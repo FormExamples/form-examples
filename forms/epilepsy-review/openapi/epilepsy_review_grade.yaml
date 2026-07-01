@@ -1,0 +1,158 @@
+# Generated from sql/. Do not edit by hand.
+# SOURCE: epilepsy_review_grade
+openapi: 3.1.0
+info:
+  title: Epilepsy Review — EpilepsyReviewGrade
+  version: 1.0.0
+  description: "Computed seizure-control classification and completeness grading result for an epilepsy annual review: seizure control, review-completeness status, and the count of documented required domains. 1:1 with the parent review."
+paths:
+  /epilepsy-review-grades:
+    get:
+      summary: List EpilepsyReviewGrade records
+      operationId: listEpilepsyReviewGrade
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of EpilepsyReviewGrade records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/EpilepsyReviewGrade"
+    post:
+      summary: Create a new EpilepsyReviewGrade
+      operationId: createEpilepsyReviewGrade
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/EpilepsyReviewGrade"
+      responses:
+        "201":
+          description: The newly created EpilepsyReviewGrade
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/EpilepsyReviewGrade"
+        "400":
+          description: Validation error
+  /epilepsy-review-grades/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one EpilepsyReviewGrade by id
+      operationId: getEpilepsyReviewGrade
+      responses:
+        "200":
+          description: The requested EpilepsyReviewGrade
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/EpilepsyReviewGrade"
+        "404":
+          description: EpilepsyReviewGrade not found
+    patch:
+      summary: Update an existing EpilepsyReviewGrade
+      operationId: updateEpilepsyReviewGrade
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/EpilepsyReviewGrade"
+      responses:
+        "200":
+          description: The updated EpilepsyReviewGrade
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/EpilepsyReviewGrade"
+        "404":
+          description: EpilepsyReviewGrade not found
+    delete:
+      summary: Soft-delete a EpilepsyReviewGrade
+      operationId: deleteEpilepsyReviewGrade
+      responses:
+        "204":
+          description: EpilepsyReviewGrade deleted
+        "404":
+          description: EpilepsyReviewGrade not found
+components:
+  schemas:
+    EpilepsyReviewGrade:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was most recently updated.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was soft-deleted.
+        epilepsy_review_id:
+          type: string
+          format: uuid
+          description: Foreign key to the parent epilepsy review (unique, 1:1).
+        seizure_control:
+          type: string
+          enum:
+            - seizure-free
+            - controlled
+            - uncontrolled
+            - ""
+          description: "Seizure-control classification: seizure-free, controlled, or uncontrolled."
+        review_status:
+          type: string
+          enum:
+            - complete
+            - partial
+            - incomplete
+            - ""
+          description: "Review completeness: complete, partial, or incomplete."
+        completeness_score:
+          type: integer
+          format: int32
+          description: Count of documented required review domains.
+        graded_at:
+          type: string
+          format: date-time
+          description: Timestamp when the engine last computed the grade.
+      required:
+        - created_at
+        - updated_at
+        - epilepsy_review_id
+        - seizure_control
+        - review_status
+        - graded_at
+      description: "Computed seizure-control classification and completeness grading result for an epilepsy annual review: seizure control, review-completeness status, and the count of documented required domains. 1:1 with the parent review."

@@ -1,0 +1,158 @@
+# Generated from sql/. Do not edit by hand.
+# SOURCE: general_practitioner_referral_letter_grade
+openapi: 3.1.0
+info:
+  title: General Practitioner Referral Letter — GeneralPractitionerReferralLetterGrade
+  version: 1.0.0
+  description: "Computed documentation-completeness grading result for a referral letter: status (Complete/Incomplete), echoed urgency classification, and completeness percentage."
+paths:
+  /general-practitioner-referral-letter-grades:
+    get:
+      summary: List GeneralPractitionerReferralLetterGrade records
+      operationId: listGeneralPractitionerReferralLetterGrade
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of GeneralPractitionerReferralLetterGrade records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/GeneralPractitionerReferralLetterGrade"
+    post:
+      summary: Create a new GeneralPractitionerReferralLetterGrade
+      operationId: createGeneralPractitionerReferralLetterGrade
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/GeneralPractitionerReferralLetterGrade"
+      responses:
+        "201":
+          description: The newly created GeneralPractitionerReferralLetterGrade
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GeneralPractitionerReferralLetterGrade"
+        "400":
+          description: Validation error
+  /general-practitioner-referral-letter-grades/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one GeneralPractitionerReferralLetterGrade by id
+      operationId: getGeneralPractitionerReferralLetterGrade
+      responses:
+        "200":
+          description: The requested GeneralPractitionerReferralLetterGrade
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GeneralPractitionerReferralLetterGrade"
+        "404":
+          description: GeneralPractitionerReferralLetterGrade not found
+    patch:
+      summary: Update an existing GeneralPractitionerReferralLetterGrade
+      operationId: updateGeneralPractitionerReferralLetterGrade
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/GeneralPractitionerReferralLetterGrade"
+      responses:
+        "200":
+          description: The updated GeneralPractitionerReferralLetterGrade
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GeneralPractitionerReferralLetterGrade"
+        "404":
+          description: GeneralPractitionerReferralLetterGrade not found
+    delete:
+      summary: Soft-delete a GeneralPractitionerReferralLetterGrade
+      operationId: deleteGeneralPractitionerReferralLetterGrade
+      responses:
+        "204":
+          description: GeneralPractitionerReferralLetterGrade deleted
+        "404":
+          description: GeneralPractitionerReferralLetterGrade not found
+components:
+  schemas:
+    GeneralPractitionerReferralLetterGrade:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was most recently updated.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was soft-deleted.
+        general_practitioner_referral_letter_id:
+          type: string
+          format: uuid
+          description: Foreign key to the parent referral letter (unique, 1:1).
+        status:
+          type: string
+          enum:
+            - Complete
+            - Incomplete
+            - ""
+          description: "Completeness status: Complete when every mandatory field is present, otherwise Incomplete."
+        urgency:
+          type: string
+          enum:
+            - routine
+            - urgent
+            - two-week-wait
+            - emergency
+            - ""
+          description: "Echoed urgency classification: routine, urgent, two-week-wait, or emergency."
+        completeness_percent:
+          type: integer
+          format: int32
+          description: "Completeness percentage (0..100): present mandatory fields / total mandatory fields x 100."
+        graded_at:
+          type: string
+          format: date-time
+          description: Timestamp when the engine last computed the grade.
+      required:
+        - created_at
+        - updated_at
+        - general_practitioner_referral_letter_id
+        - status
+        - urgency
+        - graded_at
+      description: "Computed documentation-completeness grading result for a referral letter: status (Complete/Incomplete), echoed urgency classification, and completeness percentage."

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE ottawa_ankle_rules_grade SYSTEM "ottawa_ankle_rules_grade.dtd">
+<ottawa_ankle_rules_grade>
+<id>880e8400-e29b-41d4-a716-446655440003</id>
+<created_at>2026-04-09T10:00:00Z</created_at>
+<updated_at>2026-04-09T10:00:00Z</updated_at>
+<deleted_at>2026-04-09T10:00:00Z</deleted_at>
+<ottawa_ankle_rules_id>770e8400-e29b-41d4-a716-446655440002</ottawa_ankle_rules_id>
+<unable_to_bear_weight>yes</unable_to_bear_weight>
+<ankle_xray_indicated>yes</ankle_xray_indicated>
+<foot_xray_indicated>yes</foot_xray_indicated>
+<recommended_action></recommended_action>
+<graded_at>2026-04-09T10:00:00Z</graded_at>
+</ottawa_ankle_rules_grade>

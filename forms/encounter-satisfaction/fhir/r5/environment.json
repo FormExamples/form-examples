@@ -53,12 +53,12 @@
         "coding": [
           {
             "system": "urn:form-examples:encounter-satisfaction",
-            "code": "NULL",
-            "display": "Null"
+            "code": "cleanliness",
+            "display": "Cleanliness"
           }
         ]
       },
-      "valueString": ""
+      "valueInteger": 1
     },
     {
       "code": {

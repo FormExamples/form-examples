@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE anaesthetic_record SYSTEM "anaesthetic_record.dtd">
+<anaesthetic_record>
+<id>770e8400-e29b-41d4-a716-446655440002</id>
+<created_at>2026-04-09T10:00:00Z</created_at>
+<updated_at>2026-04-09T10:00:00Z</updated_at>
+<deleted_at>2026-04-09T10:00:00Z</deleted_at>
+<patient_id>550e8400-e29b-41d4-a716-446655440000</patient_id>
+<clinician_id>660e8400-e29b-41d4-a716-446655440001</clinician_id>
+<theatre></theatre>
+<operation_date>2026-01-15</operation_date>
+<anaesthetist_name>Example</anaesthetist_name>
+<assistant_name>Example</assistant_name>
+<surgeon_name>Example</surgeon_name>
+<planned_procedure>Example text.</planned_procedure>
+<urgency>elective</urgency>
+<machine_checked>yes</machine_checked>
+<who_sign_in>yes</who_sign_in>
+<who_time_out>yes</who_time_out>
+<consent_confirmed>yes</consent_confirmed>
+<fasting_confirmed>yes</fasting_confirmed>
+<iv_access></iv_access>
+<allergy_band_checked>yes</allergy_band_checked>
+<documented_allergies></documented_allergies>
+<asa_status>I</asa_status>
+<asa_emergency_modifier>yes</asa_emergency_modifier>
+<mallampati_class>1</mallampati_class>
+<mouth_opening_cm>0.0</mouth_opening_cm>
+<thyromental_distance_cm>0.0</thyromental_distance_cm>
+<dentition></dentition>
+<anticipated_difficult_airway>yes</anticipated_difficult_airway>
+<prior_difficult_intubation>yes</prior_difficult_intubation>
+<airway_technique>facemask</airway_technique>
+<device_size></device_size>
+<tube_depth_cm>0.0</tube_depth_cm>
+<cuffed>yes</cuffed>
+<cormack_lehane_grade>1</cormack_lehane_grade>
+<intubation_attempts>1</intubation_attempts>
+<capnography_confirmed>yes</capnography_confirmed>
+<monitoring_modalities></monitoring_modalities>
+<anaesthetic_technique>general</anaesthetic_technique>
+<crystalloid_ml>0.0</crystalloid_ml>
+<colloid_ml>0.0</colloid_ml>
+<blood_products_ml>0.0</blood_products_ml>
+<estimated_blood_loss_ml>0.0</estimated_blood_loss_ml>
+<urine_output_ml>0.0</urine_output_ml>
+<cell_salvage_ml>0.0</cell_salvage_ml>
+<regional_technique>none</regional_technique>
+<regional_level></regional_level>
+<regional_drug>Paracetamol</regional_drug>
+<regional_dose_mg>10.0</regional_dose_mg>
+<block_height></block_height>
+<regional_complications></regional_complications>
+<recovery_destination>recovery</recovery_destination>
+<handover_airway_status>active</handover_airway_status>
+<analgesia_plan>Example text.</analgesia_plan>
+<antiemetic_plan>Example text.</antiemetic_plan>
+<oxygen_plan>Example text.</oxygen_plan>
+<outstanding_tasks></outstanding_tasks>
+<handover_at>2026-04-09T10:00:00Z</handover_at>
+<receiving_practitioner></receiving_practitioner>
+<anaesthetist_signature></anaesthetist_signature>
+<signed_at>2026-04-09T10:00:00Z</signed_at>
+</anaesthetic_record>

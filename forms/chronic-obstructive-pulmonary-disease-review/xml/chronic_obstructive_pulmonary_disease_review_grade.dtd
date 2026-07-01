@@ -1,0 +1,12 @@
+<!ELEMENT chronic_obstructive_pulmonary_disease_review_grade (id,created_at,updated_at,deleted_at,chronic_obstructive_pulmonary_disease_review_id,gold_airflow_grade,symptom_burden,exacerbation_risk,abe_group,review_status,graded_at)>
+<!ELEMENT id (#PCDATA)>
+<!ELEMENT created_at (#PCDATA)>
+<!ELEMENT updated_at (#PCDATA)>
+<!ELEMENT deleted_at (#PCDATA)>
+<!ELEMENT chronic_obstructive_pulmonary_disease_review_id (#PCDATA)>
+<!ELEMENT gold_airflow_grade (#PCDATA)>
+<!ELEMENT symptom_burden (#PCDATA)>
+<!ELEMENT exacerbation_risk (#PCDATA)>
+<!ELEMENT abe_group (#PCDATA)>
+<!ELEMENT review_status (#PCDATA)>
+<!ELEMENT graded_at (#PCDATA)>

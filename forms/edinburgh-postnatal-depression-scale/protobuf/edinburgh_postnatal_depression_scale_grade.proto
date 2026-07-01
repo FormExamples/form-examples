@@ -1,0 +1,32 @@
+// Generated from sql/. Do not edit by hand.
+// SOURCE: edinburgh_postnatal_depression_scale_grade
+
+syntax = "proto3";
+
+package form_examples.edinburgh_postnatal_depression_scale;
+
+enum EdinburghPostnatalDepressionScaleGradeInterpretationEnum {
+  INTERPRETATION_UNSPECIFIED = 0;
+  INTERPRETATION_LOWER = 1;  // lower
+  INTERPRETATION_POSSIBLE = 2;  // possible
+  INTERPRETATION_LIKELY = 3;  // likely
+}
+
+enum EdinburghPostnatalDepressionScaleGradeSelfHarmFlagEnum {
+  SELFHARMFLAG_UNSPECIFIED = 0;
+  SELFHARMFLAG_YES = 1;  // yes
+  SELFHARMFLAG_NO = 2;  // no
+}
+
+message EdinburghPostnatalDepressionScaleGrade {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string edinburgh_postnatal_depression_scale_id = 5;  // UUID — uuid
+  int32 total_score = 6;  // INT
+  EdinburghPostnatalDepressionScaleGradeInterpretationEnum interpretation = 7;  // VARCHAR(10)
+  int32 item_10_score = 8;  // INT
+  EdinburghPostnatalDepressionScaleGradeSelfHarmFlagEnum self_harm_flag = 9;  // VARCHAR(3)
+  string graded_at = 10;  // TIMESTAMPTZ — iso 8601
+}

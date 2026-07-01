@@ -1,0 +1,308 @@
+{
+  "resourceType": "Observation",
+  "id": "770e8400-e29b-41d4-a716-446655440002",
+  "meta": {
+    "profile": [
+      "http://hl7.org/fhir/StructureDefinition/Observation"
+    ],
+    "lastUpdated": "2026-04-09T10:00:00+00:00"
+  },
+  "status": "final",
+  "category": [
+    {
+      "coding": [
+        {
+          "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+          "code": "survey",
+          "display": "Survey"
+        }
+      ]
+    }
+  ],
+  "code": {
+    "coding": [
+      {
+        "system": "urn:form-examples:wells-score-for-pulmonary-embolism",
+        "code": "wells_score_for_pulmonary_embolism",
+        "display": "Wells Score For Pulmonary Embolism"
+      }
+    ]
+  },
+  "subject": {
+    "reference": "Patient/550e8400-e29b-41d4-a716-446655440000"
+  },
+  "encounter": {
+    "reference": "Encounter/bb0e8400-e29b-41d4-a716-446655440006"
+  },
+  "effectiveDateTime": "2026-04-09T10:00:00+00:00",
+  "component": [
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:wells-score-for-pulmonary-embolism",
+            "code": "deleted_at",
+            "display": "Deleted At"
+          }
+        ]
+      },
+      "valueDateTime": "2026-04-09T10:00:00+00:00"
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:wells-score-for-pulmonary-embolism",
+            "code": "status",
+            "display": "Status"
+          }
+        ]
+      },
+      "valueCodeableConcept": {
+        "coding": [
+          {
+            "system": "urn:form-examples:wells-score-for-pulmonary-embolism:status",
+            "code": "draft",
+            "display": "Draft"
+          }
+        ]
+      }
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:wells-score-for-pulmonary-embolism",
+            "code": "patient_identifier",
+            "display": "Patient Identifier"
+          }
+        ]
+      },
+      "valueString": ""
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:wells-score-for-pulmonary-embolism",
+            "code": "assessed_at",
+            "display": "Assessed At"
+          }
+        ]
+      },
+      "valueDateTime": "2026-04-09T10:00:00+00:00"
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:wells-score-for-pulmonary-embolism",
+            "code": "care_setting",
+            "display": "Care Setting"
+          }
+        ]
+      },
+      "valueCodeableConcept": {
+        "coding": [
+          {
+            "system": "urn:form-examples:wells-score-for-pulmonary-embolism:care_setting",
+            "code": "emergency-department",
+            "display": "Emergency-Department"
+          }
+        ]
+      }
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:wells-score-for-pulmonary-embolism",
+            "code": "age_band",
+            "display": "Age Band"
+          }
+        ]
+      },
+      "valueCodeableConcept": {
+        "coding": [
+          {
+            "system": "urn:form-examples:wells-score-for-pulmonary-embolism:age_band",
+            "code": "18-39",
+            "display": "18-39"
+          }
+        ]
+      }
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:wells-score-for-pulmonary-embolism",
+            "code": "haemodynamic_status",
+            "display": "Haemodynamic Status"
+          }
+        ]
+      },
+      "valueCodeableConcept": {
+        "coding": [
+          {
+            "system": "urn:form-examples:wells-score-for-pulmonary-embolism:haemodynamic_status",
+            "code": "stable",
+            "display": "Stable"
+          }
+        ]
+      }
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:wells-score-for-pulmonary-embolism",
+            "code": "clinical_signs_of_dvt",
+            "display": "Clinical Signs Of Dvt"
+          }
+        ]
+      },
+      "valueCodeableConcept": {
+        "coding": [
+          {
+            "system": "urn:form-examples:wells-score-for-pulmonary-embolism:clinical_signs_of_dvt",
+            "code": "yes",
+            "display": "Yes"
+          }
+        ]
+      }
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:wells-score-for-pulmonary-embolism",
+            "code": "pe_most_likely",
+            "display": "Pe Most Likely"
+          }
+        ]
+      },
+      "valueCodeableConcept": {
+        "coding": [
+          {
+            "system": "urn:form-examples:wells-score-for-pulmonary-embolism:pe_most_likely",
+            "code": "yes",
+            "display": "Yes"
+          }
+        ]
+      }
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:wells-score-for-pulmonary-embolism",
+            "code": "heart_rate_over_100",
+            "display": "Heart Rate Over 100"
+          }
+        ]
+      },
+      "valueCodeableConcept": {
+        "coding": [
+          {
+            "system": "urn:form-examples:wells-score-for-pulmonary-embolism:heart_rate_over_100",
+            "code": "yes",
+            "display": "Yes"
+          }
+        ]
+      }
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:wells-score-for-pulmonary-embolism",
+            "code": "immobilisation_or_surgery",
+            "display": "Immobilisation Or Surgery"
+          }
+        ]
+      },
+      "valueCodeableConcept": {
+        "coding": [
+          {
+            "system": "urn:form-examples:wells-score-for-pulmonary-embolism:immobilisation_or_surgery",
+            "code": "yes",
+            "display": "Yes"
+          }
+        ]
+      }
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:wells-score-for-pulmonary-embolism",
+            "code": "previous_dvt_pe",
+            "display": "Previous Dvt Pe"
+          }
+        ]
+      },
+      "valueCodeableConcept": {
+        "coding": [
+          {
+            "system": "urn:form-examples:wells-score-for-pulmonary-embolism:previous_dvt_pe",
+            "code": "yes",
+            "display": "Yes"
+          }
+        ]
+      }
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:wells-score-for-pulmonary-embolism",
+            "code": "haemoptysis",
+            "display": "Haemoptysis"
+          }
+        ]
+      },
+      "valueCodeableConcept": {
+        "coding": [
+          {
+            "system": "urn:form-examples:wells-score-for-pulmonary-embolism:haemoptysis",
+            "code": "yes",
+            "display": "Yes"
+          }
+        ]
+      }
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:wells-score-for-pulmonary-embolism",
+            "code": "malignancy",
+            "display": "Malignancy"
+          }
+        ]
+      },
+      "valueCodeableConcept": {
+        "coding": [
+          {
+            "system": "urn:form-examples:wells-score-for-pulmonary-embolism:malignancy",
+            "code": "yes",
+            "display": "Yes"
+          }
+        ]
+      }
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:wells-score-for-pulmonary-embolism",
+            "code": "clinical_notes",
+            "display": "Clinical Notes"
+          }
+        ]
+      },
+      "valueString": "Example text."
+    }
+  ]
+}

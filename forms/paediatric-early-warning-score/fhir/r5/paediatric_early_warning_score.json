@@ -1,0 +1,292 @@
+{
+  "resourceType": "Observation",
+  "id": "770e8400-e29b-41d4-a716-446655440002",
+  "meta": {
+    "profile": [
+      "http://hl7.org/fhir/StructureDefinition/Observation"
+    ],
+    "lastUpdated": "2026-04-09T10:00:00+00:00"
+  },
+  "status": "final",
+  "category": [
+    {
+      "coding": [
+        {
+          "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+          "code": "survey",
+          "display": "Survey"
+        }
+      ]
+    }
+  ],
+  "code": {
+    "coding": [
+      {
+        "system": "urn:form-examples:paediatric-early-warning-score",
+        "code": "paediatric_early_warning_score",
+        "display": "Paediatric Early Warning Score"
+      }
+    ]
+  },
+  "subject": {
+    "reference": "Patient/550e8400-e29b-41d4-a716-446655440000"
+  },
+  "encounter": {
+    "reference": "Encounter/bb0e8400-e29b-41d4-a716-446655440006"
+  },
+  "effectiveDateTime": "2026-04-09T10:00:00+00:00",
+  "component": [
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:paediatric-early-warning-score",
+            "code": "deleted_at",
+            "display": "Deleted At"
+          }
+        ]
+      },
+      "valueDateTime": "2026-04-09T10:00:00+00:00"
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:paediatric-early-warning-score",
+            "code": "status",
+            "display": "Status"
+          }
+        ]
+      },
+      "valueCodeableConcept": {
+        "coding": [
+          {
+            "system": "urn:form-examples:paediatric-early-warning-score:status",
+            "code": "draft",
+            "display": "Draft"
+          }
+        ]
+      }
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:paediatric-early-warning-score",
+            "code": "observation_at",
+            "display": "Observation At"
+          }
+        ]
+      },
+      "valueDateTime": "2026-04-09T10:00:00+00:00"
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:paediatric-early-warning-score",
+            "code": "care_setting",
+            "display": "Care Setting"
+          }
+        ]
+      },
+      "valueCodeableConcept": {
+        "coding": [
+          {
+            "system": "urn:form-examples:paediatric-early-warning-score:care_setting",
+            "code": "ward",
+            "display": "Ward"
+          }
+        ]
+      }
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:paediatric-early-warning-score",
+            "code": "age_band",
+            "display": "Age Band"
+          }
+        ]
+      },
+      "valueCodeableConcept": {
+        "coding": [
+          {
+            "system": "urn:form-examples:paediatric-early-warning-score:age_band",
+            "code": "neonate",
+            "display": "Neonate"
+          }
+        ]
+      }
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:paediatric-early-warning-score",
+            "code": "respiratory_rate",
+            "display": "Respiratory Rate"
+          }
+        ]
+      },
+      "valueInteger": 1
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:paediatric-early-warning-score",
+            "code": "respiratory_effort",
+            "display": "Respiratory Effort"
+          }
+        ]
+      },
+      "valueCodeableConcept": {
+        "coding": [
+          {
+            "system": "urn:form-examples:paediatric-early-warning-score:respiratory_effort",
+            "code": "none",
+            "display": "None"
+          }
+        ]
+      }
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:paediatric-early-warning-score",
+            "code": "oxygen_saturation",
+            "display": "Oxygen Saturation"
+          }
+        ]
+      },
+      "valueInteger": 1
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:paediatric-early-warning-score",
+            "code": "supplemental_oxygen",
+            "display": "Supplemental Oxygen"
+          }
+        ]
+      },
+      "valueCodeableConcept": {
+        "coding": [
+          {
+            "system": "urn:form-examples:paediatric-early-warning-score:supplemental_oxygen",
+            "code": "room-air",
+            "display": "Room-Air"
+          }
+        ]
+      }
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:paediatric-early-warning-score",
+            "code": "heart_rate",
+            "display": "Heart Rate"
+          }
+        ]
+      },
+      "valueInteger": 1
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:paediatric-early-warning-score",
+            "code": "capillary_refill",
+            "display": "Capillary Refill"
+          }
+        ]
+      },
+      "valueCodeableConcept": {
+        "coding": [
+          {
+            "system": "urn:form-examples:paediatric-early-warning-score:capillary_refill",
+            "code": "under-2s",
+            "display": "Under-2S"
+          }
+        ]
+      }
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:paediatric-early-warning-score",
+            "code": "consciousness_acvpu",
+            "display": "Consciousness Acvpu"
+          }
+        ]
+      },
+      "valueCodeableConcept": {
+        "coding": [
+          {
+            "system": "urn:form-examples:paediatric-early-warning-score:consciousness_acvpu",
+            "code": "alert",
+            "display": "Alert"
+          }
+        ]
+      }
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:paediatric-early-warning-score",
+            "code": "nurse_concern",
+            "display": "Nurse Concern"
+          }
+        ]
+      },
+      "valueCodeableConcept": {
+        "coding": [
+          {
+            "system": "urn:form-examples:paediatric-early-warning-score:nurse_concern",
+            "code": "yes",
+            "display": "Yes"
+          }
+        ]
+      }
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:paediatric-early-warning-score",
+            "code": "parent_concern",
+            "display": "Parent Concern"
+          }
+        ]
+      },
+      "valueCodeableConcept": {
+        "coding": [
+          {
+            "system": "urn:form-examples:paediatric-early-warning-score:parent_concern",
+            "code": "yes",
+            "display": "Yes"
+          }
+        ]
+      }
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:paediatric-early-warning-score",
+            "code": "clinical_notes",
+            "display": "Clinical Notes"
+          }
+        ]
+      },
+      "valueString": "Example text."
+    }
+  ]
+}

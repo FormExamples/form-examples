@@ -1,0 +1,168 @@
+# Generated from sql/. Do not edit by hand.
+# SOURCE: history_and_physical_examination_grade_flag
+openapi: 3.1.0
+info:
+  title: History And Physical Examination — HistoryAndPhysicalExaminationGradeFlag
+  version: 1.0.0
+  description: Safety flags that fire independently of the completeness status, with priority and a suggested action. The allergies-not-documented and no-impression-or-plan categories are blocking (they force an incomplete status).
+paths:
+  /history-and-physical-examination-grade-flags:
+    get:
+      summary: List HistoryAndPhysicalExaminationGradeFlag records
+      operationId: listHistoryAndPhysicalExaminationGradeFlag
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of HistoryAndPhysicalExaminationGradeFlag records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/HistoryAndPhysicalExaminationGradeFlag"
+    post:
+      summary: Create a new HistoryAndPhysicalExaminationGradeFlag
+      operationId: createHistoryAndPhysicalExaminationGradeFlag
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/HistoryAndPhysicalExaminationGradeFlag"
+      responses:
+        "201":
+          description: The newly created HistoryAndPhysicalExaminationGradeFlag
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/HistoryAndPhysicalExaminationGradeFlag"
+        "400":
+          description: Validation error
+  /history-and-physical-examination-grade-flags/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one HistoryAndPhysicalExaminationGradeFlag by id
+      operationId: getHistoryAndPhysicalExaminationGradeFlag
+      responses:
+        "200":
+          description: The requested HistoryAndPhysicalExaminationGradeFlag
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/HistoryAndPhysicalExaminationGradeFlag"
+        "404":
+          description: HistoryAndPhysicalExaminationGradeFlag not found
+    patch:
+      summary: Update an existing HistoryAndPhysicalExaminationGradeFlag
+      operationId: updateHistoryAndPhysicalExaminationGradeFlag
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/HistoryAndPhysicalExaminationGradeFlag"
+      responses:
+        "200":
+          description: The updated HistoryAndPhysicalExaminationGradeFlag
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/HistoryAndPhysicalExaminationGradeFlag"
+        "404":
+          description: HistoryAndPhysicalExaminationGradeFlag not found
+    delete:
+      summary: Soft-delete a HistoryAndPhysicalExaminationGradeFlag
+      operationId: deleteHistoryAndPhysicalExaminationGradeFlag
+      responses:
+        "204":
+          description: HistoryAndPhysicalExaminationGradeFlag deleted
+        "404":
+          description: HistoryAndPhysicalExaminationGradeFlag not found
+components:
+  schemas:
+    HistoryAndPhysicalExaminationGradeFlag:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was most recently updated.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was soft-deleted.
+        history_and_physical_examination_grade_id:
+          type: string
+          format: uuid
+          description: Foreign key to the parent grade.
+        flag_id:
+          type: string
+          maxLength: 50
+          description: Stable flag identifier (e.g. F-ALLERGIES-NOT-DOCUMENTED-001).
+        category:
+          type: string
+          enum:
+            - allergies-not-documented
+            - no-impression-or-plan
+            - red-flag-no-plan
+            - abnormal-vitals
+            - incomplete-systems-exam
+            - incomplete-history
+            - other
+            - ""
+          description: "Flag category: allergies-not-documented, no-impression-or-plan, red-flag-no-plan, abnormal-vitals, incomplete-systems-exam, incomplete-history, or other."
+        priority:
+          type: string
+          enum:
+            - low
+            - medium
+            - high
+            - ""
+          description: "Priority: low, medium, high."
+        description:
+          type: string
+          maxLength: 500
+          description: Human-readable description of what fired the flag.
+        suggested_action:
+          type: string
+          maxLength: 500
+          description: "Suggested clinical or governance action (e.g. \"document allergy status\", \"record an impression and management plan\")."
+      required:
+        - created_at
+        - updated_at
+        - history_and_physical_examination_grade_id
+        - flag_id
+        - category
+        - priority
+        - description
+        - suggested_action
+      description: Safety flags that fire independently of the completeness status, with priority and a suggested action. The allergies-not-documented and no-impression-or-plan categories are blocking (they force an incomplete status).

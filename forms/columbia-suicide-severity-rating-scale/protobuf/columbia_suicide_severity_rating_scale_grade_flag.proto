@@ -1,0 +1,40 @@
+// Generated from sql/. Do not edit by hand.
+// SOURCE: columbia_suicide_severity_rating_scale_grade_flag
+
+syntax = "proto3";
+
+package form_examples.columbia_suicide_severity_rating_scale;
+
+enum ColumbiaSuicideSeverityRatingScaleGradeFlagCategoryEnum {
+  CATEGORY_UNSPECIFIED = 0;
+  CATEGORY_HIGH_RISK_CRISIS_RESPONSE = 1;  // high-risk-crisis-response
+  CATEGORY_ACTIVE_PLAN_AND_INTENT = 2;  // active-plan-and-intent
+  CATEGORY_RECENT_ATTEMPT = 3;  // recent-attempt
+  CATEGORY_HIGH_LETHALITY_ATTEMPT = 4;  // high-lethality-attempt
+  CATEGORY_ACCESS_TO_MEANS = 5;  // access-to-means
+  CATEGORY_PREPARATORY_ACTS = 6;  // preparatory-acts
+  CATEGORY_NON_SUICIDAL_SELF_INJURY = 7;  // non-suicidal-self-injury
+  CATEGORY_SAFETY_PLAN_NEEDED = 8;  // safety-plan-needed
+  CATEGORY_INCOMPLETE = 9;  // incomplete
+  CATEGORY_OTHER = 10;  // other
+}
+
+enum ColumbiaSuicideSeverityRatingScaleGradeFlagPriorityEnum {
+  PRIORITY_UNSPECIFIED = 0;
+  PRIORITY_LOW = 1;  // low
+  PRIORITY_MEDIUM = 2;  // medium
+  PRIORITY_HIGH = 3;  // high
+}
+
+message ColumbiaSuicideSeverityRatingScaleGradeFlag {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string columbia_suicide_severity_rating_scale_grade_id = 5;  // UUID — uuid
+  string flag_id = 6;  // VARCHAR(50) — max 50 chars
+  ColumbiaSuicideSeverityRatingScaleGradeFlagCategoryEnum category = 7;  // VARCHAR(50)
+  ColumbiaSuicideSeverityRatingScaleGradeFlagPriorityEnum priority = 8;  // VARCHAR(10)
+  string description = 9;  // VARCHAR(500) — max 500 chars
+  string suggested_action = 10;  // VARCHAR(500) — max 500 chars
+}

@@ -1,0 +1,170 @@
+# Generated from sql/. Do not edit by hand.
+# SOURCE: child_safeguarding_referral_grade_flag
+openapi: 3.1.0
+info:
+  title: Child Safeguarding Referral — ChildSafeguardingReferralGradeFlag
+  version: 1.0.0
+  description: Safeguarding flags that fire independently of the completeness status and urgency, each with a priority and a suggested action for the referrer or receiving social-care team.
+paths:
+  /child-safeguarding-referral-grade-flags:
+    get:
+      summary: List ChildSafeguardingReferralGradeFlag records
+      operationId: listChildSafeguardingReferralGradeFlag
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of ChildSafeguardingReferralGradeFlag records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/ChildSafeguardingReferralGradeFlag"
+    post:
+      summary: Create a new ChildSafeguardingReferralGradeFlag
+      operationId: createChildSafeguardingReferralGradeFlag
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ChildSafeguardingReferralGradeFlag"
+      responses:
+        "201":
+          description: The newly created ChildSafeguardingReferralGradeFlag
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ChildSafeguardingReferralGradeFlag"
+        "400":
+          description: Validation error
+  /child-safeguarding-referral-grade-flags/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one ChildSafeguardingReferralGradeFlag by id
+      operationId: getChildSafeguardingReferralGradeFlag
+      responses:
+        "200":
+          description: The requested ChildSafeguardingReferralGradeFlag
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ChildSafeguardingReferralGradeFlag"
+        "404":
+          description: ChildSafeguardingReferralGradeFlag not found
+    patch:
+      summary: Update an existing ChildSafeguardingReferralGradeFlag
+      operationId: updateChildSafeguardingReferralGradeFlag
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ChildSafeguardingReferralGradeFlag"
+      responses:
+        "200":
+          description: The updated ChildSafeguardingReferralGradeFlag
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ChildSafeguardingReferralGradeFlag"
+        "404":
+          description: ChildSafeguardingReferralGradeFlag not found
+    delete:
+      summary: Soft-delete a ChildSafeguardingReferralGradeFlag
+      operationId: deleteChildSafeguardingReferralGradeFlag
+      responses:
+        "204":
+          description: ChildSafeguardingReferralGradeFlag deleted
+        "404":
+          description: ChildSafeguardingReferralGradeFlag not found
+components:
+  schemas:
+    ChildSafeguardingReferralGradeFlag:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was most recently updated.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was soft-deleted.
+        child_safeguarding_referral_grade_id:
+          type: string
+          format: uuid
+          description: Foreign key to the parent grade.
+        flag_id:
+          type: string
+          maxLength: 50
+          description: Stable flag identifier (e.g. F-IMMEDIATE-DANGER-001).
+        category:
+          type: string
+          enum:
+            - immediate-danger
+            - disclosure-of-abuse
+            - sexual-abuse-category
+            - other-children-at-risk
+            - no-consent-basis
+            - mandatory-field-missing
+            - child-unaware-unsafe
+            - previous-history
+            - other
+            - ""
+          description: "Flag category: immediate-danger, disclosure-of-abuse, sexual-abuse-category, other-children-at-risk, no-consent-basis, mandatory-field-missing, child-unaware-unsafe, previous-history, or other."
+        priority:
+          type: string
+          enum:
+            - low
+            - medium
+            - high
+            - ""
+          description: "Priority: low, medium, high."
+        description:
+          type: string
+          maxLength: 500
+          description: Human-readable description of what fired the flag.
+        suggested_action:
+          type: string
+          maxLength: 500
+          description: "Suggested safeguarding action (e.g. \"escalate to emergency services now\", \"record a lawful basis for sharing without consent\")."
+      required:
+        - created_at
+        - updated_at
+        - child_safeguarding_referral_grade_id
+        - flag_id
+        - category
+        - priority
+        - description
+        - suggested_action
+      description: Safeguarding flags that fire independently of the completeness status and urgency, each with a priority and a suggested action for the referrer or receiving social-care team.

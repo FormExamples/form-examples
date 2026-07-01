@@ -1,0 +1,14 @@
+<!ELEMENT newborn_and_infant_physical_examination_grade (id,created_at,updated_at,deleted_at,newborn_and_infant_physical_examination_id,eyes_result,heart_result,hips_result,testes_result,overall_outcome,completeness,completeness_percent,graded_at)>
+<!ELEMENT id (#PCDATA)>
+<!ELEMENT created_at (#PCDATA)>
+<!ELEMENT updated_at (#PCDATA)>
+<!ELEMENT deleted_at (#PCDATA)>
+<!ELEMENT newborn_and_infant_physical_examination_id (#PCDATA)>
+<!ELEMENT eyes_result (#PCDATA)>
+<!ELEMENT heart_result (#PCDATA)>
+<!ELEMENT hips_result (#PCDATA)>
+<!ELEMENT testes_result (#PCDATA)>
+<!ELEMENT overall_outcome (#PCDATA)>
+<!ELEMENT completeness (#PCDATA)>
+<!ELEMENT completeness_percent (#PCDATA)>
+<!ELEMENT graded_at (#PCDATA)>

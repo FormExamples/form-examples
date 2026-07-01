@@ -1,9 +1,9 @@
-<!ELEMENT care_quality (id,created_at,updated_at,deleted_at,encounter_satisfaction_id,NULL,treatment_plan_explanation,confidence_in_care)>
+<!ELEMENT care_quality (id,created_at,updated_at,deleted_at,encounter_satisfaction_id,involvement_in_decisions,treatment_plan_explanation,confidence_in_care)>
 <!ELEMENT id (#PCDATA)>
 <!ELEMENT created_at (#PCDATA)>
 <!ELEMENT updated_at (#PCDATA)>
 <!ELEMENT deleted_at (#PCDATA)>
 <!ELEMENT encounter_satisfaction_id (#PCDATA)>
-<!ELEMENT NULL (#PCDATA)>
+<!ELEMENT involvement_in_decisions (#PCDATA)>
 <!ELEMENT treatment_plan_explanation (#PCDATA)>
 <!ELEMENT confidence_in_care (#PCDATA)>

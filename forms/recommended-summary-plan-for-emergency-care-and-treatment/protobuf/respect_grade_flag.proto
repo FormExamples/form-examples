@@ -1,0 +1,37 @@
+// Generated from sql/. Do not edit by hand.
+// SOURCE: respect_grade_flag
+
+syntax = "proto3";
+
+package form_examples.recommended_summary_plan_for_emergency_care_and_treatment;
+
+enum RespectGradeFlagCategoryEnum {
+  CATEGORY_UNSPECIFIED = 0;
+  CATEGORY_CPR_NOT_DOCUMENTED = 1;  // cpr-not-documented
+  CATEGORY_CAPACITY_MISSING = 2;  // capacity-missing
+  CATEGORY_NO_CLINICIAN_SIGNATURE = 3;  // no-clinician-signature
+  CATEGORY_DNACPR_WITHOUT_DISCUSSION = 4;  // dnacpr-without-discussion
+  CATEGORY_REVIEW_DATE_PASSED = 5;  // review-date-passed
+  CATEGORY_HEALTH_SUMMARY_MISSING = 6;  // health-summary-missing
+  CATEGORY_OTHER = 7;  // other
+}
+
+enum RespectGradeFlagPriorityEnum {
+  PRIORITY_UNSPECIFIED = 0;
+  PRIORITY_LOW = 1;  // low
+  PRIORITY_MEDIUM = 2;  // medium
+  PRIORITY_HIGH = 3;  // high
+}
+
+message RespectGradeFlag {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string respect_grade_id = 5;  // UUID — uuid
+  string flag_id = 6;  // VARCHAR(50) — max 50 chars
+  RespectGradeFlagCategoryEnum category = 7;  // VARCHAR(50)
+  RespectGradeFlagPriorityEnum priority = 8;  // VARCHAR(10)
+  string description = 9;  // VARCHAR(500) — max 500 chars
+  string suggested_action = 10;  // VARCHAR(500) — max 500 chars
+}

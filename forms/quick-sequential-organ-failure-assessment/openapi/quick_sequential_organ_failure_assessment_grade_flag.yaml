@@ -1,0 +1,167 @@
+# Generated from sql/. Do not edit by hand.
+# SOURCE: quick_sequential_organ_failure_assessment_grade_flag
+openapi: 3.1.0
+info:
+  title: Quick Sequential Organ Failure Assessment — QuickSequentialOrganFailureAssessmentGradeFlag
+  version: 1.0.0
+  description: Red-flag issues that fire independently of the total score, with priority and a suggested action for the clinical team.
+paths:
+  /quick-sequential-organ-failure-assessment-grade-flags:
+    get:
+      summary: List QuickSequentialOrganFailureAssessmentGradeFlag records
+      operationId: listQuickSequentialOrganFailureAssessmentGradeFlag
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of QuickSequentialOrganFailureAssessmentGradeFlag records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/QuickSequentialOrganFailureAssessmentGradeFlag"
+    post:
+      summary: Create a new QuickSequentialOrganFailureAssessmentGradeFlag
+      operationId: createQuickSequentialOrganFailureAssessmentGradeFlag
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/QuickSequentialOrganFailureAssessmentGradeFlag"
+      responses:
+        "201":
+          description: The newly created QuickSequentialOrganFailureAssessmentGradeFlag
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/QuickSequentialOrganFailureAssessmentGradeFlag"
+        "400":
+          description: Validation error
+  /quick-sequential-organ-failure-assessment-grade-flags/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one QuickSequentialOrganFailureAssessmentGradeFlag by id
+      operationId: getQuickSequentialOrganFailureAssessmentGradeFlag
+      responses:
+        "200":
+          description: The requested QuickSequentialOrganFailureAssessmentGradeFlag
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/QuickSequentialOrganFailureAssessmentGradeFlag"
+        "404":
+          description: QuickSequentialOrganFailureAssessmentGradeFlag not found
+    patch:
+      summary: Update an existing QuickSequentialOrganFailureAssessmentGradeFlag
+      operationId: updateQuickSequentialOrganFailureAssessmentGradeFlag
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/QuickSequentialOrganFailureAssessmentGradeFlag"
+      responses:
+        "200":
+          description: The updated QuickSequentialOrganFailureAssessmentGradeFlag
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/QuickSequentialOrganFailureAssessmentGradeFlag"
+        "404":
+          description: QuickSequentialOrganFailureAssessmentGradeFlag not found
+    delete:
+      summary: Soft-delete a QuickSequentialOrganFailureAssessmentGradeFlag
+      operationId: deleteQuickSequentialOrganFailureAssessmentGradeFlag
+      responses:
+        "204":
+          description: QuickSequentialOrganFailureAssessmentGradeFlag deleted
+        "404":
+          description: QuickSequentialOrganFailureAssessmentGradeFlag not found
+components:
+  schemas:
+    QuickSequentialOrganFailureAssessmentGradeFlag:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was most recently updated.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was soft-deleted.
+        quick_sequential_organ_failure_assessment_grade_id:
+          type: string
+          format: uuid
+          description: Foreign key to the parent grade.
+        flag_id:
+          type: string
+          maxLength: 50
+          description: Stable flag identifier (e.g. F-SEPSIS-ESCALATION-001).
+        category:
+          type: string
+          enum:
+            - sepsis-escalation
+            - hypotension
+            - altered-mentation
+            - tachypnoea
+            - incomplete-assessment
+            - other
+            - ""
+          description: Flag category (see CHECK constraint for enumeration).
+        priority:
+          type: string
+          enum:
+            - low
+            - medium
+            - high
+            - ""
+          description: "Priority: low, medium, high."
+        description:
+          type: string
+          maxLength: 500
+          description: Human-readable description of what fired the flag.
+        suggested_action:
+          type: string
+          maxLength: 500
+          description: "Suggested clinical action (e.g. \"escalate to full SOFA and sepsis workup\")."
+      required:
+        - created_at
+        - updated_at
+        - quick_sequential_organ_failure_assessment_grade_id
+        - flag_id
+        - category
+        - priority
+        - description
+        - suggested_action
+      description: Red-flag issues that fire independently of the total score, with priority and a suggested action for the clinical team.

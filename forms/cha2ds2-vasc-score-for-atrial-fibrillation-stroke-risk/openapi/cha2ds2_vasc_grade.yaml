@@ -1,0 +1,185 @@
+# Generated from sql/. Do not edit by hand.
+# SOURCE: cha2ds2_vasc_grade
+openapi: 3.1.0
+info:
+  title: Cha2ds2 Vasc Score For Atrial Fibrillation Stroke Risk — Cha2ds2VascGrade
+  version: 1.0.0
+  description: "Computed CHA2DS2-VASc grading result: per-criterion sub-scores, summed total (0-9), derived risk band, looked-up annual stroke rate, and anticoagulation recommendation."
+paths:
+  /cha2ds2-vasc-grades:
+    get:
+      summary: List Cha2ds2VascGrade records
+      operationId: listCha2ds2VascGrade
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of Cha2ds2VascGrade records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Cha2ds2VascGrade"
+    post:
+      summary: Create a new Cha2ds2VascGrade
+      operationId: createCha2ds2VascGrade
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Cha2ds2VascGrade"
+      responses:
+        "201":
+          description: The newly created Cha2ds2VascGrade
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Cha2ds2VascGrade"
+        "400":
+          description: Validation error
+  /cha2ds2-vasc-grades/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one Cha2ds2VascGrade by id
+      operationId: getCha2ds2VascGrade
+      responses:
+        "200":
+          description: The requested Cha2ds2VascGrade
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Cha2ds2VascGrade"
+        "404":
+          description: Cha2ds2VascGrade not found
+    patch:
+      summary: Update an existing Cha2ds2VascGrade
+      operationId: updateCha2ds2VascGrade
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Cha2ds2VascGrade"
+      responses:
+        "200":
+          description: The updated Cha2ds2VascGrade
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Cha2ds2VascGrade"
+        "404":
+          description: Cha2ds2VascGrade not found
+    delete:
+      summary: Soft-delete a Cha2ds2VascGrade
+      operationId: deleteCha2ds2VascGrade
+      responses:
+        "204":
+          description: Cha2ds2VascGrade deleted
+        "404":
+          description: Cha2ds2VascGrade not found
+components:
+  schemas:
+    Cha2ds2VascGrade:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was most recently updated.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was soft-deleted.
+        cha2ds2_vasc_id:
+          type: string
+          format: uuid
+          description: Foreign key to the parent assessment (unique, 1:1).
+        congestive_heart_failure_points:
+          type: integer
+          format: int32
+          description: Points (0 or 1) awarded for criterion C, congestive heart failure / LV dysfunction.
+        hypertension_points:
+          type: integer
+          format: int32
+          description: Points (0 or 1) awarded for criterion H, hypertension.
+        age_points:
+          type: integer
+          format: int32
+          description: Points (0, 1, or 2) awarded for the age criterion (2 for >= 75, 1 for 65-74, 0 otherwise); mutually exclusive bands.
+        diabetes_points:
+          type: integer
+          format: int32
+          description: Points (0 or 1) awarded for criterion D, diabetes mellitus.
+        stroke_points:
+          type: integer
+          format: int32
+          description: Points (0 or 2) awarded for criterion S2, prior stroke / TIA / thromboembolism.
+        vascular_disease_points:
+          type: integer
+          format: int32
+          description: Points (0 or 1) awarded for criterion V, vascular disease.
+        sex_points:
+          type: integer
+          format: int32
+          description: Points (0 or 1) awarded for the sex category (1 for female).
+        total_score:
+          type: integer
+          format: int32
+          description: Summed CHA2DS2-VASc score across the criteria (0-9 when complete).
+        risk_band:
+          type: string
+          enum:
+            - low
+            - intermediate
+            - high
+            - ""
+          description: "Derived risk band: low, intermediate, or high."
+        annual_stroke_risk_percent:
+          type: number
+          format: double
+          description: Estimated annual ischaemic-stroke rate as a percentage, looked up by total score (Lip et al., Chest 2010 adjusted rates).
+        anticoagulation_recommendation:
+          type: string
+          description: "Anticoagulation recommendation mirroring the risk band: none (low), consider (intermediate), or recommended (high)."
+        graded_at:
+          type: string
+          format: date-time
+          description: Timestamp when the engine last computed the grade.
+      required:
+        - created_at
+        - updated_at
+        - cha2ds2_vasc_id
+        - risk_band
+        - anticoagulation_recommendation
+        - graded_at
+      description: "Computed CHA2DS2-VASc grading result: per-criterion sub-scores, summed total (0-9), derived risk band, looked-up annual stroke rate, and anticoagulation recommendation."

@@ -1,0 +1,168 @@
+# Generated from sql/. Do not edit by hand.
+# SOURCE: qrisk3_cardiovascular_disease_risk_score_grade_flag
+openapi: 3.1.0
+info:
+  title: Qrisk3 Cardiovascular Disease Risk Score — Qrisk3CardiovascularDiseaseRiskScoreGradeFlag
+  version: 1.0.0
+  description: Red-flag issues that fire independently of the numeric risk result, with priority and a suggested action for the clinical team.
+paths:
+  /qrisk3-cardiovascular-disease-risk-score-grade-flags:
+    get:
+      summary: List Qrisk3CardiovascularDiseaseRiskScoreGradeFlag records
+      operationId: listQrisk3CardiovascularDiseaseRiskScoreGradeFlag
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of Qrisk3CardiovascularDiseaseRiskScoreGradeFlag records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Qrisk3CardiovascularDiseaseRiskScoreGradeFlag"
+    post:
+      summary: Create a new Qrisk3CardiovascularDiseaseRiskScoreGradeFlag
+      operationId: createQrisk3CardiovascularDiseaseRiskScoreGradeFlag
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Qrisk3CardiovascularDiseaseRiskScoreGradeFlag"
+      responses:
+        "201":
+          description: The newly created Qrisk3CardiovascularDiseaseRiskScoreGradeFlag
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Qrisk3CardiovascularDiseaseRiskScoreGradeFlag"
+        "400":
+          description: Validation error
+  /qrisk3-cardiovascular-disease-risk-score-grade-flags/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one Qrisk3CardiovascularDiseaseRiskScoreGradeFlag by id
+      operationId: getQrisk3CardiovascularDiseaseRiskScoreGradeFlag
+      responses:
+        "200":
+          description: The requested Qrisk3CardiovascularDiseaseRiskScoreGradeFlag
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Qrisk3CardiovascularDiseaseRiskScoreGradeFlag"
+        "404":
+          description: Qrisk3CardiovascularDiseaseRiskScoreGradeFlag not found
+    patch:
+      summary: Update an existing Qrisk3CardiovascularDiseaseRiskScoreGradeFlag
+      operationId: updateQrisk3CardiovascularDiseaseRiskScoreGradeFlag
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Qrisk3CardiovascularDiseaseRiskScoreGradeFlag"
+      responses:
+        "200":
+          description: The updated Qrisk3CardiovascularDiseaseRiskScoreGradeFlag
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Qrisk3CardiovascularDiseaseRiskScoreGradeFlag"
+        "404":
+          description: Qrisk3CardiovascularDiseaseRiskScoreGradeFlag not found
+    delete:
+      summary: Soft-delete a Qrisk3CardiovascularDiseaseRiskScoreGradeFlag
+      operationId: deleteQrisk3CardiovascularDiseaseRiskScoreGradeFlag
+      responses:
+        "204":
+          description: Qrisk3CardiovascularDiseaseRiskScoreGradeFlag deleted
+        "404":
+          description: Qrisk3CardiovascularDiseaseRiskScoreGradeFlag not found
+components:
+  schemas:
+    Qrisk3CardiovascularDiseaseRiskScoreGradeFlag:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was most recently updated.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was soft-deleted.
+        qrisk3_cardiovascular_disease_risk_score_grade_id:
+          type: string
+          format: uuid
+          description: Foreign key to the parent grade.
+        flag_id:
+          type: string
+          maxLength: 50
+          description: Stable flag identifier (e.g. F-STATIN-RECOMMENDED-001).
+        category:
+          type: string
+          enum:
+            - statin-recommended
+            - severe-risk
+            - not-eligible
+            - missing-cholesterol
+            - incomplete
+            - severe-hypertension
+            - other
+            - ""
+          description: "Flag category: statin-recommended, severe-risk, not-eligible, missing-cholesterol, incomplete, severe-hypertension, or other."
+        priority:
+          type: string
+          enum:
+            - low
+            - medium
+            - high
+            - ""
+          description: "Priority: low, medium, high."
+        description:
+          type: string
+          maxLength: 500
+          description: Human-readable description of what fired the flag.
+        suggested_action:
+          type: string
+          maxLength: 500
+          description: "Suggested clinical action (e.g. \"offer atorvastatin 20 mg plus lifestyle advice after informed discussion\")."
+      required:
+        - created_at
+        - updated_at
+        - qrisk3_cardiovascular_disease_risk_score_grade_id
+        - flag_id
+        - category
+        - priority
+        - description
+        - suggested_action
+      description: Red-flag issues that fire independently of the numeric risk result, with priority and a suggested action for the clinical team.

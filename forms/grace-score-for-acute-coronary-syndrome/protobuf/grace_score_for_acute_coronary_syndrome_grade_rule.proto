@@ -1,0 +1,32 @@
+// Generated from sql/. Do not edit by hand.
+// SOURCE: grace_score_for_acute_coronary_syndrome_grade_rule
+
+syntax = "proto3";
+
+package form_examples.grace_score_for_acute_coronary_syndrome;
+
+enum GraceScoreForAcuteCoronarySyndromeGradeRuleVariableEnum {
+  VARIABLE_UNSPECIFIED = 0;
+  VARIABLE_AGE = 1;  // age
+  VARIABLE_HEART_RATE = 2;  // heart-rate
+  VARIABLE_SYSTOLIC_BP = 3;  // systolic-bp
+  VARIABLE_CREATININE = 4;  // creatinine
+  VARIABLE_KILLIP = 5;  // killip
+  VARIABLE_CARDIAC_ARREST = 6;  // cardiac-arrest
+  VARIABLE_ST_DEVIATION = 7;  // st-deviation
+  VARIABLE_CARDIAC_ENZYMES = 8;  // cardiac-enzymes
+  VARIABLE_BAND = 9;  // band
+}
+
+message GraceScoreForAcuteCoronarySyndromeGradeRule {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string grace_score_for_acute_coronary_syndrome_grade_id = 5;  // UUID — uuid
+  string rule_id = 6;  // VARCHAR(40) — max 40 chars
+  GraceScoreForAcuteCoronarySyndromeGradeRuleVariableEnum variable = 7;  // VARCHAR(20)
+  int32 points = 8;  // INT
+  string category = 9;  // VARCHAR(50) — max 50 chars
+  string description = 10;  // VARCHAR(500) — max 500 chars
+}

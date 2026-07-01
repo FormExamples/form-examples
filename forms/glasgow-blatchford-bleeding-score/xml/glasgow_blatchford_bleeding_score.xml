@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE glasgow_blatchford_bleeding_score SYSTEM "glasgow_blatchford_bleeding_score.dtd">
+<glasgow_blatchford_bleeding_score>
+<id>770e8400-e29b-41d4-a716-446655440002</id>
+<created_at>2026-04-09T10:00:00Z</created_at>
+<updated_at>2026-04-09T10:00:00Z</updated_at>
+<deleted_at>2026-04-09T10:00:00Z</deleted_at>
+<patient_id>550e8400-e29b-41d4-a716-446655440000</patient_id>
+<clinician_id>660e8400-e29b-41d4-a716-446655440001</clinician_id>
+<clinician_name>Example</clinician_name>
+<clinician_role>doctor</clinician_role>
+<assessed_at>2026-04-09T10:00:00Z</assessed_at>
+<care_setting>emergency-department</care_setting>
+<presenting_complaint>haematemesis</presenting_complaint>
+<patient_identifier></patient_identifier>
+<age_band>16-39</age_band>
+<sex>female</sex>
+<blood_urea_mmol_l>0.0</blood_urea_mmol_l>
+<haemoglobin_g_l>0.0</haemoglobin_g_l>
+<systolic_blood_pressure_mmhg>1</systolic_blood_pressure_mmhg>
+<pulse_beats_per_min>1</pulse_beats_per_min>
+<melaena_present>yes</melaena_present>
+<syncope>yes</syncope>
+<hepatic_disease>yes</hepatic_disease>
+<cardiac_failure>yes</cardiac_failure>
+<clinical_note>Example Hospital</clinical_note>
+</glasgow_blatchford_bleeding_score>

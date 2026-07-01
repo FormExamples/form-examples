@@ -1,0 +1,167 @@
+# Generated from sql/. Do not edit by hand.
+# SOURCE: national_early_warning_score_2_grade_flag
+openapi: 3.1.0
+info:
+  title: National Early Warning Score 2 — NationalEarlyWarningScore2GradeFlag
+  version: 1.0.0
+  description: Safety-critical flags that fire independently of the aggregate risk band, with priority and a suggested action for the ward and escalation team.
+paths:
+  /national-early-warning-score-2-grade-flags:
+    get:
+      summary: List NationalEarlyWarningScore2GradeFlag records
+      operationId: listNationalEarlyWarningScore2GradeFlag
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of NationalEarlyWarningScore2GradeFlag records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/NationalEarlyWarningScore2GradeFlag"
+    post:
+      summary: Create a new NationalEarlyWarningScore2GradeFlag
+      operationId: createNationalEarlyWarningScore2GradeFlag
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/NationalEarlyWarningScore2GradeFlag"
+      responses:
+        "201":
+          description: The newly created NationalEarlyWarningScore2GradeFlag
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/NationalEarlyWarningScore2GradeFlag"
+        "400":
+          description: Validation error
+  /national-early-warning-score-2-grade-flags/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one NationalEarlyWarningScore2GradeFlag by id
+      operationId: getNationalEarlyWarningScore2GradeFlag
+      responses:
+        "200":
+          description: The requested NationalEarlyWarningScore2GradeFlag
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/NationalEarlyWarningScore2GradeFlag"
+        "404":
+          description: NationalEarlyWarningScore2GradeFlag not found
+    patch:
+      summary: Update an existing NationalEarlyWarningScore2GradeFlag
+      operationId: updateNationalEarlyWarningScore2GradeFlag
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/NationalEarlyWarningScore2GradeFlag"
+      responses:
+        "200":
+          description: The updated NationalEarlyWarningScore2GradeFlag
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/NationalEarlyWarningScore2GradeFlag"
+        "404":
+          description: NationalEarlyWarningScore2GradeFlag not found
+    delete:
+      summary: Soft-delete a NationalEarlyWarningScore2GradeFlag
+      operationId: deleteNationalEarlyWarningScore2GradeFlag
+      responses:
+        "204":
+          description: NationalEarlyWarningScore2GradeFlag deleted
+        "404":
+          description: NationalEarlyWarningScore2GradeFlag not found
+components:
+  schemas:
+    NationalEarlyWarningScore2GradeFlag:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was most recently updated.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was soft-deleted.
+        national_early_warning_score_2_grade_id:
+          type: string
+          format: uuid
+          description: Foreign key to the parent grade.
+        flag_id:
+          type: string
+          maxLength: 50
+          description: Stable flag identifier (e.g. F-SINGLE-PARAMETER-3-001).
+        category:
+          type: string
+          enum:
+            - high-score-escalate
+            - single-parameter-3
+            - deteriorating-trend
+            - out-of-scope-population
+            - incomplete-observation
+            - other
+            - ""
+          description: "Flag category: high-score-escalate, single-parameter-3, deteriorating-trend, out-of-scope-population, incomplete-observation, or other."
+        priority:
+          type: string
+          enum:
+            - low
+            - medium
+            - high
+            - ""
+          description: "Priority: low, medium, high."
+        description:
+          type: string
+          maxLength: 500
+          description: Human-readable description of what fired the flag.
+        suggested_action:
+          type: string
+          maxLength: 500
+          description: "Suggested clinical action (e.g. \"escalate to the acute-illness team\", \"review SpO2 target against Scale 2\")."
+      required:
+        - created_at
+        - updated_at
+        - national_early_warning_score_2_grade_id
+        - flag_id
+        - category
+        - priority
+        - description
+        - suggested_action
+      description: Safety-critical flags that fire independently of the aggregate risk band, with priority and a suggested action for the ward and escalation team.

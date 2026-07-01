@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE angiography_test_result SYSTEM "angiography_test_result.dtd">
+<angiography_test_result>
+<id>770e8400-e29b-41d4-a716-446655440002</id>
+<created_at>2026-04-09T10:00:00Z</created_at>
+<updated_at>2026-04-09T10:00:00Z</updated_at>
+<deleted_at>2026-04-09T10:00:00Z</deleted_at>
+<patient_id>550e8400-e29b-41d4-a716-446655440000</patient_id>
+<clinician_id>660e8400-e29b-41d4-a716-446655440001</clinician_id>
+<originating_request_reference></originating_request_reference>
+<report_status>preliminary</report_status>
+<performed_date>2026-01-15</performed_date>
+<reported_date>2026-01-15</reported_date>
+<angiography_type>ct-angiography</angiography_type>
+<body_region>coronary</body_region>
+<contrast_used>iodinated</contrast_used>
+<examination_adequacy>adequate</examination_adequacy>
+<clinical_history>Example text.</clinical_history>
+<comparison_with_previous></comparison_with_previous>
+<findings_narrative>Example text.</findings_narrative>
+<significant_stenosis>true</significant_stenosis>
+<occlusion>true</occlusion>
+<aneurysm>true</aneurysm>
+<dissection>true</dissection>
+<active_extravasation>true</active_extravasation>
+<thrombus>true</thrombus>
+<normal_vessels>true</normal_vessels>
+<incidental_finding>true</incidental_finding>
+<max_stenosis_percent>50.0</max_stenosis_percent>
+<intervention_performed>true</intervention_performed>
+<impression>Example text.</impression>
+<reporting_category>General</reporting_category>
+<recommended_follow_up></recommended_follow_up>
+<critical_result_communicated>true</critical_result_communicated>
+<reported_to></reported_to>
+</angiography_test_result>

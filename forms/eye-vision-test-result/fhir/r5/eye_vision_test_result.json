@@ -1,0 +1,388 @@
+{
+  "resourceType": "Observation",
+  "id": "770e8400-e29b-41d4-a716-446655440002",
+  "meta": {
+    "profile": [
+      "http://hl7.org/fhir/StructureDefinition/Observation"
+    ],
+    "lastUpdated": "2026-04-09T10:00:00+00:00"
+  },
+  "status": "final",
+  "category": [
+    {
+      "coding": [
+        {
+          "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+          "code": "survey",
+          "display": "Survey"
+        }
+      ]
+    }
+  ],
+  "code": {
+    "coding": [
+      {
+        "system": "urn:form-examples:eye-vision-test-result",
+        "code": "eye_vision_test_result",
+        "display": "Eye Vision Test Result"
+      }
+    ]
+  },
+  "subject": {
+    "reference": "Patient/550e8400-e29b-41d4-a716-446655440000"
+  },
+  "encounter": {
+    "reference": "Encounter/bb0e8400-e29b-41d4-a716-446655440006"
+  },
+  "effectiveDateTime": "2026-04-09T10:00:00+00:00",
+  "component": [
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:eye-vision-test-result",
+            "code": "deleted_at",
+            "display": "Deleted At"
+          }
+        ]
+      },
+      "valueDateTime": "2026-04-09T10:00:00+00:00"
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:eye-vision-test-result",
+            "code": "originating_request_reference",
+            "display": "Originating Request Reference"
+          }
+        ]
+      },
+      "valueString": ""
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:eye-vision-test-result",
+            "code": "report_status",
+            "display": "Report Status"
+          }
+        ]
+      },
+      "valueCodeableConcept": {
+        "coding": [
+          {
+            "system": "urn:form-examples:eye-vision-test-result:report_status",
+            "code": "preliminary",
+            "display": "Preliminary"
+          }
+        ]
+      }
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:eye-vision-test-result",
+            "code": "test_type",
+            "display": "Test Type"
+          }
+        ]
+      },
+      "valueCodeableConcept": {
+        "coding": [
+          {
+            "system": "urn:form-examples:eye-vision-test-result:test_type",
+            "code": "visual-acuity",
+            "display": "Visual-Acuity"
+          }
+        ]
+      }
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:eye-vision-test-result",
+            "code": "performed_date",
+            "display": "Performed Date"
+          }
+        ]
+      },
+      "valueDateTime": "2026-01-15"
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:eye-vision-test-result",
+            "code": "reported_date",
+            "display": "Reported Date"
+          }
+        ]
+      },
+      "valueDateTime": "2026-01-15"
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:eye-vision-test-result",
+            "code": "clinical_history",
+            "display": "Clinical History"
+          }
+        ]
+      },
+      "valueString": "Example text."
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:eye-vision-test-result",
+            "code": "visual_acuity_right",
+            "display": "Visual Acuity Right"
+          }
+        ]
+      },
+      "valueString": ""
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:eye-vision-test-result",
+            "code": "visual_acuity_left",
+            "display": "Visual Acuity Left"
+          }
+        ]
+      },
+      "valueString": ""
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:eye-vision-test-result",
+            "code": "intraocular_pressure_right_mmhg",
+            "display": "Intraocular Pressure Right Mmhg"
+          }
+        ]
+      },
+      "valueQuantity": {
+        "value": 120.0
+      }
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:eye-vision-test-result",
+            "code": "intraocular_pressure_left_mmhg",
+            "display": "Intraocular Pressure Left Mmhg"
+          }
+        ]
+      },
+      "valueQuantity": {
+        "value": 120.0
+      }
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:eye-vision-test-result",
+            "code": "visual_field_result",
+            "display": "Visual Field Result"
+          }
+        ]
+      },
+      "valueCodeableConcept": {
+        "coding": [
+          {
+            "system": "urn:form-examples:eye-vision-test-result:visual_field_result",
+            "code": "full",
+            "display": "Full"
+          }
+        ]
+      }
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:eye-vision-test-result",
+            "code": "reduced_visual_acuity",
+            "display": "Reduced Visual Acuity"
+          }
+        ]
+      },
+      "valueBoolean": true
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:eye-vision-test-result",
+            "code": "visual_field_defect",
+            "display": "Visual Field Defect"
+          }
+        ]
+      },
+      "valueBoolean": true
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:eye-vision-test-result",
+            "code": "raised_intraocular_pressure",
+            "display": "Raised Intraocular Pressure"
+          }
+        ]
+      },
+      "valueBoolean": true
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:eye-vision-test-result",
+            "code": "diabetic_retinopathy",
+            "display": "Diabetic Retinopathy"
+          }
+        ]
+      },
+      "valueBoolean": true
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:eye-vision-test-result",
+            "code": "optic_disc_abnormality",
+            "display": "Optic Disc Abnormality"
+          }
+        ]
+      },
+      "valueBoolean": true
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:eye-vision-test-result",
+            "code": "macular_abnormality",
+            "display": "Macular Abnormality"
+          }
+        ]
+      },
+      "valueBoolean": true
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:eye-vision-test-result",
+            "code": "normal_examination",
+            "display": "Normal Examination"
+          }
+        ]
+      },
+      "valueBoolean": true
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:eye-vision-test-result",
+            "code": "retinopathy_grade",
+            "display": "Retinopathy Grade"
+          }
+        ]
+      },
+      "valueCodeableConcept": {
+        "coding": [
+          {
+            "system": "urn:form-examples:eye-vision-test-result:retinopathy_grade",
+            "code": "none",
+            "display": "None"
+          }
+        ]
+      }
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:eye-vision-test-result",
+            "code": "findings_narrative",
+            "display": "Findings Narrative"
+          }
+        ]
+      },
+      "valueString": "Example text."
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:eye-vision-test-result",
+            "code": "impression",
+            "display": "Impression"
+          }
+        ]
+      },
+      "valueString": "Example text."
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:eye-vision-test-result",
+            "code": "reporting_category",
+            "display": "Reporting Category"
+          }
+        ]
+      },
+      "valueString": "General"
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:eye-vision-test-result",
+            "code": "recommended_follow_up",
+            "display": "Recommended Follow Up"
+          }
+        ]
+      },
+      "valueString": ""
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:eye-vision-test-result",
+            "code": "critical_result_communicated",
+            "display": "Critical Result Communicated"
+          }
+        ]
+      },
+      "valueBoolean": true
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:eye-vision-test-result",
+            "code": "reported_to",
+            "display": "Reported To"
+          }
+        ]
+      },
+      "valueString": ""
+    }
+  ]
+}

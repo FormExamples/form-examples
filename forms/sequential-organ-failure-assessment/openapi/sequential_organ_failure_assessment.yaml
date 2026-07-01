@@ -1,0 +1,283 @@
+# Generated from sql/. Do not edit by hand.
+# SOURCE: sequential_organ_failure_assessment
+openapi: 3.1.0
+info:
+  title: Sequential Organ Failure Assessment — SequentialOrganFailureAssessment
+  version: 1.0.0
+  description: "Main Sequential Organ Failure Assessment (SOFA) record: assessment context, patient identification and baseline, and the raw inputs for the six scored organ systems (respiration, coagulation, liver, cardiovascular, central nervous system, renal)."
+paths:
+  /sequential-organ-failure-assessments:
+    get:
+      summary: List SequentialOrganFailureAssessment records
+      operationId: listSequentialOrganFailureAssessment
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of SequentialOrganFailureAssessment records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/SequentialOrganFailureAssessment"
+    post:
+      summary: Create a new SequentialOrganFailureAssessment
+      operationId: createSequentialOrganFailureAssessment
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/SequentialOrganFailureAssessment"
+      responses:
+        "201":
+          description: The newly created SequentialOrganFailureAssessment
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SequentialOrganFailureAssessment"
+        "400":
+          description: Validation error
+  /sequential-organ-failure-assessments/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one SequentialOrganFailureAssessment by id
+      operationId: getSequentialOrganFailureAssessment
+      responses:
+        "200":
+          description: The requested SequentialOrganFailureAssessment
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SequentialOrganFailureAssessment"
+        "404":
+          description: SequentialOrganFailureAssessment not found
+    patch:
+      summary: Update an existing SequentialOrganFailureAssessment
+      operationId: updateSequentialOrganFailureAssessment
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/SequentialOrganFailureAssessment"
+      responses:
+        "200":
+          description: The updated SequentialOrganFailureAssessment
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SequentialOrganFailureAssessment"
+        "404":
+          description: SequentialOrganFailureAssessment not found
+    delete:
+      summary: Soft-delete a SequentialOrganFailureAssessment
+      operationId: deleteSequentialOrganFailureAssessment
+      responses:
+        "204":
+          description: SequentialOrganFailureAssessment deleted
+        "404":
+          description: SequentialOrganFailureAssessment not found
+components:
+  schemas:
+    SequentialOrganFailureAssessment:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was updated most-recently.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was deleted a.k.a. soft-removed.
+        patient_id:
+          type: string
+          format: uuid
+          description: Foreign key to the patient being assessed (delete restricted).
+        clinician_id:
+          type: string
+          format: uuid
+          description: Foreign key to the assessing clinician (optional; delete restricted).
+        assessor_name:
+          type: string
+          maxLength: 255
+          description: Name of the assessing clinician as recorded on the assessment.
+        assessor_role:
+          type: string
+          enum:
+            - intensivist
+            - critical-care-physician
+            - acute-physician
+            - resident
+            - nurse
+            - outreach-practitioner
+            - other
+            - ""
+          description: "Role of the assessing clinician: intensivist, critical-care-physician, acute-physician, resident, nurse, outreach-practitioner, or other."
+        assessor_registration_number:
+          type: string
+          maxLength: 50
+          description: Professional registration number of the assessing clinician.
+        assessed_at:
+          type: string
+          format: date-time
+          description: Date and time the assessment was performed.
+        care_location:
+          type: string
+          enum:
+            - icu
+            - hdu
+            - critical-care-outreach
+            - acute-medical-unit
+            - emergency-department
+            - other
+            - ""
+          description: "Care location: icu, hdu, critical-care-outreach, acute-medical-unit, emergency-department, or other."
+        hours_since_admission:
+          type: integer
+          format: int32
+          description: Hours elapsed since ICU/critical-care admission (for serial scoring).
+        patient_identifier:
+          type: string
+          maxLength: 100
+          description: Local patient identifier as recorded on the assessment.
+        age_years:
+          type: integer
+          format: int32
+          description: Patient age in years at the time of assessment.
+        sex:
+          type: string
+          enum:
+            - female
+            - male
+            - intersex
+            - unknown
+            - ""
+          description: "Patient sex recorded for the assessment: female, male, intersex, or unknown."
+        admission_diagnosis:
+          type: string
+          description: Free-text admission or working diagnosis.
+        suspected_infection:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - unknown
+            - ""
+          description: "Whether infection is suspected (drives the Sepsis-3 flag): yes, no, or unknown."
+        baseline_sofa_total:
+          type: integer
+          format: int32
+          description: Prior (baseline) total SOFA score used to compute delta-SOFA; assumed 0 when no pre-existing organ dysfunction is known.
+        pao2:
+          type: number
+          format: double
+          description: Respiration input — arterial partial pressure of oxygen (PaO2); SI units (kPa) preferred, mmHg accepted.
+        fio2:
+          type: number
+          format: double
+          description: Respiration input — fraction of inspired oxygen (FiO2) as a decimal fraction (0.21-1.0).
+        pao2_fio2_ratio:
+          type: number
+          format: double
+          description: Respiration input — directly entered PaO2/FiO2 ratio, used when PaO2 and FiO2 are not entered separately.
+        respiratory_support:
+          type: string
+          enum:
+            - ventilated
+            - cpap
+            - none
+            - ""
+          description: "Respiration input — respiratory support: ventilated, cpap, or none; sub-scores of 3-4 require support."
+        platelets:
+          type: number
+          format: double
+          description: Coagulation input — platelet count in x10^9/L (equivalently x10^3/uL).
+        bilirubin:
+          type: number
+          format: double
+          description: Liver input — total bilirubin; SI units (umol/L) preferred, mg/dL accepted.
+        map:
+          type: number
+          format: double
+          description: Cardiovascular input — mean arterial pressure (MAP) in mmHg.
+        vasopressor:
+          type: string
+          enum:
+            - none
+            - dopamine
+            - dobutamine
+            - adrenaline
+            - noradrenaline
+            - other
+            - ""
+          description: "Cardiovascular input — vasopressor/inotrope agent: none, dopamine, dobutamine, adrenaline, noradrenaline, or other."
+        vasopressor_dose:
+          type: number
+          format: double
+          description: Cardiovascular input — vasopressor dose in ug/kg/min (administered for at least one hour).
+        glasgow_coma_scale:
+          type: integer
+          format: int32
+          description: Central nervous system input — Glasgow Coma Scale (GCS) total, 3-15.
+        sedated:
+          type: boolean
+          description: Central nervous system input — whether the patient is sedated; use pre-sedation GCS or best estimate.
+        creatinine:
+          type: number
+          format: double
+          description: Renal input — serum creatinine; SI units (umol/L) preferred, mg/dL accepted.
+        urine_output:
+          type: integer
+          format: int32
+          description: Renal input — 24-hour urine output in mL/day.
+        clinical_note:
+          type: string
+          description: Free-text clinical note recorded with the assessment.
+      required:
+        - created_at
+        - updated_at
+        - patient_id
+        - assessor_name
+        - assessor_role
+        - assessor_registration_number
+        - care_location
+        - patient_identifier
+        - sex
+        - admission_diagnosis
+        - suspected_infection
+        - respiratory_support
+        - vasopressor
+        - sedated
+        - clinical_note
+      description: "Main Sequential Organ Failure Assessment (SOFA) record: assessment context, patient identification and baseline, and the raw inputs for the six scored organ systems (respiration, coagulation, liver, cardiovascular, central nervous system, renal)."

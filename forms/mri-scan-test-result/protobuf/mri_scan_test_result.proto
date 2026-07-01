@@ -1,0 +1,79 @@
+// Generated from sql/. Do not edit by hand.
+// SOURCE: mri_scan_test_result
+
+syntax = "proto3";
+
+package form_examples.mri_scan_test_result;
+
+enum MriScanTestResultReportStatusEnum {
+  REPORTSTATUS_UNSPECIFIED = 0;
+  REPORTSTATUS_PRELIMINARY = 1;  // preliminary
+  REPORTSTATUS_FINAL = 2;  // final
+  REPORTSTATUS_AMENDED = 3;  // amended
+  REPORTSTATUS_CANCELLED = 4;  // cancelled
+}
+
+enum MriScanTestResultBodyRegionEnum {
+  BODYREGION_UNSPECIFIED = 0;
+  BODYREGION_BRAIN = 1;  // brain
+  BODYREGION_SPINE_CERVICAL = 2;  // spine-cervical
+  BODYREGION_SPINE_THORACIC = 3;  // spine-thoracic
+  BODYREGION_SPINE_LUMBAR = 4;  // spine-lumbar
+  BODYREGION_HEAD_NECK = 5;  // head-neck
+  BODYREGION_CHEST = 6;  // chest
+  BODYREGION_ABDOMEN = 7;  // abdomen
+  BODYREGION_PELVIS = 8;  // pelvis
+  BODYREGION_CARDIAC = 9;  // cardiac
+  BODYREGION_MR_ANGIOGRAM = 10;  // mr-angiogram
+  BODYREGION_BREAST = 11;  // breast
+  BODYREGION_MUSCULOSKELETAL_JOINT = 12;  // musculoskeletal-joint
+  BODYREGION_WHOLE_BODY = 13;  // whole-body
+  BODYREGION_OTHER = 14;  // other
+}
+
+enum MriScanTestResultContrastUsedEnum {
+  CONTRASTUSED_UNSPECIFIED = 0;
+  CONTRASTUSED_NONE = 1;  // none
+  CONTRASTUSED_IV_GADOLINIUM = 2;  // iv-gadolinium
+}
+
+enum MriScanTestResultExaminationAdequacyEnum {
+  EXAMINATIONADEQUACY_UNSPECIFIED = 0;
+  EXAMINATIONADEQUACY_ADEQUATE = 1;  // adequate
+  EXAMINATIONADEQUACY_LIMITED = 2;  // limited
+  EXAMINATIONADEQUACY_NON_DIAGNOSTIC = 3;  // non-diagnostic
+}
+
+message MriScanTestResult {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string patient_id = 5;  // UUID — uuid
+  string clinician_id = 6;  // UUID — uuid
+  string originating_request_reference = 7;  // VARCHAR(255) — max 255 chars
+  MriScanTestResultReportStatusEnum report_status = 8;  // VARCHAR(15)
+  string performed_date = 9;  // DATE — iso 8601 date
+  string reported_date = 10;  // DATE — iso 8601 date
+  MriScanTestResultBodyRegionEnum body_region = 11;  // VARCHAR(30)
+  MriScanTestResultContrastUsedEnum contrast_used = 12;  // VARCHAR(15)
+  string sequences_performed = 13;  // VARCHAR(1000) — max 1000 chars
+  MriScanTestResultExaminationAdequacyEnum examination_adequacy = 14;  // VARCHAR(15)
+  string clinical_history = 15;  // VARCHAR(1000) — max 1000 chars
+  string comparison_with_previous = 16;  // VARCHAR(1000) — max 1000 chars
+  string findings_narrative = 17;  // VARCHAR(2000) — max 2000 chars
+  bool mass_or_lesion = 18;  // BOOLEAN
+  bool haemorrhage = 19;  // BOOLEAN
+  bool infarct = 20;  // BOOLEAN
+  bool demyelination = 21;  // BOOLEAN
+  bool disc_herniation = 22;  // BOOLEAN
+  bool cord_compression = 23;  // BOOLEAN
+  bool infection_inflammation = 24;  // BOOLEAN
+  bool incidental_finding = 25;  // BOOLEAN
+  double largest_lesion_size_mm = 26;  // NUMERIC(6,1) — numeric(6,1)
+  string impression = 27;  // VARCHAR(2000) — max 2000 chars
+  string reporting_category = 28;  // VARCHAR(50) — max 50 chars
+  string recommended_follow_up = 29;  // VARCHAR(1000) — max 1000 chars
+  bool critical_result_communicated = 30;  // BOOLEAN
+  string reported_to = 31;  // VARCHAR(500) — max 500 chars
+}

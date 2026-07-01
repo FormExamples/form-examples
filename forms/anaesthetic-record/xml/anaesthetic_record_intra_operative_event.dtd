@@ -1,0 +1,9 @@
+<!ELEMENT anaesthetic_record_intra_operative_event (id,created_at,updated_at,deleted_at,anaesthetic_record_id,event_type,occurred_at,management)>
+<!ELEMENT id (#PCDATA)>
+<!ELEMENT created_at (#PCDATA)>
+<!ELEMENT updated_at (#PCDATA)>
+<!ELEMENT deleted_at (#PCDATA)>
+<!ELEMENT anaesthetic_record_id (#PCDATA)>
+<!ELEMENT event_type (#PCDATA)>
+<!ELEMENT occurred_at (#PCDATA)>
+<!ELEMENT management (#PCDATA)>

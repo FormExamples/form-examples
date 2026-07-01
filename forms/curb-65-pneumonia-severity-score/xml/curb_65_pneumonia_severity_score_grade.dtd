@@ -1,0 +1,16 @@
+<!ELEMENT curb_65_pneumonia_severity_score_grade (id,created_at,updated_at,deleted_at,curb_65_pneumonia_severity_score_id,confusion_score,urea_score,respiratory_rate_score,blood_pressure_score,age_score,total_score,score_variant,risk_band,recommended_setting,graded_at)>
+<!ELEMENT id (#PCDATA)>
+<!ELEMENT created_at (#PCDATA)>
+<!ELEMENT updated_at (#PCDATA)>
+<!ELEMENT deleted_at (#PCDATA)>
+<!ELEMENT curb_65_pneumonia_severity_score_id (#PCDATA)>
+<!ELEMENT confusion_score (#PCDATA)>
+<!ELEMENT urea_score (#PCDATA)>
+<!ELEMENT respiratory_rate_score (#PCDATA)>
+<!ELEMENT blood_pressure_score (#PCDATA)>
+<!ELEMENT age_score (#PCDATA)>
+<!ELEMENT total_score (#PCDATA)>
+<!ELEMENT score_variant (#PCDATA)>
+<!ELEMENT risk_band (#PCDATA)>
+<!ELEMENT recommended_setting (#PCDATA)>
+<!ELEMENT graded_at (#PCDATA)>

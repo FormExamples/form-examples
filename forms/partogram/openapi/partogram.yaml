@@ -1,0 +1,206 @@
+# Generated from sql/. Do not edit by hand.
+# SOURCE: partogram
+openapi: 3.1.0
+info:
+  title: Partogram — Partogram
+  version: 1.0.0
+  description: "Parent partogram labour record header: recording context, patient identification, admission findings, and the active-phase start time that anchors the alert and action lines."
+paths:
+  /partograms:
+    get:
+      summary: List Partogram records
+      operationId: listPartogram
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of Partogram records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Partogram"
+    post:
+      summary: Create a new Partogram
+      operationId: createPartogram
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Partogram"
+      responses:
+        "201":
+          description: The newly created Partogram
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Partogram"
+        "400":
+          description: Validation error
+  /partograms/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one Partogram by id
+      operationId: getPartogram
+      responses:
+        "200":
+          description: The requested Partogram
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Partogram"
+        "404":
+          description: Partogram not found
+    patch:
+      summary: Update an existing Partogram
+      operationId: updatePartogram
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Partogram"
+      responses:
+        "200":
+          description: The updated Partogram
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Partogram"
+        "404":
+          description: Partogram not found
+    delete:
+      summary: Soft-delete a Partogram
+      operationId: deletePartogram
+      responses:
+        "204":
+          description: Partogram deleted
+        "404":
+          description: Partogram not found
+components:
+  schemas:
+    Partogram:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was updated most-recently.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was deleted a.k.a. soft-removed.
+        patient_id:
+          type: string
+          format: uuid
+          description: Foreign key to the patient this labour record is for (restricted delete).
+        clinician_id:
+          type: string
+          format: uuid
+          description: Foreign key to the recording clinician (restricted delete); optional.
+        clinician_name:
+          type: string
+          description: Name of the clinician recording the partogram, as entered on the record.
+        clinician_role:
+          type: string
+          enum:
+            - midwife
+            - obstetrician
+            - nurse
+            - other
+            - ""
+          description: "Role of the recording clinician: midwife, obstetrician, nurse, or other."
+        care_setting:
+          type: string
+          enum:
+            - labour-ward
+            - birth-centre
+            - triage
+            - other
+            - ""
+          description: "Care setting: labour-ward, birth-centre, triage, or other."
+        active_phase_start_at:
+          type: string
+          format: date-time
+          description: Date and time the active phase began (cervical dilatation 4 cm); the reference time from which elapsed hours and the alert / action lines are computed.
+        patient_identifier:
+          type: string
+          description: Local patient identifier as entered on the record.
+        age_band:
+          type: string
+          enum:
+            - under-18
+            - 18-24
+            - 25-34
+            - 35-39
+            - 40-plus
+            - ""
+          description: "Adult age band: under-18, 18-24, 25-34, 35-39, or 40-plus."
+        parity:
+          type: string
+          enum:
+            - nulliparous
+            - multiparous
+            - ""
+          description: "Parity: nulliparous (no previous birth) or multiparous."
+        gestation_weeks:
+          type: number
+          format: double
+          description: Completed weeks of gestation.
+        membranes_on_admission:
+          type: string
+          enum:
+            - intact
+            - ruptured
+            - ""
+          description: "Membrane status on admission: intact or ruptured."
+        risk_factors:
+          type: string
+          description: Free-text noted risk factors for the labour.
+        planned_care:
+          type: string
+          description: Free-text planned care or management for the labour.
+      required:
+        - created_at
+        - updated_at
+        - patient_id
+        - clinician_name
+        - clinician_role
+        - care_setting
+        - patient_identifier
+        - age_band
+        - parity
+        - membranes_on_admission
+        - risk_factors
+        - planned_care
+      description: "Parent partogram labour record header: recording context, patient identification, admission findings, and the active-phase start time that anchors the alert and action lines."

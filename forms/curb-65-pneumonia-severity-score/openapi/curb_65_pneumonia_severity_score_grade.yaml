@@ -1,0 +1,181 @@
+# Generated from sql/. Do not edit by hand.
+# SOURCE: curb_65_pneumonia_severity_score_grade
+openapi: 3.1.0
+info:
+  title: Curb 65 Pneumonia Severity Score — Curb65PneumoniaSeverityScoreGrade
+  version: 1.0.0
+  description: "Computed CURB-65 (or CRB-65 fallback) grading result: per-criterion 0-or-1 sub-scores, summed total, score variant used, derived mortality-risk band, and recommended site-of-care disposition."
+paths:
+  /curb-65-pneumonia-severity-score-grades:
+    get:
+      summary: List Curb65PneumoniaSeverityScoreGrade records
+      operationId: listCurb65PneumoniaSeverityScoreGrade
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of Curb65PneumoniaSeverityScoreGrade records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Curb65PneumoniaSeverityScoreGrade"
+    post:
+      summary: Create a new Curb65PneumoniaSeverityScoreGrade
+      operationId: createCurb65PneumoniaSeverityScoreGrade
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Curb65PneumoniaSeverityScoreGrade"
+      responses:
+        "201":
+          description: The newly created Curb65PneumoniaSeverityScoreGrade
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Curb65PneumoniaSeverityScoreGrade"
+        "400":
+          description: Validation error
+  /curb-65-pneumonia-severity-score-grades/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one Curb65PneumoniaSeverityScoreGrade by id
+      operationId: getCurb65PneumoniaSeverityScoreGrade
+      responses:
+        "200":
+          description: The requested Curb65PneumoniaSeverityScoreGrade
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Curb65PneumoniaSeverityScoreGrade"
+        "404":
+          description: Curb65PneumoniaSeverityScoreGrade not found
+    patch:
+      summary: Update an existing Curb65PneumoniaSeverityScoreGrade
+      operationId: updateCurb65PneumoniaSeverityScoreGrade
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Curb65PneumoniaSeverityScoreGrade"
+      responses:
+        "200":
+          description: The updated Curb65PneumoniaSeverityScoreGrade
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Curb65PneumoniaSeverityScoreGrade"
+        "404":
+          description: Curb65PneumoniaSeverityScoreGrade not found
+    delete:
+      summary: Soft-delete a Curb65PneumoniaSeverityScoreGrade
+      operationId: deleteCurb65PneumoniaSeverityScoreGrade
+      responses:
+        "204":
+          description: Curb65PneumoniaSeverityScoreGrade deleted
+        "404":
+          description: Curb65PneumoniaSeverityScoreGrade not found
+components:
+  schemas:
+    Curb65PneumoniaSeverityScoreGrade:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was most recently updated.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was soft-deleted.
+        curb_65_pneumonia_severity_score_id:
+          type: string
+          format: uuid
+          description: Foreign key to the parent assessment (unique, 1:1).
+        confusion_score:
+          type: integer
+          format: int32
+          description: "Criterion C sub-score (0 or 1): 1 when new-onset confusion is present."
+        urea_score:
+          type: integer
+          format: int32
+          description: "Criterion U sub-score (0 or 1): 1 when serum urea > 7 mmol/L; omitted in the CRB-65 variant."
+        respiratory_rate_score:
+          type: integer
+          format: int32
+          description: "Criterion R sub-score (0 or 1): 1 when respiratory rate >= 30 breaths per minute."
+        blood_pressure_score:
+          type: integer
+          format: int32
+          description: "Criterion B sub-score (0 or 1): 1 when systolic < 90 or diastolic <= 60 mmHg."
+        age_score:
+          type: integer
+          format: int32
+          description: "Criterion A65 sub-score (0 or 1): 1 when age >= 65 years."
+        total_score:
+          type: integer
+          format: int32
+          description: "Summed severity score: 0-5 for the CURB-65 variant, 0-4 for the CRB-65 variant."
+        score_variant:
+          type: string
+          enum:
+            - curb-65
+            - crb-65
+            - ""
+          description: "Which score variant produced the total: curb-65 (urea measured) or crb-65 (urea not measured)."
+        risk_band:
+          type: string
+          enum:
+            - low
+            - intermediate
+            - high
+            - ""
+          description: "Derived mortality-risk band: low, intermediate, or high."
+        recommended_setting:
+          type: string
+          description: Recommended site-of-care disposition for the band (e.g. consider home/outpatient, short-stay/supervised, hospitalise).
+        graded_at:
+          type: string
+          format: date-time
+          description: Timestamp when the engine last computed the grade.
+      required:
+        - created_at
+        - updated_at
+        - curb_65_pneumonia_severity_score_id
+        - score_variant
+        - risk_band
+        - recommended_setting
+        - graded_at
+      description: "Computed CURB-65 (or CRB-65 fallback) grading result: per-criterion 0-or-1 sub-scores, summed total, score variant used, derived mortality-risk band, and recommended site-of-care disposition."

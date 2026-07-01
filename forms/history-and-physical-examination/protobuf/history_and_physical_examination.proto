@@ -1,0 +1,104 @@
+// Generated from sql/. Do not edit by hand.
+// SOURCE: history_and_physical_examination
+
+syntax = "proto3";
+
+package form_examples.history_and_physical_examination;
+
+enum HistoryAndPhysicalExaminationClinicianRoleEnum {
+  CLINICIANROLE_UNSPECIFIED = 0;
+  CLINICIANROLE_DOCTOR = 1;  // doctor
+  CLINICIANROLE_ACP = 2;  // acp
+  CLINICIANROLE_PHYSICIAN_ASSOCIATE = 3;  // physician-associate
+  CLINICIANROLE_OTHER = 4;  // other
+}
+
+enum HistoryAndPhysicalExaminationCareSettingEnum {
+  CARESETTING_UNSPECIFIED = 0;
+  CARESETTING_EMERGENCY_DEPARTMENT = 1;  // emergency-department
+  CARESETTING_ACUTE_MEDICAL_UNIT = 2;  // acute-medical-unit
+  CARESETTING_WARD = 3;  // ward
+  CARESETTING_OTHER = 4;  // other
+}
+
+enum HistoryAndPhysicalExaminationAdmissionSourceEnum {
+  ADMISSIONSOURCE_UNSPECIFIED = 0;
+  ADMISSIONSOURCE_SELF = 1;  // self
+  ADMISSIONSOURCE_GP = 2;  // gp
+  ADMISSIONSOURCE_AMBULANCE = 3;  // ambulance
+  ADMISSIONSOURCE_TRANSFER = 4;  // transfer
+  ADMISSIONSOURCE_OTHER = 5;  // other
+}
+
+enum HistoryAndPhysicalExaminationAgeBandEnum {
+  AGEBAND_UNSPECIFIED = 0;
+  AGEBAND_V_18_39 = 1;  // 18-39
+  AGEBAND_V_40_64 = 2;  // 40-64
+  AGEBAND_V_65_79 = 3;  // 65-79
+  AGEBAND_V_80_PLUS = 4;  // 80-plus
+}
+
+enum HistoryAndPhysicalExaminationSexEnum {
+  SEX_UNSPECIFIED = 0;
+  SEX_FEMALE = 1;  // female
+  SEX_MALE = 2;  // male
+  SEX_INTERSEX = 3;  // intersex
+  SEX_UNKNOWN = 4;  // unknown
+}
+
+enum HistoryAndPhysicalExaminationAllergyStatusEnum {
+  ALLERGYSTATUS_UNSPECIFIED = 0;
+  ALLERGYSTATUS_NONE_KNOWN = 1;  // none-known
+  ALLERGYSTATUS_HAS_ALLERGIES = 2;  // has-allergies
+  ALLERGYSTATUS_NOT_DOCUMENTED = 3;  // not-documented
+}
+
+enum HistoryAndPhysicalExaminationConsciousnessLevelEnum {
+  CONSCIOUSNESSLEVEL_UNSPECIFIED = 0;
+  CONSCIOUSNESSLEVEL_ALERT = 1;  // alert
+  CONSCIOUSNESSLEVEL_VOICE = 2;  // voice
+  CONSCIOUSNESSLEVEL_PAIN = 3;  // pain
+  CONSCIOUSNESSLEVEL_UNRESPONSIVE = 4;  // unresponsive
+}
+
+message HistoryAndPhysicalExamination {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string patient_id = 5;  // UUID — uuid
+  string clinician_id = 6;  // UUID — uuid
+  string clerked_at = 7;  // TIMESTAMPTZ — iso 8601
+  HistoryAndPhysicalExaminationClinicianRoleEnum clinician_role = 8;  // VARCHAR(30)
+  string registration_number = 9;  // VARCHAR(50) — max 50 chars
+  HistoryAndPhysicalExaminationCareSettingEnum care_setting = 10;  // VARCHAR(30)
+  HistoryAndPhysicalExaminationAdmissionSourceEnum admission_source = 11;  // VARCHAR(20)
+  string patient_identifier = 12;  // VARCHAR(100) — max 100 chars
+  HistoryAndPhysicalExaminationAgeBandEnum age_band = 13;  // VARCHAR(20)
+  HistoryAndPhysicalExaminationSexEnum sex = 14;  // VARCHAR(20)
+  string presenting_complaint = 15;  // TEXT
+  string history_of_presenting_complaint = 16;  // TEXT
+  string past_medical_surgical_history = 17;  // TEXT
+  string drug_history = 18;  // TEXT
+  HistoryAndPhysicalExaminationAllergyStatusEnum allergy_status = 19;  // VARCHAR(20)
+  string allergy_detail = 20;  // TEXT
+  string family_history = 21;  // TEXT
+  string social_history = 22;  // TEXT
+  string systems_review = 23;  // TEXT
+  double temperature = 24;  // NUMERIC(4,1) — numeric(4,1)
+  int32 heart_rate = 25;  // INTEGER
+  int32 respiratory_rate = 26;  // INTEGER
+  int32 systolic_blood_pressure = 27;  // INTEGER
+  int32 oxygen_saturation = 28;  // INTEGER
+  HistoryAndPhysicalExaminationConsciousnessLevelEnum consciousness_level = 29;  // VARCHAR(15)
+  string exam_cardiovascular = 30;  // TEXT
+  string exam_respiratory = 31;  // TEXT
+  string exam_abdominal = 32;  // TEXT
+  string exam_neurological = 33;  // TEXT
+  string exam_other = 34;  // TEXT
+  string investigations = 35;  // TEXT
+  string impression = 36;  // TEXT
+  string red_flag_findings = 37;  // TEXT
+  string management_plan = 38;  // TEXT
+  string clinical_note = 39;  // TEXT
+}

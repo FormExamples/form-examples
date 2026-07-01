@@ -1,0 +1,29 @@
+// Generated from sql/. Do not edit by hand.
+// SOURCE: centor_score_for_streptococcal_pharyngitis_grade_rule
+
+syntax = "proto3";
+
+package form_examples.centor_score_for_streptococcal_pharyngitis;
+
+enum CentorScoreForStreptococcalPharyngitisGradeRuleCriterionEnum {
+  CRITERION_UNSPECIFIED = 0;
+  CRITERION_TONSILLAR_EXUDATE = 1;  // tonsillar-exudate
+  CRITERION_TENDER_NODES = 2;  // tender-nodes
+  CRITERION_FEVER = 3;  // fever
+  CRITERION_COUGH_ABSENT = 4;  // cough-absent
+  CRITERION_AGE_MODIFIER = 5;  // age-modifier
+  CRITERION_BAND = 6;  // band
+}
+
+message CentorScoreForStreptococcalPharyngitisGradeRule {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string centor_score_for_streptococcal_pharyngitis_grade_id = 5;  // UUID — uuid
+  string rule_id = 6;  // VARCHAR(40) — max 40 chars
+  CentorScoreForStreptococcalPharyngitisGradeRuleCriterionEnum criterion = 7;  // VARCHAR(30)
+  int32 points = 8;  // INT
+  string category = 9;  // VARCHAR(50) — max 50 chars
+  string description = 10;  // VARCHAR(500) — max 500 chars
+}

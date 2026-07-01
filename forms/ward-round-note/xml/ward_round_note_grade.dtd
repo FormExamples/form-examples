@@ -1,0 +1,17 @@
+<!ELEMENT ward_round_note_grade (id,created_at,updated_at,deleted_at,ward_round_note_id,status,completeness_percent,header_documented,problems_documented,examination_documented,investigations_documented,vte_documented,medication_documented,plan_documented,escalation_documented,graded_at)>
+<!ELEMENT id (#PCDATA)>
+<!ELEMENT created_at (#PCDATA)>
+<!ELEMENT updated_at (#PCDATA)>
+<!ELEMENT deleted_at (#PCDATA)>
+<!ELEMENT ward_round_note_id (#PCDATA)>
+<!ELEMENT status (#PCDATA)>
+<!ELEMENT completeness_percent (#PCDATA)>
+<!ELEMENT header_documented (#PCDATA)>
+<!ELEMENT problems_documented (#PCDATA)>
+<!ELEMENT examination_documented (#PCDATA)>
+<!ELEMENT investigations_documented (#PCDATA)>
+<!ELEMENT vte_documented (#PCDATA)>
+<!ELEMENT medication_documented (#PCDATA)>
+<!ELEMENT plan_documented (#PCDATA)>
+<!ELEMENT escalation_documented (#PCDATA)>
+<!ELEMENT graded_at (#PCDATA)>

@@ -1,0 +1,243 @@
+# Generated from sql/. Do not edit by hand.
+# SOURCE: wells_score_for_pulmonary_embolism
+openapi: 3.1.0
+info:
+  title: Wells Score For Pulmonary Embolism — WellsScoreForPulmonaryEmbolism
+  version: 1.0.0
+  description: "Main Wells PE assessment record: identification, context, and the seven weighted clinical criterion inputs."
+paths:
+  /wells-score-for-pulmonary-embolisms:
+    get:
+      summary: List WellsScoreForPulmonaryEmbolism records
+      operationId: listWellsScoreForPulmonaryEmbolism
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of WellsScoreForPulmonaryEmbolism records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/WellsScoreForPulmonaryEmbolism"
+    post:
+      summary: Create a new WellsScoreForPulmonaryEmbolism
+      operationId: createWellsScoreForPulmonaryEmbolism
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/WellsScoreForPulmonaryEmbolism"
+      responses:
+        "201":
+          description: The newly created WellsScoreForPulmonaryEmbolism
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/WellsScoreForPulmonaryEmbolism"
+        "400":
+          description: Validation error
+  /wells-score-for-pulmonary-embolisms/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one WellsScoreForPulmonaryEmbolism by id
+      operationId: getWellsScoreForPulmonaryEmbolism
+      responses:
+        "200":
+          description: The requested WellsScoreForPulmonaryEmbolism
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/WellsScoreForPulmonaryEmbolism"
+        "404":
+          description: WellsScoreForPulmonaryEmbolism not found
+    patch:
+      summary: Update an existing WellsScoreForPulmonaryEmbolism
+      operationId: updateWellsScoreForPulmonaryEmbolism
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/WellsScoreForPulmonaryEmbolism"
+      responses:
+        "200":
+          description: The updated WellsScoreForPulmonaryEmbolism
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/WellsScoreForPulmonaryEmbolism"
+        "404":
+          description: WellsScoreForPulmonaryEmbolism not found
+    delete:
+      summary: Soft-delete a WellsScoreForPulmonaryEmbolism
+      operationId: deleteWellsScoreForPulmonaryEmbolism
+      responses:
+        "204":
+          description: WellsScoreForPulmonaryEmbolism deleted
+        "404":
+          description: WellsScoreForPulmonaryEmbolism not found
+components:
+  schemas:
+    WellsScoreForPulmonaryEmbolism:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was updated most-recently.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was deleted a.k.a. soft-removed.
+        patient_id:
+          type: string
+          format: uuid
+          description: Foreign key to the patient being assessed (restricts delete).
+        clinician_id:
+          type: string
+          format: uuid
+          description: Foreign key to the assessing clinician (restricts delete).
+        status:
+          type: string
+          enum:
+            - draft
+            - submitted
+            - amended
+            - signed
+            - ""
+          description: "Workflow status: draft, submitted, amended, or signed."
+        patient_identifier:
+          type: string
+          maxLength: 64
+          description: Local patient identifier as recorded at the point of assessment.
+        assessed_at:
+          type: string
+          format: date-time
+          description: Date and time the assessment was carried out.
+        care_setting:
+          type: string
+          enum:
+            - emergency-department
+            - acute-medical-unit
+            - ambulatory
+            - other
+            - ""
+          description: "Care setting: emergency-department, acute-medical-unit, ambulatory, or other."
+        age_band:
+          type: string
+          enum:
+            - 18-39
+            - 40-64
+            - 65-74
+            - 75-84
+            - 85-plus
+            - ""
+          description: "Adult age band: 18-39, 40-64, 65-74, 75-84, or 85-plus."
+        haemodynamic_status:
+          type: string
+          enum:
+            - stable
+            - unstable
+            - ""
+          description: "Haemodynamic status: stable or unstable (unstable suggests massive PE)."
+        clinical_signs_of_dvt:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: "Criterion 1 (+3): clinical signs and symptoms of DVT."
+        pe_most_likely:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: "Criterion 2 (+3): PE is the number-one diagnosis, or equally likely."
+        heart_rate_over_100:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: "Criterion 3 (+1.5): heart rate greater than 100 beats per minute."
+        immobilisation_or_surgery:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: "Criterion 4 (+1.5): immobilisation for at least 3 days, or surgery in the previous 4 weeks."
+        previous_dvt_pe:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: "Criterion 5 (+1.5): previous, objectively diagnosed DVT or PE."
+        haemoptysis:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: "Criterion 6 (+1): haemoptysis."
+        malignancy:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: "Criterion 7 (+1): malignancy on treatment, treated within 6 months, or palliative."
+        clinical_notes:
+          type: string
+          description: Free-text clinical notes captured alongside the assessment.
+      required:
+        - created_at
+        - updated_at
+        - patient_id
+        - status
+        - patient_identifier
+        - care_setting
+        - age_band
+        - haemodynamic_status
+        - clinical_signs_of_dvt
+        - pe_most_likely
+        - heart_rate_over_100
+        - immobilisation_or_surgery
+        - previous_dvt_pe
+        - haemoptysis
+        - malignancy
+        - clinical_notes
+      description: "Main Wells PE assessment record: identification, context, and the seven weighted clinical criterion inputs."

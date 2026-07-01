@@ -1,0 +1,13 @@
+<!ELEMENT soap_note_grade (id,created_at,updated_at,deleted_at,soap_note_id,status,completeness_percent,subjective_present,objective_present,assessment_present,plan_present,graded_at)>
+<!ELEMENT id (#PCDATA)>
+<!ELEMENT created_at (#PCDATA)>
+<!ELEMENT updated_at (#PCDATA)>
+<!ELEMENT deleted_at (#PCDATA)>
+<!ELEMENT soap_note_id (#PCDATA)>
+<!ELEMENT status (#PCDATA)>
+<!ELEMENT completeness_percent (#PCDATA)>
+<!ELEMENT subjective_present (#PCDATA)>
+<!ELEMENT objective_present (#PCDATA)>
+<!ELEMENT assessment_present (#PCDATA)>
+<!ELEMENT plan_present (#PCDATA)>
+<!ELEMENT graded_at (#PCDATA)>

@@ -1,0 +1,12 @@
+<!ELEMENT medication_reconciliation_discrepancy (id,created_at,updated_at,deleted_at,medication_reconciliation_id,discrepancy_type,bpmh_item_ref,inpatient_item_ref,intended_action,rationale,intentional)>
+<!ELEMENT id (#PCDATA)>
+<!ELEMENT created_at (#PCDATA)>
+<!ELEMENT updated_at (#PCDATA)>
+<!ELEMENT deleted_at (#PCDATA)>
+<!ELEMENT medication_reconciliation_id (#PCDATA)>
+<!ELEMENT discrepancy_type (#PCDATA)>
+<!ELEMENT bpmh_item_ref (#PCDATA)>
+<!ELEMENT inpatient_item_ref (#PCDATA)>
+<!ELEMENT intended_action (#PCDATA)>
+<!ELEMENT rationale (#PCDATA)>
+<!ELEMENT intentional (#PCDATA)>

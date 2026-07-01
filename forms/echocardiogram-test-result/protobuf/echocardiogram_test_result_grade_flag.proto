@@ -1,0 +1,44 @@
+// Generated from sql/. Do not edit by hand.
+// SOURCE: echocardiogram_test_result_grade_flag
+
+syntax = "proto3";
+
+package form_examples.echocardiogram_test_result;
+
+enum EchocardiogramTestResultGradeFlagCategoryEnum {
+  CATEGORY_UNSPECIFIED = 0;
+  CATEGORY_CRITICAL_RESULT_ALERT = 1;  // critical-result-alert
+  CATEGORY_SEVERE_VALVE_DISEASE = 2;  // severe-valve-disease
+  CATEGORY_SUSPECTED_ENDOCARDITIS = 3;  // suspected-endocarditis
+  CATEGORY_PERICARDIAL_EFFUSION_TAMPONADE = 4;  // pericardial-effusion-tamponade
+  CATEGORY_SEVERE_LV_IMPAIRMENT = 5;  // severe-lv-impairment
+  CATEGORY_INTRACARDIAC_THROMBUS = 6;  // intracardiac-thrombus
+  CATEGORY_DISCREPANCY_WITH_REQUEST = 7;  // discrepancy-with-request
+  CATEGORY_ABNORMAL_REQUIRING_ACTION = 8;  // abnormal-requiring-action
+  CATEGORY_URGENT_REFERRAL = 9;  // urgent-referral
+  CATEGORY_LIMITED_STUDY_QUALITY = 10;  // limited-study-quality
+  CATEGORY_UNEXPECTED_FINDING = 11;  // unexpected-finding
+  CATEGORY_MISSING_IMPRESSION = 12;  // missing-impression
+  CATEGORY_MISSING_MEASUREMENT = 13;  // missing-measurement
+  CATEGORY_OTHER = 14;  // other
+}
+
+enum EchocardiogramTestResultGradeFlagPriorityEnum {
+  PRIORITY_UNSPECIFIED = 0;
+  PRIORITY_LOW = 1;  // low
+  PRIORITY_MEDIUM = 2;  // medium
+  PRIORITY_HIGH = 3;  // high
+}
+
+message EchocardiogramTestResultGradeFlag {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string echocardiogram_test_result_grade_id = 5;  // UUID — uuid
+  string flag_id = 6;  // VARCHAR(50) — max 50 chars
+  EchocardiogramTestResultGradeFlagCategoryEnum category = 7;  // VARCHAR(40)
+  EchocardiogramTestResultGradeFlagPriorityEnum priority = 8;  // VARCHAR(10)
+  string description = 9;  // VARCHAR(500) — max 500 chars
+  string suggested_action = 10;  // VARCHAR(500) — max 500 chars
+}

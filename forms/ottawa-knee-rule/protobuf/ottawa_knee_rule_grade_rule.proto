@@ -1,0 +1,37 @@
+// Generated from sql/. Do not edit by hand.
+// SOURCE: ottawa_knee_rule_grade_rule
+
+syntax = "proto3";
+
+package form_examples.ottawa_knee_rule;
+
+enum OttawaKneeRuleGradeRuleInstrumentEnum {
+  INSTRUMENT_UNSPECIFIED = 0;
+  INSTRUMENT_CRITERION = 1;  // criterion
+  INSTRUMENT_COMPOSITE = 2;  // composite
+}
+
+enum OttawaKneeRuleGradeRuleCriterionEnum {
+  CRITERION_UNSPECIFIED = 0;
+  CRITERION_AGE = 1;  // age
+  CRITERION_ISOLATED_PATELLAR_TENDERNESS = 2;  // isolated-patellar-tenderness
+  CRITERION_FIBULAR_HEAD_TENDERNESS = 3;  // fibular-head-tenderness
+  CRITERION_FLEXION = 4;  // flexion
+  CRITERION_WEIGHT_BEARING = 5;  // weight-bearing
+  CRITERION_DECISION = 6;  // decision
+  CRITERION_OTHER = 7;  // other
+}
+
+message OttawaKneeRuleGradeRule {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string ottawa_knee_rule_grade_id = 5;  // UUID — uuid
+  string rule_id = 6;  // VARCHAR(40) — max 40 chars
+  OttawaKneeRuleGradeRuleInstrumentEnum instrument = 7;  // VARCHAR(20)
+  OttawaKneeRuleGradeRuleCriterionEnum criterion = 8;  // VARCHAR(50)
+  bool fired = 9;  // BOOLEAN
+  string category = 10;  // VARCHAR(50) — max 50 chars
+  string description = 11;  // VARCHAR(500) — max 500 chars
+}

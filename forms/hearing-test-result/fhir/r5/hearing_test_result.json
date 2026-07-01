@@ -1,0 +1,440 @@
+{
+  "resourceType": "Observation",
+  "id": "770e8400-e29b-41d4-a716-446655440002",
+  "meta": {
+    "profile": [
+      "http://hl7.org/fhir/StructureDefinition/Observation"
+    ],
+    "lastUpdated": "2026-04-09T10:00:00+00:00"
+  },
+  "status": "final",
+  "category": [
+    {
+      "coding": [
+        {
+          "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+          "code": "survey",
+          "display": "Survey"
+        }
+      ]
+    }
+  ],
+  "code": {
+    "coding": [
+      {
+        "system": "urn:form-examples:hearing-test-result",
+        "code": "hearing_test_result",
+        "display": "Hearing Test Result"
+      }
+    ]
+  },
+  "subject": {
+    "reference": "Patient/550e8400-e29b-41d4-a716-446655440000"
+  },
+  "encounter": {
+    "reference": "Encounter/bb0e8400-e29b-41d4-a716-446655440006"
+  },
+  "effectiveDateTime": "2026-04-09T10:00:00+00:00",
+  "component": [
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:hearing-test-result",
+            "code": "deleted_at",
+            "display": "Deleted At"
+          }
+        ]
+      },
+      "valueDateTime": "2026-04-09T10:00:00+00:00"
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:hearing-test-result",
+            "code": "originating_request_reference",
+            "display": "Originating Request Reference"
+          }
+        ]
+      },
+      "valueString": ""
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:hearing-test-result",
+            "code": "report_status",
+            "display": "Report Status"
+          }
+        ]
+      },
+      "valueCodeableConcept": {
+        "coding": [
+          {
+            "system": "urn:form-examples:hearing-test-result:report_status",
+            "code": "preliminary",
+            "display": "Preliminary"
+          }
+        ]
+      }
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:hearing-test-result",
+            "code": "performed_date",
+            "display": "Performed Date"
+          }
+        ]
+      },
+      "valueDateTime": "2026-01-15"
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:hearing-test-result",
+            "code": "reported_date",
+            "display": "Reported Date"
+          }
+        ]
+      },
+      "valueDateTime": "2026-01-15"
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:hearing-test-result",
+            "code": "test_type",
+            "display": "Test Type"
+          }
+        ]
+      },
+      "valueCodeableConcept": {
+        "coding": [
+          {
+            "system": "urn:form-examples:hearing-test-result:test_type",
+            "code": "pure-tone-audiometry",
+            "display": "Pure-Tone-Audiometry"
+          }
+        ]
+      }
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:hearing-test-result",
+            "code": "test_reliability",
+            "display": "Test Reliability"
+          }
+        ]
+      },
+      "valueCodeableConcept": {
+        "coding": [
+          {
+            "system": "urn:form-examples:hearing-test-result:test_reliability",
+            "code": "good",
+            "display": "Good"
+          }
+        ]
+      }
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:hearing-test-result",
+            "code": "clinical_history",
+            "display": "Clinical History"
+          }
+        ]
+      },
+      "valueString": "Example text."
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:hearing-test-result",
+            "code": "pure_tone_average_right_db",
+            "display": "Pure Tone Average Right Db"
+          }
+        ]
+      },
+      "valueQuantity": {
+        "value": 0.0
+      }
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:hearing-test-result",
+            "code": "pure_tone_average_left_db",
+            "display": "Pure Tone Average Left Db"
+          }
+        ]
+      },
+      "valueQuantity": {
+        "value": 0.0
+      }
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:hearing-test-result",
+            "code": "hearing_loss_type_right",
+            "display": "Hearing Loss Type Right"
+          }
+        ]
+      },
+      "valueCodeableConcept": {
+        "coding": [
+          {
+            "system": "urn:form-examples:hearing-test-result:hearing_loss_type_right",
+            "code": "none",
+            "display": "None"
+          }
+        ]
+      }
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:hearing-test-result",
+            "code": "hearing_loss_type_left",
+            "display": "Hearing Loss Type Left"
+          }
+        ]
+      },
+      "valueCodeableConcept": {
+        "coding": [
+          {
+            "system": "urn:form-examples:hearing-test-result:hearing_loss_type_left",
+            "code": "none",
+            "display": "None"
+          }
+        ]
+      }
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:hearing-test-result",
+            "code": "hearing_loss_severity_right",
+            "display": "Hearing Loss Severity Right"
+          }
+        ]
+      },
+      "valueCodeableConcept": {
+        "coding": [
+          {
+            "system": "urn:form-examples:hearing-test-result:hearing_loss_severity_right",
+            "code": "normal",
+            "display": "Normal"
+          }
+        ]
+      }
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:hearing-test-result",
+            "code": "hearing_loss_severity_left",
+            "display": "Hearing Loss Severity Left"
+          }
+        ]
+      },
+      "valueCodeableConcept": {
+        "coding": [
+          {
+            "system": "urn:form-examples:hearing-test-result:hearing_loss_severity_left",
+            "code": "normal",
+            "display": "Normal"
+          }
+        ]
+      }
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:hearing-test-result",
+            "code": "tympanometry_type_right",
+            "display": "Tympanometry Type Right"
+          }
+        ]
+      },
+      "valueCodeableConcept": {
+        "coding": [
+          {
+            "system": "urn:form-examples:hearing-test-result:tympanometry_type_right",
+            "code": "A",
+            "display": "A"
+          }
+        ]
+      }
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:hearing-test-result",
+            "code": "tympanometry_type_left",
+            "display": "Tympanometry Type Left"
+          }
+        ]
+      },
+      "valueCodeableConcept": {
+        "coding": [
+          {
+            "system": "urn:form-examples:hearing-test-result:tympanometry_type_left",
+            "code": "A",
+            "display": "A"
+          }
+        ]
+      }
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:hearing-test-result",
+            "code": "hearing_loss_present",
+            "display": "Hearing Loss Present"
+          }
+        ]
+      },
+      "valueBoolean": true
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:hearing-test-result",
+            "code": "asymmetric_loss",
+            "display": "Asymmetric Loss"
+          }
+        ]
+      },
+      "valueBoolean": true
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:hearing-test-result",
+            "code": "sudden_sensorineural_loss",
+            "display": "Sudden Sensorineural Loss"
+          }
+        ]
+      },
+      "valueBoolean": true
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:hearing-test-result",
+            "code": "conductive_component",
+            "display": "Conductive Component"
+          }
+        ]
+      },
+      "valueBoolean": true
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:hearing-test-result",
+            "code": "normal_hearing",
+            "display": "Normal Hearing"
+          }
+        ]
+      },
+      "valueBoolean": true
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:hearing-test-result",
+            "code": "findings_narrative",
+            "display": "Findings Narrative"
+          }
+        ]
+      },
+      "valueString": "Example text."
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:hearing-test-result",
+            "code": "impression",
+            "display": "Impression"
+          }
+        ]
+      },
+      "valueString": "Example text."
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:hearing-test-result",
+            "code": "reporting_category",
+            "display": "Reporting Category"
+          }
+        ]
+      },
+      "valueString": "General"
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:hearing-test-result",
+            "code": "recommended_follow_up",
+            "display": "Recommended Follow Up"
+          }
+        ]
+      },
+      "valueString": ""
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:hearing-test-result",
+            "code": "critical_result_communicated",
+            "display": "Critical Result Communicated"
+          }
+        ]
+      },
+      "valueBoolean": true
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:hearing-test-result",
+            "code": "reported_to",
+            "display": "Reported To"
+          }
+        ]
+      },
+      "valueString": ""
+    }
+  ]
+}

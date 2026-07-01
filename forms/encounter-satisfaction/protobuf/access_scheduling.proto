@@ -1,4 +1,4 @@
-// Generated from sql-migrations/. Do not edit by hand.
+// Generated from sql/. Do not edit by hand.
 // SOURCE: access_scheduling
 
 syntax = "proto3";
@@ -11,7 +11,7 @@ message AccessScheduling {
   string updated_at = 3;  // TIMESTAMPTZ — iso 8601
   string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
   string encounter_satisfaction_id = 5;  // UUID — uuid
-  string NULL = 6;  // if
+  int32 ease_of_scheduling = 6;  // SMALLINT
   int32 wait_for_appointment = 7;  // SMALLINT
   int32 wait_in_waiting_room = 8;  // SMALLINT
 }

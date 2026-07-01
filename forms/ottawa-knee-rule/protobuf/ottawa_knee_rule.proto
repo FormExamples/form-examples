@@ -1,0 +1,98 @@
+// Generated from sql/. Do not edit by hand.
+// SOURCE: ottawa_knee_rule
+
+syntax = "proto3";
+
+package form_examples.ottawa_knee_rule;
+
+enum OttawaKneeRuleStatusEnum {
+  STATUS_UNSPECIFIED = 0;
+  STATUS_DRAFT = 1;  // draft
+  STATUS_SUBMITTED = 2;  // submitted
+  STATUS_AMENDED = 3;  // amended
+  STATUS_SIGNED = 4;  // signed
+}
+
+enum OttawaKneeRuleCareSettingEnum {
+  CARESETTING_UNSPECIFIED = 0;
+  CARESETTING_EMERGENCY_DEPARTMENT = 1;  // emergency-department
+  CARESETTING_MINOR_INJURIES_UNIT = 2;  // minor-injuries-unit
+  CARESETTING_URGENT_CARE = 3;  // urgent-care
+  CARESETTING_OTHER = 4;  // other
+}
+
+enum OttawaKneeRuleInjuryMechanismEnum {
+  INJURYMECHANISM_UNSPECIFIED = 0;
+  INJURYMECHANISM_BLUNT_TRAUMA = 1;  // blunt-trauma
+  INJURYMECHANISM_TWISTING = 2;  // twisting
+  INJURYMECHANISM_FALL = 3;  // fall
+  INJURYMECHANISM_OTHER = 4;  // other
+}
+
+enum OttawaKneeRuleSexEnum {
+  SEX_UNSPECIFIED = 0;
+  SEX_FEMALE = 1;  // female
+  SEX_MALE = 2;  // male
+  SEX_INTERSEX = 3;  // intersex
+  SEX_UNKNOWN = 4;  // unknown
+}
+
+enum OttawaKneeRuleInjuredSideEnum {
+  INJUREDSIDE_UNSPECIFIED = 0;
+  INJUREDSIDE_LEFT = 1;  // left
+  INJUREDSIDE_RIGHT = 2;  // right
+}
+
+enum OttawaKneeRulePatellarTendernessEnum {
+  PATELLARTENDERNESS_UNSPECIFIED = 0;
+  PATELLARTENDERNESS_YES = 1;  // yes
+  PATELLARTENDERNESS_NO = 2;  // no
+}
+
+enum OttawaKneeRuleOtherBonyTendernessEnum {
+  OTHERBONYTENDERNESS_UNSPECIFIED = 0;
+  OTHERBONYTENDERNESS_YES = 1;  // yes
+  OTHERBONYTENDERNESS_NO = 2;  // no
+}
+
+enum OttawaKneeRuleFibularHeadTendernessEnum {
+  FIBULARHEADTENDERNESS_UNSPECIFIED = 0;
+  FIBULARHEADTENDERNESS_YES = 1;  // yes
+  FIBULARHEADTENDERNESS_NO = 2;  // no
+}
+
+enum OttawaKneeRuleUnableToFlex90Enum {
+  UNABLETOFLEX90_UNSPECIFIED = 0;
+  UNABLETOFLEX90_YES = 1;  // yes
+  UNABLETOFLEX90_NO = 2;  // no
+}
+
+enum OttawaKneeRuleUnableToBearWeightEnum {
+  UNABLETOBEARWEIGHT_UNSPECIFIED = 0;
+  UNABLETOBEARWEIGHT_YES = 1;  // yes
+  UNABLETOBEARWEIGHT_NO = 2;  // no
+}
+
+message OttawaKneeRule {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string patient_id = 5;  // UUID — uuid
+  string clinician_id = 6;  // UUID — uuid
+  OttawaKneeRuleStatusEnum status = 7;  // VARCHAR(20)
+  string patient_identifier = 8;  // VARCHAR(64) — max 64 chars
+  string assessed_at = 9;  // TIMESTAMPTZ — iso 8601
+  OttawaKneeRuleCareSettingEnum care_setting = 10;  // VARCHAR(30)
+  OttawaKneeRuleInjuryMechanismEnum injury_mechanism = 11;  // VARCHAR(20)
+  double hours_since_injury = 12;  // NUMERIC(6,1) — numeric(6,1)
+  OttawaKneeRuleSexEnum sex = 13;  // VARCHAR(20)
+  OttawaKneeRuleInjuredSideEnum injured_side = 14;  // VARCHAR(10)
+  int32 age_years = 15;  // INT
+  OttawaKneeRulePatellarTendernessEnum patellar_tenderness = 16;  // VARCHAR(5)
+  OttawaKneeRuleOtherBonyTendernessEnum other_bony_tenderness = 17;  // VARCHAR(5)
+  OttawaKneeRuleFibularHeadTendernessEnum fibular_head_tenderness = 18;  // VARCHAR(5)
+  OttawaKneeRuleUnableToFlex90Enum unable_to_flex_90 = 19;  // VARCHAR(5)
+  OttawaKneeRuleUnableToBearWeightEnum unable_to_bear_weight = 20;  // VARCHAR(5)
+  string clinical_notes = 21;  // TEXT
+}

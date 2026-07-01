@@ -1,0 +1,31 @@
+// Generated from sql/. Do not edit by hand.
+// SOURCE: cha2ds2_vasc_grade_rule
+
+syntax = "proto3";
+
+package form_examples.cha2ds2_vasc_score_for_atrial_fibrillation_stroke_risk;
+
+enum Cha2ds2VascGradeRuleCriterionEnum {
+  CRITERION_UNSPECIFIED = 0;
+  CRITERION_CONGESTIVE_HEART_FAILURE = 1;  // congestive-heart-failure
+  CRITERION_HYPERTENSION = 2;  // hypertension
+  CRITERION_AGE = 3;  // age
+  CRITERION_DIABETES = 4;  // diabetes
+  CRITERION_STROKE = 5;  // stroke
+  CRITERION_VASCULAR_DISEASE = 6;  // vascular-disease
+  CRITERION_SEX = 7;  // sex
+  CRITERION_RISK_BAND = 8;  // risk-band
+}
+
+message Cha2ds2VascGradeRule {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string cha2ds2_vasc_grade_id = 5;  // UUID — uuid
+  string rule_id = 6;  // VARCHAR(40) — max 40 chars
+  Cha2ds2VascGradeRuleCriterionEnum criterion = 7;  // VARCHAR(30)
+  int32 points = 8;  // INT
+  string category = 9;  // VARCHAR(50) — max 50 chars
+  string description = 10;  // VARCHAR(500) — max 500 chars
+}

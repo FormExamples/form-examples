@@ -1,0 +1,41 @@
+// Generated from sql/. Do not edit by hand.
+// SOURCE: national_early_warning_score_2_grade
+
+syntax = "proto3";
+
+package form_examples.national_early_warning_score_2;
+
+enum NationalEarlyWarningScore2GradeAnySingleParameterThreeEnum {
+  ANYSINGLEPARAMETERTHREE_UNSPECIFIED = 0;
+  ANYSINGLEPARAMETERTHREE_YES = 1;  // yes
+  ANYSINGLEPARAMETERTHREE_NO = 2;  // no
+}
+
+enum NationalEarlyWarningScore2GradeRiskBandEnum {
+  RISKBAND_UNSPECIFIED = 0;
+  RISKBAND_LOW = 1;  // low
+  RISKBAND_LOW_MEDIUM = 2;  // low-medium
+  RISKBAND_MEDIUM = 3;  // medium
+  RISKBAND_HIGH = 4;  // high
+}
+
+message NationalEarlyWarningScore2Grade {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string national_early_warning_score_2_id = 5;  // UUID — uuid
+  int32 aggregate_score = 6;  // INTEGER
+  int32 respiratory_rate_score = 7;  // INTEGER
+  int32 spo2_score = 8;  // INTEGER
+  int32 oxygen_score = 9;  // INTEGER
+  int32 blood_pressure_score = 10;  // INTEGER
+  int32 pulse_score = 11;  // INTEGER
+  int32 consciousness_score = 12;  // INTEGER
+  int32 temperature_score = 13;  // INTEGER
+  NationalEarlyWarningScore2GradeAnySingleParameterThreeEnum any_single_parameter_three = 14;  // VARCHAR(5)
+  NationalEarlyWarningScore2GradeRiskBandEnum risk_band = 15;  // VARCHAR(15)
+  string monitoring_frequency = 16;  // TEXT
+  string recommendation = 17;  // TEXT
+  string graded_at = 18;  // TIMESTAMPTZ — iso 8601
+}

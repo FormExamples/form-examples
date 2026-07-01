@@ -1,0 +1,56 @@
+// Generated from sql/. Do not edit by hand.
+// SOURCE: allergy_skin_test_result
+
+syntax = "proto3";
+
+package form_examples.allergy_skin_test_result;
+
+enum AllergySkinTestResultTestTypeEnum {
+  TESTTYPE_UNSPECIFIED = 0;
+  TESTTYPE_SKIN_PRICK_TEST = 1;  // skin-prick-test
+  TESTTYPE_INTRADERMAL_TEST = 2;  // intradermal-test
+  TESTTYPE_PATCH_TEST = 3;  // patch-test
+  TESTTYPE_SPECIFIC_IGE_BLOOD = 4;  // specific-ige-blood
+  TESTTYPE_DRUG_PROVOCATION_CHALLENGE = 5;  // drug-provocation-challenge
+  TESTTYPE_OTHER = 6;  // other
+}
+
+enum AllergySkinTestResultReportStatusEnum {
+  REPORTSTATUS_UNSPECIFIED = 0;
+  REPORTSTATUS_PRELIMINARY = 1;  // preliminary
+  REPORTSTATUS_FINAL = 2;  // final
+  REPORTSTATUS_AMENDED = 3;  // amended
+  REPORTSTATUS_CANCELLED = 4;  // cancelled
+}
+
+message AllergySkinTestResult {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string patient_id = 5;  // UUID — uuid
+  string clinician_id = 6;  // UUID — uuid
+  string originating_request_reference = 7;  // VARCHAR(255) — max 255 chars
+  AllergySkinTestResultTestTypeEnum test_type = 8;  // VARCHAR(30)
+  AllergySkinTestResultReportStatusEnum report_status = 9;  // VARCHAR(15)
+  string performed_date = 10;  // DATE — iso 8601 date
+  string reported_date = 11;  // DATE — iso 8601 date
+  string clinical_history = 12;  // VARCHAR(2000) — max 2000 chars
+  bool antihistamines_withheld = 13;  // BOOLEAN
+  bool positive_control_valid = 14;  // BOOLEAN
+  string allergens_tested = 15;  // VARCHAR(2000) — max 2000 chars
+  string wheal_sizes = 16;  // VARCHAR(2000) — max 2000 chars
+  string specific_ige_results = 17;  // VARCHAR(2000) — max 2000 chars
+  string sensitised_allergens = 18;  // VARCHAR(2000) — max 2000 chars
+  bool positive_reactions = 19;  // BOOLEAN
+  bool sensitisation_confirmed = 20;  // BOOLEAN
+  bool anaphylaxis_during_test = 21;  // BOOLEAN
+  bool all_negative = 22;  // BOOLEAN
+  bool test_invalid = 23;  // BOOLEAN
+  string interpretation = 24;  // VARCHAR(2000) — max 2000 chars
+  string impression = 25;  // VARCHAR(2000) — max 2000 chars
+  string reporting_category = 26;  // VARCHAR(50) — max 50 chars
+  string recommended_follow_up = 27;  // VARCHAR(1000) — max 1000 chars
+  bool critical_result_communicated = 28;  // BOOLEAN
+  string reported_to = 29;  // VARCHAR(500) — max 500 chars
+}

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE ward_round_note SYSTEM "ward_round_note.dtd">
+<ward_round_note>
+<id>770e8400-e29b-41d4-a716-446655440002</id>
+<created_at>2026-04-09T10:00:00Z</created_at>
+<updated_at>2026-04-09T10:00:00Z</updated_at>
+<deleted_at>2026-04-09T10:00:00Z</deleted_at>
+<patient_id>550e8400-e29b-41d4-a716-446655440000</patient_id>
+<clinician_id>660e8400-e29b-41d4-a716-446655440001</clinician_id>
+<clinician_name>Example</clinician_name>
+<clinician_grade>fy1</clinician_grade>
+<reviewed_at>2026-04-09T10:00:00Z</reviewed_at>
+<ward></ward>
+<patient_identifier></patient_identifier>
+<admission_date>2026-01-15</admission_date>
+<primary_diagnosis>Under investigation</primary_diagnosis>
+<overnight_events></overnight_events>
+<no_overnight_events>yes</no_overnight_events>
+<problem_list></problem_list>
+<examination_summary>Example text.</examination_summary>
+<news2_total>1</news2_total>
+<news2_single_param_three>yes</news2_single_param_three>
+<observation_trend>improving</observation_trend>
+<investigations_reviewed></investigations_reviewed>
+<no_investigations_outstanding>yes</no_investigations_outstanding>
+<abnormal_result_flagged>yes</abnormal_result_flagged>
+<abnormal_result_actioned>yes</abnormal_result_actioned>
+<vte_status>assessed</vte_status>
+<vte_prophylaxis_in_place>yes</vte_prophylaxis_in_place>
+<medication_changes>Paracetamol</medication_changes>
+<no_medication_changes>yes</no_medication_changes>
+<plan_and_jobs>Example text.</plan_and_jobs>
+<escalation_status>for-full-escalation</escalation_status>
+<senior_review_present>yes</senior_review_present>
+<estimated_discharge_date>2026-01-15</estimated_discharge_date>
+<discharge_not_estimable>yes</discharge_not_estimable>
+<clinical_note>Example Hospital</clinical_note>
+</ward_round_note>

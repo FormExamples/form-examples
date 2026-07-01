@@ -1,0 +1,174 @@
+# Generated from sql/. Do not edit by hand.
+# SOURCE: confusion_assessment_method_grade
+openapi: 3.1.0
+info:
+  title: Confusion Assessment Method — ConfusionAssessmentMethodGrade
+  version: 1.0.0
+  description: "Computed CAM classification result (1:1): boolean delirium status, derived classification (present / absent / unable-to-assess), the positive-feature set, and the motoric subtype. Status result with no numeric total."
+paths:
+  /confusion-assessment-method-grades:
+    get:
+      summary: List ConfusionAssessmentMethodGrade records
+      operationId: listConfusionAssessmentMethodGrade
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of ConfusionAssessmentMethodGrade records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/ConfusionAssessmentMethodGrade"
+    post:
+      summary: Create a new ConfusionAssessmentMethodGrade
+      operationId: createConfusionAssessmentMethodGrade
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ConfusionAssessmentMethodGrade"
+      responses:
+        "201":
+          description: The newly created ConfusionAssessmentMethodGrade
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ConfusionAssessmentMethodGrade"
+        "400":
+          description: Validation error
+  /confusion-assessment-method-grades/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one ConfusionAssessmentMethodGrade by id
+      operationId: getConfusionAssessmentMethodGrade
+      responses:
+        "200":
+          description: The requested ConfusionAssessmentMethodGrade
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ConfusionAssessmentMethodGrade"
+        "404":
+          description: ConfusionAssessmentMethodGrade not found
+    patch:
+      summary: Update an existing ConfusionAssessmentMethodGrade
+      operationId: updateConfusionAssessmentMethodGrade
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ConfusionAssessmentMethodGrade"
+      responses:
+        "200":
+          description: The updated ConfusionAssessmentMethodGrade
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ConfusionAssessmentMethodGrade"
+        "404":
+          description: ConfusionAssessmentMethodGrade not found
+    delete:
+      summary: Soft-delete a ConfusionAssessmentMethodGrade
+      operationId: deleteConfusionAssessmentMethodGrade
+      responses:
+        "204":
+          description: ConfusionAssessmentMethodGrade deleted
+        "404":
+          description: ConfusionAssessmentMethodGrade not found
+components:
+  schemas:
+    ConfusionAssessmentMethodGrade:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was most recently updated.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was soft-deleted.
+        confusion_assessment_method_id:
+          type: string
+          format: uuid
+          description: Foreign key to the parent assessment (unique, 1:1).
+        classification:
+          type: string
+          enum:
+            - present
+            - absent
+            - unable-to-assess
+            - ""
+          description: "Derived classification: present, absent, or unable-to-assess (empty when not yet graded)."
+        delirium_present:
+          type: boolean
+          description: "Boolean result of the diagnostic algorithm: 1 AND 2 AND (3 OR 4). Null when unable-to-assess or not graded."
+        feature_1_positive:
+          type: boolean
+          description: Whether feature 1 (acute onset and fluctuating course) was positive.
+        feature_2_positive:
+          type: boolean
+          description: Whether feature 2 (inattention) was positive.
+        feature_3_positive:
+          type: boolean
+          description: Whether feature 3 (disorganised thinking) was positive.
+        feature_4_positive:
+          type: boolean
+          description: Whether feature 4 (altered level of consciousness) was positive.
+        positive_features:
+          type: string
+          description: "Comma-separated subset of {1,2,3,4} that were positive (e.g. \"1,2,4\"), for auditable reasoning."
+        motoric_subtype:
+          type: string
+          enum:
+            - hypoactive
+            - hyperactive
+            - mixed
+            - normal
+            - ""
+          description: "Psychomotor subtype carried through to the result: hypoactive, hyperactive, mixed, or normal."
+        graded_at:
+          type: string
+          format: date-time
+          description: Timestamp when the engine last computed the classification.
+      required:
+        - created_at
+        - updated_at
+        - confusion_assessment_method_id
+        - classification
+        - positive_features
+        - motoric_subtype
+        - graded_at
+      description: "Computed CAM classification result (1:1): boolean delirium status, derived classification (present / absent / unable-to-assess), the positive-feature set, and the motoric subtype. Status result with no numeric total."

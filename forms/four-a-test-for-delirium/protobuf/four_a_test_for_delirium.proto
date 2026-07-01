@@ -1,0 +1,74 @@
+// Generated from sql/. Do not edit by hand.
+// SOURCE: four_a_test_for_delirium
+
+syntax = "proto3";
+
+package form_examples.four_a_test_for_delirium;
+
+enum FourATestForDeliriumSettingEnum {
+  SETTING_UNSPECIFIED = 0;
+  SETTING_ACUTE = 1;  // acute
+  SETTING_ED = 2;  // ed
+  SETTING_PERIOP = 3;  // periop
+  SETTING_CAREHOME = 4;  // careHome
+  SETTING_COMMUNITY = 5;  // community
+  SETTING_OTHER = 6;  // other
+}
+
+enum FourATestForDeliriumAlertnessEnum {
+  ALERTNESS_UNSPECIFIED = 0;
+  ALERTNESS_NORMAL = 1;  // normal
+  ALERTNESS_MILDTRANSIENT = 2;  // mildTransient
+  ALERTNESS_ABNORMAL = 3;  // abnormal
+}
+
+enum FourATestForDeliriumAmt4Enum {
+  AMT4_UNSPECIFIED = 0;
+  AMT4_NOMISTAKES = 1;  // noMistakes
+  AMT4_ONEMISTAKE = 2;  // oneMistake
+  AMT4_TWOORMOREORUNTESTABLE = 3;  // twoOrMoreOrUntestable
+}
+
+enum FourATestForDeliriumAttentionMonthsEnum {
+  ATTENTIONMONTHS_UNSPECIFIED = 0;
+  ATTENTIONMONTHS_SEVENORMORE = 1;  // sevenOrMore
+  ATTENTIONMONTHS_STARTSBUTUNDERSEVENORREFUSES = 2;  // startsButUnderSevenOrRefuses
+  ATTENTIONMONTHS_UNTESTABLE = 3;  // untestable
+}
+
+enum FourATestForDeliriumAcuteChangeEnum {
+  ACUTECHANGE_UNSPECIFIED = 0;
+  ACUTECHANGE_NO = 1;  // no
+  ACUTECHANGE_YES = 2;  // yes
+}
+
+enum FourATestForDeliriumAcuteChangeSourceEnum {
+  ACUTECHANGESOURCE_UNSPECIFIED = 0;
+  ACUTECHANGESOURCE_PATIENT = 1;  // patient
+  ACUTECHANGESOURCE_COLLATERAL = 2;  // collateral
+  ACUTECHANGESOURCE_RECORDS = 3;  // records
+  ACUTECHANGESOURCE_NONE = 4;  // none
+}
+
+message FourATestForDelirium {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string patient_id = 5;  // UUID — uuid
+  string clinician_id = 6;  // UUID — uuid
+  string patient_identifier = 7;  // VARCHAR(100) — max 100 chars
+  string patient_name = 8;  // VARCHAR(255) — max 255 chars
+  string date_of_birth = 9;  // DATE — iso 8601 date
+  string assessment_date = 10;  // DATE — iso 8601 date
+  string assessment_time = 11;  // TIME — iso 8601 time
+  FourATestForDeliriumSettingEnum setting = 12;  // VARCHAR(20)
+  string assessor_name = 13;  // VARCHAR(255) — max 255 chars
+  string assessor_role = 14;  // VARCHAR(100) — max 100 chars
+  FourATestForDeliriumAlertnessEnum alertness = 15;  // VARCHAR(20)
+  FourATestForDeliriumAmt4Enum amt4 = 16;  // VARCHAR(30)
+  FourATestForDeliriumAttentionMonthsEnum attention_months = 17;  // VARCHAR(40)
+  FourATestForDeliriumAcuteChangeEnum acute_change = 18;  // VARCHAR(10)
+  FourATestForDeliriumAcuteChangeSourceEnum acute_change_source = 19;  // VARCHAR(20)
+  string clinical_notes = 20;  // TEXT
+}

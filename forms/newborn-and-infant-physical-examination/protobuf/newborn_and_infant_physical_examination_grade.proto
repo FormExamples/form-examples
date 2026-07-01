@@ -1,0 +1,64 @@
+// Generated from sql/. Do not edit by hand.
+// SOURCE: newborn_and_infant_physical_examination_grade
+
+syntax = "proto3";
+
+package form_examples.newborn_and_infant_physical_examination;
+
+enum NewbornAndInfantPhysicalExaminationGradeEyesResultEnum {
+  EYESRESULT_UNSPECIFIED = 0;
+  EYESRESULT_SATISFACTORY = 1;  // satisfactory
+  EYESRESULT_REFER = 2;  // refer
+  EYESRESULT_NOT_EXAMINED = 3;  // not-examined
+}
+
+enum NewbornAndInfantPhysicalExaminationGradeHeartResultEnum {
+  HEARTRESULT_UNSPECIFIED = 0;
+  HEARTRESULT_SATISFACTORY = 1;  // satisfactory
+  HEARTRESULT_REFER = 2;  // refer
+  HEARTRESULT_NOT_EXAMINED = 3;  // not-examined
+}
+
+enum NewbornAndInfantPhysicalExaminationGradeHipsResultEnum {
+  HIPSRESULT_UNSPECIFIED = 0;
+  HIPSRESULT_SATISFACTORY = 1;  // satisfactory
+  HIPSRESULT_REFER = 2;  // refer
+  HIPSRESULT_NOT_EXAMINED = 3;  // not-examined
+}
+
+enum NewbornAndInfantPhysicalExaminationGradeTestesResultEnum {
+  TESTESRESULT_UNSPECIFIED = 0;
+  TESTESRESULT_SATISFACTORY = 1;  // satisfactory
+  TESTESRESULT_REFER = 2;  // refer
+  TESTESRESULT_NOT_EXAMINED = 3;  // not-examined
+  TESTESRESULT_NOT_APPLICABLE = 4;  // not-applicable
+}
+
+enum NewbornAndInfantPhysicalExaminationGradeOverallOutcomeEnum {
+  OVERALLOUTCOME_UNSPECIFIED = 0;
+  OVERALLOUTCOME_SATISFACTORY = 1;  // satisfactory
+  OVERALLOUTCOME_REFER = 2;  // refer
+  OVERALLOUTCOME_INCOMPLETE = 3;  // incomplete
+}
+
+enum NewbornAndInfantPhysicalExaminationGradeCompletenessEnum {
+  COMPLETENESS_UNSPECIFIED = 0;
+  COMPLETENESS_COMPLETE = 1;  // complete
+  COMPLETENESS_INCOMPLETE = 2;  // incomplete
+}
+
+message NewbornAndInfantPhysicalExaminationGrade {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string newborn_and_infant_physical_examination_id = 5;  // UUID — uuid
+  NewbornAndInfantPhysicalExaminationGradeEyesResultEnum eyes_result = 6;  // VARCHAR(15)
+  NewbornAndInfantPhysicalExaminationGradeHeartResultEnum heart_result = 7;  // VARCHAR(15)
+  NewbornAndInfantPhysicalExaminationGradeHipsResultEnum hips_result = 8;  // VARCHAR(15)
+  NewbornAndInfantPhysicalExaminationGradeTestesResultEnum testes_result = 9;  // VARCHAR(15)
+  NewbornAndInfantPhysicalExaminationGradeOverallOutcomeEnum overall_outcome = 10;  // VARCHAR(15)
+  NewbornAndInfantPhysicalExaminationGradeCompletenessEnum completeness = 11;  // VARCHAR(15)
+  int32 completeness_percent = 12;  // INTEGER
+  string graded_at = 13;  // TIMESTAMPTZ — iso 8601
+}

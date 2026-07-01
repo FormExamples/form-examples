@@ -1,0 +1,36 @@
+// Generated from sql/. Do not edit by hand.
+// SOURCE: waterlow_pressure_ulcer_risk_assessment_grade
+
+syntax = "proto3";
+
+package form_examples.waterlow_pressure_ulcer_risk_assessment;
+
+enum WaterlowPressureUlcerRiskAssessmentGradeRiskBandEnum {
+  RISKBAND_UNSPECIFIED = 0;
+  RISKBAND_LOW = 1;  // low
+  RISKBAND_AT_RISK = 2;  // at-risk
+  RISKBAND_HIGH_RISK = 3;  // high-risk
+  RISKBAND_VERY_HIGH_RISK = 4;  // very-high-risk
+}
+
+message WaterlowPressureUlcerRiskAssessmentGrade {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string waterlow_pressure_ulcer_risk_assessment_id = 5;  // UUID — uuid
+  int32 build_points = 6;  // INT
+  int32 skin_points = 7;  // INT
+  int32 sex_points = 8;  // INT
+  int32 age_points = 9;  // INT
+  int32 continence_points = 10;  // INT
+  int32 mobility_points = 11;  // INT
+  int32 tissue_malnutrition_points = 12;  // INT
+  int32 neurological_deficit_points = 13;  // INT
+  int32 major_surgery_trauma_points = 14;  // INT
+  int32 medication_points = 15;  // INT
+  int32 total_score = 16;  // INT
+  WaterlowPressureUlcerRiskAssessmentGradeRiskBandEnum risk_band = 17;  // VARCHAR(20)
+  string prevention_actions = 18;  // TEXT
+  string graded_at = 19;  // TIMESTAMPTZ — iso 8601
+}

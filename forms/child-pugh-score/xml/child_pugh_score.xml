@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE child_pugh_score SYSTEM "child_pugh_score.dtd">
+<child_pugh_score>
+<id>770e8400-e29b-41d4-a716-446655440002</id>
+<created_at>2026-04-09T10:00:00Z</created_at>
+<updated_at>2026-04-09T10:00:00Z</updated_at>
+<deleted_at>2026-04-09T10:00:00Z</deleted_at>
+<patient_id>550e8400-e29b-41d4-a716-446655440000</patient_id>
+<clinician_id>660e8400-e29b-41d4-a716-446655440001</clinician_id>
+<clinician_name>Example</clinician_name>
+<clinician_role>hepatologist</clinician_role>
+<assessed_at>2026-04-09T10:00:00Z</assessed_at>
+<care_setting>hepatology-clinic</care_setting>
+<aetiology>alcohol</aetiology>
+<patient_identifier></patient_identifier>
+<age_band>16-39</age_band>
+<sex>female</sex>
+<total_bilirubin_umol_l>0.0</total_bilirubin_umol_l>
+<serum_albumin_g_l>0.0</serum_albumin_g_l>
+<inr>0.0</inr>
+<prothrombin_time_seconds>0.0</prothrombin_time_seconds>
+<ascites>none</ascites>
+<hepatic_encephalopathy>none</hepatic_encephalopathy>
+<clinical_note>Example Hospital</clinical_note>
+</child_pugh_score>

@@ -1,0 +1,89 @@
+// Generated from sql/. Do not edit by hand.
+// SOURCE: child_pugh_score
+
+syntax = "proto3";
+
+package form_examples.child_pugh_score;
+
+enum ChildPughScoreClinicianRoleEnum {
+  CLINICIANROLE_UNSPECIFIED = 0;
+  CLINICIANROLE_HEPATOLOGIST = 1;  // hepatologist
+  CLINICIANROLE_SURGEON = 2;  // surgeon
+  CLINICIANROLE_ANAESTHETIST = 3;  // anaesthetist
+  CLINICIANROLE_PHYSICIAN = 4;  // physician
+  CLINICIANROLE_NURSE = 5;  // nurse
+  CLINICIANROLE_OTHER = 6;  // other
+}
+
+enum ChildPughScoreCareSettingEnum {
+  CARESETTING_UNSPECIFIED = 0;
+  CARESETTING_HEPATOLOGY_CLINIC = 1;  // hepatology-clinic
+  CARESETTING_WARD = 2;  // ward
+  CARESETTING_PRE_OPERATIVE = 3;  // pre-operative
+  CARESETTING_INTENSIVE_CARE = 4;  // intensive-care
+  CARESETTING_OTHER = 5;  // other
+}
+
+enum ChildPughScoreAetiologyEnum {
+  AETIOLOGY_UNSPECIFIED = 0;
+  AETIOLOGY_ALCOHOL = 1;  // alcohol
+  AETIOLOGY_VIRAL_HEPATITIS = 2;  // viral-hepatitis
+  AETIOLOGY_NAFLD = 3;  // nafld
+  AETIOLOGY_AUTOIMMUNE = 4;  // autoimmune
+  AETIOLOGY_CHOLESTATIC = 5;  // cholestatic
+  AETIOLOGY_OTHER = 6;  // other
+}
+
+enum ChildPughScoreAgeBandEnum {
+  AGEBAND_UNSPECIFIED = 0;
+  AGEBAND_V_16_39 = 1;  // 16-39
+  AGEBAND_V_40_59 = 2;  // 40-59
+  AGEBAND_V_60_74 = 3;  // 60-74
+  AGEBAND_V_75_PLUS = 4;  // 75-plus
+}
+
+enum ChildPughScoreSexEnum {
+  SEX_UNSPECIFIED = 0;
+  SEX_FEMALE = 1;  // female
+  SEX_MALE = 2;  // male
+  SEX_INTERSEX = 3;  // intersex
+  SEX_UNKNOWN = 4;  // unknown
+}
+
+enum ChildPughScoreAscitesEnum {
+  ASCITES_UNSPECIFIED = 0;
+  ASCITES_NONE = 1;  // none
+  ASCITES_MILD = 2;  // mild
+  ASCITES_MODERATE_SEVERE = 3;  // moderate-severe
+}
+
+enum ChildPughScoreHepaticEncephalopathyEnum {
+  HEPATICENCEPHALOPATHY_UNSPECIFIED = 0;
+  HEPATICENCEPHALOPATHY_NONE = 1;  // none
+  HEPATICENCEPHALOPATHY_GRADE_1_2 = 2;  // grade-1-2
+  HEPATICENCEPHALOPATHY_GRADE_3_4 = 3;  // grade-3-4
+}
+
+message ChildPughScore {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string patient_id = 5;  // UUID — uuid
+  string clinician_id = 6;  // UUID — uuid
+  string clinician_name = 7;  // VARCHAR(255) — max 255 chars
+  ChildPughScoreClinicianRoleEnum clinician_role = 8;  // VARCHAR(20)
+  string assessed_at = 9;  // TIMESTAMPTZ — iso 8601
+  ChildPughScoreCareSettingEnum care_setting = 10;  // VARCHAR(20)
+  ChildPughScoreAetiologyEnum aetiology = 11;  // VARCHAR(20)
+  string patient_identifier = 12;  // VARCHAR(100) — max 100 chars
+  ChildPughScoreAgeBandEnum age_band = 13;  // VARCHAR(10)
+  ChildPughScoreSexEnum sex = 14;  // VARCHAR(20)
+  double total_bilirubin_umol_l = 15;  // NUMERIC(6,1) — numeric(6,1)
+  double serum_albumin_g_l = 16;  // NUMERIC(5,1) — numeric(5,1)
+  double inr = 17;  // NUMERIC(4,2) — numeric(4,2)
+  double prothrombin_time_seconds = 18;  // NUMERIC(4,1) — numeric(4,1)
+  ChildPughScoreAscitesEnum ascites = 19;  // VARCHAR(20)
+  ChildPughScoreHepaticEncephalopathyEnum hepatic_encephalopathy = 20;  // VARCHAR(20)
+  string clinical_note = 21;  // TEXT
+}

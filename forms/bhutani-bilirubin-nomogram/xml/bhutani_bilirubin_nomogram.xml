@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE bhutani_bilirubin_nomogram SYSTEM "bhutani_bilirubin_nomogram.dtd">
+<bhutani_bilirubin_nomogram>
+<id>770e8400-e29b-41d4-a716-446655440002</id>
+<created_at>2026-04-09T10:00:00Z</created_at>
+<updated_at>2026-04-09T10:00:00Z</updated_at>
+<deleted_at>2026-04-09T10:00:00Z</deleted_at>
+<patient_id>550e8400-e29b-41d4-a716-446655440000</patient_id>
+<clinician_id>660e8400-e29b-41d4-a716-446655440001</clinician_id>
+<clinician_name>Example</clinician_name>
+<clinician_role>midwife</clinician_role>
+<assessed_at>2026-04-09T10:00:00Z</assessed_at>
+<care_setting>postnatal-ward</care_setting>
+<infant_identifier></infant_identifier>
+<sex>female</sex>
+<born_at>2026-04-09T10:00:00Z</born_at>
+<gestational_age_weeks>0.0</gestational_age_weeks>
+<age_hours>0.0</age_hours>
+<total_serum_bilirubin_umol_l>0.0</total_serum_bilirubin_umol_l>
+<measurement_method>serum</measurement_method>
+<preterm_under_38>yes</preterm_under_38>
+<previous_sibling_jaundice>yes</previous_sibling_jaundice>
+<exclusive_breastfeeding>yes</exclusive_breastfeeding>
+<bruising>yes</bruising>
+<blood_group_incompatibility>yes</blood_group_incompatibility>
+<early_onset_under_24h>yes</early_onset_under_24h>
+<clinical_note>Example Hospital</clinical_note>
+</bhutani_bilirubin_nomogram>

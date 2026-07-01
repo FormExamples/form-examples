@@ -1,0 +1,119 @@
+// Generated from sql/. Do not edit by hand.
+// SOURCE: breast_screening
+
+syntax = "proto3";
+
+package form_examples.breast_screening;
+
+enum BreastScreeningReportingClinicianRoleEnum {
+  REPORTINGCLINICIANROLE_UNSPECIFIED = 0;
+  REPORTINGCLINICIANROLE_MAMMOGRAPHER = 1;  // mammographer
+  REPORTINGCLINICIANROLE_ADVANCED_PRACTITIONER = 2;  // advanced-practitioner
+  REPORTINGCLINICIANROLE_BREAST_RADIOLOGIST = 3;  // breast-radiologist
+  REPORTINGCLINICIANROLE_SCREENING_OFFICE = 4;  // screening-office
+  REPORTINGCLINICIANROLE_OTHER = 5;  // other
+}
+
+enum BreastScreeningEpisodeTypeEnum {
+  EPISODETYPE_UNSPECIFIED = 0;
+  EPISODETYPE_ROUTINE_RECALL = 1;  // routine-recall
+  EPISODETYPE_VERY_FIRST_CALL = 2;  // very-first-call
+  EPISODETYPE_SELF_REFERRAL = 3;  // self-referral
+  EPISODETYPE_HIGHER_RISK_SURVEILLANCE = 4;  // higher-risk-surveillance
+}
+
+enum BreastScreeningHigherRiskSurveillanceEnum {
+  HIGHERRISKSURVEILLANCE_UNSPECIFIED = 0;
+  HIGHERRISKSURVEILLANCE_YES = 1;  // yes
+  HIGHERRISKSURVEILLANCE_NO = 2;  // no
+}
+
+enum BreastScreeningSymptomaticEnum {
+  SYMPTOMATIC_UNSPECIFIED = 0;
+  SYMPTOMATIC_YES = 1;  // yes
+  SYMPTOMATIC_NO = 2;  // no
+}
+
+enum BreastScreeningConsentGivenEnum {
+  CONSENTGIVEN_UNSPECIFIED = 0;
+  CONSENTGIVEN_YES = 1;  // yes
+  CONSENTGIVEN_NO = 2;  // no
+  CONSENTGIVEN_DECLINED = 3;  // declined
+}
+
+enum BreastScreeningViewsTakenEnum {
+  VIEWSTAKEN_UNSPECIFIED = 0;
+  VIEWSTAKEN_STANDARD_FOUR_VIEW = 1;  // standard-four-view
+  VIEWSTAKEN_ADDITIONAL_VIEWS = 2;  // additional-views
+  VIEWSTAKEN_UNABLE_TO_IMAGE = 3;  // unable-to-image
+}
+
+enum BreastScreeningImageAdequacyEnum {
+  IMAGEADEQUACY_UNSPECIFIED = 0;
+  IMAGEADEQUACY_ADEQUATE = 1;  // adequate
+  IMAGEADEQUACY_INADEQUATE = 2;  // inadequate
+}
+
+enum BreastScreeningFirstReadOpinionEnum {
+  FIRSTREADOPINION_UNSPECIFIED = 0;
+  FIRSTREADOPINION_NORMAL = 1;  // normal
+  FIRSTREADOPINION_RECALL = 2;  // recall
+  FIRSTREADOPINION_TECHNICAL = 3;  // technical
+}
+
+enum BreastScreeningSecondReadOpinionEnum {
+  SECONDREADOPINION_UNSPECIFIED = 0;
+  SECONDREADOPINION_NORMAL = 1;  // normal
+  SECONDREADOPINION_RECALL = 2;  // recall
+  SECONDREADOPINION_TECHNICAL = 3;  // technical
+}
+
+enum BreastScreeningArbitrationOutcomeEnum {
+  ARBITRATIONOUTCOME_UNSPECIFIED = 0;
+  ARBITRATIONOUTCOME_NORMAL = 1;  // normal
+  ARBITRATIONOUTCOME_RECALL = 2;  // recall
+  ARBITRATIONOUTCOME_TECHNICAL = 3;  // technical
+  ARBITRATIONOUTCOME_NOT_REQUIRED = 4;  // not-required
+}
+
+enum BreastScreeningReadingOutcomeEnum {
+  READINGOUTCOME_UNSPECIFIED = 0;
+  READINGOUTCOME_NORMAL_ROUTINE_RECALL = 1;  // normal-routine-recall
+  READINGOUTCOME_TECHNICAL_REPEAT = 2;  // technical-repeat
+  READINGOUTCOME_RECALL_FOR_ASSESSMENT = 3;  // recall-for-assessment
+}
+
+enum BreastScreeningAssessmentPerformedEnum {
+  ASSESSMENTPERFORMED_UNSPECIFIED = 0;
+  ASSESSMENTPERFORMED_YES = 1;  // yes
+  ASSESSMENTPERFORMED_NO = 2;  // no
+}
+
+message BreastScreening {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string patient_id = 5;  // UUID — uuid
+  string clinician_id = 6;  // UUID — uuid
+  BreastScreeningReportingClinicianRoleEnum reporting_clinician_role = 7;  // VARCHAR(25)
+  string reported_at = 8;  // TIMESTAMPTZ — iso 8601
+  string screening_unit = 9;  // TEXT
+  BreastScreeningEpisodeTypeEnum episode_type = 10;  // VARCHAR(30)
+  string patient_identifier = 11;  // VARCHAR(100) — max 100 chars
+  int32 age_years = 12;  // INTEGER
+  string last_screened_date = 13;  // DATE — iso 8601 date
+  BreastScreeningHigherRiskSurveillanceEnum higher_risk_surveillance = 14;  // VARCHAR(5)
+  BreastScreeningSymptomaticEnum symptomatic = 15;  // VARCHAR(5)
+  BreastScreeningConsentGivenEnum consent_given = 16;  // VARCHAR(10)
+  BreastScreeningViewsTakenEnum views_taken = 17;  // VARCHAR(20)
+  BreastScreeningImageAdequacyEnum image_adequacy = 18;  // VARCHAR(15)
+  BreastScreeningFirstReadOpinionEnum first_read_opinion = 19;  // VARCHAR(15)
+  BreastScreeningSecondReadOpinionEnum second_read_opinion = 20;  // VARCHAR(15)
+  BreastScreeningArbitrationOutcomeEnum arbitration_outcome = 21;  // VARCHAR(15)
+  BreastScreeningReadingOutcomeEnum reading_outcome = 22;  // VARCHAR(25)
+  BreastScreeningAssessmentPerformedEnum assessment_performed = 23;  // VARCHAR(5)
+  string assessment_modalities = 24;  // TEXT
+  int32 imaging_classification = 25;  // INTEGER
+  string clinical_context = 26;  // TEXT
+}

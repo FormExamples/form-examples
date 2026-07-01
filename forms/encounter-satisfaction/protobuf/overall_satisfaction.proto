@@ -1,4 +1,4 @@
-// Generated from sql-migrations/. Do not edit by hand.
+// Generated from sql/. Do not edit by hand.
 // SOURCE: overall_satisfaction
 
 syntax = "proto3";
@@ -11,7 +11,7 @@ message OverallSatisfaction {
   string updated_at = 3;  // TIMESTAMPTZ — iso 8601
   string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
   string encounter_satisfaction_id = 5;  // UUID — uuid
-  string NULL = 6;  // if
+  int32 overall_rating = 6;  // SMALLINT
   int32 likely_to_recommend = 7;  // SMALLINT
   int32 likely_to_return = 8;  // SMALLINT
   string comments = 9;  // TEXT

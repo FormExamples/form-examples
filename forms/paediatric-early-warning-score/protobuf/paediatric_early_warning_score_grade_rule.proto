@@ -1,0 +1,42 @@
+// Generated from sql/. Do not edit by hand.
+// SOURCE: paediatric_early_warning_score_grade_rule
+
+syntax = "proto3";
+
+package form_examples.paediatric_early_warning_score;
+
+enum PaediatricEarlyWarningScoreGradeRuleInstrumentEnum {
+  INSTRUMENT_UNSPECIFIED = 0;
+  INSTRUMENT_RESPIRATORY_RATE = 1;  // respiratory-rate
+  INSTRUMENT_RESPIRATORY_EFFORT = 2;  // respiratory-effort
+  INSTRUMENT_OXYGEN_SATURATION = 3;  // oxygen-saturation
+  INSTRUMENT_SUPPLEMENTAL_OXYGEN = 4;  // supplemental-oxygen
+  INSTRUMENT_HEART_RATE = 5;  // heart-rate
+  INSTRUMENT_CAPILLARY_REFILL = 6;  // capillary-refill
+  INSTRUMENT_CONSCIOUSNESS = 7;  // consciousness
+  INSTRUMENT_AGGREGATE = 8;  // aggregate
+  INSTRUMENT_SINGLE_PARAMETER = 9;  // single-parameter
+  INSTRUMENT_CONCERN = 10;  // concern
+}
+
+enum PaediatricEarlyWarningScoreGradeRuleBandEnum {
+  BAND_UNSPECIFIED = 0;
+  BAND_ROUTINE = 1;  // routine
+  BAND_LOW = 2;  // low
+  BAND_MEDIUM = 3;  // medium
+  BAND_HIGH = 4;  // high
+}
+
+message PaediatricEarlyWarningScoreGradeRule {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string paediatric_early_warning_score_grade_id = 5;  // UUID — uuid
+  string rule_id = 6;  // VARCHAR(40) — max 40 chars
+  PaediatricEarlyWarningScoreGradeRuleInstrumentEnum instrument = 7;  // VARCHAR(30)
+  PaediatricEarlyWarningScoreGradeRuleBandEnum band = 8;  // VARCHAR(15)
+  int32 points = 9;  // INTEGER
+  string category = 10;  // VARCHAR(50) — max 50 chars
+  string description = 11;  // VARCHAR(500) — max 500 chars
+}

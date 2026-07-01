@@ -1,0 +1,101 @@
+// Generated from sql/. Do not edit by hand.
+// SOURCE: biopsy_test_result
+
+syntax = "proto3";
+
+package form_examples.biopsy_test_result;
+
+enum BiopsyTestResultReportStatusEnum {
+  REPORTSTATUS_UNSPECIFIED = 0;
+  REPORTSTATUS_PRELIMINARY = 1;  // preliminary
+  REPORTSTATUS_FINAL = 2;  // final
+  REPORTSTATUS_AMENDED = 3;  // amended
+  REPORTSTATUS_SUPPLEMENTARY = 4;  // supplementary
+  REPORTSTATUS_CANCELLED = 5;  // cancelled
+}
+
+enum BiopsyTestResultBiopsySiteEnum {
+  BIOPSYSITE_UNSPECIFIED = 0;
+  BIOPSYSITE_SKIN = 1;  // skin
+  BIOPSYSITE_BREAST = 2;  // breast
+  BIOPSYSITE_LYMPH_NODE = 3;  // lymph-node
+  BIOPSYSITE_LIVER = 4;  // liver
+  BIOPSYSITE_KIDNEY = 5;  // kidney
+  BIOPSYSITE_PROSTATE = 6;  // prostate
+  BIOPSYSITE_LUNG = 7;  // lung
+  BIOPSYSITE_BONE_MARROW = 8;  // bone-marrow
+  BIOPSYSITE_GI_TRACT = 9;  // gi-tract
+  BIOPSYSITE_THYROID = 10;  // thyroid
+  BIOPSYSITE_SOFT_TISSUE = 11;  // soft-tissue
+  BIOPSYSITE_OTHER = 12;  // other
+}
+
+enum BiopsyTestResultBiopsyMethodEnum {
+  BIOPSYMETHOD_UNSPECIFIED = 0;
+  BIOPSYMETHOD_PUNCH = 1;  // punch
+  BIOPSYMETHOD_EXCISION = 2;  // excision
+  BIOPSYMETHOD_INCISION = 3;  // incision
+  BIOPSYMETHOD_CORE_NEEDLE = 4;  // core-needle
+  BIOPSYMETHOD_FINE_NEEDLE_ASPIRATION = 5;  // fine-needle-aspiration
+  BIOPSYMETHOD_IMAGE_GUIDED = 6;  // image-guided
+  BIOPSYMETHOD_ENDOSCOPIC = 7;  // endoscopic
+  BIOPSYMETHOD_OTHER = 8;  // other
+}
+
+enum BiopsyTestResultSpecimenAdequacyEnum {
+  SPECIMENADEQUACY_UNSPECIFIED = 0;
+  SPECIMENADEQUACY_ADEQUATE = 1;  // adequate
+  SPECIMENADEQUACY_SUBOPTIMAL = 2;  // suboptimal
+  SPECIMENADEQUACY_INADEQUATE = 3;  // inadequate
+}
+
+enum BiopsyTestResultHistologicalGradeEnum {
+  HISTOLOGICALGRADE_UNSPECIFIED = 0;
+  HISTOLOGICALGRADE_WELL_DIFFERENTIATED = 1;  // well-differentiated
+  HISTOLOGICALGRADE_MODERATELY_DIFFERENTIATED = 2;  // moderately-differentiated
+  HISTOLOGICALGRADE_POORLY_DIFFERENTIATED = 3;  // poorly-differentiated
+  HISTOLOGICALGRADE_UNDIFFERENTIATED = 4;  // undifferentiated
+  HISTOLOGICALGRADE_NOT_APPLICABLE = 5;  // not-applicable
+}
+
+enum BiopsyTestResultResectionMarginsEnum {
+  RESECTIONMARGINS_UNSPECIFIED = 0;
+  RESECTIONMARGINS_CLEAR = 1;  // clear
+  RESECTIONMARGINS_INVOLVED = 2;  // involved
+  RESECTIONMARGINS_CLOSE = 3;  // close
+  RESECTIONMARGINS_NOT_APPLICABLE = 4;  // not-applicable
+}
+
+message BiopsyTestResult {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string patient_id = 5;  // UUID — uuid
+  string clinician_id = 6;  // UUID — uuid
+  string originating_request_reference = 7;  // VARCHAR(255) — max 255 chars
+  BiopsyTestResultReportStatusEnum report_status = 8;  // VARCHAR(15)
+  string performed_date = 9;  // DATE — iso 8601 date
+  string reported_date = 10;  // DATE — iso 8601 date
+  BiopsyTestResultBiopsySiteEnum biopsy_site = 11;  // VARCHAR(15)
+  BiopsyTestResultBiopsyMethodEnum biopsy_method = 12;  // VARCHAR(25)
+  BiopsyTestResultSpecimenAdequacyEnum specimen_adequacy = 13;  // VARCHAR(12)
+  string clinical_history = 14;  // VARCHAR(1000) — max 1000 chars
+  string comparison_with_previous = 15;  // VARCHAR(1000) — max 1000 chars
+  string macroscopic_description = 16;  // VARCHAR(2000) — max 2000 chars
+  string microscopic_description = 17;  // VARCHAR(2000) — max 2000 chars
+  string diagnosis = 18;  // VARCHAR(2000) — max 2000 chars
+  bool malignancy_present = 19;  // BOOLEAN
+  string tumour_type = 20;  // VARCHAR(255) — max 255 chars
+  BiopsyTestResultHistologicalGradeEnum histological_grade = 21;  // VARCHAR(30)
+  BiopsyTestResultResectionMarginsEnum resection_margins = 22;  // VARCHAR(15)
+  bool lymphovascular_invasion = 23;  // BOOLEAN
+  string immunohistochemistry = 24;  // VARCHAR(1000) — max 1000 chars
+  string molecular_results = 25;  // VARCHAR(1000) — max 1000 chars
+  string snomed_code = 26;  // VARCHAR(50) — max 50 chars
+  string impression = 27;  // VARCHAR(2000) — max 2000 chars
+  string reporting_category = 28;  // VARCHAR(100) — max 100 chars
+  string recommended_follow_up = 29;  // VARCHAR(1000) — max 1000 chars
+  bool critical_result_communicated = 30;  // BOOLEAN
+  string reported_to = 31;  // VARCHAR(500) — max 500 chars
+}

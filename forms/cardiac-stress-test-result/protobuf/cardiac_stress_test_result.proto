@@ -1,0 +1,69 @@
+// Generated from sql/. Do not edit by hand.
+// SOURCE: cardiac_stress_test_result
+
+syntax = "proto3";
+
+package form_examples.cardiac_stress_test_result;
+
+enum CardiacStressTestResultReportStatusEnum {
+  REPORTSTATUS_UNSPECIFIED = 0;
+  REPORTSTATUS_PRELIMINARY = 1;  // preliminary
+  REPORTSTATUS_FINAL = 2;  // final
+  REPORTSTATUS_AMENDED = 3;  // amended
+  REPORTSTATUS_CANCELLED = 4;  // cancelled
+}
+
+enum CardiacStressTestResultTestTypeEnum {
+  TESTTYPE_UNSPECIFIED = 0;
+  TESTTYPE_EXERCISE_TREADMILL_ECG = 1;  // exercise-treadmill-ecg
+  TESTTYPE_STRESS_ECHO = 2;  // stress-echo
+  TESTTYPE_DOBUTAMINE_STRESS_ECHO = 3;  // dobutamine-stress-echo
+  TESTTYPE_MYOCARDIAL_PERFUSION_SPECT = 4;  // myocardial-perfusion-spect
+  TESTTYPE_STRESS_CARDIAC_MRI = 5;  // stress-cardiac-mri
+  TESTTYPE_OTHER = 6;  // other
+}
+
+enum CardiacStressTestResultBloodPressureResponseEnum {
+  BLOODPRESSURERESPONSE_UNSPECIFIED = 0;
+  BLOODPRESSURERESPONSE_NORMAL = 1;  // normal
+  BLOODPRESSURERESPONSE_HYPERTENSIVE = 2;  // hypertensive
+  BLOODPRESSURERESPONSE_HYPOTENSIVE = 3;  // hypotensive
+  BLOODPRESSURERESPONSE_FLAT = 4;  // flat
+}
+
+message CardiacStressTestResult {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string patient_id = 5;  // UUID — uuid
+  string clinician_id = 6;  // UUID — uuid
+  string originating_request_reference = 7;  // VARCHAR(255) — max 255 chars
+  CardiacStressTestResultReportStatusEnum report_status = 8;  // VARCHAR(15)
+  string performed_date = 9;  // DATE — iso 8601 date
+  string reported_date = 10;  // DATE — iso 8601 date
+  CardiacStressTestResultTestTypeEnum test_type = 11;  // VARCHAR(40)
+  string protocol = 12;  // VARCHAR(255) — max 255 chars
+  string clinical_history = 13;  // VARCHAR(1000) — max 1000 chars
+  string comparison_with_previous = 14;  // VARCHAR(1000) — max 1000 chars
+  int32 maximum_heart_rate_bpm = 15;  // INTEGER
+  double percent_predicted_heart_rate = 16;  // NUMERIC(5,1) — numeric(5,1)
+  double exercise_duration_minutes = 17;  // NUMERIC(5,1) — numeric(5,1)
+  double mets_achieved = 18;  // NUMERIC(4,1) — numeric(4,1)
+  string peak_blood_pressure = 19;  // VARCHAR(20) — max 20 chars
+  CardiacStressTestResultBloodPressureResponseEnum blood_pressure_response = 20;  // VARCHAR(15)
+  bool ischaemic_st_changes = 21;  // BOOLEAN
+  bool chest_pain_induced = 22;  // BOOLEAN
+  bool arrhythmia_induced = 23;  // BOOLEAN
+  bool terminated_early = 24;  // BOOLEAN
+  bool test_positive = 25;  // BOOLEAN
+  bool test_negative = 26;  // BOOLEAN
+  bool test_inconclusive = 27;  // BOOLEAN
+  string reason_for_termination = 28;  // VARCHAR(1000) — max 1000 chars
+  double duke_treadmill_score = 29;  // NUMERIC(5,1) — numeric(5,1)
+  string impression = 30;  // VARCHAR(2000) — max 2000 chars
+  string reporting_category = 31;  // VARCHAR(50) — max 50 chars
+  string recommended_follow_up = 32;  // VARCHAR(1000) — max 1000 chars
+  bool critical_result_communicated = 33;  // BOOLEAN
+  string reported_to = 34;  // VARCHAR(500) — max 500 chars
+}

@@ -1,0 +1,204 @@
+# Generated from sql/. Do not edit by hand.
+# SOURCE: urinalysis_test_result_grade
+openapi: 3.1.0
+info:
+  title: Urinalysis Test Result — UrinalysisTestResultGrade
+  version: 1.0.0
+  description: "Computed four-axis interpretation grade: result classification, abnormality severity / structured-reporting category, report completeness, and follow-up urgency. A critical result (e.g. significant growth in pregnancy, a critical organism, or visible haematuria findings) auto-escalates the follow-up urgency to critical-alert regardless of the other axes."
+paths:
+  /urinalysis-test-result-grades:
+    get:
+      summary: List UrinalysisTestResultGrade records
+      operationId: listUrinalysisTestResultGrade
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of UrinalysisTestResultGrade records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/UrinalysisTestResultGrade"
+    post:
+      summary: Create a new UrinalysisTestResultGrade
+      operationId: createUrinalysisTestResultGrade
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UrinalysisTestResultGrade"
+      responses:
+        "201":
+          description: The newly created UrinalysisTestResultGrade
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/UrinalysisTestResultGrade"
+        "400":
+          description: Validation error
+  /urinalysis-test-result-grades/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one UrinalysisTestResultGrade by id
+      operationId: getUrinalysisTestResultGrade
+      responses:
+        "200":
+          description: The requested UrinalysisTestResultGrade
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/UrinalysisTestResultGrade"
+        "404":
+          description: UrinalysisTestResultGrade not found
+    patch:
+      summary: Update an existing UrinalysisTestResultGrade
+      operationId: updateUrinalysisTestResultGrade
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UrinalysisTestResultGrade"
+      responses:
+        "200":
+          description: The updated UrinalysisTestResultGrade
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/UrinalysisTestResultGrade"
+        "404":
+          description: UrinalysisTestResultGrade not found
+    delete:
+      summary: Soft-delete a UrinalysisTestResultGrade
+      operationId: deleteUrinalysisTestResultGrade
+      responses:
+        "204":
+          description: UrinalysisTestResultGrade deleted
+        "404":
+          description: UrinalysisTestResultGrade not found
+components:
+  schemas:
+    UrinalysisTestResultGrade:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was updated most-recently.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was deleted a.k.a. soft-removed.
+        urinalysis_test_result_id:
+          type: string
+          format: uuid
+          description: Foreign key to the parent result (unique, 1:1).
+        result_classification:
+          type: string
+          enum:
+            - normal
+            - abnormal
+            - critical
+            - inconclusive
+            - ""
+          description: "Axis A overall classification: normal, abnormal, critical, inconclusive."
+        abnormality_severity:
+          type: string
+          enum:
+            - none
+            - minor
+            - moderate
+            - major
+            - ""
+          description: "Axis B abnormality severity: none, minor, moderate, major."
+        reporting_category:
+          type: string
+          maxLength: 50
+          description: "Axis B structured-reporting category label (e.g. \"significant E. coli bacteriuria\", \"asymptomatic bacteriuria in pregnancy\")."
+        report_completeness_percent:
+          type: integer
+          format: int32
+          description: Axis C report completeness as a percentage of mandatory report sections (0-100).
+        follow_up_urgency:
+          type: string
+          enum:
+            - routine
+            - recommended
+            - urgent
+            - critical-alert
+            - ""
+          description: "Axis D follow-up urgency: routine, recommended, urgent, critical-alert."
+        target_timeframe:
+          type: string
+          maxLength: 50
+          description: Target timeframe for the recommended follow-up implied by the urgency.
+        recommended_action:
+          type: string
+          maxLength: 500
+          description: Axis D concise recommended action derived from the urgency.
+        recommendation:
+          type: string
+          enum:
+            - no-action
+            - routine-follow-up
+            - further-testing
+            - specialist-referral
+            - urgent-review
+            - ""
+          description: "Overall recommendation: no-action, routine-follow-up, further-testing, specialist-referral, urgent-review."
+        clinician_notes:
+          type: string
+          description: Free-text interpretation / sign-off notes.
+        signed_at:
+          type: string
+          format: date-time
+          description: Timestamp of the reporting clinician electronic signature.
+        graded_at:
+          type: string
+          format: date-time
+          description: Timestamp when the engine last computed the result.
+      required:
+        - created_at
+        - updated_at
+        - urinalysis_test_result_id
+        - result_classification
+        - abnormality_severity
+        - reporting_category
+        - follow_up_urgency
+        - target_timeframe
+        - recommended_action
+        - recommendation
+        - clinician_notes
+        - graded_at
+      description: "Computed four-axis interpretation grade: result classification, abnormality severity / structured-reporting category, report completeness, and follow-up urgency. A critical result (e.g. significant growth in pregnancy, a critical organism, or visible haematuria findings) auto-escalates the follow-up urgency to critical-alert regardless of the other axes."

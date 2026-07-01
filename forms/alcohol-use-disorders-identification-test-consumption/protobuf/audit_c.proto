@@ -1,0 +1,63 @@
+// Generated from sql/. Do not edit by hand.
+// SOURCE: audit_c
+
+syntax = "proto3";
+
+package form_examples.alcohol_use_disorders_identification_test_consumption;
+
+enum AuditCClinicianRoleEnum {
+  CLINICIANROLE_UNSPECIFIED = 0;
+  CLINICIANROLE_GP = 1;  // gp
+  CLINICIANROLE_NURSE = 2;  // nurse
+  CLINICIANROLE_HEALTHCARE_ASSISTANT = 3;  // healthcare-assistant
+  CLINICIANROLE_OTHER = 4;  // other
+}
+
+enum AuditCCareSettingEnum {
+  CARESETTING_UNSPECIFIED = 0;
+  CARESETTING_PRIMARY_CARE = 1;  // primary-care
+  CARESETTING_EMERGENCY_DEPARTMENT = 2;  // emergency-department
+  CARESETTING_HEALTH_CHECK = 3;  // health-check
+  CARESETTING_INPATIENT = 4;  // inpatient
+  CARESETTING_OTHER = 5;  // other
+}
+
+enum AuditCAdministrationModeEnum {
+  ADMINISTRATIONMODE_UNSPECIFIED = 0;
+  ADMINISTRATIONMODE_SELF_COMPLETED = 1;  // self-completed
+  ADMINISTRATIONMODE_INTERVIEW = 2;  // interview
+}
+
+enum AuditCAgeBandEnum {
+  AGEBAND_UNSPECIFIED = 0;
+  AGEBAND_V_16_24 = 1;  // 16-24
+  AGEBAND_V_25_39 = 2;  // 25-39
+  AGEBAND_V_40_59 = 3;  // 40-59
+  AGEBAND_V_60_74 = 4;  // 60-74
+  AGEBAND_V_75_PLUS = 5;  // 75-plus
+}
+
+enum AuditCSexEnum {
+  SEX_UNSPECIFIED = 0;
+  SEX_FEMALE = 1;  // female
+  SEX_MALE = 2;  // male
+  SEX_INTERSEX = 3;  // intersex
+  SEX_UNKNOWN = 4;  // unknown
+}
+
+message AuditC {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string patient_id = 5;  // UUID — uuid
+  string clinician_id = 6;  // UUID — uuid
+  string clinician_name = 7;  // VARCHAR(255) — max 255 chars
+  AuditCClinicianRoleEnum clinician_role = 8;  // VARCHAR(30)
+  string assessed_at = 9;  // TIMESTAMPTZ — iso 8601
+  AuditCCareSettingEnum care_setting = 10;  // VARCHAR(30)
+  AuditCAdministrationModeEnum administration_mode = 11;  // VARCHAR(20)
+  string patient_identifier = 12;  // VARCHAR(100) — max 100 chars
+  AuditCAgeBandEnum age_band = 13;  // VARCHAR(10)
+  AuditCSexEnum sex = 14;  // VARCHAR(20)
+}

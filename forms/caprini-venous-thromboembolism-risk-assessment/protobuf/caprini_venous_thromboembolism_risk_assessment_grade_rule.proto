@@ -1,0 +1,29 @@
+// Generated from sql/. Do not edit by hand.
+// SOURCE: caprini_venous_thromboembolism_risk_assessment_grade_rule
+
+syntax = "proto3";
+
+package form_examples.caprini_venous_thromboembolism_risk_assessment;
+
+enum CapriniVenousThromboembolismRiskAssessmentGradeRuleWeightGroupEnum {
+  WEIGHTGROUP_UNSPECIFIED = 0;
+  WEIGHTGROUP_AGE = 1;  // age
+  WEIGHTGROUP_V_1_POINT = 2;  // 1-point
+  WEIGHTGROUP_V_2_POINT = 3;  // 2-point
+  WEIGHTGROUP_V_3_POINT = 4;  // 3-point
+  WEIGHTGROUP_V_5_POINT = 5;  // 5-point
+}
+
+message CapriniVenousThromboembolismRiskAssessmentGradeRule {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string caprini_venous_thromboembolism_risk_assessment_grade_id = 5;  // UUID — uuid
+  string rule_id = 6;  // VARCHAR(40) — max 40 chars
+  string factor = 7;  // VARCHAR(60) — max 60 chars
+  CapriniVenousThromboembolismRiskAssessmentGradeRuleWeightGroupEnum weight_group = 8;  // VARCHAR(10)
+  int32 points = 9;  // INT
+  string category = 10;  // VARCHAR(50) — max 50 chars
+  string description = 11;  // VARCHAR(500) — max 500 chars
+}

@@ -1,0 +1,53 @@
+// Generated from sql/. Do not edit by hand.
+// SOURCE: hypertension_review_grade
+
+syntax = "proto3";
+
+package form_examples.hypertension_review;
+
+enum HypertensionReviewGradeControlStatusEnum {
+  CONTROLSTATUS_UNSPECIFIED = 0;
+  CONTROLSTATUS_CONTROLLED = 1;  // controlled
+  CONTROLSTATUS_UNCONTROLLED = 2;  // uncontrolled
+  CONTROLSTATUS_SEVERE_UNCONTROLLED = 3;  // severe-uncontrolled
+}
+
+enum HypertensionReviewGradeHypertensionStageEnum {
+  HYPERTENSIONSTAGE_UNSPECIFIED = 0;
+  HYPERTENSIONSTAGE_NONE = 1;  // none
+  HYPERTENSIONSTAGE_STAGE_1 = 2;  // stage-1
+  HYPERTENSIONSTAGE_STAGE_2 = 3;  // stage-2
+  HYPERTENSIONSTAGE_STAGE_3_SEVERE = 4;  // stage-3-severe
+}
+
+enum HypertensionReviewGradeReviewStatusEnum {
+  REVIEWSTATUS_UNSPECIFIED = 0;
+  REVIEWSTATUS_COMPLETE = 1;  // complete
+  REVIEWSTATUS_PARTIAL = 2;  // partial
+  REVIEWSTATUS_INCOMPLETE = 3;  // incomplete
+}
+
+enum HypertensionReviewGradePrimarySourceEnum {
+  PRIMARYSOURCE_UNSPECIFIED = 0;
+  PRIMARYSOURCE_HOME = 1;  // home
+  PRIMARYSOURCE_CLINIC = 2;  // clinic
+  PRIMARYSOURCE_NONE = 3;  // none
+}
+
+message HypertensionReviewGrade {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string hypertension_review_id = 5;  // UUID — uuid
+  HypertensionReviewGradeControlStatusEnum control_status = 6;  // VARCHAR(25)
+  HypertensionReviewGradeHypertensionStageEnum hypertension_stage = 7;  // VARCHAR(15)
+  HypertensionReviewGradeReviewStatusEnum review_status = 8;  // VARCHAR(15)
+  HypertensionReviewGradePrimarySourceEnum primary_source = 9;  // VARCHAR(10)
+  string target_group = 10;  // VARCHAR(50) — max 50 chars
+  int32 clinic_target_systolic = 11;  // INTEGER
+  int32 clinic_target_diastolic = 12;  // INTEGER
+  int32 home_target_systolic = 13;  // INTEGER
+  int32 home_target_diastolic = 14;  // INTEGER
+  string graded_at = 15;  // TIMESTAMPTZ — iso 8601
+}

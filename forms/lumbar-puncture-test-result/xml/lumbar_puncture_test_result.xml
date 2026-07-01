@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE lumbar_puncture_test_result SYSTEM "lumbar_puncture_test_result.dtd">
+<lumbar_puncture_test_result>
+<id>770e8400-e29b-41d4-a716-446655440002</id>
+<created_at>2026-04-09T10:00:00Z</created_at>
+<updated_at>2026-04-09T10:00:00Z</updated_at>
+<deleted_at>2026-04-09T10:00:00Z</deleted_at>
+<patient_id>550e8400-e29b-41d4-a716-446655440000</patient_id>
+<clinician_id>660e8400-e29b-41d4-a716-446655440001</clinician_id>
+<originating_request_reference></originating_request_reference>
+<report_status>preliminary</report_status>
+<performed_date>2026-01-15</performed_date>
+<reported_date>2026-01-15</reported_date>
+<clinical_history>Example text.</clinical_history>
+<opening_pressure_cmh2o>120.0</opening_pressure_cmh2o>
+<csf_appearance>clear</csf_appearance>
+<csf_white_cell_count>0.0</csf_white_cell_count>
+<csf_red_cell_count>0.0</csf_red_cell_count>
+<csf_protein_g_l>0.0</csf_protein_g_l>
+<csf_glucose_mmol_l>0.0</csf_glucose_mmol_l>
+<csf_serum_glucose_ratio>1.5</csf_serum_glucose_ratio>
+<csf_lactate_mmol_l>0.0</csf_lactate_mmol_l>
+<gram_stain_result>Normal</gram_stain_result>
+<culture_result>Normal</culture_result>
+<pcr_result>Normal</pcr_result>
+<oligoclonal_bands>positive</oligoclonal_bands>
+<xanthochromia>positive</xanthochromia>
+<raised_protein>true</raised_protein>
+<pleocytosis>true</pleocytosis>
+<low_glucose>true</low_glucose>
+<bacterial_meningitis_pattern>true</bacterial_meningitis_pattern>
+<viral_pattern>true</viral_pattern>
+<subarachnoid_haemorrhage_suggested>true</subarachnoid_haemorrhage_suggested>
+<normal_csf>true</normal_csf>
+<findings_narrative>Example text.</findings_narrative>
+<impression>Example text.</impression>
+<reporting_category>General</reporting_category>
+<recommended_follow_up></recommended_follow_up>
+<critical_result_communicated>true</critical_result_communicated>
+<reported_to></reported_to>
+</lumbar_puncture_test_result>

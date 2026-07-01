@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE body_mass_index_and_body_surface_area_calculator_grade SYSTEM "body_mass_index_and_body_surface_area_calculator_grade.dtd">
+<body_mass_index_and_body_surface_area_calculator_grade>
+<id>880e8400-e29b-41d4-a716-446655440003</id>
+<created_at>2026-04-09T10:00:00Z</created_at>
+<updated_at>2026-04-09T10:00:00Z</updated_at>
+<deleted_at>2026-04-09T10:00:00Z</deleted_at>
+<body_mass_index_and_body_surface_area_calculator_id>770e8400-e29b-41d4-a716-446655440002</body_mass_index_and_body_surface_area_calculator_id>
+<bmi>24.2</bmi>
+<bmi_category>underweight</bmi_category>
+<bsa_mosteller>0.0</bsa_mosteller>
+<bsa_du_bois>0.0</bsa_du_bois>
+<graded_at>2026-04-09T10:00:00Z</graded_at>
+</body_mass_index_and_body_surface_area_calculator_grade>

@@ -1,0 +1,25 @@
+// Generated from sql/. Do not edit by hand.
+// SOURCE: anaesthetic_record_grade_rule
+
+syntax = "proto3";
+
+package form_examples.anaesthetic_record;
+
+enum AnaestheticRecordGradeRuleCriticalityEnum {
+  CRITICALITY_UNSPECIFIED = 0;
+  CRITICALITY_CRITICAL = 1;  // critical
+  CRITICALITY_NONCRITICAL = 2;  // noncritical
+}
+
+message AnaestheticRecordGradeRule {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string anaesthetic_record_grade_id = 5;  // UUID — uuid
+  string rule_id = 6;  // VARCHAR(40) — max 40 chars
+  string category = 7;  // VARCHAR(50) — max 50 chars
+  AnaestheticRecordGradeRuleCriticalityEnum criticality = 8;  // VARCHAR(15)
+  bool satisfied = 9;  // BOOLEAN
+  string description = 10;  // VARCHAR(500) — max 500 chars
+}

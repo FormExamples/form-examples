@@ -1,0 +1,507 @@
+# Generated from sql/. Do not edit by hand.
+# SOURCE: newborn_and_infant_physical_examination
+openapi: 3.1.0
+info:
+  title: Newborn And Infant Physical Examination — NewbornAndInfantPhysicalExamination
+  version: 1.0.0
+  description: "Main NIPE screening record: one head-to-toe physical examination of a baby, with context and baby identification, hip risk factors, the observation fields for the four key screening components (eyes, heart, hips, testes), the head-to-toe systematic-examination fields, and optional practitioner-recorded per-component results. Classification, fired rules, and referral flags live in child tables."
+paths:
+  /newborn-and-infant-physical-examinations:
+    get:
+      summary: List NewbornAndInfantPhysicalExamination records
+      operationId: listNewbornAndInfantPhysicalExamination
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of NewbornAndInfantPhysicalExamination records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/NewbornAndInfantPhysicalExamination"
+    post:
+      summary: Create a new NewbornAndInfantPhysicalExamination
+      operationId: createNewbornAndInfantPhysicalExamination
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/NewbornAndInfantPhysicalExamination"
+      responses:
+        "201":
+          description: The newly created NewbornAndInfantPhysicalExamination
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/NewbornAndInfantPhysicalExamination"
+        "400":
+          description: Validation error
+  /newborn-and-infant-physical-examinations/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one NewbornAndInfantPhysicalExamination by id
+      operationId: getNewbornAndInfantPhysicalExamination
+      responses:
+        "200":
+          description: The requested NewbornAndInfantPhysicalExamination
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/NewbornAndInfantPhysicalExamination"
+        "404":
+          description: NewbornAndInfantPhysicalExamination not found
+    patch:
+      summary: Update an existing NewbornAndInfantPhysicalExamination
+      operationId: updateNewbornAndInfantPhysicalExamination
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/NewbornAndInfantPhysicalExamination"
+      responses:
+        "200":
+          description: The updated NewbornAndInfantPhysicalExamination
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/NewbornAndInfantPhysicalExamination"
+        "404":
+          description: NewbornAndInfantPhysicalExamination not found
+    delete:
+      summary: Soft-delete a NewbornAndInfantPhysicalExamination
+      operationId: deleteNewbornAndInfantPhysicalExamination
+      responses:
+        "204":
+          description: NewbornAndInfantPhysicalExamination deleted
+        "404":
+          description: NewbornAndInfantPhysicalExamination not found
+components:
+  schemas:
+    NewbornAndInfantPhysicalExamination:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was updated most-recently.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was deleted a.k.a. soft-removed.
+        patient_id:
+          type: string
+          format: uuid
+          description: Foreign key to the infant this examination documents (restrict delete).
+        clinician_id:
+          type: string
+          format: uuid
+          description: Foreign key to the examining practitioner (restrict delete); optional.
+        practitioner_name:
+          type: string
+          description: Name of the examining practitioner.
+        practitioner_role:
+          type: string
+          enum:
+            - midwife
+            - neonatal-nurse
+            - paediatrician
+            - gp
+            - nurse-practitioner
+            - other
+            - ""
+          description: "Examining practitioner role: midwife, neonatal-nurse, paediatrician, gp, nurse-practitioner, or other."
+        examined_at:
+          type: string
+          format: date-time
+          description: Date and time of the examination.
+        examination_context:
+          type: string
+          enum:
+            - newborn-72h
+            - infant-6-8-week
+            - ""
+          description: "Screening context: newborn-72h (within 72 hours of birth) or infant-6-8-week (6-8 week infant review)."
+        care_setting:
+          type: string
+          enum:
+            - maternity-ward
+            - neonatal-unit
+            - community
+            - gp-surgery
+            - home
+            - other
+            - ""
+          description: "Care setting: maternity-ward, neonatal-unit, community, gp-surgery, home, or other."
+        baby_identifier:
+          type: string
+          maxLength: 100
+          description: NHS number or local identifier for the baby.
+        baby_name:
+          type: string
+          maxLength: 255
+          description: Name of the baby as recorded on the note.
+        date_of_birth:
+          type: string
+          format: date
+          description: Date of birth of the baby.
+        sex:
+          type: string
+          enum:
+            - male
+            - female
+            - indeterminate
+            - ""
+          description: "Sex of the baby: male, female, or indeterminate; drives whether the testes component is applicable."
+        gestational_age_weeks:
+          type: number
+          format: double
+          description: Completed gestational age in weeks at birth.
+        birth_weight_grams:
+          type: number
+          format: double
+          description: Birth weight in grams.
+        breech_presentation:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Whether the baby was breech at or after 36 weeks or at birth (yes/no); a hip risk factor.
+        family_history_hip_problems:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Whether there is a first-degree family history of hip problems (yes/no); a hip risk factor.
+        antenatal_concerns:
+          type: string
+          description: Free-text relevant antenatal findings or concerns.
+        eyes_red_reflex_right:
+          type: string
+          enum:
+            - present
+            - absent
+            - not-examined
+            - ""
+          description: "Eyes: right red reflex (present, absent, or not-examined)."
+        eyes_red_reflex_left:
+          type: string
+          enum:
+            - present
+            - absent
+            - not-examined
+            - ""
+          description: "Eyes: left red reflex (present, absent, or not-examined)."
+        eyes_appearance:
+          type: string
+          enum:
+            - normal
+            - abnormal
+            - not-examined
+            - ""
+          description: "Eyes: overall appearance (normal, abnormal, or not-examined)."
+        heart_murmur:
+          type: string
+          enum:
+            - none
+            - present
+            - not-examined
+            - ""
+          description: "Heart: murmur (none, present, or not-examined)."
+        femoral_pulses_right:
+          type: string
+          enum:
+            - present
+            - weak
+            - absent
+            - not-examined
+            - ""
+          description: "Heart: right femoral pulse (present, weak, absent, or not-examined)."
+        femoral_pulses_left:
+          type: string
+          enum:
+            - present
+            - weak
+            - absent
+            - not-examined
+            - ""
+          description: "Heart: left femoral pulse (present, weak, absent, or not-examined)."
+        central_cyanosis:
+          type: string
+          enum:
+            - absent
+            - present
+            - not-examined
+            - ""
+          description: "Heart: central cyanosis (absent, present, or not-examined)."
+        oxygen_saturation_preductal:
+          type: number
+          format: double
+          description: "Heart: pre-ductal oxygen saturation as a percentage."
+        oxygen_saturation_postductal:
+          type: number
+          format: double
+          description: "Heart: post-ductal oxygen saturation as a percentage."
+        barlow_test:
+          type: string
+          enum:
+            - negative
+            - positive
+            - not-examined
+            - ""
+          description: "Hips: Barlow test result (negative, positive, or not-examined)."
+        ortolani_test:
+          type: string
+          enum:
+            - negative
+            - positive
+            - not-examined
+            - ""
+          description: "Hips: Ortolani test result (negative, positive, or not-examined)."
+        hip_abduction:
+          type: string
+          enum:
+            - normal
+            - limited
+            - not-examined
+            - ""
+          description: "Hips: hip abduction (normal, limited, or not-examined)."
+        testis_right:
+          type: string
+          enum:
+            - descended
+            - undescended
+            - not-palpable
+            - not-examined
+            - ""
+          description: "Testes: right testis (descended, undescended, not-palpable, or not-examined)."
+        testis_left:
+          type: string
+          enum:
+            - descended
+            - undescended
+            - not-palpable
+            - not-examined
+            - ""
+          description: "Testes: left testis (descended, undescended, not-palpable, or not-examined)."
+        general_appearance:
+          type: string
+          enum:
+            - normal
+            - abnormal
+            - not-examined
+            - ""
+          description: "Head-to-toe: general appearance (normal, abnormal, or not-examined)."
+        skin:
+          type: string
+          enum:
+            - normal
+            - abnormal
+            - not-examined
+            - ""
+          description: "Head-to-toe: skin (normal, abnormal, or not-examined)."
+        head_and_fontanelles:
+          type: string
+          enum:
+            - normal
+            - abnormal
+            - not-examined
+            - ""
+          description: "Head-to-toe: head and fontanelles (normal, abnormal, or not-examined)."
+        face_and_palate:
+          type: string
+          enum:
+            - normal
+            - abnormal
+            - not-examined
+            - ""
+          description: "Head-to-toe: face and palate (normal, abnormal, or not-examined)."
+        neck_and_clavicles:
+          type: string
+          enum:
+            - normal
+            - abnormal
+            - not-examined
+            - ""
+          description: "Head-to-toe: neck and clavicles (normal, abnormal, or not-examined)."
+        chest_and_lungs:
+          type: string
+          enum:
+            - normal
+            - abnormal
+            - not-examined
+            - ""
+          description: "Head-to-toe: chest and lungs (normal, abnormal, or not-examined)."
+        abdomen:
+          type: string
+          enum:
+            - normal
+            - abnormal
+            - not-examined
+            - ""
+          description: "Head-to-toe: abdomen (normal, abnormal, or not-examined)."
+        genitalia:
+          type: string
+          enum:
+            - normal
+            - abnormal
+            - not-examined
+            - ""
+          description: "Head-to-toe: genitalia (normal, abnormal, or not-examined)."
+        anus_and_spine:
+          type: string
+          enum:
+            - normal
+            - abnormal
+            - not-examined
+            - ""
+          description: "Head-to-toe: anus and spine (normal, abnormal, or not-examined)."
+        limbs_and_digits:
+          type: string
+          enum:
+            - normal
+            - abnormal
+            - not-examined
+            - ""
+          description: "Head-to-toe: limbs and digits (normal, abnormal, or not-examined)."
+        feet:
+          type: string
+          enum:
+            - normal
+            - abnormal
+            - not-examined
+            - ""
+          description: "Head-to-toe: feet (normal, abnormal, or not-examined)."
+        tone_and_movement:
+          type: string
+          enum:
+            - normal
+            - abnormal
+            - not-examined
+            - ""
+          description: "Head-to-toe: tone and movement (normal, abnormal, or not-examined)."
+        weight_grams:
+          type: number
+          format: double
+          description: Measured weight in grams at the examination.
+        head_circumference_cm:
+          type: number
+          format: double
+          description: Measured head circumference in centimetres.
+        length_cm:
+          type: number
+          format: double
+          description: Measured length in centimetres.
+        eyes_result_recorded:
+          type: string
+          enum:
+            - satisfactory
+            - refer
+            - not-examined
+            - ""
+          description: Optional practitioner-recorded eyes component result (satisfactory, refer, or not-examined); cross-checked against the engine.
+        heart_result_recorded:
+          type: string
+          enum:
+            - satisfactory
+            - refer
+            - not-examined
+            - ""
+          description: Optional practitioner-recorded heart component result (satisfactory, refer, or not-examined); cross-checked against the engine.
+        hips_result_recorded:
+          type: string
+          enum:
+            - satisfactory
+            - refer
+            - not-examined
+            - ""
+          description: Optional practitioner-recorded hips component result (satisfactory, refer, or not-examined); cross-checked against the engine.
+        testes_result_recorded:
+          type: string
+          enum:
+            - satisfactory
+            - refer
+            - not-examined
+            - not-applicable
+            - ""
+          description: Optional practitioner-recorded testes component result (satisfactory, refer, not-examined, or not-applicable); cross-checked against the engine.
+        clinical_note:
+          type: string
+          description: Optional free-text clinical narrative shown in the summary.
+      required:
+        - created_at
+        - updated_at
+        - patient_id
+        - practitioner_name
+        - practitioner_role
+        - examination_context
+        - care_setting
+        - baby_identifier
+        - baby_name
+        - sex
+        - breech_presentation
+        - family_history_hip_problems
+        - antenatal_concerns
+        - eyes_red_reflex_right
+        - eyes_red_reflex_left
+        - eyes_appearance
+        - heart_murmur
+        - femoral_pulses_right
+        - femoral_pulses_left
+        - central_cyanosis
+        - barlow_test
+        - ortolani_test
+        - hip_abduction
+        - testis_right
+        - testis_left
+        - general_appearance
+        - skin
+        - head_and_fontanelles
+        - face_and_palate
+        - neck_and_clavicles
+        - chest_and_lungs
+        - abdomen
+        - genitalia
+        - anus_and_spine
+        - limbs_and_digits
+        - feet
+        - tone_and_movement
+        - eyes_result_recorded
+        - heart_result_recorded
+        - hips_result_recorded
+        - testes_result_recorded
+        - clinical_note
+      description: "Main NIPE screening record: one head-to-toe physical examination of a baby, with context and baby identification, hip risk factors, the observation fields for the four key screening components (eyes, heart, hips, testes), the head-to-toe systematic-examination fields, and optional practitioner-recorded per-component results. Classification, fired rules, and referral flags live in child tables."

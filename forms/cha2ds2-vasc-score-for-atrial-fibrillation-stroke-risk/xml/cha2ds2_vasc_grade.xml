@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE cha2ds2_vasc_grade SYSTEM "cha2ds2_vasc_grade.dtd">
+<cha2ds2_vasc_grade>
+<id>880e8400-e29b-41d4-a716-446655440003</id>
+<created_at>2026-04-09T10:00:00Z</created_at>
+<updated_at>2026-04-09T10:00:00Z</updated_at>
+<deleted_at>2026-04-09T10:00:00Z</deleted_at>
+<cha2ds2_vasc_id>770e8400-e29b-41d4-a716-446655440002</cha2ds2_vasc_id>
+<congestive_heart_failure_points>1</congestive_heart_failure_points>
+<hypertension_points>1</hypertension_points>
+<age_points>45</age_points>
+<diabetes_points>1</diabetes_points>
+<stroke_points>1</stroke_points>
+<vascular_disease_points>1</vascular_disease_points>
+<sex_points>1</sex_points>
+<total_score>5</total_score>
+<risk_band>low</risk_band>
+<annual_stroke_risk_percent>50.0</annual_stroke_risk_percent>
+<anticoagulation_recommendation>Example text.</anticoagulation_recommendation>
+<graded_at>2026-04-09T10:00:00Z</graded_at>
+</cha2ds2_vasc_grade>

@@ -1,0 +1,161 @@
+# Generated from sql/. Do not edit by hand.
+# SOURCE: rockall_score_for_upper_gastrointestinal_bleeding_grade_rule
+openapi: 3.1.0
+info:
+  title: Rockall Score For Upper Gastrointestinal Bleeding — RockallScoreForUpperGastrointestinalBleedingGradeRule
+  version: 1.0.0
+  description: "Audit trail of every grading rule that fired during Rockall computation: parameter, points contributed, category, and description."
+paths:
+  /rockall-score-for-upper-gastrointestinal-bleeding-grade-rules:
+    get:
+      summary: List RockallScoreForUpperGastrointestinalBleedingGradeRule records
+      operationId: listRockallScoreForUpperGastrointestinalBleedingGradeRule
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of RockallScoreForUpperGastrointestinalBleedingGradeRule records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/RockallScoreForUpperGastrointestinalBleedingGradeRule"
+    post:
+      summary: Create a new RockallScoreForUpperGastrointestinalBleedingGradeRule
+      operationId: createRockallScoreForUpperGastrointestinalBleedingGradeRule
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/RockallScoreForUpperGastrointestinalBleedingGradeRule"
+      responses:
+        "201":
+          description: The newly created RockallScoreForUpperGastrointestinalBleedingGradeRule
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/RockallScoreForUpperGastrointestinalBleedingGradeRule"
+        "400":
+          description: Validation error
+  /rockall-score-for-upper-gastrointestinal-bleeding-grade-rules/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one RockallScoreForUpperGastrointestinalBleedingGradeRule by id
+      operationId: getRockallScoreForUpperGastrointestinalBleedingGradeRule
+      responses:
+        "200":
+          description: The requested RockallScoreForUpperGastrointestinalBleedingGradeRule
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/RockallScoreForUpperGastrointestinalBleedingGradeRule"
+        "404":
+          description: RockallScoreForUpperGastrointestinalBleedingGradeRule not found
+    patch:
+      summary: Update an existing RockallScoreForUpperGastrointestinalBleedingGradeRule
+      operationId: updateRockallScoreForUpperGastrointestinalBleedingGradeRule
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/RockallScoreForUpperGastrointestinalBleedingGradeRule"
+      responses:
+        "200":
+          description: The updated RockallScoreForUpperGastrointestinalBleedingGradeRule
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/RockallScoreForUpperGastrointestinalBleedingGradeRule"
+        "404":
+          description: RockallScoreForUpperGastrointestinalBleedingGradeRule not found
+    delete:
+      summary: Soft-delete a RockallScoreForUpperGastrointestinalBleedingGradeRule
+      operationId: deleteRockallScoreForUpperGastrointestinalBleedingGradeRule
+      responses:
+        "204":
+          description: RockallScoreForUpperGastrointestinalBleedingGradeRule deleted
+        "404":
+          description: RockallScoreForUpperGastrointestinalBleedingGradeRule not found
+components:
+  schemas:
+    RockallScoreForUpperGastrointestinalBleedingGradeRule:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was most recently updated.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was soft-deleted.
+        rockall_score_for_upper_gastrointestinal_bleeding_grade_id:
+          type: string
+          format: uuid
+          description: Foreign key to the parent grade.
+        rule_id:
+          type: string
+          maxLength: 40
+          description: Stable rule identifier (e.g. R-AGE-2POINT-01).
+        parameter:
+          type: string
+          enum:
+            - age
+            - shock
+            - comorbidity
+            - diagnosis
+            - stigmata
+            - band
+          description: "Scored parameter the rule belongs to: age, shock, comorbidity, diagnosis, stigmata, or band."
+        points:
+          type: integer
+          format: int32
+          description: Points contributed by this rule for its parameter.
+        category:
+          type: string
+          maxLength: 50
+          description: Subject category (e.g. threshold-band, risk-band).
+        description:
+          type: string
+          maxLength: 500
+          description: Human-readable description of why the rule fired.
+      required:
+        - created_at
+        - updated_at
+        - rockall_score_for_upper_gastrointestinal_bleeding_grade_id
+        - rule_id
+        - parameter
+        - category
+        - description
+      description: "Audit trail of every grading rule that fired during Rockall computation: parameter, points contributed, category, and description."

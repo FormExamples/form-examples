@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE tumor_marker_test_result SYSTEM "tumor_marker_test_result.dtd">
+<tumor_marker_test_result>
+<id>770e8400-e29b-41d4-a716-446655440002</id>
+<created_at>2026-04-09T10:00:00Z</created_at>
+<updated_at>2026-04-09T10:00:00Z</updated_at>
+<deleted_at>2026-04-09T10:00:00Z</deleted_at>
+<patient_id>550e8400-e29b-41d4-a716-446655440000</patient_id>
+<clinician_id>660e8400-e29b-41d4-a716-446655440001</clinician_id>
+<originating_request_reference></originating_request_reference>
+<report_status>preliminary</report_status>
+<performed_date>2026-01-15</performed_date>
+<reported_date>2026-01-15</reported_date>
+<specimen_condition>satisfactory</specimen_condition>
+<clinical_history>Example text.</clinical_history>
+<known_cancer_site>Example location</known_cancer_site>
+<psa>0.0</psa>
+<ca125>0.0</ca125>
+<ca19_9>0.0</ca19_9>
+<carcinoembryonic_antigen_cea>0.0</carcinoembryonic_antigen_cea>
+<alpha_fetoprotein_afp>0.0</alpha_fetoprotein_afp>
+<beta_hcg>0.0</beta_hcg>
+<ca15_3>0.0</ca15_3>
+<lactate_dehydrogenase_ldh>0.0</lactate_dehydrogenase_ldh>
+<calcitonin>0.0</calcitonin>
+<chromogranin_a>0.0</chromogranin_a>
+<previous_value>5.0</previous_value>
+<trend>rising</trend>
+<comparison_with_previous></comparison_with_previous>
+<overall_result_status>normal</overall_result_status>
+<markedly_elevated>true</markedly_elevated>
+<findings_narrative>Example text.</findings_narrative>
+<impression>Example text.</impression>
+<reporting_category>General</reporting_category>
+<recommended_follow_up></recommended_follow_up>
+<critical_result_communicated>true</critical_result_communicated>
+<reported_to></reported_to>
+</tumor_marker_test_result>

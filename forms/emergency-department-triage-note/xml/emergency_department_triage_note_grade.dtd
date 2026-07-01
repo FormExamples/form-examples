@@ -1,0 +1,13 @@
+<!ELEMENT emergency_department_triage_note_grade (id,created_at,updated_at,deleted_at,emergency_department_triage_note_id,news2_total,news2_any_parameter_three,priority_level,priority_colour,priority_name,target_minutes,graded_at)>
+<!ELEMENT id (#PCDATA)>
+<!ELEMENT created_at (#PCDATA)>
+<!ELEMENT updated_at (#PCDATA)>
+<!ELEMENT deleted_at (#PCDATA)>
+<!ELEMENT emergency_department_triage_note_id (#PCDATA)>
+<!ELEMENT news2_total (#PCDATA)>
+<!ELEMENT news2_any_parameter_three (#PCDATA)>
+<!ELEMENT priority_level (#PCDATA)>
+<!ELEMENT priority_colour (#PCDATA)>
+<!ELEMENT priority_name (#PCDATA)>
+<!ELEMENT target_minutes (#PCDATA)>
+<!ELEMENT graded_at (#PCDATA)>

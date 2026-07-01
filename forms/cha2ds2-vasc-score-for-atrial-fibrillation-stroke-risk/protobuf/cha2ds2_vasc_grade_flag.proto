@@ -1,0 +1,38 @@
+// Generated from sql/. Do not edit by hand.
+// SOURCE: cha2ds2_vasc_grade_flag
+
+syntax = "proto3";
+
+package form_examples.cha2ds2_vasc_score_for_atrial_fibrillation_stroke_risk;
+
+enum Cha2ds2VascGradeFlagCategoryEnum {
+  CATEGORY_UNSPECIFIED = 0;
+  CATEGORY_ANTICOAGULATION_RECOMMENDED = 1;  // anticoagulation-recommended
+  CATEGORY_HIGH_RISK_UNTREATED = 2;  // high-risk-untreated
+  CATEGORY_BLEEDING_RISK_CROSS_REF = 3;  // bleeding-risk-cross-ref
+  CATEGORY_PRIOR_STROKE_TIA = 4;  // prior-stroke-tia
+  CATEGORY_ADVANCED_AGE = 5;  // advanced-age
+  CATEGORY_FEMALE_SEX_MODIFIER = 6;  // female-sex-modifier
+  CATEGORY_INCOMPLETE_ASSESSMENT = 7;  // incomplete-assessment
+  CATEGORY_OTHER = 8;  // other
+}
+
+enum Cha2ds2VascGradeFlagPriorityEnum {
+  PRIORITY_UNSPECIFIED = 0;
+  PRIORITY_LOW = 1;  // low
+  PRIORITY_MEDIUM = 2;  // medium
+  PRIORITY_HIGH = 3;  // high
+}
+
+message Cha2ds2VascGradeFlag {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string cha2ds2_vasc_grade_id = 5;  // UUID — uuid
+  string flag_id = 6;  // VARCHAR(50) — max 50 chars
+  Cha2ds2VascGradeFlagCategoryEnum category = 7;  // VARCHAR(50)
+  Cha2ds2VascGradeFlagPriorityEnum priority = 8;  // VARCHAR(10)
+  string description = 9;  // VARCHAR(500) — max 500 chars
+  string suggested_action = 10;  // VARCHAR(500) — max 500 chars
+}

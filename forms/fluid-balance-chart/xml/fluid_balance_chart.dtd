@@ -1,0 +1,15 @@
+<!ELEMENT fluid_balance_chart (id,created_at,updated_at,deleted_at,patient_id,clinician_id,clinician_name,clinician_role,patient_identifier,ward_or_unit,chart_start_at,chart_period_hours,weight_kg,clinical_note)>
+<!ELEMENT id (#PCDATA)>
+<!ELEMENT created_at (#PCDATA)>
+<!ELEMENT updated_at (#PCDATA)>
+<!ELEMENT deleted_at (#PCDATA)>
+<!ELEMENT patient_id (#PCDATA)>
+<!ELEMENT clinician_id (#PCDATA)>
+<!ELEMENT clinician_name (#PCDATA)>
+<!ELEMENT clinician_role (#PCDATA)>
+<!ELEMENT patient_identifier (#PCDATA)>
+<!ELEMENT ward_or_unit (#PCDATA)>
+<!ELEMENT chart_start_at (#PCDATA)>
+<!ELEMENT chart_period_hours (#PCDATA)>
+<!ELEMENT weight_kg (#PCDATA)>
+<!ELEMENT clinical_note (#PCDATA)>

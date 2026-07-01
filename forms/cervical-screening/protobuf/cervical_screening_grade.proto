@@ -1,0 +1,48 @@
+// Generated from sql/. Do not edit by hand.
+// SOURCE: cervical_screening_grade
+
+syntax = "proto3";
+
+package form_examples.cervical_screening;
+
+enum CervicalScreeningGradeResultClassEnum {
+  RESULTCLASS_UNSPECIFIED = 0;
+  RESULTCLASS_INADEQUATE = 1;  // inadequate
+  RESULTCLASS_HPV_NEGATIVE = 2;  // hpv-negative
+  RESULTCLASS_HPV_POSITIVE_CYTOLOGY_NORMAL = 3;  // hpv-positive-cytology-normal
+  RESULTCLASS_HPV_POSITIVE_CYTOLOGY_ABNORMAL_LOW = 4;  // hpv-positive-cytology-abnormal-low
+  RESULTCLASS_HPV_POSITIVE_CYTOLOGY_ABNORMAL_HIGH = 5;  // hpv-positive-cytology-abnormal-high
+  RESULTCLASS_HPV_POSITIVE_CYTOLOGY_PENDING = 6;  // hpv-positive-cytology-pending
+  RESULTCLASS_CEASE_NOT_ELIGIBLE = 7;  // cease-not-eligible
+  RESULTCLASS_PENDING = 8;  // pending
+}
+
+enum CervicalScreeningGradeManagementActionEnum {
+  MANAGEMENTACTION_UNSPECIFIED = 0;
+  MANAGEMENTACTION_ROUTINE_RECALL = 1;  // routine-recall
+  MANAGEMENTACTION_EARLY_REPEAT_12_MONTHS = 2;  // early-repeat-12-months
+  MANAGEMENTACTION_COLPOSCOPY_REFERRAL = 3;  // colposcopy-referral
+  MANAGEMENTACTION_URGENT_COLPOSCOPY_REFERRAL = 4;  // urgent-colposcopy-referral
+  MANAGEMENTACTION_REPEAT_SAMPLE_3_MONTHS = 5;  // repeat-sample-3-months
+  MANAGEMENTACTION_CEASE_SCREENING = 6;  // cease-screening
+  MANAGEMENTACTION_AWAITING_CYTOLOGY = 7;  // awaiting-cytology
+  MANAGEMENTACTION_AWAITING_RESULT = 8;  // awaiting-result
+}
+
+enum CervicalScreeningGradeStatusEnum {
+  STATUS_UNSPECIFIED = 0;
+  STATUS_COMPLETE = 1;  // complete
+  STATUS_INCOMPLETE = 2;  // incomplete
+}
+
+message CervicalScreeningGrade {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string cervical_screening_id = 5;  // UUID — uuid
+  CervicalScreeningGradeResultClassEnum result_class = 6;  // VARCHAR(40)
+  CervicalScreeningGradeManagementActionEnum management_action = 7;  // VARCHAR(30)
+  CervicalScreeningGradeStatusEnum status = 8;  // VARCHAR(15)
+  string graded_at = 9;  // TIMESTAMPTZ — iso 8601
+}

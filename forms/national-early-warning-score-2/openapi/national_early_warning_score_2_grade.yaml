@@ -1,0 +1,194 @@
+# Generated from sql/. Do not edit by hand.
+# SOURCE: national_early_warning_score_2_grade
+openapi: 3.1.0
+info:
+  title: National Early Warning Score 2 — NationalEarlyWarningScore2Grade
+  version: 1.0.0
+  description: "Computed NEWS2 grading result: per-parameter subscores, aggregate total (0-20+), red-score indicator, derived clinical-risk band, and RCP-recommended monitoring frequency and escalation response. One row per observation record (1:1)."
+paths:
+  /national-early-warning-score-2-grades:
+    get:
+      summary: List NationalEarlyWarningScore2Grade records
+      operationId: listNationalEarlyWarningScore2Grade
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of NationalEarlyWarningScore2Grade records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/NationalEarlyWarningScore2Grade"
+    post:
+      summary: Create a new NationalEarlyWarningScore2Grade
+      operationId: createNationalEarlyWarningScore2Grade
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/NationalEarlyWarningScore2Grade"
+      responses:
+        "201":
+          description: The newly created NationalEarlyWarningScore2Grade
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/NationalEarlyWarningScore2Grade"
+        "400":
+          description: Validation error
+  /national-early-warning-score-2-grades/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one NationalEarlyWarningScore2Grade by id
+      operationId: getNationalEarlyWarningScore2Grade
+      responses:
+        "200":
+          description: The requested NationalEarlyWarningScore2Grade
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/NationalEarlyWarningScore2Grade"
+        "404":
+          description: NationalEarlyWarningScore2Grade not found
+    patch:
+      summary: Update an existing NationalEarlyWarningScore2Grade
+      operationId: updateNationalEarlyWarningScore2Grade
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/NationalEarlyWarningScore2Grade"
+      responses:
+        "200":
+          description: The updated NationalEarlyWarningScore2Grade
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/NationalEarlyWarningScore2Grade"
+        "404":
+          description: NationalEarlyWarningScore2Grade not found
+    delete:
+      summary: Soft-delete a NationalEarlyWarningScore2Grade
+      operationId: deleteNationalEarlyWarningScore2Grade
+      responses:
+        "204":
+          description: NationalEarlyWarningScore2Grade deleted
+        "404":
+          description: NationalEarlyWarningScore2Grade not found
+components:
+  schemas:
+    NationalEarlyWarningScore2Grade:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was most recently updated.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was soft-deleted.
+        national_early_warning_score_2_id:
+          type: string
+          format: uuid
+          description: Foreign key to the parent observation record (unique, 1:1).
+        aggregate_score:
+          type: integer
+          format: int32
+          description: "Aggregate NEWS2 total (0-20+): sum of the six parameter subscores plus the supplemental-oxygen weighting; NULL until computed."
+        respiratory_rate_score:
+          type: integer
+          format: int32
+          description: Respiration-rate subscore (0-3); NULL when the observation was not recorded.
+        spo2_score:
+          type: integer
+          format: int32
+          description: Oxygen-saturation subscore (0-3), scored against the selected SpO2 scale; NULL when not recorded.
+        oxygen_score:
+          type: integer
+          format: int32
+          description: "Supplemental-oxygen weighting: 2 when on oxygen, otherwise 0."
+        blood_pressure_score:
+          type: integer
+          format: int32
+          description: Systolic-blood-pressure subscore (0-3); NULL when not recorded.
+        pulse_score:
+          type: integer
+          format: int32
+          description: Pulse subscore (0-3); NULL when not recorded.
+        consciousness_score:
+          type: integer
+          format: int32
+          description: "Consciousness (ACVPU) subscore: 3 for any value other than A (alert), otherwise 0; NULL when not recorded."
+        temperature_score:
+          type: integer
+          format: int32
+          description: Temperature subscore (0-3); NULL when not recorded.
+        any_single_parameter_three:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: "Red score: whether any single parameter scored 3, which escalates the band to at least low-medium."
+        risk_band:
+          type: string
+          enum:
+            - low
+            - low-medium
+            - medium
+            - high
+            - ""
+          description: "Derived clinical-risk band (worst of aggregate band and red-score band): low, low-medium, medium, or high."
+        monitoring_frequency:
+          type: string
+          description: RCP-recommended monitoring frequency (e.g. 12-hourly, 4-6 hourly, 1-hourly, continuous).
+        recommendation:
+          type: string
+          description: RCP-recommended clinical response and escalation for the risk band.
+        graded_at:
+          type: string
+          format: date-time
+          description: Timestamp when the engine last computed the grade.
+      required:
+        - created_at
+        - updated_at
+        - national_early_warning_score_2_id
+        - any_single_parameter_three
+        - risk_band
+        - monitoring_frequency
+        - recommendation
+        - graded_at
+      description: "Computed NEWS2 grading result: per-parameter subscores, aggregate total (0-20+), red-score indicator, derived clinical-risk band, and RCP-recommended monitoring frequency and escalation response. One row per observation record (1:1)."

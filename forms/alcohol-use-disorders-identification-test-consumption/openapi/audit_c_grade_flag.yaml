@@ -1,0 +1,167 @@
+# Generated from sql/. Do not edit by hand.
+# SOURCE: audit_c_grade_flag
+openapi: 3.1.0
+info:
+  title: Alcohol Use Disorders Identification Test Consumption — AuditCGradeFlag
+  version: 1.0.0
+  description: Red-flag issues that fire independently of the total score, with priority and a suggested action for the clinical team.
+paths:
+  /audit-c-grade-flags:
+    get:
+      summary: List AuditCGradeFlag records
+      operationId: listAuditCGradeFlag
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of AuditCGradeFlag records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/AuditCGradeFlag"
+    post:
+      summary: Create a new AuditCGradeFlag
+      operationId: createAuditCGradeFlag
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/AuditCGradeFlag"
+      responses:
+        "201":
+          description: The newly created AuditCGradeFlag
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AuditCGradeFlag"
+        "400":
+          description: Validation error
+  /audit-c-grade-flags/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one AuditCGradeFlag by id
+      operationId: getAuditCGradeFlag
+      responses:
+        "200":
+          description: The requested AuditCGradeFlag
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AuditCGradeFlag"
+        "404":
+          description: AuditCGradeFlag not found
+    patch:
+      summary: Update an existing AuditCGradeFlag
+      operationId: updateAuditCGradeFlag
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/AuditCGradeFlag"
+      responses:
+        "200":
+          description: The updated AuditCGradeFlag
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AuditCGradeFlag"
+        "404":
+          description: AuditCGradeFlag not found
+    delete:
+      summary: Soft-delete a AuditCGradeFlag
+      operationId: deleteAuditCGradeFlag
+      responses:
+        "204":
+          description: AuditCGradeFlag deleted
+        "404":
+          description: AuditCGradeFlag not found
+components:
+  schemas:
+    AuditCGradeFlag:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was most recently updated.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was soft-deleted.
+        audit_c_grade_id:
+          type: string
+          format: uuid
+          description: Foreign key to the parent grade.
+        flag_id:
+          type: string
+          maxLength: 50
+          description: Stable flag identifier (e.g. F-ESCALATE-FULL-AUDIT-001).
+        category:
+          type: string
+          enum:
+            - brief-intervention
+            - high-consumption
+            - dependence-indicators
+            - escalate-full-audit
+            - incomplete
+            - other
+            - ""
+          description: Flag category (see CHECK constraint for enumeration).
+        priority:
+          type: string
+          enum:
+            - low
+            - medium
+            - high
+            - ""
+          description: "Priority: low, medium, high."
+        description:
+          type: string
+          maxLength: 500
+          description: Human-readable description of what fired the flag.
+        suggested_action:
+          type: string
+          maxLength: 500
+          description: "Suggested clinical action (e.g. \"complete the full 10-item AUDIT and deliver a brief intervention\")."
+      required:
+        - created_at
+        - updated_at
+        - audit_c_grade_id
+        - flag_id
+        - category
+        - priority
+        - description
+        - suggested_action
+      description: Red-flag issues that fire independently of the total score, with priority and a suggested action for the clinical team.

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE has_bled_score_for_major_bleeding_risk_grade_flag SYSTEM "has_bled_score_for_major_bleeding_risk_grade_flag.dtd">
+<has_bled_score_for_major_bleeding_risk_grade_flag>
+<id>aa0e8400-e29b-41d4-a716-446655440005</id>
+<created_at>2026-04-09T10:00:00Z</created_at>
+<updated_at>2026-04-09T10:00:00Z</updated_at>
+<deleted_at>2026-04-09T10:00:00Z</deleted_at>
+<has_bled_score_for_major_bleeding_risk_grade_id>880e8400-e29b-41d4-a716-446655440003</has_bled_score_for_major_bleeding_risk_grade_id>
+<flag_id>660e8400-e29b-41d4-a716-446655440001</flag_id>
+<category>high-bleeding-risk</category>
+<priority>low</priority>
+<description>Example text.</description>
+<suggested_action></suggested_action>
+</has_bled_score_for_major_bleeding_risk_grade_flag>

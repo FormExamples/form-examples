@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE abdominal_aortic_aneurysm_screening SYSTEM "abdominal_aortic_aneurysm_screening.dtd">
+<abdominal_aortic_aneurysm_screening>
+<id>770e8400-e29b-41d4-a716-446655440002</id>
+<created_at>2026-04-09T10:00:00Z</created_at>
+<updated_at>2026-04-09T10:00:00Z</updated_at>
+<deleted_at>2026-04-09T10:00:00Z</deleted_at>
+<patient_id>550e8400-e29b-41d4-a716-446655440000</patient_id>
+<clinician_id>660e8400-e29b-41d4-a716-446655440001</clinician_id>
+<technician_name>Example</technician_name>
+<technician_role>screening-technician</technician_role>
+<clinic_site>Example location</clinic_site>
+<scanned_at>2026-04-09T10:00:00Z</scanned_at>
+<device_identifier></device_identifier>
+<patient_identifier></patient_identifier>
+<age>45</age>
+<sex>female</sex>
+<eligibility_route>routine-year-of-65</eligibility_route>
+<scan_type>first-scan</scan_type>
+<consent_given>yes</consent_given>
+<leaflet_provided>yes</leaflet_provided>
+<consent_note></consent_note>
+<aorta_visualised>yes</aorta_visualised>
+<max_aortic_diameter_cm>0.0</max_aortic_diameter_cm>
+<prior_max_diameter_cm>0.0</prior_max_diameter_cm>
+<prior_scan_date>2026-01-15</prior_scan_date>
+<symptomatic>yes</symptomatic>
+<incidental_findings>Example text.</incidental_findings>
+<result_note>Normal</result_note>
+</abdominal_aortic_aneurysm_screening>

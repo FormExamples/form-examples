@@ -1,0 +1,10 @@
+<!ELEMENT ottawa_knee_rule_grade (id,created_at,updated_at,deleted_at,ottawa_knee_rule_id,xray_indicated,decision,recommended_action,graded_at)>
+<!ELEMENT id (#PCDATA)>
+<!ELEMENT created_at (#PCDATA)>
+<!ELEMENT updated_at (#PCDATA)>
+<!ELEMENT deleted_at (#PCDATA)>
+<!ELEMENT ottawa_knee_rule_id (#PCDATA)>
+<!ELEMENT xray_indicated (#PCDATA)>
+<!ELEMENT decision (#PCDATA)>
+<!ELEMENT recommended_action (#PCDATA)>
+<!ELEMENT graded_at (#PCDATA)>

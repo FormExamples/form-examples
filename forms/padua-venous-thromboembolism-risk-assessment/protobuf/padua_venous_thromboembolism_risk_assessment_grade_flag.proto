@@ -1,0 +1,36 @@
+// Generated from sql/. Do not edit by hand.
+// SOURCE: padua_venous_thromboembolism_risk_assessment_grade_flag
+
+syntax = "proto3";
+
+package form_examples.padua_venous_thromboembolism_risk_assessment;
+
+enum PaduaVenousThromboembolismRiskAssessmentGradeFlagCategoryEnum {
+  CATEGORY_UNSPECIFIED = 0;
+  CATEGORY_HIGH_RISK_PROPHYLAXIS = 1;  // high-risk-prophylaxis
+  CATEGORY_BLEEDING_CONTRAINDICATION = 2;  // bleeding-contraindication
+  CATEGORY_ACTIVE_CANCER = 3;  // active-cancer
+  CATEGORY_PREVIOUS_VTE = 4;  // previous-vte
+  CATEGORY_INCOMPLETE_ASSESSMENT = 5;  // incomplete-assessment
+  CATEGORY_OTHER = 6;  // other
+}
+
+enum PaduaVenousThromboembolismRiskAssessmentGradeFlagPriorityEnum {
+  PRIORITY_UNSPECIFIED = 0;
+  PRIORITY_LOW = 1;  // low
+  PRIORITY_MEDIUM = 2;  // medium
+  PRIORITY_HIGH = 3;  // high
+}
+
+message PaduaVenousThromboembolismRiskAssessmentGradeFlag {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string padua_venous_thromboembolism_risk_assessment_grade_id = 5;  // UUID — uuid
+  string flag_id = 6;  // VARCHAR(60) — max 60 chars
+  PaduaVenousThromboembolismRiskAssessmentGradeFlagCategoryEnum category = 7;  // VARCHAR(50)
+  PaduaVenousThromboembolismRiskAssessmentGradeFlagPriorityEnum priority = 8;  // VARCHAR(10)
+  string description = 9;  // VARCHAR(500) — max 500 chars
+  string suggested_action = 10;  // VARCHAR(500) — max 500 chars
+}

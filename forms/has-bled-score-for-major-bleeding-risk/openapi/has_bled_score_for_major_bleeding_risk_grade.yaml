@@ -1,0 +1,189 @@
+# Generated from sql/. Do not edit by hand.
+# SOURCE: has_bled_score_for_major_bleeding_risk_grade
+openapi: 3.1.0
+info:
+  title: Has Bled Score For Major Bleeding Risk — HasBledScoreForMajorBleedingRiskGrade
+  version: 1.0.0
+  description: "Computed HAS-BLED grading result: per-criterion 0-1 sub-scores, summed total (0-9), derived risk band, and a summary of modifiable bleeding-risk factors."
+paths:
+  /has-bled-score-for-major-bleeding-risk-grades:
+    get:
+      summary: List HasBledScoreForMajorBleedingRiskGrade records
+      operationId: listHasBledScoreForMajorBleedingRiskGrade
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of HasBledScoreForMajorBleedingRiskGrade records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/HasBledScoreForMajorBleedingRiskGrade"
+    post:
+      summary: Create a new HasBledScoreForMajorBleedingRiskGrade
+      operationId: createHasBledScoreForMajorBleedingRiskGrade
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/HasBledScoreForMajorBleedingRiskGrade"
+      responses:
+        "201":
+          description: The newly created HasBledScoreForMajorBleedingRiskGrade
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/HasBledScoreForMajorBleedingRiskGrade"
+        "400":
+          description: Validation error
+  /has-bled-score-for-major-bleeding-risk-grades/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one HasBledScoreForMajorBleedingRiskGrade by id
+      operationId: getHasBledScoreForMajorBleedingRiskGrade
+      responses:
+        "200":
+          description: The requested HasBledScoreForMajorBleedingRiskGrade
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/HasBledScoreForMajorBleedingRiskGrade"
+        "404":
+          description: HasBledScoreForMajorBleedingRiskGrade not found
+    patch:
+      summary: Update an existing HasBledScoreForMajorBleedingRiskGrade
+      operationId: updateHasBledScoreForMajorBleedingRiskGrade
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/HasBledScoreForMajorBleedingRiskGrade"
+      responses:
+        "200":
+          description: The updated HasBledScoreForMajorBleedingRiskGrade
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/HasBledScoreForMajorBleedingRiskGrade"
+        "404":
+          description: HasBledScoreForMajorBleedingRiskGrade not found
+    delete:
+      summary: Soft-delete a HasBledScoreForMajorBleedingRiskGrade
+      operationId: deleteHasBledScoreForMajorBleedingRiskGrade
+      responses:
+        "204":
+          description: HasBledScoreForMajorBleedingRiskGrade deleted
+        "404":
+          description: HasBledScoreForMajorBleedingRiskGrade not found
+components:
+  schemas:
+    HasBledScoreForMajorBleedingRiskGrade:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was most recently updated.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was soft-deleted.
+        has_bled_score_for_major_bleeding_risk_id:
+          type: string
+          format: uuid
+          description: Foreign key to the parent assessment (unique, 1:1).
+        hypertension_points:
+          type: integer
+          format: int32
+          description: Points (0 or 1) awarded for criterion H, uncontrolled hypertension.
+        renal_points:
+          type: integer
+          format: int32
+          description: Points (0 or 1) awarded for criterion A, abnormal renal function.
+        liver_points:
+          type: integer
+          format: int32
+          description: Points (0 or 1) awarded for criterion A, abnormal liver function.
+        stroke_points:
+          type: integer
+          format: int32
+          description: Points (0 or 1) awarded for criterion S, stroke history.
+        bleeding_points:
+          type: integer
+          format: int32
+          description: Points (0 or 1) awarded for criterion B, bleeding history or predisposition.
+        labile_inr_points:
+          type: integer
+          format: int32
+          description: Points (0 or 1) awarded for criterion L, labile INR.
+        elderly_points:
+          type: integer
+          format: int32
+          description: Points (0 or 1) awarded for criterion E, elderly (age > 65).
+        drugs_points:
+          type: integer
+          format: int32
+          description: Points (0 or 1) awarded for criterion D, concomitant antiplatelets or NSAIDs.
+        alcohol_points:
+          type: integer
+          format: int32
+          description: Points (0 or 1) awarded for criterion D, alcohol >= 8 units per week.
+        total_score:
+          type: integer
+          format: int32
+          description: Summed HAS-BLED score across the nine criteria (0-9).
+        risk_band:
+          type: string
+          enum:
+            - low
+            - moderate
+            - high
+            - ""
+          description: "Derived risk band: low (0), moderate (1-2), or high (>= 3, higher major-bleeding risk)."
+        modifiable_factors:
+          type: string
+          description: Free-text summary of the correctable bleeding-risk factors surfaced by the score (uncontrolled hypertension, labile INR, antiplatelets/NSAIDs, excess alcohol).
+        graded_at:
+          type: string
+          format: date-time
+          description: Timestamp when the engine last computed the grade.
+      required:
+        - created_at
+        - updated_at
+        - has_bled_score_for_major_bleeding_risk_id
+        - risk_band
+        - modifiable_factors
+        - graded_at
+      description: "Computed HAS-BLED grading result: per-criterion 0-1 sub-scores, summed total (0-9), derived risk band, and a summary of modifiable bleeding-risk factors."

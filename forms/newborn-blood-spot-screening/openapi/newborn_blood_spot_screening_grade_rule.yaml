@@ -1,0 +1,157 @@
+# Generated from sql/. Do not edit by hand.
+# SOURCE: newborn_blood_spot_screening_grade_rule
+openapi: 3.1.0
+info:
+  title: Newborn Blood Spot Screening — NewbornBloodSpotScreeningGradeRule
+  version: 1.0.0
+  description: "Audit trail of every classification rule that fired during grading: pathway stage, category, and description."
+paths:
+  /newborn-blood-spot-screening-grade-rules:
+    get:
+      summary: List NewbornBloodSpotScreeningGradeRule records
+      operationId: listNewbornBloodSpotScreeningGradeRule
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of NewbornBloodSpotScreeningGradeRule records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/NewbornBloodSpotScreeningGradeRule"
+    post:
+      summary: Create a new NewbornBloodSpotScreeningGradeRule
+      operationId: createNewbornBloodSpotScreeningGradeRule
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/NewbornBloodSpotScreeningGradeRule"
+      responses:
+        "201":
+          description: The newly created NewbornBloodSpotScreeningGradeRule
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/NewbornBloodSpotScreeningGradeRule"
+        "400":
+          description: Validation error
+  /newborn-blood-spot-screening-grade-rules/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one NewbornBloodSpotScreeningGradeRule by id
+      operationId: getNewbornBloodSpotScreeningGradeRule
+      responses:
+        "200":
+          description: The requested NewbornBloodSpotScreeningGradeRule
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/NewbornBloodSpotScreeningGradeRule"
+        "404":
+          description: NewbornBloodSpotScreeningGradeRule not found
+    patch:
+      summary: Update an existing NewbornBloodSpotScreeningGradeRule
+      operationId: updateNewbornBloodSpotScreeningGradeRule
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/NewbornBloodSpotScreeningGradeRule"
+      responses:
+        "200":
+          description: The updated NewbornBloodSpotScreeningGradeRule
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/NewbornBloodSpotScreeningGradeRule"
+        "404":
+          description: NewbornBloodSpotScreeningGradeRule not found
+    delete:
+      summary: Soft-delete a NewbornBloodSpotScreeningGradeRule
+      operationId: deleteNewbornBloodSpotScreeningGradeRule
+      responses:
+        "204":
+          description: NewbornBloodSpotScreeningGradeRule deleted
+        "404":
+          description: NewbornBloodSpotScreeningGradeRule not found
+components:
+  schemas:
+    NewbornBloodSpotScreeningGradeRule:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was most recently updated.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was soft-deleted.
+        newborn_blood_spot_screening_grade_id:
+          type: string
+          format: uuid
+          description: Foreign key to the parent grade.
+        rule_id:
+          type: string
+          maxLength: 40
+          description: Stable rule identifier (e.g. R-OUTCOME-REFERRAL-01).
+        stage:
+          type: string
+          enum:
+            - condition
+            - outcome
+            - referral
+            - sample-quality
+            - completeness
+            - ""
+          description: "Pathway stage the rule concerns: condition, outcome, referral, sample-quality, or completeness."
+        category:
+          type: string
+          maxLength: 50
+          description: Subject category (e.g. classification, precedence, conditional-requirement).
+        description:
+          type: string
+          maxLength: 500
+          description: Human-readable description of why the rule fired.
+      required:
+        - created_at
+        - updated_at
+        - newborn_blood_spot_screening_grade_id
+        - rule_id
+        - stage
+        - category
+        - description
+      description: "Audit trail of every classification rule that fired during grading: pathway stage, category, and description."

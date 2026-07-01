@@ -1,0 +1,45 @@
+// Generated from sql/. Do not edit by hand.
+// SOURCE: qrisk3_cardiovascular_disease_risk_score_grade_rule
+
+syntax = "proto3";
+
+package form_examples.qrisk3_cardiovascular_disease_risk_score;
+
+enum Qrisk3CardiovascularDiseaseRiskScoreGradeRuleComponentEnum {
+  COMPONENT_UNSPECIFIED = 0;
+  COMPONENT_AGE = 1;  // age
+  COMPONENT_ETHNICITY = 2;  // ethnicity
+  COMPONENT_DEPRIVATION = 3;  // deprivation
+  COMPONENT_SMOKING = 4;  // smoking
+  COMPONENT_BODY_MASS_INDEX = 5;  // body-mass-index
+  COMPONENT_DIABETES = 6;  // diabetes
+  COMPONENT_CHOLESTEROL_RATIO = 7;  // cholesterol-ratio
+  COMPONENT_SYSTOLIC_BP = 8;  // systolic-bp
+  COMPONENT_BP_VARIABILITY = 9;  // bp-variability
+  COMPONENT_BP_TREATMENT = 10;  // bp-treatment
+  COMPONENT_FAMILY_HISTORY = 11;  // family-history
+  COMPONENT_ATRIAL_FIBRILLATION = 12;  // atrial-fibrillation
+  COMPONENT_CHRONIC_KIDNEY_DISEASE = 13;  // chronic-kidney-disease
+  COMPONENT_MIGRAINE = 14;  // migraine
+  COMPONENT_RHEUMATOID_ARTHRITIS = 15;  // rheumatoid-arthritis
+  COMPONENT_SYSTEMIC_LUPUS_ERYTHEMATOSUS = 16;  // systemic-lupus-erythematosus
+  COMPONENT_SEVERE_MENTAL_ILLNESS = 17;  // severe-mental-illness
+  COMPONENT_ERECTILE_DYSFUNCTION = 18;  // erectile-dysfunction
+  COMPONENT_ATYPICAL_ANTIPSYCHOTICS = 19;  // atypical-antipsychotics
+  COMPONENT_CORTICOSTEROIDS = 20;  // corticosteroids
+  COMPONENT_AGE_INTERACTION = 21;  // age-interaction
+  COMPONENT_BASELINE = 22;  // baseline
+}
+
+message Qrisk3CardiovascularDiseaseRiskScoreGradeRule {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string qrisk3_cardiovascular_disease_risk_score_grade_id = 5;  // UUID — uuid
+  string rule_id = 6;  // VARCHAR(40) — max 40 chars
+  Qrisk3CardiovascularDiseaseRiskScoreGradeRuleComponentEnum component = 7;  // VARCHAR(30)
+  double contribution = 8;  // NUMERIC(12,6) — numeric(12,6)
+  string category = 9;  // VARCHAR(50) — max 50 chars
+  string description = 10;  // VARCHAR(500) — max 500 chars
+}

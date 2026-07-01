@@ -1,0 +1,160 @@
+# Generated from sql/. Do not edit by hand.
+# SOURCE: cage_alcohol_questionnaire_grade_rule
+openapi: 3.1.0
+info:
+  title: Cage Alcohol Questionnaire — CageAlcoholQuestionnaireGradeRule
+  version: 1.0.0
+  description: "Audit trail of every grading rule that fired during CAGE computation: criterion, point contributed, category, and description."
+paths:
+  /cage-alcohol-questionnaire-grade-rules:
+    get:
+      summary: List CageAlcoholQuestionnaireGradeRule records
+      operationId: listCageAlcoholQuestionnaireGradeRule
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of CageAlcoholQuestionnaireGradeRule records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/CageAlcoholQuestionnaireGradeRule"
+    post:
+      summary: Create a new CageAlcoholQuestionnaireGradeRule
+      operationId: createCageAlcoholQuestionnaireGradeRule
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CageAlcoholQuestionnaireGradeRule"
+      responses:
+        "201":
+          description: The newly created CageAlcoholQuestionnaireGradeRule
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CageAlcoholQuestionnaireGradeRule"
+        "400":
+          description: Validation error
+  /cage-alcohol-questionnaire-grade-rules/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one CageAlcoholQuestionnaireGradeRule by id
+      operationId: getCageAlcoholQuestionnaireGradeRule
+      responses:
+        "200":
+          description: The requested CageAlcoholQuestionnaireGradeRule
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CageAlcoholQuestionnaireGradeRule"
+        "404":
+          description: CageAlcoholQuestionnaireGradeRule not found
+    patch:
+      summary: Update an existing CageAlcoholQuestionnaireGradeRule
+      operationId: updateCageAlcoholQuestionnaireGradeRule
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CageAlcoholQuestionnaireGradeRule"
+      responses:
+        "200":
+          description: The updated CageAlcoholQuestionnaireGradeRule
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CageAlcoholQuestionnaireGradeRule"
+        "404":
+          description: CageAlcoholQuestionnaireGradeRule not found
+    delete:
+      summary: Soft-delete a CageAlcoholQuestionnaireGradeRule
+      operationId: deleteCageAlcoholQuestionnaireGradeRule
+      responses:
+        "204":
+          description: CageAlcoholQuestionnaireGradeRule deleted
+        "404":
+          description: CageAlcoholQuestionnaireGradeRule not found
+components:
+  schemas:
+    CageAlcoholQuestionnaireGradeRule:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was most recently updated.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was soft-deleted.
+        cage_alcohol_questionnaire_grade_id:
+          type: string
+          format: uuid
+          description: Foreign key to the parent grade.
+        rule_id:
+          type: string
+          maxLength: 40
+          description: Stable rule identifier (e.g. R-EYE-OPENER-1POINT-01).
+        parameter:
+          type: string
+          enum:
+            - cut-down
+            - annoyed
+            - guilty
+            - eye-opener
+            - total
+          description: "Scored criterion the rule belongs to: cut-down, annoyed, guilty, eye-opener, or total."
+        points:
+          type: integer
+          format: int32
+          description: Point (0-1) contributed by this rule for its criterion.
+        category:
+          type: string
+          maxLength: 50
+          description: Subject category (e.g. criterion-positive, total-band).
+        description:
+          type: string
+          maxLength: 500
+          description: Human-readable description of why the rule fired.
+      required:
+        - created_at
+        - updated_at
+        - cage_alcohol_questionnaire_grade_id
+        - rule_id
+        - parameter
+        - category
+        - description
+      description: "Audit trail of every grading rule that fired during CAGE computation: criterion, point contributed, category, and description."

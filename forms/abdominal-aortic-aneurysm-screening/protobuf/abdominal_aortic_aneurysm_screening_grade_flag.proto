@@ -1,0 +1,36 @@
+// Generated from sql/. Do not edit by hand.
+// SOURCE: abdominal_aortic_aneurysm_screening_grade_flag
+
+syntax = "proto3";
+
+package form_examples.abdominal_aortic_aneurysm_screening;
+
+enum AbdominalAorticAneurysmScreeningGradeFlagCategoryEnum {
+  CATEGORY_UNSPECIFIED = 0;
+  CATEGORY_VASCULAR_REFERRAL = 1;  // vascular-referral
+  CATEGORY_SYMPTOMATIC_ANEURYSM = 2;  // symptomatic-aneurysm
+  CATEGORY_RAPID_GROWTH = 3;  // rapid-growth
+  CATEGORY_NON_VISUALISED = 4;  // non-visualised
+  CATEGORY_INCOMPLETE = 5;  // incomplete
+  CATEGORY_OTHER = 6;  // other
+}
+
+enum AbdominalAorticAneurysmScreeningGradeFlagPriorityEnum {
+  PRIORITY_UNSPECIFIED = 0;
+  PRIORITY_LOW = 1;  // low
+  PRIORITY_MEDIUM = 2;  // medium
+  PRIORITY_HIGH = 3;  // high
+}
+
+message AbdominalAorticAneurysmScreeningGradeFlag {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string abdominal_aortic_aneurysm_screening_grade_id = 5;  // UUID — uuid
+  string flag_id = 6;  // VARCHAR(50) — max 50 chars
+  AbdominalAorticAneurysmScreeningGradeFlagCategoryEnum category = 7;  // VARCHAR(30)
+  AbdominalAorticAneurysmScreeningGradeFlagPriorityEnum priority = 8;  // VARCHAR(10)
+  string description = 9;  // VARCHAR(500) — max 500 chars
+  string suggested_action = 10;  // VARCHAR(500) — max 500 chars
+}

@@ -1,0 +1,72 @@
+// Generated from sql/. Do not edit by hand.
+// SOURCE: dexa_bone_density_test_result
+
+syntax = "proto3";
+
+package form_examples.dexa_bone_density_test_result;
+
+enum DexaBoneDensityTestResultReportStatusEnum {
+  REPORTSTATUS_UNSPECIFIED = 0;
+  REPORTSTATUS_PRELIMINARY = 1;  // preliminary
+  REPORTSTATUS_FINAL = 2;  // final
+  REPORTSTATUS_AMENDED = 3;  // amended
+  REPORTSTATUS_CANCELLED = 4;  // cancelled
+}
+
+enum DexaBoneDensityTestResultScanRegionEnum {
+  SCANREGION_UNSPECIFIED = 0;
+  SCANREGION_HIP = 1;  // hip
+  SCANREGION_SPINE = 2;  // spine
+  SCANREGION_HIP_AND_SPINE = 3;  // hip-and-spine
+  SCANREGION_FOREARM = 4;  // forearm
+  SCANREGION_WHOLE_BODY = 5;  // whole-body
+  SCANREGION_OTHER = 6;  // other
+}
+
+enum DexaBoneDensityTestResultExaminationAdequacyEnum {
+  EXAMINATIONADEQUACY_UNSPECIFIED = 0;
+  EXAMINATIONADEQUACY_ADEQUATE = 1;  // adequate
+  EXAMINATIONADEQUACY_LIMITED = 2;  // limited
+  EXAMINATIONADEQUACY_NON_DIAGNOSTIC = 3;  // non-diagnostic
+}
+
+enum DexaBoneDensityTestResultWhoClassificationEnum {
+  WHOCLASSIFICATION_UNSPECIFIED = 0;
+  WHOCLASSIFICATION_NORMAL = 1;  // normal
+  WHOCLASSIFICATION_OSTEOPENIA = 2;  // osteopenia
+  WHOCLASSIFICATION_OSTEOPOROSIS = 3;  // osteoporosis
+  WHOCLASSIFICATION_SEVERE_OSTEOPOROSIS = 4;  // severe-osteoporosis
+}
+
+message DexaBoneDensityTestResult {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string patient_id = 5;  // UUID — uuid
+  string clinician_id = 6;  // UUID — uuid
+  string originating_request_reference = 7;  // VARCHAR(255) — max 255 chars
+  DexaBoneDensityTestResultReportStatusEnum report_status = 8;  // VARCHAR(15)
+  string performed_date = 9;  // DATE — iso 8601 date
+  string reported_date = 10;  // DATE — iso 8601 date
+  DexaBoneDensityTestResultScanRegionEnum scan_region = 11;  // VARCHAR(15)
+  DexaBoneDensityTestResultExaminationAdequacyEnum examination_adequacy = 12;  // VARCHAR(15)
+  string clinical_history = 13;  // VARCHAR(1000) — max 1000 chars
+  double lumbar_spine_t_score = 14;  // NUMERIC(4,1) — numeric(4,1)
+  double lumbar_spine_z_score = 15;  // NUMERIC(4,1) — numeric(4,1)
+  double femoral_neck_t_score = 16;  // NUMERIC(4,1) — numeric(4,1)
+  double femoral_neck_z_score = 17;  // NUMERIC(4,1) — numeric(4,1)
+  double total_hip_t_score = 18;  // NUMERIC(4,1) — numeric(4,1)
+  double lowest_t_score = 19;  // NUMERIC(4,1) — numeric(4,1)
+  double bone_mineral_density_g_cm2 = 20;  // NUMERIC(5,3) — numeric(5,3)
+  DexaBoneDensityTestResultWhoClassificationEnum who_classification = 21;  // VARCHAR(20)
+  double frax_major_fracture_percent = 22;  // NUMERIC(4,1) — numeric(4,1)
+  double frax_hip_fracture_percent = 23;  // NUMERIC(4,1) — numeric(4,1)
+  bool vertebral_fracture_identified = 24;  // BOOLEAN
+  string comparison_with_previous = 25;  // VARCHAR(1000) — max 1000 chars
+  double percent_change_since_previous = 26;  // NUMERIC(5,1) — numeric(5,1)
+  string impression = 27;  // VARCHAR(2000) — max 2000 chars
+  string recommended_follow_up = 28;  // VARCHAR(1000) — max 1000 chars
+  bool critical_result_communicated = 29;  // BOOLEAN
+  string reported_to = 30;  // VARCHAR(500) — max 500 chars
+}

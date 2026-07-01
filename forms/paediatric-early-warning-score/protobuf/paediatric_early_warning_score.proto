@@ -1,0 +1,97 @@
+// Generated from sql/. Do not edit by hand.
+// SOURCE: paediatric_early_warning_score
+
+syntax = "proto3";
+
+package form_examples.paediatric_early_warning_score;
+
+enum PaediatricEarlyWarningScoreStatusEnum {
+  STATUS_UNSPECIFIED = 0;
+  STATUS_DRAFT = 1;  // draft
+  STATUS_SUBMITTED = 2;  // submitted
+  STATUS_AMENDED = 3;  // amended
+  STATUS_SIGNED = 4;  // signed
+}
+
+enum PaediatricEarlyWarningScoreCareSettingEnum {
+  CARESETTING_UNSPECIFIED = 0;
+  CARESETTING_WARD = 1;  // ward
+  CARESETTING_CHILDRENS_ASSESSMENT_UNIT = 2;  // childrens-assessment-unit
+  CARESETTING_EMERGENCY_DEPARTMENT = 3;  // emergency-department
+  CARESETTING_OTHER = 4;  // other
+}
+
+enum PaediatricEarlyWarningScoreAgeBandEnum {
+  AGEBAND_UNSPECIFIED = 0;
+  AGEBAND_NEONATE = 1;  // neonate
+  AGEBAND_INFANT = 2;  // infant
+  AGEBAND_YOUNG_CHILD = 3;  // young-child
+  AGEBAND_CHILD = 4;  // child
+  AGEBAND_ADOLESCENT = 5;  // adolescent
+}
+
+enum PaediatricEarlyWarningScoreRespiratoryEffortEnum {
+  RESPIRATORYEFFORT_UNSPECIFIED = 0;
+  RESPIRATORYEFFORT_NONE = 1;  // none
+  RESPIRATORYEFFORT_MILD = 2;  // mild
+  RESPIRATORYEFFORT_MODERATE = 3;  // moderate
+  RESPIRATORYEFFORT_SEVERE = 4;  // severe
+}
+
+enum PaediatricEarlyWarningScoreSupplementalOxygenEnum {
+  SUPPLEMENTALOXYGEN_UNSPECIFIED = 0;
+  SUPPLEMENTALOXYGEN_ROOM_AIR = 1;  // room-air
+  SUPPLEMENTALOXYGEN_LOW_FLOW = 2;  // low-flow
+  SUPPLEMENTALOXYGEN_HIGH_FLOW = 3;  // high-flow
+}
+
+enum PaediatricEarlyWarningScoreCapillaryRefillEnum {
+  CAPILLARYREFILL_UNSPECIFIED = 0;
+  CAPILLARYREFILL_UNDER_2S = 1;  // under-2s
+  CAPILLARYREFILL_V_2_3S = 2;  // 2-3s
+  CAPILLARYREFILL_V_3_4S = 3;  // 3-4s
+  CAPILLARYREFILL_OVER_4S = 4;  // over-4s
+}
+
+enum PaediatricEarlyWarningScoreConsciousnessAcvpuEnum {
+  CONSCIOUSNESSACVPU_UNSPECIFIED = 0;
+  CONSCIOUSNESSACVPU_ALERT = 1;  // alert
+  CONSCIOUSNESSACVPU_VOICE = 2;  // voice
+  CONSCIOUSNESSACVPU_PAIN = 3;  // pain
+  CONSCIOUSNESSACVPU_UNRESPONSIVE = 4;  // unresponsive
+}
+
+enum PaediatricEarlyWarningScoreNurseConcernEnum {
+  NURSECONCERN_UNSPECIFIED = 0;
+  NURSECONCERN_YES = 1;  // yes
+  NURSECONCERN_NO = 2;  // no
+}
+
+enum PaediatricEarlyWarningScoreParentConcernEnum {
+  PARENTCONCERN_UNSPECIFIED = 0;
+  PARENTCONCERN_YES = 1;  // yes
+  PARENTCONCERN_NO = 2;  // no
+}
+
+message PaediatricEarlyWarningScore {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string patient_id = 5;  // UUID — uuid
+  string clinician_id = 6;  // UUID — uuid
+  PaediatricEarlyWarningScoreStatusEnum status = 7;  // VARCHAR(20)
+  string observation_at = 8;  // TIMESTAMPTZ — iso 8601
+  PaediatricEarlyWarningScoreCareSettingEnum care_setting = 9;  // VARCHAR(30)
+  PaediatricEarlyWarningScoreAgeBandEnum age_band = 10;  // VARCHAR(15)
+  int32 respiratory_rate = 11;  // INTEGER
+  PaediatricEarlyWarningScoreRespiratoryEffortEnum respiratory_effort = 12;  // VARCHAR(10)
+  int32 oxygen_saturation = 13;  // INTEGER
+  PaediatricEarlyWarningScoreSupplementalOxygenEnum supplemental_oxygen = 14;  // VARCHAR(10)
+  int32 heart_rate = 15;  // INTEGER
+  PaediatricEarlyWarningScoreCapillaryRefillEnum capillary_refill = 16;  // VARCHAR(10)
+  PaediatricEarlyWarningScoreConsciousnessAcvpuEnum consciousness_acvpu = 17;  // VARCHAR(15)
+  PaediatricEarlyWarningScoreNurseConcernEnum nurse_concern = 18;  // VARCHAR(5)
+  PaediatricEarlyWarningScoreParentConcernEnum parent_concern = 19;  // VARCHAR(5)
+  string clinical_notes = 20;  // TEXT
+}

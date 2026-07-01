@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE anion_gap_calculator_grade SYSTEM "anion_gap_calculator_grade.dtd">
+<anion_gap_calculator_grade>
+<id>880e8400-e29b-41d4-a716-446655440003</id>
+<created_at>2026-04-09T10:00:00Z</created_at>
+<updated_at>2026-04-09T10:00:00Z</updated_at>
+<deleted_at>2026-04-09T10:00:00Z</deleted_at>
+<anion_gap_calculator_id>770e8400-e29b-41d4-a716-446655440002</anion_gap_calculator_id>
+<anion_gap>0.0</anion_gap>
+<corrected_anion_gap>0.0</corrected_anion_gap>
+<classification>normal</classification>
+<graded_at>2026-04-09T10:00:00Z</graded_at>
+</anion_gap_calculator_grade>

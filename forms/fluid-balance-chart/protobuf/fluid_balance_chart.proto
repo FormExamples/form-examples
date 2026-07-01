@@ -1,0 +1,31 @@
+// Generated from sql/. Do not edit by hand.
+// SOURCE: fluid_balance_chart
+
+syntax = "proto3";
+
+package form_examples.fluid_balance_chart;
+
+enum FluidBalanceChartClinicianRoleEnum {
+  CLINICIANROLE_UNSPECIFIED = 0;
+  CLINICIANROLE_NURSE = 1;  // nurse
+  CLINICIANROLE_DOCTOR = 2;  // doctor
+  CLINICIANROLE_HEALTHCARE_ASSISTANT = 3;  // healthcare-assistant
+  CLINICIANROLE_OTHER = 4;  // other
+}
+
+message FluidBalanceChart {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string patient_id = 5;  // UUID — uuid
+  string clinician_id = 6;  // UUID — uuid
+  string clinician_name = 7;  // TEXT
+  FluidBalanceChartClinicianRoleEnum clinician_role = 8;  // VARCHAR(30)
+  string patient_identifier = 9;  // TEXT
+  string ward_or_unit = 10;  // TEXT
+  string chart_start_at = 11;  // TIMESTAMPTZ — iso 8601
+  double chart_period_hours = 12;  // NUMERIC(6,2) — numeric(6,2)
+  double weight_kg = 13;  // NUMERIC(5,1) — numeric(5,1)
+  string clinical_note = 14;  // TEXT
+}

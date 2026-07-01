@@ -1,0 +1,49 @@
+// Generated from sql/. Do not edit by hand.
+// SOURCE: bhutani_bilirubin_nomogram_grade
+
+syntax = "proto3";
+
+package form_examples.bhutani_bilirubin_nomogram;
+
+enum BhutaniBilirubinNomogramGradeRiskZoneEnum {
+  RISKZONE_UNSPECIFIED = 0;
+  RISKZONE_LOW = 1;  // low
+  RISKZONE_LOW_INTERMEDIATE = 2;  // low-intermediate
+  RISKZONE_HIGH_INTERMEDIATE = 3;  // high-intermediate
+  RISKZONE_HIGH = 4;  // high
+}
+
+enum BhutaniBilirubinNomogramGradePercentileBandEnum {
+  PERCENTILEBAND_UNSPECIFIED = 0;
+  PERCENTILEBAND_V_40 = 1;  // <40
+  PERCENTILEBAND_V_40_75 = 2;  // 40-75
+  PERCENTILEBAND_V_75_95 = 3;  // 75-95
+  PERCENTILEBAND_V_95 = 4;  // >=95
+}
+
+enum BhutaniBilirubinNomogramGradeAbovePhototherapyThresholdEnum {
+  ABOVEPHOTOTHERAPYTHRESHOLD_UNSPECIFIED = 0;
+  ABOVEPHOTOTHERAPYTHRESHOLD_YES = 1;  // yes
+  ABOVEPHOTOTHERAPYTHRESHOLD_NO = 2;  // no
+}
+
+enum BhutaniBilirubinNomogramGradeAboveExchangeThresholdEnum {
+  ABOVEEXCHANGETHRESHOLD_UNSPECIFIED = 0;
+  ABOVEEXCHANGETHRESHOLD_YES = 1;  // yes
+  ABOVEEXCHANGETHRESHOLD_NO = 2;  // no
+}
+
+message BhutaniBilirubinNomogramGrade {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string bhutani_bilirubin_nomogram_id = 5;  // UUID — uuid
+  BhutaniBilirubinNomogramGradeRiskZoneEnum risk_zone = 6;  // VARCHAR(20)
+  BhutaniBilirubinNomogramGradePercentileBandEnum percentile_band = 7;  // VARCHAR(10)
+  double phototherapy_threshold_umol_l = 8;  // NUMERIC(6,1) — numeric(6,1)
+  double exchange_threshold_umol_l = 9;  // NUMERIC(6,1) — numeric(6,1)
+  BhutaniBilirubinNomogramGradeAbovePhototherapyThresholdEnum above_phototherapy_threshold = 10;  // VARCHAR(5)
+  BhutaniBilirubinNomogramGradeAboveExchangeThresholdEnum above_exchange_threshold = 11;  // VARCHAR(5)
+  string graded_at = 12;  // TIMESTAMPTZ — iso 8601
+}

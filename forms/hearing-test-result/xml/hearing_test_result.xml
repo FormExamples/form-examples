@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hearing_test_result SYSTEM "hearing_test_result.dtd">
+<hearing_test_result>
+<id>770e8400-e29b-41d4-a716-446655440002</id>
+<created_at>2026-04-09T10:00:00Z</created_at>
+<updated_at>2026-04-09T10:00:00Z</updated_at>
+<deleted_at>2026-04-09T10:00:00Z</deleted_at>
+<patient_id>550e8400-e29b-41d4-a716-446655440000</patient_id>
+<clinician_id>660e8400-e29b-41d4-a716-446655440001</clinician_id>
+<originating_request_reference></originating_request_reference>
+<report_status>preliminary</report_status>
+<performed_date>2026-01-15</performed_date>
+<reported_date>2026-01-15</reported_date>
+<test_type>pure-tone-audiometry</test_type>
+<test_reliability>good</test_reliability>
+<clinical_history>Example text.</clinical_history>
+<pure_tone_average_right_db>0.0</pure_tone_average_right_db>
+<pure_tone_average_left_db>0.0</pure_tone_average_left_db>
+<hearing_loss_type_right>none</hearing_loss_type_right>
+<hearing_loss_type_left>none</hearing_loss_type_left>
+<hearing_loss_severity_right>normal</hearing_loss_severity_right>
+<hearing_loss_severity_left>normal</hearing_loss_severity_left>
+<tympanometry_type_right>A</tympanometry_type_right>
+<tympanometry_type_left>A</tympanometry_type_left>
+<hearing_loss_present>true</hearing_loss_present>
+<asymmetric_loss>true</asymmetric_loss>
+<sudden_sensorineural_loss>true</sudden_sensorineural_loss>
+<conductive_component>true</conductive_component>
+<normal_hearing>true</normal_hearing>
+<findings_narrative>Example text.</findings_narrative>
+<impression>Example text.</impression>
+<reporting_category>General</reporting_category>
+<recommended_follow_up></recommended_follow_up>
+<critical_result_communicated>true</critical_result_communicated>
+<reported_to></reported_to>
+</hearing_test_result>

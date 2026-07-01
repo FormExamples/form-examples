@@ -1,0 +1,155 @@
+# Generated from sql/. Do not edit by hand.
+# SOURCE: heart_failure_review_grade_rule
+openapi: 3.1.0
+info:
+  title: Heart Failure Review — HeartFailureReviewGradeRule
+  version: 1.0.0
+  description: "Audit trail of every classification or completeness rule that fired during grading: section, category, and description."
+paths:
+  /heart-failure-review-grade-rules:
+    get:
+      summary: List HeartFailureReviewGradeRule records
+      operationId: listHeartFailureReviewGradeRule
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of HeartFailureReviewGradeRule records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/HeartFailureReviewGradeRule"
+    post:
+      summary: Create a new HeartFailureReviewGradeRule
+      operationId: createHeartFailureReviewGradeRule
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/HeartFailureReviewGradeRule"
+      responses:
+        "201":
+          description: The newly created HeartFailureReviewGradeRule
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/HeartFailureReviewGradeRule"
+        "400":
+          description: Validation error
+  /heart-failure-review-grade-rules/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one HeartFailureReviewGradeRule by id
+      operationId: getHeartFailureReviewGradeRule
+      responses:
+        "200":
+          description: The requested HeartFailureReviewGradeRule
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/HeartFailureReviewGradeRule"
+        "404":
+          description: HeartFailureReviewGradeRule not found
+    patch:
+      summary: Update an existing HeartFailureReviewGradeRule
+      operationId: updateHeartFailureReviewGradeRule
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/HeartFailureReviewGradeRule"
+      responses:
+        "200":
+          description: The updated HeartFailureReviewGradeRule
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/HeartFailureReviewGradeRule"
+        "404":
+          description: HeartFailureReviewGradeRule not found
+    delete:
+      summary: Soft-delete a HeartFailureReviewGradeRule
+      operationId: deleteHeartFailureReviewGradeRule
+      responses:
+        "204":
+          description: HeartFailureReviewGradeRule deleted
+        "404":
+          description: HeartFailureReviewGradeRule not found
+components:
+  schemas:
+    HeartFailureReviewGradeRule:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was most recently updated.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was soft-deleted.
+        heart_failure_review_grade_id:
+          type: string
+          format: uuid
+          description: Foreign key to the parent grade.
+        rule_id:
+          type: string
+          maxLength: 40
+          description: Stable rule identifier (e.g. R-FUNCTIONAL-NYHA-III-01).
+        section:
+          type: string
+          enum:
+            - functional
+            - medication
+            - completeness
+            - ""
+          description: "Section the rule concerns: functional, medication, or completeness."
+        category:
+          type: string
+          maxLength: 50
+          description: Subject category (e.g. functional-status, optimisation-status, required-domain).
+        description:
+          type: string
+          maxLength: 500
+          description: Human-readable description of why the rule fired.
+      required:
+        - created_at
+        - updated_at
+        - heart_failure_review_grade_id
+        - rule_id
+        - section
+        - category
+        - description
+      description: "Audit trail of every classification or completeness rule that fired during grading: section, category, and description."

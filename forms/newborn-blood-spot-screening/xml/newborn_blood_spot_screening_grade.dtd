@@ -1,0 +1,12 @@
+<!ELEMENT newborn_blood_spot_screening_grade (id,created_at,updated_at,deleted_at,newborn_blood_spot_screening_id,overall_outcome,referral_status,sample_adequate,within_window,avoidable_repeat,graded_at)>
+<!ELEMENT id (#PCDATA)>
+<!ELEMENT created_at (#PCDATA)>
+<!ELEMENT updated_at (#PCDATA)>
+<!ELEMENT deleted_at (#PCDATA)>
+<!ELEMENT newborn_blood_spot_screening_id (#PCDATA)>
+<!ELEMENT overall_outcome (#PCDATA)>
+<!ELEMENT referral_status (#PCDATA)>
+<!ELEMENT sample_adequate (#PCDATA)>
+<!ELEMENT within_window (#PCDATA)>
+<!ELEMENT avoidable_repeat (#PCDATA)>
+<!ELEMENT graded_at (#PCDATA)>

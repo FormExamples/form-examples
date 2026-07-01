@@ -1,0 +1,14 @@
+<!ELEMENT model_for_end_stage_liver_disease_score_grade (id,created_at,updated_at,deleted_at,model_for_end_stage_liver_disease_score_id,bilirubin_mg_dl,creatinine_mg_dl,creatinine_adjusted,dialysis_rule_applied,meld_score,mortality_band,estimated_mortality_percent,graded_at)>
+<!ELEMENT id (#PCDATA)>
+<!ELEMENT created_at (#PCDATA)>
+<!ELEMENT updated_at (#PCDATA)>
+<!ELEMENT deleted_at (#PCDATA)>
+<!ELEMENT model_for_end_stage_liver_disease_score_id (#PCDATA)>
+<!ELEMENT bilirubin_mg_dl (#PCDATA)>
+<!ELEMENT creatinine_mg_dl (#PCDATA)>
+<!ELEMENT creatinine_adjusted (#PCDATA)>
+<!ELEMENT dialysis_rule_applied (#PCDATA)>
+<!ELEMENT meld_score (#PCDATA)>
+<!ELEMENT mortality_band (#PCDATA)>
+<!ELEMENT estimated_mortality_percent (#PCDATA)>
+<!ELEMENT graded_at (#PCDATA)>

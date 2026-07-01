@@ -1,0 +1,10 @@
+<!ELEMENT general_practitioner_referral_letter_grade (id,created_at,updated_at,deleted_at,general_practitioner_referral_letter_id,status,urgency,completeness_percent,graded_at)>
+<!ELEMENT id (#PCDATA)>
+<!ELEMENT created_at (#PCDATA)>
+<!ELEMENT updated_at (#PCDATA)>
+<!ELEMENT deleted_at (#PCDATA)>
+<!ELEMENT general_practitioner_referral_letter_id (#PCDATA)>
+<!ELEMENT status (#PCDATA)>
+<!ELEMENT urgency (#PCDATA)>
+<!ELEMENT completeness_percent (#PCDATA)>
+<!ELEMENT graded_at (#PCDATA)>

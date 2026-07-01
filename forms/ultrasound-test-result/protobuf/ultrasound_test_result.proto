@@ -1,0 +1,80 @@
+// Generated from sql/. Do not edit by hand.
+// SOURCE: ultrasound_test_result
+
+syntax = "proto3";
+
+package form_examples.ultrasound_test_result;
+
+enum UltrasoundTestResultReportStatusEnum {
+  REPORTSTATUS_UNSPECIFIED = 0;
+  REPORTSTATUS_PRELIMINARY = 1;  // preliminary
+  REPORTSTATUS_FINAL = 2;  // final
+  REPORTSTATUS_AMENDED = 3;  // amended
+  REPORTSTATUS_CANCELLED = 4;  // cancelled
+}
+
+enum UltrasoundTestResultBodyRegionEnum {
+  BODYREGION_UNSPECIFIED = 0;
+  BODYREGION_ABDOMEN = 1;  // abdomen
+  BODYREGION_PELVIS = 2;  // pelvis
+  BODYREGION_RENAL_TRACT = 3;  // renal-tract
+  BODYREGION_LIVER_BILIARY = 4;  // liver-biliary
+  BODYREGION_THYROID_NECK = 5;  // thyroid-neck
+  BODYREGION_SCROTUM_TESTES = 6;  // scrotum-testes
+  BODYREGION_BREAST = 7;  // breast
+  BODYREGION_SOFT_TISSUE = 8;  // soft-tissue
+  BODYREGION_VASCULAR_DOPPLER = 9;  // vascular-doppler
+  BODYREGION_DVT_LEG = 10;  // dvt-leg
+  BODYREGION_CAROTID = 11;  // carotid
+  BODYREGION_MSK_JOINT = 12;  // msk-joint
+  BODYREGION_OTHER = 13;  // other
+}
+
+enum UltrasoundTestResultLateralityEnum {
+  LATERALITY_UNSPECIFIED = 0;
+  LATERALITY_LEFT = 1;  // left
+  LATERALITY_RIGHT = 2;  // right
+  LATERALITY_BILATERAL = 3;  // bilateral
+  LATERALITY_NOT_APPLICABLE = 4;  // not-applicable
+}
+
+enum UltrasoundTestResultExaminationAdequacyEnum {
+  EXAMINATIONADEQUACY_UNSPECIFIED = 0;
+  EXAMINATIONADEQUACY_ADEQUATE = 1;  // adequate
+  EXAMINATIONADEQUACY_LIMITED_BODY_HABITUS = 2;  // limited-body-habitus
+  EXAMINATIONADEQUACY_NON_DIAGNOSTIC = 3;  // non-diagnostic
+}
+
+message UltrasoundTestResult {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string patient_id = 5;  // UUID — uuid
+  string clinician_id = 6;  // UUID — uuid
+  string originating_request_reference = 7;  // VARCHAR(255) — max 255 chars
+  UltrasoundTestResultReportStatusEnum report_status = 8;  // VARCHAR(15)
+  string performed_date = 9;  // DATE — iso 8601 date
+  string reported_date = 10;  // DATE — iso 8601 date
+  UltrasoundTestResultBodyRegionEnum body_region = 11;  // VARCHAR(20)
+  UltrasoundTestResultLateralityEnum laterality = 12;  // VARCHAR(20)
+  UltrasoundTestResultExaminationAdequacyEnum examination_adequacy = 13;  // VARCHAR(25)
+  string clinical_history = 14;  // VARCHAR(1000) — max 1000 chars
+  string comparison_with_previous = 15;  // VARCHAR(1000) — max 1000 chars
+  string findings_narrative = 16;  // VARCHAR(2000) — max 2000 chars
+  bool mass_or_lesion = 17;  // BOOLEAN
+  bool cyst = 18;  // BOOLEAN
+  bool gallstones = 19;  // BOOLEAN
+  bool hydronephrosis = 20;  // BOOLEAN
+  bool free_fluid = 21;  // BOOLEAN
+  bool dvt_present = 22;  // BOOLEAN
+  bool aneurysm = 23;  // BOOLEAN
+  bool organ_enlargement = 24;  // BOOLEAN
+  bool incidental_finding = 25;  // BOOLEAN
+  double largest_lesion_size_mm = 26;  // NUMERIC(6,1) — numeric(6,1)
+  string impression = 27;  // VARCHAR(2000) — max 2000 chars
+  string reporting_category = 28;  // VARCHAR(50) — max 50 chars
+  string recommended_follow_up = 29;  // VARCHAR(1000) — max 1000 chars
+  bool critical_result_communicated = 30;  // BOOLEAN
+  string reported_to = 31;  // VARCHAR(500) — max 500 chars
+}

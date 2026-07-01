@@ -1,0 +1,156 @@
+# Generated from sql/. Do not edit by hand.
+# SOURCE: learning_disability_annual_health_check_grade
+openapi: 3.1.0
+info:
+  title: Learning Disability Annual Health Check — LearningDisabilityAnnualHealthCheckGrade
+  version: 1.0.0
+  description: "Computed documentation-completeness grading result for an annual health check: status (complete/incomplete), completeness percentage against required components, and Health Action Plan completeness."
+paths:
+  /learning-disability-annual-health-check-grades:
+    get:
+      summary: List LearningDisabilityAnnualHealthCheckGrade records
+      operationId: listLearningDisabilityAnnualHealthCheckGrade
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of LearningDisabilityAnnualHealthCheckGrade records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/LearningDisabilityAnnualHealthCheckGrade"
+    post:
+      summary: Create a new LearningDisabilityAnnualHealthCheckGrade
+      operationId: createLearningDisabilityAnnualHealthCheckGrade
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/LearningDisabilityAnnualHealthCheckGrade"
+      responses:
+        "201":
+          description: The newly created LearningDisabilityAnnualHealthCheckGrade
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/LearningDisabilityAnnualHealthCheckGrade"
+        "400":
+          description: Validation error
+  /learning-disability-annual-health-check-grades/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one LearningDisabilityAnnualHealthCheckGrade by id
+      operationId: getLearningDisabilityAnnualHealthCheckGrade
+      responses:
+        "200":
+          description: The requested LearningDisabilityAnnualHealthCheckGrade
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/LearningDisabilityAnnualHealthCheckGrade"
+        "404":
+          description: LearningDisabilityAnnualHealthCheckGrade not found
+    patch:
+      summary: Update an existing LearningDisabilityAnnualHealthCheckGrade
+      operationId: updateLearningDisabilityAnnualHealthCheckGrade
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/LearningDisabilityAnnualHealthCheckGrade"
+      responses:
+        "200":
+          description: The updated LearningDisabilityAnnualHealthCheckGrade
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/LearningDisabilityAnnualHealthCheckGrade"
+        "404":
+          description: LearningDisabilityAnnualHealthCheckGrade not found
+    delete:
+      summary: Soft-delete a LearningDisabilityAnnualHealthCheckGrade
+      operationId: deleteLearningDisabilityAnnualHealthCheckGrade
+      responses:
+        "204":
+          description: LearningDisabilityAnnualHealthCheckGrade deleted
+        "404":
+          description: LearningDisabilityAnnualHealthCheckGrade not found
+components:
+  schemas:
+    LearningDisabilityAnnualHealthCheckGrade:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was most recently updated.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was soft-deleted.
+        learning_disability_annual_health_check_id:
+          type: string
+          format: uuid
+          description: Foreign key to the parent annual health check (unique, 1:1).
+        status:
+          type: string
+          enum:
+            - complete
+            - incomplete
+            - ""
+          description: "Completeness status: complete (every required component completed and the Health Action Plan complete) or incomplete."
+        completeness_percent:
+          type: integer
+          format: int32
+          description: "Completeness percentage (0..100): completed required components / total required components x 100."
+        health_action_plan_complete:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: "Whether the Health Action Plan is complete (produced and shared): yes or no."
+        graded_at:
+          type: string
+          format: date-time
+          description: Timestamp when the engine last computed the grade.
+      required:
+        - created_at
+        - updated_at
+        - learning_disability_annual_health_check_id
+        - status
+        - health_action_plan_complete
+        - graded_at
+      description: "Computed documentation-completeness grading result for an annual health check: status (complete/incomplete), completeness percentage against required components, and Health Action Plan completeness."

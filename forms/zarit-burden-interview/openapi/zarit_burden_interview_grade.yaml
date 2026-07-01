@@ -1,0 +1,160 @@
+# Generated from sql/. Do not edit by hand.
+# SOURCE: zarit_burden_interview_grade
+openapi: 3.1.0
+info:
+  title: Zarit Burden Interview — ZaritBurdenInterviewGrade
+  version: 1.0.0
+  description: "Computed Zarit Burden Interview grading result: total over the active item set, maximum score, derived burden band, and 12-item short-form subtotal."
+paths:
+  /zarit-burden-interview-grades:
+    get:
+      summary: List ZaritBurdenInterviewGrade records
+      operationId: listZaritBurdenInterviewGrade
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of ZaritBurdenInterviewGrade records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/ZaritBurdenInterviewGrade"
+    post:
+      summary: Create a new ZaritBurdenInterviewGrade
+      operationId: createZaritBurdenInterviewGrade
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ZaritBurdenInterviewGrade"
+      responses:
+        "201":
+          description: The newly created ZaritBurdenInterviewGrade
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ZaritBurdenInterviewGrade"
+        "400":
+          description: Validation error
+  /zarit-burden-interview-grades/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one ZaritBurdenInterviewGrade by id
+      operationId: getZaritBurdenInterviewGrade
+      responses:
+        "200":
+          description: The requested ZaritBurdenInterviewGrade
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ZaritBurdenInterviewGrade"
+        "404":
+          description: ZaritBurdenInterviewGrade not found
+    patch:
+      summary: Update an existing ZaritBurdenInterviewGrade
+      operationId: updateZaritBurdenInterviewGrade
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ZaritBurdenInterviewGrade"
+      responses:
+        "200":
+          description: The updated ZaritBurdenInterviewGrade
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ZaritBurdenInterviewGrade"
+        "404":
+          description: ZaritBurdenInterviewGrade not found
+    delete:
+      summary: Soft-delete a ZaritBurdenInterviewGrade
+      operationId: deleteZaritBurdenInterviewGrade
+      responses:
+        "204":
+          description: ZaritBurdenInterviewGrade deleted
+        "404":
+          description: ZaritBurdenInterviewGrade not found
+components:
+  schemas:
+    ZaritBurdenInterviewGrade:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was most recently updated.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was soft-deleted.
+        zarit_burden_interview_id:
+          type: string
+          format: uuid
+          description: Foreign key to the parent assessment (unique, 1:1).
+        total_score:
+          type: integer
+          format: int32
+          description: "Summed rating over the active item set: 0-88 for zbi22, 0-48 for zbi12."
+        max_score:
+          type: integer
+          format: int32
+          description: "Maximum attainable score for the active item set: 88 for zbi22, 48 for zbi12."
+        burden_band:
+          type: string
+          enum:
+            - little-or-none
+            - mild-to-moderate
+            - moderate-to-severe
+            - severe
+            - lower
+            - high
+            - ""
+          description: "Derived burden band: little-or-none, mild-to-moderate, moderate-to-severe, or severe (zbi22); lower or high (zbi12)."
+        short_form_score:
+          type: integer
+          format: int32
+          description: Summed rating over the 12-item short-form subset (items 1,2,3,6,9,10,11,12,17,20,21,22); 0-48 when complete, or NULL when not computed.
+        graded_at:
+          type: string
+          format: date-time
+          description: Timestamp when the engine last computed the grade.
+      required:
+        - created_at
+        - updated_at
+        - zarit_burden_interview_id
+        - burden_band
+        - graded_at
+      description: "Computed Zarit Burden Interview grading result: total over the active item set, maximum score, derived burden band, and 12-item short-form subtotal."

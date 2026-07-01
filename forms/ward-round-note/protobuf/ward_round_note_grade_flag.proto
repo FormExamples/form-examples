@@ -1,0 +1,37 @@
+// Generated from sql/. Do not edit by hand.
+// SOURCE: ward_round_note_grade_flag
+
+syntax = "proto3";
+
+package form_examples.ward_round_note;
+
+enum WardRoundNoteGradeFlagCategoryEnum {
+  CATEGORY_UNSPECIFIED = 0;
+  CATEGORY_DETERIORATING_NEWS2_ESCALATION = 1;  // deteriorating-news2-escalation
+  CATEGORY_VTE_NOT_DONE = 2;  // vte-not-done
+  CATEGORY_NO_PLAN_JOBS = 3;  // no-plan-jobs
+  CATEGORY_ABNORMAL_RESULTS_NOT_ACTIONED = 4;  // abnormal-results-not-actioned
+  CATEGORY_NO_SENIOR_REVIEW = 5;  // no-senior-review
+  CATEGORY_INCOMPLETE_ENTRY = 6;  // incomplete-entry
+  CATEGORY_OTHER = 7;  // other
+}
+
+enum WardRoundNoteGradeFlagPriorityEnum {
+  PRIORITY_UNSPECIFIED = 0;
+  PRIORITY_LOW = 1;  // low
+  PRIORITY_MEDIUM = 2;  // medium
+  PRIORITY_HIGH = 3;  // high
+}
+
+message WardRoundNoteGradeFlag {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string ward_round_note_grade_id = 5;  // UUID — uuid
+  string flag_id = 6;  // VARCHAR(50) — max 50 chars
+  WardRoundNoteGradeFlagCategoryEnum category = 7;  // VARCHAR(50)
+  WardRoundNoteGradeFlagPriorityEnum priority = 8;  // VARCHAR(10)
+  string description = 9;  // VARCHAR(500) — max 500 chars
+  string suggested_action = 10;  // VARCHAR(500) — max 500 chars
+}

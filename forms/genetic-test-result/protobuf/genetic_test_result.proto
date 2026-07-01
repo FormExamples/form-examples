@@ -1,0 +1,88 @@
+// Generated from sql/. Do not edit by hand.
+// SOURCE: genetic_test_result
+
+syntax = "proto3";
+
+package form_examples.genetic_test_result;
+
+enum GeneticTestResultReportStatusEnum {
+  REPORTSTATUS_UNSPECIFIED = 0;
+  REPORTSTATUS_PRELIMINARY = 1;  // preliminary
+  REPORTSTATUS_FINAL = 2;  // final
+  REPORTSTATUS_AMENDED = 3;  // amended
+  REPORTSTATUS_CANCELLED = 4;  // cancelled
+}
+
+enum GeneticTestResultTestTypeEnum {
+  TESTTYPE_UNSPECIFIED = 0;
+  TESTTYPE_DIAGNOSTIC_SINGLE_GENE = 1;  // diagnostic-single-gene
+  TESTTYPE_GENE_PANEL = 2;  // gene-panel
+  TESTTYPE_WHOLE_EXOME = 3;  // whole-exome
+  TESTTYPE_WHOLE_GENOME = 4;  // whole-genome
+  TESTTYPE_CHROMOSOMAL_MICROARRAY = 5;  // chromosomal-microarray
+  TESTTYPE_KARYOTYPE = 6;  // karyotype
+  TESTTYPE_PREDICTIVE_PRESYMPTOMATIC = 7;  // predictive-presymptomatic
+  TESTTYPE_CARRIER_TESTING = 8;  // carrier-testing
+  TESTTYPE_PHARMACOGENOMIC = 9;  // pharmacogenomic
+  TESTTYPE_PRENATAL = 10;  // prenatal
+  TESTTYPE_OTHER = 11;  // other
+}
+
+enum GeneticTestResultSampleTypeEnum {
+  SAMPLETYPE_UNSPECIFIED = 0;
+  SAMPLETYPE_BLOOD = 1;  // blood
+  SAMPLETYPE_SALIVA = 2;  // saliva
+  SAMPLETYPE_TISSUE = 3;  // tissue
+  SAMPLETYPE_PRENATAL = 4;  // prenatal
+}
+
+enum GeneticTestResultVariantClassificationEnum {
+  VARIANTCLASSIFICATION_UNSPECIFIED = 0;
+  VARIANTCLASSIFICATION_PATHOGENIC = 1;  // pathogenic
+  VARIANTCLASSIFICATION_LIKELY_PATHOGENIC = 2;  // likely-pathogenic
+  VARIANTCLASSIFICATION_VARIANT_UNCERTAIN_SIGNIFICANCE = 3;  // variant-uncertain-significance
+  VARIANTCLASSIFICATION_LIKELY_BENIGN = 4;  // likely-benign
+  VARIANTCLASSIFICATION_BENIGN = 5;  // benign
+  VARIANTCLASSIFICATION_NO_VARIANT_DETECTED = 6;  // no-variant-detected
+}
+
+enum GeneticTestResultZygosityEnum {
+  ZYGOSITY_UNSPECIFIED = 0;
+  ZYGOSITY_HETEROZYGOUS = 1;  // heterozygous
+  ZYGOSITY_HOMOZYGOUS = 2;  // homozygous
+  ZYGOSITY_HEMIZYGOUS = 3;  // hemizygous
+  ZYGOSITY_NOT_APPLICABLE = 4;  // not-applicable
+}
+
+message GeneticTestResult {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string patient_id = 5;  // UUID — uuid
+  string clinician_id = 6;  // UUID — uuid
+  string originating_request_reference = 7;  // VARCHAR(255) — max 255 chars
+  GeneticTestResultReportStatusEnum report_status = 8;  // VARCHAR(15)
+  string performed_date = 9;  // DATE — iso 8601 date
+  string reported_date = 10;  // DATE — iso 8601 date
+  GeneticTestResultTestTypeEnum test_type = 11;  // VARCHAR(30)
+  string genes_tested = 12;  // TEXT
+  GeneticTestResultSampleTypeEnum sample_type = 13;  // VARCHAR(15)
+  string clinical_history = 14;  // VARCHAR(1000) — max 1000 chars
+  string inheritance_pattern = 15;  // VARCHAR(500) — max 500 chars
+  string variants_detected = 16;  // VARCHAR(2000) — max 2000 chars
+  GeneticTestResultVariantClassificationEnum variant_classification = 17;  // VARCHAR(30)
+  GeneticTestResultZygosityEnum zygosity = 18;  // VARCHAR(15)
+  bool pathogenic_variant_found = 19;  // BOOLEAN
+  bool vus_found = 20;  // BOOLEAN
+  bool carrier_status_positive = 21;  // BOOLEAN
+  bool secondary_finding = 22;  // BOOLEAN
+  bool no_clinically_significant_variant = 23;  // BOOLEAN
+  string interpretation = 24;  // VARCHAR(2000) — max 2000 chars
+  string impression = 25;  // VARCHAR(2000) — max 2000 chars
+  string reporting_category = 26;  // VARCHAR(50) — max 50 chars
+  bool recommended_cascade_testing = 27;  // BOOLEAN
+  string recommended_follow_up = 28;  // VARCHAR(1000) — max 1000 chars
+  bool critical_result_communicated = 29;  // BOOLEAN
+  string reported_to = 30;  // VARCHAR(500) — max 500 chars
+}

@@ -1,0 +1,94 @@
+// Generated from sql/. Do not edit by hand.
+// SOURCE: parkland_formula_for_burns
+
+syntax = "proto3";
+
+package form_examples.parkland_formula_for_burns;
+
+enum ParklandFormulaForBurnsClinicianRoleEnum {
+  CLINICIANROLE_UNSPECIFIED = 0;
+  CLINICIANROLE_DOCTOR = 1;  // doctor
+  CLINICIANROLE_NURSE = 2;  // nurse
+  CLINICIANROLE_PARAMEDIC = 3;  // paramedic
+  CLINICIANROLE_OTHER = 4;  // other
+}
+
+enum ParklandFormulaForBurnsCareSettingEnum {
+  CARESETTING_UNSPECIFIED = 0;
+  CARESETTING_EMERGENCY_DEPARTMENT = 1;  // emergency-department
+  CARESETTING_BURNS_UNIT = 2;  // burns-unit
+  CARESETTING_INTENSIVE_CARE = 3;  // intensive-care
+  CARESETTING_RETRIEVAL = 4;  // retrieval
+  CARESETTING_OTHER = 5;  // other
+}
+
+enum ParklandFormulaForBurnsAgeBandEnum {
+  AGEBAND_UNSPECIFIED = 0;
+  AGEBAND_ADULT = 1;  // adult
+  AGEBAND_CHILD = 2;  // child
+}
+
+enum ParklandFormulaForBurnsSexEnum {
+  SEX_UNSPECIFIED = 0;
+  SEX_FEMALE = 1;  // female
+  SEX_MALE = 2;  // male
+  SEX_INTERSEX = 3;  // intersex
+  SEX_UNKNOWN = 4;  // unknown
+}
+
+enum ParklandFormulaForBurnsTbsaMethodEnum {
+  TBSAMETHOD_UNSPECIFIED = 0;
+  TBSAMETHOD_RULE_OF_NINES = 1;  // rule-of-nines
+  TBSAMETHOD_LUND_BROWDER = 2;  // lund-browder
+  TBSAMETHOD_OTHER = 3;  // other
+}
+
+enum ParklandFormulaForBurnsInjuryTimeKnownEnum {
+  INJURYTIMEKNOWN_UNSPECIFIED = 0;
+  INJURYTIMEKNOWN_KNOWN = 1;  // known
+  INJURYTIMEKNOWN_ESTIMATED = 2;  // estimated
+}
+
+enum ParklandFormulaForBurnsInhalationSuspectedEnum {
+  INHALATIONSUSPECTED_UNSPECIFIED = 0;
+  INHALATIONSUSPECTED_YES = 1;  // yes
+  INHALATIONSUSPECTED_NO = 2;  // no
+}
+
+enum ParklandFormulaForBurnsCircumferentialOrDeepEnum {
+  CIRCUMFERENTIALORDEEP_UNSPECIFIED = 0;
+  CIRCUMFERENTIALORDEEP_YES = 1;  // yes
+  CIRCUMFERENTIALORDEEP_NO = 2;  // no
+}
+
+enum ParklandFormulaForBurnsMechanismEnum {
+  MECHANISM_UNSPECIFIED = 0;
+  MECHANISM_THERMAL = 1;  // thermal
+  MECHANISM_ELECTRICAL = 2;  // electrical
+  MECHANISM_CHEMICAL = 3;  // chemical
+  MECHANISM_OTHER = 4;  // other
+}
+
+message ParklandFormulaForBurns {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string patient_id = 5;  // UUID — uuid
+  string clinician_id = 6;  // UUID — uuid
+  string clinician_name = 7;  // VARCHAR(255) — max 255 chars
+  ParklandFormulaForBurnsClinicianRoleEnum clinician_role = 8;  // VARCHAR(20)
+  ParklandFormulaForBurnsCareSettingEnum care_setting = 9;  // VARCHAR(30)
+  string assessed_at = 10;  // TIMESTAMPTZ — iso 8601
+  string patient_identifier = 11;  // VARCHAR(100) — max 100 chars
+  ParklandFormulaForBurnsAgeBandEnum age_band = 12;  // VARCHAR(10)
+  ParklandFormulaForBurnsSexEnum sex = 13;  // VARCHAR(20)
+  double weight_kg = 14;  // NUMERIC(5,1) — numeric(5,1)
+  double tbsa_percent = 15;  // NUMERIC(5,2) — numeric(5,2)
+  ParklandFormulaForBurnsTbsaMethodEnum tbsa_method = 16;  // VARCHAR(20)
+  string injury_at = 17;  // TIMESTAMPTZ — iso 8601
+  ParklandFormulaForBurnsInjuryTimeKnownEnum injury_time_known = 18;  // VARCHAR(10)
+  ParklandFormulaForBurnsInhalationSuspectedEnum inhalation_suspected = 19;  // VARCHAR(5)
+  ParklandFormulaForBurnsCircumferentialOrDeepEnum circumferential_or_deep = 20;  // VARCHAR(5)
+  ParklandFormulaForBurnsMechanismEnum mechanism = 21;  // VARCHAR(15)
+}

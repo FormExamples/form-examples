@@ -1,0 +1,41 @@
+// Generated from sql/. Do not edit by hand.
+// SOURCE: grace_score_for_acute_coronary_syndrome_grade
+
+syntax = "proto3";
+
+package form_examples.grace_score_for_acute_coronary_syndrome;
+
+enum GraceScoreForAcuteCoronarySyndromeGradeInHospitalRiskBandEnum {
+  INHOSPITALRISKBAND_UNSPECIFIED = 0;
+  INHOSPITALRISKBAND_LOW = 1;  // low
+  INHOSPITALRISKBAND_INTERMEDIATE = 2;  // intermediate
+  INHOSPITALRISKBAND_HIGH = 3;  // high
+}
+
+enum GraceScoreForAcuteCoronarySyndromeGradeSixMonthRiskBandEnum {
+  SIXMONTHRISKBAND_UNSPECIFIED = 0;
+  SIXMONTHRISKBAND_LOW = 1;  // low
+  SIXMONTHRISKBAND_INTERMEDIATE = 2;  // intermediate
+  SIXMONTHRISKBAND_HIGH = 3;  // high
+}
+
+enum GraceScoreForAcuteCoronarySyndromeGradeOverallBandEnum {
+  OVERALLBAND_UNSPECIFIED = 0;
+  OVERALLBAND_LOW = 1;  // low
+  OVERALLBAND_INTERMEDIATE = 2;  // intermediate
+  OVERALLBAND_HIGH = 3;  // high
+}
+
+message GraceScoreForAcuteCoronarySyndromeGrade {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string grace_score_for_acute_coronary_syndrome_id = 5;  // UUID — uuid
+  int32 grace_score = 6;  // INT
+  GraceScoreForAcuteCoronarySyndromeGradeInHospitalRiskBandEnum in_hospital_risk_band = 7;  // VARCHAR(15)
+  GraceScoreForAcuteCoronarySyndromeGradeSixMonthRiskBandEnum six_month_risk_band = 8;  // VARCHAR(15)
+  GraceScoreForAcuteCoronarySyndromeGradeOverallBandEnum overall_band = 9;  // VARCHAR(15)
+  string invasive_strategy = 10;  // TEXT
+  string graded_at = 11;  // TIMESTAMPTZ — iso 8601
+}

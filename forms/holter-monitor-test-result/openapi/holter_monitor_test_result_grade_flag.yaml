@@ -1,0 +1,171 @@
+# Generated from sql/. Do not edit by hand.
+# SOURCE: holter_monitor_test_result_grade_flag
+openapi: 3.1.0
+info:
+  title: Holter Monitor Test Result — HolterMonitorTestResultGradeFlag
+  version: 1.0.0
+  description: Safety-critical flags that fire independently of the four axes, with priority and a suggested action for the reporting / referring team.
+paths:
+  /holter-monitor-test-result-grade-flags:
+    get:
+      summary: List HolterMonitorTestResultGradeFlag records
+      operationId: listHolterMonitorTestResultGradeFlag
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of HolterMonitorTestResultGradeFlag records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/HolterMonitorTestResultGradeFlag"
+    post:
+      summary: Create a new HolterMonitorTestResultGradeFlag
+      operationId: createHolterMonitorTestResultGradeFlag
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/HolterMonitorTestResultGradeFlag"
+      responses:
+        "201":
+          description: The newly created HolterMonitorTestResultGradeFlag
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/HolterMonitorTestResultGradeFlag"
+        "400":
+          description: Validation error
+  /holter-monitor-test-result-grade-flags/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one HolterMonitorTestResultGradeFlag by id
+      operationId: getHolterMonitorTestResultGradeFlag
+      responses:
+        "200":
+          description: The requested HolterMonitorTestResultGradeFlag
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/HolterMonitorTestResultGradeFlag"
+        "404":
+          description: HolterMonitorTestResultGradeFlag not found
+    patch:
+      summary: Update an existing HolterMonitorTestResultGradeFlag
+      operationId: updateHolterMonitorTestResultGradeFlag
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/HolterMonitorTestResultGradeFlag"
+      responses:
+        "200":
+          description: The updated HolterMonitorTestResultGradeFlag
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/HolterMonitorTestResultGradeFlag"
+        "404":
+          description: HolterMonitorTestResultGradeFlag not found
+    delete:
+      summary: Soft-delete a HolterMonitorTestResultGradeFlag
+      operationId: deleteHolterMonitorTestResultGradeFlag
+      responses:
+        "204":
+          description: HolterMonitorTestResultGradeFlag deleted
+        "404":
+          description: HolterMonitorTestResultGradeFlag not found
+components:
+  schemas:
+    HolterMonitorTestResultGradeFlag:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was updated most-recently.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was deleted a.k.a. soft-removed.
+        holter_monitor_test_result_grade_id:
+          type: string
+          format: uuid
+          description: Foreign key to the parent grade.
+        flag_id:
+          type: string
+          maxLength: 50
+          description: Stable flag identifier (e.g. F-CRITICAL-RESULT-001).
+        category:
+          type: string
+          enum:
+            - critical-result-alert
+            - incidental-finding
+            - discrepancy-with-request
+            - abnormal-requiring-action
+            - urgent-referral
+            - inadequate-recording
+            - unexpected-finding
+            - missing-impression
+            - missing-measurement
+            - other
+            - ""
+          description: Flag category.
+        priority:
+          type: string
+          enum:
+            - low
+            - medium
+            - high
+            - ""
+          description: "Priority: low, medium, high."
+        description:
+          type: string
+          maxLength: 500
+          description: Human-readable description of what fired the flag.
+        suggested_action:
+          type: string
+          maxLength: 500
+          description: "Suggested clinical action (e.g. \"communicate critical result to referrer and document\")."
+      required:
+        - created_at
+        - updated_at
+        - holter_monitor_test_result_grade_id
+        - flag_id
+        - category
+        - priority
+        - description
+        - suggested_action
+      description: Safety-critical flags that fire independently of the four axes, with priority and a suggested action for the reporting / referring team.

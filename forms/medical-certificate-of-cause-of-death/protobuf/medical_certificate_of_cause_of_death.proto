@@ -1,0 +1,102 @@
+// Generated from sql/. Do not edit by hand.
+// SOURCE: medical_certificate_of_cause_of_death
+
+syntax = "proto3";
+
+package form_examples.medical_certificate_of_cause_of_death;
+
+enum MedicalCertificateOfCauseOfDeathCertifyingDoctorGradeEnum {
+  CERTIFYINGDOCTORGRADE_UNSPECIFIED = 0;
+  CERTIFYINGDOCTORGRADE_CONSULTANT = 1;  // consultant
+  CERTIFYINGDOCTORGRADE_SAS = 2;  // sas
+  CERTIFYINGDOCTORGRADE_REGISTRAR = 3;  // registrar
+  CERTIFYINGDOCTORGRADE_FOUNDATION = 4;  // foundation
+  CERTIFYINGDOCTORGRADE_GP = 5;  // gp
+  CERTIFYINGDOCTORGRADE_OTHER = 6;  // other
+}
+
+enum MedicalCertificateOfCauseOfDeathAttendedDeceasedEnum {
+  ATTENDEDDECEASED_UNSPECIFIED = 0;
+  ATTENDEDDECEASED_YES = 1;  // yes
+  ATTENDEDDECEASED_NO = 2;  // no
+}
+
+enum MedicalCertificateOfCauseOfDeathSexEnum {
+  SEX_UNSPECIFIED = 0;
+  SEX_FEMALE = 1;  // female
+  SEX_MALE = 2;  // male
+  SEX_OTHER = 3;  // other
+  SEX_UNKNOWN = 4;  // unknown
+}
+
+enum MedicalCertificateOfCauseOfDeathSeenAfterDeathByEnum {
+  SEENAFTERDEATHBY_UNSPECIFIED = 0;
+  SEENAFTERDEATHBY_CERTIFIER = 1;  // certifier
+  SEENAFTERDEATHBY_ANOTHER_PRACTITIONER = 2;  // another-practitioner
+  SEENAFTERDEATHBY_NOT_SEEN = 3;  // not-seen
+}
+
+enum MedicalCertificateOfCauseOfDeathReferredToCoronerEnum {
+  REFERREDTOCORONER_UNSPECIFIED = 0;
+  REFERREDTOCORONER_YES = 1;  // yes
+  REFERREDTOCORONER_NO = 2;  // no
+}
+
+enum MedicalCertificateOfCauseOfDeathCoronerReasonEnum {
+  CORONERREASON_UNSPECIFIED = 0;
+  CORONERREASON_UNNATURAL = 1;  // unnatural
+  CORONERREASON_VIOLENT = 2;  // violent
+  CORONERREASON_SUSPICIOUS = 3;  // suspicious
+  CORONERREASON_UNKNOWN_CAUSE = 4;  // unknown-cause
+  CORONERREASON_INDUSTRIAL_DISEASE = 5;  // industrial-disease
+  CORONERREASON_MEDICAL_PROCEDURE = 6;  // medical-procedure
+  CORONERREASON_CUSTODY = 7;  // custody
+  CORONERREASON_NO_ATTENDING_PRACTITIONER = 8;  // no-attending-practitioner
+  CORONERREASON_OTHER = 9;  // other
+  CORONERREASON_NONE = 10;  // none
+}
+
+enum MedicalCertificateOfCauseOfDeathMedicalExaminerStatusEnum {
+  MEDICALEXAMINERSTATUS_UNSPECIFIED = 0;
+  MEDICALEXAMINERSTATUS_SCRUTINISED = 1;  // scrutinised
+  MEDICALEXAMINERSTATUS_DISCUSSED = 2;  // discussed
+  MEDICALEXAMINERSTATUS_PENDING = 3;  // pending
+  MEDICALEXAMINERSTATUS_NOT_REQUIRED = 4;  // not-required
+}
+
+message MedicalCertificateOfCauseOfDeath {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string patient_id = 5;  // UUID — uuid
+  string clinician_id = 6;  // UUID — uuid
+  string certifying_doctor_name = 7;  // TEXT
+  MedicalCertificateOfCauseOfDeathCertifyingDoctorGradeEnum certifying_doctor_grade = 8;  // VARCHAR(20)
+  string gmc_reference = 9;  // VARCHAR(50) — max 50 chars
+  string place_of_certification = 10;  // TEXT
+  string certification_date = 11;  // DATE — iso 8601 date
+  MedicalCertificateOfCauseOfDeathAttendedDeceasedEnum attended_deceased = 12;  // VARCHAR(5)
+  string last_seen_alive_date = 13;  // DATE — iso 8601 date
+  string deceased_name = 14;  // TEXT
+  MedicalCertificateOfCauseOfDeathSexEnum sex = 15;  // VARCHAR(20)
+  string date_of_birth = 16;  // DATE — iso 8601 date
+  int32 age_years = 17;  // INTEGER
+  string patient_identifier = 18;  // VARCHAR(100) — max 100 chars
+  string date_of_death = 19;  // DATE — iso 8601 date
+  string time_of_death = 20;  // TIME — iso 8601 time
+  string place_of_death = 21;  // TEXT
+  MedicalCertificateOfCauseOfDeathSeenAfterDeathByEnum seen_after_death_by = 22;  // VARCHAR(25)
+  string cause_ia_condition = 23;  // TEXT
+  string cause_ia_interval = 24;  // TEXT
+  string cause_ib_condition = 25;  // TEXT
+  string cause_ib_interval = 26;  // TEXT
+  string cause_ic_condition = 27;  // TEXT
+  string cause_ic_interval = 28;  // TEXT
+  string part_ii_conditions = 29;  // TEXT
+  string part_ii_interval = 30;  // TEXT
+  MedicalCertificateOfCauseOfDeathReferredToCoronerEnum referred_to_coroner = 31;  // VARCHAR(5)
+  MedicalCertificateOfCauseOfDeathCoronerReasonEnum coroner_reason = 32;  // VARCHAR(30)
+  MedicalCertificateOfCauseOfDeathMedicalExaminerStatusEnum medical_examiner_status = 33;  // VARCHAR(20)
+  string certifier_note = 34;  // TEXT
+}

@@ -1,0 +1,55 @@
+// Generated from sql/. Do not edit by hand.
+// SOURCE: chronic_kidney_disease_review_grade
+
+syntax = "proto3";
+
+package form_examples.chronic_kidney_disease_review;
+
+enum ChronicKidneyDiseaseReviewGradeGfrCategoryEnum {
+  GFRCATEGORY_UNSPECIFIED = 0;
+  GFRCATEGORY_G1 = 1;  // G1
+  GFRCATEGORY_G2 = 2;  // G2
+  GFRCATEGORY_G3A = 3;  // G3a
+  GFRCATEGORY_G3B = 4;  // G3b
+  GFRCATEGORY_G4 = 5;  // G4
+  GFRCATEGORY_G5 = 6;  // G5
+}
+
+enum ChronicKidneyDiseaseReviewGradeAlbuminuriaCategoryEnum {
+  ALBUMINURIACATEGORY_UNSPECIFIED = 0;
+  ALBUMINURIACATEGORY_A1 = 1;  // A1
+  ALBUMINURIACATEGORY_A2 = 2;  // A2
+  ALBUMINURIACATEGORY_A3 = 3;  // A3
+}
+
+enum ChronicKidneyDiseaseReviewGradeKdigoRiskZoneEnum {
+  KDIGORISKZONE_UNSPECIFIED = 0;
+  KDIGORISKZONE_LOW = 1;  // low
+  KDIGORISKZONE_MODERATE = 2;  // moderate
+  KDIGORISKZONE_HIGH = 3;  // high
+  KDIGORISKZONE_VERY_HIGH = 4;  // very-high
+}
+
+enum ChronicKidneyDiseaseReviewGradeReviewStatusEnum {
+  REVIEWSTATUS_UNSPECIFIED = 0;
+  REVIEWSTATUS_COMPLETE = 1;  // complete
+  REVIEWSTATUS_PARTIAL = 2;  // partial
+  REVIEWSTATUS_INCOMPLETE = 3;  // incomplete
+}
+
+message ChronicKidneyDiseaseReviewGrade {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string chronic_kidney_disease_review_id = 5;  // UUID — uuid
+  ChronicKidneyDiseaseReviewGradeGfrCategoryEnum gfr_category = 6;  // VARCHAR(5)
+  ChronicKidneyDiseaseReviewGradeAlbuminuriaCategoryEnum albuminuria_category = 7;  // VARCHAR(5)
+  ChronicKidneyDiseaseReviewGradeKdigoRiskZoneEnum kdigo_risk_zone = 8;  // VARCHAR(15)
+  ChronicKidneyDiseaseReviewGradeReviewStatusEnum review_status = 9;  // VARCHAR(15)
+  int32 blood_pressure_target_systolic = 10;  // INTEGER
+  int32 blood_pressure_target_diastolic = 11;  // INTEGER
+  bool blood_pressure_at_target = 12;  // BOOLEAN
+  int32 completeness_score = 13;  // INTEGER
+  string graded_at = 14;  // TIMESTAMPTZ — iso 8601
+}

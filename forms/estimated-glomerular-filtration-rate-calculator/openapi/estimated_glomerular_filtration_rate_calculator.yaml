@@ -1,0 +1,208 @@
+# Generated from sql/. Do not edit by hand.
+# SOURCE: estimated_glomerular_filtration_rate_calculator
+openapi: 3.1.0
+info:
+  title: Estimated Glomerular Filtration Rate Calculator — EstimatedGlomerularFiltrationRateCalculator
+  version: 1.0.0
+  description: "Main eGFR calculation record: context and identification, plus the serum creatinine, age, sex, specimen date, and steady-state inputs and the chosen estimating equation."
+paths:
+  /estimated-glomerular-filtration-rate-calculators:
+    get:
+      summary: List EstimatedGlomerularFiltrationRateCalculator records
+      operationId: listEstimatedGlomerularFiltrationRateCalculator
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of EstimatedGlomerularFiltrationRateCalculator records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/EstimatedGlomerularFiltrationRateCalculator"
+    post:
+      summary: Create a new EstimatedGlomerularFiltrationRateCalculator
+      operationId: createEstimatedGlomerularFiltrationRateCalculator
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/EstimatedGlomerularFiltrationRateCalculator"
+      responses:
+        "201":
+          description: The newly created EstimatedGlomerularFiltrationRateCalculator
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/EstimatedGlomerularFiltrationRateCalculator"
+        "400":
+          description: Validation error
+  /estimated-glomerular-filtration-rate-calculators/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one EstimatedGlomerularFiltrationRateCalculator by id
+      operationId: getEstimatedGlomerularFiltrationRateCalculator
+      responses:
+        "200":
+          description: The requested EstimatedGlomerularFiltrationRateCalculator
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/EstimatedGlomerularFiltrationRateCalculator"
+        "404":
+          description: EstimatedGlomerularFiltrationRateCalculator not found
+    patch:
+      summary: Update an existing EstimatedGlomerularFiltrationRateCalculator
+      operationId: updateEstimatedGlomerularFiltrationRateCalculator
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/EstimatedGlomerularFiltrationRateCalculator"
+      responses:
+        "200":
+          description: The updated EstimatedGlomerularFiltrationRateCalculator
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/EstimatedGlomerularFiltrationRateCalculator"
+        "404":
+          description: EstimatedGlomerularFiltrationRateCalculator not found
+    delete:
+      summary: Soft-delete a EstimatedGlomerularFiltrationRateCalculator
+      operationId: deleteEstimatedGlomerularFiltrationRateCalculator
+      responses:
+        "204":
+          description: EstimatedGlomerularFiltrationRateCalculator deleted
+        "404":
+          description: EstimatedGlomerularFiltrationRateCalculator not found
+components:
+  schemas:
+    EstimatedGlomerularFiltrationRateCalculator:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was most recently updated.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was soft-deleted.
+        patient_id:
+          type: string
+          format: uuid
+          description: Foreign key to the patient this calculation is for (restricted delete).
+        clinician_id:
+          type: string
+          format: uuid
+          description: Foreign key to the clinician who recorded the calculation (optional, restricted delete).
+        clinician_name:
+          type: string
+          maxLength: 255
+          description: Requesting or interpreting clinician name as recorded on the form.
+        clinician_role:
+          type: string
+          enum:
+            - doctor
+            - nurse
+            - pharmacist
+            - laboratory
+            - other
+            - ""
+          description: "Clinician role: doctor, nurse, pharmacist, laboratory, or other."
+        assessed_at:
+          type: string
+          format: date-time
+          description: Date and time the calculation was assessed.
+        care_setting:
+          type: string
+          enum:
+            - primary-care
+            - secondary-care
+            - laboratory
+            - pharmacy
+            - other
+            - ""
+          description: "Care setting: primary-care, secondary-care, laboratory, pharmacy, or other."
+        equation:
+          type: string
+          enum:
+            - ckd-epi-2021-creatinine
+            - ckd-epi-2021-cystatin-c
+            - mdrd
+            - ""
+          description: "Estimating equation: ckd-epi-2021-creatinine (default), ckd-epi-2021-cystatin-c, or mdrd. The engine computes the CKD-EPI 2021 creatinine equation; the others are named for context."
+        patient_identifier:
+          type: string
+          maxLength: 100
+          description: Local patient identifier as recorded on the form.
+        serum_creatinine_umol_l:
+          type: number
+          format: double
+          description: Standardised (IDMS-traceable) serum creatinine in micromoles per litre (null when unanswered).
+        age_years:
+          type: integer
+          format: int32
+          description: Patient age in whole years (null when unanswered).
+        sex:
+          type: string
+          enum:
+            - female
+            - male
+            - ""
+          description: "Patient sex driving the equation parameters (kappa, alpha, female multiplier): female or male."
+        specimen_date:
+          type: string
+          format: date
+          description: Date the serum creatinine specimen was taken (null when unanswered).
+        steady_state:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: "Whether renal function is at steady state: yes or no."
+      required:
+        - created_at
+        - updated_at
+        - patient_id
+        - clinician_name
+        - clinician_role
+        - care_setting
+        - equation
+        - patient_identifier
+        - sex
+        - steady_state
+      description: "Main eGFR calculation record: context and identification, plus the serum creatinine, age, sex, specimen date, and steady-state inputs and the chosen estimating equation."

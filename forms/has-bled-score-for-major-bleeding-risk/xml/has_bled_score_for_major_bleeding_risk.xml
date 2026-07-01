@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE has_bled_score_for_major_bleeding_risk SYSTEM "has_bled_score_for_major_bleeding_risk.dtd">
+<has_bled_score_for_major_bleeding_risk>
+<id>770e8400-e29b-41d4-a716-446655440002</id>
+<created_at>2026-04-09T10:00:00Z</created_at>
+<updated_at>2026-04-09T10:00:00Z</updated_at>
+<deleted_at>2026-04-09T10:00:00Z</deleted_at>
+<patient_id>550e8400-e29b-41d4-a716-446655440000</patient_id>
+<clinician_id>660e8400-e29b-41d4-a716-446655440001</clinician_id>
+<clinician_name>Example</clinician_name>
+<clinician_role>doctor</clinician_role>
+<assessed_at>2026-04-09T10:00:00Z</assessed_at>
+<care_setting>cardiology</care_setting>
+<anticoagulation_status>on</anticoagulation_status>
+<cha_ds_vasc_score>5</cha_ds_vasc_score>
+<patient_identifier></patient_identifier>
+<age_years>45</age_years>
+<sex>female</sex>
+<hypertension_uncontrolled>yes</hypertension_uncontrolled>
+<abnormal_renal_function>yes</abnormal_renal_function>
+<abnormal_liver_function>yes</abnormal_liver_function>
+<stroke_history>yes</stroke_history>
+<bleeding_history>yes</bleeding_history>
+<labile_inr>yes</labile_inr>
+</has_bled_score_for_major_bleeding_risk>

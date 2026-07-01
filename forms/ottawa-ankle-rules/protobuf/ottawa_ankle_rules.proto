@@ -1,0 +1,117 @@
+// Generated from sql/. Do not edit by hand.
+// SOURCE: ottawa_ankle_rules
+
+syntax = "proto3";
+
+package form_examples.ottawa_ankle_rules;
+
+enum OttawaAnkleRulesStatusEnum {
+  STATUS_UNSPECIFIED = 0;
+  STATUS_DRAFT = 1;  // draft
+  STATUS_SUBMITTED = 2;  // submitted
+  STATUS_AMENDED = 3;  // amended
+  STATUS_SIGNED = 4;  // signed
+}
+
+enum OttawaAnkleRulesCareSettingEnum {
+  CARESETTING_UNSPECIFIED = 0;
+  CARESETTING_EMERGENCY_DEPARTMENT = 1;  // emergency-department
+  CARESETTING_MINOR_INJURY_UNIT = 2;  // minor-injury-unit
+  CARESETTING_URGENT_CARE = 3;  // urgent-care
+  CARESETTING_OTHER = 4;  // other
+}
+
+enum OttawaAnkleRulesInjuredSideEnum {
+  INJUREDSIDE_UNSPECIFIED = 0;
+  INJUREDSIDE_LEFT = 1;  // left
+  INJUREDSIDE_RIGHT = 2;  // right
+}
+
+enum OttawaAnkleRulesSexEnum {
+  SEX_UNSPECIFIED = 0;
+  SEX_FEMALE = 1;  // female
+  SEX_MALE = 2;  // male
+  SEX_INTERSEX = 3;  // intersex
+  SEX_UNKNOWN = 4;  // unknown
+}
+
+enum OttawaAnkleRulesAssessmentReliableEnum {
+  ASSESSMENTRELIABLE_UNSPECIFIED = 0;
+  ASSESSMENTRELIABLE_YES = 1;  // yes
+  ASSESSMENTRELIABLE_NO = 2;  // no
+}
+
+enum OttawaAnkleRulesMalleolarZonePainEnum {
+  MALLEOLARZONEPAIN_UNSPECIFIED = 0;
+  MALLEOLARZONEPAIN_YES = 1;  // yes
+  MALLEOLARZONEPAIN_NO = 2;  // no
+}
+
+enum OttawaAnkleRulesLateralMalleolusTendernessEnum {
+  LATERALMALLEOLUSTENDERNESS_UNSPECIFIED = 0;
+  LATERALMALLEOLUSTENDERNESS_YES = 1;  // yes
+  LATERALMALLEOLUSTENDERNESS_NO = 2;  // no
+}
+
+enum OttawaAnkleRulesMedialMalleolusTendernessEnum {
+  MEDIALMALLEOLUSTENDERNESS_UNSPECIFIED = 0;
+  MEDIALMALLEOLUSTENDERNESS_YES = 1;  // yes
+  MEDIALMALLEOLUSTENDERNESS_NO = 2;  // no
+}
+
+enum OttawaAnkleRulesMidfootZonePainEnum {
+  MIDFOOTZONEPAIN_UNSPECIFIED = 0;
+  MIDFOOTZONEPAIN_YES = 1;  // yes
+  MIDFOOTZONEPAIN_NO = 2;  // no
+}
+
+enum OttawaAnkleRulesFifthMetatarsalBaseTendernessEnum {
+  FIFTHMETATARSALBASETENDERNESS_UNSPECIFIED = 0;
+  FIFTHMETATARSALBASETENDERNESS_YES = 1;  // yes
+  FIFTHMETATARSALBASETENDERNESS_NO = 2;  // no
+}
+
+enum OttawaAnkleRulesNavicularTendernessEnum {
+  NAVICULARTENDERNESS_UNSPECIFIED = 0;
+  NAVICULARTENDERNESS_YES = 1;  // yes
+  NAVICULARTENDERNESS_NO = 2;  // no
+}
+
+enum OttawaAnkleRulesAbleToBearWeightImmediatelyEnum {
+  ABLETOBEARWEIGHTIMMEDIATELY_UNSPECIFIED = 0;
+  ABLETOBEARWEIGHTIMMEDIATELY_YES = 1;  // yes
+  ABLETOBEARWEIGHTIMMEDIATELY_NO = 2;  // no
+}
+
+enum OttawaAnkleRulesAbleToBearWeightNowEnum {
+  ABLETOBEARWEIGHTNOW_UNSPECIFIED = 0;
+  ABLETOBEARWEIGHTNOW_YES = 1;  // yes
+  ABLETOBEARWEIGHTNOW_NO = 2;  // no
+}
+
+message OttawaAnkleRules {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string patient_id = 5;  // UUID — uuid
+  string clinician_id = 6;  // UUID — uuid
+  OttawaAnkleRulesStatusEnum status = 7;  // VARCHAR(20)
+  string patient_identifier = 8;  // VARCHAR(64) — max 64 chars
+  string assessed_at = 9;  // TIMESTAMPTZ — iso 8601
+  OttawaAnkleRulesCareSettingEnum care_setting = 10;  // VARCHAR(30)
+  OttawaAnkleRulesInjuredSideEnum injured_side = 11;  // VARCHAR(10)
+  double hours_since_injury = 12;  // NUMERIC(6,1) — numeric(6,1)
+  int32 age_years = 13;  // INT
+  OttawaAnkleRulesSexEnum sex = 14;  // VARCHAR(20)
+  OttawaAnkleRulesAssessmentReliableEnum assessment_reliable = 15;  // VARCHAR(5)
+  OttawaAnkleRulesMalleolarZonePainEnum malleolar_zone_pain = 16;  // VARCHAR(5)
+  OttawaAnkleRulesLateralMalleolusTendernessEnum lateral_malleolus_tenderness = 17;  // VARCHAR(5)
+  OttawaAnkleRulesMedialMalleolusTendernessEnum medial_malleolus_tenderness = 18;  // VARCHAR(5)
+  OttawaAnkleRulesMidfootZonePainEnum midfoot_zone_pain = 19;  // VARCHAR(5)
+  OttawaAnkleRulesFifthMetatarsalBaseTendernessEnum fifth_metatarsal_base_tenderness = 20;  // VARCHAR(5)
+  OttawaAnkleRulesNavicularTendernessEnum navicular_tenderness = 21;  // VARCHAR(5)
+  OttawaAnkleRulesAbleToBearWeightImmediatelyEnum able_to_bear_weight_immediately = 22;  // VARCHAR(5)
+  OttawaAnkleRulesAbleToBearWeightNowEnum able_to_bear_weight_now = 23;  // VARCHAR(5)
+  string clinical_notes = 24;  // TEXT
+}

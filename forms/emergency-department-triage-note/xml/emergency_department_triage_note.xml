@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE emergency_department_triage_note SYSTEM "emergency_department_triage_note.dtd">
+<emergency_department_triage_note>
+<id>770e8400-e29b-41d4-a716-446655440002</id>
+<created_at>2026-04-09T10:00:00Z</created_at>
+<updated_at>2026-04-09T10:00:00Z</updated_at>
+<deleted_at>2026-04-09T10:00:00Z</deleted_at>
+<patient_id>550e8400-e29b-41d4-a716-446655440000</patient_id>
+<clinician_id>660e8400-e29b-41d4-a716-446655440001</clinician_id>
+<status>draft</status>
+<nurse_name>Example</nurse_name>
+<triaged_at>2026-04-09T10:00:00Z</triaged_at>
+<care_setting>emergency-department</care_setting>
+<arrival_mode>walk-in</arrival_mode>
+<arrived_at>2026-04-09T10:00:00Z</arrived_at>
+<referral_source></referral_source>
+<patient_identifier></patient_identifier>
+<age_band>paediatric</age_band>
+<presenting_complaint></presenting_complaint>
+<brief_history>Example text.</brief_history>
+<symptom_onset>Fatigue</symptom_onset>
+<respiratory_rate>1</respiratory_rate>
+<spo2>1</spo2>
+<on_oxygen>air</on_oxygen>
+<systolic_bp>1</systolic_bp>
+<pulse>1</pulse>
+<consciousness_acvpu>A</consciousness_acvpu>
+<temperature>0.0</temperature>
+<glasgow_coma_scale>1</glasgow_coma_scale>
+<pain_score>5</pain_score>
+<airway_threat>yes</airway_threat>
+<breathing_inadequate>yes</breathing_inadequate>
+<circulation_shock>yes</circulation_shock>
+<haemorrhage_major>yes</haemorrhage_major>
+<consciousness_reduced>yes</consciousness_reduced>
+<seizure_active>yes</seizure_active>
+<focal_neurology>yes</focal_neurology>
+<sepsis_features>yes</sepsis_features>
+<chest_pain_cardiac>yes</chest_pain_cardiac>
+<stroke_features>yes</stroke_features>
+<paediatric_red_flag>yes</paediatric_red_flag>
+<clinical_notes>Example text.</clinical_notes>
+</emergency_department_triage_note>

@@ -1,0 +1,172 @@
+# Generated from sql/. Do not edit by hand.
+# SOURCE: mental_health_act_assessment_grade_flag
+openapi: 3.1.0
+info:
+  title: Mental Health Act Assessment — MentalHealthActAssessmentGradeFlag
+  version: 1.0.0
+  description: Flagged issues that fire independently of the completeness status, with priority and a suggested action for the AMHP, clinician, or governance team.
+paths:
+  /mental-health-act-assessment-grade-flags:
+    get:
+      summary: List MentalHealthActAssessmentGradeFlag records
+      operationId: listMentalHealthActAssessmentGradeFlag
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of MentalHealthActAssessmentGradeFlag records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/MentalHealthActAssessmentGradeFlag"
+    post:
+      summary: Create a new MentalHealthActAssessmentGradeFlag
+      operationId: createMentalHealthActAssessmentGradeFlag
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/MentalHealthActAssessmentGradeFlag"
+      responses:
+        "201":
+          description: The newly created MentalHealthActAssessmentGradeFlag
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/MentalHealthActAssessmentGradeFlag"
+        "400":
+          description: Validation error
+  /mental-health-act-assessment-grade-flags/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one MentalHealthActAssessmentGradeFlag by id
+      operationId: getMentalHealthActAssessmentGradeFlag
+      responses:
+        "200":
+          description: The requested MentalHealthActAssessmentGradeFlag
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/MentalHealthActAssessmentGradeFlag"
+        "404":
+          description: MentalHealthActAssessmentGradeFlag not found
+    patch:
+      summary: Update an existing MentalHealthActAssessmentGradeFlag
+      operationId: updateMentalHealthActAssessmentGradeFlag
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/MentalHealthActAssessmentGradeFlag"
+      responses:
+        "200":
+          description: The updated MentalHealthActAssessmentGradeFlag
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/MentalHealthActAssessmentGradeFlag"
+        "404":
+          description: MentalHealthActAssessmentGradeFlag not found
+    delete:
+      summary: Soft-delete a MentalHealthActAssessmentGradeFlag
+      operationId: deleteMentalHealthActAssessmentGradeFlag
+      responses:
+        "204":
+          description: MentalHealthActAssessmentGradeFlag deleted
+        "404":
+          description: MentalHealthActAssessmentGradeFlag not found
+components:
+  schemas:
+    MentalHealthActAssessmentGradeFlag:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was most recently updated.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was soft-deleted.
+        mental_health_act_assessment_grade_id:
+          type: string
+          format: uuid
+          description: Foreign key to the parent grade.
+        flag_id:
+          type: string
+          maxLength: 50
+          description: Stable flag identifier (e.g. F-CRITERIA-NOT-MET-001).
+        category:
+          type: string
+          enum:
+            - criteria-not-met
+            - missing-second-recommendation
+            - s12-doctor-absent
+            - least-restrictive-concern
+            - appropriate-treatment-unavailable
+            - nearest-relative-not-consulted
+            - time-limit-exceeded
+            - no-prior-acquaintance
+            - no-bed-identified
+            - incomplete
+            - other
+            - ""
+          description: "Flag category: criteria-not-met, missing-second-recommendation, s12-doctor-absent, least-restrictive-concern, appropriate-treatment-unavailable, nearest-relative-not-consulted, time-limit-exceeded, no-prior-acquaintance, no-bed-identified, incomplete, or other."
+        priority:
+          type: string
+          enum:
+            - low
+            - medium
+            - high
+            - ""
+          description: "Priority: low, medium, high."
+        description:
+          type: string
+          maxLength: 500
+          description: Human-readable description of what fired the flag.
+        suggested_action:
+          type: string
+          maxLength: 500
+          description: "Suggested action (e.g. \"obtain a second medical recommendation\", \"document a less restrictive alternative\")."
+      required:
+        - created_at
+        - updated_at
+        - mental_health_act_assessment_grade_id
+        - flag_id
+        - category
+        - priority
+        - description
+        - suggested_action
+      description: Flagged issues that fire independently of the completeness status, with priority and a suggested action for the AMHP, clinician, or governance team.

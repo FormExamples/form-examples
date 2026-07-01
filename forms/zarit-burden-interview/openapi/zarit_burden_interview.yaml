@@ -1,0 +1,308 @@
+# Generated from sql/. Do not edit by hand.
+# SOURCE: zarit_burden_interview
+openapi: 3.1.0
+info:
+  title: Zarit Burden Interview — ZaritBurdenInterview
+  version: 1.0.0
+  description: "Main Zarit Burden Interview record: assessment context, carer and care-recipient identification, and the twenty-two 0-4 item ratings."
+paths:
+  /zarit-burden-interviews:
+    get:
+      summary: List ZaritBurdenInterview records
+      operationId: listZaritBurdenInterview
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of ZaritBurdenInterview records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/ZaritBurdenInterview"
+    post:
+      summary: Create a new ZaritBurdenInterview
+      operationId: createZaritBurdenInterview
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ZaritBurdenInterview"
+      responses:
+        "201":
+          description: The newly created ZaritBurdenInterview
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ZaritBurdenInterview"
+        "400":
+          description: Validation error
+  /zarit-burden-interviews/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one ZaritBurdenInterview by id
+      operationId: getZaritBurdenInterview
+      responses:
+        "200":
+          description: The requested ZaritBurdenInterview
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ZaritBurdenInterview"
+        "404":
+          description: ZaritBurdenInterview not found
+    patch:
+      summary: Update an existing ZaritBurdenInterview
+      operationId: updateZaritBurdenInterview
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ZaritBurdenInterview"
+      responses:
+        "200":
+          description: The updated ZaritBurdenInterview
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ZaritBurdenInterview"
+        "404":
+          description: ZaritBurdenInterview not found
+    delete:
+      summary: Soft-delete a ZaritBurdenInterview
+      operationId: deleteZaritBurdenInterview
+      responses:
+        "204":
+          description: ZaritBurdenInterview deleted
+        "404":
+          description: ZaritBurdenInterview not found
+components:
+  schemas:
+    ZaritBurdenInterview:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was updated most-recently.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was deleted a.k.a. soft-removed.
+        patient_id:
+          type: string
+          format: uuid
+          description: Foreign key to the care recipient being cared for (delete restricted).
+        clinician_id:
+          type: string
+          format: uuid
+          description: Foreign key to the administering practitioner (optional; delete restricted).
+        practitioner_name:
+          type: string
+          maxLength: 255
+          description: Name of the administering practitioner as recorded on the assessment.
+        practitioner_role:
+          type: string
+          enum:
+            - clinician
+            - nurse
+            - social-care
+            - carer-support
+            - other
+            - ""
+          description: "Role of the administering practitioner: clinician, nurse, social-care, carer-support, or other."
+        assessed_at:
+          type: string
+          format: date-time
+          description: Date and time the assessment was performed.
+        care_setting:
+          type: string
+          enum:
+            - memory-service
+            - community
+            - general-practice
+            - social-care
+            - other
+            - ""
+          description: "Care setting: memory-service, community, general-practice, social-care, or other."
+        instrument_form:
+          type: string
+          enum:
+            - zbi22
+            - zbi12
+          description: "Which item set is scored: zbi22 (full 22-item, default) or zbi12 (12-item short form)."
+        carer_identifier:
+          type: string
+          maxLength: 100
+          description: Local identifier for the carer completing the questionnaire.
+        carer_relationship:
+          type: string
+          enum:
+            - spouse-partner
+            - adult-child
+            - other-relative
+            - friend
+            - other
+            - ""
+          description: "Carer relationship to the care recipient: spouse-partner, adult-child, other-relative, friend, or other."
+        carer_co_resident:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: "Whether the carer lives with the care recipient: yes or no."
+        care_hours_per_week:
+          type: number
+          format: double
+          description: Approximate hours of care provided per week.
+        recipient_identifier:
+          type: string
+          maxLength: 100
+          description: Local identifier for the care recipient.
+        recipient_condition:
+          type: string
+          enum:
+            - dementia
+            - chronic-illness
+            - disability
+            - other
+            - ""
+          description: "Primary condition of the care recipient: dementia, chronic-illness, disability, or other."
+        item_1:
+          type: integer
+          format: int32
+          description: "Item 1 rating (0-4): feel asked to do more than you should for the relative."
+        item_2:
+          type: integer
+          format: int32
+          description: "Item 2 rating (0-4): not enough time for yourself."
+        item_3:
+          type: integer
+          format: int32
+          description: "Item 3 rating (0-4): stressed between caring and other responsibilities."
+        item_4:
+          type: integer
+          format: int32
+          description: "Item 4 rating (0-4): embarrassed by the relative's behaviour."
+        item_5:
+          type: integer
+          format: int32
+          description: "Item 5 rating (0-4): angry when around the relative."
+        item_6:
+          type: integer
+          format: int32
+          description: "Item 6 rating (0-4): relative affects your relationships with others negatively."
+        item_7:
+          type: integer
+          format: int32
+          description: "Item 7 rating (0-4): afraid about what the future holds for the relative."
+        item_8:
+          type: integer
+          format: int32
+          description: "Item 8 rating (0-4): the relative is dependent on you."
+        item_9:
+          type: integer
+          format: int32
+          description: "Item 9 rating (0-4): strained when around the relative."
+        item_10:
+          type: integer
+          format: int32
+          description: "Item 10 rating (0-4): your health has suffered because of caring."
+        item_11:
+          type: integer
+          format: int32
+          description: "Item 11 rating (0-4): not as much privacy as you would like."
+        item_12:
+          type: integer
+          format: int32
+          description: "Item 12 rating (0-4): social life has suffered."
+        item_13:
+          type: integer
+          format: int32
+          description: "Item 13 rating (0-4): uncomfortable having friends over because of the relative."
+        item_14:
+          type: integer
+          format: int32
+          description: "Item 14 rating (0-4): relative expects you to care as the only one they can depend on."
+        item_15:
+          type: integer
+          format: int32
+          description: "Item 15 rating (0-4): not enough money to care in addition to other expenses."
+        item_16:
+          type: integer
+          format: int32
+          description: "Item 16 rating (0-4): unable to care for the relative much longer."
+        item_17:
+          type: integer
+          format: int32
+          description: "Item 17 rating (0-4): lost control of your life since the relative's illness."
+        item_18:
+          type: integer
+          format: int32
+          description: "Item 18 rating (0-4): wish you could leave the care to someone else."
+        item_19:
+          type: integer
+          format: int32
+          description: "Item 19 rating (0-4): uncertain about what to do for the relative."
+        item_20:
+          type: integer
+          format: int32
+          description: "Item 20 rating (0-4): feel you should be doing more for the relative."
+        item_21:
+          type: integer
+          format: int32
+          description: "Item 21 rating (0-4): feel you could do a better job caring."
+        item_22:
+          type: integer
+          format: int32
+          description: "Item 22 rating (0-4): global burden — overall how burdened you feel caring."
+        clinical_note:
+          type: string
+          description: Free-text clinical note recorded with the assessment.
+      required:
+        - created_at
+        - updated_at
+        - patient_id
+        - practitioner_name
+        - practitioner_role
+        - care_setting
+        - instrument_form
+        - carer_identifier
+        - carer_relationship
+        - carer_co_resident
+        - recipient_identifier
+        - recipient_condition
+        - clinical_note
+      description: "Main Zarit Burden Interview record: assessment context, carer and care-recipient identification, and the twenty-two 0-4 item ratings."

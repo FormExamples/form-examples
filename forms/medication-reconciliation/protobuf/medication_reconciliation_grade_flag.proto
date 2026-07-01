@@ -1,0 +1,38 @@
+// Generated from sql/. Do not edit by hand.
+// SOURCE: medication_reconciliation_grade_flag
+
+syntax = "proto3";
+
+package form_examples.medication_reconciliation;
+
+enum MedicationReconciliationGradeFlagCategoryEnum {
+  CATEGORY_UNSPECIFIED = 0;
+  CATEGORY_HIGH_RISK_UNINTENTIONAL_DISCREPANCY = 1;  // high-risk-unintentional-discrepancy
+  CATEGORY_INSUFFICIENT_SOURCES = 2;  // insufficient-sources
+  CATEGORY_ALLERGY_CONFLICT = 3;  // allergy-conflict
+  CATEGORY_INTERACTION = 4;  // interaction
+  CATEGORY_THERAPEUTIC_DUPLICATION = 5;  // therapeutic-duplication
+  CATEGORY_UNINTENTIONAL_DISCREPANCY_OUTSTANDING = 6;  // unintentional-discrepancy-outstanding
+  CATEGORY_ALLERGY_STATUS_NOT_DOCUMENTED = 7;  // allergy-status-not-documented
+  CATEGORY_OTHER = 8;  // other
+}
+
+enum MedicationReconciliationGradeFlagPriorityEnum {
+  PRIORITY_UNSPECIFIED = 0;
+  PRIORITY_LOW = 1;  // low
+  PRIORITY_MEDIUM = 2;  // medium
+  PRIORITY_HIGH = 3;  // high
+}
+
+message MedicationReconciliationGradeFlag {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string medication_reconciliation_grade_id = 5;  // UUID — uuid
+  string flag_id = 6;  // VARCHAR(50) — max 50 chars
+  MedicationReconciliationGradeFlagCategoryEnum category = 7;  // VARCHAR(40)
+  MedicationReconciliationGradeFlagPriorityEnum priority = 8;  // VARCHAR(10)
+  string description = 9;  // VARCHAR(500) — max 500 chars
+  string suggested_action = 10;  // VARCHAR(500) — max 500 chars
+}

@@ -1,0 +1,37 @@
+// Generated from sql/. Do not edit by hand.
+// SOURCE: curb_65_pneumonia_severity_score_grade
+
+syntax = "proto3";
+
+package form_examples.curb_65_pneumonia_severity_score;
+
+enum Curb65PneumoniaSeverityScoreGradeScoreVariantEnum {
+  SCOREVARIANT_UNSPECIFIED = 0;
+  SCOREVARIANT_CURB_65 = 1;  // curb-65
+  SCOREVARIANT_CRB_65 = 2;  // crb-65
+}
+
+enum Curb65PneumoniaSeverityScoreGradeRiskBandEnum {
+  RISKBAND_UNSPECIFIED = 0;
+  RISKBAND_LOW = 1;  // low
+  RISKBAND_INTERMEDIATE = 2;  // intermediate
+  RISKBAND_HIGH = 3;  // high
+}
+
+message Curb65PneumoniaSeverityScoreGrade {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string curb_65_pneumonia_severity_score_id = 5;  // UUID — uuid
+  int32 confusion_score = 6;  // INT
+  int32 urea_score = 7;  // INT
+  int32 respiratory_rate_score = 8;  // INT
+  int32 blood_pressure_score = 9;  // INT
+  int32 age_score = 10;  // INT
+  int32 total_score = 11;  // INT
+  Curb65PneumoniaSeverityScoreGradeScoreVariantEnum score_variant = 12;  // VARCHAR(10)
+  Curb65PneumoniaSeverityScoreGradeRiskBandEnum risk_band = 13;  // VARCHAR(15)
+  string recommended_setting = 14;  // TEXT
+  string graded_at = 15;  // TIMESTAMPTZ — iso 8601
+}

@@ -1,0 +1,67 @@
+// Generated from sql/. Do not edit by hand.
+// SOURCE: ambulatory_blood_pressure_test_result
+
+syntax = "proto3";
+
+package form_examples.ambulatory_blood_pressure_test_result;
+
+enum AmbulatoryBloodPressureTestResultMonitoringTypeEnum {
+  MONITORINGTYPE_UNSPECIFIED = 0;
+  MONITORINGTYPE_V_24_HOUR_ABPM = 1;  // 24-hour-abpm
+  MONITORINGTYPE_HOME_BLOOD_PRESSURE_MONITORING = 2;  // home-blood-pressure-monitoring
+  MONITORINGTYPE_OTHER = 3;  // other
+}
+
+enum AmbulatoryBloodPressureTestResultReportStatusEnum {
+  REPORTSTATUS_UNSPECIFIED = 0;
+  REPORTSTATUS_PRELIMINARY = 1;  // preliminary
+  REPORTSTATUS_FINAL = 2;  // final
+  REPORTSTATUS_AMENDED = 3;  // amended
+  REPORTSTATUS_CANCELLED = 4;  // cancelled
+}
+
+enum AmbulatoryBloodPressureTestResultDipperStatusEnum {
+  DIPPERSTATUS_UNSPECIFIED = 0;
+  DIPPERSTATUS_DIPPER = 1;  // dipper
+  DIPPERSTATUS_NON_DIPPER = 2;  // non-dipper
+  DIPPERSTATUS_REVERSE_DIPPER = 3;  // reverse-dipper
+  DIPPERSTATUS_EXTREME_DIPPER = 4;  // extreme-dipper
+}
+
+message AmbulatoryBloodPressureTestResult {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string patient_id = 5;  // UUID — uuid
+  string clinician_id = 6;  // UUID — uuid
+  string originating_request_reference = 7;  // VARCHAR(255) — max 255 chars
+  AmbulatoryBloodPressureTestResultMonitoringTypeEnum monitoring_type = 8;  // VARCHAR(40)
+  AmbulatoryBloodPressureTestResultReportStatusEnum report_status = 9;  // VARCHAR(15)
+  string performed_date = 10;  // DATE — iso 8601 date
+  string reported_date = 11;  // DATE — iso 8601 date
+  double valid_readings_percent = 12;  // NUMERIC(5,1) — numeric(5,1)
+  bool recording_adequate = 13;  // BOOLEAN
+  string clinical_history = 14;  // VARCHAR(1000) — max 1000 chars
+  double daytime_average_systolic = 15;  // NUMERIC(5,1) — numeric(5,1)
+  double daytime_average_diastolic = 16;  // NUMERIC(5,1) — numeric(5,1)
+  double nighttime_average_systolic = 17;  // NUMERIC(5,1) — numeric(5,1)
+  double nighttime_average_diastolic = 18;  // NUMERIC(5,1) — numeric(5,1)
+  double twenty_four_hour_average_systolic = 19;  // NUMERIC(5,1) — numeric(5,1)
+  double twenty_four_hour_average_diastolic = 20;  // NUMERIC(5,1) — numeric(5,1)
+  double nocturnal_dip_percent = 21;  // NUMERIC(5,1) — numeric(5,1)
+  AmbulatoryBloodPressureTestResultDipperStatusEnum dipper_status = 22;  // VARCHAR(15)
+  bool hypertension_confirmed = 23;  // BOOLEAN
+  bool white_coat_effect = 24;  // BOOLEAN
+  bool masked_hypertension = 25;  // BOOLEAN
+  bool severe_hypertension = 26;  // BOOLEAN
+  bool nocturnal_hypertension = 27;  // BOOLEAN
+  bool normal_study = 28;  // BOOLEAN
+  string findings_narrative = 29;  // VARCHAR(2000) — max 2000 chars
+  string comparison_with_previous = 30;  // VARCHAR(1000) — max 1000 chars
+  string impression = 31;  // VARCHAR(2000) — max 2000 chars
+  string reporting_category = 32;  // VARCHAR(50) — max 50 chars
+  string recommended_follow_up = 33;  // VARCHAR(1000) — max 1000 chars
+  bool critical_result_communicated = 34;  // BOOLEAN
+  string reported_to = 35;  // VARCHAR(500) — max 500 chars
+}

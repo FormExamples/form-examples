@@ -1,0 +1,251 @@
+# Generated from sql/. Do not edit by hand.
+# SOURCE: glasgow_blatchford_bleeding_score
+openapi: 3.1.0
+info:
+  title: Glasgow Blatchford Bleeding Score — GlasgowBlatchfordBleedingScore
+  version: 1.0.0
+  description: "Main Glasgow-Blatchford Bleeding Score assessment record: assessment context, patient identification, and the eight weighted admission parameter inputs (blood urea, haemoglobin, systolic blood pressure, pulse, melaena, syncope, hepatic disease, cardiac failure)."
+paths:
+  /glasgow-blatchford-bleeding-scores:
+    get:
+      summary: List GlasgowBlatchfordBleedingScore records
+      operationId: listGlasgowBlatchfordBleedingScore
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of GlasgowBlatchfordBleedingScore records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/GlasgowBlatchfordBleedingScore"
+    post:
+      summary: Create a new GlasgowBlatchfordBleedingScore
+      operationId: createGlasgowBlatchfordBleedingScore
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/GlasgowBlatchfordBleedingScore"
+      responses:
+        "201":
+          description: The newly created GlasgowBlatchfordBleedingScore
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GlasgowBlatchfordBleedingScore"
+        "400":
+          description: Validation error
+  /glasgow-blatchford-bleeding-scores/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one GlasgowBlatchfordBleedingScore by id
+      operationId: getGlasgowBlatchfordBleedingScore
+      responses:
+        "200":
+          description: The requested GlasgowBlatchfordBleedingScore
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GlasgowBlatchfordBleedingScore"
+        "404":
+          description: GlasgowBlatchfordBleedingScore not found
+    patch:
+      summary: Update an existing GlasgowBlatchfordBleedingScore
+      operationId: updateGlasgowBlatchfordBleedingScore
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/GlasgowBlatchfordBleedingScore"
+      responses:
+        "200":
+          description: The updated GlasgowBlatchfordBleedingScore
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GlasgowBlatchfordBleedingScore"
+        "404":
+          description: GlasgowBlatchfordBleedingScore not found
+    delete:
+      summary: Soft-delete a GlasgowBlatchfordBleedingScore
+      operationId: deleteGlasgowBlatchfordBleedingScore
+      responses:
+        "204":
+          description: GlasgowBlatchfordBleedingScore deleted
+        "404":
+          description: GlasgowBlatchfordBleedingScore not found
+components:
+  schemas:
+    GlasgowBlatchfordBleedingScore:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was updated most-recently.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was deleted a.k.a. soft-removed.
+        patient_id:
+          type: string
+          format: uuid
+          description: Foreign key to the patient being assessed (delete restricted).
+        clinician_id:
+          type: string
+          format: uuid
+          description: Foreign key to the assessing clinician (optional; delete restricted).
+        clinician_name:
+          type: string
+          maxLength: 255
+          description: Name of the assessing clinician as recorded on the assessment.
+        clinician_role:
+          type: string
+          enum:
+            - doctor
+            - nurse
+            - advanced-practitioner
+            - other
+            - ""
+          description: "Role of the assessing clinician: doctor, nurse, advanced-practitioner, or other."
+        assessed_at:
+          type: string
+          format: date-time
+          description: Date and time the assessment was performed.
+        care_setting:
+          type: string
+          enum:
+            - emergency-department
+            - acute-medical-unit
+            - ward
+            - other
+            - ""
+          description: "Care setting: emergency-department, acute-medical-unit, ward, or other."
+        presenting_complaint:
+          type: string
+          enum:
+            - haematemesis
+            - coffee-ground
+            - melaena
+            - other
+            - ""
+          description: "Presenting complaint: haematemesis, coffee-ground (vomit), melaena, or other."
+        patient_identifier:
+          type: string
+          maxLength: 100
+          description: Local patient identifier as recorded on the assessment.
+        age_band:
+          type: string
+          enum:
+            - 16-39
+            - 40-59
+            - 60-74
+            - 75-plus
+            - ""
+          description: "Adult age band: 16-39, 40-59, 60-74, or 75-plus."
+        sex:
+          type: string
+          enum:
+            - female
+            - male
+            - intersex
+            - unknown
+            - ""
+          description: "Patient sex recorded for the assessment: female, male, intersex, or unknown. Selects the haemoglobin band table; unknown falls back to the female table."
+        blood_urea_mmol_l:
+          type: number
+          format: double
+          description: Parameter 1 — measured blood urea in millimoles per litre (mmol/L).
+        haemoglobin_g_l:
+          type: number
+          format: double
+          description: Parameters 2/3 — measured haemoglobin in grams per litre (g/L); scored against sex-specific bands.
+        systolic_blood_pressure_mmhg:
+          type: integer
+          format: int32
+          description: Parameter 4 — measured systolic blood pressure in millimetres of mercury (mmHg).
+        pulse_beats_per_min:
+          type: integer
+          format: int32
+          description: Parameter 5 — measured pulse rate in beats per minute.
+        melaena_present:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: "Parameter 6 — melaena (black tarry stool) present: yes or no."
+        syncope:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: "Parameter 7 — syncope (fainting) present: yes or no."
+        hepatic_disease:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: "Parameter 8 — history of hepatic (liver) disease: yes or no."
+        cardiac_failure:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: "Parameter 9 — history of cardiac failure: yes or no."
+        clinical_note:
+          type: string
+          description: Free-text clinical context note recorded with the assessment.
+      required:
+        - created_at
+        - updated_at
+        - patient_id
+        - clinician_name
+        - clinician_role
+        - care_setting
+        - presenting_complaint
+        - patient_identifier
+        - age_band
+        - sex
+        - melaena_present
+        - syncope
+        - hepatic_disease
+        - cardiac_failure
+        - clinical_note
+      description: "Main Glasgow-Blatchford Bleeding Score assessment record: assessment context, patient identification, and the eight weighted admission parameter inputs (blood urea, haemoglobin, systolic blood pressure, pulse, melaena, syncope, hepatic disease, cardiac failure)."

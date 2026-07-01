@@ -1,0 +1,123 @@
+// Generated from sql/. Do not edit by hand.
+// SOURCE: child_safeguarding_referral
+
+syntax = "proto3";
+
+package form_examples.child_safeguarding_referral;
+
+enum ChildSafeguardingReferralChildDisclosedEnum {
+  CHILDDISCLOSED_UNSPECIFIED = 0;
+  CHILDDISCLOSED_YES = 1;  // yes
+  CHILDDISCLOSED_NO = 2;  // no
+}
+
+enum ChildSafeguardingReferralPrimaryCategoryEnum {
+  PRIMARYCATEGORY_UNSPECIFIED = 0;
+  PRIMARYCATEGORY_PHYSICAL = 1;  // physical
+  PRIMARYCATEGORY_EMOTIONAL = 2;  // emotional
+  PRIMARYCATEGORY_SEXUAL = 3;  // sexual
+  PRIMARYCATEGORY_NEGLECT = 4;  // neglect
+}
+
+enum ChildSafeguardingReferralImmediateDangerEnum {
+  IMMEDIATEDANGER_UNSPECIFIED = 0;
+  IMMEDIATEDANGER_YES = 1;  // yes
+  IMMEDIATEDANGER_NO = 2;  // no
+}
+
+enum ChildSafeguardingReferralAllegedPersonInContactEnum {
+  ALLEGEDPERSONINCONTACT_UNSPECIFIED = 0;
+  ALLEGEDPERSONINCONTACT_YES = 1;  // yes
+  ALLEGEDPERSONINCONTACT_NO = 2;  // no
+  ALLEGEDPERSONINCONTACT_UNKNOWN = 3;  // unknown
+}
+
+enum ChildSafeguardingReferralOtherChildrenAtRiskEnum {
+  OTHERCHILDRENATRISK_UNSPECIFIED = 0;
+  OTHERCHILDRENATRISK_YES = 1;  // yes
+  OTHERCHILDRENATRISK_NO = 2;  // no
+  OTHERCHILDRENATRISK_UNKNOWN = 3;  // unknown
+}
+
+enum ChildSafeguardingReferralConsentSoughtEnum {
+  CONSENTSOUGHT_UNSPECIFIED = 0;
+  CONSENTSOUGHT_YES = 1;  // yes
+  CONSENTSOUGHT_NO = 2;  // no
+}
+
+enum ChildSafeguardingReferralConsentStatusEnum {
+  CONSENTSTATUS_UNSPECIFIED = 0;
+  CONSENTSTATUS_GIVEN = 1;  // given
+  CONSENTSTATUS_REFUSED = 2;  // refused
+  CONSENTSTATUS_NOT_SOUGHT = 3;  // not-sought
+}
+
+enum ChildSafeguardingReferralSharingBasisWithoutConsentEnum {
+  SHARINGBASISWITHOUTCONSENT_UNSPECIFIED = 0;
+  SHARINGBASISWITHOUTCONSENT_RISK_OF_SERIOUS_HARM = 1;  // risk-of-serious-harm
+  SHARINGBASISWITHOUTCONSENT_SEEKING_CONSENT_INCREASES_RISK = 2;  // seeking-consent-increases-risk
+  SHARINGBASISWITHOUTCONSENT_NOT_APPLICABLE = 3;  // not-applicable
+}
+
+enum ChildSafeguardingReferralFamilyAwareEnum {
+  FAMILYAWARE_UNSPECIFIED = 0;
+  FAMILYAWARE_YES = 1;  // yes
+  FAMILYAWARE_NO = 2;  // no
+}
+
+enum ChildSafeguardingReferralStrategyDiscussionHeldEnum {
+  STRATEGYDISCUSSIONHELD_UNSPECIFIED = 0;
+  STRATEGYDISCUSSIONHELD_YES = 1;  // yes
+  STRATEGYDISCUSSIONHELD_NO = 2;  // no
+}
+
+enum ChildSafeguardingReferralReferrerDeclarationEnum {
+  REFERRERDECLARATION_UNSPECIFIED = 0;
+  REFERRERDECLARATION_YES = 1;  // yes
+  REFERRERDECLARATION_NO = 2;  // no
+}
+
+message ChildSafeguardingReferral {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string patient_id = 5;  // UUID — uuid
+  string clinician_id = 6;  // UUID — uuid
+  string referrer_organisation = 7;  // TEXT
+  string referred_at = 8;  // TIMESTAMPTZ — iso 8601
+  string relationship_to_child = 9;  // TEXT
+  double child_age = 10;  // NUMERIC(4,1) — numeric(4,1)
+  string child_setting = 11;  // TEXT
+  string child_reference = 12;  // TEXT
+  string child_ethnicity = 13;  // TEXT
+  string child_first_language = 14;  // TEXT
+  string child_disability = 15;  // TEXT
+  string carers = 16;  // TEXT
+  string household_members = 17;  // TEXT
+  string other_children = 18;  // TEXT
+  string professionals_involved = 19;  // TEXT
+  string concern_description = 20;  // TEXT
+  string concern_onset = 21;  // TEXT
+  ChildSafeguardingReferralChildDisclosedEnum child_disclosed = 22;  // VARCHAR(5)
+  string referrer_observations = 23;  // TEXT
+  ChildSafeguardingReferralPrimaryCategoryEnum primary_category = 24;  // VARCHAR(15)
+  string additional_categories = 25;  // TEXT
+  string presenting_evidence = 26;  // TEXT
+  ChildSafeguardingReferralImmediateDangerEnum immediate_danger = 27;  // VARCHAR(5)
+  string child_whereabouts = 28;  // TEXT
+  string who_with_child = 29;  // TEXT
+  ChildSafeguardingReferralAllegedPersonInContactEnum alleged_person_in_contact = 30;  // VARCHAR(10)
+  ChildSafeguardingReferralOtherChildrenAtRiskEnum other_children_at_risk = 31;  // VARCHAR(10)
+  ChildSafeguardingReferralConsentSoughtEnum consent_sought = 32;  // VARCHAR(5)
+  ChildSafeguardingReferralConsentStatusEnum consent_status = 33;  // VARCHAR(15)
+  ChildSafeguardingReferralSharingBasisWithoutConsentEnum sharing_basis_without_consent = 34;  // VARCHAR(35)
+  ChildSafeguardingReferralFamilyAwareEnum family_aware = 35;  // VARCHAR(5)
+  string unsafe_to_inform_reason = 36;  // TEXT
+  string agencies_contacted = 37;  // TEXT
+  ChildSafeguardingReferralStrategyDiscussionHeldEnum strategy_discussion_held = 38;  // VARCHAR(5)
+  string previous_safeguarding_history = 39;  // TEXT
+  string requested_action = 40;  // TEXT
+  ChildSafeguardingReferralReferrerDeclarationEnum referrer_declaration = 41;  // VARCHAR(5)
+  string notes = 42;  // TEXT
+}

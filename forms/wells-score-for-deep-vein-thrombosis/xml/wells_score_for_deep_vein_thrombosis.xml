@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE wells_score_for_deep_vein_thrombosis SYSTEM "wells_score_for_deep_vein_thrombosis.dtd">
+<wells_score_for_deep_vein_thrombosis>
+<id>770e8400-e29b-41d4-a716-446655440002</id>
+<created_at>2026-04-09T10:00:00Z</created_at>
+<updated_at>2026-04-09T10:00:00Z</updated_at>
+<deleted_at>2026-04-09T10:00:00Z</deleted_at>
+<patient_id>550e8400-e29b-41d4-a716-446655440000</patient_id>
+<clinician_id>660e8400-e29b-41d4-a716-446655440001</clinician_id>
+<status>draft</status>
+<patient_identifier></patient_identifier>
+<assessed_at>2026-04-09T10:00:00Z</assessed_at>
+<care_setting>emergency-department</care_setting>
+<age_band>18-39</age_band>
+<symptomatic_leg>left</symptomatic_leg>
+<active_cancer>yes</active_cancer>
+<paralysis_or_immobilisation>yes</paralysis_or_immobilisation>
+<recently_bedridden_or_surgery>yes</recently_bedridden_or_surgery>
+<localised_tenderness>yes</localised_tenderness>
+<entire_leg_swollen>yes</entire_leg_swollen>
+<calf_swelling_over_3cm>yes</calf_swelling_over_3cm>
+<pitting_oedema>yes</pitting_oedema>
+<collateral_superficial_veins>yes</collateral_superficial_veins>
+<previously_documented_dvt>yes</previously_documented_dvt>
+<alternative_diagnosis_as_likely>yes</alternative_diagnosis_as_likely>
+<clinical_notes>Example text.</clinical_notes>
+</wells_score_for_deep_vein_thrombosis>

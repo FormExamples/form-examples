@@ -1,0 +1,168 @@
+# Generated from sql/. Do not edit by hand.
+# SOURCE: body_mass_index_and_body_surface_area_calculator_grade_rule
+openapi: 3.1.0
+info:
+  title: Body Mass Index And Body Surface Area Calculator — BodyMassIndexAndBodySurfaceAreaCalculatorGradeRule
+  version: 1.0.0
+  description: "Audit trail of every rule that fired during anthropometry computation: instrument, band, category, and description."
+paths:
+  /body-mass-index-and-body-surface-area-calculator-grade-rules:
+    get:
+      summary: List BodyMassIndexAndBodySurfaceAreaCalculatorGradeRule records
+      operationId: listBodyMassIndexAndBodySurfaceAreaCalculatorGradeRule
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of BodyMassIndexAndBodySurfaceAreaCalculatorGradeRule records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/BodyMassIndexAndBodySurfaceAreaCalculatorGradeRule"
+    post:
+      summary: Create a new BodyMassIndexAndBodySurfaceAreaCalculatorGradeRule
+      operationId: createBodyMassIndexAndBodySurfaceAreaCalculatorGradeRule
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/BodyMassIndexAndBodySurfaceAreaCalculatorGradeRule"
+      responses:
+        "201":
+          description: The newly created BodyMassIndexAndBodySurfaceAreaCalculatorGradeRule
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/BodyMassIndexAndBodySurfaceAreaCalculatorGradeRule"
+        "400":
+          description: Validation error
+  /body-mass-index-and-body-surface-area-calculator-grade-rules/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one BodyMassIndexAndBodySurfaceAreaCalculatorGradeRule by id
+      operationId: getBodyMassIndexAndBodySurfaceAreaCalculatorGradeRule
+      responses:
+        "200":
+          description: The requested BodyMassIndexAndBodySurfaceAreaCalculatorGradeRule
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/BodyMassIndexAndBodySurfaceAreaCalculatorGradeRule"
+        "404":
+          description: BodyMassIndexAndBodySurfaceAreaCalculatorGradeRule not found
+    patch:
+      summary: Update an existing BodyMassIndexAndBodySurfaceAreaCalculatorGradeRule
+      operationId: updateBodyMassIndexAndBodySurfaceAreaCalculatorGradeRule
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/BodyMassIndexAndBodySurfaceAreaCalculatorGradeRule"
+      responses:
+        "200":
+          description: The updated BodyMassIndexAndBodySurfaceAreaCalculatorGradeRule
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/BodyMassIndexAndBodySurfaceAreaCalculatorGradeRule"
+        "404":
+          description: BodyMassIndexAndBodySurfaceAreaCalculatorGradeRule not found
+    delete:
+      summary: Soft-delete a BodyMassIndexAndBodySurfaceAreaCalculatorGradeRule
+      operationId: deleteBodyMassIndexAndBodySurfaceAreaCalculatorGradeRule
+      responses:
+        "204":
+          description: BodyMassIndexAndBodySurfaceAreaCalculatorGradeRule deleted
+        "404":
+          description: BodyMassIndexAndBodySurfaceAreaCalculatorGradeRule not found
+components:
+  schemas:
+    BodyMassIndexAndBodySurfaceAreaCalculatorGradeRule:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was most recently updated.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was soft-deleted.
+        body_mass_index_and_body_surface_area_calculator_grade_id:
+          type: string
+          format: uuid
+          description: Foreign key to the parent grade.
+        rule_id:
+          type: string
+          maxLength: 40
+          description: Stable rule identifier (e.g. R-BMI-BAND-OVERWEIGHT-01).
+        instrument:
+          type: string
+          enum:
+            - bmi
+            - bsa
+            - classification
+            - threshold
+            - composite
+          description: "Instrument the rule belongs to: bmi, bsa, classification, threshold, or composite."
+        band:
+          type: string
+          enum:
+            - underweight
+            - normal
+            - overweight
+            - obese-class-1
+            - obese-class-2
+            - obese-class-3
+            - ""
+          description: "BMI category band contributed by this rule: underweight, normal, overweight, obese-class-1, obese-class-2, or obese-class-3."
+        category:
+          type: string
+          maxLength: 50
+          description: Subject category (e.g. who-band, asian-threshold, plausibility, missing-input).
+        description:
+          type: string
+          maxLength: 500
+          description: Human-readable description of why the rule fired.
+      required:
+        - created_at
+        - updated_at
+        - body_mass_index_and_body_surface_area_calculator_grade_id
+        - rule_id
+        - instrument
+        - band
+        - category
+        - description
+      description: "Audit trail of every rule that fired during anthropometry computation: instrument, band, category, and description."

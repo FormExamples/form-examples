@@ -1,0 +1,342 @@
+# Generated from sql/. Do not edit by hand.
+# SOURCE: emergency_department_triage_note
+openapi: 3.1.0
+info:
+  title: Emergency Department Triage Note — EmergencyDepartmentTriageNote
+  version: 1.0.0
+  description: "Main emergency-department triage-note record: arrival and context, presenting complaint and brief history, triage vital signs (NEWS2 inputs), pain score, and Manchester Triage System discriminator flags. The classification result, fired rules, and red-flag issues live in child tables."
+paths:
+  /emergency-department-triage-notes:
+    get:
+      summary: List EmergencyDepartmentTriageNote records
+      operationId: listEmergencyDepartmentTriageNote
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of EmergencyDepartmentTriageNote records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/EmergencyDepartmentTriageNote"
+    post:
+      summary: Create a new EmergencyDepartmentTriageNote
+      operationId: createEmergencyDepartmentTriageNote
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/EmergencyDepartmentTriageNote"
+      responses:
+        "201":
+          description: The newly created EmergencyDepartmentTriageNote
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/EmergencyDepartmentTriageNote"
+        "400":
+          description: Validation error
+  /emergency-department-triage-notes/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one EmergencyDepartmentTriageNote by id
+      operationId: getEmergencyDepartmentTriageNote
+      responses:
+        "200":
+          description: The requested EmergencyDepartmentTriageNote
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/EmergencyDepartmentTriageNote"
+        "404":
+          description: EmergencyDepartmentTriageNote not found
+    patch:
+      summary: Update an existing EmergencyDepartmentTriageNote
+      operationId: updateEmergencyDepartmentTriageNote
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/EmergencyDepartmentTriageNote"
+      responses:
+        "200":
+          description: The updated EmergencyDepartmentTriageNote
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/EmergencyDepartmentTriageNote"
+        "404":
+          description: EmergencyDepartmentTriageNote not found
+    delete:
+      summary: Soft-delete a EmergencyDepartmentTriageNote
+      operationId: deleteEmergencyDepartmentTriageNote
+      responses:
+        "204":
+          description: EmergencyDepartmentTriageNote deleted
+        "404":
+          description: EmergencyDepartmentTriageNote not found
+components:
+  schemas:
+    EmergencyDepartmentTriageNote:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was updated most-recently.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was deleted a.k.a. soft-removed.
+        patient_id:
+          type: string
+          format: uuid
+          description: "Foreign key to the patient being triaged (RESTRICT: patients are not deleted while triage notes exist)."
+        clinician_id:
+          type: string
+          format: uuid
+          description: Foreign key to the triaging clinician (RESTRICT); NULL until assigned.
+        status:
+          type: string
+          enum:
+            - draft
+            - submitted
+            - amended
+            - signed
+          description: "Workflow status: draft, submitted, amended, or signed."
+        nurse_name:
+          type: string
+          description: Name of the triage nurse or clinician who performed the assessment.
+        triaged_at:
+          type: string
+          format: date-time
+          description: Date and time the triage assessment was performed; NULL when not yet recorded.
+        care_setting:
+          type: string
+          enum:
+            - emergency-department
+            - urgent-treatment-centre
+            - minor-injuries-unit
+            - ""
+          description: "Care setting: emergency-department, urgent-treatment-centre, or minor-injuries-unit."
+        arrival_mode:
+          type: string
+          enum:
+            - walk-in
+            - ambulance
+            - other
+            - ""
+          description: "Mode of arrival: walk-in, ambulance, or other."
+        arrived_at:
+          type: string
+          format: date-time
+          description: Date and time the patient arrived; NULL when not recorded.
+        referral_source:
+          type: string
+          description: Referral source (e.g. self, GP, ambulance service, other).
+        patient_identifier:
+          type: string
+          description: Local patient identifier as recorded at triage.
+        age_band:
+          type: string
+          enum:
+            - paediatric
+            - adult
+            - older-adult
+            - ""
+          description: "Age band: paediatric, adult, or older-adult."
+        presenting_complaint:
+          type: string
+          description: Chief presenting complaint in the patient's or clinician's words.
+        brief_history:
+          type: string
+          description: Relevant brief history accompanying the presenting complaint.
+        symptom_onset:
+          type: string
+          description: Timing of symptom onset (free text).
+        respiratory_rate:
+          type: integer
+          format: int32
+          description: Respiration rate in breaths per minute; NULL when not recorded.
+        spo2:
+          type: integer
+          format: int32
+          description: Oxygen saturation as a percentage (SpO2); NULL when not recorded.
+        on_oxygen:
+          type: string
+          enum:
+            - air
+            - oxygen
+            - ""
+          description: Whether the patient is breathing air or receiving supplemental oxygen (NEWS2 +2 when oxygen).
+        systolic_bp:
+          type: integer
+          format: int32
+          description: Systolic blood pressure in mmHg; NULL when not recorded.
+        pulse:
+          type: integer
+          format: int32
+          description: Pulse rate in beats per minute; NULL when not recorded.
+        consciousness_acvpu:
+          type: string
+          enum:
+            - A
+            - C
+            - V
+            - P
+            - U
+            - ""
+          description: "Consciousness level on the ACVPU scale: A (alert), C (new confusion), V (voice), P (pain), U (unresponsive)."
+        temperature:
+          type: number
+          format: double
+          description: Body temperature in degrees Celsius; NULL when not recorded.
+        glasgow_coma_scale:
+          type: integer
+          format: int32
+          description: Optional Glasgow Coma Scale total (3-15) as a supporting disability finding; NULL when not recorded.
+        pain_score:
+          type: integer
+          format: int32
+          description: Pain score (0-10) used as a pain discriminator; NULL when not recorded.
+        airway_threat:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: "Discriminator: threat to the airway (Level-1 immediate)."
+        breathing_inadequate:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: "Discriminator: severely inadequate breathing (Level-1 immediate)."
+        circulation_shock:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: "Discriminator: shock or circulatory compromise (Level-1 immediate)."
+        haemorrhage_major:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: "Discriminator: major or catastrophic haemorrhage (Level-1 immediate)."
+        consciousness_reduced:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: "Discriminator: reduced consciousness responding to voice or pain (Level-2 very urgent)."
+        seizure_active:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: "Discriminator: active seizure (Level-1 immediate)."
+        focal_neurology:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: "Discriminator: acute focal neurological deficit (Level-2 very urgent)."
+        sepsis_features:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: "Discriminator: features suggestive of sepsis (Level-2 very urgent; sepsis screen)."
+        chest_pain_cardiac:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: "Discriminator: chest pain of possible cardiac origin (Level-2 very urgent; time-critical)."
+        stroke_features:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: "Discriminator: features suggestive of acute stroke (Level-2 very urgent; time-critical)."
+        paediatric_red_flag:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: "Discriminator: paediatric red flag (Level-2 very urgent; time-critical)."
+        clinical_notes:
+          type: string
+          description: Free-text clinical notes accompanying the triage assessment.
+      required:
+        - created_at
+        - updated_at
+        - patient_id
+        - status
+        - nurse_name
+        - care_setting
+        - arrival_mode
+        - referral_source
+        - patient_identifier
+        - age_band
+        - presenting_complaint
+        - brief_history
+        - symptom_onset
+        - on_oxygen
+        - consciousness_acvpu
+        - airway_threat
+        - breathing_inadequate
+        - circulation_shock
+        - haemorrhage_major
+        - consciousness_reduced
+        - seizure_active
+        - focal_neurology
+        - sepsis_features
+        - chest_pain_cardiac
+        - stroke_features
+        - paediatric_red_flag
+        - clinical_notes
+      description: "Main emergency-department triage-note record: arrival and context, presenting complaint and brief history, triage vital signs (NEWS2 inputs), pain score, and Manchester Triage System discriminator flags. The classification result, fired rules, and red-flag issues live in child tables."

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE rockall_score_for_upper_gastrointestinal_bleeding SYSTEM "rockall_score_for_upper_gastrointestinal_bleeding.dtd">
+<rockall_score_for_upper_gastrointestinal_bleeding>
+<id>770e8400-e29b-41d4-a716-446655440002</id>
+<created_at>2026-04-09T10:00:00Z</created_at>
+<updated_at>2026-04-09T10:00:00Z</updated_at>
+<deleted_at>2026-04-09T10:00:00Z</deleted_at>
+<patient_id>550e8400-e29b-41d4-a716-446655440000</patient_id>
+<clinician_id>660e8400-e29b-41d4-a716-446655440001</clinician_id>
+<clinician_name>Example</clinician_name>
+<clinician_role>doctor</clinician_role>
+<assessed_at>2026-04-09T10:00:00Z</assessed_at>
+<care_setting>emergency-department</care_setting>
+<presenting_complaint></presenting_complaint>
+<patient_identifier></patient_identifier>
+<age_years>45</age_years>
+<sex>female</sex>
+<systolic_blood_pressure_mmhg>1</systolic_blood_pressure_mmhg>
+<heart_rate_bpm>1</heart_rate_bpm>
+<comorbidity>none</comorbidity>
+<endoscopy_performed>yes</endoscopy_performed>
+<diagnosis>mallory-weiss-or-none</diagnosis>
+<stigmata_recent_haemorrhage>none-or-dark-spot</stigmata_recent_haemorrhage>
+<clinical_note>Example Hospital</clinical_note>
+</rockall_score_for_upper_gastrointestinal_bleeding>

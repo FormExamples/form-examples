@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE modified_early_warning_score SYSTEM "modified_early_warning_score.dtd">
+<modified_early_warning_score>
+<id>770e8400-e29b-41d4-a716-446655440002</id>
+<created_at>2026-04-09T10:00:00Z</created_at>
+<updated_at>2026-04-09T10:00:00Z</updated_at>
+<deleted_at>2026-04-09T10:00:00Z</deleted_at>
+<patient_id>550e8400-e29b-41d4-a716-446655440000</patient_id>
+<clinician_id>660e8400-e29b-41d4-a716-446655440001</clinician_id>
+<status>draft</status>
+<observation_at>2026-04-09T10:00:00Z</observation_at>
+<care_setting>acute-ward</care_setting>
+<ward_or_location>Example location</ward_or_location>
+<systolic_blood_pressure>1</systolic_blood_pressure>
+<heart_rate>1</heart_rate>
+<respiratory_rate>1</respiratory_rate>
+<temperature>0.0</temperature>
+<consciousness_avpu>A</consciousness_avpu>
+<previous_mews_score>5</previous_mews_score>
+<clinical_notes>Example text.</clinical_notes>
+</modified_early_warning_score>

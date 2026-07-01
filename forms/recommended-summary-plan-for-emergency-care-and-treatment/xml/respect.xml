@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE respect SYSTEM "respect.dtd">
+<respect>
+<id>770e8400-e29b-41d4-a716-446655440002</id>
+<created_at>2026-04-09T10:00:00Z</created_at>
+<updated_at>2026-04-09T10:00:00Z</updated_at>
+<deleted_at>2026-04-09T10:00:00Z</deleted_at>
+<patient_id>550e8400-e29b-41d4-a716-446655440000</patient_id>
+<clinician_id>660e8400-e29b-41d4-a716-446655440001</clinician_id>
+<person_name>Example</person_name>
+<date_of_birth>1965-06-15</date_of_birth>
+<identifier></identifier>
+<address>123 Example Street</address>
+<key_contact>07700900001</key_contact>
+<health_summary>Example text.</health_summary>
+<diagnoses></diagnoses>
+<existing_documents></existing_documents>
+<what_matters></what_matters>
+<care_preferences></care_preferences>
+<priority_balance>sustain-life</priority_balance>
+<recommended_interventions></recommended_interventions>
+<not_recommended_interventions></not_recommended_interventions>
+<cpr_recommendation>attempt</cpr_recommendation>
+<cpr_rationale></cpr_rationale>
+<cpr_discussed>yes</cpr_discussed>
+<hospital_transfer>appropriate</hospital_transfer>
+<critical_care_admission>appropriate</critical_care_admission>
+<treatment_ceilings>Example treatment</treatment_ceilings>
+<has_capacity>yes</has_capacity>
+<capacity_assessment></capacity_assessment>
+<involvement>person</involvement>
+<proxy_details>Example text.</proxy_details>
+<clinician_name>Example</clinician_name>
+<clinician_role>doctor</clinician_role>
+<clinician_registration>Dr Smith</clinician_registration>
+<signature></signature>
+<signed_at>2026-04-09T10:00:00Z</signed_at>
+<senior_endorsement></senior_endorsement>
+<emergency_contacts>07700900001</emergency_contacts>
+<review_date>2026-01-15</review_date>
+</respect>

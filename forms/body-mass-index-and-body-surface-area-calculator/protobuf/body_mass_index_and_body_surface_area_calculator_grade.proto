@@ -1,0 +1,29 @@
+// Generated from sql/. Do not edit by hand.
+// SOURCE: body_mass_index_and_body_surface_area_calculator_grade
+
+syntax = "proto3";
+
+package form_examples.body_mass_index_and_body_surface_area_calculator;
+
+enum BodyMassIndexAndBodySurfaceAreaCalculatorGradeBmiCategoryEnum {
+  BMICATEGORY_UNSPECIFIED = 0;
+  BMICATEGORY_UNDERWEIGHT = 1;  // underweight
+  BMICATEGORY_NORMAL = 2;  // normal
+  BMICATEGORY_OVERWEIGHT = 3;  // overweight
+  BMICATEGORY_OBESE_CLASS_1 = 4;  // obese-class-1
+  BMICATEGORY_OBESE_CLASS_2 = 5;  // obese-class-2
+  BMICATEGORY_OBESE_CLASS_3 = 6;  // obese-class-3
+}
+
+message BodyMassIndexAndBodySurfaceAreaCalculatorGrade {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string body_mass_index_and_body_surface_area_calculator_id = 5;  // UUID — uuid
+  double bmi = 6;  // NUMERIC(6,3) — numeric(6,3)
+  BodyMassIndexAndBodySurfaceAreaCalculatorGradeBmiCategoryEnum bmi_category = 7;  // VARCHAR(20)
+  double bsa_mosteller = 8;  // NUMERIC(5,3) — numeric(5,3)
+  double bsa_du_bois = 9;  // NUMERIC(5,3) — numeric(5,3)
+  string graded_at = 10;  // TIMESTAMPTZ — iso 8601
+}

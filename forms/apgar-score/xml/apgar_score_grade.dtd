@@ -1,0 +1,15 @@
+<!ELEMENT apgar_score_grade (id,created_at,updated_at,deleted_at,apgar_score_id,total_one_minute,total_five_minute,total_ten_minute,band_one_minute,band_five_minute,band_ten_minute,summary_band,trend,graded_at)>
+<!ELEMENT id (#PCDATA)>
+<!ELEMENT created_at (#PCDATA)>
+<!ELEMENT updated_at (#PCDATA)>
+<!ELEMENT deleted_at (#PCDATA)>
+<!ELEMENT apgar_score_id (#PCDATA)>
+<!ELEMENT total_one_minute (#PCDATA)>
+<!ELEMENT total_five_minute (#PCDATA)>
+<!ELEMENT total_ten_minute (#PCDATA)>
+<!ELEMENT band_one_minute (#PCDATA)>
+<!ELEMENT band_five_minute (#PCDATA)>
+<!ELEMENT band_ten_minute (#PCDATA)>
+<!ELEMENT summary_band (#PCDATA)>
+<!ELEMENT trend (#PCDATA)>
+<!ELEMENT graded_at (#PCDATA)>

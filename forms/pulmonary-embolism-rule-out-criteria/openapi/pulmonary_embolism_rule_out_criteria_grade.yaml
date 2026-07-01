@@ -1,0 +1,164 @@
+# Generated from sql/. Do not edit by hand.
+# SOURCE: pulmonary_embolism_rule_out_criteria_grade
+openapi: 3.1.0
+info:
+  title: Pulmonary Embolism Rule Out Criteria — PulmonaryEmbolismRuleOutCriteriaGrade
+  version: 1.0.0
+  description: "Computed PERC classification result: binary classification, all-criteria-satisfied flag, applicability, and recommended pathway. One-to-one with the parent assessment."
+paths:
+  /pulmonary-embolism-rule-out-criteria-grades:
+    get:
+      summary: List PulmonaryEmbolismRuleOutCriteriaGrade records
+      operationId: listPulmonaryEmbolismRuleOutCriteriaGrade
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of PulmonaryEmbolismRuleOutCriteriaGrade records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/PulmonaryEmbolismRuleOutCriteriaGrade"
+    post:
+      summary: Create a new PulmonaryEmbolismRuleOutCriteriaGrade
+      operationId: createPulmonaryEmbolismRuleOutCriteriaGrade
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/PulmonaryEmbolismRuleOutCriteriaGrade"
+      responses:
+        "201":
+          description: The newly created PulmonaryEmbolismRuleOutCriteriaGrade
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PulmonaryEmbolismRuleOutCriteriaGrade"
+        "400":
+          description: Validation error
+  /pulmonary-embolism-rule-out-criteria-grades/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one PulmonaryEmbolismRuleOutCriteriaGrade by id
+      operationId: getPulmonaryEmbolismRuleOutCriteriaGrade
+      responses:
+        "200":
+          description: The requested PulmonaryEmbolismRuleOutCriteriaGrade
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PulmonaryEmbolismRuleOutCriteriaGrade"
+        "404":
+          description: PulmonaryEmbolismRuleOutCriteriaGrade not found
+    patch:
+      summary: Update an existing PulmonaryEmbolismRuleOutCriteriaGrade
+      operationId: updatePulmonaryEmbolismRuleOutCriteriaGrade
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/PulmonaryEmbolismRuleOutCriteriaGrade"
+      responses:
+        "200":
+          description: The updated PulmonaryEmbolismRuleOutCriteriaGrade
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PulmonaryEmbolismRuleOutCriteriaGrade"
+        "404":
+          description: PulmonaryEmbolismRuleOutCriteriaGrade not found
+    delete:
+      summary: Soft-delete a PulmonaryEmbolismRuleOutCriteriaGrade
+      operationId: deletePulmonaryEmbolismRuleOutCriteriaGrade
+      responses:
+        "204":
+          description: PulmonaryEmbolismRuleOutCriteriaGrade deleted
+        "404":
+          description: PulmonaryEmbolismRuleOutCriteriaGrade not found
+components:
+  schemas:
+    PulmonaryEmbolismRuleOutCriteriaGrade:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was most recently updated.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was soft-deleted.
+        pulmonary_embolism_rule_out_criteria_id:
+          type: string
+          format: uuid
+          description: Foreign key to the parent assessment (unique, 1:1).
+        classification:
+          type: string
+          enum:
+            - perc-negative
+            - perc-positive
+            - ""
+          description: "Binary PERC classification: perc-negative (PE excluded without further testing) or perc-positive (proceed to D-dimer / imaging)."
+        all_criteria_satisfied:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Whether all eight criteria were satisfied (yes) or at least one failed (no).
+        applicable:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Whether PERC was applicable (yes when pre-test probability is low; otherwise no).
+        recommended_pathway:
+          type: string
+          description: "Recommended pathway: no further testing when perc-negative, otherwise D-dimer and/or imaging per local policy."
+        graded_at:
+          type: string
+          format: date-time
+          description: Timestamp when the engine last computed the classification.
+      required:
+        - created_at
+        - updated_at
+        - pulmonary_embolism_rule_out_criteria_id
+        - classification
+        - all_criteria_satisfied
+        - applicable
+        - recommended_pathway
+        - graded_at
+      description: "Computed PERC classification result: binary classification, all-criteria-satisfied flag, applicability, and recommended pathway. One-to-one with the parent assessment."

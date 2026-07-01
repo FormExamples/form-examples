@@ -1,0 +1,12 @@
+<!ELEMENT apgar_score_grade_rule (id,created_at,updated_at,deleted_at,apgar_score_grade_id,rule_id,timepoint_minutes,sign,points,category,description)>
+<!ELEMENT id (#PCDATA)>
+<!ELEMENT created_at (#PCDATA)>
+<!ELEMENT updated_at (#PCDATA)>
+<!ELEMENT deleted_at (#PCDATA)>
+<!ELEMENT apgar_score_grade_id (#PCDATA)>
+<!ELEMENT rule_id (#PCDATA)>
+<!ELEMENT timepoint_minutes (#PCDATA)>
+<!ELEMENT sign (#PCDATA)>
+<!ELEMENT points (#PCDATA)>
+<!ELEMENT category (#PCDATA)>
+<!ELEMENT description (#PCDATA)>

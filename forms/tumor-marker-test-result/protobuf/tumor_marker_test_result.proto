@@ -1,0 +1,74 @@
+// Generated from sql/. Do not edit by hand.
+// SOURCE: tumor_marker_test_result
+
+syntax = "proto3";
+
+package form_examples.tumor_marker_test_result;
+
+enum TumorMarkerTestResultReportStatusEnum {
+  REPORTSTATUS_UNSPECIFIED = 0;
+  REPORTSTATUS_PRELIMINARY = 1;  // preliminary
+  REPORTSTATUS_FINAL = 2;  // final
+  REPORTSTATUS_AMENDED = 3;  // amended
+  REPORTSTATUS_CANCELLED = 4;  // cancelled
+}
+
+enum TumorMarkerTestResultSpecimenConditionEnum {
+  SPECIMENCONDITION_UNSPECIFIED = 0;
+  SPECIMENCONDITION_SATISFACTORY = 1;  // satisfactory
+  SPECIMENCONDITION_HAEMOLYSED = 2;  // haemolysed
+  SPECIMENCONDITION_LIPAEMIC = 3;  // lipaemic
+  SPECIMENCONDITION_INSUFFICIENT = 4;  // insufficient
+}
+
+enum TumorMarkerTestResultTrendEnum {
+  TREND_UNSPECIFIED = 0;
+  TREND_RISING = 1;  // rising
+  TREND_STABLE = 2;  // stable
+  TREND_FALLING = 3;  // falling
+  TREND_NOT_APPLICABLE = 4;  // not-applicable
+}
+
+enum TumorMarkerTestResultOverallResultStatusEnum {
+  OVERALLRESULTSTATUS_UNSPECIFIED = 0;
+  OVERALLRESULTSTATUS_NORMAL = 1;  // normal
+  OVERALLRESULTSTATUS_ABNORMAL = 2;  // abnormal
+  OVERALLRESULTSTATUS_CRITICAL = 3;  // critical
+}
+
+message TumorMarkerTestResult {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string patient_id = 5;  // UUID — uuid
+  string clinician_id = 6;  // UUID — uuid
+  string originating_request_reference = 7;  // VARCHAR(255) — max 255 chars
+  TumorMarkerTestResultReportStatusEnum report_status = 8;  // VARCHAR(15)
+  string performed_date = 9;  // DATE — iso 8601 date
+  string reported_date = 10;  // DATE — iso 8601 date
+  TumorMarkerTestResultSpecimenConditionEnum specimen_condition = 11;  // VARCHAR(15)
+  string clinical_history = 12;  // VARCHAR(1000) — max 1000 chars
+  string known_cancer_site = 13;  // VARCHAR(255) — max 255 chars
+  double psa = 14;  // NUMERIC(12,2) — numeric(12,2)
+  double ca125 = 15;  // NUMERIC(12,2) — numeric(12,2)
+  double ca19_9 = 16;  // NUMERIC(12,2) — numeric(12,2)
+  double carcinoembryonic_antigen_cea = 17;  // NUMERIC(12,2) — numeric(12,2)
+  double alpha_fetoprotein_afp = 18;  // NUMERIC(12,2) — numeric(12,2)
+  double beta_hcg = 19;  // NUMERIC(12,2) — numeric(12,2)
+  double ca15_3 = 20;  // NUMERIC(12,2) — numeric(12,2)
+  double lactate_dehydrogenase_ldh = 21;  // NUMERIC(12,2) — numeric(12,2)
+  double calcitonin = 22;  // NUMERIC(12,2) — numeric(12,2)
+  double chromogranin_a = 23;  // NUMERIC(12,2) — numeric(12,2)
+  double previous_value = 24;  // NUMERIC(12,2) — numeric(12,2)
+  TumorMarkerTestResultTrendEnum trend = 25;  // VARCHAR(15)
+  string comparison_with_previous = 26;  // VARCHAR(1000) — max 1000 chars
+  TumorMarkerTestResultOverallResultStatusEnum overall_result_status = 27;  // VARCHAR(10)
+  bool markedly_elevated = 28;  // BOOLEAN
+  string findings_narrative = 29;  // VARCHAR(2000) — max 2000 chars
+  string impression = 30;  // VARCHAR(2000) — max 2000 chars
+  string reporting_category = 31;  // VARCHAR(50) — max 50 chars
+  string recommended_follow_up = 32;  // VARCHAR(1000) — max 1000 chars
+  bool critical_result_communicated = 33;  // BOOLEAN
+  string reported_to = 34;  // VARCHAR(500) — max 500 chars
+}

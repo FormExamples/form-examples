@@ -1,0 +1,160 @@
+# Generated from sql/. Do not edit by hand.
+# SOURCE: emergency_department_triage_note_grade_rule
+openapi: 3.1.0
+info:
+  title: Emergency Department Triage Note — EmergencyDepartmentTriageNoteGradeRule
+  version: 1.0.0
+  description: "Audit trail of every classification rule that fired while selecting the MTS priority level: instrument, minimum level justified, category, and description."
+paths:
+  /emergency-department-triage-note-grade-rules:
+    get:
+      summary: List EmergencyDepartmentTriageNoteGradeRule records
+      operationId: listEmergencyDepartmentTriageNoteGradeRule
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of EmergencyDepartmentTriageNoteGradeRule records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/EmergencyDepartmentTriageNoteGradeRule"
+    post:
+      summary: Create a new EmergencyDepartmentTriageNoteGradeRule
+      operationId: createEmergencyDepartmentTriageNoteGradeRule
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/EmergencyDepartmentTriageNoteGradeRule"
+      responses:
+        "201":
+          description: The newly created EmergencyDepartmentTriageNoteGradeRule
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/EmergencyDepartmentTriageNoteGradeRule"
+        "400":
+          description: Validation error
+  /emergency-department-triage-note-grade-rules/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one EmergencyDepartmentTriageNoteGradeRule by id
+      operationId: getEmergencyDepartmentTriageNoteGradeRule
+      responses:
+        "200":
+          description: The requested EmergencyDepartmentTriageNoteGradeRule
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/EmergencyDepartmentTriageNoteGradeRule"
+        "404":
+          description: EmergencyDepartmentTriageNoteGradeRule not found
+    patch:
+      summary: Update an existing EmergencyDepartmentTriageNoteGradeRule
+      operationId: updateEmergencyDepartmentTriageNoteGradeRule
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/EmergencyDepartmentTriageNoteGradeRule"
+      responses:
+        "200":
+          description: The updated EmergencyDepartmentTriageNoteGradeRule
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/EmergencyDepartmentTriageNoteGradeRule"
+        "404":
+          description: EmergencyDepartmentTriageNoteGradeRule not found
+    delete:
+      summary: Soft-delete a EmergencyDepartmentTriageNoteGradeRule
+      operationId: deleteEmergencyDepartmentTriageNoteGradeRule
+      responses:
+        "204":
+          description: EmergencyDepartmentTriageNoteGradeRule deleted
+        "404":
+          description: EmergencyDepartmentTriageNoteGradeRule not found
+components:
+  schemas:
+    EmergencyDepartmentTriageNoteGradeRule:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was most recently updated.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was soft-deleted.
+        emergency_department_triage_note_grade_id:
+          type: string
+          format: uuid
+          description: Foreign key to the parent grade.
+        rule_id:
+          type: string
+          maxLength: 40
+          description: Stable rule identifier (e.g. R-DISCRIMINATOR-AIRWAY-01).
+        instrument:
+          type: string
+          enum:
+            - discriminator
+            - news2
+            - pain
+            - vital-sign
+            - composite
+          description: "Classification instrument the rule belongs to: discriminator, news2, pain, vital-sign, or composite."
+        band:
+          type: integer
+          format: int32
+          description: Minimum MTS priority level (1-5) justified by this rule; NULL when not applicable.
+        category:
+          type: string
+          maxLength: 50
+          description: Subject category (e.g. airway, sepsis, deterioration, pain).
+        description:
+          type: string
+          maxLength: 500
+          description: Human-readable description of why the rule fired.
+      required:
+        - created_at
+        - updated_at
+        - emergency_department_triage_note_grade_id
+        - rule_id
+        - instrument
+        - category
+        - description
+      description: "Audit trail of every classification rule that fired while selecting the MTS priority level: instrument, minimum level justified, category, and description."

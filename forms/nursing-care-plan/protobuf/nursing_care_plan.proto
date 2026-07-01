@@ -1,0 +1,160 @@
+// Generated from sql/. Do not edit by hand.
+// SOURCE: nursing_care_plan
+
+syntax = "proto3";
+
+package form_examples.nursing_care_plan;
+
+enum NursingCarePlanNurseRoleEnum {
+  NURSEROLE_UNSPECIFIED = 0;
+  NURSEROLE_REGISTERED_NURSE = 1;  // registered-nurse
+  NURSEROLE_NURSING_ASSOCIATE = 2;  // nursing-associate
+  NURSEROLE_STUDENT = 3;  // student
+}
+
+enum NursingCarePlanCareSettingEnum {
+  CARESETTING_UNSPECIFIED = 0;
+  CARESETTING_WARD = 1;  // ward
+  CARESETTING_COMMUNITY = 2;  // community
+  CARESETTING_CARE_HOME = 3;  // care-home
+  CARESETTING_HOSPICE = 4;  // hospice
+  CARESETTING_OTHER = 5;  // other
+}
+
+enum NursingCarePlanPlanTypeEnum {
+  PLANTYPE_UNSPECIFIED = 0;
+  PLANTYPE_ADMISSION = 1;  // admission
+  PLANTYPE_ONGOING = 2;  // ongoing
+  PLANTYPE_DISCHARGE = 3;  // discharge
+}
+
+enum NursingCarePlanModelUsedEnum {
+  MODELUSED_UNSPECIFIED = 0;
+  MODELUSED_ROPER_LOGAN_TIERNEY = 1;  // roper-logan-tierney
+  MODELUSED_OREM = 2;  // orem
+  MODELUSED_ACTIVITIES_OF_LIVING = 3;  // activities-of-living
+  MODELUSED_OTHER = 4;  // other
+}
+
+enum NursingCarePlanSexEnum {
+  SEX_UNSPECIFIED = 0;
+  SEX_FEMALE = 1;  // female
+  SEX_MALE = 2;  // male
+  SEX_INTERSEX = 3;  // intersex
+  SEX_UNKNOWN = 4;  // unknown
+}
+
+enum NursingCarePlanFallsRiskDoneEnum {
+  FALLSRISKDONE_UNSPECIFIED = 0;
+  FALLSRISKDONE_YES = 1;  // yes
+  FALLSRISKDONE_NO = 2;  // no
+}
+
+enum NursingCarePlanFallsRiskLevelEnum {
+  FALLSRISKLEVEL_UNSPECIFIED = 0;
+  FALLSRISKLEVEL_LOW = 1;  // low
+  FALLSRISKLEVEL_MEDIUM = 2;  // medium
+  FALLSRISKLEVEL_HIGH = 3;  // high
+}
+
+enum NursingCarePlanFallsRiskActionedEnum {
+  FALLSRISKACTIONED_UNSPECIFIED = 0;
+  FALLSRISKACTIONED_YES = 1;  // yes
+  FALLSRISKACTIONED_NO = 2;  // no
+}
+
+enum NursingCarePlanPressureUlcerRiskDoneEnum {
+  PRESSUREULCERRISKDONE_UNSPECIFIED = 0;
+  PRESSUREULCERRISKDONE_YES = 1;  // yes
+  PRESSUREULCERRISKDONE_NO = 2;  // no
+}
+
+enum NursingCarePlanPressureUlcerRiskLevelEnum {
+  PRESSUREULCERRISKLEVEL_UNSPECIFIED = 0;
+  PRESSUREULCERRISKLEVEL_LOW = 1;  // low
+  PRESSUREULCERRISKLEVEL_MEDIUM = 2;  // medium
+  PRESSUREULCERRISKLEVEL_HIGH = 3;  // high
+}
+
+enum NursingCarePlanPressureUlcerRiskActionedEnum {
+  PRESSUREULCERRISKACTIONED_UNSPECIFIED = 0;
+  PRESSUREULCERRISKACTIONED_YES = 1;  // yes
+  PRESSUREULCERRISKACTIONED_NO = 2;  // no
+}
+
+enum NursingCarePlanVteRiskDoneEnum {
+  VTERISKDONE_UNSPECIFIED = 0;
+  VTERISKDONE_YES = 1;  // yes
+  VTERISKDONE_NO = 2;  // no
+}
+
+enum NursingCarePlanVteRiskLevelEnum {
+  VTERISKLEVEL_UNSPECIFIED = 0;
+  VTERISKLEVEL_LOW = 1;  // low
+  VTERISKLEVEL_MEDIUM = 2;  // medium
+  VTERISKLEVEL_HIGH = 3;  // high
+}
+
+enum NursingCarePlanVteRiskActionedEnum {
+  VTERISKACTIONED_UNSPECIFIED = 0;
+  VTERISKACTIONED_YES = 1;  // yes
+  VTERISKACTIONED_NO = 2;  // no
+}
+
+enum NursingCarePlanNutritionRiskDoneEnum {
+  NUTRITIONRISKDONE_UNSPECIFIED = 0;
+  NUTRITIONRISKDONE_YES = 1;  // yes
+  NUTRITIONRISKDONE_NO = 2;  // no
+}
+
+enum NursingCarePlanNutritionRiskLevelEnum {
+  NUTRITIONRISKLEVEL_UNSPECIFIED = 0;
+  NUTRITIONRISKLEVEL_LOW = 1;  // low
+  NUTRITIONRISKLEVEL_MEDIUM = 2;  // medium
+  NUTRITIONRISKLEVEL_HIGH = 3;  // high
+}
+
+enum NursingCarePlanNutritionRiskActionedEnum {
+  NUTRITIONRISKACTIONED_UNSPECIFIED = 0;
+  NUTRITIONRISKACTIONED_YES = 1;  // yes
+  NUTRITIONRISKACTIONED_NO = 2;  // no
+}
+
+message NursingCarePlan {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string patient_id = 5;  // UUID — uuid
+  string clinician_id = 6;  // UUID — uuid
+  string nurse_name = 7;  // TEXT
+  NursingCarePlanNurseRoleEnum nurse_role = 8;  // VARCHAR(30)
+  string nmc_number = 9;  // TEXT
+  string authored_at = 10;  // TIMESTAMPTZ — iso 8601
+  NursingCarePlanCareSettingEnum care_setting = 11;  // VARCHAR(20)
+  NursingCarePlanPlanTypeEnum plan_type = 12;  // VARCHAR(20)
+  NursingCarePlanModelUsedEnum model_used = 13;  // VARCHAR(30)
+  string patient_identifier = 14;  // TEXT
+  string patient_name = 15;  // TEXT
+  string date_of_birth = 16;  // DATE — iso 8601 date
+  NursingCarePlanSexEnum sex = 17;  // VARCHAR(20)
+  string ward_location = 18;  // TEXT
+  string handover_note = 19;  // TEXT
+  string review_date = 20;  // DATE — iso 8601 date
+  NursingCarePlanFallsRiskDoneEnum falls_risk_done = 21;  // VARCHAR(5)
+  NursingCarePlanFallsRiskLevelEnum falls_risk_level = 22;  // VARCHAR(10)
+  string falls_risk_assessed_on = 23;  // DATE — iso 8601 date
+  NursingCarePlanFallsRiskActionedEnum falls_risk_actioned = 24;  // VARCHAR(5)
+  NursingCarePlanPressureUlcerRiskDoneEnum pressure_ulcer_risk_done = 25;  // VARCHAR(5)
+  NursingCarePlanPressureUlcerRiskLevelEnum pressure_ulcer_risk_level = 26;  // VARCHAR(10)
+  string pressure_ulcer_risk_assessed_on = 27;  // DATE — iso 8601 date
+  NursingCarePlanPressureUlcerRiskActionedEnum pressure_ulcer_risk_actioned = 28;  // VARCHAR(5)
+  NursingCarePlanVteRiskDoneEnum vte_risk_done = 29;  // VARCHAR(5)
+  NursingCarePlanVteRiskLevelEnum vte_risk_level = 30;  // VARCHAR(10)
+  string vte_risk_assessed_on = 31;  // DATE — iso 8601 date
+  NursingCarePlanVteRiskActionedEnum vte_risk_actioned = 32;  // VARCHAR(5)
+  NursingCarePlanNutritionRiskDoneEnum nutrition_risk_done = 33;  // VARCHAR(5)
+  NursingCarePlanNutritionRiskLevelEnum nutrition_risk_level = 34;  // VARCHAR(10)
+  string nutrition_risk_assessed_on = 35;  // DATE — iso 8601 date
+  NursingCarePlanNutritionRiskActionedEnum nutrition_risk_actioned = 36;  // VARCHAR(5)
+}

@@ -1,0 +1,159 @@
+# Generated from sql/. Do not edit by hand.
+# SOURCE: quick_sequential_organ_failure_assessment_grade_rule
+openapi: 3.1.0
+info:
+  title: Quick Sequential Organ Failure Assessment — QuickSequentialOrganFailureAssessmentGradeRule
+  version: 1.0.0
+  description: "Audit trail of every grading rule that fired during qSOFA computation: criterion, point contributed, category, and description."
+paths:
+  /quick-sequential-organ-failure-assessment-grade-rules:
+    get:
+      summary: List QuickSequentialOrganFailureAssessmentGradeRule records
+      operationId: listQuickSequentialOrganFailureAssessmentGradeRule
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of QuickSequentialOrganFailureAssessmentGradeRule records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/QuickSequentialOrganFailureAssessmentGradeRule"
+    post:
+      summary: Create a new QuickSequentialOrganFailureAssessmentGradeRule
+      operationId: createQuickSequentialOrganFailureAssessmentGradeRule
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/QuickSequentialOrganFailureAssessmentGradeRule"
+      responses:
+        "201":
+          description: The newly created QuickSequentialOrganFailureAssessmentGradeRule
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/QuickSequentialOrganFailureAssessmentGradeRule"
+        "400":
+          description: Validation error
+  /quick-sequential-organ-failure-assessment-grade-rules/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one QuickSequentialOrganFailureAssessmentGradeRule by id
+      operationId: getQuickSequentialOrganFailureAssessmentGradeRule
+      responses:
+        "200":
+          description: The requested QuickSequentialOrganFailureAssessmentGradeRule
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/QuickSequentialOrganFailureAssessmentGradeRule"
+        "404":
+          description: QuickSequentialOrganFailureAssessmentGradeRule not found
+    patch:
+      summary: Update an existing QuickSequentialOrganFailureAssessmentGradeRule
+      operationId: updateQuickSequentialOrganFailureAssessmentGradeRule
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/QuickSequentialOrganFailureAssessmentGradeRule"
+      responses:
+        "200":
+          description: The updated QuickSequentialOrganFailureAssessmentGradeRule
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/QuickSequentialOrganFailureAssessmentGradeRule"
+        "404":
+          description: QuickSequentialOrganFailureAssessmentGradeRule not found
+    delete:
+      summary: Soft-delete a QuickSequentialOrganFailureAssessmentGradeRule
+      operationId: deleteQuickSequentialOrganFailureAssessmentGradeRule
+      responses:
+        "204":
+          description: QuickSequentialOrganFailureAssessmentGradeRule deleted
+        "404":
+          description: QuickSequentialOrganFailureAssessmentGradeRule not found
+components:
+  schemas:
+    QuickSequentialOrganFailureAssessmentGradeRule:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was most recently updated.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was soft-deleted.
+        quick_sequential_organ_failure_assessment_grade_id:
+          type: string
+          format: uuid
+          description: Foreign key to the parent grade.
+        rule_id:
+          type: string
+          maxLength: 40
+          description: Stable rule identifier (e.g. R-RESPIRATORY-RATE-01).
+        criterion:
+          type: string
+          enum:
+            - respiratory-rate
+            - mentation
+            - systolic-blood-pressure
+            - band
+          description: "Scored criterion the rule belongs to: respiratory-rate, mentation, systolic-blood-pressure, or band."
+        points:
+          type: integer
+          format: int32
+          description: Point (0 or 1) contributed by this rule for its criterion.
+        category:
+          type: string
+          maxLength: 50
+          description: Subject category (e.g. threshold-band, risk-band).
+        description:
+          type: string
+          maxLength: 500
+          description: Human-readable description of why the rule fired.
+      required:
+        - created_at
+        - updated_at
+        - quick_sequential_organ_failure_assessment_grade_id
+        - rule_id
+        - criterion
+        - category
+        - description
+      description: "Audit trail of every grading rule that fired during qSOFA computation: criterion, point contributed, category, and description."

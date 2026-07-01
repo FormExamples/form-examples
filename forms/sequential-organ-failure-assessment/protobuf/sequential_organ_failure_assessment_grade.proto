@@ -1,0 +1,34 @@
+// Generated from sql/. Do not edit by hand.
+// SOURCE: sequential_organ_failure_assessment_grade
+
+syntax = "proto3";
+
+package form_examples.sequential_organ_failure_assessment;
+
+enum SequentialOrganFailureAssessmentGradeMortalityBandEnum {
+  MORTALITYBAND_UNSPECIFIED = 0;
+  MORTALITYBAND_LOW = 1;  // low
+  MORTALITYBAND_MODERATE = 2;  // moderate
+  MORTALITYBAND_HIGH = 3;  // high
+  MORTALITYBAND_VERYHIGH = 4;  // veryHigh
+  MORTALITYBAND_EXTREME = 5;  // extreme
+}
+
+message SequentialOrganFailureAssessmentGrade {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string sequential_organ_failure_assessment_id = 5;  // UUID — uuid
+  int32 respiration_score = 6;  // INT
+  int32 coagulation_score = 7;  // INT
+  int32 liver_score = 8;  // INT
+  int32 cardiovascular_score = 9;  // INT
+  int32 cns_score = 10;  // INT
+  int32 renal_score = 11;  // INT
+  int32 total_score = 12;  // INT
+  int32 delta_sofa = 13;  // INT
+  SequentialOrganFailureAssessmentGradeMortalityBandEnum mortality_band = 14;  // VARCHAR(10)
+  bool sepsis3 = 15;  // BOOLEAN
+  string graded_at = 16;  // TIMESTAMPTZ — iso 8601
+}

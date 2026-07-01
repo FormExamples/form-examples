@@ -1,0 +1,228 @@
+# Generated from sql/. Do not edit by hand.
+# SOURCE: body_mass_index_and_body_surface_area_calculator
+openapi: 3.1.0
+info:
+  title: Body Mass Index And Body Surface Area Calculator — BodyMassIndexAndBodySurfaceAreaCalculator
+  version: 1.0.0
+  description: "Main body-mass-index and body-surface-area calculation record: context and identification, plus the measured height and weight inputs and the preferred BSA formula."
+paths:
+  /body-mass-index-and-body-surface-area-calculators:
+    get:
+      summary: List BodyMassIndexAndBodySurfaceAreaCalculator records
+      operationId: listBodyMassIndexAndBodySurfaceAreaCalculator
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of BodyMassIndexAndBodySurfaceAreaCalculator records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/BodyMassIndexAndBodySurfaceAreaCalculator"
+    post:
+      summary: Create a new BodyMassIndexAndBodySurfaceAreaCalculator
+      operationId: createBodyMassIndexAndBodySurfaceAreaCalculator
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/BodyMassIndexAndBodySurfaceAreaCalculator"
+      responses:
+        "201":
+          description: The newly created BodyMassIndexAndBodySurfaceAreaCalculator
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/BodyMassIndexAndBodySurfaceAreaCalculator"
+        "400":
+          description: Validation error
+  /body-mass-index-and-body-surface-area-calculators/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one BodyMassIndexAndBodySurfaceAreaCalculator by id
+      operationId: getBodyMassIndexAndBodySurfaceAreaCalculator
+      responses:
+        "200":
+          description: The requested BodyMassIndexAndBodySurfaceAreaCalculator
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/BodyMassIndexAndBodySurfaceAreaCalculator"
+        "404":
+          description: BodyMassIndexAndBodySurfaceAreaCalculator not found
+    patch:
+      summary: Update an existing BodyMassIndexAndBodySurfaceAreaCalculator
+      operationId: updateBodyMassIndexAndBodySurfaceAreaCalculator
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/BodyMassIndexAndBodySurfaceAreaCalculator"
+      responses:
+        "200":
+          description: The updated BodyMassIndexAndBodySurfaceAreaCalculator
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/BodyMassIndexAndBodySurfaceAreaCalculator"
+        "404":
+          description: BodyMassIndexAndBodySurfaceAreaCalculator not found
+    delete:
+      summary: Soft-delete a BodyMassIndexAndBodySurfaceAreaCalculator
+      operationId: deleteBodyMassIndexAndBodySurfaceAreaCalculator
+      responses:
+        "204":
+          description: BodyMassIndexAndBodySurfaceAreaCalculator deleted
+        "404":
+          description: BodyMassIndexAndBodySurfaceAreaCalculator not found
+components:
+  schemas:
+    BodyMassIndexAndBodySurfaceAreaCalculator:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was most recently updated.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was soft-deleted.
+        patient_id:
+          type: string
+          format: uuid
+          description: Foreign key to the patient this calculation is for (restricted delete).
+        clinician_id:
+          type: string
+          format: uuid
+          description: Foreign key to the clinician who recorded the calculation (optional, restricted delete).
+        clinician_name:
+          type: string
+          maxLength: 255
+          description: Recording clinician name as entered on the form.
+        clinician_role:
+          type: string
+          enum:
+            - doctor
+            - nurse
+            - pharmacist
+            - dietitian
+            - other
+            - ""
+          description: "Recording clinician role: doctor, nurse, pharmacist, dietitian, or other."
+        assessed_at:
+          type: string
+          format: date-time
+          description: Date and time the measurement was taken.
+        care_setting:
+          type: string
+          enum:
+            - primary-care
+            - outpatient
+            - inpatient
+            - oncology
+            - pre-operative
+            - other
+            - ""
+          description: "Care setting: primary-care, outpatient, inpatient, oncology, pre-operative, or other."
+        purpose:
+          type: string
+          enum:
+            - screening
+            - drug-dosing
+            - monitoring
+            - other
+            - ""
+          description: "Purpose of the calculation: screening, drug-dosing, monitoring, or other."
+        patient_identifier:
+          type: string
+          maxLength: 100
+          description: Local patient identifier as recorded on the form.
+        age_band:
+          type: string
+          enum:
+            - 18-39
+            - 40-64
+            - 65-74
+            - 75-84
+            - 85-plus
+            - ""
+          description: "Adult age band: 18-39, 40-64, 65-74, 75-84, or 85-plus."
+        sex:
+          type: string
+          enum:
+            - female
+            - male
+            - intersex
+            - unknown
+            - ""
+          description: "Patient sex recorded for clinical purposes: female, male, intersex, or unknown."
+        ancestry:
+          type: string
+          enum:
+            - asian
+            - other
+            - unspecified
+            - ""
+          description: "Patient ancestry for the Asian lower-threshold action points: asian, other, or unspecified."
+        height_cm:
+          type: number
+          format: double
+          description: Measured height in centimetres (null when unanswered).
+        weight_kg:
+          type: number
+          format: double
+          description: Measured weight in kilograms (null when unanswered).
+        bsa_formula:
+          type: string
+          enum:
+            - mosteller
+            - du-bois
+            - ""
+          description: "Preferred body-surface-area formula shown as primary: mosteller (default) or du-bois; both values are always computed."
+      required:
+        - created_at
+        - updated_at
+        - patient_id
+        - clinician_name
+        - clinician_role
+        - care_setting
+        - purpose
+        - patient_identifier
+        - age_band
+        - sex
+        - ancestry
+        - bsa_formula
+      description: "Main body-mass-index and body-surface-area calculation record: context and identification, plus the measured height and weight inputs and the preferred BSA formula."

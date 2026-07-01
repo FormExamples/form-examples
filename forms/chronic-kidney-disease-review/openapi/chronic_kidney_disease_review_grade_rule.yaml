@@ -1,0 +1,157 @@
+# Generated from sql/. Do not edit by hand.
+# SOURCE: chronic_kidney_disease_review_grade_rule
+openapi: 3.1.0
+info:
+  title: Chronic Kidney Disease Review — ChronicKidneyDiseaseReviewGradeRule
+  version: 1.0.0
+  description: "Audit trail of every classification or completeness rule that fired during grading: section, category, and description."
+paths:
+  /chronic-kidney-disease-review-grade-rules:
+    get:
+      summary: List ChronicKidneyDiseaseReviewGradeRule records
+      operationId: listChronicKidneyDiseaseReviewGradeRule
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of ChronicKidneyDiseaseReviewGradeRule records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/ChronicKidneyDiseaseReviewGradeRule"
+    post:
+      summary: Create a new ChronicKidneyDiseaseReviewGradeRule
+      operationId: createChronicKidneyDiseaseReviewGradeRule
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ChronicKidneyDiseaseReviewGradeRule"
+      responses:
+        "201":
+          description: The newly created ChronicKidneyDiseaseReviewGradeRule
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ChronicKidneyDiseaseReviewGradeRule"
+        "400":
+          description: Validation error
+  /chronic-kidney-disease-review-grade-rules/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one ChronicKidneyDiseaseReviewGradeRule by id
+      operationId: getChronicKidneyDiseaseReviewGradeRule
+      responses:
+        "200":
+          description: The requested ChronicKidneyDiseaseReviewGradeRule
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ChronicKidneyDiseaseReviewGradeRule"
+        "404":
+          description: ChronicKidneyDiseaseReviewGradeRule not found
+    patch:
+      summary: Update an existing ChronicKidneyDiseaseReviewGradeRule
+      operationId: updateChronicKidneyDiseaseReviewGradeRule
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ChronicKidneyDiseaseReviewGradeRule"
+      responses:
+        "200":
+          description: The updated ChronicKidneyDiseaseReviewGradeRule
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ChronicKidneyDiseaseReviewGradeRule"
+        "404":
+          description: ChronicKidneyDiseaseReviewGradeRule not found
+    delete:
+      summary: Soft-delete a ChronicKidneyDiseaseReviewGradeRule
+      operationId: deleteChronicKidneyDiseaseReviewGradeRule
+      responses:
+        "204":
+          description: ChronicKidneyDiseaseReviewGradeRule deleted
+        "404":
+          description: ChronicKidneyDiseaseReviewGradeRule not found
+components:
+  schemas:
+    ChronicKidneyDiseaseReviewGradeRule:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was most recently updated.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was soft-deleted.
+        chronic_kidney_disease_review_grade_id:
+          type: string
+          format: uuid
+          description: Foreign key to the parent grade.
+        rule_id:
+          type: string
+          maxLength: 40
+          description: Stable rule identifier (e.g. R-GFR-STAGE-G3B-01).
+        section:
+          type: string
+          enum:
+            - gfr-stage
+            - albuminuria-stage
+            - risk-zone
+            - bp-target
+            - completeness
+            - ""
+          description: "Section the rule concerns: gfr-stage, albuminuria-stage, risk-zone, bp-target, or completeness."
+        category:
+          type: string
+          maxLength: 50
+          description: Subject category (e.g. staging, heat-map, target-selection, required-component).
+        description:
+          type: string
+          maxLength: 500
+          description: Human-readable description of why the rule fired.
+      required:
+        - created_at
+        - updated_at
+        - chronic_kidney_disease_review_grade_id
+        - rule_id
+        - section
+        - category
+        - description
+      description: "Audit trail of every classification or completeness rule that fired during grading: section, category, and description."

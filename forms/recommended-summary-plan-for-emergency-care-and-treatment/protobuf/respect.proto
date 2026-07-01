@@ -1,0 +1,98 @@
+// Generated from sql/. Do not edit by hand.
+// SOURCE: respect
+
+syntax = "proto3";
+
+package form_examples.recommended_summary_plan_for_emergency_care_and_treatment;
+
+enum RespectPriorityBalanceEnum {
+  PRIORITYBALANCE_UNSPECIFIED = 0;
+  PRIORITYBALANCE_SUSTAIN_LIFE = 1;  // sustain-life
+  PRIORITYBALANCE_BALANCED = 2;  // balanced
+  PRIORITYBALANCE_COMFORT = 3;  // comfort
+}
+
+enum RespectCprRecommendationEnum {
+  CPRRECOMMENDATION_UNSPECIFIED = 0;
+  CPRRECOMMENDATION_ATTEMPT = 1;  // attempt
+  CPRRECOMMENDATION_DO_NOT_ATTEMPT = 2;  // do-not-attempt
+}
+
+enum RespectCprDiscussedEnum {
+  CPRDISCUSSED_UNSPECIFIED = 0;
+  CPRDISCUSSED_YES = 1;  // yes
+  CPRDISCUSSED_NO = 2;  // no
+}
+
+enum RespectHospitalTransferEnum {
+  HOSPITALTRANSFER_UNSPECIFIED = 0;
+  HOSPITALTRANSFER_APPROPRIATE = 1;  // appropriate
+  HOSPITALTRANSFER_NOT_APPROPRIATE = 2;  // not-appropriate
+}
+
+enum RespectCriticalCareAdmissionEnum {
+  CRITICALCAREADMISSION_UNSPECIFIED = 0;
+  CRITICALCAREADMISSION_APPROPRIATE = 1;  // appropriate
+  CRITICALCAREADMISSION_NOT_APPROPRIATE = 2;  // not-appropriate
+}
+
+enum RespectHasCapacityEnum {
+  HASCAPACITY_UNSPECIFIED = 0;
+  HASCAPACITY_YES = 1;  // yes
+  HASCAPACITY_NO = 2;  // no
+}
+
+enum RespectInvolvementEnum {
+  INVOLVEMENT_UNSPECIFIED = 0;
+  INVOLVEMENT_PERSON = 1;  // person
+  INVOLVEMENT_LEGAL_PROXY = 2;  // legal-proxy
+  INVOLVEMENT_CONSULTEES = 3;  // consultees
+}
+
+enum RespectClinicianRoleEnum {
+  CLINICIANROLE_UNSPECIFIED = 0;
+  CLINICIANROLE_DOCTOR = 1;  // doctor
+  CLINICIANROLE_NURSE = 2;  // nurse
+  CLINICIANROLE_PARAMEDIC = 3;  // paramedic
+  CLINICIANROLE_OTHER = 4;  // other
+}
+
+message Respect {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string patient_id = 5;  // UUID — uuid
+  string clinician_id = 6;  // UUID — uuid
+  string person_name = 7;  // TEXT
+  string date_of_birth = 8;  // DATE — iso 8601 date
+  string identifier = 9;  // TEXT
+  string address = 10;  // TEXT
+  string key_contact = 11;  // TEXT
+  string health_summary = 12;  // TEXT
+  string diagnoses = 13;  // TEXT
+  string existing_documents = 14;  // TEXT
+  string what_matters = 15;  // TEXT
+  string care_preferences = 16;  // TEXT
+  RespectPriorityBalanceEnum priority_balance = 17;  // VARCHAR(15)
+  string recommended_interventions = 18;  // TEXT
+  string not_recommended_interventions = 19;  // TEXT
+  RespectCprRecommendationEnum cpr_recommendation = 20;  // VARCHAR(15)
+  string cpr_rationale = 21;  // TEXT
+  RespectCprDiscussedEnum cpr_discussed = 22;  // VARCHAR(5)
+  RespectHospitalTransferEnum hospital_transfer = 23;  // VARCHAR(20)
+  RespectCriticalCareAdmissionEnum critical_care_admission = 24;  // VARCHAR(20)
+  string treatment_ceilings = 25;  // TEXT
+  RespectHasCapacityEnum has_capacity = 26;  // VARCHAR(5)
+  string capacity_assessment = 27;  // TEXT
+  RespectInvolvementEnum involvement = 28;  // VARCHAR(15)
+  string proxy_details = 29;  // TEXT
+  string clinician_name = 30;  // TEXT
+  RespectClinicianRoleEnum clinician_role = 31;  // VARCHAR(20)
+  string clinician_registration = 32;  // TEXT
+  string signature = 33;  // TEXT
+  string signed_at = 34;  // TIMESTAMPTZ — iso 8601
+  string senior_endorsement = 35;  // TEXT
+  string emergency_contacts = 36;  // TEXT
+  string review_date = 37;  // DATE — iso 8601 date
+}

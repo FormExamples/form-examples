@@ -1,0 +1,156 @@
+# Generated from sql/. Do not edit by hand.
+# SOURCE: sleep_study_test_result_grade_rule
+openapi: 3.1.0
+info:
+  title: Sleep Study Test Result — SleepStudyTestResultGradeRule
+  version: 1.0.0
+  description: Audit trail of every classification / severity / completeness / follow-up rule that fired for this result.
+paths:
+  /sleep-study-test-result-grade-rules:
+    get:
+      summary: List SleepStudyTestResultGradeRule records
+      operationId: listSleepStudyTestResultGradeRule
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of SleepStudyTestResultGradeRule records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/SleepStudyTestResultGradeRule"
+    post:
+      summary: Create a new SleepStudyTestResultGradeRule
+      operationId: createSleepStudyTestResultGradeRule
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/SleepStudyTestResultGradeRule"
+      responses:
+        "201":
+          description: The newly created SleepStudyTestResultGradeRule
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SleepStudyTestResultGradeRule"
+        "400":
+          description: Validation error
+  /sleep-study-test-result-grade-rules/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one SleepStudyTestResultGradeRule by id
+      operationId: getSleepStudyTestResultGradeRule
+      responses:
+        "200":
+          description: The requested SleepStudyTestResultGradeRule
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SleepStudyTestResultGradeRule"
+        "404":
+          description: SleepStudyTestResultGradeRule not found
+    patch:
+      summary: Update an existing SleepStudyTestResultGradeRule
+      operationId: updateSleepStudyTestResultGradeRule
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/SleepStudyTestResultGradeRule"
+      responses:
+        "200":
+          description: The updated SleepStudyTestResultGradeRule
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SleepStudyTestResultGradeRule"
+        "404":
+          description: SleepStudyTestResultGradeRule not found
+    delete:
+      summary: Soft-delete a SleepStudyTestResultGradeRule
+      operationId: deleteSleepStudyTestResultGradeRule
+      responses:
+        "204":
+          description: SleepStudyTestResultGradeRule deleted
+        "404":
+          description: SleepStudyTestResultGradeRule not found
+components:
+  schemas:
+    SleepStudyTestResultGradeRule:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was updated most-recently.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was deleted a.k.a. soft-removed.
+        sleep_study_test_result_grade_id:
+          type: string
+          format: uuid
+          description: Foreign key to the parent grade.
+        rule_id:
+          type: string
+          maxLength: 40
+          description: Stable rule identifier (e.g. R-CLASS-CRITICAL-01).
+        axis:
+          type: string
+          enum:
+            - classification
+            - severity
+            - completeness
+            - follow-up
+            - ""
+          description: "Scoring axis the rule belongs to: classification, severity, completeness, follow-up."
+        category:
+          type: string
+          maxLength: 50
+          description: Category or finding the rule relates to.
+        description:
+          type: string
+          maxLength: 500
+          description: Human-readable description of why the rule fired.
+      required:
+        - created_at
+        - updated_at
+        - sleep_study_test_result_grade_id
+        - rule_id
+        - axis
+        - category
+        - description
+      description: Audit trail of every classification / severity / completeness / follow-up rule that fired for this result.

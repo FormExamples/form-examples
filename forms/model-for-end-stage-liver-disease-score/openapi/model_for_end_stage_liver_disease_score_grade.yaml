@@ -1,0 +1,171 @@
+# Generated from sql/. Do not edit by hand.
+# SOURCE: model_for_end_stage_liver_disease_score_grade
+openapi: 3.1.0
+info:
+  title: Model For End Stage Liver Disease Score — ModelForEndStageLiverDiseaseScoreGrade
+  version: 1.0.0
+  description: "Computed MELD grading result: derived intermediate values, the integer MELD score (6-40 when computable), the mapped 3-month mortality band, and the estimated mortality percentage."
+paths:
+  /model-for-end-stage-liver-disease-score-grades:
+    get:
+      summary: List ModelForEndStageLiverDiseaseScoreGrade records
+      operationId: listModelForEndStageLiverDiseaseScoreGrade
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of ModelForEndStageLiverDiseaseScoreGrade records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/ModelForEndStageLiverDiseaseScoreGrade"
+    post:
+      summary: Create a new ModelForEndStageLiverDiseaseScoreGrade
+      operationId: createModelForEndStageLiverDiseaseScoreGrade
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ModelForEndStageLiverDiseaseScoreGrade"
+      responses:
+        "201":
+          description: The newly created ModelForEndStageLiverDiseaseScoreGrade
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ModelForEndStageLiverDiseaseScoreGrade"
+        "400":
+          description: Validation error
+  /model-for-end-stage-liver-disease-score-grades/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one ModelForEndStageLiverDiseaseScoreGrade by id
+      operationId: getModelForEndStageLiverDiseaseScoreGrade
+      responses:
+        "200":
+          description: The requested ModelForEndStageLiverDiseaseScoreGrade
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ModelForEndStageLiverDiseaseScoreGrade"
+        "404":
+          description: ModelForEndStageLiverDiseaseScoreGrade not found
+    patch:
+      summary: Update an existing ModelForEndStageLiverDiseaseScoreGrade
+      operationId: updateModelForEndStageLiverDiseaseScoreGrade
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ModelForEndStageLiverDiseaseScoreGrade"
+      responses:
+        "200":
+          description: The updated ModelForEndStageLiverDiseaseScoreGrade
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ModelForEndStageLiverDiseaseScoreGrade"
+        "404":
+          description: ModelForEndStageLiverDiseaseScoreGrade not found
+    delete:
+      summary: Soft-delete a ModelForEndStageLiverDiseaseScoreGrade
+      operationId: deleteModelForEndStageLiverDiseaseScoreGrade
+      responses:
+        "204":
+          description: ModelForEndStageLiverDiseaseScoreGrade deleted
+        "404":
+          description: ModelForEndStageLiverDiseaseScoreGrade not found
+components:
+  schemas:
+    ModelForEndStageLiverDiseaseScoreGrade:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was most recently updated.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was soft-deleted.
+        model_for_end_stage_liver_disease_score_id:
+          type: string
+          format: uuid
+          description: Foreign key to the parent assessment (unique, 1:1).
+        bilirubin_mg_dl:
+          type: number
+          format: double
+          description: Total bilirubin converted to mg/dL (from umol/L when required).
+        creatinine_mg_dl:
+          type: number
+          format: double
+          description: Serum creatinine converted to mg/dL (from umol/L when required), before the dialysis rule and bounds.
+        creatinine_adjusted:
+          type: number
+          format: double
+          description: Creatinine after the dialysis rule (set to 4.0 mg/dL when the rule applied), before the 1.0-4.0 bounds.
+        dialysis_rule_applied:
+          type: boolean
+          description: True when the dialysis creatinine rule applied (>= 2 haemodialysis sessions in the past 7 days or >= 24 h CVVHD).
+        meld_score:
+          type: integer
+          format: int32
+          description: Integer MELD score clamped to 6-40; NULL when a required lab input for the chosen variant is missing.
+        mortality_band:
+          type: string
+          enum:
+            - low
+            - moderate
+            - high
+            - very-high
+            - extreme
+            - ""
+          description: "Mapped estimated 3-month mortality band: low, moderate, high, very-high, or extreme."
+        estimated_mortality_percent:
+          type: number
+          format: double
+          description: Estimated 3-month mortality as a percentage for the mapped band.
+        graded_at:
+          type: string
+          format: date-time
+          description: Timestamp when the engine last computed the grade.
+      required:
+        - created_at
+        - updated_at
+        - model_for_end_stage_liver_disease_score_id
+        - dialysis_rule_applied
+        - mortality_band
+        - graded_at
+      description: "Computed MELD grading result: derived intermediate values, the integer MELD score (6-40 when computable), the mapped 3-month mortality band, and the estimated mortality percentage."

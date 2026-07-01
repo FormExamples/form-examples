@@ -1,0 +1,171 @@
+# Generated from sql/. Do not edit by hand.
+# SOURCE: wells_score_for_pulmonary_embolism_grade_rule
+openapi: 3.1.0
+info:
+  title: Wells Score For Pulmonary Embolism — WellsScoreForPulmonaryEmbolismGradeRule
+  version: 1.0.0
+  description: "Audit trail of every grading rule that fired during Wells-score computation: instrument, points, band, category, and description."
+paths:
+  /wells-score-for-pulmonary-embolism-grade-rules:
+    get:
+      summary: List WellsScoreForPulmonaryEmbolismGradeRule records
+      operationId: listWellsScoreForPulmonaryEmbolismGradeRule
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of WellsScoreForPulmonaryEmbolismGradeRule records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/WellsScoreForPulmonaryEmbolismGradeRule"
+    post:
+      summary: Create a new WellsScoreForPulmonaryEmbolismGradeRule
+      operationId: createWellsScoreForPulmonaryEmbolismGradeRule
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/WellsScoreForPulmonaryEmbolismGradeRule"
+      responses:
+        "201":
+          description: The newly created WellsScoreForPulmonaryEmbolismGradeRule
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/WellsScoreForPulmonaryEmbolismGradeRule"
+        "400":
+          description: Validation error
+  /wells-score-for-pulmonary-embolism-grade-rules/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one WellsScoreForPulmonaryEmbolismGradeRule by id
+      operationId: getWellsScoreForPulmonaryEmbolismGradeRule
+      responses:
+        "200":
+          description: The requested WellsScoreForPulmonaryEmbolismGradeRule
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/WellsScoreForPulmonaryEmbolismGradeRule"
+        "404":
+          description: WellsScoreForPulmonaryEmbolismGradeRule not found
+    patch:
+      summary: Update an existing WellsScoreForPulmonaryEmbolismGradeRule
+      operationId: updateWellsScoreForPulmonaryEmbolismGradeRule
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/WellsScoreForPulmonaryEmbolismGradeRule"
+      responses:
+        "200":
+          description: The updated WellsScoreForPulmonaryEmbolismGradeRule
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/WellsScoreForPulmonaryEmbolismGradeRule"
+        "404":
+          description: WellsScoreForPulmonaryEmbolismGradeRule not found
+    delete:
+      summary: Soft-delete a WellsScoreForPulmonaryEmbolismGradeRule
+      operationId: deleteWellsScoreForPulmonaryEmbolismGradeRule
+      responses:
+        "204":
+          description: WellsScoreForPulmonaryEmbolismGradeRule deleted
+        "404":
+          description: WellsScoreForPulmonaryEmbolismGradeRule not found
+components:
+  schemas:
+    WellsScoreForPulmonaryEmbolismGradeRule:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was most recently updated.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was soft-deleted.
+        wells_score_for_pulmonary_embolism_grade_id:
+          type: string
+          format: uuid
+          description: Foreign key to the parent grade.
+        rule_id:
+          type: string
+          maxLength: 40
+          description: Stable rule identifier (e.g. R-DVT-SIGNS-01).
+        instrument:
+          type: string
+          enum:
+            - criterion
+            - two-level
+            - three-level
+            - composite
+          description: "Scoring instrument the rule belongs to: criterion, two-level, three-level, or composite."
+        points:
+          type: number
+          format: double
+          description: Points contributed by this rule (+3, +1.5, or +1 for a criterion).
+        band:
+          type: string
+          enum:
+            - likely
+            - unlikely
+            - low
+            - moderate
+            - high
+            - ""
+          description: "Stratification band informed by this rule: likely, unlikely, low, moderate, or high."
+        category:
+          type: string
+          maxLength: 50
+          description: Subject category (e.g. clinical-sign, gestalt, tachycardia, immobilisation, malignancy).
+        description:
+          type: string
+          maxLength: 500
+          description: Human-readable description of why the rule fired.
+      required:
+        - created_at
+        - updated_at
+        - wells_score_for_pulmonary_embolism_grade_id
+        - rule_id
+        - instrument
+        - points
+        - band
+        - category
+        - description
+      description: "Audit trail of every grading rule that fired during Wells-score computation: instrument, points, band, category, and description."

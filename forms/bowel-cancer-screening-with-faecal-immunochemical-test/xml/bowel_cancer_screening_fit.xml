@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE bowel_cancer_screening_fit SYSTEM "bowel_cancer_screening_fit.dtd">
+<bowel_cancer_screening_fit>
+<id>770e8400-e29b-41d4-a716-446655440002</id>
+<created_at>2026-04-09T10:00:00Z</created_at>
+<updated_at>2026-04-09T10:00:00Z</updated_at>
+<deleted_at>2026-04-09T10:00:00Z</deleted_at>
+<patient_id>550e8400-e29b-41d4-a716-446655440000</patient_id>
+<clinician_id>660e8400-e29b-41d4-a716-446655440001</clinician_id>
+<reviewed_at>2026-04-09T10:00:00Z</reviewed_at>
+<screening_hub></screening_hub>
+<participant_identifier></participant_identifier>
+<age>45</age>
+<within_age_range>eligible</within_age_range>
+<recall_interval>two-yearly</recall_interval>
+<invitation_date>2026-01-15</invitation_date>
+<previous_outcome>first-invitation</previous_outcome>
+<last_screen_date>2026-01-15</last_screen_date>
+<kit_returned>yes</kit_returned>
+<return_date>2026-01-15</return_date>
+<sample_adequacy>adequate</sample_adequacy>
+<spoilt_reason>leaked</spoilt_reason>
+<faecal_haemoglobin_ug_g>0.0</faecal_haemoglobin_ug_g>
+<assay></assay>
+<threshold_applied>0.0</threshold_applied>
+<red_flag_symptoms>yes</red_flag_symptoms>
+<clinical_note>Example Hospital</clinical_note>
+<context>Example text.</context>
+</bowel_cancer_screening_fit>

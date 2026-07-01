@@ -1,0 +1,172 @@
+# Generated from sql/. Do not edit by hand.
+# SOURCE: wells_score_for_deep_vein_thrombosis_grade_rule
+openapi: 3.1.0
+info:
+  title: Wells Score For Deep Vein Thrombosis — WellsScoreForDeepVeinThrombosisGradeRule
+  version: 1.0.0
+  description: "Audit trail of every grading rule that fired during Wells-score computation: instrument, points, band, category, and description."
+paths:
+  /wells-score-for-deep-vein-thrombosis-grade-rules:
+    get:
+      summary: List WellsScoreForDeepVeinThrombosisGradeRule records
+      operationId: listWellsScoreForDeepVeinThrombosisGradeRule
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of WellsScoreForDeepVeinThrombosisGradeRule records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/WellsScoreForDeepVeinThrombosisGradeRule"
+    post:
+      summary: Create a new WellsScoreForDeepVeinThrombosisGradeRule
+      operationId: createWellsScoreForDeepVeinThrombosisGradeRule
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/WellsScoreForDeepVeinThrombosisGradeRule"
+      responses:
+        "201":
+          description: The newly created WellsScoreForDeepVeinThrombosisGradeRule
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/WellsScoreForDeepVeinThrombosisGradeRule"
+        "400":
+          description: Validation error
+  /wells-score-for-deep-vein-thrombosis-grade-rules/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one WellsScoreForDeepVeinThrombosisGradeRule by id
+      operationId: getWellsScoreForDeepVeinThrombosisGradeRule
+      responses:
+        "200":
+          description: The requested WellsScoreForDeepVeinThrombosisGradeRule
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/WellsScoreForDeepVeinThrombosisGradeRule"
+        "404":
+          description: WellsScoreForDeepVeinThrombosisGradeRule not found
+    patch:
+      summary: Update an existing WellsScoreForDeepVeinThrombosisGradeRule
+      operationId: updateWellsScoreForDeepVeinThrombosisGradeRule
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/WellsScoreForDeepVeinThrombosisGradeRule"
+      responses:
+        "200":
+          description: The updated WellsScoreForDeepVeinThrombosisGradeRule
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/WellsScoreForDeepVeinThrombosisGradeRule"
+        "404":
+          description: WellsScoreForDeepVeinThrombosisGradeRule not found
+    delete:
+      summary: Soft-delete a WellsScoreForDeepVeinThrombosisGradeRule
+      operationId: deleteWellsScoreForDeepVeinThrombosisGradeRule
+      responses:
+        "204":
+          description: WellsScoreForDeepVeinThrombosisGradeRule deleted
+        "404":
+          description: WellsScoreForDeepVeinThrombosisGradeRule not found
+components:
+  schemas:
+    WellsScoreForDeepVeinThrombosisGradeRule:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was most recently updated.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was soft-deleted.
+        wells_score_for_deep_vein_thrombosis_grade_id:
+          type: string
+          format: uuid
+          description: Foreign key to the parent grade.
+        rule_id:
+          type: string
+          maxLength: 40
+          description: Stable rule identifier (e.g. R-ACTIVE-CANCER-01).
+        instrument:
+          type: string
+          enum:
+            - criterion
+            - adjustment
+            - two-level
+            - three-level
+            - composite
+          description: "Scoring instrument the rule belongs to: criterion, adjustment, two-level, three-level, or composite."
+        points:
+          type: integer
+          format: int32
+          description: Points contributed by this rule (+1 for a criterion, -2 for the alternative-diagnosis adjustment).
+        band:
+          type: string
+          enum:
+            - likely
+            - unlikely
+            - low
+            - moderate
+            - high
+            - ""
+          description: "Stratification band informed by this rule: likely, unlikely, low, moderate, or high."
+        category:
+          type: string
+          maxLength: 50
+          description: Subject category (e.g. malignancy, immobilisation, clinical-sign, alternative-diagnosis).
+        description:
+          type: string
+          maxLength: 500
+          description: Human-readable description of why the rule fired.
+      required:
+        - created_at
+        - updated_at
+        - wells_score_for_deep_vein_thrombosis_grade_id
+        - rule_id
+        - instrument
+        - points
+        - band
+        - category
+        - description
+      description: "Audit trail of every grading rule that fired during Wells-score computation: instrument, points, band, category, and description."

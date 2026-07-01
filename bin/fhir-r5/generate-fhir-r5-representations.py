@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 """Generate FHIR HL7 R5 JSON representations from SQL migration files.
 
-For each form's sql-migrations/ directory, parses CREATE TABLE statements
-and generates corresponding FHIR R5 JSON resources in fhir-r5/.
+For each form's sql/ directory, parses CREATE TABLE statements
+and generates corresponding FHIR R5 JSON resources in fhir/r5/.
 
 FHIR resource mapping:
   patient                  → Patient
@@ -837,11 +837,11 @@ def process_form(form_dir):
     uuid_counter = 0
     table_uuid_map.clear()
 
-    sql_dir = form_dir / "sql-migrations"
+    sql_dir = form_dir / "sql"
     if not sql_dir.is_dir():
         return 0
 
-    fhir_dir = form_dir / "fhir-r5"
+    fhir_dir = form_dir / "fhir" / "r5"
     form_slug = form_dir.name
 
     # Only process numbered migration files; skip the combined schema.sql
@@ -867,7 +867,7 @@ def process_form(form_dir):
     for table_name, _ in all_tables:
         get_uuid(table_name)
 
-    fhir_dir.mkdir(exist_ok=True)
+    fhir_dir.mkdir(parents=True, exist_ok=True)
 
     count = 0
     for table_name, columns in all_tables:
@@ -895,7 +895,7 @@ def main():
 
     form_dirs = sorted([
         d for d in FORMS_DIR.iterdir()
-        if d.is_dir() and (d / "sql-migrations").is_dir()
+        if d.is_dir() and (d / "sql").is_dir()
     ])
 
     for form_dir in form_dirs:

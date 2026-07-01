@@ -1,0 +1,161 @@
+# Generated from sql/. Do not edit by hand.
+# SOURCE: curb_65_pneumonia_severity_score_grade_rule
+openapi: 3.1.0
+info:
+  title: Curb 65 Pneumonia Severity Score — Curb65PneumoniaSeverityScoreGradeRule
+  version: 1.0.0
+  description: "Audit trail of every grading rule that fired during CURB-65 computation: criterion, points contributed, category, and description."
+paths:
+  /curb-65-pneumonia-severity-score-grade-rules:
+    get:
+      summary: List Curb65PneumoniaSeverityScoreGradeRule records
+      operationId: listCurb65PneumoniaSeverityScoreGradeRule
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of Curb65PneumoniaSeverityScoreGradeRule records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Curb65PneumoniaSeverityScoreGradeRule"
+    post:
+      summary: Create a new Curb65PneumoniaSeverityScoreGradeRule
+      operationId: createCurb65PneumoniaSeverityScoreGradeRule
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Curb65PneumoniaSeverityScoreGradeRule"
+      responses:
+        "201":
+          description: The newly created Curb65PneumoniaSeverityScoreGradeRule
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Curb65PneumoniaSeverityScoreGradeRule"
+        "400":
+          description: Validation error
+  /curb-65-pneumonia-severity-score-grade-rules/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one Curb65PneumoniaSeverityScoreGradeRule by id
+      operationId: getCurb65PneumoniaSeverityScoreGradeRule
+      responses:
+        "200":
+          description: The requested Curb65PneumoniaSeverityScoreGradeRule
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Curb65PneumoniaSeverityScoreGradeRule"
+        "404":
+          description: Curb65PneumoniaSeverityScoreGradeRule not found
+    patch:
+      summary: Update an existing Curb65PneumoniaSeverityScoreGradeRule
+      operationId: updateCurb65PneumoniaSeverityScoreGradeRule
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Curb65PneumoniaSeverityScoreGradeRule"
+      responses:
+        "200":
+          description: The updated Curb65PneumoniaSeverityScoreGradeRule
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Curb65PneumoniaSeverityScoreGradeRule"
+        "404":
+          description: Curb65PneumoniaSeverityScoreGradeRule not found
+    delete:
+      summary: Soft-delete a Curb65PneumoniaSeverityScoreGradeRule
+      operationId: deleteCurb65PneumoniaSeverityScoreGradeRule
+      responses:
+        "204":
+          description: Curb65PneumoniaSeverityScoreGradeRule deleted
+        "404":
+          description: Curb65PneumoniaSeverityScoreGradeRule not found
+components:
+  schemas:
+    Curb65PneumoniaSeverityScoreGradeRule:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was most recently updated.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was soft-deleted.
+        curb_65_pneumonia_severity_score_grade_id:
+          type: string
+          format: uuid
+          description: Foreign key to the parent grade.
+        rule_id:
+          type: string
+          maxLength: 40
+          description: Stable rule identifier (e.g. R-CONFUSION-01).
+        criterion:
+          type: string
+          enum:
+            - confusion
+            - urea
+            - respiratory-rate
+            - blood-pressure
+            - age
+            - band
+          description: "Scored criterion the rule belongs to: confusion, urea, respiratory-rate, blood-pressure, age, or band."
+        points:
+          type: integer
+          format: int32
+          description: Points (0 or 1) contributed by this rule for its criterion.
+        category:
+          type: string
+          maxLength: 50
+          description: Subject category (e.g. threshold-band, band-classification).
+        description:
+          type: string
+          maxLength: 500
+          description: Human-readable description of why the rule fired.
+      required:
+        - created_at
+        - updated_at
+        - curb_65_pneumonia_severity_score_grade_id
+        - rule_id
+        - criterion
+        - category
+        - description
+      description: "Audit trail of every grading rule that fired during CURB-65 computation: criterion, points contributed, category, and description."

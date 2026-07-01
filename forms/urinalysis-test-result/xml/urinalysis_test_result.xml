@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE urinalysis_test_result SYSTEM "urinalysis_test_result.dtd">
+<urinalysis_test_result>
+<id>770e8400-e29b-41d4-a716-446655440002</id>
+<created_at>2026-04-09T10:00:00Z</created_at>
+<updated_at>2026-04-09T10:00:00Z</updated_at>
+<deleted_at>2026-04-09T10:00:00Z</deleted_at>
+<patient_id>550e8400-e29b-41d4-a716-446655440000</patient_id>
+<clinician_id>660e8400-e29b-41d4-a716-446655440001</clinician_id>
+<originating_request_reference></originating_request_reference>
+<report_status>preliminary</report_status>
+<performed_date>2026-01-15</performed_date>
+<reported_date>2026-01-15</reported_date>
+<specimen_type>midstream</specimen_type>
+<specimen_condition>satisfactory</specimen_condition>
+<clinical_history>Example text.</clinical_history>
+<leucocytes>negative</leucocytes>
+<nitrites>negative</nitrites>
+<protein>negative</protein>
+<blood>negative</blood>
+<glucose>negative</glucose>
+<ketones>negative</ketones>
+<bilirubin>negative</bilirubin>
+<ph>0.0</ph>
+<specific_gravity>0.0</specific_gravity>
+<red_cell_count></red_cell_count>
+<white_cell_count></white_cell_count>
+<epithelial_cells></epithelial_cells>
+<casts></casts>
+<organisms_seen>true</organisms_seen>
+<crystals></crystals>
+<culture_result>no-growth</culture_result>
+<organism_isolated></organism_isolated>
+<colony_count_cfu_ml></colony_count_cfu_ml>
+<antibiotic_sensitivities></antibiotic_sensitivities>
+<overall_result_status>normal</overall_result_status>
+<findings_narrative>Example text.</findings_narrative>
+<impression>Example text.</impression>
+<reporting_category>General</reporting_category>
+<recommended_follow_up></recommended_follow_up>
+<critical_result_communicated>true</critical_result_communicated>
+<reported_to></reported_to>
+</urinalysis_test_result>

@@ -1,0 +1,156 @@
+# Generated from sql/. Do not edit by hand.
+# SOURCE: coagulation_test_result_grade_rule
+openapi: 3.1.0
+info:
+  title: Coagulation Test Result — CoagulationTestResultGradeRule
+  version: 1.0.0
+  description: Audit trail of every classification / severity / completeness / follow-up rule that fired for this result.
+paths:
+  /coagulation-test-result-grade-rules:
+    get:
+      summary: List CoagulationTestResultGradeRule records
+      operationId: listCoagulationTestResultGradeRule
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of CoagulationTestResultGradeRule records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/CoagulationTestResultGradeRule"
+    post:
+      summary: Create a new CoagulationTestResultGradeRule
+      operationId: createCoagulationTestResultGradeRule
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CoagulationTestResultGradeRule"
+      responses:
+        "201":
+          description: The newly created CoagulationTestResultGradeRule
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CoagulationTestResultGradeRule"
+        "400":
+          description: Validation error
+  /coagulation-test-result-grade-rules/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one CoagulationTestResultGradeRule by id
+      operationId: getCoagulationTestResultGradeRule
+      responses:
+        "200":
+          description: The requested CoagulationTestResultGradeRule
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CoagulationTestResultGradeRule"
+        "404":
+          description: CoagulationTestResultGradeRule not found
+    patch:
+      summary: Update an existing CoagulationTestResultGradeRule
+      operationId: updateCoagulationTestResultGradeRule
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CoagulationTestResultGradeRule"
+      responses:
+        "200":
+          description: The updated CoagulationTestResultGradeRule
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CoagulationTestResultGradeRule"
+        "404":
+          description: CoagulationTestResultGradeRule not found
+    delete:
+      summary: Soft-delete a CoagulationTestResultGradeRule
+      operationId: deleteCoagulationTestResultGradeRule
+      responses:
+        "204":
+          description: CoagulationTestResultGradeRule deleted
+        "404":
+          description: CoagulationTestResultGradeRule not found
+components:
+  schemas:
+    CoagulationTestResultGradeRule:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was updated most-recently.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was deleted a.k.a. soft-removed.
+        coagulation_test_result_grade_id:
+          type: string
+          format: uuid
+          description: Foreign key to the parent grade.
+        rule_id:
+          type: string
+          maxLength: 40
+          description: Stable rule identifier (e.g. R-CLASS-CRITICAL-01).
+        axis:
+          type: string
+          enum:
+            - classification
+            - severity
+            - completeness
+            - follow-up
+            - ""
+          description: "Scoring axis the rule belongs to: classification, severity, completeness, follow-up."
+        category:
+          type: string
+          maxLength: 50
+          description: Category or finding the rule relates to.
+        description:
+          type: string
+          maxLength: 500
+          description: Human-readable description of why the rule fired.
+      required:
+        - created_at
+        - updated_at
+        - coagulation_test_result_grade_id
+        - rule_id
+        - axis
+        - category
+        - description
+      description: Audit trail of every classification / severity / completeness / follow-up rule that fired for this result.

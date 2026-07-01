@@ -1,0 +1,214 @@
+# Generated from sql/. Do not edit by hand.
+# SOURCE: mental_state_examination_grade
+openapi: 3.1.0
+info:
+  title: Mental State Examination — MentalStateExaminationGrade
+  version: 1.0.0
+  description: "Computed documentation-completeness and risk grading result for a mental state examination: status (complete/partial), risk level (none/low/moderate/high), completeness percentage, and per-domain documented flags."
+paths:
+  /mental-state-examination-grades:
+    get:
+      summary: List MentalStateExaminationGrade records
+      operationId: listMentalStateExaminationGrade
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of MentalStateExaminationGrade records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/MentalStateExaminationGrade"
+    post:
+      summary: Create a new MentalStateExaminationGrade
+      operationId: createMentalStateExaminationGrade
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/MentalStateExaminationGrade"
+      responses:
+        "201":
+          description: The newly created MentalStateExaminationGrade
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/MentalStateExaminationGrade"
+        "400":
+          description: Validation error
+  /mental-state-examination-grades/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one MentalStateExaminationGrade by id
+      operationId: getMentalStateExaminationGrade
+      responses:
+        "200":
+          description: The requested MentalStateExaminationGrade
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/MentalStateExaminationGrade"
+        "404":
+          description: MentalStateExaminationGrade not found
+    patch:
+      summary: Update an existing MentalStateExaminationGrade
+      operationId: updateMentalStateExaminationGrade
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/MentalStateExaminationGrade"
+      responses:
+        "200":
+          description: The updated MentalStateExaminationGrade
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/MentalStateExaminationGrade"
+        "404":
+          description: MentalStateExaminationGrade not found
+    delete:
+      summary: Soft-delete a MentalStateExaminationGrade
+      operationId: deleteMentalStateExaminationGrade
+      responses:
+        "204":
+          description: MentalStateExaminationGrade deleted
+        "404":
+          description: MentalStateExaminationGrade not found
+components:
+  schemas:
+    MentalStateExaminationGrade:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was most recently updated.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was soft-deleted.
+        mental_state_examination_id:
+          type: string
+          format: uuid
+          description: Foreign key to the parent mental state examination (unique, 1:1).
+        status:
+          type: string
+          enum:
+            - complete
+            - partial
+            - ""
+          description: "Completeness status: complete (all seven domains documented) or partial."
+        risk_level:
+          type: string
+          enum:
+            - none
+            - low
+            - moderate
+            - high
+            - ""
+          description: "Risk level derived from the highest-priority flag raised: none, low, moderate, or high."
+        completeness_percent:
+          type: integer
+          format: int32
+          description: "Completeness percentage (0..100): documented domains / 7 x 100."
+        appearance_behaviour_documented:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Whether Domain 1 (appearance and behaviour) has any non-blank finding (yes/no).
+        speech_documented:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Whether Domain 2 (speech) has any non-blank finding (yes/no).
+        emotion_documented:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Whether Domain 3 (emotion) has any non-blank finding (yes/no).
+        perception_documented:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Whether Domain 4 (perception) has any non-blank finding (yes/no).
+        thought_documented:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Whether Domain 5 (thought) has any non-blank finding (yes/no).
+        insight_documented:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Whether Domain 6 (insight and judgement) has any non-blank finding (yes/no).
+        cognition_documented:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Whether Domain 7 (cognition) has any non-blank finding (yes/no).
+        graded_at:
+          type: string
+          format: date-time
+          description: Timestamp when the engine last computed the grade.
+      required:
+        - created_at
+        - updated_at
+        - mental_state_examination_id
+        - status
+        - risk_level
+        - appearance_behaviour_documented
+        - speech_documented
+        - emotion_documented
+        - perception_documented
+        - thought_documented
+        - insight_documented
+        - cognition_documented
+        - graded_at
+      description: "Computed documentation-completeness and risk grading result for a mental state examination: status (complete/partial), risk level (none/low/moderate/high), completeness percentage, and per-domain documented flags."

@@ -1,0 +1,175 @@
+# Generated from sql/. Do not edit by hand.
+# SOURCE: paediatric_early_warning_score_grade_rule
+openapi: 3.1.0
+info:
+  title: Paediatric Early Warning Score — PaediatricEarlyWarningScoreGradeRule
+  version: 1.0.0
+  description: "Audit trail of every grading rule that fired during PEWS computation: instrument, band, points contributed, category, and description."
+paths:
+  /paediatric-early-warning-score-grade-rules:
+    get:
+      summary: List PaediatricEarlyWarningScoreGradeRule records
+      operationId: listPaediatricEarlyWarningScoreGradeRule
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of PaediatricEarlyWarningScoreGradeRule records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/PaediatricEarlyWarningScoreGradeRule"
+    post:
+      summary: Create a new PaediatricEarlyWarningScoreGradeRule
+      operationId: createPaediatricEarlyWarningScoreGradeRule
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/PaediatricEarlyWarningScoreGradeRule"
+      responses:
+        "201":
+          description: The newly created PaediatricEarlyWarningScoreGradeRule
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PaediatricEarlyWarningScoreGradeRule"
+        "400":
+          description: Validation error
+  /paediatric-early-warning-score-grade-rules/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one PaediatricEarlyWarningScoreGradeRule by id
+      operationId: getPaediatricEarlyWarningScoreGradeRule
+      responses:
+        "200":
+          description: The requested PaediatricEarlyWarningScoreGradeRule
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PaediatricEarlyWarningScoreGradeRule"
+        "404":
+          description: PaediatricEarlyWarningScoreGradeRule not found
+    patch:
+      summary: Update an existing PaediatricEarlyWarningScoreGradeRule
+      operationId: updatePaediatricEarlyWarningScoreGradeRule
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/PaediatricEarlyWarningScoreGradeRule"
+      responses:
+        "200":
+          description: The updated PaediatricEarlyWarningScoreGradeRule
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PaediatricEarlyWarningScoreGradeRule"
+        "404":
+          description: PaediatricEarlyWarningScoreGradeRule not found
+    delete:
+      summary: Soft-delete a PaediatricEarlyWarningScoreGradeRule
+      operationId: deletePaediatricEarlyWarningScoreGradeRule
+      responses:
+        "204":
+          description: PaediatricEarlyWarningScoreGradeRule deleted
+        "404":
+          description: PaediatricEarlyWarningScoreGradeRule not found
+components:
+  schemas:
+    PaediatricEarlyWarningScoreGradeRule:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was most recently updated.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was soft-deleted.
+        paediatric_early_warning_score_grade_id:
+          type: string
+          format: uuid
+          description: Foreign key to the parent grade.
+        rule_id:
+          type: string
+          maxLength: 40
+          description: Stable rule identifier (e.g. R-RESP-RATE-3-HIGH-01).
+        instrument:
+          type: string
+          enum:
+            - respiratory-rate
+            - respiratory-effort
+            - oxygen-saturation
+            - supplemental-oxygen
+            - heart-rate
+            - capillary-refill
+            - consciousness
+            - aggregate
+            - single-parameter
+            - concern
+          description: "Scoring instrument the rule belongs to: respiratory-rate, respiratory-effort, oxygen-saturation, supplemental-oxygen, heart-rate, capillary-refill, consciousness, aggregate, single-parameter, or concern."
+        band:
+          type: string
+          enum:
+            - routine
+            - low
+            - medium
+            - high
+            - ""
+          description: "Escalation band contributed by this rule: routine, low, medium, or high."
+        points:
+          type: integer
+          format: int32
+          description: Sub-score points contributed by this rule (0-3); NULL for non-scoring rules.
+        category:
+          type: string
+          maxLength: 50
+          description: Subject category (e.g. tachypnoea, recession, hypoxia, prolonged-refill, reduced-consciousness).
+        description:
+          type: string
+          maxLength: 500
+          description: Human-readable description of why the rule fired.
+      required:
+        - created_at
+        - updated_at
+        - paediatric_early_warning_score_grade_id
+        - rule_id
+        - instrument
+        - band
+        - category
+        - description
+      description: "Audit trail of every grading rule that fired during PEWS computation: instrument, band, points contributed, category, and description."

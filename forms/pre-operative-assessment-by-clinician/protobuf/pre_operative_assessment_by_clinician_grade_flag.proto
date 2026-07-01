@@ -1,4 +1,4 @@
-// Generated from sql-migrations/. Do not edit by hand.
+// Generated from sql/. Do not edit by hand.
 // SOURCE: pre_operative_assessment_by_clinician_grade_flag
 
 syntax = "proto3";

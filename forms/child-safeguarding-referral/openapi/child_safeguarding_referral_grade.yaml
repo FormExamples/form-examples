@@ -1,0 +1,158 @@
+# Generated from sql/. Do not edit by hand.
+# SOURCE: child_safeguarding_referral_grade
+openapi: 3.1.0
+info:
+  title: Child Safeguarding Referral — ChildSafeguardingReferralGrade
+  version: 1.0.0
+  description: "Computed grading result for a child safeguarding referral: completeness/validity status (complete/partial/incomplete), urgency classification (emergency/urgent/standard), and completeness percentage."
+paths:
+  /child-safeguarding-referral-grades:
+    get:
+      summary: List ChildSafeguardingReferralGrade records
+      operationId: listChildSafeguardingReferralGrade
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of ChildSafeguardingReferralGrade records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/ChildSafeguardingReferralGrade"
+    post:
+      summary: Create a new ChildSafeguardingReferralGrade
+      operationId: createChildSafeguardingReferralGrade
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ChildSafeguardingReferralGrade"
+      responses:
+        "201":
+          description: The newly created ChildSafeguardingReferralGrade
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ChildSafeguardingReferralGrade"
+        "400":
+          description: Validation error
+  /child-safeguarding-referral-grades/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one ChildSafeguardingReferralGrade by id
+      operationId: getChildSafeguardingReferralGrade
+      responses:
+        "200":
+          description: The requested ChildSafeguardingReferralGrade
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ChildSafeguardingReferralGrade"
+        "404":
+          description: ChildSafeguardingReferralGrade not found
+    patch:
+      summary: Update an existing ChildSafeguardingReferralGrade
+      operationId: updateChildSafeguardingReferralGrade
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ChildSafeguardingReferralGrade"
+      responses:
+        "200":
+          description: The updated ChildSafeguardingReferralGrade
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ChildSafeguardingReferralGrade"
+        "404":
+          description: ChildSafeguardingReferralGrade not found
+    delete:
+      summary: Soft-delete a ChildSafeguardingReferralGrade
+      operationId: deleteChildSafeguardingReferralGrade
+      responses:
+        "204":
+          description: ChildSafeguardingReferralGrade deleted
+        "404":
+          description: ChildSafeguardingReferralGrade not found
+components:
+  schemas:
+    ChildSafeguardingReferralGrade:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was most recently updated.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was soft-deleted.
+        child_safeguarding_referral_id:
+          type: string
+          format: uuid
+          description: Foreign key to the parent referral (unique, 1:1).
+        status:
+          type: string
+          enum:
+            - complete
+            - partial
+            - incomplete
+            - ""
+          description: "Completeness/validity status: complete, partial, or incomplete."
+        urgency:
+          type: string
+          enum:
+            - emergency
+            - urgent
+            - standard
+            - ""
+          description: "Urgency classification: emergency (s47 + emergency services), urgent (s47 enquiry), or standard (s17 assessment). Always computed, even when the referral is incomplete."
+        completeness_percent:
+          type: integer
+          format: int32
+          description: "Completeness percentage (0..100): answered mandatory and recommended fields / total mandatory and recommended fields x 100."
+        graded_at:
+          type: string
+          format: date-time
+          description: Timestamp when the engine last computed the grade.
+      required:
+        - created_at
+        - updated_at
+        - child_safeguarding_referral_id
+        - status
+        - urgency
+        - graded_at
+      description: "Computed grading result for a child safeguarding referral: completeness/validity status (complete/partial/incomplete), urgency classification (emergency/urgent/standard), and completeness percentage."

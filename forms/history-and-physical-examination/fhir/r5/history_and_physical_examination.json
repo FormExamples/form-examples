@@ -1,0 +1,506 @@
+{
+  "resourceType": "Observation",
+  "id": "770e8400-e29b-41d4-a716-446655440002",
+  "meta": {
+    "profile": [
+      "http://hl7.org/fhir/StructureDefinition/Observation"
+    ],
+    "lastUpdated": "2026-04-09T10:00:00+00:00"
+  },
+  "status": "final",
+  "category": [
+    {
+      "coding": [
+        {
+          "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+          "code": "survey",
+          "display": "Survey"
+        }
+      ]
+    }
+  ],
+  "code": {
+    "coding": [
+      {
+        "system": "urn:form-examples:history-and-physical-examination",
+        "code": "history_and_physical_examination",
+        "display": "History And Physical Examination"
+      }
+    ]
+  },
+  "subject": {
+    "reference": "Patient/550e8400-e29b-41d4-a716-446655440000"
+  },
+  "encounter": {
+    "reference": "Encounter/bb0e8400-e29b-41d4-a716-446655440006"
+  },
+  "effectiveDateTime": "2026-04-09T10:00:00+00:00",
+  "component": [
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:history-and-physical-examination",
+            "code": "deleted_at",
+            "display": "Deleted At"
+          }
+        ]
+      },
+      "valueDateTime": "2026-04-09T10:00:00+00:00"
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:history-and-physical-examination",
+            "code": "clerked_at",
+            "display": "Clerked At"
+          }
+        ]
+      },
+      "valueDateTime": "2026-04-09T10:00:00+00:00"
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:history-and-physical-examination",
+            "code": "clinician_role",
+            "display": "Clinician Role"
+          }
+        ]
+      },
+      "valueCodeableConcept": {
+        "coding": [
+          {
+            "system": "urn:form-examples:history-and-physical-examination:clinician_role",
+            "code": "doctor",
+            "display": "Doctor"
+          }
+        ]
+      }
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:history-and-physical-examination",
+            "code": "registration_number",
+            "display": "Registration Number"
+          }
+        ]
+      },
+      "valueString": ""
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:history-and-physical-examination",
+            "code": "care_setting",
+            "display": "Care Setting"
+          }
+        ]
+      },
+      "valueCodeableConcept": {
+        "coding": [
+          {
+            "system": "urn:form-examples:history-and-physical-examination:care_setting",
+            "code": "emergency-department",
+            "display": "Emergency-Department"
+          }
+        ]
+      }
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:history-and-physical-examination",
+            "code": "admission_source",
+            "display": "Admission Source"
+          }
+        ]
+      },
+      "valueCodeableConcept": {
+        "coding": [
+          {
+            "system": "urn:form-examples:history-and-physical-examination:admission_source",
+            "code": "self",
+            "display": "Self"
+          }
+        ]
+      }
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:history-and-physical-examination",
+            "code": "patient_identifier",
+            "display": "Patient Identifier"
+          }
+        ]
+      },
+      "valueString": ""
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:history-and-physical-examination",
+            "code": "age_band",
+            "display": "Age Band"
+          }
+        ]
+      },
+      "valueCodeableConcept": {
+        "coding": [
+          {
+            "system": "urn:form-examples:history-and-physical-examination:age_band",
+            "code": "18-39",
+            "display": "18-39"
+          }
+        ]
+      }
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:history-and-physical-examination",
+            "code": "sex",
+            "display": "Sex"
+          }
+        ]
+      },
+      "valueCodeableConcept": {
+        "coding": [
+          {
+            "system": "urn:form-examples:history-and-physical-examination:sex",
+            "code": "female",
+            "display": "Female"
+          }
+        ]
+      }
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:history-and-physical-examination",
+            "code": "presenting_complaint",
+            "display": "Presenting Complaint"
+          }
+        ]
+      },
+      "valueString": ""
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:history-and-physical-examination",
+            "code": "history_of_presenting_complaint",
+            "display": "History Of Presenting Complaint"
+          }
+        ]
+      },
+      "valueString": "Example text."
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:history-and-physical-examination",
+            "code": "past_medical_surgical_history",
+            "display": "Past Medical Surgical History"
+          }
+        ]
+      },
+      "valueString": "Example text."
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:history-and-physical-examination",
+            "code": "drug_history",
+            "display": "Drug History"
+          }
+        ]
+      },
+      "valueString": "Example text."
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:history-and-physical-examination",
+            "code": "allergy_status",
+            "display": "Allergy Status"
+          }
+        ]
+      },
+      "valueCodeableConcept": {
+        "coding": [
+          {
+            "system": "urn:form-examples:history-and-physical-examination:allergy_status",
+            "code": "none-known",
+            "display": "None-Known"
+          }
+        ]
+      }
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:history-and-physical-examination",
+            "code": "allergy_detail",
+            "display": "Allergy Detail"
+          }
+        ]
+      },
+      "valueString": ""
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:history-and-physical-examination",
+            "code": "family_history",
+            "display": "Family History"
+          }
+        ]
+      },
+      "valueString": "Example text."
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:history-and-physical-examination",
+            "code": "social_history",
+            "display": "Social History"
+          }
+        ]
+      },
+      "valueString": "Example text."
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:history-and-physical-examination",
+            "code": "systems_review",
+            "display": "Systems Review"
+          }
+        ]
+      },
+      "valueString": ""
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:history-and-physical-examination",
+            "code": "temperature",
+            "display": "Temperature"
+          }
+        ]
+      },
+      "valueQuantity": {
+        "value": 0.0
+      }
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:history-and-physical-examination",
+            "code": "heart_rate",
+            "display": "Heart Rate"
+          }
+        ]
+      },
+      "valueInteger": 1
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:history-and-physical-examination",
+            "code": "respiratory_rate",
+            "display": "Respiratory Rate"
+          }
+        ]
+      },
+      "valueInteger": 1
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:history-and-physical-examination",
+            "code": "systolic_blood_pressure",
+            "display": "Systolic Blood Pressure"
+          }
+        ]
+      },
+      "valueInteger": 1
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:history-and-physical-examination",
+            "code": "oxygen_saturation",
+            "display": "Oxygen Saturation"
+          }
+        ]
+      },
+      "valueInteger": 1
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:history-and-physical-examination",
+            "code": "consciousness_level",
+            "display": "Consciousness Level"
+          }
+        ]
+      },
+      "valueCodeableConcept": {
+        "coding": [
+          {
+            "system": "urn:form-examples:history-and-physical-examination:consciousness_level",
+            "code": "alert",
+            "display": "Alert"
+          }
+        ]
+      }
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:history-and-physical-examination",
+            "code": "exam_cardiovascular",
+            "display": "Exam Cardiovascular"
+          }
+        ]
+      },
+      "valueString": ""
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:history-and-physical-examination",
+            "code": "exam_respiratory",
+            "display": "Exam Respiratory"
+          }
+        ]
+      },
+      "valueString": ""
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:history-and-physical-examination",
+            "code": "exam_abdominal",
+            "display": "Exam Abdominal"
+          }
+        ]
+      },
+      "valueString": ""
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:history-and-physical-examination",
+            "code": "exam_neurological",
+            "display": "Exam Neurological"
+          }
+        ]
+      },
+      "valueString": ""
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:history-and-physical-examination",
+            "code": "exam_other",
+            "display": "Exam Other"
+          }
+        ]
+      },
+      "valueString": ""
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:history-and-physical-examination",
+            "code": "investigations",
+            "display": "Investigations"
+          }
+        ]
+      },
+      "valueString": ""
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:history-and-physical-examination",
+            "code": "impression",
+            "display": "Impression"
+          }
+        ]
+      },
+      "valueString": "Example text."
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:history-and-physical-examination",
+            "code": "red_flag_findings",
+            "display": "Red Flag Findings"
+          }
+        ]
+      },
+      "valueString": "Example text."
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:history-and-physical-examination",
+            "code": "management_plan",
+            "display": "Management Plan"
+          }
+        ]
+      },
+      "valueString": "Example text."
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:history-and-physical-examination",
+            "code": "clinical_note",
+            "display": "Clinical Note"
+          }
+        ]
+      },
+      "valueString": ""
+    }
+  ]
+}

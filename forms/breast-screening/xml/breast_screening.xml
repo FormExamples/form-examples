@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE breast_screening SYSTEM "breast_screening.dtd">
+<breast_screening>
+<id>770e8400-e29b-41d4-a716-446655440002</id>
+<created_at>2026-04-09T10:00:00Z</created_at>
+<updated_at>2026-04-09T10:00:00Z</updated_at>
+<deleted_at>2026-04-09T10:00:00Z</deleted_at>
+<patient_id>550e8400-e29b-41d4-a716-446655440000</patient_id>
+<clinician_id>660e8400-e29b-41d4-a716-446655440001</clinician_id>
+<reporting_clinician_role>mammographer</reporting_clinician_role>
+<reported_at>2026-04-09T10:00:00Z</reported_at>
+<screening_unit>mg/dL</screening_unit>
+<episode_type>routine-recall</episode_type>
+<patient_identifier></patient_identifier>
+<age_years>45</age_years>
+<last_screened_date>2026-01-15</last_screened_date>
+<higher_risk_surveillance>yes</higher_risk_surveillance>
+<symptomatic>yes</symptomatic>
+<consent_given>yes</consent_given>
+<views_taken>standard-four-view</views_taken>
+<image_adequacy>adequate</image_adequacy>
+<first_read_opinion>normal</first_read_opinion>
+<second_read_opinion>normal</second_read_opinion>
+<arbitration_outcome>normal</arbitration_outcome>
+<reading_outcome>normal-routine-recall</reading_outcome>
+<assessment_performed>yes</assessment_performed>
+<assessment_modalities></assessment_modalities>
+<imaging_classification>1</imaging_classification>
+<clinical_context>Example text.</clinical_context>
+</breast_screening>

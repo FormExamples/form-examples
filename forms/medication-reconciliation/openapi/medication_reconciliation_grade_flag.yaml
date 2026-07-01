@@ -1,0 +1,169 @@
+# Generated from sql/. Do not edit by hand.
+# SOURCE: medication_reconciliation_grade_flag
+openapi: 3.1.0
+info:
+  title: Medication Reconciliation — MedicationReconciliationGradeFlag
+  version: 1.0.0
+  description: Safety flags raised independently of the reconciliation status, with priority, description, and a suggested action for the pharmacy or prescribing team.
+paths:
+  /medication-reconciliation-grade-flags:
+    get:
+      summary: List MedicationReconciliationGradeFlag records
+      operationId: listMedicationReconciliationGradeFlag
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of MedicationReconciliationGradeFlag records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/MedicationReconciliationGradeFlag"
+    post:
+      summary: Create a new MedicationReconciliationGradeFlag
+      operationId: createMedicationReconciliationGradeFlag
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/MedicationReconciliationGradeFlag"
+      responses:
+        "201":
+          description: The newly created MedicationReconciliationGradeFlag
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/MedicationReconciliationGradeFlag"
+        "400":
+          description: Validation error
+  /medication-reconciliation-grade-flags/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one MedicationReconciliationGradeFlag by id
+      operationId: getMedicationReconciliationGradeFlag
+      responses:
+        "200":
+          description: The requested MedicationReconciliationGradeFlag
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/MedicationReconciliationGradeFlag"
+        "404":
+          description: MedicationReconciliationGradeFlag not found
+    patch:
+      summary: Update an existing MedicationReconciliationGradeFlag
+      operationId: updateMedicationReconciliationGradeFlag
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/MedicationReconciliationGradeFlag"
+      responses:
+        "200":
+          description: The updated MedicationReconciliationGradeFlag
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/MedicationReconciliationGradeFlag"
+        "404":
+          description: MedicationReconciliationGradeFlag not found
+    delete:
+      summary: Soft-delete a MedicationReconciliationGradeFlag
+      operationId: deleteMedicationReconciliationGradeFlag
+      responses:
+        "204":
+          description: MedicationReconciliationGradeFlag deleted
+        "404":
+          description: MedicationReconciliationGradeFlag not found
+components:
+  schemas:
+    MedicationReconciliationGradeFlag:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was most recently updated.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was soft-deleted.
+        medication_reconciliation_grade_id:
+          type: string
+          format: uuid
+          description: Foreign key to the parent grade.
+        flag_id:
+          type: string
+          maxLength: 50
+          description: Stable flag identifier (e.g. F-HIGH-RISK-UNINTENTIONAL-DISCREPANCY-001).
+        category:
+          type: string
+          enum:
+            - high-risk-unintentional-discrepancy
+            - insufficient-sources
+            - allergy-conflict
+            - interaction
+            - therapeutic-duplication
+            - unintentional-discrepancy-outstanding
+            - allergy-status-not-documented
+            - other
+            - ""
+          description: "Flag category: high-risk-unintentional-discrepancy, insufficient-sources, allergy-conflict, interaction, therapeutic-duplication, unintentional-discrepancy-outstanding, allergy-status-not-documented, or other."
+        priority:
+          type: string
+          enum:
+            - low
+            - medium
+            - high
+            - ""
+          description: "Priority: low, medium, high."
+        description:
+          type: string
+          maxLength: 500
+          description: Human-readable description of what fired the flag.
+        suggested_action:
+          type: string
+          maxLength: 500
+          description: "Suggested action (e.g. \"resolve the unintentional anticoagulant discrepancy with the prescriber\")."
+      required:
+        - created_at
+        - updated_at
+        - medication_reconciliation_grade_id
+        - flag_id
+        - category
+        - priority
+        - description
+        - suggested_action
+      description: Safety flags raised independently of the reconciliation status, with priority, description, and a suggested action for the pharmacy or prescribing team.

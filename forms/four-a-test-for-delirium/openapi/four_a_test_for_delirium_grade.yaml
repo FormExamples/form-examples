@@ -1,0 +1,165 @@
+# Generated from sql/. Do not edit by hand.
+# SOURCE: four_a_test_for_delirium_grade
+openapi: 3.1.0
+info:
+  title: Four A Test For Delirium — FourATestForDeliriumGrade
+  version: 1.0.0
+  description: "Computed 4AT grading result: per-item sub-scores, summed total (0-12), and derived interpretation band."
+paths:
+  /four-a-test-for-delirium-grades:
+    get:
+      summary: List FourATestForDeliriumGrade records
+      operationId: listFourATestForDeliriumGrade
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of FourATestForDeliriumGrade records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/FourATestForDeliriumGrade"
+    post:
+      summary: Create a new FourATestForDeliriumGrade
+      operationId: createFourATestForDeliriumGrade
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/FourATestForDeliriumGrade"
+      responses:
+        "201":
+          description: The newly created FourATestForDeliriumGrade
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/FourATestForDeliriumGrade"
+        "400":
+          description: Validation error
+  /four-a-test-for-delirium-grades/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one FourATestForDeliriumGrade by id
+      operationId: getFourATestForDeliriumGrade
+      responses:
+        "200":
+          description: The requested FourATestForDeliriumGrade
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/FourATestForDeliriumGrade"
+        "404":
+          description: FourATestForDeliriumGrade not found
+    patch:
+      summary: Update an existing FourATestForDeliriumGrade
+      operationId: updateFourATestForDeliriumGrade
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/FourATestForDeliriumGrade"
+      responses:
+        "200":
+          description: The updated FourATestForDeliriumGrade
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/FourATestForDeliriumGrade"
+        "404":
+          description: FourATestForDeliriumGrade not found
+    delete:
+      summary: Soft-delete a FourATestForDeliriumGrade
+      operationId: deleteFourATestForDeliriumGrade
+      responses:
+        "204":
+          description: FourATestForDeliriumGrade deleted
+        "404":
+          description: FourATestForDeliriumGrade not found
+components:
+  schemas:
+    FourATestForDeliriumGrade:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was most recently updated.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was soft-deleted.
+        four_a_test_for_delirium_id:
+          type: string
+          format: uuid
+          description: Foreign key to the parent assessment (unique, 1:1).
+        item1_score:
+          type: integer
+          format: int32
+          description: Sub-score for item 1, alertness (0 or 4).
+        item2_score:
+          type: integer
+          format: int32
+          description: Sub-score for item 2, AMT4 (0, 1, or 2).
+        item3_score:
+          type: integer
+          format: int32
+          description: Sub-score for item 3, attention via months backwards (0, 1, or 2).
+        item4_score:
+          type: integer
+          format: int32
+          description: Sub-score for item 4, acute change or fluctuating course (0 or 4).
+        total_score:
+          type: integer
+          format: int32
+          description: Summed 4AT score across the four items (0-12 when complete).
+        interpretation:
+          type: string
+          enum:
+            - delirium-unlikely
+            - possible-cognitive-impairment
+            - possible-delirium
+            - ""
+          description: "Derived interpretation band: delirium-unlikely (0), possible-cognitive-impairment (1-3), or possible-delirium (>= 4)."
+        graded_at:
+          type: string
+          format: date-time
+          description: Timestamp when the engine last computed the grade.
+      required:
+        - created_at
+        - updated_at
+        - four_a_test_for_delirium_id
+        - interpretation
+        - graded_at
+      description: "Computed 4AT grading result: per-item sub-scores, summed total (0-12), and derived interpretation band."

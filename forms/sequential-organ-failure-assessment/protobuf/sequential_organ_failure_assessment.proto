@@ -1,0 +1,94 @@
+// Generated from sql/. Do not edit by hand.
+// SOURCE: sequential_organ_failure_assessment
+
+syntax = "proto3";
+
+package form_examples.sequential_organ_failure_assessment;
+
+enum SequentialOrganFailureAssessmentAssessorRoleEnum {
+  ASSESSORROLE_UNSPECIFIED = 0;
+  ASSESSORROLE_INTENSIVIST = 1;  // intensivist
+  ASSESSORROLE_CRITICAL_CARE_PHYSICIAN = 2;  // critical-care-physician
+  ASSESSORROLE_ACUTE_PHYSICIAN = 3;  // acute-physician
+  ASSESSORROLE_RESIDENT = 4;  // resident
+  ASSESSORROLE_NURSE = 5;  // nurse
+  ASSESSORROLE_OUTREACH_PRACTITIONER = 6;  // outreach-practitioner
+  ASSESSORROLE_OTHER = 7;  // other
+}
+
+enum SequentialOrganFailureAssessmentCareLocationEnum {
+  CARELOCATION_UNSPECIFIED = 0;
+  CARELOCATION_ICU = 1;  // icu
+  CARELOCATION_HDU = 2;  // hdu
+  CARELOCATION_CRITICAL_CARE_OUTREACH = 3;  // critical-care-outreach
+  CARELOCATION_ACUTE_MEDICAL_UNIT = 4;  // acute-medical-unit
+  CARELOCATION_EMERGENCY_DEPARTMENT = 5;  // emergency-department
+  CARELOCATION_OTHER = 6;  // other
+}
+
+enum SequentialOrganFailureAssessmentSexEnum {
+  SEX_UNSPECIFIED = 0;
+  SEX_FEMALE = 1;  // female
+  SEX_MALE = 2;  // male
+  SEX_INTERSEX = 3;  // intersex
+  SEX_UNKNOWN = 4;  // unknown
+}
+
+enum SequentialOrganFailureAssessmentSuspectedInfectionEnum {
+  SUSPECTEDINFECTION_UNSPECIFIED = 0;
+  SUSPECTEDINFECTION_YES = 1;  // yes
+  SUSPECTEDINFECTION_NO = 2;  // no
+  SUSPECTEDINFECTION_UNKNOWN = 3;  // unknown
+}
+
+enum SequentialOrganFailureAssessmentRespiratorySupportEnum {
+  RESPIRATORYSUPPORT_UNSPECIFIED = 0;
+  RESPIRATORYSUPPORT_VENTILATED = 1;  // ventilated
+  RESPIRATORYSUPPORT_CPAP = 2;  // cpap
+  RESPIRATORYSUPPORT_NONE = 3;  // none
+}
+
+enum SequentialOrganFailureAssessmentVasopressorEnum {
+  VASOPRESSOR_UNSPECIFIED = 0;
+  VASOPRESSOR_NONE = 1;  // none
+  VASOPRESSOR_DOPAMINE = 2;  // dopamine
+  VASOPRESSOR_DOBUTAMINE = 3;  // dobutamine
+  VASOPRESSOR_ADRENALINE = 4;  // adrenaline
+  VASOPRESSOR_NORADRENALINE = 5;  // noradrenaline
+  VASOPRESSOR_OTHER = 6;  // other
+}
+
+message SequentialOrganFailureAssessment {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string patient_id = 5;  // UUID — uuid
+  string clinician_id = 6;  // UUID — uuid
+  string assessor_name = 7;  // VARCHAR(255) — max 255 chars
+  SequentialOrganFailureAssessmentAssessorRoleEnum assessor_role = 8;  // VARCHAR(40)
+  string assessor_registration_number = 9;  // VARCHAR(50) — max 50 chars
+  string assessed_at = 10;  // TIMESTAMPTZ — iso 8601
+  SequentialOrganFailureAssessmentCareLocationEnum care_location = 11;  // VARCHAR(30)
+  int32 hours_since_admission = 12;  // INT
+  string patient_identifier = 13;  // VARCHAR(100) — max 100 chars
+  int32 age_years = 14;  // INT
+  SequentialOrganFailureAssessmentSexEnum sex = 15;  // VARCHAR(20)
+  string admission_diagnosis = 16;  // TEXT
+  SequentialOrganFailureAssessmentSuspectedInfectionEnum suspected_infection = 17;  // VARCHAR(10)
+  int32 baseline_sofa_total = 18;  // INT
+  double pao2 = 19;  // NUMERIC(6,2) — numeric(6,2)
+  double fio2 = 20;  // NUMERIC(4,2) — numeric(4,2)
+  double pao2_fio2_ratio = 21;  // NUMERIC(7,2) — numeric(7,2)
+  SequentialOrganFailureAssessmentRespiratorySupportEnum respiratory_support = 22;  // VARCHAR(20)
+  double platelets = 23;  // NUMERIC(6,1) — numeric(6,1)
+  double bilirubin = 24;  // NUMERIC(7,1) — numeric(7,1)
+  double map_ = 25;  // NUMERIC(5,1) — numeric(5,1)
+  SequentialOrganFailureAssessmentVasopressorEnum vasopressor = 26;  // VARCHAR(20)
+  double vasopressor_dose = 27;  // NUMERIC(6,3) — numeric(6,3)
+  int32 glasgow_coma_scale = 28;  // INT
+  bool sedated = 29;  // BOOLEAN
+  double creatinine = 30;  // NUMERIC(7,1) — numeric(7,1)
+  int32 urine_output = 31;  // INT
+  string clinical_note = 32;  // TEXT
+}

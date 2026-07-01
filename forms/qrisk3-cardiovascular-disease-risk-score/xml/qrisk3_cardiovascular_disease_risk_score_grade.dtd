@@ -1,0 +1,11 @@
+<!ELEMENT qrisk3_cardiovascular_disease_risk_score_grade (id,created_at,updated_at,deleted_at,qrisk3_cardiovascular_disease_risk_score_id,ten_year_risk_percent,risk_band,heart_age,linear_predictor,graded_at)>
+<!ELEMENT id (#PCDATA)>
+<!ELEMENT created_at (#PCDATA)>
+<!ELEMENT updated_at (#PCDATA)>
+<!ELEMENT deleted_at (#PCDATA)>
+<!ELEMENT qrisk3_cardiovascular_disease_risk_score_id (#PCDATA)>
+<!ELEMENT ten_year_risk_percent (#PCDATA)>
+<!ELEMENT risk_band (#PCDATA)>
+<!ELEMENT heart_age (#PCDATA)>
+<!ELEMENT linear_predictor (#PCDATA)>
+<!ELEMENT graded_at (#PCDATA)>

@@ -1,0 +1,602 @@
+{
+  "resourceType": "Observation",
+  "id": "770e8400-e29b-41d4-a716-446655440002",
+  "meta": {
+    "profile": [
+      "http://hl7.org/fhir/StructureDefinition/Observation"
+    ],
+    "lastUpdated": "2026-04-09T10:00:00+00:00"
+  },
+  "status": "final",
+  "category": [
+    {
+      "coding": [
+        {
+          "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+          "code": "survey",
+          "display": "Survey"
+        }
+      ]
+    }
+  ],
+  "code": {
+    "coding": [
+      {
+        "system": "urn:form-examples:hypertension-review",
+        "code": "hypertension_review",
+        "display": "Hypertension Review"
+      }
+    ]
+  },
+  "subject": {
+    "reference": "Patient/550e8400-e29b-41d4-a716-446655440000"
+  },
+  "encounter": {
+    "reference": "Encounter/bb0e8400-e29b-41d4-a716-446655440006"
+  },
+  "effectiveDateTime": "2026-04-09T10:00:00+00:00",
+  "component": [
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:hypertension-review",
+            "code": "deleted_at",
+            "display": "Deleted At"
+          }
+        ]
+      },
+      "valueDateTime": "2026-04-09T10:00:00+00:00"
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:hypertension-review",
+            "code": "clinician_role",
+            "display": "Clinician Role"
+          }
+        ]
+      },
+      "valueCodeableConcept": {
+        "coding": [
+          {
+            "system": "urn:form-examples:hypertension-review:clinician_role",
+            "code": "gp",
+            "display": "Gp"
+          }
+        ]
+      }
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:hypertension-review",
+            "code": "reviewed_at",
+            "display": "Reviewed At"
+          }
+        ]
+      },
+      "valueDateTime": "2026-01-15"
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:hypertension-review",
+            "code": "practice_site",
+            "display": "Practice Site"
+          }
+        ]
+      },
+      "valueString": "Example location"
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:hypertension-review",
+            "code": "patient_identifier",
+            "display": "Patient Identifier"
+          }
+        ]
+      },
+      "valueString": ""
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:hypertension-review",
+            "code": "age_band",
+            "display": "Age Band"
+          }
+        ]
+      },
+      "valueCodeableConcept": {
+        "coding": [
+          {
+            "system": "urn:form-examples:hypertension-review:age_band",
+            "code": "18-39",
+            "display": "18-39"
+          }
+        ]
+      }
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:hypertension-review",
+            "code": "sex",
+            "display": "Sex"
+          }
+        ]
+      },
+      "valueCodeableConcept": {
+        "coding": [
+          {
+            "system": "urn:form-examples:hypertension-review:sex",
+            "code": "female",
+            "display": "Female"
+          }
+        ]
+      }
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:hypertension-review",
+            "code": "ethnicity",
+            "display": "Ethnicity"
+          }
+        ]
+      },
+      "valueCodeableConcept": {
+        "coding": [
+          {
+            "system": "urn:form-examples:hypertension-review:ethnicity",
+            "code": "white",
+            "display": "White"
+          }
+        ]
+      }
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:hypertension-review",
+            "code": "diagnosis_date",
+            "display": "Diagnosis Date"
+          }
+        ]
+      },
+      "valueDateTime": "2026-01-15"
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:hypertension-review",
+            "code": "type2_diabetes",
+            "display": "Type2 Diabetes"
+          }
+        ]
+      },
+      "valueCodeableConcept": {
+        "coding": [
+          {
+            "system": "urn:form-examples:hypertension-review:type2_diabetes",
+            "code": "yes",
+            "display": "Yes"
+          }
+        ]
+      }
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:hypertension-review",
+            "code": "chronic_kidney_disease",
+            "display": "Chronic Kidney Disease"
+          }
+        ]
+      },
+      "valueCodeableConcept": {
+        "coding": [
+          {
+            "system": "urn:form-examples:hypertension-review:chronic_kidney_disease",
+            "code": "yes",
+            "display": "Yes"
+          }
+        ]
+      }
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:hypertension-review",
+            "code": "established_cvd",
+            "display": "Established Cvd"
+          }
+        ]
+      },
+      "valueCodeableConcept": {
+        "coding": [
+          {
+            "system": "urn:form-examples:hypertension-review:established_cvd",
+            "code": "yes",
+            "display": "Yes"
+          }
+        ]
+      }
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:hypertension-review",
+            "code": "atrial_fibrillation",
+            "display": "Atrial Fibrillation"
+          }
+        ]
+      },
+      "valueCodeableConcept": {
+        "coding": [
+          {
+            "system": "urn:form-examples:hypertension-review:atrial_fibrillation",
+            "code": "yes",
+            "display": "Yes"
+          }
+        ]
+      }
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:hypertension-review",
+            "code": "clinic_systolic",
+            "display": "Clinic Systolic"
+          }
+        ]
+      },
+      "valueInteger": 1
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:hypertension-review",
+            "code": "clinic_diastolic",
+            "display": "Clinic Diastolic"
+          }
+        ]
+      },
+      "valueInteger": 1
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:hypertension-review",
+            "code": "home_systolic",
+            "display": "Home Systolic"
+          }
+        ]
+      },
+      "valueInteger": 1
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:hypertension-review",
+            "code": "home_diastolic",
+            "display": "Home Diastolic"
+          }
+        ]
+      },
+      "valueInteger": 1
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:hypertension-review",
+            "code": "monitoring_method",
+            "display": "Monitoring Method"
+          }
+        ]
+      },
+      "valueCodeableConcept": {
+        "coding": [
+          {
+            "system": "urn:form-examples:hypertension-review:monitoring_method",
+            "code": "clinic-only",
+            "display": "Clinic-Only"
+          }
+        ]
+      }
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:hypertension-review",
+            "code": "postural_drop",
+            "display": "Postural Drop"
+          }
+        ]
+      },
+      "valueCodeableConcept": {
+        "coding": [
+          {
+            "system": "urn:form-examples:hypertension-review:postural_drop",
+            "code": "yes",
+            "display": "Yes"
+          }
+        ]
+      }
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:hypertension-review",
+            "code": "antihypertensive_agents",
+            "display": "Antihypertensive Agents"
+          }
+        ]
+      },
+      "valueInteger": 45
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:hypertension-review",
+            "code": "adherence",
+            "display": "Adherence"
+          }
+        ]
+      },
+      "valueCodeableConcept": {
+        "coding": [
+          {
+            "system": "urn:form-examples:hypertension-review:adherence",
+            "code": "good",
+            "display": "Good"
+          }
+        ]
+      }
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:hypertension-review",
+            "code": "side_effects",
+            "display": "Side Effects"
+          }
+        ]
+      },
+      "valueCodeableConcept": {
+        "coding": [
+          {
+            "system": "urn:form-examples:hypertension-review:side_effects",
+            "code": "yes",
+            "display": "Yes"
+          }
+        ]
+      }
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:hypertension-review",
+            "code": "qrisk_percent",
+            "display": "Qrisk Percent"
+          }
+        ]
+      },
+      "valueQuantity": {
+        "value": 0.0
+      }
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:hypertension-review",
+            "code": "smoking_status",
+            "display": "Smoking Status"
+          }
+        ]
+      },
+      "valueCodeableConcept": {
+        "coding": [
+          {
+            "system": "urn:form-examples:hypertension-review:smoking_status",
+            "code": "never",
+            "display": "Never"
+          }
+        ]
+      }
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:hypertension-review",
+            "code": "statin_therapy",
+            "display": "Statin Therapy"
+          }
+        ]
+      },
+      "valueCodeableConcept": {
+        "coding": [
+          {
+            "system": "urn:form-examples:hypertension-review:statin_therapy",
+            "code": "yes",
+            "display": "Yes"
+          }
+        ]
+      }
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:hypertension-review",
+            "code": "bmi",
+            "display": "Bmi"
+          }
+        ]
+      },
+      "valueQuantity": {
+        "value": 24.2
+      }
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:hypertension-review",
+            "code": "lifestyle_advice",
+            "display": "Lifestyle Advice"
+          }
+        ]
+      },
+      "valueString": ""
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:hypertension-review",
+            "code": "serum_creatinine",
+            "display": "Serum Creatinine"
+          }
+        ]
+      },
+      "valueQuantity": {
+        "value": 0.0
+      }
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:hypertension-review",
+            "code": "egfr",
+            "display": "Egfr"
+          }
+        ]
+      },
+      "valueQuantity": {
+        "value": 0.0
+      }
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:hypertension-review",
+            "code": "serum_potassium",
+            "display": "Serum Potassium"
+          }
+        ]
+      },
+      "valueQuantity": {
+        "value": 0.0
+      }
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:hypertension-review",
+            "code": "hba1c",
+            "display": "Hba1C"
+          }
+        ]
+      },
+      "valueQuantity": {
+        "value": 0.0
+      }
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:hypertension-review",
+            "code": "total_cholesterol",
+            "display": "Total Cholesterol"
+          }
+        ]
+      },
+      "valueQuantity": {
+        "value": 0.0
+      }
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:hypertension-review",
+            "code": "hdl_cholesterol",
+            "display": "Hdl Cholesterol"
+          }
+        ]
+      },
+      "valueQuantity": {
+        "value": 0.0
+      }
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:hypertension-review",
+            "code": "urine_acr",
+            "display": "Urine Acr"
+          }
+        ]
+      },
+      "valueQuantity": {
+        "value": 0.0
+      }
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:hypertension-review",
+            "code": "complications",
+            "display": "Complications"
+          }
+        ]
+      },
+      "valueString": ""
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:hypertension-review",
+            "code": "review_context",
+            "display": "Review Context"
+          }
+        ]
+      },
+      "valueString": "Example text."
+    }
+  ]
+}

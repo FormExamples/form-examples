@@ -1,0 +1,295 @@
+# Generated from sql/. Do not edit by hand.
+# SOURCE: respect
+openapi: 3.1.0
+info:
+  title: Recommended Summary Plan For Emergency Care And Treatment — Respect
+  version: 1.0.0
+  description: "Main ReSPECT record: one personalised emergency care and treatment plan created through shared decision-making, covering the person's summary of health, preferences, agreed clinical recommendations, CPR recommendation, ceilings of treatment, capacity and involvement, and clinician sign-off. Completeness grade, fired rules, and flags live in child tables. The short base name `respect` is used because the full slug would exceed PostgreSQL's 63-byte identifier limit."
+paths:
+  /respects:
+    get:
+      summary: List Respect records
+      operationId: listRespect
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of Respect records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Respect"
+    post:
+      summary: Create a new Respect
+      operationId: createRespect
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Respect"
+      responses:
+        "201":
+          description: The newly created Respect
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Respect"
+        "400":
+          description: Validation error
+  /respects/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one Respect by id
+      operationId: getRespect
+      responses:
+        "200":
+          description: The requested Respect
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Respect"
+        "404":
+          description: Respect not found
+    patch:
+      summary: Update an existing Respect
+      operationId: updateRespect
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Respect"
+      responses:
+        "200":
+          description: The updated Respect
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Respect"
+        "404":
+          description: Respect not found
+    delete:
+      summary: Soft-delete a Respect
+      operationId: deleteRespect
+      responses:
+        "204":
+          description: Respect deleted
+        "404":
+          description: Respect not found
+components:
+  schemas:
+    Respect:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was updated most-recently.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was deleted a.k.a. soft-removed.
+        patient_id:
+          type: string
+          format: uuid
+          description: Foreign key to the patient this plan is about (restrict delete).
+        clinician_id:
+          type: string
+          format: uuid
+          description: Foreign key to the clinician who completed and signed the plan (restrict delete); optional.
+        person_name:
+          type: string
+          description: "Personal details: name of the person the plan is about."
+        date_of_birth:
+          type: string
+          format: date
+          description: "Personal details: the person's date of birth."
+        identifier:
+          type: string
+          description: "Personal details: NHS / CHI number or local identifier."
+        address:
+          type: string
+          description: "Personal details: usual residence."
+        key_contact:
+          type: string
+          description: "Personal details: key contact / next-of-kin details."
+        health_summary:
+          type: string
+          description: "Summary of relevant health: brief clinical summary (mandatory content)."
+        diagnoses:
+          type: string
+          description: "Summary of relevant health: relevant diagnoses."
+        existing_documents:
+          type: string
+          description: "Summary of relevant health: existing documents such as ADRT, LPA, or organ-donation wishes."
+        what_matters:
+          type: string
+          description: "Preferences: the person's values, priorities, and fears."
+        care_preferences:
+          type: string
+          description: "Preferences: the person's preferences for care."
+        priority_balance:
+          type: string
+          enum:
+            - sustain-life
+            - balanced
+            - comfort
+            - ""
+          description: "Clinical recommendations: balance of priorities from life-sustaining to comfort (sustain-life, balanced, or comfort)."
+        recommended_interventions:
+          type: string
+          description: "Clinical recommendations: interventions recommended."
+        not_recommended_interventions:
+          type: string
+          description: "Clinical recommendations: interventions not recommended."
+        cpr_recommendation:
+          type: string
+          enum:
+            - attempt
+            - do-not-attempt
+            - ""
+          description: "CPR recommendation: attempt CPR, do-not-attempt CPR, or empty when undocumented (the most safety-critical field)."
+        cpr_rationale:
+          type: string
+          description: "CPR recommendation: clinical rationale for the recommendation."
+        cpr_discussed:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: "CPR recommendation: whether the recommendation was discussed with the person or their proxy (yes/no)."
+        hospital_transfer:
+          type: string
+          enum:
+            - appropriate
+            - not-appropriate
+            - ""
+          description: "Ceilings of treatment: whether hospital transfer is appropriate or not-appropriate."
+        critical_care_admission:
+          type: string
+          enum:
+            - appropriate
+            - not-appropriate
+            - ""
+          description: "Ceilings of treatment: whether critical-care admission is appropriate or not-appropriate."
+        treatment_ceilings:
+          type: string
+          description: "Ceilings of treatment: other agreed limits on treatment."
+        has_capacity:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: "Capacity and involvement: whether the person has capacity for this decision (yes/no); drives the conditional capacity rule."
+        capacity_assessment:
+          type: string
+          description: "Capacity and involvement: assessment recorded where the person lacks capacity (Mental Capacity Act 2005)."
+        involvement:
+          type: string
+          enum:
+            - person
+            - legal-proxy
+            - consultees
+            - ""
+          description: "Capacity and involvement: who was involved in the decision (person, legal-proxy, or consultees)."
+        proxy_details:
+          type: string
+          description: "Capacity and involvement: welfare attorney, deputy, or consultee details."
+        clinician_name:
+          type: string
+          description: "Clinician sign-off: name of the completing clinician."
+        clinician_role:
+          type: string
+          enum:
+            - doctor
+            - nurse
+            - paramedic
+            - other
+            - ""
+          description: "Clinician sign-off: role of the completing clinician (doctor, nurse, paramedic, or other)."
+        clinician_registration:
+          type: string
+          description: "Clinician sign-off: GMC / NMC / HCPC registration number."
+        signature:
+          type: string
+          description: "Clinician sign-off: electronic signature; required for the plan to be valid."
+        signed_at:
+          type: string
+          format: date-time
+          description: "Clinician sign-off: date and time the plan was signed."
+        senior_endorsement:
+          type: string
+          description: "Clinician sign-off: senior clinician endorsement."
+        emergency_contacts:
+          type: string
+          description: "Clinician sign-off: emergency contacts."
+        review_date:
+          type: string
+          format: date
+          description: "Clinician sign-off: planned review date; drives the review-date-passed flag."
+      required:
+        - created_at
+        - updated_at
+        - patient_id
+        - person_name
+        - identifier
+        - address
+        - key_contact
+        - health_summary
+        - diagnoses
+        - existing_documents
+        - what_matters
+        - care_preferences
+        - priority_balance
+        - recommended_interventions
+        - not_recommended_interventions
+        - cpr_recommendation
+        - cpr_rationale
+        - cpr_discussed
+        - hospital_transfer
+        - critical_care_admission
+        - treatment_ceilings
+        - has_capacity
+        - capacity_assessment
+        - involvement
+        - proxy_details
+        - clinician_name
+        - clinician_role
+        - clinician_registration
+        - signature
+        - senior_endorsement
+        - emergency_contacts
+      description: "Main ReSPECT record: one personalised emergency care and treatment plan created through shared decision-making, covering the person's summary of health, preferences, agreed clinical recommendations, CPR recommendation, ceilings of treatment, capacity and involvement, and clinician sign-off. Completeness grade, fired rules, and flags live in child tables. The short base name `respect` is used because the full slug would exceed PostgreSQL's 63-byte identifier limit."

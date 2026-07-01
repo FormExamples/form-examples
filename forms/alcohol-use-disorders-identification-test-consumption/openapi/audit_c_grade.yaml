@@ -1,0 +1,158 @@
+# Generated from sql/. Do not edit by hand.
+# SOURCE: audit_c_grade
+openapi: 3.1.0
+info:
+  title: Alcohol Use Disorders Identification Test Consumption — AuditCGrade
+  version: 1.0.0
+  description: "Computed AUDIT-C grading result (1:1 with audit_c): summed total (0-12), derived risk band, and positive-screen indicator (total >= 5)."
+paths:
+  /audit-c-grades:
+    get:
+      summary: List AuditCGrade records
+      operationId: listAuditCGrade
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of AuditCGrade records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/AuditCGrade"
+    post:
+      summary: Create a new AuditCGrade
+      operationId: createAuditCGrade
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/AuditCGrade"
+      responses:
+        "201":
+          description: The newly created AuditCGrade
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AuditCGrade"
+        "400":
+          description: Validation error
+  /audit-c-grades/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one AuditCGrade by id
+      operationId: getAuditCGrade
+      responses:
+        "200":
+          description: The requested AuditCGrade
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AuditCGrade"
+        "404":
+          description: AuditCGrade not found
+    patch:
+      summary: Update an existing AuditCGrade
+      operationId: updateAuditCGrade
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/AuditCGrade"
+      responses:
+        "200":
+          description: The updated AuditCGrade
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AuditCGrade"
+        "404":
+          description: AuditCGrade not found
+    delete:
+      summary: Soft-delete a AuditCGrade
+      operationId: deleteAuditCGrade
+      responses:
+        "204":
+          description: AuditCGrade deleted
+        "404":
+          description: AuditCGrade not found
+components:
+  schemas:
+    AuditCGrade:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was most recently updated.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was soft-deleted.
+        audit_c_id:
+          type: string
+          format: uuid
+          description: Foreign key to the parent assessment (unique, 1:1).
+        total_score:
+          type: integer
+          format: int32
+          description: Summed AUDIT-C score across the three consumption items (0-12); a missing item contributes 0.
+        risk_band:
+          type: string
+          enum:
+            - lower
+            - increasing
+            - higher
+            - possible-dependence
+            - ""
+          description: "Derived risk band: lower (0-4), increasing (5-7), higher (8-10), or possible-dependence (11-12)."
+        positive_screen:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: "Positive-screen indicator: yes when total_score >= 5 (UK default cut), otherwise no."
+        graded_at:
+          type: string
+          format: date-time
+          description: Timestamp when the engine last computed the grade.
+      required:
+        - created_at
+        - updated_at
+        - audit_c_id
+        - risk_band
+        - positive_screen
+        - graded_at
+      description: "Computed AUDIT-C grading result (1:1 with audit_c): summed total (0-12), derived risk band, and positive-screen indicator (total >= 5)."

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE cage_alcohol_questionnaire_grade SYSTEM "cage_alcohol_questionnaire_grade.dtd">
+<cage_alcohol_questionnaire_grade>
+<id>880e8400-e29b-41d4-a716-446655440003</id>
+<created_at>2026-04-09T10:00:00Z</created_at>
+<updated_at>2026-04-09T10:00:00Z</updated_at>
+<deleted_at>2026-04-09T10:00:00Z</deleted_at>
+<cage_alcohol_questionnaire_id>770e8400-e29b-41d4-a716-446655440002</cage_alcohol_questionnaire_id>
+<cut_down_point>1</cut_down_point>
+<annoyed_point>1</annoyed_point>
+<guilty_point>1</guilty_point>
+<eye_opener_point>1</eye_opener_point>
+<total_score>5</total_score>
+<interpretation>negative</interpretation>
+<graded_at>2026-04-09T10:00:00Z</graded_at>
+</cage_alcohol_questionnaire_grade>

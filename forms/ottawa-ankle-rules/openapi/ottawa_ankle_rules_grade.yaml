@@ -1,0 +1,164 @@
+# Generated from sql/. Do not edit by hand.
+# SOURCE: ottawa_ankle_rules_grade
+openapi: 3.1.0
+info:
+  title: Ottawa Ankle Rules — OttawaAnkleRulesGrade
+  version: 1.0.0
+  description: "Computed Ottawa Ankle Rules decision result: the derived unable-to-bear-weight finding and the two independent imaging decisions. One-to-one with the parent assessment."
+paths:
+  /ottawa-ankle-rules-grades:
+    get:
+      summary: List OttawaAnkleRulesGrade records
+      operationId: listOttawaAnkleRulesGrade
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of OttawaAnkleRulesGrade records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/OttawaAnkleRulesGrade"
+    post:
+      summary: Create a new OttawaAnkleRulesGrade
+      operationId: createOttawaAnkleRulesGrade
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/OttawaAnkleRulesGrade"
+      responses:
+        "201":
+          description: The newly created OttawaAnkleRulesGrade
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/OttawaAnkleRulesGrade"
+        "400":
+          description: Validation error
+  /ottawa-ankle-rules-grades/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one OttawaAnkleRulesGrade by id
+      operationId: getOttawaAnkleRulesGrade
+      responses:
+        "200":
+          description: The requested OttawaAnkleRulesGrade
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/OttawaAnkleRulesGrade"
+        "404":
+          description: OttawaAnkleRulesGrade not found
+    patch:
+      summary: Update an existing OttawaAnkleRulesGrade
+      operationId: updateOttawaAnkleRulesGrade
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/OttawaAnkleRulesGrade"
+      responses:
+        "200":
+          description: The updated OttawaAnkleRulesGrade
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/OttawaAnkleRulesGrade"
+        "404":
+          description: OttawaAnkleRulesGrade not found
+    delete:
+      summary: Soft-delete a OttawaAnkleRulesGrade
+      operationId: deleteOttawaAnkleRulesGrade
+      responses:
+        "204":
+          description: OttawaAnkleRulesGrade deleted
+        "404":
+          description: OttawaAnkleRulesGrade not found
+components:
+  schemas:
+    OttawaAnkleRulesGrade:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was most recently updated.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was soft-deleted.
+        ottawa_ankle_rules_id:
+          type: string
+          format: uuid
+          description: Foreign key to the parent assessment (unique, 1:1).
+        unable_to_bear_weight:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: "Derived: patient cannot take four steps both immediately after injury and at assessment (yes/no); contributes to both the ankle and foot decisions."
+        ankle_xray_indicated:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: "Decision: an ankle X-ray series is indicated (yes/no), true when malleolar-zone pain plus any of lateral tenderness, medial tenderness, or unable-to-bear-weight."
+        foot_xray_indicated:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: "Decision: a foot X-ray series is indicated (yes/no), true when midfoot-zone pain plus any of fifth-metatarsal-base tenderness, navicular tenderness, or unable-to-bear-weight."
+        recommended_action:
+          type: string
+          description: Recommended imaging action derived from the two decisions (e.g. request ankle and foot radiographs, no imaging indicated).
+        graded_at:
+          type: string
+          format: date-time
+          description: Timestamp when the engine last computed the decision.
+      required:
+        - created_at
+        - updated_at
+        - ottawa_ankle_rules_id
+        - unable_to_bear_weight
+        - ankle_xray_indicated
+        - foot_xray_indicated
+        - recommended_action
+        - graded_at
+      description: "Computed Ottawa Ankle Rules decision result: the derived unable-to-bear-weight finding and the two independent imaging decisions. One-to-one with the parent assessment."

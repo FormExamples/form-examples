@@ -1,0 +1,171 @@
+# Generated from sql/. Do not edit by hand.
+# SOURCE: breast_screening_grade_flag
+openapi: 3.1.0
+info:
+  title: Breast Screening — BreastScreeningGradeFlag
+  version: 1.0.0
+  description: Safety flags that fire independently of the screening outcome, with priority and a suggested action for the reporting clinician or screening service.
+paths:
+  /breast-screening-grade-flags:
+    get:
+      summary: List BreastScreeningGradeFlag records
+      operationId: listBreastScreeningGradeFlag
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of BreastScreeningGradeFlag records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/BreastScreeningGradeFlag"
+    post:
+      summary: Create a new BreastScreeningGradeFlag
+      operationId: createBreastScreeningGradeFlag
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/BreastScreeningGradeFlag"
+      responses:
+        "201":
+          description: The newly created BreastScreeningGradeFlag
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/BreastScreeningGradeFlag"
+        "400":
+          description: Validation error
+  /breast-screening-grade-flags/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one BreastScreeningGradeFlag by id
+      operationId: getBreastScreeningGradeFlag
+      responses:
+        "200":
+          description: The requested BreastScreeningGradeFlag
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/BreastScreeningGradeFlag"
+        "404":
+          description: BreastScreeningGradeFlag not found
+    patch:
+      summary: Update an existing BreastScreeningGradeFlag
+      operationId: updateBreastScreeningGradeFlag
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/BreastScreeningGradeFlag"
+      responses:
+        "200":
+          description: The updated BreastScreeningGradeFlag
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/BreastScreeningGradeFlag"
+        "404":
+          description: BreastScreeningGradeFlag not found
+    delete:
+      summary: Soft-delete a BreastScreeningGradeFlag
+      operationId: deleteBreastScreeningGradeFlag
+      responses:
+        "204":
+          description: BreastScreeningGradeFlag deleted
+        "404":
+          description: BreastScreeningGradeFlag not found
+components:
+  schemas:
+    BreastScreeningGradeFlag:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was most recently updated.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was soft-deleted.
+        breast_screening_grade_id:
+          type: string
+          format: uuid
+          description: Foreign key to the parent grade.
+        flag_id:
+          type: string
+          maxLength: 50
+          description: Stable flag identifier (e.g. F-SUSPICIOUS-MALIGNANT-001).
+        category:
+          type: string
+          enum:
+            - symptomatic-wrong-pathway
+            - suspicious-malignant
+            - recall-for-assessment
+            - indeterminate-result
+            - technical-repeat
+            - consent-not-given
+            - outside-age-range
+            - overdue
+            - incomplete-record
+            - other
+            - ""
+          description: "Flag category: symptomatic-wrong-pathway, suspicious-malignant, recall-for-assessment, indeterminate-result, technical-repeat, consent-not-given, outside-age-range, overdue, incomplete-record, or other."
+        priority:
+          type: string
+          enum:
+            - low
+            - medium
+            - high
+            - ""
+          description: "Priority: low, medium, high."
+        description:
+          type: string
+          maxLength: 500
+          description: Human-readable description of what fired the flag.
+        suggested_action:
+          type: string
+          maxLength: 500
+          description: "Suggested clinical or service action (e.g. \"refer urgently to the breast clinic\", \"repeat the mammogram\")."
+      required:
+        - created_at
+        - updated_at
+        - breast_screening_grade_id
+        - flag_id
+        - category
+        - priority
+        - description
+        - suggested_action
+      description: Safety flags that fire independently of the screening outcome, with priority and a suggested action for the reporting clinician or screening service.

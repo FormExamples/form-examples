@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Generate OpenAPI 3.1 (.yaml) representations from SQL migrations.
 
-For each form's sql-migrations/ directory, parses CREATE TABLE statements
+For each form's sql/ directory, parses CREATE TABLE statements
 plus COMMENT ON TABLE / COMMENT ON COLUMN, and writes one .yaml file per
 top-level SQL entity into openapi/.
 
@@ -398,7 +398,7 @@ def build_yaml(table_name, columns, form_slug, source_table_names,
         schema_description = None
 
     L = []
-    L.append("# Generated from sql-migrations/. Do not edit by hand.")
+    L.append("# Generated from sql/. Do not edit by hand.")
     L.append(f"# SOURCE: {', '.join(source_table_names)}")
     L.append("openapi: 3.1.0")
     L.append("info:")
@@ -518,7 +518,7 @@ def build_yaml(table_name, columns, form_slug, source_table_names,
 
 
 def process_form(form_dir):
-    sql_dir = form_dir / "sql-migrations"
+    sql_dir = form_dir / "sql"
     if not sql_dir.is_dir():
         return 0
 
@@ -583,7 +583,7 @@ def main():
 
     form_dirs = sorted(
         d for d in FORMS_DIR.iterdir()
-        if d.is_dir() and (d / "sql-migrations").is_dir()
+        if d.is_dir() and (d / "sql").is_dir()
     )
 
     for form_dir in form_dirs:

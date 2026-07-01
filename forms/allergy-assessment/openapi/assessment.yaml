@@ -1,4 +1,4 @@
-# Generated from sql-migrations/. Do not edit by hand.
+# Generated from sql/. Do not edit by hand.
 # SOURCE: assessment, assessment_drug_allergies, assessment_drug_allergy_item, assessment_food_allergies, assessment_food_allergy_item, assessment_anaphylaxis_history, assessment_anaphylaxis_episode, assessment_testing_results, assessment_test_result_item, assessment_current_management, assessment_other_medication
 openapi: 3.1.0
 info:

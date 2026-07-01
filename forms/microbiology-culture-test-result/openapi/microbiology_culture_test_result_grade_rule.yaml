@@ -1,0 +1,156 @@
+# Generated from sql/. Do not edit by hand.
+# SOURCE: microbiology_culture_test_result_grade_rule
+openapi: 3.1.0
+info:
+  title: Microbiology Culture Test Result — MicrobiologyCultureTestResultGradeRule
+  version: 1.0.0
+  description: Audit trail of every classification / severity / completeness / follow-up rule that fired for this result.
+paths:
+  /microbiology-culture-test-result-grade-rules:
+    get:
+      summary: List MicrobiologyCultureTestResultGradeRule records
+      operationId: listMicrobiologyCultureTestResultGradeRule
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of MicrobiologyCultureTestResultGradeRule records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/MicrobiologyCultureTestResultGradeRule"
+    post:
+      summary: Create a new MicrobiologyCultureTestResultGradeRule
+      operationId: createMicrobiologyCultureTestResultGradeRule
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/MicrobiologyCultureTestResultGradeRule"
+      responses:
+        "201":
+          description: The newly created MicrobiologyCultureTestResultGradeRule
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/MicrobiologyCultureTestResultGradeRule"
+        "400":
+          description: Validation error
+  /microbiology-culture-test-result-grade-rules/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one MicrobiologyCultureTestResultGradeRule by id
+      operationId: getMicrobiologyCultureTestResultGradeRule
+      responses:
+        "200":
+          description: The requested MicrobiologyCultureTestResultGradeRule
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/MicrobiologyCultureTestResultGradeRule"
+        "404":
+          description: MicrobiologyCultureTestResultGradeRule not found
+    patch:
+      summary: Update an existing MicrobiologyCultureTestResultGradeRule
+      operationId: updateMicrobiologyCultureTestResultGradeRule
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/MicrobiologyCultureTestResultGradeRule"
+      responses:
+        "200":
+          description: The updated MicrobiologyCultureTestResultGradeRule
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/MicrobiologyCultureTestResultGradeRule"
+        "404":
+          description: MicrobiologyCultureTestResultGradeRule not found
+    delete:
+      summary: Soft-delete a MicrobiologyCultureTestResultGradeRule
+      operationId: deleteMicrobiologyCultureTestResultGradeRule
+      responses:
+        "204":
+          description: MicrobiologyCultureTestResultGradeRule deleted
+        "404":
+          description: MicrobiologyCultureTestResultGradeRule not found
+components:
+  schemas:
+    MicrobiologyCultureTestResultGradeRule:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was updated most-recently.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was deleted a.k.a. soft-removed.
+        microbiology_culture_test_result_grade_id:
+          type: string
+          format: uuid
+          description: Foreign key to the parent grade.
+        rule_id:
+          type: string
+          maxLength: 40
+          description: Stable rule identifier (e.g. R-CLASS-CRITICAL-01).
+        axis:
+          type: string
+          enum:
+            - classification
+            - severity
+            - completeness
+            - follow-up
+            - ""
+          description: "Scoring axis the rule belongs to: classification, severity, completeness, follow-up."
+        category:
+          type: string
+          maxLength: 50
+          description: Category or finding the rule relates to.
+        description:
+          type: string
+          maxLength: 500
+          description: Human-readable description of why the rule fired.
+      required:
+        - created_at
+        - updated_at
+        - microbiology_culture_test_result_grade_id
+        - rule_id
+        - axis
+        - category
+        - description
+      description: Audit trail of every classification / severity / completeness / follow-up rule that fired for this result.

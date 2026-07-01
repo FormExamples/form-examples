@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE dexa_bone_density_test_result SYSTEM "dexa_bone_density_test_result.dtd">
+<dexa_bone_density_test_result>
+<id>770e8400-e29b-41d4-a716-446655440002</id>
+<created_at>2026-04-09T10:00:00Z</created_at>
+<updated_at>2026-04-09T10:00:00Z</updated_at>
+<deleted_at>2026-04-09T10:00:00Z</deleted_at>
+<patient_id>550e8400-e29b-41d4-a716-446655440000</patient_id>
+<clinician_id>660e8400-e29b-41d4-a716-446655440001</clinician_id>
+<originating_request_reference></originating_request_reference>
+<report_status>preliminary</report_status>
+<performed_date>2026-01-15</performed_date>
+<reported_date>2026-01-15</reported_date>
+<scan_region>hip</scan_region>
+<examination_adequacy>adequate</examination_adequacy>
+<clinical_history>Example text.</clinical_history>
+<lumbar_spine_t_score>5.0</lumbar_spine_t_score>
+<lumbar_spine_z_score>5.0</lumbar_spine_z_score>
+<femoral_neck_t_score>5.0</femoral_neck_t_score>
+<femoral_neck_z_score>5.0</femoral_neck_z_score>
+<total_hip_t_score>5.0</total_hip_t_score>
+<lowest_t_score>5.0</lowest_t_score>
+<bone_mineral_density_g_cm2>0.0</bone_mineral_density_g_cm2>
+<who_classification>normal</who_classification>
+<frax_major_fracture_percent>50.0</frax_major_fracture_percent>
+<frax_hip_fracture_percent>50.0</frax_hip_fracture_percent>
+<vertebral_fracture_identified>true</vertebral_fracture_identified>
+<comparison_with_previous></comparison_with_previous>
+<percent_change_since_previous>50.0</percent_change_since_previous>
+<impression>Example text.</impression>
+<recommended_follow_up></recommended_follow_up>
+<critical_result_communicated>true</critical_result_communicated>
+<reported_to></reported_to>
+</dexa_bone_density_test_result>

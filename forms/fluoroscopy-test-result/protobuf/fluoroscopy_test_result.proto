@@ -1,0 +1,77 @@
+// Generated from sql/. Do not edit by hand.
+// SOURCE: fluoroscopy_test_result
+
+syntax = "proto3";
+
+package form_examples.fluoroscopy_test_result;
+
+enum FluoroscopyTestResultReportStatusEnum {
+  REPORTSTATUS_UNSPECIFIED = 0;
+  REPORTSTATUS_PRELIMINARY = 1;  // preliminary
+  REPORTSTATUS_FINAL = 2;  // final
+  REPORTSTATUS_AMENDED = 3;  // amended
+  REPORTSTATUS_CANCELLED = 4;  // cancelled
+}
+
+enum FluoroscopyTestResultStudyTypeEnum {
+  STUDYTYPE_UNSPECIFIED = 0;
+  STUDYTYPE_BARIUM_SWALLOW = 1;  // barium-swallow
+  STUDYTYPE_BARIUM_MEAL = 2;  // barium-meal
+  STUDYTYPE_BARIUM_FOLLOW_THROUGH = 3;  // barium-follow-through
+  STUDYTYPE_BARIUM_ENEMA = 4;  // barium-enema
+  STUDYTYPE_WATER_SOLUBLE_CONTRAST_SWALLOW = 5;  // water-soluble-contrast-swallow
+  STUDYTYPE_DEFECATING_PROCTOGRAM = 6;  // defecating-proctogram
+  STUDYTYPE_HYSTEROSALPINGOGRAM = 7;  // hysterosalpingogram
+  STUDYTYPE_MICTURATING_CYSTOURETHROGRAM = 8;  // micturating-cystourethrogram
+  STUDYTYPE_ARTHROGRAM = 9;  // arthrogram
+  STUDYTYPE_FLUOROSCOPY_GUIDED_PROCEDURE = 10;  // fluoroscopy-guided-procedure
+  STUDYTYPE_OTHER = 11;  // other
+}
+
+enum FluoroscopyTestResultContrastUsedEnum {
+  CONTRASTUSED_UNSPECIFIED = 0;
+  CONTRASTUSED_BARIUM = 1;  // barium
+  CONTRASTUSED_WATER_SOLUBLE_IODINATED = 2;  // water-soluble-iodinated
+  CONTRASTUSED_NONE = 3;  // none
+}
+
+enum FluoroscopyTestResultExaminationAdequacyEnum {
+  EXAMINATIONADEQUACY_UNSPECIFIED = 0;
+  EXAMINATIONADEQUACY_ADEQUATE = 1;  // adequate
+  EXAMINATIONADEQUACY_LIMITED = 2;  // limited
+  EXAMINATIONADEQUACY_NON_DIAGNOSTIC = 3;  // non-diagnostic
+}
+
+message FluoroscopyTestResult {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string patient_id = 5;  // UUID — uuid
+  string clinician_id = 6;  // UUID — uuid
+  string originating_request_reference = 7;  // VARCHAR(255) — max 255 chars
+  FluoroscopyTestResultReportStatusEnum report_status = 8;  // VARCHAR(15)
+  string performed_date = 9;  // DATE — iso 8601 date
+  string reported_date = 10;  // DATE — iso 8601 date
+  FluoroscopyTestResultStudyTypeEnum study_type = 11;  // VARCHAR(40)
+  FluoroscopyTestResultContrastUsedEnum contrast_used = 12;  // VARCHAR(25)
+  FluoroscopyTestResultExaminationAdequacyEnum examination_adequacy = 13;  // VARCHAR(15)
+  double screening_time_minutes = 14;  // NUMERIC(6,1) — numeric(6,1)
+  string clinical_history = 15;  // VARCHAR(1000) — max 1000 chars
+  string comparison_with_previous = 16;  // VARCHAR(1000) — max 1000 chars
+  string findings_narrative = 17;  // VARCHAR(2000) — max 2000 chars
+  bool stricture = 18;  // BOOLEAN
+  bool reflux = 19;  // BOOLEAN
+  bool obstruction = 20;  // BOOLEAN
+  bool perforation_or_leak = 21;  // BOOLEAN
+  bool fistula = 22;  // BOOLEAN
+  bool filling_defect = 23;  // BOOLEAN
+  bool dysmotility = 24;  // BOOLEAN
+  bool normal_study = 25;  // BOOLEAN
+  bool incidental_finding = 26;  // BOOLEAN
+  string impression = 27;  // VARCHAR(2000) — max 2000 chars
+  string reporting_category = 28;  // VARCHAR(50) — max 50 chars
+  string recommended_follow_up = 29;  // VARCHAR(1000) — max 1000 chars
+  bool critical_result_communicated = 30;  // BOOLEAN
+  string reported_to = 31;  // VARCHAR(500) — max 500 chars
+}

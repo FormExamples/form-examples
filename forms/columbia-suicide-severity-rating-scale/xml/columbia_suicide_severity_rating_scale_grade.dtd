@@ -1,0 +1,13 @@
+<!ELEMENT columbia_suicide_severity_rating_scale_grade (id,created_at,updated_at,deleted_at,columbia_suicide_severity_rating_scale_id,ideation_level,any_behaviour,recent_behaviour,risk_tier,positive_features,management_recommendation,graded_at)>
+<!ELEMENT id (#PCDATA)>
+<!ELEMENT created_at (#PCDATA)>
+<!ELEMENT updated_at (#PCDATA)>
+<!ELEMENT deleted_at (#PCDATA)>
+<!ELEMENT columbia_suicide_severity_rating_scale_id (#PCDATA)>
+<!ELEMENT ideation_level (#PCDATA)>
+<!ELEMENT any_behaviour (#PCDATA)>
+<!ELEMENT recent_behaviour (#PCDATA)>
+<!ELEMENT risk_tier (#PCDATA)>
+<!ELEMENT positive_features (#PCDATA)>
+<!ELEMENT management_recommendation (#PCDATA)>
+<!ELEMENT graded_at (#PCDATA)>

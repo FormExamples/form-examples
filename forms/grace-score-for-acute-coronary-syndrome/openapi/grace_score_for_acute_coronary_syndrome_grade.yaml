@@ -1,0 +1,171 @@
+# Generated from sql/. Do not edit by hand.
+# SOURCE: grace_score_for_acute_coronary_syndrome_grade
+openapi: 3.1.0
+info:
+  title: Grace Score For Acute Coronary Syndrome — GraceScoreForAcuteCoronarySyndromeGrade
+  version: 1.0.0
+  description: "Computed GRACE grading result: weighted point total, in-hospital and 6-month mortality risk bands, overall risk category (max-band rule), and the derived invasive-strategy recommendation."
+paths:
+  /grace-score-for-acute-coronary-syndrome-grades:
+    get:
+      summary: List GraceScoreForAcuteCoronarySyndromeGrade records
+      operationId: listGraceScoreForAcuteCoronarySyndromeGrade
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of GraceScoreForAcuteCoronarySyndromeGrade records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/GraceScoreForAcuteCoronarySyndromeGrade"
+    post:
+      summary: Create a new GraceScoreForAcuteCoronarySyndromeGrade
+      operationId: createGraceScoreForAcuteCoronarySyndromeGrade
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/GraceScoreForAcuteCoronarySyndromeGrade"
+      responses:
+        "201":
+          description: The newly created GraceScoreForAcuteCoronarySyndromeGrade
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GraceScoreForAcuteCoronarySyndromeGrade"
+        "400":
+          description: Validation error
+  /grace-score-for-acute-coronary-syndrome-grades/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one GraceScoreForAcuteCoronarySyndromeGrade by id
+      operationId: getGraceScoreForAcuteCoronarySyndromeGrade
+      responses:
+        "200":
+          description: The requested GraceScoreForAcuteCoronarySyndromeGrade
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GraceScoreForAcuteCoronarySyndromeGrade"
+        "404":
+          description: GraceScoreForAcuteCoronarySyndromeGrade not found
+    patch:
+      summary: Update an existing GraceScoreForAcuteCoronarySyndromeGrade
+      operationId: updateGraceScoreForAcuteCoronarySyndromeGrade
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/GraceScoreForAcuteCoronarySyndromeGrade"
+      responses:
+        "200":
+          description: The updated GraceScoreForAcuteCoronarySyndromeGrade
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GraceScoreForAcuteCoronarySyndromeGrade"
+        "404":
+          description: GraceScoreForAcuteCoronarySyndromeGrade not found
+    delete:
+      summary: Soft-delete a GraceScoreForAcuteCoronarySyndromeGrade
+      operationId: deleteGraceScoreForAcuteCoronarySyndromeGrade
+      responses:
+        "204":
+          description: GraceScoreForAcuteCoronarySyndromeGrade deleted
+        "404":
+          description: GraceScoreForAcuteCoronarySyndromeGrade not found
+components:
+  schemas:
+    GraceScoreForAcuteCoronarySyndromeGrade:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was most recently updated.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was soft-deleted.
+        grace_score_for_acute_coronary_syndrome_id:
+          type: string
+          format: uuid
+          description: Foreign key to the parent assessment (unique, 1:1).
+        grace_score:
+          type: integer
+          format: int32
+          description: Weighted GRACE point total summed across the eight variable contributions.
+        in_hospital_risk_band:
+          type: string
+          enum:
+            - low
+            - intermediate
+            - high
+            - ""
+          description: "In-hospital mortality band: low (<=108), intermediate (109-140), or high (>140)."
+        six_month_risk_band:
+          type: string
+          enum:
+            - low
+            - intermediate
+            - high
+            - ""
+          description: "Six-month mortality band: low (<=88), intermediate (89-118), or high (>118)."
+        overall_band:
+          type: string
+          enum:
+            - low
+            - intermediate
+            - high
+            - ""
+          description: "Overall risk category: the worse of the in-hospital and six-month bands (max-band rule)."
+        invasive_strategy:
+          type: string
+          description: Derived invasive-strategy recommendation keyed on the overall risk category (e.g. early angiography within 24 h for high risk).
+        graded_at:
+          type: string
+          format: date-time
+          description: Timestamp when the engine last computed the grade.
+      required:
+        - created_at
+        - updated_at
+        - grace_score_for_acute_coronary_syndrome_id
+        - in_hospital_risk_band
+        - six_month_risk_band
+        - overall_band
+        - invasive_strategy
+        - graded_at
+      description: "Computed GRACE grading result: weighted point total, in-hospital and 6-month mortality risk bands, overall risk category (max-band rule), and the derived invasive-strategy recommendation."

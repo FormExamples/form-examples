@@ -1,0 +1,327 @@
+# Generated from sql/. Do not edit by hand.
+# SOURCE: confusion_assessment_method
+openapi: 3.1.0
+info:
+  title: Confusion Assessment Method — ConfusionAssessmentMethod
+  version: 1.0.0
+  description: "Main Confusion Assessment Method (CAM) record: assessment context, patient identification, and the four observational feature inputs plus CAM-ICU support fields. Status / classification form with no numeric total."
+paths:
+  /confusion-assessment-methods:
+    get:
+      summary: List ConfusionAssessmentMethod records
+      operationId: listConfusionAssessmentMethod
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of ConfusionAssessmentMethod records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/ConfusionAssessmentMethod"
+    post:
+      summary: Create a new ConfusionAssessmentMethod
+      operationId: createConfusionAssessmentMethod
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ConfusionAssessmentMethod"
+      responses:
+        "201":
+          description: The newly created ConfusionAssessmentMethod
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ConfusionAssessmentMethod"
+        "400":
+          description: Validation error
+  /confusion-assessment-methods/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one ConfusionAssessmentMethod by id
+      operationId: getConfusionAssessmentMethod
+      responses:
+        "200":
+          description: The requested ConfusionAssessmentMethod
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ConfusionAssessmentMethod"
+        "404":
+          description: ConfusionAssessmentMethod not found
+    patch:
+      summary: Update an existing ConfusionAssessmentMethod
+      operationId: updateConfusionAssessmentMethod
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ConfusionAssessmentMethod"
+      responses:
+        "200":
+          description: The updated ConfusionAssessmentMethod
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ConfusionAssessmentMethod"
+        "404":
+          description: ConfusionAssessmentMethod not found
+    delete:
+      summary: Soft-delete a ConfusionAssessmentMethod
+      operationId: deleteConfusionAssessmentMethod
+      responses:
+        "204":
+          description: ConfusionAssessmentMethod deleted
+        "404":
+          description: ConfusionAssessmentMethod not found
+components:
+  schemas:
+    ConfusionAssessmentMethod:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was updated most-recently.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was deleted a.k.a. soft-removed.
+        patient_id:
+          type: string
+          format: uuid
+          description: Foreign key to the patient being assessed (delete restricted).
+        clinician_id:
+          type: string
+          format: uuid
+          description: Foreign key to the assessing clinician (optional; delete restricted).
+        assessor_name:
+          type: string
+          maxLength: 255
+          description: Name of the assessor as recorded on the assessment.
+        assessor_role:
+          type: string
+          enum:
+            - nurse
+            - doctor
+            - geriatrician
+            - liaison-psychiatrist
+            - physiotherapist
+            - occupational-therapist
+            - researcher
+            - other
+            - ""
+          description: "Role of the assessor: nurse, doctor, geriatrician, liaison-psychiatrist, physiotherapist, occupational-therapist, researcher, or other."
+        assessed_at:
+          type: string
+          format: date-time
+          description: Date and time the assessment was performed.
+        ward_unit:
+          type: string
+          maxLength: 100
+          description: Ward or unit where the assessment took place.
+        cam_variant:
+          type: string
+          enum:
+            - cam
+            - cam-icu
+            - ""
+          description: "Assessment variant: cam (standard bedside) or cam-icu (ventilated / non-verbal patients)."
+        patient_identifier:
+          type: string
+          maxLength: 100
+          description: Local patient identifier as recorded on the assessment.
+        age_band:
+          type: string
+          enum:
+            - 16-39
+            - 40-59
+            - 60-74
+            - 75-plus
+            - ""
+          description: "Adult age band: 16-39, 40-59, 60-74, or 75-plus."
+        sex:
+          type: string
+          enum:
+            - female
+            - male
+            - intersex
+            - unknown
+            - ""
+          description: "Patient sex recorded for the assessment: female, male, intersex, or unknown."
+        cognitive_baseline:
+          type: string
+          enum:
+            - independent
+            - known-dementia
+            - mild-cognitive-impairment
+            - unknown
+            - ""
+          description: "Cognitive baseline before the acute change: independent, known-dementia, mild-cognitive-impairment, or unknown."
+        collateral_source:
+          type: string
+          enum:
+            - family
+            - carer
+            - nurse
+            - notes
+            - none
+            - ""
+          description: "Source of collateral history establishing the baseline: family, carer, nurse, notes, or none."
+        feature_acute_onset_fluctuating:
+          type: string
+          enum:
+            - present
+            - absent
+            - ""
+          description: "Feature 1 — acute onset and fluctuating course: present or absent (empty when unset)."
+        onset_timing:
+          type: string
+          enum:
+            - hours
+            - days
+            - weeks
+            - unknown
+            - ""
+          description: "Timing of the acute change from baseline: hours, days, weeks, or unknown."
+        feature_inattention:
+          type: string
+          enum:
+            - present
+            - absent
+            - ""
+          description: "Feature 2 — inattention: present or absent (empty when unset)."
+        attention_test:
+          type: string
+          enum:
+            - digit-span
+            - months-backwards
+            - serial-sevens
+            - attention-screening-examination
+            - not-completable
+            - ""
+          description: "Attention test used: digit-span, months-backwards, serial-sevens, attention-screening-examination (CAM-ICU), or not-completable."
+        feature_disorganised_thinking:
+          type: string
+          enum:
+            - present
+            - absent
+            - ""
+          description: "Feature 3 — disorganised thinking: present or absent (empty when unset)."
+        feature_altered_consciousness:
+          type: string
+          enum:
+            - present
+            - absent
+            - ""
+          description: "Feature 4 — altered level of consciousness: present or absent (empty when unset)."
+        consciousness_level:
+          type: string
+          enum:
+            - alert
+            - vigilant
+            - lethargic
+            - stupor
+            - coma
+            - ""
+          description: "Observed level of consciousness: alert, vigilant, lethargic, stupor, or coma."
+        rass_score:
+          type: integer
+          format: int32
+          description: Richmond Agitation-Sedation Scale score (-5 to +4); recorded for the CAM-ICU variant. RASS -4/-5 (unrousable) yields an unable-to-assess classification.
+        motoric_subtype:
+          type: string
+          enum:
+            - hypoactive
+            - hyperactive
+            - mixed
+            - normal
+            - ""
+          description: "Psychomotor subtype of delirium: hypoactive, hyperactive, mixed, or normal."
+        hallucinations:
+          type: boolean
+          description: Whether hallucinations were observed during the assessment.
+        delusions:
+          type: boolean
+          description: Whether delusions were observed during the assessment.
+        sleep_wake_disturbance:
+          type: boolean
+          description: Whether a sleep-wake cycle disturbance was observed.
+        deliriogenic_medication:
+          type: boolean
+          description: Whether a recent high-risk deliriogenic medication (anticholinergic, benzodiazepine, opioid) was noted.
+        deliriogenic_medication_detail:
+          type: string
+          description: Free-text detail of the deliriogenic medication noted.
+        suspected_precipitants:
+          type: string
+          description: Free-text note of suspected reversible precipitants (PINCH ME screen).
+        recommended_actions:
+          type: string
+          description: Free-text note of recommended actions and disposition.
+        clinical_note:
+          type: string
+          description: Free-text clinical note recorded with the assessment.
+      required:
+        - created_at
+        - updated_at
+        - patient_id
+        - assessor_name
+        - assessor_role
+        - ward_unit
+        - cam_variant
+        - patient_identifier
+        - age_band
+        - sex
+        - cognitive_baseline
+        - collateral_source
+        - feature_acute_onset_fluctuating
+        - onset_timing
+        - feature_inattention
+        - attention_test
+        - feature_disorganised_thinking
+        - feature_altered_consciousness
+        - consciousness_level
+        - motoric_subtype
+        - hallucinations
+        - delusions
+        - sleep_wake_disturbance
+        - deliriogenic_medication
+        - deliriogenic_medication_detail
+        - suspected_precipitants
+        - recommended_actions
+        - clinical_note
+      description: "Main Confusion Assessment Method (CAM) record: assessment context, patient identification, and the four observational feature inputs plus CAM-ICU support fields. Status / classification form with no numeric total."

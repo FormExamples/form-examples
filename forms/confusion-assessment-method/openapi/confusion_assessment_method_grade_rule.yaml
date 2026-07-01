@@ -1,0 +1,160 @@
+# Generated from sql/. Do not edit by hand.
+# SOURCE: confusion_assessment_method_grade_rule
+openapi: 3.1.0
+info:
+  title: Confusion Assessment Method — ConfusionAssessmentMethodGradeRule
+  version: 1.0.0
+  description: "Audit trail of every classification rule that fired during CAM computation: feature, whether it was positive, category, and description."
+paths:
+  /confusion-assessment-method-grade-rules:
+    get:
+      summary: List ConfusionAssessmentMethodGradeRule records
+      operationId: listConfusionAssessmentMethodGradeRule
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of ConfusionAssessmentMethodGradeRule records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/ConfusionAssessmentMethodGradeRule"
+    post:
+      summary: Create a new ConfusionAssessmentMethodGradeRule
+      operationId: createConfusionAssessmentMethodGradeRule
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ConfusionAssessmentMethodGradeRule"
+      responses:
+        "201":
+          description: The newly created ConfusionAssessmentMethodGradeRule
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ConfusionAssessmentMethodGradeRule"
+        "400":
+          description: Validation error
+  /confusion-assessment-method-grade-rules/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one ConfusionAssessmentMethodGradeRule by id
+      operationId: getConfusionAssessmentMethodGradeRule
+      responses:
+        "200":
+          description: The requested ConfusionAssessmentMethodGradeRule
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ConfusionAssessmentMethodGradeRule"
+        "404":
+          description: ConfusionAssessmentMethodGradeRule not found
+    patch:
+      summary: Update an existing ConfusionAssessmentMethodGradeRule
+      operationId: updateConfusionAssessmentMethodGradeRule
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ConfusionAssessmentMethodGradeRule"
+      responses:
+        "200":
+          description: The updated ConfusionAssessmentMethodGradeRule
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ConfusionAssessmentMethodGradeRule"
+        "404":
+          description: ConfusionAssessmentMethodGradeRule not found
+    delete:
+      summary: Soft-delete a ConfusionAssessmentMethodGradeRule
+      operationId: deleteConfusionAssessmentMethodGradeRule
+      responses:
+        "204":
+          description: ConfusionAssessmentMethodGradeRule deleted
+        "404":
+          description: ConfusionAssessmentMethodGradeRule not found
+components:
+  schemas:
+    ConfusionAssessmentMethodGradeRule:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was most recently updated.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was soft-deleted.
+        confusion_assessment_method_grade_id:
+          type: string
+          format: uuid
+          description: Foreign key to the parent grade.
+        rule_id:
+          type: string
+          maxLength: 40
+          description: Stable rule identifier (e.g. R-FEATURE-1-POSITIVE-01).
+        feature:
+          type: string
+          enum:
+            - acute-onset-fluctuating
+            - inattention
+            - disorganised-thinking
+            - altered-consciousness
+            - algorithm
+            - arousal
+          description: "Feature the rule belongs to: acute-onset-fluctuating, inattention, disorganised-thinking, altered-consciousness, algorithm (the 1 AND 2 AND (3 OR 4) combiner), or arousal (RASS gating)."
+        positive:
+          type: boolean
+          description: Whether the feature evaluated positive for this firing (null for combiner / arousal rules).
+        category:
+          type: string
+          maxLength: 50
+          description: Subject category (e.g. feature-evaluation, algorithm-combiner, arousal-gate).
+        description:
+          type: string
+          maxLength: 500
+          description: Human-readable description of why the rule fired.
+      required:
+        - created_at
+        - updated_at
+        - confusion_assessment_method_grade_id
+        - rule_id
+        - feature
+        - category
+        - description
+      description: "Audit trail of every classification rule that fired during CAM computation: feature, whether it was positive, category, and description."

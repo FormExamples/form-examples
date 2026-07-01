@@ -1,4 +1,4 @@
-// Generated from sql-migrations/. Do not edit by hand.
+// Generated from sql/. Do not edit by hand.
 // SOURCE: assessment, assessment_current_medications, assessment_current_medication_item
 
 syntax = "proto3";

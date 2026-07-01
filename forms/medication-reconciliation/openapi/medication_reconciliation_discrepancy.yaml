@@ -1,0 +1,171 @@
+# Generated from sql/. Do not edit by hand.
+# SOURCE: medication_reconciliation_discrepancy
+openapi: 3.1.0
+info:
+  title: Medication Reconciliation — MedicationReconciliationDiscrepancy
+  version: 1.0.0
+  description: Reconciliation discrepancies between the BPMH and the inpatient list, classified by type and by intentional / unintentional, cascading from the parent reconciliation.
+paths:
+  /medication-reconciliation-discrepancies:
+    get:
+      summary: List MedicationReconciliationDiscrepancy records
+      operationId: listMedicationReconciliationDiscrepancy
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of MedicationReconciliationDiscrepancy records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/MedicationReconciliationDiscrepancy"
+    post:
+      summary: Create a new MedicationReconciliationDiscrepancy
+      operationId: createMedicationReconciliationDiscrepancy
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/MedicationReconciliationDiscrepancy"
+      responses:
+        "201":
+          description: The newly created MedicationReconciliationDiscrepancy
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/MedicationReconciliationDiscrepancy"
+        "400":
+          description: Validation error
+  /medication-reconciliation-discrepancies/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one MedicationReconciliationDiscrepancy by id
+      operationId: getMedicationReconciliationDiscrepancy
+      responses:
+        "200":
+          description: The requested MedicationReconciliationDiscrepancy
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/MedicationReconciliationDiscrepancy"
+        "404":
+          description: MedicationReconciliationDiscrepancy not found
+    patch:
+      summary: Update an existing MedicationReconciliationDiscrepancy
+      operationId: updateMedicationReconciliationDiscrepancy
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/MedicationReconciliationDiscrepancy"
+      responses:
+        "200":
+          description: The updated MedicationReconciliationDiscrepancy
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/MedicationReconciliationDiscrepancy"
+        "404":
+          description: MedicationReconciliationDiscrepancy not found
+    delete:
+      summary: Soft-delete a MedicationReconciliationDiscrepancy
+      operationId: deleteMedicationReconciliationDiscrepancy
+      responses:
+        "204":
+          description: MedicationReconciliationDiscrepancy deleted
+        "404":
+          description: MedicationReconciliationDiscrepancy not found
+components:
+  schemas:
+    MedicationReconciliationDiscrepancy:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was most recently updated.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was soft-deleted.
+        medication_reconciliation_id:
+          type: string
+          format: uuid
+          description: Foreign key to the parent medication reconciliation.
+        discrepancy_type:
+          type: string
+          enum:
+            - omission
+            - commission
+            - duplication
+            - dose
+            - frequency
+            - route
+            - formulation
+            - ""
+          description: "Type of difference: omission, commission, duplication, dose, frequency, route, or formulation."
+        bpmh_item_ref:
+          type: string
+          description: Reference to the matched BPMH line item (free text; empty when not applicable).
+        inpatient_item_ref:
+          type: string
+          description: Reference to the matched inpatient line item (free text; empty when not applicable).
+        intended_action:
+          type: string
+          enum:
+            - continue
+            - hold
+            - stop
+            - change
+            - start
+            - ""
+          description: "Documented action for an intentional discrepancy: continue, hold, stop, change, or start."
+        rationale:
+          type: string
+          description: Clinical reason for the intended action.
+        intentional:
+          type: boolean
+          description: True when the discrepancy is a documented decision; false when unexplained (an error).
+      required:
+        - created_at
+        - updated_at
+        - medication_reconciliation_id
+        - discrepancy_type
+        - bpmh_item_ref
+        - inpatient_item_ref
+        - intended_action
+        - rationale
+        - intentional
+      description: Reconciliation discrepancies between the BPMH and the inpatient list, classified by type and by intentional / unintentional, cascading from the parent reconciliation.

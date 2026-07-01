@@ -1,0 +1,167 @@
+# Generated from sql/. Do not edit by hand.
+# SOURCE: child_pugh_score_grade_flag
+openapi: 3.1.0
+info:
+  title: Child Pugh Score — ChildPughScoreGradeFlag
+  version: 1.0.0
+  description: Red-flag issues that fire independently of the total score, with priority and a suggested action for the clinical team.
+paths:
+  /child-pugh-score-grade-flags:
+    get:
+      summary: List ChildPughScoreGradeFlag records
+      operationId: listChildPughScoreGradeFlag
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of ChildPughScoreGradeFlag records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/ChildPughScoreGradeFlag"
+    post:
+      summary: Create a new ChildPughScoreGradeFlag
+      operationId: createChildPughScoreGradeFlag
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ChildPughScoreGradeFlag"
+      responses:
+        "201":
+          description: The newly created ChildPughScoreGradeFlag
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ChildPughScoreGradeFlag"
+        "400":
+          description: Validation error
+  /child-pugh-score-grade-flags/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one ChildPughScoreGradeFlag by id
+      operationId: getChildPughScoreGradeFlag
+      responses:
+        "200":
+          description: The requested ChildPughScoreGradeFlag
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ChildPughScoreGradeFlag"
+        "404":
+          description: ChildPughScoreGradeFlag not found
+    patch:
+      summary: Update an existing ChildPughScoreGradeFlag
+      operationId: updateChildPughScoreGradeFlag
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ChildPughScoreGradeFlag"
+      responses:
+        "200":
+          description: The updated ChildPughScoreGradeFlag
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ChildPughScoreGradeFlag"
+        "404":
+          description: ChildPughScoreGradeFlag not found
+    delete:
+      summary: Soft-delete a ChildPughScoreGradeFlag
+      operationId: deleteChildPughScoreGradeFlag
+      responses:
+        "204":
+          description: ChildPughScoreGradeFlag deleted
+        "404":
+          description: ChildPughScoreGradeFlag not found
+components:
+  schemas:
+    ChildPughScoreGradeFlag:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was most recently updated.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was soft-deleted.
+        child_pugh_score_grade_id:
+          type: string
+          format: uuid
+          description: Foreign key to the parent grade.
+        flag_id:
+          type: string
+          maxLength: 50
+          description: Stable flag identifier (e.g. F-CLASS-C-DECOMPENSATED-001).
+        category:
+          type: string
+          enum:
+            - class-c-decompensated
+            - high-surgical-risk
+            - encephalopathy
+            - refractory-ascites
+            - incomplete-assessment
+            - other
+            - ""
+          description: Flag category (see CHECK constraint for enumeration).
+        priority:
+          type: string
+          enum:
+            - low
+            - medium
+            - high
+            - ""
+          description: "Priority: low, medium, high."
+        description:
+          type: string
+          maxLength: 500
+          description: Human-readable description of what fired the flag.
+        suggested_action:
+          type: string
+          maxLength: 500
+          description: "Suggested clinical action (e.g. \"refer for transplant assessment\")."
+      required:
+        - created_at
+        - updated_at
+        - child_pugh_score_grade_id
+        - flag_id
+        - category
+        - priority
+        - description
+        - suggested_action
+      description: Red-flag issues that fire independently of the total score, with priority and a suggested action for the clinical team.

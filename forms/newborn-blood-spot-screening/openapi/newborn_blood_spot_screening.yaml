@@ -1,0 +1,367 @@
+# Generated from sql/. Do not edit by hand.
+# SOURCE: newborn_blood_spot_screening
+openapi: 3.1.0
+info:
+  title: Newborn Blood Spot Screening — NewbornBloodSpotScreening
+  version: 1.0.0
+  description: "Main newborn-blood-spot-screening record for one heel-prick screening event: sample-taker and setting, baby identification, eligibility and consent, the sample event and its timing, sample quality, and the per-condition result class for the nine screened conditions. Overall outcome, fired rules, and flags live in child tables."
+paths:
+  /newborn-blood-spot-screenings:
+    get:
+      summary: List NewbornBloodSpotScreening records
+      operationId: listNewbornBloodSpotScreening
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of NewbornBloodSpotScreening records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/NewbornBloodSpotScreening"
+    post:
+      summary: Create a new NewbornBloodSpotScreening
+      operationId: createNewbornBloodSpotScreening
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/NewbornBloodSpotScreening"
+      responses:
+        "201":
+          description: The newly created NewbornBloodSpotScreening
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/NewbornBloodSpotScreening"
+        "400":
+          description: Validation error
+  /newborn-blood-spot-screenings/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one NewbornBloodSpotScreening by id
+      operationId: getNewbornBloodSpotScreening
+      responses:
+        "200":
+          description: The requested NewbornBloodSpotScreening
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/NewbornBloodSpotScreening"
+        "404":
+          description: NewbornBloodSpotScreening not found
+    patch:
+      summary: Update an existing NewbornBloodSpotScreening
+      operationId: updateNewbornBloodSpotScreening
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/NewbornBloodSpotScreening"
+      responses:
+        "200":
+          description: The updated NewbornBloodSpotScreening
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/NewbornBloodSpotScreening"
+        "404":
+          description: NewbornBloodSpotScreening not found
+    delete:
+      summary: Soft-delete a NewbornBloodSpotScreening
+      operationId: deleteNewbornBloodSpotScreening
+      responses:
+        "204":
+          description: NewbornBloodSpotScreening deleted
+        "404":
+          description: NewbornBloodSpotScreening not found
+components:
+  schemas:
+    NewbornBloodSpotScreening:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was updated most-recently.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was deleted a.k.a. soft-removed.
+        patient_id:
+          type: string
+          format: uuid
+          description: Foreign key to the newborn (infant) this screening documents (restrict delete).
+        clinician_id:
+          type: string
+          format: uuid
+          description: Foreign key to the sample-taker clinician (restrict delete); optional.
+        sample_taker_role:
+          type: string
+          enum:
+            - midwife
+            - health-visitor
+            - neonatal-nurse
+            - laboratory
+            - other
+            - ""
+          description: "Role of the person taking and recording the sample: midwife, health-visitor, neonatal-nurse, laboratory, or other."
+        care_setting:
+          type: string
+          enum:
+            - community
+            - home
+            - neonatal-unit
+            - hospital
+            - other
+            - ""
+          description: "Care setting where the sample was taken: community, home, neonatal-unit, hospital, or other."
+        record_date:
+          type: string
+          format: date
+          description: Date of this record.
+        time_of_birth:
+          type: string
+          format: time
+          description: Time of birth of the baby.
+        gestation_weeks:
+          type: number
+          format: double
+          description: Gestation at birth in weeks; affects cystic-fibrosis and preterm handling.
+        previously_screened:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - unknown
+            - ""
+          description: "Whether the baby has been previously screened: yes, no, or unknown."
+        consent_given:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - partial
+            - ""
+          description: "Whether informed parental consent to screen was given: yes, no, or partial."
+        decline_reason:
+          type: string
+          description: Free-text reason where screening for any condition was declined.
+        sample_date:
+          type: string
+          format: date
+          description: Date the heel-prick sample was taken.
+        sample_time:
+          type: string
+          format: time
+          description: Time the heel-prick sample was taken.
+        age_at_sample_days:
+          type: integer
+          format: int32
+          description: Age of the baby in days at the time of sampling (sample_date minus birth_date); stored for audit and drives the day 5-8 window flag.
+        sampling_site:
+          type: string
+          enum:
+            - heel
+            - other
+            - ""
+          description: "Site the sample was taken from: heel or other."
+        sample_notes:
+          type: string
+          description: Free-text sample-taker note about the sample event.
+        sample_adequacy:
+          type: string
+          enum:
+            - adequate
+            - inadequate
+            - ""
+          description: "Sample adequacy: adequate or inadequate; an inadequate sample cannot be reliably screened and is repeated."
+        spot_quality_issue:
+          type: string
+          enum:
+            - none
+            - insufficient
+            - compressed
+            - layered
+            - contaminated
+            - incomplete-circles
+            - ""
+          description: "Blood-spot quality issue: none, insufficient, compressed, layered, contaminated, or incomplete-circles."
+        is_repeat:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: "Whether this sample is a repeat: yes or no."
+        repeat_reason:
+          type: string
+          enum:
+            - not-applicable
+            - borderline-result
+            - inadequate-sample
+            - too-early
+            - technical
+            - other
+            - ""
+          description: "Reason a repeat was taken: not-applicable, borderline-result, inadequate-sample, too-early, technical, or other; the last three are avoidable repeats."
+        scd_result:
+          type: string
+          enum:
+            - not-suspected
+            - suspected
+            - carrier
+            - repeat-required
+            - declined
+            - pending
+            - ""
+          description: "Sickle cell disease result class: not-suspected, suspected, carrier, repeat-required, declined, or pending. carrier is valid for this condition only."
+        cf_result:
+          type: string
+          enum:
+            - not-suspected
+            - suspected
+            - carrier
+            - repeat-required
+            - declined
+            - pending
+            - ""
+          description: "Cystic fibrosis result class: not-suspected, suspected, carrier (invalid), repeat-required, declined, or pending."
+        cht_result:
+          type: string
+          enum:
+            - not-suspected
+            - suspected
+            - carrier
+            - repeat-required
+            - declined
+            - pending
+            - ""
+          description: "Congenital hypothyroidism result class: not-suspected, suspected, carrier (invalid), repeat-required, declined, or pending."
+        pku_result:
+          type: string
+          enum:
+            - not-suspected
+            - suspected
+            - carrier
+            - repeat-required
+            - declined
+            - pending
+            - ""
+          description: "Phenylketonuria result class: not-suspected, suspected, carrier (invalid), repeat-required, declined, or pending."
+        mcadd_result:
+          type: string
+          enum:
+            - not-suspected
+            - suspected
+            - carrier
+            - repeat-required
+            - declined
+            - pending
+            - ""
+          description: "MCADD (medium-chain acyl-CoA dehydrogenase deficiency) result class: not-suspected, suspected, carrier (invalid), repeat-required, declined, or pending."
+        msud_result:
+          type: string
+          enum:
+            - not-suspected
+            - suspected
+            - carrier
+            - repeat-required
+            - declined
+            - pending
+            - ""
+          description: "Maple syrup urine disease result class: not-suspected, suspected, carrier (invalid), repeat-required, declined, or pending."
+        iva_result:
+          type: string
+          enum:
+            - not-suspected
+            - suspected
+            - carrier
+            - repeat-required
+            - declined
+            - pending
+            - ""
+          description: "Isovaleric acidaemia result class: not-suspected, suspected, carrier (invalid), repeat-required, declined, or pending."
+        ga1_result:
+          type: string
+          enum:
+            - not-suspected
+            - suspected
+            - carrier
+            - repeat-required
+            - declined
+            - pending
+            - ""
+          description: "Glutaric aciduria type 1 result class: not-suspected, suspected, carrier (invalid), repeat-required, declined, or pending."
+        hcu_result:
+          type: string
+          enum:
+            - not-suspected
+            - suspected
+            - carrier
+            - repeat-required
+            - declined
+            - pending
+            - ""
+          description: "Homocystinuria (pyridoxine unresponsive) result class: not-suspected, suspected, carrier (invalid), repeat-required, declined, or pending."
+        clinical_context:
+          type: string
+          description: Optional free-text clinical context shown in the summary.
+      required:
+        - created_at
+        - updated_at
+        - patient_id
+        - sample_taker_role
+        - care_setting
+        - previously_screened
+        - consent_given
+        - decline_reason
+        - sampling_site
+        - sample_notes
+        - sample_adequacy
+        - spot_quality_issue
+        - is_repeat
+        - repeat_reason
+        - scd_result
+        - cf_result
+        - cht_result
+        - pku_result
+        - mcadd_result
+        - msud_result
+        - iva_result
+        - ga1_result
+        - hcu_result
+        - clinical_context
+      description: "Main newborn-blood-spot-screening record for one heel-prick screening event: sample-taker and setting, baby identification, eligibility and consent, the sample event and its timing, sample quality, and the per-condition result class for the nine screened conditions. Overall outcome, fired rules, and flags live in child tables."

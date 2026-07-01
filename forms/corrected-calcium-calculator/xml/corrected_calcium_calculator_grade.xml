@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE corrected_calcium_calculator_grade SYSTEM "corrected_calcium_calculator_grade.dtd">
+<corrected_calcium_calculator_grade>
+<id>880e8400-e29b-41d4-a716-446655440003</id>
+<created_at>2026-04-09T10:00:00Z</created_at>
+<updated_at>2026-04-09T10:00:00Z</updated_at>
+<deleted_at>2026-04-09T10:00:00Z</deleted_at>
+<corrected_calcium_calculator_id>770e8400-e29b-41d4-a716-446655440002</corrected_calcium_calculator_id>
+<corrected_calcium_mmol_l>0.0</corrected_calcium_mmol_l>
+<classification>hypocalcaemia</classification>
+<graded_at>2026-04-09T10:00:00Z</graded_at>
+</corrected_calcium_calculator_grade>

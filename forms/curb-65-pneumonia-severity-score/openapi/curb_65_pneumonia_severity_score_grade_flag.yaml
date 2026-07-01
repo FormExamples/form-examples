@@ -1,0 +1,168 @@
+# Generated from sql/. Do not edit by hand.
+# SOURCE: curb_65_pneumonia_severity_score_grade_flag
+openapi: 3.1.0
+info:
+  title: Curb 65 Pneumonia Severity Score — Curb65PneumoniaSeverityScoreGradeFlag
+  version: 1.0.0
+  description: Advisory safety flags that fire independently of the numeric band, with priority and a suggested action for the clinical team.
+paths:
+  /curb-65-pneumonia-severity-score-grade-flags:
+    get:
+      summary: List Curb65PneumoniaSeverityScoreGradeFlag records
+      operationId: listCurb65PneumoniaSeverityScoreGradeFlag
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of Curb65PneumoniaSeverityScoreGradeFlag records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Curb65PneumoniaSeverityScoreGradeFlag"
+    post:
+      summary: Create a new Curb65PneumoniaSeverityScoreGradeFlag
+      operationId: createCurb65PneumoniaSeverityScoreGradeFlag
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Curb65PneumoniaSeverityScoreGradeFlag"
+      responses:
+        "201":
+          description: The newly created Curb65PneumoniaSeverityScoreGradeFlag
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Curb65PneumoniaSeverityScoreGradeFlag"
+        "400":
+          description: Validation error
+  /curb-65-pneumonia-severity-score-grade-flags/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one Curb65PneumoniaSeverityScoreGradeFlag by id
+      operationId: getCurb65PneumoniaSeverityScoreGradeFlag
+      responses:
+        "200":
+          description: The requested Curb65PneumoniaSeverityScoreGradeFlag
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Curb65PneumoniaSeverityScoreGradeFlag"
+        "404":
+          description: Curb65PneumoniaSeverityScoreGradeFlag not found
+    patch:
+      summary: Update an existing Curb65PneumoniaSeverityScoreGradeFlag
+      operationId: updateCurb65PneumoniaSeverityScoreGradeFlag
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Curb65PneumoniaSeverityScoreGradeFlag"
+      responses:
+        "200":
+          description: The updated Curb65PneumoniaSeverityScoreGradeFlag
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Curb65PneumoniaSeverityScoreGradeFlag"
+        "404":
+          description: Curb65PneumoniaSeverityScoreGradeFlag not found
+    delete:
+      summary: Soft-delete a Curb65PneumoniaSeverityScoreGradeFlag
+      operationId: deleteCurb65PneumoniaSeverityScoreGradeFlag
+      responses:
+        "204":
+          description: Curb65PneumoniaSeverityScoreGradeFlag deleted
+        "404":
+          description: Curb65PneumoniaSeverityScoreGradeFlag not found
+components:
+  schemas:
+    Curb65PneumoniaSeverityScoreGradeFlag:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was most recently updated.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was soft-deleted.
+        curb_65_pneumonia_severity_score_grade_id:
+          type: string
+          format: uuid
+          description: Foreign key to the parent grade.
+        flag_id:
+          type: string
+          maxLength: 50
+          description: Stable flag identifier (e.g. F-HIGH-SEVERITY-ADMIT-001).
+        category:
+          type: string
+          enum:
+            - high-severity-admit
+            - consider-icu
+            - hypotension
+            - new-confusion
+            - hypoxia
+            - incomplete-criterion
+            - other
+            - ""
+          description: "Flag category: high-severity-admit, consider-icu, hypotension, new-confusion, hypoxia, incomplete-criterion, or other."
+        priority:
+          type: string
+          enum:
+            - low
+            - medium
+            - high
+            - ""
+          description: "Priority: low, medium, high."
+        description:
+          type: string
+          maxLength: 500
+          description: Human-readable description of what fired the flag.
+        suggested_action:
+          type: string
+          maxLength: 500
+          description: "Suggested clinical action (e.g. \"hospitalise and manage as severe CAP\", \"assess for intensive-care / HDU admission\")."
+      required:
+        - created_at
+        - updated_at
+        - curb_65_pneumonia_severity_score_grade_id
+        - flag_id
+        - category
+        - priority
+        - description
+        - suggested_action
+      description: Advisory safety flags that fire independently of the numeric band, with priority and a suggested action for the clinical team.

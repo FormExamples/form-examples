@@ -1,0 +1,171 @@
+# Generated from sql/. Do not edit by hand.
+# SOURCE: modified_early_warning_score_grade_flag
+openapi: 3.1.0
+info:
+  title: Modified Early Warning Score — ModifiedEarlyWarningScoreGradeFlag
+  version: 1.0.0
+  description: Safety-critical flags that fire independently of the aggregate risk band, with priority and a suggested action for the ward and escalation team.
+paths:
+  /modified-early-warning-score-grade-flags:
+    get:
+      summary: List ModifiedEarlyWarningScoreGradeFlag records
+      operationId: listModifiedEarlyWarningScoreGradeFlag
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of ModifiedEarlyWarningScoreGradeFlag records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/ModifiedEarlyWarningScoreGradeFlag"
+    post:
+      summary: Create a new ModifiedEarlyWarningScoreGradeFlag
+      operationId: createModifiedEarlyWarningScoreGradeFlag
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ModifiedEarlyWarningScoreGradeFlag"
+      responses:
+        "201":
+          description: The newly created ModifiedEarlyWarningScoreGradeFlag
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ModifiedEarlyWarningScoreGradeFlag"
+        "400":
+          description: Validation error
+  /modified-early-warning-score-grade-flags/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one ModifiedEarlyWarningScoreGradeFlag by id
+      operationId: getModifiedEarlyWarningScoreGradeFlag
+      responses:
+        "200":
+          description: The requested ModifiedEarlyWarningScoreGradeFlag
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ModifiedEarlyWarningScoreGradeFlag"
+        "404":
+          description: ModifiedEarlyWarningScoreGradeFlag not found
+    patch:
+      summary: Update an existing ModifiedEarlyWarningScoreGradeFlag
+      operationId: updateModifiedEarlyWarningScoreGradeFlag
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ModifiedEarlyWarningScoreGradeFlag"
+      responses:
+        "200":
+          description: The updated ModifiedEarlyWarningScoreGradeFlag
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ModifiedEarlyWarningScoreGradeFlag"
+        "404":
+          description: ModifiedEarlyWarningScoreGradeFlag not found
+    delete:
+      summary: Soft-delete a ModifiedEarlyWarningScoreGradeFlag
+      operationId: deleteModifiedEarlyWarningScoreGradeFlag
+      responses:
+        "204":
+          description: ModifiedEarlyWarningScoreGradeFlag deleted
+        "404":
+          description: ModifiedEarlyWarningScoreGradeFlag not found
+components:
+  schemas:
+    ModifiedEarlyWarningScoreGradeFlag:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was most recently updated.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was soft-deleted.
+        modified_early_warning_score_grade_id:
+          type: string
+          format: uuid
+          description: Foreign key to the parent grade.
+        flag_id:
+          type: string
+          maxLength: 50
+          description: Stable flag identifier (e.g. F-SINGLE-PARAMETER-3-001).
+        category:
+          type: string
+          enum:
+            - aggregate-escalation
+            - single-parameter-3
+            - deteriorating-trend
+            - hypotension
+            - reduced-consciousness
+            - tachypnoea-bradypnoea
+            - tachycardia-bradycardia
+            - pyrexia-hypothermia
+            - incomplete-observation
+            - other
+            - ""
+          description: "Flag category: aggregate-escalation, single-parameter-3, deteriorating-trend, hypotension, reduced-consciousness, tachypnoea-bradypnoea, tachycardia-bradycardia, pyrexia-hypothermia, incomplete-observation, or other."
+        priority:
+          type: string
+          enum:
+            - low
+            - medium
+            - high
+            - ""
+          description: "Priority: low, medium, high."
+        description:
+          type: string
+          maxLength: 500
+          description: Human-readable description of what fired the flag.
+        suggested_action:
+          type: string
+          maxLength: 500
+          description: "Suggested clinical action (e.g. \"urgent medical review\", \"consider critical-care outreach\")."
+      required:
+        - created_at
+        - updated_at
+        - modified_early_warning_score_grade_id
+        - flag_id
+        - category
+        - priority
+        - description
+        - suggested_action
+      description: Safety-critical flags that fire independently of the aggregate risk band, with priority and a suggested action for the ward and escalation team.

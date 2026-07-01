@@ -1,0 +1,574 @@
+{
+  "resourceType": "Observation",
+  "id": "770e8400-e29b-41d4-a716-446655440002",
+  "meta": {
+    "profile": [
+      "http://hl7.org/fhir/StructureDefinition/Observation"
+    ],
+    "lastUpdated": "2026-04-09T10:00:00+00:00"
+  },
+  "status": "final",
+  "category": [
+    {
+      "coding": [
+        {
+          "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+          "code": "survey",
+          "display": "Survey"
+        }
+      ]
+    }
+  ],
+  "code": {
+    "coding": [
+      {
+        "system": "urn:form-examples:child-safeguarding-referral",
+        "code": "child_safeguarding_referral",
+        "display": "Child Safeguarding Referral"
+      }
+    ]
+  },
+  "subject": {
+    "reference": "Patient/550e8400-e29b-41d4-a716-446655440000"
+  },
+  "encounter": {
+    "reference": "Encounter/bb0e8400-e29b-41d4-a716-446655440006"
+  },
+  "effectiveDateTime": "2026-04-09T10:00:00+00:00",
+  "component": [
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:child-safeguarding-referral",
+            "code": "deleted_at",
+            "display": "Deleted At"
+          }
+        ]
+      },
+      "valueDateTime": "2026-04-09T10:00:00+00:00"
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:child-safeguarding-referral",
+            "code": "referrer_organisation",
+            "display": "Referrer Organisation"
+          }
+        ]
+      },
+      "valueString": ""
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:child-safeguarding-referral",
+            "code": "referred_at",
+            "display": "Referred At"
+          }
+        ]
+      },
+      "valueDateTime": "2026-04-09T10:00:00+00:00"
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:child-safeguarding-referral",
+            "code": "relationship_to_child",
+            "display": "Relationship To Child"
+          }
+        ]
+      },
+      "valueString": ""
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:child-safeguarding-referral",
+            "code": "child_age",
+            "display": "Child Age"
+          }
+        ]
+      },
+      "valueQuantity": {
+        "value": 0.0
+      }
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:child-safeguarding-referral",
+            "code": "child_setting",
+            "display": "Child Setting"
+          }
+        ]
+      },
+      "valueString": ""
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:child-safeguarding-referral",
+            "code": "child_reference",
+            "display": "Child Reference"
+          }
+        ]
+      },
+      "valueString": ""
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:child-safeguarding-referral",
+            "code": "child_ethnicity",
+            "display": "Child Ethnicity"
+          }
+        ]
+      },
+      "valueString": "White British"
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:child-safeguarding-referral",
+            "code": "child_first_language",
+            "display": "Child First Language"
+          }
+        ]
+      },
+      "valueString": ""
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:child-safeguarding-referral",
+            "code": "child_disability",
+            "display": "Child Disability"
+          }
+        ]
+      },
+      "valueString": ""
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:child-safeguarding-referral",
+            "code": "carers",
+            "display": "Carers"
+          }
+        ]
+      },
+      "valueString": ""
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:child-safeguarding-referral",
+            "code": "household_members",
+            "display": "Household Members"
+          }
+        ]
+      },
+      "valueString": ""
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:child-safeguarding-referral",
+            "code": "other_children",
+            "display": "Other Children"
+          }
+        ]
+      },
+      "valueString": ""
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:child-safeguarding-referral",
+            "code": "professionals_involved",
+            "display": "Professionals Involved"
+          }
+        ]
+      },
+      "valueString": ""
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:child-safeguarding-referral",
+            "code": "concern_description",
+            "display": "Concern Description"
+          }
+        ]
+      },
+      "valueString": "Example text."
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:child-safeguarding-referral",
+            "code": "concern_onset",
+            "display": "Concern Onset"
+          }
+        ]
+      },
+      "valueString": ""
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:child-safeguarding-referral",
+            "code": "child_disclosed",
+            "display": "Child Disclosed"
+          }
+        ]
+      },
+      "valueCodeableConcept": {
+        "coding": [
+          {
+            "system": "urn:form-examples:child-safeguarding-referral:child_disclosed",
+            "code": "yes",
+            "display": "Yes"
+          }
+        ]
+      }
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:child-safeguarding-referral",
+            "code": "referrer_observations",
+            "display": "Referrer Observations"
+          }
+        ]
+      },
+      "valueString": "Example text."
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:child-safeguarding-referral",
+            "code": "primary_category",
+            "display": "Primary Category"
+          }
+        ]
+      },
+      "valueCodeableConcept": {
+        "coding": [
+          {
+            "system": "urn:form-examples:child-safeguarding-referral:primary_category",
+            "code": "physical",
+            "display": "Physical"
+          }
+        ]
+      }
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:child-safeguarding-referral",
+            "code": "additional_categories",
+            "display": "Additional Categories"
+          }
+        ]
+      },
+      "valueString": ""
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:child-safeguarding-referral",
+            "code": "presenting_evidence",
+            "display": "Presenting Evidence"
+          }
+        ]
+      },
+      "valueString": ""
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:child-safeguarding-referral",
+            "code": "immediate_danger",
+            "display": "Immediate Danger"
+          }
+        ]
+      },
+      "valueCodeableConcept": {
+        "coding": [
+          {
+            "system": "urn:form-examples:child-safeguarding-referral:immediate_danger",
+            "code": "yes",
+            "display": "Yes"
+          }
+        ]
+      }
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:child-safeguarding-referral",
+            "code": "child_whereabouts",
+            "display": "Child Whereabouts"
+          }
+        ]
+      },
+      "valueString": ""
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:child-safeguarding-referral",
+            "code": "who_with_child",
+            "display": "Who With Child"
+          }
+        ]
+      },
+      "valueString": ""
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:child-safeguarding-referral",
+            "code": "alleged_person_in_contact",
+            "display": "Alleged Person In Contact"
+          }
+        ]
+      },
+      "valueCodeableConcept": {
+        "coding": [
+          {
+            "system": "urn:form-examples:child-safeguarding-referral:alleged_person_in_contact",
+            "code": "yes",
+            "display": "Yes"
+          }
+        ]
+      }
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:child-safeguarding-referral",
+            "code": "other_children_at_risk",
+            "display": "Other Children At Risk"
+          }
+        ]
+      },
+      "valueCodeableConcept": {
+        "coding": [
+          {
+            "system": "urn:form-examples:child-safeguarding-referral:other_children_at_risk",
+            "code": "yes",
+            "display": "Yes"
+          }
+        ]
+      }
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:child-safeguarding-referral",
+            "code": "consent_sought",
+            "display": "Consent Sought"
+          }
+        ]
+      },
+      "valueCodeableConcept": {
+        "coding": [
+          {
+            "system": "urn:form-examples:child-safeguarding-referral:consent_sought",
+            "code": "yes",
+            "display": "Yes"
+          }
+        ]
+      }
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:child-safeguarding-referral",
+            "code": "consent_status",
+            "display": "Consent Status"
+          }
+        ]
+      },
+      "valueCodeableConcept": {
+        "coding": [
+          {
+            "system": "urn:form-examples:child-safeguarding-referral:consent_status",
+            "code": "given",
+            "display": "Given"
+          }
+        ]
+      }
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:child-safeguarding-referral",
+            "code": "sharing_basis_without_consent",
+            "display": "Sharing Basis Without Consent"
+          }
+        ]
+      },
+      "valueCodeableConcept": {
+        "coding": [
+          {
+            "system": "urn:form-examples:child-safeguarding-referral:sharing_basis_without_consent",
+            "code": "risk-of-serious-harm",
+            "display": "Risk-Of-Serious-Harm"
+          }
+        ]
+      }
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:child-safeguarding-referral",
+            "code": "family_aware",
+            "display": "Family Aware"
+          }
+        ]
+      },
+      "valueCodeableConcept": {
+        "coding": [
+          {
+            "system": "urn:form-examples:child-safeguarding-referral:family_aware",
+            "code": "yes",
+            "display": "Yes"
+          }
+        ]
+      }
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:child-safeguarding-referral",
+            "code": "unsafe_to_inform_reason",
+            "display": "Unsafe To Inform Reason"
+          }
+        ]
+      },
+      "valueString": "Example text."
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:child-safeguarding-referral",
+            "code": "agencies_contacted",
+            "display": "Agencies Contacted"
+          }
+        ]
+      },
+      "valueString": ""
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:child-safeguarding-referral",
+            "code": "strategy_discussion_held",
+            "display": "Strategy Discussion Held"
+          }
+        ]
+      },
+      "valueCodeableConcept": {
+        "coding": [
+          {
+            "system": "urn:form-examples:child-safeguarding-referral:strategy_discussion_held",
+            "code": "yes",
+            "display": "Yes"
+          }
+        ]
+      }
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:child-safeguarding-referral",
+            "code": "previous_safeguarding_history",
+            "display": "Previous Safeguarding History"
+          }
+        ]
+      },
+      "valueString": "Example text."
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:child-safeguarding-referral",
+            "code": "requested_action",
+            "display": "Requested Action"
+          }
+        ]
+      },
+      "valueString": ""
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:child-safeguarding-referral",
+            "code": "referrer_declaration",
+            "display": "Referrer Declaration"
+          }
+        ]
+      },
+      "valueCodeableConcept": {
+        "coding": [
+          {
+            "system": "urn:form-examples:child-safeguarding-referral:referrer_declaration",
+            "code": "yes",
+            "display": "Yes"
+          }
+        ]
+      }
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:child-safeguarding-referral",
+            "code": "notes",
+            "display": "Notes"
+          }
+        ]
+      },
+      "valueString": "Example text."
+    }
+  ]
+}

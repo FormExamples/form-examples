@@ -1,0 +1,146 @@
+# Generated from sql/. Do not edit by hand.
+# SOURCE: bhutani_bilirubin_nomogram_grade_rule
+openapi: 3.1.0
+info:
+  title: Bhutani Bilirubin Nomogram — BhutaniBilirubinNomogramGradeRule
+  version: 1.0.0
+  description: "Audit trail of every classification rule that fired during Bhutani bilirubin nomogram computation: rule identifier, category, and description."
+paths:
+  /bhutani-bilirubin-nomogram-grade-rules:
+    get:
+      summary: List BhutaniBilirubinNomogramGradeRule records
+      operationId: listBhutaniBilirubinNomogramGradeRule
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of BhutaniBilirubinNomogramGradeRule records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/BhutaniBilirubinNomogramGradeRule"
+    post:
+      summary: Create a new BhutaniBilirubinNomogramGradeRule
+      operationId: createBhutaniBilirubinNomogramGradeRule
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/BhutaniBilirubinNomogramGradeRule"
+      responses:
+        "201":
+          description: The newly created BhutaniBilirubinNomogramGradeRule
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/BhutaniBilirubinNomogramGradeRule"
+        "400":
+          description: Validation error
+  /bhutani-bilirubin-nomogram-grade-rules/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one BhutaniBilirubinNomogramGradeRule by id
+      operationId: getBhutaniBilirubinNomogramGradeRule
+      responses:
+        "200":
+          description: The requested BhutaniBilirubinNomogramGradeRule
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/BhutaniBilirubinNomogramGradeRule"
+        "404":
+          description: BhutaniBilirubinNomogramGradeRule not found
+    patch:
+      summary: Update an existing BhutaniBilirubinNomogramGradeRule
+      operationId: updateBhutaniBilirubinNomogramGradeRule
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/BhutaniBilirubinNomogramGradeRule"
+      responses:
+        "200":
+          description: The updated BhutaniBilirubinNomogramGradeRule
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/BhutaniBilirubinNomogramGradeRule"
+        "404":
+          description: BhutaniBilirubinNomogramGradeRule not found
+    delete:
+      summary: Soft-delete a BhutaniBilirubinNomogramGradeRule
+      operationId: deleteBhutaniBilirubinNomogramGradeRule
+      responses:
+        "204":
+          description: BhutaniBilirubinNomogramGradeRule deleted
+        "404":
+          description: BhutaniBilirubinNomogramGradeRule not found
+components:
+  schemas:
+    BhutaniBilirubinNomogramGradeRule:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was most recently updated.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was soft-deleted.
+        bhutani_bilirubin_nomogram_grade_id:
+          type: string
+          format: uuid
+          description: Foreign key to the parent grade.
+        rule_id:
+          type: string
+          maxLength: 40
+          description: Stable rule identifier (e.g. R-ZONE-HIGH-INTERMEDIATE-01).
+        category:
+          type: string
+          maxLength: 50
+          description: Rule category (e.g. zone-lookup, phototherapy-threshold, exchange-threshold).
+        description:
+          type: string
+          maxLength: 500
+          description: Human-readable description of why the rule fired.
+      required:
+        - created_at
+        - updated_at
+        - bhutani_bilirubin_nomogram_grade_id
+        - rule_id
+        - category
+        - description
+      description: "Audit trail of every classification rule that fired during Bhutani bilirubin nomogram computation: rule identifier, category, and description."

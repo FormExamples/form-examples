@@ -1,0 +1,36 @@
+// Generated from sql/. Do not edit by hand.
+// SOURCE: caprini_venous_thromboembolism_risk_assessment_grade_flag
+
+syntax = "proto3";
+
+package form_examples.caprini_venous_thromboembolism_risk_assessment;
+
+enum CapriniVenousThromboembolismRiskAssessmentGradeFlagCategoryEnum {
+  CATEGORY_UNSPECIFIED = 0;
+  CATEGORY_HIGH_VTE_RISK = 1;  // high-vte-risk
+  CATEGORY_BLEEDING_CONTRAINDICATION = 2;  // bleeding-contraindication
+  CATEGORY_PRIOR_VTE = 3;  // prior-vte
+  CATEGORY_KNOWN_THROMBOPHILIA = 4;  // known-thrombophilia
+  CATEGORY_INCOMPLETE_ASSESSMENT = 5;  // incomplete-assessment
+  CATEGORY_OTHER = 6;  // other
+}
+
+enum CapriniVenousThromboembolismRiskAssessmentGradeFlagPriorityEnum {
+  PRIORITY_UNSPECIFIED = 0;
+  PRIORITY_LOW = 1;  // low
+  PRIORITY_MEDIUM = 2;  // medium
+  PRIORITY_HIGH = 3;  // high
+}
+
+message CapriniVenousThromboembolismRiskAssessmentGradeFlag {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string caprini_venous_thromboembolism_risk_assessment_grade_id = 5;  // UUID — uuid
+  string flag_id = 6;  // VARCHAR(50) — max 50 chars
+  CapriniVenousThromboembolismRiskAssessmentGradeFlagCategoryEnum category = 7;  // VARCHAR(50)
+  CapriniVenousThromboembolismRiskAssessmentGradeFlagPriorityEnum priority = 8;  // VARCHAR(10)
+  string description = 9;  // VARCHAR(500) — max 500 chars
+  string suggested_action = 10;  // VARCHAR(500) — max 500 chars
+}

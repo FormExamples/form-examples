@@ -1,0 +1,168 @@
+# Generated from sql/. Do not edit by hand.
+# SOURCE: corrected_calcium_calculator_grade_flag
+openapi: 3.1.0
+info:
+  title: Corrected Calcium Calculator — CorrectedCalciumCalculatorGradeFlag
+  version: 1.0.0
+  description: Safety-critical flags that fire independently of the classification, with priority and a suggested action for the assessing clinician.
+paths:
+  /corrected-calcium-calculator-grade-flags:
+    get:
+      summary: List CorrectedCalciumCalculatorGradeFlag records
+      operationId: listCorrectedCalciumCalculatorGradeFlag
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of CorrectedCalciumCalculatorGradeFlag records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/CorrectedCalciumCalculatorGradeFlag"
+    post:
+      summary: Create a new CorrectedCalciumCalculatorGradeFlag
+      operationId: createCorrectedCalciumCalculatorGradeFlag
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CorrectedCalciumCalculatorGradeFlag"
+      responses:
+        "201":
+          description: The newly created CorrectedCalciumCalculatorGradeFlag
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CorrectedCalciumCalculatorGradeFlag"
+        "400":
+          description: Validation error
+  /corrected-calcium-calculator-grade-flags/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one CorrectedCalciumCalculatorGradeFlag by id
+      operationId: getCorrectedCalciumCalculatorGradeFlag
+      responses:
+        "200":
+          description: The requested CorrectedCalciumCalculatorGradeFlag
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CorrectedCalciumCalculatorGradeFlag"
+        "404":
+          description: CorrectedCalciumCalculatorGradeFlag not found
+    patch:
+      summary: Update an existing CorrectedCalciumCalculatorGradeFlag
+      operationId: updateCorrectedCalciumCalculatorGradeFlag
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CorrectedCalciumCalculatorGradeFlag"
+      responses:
+        "200":
+          description: The updated CorrectedCalciumCalculatorGradeFlag
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CorrectedCalciumCalculatorGradeFlag"
+        "404":
+          description: CorrectedCalciumCalculatorGradeFlag not found
+    delete:
+      summary: Soft-delete a CorrectedCalciumCalculatorGradeFlag
+      operationId: deleteCorrectedCalciumCalculatorGradeFlag
+      responses:
+        "204":
+          description: CorrectedCalciumCalculatorGradeFlag deleted
+        "404":
+          description: CorrectedCalciumCalculatorGradeFlag not found
+components:
+  schemas:
+    CorrectedCalciumCalculatorGradeFlag:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was most recently updated.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was soft-deleted.
+        corrected_calcium_calculator_grade_id:
+          type: string
+          format: uuid
+          description: Foreign key to the parent grade.
+        flag_id:
+          type: string
+          maxLength: 50
+          description: Stable flag identifier (e.g. F-SEVERE-HYPERCALCAEMIA-001).
+        category:
+          type: string
+          enum:
+            - severe-hypercalcaemia
+            - severe-hypocalcaemia
+            - symptomatic-hypercalcaemia
+            - hypercalcaemia
+            - hypocalcaemia
+            - incomplete-data
+            - other
+            - ""
+          description: "Flag category: severe-hypercalcaemia, severe-hypocalcaemia, symptomatic-hypercalcaemia, hypercalcaemia, hypocalcaemia, incomplete-data, or other."
+        priority:
+          type: string
+          enum:
+            - low
+            - medium
+            - high
+            - ""
+          description: "Priority: low, medium, high."
+        description:
+          type: string
+          maxLength: 500
+          description: Human-readable description of what fired the flag.
+        suggested_action:
+          type: string
+          maxLength: 500
+          description: "Suggested clinical action (e.g. \"seek immediate senior or endocrine review\")."
+      required:
+        - created_at
+        - updated_at
+        - corrected_calcium_calculator_grade_id
+        - flag_id
+        - category
+        - priority
+        - description
+        - suggested_action
+      description: Safety-critical flags that fire independently of the classification, with priority and a suggested action for the assessing clinician.

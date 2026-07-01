@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mental_state_examination_grade SYSTEM "mental_state_examination_grade.dtd">
+<mental_state_examination_grade>
+<id>880e8400-e29b-41d4-a716-446655440003</id>
+<created_at>2026-04-09T10:00:00Z</created_at>
+<updated_at>2026-04-09T10:00:00Z</updated_at>
+<deleted_at>2026-04-09T10:00:00Z</deleted_at>
+<mental_state_examination_id>770e8400-e29b-41d4-a716-446655440002</mental_state_examination_id>
+<status>complete</status>
+<risk_level>none</risk_level>
+<completeness_percent>1</completeness_percent>
+<appearance_behaviour_documented>yes</appearance_behaviour_documented>
+<speech_documented>yes</speech_documented>
+<emotion_documented>yes</emotion_documented>
+<perception_documented>yes</perception_documented>
+<thought_documented>yes</thought_documented>
+<insight_documented>yes</insight_documented>
+<cognition_documented>yes</cognition_documented>
+<graded_at>2026-04-09T10:00:00Z</graded_at>
+</mental_state_examination_grade>

@@ -1,0 +1,276 @@
+# Generated from sql/. Do not edit by hand.
+# SOURCE: breast_screening
+openapi: 3.1.0
+info:
+  title: Breast Screening — BreastScreening
+  version: 1.0.0
+  description: "Main breast-screening record for one NHS Breast Screening Programme mammography encounter: context and identification, eligibility, consent, mammogram views, double-read opinions and arbitration, the reading outcome, and the five-point breast imaging classification when assessed. Screening outcome, fired rules, and flags live in child tables."
+paths:
+  /breast-screenings:
+    get:
+      summary: List BreastScreening records
+      operationId: listBreastScreening
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of BreastScreening records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/BreastScreening"
+    post:
+      summary: Create a new BreastScreening
+      operationId: createBreastScreening
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/BreastScreening"
+      responses:
+        "201":
+          description: The newly created BreastScreening
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/BreastScreening"
+        "400":
+          description: Validation error
+  /breast-screenings/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one BreastScreening by id
+      operationId: getBreastScreening
+      responses:
+        "200":
+          description: The requested BreastScreening
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/BreastScreening"
+        "404":
+          description: BreastScreening not found
+    patch:
+      summary: Update an existing BreastScreening
+      operationId: updateBreastScreening
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/BreastScreening"
+      responses:
+        "200":
+          description: The updated BreastScreening
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/BreastScreening"
+        "404":
+          description: BreastScreening not found
+    delete:
+      summary: Soft-delete a BreastScreening
+      operationId: deleteBreastScreening
+      responses:
+        "204":
+          description: BreastScreening deleted
+        "404":
+          description: BreastScreening not found
+components:
+  schemas:
+    BreastScreening:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was updated most-recently.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was deleted a.k.a. soft-removed.
+        patient_id:
+          type: string
+          format: uuid
+          description: Foreign key to the patient this screening documents (restrict delete).
+        clinician_id:
+          type: string
+          format: uuid
+          description: Foreign key to the reporting clinician (restrict delete); optional.
+        reporting_clinician_role:
+          type: string
+          enum:
+            - mammographer
+            - advanced-practitioner
+            - breast-radiologist
+            - screening-office
+            - other
+            - ""
+          description: "Role of the reporting clinician: mammographer, advanced-practitioner, breast-radiologist, screening-office, or other."
+        reported_at:
+          type: string
+          format: date-time
+          description: Date and time the screening outcome was reported.
+        screening_unit:
+          type: string
+          description: "Screening unit where the mammogram was taken: static or mobile unit."
+        episode_type:
+          type: string
+          enum:
+            - routine-recall
+            - very-first-call
+            - self-referral
+            - higher-risk-surveillance
+            - ""
+          description: "Screening episode type: routine-recall, very-first-call, self-referral, or higher-risk-surveillance."
+        patient_identifier:
+          type: string
+          maxLength: 100
+          description: NHS number or local patient identifier as recorded on the record.
+        age_years:
+          type: integer
+          format: int32
+          description: Patient age in years; drives eligibility and the age-range flag (routine eligible range 50-70).
+        last_screened_date:
+          type: string
+          format: date
+          description: Date of the most recent previous screen, when known; drives the overdue flag (~36 months).
+        higher_risk_surveillance:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Whether the woman is on the separate higher-risk surveillance pathway (yes/no); yes classifies eligibility as higher-risk-surveillance.
+        symptomatic:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Whether the woman reports a breast symptom (yes/no); yes routes to the symptomatic breast pathway rather than screening.
+        consent_given:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - declined
+            - ""
+          description: "Whether informed consent to image was given: yes, no, or declined; anything other than yes raises the consent flag."
+        views_taken:
+          type: string
+          enum:
+            - standard-four-view
+            - additional-views
+            - unable-to-image
+            - ""
+          description: "Mammogram views taken: standard-four-view, additional-views, or unable-to-image."
+        image_adequacy:
+          type: string
+          enum:
+            - adequate
+            - inadequate
+            - ""
+          description: "Image adequacy: adequate or inadequate; an inadequate image drives the technical-repeat flag."
+        first_read_opinion:
+          type: string
+          enum:
+            - normal
+            - recall
+            - technical
+            - ""
+          description: "First reader opinion: normal, recall, or technical."
+        second_read_opinion:
+          type: string
+          enum:
+            - normal
+            - recall
+            - technical
+            - ""
+          description: "Second reader opinion: normal, recall, or technical."
+        arbitration_outcome:
+          type: string
+          enum:
+            - normal
+            - recall
+            - technical
+            - not-required
+            - ""
+          description: "Arbitration outcome when the two reads disagree: normal, recall, technical, or not-required."
+        reading_outcome:
+          type: string
+          enum:
+            - normal-routine-recall
+            - technical-repeat
+            - recall-for-assessment
+            - ""
+          description: "Overall film-reading outcome: normal-routine-recall, technical-repeat, or recall-for-assessment."
+        assessment_performed:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Whether the recall assessment clinic was attended (yes/no); required before an imaging classification can be recorded.
+        assessment_modalities:
+          type: string
+          description: Assessment modalities used, serialised multi-select from mammography, ultrasound, and biopsy.
+        imaging_classification:
+          type: integer
+          format: int32
+          description: Five-point breast imaging classification recorded at assessment (1 normal, 2 benign, 3 indeterminate, 4 suspicious, 5 malignant); null until assessed.
+        clinical_context:
+          type: string
+          description: Optional free-text clinical context shown in the summary.
+      required:
+        - created_at
+        - updated_at
+        - patient_id
+        - reporting_clinician_role
+        - screening_unit
+        - episode_type
+        - patient_identifier
+        - higher_risk_surveillance
+        - symptomatic
+        - consent_given
+        - views_taken
+        - image_adequacy
+        - first_read_opinion
+        - second_read_opinion
+        - arbitration_outcome
+        - reading_outcome
+        - assessment_performed
+        - assessment_modalities
+        - clinical_context
+      description: "Main breast-screening record for one NHS Breast Screening Programme mammography encounter: context and identification, eligibility, consent, mammogram views, double-read opinions and arbitration, the reading outcome, and the five-point breast imaging classification when assessed. Screening outcome, fired rules, and flags live in child tables."

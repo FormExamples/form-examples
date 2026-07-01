@@ -1,0 +1,27 @@
+// Generated from sql/. Do not edit by hand.
+// SOURCE: cage_alcohol_questionnaire_grade
+
+syntax = "proto3";
+
+package form_examples.cage_alcohol_questionnaire;
+
+enum CageAlcoholQuestionnaireGradeInterpretationEnum {
+  INTERPRETATION_UNSPECIFIED = 0;
+  INTERPRETATION_NEGATIVE = 1;  // negative
+  INTERPRETATION_POSITIVE = 2;  // positive
+}
+
+message CageAlcoholQuestionnaireGrade {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string cage_alcohol_questionnaire_id = 5;  // UUID — uuid
+  int32 cut_down_point = 6;  // INT
+  int32 annoyed_point = 7;  // INT
+  int32 guilty_point = 8;  // INT
+  int32 eye_opener_point = 9;  // INT
+  int32 total_score = 10;  // INT
+  CageAlcoholQuestionnaireGradeInterpretationEnum interpretation = 11;  // VARCHAR(10)
+  string graded_at = 12;  // TIMESTAMPTZ — iso 8601
+}

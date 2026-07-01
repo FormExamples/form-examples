@@ -1,0 +1,30 @@
+// Generated from sql/. Do not edit by hand.
+// SOURCE: ottawa_knee_rule_grade
+
+syntax = "proto3";
+
+package form_examples.ottawa_knee_rule;
+
+enum OttawaKneeRuleGradeXrayIndicatedEnum {
+  XRAYINDICATED_UNSPECIFIED = 0;
+  XRAYINDICATED_YES = 1;  // yes
+  XRAYINDICATED_NO = 2;  // no
+}
+
+enum OttawaKneeRuleGradeDecisionEnum {
+  DECISION_UNSPECIFIED = 0;
+  DECISION_XRAY_INDICATED = 1;  // xray-indicated
+  DECISION_XRAY_NOT_INDICATED = 2;  // xray-not-indicated
+}
+
+message OttawaKneeRuleGrade {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string ottawa_knee_rule_id = 5;  // UUID — uuid
+  OttawaKneeRuleGradeXrayIndicatedEnum xray_indicated = 6;  // VARCHAR(5)
+  OttawaKneeRuleGradeDecisionEnum decision = 7;  // VARCHAR(20)
+  string recommended_action = 8;  // TEXT
+  string graded_at = 9;  // TIMESTAMPTZ — iso 8601
+}

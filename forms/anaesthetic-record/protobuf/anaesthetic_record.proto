@@ -1,0 +1,188 @@
+// Generated from sql/. Do not edit by hand.
+// SOURCE: anaesthetic_record
+
+syntax = "proto3";
+
+package form_examples.anaesthetic_record;
+
+enum AnaestheticRecordUrgencyEnum {
+  URGENCY_UNSPECIFIED = 0;
+  URGENCY_ELECTIVE = 1;  // elective
+  URGENCY_URGENT = 2;  // urgent
+  URGENCY_EMERGENCY = 3;  // emergency
+  URGENCY_IMMEDIATE = 4;  // immediate
+}
+
+enum AnaestheticRecordMachineCheckedEnum {
+  MACHINECHECKED_UNSPECIFIED = 0;
+  MACHINECHECKED_YES = 1;  // yes
+  MACHINECHECKED_NO = 2;  // no
+}
+
+enum AnaestheticRecordWhoSignInEnum {
+  WHOSIGNIN_UNSPECIFIED = 0;
+  WHOSIGNIN_YES = 1;  // yes
+  WHOSIGNIN_NO = 2;  // no
+}
+
+enum AnaestheticRecordWhoTimeOutEnum {
+  WHOTIMEOUT_UNSPECIFIED = 0;
+  WHOTIMEOUT_YES = 1;  // yes
+  WHOTIMEOUT_NO = 2;  // no
+}
+
+enum AnaestheticRecordConsentConfirmedEnum {
+  CONSENTCONFIRMED_UNSPECIFIED = 0;
+  CONSENTCONFIRMED_YES = 1;  // yes
+  CONSENTCONFIRMED_NO = 2;  // no
+}
+
+enum AnaestheticRecordFastingConfirmedEnum {
+  FASTINGCONFIRMED_UNSPECIFIED = 0;
+  FASTINGCONFIRMED_YES = 1;  // yes
+  FASTINGCONFIRMED_NO = 2;  // no
+}
+
+enum AnaestheticRecordAllergyBandCheckedEnum {
+  ALLERGYBANDCHECKED_UNSPECIFIED = 0;
+  ALLERGYBANDCHECKED_YES = 1;  // yes
+  ALLERGYBANDCHECKED_NO = 2;  // no
+}
+
+enum AnaestheticRecordAsaStatusEnum {
+  ASASTATUS_UNSPECIFIED = 0;
+  ASASTATUS_I = 1;  // I
+  ASASTATUS_II = 2;  // II
+  ASASTATUS_III = 3;  // III
+  ASASTATUS_IV = 4;  // IV
+  ASASTATUS_V = 5;  // V
+  ASASTATUS_VI = 6;  // VI
+}
+
+enum AnaestheticRecordAsaEmergencyModifierEnum {
+  ASAEMERGENCYMODIFIER_UNSPECIFIED = 0;
+  ASAEMERGENCYMODIFIER_YES = 1;  // yes
+  ASAEMERGENCYMODIFIER_NO = 2;  // no
+}
+
+enum AnaestheticRecordAnticipatedDifficultAirwayEnum {
+  ANTICIPATEDDIFFICULTAIRWAY_UNSPECIFIED = 0;
+  ANTICIPATEDDIFFICULTAIRWAY_YES = 1;  // yes
+  ANTICIPATEDDIFFICULTAIRWAY_NO = 2;  // no
+}
+
+enum AnaestheticRecordPriorDifficultIntubationEnum {
+  PRIORDIFFICULTINTUBATION_UNSPECIFIED = 0;
+  PRIORDIFFICULTINTUBATION_YES = 1;  // yes
+  PRIORDIFFICULTINTUBATION_NO = 2;  // no
+}
+
+enum AnaestheticRecordAirwayTechniqueEnum {
+  AIRWAYTECHNIQUE_UNSPECIFIED = 0;
+  AIRWAYTECHNIQUE_FACEMASK = 1;  // facemask
+  AIRWAYTECHNIQUE_SUPRAGLOTTIC = 2;  // supraglottic
+  AIRWAYTECHNIQUE_TRACHEAL_TUBE = 3;  // tracheal-tube
+  AIRWAYTECHNIQUE_TRACHEOSTOMY = 4;  // tracheostomy
+  AIRWAYTECHNIQUE_AWAKE_FOI = 5;  // awake-foi
+}
+
+enum AnaestheticRecordCuffedEnum {
+  CUFFED_UNSPECIFIED = 0;
+  CUFFED_YES = 1;  // yes
+  CUFFED_NO = 2;  // no
+}
+
+enum AnaestheticRecordCapnographyConfirmedEnum {
+  CAPNOGRAPHYCONFIRMED_UNSPECIFIED = 0;
+  CAPNOGRAPHYCONFIRMED_YES = 1;  // yes
+  CAPNOGRAPHYCONFIRMED_NO = 2;  // no
+}
+
+enum AnaestheticRecordAnaestheticTechniqueEnum {
+  ANAESTHETICTECHNIQUE_UNSPECIFIED = 0;
+  ANAESTHETICTECHNIQUE_GENERAL = 1;  // general
+  ANAESTHETICTECHNIQUE_REGIONAL = 2;  // regional
+  ANAESTHETICTECHNIQUE_SEDATION = 3;  // sedation
+  ANAESTHETICTECHNIQUE_MAC = 4;  // mac
+  ANAESTHETICTECHNIQUE_COMBINED = 5;  // combined
+}
+
+enum AnaestheticRecordRegionalTechniqueEnum {
+  REGIONALTECHNIQUE_UNSPECIFIED = 0;
+  REGIONALTECHNIQUE_NONE = 1;  // none
+  REGIONALTECHNIQUE_SPINAL = 2;  // spinal
+  REGIONALTECHNIQUE_EPIDURAL = 3;  // epidural
+  REGIONALTECHNIQUE_CSE = 4;  // cse
+  REGIONALTECHNIQUE_PERIPHERAL_BLOCK = 5;  // peripheral-block
+}
+
+enum AnaestheticRecordRecoveryDestinationEnum {
+  RECOVERYDESTINATION_UNSPECIFIED = 0;
+  RECOVERYDESTINATION_RECOVERY = 1;  // recovery
+  RECOVERYDESTINATION_HDU = 2;  // hdu
+  RECOVERYDESTINATION_ICU = 3;  // icu
+  RECOVERYDESTINATION_WARD = 4;  // ward
+}
+
+message AnaestheticRecord {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string patient_id = 5;  // UUID — uuid
+  string clinician_id = 6;  // UUID — uuid
+  string theatre = 7;  // VARCHAR(100) — max 100 chars
+  string operation_date = 8;  // DATE — iso 8601 date
+  string anaesthetist_name = 9;  // VARCHAR(255) — max 255 chars
+  string assistant_name = 10;  // VARCHAR(255) — max 255 chars
+  string surgeon_name = 11;  // VARCHAR(255) — max 255 chars
+  string planned_procedure = 12;  // TEXT
+  AnaestheticRecordUrgencyEnum urgency = 13;  // VARCHAR(20)
+  AnaestheticRecordMachineCheckedEnum machine_checked = 14;  // VARCHAR(5)
+  AnaestheticRecordWhoSignInEnum who_sign_in = 15;  // VARCHAR(5)
+  AnaestheticRecordWhoTimeOutEnum who_time_out = 16;  // VARCHAR(5)
+  AnaestheticRecordConsentConfirmedEnum consent_confirmed = 17;  // VARCHAR(5)
+  AnaestheticRecordFastingConfirmedEnum fasting_confirmed = 18;  // VARCHAR(5)
+  string iv_access = 19;  // TEXT
+  AnaestheticRecordAllergyBandCheckedEnum allergy_band_checked = 20;  // VARCHAR(5)
+  string documented_allergies = 21;  // TEXT
+  AnaestheticRecordAsaStatusEnum asa_status = 22;  // VARCHAR(5)
+  AnaestheticRecordAsaEmergencyModifierEnum asa_emergency_modifier = 23;  // VARCHAR(5)
+  int32 mallampati_class = 24;  // INTEGER
+  double mouth_opening_cm = 25;  // NUMERIC(4,1) — numeric(4,1)
+  double thyromental_distance_cm = 26;  // NUMERIC(4,1) — numeric(4,1)
+  string dentition = 27;  // TEXT
+  AnaestheticRecordAnticipatedDifficultAirwayEnum anticipated_difficult_airway = 28;  // VARCHAR(5)
+  AnaestheticRecordPriorDifficultIntubationEnum prior_difficult_intubation = 29;  // VARCHAR(5)
+  AnaestheticRecordAirwayTechniqueEnum airway_technique = 30;  // VARCHAR(20)
+  string device_size = 31;  // VARCHAR(60) — max 60 chars
+  double tube_depth_cm = 32;  // NUMERIC(4,1) — numeric(4,1)
+  AnaestheticRecordCuffedEnum cuffed = 33;  // VARCHAR(5)
+  int32 cormack_lehane_grade = 34;  // INTEGER
+  int32 intubation_attempts = 35;  // INTEGER
+  AnaestheticRecordCapnographyConfirmedEnum capnography_confirmed = 36;  // VARCHAR(5)
+  string monitoring_modalities = 37;  // TEXT
+  AnaestheticRecordAnaestheticTechniqueEnum anaesthetic_technique = 38;  // VARCHAR(20)
+  double crystalloid_ml = 39;  // NUMERIC(7,1) — numeric(7,1)
+  double colloid_ml = 40;  // NUMERIC(7,1) — numeric(7,1)
+  double blood_products_ml = 41;  // NUMERIC(7,1) — numeric(7,1)
+  double estimated_blood_loss_ml = 42;  // NUMERIC(7,1) — numeric(7,1)
+  double urine_output_ml = 43;  // NUMERIC(7,1) — numeric(7,1)
+  double cell_salvage_ml = 44;  // NUMERIC(7,1) — numeric(7,1)
+  AnaestheticRecordRegionalTechniqueEnum regional_technique = 45;  // VARCHAR(20)
+  string regional_level = 46;  // VARCHAR(100) — max 100 chars
+  string regional_drug = 47;  // VARCHAR(255) — max 255 chars
+  double regional_dose_mg = 48;  // NUMERIC(7,2) — numeric(7,2)
+  string block_height = 49;  // VARCHAR(100) — max 100 chars
+  string regional_complications = 50;  // TEXT
+  AnaestheticRecordRecoveryDestinationEnum recovery_destination = 51;  // VARCHAR(20)
+  string handover_airway_status = 52;  // TEXT
+  string analgesia_plan = 53;  // TEXT
+  string antiemetic_plan = 54;  // TEXT
+  string oxygen_plan = 55;  // TEXT
+  string outstanding_tasks = 56;  // TEXT
+  string handover_at = 57;  // TIMESTAMPTZ — iso 8601
+  string receiving_practitioner = 58;  // VARCHAR(255) — max 255 chars
+  string anaesthetist_signature = 59;  // TEXT
+  string signed_at = 60;  // TIMESTAMPTZ — iso 8601
+}

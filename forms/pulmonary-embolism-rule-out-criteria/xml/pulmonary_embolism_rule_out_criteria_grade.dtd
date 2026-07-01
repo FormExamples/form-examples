@@ -1,0 +1,11 @@
+<!ELEMENT pulmonary_embolism_rule_out_criteria_grade (id,created_at,updated_at,deleted_at,pulmonary_embolism_rule_out_criteria_id,classification,all_criteria_satisfied,applicable,recommended_pathway,graded_at)>
+<!ELEMENT id (#PCDATA)>
+<!ELEMENT created_at (#PCDATA)>
+<!ELEMENT updated_at (#PCDATA)>
+<!ELEMENT deleted_at (#PCDATA)>
+<!ELEMENT pulmonary_embolism_rule_out_criteria_id (#PCDATA)>
+<!ELEMENT classification (#PCDATA)>
+<!ELEMENT all_criteria_satisfied (#PCDATA)>
+<!ELEMENT applicable (#PCDATA)>
+<!ELEMENT recommended_pathway (#PCDATA)>
+<!ELEMENT graded_at (#PCDATA)>

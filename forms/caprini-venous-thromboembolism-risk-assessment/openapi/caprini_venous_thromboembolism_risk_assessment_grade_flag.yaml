@@ -1,0 +1,167 @@
+# Generated from sql/. Do not edit by hand.
+# SOURCE: caprini_venous_thromboembolism_risk_assessment_grade_flag
+openapi: 3.1.0
+info:
+  title: Caprini Venous Thromboembolism Risk Assessment — CapriniVenousThromboembolismRiskAssessmentGradeFlag
+  version: 1.0.0
+  description: Red-flag issues that fire independently of the total score, with priority and a suggested action for the clinical team.
+paths:
+  /caprini-venous-thromboembolism-risk-assessment-grade-flags:
+    get:
+      summary: List CapriniVenousThromboembolismRiskAssessmentGradeFlag records
+      operationId: listCapriniVenousThromboembolismRiskAssessmentGradeFlag
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of CapriniVenousThromboembolismRiskAssessmentGradeFlag records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/CapriniVenousThromboembolismRiskAssessmentGradeFlag"
+    post:
+      summary: Create a new CapriniVenousThromboembolismRiskAssessmentGradeFlag
+      operationId: createCapriniVenousThromboembolismRiskAssessmentGradeFlag
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CapriniVenousThromboembolismRiskAssessmentGradeFlag"
+      responses:
+        "201":
+          description: The newly created CapriniVenousThromboembolismRiskAssessmentGradeFlag
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CapriniVenousThromboembolismRiskAssessmentGradeFlag"
+        "400":
+          description: Validation error
+  /caprini-venous-thromboembolism-risk-assessment-grade-flags/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one CapriniVenousThromboembolismRiskAssessmentGradeFlag by id
+      operationId: getCapriniVenousThromboembolismRiskAssessmentGradeFlag
+      responses:
+        "200":
+          description: The requested CapriniVenousThromboembolismRiskAssessmentGradeFlag
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CapriniVenousThromboembolismRiskAssessmentGradeFlag"
+        "404":
+          description: CapriniVenousThromboembolismRiskAssessmentGradeFlag not found
+    patch:
+      summary: Update an existing CapriniVenousThromboembolismRiskAssessmentGradeFlag
+      operationId: updateCapriniVenousThromboembolismRiskAssessmentGradeFlag
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CapriniVenousThromboembolismRiskAssessmentGradeFlag"
+      responses:
+        "200":
+          description: The updated CapriniVenousThromboembolismRiskAssessmentGradeFlag
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CapriniVenousThromboembolismRiskAssessmentGradeFlag"
+        "404":
+          description: CapriniVenousThromboembolismRiskAssessmentGradeFlag not found
+    delete:
+      summary: Soft-delete a CapriniVenousThromboembolismRiskAssessmentGradeFlag
+      operationId: deleteCapriniVenousThromboembolismRiskAssessmentGradeFlag
+      responses:
+        "204":
+          description: CapriniVenousThromboembolismRiskAssessmentGradeFlag deleted
+        "404":
+          description: CapriniVenousThromboembolismRiskAssessmentGradeFlag not found
+components:
+  schemas:
+    CapriniVenousThromboembolismRiskAssessmentGradeFlag:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was most recently updated.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was soft-deleted.
+        caprini_venous_thromboembolism_risk_assessment_grade_id:
+          type: string
+          format: uuid
+          description: Foreign key to the parent grade.
+        flag_id:
+          type: string
+          maxLength: 50
+          description: Stable flag identifier (e.g. F-HIGH-VTE-RISK-001).
+        category:
+          type: string
+          enum:
+            - high-vte-risk
+            - bleeding-contraindication
+            - prior-vte
+            - known-thrombophilia
+            - incomplete-assessment
+            - other
+            - ""
+          description: "Flag category: high-vte-risk, bleeding-contraindication, prior-vte, known-thrombophilia, incomplete-assessment, or other."
+        priority:
+          type: string
+          enum:
+            - low
+            - medium
+            - high
+            - ""
+          description: "Priority: low, medium, high."
+        description:
+          type: string
+          maxLength: 500
+          description: Human-readable description of what fired the flag.
+        suggested_action:
+          type: string
+          maxLength: 500
+          description: "Suggested clinical action (e.g. \"commence pharmacological prophylaxis after bleeding-risk review\")."
+      required:
+        - created_at
+        - updated_at
+        - caprini_venous_thromboembolism_risk_assessment_grade_id
+        - flag_id
+        - category
+        - priority
+        - description
+        - suggested_action
+      description: Red-flag issues that fire independently of the total score, with priority and a suggested action for the clinical team.

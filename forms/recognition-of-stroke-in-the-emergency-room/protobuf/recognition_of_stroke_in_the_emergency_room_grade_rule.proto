@@ -1,0 +1,31 @@
+// Generated from sql/. Do not edit by hand.
+// SOURCE: recognition_of_stroke_in_the_emergency_room_grade_rule
+
+syntax = "proto3";
+
+package form_examples.recognition_of_stroke_in_the_emergency_room;
+
+enum RecognitionOfStrokeInTheEmergencyRoomGradeRuleCriterionEnum {
+  CRITERION_UNSPECIFIED = 0;
+  CRITERION_LOSS_OF_CONSCIOUSNESS = 1;  // loss-of-consciousness
+  CRITERION_SEIZURE_ACTIVITY = 2;  // seizure-activity
+  CRITERION_FACIAL_WEAKNESS = 3;  // facial-weakness
+  CRITERION_ARM_WEAKNESS = 4;  // arm-weakness
+  CRITERION_LEG_WEAKNESS = 5;  // leg-weakness
+  CRITERION_SPEECH_DISTURBANCE = 6;  // speech-disturbance
+  CRITERION_VISUAL_FIELD_DEFECT = 7;  // visual-field-defect
+  CRITERION_BAND = 8;  // band
+}
+
+message RecognitionOfStrokeInTheEmergencyRoomGradeRule {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string recognition_of_stroke_in_the_emergency_room_grade_id = 5;  // UUID — uuid
+  string rule_id = 6;  // VARCHAR(40) — max 40 chars
+  RecognitionOfStrokeInTheEmergencyRoomGradeRuleCriterionEnum criterion = 7;  // VARCHAR(30)
+  int32 points = 8;  // INT
+  string category = 9;  // VARCHAR(50) — max 50 chars
+  string description = 10;  // VARCHAR(500) — max 500 chars
+}

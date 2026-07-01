@@ -1,0 +1,166 @@
+// Generated from sql/. Do not edit by hand.
+// SOURCE: columbia_suicide_severity_rating_scale
+
+syntax = "proto3";
+
+package form_examples.columbia_suicide_severity_rating_scale;
+
+enum ColumbiaSuicideSeverityRatingScaleClinicianRoleEnum {
+  CLINICIANROLE_UNSPECIFIED = 0;
+  CLINICIANROLE_CLINICIAN = 1;  // clinician
+  CLINICIANROLE_NURSE = 2;  // nurse
+  CLINICIANROLE_MENTAL_HEALTH_PRACTITIONER = 3;  // mental-health-practitioner
+  CLINICIANROLE_CRISIS_WORKER = 4;  // crisis-worker
+  CLINICIANROLE_OTHER = 5;  // other
+}
+
+enum ColumbiaSuicideSeverityRatingScaleCareSettingEnum {
+  CARESETTING_UNSPECIFIED = 0;
+  CARESETTING_MENTAL_HEALTH = 1;  // mental-health
+  CARESETTING_EMERGENCY_DEPARTMENT = 2;  // emergency-department
+  CARESETTING_PRIMARY_CARE = 3;  // primary-care
+  CARESETTING_CRISIS_SERVICE = 4;  // crisis-service
+  CARESETTING_INPATIENT = 5;  // inpatient
+  CARESETTING_OTHER = 6;  // other
+}
+
+enum ColumbiaSuicideSeverityRatingScaleScaleVersionEnum {
+  SCALEVERSION_UNSPECIFIED = 0;
+  SCALEVERSION_SCREENER = 1;  // screener
+  SCALEVERSION_FULL = 2;  // full
+}
+
+enum ColumbiaSuicideSeverityRatingScaleAgeBandEnum {
+  AGEBAND_UNSPECIFIED = 0;
+  AGEBAND_ADOLESCENT = 1;  // adolescent
+  AGEBAND_ADULT = 2;  // adult
+}
+
+enum ColumbiaSuicideSeverityRatingScaleSexEnum {
+  SEX_UNSPECIFIED = 0;
+  SEX_FEMALE = 1;  // female
+  SEX_MALE = 2;  // male
+  SEX_INTERSEX = 3;  // intersex
+  SEX_UNKNOWN = 4;  // unknown
+}
+
+enum ColumbiaSuicideSeverityRatingScaleWishToBeDeadEnum {
+  WISHTOBEDEAD_UNSPECIFIED = 0;
+  WISHTOBEDEAD_YES = 1;  // yes
+  WISHTOBEDEAD_NO = 2;  // no
+}
+
+enum ColumbiaSuicideSeverityRatingScaleNonSpecificActiveThoughtsEnum {
+  NONSPECIFICACTIVETHOUGHTS_UNSPECIFIED = 0;
+  NONSPECIFICACTIVETHOUGHTS_YES = 1;  // yes
+  NONSPECIFICACTIVETHOUGHTS_NO = 2;  // no
+}
+
+enum ColumbiaSuicideSeverityRatingScaleActiveIdeationMethodsEnum {
+  ACTIVEIDEATIONMETHODS_UNSPECIFIED = 0;
+  ACTIVEIDEATIONMETHODS_YES = 1;  // yes
+  ACTIVEIDEATIONMETHODS_NO = 2;  // no
+}
+
+enum ColumbiaSuicideSeverityRatingScaleActiveIdeationIntentEnum {
+  ACTIVEIDEATIONINTENT_UNSPECIFIED = 0;
+  ACTIVEIDEATIONINTENT_YES = 1;  // yes
+  ACTIVEIDEATIONINTENT_NO = 2;  // no
+}
+
+enum ColumbiaSuicideSeverityRatingScaleActiveIdeationPlanEnum {
+  ACTIVEIDEATIONPLAN_UNSPECIFIED = 0;
+  ACTIVEIDEATIONPLAN_YES = 1;  // yes
+  ACTIVEIDEATIONPLAN_NO = 2;  // no
+}
+
+enum ColumbiaSuicideSeverityRatingScaleIdeationTimeframeEnum {
+  IDEATIONTIMEFRAME_UNSPECIFIED = 0;
+  IDEATIONTIMEFRAME_PAST_MONTH = 1;  // past-month
+  IDEATIONTIMEFRAME_LIFETIME_WORST = 2;  // lifetime-worst
+}
+
+enum ColumbiaSuicideSeverityRatingScaleActualAttemptEnum {
+  ACTUALATTEMPT_UNSPECIFIED = 0;
+  ACTUALATTEMPT_YES = 1;  // yes
+  ACTUALATTEMPT_NO = 2;  // no
+}
+
+enum ColumbiaSuicideSeverityRatingScaleInterruptedAttemptEnum {
+  INTERRUPTEDATTEMPT_UNSPECIFIED = 0;
+  INTERRUPTEDATTEMPT_YES = 1;  // yes
+  INTERRUPTEDATTEMPT_NO = 2;  // no
+}
+
+enum ColumbiaSuicideSeverityRatingScaleAbortedAttemptEnum {
+  ABORTEDATTEMPT_UNSPECIFIED = 0;
+  ABORTEDATTEMPT_YES = 1;  // yes
+  ABORTEDATTEMPT_NO = 2;  // no
+}
+
+enum ColumbiaSuicideSeverityRatingScalePreparatoryActsEnum {
+  PREPARATORYACTS_UNSPECIFIED = 0;
+  PREPARATORYACTS_YES = 1;  // yes
+  PREPARATORYACTS_NO = 2;  // no
+}
+
+enum ColumbiaSuicideSeverityRatingScaleNonSuicidalSelfInjuryEnum {
+  NONSUICIDALSELFINJURY_UNSPECIFIED = 0;
+  NONSUICIDALSELFINJURY_YES = 1;  // yes
+  NONSUICIDALSELFINJURY_NO = 2;  // no
+}
+
+enum ColumbiaSuicideSeverityRatingScaleBehaviourRecencyEnum {
+  BEHAVIOURRECENCY_UNSPECIFIED = 0;
+  BEHAVIOURRECENCY_WITHIN_3_MONTHS = 1;  // within-3-months
+  BEHAVIOURRECENCY_OVER_3_MONTHS = 2;  // over-3-months
+}
+
+enum ColumbiaSuicideSeverityRatingScaleAccessToLethalMeansEnum {
+  ACCESSTOLETHALMEANS_UNSPECIFIED = 0;
+  ACCESSTOLETHALMEANS_YES = 1;  // yes
+  ACCESSTOLETHALMEANS_NO = 2;  // no
+  ACCESSTOLETHALMEANS_UNKNOWN = 3;  // unknown
+}
+
+message ColumbiaSuicideSeverityRatingScale {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string patient_id = 5;  // UUID — uuid
+  string clinician_id = 6;  // UUID — uuid
+  string clinician_name = 7;  // VARCHAR(255) — max 255 chars
+  ColumbiaSuicideSeverityRatingScaleClinicianRoleEnum clinician_role = 8;  // VARCHAR(30)
+  string assessed_at = 9;  // TIMESTAMPTZ — iso 8601
+  ColumbiaSuicideSeverityRatingScaleCareSettingEnum care_setting = 10;  // VARCHAR(30)
+  ColumbiaSuicideSeverityRatingScaleScaleVersionEnum scale_version = 11;  // VARCHAR(10)
+  string reason_for_assessment = 12;  // TEXT
+  string patient_identifier = 13;  // VARCHAR(100) — max 100 chars
+  ColumbiaSuicideSeverityRatingScaleAgeBandEnum age_band = 14;  // VARCHAR(20)
+  ColumbiaSuicideSeverityRatingScaleSexEnum sex = 15;  // VARCHAR(20)
+  ColumbiaSuicideSeverityRatingScaleWishToBeDeadEnum wish_to_be_dead = 16;  // VARCHAR(5)
+  ColumbiaSuicideSeverityRatingScaleNonSpecificActiveThoughtsEnum non_specific_active_thoughts = 17;  // VARCHAR(5)
+  ColumbiaSuicideSeverityRatingScaleActiveIdeationMethodsEnum active_ideation_methods = 18;  // VARCHAR(5)
+  ColumbiaSuicideSeverityRatingScaleActiveIdeationIntentEnum active_ideation_intent = 19;  // VARCHAR(5)
+  ColumbiaSuicideSeverityRatingScaleActiveIdeationPlanEnum active_ideation_plan = 20;  // VARCHAR(5)
+  ColumbiaSuicideSeverityRatingScaleIdeationTimeframeEnum ideation_timeframe = 21;  // VARCHAR(20)
+  int32 ideation_frequency = 22;  // INT
+  int32 ideation_duration = 23;  // INT
+  int32 ideation_controllability = 24;  // INT
+  int32 ideation_deterrents = 25;  // INT
+  int32 ideation_reasons = 26;  // INT
+  ColumbiaSuicideSeverityRatingScaleActualAttemptEnum actual_attempt = 27;  // VARCHAR(5)
+  ColumbiaSuicideSeverityRatingScaleInterruptedAttemptEnum interrupted_attempt = 28;  // VARCHAR(5)
+  ColumbiaSuicideSeverityRatingScaleAbortedAttemptEnum aborted_attempt = 29;  // VARCHAR(5)
+  ColumbiaSuicideSeverityRatingScalePreparatoryActsEnum preparatory_acts = 30;  // VARCHAR(5)
+  ColumbiaSuicideSeverityRatingScaleNonSuicidalSelfInjuryEnum non_suicidal_self_injury = 31;  // VARCHAR(5)
+  ColumbiaSuicideSeverityRatingScaleBehaviourRecencyEnum behaviour_recency = 32;  // VARCHAR(20)
+  int32 lifetime_attempt_count = 33;  // INT
+  string most_recent_attempt_date = 34;  // DATE — iso 8601 date
+  int32 actual_lethality = 35;  // INT
+  int32 potential_lethality = 36;  // INT
+  ColumbiaSuicideSeverityRatingScaleAccessToLethalMeansEnum access_to_lethal_means = 37;  // VARCHAR(10)
+  string protective_factors = 38;  // TEXT
+  string clinical_note = 39;  // TEXT
+}

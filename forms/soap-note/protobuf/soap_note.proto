@@ -1,0 +1,87 @@
+// Generated from sql/. Do not edit by hand.
+// SOURCE: soap_note
+
+syntax = "proto3";
+
+package form_examples.soap_note;
+
+enum SoapNoteCareSettingEnum {
+  CARESETTING_UNSPECIFIED = 0;
+  CARESETTING_GENERAL_PRACTICE = 1;  // general-practice
+  CARESETTING_OUTPATIENT = 2;  // outpatient
+  CARESETTING_WARD = 3;  // ward
+  CARESETTING_EMERGENCY_DEPARTMENT = 4;  // emergency-department
+  CARESETTING_COMMUNITY = 5;  // community
+  CARESETTING_TELEHEALTH = 6;  // telehealth
+  CARESETTING_OTHER = 7;  // other
+}
+
+enum SoapNoteEncounterTypeEnum {
+  ENCOUNTERTYPE_UNSPECIFIED = 0;
+  ENCOUNTERTYPE_NEW_PROBLEM = 1;  // new-problem
+  ENCOUNTERTYPE_FOLLOW_UP = 2;  // follow-up
+  ENCOUNTERTYPE_REVIEW = 3;  // review
+  ENCOUNTERTYPE_OTHER = 4;  // other
+}
+
+enum SoapNoteClinicianRoleEnum {
+  CLINICIANROLE_UNSPECIFIED = 0;
+  CLINICIANROLE_DOCTOR = 1;  // doctor
+  CLINICIANROLE_NURSE = 2;  // nurse
+  CLINICIANROLE_PARAMEDIC = 3;  // paramedic
+  CLINICIANROLE_PHARMACIST = 4;  // pharmacist
+  CLINICIANROLE_ALLIED_HEALTH = 5;  // allied-health
+  CLINICIANROLE_OTHER = 6;  // other
+}
+
+enum SoapNoteRedFlagSymptomsEnum {
+  REDFLAGSYMPTOMS_UNSPECIFIED = 0;
+  REDFLAGSYMPTOMS_YES = 1;  // yes
+  REDFLAGSYMPTOMS_NO = 2;  // no
+}
+
+enum SoapNoteAbnormalVitalsPresentEnum {
+  ABNORMALVITALSPRESENT_UNSPECIFIED = 0;
+  ABNORMALVITALSPRESENT_YES = 1;  // yes
+  ABNORMALVITALSPRESENT_NO = 2;  // no
+}
+
+enum SoapNoteManagedAtHomeEnum {
+  MANAGEDATHOME_UNSPECIFIED = 0;
+  MANAGEDATHOME_YES = 1;  // yes
+  MANAGEDATHOME_NO = 2;  // no
+}
+
+message SoapNote {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string patient_id = 5;  // UUID — uuid
+  string clinician_id = 6;  // UUID — uuid
+  string encountered_at = 7;  // TIMESTAMPTZ — iso 8601
+  SoapNoteCareSettingEnum care_setting = 8;  // VARCHAR(30)
+  SoapNoteEncounterTypeEnum encounter_type = 9;  // VARCHAR(20)
+  SoapNoteClinicianRoleEnum clinician_role = 10;  // VARCHAR(20)
+  string patient_identifier = 11;  // VARCHAR(100) — max 100 chars
+  string presenting_complaint = 12;  // TEXT
+  string history_of_presenting_complaint = 13;  // TEXT
+  string patient_reported_symptoms = 14;  // TEXT
+  string relevant_history = 15;  // TEXT
+  SoapNoteRedFlagSymptomsEnum red_flag_symptoms = 16;  // VARCHAR(5)
+  string examination_findings = 17;  // TEXT
+  string vital_signs = 18;  // TEXT
+  SoapNoteAbnormalVitalsPresentEnum abnormal_vitals_present = 19;  // VARCHAR(5)
+  string investigation_results = 20;  // TEXT
+  string primary_diagnosis = 21;  // TEXT
+  string problem_list = 22;  // TEXT
+  string differential = 23;  // TEXT
+  string clinical_impression = 24;  // TEXT
+  string investigations_plan = 25;  // TEXT
+  string treatment_plan = 26;  // TEXT
+  string referrals = 27;  // TEXT
+  string follow_up = 28;  // TEXT
+  string safety_netting = 29;  // TEXT
+  SoapNoteManagedAtHomeEnum managed_at_home = 30;  // VARCHAR(5)
+  string clinical_note = 31;  // TEXT
+}

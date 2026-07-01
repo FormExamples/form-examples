@@ -1,0 +1,81 @@
+// Generated from sql/. Do not edit by hand.
+// SOURCE: x_ray_test_result
+
+syntax = "proto3";
+
+package form_examples.x_ray_test_result;
+
+enum XRayTestResultReportStatusEnum {
+  REPORTSTATUS_UNSPECIFIED = 0;
+  REPORTSTATUS_PRELIMINARY = 1;  // preliminary
+  REPORTSTATUS_FINAL = 2;  // final
+  REPORTSTATUS_AMENDED = 3;  // amended
+  REPORTSTATUS_CANCELLED = 4;  // cancelled
+}
+
+enum XRayTestResultBodyRegionEnum {
+  BODYREGION_UNSPECIFIED = 0;
+  BODYREGION_CHEST = 1;  // chest
+  BODYREGION_ABDOMEN = 2;  // abdomen
+  BODYREGION_SPINE_CERVICAL = 3;  // spine-cervical
+  BODYREGION_SPINE_THORACIC = 4;  // spine-thoracic
+  BODYREGION_SPINE_LUMBAR = 5;  // spine-lumbar
+  BODYREGION_PELVIS = 6;  // pelvis
+  BODYREGION_HIP = 7;  // hip
+  BODYREGION_KNEE = 8;  // knee
+  BODYREGION_ANKLE_FOOT = 9;  // ankle-foot
+  BODYREGION_SHOULDER = 10;  // shoulder
+  BODYREGION_WRIST_HAND = 11;  // wrist-hand
+  BODYREGION_SKULL = 12;  // skull
+  BODYREGION_DENTAL = 13;  // dental
+  BODYREGION_OTHER = 14;  // other
+}
+
+enum XRayTestResultLateralityEnum {
+  LATERALITY_UNSPECIFIED = 0;
+  LATERALITY_LEFT = 1;  // left
+  LATERALITY_RIGHT = 2;  // right
+  LATERALITY_BILATERAL = 3;  // bilateral
+  LATERALITY_NOT_APPLICABLE = 4;  // not-applicable
+}
+
+enum XRayTestResultExaminationAdequacyEnum {
+  EXAMINATIONADEQUACY_UNSPECIFIED = 0;
+  EXAMINATIONADEQUACY_ADEQUATE = 1;  // adequate
+  EXAMINATIONADEQUACY_LIMITED = 2;  // limited
+  EXAMINATIONADEQUACY_NON_DIAGNOSTIC = 3;  // non-diagnostic
+}
+
+message XRayTestResult {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string patient_id = 5;  // UUID — uuid
+  string clinician_id = 6;  // UUID — uuid
+  string originating_request_reference = 7;  // VARCHAR(255) — max 255 chars
+  XRayTestResultReportStatusEnum report_status = 8;  // VARCHAR(15)
+  string performed_date = 9;  // DATE — iso 8601 date
+  string reported_date = 10;  // DATE — iso 8601 date
+  XRayTestResultBodyRegionEnum body_region = 11;  // VARCHAR(20)
+  XRayTestResultLateralityEnum laterality = 12;  // VARCHAR(15)
+  string projections = 13;  // VARCHAR(1000) — max 1000 chars
+  XRayTestResultExaminationAdequacyEnum examination_adequacy = 14;  // VARCHAR(15)
+  string clinical_history = 15;  // VARCHAR(1000) — max 1000 chars
+  string comparison_with_previous = 16;  // VARCHAR(1000) — max 1000 chars
+  string findings_narrative = 17;  // VARCHAR(2000) — max 2000 chars
+  bool fracture = 18;  // BOOLEAN
+  bool dislocation = 19;  // BOOLEAN
+  bool consolidation = 20;  // BOOLEAN
+  bool pneumothorax = 21;  // BOOLEAN
+  bool pleural_effusion = 22;  // BOOLEAN
+  bool foreign_body = 23;  // BOOLEAN
+  bool free_air = 24;  // BOOLEAN
+  bool bony_lesion = 25;  // BOOLEAN
+  bool incidental_finding = 26;  // BOOLEAN
+  string impression = 27;  // VARCHAR(2000) — max 2000 chars
+  string reporting_category = 28;  // VARCHAR(50) — max 50 chars
+  string recommended_follow_up = 29;  // VARCHAR(1000) — max 1000 chars
+  bool critical_result_communicated = 30;  // BOOLEAN
+  string reported_to = 31;  // VARCHAR(500) — max 500 chars
+}

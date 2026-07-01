@@ -1,0 +1,29 @@
+// Generated from sql/. Do not edit by hand.
+// SOURCE: child_pugh_score_grade_rule
+
+syntax = "proto3";
+
+package form_examples.child_pugh_score;
+
+enum ChildPughScoreGradeRuleParameterEnum {
+  PARAMETER_UNSPECIFIED = 0;
+  PARAMETER_BILIRUBIN = 1;  // bilirubin
+  PARAMETER_ALBUMIN = 2;  // albumin
+  PARAMETER_COAGULATION = 3;  // coagulation
+  PARAMETER_ASCITES = 4;  // ascites
+  PARAMETER_ENCEPHALOPATHY = 5;  // encephalopathy
+  PARAMETER_CLASS = 6;  // class
+}
+
+message ChildPughScoreGradeRule {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string child_pugh_score_grade_id = 5;  // UUID — uuid
+  string rule_id = 6;  // VARCHAR(40) — max 40 chars
+  ChildPughScoreGradeRuleParameterEnum parameter = 7;  // VARCHAR(20)
+  int32 points = 8;  // INT
+  string category = 9;  // VARCHAR(50) — max 50 chars
+  string description = 10;  // VARCHAR(500) — max 500 chars
+}

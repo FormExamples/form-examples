@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE cardiac_stress_test_result SYSTEM "cardiac_stress_test_result.dtd">
+<cardiac_stress_test_result>
+<id>770e8400-e29b-41d4-a716-446655440002</id>
+<created_at>2026-04-09T10:00:00Z</created_at>
+<updated_at>2026-04-09T10:00:00Z</updated_at>
+<deleted_at>2026-04-09T10:00:00Z</deleted_at>
+<patient_id>550e8400-e29b-41d4-a716-446655440000</patient_id>
+<clinician_id>660e8400-e29b-41d4-a716-446655440001</clinician_id>
+<originating_request_reference></originating_request_reference>
+<report_status>preliminary</report_status>
+<performed_date>2026-01-15</performed_date>
+<reported_date>2026-01-15</reported_date>
+<test_type>exercise-treadmill-ecg</test_type>
+<protocol></protocol>
+<clinical_history>Example text.</clinical_history>
+<comparison_with_previous></comparison_with_previous>
+<maximum_heart_rate_bpm>1</maximum_heart_rate_bpm>
+<percent_predicted_heart_rate>50.0</percent_predicted_heart_rate>
+<exercise_duration_minutes>1.5</exercise_duration_minutes>
+<mets_achieved>0.0</mets_achieved>
+<peak_blood_pressure></peak_blood_pressure>
+<blood_pressure_response>normal</blood_pressure_response>
+<ischaemic_st_changes>true</ischaemic_st_changes>
+<chest_pain_induced>true</chest_pain_induced>
+<arrhythmia_induced>true</arrhythmia_induced>
+<terminated_early>true</terminated_early>
+<test_positive>true</test_positive>
+<test_negative>true</test_negative>
+<test_inconclusive>true</test_inconclusive>
+<reason_for_termination>Example text.</reason_for_termination>
+<duke_treadmill_score>5.0</duke_treadmill_score>
+<impression>Example text.</impression>
+<reporting_category>General</reporting_category>
+<recommended_follow_up></recommended_follow_up>
+<critical_result_communicated>true</critical_result_communicated>
+<reported_to></reported_to>
+</cardiac_stress_test_result>

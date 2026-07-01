@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mental_health_act_assessment SYSTEM "mental_health_act_assessment.dtd">
+<mental_health_act_assessment>
+<id>770e8400-e29b-41d4-a716-446655440002</id>
+<created_at>2026-04-09T10:00:00Z</created_at>
+<updated_at>2026-04-09T10:00:00Z</updated_at>
+<deleted_at>2026-04-09T10:00:00Z</deleted_at>
+<patient_id>550e8400-e29b-41d4-a716-446655440000</patient_id>
+<clinician_id>660e8400-e29b-41d4-a716-446655440001</clinician_id>
+<assessed_at>2026-04-09T10:00:00Z</assessed_at>
+<location>hospital-ward</location>
+<referral_source></referral_source>
+<reason_for_assessment>Example text.</reason_for_assessment>
+<person_identifier></person_identifier>
+<age_band>child</age_band>
+<sex>female</sex>
+<first_language>English</first_language>
+<amhp_name>Example</amhp_name>
+<amhp_approved>yes</amhp_approved>
+<doctor1_name>Example</doctor1_name>
+<doctor1_gmc_number>Dr Smith</doctor1_gmc_number>
+<doctor1_section12_approved>yes</doctor1_section12_approved>
+<doctor1_examined_at>2026-04-09T10:00:00Z</doctor1_examined_at>
+<doctor2_name>Example</doctor2_name>
+<doctor2_gmc_number>Dr Smith</doctor2_gmc_number>
+<doctor2_section12_approved>yes</doctor2_section12_approved>
+<doctor2_examined_at>2026-04-09T10:00:00Z</doctor2_examined_at>
+<prior_acquaintance>yes</prior_acquaintance>
+<mental_disorder_present>met</mental_disorder_present>
+<mental_disorder_evidence></mental_disorder_evidence>
+<risk_to_own_health>met</risk_to_own_health>
+<risk_to_own_safety>met</risk_to_own_safety>
+<risk_to_others>met</risk_to_others>
+<risk_evidence></risk_evidence>
+<risk_imminence>none</risk_imminence>
+<least_restrictive_met>met</least_restrictive_met>
+<alternatives_considered></alternatives_considered>
+<appropriate_treatment_available>met</appropriate_treatment_available>
+<treatment_plan_summary>Example text.</treatment_plan_summary>
+<nearest_relative_identified>yes</nearest_relative_identified>
+<nearest_relative_consulted>yes</nearest_relative_consulted>
+<nearest_relative_objection>yes</nearest_relative_objection>
+<consultation_record></consultation_record>
+<recommended_section>2</recommended_section>
+<outcome>detain-under-section</outcome>
+<bed_identified>yes</bed_identified>
+<conveyance>ambulance</conveyance>
+<clinical_legal_note>Example Hospital</clinical_legal_note>
+</mental_health_act_assessment>

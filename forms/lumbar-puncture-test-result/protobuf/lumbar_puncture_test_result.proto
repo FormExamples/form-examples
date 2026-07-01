@@ -1,0 +1,77 @@
+// Generated from sql/. Do not edit by hand.
+// SOURCE: lumbar_puncture_test_result
+
+syntax = "proto3";
+
+package form_examples.lumbar_puncture_test_result;
+
+enum LumbarPunctureTestResultReportStatusEnum {
+  REPORTSTATUS_UNSPECIFIED = 0;
+  REPORTSTATUS_PRELIMINARY = 1;  // preliminary
+  REPORTSTATUS_FINAL = 2;  // final
+  REPORTSTATUS_AMENDED = 3;  // amended
+  REPORTSTATUS_CANCELLED = 4;  // cancelled
+}
+
+enum LumbarPunctureTestResultCsfAppearanceEnum {
+  CSFAPPEARANCE_UNSPECIFIED = 0;
+  CSFAPPEARANCE_CLEAR = 1;  // clear
+  CSFAPPEARANCE_CLOUDY = 2;  // cloudy
+  CSFAPPEARANCE_TURBID = 3;  // turbid
+  CSFAPPEARANCE_BLOOD_STAINED = 4;  // blood-stained
+  CSFAPPEARANCE_XANTHOCHROMIC = 5;  // xanthochromic
+}
+
+enum LumbarPunctureTestResultOligoclonalBandsEnum {
+  OLIGOCLONALBANDS_UNSPECIFIED = 0;
+  OLIGOCLONALBANDS_POSITIVE = 1;  // positive
+  OLIGOCLONALBANDS_NEGATIVE = 2;  // negative
+  OLIGOCLONALBANDS_NOT_TESTED = 3;  // not-tested
+}
+
+enum LumbarPunctureTestResultXanthochromiaEnum {
+  XANTHOCHROMIA_UNSPECIFIED = 0;
+  XANTHOCHROMIA_POSITIVE = 1;  // positive
+  XANTHOCHROMIA_NEGATIVE = 2;  // negative
+  XANTHOCHROMIA_NOT_TESTED = 3;  // not-tested
+}
+
+message LumbarPunctureTestResult {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string patient_id = 5;  // UUID — uuid
+  string clinician_id = 6;  // UUID — uuid
+  string originating_request_reference = 7;  // VARCHAR(255) — max 255 chars
+  LumbarPunctureTestResultReportStatusEnum report_status = 8;  // VARCHAR(15)
+  string performed_date = 9;  // DATE — iso 8601 date
+  string reported_date = 10;  // DATE — iso 8601 date
+  string clinical_history = 11;  // VARCHAR(1000) — max 1000 chars
+  double opening_pressure_cmh2o = 12;  // NUMERIC(5,1) — numeric(5,1)
+  LumbarPunctureTestResultCsfAppearanceEnum csf_appearance = 13;  // VARCHAR(15)
+  double csf_white_cell_count = 14;  // NUMERIC(8,1) — numeric(8,1)
+  double csf_red_cell_count = 15;  // NUMERIC(10,1) — numeric(10,1)
+  double csf_protein_g_l = 16;  // NUMERIC(5,2) — numeric(5,2)
+  double csf_glucose_mmol_l = 17;  // NUMERIC(5,2) — numeric(5,2)
+  double csf_serum_glucose_ratio = 18;  // NUMERIC(4,2) — numeric(4,2)
+  double csf_lactate_mmol_l = 19;  // NUMERIC(5,2) — numeric(5,2)
+  string gram_stain_result = 20;  // VARCHAR(500) — max 500 chars
+  string culture_result = 21;  // VARCHAR(500) — max 500 chars
+  string pcr_result = 22;  // VARCHAR(500) — max 500 chars
+  LumbarPunctureTestResultOligoclonalBandsEnum oligoclonal_bands = 23;  // VARCHAR(15)
+  LumbarPunctureTestResultXanthochromiaEnum xanthochromia = 24;  // VARCHAR(15)
+  bool raised_protein = 25;  // BOOLEAN
+  bool pleocytosis = 26;  // BOOLEAN
+  bool low_glucose = 27;  // BOOLEAN
+  bool bacterial_meningitis_pattern = 28;  // BOOLEAN
+  bool viral_pattern = 29;  // BOOLEAN
+  bool subarachnoid_haemorrhage_suggested = 30;  // BOOLEAN
+  bool normal_csf = 31;  // BOOLEAN
+  string findings_narrative = 32;  // VARCHAR(2000) — max 2000 chars
+  string impression = 33;  // VARCHAR(2000) — max 2000 chars
+  string reporting_category = 34;  // VARCHAR(50) — max 50 chars
+  string recommended_follow_up = 35;  // VARCHAR(1000) — max 1000 chars
+  bool critical_result_communicated = 36;  // BOOLEAN
+  string reported_to = 37;  // VARCHAR(500) — max 500 chars
+}

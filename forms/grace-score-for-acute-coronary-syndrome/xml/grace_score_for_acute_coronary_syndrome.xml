@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE grace_score_for_acute_coronary_syndrome SYSTEM "grace_score_for_acute_coronary_syndrome.dtd">
+<grace_score_for_acute_coronary_syndrome>
+<id>770e8400-e29b-41d4-a716-446655440002</id>
+<created_at>2026-04-09T10:00:00Z</created_at>
+<updated_at>2026-04-09T10:00:00Z</updated_at>
+<deleted_at>2026-04-09T10:00:00Z</deleted_at>
+<patient_id>550e8400-e29b-41d4-a716-446655440000</patient_id>
+<clinician_id>660e8400-e29b-41d4-a716-446655440001</clinician_id>
+<clinician_name>Example</clinician_name>
+<clinician_role>emergency-physician</clinician_role>
+<assessed_at>2026-04-09T10:00:00Z</assessed_at>
+<care_setting>emergency-department</care_setting>
+<presentation_type>nstemi</presentation_type>
+<patient_identifier></patient_identifier>
+<age_years>45</age_years>
+<sex>female</sex>
+<heart_rate>1</heart_rate>
+<systolic_blood_pressure>1</systolic_blood_pressure>
+<serum_creatinine>0.0</serum_creatinine>
+<serum_creatinine_unit>mg/dL</serum_creatinine_unit>
+<killip_class>I</killip_class>
+<cardiac_arrest_at_admission>yes</cardiac_arrest_at_admission>
+<st_segment_deviation>yes</st_segment_deviation>
+<elevated_cardiac_enzymes>yes</elevated_cardiac_enzymes>
+<clinical_note>Example Hospital</clinical_note>
+</grace_score_for_acute_coronary_syndrome>

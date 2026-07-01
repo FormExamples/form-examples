@@ -1,0 +1,171 @@
+# Generated from sql/. Do not edit by hand.
+# SOURCE: columbia_suicide_severity_rating_scale_grade_flag
+openapi: 3.1.0
+info:
+  title: Columbia Suicide Severity Rating Scale — ColumbiaSuicideSeverityRatingScaleGradeFlag
+  version: 1.0.0
+  description: Red-flag issues that fire independently of the risk tier, with priority and a suggested action for the clinical or crisis team.
+paths:
+  /columbia-suicide-severity-rating-scale-grade-flags:
+    get:
+      summary: List ColumbiaSuicideSeverityRatingScaleGradeFlag records
+      operationId: listColumbiaSuicideSeverityRatingScaleGradeFlag
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of ColumbiaSuicideSeverityRatingScaleGradeFlag records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/ColumbiaSuicideSeverityRatingScaleGradeFlag"
+    post:
+      summary: Create a new ColumbiaSuicideSeverityRatingScaleGradeFlag
+      operationId: createColumbiaSuicideSeverityRatingScaleGradeFlag
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ColumbiaSuicideSeverityRatingScaleGradeFlag"
+      responses:
+        "201":
+          description: The newly created ColumbiaSuicideSeverityRatingScaleGradeFlag
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ColumbiaSuicideSeverityRatingScaleGradeFlag"
+        "400":
+          description: Validation error
+  /columbia-suicide-severity-rating-scale-grade-flags/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one ColumbiaSuicideSeverityRatingScaleGradeFlag by id
+      operationId: getColumbiaSuicideSeverityRatingScaleGradeFlag
+      responses:
+        "200":
+          description: The requested ColumbiaSuicideSeverityRatingScaleGradeFlag
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ColumbiaSuicideSeverityRatingScaleGradeFlag"
+        "404":
+          description: ColumbiaSuicideSeverityRatingScaleGradeFlag not found
+    patch:
+      summary: Update an existing ColumbiaSuicideSeverityRatingScaleGradeFlag
+      operationId: updateColumbiaSuicideSeverityRatingScaleGradeFlag
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ColumbiaSuicideSeverityRatingScaleGradeFlag"
+      responses:
+        "200":
+          description: The updated ColumbiaSuicideSeverityRatingScaleGradeFlag
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ColumbiaSuicideSeverityRatingScaleGradeFlag"
+        "404":
+          description: ColumbiaSuicideSeverityRatingScaleGradeFlag not found
+    delete:
+      summary: Soft-delete a ColumbiaSuicideSeverityRatingScaleGradeFlag
+      operationId: deleteColumbiaSuicideSeverityRatingScaleGradeFlag
+      responses:
+        "204":
+          description: ColumbiaSuicideSeverityRatingScaleGradeFlag deleted
+        "404":
+          description: ColumbiaSuicideSeverityRatingScaleGradeFlag not found
+components:
+  schemas:
+    ColumbiaSuicideSeverityRatingScaleGradeFlag:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was most recently updated.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was soft-deleted.
+        columbia_suicide_severity_rating_scale_grade_id:
+          type: string
+          format: uuid
+          description: Foreign key to the parent grade.
+        flag_id:
+          type: string
+          maxLength: 50
+          description: Stable flag identifier (e.g. F-HIGH-RISK-CRISIS-RESPONSE-001).
+        category:
+          type: string
+          enum:
+            - high-risk-crisis-response
+            - active-plan-and-intent
+            - recent-attempt
+            - high-lethality-attempt
+            - access-to-means
+            - preparatory-acts
+            - non-suicidal-self-injury
+            - safety-plan-needed
+            - incomplete
+            - other
+            - ""
+          description: Flag category (see CHECK constraint for enumeration).
+        priority:
+          type: string
+          enum:
+            - low
+            - medium
+            - high
+            - ""
+          description: "Priority: low, medium, high."
+        description:
+          type: string
+          maxLength: 500
+          description: Human-readable description of what fired the flag.
+        suggested_action:
+          type: string
+          maxLength: 500
+          description: "Suggested clinical or crisis-response action (e.g. \"arrange emergency mental-health evaluation; do not leave the person alone\")."
+      required:
+        - created_at
+        - updated_at
+        - columbia_suicide_severity_rating_scale_grade_id
+        - flag_id
+        - category
+        - priority
+        - description
+        - suggested_action
+      description: Red-flag issues that fire independently of the risk tier, with priority and a suggested action for the clinical or crisis team.

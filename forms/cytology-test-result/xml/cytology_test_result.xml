@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE cytology_test_result SYSTEM "cytology_test_result.dtd">
+<cytology_test_result>
+<id>770e8400-e29b-41d4-a716-446655440002</id>
+<created_at>2026-04-09T10:00:00Z</created_at>
+<updated_at>2026-04-09T10:00:00Z</updated_at>
+<deleted_at>2026-04-09T10:00:00Z</deleted_at>
+<patient_id>550e8400-e29b-41d4-a716-446655440000</patient_id>
+<clinician_id>660e8400-e29b-41d4-a716-446655440001</clinician_id>
+<originating_request_reference></originating_request_reference>
+<report_status>preliminary</report_status>
+<performed_date>2026-01-15</performed_date>
+<reported_date>2026-01-15</reported_date>
+<specimen_type>cervical-smear</specimen_type>
+<specimen_adequacy>satisfactory</specimen_adequacy>
+<clinical_history>Example text.</clinical_history>
+<comparison_with_previous></comparison_with_previous>
+<cytology_result_category>Normal</cytology_result_category>
+<hpv_result>positive</hpv_result>
+<malignancy_present>true</malignancy_present>
+<dysplasia_present>true</dysplasia_present>
+<microscopic_description>Example text.</microscopic_description>
+<diagnosis>Under investigation</diagnosis>
+<impression>Example text.</impression>
+<reporting_category>General</reporting_category>
+<recommended_follow_up></recommended_follow_up>
+<critical_result_communicated>true</critical_result_communicated>
+<reported_to></reported_to>
+</cytology_test_result>

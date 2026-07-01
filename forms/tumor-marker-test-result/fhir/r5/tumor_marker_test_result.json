@@ -1,0 +1,442 @@
+{
+  "resourceType": "Observation",
+  "id": "770e8400-e29b-41d4-a716-446655440002",
+  "meta": {
+    "profile": [
+      "http://hl7.org/fhir/StructureDefinition/Observation"
+    ],
+    "lastUpdated": "2026-04-09T10:00:00+00:00"
+  },
+  "status": "final",
+  "category": [
+    {
+      "coding": [
+        {
+          "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+          "code": "survey",
+          "display": "Survey"
+        }
+      ]
+    }
+  ],
+  "code": {
+    "coding": [
+      {
+        "system": "urn:form-examples:tumor-marker-test-result",
+        "code": "tumor_marker_test_result",
+        "display": "Tumor Marker Test Result"
+      }
+    ]
+  },
+  "subject": {
+    "reference": "Patient/550e8400-e29b-41d4-a716-446655440000"
+  },
+  "encounter": {
+    "reference": "Encounter/bb0e8400-e29b-41d4-a716-446655440006"
+  },
+  "effectiveDateTime": "2026-04-09T10:00:00+00:00",
+  "component": [
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:tumor-marker-test-result",
+            "code": "deleted_at",
+            "display": "Deleted At"
+          }
+        ]
+      },
+      "valueDateTime": "2026-04-09T10:00:00+00:00"
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:tumor-marker-test-result",
+            "code": "originating_request_reference",
+            "display": "Originating Request Reference"
+          }
+        ]
+      },
+      "valueString": ""
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:tumor-marker-test-result",
+            "code": "report_status",
+            "display": "Report Status"
+          }
+        ]
+      },
+      "valueCodeableConcept": {
+        "coding": [
+          {
+            "system": "urn:form-examples:tumor-marker-test-result:report_status",
+            "code": "preliminary",
+            "display": "Preliminary"
+          }
+        ]
+      }
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:tumor-marker-test-result",
+            "code": "performed_date",
+            "display": "Performed Date"
+          }
+        ]
+      },
+      "valueDateTime": "2026-01-15"
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:tumor-marker-test-result",
+            "code": "reported_date",
+            "display": "Reported Date"
+          }
+        ]
+      },
+      "valueDateTime": "2026-01-15"
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:tumor-marker-test-result",
+            "code": "specimen_condition",
+            "display": "Specimen Condition"
+          }
+        ]
+      },
+      "valueCodeableConcept": {
+        "coding": [
+          {
+            "system": "urn:form-examples:tumor-marker-test-result:specimen_condition",
+            "code": "satisfactory",
+            "display": "Satisfactory"
+          }
+        ]
+      }
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:tumor-marker-test-result",
+            "code": "clinical_history",
+            "display": "Clinical History"
+          }
+        ]
+      },
+      "valueString": "Example text."
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:tumor-marker-test-result",
+            "code": "known_cancer_site",
+            "display": "Known Cancer Site"
+          }
+        ]
+      },
+      "valueString": "Example location"
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:tumor-marker-test-result",
+            "code": "psa",
+            "display": "Psa"
+          }
+        ]
+      },
+      "valueQuantity": {
+        "value": 0.0
+      }
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:tumor-marker-test-result",
+            "code": "ca125",
+            "display": "Ca125"
+          }
+        ]
+      },
+      "valueQuantity": {
+        "value": 0.0
+      }
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:tumor-marker-test-result",
+            "code": "ca19_9",
+            "display": "Ca19 9"
+          }
+        ]
+      },
+      "valueQuantity": {
+        "value": 0.0
+      }
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:tumor-marker-test-result",
+            "code": "carcinoembryonic_antigen_cea",
+            "display": "Carcinoembryonic Antigen Cea"
+          }
+        ]
+      },
+      "valueQuantity": {
+        "value": 0.0
+      }
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:tumor-marker-test-result",
+            "code": "alpha_fetoprotein_afp",
+            "display": "Alpha Fetoprotein Afp"
+          }
+        ]
+      },
+      "valueQuantity": {
+        "value": 0.0
+      }
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:tumor-marker-test-result",
+            "code": "beta_hcg",
+            "display": "Beta Hcg"
+          }
+        ]
+      },
+      "valueQuantity": {
+        "value": 0.0
+      }
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:tumor-marker-test-result",
+            "code": "ca15_3",
+            "display": "Ca15 3"
+          }
+        ]
+      },
+      "valueQuantity": {
+        "value": 0.0
+      }
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:tumor-marker-test-result",
+            "code": "lactate_dehydrogenase_ldh",
+            "display": "Lactate Dehydrogenase Ldh"
+          }
+        ]
+      },
+      "valueQuantity": {
+        "value": 0.0
+      }
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:tumor-marker-test-result",
+            "code": "calcitonin",
+            "display": "Calcitonin"
+          }
+        ]
+      },
+      "valueQuantity": {
+        "value": 0.0
+      }
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:tumor-marker-test-result",
+            "code": "chromogranin_a",
+            "display": "Chromogranin A"
+          }
+        ]
+      },
+      "valueQuantity": {
+        "value": 0.0
+      }
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:tumor-marker-test-result",
+            "code": "previous_value",
+            "display": "Previous Value"
+          }
+        ]
+      },
+      "valueQuantity": {
+        "value": 0.0
+      }
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:tumor-marker-test-result",
+            "code": "trend",
+            "display": "Trend"
+          }
+        ]
+      },
+      "valueCodeableConcept": {
+        "coding": [
+          {
+            "system": "urn:form-examples:tumor-marker-test-result:trend",
+            "code": "rising",
+            "display": "Rising"
+          }
+        ]
+      }
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:tumor-marker-test-result",
+            "code": "comparison_with_previous",
+            "display": "Comparison With Previous"
+          }
+        ]
+      },
+      "valueString": ""
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:tumor-marker-test-result",
+            "code": "overall_result_status",
+            "display": "Overall Result Status"
+          }
+        ]
+      },
+      "valueCodeableConcept": {
+        "coding": [
+          {
+            "system": "urn:form-examples:tumor-marker-test-result:overall_result_status",
+            "code": "normal",
+            "display": "Normal"
+          }
+        ]
+      }
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:tumor-marker-test-result",
+            "code": "markedly_elevated",
+            "display": "Markedly Elevated"
+          }
+        ]
+      },
+      "valueBoolean": true
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:tumor-marker-test-result",
+            "code": "findings_narrative",
+            "display": "Findings Narrative"
+          }
+        ]
+      },
+      "valueString": "Example text."
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:tumor-marker-test-result",
+            "code": "impression",
+            "display": "Impression"
+          }
+        ]
+      },
+      "valueString": "Example text."
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:tumor-marker-test-result",
+            "code": "reporting_category",
+            "display": "Reporting Category"
+          }
+        ]
+      },
+      "valueString": "General"
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:tumor-marker-test-result",
+            "code": "recommended_follow_up",
+            "display": "Recommended Follow Up"
+          }
+        ]
+      },
+      "valueString": ""
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:tumor-marker-test-result",
+            "code": "critical_result_communicated",
+            "display": "Critical Result Communicated"
+          }
+        ]
+      },
+      "valueBoolean": true
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:tumor-marker-test-result",
+            "code": "reported_to",
+            "display": "Reported To"
+          }
+        ]
+      },
+      "valueString": ""
+    }
+  ]
+}

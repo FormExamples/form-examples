@@ -1,0 +1,26 @@
+// Generated from sql/. Do not edit by hand.
+// SOURCE: qrisk3_cardiovascular_disease_risk_score_grade
+
+syntax = "proto3";
+
+package form_examples.qrisk3_cardiovascular_disease_risk_score;
+
+enum Qrisk3CardiovascularDiseaseRiskScoreGradeRiskBandEnum {
+  RISKBAND_UNSPECIFIED = 0;
+  RISKBAND_LOW = 1;  // low
+  RISKBAND_RAISED = 2;  // raised
+  RISKBAND_HIGH = 3;  // high
+}
+
+message Qrisk3CardiovascularDiseaseRiskScoreGrade {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string qrisk3_cardiovascular_disease_risk_score_id = 5;  // UUID — uuid
+  double ten_year_risk_percent = 6;  // NUMERIC(4,1) — numeric(4,1)
+  Qrisk3CardiovascularDiseaseRiskScoreGradeRiskBandEnum risk_band = 7;  // VARCHAR(10)
+  double heart_age = 8;  // NUMERIC(4,1) — numeric(4,1)
+  double linear_predictor = 9;  // NUMERIC(12,6) — numeric(12,6)
+  string graded_at = 10;  // TIMESTAMPTZ — iso 8601
+}

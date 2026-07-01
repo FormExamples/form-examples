@@ -1,0 +1,35 @@
+// Generated from sql/. Do not edit by hand.
+// SOURCE: columbia_suicide_severity_rating_scale_grade_rule
+
+syntax = "proto3";
+
+package form_examples.columbia_suicide_severity_rating_scale;
+
+enum ColumbiaSuicideSeverityRatingScaleGradeRuleDimensionEnum {
+  DIMENSION_UNSPECIFIED = 0;
+  DIMENSION_IDEATION = 1;  // ideation
+  DIMENSION_BEHAVIOUR = 2;  // behaviour
+  DIMENSION_LETHALITY = 3;  // lethality
+  DIMENSION_MEANS = 4;  // means
+  DIMENSION_TIER = 5;  // tier
+}
+
+enum ColumbiaSuicideSeverityRatingScaleGradeRuleTierEnum {
+  TIER_UNSPECIFIED = 0;
+  TIER_LOW = 1;  // low
+  TIER_MODERATE = 2;  // moderate
+  TIER_HIGH = 3;  // high
+}
+
+message ColumbiaSuicideSeverityRatingScaleGradeRule {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string columbia_suicide_severity_rating_scale_grade_id = 5;  // UUID — uuid
+  string rule_id = 6;  // VARCHAR(40) — max 40 chars
+  ColumbiaSuicideSeverityRatingScaleGradeRuleDimensionEnum dimension = 7;  // VARCHAR(20)
+  ColumbiaSuicideSeverityRatingScaleGradeRuleTierEnum tier = 8;  // VARCHAR(10)
+  string category = 9;  // VARCHAR(50) — max 50 chars
+  string description = 10;  // VARCHAR(500) — max 500 chars
+}

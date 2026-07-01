@@ -1,0 +1,37 @@
+// Generated from sql/. Do not edit by hand.
+// SOURCE: general_practitioner_referral_letter_grade_flag
+
+syntax = "proto3";
+
+package form_examples.general_practitioner_referral_letter;
+
+enum GeneralPractitionerReferralLetterGradeFlagCategoryEnum {
+  CATEGORY_UNSPECIFIED = 0;
+  CATEGORY_SUSPECTED_CANCER_PATHWAY = 1;  // suspected-cancer-pathway
+  CATEGORY_EMERGENCY_FEATURES = 2;  // emergency-features
+  CATEGORY_MANDATORY_INFORMATION_MISSING = 3;  // mandatory-information-missing
+  CATEGORY_URGENCY_INFORMATION_MISSING = 4;  // urgency-information-missing
+  CATEGORY_CONSENT_NOT_DOCUMENTED = 5;  // consent-not-documented
+  CATEGORY_NO_SAFETY_NETTING = 6;  // no-safety-netting
+  CATEGORY_OTHER = 7;  // other
+}
+
+enum GeneralPractitionerReferralLetterGradeFlagPriorityEnum {
+  PRIORITY_UNSPECIFIED = 0;
+  PRIORITY_LOW = 1;  // low
+  PRIORITY_MEDIUM = 2;  // medium
+  PRIORITY_HIGH = 3;  // high
+}
+
+message GeneralPractitionerReferralLetterGradeFlag {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string general_practitioner_referral_letter_grade_id = 5;  // UUID — uuid
+  string flag_id = 6;  // VARCHAR(50) — max 50 chars
+  GeneralPractitionerReferralLetterGradeFlagCategoryEnum category = 7;  // VARCHAR(50)
+  GeneralPractitionerReferralLetterGradeFlagPriorityEnum priority = 8;  // VARCHAR(10)
+  string description = 9;  // VARCHAR(500) — max 500 chars
+  string suggested_action = 10;  // VARCHAR(500) — max 500 chars
+}

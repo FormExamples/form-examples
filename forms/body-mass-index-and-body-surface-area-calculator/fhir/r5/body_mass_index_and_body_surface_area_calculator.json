@@ -1,0 +1,256 @@
+{
+  "resourceType": "Observation",
+  "id": "770e8400-e29b-41d4-a716-446655440002",
+  "meta": {
+    "profile": [
+      "http://hl7.org/fhir/StructureDefinition/Observation"
+    ],
+    "lastUpdated": "2026-04-09T10:00:00+00:00"
+  },
+  "status": "final",
+  "category": [
+    {
+      "coding": [
+        {
+          "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+          "code": "survey",
+          "display": "Survey"
+        }
+      ]
+    }
+  ],
+  "code": {
+    "coding": [
+      {
+        "system": "urn:form-examples:body-mass-index-and-body-surface-area-calculator",
+        "code": "body_mass_index_and_body_surface_area_calculator",
+        "display": "Body Mass Index And Body Surface Area Calculator"
+      }
+    ]
+  },
+  "subject": {
+    "reference": "Patient/550e8400-e29b-41d4-a716-446655440000"
+  },
+  "encounter": {
+    "reference": "Encounter/bb0e8400-e29b-41d4-a716-446655440006"
+  },
+  "effectiveDateTime": "2026-04-09T10:00:00+00:00",
+  "component": [
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:body-mass-index-and-body-surface-area-calculator",
+            "code": "deleted_at",
+            "display": "Deleted At"
+          }
+        ]
+      },
+      "valueDateTime": "2026-04-09T10:00:00+00:00"
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:body-mass-index-and-body-surface-area-calculator",
+            "code": "clinician_name",
+            "display": "Clinician Name"
+          }
+        ]
+      },
+      "valueString": "Example"
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:body-mass-index-and-body-surface-area-calculator",
+            "code": "clinician_role",
+            "display": "Clinician Role"
+          }
+        ]
+      },
+      "valueCodeableConcept": {
+        "coding": [
+          {
+            "system": "urn:form-examples:body-mass-index-and-body-surface-area-calculator:clinician_role",
+            "code": "doctor",
+            "display": "Doctor"
+          }
+        ]
+      }
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:body-mass-index-and-body-surface-area-calculator",
+            "code": "assessed_at",
+            "display": "Assessed At"
+          }
+        ]
+      },
+      "valueDateTime": "2026-04-09T10:00:00+00:00"
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:body-mass-index-and-body-surface-area-calculator",
+            "code": "care_setting",
+            "display": "Care Setting"
+          }
+        ]
+      },
+      "valueCodeableConcept": {
+        "coding": [
+          {
+            "system": "urn:form-examples:body-mass-index-and-body-surface-area-calculator:care_setting",
+            "code": "primary-care",
+            "display": "Primary-Care"
+          }
+        ]
+      }
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:body-mass-index-and-body-surface-area-calculator",
+            "code": "purpose",
+            "display": "Purpose"
+          }
+        ]
+      },
+      "valueCodeableConcept": {
+        "coding": [
+          {
+            "system": "urn:form-examples:body-mass-index-and-body-surface-area-calculator:purpose",
+            "code": "screening",
+            "display": "Screening"
+          }
+        ]
+      }
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:body-mass-index-and-body-surface-area-calculator",
+            "code": "patient_identifier",
+            "display": "Patient Identifier"
+          }
+        ]
+      },
+      "valueString": ""
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:body-mass-index-and-body-surface-area-calculator",
+            "code": "age_band",
+            "display": "Age Band"
+          }
+        ]
+      },
+      "valueCodeableConcept": {
+        "coding": [
+          {
+            "system": "urn:form-examples:body-mass-index-and-body-surface-area-calculator:age_band",
+            "code": "18-39",
+            "display": "18-39"
+          }
+        ]
+      }
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:body-mass-index-and-body-surface-area-calculator",
+            "code": "sex",
+            "display": "Sex"
+          }
+        ]
+      },
+      "valueCodeableConcept": {
+        "coding": [
+          {
+            "system": "urn:form-examples:body-mass-index-and-body-surface-area-calculator:sex",
+            "code": "female",
+            "display": "Female"
+          }
+        ]
+      }
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:body-mass-index-and-body-surface-area-calculator",
+            "code": "ancestry",
+            "display": "Ancestry"
+          }
+        ]
+      },
+      "valueCodeableConcept": {
+        "coding": [
+          {
+            "system": "urn:form-examples:body-mass-index-and-body-surface-area-calculator:ancestry",
+            "code": "asian",
+            "display": "Asian"
+          }
+        ]
+      }
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:body-mass-index-and-body-surface-area-calculator",
+            "code": "height_cm",
+            "display": "Height Cm"
+          }
+        ]
+      },
+      "valueQuantity": {
+        "value": 170.0
+      }
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:body-mass-index-and-body-surface-area-calculator",
+            "code": "weight_kg",
+            "display": "Weight Kg"
+          }
+        ]
+      },
+      "valueQuantity": {
+        "value": 70.0
+      }
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:body-mass-index-and-body-surface-area-calculator",
+            "code": "bsa_formula",
+            "display": "Bsa Formula"
+          }
+        ]
+      },
+      "valueCodeableConcept": {
+        "coding": [
+          {
+            "system": "urn:form-examples:body-mass-index-and-body-surface-area-calculator:bsa_formula",
+            "code": "mosteller",
+            "display": "Mosteller"
+          }
+        ]
+      }
+    }
+  ]
+}

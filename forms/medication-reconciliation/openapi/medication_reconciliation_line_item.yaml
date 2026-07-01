@@ -1,0 +1,218 @@
+# Generated from sql/. Do not edit by hand.
+# SOURCE: medication_reconciliation_line_item
+openapi: 3.1.0
+info:
+  title: Medication Reconciliation — MedicationReconciliationLineItem
+  version: 1.0.0
+  description: Medication line items on either list (BPMH or inpatient), discriminated by list_source, cascading from the parent reconciliation.
+paths:
+  /medication-reconciliation-line-items:
+    get:
+      summary: List MedicationReconciliationLineItem records
+      operationId: listMedicationReconciliationLineItem
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of MedicationReconciliationLineItem records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/MedicationReconciliationLineItem"
+    post:
+      summary: Create a new MedicationReconciliationLineItem
+      operationId: createMedicationReconciliationLineItem
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/MedicationReconciliationLineItem"
+      responses:
+        "201":
+          description: The newly created MedicationReconciliationLineItem
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/MedicationReconciliationLineItem"
+        "400":
+          description: Validation error
+  /medication-reconciliation-line-items/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one MedicationReconciliationLineItem by id
+      operationId: getMedicationReconciliationLineItem
+      responses:
+        "200":
+          description: The requested MedicationReconciliationLineItem
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/MedicationReconciliationLineItem"
+        "404":
+          description: MedicationReconciliationLineItem not found
+    patch:
+      summary: Update an existing MedicationReconciliationLineItem
+      operationId: updateMedicationReconciliationLineItem
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/MedicationReconciliationLineItem"
+      responses:
+        "200":
+          description: The updated MedicationReconciliationLineItem
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/MedicationReconciliationLineItem"
+        "404":
+          description: MedicationReconciliationLineItem not found
+    delete:
+      summary: Soft-delete a MedicationReconciliationLineItem
+      operationId: deleteMedicationReconciliationLineItem
+      responses:
+        "204":
+          description: MedicationReconciliationLineItem deleted
+        "404":
+          description: MedicationReconciliationLineItem not found
+components:
+  schemas:
+    MedicationReconciliationLineItem:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was most recently updated.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was soft-deleted.
+        medication_reconciliation_id:
+          type: string
+          format: uuid
+          description: Foreign key to the parent medication reconciliation.
+        list_source:
+          type: string
+          enum:
+            - bpmh
+            - inpatient
+            - ""
+          description: "Which list this line belongs to: bpmh (best-possible medication history) or inpatient."
+        drug_name:
+          type: string
+          description: Generic (preferred) or brand name of the medicine.
+        form:
+          type: string
+          description: Pharmaceutical form, e.g. tablet, capsule, injection, patch.
+        dose:
+          type: string
+          description: "Dose as free text to preserve units, e.g. \"5 mg\"."
+        route:
+          type: string
+          enum:
+            - oral
+            - iv
+            - im
+            - subcutaneous
+            - topical
+            - inhaled
+            - other
+            - ""
+          description: "Route of administration: oral, iv, im, subcutaneous, topical, inhaled, or other."
+        frequency:
+          type: string
+          description: "Dosing frequency as free text, e.g. \"once daily\", \"BD\", \"PRN\"."
+        indication:
+          type: string
+          description: Reason the medicine is prescribed.
+        high_risk_class:
+          type: string
+          enum:
+            - none
+            - anticoagulant
+            - insulin
+            - opioid
+            - other
+            - ""
+          description: "High-risk medicine class: none, anticoagulant, insulin, opioid, or other."
+        adherence:
+          type: string
+          enum:
+            - taking
+            - not-taking
+            - intermittent
+            - unknown
+            - ""
+          description: "Patient adherence: taking, not-taking, intermittent, or unknown."
+        source_type:
+          type: string
+          enum:
+            - patient-interview
+            - carer-interview
+            - gp-record
+            - repeat-prescription
+            - community-pharmacy
+            - dispensing-history
+            - previous-discharge-summary
+            - own-drugs-bag
+            - care-home-mar
+            - ""
+          description: "Information source this line came from: patient-interview, carer-interview, gp-record, repeat-prescription, community-pharmacy, dispensing-history, previous-discharge-summary, own-drugs-bag, or care-home-mar."
+        status:
+          type: string
+          enum:
+            - active
+            - held
+            - stopped
+            - suspended
+            - ""
+          description: "Prescribing status for inpatient rows: active, held, stopped, or suspended."
+      required:
+        - created_at
+        - updated_at
+        - medication_reconciliation_id
+        - list_source
+        - drug_name
+        - form
+        - dose
+        - route
+        - frequency
+        - indication
+        - high_risk_class
+        - adherence
+        - source_type
+        - status
+      description: Medication line items on either list (BPMH or inpatient), discriminated by list_source, cascading from the parent reconciliation.

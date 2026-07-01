@@ -1,0 +1,40 @@
+// Generated from sql/. Do not edit by hand.
+// SOURCE: cardiac_stress_test_result_grade_flag
+
+syntax = "proto3";
+
+package form_examples.cardiac_stress_test_result;
+
+enum CardiacStressTestResultGradeFlagCategoryEnum {
+  CATEGORY_UNSPECIFIED = 0;
+  CATEGORY_CRITICAL_RESULT_ALERT = 1;  // critical-result-alert
+  CATEGORY_INCIDENTAL_FINDING = 2;  // incidental-finding
+  CATEGORY_DISCREPANCY_WITH_REQUEST = 3;  // discrepancy-with-request
+  CATEGORY_ABNORMAL_REQUIRING_ACTION = 4;  // abnormal-requiring-action
+  CATEGORY_URGENT_REFERRAL = 5;  // urgent-referral
+  CATEGORY_INADEQUATE_TECHNIQUE = 6;  // inadequate-technique
+  CATEGORY_UNEXPECTED_FINDING = 7;  // unexpected-finding
+  CATEGORY_MISSING_IMPRESSION = 8;  // missing-impression
+  CATEGORY_MISSING_MEASUREMENT = 9;  // missing-measurement
+  CATEGORY_OTHER = 10;  // other
+}
+
+enum CardiacStressTestResultGradeFlagPriorityEnum {
+  PRIORITY_UNSPECIFIED = 0;
+  PRIORITY_LOW = 1;  // low
+  PRIORITY_MEDIUM = 2;  // medium
+  PRIORITY_HIGH = 3;  // high
+}
+
+message CardiacStressTestResultGradeFlag {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string cardiac_stress_test_result_grade_id = 5;  // UUID — uuid
+  string flag_id = 6;  // VARCHAR(50) — max 50 chars
+  CardiacStressTestResultGradeFlagCategoryEnum category = 7;  // VARCHAR(40)
+  CardiacStressTestResultGradeFlagPriorityEnum priority = 8;  // VARCHAR(10)
+  string description = 9;  // VARCHAR(500) — max 500 chars
+  string suggested_action = 10;  // VARCHAR(500) — max 500 chars
+}

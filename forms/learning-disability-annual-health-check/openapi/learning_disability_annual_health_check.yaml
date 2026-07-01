@@ -1,0 +1,489 @@
+# Generated from sql/. Do not edit by hand.
+# SOURCE: learning_disability_annual_health_check
+openapi: 3.1.0
+info:
+  title: Learning Disability Annual Health Check — LearningDisabilityAnnualHealthCheck
+  version: 1.0.0
+  description: "Main learning-disability annual-health-check record: context and identification, one field per required component (reasonable adjustments and communication, physical health, screening and immunisation uptake, medication review including STOMP, mental health and behaviour, syndrome-specific checks, carer and social), and the Health Action Plan. Completeness grade, fired rules, and flags live in child tables."
+paths:
+  /learning-disability-annual-health-checks:
+    get:
+      summary: List LearningDisabilityAnnualHealthCheck records
+      operationId: listLearningDisabilityAnnualHealthCheck
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of LearningDisabilityAnnualHealthCheck records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/LearningDisabilityAnnualHealthCheck"
+    post:
+      summary: Create a new LearningDisabilityAnnualHealthCheck
+      operationId: createLearningDisabilityAnnualHealthCheck
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/LearningDisabilityAnnualHealthCheck"
+      responses:
+        "201":
+          description: The newly created LearningDisabilityAnnualHealthCheck
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/LearningDisabilityAnnualHealthCheck"
+        "400":
+          description: Validation error
+  /learning-disability-annual-health-checks/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one LearningDisabilityAnnualHealthCheck by id
+      operationId: getLearningDisabilityAnnualHealthCheck
+      responses:
+        "200":
+          description: The requested LearningDisabilityAnnualHealthCheck
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/LearningDisabilityAnnualHealthCheck"
+        "404":
+          description: LearningDisabilityAnnualHealthCheck not found
+    patch:
+      summary: Update an existing LearningDisabilityAnnualHealthCheck
+      operationId: updateLearningDisabilityAnnualHealthCheck
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/LearningDisabilityAnnualHealthCheck"
+      responses:
+        "200":
+          description: The updated LearningDisabilityAnnualHealthCheck
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/LearningDisabilityAnnualHealthCheck"
+        "404":
+          description: LearningDisabilityAnnualHealthCheck not found
+    delete:
+      summary: Soft-delete a LearningDisabilityAnnualHealthCheck
+      operationId: deleteLearningDisabilityAnnualHealthCheck
+      responses:
+        "204":
+          description: LearningDisabilityAnnualHealthCheck deleted
+        "404":
+          description: LearningDisabilityAnnualHealthCheck not found
+components:
+  schemas:
+    LearningDisabilityAnnualHealthCheck:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was updated most-recently.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was deleted a.k.a. soft-removed.
+        patient_id:
+          type: string
+          format: uuid
+          description: Foreign key to the patient this check documents (restrict delete).
+        clinician_id:
+          type: string
+          format: uuid
+          description: Foreign key to the clinician who completed the check (restrict delete); optional.
+        clinician_name:
+          type: string
+          description: Name of the clinician completing the check.
+        clinician_role:
+          type: string
+          enum:
+            - gp
+            - practice-nurse
+            - healthcare-assistant
+            - ld-team
+            - other
+            - ""
+          description: "Role of the clinician completing the check: gp, practice-nurse, healthcare-assistant, ld-team, or other."
+        checked_on:
+          type: string
+          format: date
+          description: Date the annual health check was carried out.
+        practice_name:
+          type: string
+          description: Name of the GP practice conducting the check.
+        easy_read_invitation_sent:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Whether an easy-read invitation was sent to the person (yes/no).
+        pre_check_done:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Whether a pre-check health questionnaire was completed beforehand (yes/no).
+        person_identifier:
+          type: string
+          maxLength: 100
+          description: Local identifier for the person.
+        age_band:
+          type: string
+          enum:
+            - 14-17
+            - 18-24
+            - 25-44
+            - 45-64
+            - 65+
+            - ""
+          description: "Age band of the person: 14-17, 18-24, 25-44, 45-64, or 65+."
+        sex:
+          type: string
+          enum:
+            - female
+            - male
+            - intersex
+            - unknown
+            - ""
+          description: "Person's sex: female, male, intersex, or unknown."
+        ld_register_status:
+          type: string
+          enum:
+            - on-register
+            - not-on-register
+            - newly-added
+            - ""
+          description: "Learning-disability register status: on-register, not-on-register, or newly-added."
+        main_carer:
+          type: string
+          description: Main carer or supporter for the person.
+        communication_needs:
+          type: string
+          description: Reasonable adjustments and communication needs (free text); required component.
+        reasonable_adjustments_recorded:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Whether reasonable adjustments were recorded (yes/no).
+        health_passport:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - not-applicable
+            - ""
+          description: Whether a hospital / health passport is in place (yes/no/not-applicable).
+        consent_capacity_note:
+          type: string
+          description: Consent and mental-capacity note (free text).
+        weight_bmi_status:
+          type: string
+          enum:
+            - recorded
+            - not-recorded
+            - declined
+            - ""
+          description: "Weight / BMI component status: recorded, not-recorded, or declined."
+        bmi:
+          type: number
+          format: double
+          description: Body-mass index (kg/m^2) recorded at the check.
+        blood_pressure_status:
+          type: string
+          enum:
+            - normal
+            - raised
+            - recorded
+            - not-recorded
+            - ""
+          description: "Blood-pressure component status: normal, raised, recorded, or not-recorded."
+        epilepsy_status:
+          type: string
+          enum:
+            - reviewed
+            - not-reviewed
+            - not-applicable
+            - ""
+          description: "Epilepsy review status: reviewed, not-reviewed, or not-applicable."
+        constipation_status:
+          type: string
+          enum:
+            - none
+            - present
+            - not-assessed
+            - ""
+          description: "Constipation component status: none, present, or not-assessed."
+        dysphagia_status:
+          type: string
+          enum:
+            - none
+            - present
+            - not-assessed
+            - ""
+          description: "Dysphagia / swallowing component status: none, present, or not-assessed."
+        continence_status:
+          type: string
+          enum:
+            - ok
+            - issue
+            - not-assessed
+            - ""
+          description: "Continence component status: ok, issue, or not-assessed."
+        mobility_falls_status:
+          type: string
+          enum:
+            - ok
+            - issue
+            - not-assessed
+            - ""
+          description: "Mobility and falls component status: ok, issue, or not-assessed."
+        dental_status:
+          type: string
+          enum:
+            - ok
+            - issue
+            - not-assessed
+            - ""
+          description: "Dental / oral-health component status: ok, issue, or not-assessed."
+        vision_status:
+          type: string
+          enum:
+            - ok
+            - issue
+            - not-assessed
+            - ""
+          description: "Vision component status: ok, issue, or not-assessed."
+        hearing_status:
+          type: string
+          enum:
+            - ok
+            - issue
+            - not-assessed
+            - ""
+          description: "Hearing component status: ok, issue, or not-assessed."
+        foot_health_status:
+          type: string
+          enum:
+            - ok
+            - issue
+            - not-assessed
+            - ""
+          description: "Foot-health component status: ok, issue, or not-assessed."
+        skin_status:
+          type: string
+          enum:
+            - ok
+            - issue
+            - not-assessed
+            - ""
+          description: "Skin component status: ok, issue, or not-assessed."
+        physical_health_actions:
+          type: string
+          description: Actions arising from the physical-health review (free text).
+        cancer_screening_status:
+          type: string
+          enum:
+            - up-to-date
+            - declined
+            - not-eligible
+            - not-recorded
+            - ""
+          description: "National cancer-screening uptake status: up-to-date, declined, not-eligible, or not-recorded."
+        other_screening_status:
+          type: string
+          enum:
+            - up-to-date
+            - declined
+            - not-eligible
+            - not-recorded
+            - ""
+          description: "Other screening uptake status: up-to-date, declined, not-eligible, or not-recorded."
+        immunisation_status:
+          type: string
+          enum:
+            - up-to-date
+            - declined
+            - not-recorded
+            - ""
+          description: "Immunisation uptake status: up-to-date, declined, or not-recorded."
+        medication_reconciled:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Whether the medication list was reconciled at the check (yes/no).
+        psychotropic_prescribed:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Whether a psychotropic medicine is prescribed (yes/no); drives the STOMP flag.
+        psychotropic_indication:
+          type: string
+          description: Documented indication for the psychotropic medicine (free text).
+        psychotropic_last_reviewed:
+          type: string
+          format: date
+          description: Date the psychotropic medicine was last reviewed.
+        stomp_discussed:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - not-applicable
+            - ""
+          description: Whether STOMP was discussed (yes/no/not-applicable).
+        medication_side_effects:
+          type: string
+          description: Side effects reviewed at the medication review (free text).
+        mental_health_status:
+          type: string
+          enum:
+            - ok
+            - concern
+            - not-assessed
+            - ""
+          description: "Mental-health component status: ok, concern, or not-assessed."
+        behaviour_status:
+          type: string
+          enum:
+            - none
+            - challenging
+            - not-assessed
+            - ""
+          description: "Behaviour component status: none, challenging, or not-assessed."
+        behaviour_triggers:
+          type: string
+          description: Triggers for behaviour that challenges (free text).
+        syndrome_specific_status:
+          type: string
+          enum:
+            - done
+            - not-applicable
+            - not-done
+            - ""
+          description: "Syndrome-specific check status: done, not-applicable, or not-done."
+        carer_needs_status:
+          type: string
+          enum:
+            - assessed
+            - not-assessed
+            - no-carer
+            - ""
+          description: "Carer-needs component status: assessed, not-assessed, or no-carer."
+        social_circumstances:
+          type: string
+          description: Social circumstances, day activity, and employment (free text).
+        health_action_plan_produced:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Whether a Health Action Plan was produced (yes/no); required output.
+        health_action_plan_shared:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Whether the Health Action Plan was shared with the person and carer (yes/no).
+        health_action_plan_actions:
+          type: string
+          description: Collated Health Action Plan actions (free text).
+        clinician_note:
+          type: string
+          description: Free-text summary note for the check.
+      required:
+        - created_at
+        - updated_at
+        - patient_id
+        - clinician_name
+        - clinician_role
+        - practice_name
+        - easy_read_invitation_sent
+        - pre_check_done
+        - person_identifier
+        - age_band
+        - sex
+        - ld_register_status
+        - main_carer
+        - communication_needs
+        - reasonable_adjustments_recorded
+        - health_passport
+        - consent_capacity_note
+        - weight_bmi_status
+        - blood_pressure_status
+        - epilepsy_status
+        - constipation_status
+        - dysphagia_status
+        - continence_status
+        - mobility_falls_status
+        - dental_status
+        - vision_status
+        - hearing_status
+        - foot_health_status
+        - skin_status
+        - physical_health_actions
+        - cancer_screening_status
+        - other_screening_status
+        - immunisation_status
+        - medication_reconciled
+        - psychotropic_prescribed
+        - psychotropic_indication
+        - stomp_discussed
+        - medication_side_effects
+        - mental_health_status
+        - behaviour_status
+        - behaviour_triggers
+        - syndrome_specific_status
+        - carer_needs_status
+        - social_circumstances
+        - health_action_plan_produced
+        - health_action_plan_shared
+        - health_action_plan_actions
+        - clinician_note
+      description: "Main learning-disability annual-health-check record: context and identification, one field per required component (reasonable adjustments and communication, physical health, screening and immunisation uptake, medication review including STOMP, mental health and behaviour, syndrome-specific checks, carer and social), and the Health Action Plan. Completeness grade, fired rules, and flags live in child tables."

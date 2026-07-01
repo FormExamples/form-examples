@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE structured_medication_review SYSTEM "structured_medication_review.dtd">
+<structured_medication_review>
+<id>770e8400-e29b-41d4-a716-446655440002</id>
+<created_at>2026-04-09T10:00:00Z</created_at>
+<updated_at>2026-04-09T10:00:00Z</updated_at>
+<deleted_at>2026-04-09T10:00:00Z</deleted_at>
+<patient_id>550e8400-e29b-41d4-a716-446655440000</patient_id>
+<clinician_id>660e8400-e29b-41d4-a716-446655440001</clinician_id>
+<clinician_name>Example</clinician_name>
+<clinician_role>clinical-pharmacist</clinician_role>
+<reviewed_at>2026-04-09T10:00:00Z</reviewed_at>
+<care_setting>gp-practice</care_setting>
+<consultation_mode>face-to-face</consultation_mode>
+<patient_identifier></patient_identifier>
+<age_band>18-39</age_band>
+<sex>female</sex>
+<frailty_status>fit</frailty_status>
+<lives_in_care_home>yes</lives_in_care_home>
+<long_term_conditions></long_term_conditions>
+<presenting_problems></presenting_problems>
+<patient_reported_issues></patient_reported_issues>
+<what_matters_to_patient></what_matters_to_patient>
+<shared_decisions></shared_decisions>
+<monitoring_due></monitoring_due>
+<overdue_monitoring_count>2</overdue_monitoring_count>
+<follow_up_plan>Example text.</follow_up_plan>
+<follow_up_date>2026-01-15</follow_up_date>
+<review_completed>yes</review_completed>
+</structured_medication_review>

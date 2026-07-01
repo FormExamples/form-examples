@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE ottawa_ankle_rules SYSTEM "ottawa_ankle_rules.dtd">
+<ottawa_ankle_rules>
+<id>770e8400-e29b-41d4-a716-446655440002</id>
+<created_at>2026-04-09T10:00:00Z</created_at>
+<updated_at>2026-04-09T10:00:00Z</updated_at>
+<deleted_at>2026-04-09T10:00:00Z</deleted_at>
+<patient_id>550e8400-e29b-41d4-a716-446655440000</patient_id>
+<clinician_id>660e8400-e29b-41d4-a716-446655440001</clinician_id>
+<status>draft</status>
+<patient_identifier></patient_identifier>
+<assessed_at>2026-04-09T10:00:00Z</assessed_at>
+<care_setting>emergency-department</care_setting>
+<injured_side>left</injured_side>
+<hours_since_injury>0.0</hours_since_injury>
+<age_years>45</age_years>
+<sex>female</sex>
+<assessment_reliable>yes</assessment_reliable>
+<malleolar_zone_pain>yes</malleolar_zone_pain>
+<lateral_malleolus_tenderness>yes</lateral_malleolus_tenderness>
+<medial_malleolus_tenderness>yes</medial_malleolus_tenderness>
+<midfoot_zone_pain>yes</midfoot_zone_pain>
+<fifth_metatarsal_base_tenderness>yes</fifth_metatarsal_base_tenderness>
+<navicular_tenderness>yes</navicular_tenderness>
+<able_to_bear_weight_immediately>yes</able_to_bear_weight_immediately>
+<able_to_bear_weight_now>yes</able_to_bear_weight_now>
+<clinical_notes>Example text.</clinical_notes>
+</ottawa_ankle_rules>

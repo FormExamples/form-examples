@@ -1,0 +1,164 @@
+# Generated from sql/. Do not edit by hand.
+# SOURCE: grace_score_for_acute_coronary_syndrome_grade_rule
+openapi: 3.1.0
+info:
+  title: Grace Score For Acute Coronary Syndrome — GraceScoreForAcuteCoronarySyndromeGradeRule
+  version: 1.0.0
+  description: "Audit trail of every grading rule (per-variable point contributor) that fired during GRACE computation: GRACE variable, points contributed, category, and description."
+paths:
+  /grace-score-for-acute-coronary-syndrome-grade-rules:
+    get:
+      summary: List GraceScoreForAcuteCoronarySyndromeGradeRule records
+      operationId: listGraceScoreForAcuteCoronarySyndromeGradeRule
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of GraceScoreForAcuteCoronarySyndromeGradeRule records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/GraceScoreForAcuteCoronarySyndromeGradeRule"
+    post:
+      summary: Create a new GraceScoreForAcuteCoronarySyndromeGradeRule
+      operationId: createGraceScoreForAcuteCoronarySyndromeGradeRule
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/GraceScoreForAcuteCoronarySyndromeGradeRule"
+      responses:
+        "201":
+          description: The newly created GraceScoreForAcuteCoronarySyndromeGradeRule
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GraceScoreForAcuteCoronarySyndromeGradeRule"
+        "400":
+          description: Validation error
+  /grace-score-for-acute-coronary-syndrome-grade-rules/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one GraceScoreForAcuteCoronarySyndromeGradeRule by id
+      operationId: getGraceScoreForAcuteCoronarySyndromeGradeRule
+      responses:
+        "200":
+          description: The requested GraceScoreForAcuteCoronarySyndromeGradeRule
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GraceScoreForAcuteCoronarySyndromeGradeRule"
+        "404":
+          description: GraceScoreForAcuteCoronarySyndromeGradeRule not found
+    patch:
+      summary: Update an existing GraceScoreForAcuteCoronarySyndromeGradeRule
+      operationId: updateGraceScoreForAcuteCoronarySyndromeGradeRule
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/GraceScoreForAcuteCoronarySyndromeGradeRule"
+      responses:
+        "200":
+          description: The updated GraceScoreForAcuteCoronarySyndromeGradeRule
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GraceScoreForAcuteCoronarySyndromeGradeRule"
+        "404":
+          description: GraceScoreForAcuteCoronarySyndromeGradeRule not found
+    delete:
+      summary: Soft-delete a GraceScoreForAcuteCoronarySyndromeGradeRule
+      operationId: deleteGraceScoreForAcuteCoronarySyndromeGradeRule
+      responses:
+        "204":
+          description: GraceScoreForAcuteCoronarySyndromeGradeRule deleted
+        "404":
+          description: GraceScoreForAcuteCoronarySyndromeGradeRule not found
+components:
+  schemas:
+    GraceScoreForAcuteCoronarySyndromeGradeRule:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was most recently updated.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was soft-deleted.
+        grace_score_for_acute_coronary_syndrome_grade_id:
+          type: string
+          format: uuid
+          description: Foreign key to the parent grade.
+        rule_id:
+          type: string
+          maxLength: 40
+          description: Stable rule identifier (e.g. R-AGE-BAND-04).
+        variable:
+          type: string
+          enum:
+            - age
+            - heart-rate
+            - systolic-bp
+            - creatinine
+            - killip
+            - cardiac-arrest
+            - st-deviation
+            - cardiac-enzymes
+            - band
+          description: "GRACE variable the contributor belongs to: age, heart-rate, systolic-bp, creatinine, killip, cardiac-arrest, st-deviation, cardiac-enzymes, or band."
+        points:
+          type: integer
+          format: int32
+          description: Weighted points contributed by this variable to the GRACE total.
+        category:
+          type: string
+          maxLength: 50
+          description: Subject category (e.g. weighted-band, mortality-band).
+        description:
+          type: string
+          maxLength: 500
+          description: Human-readable description of why the rule fired.
+      required:
+        - created_at
+        - updated_at
+        - grace_score_for_acute_coronary_syndrome_grade_id
+        - rule_id
+        - variable
+        - category
+        - description
+      description: "Audit trail of every grading rule (per-variable point contributor) that fired during GRACE computation: GRACE variable, points contributed, category, and description."

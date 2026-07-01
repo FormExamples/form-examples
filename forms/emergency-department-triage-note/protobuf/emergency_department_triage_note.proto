@@ -1,0 +1,158 @@
+// Generated from sql/. Do not edit by hand.
+// SOURCE: emergency_department_triage_note
+
+syntax = "proto3";
+
+package form_examples.emergency_department_triage_note;
+
+enum EmergencyDepartmentTriageNoteStatusEnum {
+  STATUS_UNSPECIFIED = 0;
+  STATUS_DRAFT = 1;  // draft
+  STATUS_SUBMITTED = 2;  // submitted
+  STATUS_AMENDED = 3;  // amended
+  STATUS_SIGNED = 4;  // signed
+}
+
+enum EmergencyDepartmentTriageNoteCareSettingEnum {
+  CARESETTING_UNSPECIFIED = 0;
+  CARESETTING_EMERGENCY_DEPARTMENT = 1;  // emergency-department
+  CARESETTING_URGENT_TREATMENT_CENTRE = 2;  // urgent-treatment-centre
+  CARESETTING_MINOR_INJURIES_UNIT = 3;  // minor-injuries-unit
+}
+
+enum EmergencyDepartmentTriageNoteArrivalModeEnum {
+  ARRIVALMODE_UNSPECIFIED = 0;
+  ARRIVALMODE_WALK_IN = 1;  // walk-in
+  ARRIVALMODE_AMBULANCE = 2;  // ambulance
+  ARRIVALMODE_OTHER = 3;  // other
+}
+
+enum EmergencyDepartmentTriageNoteAgeBandEnum {
+  AGEBAND_UNSPECIFIED = 0;
+  AGEBAND_PAEDIATRIC = 1;  // paediatric
+  AGEBAND_ADULT = 2;  // adult
+  AGEBAND_OLDER_ADULT = 3;  // older-adult
+}
+
+enum EmergencyDepartmentTriageNoteOnOxygenEnum {
+  ONOXYGEN_UNSPECIFIED = 0;
+  ONOXYGEN_AIR = 1;  // air
+  ONOXYGEN_OXYGEN = 2;  // oxygen
+}
+
+enum EmergencyDepartmentTriageNoteConsciousnessAcvpuEnum {
+  CONSCIOUSNESSACVPU_UNSPECIFIED = 0;
+  CONSCIOUSNESSACVPU_A = 1;  // A
+  CONSCIOUSNESSACVPU_C = 2;  // C
+  CONSCIOUSNESSACVPU_V = 3;  // V
+  CONSCIOUSNESSACVPU_P = 4;  // P
+  CONSCIOUSNESSACVPU_U = 5;  // U
+}
+
+enum EmergencyDepartmentTriageNoteAirwayThreatEnum {
+  AIRWAYTHREAT_UNSPECIFIED = 0;
+  AIRWAYTHREAT_YES = 1;  // yes
+  AIRWAYTHREAT_NO = 2;  // no
+}
+
+enum EmergencyDepartmentTriageNoteBreathingInadequateEnum {
+  BREATHINGINADEQUATE_UNSPECIFIED = 0;
+  BREATHINGINADEQUATE_YES = 1;  // yes
+  BREATHINGINADEQUATE_NO = 2;  // no
+}
+
+enum EmergencyDepartmentTriageNoteCirculationShockEnum {
+  CIRCULATIONSHOCK_UNSPECIFIED = 0;
+  CIRCULATIONSHOCK_YES = 1;  // yes
+  CIRCULATIONSHOCK_NO = 2;  // no
+}
+
+enum EmergencyDepartmentTriageNoteHaemorrhageMajorEnum {
+  HAEMORRHAGEMAJOR_UNSPECIFIED = 0;
+  HAEMORRHAGEMAJOR_YES = 1;  // yes
+  HAEMORRHAGEMAJOR_NO = 2;  // no
+}
+
+enum EmergencyDepartmentTriageNoteConsciousnessReducedEnum {
+  CONSCIOUSNESSREDUCED_UNSPECIFIED = 0;
+  CONSCIOUSNESSREDUCED_YES = 1;  // yes
+  CONSCIOUSNESSREDUCED_NO = 2;  // no
+}
+
+enum EmergencyDepartmentTriageNoteSeizureActiveEnum {
+  SEIZUREACTIVE_UNSPECIFIED = 0;
+  SEIZUREACTIVE_YES = 1;  // yes
+  SEIZUREACTIVE_NO = 2;  // no
+}
+
+enum EmergencyDepartmentTriageNoteFocalNeurologyEnum {
+  FOCALNEUROLOGY_UNSPECIFIED = 0;
+  FOCALNEUROLOGY_YES = 1;  // yes
+  FOCALNEUROLOGY_NO = 2;  // no
+}
+
+enum EmergencyDepartmentTriageNoteSepsisFeaturesEnum {
+  SEPSISFEATURES_UNSPECIFIED = 0;
+  SEPSISFEATURES_YES = 1;  // yes
+  SEPSISFEATURES_NO = 2;  // no
+}
+
+enum EmergencyDepartmentTriageNoteChestPainCardiacEnum {
+  CHESTPAINCARDIAC_UNSPECIFIED = 0;
+  CHESTPAINCARDIAC_YES = 1;  // yes
+  CHESTPAINCARDIAC_NO = 2;  // no
+}
+
+enum EmergencyDepartmentTriageNoteStrokeFeaturesEnum {
+  STROKEFEATURES_UNSPECIFIED = 0;
+  STROKEFEATURES_YES = 1;  // yes
+  STROKEFEATURES_NO = 2;  // no
+}
+
+enum EmergencyDepartmentTriageNotePaediatricRedFlagEnum {
+  PAEDIATRICREDFLAG_UNSPECIFIED = 0;
+  PAEDIATRICREDFLAG_YES = 1;  // yes
+  PAEDIATRICREDFLAG_NO = 2;  // no
+}
+
+message EmergencyDepartmentTriageNote {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string patient_id = 5;  // UUID — uuid
+  string clinician_id = 6;  // UUID — uuid
+  EmergencyDepartmentTriageNoteStatusEnum status = 7;  // VARCHAR(20)
+  string nurse_name = 8;  // TEXT
+  string triaged_at = 9;  // TIMESTAMPTZ — iso 8601
+  EmergencyDepartmentTriageNoteCareSettingEnum care_setting = 10;  // VARCHAR(30)
+  EmergencyDepartmentTriageNoteArrivalModeEnum arrival_mode = 11;  // VARCHAR(20)
+  string arrived_at = 12;  // TIMESTAMPTZ — iso 8601
+  string referral_source = 13;  // TEXT
+  string patient_identifier = 14;  // TEXT
+  EmergencyDepartmentTriageNoteAgeBandEnum age_band = 15;  // VARCHAR(20)
+  string presenting_complaint = 16;  // TEXT
+  string brief_history = 17;  // TEXT
+  string symptom_onset = 18;  // TEXT
+  int32 respiratory_rate = 19;  // INTEGER
+  int32 spo2 = 20;  // INTEGER
+  EmergencyDepartmentTriageNoteOnOxygenEnum on_oxygen = 21;  // VARCHAR(10)
+  int32 systolic_bp = 22;  // INTEGER
+  int32 pulse = 23;  // INTEGER
+  EmergencyDepartmentTriageNoteConsciousnessAcvpuEnum consciousness_acvpu = 24;  // VARCHAR(1)
+  double temperature = 25;  // NUMERIC(4,1) — numeric(4,1)
+  int32 glasgow_coma_scale = 26;  // INTEGER
+  int32 pain_score = 27;  // INTEGER
+  EmergencyDepartmentTriageNoteAirwayThreatEnum airway_threat = 28;  // VARCHAR(5)
+  EmergencyDepartmentTriageNoteBreathingInadequateEnum breathing_inadequate = 29;  // VARCHAR(5)
+  EmergencyDepartmentTriageNoteCirculationShockEnum circulation_shock = 30;  // VARCHAR(5)
+  EmergencyDepartmentTriageNoteHaemorrhageMajorEnum haemorrhage_major = 31;  // VARCHAR(5)
+  EmergencyDepartmentTriageNoteConsciousnessReducedEnum consciousness_reduced = 32;  // VARCHAR(5)
+  EmergencyDepartmentTriageNoteSeizureActiveEnum seizure_active = 33;  // VARCHAR(5)
+  EmergencyDepartmentTriageNoteFocalNeurologyEnum focal_neurology = 34;  // VARCHAR(5)
+  EmergencyDepartmentTriageNoteSepsisFeaturesEnum sepsis_features = 35;  // VARCHAR(5)
+  EmergencyDepartmentTriageNoteChestPainCardiacEnum chest_pain_cardiac = 36;  // VARCHAR(5)
+  EmergencyDepartmentTriageNoteStrokeFeaturesEnum stroke_features = 37;  // VARCHAR(5)
+  EmergencyDepartmentTriageNotePaediatricRedFlagEnum paediatric_red_flag = 38;  // VARCHAR(5)
+  string clinical_notes = 39;  // TEXT
+}

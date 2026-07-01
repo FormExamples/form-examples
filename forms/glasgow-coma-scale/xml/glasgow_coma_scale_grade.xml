@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE glasgow_coma_scale_grade SYSTEM "glasgow_coma_scale_grade.dtd">
+<glasgow_coma_scale_grade>
+<id>880e8400-e29b-41d4-a716-446655440003</id>
+<created_at>2026-04-09T10:00:00Z</created_at>
+<updated_at>2026-04-09T10:00:00Z</updated_at>
+<deleted_at>2026-04-09T10:00:00Z</deleted_at>
+<glasgow_coma_scale_id>770e8400-e29b-41d4-a716-446655440002</glasgow_coma_scale_id>
+<eye_score>5</eye_score>
+<verbal_score>5</verbal_score>
+<motor_score>5</motor_score>
+<total_score>5</total_score>
+<breakdown></breakdown>
+<total_display></total_display>
+<severity_band>mild</severity_band>
+<pupil_reactivity_score>5</pupil_reactivity_score>
+<gcs_p>1</gcs_p>
+<graded_at>2026-04-09T10:00:00Z</graded_at>
+</glasgow_coma_scale_grade>

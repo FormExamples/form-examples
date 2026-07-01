@@ -1,0 +1,38 @@
+// Generated from sql/. Do not edit by hand.
+// SOURCE: structured_medication_review_grade_flag
+
+syntax = "proto3";
+
+package form_examples.structured_medication_review;
+
+enum StructuredMedicationReviewGradeFlagCategoryEnum {
+  CATEGORY_UNSPECIFIED = 0;
+  CATEGORY_HIGH_ACB = 1;  // high-acb
+  CATEGORY_STOPP_TRIGGER = 2;  // stopp-trigger
+  CATEGORY_START_OMISSION = 3;  // start-omission
+  CATEGORY_MISSING_MONITORING = 4;  // missing-monitoring
+  CATEGORY_ADHERENCE_CONCERN = 5;  // adherence-concern
+  CATEGORY_HIGH_RISK_NO_INDICATION = 6;  // high-risk-no-indication
+  CATEGORY_INCOMPLETE = 7;  // incomplete
+  CATEGORY_OTHER = 8;  // other
+}
+
+enum StructuredMedicationReviewGradeFlagPriorityEnum {
+  PRIORITY_UNSPECIFIED = 0;
+  PRIORITY_LOW = 1;  // low
+  PRIORITY_MEDIUM = 2;  // medium
+  PRIORITY_HIGH = 3;  // high
+}
+
+message StructuredMedicationReviewGradeFlag {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string structured_medication_review_grade_id = 5;  // UUID — uuid
+  string flag_id = 6;  // VARCHAR(50) — max 50 chars
+  StructuredMedicationReviewGradeFlagCategoryEnum category = 7;  // VARCHAR(30)
+  StructuredMedicationReviewGradeFlagPriorityEnum priority = 8;  // VARCHAR(10)
+  string description = 9;  // VARCHAR(500) — max 500 chars
+  string suggested_action = 10;  // VARCHAR(500) — max 500 chars
+}

@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE soap_note SYSTEM "soap_note.dtd">
+<soap_note>
+<id>770e8400-e29b-41d4-a716-446655440002</id>
+<created_at>2026-04-09T10:00:00Z</created_at>
+<updated_at>2026-04-09T10:00:00Z</updated_at>
+<deleted_at>2026-04-09T10:00:00Z</deleted_at>
+<patient_id>550e8400-e29b-41d4-a716-446655440000</patient_id>
+<clinician_id>660e8400-e29b-41d4-a716-446655440001</clinician_id>
+<encountered_at>2026-04-09T10:00:00Z</encountered_at>
+<care_setting>general-practice</care_setting>
+<encounter_type>new-problem</encounter_type>
+<clinician_role>doctor</clinician_role>
+<patient_identifier></patient_identifier>
+<presenting_complaint></presenting_complaint>
+<history_of_presenting_complaint>Example text.</history_of_presenting_complaint>
+<patient_reported_symptoms>Fatigue</patient_reported_symptoms>
+<relevant_history>Example text.</relevant_history>
+<red_flag_symptoms>yes</red_flag_symptoms>
+<examination_findings>Example text.</examination_findings>
+<vital_signs></vital_signs>
+<abnormal_vitals_present>yes</abnormal_vitals_present>
+<investigation_results>Normal</investigation_results>
+<primary_diagnosis>Under investigation</primary_diagnosis>
+<problem_list></problem_list>
+<differential></differential>
+<clinical_impression>Example text.</clinical_impression>
+<investigations_plan>Example text.</investigations_plan>
+<treatment_plan>Example text.</treatment_plan>
+<referrals></referrals>
+<follow_up></follow_up>
+<safety_netting></safety_netting>
+<managed_at_home>yes</managed_at_home>
+<clinical_note>Example Hospital</clinical_note>
+</soap_note>

@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE cystoscopy_test_result SYSTEM "cystoscopy_test_result.dtd">
+<cystoscopy_test_result>
+<id>770e8400-e29b-41d4-a716-446655440002</id>
+<created_at>2026-04-09T10:00:00Z</created_at>
+<updated_at>2026-04-09T10:00:00Z</updated_at>
+<deleted_at>2026-04-09T10:00:00Z</deleted_at>
+<patient_id>550e8400-e29b-41d4-a716-446655440000</patient_id>
+<clinician_id>660e8400-e29b-41d4-a716-446655440001</clinician_id>
+<originating_request_reference></originating_request_reference>
+<report_status>preliminary</report_status>
+<performed_date>2026-01-15</performed_date>
+<reported_date>2026-01-15</reported_date>
+<procedure>flexible-cystoscopy</procedure>
+<anaesthesia>local</anaesthesia>
+<clinical_history>Example text.</clinical_history>
+<bladder_tumour>true</bladder_tumour>
+<inflammation_cystitis>true</inflammation_cystitis>
+<bladder_stones>true</bladder_stones>
+<urethral_stricture>true</urethral_stricture>
+<trabeculation>true</trabeculation>
+<prostatic_enlargement>true</prostatic_enlargement>
+<normal_examination>true</normal_examination>
+<tumour_size_mm>0.0</tumour_size_mm>
+<tumour_appearance>papillary</tumour_appearance>
+<biopsy_taken>true</biopsy_taken>
+<complication>none</complication>
+<findings_narrative>Example text.</findings_narrative>
+<impression>Example text.</impression>
+<reporting_category>General</reporting_category>
+<recommended_follow_up></recommended_follow_up>
+<critical_result_communicated>true</critical_result_communicated>
+<reported_to></reported_to>
+</cystoscopy_test_result>

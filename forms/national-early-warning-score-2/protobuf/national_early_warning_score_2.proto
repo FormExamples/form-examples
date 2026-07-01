@@ -1,0 +1,101 @@
+// Generated from sql/. Do not edit by hand.
+// SOURCE: national_early_warning_score_2
+
+syntax = "proto3";
+
+package form_examples.national_early_warning_score_2;
+
+enum NationalEarlyWarningScore2StatusEnum {
+  STATUS_UNSPECIFIED = 0;
+  STATUS_DRAFT = 1;  // draft
+  STATUS_SUBMITTED = 2;  // submitted
+  STATUS_AMENDED = 3;  // amended
+  STATUS_SIGNED = 4;  // signed
+}
+
+enum NationalEarlyWarningScore2Spo2ScaleEnum {
+  SPO2SCALE_UNSPECIFIED = 0;
+  SPO2SCALE_SCALE_1 = 1;  // scale-1
+  SPO2SCALE_SCALE_2 = 2;  // scale-2
+}
+
+enum NationalEarlyWarningScore2Spo2Scale2EndorsedEnum {
+  SPO2SCALE2ENDORSED_UNSPECIFIED = 0;
+  SPO2SCALE2ENDORSED_YES = 1;  // yes
+  SPO2SCALE2ENDORSED_NO = 2;  // no
+}
+
+enum NationalEarlyWarningScore2OnOxygenEnum {
+  ONOXYGEN_UNSPECIFIED = 0;
+  ONOXYGEN_AIR = 1;  // air
+  ONOXYGEN_OXYGEN = 2;  // oxygen
+}
+
+enum NationalEarlyWarningScore2OxygenDeviceEnum {
+  OXYGENDEVICE_UNSPECIFIED = 0;
+  OXYGENDEVICE_NASAL_CANNULA = 1;  // nasal-cannula
+  OXYGENDEVICE_SIMPLE_FACE_MASK = 2;  // simple-face-mask
+  OXYGENDEVICE_VENTURI_MASK = 3;  // venturi-mask
+  OXYGENDEVICE_NON_REBREATHER_MASK = 4;  // non-rebreather-mask
+  OXYGENDEVICE_HUMIDIFIED = 5;  // humidified
+  OXYGENDEVICE_CPAP = 6;  // cpap
+  OXYGENDEVICE_NIV = 7;  // niv
+  OXYGENDEVICE_TRACHEOSTOMY = 8;  // tracheostomy
+  OXYGENDEVICE_VENTILATOR = 9;  // ventilator
+  OXYGENDEVICE_OTHER = 10;  // other
+}
+
+enum NationalEarlyWarningScore2ConsciousnessAcvpuEnum {
+  CONSCIOUSNESSACVPU_UNSPECIFIED = 0;
+  CONSCIOUSNESSACVPU_A = 1;  // A
+  CONSCIOUSNESSACVPU_C = 2;  // C
+  CONSCIOUSNESSACVPU_V = 3;  // V
+  CONSCIOUSNESSACVPU_P = 4;  // P
+  CONSCIOUSNESSACVPU_U = 5;  // U
+}
+
+enum NationalEarlyWarningScore2IsUnder16Enum {
+  ISUNDER16_UNSPECIFIED = 0;
+  ISUNDER16_YES = 1;  // yes
+  ISUNDER16_NO = 2;  // no
+}
+
+enum NationalEarlyWarningScore2IsPregnantEnum {
+  ISPREGNANT_UNSPECIFIED = 0;
+  ISPREGNANT_YES = 1;  // yes
+  ISPREGNANT_NO = 2;  // no
+}
+
+enum NationalEarlyWarningScore2HasSpinalCordInjuryEnum {
+  HASSPINALCORDINJURY_UNSPECIFIED = 0;
+  HASSPINALCORDINJURY_YES = 1;  // yes
+  HASSPINALCORDINJURY_NO = 2;  // no
+}
+
+message NationalEarlyWarningScore2 {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string patient_id = 5;  // UUID — uuid
+  string clinician_id = 6;  // UUID — uuid
+  NationalEarlyWarningScore2StatusEnum status = 7;  // VARCHAR(20)
+  string observation_at = 8;  // TIMESTAMPTZ — iso 8601
+  string ward_or_location = 9;  // VARCHAR(255) — max 255 chars
+  NationalEarlyWarningScore2Spo2ScaleEnum spo2_scale = 10;  // VARCHAR(10)
+  NationalEarlyWarningScore2Spo2Scale2EndorsedEnum spo2_scale2_endorsed = 11;  // VARCHAR(5)
+  int32 respiratory_rate = 12;  // INTEGER
+  int32 spo2 = 13;  // INTEGER
+  NationalEarlyWarningScore2OnOxygenEnum on_oxygen = 14;  // VARCHAR(10)
+  NationalEarlyWarningScore2OxygenDeviceEnum oxygen_device = 15;  // VARCHAR(40)
+  double oxygen_flow_rate_l_min = 16;  // NUMERIC(4,1) — numeric(4,1)
+  int32 inspired_oxygen_fraction_percent = 17;  // INTEGER
+  int32 systolic_blood_pressure = 18;  // INTEGER
+  int32 pulse = 19;  // INTEGER
+  NationalEarlyWarningScore2ConsciousnessAcvpuEnum consciousness_acvpu = 20;  // VARCHAR(1)
+  double temperature = 21;  // NUMERIC(4,1) — numeric(4,1)
+  NationalEarlyWarningScore2IsUnder16Enum is_under_16 = 22;  // VARCHAR(5)
+  NationalEarlyWarningScore2IsPregnantEnum is_pregnant = 23;  // VARCHAR(5)
+  NationalEarlyWarningScore2HasSpinalCordInjuryEnum has_spinal_cord_injury = 24;  // VARCHAR(5)
+  string clinical_notes = 25;  // TEXT
+}

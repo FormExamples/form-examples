@@ -1,0 +1,160 @@
+# Generated from sql/. Do not edit by hand.
+# SOURCE: medication_reconciliation_grade
+openapi: 3.1.0
+info:
+  title: Medication Reconciliation — MedicationReconciliationGrade
+  version: 1.0.0
+  description: "Computed reconciliation grading result: overall status and the derived source / unintentional / high-risk-unintentional counts."
+paths:
+  /medication-reconciliation-grades:
+    get:
+      summary: List MedicationReconciliationGrade records
+      operationId: listMedicationReconciliationGrade
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of MedicationReconciliationGrade records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/MedicationReconciliationGrade"
+    post:
+      summary: Create a new MedicationReconciliationGrade
+      operationId: createMedicationReconciliationGrade
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/MedicationReconciliationGrade"
+      responses:
+        "201":
+          description: The newly created MedicationReconciliationGrade
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/MedicationReconciliationGrade"
+        "400":
+          description: Validation error
+  /medication-reconciliation-grades/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one MedicationReconciliationGrade by id
+      operationId: getMedicationReconciliationGrade
+      responses:
+        "200":
+          description: The requested MedicationReconciliationGrade
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/MedicationReconciliationGrade"
+        "404":
+          description: MedicationReconciliationGrade not found
+    patch:
+      summary: Update an existing MedicationReconciliationGrade
+      operationId: updateMedicationReconciliationGrade
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/MedicationReconciliationGrade"
+      responses:
+        "200":
+          description: The updated MedicationReconciliationGrade
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/MedicationReconciliationGrade"
+        "404":
+          description: MedicationReconciliationGrade not found
+    delete:
+      summary: Soft-delete a MedicationReconciliationGrade
+      operationId: deleteMedicationReconciliationGrade
+      responses:
+        "204":
+          description: MedicationReconciliationGrade deleted
+        "404":
+          description: MedicationReconciliationGrade not found
+components:
+  schemas:
+    MedicationReconciliationGrade:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was most recently updated.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was soft-deleted.
+        medication_reconciliation_id:
+          type: string
+          format: uuid
+          description: Foreign key to the parent medication reconciliation (unique, 1:1).
+        status:
+          type: string
+          enum:
+            - complete
+            - discrepancies-outstanding
+            - incomplete
+            - ""
+          description: "Overall reconciliation status: complete, discrepancies-outstanding, or incomplete."
+        source_count:
+          type: integer
+          format: int32
+          description: Number of independent information sources used to build the BPMH.
+        unintentional_count:
+          type: integer
+          format: int32
+          description: Number of unintentional (unexplained) discrepancies outstanding.
+        high_risk_unintentional_count:
+          type: integer
+          format: int32
+          description: Number of unintentional discrepancies on a high-risk medicine (anticoagulant, insulin, or opioid).
+        graded_at:
+          type: string
+          format: date-time
+          description: Timestamp when the engine last computed the grade.
+      required:
+        - created_at
+        - updated_at
+        - medication_reconciliation_id
+        - status
+        - source_count
+        - unintentional_count
+        - high_risk_unintentional_count
+        - graded_at
+      description: "Computed reconciliation grading result: overall status and the derived source / unintentional / high-risk-unintentional counts."

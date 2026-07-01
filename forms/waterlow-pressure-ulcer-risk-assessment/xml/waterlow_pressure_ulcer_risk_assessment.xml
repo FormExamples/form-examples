@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE waterlow_pressure_ulcer_risk_assessment SYSTEM "waterlow_pressure_ulcer_risk_assessment.dtd">
+<waterlow_pressure_ulcer_risk_assessment>
+<id>770e8400-e29b-41d4-a716-446655440002</id>
+<created_at>2026-04-09T10:00:00Z</created_at>
+<updated_at>2026-04-09T10:00:00Z</updated_at>
+<deleted_at>2026-04-09T10:00:00Z</deleted_at>
+<patient_id>550e8400-e29b-41d4-a716-446655440000</patient_id>
+<clinician_id>660e8400-e29b-41d4-a716-446655440001</clinician_id>
+<nurse_name>Example</nurse_name>
+<nurse_role>registered-nurse</nurse_role>
+<assessed_at>2026-04-09T10:00:00Z</assessed_at>
+<care_setting>acute-ward</care_setting>
+<assessment_reason>admission</assessment_reason>
+<patient_identifier></patient_identifier>
+<age_band>14-49</age_band>
+<sex>female</sex>
+<build_weight_for_height>average</build_weight_for_height>
+<skin_type>healthy</skin_type>
+<continence>complete-catheterised</continence>
+<mobility>fully-mobile</mobility>
+<tissue_malnutrition>none</tissue_malnutrition>
+<neurological_deficit>none</neurological_deficit>
+<major_surgery_trauma>none</major_surgery_trauma>
+<medication>none</medication>
+<existing_pressure_damage>no</existing_pressure_damage>
+<clinical_note>Example Hospital</clinical_note>
+</waterlow_pressure_ulcer_risk_assessment>

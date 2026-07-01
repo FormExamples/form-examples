@@ -1,0 +1,37 @@
+// Generated from sql/. Do not edit by hand.
+// SOURCE: ottawa_ankle_rules_grade
+
+syntax = "proto3";
+
+package form_examples.ottawa_ankle_rules;
+
+enum OttawaAnkleRulesGradeUnableToBearWeightEnum {
+  UNABLETOBEARWEIGHT_UNSPECIFIED = 0;
+  UNABLETOBEARWEIGHT_YES = 1;  // yes
+  UNABLETOBEARWEIGHT_NO = 2;  // no
+}
+
+enum OttawaAnkleRulesGradeAnkleXrayIndicatedEnum {
+  ANKLEXRAYINDICATED_UNSPECIFIED = 0;
+  ANKLEXRAYINDICATED_YES = 1;  // yes
+  ANKLEXRAYINDICATED_NO = 2;  // no
+}
+
+enum OttawaAnkleRulesGradeFootXrayIndicatedEnum {
+  FOOTXRAYINDICATED_UNSPECIFIED = 0;
+  FOOTXRAYINDICATED_YES = 1;  // yes
+  FOOTXRAYINDICATED_NO = 2;  // no
+}
+
+message OttawaAnkleRulesGrade {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string ottawa_ankle_rules_id = 5;  // UUID — uuid
+  OttawaAnkleRulesGradeUnableToBearWeightEnum unable_to_bear_weight = 6;  // VARCHAR(5)
+  OttawaAnkleRulesGradeAnkleXrayIndicatedEnum ankle_xray_indicated = 7;  // VARCHAR(5)
+  OttawaAnkleRulesGradeFootXrayIndicatedEnum foot_xray_indicated = 8;  // VARCHAR(5)
+  string recommended_action = 9;  // TEXT
+  string graded_at = 10;  // TIMESTAMPTZ — iso 8601
+}

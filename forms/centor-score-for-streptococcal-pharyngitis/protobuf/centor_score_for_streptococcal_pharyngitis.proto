@@ -1,0 +1,112 @@
+// Generated from sql/. Do not edit by hand.
+// SOURCE: centor_score_for_streptococcal_pharyngitis
+
+syntax = "proto3";
+
+package form_examples.centor_score_for_streptococcal_pharyngitis;
+
+enum CentorScoreForStreptococcalPharyngitisClinicianRoleEnum {
+  CLINICIANROLE_UNSPECIFIED = 0;
+  CLINICIANROLE_GP = 1;  // gp
+  CLINICIANROLE_NURSE_PRACTITIONER = 2;  // nurse-practitioner
+  CLINICIANROLE_PHARMACIST = 3;  // pharmacist
+  CLINICIANROLE_OTHER = 4;  // other
+}
+
+enum CentorScoreForStreptococcalPharyngitisCareSettingEnum {
+  CARESETTING_UNSPECIFIED = 0;
+  CARESETTING_GENERAL_PRACTICE = 1;  // general-practice
+  CARESETTING_URGENT_CARE = 2;  // urgent-care
+  CARESETTING_PHARMACY = 3;  // pharmacy
+  CARESETTING_EMERGENCY_DEPARTMENT = 4;  // emergency-department
+  CARESETTING_OTHER = 5;  // other
+}
+
+enum CentorScoreForStreptococcalPharyngitisSexEnum {
+  SEX_UNSPECIFIED = 0;
+  SEX_FEMALE = 1;  // female
+  SEX_MALE = 2;  // male
+  SEX_INTERSEX = 3;  // intersex
+  SEX_UNKNOWN = 4;  // unknown
+}
+
+enum CentorScoreForStreptococcalPharyngitisTonsillarExudateEnum {
+  TONSILLAREXUDATE_UNSPECIFIED = 0;
+  TONSILLAREXUDATE_YES = 1;  // yes
+  TONSILLAREXUDATE_NO = 2;  // no
+}
+
+enum CentorScoreForStreptococcalPharyngitisTenderAnteriorCervicalNodesEnum {
+  TENDERANTERIORCERVICALNODES_UNSPECIFIED = 0;
+  TENDERANTERIORCERVICALNODES_YES = 1;  // yes
+  TENDERANTERIORCERVICALNODES_NO = 2;  // no
+}
+
+enum CentorScoreForStreptococcalPharyngitisFeverOver38Enum {
+  FEVEROVER38_UNSPECIFIED = 0;
+  FEVEROVER38_YES = 1;  // yes
+  FEVEROVER38_NO = 2;  // no
+}
+
+enum CentorScoreForStreptococcalPharyngitisAbsenceOfCoughEnum {
+  ABSENCEOFCOUGH_UNSPECIFIED = 0;
+  ABSENCEOFCOUGH_YES = 1;  // yes
+  ABSENCEOFCOUGH_NO = 2;  // no
+}
+
+enum CentorScoreForStreptococcalPharyngitisStridorOrBreathingDifficultyEnum {
+  STRIDORORBREATHINGDIFFICULTY_UNSPECIFIED = 0;
+  STRIDORORBREATHINGDIFFICULTY_YES = 1;  // yes
+  STRIDORORBREATHINGDIFFICULTY_NO = 2;  // no
+}
+
+enum CentorScoreForStreptococcalPharyngitisDroolingOrCannotSwallowEnum {
+  DROOLINGORCANNOTSWALLOW_UNSPECIFIED = 0;
+  DROOLINGORCANNOTSWALLOW_YES = 1;  // yes
+  DROOLINGORCANNOTSWALLOW_NO = 2;  // no
+}
+
+enum CentorScoreForStreptococcalPharyngitisTrismusEnum {
+  TRISMUS_UNSPECIFIED = 0;
+  TRISMUS_YES = 1;  // yes
+  TRISMUS_NO = 2;  // no
+}
+
+enum CentorScoreForStreptococcalPharyngitisMuffledVoiceEnum {
+  MUFFLEDVOICE_UNSPECIFIED = 0;
+  MUFFLEDVOICE_YES = 1;  // yes
+  MUFFLEDVOICE_NO = 2;  // no
+}
+
+enum CentorScoreForStreptococcalPharyngitisUnilateralNeckSwellingEnum {
+  UNILATERALNECKSWELLING_UNSPECIFIED = 0;
+  UNILATERALNECKSWELLING_YES = 1;  // yes
+  UNILATERALNECKSWELLING_NO = 2;  // no
+}
+
+message CentorScoreForStreptococcalPharyngitis {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string patient_id = 5;  // UUID — uuid
+  string clinician_id = 6;  // UUID — uuid
+  string clinician_name = 7;  // VARCHAR(255) — max 255 chars
+  CentorScoreForStreptococcalPharyngitisClinicianRoleEnum clinician_role = 8;  // VARCHAR(20)
+  string assessed_at = 9;  // TIMESTAMPTZ — iso 8601
+  CentorScoreForStreptococcalPharyngitisCareSettingEnum care_setting = 10;  // VARCHAR(30)
+  string patient_identifier = 11;  // VARCHAR(100) — max 100 chars
+  int32 age_years = 12;  // INT
+  CentorScoreForStreptococcalPharyngitisSexEnum sex = 13;  // VARCHAR(20)
+  CentorScoreForStreptococcalPharyngitisTonsillarExudateEnum tonsillar_exudate = 14;  // VARCHAR(3)
+  CentorScoreForStreptococcalPharyngitisTenderAnteriorCervicalNodesEnum tender_anterior_cervical_nodes = 15;  // VARCHAR(3)
+  CentorScoreForStreptococcalPharyngitisFeverOver38Enum fever_over_38 = 16;  // VARCHAR(3)
+  double measured_temperature_celsius = 17;  // NUMERIC(4,1) — numeric(4,1)
+  CentorScoreForStreptococcalPharyngitisAbsenceOfCoughEnum absence_of_cough = 18;  // VARCHAR(3)
+  CentorScoreForStreptococcalPharyngitisStridorOrBreathingDifficultyEnum stridor_or_breathing_difficulty = 19;  // VARCHAR(3)
+  CentorScoreForStreptococcalPharyngitisDroolingOrCannotSwallowEnum drooling_or_cannot_swallow = 20;  // VARCHAR(3)
+  CentorScoreForStreptococcalPharyngitisTrismusEnum trismus = 21;  // VARCHAR(3)
+  CentorScoreForStreptococcalPharyngitisMuffledVoiceEnum muffled_voice = 22;  // VARCHAR(3)
+  CentorScoreForStreptococcalPharyngitisUnilateralNeckSwellingEnum unilateral_neck_swelling = 23;  // VARCHAR(3)
+  string clinical_note = 24;  // TEXT
+}

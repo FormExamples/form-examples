@@ -1,0 +1,168 @@
+# Generated from sql/. Do not edit by hand.
+# SOURCE: respect_grade_flag
+openapi: 3.1.0
+info:
+  title: Recommended Summary Plan For Emergency Care And Treatment — RespectGradeFlag
+  version: 1.0.0
+  description: Safety and governance flags that fire independently of the completeness status, with priority and a suggested action for the clinician or governance team.
+paths:
+  /respect-grade-flags:
+    get:
+      summary: List RespectGradeFlag records
+      operationId: listRespectGradeFlag
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of RespectGradeFlag records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/RespectGradeFlag"
+    post:
+      summary: Create a new RespectGradeFlag
+      operationId: createRespectGradeFlag
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/RespectGradeFlag"
+      responses:
+        "201":
+          description: The newly created RespectGradeFlag
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/RespectGradeFlag"
+        "400":
+          description: Validation error
+  /respect-grade-flags/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one RespectGradeFlag by id
+      operationId: getRespectGradeFlag
+      responses:
+        "200":
+          description: The requested RespectGradeFlag
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/RespectGradeFlag"
+        "404":
+          description: RespectGradeFlag not found
+    patch:
+      summary: Update an existing RespectGradeFlag
+      operationId: updateRespectGradeFlag
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/RespectGradeFlag"
+      responses:
+        "200":
+          description: The updated RespectGradeFlag
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/RespectGradeFlag"
+        "404":
+          description: RespectGradeFlag not found
+    delete:
+      summary: Soft-delete a RespectGradeFlag
+      operationId: deleteRespectGradeFlag
+      responses:
+        "204":
+          description: RespectGradeFlag deleted
+        "404":
+          description: RespectGradeFlag not found
+components:
+  schemas:
+    RespectGradeFlag:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was most recently updated.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was soft-deleted.
+        respect_grade_id:
+          type: string
+          format: uuid
+          description: Foreign key to the parent grade.
+        flag_id:
+          type: string
+          maxLength: 50
+          description: Stable flag identifier (e.g. F-CPR-NOT-DOCUMENTED-001).
+        category:
+          type: string
+          enum:
+            - cpr-not-documented
+            - capacity-missing
+            - no-clinician-signature
+            - dnacpr-without-discussion
+            - review-date-passed
+            - health-summary-missing
+            - other
+            - ""
+          description: "Flag category: cpr-not-documented, capacity-missing, no-clinician-signature, dnacpr-without-discussion, review-date-passed, health-summary-missing, or other."
+        priority:
+          type: string
+          enum:
+            - low
+            - medium
+            - high
+            - ""
+          description: "Priority: low, medium, high."
+        description:
+          type: string
+          maxLength: 500
+          description: Human-readable description of what fired the flag.
+        suggested_action:
+          type: string
+          maxLength: 500
+          description: "Suggested clinical or governance action (e.g. \"document a CPR recommendation\", \"obtain a clinician signature\")."
+      required:
+        - created_at
+        - updated_at
+        - respect_grade_id
+        - flag_id
+        - category
+        - priority
+        - description
+        - suggested_action
+      description: Safety and governance flags that fire independently of the completeness status, with priority and a suggested action for the clinician or governance team.

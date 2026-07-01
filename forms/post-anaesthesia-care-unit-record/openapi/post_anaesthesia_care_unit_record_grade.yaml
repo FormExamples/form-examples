@@ -1,0 +1,180 @@
+# Generated from sql/. Do not edit by hand.
+# SOURCE: post_anaesthesia_care_unit_record_grade
+openapi: 3.1.0
+info:
+  title: Post Anaesthesia Care Unit Record — PostAnaesthesiaCareUnitRecordGrade
+  version: 1.0.0
+  description: "Computed PACU grading result: per-parameter Aldrete sub-scores, the summed Aldrete total (0-10), the derived discharge-readiness band, and the optional PADSS total and street-fitness result."
+paths:
+  /post-anaesthesia-care-unit-record-grades:
+    get:
+      summary: List PostAnaesthesiaCareUnitRecordGrade records
+      operationId: listPostAnaesthesiaCareUnitRecordGrade
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of PostAnaesthesiaCareUnitRecordGrade records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/PostAnaesthesiaCareUnitRecordGrade"
+    post:
+      summary: Create a new PostAnaesthesiaCareUnitRecordGrade
+      operationId: createPostAnaesthesiaCareUnitRecordGrade
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/PostAnaesthesiaCareUnitRecordGrade"
+      responses:
+        "201":
+          description: The newly created PostAnaesthesiaCareUnitRecordGrade
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PostAnaesthesiaCareUnitRecordGrade"
+        "400":
+          description: Validation error
+  /post-anaesthesia-care-unit-record-grades/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one PostAnaesthesiaCareUnitRecordGrade by id
+      operationId: getPostAnaesthesiaCareUnitRecordGrade
+      responses:
+        "200":
+          description: The requested PostAnaesthesiaCareUnitRecordGrade
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PostAnaesthesiaCareUnitRecordGrade"
+        "404":
+          description: PostAnaesthesiaCareUnitRecordGrade not found
+    patch:
+      summary: Update an existing PostAnaesthesiaCareUnitRecordGrade
+      operationId: updatePostAnaesthesiaCareUnitRecordGrade
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/PostAnaesthesiaCareUnitRecordGrade"
+      responses:
+        "200":
+          description: The updated PostAnaesthesiaCareUnitRecordGrade
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PostAnaesthesiaCareUnitRecordGrade"
+        "404":
+          description: PostAnaesthesiaCareUnitRecordGrade not found
+    delete:
+      summary: Soft-delete a PostAnaesthesiaCareUnitRecordGrade
+      operationId: deletePostAnaesthesiaCareUnitRecordGrade
+      responses:
+        "204":
+          description: PostAnaesthesiaCareUnitRecordGrade deleted
+        "404":
+          description: PostAnaesthesiaCareUnitRecordGrade not found
+components:
+  schemas:
+    PostAnaesthesiaCareUnitRecordGrade:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was most recently updated.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was soft-deleted.
+        post_anaesthesia_care_unit_record_id:
+          type: string
+          format: uuid
+          description: Foreign key to the parent PACU record (unique, 1:1).
+        activity_score:
+          type: integer
+          format: int32
+          description: Aldrete activity sub-score (0-2).
+        respiration_score:
+          type: integer
+          format: int32
+          description: Aldrete respiration sub-score (0-2).
+        circulation_score:
+          type: integer
+          format: int32
+          description: Aldrete circulation sub-score (0-2).
+        consciousness_score:
+          type: integer
+          format: int32
+          description: Aldrete consciousness sub-score (0-2).
+        oxygen_saturation_score:
+          type: integer
+          format: int32
+          description: Aldrete oxygen-saturation sub-score (0-2); discharge-readiness is gated on this parameter scoring 2.
+        aldrete_total:
+          type: integer
+          format: int32
+          description: Summed Modified Aldrete total across the five parameters (0-10 when complete).
+        discharge_ready:
+          type: string
+          enum:
+            - not-ready
+            - discharge-ready
+            - ""
+          description: "Derived discharge-readiness band: discharge-ready (Aldrete >= 9 and oxygen-saturation score = 2) or not-ready."
+        padss_total:
+          type: integer
+          format: int32
+          description: Summed PADSS total (0-10) for ambulatory cases with all five criteria supplied; null otherwise.
+        padss_street_fit:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: "PADSS street-fitness result: yes (PADSS total >= 9), no, or empty when PADSS was not scored."
+        graded_at:
+          type: string
+          format: date-time
+          description: Timestamp when the engine last computed the grade.
+      required:
+        - created_at
+        - updated_at
+        - post_anaesthesia_care_unit_record_id
+        - discharge_ready
+        - padss_street_fit
+        - graded_at
+      description: "Computed PACU grading result: per-parameter Aldrete sub-scores, the summed Aldrete total (0-10), the derived discharge-readiness band, and the optional PADSS total and street-fitness result."

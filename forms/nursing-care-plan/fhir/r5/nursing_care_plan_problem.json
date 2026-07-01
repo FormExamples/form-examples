@@ -1,0 +1,180 @@
+{
+  "resourceType": "Observation",
+  "id": "880e8400-e29b-41d4-a716-446655440003",
+  "meta": {
+    "profile": [
+      "http://hl7.org/fhir/StructureDefinition/Observation"
+    ],
+    "lastUpdated": "2026-04-09T10:00:00+00:00"
+  },
+  "status": "final",
+  "category": [
+    {
+      "coding": [
+        {
+          "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+          "code": "survey",
+          "display": "Survey"
+        }
+      ]
+    }
+  ],
+  "code": {
+    "coding": [
+      {
+        "system": "urn:form-examples:nursing-care-plan",
+        "code": "nursing_care_plan_problem",
+        "display": "Nursing Care Plan Problem"
+      }
+    ]
+  },
+  "subject": {
+    "reference": "Patient/550e8400-e29b-41d4-a716-446655440000"
+  },
+  "encounter": {
+    "reference": "Encounter/ee0e8400-e29b-41d4-a716-446655440009"
+  },
+  "effectiveDateTime": "2026-04-09T10:00:00+00:00",
+  "component": [
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:nursing-care-plan",
+            "code": "deleted_at",
+            "display": "Deleted At"
+          }
+        ]
+      },
+      "valueDateTime": "2026-04-09T10:00:00+00:00"
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:nursing-care-plan",
+            "code": "problem_statement",
+            "display": "Problem Statement"
+          }
+        ]
+      },
+      "valueString": ""
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:nursing-care-plan",
+            "code": "adl_category",
+            "display": "Adl Category"
+          }
+        ]
+      },
+      "valueCodeableConcept": {
+        "coding": [
+          {
+            "system": "urn:form-examples:nursing-care-plan:adl_category",
+            "code": "safe-environment",
+            "display": "Safe-Environment"
+          }
+        ]
+      }
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:nursing-care-plan",
+            "code": "actual_or_potential",
+            "display": "Actual Or Potential"
+          }
+        ]
+      },
+      "valueCodeableConcept": {
+        "coding": [
+          {
+            "system": "urn:form-examples:nursing-care-plan:actual_or_potential",
+            "code": "actual",
+            "display": "Actual"
+          }
+        ]
+      }
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:nursing-care-plan",
+            "code": "assessment_data",
+            "display": "Assessment Data"
+          }
+        ]
+      },
+      "valueString": ""
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:nursing-care-plan",
+            "code": "linked_risk",
+            "display": "Linked Risk"
+          }
+        ]
+      },
+      "valueCodeableConcept": {
+        "coding": [
+          {
+            "system": "urn:form-examples:nursing-care-plan:linked_risk",
+            "code": "none",
+            "display": "None"
+          }
+        ]
+      }
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:nursing-care-plan",
+            "code": "evaluation_note",
+            "display": "Evaluation Note"
+          }
+        ]
+      },
+      "valueString": ""
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:nursing-care-plan",
+            "code": "goal_met",
+            "display": "Goal Met"
+          }
+        ]
+      },
+      "valueCodeableConcept": {
+        "coding": [
+          {
+            "system": "urn:form-examples:nursing-care-plan:goal_met",
+            "code": "met",
+            "display": "Met"
+          }
+        ]
+      }
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:nursing-care-plan",
+            "code": "next_review_date",
+            "display": "Next Review Date"
+          }
+        ]
+      },
+      "valueDateTime": "2026-01-15"
+    }
+  ]
+}

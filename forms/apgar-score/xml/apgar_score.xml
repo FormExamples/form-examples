@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE apgar_score SYSTEM "apgar_score.dtd">
+<apgar_score>
+<id>770e8400-e29b-41d4-a716-446655440002</id>
+<created_at>2026-04-09T10:00:00Z</created_at>
+<updated_at>2026-04-09T10:00:00Z</updated_at>
+<deleted_at>2026-04-09T10:00:00Z</deleted_at>
+<patient_id>550e8400-e29b-41d4-a716-446655440000</patient_id>
+<clinician_id>660e8400-e29b-41d4-a716-446655440001</clinician_id>
+<clinician_name>Example</clinician_name>
+<clinician_role>midwife</clinician_role>
+<born_at>2026-04-09T10:00:00Z</born_at>
+<care_setting>delivery-room</care_setting>
+<gestational_age_weeks>0.0</gestational_age_weeks>
+<mode_of_delivery>vaginal</mode_of_delivery>
+<newborn_identifier></newborn_identifier>
+<sex>female</sex>
+<birth_order>1</birth_order>
+<resuscitation_measures></resuscitation_measures>
+<clinician_note>Dr Smith</clinician_note>
+</apgar_score>

@@ -1,0 +1,91 @@
+// Generated from sql/. Do not edit by hand.
+// SOURCE: partogram_observation
+
+syntax = "proto3";
+
+package form_examples.partogram;
+
+enum PartogramObservationContractionDurationBandEnum {
+  CONTRACTIONDURATIONBAND_UNSPECIFIED = 0;
+  CONTRACTIONDURATIONBAND_V_20S = 1;  // <20s
+  CONTRACTIONDURATIONBAND_V_20_40S = 2;  // 20-40s
+  CONTRACTIONDURATIONBAND_V_40S = 3;  // >40s
+}
+
+enum PartogramObservationContractionStrengthEnum {
+  CONTRACTIONSTRENGTH_UNSPECIFIED = 0;
+  CONTRACTIONSTRENGTH_MILD = 1;  // mild
+  CONTRACTIONSTRENGTH_MODERATE = 2;  // moderate
+  CONTRACTIONSTRENGTH_STRONG = 3;  // strong
+}
+
+enum PartogramObservationLiquorStateEnum {
+  LIQUORSTATE_UNSPECIFIED = 0;
+  LIQUORSTATE_INTACT = 1;  // intact
+  LIQUORSTATE_CLEAR = 2;  // clear
+  LIQUORSTATE_MECONIUM = 3;  // meconium
+  LIQUORSTATE_BLOOD_STAINED = 4;  // blood-stained
+  LIQUORSTATE_ABSENT = 5;  // absent
+}
+
+enum PartogramObservationMouldingEnum {
+  MOULDING_UNSPECIFIED = 0;
+  MOULDING_V_0 = 1;  // 0
+  MOULDING_EMPTY = 2;  // +
+  MOULDING_EMPTY = 3;  // ++
+  MOULDING_EMPTY = 4;  // +++
+}
+
+enum PartogramObservationUrineProteinEnum {
+  URINEPROTEIN_UNSPECIFIED = 0;
+  URINEPROTEIN_NEGATIVE = 1;  // negative
+  URINEPROTEIN_TRACE = 2;  // trace
+  URINEPROTEIN_EMPTY = 3;  // +
+  URINEPROTEIN_EMPTY = 4;  // ++
+  URINEPROTEIN_EMPTY = 5;  // +++
+}
+
+enum PartogramObservationUrineKetonesEnum {
+  URINEKETONES_UNSPECIFIED = 0;
+  URINEKETONES_NEGATIVE = 1;  // negative
+  URINEKETONES_TRACE = 2;  // trace
+  URINEKETONES_EMPTY = 3;  // +
+  URINEKETONES_EMPTY = 4;  // ++
+  URINEKETONES_EMPTY = 5;  // +++
+}
+
+enum PartogramObservationUrineGlucoseEnum {
+  URINEGLUCOSE_UNSPECIFIED = 0;
+  URINEGLUCOSE_NEGATIVE = 1;  // negative
+  URINEGLUCOSE_TRACE = 2;  // trace
+  URINEGLUCOSE_EMPTY = 3;  // +
+  URINEGLUCOSE_EMPTY = 4;  // ++
+  URINEGLUCOSE_EMPTY = 5;  // +++
+}
+
+message PartogramObservation {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string partogram_id = 5;  // UUID — uuid
+  string observed_at = 6;  // TIMESTAMPTZ — iso 8601
+  double cervical_dilatation_cm = 7;  // NUMERIC(3,1) — numeric(3,1)
+  double descent_fifths = 8;  // NUMERIC(2,1) — numeric(2,1)
+  double contractions_per_10_min = 9;  // NUMERIC(3,0) — numeric(3,0)
+  PartogramObservationContractionDurationBandEnum contraction_duration_band = 10;  // VARCHAR(10)
+  PartogramObservationContractionStrengthEnum contraction_strength = 11;  // VARCHAR(10)
+  int32 fetal_heart_rate = 12;  // INTEGER
+  PartogramObservationLiquorStateEnum liquor_state = 13;  // VARCHAR(15)
+  PartogramObservationMouldingEnum moulding = 14;  // VARCHAR(5)
+  int32 systolic_blood_pressure = 15;  // INTEGER
+  int32 diastolic_blood_pressure = 16;  // INTEGER
+  int32 pulse = 17;  // INTEGER
+  double temperature = 18;  // NUMERIC(4,1) — numeric(4,1)
+  double urine_volume_ml = 19;  // NUMERIC(6,0) — numeric(6,0)
+  PartogramObservationUrineProteinEnum urine_protein = 20;  // VARCHAR(10)
+  PartogramObservationUrineKetonesEnum urine_ketones = 21;  // VARCHAR(10)
+  PartogramObservationUrineGlucoseEnum urine_glucose = 22;  // VARCHAR(10)
+  double oxytocin_rate = 23;  // NUMERIC(6,1) — numeric(6,1)
+  string drugs_and_fluids = 24;  // TEXT
+}

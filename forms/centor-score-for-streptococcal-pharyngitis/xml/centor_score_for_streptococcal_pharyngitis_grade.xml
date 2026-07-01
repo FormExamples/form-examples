@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE centor_score_for_streptococcal_pharyngitis_grade SYSTEM "centor_score_for_streptococcal_pharyngitis_grade.dtd">
+<centor_score_for_streptococcal_pharyngitis_grade>
+<id>880e8400-e29b-41d4-a716-446655440003</id>
+<created_at>2026-04-09T10:00:00Z</created_at>
+<updated_at>2026-04-09T10:00:00Z</updated_at>
+<deleted_at>2026-04-09T10:00:00Z</deleted_at>
+<centor_score_for_streptococcal_pharyngitis_id>770e8400-e29b-41d4-a716-446655440002</centor_score_for_streptococcal_pharyngitis_id>
+<centor_score>5</centor_score>
+<age_modifier>45</age_modifier>
+<mcisaac_score>5</mcisaac_score>
+<risk_band>low</risk_band>
+<management></management>
+<graded_at>2026-04-09T10:00:00Z</graded_at>
+</centor_score_for_streptococcal_pharyngitis_grade>

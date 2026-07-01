@@ -1,0 +1,97 @@
+// Generated from sql/. Do not edit by hand.
+// SOURCE: grace_score_for_acute_coronary_syndrome
+
+syntax = "proto3";
+
+package form_examples.grace_score_for_acute_coronary_syndrome;
+
+enum GraceScoreForAcuteCoronarySyndromeClinicianRoleEnum {
+  CLINICIANROLE_UNSPECIFIED = 0;
+  CLINICIANROLE_EMERGENCY_PHYSICIAN = 1;  // emergency-physician
+  CLINICIANROLE_ACUTE_PHYSICIAN = 2;  // acute-physician
+  CLINICIANROLE_CARDIOLOGIST = 3;  // cardiologist
+  CLINICIANROLE_NURSE = 4;  // nurse
+  CLINICIANROLE_OTHER = 5;  // other
+}
+
+enum GraceScoreForAcuteCoronarySyndromeCareSettingEnum {
+  CARESETTING_UNSPECIFIED = 0;
+  CARESETTING_EMERGENCY_DEPARTMENT = 1;  // emergency-department
+  CARESETTING_ACUTE_MEDICAL_UNIT = 2;  // acute-medical-unit
+  CARESETTING_CORONARY_CARE_UNIT = 3;  // coronary-care-unit
+  CARESETTING_CARDIOLOGY_WARD = 4;  // cardiology-ward
+  CARESETTING_OTHER = 5;  // other
+}
+
+enum GraceScoreForAcuteCoronarySyndromePresentationTypeEnum {
+  PRESENTATIONTYPE_UNSPECIFIED = 0;
+  PRESENTATIONTYPE_NSTEMI = 1;  // nstemi
+  PRESENTATIONTYPE_UNSTABLE_ANGINA = 2;  // unstable-angina
+  PRESENTATIONTYPE_STEMI = 3;  // stemi
+}
+
+enum GraceScoreForAcuteCoronarySyndromeSexEnum {
+  SEX_UNSPECIFIED = 0;
+  SEX_FEMALE = 1;  // female
+  SEX_MALE = 2;  // male
+  SEX_INTERSEX = 3;  // intersex
+  SEX_UNKNOWN = 4;  // unknown
+}
+
+enum GraceScoreForAcuteCoronarySyndromeSerumCreatinineUnitEnum {
+  SERUMCREATININEUNIT_UNSPECIFIED = 0;
+  SERUMCREATININEUNIT_MG_DL = 1;  // mg/dL
+  SERUMCREATININEUNIT_UMOL_L = 2;  // umol/L
+}
+
+enum GraceScoreForAcuteCoronarySyndromeKillipClassEnum {
+  KILLIPCLASS_UNSPECIFIED = 0;
+  KILLIPCLASS_I = 1;  // I
+  KILLIPCLASS_II = 2;  // II
+  KILLIPCLASS_III = 3;  // III
+  KILLIPCLASS_IV = 4;  // IV
+}
+
+enum GraceScoreForAcuteCoronarySyndromeCardiacArrestAtAdmissionEnum {
+  CARDIACARRESTATADMISSION_UNSPECIFIED = 0;
+  CARDIACARRESTATADMISSION_YES = 1;  // yes
+  CARDIACARRESTATADMISSION_NO = 2;  // no
+}
+
+enum GraceScoreForAcuteCoronarySyndromeStSegmentDeviationEnum {
+  STSEGMENTDEVIATION_UNSPECIFIED = 0;
+  STSEGMENTDEVIATION_YES = 1;  // yes
+  STSEGMENTDEVIATION_NO = 2;  // no
+}
+
+enum GraceScoreForAcuteCoronarySyndromeElevatedCardiacEnzymesEnum {
+  ELEVATEDCARDIACENZYMES_UNSPECIFIED = 0;
+  ELEVATEDCARDIACENZYMES_YES = 1;  // yes
+  ELEVATEDCARDIACENZYMES_NO = 2;  // no
+}
+
+message GraceScoreForAcuteCoronarySyndrome {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string patient_id = 5;  // UUID — uuid
+  string clinician_id = 6;  // UUID — uuid
+  string clinician_name = 7;  // VARCHAR(255) — max 255 chars
+  GraceScoreForAcuteCoronarySyndromeClinicianRoleEnum clinician_role = 8;  // VARCHAR(30)
+  string assessed_at = 9;  // TIMESTAMPTZ — iso 8601
+  GraceScoreForAcuteCoronarySyndromeCareSettingEnum care_setting = 10;  // VARCHAR(30)
+  GraceScoreForAcuteCoronarySyndromePresentationTypeEnum presentation_type = 11;  // VARCHAR(20)
+  string patient_identifier = 12;  // VARCHAR(100) — max 100 chars
+  int32 age_years = 13;  // INT
+  GraceScoreForAcuteCoronarySyndromeSexEnum sex = 14;  // VARCHAR(20)
+  int32 heart_rate = 15;  // INT
+  int32 systolic_blood_pressure = 16;  // INT
+  double serum_creatinine = 17;  // NUMERIC(6,2) — numeric(6,2)
+  GraceScoreForAcuteCoronarySyndromeSerumCreatinineUnitEnum serum_creatinine_unit = 18;  // VARCHAR(10)
+  GraceScoreForAcuteCoronarySyndromeKillipClassEnum killip_class = 19;  // VARCHAR(3)
+  GraceScoreForAcuteCoronarySyndromeCardiacArrestAtAdmissionEnum cardiac_arrest_at_admission = 20;  // VARCHAR(3)
+  GraceScoreForAcuteCoronarySyndromeStSegmentDeviationEnum st_segment_deviation = 21;  // VARCHAR(3)
+  GraceScoreForAcuteCoronarySyndromeElevatedCardiacEnzymesEnum elevated_cardiac_enzymes = 22;  // VARCHAR(3)
+  string clinical_note = 23;  // TEXT
+}

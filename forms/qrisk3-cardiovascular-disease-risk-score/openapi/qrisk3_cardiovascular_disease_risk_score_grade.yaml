@@ -1,0 +1,157 @@
+# Generated from sql/. Do not edit by hand.
+# SOURCE: qrisk3_cardiovascular_disease_risk_score_grade
+openapi: 3.1.0
+info:
+  title: Qrisk3 Cardiovascular Disease Risk Score — Qrisk3CardiovascularDiseaseRiskScoreGrade
+  version: 1.0.0
+  description: "Computed QRISK3 grading result: the linear predictor, the 10-year CVD risk percentage, the derived risk band, and the estimated heart age."
+paths:
+  /qrisk3-cardiovascular-disease-risk-score-grades:
+    get:
+      summary: List Qrisk3CardiovascularDiseaseRiskScoreGrade records
+      operationId: listQrisk3CardiovascularDiseaseRiskScoreGrade
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of Qrisk3CardiovascularDiseaseRiskScoreGrade records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Qrisk3CardiovascularDiseaseRiskScoreGrade"
+    post:
+      summary: Create a new Qrisk3CardiovascularDiseaseRiskScoreGrade
+      operationId: createQrisk3CardiovascularDiseaseRiskScoreGrade
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Qrisk3CardiovascularDiseaseRiskScoreGrade"
+      responses:
+        "201":
+          description: The newly created Qrisk3CardiovascularDiseaseRiskScoreGrade
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Qrisk3CardiovascularDiseaseRiskScoreGrade"
+        "400":
+          description: Validation error
+  /qrisk3-cardiovascular-disease-risk-score-grades/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one Qrisk3CardiovascularDiseaseRiskScoreGrade by id
+      operationId: getQrisk3CardiovascularDiseaseRiskScoreGrade
+      responses:
+        "200":
+          description: The requested Qrisk3CardiovascularDiseaseRiskScoreGrade
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Qrisk3CardiovascularDiseaseRiskScoreGrade"
+        "404":
+          description: Qrisk3CardiovascularDiseaseRiskScoreGrade not found
+    patch:
+      summary: Update an existing Qrisk3CardiovascularDiseaseRiskScoreGrade
+      operationId: updateQrisk3CardiovascularDiseaseRiskScoreGrade
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Qrisk3CardiovascularDiseaseRiskScoreGrade"
+      responses:
+        "200":
+          description: The updated Qrisk3CardiovascularDiseaseRiskScoreGrade
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Qrisk3CardiovascularDiseaseRiskScoreGrade"
+        "404":
+          description: Qrisk3CardiovascularDiseaseRiskScoreGrade not found
+    delete:
+      summary: Soft-delete a Qrisk3CardiovascularDiseaseRiskScoreGrade
+      operationId: deleteQrisk3CardiovascularDiseaseRiskScoreGrade
+      responses:
+        "204":
+          description: Qrisk3CardiovascularDiseaseRiskScoreGrade deleted
+        "404":
+          description: Qrisk3CardiovascularDiseaseRiskScoreGrade not found
+components:
+  schemas:
+    Qrisk3CardiovascularDiseaseRiskScoreGrade:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was most recently updated.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was soft-deleted.
+        qrisk3_cardiovascular_disease_risk_score_id:
+          type: string
+          format: uuid
+          description: Foreign key to the parent assessment (unique, 1:1).
+        ten_year_risk_percent:
+          type: number
+          format: double
+          description: Ten-year cardiovascular disease risk percentage (0.0-99.9, one decimal place).
+        risk_band:
+          type: string
+          enum:
+            - low
+            - raised
+            - high
+            - ""
+          description: "Derived risk band: low (< 10%), raised (>= 10%), or high (>= 20%)."
+        heart_age:
+          type: number
+          format: double
+          description: Estimated heart age in years for the same risk with modifiable factors optimal (null when not computable).
+        linear_predictor:
+          type: number
+          format: double
+          description: Linear predictor from the sex-specific Cox proportional-hazards model.
+        graded_at:
+          type: string
+          format: date-time
+          description: Timestamp when the engine last computed the grade.
+      required:
+        - created_at
+        - updated_at
+        - qrisk3_cardiovascular_disease_risk_score_id
+        - risk_band
+        - graded_at
+      description: "Computed QRISK3 grading result: the linear predictor, the 10-year CVD risk percentage, the derived risk band, and the estimated heart age."

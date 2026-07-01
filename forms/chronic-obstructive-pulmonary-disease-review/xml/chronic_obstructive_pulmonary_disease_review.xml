@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE chronic_obstructive_pulmonary_disease_review SYSTEM "chronic_obstructive_pulmonary_disease_review.dtd">
+<chronic_obstructive_pulmonary_disease_review>
+<id>770e8400-e29b-41d4-a716-446655440002</id>
+<created_at>2026-04-09T10:00:00Z</created_at>
+<updated_at>2026-04-09T10:00:00Z</updated_at>
+<deleted_at>2026-04-09T10:00:00Z</deleted_at>
+<patient_id>550e8400-e29b-41d4-a716-446655440000</patient_id>
+<clinician_id>660e8400-e29b-41d4-a716-446655440001</clinician_id>
+<clinician_name>Example</clinician_name>
+<clinician_role>gp</clinician_role>
+<reviewed_at>2026-01-15</reviewed_at>
+<review_type>routine-annual</review_type>
+<patient_identifier></patient_identifier>
+<age_band>18-39</age_band>
+<sex>female</sex>
+<diagnosis_year>2026</diagnosis_year>
+<spirometry_confirmed>yes</spirometry_confirmed>
+<exposure_notes>Example text.</exposure_notes>
+<fev1_litres>0.0</fev1_litres>
+<fev1_percent_predicted>50.0</fev1_percent_predicted>
+<fvc_litres>0.0</fvc_litres>
+<fev1_fvc_ratio>1.5</fev1_fvc_ratio>
+<spirometry_date>2026-01-15</spirometry_date>
+<mrc_grade>1</mrc_grade>
+<mmrc_grade>1</mmrc_grade>
+<cat_score>5</cat_score>
+<exacerbations_last_12m>1</exacerbations_last_12m>
+<hospitalisations_last_12m>1</hospitalisations_last_12m>
+<last_exacerbation_date>2026-01-15</last_exacerbation_date>
+<rescue_pack_courses>1</rescue_pack_courses>
+<smoking_status>current</smoking_status>
+<pack_years>0.0</pack_years>
+<cessation_support_offered>yes</cessation_support_offered>
+<inhaled_therapy>Example treatment</inhaled_therapy>
+<device_type>standard</device_type>
+<inhaler_technique_checked>yes</inhaler_technique_checked>
+<inhaler_technique_adequate>yes</inhaler_technique_adequate>
+<adherence>good</adherence>
+<influenza_vaccine>up-to-date</influenza_vaccine>
+<pneumococcal_vaccine>up-to-date</pneumococcal_vaccine>
+<covid_vaccine>up-to-date</covid_vaccine>
+<pulmonary_rehab_status>completed</pulmonary_rehab_status>
+<oxygen_use>none</oxygen_use>
+<resting_spo2>1</resting_spo2>
+<comorbidities></comorbidities>
+<self_management_plan>yes</self_management_plan>
+<rescue_pack_supplied>yes</rescue_pack_supplied>
+<next_review_interval></next_review_interval>
+<clinician_note>Dr Smith</clinician_note>
+</chronic_obstructive_pulmonary_disease_review>

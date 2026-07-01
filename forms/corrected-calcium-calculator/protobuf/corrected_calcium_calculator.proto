@@ -1,0 +1,68 @@
+// Generated from sql/. Do not edit by hand.
+// SOURCE: corrected_calcium_calculator
+
+syntax = "proto3";
+
+package form_examples.corrected_calcium_calculator;
+
+enum CorrectedCalciumCalculatorClinicianRoleEnum {
+  CLINICIANROLE_UNSPECIFIED = 0;
+  CLINICIANROLE_DOCTOR = 1;  // doctor
+  CLINICIANROLE_NURSE = 2;  // nurse
+  CLINICIANROLE_PHARMACIST = 3;  // pharmacist
+  CLINICIANROLE_LABORATORY_STAFF = 4;  // laboratory-staff
+  CLINICIANROLE_OTHER = 5;  // other
+}
+
+enum CorrectedCalciumCalculatorCareSettingEnum {
+  CARESETTING_UNSPECIFIED = 0;
+  CARESETTING_GENERAL_PRACTICE = 1;  // general-practice
+  CARESETTING_WARD = 2;  // ward
+  CARESETTING_EMERGENCY_DEPARTMENT = 3;  // emergency-department
+  CARESETTING_OUTPATIENT = 4;  // outpatient
+  CARESETTING_LABORATORY = 5;  // laboratory
+  CARESETTING_OTHER = 6;  // other
+}
+
+enum CorrectedCalciumCalculatorAgeBandEnum {
+  AGEBAND_UNSPECIFIED = 0;
+  AGEBAND_V_18_39 = 1;  // 18-39
+  AGEBAND_V_40_64 = 2;  // 40-64
+  AGEBAND_V_65_74 = 3;  // 65-74
+  AGEBAND_V_75_84 = 4;  // 75-84
+  AGEBAND_V_85_PLUS = 5;  // 85-plus
+}
+
+enum CorrectedCalciumCalculatorSexEnum {
+  SEX_UNSPECIFIED = 0;
+  SEX_FEMALE = 1;  // female
+  SEX_MALE = 2;  // male
+  SEX_INTERSEX = 3;  // intersex
+  SEX_UNKNOWN = 4;  // unknown
+}
+
+enum CorrectedCalciumCalculatorSymptomaticEnum {
+  SYMPTOMATIC_UNSPECIFIED = 0;
+  SYMPTOMATIC_YES = 1;  // yes
+  SYMPTOMATIC_NO = 2;  // no
+}
+
+message CorrectedCalciumCalculator {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string patient_id = 5;  // UUID — uuid
+  string clinician_id = 6;  // UUID — uuid
+  string clinician_name = 7;  // VARCHAR(255) — max 255 chars
+  CorrectedCalciumCalculatorClinicianRoleEnum clinician_role = 8;  // VARCHAR(20)
+  string assessed_at = 9;  // TIMESTAMPTZ — iso 8601
+  CorrectedCalciumCalculatorCareSettingEnum care_setting = 10;  // VARCHAR(30)
+  string sample_reference = 11;  // VARCHAR(100) — max 100 chars
+  string patient_identifier = 12;  // VARCHAR(100) — max 100 chars
+  CorrectedCalciumCalculatorAgeBandEnum age_band = 13;  // VARCHAR(20)
+  CorrectedCalciumCalculatorSexEnum sex = 14;  // VARCHAR(20)
+  double total_calcium_mmol_l = 15;  // NUMERIC(4,2) — numeric(4,2)
+  double albumin_g_l = 16;  // NUMERIC(5,2) — numeric(5,2)
+  CorrectedCalciumCalculatorSymptomaticEnum symptomatic = 17;  // VARCHAR(5)
+}

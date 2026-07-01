@@ -1,0 +1,263 @@
+# Generated from sql/. Do not edit by hand.
+# SOURCE: dexa_bone_density_test_result
+openapi: 3.1.0
+info:
+  title: Dexa Bone Density Test Result — DexaBoneDensityTestResult
+  version: 1.0.0
+  description: DEXA / DXA (dual-energy X-ray absorptiometry) bone-density result (report). Captures the performed examination, the clinical history, the quantitative findings (BMD in g/cm2, T-scores and Z-scores at the lumbar spine, femoral neck, and total hip, plus the lowest T-score), the WHO densitometric classification, FRAX 10-year fracture probabilities, vertebral-fracture identification, comparison with previous DEXA, the impression, and recommended follow-up. This is the source-of-truth record that the four-axis interpretation grade is computed from.
+paths:
+  /dexa-bone-density-test-results:
+    get:
+      summary: List DexaBoneDensityTestResult records
+      operationId: listDexaBoneDensityTestResult
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of DexaBoneDensityTestResult records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/DexaBoneDensityTestResult"
+    post:
+      summary: Create a new DexaBoneDensityTestResult
+      operationId: createDexaBoneDensityTestResult
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/DexaBoneDensityTestResult"
+      responses:
+        "201":
+          description: The newly created DexaBoneDensityTestResult
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/DexaBoneDensityTestResult"
+        "400":
+          description: Validation error
+  /dexa-bone-density-test-results/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one DexaBoneDensityTestResult by id
+      operationId: getDexaBoneDensityTestResult
+      responses:
+        "200":
+          description: The requested DexaBoneDensityTestResult
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/DexaBoneDensityTestResult"
+        "404":
+          description: DexaBoneDensityTestResult not found
+    patch:
+      summary: Update an existing DexaBoneDensityTestResult
+      operationId: updateDexaBoneDensityTestResult
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/DexaBoneDensityTestResult"
+      responses:
+        "200":
+          description: The updated DexaBoneDensityTestResult
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/DexaBoneDensityTestResult"
+        "404":
+          description: DexaBoneDensityTestResult not found
+    delete:
+      summary: Soft-delete a DexaBoneDensityTestResult
+      operationId: deleteDexaBoneDensityTestResult
+      responses:
+        "204":
+          description: DexaBoneDensityTestResult deleted
+        "404":
+          description: DexaBoneDensityTestResult not found
+components:
+  schemas:
+    DexaBoneDensityTestResult:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was updated most-recently.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was deleted a.k.a. soft-removed.
+        patient_id:
+          type: string
+          format: uuid
+          description: Foreign key to the patient.
+        clinician_id:
+          type: string
+          format: uuid
+          description: Foreign key to the reporting clinician (radiologist / consultant / reporting radiographer / rheumatologist / endocrinologist).
+        originating_request_reference:
+          type: string
+          maxLength: 255
+          description: Free-text reference linking this report back to the originating DEXA scan request (referral).
+        report_status:
+          type: string
+          enum:
+            - preliminary
+            - final
+            - amended
+            - cancelled
+            - ""
+          description: "Report lifecycle status: preliminary, final, amended, cancelled."
+        performed_date:
+          type: string
+          format: date
+          description: Date the DEXA examination was performed.
+        reported_date:
+          type: string
+          format: date
+          description: Date the report was authored / signed.
+        scan_region:
+          type: string
+          enum:
+            - hip
+            - spine
+            - hip-and-spine
+            - forearm
+            - whole-body
+            - other
+            - ""
+          description: "Examined DEXA scan region: hip, spine, hip-and-spine, forearm, whole-body, other."
+        examination_adequacy:
+          type: string
+          enum:
+            - adequate
+            - limited
+            - non-diagnostic
+            - ""
+          description: "Diagnostic adequacy of the examination: adequate, limited, non-diagnostic."
+        clinical_history:
+          type: string
+          maxLength: 1000
+          description: Clinical history and the question the examination was performed to answer.
+        lumbar_spine_t_score:
+          type: number
+          format: double
+          description: "Lumbar-spine T-score: standard deviations from young-adult reference mean (WHO classification input)."
+        lumbar_spine_z_score:
+          type: number
+          format: double
+          description: "Lumbar-spine Z-score: standard deviations from age-matched reference mean (used in younger adults / children)."
+        femoral_neck_t_score:
+          type: number
+          format: double
+          description: "Femoral-neck T-score: standard deviations from young-adult reference mean (reference site for WHO classification and FRAX)."
+        femoral_neck_z_score:
+          type: number
+          format: double
+          description: "Femoral-neck Z-score: standard deviations from age-matched reference mean."
+        total_hip_t_score:
+          type: number
+          format: double
+          description: "Total-hip T-score: standard deviations from young-adult reference mean."
+        lowest_t_score:
+          type: number
+          format: double
+          description: Lowest (most negative) T-score across the measured skeletal sites, which drives the WHO classification.
+        bone_mineral_density_g_cm2:
+          type: number
+          format: double
+          description: Areal bone mineral density (BMD) in g/cm2 at the reference site.
+        who_classification:
+          type: string
+          enum:
+            - normal
+            - osteopenia
+            - osteoporosis
+            - severe-osteoporosis
+            - ""
+          description: "WHO densitometric classification derived from the lowest T-score: normal, osteopenia, osteoporosis, severe-osteoporosis."
+        frax_major_fracture_percent:
+          type: number
+          format: double
+          description: FRAX 10-year major osteoporotic fracture probability as a percentage (0-100).
+        frax_hip_fracture_percent:
+          type: number
+          format: double
+          description: FRAX 10-year hip fracture probability as a percentage (0-100).
+        vertebral_fracture_identified:
+          type: boolean
+          description: Whether one or more vertebral fractures were identified (e.g. on vertebral fracture assessment / lateral spine imaging).
+        comparison_with_previous:
+          type: string
+          maxLength: 1000
+          description: Comparison with the relevant previous DEXA examination.
+        percent_change_since_previous:
+          type: number
+          format: double
+          description: Percentage change in BMD since the previous DEXA (positive = gain, negative = loss), for monitoring.
+        impression:
+          type: string
+          maxLength: 2000
+          description: Summary impression / conclusion answering the clinical question.
+        recommended_follow_up:
+          type: string
+          maxLength: 1000
+          description: Recommended follow-up scan interval, referral, or management.
+        critical_result_communicated:
+          type: boolean
+          description: Whether a critical or unexpected significant result was communicated directly to the referrer.
+        reported_to:
+          type: string
+          maxLength: 500
+          description: Who the critical / urgent result was communicated to, with date and time if applicable.
+      required:
+        - created_at
+        - updated_at
+        - patient_id
+        - clinician_id
+        - originating_request_reference
+        - report_status
+        - scan_region
+        - examination_adequacy
+        - clinical_history
+        - who_classification
+        - vertebral_fracture_identified
+        - comparison_with_previous
+        - impression
+        - recommended_follow_up
+        - critical_result_communicated
+        - reported_to
+      description: DEXA / DXA (dual-energy X-ray absorptiometry) bone-density result (report). Captures the performed examination, the clinical history, the quantitative findings (BMD in g/cm2, T-scores and Z-scores at the lumbar spine, femoral neck, and total hip, plus the lowest T-score), the WHO densitometric classification, FRAX 10-year fracture probabilities, vertebral-fracture identification, comparison with previous DEXA, the impression, and recommended follow-up. This is the source-of-truth record that the four-axis interpretation grade is computed from.

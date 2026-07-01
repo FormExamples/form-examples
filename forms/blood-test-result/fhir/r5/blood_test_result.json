@@ -1,0 +1,566 @@
+{
+  "resourceType": "Observation",
+  "id": "770e8400-e29b-41d4-a716-446655440002",
+  "meta": {
+    "profile": [
+      "http://hl7.org/fhir/StructureDefinition/Observation"
+    ],
+    "lastUpdated": "2026-04-09T10:00:00+00:00"
+  },
+  "status": "final",
+  "category": [
+    {
+      "coding": [
+        {
+          "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+          "code": "survey",
+          "display": "Survey"
+        }
+      ]
+    }
+  ],
+  "code": {
+    "coding": [
+      {
+        "system": "urn:form-examples:blood-test-result",
+        "code": "blood_test_result",
+        "display": "Blood Test Result"
+      }
+    ]
+  },
+  "subject": {
+    "reference": "Patient/550e8400-e29b-41d4-a716-446655440000"
+  },
+  "encounter": {
+    "reference": "Encounter/bb0e8400-e29b-41d4-a716-446655440006"
+  },
+  "effectiveDateTime": "2026-04-09T10:00:00+00:00",
+  "component": [
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:blood-test-result",
+            "code": "deleted_at",
+            "display": "Deleted At"
+          }
+        ]
+      },
+      "valueDateTime": "2026-04-09T10:00:00+00:00"
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:blood-test-result",
+            "code": "originating_request_reference",
+            "display": "Originating Request Reference"
+          }
+        ]
+      },
+      "valueString": ""
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:blood-test-result",
+            "code": "report_status",
+            "display": "Report Status"
+          }
+        ]
+      },
+      "valueCodeableConcept": {
+        "coding": [
+          {
+            "system": "urn:form-examples:blood-test-result:report_status",
+            "code": "preliminary",
+            "display": "Preliminary"
+          }
+        ]
+      }
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:blood-test-result",
+            "code": "performed_date",
+            "display": "Performed Date"
+          }
+        ]
+      },
+      "valueDateTime": "2026-01-15"
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:blood-test-result",
+            "code": "reported_date",
+            "display": "Reported Date"
+          }
+        ]
+      },
+      "valueDateTime": "2026-01-15"
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:blood-test-result",
+            "code": "specimen_type",
+            "display": "Specimen Type"
+          }
+        ]
+      },
+      "valueCodeableConcept": {
+        "coding": [
+          {
+            "system": "urn:form-examples:blood-test-result:specimen_type",
+            "code": "serum",
+            "display": "Serum"
+          }
+        ]
+      }
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:blood-test-result",
+            "code": "specimen_condition",
+            "display": "Specimen Condition"
+          }
+        ]
+      },
+      "valueCodeableConcept": {
+        "coding": [
+          {
+            "system": "urn:form-examples:blood-test-result:specimen_condition",
+            "code": "satisfactory",
+            "display": "Satisfactory"
+          }
+        ]
+      }
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:blood-test-result",
+            "code": "clinical_history",
+            "display": "Clinical History"
+          }
+        ]
+      },
+      "valueString": "Example text."
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:blood-test-result",
+            "code": "haemoglobin_g_l",
+            "display": "Haemoglobin G L"
+          }
+        ]
+      },
+      "valueQuantity": {
+        "value": 0.0
+      }
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:blood-test-result",
+            "code": "white_cell_count",
+            "display": "White Cell Count"
+          }
+        ]
+      },
+      "valueQuantity": {
+        "value": 0.0
+      }
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:blood-test-result",
+            "code": "platelets",
+            "display": "Platelets"
+          }
+        ]
+      },
+      "valueQuantity": {
+        "value": 0.0
+      }
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:blood-test-result",
+            "code": "neutrophils",
+            "display": "Neutrophils"
+          }
+        ]
+      },
+      "valueQuantity": {
+        "value": 0.0
+      }
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:blood-test-result",
+            "code": "sodium_mmol_l",
+            "display": "Sodium Mmol L"
+          }
+        ]
+      },
+      "valueQuantity": {
+        "value": 0.0
+      }
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:blood-test-result",
+            "code": "potassium_mmol_l",
+            "display": "Potassium Mmol L"
+          }
+        ]
+      },
+      "valueQuantity": {
+        "value": 0.0
+      }
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:blood-test-result",
+            "code": "urea_mmol_l",
+            "display": "Urea Mmol L"
+          }
+        ]
+      },
+      "valueQuantity": {
+        "value": 0.0
+      }
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:blood-test-result",
+            "code": "creatinine_umol_l",
+            "display": "Creatinine Umol L"
+          }
+        ]
+      },
+      "valueQuantity": {
+        "value": 0.0
+      }
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:blood-test-result",
+            "code": "egfr",
+            "display": "Egfr"
+          }
+        ]
+      },
+      "valueQuantity": {
+        "value": 0.0
+      }
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:blood-test-result",
+            "code": "alt_u_l",
+            "display": "Alt U L"
+          }
+        ]
+      },
+      "valueQuantity": {
+        "value": 0.0
+      }
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:blood-test-result",
+            "code": "alkaline_phosphatase",
+            "display": "Alkaline Phosphatase"
+          }
+        ]
+      },
+      "valueQuantity": {
+        "value": 0.0
+      }
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:blood-test-result",
+            "code": "bilirubin_umol_l",
+            "display": "Bilirubin Umol L"
+          }
+        ]
+      },
+      "valueQuantity": {
+        "value": 0.0
+      }
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:blood-test-result",
+            "code": "albumin_g_l",
+            "display": "Albumin G L"
+          }
+        ]
+      },
+      "valueQuantity": {
+        "value": 0.0
+      }
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:blood-test-result",
+            "code": "c_reactive_protein",
+            "display": "C Reactive Protein"
+          }
+        ]
+      },
+      "valueQuantity": {
+        "value": 0.0
+      }
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:blood-test-result",
+            "code": "hba1c_mmol_mol",
+            "display": "Hba1C Mmol Mol"
+          }
+        ]
+      },
+      "valueQuantity": {
+        "value": 0.0
+      }
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:blood-test-result",
+            "code": "glucose_mmol_l",
+            "display": "Glucose Mmol L"
+          }
+        ]
+      },
+      "valueQuantity": {
+        "value": 0.0
+      }
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:blood-test-result",
+            "code": "tsh",
+            "display": "Tsh"
+          }
+        ]
+      },
+      "valueQuantity": {
+        "value": 0.0
+      }
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:blood-test-result",
+            "code": "ferritin",
+            "display": "Ferritin"
+          }
+        ]
+      },
+      "valueQuantity": {
+        "value": 0.0
+      }
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:blood-test-result",
+            "code": "inr",
+            "display": "Inr"
+          }
+        ]
+      },
+      "valueQuantity": {
+        "value": 0.0
+      }
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:blood-test-result",
+            "code": "overall_result_status",
+            "display": "Overall Result Status"
+          }
+        ]
+      },
+      "valueCodeableConcept": {
+        "coding": [
+          {
+            "system": "urn:form-examples:blood-test-result:overall_result_status",
+            "code": "normal",
+            "display": "Normal"
+          }
+        ]
+      }
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:blood-test-result",
+            "code": "abnormal_results_present",
+            "display": "Abnormal Results Present"
+          }
+        ]
+      },
+      "valueBoolean": true
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:blood-test-result",
+            "code": "critical_value_present",
+            "display": "Critical Value Present"
+          }
+        ]
+      },
+      "valueBoolean": true
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:blood-test-result",
+            "code": "critical_value_detail",
+            "display": "Critical Value Detail"
+          }
+        ]
+      },
+      "valueString": ""
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:blood-test-result",
+            "code": "findings_narrative",
+            "display": "Findings Narrative"
+          }
+        ]
+      },
+      "valueString": "Example text."
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:blood-test-result",
+            "code": "comparison_with_previous",
+            "display": "Comparison With Previous"
+          }
+        ]
+      },
+      "valueString": ""
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:blood-test-result",
+            "code": "impression",
+            "display": "Impression"
+          }
+        ]
+      },
+      "valueString": "Example text."
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:blood-test-result",
+            "code": "reporting_category",
+            "display": "Reporting Category"
+          }
+        ]
+      },
+      "valueString": "General"
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:blood-test-result",
+            "code": "recommended_follow_up",
+            "display": "Recommended Follow Up"
+          }
+        ]
+      },
+      "valueString": ""
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:blood-test-result",
+            "code": "critical_result_communicated",
+            "display": "Critical Result Communicated"
+          }
+        ]
+      },
+      "valueBoolean": true
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:blood-test-result",
+            "code": "reported_to",
+            "display": "Reported To"
+          }
+        ]
+      },
+      "valueString": ""
+    }
+  ]
+}

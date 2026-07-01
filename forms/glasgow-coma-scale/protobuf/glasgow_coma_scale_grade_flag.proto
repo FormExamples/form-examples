@@ -1,0 +1,36 @@
+// Generated from sql/. Do not edit by hand.
+// SOURCE: glasgow_coma_scale_grade_flag
+
+syntax = "proto3";
+
+package form_examples.glasgow_coma_scale;
+
+enum GlasgowComaScaleGradeFlagCategoryEnum {
+  CATEGORY_UNSPECIFIED = 0;
+  CATEGORY_AIRWAY_RISK = 1;  // airway-risk
+  CATEGORY_DETERIORATING = 2;  // deteriorating
+  CATEGORY_UNEQUAL_PUPILS = 3;  // unequal-pupils
+  CATEGORY_UNTESTABLE_COMPONENT = 4;  // untestable-component
+  CATEGORY_FALLING_MOTOR = 5;  // falling-motor
+  CATEGORY_OTHER = 6;  // other
+}
+
+enum GlasgowComaScaleGradeFlagPriorityEnum {
+  PRIORITY_UNSPECIFIED = 0;
+  PRIORITY_LOW = 1;  // low
+  PRIORITY_MEDIUM = 2;  // medium
+  PRIORITY_HIGH = 3;  // high
+}
+
+message GlasgowComaScaleGradeFlag {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string glasgow_coma_scale_grade_id = 5;  // UUID — uuid
+  string flag_id = 6;  // VARCHAR(50) — max 50 chars
+  GlasgowComaScaleGradeFlagCategoryEnum category = 7;  // VARCHAR(50)
+  GlasgowComaScaleGradeFlagPriorityEnum priority = 8;  // VARCHAR(10)
+  string description = 9;  // VARCHAR(500) — max 500 chars
+  string suggested_action = 10;  // VARCHAR(500) — max 500 chars
+}

@@ -358,7 +358,6 @@ COMMENT ON COLUMN access_scheduling.updated_at IS
 COMMENT ON COLUMN access_scheduling.deleted_at IS
     'Timestamp when this row was deleted.';
 
-
 -- ========================================================================
 -- END 06_create_table_access_scheduling.sql
 -- ========================================================================
@@ -408,7 +407,6 @@ COMMENT ON COLUMN communication.updated_at IS
 COMMENT ON COLUMN communication.deleted_at IS
     'Timestamp when this row was deleted.';
 
-
 -- ========================================================================
 -- END 07_create_table_communication.sql
 -- ========================================================================
@@ -454,7 +452,6 @@ COMMENT ON COLUMN staff_professionalism.updated_at IS
     'Timestamp when this row was updated.';
 COMMENT ON COLUMN staff_professionalism.deleted_at IS
     'Timestamp when this row was deleted.';
-
 
 -- ========================================================================
 -- END 08_create_table_staff_professionalism.sql
@@ -502,7 +499,6 @@ COMMENT ON COLUMN care_quality.updated_at IS
 COMMENT ON COLUMN care_quality.deleted_at IS
     'Timestamp when this row was deleted.';
 
-
 -- ========================================================================
 -- END 09_create_table_care_quality.sql
 -- ========================================================================
@@ -548,7 +544,6 @@ COMMENT ON COLUMN environment.updated_at IS
     'Timestamp when this row was updated.';
 COMMENT ON COLUMN environment.deleted_at IS
     'Timestamp when this row was deleted.';
-
 
 -- ========================================================================
 -- END 10_create_table_environment.sql
@@ -599,7 +594,6 @@ COMMENT ON COLUMN overall_satisfaction.updated_at IS
     'Timestamp when this row was updated.';
 COMMENT ON COLUMN overall_satisfaction.deleted_at IS
     'Timestamp when this row was deleted.';
-
 
 -- ========================================================================
 -- END 11_create_table_overall_satisfaction.sql

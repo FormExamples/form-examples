@@ -1,0 +1,189 @@
+# Generated from sql/. Do not edit by hand.
+# SOURCE: anaesthetic_record_drug_administration
+openapi: 3.1.0
+info:
+  title: Anaesthetic Record — AnaestheticRecordDrugAdministration
+  version: 1.0.0
+  description: "Drug administrations recorded during the anaesthetic: drug, dose, unit, route, category, and time."
+paths:
+  /anaesthetic-record-drug-administrations:
+    get:
+      summary: List AnaestheticRecordDrugAdministration records
+      operationId: listAnaestheticRecordDrugAdministration
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of AnaestheticRecordDrugAdministration records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/AnaestheticRecordDrugAdministration"
+    post:
+      summary: Create a new AnaestheticRecordDrugAdministration
+      operationId: createAnaestheticRecordDrugAdministration
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/AnaestheticRecordDrugAdministration"
+      responses:
+        "201":
+          description: The newly created AnaestheticRecordDrugAdministration
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AnaestheticRecordDrugAdministration"
+        "400":
+          description: Validation error
+  /anaesthetic-record-drug-administrations/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one AnaestheticRecordDrugAdministration by id
+      operationId: getAnaestheticRecordDrugAdministration
+      responses:
+        "200":
+          description: The requested AnaestheticRecordDrugAdministration
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AnaestheticRecordDrugAdministration"
+        "404":
+          description: AnaestheticRecordDrugAdministration not found
+    patch:
+      summary: Update an existing AnaestheticRecordDrugAdministration
+      operationId: updateAnaestheticRecordDrugAdministration
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/AnaestheticRecordDrugAdministration"
+      responses:
+        "200":
+          description: The updated AnaestheticRecordDrugAdministration
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AnaestheticRecordDrugAdministration"
+        "404":
+          description: AnaestheticRecordDrugAdministration not found
+    delete:
+      summary: Soft-delete a AnaestheticRecordDrugAdministration
+      operationId: deleteAnaestheticRecordDrugAdministration
+      responses:
+        "204":
+          description: AnaestheticRecordDrugAdministration deleted
+        "404":
+          description: AnaestheticRecordDrugAdministration not found
+components:
+  schemas:
+    AnaestheticRecordDrugAdministration:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was most recently updated.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was soft-deleted.
+        anaesthetic_record_id:
+          type: string
+          format: uuid
+          description: Foreign key to the parent anaesthetic record.
+        drug_name:
+          type: string
+          maxLength: 255
+          description: Name of the administered drug.
+        dose:
+          type: number
+          format: double
+          description: Dose administered, in the accompanying dose unit.
+        dose_unit:
+          type: string
+          enum:
+            - mg
+            - mcg
+            - g
+            - ml
+            - units
+            - mmol
+            - puff
+            - other
+            - ""
+          description: "Dose unit: mg, mcg, g, ml, units, mmol, puff, or other."
+        route:
+          type: string
+          enum:
+            - iv
+            - im
+            - subcutaneous
+            - inhalational
+            - oral
+            - topical
+            - neuraxial
+            - infusion
+            - other
+            - ""
+          description: "Route of administration: iv, im, subcutaneous, inhalational, oral, topical, neuraxial, infusion, or other."
+        category:
+          type: string
+          enum:
+            - induction
+            - neuromuscular-blocker
+            - maintenance
+            - reversal
+            - analgesia
+            - antiemetic
+            - antibiotic
+            - vasoactive
+            - local-anaesthetic
+            - other
+            - ""
+          description: "Therapeutic category: induction, neuromuscular-blocker, maintenance, reversal, analgesia, antiemetic, antibiotic, vasoactive, local-anaesthetic, or other."
+        administered_at:
+          type: string
+          format: date-time
+          description: Timestamp when the drug was administered.
+      required:
+        - created_at
+        - updated_at
+        - anaesthetic_record_id
+        - drug_name
+        - dose_unit
+        - route
+        - category
+      description: "Drug administrations recorded during the anaesthetic: drug, dose, unit, route, category, and time."

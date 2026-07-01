@@ -1,0 +1,154 @@
+# Generated from sql/. Do not edit by hand.
+# SOURCE: zarit_burden_interview_grade_rule
+openapi: 3.1.0
+info:
+  title: Zarit Burden Interview — ZaritBurdenInterviewGradeRule
+  version: 1.0.0
+  description: "Audit trail of every grading rule that fired during Zarit Burden Interview computation: item number, points contributed, category, and description."
+paths:
+  /zarit-burden-interview-grade-rules:
+    get:
+      summary: List ZaritBurdenInterviewGradeRule records
+      operationId: listZaritBurdenInterviewGradeRule
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of ZaritBurdenInterviewGradeRule records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/ZaritBurdenInterviewGradeRule"
+    post:
+      summary: Create a new ZaritBurdenInterviewGradeRule
+      operationId: createZaritBurdenInterviewGradeRule
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ZaritBurdenInterviewGradeRule"
+      responses:
+        "201":
+          description: The newly created ZaritBurdenInterviewGradeRule
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ZaritBurdenInterviewGradeRule"
+        "400":
+          description: Validation error
+  /zarit-burden-interview-grade-rules/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one ZaritBurdenInterviewGradeRule by id
+      operationId: getZaritBurdenInterviewGradeRule
+      responses:
+        "200":
+          description: The requested ZaritBurdenInterviewGradeRule
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ZaritBurdenInterviewGradeRule"
+        "404":
+          description: ZaritBurdenInterviewGradeRule not found
+    patch:
+      summary: Update an existing ZaritBurdenInterviewGradeRule
+      operationId: updateZaritBurdenInterviewGradeRule
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ZaritBurdenInterviewGradeRule"
+      responses:
+        "200":
+          description: The updated ZaritBurdenInterviewGradeRule
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ZaritBurdenInterviewGradeRule"
+        "404":
+          description: ZaritBurdenInterviewGradeRule not found
+    delete:
+      summary: Soft-delete a ZaritBurdenInterviewGradeRule
+      operationId: deleteZaritBurdenInterviewGradeRule
+      responses:
+        "204":
+          description: ZaritBurdenInterviewGradeRule deleted
+        "404":
+          description: ZaritBurdenInterviewGradeRule not found
+components:
+  schemas:
+    ZaritBurdenInterviewGradeRule:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was most recently updated.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was soft-deleted.
+        zarit_burden_interview_grade_id:
+          type: string
+          format: uuid
+          description: Foreign key to the parent grade.
+        rule_id:
+          type: string
+          maxLength: 40
+          description: Stable rule identifier (e.g. R-ITEM-22-FIRED-01).
+        item_number:
+          type: integer
+          format: int32
+          description: Item number (1-22) the fired rule belongs to, or NULL for a whole-form rule.
+        points:
+          type: integer
+          format: int32
+          description: Points (0-4) contributed by this item to the total.
+        category:
+          type: string
+          maxLength: 50
+          description: Subject category (e.g. item-rating, short-form-item).
+        description:
+          type: string
+          maxLength: 500
+          description: Human-readable description of why the rule fired.
+      required:
+        - created_at
+        - updated_at
+        - zarit_burden_interview_grade_id
+        - rule_id
+        - category
+        - description
+      description: "Audit trail of every grading rule that fired during Zarit Burden Interview computation: item number, points contributed, category, and description."

@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Generate Protocol Buffers (.proto) representations from SQL migrations.
 
-For each form's sql-migrations/ directory, parses CREATE TABLE statements
+For each form's sql/ directory, parses CREATE TABLE statements
 and writes one .proto file per top-level SQL entity into protobuf/.
 
 Conventions documented in AGENTS/protobuf.md:
@@ -292,7 +292,7 @@ def build_proto_file(table_name, columns, form_slug, source_table_names):
         field_number += 1
 
     header = [
-        "// Generated from sql-migrations/. Do not edit by hand.",
+        "// Generated from sql/. Do not edit by hand.",
         f"// SOURCE: {', '.join(source_table_names)}",
         "",
         'syntax = "proto3";',
@@ -315,7 +315,7 @@ def build_proto_file(table_name, columns, form_slug, source_table_names):
 def process_form(form_dir):
     """Process a single form: parse its SQL migrations and write .proto
     files into protobuf/. Returns the number of files written."""
-    sql_dir = form_dir / "sql-migrations"
+    sql_dir = form_dir / "sql"
     if not sql_dir.is_dir():
         return 0
 
@@ -323,7 +323,7 @@ def process_form(form_dir):
     form_slug = form_dir.name
 
     # Only numbered migration files; skip the combined NN_schema.sql
-    # produced by bin/sql-migrations/generate-sql-combined.py — it
+    # produced by bin/sql/generate-sql-combined.py — it
     # restates every CREATE TABLE and would yield duplicate messages.
     sql_files = sorted(
         f for f in sql_dir.glob("*.sql")
@@ -392,7 +392,7 @@ def main():
 
     form_dirs = sorted(
         d for d in FORMS_DIR.iterdir()
-        if d.is_dir() and (d / "sql-migrations").is_dir()
+        if d.is_dir() and (d / "sql").is_dir()
     )
 
     for form_dir in form_dirs:

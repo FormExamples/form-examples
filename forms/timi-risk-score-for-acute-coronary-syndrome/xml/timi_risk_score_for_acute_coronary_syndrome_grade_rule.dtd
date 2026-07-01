@@ -1,0 +1,11 @@
+<!ELEMENT timi_risk_score_for_acute_coronary_syndrome_grade_rule (id,created_at,updated_at,deleted_at,timi_risk_score_for_acute_coronary_syndrome_grade_id,rule_id,criterion,points,category,description)>
+<!ELEMENT id (#PCDATA)>
+<!ELEMENT created_at (#PCDATA)>
+<!ELEMENT updated_at (#PCDATA)>
+<!ELEMENT deleted_at (#PCDATA)>
+<!ELEMENT timi_risk_score_for_acute_coronary_syndrome_grade_id (#PCDATA)>
+<!ELEMENT rule_id (#PCDATA)>
+<!ELEMENT criterion (#PCDATA)>
+<!ELEMENT points (#PCDATA)>
+<!ELEMENT category (#PCDATA)>
+<!ELEMENT description (#PCDATA)>

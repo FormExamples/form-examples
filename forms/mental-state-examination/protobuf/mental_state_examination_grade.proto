@@ -1,0 +1,81 @@
+// Generated from sql/. Do not edit by hand.
+// SOURCE: mental_state_examination_grade
+
+syntax = "proto3";
+
+package form_examples.mental_state_examination;
+
+enum MentalStateExaminationGradeStatusEnum {
+  STATUS_UNSPECIFIED = 0;
+  STATUS_COMPLETE = 1;  // complete
+  STATUS_PARTIAL = 2;  // partial
+}
+
+enum MentalStateExaminationGradeRiskLevelEnum {
+  RISKLEVEL_UNSPECIFIED = 0;
+  RISKLEVEL_NONE = 1;  // none
+  RISKLEVEL_LOW = 2;  // low
+  RISKLEVEL_MODERATE = 3;  // moderate
+  RISKLEVEL_HIGH = 4;  // high
+}
+
+enum MentalStateExaminationGradeAppearanceBehaviourDocumentedEnum {
+  APPEARANCEBEHAVIOURDOCUMENTED_UNSPECIFIED = 0;
+  APPEARANCEBEHAVIOURDOCUMENTED_YES = 1;  // yes
+  APPEARANCEBEHAVIOURDOCUMENTED_NO = 2;  // no
+}
+
+enum MentalStateExaminationGradeSpeechDocumentedEnum {
+  SPEECHDOCUMENTED_UNSPECIFIED = 0;
+  SPEECHDOCUMENTED_YES = 1;  // yes
+  SPEECHDOCUMENTED_NO = 2;  // no
+}
+
+enum MentalStateExaminationGradeEmotionDocumentedEnum {
+  EMOTIONDOCUMENTED_UNSPECIFIED = 0;
+  EMOTIONDOCUMENTED_YES = 1;  // yes
+  EMOTIONDOCUMENTED_NO = 2;  // no
+}
+
+enum MentalStateExaminationGradePerceptionDocumentedEnum {
+  PERCEPTIONDOCUMENTED_UNSPECIFIED = 0;
+  PERCEPTIONDOCUMENTED_YES = 1;  // yes
+  PERCEPTIONDOCUMENTED_NO = 2;  // no
+}
+
+enum MentalStateExaminationGradeThoughtDocumentedEnum {
+  THOUGHTDOCUMENTED_UNSPECIFIED = 0;
+  THOUGHTDOCUMENTED_YES = 1;  // yes
+  THOUGHTDOCUMENTED_NO = 2;  // no
+}
+
+enum MentalStateExaminationGradeInsightDocumentedEnum {
+  INSIGHTDOCUMENTED_UNSPECIFIED = 0;
+  INSIGHTDOCUMENTED_YES = 1;  // yes
+  INSIGHTDOCUMENTED_NO = 2;  // no
+}
+
+enum MentalStateExaminationGradeCognitionDocumentedEnum {
+  COGNITIONDOCUMENTED_UNSPECIFIED = 0;
+  COGNITIONDOCUMENTED_YES = 1;  // yes
+  COGNITIONDOCUMENTED_NO = 2;  // no
+}
+
+message MentalStateExaminationGrade {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string mental_state_examination_id = 5;  // UUID — uuid
+  MentalStateExaminationGradeStatusEnum status = 6;  // VARCHAR(15)
+  MentalStateExaminationGradeRiskLevelEnum risk_level = 7;  // VARCHAR(10)
+  int32 completeness_percent = 8;  // INTEGER
+  MentalStateExaminationGradeAppearanceBehaviourDocumentedEnum appearance_behaviour_documented = 9;  // VARCHAR(5)
+  MentalStateExaminationGradeSpeechDocumentedEnum speech_documented = 10;  // VARCHAR(5)
+  MentalStateExaminationGradeEmotionDocumentedEnum emotion_documented = 11;  // VARCHAR(5)
+  MentalStateExaminationGradePerceptionDocumentedEnum perception_documented = 12;  // VARCHAR(5)
+  MentalStateExaminationGradeThoughtDocumentedEnum thought_documented = 13;  // VARCHAR(5)
+  MentalStateExaminationGradeInsightDocumentedEnum insight_documented = 14;  // VARCHAR(5)
+  MentalStateExaminationGradeCognitionDocumentedEnum cognition_documented = 15;  // VARCHAR(5)
+  string graded_at = 16;  // TIMESTAMPTZ — iso 8601
+}

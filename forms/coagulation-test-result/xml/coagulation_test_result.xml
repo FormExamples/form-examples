@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE coagulation_test_result SYSTEM "coagulation_test_result.dtd">
+<coagulation_test_result>
+<id>770e8400-e29b-41d4-a716-446655440002</id>
+<created_at>2026-04-09T10:00:00Z</created_at>
+<updated_at>2026-04-09T10:00:00Z</updated_at>
+<deleted_at>2026-04-09T10:00:00Z</deleted_at>
+<patient_id>550e8400-e29b-41d4-a716-446655440000</patient_id>
+<clinician_id>660e8400-e29b-41d4-a716-446655440001</clinician_id>
+<originating_request_reference></originating_request_reference>
+<report_status>preliminary</report_status>
+<performed_date>2026-01-15</performed_date>
+<reported_date>2026-01-15</reported_date>
+<specimen_condition>satisfactory</specimen_condition>
+<clinical_history>Example text.</clinical_history>
+<on_anticoagulant>true</on_anticoagulant>
+<anticoagulant_agent></anticoagulant_agent>
+<prothrombin_time_seconds>0.0</prothrombin_time_seconds>
+<inr>0.0</inr>
+<activated_partial_thromboplastin_time_seconds>0.0</activated_partial_thromboplastin_time_seconds>
+<aptt_ratio>1.5</aptt_ratio>
+<fibrinogen_g_l>0.0</fibrinogen_g_l>
+<d_dimer>0.0</d_dimer>
+<thrombin_time_seconds>0.0</thrombin_time_seconds>
+<factor_assays></factor_assays>
+<overall_result_status>normal</overall_result_status>
+<critical_value_present>true</critical_value_present>
+<critical_value_detail></critical_value_detail>
+<findings_narrative>Example text.</findings_narrative>
+<comparison_with_previous></comparison_with_previous>
+<impression>Example text.</impression>
+<reporting_category>General</reporting_category>
+<recommended_follow_up></recommended_follow_up>
+<critical_result_communicated>true</critical_result_communicated>
+<reported_to></reported_to>
+</coagulation_test_result>

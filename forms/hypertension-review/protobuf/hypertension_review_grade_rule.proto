@@ -1,0 +1,26 @@
+// Generated from sql/. Do not edit by hand.
+// SOURCE: hypertension_review_grade_rule
+
+syntax = "proto3";
+
+package form_examples.hypertension_review;
+
+enum HypertensionReviewGradeRuleSectionEnum {
+  SECTION_UNSPECIFIED = 0;
+  SECTION_TARGET = 1;  // target
+  SECTION_CONTROL = 2;  // control
+  SECTION_STAGE = 3;  // stage
+  SECTION_COMPLETENESS = 4;  // completeness
+}
+
+message HypertensionReviewGradeRule {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string hypertension_review_grade_id = 5;  // UUID — uuid
+  string rule_id = 6;  // VARCHAR(40) — max 40 chars
+  HypertensionReviewGradeRuleSectionEnum section = 7;  // VARCHAR(20)
+  string category = 8;  // VARCHAR(50) — max 50 chars
+  string description = 9;  // VARCHAR(500) — max 500 chars
+}

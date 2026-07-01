@@ -1,0 +1,35 @@
+// Generated from sql/. Do not edit by hand.
+// SOURCE: ottawa_ankle_rules_grade_rule
+
+syntax = "proto3";
+
+package form_examples.ottawa_ankle_rules;
+
+enum OttawaAnkleRulesGradeRuleInstrumentEnum {
+  INSTRUMENT_UNSPECIFIED = 0;
+  INSTRUMENT_PRECONDITION = 1;  // precondition
+  INSTRUMENT_ANKLE_CRITERION = 2;  // ankle-criterion
+  INSTRUMENT_FOOT_CRITERION = 3;  // foot-criterion
+  INSTRUMENT_WEIGHT_BEARING = 4;  // weight-bearing
+  INSTRUMENT_DECISION = 5;  // decision
+}
+
+enum OttawaAnkleRulesGradeRuleRegionEnum {
+  REGION_UNSPECIFIED = 0;
+  REGION_ANKLE = 1;  // ankle
+  REGION_FOOT = 2;  // foot
+  REGION_BOTH = 3;  // both
+}
+
+message OttawaAnkleRulesGradeRule {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string ottawa_ankle_rules_grade_id = 5;  // UUID — uuid
+  string rule_id = 6;  // VARCHAR(40) — max 40 chars
+  OttawaAnkleRulesGradeRuleInstrumentEnum instrument = 7;  // VARCHAR(20)
+  OttawaAnkleRulesGradeRuleRegionEnum region = 8;  // VARCHAR(10)
+  string category = 9;  // VARCHAR(50) — max 50 chars
+  string description = 10;  // VARCHAR(500) — max 500 chars
+}

@@ -1,0 +1,173 @@
+# Generated from sql/. Do not edit by hand.
+# SOURCE: columbia_suicide_severity_rating_scale_grade
+openapi: 3.1.0
+info:
+  title: Columbia Suicide Severity Rating Scale — ColumbiaSuicideSeverityRatingScaleGrade
+  version: 1.0.0
+  description: "Computed C-SSRS risk classification result: derived ideation level (0-5), behaviour-present and recent-behaviour flags, Low / Moderate / High risk tier, positive-features summary, and management recommendation."
+paths:
+  /columbia-suicide-severity-rating-scale-grades:
+    get:
+      summary: List ColumbiaSuicideSeverityRatingScaleGrade records
+      operationId: listColumbiaSuicideSeverityRatingScaleGrade
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of ColumbiaSuicideSeverityRatingScaleGrade records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/ColumbiaSuicideSeverityRatingScaleGrade"
+    post:
+      summary: Create a new ColumbiaSuicideSeverityRatingScaleGrade
+      operationId: createColumbiaSuicideSeverityRatingScaleGrade
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ColumbiaSuicideSeverityRatingScaleGrade"
+      responses:
+        "201":
+          description: The newly created ColumbiaSuicideSeverityRatingScaleGrade
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ColumbiaSuicideSeverityRatingScaleGrade"
+        "400":
+          description: Validation error
+  /columbia-suicide-severity-rating-scale-grades/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one ColumbiaSuicideSeverityRatingScaleGrade by id
+      operationId: getColumbiaSuicideSeverityRatingScaleGrade
+      responses:
+        "200":
+          description: The requested ColumbiaSuicideSeverityRatingScaleGrade
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ColumbiaSuicideSeverityRatingScaleGrade"
+        "404":
+          description: ColumbiaSuicideSeverityRatingScaleGrade not found
+    patch:
+      summary: Update an existing ColumbiaSuicideSeverityRatingScaleGrade
+      operationId: updateColumbiaSuicideSeverityRatingScaleGrade
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ColumbiaSuicideSeverityRatingScaleGrade"
+      responses:
+        "200":
+          description: The updated ColumbiaSuicideSeverityRatingScaleGrade
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ColumbiaSuicideSeverityRatingScaleGrade"
+        "404":
+          description: ColumbiaSuicideSeverityRatingScaleGrade not found
+    delete:
+      summary: Soft-delete a ColumbiaSuicideSeverityRatingScaleGrade
+      operationId: deleteColumbiaSuicideSeverityRatingScaleGrade
+      responses:
+        "204":
+          description: ColumbiaSuicideSeverityRatingScaleGrade deleted
+        "404":
+          description: ColumbiaSuicideSeverityRatingScaleGrade not found
+components:
+  schemas:
+    ColumbiaSuicideSeverityRatingScaleGrade:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was most recently updated.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was soft-deleted.
+        columbia_suicide_severity_rating_scale_id:
+          type: string
+          format: uuid
+          description: Foreign key to the parent assessment (unique, 1:1).
+        ideation_level:
+          type: integer
+          format: int32
+          description: "Derived ordinal ideation level 0-5: the highest affirmative ideation item (0 when none present)."
+        any_behaviour:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Whether any suicidal behaviour is present (actual, interrupted, aborted attempt, or preparatory acts; NSSI excluded).
+        recent_behaviour:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Whether suicidal behaviour is present and occurred within the past 3 months.
+        risk_tier:
+          type: string
+          enum:
+            - low
+            - moderate
+            - high
+            - ""
+          description: "Derived risk tier: low, moderate, or high."
+        positive_features:
+          type: string
+          description: Human-readable summary of the positive features (fired criteria) that drove the risk tier.
+        management_recommendation:
+          type: string
+          description: Proportionate management recommendation for the derived risk tier.
+        graded_at:
+          type: string
+          format: date-time
+          description: Timestamp when the engine last computed the classification.
+      required:
+        - created_at
+        - updated_at
+        - columbia_suicide_severity_rating_scale_id
+        - any_behaviour
+        - recent_behaviour
+        - risk_tier
+        - positive_features
+        - management_recommendation
+        - graded_at
+      description: "Computed C-SSRS risk classification result: derived ideation level (0-5), behaviour-present and recent-behaviour flags, Low / Moderate / High risk tier, positive-features summary, and management recommendation."

@@ -1,0 +1,194 @@
+# Generated from sql/. Do not edit by hand.
+# SOURCE: newborn_and_infant_physical_examination_grade
+openapi: 3.1.0
+info:
+  title: Newborn And Infant Physical Examination — NewbornAndInfantPhysicalExaminationGrade
+  version: 1.0.0
+  description: "Computed screening-classification result for a NIPE examination: per-component results (eyes, heart, hips, testes), overall outcome (satisfactory/refer/incomplete), completeness status, and completeness percentage. A screening classification records whether onward referral is indicated; it is not a diagnosis."
+paths:
+  /newborn-and-infant-physical-examination-grades:
+    get:
+      summary: List NewbornAndInfantPhysicalExaminationGrade records
+      operationId: listNewbornAndInfantPhysicalExaminationGrade
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of NewbornAndInfantPhysicalExaminationGrade records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/NewbornAndInfantPhysicalExaminationGrade"
+    post:
+      summary: Create a new NewbornAndInfantPhysicalExaminationGrade
+      operationId: createNewbornAndInfantPhysicalExaminationGrade
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/NewbornAndInfantPhysicalExaminationGrade"
+      responses:
+        "201":
+          description: The newly created NewbornAndInfantPhysicalExaminationGrade
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/NewbornAndInfantPhysicalExaminationGrade"
+        "400":
+          description: Validation error
+  /newborn-and-infant-physical-examination-grades/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one NewbornAndInfantPhysicalExaminationGrade by id
+      operationId: getNewbornAndInfantPhysicalExaminationGrade
+      responses:
+        "200":
+          description: The requested NewbornAndInfantPhysicalExaminationGrade
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/NewbornAndInfantPhysicalExaminationGrade"
+        "404":
+          description: NewbornAndInfantPhysicalExaminationGrade not found
+    patch:
+      summary: Update an existing NewbornAndInfantPhysicalExaminationGrade
+      operationId: updateNewbornAndInfantPhysicalExaminationGrade
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/NewbornAndInfantPhysicalExaminationGrade"
+      responses:
+        "200":
+          description: The updated NewbornAndInfantPhysicalExaminationGrade
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/NewbornAndInfantPhysicalExaminationGrade"
+        "404":
+          description: NewbornAndInfantPhysicalExaminationGrade not found
+    delete:
+      summary: Soft-delete a NewbornAndInfantPhysicalExaminationGrade
+      operationId: deleteNewbornAndInfantPhysicalExaminationGrade
+      responses:
+        "204":
+          description: NewbornAndInfantPhysicalExaminationGrade deleted
+        "404":
+          description: NewbornAndInfantPhysicalExaminationGrade not found
+components:
+  schemas:
+    NewbornAndInfantPhysicalExaminationGrade:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was most recently updated.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was soft-deleted.
+        newborn_and_infant_physical_examination_id:
+          type: string
+          format: uuid
+          description: Foreign key to the parent examination (unique, 1:1).
+        eyes_result:
+          type: string
+          enum:
+            - satisfactory
+            - refer
+            - not-examined
+            - ""
+          description: "Eyes key-component result: satisfactory, refer, or not-examined."
+        heart_result:
+          type: string
+          enum:
+            - satisfactory
+            - refer
+            - not-examined
+            - ""
+          description: "Heart key-component result: satisfactory, refer, or not-examined."
+        hips_result:
+          type: string
+          enum:
+            - satisfactory
+            - refer
+            - not-examined
+            - ""
+          description: "Hips key-component result: satisfactory, refer, or not-examined."
+        testes_result:
+          type: string
+          enum:
+            - satisfactory
+            - refer
+            - not-examined
+            - not-applicable
+            - ""
+          description: "Testes key-component result: satisfactory, refer, not-examined, or not-applicable (for girls)."
+        overall_outcome:
+          type: string
+          enum:
+            - satisfactory
+            - refer
+            - incomplete
+            - ""
+          description: "Overall screening outcome rolled up over the applicable key components: refer (any component refer), incomplete (any applicable component not-examined), or satisfactory."
+        completeness:
+          type: string
+          enum:
+            - complete
+            - incomplete
+            - ""
+          description: "Completeness status: complete when every applicable key component was examined, otherwise incomplete."
+        completeness_percent:
+          type: integer
+          format: int32
+          description: "Completeness percentage (0..100): applicable key components examined / total applicable key components x 100."
+        graded_at:
+          type: string
+          format: date-time
+          description: Timestamp when the engine last computed the classification.
+      required:
+        - created_at
+        - updated_at
+        - newborn_and_infant_physical_examination_id
+        - eyes_result
+        - heart_result
+        - hips_result
+        - testes_result
+        - overall_outcome
+        - completeness
+        - graded_at
+      description: "Computed screening-classification result for a NIPE examination: per-component results (eyes, heart, hips, testes), overall outcome (satisfactory/refer/incomplete), completeness status, and completeness percentage. A screening classification records whether onward referral is indicated; it is not a diagnosis."

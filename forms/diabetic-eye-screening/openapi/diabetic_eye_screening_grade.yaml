@@ -1,0 +1,197 @@
+# Generated from sql/. Do not edit by hand.
+# SOURCE: diabetic_eye_screening_grade
+openapi: 3.1.0
+info:
+  title: Diabetic Eye Screening — DiabeticEyeScreeningGrade
+  version: 1.0.0
+  description: "Computed worst-eye classification and outcome for a diabetic-eye-screening record: worst retinopathy and maculopathy grade, any-ungradable marker, recall / referral pathway, recall interval, and completeness status."
+paths:
+  /diabetic-eye-screening-grades:
+    get:
+      summary: List DiabeticEyeScreeningGrade records
+      operationId: listDiabeticEyeScreeningGrade
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of DiabeticEyeScreeningGrade records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/DiabeticEyeScreeningGrade"
+    post:
+      summary: Create a new DiabeticEyeScreeningGrade
+      operationId: createDiabeticEyeScreeningGrade
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/DiabeticEyeScreeningGrade"
+      responses:
+        "201":
+          description: The newly created DiabeticEyeScreeningGrade
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/DiabeticEyeScreeningGrade"
+        "400":
+          description: Validation error
+  /diabetic-eye-screening-grades/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one DiabeticEyeScreeningGrade by id
+      operationId: getDiabeticEyeScreeningGrade
+      responses:
+        "200":
+          description: The requested DiabeticEyeScreeningGrade
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/DiabeticEyeScreeningGrade"
+        "404":
+          description: DiabeticEyeScreeningGrade not found
+    patch:
+      summary: Update an existing DiabeticEyeScreeningGrade
+      operationId: updateDiabeticEyeScreeningGrade
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/DiabeticEyeScreeningGrade"
+      responses:
+        "200":
+          description: The updated DiabeticEyeScreeningGrade
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/DiabeticEyeScreeningGrade"
+        "404":
+          description: DiabeticEyeScreeningGrade not found
+    delete:
+      summary: Soft-delete a DiabeticEyeScreeningGrade
+      operationId: deleteDiabeticEyeScreeningGrade
+      responses:
+        "204":
+          description: DiabeticEyeScreeningGrade deleted
+        "404":
+          description: DiabeticEyeScreeningGrade not found
+components:
+  schemas:
+    DiabeticEyeScreeningGrade:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was most recently updated.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was soft-deleted.
+        diabetic_eye_screening_id:
+          type: string
+          format: uuid
+          description: Foreign key to the parent diabetic-eye-screening record (unique, 1:1).
+        worst_retinopathy:
+          type: string
+          enum:
+            - R0
+            - R1
+            - R2
+            - R3A
+            - R3S
+            - ""
+          description: "Worst retinopathy (R) grade across both eyes by severity R0 < R1 < R2 < R3S < R3A: R0, R1, R2, R3A, or R3S."
+        worst_maculopathy:
+          type: string
+          enum:
+            - M0
+            - M1
+            - ""
+          description: "Worst maculopathy (M) grade across both eyes: M1 if either eye is M1, otherwise M0."
+        any_ungradable:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Whether either eye is ungradable (yes/no); yes routes to slit-lamp unless referable disease routes to HES.
+        outcome:
+          type: string
+          enum:
+            - refer-hes-urgent
+            - refer-hes
+            - refer-slit-lamp
+            - surveillance-6-month
+            - routine-12-month
+            - routine-24-month
+            - ""
+          description: "Recall / referral pathway (most urgent wins): refer-hes-urgent, refer-hes, refer-slit-lamp, surveillance-6-month, routine-12-month, or routine-24-month."
+        referral:
+          type: string
+          enum:
+            - none
+            - hes-routine
+            - hes-urgent
+            - slit-lamp
+            - ""
+          description: "Referral destination derived from the outcome: none, hes-routine, hes-urgent, or slit-lamp."
+        recall_interval_months:
+          type: integer
+          format: int32
+          description: Recall interval in months (6, 12, or 24); null for referral pathways with no routine recall interval.
+        status:
+          type: string
+          enum:
+            - complete
+            - incomplete
+            - ""
+          description: "Completeness status: complete when both eyes have an R and M grade (or are marked ungradable); otherwise incomplete."
+        graded_at:
+          type: string
+          format: date-time
+          description: Timestamp when the engine last computed the classification.
+      required:
+        - created_at
+        - updated_at
+        - diabetic_eye_screening_id
+        - worst_retinopathy
+        - worst_maculopathy
+        - any_ungradable
+        - outcome
+        - referral
+        - status
+        - graded_at
+      description: "Computed worst-eye classification and outcome for a diabetic-eye-screening record: worst retinopathy and maculopathy grade, any-ungradable marker, recall / referral pathway, recall interval, and completeness status."

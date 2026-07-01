@@ -1,0 +1,11 @@
+<!ELEMENT estimated_glomerular_filtration_rate_calculator_grade (id,created_at,updated_at,deleted_at,estimated_glomerular_filtration_rate_calculator_id,serum_creatinine_mg_dl,egfr_ml_min_1_73m2,g_stage,g_stage_label,graded_at)>
+<!ELEMENT id (#PCDATA)>
+<!ELEMENT created_at (#PCDATA)>
+<!ELEMENT updated_at (#PCDATA)>
+<!ELEMENT deleted_at (#PCDATA)>
+<!ELEMENT estimated_glomerular_filtration_rate_calculator_id (#PCDATA)>
+<!ELEMENT serum_creatinine_mg_dl (#PCDATA)>
+<!ELEMENT egfr_ml_min_1_73m2 (#PCDATA)>
+<!ELEMENT g_stage (#PCDATA)>
+<!ELEMENT g_stage_label (#PCDATA)>
+<!ELEMENT graded_at (#PCDATA)>

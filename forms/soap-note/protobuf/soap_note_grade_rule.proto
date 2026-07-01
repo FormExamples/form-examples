@@ -1,0 +1,27 @@
+// Generated from sql/. Do not edit by hand.
+// SOURCE: soap_note_grade_rule
+
+syntax = "proto3";
+
+package form_examples.soap_note;
+
+enum SoapNoteGradeRuleSectionEnum {
+  SECTION_UNSPECIFIED = 0;
+  SECTION_SUBJECTIVE = 1;  // subjective
+  SECTION_OBJECTIVE = 2;  // objective
+  SECTION_ASSESSMENT = 3;  // assessment
+  SECTION_PLAN = 4;  // plan
+  SECTION_COMPLETENESS = 5;  // completeness
+}
+
+message SoapNoteGradeRule {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string soap_note_grade_id = 5;  // UUID — uuid
+  string rule_id = 6;  // VARCHAR(40) — max 40 chars
+  SoapNoteGradeRuleSectionEnum section = 7;  // VARCHAR(20)
+  string category = 8;  // VARCHAR(50) — max 50 chars
+  string description = 9;  // VARCHAR(500) — max 500 chars
+}

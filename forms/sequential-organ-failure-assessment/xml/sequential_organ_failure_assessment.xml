@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sequential_organ_failure_assessment SYSTEM "sequential_organ_failure_assessment.dtd">
+<sequential_organ_failure_assessment>
+<id>770e8400-e29b-41d4-a716-446655440002</id>
+<created_at>2026-04-09T10:00:00Z</created_at>
+<updated_at>2026-04-09T10:00:00Z</updated_at>
+<deleted_at>2026-04-09T10:00:00Z</deleted_at>
+<patient_id>550e8400-e29b-41d4-a716-446655440000</patient_id>
+<clinician_id>660e8400-e29b-41d4-a716-446655440001</clinician_id>
+<assessor_name>Example</assessor_name>
+<assessor_role>intensivist</assessor_role>
+<assessor_registration_number></assessor_registration_number>
+<assessed_at>2026-04-09T10:00:00Z</assessed_at>
+<care_location>icu</care_location>
+<hours_since_admission>1</hours_since_admission>
+<patient_identifier></patient_identifier>
+<age_years>45</age_years>
+<sex>female</sex>
+<admission_diagnosis>Under investigation</admission_diagnosis>
+<suspected_infection>yes</suspected_infection>
+<baseline_sofa_total>1</baseline_sofa_total>
+<pao2>0.0</pao2>
+<fio2>0.0</fio2>
+<pao2_fio2_ratio>1.5</pao2_fio2_ratio>
+<respiratory_support>ventilated</respiratory_support>
+<platelets>0.0</platelets>
+<bilirubin>0.0</bilirubin>
+<map>0.0</map>
+<vasopressor>none</vasopressor>
+<vasopressor_dose>10.0</vasopressor_dose>
+<glasgow_coma_scale>1</glasgow_coma_scale>
+<sedated>2026-01-15</sedated>
+<creatinine>0.0</creatinine>
+<urine_output>1</urine_output>
+<clinical_note>Example Hospital</clinical_note>
+</sequential_organ_failure_assessment>

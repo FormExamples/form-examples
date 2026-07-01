@@ -1,4 +1,4 @@
-// Generated from sql-migrations/. Do not edit by hand.
+// Generated from sql/. Do not edit by hand.
 // SOURCE: assessment, assessment_range_of_motion, assessment_rom_measurement, assessment_strength_testing, assessment_strength_test_item, assessment_imaging_history, assessment_imaging_item, assessment_surgical_history, assessment_surgery_item
 
 syntax = "proto3";

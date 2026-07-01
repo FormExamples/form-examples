@@ -1,0 +1,17 @@
+<!ELEMENT medication_reconciliation_line_item (id,created_at,updated_at,deleted_at,medication_reconciliation_id,list_source,drug_name,form,dose,route,frequency,indication,high_risk_class,adherence,source_type,status)>
+<!ELEMENT id (#PCDATA)>
+<!ELEMENT created_at (#PCDATA)>
+<!ELEMENT updated_at (#PCDATA)>
+<!ELEMENT deleted_at (#PCDATA)>
+<!ELEMENT medication_reconciliation_id (#PCDATA)>
+<!ELEMENT list_source (#PCDATA)>
+<!ELEMENT drug_name (#PCDATA)>
+<!ELEMENT form (#PCDATA)>
+<!ELEMENT dose (#PCDATA)>
+<!ELEMENT route (#PCDATA)>
+<!ELEMENT frequency (#PCDATA)>
+<!ELEMENT indication (#PCDATA)>
+<!ELEMENT high_risk_class (#PCDATA)>
+<!ELEMENT adherence (#PCDATA)>
+<!ELEMENT source_type (#PCDATA)>
+<!ELEMENT status (#PCDATA)>

@@ -1,0 +1,185 @@
+# Generated from sql/. Do not edit by hand.
+# SOURCE: structured_medication_review_grade
+openapi: 3.1.0
+info:
+  title: Structured Medication Review — StructuredMedicationReviewGrade
+  version: 1.0.0
+  description: "Computed scoring result for a structured medication review: review status, anticholinergic burden score and band, polypharmacy band, composite burden band, and medicine counts."
+paths:
+  /structured-medication-review-grades:
+    get:
+      summary: List StructuredMedicationReviewGrade records
+      operationId: listStructuredMedicationReviewGrade
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of StructuredMedicationReviewGrade records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/StructuredMedicationReviewGrade"
+    post:
+      summary: Create a new StructuredMedicationReviewGrade
+      operationId: createStructuredMedicationReviewGrade
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/StructuredMedicationReviewGrade"
+      responses:
+        "201":
+          description: The newly created StructuredMedicationReviewGrade
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/StructuredMedicationReviewGrade"
+        "400":
+          description: Validation error
+  /structured-medication-review-grades/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one StructuredMedicationReviewGrade by id
+      operationId: getStructuredMedicationReviewGrade
+      responses:
+        "200":
+          description: The requested StructuredMedicationReviewGrade
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/StructuredMedicationReviewGrade"
+        "404":
+          description: StructuredMedicationReviewGrade not found
+    patch:
+      summary: Update an existing StructuredMedicationReviewGrade
+      operationId: updateStructuredMedicationReviewGrade
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/StructuredMedicationReviewGrade"
+      responses:
+        "200":
+          description: The updated StructuredMedicationReviewGrade
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/StructuredMedicationReviewGrade"
+        "404":
+          description: StructuredMedicationReviewGrade not found
+    delete:
+      summary: Soft-delete a StructuredMedicationReviewGrade
+      operationId: deleteStructuredMedicationReviewGrade
+      responses:
+        "204":
+          description: StructuredMedicationReviewGrade deleted
+        "404":
+          description: StructuredMedicationReviewGrade not found
+components:
+  schemas:
+    StructuredMedicationReviewGrade:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was most recently updated.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was soft-deleted.
+        structured_medication_review_id:
+          type: string
+          format: uuid
+          description: Foreign key to the parent structured medication review (unique, 1:1).
+        review_status:
+          type: string
+          enum:
+            - complete
+            - incomplete
+            - ""
+          description: "Overall review status: complete or incomplete."
+        anticholinergic_burden_score:
+          type: integer
+          format: int32
+          description: Sum of the per-medicine anticholinergic burden points (ACB scale).
+        anticholinergic_band:
+          type: string
+          enum:
+            - low
+            - significant
+            - ""
+          description: "Anticholinergic burden band: low, or significant when the score is 3 or more."
+        polypharmacy_band:
+          type: string
+          enum:
+            - none
+            - polypharmacy
+            - hyperpolypharmacy
+            - ""
+          description: "Polypharmacy band from the regular-medicine count: none (< 5), polypharmacy (5-9), or hyperpolypharmacy (>= 10)."
+        burden_band:
+          type: string
+          enum:
+            - low
+            - moderate
+            - high
+            - ""
+          description: "Composite burden band (worse of polypharmacy and anticholinergic bands): low, moderate, or high."
+        medicine_count:
+          type: integer
+          format: int32
+          description: Total count of medicines reviewed.
+        regular_medicine_count:
+          type: integer
+          format: int32
+          description: Count of regular medicines that count toward polypharmacy.
+        graded_at:
+          type: string
+          format: date-time
+          description: Timestamp when the engine last computed the grade.
+      required:
+        - created_at
+        - updated_at
+        - structured_medication_review_id
+        - review_status
+        - anticholinergic_burden_score
+        - anticholinergic_band
+        - polypharmacy_band
+        - burden_band
+        - medicine_count
+        - regular_medicine_count
+        - graded_at
+      description: "Computed scoring result for a structured medication review: review status, anticholinergic burden score and band, polypharmacy band, composite burden band, and medicine counts."

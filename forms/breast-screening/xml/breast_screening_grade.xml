@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE breast_screening_grade SYSTEM "breast_screening_grade.dtd">
+<breast_screening_grade>
+<id>880e8400-e29b-41d4-a716-446655440003</id>
+<created_at>2026-04-09T10:00:00Z</created_at>
+<updated_at>2026-04-09T10:00:00Z</updated_at>
+<deleted_at>2026-04-09T10:00:00Z</deleted_at>
+<breast_screening_id>770e8400-e29b-41d4-a716-446655440002</breast_screening_id>
+<eligibility_status>eligible</eligibility_status>
+<result_class>routine</result_class>
+<management_action>routine-recall</management_action>
+<status>complete</status>
+<graded_at>2026-04-09T10:00:00Z</graded_at>
+</breast_screening_grade>

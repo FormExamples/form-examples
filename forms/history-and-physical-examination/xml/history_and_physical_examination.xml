@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE history_and_physical_examination SYSTEM "history_and_physical_examination.dtd">
+<history_and_physical_examination>
+<id>770e8400-e29b-41d4-a716-446655440002</id>
+<created_at>2026-04-09T10:00:00Z</created_at>
+<updated_at>2026-04-09T10:00:00Z</updated_at>
+<deleted_at>2026-04-09T10:00:00Z</deleted_at>
+<patient_id>550e8400-e29b-41d4-a716-446655440000</patient_id>
+<clinician_id>660e8400-e29b-41d4-a716-446655440001</clinician_id>
+<clerked_at>2026-04-09T10:00:00Z</clerked_at>
+<clinician_role>doctor</clinician_role>
+<registration_number></registration_number>
+<care_setting>emergency-department</care_setting>
+<admission_source>self</admission_source>
+<patient_identifier></patient_identifier>
+<age_band>18-39</age_band>
+<sex>female</sex>
+<presenting_complaint></presenting_complaint>
+<history_of_presenting_complaint>Example text.</history_of_presenting_complaint>
+<past_medical_surgical_history>Example text.</past_medical_surgical_history>
+<drug_history>Example text.</drug_history>
+<allergy_status>none-known</allergy_status>
+<allergy_detail></allergy_detail>
+<family_history>Example text.</family_history>
+<social_history>Example text.</social_history>
+<systems_review></systems_review>
+<temperature>0.0</temperature>
+<heart_rate>1</heart_rate>
+<respiratory_rate>1</respiratory_rate>
+<systolic_blood_pressure>1</systolic_blood_pressure>
+<oxygen_saturation>1</oxygen_saturation>
+<consciousness_level>alert</consciousness_level>
+<exam_cardiovascular></exam_cardiovascular>
+<exam_respiratory></exam_respiratory>
+<exam_abdominal></exam_abdominal>
+<exam_neurological></exam_neurological>
+<exam_other></exam_other>
+<investigations></investigations>
+<impression>Example text.</impression>
+<red_flag_findings>Example text.</red_flag_findings>
+<management_plan>Example text.</management_plan>
+<clinical_note>Example Hospital</clinical_note>
+</history_and_physical_examination>

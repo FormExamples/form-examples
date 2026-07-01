@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE electrocardiogram_test_result SYSTEM "electrocardiogram_test_result.dtd">
+<electrocardiogram_test_result>
+<id>770e8400-e29b-41d4-a716-446655440002</id>
+<created_at>2026-04-09T10:00:00Z</created_at>
+<updated_at>2026-04-09T10:00:00Z</updated_at>
+<deleted_at>2026-04-09T10:00:00Z</deleted_at>
+<patient_id>550e8400-e29b-41d4-a716-446655440000</patient_id>
+<clinician_id>660e8400-e29b-41d4-a716-446655440001</clinician_id>
+<originating_request_reference></originating_request_reference>
+<report_status>preliminary</report_status>
+<ecg_type>resting-12-lead</ecg_type>
+<performed_date>2026-01-15</performed_date>
+<reported_date>2026-01-15</reported_date>
+<recording_quality>good</recording_quality>
+<clinical_history>Example text.</clinical_history>
+<ventricular_rate_bpm>1</ventricular_rate_bpm>
+<rhythm>sinus</rhythm>
+<pr_interval_ms>1</pr_interval_ms>
+<qrs_duration_ms>1</qrs_duration_ms>
+<qt_interval_ms>1</qt_interval_ms>
+<qtc_ms>1</qtc_ms>
+<cardiac_axis>normal</cardiac_axis>
+<st_elevation>true</st_elevation>
+<st_depression>true</st_depression>
+<t_wave_inversion>true</t_wave_inversion>
+<pathological_q_waves>true</pathological_q_waves>
+<left_ventricular_hypertrophy>true</left_ventricular_hypertrophy>
+<bundle_branch_block>true</bundle_branch_block>
+<ischaemia>true</ischaemia>
+<normal_ecg>true</normal_ecg>
+<interpretation></interpretation>
+<comparison_with_previous></comparison_with_previous>
+<impression>Example text.</impression>
+<reporting_category>General</reporting_category>
+<recommended_follow_up></recommended_follow_up>
+<critical_result_communicated>true</critical_result_communicated>
+<reported_to></reported_to>
+</electrocardiogram_test_result>

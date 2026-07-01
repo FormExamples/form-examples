@@ -1,0 +1,87 @@
+// Generated from sql/. Do not edit by hand.
+// SOURCE: abdominal_aortic_aneurysm_screening
+
+syntax = "proto3";
+
+package form_examples.abdominal_aortic_aneurysm_screening;
+
+enum AbdominalAorticAneurysmScreeningTechnicianRoleEnum {
+  TECHNICIANROLE_UNSPECIFIED = 0;
+  TECHNICIANROLE_SCREENING_TECHNICIAN = 1;  // screening-technician
+  TECHNICIANROLE_CLINICAL_SKILLS_TRAINER = 2;  // clinical-skills-trainer
+  TECHNICIANROLE_OTHER = 3;  // other
+}
+
+enum AbdominalAorticAneurysmScreeningSexEnum {
+  SEX_UNSPECIFIED = 0;
+  SEX_FEMALE = 1;  // female
+  SEX_MALE = 2;  // male
+  SEX_INTERSEX = 3;  // intersex
+  SEX_UNKNOWN = 4;  // unknown
+}
+
+enum AbdominalAorticAneurysmScreeningEligibilityRouteEnum {
+  ELIGIBILITYROUTE_UNSPECIFIED = 0;
+  ELIGIBILITYROUTE_ROUTINE_YEAR_OF_65 = 1;  // routine-year-of-65
+  ELIGIBILITYROUTE_SELF_REFERRAL_OVER_65 = 2;  // self-referral-over-65
+  ELIGIBILITYROUTE_OTHER = 3;  // other
+}
+
+enum AbdominalAorticAneurysmScreeningScanTypeEnum {
+  SCANTYPE_UNSPECIFIED = 0;
+  SCANTYPE_FIRST_SCAN = 1;  // first-scan
+  SCANTYPE_SURVEILLANCE_RESCAN = 2;  // surveillance-rescan
+}
+
+enum AbdominalAorticAneurysmScreeningConsentGivenEnum {
+  CONSENTGIVEN_UNSPECIFIED = 0;
+  CONSENTGIVEN_YES = 1;  // yes
+  CONSENTGIVEN_NO = 2;  // no
+}
+
+enum AbdominalAorticAneurysmScreeningLeafletProvidedEnum {
+  LEAFLETPROVIDED_UNSPECIFIED = 0;
+  LEAFLETPROVIDED_YES = 1;  // yes
+  LEAFLETPROVIDED_NO = 2;  // no
+}
+
+enum AbdominalAorticAneurysmScreeningAortaVisualisedEnum {
+  AORTAVISUALISED_UNSPECIFIED = 0;
+  AORTAVISUALISED_YES = 1;  // yes
+  AORTAVISUALISED_NO = 2;  // no
+}
+
+enum AbdominalAorticAneurysmScreeningSymptomaticEnum {
+  SYMPTOMATIC_UNSPECIFIED = 0;
+  SYMPTOMATIC_YES = 1;  // yes
+  SYMPTOMATIC_NO = 2;  // no
+}
+
+message AbdominalAorticAneurysmScreening {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string patient_id = 5;  // UUID — uuid
+  string clinician_id = 6;  // UUID — uuid
+  string technician_name = 7;  // TEXT
+  AbdominalAorticAneurysmScreeningTechnicianRoleEnum technician_role = 8;  // VARCHAR(30)
+  string clinic_site = 9;  // TEXT
+  string scanned_at = 10;  // TIMESTAMPTZ — iso 8601
+  string device_identifier = 11;  // TEXT
+  string patient_identifier = 12;  // VARCHAR(100) — max 100 chars
+  int32 age = 13;  // INTEGER
+  AbdominalAorticAneurysmScreeningSexEnum sex = 14;  // VARCHAR(20)
+  AbdominalAorticAneurysmScreeningEligibilityRouteEnum eligibility_route = 15;  // VARCHAR(30)
+  AbdominalAorticAneurysmScreeningScanTypeEnum scan_type = 16;  // VARCHAR(25)
+  AbdominalAorticAneurysmScreeningConsentGivenEnum consent_given = 17;  // VARCHAR(5)
+  AbdominalAorticAneurysmScreeningLeafletProvidedEnum leaflet_provided = 18;  // VARCHAR(5)
+  string consent_note = 19;  // TEXT
+  AbdominalAorticAneurysmScreeningAortaVisualisedEnum aorta_visualised = 20;  // VARCHAR(5)
+  double max_aortic_diameter_cm = 21;  // NUMERIC(4,1) — numeric(4,1)
+  double prior_max_diameter_cm = 22;  // NUMERIC(4,1) — numeric(4,1)
+  string prior_scan_date = 23;  // DATE — iso 8601 date
+  AbdominalAorticAneurysmScreeningSymptomaticEnum symptomatic = 24;  // VARCHAR(5)
+  string incidental_findings = 25;  // TEXT
+  string result_note = 26;  // TEXT
+}

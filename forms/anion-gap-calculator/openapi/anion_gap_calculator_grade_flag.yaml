@@ -1,0 +1,168 @@
+# Generated from sql/. Do not edit by hand.
+# SOURCE: anion_gap_calculator_grade_flag
+openapi: 3.1.0
+info:
+  title: Anion Gap Calculator — AnionGapCalculatorGradeFlag
+  version: 1.0.0
+  description: Safety-critical flags that fire independently of the classification, with priority and a suggested action for the assessing clinician.
+paths:
+  /anion-gap-calculator-grade-flags:
+    get:
+      summary: List AnionGapCalculatorGradeFlag records
+      operationId: listAnionGapCalculatorGradeFlag
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of AnionGapCalculatorGradeFlag records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/AnionGapCalculatorGradeFlag"
+    post:
+      summary: Create a new AnionGapCalculatorGradeFlag
+      operationId: createAnionGapCalculatorGradeFlag
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/AnionGapCalculatorGradeFlag"
+      responses:
+        "201":
+          description: The newly created AnionGapCalculatorGradeFlag
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AnionGapCalculatorGradeFlag"
+        "400":
+          description: Validation error
+  /anion-gap-calculator-grade-flags/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one AnionGapCalculatorGradeFlag by id
+      operationId: getAnionGapCalculatorGradeFlag
+      responses:
+        "200":
+          description: The requested AnionGapCalculatorGradeFlag
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AnionGapCalculatorGradeFlag"
+        "404":
+          description: AnionGapCalculatorGradeFlag not found
+    patch:
+      summary: Update an existing AnionGapCalculatorGradeFlag
+      operationId: updateAnionGapCalculatorGradeFlag
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/AnionGapCalculatorGradeFlag"
+      responses:
+        "200":
+          description: The updated AnionGapCalculatorGradeFlag
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AnionGapCalculatorGradeFlag"
+        "404":
+          description: AnionGapCalculatorGradeFlag not found
+    delete:
+      summary: Soft-delete a AnionGapCalculatorGradeFlag
+      operationId: deleteAnionGapCalculatorGradeFlag
+      responses:
+        "204":
+          description: AnionGapCalculatorGradeFlag deleted
+        "404":
+          description: AnionGapCalculatorGradeFlag not found
+components:
+  schemas:
+    AnionGapCalculatorGradeFlag:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was most recently updated.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was soft-deleted.
+        anion_gap_calculator_grade_id:
+          type: string
+          format: uuid
+          description: Foreign key to the parent grade.
+        flag_id:
+          type: string
+          maxLength: 50
+          description: Stable flag identifier (e.g. F-VERY-HIGH-001).
+        category:
+          type: string
+          enum:
+            - very-high
+            - high-hagma
+            - hypoalbuminaemia-masking
+            - low
+            - incomplete
+            - other
+            - ""
+          description: "Flag category: very-high, high-hagma, hypoalbuminaemia-masking, low, incomplete, or other."
+        priority:
+          type: string
+          enum:
+            - low
+            - medium
+            - high
+            - urgent
+            - ""
+          description: "Priority: low, medium, high, or urgent."
+        description:
+          type: string
+          maxLength: 500
+          description: Human-readable description of what fired the flag.
+        suggested_action:
+          type: string
+          maxLength: 500
+          description: "Suggested clinical action (e.g. \"urgent search for the cause of the metabolic acidosis\")."
+      required:
+        - created_at
+        - updated_at
+        - anion_gap_calculator_grade_id
+        - flag_id
+        - category
+        - priority
+        - description
+        - suggested_action
+      description: Safety-critical flags that fire independently of the classification, with priority and a suggested action for the assessing clinician.

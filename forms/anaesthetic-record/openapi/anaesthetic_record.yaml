@@ -1,0 +1,445 @@
+# Generated from sql/. Do not edit by hand.
+# SOURCE: anaesthetic_record
+openapi: 3.1.0
+info:
+  title: Anaesthetic Record — AnaestheticRecord
+  version: 1.0.0
+  description: "Contemporaneous intra-operative anaesthesia chart: case identification, pre-induction checks, ASA and airway assessment, airway management, monitoring, technique, fluids, regional technique, recovery handover, and sign-off."
+paths:
+  /anaesthetic-records:
+    get:
+      summary: List AnaestheticRecord records
+      operationId: listAnaestheticRecord
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of AnaestheticRecord records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/AnaestheticRecord"
+    post:
+      summary: Create a new AnaestheticRecord
+      operationId: createAnaestheticRecord
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/AnaestheticRecord"
+      responses:
+        "201":
+          description: The newly created AnaestheticRecord
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AnaestheticRecord"
+        "400":
+          description: Validation error
+  /anaesthetic-records/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one AnaestheticRecord by id
+      operationId: getAnaestheticRecord
+      responses:
+        "200":
+          description: The requested AnaestheticRecord
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AnaestheticRecord"
+        "404":
+          description: AnaestheticRecord not found
+    patch:
+      summary: Update an existing AnaestheticRecord
+      operationId: updateAnaestheticRecord
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/AnaestheticRecord"
+      responses:
+        "200":
+          description: The updated AnaestheticRecord
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AnaestheticRecord"
+        "404":
+          description: AnaestheticRecord not found
+    delete:
+      summary: Soft-delete a AnaestheticRecord
+      operationId: deleteAnaestheticRecord
+      responses:
+        "204":
+          description: AnaestheticRecord deleted
+        "404":
+          description: AnaestheticRecord not found
+components:
+  schemas:
+    AnaestheticRecord:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was most recently updated.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was soft-deleted.
+        patient_id:
+          type: string
+          format: uuid
+          description: Foreign key to the patient who received the anaesthetic.
+        clinician_id:
+          type: string
+          format: uuid
+          description: Foreign key to the responsible anaesthetist (primary author of the record).
+        theatre:
+          type: string
+          maxLength: 100
+          description: Theatre or location where the anaesthetic was delivered.
+        operation_date:
+          type: string
+          format: date
+          description: Date of the anaesthetic.
+        anaesthetist_name:
+          type: string
+          maxLength: 255
+          description: Name of the responsible anaesthetist as recorded on the chart.
+        assistant_name:
+          type: string
+          maxLength: 255
+          description: Name of the ODP or anaesthetic assistant.
+        surgeon_name:
+          type: string
+          maxLength: 255
+          description: Name of the operating surgeon.
+        planned_procedure:
+          type: string
+          description: Planned operation or procedure.
+        urgency:
+          type: string
+          enum:
+            - elective
+            - urgent
+            - emergency
+            - immediate
+            - ""
+          description: "Case urgency: elective, urgent, emergency, or immediate."
+        machine_checked:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: "Whether the anaesthetic machine check was performed: yes or no."
+        who_sign_in:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: "Whether the WHO Sign In was performed: yes or no."
+        who_time_out:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: "Whether the WHO Time Out was performed: yes or no."
+        consent_confirmed:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: "Whether consent was confirmed: yes or no."
+        fasting_confirmed:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: "Whether fasting status was confirmed: yes or no."
+        iv_access:
+          type: string
+          description: Intravenous access sites established.
+        allergy_band_checked:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: "Whether the allergy band was checked: yes or no."
+        documented_allergies:
+          type: string
+          description: Documented allergies used for the drug allergy-conflict safety check.
+        asa_status:
+          type: string
+          enum:
+            - I
+            - II
+            - III
+            - IV
+            - V
+            - VI
+            - ""
+          description: "ASA Physical Status classification: I, II, III, IV, V, or VI."
+        asa_emergency_modifier:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: "Whether the ASA E (emergency) modifier applies: yes or no."
+        mallampati_class:
+          type: integer
+          format: int32
+          description: Modified Mallampati class (1-4).
+        mouth_opening_cm:
+          type: number
+          format: double
+          description: Inter-incisor gap (mouth opening) in centimetres.
+        thyromental_distance_cm:
+          type: number
+          format: double
+          description: Thyromental distance in centimetres.
+        dentition:
+          type: string
+          description: Dentition notes, including loose or capped teeth.
+        anticipated_difficult_airway:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: "Whether a difficult airway was anticipated: yes or no."
+        prior_difficult_intubation:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: "Whether there is a history of prior difficult intubation: yes or no."
+        airway_technique:
+          type: string
+          enum:
+            - facemask
+            - supraglottic
+            - tracheal-tube
+            - tracheostomy
+            - awake-foi
+            - ""
+          description: "Airway technique used: facemask, supraglottic, tracheal-tube, tracheostomy, or awake-foi."
+        device_size:
+          type: string
+          maxLength: 60
+          description: Airway device or tube size.
+        tube_depth_cm:
+          type: number
+          format: double
+          description: Tracheal tube depth at the teeth in centimetres.
+        cuffed:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: "Whether the airway device was cuffed: yes or no."
+        cormack_lehane_grade:
+          type: integer
+          format: int32
+          description: Cormack-Lehane grade of the laryngoscopic view (1-4).
+        intubation_attempts:
+          type: integer
+          format: int32
+          description: Number of intubation attempts.
+        capnography_confirmed:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: "Whether airway placement was confirmed by capnography: yes or no."
+        monitoring_modalities:
+          type: string
+          description: Monitoring modalities in use as a space-separated token list (e.g. ecg nibp spo2 capnography temperature neuromuscular depth-of-anaesthesia arterial-line cvp urine-output).
+        anaesthetic_technique:
+          type: string
+          enum:
+            - general
+            - regional
+            - sedation
+            - mac
+            - combined
+            - ""
+          description: "Primary anaesthetic technique: general, regional, sedation, mac, or combined."
+        crystalloid_ml:
+          type: number
+          format: double
+          description: Crystalloid volume administered in millilitres.
+        colloid_ml:
+          type: number
+          format: double
+          description: Colloid volume administered in millilitres.
+        blood_products_ml:
+          type: number
+          format: double
+          description: Blood products volume administered in millilitres.
+        estimated_blood_loss_ml:
+          type: number
+          format: double
+          description: Estimated blood loss in millilitres.
+        urine_output_ml:
+          type: number
+          format: double
+          description: Urine output in millilitres.
+        cell_salvage_ml:
+          type: number
+          format: double
+          description: Cell-salvaged blood returned to the patient in millilitres.
+        regional_technique:
+          type: string
+          enum:
+            - none
+            - spinal
+            - epidural
+            - cse
+            - peripheral-block
+            - ""
+          description: "Regional / neuraxial technique: none, spinal, epidural, cse, or peripheral-block."
+        regional_level:
+          type: string
+          maxLength: 100
+          description: Interspace or anatomical target of the regional technique.
+        regional_drug:
+          type: string
+          maxLength: 255
+          description: Local anaesthetic agent used for the regional technique.
+        regional_dose_mg:
+          type: number
+          format: double
+          description: Regional local anaesthetic dose in milligrams.
+        block_height:
+          type: string
+          maxLength: 100
+          description: Achieved block height or clinical effect.
+        regional_complications:
+          type: string
+          description: Complications of the regional technique.
+        recovery_destination:
+          type: string
+          enum:
+            - recovery
+            - hdu
+            - icu
+            - ward
+            - ""
+          description: "Post-anaesthetic destination: recovery, hdu, icu, or ward."
+        handover_airway_status:
+          type: string
+          description: Airway status at handover to the recovery team.
+        analgesia_plan:
+          type: string
+          description: Post-operative analgesia plan.
+        antiemetic_plan:
+          type: string
+          description: Post-operative antiemetic plan.
+        oxygen_plan:
+          type: string
+          description: Post-operative oxygen therapy plan.
+        outstanding_tasks:
+          type: string
+          description: Outstanding tasks handed over to the recovery team.
+        handover_at:
+          type: string
+          format: date-time
+          description: Timestamp of handover to the recovery team.
+        receiving_practitioner:
+          type: string
+          maxLength: 255
+          description: Name of the practitioner receiving the patient at handover.
+        anaesthetist_signature:
+          type: string
+          description: Electronic signature of the anaesthetist at sign-off.
+        signed_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was signed.
+      required:
+        - created_at
+        - updated_at
+        - patient_id
+        - theatre
+        - anaesthetist_name
+        - assistant_name
+        - surgeon_name
+        - planned_procedure
+        - urgency
+        - machine_checked
+        - who_sign_in
+        - who_time_out
+        - consent_confirmed
+        - fasting_confirmed
+        - iv_access
+        - allergy_band_checked
+        - documented_allergies
+        - asa_status
+        - asa_emergency_modifier
+        - dentition
+        - anticipated_difficult_airway
+        - prior_difficult_intubation
+        - airway_technique
+        - device_size
+        - cuffed
+        - capnography_confirmed
+        - monitoring_modalities
+        - anaesthetic_technique
+        - regional_technique
+        - regional_level
+        - regional_drug
+        - block_height
+        - regional_complications
+        - recovery_destination
+        - handover_airway_status
+        - analgesia_plan
+        - antiemetic_plan
+        - oxygen_plan
+        - outstanding_tasks
+        - receiving_practitioner
+        - anaesthetist_signature
+      description: "Contemporaneous intra-operative anaesthesia chart: case identification, pre-induction checks, ASA and airway assessment, airway management, monitoring, technique, fluids, regional technique, recovery handover, and sign-off."

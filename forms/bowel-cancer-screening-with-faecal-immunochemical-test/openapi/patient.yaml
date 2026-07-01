@@ -1,0 +1,186 @@
+# Generated from sql/. Do not edit by hand.
+# SOURCE: patient
+openapi: 3.1.0
+info:
+  title: Bowel Cancer Screening With Faecal Immunochemical Test — Patient
+  version: 1.0.0
+  description: Patient demographic information used by the bowel-cancer-screening FIT record; the screening participant.
+paths:
+  /patients:
+    get:
+      summary: List Patient records
+      operationId: listPatient
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of Patient records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Patient"
+    post:
+      summary: Create a new Patient
+      operationId: createPatient
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Patient"
+      responses:
+        "201":
+          description: The newly created Patient
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Patient"
+        "400":
+          description: Validation error
+  /patients/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one Patient by id
+      operationId: getPatient
+      responses:
+        "200":
+          description: The requested Patient
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Patient"
+        "404":
+          description: Patient not found
+    patch:
+      summary: Update an existing Patient
+      operationId: updatePatient
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Patient"
+      responses:
+        "200":
+          description: The updated Patient
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Patient"
+        "404":
+          description: Patient not found
+    delete:
+      summary: Soft-delete a Patient
+      operationId: deletePatient
+      responses:
+        "204":
+          description: Patient deleted
+        "404":
+          description: Patient not found
+components:
+  schemas:
+    Patient:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was updated most-recently.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was deleted a.k.a. soft-removed.
+        name:
+          type: string
+          maxLength: 255
+          description: Full patient name.
+        birth_date:
+          type: string
+          format: date
+          description: Date of birth.
+        sex:
+          type: string
+          enum:
+            - female
+            - male
+            - intersex
+            - unknown
+            - ""
+          description: "Sex recorded for clinical purposes: female, male, intersex, or unknown."
+        email:
+          type: string
+          description: Email address.
+        phone:
+          type: string
+          description: Phone number.
+        postal_address_as_full_text:
+          type: string
+          description: Postal address as a single text block.
+        country_as_iso_3166_1_alpha_2:
+          type: string
+          maxLength: 2
+          description: Country as ISO 3166-1 alpha-2.
+        postcode:
+          type: string
+          description: Postal code.
+        united_kingdom_nhs_number:
+          type: string
+          maxLength: 20
+          description: United Kingdom NHS number, unique per person.
+        hospital_mrn:
+          type: string
+          maxLength: 50
+          description: Local hospital medical record number (MRN).
+        height_as_cm:
+          type: number
+          format: double
+          description: Height in centimetres.
+        weight_as_kg:
+          type: number
+          format: double
+          description: Weight in kilograms.
+        body_mass_index:
+          type: number
+          format: double
+          description: Body mass index (BMI), kg/m^2.
+        allergies_summary:
+          type: string
+          description: Free-text summary of known allergies.
+      required:
+        - created_at
+        - updated_at
+        - name
+        - birth_date
+        - sex
+        - allergies_summary
+      description: Patient demographic information used by the bowel-cancer-screening FIT record; the screening participant.

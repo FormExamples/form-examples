@@ -1,0 +1,234 @@
+# Generated from sql/. Do not edit by hand.
+# SOURCE: rockall_score_for_upper_gastrointestinal_bleeding
+openapi: 3.1.0
+info:
+  title: Rockall Score For Upper Gastrointestinal Bleeding — RockallScoreForUpperGastrointestinalBleeding
+  version: 1.0.0
+  description: "Main Rockall assessment record: assessment context, patient identification, the three clinical parameter inputs (age, shock, comorbidity), and the two endoscopic parameter inputs (diagnosis, stigmata of recent haemorrhage)."
+paths:
+  /rockall-score-for-upper-gastrointestinal-bleedings:
+    get:
+      summary: List RockallScoreForUpperGastrointestinalBleeding records
+      operationId: listRockallScoreForUpperGastrointestinalBleeding
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of RockallScoreForUpperGastrointestinalBleeding records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/RockallScoreForUpperGastrointestinalBleeding"
+    post:
+      summary: Create a new RockallScoreForUpperGastrointestinalBleeding
+      operationId: createRockallScoreForUpperGastrointestinalBleeding
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/RockallScoreForUpperGastrointestinalBleeding"
+      responses:
+        "201":
+          description: The newly created RockallScoreForUpperGastrointestinalBleeding
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/RockallScoreForUpperGastrointestinalBleeding"
+        "400":
+          description: Validation error
+  /rockall-score-for-upper-gastrointestinal-bleedings/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one RockallScoreForUpperGastrointestinalBleeding by id
+      operationId: getRockallScoreForUpperGastrointestinalBleeding
+      responses:
+        "200":
+          description: The requested RockallScoreForUpperGastrointestinalBleeding
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/RockallScoreForUpperGastrointestinalBleeding"
+        "404":
+          description: RockallScoreForUpperGastrointestinalBleeding not found
+    patch:
+      summary: Update an existing RockallScoreForUpperGastrointestinalBleeding
+      operationId: updateRockallScoreForUpperGastrointestinalBleeding
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/RockallScoreForUpperGastrointestinalBleeding"
+      responses:
+        "200":
+          description: The updated RockallScoreForUpperGastrointestinalBleeding
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/RockallScoreForUpperGastrointestinalBleeding"
+        "404":
+          description: RockallScoreForUpperGastrointestinalBleeding not found
+    delete:
+      summary: Soft-delete a RockallScoreForUpperGastrointestinalBleeding
+      operationId: deleteRockallScoreForUpperGastrointestinalBleeding
+      responses:
+        "204":
+          description: RockallScoreForUpperGastrointestinalBleeding deleted
+        "404":
+          description: RockallScoreForUpperGastrointestinalBleeding not found
+components:
+  schemas:
+    RockallScoreForUpperGastrointestinalBleeding:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was updated most-recently.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was deleted a.k.a. soft-removed.
+        patient_id:
+          type: string
+          format: uuid
+          description: Foreign key to the patient being assessed (delete restricted).
+        clinician_id:
+          type: string
+          format: uuid
+          description: Foreign key to the assessing clinician (optional; delete restricted).
+        clinician_name:
+          type: string
+          maxLength: 255
+          description: Name of the assessing clinician as recorded on the assessment.
+        clinician_role:
+          type: string
+          enum:
+            - doctor
+            - nurse
+            - gastroenterologist
+            - endoscopist
+            - other
+            - ""
+          description: "Role of the assessing clinician: doctor, nurse, gastroenterologist, endoscopist, or other."
+        assessed_at:
+          type: string
+          format: date-time
+          description: Date and time the assessment was performed.
+        care_setting:
+          type: string
+          enum:
+            - emergency-department
+            - ward
+            - endoscopy-unit
+            - other
+            - ""
+          description: "Care setting: emergency-department, ward, endoscopy-unit, or other."
+        presenting_complaint:
+          type: string
+          description: Presenting complaint free text (e.g. haematemesis, melaena, coffee-ground vomiting).
+        patient_identifier:
+          type: string
+          maxLength: 100
+          description: Local patient identifier as recorded on the assessment.
+        age_years:
+          type: integer
+          format: int32
+          description: Clinical parameter — patient age in whole years; scores 0 (<60), 1 (60-79), or 2 (>=80).
+        sex:
+          type: string
+          enum:
+            - female
+            - male
+            - intersex
+            - unknown
+            - ""
+          description: "Patient sex recorded for the assessment: female, male, intersex, or unknown."
+        systolic_blood_pressure_mmhg:
+          type: integer
+          format: int32
+          description: Clinical parameter (shock) — systolic blood pressure in mmHg; SBP < 100 scores 2 (hypotension).
+        heart_rate_bpm:
+          type: integer
+          format: int32
+          description: Clinical parameter (shock) — pulse in beats per minute; HR >= 100 scores 1 (tachycardia) when not hypotensive.
+        comorbidity:
+          type: string
+          enum:
+            - none
+            - major
+            - severe
+            - ""
+          description: "Clinical parameter — comorbidity: none (0), major (cardiac failure / ischaemic heart disease / any major comorbidity, 2), or severe (renal failure / liver failure / disseminated malignancy, 3)."
+        endoscopy_performed:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Whether endoscopy has been performed (yes / no); gates computation of the full post-endoscopy score.
+        diagnosis:
+          type: string
+          enum:
+            - mallory-weiss-or-none
+            - all-other
+            - upper-gi-malignancy
+            - ""
+          description: "Endoscopic parameter (full score only) — diagnosis: mallory-weiss-or-none (0), all-other (1), or upper-gi-malignancy (2)."
+        stigmata_recent_haemorrhage:
+          type: string
+          enum:
+            - none-or-dark-spot
+            - high-risk
+            - ""
+          description: "Endoscopic parameter (full score only) — stigmata of recent haemorrhage: none-or-dark-spot (0) or high-risk (blood in upper GI tract, adherent clot, or visible / spurting vessel, 2)."
+        clinical_note:
+          type: string
+          description: Free-text clinical note recorded with the assessment.
+      required:
+        - created_at
+        - updated_at
+        - patient_id
+        - clinician_name
+        - clinician_role
+        - care_setting
+        - presenting_complaint
+        - patient_identifier
+        - sex
+        - comorbidity
+        - endoscopy_performed
+        - diagnosis
+        - stigmata_recent_haemorrhage
+        - clinical_note
+      description: "Main Rockall assessment record: assessment context, patient identification, the three clinical parameter inputs (age, shock, comorbidity), and the two endoscopic parameter inputs (diagnosis, stigmata of recent haemorrhage)."

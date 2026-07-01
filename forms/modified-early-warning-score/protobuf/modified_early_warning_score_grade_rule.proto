@@ -1,0 +1,38 @@
+// Generated from sql/. Do not edit by hand.
+// SOURCE: modified_early_warning_score_grade_rule
+
+syntax = "proto3";
+
+package form_examples.modified_early_warning_score;
+
+enum ModifiedEarlyWarningScoreGradeRuleInstrumentEnum {
+  INSTRUMENT_UNSPECIFIED = 0;
+  INSTRUMENT_SYSTOLIC_BLOOD_PRESSURE = 1;  // systolic-blood-pressure
+  INSTRUMENT_HEART_RATE = 2;  // heart-rate
+  INSTRUMENT_RESPIRATORY_RATE = 3;  // respiratory-rate
+  INSTRUMENT_TEMPERATURE = 4;  // temperature
+  INSTRUMENT_AVPU = 5;  // avpu
+  INSTRUMENT_AGGREGATE = 6;  // aggregate
+  INSTRUMENT_SINGLE_PARAMETER = 7;  // single-parameter
+}
+
+enum ModifiedEarlyWarningScoreGradeRuleBandEnum {
+  BAND_UNSPECIFIED = 0;
+  BAND_LOW = 1;  // low
+  BAND_MEDIUM = 2;  // medium
+  BAND_HIGH = 3;  // high
+}
+
+message ModifiedEarlyWarningScoreGradeRule {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string modified_early_warning_score_grade_id = 5;  // UUID — uuid
+  string rule_id = 6;  // VARCHAR(40) — max 40 chars
+  ModifiedEarlyWarningScoreGradeRuleInstrumentEnum instrument = 7;  // VARCHAR(30)
+  ModifiedEarlyWarningScoreGradeRuleBandEnum band = 8;  // VARCHAR(10)
+  int32 points = 9;  // INTEGER
+  string category = 10;  // VARCHAR(50) — max 50 chars
+  string description = 11;  // VARCHAR(500) — max 500 chars
+}

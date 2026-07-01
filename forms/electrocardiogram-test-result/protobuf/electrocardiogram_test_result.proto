@@ -1,0 +1,88 @@
+// Generated from sql/. Do not edit by hand.
+// SOURCE: electrocardiogram_test_result
+
+syntax = "proto3";
+
+package form_examples.electrocardiogram_test_result;
+
+enum ElectrocardiogramTestResultReportStatusEnum {
+  REPORTSTATUS_UNSPECIFIED = 0;
+  REPORTSTATUS_PRELIMINARY = 1;  // preliminary
+  REPORTSTATUS_FINAL = 2;  // final
+  REPORTSTATUS_AMENDED = 3;  // amended
+  REPORTSTATUS_CANCELLED = 4;  // cancelled
+}
+
+enum ElectrocardiogramTestResultEcgTypeEnum {
+  ECGTYPE_UNSPECIFIED = 0;
+  ECGTYPE_RESTING_12_LEAD = 1;  // resting-12-lead
+  ECGTYPE_EXERCISE_STRESS = 2;  // exercise-stress
+  ECGTYPE_AMBULATORY_HOLTER_24H = 3;  // ambulatory-holter-24h
+  ECGTYPE_AMBULATORY_48H = 4;  // ambulatory-48h
+  ECGTYPE_EVENT_RECORDER = 5;  // event-recorder
+  ECGTYPE_OTHER = 6;  // other
+}
+
+enum ElectrocardiogramTestResultRecordingQualityEnum {
+  RECORDINGQUALITY_UNSPECIFIED = 0;
+  RECORDINGQUALITY_GOOD = 1;  // good
+  RECORDINGQUALITY_ADEQUATE = 2;  // adequate
+  RECORDINGQUALITY_POOR = 3;  // poor
+}
+
+enum ElectrocardiogramTestResultRhythmEnum {
+  RHYTHM_UNSPECIFIED = 0;
+  RHYTHM_SINUS = 1;  // sinus
+  RHYTHM_ATRIAL_FIBRILLATION = 2;  // atrial-fibrillation
+  RHYTHM_ATRIAL_FLUTTER = 3;  // atrial-flutter
+  RHYTHM_SVT = 4;  // svt
+  RHYTHM_VENTRICULAR_TACHYCARDIA = 5;  // ventricular-tachycardia
+  RHYTHM_HEART_BLOCK = 6;  // heart-block
+  RHYTHM_PACED = 7;  // paced
+  RHYTHM_OTHER = 8;  // other
+}
+
+enum ElectrocardiogramTestResultCardiacAxisEnum {
+  CARDIACAXIS_UNSPECIFIED = 0;
+  CARDIACAXIS_NORMAL = 1;  // normal
+  CARDIACAXIS_LEFT_DEVIATION = 2;  // left-deviation
+  CARDIACAXIS_RIGHT_DEVIATION = 3;  // right-deviation
+}
+
+message ElectrocardiogramTestResult {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string patient_id = 5;  // UUID — uuid
+  string clinician_id = 6;  // UUID — uuid
+  string originating_request_reference = 7;  // VARCHAR(255) — max 255 chars
+  ElectrocardiogramTestResultReportStatusEnum report_status = 8;  // VARCHAR(15)
+  ElectrocardiogramTestResultEcgTypeEnum ecg_type = 9;  // VARCHAR(25)
+  string performed_date = 10;  // DATE — iso 8601 date
+  string reported_date = 11;  // DATE — iso 8601 date
+  ElectrocardiogramTestResultRecordingQualityEnum recording_quality = 12;  // VARCHAR(10)
+  string clinical_history = 13;  // VARCHAR(1000) — max 1000 chars
+  int32 ventricular_rate_bpm = 14;  // INTEGER
+  ElectrocardiogramTestResultRhythmEnum rhythm = 15;  // VARCHAR(25)
+  int32 pr_interval_ms = 16;  // INTEGER
+  int32 qrs_duration_ms = 17;  // INTEGER
+  int32 qt_interval_ms = 18;  // INTEGER
+  int32 qtc_ms = 19;  // INTEGER
+  ElectrocardiogramTestResultCardiacAxisEnum cardiac_axis = 20;  // VARCHAR(20)
+  bool st_elevation = 21;  // BOOLEAN
+  bool st_depression = 22;  // BOOLEAN
+  bool t_wave_inversion = 23;  // BOOLEAN
+  bool pathological_q_waves = 24;  // BOOLEAN
+  bool left_ventricular_hypertrophy = 25;  // BOOLEAN
+  bool bundle_branch_block = 26;  // BOOLEAN
+  bool ischaemia = 27;  // BOOLEAN
+  bool normal_ecg = 28;  // BOOLEAN
+  string interpretation = 29;  // VARCHAR(2000) — max 2000 chars
+  string comparison_with_previous = 30;  // VARCHAR(1000) — max 1000 chars
+  string impression = 31;  // VARCHAR(2000) — max 2000 chars
+  string reporting_category = 32;  // VARCHAR(50) — max 50 chars
+  string recommended_follow_up = 33;  // VARCHAR(1000) — max 1000 chars
+  bool critical_result_communicated = 34;  // BOOLEAN
+  string reported_to = 35;  // VARCHAR(500) — max 500 chars
+}

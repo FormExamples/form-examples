@@ -1,0 +1,309 @@
+// Generated from sql/. Do not edit by hand.
+// SOURCE: newborn_and_infant_physical_examination
+
+syntax = "proto3";
+
+package form_examples.newborn_and_infant_physical_examination;
+
+enum NewbornAndInfantPhysicalExaminationPractitionerRoleEnum {
+  PRACTITIONERROLE_UNSPECIFIED = 0;
+  PRACTITIONERROLE_MIDWIFE = 1;  // midwife
+  PRACTITIONERROLE_NEONATAL_NURSE = 2;  // neonatal-nurse
+  PRACTITIONERROLE_PAEDIATRICIAN = 3;  // paediatrician
+  PRACTITIONERROLE_GP = 4;  // gp
+  PRACTITIONERROLE_NURSE_PRACTITIONER = 5;  // nurse-practitioner
+  PRACTITIONERROLE_OTHER = 6;  // other
+}
+
+enum NewbornAndInfantPhysicalExaminationExaminationContextEnum {
+  EXAMINATIONCONTEXT_UNSPECIFIED = 0;
+  EXAMINATIONCONTEXT_NEWBORN_72H = 1;  // newborn-72h
+  EXAMINATIONCONTEXT_INFANT_6_8_WEEK = 2;  // infant-6-8-week
+}
+
+enum NewbornAndInfantPhysicalExaminationCareSettingEnum {
+  CARESETTING_UNSPECIFIED = 0;
+  CARESETTING_MATERNITY_WARD = 1;  // maternity-ward
+  CARESETTING_NEONATAL_UNIT = 2;  // neonatal-unit
+  CARESETTING_COMMUNITY = 3;  // community
+  CARESETTING_GP_SURGERY = 4;  // gp-surgery
+  CARESETTING_HOME = 5;  // home
+  CARESETTING_OTHER = 6;  // other
+}
+
+enum NewbornAndInfantPhysicalExaminationSexEnum {
+  SEX_UNSPECIFIED = 0;
+  SEX_MALE = 1;  // male
+  SEX_FEMALE = 2;  // female
+  SEX_INDETERMINATE = 3;  // indeterminate
+}
+
+enum NewbornAndInfantPhysicalExaminationBreechPresentationEnum {
+  BREECHPRESENTATION_UNSPECIFIED = 0;
+  BREECHPRESENTATION_YES = 1;  // yes
+  BREECHPRESENTATION_NO = 2;  // no
+}
+
+enum NewbornAndInfantPhysicalExaminationFamilyHistoryHipProblemsEnum {
+  FAMILYHISTORYHIPPROBLEMS_UNSPECIFIED = 0;
+  FAMILYHISTORYHIPPROBLEMS_YES = 1;  // yes
+  FAMILYHISTORYHIPPROBLEMS_NO = 2;  // no
+}
+
+enum NewbornAndInfantPhysicalExaminationEyesRedReflexRightEnum {
+  EYESREDREFLEXRIGHT_UNSPECIFIED = 0;
+  EYESREDREFLEXRIGHT_PRESENT = 1;  // present
+  EYESREDREFLEXRIGHT_ABSENT = 2;  // absent
+  EYESREDREFLEXRIGHT_NOT_EXAMINED = 3;  // not-examined
+}
+
+enum NewbornAndInfantPhysicalExaminationEyesRedReflexLeftEnum {
+  EYESREDREFLEXLEFT_UNSPECIFIED = 0;
+  EYESREDREFLEXLEFT_PRESENT = 1;  // present
+  EYESREDREFLEXLEFT_ABSENT = 2;  // absent
+  EYESREDREFLEXLEFT_NOT_EXAMINED = 3;  // not-examined
+}
+
+enum NewbornAndInfantPhysicalExaminationEyesAppearanceEnum {
+  EYESAPPEARANCE_UNSPECIFIED = 0;
+  EYESAPPEARANCE_NORMAL = 1;  // normal
+  EYESAPPEARANCE_ABNORMAL = 2;  // abnormal
+  EYESAPPEARANCE_NOT_EXAMINED = 3;  // not-examined
+}
+
+enum NewbornAndInfantPhysicalExaminationHeartMurmurEnum {
+  HEARTMURMUR_UNSPECIFIED = 0;
+  HEARTMURMUR_NONE = 1;  // none
+  HEARTMURMUR_PRESENT = 2;  // present
+  HEARTMURMUR_NOT_EXAMINED = 3;  // not-examined
+}
+
+enum NewbornAndInfantPhysicalExaminationFemoralPulsesRightEnum {
+  FEMORALPULSESRIGHT_UNSPECIFIED = 0;
+  FEMORALPULSESRIGHT_PRESENT = 1;  // present
+  FEMORALPULSESRIGHT_WEAK = 2;  // weak
+  FEMORALPULSESRIGHT_ABSENT = 3;  // absent
+  FEMORALPULSESRIGHT_NOT_EXAMINED = 4;  // not-examined
+}
+
+enum NewbornAndInfantPhysicalExaminationFemoralPulsesLeftEnum {
+  FEMORALPULSESLEFT_UNSPECIFIED = 0;
+  FEMORALPULSESLEFT_PRESENT = 1;  // present
+  FEMORALPULSESLEFT_WEAK = 2;  // weak
+  FEMORALPULSESLEFT_ABSENT = 3;  // absent
+  FEMORALPULSESLEFT_NOT_EXAMINED = 4;  // not-examined
+}
+
+enum NewbornAndInfantPhysicalExaminationCentralCyanosisEnum {
+  CENTRALCYANOSIS_UNSPECIFIED = 0;
+  CENTRALCYANOSIS_ABSENT = 1;  // absent
+  CENTRALCYANOSIS_PRESENT = 2;  // present
+  CENTRALCYANOSIS_NOT_EXAMINED = 3;  // not-examined
+}
+
+enum NewbornAndInfantPhysicalExaminationBarlowTestEnum {
+  BARLOWTEST_UNSPECIFIED = 0;
+  BARLOWTEST_NEGATIVE = 1;  // negative
+  BARLOWTEST_POSITIVE = 2;  // positive
+  BARLOWTEST_NOT_EXAMINED = 3;  // not-examined
+}
+
+enum NewbornAndInfantPhysicalExaminationOrtolaniTestEnum {
+  ORTOLANITEST_UNSPECIFIED = 0;
+  ORTOLANITEST_NEGATIVE = 1;  // negative
+  ORTOLANITEST_POSITIVE = 2;  // positive
+  ORTOLANITEST_NOT_EXAMINED = 3;  // not-examined
+}
+
+enum NewbornAndInfantPhysicalExaminationHipAbductionEnum {
+  HIPABDUCTION_UNSPECIFIED = 0;
+  HIPABDUCTION_NORMAL = 1;  // normal
+  HIPABDUCTION_LIMITED = 2;  // limited
+  HIPABDUCTION_NOT_EXAMINED = 3;  // not-examined
+}
+
+enum NewbornAndInfantPhysicalExaminationTestisRightEnum {
+  TESTISRIGHT_UNSPECIFIED = 0;
+  TESTISRIGHT_DESCENDED = 1;  // descended
+  TESTISRIGHT_UNDESCENDED = 2;  // undescended
+  TESTISRIGHT_NOT_PALPABLE = 3;  // not-palpable
+  TESTISRIGHT_NOT_EXAMINED = 4;  // not-examined
+}
+
+enum NewbornAndInfantPhysicalExaminationTestisLeftEnum {
+  TESTISLEFT_UNSPECIFIED = 0;
+  TESTISLEFT_DESCENDED = 1;  // descended
+  TESTISLEFT_UNDESCENDED = 2;  // undescended
+  TESTISLEFT_NOT_PALPABLE = 3;  // not-palpable
+  TESTISLEFT_NOT_EXAMINED = 4;  // not-examined
+}
+
+enum NewbornAndInfantPhysicalExaminationGeneralAppearanceEnum {
+  GENERALAPPEARANCE_UNSPECIFIED = 0;
+  GENERALAPPEARANCE_NORMAL = 1;  // normal
+  GENERALAPPEARANCE_ABNORMAL = 2;  // abnormal
+  GENERALAPPEARANCE_NOT_EXAMINED = 3;  // not-examined
+}
+
+enum NewbornAndInfantPhysicalExaminationSkinEnum {
+  SKIN_UNSPECIFIED = 0;
+  SKIN_NORMAL = 1;  // normal
+  SKIN_ABNORMAL = 2;  // abnormal
+  SKIN_NOT_EXAMINED = 3;  // not-examined
+}
+
+enum NewbornAndInfantPhysicalExaminationHeadAndFontanellesEnum {
+  HEADANDFONTANELLES_UNSPECIFIED = 0;
+  HEADANDFONTANELLES_NORMAL = 1;  // normal
+  HEADANDFONTANELLES_ABNORMAL = 2;  // abnormal
+  HEADANDFONTANELLES_NOT_EXAMINED = 3;  // not-examined
+}
+
+enum NewbornAndInfantPhysicalExaminationFaceAndPalateEnum {
+  FACEANDPALATE_UNSPECIFIED = 0;
+  FACEANDPALATE_NORMAL = 1;  // normal
+  FACEANDPALATE_ABNORMAL = 2;  // abnormal
+  FACEANDPALATE_NOT_EXAMINED = 3;  // not-examined
+}
+
+enum NewbornAndInfantPhysicalExaminationNeckAndClaviclesEnum {
+  NECKANDCLAVICLES_UNSPECIFIED = 0;
+  NECKANDCLAVICLES_NORMAL = 1;  // normal
+  NECKANDCLAVICLES_ABNORMAL = 2;  // abnormal
+  NECKANDCLAVICLES_NOT_EXAMINED = 3;  // not-examined
+}
+
+enum NewbornAndInfantPhysicalExaminationChestAndLungsEnum {
+  CHESTANDLUNGS_UNSPECIFIED = 0;
+  CHESTANDLUNGS_NORMAL = 1;  // normal
+  CHESTANDLUNGS_ABNORMAL = 2;  // abnormal
+  CHESTANDLUNGS_NOT_EXAMINED = 3;  // not-examined
+}
+
+enum NewbornAndInfantPhysicalExaminationAbdomenEnum {
+  ABDOMEN_UNSPECIFIED = 0;
+  ABDOMEN_NORMAL = 1;  // normal
+  ABDOMEN_ABNORMAL = 2;  // abnormal
+  ABDOMEN_NOT_EXAMINED = 3;  // not-examined
+}
+
+enum NewbornAndInfantPhysicalExaminationGenitaliaEnum {
+  GENITALIA_UNSPECIFIED = 0;
+  GENITALIA_NORMAL = 1;  // normal
+  GENITALIA_ABNORMAL = 2;  // abnormal
+  GENITALIA_NOT_EXAMINED = 3;  // not-examined
+}
+
+enum NewbornAndInfantPhysicalExaminationAnusAndSpineEnum {
+  ANUSANDSPINE_UNSPECIFIED = 0;
+  ANUSANDSPINE_NORMAL = 1;  // normal
+  ANUSANDSPINE_ABNORMAL = 2;  // abnormal
+  ANUSANDSPINE_NOT_EXAMINED = 3;  // not-examined
+}
+
+enum NewbornAndInfantPhysicalExaminationLimbsAndDigitsEnum {
+  LIMBSANDDIGITS_UNSPECIFIED = 0;
+  LIMBSANDDIGITS_NORMAL = 1;  // normal
+  LIMBSANDDIGITS_ABNORMAL = 2;  // abnormal
+  LIMBSANDDIGITS_NOT_EXAMINED = 3;  // not-examined
+}
+
+enum NewbornAndInfantPhysicalExaminationFeetEnum {
+  FEET_UNSPECIFIED = 0;
+  FEET_NORMAL = 1;  // normal
+  FEET_ABNORMAL = 2;  // abnormal
+  FEET_NOT_EXAMINED = 3;  // not-examined
+}
+
+enum NewbornAndInfantPhysicalExaminationToneAndMovementEnum {
+  TONEANDMOVEMENT_UNSPECIFIED = 0;
+  TONEANDMOVEMENT_NORMAL = 1;  // normal
+  TONEANDMOVEMENT_ABNORMAL = 2;  // abnormal
+  TONEANDMOVEMENT_NOT_EXAMINED = 3;  // not-examined
+}
+
+enum NewbornAndInfantPhysicalExaminationEyesResultRecordedEnum {
+  EYESRESULTRECORDED_UNSPECIFIED = 0;
+  EYESRESULTRECORDED_SATISFACTORY = 1;  // satisfactory
+  EYESRESULTRECORDED_REFER = 2;  // refer
+  EYESRESULTRECORDED_NOT_EXAMINED = 3;  // not-examined
+}
+
+enum NewbornAndInfantPhysicalExaminationHeartResultRecordedEnum {
+  HEARTRESULTRECORDED_UNSPECIFIED = 0;
+  HEARTRESULTRECORDED_SATISFACTORY = 1;  // satisfactory
+  HEARTRESULTRECORDED_REFER = 2;  // refer
+  HEARTRESULTRECORDED_NOT_EXAMINED = 3;  // not-examined
+}
+
+enum NewbornAndInfantPhysicalExaminationHipsResultRecordedEnum {
+  HIPSRESULTRECORDED_UNSPECIFIED = 0;
+  HIPSRESULTRECORDED_SATISFACTORY = 1;  // satisfactory
+  HIPSRESULTRECORDED_REFER = 2;  // refer
+  HIPSRESULTRECORDED_NOT_EXAMINED = 3;  // not-examined
+}
+
+enum NewbornAndInfantPhysicalExaminationTestesResultRecordedEnum {
+  TESTESRESULTRECORDED_UNSPECIFIED = 0;
+  TESTESRESULTRECORDED_SATISFACTORY = 1;  // satisfactory
+  TESTESRESULTRECORDED_REFER = 2;  // refer
+  TESTESRESULTRECORDED_NOT_EXAMINED = 3;  // not-examined
+  TESTESRESULTRECORDED_NOT_APPLICABLE = 4;  // not-applicable
+}
+
+message NewbornAndInfantPhysicalExamination {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string patient_id = 5;  // UUID — uuid
+  string clinician_id = 6;  // UUID — uuid
+  string practitioner_name = 7;  // TEXT
+  NewbornAndInfantPhysicalExaminationPractitionerRoleEnum practitioner_role = 8;  // VARCHAR(30)
+  string examined_at = 9;  // TIMESTAMPTZ — iso 8601
+  NewbornAndInfantPhysicalExaminationExaminationContextEnum examination_context = 10;  // VARCHAR(20)
+  NewbornAndInfantPhysicalExaminationCareSettingEnum care_setting = 11;  // VARCHAR(20)
+  string baby_identifier = 12;  // VARCHAR(100) — max 100 chars
+  string baby_name = 13;  // VARCHAR(255) — max 255 chars
+  string date_of_birth = 14;  // DATE — iso 8601 date
+  NewbornAndInfantPhysicalExaminationSexEnum sex = 15;  // VARCHAR(15)
+  double gestational_age_weeks = 16;  // NUMERIC(4,1) — numeric(4,1)
+  double birth_weight_grams = 17;  // NUMERIC(6,1) — numeric(6,1)
+  NewbornAndInfantPhysicalExaminationBreechPresentationEnum breech_presentation = 18;  // VARCHAR(5)
+  NewbornAndInfantPhysicalExaminationFamilyHistoryHipProblemsEnum family_history_hip_problems = 19;  // VARCHAR(5)
+  string antenatal_concerns = 20;  // TEXT
+  NewbornAndInfantPhysicalExaminationEyesRedReflexRightEnum eyes_red_reflex_right = 21;  // VARCHAR(15)
+  NewbornAndInfantPhysicalExaminationEyesRedReflexLeftEnum eyes_red_reflex_left = 22;  // VARCHAR(15)
+  NewbornAndInfantPhysicalExaminationEyesAppearanceEnum eyes_appearance = 23;  // VARCHAR(15)
+  NewbornAndInfantPhysicalExaminationHeartMurmurEnum heart_murmur = 24;  // VARCHAR(15)
+  NewbornAndInfantPhysicalExaminationFemoralPulsesRightEnum femoral_pulses_right = 25;  // VARCHAR(15)
+  NewbornAndInfantPhysicalExaminationFemoralPulsesLeftEnum femoral_pulses_left = 26;  // VARCHAR(15)
+  NewbornAndInfantPhysicalExaminationCentralCyanosisEnum central_cyanosis = 27;  // VARCHAR(15)
+  double oxygen_saturation_preductal = 28;  // NUMERIC(4,1) — numeric(4,1)
+  double oxygen_saturation_postductal = 29;  // NUMERIC(4,1) — numeric(4,1)
+  NewbornAndInfantPhysicalExaminationBarlowTestEnum barlow_test = 30;  // VARCHAR(15)
+  NewbornAndInfantPhysicalExaminationOrtolaniTestEnum ortolani_test = 31;  // VARCHAR(15)
+  NewbornAndInfantPhysicalExaminationHipAbductionEnum hip_abduction = 32;  // VARCHAR(15)
+  NewbornAndInfantPhysicalExaminationTestisRightEnum testis_right = 33;  // VARCHAR(15)
+  NewbornAndInfantPhysicalExaminationTestisLeftEnum testis_left = 34;  // VARCHAR(15)
+  NewbornAndInfantPhysicalExaminationGeneralAppearanceEnum general_appearance = 35;  // VARCHAR(15)
+  NewbornAndInfantPhysicalExaminationSkinEnum skin = 36;  // VARCHAR(15)
+  NewbornAndInfantPhysicalExaminationHeadAndFontanellesEnum head_and_fontanelles = 37;  // VARCHAR(15)
+  NewbornAndInfantPhysicalExaminationFaceAndPalateEnum face_and_palate = 38;  // VARCHAR(15)
+  NewbornAndInfantPhysicalExaminationNeckAndClaviclesEnum neck_and_clavicles = 39;  // VARCHAR(15)
+  NewbornAndInfantPhysicalExaminationChestAndLungsEnum chest_and_lungs = 40;  // VARCHAR(15)
+  NewbornAndInfantPhysicalExaminationAbdomenEnum abdomen = 41;  // VARCHAR(15)
+  NewbornAndInfantPhysicalExaminationGenitaliaEnum genitalia = 42;  // VARCHAR(15)
+  NewbornAndInfantPhysicalExaminationAnusAndSpineEnum anus_and_spine = 43;  // VARCHAR(15)
+  NewbornAndInfantPhysicalExaminationLimbsAndDigitsEnum limbs_and_digits = 44;  // VARCHAR(15)
+  NewbornAndInfantPhysicalExaminationFeetEnum feet = 45;  // VARCHAR(15)
+  NewbornAndInfantPhysicalExaminationToneAndMovementEnum tone_and_movement = 46;  // VARCHAR(15)
+  double weight_grams = 47;  // NUMERIC(6,1) — numeric(6,1)
+  double head_circumference_cm = 48;  // NUMERIC(4,1) — numeric(4,1)
+  double length_cm = 49;  // NUMERIC(4,1) — numeric(4,1)
+  NewbornAndInfantPhysicalExaminationEyesResultRecordedEnum eyes_result_recorded = 50;  // VARCHAR(15)
+  NewbornAndInfantPhysicalExaminationHeartResultRecordedEnum heart_result_recorded = 51;  // VARCHAR(15)
+  NewbornAndInfantPhysicalExaminationHipsResultRecordedEnum hips_result_recorded = 52;  // VARCHAR(15)
+  NewbornAndInfantPhysicalExaminationTestesResultRecordedEnum testes_result_recorded = 53;  // VARCHAR(15)
+  string clinical_note = 54;  // TEXT
+}

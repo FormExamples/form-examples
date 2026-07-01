@@ -1,0 +1,31 @@
+// Generated from sql/. Do not edit by hand.
+// SOURCE: medical_certificate_of_cause_of_death_grade
+
+syntax = "proto3";
+
+package form_examples.medical_certificate_of_cause_of_death;
+
+enum MedicalCertificateOfCauseOfDeathGradeValidityClassEnum {
+  VALIDITYCLASS_UNSPECIFIED = 0;
+  VALIDITYCLASS_VALID = 1;  // valid
+  VALIDITYCLASS_INCOMPLETE = 2;  // incomplete
+  VALIDITYCLASS_REFER_TO_CORONER = 3;  // refer-to-coroner
+}
+
+enum MedicalCertificateOfCauseOfDeathGradeCoronerReferralIndicatedEnum {
+  CORONERREFERRALINDICATED_UNSPECIFIED = 0;
+  CORONERREFERRALINDICATED_YES = 1;  // yes
+  CORONERREFERRALINDICATED_NO = 2;  // no
+}
+
+message MedicalCertificateOfCauseOfDeathGrade {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string medical_certificate_of_cause_of_death_id = 5;  // UUID — uuid
+  MedicalCertificateOfCauseOfDeathGradeValidityClassEnum validity_class = 6;  // VARCHAR(20)
+  string underlying_cause = 7;  // TEXT
+  MedicalCertificateOfCauseOfDeathGradeCoronerReferralIndicatedEnum coroner_referral_indicated = 8;  // VARCHAR(5)
+  string graded_at = 9;  // TIMESTAMPTZ — iso 8601
+}

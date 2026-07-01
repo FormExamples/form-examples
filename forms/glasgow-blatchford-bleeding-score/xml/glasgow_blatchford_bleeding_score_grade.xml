@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE glasgow_blatchford_bleeding_score_grade SYSTEM "glasgow_blatchford_bleeding_score_grade.dtd">
+<glasgow_blatchford_bleeding_score_grade>
+<id>880e8400-e29b-41d4-a716-446655440003</id>
+<created_at>2026-04-09T10:00:00Z</created_at>
+<updated_at>2026-04-09T10:00:00Z</updated_at>
+<deleted_at>2026-04-09T10:00:00Z</deleted_at>
+<glasgow_blatchford_bleeding_score_id>770e8400-e29b-41d4-a716-446655440002</glasgow_blatchford_bleeding_score_id>
+<blood_urea_points>1</blood_urea_points>
+<haemoglobin_points>1</haemoglobin_points>
+<systolic_blood_pressure_points>1</systolic_blood_pressure_points>
+<pulse_point>1</pulse_point>
+<melaena_point>1</melaena_point>
+<syncope_point>1</syncope_point>
+<hepatic_disease_point>1</hepatic_disease_point>
+<cardiac_failure_point>1</cardiac_failure_point>
+<total_score>5</total_score>
+<risk_band>very-low</risk_band>
+<recommended_management></recommended_management>
+<graded_at>2026-04-09T10:00:00Z</graded_at>
+</glasgow_blatchford_bleeding_score_grade>

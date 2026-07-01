@@ -1,0 +1,83 @@
+// Generated from sql/. Do not edit by hand.
+// SOURCE: blood_test_result
+
+syntax = "proto3";
+
+package form_examples.blood_test_result;
+
+enum BloodTestResultReportStatusEnum {
+  REPORTSTATUS_UNSPECIFIED = 0;
+  REPORTSTATUS_PRELIMINARY = 1;  // preliminary
+  REPORTSTATUS_FINAL = 2;  // final
+  REPORTSTATUS_AMENDED = 3;  // amended
+  REPORTSTATUS_CANCELLED = 4;  // cancelled
+}
+
+enum BloodTestResultSpecimenTypeEnum {
+  SPECIMENTYPE_UNSPECIFIED = 0;
+  SPECIMENTYPE_SERUM = 1;  // serum
+  SPECIMENTYPE_PLASMA = 2;  // plasma
+  SPECIMENTYPE_WHOLE_BLOOD = 3;  // whole-blood
+}
+
+enum BloodTestResultSpecimenConditionEnum {
+  SPECIMENCONDITION_UNSPECIFIED = 0;
+  SPECIMENCONDITION_SATISFACTORY = 1;  // satisfactory
+  SPECIMENCONDITION_HAEMOLYSED = 2;  // haemolysed
+  SPECIMENCONDITION_LIPAEMIC = 3;  // lipaemic
+  SPECIMENCONDITION_CLOTTED = 4;  // clotted
+  SPECIMENCONDITION_INSUFFICIENT = 5;  // insufficient
+}
+
+enum BloodTestResultOverallResultStatusEnum {
+  OVERALLRESULTSTATUS_UNSPECIFIED = 0;
+  OVERALLRESULTSTATUS_NORMAL = 1;  // normal
+  OVERALLRESULTSTATUS_ABNORMAL = 2;  // abnormal
+  OVERALLRESULTSTATUS_CRITICAL = 3;  // critical
+}
+
+message BloodTestResult {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string patient_id = 5;  // UUID — uuid
+  string clinician_id = 6;  // UUID — uuid
+  string originating_request_reference = 7;  // VARCHAR(255) — max 255 chars
+  BloodTestResultReportStatusEnum report_status = 8;  // VARCHAR(15)
+  string performed_date = 9;  // DATE — iso 8601 date
+  string reported_date = 10;  // DATE — iso 8601 date
+  BloodTestResultSpecimenTypeEnum specimen_type = 11;  // VARCHAR(15)
+  BloodTestResultSpecimenConditionEnum specimen_condition = 12;  // VARCHAR(15)
+  string clinical_history = 13;  // VARCHAR(1000) — max 1000 chars
+  double haemoglobin_g_l = 14;  // NUMERIC(6,1) — numeric(6,1)
+  double white_cell_count = 15;  // NUMERIC(6,2) — numeric(6,2)
+  double platelets = 16;  // NUMERIC(6,0) — numeric(6,0)
+  double neutrophils = 17;  // NUMERIC(6,2) — numeric(6,2)
+  double sodium_mmol_l = 18;  // NUMERIC(5,1) — numeric(5,1)
+  double potassium_mmol_l = 19;  // NUMERIC(4,1) — numeric(4,1)
+  double urea_mmol_l = 20;  // NUMERIC(5,1) — numeric(5,1)
+  double creatinine_umol_l = 21;  // NUMERIC(6,0) — numeric(6,0)
+  double egfr = 22;  // NUMERIC(5,0) — numeric(5,0)
+  double alt_u_l = 23;  // NUMERIC(6,0) — numeric(6,0)
+  double alkaline_phosphatase = 24;  // NUMERIC(6,0) — numeric(6,0)
+  double bilirubin_umol_l = 25;  // NUMERIC(6,0) — numeric(6,0)
+  double albumin_g_l = 26;  // NUMERIC(4,0) — numeric(4,0)
+  double c_reactive_protein = 27;  // NUMERIC(6,1) — numeric(6,1)
+  double hba1c_mmol_mol = 28;  // NUMERIC(5,0) — numeric(5,0)
+  double glucose_mmol_l = 29;  // NUMERIC(5,1) — numeric(5,1)
+  double tsh = 30;  // NUMERIC(7,2) — numeric(7,2)
+  double ferritin = 31;  // NUMERIC(7,0) — numeric(7,0)
+  double inr = 32;  // NUMERIC(4,1) — numeric(4,1)
+  BloodTestResultOverallResultStatusEnum overall_result_status = 33;  // VARCHAR(15)
+  bool abnormal_results_present = 34;  // BOOLEAN
+  bool critical_value_present = 35;  // BOOLEAN
+  string critical_value_detail = 36;  // VARCHAR(1000) — max 1000 chars
+  string findings_narrative = 37;  // VARCHAR(2000) — max 2000 chars
+  string comparison_with_previous = 38;  // VARCHAR(1000) — max 1000 chars
+  string impression = 39;  // VARCHAR(2000) — max 2000 chars
+  string reporting_category = 40;  // VARCHAR(50) — max 50 chars
+  string recommended_follow_up = 41;  // VARCHAR(1000) — max 1000 chars
+  bool critical_result_communicated = 42;  // BOOLEAN
+  string reported_to = 43;  // VARCHAR(500) — max 500 chars
+}

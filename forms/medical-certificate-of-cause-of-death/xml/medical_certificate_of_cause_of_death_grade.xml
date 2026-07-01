@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE medical_certificate_of_cause_of_death_grade SYSTEM "medical_certificate_of_cause_of_death_grade.dtd">
+<medical_certificate_of_cause_of_death_grade>
+<id>880e8400-e29b-41d4-a716-446655440003</id>
+<created_at>2026-04-09T10:00:00Z</created_at>
+<updated_at>2026-04-09T10:00:00Z</updated_at>
+<deleted_at>2026-04-09T10:00:00Z</deleted_at>
+<medical_certificate_of_cause_of_death_id>770e8400-e29b-41d4-a716-446655440002</medical_certificate_of_cause_of_death_id>
+<validity_class>valid</validity_class>
+<underlying_cause></underlying_cause>
+<coroner_referral_indicated>yes</coroner_referral_indicated>
+<graded_at>2026-04-09T10:00:00Z</graded_at>
+</medical_certificate_of_cause_of_death_grade>

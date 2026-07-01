@@ -1,0 +1,210 @@
+# Generated from sql/. Do not edit by hand.
+# SOURCE: medication_reconciliation
+openapi: 3.1.0
+info:
+  title: Medication Reconciliation — MedicationReconciliation
+  version: 1.0.0
+  description: "Parent medication-reconciliation header: transition-of-care context, care setting, reconciling clinician, patient identification, and patient-level allergy status."
+paths:
+  /medication-reconciliations:
+    get:
+      summary: List MedicationReconciliation records
+      operationId: listMedicationReconciliation
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of MedicationReconciliation records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/MedicationReconciliation"
+    post:
+      summary: Create a new MedicationReconciliation
+      operationId: createMedicationReconciliation
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/MedicationReconciliation"
+      responses:
+        "201":
+          description: The newly created MedicationReconciliation
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/MedicationReconciliation"
+        "400":
+          description: Validation error
+  /medication-reconciliations/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one MedicationReconciliation by id
+      operationId: getMedicationReconciliation
+      responses:
+        "200":
+          description: The requested MedicationReconciliation
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/MedicationReconciliation"
+        "404":
+          description: MedicationReconciliation not found
+    patch:
+      summary: Update an existing MedicationReconciliation
+      operationId: updateMedicationReconciliation
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/MedicationReconciliation"
+      responses:
+        "200":
+          description: The updated MedicationReconciliation
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/MedicationReconciliation"
+        "404":
+          description: MedicationReconciliation not found
+    delete:
+      summary: Soft-delete a MedicationReconciliation
+      operationId: deleteMedicationReconciliation
+      responses:
+        "204":
+          description: MedicationReconciliation deleted
+        "404":
+          description: MedicationReconciliation not found
+components:
+  schemas:
+    MedicationReconciliation:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was updated most-recently.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was deleted a.k.a. soft-removed.
+        patient_id:
+          type: string
+          format: uuid
+          description: Foreign key to the patient this reconciliation is for (restricted delete).
+        clinician_id:
+          type: string
+          format: uuid
+          description: Foreign key to the reconciling clinician (restricted delete); optional.
+        reconciliation_type:
+          type: string
+          enum:
+            - admission
+            - transfer
+            - discharge
+            - ""
+          description: "Transition of care at which the reconciliation is performed: admission, transfer, or discharge."
+        care_setting:
+          type: string
+          enum:
+            - emergency-department
+            - acute-medical-unit
+            - surgical-admissions
+            - ward
+            - critical-care
+            - other
+            - ""
+          description: "Care setting: emergency-department, acute-medical-unit, surgical-admissions, ward, critical-care, or other."
+        reconciled_at:
+          type: string
+          format: date-time
+          description: Date and time the reconciliation was carried out.
+        clinician_name:
+          type: string
+          description: Name of the reconciling clinician as entered on the form.
+        clinician_role:
+          type: string
+          enum:
+            - pharmacist
+            - pharmacy-technician
+            - prescriber
+            - nurse
+            - other
+            - ""
+          description: "Role of the reconciling clinician: pharmacist, pharmacy-technician, prescriber, nurse, or other."
+        patient_identifier:
+          type: string
+          description: Local patient identifier as entered on the form.
+        age_band:
+          type: string
+          enum:
+            - adult
+            - paediatric
+            - ""
+          description: "Patient age band for dosing context: adult or paediatric."
+        sex:
+          type: string
+          enum:
+            - female
+            - male
+            - intersex
+            - unknown
+            - ""
+          description: "Patient sex: female, male, intersex, or unknown."
+        weight_kg:
+          type: number
+          format: double
+          description: Patient weight in kilograms for weight-based dosing (nullable).
+        allergy_status:
+          type: string
+          enum:
+            - documented
+            - no-known-drug-allergies
+            - not-documented
+            - ""
+          description: "Patient allergy status: documented, no-known-drug-allergies, or not-documented."
+      required:
+        - created_at
+        - updated_at
+        - patient_id
+        - reconciliation_type
+        - care_setting
+        - clinician_name
+        - clinician_role
+        - patient_identifier
+        - age_band
+        - sex
+        - allergy_status
+      description: "Parent medication-reconciliation header: transition-of-care context, care setting, reconciling clinician, patient identification, and patient-level allergy status."

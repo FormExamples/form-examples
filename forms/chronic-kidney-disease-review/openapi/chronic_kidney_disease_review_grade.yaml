@@ -1,0 +1,191 @@
+# Generated from sql/. Do not edit by hand.
+# SOURCE: chronic_kidney_disease_review_grade
+openapi: 3.1.0
+info:
+  title: Chronic Kidney Disease Review — ChronicKidneyDiseaseReviewGrade
+  version: 1.0.0
+  description: "Computed KDIGO classification and completeness grading result for a CKD annual review: G-stage, albuminuria stage, KDIGO risk zone, review status, the selected blood-pressure target and whether it is met, and the completeness score. 1:1 with the parent review."
+paths:
+  /chronic-kidney-disease-review-grades:
+    get:
+      summary: List ChronicKidneyDiseaseReviewGrade records
+      operationId: listChronicKidneyDiseaseReviewGrade
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of ChronicKidneyDiseaseReviewGrade records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/ChronicKidneyDiseaseReviewGrade"
+    post:
+      summary: Create a new ChronicKidneyDiseaseReviewGrade
+      operationId: createChronicKidneyDiseaseReviewGrade
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ChronicKidneyDiseaseReviewGrade"
+      responses:
+        "201":
+          description: The newly created ChronicKidneyDiseaseReviewGrade
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ChronicKidneyDiseaseReviewGrade"
+        "400":
+          description: Validation error
+  /chronic-kidney-disease-review-grades/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one ChronicKidneyDiseaseReviewGrade by id
+      operationId: getChronicKidneyDiseaseReviewGrade
+      responses:
+        "200":
+          description: The requested ChronicKidneyDiseaseReviewGrade
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ChronicKidneyDiseaseReviewGrade"
+        "404":
+          description: ChronicKidneyDiseaseReviewGrade not found
+    patch:
+      summary: Update an existing ChronicKidneyDiseaseReviewGrade
+      operationId: updateChronicKidneyDiseaseReviewGrade
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ChronicKidneyDiseaseReviewGrade"
+      responses:
+        "200":
+          description: The updated ChronicKidneyDiseaseReviewGrade
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ChronicKidneyDiseaseReviewGrade"
+        "404":
+          description: ChronicKidneyDiseaseReviewGrade not found
+    delete:
+      summary: Soft-delete a ChronicKidneyDiseaseReviewGrade
+      operationId: deleteChronicKidneyDiseaseReviewGrade
+      responses:
+        "204":
+          description: ChronicKidneyDiseaseReviewGrade deleted
+        "404":
+          description: ChronicKidneyDiseaseReviewGrade not found
+components:
+  schemas:
+    ChronicKidneyDiseaseReviewGrade:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was most recently updated.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was soft-deleted.
+        chronic_kidney_disease_review_id:
+          type: string
+          format: uuid
+          description: Foreign key to the parent CKD review (unique, 1:1).
+        gfr_category:
+          type: string
+          enum:
+            - G1
+            - G2
+            - G3a
+            - G3b
+            - G4
+            - G5
+            - ""
+          description: "KDIGO G-stage from the current eGFR: G1, G2, G3a, G3b, G4, or G5 (empty when eGFR missing)."
+        albuminuria_category:
+          type: string
+          enum:
+            - A1
+            - A2
+            - A3
+            - ""
+          description: "KDIGO albuminuria stage from the urine ACR: A1, A2, or A3 (empty when ACR missing)."
+        kdigo_risk_zone:
+          type: string
+          enum:
+            - low
+            - moderate
+            - high
+            - very-high
+            - ""
+          description: "KDIGO risk zone from the G-stage x albuminuria-stage heat-map: low, moderate, high, or very-high (empty when either stage missing)."
+        review_status:
+          type: string
+          enum:
+            - complete
+            - partial
+            - incomplete
+            - ""
+          description: "Review completeness: complete, partial, or incomplete."
+        blood_pressure_target_systolic:
+          type: integer
+          format: int32
+          description: Selected systolic blood-pressure target in mmHg (130 when ACR >= 70 or diabetic, else 140).
+        blood_pressure_target_diastolic:
+          type: integer
+          format: int32
+          description: Selected diastolic blood-pressure target in mmHg (80 when ACR >= 70 or diabetic, else 90).
+        blood_pressure_at_target:
+          type: boolean
+          description: Whether the recorded blood pressure is below the selected target (null when blood pressure missing).
+        completeness_score:
+          type: integer
+          format: int32
+          description: Integer count of recorded review bundle items (eGFR, ACR, BP, medication review, core bloods).
+        graded_at:
+          type: string
+          format: date-time
+          description: Timestamp when the engine last computed the grade.
+      required:
+        - created_at
+        - updated_at
+        - chronic_kidney_disease_review_id
+        - gfr_category
+        - albuminuria_category
+        - kdigo_risk_zone
+        - review_status
+        - graded_at
+      description: "Computed KDIGO classification and completeness grading result for a CKD annual review: G-stage, albuminuria stage, KDIGO risk zone, review status, the selected blood-pressure target and whether it is met, and the completeness score. 1:1 with the parent review."

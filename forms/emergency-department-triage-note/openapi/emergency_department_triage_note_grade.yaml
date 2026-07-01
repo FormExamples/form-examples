@@ -1,0 +1,178 @@
+# Generated from sql/. Do not edit by hand.
+# SOURCE: emergency_department_triage_note_grade
+openapi: 3.1.0
+info:
+  title: Emergency Department Triage Note — EmergencyDepartmentTriageNoteGrade
+  version: 1.0.0
+  description: "Computed triage classification result (1:1 with the triage note): supporting NEWS2 aggregate, the selected MTS priority level, and the fixed colour, name, and target time derived from that level."
+paths:
+  /emergency-department-triage-note-grades:
+    get:
+      summary: List EmergencyDepartmentTriageNoteGrade records
+      operationId: listEmergencyDepartmentTriageNoteGrade
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of EmergencyDepartmentTriageNoteGrade records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/EmergencyDepartmentTriageNoteGrade"
+    post:
+      summary: Create a new EmergencyDepartmentTriageNoteGrade
+      operationId: createEmergencyDepartmentTriageNoteGrade
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/EmergencyDepartmentTriageNoteGrade"
+      responses:
+        "201":
+          description: The newly created EmergencyDepartmentTriageNoteGrade
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/EmergencyDepartmentTriageNoteGrade"
+        "400":
+          description: Validation error
+  /emergency-department-triage-note-grades/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one EmergencyDepartmentTriageNoteGrade by id
+      operationId: getEmergencyDepartmentTriageNoteGrade
+      responses:
+        "200":
+          description: The requested EmergencyDepartmentTriageNoteGrade
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/EmergencyDepartmentTriageNoteGrade"
+        "404":
+          description: EmergencyDepartmentTriageNoteGrade not found
+    patch:
+      summary: Update an existing EmergencyDepartmentTriageNoteGrade
+      operationId: updateEmergencyDepartmentTriageNoteGrade
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/EmergencyDepartmentTriageNoteGrade"
+      responses:
+        "200":
+          description: The updated EmergencyDepartmentTriageNoteGrade
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/EmergencyDepartmentTriageNoteGrade"
+        "404":
+          description: EmergencyDepartmentTriageNoteGrade not found
+    delete:
+      summary: Soft-delete a EmergencyDepartmentTriageNoteGrade
+      operationId: deleteEmergencyDepartmentTriageNoteGrade
+      responses:
+        "204":
+          description: EmergencyDepartmentTriageNoteGrade deleted
+        "404":
+          description: EmergencyDepartmentTriageNoteGrade not found
+components:
+  schemas:
+    EmergencyDepartmentTriageNoteGrade:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was most recently updated.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was soft-deleted.
+        emergency_department_triage_note_id:
+          type: string
+          format: uuid
+          description: Foreign key to the parent triage note (unique, 1:1).
+        news2_total:
+          type: integer
+          format: int32
+          description: Supporting NEWS2 aggregate computed from the recorded vital signs; NULL when not computed.
+        news2_any_parameter_three:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Whether any single NEWS2 parameter scored 3 (drives escalation to at least Level 2).
+        priority_level:
+          type: integer
+          format: int32
+          description: "Selected MTS priority level: 1 (most urgent) to 5 (least urgent); NULL when not classified."
+        priority_colour:
+          type: string
+          enum:
+            - red
+            - orange
+            - yellow
+            - green
+            - blue
+            - ""
+          description: "Colour derived from the level: red (1), orange (2), yellow (3), green (4), blue (5)."
+        priority_name:
+          type: string
+          enum:
+            - Immediate
+            - Very urgent
+            - Urgent
+            - Standard
+            - Non-urgent
+            - ""
+          description: "Name derived from the level: Immediate, Very urgent, Urgent, Standard, or Non-urgent."
+        target_minutes:
+          type: integer
+          format: int32
+          description: "Target minutes to first clinical assessment derived from the level: 0, 10, 60, 120, or 240."
+        graded_at:
+          type: string
+          format: date-time
+          description: Timestamp when the engine last computed the classification.
+      required:
+        - created_at
+        - updated_at
+        - emergency_department_triage_note_id
+        - news2_any_parameter_three
+        - priority_colour
+        - priority_name
+        - graded_at
+      description: "Computed triage classification result (1:1 with the triage note): supporting NEWS2 aggregate, the selected MTS priority level, and the fixed colour, name, and target time derived from that level."

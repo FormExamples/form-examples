@@ -1,0 +1,11 @@
+<!ELEMENT edinburgh_postnatal_depression_scale_grade (id,created_at,updated_at,deleted_at,edinburgh_postnatal_depression_scale_id,total_score,interpretation,item_10_score,self_harm_flag,graded_at)>
+<!ELEMENT id (#PCDATA)>
+<!ELEMENT created_at (#PCDATA)>
+<!ELEMENT updated_at (#PCDATA)>
+<!ELEMENT deleted_at (#PCDATA)>
+<!ELEMENT edinburgh_postnatal_depression_scale_id (#PCDATA)>
+<!ELEMENT total_score (#PCDATA)>
+<!ELEMENT interpretation (#PCDATA)>
+<!ELEMENT item_10_score (#PCDATA)>
+<!ELEMENT self_harm_flag (#PCDATA)>
+<!ELEMENT graded_at (#PCDATA)>

@@ -1,0 +1,130 @@
+// Generated from sql/. Do not edit by hand.
+// SOURCE: ward_round_note
+
+syntax = "proto3";
+
+package form_examples.ward_round_note;
+
+enum WardRoundNoteClinicianGradeEnum {
+  CLINICIANGRADE_UNSPECIFIED = 0;
+  CLINICIANGRADE_FY1 = 1;  // fy1
+  CLINICIANGRADE_FY2 = 2;  // fy2
+  CLINICIANGRADE_CORE_TRAINEE = 3;  // core-trainee
+  CLINICIANGRADE_SPECIALTY_REGISTRAR = 4;  // specialty-registrar
+  CLINICIANGRADE_ACP = 5;  // acp
+  CLINICIANGRADE_PHYSICIAN_ASSOCIATE = 6;  // physician-associate
+  CLINICIANGRADE_CONSULTANT = 7;  // consultant
+}
+
+enum WardRoundNoteNoOvernightEventsEnum {
+  NOOVERNIGHTEVENTS_UNSPECIFIED = 0;
+  NOOVERNIGHTEVENTS_YES = 1;  // yes
+  NOOVERNIGHTEVENTS_NO = 2;  // no
+}
+
+enum WardRoundNoteNews2SingleParamThreeEnum {
+  NEWS2SINGLEPARAMTHREE_UNSPECIFIED = 0;
+  NEWS2SINGLEPARAMTHREE_YES = 1;  // yes
+  NEWS2SINGLEPARAMTHREE_NO = 2;  // no
+}
+
+enum WardRoundNoteObservationTrendEnum {
+  OBSERVATIONTREND_UNSPECIFIED = 0;
+  OBSERVATIONTREND_IMPROVING = 1;  // improving
+  OBSERVATIONTREND_STABLE = 2;  // stable
+  OBSERVATIONTREND_DETERIORATING = 3;  // deteriorating
+}
+
+enum WardRoundNoteNoInvestigationsOutstandingEnum {
+  NOINVESTIGATIONSOUTSTANDING_UNSPECIFIED = 0;
+  NOINVESTIGATIONSOUTSTANDING_YES = 1;  // yes
+  NOINVESTIGATIONSOUTSTANDING_NO = 2;  // no
+}
+
+enum WardRoundNoteAbnormalResultFlaggedEnum {
+  ABNORMALRESULTFLAGGED_UNSPECIFIED = 0;
+  ABNORMALRESULTFLAGGED_YES = 1;  // yes
+  ABNORMALRESULTFLAGGED_NO = 2;  // no
+}
+
+enum WardRoundNoteAbnormalResultActionedEnum {
+  ABNORMALRESULTACTIONED_UNSPECIFIED = 0;
+  ABNORMALRESULTACTIONED_YES = 1;  // yes
+  ABNORMALRESULTACTIONED_NO = 2;  // no
+}
+
+enum WardRoundNoteVteStatusEnum {
+  VTESTATUS_UNSPECIFIED = 0;
+  VTESTATUS_ASSESSED = 1;  // assessed
+  VTESTATUS_NOT_REQUIRED = 2;  // not-required
+  VTESTATUS_NOT_DONE = 3;  // not-done
+}
+
+enum WardRoundNoteVteProphylaxisInPlaceEnum {
+  VTEPROPHYLAXISINPLACE_UNSPECIFIED = 0;
+  VTEPROPHYLAXISINPLACE_YES = 1;  // yes
+  VTEPROPHYLAXISINPLACE_NO = 2;  // no
+}
+
+enum WardRoundNoteNoMedicationChangesEnum {
+  NOMEDICATIONCHANGES_UNSPECIFIED = 0;
+  NOMEDICATIONCHANGES_YES = 1;  // yes
+  NOMEDICATIONCHANGES_NO = 2;  // no
+}
+
+enum WardRoundNoteEscalationStatusEnum {
+  ESCALATIONSTATUS_UNSPECIFIED = 0;
+  ESCALATIONSTATUS_FOR_FULL_ESCALATION = 1;  // for-full-escalation
+  ESCALATIONSTATUS_WARD_LEVEL_CEILING = 2;  // ward-level-ceiling
+  ESCALATIONSTATUS_DNACPR = 3;  // dnacpr
+  ESCALATIONSTATUS_NOT_RECORDED = 4;  // not-recorded
+}
+
+enum WardRoundNoteSeniorReviewPresentEnum {
+  SENIORREVIEWPRESENT_UNSPECIFIED = 0;
+  SENIORREVIEWPRESENT_YES = 1;  // yes
+  SENIORREVIEWPRESENT_NO = 2;  // no
+}
+
+enum WardRoundNoteDischargeNotEstimableEnum {
+  DISCHARGENOTESTIMABLE_UNSPECIFIED = 0;
+  DISCHARGENOTESTIMABLE_YES = 1;  // yes
+  DISCHARGENOTESTIMABLE_NO = 2;  // no
+}
+
+message WardRoundNote {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string patient_id = 5;  // UUID — uuid
+  string clinician_id = 6;  // UUID — uuid
+  string clinician_name = 7;  // TEXT
+  WardRoundNoteClinicianGradeEnum clinician_grade = 8;  // VARCHAR(30)
+  string reviewed_at = 9;  // TIMESTAMPTZ — iso 8601
+  string ward = 10;  // TEXT
+  string patient_identifier = 11;  // VARCHAR(100) — max 100 chars
+  string admission_date = 12;  // DATE — iso 8601 date
+  string primary_diagnosis = 13;  // TEXT
+  string overnight_events = 14;  // TEXT
+  WardRoundNoteNoOvernightEventsEnum no_overnight_events = 15;  // VARCHAR(5)
+  string problem_list = 16;  // TEXT
+  string examination_summary = 17;  // TEXT
+  int32 news2_total = 18;  // INTEGER
+  WardRoundNoteNews2SingleParamThreeEnum news2_single_param_three = 19;  // VARCHAR(5)
+  WardRoundNoteObservationTrendEnum observation_trend = 20;  // VARCHAR(20)
+  string investigations_reviewed = 21;  // TEXT
+  WardRoundNoteNoInvestigationsOutstandingEnum no_investigations_outstanding = 22;  // VARCHAR(5)
+  WardRoundNoteAbnormalResultFlaggedEnum abnormal_result_flagged = 23;  // VARCHAR(5)
+  WardRoundNoteAbnormalResultActionedEnum abnormal_result_actioned = 24;  // VARCHAR(5)
+  WardRoundNoteVteStatusEnum vte_status = 25;  // VARCHAR(20)
+  WardRoundNoteVteProphylaxisInPlaceEnum vte_prophylaxis_in_place = 26;  // VARCHAR(5)
+  string medication_changes = 27;  // TEXT
+  WardRoundNoteNoMedicationChangesEnum no_medication_changes = 28;  // VARCHAR(5)
+  string plan_and_jobs = 29;  // TEXT
+  WardRoundNoteEscalationStatusEnum escalation_status = 30;  // VARCHAR(30)
+  WardRoundNoteSeniorReviewPresentEnum senior_review_present = 31;  // VARCHAR(5)
+  string estimated_discharge_date = 32;  // DATE — iso 8601 date
+  WardRoundNoteDischargeNotEstimableEnum discharge_not_estimable = 33;  // VARCHAR(5)
+  string clinical_note = 34;  // TEXT
+}

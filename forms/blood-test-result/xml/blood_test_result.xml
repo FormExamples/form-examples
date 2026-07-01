@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE blood_test_result SYSTEM "blood_test_result.dtd">
+<blood_test_result>
+<id>770e8400-e29b-41d4-a716-446655440002</id>
+<created_at>2026-04-09T10:00:00Z</created_at>
+<updated_at>2026-04-09T10:00:00Z</updated_at>
+<deleted_at>2026-04-09T10:00:00Z</deleted_at>
+<patient_id>550e8400-e29b-41d4-a716-446655440000</patient_id>
+<clinician_id>660e8400-e29b-41d4-a716-446655440001</clinician_id>
+<originating_request_reference></originating_request_reference>
+<report_status>preliminary</report_status>
+<performed_date>2026-01-15</performed_date>
+<reported_date>2026-01-15</reported_date>
+<specimen_type>serum</specimen_type>
+<specimen_condition>satisfactory</specimen_condition>
+<clinical_history>Example text.</clinical_history>
+<haemoglobin_g_l>0.0</haemoglobin_g_l>
+<white_cell_count>0.0</white_cell_count>
+<platelets>0.0</platelets>
+<neutrophils>0.0</neutrophils>
+<sodium_mmol_l>0.0</sodium_mmol_l>
+<potassium_mmol_l>0.0</potassium_mmol_l>
+<urea_mmol_l>0.0</urea_mmol_l>
+<creatinine_umol_l>0.0</creatinine_umol_l>
+<egfr>0.0</egfr>
+<alt_u_l>0.0</alt_u_l>
+<alkaline_phosphatase>0.0</alkaline_phosphatase>
+<bilirubin_umol_l>0.0</bilirubin_umol_l>
+<albumin_g_l>0.0</albumin_g_l>
+<c_reactive_protein>0.0</c_reactive_protein>
+<hba1c_mmol_mol>0.0</hba1c_mmol_mol>
+<glucose_mmol_l>0.0</glucose_mmol_l>
+<tsh>0.0</tsh>
+<ferritin>0.0</ferritin>
+<inr>0.0</inr>
+<overall_result_status>normal</overall_result_status>
+<abnormal_results_present>true</abnormal_results_present>
+<critical_value_present>true</critical_value_present>
+<critical_value_detail></critical_value_detail>
+<findings_narrative>Example text.</findings_narrative>
+<comparison_with_previous></comparison_with_previous>
+<impression>Example text.</impression>
+<reporting_category>General</reporting_category>
+<recommended_follow_up></recommended_follow_up>
+<critical_result_communicated>true</critical_result_communicated>
+<reported_to></reported_to>
+</blood_test_result>

@@ -1,0 +1,202 @@
+// Generated from sql/. Do not edit by hand.
+// SOURCE: newborn_blood_spot_screening
+
+syntax = "proto3";
+
+package form_examples.newborn_blood_spot_screening;
+
+enum NewbornBloodSpotScreeningSampleTakerRoleEnum {
+  SAMPLETAKERROLE_UNSPECIFIED = 0;
+  SAMPLETAKERROLE_MIDWIFE = 1;  // midwife
+  SAMPLETAKERROLE_HEALTH_VISITOR = 2;  // health-visitor
+  SAMPLETAKERROLE_NEONATAL_NURSE = 3;  // neonatal-nurse
+  SAMPLETAKERROLE_LABORATORY = 4;  // laboratory
+  SAMPLETAKERROLE_OTHER = 5;  // other
+}
+
+enum NewbornBloodSpotScreeningCareSettingEnum {
+  CARESETTING_UNSPECIFIED = 0;
+  CARESETTING_COMMUNITY = 1;  // community
+  CARESETTING_HOME = 2;  // home
+  CARESETTING_NEONATAL_UNIT = 3;  // neonatal-unit
+  CARESETTING_HOSPITAL = 4;  // hospital
+  CARESETTING_OTHER = 5;  // other
+}
+
+enum NewbornBloodSpotScreeningPreviouslyScreenedEnum {
+  PREVIOUSLYSCREENED_UNSPECIFIED = 0;
+  PREVIOUSLYSCREENED_YES = 1;  // yes
+  PREVIOUSLYSCREENED_NO = 2;  // no
+  PREVIOUSLYSCREENED_UNKNOWN = 3;  // unknown
+}
+
+enum NewbornBloodSpotScreeningConsentGivenEnum {
+  CONSENTGIVEN_UNSPECIFIED = 0;
+  CONSENTGIVEN_YES = 1;  // yes
+  CONSENTGIVEN_NO = 2;  // no
+  CONSENTGIVEN_PARTIAL = 3;  // partial
+}
+
+enum NewbornBloodSpotScreeningSamplingSiteEnum {
+  SAMPLINGSITE_UNSPECIFIED = 0;
+  SAMPLINGSITE_HEEL = 1;  // heel
+  SAMPLINGSITE_OTHER = 2;  // other
+}
+
+enum NewbornBloodSpotScreeningSampleAdequacyEnum {
+  SAMPLEADEQUACY_UNSPECIFIED = 0;
+  SAMPLEADEQUACY_ADEQUATE = 1;  // adequate
+  SAMPLEADEQUACY_INADEQUATE = 2;  // inadequate
+}
+
+enum NewbornBloodSpotScreeningSpotQualityIssueEnum {
+  SPOTQUALITYISSUE_UNSPECIFIED = 0;
+  SPOTQUALITYISSUE_NONE = 1;  // none
+  SPOTQUALITYISSUE_INSUFFICIENT = 2;  // insufficient
+  SPOTQUALITYISSUE_COMPRESSED = 3;  // compressed
+  SPOTQUALITYISSUE_LAYERED = 4;  // layered
+  SPOTQUALITYISSUE_CONTAMINATED = 5;  // contaminated
+  SPOTQUALITYISSUE_INCOMPLETE_CIRCLES = 6;  // incomplete-circles
+}
+
+enum NewbornBloodSpotScreeningIsRepeatEnum {
+  ISREPEAT_UNSPECIFIED = 0;
+  ISREPEAT_YES = 1;  // yes
+  ISREPEAT_NO = 2;  // no
+}
+
+enum NewbornBloodSpotScreeningRepeatReasonEnum {
+  REPEATREASON_UNSPECIFIED = 0;
+  REPEATREASON_NOT_APPLICABLE = 1;  // not-applicable
+  REPEATREASON_BORDERLINE_RESULT = 2;  // borderline-result
+  REPEATREASON_INADEQUATE_SAMPLE = 3;  // inadequate-sample
+  REPEATREASON_TOO_EARLY = 4;  // too-early
+  REPEATREASON_TECHNICAL = 5;  // technical
+  REPEATREASON_OTHER = 6;  // other
+}
+
+enum NewbornBloodSpotScreeningScdResultEnum {
+  SCDRESULT_UNSPECIFIED = 0;
+  SCDRESULT_NOT_SUSPECTED = 1;  // not-suspected
+  SCDRESULT_SUSPECTED = 2;  // suspected
+  SCDRESULT_CARRIER = 3;  // carrier
+  SCDRESULT_REPEAT_REQUIRED = 4;  // repeat-required
+  SCDRESULT_DECLINED = 5;  // declined
+  SCDRESULT_PENDING = 6;  // pending
+}
+
+enum NewbornBloodSpotScreeningCfResultEnum {
+  CFRESULT_UNSPECIFIED = 0;
+  CFRESULT_NOT_SUSPECTED = 1;  // not-suspected
+  CFRESULT_SUSPECTED = 2;  // suspected
+  CFRESULT_CARRIER = 3;  // carrier
+  CFRESULT_REPEAT_REQUIRED = 4;  // repeat-required
+  CFRESULT_DECLINED = 5;  // declined
+  CFRESULT_PENDING = 6;  // pending
+}
+
+enum NewbornBloodSpotScreeningChtResultEnum {
+  CHTRESULT_UNSPECIFIED = 0;
+  CHTRESULT_NOT_SUSPECTED = 1;  // not-suspected
+  CHTRESULT_SUSPECTED = 2;  // suspected
+  CHTRESULT_CARRIER = 3;  // carrier
+  CHTRESULT_REPEAT_REQUIRED = 4;  // repeat-required
+  CHTRESULT_DECLINED = 5;  // declined
+  CHTRESULT_PENDING = 6;  // pending
+}
+
+enum NewbornBloodSpotScreeningPkuResultEnum {
+  PKURESULT_UNSPECIFIED = 0;
+  PKURESULT_NOT_SUSPECTED = 1;  // not-suspected
+  PKURESULT_SUSPECTED = 2;  // suspected
+  PKURESULT_CARRIER = 3;  // carrier
+  PKURESULT_REPEAT_REQUIRED = 4;  // repeat-required
+  PKURESULT_DECLINED = 5;  // declined
+  PKURESULT_PENDING = 6;  // pending
+}
+
+enum NewbornBloodSpotScreeningMcaddResultEnum {
+  MCADDRESULT_UNSPECIFIED = 0;
+  MCADDRESULT_NOT_SUSPECTED = 1;  // not-suspected
+  MCADDRESULT_SUSPECTED = 2;  // suspected
+  MCADDRESULT_CARRIER = 3;  // carrier
+  MCADDRESULT_REPEAT_REQUIRED = 4;  // repeat-required
+  MCADDRESULT_DECLINED = 5;  // declined
+  MCADDRESULT_PENDING = 6;  // pending
+}
+
+enum NewbornBloodSpotScreeningMsudResultEnum {
+  MSUDRESULT_UNSPECIFIED = 0;
+  MSUDRESULT_NOT_SUSPECTED = 1;  // not-suspected
+  MSUDRESULT_SUSPECTED = 2;  // suspected
+  MSUDRESULT_CARRIER = 3;  // carrier
+  MSUDRESULT_REPEAT_REQUIRED = 4;  // repeat-required
+  MSUDRESULT_DECLINED = 5;  // declined
+  MSUDRESULT_PENDING = 6;  // pending
+}
+
+enum NewbornBloodSpotScreeningIvaResultEnum {
+  IVARESULT_UNSPECIFIED = 0;
+  IVARESULT_NOT_SUSPECTED = 1;  // not-suspected
+  IVARESULT_SUSPECTED = 2;  // suspected
+  IVARESULT_CARRIER = 3;  // carrier
+  IVARESULT_REPEAT_REQUIRED = 4;  // repeat-required
+  IVARESULT_DECLINED = 5;  // declined
+  IVARESULT_PENDING = 6;  // pending
+}
+
+enum NewbornBloodSpotScreeningGa1ResultEnum {
+  GA1RESULT_UNSPECIFIED = 0;
+  GA1RESULT_NOT_SUSPECTED = 1;  // not-suspected
+  GA1RESULT_SUSPECTED = 2;  // suspected
+  GA1RESULT_CARRIER = 3;  // carrier
+  GA1RESULT_REPEAT_REQUIRED = 4;  // repeat-required
+  GA1RESULT_DECLINED = 5;  // declined
+  GA1RESULT_PENDING = 6;  // pending
+}
+
+enum NewbornBloodSpotScreeningHcuResultEnum {
+  HCURESULT_UNSPECIFIED = 0;
+  HCURESULT_NOT_SUSPECTED = 1;  // not-suspected
+  HCURESULT_SUSPECTED = 2;  // suspected
+  HCURESULT_CARRIER = 3;  // carrier
+  HCURESULT_REPEAT_REQUIRED = 4;  // repeat-required
+  HCURESULT_DECLINED = 5;  // declined
+  HCURESULT_PENDING = 6;  // pending
+}
+
+message NewbornBloodSpotScreening {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string patient_id = 5;  // UUID — uuid
+  string clinician_id = 6;  // UUID — uuid
+  NewbornBloodSpotScreeningSampleTakerRoleEnum sample_taker_role = 7;  // VARCHAR(20)
+  NewbornBloodSpotScreeningCareSettingEnum care_setting = 8;  // VARCHAR(20)
+  string record_date = 9;  // DATE — iso 8601 date
+  string time_of_birth = 10;  // TIME — iso 8601 time
+  double gestation_weeks = 11;  // NUMERIC(4,1) — numeric(4,1)
+  NewbornBloodSpotScreeningPreviouslyScreenedEnum previously_screened = 12;  // VARCHAR(10)
+  NewbornBloodSpotScreeningConsentGivenEnum consent_given = 13;  // VARCHAR(10)
+  string decline_reason = 14;  // TEXT
+  string sample_date = 15;  // DATE — iso 8601 date
+  string sample_time = 16;  // TIME — iso 8601 time
+  int32 age_at_sample_days = 17;  // INTEGER
+  NewbornBloodSpotScreeningSamplingSiteEnum sampling_site = 18;  // VARCHAR(10)
+  string sample_notes = 19;  // TEXT
+  NewbornBloodSpotScreeningSampleAdequacyEnum sample_adequacy = 20;  // VARCHAR(15)
+  NewbornBloodSpotScreeningSpotQualityIssueEnum spot_quality_issue = 21;  // VARCHAR(20)
+  NewbornBloodSpotScreeningIsRepeatEnum is_repeat = 22;  // VARCHAR(5)
+  NewbornBloodSpotScreeningRepeatReasonEnum repeat_reason = 23;  // VARCHAR(20)
+  NewbornBloodSpotScreeningScdResultEnum scd_result = 24;  // VARCHAR(15)
+  NewbornBloodSpotScreeningCfResultEnum cf_result = 25;  // VARCHAR(15)
+  NewbornBloodSpotScreeningChtResultEnum cht_result = 26;  // VARCHAR(15)
+  NewbornBloodSpotScreeningPkuResultEnum pku_result = 27;  // VARCHAR(15)
+  NewbornBloodSpotScreeningMcaddResultEnum mcadd_result = 28;  // VARCHAR(15)
+  NewbornBloodSpotScreeningMsudResultEnum msud_result = 29;  // VARCHAR(15)
+  NewbornBloodSpotScreeningIvaResultEnum iva_result = 30;  // VARCHAR(15)
+  NewbornBloodSpotScreeningGa1ResultEnum ga1_result = 31;  // VARCHAR(15)
+  NewbornBloodSpotScreeningHcuResultEnum hcu_result = 32;  // VARCHAR(15)
+  string clinical_context = 33;  // TEXT
+}

@@ -1,0 +1,160 @@
+# Generated from sql/. Do not edit by hand.
+# SOURCE: body_mass_index_and_body_surface_area_calculator_grade
+openapi: 3.1.0
+info:
+  title: Body Mass Index And Body Surface Area Calculator — BodyMassIndexAndBodySurfaceAreaCalculatorGrade
+  version: 1.0.0
+  description: "Computed anthropometry result: body mass index and its WHO adult weight-status category, plus both body-surface-area values (1:1 with the parent calculation record)."
+paths:
+  /body-mass-index-and-body-surface-area-calculator-grades:
+    get:
+      summary: List BodyMassIndexAndBodySurfaceAreaCalculatorGrade records
+      operationId: listBodyMassIndexAndBodySurfaceAreaCalculatorGrade
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of BodyMassIndexAndBodySurfaceAreaCalculatorGrade records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/BodyMassIndexAndBodySurfaceAreaCalculatorGrade"
+    post:
+      summary: Create a new BodyMassIndexAndBodySurfaceAreaCalculatorGrade
+      operationId: createBodyMassIndexAndBodySurfaceAreaCalculatorGrade
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/BodyMassIndexAndBodySurfaceAreaCalculatorGrade"
+      responses:
+        "201":
+          description: The newly created BodyMassIndexAndBodySurfaceAreaCalculatorGrade
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/BodyMassIndexAndBodySurfaceAreaCalculatorGrade"
+        "400":
+          description: Validation error
+  /body-mass-index-and-body-surface-area-calculator-grades/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one BodyMassIndexAndBodySurfaceAreaCalculatorGrade by id
+      operationId: getBodyMassIndexAndBodySurfaceAreaCalculatorGrade
+      responses:
+        "200":
+          description: The requested BodyMassIndexAndBodySurfaceAreaCalculatorGrade
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/BodyMassIndexAndBodySurfaceAreaCalculatorGrade"
+        "404":
+          description: BodyMassIndexAndBodySurfaceAreaCalculatorGrade not found
+    patch:
+      summary: Update an existing BodyMassIndexAndBodySurfaceAreaCalculatorGrade
+      operationId: updateBodyMassIndexAndBodySurfaceAreaCalculatorGrade
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/BodyMassIndexAndBodySurfaceAreaCalculatorGrade"
+      responses:
+        "200":
+          description: The updated BodyMassIndexAndBodySurfaceAreaCalculatorGrade
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/BodyMassIndexAndBodySurfaceAreaCalculatorGrade"
+        "404":
+          description: BodyMassIndexAndBodySurfaceAreaCalculatorGrade not found
+    delete:
+      summary: Soft-delete a BodyMassIndexAndBodySurfaceAreaCalculatorGrade
+      operationId: deleteBodyMassIndexAndBodySurfaceAreaCalculatorGrade
+      responses:
+        "204":
+          description: BodyMassIndexAndBodySurfaceAreaCalculatorGrade deleted
+        "404":
+          description: BodyMassIndexAndBodySurfaceAreaCalculatorGrade not found
+components:
+  schemas:
+    BodyMassIndexAndBodySurfaceAreaCalculatorGrade:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was most recently updated.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was soft-deleted.
+        body_mass_index_and_body_surface_area_calculator_id:
+          type: string
+          format: uuid
+          description: Foreign key to the parent calculation record (unique, 1:1).
+        bmi:
+          type: number
+          format: double
+          description: Body mass index in kg/m^2 at full precision (null when either input is missing); rounded to 1 decimal place for display.
+        bmi_category:
+          type: string
+          enum:
+            - underweight
+            - normal
+            - overweight
+            - obese-class-1
+            - obese-class-2
+            - obese-class-3
+            - ""
+          description: "WHO adult weight-status category: underweight, normal, overweight, obese-class-1, obese-class-2, or obese-class-3."
+        bsa_mosteller:
+          type: number
+          format: double
+          description: Body surface area in m^2 by the Mosteller formula (null when either input is missing).
+        bsa_du_bois:
+          type: number
+          format: double
+          description: Body surface area in m^2 by the Du Bois formula (null when either input is missing).
+        graded_at:
+          type: string
+          format: date-time
+          description: Timestamp when the engine last computed the result.
+      required:
+        - created_at
+        - updated_at
+        - body_mass_index_and_body_surface_area_calculator_id
+        - bmi_category
+        - graded_at
+      description: "Computed anthropometry result: body mass index and its WHO adult weight-status category, plus both body-surface-area values (1:1 with the parent calculation record)."

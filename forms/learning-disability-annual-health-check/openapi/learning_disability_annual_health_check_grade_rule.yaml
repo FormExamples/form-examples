@@ -1,0 +1,159 @@
+# Generated from sql/. Do not edit by hand.
+# SOURCE: learning_disability_annual_health_check_grade_rule
+openapi: 3.1.0
+info:
+  title: Learning Disability Annual Health Check — LearningDisabilityAnnualHealthCheckGradeRule
+  version: 1.0.0
+  description: "Audit trail of every completeness rule that fired during grading: required component, whether it was completed, category, and description."
+paths:
+  /learning-disability-annual-health-check-grade-rules:
+    get:
+      summary: List LearningDisabilityAnnualHealthCheckGradeRule records
+      operationId: listLearningDisabilityAnnualHealthCheckGradeRule
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of LearningDisabilityAnnualHealthCheckGradeRule records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/LearningDisabilityAnnualHealthCheckGradeRule"
+    post:
+      summary: Create a new LearningDisabilityAnnualHealthCheckGradeRule
+      operationId: createLearningDisabilityAnnualHealthCheckGradeRule
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/LearningDisabilityAnnualHealthCheckGradeRule"
+      responses:
+        "201":
+          description: The newly created LearningDisabilityAnnualHealthCheckGradeRule
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/LearningDisabilityAnnualHealthCheckGradeRule"
+        "400":
+          description: Validation error
+  /learning-disability-annual-health-check-grade-rules/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one LearningDisabilityAnnualHealthCheckGradeRule by id
+      operationId: getLearningDisabilityAnnualHealthCheckGradeRule
+      responses:
+        "200":
+          description: The requested LearningDisabilityAnnualHealthCheckGradeRule
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/LearningDisabilityAnnualHealthCheckGradeRule"
+        "404":
+          description: LearningDisabilityAnnualHealthCheckGradeRule not found
+    patch:
+      summary: Update an existing LearningDisabilityAnnualHealthCheckGradeRule
+      operationId: updateLearningDisabilityAnnualHealthCheckGradeRule
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/LearningDisabilityAnnualHealthCheckGradeRule"
+      responses:
+        "200":
+          description: The updated LearningDisabilityAnnualHealthCheckGradeRule
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/LearningDisabilityAnnualHealthCheckGradeRule"
+        "404":
+          description: LearningDisabilityAnnualHealthCheckGradeRule not found
+    delete:
+      summary: Soft-delete a LearningDisabilityAnnualHealthCheckGradeRule
+      operationId: deleteLearningDisabilityAnnualHealthCheckGradeRule
+      responses:
+        "204":
+          description: LearningDisabilityAnnualHealthCheckGradeRule deleted
+        "404":
+          description: LearningDisabilityAnnualHealthCheckGradeRule not found
+components:
+  schemas:
+    LearningDisabilityAnnualHealthCheckGradeRule:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was most recently updated.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was soft-deleted.
+        learning_disability_annual_health_check_grade_id:
+          type: string
+          format: uuid
+          description: Foreign key to the parent grade.
+        rule_id:
+          type: string
+          maxLength: 40
+          description: Stable rule identifier (e.g. R-PHYSICAL-HEALTH-01).
+        component:
+          type: string
+          maxLength: 50
+          description: Required component the rule concerns (e.g. reasonable-adjustments, physical-health, medication-review).
+        completed:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Whether the required component was completed (yes/no).
+        category:
+          type: string
+          maxLength: 50
+          description: Subject category (e.g. required-component).
+        description:
+          type: string
+          maxLength: 500
+          description: Human-readable description of why the rule fired.
+      required:
+        - created_at
+        - updated_at
+        - learning_disability_annual_health_check_grade_id
+        - rule_id
+        - component
+        - completed
+        - category
+        - description
+      description: "Audit trail of every completeness rule that fired during grading: required component, whether it was completed, category, and description."

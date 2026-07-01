@@ -1,0 +1,96 @@
+// Generated from sql/. Do not edit by hand.
+// SOURCE: zarit_burden_interview
+
+syntax = "proto3";
+
+package form_examples.zarit_burden_interview;
+
+enum ZaritBurdenInterviewPractitionerRoleEnum {
+  PRACTITIONERROLE_UNSPECIFIED = 0;
+  PRACTITIONERROLE_CLINICIAN = 1;  // clinician
+  PRACTITIONERROLE_NURSE = 2;  // nurse
+  PRACTITIONERROLE_SOCIAL_CARE = 3;  // social-care
+  PRACTITIONERROLE_CARER_SUPPORT = 4;  // carer-support
+  PRACTITIONERROLE_OTHER = 5;  // other
+}
+
+enum ZaritBurdenInterviewCareSettingEnum {
+  CARESETTING_UNSPECIFIED = 0;
+  CARESETTING_MEMORY_SERVICE = 1;  // memory-service
+  CARESETTING_COMMUNITY = 2;  // community
+  CARESETTING_GENERAL_PRACTICE = 3;  // general-practice
+  CARESETTING_SOCIAL_CARE = 4;  // social-care
+  CARESETTING_OTHER = 5;  // other
+}
+
+enum ZaritBurdenInterviewInstrumentFormEnum {
+  INSTRUMENTFORM_UNSPECIFIED = 0;
+  INSTRUMENTFORM_ZBI22 = 1;  // zbi22
+  INSTRUMENTFORM_ZBI12 = 2;  // zbi12
+}
+
+enum ZaritBurdenInterviewCarerRelationshipEnum {
+  CARERRELATIONSHIP_UNSPECIFIED = 0;
+  CARERRELATIONSHIP_SPOUSE_PARTNER = 1;  // spouse-partner
+  CARERRELATIONSHIP_ADULT_CHILD = 2;  // adult-child
+  CARERRELATIONSHIP_OTHER_RELATIVE = 3;  // other-relative
+  CARERRELATIONSHIP_FRIEND = 4;  // friend
+  CARERRELATIONSHIP_OTHER = 5;  // other
+}
+
+enum ZaritBurdenInterviewCarerCoResidentEnum {
+  CARERCORESIDENT_UNSPECIFIED = 0;
+  CARERCORESIDENT_YES = 1;  // yes
+  CARERCORESIDENT_NO = 2;  // no
+}
+
+enum ZaritBurdenInterviewRecipientConditionEnum {
+  RECIPIENTCONDITION_UNSPECIFIED = 0;
+  RECIPIENTCONDITION_DEMENTIA = 1;  // dementia
+  RECIPIENTCONDITION_CHRONIC_ILLNESS = 2;  // chronic-illness
+  RECIPIENTCONDITION_DISABILITY = 3;  // disability
+  RECIPIENTCONDITION_OTHER = 4;  // other
+}
+
+message ZaritBurdenInterview {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string patient_id = 5;  // UUID — uuid
+  string clinician_id = 6;  // UUID — uuid
+  string practitioner_name = 7;  // VARCHAR(255) — max 255 chars
+  ZaritBurdenInterviewPractitionerRoleEnum practitioner_role = 8;  // VARCHAR(20)
+  string assessed_at = 9;  // TIMESTAMPTZ — iso 8601
+  ZaritBurdenInterviewCareSettingEnum care_setting = 10;  // VARCHAR(20)
+  ZaritBurdenInterviewInstrumentFormEnum instrument_form = 11;  // VARCHAR(10)
+  string carer_identifier = 12;  // VARCHAR(100) — max 100 chars
+  ZaritBurdenInterviewCarerRelationshipEnum carer_relationship = 13;  // VARCHAR(20)
+  ZaritBurdenInterviewCarerCoResidentEnum carer_co_resident = 14;  // VARCHAR(10)
+  double care_hours_per_week = 15;  // NUMERIC(5,1) — numeric(5,1)
+  string recipient_identifier = 16;  // VARCHAR(100) — max 100 chars
+  ZaritBurdenInterviewRecipientConditionEnum recipient_condition = 17;  // VARCHAR(20)
+  int32 item_1 = 18;  // SMALLINT
+  int32 item_2 = 19;  // SMALLINT
+  int32 item_3 = 20;  // SMALLINT
+  int32 item_4 = 21;  // SMALLINT
+  int32 item_5 = 22;  // SMALLINT
+  int32 item_6 = 23;  // SMALLINT
+  int32 item_7 = 24;  // SMALLINT
+  int32 item_8 = 25;  // SMALLINT
+  int32 item_9 = 26;  // SMALLINT
+  int32 item_10 = 27;  // SMALLINT
+  int32 item_11 = 28;  // SMALLINT
+  int32 item_12 = 29;  // SMALLINT
+  int32 item_13 = 30;  // SMALLINT
+  int32 item_14 = 31;  // SMALLINT
+  int32 item_15 = 32;  // SMALLINT
+  int32 item_16 = 33;  // SMALLINT
+  int32 item_17 = 34;  // SMALLINT
+  int32 item_18 = 35;  // SMALLINT
+  int32 item_19 = 36;  // SMALLINT
+  int32 item_20 = 37;  // SMALLINT
+  int32 item_21 = 38;  // SMALLINT
+  int32 item_22 = 39;  // SMALLINT
+  string clinical_note = 40;  // TEXT
+}

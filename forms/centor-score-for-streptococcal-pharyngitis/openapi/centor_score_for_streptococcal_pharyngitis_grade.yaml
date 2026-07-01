@@ -1,0 +1,161 @@
+# Generated from sql/. Do not edit by hand.
+# SOURCE: centor_score_for_streptococcal_pharyngitis_grade
+openapi: 3.1.0
+info:
+  title: Centor Score For Streptococcal Pharyngitis — CentorScoreForStreptococcalPharyngitisGrade
+  version: 1.0.0
+  description: "Computed Centor / McIsaac grading result: raw Centor total (0-4), age modifier (-1..+1), modified McIsaac score (-1..5), derived risk band, and management guidance."
+paths:
+  /centor-score-for-streptococcal-pharyngitis-grades:
+    get:
+      summary: List CentorScoreForStreptococcalPharyngitisGrade records
+      operationId: listCentorScoreForStreptococcalPharyngitisGrade
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of CentorScoreForStreptococcalPharyngitisGrade records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/CentorScoreForStreptococcalPharyngitisGrade"
+    post:
+      summary: Create a new CentorScoreForStreptococcalPharyngitisGrade
+      operationId: createCentorScoreForStreptococcalPharyngitisGrade
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CentorScoreForStreptococcalPharyngitisGrade"
+      responses:
+        "201":
+          description: The newly created CentorScoreForStreptococcalPharyngitisGrade
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CentorScoreForStreptococcalPharyngitisGrade"
+        "400":
+          description: Validation error
+  /centor-score-for-streptococcal-pharyngitis-grades/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one CentorScoreForStreptococcalPharyngitisGrade by id
+      operationId: getCentorScoreForStreptococcalPharyngitisGrade
+      responses:
+        "200":
+          description: The requested CentorScoreForStreptococcalPharyngitisGrade
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CentorScoreForStreptococcalPharyngitisGrade"
+        "404":
+          description: CentorScoreForStreptococcalPharyngitisGrade not found
+    patch:
+      summary: Update an existing CentorScoreForStreptococcalPharyngitisGrade
+      operationId: updateCentorScoreForStreptococcalPharyngitisGrade
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CentorScoreForStreptococcalPharyngitisGrade"
+      responses:
+        "200":
+          description: The updated CentorScoreForStreptococcalPharyngitisGrade
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CentorScoreForStreptococcalPharyngitisGrade"
+        "404":
+          description: CentorScoreForStreptococcalPharyngitisGrade not found
+    delete:
+      summary: Soft-delete a CentorScoreForStreptococcalPharyngitisGrade
+      operationId: deleteCentorScoreForStreptococcalPharyngitisGrade
+      responses:
+        "204":
+          description: CentorScoreForStreptococcalPharyngitisGrade deleted
+        "404":
+          description: CentorScoreForStreptococcalPharyngitisGrade not found
+components:
+  schemas:
+    CentorScoreForStreptococcalPharyngitisGrade:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was most recently updated.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was soft-deleted.
+        centor_score_for_streptococcal_pharyngitis_id:
+          type: string
+          format: uuid
+          description: Foreign key to the parent assessment (unique, 1:1).
+        centor_score:
+          type: integer
+          format: int32
+          description: Raw Centor total across the four criteria (0-4 when complete).
+        age_modifier:
+          type: integer
+          format: int32
+          description: "McIsaac age modifier: +1 for ages 3-14, 0 for ages 15-44, -1 for ages 45+."
+        mcisaac_score:
+          type: integer
+          format: int32
+          description: "Modified McIsaac score: Centor total plus age modifier (-1..5)."
+        risk_band:
+          type: string
+          enum:
+            - low
+            - moderate
+            - high
+            - ""
+          description: "Derived risk band from the McIsaac score: low (<=1), moderate (2-3), or high (4-5)."
+        management:
+          type: string
+          description: Free-text testing / antibiotic management guidance for the derived band.
+        graded_at:
+          type: string
+          format: date-time
+          description: Timestamp when the engine last computed the grade.
+      required:
+        - created_at
+        - updated_at
+        - centor_score_for_streptococcal_pharyngitis_id
+        - risk_band
+        - management
+        - graded_at
+      description: "Computed Centor / McIsaac grading result: raw Centor total (0-4), age modifier (-1..+1), modified McIsaac score (-1..5), derived risk band, and management guidance."

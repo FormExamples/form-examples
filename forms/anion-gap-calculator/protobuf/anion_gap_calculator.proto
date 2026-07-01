@@ -1,0 +1,70 @@
+// Generated from sql/. Do not edit by hand.
+// SOURCE: anion_gap_calculator
+
+syntax = "proto3";
+
+package form_examples.anion_gap_calculator;
+
+enum AnionGapCalculatorClinicianRoleEnum {
+  CLINICIANROLE_UNSPECIFIED = 0;
+  CLINICIANROLE_DOCTOR = 1;  // doctor
+  CLINICIANROLE_NURSE = 2;  // nurse
+  CLINICIANROLE_SCIENTIST = 3;  // scientist
+  CLINICIANROLE_PHARMACIST = 4;  // pharmacist
+  CLINICIANROLE_OTHER = 5;  // other
+}
+
+enum AnionGapCalculatorCareSettingEnum {
+  CARESETTING_UNSPECIFIED = 0;
+  CARESETTING_EMERGENCY_DEPARTMENT = 1;  // emergency-department
+  CARESETTING_WARD = 2;  // ward
+  CARESETTING_INTENSIVE_CARE = 3;  // intensive-care
+  CARESETTING_LABORATORY = 4;  // laboratory
+  CARESETTING_OTHER = 5;  // other
+}
+
+enum AnionGapCalculatorAgeBandEnum {
+  AGEBAND_UNSPECIFIED = 0;
+  AGEBAND_V_18_39 = 1;  // 18-39
+  AGEBAND_V_40_64 = 2;  // 40-64
+  AGEBAND_V_65_74 = 3;  // 65-74
+  AGEBAND_V_75_84 = 4;  // 75-84
+  AGEBAND_V_85_PLUS = 5;  // 85-plus
+}
+
+enum AnionGapCalculatorSexEnum {
+  SEX_UNSPECIFIED = 0;
+  SEX_FEMALE = 1;  // female
+  SEX_MALE = 2;  // male
+  SEX_INTERSEX = 3;  // intersex
+  SEX_UNKNOWN = 4;  // unknown
+}
+
+enum AnionGapCalculatorIncludePotassiumEnum {
+  INCLUDEPOTASSIUM_UNSPECIFIED = 0;
+  INCLUDEPOTASSIUM_YES = 1;  // yes
+  INCLUDEPOTASSIUM_NO = 2;  // no
+}
+
+message AnionGapCalculator {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string patient_id = 5;  // UUID — uuid
+  string clinician_id = 6;  // UUID — uuid
+  string clinician_name = 7;  // VARCHAR(255) — max 255 chars
+  AnionGapCalculatorClinicianRoleEnum clinician_role = 8;  // VARCHAR(20)
+  string calculated_at = 9;  // TIMESTAMPTZ — iso 8601
+  AnionGapCalculatorCareSettingEnum care_setting = 10;  // VARCHAR(30)
+  string clinical_context = 11;  // TEXT
+  string patient_identifier = 12;  // VARCHAR(100) — max 100 chars
+  AnionGapCalculatorAgeBandEnum age_band = 13;  // VARCHAR(20)
+  AnionGapCalculatorSexEnum sex = 14;  // VARCHAR(20)
+  double sodium_mmol_l = 15;  // NUMERIC(5,2) — numeric(5,2)
+  double potassium_mmol_l = 16;  // NUMERIC(5,2) — numeric(5,2)
+  double chloride_mmol_l = 17;  // NUMERIC(5,2) — numeric(5,2)
+  double bicarbonate_mmol_l = 18;  // NUMERIC(5,2) — numeric(5,2)
+  double albumin_g_l = 19;  // NUMERIC(5,2) — numeric(5,2)
+  AnionGapCalculatorIncludePotassiumEnum include_potassium = 20;  // VARCHAR(5)
+}

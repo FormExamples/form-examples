@@ -1,0 +1,37 @@
+// Generated from sql/. Do not edit by hand.
+// SOURCE: wells_score_for_pulmonary_embolism_grade_rule
+
+syntax = "proto3";
+
+package form_examples.wells_score_for_pulmonary_embolism;
+
+enum WellsScoreForPulmonaryEmbolismGradeRuleInstrumentEnum {
+  INSTRUMENT_UNSPECIFIED = 0;
+  INSTRUMENT_CRITERION = 1;  // criterion
+  INSTRUMENT_TWO_LEVEL = 2;  // two-level
+  INSTRUMENT_THREE_LEVEL = 3;  // three-level
+  INSTRUMENT_COMPOSITE = 4;  // composite
+}
+
+enum WellsScoreForPulmonaryEmbolismGradeRuleBandEnum {
+  BAND_UNSPECIFIED = 0;
+  BAND_LIKELY = 1;  // likely
+  BAND_UNLIKELY = 2;  // unlikely
+  BAND_LOW = 3;  // low
+  BAND_MODERATE = 4;  // moderate
+  BAND_HIGH = 5;  // high
+}
+
+message WellsScoreForPulmonaryEmbolismGradeRule {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string wells_score_for_pulmonary_embolism_grade_id = 5;  // UUID — uuid
+  string rule_id = 6;  // VARCHAR(40) — max 40 chars
+  WellsScoreForPulmonaryEmbolismGradeRuleInstrumentEnum instrument = 7;  // VARCHAR(20)
+  double points = 8;  // NUMERIC(4,1) — numeric(4,1)
+  WellsScoreForPulmonaryEmbolismGradeRuleBandEnum band = 9;  // VARCHAR(10)
+  string category = 10;  // VARCHAR(50) — max 50 chars
+  string description = 11;  // VARCHAR(500) — max 500 chars
+}

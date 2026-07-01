@@ -1,0 +1,165 @@
+# Generated from sql/. Do not edit by hand.
+# SOURCE: has_bled_score_for_major_bleeding_risk_grade_rule
+openapi: 3.1.0
+info:
+  title: Has Bled Score For Major Bleeding Risk — HasBledScoreForMajorBleedingRiskGradeRule
+  version: 1.0.0
+  description: "Audit trail of every grading rule that fired during HAS-BLED computation: criterion, points contributed, category, and description."
+paths:
+  /has-bled-score-for-major-bleeding-risk-grade-rules:
+    get:
+      summary: List HasBledScoreForMajorBleedingRiskGradeRule records
+      operationId: listHasBledScoreForMajorBleedingRiskGradeRule
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of HasBledScoreForMajorBleedingRiskGradeRule records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/HasBledScoreForMajorBleedingRiskGradeRule"
+    post:
+      summary: Create a new HasBledScoreForMajorBleedingRiskGradeRule
+      operationId: createHasBledScoreForMajorBleedingRiskGradeRule
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/HasBledScoreForMajorBleedingRiskGradeRule"
+      responses:
+        "201":
+          description: The newly created HasBledScoreForMajorBleedingRiskGradeRule
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/HasBledScoreForMajorBleedingRiskGradeRule"
+        "400":
+          description: Validation error
+  /has-bled-score-for-major-bleeding-risk-grade-rules/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one HasBledScoreForMajorBleedingRiskGradeRule by id
+      operationId: getHasBledScoreForMajorBleedingRiskGradeRule
+      responses:
+        "200":
+          description: The requested HasBledScoreForMajorBleedingRiskGradeRule
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/HasBledScoreForMajorBleedingRiskGradeRule"
+        "404":
+          description: HasBledScoreForMajorBleedingRiskGradeRule not found
+    patch:
+      summary: Update an existing HasBledScoreForMajorBleedingRiskGradeRule
+      operationId: updateHasBledScoreForMajorBleedingRiskGradeRule
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/HasBledScoreForMajorBleedingRiskGradeRule"
+      responses:
+        "200":
+          description: The updated HasBledScoreForMajorBleedingRiskGradeRule
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/HasBledScoreForMajorBleedingRiskGradeRule"
+        "404":
+          description: HasBledScoreForMajorBleedingRiskGradeRule not found
+    delete:
+      summary: Soft-delete a HasBledScoreForMajorBleedingRiskGradeRule
+      operationId: deleteHasBledScoreForMajorBleedingRiskGradeRule
+      responses:
+        "204":
+          description: HasBledScoreForMajorBleedingRiskGradeRule deleted
+        "404":
+          description: HasBledScoreForMajorBleedingRiskGradeRule not found
+components:
+  schemas:
+    HasBledScoreForMajorBleedingRiskGradeRule:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was most recently updated.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was soft-deleted.
+        has_bled_score_for_major_bleeding_risk_grade_id:
+          type: string
+          format: uuid
+          description: Foreign key to the parent grade.
+        rule_id:
+          type: string
+          maxLength: 40
+          description: Stable rule identifier (e.g. R-ELDERLY-1POINT-01).
+        criterion:
+          type: string
+          enum:
+            - hypertension
+            - renal
+            - liver
+            - stroke
+            - bleeding
+            - labile-inr
+            - elderly
+            - drugs
+            - alcohol
+            - band
+          description: "Scored criterion the rule belongs to: hypertension, renal, liver, stroke, bleeding, labile-inr, elderly, drugs, alcohol, or band."
+        points:
+          type: integer
+          format: int32
+          description: Points (0 or 1) contributed by this rule for its criterion.
+        category:
+          type: string
+          maxLength: 50
+          description: Subject category (e.g. criterion-fired, band).
+        description:
+          type: string
+          maxLength: 500
+          description: Human-readable description of why the rule fired.
+      required:
+        - created_at
+        - updated_at
+        - has_bled_score_for_major_bleeding_risk_grade_id
+        - rule_id
+        - criterion
+        - category
+        - description
+      description: "Audit trail of every grading rule that fired during HAS-BLED computation: criterion, points contributed, category, and description."

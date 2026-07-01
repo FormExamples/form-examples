@@ -1,9 +1,9 @@
-<!ELEMENT access_scheduling (id,created_at,updated_at,deleted_at,encounter_satisfaction_id,NULL,wait_for_appointment,wait_in_waiting_room)>
+<!ELEMENT access_scheduling (id,created_at,updated_at,deleted_at,encounter_satisfaction_id,ease_of_scheduling,wait_for_appointment,wait_in_waiting_room)>
 <!ELEMENT id (#PCDATA)>
 <!ELEMENT created_at (#PCDATA)>
 <!ELEMENT updated_at (#PCDATA)>
 <!ELEMENT deleted_at (#PCDATA)>
 <!ELEMENT encounter_satisfaction_id (#PCDATA)>
-<!ELEMENT NULL (#PCDATA)>
+<!ELEMENT ease_of_scheduling (#PCDATA)>
 <!ELEMENT wait_for_appointment (#PCDATA)>
 <!ELEMENT wait_in_waiting_room (#PCDATA)>

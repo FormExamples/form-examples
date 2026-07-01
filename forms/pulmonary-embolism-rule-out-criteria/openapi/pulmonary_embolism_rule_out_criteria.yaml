@@ -1,0 +1,255 @@
+# Generated from sql/. Do not edit by hand.
+# SOURCE: pulmonary_embolism_rule_out_criteria
+openapi: 3.1.0
+info:
+  title: Pulmonary Embolism Rule Out Criteria — PulmonaryEmbolismRuleOutCriteria
+  version: 1.0.0
+  description: "Main PERC assessment record: identification, context, the pre-test probability gate, and the eight objective criterion inputs."
+paths:
+  /pulmonary-embolism-rule-out-criterias:
+    get:
+      summary: List PulmonaryEmbolismRuleOutCriteria records
+      operationId: listPulmonaryEmbolismRuleOutCriteria
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of PulmonaryEmbolismRuleOutCriteria records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/PulmonaryEmbolismRuleOutCriteria"
+    post:
+      summary: Create a new PulmonaryEmbolismRuleOutCriteria
+      operationId: createPulmonaryEmbolismRuleOutCriteria
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/PulmonaryEmbolismRuleOutCriteria"
+      responses:
+        "201":
+          description: The newly created PulmonaryEmbolismRuleOutCriteria
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PulmonaryEmbolismRuleOutCriteria"
+        "400":
+          description: Validation error
+  /pulmonary-embolism-rule-out-criterias/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one PulmonaryEmbolismRuleOutCriteria by id
+      operationId: getPulmonaryEmbolismRuleOutCriteria
+      responses:
+        "200":
+          description: The requested PulmonaryEmbolismRuleOutCriteria
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PulmonaryEmbolismRuleOutCriteria"
+        "404":
+          description: PulmonaryEmbolismRuleOutCriteria not found
+    patch:
+      summary: Update an existing PulmonaryEmbolismRuleOutCriteria
+      operationId: updatePulmonaryEmbolismRuleOutCriteria
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/PulmonaryEmbolismRuleOutCriteria"
+      responses:
+        "200":
+          description: The updated PulmonaryEmbolismRuleOutCriteria
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PulmonaryEmbolismRuleOutCriteria"
+        "404":
+          description: PulmonaryEmbolismRuleOutCriteria not found
+    delete:
+      summary: Soft-delete a PulmonaryEmbolismRuleOutCriteria
+      operationId: deletePulmonaryEmbolismRuleOutCriteria
+      responses:
+        "204":
+          description: PulmonaryEmbolismRuleOutCriteria deleted
+        "404":
+          description: PulmonaryEmbolismRuleOutCriteria not found
+components:
+  schemas:
+    PulmonaryEmbolismRuleOutCriteria:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was updated most-recently.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was deleted a.k.a. soft-removed.
+        patient_id:
+          type: string
+          format: uuid
+          description: Foreign key to the patient being assessed (restricts delete).
+        clinician_id:
+          type: string
+          format: uuid
+          description: Foreign key to the assessing clinician (restricts delete).
+        status:
+          type: string
+          enum:
+            - draft
+            - submitted
+            - amended
+            - signed
+            - ""
+          description: "Workflow status: draft, submitted, amended, or signed."
+        patient_identifier:
+          type: string
+          maxLength: 64
+          description: Local patient identifier as recorded at the point of assessment.
+        assessed_at:
+          type: string
+          format: date-time
+          description: Date and time the assessment was carried out.
+        care_setting:
+          type: string
+          enum:
+            - emergency-department
+            - acute-ambulatory
+            - other
+            - ""
+          description: "Care setting: emergency-department, acute-ambulatory, or other."
+        presenting_complaint:
+          type: string
+          description: Symptom prompting consideration of pulmonary embolism.
+        age:
+          type: number
+          format: double
+          description: Patient age in years; the objective measurement behind criterion 1 (age < 50).
+        heart_rate:
+          type: number
+          format: double
+          description: Heart rate in beats per minute; the objective measurement behind criterion 2 (heart rate < 100).
+        oxygen_saturation:
+          type: number
+          format: double
+          description: Oxygen saturation (SpO2) as a percentage; the objective measurement behind criterion 3 (SpO2 >= 95).
+        pretest_probability:
+          type: string
+          enum:
+            - low
+            - not-low
+            - ""
+          description: "Clinician gestalt pre-test probability: low or not-low. PERC applies only when low."
+        age_under_50:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: "Criterion 1 (satisfied when yes): age under 50 years."
+        heart_rate_under_100:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: "Criterion 2 (satisfied when yes): heart rate under 100 beats per minute."
+        spo2_at_least_95:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: "Criterion 3 (satisfied when yes): oxygen saturation at least 95 per cent."
+        no_unilateral_leg_swelling:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: "Criterion 4 (satisfied when yes): no unilateral leg swelling."
+        no_haemoptysis:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: "Criterion 5 (satisfied when yes): no haemoptysis."
+        no_recent_surgery_trauma:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: "Criterion 6 (satisfied when yes): no surgery or trauma within 4 weeks requiring general anaesthesia."
+        no_prior_dvt_pe:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: "Criterion 7 (satisfied when yes): no prior deep vein thrombosis or pulmonary embolism."
+        no_oestrogen_use:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: "Criterion 8 (satisfied when yes): no exogenous oestrogen use."
+        clinical_notes:
+          type: string
+          description: Free-text clinical notes captured alongside the assessment.
+      required:
+        - created_at
+        - updated_at
+        - patient_id
+        - status
+        - patient_identifier
+        - care_setting
+        - presenting_complaint
+        - pretest_probability
+        - age_under_50
+        - heart_rate_under_100
+        - spo2_at_least_95
+        - no_unilateral_leg_swelling
+        - no_haemoptysis
+        - no_recent_surgery_trauma
+        - no_prior_dvt_pe
+        - no_oestrogen_use
+        - clinical_notes
+      description: "Main PERC assessment record: identification, context, the pre-test probability gate, and the eight objective criterion inputs."

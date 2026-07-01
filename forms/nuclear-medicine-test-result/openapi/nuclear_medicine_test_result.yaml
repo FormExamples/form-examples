@@ -1,0 +1,268 @@
+# Generated from sql/. Do not edit by hand.
+# SOURCE: nuclear_medicine_test_result
+openapi: 3.1.0
+info:
+  title: Nuclear Medicine Test Result — NuclearMedicineTestResult
+  version: 1.0.0
+  description: Nuclear medicine (radionuclide scan) result (report). Captures the performed examination, the radiopharmaceutical and injected activity, clinical history, the narrative and structured findings, key quantitative measurements (e.g. ejection fraction, split renal function), the impression and structured reporting category (e.g. V/Q PE probability), recommended follow-up, and critical-result communication. This is the source-of-truth record that the four-axis interpretation grade is computed from.
+paths:
+  /nuclear-medicine-test-results:
+    get:
+      summary: List NuclearMedicineTestResult records
+      operationId: listNuclearMedicineTestResult
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of NuclearMedicineTestResult records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/NuclearMedicineTestResult"
+    post:
+      summary: Create a new NuclearMedicineTestResult
+      operationId: createNuclearMedicineTestResult
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/NuclearMedicineTestResult"
+      responses:
+        "201":
+          description: The newly created NuclearMedicineTestResult
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/NuclearMedicineTestResult"
+        "400":
+          description: Validation error
+  /nuclear-medicine-test-results/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one NuclearMedicineTestResult by id
+      operationId: getNuclearMedicineTestResult
+      responses:
+        "200":
+          description: The requested NuclearMedicineTestResult
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/NuclearMedicineTestResult"
+        "404":
+          description: NuclearMedicineTestResult not found
+    patch:
+      summary: Update an existing NuclearMedicineTestResult
+      operationId: updateNuclearMedicineTestResult
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/NuclearMedicineTestResult"
+      responses:
+        "200":
+          description: The updated NuclearMedicineTestResult
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/NuclearMedicineTestResult"
+        "404":
+          description: NuclearMedicineTestResult not found
+    delete:
+      summary: Soft-delete a NuclearMedicineTestResult
+      operationId: deleteNuclearMedicineTestResult
+      responses:
+        "204":
+          description: NuclearMedicineTestResult deleted
+        "404":
+          description: NuclearMedicineTestResult not found
+components:
+  schemas:
+    NuclearMedicineTestResult:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was updated most-recently.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was deleted a.k.a. soft-removed.
+        patient_id:
+          type: string
+          format: uuid
+          description: Foreign key to the patient.
+        clinician_id:
+          type: string
+          format: uuid
+          description: Foreign key to the reporting clinician (nuclear-medicine physician / radiologist).
+        originating_request_reference:
+          type: string
+          maxLength: 255
+          description: Free-text reference linking this report back to the originating nuclear medicine scan request (referral).
+        report_status:
+          type: string
+          enum:
+            - preliminary
+            - final
+            - amended
+            - cancelled
+            - ""
+          description: "Report lifecycle status: preliminary, final, amended, cancelled."
+        performed_date:
+          type: string
+          format: date
+          description: Date the nuclear medicine examination was performed.
+        reported_date:
+          type: string
+          format: date
+          description: Date the report was authored / signed.
+        scan_type:
+          type: string
+          enum:
+            - bone-scan
+            - myocardial-perfusion
+            - vq-lung-scan
+            - thyroid-uptake
+            - renal-dmsa
+            - renal-mag3
+            - gallium-octreotide
+            - white-cell-scan
+            - sentinel-node
+            - other
+            - ""
+          description: "Radionuclide scan type: bone-scan, myocardial-perfusion, vq-lung-scan, thyroid-uptake, renal-dmsa, renal-mag3, gallium-octreotide, white-cell-scan, sentinel-node, other."
+        radiopharmaceutical:
+          type: string
+          maxLength: 255
+          description: Radiopharmaceutical (tracer) administered, e.g. Tc-99m MDP, Tc-99m MAA, Tc-99m sestamibi, Tc-99m MAG3, Tc-99m DMSA, Ga-68 DOTATATE.
+        injected_activity_mbq:
+          type: number
+          format: double
+          description: Administered activity in megabecquerels (MBq), for dose audit (DRL comparison).
+        examination_adequacy:
+          type: string
+          enum:
+            - adequate
+            - limited
+            - non-diagnostic
+            - ""
+          description: "Diagnostic adequacy of the examination: adequate, limited, non-diagnostic."
+        clinical_history:
+          type: string
+          maxLength: 1000
+          description: Clinical history and the question the examination was performed to answer.
+        comparison_with_previous:
+          type: string
+          maxLength: 1000
+          description: Comparison with relevant previous imaging studies.
+        findings_narrative:
+          type: string
+          maxLength: 2000
+          description: Narrative description of the scintigraphic findings (the body of the report).
+        abnormal_uptake:
+          type: boolean
+          description: Whether abnormal tracer uptake (focal or diffuse) is present.
+        metastatic_pattern:
+          type: boolean
+          description: Whether a pattern suggestive of metastatic disease (e.g. multiple foci on bone scan) is present.
+        perfusion_defect:
+          type: boolean
+          description: Whether a perfusion defect (e.g. myocardial or pulmonary) is present.
+        photopenic_area:
+          type: boolean
+          description: Whether a photopenic (reduced-uptake / cold) area is present.
+        no_significant_abnormality:
+          type: boolean
+          description: Whether the study shows no significant abnormality.
+        incidental_finding:
+          type: boolean
+          description: Whether one or more incidental findings warranting documentation are present.
+        ejection_fraction_percent:
+          type: number
+          format: double
+          description: Left-ventricular ejection fraction percentage, where gated cardiac studies are performed (0-100).
+        split_function_left_percent:
+          type: number
+          format: double
+          description: Left-kidney split (differential) function percentage, for renal studies (0-100).
+        split_function_right_percent:
+          type: number
+          format: double
+          description: Right-kidney split (differential) function percentage, for renal studies (0-100).
+        impression:
+          type: string
+          maxLength: 2000
+          description: Summary impression / conclusion answering the clinical question.
+        reporting_category:
+          type: string
+          maxLength: 100
+          description: Free-text structured-reporting category label, e.g. PE probability for a V/Q study (normal / very-low / intermediate / high) or a bone-scan flare category.
+        recommended_follow_up:
+          type: string
+          maxLength: 1000
+          description: Recommended follow-up imaging, referral, or management.
+        critical_result_communicated:
+          type: boolean
+          description: Whether a critical or unexpected significant result was communicated directly to the referrer.
+        reported_to:
+          type: string
+          maxLength: 500
+          description: Who the critical / urgent result was communicated to, with date and time if applicable.
+      required:
+        - created_at
+        - updated_at
+        - patient_id
+        - clinician_id
+        - originating_request_reference
+        - report_status
+        - scan_type
+        - radiopharmaceutical
+        - examination_adequacy
+        - clinical_history
+        - comparison_with_previous
+        - findings_narrative
+        - abnormal_uptake
+        - metastatic_pattern
+        - perfusion_defect
+        - photopenic_area
+        - no_significant_abnormality
+        - incidental_finding
+        - impression
+        - reporting_category
+        - recommended_follow_up
+        - critical_result_communicated
+        - reported_to
+      description: Nuclear medicine (radionuclide scan) result (report). Captures the performed examination, the radiopharmaceutical and injected activity, clinical history, the narrative and structured findings, key quantitative measurements (e.g. ejection fraction, split renal function), the impression and structured reporting category (e.g. V/Q PE probability), recommended follow-up, and critical-result communication. This is the source-of-truth record that the four-axis interpretation grade is computed from.

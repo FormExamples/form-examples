@@ -1,0 +1,38 @@
+// Generated from sql/. Do not edit by hand.
+// SOURCE: wells_score_for_deep_vein_thrombosis_grade_rule
+
+syntax = "proto3";
+
+package form_examples.wells_score_for_deep_vein_thrombosis;
+
+enum WellsScoreForDeepVeinThrombosisGradeRuleInstrumentEnum {
+  INSTRUMENT_UNSPECIFIED = 0;
+  INSTRUMENT_CRITERION = 1;  // criterion
+  INSTRUMENT_ADJUSTMENT = 2;  // adjustment
+  INSTRUMENT_TWO_LEVEL = 3;  // two-level
+  INSTRUMENT_THREE_LEVEL = 4;  // three-level
+  INSTRUMENT_COMPOSITE = 5;  // composite
+}
+
+enum WellsScoreForDeepVeinThrombosisGradeRuleBandEnum {
+  BAND_UNSPECIFIED = 0;
+  BAND_LIKELY = 1;  // likely
+  BAND_UNLIKELY = 2;  // unlikely
+  BAND_LOW = 3;  // low
+  BAND_MODERATE = 4;  // moderate
+  BAND_HIGH = 5;  // high
+}
+
+message WellsScoreForDeepVeinThrombosisGradeRule {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string wells_score_for_deep_vein_thrombosis_grade_id = 5;  // UUID — uuid
+  string rule_id = 6;  // VARCHAR(40) — max 40 chars
+  WellsScoreForDeepVeinThrombosisGradeRuleInstrumentEnum instrument = 7;  // VARCHAR(20)
+  int32 points = 8;  // INT
+  WellsScoreForDeepVeinThrombosisGradeRuleBandEnum band = 9;  // VARCHAR(10)
+  string category = 10;  // VARCHAR(50) — max 50 chars
+  string description = 11;  // VARCHAR(500) — max 500 chars
+}

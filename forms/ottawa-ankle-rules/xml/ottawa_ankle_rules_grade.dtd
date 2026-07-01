@@ -1,0 +1,11 @@
+<!ELEMENT ottawa_ankle_rules_grade (id,created_at,updated_at,deleted_at,ottawa_ankle_rules_id,unable_to_bear_weight,ankle_xray_indicated,foot_xray_indicated,recommended_action,graded_at)>
+<!ELEMENT id (#PCDATA)>
+<!ELEMENT created_at (#PCDATA)>
+<!ELEMENT updated_at (#PCDATA)>
+<!ELEMENT deleted_at (#PCDATA)>
+<!ELEMENT ottawa_ankle_rules_id (#PCDATA)>
+<!ELEMENT unable_to_bear_weight (#PCDATA)>
+<!ELEMENT ankle_xray_indicated (#PCDATA)>
+<!ELEMENT foot_xray_indicated (#PCDATA)>
+<!ELEMENT recommended_action (#PCDATA)>
+<!ELEMENT graded_at (#PCDATA)>

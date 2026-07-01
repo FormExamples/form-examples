@@ -1,0 +1,62 @@
+// Generated from sql/. Do not edit by hand.
+// SOURCE: nursing_care_plan_problem
+
+syntax = "proto3";
+
+package form_examples.nursing_care_plan;
+
+enum NursingCarePlanProblemAdlCategoryEnum {
+  ADLCATEGORY_UNSPECIFIED = 0;
+  ADLCATEGORY_SAFE_ENVIRONMENT = 1;  // safe-environment
+  ADLCATEGORY_COMMUNICATION = 2;  // communication
+  ADLCATEGORY_BREATHING = 3;  // breathing
+  ADLCATEGORY_EATING_DRINKING = 4;  // eating-drinking
+  ADLCATEGORY_ELIMINATION = 5;  // elimination
+  ADLCATEGORY_PERSONAL_CLEANSING_DRESSING = 6;  // personal-cleansing-dressing
+  ADLCATEGORY_BODY_TEMPERATURE = 7;  // body-temperature
+  ADLCATEGORY_MOBILISING = 8;  // mobilising
+  ADLCATEGORY_WORKING_PLAYING = 9;  // working-playing
+  ADLCATEGORY_EXPRESSING_SEXUALITY = 10;  // expressing-sexuality
+  ADLCATEGORY_SLEEPING = 11;  // sleeping
+  ADLCATEGORY_DYING = 12;  // dying
+  ADLCATEGORY_OTHER = 13;  // other
+}
+
+enum NursingCarePlanProblemActualOrPotentialEnum {
+  ACTUALORPOTENTIAL_UNSPECIFIED = 0;
+  ACTUALORPOTENTIAL_ACTUAL = 1;  // actual
+  ACTUALORPOTENTIAL_POTENTIAL = 2;  // potential
+}
+
+enum NursingCarePlanProblemLinkedRiskEnum {
+  LINKEDRISK_UNSPECIFIED = 0;
+  LINKEDRISK_NONE = 1;  // none
+  LINKEDRISK_FALLS = 2;  // falls
+  LINKEDRISK_PRESSURE_ULCER = 3;  // pressure-ulcer
+  LINKEDRISK_VTE = 4;  // vte
+  LINKEDRISK_NUTRITION = 5;  // nutrition
+}
+
+enum NursingCarePlanProblemGoalMetEnum {
+  GOALMET_UNSPECIFIED = 0;
+  GOALMET_MET = 1;  // met
+  GOALMET_PARTIALLY_MET = 2;  // partially-met
+  GOALMET_NOT_MET = 3;  // not-met
+  GOALMET_NOT_EVALUATED = 4;  // not-evaluated
+}
+
+message NursingCarePlanProblem {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string nursing_care_plan_id = 5;  // UUID — uuid
+  string problem_statement = 6;  // TEXT
+  NursingCarePlanProblemAdlCategoryEnum adl_category = 7;  // VARCHAR(30)
+  NursingCarePlanProblemActualOrPotentialEnum actual_or_potential = 8;  // VARCHAR(10)
+  string assessment_data = 9;  // TEXT
+  NursingCarePlanProblemLinkedRiskEnum linked_risk = 10;  // VARCHAR(20)
+  string evaluation_note = 11;  // TEXT
+  NursingCarePlanProblemGoalMetEnum goal_met = 12;  // VARCHAR(20)
+  string next_review_date = 13;  // DATE — iso 8601 date
+}

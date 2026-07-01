@@ -1,0 +1,17 @@
+<!ELEMENT mental_state_examination_grade (id,created_at,updated_at,deleted_at,mental_state_examination_id,status,risk_level,completeness_percent,appearance_behaviour_documented,speech_documented,emotion_documented,perception_documented,thought_documented,insight_documented,cognition_documented,graded_at)>
+<!ELEMENT id (#PCDATA)>
+<!ELEMENT created_at (#PCDATA)>
+<!ELEMENT updated_at (#PCDATA)>
+<!ELEMENT deleted_at (#PCDATA)>
+<!ELEMENT mental_state_examination_id (#PCDATA)>
+<!ELEMENT status (#PCDATA)>
+<!ELEMENT risk_level (#PCDATA)>
+<!ELEMENT completeness_percent (#PCDATA)>
+<!ELEMENT appearance_behaviour_documented (#PCDATA)>
+<!ELEMENT speech_documented (#PCDATA)>
+<!ELEMENT emotion_documented (#PCDATA)>
+<!ELEMENT perception_documented (#PCDATA)>
+<!ELEMENT thought_documented (#PCDATA)>
+<!ELEMENT insight_documented (#PCDATA)>
+<!ELEMENT cognition_documented (#PCDATA)>
+<!ELEMENT graded_at (#PCDATA)>

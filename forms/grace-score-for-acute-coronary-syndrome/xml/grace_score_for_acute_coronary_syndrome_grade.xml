@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE grace_score_for_acute_coronary_syndrome_grade SYSTEM "grace_score_for_acute_coronary_syndrome_grade.dtd">
+<grace_score_for_acute_coronary_syndrome_grade>
+<id>880e8400-e29b-41d4-a716-446655440003</id>
+<created_at>2026-04-09T10:00:00Z</created_at>
+<updated_at>2026-04-09T10:00:00Z</updated_at>
+<deleted_at>2026-04-09T10:00:00Z</deleted_at>
+<grace_score_for_acute_coronary_syndrome_id>770e8400-e29b-41d4-a716-446655440002</grace_score_for_acute_coronary_syndrome_id>
+<grace_score>5</grace_score>
+<in_hospital_risk_band>low</in_hospital_risk_band>
+<six_month_risk_band>low</six_month_risk_band>
+<overall_band>low</overall_band>
+<invasive_strategy></invasive_strategy>
+<graded_at>2026-04-09T10:00:00Z</graded_at>
+</grace_score_for_acute_coronary_syndrome_grade>

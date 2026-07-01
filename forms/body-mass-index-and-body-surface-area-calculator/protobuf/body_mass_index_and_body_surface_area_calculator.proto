@@ -1,0 +1,84 @@
+// Generated from sql/. Do not edit by hand.
+// SOURCE: body_mass_index_and_body_surface_area_calculator
+
+syntax = "proto3";
+
+package form_examples.body_mass_index_and_body_surface_area_calculator;
+
+enum BodyMassIndexAndBodySurfaceAreaCalculatorClinicianRoleEnum {
+  CLINICIANROLE_UNSPECIFIED = 0;
+  CLINICIANROLE_DOCTOR = 1;  // doctor
+  CLINICIANROLE_NURSE = 2;  // nurse
+  CLINICIANROLE_PHARMACIST = 3;  // pharmacist
+  CLINICIANROLE_DIETITIAN = 4;  // dietitian
+  CLINICIANROLE_OTHER = 5;  // other
+}
+
+enum BodyMassIndexAndBodySurfaceAreaCalculatorCareSettingEnum {
+  CARESETTING_UNSPECIFIED = 0;
+  CARESETTING_PRIMARY_CARE = 1;  // primary-care
+  CARESETTING_OUTPATIENT = 2;  // outpatient
+  CARESETTING_INPATIENT = 3;  // inpatient
+  CARESETTING_ONCOLOGY = 4;  // oncology
+  CARESETTING_PRE_OPERATIVE = 5;  // pre-operative
+  CARESETTING_OTHER = 6;  // other
+}
+
+enum BodyMassIndexAndBodySurfaceAreaCalculatorPurposeEnum {
+  PURPOSE_UNSPECIFIED = 0;
+  PURPOSE_SCREENING = 1;  // screening
+  PURPOSE_DRUG_DOSING = 2;  // drug-dosing
+  PURPOSE_MONITORING = 3;  // monitoring
+  PURPOSE_OTHER = 4;  // other
+}
+
+enum BodyMassIndexAndBodySurfaceAreaCalculatorAgeBandEnum {
+  AGEBAND_UNSPECIFIED = 0;
+  AGEBAND_V_18_39 = 1;  // 18-39
+  AGEBAND_V_40_64 = 2;  // 40-64
+  AGEBAND_V_65_74 = 3;  // 65-74
+  AGEBAND_V_75_84 = 4;  // 75-84
+  AGEBAND_V_85_PLUS = 5;  // 85-plus
+}
+
+enum BodyMassIndexAndBodySurfaceAreaCalculatorSexEnum {
+  SEX_UNSPECIFIED = 0;
+  SEX_FEMALE = 1;  // female
+  SEX_MALE = 2;  // male
+  SEX_INTERSEX = 3;  // intersex
+  SEX_UNKNOWN = 4;  // unknown
+}
+
+enum BodyMassIndexAndBodySurfaceAreaCalculatorAncestryEnum {
+  ANCESTRY_UNSPECIFIED = 0;
+  ANCESTRY_ASIAN = 1;  // asian
+  ANCESTRY_OTHER = 2;  // other
+  ANCESTRY_UNSPECIFIED = 3;  // unspecified
+}
+
+enum BodyMassIndexAndBodySurfaceAreaCalculatorBsaFormulaEnum {
+  BSAFORMULA_UNSPECIFIED = 0;
+  BSAFORMULA_MOSTELLER = 1;  // mosteller
+  BSAFORMULA_DU_BOIS = 2;  // du-bois
+}
+
+message BodyMassIndexAndBodySurfaceAreaCalculator {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string patient_id = 5;  // UUID — uuid
+  string clinician_id = 6;  // UUID — uuid
+  string clinician_name = 7;  // VARCHAR(255) — max 255 chars
+  BodyMassIndexAndBodySurfaceAreaCalculatorClinicianRoleEnum clinician_role = 8;  // VARCHAR(20)
+  string assessed_at = 9;  // TIMESTAMPTZ — iso 8601
+  BodyMassIndexAndBodySurfaceAreaCalculatorCareSettingEnum care_setting = 10;  // VARCHAR(20)
+  BodyMassIndexAndBodySurfaceAreaCalculatorPurposeEnum purpose = 11;  // VARCHAR(20)
+  string patient_identifier = 12;  // VARCHAR(100) — max 100 chars
+  BodyMassIndexAndBodySurfaceAreaCalculatorAgeBandEnum age_band = 13;  // VARCHAR(20)
+  BodyMassIndexAndBodySurfaceAreaCalculatorSexEnum sex = 14;  // VARCHAR(20)
+  BodyMassIndexAndBodySurfaceAreaCalculatorAncestryEnum ancestry = 15;  // VARCHAR(20)
+  double height_cm = 16;  // NUMERIC(5,1) — numeric(5,1)
+  double weight_kg = 17;  // NUMERIC(5,1) — numeric(5,1)
+  BodyMassIndexAndBodySurfaceAreaCalculatorBsaFormulaEnum bsa_formula = 18;  // VARCHAR(15)
+}

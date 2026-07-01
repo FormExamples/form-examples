@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE ultrasound_test_result SYSTEM "ultrasound_test_result.dtd">
+<ultrasound_test_result>
+<id>770e8400-e29b-41d4-a716-446655440002</id>
+<created_at>2026-04-09T10:00:00Z</created_at>
+<updated_at>2026-04-09T10:00:00Z</updated_at>
+<deleted_at>2026-04-09T10:00:00Z</deleted_at>
+<patient_id>550e8400-e29b-41d4-a716-446655440000</patient_id>
+<clinician_id>660e8400-e29b-41d4-a716-446655440001</clinician_id>
+<originating_request_reference></originating_request_reference>
+<report_status>preliminary</report_status>
+<performed_date>2026-01-15</performed_date>
+<reported_date>2026-01-15</reported_date>
+<body_region>abdomen</body_region>
+<laterality>left</laterality>
+<examination_adequacy>adequate</examination_adequacy>
+<clinical_history>Example text.</clinical_history>
+<comparison_with_previous></comparison_with_previous>
+<findings_narrative>Example text.</findings_narrative>
+<mass_or_lesion>true</mass_or_lesion>
+<cyst>true</cyst>
+<gallstones>true</gallstones>
+<hydronephrosis>true</hydronephrosis>
+<free_fluid>true</free_fluid>
+<dvt_present>true</dvt_present>
+<aneurysm>true</aneurysm>
+<organ_enlargement>true</organ_enlargement>
+<incidental_finding>true</incidental_finding>
+<largest_lesion_size_mm>0.0</largest_lesion_size_mm>
+<impression>Example text.</impression>
+<reporting_category>General</reporting_category>
+<recommended_follow_up></recommended_follow_up>
+<critical_result_communicated>true</critical_result_communicated>
+<reported_to></reported_to>
+</ultrasound_test_result>

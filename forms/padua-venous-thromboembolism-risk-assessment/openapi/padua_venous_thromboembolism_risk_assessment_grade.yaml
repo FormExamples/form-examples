@@ -1,0 +1,196 @@
+# Generated from sql/. Do not edit by hand.
+# SOURCE: padua_venous_thromboembolism_risk_assessment_grade
+openapi: 3.1.0
+info:
+  title: Padua Venous Thromboembolism Risk Assessment — PaduaVenousThromboembolismRiskAssessmentGrade
+  version: 1.0.0
+  description: "Computed Padua grading result: per-factor points, summed Padua Prediction Score (0-20), derived risk band (low/high), and the bleeding-risk-gated prophylaxis recommendation."
+paths:
+  /padua-venous-thromboembolism-risk-assessment-grades:
+    get:
+      summary: List PaduaVenousThromboembolismRiskAssessmentGrade records
+      operationId: listPaduaVenousThromboembolismRiskAssessmentGrade
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of PaduaVenousThromboembolismRiskAssessmentGrade records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/PaduaVenousThromboembolismRiskAssessmentGrade"
+    post:
+      summary: Create a new PaduaVenousThromboembolismRiskAssessmentGrade
+      operationId: createPaduaVenousThromboembolismRiskAssessmentGrade
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/PaduaVenousThromboembolismRiskAssessmentGrade"
+      responses:
+        "201":
+          description: The newly created PaduaVenousThromboembolismRiskAssessmentGrade
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PaduaVenousThromboembolismRiskAssessmentGrade"
+        "400":
+          description: Validation error
+  /padua-venous-thromboembolism-risk-assessment-grades/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one PaduaVenousThromboembolismRiskAssessmentGrade by id
+      operationId: getPaduaVenousThromboembolismRiskAssessmentGrade
+      responses:
+        "200":
+          description: The requested PaduaVenousThromboembolismRiskAssessmentGrade
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PaduaVenousThromboembolismRiskAssessmentGrade"
+        "404":
+          description: PaduaVenousThromboembolismRiskAssessmentGrade not found
+    patch:
+      summary: Update an existing PaduaVenousThromboembolismRiskAssessmentGrade
+      operationId: updatePaduaVenousThromboembolismRiskAssessmentGrade
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/PaduaVenousThromboembolismRiskAssessmentGrade"
+      responses:
+        "200":
+          description: The updated PaduaVenousThromboembolismRiskAssessmentGrade
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PaduaVenousThromboembolismRiskAssessmentGrade"
+        "404":
+          description: PaduaVenousThromboembolismRiskAssessmentGrade not found
+    delete:
+      summary: Soft-delete a PaduaVenousThromboembolismRiskAssessmentGrade
+      operationId: deletePaduaVenousThromboembolismRiskAssessmentGrade
+      responses:
+        "204":
+          description: PaduaVenousThromboembolismRiskAssessmentGrade deleted
+        "404":
+          description: PaduaVenousThromboembolismRiskAssessmentGrade not found
+components:
+  schemas:
+    PaduaVenousThromboembolismRiskAssessmentGrade:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was most recently updated.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was soft-deleted.
+        padua_venous_thromboembolism_risk_assessment_id:
+          type: string
+          format: uuid
+          description: Foreign key to the parent assessment (unique, 1:1).
+        active_cancer_points:
+          type: integer
+          format: int32
+          description: Points contributed by factor 1, active cancer (3 or 0).
+        previous_vte_points:
+          type: integer
+          format: int32
+          description: Points contributed by factor 2, previous VTE (3 or 0).
+        reduced_mobility_points:
+          type: integer
+          format: int32
+          description: Points contributed by factor 3, reduced mobility >= 3 days (3 or 0).
+        known_thrombophilia_points:
+          type: integer
+          format: int32
+          description: Points contributed by factor 4, known thrombophilia (3 or 0).
+        recent_trauma_or_surgery_points:
+          type: integer
+          format: int32
+          description: Points contributed by factor 5, recent trauma or surgery <= 1 month (2 or 0).
+        elderly_age_points:
+          type: integer
+          format: int32
+          description: Points contributed by factor 6, age >= 70 (1 or 0).
+        heart_or_respiratory_failure_points:
+          type: integer
+          format: int32
+          description: Points contributed by factor 7, heart and/or respiratory failure (1 or 0).
+        acute_mi_or_ischaemic_stroke_points:
+          type: integer
+          format: int32
+          description: Points contributed by factor 8, acute MI or ischaemic stroke (1 or 0).
+        acute_infection_or_rheumatological_points:
+          type: integer
+          format: int32
+          description: Points contributed by factor 9, acute infection and/or rheumatological disorder (1 or 0).
+        obesity_points:
+          type: integer
+          format: int32
+          description: Points contributed by factor 10, obesity BMI >= 30 (1 or 0).
+        ongoing_hormonal_treatment_points:
+          type: integer
+          format: int32
+          description: Points contributed by factor 11, ongoing hormonal treatment (1 or 0).
+        total_score:
+          type: integer
+          format: int32
+          description: Summed Padua Prediction Score across the eleven factors (0-20).
+        risk_band:
+          type: string
+          enum:
+            - low
+            - high
+            - ""
+          description: "Derived risk band: low (< 4) or high (>= 4)."
+        prophylaxis_recommendation:
+          type: string
+          description: "Prophylaxis recommendation gated by the bleeding-risk check: pharmacological, mechanical, or none."
+        graded_at:
+          type: string
+          format: date-time
+          description: Timestamp when the engine last computed the grade.
+      required:
+        - created_at
+        - updated_at
+        - padua_venous_thromboembolism_risk_assessment_id
+        - risk_band
+        - prophylaxis_recommendation
+        - graded_at
+      description: "Computed Padua grading result: per-factor points, summed Padua Prediction Score (0-20), derived risk band (low/high), and the bleeding-risk-gated prophylaxis recommendation."

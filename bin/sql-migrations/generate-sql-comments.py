@@ -2,7 +2,7 @@
 """Add missing COMMENT ON TABLE and COMMENT ON COLUMN statements to every
 numbered SQL migration file.
 
-For each form's sql-migrations/NN-*.sql file, this generator:
+For each form's sql/NN-*.sql file, this generator:
 
 - Parses every CREATE TABLE statement and its column definitions.
 - Detects existing `COMMENT ON TABLE <name>` and
@@ -24,7 +24,7 @@ import re
 import sys
 from pathlib import Path
 
-TOP = Path(__file__).resolve().parent.parent
+TOP = Path(__file__).resolve().parent.parent.parent
 FORMS_DIR = TOP / "forms"
 
 # Preserve these tokens verbatim when humanizing column names; everything
@@ -238,7 +238,7 @@ def main():
     total_stmts = 0
     form_dirs = sorted(d for d in FORMS_DIR.iterdir() if d.is_dir())
     for form_dir in form_dirs:
-        sql_dir = form_dir / "sql-migrations"
+        sql_dir = form_dir / "sql"
         if not sql_dir.is_dir():
             continue
         form_stmts = 0

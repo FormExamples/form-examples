@@ -1,0 +1,16 @@
+<!ELEMENT glasgow_coma_scale_grade (id,created_at,updated_at,deleted_at,glasgow_coma_scale_id,eye_score,verbal_score,motor_score,total_score,breakdown,total_display,severity_band,pupil_reactivity_score,gcs_p,graded_at)>
+<!ELEMENT id (#PCDATA)>
+<!ELEMENT created_at (#PCDATA)>
+<!ELEMENT updated_at (#PCDATA)>
+<!ELEMENT deleted_at (#PCDATA)>
+<!ELEMENT glasgow_coma_scale_id (#PCDATA)>
+<!ELEMENT eye_score (#PCDATA)>
+<!ELEMENT verbal_score (#PCDATA)>
+<!ELEMENT motor_score (#PCDATA)>
+<!ELEMENT total_score (#PCDATA)>
+<!ELEMENT breakdown (#PCDATA)>
+<!ELEMENT total_display (#PCDATA)>
+<!ELEMENT severity_band (#PCDATA)>
+<!ELEMENT pupil_reactivity_score (#PCDATA)>
+<!ELEMENT gcs_p (#PCDATA)>
+<!ELEMENT graded_at (#PCDATA)>

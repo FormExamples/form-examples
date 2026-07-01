@@ -1,0 +1,113 @@
+// Generated from sql/. Do not edit by hand.
+// SOURCE: recognition_of_stroke_in_the_emergency_room
+
+syntax = "proto3";
+
+package form_examples.recognition_of_stroke_in_the_emergency_room;
+
+enum RecognitionOfStrokeInTheEmergencyRoomClinicianRoleEnum {
+  CLINICIANROLE_UNSPECIFIED = 0;
+  CLINICIANROLE_DOCTOR = 1;  // doctor
+  CLINICIANROLE_NURSE = 2;  // nurse
+  CLINICIANROLE_PARAMEDIC = 3;  // paramedic
+  CLINICIANROLE_OTHER = 4;  // other
+}
+
+enum RecognitionOfStrokeInTheEmergencyRoomCareSettingEnum {
+  CARESETTING_UNSPECIFIED = 0;
+  CARESETTING_EMERGENCY_DEPARTMENT = 1;  // emergency-department
+  CARESETTING_ACUTE_MEDICAL = 2;  // acute-medical
+  CARESETTING_OTHER = 3;  // other
+}
+
+enum RecognitionOfStrokeInTheEmergencyRoomAgeBandEnum {
+  AGEBAND_UNSPECIFIED = 0;
+  AGEBAND_V_16_39 = 1;  // 16-39
+  AGEBAND_V_40_59 = 2;  // 40-59
+  AGEBAND_V_60_74 = 3;  // 60-74
+  AGEBAND_V_75_PLUS = 4;  // 75-plus
+}
+
+enum RecognitionOfStrokeInTheEmergencyRoomSexEnum {
+  SEX_UNSPECIFIED = 0;
+  SEX_FEMALE = 1;  // female
+  SEX_MALE = 2;  // male
+  SEX_INTERSEX = 3;  // intersex
+  SEX_UNKNOWN = 4;  // unknown
+}
+
+enum RecognitionOfStrokeInTheEmergencyRoomHypoglycaemiaCorrectedEnum {
+  HYPOGLYCAEMIACORRECTED_UNSPECIFIED = 0;
+  HYPOGLYCAEMIACORRECTED_YES = 1;  // yes
+  HYPOGLYCAEMIACORRECTED_NO = 2;  // no
+  HYPOGLYCAEMIACORRECTED_NA = 3;  // na
+}
+
+enum RecognitionOfStrokeInTheEmergencyRoomLossOfConsciousnessEnum {
+  LOSSOFCONSCIOUSNESS_UNSPECIFIED = 0;
+  LOSSOFCONSCIOUSNESS_YES = 1;  // yes
+  LOSSOFCONSCIOUSNESS_NO = 2;  // no
+}
+
+enum RecognitionOfStrokeInTheEmergencyRoomSeizureActivityEnum {
+  SEIZUREACTIVITY_UNSPECIFIED = 0;
+  SEIZUREACTIVITY_YES = 1;  // yes
+  SEIZUREACTIVITY_NO = 2;  // no
+}
+
+enum RecognitionOfStrokeInTheEmergencyRoomFacialWeaknessEnum {
+  FACIALWEAKNESS_UNSPECIFIED = 0;
+  FACIALWEAKNESS_YES = 1;  // yes
+  FACIALWEAKNESS_NO = 2;  // no
+}
+
+enum RecognitionOfStrokeInTheEmergencyRoomArmWeaknessEnum {
+  ARMWEAKNESS_UNSPECIFIED = 0;
+  ARMWEAKNESS_YES = 1;  // yes
+  ARMWEAKNESS_NO = 2;  // no
+}
+
+enum RecognitionOfStrokeInTheEmergencyRoomLegWeaknessEnum {
+  LEGWEAKNESS_UNSPECIFIED = 0;
+  LEGWEAKNESS_YES = 1;  // yes
+  LEGWEAKNESS_NO = 2;  // no
+}
+
+enum RecognitionOfStrokeInTheEmergencyRoomSpeechDisturbanceEnum {
+  SPEECHDISTURBANCE_UNSPECIFIED = 0;
+  SPEECHDISTURBANCE_YES = 1;  // yes
+  SPEECHDISTURBANCE_NO = 2;  // no
+}
+
+enum RecognitionOfStrokeInTheEmergencyRoomVisualFieldDefectEnum {
+  VISUALFIELDDEFECT_UNSPECIFIED = 0;
+  VISUALFIELDDEFECT_YES = 1;  // yes
+  VISUALFIELDDEFECT_NO = 2;  // no
+}
+
+message RecognitionOfStrokeInTheEmergencyRoom {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string patient_id = 5;  // UUID — uuid
+  string clinician_id = 6;  // UUID — uuid
+  string clinician_name = 7;  // VARCHAR(255) — max 255 chars
+  RecognitionOfStrokeInTheEmergencyRoomClinicianRoleEnum clinician_role = 8;  // VARCHAR(20)
+  string assessed_at = 9;  // TIMESTAMPTZ — iso 8601
+  RecognitionOfStrokeInTheEmergencyRoomCareSettingEnum care_setting = 10;  // VARCHAR(30)
+  string symptom_onset_at = 11;  // TIMESTAMPTZ — iso 8601
+  string patient_identifier = 12;  // VARCHAR(100) — max 100 chars
+  RecognitionOfStrokeInTheEmergencyRoomAgeBandEnum age_band = 13;  // VARCHAR(10)
+  RecognitionOfStrokeInTheEmergencyRoomSexEnum sex = 14;  // VARCHAR(20)
+  double blood_glucose = 15;  // NUMERIC(5,1) — numeric(5,1)
+  RecognitionOfStrokeInTheEmergencyRoomHypoglycaemiaCorrectedEnum hypoglycaemia_corrected = 16;  // VARCHAR(5)
+  RecognitionOfStrokeInTheEmergencyRoomLossOfConsciousnessEnum loss_of_consciousness = 17;  // VARCHAR(5)
+  RecognitionOfStrokeInTheEmergencyRoomSeizureActivityEnum seizure_activity = 18;  // VARCHAR(5)
+  RecognitionOfStrokeInTheEmergencyRoomFacialWeaknessEnum facial_weakness = 19;  // VARCHAR(5)
+  RecognitionOfStrokeInTheEmergencyRoomArmWeaknessEnum arm_weakness = 20;  // VARCHAR(5)
+  RecognitionOfStrokeInTheEmergencyRoomLegWeaknessEnum leg_weakness = 21;  // VARCHAR(5)
+  RecognitionOfStrokeInTheEmergencyRoomSpeechDisturbanceEnum speech_disturbance = 22;  // VARCHAR(5)
+  RecognitionOfStrokeInTheEmergencyRoomVisualFieldDefectEnum visual_field_defect = 23;  // VARCHAR(5)
+  string clinical_note = 24;  // TEXT
+}

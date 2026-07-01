@@ -1,0 +1,170 @@
+# Generated from sql/. Do not edit by hand.
+# SOURCE: mental_state_examination_grade_flag
+openapi: 3.1.0
+info:
+  title: Mental State Examination — MentalStateExaminationGradeFlag
+  version: 1.0.0
+  description: Safety flags that fire independently of the completeness status, with priority and a suggested action for the clinician or crisis / safeguarding team. The risk level on the grade is the highest priority present here.
+paths:
+  /mental-state-examination-grade-flags:
+    get:
+      summary: List MentalStateExaminationGradeFlag records
+      operationId: listMentalStateExaminationGradeFlag
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of MentalStateExaminationGradeFlag records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/MentalStateExaminationGradeFlag"
+    post:
+      summary: Create a new MentalStateExaminationGradeFlag
+      operationId: createMentalStateExaminationGradeFlag
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/MentalStateExaminationGradeFlag"
+      responses:
+        "201":
+          description: The newly created MentalStateExaminationGradeFlag
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/MentalStateExaminationGradeFlag"
+        "400":
+          description: Validation error
+  /mental-state-examination-grade-flags/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one MentalStateExaminationGradeFlag by id
+      operationId: getMentalStateExaminationGradeFlag
+      responses:
+        "200":
+          description: The requested MentalStateExaminationGradeFlag
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/MentalStateExaminationGradeFlag"
+        "404":
+          description: MentalStateExaminationGradeFlag not found
+    patch:
+      summary: Update an existing MentalStateExaminationGradeFlag
+      operationId: updateMentalStateExaminationGradeFlag
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/MentalStateExaminationGradeFlag"
+      responses:
+        "200":
+          description: The updated MentalStateExaminationGradeFlag
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/MentalStateExaminationGradeFlag"
+        "404":
+          description: MentalStateExaminationGradeFlag not found
+    delete:
+      summary: Soft-delete a MentalStateExaminationGradeFlag
+      operationId: deleteMentalStateExaminationGradeFlag
+      responses:
+        "204":
+          description: MentalStateExaminationGradeFlag deleted
+        "404":
+          description: MentalStateExaminationGradeFlag not found
+components:
+  schemas:
+    MentalStateExaminationGradeFlag:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was most recently updated.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was soft-deleted.
+        mental_state_examination_grade_id:
+          type: string
+          format: uuid
+          description: Foreign key to the parent grade.
+        flag_id:
+          type: string
+          maxLength: 50
+          description: Stable flag identifier (e.g. F-SUICIDAL-IDEATION-001).
+        category:
+          type: string
+          enum:
+            - suicidal-ideation
+            - homicidal-ideation
+            - command-hallucinations
+            - self-harm
+            - psychosis-with-risk
+            - lack-of-insight-with-risk
+            - cognitive-impairment
+            - incomplete
+            - other
+            - ""
+          description: "Flag category: suicidal-ideation, homicidal-ideation, command-hallucinations, self-harm, psychosis-with-risk, lack-of-insight-with-risk, cognitive-impairment, incomplete, or other."
+        priority:
+          type: string
+          enum:
+            - low
+            - moderate
+            - high
+            - ""
+          description: "Priority: low, moderate, high."
+        description:
+          type: string
+          maxLength: 500
+          description: Human-readable description of what fired the flag.
+        suggested_action:
+          type: string
+          maxLength: 500
+          description: "Suggested clinical or safeguarding action (e.g. \"complete a full risk assessment and escalate\")."
+      required:
+        - created_at
+        - updated_at
+        - mental_state_examination_grade_id
+        - flag_id
+        - category
+        - priority
+        - description
+        - suggested_action
+      description: Safety flags that fire independently of the completeness status, with priority and a suggested action for the clinician or crisis / safeguarding team. The risk level on the grade is the highest priority present here.

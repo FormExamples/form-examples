@@ -1,0 +1,277 @@
+# Generated from sql/. Do not edit by hand.
+# SOURCE: ambulatory_blood_pressure_test_result
+openapi: 3.1.0
+info:
+  title: Ambulatory Blood Pressure Test Result — AmbulatoryBloodPressureTestResult
+  version: 1.0.0
+  description: Ambulatory blood pressure monitoring (ABPM) result (report). Captures the monitoring type, recording adequacy, clinical history, the daytime / nighttime / 24-hour averaged blood pressures, the nocturnal dip and dipper status, the narrative and structured interpretation, the impression, and critical-result communication. This is the source-of-truth record that the four-axis interpretation grade is computed from.
+paths:
+  /ambulatory-blood-pressure-test-results:
+    get:
+      summary: List AmbulatoryBloodPressureTestResult records
+      operationId: listAmbulatoryBloodPressureTestResult
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of AmbulatoryBloodPressureTestResult records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/AmbulatoryBloodPressureTestResult"
+    post:
+      summary: Create a new AmbulatoryBloodPressureTestResult
+      operationId: createAmbulatoryBloodPressureTestResult
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/AmbulatoryBloodPressureTestResult"
+      responses:
+        "201":
+          description: The newly created AmbulatoryBloodPressureTestResult
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AmbulatoryBloodPressureTestResult"
+        "400":
+          description: Validation error
+  /ambulatory-blood-pressure-test-results/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one AmbulatoryBloodPressureTestResult by id
+      operationId: getAmbulatoryBloodPressureTestResult
+      responses:
+        "200":
+          description: The requested AmbulatoryBloodPressureTestResult
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AmbulatoryBloodPressureTestResult"
+        "404":
+          description: AmbulatoryBloodPressureTestResult not found
+    patch:
+      summary: Update an existing AmbulatoryBloodPressureTestResult
+      operationId: updateAmbulatoryBloodPressureTestResult
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/AmbulatoryBloodPressureTestResult"
+      responses:
+        "200":
+          description: The updated AmbulatoryBloodPressureTestResult
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AmbulatoryBloodPressureTestResult"
+        "404":
+          description: AmbulatoryBloodPressureTestResult not found
+    delete:
+      summary: Soft-delete a AmbulatoryBloodPressureTestResult
+      operationId: deleteAmbulatoryBloodPressureTestResult
+      responses:
+        "204":
+          description: AmbulatoryBloodPressureTestResult deleted
+        "404":
+          description: AmbulatoryBloodPressureTestResult not found
+components:
+  schemas:
+    AmbulatoryBloodPressureTestResult:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was updated most-recently.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was deleted a.k.a. soft-removed.
+        patient_id:
+          type: string
+          format: uuid
+          description: Foreign key to the patient.
+        clinician_id:
+          type: string
+          format: uuid
+          description: Foreign key to the reporting clinician (report author/signer).
+        originating_request_reference:
+          type: string
+          maxLength: 255
+          description: Free-text reference linking this report back to the originating ABPM request (referral).
+        monitoring_type:
+          type: string
+          enum:
+            - 24-hour-abpm
+            - home-blood-pressure-monitoring
+            - other
+            - ""
+          description: "Monitoring modality reported: 24-hour-abpm, home-blood-pressure-monitoring, other."
+        report_status:
+          type: string
+          enum:
+            - preliminary
+            - final
+            - amended
+            - cancelled
+            - ""
+          description: "Report lifecycle status: preliminary, final, amended, cancelled."
+        performed_date:
+          type: string
+          format: date
+          description: Date the monitoring period was performed (recording start).
+        reported_date:
+          type: string
+          format: date
+          description: Date the report was authored / signed.
+        valid_readings_percent:
+          type: number
+          format: double
+          description: Percentage of valid (successful) readings captured over the monitoring period; ABPM is generally considered adequate at >= 70% valid readings.
+        recording_adequate:
+          type: boolean
+          description: Whether the recording met the adequacy threshold for a diagnostic interpretation.
+        clinical_history:
+          type: string
+          maxLength: 1000
+          description: Clinical history and the question the monitoring was performed to answer.
+        daytime_average_systolic:
+          type: number
+          format: double
+          description: Daytime (waking-hours) average systolic blood pressure in mmHg; ABPM daytime average >= 135/85 confirms hypertension (NICE NG136).
+        daytime_average_diastolic:
+          type: number
+          format: double
+          description: Daytime (waking-hours) average diastolic blood pressure in mmHg; ABPM daytime average >= 135/85 confirms hypertension (NICE NG136).
+        nighttime_average_systolic:
+          type: number
+          format: double
+          description: Nighttime (asleep) average systolic blood pressure in mmHg; nocturnal hypertension is >= 120/70.
+        nighttime_average_diastolic:
+          type: number
+          format: double
+          description: Nighttime (asleep) average diastolic blood pressure in mmHg; nocturnal hypertension is >= 120/70.
+        twenty_four_hour_average_systolic:
+          type: number
+          format: double
+          description: Whole 24-hour average systolic blood pressure in mmHg; 24-hour average >= 130/80 indicates hypertension.
+        twenty_four_hour_average_diastolic:
+          type: number
+          format: double
+          description: Whole 24-hour average diastolic blood pressure in mmHg; 24-hour average >= 130/80 indicates hypertension.
+        nocturnal_dip_percent:
+          type: number
+          format: double
+          description: Percentage fall in average systolic blood pressure from daytime to nighttime; drives dipper status.
+        dipper_status:
+          type: string
+          enum:
+            - dipper
+            - non-dipper
+            - reverse-dipper
+            - extreme-dipper
+            - ""
+          description: "Nocturnal dipping pattern (ESH): dipper (>10-20% fall), non-dipper (>0-10%), reverse-dipper (<= 0%, a nighttime rise), extreme-dipper (>20%)."
+        hypertension_confirmed:
+          type: boolean
+          description: Whether the study confirms a diagnosis of hypertension on ABPM/HBPM averages.
+        white_coat_effect:
+          type: boolean
+          description: Whether a white-coat effect is present (raised clinic BP but normal ambulatory averages).
+        masked_hypertension:
+          type: boolean
+          description: Whether masked hypertension is present (normal clinic BP but raised ambulatory averages).
+        severe_hypertension:
+          type: boolean
+          description: Whether the study shows severe hypertension (ABPM average >= 150/95, equivalent to clinic >= 180/120).
+        nocturnal_hypertension:
+          type: boolean
+          description: Whether nocturnal hypertension is present (nighttime average >= 120/70).
+        normal_study:
+          type: boolean
+          description: Whether the study is normal (all averages within normal limits and a normal dipping pattern).
+        findings_narrative:
+          type: string
+          maxLength: 2000
+          description: Narrative description of the monitoring findings (the body of the report).
+        comparison_with_previous:
+          type: string
+          maxLength: 1000
+          description: Comparison with relevant previous ambulatory or home monitoring studies.
+        impression:
+          type: string
+          maxLength: 2000
+          description: Summary impression / conclusion answering the clinical question.
+        reporting_category:
+          type: string
+          maxLength: 50
+          description: "Free-text structured-reporting category label (e.g. the hypertension stage: normotensive, stage 1, stage 2, severe)."
+        recommended_follow_up:
+          type: string
+          maxLength: 1000
+          description: Recommended follow-up, treatment change, or referral.
+        critical_result_communicated:
+          type: boolean
+          description: Whether a critical or unexpected significant result was communicated directly to the referrer.
+        reported_to:
+          type: string
+          maxLength: 500
+          description: Who the critical / urgent result was communicated to, with date and time if applicable.
+      required:
+        - created_at
+        - updated_at
+        - patient_id
+        - clinician_id
+        - originating_request_reference
+        - monitoring_type
+        - report_status
+        - recording_adequate
+        - clinical_history
+        - dipper_status
+        - hypertension_confirmed
+        - white_coat_effect
+        - masked_hypertension
+        - severe_hypertension
+        - nocturnal_hypertension
+        - normal_study
+        - findings_narrative
+        - comparison_with_previous
+        - impression
+        - reporting_category
+        - recommended_follow_up
+        - critical_result_communicated
+        - reported_to
+      description: Ambulatory blood pressure monitoring (ABPM) result (report). Captures the monitoring type, recording adequacy, clinical history, the daytime / nighttime / 24-hour averaged blood pressures, the nocturnal dip and dipper status, the narrative and structured interpretation, the impression, and critical-result communication. This is the source-of-truth record that the four-axis interpretation grade is computed from.

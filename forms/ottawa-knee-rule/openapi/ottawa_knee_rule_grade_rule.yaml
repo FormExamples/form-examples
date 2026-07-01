@@ -1,0 +1,171 @@
+# Generated from sql/. Do not edit by hand.
+# SOURCE: ottawa_knee_rule_grade_rule
+openapi: 3.1.0
+info:
+  title: Ottawa Knee Rule — OttawaKneeRuleGradeRule
+  version: 1.0.0
+  description: "Audit trail of every decision rule evaluated during Ottawa Knee Rule computation: instrument, criterion, whether it fired, category, and description."
+paths:
+  /ottawa-knee-rule-grade-rules:
+    get:
+      summary: List OttawaKneeRuleGradeRule records
+      operationId: listOttawaKneeRuleGradeRule
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of OttawaKneeRuleGradeRule records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/OttawaKneeRuleGradeRule"
+    post:
+      summary: Create a new OttawaKneeRuleGradeRule
+      operationId: createOttawaKneeRuleGradeRule
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/OttawaKneeRuleGradeRule"
+      responses:
+        "201":
+          description: The newly created OttawaKneeRuleGradeRule
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/OttawaKneeRuleGradeRule"
+        "400":
+          description: Validation error
+  /ottawa-knee-rule-grade-rules/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one OttawaKneeRuleGradeRule by id
+      operationId: getOttawaKneeRuleGradeRule
+      responses:
+        "200":
+          description: The requested OttawaKneeRuleGradeRule
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/OttawaKneeRuleGradeRule"
+        "404":
+          description: OttawaKneeRuleGradeRule not found
+    patch:
+      summary: Update an existing OttawaKneeRuleGradeRule
+      operationId: updateOttawaKneeRuleGradeRule
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/OttawaKneeRuleGradeRule"
+      responses:
+        "200":
+          description: The updated OttawaKneeRuleGradeRule
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/OttawaKneeRuleGradeRule"
+        "404":
+          description: OttawaKneeRuleGradeRule not found
+    delete:
+      summary: Soft-delete a OttawaKneeRuleGradeRule
+      operationId: deleteOttawaKneeRuleGradeRule
+      responses:
+        "204":
+          description: OttawaKneeRuleGradeRule deleted
+        "404":
+          description: OttawaKneeRuleGradeRule not found
+components:
+  schemas:
+    OttawaKneeRuleGradeRule:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was most recently updated.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was soft-deleted.
+        ottawa_knee_rule_grade_id:
+          type: string
+          format: uuid
+          description: Foreign key to the parent grade.
+        rule_id:
+          type: string
+          maxLength: 40
+          description: Stable rule identifier (e.g. R-AGE-01, R-ISOLATED-PATELLAR-01).
+        instrument:
+          type: string
+          enum:
+            - criterion
+            - composite
+            - ""
+          description: "Decision instrument the rule belongs to: criterion (one of the five) or composite (the ANY-of decision)."
+        criterion:
+          type: string
+          enum:
+            - age
+            - isolated-patellar-tenderness
+            - fibular-head-tenderness
+            - flexion
+            - weight-bearing
+            - decision
+            - other
+            - ""
+          description: "Criterion the rule relates to: age, isolated-patellar-tenderness, fibular-head-tenderness, flexion, weight-bearing, or decision."
+        fired:
+          type: boolean
+          description: Whether this criterion was present (true) and therefore contributed to indicating imaging.
+        category:
+          type: string
+          maxLength: 50
+          description: Subject category (e.g. age, bony-tenderness, range-of-motion, weight-bearing, decision).
+        description:
+          type: string
+          maxLength: 500
+          description: Human-readable description of why the rule fired or did not fire.
+      required:
+        - created_at
+        - updated_at
+        - ottawa_knee_rule_grade_id
+        - rule_id
+        - instrument
+        - criterion
+        - fired
+        - category
+        - description
+      description: "Audit trail of every decision rule evaluated during Ottawa Knee Rule computation: instrument, criterion, whether it fired, category, and description."

@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE columbia_suicide_severity_rating_scale SYSTEM "columbia_suicide_severity_rating_scale.dtd">
+<columbia_suicide_severity_rating_scale>
+<id>770e8400-e29b-41d4-a716-446655440002</id>
+<created_at>2026-04-09T10:00:00Z</created_at>
+<updated_at>2026-04-09T10:00:00Z</updated_at>
+<deleted_at>2026-04-09T10:00:00Z</deleted_at>
+<patient_id>550e8400-e29b-41d4-a716-446655440000</patient_id>
+<clinician_id>660e8400-e29b-41d4-a716-446655440001</clinician_id>
+<clinician_name>Example</clinician_name>
+<clinician_role>clinician</clinician_role>
+<assessed_at>2026-04-09T10:00:00Z</assessed_at>
+<care_setting>mental-health</care_setting>
+<scale_version>screener</scale_version>
+<reason_for_assessment>Example text.</reason_for_assessment>
+<patient_identifier></patient_identifier>
+<age_band>adolescent</age_band>
+<sex>female</sex>
+<wish_to_be_dead>yes</wish_to_be_dead>
+<non_specific_active_thoughts>yes</non_specific_active_thoughts>
+<active_ideation_methods>yes</active_ideation_methods>
+<active_ideation_intent>yes</active_ideation_intent>
+<active_ideation_plan>yes</active_ideation_plan>
+<ideation_timeframe>past-month</ideation_timeframe>
+<ideation_frequency>1</ideation_frequency>
+<ideation_duration>1</ideation_duration>
+<ideation_controllability>1</ideation_controllability>
+<ideation_deterrents>1</ideation_deterrents>
+<ideation_reasons>1</ideation_reasons>
+<actual_attempt>yes</actual_attempt>
+<interrupted_attempt>yes</interrupted_attempt>
+<aborted_attempt>yes</aborted_attempt>
+<preparatory_acts>yes</preparatory_acts>
+<non_suicidal_self_injury>yes</non_suicidal_self_injury>
+<behaviour_recency>within-3-months</behaviour_recency>
+<lifetime_attempt_count>2</lifetime_attempt_count>
+<most_recent_attempt_date>2026-01-15</most_recent_attempt_date>
+<actual_lethality>1</actual_lethality>
+<potential_lethality>1</potential_lethality>
+<access_to_lethal_means>yes</access_to_lethal_means>
+<protective_factors></protective_factors>
+<clinical_note>Example Hospital</clinical_note>
+</columbia_suicide_severity_rating_scale>

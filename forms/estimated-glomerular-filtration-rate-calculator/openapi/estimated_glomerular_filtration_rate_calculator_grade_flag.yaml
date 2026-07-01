@@ -1,0 +1,169 @@
+# Generated from sql/. Do not edit by hand.
+# SOURCE: estimated_glomerular_filtration_rate_calculator_grade_flag
+openapi: 3.1.0
+info:
+  title: Estimated Glomerular Filtration Rate Calculator — EstimatedGlomerularFiltrationRateCalculatorGradeFlag
+  version: 1.0.0
+  description: Safety-critical flags that fire independently of the CKD G-stage, with priority and a suggested action for the assessing clinician.
+paths:
+  /estimated-glomerular-filtration-rate-calculator-grade-flags:
+    get:
+      summary: List EstimatedGlomerularFiltrationRateCalculatorGradeFlag records
+      operationId: listEstimatedGlomerularFiltrationRateCalculatorGradeFlag
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of EstimatedGlomerularFiltrationRateCalculatorGradeFlag records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/EstimatedGlomerularFiltrationRateCalculatorGradeFlag"
+    post:
+      summary: Create a new EstimatedGlomerularFiltrationRateCalculatorGradeFlag
+      operationId: createEstimatedGlomerularFiltrationRateCalculatorGradeFlag
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/EstimatedGlomerularFiltrationRateCalculatorGradeFlag"
+      responses:
+        "201":
+          description: The newly created EstimatedGlomerularFiltrationRateCalculatorGradeFlag
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/EstimatedGlomerularFiltrationRateCalculatorGradeFlag"
+        "400":
+          description: Validation error
+  /estimated-glomerular-filtration-rate-calculator-grade-flags/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one EstimatedGlomerularFiltrationRateCalculatorGradeFlag by id
+      operationId: getEstimatedGlomerularFiltrationRateCalculatorGradeFlag
+      responses:
+        "200":
+          description: The requested EstimatedGlomerularFiltrationRateCalculatorGradeFlag
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/EstimatedGlomerularFiltrationRateCalculatorGradeFlag"
+        "404":
+          description: EstimatedGlomerularFiltrationRateCalculatorGradeFlag not found
+    patch:
+      summary: Update an existing EstimatedGlomerularFiltrationRateCalculatorGradeFlag
+      operationId: updateEstimatedGlomerularFiltrationRateCalculatorGradeFlag
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/EstimatedGlomerularFiltrationRateCalculatorGradeFlag"
+      responses:
+        "200":
+          description: The updated EstimatedGlomerularFiltrationRateCalculatorGradeFlag
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/EstimatedGlomerularFiltrationRateCalculatorGradeFlag"
+        "404":
+          description: EstimatedGlomerularFiltrationRateCalculatorGradeFlag not found
+    delete:
+      summary: Soft-delete a EstimatedGlomerularFiltrationRateCalculatorGradeFlag
+      operationId: deleteEstimatedGlomerularFiltrationRateCalculatorGradeFlag
+      responses:
+        "204":
+          description: EstimatedGlomerularFiltrationRateCalculatorGradeFlag deleted
+        "404":
+          description: EstimatedGlomerularFiltrationRateCalculatorGradeFlag not found
+components:
+  schemas:
+    EstimatedGlomerularFiltrationRateCalculatorGradeFlag:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was most recently updated.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was soft-deleted.
+        estimated_glomerular_filtration_rate_calculator_grade_id:
+          type: string
+          format: uuid
+          description: Foreign key to the parent grade.
+        flag_id:
+          type: string
+          maxLength: 50
+          description: Stable flag identifier (e.g. F-G5-NEPHROLOGY-REFERRAL-001).
+        category:
+          type: string
+          enum:
+            - g5-nephrology-referral
+            - g4-nephrology-referral
+            - drug-dosing-review
+            - acute-drop-aki
+            - reduced-function
+            - confirm-ckd
+            - incomplete
+            - other
+            - ""
+          description: "Flag category: g5-nephrology-referral, g4-nephrology-referral, drug-dosing-review, acute-drop-aki, reduced-function, confirm-ckd, incomplete, or other."
+        priority:
+          type: string
+          enum:
+            - low
+            - medium
+            - high
+            - ""
+          description: "Priority: low, medium, high."
+        description:
+          type: string
+          maxLength: 500
+          description: Human-readable description of what fired the flag.
+        suggested_action:
+          type: string
+          maxLength: 500
+          description: "Suggested clinical action (e.g. \"refer to nephrology per NICE NG203\")."
+      required:
+        - created_at
+        - updated_at
+        - estimated_glomerular_filtration_rate_calculator_grade_id
+        - flag_id
+        - category
+        - priority
+        - description
+        - suggested_action
+      description: Safety-critical flags that fire independently of the CKD G-stage, with priority and a suggested action for the assessing clinician.

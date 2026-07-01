@@ -1,0 +1,25 @@
+// Generated from sql/. Do not edit by hand.
+// SOURCE: learning_disability_annual_health_check_grade_rule
+
+syntax = "proto3";
+
+package form_examples.learning_disability_annual_health_check;
+
+enum LearningDisabilityAnnualHealthCheckGradeRuleCompletedEnum {
+  COMPLETED_UNSPECIFIED = 0;
+  COMPLETED_YES = 1;  // yes
+  COMPLETED_NO = 2;  // no
+}
+
+message LearningDisabilityAnnualHealthCheckGradeRule {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string learning_disability_annual_health_check_grade_id = 5;  // UUID — uuid
+  string rule_id = 6;  // VARCHAR(40) — max 40 chars
+  string component = 7;  // VARCHAR(50) — max 50 chars
+  LearningDisabilityAnnualHealthCheckGradeRuleCompletedEnum completed = 8;  // VARCHAR(5)
+  string category = 9;  // VARCHAR(50) — max 50 chars
+  string description = 10;  // VARCHAR(500) — max 500 chars
+}

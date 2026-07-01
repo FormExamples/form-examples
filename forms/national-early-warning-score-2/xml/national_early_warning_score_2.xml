@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE national_early_warning_score_2 SYSTEM "national_early_warning_score_2.dtd">
+<national_early_warning_score_2>
+<id>770e8400-e29b-41d4-a716-446655440002</id>
+<created_at>2026-04-09T10:00:00Z</created_at>
+<updated_at>2026-04-09T10:00:00Z</updated_at>
+<deleted_at>2026-04-09T10:00:00Z</deleted_at>
+<patient_id>550e8400-e29b-41d4-a716-446655440000</patient_id>
+<clinician_id>660e8400-e29b-41d4-a716-446655440001</clinician_id>
+<status>draft</status>
+<observation_at>2026-04-09T10:00:00Z</observation_at>
+<ward_or_location>Example location</ward_or_location>
+<spo2_scale>scale-1</spo2_scale>
+<spo2_scale2_endorsed>yes</spo2_scale2_endorsed>
+<respiratory_rate>1</respiratory_rate>
+<spo2>1</spo2>
+<on_oxygen>air</on_oxygen>
+<oxygen_device>nasal-cannula</oxygen_device>
+<oxygen_flow_rate_l_min>72.0</oxygen_flow_rate_l_min>
+<inspired_oxygen_fraction_percent>1</inspired_oxygen_fraction_percent>
+<systolic_blood_pressure>1</systolic_blood_pressure>
+<pulse>1</pulse>
+<consciousness_acvpu>A</consciousness_acvpu>
+<temperature>0.0</temperature>
+<is_under_16>yes</is_under_16>
+<is_pregnant>yes</is_pregnant>
+<has_spinal_cord_injury>yes</has_spinal_cord_injury>
+<clinical_notes>Example text.</clinical_notes>
+</national_early_warning_score_2>

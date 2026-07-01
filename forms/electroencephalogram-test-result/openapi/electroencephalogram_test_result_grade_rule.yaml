@@ -1,0 +1,156 @@
+# Generated from sql/. Do not edit by hand.
+# SOURCE: electroencephalogram_test_result_grade_rule
+openapi: 3.1.0
+info:
+  title: Electroencephalogram Test Result — ElectroencephalogramTestResultGradeRule
+  version: 1.0.0
+  description: Audit trail of every classification / severity / completeness / follow-up rule that fired for this result.
+paths:
+  /electroencephalogram-test-result-grade-rules:
+    get:
+      summary: List ElectroencephalogramTestResultGradeRule records
+      operationId: listElectroencephalogramTestResultGradeRule
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of ElectroencephalogramTestResultGradeRule records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/ElectroencephalogramTestResultGradeRule"
+    post:
+      summary: Create a new ElectroencephalogramTestResultGradeRule
+      operationId: createElectroencephalogramTestResultGradeRule
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ElectroencephalogramTestResultGradeRule"
+      responses:
+        "201":
+          description: The newly created ElectroencephalogramTestResultGradeRule
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ElectroencephalogramTestResultGradeRule"
+        "400":
+          description: Validation error
+  /electroencephalogram-test-result-grade-rules/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one ElectroencephalogramTestResultGradeRule by id
+      operationId: getElectroencephalogramTestResultGradeRule
+      responses:
+        "200":
+          description: The requested ElectroencephalogramTestResultGradeRule
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ElectroencephalogramTestResultGradeRule"
+        "404":
+          description: ElectroencephalogramTestResultGradeRule not found
+    patch:
+      summary: Update an existing ElectroencephalogramTestResultGradeRule
+      operationId: updateElectroencephalogramTestResultGradeRule
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ElectroencephalogramTestResultGradeRule"
+      responses:
+        "200":
+          description: The updated ElectroencephalogramTestResultGradeRule
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ElectroencephalogramTestResultGradeRule"
+        "404":
+          description: ElectroencephalogramTestResultGradeRule not found
+    delete:
+      summary: Soft-delete a ElectroencephalogramTestResultGradeRule
+      operationId: deleteElectroencephalogramTestResultGradeRule
+      responses:
+        "204":
+          description: ElectroencephalogramTestResultGradeRule deleted
+        "404":
+          description: ElectroencephalogramTestResultGradeRule not found
+components:
+  schemas:
+    ElectroencephalogramTestResultGradeRule:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was updated most-recently.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was deleted a.k.a. soft-removed.
+        electroencephalogram_test_result_grade_id:
+          type: string
+          format: uuid
+          description: Foreign key to the parent grade.
+        rule_id:
+          type: string
+          maxLength: 40
+          description: Stable rule identifier (e.g. R-CLASS-CRITICAL-01).
+        axis:
+          type: string
+          enum:
+            - classification
+            - severity
+            - completeness
+            - follow-up
+            - ""
+          description: "Scoring axis the rule belongs to: classification, severity, completeness, follow-up."
+        category:
+          type: string
+          maxLength: 50
+          description: Category or finding the rule relates to.
+        description:
+          type: string
+          maxLength: 500
+          description: Human-readable description of why the rule fired.
+      required:
+        - created_at
+        - updated_at
+        - electroencephalogram_test_result_grade_id
+        - rule_id
+        - axis
+        - category
+        - description
+      description: Audit trail of every classification / severity / completeness / follow-up rule that fired for this result.

@@ -1,0 +1,16 @@
+<!ELEMENT parkland_formula_for_burns_grade (id,created_at,updated_at,deleted_at,parkland_formula_for_burns_id,total_24h_volume_ml,first_8h_volume_ml,next_16h_volume_ml,hours_since_injury,remaining_first_8h_hours,first_8h_rate_ml_h,next_16h_rate_ml_h,urine_output_target_min_ml_h,urine_output_target_max_ml_h,graded_at)>
+<!ELEMENT id (#PCDATA)>
+<!ELEMENT created_at (#PCDATA)>
+<!ELEMENT updated_at (#PCDATA)>
+<!ELEMENT deleted_at (#PCDATA)>
+<!ELEMENT parkland_formula_for_burns_id (#PCDATA)>
+<!ELEMENT total_24h_volume_ml (#PCDATA)>
+<!ELEMENT first_8h_volume_ml (#PCDATA)>
+<!ELEMENT next_16h_volume_ml (#PCDATA)>
+<!ELEMENT hours_since_injury (#PCDATA)>
+<!ELEMENT remaining_first_8h_hours (#PCDATA)>
+<!ELEMENT first_8h_rate_ml_h (#PCDATA)>
+<!ELEMENT next_16h_rate_ml_h (#PCDATA)>
+<!ELEMENT urine_output_target_min_ml_h (#PCDATA)>
+<!ELEMENT urine_output_target_max_ml_h (#PCDATA)>
+<!ELEMENT graded_at (#PCDATA)>

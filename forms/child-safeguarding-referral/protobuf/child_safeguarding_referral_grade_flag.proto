@@ -1,0 +1,39 @@
+// Generated from sql/. Do not edit by hand.
+// SOURCE: child_safeguarding_referral_grade_flag
+
+syntax = "proto3";
+
+package form_examples.child_safeguarding_referral;
+
+enum ChildSafeguardingReferralGradeFlagCategoryEnum {
+  CATEGORY_UNSPECIFIED = 0;
+  CATEGORY_IMMEDIATE_DANGER = 1;  // immediate-danger
+  CATEGORY_DISCLOSURE_OF_ABUSE = 2;  // disclosure-of-abuse
+  CATEGORY_SEXUAL_ABUSE_CATEGORY = 3;  // sexual-abuse-category
+  CATEGORY_OTHER_CHILDREN_AT_RISK = 4;  // other-children-at-risk
+  CATEGORY_NO_CONSENT_BASIS = 5;  // no-consent-basis
+  CATEGORY_MANDATORY_FIELD_MISSING = 6;  // mandatory-field-missing
+  CATEGORY_CHILD_UNAWARE_UNSAFE = 7;  // child-unaware-unsafe
+  CATEGORY_PREVIOUS_HISTORY = 8;  // previous-history
+  CATEGORY_OTHER = 9;  // other
+}
+
+enum ChildSafeguardingReferralGradeFlagPriorityEnum {
+  PRIORITY_UNSPECIFIED = 0;
+  PRIORITY_LOW = 1;  // low
+  PRIORITY_MEDIUM = 2;  // medium
+  PRIORITY_HIGH = 3;  // high
+}
+
+message ChildSafeguardingReferralGradeFlag {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string child_safeguarding_referral_grade_id = 5;  // UUID — uuid
+  string flag_id = 6;  // VARCHAR(50) — max 50 chars
+  ChildSafeguardingReferralGradeFlagCategoryEnum category = 7;  // VARCHAR(30)
+  ChildSafeguardingReferralGradeFlagPriorityEnum priority = 8;  // VARCHAR(10)
+  string description = 9;  // VARCHAR(500) — max 500 chars
+  string suggested_action = 10;  // VARCHAR(500) — max 500 chars
+}

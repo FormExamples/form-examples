@@ -1,0 +1,84 @@
+// Generated from sql/. Do not edit by hand.
+// SOURCE: bowel_cancer_screening_fit
+
+syntax = "proto3";
+
+package form_examples.bowel_cancer_screening_with_faecal_immunochemical_test;
+
+enum BowelCancerScreeningFitWithinAgeRangeEnum {
+  WITHINAGERANGE_UNSPECIFIED = 0;
+  WITHINAGERANGE_ELIGIBLE = 1;  // eligible
+  WITHINAGERANGE_OVER_AGE_SELF_REQUEST = 2;  // over-age-self-request
+  WITHINAGERANGE_NOT_ELIGIBLE = 3;  // not-eligible
+}
+
+enum BowelCancerScreeningFitRecallIntervalEnum {
+  RECALLINTERVAL_UNSPECIFIED = 0;
+  RECALLINTERVAL_TWO_YEARLY = 1;  // two-yearly
+  RECALLINTERVAL_OTHER = 2;  // other
+}
+
+enum BowelCancerScreeningFitPreviousOutcomeEnum {
+  PREVIOUSOUTCOME_UNSPECIFIED = 0;
+  PREVIOUSOUTCOME_FIRST_INVITATION = 1;  // first-invitation
+  PREVIOUSOUTCOME_PRIOR_NEGATIVE = 2;  // prior-negative
+  PREVIOUSOUTCOME_PRIOR_POSITIVE = 3;  // prior-positive
+  PREVIOUSOUTCOME_UNKNOWN = 4;  // unknown
+}
+
+enum BowelCancerScreeningFitKitReturnedEnum {
+  KITRETURNED_UNSPECIFIED = 0;
+  KITRETURNED_YES = 1;  // yes
+  KITRETURNED_NO = 2;  // no
+}
+
+enum BowelCancerScreeningFitSampleAdequacyEnum {
+  SAMPLEADEQUACY_UNSPECIFIED = 0;
+  SAMPLEADEQUACY_ADEQUATE = 1;  // adequate
+  SAMPLEADEQUACY_SPOILT = 2;  // spoilt
+  SAMPLEADEQUACY_INSUFFICIENT = 3;  // insufficient
+  SAMPLEADEQUACY_EXPIRED = 4;  // expired
+}
+
+enum BowelCancerScreeningFitSpoiltReasonEnum {
+  SPOILTREASON_UNSPECIFIED = 0;
+  SPOILTREASON_LEAKED = 1;  // leaked
+  SPOILTREASON_UNDATED = 2;  // undated
+  SPOILTREASON_UNLABELLED = 3;  // unlabelled
+  SPOILTREASON_TOO_OLD = 4;  // too-old
+  SPOILTREASON_DAMAGED = 5;  // damaged
+}
+
+enum BowelCancerScreeningFitRedFlagSymptomsEnum {
+  REDFLAGSYMPTOMS_UNSPECIFIED = 0;
+  REDFLAGSYMPTOMS_YES = 1;  // yes
+  REDFLAGSYMPTOMS_NO = 2;  // no
+}
+
+message BowelCancerScreeningFit {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string patient_id = 5;  // UUID — uuid
+  string clinician_id = 6;  // UUID — uuid
+  string reviewed_at = 7;  // TIMESTAMPTZ — iso 8601
+  string screening_hub = 8;  // VARCHAR(200) — max 200 chars
+  string participant_identifier = 9;  // VARCHAR(100) — max 100 chars
+  int32 age = 10;  // INTEGER
+  BowelCancerScreeningFitWithinAgeRangeEnum within_age_range = 11;  // VARCHAR(25)
+  BowelCancerScreeningFitRecallIntervalEnum recall_interval = 12;  // VARCHAR(15)
+  string invitation_date = 13;  // DATE — iso 8601 date
+  BowelCancerScreeningFitPreviousOutcomeEnum previous_outcome = 14;  // VARCHAR(20)
+  string last_screen_date = 15;  // DATE — iso 8601 date
+  BowelCancerScreeningFitKitReturnedEnum kit_returned = 16;  // VARCHAR(5)
+  string return_date = 17;  // DATE — iso 8601 date
+  BowelCancerScreeningFitSampleAdequacyEnum sample_adequacy = 18;  // VARCHAR(15)
+  BowelCancerScreeningFitSpoiltReasonEnum spoilt_reason = 19;  // VARCHAR(15)
+  double faecal_haemoglobin_ug_g = 20;  // NUMERIC(8,1) — numeric(8,1)
+  string assay = 21;  // VARCHAR(200) — max 200 chars
+  double threshold_applied = 22;  // NUMERIC(8,1) — numeric(8,1)
+  BowelCancerScreeningFitRedFlagSymptomsEnum red_flag_symptoms = 23;  // VARCHAR(5)
+  string clinical_note = 24;  // TEXT
+  string context = 25;  // TEXT
+}

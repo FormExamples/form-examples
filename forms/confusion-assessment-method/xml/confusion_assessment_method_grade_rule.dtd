@@ -1,0 +1,11 @@
+<!ELEMENT confusion_assessment_method_grade_rule (id,created_at,updated_at,deleted_at,confusion_assessment_method_grade_id,rule_id,feature,positive,category,description)>
+<!ELEMENT id (#PCDATA)>
+<!ELEMENT created_at (#PCDATA)>
+<!ELEMENT updated_at (#PCDATA)>
+<!ELEMENT deleted_at (#PCDATA)>
+<!ELEMENT confusion_assessment_method_grade_id (#PCDATA)>
+<!ELEMENT rule_id (#PCDATA)>
+<!ELEMENT feature (#PCDATA)>
+<!ELEMENT positive (#PCDATA)>
+<!ELEMENT category (#PCDATA)>
+<!ELEMENT description (#PCDATA)>

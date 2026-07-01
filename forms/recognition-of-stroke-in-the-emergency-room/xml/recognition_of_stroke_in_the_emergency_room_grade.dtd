@@ -1,0 +1,10 @@
+<!ELEMENT recognition_of_stroke_in_the_emergency_room_grade (id,created_at,updated_at,deleted_at,recognition_of_stroke_in_the_emergency_room_id,rosier_score,stroke_likely,glucose_excluded,graded_at)>
+<!ELEMENT id (#PCDATA)>
+<!ELEMENT created_at (#PCDATA)>
+<!ELEMENT updated_at (#PCDATA)>
+<!ELEMENT deleted_at (#PCDATA)>
+<!ELEMENT recognition_of_stroke_in_the_emergency_room_id (#PCDATA)>
+<!ELEMENT rosier_score (#PCDATA)>
+<!ELEMENT stroke_likely (#PCDATA)>
+<!ELEMENT glucose_excluded (#PCDATA)>
+<!ELEMENT graded_at (#PCDATA)>

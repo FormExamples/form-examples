@@ -1,0 +1,167 @@
+# Generated from sql/. Do not edit by hand.
+# SOURCE: fluid_balance_chart_grade_flag
+openapi: 3.1.0
+info:
+  title: Fluid Balance Chart — FluidBalanceChartGradeFlag
+  version: 1.0.0
+  description: Flagged issues raised independently of the fluid-status classification, with priority and a suggested action for the clinical team.
+paths:
+  /fluid-balance-chart-grade-flags:
+    get:
+      summary: List FluidBalanceChartGradeFlag records
+      operationId: listFluidBalanceChartGradeFlag
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of FluidBalanceChartGradeFlag records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/FluidBalanceChartGradeFlag"
+    post:
+      summary: Create a new FluidBalanceChartGradeFlag
+      operationId: createFluidBalanceChartGradeFlag
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/FluidBalanceChartGradeFlag"
+      responses:
+        "201":
+          description: The newly created FluidBalanceChartGradeFlag
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/FluidBalanceChartGradeFlag"
+        "400":
+          description: Validation error
+  /fluid-balance-chart-grade-flags/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one FluidBalanceChartGradeFlag by id
+      operationId: getFluidBalanceChartGradeFlag
+      responses:
+        "200":
+          description: The requested FluidBalanceChartGradeFlag
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/FluidBalanceChartGradeFlag"
+        "404":
+          description: FluidBalanceChartGradeFlag not found
+    patch:
+      summary: Update an existing FluidBalanceChartGradeFlag
+      operationId: updateFluidBalanceChartGradeFlag
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/FluidBalanceChartGradeFlag"
+      responses:
+        "200":
+          description: The updated FluidBalanceChartGradeFlag
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/FluidBalanceChartGradeFlag"
+        "404":
+          description: FluidBalanceChartGradeFlag not found
+    delete:
+      summary: Soft-delete a FluidBalanceChartGradeFlag
+      operationId: deleteFluidBalanceChartGradeFlag
+      responses:
+        "204":
+          description: FluidBalanceChartGradeFlag deleted
+        "404":
+          description: FluidBalanceChartGradeFlag not found
+components:
+  schemas:
+    FluidBalanceChartGradeFlag:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was most recently updated.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was soft-deleted.
+        fluid_balance_chart_grade_id:
+          type: string
+          format: uuid
+          description: Foreign key to the parent grade.
+        flag_id:
+          type: string
+          maxLength: 50
+          description: Stable flag identifier (e.g. F-FLUID-OVERLOAD-001).
+        category:
+          type: string
+          enum:
+            - fluid-overload
+            - dehydration
+            - oliguria
+            - anuria
+            - incomplete-recording
+            - other
+            - ""
+          description: "Flag category: fluid-overload, dehydration, oliguria, anuria, incomplete-recording, or other."
+        priority:
+          type: string
+          enum:
+            - low
+            - medium
+            - high
+            - ""
+          description: "Priority: low, medium, high."
+        description:
+          type: string
+          maxLength: 500
+          description: Human-readable description of what fired the flag.
+        suggested_action:
+          type: string
+          maxLength: 500
+          description: "Suggested clinical action (e.g. \"review for pulmonary or peripheral oedema\")."
+      required:
+        - created_at
+        - updated_at
+        - fluid_balance_chart_grade_id
+        - flag_id
+        - category
+        - priority
+        - description
+        - suggested_action
+      description: Flagged issues raised independently of the fluid-status classification, with priority and a suggested action for the clinical team.

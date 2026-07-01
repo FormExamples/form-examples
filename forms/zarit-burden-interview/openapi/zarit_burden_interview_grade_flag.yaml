@@ -1,0 +1,166 @@
+# Generated from sql/. Do not edit by hand.
+# SOURCE: zarit_burden_interview_grade_flag
+openapi: 3.1.0
+info:
+  title: Zarit Burden Interview — ZaritBurdenInterviewGradeFlag
+  version: 1.0.0
+  description: Red-flag issues that fire independently of the burden band, with priority and a suggested action for the carer-support team.
+paths:
+  /zarit-burden-interview-grade-flags:
+    get:
+      summary: List ZaritBurdenInterviewGradeFlag records
+      operationId: listZaritBurdenInterviewGradeFlag
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of ZaritBurdenInterviewGradeFlag records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/ZaritBurdenInterviewGradeFlag"
+    post:
+      summary: Create a new ZaritBurdenInterviewGradeFlag
+      operationId: createZaritBurdenInterviewGradeFlag
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ZaritBurdenInterviewGradeFlag"
+      responses:
+        "201":
+          description: The newly created ZaritBurdenInterviewGradeFlag
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ZaritBurdenInterviewGradeFlag"
+        "400":
+          description: Validation error
+  /zarit-burden-interview-grade-flags/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one ZaritBurdenInterviewGradeFlag by id
+      operationId: getZaritBurdenInterviewGradeFlag
+      responses:
+        "200":
+          description: The requested ZaritBurdenInterviewGradeFlag
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ZaritBurdenInterviewGradeFlag"
+        "404":
+          description: ZaritBurdenInterviewGradeFlag not found
+    patch:
+      summary: Update an existing ZaritBurdenInterviewGradeFlag
+      operationId: updateZaritBurdenInterviewGradeFlag
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ZaritBurdenInterviewGradeFlag"
+      responses:
+        "200":
+          description: The updated ZaritBurdenInterviewGradeFlag
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ZaritBurdenInterviewGradeFlag"
+        "404":
+          description: ZaritBurdenInterviewGradeFlag not found
+    delete:
+      summary: Soft-delete a ZaritBurdenInterviewGradeFlag
+      operationId: deleteZaritBurdenInterviewGradeFlag
+      responses:
+        "204":
+          description: ZaritBurdenInterviewGradeFlag deleted
+        "404":
+          description: ZaritBurdenInterviewGradeFlag not found
+components:
+  schemas:
+    ZaritBurdenInterviewGradeFlag:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was most recently updated.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was soft-deleted.
+        zarit_burden_interview_grade_id:
+          type: string
+          format: uuid
+          description: Foreign key to the parent grade.
+        flag_id:
+          type: string
+          maxLength: 50
+          description: Stable flag identifier (e.g. F-SEVERE-BURDEN-001).
+        category:
+          type: string
+          enum:
+            - severe-burden
+            - carer-support-respite
+            - carer-mental-health-screen
+            - incomplete
+            - other
+            - ""
+          description: "Flag category: severe-burden, carer-support-respite, carer-mental-health-screen, incomplete, or other."
+        priority:
+          type: string
+          enum:
+            - low
+            - medium
+            - high
+            - ""
+          description: "Priority: low, medium, high."
+        description:
+          type: string
+          maxLength: 500
+          description: Human-readable description of what fired the flag.
+        suggested_action:
+          type: string
+          maxLength: 500
+          description: "Suggested action (e.g. \"arrange urgent carer support and respite\")."
+      required:
+        - created_at
+        - updated_at
+        - zarit_burden_interview_grade_id
+        - flag_id
+        - category
+        - priority
+        - description
+        - suggested_action
+      description: Red-flag issues that fire independently of the burden band, with priority and a suggested action for the carer-support team.

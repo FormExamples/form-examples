@@ -1,0 +1,31 @@
+// Generated from sql/. Do not edit by hand.
+// SOURCE: model_for_end_stage_liver_disease_score_grade
+
+syntax = "proto3";
+
+package form_examples.model_for_end_stage_liver_disease_score;
+
+enum ModelForEndStageLiverDiseaseScoreGradeMortalityBandEnum {
+  MORTALITYBAND_UNSPECIFIED = 0;
+  MORTALITYBAND_LOW = 1;  // low
+  MORTALITYBAND_MODERATE = 2;  // moderate
+  MORTALITYBAND_HIGH = 3;  // high
+  MORTALITYBAND_VERY_HIGH = 4;  // very-high
+  MORTALITYBAND_EXTREME = 5;  // extreme
+}
+
+message ModelForEndStageLiverDiseaseScoreGrade {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string model_for_end_stage_liver_disease_score_id = 5;  // UUID — uuid
+  double bilirubin_mg_dl = 6;  // NUMERIC(7,2) — numeric(7,2)
+  double creatinine_mg_dl = 7;  // NUMERIC(7,2) — numeric(7,2)
+  double creatinine_adjusted = 8;  // NUMERIC(7,2) — numeric(7,2)
+  bool dialysis_rule_applied = 9;  // BOOLEAN
+  int32 meld_score = 10;  // INT
+  ModelForEndStageLiverDiseaseScoreGradeMortalityBandEnum mortality_band = 11;  // VARCHAR(10)
+  double estimated_mortality_percent = 12;  // NUMERIC(5,2) — numeric(5,2)
+  string graded_at = 13;  // TIMESTAMPTZ — iso 8601
+}

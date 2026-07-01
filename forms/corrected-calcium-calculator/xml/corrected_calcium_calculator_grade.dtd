@@ -1,0 +1,9 @@
+<!ELEMENT corrected_calcium_calculator_grade (id,created_at,updated_at,deleted_at,corrected_calcium_calculator_id,corrected_calcium_mmol_l,classification,graded_at)>
+<!ELEMENT id (#PCDATA)>
+<!ELEMENT created_at (#PCDATA)>
+<!ELEMENT updated_at (#PCDATA)>
+<!ELEMENT deleted_at (#PCDATA)>
+<!ELEMENT corrected_calcium_calculator_id (#PCDATA)>
+<!ELEMENT corrected_calcium_mmol_l (#PCDATA)>
+<!ELEMENT classification (#PCDATA)>
+<!ELEMENT graded_at (#PCDATA)>

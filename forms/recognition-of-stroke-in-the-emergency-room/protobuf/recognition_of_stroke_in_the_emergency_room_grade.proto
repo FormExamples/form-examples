@@ -1,0 +1,30 @@
+// Generated from sql/. Do not edit by hand.
+// SOURCE: recognition_of_stroke_in_the_emergency_room_grade
+
+syntax = "proto3";
+
+package form_examples.recognition_of_stroke_in_the_emergency_room;
+
+enum RecognitionOfStrokeInTheEmergencyRoomGradeStrokeLikelyEnum {
+  STROKELIKELY_UNSPECIFIED = 0;
+  STROKELIKELY_STROKE_UNLIKELY = 1;  // stroke-unlikely
+  STROKELIKELY_STROKE_LIKELY = 2;  // stroke-likely
+}
+
+enum RecognitionOfStrokeInTheEmergencyRoomGradeGlucoseExcludedEnum {
+  GLUCOSEEXCLUDED_UNSPECIFIED = 0;
+  GLUCOSEEXCLUDED_YES = 1;  // yes
+  GLUCOSEEXCLUDED_NO = 2;  // no
+}
+
+message RecognitionOfStrokeInTheEmergencyRoomGrade {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string recognition_of_stroke_in_the_emergency_room_id = 5;  // UUID — uuid
+  int32 rosier_score = 6;  // INT
+  RecognitionOfStrokeInTheEmergencyRoomGradeStrokeLikelyEnum stroke_likely = 7;  // VARCHAR(20)
+  RecognitionOfStrokeInTheEmergencyRoomGradeGlucoseExcludedEnum glucose_excluded = 8;  // VARCHAR(5)
+  string graded_at = 9;  // TIMESTAMPTZ — iso 8601
+}

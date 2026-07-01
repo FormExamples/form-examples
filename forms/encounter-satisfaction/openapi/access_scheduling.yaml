@@ -1,4 +1,4 @@
-# Generated from sql-migrations/. Do not edit by hand.
+# Generated from sql/. Do not edit by hand.
 # SOURCE: access_scheduling
 openapi: 3.1.0
 info:
@@ -124,9 +124,10 @@ components:
           type: string
           format: uuid
           description: FK to encounter_satisfaction (UNIQUE = 1:1 relationship).
-        "NULL":
-          type: string
-          description: Null.
+        ease_of_scheduling:
+          type: integer
+          format: int32
+          description: Satisfaction with ease of scheduling (1-5 Likert). NULL if unanswered.
         wait_for_appointment:
           type: integer
           format: int32

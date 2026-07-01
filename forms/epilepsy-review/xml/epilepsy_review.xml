@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE epilepsy_review SYSTEM "epilepsy_review.dtd">
+<epilepsy_review>
+<id>770e8400-e29b-41d4-a716-446655440002</id>
+<created_at>2026-04-09T10:00:00Z</created_at>
+<updated_at>2026-04-09T10:00:00Z</updated_at>
+<deleted_at>2026-04-09T10:00:00Z</deleted_at>
+<patient_id>550e8400-e29b-41d4-a716-446655440000</patient_id>
+<clinician_id>660e8400-e29b-41d4-a716-446655440001</clinician_id>
+<reviewer_name>Example</reviewer_name>
+<reviewer_role>gp</reviewer_role>
+<reviewed_at>2026-01-15</reviewed_at>
+<care_setting>general-practice</care_setting>
+<review_type>annual</review_type>
+<months_since_last_review>0.0</months_since_last_review>
+<patient_identifier></patient_identifier>
+<age_band>18-39</age_band>
+<sex>female</sex>
+<epilepsy_type>focal</epilepsy_type>
+<age_at_onset>0.0</age_at_onset>
+<years_since_diagnosis>0.0</years_since_diagnosis>
+<learning_disability>yes</learning_disability>
+<seizure_types>standard</seizure_types>
+<seizure_frequency>none</seizure_frequency>
+<last_seizure_date>2026-01-15</last_seizure_date>
+<seizure_free_months>0.0</seizure_free_months>
+<seizure_trend>seizure-free</seizure_trend>
+<current_asms></current_asms>
+<asm_adherence>good</asm_adherence>
+<asm_side_effects>none</asm_side_effects>
+<drug_level>5.0</drug_level>
+<triggers></triggers>
+<sudep_discussed>yes</sudep_discussed>
+<status_epilepticus>yes</status_epilepticus>
+<seizure_injury>yes</seizure_injury>
+<dvla_eligible>eligible</dvla_eligible>
+<currently_driving>yes</currently_driving>
+<bathing_advice_given>yes</bathing_advice_given>
+<woman_of_childbearing_potential>yes</woman_of_childbearing_potential>
+<on_valproate>yes</on_valproate>
+<pregnancy_prevention_programme>in-place</pregnancy_prevention_programme>
+<folic_acid>yes</folic_acid>
+<contraception_interaction_reviewed>yes</contraception_interaction_reviewed>
+<mental_health_concern>none</mental_health_concern>
+<specialist_review_needed>yes</specialist_review_needed>
+<next_review_due>2026-01-15</next_review_due>
+<care_plan>Example text.</care_plan>
+<review_context>Example text.</review_context>
+</epilepsy_review>

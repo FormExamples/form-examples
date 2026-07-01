@@ -1,0 +1,166 @@
+# Generated from sql/. Do not edit by hand.
+# SOURCE: caprini_venous_thromboembolism_risk_assessment_grade_rule
+openapi: 3.1.0
+info:
+  title: Caprini Venous Thromboembolism Risk Assessment — CapriniVenousThromboembolismRiskAssessmentGradeRule
+  version: 1.0.0
+  description: "Audit trail of every grading rule that fired during Caprini computation: fired factor (or age band), weight group, points contributed, category, and description."
+paths:
+  /caprini-venous-thromboembolism-risk-assessment-grade-rules:
+    get:
+      summary: List CapriniVenousThromboembolismRiskAssessmentGradeRule records
+      operationId: listCapriniVenousThromboembolismRiskAssessmentGradeRule
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of CapriniVenousThromboembolismRiskAssessmentGradeRule records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/CapriniVenousThromboembolismRiskAssessmentGradeRule"
+    post:
+      summary: Create a new CapriniVenousThromboembolismRiskAssessmentGradeRule
+      operationId: createCapriniVenousThromboembolismRiskAssessmentGradeRule
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CapriniVenousThromboembolismRiskAssessmentGradeRule"
+      responses:
+        "201":
+          description: The newly created CapriniVenousThromboembolismRiskAssessmentGradeRule
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CapriniVenousThromboembolismRiskAssessmentGradeRule"
+        "400":
+          description: Validation error
+  /caprini-venous-thromboembolism-risk-assessment-grade-rules/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one CapriniVenousThromboembolismRiskAssessmentGradeRule by id
+      operationId: getCapriniVenousThromboembolismRiskAssessmentGradeRule
+      responses:
+        "200":
+          description: The requested CapriniVenousThromboembolismRiskAssessmentGradeRule
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CapriniVenousThromboembolismRiskAssessmentGradeRule"
+        "404":
+          description: CapriniVenousThromboembolismRiskAssessmentGradeRule not found
+    patch:
+      summary: Update an existing CapriniVenousThromboembolismRiskAssessmentGradeRule
+      operationId: updateCapriniVenousThromboembolismRiskAssessmentGradeRule
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CapriniVenousThromboembolismRiskAssessmentGradeRule"
+      responses:
+        "200":
+          description: The updated CapriniVenousThromboembolismRiskAssessmentGradeRule
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CapriniVenousThromboembolismRiskAssessmentGradeRule"
+        "404":
+          description: CapriniVenousThromboembolismRiskAssessmentGradeRule not found
+    delete:
+      summary: Soft-delete a CapriniVenousThromboembolismRiskAssessmentGradeRule
+      operationId: deleteCapriniVenousThromboembolismRiskAssessmentGradeRule
+      responses:
+        "204":
+          description: CapriniVenousThromboembolismRiskAssessmentGradeRule deleted
+        "404":
+          description: CapriniVenousThromboembolismRiskAssessmentGradeRule not found
+components:
+  schemas:
+    CapriniVenousThromboembolismRiskAssessmentGradeRule:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was most recently updated.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was soft-deleted.
+        caprini_venous_thromboembolism_risk_assessment_grade_id:
+          type: string
+          format: uuid
+          description: Foreign key to the parent grade.
+        rule_id:
+          type: string
+          maxLength: 40
+          description: Stable rule identifier (e.g. R-HISTORY-OF-VTE-3POINT-01).
+        factor:
+          type: string
+          maxLength: 60
+          description: Fired factor key (e.g. history_of_vte) or age_band that contributed the points.
+        weight_group:
+          type: string
+          enum:
+            - age
+            - 1-point
+            - 2-point
+            - 3-point
+            - 5-point
+            - ""
+          description: "Weight group the rule belongs to: age, 1-point, 2-point, 3-point, or 5-point."
+        points:
+          type: integer
+          format: int32
+          description: Points contributed by this rule (1, 2, 3, 5, or the 0-3 age-band weight).
+        category:
+          type: string
+          maxLength: 50
+          description: Subject category (e.g. surgical, thrombophilia, mobility, age-band).
+        description:
+          type: string
+          maxLength: 500
+          description: Human-readable description of why the rule fired.
+      required:
+        - created_at
+        - updated_at
+        - caprini_venous_thromboembolism_risk_assessment_grade_id
+        - rule_id
+        - factor
+        - weight_group
+        - category
+        - description
+      description: "Audit trail of every grading rule that fired during Caprini computation: fired factor (or age band), weight group, points contributed, category, and description."

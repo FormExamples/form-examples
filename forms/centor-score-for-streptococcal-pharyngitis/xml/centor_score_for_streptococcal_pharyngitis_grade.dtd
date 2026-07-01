@@ -1,0 +1,12 @@
+<!ELEMENT centor_score_for_streptococcal_pharyngitis_grade (id,created_at,updated_at,deleted_at,centor_score_for_streptococcal_pharyngitis_id,centor_score,age_modifier,mcisaac_score,risk_band,management,graded_at)>
+<!ELEMENT id (#PCDATA)>
+<!ELEMENT created_at (#PCDATA)>
+<!ELEMENT updated_at (#PCDATA)>
+<!ELEMENT deleted_at (#PCDATA)>
+<!ELEMENT centor_score_for_streptococcal_pharyngitis_id (#PCDATA)>
+<!ELEMENT centor_score (#PCDATA)>
+<!ELEMENT age_modifier (#PCDATA)>
+<!ELEMENT mcisaac_score (#PCDATA)>
+<!ELEMENT risk_band (#PCDATA)>
+<!ELEMENT management (#PCDATA)>
+<!ELEMENT graded_at (#PCDATA)>

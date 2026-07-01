@@ -1,0 +1,25 @@
+// Generated from sql/. Do not edit by hand.
+// SOURCE: heart_failure_review_grade_rule
+
+syntax = "proto3";
+
+package form_examples.heart_failure_review;
+
+enum HeartFailureReviewGradeRuleSectionEnum {
+  SECTION_UNSPECIFIED = 0;
+  SECTION_FUNCTIONAL = 1;  // functional
+  SECTION_MEDICATION = 2;  // medication
+  SECTION_COMPLETENESS = 3;  // completeness
+}
+
+message HeartFailureReviewGradeRule {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string heart_failure_review_grade_id = 5;  // UUID — uuid
+  string rule_id = 6;  // VARCHAR(40) — max 40 chars
+  HeartFailureReviewGradeRuleSectionEnum section = 7;  // VARCHAR(20)
+  string category = 8;  // VARCHAR(50) — max 50 chars
+  string description = 9;  // VARCHAR(500) — max 500 chars
+}

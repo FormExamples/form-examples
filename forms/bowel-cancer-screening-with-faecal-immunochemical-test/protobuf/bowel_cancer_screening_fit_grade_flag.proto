@@ -1,0 +1,36 @@
+// Generated from sql/. Do not edit by hand.
+// SOURCE: bowel_cancer_screening_fit_grade_flag
+
+syntax = "proto3";
+
+package form_examples.bowel_cancer_screening_with_faecal_immunochemical_test;
+
+enum BowelCancerScreeningFitGradeFlagCategoryEnum {
+  CATEGORY_UNSPECIFIED = 0;
+  CATEGORY_POSITIVE_COLONOSCOPY_REFERRAL = 1;  // positive-colonoscopy-referral
+  CATEGORY_SYMPTOMATIC_SUSPECTED_CANCER = 2;  // symptomatic-suspected-cancer
+  CATEGORY_NON_RETURN = 3;  // non-return
+  CATEGORY_SPOILT_KIT = 4;  // spoilt-kit
+  CATEGORY_INCOMPLETE = 5;  // incomplete
+  CATEGORY_OTHER = 6;  // other
+}
+
+enum BowelCancerScreeningFitGradeFlagPriorityEnum {
+  PRIORITY_UNSPECIFIED = 0;
+  PRIORITY_LOW = 1;  // low
+  PRIORITY_MEDIUM = 2;  // medium
+  PRIORITY_HIGH = 3;  // high
+}
+
+message BowelCancerScreeningFitGradeFlag {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string bowel_cancer_screening_fit_grade_id = 5;  // UUID — uuid
+  string flag_id = 6;  // VARCHAR(50) — max 50 chars
+  BowelCancerScreeningFitGradeFlagCategoryEnum category = 7;  // VARCHAR(40)
+  BowelCancerScreeningFitGradeFlagPriorityEnum priority = 8;  // VARCHAR(10)
+  string description = 9;  // VARCHAR(500) — max 500 chars
+  string suggested_action = 10;  // VARCHAR(500) — max 500 chars
+}

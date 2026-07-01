@@ -1,0 +1,11 @@
+<!ELEMENT learning_disability_annual_health_check_grade_rule (id,created_at,updated_at,deleted_at,learning_disability_annual_health_check_grade_id,rule_id,component,completed,category,description)>
+<!ELEMENT id (#PCDATA)>
+<!ELEMENT created_at (#PCDATA)>
+<!ELEMENT updated_at (#PCDATA)>
+<!ELEMENT deleted_at (#PCDATA)>
+<!ELEMENT learning_disability_annual_health_check_grade_id (#PCDATA)>
+<!ELEMENT rule_id (#PCDATA)>
+<!ELEMENT component (#PCDATA)>
+<!ELEMENT completed (#PCDATA)>
+<!ELEMENT category (#PCDATA)>
+<!ELEMENT description (#PCDATA)>

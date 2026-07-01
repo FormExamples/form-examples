@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE parkland_formula_for_burns SYSTEM "parkland_formula_for_burns.dtd">
+<parkland_formula_for_burns>
+<id>770e8400-e29b-41d4-a716-446655440002</id>
+<created_at>2026-04-09T10:00:00Z</created_at>
+<updated_at>2026-04-09T10:00:00Z</updated_at>
+<deleted_at>2026-04-09T10:00:00Z</deleted_at>
+<patient_id>550e8400-e29b-41d4-a716-446655440000</patient_id>
+<clinician_id>660e8400-e29b-41d4-a716-446655440001</clinician_id>
+<clinician_name>Example</clinician_name>
+<clinician_role>doctor</clinician_role>
+<care_setting>emergency-department</care_setting>
+<assessed_at>2026-04-09T10:00:00Z</assessed_at>
+<patient_identifier></patient_identifier>
+<age_band>adult</age_band>
+<sex>female</sex>
+<weight_kg>70.0</weight_kg>
+<tbsa_percent>50.0</tbsa_percent>
+<tbsa_method>rule-of-nines</tbsa_method>
+<injury_at>2026-04-09T10:00:00Z</injury_at>
+<injury_time_known>known</injury_time_known>
+<inhalation_suspected>yes</inhalation_suspected>
+<circumferential_or_deep>yes</circumferential_or_deep>
+<mechanism>thermal</mechanism>
+</parkland_formula_for_burns>

@@ -1,0 +1,332 @@
+{
+  "resourceType": "Observation",
+  "id": "770e8400-e29b-41d4-a716-446655440002",
+  "meta": {
+    "profile": [
+      "http://hl7.org/fhir/StructureDefinition/Observation"
+    ],
+    "lastUpdated": "2026-04-09T10:00:00+00:00"
+  },
+  "status": "final",
+  "category": [
+    {
+      "coding": [
+        {
+          "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+          "code": "survey",
+          "display": "Survey"
+        }
+      ]
+    }
+  ],
+  "code": {
+    "coding": [
+      {
+        "system": "urn:form-examples:glasgow-blatchford-bleeding-score",
+        "code": "glasgow_blatchford_bleeding_score",
+        "display": "Glasgow Blatchford Bleeding Score"
+      }
+    ]
+  },
+  "subject": {
+    "reference": "Patient/550e8400-e29b-41d4-a716-446655440000"
+  },
+  "encounter": {
+    "reference": "Encounter/bb0e8400-e29b-41d4-a716-446655440006"
+  },
+  "effectiveDateTime": "2026-04-09T10:00:00+00:00",
+  "component": [
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:glasgow-blatchford-bleeding-score",
+            "code": "deleted_at",
+            "display": "Deleted At"
+          }
+        ]
+      },
+      "valueDateTime": "2026-04-09T10:00:00+00:00"
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:glasgow-blatchford-bleeding-score",
+            "code": "clinician_name",
+            "display": "Clinician Name"
+          }
+        ]
+      },
+      "valueString": "Example"
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:glasgow-blatchford-bleeding-score",
+            "code": "clinician_role",
+            "display": "Clinician Role"
+          }
+        ]
+      },
+      "valueCodeableConcept": {
+        "coding": [
+          {
+            "system": "urn:form-examples:glasgow-blatchford-bleeding-score:clinician_role",
+            "code": "doctor",
+            "display": "Doctor"
+          }
+        ]
+      }
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:glasgow-blatchford-bleeding-score",
+            "code": "assessed_at",
+            "display": "Assessed At"
+          }
+        ]
+      },
+      "valueDateTime": "2026-04-09T10:00:00+00:00"
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:glasgow-blatchford-bleeding-score",
+            "code": "care_setting",
+            "display": "Care Setting"
+          }
+        ]
+      },
+      "valueCodeableConcept": {
+        "coding": [
+          {
+            "system": "urn:form-examples:glasgow-blatchford-bleeding-score:care_setting",
+            "code": "emergency-department",
+            "display": "Emergency-Department"
+          }
+        ]
+      }
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:glasgow-blatchford-bleeding-score",
+            "code": "presenting_complaint",
+            "display": "Presenting Complaint"
+          }
+        ]
+      },
+      "valueCodeableConcept": {
+        "coding": [
+          {
+            "system": "urn:form-examples:glasgow-blatchford-bleeding-score:presenting_complaint",
+            "code": "haematemesis",
+            "display": "Haematemesis"
+          }
+        ]
+      }
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:glasgow-blatchford-bleeding-score",
+            "code": "patient_identifier",
+            "display": "Patient Identifier"
+          }
+        ]
+      },
+      "valueString": ""
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:glasgow-blatchford-bleeding-score",
+            "code": "age_band",
+            "display": "Age Band"
+          }
+        ]
+      },
+      "valueCodeableConcept": {
+        "coding": [
+          {
+            "system": "urn:form-examples:glasgow-blatchford-bleeding-score:age_band",
+            "code": "16-39",
+            "display": "16-39"
+          }
+        ]
+      }
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:glasgow-blatchford-bleeding-score",
+            "code": "sex",
+            "display": "Sex"
+          }
+        ]
+      },
+      "valueCodeableConcept": {
+        "coding": [
+          {
+            "system": "urn:form-examples:glasgow-blatchford-bleeding-score:sex",
+            "code": "female",
+            "display": "Female"
+          }
+        ]
+      }
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:glasgow-blatchford-bleeding-score",
+            "code": "blood_urea_mmol_l",
+            "display": "Blood Urea Mmol L"
+          }
+        ]
+      },
+      "valueQuantity": {
+        "value": 0.0
+      }
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:glasgow-blatchford-bleeding-score",
+            "code": "haemoglobin_g_l",
+            "display": "Haemoglobin G L"
+          }
+        ]
+      },
+      "valueQuantity": {
+        "value": 0.0
+      }
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:glasgow-blatchford-bleeding-score",
+            "code": "systolic_blood_pressure_mmhg",
+            "display": "Systolic Blood Pressure Mmhg"
+          }
+        ]
+      },
+      "valueInteger": 1
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:glasgow-blatchford-bleeding-score",
+            "code": "pulse_beats_per_min",
+            "display": "Pulse Beats Per Min"
+          }
+        ]
+      },
+      "valueInteger": 1
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:glasgow-blatchford-bleeding-score",
+            "code": "melaena_present",
+            "display": "Melaena Present"
+          }
+        ]
+      },
+      "valueCodeableConcept": {
+        "coding": [
+          {
+            "system": "urn:form-examples:glasgow-blatchford-bleeding-score:melaena_present",
+            "code": "yes",
+            "display": "Yes"
+          }
+        ]
+      }
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:glasgow-blatchford-bleeding-score",
+            "code": "syncope",
+            "display": "Syncope"
+          }
+        ]
+      },
+      "valueCodeableConcept": {
+        "coding": [
+          {
+            "system": "urn:form-examples:glasgow-blatchford-bleeding-score:syncope",
+            "code": "yes",
+            "display": "Yes"
+          }
+        ]
+      }
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:glasgow-blatchford-bleeding-score",
+            "code": "hepatic_disease",
+            "display": "Hepatic Disease"
+          }
+        ]
+      },
+      "valueCodeableConcept": {
+        "coding": [
+          {
+            "system": "urn:form-examples:glasgow-blatchford-bleeding-score:hepatic_disease",
+            "code": "yes",
+            "display": "Yes"
+          }
+        ]
+      }
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:glasgow-blatchford-bleeding-score",
+            "code": "cardiac_failure",
+            "display": "Cardiac Failure"
+          }
+        ]
+      },
+      "valueCodeableConcept": {
+        "coding": [
+          {
+            "system": "urn:form-examples:glasgow-blatchford-bleeding-score:cardiac_failure",
+            "code": "yes",
+            "display": "Yes"
+          }
+        ]
+      }
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:glasgow-blatchford-bleeding-score",
+            "code": "clinical_note",
+            "display": "Clinical Note"
+          }
+        ]
+      },
+      "valueString": ""
+    }
+  ]
+}

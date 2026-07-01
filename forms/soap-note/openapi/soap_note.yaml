@@ -1,0 +1,271 @@
+# Generated from sql/. Do not edit by hand.
+# SOURCE: soap_note
+openapi: 3.1.0
+info:
+  title: Soap Note — SoapNote
+  version: 1.0.0
+  description: "Main SOAP-note record for one patient encounter: encounter context, patient and clinician identification, and the four SOAP sections (Subjective, Objective, Assessment, Plan) as free text. Completeness grade, fired rules, and flags live in child tables."
+paths:
+  /soap-notes:
+    get:
+      summary: List SoapNote records
+      operationId: listSoapNote
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of SoapNote records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/SoapNote"
+    post:
+      summary: Create a new SoapNote
+      operationId: createSoapNote
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/SoapNote"
+      responses:
+        "201":
+          description: The newly created SoapNote
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SoapNote"
+        "400":
+          description: Validation error
+  /soap-notes/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one SoapNote by id
+      operationId: getSoapNote
+      responses:
+        "200":
+          description: The requested SoapNote
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SoapNote"
+        "404":
+          description: SoapNote not found
+    patch:
+      summary: Update an existing SoapNote
+      operationId: updateSoapNote
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/SoapNote"
+      responses:
+        "200":
+          description: The updated SoapNote
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SoapNote"
+        "404":
+          description: SoapNote not found
+    delete:
+      summary: Soft-delete a SoapNote
+      operationId: deleteSoapNote
+      responses:
+        "204":
+          description: SoapNote deleted
+        "404":
+          description: SoapNote not found
+components:
+  schemas:
+    SoapNote:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was updated most-recently.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was deleted a.k.a. soft-removed.
+        patient_id:
+          type: string
+          format: uuid
+          description: Foreign key to the patient this note documents (restrict delete).
+        clinician_id:
+          type: string
+          format: uuid
+          description: Foreign key to the authoring clinician (restrict delete); optional.
+        encountered_at:
+          type: string
+          format: date-time
+          description: Date and time of the patient encounter.
+        care_setting:
+          type: string
+          enum:
+            - general-practice
+            - outpatient
+            - ward
+            - emergency-department
+            - community
+            - telehealth
+            - other
+            - ""
+          description: "Care setting: general-practice, outpatient, ward, emergency-department, community, telehealth, or other."
+        encounter_type:
+          type: string
+          enum:
+            - new-problem
+            - follow-up
+            - review
+            - other
+            - ""
+          description: "Encounter type: new-problem, follow-up, review, or other."
+        clinician_role:
+          type: string
+          enum:
+            - doctor
+            - nurse
+            - paramedic
+            - pharmacist
+            - allied-health
+            - other
+            - ""
+          description: "Authoring clinician role: doctor, nurse, paramedic, pharmacist, allied-health, or other."
+        patient_identifier:
+          type: string
+          maxLength: 100
+          description: Local patient or encounter identifier as recorded on the note.
+        presenting_complaint:
+          type: string
+          description: "Subjective: the presenting complaint (required component)."
+        history_of_presenting_complaint:
+          type: string
+          description: "Subjective: the history of the presenting complaint (required component)."
+        patient_reported_symptoms:
+          type: string
+          description: "Subjective: patient-reported symptoms (optional)."
+        relevant_history:
+          type: string
+          description: "Subjective: relevant past history, medication, and allergies (optional)."
+        red_flag_symptoms:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Whether red-flag symptoms are present (yes/no); yes makes safety-netting a required component.
+        examination_findings:
+          type: string
+          description: "Objective: examination findings; satisfies the Objective section when non-empty."
+        vital_signs:
+          type: string
+          description: "Objective: recorded vital signs; satisfies the Objective section when non-empty."
+        abnormal_vitals_present:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Whether abnormal vital signs are present (yes/no); drives the abnormal-vitals-not-addressed flag.
+        investigation_results:
+          type: string
+          description: "Objective: investigation or test results; satisfies the Objective section when non-empty."
+        primary_diagnosis:
+          type: string
+          description: "Assessment: the primary diagnosis or problem (required component)."
+        problem_list:
+          type: string
+          description: "Assessment: the problem list (optional)."
+        differential:
+          type: string
+          description: "Assessment: differential diagnoses (optional)."
+        clinical_impression:
+          type: string
+          description: "Assessment: overall clinical impression (optional)."
+        investigations_plan:
+          type: string
+          description: "Plan: investigations planned."
+        treatment_plan:
+          type: string
+          description: "Plan: treatment plan."
+        referrals:
+          type: string
+          description: "Plan: referrals made or requested."
+        follow_up:
+          type: string
+          description: "Plan: follow-up arrangement; satisfies the conditional follow-up requirement."
+        safety_netting:
+          type: string
+          description: "Plan: safety-netting advice; a required component when red-flag symptoms are present or the patient is managed at home."
+        managed_at_home:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Whether the patient is managed at home (yes/no); yes makes safety-netting a required component.
+        clinical_note:
+          type: string
+          description: Optional free-text narrative shown in the summary.
+      required:
+        - created_at
+        - updated_at
+        - patient_id
+        - care_setting
+        - encounter_type
+        - clinician_role
+        - patient_identifier
+        - presenting_complaint
+        - history_of_presenting_complaint
+        - patient_reported_symptoms
+        - relevant_history
+        - red_flag_symptoms
+        - examination_findings
+        - vital_signs
+        - abnormal_vitals_present
+        - investigation_results
+        - primary_diagnosis
+        - problem_list
+        - differential
+        - clinical_impression
+        - investigations_plan
+        - treatment_plan
+        - referrals
+        - follow_up
+        - safety_netting
+        - managed_at_home
+        - clinical_note
+      description: "Main SOAP-note record for one patient encounter: encounter context, patient and clinician identification, and the four SOAP sections (Subjective, Objective, Assessment, Plan) as free text. Completeness grade, fired rules, and flags live in child tables."

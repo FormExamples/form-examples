@@ -1,0 +1,30 @@
+// Generated from sql/. Do not edit by hand.
+// SOURCE: post_anaesthesia_care_unit_record_grade_rule
+
+syntax = "proto3";
+
+package form_examples.post_anaesthesia_care_unit_record;
+
+enum PostAnaesthesiaCareUnitRecordGradeRuleParameterEnum {
+  PARAMETER_UNSPECIFIED = 0;
+  PARAMETER_ACTIVITY = 1;  // activity
+  PARAMETER_RESPIRATION = 2;  // respiration
+  PARAMETER_CIRCULATION = 3;  // circulation
+  PARAMETER_CONSCIOUSNESS = 4;  // consciousness
+  PARAMETER_OXYGEN_SATURATION = 5;  // oxygen-saturation
+  PARAMETER_PADSS = 6;  // padss
+  PARAMETER_READINESS = 7;  // readiness
+}
+
+message PostAnaesthesiaCareUnitRecordGradeRule {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string post_anaesthesia_care_unit_record_grade_id = 5;  // UUID — uuid
+  string rule_id = 6;  // VARCHAR(40) — max 40 chars
+  PostAnaesthesiaCareUnitRecordGradeRuleParameterEnum parameter = 7;  // VARCHAR(20)
+  int32 points = 8;  // INT
+  string category = 9;  // VARCHAR(50) — max 50 chars
+  string description = 10;  // VARCHAR(500) — max 500 chars
+}

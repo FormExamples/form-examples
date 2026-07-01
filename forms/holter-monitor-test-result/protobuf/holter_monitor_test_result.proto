@@ -1,0 +1,71 @@
+// Generated from sql/. Do not edit by hand.
+// SOURCE: holter_monitor_test_result
+
+syntax = "proto3";
+
+package form_examples.holter_monitor_test_result;
+
+enum HolterMonitorTestResultReportStatusEnum {
+  REPORTSTATUS_UNSPECIFIED = 0;
+  REPORTSTATUS_PRELIMINARY = 1;  // preliminary
+  REPORTSTATUS_FINAL = 2;  // final
+  REPORTSTATUS_AMENDED = 3;  // amended
+  REPORTSTATUS_CANCELLED = 4;  // cancelled
+}
+
+enum HolterMonitorTestResultMonitorTypeEnum {
+  MONITORTYPE_UNSPECIFIED = 0;
+  MONITORTYPE_V_24_HOUR = 1;  // 24-hour
+  MONITORTYPE_V_48_HOUR = 2;  // 48-hour
+  MONITORTYPE_V_7_DAY = 3;  // 7-day
+  MONITORTYPE_V_14_DAY = 4;  // 14-day
+  MONITORTYPE_EVENT_RECORDER = 5;  // event-recorder
+  MONITORTYPE_IMPLANTABLE_LOOP_RECORDER = 6;  // implantable-loop-recorder
+  MONITORTYPE_OTHER = 7;  // other
+}
+
+enum HolterMonitorTestResultPredominantRhythmEnum {
+  PREDOMINANTRHYTHM_UNSPECIFIED = 0;
+  PREDOMINANTRHYTHM_SINUS = 1;  // sinus
+  PREDOMINANTRHYTHM_ATRIAL_FIBRILLATION = 2;  // atrial-fibrillation
+  PREDOMINANTRHYTHM_PACED = 3;  // paced
+  PREDOMINANTRHYTHM_OTHER = 4;  // other
+}
+
+message HolterMonitorTestResult {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string patient_id = 5;  // UUID — uuid
+  string clinician_id = 6;  // UUID — uuid
+  string originating_request_reference = 7;  // VARCHAR(255) — max 255 chars
+  HolterMonitorTestResultReportStatusEnum report_status = 8;  // VARCHAR(15)
+  HolterMonitorTestResultMonitorTypeEnum monitor_type = 9;  // VARCHAR(30)
+  string performed_date = 10;  // DATE — iso 8601 date
+  string reported_date = 11;  // DATE — iso 8601 date
+  double recording_duration_hours = 12;  // NUMERIC(7,1) — numeric(7,1)
+  double analysed_percent = 13;  // NUMERIC(5,1) — numeric(5,1)
+  string clinical_history = 14;  // VARCHAR(1000) — max 1000 chars
+  HolterMonitorTestResultPredominantRhythmEnum predominant_rhythm = 15;  // VARCHAR(20)
+  int32 mean_heart_rate_bpm = 16;  // INTEGER
+  int32 minimum_heart_rate_bpm = 17;  // INTEGER
+  int32 maximum_heart_rate_bpm = 18;  // INTEGER
+  double longest_pause_seconds = 19;  // NUMERIC(5,2) — numeric(5,2)
+  double ventricular_ectopic_percent = 20;  // NUMERIC(5,2) — numeric(5,2)
+  double supraventricular_ectopic_percent = 21;  // NUMERIC(5,2) — numeric(5,2)
+  bool atrial_fibrillation_detected = 22;  // BOOLEAN
+  bool significant_pauses = 23;  // BOOLEAN
+  bool ventricular_tachycardia = 24;  // BOOLEAN
+  bool supraventricular_tachycardia = 25;  // BOOLEAN
+  bool high_grade_av_block = 26;  // BOOLEAN
+  bool symptom_rhythm_correlation = 27;  // BOOLEAN
+  bool normal_study = 28;  // BOOLEAN
+  string findings_narrative = 29;  // VARCHAR(2000) — max 2000 chars
+  string comparison_with_previous = 30;  // VARCHAR(1000) — max 1000 chars
+  string impression = 31;  // VARCHAR(2000) — max 2000 chars
+  string reporting_category = 32;  // VARCHAR(50) — max 50 chars
+  string recommended_follow_up = 33;  // VARCHAR(1000) — max 1000 chars
+  bool critical_result_communicated = 34;  // BOOLEAN
+  string reported_to = 35;  // VARCHAR(500) — max 500 chars
+}

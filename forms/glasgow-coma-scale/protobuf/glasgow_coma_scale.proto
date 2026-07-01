@@ -1,0 +1,119 @@
+// Generated from sql/. Do not edit by hand.
+// SOURCE: glasgow_coma_scale
+
+syntax = "proto3";
+
+package form_examples.glasgow_coma_scale;
+
+enum GlasgowComaScaleAssessorRoleEnum {
+  ASSESSORROLE_UNSPECIFIED = 0;
+  ASSESSORROLE_DOCTOR = 1;  // doctor
+  ASSESSORROLE_NURSE = 2;  // nurse
+  ASSESSORROLE_PARAMEDIC = 3;  // paramedic
+  ASSESSORROLE_EMERGENCY_MEDICAL_TECHNICIAN = 4;  // emergency-medical-technician
+  ASSESSORROLE_ADVANCED_CLINICAL_PRACTITIONER = 5;  // advanced-clinical-practitioner
+  ASSESSORROLE_NEURO_OBSERVATION_STAFF = 6;  // neuro-observation-staff
+  ASSESSORROLE_OTHER = 7;  // other
+}
+
+enum GlasgowComaScaleSettingEnum {
+  SETTING_UNSPECIFIED = 0;
+  SETTING_ED = 1;  // ed
+  SETTING_NEURO = 2;  // neuro
+  SETTING_CRITICAL_CARE = 3;  // critical-care
+  SETTING_PRE_HOSPITAL = 4;  // pre-hospital
+  SETTING_OTHER = 5;  // other
+}
+
+enum GlasgowComaScaleIntubatedEnum {
+  INTUBATED_UNSPECIFIED = 0;
+  INTUBATED_YES = 1;  // yes
+  INTUBATED_NO = 2;  // no
+}
+
+enum GlasgowComaScaleSedatedEnum {
+  SEDATED_UNSPECIFIED = 0;
+  SEDATED_YES = 1;  // yes
+  SEDATED_NO = 2;  // no
+}
+
+enum GlasgowComaScaleParalysedEnum {
+  PARALYSED_UNSPECIFIED = 0;
+  PARALYSED_YES = 1;  // yes
+  PARALYSED_NO = 2;  // no
+}
+
+enum GlasgowComaScaleEyeResponseEnum {
+  EYERESPONSE_UNSPECIFIED = 0;
+  EYERESPONSE_SPONTANEOUS = 1;  // spontaneous
+  EYERESPONSE_TO_SOUND = 2;  // to-sound
+  EYERESPONSE_TO_PRESSURE = 3;  // to-pressure
+  EYERESPONSE_NONE = 4;  // none
+  EYERESPONSE_NT = 5;  // NT
+}
+
+enum GlasgowComaScaleVerbalResponseEnum {
+  VERBALRESPONSE_UNSPECIFIED = 0;
+  VERBALRESPONSE_ORIENTATED = 1;  // orientated
+  VERBALRESPONSE_CONFUSED = 2;  // confused
+  VERBALRESPONSE_WORDS = 3;  // words
+  VERBALRESPONSE_SOUNDS = 4;  // sounds
+  VERBALRESPONSE_NONE = 5;  // none
+  VERBALRESPONSE_NT = 6;  // NT
+}
+
+enum GlasgowComaScaleMotorResponseEnum {
+  MOTORRESPONSE_UNSPECIFIED = 0;
+  MOTORRESPONSE_OBEYS_COMMANDS = 1;  // obeys-commands
+  MOTORRESPONSE_LOCALISING = 2;  // localising
+  MOTORRESPONSE_NORMAL_FLEXION = 3;  // normal-flexion
+  MOTORRESPONSE_ABNORMAL_FLEXION = 4;  // abnormal-flexion
+  MOTORRESPONSE_EXTENSION = 5;  // extension
+  MOTORRESPONSE_NONE = 6;  // none
+  MOTORRESPONSE_NT = 7;  // NT
+}
+
+enum GlasgowComaScaleLeftPupilReactivityEnum {
+  LEFTPUPILREACTIVITY_UNSPECIFIED = 0;
+  LEFTPUPILREACTIVITY_REACTIVE = 1;  // reactive
+  LEFTPUPILREACTIVITY_SLUGGISH = 2;  // sluggish
+  LEFTPUPILREACTIVITY_UNREACTIVE = 3;  // unreactive
+}
+
+enum GlasgowComaScaleRightPupilReactivityEnum {
+  RIGHTPUPILREACTIVITY_UNSPECIFIED = 0;
+  RIGHTPUPILREACTIVITY_REACTIVE = 1;  // reactive
+  RIGHTPUPILREACTIVITY_SLUGGISH = 2;  // sluggish
+  RIGHTPUPILREACTIVITY_UNREACTIVE = 3;  // unreactive
+}
+
+message GlasgowComaScale {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string patient_id = 5;  // UUID — uuid
+  string clinician_id = 6;  // UUID — uuid
+  string assessor_name = 7;  // VARCHAR(255) — max 255 chars
+  GlasgowComaScaleAssessorRoleEnum assessor_role = 8;  // VARCHAR(40)
+  string assessed_at = 9;  // TIMESTAMPTZ — iso 8601
+  GlasgowComaScaleSettingEnum setting = 10;  // VARCHAR(20)
+  string reason = 11;  // TEXT
+  GlasgowComaScaleIntubatedEnum intubated = 12;  // VARCHAR(5)
+  GlasgowComaScaleSedatedEnum sedated = 13;  // VARCHAR(5)
+  GlasgowComaScaleParalysedEnum paralysed = 14;  // VARCHAR(5)
+  GlasgowComaScaleEyeResponseEnum eye_response = 15;  // VARCHAR(15)
+  string eye_not_testable_reason = 16;  // TEXT
+  GlasgowComaScaleVerbalResponseEnum verbal_response = 17;  // VARCHAR(15)
+  string verbal_not_testable_reason = 18;  // TEXT
+  GlasgowComaScaleMotorResponseEnum motor_response = 19;  // VARCHAR(20)
+  string motor_not_testable_reason = 20;  // TEXT
+  GlasgowComaScaleLeftPupilReactivityEnum left_pupil_reactivity = 21;  // VARCHAR(15)
+  GlasgowComaScaleRightPupilReactivityEnum right_pupil_reactivity = 22;  // VARCHAR(15)
+  double left_pupil_size_mm = 23;  // NUMERIC(3,1) — numeric(3,1)
+  double right_pupil_size_mm = 24;  // NUMERIC(3,1) — numeric(3,1)
+  int32 previous_total = 25;  // INT
+  int32 previous_motor_score = 26;  // INT
+  string previous_assessed_at = 27;  // TIMESTAMPTZ — iso 8601
+  string clinical_note = 28;  // TEXT
+}

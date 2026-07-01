@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE bhutani_bilirubin_nomogram_grade SYSTEM "bhutani_bilirubin_nomogram_grade.dtd">
+<bhutani_bilirubin_nomogram_grade>
+<id>880e8400-e29b-41d4-a716-446655440003</id>
+<created_at>2026-04-09T10:00:00Z</created_at>
+<updated_at>2026-04-09T10:00:00Z</updated_at>
+<deleted_at>2026-04-09T10:00:00Z</deleted_at>
+<bhutani_bilirubin_nomogram_id>770e8400-e29b-41d4-a716-446655440002</bhutani_bilirubin_nomogram_id>
+<risk_zone>low</risk_zone>
+<percentile_band><40</percentile_band>
+<phototherapy_threshold_umol_l>0.0</phototherapy_threshold_umol_l>
+<exchange_threshold_umol_l>0.0</exchange_threshold_umol_l>
+<above_phototherapy_threshold>yes</above_phototherapy_threshold>
+<above_exchange_threshold>yes</above_exchange_threshold>
+<graded_at>2026-04-09T10:00:00Z</graded_at>
+</bhutani_bilirubin_nomogram_grade>

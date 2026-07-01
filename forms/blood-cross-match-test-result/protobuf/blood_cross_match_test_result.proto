@@ -1,0 +1,99 @@
+// Generated from sql/. Do not edit by hand.
+// SOURCE: blood_cross_match_test_result
+
+syntax = "proto3";
+
+package form_examples.blood_cross_match_test_result;
+
+enum BloodCrossMatchTestResultReportStatusEnum {
+  REPORTSTATUS_UNSPECIFIED = 0;
+  REPORTSTATUS_PRELIMINARY = 1;  // preliminary
+  REPORTSTATUS_FINAL = 2;  // final
+  REPORTSTATUS_AMENDED = 3;  // amended
+  REPORTSTATUS_CANCELLED = 4;  // cancelled
+}
+
+enum BloodCrossMatchTestResultRequestTypeEnum {
+  REQUESTTYPE_UNSPECIFIED = 0;
+  REQUESTTYPE_GROUP_AND_SAVE = 1;  // group-and-save
+  REQUESTTYPE_CROSSMATCH = 2;  // crossmatch
+  REQUESTTYPE_ANTIBODY_SCREEN = 3;  // antibody-screen
+  REQUESTTYPE_EMERGENCY_ISSUE = 4;  // emergency-issue
+}
+
+enum BloodCrossMatchTestResultAboGroupEnum {
+  ABOGROUP_UNSPECIFIED = 0;
+  ABOGROUP_A = 1;  // a
+  ABOGROUP_B = 2;  // b
+  ABOGROUP_O = 3;  // o
+  ABOGROUP_AB = 4;  // ab
+}
+
+enum BloodCrossMatchTestResultRhdGroupEnum {
+  RHDGROUP_UNSPECIFIED = 0;
+  RHDGROUP_POSITIVE = 1;  // positive
+  RHDGROUP_NEGATIVE = 2;  // negative
+}
+
+enum BloodCrossMatchTestResultAntibodyScreenResultEnum {
+  ANTIBODYSCREENRESULT_UNSPECIFIED = 0;
+  ANTIBODYSCREENRESULT_NEGATIVE = 1;  // negative
+  ANTIBODYSCREENRESULT_POSITIVE = 2;  // positive
+}
+
+enum BloodCrossMatchTestResultCrossmatchResultEnum {
+  CROSSMATCHRESULT_UNSPECIFIED = 0;
+  CROSSMATCHRESULT_COMPATIBLE = 1;  // compatible
+  CROSSMATCHRESULT_INCOMPATIBLE = 2;  // incompatible
+  CROSSMATCHRESULT_ELECTRONIC_ISSUE = 3;  // electronic-issue
+  CROSSMATCHRESULT_NOT_PERFORMED = 4;  // not-performed
+}
+
+enum BloodCrossMatchTestResultComponentEnum {
+  COMPONENT_UNSPECIFIED = 0;
+  COMPONENT_RED_CELLS = 1;  // red-cells
+  COMPONENT_PLATELETS = 2;  // platelets
+  COMPONENT_FRESH_FROZEN_PLASMA = 3;  // fresh-frozen-plasma
+  COMPONENT_CRYOPRECIPITATE = 4;  // cryoprecipitate
+  COMPONENT_NONE = 5;  // none
+}
+
+enum BloodCrossMatchTestResultOverallResultStatusEnum {
+  OVERALLRESULTSTATUS_UNSPECIFIED = 0;
+  OVERALLRESULTSTATUS_NORMAL = 1;  // normal
+  OVERALLRESULTSTATUS_ABNORMAL = 2;  // abnormal
+  OVERALLRESULTSTATUS_CRITICAL = 3;  // critical
+}
+
+message BloodCrossMatchTestResult {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string patient_id = 5;  // UUID — uuid
+  string clinician_id = 6;  // UUID — uuid
+  string originating_request_reference = 7;  // VARCHAR(255) — max 255 chars
+  BloodCrossMatchTestResultReportStatusEnum report_status = 8;  // VARCHAR(15)
+  string performed_date = 9;  // DATE — iso 8601 date
+  string reported_date = 10;  // DATE — iso 8601 date
+  BloodCrossMatchTestResultRequestTypeEnum request_type = 11;  // VARCHAR(20)
+  string clinical_history = 12;  // VARCHAR(1000) — max 1000 chars
+  BloodCrossMatchTestResultAboGroupEnum abo_group = 13;  // VARCHAR(2)
+  BloodCrossMatchTestResultRhdGroupEnum rhd_group = 14;  // VARCHAR(10)
+  BloodCrossMatchTestResultAntibodyScreenResultEnum antibody_screen_result = 15;  // VARCHAR(10)
+  string antibodies_identified = 16;  // VARCHAR(1000) — max 1000 chars
+  BloodCrossMatchTestResultCrossmatchResultEnum crossmatch_result = 17;  // VARCHAR(20)
+  BloodCrossMatchTestResultComponentEnum component = 18;  // VARCHAR(20)
+  int32 units_crossmatched = 19;  // INTEGER
+  int32 units_available = 20;  // INTEGER
+  bool two_sample_rule_met = 21;  // BOOLEAN
+  string special_requirements = 22;  // VARCHAR(1000) — max 1000 chars
+  bool historical_group_concordant = 23;  // BOOLEAN
+  BloodCrossMatchTestResultOverallResultStatusEnum overall_result_status = 24;  // VARCHAR(10)
+  string findings_narrative = 25;  // VARCHAR(2000) — max 2000 chars
+  string impression = 26;  // VARCHAR(2000) — max 2000 chars
+  string reporting_category = 27;  // VARCHAR(50) — max 50 chars
+  string recommended_follow_up = 28;  // VARCHAR(1000) — max 1000 chars
+  bool critical_result_communicated = 29;  // BOOLEAN
+  string reported_to = 30;  // VARCHAR(500) — max 500 chars
+}

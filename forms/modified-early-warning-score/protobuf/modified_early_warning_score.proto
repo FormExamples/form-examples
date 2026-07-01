@@ -1,0 +1,50 @@
+// Generated from sql/. Do not edit by hand.
+// SOURCE: modified_early_warning_score
+
+syntax = "proto3";
+
+package form_examples.modified_early_warning_score;
+
+enum ModifiedEarlyWarningScoreStatusEnum {
+  STATUS_UNSPECIFIED = 0;
+  STATUS_DRAFT = 1;  // draft
+  STATUS_SUBMITTED = 2;  // submitted
+  STATUS_AMENDED = 3;  // amended
+  STATUS_SIGNED = 4;  // signed
+}
+
+enum ModifiedEarlyWarningScoreCareSettingEnum {
+  CARESETTING_UNSPECIFIED = 0;
+  CARESETTING_ACUTE_WARD = 1;  // acute-ward
+  CARESETTING_ADMISSIONS_UNIT = 2;  // admissions-unit
+  CARESETTING_ASSESSMENT_UNIT = 3;  // assessment-unit
+  CARESETTING_OTHER = 4;  // other
+}
+
+enum ModifiedEarlyWarningScoreConsciousnessAvpuEnum {
+  CONSCIOUSNESSAVPU_UNSPECIFIED = 0;
+  CONSCIOUSNESSAVPU_A = 1;  // A
+  CONSCIOUSNESSAVPU_V = 2;  // V
+  CONSCIOUSNESSAVPU_P = 3;  // P
+  CONSCIOUSNESSAVPU_U = 4;  // U
+}
+
+message ModifiedEarlyWarningScore {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string patient_id = 5;  // UUID — uuid
+  string clinician_id = 6;  // UUID — uuid
+  ModifiedEarlyWarningScoreStatusEnum status = 7;  // VARCHAR(20)
+  string observation_at = 8;  // TIMESTAMPTZ — iso 8601
+  ModifiedEarlyWarningScoreCareSettingEnum care_setting = 9;  // VARCHAR(20)
+  string ward_or_location = 10;  // VARCHAR(255) — max 255 chars
+  int32 systolic_blood_pressure = 11;  // INTEGER
+  int32 heart_rate = 12;  // INTEGER
+  int32 respiratory_rate = 13;  // INTEGER
+  double temperature = 14;  // NUMERIC(4,1) — numeric(4,1)
+  ModifiedEarlyWarningScoreConsciousnessAvpuEnum consciousness_avpu = 15;  // VARCHAR(1)
+  int32 previous_mews_score = 16;  // INTEGER
+  string clinical_notes = 17;  // TEXT
+}

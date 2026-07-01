@@ -1,0 +1,37 @@
+// Generated from sql/. Do not edit by hand.
+// SOURCE: heart_failure_review_grade_flag
+
+syntax = "proto3";
+
+package form_examples.heart_failure_review;
+
+enum HeartFailureReviewGradeFlagCategoryEnum {
+  CATEGORY_UNSPECIFIED = 0;
+  CATEGORY_URGENT_REVIEW = 1;  // urgent-review
+  CATEGORY_OPTIMISATION_GAP = 2;  // optimisation-gap
+  CATEGORY_DERANGED_U_E_HYPERKALAEMIA = 3;  // deranged-u-e-hyperkalaemia
+  CATEGORY_FLUID_OVERLOAD = 4;  // fluid-overload
+  CATEGORY_MISSING_MONITORING = 5;  // missing-monitoring
+  CATEGORY_INCOMPLETE = 6;  // incomplete
+  CATEGORY_OTHER = 7;  // other
+}
+
+enum HeartFailureReviewGradeFlagPriorityEnum {
+  PRIORITY_UNSPECIFIED = 0;
+  PRIORITY_LOW = 1;  // low
+  PRIORITY_MEDIUM = 2;  // medium
+  PRIORITY_HIGH = 3;  // high
+}
+
+message HeartFailureReviewGradeFlag {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string heart_failure_review_grade_id = 5;  // UUID — uuid
+  string flag_id = 6;  // VARCHAR(50) — max 50 chars
+  HeartFailureReviewGradeFlagCategoryEnum category = 7;  // VARCHAR(35)
+  HeartFailureReviewGradeFlagPriorityEnum priority = 8;  // VARCHAR(10)
+  string description = 9;  // VARCHAR(500) — max 500 chars
+  string suggested_action = 10;  // VARCHAR(500) — max 500 chars
+}

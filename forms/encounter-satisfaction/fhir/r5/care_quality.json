@@ -53,12 +53,12 @@
         "coding": [
           {
             "system": "urn:form-examples:encounter-satisfaction",
-            "code": "NULL",
-            "display": "Null"
+            "code": "involvement_in_decisions",
+            "display": "Involvement In Decisions"
           }
         ]
       },
-      "valueString": ""
+      "valueInteger": 1
     },
     {
       "code": {

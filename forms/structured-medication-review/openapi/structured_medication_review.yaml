@@ -1,0 +1,261 @@
+# Generated from sql/. Do not edit by hand.
+# SOURCE: structured_medication_review
+openapi: 3.1.0
+info:
+  title: Structured Medication Review — StructuredMedicationReview
+  version: 1.0.0
+  description: "Parent structured medication review header: reviewing context, patient identification and frailty context, presenting problems and priorities, monitoring due, and shared decisions and follow-up plan."
+paths:
+  /structured-medication-reviews:
+    get:
+      summary: List StructuredMedicationReview records
+      operationId: listStructuredMedicationReview
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of StructuredMedicationReview records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/StructuredMedicationReview"
+    post:
+      summary: Create a new StructuredMedicationReview
+      operationId: createStructuredMedicationReview
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/StructuredMedicationReview"
+      responses:
+        "201":
+          description: The newly created StructuredMedicationReview
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/StructuredMedicationReview"
+        "400":
+          description: Validation error
+  /structured-medication-reviews/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one StructuredMedicationReview by id
+      operationId: getStructuredMedicationReview
+      responses:
+        "200":
+          description: The requested StructuredMedicationReview
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/StructuredMedicationReview"
+        "404":
+          description: StructuredMedicationReview not found
+    patch:
+      summary: Update an existing StructuredMedicationReview
+      operationId: updateStructuredMedicationReview
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/StructuredMedicationReview"
+      responses:
+        "200":
+          description: The updated StructuredMedicationReview
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/StructuredMedicationReview"
+        "404":
+          description: StructuredMedicationReview not found
+    delete:
+      summary: Soft-delete a StructuredMedicationReview
+      operationId: deleteStructuredMedicationReview
+      responses:
+        "204":
+          description: StructuredMedicationReview deleted
+        "404":
+          description: StructuredMedicationReview not found
+components:
+  schemas:
+    StructuredMedicationReview:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was updated most-recently.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was deleted a.k.a. soft-removed.
+        patient_id:
+          type: string
+          format: uuid
+          description: Foreign key to the patient this review is for (restricted delete).
+        clinician_id:
+          type: string
+          format: uuid
+          description: Foreign key to the reviewing clinician (restricted delete); optional.
+        clinician_name:
+          type: string
+          description: Name of the reviewing clinician as entered on the review.
+        clinician_role:
+          type: string
+          enum:
+            - clinical-pharmacist
+            - gp
+            - pharmacy-technician
+            - other
+            - ""
+          description: "Role of the reviewing clinician: clinical-pharmacist, gp, pharmacy-technician, or other."
+        reviewed_at:
+          type: string
+          format: date-time
+          description: Date and time the review was carried out.
+        care_setting:
+          type: string
+          enum:
+            - gp-practice
+            - pcn
+            - care-home
+            - community-pharmacy
+            - patient-home
+            - ""
+          description: "Care setting: gp-practice, pcn, care-home, community-pharmacy, or patient-home."
+        consultation_mode:
+          type: string
+          enum:
+            - face-to-face
+            - telephone
+            - video
+            - home-visit
+            - ""
+          description: "Consultation mode: face-to-face, telephone, video, or home-visit."
+        patient_identifier:
+          type: string
+          description: Local patient identifier as entered on the review.
+        age_band:
+          type: string
+          enum:
+            - 18-39
+            - 40-64
+            - 65-74
+            - 75-84
+            - 85-plus
+            - ""
+          description: "Patient adult age band: 18-39, 40-64, 65-74, 75-84, or 85-plus."
+        sex:
+          type: string
+          enum:
+            - female
+            - male
+            - intersex
+            - unknown
+            - ""
+          description: "Patient sex: female, male, intersex, or unknown."
+        frailty_status:
+          type: string
+          enum:
+            - fit
+            - mild
+            - moderate
+            - severe
+            - ""
+          description: "Patient frailty status: fit, mild, moderate, or severe."
+        lives_in_care_home:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: "Whether the patient lives in a care home: yes or no."
+        long_term_conditions:
+          type: string
+          description: Comma-separated list of the patient long-term conditions.
+        presenting_problems:
+          type: string
+          description: Reasons for the review / presenting medication problems.
+        patient_reported_issues:
+          type: string
+          description: Side effects and difficulties reported by the patient.
+        what_matters_to_patient:
+          type: string
+          description: The patient priorities and what matters most to them.
+        shared_decisions:
+          type: string
+          description: Decisions agreed together with the patient.
+        monitoring_due:
+          type: string
+          description: Tests / bloods due or outstanding for the patient medicines.
+        overdue_monitoring_count:
+          type: integer
+          format: int32
+          description: Count of monitoring items that are overdue; null when unanswered.
+        follow_up_plan:
+          type: string
+          description: Agreed follow-up plan and actions.
+        follow_up_date:
+          type: string
+          format: date
+          description: Date the next review is due.
+        review_completed:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: "Whether the clinician marked the review as completed: yes or no."
+      required:
+        - created_at
+        - updated_at
+        - patient_id
+        - clinician_name
+        - clinician_role
+        - care_setting
+        - consultation_mode
+        - patient_identifier
+        - age_band
+        - sex
+        - frailty_status
+        - lives_in_care_home
+        - long_term_conditions
+        - presenting_problems
+        - patient_reported_issues
+        - what_matters_to_patient
+        - shared_decisions
+        - monitoring_due
+        - follow_up_plan
+        - review_completed
+      description: "Parent structured medication review header: reviewing context, patient identification and frailty context, presenting problems and priorities, monitoring due, and shared decisions and follow-up plan."

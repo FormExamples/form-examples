@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mental_state_examination SYSTEM "mental_state_examination.dtd">
+<mental_state_examination>
+<id>770e8400-e29b-41d4-a716-446655440002</id>
+<created_at>2026-04-09T10:00:00Z</created_at>
+<updated_at>2026-04-09T10:00:00Z</updated_at>
+<deleted_at>2026-04-09T10:00:00Z</deleted_at>
+<patient_id>550e8400-e29b-41d4-a716-446655440000</patient_id>
+<clinician_id>660e8400-e29b-41d4-a716-446655440001</clinician_id>
+<clinician_name>Example</clinician_name>
+<clinician_role>psychiatrist</clinician_role>
+<assessed_at>2026-04-09T10:00:00Z</assessed_at>
+<care_setting>outpatient</care_setting>
+<assessment_reason>Example text.</assessment_reason>
+<patient_identifier></patient_identifier>
+<age_band>under-18</age_band>
+<sex>female</sex>
+<appearance_grooming>well-kempt</appearance_grooming>
+<appearance_eye_contact>normal</appearance_eye_contact>
+<appearance_rapport>good</appearance_rapport>
+<appearance_psychomotor>normal</appearance_psychomotor>
+<appearance_abnormal_movements></appearance_abnormal_movements>
+<appearance_notes>Example text.</appearance_notes>
+<speech_rate>normal</speech_rate>
+<speech_volume>normal</speech_volume>
+<speech_quantity>normal</speech_quantity>
+<speech_fluency>fluent</speech_fluency>
+<speech_notes>Example text.</speech_notes>
+<mood_subjective></mood_subjective>
+<mood_descriptor>euthymic</mood_descriptor>
+<affect_range>full</affect_range>
+<affect_congruence>congruent</affect_congruence>
+<affect_reactivity>reactive</affect_reactivity>
+<emotion_notes>Example text.</emotion_notes>
+<hallucinations_present>none</hallucinations_present>
+<command_hallucinations>yes</command_hallucinations>
+<illusions>present</illusions>
+<depersonalisation>present</depersonalisation>
+<derealisation>present</derealisation>
+<perception_notes>Example text.</perception_notes>
+<thought_form>linear</thought_form>
+<delusions>none</delusions>
+<obsessions>present</obsessions>
+<suicidal_ideation>none</suicidal_ideation>
+<homicidal_ideation>none</homicidal_ideation>
+<self_harm_thoughts>none</self_harm_thoughts>
+<thought_notes>Example text.</thought_notes>
+<insight_level>full</insight_level>
+<treatment_understanding>accepts</treatment_understanding>
+<judgement>intact</judgement>
+<insight_notes>Example text.</insight_notes>
+<orientation>orientated</orientation>
+<attention>normal</attention>
+<memory>intact</memory>
+<cognitive_impression>no-concern</cognitive_impression>
+<cognition_notes>Example text.</cognition_notes>
+<clinical_formulation>Example Hospital</clinical_formulation>
+</mental_state_examination>

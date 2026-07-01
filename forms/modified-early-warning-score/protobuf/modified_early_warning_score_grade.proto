@@ -1,0 +1,37 @@
+// Generated from sql/. Do not edit by hand.
+// SOURCE: modified_early_warning_score_grade
+
+syntax = "proto3";
+
+package form_examples.modified_early_warning_score;
+
+enum ModifiedEarlyWarningScoreGradeSingleParameterTriggerEnum {
+  SINGLEPARAMETERTRIGGER_UNSPECIFIED = 0;
+  SINGLEPARAMETERTRIGGER_YES = 1;  // yes
+  SINGLEPARAMETERTRIGGER_NO = 2;  // no
+}
+
+enum ModifiedEarlyWarningScoreGradeRiskBandEnum {
+  RISKBAND_UNSPECIFIED = 0;
+  RISKBAND_LOW = 1;  // low
+  RISKBAND_MEDIUM = 2;  // medium
+  RISKBAND_HIGH = 3;  // high
+}
+
+message ModifiedEarlyWarningScoreGrade {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string modified_early_warning_score_id = 5;  // UUID — uuid
+  int32 aggregate_score = 6;  // INTEGER
+  int32 systolic_blood_pressure_score = 7;  // INTEGER
+  int32 heart_rate_score = 8;  // INTEGER
+  int32 respiratory_rate_score = 9;  // INTEGER
+  int32 temperature_score = 10;  // INTEGER
+  int32 avpu_score = 11;  // INTEGER
+  ModifiedEarlyWarningScoreGradeSingleParameterTriggerEnum single_parameter_trigger = 12;  // VARCHAR(5)
+  ModifiedEarlyWarningScoreGradeRiskBandEnum risk_band = 13;  // VARCHAR(10)
+  string monitoring_frequency = 14;  // TEXT
+  string graded_at = 15;  // TIMESTAMPTZ — iso 8601
+}

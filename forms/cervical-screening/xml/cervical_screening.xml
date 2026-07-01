@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE cervical_screening SYSTEM "cervical_screening.dtd">
+<cervical_screening>
+<id>770e8400-e29b-41d4-a716-446655440002</id>
+<created_at>2026-04-09T10:00:00Z</created_at>
+<updated_at>2026-04-09T10:00:00Z</updated_at>
+<deleted_at>2026-04-09T10:00:00Z</deleted_at>
+<patient_id>550e8400-e29b-41d4-a716-446655440000</patient_id>
+<clinician_id>660e8400-e29b-41d4-a716-446655440001</clinician_id>
+<care_setting>general-practice</care_setting>
+<sample_taker_role>practice-nurse</sample_taker_role>
+<sample_taken_at>2026-04-09T10:00:00Z</sample_taken_at>
+<patient_identifier></patient_identifier>
+<age>45</age>
+<recall_interval>three-yearly</recall_interval>
+<screen_due_date>2026-01-15</screen_due_date>
+<last_screen_date>2026-01-15</last_screen_date>
+<overdue>yes</overdue>
+<previously_ceased>yes</previously_ceased>
+<consent_given>yes</consent_given>
+<symptomatic>yes</symptomatic>
+<symptom_detail>Fatigue</symptom_detail>
+<sample_adequacy>adequate</sample_adequacy>
+<inadequate_reason>insufficient-cells</inadequate_reason>
+<hpv_result>negative</hpv_result>
+<cytology_grade>negative</cytology_grade>
+<clinical_context>Example text.</clinical_context>
+</cervical_screening>

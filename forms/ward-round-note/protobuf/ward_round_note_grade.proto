@@ -1,0 +1,80 @@
+// Generated from sql/. Do not edit by hand.
+// SOURCE: ward_round_note_grade
+
+syntax = "proto3";
+
+package form_examples.ward_round_note;
+
+enum WardRoundNoteGradeStatusEnum {
+  STATUS_UNSPECIFIED = 0;
+  STATUS_COMPLETE = 1;  // complete
+  STATUS_PARTIAL = 2;  // partial
+  STATUS_INCOMPLETE = 3;  // incomplete
+}
+
+enum WardRoundNoteGradeHeaderDocumentedEnum {
+  HEADERDOCUMENTED_UNSPECIFIED = 0;
+  HEADERDOCUMENTED_YES = 1;  // yes
+  HEADERDOCUMENTED_NO = 2;  // no
+}
+
+enum WardRoundNoteGradeProblemsDocumentedEnum {
+  PROBLEMSDOCUMENTED_UNSPECIFIED = 0;
+  PROBLEMSDOCUMENTED_YES = 1;  // yes
+  PROBLEMSDOCUMENTED_NO = 2;  // no
+}
+
+enum WardRoundNoteGradeExaminationDocumentedEnum {
+  EXAMINATIONDOCUMENTED_UNSPECIFIED = 0;
+  EXAMINATIONDOCUMENTED_YES = 1;  // yes
+  EXAMINATIONDOCUMENTED_NO = 2;  // no
+}
+
+enum WardRoundNoteGradeInvestigationsDocumentedEnum {
+  INVESTIGATIONSDOCUMENTED_UNSPECIFIED = 0;
+  INVESTIGATIONSDOCUMENTED_YES = 1;  // yes
+  INVESTIGATIONSDOCUMENTED_NO = 2;  // no
+}
+
+enum WardRoundNoteGradeVteDocumentedEnum {
+  VTEDOCUMENTED_UNSPECIFIED = 0;
+  VTEDOCUMENTED_YES = 1;  // yes
+  VTEDOCUMENTED_NO = 2;  // no
+}
+
+enum WardRoundNoteGradeMedicationDocumentedEnum {
+  MEDICATIONDOCUMENTED_UNSPECIFIED = 0;
+  MEDICATIONDOCUMENTED_YES = 1;  // yes
+  MEDICATIONDOCUMENTED_NO = 2;  // no
+}
+
+enum WardRoundNoteGradePlanDocumentedEnum {
+  PLANDOCUMENTED_UNSPECIFIED = 0;
+  PLANDOCUMENTED_YES = 1;  // yes
+  PLANDOCUMENTED_NO = 2;  // no
+}
+
+enum WardRoundNoteGradeEscalationDocumentedEnum {
+  ESCALATIONDOCUMENTED_UNSPECIFIED = 0;
+  ESCALATIONDOCUMENTED_YES = 1;  // yes
+  ESCALATIONDOCUMENTED_NO = 2;  // no
+}
+
+message WardRoundNoteGrade {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string ward_round_note_id = 5;  // UUID — uuid
+  WardRoundNoteGradeStatusEnum status = 6;  // VARCHAR(15)
+  int32 completeness_percent = 7;  // INTEGER
+  WardRoundNoteGradeHeaderDocumentedEnum header_documented = 8;  // VARCHAR(5)
+  WardRoundNoteGradeProblemsDocumentedEnum problems_documented = 9;  // VARCHAR(5)
+  WardRoundNoteGradeExaminationDocumentedEnum examination_documented = 10;  // VARCHAR(5)
+  WardRoundNoteGradeInvestigationsDocumentedEnum investigations_documented = 11;  // VARCHAR(5)
+  WardRoundNoteGradeVteDocumentedEnum vte_documented = 12;  // VARCHAR(5)
+  WardRoundNoteGradeMedicationDocumentedEnum medication_documented = 13;  // VARCHAR(5)
+  WardRoundNoteGradePlanDocumentedEnum plan_documented = 14;  // VARCHAR(5)
+  WardRoundNoteGradeEscalationDocumentedEnum escalation_documented = 15;  // VARCHAR(5)
+  string graded_at = 16;  // TIMESTAMPTZ — iso 8601
+}

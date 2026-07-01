@@ -1,0 +1,167 @@
+# Generated from sql/. Do not edit by hand.
+# SOURCE: anaesthetic_record_timed_observation
+openapi: 3.1.0
+info:
+  title: Anaesthetic Record — AnaestheticRecordTimedObservation
+  version: 1.0.0
+  description: "Timed physiological observations charted during the anaesthetic: time plus monitored values."
+paths:
+  /anaesthetic-record-timed-observations:
+    get:
+      summary: List AnaestheticRecordTimedObservation records
+      operationId: listAnaestheticRecordTimedObservation
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of AnaestheticRecordTimedObservation records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/AnaestheticRecordTimedObservation"
+    post:
+      summary: Create a new AnaestheticRecordTimedObservation
+      operationId: createAnaestheticRecordTimedObservation
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/AnaestheticRecordTimedObservation"
+      responses:
+        "201":
+          description: The newly created AnaestheticRecordTimedObservation
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AnaestheticRecordTimedObservation"
+        "400":
+          description: Validation error
+  /anaesthetic-record-timed-observations/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one AnaestheticRecordTimedObservation by id
+      operationId: getAnaestheticRecordTimedObservation
+      responses:
+        "200":
+          description: The requested AnaestheticRecordTimedObservation
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AnaestheticRecordTimedObservation"
+        "404":
+          description: AnaestheticRecordTimedObservation not found
+    patch:
+      summary: Update an existing AnaestheticRecordTimedObservation
+      operationId: updateAnaestheticRecordTimedObservation
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/AnaestheticRecordTimedObservation"
+      responses:
+        "200":
+          description: The updated AnaestheticRecordTimedObservation
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AnaestheticRecordTimedObservation"
+        "404":
+          description: AnaestheticRecordTimedObservation not found
+    delete:
+      summary: Soft-delete a AnaestheticRecordTimedObservation
+      operationId: deleteAnaestheticRecordTimedObservation
+      responses:
+        "204":
+          description: AnaestheticRecordTimedObservation deleted
+        "404":
+          description: AnaestheticRecordTimedObservation not found
+components:
+  schemas:
+    AnaestheticRecordTimedObservation:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was most recently updated.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was soft-deleted.
+        anaesthetic_record_id:
+          type: string
+          format: uuid
+          description: Foreign key to the parent anaesthetic record.
+        observed_at:
+          type: string
+          format: date-time
+          description: Timestamp of the timed observation.
+        systolic_blood_pressure:
+          type: number
+          format: double
+          description: Systolic blood pressure in mmHg.
+        diastolic_blood_pressure:
+          type: number
+          format: double
+          description: Diastolic blood pressure in mmHg.
+        heart_rate:
+          type: number
+          format: double
+          description: Heart rate in beats per minute.
+        spo2:
+          type: number
+          format: double
+          description: Peripheral oxygen saturation (SpO2) as a percentage.
+        end_tidal_co2:
+          type: number
+          format: double
+          description: End-tidal carbon dioxide in kPa.
+        temperature:
+          type: number
+          format: double
+          description: Core temperature in degrees Celsius.
+        agent_percent:
+          type: number
+          format: double
+          description: Inspired or expired volatile agent concentration as a percentage.
+        fresh_gas_flow_l:
+          type: number
+          format: double
+          description: Fresh gas flow in litres per minute.
+      required:
+        - created_at
+        - updated_at
+        - anaesthetic_record_id
+      description: "Timed physiological observations charted during the anaesthetic: time plus monitored values."

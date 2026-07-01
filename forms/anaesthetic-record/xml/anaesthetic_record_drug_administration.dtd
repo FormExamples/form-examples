@@ -1,0 +1,12 @@
+<!ELEMENT anaesthetic_record_drug_administration (id,created_at,updated_at,deleted_at,anaesthetic_record_id,drug_name,dose,dose_unit,route,category,administered_at)>
+<!ELEMENT id (#PCDATA)>
+<!ELEMENT created_at (#PCDATA)>
+<!ELEMENT updated_at (#PCDATA)>
+<!ELEMENT deleted_at (#PCDATA)>
+<!ELEMENT anaesthetic_record_id (#PCDATA)>
+<!ELEMENT drug_name (#PCDATA)>
+<!ELEMENT dose (#PCDATA)>
+<!ELEMENT dose_unit (#PCDATA)>
+<!ELEMENT route (#PCDATA)>
+<!ELEMENT category (#PCDATA)>
+<!ELEMENT administered_at (#PCDATA)>

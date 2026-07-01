@@ -1,0 +1,27 @@
+// Generated from sql/. Do not edit by hand.
+// SOURCE: cervical_screening_grade_rule
+
+syntax = "proto3";
+
+package form_examples.cervical_screening;
+
+enum CervicalScreeningGradeRuleStageEnum {
+  STAGE_UNSPECIFIED = 0;
+  STAGE_ELIGIBILITY = 1;  // eligibility
+  STAGE_ADEQUACY = 2;  // adequacy
+  STAGE_HPV = 3;  // hpv
+  STAGE_CYTOLOGY = 4;  // cytology
+  STAGE_COMPLETENESS = 5;  // completeness
+}
+
+message CervicalScreeningGradeRule {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string cervical_screening_grade_id = 5;  // UUID — uuid
+  string rule_id = 6;  // VARCHAR(40) — max 40 chars
+  CervicalScreeningGradeRuleStageEnum stage = 7;  // VARCHAR(20)
+  string category = 8;  // VARCHAR(50) — max 50 chars
+  string description = 9;  // VARCHAR(500) — max 500 chars
+}

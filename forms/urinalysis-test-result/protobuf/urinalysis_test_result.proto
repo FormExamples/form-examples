@@ -1,0 +1,147 @@
+// Generated from sql/. Do not edit by hand.
+// SOURCE: urinalysis_test_result
+
+syntax = "proto3";
+
+package form_examples.urinalysis_test_result;
+
+enum UrinalysisTestResultReportStatusEnum {
+  REPORTSTATUS_UNSPECIFIED = 0;
+  REPORTSTATUS_PRELIMINARY = 1;  // preliminary
+  REPORTSTATUS_FINAL = 2;  // final
+  REPORTSTATUS_AMENDED = 3;  // amended
+  REPORTSTATUS_CANCELLED = 4;  // cancelled
+}
+
+enum UrinalysisTestResultSpecimenTypeEnum {
+  SPECIMENTYPE_UNSPECIFIED = 0;
+  SPECIMENTYPE_MIDSTREAM = 1;  // midstream
+  SPECIMENTYPE_CATHETER = 2;  // catheter
+  SPECIMENTYPE_CLEAN_CATCH = 3;  // clean-catch
+  SPECIMENTYPE_V_24H = 4;  // 24h
+  SPECIMENTYPE_RANDOM = 5;  // random
+}
+
+enum UrinalysisTestResultSpecimenConditionEnum {
+  SPECIMENCONDITION_UNSPECIFIED = 0;
+  SPECIMENCONDITION_SATISFACTORY = 1;  // satisfactory
+  SPECIMENCONDITION_CONTAMINATED = 2;  // contaminated
+  SPECIMENCONDITION_INSUFFICIENT = 3;  // insufficient
+  SPECIMENCONDITION_DELAYED = 4;  // delayed
+}
+
+enum UrinalysisTestResultLeucocytesEnum {
+  LEUCOCYTES_UNSPECIFIED = 0;
+  LEUCOCYTES_NEGATIVE = 1;  // negative
+  LEUCOCYTES_TRACE = 2;  // trace
+  LEUCOCYTES_PLUS_ONE = 3;  // plus-one
+  LEUCOCYTES_PLUS_TWO = 4;  // plus-two
+  LEUCOCYTES_PLUS_THREE = 5;  // plus-three
+}
+
+enum UrinalysisTestResultNitritesEnum {
+  NITRITES_UNSPECIFIED = 0;
+  NITRITES_NEGATIVE = 1;  // negative
+  NITRITES_POSITIVE = 2;  // positive
+}
+
+enum UrinalysisTestResultProteinEnum {
+  PROTEIN_UNSPECIFIED = 0;
+  PROTEIN_NEGATIVE = 1;  // negative
+  PROTEIN_TRACE = 2;  // trace
+  PROTEIN_PLUS_ONE = 3;  // plus-one
+  PROTEIN_PLUS_TWO = 4;  // plus-two
+  PROTEIN_PLUS_THREE = 5;  // plus-three
+}
+
+enum UrinalysisTestResultBloodEnum {
+  BLOOD_UNSPECIFIED = 0;
+  BLOOD_NEGATIVE = 1;  // negative
+  BLOOD_TRACE = 2;  // trace
+  BLOOD_PLUS_ONE = 3;  // plus-one
+  BLOOD_PLUS_TWO = 4;  // plus-two
+  BLOOD_PLUS_THREE = 5;  // plus-three
+}
+
+enum UrinalysisTestResultGlucoseEnum {
+  GLUCOSE_UNSPECIFIED = 0;
+  GLUCOSE_NEGATIVE = 1;  // negative
+  GLUCOSE_TRACE = 2;  // trace
+  GLUCOSE_PLUS_ONE = 3;  // plus-one
+  GLUCOSE_PLUS_TWO = 4;  // plus-two
+  GLUCOSE_PLUS_THREE = 5;  // plus-three
+}
+
+enum UrinalysisTestResultKetonesEnum {
+  KETONES_UNSPECIFIED = 0;
+  KETONES_NEGATIVE = 1;  // negative
+  KETONES_TRACE = 2;  // trace
+  KETONES_PLUS_ONE = 3;  // plus-one
+  KETONES_PLUS_TWO = 4;  // plus-two
+  KETONES_PLUS_THREE = 5;  // plus-three
+}
+
+enum UrinalysisTestResultBilirubinEnum {
+  BILIRUBIN_UNSPECIFIED = 0;
+  BILIRUBIN_NEGATIVE = 1;  // negative
+  BILIRUBIN_TRACE = 2;  // trace
+  BILIRUBIN_PLUS_ONE = 3;  // plus-one
+  BILIRUBIN_PLUS_TWO = 4;  // plus-two
+  BILIRUBIN_PLUS_THREE = 5;  // plus-three
+}
+
+enum UrinalysisTestResultCultureResultEnum {
+  CULTURERESULT_UNSPECIFIED = 0;
+  CULTURERESULT_NO_GROWTH = 1;  // no-growth
+  CULTURERESULT_MIXED_GROWTH_LIKELY_CONTAMINANT = 2;  // mixed-growth-likely-contaminant
+  CULTURERESULT_SIGNIFICANT_GROWTH = 3;  // significant-growth
+}
+
+enum UrinalysisTestResultOverallResultStatusEnum {
+  OVERALLRESULTSTATUS_UNSPECIFIED = 0;
+  OVERALLRESULTSTATUS_NORMAL = 1;  // normal
+  OVERALLRESULTSTATUS_ABNORMAL = 2;  // abnormal
+  OVERALLRESULTSTATUS_CRITICAL = 3;  // critical
+}
+
+message UrinalysisTestResult {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string patient_id = 5;  // UUID — uuid
+  string clinician_id = 6;  // UUID — uuid
+  string originating_request_reference = 7;  // VARCHAR(255) — max 255 chars
+  UrinalysisTestResultReportStatusEnum report_status = 8;  // VARCHAR(15)
+  string performed_date = 9;  // DATE — iso 8601 date
+  string reported_date = 10;  // DATE — iso 8601 date
+  UrinalysisTestResultSpecimenTypeEnum specimen_type = 11;  // VARCHAR(15)
+  UrinalysisTestResultSpecimenConditionEnum specimen_condition = 12;  // VARCHAR(15)
+  string clinical_history = 13;  // VARCHAR(1000) — max 1000 chars
+  UrinalysisTestResultLeucocytesEnum leucocytes = 14;  // VARCHAR(10)
+  UrinalysisTestResultNitritesEnum nitrites = 15;  // VARCHAR(10)
+  UrinalysisTestResultProteinEnum protein = 16;  // VARCHAR(10)
+  UrinalysisTestResultBloodEnum blood = 17;  // VARCHAR(10)
+  UrinalysisTestResultGlucoseEnum glucose = 18;  // VARCHAR(10)
+  UrinalysisTestResultKetonesEnum ketones = 19;  // VARCHAR(10)
+  UrinalysisTestResultBilirubinEnum bilirubin = 20;  // VARCHAR(10)
+  double ph = 21;  // NUMERIC(3,1) — numeric(3,1)
+  double specific_gravity = 22;  // NUMERIC(4,3) — numeric(4,3)
+  string red_cell_count = 23;  // VARCHAR(50) — max 50 chars
+  string white_cell_count = 24;  // VARCHAR(50) — max 50 chars
+  string epithelial_cells = 25;  // VARCHAR(50) — max 50 chars
+  string casts = 26;  // VARCHAR(255) — max 255 chars
+  bool organisms_seen = 27;  // BOOLEAN
+  string crystals = 28;  // VARCHAR(255) — max 255 chars
+  UrinalysisTestResultCultureResultEnum culture_result = 29;  // VARCHAR(35)
+  string organism_isolated = 30;  // VARCHAR(255) — max 255 chars
+  string colony_count_cfu_ml = 31;  // VARCHAR(50) — max 50 chars
+  string antibiotic_sensitivities = 32;  // VARCHAR(1000) — max 1000 chars
+  UrinalysisTestResultOverallResultStatusEnum overall_result_status = 33;  // VARCHAR(10)
+  string findings_narrative = 34;  // VARCHAR(2000) — max 2000 chars
+  string impression = 35;  // VARCHAR(2000) — max 2000 chars
+  string reporting_category = 36;  // VARCHAR(50) — max 50 chars
+  string recommended_follow_up = 37;  // VARCHAR(1000) — max 1000 chars
+  bool critical_result_communicated = 38;  // BOOLEAN
+  string reported_to = 39;  // VARCHAR(500) — max 500 chars
+}

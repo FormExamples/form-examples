@@ -1,0 +1,155 @@
+# Generated from sql/. Do not edit by hand.
+# SOURCE: medication_reconciliation_allergy
+openapi: 3.1.0
+info:
+  title: Medication Reconciliation — MedicationReconciliationAllergy
+  version: 1.0.0
+  description: Drug allergies and adverse reactions recorded for the patient, cascading from the parent reconciliation.
+paths:
+  /medication-reconciliation-allergies:
+    get:
+      summary: List MedicationReconciliationAllergy records
+      operationId: listMedicationReconciliationAllergy
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of MedicationReconciliationAllergy records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/MedicationReconciliationAllergy"
+    post:
+      summary: Create a new MedicationReconciliationAllergy
+      operationId: createMedicationReconciliationAllergy
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/MedicationReconciliationAllergy"
+      responses:
+        "201":
+          description: The newly created MedicationReconciliationAllergy
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/MedicationReconciliationAllergy"
+        "400":
+          description: Validation error
+  /medication-reconciliation-allergies/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one MedicationReconciliationAllergy by id
+      operationId: getMedicationReconciliationAllergy
+      responses:
+        "200":
+          description: The requested MedicationReconciliationAllergy
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/MedicationReconciliationAllergy"
+        "404":
+          description: MedicationReconciliationAllergy not found
+    patch:
+      summary: Update an existing MedicationReconciliationAllergy
+      operationId: updateMedicationReconciliationAllergy
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/MedicationReconciliationAllergy"
+      responses:
+        "200":
+          description: The updated MedicationReconciliationAllergy
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/MedicationReconciliationAllergy"
+        "404":
+          description: MedicationReconciliationAllergy not found
+    delete:
+      summary: Soft-delete a MedicationReconciliationAllergy
+      operationId: deleteMedicationReconciliationAllergy
+      responses:
+        "204":
+          description: MedicationReconciliationAllergy deleted
+        "404":
+          description: MedicationReconciliationAllergy not found
+components:
+  schemas:
+    MedicationReconciliationAllergy:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was most recently updated.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was soft-deleted.
+        medication_reconciliation_id:
+          type: string
+          format: uuid
+          description: Foreign key to the parent medication reconciliation.
+        substance:
+          type: string
+          description: Drug or drug class the patient reacts to.
+        reaction_type:
+          type: string
+          enum:
+            - allergy
+            - intolerance
+            - adverse-effect
+            - unknown
+            - ""
+          description: "Reaction type: allergy, intolerance, adverse-effect, or unknown."
+        severity:
+          type: string
+          enum:
+            - mild
+            - moderate
+            - severe
+            - anaphylaxis
+            - ""
+          description: "Reaction severity: mild, moderate, severe, or anaphylaxis."
+      required:
+        - created_at
+        - updated_at
+        - medication_reconciliation_id
+        - substance
+        - reaction_type
+        - severity
+      description: Drug allergies and adverse reactions recorded for the patient, cascading from the parent reconciliation.

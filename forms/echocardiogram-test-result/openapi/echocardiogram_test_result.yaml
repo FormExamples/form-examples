@@ -1,0 +1,305 @@
+# Generated from sql/. Do not edit by hand.
+# SOURCE: echocardiogram_test_result
+openapi: 3.1.0
+info:
+  title: Echocardiogram Test Result — EchocardiogramTestResult
+  version: 1.0.0
+  description: Echocardiogram (echo) result (report). Captures the performed study type and quality, clinical history, left-ventricular function (ejection fraction, qualitative function, LV internal diameter), valvular stenosis and regurgitation grades, estimated pulmonary artery systolic pressure, structured findings, the narrative findings, comparison with previous studies, the impression, a structured reporting category, and recommended follow-up plus critical-result communication. This is the source-of-truth record that the four-axis interpretation grade is computed from.
+paths:
+  /echocardiogram-test-results:
+    get:
+      summary: List EchocardiogramTestResult records
+      operationId: listEchocardiogramTestResult
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of EchocardiogramTestResult records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/EchocardiogramTestResult"
+    post:
+      summary: Create a new EchocardiogramTestResult
+      operationId: createEchocardiogramTestResult
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/EchocardiogramTestResult"
+      responses:
+        "201":
+          description: The newly created EchocardiogramTestResult
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/EchocardiogramTestResult"
+        "400":
+          description: Validation error
+  /echocardiogram-test-results/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one EchocardiogramTestResult by id
+      operationId: getEchocardiogramTestResult
+      responses:
+        "200":
+          description: The requested EchocardiogramTestResult
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/EchocardiogramTestResult"
+        "404":
+          description: EchocardiogramTestResult not found
+    patch:
+      summary: Update an existing EchocardiogramTestResult
+      operationId: updateEchocardiogramTestResult
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/EchocardiogramTestResult"
+      responses:
+        "200":
+          description: The updated EchocardiogramTestResult
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/EchocardiogramTestResult"
+        "404":
+          description: EchocardiogramTestResult not found
+    delete:
+      summary: Soft-delete a EchocardiogramTestResult
+      operationId: deleteEchocardiogramTestResult
+      responses:
+        "204":
+          description: EchocardiogramTestResult deleted
+        "404":
+          description: EchocardiogramTestResult not found
+components:
+  schemas:
+    EchocardiogramTestResult:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was updated most-recently.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was deleted a.k.a. soft-removed.
+        patient_id:
+          type: string
+          format: uuid
+          description: Foreign key to the patient.
+        clinician_id:
+          type: string
+          format: uuid
+          description: Foreign key to the reporting clinician (cardiologist / cardiac physiologist / sonographer).
+        originating_request_reference:
+          type: string
+          maxLength: 255
+          description: Free-text reference linking this report back to the originating echocardiogram request (referral).
+        echo_type:
+          type: string
+          enum:
+            - transthoracic-tte
+            - transoesophageal-toe
+            - stress-echo
+            - contrast-echo
+            - other
+            - ""
+          description: "Performed echo modality: transthoracic-tte, transoesophageal-toe, stress-echo, contrast-echo, other."
+        performed_date:
+          type: string
+          format: date
+          description: Date the echocardiogram study was performed.
+        reported_date:
+          type: string
+          format: date
+          description: Date the report was authored / signed.
+        report_status:
+          type: string
+          enum:
+            - preliminary
+            - final
+            - amended
+            - cancelled
+            - ""
+          description: "Report lifecycle status: preliminary, final, amended, cancelled."
+        study_quality:
+          type: string
+          enum:
+            - good
+            - adequate
+            - limited
+            - poor
+            - ""
+          description: "Acoustic-window / image quality of the study: good, adequate, limited, poor."
+        clinical_history:
+          type: string
+          maxLength: 1000
+          description: Clinical history and the question the study was performed to answer.
+        lv_ejection_fraction_percent:
+          type: number
+          format: double
+          description: Left-ventricular ejection fraction (LVEF) as a percentage (0-100).
+        lv_function:
+          type: string
+          enum:
+            - normal
+            - mildly-impaired
+            - moderately-impaired
+            - severely-impaired
+            - ""
+          description: "Qualitative left-ventricular systolic function: normal, mildly-impaired, moderately-impaired, severely-impaired."
+        lv_internal_diameter_diastole_mm:
+          type: number
+          format: double
+          description: Left-ventricular internal diameter at end-diastole (LVIDd) in millimetres.
+        aortic_stenosis:
+          type: string
+          enum:
+            - none
+            - mild
+            - moderate
+            - severe
+            - ""
+          description: "Aortic stenosis severity: none, mild, moderate, severe."
+        aortic_regurgitation:
+          type: string
+          enum:
+            - none
+            - mild
+            - moderate
+            - severe
+            - ""
+          description: "Aortic regurgitation severity: none, mild, moderate, severe."
+        mitral_stenosis:
+          type: string
+          enum:
+            - none
+            - mild
+            - moderate
+            - severe
+            - ""
+          description: "Mitral stenosis severity: none, mild, moderate, severe."
+        mitral_regurgitation:
+          type: string
+          enum:
+            - none
+            - mild
+            - moderate
+            - severe
+            - ""
+          description: "Mitral regurgitation severity: none, mild, moderate, severe."
+        pulmonary_artery_systolic_pressure_mmhg:
+          type: number
+          format: double
+          description: Estimated pulmonary artery systolic pressure (PASP) in mmHg.
+        lv_hypertrophy:
+          type: boolean
+          description: Whether left-ventricular hypertrophy is present.
+        regional_wall_motion_abnormality:
+          type: boolean
+          description: Whether a regional wall-motion abnormality (RWMA) is present.
+        pericardial_effusion:
+          type: boolean
+          description: Whether a pericardial effusion is present.
+        vegetation:
+          type: boolean
+          description: Whether a valvular vegetation (suspected endocarditis) is present.
+        intracardiac_thrombus:
+          type: boolean
+          description: Whether an intracardiac thrombus is present.
+        normal_study:
+          type: boolean
+          description: Whether the study is reported as entirely normal.
+        findings_narrative:
+          type: string
+          maxLength: 2000
+          description: Narrative description of the echocardiographic findings (the body of the report).
+        comparison_with_previous:
+          type: string
+          maxLength: 1000
+          description: Comparison with relevant previous echocardiogram studies.
+        impression:
+          type: string
+          maxLength: 2000
+          description: Summary impression / conclusion answering the clinical question.
+        reporting_category:
+          type: string
+          maxLength: 100
+          description: Free-text structured-reporting category or summary label (e.g. a severity / surveillance category).
+        recommended_follow_up:
+          type: string
+          maxLength: 1000
+          description: Recommended follow-up imaging, referral, or management.
+        critical_result_communicated:
+          type: boolean
+          description: Whether a critical or unexpected significant result was communicated directly to the referrer.
+        reported_to:
+          type: string
+          maxLength: 500
+          description: Who the critical / urgent result was communicated to, with date and time if applicable.
+      required:
+        - created_at
+        - updated_at
+        - patient_id
+        - clinician_id
+        - originating_request_reference
+        - echo_type
+        - report_status
+        - study_quality
+        - clinical_history
+        - lv_function
+        - aortic_stenosis
+        - aortic_regurgitation
+        - mitral_stenosis
+        - mitral_regurgitation
+        - lv_hypertrophy
+        - regional_wall_motion_abnormality
+        - pericardial_effusion
+        - vegetation
+        - intracardiac_thrombus
+        - normal_study
+        - findings_narrative
+        - comparison_with_previous
+        - impression
+        - reporting_category
+        - recommended_follow_up
+        - critical_result_communicated
+        - reported_to
+      description: Echocardiogram (echo) result (report). Captures the performed study type and quality, clinical history, left-ventricular function (ejection fraction, qualitative function, LV internal diameter), valvular stenosis and regurgitation grades, estimated pulmonary artery systolic pressure, structured findings, the narrative findings, comparison with previous studies, the impression, a structured reporting category, and recommended follow-up plus critical-result communication. This is the source-of-truth record that the four-axis interpretation grade is computed from.

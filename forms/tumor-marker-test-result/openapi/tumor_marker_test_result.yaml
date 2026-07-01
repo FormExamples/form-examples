@@ -1,0 +1,280 @@
+# Generated from sql/. Do not edit by hand.
+# SOURCE: tumor_marker_test_result
+openapi: 3.1.0
+info:
+  title: Tumor Marker Test Result — TumorMarkerTestResult
+  version: 1.0.0
+  description: Serum tumour-marker test result (report). Captures the measured result value for each serum tumour marker (NUMERIC), the prior value and trend, an overall result status, the interpretive narrative and impression, recommended follow-up, and critical-result communication. This is the source-of-truth record that the four-axis interpretation grade is computed from.
+paths:
+  /tumor-marker-test-results:
+    get:
+      summary: List TumorMarkerTestResult records
+      operationId: listTumorMarkerTestResult
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of TumorMarkerTestResult records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/TumorMarkerTestResult"
+    post:
+      summary: Create a new TumorMarkerTestResult
+      operationId: createTumorMarkerTestResult
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/TumorMarkerTestResult"
+      responses:
+        "201":
+          description: The newly created TumorMarkerTestResult
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/TumorMarkerTestResult"
+        "400":
+          description: Validation error
+  /tumor-marker-test-results/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one TumorMarkerTestResult by id
+      operationId: getTumorMarkerTestResult
+      responses:
+        "200":
+          description: The requested TumorMarkerTestResult
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/TumorMarkerTestResult"
+        "404":
+          description: TumorMarkerTestResult not found
+    patch:
+      summary: Update an existing TumorMarkerTestResult
+      operationId: updateTumorMarkerTestResult
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/TumorMarkerTestResult"
+      responses:
+        "200":
+          description: The updated TumorMarkerTestResult
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/TumorMarkerTestResult"
+        "404":
+          description: TumorMarkerTestResult not found
+    delete:
+      summary: Soft-delete a TumorMarkerTestResult
+      operationId: deleteTumorMarkerTestResult
+      responses:
+        "204":
+          description: TumorMarkerTestResult deleted
+        "404":
+          description: TumorMarkerTestResult not found
+components:
+  schemas:
+    TumorMarkerTestResult:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was updated most-recently.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was deleted a.k.a. soft-removed.
+        patient_id:
+          type: string
+          format: uuid
+          description: Foreign key to the patient.
+        clinician_id:
+          type: string
+          format: uuid
+          description: Foreign key to the reporting clinician (clinical biochemist / oncologist / reporting clinician).
+        originating_request_reference:
+          type: string
+          maxLength: 255
+          description: Free-text reference linking this report back to the originating tumour-marker test request (referral).
+        report_status:
+          type: string
+          enum:
+            - preliminary
+            - final
+            - amended
+            - cancelled
+            - ""
+          description: "Report lifecycle status: preliminary, final, amended, cancelled."
+        performed_date:
+          type: string
+          format: date
+          description: Date the specimen was collected / the assay was performed.
+        reported_date:
+          type: string
+          format: date
+          description: Date the report was authored / signed.
+        specimen_condition:
+          type: string
+          enum:
+            - satisfactory
+            - haemolysed
+            - lipaemic
+            - insufficient
+            - ""
+          description: "Specimen condition affecting assay validity: satisfactory, haemolysed, lipaemic, insufficient."
+        clinical_history:
+          type: string
+          maxLength: 1000
+          description: Clinical history and the question the test was performed to answer.
+        known_cancer_site:
+          type: string
+          maxLength: 255
+          description: Known or suspected primary cancer site, if any (context for interpretation).
+        psa:
+          type: number
+          format: double
+          description: Measured prostate-specific antigen (PSA) value in ng/mL; NULL if not measured.
+        ca125:
+          type: number
+          format: double
+          description: Measured CA125 value in IU/mL (suspected ovarian cancer; NICE CG122 ultrasound threshold 35 IU/mL); NULL if not measured.
+        ca19_9:
+          type: number
+          format: double
+          description: Measured CA19-9 value in U/mL (pancreatic / hepatobiliary cancer; reference < 37 U/mL); NULL if not measured.
+        carcinoembryonic_antigen_cea:
+          type: number
+          format: double
+          description: Measured carcinoembryonic antigen (CEA) value in ng/mL (colorectal cancer monitoring); NULL if not measured.
+        alpha_fetoprotein_afp:
+          type: number
+          format: double
+          description: Measured alpha-fetoprotein (AFP) value in ng/mL (hepatocellular carcinoma, germ-cell tumours); a very high value suggests a germ-cell tumour; NULL if not measured.
+        beta_hcg:
+          type: number
+          format: double
+          description: Measured beta human chorionic gonadotrophin (beta-hCG) value in IU/L (germ-cell / trophoblastic tumours); a very high value suggests a germ-cell tumour; NULL if not measured.
+        ca15_3:
+          type: number
+          format: double
+          description: Measured CA15-3 value in U/mL (breast cancer monitoring); NULL if not measured.
+        lactate_dehydrogenase_ldh:
+          type: number
+          format: double
+          description: Measured lactate dehydrogenase (LDH) value in U/L (germ-cell tumour staging, lymphoma prognosis); NULL if not measured.
+        calcitonin:
+          type: number
+          format: double
+          description: Measured calcitonin value in ng/L (medullary thyroid carcinoma); NULL if not measured.
+        chromogranin_a:
+          type: number
+          format: double
+          description: Measured chromogranin A value in nmol/L (neuroendocrine tumours); NULL if not measured.
+        previous_value:
+          type: number
+          format: double
+          description: Most recent previous value of the principal marker, for trend / response interpretation; NULL if none.
+        trend:
+          type: string
+          enum:
+            - rising
+            - stable
+            - falling
+            - not-applicable
+            - ""
+          description: "Trend of the principal marker versus the previous value: rising, stable, falling, not-applicable."
+        comparison_with_previous:
+          type: string
+          maxLength: 1000
+          description: Narrative comparison with previous tumour-marker results.
+        overall_result_status:
+          type: string
+          enum:
+            - normal
+            - abnormal
+            - critical
+            - ""
+          description: "Overall result status: normal, abnormal, critical."
+        markedly_elevated:
+          type: boolean
+          description: Whether one or more markers are markedly elevated above the reference range.
+        findings_narrative:
+          type: string
+          maxLength: 2000
+          description: Narrative description of the measured values and their interpretation (the body of the report).
+        impression:
+          type: string
+          maxLength: 2000
+          description: Summary impression / conclusion answering the clinical question.
+        reporting_category:
+          type: string
+          maxLength: 50
+          description: Structured-reporting category label (e.g. a germ-cell-marker pattern or monitoring-trend category).
+        recommended_follow_up:
+          type: string
+          maxLength: 1000
+          description: "Recommended follow-up: repeat interval, referral, or further investigation."
+        critical_result_communicated:
+          type: boolean
+          description: Whether a critical or unexpected significant result was communicated directly to the requester.
+        reported_to:
+          type: string
+          maxLength: 500
+          description: Who the critical / urgent result was communicated to, with date and time if applicable.
+      required:
+        - created_at
+        - updated_at
+        - patient_id
+        - clinician_id
+        - originating_request_reference
+        - report_status
+        - specimen_condition
+        - clinical_history
+        - known_cancer_site
+        - trend
+        - comparison_with_previous
+        - overall_result_status
+        - markedly_elevated
+        - findings_narrative
+        - impression
+        - reporting_category
+        - recommended_follow_up
+        - critical_result_communicated
+        - reported_to
+      description: Serum tumour-marker test result (report). Captures the measured result value for each serum tumour marker (NUMERIC), the prior value and trend, an overall result status, the interpretive narrative and impression, recommended follow-up, and critical-result communication. This is the source-of-truth record that the four-axis interpretation grade is computed from.

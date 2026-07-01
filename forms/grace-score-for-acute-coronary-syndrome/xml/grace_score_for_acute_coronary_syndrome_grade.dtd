@@ -1,0 +1,12 @@
+<!ELEMENT grace_score_for_acute_coronary_syndrome_grade (id,created_at,updated_at,deleted_at,grace_score_for_acute_coronary_syndrome_id,grace_score,in_hospital_risk_band,six_month_risk_band,overall_band,invasive_strategy,graded_at)>
+<!ELEMENT id (#PCDATA)>
+<!ELEMENT created_at (#PCDATA)>
+<!ELEMENT updated_at (#PCDATA)>
+<!ELEMENT deleted_at (#PCDATA)>
+<!ELEMENT grace_score_for_acute_coronary_syndrome_id (#PCDATA)>
+<!ELEMENT grace_score (#PCDATA)>
+<!ELEMENT in_hospital_risk_band (#PCDATA)>
+<!ELEMENT six_month_risk_band (#PCDATA)>
+<!ELEMENT overall_band (#PCDATA)>
+<!ELEMENT invasive_strategy (#PCDATA)>
+<!ELEMENT graded_at (#PCDATA)>

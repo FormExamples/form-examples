@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE ward_round_note_grade SYSTEM "ward_round_note_grade.dtd">
+<ward_round_note_grade>
+<id>880e8400-e29b-41d4-a716-446655440003</id>
+<created_at>2026-04-09T10:00:00Z</created_at>
+<updated_at>2026-04-09T10:00:00Z</updated_at>
+<deleted_at>2026-04-09T10:00:00Z</deleted_at>
+<ward_round_note_id>770e8400-e29b-41d4-a716-446655440002</ward_round_note_id>
+<status>complete</status>
+<completeness_percent>1</completeness_percent>
+<header_documented>yes</header_documented>
+<problems_documented>yes</problems_documented>
+<examination_documented>yes</examination_documented>
+<investigations_documented>yes</investigations_documented>
+<vte_documented>yes</vte_documented>
+<medication_documented>yes</medication_documented>
+<plan_documented>yes</plan_documented>
+<escalation_documented>yes</escalation_documented>
+<graded_at>2026-04-09T10:00:00Z</graded_at>
+</ward_round_note_grade>

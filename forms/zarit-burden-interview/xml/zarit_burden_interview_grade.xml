@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE zarit_burden_interview_grade SYSTEM "zarit_burden_interview_grade.dtd">
+<zarit_burden_interview_grade>
+<id>880e8400-e29b-41d4-a716-446655440003</id>
+<created_at>2026-04-09T10:00:00Z</created_at>
+<updated_at>2026-04-09T10:00:00Z</updated_at>
+<deleted_at>2026-04-09T10:00:00Z</deleted_at>
+<zarit_burden_interview_id>770e8400-e29b-41d4-a716-446655440002</zarit_burden_interview_id>
+<total_score>5</total_score>
+<max_score>5</max_score>
+<burden_band>little-or-none</burden_band>
+<short_form_score>5</short_form_score>
+<graded_at>2026-04-09T10:00:00Z</graded_at>
+</zarit_burden_interview_grade>

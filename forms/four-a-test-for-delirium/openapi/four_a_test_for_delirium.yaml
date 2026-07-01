@@ -1,0 +1,228 @@
+# Generated from sql/. Do not edit by hand.
+# SOURCE: four_a_test_for_delirium
+openapi: 3.1.0
+info:
+  title: Four A Test For Delirium — FourATestForDelirium
+  version: 1.0.0
+  description: "Main 4AT assessment record: patient and assessment identification, context, and the four scored item inputs (alertness, AMT4, attention via months-backwards, and acute change or fluctuating course)."
+paths:
+  /four-a-test-for-deliriums:
+    get:
+      summary: List FourATestForDelirium records
+      operationId: listFourATestForDelirium
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of FourATestForDelirium records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/FourATestForDelirium"
+    post:
+      summary: Create a new FourATestForDelirium
+      operationId: createFourATestForDelirium
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/FourATestForDelirium"
+      responses:
+        "201":
+          description: The newly created FourATestForDelirium
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/FourATestForDelirium"
+        "400":
+          description: Validation error
+  /four-a-test-for-deliriums/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one FourATestForDelirium by id
+      operationId: getFourATestForDelirium
+      responses:
+        "200":
+          description: The requested FourATestForDelirium
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/FourATestForDelirium"
+        "404":
+          description: FourATestForDelirium not found
+    patch:
+      summary: Update an existing FourATestForDelirium
+      operationId: updateFourATestForDelirium
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/FourATestForDelirium"
+      responses:
+        "200":
+          description: The updated FourATestForDelirium
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/FourATestForDelirium"
+        "404":
+          description: FourATestForDelirium not found
+    delete:
+      summary: Soft-delete a FourATestForDelirium
+      operationId: deleteFourATestForDelirium
+      responses:
+        "204":
+          description: FourATestForDelirium deleted
+        "404":
+          description: FourATestForDelirium not found
+components:
+  schemas:
+    FourATestForDelirium:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was updated most-recently.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was deleted a.k.a. soft-removed.
+        patient_id:
+          type: string
+          format: uuid
+          description: Foreign key to the patient being assessed (delete restricted).
+        clinician_id:
+          type: string
+          format: uuid
+          description: Foreign key to the assessing clinician (optional; delete restricted).
+        patient_identifier:
+          type: string
+          maxLength: 100
+          description: Local patient identifier as recorded on the assessment.
+        patient_name:
+          type: string
+          maxLength: 255
+          description: Patient name as recorded on the assessment.
+        date_of_birth:
+          type: string
+          format: date
+          description: Patient date of birth as recorded on the assessment.
+        assessment_date:
+          type: string
+          format: date
+          description: Date the 4AT assessment was performed.
+        assessment_time:
+          type: string
+          format: time
+          description: Time of day the 4AT assessment was performed.
+        setting:
+          type: string
+          enum:
+            - acute
+            - ed
+            - periop
+            - careHome
+            - community
+            - other
+            - ""
+          description: "Care setting: acute, ed (emergency department), periop, careHome, community, or other."
+        assessor_name:
+          type: string
+          maxLength: 255
+          description: Name of the practitioner who completed the assessment.
+        assessor_role:
+          type: string
+          maxLength: 100
+          description: Free-text role of the practitioner who completed the assessment.
+        alertness:
+          type: string
+          enum:
+            - normal
+            - mildTransient
+            - abnormal
+            - ""
+          description: "Item 1 — observed alertness: normal, mildTransient (brief sleepiness then normal), or abnormal (markedly drowsy or agitated)."
+        amt4:
+          type: string
+          enum:
+            - noMistakes
+            - oneMistake
+            - twoOrMoreOrUntestable
+            - ""
+          description: "Item 2 — AMT4 mistake band across age, date of birth, place, and current year: noMistakes, oneMistake, or twoOrMoreOrUntestable."
+        attention_months:
+          type: string
+          enum:
+            - sevenOrMore
+            - startsButUnderSevenOrRefuses
+            - untestable
+            - ""
+          description: "Item 3 — attention via reciting the months backwards: sevenOrMore correct, startsButUnderSevenOrRefuses, or untestable."
+        acute_change:
+          type: string
+          enum:
+            - "no"
+            - "yes"
+            - ""
+          description: "Item 4 — presence of acute change or fluctuating course over the last 2 weeks still evident in the last 24 hours: no or yes."
+        acute_change_source:
+          type: string
+          enum:
+            - patient
+            - collateral
+            - records
+            - none
+            - ""
+          description: "Source of the item 4 acute-change information: patient, collateral, records, or none."
+        clinical_notes:
+          type: string
+          description: Free-text clinical note recorded with the assessment.
+      required:
+        - created_at
+        - updated_at
+        - patient_id
+        - patient_identifier
+        - patient_name
+        - setting
+        - assessor_name
+        - assessor_role
+        - alertness
+        - amt4
+        - attention_months
+        - acute_change
+        - acute_change_source
+        - clinical_notes
+      description: "Main 4AT assessment record: patient and assessment identification, context, and the four scored item inputs (alertness, AMT4, attention via months-backwards, and acute change or fluctuating course)."

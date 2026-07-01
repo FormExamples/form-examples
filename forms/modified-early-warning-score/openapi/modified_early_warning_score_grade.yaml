@@ -1,0 +1,181 @@
+# Generated from sql/. Do not edit by hand.
+# SOURCE: modified_early_warning_score_grade
+openapi: 3.1.0
+info:
+  title: Modified Early Warning Score — ModifiedEarlyWarningScoreGrade
+  version: 1.0.0
+  description: "Computed MEWS grading result: five per-parameter sub-scores, aggregate total (0-14), single-parameter trigger indicator, derived clinical-risk band, and recommended monitoring frequency. One row per observation record (1:1)."
+paths:
+  /modified-early-warning-score-grades:
+    get:
+      summary: List ModifiedEarlyWarningScoreGrade records
+      operationId: listModifiedEarlyWarningScoreGrade
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of ModifiedEarlyWarningScoreGrade records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/ModifiedEarlyWarningScoreGrade"
+    post:
+      summary: Create a new ModifiedEarlyWarningScoreGrade
+      operationId: createModifiedEarlyWarningScoreGrade
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ModifiedEarlyWarningScoreGrade"
+      responses:
+        "201":
+          description: The newly created ModifiedEarlyWarningScoreGrade
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ModifiedEarlyWarningScoreGrade"
+        "400":
+          description: Validation error
+  /modified-early-warning-score-grades/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one ModifiedEarlyWarningScoreGrade by id
+      operationId: getModifiedEarlyWarningScoreGrade
+      responses:
+        "200":
+          description: The requested ModifiedEarlyWarningScoreGrade
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ModifiedEarlyWarningScoreGrade"
+        "404":
+          description: ModifiedEarlyWarningScoreGrade not found
+    patch:
+      summary: Update an existing ModifiedEarlyWarningScoreGrade
+      operationId: updateModifiedEarlyWarningScoreGrade
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ModifiedEarlyWarningScoreGrade"
+      responses:
+        "200":
+          description: The updated ModifiedEarlyWarningScoreGrade
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ModifiedEarlyWarningScoreGrade"
+        "404":
+          description: ModifiedEarlyWarningScoreGrade not found
+    delete:
+      summary: Soft-delete a ModifiedEarlyWarningScoreGrade
+      operationId: deleteModifiedEarlyWarningScoreGrade
+      responses:
+        "204":
+          description: ModifiedEarlyWarningScoreGrade deleted
+        "404":
+          description: ModifiedEarlyWarningScoreGrade not found
+components:
+  schemas:
+    ModifiedEarlyWarningScoreGrade:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was most recently updated.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was soft-deleted.
+        modified_early_warning_score_id:
+          type: string
+          format: uuid
+          description: Foreign key to the parent observation record (unique, 1:1).
+        aggregate_score:
+          type: integer
+          format: int32
+          description: "Aggregate MEWS total (0-14): sum of the five parameter sub-scores; NULL until computed."
+        systolic_blood_pressure_score:
+          type: integer
+          format: int32
+          description: Systolic-blood-pressure sub-score (0-3); NULL when the observation was not recorded.
+        heart_rate_score:
+          type: integer
+          format: int32
+          description: Heart-rate sub-score (0-3); NULL when not recorded.
+        respiratory_rate_score:
+          type: integer
+          format: int32
+          description: Respiratory-rate sub-score (0-3); NULL when not recorded.
+        temperature_score:
+          type: integer
+          format: int32
+          description: Temperature sub-score (0-3); NULL when not recorded.
+        avpu_score:
+          type: integer
+          format: int32
+          description: Consciousness (AVPU) sub-score (0-3); NULL when not recorded.
+        single_parameter_trigger:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: "Single-parameter trigger: whether any single parameter scored 3, which warrants urgent review regardless of the aggregate."
+        risk_band:
+          type: string
+          enum:
+            - low
+            - medium
+            - high
+            - ""
+          description: "Derived clinical-risk band: low (0-1), medium (2-4), or high (>= 5)."
+        monitoring_frequency:
+          type: string
+          description: Recommended monitoring frequency for the risk band (e.g. routine, increased, hourly, continuous).
+        graded_at:
+          type: string
+          format: date-time
+          description: Timestamp when the engine last computed the grade.
+      required:
+        - created_at
+        - updated_at
+        - modified_early_warning_score_id
+        - single_parameter_trigger
+        - risk_band
+        - monitoring_frequency
+        - graded_at
+      description: "Computed MEWS grading result: five per-parameter sub-scores, aggregate total (0-14), single-parameter trigger indicator, derived clinical-risk band, and recommended monitoring frequency. One row per observation record (1:1)."

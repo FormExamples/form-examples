@@ -1,0 +1,38 @@
+// Generated from sql/. Do not edit by hand.
+// SOURCE: anaesthetic_record_grade_flag
+
+syntax = "proto3";
+
+package form_examples.anaesthetic_record;
+
+enum AnaestheticRecordGradeFlagCategoryEnum {
+  CATEGORY_UNSPECIFIED = 0;
+  CATEGORY_WHO_CHECKLIST_NOT_DONE = 1;  // who-checklist-not-done
+  CATEGORY_ALLERGY_CONFLICT = 2;  // allergy-conflict
+  CATEGORY_DIFFICULT_AIRWAY = 3;  // difficult-airway
+  CATEGORY_DRUG_ANAPHYLAXIS = 4;  // drug-anaphylaxis
+  CATEGORY_UNLOGGED_CONSENT = 5;  // unlogged-consent
+  CATEGORY_PHYSIOLOGICAL_DERANGEMENT = 6;  // physiological-derangement
+  CATEGORY_INCOMPLETE = 7;  // incomplete
+  CATEGORY_OTHER = 8;  // other
+}
+
+enum AnaestheticRecordGradeFlagPriorityEnum {
+  PRIORITY_UNSPECIFIED = 0;
+  PRIORITY_LOW = 1;  // low
+  PRIORITY_MEDIUM = 2;  // medium
+  PRIORITY_HIGH = 3;  // high
+}
+
+message AnaestheticRecordGradeFlag {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string anaesthetic_record_grade_id = 5;  // UUID — uuid
+  string flag_id = 6;  // VARCHAR(50) — max 50 chars
+  AnaestheticRecordGradeFlagCategoryEnum category = 7;  // VARCHAR(40)
+  AnaestheticRecordGradeFlagPriorityEnum priority = 8;  // VARCHAR(10)
+  string description = 9;  // VARCHAR(500) — max 500 chars
+  string suggested_action = 10;  // VARCHAR(500) — max 500 chars
+}

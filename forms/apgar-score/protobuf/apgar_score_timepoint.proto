@@ -1,0 +1,64 @@
+// Generated from sql/. Do not edit by hand.
+// SOURCE: apgar_score_timepoint
+
+syntax = "proto3";
+
+package form_examples.apgar_score;
+
+enum ApgarScoreTimepointAppearanceEnum {
+  APPEARANCE_UNSPECIFIED = 0;
+  APPEARANCE_V_0 = 1;  // 0
+  APPEARANCE_V_1 = 2;  // 1
+  APPEARANCE_V_2 = 3;  // 2
+}
+
+enum ApgarScoreTimepointPulseEnum {
+  PULSE_UNSPECIFIED = 0;
+  PULSE_V_0 = 1;  // 0
+  PULSE_V_1 = 2;  // 1
+  PULSE_V_2 = 3;  // 2
+}
+
+enum ApgarScoreTimepointGrimaceEnum {
+  GRIMACE_UNSPECIFIED = 0;
+  GRIMACE_V_0 = 1;  // 0
+  GRIMACE_V_1 = 2;  // 1
+  GRIMACE_V_2 = 3;  // 2
+}
+
+enum ApgarScoreTimepointActivityEnum {
+  ACTIVITY_UNSPECIFIED = 0;
+  ACTIVITY_V_0 = 1;  // 0
+  ACTIVITY_V_1 = 2;  // 1
+  ACTIVITY_V_2 = 3;  // 2
+}
+
+enum ApgarScoreTimepointRespirationEnum {
+  RESPIRATION_UNSPECIFIED = 0;
+  RESPIRATION_V_0 = 1;  // 0
+  RESPIRATION_V_1 = 2;  // 1
+  RESPIRATION_V_2 = 3;  // 2
+}
+
+enum ApgarScoreTimepointBandEnum {
+  BAND_UNSPECIFIED = 0;
+  BAND_REASSURING = 1;  // reassuring
+  BAND_MODERATELY_LOW = 2;  // moderately-low
+  BAND_LOW = 3;  // low
+}
+
+message ApgarScoreTimepoint {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string apgar_score_id = 5;  // UUID — uuid
+  int32 timepoint_minutes = 6;  // INT
+  ApgarScoreTimepointAppearanceEnum appearance = 7;  // VARCHAR(1)
+  ApgarScoreTimepointPulseEnum pulse = 8;  // VARCHAR(1)
+  ApgarScoreTimepointGrimaceEnum grimace = 9;  // VARCHAR(1)
+  ApgarScoreTimepointActivityEnum activity = 10;  // VARCHAR(1)
+  ApgarScoreTimepointRespirationEnum respiration = 11;  // VARCHAR(1)
+  int32 total = 12;  // INT
+  ApgarScoreTimepointBandEnum band = 13;  // VARCHAR(20)
+}

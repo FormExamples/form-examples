@@ -1,4 +1,4 @@
-# Generated from sql-migrations/. Do not edit by hand.
+# Generated from sql/. Do not edit by hand.
 # SOURCE: dexa_bone_density_test_request_grade
 openapi: 3.1.0
 info:

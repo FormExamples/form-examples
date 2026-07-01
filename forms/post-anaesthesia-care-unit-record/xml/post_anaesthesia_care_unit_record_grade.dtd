@@ -1,0 +1,16 @@
+<!ELEMENT post_anaesthesia_care_unit_record_grade (id,created_at,updated_at,deleted_at,post_anaesthesia_care_unit_record_id,activity_score,respiration_score,circulation_score,consciousness_score,oxygen_saturation_score,aldrete_total,discharge_ready,padss_total,padss_street_fit,graded_at)>
+<!ELEMENT id (#PCDATA)>
+<!ELEMENT created_at (#PCDATA)>
+<!ELEMENT updated_at (#PCDATA)>
+<!ELEMENT deleted_at (#PCDATA)>
+<!ELEMENT post_anaesthesia_care_unit_record_id (#PCDATA)>
+<!ELEMENT activity_score (#PCDATA)>
+<!ELEMENT respiration_score (#PCDATA)>
+<!ELEMENT circulation_score (#PCDATA)>
+<!ELEMENT consciousness_score (#PCDATA)>
+<!ELEMENT oxygen_saturation_score (#PCDATA)>
+<!ELEMENT aldrete_total (#PCDATA)>
+<!ELEMENT discharge_ready (#PCDATA)>
+<!ELEMENT padss_total (#PCDATA)>
+<!ELEMENT padss_street_fit (#PCDATA)>
+<!ELEMENT graded_at (#PCDATA)>

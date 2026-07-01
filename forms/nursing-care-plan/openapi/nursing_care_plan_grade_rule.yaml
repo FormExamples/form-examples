@@ -1,0 +1,146 @@
+# Generated from sql/. Do not edit by hand.
+# SOURCE: nursing_care_plan_grade_rule
+openapi: 3.1.0
+info:
+  title: Nursing Care Plan — NursingCarePlanGradeRule
+  version: 1.0.0
+  description: "Audit trail of every completeness rule that fired during grading: category and description."
+paths:
+  /nursing-care-plan-grade-rules:
+    get:
+      summary: List NursingCarePlanGradeRule records
+      operationId: listNursingCarePlanGradeRule
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of NursingCarePlanGradeRule records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/NursingCarePlanGradeRule"
+    post:
+      summary: Create a new NursingCarePlanGradeRule
+      operationId: createNursingCarePlanGradeRule
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/NursingCarePlanGradeRule"
+      responses:
+        "201":
+          description: The newly created NursingCarePlanGradeRule
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/NursingCarePlanGradeRule"
+        "400":
+          description: Validation error
+  /nursing-care-plan-grade-rules/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one NursingCarePlanGradeRule by id
+      operationId: getNursingCarePlanGradeRule
+      responses:
+        "200":
+          description: The requested NursingCarePlanGradeRule
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/NursingCarePlanGradeRule"
+        "404":
+          description: NursingCarePlanGradeRule not found
+    patch:
+      summary: Update an existing NursingCarePlanGradeRule
+      operationId: updateNursingCarePlanGradeRule
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/NursingCarePlanGradeRule"
+      responses:
+        "200":
+          description: The updated NursingCarePlanGradeRule
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/NursingCarePlanGradeRule"
+        "404":
+          description: NursingCarePlanGradeRule not found
+    delete:
+      summary: Soft-delete a NursingCarePlanGradeRule
+      operationId: deleteNursingCarePlanGradeRule
+      responses:
+        "204":
+          description: NursingCarePlanGradeRule deleted
+        "404":
+          description: NursingCarePlanGradeRule not found
+components:
+  schemas:
+    NursingCarePlanGradeRule:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was most recently updated.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was soft-deleted.
+        nursing_care_plan_grade_id:
+          type: string
+          format: uuid
+          description: Foreign key to the parent grade.
+        rule_id:
+          type: string
+          maxLength: 40
+          description: Stable rule identifier (e.g. R-PROBLEM-COMPLETE-01).
+        category:
+          type: string
+          maxLength: 50
+          description: Subject category (e.g. problem-completeness, plan-status).
+        description:
+          type: string
+          maxLength: 500
+          description: Human-readable description of why the rule fired.
+      required:
+        - created_at
+        - updated_at
+        - nursing_care_plan_grade_id
+        - rule_id
+        - category
+        - description
+      description: "Audit trail of every completeness rule that fired during grading: category and description."

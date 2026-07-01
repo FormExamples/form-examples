@@ -1,0 +1,231 @@
+# Generated from sql/. Do not edit by hand.
+# SOURCE: structured_medication_review_medicine
+openapi: 3.1.0
+info:
+  title: Structured Medication Review — StructuredMedicationReviewMedicine
+  version: 1.0.0
+  description: "Medicines reviewed within a structured medication review: name, form and strength, dose, indication, regular/high-risk flags, adherence, anticholinergic burden, monitoring, deprescribing candidacy, and STOPP/START criteria."
+paths:
+  /structured-medication-review-medicines:
+    get:
+      summary: List StructuredMedicationReviewMedicine records
+      operationId: listStructuredMedicationReviewMedicine
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of StructuredMedicationReviewMedicine records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/StructuredMedicationReviewMedicine"
+    post:
+      summary: Create a new StructuredMedicationReviewMedicine
+      operationId: createStructuredMedicationReviewMedicine
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/StructuredMedicationReviewMedicine"
+      responses:
+        "201":
+          description: The newly created StructuredMedicationReviewMedicine
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/StructuredMedicationReviewMedicine"
+        "400":
+          description: Validation error
+  /structured-medication-review-medicines/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one StructuredMedicationReviewMedicine by id
+      operationId: getStructuredMedicationReviewMedicine
+      responses:
+        "200":
+          description: The requested StructuredMedicationReviewMedicine
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/StructuredMedicationReviewMedicine"
+        "404":
+          description: StructuredMedicationReviewMedicine not found
+    patch:
+      summary: Update an existing StructuredMedicationReviewMedicine
+      operationId: updateStructuredMedicationReviewMedicine
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/StructuredMedicationReviewMedicine"
+      responses:
+        "200":
+          description: The updated StructuredMedicationReviewMedicine
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/StructuredMedicationReviewMedicine"
+        "404":
+          description: StructuredMedicationReviewMedicine not found
+    delete:
+      summary: Soft-delete a StructuredMedicationReviewMedicine
+      operationId: deleteStructuredMedicationReviewMedicine
+      responses:
+        "204":
+          description: StructuredMedicationReviewMedicine deleted
+        "404":
+          description: StructuredMedicationReviewMedicine not found
+components:
+  schemas:
+    StructuredMedicationReviewMedicine:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was most recently updated.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was soft-deleted.
+        structured_medication_review_id:
+          type: string
+          format: uuid
+          description: Foreign key to the parent structured medication review.
+        drug_name:
+          type: string
+          description: Medicine name.
+        form_strength:
+          type: string
+          description: Form and strength of the medicine (e.g. tablet 5 mg).
+        dose_regimen:
+          type: string
+          description: Dose and frequency (e.g. one tablet twice daily).
+        indication:
+          type: string
+          description: Reason the medicine is prescribed.
+        indication_recorded:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: "Whether an indication is recorded for the medicine: yes or no."
+        is_regular:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: "Whether the medicine is a regular (repeat) medicine that counts toward polypharmacy: yes or no."
+        is_high_risk:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: "Whether the medicine is a high-risk medicine: yes or no."
+        high_risk_class:
+          type: string
+          enum:
+            - anticoagulant
+            - insulin
+            - opioid
+            - dmard
+            - lithium
+            - methotrexate
+            - other
+            - ""
+          description: "High-risk medicine class: anticoagulant, insulin, opioid, dmard, lithium, methotrexate, or other."
+        adherence:
+          type: string
+          enum:
+            - good
+            - partial
+            - poor
+            - unknown
+            - ""
+          description: "Patient adherence to the medicine: good, partial, poor, or unknown."
+        anticholinergic_burden_points:
+          type: integer
+          format: int32
+          description: Anticholinergic Cognitive Burden (ACB) points for the medicine, 0-3; null when unanswered (contributes 0 to the sum).
+        monitoring_required:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: "Whether the medicine requires monitoring: yes or no."
+        monitoring_up_to_date:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - na
+            - ""
+          description: "Whether required monitoring is up to date: yes, no, or na (not applicable)."
+        deprescribing_candidate:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: "Whether the medicine is a candidate for deprescribing: yes or no."
+        stopp_criterion:
+          type: string
+          description: STOPP code / description for a potentially inappropriate medicine, or empty.
+        start_criterion:
+          type: string
+          description: START code / description for a potential prescribing omission, or empty.
+      required:
+        - created_at
+        - updated_at
+        - structured_medication_review_id
+        - drug_name
+        - form_strength
+        - dose_regimen
+        - indication
+        - indication_recorded
+        - is_regular
+        - is_high_risk
+        - high_risk_class
+        - adherence
+        - monitoring_required
+        - monitoring_up_to_date
+        - deprescribing_candidate
+        - stopp_criterion
+        - start_criterion
+      description: "Medicines reviewed within a structured medication review: name, form and strength, dose, indication, regular/high-risk flags, adherence, anticholinergic burden, monitoring, deprescribing candidacy, and STOPP/START criteria."

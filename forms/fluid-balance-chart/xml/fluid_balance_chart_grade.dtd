@@ -1,0 +1,15 @@
+<!ELEMENT fluid_balance_chart_grade (id,created_at,updated_at,deleted_at,fluid_balance_chart_id,total_intake_ml,total_output_ml,net_balance_ml,urine_output_ml,hours_observed,weight_kg,urine_output_ml_kg_h,fluid_status,graded_at)>
+<!ELEMENT id (#PCDATA)>
+<!ELEMENT created_at (#PCDATA)>
+<!ELEMENT updated_at (#PCDATA)>
+<!ELEMENT deleted_at (#PCDATA)>
+<!ELEMENT fluid_balance_chart_id (#PCDATA)>
+<!ELEMENT total_intake_ml (#PCDATA)>
+<!ELEMENT total_output_ml (#PCDATA)>
+<!ELEMENT net_balance_ml (#PCDATA)>
+<!ELEMENT urine_output_ml (#PCDATA)>
+<!ELEMENT hours_observed (#PCDATA)>
+<!ELEMENT weight_kg (#PCDATA)>
+<!ELEMENT urine_output_ml_kg_h (#PCDATA)>
+<!ELEMENT fluid_status (#PCDATA)>
+<!ELEMENT graded_at (#PCDATA)>

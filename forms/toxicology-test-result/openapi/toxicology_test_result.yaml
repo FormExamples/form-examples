@@ -1,0 +1,267 @@
+# Generated from sql/. Do not edit by hand.
+# SOURCE: toxicology_test_result
+openapi: 3.1.0
+info:
+  title: Toxicology Test Result — ToxicologyTestResult
+  version: 1.0.0
+  description: Toxicology / poisons / therapeutic-drug-level test result (report). Captures the specimen condition, clinical history and suspected agent, the assay result values (paracetamol, salicylate, ethanol, lithium, digoxin, carboxyhaemoglobin, drugs-of-abuse screen, named specific drug), the paracetamol-nomogram interpretation, the overall result status, the narrative findings and impression, recommended follow-up, and critical-result communication. This is the source-of-truth record that the four-axis interpretation grade is computed from.
+paths:
+  /toxicology-test-results:
+    get:
+      summary: List ToxicologyTestResult records
+      operationId: listToxicologyTestResult
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of ToxicologyTestResult records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/ToxicologyTestResult"
+    post:
+      summary: Create a new ToxicologyTestResult
+      operationId: createToxicologyTestResult
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ToxicologyTestResult"
+      responses:
+        "201":
+          description: The newly created ToxicologyTestResult
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ToxicologyTestResult"
+        "400":
+          description: Validation error
+  /toxicology-test-results/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one ToxicologyTestResult by id
+      operationId: getToxicologyTestResult
+      responses:
+        "200":
+          description: The requested ToxicologyTestResult
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ToxicologyTestResult"
+        "404":
+          description: ToxicologyTestResult not found
+    patch:
+      summary: Update an existing ToxicologyTestResult
+      operationId: updateToxicologyTestResult
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ToxicologyTestResult"
+      responses:
+        "200":
+          description: The updated ToxicologyTestResult
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ToxicologyTestResult"
+        "404":
+          description: ToxicologyTestResult not found
+    delete:
+      summary: Soft-delete a ToxicologyTestResult
+      operationId: deleteToxicologyTestResult
+      responses:
+        "204":
+          description: ToxicologyTestResult deleted
+        "404":
+          description: ToxicologyTestResult not found
+components:
+  schemas:
+    ToxicologyTestResult:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was updated most-recently.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was deleted a.k.a. soft-removed.
+        patient_id:
+          type: string
+          format: uuid
+          description: Foreign key to the patient.
+        clinician_id:
+          type: string
+          format: uuid
+          description: Foreign key to the reporting clinician (clinical biochemist / toxicologist / emergency physician).
+        originating_request_reference:
+          type: string
+          maxLength: 255
+          description: Free-text reference linking this report back to the originating toxicology test request (referral).
+        report_status:
+          type: string
+          enum:
+            - preliminary
+            - final
+            - amended
+            - cancelled
+            - ""
+          description: "Report lifecycle status: preliminary, final, amended, cancelled."
+        performed_date:
+          type: string
+          format: date
+          description: Date the toxicology assay was performed.
+        reported_date:
+          type: string
+          format: date
+          description: Date the report was authored / signed.
+        specimen_condition:
+          type: string
+          enum:
+            - satisfactory
+            - insufficient
+            - delayed
+            - ""
+          description: "Condition of the specimen on receipt: satisfactory, insufficient, delayed."
+        clinical_history:
+          type: string
+          maxLength: 1000
+          description: Clinical history and the question the assay was performed to answer.
+        suspected_agent:
+          type: string
+          maxLength: 500
+          description: Suspected agent(s) ingested or implicated.
+        time_since_ingestion_hours:
+          type: number
+          format: double
+          description: Hours elapsed between ingestion and specimen collection, for nomogram and timing interpretation.
+        paracetamol_level_mg_l:
+          type: number
+          format: double
+          description: Paracetamol (acetaminophen) level in mg/L; interpretable on the UK treatment nomogram only at >= 4 h post-ingestion.
+        salicylate_level_mg_l:
+          type: number
+          format: double
+          description: Salicylate (aspirin) level in mg/L.
+        ethanol_level:
+          type: number
+          format: double
+          description: Blood ethanol (alcohol) level in the reporting laboratory units (e.g. mg/dL or mmol/L).
+        lithium_level_mmol_l:
+          type: number
+          format: double
+          description: Lithium level in mmol/L; therapeutic range is narrow, toxicity at modest elevation.
+        digoxin_level:
+          type: number
+          format: double
+          description: Digoxin level in the reporting laboratory units (e.g. ng/mL or nmol/L).
+        carboxyhaemoglobin_percent:
+          type: number
+          format: double
+          description: Carboxyhaemoglobin saturation as a percentage, for carbon-monoxide exposure.
+        drugs_of_abuse_screen:
+          type: string
+          maxLength: 1000
+          description: Drugs-of-abuse screen result narrative (opiates, benzodiazepines, cocaine, amphetamines, etc.).
+        specific_drug_level:
+          type: string
+          maxLength: 1000
+          description: Named specific drug level result narrative for an agent not captured by a dedicated column.
+        paracetamol_nomogram:
+          type: string
+          enum:
+            - above-treatment-line
+            - below-treatment-line
+            - not-applicable
+            - ""
+          description: "Paracetamol treatment-nomogram interpretation: above-treatment-line, below-treatment-line, not-applicable."
+        overall_result_status:
+          type: string
+          enum:
+            - normal
+            - abnormal
+            - critical
+            - ""
+          description: "Overall result status: normal, abnormal, critical."
+        toxic_level_present:
+          type: boolean
+          description: Whether any reported level is in a toxic range requiring action.
+        findings_narrative:
+          type: string
+          maxLength: 2000
+          description: Narrative description of the result values and their significance (the body of the report).
+        impression:
+          type: string
+          maxLength: 2000
+          description: Summary impression / conclusion answering the clinical question.
+        reporting_category:
+          type: string
+          maxLength: 50
+          description: Structured-reporting category label (e.g. a nomogram band or therapeutic / toxic descriptor).
+        recommended_follow_up:
+          type: string
+          maxLength: 1000
+          description: Recommended follow-up assay, antidote, or management.
+        critical_result_communicated:
+          type: boolean
+          description: Whether a critical or unexpected significant result was communicated directly to the requester.
+        reported_to:
+          type: string
+          maxLength: 500
+          description: Who the critical / urgent result was communicated to, with date and time if applicable.
+      required:
+        - created_at
+        - updated_at
+        - patient_id
+        - clinician_id
+        - originating_request_reference
+        - report_status
+        - specimen_condition
+        - clinical_history
+        - suspected_agent
+        - drugs_of_abuse_screen
+        - specific_drug_level
+        - paracetamol_nomogram
+        - overall_result_status
+        - toxic_level_present
+        - findings_narrative
+        - impression
+        - reporting_category
+        - recommended_follow_up
+        - critical_result_communicated
+        - reported_to
+      description: Toxicology / poisons / therapeutic-drug-level test result (report). Captures the specimen condition, clinical history and suspected agent, the assay result values (paracetamol, salicylate, ethanol, lithium, digoxin, carboxyhaemoglobin, drugs-of-abuse screen, named specific drug), the paracetamol-nomogram interpretation, the overall result status, the narrative findings and impression, recommended follow-up, and critical-result communication. This is the source-of-truth record that the four-axis interpretation grade is computed from.

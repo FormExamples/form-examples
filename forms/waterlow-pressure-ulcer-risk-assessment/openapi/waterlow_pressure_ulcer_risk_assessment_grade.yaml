@@ -1,0 +1,194 @@
+# Generated from sql/. Do not edit by hand.
+# SOURCE: waterlow_pressure_ulcer_risk_assessment_grade
+openapi: 3.1.0
+info:
+  title: Waterlow Pressure Ulcer Risk Assessment — WaterlowPressureUlcerRiskAssessmentGrade
+  version: 1.0.0
+  description: "Computed Waterlow grading result: per-category points, summed Waterlow total, derived risk band, and recommended prevention actions."
+paths:
+  /waterlow-pressure-ulcer-risk-assessment-grades:
+    get:
+      summary: List WaterlowPressureUlcerRiskAssessmentGrade records
+      operationId: listWaterlowPressureUlcerRiskAssessmentGrade
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of WaterlowPressureUlcerRiskAssessmentGrade records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/WaterlowPressureUlcerRiskAssessmentGrade"
+    post:
+      summary: Create a new WaterlowPressureUlcerRiskAssessmentGrade
+      operationId: createWaterlowPressureUlcerRiskAssessmentGrade
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/WaterlowPressureUlcerRiskAssessmentGrade"
+      responses:
+        "201":
+          description: The newly created WaterlowPressureUlcerRiskAssessmentGrade
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/WaterlowPressureUlcerRiskAssessmentGrade"
+        "400":
+          description: Validation error
+  /waterlow-pressure-ulcer-risk-assessment-grades/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one WaterlowPressureUlcerRiskAssessmentGrade by id
+      operationId: getWaterlowPressureUlcerRiskAssessmentGrade
+      responses:
+        "200":
+          description: The requested WaterlowPressureUlcerRiskAssessmentGrade
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/WaterlowPressureUlcerRiskAssessmentGrade"
+        "404":
+          description: WaterlowPressureUlcerRiskAssessmentGrade not found
+    patch:
+      summary: Update an existing WaterlowPressureUlcerRiskAssessmentGrade
+      operationId: updateWaterlowPressureUlcerRiskAssessmentGrade
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/WaterlowPressureUlcerRiskAssessmentGrade"
+      responses:
+        "200":
+          description: The updated WaterlowPressureUlcerRiskAssessmentGrade
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/WaterlowPressureUlcerRiskAssessmentGrade"
+        "404":
+          description: WaterlowPressureUlcerRiskAssessmentGrade not found
+    delete:
+      summary: Soft-delete a WaterlowPressureUlcerRiskAssessmentGrade
+      operationId: deleteWaterlowPressureUlcerRiskAssessmentGrade
+      responses:
+        "204":
+          description: WaterlowPressureUlcerRiskAssessmentGrade deleted
+        "404":
+          description: WaterlowPressureUlcerRiskAssessmentGrade not found
+components:
+  schemas:
+    WaterlowPressureUlcerRiskAssessmentGrade:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was most recently updated.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was soft-deleted.
+        waterlow_pressure_ulcer_risk_assessment_id:
+          type: string
+          format: uuid
+          description: Foreign key to the parent assessment (unique, 1:1).
+        build_points:
+          type: integer
+          format: int32
+          description: Points contributed by the build / weight for height category.
+        skin_points:
+          type: integer
+          format: int32
+          description: Points contributed by the skin type category.
+        sex_points:
+          type: integer
+          format: int32
+          description: Points contributed by the sex sub-category of the sex-and-age category.
+        age_points:
+          type: integer
+          format: int32
+          description: Points contributed by the age sub-category of the sex-and-age category.
+        continence_points:
+          type: integer
+          format: int32
+          description: Points contributed by the continence category.
+        mobility_points:
+          type: integer
+          format: int32
+          description: Points contributed by the mobility category.
+        tissue_malnutrition_points:
+          type: integer
+          format: int32
+          description: Points contributed by the tissue malnutrition special-risk group.
+        neurological_deficit_points:
+          type: integer
+          format: int32
+          description: Points contributed by the neurological deficit special-risk group.
+        major_surgery_trauma_points:
+          type: integer
+          format: int32
+          description: Points contributed by the major surgery or trauma special-risk group.
+        medication_points:
+          type: integer
+          format: int32
+          description: Points contributed by the medication special-risk group.
+        total_score:
+          type: integer
+          format: int32
+          description: Summed Waterlow score across all core categories and special-risk groups (higher means higher risk).
+        risk_band:
+          type: string
+          enum:
+            - low
+            - at-risk
+            - high-risk
+            - very-high-risk
+            - ""
+          description: "Derived risk band: low (< 10), at-risk (10-14), high-risk (15-19), or very-high-risk (>= 20)."
+        prevention_actions:
+          type: string
+          description: Recommended prevention actions (support surface, repositioning, skin care) for the derived band.
+        graded_at:
+          type: string
+          format: date-time
+          description: Timestamp when the engine last computed the grade.
+      required:
+        - created_at
+        - updated_at
+        - waterlow_pressure_ulcer_risk_assessment_id
+        - risk_band
+        - prevention_actions
+        - graded_at
+      description: "Computed Waterlow grading result: per-category points, summed Waterlow total, derived risk band, and recommended prevention actions."

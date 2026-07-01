@@ -1,0 +1,33 @@
+// Generated from sql/. Do not edit by hand.
+// SOURCE: sequential_organ_failure_assessment_grade_rule
+
+syntax = "proto3";
+
+package form_examples.sequential_organ_failure_assessment;
+
+enum SequentialOrganFailureAssessmentGradeRuleParameterEnum {
+  PARAMETER_UNSPECIFIED = 0;
+  PARAMETER_RESPIRATION = 1;  // respiration
+  PARAMETER_COAGULATION = 2;  // coagulation
+  PARAMETER_LIVER = 3;  // liver
+  PARAMETER_CARDIOVASCULAR = 4;  // cardiovascular
+  PARAMETER_CNS = 5;  // cns
+  PARAMETER_RENAL = 6;  // renal
+  PARAMETER_TOTAL = 7;  // total
+  PARAMETER_DELTA = 8;  // delta
+  PARAMETER_BAND = 9;  // band
+  PARAMETER_SEPSIS = 10;  // sepsis
+}
+
+message SequentialOrganFailureAssessmentGradeRule {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string sequential_organ_failure_assessment_grade_id = 5;  // UUID — uuid
+  string rule_id = 6;  // VARCHAR(40) — max 40 chars
+  SequentialOrganFailureAssessmentGradeRuleParameterEnum parameter = 7;  // VARCHAR(20)
+  int32 points = 8;  // INT
+  string category = 9;  // VARCHAR(50) — max 50 chars
+  string description = 10;  // VARCHAR(500) — max 500 chars
+}

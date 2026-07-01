@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE fluid_balance_chart SYSTEM "fluid_balance_chart.dtd">
+<fluid_balance_chart>
+<id>770e8400-e29b-41d4-a716-446655440002</id>
+<created_at>2026-04-09T10:00:00Z</created_at>
+<updated_at>2026-04-09T10:00:00Z</updated_at>
+<deleted_at>2026-04-09T10:00:00Z</deleted_at>
+<patient_id>550e8400-e29b-41d4-a716-446655440000</patient_id>
+<clinician_id>660e8400-e29b-41d4-a716-446655440001</clinician_id>
+<clinician_name>Example</clinician_name>
+<clinician_role>nurse</clinician_role>
+<patient_identifier></patient_identifier>
+<ward_or_unit>mg/dL</ward_or_unit>
+<chart_start_at>2026-04-09T10:00:00Z</chart_start_at>
+<chart_period_hours>0.0</chart_period_hours>
+<weight_kg>70.0</weight_kg>
+<clinical_note>Example Hospital</clinical_note>
+</fluid_balance_chart>

@@ -1,0 +1,166 @@
+# Generated from sql/. Do not edit by hand.
+# SOURCE: waterlow_pressure_ulcer_risk_assessment_grade_rule
+openapi: 3.1.0
+info:
+  title: Waterlow Pressure Ulcer Risk Assessment — WaterlowPressureUlcerRiskAssessmentGradeRule
+  version: 1.0.0
+  description: "Audit trail of every grading rule that fired during Waterlow computation: category, points contributed, label, and description."
+paths:
+  /waterlow-pressure-ulcer-risk-assessment-grade-rules:
+    get:
+      summary: List WaterlowPressureUlcerRiskAssessmentGradeRule records
+      operationId: listWaterlowPressureUlcerRiskAssessmentGradeRule
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of WaterlowPressureUlcerRiskAssessmentGradeRule records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/WaterlowPressureUlcerRiskAssessmentGradeRule"
+    post:
+      summary: Create a new WaterlowPressureUlcerRiskAssessmentGradeRule
+      operationId: createWaterlowPressureUlcerRiskAssessmentGradeRule
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/WaterlowPressureUlcerRiskAssessmentGradeRule"
+      responses:
+        "201":
+          description: The newly created WaterlowPressureUlcerRiskAssessmentGradeRule
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/WaterlowPressureUlcerRiskAssessmentGradeRule"
+        "400":
+          description: Validation error
+  /waterlow-pressure-ulcer-risk-assessment-grade-rules/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one WaterlowPressureUlcerRiskAssessmentGradeRule by id
+      operationId: getWaterlowPressureUlcerRiskAssessmentGradeRule
+      responses:
+        "200":
+          description: The requested WaterlowPressureUlcerRiskAssessmentGradeRule
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/WaterlowPressureUlcerRiskAssessmentGradeRule"
+        "404":
+          description: WaterlowPressureUlcerRiskAssessmentGradeRule not found
+    patch:
+      summary: Update an existing WaterlowPressureUlcerRiskAssessmentGradeRule
+      operationId: updateWaterlowPressureUlcerRiskAssessmentGradeRule
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/WaterlowPressureUlcerRiskAssessmentGradeRule"
+      responses:
+        "200":
+          description: The updated WaterlowPressureUlcerRiskAssessmentGradeRule
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/WaterlowPressureUlcerRiskAssessmentGradeRule"
+        "404":
+          description: WaterlowPressureUlcerRiskAssessmentGradeRule not found
+    delete:
+      summary: Soft-delete a WaterlowPressureUlcerRiskAssessmentGradeRule
+      operationId: deleteWaterlowPressureUlcerRiskAssessmentGradeRule
+      responses:
+        "204":
+          description: WaterlowPressureUlcerRiskAssessmentGradeRule deleted
+        "404":
+          description: WaterlowPressureUlcerRiskAssessmentGradeRule not found
+components:
+  schemas:
+    WaterlowPressureUlcerRiskAssessmentGradeRule:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was most recently updated.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was soft-deleted.
+        waterlow_pressure_ulcer_risk_assessment_grade_id:
+          type: string
+          format: uuid
+          description: Foreign key to the parent grade.
+        rule_id:
+          type: string
+          maxLength: 40
+          description: Stable rule identifier (e.g. R-MOBILITY-BEDBOUND-01).
+        category:
+          type: string
+          enum:
+            - build
+            - skin
+            - sex
+            - age
+            - continence
+            - mobility
+            - tissue-malnutrition
+            - neurological-deficit
+            - major-surgery-trauma
+            - medication
+            - band
+          description: "Scored category the rule belongs to: build, skin, sex, age, continence, mobility, tissue-malnutrition, neurological-deficit, major-surgery-trauma, medication, or band."
+        points:
+          type: integer
+          format: int32
+          description: Points contributed by this rule for its category.
+        label:
+          type: string
+          maxLength: 100
+          description: Human-readable label of the selected option that contributed the points.
+        description:
+          type: string
+          maxLength: 500
+          description: Human-readable description of why the rule fired.
+      required:
+        - created_at
+        - updated_at
+        - waterlow_pressure_ulcer_risk_assessment_grade_id
+        - rule_id
+        - category
+        - label
+        - description
+      description: "Audit trail of every grading rule that fired during Waterlow computation: category, points contributed, label, and description."

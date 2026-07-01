@@ -1,0 +1,72 @@
+// Generated from sql/. Do not edit by hand.
+// SOURCE: medication_reconciliation
+
+syntax = "proto3";
+
+package form_examples.medication_reconciliation;
+
+enum MedicationReconciliationReconciliationTypeEnum {
+  RECONCILIATIONTYPE_UNSPECIFIED = 0;
+  RECONCILIATIONTYPE_ADMISSION = 1;  // admission
+  RECONCILIATIONTYPE_TRANSFER = 2;  // transfer
+  RECONCILIATIONTYPE_DISCHARGE = 3;  // discharge
+}
+
+enum MedicationReconciliationCareSettingEnum {
+  CARESETTING_UNSPECIFIED = 0;
+  CARESETTING_EMERGENCY_DEPARTMENT = 1;  // emergency-department
+  CARESETTING_ACUTE_MEDICAL_UNIT = 2;  // acute-medical-unit
+  CARESETTING_SURGICAL_ADMISSIONS = 3;  // surgical-admissions
+  CARESETTING_WARD = 4;  // ward
+  CARESETTING_CRITICAL_CARE = 5;  // critical-care
+  CARESETTING_OTHER = 6;  // other
+}
+
+enum MedicationReconciliationClinicianRoleEnum {
+  CLINICIANROLE_UNSPECIFIED = 0;
+  CLINICIANROLE_PHARMACIST = 1;  // pharmacist
+  CLINICIANROLE_PHARMACY_TECHNICIAN = 2;  // pharmacy-technician
+  CLINICIANROLE_PRESCRIBER = 3;  // prescriber
+  CLINICIANROLE_NURSE = 4;  // nurse
+  CLINICIANROLE_OTHER = 5;  // other
+}
+
+enum MedicationReconciliationAgeBandEnum {
+  AGEBAND_UNSPECIFIED = 0;
+  AGEBAND_ADULT = 1;  // adult
+  AGEBAND_PAEDIATRIC = 2;  // paediatric
+}
+
+enum MedicationReconciliationSexEnum {
+  SEX_UNSPECIFIED = 0;
+  SEX_FEMALE = 1;  // female
+  SEX_MALE = 2;  // male
+  SEX_INTERSEX = 3;  // intersex
+  SEX_UNKNOWN = 4;  // unknown
+}
+
+enum MedicationReconciliationAllergyStatusEnum {
+  ALLERGYSTATUS_UNSPECIFIED = 0;
+  ALLERGYSTATUS_DOCUMENTED = 1;  // documented
+  ALLERGYSTATUS_NO_KNOWN_DRUG_ALLERGIES = 2;  // no-known-drug-allergies
+  ALLERGYSTATUS_NOT_DOCUMENTED = 3;  // not-documented
+}
+
+message MedicationReconciliation {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string patient_id = 5;  // UUID — uuid
+  string clinician_id = 6;  // UUID — uuid
+  MedicationReconciliationReconciliationTypeEnum reconciliation_type = 7;  // VARCHAR(15)
+  MedicationReconciliationCareSettingEnum care_setting = 8;  // VARCHAR(25)
+  string reconciled_at = 9;  // TIMESTAMPTZ — iso 8601
+  string clinician_name = 10;  // TEXT
+  MedicationReconciliationClinicianRoleEnum clinician_role = 11;  // VARCHAR(20)
+  string patient_identifier = 12;  // TEXT
+  MedicationReconciliationAgeBandEnum age_band = 13;  // VARCHAR(15)
+  MedicationReconciliationSexEnum sex = 14;  // VARCHAR(20)
+  double weight_kg = 15;  // NUMERIC(5,1) — numeric(5,1)
+  MedicationReconciliationAllergyStatusEnum allergy_status = 16;  // VARCHAR(25)
+}

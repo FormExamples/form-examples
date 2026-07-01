@@ -1,0 +1,27 @@
+// Generated from sql/. Do not edit by hand.
+// SOURCE: chronic_kidney_disease_review_grade_rule
+
+syntax = "proto3";
+
+package form_examples.chronic_kidney_disease_review;
+
+enum ChronicKidneyDiseaseReviewGradeRuleSectionEnum {
+  SECTION_UNSPECIFIED = 0;
+  SECTION_GFR_STAGE = 1;  // gfr-stage
+  SECTION_ALBUMINURIA_STAGE = 2;  // albuminuria-stage
+  SECTION_RISK_ZONE = 3;  // risk-zone
+  SECTION_BP_TARGET = 4;  // bp-target
+  SECTION_COMPLETENESS = 5;  // completeness
+}
+
+message ChronicKidneyDiseaseReviewGradeRule {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string chronic_kidney_disease_review_grade_id = 5;  // UUID — uuid
+  string rule_id = 6;  // VARCHAR(40) — max 40 chars
+  ChronicKidneyDiseaseReviewGradeRuleSectionEnum section = 7;  // VARCHAR(20)
+  string category = 8;  // VARCHAR(50) — max 50 chars
+  string description = 9;  // VARCHAR(500) — max 500 chars
+}

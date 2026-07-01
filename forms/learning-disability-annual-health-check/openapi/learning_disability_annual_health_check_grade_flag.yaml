@@ -1,0 +1,169 @@
+# Generated from sql/. Do not edit by hand.
+# SOURCE: learning_disability_annual_health_check_grade_flag
+openapi: 3.1.0
+info:
+  title: Learning Disability Annual Health Check — LearningDisabilityAnnualHealthCheckGradeFlag
+  version: 1.0.0
+  description: Clinical flags that fire independently of the completeness status, with priority and a suggested action for the clinician or governance team.
+paths:
+  /learning-disability-annual-health-check-grade-flags:
+    get:
+      summary: List LearningDisabilityAnnualHealthCheckGradeFlag records
+      operationId: listLearningDisabilityAnnualHealthCheckGradeFlag
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of LearningDisabilityAnnualHealthCheckGradeFlag records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/LearningDisabilityAnnualHealthCheckGradeFlag"
+    post:
+      summary: Create a new LearningDisabilityAnnualHealthCheckGradeFlag
+      operationId: createLearningDisabilityAnnualHealthCheckGradeFlag
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/LearningDisabilityAnnualHealthCheckGradeFlag"
+      responses:
+        "201":
+          description: The newly created LearningDisabilityAnnualHealthCheckGradeFlag
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/LearningDisabilityAnnualHealthCheckGradeFlag"
+        "400":
+          description: Validation error
+  /learning-disability-annual-health-check-grade-flags/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one LearningDisabilityAnnualHealthCheckGradeFlag by id
+      operationId: getLearningDisabilityAnnualHealthCheckGradeFlag
+      responses:
+        "200":
+          description: The requested LearningDisabilityAnnualHealthCheckGradeFlag
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/LearningDisabilityAnnualHealthCheckGradeFlag"
+        "404":
+          description: LearningDisabilityAnnualHealthCheckGradeFlag not found
+    patch:
+      summary: Update an existing LearningDisabilityAnnualHealthCheckGradeFlag
+      operationId: updateLearningDisabilityAnnualHealthCheckGradeFlag
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/LearningDisabilityAnnualHealthCheckGradeFlag"
+      responses:
+        "200":
+          description: The updated LearningDisabilityAnnualHealthCheckGradeFlag
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/LearningDisabilityAnnualHealthCheckGradeFlag"
+        "404":
+          description: LearningDisabilityAnnualHealthCheckGradeFlag not found
+    delete:
+      summary: Soft-delete a LearningDisabilityAnnualHealthCheckGradeFlag
+      operationId: deleteLearningDisabilityAnnualHealthCheckGradeFlag
+      responses:
+        "204":
+          description: LearningDisabilityAnnualHealthCheckGradeFlag deleted
+        "404":
+          description: LearningDisabilityAnnualHealthCheckGradeFlag not found
+components:
+  schemas:
+    LearningDisabilityAnnualHealthCheckGradeFlag:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was most recently updated.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was soft-deleted.
+        learning_disability_annual_health_check_grade_id:
+          type: string
+          format: uuid
+          description: Foreign key to the parent grade.
+        flag_id:
+          type: string
+          maxLength: 50
+          description: Stable flag identifier (e.g. F-STOMP-001).
+        category:
+          type: string
+          enum:
+            - stomp
+            - missing-screening-uptake
+            - unaddressed-physical-health
+            - no-health-action-plan
+            - reasonable-adjustments-not-recorded
+            - dysphagia-constipation-risk
+            - incomplete
+            - other
+            - ""
+          description: "Flag category: stomp, missing-screening-uptake, unaddressed-physical-health, no-health-action-plan, reasonable-adjustments-not-recorded, dysphagia-constipation-risk, incomplete, or other."
+        priority:
+          type: string
+          enum:
+            - low
+            - medium
+            - high
+            - ""
+          description: "Priority: low, medium, high."
+        description:
+          type: string
+          maxLength: 500
+          description: Human-readable description of what fired the flag.
+        suggested_action:
+          type: string
+          maxLength: 500
+          description: "Suggested clinical or governance action (e.g. \"arrange a STOMP medication review\", \"produce a Health Action Plan\")."
+      required:
+        - created_at
+        - updated_at
+        - learning_disability_annual_health_check_grade_id
+        - flag_id
+        - category
+        - priority
+        - description
+        - suggested_action
+      description: Clinical flags that fire independently of the completeness status, with priority and a suggested action for the clinician or governance team.

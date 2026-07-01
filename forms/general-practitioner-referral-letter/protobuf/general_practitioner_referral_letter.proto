@@ -1,0 +1,64 @@
+// Generated from sql/. Do not edit by hand.
+// SOURCE: general_practitioner_referral_letter
+
+syntax = "proto3";
+
+package form_examples.general_practitioner_referral_letter;
+
+enum GeneralPractitionerReferralLetterReferrerRoleEnum {
+  REFERRERROLE_UNSPECIFIED = 0;
+  REFERRERROLE_GP = 1;  // gp
+  REFERRERROLE_GP_REGISTRAR = 2;  // gp-registrar
+  REFERRERROLE_NURSE_PRACTITIONER = 3;  // nurse-practitioner
+  REFERRERROLE_PHARMACIST = 4;  // pharmacist
+  REFERRERROLE_PARAMEDIC = 5;  // paramedic
+  REFERRERROLE_OTHER = 6;  // other
+}
+
+enum GeneralPractitionerReferralLetterUrgencyEnum {
+  URGENCY_UNSPECIFIED = 0;
+  URGENCY_ROUTINE = 1;  // routine
+  URGENCY_URGENT = 2;  // urgent
+  URGENCY_TWO_WEEK_WAIT = 3;  // two-week-wait
+  URGENCY_EMERGENCY = 4;  // emergency
+}
+
+enum GeneralPractitionerReferralLetterConsentToShareEnum {
+  CONSENTTOSHARE_UNSPECIFIED = 0;
+  CONSENTTOSHARE_YES = 1;  // yes
+  CONSENTTOSHARE_NO = 2;  // no
+}
+
+message GeneralPractitionerReferralLetter {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string patient_id = 5;  // UUID — uuid
+  string clinician_id = 6;  // UUID — uuid
+  string patient_identifier = 7;  // VARCHAR(100) — max 100 chars
+  GeneralPractitionerReferralLetterReferrerRoleEnum referrer_role = 8;  // VARCHAR(30)
+  string referring_practice = 9;  // TEXT
+  string referral_date = 10;  // DATE — iso 8601 date
+  string access_needs = 11;  // TEXT
+  string referral_specialty = 12;  // TEXT
+  string named_clinician = 13;  // TEXT
+  string receiving_organisation = 14;  // TEXT
+  GeneralPractitionerReferralLetterUrgencyEnum urgency = 15;  // VARCHAR(20)
+  string urgency_reason = 16;  // TEXT
+  string suspected_cancer_criterion = 17;  // TEXT
+  string suspected_cancer_pathway = 18;  // TEXT
+  string reason_for_referral = 19;  // TEXT
+  string relevant_history = 20;  // TEXT
+  string presenting_problem = 21;  // TEXT
+  string symptom_duration = 22;  // TEXT
+  string red_flag_symptoms = 23;  // TEXT
+  string examination_findings = 24;  // TEXT
+  string investigation_results = 25;  // TEXT
+  string current_medications = 26;  // TEXT
+  string allergies = 27;  // TEXT
+  string patient_expectations = 28;  // TEXT
+  GeneralPractitionerReferralLetterConsentToShareEnum consent_to_share = 29;  // VARCHAR(5)
+  string safety_netting = 30;  // TEXT
+  string clinical_note = 31;  // TEXT
+}

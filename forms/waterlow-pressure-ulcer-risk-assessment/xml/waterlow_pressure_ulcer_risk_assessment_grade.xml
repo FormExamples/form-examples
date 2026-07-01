@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE waterlow_pressure_ulcer_risk_assessment_grade SYSTEM "waterlow_pressure_ulcer_risk_assessment_grade.dtd">
+<waterlow_pressure_ulcer_risk_assessment_grade>
+<id>880e8400-e29b-41d4-a716-446655440003</id>
+<created_at>2026-04-09T10:00:00Z</created_at>
+<updated_at>2026-04-09T10:00:00Z</updated_at>
+<deleted_at>2026-04-09T10:00:00Z</deleted_at>
+<waterlow_pressure_ulcer_risk_assessment_id>770e8400-e29b-41d4-a716-446655440002</waterlow_pressure_ulcer_risk_assessment_id>
+<build_points>1</build_points>
+<skin_points>1</skin_points>
+<sex_points>1</sex_points>
+<age_points>45</age_points>
+<continence_points>1</continence_points>
+<mobility_points>1</mobility_points>
+<tissue_malnutrition_points>1</tissue_malnutrition_points>
+<neurological_deficit_points>1</neurological_deficit_points>
+<major_surgery_trauma_points>1</major_surgery_trauma_points>
+<medication_points>1</medication_points>
+<total_score>5</total_score>
+<risk_band>low</risk_band>
+<prevention_actions></prevention_actions>
+<graded_at>2026-04-09T10:00:00Z</graded_at>
+</waterlow_pressure_ulcer_risk_assessment_grade>

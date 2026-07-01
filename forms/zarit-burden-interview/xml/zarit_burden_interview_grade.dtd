@@ -1,0 +1,11 @@
+<!ELEMENT zarit_burden_interview_grade (id,created_at,updated_at,deleted_at,zarit_burden_interview_id,total_score,max_score,burden_band,short_form_score,graded_at)>
+<!ELEMENT id (#PCDATA)>
+<!ELEMENT created_at (#PCDATA)>
+<!ELEMENT updated_at (#PCDATA)>
+<!ELEMENT deleted_at (#PCDATA)>
+<!ELEMENT zarit_burden_interview_id (#PCDATA)>
+<!ELEMENT total_score (#PCDATA)>
+<!ELEMENT max_score (#PCDATA)>
+<!ELEMENT burden_band (#PCDATA)>
+<!ELEMENT short_form_score (#PCDATA)>
+<!ELEMENT graded_at (#PCDATA)>

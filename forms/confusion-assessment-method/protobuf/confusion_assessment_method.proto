@@ -1,0 +1,151 @@
+// Generated from sql/. Do not edit by hand.
+// SOURCE: confusion_assessment_method
+
+syntax = "proto3";
+
+package form_examples.confusion_assessment_method;
+
+enum ConfusionAssessmentMethodAssessorRoleEnum {
+  ASSESSORROLE_UNSPECIFIED = 0;
+  ASSESSORROLE_NURSE = 1;  // nurse
+  ASSESSORROLE_DOCTOR = 2;  // doctor
+  ASSESSORROLE_GERIATRICIAN = 3;  // geriatrician
+  ASSESSORROLE_LIAISON_PSYCHIATRIST = 4;  // liaison-psychiatrist
+  ASSESSORROLE_PHYSIOTHERAPIST = 5;  // physiotherapist
+  ASSESSORROLE_OCCUPATIONAL_THERAPIST = 6;  // occupational-therapist
+  ASSESSORROLE_RESEARCHER = 7;  // researcher
+  ASSESSORROLE_OTHER = 8;  // other
+}
+
+enum ConfusionAssessmentMethodCamVariantEnum {
+  CAMVARIANT_UNSPECIFIED = 0;
+  CAMVARIANT_CAM = 1;  // cam
+  CAMVARIANT_CAM_ICU = 2;  // cam-icu
+}
+
+enum ConfusionAssessmentMethodAgeBandEnum {
+  AGEBAND_UNSPECIFIED = 0;
+  AGEBAND_V_16_39 = 1;  // 16-39
+  AGEBAND_V_40_59 = 2;  // 40-59
+  AGEBAND_V_60_74 = 3;  // 60-74
+  AGEBAND_V_75_PLUS = 4;  // 75-plus
+}
+
+enum ConfusionAssessmentMethodSexEnum {
+  SEX_UNSPECIFIED = 0;
+  SEX_FEMALE = 1;  // female
+  SEX_MALE = 2;  // male
+  SEX_INTERSEX = 3;  // intersex
+  SEX_UNKNOWN = 4;  // unknown
+}
+
+enum ConfusionAssessmentMethodCognitiveBaselineEnum {
+  COGNITIVEBASELINE_UNSPECIFIED = 0;
+  COGNITIVEBASELINE_INDEPENDENT = 1;  // independent
+  COGNITIVEBASELINE_KNOWN_DEMENTIA = 2;  // known-dementia
+  COGNITIVEBASELINE_MILD_COGNITIVE_IMPAIRMENT = 3;  // mild-cognitive-impairment
+  COGNITIVEBASELINE_UNKNOWN = 4;  // unknown
+}
+
+enum ConfusionAssessmentMethodCollateralSourceEnum {
+  COLLATERALSOURCE_UNSPECIFIED = 0;
+  COLLATERALSOURCE_FAMILY = 1;  // family
+  COLLATERALSOURCE_CARER = 2;  // carer
+  COLLATERALSOURCE_NURSE = 3;  // nurse
+  COLLATERALSOURCE_NOTES = 4;  // notes
+  COLLATERALSOURCE_NONE = 5;  // none
+}
+
+enum ConfusionAssessmentMethodFeatureAcuteOnsetFluctuatingEnum {
+  FEATUREACUTEONSETFLUCTUATING_UNSPECIFIED = 0;
+  FEATUREACUTEONSETFLUCTUATING_PRESENT = 1;  // present
+  FEATUREACUTEONSETFLUCTUATING_ABSENT = 2;  // absent
+}
+
+enum ConfusionAssessmentMethodOnsetTimingEnum {
+  ONSETTIMING_UNSPECIFIED = 0;
+  ONSETTIMING_HOURS = 1;  // hours
+  ONSETTIMING_DAYS = 2;  // days
+  ONSETTIMING_WEEKS = 3;  // weeks
+  ONSETTIMING_UNKNOWN = 4;  // unknown
+}
+
+enum ConfusionAssessmentMethodFeatureInattentionEnum {
+  FEATUREINATTENTION_UNSPECIFIED = 0;
+  FEATUREINATTENTION_PRESENT = 1;  // present
+  FEATUREINATTENTION_ABSENT = 2;  // absent
+}
+
+enum ConfusionAssessmentMethodAttentionTestEnum {
+  ATTENTIONTEST_UNSPECIFIED = 0;
+  ATTENTIONTEST_DIGIT_SPAN = 1;  // digit-span
+  ATTENTIONTEST_MONTHS_BACKWARDS = 2;  // months-backwards
+  ATTENTIONTEST_SERIAL_SEVENS = 3;  // serial-sevens
+  ATTENTIONTEST_ATTENTION_SCREENING_EXAMINATION = 4;  // attention-screening-examination
+  ATTENTIONTEST_NOT_COMPLETABLE = 5;  // not-completable
+}
+
+enum ConfusionAssessmentMethodFeatureDisorganisedThinkingEnum {
+  FEATUREDISORGANISEDTHINKING_UNSPECIFIED = 0;
+  FEATUREDISORGANISEDTHINKING_PRESENT = 1;  // present
+  FEATUREDISORGANISEDTHINKING_ABSENT = 2;  // absent
+}
+
+enum ConfusionAssessmentMethodFeatureAlteredConsciousnessEnum {
+  FEATUREALTEREDCONSCIOUSNESS_UNSPECIFIED = 0;
+  FEATUREALTEREDCONSCIOUSNESS_PRESENT = 1;  // present
+  FEATUREALTEREDCONSCIOUSNESS_ABSENT = 2;  // absent
+}
+
+enum ConfusionAssessmentMethodConsciousnessLevelEnum {
+  CONSCIOUSNESSLEVEL_UNSPECIFIED = 0;
+  CONSCIOUSNESSLEVEL_ALERT = 1;  // alert
+  CONSCIOUSNESSLEVEL_VIGILANT = 2;  // vigilant
+  CONSCIOUSNESSLEVEL_LETHARGIC = 3;  // lethargic
+  CONSCIOUSNESSLEVEL_STUPOR = 4;  // stupor
+  CONSCIOUSNESSLEVEL_COMA = 5;  // coma
+}
+
+enum ConfusionAssessmentMethodMotoricSubtypeEnum {
+  MOTORICSUBTYPE_UNSPECIFIED = 0;
+  MOTORICSUBTYPE_HYPOACTIVE = 1;  // hypoactive
+  MOTORICSUBTYPE_HYPERACTIVE = 2;  // hyperactive
+  MOTORICSUBTYPE_MIXED = 3;  // mixed
+  MOTORICSUBTYPE_NORMAL = 4;  // normal
+}
+
+message ConfusionAssessmentMethod {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string patient_id = 5;  // UUID — uuid
+  string clinician_id = 6;  // UUID — uuid
+  string assessor_name = 7;  // VARCHAR(255) — max 255 chars
+  ConfusionAssessmentMethodAssessorRoleEnum assessor_role = 8;  // VARCHAR(30)
+  string assessed_at = 9;  // TIMESTAMPTZ — iso 8601
+  string ward_unit = 10;  // VARCHAR(100) — max 100 chars
+  ConfusionAssessmentMethodCamVariantEnum cam_variant = 11;  // VARCHAR(10)
+  string patient_identifier = 12;  // VARCHAR(100) — max 100 chars
+  ConfusionAssessmentMethodAgeBandEnum age_band = 13;  // VARCHAR(10)
+  ConfusionAssessmentMethodSexEnum sex = 14;  // VARCHAR(20)
+  ConfusionAssessmentMethodCognitiveBaselineEnum cognitive_baseline = 15;  // VARCHAR(30)
+  ConfusionAssessmentMethodCollateralSourceEnum collateral_source = 16;  // VARCHAR(30)
+  ConfusionAssessmentMethodFeatureAcuteOnsetFluctuatingEnum feature_acute_onset_fluctuating = 17;  // VARCHAR(10)
+  ConfusionAssessmentMethodOnsetTimingEnum onset_timing = 18;  // VARCHAR(20)
+  ConfusionAssessmentMethodFeatureInattentionEnum feature_inattention = 19;  // VARCHAR(10)
+  ConfusionAssessmentMethodAttentionTestEnum attention_test = 20;  // VARCHAR(30)
+  ConfusionAssessmentMethodFeatureDisorganisedThinkingEnum feature_disorganised_thinking = 21;  // VARCHAR(10)
+  ConfusionAssessmentMethodFeatureAlteredConsciousnessEnum feature_altered_consciousness = 22;  // VARCHAR(10)
+  ConfusionAssessmentMethodConsciousnessLevelEnum consciousness_level = 23;  // VARCHAR(20)
+  int32 rass_score = 24;  // INT
+  ConfusionAssessmentMethodMotoricSubtypeEnum motoric_subtype = 25;  // VARCHAR(20)
+  bool hallucinations = 26;  // BOOLEAN
+  bool delusions = 27;  // BOOLEAN
+  bool sleep_wake_disturbance = 28;  // BOOLEAN
+  bool deliriogenic_medication = 29;  // BOOLEAN
+  string deliriogenic_medication_detail = 30;  // TEXT
+  string suspected_precipitants = 31;  // TEXT
+  string recommended_actions = 32;  // TEXT
+  string clinical_note = 33;  // TEXT
+}

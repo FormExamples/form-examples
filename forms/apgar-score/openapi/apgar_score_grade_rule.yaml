@@ -1,0 +1,167 @@
+# Generated from sql/. Do not edit by hand.
+# SOURCE: apgar_score_grade_rule
+openapi: 3.1.0
+info:
+  title: Apgar Score — ApgarScoreGradeRule
+  version: 1.0.0
+  description: "Audit trail of every grading rule that fired during Apgar computation: timepoint, sign, points contributed, category, and description."
+paths:
+  /apgar-score-grade-rules:
+    get:
+      summary: List ApgarScoreGradeRule records
+      operationId: listApgarScoreGradeRule
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of ApgarScoreGradeRule records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/ApgarScoreGradeRule"
+    post:
+      summary: Create a new ApgarScoreGradeRule
+      operationId: createApgarScoreGradeRule
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ApgarScoreGradeRule"
+      responses:
+        "201":
+          description: The newly created ApgarScoreGradeRule
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ApgarScoreGradeRule"
+        "400":
+          description: Validation error
+  /apgar-score-grade-rules/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one ApgarScoreGradeRule by id
+      operationId: getApgarScoreGradeRule
+      responses:
+        "200":
+          description: The requested ApgarScoreGradeRule
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ApgarScoreGradeRule"
+        "404":
+          description: ApgarScoreGradeRule not found
+    patch:
+      summary: Update an existing ApgarScoreGradeRule
+      operationId: updateApgarScoreGradeRule
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ApgarScoreGradeRule"
+      responses:
+        "200":
+          description: The updated ApgarScoreGradeRule
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ApgarScoreGradeRule"
+        "404":
+          description: ApgarScoreGradeRule not found
+    delete:
+      summary: Soft-delete a ApgarScoreGradeRule
+      operationId: deleteApgarScoreGradeRule
+      responses:
+        "204":
+          description: ApgarScoreGradeRule deleted
+        "404":
+          description: ApgarScoreGradeRule not found
+components:
+  schemas:
+    ApgarScoreGradeRule:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was most recently updated.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was soft-deleted.
+        apgar_score_grade_id:
+          type: string
+          format: uuid
+          description: Foreign key to the parent grade.
+        rule_id:
+          type: string
+          maxLength: 40
+          description: Stable rule identifier (e.g. R-TOTAL-BAND-01, R-TREND-FALLING-01).
+        timepoint_minutes:
+          type: integer
+          format: int32
+          description: Timepoint in minutes the rule applies to (1, 5, 10, ...); null for cross-timepoint rules such as trend.
+        sign:
+          type: string
+          enum:
+            - appearance
+            - pulse
+            - grimace
+            - activity
+            - respiration
+            - total
+            - trend
+            - ""
+          description: "Scored sign the rule belongs to: appearance, pulse, grimace, activity, respiration, total (per-timepoint sum), or trend (across timepoints)."
+        points:
+          type: integer
+          format: int32
+          description: Points (0-2 for a sign, 0-10 for a total) contributed by this rule.
+        category:
+          type: string
+          maxLength: 50
+          description: Subject category (e.g. sign-score, total-band, trend-band).
+        description:
+          type: string
+          maxLength: 500
+          description: Human-readable description of why the rule fired.
+      required:
+        - created_at
+        - updated_at
+        - apgar_score_grade_id
+        - rule_id
+        - sign
+        - category
+        - description
+      description: "Audit trail of every grading rule that fired during Apgar computation: timepoint, sign, points contributed, category, and description."

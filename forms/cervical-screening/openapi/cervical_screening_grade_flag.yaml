@@ -1,0 +1,169 @@
+# Generated from sql/. Do not edit by hand.
+# SOURCE: cervical_screening_grade_flag
+openapi: 3.1.0
+info:
+  title: Cervical Screening — CervicalScreeningGradeFlag
+  version: 1.0.0
+  description: Safety flags that fire independently of the result class, with priority and a suggested action for the sample-taker or screening service.
+paths:
+  /cervical-screening-grade-flags:
+    get:
+      summary: List CervicalScreeningGradeFlag records
+      operationId: listCervicalScreeningGradeFlag
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of CervicalScreeningGradeFlag records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/CervicalScreeningGradeFlag"
+    post:
+      summary: Create a new CervicalScreeningGradeFlag
+      operationId: createCervicalScreeningGradeFlag
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CervicalScreeningGradeFlag"
+      responses:
+        "201":
+          description: The newly created CervicalScreeningGradeFlag
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CervicalScreeningGradeFlag"
+        "400":
+          description: Validation error
+  /cervical-screening-grade-flags/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one CervicalScreeningGradeFlag by id
+      operationId: getCervicalScreeningGradeFlag
+      responses:
+        "200":
+          description: The requested CervicalScreeningGradeFlag
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CervicalScreeningGradeFlag"
+        "404":
+          description: CervicalScreeningGradeFlag not found
+    patch:
+      summary: Update an existing CervicalScreeningGradeFlag
+      operationId: updateCervicalScreeningGradeFlag
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CervicalScreeningGradeFlag"
+      responses:
+        "200":
+          description: The updated CervicalScreeningGradeFlag
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CervicalScreeningGradeFlag"
+        "404":
+          description: CervicalScreeningGradeFlag not found
+    delete:
+      summary: Soft-delete a CervicalScreeningGradeFlag
+      operationId: deleteCervicalScreeningGradeFlag
+      responses:
+        "204":
+          description: CervicalScreeningGradeFlag deleted
+        "404":
+          description: CervicalScreeningGradeFlag not found
+components:
+  schemas:
+    CervicalScreeningGradeFlag:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was most recently updated.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was soft-deleted.
+        cervical_screening_grade_id:
+          type: string
+          format: uuid
+          description: Foreign key to the parent grade.
+        flag_id:
+          type: string
+          maxLength: 50
+          description: Stable flag identifier (e.g. F-URGENT-COLPOSCOPY-001).
+        category:
+          type: string
+          enum:
+            - urgent-colposcopy
+            - symptomatic-refer-regardless
+            - missing-consent
+            - inadequate-sample
+            - patient-overdue
+            - age-outside-range
+            - incomplete
+            - other
+            - ""
+          description: "Flag category: urgent-colposcopy, symptomatic-refer-regardless, missing-consent, inadequate-sample, patient-overdue, age-outside-range, incomplete, or other."
+        priority:
+          type: string
+          enum:
+            - low
+            - medium
+            - high
+            - ""
+          description: "Priority: low, medium, high."
+        description:
+          type: string
+          maxLength: 500
+          description: Human-readable description of what fired the flag.
+        suggested_action:
+          type: string
+          maxLength: 500
+          description: "Suggested clinical or service action (e.g. \"refer urgently for colposcopy\", \"record informed consent\")."
+      required:
+        - created_at
+        - updated_at
+        - cervical_screening_grade_id
+        - flag_id
+        - category
+        - priority
+        - description
+        - suggested_action
+      description: Safety flags that fire independently of the result class, with priority and a suggested action for the sample-taker or screening service.

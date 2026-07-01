@@ -1,0 +1,161 @@
+# Generated from sql/. Do not edit by hand.
+# SOURCE: child_safeguarding_referral_grade_rule
+openapi: 3.1.0
+info:
+  title: Child Safeguarding Referral — ChildSafeguardingReferralGradeRule
+  version: 1.0.0
+  description: "Audit trail of every grading rule that fired during grading: section, category, and description."
+paths:
+  /child-safeguarding-referral-grade-rules:
+    get:
+      summary: List ChildSafeguardingReferralGradeRule records
+      operationId: listChildSafeguardingReferralGradeRule
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of ChildSafeguardingReferralGradeRule records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/ChildSafeguardingReferralGradeRule"
+    post:
+      summary: Create a new ChildSafeguardingReferralGradeRule
+      operationId: createChildSafeguardingReferralGradeRule
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ChildSafeguardingReferralGradeRule"
+      responses:
+        "201":
+          description: The newly created ChildSafeguardingReferralGradeRule
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ChildSafeguardingReferralGradeRule"
+        "400":
+          description: Validation error
+  /child-safeguarding-referral-grade-rules/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one ChildSafeguardingReferralGradeRule by id
+      operationId: getChildSafeguardingReferralGradeRule
+      responses:
+        "200":
+          description: The requested ChildSafeguardingReferralGradeRule
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ChildSafeguardingReferralGradeRule"
+        "404":
+          description: ChildSafeguardingReferralGradeRule not found
+    patch:
+      summary: Update an existing ChildSafeguardingReferralGradeRule
+      operationId: updateChildSafeguardingReferralGradeRule
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ChildSafeguardingReferralGradeRule"
+      responses:
+        "200":
+          description: The updated ChildSafeguardingReferralGradeRule
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ChildSafeguardingReferralGradeRule"
+        "404":
+          description: ChildSafeguardingReferralGradeRule not found
+    delete:
+      summary: Soft-delete a ChildSafeguardingReferralGradeRule
+      operationId: deleteChildSafeguardingReferralGradeRule
+      responses:
+        "204":
+          description: ChildSafeguardingReferralGradeRule deleted
+        "404":
+          description: ChildSafeguardingReferralGradeRule not found
+components:
+  schemas:
+    ChildSafeguardingReferralGradeRule:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was most recently updated.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was soft-deleted.
+        child_safeguarding_referral_grade_id:
+          type: string
+          format: uuid
+          description: Foreign key to the parent grade.
+        rule_id:
+          type: string
+          maxLength: 40
+          description: Stable rule identifier (e.g. R-CONSENT-BASIS-01).
+        section:
+          type: string
+          enum:
+            - referrer
+            - child
+            - concern
+            - category
+            - risk
+            - consent
+            - informed
+            - completeness
+            - urgency
+            - ""
+          description: "Referral section the rule concerns: referrer, child, concern, category, risk, consent, informed, completeness, or urgency."
+        category:
+          type: string
+          maxLength: 50
+          description: Subject category (e.g. mandatory-field, consent-basis, urgency-trigger).
+        description:
+          type: string
+          maxLength: 500
+          description: Human-readable description of why the rule fired.
+      required:
+        - created_at
+        - updated_at
+        - child_safeguarding_referral_grade_id
+        - rule_id
+        - section
+        - category
+        - description
+      description: "Audit trail of every grading rule that fired during grading: section, category, and description."

@@ -1,0 +1,388 @@
+{
+  "resourceType": "Observation",
+  "id": "770e8400-e29b-41d4-a716-446655440002",
+  "meta": {
+    "profile": [
+      "http://hl7.org/fhir/StructureDefinition/Observation"
+    ],
+    "lastUpdated": "2026-04-09T10:00:00+00:00"
+  },
+  "status": "final",
+  "category": [
+    {
+      "coding": [
+        {
+          "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+          "code": "survey",
+          "display": "Survey"
+        }
+      ]
+    }
+  ],
+  "code": {
+    "coding": [
+      {
+        "system": "urn:form-examples:breast-screening",
+        "code": "breast_screening",
+        "display": "Breast Screening"
+      }
+    ]
+  },
+  "subject": {
+    "reference": "Patient/550e8400-e29b-41d4-a716-446655440000"
+  },
+  "encounter": {
+    "reference": "Encounter/bb0e8400-e29b-41d4-a716-446655440006"
+  },
+  "effectiveDateTime": "2026-04-09T10:00:00+00:00",
+  "component": [
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:breast-screening",
+            "code": "deleted_at",
+            "display": "Deleted At"
+          }
+        ]
+      },
+      "valueDateTime": "2026-04-09T10:00:00+00:00"
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:breast-screening",
+            "code": "reporting_clinician_role",
+            "display": "Reporting Clinician Role"
+          }
+        ]
+      },
+      "valueCodeableConcept": {
+        "coding": [
+          {
+            "system": "urn:form-examples:breast-screening:reporting_clinician_role",
+            "code": "mammographer",
+            "display": "Mammographer"
+          }
+        ]
+      }
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:breast-screening",
+            "code": "reported_at",
+            "display": "Reported At"
+          }
+        ]
+      },
+      "valueDateTime": "2026-04-09T10:00:00+00:00"
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:breast-screening",
+            "code": "screening_unit",
+            "display": "Screening Unit"
+          }
+        ]
+      },
+      "valueString": "mg/dL"
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:breast-screening",
+            "code": "episode_type",
+            "display": "Episode Type"
+          }
+        ]
+      },
+      "valueCodeableConcept": {
+        "coding": [
+          {
+            "system": "urn:form-examples:breast-screening:episode_type",
+            "code": "routine-recall",
+            "display": "Routine-Recall"
+          }
+        ]
+      }
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:breast-screening",
+            "code": "patient_identifier",
+            "display": "Patient Identifier"
+          }
+        ]
+      },
+      "valueString": ""
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:breast-screening",
+            "code": "age_years",
+            "display": "Age Years"
+          }
+        ]
+      },
+      "valueInteger": 45
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:breast-screening",
+            "code": "last_screened_date",
+            "display": "Last Screened Date"
+          }
+        ]
+      },
+      "valueDateTime": "2026-01-15"
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:breast-screening",
+            "code": "higher_risk_surveillance",
+            "display": "Higher Risk Surveillance"
+          }
+        ]
+      },
+      "valueCodeableConcept": {
+        "coding": [
+          {
+            "system": "urn:form-examples:breast-screening:higher_risk_surveillance",
+            "code": "yes",
+            "display": "Yes"
+          }
+        ]
+      }
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:breast-screening",
+            "code": "symptomatic",
+            "display": "Symptomatic"
+          }
+        ]
+      },
+      "valueCodeableConcept": {
+        "coding": [
+          {
+            "system": "urn:form-examples:breast-screening:symptomatic",
+            "code": "yes",
+            "display": "Yes"
+          }
+        ]
+      }
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:breast-screening",
+            "code": "consent_given",
+            "display": "Consent Given"
+          }
+        ]
+      },
+      "valueCodeableConcept": {
+        "coding": [
+          {
+            "system": "urn:form-examples:breast-screening:consent_given",
+            "code": "yes",
+            "display": "Yes"
+          }
+        ]
+      }
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:breast-screening",
+            "code": "views_taken",
+            "display": "Views Taken"
+          }
+        ]
+      },
+      "valueCodeableConcept": {
+        "coding": [
+          {
+            "system": "urn:form-examples:breast-screening:views_taken",
+            "code": "standard-four-view",
+            "display": "Standard-Four-View"
+          }
+        ]
+      }
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:breast-screening",
+            "code": "image_adequacy",
+            "display": "Image Adequacy"
+          }
+        ]
+      },
+      "valueCodeableConcept": {
+        "coding": [
+          {
+            "system": "urn:form-examples:breast-screening:image_adequacy",
+            "code": "adequate",
+            "display": "Adequate"
+          }
+        ]
+      }
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:breast-screening",
+            "code": "first_read_opinion",
+            "display": "First Read Opinion"
+          }
+        ]
+      },
+      "valueCodeableConcept": {
+        "coding": [
+          {
+            "system": "urn:form-examples:breast-screening:first_read_opinion",
+            "code": "normal",
+            "display": "Normal"
+          }
+        ]
+      }
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:breast-screening",
+            "code": "second_read_opinion",
+            "display": "Second Read Opinion"
+          }
+        ]
+      },
+      "valueCodeableConcept": {
+        "coding": [
+          {
+            "system": "urn:form-examples:breast-screening:second_read_opinion",
+            "code": "normal",
+            "display": "Normal"
+          }
+        ]
+      }
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:breast-screening",
+            "code": "arbitration_outcome",
+            "display": "Arbitration Outcome"
+          }
+        ]
+      },
+      "valueCodeableConcept": {
+        "coding": [
+          {
+            "system": "urn:form-examples:breast-screening:arbitration_outcome",
+            "code": "normal",
+            "display": "Normal"
+          }
+        ]
+      }
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:breast-screening",
+            "code": "reading_outcome",
+            "display": "Reading Outcome"
+          }
+        ]
+      },
+      "valueCodeableConcept": {
+        "coding": [
+          {
+            "system": "urn:form-examples:breast-screening:reading_outcome",
+            "code": "normal-routine-recall",
+            "display": "Normal-Routine-Recall"
+          }
+        ]
+      }
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:breast-screening",
+            "code": "assessment_performed",
+            "display": "Assessment Performed"
+          }
+        ]
+      },
+      "valueCodeableConcept": {
+        "coding": [
+          {
+            "system": "urn:form-examples:breast-screening:assessment_performed",
+            "code": "yes",
+            "display": "Yes"
+          }
+        ]
+      }
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:breast-screening",
+            "code": "assessment_modalities",
+            "display": "Assessment Modalities"
+          }
+        ]
+      },
+      "valueString": ""
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:breast-screening",
+            "code": "imaging_classification",
+            "display": "Imaging Classification"
+          }
+        ]
+      },
+      "valueInteger": 1
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:breast-screening",
+            "code": "clinical_context",
+            "display": "Clinical Context"
+          }
+        ]
+      },
+      "valueString": "Example text."
+    }
+  ]
+}

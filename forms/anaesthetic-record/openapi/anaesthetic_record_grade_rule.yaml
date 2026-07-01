@@ -1,0 +1,158 @@
+# Generated from sql/. Do not edit by hand.
+# SOURCE: anaesthetic_record_grade_rule
+openapi: 3.1.0
+info:
+  title: Anaesthetic Record — AnaestheticRecordGradeRule
+  version: 1.0.0
+  description: "Audit trail of every mandatory-item rule evaluated during grading: criticality, satisfied state, and description."
+paths:
+  /anaesthetic-record-grade-rules:
+    get:
+      summary: List AnaestheticRecordGradeRule records
+      operationId: listAnaestheticRecordGradeRule
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of AnaestheticRecordGradeRule records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/AnaestheticRecordGradeRule"
+    post:
+      summary: Create a new AnaestheticRecordGradeRule
+      operationId: createAnaestheticRecordGradeRule
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/AnaestheticRecordGradeRule"
+      responses:
+        "201":
+          description: The newly created AnaestheticRecordGradeRule
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AnaestheticRecordGradeRule"
+        "400":
+          description: Validation error
+  /anaesthetic-record-grade-rules/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one AnaestheticRecordGradeRule by id
+      operationId: getAnaestheticRecordGradeRule
+      responses:
+        "200":
+          description: The requested AnaestheticRecordGradeRule
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AnaestheticRecordGradeRule"
+        "404":
+          description: AnaestheticRecordGradeRule not found
+    patch:
+      summary: Update an existing AnaestheticRecordGradeRule
+      operationId: updateAnaestheticRecordGradeRule
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/AnaestheticRecordGradeRule"
+      responses:
+        "200":
+          description: The updated AnaestheticRecordGradeRule
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AnaestheticRecordGradeRule"
+        "404":
+          description: AnaestheticRecordGradeRule not found
+    delete:
+      summary: Soft-delete a AnaestheticRecordGradeRule
+      operationId: deleteAnaestheticRecordGradeRule
+      responses:
+        "204":
+          description: AnaestheticRecordGradeRule deleted
+        "404":
+          description: AnaestheticRecordGradeRule not found
+components:
+  schemas:
+    AnaestheticRecordGradeRule:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was most recently updated.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was soft-deleted.
+        anaesthetic_record_grade_id:
+          type: string
+          format: uuid
+          description: Foreign key to the parent grade.
+        rule_id:
+          type: string
+          maxLength: 40
+          description: Stable rule identifier (e.g. R-ASA-STATUS-01).
+        category:
+          type: string
+          maxLength: 50
+          description: Subject category (e.g. identification, airway, monitoring, sign-off).
+        criticality:
+          type: string
+          enum:
+            - critical
+            - noncritical
+            - ""
+          description: "Rule criticality: critical (missing implies incomplete) or noncritical (missing implies partial)."
+        satisfied:
+          type: boolean
+          description: Whether the mandatory item was present and valid.
+        description:
+          type: string
+          maxLength: 500
+          description: Human-readable label describing the mandatory item.
+      required:
+        - created_at
+        - updated_at
+        - anaesthetic_record_grade_id
+        - rule_id
+        - category
+        - criticality
+        - satisfied
+        - description
+      description: "Audit trail of every mandatory-item rule evaluated during grading: criticality, satisfied state, and description."

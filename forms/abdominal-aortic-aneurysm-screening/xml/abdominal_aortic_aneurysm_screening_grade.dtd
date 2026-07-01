@@ -1,0 +1,11 @@
+<!ELEMENT abdominal_aortic_aneurysm_screening_grade (id,created_at,updated_at,deleted_at,abdominal_aortic_aneurysm_screening_id,category,surveillance_band,recommended_action,growth_cm,graded_at)>
+<!ELEMENT id (#PCDATA)>
+<!ELEMENT created_at (#PCDATA)>
+<!ELEMENT updated_at (#PCDATA)>
+<!ELEMENT deleted_at (#PCDATA)>
+<!ELEMENT abdominal_aortic_aneurysm_screening_id (#PCDATA)>
+<!ELEMENT category (#PCDATA)>
+<!ELEMENT surveillance_band (#PCDATA)>
+<!ELEMENT recommended_action (#PCDATA)>
+<!ELEMENT growth_cm (#PCDATA)>
+<!ELEMENT graded_at (#PCDATA)>

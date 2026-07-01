@@ -1,0 +1,251 @@
+# Generated from sql/. Do not edit by hand.
+# SOURCE: partogram_observation
+openapi: 3.1.0
+info:
+  title: Partogram — PartogramObservation
+  version: 1.0.0
+  description: "Timed intrapartum observation rows for a partogram: labour progress, contractions, fetal heart rate, liquor and moulding, maternal vitals, urine, and drugs / oxytocin."
+paths:
+  /partogram-observations:
+    get:
+      summary: List PartogramObservation records
+      operationId: listPartogramObservation
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of PartogramObservation records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/PartogramObservation"
+    post:
+      summary: Create a new PartogramObservation
+      operationId: createPartogramObservation
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/PartogramObservation"
+      responses:
+        "201":
+          description: The newly created PartogramObservation
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PartogramObservation"
+        "400":
+          description: Validation error
+  /partogram-observations/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one PartogramObservation by id
+      operationId: getPartogramObservation
+      responses:
+        "200":
+          description: The requested PartogramObservation
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PartogramObservation"
+        "404":
+          description: PartogramObservation not found
+    patch:
+      summary: Update an existing PartogramObservation
+      operationId: updatePartogramObservation
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/PartogramObservation"
+      responses:
+        "200":
+          description: The updated PartogramObservation
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PartogramObservation"
+        "404":
+          description: PartogramObservation not found
+    delete:
+      summary: Soft-delete a PartogramObservation
+      operationId: deletePartogramObservation
+      responses:
+        "204":
+          description: PartogramObservation deleted
+        "404":
+          description: PartogramObservation not found
+components:
+  schemas:
+    PartogramObservation:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was most recently updated.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was soft-deleted.
+        partogram_id:
+          type: string
+          format: uuid
+          description: Foreign key to the parent partogram labour record.
+        observed_at:
+          type: string
+          format: date-time
+          description: Wall-clock date and time the observation was taken.
+        cervical_dilatation_cm:
+          type: number
+          format: double
+          description: Cervical dilatation in centimetres (0-10), plotted against the alert and action lines.
+        descent_fifths:
+          type: number
+          format: double
+          description: Descent of the fetal head in fifths palpable above the pelvic brim (5 down to 0).
+        contractions_per_10_min:
+          type: number
+          format: double
+          description: "Uterine contraction frequency: number of contractions in 10 minutes."
+        contraction_duration_band:
+          type: string
+          enum:
+            - <20s
+            - 20-40s
+            - >40s
+            - ""
+          description: "Contraction duration band: <20s, 20-40s, or >40s."
+        contraction_strength:
+          type: string
+          enum:
+            - mild
+            - moderate
+            - strong
+            - ""
+          description: "Contraction strength on palpation: mild, moderate, or strong."
+        fetal_heart_rate:
+          type: integer
+          format: int32
+          description: Fetal heart rate in beats per minute.
+        liquor_state:
+          type: string
+          enum:
+            - intact
+            - clear
+            - meconium
+            - blood-stained
+            - absent
+            - ""
+          description: "Amniotic fluid (liquor) state: intact, clear, meconium, blood-stained, or absent."
+        moulding:
+          type: string
+          enum:
+            - "0"
+            - +
+            - ++
+            - +++
+            - ""
+          description: "Degree of fetal skull moulding: 0, +, ++, or +++."
+        systolic_blood_pressure:
+          type: integer
+          format: int32
+          description: Maternal systolic blood pressure in mmHg.
+        diastolic_blood_pressure:
+          type: integer
+          format: int32
+          description: Maternal diastolic blood pressure in mmHg.
+        pulse:
+          type: integer
+          format: int32
+          description: Maternal pulse in beats per minute.
+        temperature:
+          type: number
+          format: double
+          description: Maternal temperature in degrees Celsius.
+        urine_volume_ml:
+          type: number
+          format: double
+          description: Volume of urine passed in millilitres.
+        urine_protein:
+          type: string
+          enum:
+            - negative
+            - trace
+            - +
+            - ++
+            - +++
+            - ""
+          description: "Urine protein dipstick: negative, trace, +, ++, or +++."
+        urine_ketones:
+          type: string
+          enum:
+            - negative
+            - trace
+            - +
+            - ++
+            - +++
+            - ""
+          description: "Urine ketones (acetone) dipstick: negative, trace, +, ++, or +++."
+        urine_glucose:
+          type: string
+          enum:
+            - negative
+            - trace
+            - +
+            - ++
+            - +++
+            - ""
+          description: "Urine glucose dipstick: negative, trace, +, ++, or +++."
+        oxytocin_rate:
+          type: number
+          format: double
+          description: Oxytocin infusion rate (drops per minute or mU/min).
+        drugs_and_fluids:
+          type: string
+          description: Free-text record of other drugs and intravenous fluids given.
+      required:
+        - created_at
+        - updated_at
+        - partogram_id
+        - contraction_duration_band
+        - contraction_strength
+        - liquor_state
+        - moulding
+        - urine_protein
+        - urine_ketones
+        - urine_glucose
+        - drugs_and_fluids
+      description: "Timed intrapartum observation rows for a partogram: labour progress, contractions, fetal heart rate, liquor and moulding, maternal vitals, urine, and drugs / oxytocin."

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE nursing_care_plan_goal SYSTEM "nursing_care_plan_goal.dtd">
+<nursing_care_plan_goal>
+<id>990e8400-e29b-41d4-a716-446655440004</id>
+<created_at>2026-04-09T10:00:00Z</created_at>
+<updated_at>2026-04-09T10:00:00Z</updated_at>
+<deleted_at>2026-04-09T10:00:00Z</deleted_at>
+<nursing_care_plan_problem_id>880e8400-e29b-41d4-a716-446655440003</nursing_care_plan_problem_id>
+<goal_text>Example text.</goal_text>
+<target_date>2026-01-15</target_date>
+<met>met</met>
+</nursing_care_plan_goal>

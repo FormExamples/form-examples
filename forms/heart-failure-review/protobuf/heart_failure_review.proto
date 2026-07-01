@@ -1,0 +1,377 @@
+// Generated from sql/. Do not edit by hand.
+// SOURCE: heart_failure_review
+
+syntax = "proto3";
+
+package form_examples.heart_failure_review;
+
+enum HeartFailureReviewClinicianRoleEnum {
+  CLINICIANROLE_UNSPECIFIED = 0;
+  CLINICIANROLE_GP = 1;  // gp
+  CLINICIANROLE_PRACTICE_NURSE = 2;  // practice-nurse
+  CLINICIANROLE_HF_NURSE = 3;  // hf-nurse
+  CLINICIANROLE_PHARMACIST = 4;  // pharmacist
+  CLINICIANROLE_CARDIOLOGIST = 5;  // cardiologist
+  CLINICIANROLE_OTHER = 6;  // other
+}
+
+enum HeartFailureReviewCareSettingEnum {
+  CARESETTING_UNSPECIFIED = 0;
+  CARESETTING_GENERAL_PRACTICE = 1;  // general-practice
+  CARESETTING_COMMUNITY_HF_SERVICE = 2;  // community-hf-service
+  CARESETTING_HOSPITAL_CLINIC = 3;  // hospital-clinic
+  CARESETTING_OTHER = 4;  // other
+}
+
+enum HeartFailureReviewReviewTypeEnum {
+  REVIEWTYPE_UNSPECIFIED = 0;
+  REVIEWTYPE_ROUTINE_ANNUAL = 1;  // routine-annual
+  REVIEWTYPE_POST_DISCHARGE = 2;  // post-discharge
+  REVIEWTYPE_MEDICATION_TITRATION = 3;  // medication-titration
+}
+
+enum HeartFailureReviewAgeBandEnum {
+  AGEBAND_UNSPECIFIED = 0;
+  AGEBAND_V_18_39 = 1;  // 18-39
+  AGEBAND_V_40_59 = 2;  // 40-59
+  AGEBAND_V_60_79 = 3;  // 60-79
+  AGEBAND_V_80 = 4;  // >=80
+}
+
+enum HeartFailureReviewSexEnum {
+  SEX_UNSPECIFIED = 0;
+  SEX_FEMALE = 1;  // female
+  SEX_MALE = 2;  // male
+  SEX_INTERSEX = 3;  // intersex
+  SEX_UNKNOWN = 4;  // unknown
+}
+
+enum HeartFailureReviewHeartFailureTypeEnum {
+  HEARTFAILURETYPE_UNSPECIFIED = 0;
+  HEARTFAILURETYPE_REDUCED = 1;  // reduced
+  HEARTFAILURETYPE_MILDLY_REDUCED = 2;  // mildly-reduced
+  HEARTFAILURETYPE_PRESERVED = 3;  // preserved
+  HEARTFAILURETYPE_UNKNOWN = 4;  // unknown
+}
+
+enum HeartFailureReviewAetiologyEnum {
+  AETIOLOGY_UNSPECIFIED = 0;
+  AETIOLOGY_ISCHAEMIC = 1;  // ischaemic
+  AETIOLOGY_HYPERTENSIVE = 2;  // hypertensive
+  AETIOLOGY_VALVULAR = 3;  // valvular
+  AETIOLOGY_OTHER = 4;  // other
+  AETIOLOGY_UNKNOWN = 5;  // unknown
+}
+
+enum HeartFailureReviewBreathlessnessEnum {
+  BREATHLESSNESS_UNSPECIFIED = 0;
+  BREATHLESSNESS_NONE = 1;  // none
+  BREATHLESSNESS_ON_EXERTION = 2;  // on-exertion
+  BREATHLESSNESS_AT_REST = 3;  // at-rest
+}
+
+enum HeartFailureReviewOrthopnoeaEnum {
+  ORTHOPNOEA_UNSPECIFIED = 0;
+  ORTHOPNOEA_YES = 1;  // yes
+  ORTHOPNOEA_NO = 2;  // no
+}
+
+enum HeartFailureReviewParoxysmalNocturnalDyspnoeaEnum {
+  PAROXYSMALNOCTURNALDYSPNOEA_UNSPECIFIED = 0;
+  PAROXYSMALNOCTURNALDYSPNOEA_YES = 1;  // yes
+  PAROXYSMALNOCTURNALDYSPNOEA_NO = 2;  // no
+}
+
+enum HeartFailureReviewFatigueEnum {
+  FATIGUE_UNSPECIFIED = 0;
+  FATIGUE_NONE = 1;  // none
+  FATIGUE_MILD = 2;  // mild
+  FATIGUE_MODERATE = 3;  // moderate
+  FATIGUE_SEVERE = 4;  // severe
+}
+
+enum HeartFailureReviewChangeSinceLastReviewEnum {
+  CHANGESINCELASTREVIEW_UNSPECIFIED = 0;
+  CHANGESINCELASTREVIEW_IMPROVED = 1;  // improved
+  CHANGESINCELASTREVIEW_UNCHANGED = 2;  // unchanged
+  CHANGESINCELASTREVIEW_WORSE = 3;  // worse
+}
+
+enum HeartFailureReviewDecompensationEnum {
+  DECOMPENSATION_UNSPECIFIED = 0;
+  DECOMPENSATION_YES = 1;  // yes
+  DECOMPENSATION_NO = 2;  // no
+}
+
+enum HeartFailureReviewPeripheralOedemaEnum {
+  PERIPHERALOEDEMA_UNSPECIFIED = 0;
+  PERIPHERALOEDEMA_NONE = 1;  // none
+  PERIPHERALOEDEMA_MILD = 2;  // mild
+  PERIPHERALOEDEMA_MODERATE = 3;  // moderate
+  PERIPHERALOEDEMA_SEVERE = 4;  // severe
+}
+
+enum HeartFailureReviewRaisedJvpEnum {
+  RAISEDJVP_UNSPECIFIED = 0;
+  RAISEDJVP_YES = 1;  // yes
+  RAISEDJVP_NO = 2;  // no
+}
+
+enum HeartFailureReviewLungCracklesEnum {
+  LUNGCRACKLES_UNSPECIFIED = 0;
+  LUNGCRACKLES_YES = 1;  // yes
+  LUNGCRACKLES_NO = 2;  // no
+}
+
+enum HeartFailureReviewHeartRhythmEnum {
+  HEARTRHYTHM_UNSPECIFIED = 0;
+  HEARTRHYTHM_SINUS = 1;  // sinus
+  HEARTRHYTHM_ATRIAL_FIBRILLATION = 2;  // atrial-fibrillation
+  HEARTRHYTHM_PACED = 3;  // paced
+  HEARTRHYTHM_OTHER = 4;  // other
+}
+
+enum HeartFailureReviewRaasInhibitorStatusEnum {
+  RAASINHIBITORSTATUS_UNSPECIFIED = 0;
+  RAASINHIBITORSTATUS_PRESCRIBED = 1;  // prescribed
+  RAASINHIBITORSTATUS_NOT_PRESCRIBED = 2;  // not-prescribed
+  RAASINHIBITORSTATUS_CONTRAINDICATED = 3;  // contraindicated
+  RAASINHIBITORSTATUS_NOT_TOLERATED = 4;  // not-tolerated
+}
+
+enum HeartFailureReviewRaasInhibitorAtTargetDoseEnum {
+  RAASINHIBITORATTARGETDOSE_UNSPECIFIED = 0;
+  RAASINHIBITORATTARGETDOSE_YES = 1;  // yes
+  RAASINHIBITORATTARGETDOSE_NO = 2;  // no
+}
+
+enum HeartFailureReviewRaasInhibitorAdherenceEnum {
+  RAASINHIBITORADHERENCE_UNSPECIFIED = 0;
+  RAASINHIBITORADHERENCE_GOOD = 1;  // good
+  RAASINHIBITORADHERENCE_PARTIAL = 2;  // partial
+  RAASINHIBITORADHERENCE_POOR = 3;  // poor
+}
+
+enum HeartFailureReviewBetaBlockerStatusEnum {
+  BETABLOCKERSTATUS_UNSPECIFIED = 0;
+  BETABLOCKERSTATUS_PRESCRIBED = 1;  // prescribed
+  BETABLOCKERSTATUS_NOT_PRESCRIBED = 2;  // not-prescribed
+  BETABLOCKERSTATUS_CONTRAINDICATED = 3;  // contraindicated
+  BETABLOCKERSTATUS_NOT_TOLERATED = 4;  // not-tolerated
+}
+
+enum HeartFailureReviewBetaBlockerAtTargetDoseEnum {
+  BETABLOCKERATTARGETDOSE_UNSPECIFIED = 0;
+  BETABLOCKERATTARGETDOSE_YES = 1;  // yes
+  BETABLOCKERATTARGETDOSE_NO = 2;  // no
+}
+
+enum HeartFailureReviewBetaBlockerAdherenceEnum {
+  BETABLOCKERADHERENCE_UNSPECIFIED = 0;
+  BETABLOCKERADHERENCE_GOOD = 1;  // good
+  BETABLOCKERADHERENCE_PARTIAL = 2;  // partial
+  BETABLOCKERADHERENCE_POOR = 3;  // poor
+}
+
+enum HeartFailureReviewMraStatusEnum {
+  MRASTATUS_UNSPECIFIED = 0;
+  MRASTATUS_PRESCRIBED = 1;  // prescribed
+  MRASTATUS_NOT_PRESCRIBED = 2;  // not-prescribed
+  MRASTATUS_CONTRAINDICATED = 3;  // contraindicated
+  MRASTATUS_NOT_TOLERATED = 4;  // not-tolerated
+}
+
+enum HeartFailureReviewMraAtTargetDoseEnum {
+  MRAATTARGETDOSE_UNSPECIFIED = 0;
+  MRAATTARGETDOSE_YES = 1;  // yes
+  MRAATTARGETDOSE_NO = 2;  // no
+}
+
+enum HeartFailureReviewMraAdherenceEnum {
+  MRAADHERENCE_UNSPECIFIED = 0;
+  MRAADHERENCE_GOOD = 1;  // good
+  MRAADHERENCE_PARTIAL = 2;  // partial
+  MRAADHERENCE_POOR = 3;  // poor
+}
+
+enum HeartFailureReviewSglt2InhibitorStatusEnum {
+  SGLT2INHIBITORSTATUS_UNSPECIFIED = 0;
+  SGLT2INHIBITORSTATUS_PRESCRIBED = 1;  // prescribed
+  SGLT2INHIBITORSTATUS_NOT_PRESCRIBED = 2;  // not-prescribed
+  SGLT2INHIBITORSTATUS_CONTRAINDICATED = 3;  // contraindicated
+  SGLT2INHIBITORSTATUS_NOT_TOLERATED = 4;  // not-tolerated
+}
+
+enum HeartFailureReviewSglt2InhibitorAtTargetDoseEnum {
+  SGLT2INHIBITORATTARGETDOSE_UNSPECIFIED = 0;
+  SGLT2INHIBITORATTARGETDOSE_YES = 1;  // yes
+  SGLT2INHIBITORATTARGETDOSE_NO = 2;  // no
+}
+
+enum HeartFailureReviewSglt2InhibitorAdherenceEnum {
+  SGLT2INHIBITORADHERENCE_UNSPECIFIED = 0;
+  SGLT2INHIBITORADHERENCE_GOOD = 1;  // good
+  SGLT2INHIBITORADHERENCE_PARTIAL = 2;  // partial
+  SGLT2INHIBITORADHERENCE_POOR = 3;  // poor
+}
+
+enum HeartFailureReviewIcdEnum {
+  ICD_UNSPECIFIED = 0;
+  ICD_YES = 1;  // yes
+  ICD_NO = 2;  // no
+}
+
+enum HeartFailureReviewCrtEnum {
+  CRT_UNSPECIFIED = 0;
+  CRT_YES = 1;  // yes
+  CRT_NO = 2;  // no
+}
+
+enum HeartFailureReviewPacemakerEnum {
+  PACEMAKER_UNSPECIFIED = 0;
+  PACEMAKER_YES = 1;  // yes
+  PACEMAKER_NO = 2;  // no
+}
+
+enum HeartFailureReviewDeviceCheckStatusEnum {
+  DEVICECHECKSTATUS_UNSPECIFIED = 0;
+  DEVICECHECKSTATUS_UP_TO_DATE = 1;  // up-to-date
+  DEVICECHECKSTATUS_OVERDUE = 2;  // overdue
+  DEVICECHECKSTATUS_NOT_APPLICABLE = 3;  // not-applicable
+}
+
+enum HeartFailureReviewInfluenzaVaccinationEnum {
+  INFLUENZAVACCINATION_UNSPECIFIED = 0;
+  INFLUENZAVACCINATION_YES = 1;  // yes
+  INFLUENZAVACCINATION_NO = 2;  // no
+}
+
+enum HeartFailureReviewPneumococcalVaccinationEnum {
+  PNEUMOCOCCALVACCINATION_UNSPECIFIED = 0;
+  PNEUMOCOCCALVACCINATION_YES = 1;  // yes
+  PNEUMOCOCCALVACCINATION_NO = 2;  // no
+}
+
+enum HeartFailureReviewCovidVaccinationEnum {
+  COVIDVACCINATION_UNSPECIFIED = 0;
+  COVIDVACCINATION_YES = 1;  // yes
+  COVIDVACCINATION_NO = 2;  // no
+}
+
+enum HeartFailureReviewSmokingStatusEnum {
+  SMOKINGSTATUS_UNSPECIFIED = 0;
+  SMOKINGSTATUS_NEVER = 1;  // never
+  SMOKINGSTATUS_EX = 2;  // ex
+  SMOKINGSTATUS_CURRENT = 3;  // current
+}
+
+enum HeartFailureReviewAlcoholStatusEnum {
+  ALCOHOLSTATUS_UNSPECIFIED = 0;
+  ALCOHOLSTATUS_NONE = 1;  // none
+  ALCOHOLSTATUS_WITHIN_LIMITS = 2;  // within-limits
+  ALCOHOLSTATUS_ABOVE_LIMITS = 3;  // above-limits
+}
+
+enum HeartFailureReviewDailyWeightsEnum {
+  DAILYWEIGHTS_UNSPECIFIED = 0;
+  DAILYWEIGHTS_YES = 1;  // yes
+  DAILYWEIGHTS_NO = 2;  // no
+}
+
+enum HeartFailureReviewSelfManagementPlanEnum {
+  SELFMANAGEMENTPLAN_UNSPECIFIED = 0;
+  SELFMANAGEMENTPLAN_YES = 1;  // yes
+  SELFMANAGEMENTPLAN_NO = 2;  // no
+}
+
+enum HeartFailureReviewCardiacRehabEnum {
+  CARDIACREHAB_UNSPECIFIED = 0;
+  CARDIACREHAB_YES = 1;  // yes
+  CARDIACREHAB_NO = 2;  // no
+}
+
+message HeartFailureReview {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string patient_id = 5;  // UUID — uuid
+  string clinician_id = 6;  // UUID — uuid
+  string clinician_name = 7;  // VARCHAR(255) — max 255 chars
+  HeartFailureReviewClinicianRoleEnum clinician_role = 8;  // VARCHAR(20)
+  string review_date = 9;  // DATE — iso 8601 date
+  HeartFailureReviewCareSettingEnum care_setting = 10;  // VARCHAR(25)
+  HeartFailureReviewReviewTypeEnum review_type = 11;  // VARCHAR(25)
+  string last_review_date = 12;  // DATE — iso 8601 date
+  string patient_identifier = 13;  // VARCHAR(100) — max 100 chars
+  HeartFailureReviewAgeBandEnum age_band = 14;  // VARCHAR(10)
+  HeartFailureReviewSexEnum sex = 15;  // VARCHAR(20)
+  int32 year_of_diagnosis = 16;  // INTEGER
+  HeartFailureReviewHeartFailureTypeEnum heart_failure_type = 17;  // VARCHAR(15)
+  double latest_lvef = 18;  // NUMERIC(4,1) — numeric(4,1)
+  string last_echo_date = 19;  // DATE — iso 8601 date
+  HeartFailureReviewAetiologyEnum aetiology = 20;  // VARCHAR(15)
+  int32 nyha_class = 21;  // INTEGER
+  HeartFailureReviewBreathlessnessEnum breathlessness = 22;  // VARCHAR(15)
+  HeartFailureReviewOrthopnoeaEnum orthopnoea = 23;  // VARCHAR(5)
+  HeartFailureReviewParoxysmalNocturnalDyspnoeaEnum paroxysmal_nocturnal_dyspnoea = 24;  // VARCHAR(5)
+  HeartFailureReviewFatigueEnum fatigue = 25;  // VARCHAR(10)
+  HeartFailureReviewChangeSinceLastReviewEnum change_since_last_review = 26;  // VARCHAR(10)
+  HeartFailureReviewDecompensationEnum decompensation = 27;  // VARCHAR(5)
+  double weight_kg = 28;  // NUMERIC(5,1) — numeric(5,1)
+  double weight_change_kg = 29;  // NUMERIC(4,1) — numeric(4,1)
+  HeartFailureReviewPeripheralOedemaEnum peripheral_oedema = 30;  // VARCHAR(10)
+  HeartFailureReviewRaisedJvpEnum raised_jvp = 31;  // VARCHAR(5)
+  HeartFailureReviewLungCracklesEnum lung_crackles = 32;  // VARCHAR(5)
+  int32 systolic_blood_pressure = 33;  // INTEGER
+  int32 diastolic_blood_pressure = 34;  // INTEGER
+  int32 heart_rate = 35;  // INTEGER
+  HeartFailureReviewHeartRhythmEnum heart_rhythm = 36;  // VARCHAR(20)
+  double nt_pro_bnp = 37;  // NUMERIC(7,1) — numeric(7,1)
+  double sodium = 38;  // NUMERIC(4,1) — numeric(4,1)
+  double potassium = 39;  // NUMERIC(3,1) — numeric(3,1)
+  double urea = 40;  // NUMERIC(4,1) — numeric(4,1)
+  double creatinine = 41;  // NUMERIC(5,1) — numeric(5,1)
+  double egfr = 42;  // NUMERIC(5,1) — numeric(5,1)
+  double haemoglobin = 43;  // NUMERIC(4,1) — numeric(4,1)
+  double ferritin = 44;  // NUMERIC(6,1) — numeric(6,1)
+  double transferrin_saturation = 45;  // NUMERIC(4,1) — numeric(4,1)
+  double hba1c = 46;  // NUMERIC(4,1) — numeric(4,1)
+  string bloods_date = 47;  // DATE — iso 8601 date
+  HeartFailureReviewRaasInhibitorStatusEnum raas_inhibitor_status = 48;  // VARCHAR(15)
+  string raas_inhibitor_agent = 49;  // VARCHAR(100) — max 100 chars
+  string raas_inhibitor_dose = 50;  // VARCHAR(100) — max 100 chars
+  HeartFailureReviewRaasInhibitorAtTargetDoseEnum raas_inhibitor_at_target_dose = 51;  // VARCHAR(5)
+  HeartFailureReviewRaasInhibitorAdherenceEnum raas_inhibitor_adherence = 52;  // VARCHAR(10)
+  HeartFailureReviewBetaBlockerStatusEnum beta_blocker_status = 53;  // VARCHAR(15)
+  string beta_blocker_agent = 54;  // VARCHAR(100) — max 100 chars
+  string beta_blocker_dose = 55;  // VARCHAR(100) — max 100 chars
+  HeartFailureReviewBetaBlockerAtTargetDoseEnum beta_blocker_at_target_dose = 56;  // VARCHAR(5)
+  HeartFailureReviewBetaBlockerAdherenceEnum beta_blocker_adherence = 57;  // VARCHAR(10)
+  HeartFailureReviewMraStatusEnum mra_status = 58;  // VARCHAR(15)
+  string mra_agent = 59;  // VARCHAR(100) — max 100 chars
+  string mra_dose = 60;  // VARCHAR(100) — max 100 chars
+  HeartFailureReviewMraAtTargetDoseEnum mra_at_target_dose = 61;  // VARCHAR(5)
+  HeartFailureReviewMraAdherenceEnum mra_adherence = 62;  // VARCHAR(10)
+  HeartFailureReviewSglt2InhibitorStatusEnum sglt2_inhibitor_status = 63;  // VARCHAR(15)
+  string sglt2_inhibitor_agent = 64;  // VARCHAR(100) — max 100 chars
+  string sglt2_inhibitor_dose = 65;  // VARCHAR(100) — max 100 chars
+  HeartFailureReviewSglt2InhibitorAtTargetDoseEnum sglt2_inhibitor_at_target_dose = 66;  // VARCHAR(5)
+  HeartFailureReviewSglt2InhibitorAdherenceEnum sglt2_inhibitor_adherence = 67;  // VARCHAR(10)
+  string loop_diuretic_agent = 68;  // VARCHAR(100) — max 100 chars
+  string loop_diuretic_dose = 69;  // VARCHAR(100) — max 100 chars
+  string other_medications = 70;  // TEXT
+  HeartFailureReviewIcdEnum icd = 71;  // VARCHAR(5)
+  HeartFailureReviewCrtEnum crt = 72;  // VARCHAR(5)
+  HeartFailureReviewPacemakerEnum pacemaker = 73;  // VARCHAR(5)
+  HeartFailureReviewDeviceCheckStatusEnum device_check_status = 74;  // VARCHAR(20)
+  HeartFailureReviewInfluenzaVaccinationEnum influenza_vaccination = 75;  // VARCHAR(5)
+  HeartFailureReviewPneumococcalVaccinationEnum pneumococcal_vaccination = 76;  // VARCHAR(5)
+  HeartFailureReviewCovidVaccinationEnum covid_vaccination = 77;  // VARCHAR(5)
+  HeartFailureReviewSmokingStatusEnum smoking_status = 78;  // VARCHAR(10)
+  HeartFailureReviewAlcoholStatusEnum alcohol_status = 79;  // VARCHAR(15)
+  HeartFailureReviewDailyWeightsEnum daily_weights = 80;  // VARCHAR(5)
+  HeartFailureReviewSelfManagementPlanEnum self_management_plan = 81;  // VARCHAR(5)
+  HeartFailureReviewCardiacRehabEnum cardiac_rehab = 82;  // VARCHAR(5)
+  string review_context = 83;  // TEXT
+}

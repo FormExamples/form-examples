@@ -1,9 +1,9 @@
-<!ELEMENT staff_professionalism (id,created_at,updated_at,deleted_at,encounter_satisfaction_id,NULL,nursing_courtesy,respect_shown)>
+<!ELEMENT staff_professionalism (id,created_at,updated_at,deleted_at,encounter_satisfaction_id,reception_courtesy,nursing_courtesy,respect_shown)>
 <!ELEMENT id (#PCDATA)>
 <!ELEMENT created_at (#PCDATA)>
 <!ELEMENT updated_at (#PCDATA)>
 <!ELEMENT deleted_at (#PCDATA)>
 <!ELEMENT encounter_satisfaction_id (#PCDATA)>
-<!ELEMENT NULL (#PCDATA)>
+<!ELEMENT reception_courtesy (#PCDATA)>
 <!ELEMENT nursing_courtesy (#PCDATA)>
 <!ELEMENT respect_shown (#PCDATA)>

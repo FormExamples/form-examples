@@ -1,0 +1,63 @@
+// Generated from sql/. Do not edit by hand.
+// SOURCE: partogram
+
+syntax = "proto3";
+
+package form_examples.partogram;
+
+enum PartogramClinicianRoleEnum {
+  CLINICIANROLE_UNSPECIFIED = 0;
+  CLINICIANROLE_MIDWIFE = 1;  // midwife
+  CLINICIANROLE_OBSTETRICIAN = 2;  // obstetrician
+  CLINICIANROLE_NURSE = 3;  // nurse
+  CLINICIANROLE_OTHER = 4;  // other
+}
+
+enum PartogramCareSettingEnum {
+  CARESETTING_UNSPECIFIED = 0;
+  CARESETTING_LABOUR_WARD = 1;  // labour-ward
+  CARESETTING_BIRTH_CENTRE = 2;  // birth-centre
+  CARESETTING_TRIAGE = 3;  // triage
+  CARESETTING_OTHER = 4;  // other
+}
+
+enum PartogramAgeBandEnum {
+  AGEBAND_UNSPECIFIED = 0;
+  AGEBAND_UNDER_18 = 1;  // under-18
+  AGEBAND_V_18_24 = 2;  // 18-24
+  AGEBAND_V_25_34 = 3;  // 25-34
+  AGEBAND_V_35_39 = 4;  // 35-39
+  AGEBAND_V_40_PLUS = 5;  // 40-plus
+}
+
+enum PartogramParityEnum {
+  PARITY_UNSPECIFIED = 0;
+  PARITY_NULLIPAROUS = 1;  // nulliparous
+  PARITY_MULTIPAROUS = 2;  // multiparous
+}
+
+enum PartogramMembranesOnAdmissionEnum {
+  MEMBRANESONADMISSION_UNSPECIFIED = 0;
+  MEMBRANESONADMISSION_INTACT = 1;  // intact
+  MEMBRANESONADMISSION_RUPTURED = 2;  // ruptured
+}
+
+message Partogram {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string patient_id = 5;  // UUID — uuid
+  string clinician_id = 6;  // UUID — uuid
+  string clinician_name = 7;  // TEXT
+  PartogramClinicianRoleEnum clinician_role = 8;  // VARCHAR(20)
+  PartogramCareSettingEnum care_setting = 9;  // VARCHAR(20)
+  string active_phase_start_at = 10;  // TIMESTAMPTZ — iso 8601
+  string patient_identifier = 11;  // TEXT
+  PartogramAgeBandEnum age_band = 12;  // VARCHAR(10)
+  PartogramParityEnum parity = 13;  // VARCHAR(15)
+  double gestation_weeks = 14;  // NUMERIC(4,1) — numeric(4,1)
+  PartogramMembranesOnAdmissionEnum membranes_on_admission = 15;  // VARCHAR(15)
+  string risk_factors = 16;  // TEXT
+  string planned_care = 17;  // TEXT
+}

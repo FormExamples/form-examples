@@ -1,0 +1,96 @@
+// Generated from sql/. Do not edit by hand.
+// SOURCE: curb_65_pneumonia_severity_score
+
+syntax = "proto3";
+
+package form_examples.curb_65_pneumonia_severity_score;
+
+enum Curb65PneumoniaSeverityScoreClinicianRoleEnum {
+  CLINICIANROLE_UNSPECIFIED = 0;
+  CLINICIANROLE_PHYSICIAN = 1;  // physician
+  CLINICIANROLE_GENERAL_PRACTITIONER = 2;  // general-practitioner
+  CLINICIANROLE_ADVANCED_NURSE_PRACTITIONER = 3;  // advanced-nurse-practitioner
+  CLINICIANROLE_NURSE = 4;  // nurse
+  CLINICIANROLE_PARAMEDIC = 5;  // paramedic
+  CLINICIANROLE_PHARMACIST = 6;  // pharmacist
+  CLINICIANROLE_OTHER = 7;  // other
+}
+
+enum Curb65PneumoniaSeverityScoreCareSettingEnum {
+  CARESETTING_UNSPECIFIED = 0;
+  CARESETTING_PRIMARY_CARE = 1;  // primary-care
+  CARESETTING_EMERGENCY_DEPARTMENT = 2;  // emergency-department
+  CARESETTING_ACUTE_MEDICAL_UNIT = 3;  // acute-medical-unit
+  CARESETTING_WARD = 4;  // ward
+  CARESETTING_COMMUNITY = 5;  // community
+  CARESETTING_OTHER = 6;  // other
+}
+
+enum Curb65PneumoniaSeverityScoreSexEnum {
+  SEX_UNSPECIFIED = 0;
+  SEX_FEMALE = 1;  // female
+  SEX_MALE = 2;  // male
+  SEX_INTERSEX = 3;  // intersex
+  SEX_UNKNOWN = 4;  // unknown
+}
+
+enum Curb65PneumoniaSeverityScoreConfusionPresentEnum {
+  CONFUSIONPRESENT_UNSPECIFIED = 0;
+  CONFUSIONPRESENT_YES = 1;  // yes
+  CONFUSIONPRESENT_NO = 2;  // no
+}
+
+enum Curb65PneumoniaSeverityScoreUreaMeasuredEnum {
+  UREAMEASURED_UNSPECIFIED = 0;
+  UREAMEASURED_YES = 1;  // yes
+  UREAMEASURED_NO = 2;  // no
+}
+
+enum Curb65PneumoniaSeverityScoreSignificantComorbidityEnum {
+  SIGNIFICANTCOMORBIDITY_UNSPECIFIED = 0;
+  SIGNIFICANTCOMORBIDITY_YES = 1;  // yes
+  SIGNIFICANTCOMORBIDITY_NO = 2;  // no
+}
+
+enum Curb65PneumoniaSeverityScoreMultilobarChangesEnum {
+  MULTILOBARCHANGES_UNSPECIFIED = 0;
+  MULTILOBARCHANGES_YES = 1;  // yes
+  MULTILOBARCHANGES_NO = 2;  // no
+}
+
+enum Curb65PneumoniaSeverityScoreClinicianOverrideBandEnum {
+  CLINICIANOVERRIDEBAND_UNSPECIFIED = 0;
+  CLINICIANOVERRIDEBAND_LOW = 1;  // low
+  CLINICIANOVERRIDEBAND_INTERMEDIATE = 2;  // intermediate
+  CLINICIANOVERRIDEBAND_HIGH = 3;  // high
+}
+
+message Curb65PneumoniaSeverityScore {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string patient_id = 5;  // UUID — uuid
+  string clinician_id = 6;  // UUID — uuid
+  string clinician_name = 7;  // VARCHAR(255) — max 255 chars
+  Curb65PneumoniaSeverityScoreClinicianRoleEnum clinician_role = 8;  // VARCHAR(40)
+  string assessed_at = 9;  // TIMESTAMPTZ — iso 8601
+  Curb65PneumoniaSeverityScoreCareSettingEnum care_setting = 10;  // VARCHAR(30)
+  string patient_identifier = 11;  // VARCHAR(100) — max 100 chars
+  Curb65PneumoniaSeverityScoreSexEnum sex = 12;  // VARCHAR(20)
+  int32 age_years = 13;  // INT
+  Curb65PneumoniaSeverityScoreConfusionPresentEnum confusion_present = 14;  // VARCHAR(10)
+  int32 amt_score = 15;  // INT
+  Curb65PneumoniaSeverityScoreUreaMeasuredEnum urea_measured = 16;  // VARCHAR(10)
+  double urea_mmol_l = 17;  // NUMERIC(5,1) — numeric(5,1)
+  int32 respiratory_rate = 18;  // INT
+  int32 systolic_bp = 19;  // INT
+  int32 diastolic_bp = 20;  // INT
+  int32 oxygen_saturation = 21;  // INT
+  double temperature_c = 22;  // NUMERIC(4,1) — numeric(4,1)
+  Curb65PneumoniaSeverityScoreSignificantComorbidityEnum significant_comorbidity = 23;  // VARCHAR(10)
+  Curb65PneumoniaSeverityScoreMultilobarChangesEnum multilobar_changes = 24;  // VARCHAR(10)
+  Curb65PneumoniaSeverityScoreClinicianOverrideBandEnum clinician_override_band = 25;  // VARCHAR(15)
+  string override_reason = 26;  // TEXT
+  string clinical_note = 27;  // TEXT
+}

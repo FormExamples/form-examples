@@ -1,0 +1,180 @@
+# Generated from sql/. Do not edit by hand.
+# SOURCE: bhutani_bilirubin_nomogram_grade
+openapi: 3.1.0
+info:
+  title: Bhutani Bilirubin Nomogram — BhutaniBilirubinNomogramGrade
+  version: 1.0.0
+  description: "Computed Bhutani bilirubin nomogram classification result (1:1): percentile risk zone, mirrored percentile band, interpolated gestation-specific phototherapy and exchange thresholds, and the yes/no above-threshold signals."
+paths:
+  /bhutani-bilirubin-nomogram-grades:
+    get:
+      summary: List BhutaniBilirubinNomogramGrade records
+      operationId: listBhutaniBilirubinNomogramGrade
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of BhutaniBilirubinNomogramGrade records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/BhutaniBilirubinNomogramGrade"
+    post:
+      summary: Create a new BhutaniBilirubinNomogramGrade
+      operationId: createBhutaniBilirubinNomogramGrade
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/BhutaniBilirubinNomogramGrade"
+      responses:
+        "201":
+          description: The newly created BhutaniBilirubinNomogramGrade
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/BhutaniBilirubinNomogramGrade"
+        "400":
+          description: Validation error
+  /bhutani-bilirubin-nomogram-grades/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one BhutaniBilirubinNomogramGrade by id
+      operationId: getBhutaniBilirubinNomogramGrade
+      responses:
+        "200":
+          description: The requested BhutaniBilirubinNomogramGrade
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/BhutaniBilirubinNomogramGrade"
+        "404":
+          description: BhutaniBilirubinNomogramGrade not found
+    patch:
+      summary: Update an existing BhutaniBilirubinNomogramGrade
+      operationId: updateBhutaniBilirubinNomogramGrade
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/BhutaniBilirubinNomogramGrade"
+      responses:
+        "200":
+          description: The updated BhutaniBilirubinNomogramGrade
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/BhutaniBilirubinNomogramGrade"
+        "404":
+          description: BhutaniBilirubinNomogramGrade not found
+    delete:
+      summary: Soft-delete a BhutaniBilirubinNomogramGrade
+      operationId: deleteBhutaniBilirubinNomogramGrade
+      responses:
+        "204":
+          description: BhutaniBilirubinNomogramGrade deleted
+        "404":
+          description: BhutaniBilirubinNomogramGrade not found
+components:
+  schemas:
+    BhutaniBilirubinNomogramGrade:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was most recently updated.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was soft-deleted.
+        bhutani_bilirubin_nomogram_id:
+          type: string
+          format: uuid
+          description: Foreign key to the parent assessment (unique, 1:1).
+        risk_zone:
+          type: string
+          enum:
+            - low
+            - low-intermediate
+            - high-intermediate
+            - high
+            - ""
+          description: "Percentile risk zone assigned by the nomogram: low, low-intermediate, high-intermediate, or high (empty when age or TSB is missing)."
+        percentile_band:
+          type: string
+          enum:
+            - <40
+            - 40-75
+            - 75-95
+            - >=95
+            - ""
+          description: "Percentile band mirroring the risk zone: <40, 40-75, 75-95, or >=95."
+        phototherapy_threshold_umol_l:
+          type: number
+          format: double
+          description: Interpolated gestation-specific phototherapy threshold at the infant age in micromoles per litre (umol/L).
+        exchange_threshold_umol_l:
+          type: number
+          format: double
+          description: Interpolated gestation-specific exchange-transfusion threshold at the infant age in micromoles per litre (umol/L).
+        above_phototherapy_threshold:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: "Whether the measured TSB is at or above the phototherapy threshold: yes or no."
+        above_exchange_threshold:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: "Whether the measured TSB is at or above the exchange-transfusion threshold: yes or no."
+        graded_at:
+          type: string
+          format: date-time
+          description: Timestamp when the engine last computed the classification.
+      required:
+        - created_at
+        - updated_at
+        - bhutani_bilirubin_nomogram_id
+        - risk_zone
+        - percentile_band
+        - above_phototherapy_threshold
+        - above_exchange_threshold
+        - graded_at
+      description: "Computed Bhutani bilirubin nomogram classification result (1:1): percentile risk zone, mirrored percentile band, interpolated gestation-specific phototherapy and exchange thresholds, and the yes/no above-threshold signals."

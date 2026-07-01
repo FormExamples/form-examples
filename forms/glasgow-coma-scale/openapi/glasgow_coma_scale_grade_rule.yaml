@@ -1,0 +1,163 @@
+# Generated from sql/. Do not edit by hand.
+# SOURCE: glasgow_coma_scale_grade_rule
+openapi: 3.1.0
+info:
+  title: Glasgow Coma Scale — GlasgowComaScaleGradeRule
+  version: 1.0.0
+  description: "Audit trail of every grading rule that fired during Glasgow Coma Scale computation: component, score contributed, category, and description."
+paths:
+  /glasgow-coma-scale-grade-rules:
+    get:
+      summary: List GlasgowComaScaleGradeRule records
+      operationId: listGlasgowComaScaleGradeRule
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of GlasgowComaScaleGradeRule records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/GlasgowComaScaleGradeRule"
+    post:
+      summary: Create a new GlasgowComaScaleGradeRule
+      operationId: createGlasgowComaScaleGradeRule
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/GlasgowComaScaleGradeRule"
+      responses:
+        "201":
+          description: The newly created GlasgowComaScaleGradeRule
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GlasgowComaScaleGradeRule"
+        "400":
+          description: Validation error
+  /glasgow-coma-scale-grade-rules/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one GlasgowComaScaleGradeRule by id
+      operationId: getGlasgowComaScaleGradeRule
+      responses:
+        "200":
+          description: The requested GlasgowComaScaleGradeRule
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GlasgowComaScaleGradeRule"
+        "404":
+          description: GlasgowComaScaleGradeRule not found
+    patch:
+      summary: Update an existing GlasgowComaScaleGradeRule
+      operationId: updateGlasgowComaScaleGradeRule
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/GlasgowComaScaleGradeRule"
+      responses:
+        "200":
+          description: The updated GlasgowComaScaleGradeRule
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GlasgowComaScaleGradeRule"
+        "404":
+          description: GlasgowComaScaleGradeRule not found
+    delete:
+      summary: Soft-delete a GlasgowComaScaleGradeRule
+      operationId: deleteGlasgowComaScaleGradeRule
+      responses:
+        "204":
+          description: GlasgowComaScaleGradeRule deleted
+        "404":
+          description: GlasgowComaScaleGradeRule not found
+components:
+  schemas:
+    GlasgowComaScaleGradeRule:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was most recently updated.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was soft-deleted.
+        glasgow_coma_scale_grade_id:
+          type: string
+          format: uuid
+          description: Foreign key to the parent grade.
+        rule_id:
+          type: string
+          maxLength: 40
+          description: Stable rule identifier (e.g. R-EYE-SPONTANEOUS-01, R-TOTAL-BAND-SEVERE-01).
+        component:
+          type: string
+          enum:
+            - eye
+            - verbal
+            - motor
+            - total
+            - pupils
+            - gcs-p
+            - trend
+            - other
+          description: "Assessment component the rule belongs to: eye, verbal, motor, total, pupils, gcs-p, trend, or other."
+        points:
+          type: integer
+          format: int32
+          description: Score contributed by this rule for its component (e.g. the resolved component score), when applicable.
+        category:
+          type: string
+          maxLength: 50
+          description: Subject category (e.g. component-score, severity-band, pupil-reactivity).
+        description:
+          type: string
+          maxLength: 500
+          description: Human-readable description of why the rule fired.
+      required:
+        - created_at
+        - updated_at
+        - glasgow_coma_scale_grade_id
+        - rule_id
+        - component
+        - category
+        - description
+      description: "Audit trail of every grading rule that fired during Glasgow Coma Scale computation: component, score contributed, category, and description."

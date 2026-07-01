@@ -1,0 +1,188 @@
+# Generated from sql/. Do not edit by hand.
+# SOURCE: child_pugh_score_grade
+openapi: 3.1.0
+info:
+  title: Child Pugh Score — ChildPughScoreGrade
+  version: 1.0.0
+  description: "Computed Child-Pugh grading result: per-parameter points, summed total (5-15), derived class (A/B/C), and banded survival and surgical-risk estimates."
+paths:
+  /child-pugh-score-grades:
+    get:
+      summary: List ChildPughScoreGrade records
+      operationId: listChildPughScoreGrade
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of ChildPughScoreGrade records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/ChildPughScoreGrade"
+    post:
+      summary: Create a new ChildPughScoreGrade
+      operationId: createChildPughScoreGrade
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ChildPughScoreGrade"
+      responses:
+        "201":
+          description: The newly created ChildPughScoreGrade
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ChildPughScoreGrade"
+        "400":
+          description: Validation error
+  /child-pugh-score-grades/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one ChildPughScoreGrade by id
+      operationId: getChildPughScoreGrade
+      responses:
+        "200":
+          description: The requested ChildPughScoreGrade
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ChildPughScoreGrade"
+        "404":
+          description: ChildPughScoreGrade not found
+    patch:
+      summary: Update an existing ChildPughScoreGrade
+      operationId: updateChildPughScoreGrade
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ChildPughScoreGrade"
+      responses:
+        "200":
+          description: The updated ChildPughScoreGrade
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ChildPughScoreGrade"
+        "404":
+          description: ChildPughScoreGrade not found
+    delete:
+      summary: Soft-delete a ChildPughScoreGrade
+      operationId: deleteChildPughScoreGrade
+      responses:
+        "204":
+          description: ChildPughScoreGrade deleted
+        "404":
+          description: ChildPughScoreGrade not found
+components:
+  schemas:
+    ChildPughScoreGrade:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was most recently updated.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was soft-deleted.
+        child_pugh_score_id:
+          type: string
+          format: uuid
+          description: Foreign key to the parent assessment (unique, 1:1).
+        bilirubin_points:
+          type: integer
+          format: int32
+          description: Points (1-3) awarded for parameter 1, total bilirubin.
+        albumin_points:
+          type: integer
+          format: int32
+          description: Points (1-3) awarded for parameter 2, serum albumin.
+        coagulation_points:
+          type: integer
+          format: int32
+          description: Points (1-3) awarded for parameter 3, coagulation (INR or prothrombin time).
+        ascites_points:
+          type: integer
+          format: int32
+          description: Points (1-3) awarded for parameter 4, ascites.
+        encephalopathy_points:
+          type: integer
+          format: int32
+          description: Points (1-3) awarded for parameter 5, hepatic encephalopathy.
+        total_score:
+          type: integer
+          format: int32
+          description: Summed Child-Pugh score across the five parameters (5-15 when complete).
+        child_pugh_class:
+          type: string
+          enum:
+            - A
+            - B
+            - C
+            - ""
+          description: "Derived class: A (5-6), B (7-9), or C (10-15)."
+        one_year_survival:
+          type: string
+          maxLength: 20
+          description: Banded one-year survival estimate for the class (e.g. ~100%).
+        two_year_survival:
+          type: string
+          maxLength: 20
+          description: Banded two-year survival estimate for the class (e.g. ~85%).
+        surgical_risk:
+          type: string
+          enum:
+            - low
+            - moderate
+            - high
+            - ""
+          description: "Banded peri-operative risk for the class: low, moderate, or high."
+        graded_at:
+          type: string
+          format: date-time
+          description: Timestamp when the engine last computed the grade.
+      required:
+        - created_at
+        - updated_at
+        - child_pugh_score_id
+        - child_pugh_class
+        - one_year_survival
+        - two_year_survival
+        - surgical_risk
+        - graded_at
+      description: "Computed Child-Pugh grading result: per-parameter points, summed total (5-15), derived class (A/B/C), and banded survival and surgical-risk estimates."

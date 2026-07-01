@@ -1,0 +1,27 @@
+// Generated from sql/. Do not edit by hand.
+// SOURCE: chronic_obstructive_pulmonary_disease_review_grade_rule
+
+syntax = "proto3";
+
+package form_examples.chronic_obstructive_pulmonary_disease_review;
+
+enum ChronicObstructivePulmonaryDiseaseReviewGradeRuleSectionEnum {
+  SECTION_UNSPECIFIED = 0;
+  SECTION_GOLD = 1;  // gold
+  SECTION_SYMPTOM = 2;  // symptom
+  SECTION_EXACERBATION = 3;  // exacerbation
+  SECTION_ABE = 4;  // abe
+  SECTION_COMPLETENESS = 5;  // completeness
+}
+
+message ChronicObstructivePulmonaryDiseaseReviewGradeRule {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string chronic_obstructive_pulmonary_disease_review_grade_id = 5;  // UUID — uuid
+  string rule_id = 6;  // VARCHAR(40) — max 40 chars
+  ChronicObstructivePulmonaryDiseaseReviewGradeRuleSectionEnum section = 7;  // VARCHAR(20)
+  string category = 8;  // VARCHAR(50) — max 50 chars
+  string description = 9;  // VARCHAR(500) — max 500 chars
+}

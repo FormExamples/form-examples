@@ -1,0 +1,175 @@
+# Generated from sql/. Do not edit by hand.
+# SOURCE: pulmonary_embolism_rule_out_criteria_grade_rule
+openapi: 3.1.0
+info:
+  title: Pulmonary Embolism Rule Out Criteria — PulmonaryEmbolismRuleOutCriteriaGradeRule
+  version: 1.0.0
+  description: "Audit trail of every classification rule that fired during PERC computation: instrument, satisfied flag, outcome, category, and description."
+paths:
+  /pulmonary-embolism-rule-out-criteria-grade-rules:
+    get:
+      summary: List PulmonaryEmbolismRuleOutCriteriaGradeRule records
+      operationId: listPulmonaryEmbolismRuleOutCriteriaGradeRule
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of PulmonaryEmbolismRuleOutCriteriaGradeRule records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/PulmonaryEmbolismRuleOutCriteriaGradeRule"
+    post:
+      summary: Create a new PulmonaryEmbolismRuleOutCriteriaGradeRule
+      operationId: createPulmonaryEmbolismRuleOutCriteriaGradeRule
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/PulmonaryEmbolismRuleOutCriteriaGradeRule"
+      responses:
+        "201":
+          description: The newly created PulmonaryEmbolismRuleOutCriteriaGradeRule
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PulmonaryEmbolismRuleOutCriteriaGradeRule"
+        "400":
+          description: Validation error
+  /pulmonary-embolism-rule-out-criteria-grade-rules/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one PulmonaryEmbolismRuleOutCriteriaGradeRule by id
+      operationId: getPulmonaryEmbolismRuleOutCriteriaGradeRule
+      responses:
+        "200":
+          description: The requested PulmonaryEmbolismRuleOutCriteriaGradeRule
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PulmonaryEmbolismRuleOutCriteriaGradeRule"
+        "404":
+          description: PulmonaryEmbolismRuleOutCriteriaGradeRule not found
+    patch:
+      summary: Update an existing PulmonaryEmbolismRuleOutCriteriaGradeRule
+      operationId: updatePulmonaryEmbolismRuleOutCriteriaGradeRule
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/PulmonaryEmbolismRuleOutCriteriaGradeRule"
+      responses:
+        "200":
+          description: The updated PulmonaryEmbolismRuleOutCriteriaGradeRule
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PulmonaryEmbolismRuleOutCriteriaGradeRule"
+        "404":
+          description: PulmonaryEmbolismRuleOutCriteriaGradeRule not found
+    delete:
+      summary: Soft-delete a PulmonaryEmbolismRuleOutCriteriaGradeRule
+      operationId: deletePulmonaryEmbolismRuleOutCriteriaGradeRule
+      responses:
+        "204":
+          description: PulmonaryEmbolismRuleOutCriteriaGradeRule deleted
+        "404":
+          description: PulmonaryEmbolismRuleOutCriteriaGradeRule not found
+components:
+  schemas:
+    PulmonaryEmbolismRuleOutCriteriaGradeRule:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was most recently updated.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was soft-deleted.
+        pulmonary_embolism_rule_out_criteria_grade_id:
+          type: string
+          format: uuid
+          description: Foreign key to the parent grade.
+        rule_id:
+          type: string
+          maxLength: 40
+          description: Stable rule identifier (e.g. R-AGE-UNDER-50-01).
+        instrument:
+          type: string
+          enum:
+            - criterion
+            - gate
+            - composite
+            - ""
+          description: "Classification instrument the rule belongs to: criterion, gate (applicability), or composite (overall classification)."
+        satisfied:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Whether the criterion was satisfied (yes) or failed (no); blank for non-criterion instruments.
+        outcome:
+          type: string
+          enum:
+            - satisfied
+            - failed
+            - applicable
+            - not-applicable
+            - perc-negative
+            - perc-positive
+            - ""
+          description: "Outcome informed by this rule: satisfied, failed, applicable, not-applicable, perc-negative, or perc-positive."
+        category:
+          type: string
+          maxLength: 50
+          description: Subject category (e.g. age, heart-rate, oxygenation, clinical-sign, history, applicability).
+        description:
+          type: string
+          maxLength: 500
+          description: Human-readable description of why the rule fired.
+      required:
+        - created_at
+        - updated_at
+        - pulmonary_embolism_rule_out_criteria_grade_id
+        - rule_id
+        - instrument
+        - satisfied
+        - outcome
+        - category
+        - description
+      description: "Audit trail of every classification rule that fired during PERC computation: instrument, satisfied flag, outcome, category, and description."

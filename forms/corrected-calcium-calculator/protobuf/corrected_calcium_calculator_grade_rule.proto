@@ -1,0 +1,35 @@
+// Generated from sql/. Do not edit by hand.
+// SOURCE: corrected_calcium_calculator_grade_rule
+
+syntax = "proto3";
+
+package form_examples.corrected_calcium_calculator;
+
+enum CorrectedCalciumCalculatorGradeRuleInstrumentEnum {
+  INSTRUMENT_UNSPECIFIED = 0;
+  INSTRUMENT_CORRECTION = 1;  // correction
+  INSTRUMENT_CLASSIFICATION = 2;  // classification
+  INSTRUMENT_SEVERITY = 3;  // severity
+  INSTRUMENT_COMPOSITE = 4;  // composite
+}
+
+enum CorrectedCalciumCalculatorGradeRuleBandEnum {
+  BAND_UNSPECIFIED = 0;
+  BAND_HYPOCALCAEMIA = 1;  // hypocalcaemia
+  BAND_NORMAL = 2;  // normal
+  BAND_HYPERCALCAEMIA = 3;  // hypercalcaemia
+  BAND_UNKNOWN = 4;  // unknown
+}
+
+message CorrectedCalciumCalculatorGradeRule {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string corrected_calcium_calculator_grade_id = 5;  // UUID — uuid
+  string rule_id = 6;  // VARCHAR(40) — max 40 chars
+  CorrectedCalciumCalculatorGradeRuleInstrumentEnum instrument = 7;  // VARCHAR(20)
+  CorrectedCalciumCalculatorGradeRuleBandEnum band = 8;  // VARCHAR(15)
+  string category = 9;  // VARCHAR(50) — max 50 chars
+  string description = 10;  // VARCHAR(500) — max 500 chars
+}

@@ -1,0 +1,168 @@
+# Generated from sql/. Do not edit by hand.
+# SOURCE: body_mass_index_and_body_surface_area_calculator_grade_flag
+openapi: 3.1.0
+info:
+  title: Body Mass Index And Body Surface Area Calculator — BodyMassIndexAndBodySurfaceAreaCalculatorGradeFlag
+  version: 1.0.0
+  description: Safety-critical flags that fire independently of the BMI category, with priority and a suggested action for the recording clinician.
+paths:
+  /body-mass-index-and-body-surface-area-calculator-grade-flags:
+    get:
+      summary: List BodyMassIndexAndBodySurfaceAreaCalculatorGradeFlag records
+      operationId: listBodyMassIndexAndBodySurfaceAreaCalculatorGradeFlag
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of BodyMassIndexAndBodySurfaceAreaCalculatorGradeFlag records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/BodyMassIndexAndBodySurfaceAreaCalculatorGradeFlag"
+    post:
+      summary: Create a new BodyMassIndexAndBodySurfaceAreaCalculatorGradeFlag
+      operationId: createBodyMassIndexAndBodySurfaceAreaCalculatorGradeFlag
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/BodyMassIndexAndBodySurfaceAreaCalculatorGradeFlag"
+      responses:
+        "201":
+          description: The newly created BodyMassIndexAndBodySurfaceAreaCalculatorGradeFlag
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/BodyMassIndexAndBodySurfaceAreaCalculatorGradeFlag"
+        "400":
+          description: Validation error
+  /body-mass-index-and-body-surface-area-calculator-grade-flags/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one BodyMassIndexAndBodySurfaceAreaCalculatorGradeFlag by id
+      operationId: getBodyMassIndexAndBodySurfaceAreaCalculatorGradeFlag
+      responses:
+        "200":
+          description: The requested BodyMassIndexAndBodySurfaceAreaCalculatorGradeFlag
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/BodyMassIndexAndBodySurfaceAreaCalculatorGradeFlag"
+        "404":
+          description: BodyMassIndexAndBodySurfaceAreaCalculatorGradeFlag not found
+    patch:
+      summary: Update an existing BodyMassIndexAndBodySurfaceAreaCalculatorGradeFlag
+      operationId: updateBodyMassIndexAndBodySurfaceAreaCalculatorGradeFlag
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/BodyMassIndexAndBodySurfaceAreaCalculatorGradeFlag"
+      responses:
+        "200":
+          description: The updated BodyMassIndexAndBodySurfaceAreaCalculatorGradeFlag
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/BodyMassIndexAndBodySurfaceAreaCalculatorGradeFlag"
+        "404":
+          description: BodyMassIndexAndBodySurfaceAreaCalculatorGradeFlag not found
+    delete:
+      summary: Soft-delete a BodyMassIndexAndBodySurfaceAreaCalculatorGradeFlag
+      operationId: deleteBodyMassIndexAndBodySurfaceAreaCalculatorGradeFlag
+      responses:
+        "204":
+          description: BodyMassIndexAndBodySurfaceAreaCalculatorGradeFlag deleted
+        "404":
+          description: BodyMassIndexAndBodySurfaceAreaCalculatorGradeFlag not found
+components:
+  schemas:
+    BodyMassIndexAndBodySurfaceAreaCalculatorGradeFlag:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was most recently updated.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was soft-deleted.
+        body_mass_index_and_body_surface_area_calculator_grade_id:
+          type: string
+          format: uuid
+          description: Foreign key to the parent grade.
+        flag_id:
+          type: string
+          maxLength: 50
+          description: Stable flag identifier (e.g. F-SEVERE-OBESITY-001).
+        category:
+          type: string
+          enum:
+            - severe-obesity
+            - underweight
+            - extreme-value
+            - asian-high-risk
+            - asian-increased-risk
+            - incomplete
+            - other
+            - ""
+          description: "Flag category: severe-obesity, underweight, extreme-value, asian-high-risk, asian-increased-risk, incomplete, or other."
+        priority:
+          type: string
+          enum:
+            - low
+            - medium
+            - high
+            - ""
+          description: "Priority: low, medium, high."
+        description:
+          type: string
+          maxLength: 500
+          description: Human-readable description of what fired the flag.
+        suggested_action:
+          type: string
+          maxLength: 500
+          description: "Suggested clinical action (e.g. \"consider specialist weight-management referral\")."
+      required:
+        - created_at
+        - updated_at
+        - body_mass_index_and_body_surface_area_calculator_grade_id
+        - flag_id
+        - category
+        - priority
+        - description
+        - suggested_action
+      description: Safety-critical flags that fire independently of the BMI category, with priority and a suggested action for the recording clinician.

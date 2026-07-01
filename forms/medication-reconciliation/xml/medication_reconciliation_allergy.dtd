@@ -1,0 +1,9 @@
+<!ELEMENT medication_reconciliation_allergy (id,created_at,updated_at,deleted_at,medication_reconciliation_id,substance,reaction_type,severity)>
+<!ELEMENT id (#PCDATA)>
+<!ELEMENT created_at (#PCDATA)>
+<!ELEMENT updated_at (#PCDATA)>
+<!ELEMENT deleted_at (#PCDATA)>
+<!ELEMENT medication_reconciliation_id (#PCDATA)>
+<!ELEMENT substance (#PCDATA)>
+<!ELEMENT reaction_type (#PCDATA)>
+<!ELEMENT severity (#PCDATA)>

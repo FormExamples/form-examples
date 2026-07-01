@@ -1,0 +1,157 @@
+# Generated from sql/. Do not edit by hand.
+# SOURCE: medical_certificate_of_cause_of_death_grade
+openapi: 3.1.0
+info:
+  title: Medical Certificate Of Cause Of Death — MedicalCertificateOfCauseOfDeathGrade
+  version: 1.0.0
+  description: "Computed completeness and validity-classification result for a Medical Certificate of Cause of Death: validity class (valid/incomplete/refer-to-coroner), derived underlying cause of death, and whether a coroner-referral criterion is indicated."
+paths:
+  /medical-certificate-of-cause-of-death-grades:
+    get:
+      summary: List MedicalCertificateOfCauseOfDeathGrade records
+      operationId: listMedicalCertificateOfCauseOfDeathGrade
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of MedicalCertificateOfCauseOfDeathGrade records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/MedicalCertificateOfCauseOfDeathGrade"
+    post:
+      summary: Create a new MedicalCertificateOfCauseOfDeathGrade
+      operationId: createMedicalCertificateOfCauseOfDeathGrade
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/MedicalCertificateOfCauseOfDeathGrade"
+      responses:
+        "201":
+          description: The newly created MedicalCertificateOfCauseOfDeathGrade
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/MedicalCertificateOfCauseOfDeathGrade"
+        "400":
+          description: Validation error
+  /medical-certificate-of-cause-of-death-grades/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one MedicalCertificateOfCauseOfDeathGrade by id
+      operationId: getMedicalCertificateOfCauseOfDeathGrade
+      responses:
+        "200":
+          description: The requested MedicalCertificateOfCauseOfDeathGrade
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/MedicalCertificateOfCauseOfDeathGrade"
+        "404":
+          description: MedicalCertificateOfCauseOfDeathGrade not found
+    patch:
+      summary: Update an existing MedicalCertificateOfCauseOfDeathGrade
+      operationId: updateMedicalCertificateOfCauseOfDeathGrade
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/MedicalCertificateOfCauseOfDeathGrade"
+      responses:
+        "200":
+          description: The updated MedicalCertificateOfCauseOfDeathGrade
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/MedicalCertificateOfCauseOfDeathGrade"
+        "404":
+          description: MedicalCertificateOfCauseOfDeathGrade not found
+    delete:
+      summary: Soft-delete a MedicalCertificateOfCauseOfDeathGrade
+      operationId: deleteMedicalCertificateOfCauseOfDeathGrade
+      responses:
+        "204":
+          description: MedicalCertificateOfCauseOfDeathGrade deleted
+        "404":
+          description: MedicalCertificateOfCauseOfDeathGrade not found
+components:
+  schemas:
+    MedicalCertificateOfCauseOfDeathGrade:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was most recently updated.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was soft-deleted.
+        medical_certificate_of_cause_of_death_id:
+          type: string
+          format: uuid
+          description: Foreign key to the parent certificate (unique, 1:1).
+        validity_class:
+          type: string
+          enum:
+            - valid
+            - incomplete
+            - refer-to-coroner
+            - ""
+          description: "Validity classification: valid, incomplete, or refer-to-coroner (refer-to-coroner takes precedence)."
+        underlying_cause:
+          type: string
+          description: "Derived underlying cause of death: the lowest completed Part I line (I(c) else I(b) else I(a)); empty when Part I is empty."
+        coroner_referral_indicated:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Whether a coroner-referral criterion is indicated (yes/no).
+        graded_at:
+          type: string
+          format: date-time
+          description: Timestamp when the engine last computed the classification.
+      required:
+        - created_at
+        - updated_at
+        - medical_certificate_of_cause_of_death_id
+        - validity_class
+        - underlying_cause
+        - coroner_referral_indicated
+        - graded_at
+      description: "Computed completeness and validity-classification result for a Medical Certificate of Cause of Death: validity class (valid/incomplete/refer-to-coroner), derived underlying cause of death, and whether a coroner-referral criterion is indicated."

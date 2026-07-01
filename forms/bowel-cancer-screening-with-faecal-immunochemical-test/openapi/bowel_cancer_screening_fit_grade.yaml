@@ -1,0 +1,166 @@
+# Generated from sql/. Do not edit by hand.
+# SOURCE: bowel_cancer_screening_fit_grade
+openapi: 3.1.0
+info:
+  title: Bowel Cancer Screening With Faecal Immunochemical Test — BowelCancerScreeningFitGrade
+  version: 1.0.0
+  description: "Computed result classification for a bowel-cancer-screening FIT record: result class, recommended management action, symptomatic-pathway indicator, and completeness status."
+paths:
+  /bowel-cancer-screening-fit-grades:
+    get:
+      summary: List BowelCancerScreeningFitGrade records
+      operationId: listBowelCancerScreeningFitGrade
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of BowelCancerScreeningFitGrade records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/BowelCancerScreeningFitGrade"
+    post:
+      summary: Create a new BowelCancerScreeningFitGrade
+      operationId: createBowelCancerScreeningFitGrade
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/BowelCancerScreeningFitGrade"
+      responses:
+        "201":
+          description: The newly created BowelCancerScreeningFitGrade
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/BowelCancerScreeningFitGrade"
+        "400":
+          description: Validation error
+  /bowel-cancer-screening-fit-grades/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one BowelCancerScreeningFitGrade by id
+      operationId: getBowelCancerScreeningFitGrade
+      responses:
+        "200":
+          description: The requested BowelCancerScreeningFitGrade
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/BowelCancerScreeningFitGrade"
+        "404":
+          description: BowelCancerScreeningFitGrade not found
+    patch:
+      summary: Update an existing BowelCancerScreeningFitGrade
+      operationId: updateBowelCancerScreeningFitGrade
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/BowelCancerScreeningFitGrade"
+      responses:
+        "200":
+          description: The updated BowelCancerScreeningFitGrade
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/BowelCancerScreeningFitGrade"
+        "404":
+          description: BowelCancerScreeningFitGrade not found
+    delete:
+      summary: Soft-delete a BowelCancerScreeningFitGrade
+      operationId: deleteBowelCancerScreeningFitGrade
+      responses:
+        "204":
+          description: BowelCancerScreeningFitGrade deleted
+        "404":
+          description: BowelCancerScreeningFitGrade not found
+components:
+  schemas:
+    BowelCancerScreeningFitGrade:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was most recently updated.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was soft-deleted.
+        bowel_cancer_screening_fit_id:
+          type: string
+          format: uuid
+          description: Foreign key to the parent bowel-cancer-screening FIT record (unique, 1:1).
+        result_class:
+          type: string
+          enum:
+            - negative
+            - positive
+            - spoilt
+            - ""
+          description: "Result classification: negative (below threshold), positive (at or above threshold), spoilt (kit not returned or inadequate sample), or empty when returned and adequate but no numeric result."
+        management_action:
+          type: string
+          enum:
+            - routine-recall
+            - refer-colonoscopy
+            - repeat-kit
+            - ""
+          description: "Recommended management action: routine-recall (negative), refer-colonoscopy (positive), or repeat-kit (non-return, spoilt, or incomplete)."
+        symptomatic_pathway:
+          type: boolean
+          description: Whether the participant is routed to the urgent suspected-cancer pathway (red-flag symptoms present); set independently of the result class.
+        status:
+          type: string
+          enum:
+            - complete
+            - incomplete
+            - ""
+          description: "Completeness status: complete when the fields required for the reached branch are present; otherwise incomplete."
+        graded_at:
+          type: string
+          format: date-time
+          description: Timestamp when the engine last computed the classification.
+      required:
+        - created_at
+        - updated_at
+        - bowel_cancer_screening_fit_id
+        - result_class
+        - management_action
+        - symptomatic_pathway
+        - status
+        - graded_at
+      description: "Computed result classification for a bowel-cancer-screening FIT record: result class, recommended management action, symptomatic-pathway indicator, and completeness status."

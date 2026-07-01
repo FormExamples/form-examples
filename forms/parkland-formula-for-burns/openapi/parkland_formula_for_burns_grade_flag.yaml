@@ -1,0 +1,169 @@
+# Generated from sql/. Do not edit by hand.
+# SOURCE: parkland_formula_for_burns_grade_flag
+openapi: 3.1.0
+info:
+  title: Parkland Formula For Burns — ParklandFormulaForBurnsGradeFlag
+  version: 1.0.0
+  description: Safety-critical red flags that fire independently of the arithmetic, with priority and a suggested action for the assessing clinician.
+paths:
+  /parkland-formula-for-burns-grade-flags:
+    get:
+      summary: List ParklandFormulaForBurnsGradeFlag records
+      operationId: listParklandFormulaForBurnsGradeFlag
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of ParklandFormulaForBurnsGradeFlag records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/ParklandFormulaForBurnsGradeFlag"
+    post:
+      summary: Create a new ParklandFormulaForBurnsGradeFlag
+      operationId: createParklandFormulaForBurnsGradeFlag
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ParklandFormulaForBurnsGradeFlag"
+      responses:
+        "201":
+          description: The newly created ParklandFormulaForBurnsGradeFlag
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ParklandFormulaForBurnsGradeFlag"
+        "400":
+          description: Validation error
+  /parkland-formula-for-burns-grade-flags/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one ParklandFormulaForBurnsGradeFlag by id
+      operationId: getParklandFormulaForBurnsGradeFlag
+      responses:
+        "200":
+          description: The requested ParklandFormulaForBurnsGradeFlag
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ParklandFormulaForBurnsGradeFlag"
+        "404":
+          description: ParklandFormulaForBurnsGradeFlag not found
+    patch:
+      summary: Update an existing ParklandFormulaForBurnsGradeFlag
+      operationId: updateParklandFormulaForBurnsGradeFlag
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ParklandFormulaForBurnsGradeFlag"
+      responses:
+        "200":
+          description: The updated ParklandFormulaForBurnsGradeFlag
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ParklandFormulaForBurnsGradeFlag"
+        "404":
+          description: ParklandFormulaForBurnsGradeFlag not found
+    delete:
+      summary: Soft-delete a ParklandFormulaForBurnsGradeFlag
+      operationId: deleteParklandFormulaForBurnsGradeFlag
+      responses:
+        "204":
+          description: ParklandFormulaForBurnsGradeFlag deleted
+        "404":
+          description: ParklandFormulaForBurnsGradeFlag not found
+components:
+  schemas:
+    ParklandFormulaForBurnsGradeFlag:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was most recently updated.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was soft-deleted.
+        parkland_formula_for_burns_grade_id:
+          type: string
+          format: uuid
+          description: Foreign key to the parent grade.
+        flag_id:
+          type: string
+          maxLength: 50
+          description: Stable flag identifier (e.g. F-MAJOR-BURN-REFERRAL-001).
+        category:
+          type: string
+          enum:
+            - major-burn-referral
+            - inhalation-airway
+            - escharotomy
+            - resuscitation-overdue
+            - titrate-to-urine-output
+            - special-mechanism
+            - incomplete
+            - other
+            - ""
+          description: "Flag category: major-burn-referral, inhalation-airway, escharotomy, resuscitation-overdue, titrate-to-urine-output, special-mechanism, incomplete, or other."
+        priority:
+          type: string
+          enum:
+            - low
+            - medium
+            - high
+            - ""
+          description: "Priority: low, medium, high."
+        description:
+          type: string
+          maxLength: 500
+          description: Human-readable description of what fired the flag.
+        suggested_action:
+          type: string
+          maxLength: 500
+          description: "Suggested clinical action (e.g. \"refer to a specialist burns service and commence formal resuscitation\")."
+      required:
+        - created_at
+        - updated_at
+        - parkland_formula_for_burns_grade_id
+        - flag_id
+        - category
+        - priority
+        - description
+        - suggested_action
+      description: Safety-critical red flags that fire independently of the arithmetic, with priority and a suggested action for the assessing clinician.

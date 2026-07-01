@@ -1,0 +1,207 @@
+// Generated from sql/. Do not edit by hand.
+// SOURCE: mental_health_act_assessment
+
+syntax = "proto3";
+
+package form_examples.mental_health_act_assessment;
+
+enum MentalHealthActAssessmentLocationEnum {
+  LOCATION_UNSPECIFIED = 0;
+  LOCATION_HOSPITAL_WARD = 1;  // hospital-ward
+  LOCATION_EMERGENCY_DEPARTMENT = 2;  // emergency-department
+  LOCATION_PLACE_OF_SAFETY = 3;  // place-of-safety
+  LOCATION_CARE_HOME = 4;  // care-home
+  LOCATION_COMMUNITY = 5;  // community
+  LOCATION_OTHER = 6;  // other
+}
+
+enum MentalHealthActAssessmentAgeBandEnum {
+  AGEBAND_UNSPECIFIED = 0;
+  AGEBAND_CHILD = 1;  // child
+  AGEBAND_ADOLESCENT = 2;  // adolescent
+  AGEBAND_ADULT = 3;  // adult
+  AGEBAND_OLDER_ADULT = 4;  // older-adult
+}
+
+enum MentalHealthActAssessmentSexEnum {
+  SEX_UNSPECIFIED = 0;
+  SEX_FEMALE = 1;  // female
+  SEX_MALE = 2;  // male
+  SEX_INTERSEX = 3;  // intersex
+  SEX_UNKNOWN = 4;  // unknown
+}
+
+enum MentalHealthActAssessmentAmhpApprovedEnum {
+  AMHPAPPROVED_UNSPECIFIED = 0;
+  AMHPAPPROVED_YES = 1;  // yes
+  AMHPAPPROVED_NO = 2;  // no
+}
+
+enum MentalHealthActAssessmentDoctor1Section12ApprovedEnum {
+  DOCTOR1SECTION12APPROVED_UNSPECIFIED = 0;
+  DOCTOR1SECTION12APPROVED_YES = 1;  // yes
+  DOCTOR1SECTION12APPROVED_NO = 2;  // no
+}
+
+enum MentalHealthActAssessmentDoctor2Section12ApprovedEnum {
+  DOCTOR2SECTION12APPROVED_UNSPECIFIED = 0;
+  DOCTOR2SECTION12APPROVED_YES = 1;  // yes
+  DOCTOR2SECTION12APPROVED_NO = 2;  // no
+}
+
+enum MentalHealthActAssessmentPriorAcquaintanceEnum {
+  PRIORACQUAINTANCE_UNSPECIFIED = 0;
+  PRIORACQUAINTANCE_YES = 1;  // yes
+  PRIORACQUAINTANCE_NO = 2;  // no
+}
+
+enum MentalHealthActAssessmentMentalDisorderPresentEnum {
+  MENTALDISORDERPRESENT_UNSPECIFIED = 0;
+  MENTALDISORDERPRESENT_MET = 1;  // met
+  MENTALDISORDERPRESENT_NOT_MET = 2;  // not-met
+  MENTALDISORDERPRESENT_NOT_APPLICABLE = 3;  // not-applicable
+}
+
+enum MentalHealthActAssessmentRiskToOwnHealthEnum {
+  RISKTOOWNHEALTH_UNSPECIFIED = 0;
+  RISKTOOWNHEALTH_MET = 1;  // met
+  RISKTOOWNHEALTH_NOT_MET = 2;  // not-met
+  RISKTOOWNHEALTH_NOT_APPLICABLE = 3;  // not-applicable
+}
+
+enum MentalHealthActAssessmentRiskToOwnSafetyEnum {
+  RISKTOOWNSAFETY_UNSPECIFIED = 0;
+  RISKTOOWNSAFETY_MET = 1;  // met
+  RISKTOOWNSAFETY_NOT_MET = 2;  // not-met
+  RISKTOOWNSAFETY_NOT_APPLICABLE = 3;  // not-applicable
+}
+
+enum MentalHealthActAssessmentRiskToOthersEnum {
+  RISKTOOTHERS_UNSPECIFIED = 0;
+  RISKTOOTHERS_MET = 1;  // met
+  RISKTOOTHERS_NOT_MET = 2;  // not-met
+  RISKTOOTHERS_NOT_APPLICABLE = 3;  // not-applicable
+}
+
+enum MentalHealthActAssessmentRiskImminenceEnum {
+  RISKIMMINENCE_UNSPECIFIED = 0;
+  RISKIMMINENCE_NONE = 1;  // none
+  RISKIMMINENCE_LOW = 2;  // low
+  RISKIMMINENCE_MODERATE = 3;  // moderate
+  RISKIMMINENCE_IMMINENT = 4;  // imminent
+}
+
+enum MentalHealthActAssessmentLeastRestrictiveMetEnum {
+  LEASTRESTRICTIVEMET_UNSPECIFIED = 0;
+  LEASTRESTRICTIVEMET_MET = 1;  // met
+  LEASTRESTRICTIVEMET_NOT_MET = 2;  // not-met
+  LEASTRESTRICTIVEMET_NOT_APPLICABLE = 3;  // not-applicable
+}
+
+enum MentalHealthActAssessmentAppropriateTreatmentAvailableEnum {
+  APPROPRIATETREATMENTAVAILABLE_UNSPECIFIED = 0;
+  APPROPRIATETREATMENTAVAILABLE_MET = 1;  // met
+  APPROPRIATETREATMENTAVAILABLE_NOT_MET = 2;  // not-met
+  APPROPRIATETREATMENTAVAILABLE_NOT_APPLICABLE = 3;  // not-applicable
+}
+
+enum MentalHealthActAssessmentNearestRelativeIdentifiedEnum {
+  NEARESTRELATIVEIDENTIFIED_UNSPECIFIED = 0;
+  NEARESTRELATIVEIDENTIFIED_YES = 1;  // yes
+  NEARESTRELATIVEIDENTIFIED_NO = 2;  // no
+}
+
+enum MentalHealthActAssessmentNearestRelativeConsultedEnum {
+  NEARESTRELATIVECONSULTED_UNSPECIFIED = 0;
+  NEARESTRELATIVECONSULTED_YES = 1;  // yes
+  NEARESTRELATIVECONSULTED_NO = 2;  // no
+  NEARESTRELATIVECONSULTED_NOT_PRACTICABLE = 3;  // not-practicable
+}
+
+enum MentalHealthActAssessmentNearestRelativeObjectionEnum {
+  NEARESTRELATIVEOBJECTION_UNSPECIFIED = 0;
+  NEARESTRELATIVEOBJECTION_YES = 1;  // yes
+  NEARESTRELATIVEOBJECTION_NO = 2;  // no
+  NEARESTRELATIVEOBJECTION_UNKNOWN = 3;  // unknown
+}
+
+enum MentalHealthActAssessmentRecommendedSectionEnum {
+  RECOMMENDEDSECTION_UNSPECIFIED = 0;
+  RECOMMENDEDSECTION_V_2 = 1;  // 2
+  RECOMMENDEDSECTION_V_3 = 2;  // 3
+  RECOMMENDEDSECTION_V_4 = 3;  // 4
+  RECOMMENDEDSECTION_V_5_2 = 4;  // 5-2
+  RECOMMENDEDSECTION_V_5_4 = 5;  // 5-4
+  RECOMMENDEDSECTION_V_136 = 6;  // 136
+  RECOMMENDEDSECTION_NONE = 7;  // none
+}
+
+enum MentalHealthActAssessmentOutcomeEnum {
+  OUTCOME_UNSPECIFIED = 0;
+  OUTCOME_DETAIN_UNDER_SECTION = 1;  // detain-under-section
+  OUTCOME_INFORMAL_ADMISSION = 2;  // informal-admission
+  OUTCOME_COMMUNITY = 3;  // community
+  OUTCOME_NO_ACTION = 4;  // no-action
+}
+
+enum MentalHealthActAssessmentBedIdentifiedEnum {
+  BEDIDENTIFIED_UNSPECIFIED = 0;
+  BEDIDENTIFIED_YES = 1;  // yes
+  BEDIDENTIFIED_NO = 2;  // no
+}
+
+enum MentalHealthActAssessmentConveyanceEnum {
+  CONVEYANCE_UNSPECIFIED = 0;
+  CONVEYANCE_AMBULANCE = 1;  // ambulance
+  CONVEYANCE_POLICE = 2;  // police
+  CONVEYANCE_SELF = 3;  // self
+  CONVEYANCE_OTHER = 4;  // other
+}
+
+message MentalHealthActAssessment {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string patient_id = 5;  // UUID — uuid
+  string clinician_id = 6;  // UUID — uuid
+  string assessed_at = 7;  // TIMESTAMPTZ — iso 8601
+  MentalHealthActAssessmentLocationEnum location = 8;  // VARCHAR(30)
+  string referral_source = 9;  // TEXT
+  string reason_for_assessment = 10;  // TEXT
+  string person_identifier = 11;  // VARCHAR(100) — max 100 chars
+  MentalHealthActAssessmentAgeBandEnum age_band = 12;  // VARCHAR(20)
+  MentalHealthActAssessmentSexEnum sex = 13;  // VARCHAR(20)
+  string first_language = 14;  // TEXT
+  string amhp_name = 15;  // TEXT
+  MentalHealthActAssessmentAmhpApprovedEnum amhp_approved = 16;  // VARCHAR(5)
+  string doctor1_name = 17;  // TEXT
+  string doctor1_gmc_number = 18;  // TEXT
+  MentalHealthActAssessmentDoctor1Section12ApprovedEnum doctor1_section12_approved = 19;  // VARCHAR(5)
+  string doctor1_examined_at = 20;  // TIMESTAMPTZ — iso 8601
+  string doctor2_name = 21;  // TEXT
+  string doctor2_gmc_number = 22;  // TEXT
+  MentalHealthActAssessmentDoctor2Section12ApprovedEnum doctor2_section12_approved = 23;  // VARCHAR(5)
+  string doctor2_examined_at = 24;  // TIMESTAMPTZ — iso 8601
+  MentalHealthActAssessmentPriorAcquaintanceEnum prior_acquaintance = 25;  // VARCHAR(5)
+  MentalHealthActAssessmentMentalDisorderPresentEnum mental_disorder_present = 26;  // VARCHAR(15)
+  string mental_disorder_evidence = 27;  // TEXT
+  MentalHealthActAssessmentRiskToOwnHealthEnum risk_to_own_health = 28;  // VARCHAR(15)
+  MentalHealthActAssessmentRiskToOwnSafetyEnum risk_to_own_safety = 29;  // VARCHAR(15)
+  MentalHealthActAssessmentRiskToOthersEnum risk_to_others = 30;  // VARCHAR(15)
+  string risk_evidence = 31;  // TEXT
+  MentalHealthActAssessmentRiskImminenceEnum risk_imminence = 32;  // VARCHAR(15)
+  MentalHealthActAssessmentLeastRestrictiveMetEnum least_restrictive_met = 33;  // VARCHAR(15)
+  string alternatives_considered = 34;  // TEXT
+  MentalHealthActAssessmentAppropriateTreatmentAvailableEnum appropriate_treatment_available = 35;  // VARCHAR(15)
+  string treatment_plan_summary = 36;  // TEXT
+  MentalHealthActAssessmentNearestRelativeIdentifiedEnum nearest_relative_identified = 37;  // VARCHAR(5)
+  MentalHealthActAssessmentNearestRelativeConsultedEnum nearest_relative_consulted = 38;  // VARCHAR(20)
+  MentalHealthActAssessmentNearestRelativeObjectionEnum nearest_relative_objection = 39;  // VARCHAR(10)
+  string consultation_record = 40;  // TEXT
+  MentalHealthActAssessmentRecommendedSectionEnum recommended_section = 41;  // VARCHAR(10)
+  MentalHealthActAssessmentOutcomeEnum outcome = 42;  // VARCHAR(25)
+  MentalHealthActAssessmentBedIdentifiedEnum bed_identified = 43;  // VARCHAR(5)
+  MentalHealthActAssessmentConveyanceEnum conveyance = 44;  // VARCHAR(15)
+  string clinical_legal_note = 45;  // TEXT
+}

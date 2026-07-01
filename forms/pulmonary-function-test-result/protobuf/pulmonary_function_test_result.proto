@@ -1,0 +1,94 @@
+// Generated from sql/. Do not edit by hand.
+// SOURCE: pulmonary_function_test_result
+
+syntax = "proto3";
+
+package form_examples.pulmonary_function_test_result;
+
+enum PulmonaryFunctionTestResultTestTypeEnum {
+  TESTTYPE_UNSPECIFIED = 0;
+  TESTTYPE_SPIROMETRY = 1;  // spirometry
+  TESTTYPE_SPIROMETRY_WITH_REVERSIBILITY = 2;  // spirometry-with-reversibility
+  TESTTYPE_FULL_LUNG_FUNCTION = 3;  // full-lung-function
+  TESTTYPE_GAS_TRANSFER_DLCO = 4;  // gas-transfer-dlco
+  TESTTYPE_PEAK_FLOW = 5;  // peak-flow
+  TESTTYPE_FENO = 6;  // feno
+  TESTTYPE_OTHER = 7;  // other
+}
+
+enum PulmonaryFunctionTestResultReportStatusEnum {
+  REPORTSTATUS_UNSPECIFIED = 0;
+  REPORTSTATUS_PRELIMINARY = 1;  // preliminary
+  REPORTSTATUS_FINAL = 2;  // final
+  REPORTSTATUS_AMENDED = 3;  // amended
+  REPORTSTATUS_CANCELLED = 4;  // cancelled
+}
+
+enum PulmonaryFunctionTestResultTestQualityEnum {
+  TESTQUALITY_UNSPECIFIED = 0;
+  TESTQUALITY_ACCEPTABLE = 1;  // acceptable
+  TESTQUALITY_SUB_OPTIMAL = 2;  // sub-optimal
+  TESTQUALITY_UNACCEPTABLE = 3;  // unacceptable
+}
+
+enum PulmonaryFunctionTestResultVentilatoryPatternEnum {
+  VENTILATORYPATTERN_UNSPECIFIED = 0;
+  VENTILATORYPATTERN_NORMAL = 1;  // normal
+  VENTILATORYPATTERN_OBSTRUCTIVE = 2;  // obstructive
+  VENTILATORYPATTERN_RESTRICTIVE = 3;  // restrictive
+  VENTILATORYPATTERN_MIXED = 4;  // mixed
+}
+
+enum PulmonaryFunctionTestResultSeverityEnum {
+  SEVERITY_UNSPECIFIED = 0;
+  SEVERITY_NONE = 1;  // none
+  SEVERITY_MILD = 2;  // mild
+  SEVERITY_MODERATE = 3;  // moderate
+  SEVERITY_SEVERE = 4;  // severe
+  SEVERITY_VERY_SEVERE = 5;  // very-severe
+}
+
+enum PulmonaryFunctionTestResultBronchodilatorReversibilityEnum {
+  BRONCHODILATORREVERSIBILITY_UNSPECIFIED = 0;
+  BRONCHODILATORREVERSIBILITY_POSITIVE = 1;  // positive
+  BRONCHODILATORREVERSIBILITY_NEGATIVE = 2;  // negative
+  BRONCHODILATORREVERSIBILITY_NOT_TESTED = 3;  // not-tested
+}
+
+message PulmonaryFunctionTestResult {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string patient_id = 5;  // UUID — uuid
+  string clinician_id = 6;  // UUID — uuid
+  string originating_request_reference = 7;  // VARCHAR(255) — max 255 chars
+  PulmonaryFunctionTestResultTestTypeEnum test_type = 8;  // VARCHAR(30)
+  string performed_date = 9;  // DATE — iso 8601 date
+  string reported_date = 10;  // DATE — iso 8601 date
+  PulmonaryFunctionTestResultReportStatusEnum report_status = 11;  // VARCHAR(15)
+  PulmonaryFunctionTestResultTestQualityEnum test_quality = 12;  // VARCHAR(15)
+  string clinical_history = 13;  // VARCHAR(1000) — max 1000 chars
+  double fev1_litres = 14;  // NUMERIC(4,2) — numeric(4,2)
+  double fev1_percent_predicted = 15;  // NUMERIC(5,1) — numeric(5,1)
+  double fvc_litres = 16;  // NUMERIC(4,2) — numeric(4,2)
+  double fvc_percent_predicted = 17;  // NUMERIC(5,1) — numeric(5,1)
+  double fev1_fvc_ratio = 18;  // NUMERIC(4,2) — numeric(4,2)
+  double peak_expiratory_flow = 19;  // NUMERIC(6,1) — numeric(6,1)
+  double dlco_percent_predicted = 20;  // NUMERIC(5,1) — numeric(5,1)
+  PulmonaryFunctionTestResultVentilatoryPatternEnum ventilatory_pattern = 21;  // VARCHAR(15)
+  PulmonaryFunctionTestResultSeverityEnum severity = 22;  // VARCHAR(15)
+  PulmonaryFunctionTestResultBronchodilatorReversibilityEnum bronchodilator_reversibility = 23;  // VARCHAR(15)
+  bool airflow_obstruction = 24;  // BOOLEAN
+  bool restriction = 25;  // BOOLEAN
+  bool reduced_gas_transfer = 26;  // BOOLEAN
+  bool significant_reversibility = 27;  // BOOLEAN
+  bool normal_spirometry = 28;  // BOOLEAN
+  string findings_narrative = 29;  // VARCHAR(2000) — max 2000 chars
+  string comparison_with_previous = 30;  // VARCHAR(1000) — max 1000 chars
+  string impression = 31;  // VARCHAR(2000) — max 2000 chars
+  string reporting_category = 32;  // VARCHAR(50) — max 50 chars
+  string recommended_follow_up = 33;  // VARCHAR(1000) — max 1000 chars
+  bool critical_result_communicated = 34;  // BOOLEAN
+  string reported_to = 35;  // VARCHAR(500) — max 500 chars
+}

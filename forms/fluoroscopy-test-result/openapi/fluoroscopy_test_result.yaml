@@ -1,0 +1,273 @@
+# Generated from sql/. Do not edit by hand.
+# SOURCE: fluoroscopy_test_result
+openapi: 3.1.0
+info:
+  title: Fluoroscopy Test Result — FluoroscopyTestResult
+  version: 1.0.0
+  description: Fluoroscopy / contrast-study result (report). Captures the performed examination (barium / water-soluble / proctogram / hysterosalpingogram / cystourethrogram / arthrogram / fluoroscopy-guided procedure), the contrast used, screening time, clinical history, the narrative and structured findings, the impression and structured-reporting category, recommended follow-up, and critical-result communication. This is the source-of-truth record that the four-axis interpretation grade is computed from.
+paths:
+  /fluoroscopy-test-results:
+    get:
+      summary: List FluoroscopyTestResult records
+      operationId: listFluoroscopyTestResult
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of FluoroscopyTestResult records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/FluoroscopyTestResult"
+    post:
+      summary: Create a new FluoroscopyTestResult
+      operationId: createFluoroscopyTestResult
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/FluoroscopyTestResult"
+      responses:
+        "201":
+          description: The newly created FluoroscopyTestResult
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/FluoroscopyTestResult"
+        "400":
+          description: Validation error
+  /fluoroscopy-test-results/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one FluoroscopyTestResult by id
+      operationId: getFluoroscopyTestResult
+      responses:
+        "200":
+          description: The requested FluoroscopyTestResult
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/FluoroscopyTestResult"
+        "404":
+          description: FluoroscopyTestResult not found
+    patch:
+      summary: Update an existing FluoroscopyTestResult
+      operationId: updateFluoroscopyTestResult
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/FluoroscopyTestResult"
+      responses:
+        "200":
+          description: The updated FluoroscopyTestResult
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/FluoroscopyTestResult"
+        "404":
+          description: FluoroscopyTestResult not found
+    delete:
+      summary: Soft-delete a FluoroscopyTestResult
+      operationId: deleteFluoroscopyTestResult
+      responses:
+        "204":
+          description: FluoroscopyTestResult deleted
+        "404":
+          description: FluoroscopyTestResult not found
+components:
+  schemas:
+    FluoroscopyTestResult:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was updated most-recently.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was deleted a.k.a. soft-removed.
+        patient_id:
+          type: string
+          format: uuid
+          description: Foreign key to the patient.
+        clinician_id:
+          type: string
+          format: uuid
+          description: Foreign key to the reporting clinician (radiologist / consultant / reporting radiographer).
+        originating_request_reference:
+          type: string
+          maxLength: 255
+          description: Free-text reference linking this report back to the originating fluoroscopy request (referral).
+        report_status:
+          type: string
+          enum:
+            - preliminary
+            - final
+            - amended
+            - cancelled
+            - ""
+          description: "Report lifecycle status: preliminary, final, amended, cancelled."
+        performed_date:
+          type: string
+          format: date
+          description: Date the fluoroscopy examination was performed.
+        reported_date:
+          type: string
+          format: date
+          description: Date the report was authored / signed.
+        study_type:
+          type: string
+          enum:
+            - barium-swallow
+            - barium-meal
+            - barium-follow-through
+            - barium-enema
+            - water-soluble-contrast-swallow
+            - defecating-proctogram
+            - hysterosalpingogram
+            - micturating-cystourethrogram
+            - arthrogram
+            - fluoroscopy-guided-procedure
+            - other
+            - ""
+          description: "Performed fluoroscopy study type: barium-swallow, barium-meal, barium-follow-through, barium-enema, water-soluble-contrast-swallow, defecating-proctogram, hysterosalpingogram, micturating-cystourethrogram, arthrogram, fluoroscopy-guided-procedure, other."
+        contrast_used:
+          type: string
+          enum:
+            - barium
+            - water-soluble-iodinated
+            - none
+            - ""
+          description: "Contrast actually administered: barium, water-soluble-iodinated, none."
+        examination_adequacy:
+          type: string
+          enum:
+            - adequate
+            - limited
+            - non-diagnostic
+            - ""
+          description: "Diagnostic adequacy of the examination: adequate, limited, non-diagnostic."
+        screening_time_minutes:
+          type: number
+          format: double
+          description: Total fluoroscopy screening time in minutes, for dose audit.
+        clinical_history:
+          type: string
+          maxLength: 1000
+          description: Clinical history and the question the examination was performed to answer.
+        comparison_with_previous:
+          type: string
+          maxLength: 1000
+          description: Comparison with relevant previous imaging studies.
+        findings_narrative:
+          type: string
+          maxLength: 2000
+          description: Narrative description of the imaging findings (the body of the report).
+        stricture:
+          type: boolean
+          description: Whether a stricture (luminal narrowing) is present.
+        reflux:
+          type: boolean
+          description: Whether reflux (e.g. gastro-oesophageal, vesico-ureteric) is demonstrated.
+        obstruction:
+          type: boolean
+          description: Whether an obstruction is present.
+        perforation_or_leak:
+          type: boolean
+          description: Whether a perforation or contrast leak / extravasation is present (a critical finding).
+        fistula:
+          type: boolean
+          description: Whether a fistulous tract is demonstrated.
+        filling_defect:
+          type: boolean
+          description: Whether a filling defect (e.g. mass, polyp, food bolus) is present.
+        dysmotility:
+          type: boolean
+          description: Whether abnormal motility (e.g. achalasia, dysmotility) is demonstrated.
+        normal_study:
+          type: boolean
+          description: Whether the study is reported as normal (no significant abnormality).
+        incidental_finding:
+          type: boolean
+          description: Whether one or more incidental findings warranting documentation are present.
+        impression:
+          type: string
+          maxLength: 2000
+          description: Summary impression / conclusion answering the clinical question.
+        reporting_category:
+          type: string
+          maxLength: 50
+          description: Structured-reporting category / label recorded on the report (free text).
+        recommended_follow_up:
+          type: string
+          maxLength: 1000
+          description: Recommended follow-up imaging, referral, or management.
+        critical_result_communicated:
+          type: boolean
+          description: Whether a critical or unexpected significant result was communicated directly to the referrer.
+        reported_to:
+          type: string
+          maxLength: 500
+          description: Who the critical / urgent result was communicated to, with date and time if applicable.
+      required:
+        - created_at
+        - updated_at
+        - patient_id
+        - clinician_id
+        - originating_request_reference
+        - report_status
+        - study_type
+        - contrast_used
+        - examination_adequacy
+        - clinical_history
+        - comparison_with_previous
+        - findings_narrative
+        - stricture
+        - reflux
+        - obstruction
+        - perforation_or_leak
+        - fistula
+        - filling_defect
+        - dysmotility
+        - normal_study
+        - incidental_finding
+        - impression
+        - reporting_category
+        - recommended_follow_up
+        - critical_result_communicated
+        - reported_to
+      description: Fluoroscopy / contrast-study result (report). Captures the performed examination (barium / water-soluble / proctogram / hysterosalpingogram / cystourethrogram / arthrogram / fluoroscopy-guided procedure), the contrast used, screening time, clinical history, the narrative and structured findings, the impression and structured-reporting category, recommended follow-up, and critical-result communication. This is the source-of-truth record that the four-axis interpretation grade is computed from.

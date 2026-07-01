@@ -1,0 +1,146 @@
+# Generated from sql/. Do not edit by hand.
+# SOURCE: structured_medication_review_grade_rule
+openapi: 3.1.0
+info:
+  title: Structured Medication Review — StructuredMedicationReviewGradeRule
+  version: 1.0.0
+  description: "Audit trail of every scoring rule that fired during grading: category and description."
+paths:
+  /structured-medication-review-grade-rules:
+    get:
+      summary: List StructuredMedicationReviewGradeRule records
+      operationId: listStructuredMedicationReviewGradeRule
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of StructuredMedicationReviewGradeRule records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/StructuredMedicationReviewGradeRule"
+    post:
+      summary: Create a new StructuredMedicationReviewGradeRule
+      operationId: createStructuredMedicationReviewGradeRule
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/StructuredMedicationReviewGradeRule"
+      responses:
+        "201":
+          description: The newly created StructuredMedicationReviewGradeRule
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/StructuredMedicationReviewGradeRule"
+        "400":
+          description: Validation error
+  /structured-medication-review-grade-rules/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one StructuredMedicationReviewGradeRule by id
+      operationId: getStructuredMedicationReviewGradeRule
+      responses:
+        "200":
+          description: The requested StructuredMedicationReviewGradeRule
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/StructuredMedicationReviewGradeRule"
+        "404":
+          description: StructuredMedicationReviewGradeRule not found
+    patch:
+      summary: Update an existing StructuredMedicationReviewGradeRule
+      operationId: updateStructuredMedicationReviewGradeRule
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/StructuredMedicationReviewGradeRule"
+      responses:
+        "200":
+          description: The updated StructuredMedicationReviewGradeRule
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/StructuredMedicationReviewGradeRule"
+        "404":
+          description: StructuredMedicationReviewGradeRule not found
+    delete:
+      summary: Soft-delete a StructuredMedicationReviewGradeRule
+      operationId: deleteStructuredMedicationReviewGradeRule
+      responses:
+        "204":
+          description: StructuredMedicationReviewGradeRule deleted
+        "404":
+          description: StructuredMedicationReviewGradeRule not found
+components:
+  schemas:
+    StructuredMedicationReviewGradeRule:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was most recently updated.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was soft-deleted.
+        structured_medication_review_grade_id:
+          type: string
+          format: uuid
+          description: Foreign key to the parent grade.
+        rule_id:
+          type: string
+          maxLength: 40
+          description: Stable rule identifier (e.g. R-POLYPHARMACY-01).
+        category:
+          type: string
+          maxLength: 50
+          description: Subject category (e.g. polypharmacy, anticholinergic-burden, review-status).
+        description:
+          type: string
+          maxLength: 500
+          description: Human-readable description of why the rule fired.
+      required:
+        - created_at
+        - updated_at
+        - structured_medication_review_grade_id
+        - rule_id
+        - category
+        - description
+      description: "Audit trail of every scoring rule that fired during grading: category and description."

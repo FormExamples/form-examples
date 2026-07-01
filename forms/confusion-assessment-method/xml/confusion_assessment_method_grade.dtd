@@ -1,0 +1,15 @@
+<!ELEMENT confusion_assessment_method_grade (id,created_at,updated_at,deleted_at,confusion_assessment_method_id,classification,delirium_present,feature_1_positive,feature_2_positive,feature_3_positive,feature_4_positive,positive_features,motoric_subtype,graded_at)>
+<!ELEMENT id (#PCDATA)>
+<!ELEMENT created_at (#PCDATA)>
+<!ELEMENT updated_at (#PCDATA)>
+<!ELEMENT deleted_at (#PCDATA)>
+<!ELEMENT confusion_assessment_method_id (#PCDATA)>
+<!ELEMENT classification (#PCDATA)>
+<!ELEMENT delirium_present (#PCDATA)>
+<!ELEMENT feature_1_positive (#PCDATA)>
+<!ELEMENT feature_2_positive (#PCDATA)>
+<!ELEMENT feature_3_positive (#PCDATA)>
+<!ELEMENT feature_4_positive (#PCDATA)>
+<!ELEMENT positive_features (#PCDATA)>
+<!ELEMENT motoric_subtype (#PCDATA)>
+<!ELEMENT graded_at (#PCDATA)>

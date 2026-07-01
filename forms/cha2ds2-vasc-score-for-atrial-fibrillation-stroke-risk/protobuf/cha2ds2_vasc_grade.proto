@@ -1,0 +1,33 @@
+// Generated from sql/. Do not edit by hand.
+// SOURCE: cha2ds2_vasc_grade
+
+syntax = "proto3";
+
+package form_examples.cha2ds2_vasc_score_for_atrial_fibrillation_stroke_risk;
+
+enum Cha2ds2VascGradeRiskBandEnum {
+  RISKBAND_UNSPECIFIED = 0;
+  RISKBAND_LOW = 1;  // low
+  RISKBAND_INTERMEDIATE = 2;  // intermediate
+  RISKBAND_HIGH = 3;  // high
+}
+
+message Cha2ds2VascGrade {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string cha2ds2_vasc_id = 5;  // UUID — uuid
+  int32 congestive_heart_failure_points = 6;  // INT
+  int32 hypertension_points = 7;  // INT
+  int32 age_points = 8;  // INT
+  int32 diabetes_points = 9;  // INT
+  int32 stroke_points = 10;  // INT
+  int32 vascular_disease_points = 11;  // INT
+  int32 sex_points = 12;  // INT
+  int32 total_score = 13;  // INT
+  Cha2ds2VascGradeRiskBandEnum risk_band = 14;  // VARCHAR(20)
+  double annual_stroke_risk_percent = 15;  // NUMERIC(4,1) — numeric(4,1)
+  string anticoagulation_recommendation = 16;  // TEXT
+  string graded_at = 17;  // TIMESTAMPTZ — iso 8601
+}

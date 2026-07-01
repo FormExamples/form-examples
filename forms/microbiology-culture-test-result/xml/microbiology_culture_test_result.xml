@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE microbiology_culture_test_result SYSTEM "microbiology_culture_test_result.dtd">
+<microbiology_culture_test_result>
+<id>770e8400-e29b-41d4-a716-446655440002</id>
+<created_at>2026-04-09T10:00:00Z</created_at>
+<updated_at>2026-04-09T10:00:00Z</updated_at>
+<deleted_at>2026-04-09T10:00:00Z</deleted_at>
+<patient_id>550e8400-e29b-41d4-a716-446655440000</patient_id>
+<clinician_id>660e8400-e29b-41d4-a716-446655440001</clinician_id>
+<originating_request_reference></originating_request_reference>
+<report_status>preliminary</report_status>
+<performed_date>2026-01-15</performed_date>
+<reported_date>2026-01-15</reported_date>
+<specimen_type>blood-culture</specimen_type>
+<specimen_site_detail>Example location</specimen_site_detail>
+<specimen_condition>satisfactory</specimen_condition>
+<clinical_history>Example text.</clinical_history>
+<gram_stain_result>Normal</gram_stain_result>
+<culture_result>no-growth</culture_result>
+<organism_isolated></organism_isolated>
+<second_organism_isolated></second_organism_isolated>
+<colony_count></colony_count>
+<antibiotic_sensitivities></antibiotic_sensitivities>
+<resistance_mrsa>true</resistance_mrsa>
+<resistance_esbl>true</resistance_esbl>
+<resistance_cpe>true</resistance_cpe>
+<c_difficile_toxin>positive</c_difficile_toxin>
+<acid_fast_bacilli>positive</acid_fast_bacilli>
+<pcr_result>Normal</pcr_result>
+<critical_organism>true</critical_organism>
+<findings_narrative>Example text.</findings_narrative>
+<impression>Example text.</impression>
+<reporting_category>General</reporting_category>
+<recommended_follow_up></recommended_follow_up>
+<critical_result_communicated>true</critical_result_communicated>
+<reported_to></reported_to>
+</microbiology_culture_test_result>

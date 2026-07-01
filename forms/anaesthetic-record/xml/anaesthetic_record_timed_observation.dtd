@@ -1,0 +1,15 @@
+<!ELEMENT anaesthetic_record_timed_observation (id,created_at,updated_at,deleted_at,anaesthetic_record_id,observed_at,systolic_blood_pressure,diastolic_blood_pressure,heart_rate,spo2,end_tidal_co2,temperature,agent_percent,fresh_gas_flow_l)>
+<!ELEMENT id (#PCDATA)>
+<!ELEMENT created_at (#PCDATA)>
+<!ELEMENT updated_at (#PCDATA)>
+<!ELEMENT deleted_at (#PCDATA)>
+<!ELEMENT anaesthetic_record_id (#PCDATA)>
+<!ELEMENT observed_at (#PCDATA)>
+<!ELEMENT systolic_blood_pressure (#PCDATA)>
+<!ELEMENT diastolic_blood_pressure (#PCDATA)>
+<!ELEMENT heart_rate (#PCDATA)>
+<!ELEMENT spo2 (#PCDATA)>
+<!ELEMENT end_tidal_co2 (#PCDATA)>
+<!ELEMENT temperature (#PCDATA)>
+<!ELEMENT agent_percent (#PCDATA)>
+<!ELEMENT fresh_gas_flow_l (#PCDATA)>

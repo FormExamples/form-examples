@@ -1,0 +1,65 @@
+// Generated from sql/. Do not edit by hand.
+// SOURCE: coagulation_test_result
+
+syntax = "proto3";
+
+package form_examples.coagulation_test_result;
+
+enum CoagulationTestResultReportStatusEnum {
+  REPORTSTATUS_UNSPECIFIED = 0;
+  REPORTSTATUS_PRELIMINARY = 1;  // preliminary
+  REPORTSTATUS_FINAL = 2;  // final
+  REPORTSTATUS_AMENDED = 3;  // amended
+  REPORTSTATUS_CANCELLED = 4;  // cancelled
+}
+
+enum CoagulationTestResultSpecimenConditionEnum {
+  SPECIMENCONDITION_UNSPECIFIED = 0;
+  SPECIMENCONDITION_SATISFACTORY = 1;  // satisfactory
+  SPECIMENCONDITION_CLOTTED = 2;  // clotted
+  SPECIMENCONDITION_UNDERFILLED = 3;  // underfilled
+  SPECIMENCONDITION_HAEMOLYSED = 4;  // haemolysed
+  SPECIMENCONDITION_INSUFFICIENT = 5;  // insufficient
+}
+
+enum CoagulationTestResultOverallResultStatusEnum {
+  OVERALLRESULTSTATUS_UNSPECIFIED = 0;
+  OVERALLRESULTSTATUS_NORMAL = 1;  // normal
+  OVERALLRESULTSTATUS_ABNORMAL = 2;  // abnormal
+  OVERALLRESULTSTATUS_CRITICAL = 3;  // critical
+}
+
+message CoagulationTestResult {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string patient_id = 5;  // UUID — uuid
+  string clinician_id = 6;  // UUID — uuid
+  string originating_request_reference = 7;  // VARCHAR(255) — max 255 chars
+  CoagulationTestResultReportStatusEnum report_status = 8;  // VARCHAR(15)
+  string performed_date = 9;  // DATE — iso 8601 date
+  string reported_date = 10;  // DATE — iso 8601 date
+  CoagulationTestResultSpecimenConditionEnum specimen_condition = 11;  // VARCHAR(15)
+  string clinical_history = 12;  // VARCHAR(1000) — max 1000 chars
+  bool on_anticoagulant = 13;  // BOOLEAN
+  string anticoagulant_agent = 14;  // VARCHAR(255) — max 255 chars
+  double prothrombin_time_seconds = 15;  // NUMERIC(5,1) — numeric(5,1)
+  double inr = 16;  // NUMERIC(4,1) — numeric(4,1)
+  double activated_partial_thromboplastin_time_seconds = 17;  // NUMERIC(5,1) — numeric(5,1)
+  double aptt_ratio = 18;  // NUMERIC(4,1) — numeric(4,1)
+  double fibrinogen_g_l = 19;  // NUMERIC(4,1) — numeric(4,1)
+  double d_dimer = 20;  // NUMERIC(8,1) — numeric(8,1)
+  double thrombin_time_seconds = 21;  // NUMERIC(5,1) — numeric(5,1)
+  string factor_assays = 22;  // VARCHAR(2000) — max 2000 chars
+  CoagulationTestResultOverallResultStatusEnum overall_result_status = 23;  // VARCHAR(15)
+  bool critical_value_present = 24;  // BOOLEAN
+  string critical_value_detail = 25;  // VARCHAR(1000) — max 1000 chars
+  string findings_narrative = 26;  // VARCHAR(2000) — max 2000 chars
+  string comparison_with_previous = 27;  // VARCHAR(1000) — max 1000 chars
+  string impression = 28;  // VARCHAR(2000) — max 2000 chars
+  string reporting_category = 29;  // VARCHAR(50) — max 50 chars
+  string recommended_follow_up = 30;  // VARCHAR(1000) — max 1000 chars
+  bool critical_result_communicated = 31;  // BOOLEAN
+  string reported_to = 32;  // VARCHAR(500) — max 500 chars
+}

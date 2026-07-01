@@ -1,0 +1,110 @@
+// Generated from sql/. Do not edit by hand.
+// SOURCE: cervical_screening
+
+syntax = "proto3";
+
+package form_examples.cervical_screening;
+
+enum CervicalScreeningCareSettingEnum {
+  CARESETTING_UNSPECIFIED = 0;
+  CARESETTING_GENERAL_PRACTICE = 1;  // general-practice
+  CARESETTING_SEXUAL_HEALTH = 2;  // sexual-health
+  CARESETTING_OTHER = 3;  // other
+}
+
+enum CervicalScreeningSampleTakerRoleEnum {
+  SAMPLETAKERROLE_UNSPECIFIED = 0;
+  SAMPLETAKERROLE_PRACTICE_NURSE = 1;  // practice-nurse
+  SAMPLETAKERROLE_GP = 2;  // gp
+  SAMPLETAKERROLE_SMEAR_TAKER = 3;  // smear-taker
+  SAMPLETAKERROLE_OTHER = 4;  // other
+}
+
+enum CervicalScreeningRecallIntervalEnum {
+  RECALLINTERVAL_UNSPECIFIED = 0;
+  RECALLINTERVAL_THREE_YEARLY = 1;  // three-yearly
+  RECALLINTERVAL_FIVE_YEARLY = 2;  // five-yearly
+  RECALLINTERVAL_NOT_APPLICABLE = 3;  // not-applicable
+}
+
+enum CervicalScreeningOverdueEnum {
+  OVERDUE_UNSPECIFIED = 0;
+  OVERDUE_YES = 1;  // yes
+  OVERDUE_NO = 2;  // no
+}
+
+enum CervicalScreeningPreviouslyCeasedEnum {
+  PREVIOUSLYCEASED_UNSPECIFIED = 0;
+  PREVIOUSLYCEASED_YES = 1;  // yes
+  PREVIOUSLYCEASED_NO = 2;  // no
+}
+
+enum CervicalScreeningConsentGivenEnum {
+  CONSENTGIVEN_UNSPECIFIED = 0;
+  CONSENTGIVEN_YES = 1;  // yes
+  CONSENTGIVEN_NO = 2;  // no
+}
+
+enum CervicalScreeningSymptomaticEnum {
+  SYMPTOMATIC_UNSPECIFIED = 0;
+  SYMPTOMATIC_YES = 1;  // yes
+  SYMPTOMATIC_NO = 2;  // no
+}
+
+enum CervicalScreeningSampleAdequacyEnum {
+  SAMPLEADEQUACY_UNSPECIFIED = 0;
+  SAMPLEADEQUACY_ADEQUATE = 1;  // adequate
+  SAMPLEADEQUACY_INADEQUATE = 2;  // inadequate
+}
+
+enum CervicalScreeningInadequateReasonEnum {
+  INADEQUATEREASON_UNSPECIFIED = 0;
+  INADEQUATEREASON_INSUFFICIENT_CELLS = 1;  // insufficient-cells
+  INADEQUATEREASON_OBSCURING_BLOOD = 2;  // obscuring-blood
+  INADEQUATEREASON_INFLAMMATION = 3;  // inflammation
+  INADEQUATEREASON_LABELLING = 4;  // labelling
+  INADEQUATEREASON_OTHER = 5;  // other
+}
+
+enum CervicalScreeningHpvResultEnum {
+  HPVRESULT_UNSPECIFIED = 0;
+  HPVRESULT_NEGATIVE = 1;  // negative
+  HPVRESULT_POSITIVE = 2;  // positive
+  HPVRESULT_NOT_TESTED = 3;  // not-tested
+}
+
+enum CervicalScreeningCytologyGradeEnum {
+  CYTOLOGYGRADE_UNSPECIFIED = 0;
+  CYTOLOGYGRADE_NEGATIVE = 1;  // negative
+  CYTOLOGYGRADE_BORDERLINE = 2;  // borderline
+  CYTOLOGYGRADE_LOW_GRADE = 3;  // low-grade
+  CYTOLOGYGRADE_HIGH_GRADE = 4;  // high-grade
+  CYTOLOGYGRADE_NOT_PERFORMED = 5;  // not-performed
+}
+
+message CervicalScreening {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string patient_id = 5;  // UUID — uuid
+  string clinician_id = 6;  // UUID — uuid
+  CervicalScreeningCareSettingEnum care_setting = 7;  // VARCHAR(20)
+  CervicalScreeningSampleTakerRoleEnum sample_taker_role = 8;  // VARCHAR(20)
+  string sample_taken_at = 9;  // TIMESTAMPTZ — iso 8601
+  string patient_identifier = 10;  // VARCHAR(100) — max 100 chars
+  int32 age = 11;  // INTEGER
+  CervicalScreeningRecallIntervalEnum recall_interval = 12;  // VARCHAR(20)
+  string screen_due_date = 13;  // DATE — iso 8601 date
+  string last_screen_date = 14;  // DATE — iso 8601 date
+  CervicalScreeningOverdueEnum overdue = 15;  // VARCHAR(5)
+  CervicalScreeningPreviouslyCeasedEnum previously_ceased = 16;  // VARCHAR(5)
+  CervicalScreeningConsentGivenEnum consent_given = 17;  // VARCHAR(5)
+  CervicalScreeningSymptomaticEnum symptomatic = 18;  // VARCHAR(5)
+  string symptom_detail = 19;  // TEXT
+  CervicalScreeningSampleAdequacyEnum sample_adequacy = 20;  // VARCHAR(15)
+  CervicalScreeningInadequateReasonEnum inadequate_reason = 21;  // VARCHAR(20)
+  CervicalScreeningHpvResultEnum hpv_result = 22;  // VARCHAR(15)
+  CervicalScreeningCytologyGradeEnum cytology_grade = 23;  // VARCHAR(15)
+  string clinical_context = 24;  // TEXT
+}

@@ -1,0 +1,167 @@
+# Generated from sql/. Do not edit by hand.
+# SOURCE: ottawa_knee_rule_grade_flag
+openapi: 3.1.0
+info:
+  title: Ottawa Knee Rule — OttawaKneeRuleGradeFlag
+  version: 1.0.0
+  description: Clinically significant flags that fire independently of the imaging decision, with priority and a suggested action for the assessing team.
+paths:
+  /ottawa-knee-rule-grade-flags:
+    get:
+      summary: List OttawaKneeRuleGradeFlag records
+      operationId: listOttawaKneeRuleGradeFlag
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of OttawaKneeRuleGradeFlag records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/OttawaKneeRuleGradeFlag"
+    post:
+      summary: Create a new OttawaKneeRuleGradeFlag
+      operationId: createOttawaKneeRuleGradeFlag
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/OttawaKneeRuleGradeFlag"
+      responses:
+        "201":
+          description: The newly created OttawaKneeRuleGradeFlag
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/OttawaKneeRuleGradeFlag"
+        "400":
+          description: Validation error
+  /ottawa-knee-rule-grade-flags/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one OttawaKneeRuleGradeFlag by id
+      operationId: getOttawaKneeRuleGradeFlag
+      responses:
+        "200":
+          description: The requested OttawaKneeRuleGradeFlag
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/OttawaKneeRuleGradeFlag"
+        "404":
+          description: OttawaKneeRuleGradeFlag not found
+    patch:
+      summary: Update an existing OttawaKneeRuleGradeFlag
+      operationId: updateOttawaKneeRuleGradeFlag
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/OttawaKneeRuleGradeFlag"
+      responses:
+        "200":
+          description: The updated OttawaKneeRuleGradeFlag
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/OttawaKneeRuleGradeFlag"
+        "404":
+          description: OttawaKneeRuleGradeFlag not found
+    delete:
+      summary: Soft-delete a OttawaKneeRuleGradeFlag
+      operationId: deleteOttawaKneeRuleGradeFlag
+      responses:
+        "204":
+          description: OttawaKneeRuleGradeFlag deleted
+        "404":
+          description: OttawaKneeRuleGradeFlag not found
+components:
+  schemas:
+    OttawaKneeRuleGradeFlag:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was most recently updated.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was soft-deleted.
+        ottawa_knee_rule_grade_id:
+          type: string
+          format: uuid
+          description: Foreign key to the parent grade.
+        flag_id:
+          type: string
+          maxLength: 50
+          description: Stable flag identifier (e.g. F-XRAY-INDICATED-001).
+        category:
+          type: string
+          enum:
+            - xray-indicated
+            - unable-to-bear-weight
+            - other-bony-tenderness
+            - applicability
+            - incomplete
+            - other
+            - ""
+          description: "Flag category: xray-indicated, unable-to-bear-weight, other-bony-tenderness, applicability, incomplete, or other."
+        priority:
+          type: string
+          enum:
+            - low
+            - medium
+            - high
+            - ""
+          description: "Priority: low, medium, high."
+        description:
+          type: string
+          maxLength: 500
+          description: Human-readable description of what fired the flag.
+        suggested_action:
+          type: string
+          maxLength: 500
+          description: "Suggested clinical action (e.g. \"obtain a knee radiograph per local protocol\", \"complete the outstanding criterion inputs\")."
+      required:
+        - created_at
+        - updated_at
+        - ottawa_knee_rule_grade_id
+        - flag_id
+        - category
+        - priority
+        - description
+        - suggested_action
+      description: Clinically significant flags that fire independently of the imaging decision, with priority and a suggested action for the assessing team.

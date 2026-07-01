@@ -1,0 +1,41 @@
+// Generated from sql/. Do not edit by hand.
+// SOURCE: national_early_warning_score_2_grade_rule
+
+syntax = "proto3";
+
+package form_examples.national_early_warning_score_2;
+
+enum NationalEarlyWarningScore2GradeRuleInstrumentEnum {
+  INSTRUMENT_UNSPECIFIED = 0;
+  INSTRUMENT_RESPIRATORY_RATE = 1;  // respiratory-rate
+  INSTRUMENT_SPO2 = 2;  // spo2
+  INSTRUMENT_OXYGEN = 3;  // oxygen
+  INSTRUMENT_BLOOD_PRESSURE = 4;  // blood-pressure
+  INSTRUMENT_PULSE = 5;  // pulse
+  INSTRUMENT_CONSCIOUSNESS = 6;  // consciousness
+  INSTRUMENT_TEMPERATURE = 7;  // temperature
+  INSTRUMENT_AGGREGATE = 8;  // aggregate
+  INSTRUMENT_RED_SCORE = 9;  // red-score
+}
+
+enum NationalEarlyWarningScore2GradeRuleBandEnum {
+  BAND_UNSPECIFIED = 0;
+  BAND_LOW = 1;  // low
+  BAND_LOW_MEDIUM = 2;  // low-medium
+  BAND_MEDIUM = 3;  // medium
+  BAND_HIGH = 4;  // high
+}
+
+message NationalEarlyWarningScore2GradeRule {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string national_early_warning_score_2_grade_id = 5;  // UUID — uuid
+  string rule_id = 6;  // VARCHAR(40) — max 40 chars
+  NationalEarlyWarningScore2GradeRuleInstrumentEnum instrument = 7;  // VARCHAR(30)
+  NationalEarlyWarningScore2GradeRuleBandEnum band = 8;  // VARCHAR(15)
+  int32 points = 9;  // INTEGER
+  string category = 10;  // VARCHAR(50) — max 50 chars
+  string description = 11;  // VARCHAR(500) — max 500 chars
+}

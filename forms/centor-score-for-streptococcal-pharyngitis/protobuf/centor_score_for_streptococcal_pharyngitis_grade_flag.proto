@@ -1,0 +1,36 @@
+// Generated from sql/. Do not edit by hand.
+// SOURCE: centor_score_for_streptococcal_pharyngitis_grade_flag
+
+syntax = "proto3";
+
+package form_examples.centor_score_for_streptococcal_pharyngitis;
+
+enum CentorScoreForStreptococcalPharyngitisGradeFlagCategoryEnum {
+  CATEGORY_UNSPECIFIED = 0;
+  CATEGORY_AIRWAY_RED_FLAG = 1;  // airway-red-flag
+  CATEGORY_QUINSY = 2;  // quinsy
+  CATEGORY_TEST_OR_ANTIBIOTIC = 3;  // test-or-antibiotic
+  CATEGORY_STEWARDSHIP = 4;  // stewardship
+  CATEGORY_INCOMPLETE = 5;  // incomplete
+  CATEGORY_OTHER = 6;  // other
+}
+
+enum CentorScoreForStreptococcalPharyngitisGradeFlagPriorityEnum {
+  PRIORITY_UNSPECIFIED = 0;
+  PRIORITY_LOW = 1;  // low
+  PRIORITY_MEDIUM = 2;  // medium
+  PRIORITY_HIGH = 3;  // high
+}
+
+message CentorScoreForStreptococcalPharyngitisGradeFlag {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string centor_score_for_streptococcal_pharyngitis_grade_id = 5;  // UUID — uuid
+  string flag_id = 6;  // VARCHAR(50) — max 50 chars
+  CentorScoreForStreptococcalPharyngitisGradeFlagCategoryEnum category = 7;  // VARCHAR(50)
+  CentorScoreForStreptococcalPharyngitisGradeFlagPriorityEnum priority = 8;  // VARCHAR(10)
+  string description = 9;  // VARCHAR(500) — max 500 chars
+  string suggested_action = 10;  // VARCHAR(500) — max 500 chars
+}

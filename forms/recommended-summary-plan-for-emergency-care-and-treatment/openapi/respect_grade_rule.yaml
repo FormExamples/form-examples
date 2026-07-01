@@ -1,0 +1,169 @@
+# Generated from sql/. Do not edit by hand.
+# SOURCE: respect_grade_rule
+openapi: 3.1.0
+info:
+  title: Recommended Summary Plan For Emergency Care And Treatment — RespectGradeRule
+  version: 1.0.0
+  description: "Audit trail of every mandatory rule evaluated during grading: rule identifier, plan section, whether it was satisfied, category, and description."
+paths:
+  /respect-grade-rules:
+    get:
+      summary: List RespectGradeRule records
+      operationId: listRespectGradeRule
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of RespectGradeRule records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/RespectGradeRule"
+    post:
+      summary: Create a new RespectGradeRule
+      operationId: createRespectGradeRule
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/RespectGradeRule"
+      responses:
+        "201":
+          description: The newly created RespectGradeRule
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/RespectGradeRule"
+        "400":
+          description: Validation error
+  /respect-grade-rules/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one RespectGradeRule by id
+      operationId: getRespectGradeRule
+      responses:
+        "200":
+          description: The requested RespectGradeRule
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/RespectGradeRule"
+        "404":
+          description: RespectGradeRule not found
+    patch:
+      summary: Update an existing RespectGradeRule
+      operationId: updateRespectGradeRule
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/RespectGradeRule"
+      responses:
+        "200":
+          description: The updated RespectGradeRule
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/RespectGradeRule"
+        "404":
+          description: RespectGradeRule not found
+    delete:
+      summary: Soft-delete a RespectGradeRule
+      operationId: deleteRespectGradeRule
+      responses:
+        "204":
+          description: RespectGradeRule deleted
+        "404":
+          description: RespectGradeRule not found
+components:
+  schemas:
+    RespectGradeRule:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was most recently updated.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was soft-deleted.
+        respect_grade_id:
+          type: string
+          format: uuid
+          description: Foreign key to the parent grade.
+        rule_id:
+          type: string
+          maxLength: 40
+          description: Stable rule identifier (e.g. R1-IDENTITY, R5-CPR).
+        section:
+          type: string
+          enum:
+            - identity
+            - health
+            - preferences
+            - recommendations
+            - cpr
+            - ceilings
+            - capacity
+            - sign-off
+            - completeness
+            - ""
+          description: "Plan section the rule concerns: identity, health, preferences, recommendations, cpr, ceilings, capacity, sign-off, or completeness."
+        satisfied:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Whether the mandatory rule was satisfied (yes/no).
+        category:
+          type: string
+          maxLength: 50
+          description: Subject category (e.g. mandatory-rule, conditional-requirement).
+        description:
+          type: string
+          maxLength: 500
+          description: Human-readable description of the rule and why it passed or failed.
+      required:
+        - created_at
+        - updated_at
+        - respect_grade_id
+        - rule_id
+        - section
+        - satisfied
+        - category
+        - description
+      description: "Audit trail of every mandatory rule evaluated during grading: rule identifier, plan section, whether it was satisfied, category, and description."

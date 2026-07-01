@@ -1,0 +1,163 @@
+# Generated from sql/. Do not edit by hand.
+# SOURCE: ward_round_note_grade_rule
+openapi: 3.1.0
+info:
+  title: Ward Round Note — WardRoundNoteGradeRule
+  version: 1.0.0
+  description: "Audit trail of every completeness rule that fired during grading: component, category, and description."
+paths:
+  /ward-round-note-grade-rules:
+    get:
+      summary: List WardRoundNoteGradeRule records
+      operationId: listWardRoundNoteGradeRule
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of WardRoundNoteGradeRule records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/WardRoundNoteGradeRule"
+    post:
+      summary: Create a new WardRoundNoteGradeRule
+      operationId: createWardRoundNoteGradeRule
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/WardRoundNoteGradeRule"
+      responses:
+        "201":
+          description: The newly created WardRoundNoteGradeRule
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/WardRoundNoteGradeRule"
+        "400":
+          description: Validation error
+  /ward-round-note-grade-rules/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one WardRoundNoteGradeRule by id
+      operationId: getWardRoundNoteGradeRule
+      responses:
+        "200":
+          description: The requested WardRoundNoteGradeRule
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/WardRoundNoteGradeRule"
+        "404":
+          description: WardRoundNoteGradeRule not found
+    patch:
+      summary: Update an existing WardRoundNoteGradeRule
+      operationId: updateWardRoundNoteGradeRule
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/WardRoundNoteGradeRule"
+      responses:
+        "200":
+          description: The updated WardRoundNoteGradeRule
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/WardRoundNoteGradeRule"
+        "404":
+          description: WardRoundNoteGradeRule not found
+    delete:
+      summary: Soft-delete a WardRoundNoteGradeRule
+      operationId: deleteWardRoundNoteGradeRule
+      responses:
+        "204":
+          description: WardRoundNoteGradeRule deleted
+        "404":
+          description: WardRoundNoteGradeRule not found
+components:
+  schemas:
+    WardRoundNoteGradeRule:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was most recently updated.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was soft-deleted.
+        ward_round_note_grade_id:
+          type: string
+          format: uuid
+          description: Foreign key to the parent grade.
+        rule_id:
+          type: string
+          maxLength: 40
+          description: Stable rule identifier (e.g. R-PLAN-DOCUMENTED-01).
+        component:
+          type: string
+          enum:
+            - header
+            - problems
+            - examination
+            - investigations
+            - vte
+            - medication
+            - plan
+            - escalation
+            - overnight-events
+            - estimated-discharge
+            - completeness
+            - ""
+          description: "Review component the rule concerns: header, problems, examination, investigations, vte, medication, plan, escalation, overnight-events, estimated-discharge, or completeness."
+        category:
+          type: string
+          maxLength: 50
+          description: Subject category (e.g. required-component, recommended-component).
+        description:
+          type: string
+          maxLength: 500
+          description: Human-readable description of why the rule fired.
+      required:
+        - created_at
+        - updated_at
+        - ward_round_note_grade_id
+        - rule_id
+        - component
+        - category
+        - description
+      description: "Audit trail of every completeness rule that fired during grading: component, category, and description."

@@ -1,0 +1,63 @@
+// Generated from sql/. Do not edit by hand.
+// SOURCE: estimated_glomerular_filtration_rate_calculator
+
+syntax = "proto3";
+
+package form_examples.estimated_glomerular_filtration_rate_calculator;
+
+enum EstimatedGlomerularFiltrationRateCalculatorClinicianRoleEnum {
+  CLINICIANROLE_UNSPECIFIED = 0;
+  CLINICIANROLE_DOCTOR = 1;  // doctor
+  CLINICIANROLE_NURSE = 2;  // nurse
+  CLINICIANROLE_PHARMACIST = 3;  // pharmacist
+  CLINICIANROLE_LABORATORY = 4;  // laboratory
+  CLINICIANROLE_OTHER = 5;  // other
+}
+
+enum EstimatedGlomerularFiltrationRateCalculatorCareSettingEnum {
+  CARESETTING_UNSPECIFIED = 0;
+  CARESETTING_PRIMARY_CARE = 1;  // primary-care
+  CARESETTING_SECONDARY_CARE = 2;  // secondary-care
+  CARESETTING_LABORATORY = 3;  // laboratory
+  CARESETTING_PHARMACY = 4;  // pharmacy
+  CARESETTING_OTHER = 5;  // other
+}
+
+enum EstimatedGlomerularFiltrationRateCalculatorEquationEnum {
+  EQUATION_UNSPECIFIED = 0;
+  EQUATION_CKD_EPI_2021_CREATININE = 1;  // ckd-epi-2021-creatinine
+  EQUATION_CKD_EPI_2021_CYSTATIN_C = 2;  // ckd-epi-2021-cystatin-c
+  EQUATION_MDRD = 3;  // mdrd
+}
+
+enum EstimatedGlomerularFiltrationRateCalculatorSexEnum {
+  SEX_UNSPECIFIED = 0;
+  SEX_FEMALE = 1;  // female
+  SEX_MALE = 2;  // male
+}
+
+enum EstimatedGlomerularFiltrationRateCalculatorSteadyStateEnum {
+  STEADYSTATE_UNSPECIFIED = 0;
+  STEADYSTATE_YES = 1;  // yes
+  STEADYSTATE_NO = 2;  // no
+}
+
+message EstimatedGlomerularFiltrationRateCalculator {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string patient_id = 5;  // UUID — uuid
+  string clinician_id = 6;  // UUID — uuid
+  string clinician_name = 7;  // VARCHAR(255) — max 255 chars
+  EstimatedGlomerularFiltrationRateCalculatorClinicianRoleEnum clinician_role = 8;  // VARCHAR(20)
+  string assessed_at = 9;  // TIMESTAMPTZ — iso 8601
+  EstimatedGlomerularFiltrationRateCalculatorCareSettingEnum care_setting = 10;  // VARCHAR(20)
+  EstimatedGlomerularFiltrationRateCalculatorEquationEnum equation = 11;  // VARCHAR(30)
+  string patient_identifier = 12;  // VARCHAR(100) — max 100 chars
+  double serum_creatinine_umol_l = 13;  // NUMERIC(6,1) — numeric(6,1)
+  int32 age_years = 14;  // INT
+  EstimatedGlomerularFiltrationRateCalculatorSexEnum sex = 15;  // VARCHAR(20)
+  string specimen_date = 16;  // DATE — iso 8601 date
+  EstimatedGlomerularFiltrationRateCalculatorSteadyStateEnum steady_state = 17;  // VARCHAR(5)
+}

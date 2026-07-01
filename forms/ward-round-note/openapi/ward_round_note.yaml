@@ -1,0 +1,309 @@
+# Generated from sql/. Do not edit by hand.
+# SOURCE: ward_round_note
+openapi: 3.1.0
+info:
+  title: Ward Round Note — WardRoundNote
+  version: 1.0.0
+  description: "Main ward-round-note record for one daily inpatient review: review header, patient and clinician identification, and the ten review components (overnight events, problem list, examination and NEWS2, investigations, VTE, medication, plan, escalation, estimated discharge) as free text and enum flags. Completeness grade, fired rules, and flags live in child tables."
+paths:
+  /ward-round-notes:
+    get:
+      summary: List WardRoundNote records
+      operationId: listWardRoundNote
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of WardRoundNote records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/WardRoundNote"
+    post:
+      summary: Create a new WardRoundNote
+      operationId: createWardRoundNote
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/WardRoundNote"
+      responses:
+        "201":
+          description: The newly created WardRoundNote
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/WardRoundNote"
+        "400":
+          description: Validation error
+  /ward-round-notes/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one WardRoundNote by id
+      operationId: getWardRoundNote
+      responses:
+        "200":
+          description: The requested WardRoundNote
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/WardRoundNote"
+        "404":
+          description: WardRoundNote not found
+    patch:
+      summary: Update an existing WardRoundNote
+      operationId: updateWardRoundNote
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/WardRoundNote"
+      responses:
+        "200":
+          description: The updated WardRoundNote
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/WardRoundNote"
+        "404":
+          description: WardRoundNote not found
+    delete:
+      summary: Soft-delete a WardRoundNote
+      operationId: deleteWardRoundNote
+      responses:
+        "204":
+          description: WardRoundNote deleted
+        "404":
+          description: WardRoundNote not found
+components:
+  schemas:
+    WardRoundNote:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was updated most-recently.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was deleted a.k.a. soft-removed.
+        patient_id:
+          type: string
+          format: uuid
+          description: Foreign key to the patient this review documents (restrict delete).
+        clinician_id:
+          type: string
+          format: uuid
+          description: Foreign key to the reviewing clinician (restrict delete); optional.
+        clinician_name:
+          type: string
+          description: "Name of the reviewing clinician (required component: header)."
+        clinician_grade:
+          type: string
+          enum:
+            - fy1
+            - fy2
+            - core-trainee
+            - specialty-registrar
+            - acp
+            - physician-associate
+            - consultant
+            - ""
+          description: "Grade of the reviewing clinician: fy1, fy2, core-trainee, specialty-registrar, acp, physician-associate, or consultant (required component: header)."
+        reviewed_at:
+          type: string
+          format: date-time
+          description: "Date and time of the review (required component: header)."
+        ward:
+          type: string
+          description: Ward or location where the review took place.
+        patient_identifier:
+          type: string
+          maxLength: 100
+          description: Local patient identifier as recorded on the entry.
+        admission_date:
+          type: string
+          format: date
+          description: Date of admission.
+        primary_diagnosis:
+          type: string
+          description: Reason for admission or working diagnosis.
+        overnight_events:
+          type: string
+          description: "Component 2: overnight events since the previous review (recommended component)."
+        no_overnight_events:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: "Explicit \"no overnight events\" flag (yes/no); yes documents component 2 as a deliberate negative."
+        problem_list:
+          type: string
+          description: "Component 3: current issues, problem list, and progress (required component: problems)."
+        examination_summary:
+          type: string
+          description: "Component 4: examination summary (required component: examination, with news2_total)."
+        news2_total:
+          type: integer
+          format: int32
+          description: "Component 4: latest NEWS2 total (0..20+); NULL when unrecorded."
+        news2_single_param_three:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Whether any single NEWS2 parameter scores 3 (yes/no); drives the deteriorating-NEWS2 flag.
+        observation_trend:
+          type: string
+          enum:
+            - improving
+            - stable
+            - deteriorating
+            - ""
+          description: "Component 4: observation trend: improving, stable, or deteriorating."
+        investigations_reviewed:
+          type: string
+          description: "Component 5: investigations and results reviewed (required component: investigations)."
+        no_investigations_outstanding:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: "Explicit \"none outstanding\" flag (yes/no); yes documents component 5 as a deliberate negative."
+        abnormal_result_flagged:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Whether an abnormal or critical result is present (yes/no); drives the abnormal-results-not-actioned flag.
+        abnormal_result_actioned:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Whether an action was recorded for the abnormal result (yes/no).
+        vte_status:
+          type: string
+          enum:
+            - assessed
+            - not-required
+            - not-done
+            - ""
+          description: "Component 6: VTE assessment status: assessed, not-required, or not-done (required component: vte)."
+        vte_prophylaxis_in_place:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Whether VTE prophylaxis is in place (yes/no).
+        medication_changes:
+          type: string
+          description: "Component 7: medication changes made on the review (required component: medication)."
+        no_medication_changes:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: "Explicit \"no medication changes\" flag (yes/no); yes documents component 7 as a deliberate negative."
+        plan_and_jobs:
+          type: string
+          description: "Component 8: plan and jobs for the day (required component: plan)."
+        escalation_status:
+          type: string
+          enum:
+            - for-full-escalation
+            - ward-level-ceiling
+            - dnacpr
+            - not-recorded
+            - ""
+          description: "Component 9: escalation / ceiling-of-care status: for-full-escalation, ward-level-ceiling, dnacpr, or not-recorded (required component: escalation)."
+        senior_review_present:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Whether a consultant or senior grade is named on the entry (yes/no); drives the no-senior-review flag.
+        estimated_discharge_date:
+          type: string
+          format: date
+          description: "Component 10: estimated date of discharge; NULL when not set (recommended component)."
+        discharge_not_estimable:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: "Explicit \"not yet estimable\" flag (yes/no); yes documents component 10 as a deliberate negative."
+        clinical_note:
+          type: string
+          description: Optional free-text summary note shown in the summary.
+      required:
+        - created_at
+        - updated_at
+        - patient_id
+        - clinician_name
+        - clinician_grade
+        - ward
+        - patient_identifier
+        - primary_diagnosis
+        - overnight_events
+        - no_overnight_events
+        - problem_list
+        - examination_summary
+        - news2_single_param_three
+        - observation_trend
+        - investigations_reviewed
+        - no_investigations_outstanding
+        - abnormal_result_flagged
+        - abnormal_result_actioned
+        - vte_status
+        - vte_prophylaxis_in_place
+        - medication_changes
+        - no_medication_changes
+        - plan_and_jobs
+        - escalation_status
+        - senior_review_present
+        - discharge_not_estimable
+        - clinical_note
+      description: "Main ward-round-note record for one daily inpatient review: review header, patient and clinician identification, and the ten review components (overnight events, problem list, examination and NEWS2, investigations, VTE, medication, plan, escalation, estimated discharge) as free text and enum flags. Completeness grade, fired rules, and flags live in child tables."

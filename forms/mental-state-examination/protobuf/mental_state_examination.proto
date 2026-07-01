@@ -1,0 +1,323 @@
+// Generated from sql/. Do not edit by hand.
+// SOURCE: mental_state_examination
+
+syntax = "proto3";
+
+package form_examples.mental_state_examination;
+
+enum MentalStateExaminationClinicianRoleEnum {
+  CLINICIANROLE_UNSPECIFIED = 0;
+  CLINICIANROLE_PSYCHIATRIST = 1;  // psychiatrist
+  CLINICIANROLE_MENTAL_HEALTH_NURSE = 2;  // mental-health-nurse
+  CLINICIANROLE_GP = 3;  // gp
+  CLINICIANROLE_LIAISON = 4;  // liaison
+  CLINICIANROLE_OTHER = 5;  // other
+}
+
+enum MentalStateExaminationCareSettingEnum {
+  CARESETTING_UNSPECIFIED = 0;
+  CARESETTING_OUTPATIENT = 1;  // outpatient
+  CARESETTING_INPATIENT = 2;  // inpatient
+  CARESETTING_LIAISON = 3;  // liaison
+  CARESETTING_CRISIS = 4;  // crisis
+  CARESETTING_PRIMARY_CARE = 5;  // primary-care
+  CARESETTING_OTHER = 6;  // other
+}
+
+enum MentalStateExaminationAgeBandEnum {
+  AGEBAND_UNSPECIFIED = 0;
+  AGEBAND_UNDER_18 = 1;  // under-18
+  AGEBAND_V_18_25 = 2;  // 18-25
+  AGEBAND_V_26_39 = 3;  // 26-39
+  AGEBAND_V_40_64 = 4;  // 40-64
+  AGEBAND_V_65_PLUS = 5;  // 65-plus
+}
+
+enum MentalStateExaminationSexEnum {
+  SEX_UNSPECIFIED = 0;
+  SEX_FEMALE = 1;  // female
+  SEX_MALE = 2;  // male
+  SEX_INTERSEX = 3;  // intersex
+  SEX_UNKNOWN = 4;  // unknown
+}
+
+enum MentalStateExaminationAppearanceGroomingEnum {
+  APPEARANCEGROOMING_UNSPECIFIED = 0;
+  APPEARANCEGROOMING_WELL_KEMPT = 1;  // well-kempt
+  APPEARANCEGROOMING_DISHEVELLED = 2;  // dishevelled
+  APPEARANCEGROOMING_OTHER = 3;  // other
+}
+
+enum MentalStateExaminationAppearanceEyeContactEnum {
+  APPEARANCEEYECONTACT_UNSPECIFIED = 0;
+  APPEARANCEEYECONTACT_NORMAL = 1;  // normal
+  APPEARANCEEYECONTACT_REDUCED = 2;  // reduced
+  APPEARANCEEYECONTACT_INTENSE = 3;  // intense
+  APPEARANCEEYECONTACT_AVOIDANT = 4;  // avoidant
+}
+
+enum MentalStateExaminationAppearanceRapportEnum {
+  APPEARANCERAPPORT_UNSPECIFIED = 0;
+  APPEARANCERAPPORT_GOOD = 1;  // good
+  APPEARANCERAPPORT_GUARDED = 2;  // guarded
+  APPEARANCERAPPORT_HOSTILE = 3;  // hostile
+  APPEARANCERAPPORT_WITHDRAWN = 4;  // withdrawn
+}
+
+enum MentalStateExaminationAppearancePsychomotorEnum {
+  APPEARANCEPSYCHOMOTOR_UNSPECIFIED = 0;
+  APPEARANCEPSYCHOMOTOR_NORMAL = 1;  // normal
+  APPEARANCEPSYCHOMOTOR_AGITATION = 2;  // agitation
+  APPEARANCEPSYCHOMOTOR_RETARDATION = 3;  // retardation
+}
+
+enum MentalStateExaminationSpeechRateEnum {
+  SPEECHRATE_UNSPECIFIED = 0;
+  SPEECHRATE_NORMAL = 1;  // normal
+  SPEECHRATE_SLOW = 2;  // slow
+  SPEECHRATE_RAPID = 3;  // rapid
+  SPEECHRATE_PRESSURED = 4;  // pressured
+}
+
+enum MentalStateExaminationSpeechVolumeEnum {
+  SPEECHVOLUME_UNSPECIFIED = 0;
+  SPEECHVOLUME_NORMAL = 1;  // normal
+  SPEECHVOLUME_QUIET = 2;  // quiet
+  SPEECHVOLUME_LOUD = 3;  // loud
+}
+
+enum MentalStateExaminationSpeechQuantityEnum {
+  SPEECHQUANTITY_UNSPECIFIED = 0;
+  SPEECHQUANTITY_NORMAL = 1;  // normal
+  SPEECHQUANTITY_POVERTY = 2;  // poverty
+  SPEECHQUANTITY_EXCESSIVE = 3;  // excessive
+}
+
+enum MentalStateExaminationSpeechFluencyEnum {
+  SPEECHFLUENCY_UNSPECIFIED = 0;
+  SPEECHFLUENCY_FLUENT = 1;  // fluent
+  SPEECHFLUENCY_HESITANT = 2;  // hesitant
+  SPEECHFLUENCY_DYSARTHRIC = 3;  // dysarthric
+  SPEECHFLUENCY_MUTE = 4;  // mute
+}
+
+enum MentalStateExaminationMoodDescriptorEnum {
+  MOODDESCRIPTOR_UNSPECIFIED = 0;
+  MOODDESCRIPTOR_EUTHYMIC = 1;  // euthymic
+  MOODDESCRIPTOR_LOW = 2;  // low
+  MOODDESCRIPTOR_ELEVATED = 3;  // elevated
+  MOODDESCRIPTOR_ANXIOUS = 4;  // anxious
+  MOODDESCRIPTOR_IRRITABLE = 5;  // irritable
+  MOODDESCRIPTOR_OTHER = 6;  // other
+}
+
+enum MentalStateExaminationAffectRangeEnum {
+  AFFECTRANGE_UNSPECIFIED = 0;
+  AFFECTRANGE_FULL = 1;  // full
+  AFFECTRANGE_RESTRICTED = 2;  // restricted
+  AFFECTRANGE_BLUNTED = 3;  // blunted
+  AFFECTRANGE_FLAT = 4;  // flat
+}
+
+enum MentalStateExaminationAffectCongruenceEnum {
+  AFFECTCONGRUENCE_UNSPECIFIED = 0;
+  AFFECTCONGRUENCE_CONGRUENT = 1;  // congruent
+  AFFECTCONGRUENCE_INCONGRUENT = 2;  // incongruent
+}
+
+enum MentalStateExaminationAffectReactivityEnum {
+  AFFECTREACTIVITY_UNSPECIFIED = 0;
+  AFFECTREACTIVITY_REACTIVE = 1;  // reactive
+  AFFECTREACTIVITY_NON_REACTIVE = 2;  // non-reactive
+}
+
+enum MentalStateExaminationHallucinationsPresentEnum {
+  HALLUCINATIONSPRESENT_UNSPECIFIED = 0;
+  HALLUCINATIONSPRESENT_NONE = 1;  // none
+  HALLUCINATIONSPRESENT_AUDITORY = 2;  // auditory
+  HALLUCINATIONSPRESENT_VISUAL = 3;  // visual
+  HALLUCINATIONSPRESENT_OLFACTORY = 4;  // olfactory
+  HALLUCINATIONSPRESENT_GUSTATORY = 5;  // gustatory
+  HALLUCINATIONSPRESENT_TACTILE = 6;  // tactile
+  HALLUCINATIONSPRESENT_MULTIPLE = 7;  // multiple
+}
+
+enum MentalStateExaminationCommandHallucinationsEnum {
+  COMMANDHALLUCINATIONS_UNSPECIFIED = 0;
+  COMMANDHALLUCINATIONS_YES = 1;  // yes
+  COMMANDHALLUCINATIONS_NO = 2;  // no
+  COMMANDHALLUCINATIONS_NOT_APPLICABLE = 3;  // not-applicable
+}
+
+enum MentalStateExaminationIllusionsEnum {
+  ILLUSIONS_UNSPECIFIED = 0;
+  ILLUSIONS_PRESENT = 1;  // present
+  ILLUSIONS_ABSENT = 2;  // absent
+}
+
+enum MentalStateExaminationDepersonalisationEnum {
+  DEPERSONALISATION_UNSPECIFIED = 0;
+  DEPERSONALISATION_PRESENT = 1;  // present
+  DEPERSONALISATION_ABSENT = 2;  // absent
+}
+
+enum MentalStateExaminationDerealisationEnum {
+  DEREALISATION_UNSPECIFIED = 0;
+  DEREALISATION_PRESENT = 1;  // present
+  DEREALISATION_ABSENT = 2;  // absent
+}
+
+enum MentalStateExaminationThoughtFormEnum {
+  THOUGHTFORM_UNSPECIFIED = 0;
+  THOUGHTFORM_LINEAR = 1;  // linear
+  THOUGHTFORM_CIRCUMSTANTIAL = 2;  // circumstantial
+  THOUGHTFORM_TANGENTIAL = 3;  // tangential
+  THOUGHTFORM_FLIGHT_OF_IDEAS = 4;  // flight-of-ideas
+  THOUGHTFORM_THOUGHT_BLOCK = 5;  // thought-block
+  THOUGHTFORM_LOOSENING = 6;  // loosening
+}
+
+enum MentalStateExaminationDelusionsEnum {
+  DELUSIONS_UNSPECIFIED = 0;
+  DELUSIONS_NONE = 1;  // none
+  DELUSIONS_PERSECUTORY = 2;  // persecutory
+  DELUSIONS_GRANDIOSE = 3;  // grandiose
+  DELUSIONS_REFERENCE = 4;  // reference
+  DELUSIONS_NIHILISTIC = 5;  // nihilistic
+  DELUSIONS_OTHER = 6;  // other
+}
+
+enum MentalStateExaminationObsessionsEnum {
+  OBSESSIONS_UNSPECIFIED = 0;
+  OBSESSIONS_PRESENT = 1;  // present
+  OBSESSIONS_ABSENT = 2;  // absent
+}
+
+enum MentalStateExaminationSuicidalIdeationEnum {
+  SUICIDALIDEATION_UNSPECIFIED = 0;
+  SUICIDALIDEATION_NONE = 1;  // none
+  SUICIDALIDEATION_PASSIVE = 2;  // passive
+  SUICIDALIDEATION_ACTIVE_NO_PLAN = 3;  // active-no-plan
+  SUICIDALIDEATION_ACTIVE_WITH_PLAN = 4;  // active-with-plan
+}
+
+enum MentalStateExaminationHomicidalIdeationEnum {
+  HOMICIDALIDEATION_UNSPECIFIED = 0;
+  HOMICIDALIDEATION_NONE = 1;  // none
+  HOMICIDALIDEATION_THOUGHTS = 2;  // thoughts
+  HOMICIDALIDEATION_INTENT = 3;  // intent
+}
+
+enum MentalStateExaminationSelfHarmThoughtsEnum {
+  SELFHARMTHOUGHTS_UNSPECIFIED = 0;
+  SELFHARMTHOUGHTS_NONE = 1;  // none
+  SELFHARMTHOUGHTS_THOUGHTS = 2;  // thoughts
+  SELFHARMTHOUGHTS_RECENT_ACTS = 3;  // recent-acts
+}
+
+enum MentalStateExaminationInsightLevelEnum {
+  INSIGHTLEVEL_UNSPECIFIED = 0;
+  INSIGHTLEVEL_FULL = 1;  // full
+  INSIGHTLEVEL_PARTIAL = 2;  // partial
+  INSIGHTLEVEL_NONE = 3;  // none
+}
+
+enum MentalStateExaminationTreatmentUnderstandingEnum {
+  TREATMENTUNDERSTANDING_UNSPECIFIED = 0;
+  TREATMENTUNDERSTANDING_ACCEPTS = 1;  // accepts
+  TREATMENTUNDERSTANDING_AMBIVALENT = 2;  // ambivalent
+  TREATMENTUNDERSTANDING_REFUSES = 3;  // refuses
+}
+
+enum MentalStateExaminationJudgementEnum {
+  JUDGEMENT_UNSPECIFIED = 0;
+  JUDGEMENT_INTACT = 1;  // intact
+  JUDGEMENT_IMPAIRED = 2;  // impaired
+}
+
+enum MentalStateExaminationOrientationEnum {
+  ORIENTATION_UNSPECIFIED = 0;
+  ORIENTATION_ORIENTATED = 1;  // orientated
+  ORIENTATION_DISORIENTATED_TIME = 2;  // disorientated-time
+  ORIENTATION_DISORIENTATED_PLACE = 3;  // disorientated-place
+  ORIENTATION_DISORIENTATED_PERSON = 4;  // disorientated-person
+  ORIENTATION_GLOBAL = 5;  // global
+}
+
+enum MentalStateExaminationAttentionEnum {
+  ATTENTION_UNSPECIFIED = 0;
+  ATTENTION_NORMAL = 1;  // normal
+  ATTENTION_IMPAIRED = 2;  // impaired
+}
+
+enum MentalStateExaminationMemoryEnum {
+  MEMORY_UNSPECIFIED = 0;
+  MEMORY_INTACT = 1;  // intact
+  MEMORY_SHORT_TERM_IMPAIRED = 2;  // short-term-impaired
+  MEMORY_LONG_TERM_IMPAIRED = 3;  // long-term-impaired
+  MEMORY_GLOBAL_IMPAIRMENT = 4;  // global-impairment
+}
+
+enum MentalStateExaminationCognitiveImpressionEnum {
+  COGNITIVEIMPRESSION_UNSPECIFIED = 0;
+  COGNITIVEIMPRESSION_NO_CONCERN = 1;  // no-concern
+  COGNITIVEIMPRESSION_MILD_CONCERN = 2;  // mild-concern
+  COGNITIVEIMPRESSION_SIGNIFICANT_CONCERN = 3;  // significant-concern
+}
+
+message MentalStateExamination {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string patient_id = 5;  // UUID — uuid
+  string clinician_id = 6;  // UUID — uuid
+  string clinician_name = 7;  // TEXT
+  MentalStateExaminationClinicianRoleEnum clinician_role = 8;  // VARCHAR(30)
+  string assessed_at = 9;  // TIMESTAMPTZ — iso 8601
+  MentalStateExaminationCareSettingEnum care_setting = 10;  // VARCHAR(30)
+  string assessment_reason = 11;  // TEXT
+  string patient_identifier = 12;  // VARCHAR(100) — max 100 chars
+  MentalStateExaminationAgeBandEnum age_band = 13;  // VARCHAR(20)
+  MentalStateExaminationSexEnum sex = 14;  // VARCHAR(20)
+  MentalStateExaminationAppearanceGroomingEnum appearance_grooming = 15;  // VARCHAR(20)
+  MentalStateExaminationAppearanceEyeContactEnum appearance_eye_contact = 16;  // VARCHAR(20)
+  MentalStateExaminationAppearanceRapportEnum appearance_rapport = 17;  // VARCHAR(20)
+  MentalStateExaminationAppearancePsychomotorEnum appearance_psychomotor = 18;  // VARCHAR(20)
+  string appearance_abnormal_movements = 19;  // TEXT
+  string appearance_notes = 20;  // TEXT
+  MentalStateExaminationSpeechRateEnum speech_rate = 21;  // VARCHAR(20)
+  MentalStateExaminationSpeechVolumeEnum speech_volume = 22;  // VARCHAR(20)
+  MentalStateExaminationSpeechQuantityEnum speech_quantity = 23;  // VARCHAR(20)
+  MentalStateExaminationSpeechFluencyEnum speech_fluency = 24;  // VARCHAR(20)
+  string speech_notes = 25;  // TEXT
+  string mood_subjective = 26;  // TEXT
+  MentalStateExaminationMoodDescriptorEnum mood_descriptor = 27;  // VARCHAR(20)
+  MentalStateExaminationAffectRangeEnum affect_range = 28;  // VARCHAR(20)
+  MentalStateExaminationAffectCongruenceEnum affect_congruence = 29;  // VARCHAR(20)
+  MentalStateExaminationAffectReactivityEnum affect_reactivity = 30;  // VARCHAR(20)
+  string emotion_notes = 31;  // TEXT
+  MentalStateExaminationHallucinationsPresentEnum hallucinations_present = 32;  // VARCHAR(20)
+  MentalStateExaminationCommandHallucinationsEnum command_hallucinations = 33;  // VARCHAR(20)
+  MentalStateExaminationIllusionsEnum illusions = 34;  // VARCHAR(20)
+  MentalStateExaminationDepersonalisationEnum depersonalisation = 35;  // VARCHAR(20)
+  MentalStateExaminationDerealisationEnum derealisation = 36;  // VARCHAR(20)
+  string perception_notes = 37;  // TEXT
+  MentalStateExaminationThoughtFormEnum thought_form = 38;  // VARCHAR(20)
+  MentalStateExaminationDelusionsEnum delusions = 39;  // VARCHAR(20)
+  MentalStateExaminationObsessionsEnum obsessions = 40;  // VARCHAR(20)
+  MentalStateExaminationSuicidalIdeationEnum suicidal_ideation = 41;  // VARCHAR(20)
+  MentalStateExaminationHomicidalIdeationEnum homicidal_ideation = 42;  // VARCHAR(20)
+  MentalStateExaminationSelfHarmThoughtsEnum self_harm_thoughts = 43;  // VARCHAR(20)
+  string thought_notes = 44;  // TEXT
+  MentalStateExaminationInsightLevelEnum insight_level = 45;  // VARCHAR(20)
+  MentalStateExaminationTreatmentUnderstandingEnum treatment_understanding = 46;  // VARCHAR(20)
+  MentalStateExaminationJudgementEnum judgement = 47;  // VARCHAR(20)
+  string insight_notes = 48;  // TEXT
+  MentalStateExaminationOrientationEnum orientation = 49;  // VARCHAR(30)
+  MentalStateExaminationAttentionEnum attention = 50;  // VARCHAR(20)
+  MentalStateExaminationMemoryEnum memory = 51;  // VARCHAR(30)
+  MentalStateExaminationCognitiveImpressionEnum cognitive_impression = 52;  // VARCHAR(30)
+  string cognition_notes = 53;  // TEXT
+  string clinical_formulation = 54;  // TEXT
+}

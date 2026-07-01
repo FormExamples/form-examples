@@ -1,0 +1,177 @@
+# Generated from sql/. Do not edit by hand.
+# SOURCE: qrisk3_cardiovascular_disease_risk_score_grade_rule
+openapi: 3.1.0
+info:
+  title: Qrisk3 Cardiovascular Disease Risk Score — Qrisk3CardiovascularDiseaseRiskScoreGradeRule
+  version: 1.0.0
+  description: "Audit trail of every model term that contributed during QRISK3 computation: component, transformed contribution to the linear predictor, category, and description."
+paths:
+  /qrisk3-cardiovascular-disease-risk-score-grade-rules:
+    get:
+      summary: List Qrisk3CardiovascularDiseaseRiskScoreGradeRule records
+      operationId: listQrisk3CardiovascularDiseaseRiskScoreGradeRule
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of Qrisk3CardiovascularDiseaseRiskScoreGradeRule records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Qrisk3CardiovascularDiseaseRiskScoreGradeRule"
+    post:
+      summary: Create a new Qrisk3CardiovascularDiseaseRiskScoreGradeRule
+      operationId: createQrisk3CardiovascularDiseaseRiskScoreGradeRule
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Qrisk3CardiovascularDiseaseRiskScoreGradeRule"
+      responses:
+        "201":
+          description: The newly created Qrisk3CardiovascularDiseaseRiskScoreGradeRule
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Qrisk3CardiovascularDiseaseRiskScoreGradeRule"
+        "400":
+          description: Validation error
+  /qrisk3-cardiovascular-disease-risk-score-grade-rules/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one Qrisk3CardiovascularDiseaseRiskScoreGradeRule by id
+      operationId: getQrisk3CardiovascularDiseaseRiskScoreGradeRule
+      responses:
+        "200":
+          description: The requested Qrisk3CardiovascularDiseaseRiskScoreGradeRule
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Qrisk3CardiovascularDiseaseRiskScoreGradeRule"
+        "404":
+          description: Qrisk3CardiovascularDiseaseRiskScoreGradeRule not found
+    patch:
+      summary: Update an existing Qrisk3CardiovascularDiseaseRiskScoreGradeRule
+      operationId: updateQrisk3CardiovascularDiseaseRiskScoreGradeRule
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Qrisk3CardiovascularDiseaseRiskScoreGradeRule"
+      responses:
+        "200":
+          description: The updated Qrisk3CardiovascularDiseaseRiskScoreGradeRule
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Qrisk3CardiovascularDiseaseRiskScoreGradeRule"
+        "404":
+          description: Qrisk3CardiovascularDiseaseRiskScoreGradeRule not found
+    delete:
+      summary: Soft-delete a Qrisk3CardiovascularDiseaseRiskScoreGradeRule
+      operationId: deleteQrisk3CardiovascularDiseaseRiskScoreGradeRule
+      responses:
+        "204":
+          description: Qrisk3CardiovascularDiseaseRiskScoreGradeRule deleted
+        "404":
+          description: Qrisk3CardiovascularDiseaseRiskScoreGradeRule not found
+components:
+  schemas:
+    Qrisk3CardiovascularDiseaseRiskScoreGradeRule:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was most recently updated.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was soft-deleted.
+        qrisk3_cardiovascular_disease_risk_score_grade_id:
+          type: string
+          format: uuid
+          description: Foreign key to the parent grade.
+        rule_id:
+          type: string
+          maxLength: 40
+          description: Stable rule identifier (e.g. R-SMOKING-HEAVY-01).
+        component:
+          type: string
+          enum:
+            - age
+            - ethnicity
+            - deprivation
+            - smoking
+            - body-mass-index
+            - diabetes
+            - cholesterol-ratio
+            - systolic-bp
+            - bp-variability
+            - bp-treatment
+            - family-history
+            - atrial-fibrillation
+            - chronic-kidney-disease
+            - migraine
+            - rheumatoid-arthritis
+            - systemic-lupus-erythematosus
+            - severe-mental-illness
+            - erectile-dysfunction
+            - atypical-antipsychotics
+            - corticosteroids
+            - age-interaction
+            - baseline
+          description: Model component the term belongs to (see CHECK constraint for enumeration).
+        contribution:
+          type: number
+          format: double
+          description: Transformed value multiplied by its fitted coefficient, contributed to the linear predictor.
+        category:
+          type: string
+          maxLength: 50
+          description: Subject category (e.g. continuous-term, categorical-term, interaction-term).
+        description:
+          type: string
+          maxLength: 500
+          description: Human-readable description of how the component contributed.
+      required:
+        - created_at
+        - updated_at
+        - qrisk3_cardiovascular_disease_risk_score_grade_id
+        - rule_id
+        - component
+        - category
+        - description
+      description: "Audit trail of every model term that contributed during QRISK3 computation: component, transformed contribution to the linear predictor, category, and description."

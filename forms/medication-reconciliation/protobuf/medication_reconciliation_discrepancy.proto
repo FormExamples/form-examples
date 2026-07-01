@@ -1,0 +1,40 @@
+// Generated from sql/. Do not edit by hand.
+// SOURCE: medication_reconciliation_discrepancy
+
+syntax = "proto3";
+
+package form_examples.medication_reconciliation;
+
+enum MedicationReconciliationDiscrepancyDiscrepancyTypeEnum {
+  DISCREPANCYTYPE_UNSPECIFIED = 0;
+  DISCREPANCYTYPE_OMISSION = 1;  // omission
+  DISCREPANCYTYPE_COMMISSION = 2;  // commission
+  DISCREPANCYTYPE_DUPLICATION = 3;  // duplication
+  DISCREPANCYTYPE_DOSE = 4;  // dose
+  DISCREPANCYTYPE_FREQUENCY = 5;  // frequency
+  DISCREPANCYTYPE_ROUTE = 6;  // route
+  DISCREPANCYTYPE_FORMULATION = 7;  // formulation
+}
+
+enum MedicationReconciliationDiscrepancyIntendedActionEnum {
+  INTENDEDACTION_UNSPECIFIED = 0;
+  INTENDEDACTION_CONTINUE = 1;  // continue
+  INTENDEDACTION_HOLD = 2;  // hold
+  INTENDEDACTION_STOP = 3;  // stop
+  INTENDEDACTION_CHANGE = 4;  // change
+  INTENDEDACTION_START = 5;  // start
+}
+
+message MedicationReconciliationDiscrepancy {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string medication_reconciliation_id = 5;  // UUID — uuid
+  MedicationReconciliationDiscrepancyDiscrepancyTypeEnum discrepancy_type = 6;  // VARCHAR(15)
+  string bpmh_item_ref = 7;  // TEXT
+  string inpatient_item_ref = 8;  // TEXT
+  MedicationReconciliationDiscrepancyIntendedActionEnum intended_action = 9;  // VARCHAR(15)
+  string rationale = 10;  // TEXT
+  bool intentional = 11;  // BOOLEAN
+}

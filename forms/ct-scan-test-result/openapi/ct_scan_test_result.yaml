@@ -1,0 +1,275 @@
+# Generated from sql/. Do not edit by hand.
+# SOURCE: ct_scan_test_result
+openapi: 3.1.0
+info:
+  title: Ct Scan Test Result — CtScanTestResult
+  version: 1.0.0
+  description: CT (computed tomography) scan result (report). Captures the performed examination, contrast and technique, clinical history, the narrative and structured findings, key measurements and radiation dose (DLP), the impression, recommended follow-up, and critical-result communication. This is the source-of-truth record that the four-axis interpretation grade is computed from.
+paths:
+  /ct-scan-test-results:
+    get:
+      summary: List CtScanTestResult records
+      operationId: listCtScanTestResult
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of CtScanTestResult records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/CtScanTestResult"
+    post:
+      summary: Create a new CtScanTestResult
+      operationId: createCtScanTestResult
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CtScanTestResult"
+      responses:
+        "201":
+          description: The newly created CtScanTestResult
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CtScanTestResult"
+        "400":
+          description: Validation error
+  /ct-scan-test-results/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one CtScanTestResult by id
+      operationId: getCtScanTestResult
+      responses:
+        "200":
+          description: The requested CtScanTestResult
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CtScanTestResult"
+        "404":
+          description: CtScanTestResult not found
+    patch:
+      summary: Update an existing CtScanTestResult
+      operationId: updateCtScanTestResult
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CtScanTestResult"
+      responses:
+        "200":
+          description: The updated CtScanTestResult
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CtScanTestResult"
+        "404":
+          description: CtScanTestResult not found
+    delete:
+      summary: Soft-delete a CtScanTestResult
+      operationId: deleteCtScanTestResult
+      responses:
+        "204":
+          description: CtScanTestResult deleted
+        "404":
+          description: CtScanTestResult not found
+components:
+  schemas:
+    CtScanTestResult:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was updated most-recently.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was deleted a.k.a. soft-removed.
+        patient_id:
+          type: string
+          format: uuid
+          description: Foreign key to the patient.
+        clinician_id:
+          type: string
+          format: uuid
+          description: Foreign key to the reporting clinician (radiologist / reporting radiographer).
+        originating_request_reference:
+          type: string
+          maxLength: 255
+          description: Free-text reference linking this report back to the originating CT scan request (referral).
+        report_status:
+          type: string
+          enum:
+            - preliminary
+            - final
+            - amended
+            - cancelled
+            - ""
+          description: "Report lifecycle status: preliminary, final, amended, cancelled."
+        performed_date:
+          type: string
+          format: date
+          description: Date the CT examination was performed.
+        reported_date:
+          type: string
+          format: date
+          description: Date the report was authored / signed.
+        body_region:
+          type: string
+          enum:
+            - head
+            - neck
+            - chest
+            - abdomen
+            - pelvis
+            - abdomen-pelvis
+            - spine
+            - ct-angiogram
+            - ct-colonography
+            - whole-body
+            - extremity
+            - other
+            - ""
+          description: "Examined CT body region: head, neck, chest, abdomen, pelvis, abdomen-pelvis, spine, ct-angiogram, ct-colonography, whole-body, extremity, other."
+        contrast_used:
+          type: string
+          enum:
+            - none
+            - iv-iodinated
+            - oral
+            - both
+            - ""
+          description: "Contrast actually administered: none, iv-iodinated, oral, both."
+        technique:
+          type: string
+          maxLength: 1000
+          description: "Technique narrative: phases, scan parameters, reconstructions, and any protocol deviations."
+        examination_adequacy:
+          type: string
+          enum:
+            - adequate
+            - limited
+            - non-diagnostic
+            - ""
+          description: "Diagnostic adequacy of the examination: adequate, limited, non-diagnostic."
+        clinical_history:
+          type: string
+          maxLength: 1000
+          description: Clinical history and the question the examination was performed to answer.
+        comparison_with_previous:
+          type: string
+          maxLength: 1000
+          description: Comparison with relevant previous imaging studies.
+        findings_narrative:
+          type: string
+          maxLength: 2000
+          description: Narrative description of the imaging findings (the body of the report).
+        acute_finding:
+          type: boolean
+          description: Whether an acute finding requiring timely action is present.
+        mass_or_lesion:
+          type: boolean
+          description: Whether a mass or focal lesion is present.
+        haemorrhage:
+          type: boolean
+          description: Whether haemorrhage is present.
+        infarct:
+          type: boolean
+          description: Whether infarction (e.g. ischaemic stroke, bowel ischaemia) is present.
+        fracture:
+          type: boolean
+          description: Whether a fracture is present.
+        infection_inflammation:
+          type: boolean
+          description: Whether infection or inflammation (e.g. abscess, collection) is present.
+        obstruction:
+          type: boolean
+          description: Whether an obstruction (e.g. bowel, urinary tract) is present.
+        incidental_finding:
+          type: boolean
+          description: Whether one or more incidental findings warranting documentation are present.
+        largest_lesion_size_mm:
+          type: number
+          format: double
+          description: Largest lesion long-axis size in millimetres, for surveillance and categorisation.
+        radiation_dose_dlp:
+          type: number
+          format: double
+          description: Dose-length product (DLP) in mGy.cm for the examination, for dose audit.
+        impression:
+          type: string
+          maxLength: 2000
+          description: Summary impression / conclusion answering the clinical question.
+        recommended_follow_up:
+          type: string
+          maxLength: 1000
+          description: Recommended follow-up imaging, referral, or management.
+        critical_result_communicated:
+          type: boolean
+          description: Whether a critical or unexpected significant result was communicated directly to the referrer.
+        reported_to:
+          type: string
+          maxLength: 500
+          description: Who the critical / urgent result was communicated to, with date and time if applicable.
+      required:
+        - created_at
+        - updated_at
+        - patient_id
+        - clinician_id
+        - originating_request_reference
+        - report_status
+        - body_region
+        - contrast_used
+        - technique
+        - examination_adequacy
+        - clinical_history
+        - comparison_with_previous
+        - findings_narrative
+        - acute_finding
+        - mass_or_lesion
+        - haemorrhage
+        - infarct
+        - fracture
+        - infection_inflammation
+        - obstruction
+        - incidental_finding
+        - impression
+        - recommended_follow_up
+        - critical_result_communicated
+        - reported_to
+      description: CT (computed tomography) scan result (report). Captures the performed examination, contrast and technique, clinical history, the narrative and structured findings, key measurements and radiation dose (DLP), the impression, recommended follow-up, and critical-result communication. This is the source-of-truth record that the four-axis interpretation grade is computed from.

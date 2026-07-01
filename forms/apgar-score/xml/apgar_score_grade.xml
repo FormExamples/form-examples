@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE apgar_score_grade SYSTEM "apgar_score_grade.dtd">
+<apgar_score_grade>
+<id>990e8400-e29b-41d4-a716-446655440004</id>
+<created_at>2026-04-09T10:00:00Z</created_at>
+<updated_at>2026-04-09T10:00:00Z</updated_at>
+<deleted_at>2026-04-09T10:00:00Z</deleted_at>
+<apgar_score_id>770e8400-e29b-41d4-a716-446655440002</apgar_score_id>
+<total_one_minute>1</total_one_minute>
+<total_five_minute>1</total_five_minute>
+<total_ten_minute>1</total_ten_minute>
+<band_one_minute>reassuring</band_one_minute>
+<band_five_minute>reassuring</band_five_minute>
+<band_ten_minute>reassuring</band_ten_minute>
+<summary_band>reassuring</summary_band>
+<trend>improving</trend>
+<graded_at>2026-04-09T10:00:00Z</graded_at>
+</apgar_score_grade>

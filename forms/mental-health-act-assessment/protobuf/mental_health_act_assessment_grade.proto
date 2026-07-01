@@ -1,0 +1,42 @@
+// Generated from sql/. Do not edit by hand.
+// SOURCE: mental_health_act_assessment_grade
+
+syntax = "proto3";
+
+package form_examples.mental_health_act_assessment;
+
+enum MentalHealthActAssessmentGradeCompletenessStatusEnum {
+  COMPLETENESSSTATUS_UNSPECIFIED = 0;
+  COMPLETENESSSTATUS_VALID = 1;  // valid
+  COMPLETENESSSTATUS_INCOMPLETE = 2;  // incomplete
+}
+
+enum MentalHealthActAssessmentGradeRecommendedSectionClassEnum {
+  RECOMMENDEDSECTIONCLASS_UNSPECIFIED = 0;
+  RECOMMENDEDSECTIONCLASS_SECTION_2 = 1;  // section-2
+  RECOMMENDEDSECTIONCLASS_SECTION_3 = 2;  // section-3
+  RECOMMENDEDSECTIONCLASS_SECTION_4 = 3;  // section-4
+  RECOMMENDEDSECTIONCLASS_SECTION_5_2 = 4;  // section-5-2
+  RECOMMENDEDSECTIONCLASS_SECTION_5_4 = 5;  // section-5-4
+  RECOMMENDEDSECTIONCLASS_SECTION_136 = 6;  // section-136
+  RECOMMENDEDSECTIONCLASS_NONE = 7;  // none
+}
+
+enum MentalHealthActAssessmentGradeUrgencyEnum {
+  URGENCY_UNSPECIFIED = 0;
+  URGENCY_ROUTINE = 1;  // routine
+  URGENCY_URGENT = 2;  // urgent
+  URGENCY_EMERGENCY = 3;  // emergency
+}
+
+message MentalHealthActAssessmentGrade {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string mental_health_act_assessment_id = 5;  // UUID — uuid
+  MentalHealthActAssessmentGradeCompletenessStatusEnum completeness_status = 6;  // VARCHAR(15)
+  MentalHealthActAssessmentGradeRecommendedSectionClassEnum recommended_section_class = 7;  // VARCHAR(15)
+  MentalHealthActAssessmentGradeUrgencyEnum urgency = 8;  // VARCHAR(15)
+  string graded_at = 9;  // TIMESTAMPTZ — iso 8601
+}

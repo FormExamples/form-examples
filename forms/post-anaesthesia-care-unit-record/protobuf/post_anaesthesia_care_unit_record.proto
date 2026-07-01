@@ -1,0 +1,175 @@
+// Generated from sql/. Do not edit by hand.
+// SOURCE: post_anaesthesia_care_unit_record
+
+syntax = "proto3";
+
+package form_examples.post_anaesthesia_care_unit_record;
+
+enum PostAnaesthesiaCareUnitRecordNurseRoleEnum {
+  NURSEROLE_UNSPECIFIED = 0;
+  NURSEROLE_RECOVERY_NURSE = 1;  // recovery-nurse
+  NURSEROLE_ODP = 2;  // odp
+  NURSEROLE_ANAESTHETIST = 3;  // anaesthetist
+  NURSEROLE_OTHER = 4;  // other
+}
+
+enum PostAnaesthesiaCareUnitRecordAnaestheticTechniqueEnum {
+  ANAESTHETICTECHNIQUE_UNSPECIFIED = 0;
+  ANAESTHETICTECHNIQUE_GENERAL = 1;  // general
+  ANAESTHETICTECHNIQUE_REGIONAL = 2;  // regional
+  ANAESTHETICTECHNIQUE_SEDATION = 3;  // sedation
+  ANAESTHETICTECHNIQUE_COMBINED = 4;  // combined
+}
+
+enum PostAnaesthesiaCareUnitRecordAgeBandEnum {
+  AGEBAND_UNSPECIFIED = 0;
+  AGEBAND_V_16_39 = 1;  // 16-39
+  AGEBAND_V_40_59 = 2;  // 40-59
+  AGEBAND_V_60_74 = 3;  // 60-74
+  AGEBAND_V_75_PLUS = 4;  // 75-plus
+}
+
+enum PostAnaesthesiaCareUnitRecordSexEnum {
+  SEX_UNSPECIFIED = 0;
+  SEX_FEMALE = 1;  // female
+  SEX_MALE = 2;  // male
+  SEX_INTERSEX = 3;  // intersex
+  SEX_UNKNOWN = 4;  // unknown
+}
+
+enum PostAnaesthesiaCareUnitRecordAsaStatusEnum {
+  ASASTATUS_UNSPECIFIED = 0;
+  ASASTATUS_I = 1;  // I
+  ASASTATUS_II = 2;  // II
+  ASASTATUS_III = 3;  // III
+  ASASTATUS_IV = 4;  // IV
+  ASASTATUS_V = 5;  // V
+}
+
+enum PostAnaesthesiaCareUnitRecordAmbulatoryCaseEnum {
+  AMBULATORYCASE_UNSPECIFIED = 0;
+  AMBULATORYCASE_YES = 1;  // yes
+  AMBULATORYCASE_NO = 2;  // no
+}
+
+enum PostAnaesthesiaCareUnitRecordActivityEnum {
+  ACTIVITY_UNSPECIFIED = 0;
+  ACTIVITY_ALL_FOUR = 1;  // all-four
+  ACTIVITY_TWO = 2;  // two
+  ACTIVITY_NONE = 3;  // none
+}
+
+enum PostAnaesthesiaCareUnitRecordRespirationEnum {
+  RESPIRATION_UNSPECIFIED = 0;
+  RESPIRATION_DEEP_COUGH = 1;  // deep-cough
+  RESPIRATION_LIMITED = 2;  // limited
+  RESPIRATION_APNOEIC = 3;  // apnoeic
+}
+
+enum PostAnaesthesiaCareUnitRecordCirculationEnum {
+  CIRCULATION_UNSPECIFIED = 0;
+  CIRCULATION_WITHIN_20 = 1;  // within-20
+  CIRCULATION_WITHIN_50 = 2;  // within-50
+  CIRCULATION_OVER_50 = 3;  // over-50
+}
+
+enum PostAnaesthesiaCareUnitRecordConsciousnessEnum {
+  CONSCIOUSNESS_UNSPECIFIED = 0;
+  CONSCIOUSNESS_AWAKE = 1;  // awake
+  CONSCIOUSNESS_AROUSABLE = 2;  // arousable
+  CONSCIOUSNESS_UNRESPONSIVE = 3;  // unresponsive
+}
+
+enum PostAnaesthesiaCareUnitRecordOxygenSaturationEnum {
+  OXYGENSATURATION_UNSPECIFIED = 0;
+  OXYGENSATURATION_ROOM_AIR = 1;  // room-air
+  OXYGENSATURATION_NEEDS_O2 = 2;  // needs-o2
+  OXYGENSATURATION_LOW_ON_O2 = 3;  // low-on-o2
+}
+
+enum PostAnaesthesiaCareUnitRecordAirwayStatusEnum {
+  AIRWAYSTATUS_UNSPECIFIED = 0;
+  AIRWAYSTATUS_PATENT = 1;  // patent
+  AIRWAYSTATUS_ORAL_AIRWAY = 2;  // oral-airway
+  AIRWAYSTATUS_OTHER = 3;  // other
+}
+
+enum PostAnaesthesiaCareUnitRecordPonvSeverityEnum {
+  PONVSEVERITY_UNSPECIFIED = 0;
+  PONVSEVERITY_NONE = 1;  // none
+  PONVSEVERITY_MILD = 2;  // mild
+  PONVSEVERITY_MODERATE = 3;  // moderate
+  PONVSEVERITY_SEVERE = 4;  // severe
+}
+
+enum PostAnaesthesiaCareUnitRecordPadssVitalSignsEnum {
+  PADSSVITALSIGNS_UNSPECIFIED = 0;
+  PADSSVITALSIGNS_WITHIN_20 = 1;  // within-20
+  PADSSVITALSIGNS_WITHIN_40 = 2;  // within-40
+  PADSSVITALSIGNS_OVER_40 = 3;  // over-40
+}
+
+enum PostAnaesthesiaCareUnitRecordPadssAmbulationEnum {
+  PADSSAMBULATION_UNSPECIFIED = 0;
+  PADSSAMBULATION_STEADY = 1;  // steady
+  PADSSAMBULATION_WITH_ASSISTANCE = 2;  // with-assistance
+  PADSSAMBULATION_UNABLE = 3;  // unable
+}
+
+enum PostAnaesthesiaCareUnitRecordPadssNauseaVomitingEnum {
+  PADSSNAUSEAVOMITING_UNSPECIFIED = 0;
+  PADSSNAUSEAVOMITING_MINIMAL = 1;  // minimal
+  PADSSNAUSEAVOMITING_MODERATE = 2;  // moderate
+  PADSSNAUSEAVOMITING_SEVERE = 3;  // severe
+}
+
+enum PostAnaesthesiaCareUnitRecordPadssPainEnum {
+  PADSSPAIN_UNSPECIFIED = 0;
+  PADSSPAIN_MINIMAL = 1;  // minimal
+  PADSSPAIN_MODERATE = 2;  // moderate
+  PADSSPAIN_SEVERE = 3;  // severe
+}
+
+enum PostAnaesthesiaCareUnitRecordPadssSurgicalBleedingEnum {
+  PADSSSURGICALBLEEDING_UNSPECIFIED = 0;
+  PADSSSURGICALBLEEDING_MINIMAL = 1;  // minimal
+  PADSSSURGICALBLEEDING_MODERATE = 2;  // moderate
+  PADSSSURGICALBLEEDING_SEVERE = 3;  // severe
+}
+
+message PostAnaesthesiaCareUnitRecord {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string patient_id = 5;  // UUID — uuid
+  string clinician_id = 6;  // UUID — uuid
+  string nurse_name = 7;  // VARCHAR(255) — max 255 chars
+  PostAnaesthesiaCareUnitRecordNurseRoleEnum nurse_role = 8;  // VARCHAR(20)
+  string anaesthetist_name = 9;  // VARCHAR(255) — max 255 chars
+  string admitted_at = 10;  // TIMESTAMPTZ — iso 8601
+  PostAnaesthesiaCareUnitRecordAnaestheticTechniqueEnum anaesthetic_technique = 11;  // VARCHAR(20)
+  string procedure = 12;  // TEXT
+  string patient_identifier = 13;  // VARCHAR(100) — max 100 chars
+  PostAnaesthesiaCareUnitRecordAgeBandEnum age_band = 14;  // VARCHAR(10)
+  PostAnaesthesiaCareUnitRecordSexEnum sex = 15;  // VARCHAR(20)
+  PostAnaesthesiaCareUnitRecordAsaStatusEnum asa_status = 16;  // VARCHAR(5)
+  double baseline_systolic_bp = 17;  // NUMERIC(4,0) — numeric(4,0)
+  PostAnaesthesiaCareUnitRecordAmbulatoryCaseEnum ambulatory_case = 18;  // VARCHAR(5)
+  PostAnaesthesiaCareUnitRecordActivityEnum activity = 19;  // VARCHAR(20)
+  PostAnaesthesiaCareUnitRecordRespirationEnum respiration = 20;  // VARCHAR(20)
+  PostAnaesthesiaCareUnitRecordCirculationEnum circulation = 21;  // VARCHAR(20)
+  PostAnaesthesiaCareUnitRecordConsciousnessEnum consciousness = 22;  // VARCHAR(20)
+  PostAnaesthesiaCareUnitRecordOxygenSaturationEnum oxygen_saturation = 23;  // VARCHAR(20)
+  PostAnaesthesiaCareUnitRecordAirwayStatusEnum airway_status = 24;  // VARCHAR(20)
+  double pain_score = 25;  // NUMERIC(3,0) — numeric(3,0)
+  PostAnaesthesiaCareUnitRecordPonvSeverityEnum ponv_severity = 26;  // VARCHAR(20)
+  string analgesia_given = 27;  // TEXT
+  string antiemetics_given = 28;  // TEXT
+  PostAnaesthesiaCareUnitRecordPadssVitalSignsEnum padss_vital_signs = 29;  // VARCHAR(20)
+  PostAnaesthesiaCareUnitRecordPadssAmbulationEnum padss_ambulation = 30;  // VARCHAR(20)
+  PostAnaesthesiaCareUnitRecordPadssNauseaVomitingEnum padss_nausea_vomiting = 31;  // VARCHAR(20)
+  PostAnaesthesiaCareUnitRecordPadssPainEnum padss_pain = 32;  // VARCHAR(20)
+  PostAnaesthesiaCareUnitRecordPadssSurgicalBleedingEnum padss_surgical_bleeding = 33;  // VARCHAR(20)
+  string recovery_note = 34;  // TEXT
+}

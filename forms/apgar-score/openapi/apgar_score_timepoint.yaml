@@ -1,0 +1,193 @@
+# Generated from sql/. Do not edit by hand.
+# SOURCE: apgar_score_timepoint
+openapi: 3.1.0
+info:
+  title: Apgar Score — ApgarScoreTimepoint
+  version: 1.0.0
+  description: Repeated per-timepoint five-sign Apgar scores (1, 5, 10 minutes, and beyond); cascades from the parent apgar_score.
+paths:
+  /apgar-score-timepoints:
+    get:
+      summary: List ApgarScoreTimepoint records
+      operationId: listApgarScoreTimepoint
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of ApgarScoreTimepoint records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/ApgarScoreTimepoint"
+    post:
+      summary: Create a new ApgarScoreTimepoint
+      operationId: createApgarScoreTimepoint
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ApgarScoreTimepoint"
+      responses:
+        "201":
+          description: The newly created ApgarScoreTimepoint
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ApgarScoreTimepoint"
+        "400":
+          description: Validation error
+  /apgar-score-timepoints/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one ApgarScoreTimepoint by id
+      operationId: getApgarScoreTimepoint
+      responses:
+        "200":
+          description: The requested ApgarScoreTimepoint
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ApgarScoreTimepoint"
+        "404":
+          description: ApgarScoreTimepoint not found
+    patch:
+      summary: Update an existing ApgarScoreTimepoint
+      operationId: updateApgarScoreTimepoint
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ApgarScoreTimepoint"
+      responses:
+        "200":
+          description: The updated ApgarScoreTimepoint
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ApgarScoreTimepoint"
+        "404":
+          description: ApgarScoreTimepoint not found
+    delete:
+      summary: Soft-delete a ApgarScoreTimepoint
+      operationId: deleteApgarScoreTimepoint
+      responses:
+        "204":
+          description: ApgarScoreTimepoint deleted
+        "404":
+          description: ApgarScoreTimepoint not found
+components:
+  schemas:
+    ApgarScoreTimepoint:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was most recently updated.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was soft-deleted.
+        apgar_score_id:
+          type: string
+          format: uuid
+          description: Foreign key to the parent Apgar assessment.
+        timepoint_minutes:
+          type: integer
+          format: int32
+          description: Timepoint in minutes after birth at which this score was recorded (1, 5, 10, ...).
+        appearance:
+          type: string
+          enum:
+            - "0"
+            - "1"
+            - "2"
+            - ""
+          description: Sign A — appearance (skin colour), scored 0, 1, or 2.
+        pulse:
+          type: string
+          enum:
+            - "0"
+            - "1"
+            - "2"
+            - ""
+          description: Sign P — pulse (heart rate), scored 0, 1, or 2.
+        grimace:
+          type: string
+          enum:
+            - "0"
+            - "1"
+            - "2"
+            - ""
+          description: Sign G — grimace (reflex irritability), scored 0, 1, or 2.
+        activity:
+          type: string
+          enum:
+            - "0"
+            - "1"
+            - "2"
+            - ""
+          description: Sign A — activity (muscle tone), scored 0, 1, or 2.
+        respiration:
+          type: string
+          enum:
+            - "0"
+            - "1"
+            - "2"
+            - ""
+          description: Sign R — respiration, scored 0, 1, or 2.
+        total:
+          type: integer
+          format: int32
+          description: "Derived total for this timepoint: sum of the five signs (0-10)."
+        band:
+          type: string
+          enum:
+            - reassuring
+            - moderately-low
+            - low
+            - ""
+          description: "Derived band for this timepoint: reassuring (7-10), moderately-low (4-6), or low (0-3)."
+      required:
+        - created_at
+        - updated_at
+        - apgar_score_id
+        - appearance
+        - pulse
+        - grimace
+        - activity
+        - respiration
+        - band
+      description: Repeated per-timepoint five-sign Apgar scores (1, 5, 10 minutes, and beyond); cascades from the parent apgar_score.

@@ -1,0 +1,9 @@
+<!ELEMENT bhutani_bilirubin_nomogram_grade_rule (id,created_at,updated_at,deleted_at,bhutani_bilirubin_nomogram_grade_id,rule_id,category,description)>
+<!ELEMENT id (#PCDATA)>
+<!ELEMENT created_at (#PCDATA)>
+<!ELEMENT updated_at (#PCDATA)>
+<!ELEMENT deleted_at (#PCDATA)>
+<!ELEMENT bhutani_bilirubin_nomogram_grade_id (#PCDATA)>
+<!ELEMENT rule_id (#PCDATA)>
+<!ELEMENT category (#PCDATA)>
+<!ELEMENT description (#PCDATA)>

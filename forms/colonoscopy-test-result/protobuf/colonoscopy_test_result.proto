@@ -1,0 +1,85 @@
+// Generated from sql/. Do not edit by hand.
+// SOURCE: colonoscopy_test_result
+
+syntax = "proto3";
+
+package form_examples.colonoscopy_test_result;
+
+enum ColonoscopyTestResultReportStatusEnum {
+  REPORTSTATUS_UNSPECIFIED = 0;
+  REPORTSTATUS_PRELIMINARY = 1;  // preliminary
+  REPORTSTATUS_FINAL = 2;  // final
+  REPORTSTATUS_AMENDED = 3;  // amended
+  REPORTSTATUS_CANCELLED = 4;  // cancelled
+}
+
+enum ColonoscopyTestResultProcedureEnum {
+  PROCEDURE_UNSPECIFIED = 0;
+  PROCEDURE_COLONOSCOPY = 1;  // colonoscopy
+  PROCEDURE_FLEXIBLE_SIGMOIDOSCOPY = 2;  // flexible-sigmoidoscopy
+  PROCEDURE_CT_COLONOGRAPHY = 3;  // ct-colonography
+  PROCEDURE_OTHER = 4;  // other
+}
+
+enum ColonoscopyTestResultExtentReachedEnum {
+  EXTENTREACHED_UNSPECIFIED = 0;
+  EXTENTREACHED_CAECUM = 1;  // caecum
+  EXTENTREACHED_TERMINAL_ILEUM = 2;  // terminal-ileum
+  EXTENTREACHED_HEPATIC_FLEXURE = 3;  // hepatic-flexure
+  EXTENTREACHED_SPLENIC_FLEXURE = 4;  // splenic-flexure
+  EXTENTREACHED_DESCENDING_COLON = 5;  // descending-colon
+  EXTENTREACHED_RECTUM_SIGMOID = 6;  // rectum-sigmoid
+  EXTENTREACHED_INCOMPLETE = 7;  // incomplete
+}
+
+enum ColonoscopyTestResultBowelPreparationQualityEnum {
+  BOWELPREPARATIONQUALITY_UNSPECIFIED = 0;
+  BOWELPREPARATIONQUALITY_EXCELLENT = 1;  // excellent
+  BOWELPREPARATIONQUALITY_GOOD = 2;  // good
+  BOWELPREPARATIONQUALITY_ADEQUATE = 3;  // adequate
+  BOWELPREPARATIONQUALITY_POOR = 4;  // poor
+}
+
+enum ColonoscopyTestResultComplicationEnum {
+  COMPLICATION_UNSPECIFIED = 0;
+  COMPLICATION_NONE = 1;  // none
+  COMPLICATION_BLEEDING = 2;  // bleeding
+  COMPLICATION_PERFORATION = 3;  // perforation
+  COMPLICATION_OTHER = 4;  // other
+}
+
+message ColonoscopyTestResult {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string patient_id = 5;  // UUID — uuid
+  string clinician_id = 6;  // UUID — uuid
+  string originating_request_reference = 7;  // VARCHAR(255) — max 255 chars
+  ColonoscopyTestResultReportStatusEnum report_status = 8;  // VARCHAR(15)
+  string performed_date = 9;  // DATE — iso 8601 date
+  string reported_date = 10;  // DATE — iso 8601 date
+  ColonoscopyTestResultProcedureEnum procedure = 11;  // VARCHAR(25)
+  ColonoscopyTestResultExtentReachedEnum extent_reached = 12;  // VARCHAR(25)
+  ColonoscopyTestResultBowelPreparationQualityEnum bowel_preparation_quality = 13;  // VARCHAR(15)
+  bool sedation_used = 14;  // BOOLEAN
+  string clinical_history = 15;  // VARCHAR(1000) — max 1000 chars
+  bool polyps_found = 16;  // BOOLEAN
+  bool mass_lesion = 17;  // BOOLEAN
+  bool diverticulosis = 18;  // BOOLEAN
+  bool inflammation_ibd = 19;  // BOOLEAN
+  bool angiodysplasia = 20;  // BOOLEAN
+  bool bleeding_source_identified = 21;  // BOOLEAN
+  bool normal_examination = 22;  // BOOLEAN
+  int32 polyp_count = 23;  // INTEGER
+  double largest_polyp_mm = 24;  // NUMERIC(5,1) — numeric(5,1)
+  bool biopsy_taken = 25;  // BOOLEAN
+  bool polypectomy_performed = 26;  // BOOLEAN
+  ColonoscopyTestResultComplicationEnum complication = 27;  // VARCHAR(15)
+  string findings_narrative = 28;  // VARCHAR(2000) — max 2000 chars
+  string impression = 29;  // VARCHAR(2000) — max 2000 chars
+  string reporting_category = 30;  // VARCHAR(50) — max 50 chars
+  string recommended_follow_up = 31;  // VARCHAR(1000) — max 1000 chars
+  bool critical_result_communicated = 32;  // BOOLEAN
+  string reported_to = 33;  // VARCHAR(500) — max 500 chars
+}

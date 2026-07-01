@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE zarit_burden_interview SYSTEM "zarit_burden_interview.dtd">
+<zarit_burden_interview>
+<id>770e8400-e29b-41d4-a716-446655440002</id>
+<created_at>2026-04-09T10:00:00Z</created_at>
+<updated_at>2026-04-09T10:00:00Z</updated_at>
+<deleted_at>2026-04-09T10:00:00Z</deleted_at>
+<patient_id>550e8400-e29b-41d4-a716-446655440000</patient_id>
+<clinician_id>660e8400-e29b-41d4-a716-446655440001</clinician_id>
+<practitioner_name>Example</practitioner_name>
+<practitioner_role>clinician</practitioner_role>
+<assessed_at>2026-04-09T10:00:00Z</assessed_at>
+<care_setting>memory-service</care_setting>
+<instrument_form>zbi22</instrument_form>
+<carer_identifier></carer_identifier>
+<carer_relationship>spouse-partner</carer_relationship>
+<carer_co_resident>yes</carer_co_resident>
+<care_hours_per_week>0.0</care_hours_per_week>
+<recipient_identifier></recipient_identifier>
+<recipient_condition>dementia</recipient_condition>
+<item_1>1</item_1>
+<item_2>1</item_2>
+<item_3>1</item_3>
+<item_4>1</item_4>
+<item_5>1</item_5>
+<item_6>1</item_6>
+<item_7>1</item_7>
+<item_8>1</item_8>
+<item_9>1</item_9>
+<item_10>1</item_10>
+<item_11>1</item_11>
+<item_12>1</item_12>
+<item_13>1</item_13>
+<item_14>1</item_14>
+<item_15>1</item_15>
+<item_16>1</item_16>
+<item_17>1</item_17>
+<item_18>1</item_18>
+<item_19>1</item_19>
+<item_20>1</item_20>
+<item_21>1</item_21>
+<item_22>1</item_22>
+<clinical_note>Example Hospital</clinical_note>
+</zarit_burden_interview>

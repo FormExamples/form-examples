@@ -1,0 +1,10 @@
+<!ELEMENT anion_gap_calculator_grade (id,created_at,updated_at,deleted_at,anion_gap_calculator_id,anion_gap,corrected_anion_gap,classification,graded_at)>
+<!ELEMENT id (#PCDATA)>
+<!ELEMENT created_at (#PCDATA)>
+<!ELEMENT updated_at (#PCDATA)>
+<!ELEMENT deleted_at (#PCDATA)>
+<!ELEMENT anion_gap_calculator_id (#PCDATA)>
+<!ELEMENT anion_gap (#PCDATA)>
+<!ELEMENT corrected_anion_gap (#PCDATA)>
+<!ELEMENT classification (#PCDATA)>
+<!ELEMENT graded_at (#PCDATA)>

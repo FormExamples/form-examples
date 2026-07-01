@@ -1,0 +1,40 @@
+// Generated from sql/. Do not edit by hand.
+// SOURCE: modified_early_warning_score_grade_flag
+
+syntax = "proto3";
+
+package form_examples.modified_early_warning_score;
+
+enum ModifiedEarlyWarningScoreGradeFlagCategoryEnum {
+  CATEGORY_UNSPECIFIED = 0;
+  CATEGORY_AGGREGATE_ESCALATION = 1;  // aggregate-escalation
+  CATEGORY_SINGLE_PARAMETER_3 = 2;  // single-parameter-3
+  CATEGORY_DETERIORATING_TREND = 3;  // deteriorating-trend
+  CATEGORY_HYPOTENSION = 4;  // hypotension
+  CATEGORY_REDUCED_CONSCIOUSNESS = 5;  // reduced-consciousness
+  CATEGORY_TACHYPNOEA_BRADYPNOEA = 6;  // tachypnoea-bradypnoea
+  CATEGORY_TACHYCARDIA_BRADYCARDIA = 7;  // tachycardia-bradycardia
+  CATEGORY_PYREXIA_HYPOTHERMIA = 8;  // pyrexia-hypothermia
+  CATEGORY_INCOMPLETE_OBSERVATION = 9;  // incomplete-observation
+  CATEGORY_OTHER = 10;  // other
+}
+
+enum ModifiedEarlyWarningScoreGradeFlagPriorityEnum {
+  PRIORITY_UNSPECIFIED = 0;
+  PRIORITY_LOW = 1;  // low
+  PRIORITY_MEDIUM = 2;  // medium
+  PRIORITY_HIGH = 3;  // high
+}
+
+message ModifiedEarlyWarningScoreGradeFlag {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string modified_early_warning_score_grade_id = 5;  // UUID — uuid
+  string flag_id = 6;  // VARCHAR(50) — max 50 chars
+  ModifiedEarlyWarningScoreGradeFlagCategoryEnum category = 7;  // VARCHAR(50)
+  ModifiedEarlyWarningScoreGradeFlagPriorityEnum priority = 8;  // VARCHAR(10)
+  string description = 9;  // VARCHAR(500) — max 500 chars
+  string suggested_action = 10;  // VARCHAR(500) — max 500 chars
+}

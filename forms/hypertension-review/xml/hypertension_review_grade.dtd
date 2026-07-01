@@ -1,0 +1,16 @@
+<!ELEMENT hypertension_review_grade (id,created_at,updated_at,deleted_at,hypertension_review_id,control_status,hypertension_stage,review_status,primary_source,target_group,clinic_target_systolic,clinic_target_diastolic,home_target_systolic,home_target_diastolic,graded_at)>
+<!ELEMENT id (#PCDATA)>
+<!ELEMENT created_at (#PCDATA)>
+<!ELEMENT updated_at (#PCDATA)>
+<!ELEMENT deleted_at (#PCDATA)>
+<!ELEMENT hypertension_review_id (#PCDATA)>
+<!ELEMENT control_status (#PCDATA)>
+<!ELEMENT hypertension_stage (#PCDATA)>
+<!ELEMENT review_status (#PCDATA)>
+<!ELEMENT primary_source (#PCDATA)>
+<!ELEMENT target_group (#PCDATA)>
+<!ELEMENT clinic_target_systolic (#PCDATA)>
+<!ELEMENT clinic_target_diastolic (#PCDATA)>
+<!ELEMENT home_target_systolic (#PCDATA)>
+<!ELEMENT home_target_diastolic (#PCDATA)>
+<!ELEMENT graded_at (#PCDATA)>

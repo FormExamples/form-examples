@@ -1,0 +1,520 @@
+# Generated from sql/. Do not edit by hand.
+# SOURCE: mental_state_examination
+openapi: 3.1.0
+info:
+  title: Mental State Examination — MentalStateExamination
+  version: 1.0.0
+  description: "Main mental state examination (MSE) record: assessment context, patient and clinician identification, and the seven ASEPTIC domains (appearance and behaviour, speech, emotion, perception, thought, insight and judgement, cognition). Completeness-and-risk grade, fired rules, and flags live in child tables."
+paths:
+  /mental-state-examinations:
+    get:
+      summary: List MentalStateExamination records
+      operationId: listMentalStateExamination
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of MentalStateExamination records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/MentalStateExamination"
+    post:
+      summary: Create a new MentalStateExamination
+      operationId: createMentalStateExamination
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/MentalStateExamination"
+      responses:
+        "201":
+          description: The newly created MentalStateExamination
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/MentalStateExamination"
+        "400":
+          description: Validation error
+  /mental-state-examinations/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one MentalStateExamination by id
+      operationId: getMentalStateExamination
+      responses:
+        "200":
+          description: The requested MentalStateExamination
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/MentalStateExamination"
+        "404":
+          description: MentalStateExamination not found
+    patch:
+      summary: Update an existing MentalStateExamination
+      operationId: updateMentalStateExamination
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/MentalStateExamination"
+      responses:
+        "200":
+          description: The updated MentalStateExamination
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/MentalStateExamination"
+        "404":
+          description: MentalStateExamination not found
+    delete:
+      summary: Soft-delete a MentalStateExamination
+      operationId: deleteMentalStateExamination
+      responses:
+        "204":
+          description: MentalStateExamination deleted
+        "404":
+          description: MentalStateExamination not found
+components:
+  schemas:
+    MentalStateExamination:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was updated most-recently.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was deleted a.k.a. soft-removed.
+        patient_id:
+          type: string
+          format: uuid
+          description: Foreign key to the patient this examination documents (restrict delete).
+        clinician_id:
+          type: string
+          format: uuid
+          description: Foreign key to the assessing clinician (restrict delete); optional.
+        clinician_name:
+          type: string
+          description: Name of the assessing clinician as recorded on the examination.
+        clinician_role:
+          type: string
+          enum:
+            - psychiatrist
+            - mental-health-nurse
+            - gp
+            - liaison
+            - other
+            - ""
+          description: "Assessing clinician role: psychiatrist, mental-health-nurse, gp, liaison, or other."
+        assessed_at:
+          type: string
+          format: date-time
+          description: Date and time the mental state examination was performed.
+        care_setting:
+          type: string
+          enum:
+            - outpatient
+            - inpatient
+            - liaison
+            - crisis
+            - primary-care
+            - other
+            - ""
+          description: "Care setting: outpatient, inpatient, liaison, crisis, primary-care, or other."
+        assessment_reason:
+          type: string
+          description: Reason for assessment or referral.
+        patient_identifier:
+          type: string
+          maxLength: 100
+          description: Local patient or encounter identifier as recorded on the examination.
+        age_band:
+          type: string
+          enum:
+            - under-18
+            - 18-25
+            - 26-39
+            - 40-64
+            - 65-plus
+            - ""
+          description: "Patient age band: under-18, 18-25, 26-39, 40-64, or 65-plus."
+        sex:
+          type: string
+          enum:
+            - female
+            - male
+            - intersex
+            - unknown
+            - ""
+          description: "Patient sex: female, male, intersex, or unknown."
+        appearance_grooming:
+          type: string
+          enum:
+            - well-kempt
+            - dishevelled
+            - other
+            - ""
+          description: "Domain 1 (appearance and behaviour): grooming — well-kempt, dishevelled, or other."
+        appearance_eye_contact:
+          type: string
+          enum:
+            - normal
+            - reduced
+            - intense
+            - avoidant
+            - ""
+          description: "Domain 1: eye contact — normal, reduced, intense, or avoidant."
+        appearance_rapport:
+          type: string
+          enum:
+            - good
+            - guarded
+            - hostile
+            - withdrawn
+            - ""
+          description: "Domain 1: rapport — good, guarded, hostile, or withdrawn."
+        appearance_psychomotor:
+          type: string
+          enum:
+            - normal
+            - agitation
+            - retardation
+            - ""
+          description: "Domain 1: psychomotor activity — normal, agitation, or retardation; agitation drives the agitation flag."
+        appearance_abnormal_movements:
+          type: string
+          description: "Domain 1: abnormal movements (tics, tremor, dystonia, etc.); free text."
+        appearance_notes:
+          type: string
+          description: "Domain 1: free-text notes on appearance and behaviour."
+        speech_rate:
+          type: string
+          enum:
+            - normal
+            - slow
+            - rapid
+            - pressured
+            - ""
+          description: "Domain 2 (speech): rate — normal, slow, rapid, or pressured."
+        speech_volume:
+          type: string
+          enum:
+            - normal
+            - quiet
+            - loud
+            - ""
+          description: "Domain 2: volume — normal, quiet, or loud."
+        speech_quantity:
+          type: string
+          enum:
+            - normal
+            - poverty
+            - excessive
+            - ""
+          description: "Domain 2: quantity — normal, poverty, or excessive."
+        speech_fluency:
+          type: string
+          enum:
+            - fluent
+            - hesitant
+            - dysarthric
+            - mute
+            - ""
+          description: "Domain 2: fluency — fluent, hesitant, dysarthric, or mute."
+        speech_notes:
+          type: string
+          description: "Domain 2: free-text notes on speech."
+        mood_subjective:
+          type: string
+          description: "Domain 3 (emotion): subjective mood in the patient's own words; free text."
+        mood_descriptor:
+          type: string
+          enum:
+            - euthymic
+            - low
+            - elevated
+            - anxious
+            - irritable
+            - other
+            - ""
+          description: "Domain 3: objective mood descriptor — euthymic, low, elevated, anxious, irritable, or other; low drives the low-mood flag."
+        affect_range:
+          type: string
+          enum:
+            - full
+            - restricted
+            - blunted
+            - flat
+            - ""
+          description: "Domain 3: affect range — full, restricted, blunted, or flat."
+        affect_congruence:
+          type: string
+          enum:
+            - congruent
+            - incongruent
+            - ""
+          description: "Domain 3: affect congruence — congruent or incongruent."
+        affect_reactivity:
+          type: string
+          enum:
+            - reactive
+            - non-reactive
+            - ""
+          description: "Domain 3: affect reactivity — reactive or non-reactive."
+        emotion_notes:
+          type: string
+          description: "Domain 3: free-text notes on mood and affect."
+        hallucinations_present:
+          type: string
+          enum:
+            - none
+            - auditory
+            - visual
+            - olfactory
+            - gustatory
+            - tactile
+            - multiple
+            - ""
+          description: "Domain 4 (perception): hallucination modality — none, auditory, visual, olfactory, gustatory, tactile, or multiple; contributes to the psychosis-with-risk flag."
+        command_hallucinations:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - not-applicable
+            - ""
+          description: "Domain 4: command hallucinations — yes, no, or not-applicable; yes drives the command-hallucinations flag."
+        illusions:
+          type: string
+          enum:
+            - present
+            - absent
+            - ""
+          description: "Domain 4: illusions — present or absent."
+        depersonalisation:
+          type: string
+          enum:
+            - present
+            - absent
+            - ""
+          description: "Domain 4: depersonalisation — present or absent."
+        derealisation:
+          type: string
+          enum:
+            - present
+            - absent
+            - ""
+          description: "Domain 4: derealisation — present or absent."
+        perception_notes:
+          type: string
+          description: "Domain 4: free-text notes on perception."
+        thought_form:
+          type: string
+          enum:
+            - linear
+            - circumstantial
+            - tangential
+            - flight-of-ideas
+            - thought-block
+            - loosening
+            - ""
+          description: "Domain 5 (thought): thought form — linear, circumstantial, tangential, flight-of-ideas, thought-block, or loosening."
+        delusions:
+          type: string
+          enum:
+            - none
+            - persecutory
+            - grandiose
+            - reference
+            - nihilistic
+            - other
+            - ""
+          description: "Domain 5: delusional content — none, persecutory, grandiose, reference, nihilistic, or other; any value other than none drives the delusional-content flag."
+        obsessions:
+          type: string
+          enum:
+            - present
+            - absent
+            - ""
+          description: "Domain 5: obsessions — present or absent."
+        suicidal_ideation:
+          type: string
+          enum:
+            - none
+            - passive
+            - active-no-plan
+            - active-with-plan
+            - ""
+          description: "Domain 5: suicidal ideation — none, passive, active-no-plan, or active-with-plan; active values drive the suicidal-ideation flag, passive the thoughts-of-self-harm flag."
+        homicidal_ideation:
+          type: string
+          enum:
+            - none
+            - thoughts
+            - intent
+            - ""
+          description: "Domain 5: homicidal ideation — none, thoughts, or intent; thoughts or intent drive the homicidal-ideation flag."
+        self_harm_thoughts:
+          type: string
+          enum:
+            - none
+            - thoughts
+            - recent-acts
+            - ""
+          description: "Domain 5: self-harm — none, thoughts, or recent-acts; recent-acts drives the recent-self-harm flag, thoughts the thoughts-of-self-harm flag."
+        thought_notes:
+          type: string
+          description: "Domain 5: free-text notes on thought form and content."
+        insight_level:
+          type: string
+          enum:
+            - full
+            - partial
+            - none
+            - ""
+          description: "Domain 6 (insight and judgement): insight level — full, partial, or none; none contributes to the lack-of-insight-with-risk flag."
+        treatment_understanding:
+          type: string
+          enum:
+            - accepts
+            - ambivalent
+            - refuses
+            - ""
+          description: "Domain 6: understanding of and attitude to treatment — accepts, ambivalent, or refuses; refuses contributes to the lack-of-insight-with-risk flag."
+        judgement:
+          type: string
+          enum:
+            - intact
+            - impaired
+            - ""
+          description: "Domain 6: judgement — intact or impaired."
+        insight_notes:
+          type: string
+          description: "Domain 6: free-text notes on insight and judgement."
+        orientation:
+          type: string
+          enum:
+            - orientated
+            - disorientated-time
+            - disorientated-place
+            - disorientated-person
+            - global
+            - ""
+          description: "Domain 7 (cognition): orientation — orientated, disorientated-time, disorientated-place, disorientated-person, or global; global contributes to the cognitive-impairment flag."
+        attention:
+          type: string
+          enum:
+            - normal
+            - impaired
+            - ""
+          description: "Domain 7: attention — normal or impaired."
+        memory:
+          type: string
+          enum:
+            - intact
+            - short-term-impaired
+            - long-term-impaired
+            - global-impairment
+            - ""
+          description: "Domain 7: memory — intact, short-term-impaired, long-term-impaired, or global-impairment."
+        cognitive_impression:
+          type: string
+          enum:
+            - no-concern
+            - mild-concern
+            - significant-concern
+            - ""
+          description: "Domain 7: overall cognitive impression — no-concern, mild-concern, or significant-concern; significant-concern contributes to the cognitive-impairment flag."
+        cognition_notes:
+          type: string
+          description: "Domain 7: free-text notes on cognition."
+        clinical_formulation:
+          type: string
+          description: "Summary: free-text clinical formulation drawing the domains together."
+      required:
+        - created_at
+        - updated_at
+        - patient_id
+        - clinician_name
+        - clinician_role
+        - care_setting
+        - assessment_reason
+        - patient_identifier
+        - age_band
+        - sex
+        - appearance_grooming
+        - appearance_eye_contact
+        - appearance_rapport
+        - appearance_psychomotor
+        - appearance_abnormal_movements
+        - appearance_notes
+        - speech_rate
+        - speech_volume
+        - speech_quantity
+        - speech_fluency
+        - speech_notes
+        - mood_subjective
+        - mood_descriptor
+        - affect_range
+        - affect_congruence
+        - affect_reactivity
+        - emotion_notes
+        - hallucinations_present
+        - command_hallucinations
+        - illusions
+        - depersonalisation
+        - derealisation
+        - perception_notes
+        - thought_form
+        - delusions
+        - obsessions
+        - suicidal_ideation
+        - homicidal_ideation
+        - self_harm_thoughts
+        - thought_notes
+        - insight_level
+        - treatment_understanding
+        - judgement
+        - insight_notes
+        - orientation
+        - attention
+        - memory
+        - cognitive_impression
+        - cognition_notes
+        - clinical_formulation
+      description: "Main mental state examination (MSE) record: assessment context, patient and clinician identification, and the seven ASEPTIC domains (appearance and behaviour, speech, emotion, perception, thought, insight and judgement, cognition). Completeness-and-risk grade, fired rules, and flags live in child tables."

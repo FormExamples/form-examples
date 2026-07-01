@@ -1,0 +1,158 @@
+# Generated from sql/. Do not edit by hand.
+# SOURCE: mental_health_act_assessment_grade_rule
+openapi: 3.1.0
+info:
+  title: Mental Health Act Assessment — MentalHealthActAssessmentGradeRule
+  version: 1.0.0
+  description: "Audit trail of every classification rule that fired during grading: assessment area, category, and description."
+paths:
+  /mental-health-act-assessment-grade-rules:
+    get:
+      summary: List MentalHealthActAssessmentGradeRule records
+      operationId: listMentalHealthActAssessmentGradeRule
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of MentalHealthActAssessmentGradeRule records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/MentalHealthActAssessmentGradeRule"
+    post:
+      summary: Create a new MentalHealthActAssessmentGradeRule
+      operationId: createMentalHealthActAssessmentGradeRule
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/MentalHealthActAssessmentGradeRule"
+      responses:
+        "201":
+          description: The newly created MentalHealthActAssessmentGradeRule
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/MentalHealthActAssessmentGradeRule"
+        "400":
+          description: Validation error
+  /mental-health-act-assessment-grade-rules/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one MentalHealthActAssessmentGradeRule by id
+      operationId: getMentalHealthActAssessmentGradeRule
+      responses:
+        "200":
+          description: The requested MentalHealthActAssessmentGradeRule
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/MentalHealthActAssessmentGradeRule"
+        "404":
+          description: MentalHealthActAssessmentGradeRule not found
+    patch:
+      summary: Update an existing MentalHealthActAssessmentGradeRule
+      operationId: updateMentalHealthActAssessmentGradeRule
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/MentalHealthActAssessmentGradeRule"
+      responses:
+        "200":
+          description: The updated MentalHealthActAssessmentGradeRule
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/MentalHealthActAssessmentGradeRule"
+        "404":
+          description: MentalHealthActAssessmentGradeRule not found
+    delete:
+      summary: Soft-delete a MentalHealthActAssessmentGradeRule
+      operationId: deleteMentalHealthActAssessmentGradeRule
+      responses:
+        "204":
+          description: MentalHealthActAssessmentGradeRule deleted
+        "404":
+          description: MentalHealthActAssessmentGradeRule not found
+components:
+  schemas:
+    MentalHealthActAssessmentGradeRule:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was most recently updated.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was soft-deleted.
+        mental_health_act_assessment_grade_id:
+          type: string
+          format: uuid
+          description: Foreign key to the parent grade.
+        rule_id:
+          type: string
+          maxLength: 40
+          description: Stable rule identifier (e.g. R-SIGNATORIES-S2-01).
+        section:
+          type: string
+          enum:
+            - signatories
+            - criteria
+            - completeness
+            - urgency
+            - time-limits
+            - other
+            - ""
+          description: "Assessment area the rule concerns: signatories, criteria, completeness, urgency, time-limits, or other."
+        category:
+          type: string
+          maxLength: 50
+          description: Subject category (e.g. required-signatory, required-criterion, classification).
+        description:
+          type: string
+          maxLength: 500
+          description: Human-readable description of why the rule fired.
+      required:
+        - created_at
+        - updated_at
+        - mental_health_act_assessment_grade_id
+        - rule_id
+        - section
+        - category
+        - description
+      description: "Audit trail of every classification rule that fired during grading: assessment area, category, and description."

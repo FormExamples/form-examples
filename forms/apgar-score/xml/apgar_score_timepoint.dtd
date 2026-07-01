@@ -1,0 +1,14 @@
+<!ELEMENT apgar_score_timepoint (id,created_at,updated_at,deleted_at,apgar_score_id,timepoint_minutes,appearance,pulse,grimace,activity,respiration,total,band)>
+<!ELEMENT id (#PCDATA)>
+<!ELEMENT created_at (#PCDATA)>
+<!ELEMENT updated_at (#PCDATA)>
+<!ELEMENT deleted_at (#PCDATA)>
+<!ELEMENT apgar_score_id (#PCDATA)>
+<!ELEMENT timepoint_minutes (#PCDATA)>
+<!ELEMENT appearance (#PCDATA)>
+<!ELEMENT pulse (#PCDATA)>
+<!ELEMENT grimace (#PCDATA)>
+<!ELEMENT activity (#PCDATA)>
+<!ELEMENT respiration (#PCDATA)>
+<!ELEMENT total (#PCDATA)>
+<!ELEMENT band (#PCDATA)>

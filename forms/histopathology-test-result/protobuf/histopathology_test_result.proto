@@ -1,0 +1,75 @@
+// Generated from sql/. Do not edit by hand.
+// SOURCE: histopathology_test_result
+
+syntax = "proto3";
+
+package form_examples.histopathology_test_result;
+
+enum HistopathologyTestResultReportStatusEnum {
+  REPORTSTATUS_UNSPECIFIED = 0;
+  REPORTSTATUS_PRELIMINARY = 1;  // preliminary
+  REPORTSTATUS_FINAL = 2;  // final
+  REPORTSTATUS_AMENDED = 3;  // amended
+  REPORTSTATUS_SUPPLEMENTARY = 4;  // supplementary
+  REPORTSTATUS_CANCELLED = 5;  // cancelled
+}
+
+enum HistopathologyTestResultSpecimenAdequacyEnum {
+  SPECIMENADEQUACY_UNSPECIFIED = 0;
+  SPECIMENADEQUACY_ADEQUATE = 1;  // adequate
+  SPECIMENADEQUACY_SUBOPTIMAL = 2;  // suboptimal
+  SPECIMENADEQUACY_INADEQUATE = 3;  // inadequate
+}
+
+enum HistopathologyTestResultHistologicalGradeEnum {
+  HISTOLOGICALGRADE_UNSPECIFIED = 0;
+  HISTOLOGICALGRADE_WELL_DIFFERENTIATED = 1;  // well-differentiated
+  HISTOLOGICALGRADE_MODERATELY_DIFFERENTIATED = 2;  // moderately-differentiated
+  HISTOLOGICALGRADE_POORLY_DIFFERENTIATED = 3;  // poorly-differentiated
+  HISTOLOGICALGRADE_UNDIFFERENTIATED = 4;  // undifferentiated
+  HISTOLOGICALGRADE_NOT_APPLICABLE = 5;  // not-applicable
+}
+
+enum HistopathologyTestResultResectionMarginsEnum {
+  RESECTIONMARGINS_UNSPECIFIED = 0;
+  RESECTIONMARGINS_CLEAR = 1;  // clear
+  RESECTIONMARGINS_INVOLVED = 2;  // involved
+  RESECTIONMARGINS_CLOSE = 3;  // close
+  RESECTIONMARGINS_NOT_APPLICABLE = 4;  // not-applicable
+}
+
+message HistopathologyTestResult {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string patient_id = 5;  // UUID — uuid
+  string clinician_id = 6;  // UUID — uuid
+  string originating_request_reference = 7;  // VARCHAR(255) — max 255 chars
+  HistopathologyTestResultReportStatusEnum report_status = 8;  // VARCHAR(15)
+  string performed_date = 9;  // DATE — iso 8601 date
+  string reported_date = 10;  // DATE — iso 8601 date
+  string specimen_type = 11;  // VARCHAR(255) — max 255 chars
+  string specimen_site = 12;  // VARCHAR(255) — max 255 chars
+  HistopathologyTestResultSpecimenAdequacyEnum specimen_adequacy = 13;  // VARCHAR(15)
+  string clinical_history = 14;  // VARCHAR(1000) — max 1000 chars
+  string macroscopic_description = 15;  // VARCHAR(2000) — max 2000 chars
+  string microscopic_description = 16;  // VARCHAR(2000) — max 2000 chars
+  string diagnosis = 17;  // VARCHAR(2000) — max 2000 chars
+  bool malignancy_present = 18;  // BOOLEAN
+  string tumour_type = 19;  // VARCHAR(255) — max 255 chars
+  HistopathologyTestResultHistologicalGradeEnum histological_grade = 20;  // VARCHAR(30)
+  string tnm_pt = 21;  // VARCHAR(20) — max 20 chars
+  string tnm_pn = 22;  // VARCHAR(20) — max 20 chars
+  string tnm_pm = 23;  // VARCHAR(20) — max 20 chars
+  HistopathologyTestResultResectionMarginsEnum resection_margins = 24;  // VARCHAR(20)
+  bool lymphovascular_invasion = 25;  // BOOLEAN
+  string immunohistochemistry = 26;  // VARCHAR(1000) — max 1000 chars
+  string snomed_code = 27;  // VARCHAR(50) — max 50 chars
+  string comparison_with_previous = 28;  // VARCHAR(1000) — max 1000 chars
+  string impression = 29;  // VARCHAR(2000) — max 2000 chars
+  string reporting_category = 30;  // VARCHAR(255) — max 255 chars
+  string recommended_follow_up = 31;  // VARCHAR(1000) — max 1000 chars
+  bool critical_result_communicated = 32;  // BOOLEAN
+  string reported_to = 33;  // VARCHAR(500) — max 500 chars
+}

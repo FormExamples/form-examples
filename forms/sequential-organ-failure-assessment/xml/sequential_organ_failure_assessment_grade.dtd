@@ -1,0 +1,17 @@
+<!ELEMENT sequential_organ_failure_assessment_grade (id,created_at,updated_at,deleted_at,sequential_organ_failure_assessment_id,respiration_score,coagulation_score,liver_score,cardiovascular_score,cns_score,renal_score,total_score,delta_sofa,mortality_band,sepsis3,graded_at)>
+<!ELEMENT id (#PCDATA)>
+<!ELEMENT created_at (#PCDATA)>
+<!ELEMENT updated_at (#PCDATA)>
+<!ELEMENT deleted_at (#PCDATA)>
+<!ELEMENT sequential_organ_failure_assessment_id (#PCDATA)>
+<!ELEMENT respiration_score (#PCDATA)>
+<!ELEMENT coagulation_score (#PCDATA)>
+<!ELEMENT liver_score (#PCDATA)>
+<!ELEMENT cardiovascular_score (#PCDATA)>
+<!ELEMENT cns_score (#PCDATA)>
+<!ELEMENT renal_score (#PCDATA)>
+<!ELEMENT total_score (#PCDATA)>
+<!ELEMENT delta_sofa (#PCDATA)>
+<!ELEMENT mortality_band (#PCDATA)>
+<!ELEMENT sepsis3 (#PCDATA)>
+<!ELEMENT graded_at (#PCDATA)>

@@ -1,0 +1,38 @@
+// Generated from sql/. Do not edit by hand.
+// SOURCE: body_mass_index_and_body_surface_area_calculator_grade_rule
+
+syntax = "proto3";
+
+package form_examples.body_mass_index_and_body_surface_area_calculator;
+
+enum BodyMassIndexAndBodySurfaceAreaCalculatorGradeRuleInstrumentEnum {
+  INSTRUMENT_UNSPECIFIED = 0;
+  INSTRUMENT_BMI = 1;  // bmi
+  INSTRUMENT_BSA = 2;  // bsa
+  INSTRUMENT_CLASSIFICATION = 3;  // classification
+  INSTRUMENT_THRESHOLD = 4;  // threshold
+  INSTRUMENT_COMPOSITE = 5;  // composite
+}
+
+enum BodyMassIndexAndBodySurfaceAreaCalculatorGradeRuleBandEnum {
+  BAND_UNSPECIFIED = 0;
+  BAND_UNDERWEIGHT = 1;  // underweight
+  BAND_NORMAL = 2;  // normal
+  BAND_OVERWEIGHT = 3;  // overweight
+  BAND_OBESE_CLASS_1 = 4;  // obese-class-1
+  BAND_OBESE_CLASS_2 = 5;  // obese-class-2
+  BAND_OBESE_CLASS_3 = 6;  // obese-class-3
+}
+
+message BodyMassIndexAndBodySurfaceAreaCalculatorGradeRule {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string body_mass_index_and_body_surface_area_calculator_grade_id = 5;  // UUID — uuid
+  string rule_id = 6;  // VARCHAR(40) — max 40 chars
+  BodyMassIndexAndBodySurfaceAreaCalculatorGradeRuleInstrumentEnum instrument = 7;  // VARCHAR(20)
+  BodyMassIndexAndBodySurfaceAreaCalculatorGradeRuleBandEnum band = 8;  // VARCHAR(20)
+  string category = 9;  // VARCHAR(50) — max 50 chars
+  string description = 10;  // VARCHAR(500) — max 500 chars
+}

@@ -1,0 +1,144 @@
+# Generated from sql/. Do not edit by hand.
+# SOURCE: nursing_care_plan_intervention
+openapi: 3.1.0
+info:
+  title: Nursing Care Plan — NursingCarePlanIntervention
+  version: 1.0.0
+  description: Planned nursing interventions for a problem; cascades from the parent problem.
+paths:
+  /nursing-care-plan-interventions:
+    get:
+      summary: List NursingCarePlanIntervention records
+      operationId: listNursingCarePlanIntervention
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of NursingCarePlanIntervention records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/NursingCarePlanIntervention"
+    post:
+      summary: Create a new NursingCarePlanIntervention
+      operationId: createNursingCarePlanIntervention
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/NursingCarePlanIntervention"
+      responses:
+        "201":
+          description: The newly created NursingCarePlanIntervention
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/NursingCarePlanIntervention"
+        "400":
+          description: Validation error
+  /nursing-care-plan-interventions/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one NursingCarePlanIntervention by id
+      operationId: getNursingCarePlanIntervention
+      responses:
+        "200":
+          description: The requested NursingCarePlanIntervention
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/NursingCarePlanIntervention"
+        "404":
+          description: NursingCarePlanIntervention not found
+    patch:
+      summary: Update an existing NursingCarePlanIntervention
+      operationId: updateNursingCarePlanIntervention
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/NursingCarePlanIntervention"
+      responses:
+        "200":
+          description: The updated NursingCarePlanIntervention
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/NursingCarePlanIntervention"
+        "404":
+          description: NursingCarePlanIntervention not found
+    delete:
+      summary: Soft-delete a NursingCarePlanIntervention
+      operationId: deleteNursingCarePlanIntervention
+      responses:
+        "204":
+          description: NursingCarePlanIntervention deleted
+        "404":
+          description: NursingCarePlanIntervention not found
+components:
+  schemas:
+    NursingCarePlanIntervention:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was most recently updated.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was soft-deleted.
+        nursing_care_plan_problem_id:
+          type: string
+          format: uuid
+          description: Foreign key to the parent nursing problem.
+        intervention_text:
+          type: string
+          description: The planned nursing action.
+        carried_out:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - partial
+            - ""
+          description: "Whether the intervention was carried out: yes, no, or partial."
+      required:
+        - created_at
+        - updated_at
+        - nursing_care_plan_problem_id
+        - intervention_text
+        - carried_out
+      description: Planned nursing interventions for a problem; cascades from the parent problem.

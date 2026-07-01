@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE newborn_blood_spot_screening SYSTEM "newborn_blood_spot_screening.dtd">
+<newborn_blood_spot_screening>
+<id>770e8400-e29b-41d4-a716-446655440002</id>
+<created_at>2026-04-09T10:00:00Z</created_at>
+<updated_at>2026-04-09T10:00:00Z</updated_at>
+<deleted_at>2026-04-09T10:00:00Z</deleted_at>
+<patient_id>550e8400-e29b-41d4-a716-446655440000</patient_id>
+<clinician_id>660e8400-e29b-41d4-a716-446655440001</clinician_id>
+<sample_taker_role>midwife</sample_taker_role>
+<care_setting>community</care_setting>
+<record_date>2026-01-15</record_date>
+<time_of_birth></time_of_birth>
+<gestation_weeks>0.0</gestation_weeks>
+<previously_screened>yes</previously_screened>
+<consent_given>yes</consent_given>
+<decline_reason>Example text.</decline_reason>
+<sample_date>2026-01-15</sample_date>
+<sample_time></sample_time>
+<age_at_sample_days>45</age_at_sample_days>
+<sampling_site>heel</sampling_site>
+<sample_notes>Example text.</sample_notes>
+<sample_adequacy>adequate</sample_adequacy>
+<spot_quality_issue>none</spot_quality_issue>
+<is_repeat>yes</is_repeat>
+<repeat_reason>not-applicable</repeat_reason>
+<scd_result>not-suspected</scd_result>
+<cf_result>not-suspected</cf_result>
+<cht_result>not-suspected</cht_result>
+<pku_result>not-suspected</pku_result>
+<mcadd_result>not-suspected</mcadd_result>
+<msud_result>not-suspected</msud_result>
+<iva_result>not-suspected</iva_result>
+<ga1_result>not-suspected</ga1_result>
+<hcu_result>not-suspected</hcu_result>
+<clinical_context>Example text.</clinical_context>
+</newborn_blood_spot_screening>

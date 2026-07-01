@@ -1,0 +1,28 @@
+// Generated from sql/. Do not edit by hand.
+// SOURCE: four_a_test_for_delirium_grade
+
+syntax = "proto3";
+
+package form_examples.four_a_test_for_delirium;
+
+enum FourATestForDeliriumGradeInterpretationEnum {
+  INTERPRETATION_UNSPECIFIED = 0;
+  INTERPRETATION_DELIRIUM_UNLIKELY = 1;  // delirium-unlikely
+  INTERPRETATION_POSSIBLE_COGNITIVE_IMPAIRMENT = 2;  // possible-cognitive-impairment
+  INTERPRETATION_POSSIBLE_DELIRIUM = 3;  // possible-delirium
+}
+
+message FourATestForDeliriumGrade {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string four_a_test_for_delirium_id = 5;  // UUID — uuid
+  int32 item1_score = 6;  // INT
+  int32 item2_score = 7;  // INT
+  int32 item3_score = 8;  // INT
+  int32 item4_score = 9;  // INT
+  int32 total_score = 10;  // INT
+  FourATestForDeliriumGradeInterpretationEnum interpretation = 11;  // VARCHAR(40)
+  string graded_at = 12;  // TIMESTAMPTZ — iso 8601
+}

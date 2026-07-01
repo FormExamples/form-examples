@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE eye_vision_test_result SYSTEM "eye_vision_test_result.dtd">
+<eye_vision_test_result>
+<id>770e8400-e29b-41d4-a716-446655440002</id>
+<created_at>2026-04-09T10:00:00Z</created_at>
+<updated_at>2026-04-09T10:00:00Z</updated_at>
+<deleted_at>2026-04-09T10:00:00Z</deleted_at>
+<patient_id>550e8400-e29b-41d4-a716-446655440000</patient_id>
+<clinician_id>660e8400-e29b-41d4-a716-446655440001</clinician_id>
+<originating_request_reference></originating_request_reference>
+<report_status>preliminary</report_status>
+<test_type>visual-acuity</test_type>
+<performed_date>2026-01-15</performed_date>
+<reported_date>2026-01-15</reported_date>
+<clinical_history>Example text.</clinical_history>
+<visual_acuity_right></visual_acuity_right>
+<visual_acuity_left></visual_acuity_left>
+<intraocular_pressure_right_mmhg>120.0</intraocular_pressure_right_mmhg>
+<intraocular_pressure_left_mmhg>120.0</intraocular_pressure_left_mmhg>
+<visual_field_result>full</visual_field_result>
+<reduced_visual_acuity>true</reduced_visual_acuity>
+<visual_field_defect>true</visual_field_defect>
+<raised_intraocular_pressure>true</raised_intraocular_pressure>
+<diabetic_retinopathy>true</diabetic_retinopathy>
+<optic_disc_abnormality>true</optic_disc_abnormality>
+<macular_abnormality>true</macular_abnormality>
+<normal_examination>true</normal_examination>
+<retinopathy_grade>none</retinopathy_grade>
+<findings_narrative>Example text.</findings_narrative>
+<impression>Example text.</impression>
+<reporting_category>General</reporting_category>
+<recommended_follow_up></recommended_follow_up>
+<critical_result_communicated>true</critical_result_communicated>
+<reported_to></reported_to>
+</eye_vision_test_result>

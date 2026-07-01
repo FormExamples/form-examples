@@ -1,0 +1,97 @@
+// Generated from sql/. Do not edit by hand.
+// SOURCE: structured_medication_review
+
+syntax = "proto3";
+
+package form_examples.structured_medication_review;
+
+enum StructuredMedicationReviewClinicianRoleEnum {
+  CLINICIANROLE_UNSPECIFIED = 0;
+  CLINICIANROLE_CLINICAL_PHARMACIST = 1;  // clinical-pharmacist
+  CLINICIANROLE_GP = 2;  // gp
+  CLINICIANROLE_PHARMACY_TECHNICIAN = 3;  // pharmacy-technician
+  CLINICIANROLE_OTHER = 4;  // other
+}
+
+enum StructuredMedicationReviewCareSettingEnum {
+  CARESETTING_UNSPECIFIED = 0;
+  CARESETTING_GP_PRACTICE = 1;  // gp-practice
+  CARESETTING_PCN = 2;  // pcn
+  CARESETTING_CARE_HOME = 3;  // care-home
+  CARESETTING_COMMUNITY_PHARMACY = 4;  // community-pharmacy
+  CARESETTING_PATIENT_HOME = 5;  // patient-home
+}
+
+enum StructuredMedicationReviewConsultationModeEnum {
+  CONSULTATIONMODE_UNSPECIFIED = 0;
+  CONSULTATIONMODE_FACE_TO_FACE = 1;  // face-to-face
+  CONSULTATIONMODE_TELEPHONE = 2;  // telephone
+  CONSULTATIONMODE_VIDEO = 3;  // video
+  CONSULTATIONMODE_HOME_VISIT = 4;  // home-visit
+}
+
+enum StructuredMedicationReviewAgeBandEnum {
+  AGEBAND_UNSPECIFIED = 0;
+  AGEBAND_V_18_39 = 1;  // 18-39
+  AGEBAND_V_40_64 = 2;  // 40-64
+  AGEBAND_V_65_74 = 3;  // 65-74
+  AGEBAND_V_75_84 = 4;  // 75-84
+  AGEBAND_V_85_PLUS = 5;  // 85-plus
+}
+
+enum StructuredMedicationReviewSexEnum {
+  SEX_UNSPECIFIED = 0;
+  SEX_FEMALE = 1;  // female
+  SEX_MALE = 2;  // male
+  SEX_INTERSEX = 3;  // intersex
+  SEX_UNKNOWN = 4;  // unknown
+}
+
+enum StructuredMedicationReviewFrailtyStatusEnum {
+  FRAILTYSTATUS_UNSPECIFIED = 0;
+  FRAILTYSTATUS_FIT = 1;  // fit
+  FRAILTYSTATUS_MILD = 2;  // mild
+  FRAILTYSTATUS_MODERATE = 3;  // moderate
+  FRAILTYSTATUS_SEVERE = 4;  // severe
+}
+
+enum StructuredMedicationReviewLivesInCareHomeEnum {
+  LIVESINCAREHOME_UNSPECIFIED = 0;
+  LIVESINCAREHOME_YES = 1;  // yes
+  LIVESINCAREHOME_NO = 2;  // no
+}
+
+enum StructuredMedicationReviewReviewCompletedEnum {
+  REVIEWCOMPLETED_UNSPECIFIED = 0;
+  REVIEWCOMPLETED_YES = 1;  // yes
+  REVIEWCOMPLETED_NO = 2;  // no
+}
+
+message StructuredMedicationReview {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string patient_id = 5;  // UUID — uuid
+  string clinician_id = 6;  // UUID — uuid
+  string clinician_name = 7;  // TEXT
+  StructuredMedicationReviewClinicianRoleEnum clinician_role = 8;  // VARCHAR(30)
+  string reviewed_at = 9;  // TIMESTAMPTZ — iso 8601
+  StructuredMedicationReviewCareSettingEnum care_setting = 10;  // VARCHAR(20)
+  StructuredMedicationReviewConsultationModeEnum consultation_mode = 11;  // VARCHAR(15)
+  string patient_identifier = 12;  // TEXT
+  StructuredMedicationReviewAgeBandEnum age_band = 13;  // VARCHAR(10)
+  StructuredMedicationReviewSexEnum sex = 14;  // VARCHAR(20)
+  StructuredMedicationReviewFrailtyStatusEnum frailty_status = 15;  // VARCHAR(10)
+  StructuredMedicationReviewLivesInCareHomeEnum lives_in_care_home = 16;  // VARCHAR(5)
+  string long_term_conditions = 17;  // TEXT
+  string presenting_problems = 18;  // TEXT
+  string patient_reported_issues = 19;  // TEXT
+  string what_matters_to_patient = 20;  // TEXT
+  string shared_decisions = 21;  // TEXT
+  string monitoring_due = 22;  // TEXT
+  int32 overdue_monitoring_count = 23;  // INTEGER
+  string follow_up_plan = 24;  // TEXT
+  string follow_up_date = 25;  // DATE — iso 8601 date
+  StructuredMedicationReviewReviewCompletedEnum review_completed = 26;  // VARCHAR(5)
+}

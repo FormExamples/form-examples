@@ -1,0 +1,156 @@
+# Generated from sql/. Do not edit by hand.
+# SOURCE: recognition_of_stroke_in_the_emergency_room_grade
+openapi: 3.1.0
+info:
+  title: Recognition Of Stroke In The Emergency Room — RecognitionOfStrokeInTheEmergencyRoomGrade
+  version: 1.0.0
+  description: "Computed ROSIER grading result: signed total (-2..+5), derived band against the strict > 0 threshold, and whether the hypoglycaemia mimic was excluded before scoring."
+paths:
+  /recognition-of-stroke-in-the-emergency-room-grades:
+    get:
+      summary: List RecognitionOfStrokeInTheEmergencyRoomGrade records
+      operationId: listRecognitionOfStrokeInTheEmergencyRoomGrade
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of RecognitionOfStrokeInTheEmergencyRoomGrade records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/RecognitionOfStrokeInTheEmergencyRoomGrade"
+    post:
+      summary: Create a new RecognitionOfStrokeInTheEmergencyRoomGrade
+      operationId: createRecognitionOfStrokeInTheEmergencyRoomGrade
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/RecognitionOfStrokeInTheEmergencyRoomGrade"
+      responses:
+        "201":
+          description: The newly created RecognitionOfStrokeInTheEmergencyRoomGrade
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/RecognitionOfStrokeInTheEmergencyRoomGrade"
+        "400":
+          description: Validation error
+  /recognition-of-stroke-in-the-emergency-room-grades/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one RecognitionOfStrokeInTheEmergencyRoomGrade by id
+      operationId: getRecognitionOfStrokeInTheEmergencyRoomGrade
+      responses:
+        "200":
+          description: The requested RecognitionOfStrokeInTheEmergencyRoomGrade
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/RecognitionOfStrokeInTheEmergencyRoomGrade"
+        "404":
+          description: RecognitionOfStrokeInTheEmergencyRoomGrade not found
+    patch:
+      summary: Update an existing RecognitionOfStrokeInTheEmergencyRoomGrade
+      operationId: updateRecognitionOfStrokeInTheEmergencyRoomGrade
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/RecognitionOfStrokeInTheEmergencyRoomGrade"
+      responses:
+        "200":
+          description: The updated RecognitionOfStrokeInTheEmergencyRoomGrade
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/RecognitionOfStrokeInTheEmergencyRoomGrade"
+        "404":
+          description: RecognitionOfStrokeInTheEmergencyRoomGrade not found
+    delete:
+      summary: Soft-delete a RecognitionOfStrokeInTheEmergencyRoomGrade
+      operationId: deleteRecognitionOfStrokeInTheEmergencyRoomGrade
+      responses:
+        "204":
+          description: RecognitionOfStrokeInTheEmergencyRoomGrade deleted
+        "404":
+          description: RecognitionOfStrokeInTheEmergencyRoomGrade not found
+components:
+  schemas:
+    RecognitionOfStrokeInTheEmergencyRoomGrade:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was most recently updated.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was soft-deleted.
+        recognition_of_stroke_in_the_emergency_room_id:
+          type: string
+          format: uuid
+          description: Foreign key to the parent assessment (unique, 1:1).
+        rosier_score:
+          type: integer
+          format: int32
+          description: "Signed ROSIER total: sum of the mimic (-1) and sign (+1) criteria, range -2..+5."
+        stroke_likely:
+          type: string
+          enum:
+            - stroke-unlikely
+            - stroke-likely
+            - ""
+          description: "Derived band: stroke-likely when rosier_score > 0 (strict), otherwise stroke-unlikely."
+        glucose_excluded:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Whether the hypoglycaemia mimic was excluded or corrected before the score was applied.
+        graded_at:
+          type: string
+          format: date-time
+          description: Timestamp when the engine last computed the grade.
+      required:
+        - created_at
+        - updated_at
+        - recognition_of_stroke_in_the_emergency_room_id
+        - stroke_likely
+        - glucose_excluded
+        - graded_at
+      description: "Computed ROSIER grading result: signed total (-2..+5), derived band against the strict > 0 threshold, and whether the hypoglycaemia mimic was excluded before scoring."

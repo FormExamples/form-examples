@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE quick_sequential_organ_failure_assessment SYSTEM "quick_sequential_organ_failure_assessment.dtd">
+<quick_sequential_organ_failure_assessment>
+<id>770e8400-e29b-41d4-a716-446655440002</id>
+<created_at>2026-04-09T10:00:00Z</created_at>
+<updated_at>2026-04-09T10:00:00Z</updated_at>
+<deleted_at>2026-04-09T10:00:00Z</deleted_at>
+<patient_id>550e8400-e29b-41d4-a716-446655440000</patient_id>
+<clinician_id>660e8400-e29b-41d4-a716-446655440001</clinician_id>
+<clinician_name>Example</clinician_name>
+<clinician_role>doctor</clinician_role>
+<assessed_at>2026-04-09T10:00:00Z</assessed_at>
+<care_setting>emergency-department</care_setting>
+<suspected_source></suspected_source>
+<patient_identifier></patient_identifier>
+<age_band>16-39</age_band>
+<sex>female</sex>
+<respiratory_rate>72.0</respiratory_rate>
+<glasgow_coma_scale>1</glasgow_coma_scale>
+<mentation_altered>yes</mentation_altered>
+<systolic_blood_pressure>120.0</systolic_blood_pressure>
+<clinical_note>Example Hospital</clinical_note>
+</quick_sequential_organ_failure_assessment>

@@ -1,0 +1,37 @@
+// Generated from sql/. Do not edit by hand.
+// SOURCE: pulmonary_embolism_rule_out_criteria_grade
+
+syntax = "proto3";
+
+package form_examples.pulmonary_embolism_rule_out_criteria;
+
+enum PulmonaryEmbolismRuleOutCriteriaGradeClassificationEnum {
+  CLASSIFICATION_UNSPECIFIED = 0;
+  CLASSIFICATION_PERC_NEGATIVE = 1;  // perc-negative
+  CLASSIFICATION_PERC_POSITIVE = 2;  // perc-positive
+}
+
+enum PulmonaryEmbolismRuleOutCriteriaGradeAllCriteriaSatisfiedEnum {
+  ALLCRITERIASATISFIED_UNSPECIFIED = 0;
+  ALLCRITERIASATISFIED_YES = 1;  // yes
+  ALLCRITERIASATISFIED_NO = 2;  // no
+}
+
+enum PulmonaryEmbolismRuleOutCriteriaGradeApplicableEnum {
+  APPLICABLE_UNSPECIFIED = 0;
+  APPLICABLE_YES = 1;  // yes
+  APPLICABLE_NO = 2;  // no
+}
+
+message PulmonaryEmbolismRuleOutCriteriaGrade {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string pulmonary_embolism_rule_out_criteria_id = 5;  // UUID — uuid
+  PulmonaryEmbolismRuleOutCriteriaGradeClassificationEnum classification = 6;  // VARCHAR(20)
+  PulmonaryEmbolismRuleOutCriteriaGradeAllCriteriaSatisfiedEnum all_criteria_satisfied = 7;  // VARCHAR(5)
+  PulmonaryEmbolismRuleOutCriteriaGradeApplicableEnum applicable = 8;  // VARCHAR(5)
+  string recommended_pathway = 9;  // TEXT
+  string graded_at = 10;  // TIMESTAMPTZ — iso 8601
+}

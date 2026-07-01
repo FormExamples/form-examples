@@ -1,0 +1,96 @@
+// Generated from sql/. Do not edit by hand.
+// SOURCE: microbiology_culture_test_result
+
+syntax = "proto3";
+
+package form_examples.microbiology_culture_test_result;
+
+enum MicrobiologyCultureTestResultReportStatusEnum {
+  REPORTSTATUS_UNSPECIFIED = 0;
+  REPORTSTATUS_PRELIMINARY = 1;  // preliminary
+  REPORTSTATUS_INTERIM = 2;  // interim
+  REPORTSTATUS_FINAL = 3;  // final
+  REPORTSTATUS_AMENDED = 4;  // amended
+  REPORTSTATUS_CANCELLED = 5;  // cancelled
+}
+
+enum MicrobiologyCultureTestResultSpecimenTypeEnum {
+  SPECIMENTYPE_UNSPECIFIED = 0;
+  SPECIMENTYPE_BLOOD_CULTURE = 1;  // blood-culture
+  SPECIMENTYPE_URINE = 2;  // urine
+  SPECIMENTYPE_WOUND_SWAB = 3;  // wound-swab
+  SPECIMENTYPE_SPUTUM = 4;  // sputum
+  SPECIMENTYPE_THROAT_SWAB = 5;  // throat-swab
+  SPECIMENTYPE_STOOL = 6;  // stool
+  SPECIMENTYPE_CSF = 7;  // csf
+  SPECIMENTYPE_TISSUE = 8;  // tissue
+  SPECIMENTYPE_CATHETER_TIP = 9;  // catheter-tip
+  SPECIMENTYPE_GENITAL_SWAB = 10;  // genital-swab
+  SPECIMENTYPE_OTHER = 11;  // other
+}
+
+enum MicrobiologyCultureTestResultSpecimenConditionEnum {
+  SPECIMENCONDITION_UNSPECIFIED = 0;
+  SPECIMENCONDITION_SATISFACTORY = 1;  // satisfactory
+  SPECIMENCONDITION_CONTAMINATED = 2;  // contaminated
+  SPECIMENCONDITION_INSUFFICIENT = 3;  // insufficient
+  SPECIMENCONDITION_DELAYED = 4;  // delayed
+}
+
+enum MicrobiologyCultureTestResultCultureResultEnum {
+  CULTURERESULT_UNSPECIFIED = 0;
+  CULTURERESULT_NO_GROWTH = 1;  // no-growth
+  CULTURERESULT_MIXED_GROWTH = 2;  // mixed-growth
+  CULTURERESULT_SIGNIFICANT_GROWTH = 3;  // significant-growth
+  CULTURERESULT_POSITIVE = 4;  // positive
+}
+
+enum MicrobiologyCultureTestResultCDifficileToxinEnum {
+  CDIFFICILETOXIN_UNSPECIFIED = 0;
+  CDIFFICILETOXIN_POSITIVE = 1;  // positive
+  CDIFFICILETOXIN_NEGATIVE = 2;  // negative
+  CDIFFICILETOXIN_NOT_TESTED = 3;  // not-tested
+}
+
+enum MicrobiologyCultureTestResultAcidFastBacilliEnum {
+  ACIDFASTBACILLI_UNSPECIFIED = 0;
+  ACIDFASTBACILLI_POSITIVE = 1;  // positive
+  ACIDFASTBACILLI_NEGATIVE = 2;  // negative
+  ACIDFASTBACILLI_NOT_TESTED = 3;  // not-tested
+}
+
+message MicrobiologyCultureTestResult {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string patient_id = 5;  // UUID — uuid
+  string clinician_id = 6;  // UUID — uuid
+  string originating_request_reference = 7;  // VARCHAR(255) — max 255 chars
+  MicrobiologyCultureTestResultReportStatusEnum report_status = 8;  // VARCHAR(15)
+  string performed_date = 9;  // DATE — iso 8601 date
+  string reported_date = 10;  // DATE — iso 8601 date
+  MicrobiologyCultureTestResultSpecimenTypeEnum specimen_type = 11;  // VARCHAR(20)
+  string specimen_site_detail = 12;  // VARCHAR(255) — max 255 chars
+  MicrobiologyCultureTestResultSpecimenConditionEnum specimen_condition = 13;  // VARCHAR(15)
+  string clinical_history = 14;  // VARCHAR(1000) — max 1000 chars
+  string gram_stain_result = 15;  // VARCHAR(1000) — max 1000 chars
+  MicrobiologyCultureTestResultCultureResultEnum culture_result = 16;  // VARCHAR(20)
+  string organism_isolated = 17;  // VARCHAR(500) — max 500 chars
+  string second_organism_isolated = 18;  // VARCHAR(500) — max 500 chars
+  string colony_count = 19;  // VARCHAR(255) — max 255 chars
+  string antibiotic_sensitivities = 20;  // VARCHAR(2000) — max 2000 chars
+  bool resistance_mrsa = 21;  // BOOLEAN
+  bool resistance_esbl = 22;  // BOOLEAN
+  bool resistance_cpe = 23;  // BOOLEAN
+  MicrobiologyCultureTestResultCDifficileToxinEnum c_difficile_toxin = 24;  // VARCHAR(15)
+  MicrobiologyCultureTestResultAcidFastBacilliEnum acid_fast_bacilli = 25;  // VARCHAR(15)
+  string pcr_result = 26;  // VARCHAR(1000) — max 1000 chars
+  bool critical_organism = 27;  // BOOLEAN
+  string findings_narrative = 28;  // VARCHAR(2000) — max 2000 chars
+  string impression = 29;  // VARCHAR(2000) — max 2000 chars
+  string reporting_category = 30;  // VARCHAR(50) — max 50 chars
+  string recommended_follow_up = 31;  // VARCHAR(1000) — max 1000 chars
+  bool critical_result_communicated = 32;  // BOOLEAN
+  string reported_to = 33;  // VARCHAR(500) — max 500 chars
+}

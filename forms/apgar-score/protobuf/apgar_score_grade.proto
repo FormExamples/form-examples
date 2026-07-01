@@ -1,0 +1,59 @@
+// Generated from sql/. Do not edit by hand.
+// SOURCE: apgar_score_grade
+
+syntax = "proto3";
+
+package form_examples.apgar_score;
+
+enum ApgarScoreGradeBandOneMinuteEnum {
+  BANDONEMINUTE_UNSPECIFIED = 0;
+  BANDONEMINUTE_REASSURING = 1;  // reassuring
+  BANDONEMINUTE_MODERATELY_LOW = 2;  // moderately-low
+  BANDONEMINUTE_LOW = 3;  // low
+}
+
+enum ApgarScoreGradeBandFiveMinuteEnum {
+  BANDFIVEMINUTE_UNSPECIFIED = 0;
+  BANDFIVEMINUTE_REASSURING = 1;  // reassuring
+  BANDFIVEMINUTE_MODERATELY_LOW = 2;  // moderately-low
+  BANDFIVEMINUTE_LOW = 3;  // low
+}
+
+enum ApgarScoreGradeBandTenMinuteEnum {
+  BANDTENMINUTE_UNSPECIFIED = 0;
+  BANDTENMINUTE_REASSURING = 1;  // reassuring
+  BANDTENMINUTE_MODERATELY_LOW = 2;  // moderately-low
+  BANDTENMINUTE_LOW = 3;  // low
+}
+
+enum ApgarScoreGradeSummaryBandEnum {
+  SUMMARYBAND_UNSPECIFIED = 0;
+  SUMMARYBAND_REASSURING = 1;  // reassuring
+  SUMMARYBAND_MODERATELY_LOW = 2;  // moderately-low
+  SUMMARYBAND_LOW = 3;  // low
+}
+
+enum ApgarScoreGradeTrendEnum {
+  TREND_UNSPECIFIED = 0;
+  TREND_IMPROVING = 1;  // improving
+  TREND_STATIC = 2;  // static
+  TREND_FALLING = 3;  // falling
+  TREND_INSUFFICIENT = 4;  // insufficient
+}
+
+message ApgarScoreGrade {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string apgar_score_id = 5;  // UUID — uuid
+  int32 total_one_minute = 6;  // INT
+  int32 total_five_minute = 7;  // INT
+  int32 total_ten_minute = 8;  // INT
+  ApgarScoreGradeBandOneMinuteEnum band_one_minute = 9;  // VARCHAR(20)
+  ApgarScoreGradeBandFiveMinuteEnum band_five_minute = 10;  // VARCHAR(20)
+  ApgarScoreGradeBandTenMinuteEnum band_ten_minute = 11;  // VARCHAR(20)
+  ApgarScoreGradeSummaryBandEnum summary_band = 12;  // VARCHAR(20)
+  ApgarScoreGradeTrendEnum trend = 13;  // VARCHAR(20)
+  string graded_at = 14;  // TIMESTAMPTZ — iso 8601
+}

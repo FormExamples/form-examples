@@ -1,0 +1,15 @@
+<!ELEMENT chronic_kidney_disease_review_grade (id,created_at,updated_at,deleted_at,chronic_kidney_disease_review_id,gfr_category,albuminuria_category,kdigo_risk_zone,review_status,blood_pressure_target_systolic,blood_pressure_target_diastolic,blood_pressure_at_target,completeness_score,graded_at)>
+<!ELEMENT id (#PCDATA)>
+<!ELEMENT created_at (#PCDATA)>
+<!ELEMENT updated_at (#PCDATA)>
+<!ELEMENT deleted_at (#PCDATA)>
+<!ELEMENT chronic_kidney_disease_review_id (#PCDATA)>
+<!ELEMENT gfr_category (#PCDATA)>
+<!ELEMENT albuminuria_category (#PCDATA)>
+<!ELEMENT kdigo_risk_zone (#PCDATA)>
+<!ELEMENT review_status (#PCDATA)>
+<!ELEMENT blood_pressure_target_systolic (#PCDATA)>
+<!ELEMENT blood_pressure_target_diastolic (#PCDATA)>
+<!ELEMENT blood_pressure_at_target (#PCDATA)>
+<!ELEMENT completeness_score (#PCDATA)>
+<!ELEMENT graded_at (#PCDATA)>

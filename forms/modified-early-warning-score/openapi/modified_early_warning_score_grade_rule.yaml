@@ -1,0 +1,171 @@
+# Generated from sql/. Do not edit by hand.
+# SOURCE: modified_early_warning_score_grade_rule
+openapi: 3.1.0
+info:
+  title: Modified Early Warning Score — ModifiedEarlyWarningScoreGradeRule
+  version: 1.0.0
+  description: "Audit trail of every grading rule that fired during MEWS computation: instrument, band, points contributed, category, and description."
+paths:
+  /modified-early-warning-score-grade-rules:
+    get:
+      summary: List ModifiedEarlyWarningScoreGradeRule records
+      operationId: listModifiedEarlyWarningScoreGradeRule
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of ModifiedEarlyWarningScoreGradeRule records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/ModifiedEarlyWarningScoreGradeRule"
+    post:
+      summary: Create a new ModifiedEarlyWarningScoreGradeRule
+      operationId: createModifiedEarlyWarningScoreGradeRule
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ModifiedEarlyWarningScoreGradeRule"
+      responses:
+        "201":
+          description: The newly created ModifiedEarlyWarningScoreGradeRule
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ModifiedEarlyWarningScoreGradeRule"
+        "400":
+          description: Validation error
+  /modified-early-warning-score-grade-rules/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one ModifiedEarlyWarningScoreGradeRule by id
+      operationId: getModifiedEarlyWarningScoreGradeRule
+      responses:
+        "200":
+          description: The requested ModifiedEarlyWarningScoreGradeRule
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ModifiedEarlyWarningScoreGradeRule"
+        "404":
+          description: ModifiedEarlyWarningScoreGradeRule not found
+    patch:
+      summary: Update an existing ModifiedEarlyWarningScoreGradeRule
+      operationId: updateModifiedEarlyWarningScoreGradeRule
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ModifiedEarlyWarningScoreGradeRule"
+      responses:
+        "200":
+          description: The updated ModifiedEarlyWarningScoreGradeRule
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ModifiedEarlyWarningScoreGradeRule"
+        "404":
+          description: ModifiedEarlyWarningScoreGradeRule not found
+    delete:
+      summary: Soft-delete a ModifiedEarlyWarningScoreGradeRule
+      operationId: deleteModifiedEarlyWarningScoreGradeRule
+      responses:
+        "204":
+          description: ModifiedEarlyWarningScoreGradeRule deleted
+        "404":
+          description: ModifiedEarlyWarningScoreGradeRule not found
+components:
+  schemas:
+    ModifiedEarlyWarningScoreGradeRule:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was most recently updated.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was soft-deleted.
+        modified_early_warning_score_grade_id:
+          type: string
+          format: uuid
+          description: Foreign key to the parent grade.
+        rule_id:
+          type: string
+          maxLength: 40
+          description: Stable rule identifier (e.g. R-SBP-3-LOW-01).
+        instrument:
+          type: string
+          enum:
+            - systolic-blood-pressure
+            - heart-rate
+            - respiratory-rate
+            - temperature
+            - avpu
+            - aggregate
+            - single-parameter
+          description: "Scoring instrument the rule belongs to: systolic-blood-pressure, heart-rate, respiratory-rate, temperature, avpu, aggregate, or single-parameter."
+        band:
+          type: string
+          enum:
+            - low
+            - medium
+            - high
+            - ""
+          description: "Clinical-risk band contributed by this rule: low, medium, or high."
+        points:
+          type: integer
+          format: int32
+          description: Sub-score points contributed by this rule (0-3); NULL for non-scoring rules.
+        category:
+          type: string
+          maxLength: 50
+          description: Subject category (e.g. hypotension, tachycardia, tachypnoea, hypothermia).
+        description:
+          type: string
+          maxLength: 500
+          description: Human-readable description of why the rule fired.
+      required:
+        - created_at
+        - updated_at
+        - modified_early_warning_score_grade_id
+        - rule_id
+        - instrument
+        - band
+        - category
+        - description
+      description: "Audit trail of every grading rule that fired during MEWS computation: instrument, band, points contributed, category, and description."

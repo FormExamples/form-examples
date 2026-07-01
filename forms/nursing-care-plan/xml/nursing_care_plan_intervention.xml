@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE nursing_care_plan_intervention SYSTEM "nursing_care_plan_intervention.dtd">
+<nursing_care_plan_intervention>
+<id>aa0e8400-e29b-41d4-a716-446655440005</id>
+<created_at>2026-04-09T10:00:00Z</created_at>
+<updated_at>2026-04-09T10:00:00Z</updated_at>
+<deleted_at>2026-04-09T10:00:00Z</deleted_at>
+<nursing_care_plan_problem_id>880e8400-e29b-41d4-a716-446655440003</nursing_care_plan_problem_id>
+<intervention_text>Example text.</intervention_text>
+<carried_out>yes</carried_out>
+</nursing_care_plan_intervention>

@@ -1,0 +1,39 @@
+// Generated from sql/. Do not edit by hand.
+// SOURCE: hypertension_review_grade_flag
+
+syntax = "proto3";
+
+package form_examples.hypertension_review;
+
+enum HypertensionReviewGradeFlagCategoryEnum {
+  CATEGORY_UNSPECIFIED = 0;
+  CATEGORY_SEVERE_HYPERTENSION = 1;  // severe-hypertension
+  CATEGORY_UNCONTROLLED_BP = 2;  // uncontrolled-bp
+  CATEGORY_MISSING_BLOODS = 3;  // missing-bloods
+  CATEGORY_MISSING_ACR = 4;  // missing-acr
+  CATEGORY_HIGH_CV_RISK_UNTREATED = 5;  // high-cv-risk-untreated
+  CATEGORY_ADHERENCE_CONCERN = 6;  // adherence-concern
+  CATEGORY_POSTURAL_DROP = 7;  // postural-drop
+  CATEGORY_INCOMPLETE = 8;  // incomplete
+  CATEGORY_OTHER = 9;  // other
+}
+
+enum HypertensionReviewGradeFlagPriorityEnum {
+  PRIORITY_UNSPECIFIED = 0;
+  PRIORITY_LOW = 1;  // low
+  PRIORITY_MEDIUM = 2;  // medium
+  PRIORITY_HIGH = 3;  // high
+}
+
+message HypertensionReviewGradeFlag {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string hypertension_review_grade_id = 5;  // UUID — uuid
+  string flag_id = 6;  // VARCHAR(50) — max 50 chars
+  HypertensionReviewGradeFlagCategoryEnum category = 7;  // VARCHAR(30)
+  HypertensionReviewGradeFlagPriorityEnum priority = 8;  // VARCHAR(10)
+  string description = 9;  // VARCHAR(500) — max 500 chars
+  string suggested_action = 10;  // VARCHAR(500) — max 500 chars
+}

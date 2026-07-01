@@ -1,0 +1,37 @@
+// Generated from sql/. Do not edit by hand.
+// SOURCE: pulmonary_embolism_rule_out_criteria_grade_flag
+
+syntax = "proto3";
+
+package form_examples.pulmonary_embolism_rule_out_criteria;
+
+enum PulmonaryEmbolismRuleOutCriteriaGradeFlagCategoryEnum {
+  CATEGORY_UNSPECIFIED = 0;
+  CATEGORY_REQUIRES_WORKUP = 1;  // requires-workup
+  CATEGORY_NOT_APPLICABLE = 2;  // not-applicable
+  CATEGORY_HYPOXIA = 3;  // hypoxia
+  CATEGORY_TACHYCARDIA = 4;  // tachycardia
+  CATEGORY_PRIOR_VTE = 5;  // prior-vte
+  CATEGORY_INCOMPLETE = 6;  // incomplete
+  CATEGORY_OTHER = 7;  // other
+}
+
+enum PulmonaryEmbolismRuleOutCriteriaGradeFlagPriorityEnum {
+  PRIORITY_UNSPECIFIED = 0;
+  PRIORITY_LOW = 1;  // low
+  PRIORITY_MEDIUM = 2;  // medium
+  PRIORITY_HIGH = 3;  // high
+}
+
+message PulmonaryEmbolismRuleOutCriteriaGradeFlag {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string pulmonary_embolism_rule_out_criteria_grade_id = 5;  // UUID — uuid
+  string flag_id = 6;  // VARCHAR(50) — max 50 chars
+  PulmonaryEmbolismRuleOutCriteriaGradeFlagCategoryEnum category = 7;  // VARCHAR(30)
+  PulmonaryEmbolismRuleOutCriteriaGradeFlagPriorityEnum priority = 8;  // VARCHAR(10)
+  string description = 9;  // VARCHAR(500) — max 500 chars
+  string suggested_action = 10;  // VARCHAR(500) — max 500 chars
+}

@@ -1,0 +1,32 @@
+// Generated from sql/. Do not edit by hand.
+// SOURCE: wells_score_for_deep_vein_thrombosis_grade
+
+syntax = "proto3";
+
+package form_examples.wells_score_for_deep_vein_thrombosis;
+
+enum WellsScoreForDeepVeinThrombosisGradeTwoLevelBandEnum {
+  TWOLEVELBAND_UNSPECIFIED = 0;
+  TWOLEVELBAND_LIKELY = 1;  // likely
+  TWOLEVELBAND_UNLIKELY = 2;  // unlikely
+}
+
+enum WellsScoreForDeepVeinThrombosisGradeThreeLevelBandEnum {
+  THREELEVELBAND_UNSPECIFIED = 0;
+  THREELEVELBAND_LOW = 1;  // low
+  THREELEVELBAND_MODERATE = 2;  // moderate
+  THREELEVELBAND_HIGH = 3;  // high
+}
+
+message WellsScoreForDeepVeinThrombosisGrade {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string wells_score_for_deep_vein_thrombosis_id = 5;  // UUID — uuid
+  int32 wells_score = 6;  // INT
+  WellsScoreForDeepVeinThrombosisGradeTwoLevelBandEnum two_level_band = 7;  // VARCHAR(10)
+  WellsScoreForDeepVeinThrombosisGradeThreeLevelBandEnum three_level_band = 8;  // VARCHAR(10)
+  string recommended_pathway = 9;  // TEXT
+  string graded_at = 10;  // TIMESTAMPTZ — iso 8601
+}

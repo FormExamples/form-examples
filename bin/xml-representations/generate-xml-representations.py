@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 """Generate XML and DTD representations from SQL migration files.
 
-For each form's sql-migrations/ directory, parses CREATE TABLE statements
-and generates corresponding .xml and .dtd files in xml-representations/.
+For each form's sql/ directory, parses CREATE TABLE statements
+and generates corresponding .xml and .dtd files in xml/.
 """
 
 import os
@@ -351,11 +351,11 @@ def process_form(form_dir):
     uuid_counter = 0
     table_uuid_map.clear()
 
-    sql_dir = form_dir / "sql-migrations"
+    sql_dir = form_dir / "sql"
     if not sql_dir.is_dir():
         return 0
 
-    xml_dir = form_dir / "xml-representations"
+    xml_dir = form_dir / "xml"
 
     # Read all SQL files in order
     # Only process numbered migration files; skip the combined schema.sql
@@ -402,7 +402,7 @@ def main():
     # Get all form directories
     form_dirs = sorted([
         d for d in FORMS_DIR.iterdir()
-        if d.is_dir() and (d / "sql-migrations").is_dir()
+        if d.is_dir() and (d / "sql").is_dir()
     ])
 
     for form_dir in form_dirs:

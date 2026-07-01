@@ -1,0 +1,78 @@
+// Generated from sql/. Do not edit by hand.
+// SOURCE: cystoscopy_test_result
+
+syntax = "proto3";
+
+package form_examples.cystoscopy_test_result;
+
+enum CystoscopyTestResultReportStatusEnum {
+  REPORTSTATUS_UNSPECIFIED = 0;
+  REPORTSTATUS_PRELIMINARY = 1;  // preliminary
+  REPORTSTATUS_FINAL = 2;  // final
+  REPORTSTATUS_AMENDED = 3;  // amended
+  REPORTSTATUS_CANCELLED = 4;  // cancelled
+}
+
+enum CystoscopyTestResultProcedureEnum {
+  PROCEDURE_UNSPECIFIED = 0;
+  PROCEDURE_FLEXIBLE_CYSTOSCOPY = 1;  // flexible-cystoscopy
+  PROCEDURE_RIGID_CYSTOSCOPY = 2;  // rigid-cystoscopy
+  PROCEDURE_OTHER = 3;  // other
+}
+
+enum CystoscopyTestResultAnaesthesiaEnum {
+  ANAESTHESIA_UNSPECIFIED = 0;
+  ANAESTHESIA_LOCAL = 1;  // local
+  ANAESTHESIA_SEDATION = 2;  // sedation
+  ANAESTHESIA_GENERAL = 3;  // general
+}
+
+enum CystoscopyTestResultTumourAppearanceEnum {
+  TUMOURAPPEARANCE_UNSPECIFIED = 0;
+  TUMOURAPPEARANCE_PAPILLARY = 1;  // papillary
+  TUMOURAPPEARANCE_SOLID = 2;  // solid
+  TUMOURAPPEARANCE_FLAT = 3;  // flat
+  TUMOURAPPEARANCE_NOT_APPLICABLE = 4;  // not-applicable
+}
+
+enum CystoscopyTestResultComplicationEnum {
+  COMPLICATION_UNSPECIFIED = 0;
+  COMPLICATION_NONE = 1;  // none
+  COMPLICATION_BLEEDING = 2;  // bleeding
+  COMPLICATION_PERFORATION = 3;  // perforation
+  COMPLICATION_UTI = 4;  // uti
+  COMPLICATION_OTHER = 5;  // other
+}
+
+message CystoscopyTestResult {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string patient_id = 5;  // UUID — uuid
+  string clinician_id = 6;  // UUID — uuid
+  string originating_request_reference = 7;  // VARCHAR(255) — max 255 chars
+  CystoscopyTestResultReportStatusEnum report_status = 8;  // VARCHAR(15)
+  string performed_date = 9;  // DATE — iso 8601 date
+  string reported_date = 10;  // DATE — iso 8601 date
+  CystoscopyTestResultProcedureEnum procedure = 11;  // VARCHAR(20)
+  CystoscopyTestResultAnaesthesiaEnum anaesthesia = 12;  // VARCHAR(10)
+  string clinical_history = 13;  // VARCHAR(1000) — max 1000 chars
+  bool bladder_tumour = 14;  // BOOLEAN
+  bool inflammation_cystitis = 15;  // BOOLEAN
+  bool bladder_stones = 16;  // BOOLEAN
+  bool urethral_stricture = 17;  // BOOLEAN
+  bool trabeculation = 18;  // BOOLEAN
+  bool prostatic_enlargement = 19;  // BOOLEAN
+  bool normal_examination = 20;  // BOOLEAN
+  double tumour_size_mm = 21;  // NUMERIC(6,1) — numeric(6,1)
+  CystoscopyTestResultTumourAppearanceEnum tumour_appearance = 22;  // VARCHAR(15)
+  bool biopsy_taken = 23;  // BOOLEAN
+  CystoscopyTestResultComplicationEnum complication = 24;  // VARCHAR(15)
+  string findings_narrative = 25;  // VARCHAR(2000) — max 2000 chars
+  string impression = 26;  // VARCHAR(2000) — max 2000 chars
+  string reporting_category = 27;  // VARCHAR(50) — max 50 chars
+  string recommended_follow_up = 28;  // VARCHAR(1000) — max 1000 chars
+  bool critical_result_communicated = 29;  // BOOLEAN
+  string reported_to = 30;  // VARCHAR(500) — max 500 chars
+}

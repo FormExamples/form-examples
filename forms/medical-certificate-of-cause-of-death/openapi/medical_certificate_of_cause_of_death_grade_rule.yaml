@@ -1,0 +1,158 @@
+# Generated from sql/. Do not edit by hand.
+# SOURCE: medical_certificate_of_cause_of_death_grade_rule
+openapi: 3.1.0
+info:
+  title: Medical Certificate Of Cause Of Death — MedicalCertificateOfCauseOfDeathGradeRule
+  version: 1.0.0
+  description: "Audit trail of every validity rule that fired during classification: certificate dimension, category, and description."
+paths:
+  /medical-certificate-of-cause-of-death-grade-rules:
+    get:
+      summary: List MedicalCertificateOfCauseOfDeathGradeRule records
+      operationId: listMedicalCertificateOfCauseOfDeathGradeRule
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of MedicalCertificateOfCauseOfDeathGradeRule records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/MedicalCertificateOfCauseOfDeathGradeRule"
+    post:
+      summary: Create a new MedicalCertificateOfCauseOfDeathGradeRule
+      operationId: createMedicalCertificateOfCauseOfDeathGradeRule
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/MedicalCertificateOfCauseOfDeathGradeRule"
+      responses:
+        "201":
+          description: The newly created MedicalCertificateOfCauseOfDeathGradeRule
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/MedicalCertificateOfCauseOfDeathGradeRule"
+        "400":
+          description: Validation error
+  /medical-certificate-of-cause-of-death-grade-rules/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one MedicalCertificateOfCauseOfDeathGradeRule by id
+      operationId: getMedicalCertificateOfCauseOfDeathGradeRule
+      responses:
+        "200":
+          description: The requested MedicalCertificateOfCauseOfDeathGradeRule
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/MedicalCertificateOfCauseOfDeathGradeRule"
+        "404":
+          description: MedicalCertificateOfCauseOfDeathGradeRule not found
+    patch:
+      summary: Update an existing MedicalCertificateOfCauseOfDeathGradeRule
+      operationId: updateMedicalCertificateOfCauseOfDeathGradeRule
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/MedicalCertificateOfCauseOfDeathGradeRule"
+      responses:
+        "200":
+          description: The updated MedicalCertificateOfCauseOfDeathGradeRule
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/MedicalCertificateOfCauseOfDeathGradeRule"
+        "404":
+          description: MedicalCertificateOfCauseOfDeathGradeRule not found
+    delete:
+      summary: Soft-delete a MedicalCertificateOfCauseOfDeathGradeRule
+      operationId: deleteMedicalCertificateOfCauseOfDeathGradeRule
+      responses:
+        "204":
+          description: MedicalCertificateOfCauseOfDeathGradeRule deleted
+        "404":
+          description: MedicalCertificateOfCauseOfDeathGradeRule not found
+components:
+  schemas:
+    MedicalCertificateOfCauseOfDeathGradeRule:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was most recently updated.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was soft-deleted.
+        medical_certificate_of_cause_of_death_grade_id:
+          type: string
+          format: uuid
+          description: Foreign key to the parent grade.
+        rule_id:
+          type: string
+          maxLength: 40
+          description: Stable rule identifier (e.g. R-MISSING-PART-IA-01).
+        dimension:
+          type: string
+          enum:
+            - part-i
+            - part-ii
+            - referral
+            - scrutiny
+            - certifier
+            - classification
+            - ""
+          description: "Certificate dimension the rule concerns: part-i, part-ii, referral, scrutiny, certifier, or classification."
+        category:
+          type: string
+          maxLength: 50
+          description: Subject category (e.g. required-component, illogical-sequence, coroner-referral).
+        description:
+          type: string
+          maxLength: 500
+          description: Human-readable description of why the rule fired.
+      required:
+        - created_at
+        - updated_at
+        - medical_certificate_of_cause_of_death_grade_id
+        - rule_id
+        - dimension
+        - category
+        - description
+      description: "Audit trail of every validity rule that fired during classification: certificate dimension, category, and description."

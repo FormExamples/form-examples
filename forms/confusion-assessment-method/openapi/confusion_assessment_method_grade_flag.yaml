@@ -1,0 +1,168 @@
+# Generated from sql/. Do not edit by hand.
+# SOURCE: confusion_assessment_method_grade_flag
+openapi: 3.1.0
+info:
+  title: Confusion Assessment Method — ConfusionAssessmentMethodGradeFlag
+  version: 1.0.0
+  description: Red-flag issues that fire independently of the present / absent classification, with priority and a suggested action for the clinical team.
+paths:
+  /confusion-assessment-method-grade-flags:
+    get:
+      summary: List ConfusionAssessmentMethodGradeFlag records
+      operationId: listConfusionAssessmentMethodGradeFlag
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of ConfusionAssessmentMethodGradeFlag records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/ConfusionAssessmentMethodGradeFlag"
+    post:
+      summary: Create a new ConfusionAssessmentMethodGradeFlag
+      operationId: createConfusionAssessmentMethodGradeFlag
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ConfusionAssessmentMethodGradeFlag"
+      responses:
+        "201":
+          description: The newly created ConfusionAssessmentMethodGradeFlag
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ConfusionAssessmentMethodGradeFlag"
+        "400":
+          description: Validation error
+  /confusion-assessment-method-grade-flags/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one ConfusionAssessmentMethodGradeFlag by id
+      operationId: getConfusionAssessmentMethodGradeFlag
+      responses:
+        "200":
+          description: The requested ConfusionAssessmentMethodGradeFlag
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ConfusionAssessmentMethodGradeFlag"
+        "404":
+          description: ConfusionAssessmentMethodGradeFlag not found
+    patch:
+      summary: Update an existing ConfusionAssessmentMethodGradeFlag
+      operationId: updateConfusionAssessmentMethodGradeFlag
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ConfusionAssessmentMethodGradeFlag"
+      responses:
+        "200":
+          description: The updated ConfusionAssessmentMethodGradeFlag
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ConfusionAssessmentMethodGradeFlag"
+        "404":
+          description: ConfusionAssessmentMethodGradeFlag not found
+    delete:
+      summary: Soft-delete a ConfusionAssessmentMethodGradeFlag
+      operationId: deleteConfusionAssessmentMethodGradeFlag
+      responses:
+        "204":
+          description: ConfusionAssessmentMethodGradeFlag deleted
+        "404":
+          description: ConfusionAssessmentMethodGradeFlag not found
+components:
+  schemas:
+    ConfusionAssessmentMethodGradeFlag:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was most recently updated.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was soft-deleted.
+        confusion_assessment_method_grade_id:
+          type: string
+          format: uuid
+          description: Foreign key to the parent grade.
+        flag_id:
+          type: string
+          maxLength: 50
+          description: Stable flag identifier (e.g. F-DELIRIUM-PRESENT-001).
+        category:
+          type: string
+          enum:
+            - delirium-present
+            - hypoactive-delirium
+            - altered-consciousness
+            - deliriogenic-medication
+            - unable-to-assess
+            - repeat-screening
+            - other
+            - ""
+          description: "Flag category: delirium-present, hypoactive-delirium, altered-consciousness, deliriogenic-medication, unable-to-assess, repeat-screening, or other."
+        priority:
+          type: string
+          enum:
+            - low
+            - medium
+            - high
+            - ""
+          description: "Priority: low, medium, high."
+        description:
+          type: string
+          maxLength: 500
+          description: Human-readable description of what fired the flag.
+        suggested_action:
+          type: string
+          maxLength: 500
+          description: "Suggested clinical action (e.g. \"commence PINCH ME reversible-precipitant screen\")."
+      required:
+        - created_at
+        - updated_at
+        - confusion_assessment_method_grade_id
+        - flag_id
+        - category
+        - priority
+        - description
+        - suggested_action
+      description: Red-flag issues that fire independently of the present / absent classification, with priority and a suggested action for the clinical team.

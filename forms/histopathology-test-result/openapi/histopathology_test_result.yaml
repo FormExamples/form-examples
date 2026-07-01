@@ -1,0 +1,287 @@
+# Generated from sql/. Do not edit by hand.
+# SOURCE: histopathology_test_result
+openapi: 3.1.0
+info:
+  title: Histopathology Test Result — HistopathologyTestResult
+  version: 1.0.0
+  description: Histopathology test result (report). Captures the examined specimen and adequacy, clinical history, the macroscopic and microscopic descriptions, the diagnosis, malignancy and tumour characterisation (type, histological grade, pathological TNM stage), resection margins and lymphovascular invasion, ancillary immunohistochemistry and SNOMED coding, the impression, recommended follow-up, and critical-result communication. This is the source-of-truth record that the four-axis interpretation grade is computed from.
+paths:
+  /histopathology-test-results:
+    get:
+      summary: List HistopathologyTestResult records
+      operationId: listHistopathologyTestResult
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of HistopathologyTestResult records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/HistopathologyTestResult"
+    post:
+      summary: Create a new HistopathologyTestResult
+      operationId: createHistopathologyTestResult
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/HistopathologyTestResult"
+      responses:
+        "201":
+          description: The newly created HistopathologyTestResult
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/HistopathologyTestResult"
+        "400":
+          description: Validation error
+  /histopathology-test-results/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one HistopathologyTestResult by id
+      operationId: getHistopathologyTestResult
+      responses:
+        "200":
+          description: The requested HistopathologyTestResult
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/HistopathologyTestResult"
+        "404":
+          description: HistopathologyTestResult not found
+    patch:
+      summary: Update an existing HistopathologyTestResult
+      operationId: updateHistopathologyTestResult
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/HistopathologyTestResult"
+      responses:
+        "200":
+          description: The updated HistopathologyTestResult
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/HistopathologyTestResult"
+        "404":
+          description: HistopathologyTestResult not found
+    delete:
+      summary: Soft-delete a HistopathologyTestResult
+      operationId: deleteHistopathologyTestResult
+      responses:
+        "204":
+          description: HistopathologyTestResult deleted
+        "404":
+          description: HistopathologyTestResult not found
+components:
+  schemas:
+    HistopathologyTestResult:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was updated most-recently.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was deleted a.k.a. soft-removed.
+        patient_id:
+          type: string
+          format: uuid
+          description: Foreign key to the patient.
+        clinician_id:
+          type: string
+          format: uuid
+          description: Foreign key to the reporting clinician (consultant histopathologist / biomedical scientist).
+        originating_request_reference:
+          type: string
+          maxLength: 255
+          description: Free-text reference linking this report back to the originating histopathology test request (referral).
+        report_status:
+          type: string
+          enum:
+            - preliminary
+            - final
+            - amended
+            - supplementary
+            - cancelled
+            - ""
+          description: "Report lifecycle status: preliminary, final, amended, supplementary, cancelled."
+        performed_date:
+          type: string
+          format: date
+          description: Date the specimen was examined / grossed.
+        reported_date:
+          type: string
+          format: date
+          description: Date the report was authored / signed.
+        specimen_type:
+          type: string
+          maxLength: 255
+          description: Type of specimen examined (e.g. biopsy, excision, resection, endoscopic biopsy).
+        specimen_site:
+          type: string
+          maxLength: 255
+          description: Anatomical site the specimen was taken from.
+        specimen_adequacy:
+          type: string
+          enum:
+            - adequate
+            - suboptimal
+            - inadequate
+            - ""
+          description: "Adequacy of the specimen for diagnosis: adequate, suboptimal, inadequate."
+        clinical_history:
+          type: string
+          maxLength: 1000
+          description: Clinical history and the question the examination was performed to answer.
+        macroscopic_description:
+          type: string
+          maxLength: 2000
+          description: "Macroscopic (gross) description of the specimen: dimensions, appearance, blocks taken."
+        microscopic_description:
+          type: string
+          maxLength: 2000
+          description: Microscopic (histological) description of the tissue under the microscope.
+        diagnosis:
+          type: string
+          maxLength: 2000
+          description: Histopathological diagnosis (the body of the report conclusion).
+        malignancy_present:
+          type: boolean
+          description: Whether malignancy is present in the examined specimen.
+        tumour_type:
+          type: string
+          maxLength: 255
+          description: Tumour type / histological subtype where a neoplasm is present.
+        histological_grade:
+          type: string
+          enum:
+            - well-differentiated
+            - moderately-differentiated
+            - poorly-differentiated
+            - undifferentiated
+            - not-applicable
+            - ""
+          description: "Histological differentiation grade: well-differentiated, moderately-differentiated, poorly-differentiated, undifferentiated, not-applicable."
+        tnm_pt:
+          type: string
+          maxLength: 20
+          description: Pathological primary tumour (pT) category per UICC/AJCC TNM 8th edition.
+        tnm_pn:
+          type: string
+          maxLength: 20
+          description: Pathological regional lymph node (pN) category per UICC/AJCC TNM 8th edition.
+        tnm_pm:
+          type: string
+          maxLength: 20
+          description: Pathological distant metastasis (pM) category per UICC/AJCC TNM 8th edition.
+        resection_margins:
+          type: string
+          enum:
+            - clear
+            - involved
+            - close
+            - not-applicable
+            - ""
+          description: "Resection margin status: clear, involved, close, not-applicable."
+        lymphovascular_invasion:
+          type: boolean
+          description: Whether lymphovascular invasion is identified.
+        immunohistochemistry:
+          type: string
+          maxLength: 1000
+          description: Immunohistochemistry and other ancillary test results.
+        snomed_code:
+          type: string
+          maxLength: 50
+          description: SNOMED CT topography / morphology code(s) for the diagnosis.
+        comparison_with_previous:
+          type: string
+          maxLength: 1000
+          description: Comparison with relevant previous histology.
+        impression:
+          type: string
+          maxLength: 2000
+          description: Summary impression / conclusion answering the clinical question.
+        reporting_category:
+          type: string
+          maxLength: 255
+          description: Free-text structured grade / stage summary (e.g. an RCPath cancer-dataset core-item or staging summary line).
+        recommended_follow_up:
+          type: string
+          maxLength: 1000
+          description: Recommended follow-up, referral, MDT discussion, or management.
+        critical_result_communicated:
+          type: boolean
+          description: Whether a critical or unexpected significant result was communicated directly to the requester.
+        reported_to:
+          type: string
+          maxLength: 500
+          description: Who the critical / urgent result was communicated to, with date and time if applicable.
+      required:
+        - created_at
+        - updated_at
+        - patient_id
+        - clinician_id
+        - originating_request_reference
+        - report_status
+        - specimen_type
+        - specimen_site
+        - specimen_adequacy
+        - clinical_history
+        - macroscopic_description
+        - microscopic_description
+        - diagnosis
+        - malignancy_present
+        - tumour_type
+        - histological_grade
+        - tnm_pt
+        - tnm_pn
+        - tnm_pm
+        - resection_margins
+        - lymphovascular_invasion
+        - immunohistochemistry
+        - snomed_code
+        - comparison_with_previous
+        - impression
+        - reporting_category
+        - recommended_follow_up
+        - critical_result_communicated
+        - reported_to
+      description: Histopathology test result (report). Captures the examined specimen and adequacy, clinical history, the macroscopic and microscopic descriptions, the diagnosis, malignancy and tumour characterisation (type, histological grade, pathological TNM stage), resection margins and lymphovascular invasion, ancillary immunohistochemistry and SNOMED coding, the impression, recommended follow-up, and critical-result communication. This is the source-of-truth record that the four-axis interpretation grade is computed from.

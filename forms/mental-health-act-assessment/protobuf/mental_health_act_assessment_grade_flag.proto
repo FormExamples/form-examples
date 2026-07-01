@@ -1,0 +1,41 @@
+// Generated from sql/. Do not edit by hand.
+// SOURCE: mental_health_act_assessment_grade_flag
+
+syntax = "proto3";
+
+package form_examples.mental_health_act_assessment;
+
+enum MentalHealthActAssessmentGradeFlagCategoryEnum {
+  CATEGORY_UNSPECIFIED = 0;
+  CATEGORY_CRITERIA_NOT_MET = 1;  // criteria-not-met
+  CATEGORY_MISSING_SECOND_RECOMMENDATION = 2;  // missing-second-recommendation
+  CATEGORY_S12_DOCTOR_ABSENT = 3;  // s12-doctor-absent
+  CATEGORY_LEAST_RESTRICTIVE_CONCERN = 4;  // least-restrictive-concern
+  CATEGORY_APPROPRIATE_TREATMENT_UNAVAILABLE = 5;  // appropriate-treatment-unavailable
+  CATEGORY_NEAREST_RELATIVE_NOT_CONSULTED = 6;  // nearest-relative-not-consulted
+  CATEGORY_TIME_LIMIT_EXCEEDED = 7;  // time-limit-exceeded
+  CATEGORY_NO_PRIOR_ACQUAINTANCE = 8;  // no-prior-acquaintance
+  CATEGORY_NO_BED_IDENTIFIED = 9;  // no-bed-identified
+  CATEGORY_INCOMPLETE = 10;  // incomplete
+  CATEGORY_OTHER = 11;  // other
+}
+
+enum MentalHealthActAssessmentGradeFlagPriorityEnum {
+  PRIORITY_UNSPECIFIED = 0;
+  PRIORITY_LOW = 1;  // low
+  PRIORITY_MEDIUM = 2;  // medium
+  PRIORITY_HIGH = 3;  // high
+}
+
+message MentalHealthActAssessmentGradeFlag {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string mental_health_act_assessment_grade_id = 5;  // UUID — uuid
+  string flag_id = 6;  // VARCHAR(50) — max 50 chars
+  MentalHealthActAssessmentGradeFlagCategoryEnum category = 7;  // VARCHAR(50)
+  MentalHealthActAssessmentGradeFlagPriorityEnum priority = 8;  // VARCHAR(10)
+  string description = 9;  // VARCHAR(500) — max 500 chars
+  string suggested_action = 10;  // VARCHAR(500) — max 500 chars
+}

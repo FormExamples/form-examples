@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE edinburgh_postnatal_depression_scale_grade SYSTEM "edinburgh_postnatal_depression_scale_grade.dtd">
+<edinburgh_postnatal_depression_scale_grade>
+<id>880e8400-e29b-41d4-a716-446655440003</id>
+<created_at>2026-04-09T10:00:00Z</created_at>
+<updated_at>2026-04-09T10:00:00Z</updated_at>
+<deleted_at>2026-04-09T10:00:00Z</deleted_at>
+<edinburgh_postnatal_depression_scale_id>770e8400-e29b-41d4-a716-446655440002</edinburgh_postnatal_depression_scale_id>
+<total_score>5</total_score>
+<interpretation>lower</interpretation>
+<item_10_score>5</item_10_score>
+<self_harm_flag>yes</self_harm_flag>
+<graded_at>2026-04-09T10:00:00Z</graded_at>
+</edinburgh_postnatal_depression_scale_grade>

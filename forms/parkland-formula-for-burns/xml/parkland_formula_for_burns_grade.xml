@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE parkland_formula_for_burns_grade SYSTEM "parkland_formula_for_burns_grade.dtd">
+<parkland_formula_for_burns_grade>
+<id>880e8400-e29b-41d4-a716-446655440003</id>
+<created_at>2026-04-09T10:00:00Z</created_at>
+<updated_at>2026-04-09T10:00:00Z</updated_at>
+<deleted_at>2026-04-09T10:00:00Z</deleted_at>
+<parkland_formula_for_burns_id>770e8400-e29b-41d4-a716-446655440002</parkland_formula_for_burns_id>
+<total_24h_volume_ml>0.0</total_24h_volume_ml>
+<first_8h_volume_ml>0.0</first_8h_volume_ml>
+<next_16h_volume_ml>0.0</next_16h_volume_ml>
+<hours_since_injury>0.0</hours_since_injury>
+<remaining_first_8h_hours>0.0</remaining_first_8h_hours>
+<first_8h_rate_ml_h>72.0</first_8h_rate_ml_h>
+<next_16h_rate_ml_h>72.0</next_16h_rate_ml_h>
+<urine_output_target_min_ml_h>0.0</urine_output_target_min_ml_h>
+<urine_output_target_max_ml_h>0.0</urine_output_target_max_ml_h>
+<graded_at>2026-04-09T10:00:00Z</graded_at>
+</parkland_formula_for_burns_grade>

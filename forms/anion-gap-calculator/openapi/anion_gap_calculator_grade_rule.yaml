@@ -1,0 +1,165 @@
+# Generated from sql/. Do not edit by hand.
+# SOURCE: anion_gap_calculator_grade_rule
+openapi: 3.1.0
+info:
+  title: Anion Gap Calculator — AnionGapCalculatorGradeRule
+  version: 1.0.0
+  description: "Audit trail of every rule that fired during anion-gap computation: instrument, band, category, and description."
+paths:
+  /anion-gap-calculator-grade-rules:
+    get:
+      summary: List AnionGapCalculatorGradeRule records
+      operationId: listAnionGapCalculatorGradeRule
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of AnionGapCalculatorGradeRule records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/AnionGapCalculatorGradeRule"
+    post:
+      summary: Create a new AnionGapCalculatorGradeRule
+      operationId: createAnionGapCalculatorGradeRule
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/AnionGapCalculatorGradeRule"
+      responses:
+        "201":
+          description: The newly created AnionGapCalculatorGradeRule
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AnionGapCalculatorGradeRule"
+        "400":
+          description: Validation error
+  /anion-gap-calculator-grade-rules/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one AnionGapCalculatorGradeRule by id
+      operationId: getAnionGapCalculatorGradeRule
+      responses:
+        "200":
+          description: The requested AnionGapCalculatorGradeRule
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AnionGapCalculatorGradeRule"
+        "404":
+          description: AnionGapCalculatorGradeRule not found
+    patch:
+      summary: Update an existing AnionGapCalculatorGradeRule
+      operationId: updateAnionGapCalculatorGradeRule
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/AnionGapCalculatorGradeRule"
+      responses:
+        "200":
+          description: The updated AnionGapCalculatorGradeRule
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AnionGapCalculatorGradeRule"
+        "404":
+          description: AnionGapCalculatorGradeRule not found
+    delete:
+      summary: Soft-delete a AnionGapCalculatorGradeRule
+      operationId: deleteAnionGapCalculatorGradeRule
+      responses:
+        "204":
+          description: AnionGapCalculatorGradeRule deleted
+        "404":
+          description: AnionGapCalculatorGradeRule not found
+components:
+  schemas:
+    AnionGapCalculatorGradeRule:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was most recently updated.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was soft-deleted.
+        anion_gap_calculator_grade_id:
+          type: string
+          format: uuid
+          description: Foreign key to the parent grade.
+        rule_id:
+          type: string
+          maxLength: 40
+          description: Stable rule identifier (e.g. R-CLASSIFY-HIGH-01).
+        instrument:
+          type: string
+          enum:
+            - formula
+            - correction
+            - classification
+            - composite
+          description: "Instrument the rule belongs to: formula, correction, classification, or composite."
+        band:
+          type: string
+          enum:
+            - normal
+            - high
+            - very-high
+            - low
+            - ""
+          description: "Classification band contributed by this rule: normal, high, very-high, or low."
+        category:
+          type: string
+          maxLength: 50
+          description: Subject category (e.g. reference-range, albumin-correction, missing-input).
+        description:
+          type: string
+          maxLength: 500
+          description: Human-readable description of why the rule fired.
+      required:
+        - created_at
+        - updated_at
+        - anion_gap_calculator_grade_id
+        - rule_id
+        - instrument
+        - band
+        - category
+        - description
+      description: "Audit trail of every rule that fired during anion-gap computation: instrument, band, category, and description."

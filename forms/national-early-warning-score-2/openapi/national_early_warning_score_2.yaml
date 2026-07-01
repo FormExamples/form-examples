@@ -1,0 +1,260 @@
+# Generated from sql/. Do not edit by hand.
+# SOURCE: national_early_warning_score_2
+openapi: 3.1.0
+info:
+  title: National Early Warning Score 2 — NationalEarlyWarningScore2
+  version: 1.0.0
+  description: "Main NEWS2 observation record: raw physiological observations for a single vital-sign set plus recording context (ward/location, observation timestamp, SpO2 scale, supplemental-oxygen details). Subscores, aggregate, risk band, rules, and flags live in child tables."
+paths:
+  /national-early-warning-score-2s:
+    get:
+      summary: List NationalEarlyWarningScore2 records
+      operationId: listNationalEarlyWarningScore2
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of NationalEarlyWarningScore2 records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/NationalEarlyWarningScore2"
+    post:
+      summary: Create a new NationalEarlyWarningScore2
+      operationId: createNationalEarlyWarningScore2
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/NationalEarlyWarningScore2"
+      responses:
+        "201":
+          description: The newly created NationalEarlyWarningScore2
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/NationalEarlyWarningScore2"
+        "400":
+          description: Validation error
+  /national-early-warning-score-2s/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one NationalEarlyWarningScore2 by id
+      operationId: getNationalEarlyWarningScore2
+      responses:
+        "200":
+          description: The requested NationalEarlyWarningScore2
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/NationalEarlyWarningScore2"
+        "404":
+          description: NationalEarlyWarningScore2 not found
+    patch:
+      summary: Update an existing NationalEarlyWarningScore2
+      operationId: updateNationalEarlyWarningScore2
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/NationalEarlyWarningScore2"
+      responses:
+        "200":
+          description: The updated NationalEarlyWarningScore2
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/NationalEarlyWarningScore2"
+        "404":
+          description: NationalEarlyWarningScore2 not found
+    delete:
+      summary: Soft-delete a NationalEarlyWarningScore2
+      operationId: deleteNationalEarlyWarningScore2
+      responses:
+        "204":
+          description: NationalEarlyWarningScore2 deleted
+        "404":
+          description: NationalEarlyWarningScore2 not found
+components:
+  schemas:
+    NationalEarlyWarningScore2:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was updated most-recently.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was deleted a.k.a. soft-removed.
+        patient_id:
+          type: string
+          format: uuid
+          description: "Foreign key to the patient observed (RESTRICT: patients are not deleted while observations exist)."
+        clinician_id:
+          type: string
+          format: uuid
+          description: Foreign key to the clinician who recorded the observation set (RESTRICT); NULL until assigned.
+        status:
+          type: string
+          enum:
+            - draft
+            - submitted
+            - amended
+            - signed
+          description: "Workflow status: draft, submitted, amended, or signed."
+        observation_at:
+          type: string
+          format: date-time
+          description: Date and time the observation set was taken; NULL when not yet recorded.
+        ward_or_location:
+          type: string
+          maxLength: 255
+          description: Ward or clinical location where the observations were recorded.
+        spo2_scale:
+          type: string
+          enum:
+            - scale-1
+            - scale-2
+            - ""
+          description: "SpO2 scoring scale: scale-1 (default) or scale-2 (prescribed 88-92% target, e.g. hypercapnic respiratory failure)."
+        spo2_scale2_endorsed:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Whether a clinician has endorsed use of Scale 2 for this patient.
+        respiratory_rate:
+          type: integer
+          format: int32
+          description: Respiration rate in breaths per minute; NULL when not recorded.
+        spo2:
+          type: integer
+          format: int32
+          description: Oxygen saturation as a percentage; NULL when not recorded.
+        on_oxygen:
+          type: string
+          enum:
+            - air
+            - oxygen
+            - ""
+          description: Whether the patient is breathing air or receiving supplemental oxygen.
+        oxygen_device:
+          type: string
+          enum:
+            - nasal-cannula
+            - simple-face-mask
+            - venturi-mask
+            - non-rebreather-mask
+            - humidified
+            - cpap
+            - niv
+            - tracheostomy
+            - ventilator
+            - other
+            - ""
+          description: Supplemental-oxygen delivery device when on oxygen.
+        oxygen_flow_rate_l_min:
+          type: number
+          format: double
+          description: Supplemental-oxygen flow rate in litres per minute; NULL when not recorded.
+        inspired_oxygen_fraction_percent:
+          type: integer
+          format: int32
+          description: Fraction of inspired oxygen (FiO2) as a percentage; NULL when not recorded.
+        systolic_blood_pressure:
+          type: integer
+          format: int32
+          description: Systolic blood pressure in mmHg; NULL when not recorded.
+        pulse:
+          type: integer
+          format: int32
+          description: Pulse rate in beats per minute; NULL when not recorded.
+        consciousness_acvpu:
+          type: string
+          enum:
+            - A
+            - C
+            - V
+            - P
+            - U
+            - ""
+          description: "Consciousness level on the ACVPU scale: A (alert), C (new confusion), V (voice), P (pain), U (unresponsive)."
+        temperature:
+          type: number
+          format: double
+          description: Body temperature in degrees Celsius; NULL when not recorded.
+        is_under_16:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Whether the patient is under 16 years old (NEWS2 not validated; raises out-of-scope flag).
+        is_pregnant:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Whether the patient is pregnant (NEWS2 not validated; raises out-of-scope flag).
+        has_spinal_cord_injury:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Whether the patient has a spinal-cord injury (NEWS2 not validated; raises out-of-scope flag).
+        clinical_notes:
+          type: string
+          description: Free-text clinical notes accompanying the observation set.
+      required:
+        - created_at
+        - updated_at
+        - patient_id
+        - status
+        - ward_or_location
+        - spo2_scale
+        - spo2_scale2_endorsed
+        - on_oxygen
+        - oxygen_device
+        - consciousness_acvpu
+        - is_under_16
+        - is_pregnant
+        - has_spinal_cord_injury
+        - clinical_notes
+      description: "Main NEWS2 observation record: raw physiological observations for a single vital-sign set plus recording context (ward/location, observation timestamp, SpO2 scale, supplemental-oxygen details). Subscores, aggregate, risk band, rules, and flags live in child tables."

@@ -1,0 +1,161 @@
+# Generated from sql/. Do not edit by hand.
+# SOURCE: wells_score_for_deep_vein_thrombosis_grade
+openapi: 3.1.0
+info:
+  title: Wells Score For Deep Vein Thrombosis — WellsScoreForDeepVeinThrombosisGrade
+  version: 1.0.0
+  description: "Computed Wells DVT grading result: total score, two-level band, three-level band, and recommended investigation pathway. One-to-one with the parent assessment."
+paths:
+  /wells-score-for-deep-vein-thrombosis-grades:
+    get:
+      summary: List WellsScoreForDeepVeinThrombosisGrade records
+      operationId: listWellsScoreForDeepVeinThrombosisGrade
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of WellsScoreForDeepVeinThrombosisGrade records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/WellsScoreForDeepVeinThrombosisGrade"
+    post:
+      summary: Create a new WellsScoreForDeepVeinThrombosisGrade
+      operationId: createWellsScoreForDeepVeinThrombosisGrade
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/WellsScoreForDeepVeinThrombosisGrade"
+      responses:
+        "201":
+          description: The newly created WellsScoreForDeepVeinThrombosisGrade
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/WellsScoreForDeepVeinThrombosisGrade"
+        "400":
+          description: Validation error
+  /wells-score-for-deep-vein-thrombosis-grades/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one WellsScoreForDeepVeinThrombosisGrade by id
+      operationId: getWellsScoreForDeepVeinThrombosisGrade
+      responses:
+        "200":
+          description: The requested WellsScoreForDeepVeinThrombosisGrade
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/WellsScoreForDeepVeinThrombosisGrade"
+        "404":
+          description: WellsScoreForDeepVeinThrombosisGrade not found
+    patch:
+      summary: Update an existing WellsScoreForDeepVeinThrombosisGrade
+      operationId: updateWellsScoreForDeepVeinThrombosisGrade
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/WellsScoreForDeepVeinThrombosisGrade"
+      responses:
+        "200":
+          description: The updated WellsScoreForDeepVeinThrombosisGrade
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/WellsScoreForDeepVeinThrombosisGrade"
+        "404":
+          description: WellsScoreForDeepVeinThrombosisGrade not found
+    delete:
+      summary: Soft-delete a WellsScoreForDeepVeinThrombosisGrade
+      operationId: deleteWellsScoreForDeepVeinThrombosisGrade
+      responses:
+        "204":
+          description: WellsScoreForDeepVeinThrombosisGrade deleted
+        "404":
+          description: WellsScoreForDeepVeinThrombosisGrade not found
+components:
+  schemas:
+    WellsScoreForDeepVeinThrombosisGrade:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was most recently updated.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was soft-deleted.
+        wells_score_for_deep_vein_thrombosis_id:
+          type: string
+          format: uuid
+          description: Foreign key to the parent assessment (unique, 1:1).
+        wells_score:
+          type: integer
+          format: int32
+          description: Total Wells score computed by the engine, range -2..9.
+        two_level_band:
+          type: string
+          enum:
+            - likely
+            - unlikely
+            - ""
+          description: "Two-level band: likely (score >= 2) or unlikely (score <= 1)."
+        three_level_band:
+          type: string
+          enum:
+            - low
+            - moderate
+            - high
+            - ""
+          description: "Informational three-level band: low (<= 0), moderate (1-2), or high (>= 3)."
+        recommended_pathway:
+          type: string
+          description: "Recommended investigation pathway: proximal leg vein ultrasound when likely, otherwise D-dimer."
+        graded_at:
+          type: string
+          format: date-time
+          description: Timestamp when the engine last computed the grade.
+      required:
+        - created_at
+        - updated_at
+        - wells_score_for_deep_vein_thrombosis_id
+        - two_level_band
+        - three_level_band
+        - recommended_pathway
+        - graded_at
+      description: "Computed Wells DVT grading result: total score, two-level band, three-level band, and recommended investigation pathway. One-to-one with the parent assessment."

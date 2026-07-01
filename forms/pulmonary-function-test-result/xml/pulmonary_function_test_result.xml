@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE pulmonary_function_test_result SYSTEM "pulmonary_function_test_result.dtd">
+<pulmonary_function_test_result>
+<id>770e8400-e29b-41d4-a716-446655440002</id>
+<created_at>2026-04-09T10:00:00Z</created_at>
+<updated_at>2026-04-09T10:00:00Z</updated_at>
+<deleted_at>2026-04-09T10:00:00Z</deleted_at>
+<patient_id>550e8400-e29b-41d4-a716-446655440000</patient_id>
+<clinician_id>660e8400-e29b-41d4-a716-446655440001</clinician_id>
+<originating_request_reference></originating_request_reference>
+<test_type>spirometry</test_type>
+<performed_date>2026-01-15</performed_date>
+<reported_date>2026-01-15</reported_date>
+<report_status>preliminary</report_status>
+<test_quality>acceptable</test_quality>
+<clinical_history>Example text.</clinical_history>
+<fev1_litres>0.0</fev1_litres>
+<fev1_percent_predicted>50.0</fev1_percent_predicted>
+<fvc_litres>0.0</fvc_litres>
+<fvc_percent_predicted>50.0</fvc_percent_predicted>
+<fev1_fvc_ratio>1.5</fev1_fvc_ratio>
+<peak_expiratory_flow>0.0</peak_expiratory_flow>
+<dlco_percent_predicted>50.0</dlco_percent_predicted>
+<ventilatory_pattern>normal</ventilatory_pattern>
+<severity>none</severity>
+<bronchodilator_reversibility>positive</bronchodilator_reversibility>
+<airflow_obstruction>true</airflow_obstruction>
+<restriction>true</restriction>
+<reduced_gas_transfer>true</reduced_gas_transfer>
+<significant_reversibility>true</significant_reversibility>
+<normal_spirometry>true</normal_spirometry>
+<findings_narrative>Example text.</findings_narrative>
+<comparison_with_previous></comparison_with_previous>
+<impression>Example text.</impression>
+<reporting_category>General</reporting_category>
+<recommended_follow_up></recommended_follow_up>
+<critical_result_communicated>true</critical_result_communicated>
+<reported_to></reported_to>
+</pulmonary_function_test_result>

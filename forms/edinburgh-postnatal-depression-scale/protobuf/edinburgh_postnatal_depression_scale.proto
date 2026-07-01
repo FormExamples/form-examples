@@ -1,0 +1,76 @@
+// Generated from sql/. Do not edit by hand.
+// SOURCE: edinburgh_postnatal_depression_scale
+
+syntax = "proto3";
+
+package form_examples.edinburgh_postnatal_depression_scale;
+
+enum EdinburghPostnatalDepressionScaleClinicianRoleEnum {
+  CLINICIANROLE_UNSPECIFIED = 0;
+  CLINICIANROLE_MIDWIFE = 1;  // midwife
+  CLINICIANROLE_HEALTH_VISITOR = 2;  // health-visitor
+  CLINICIANROLE_GP = 3;  // gp
+  CLINICIANROLE_PERINATAL_MH = 4;  // perinatal-mh
+  CLINICIANROLE_OTHER = 5;  // other
+}
+
+enum EdinburghPostnatalDepressionScaleCareSettingEnum {
+  CARESETTING_UNSPECIFIED = 0;
+  CARESETTING_MATERNITY = 1;  // maternity
+  CARESETTING_COMMUNITY = 2;  // community
+  CARESETTING_GENERAL_PRACTICE = 3;  // general-practice
+  CARESETTING_PERINATAL_MH = 4;  // perinatal-mh
+  CARESETTING_OTHER = 5;  // other
+}
+
+enum EdinburghPostnatalDepressionScalePerinatalStageEnum {
+  PERINATALSTAGE_UNSPECIFIED = 0;
+  PERINATALSTAGE_ANTENATAL = 1;  // antenatal
+  PERINATALSTAGE_POSTNATAL = 2;  // postnatal
+}
+
+enum EdinburghPostnatalDepressionScaleAgeBandEnum {
+  AGEBAND_UNSPECIFIED = 0;
+  AGEBAND_UNDER_20 = 1;  // under-20
+  AGEBAND_V_20_29 = 2;  // 20-29
+  AGEBAND_V_30_39 = 3;  // 30-39
+  AGEBAND_V_40_PLUS = 4;  // 40-plus
+}
+
+enum EdinburghPostnatalDepressionScaleAssistanceNeededEnum {
+  ASSISTANCENEEDED_UNSPECIFIED = 0;
+  ASSISTANCENEEDED_NONE = 1;  // none
+  ASSISTANCENEEDED_INTERPRETER = 2;  // interpreter
+  ASSISTANCENEEDED_CLINICIAN_READ = 3;  // clinician-read
+  ASSISTANCENEEDED_OTHER = 4;  // other
+}
+
+message EdinburghPostnatalDepressionScale {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string patient_id = 5;  // UUID — uuid
+  string clinician_id = 6;  // UUID — uuid
+  string clinician_name = 7;  // VARCHAR(255) — max 255 chars
+  EdinburghPostnatalDepressionScaleClinicianRoleEnum clinician_role = 8;  // VARCHAR(20)
+  EdinburghPostnatalDepressionScaleCareSettingEnum care_setting = 9;  // VARCHAR(20)
+  string assessed_at = 10;  // TIMESTAMPTZ — iso 8601
+  EdinburghPostnatalDepressionScalePerinatalStageEnum perinatal_stage = 11;  // VARCHAR(20)
+  double perinatal_week = 12;  // NUMERIC(4,1) — numeric(4,1)
+  string respondent_identifier = 13;  // VARCHAR(100) — max 100 chars
+  EdinburghPostnatalDepressionScaleAgeBandEnum age_band = 14;  // VARCHAR(10)
+  string preferred_language = 15;  // VARCHAR(100) — max 100 chars
+  EdinburghPostnatalDepressionScaleAssistanceNeededEnum assistance_needed = 16;  // VARCHAR(20)
+  int32 item_1 = 17;  // SMALLINT
+  int32 item_2 = 18;  // SMALLINT
+  int32 item_3 = 19;  // SMALLINT
+  int32 item_4 = 20;  // SMALLINT
+  int32 item_5 = 21;  // SMALLINT
+  int32 item_6 = 22;  // SMALLINT
+  int32 item_7 = 23;  // SMALLINT
+  int32 item_8 = 24;  // SMALLINT
+  int32 item_9 = 25;  // SMALLINT
+  int32 item_10 = 26;  // SMALLINT
+  string clinical_note = 27;  // TEXT
+}

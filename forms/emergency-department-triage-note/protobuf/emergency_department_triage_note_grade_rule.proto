@@ -1,0 +1,28 @@
+// Generated from sql/. Do not edit by hand.
+// SOURCE: emergency_department_triage_note_grade_rule
+
+syntax = "proto3";
+
+package form_examples.emergency_department_triage_note;
+
+enum EmergencyDepartmentTriageNoteGradeRuleInstrumentEnum {
+  INSTRUMENT_UNSPECIFIED = 0;
+  INSTRUMENT_DISCRIMINATOR = 1;  // discriminator
+  INSTRUMENT_NEWS2 = 2;  // news2
+  INSTRUMENT_PAIN = 3;  // pain
+  INSTRUMENT_VITAL_SIGN = 4;  // vital-sign
+  INSTRUMENT_COMPOSITE = 5;  // composite
+}
+
+message EmergencyDepartmentTriageNoteGradeRule {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string emergency_department_triage_note_grade_id = 5;  // UUID — uuid
+  string rule_id = 6;  // VARCHAR(40) — max 40 chars
+  EmergencyDepartmentTriageNoteGradeRuleInstrumentEnum instrument = 7;  // VARCHAR(30)
+  int32 band = 8;  // INT
+  string category = 9;  // VARCHAR(50) — max 50 chars
+  string description = 10;  // VARCHAR(500) — max 500 chars
+}

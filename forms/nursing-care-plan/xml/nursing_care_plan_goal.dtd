@@ -1,0 +1,9 @@
+<!ELEMENT nursing_care_plan_goal (id,created_at,updated_at,deleted_at,nursing_care_plan_problem_id,goal_text,target_date,met)>
+<!ELEMENT id (#PCDATA)>
+<!ELEMENT created_at (#PCDATA)>
+<!ELEMENT updated_at (#PCDATA)>
+<!ELEMENT deleted_at (#PCDATA)>
+<!ELEMENT nursing_care_plan_problem_id (#PCDATA)>
+<!ELEMENT goal_text (#PCDATA)>
+<!ELEMENT target_date (#PCDATA)>
+<!ELEMENT met (#PCDATA)>

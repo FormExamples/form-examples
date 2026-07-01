@@ -1,0 +1,250 @@
+# Generated from sql/. Do not edit by hand.
+# SOURCE: bowel_cancer_screening_fit
+openapi: 3.1.0
+info:
+  title: Bowel Cancer Screening With Faecal Immunochemical Test — BowelCancerScreeningFit
+  version: 1.0.0
+  description: "Main bowel-cancer-screening FIT record for one home faecal immunochemical test kit outcome: review context, participant identification, eligibility and invitation, kit return and sample adequacy, the measured faecal haemoglobin concentration and programme threshold, and red-flag symptoms. Result classification, fired rules, and flags live in child tables."
+paths:
+  /bowel-cancer-screening-fits:
+    get:
+      summary: List BowelCancerScreeningFit records
+      operationId: listBowelCancerScreeningFit
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of BowelCancerScreeningFit records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/BowelCancerScreeningFit"
+    post:
+      summary: Create a new BowelCancerScreeningFit
+      operationId: createBowelCancerScreeningFit
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/BowelCancerScreeningFit"
+      responses:
+        "201":
+          description: The newly created BowelCancerScreeningFit
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/BowelCancerScreeningFit"
+        "400":
+          description: Validation error
+  /bowel-cancer-screening-fits/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one BowelCancerScreeningFit by id
+      operationId: getBowelCancerScreeningFit
+      responses:
+        "200":
+          description: The requested BowelCancerScreeningFit
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/BowelCancerScreeningFit"
+        "404":
+          description: BowelCancerScreeningFit not found
+    patch:
+      summary: Update an existing BowelCancerScreeningFit
+      operationId: updateBowelCancerScreeningFit
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/BowelCancerScreeningFit"
+      responses:
+        "200":
+          description: The updated BowelCancerScreeningFit
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/BowelCancerScreeningFit"
+        "404":
+          description: BowelCancerScreeningFit not found
+    delete:
+      summary: Soft-delete a BowelCancerScreeningFit
+      operationId: deleteBowelCancerScreeningFit
+      responses:
+        "204":
+          description: BowelCancerScreeningFit deleted
+        "404":
+          description: BowelCancerScreeningFit not found
+components:
+  schemas:
+    BowelCancerScreeningFit:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was updated most-recently.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was deleted a.k.a. soft-removed.
+        patient_id:
+          type: string
+          format: uuid
+          description: Foreign key to the participant this screening documents (restrict delete).
+        clinician_id:
+          type: string
+          format: uuid
+          description: Foreign key to the reviewing clinician or administrator (restrict delete); optional.
+        reviewed_at:
+          type: string
+          format: date-time
+          description: Date and time the FIT result was reviewed.
+        screening_hub:
+          type: string
+          maxLength: 200
+          description: Screening hub or centre name that processed the kit.
+        participant_identifier:
+          type: string
+          maxLength: 100
+          description: Local participant or episode identifier as recorded on the record.
+        age:
+          type: integer
+          format: int32
+          description: Participant age in years; drives eligibility for the programme age range.
+        within_age_range:
+          type: string
+          enum:
+            - eligible
+            - over-age-self-request
+            - not-eligible
+            - ""
+          description: "Eligibility against the programme age range: eligible, over-age-self-request, or not-eligible."
+        recall_interval:
+          type: string
+          enum:
+            - two-yearly
+            - other
+            - ""
+          description: "Routine recall interval: two-yearly (standard programme) or other."
+        invitation_date:
+          type: string
+          format: date
+          description: Date the FIT kit was issued to the participant.
+        previous_outcome:
+          type: string
+          enum:
+            - first-invitation
+            - prior-negative
+            - prior-positive
+            - unknown
+            - ""
+          description: "Outcome of the previous screening round: first-invitation, prior-negative, prior-positive, or unknown."
+        last_screen_date:
+          type: string
+          format: date
+          description: Date of the most recent previous screening, when known.
+        kit_returned:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Whether the FIT kit was returned (yes/no); no yields a repeat-kit management action and a non-return flag.
+        return_date:
+          type: string
+          format: date
+          description: Date the completed sample was received.
+        sample_adequacy:
+          type: string
+          enum:
+            - adequate
+            - spoilt
+            - insufficient
+            - expired
+            - ""
+          description: "Sample adequacy: adequate, spoilt, insufficient, or expired; anything other than adequate classifies as spoilt and is repeated."
+        spoilt_reason:
+          type: string
+          enum:
+            - leaked
+            - undated
+            - unlabelled
+            - too-old
+            - damaged
+            - ""
+          description: "Reason a sample was spoilt or inadequate: leaked, undated, unlabelled, too-old, or damaged."
+        faecal_haemoglobin_ug_g:
+          type: number
+          format: double
+          description: Measured faecal haemoglobin concentration in micrograms of haemoglobin per gram of faeces (ug Hb/g).
+        assay:
+          type: string
+          maxLength: 200
+          description: Analyser or assay identifier used to measure the faecal haemoglobin concentration.
+        threshold_applied:
+          type: number
+          format: double
+          description: Programme threshold in ug Hb/g at or above which the result is positive; defaults to 120 (screening); 10 yields NICE DG56 symptomatic behaviour.
+        red_flag_symptoms:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Whether the participant reports red-flag symptoms (yes/no); yes sets the symptomatic pathway independently of the FIT result.
+        clinical_note:
+          type: string
+          description: Free-text clinical note.
+        context:
+          type: string
+          description: Optional free-text clinical context shown in the summary.
+      required:
+        - created_at
+        - updated_at
+        - patient_id
+        - screening_hub
+        - participant_identifier
+        - within_age_range
+        - recall_interval
+        - previous_outcome
+        - kit_returned
+        - sample_adequacy
+        - spoilt_reason
+        - assay
+        - red_flag_symptoms
+        - clinical_note
+        - context
+      description: "Main bowel-cancer-screening FIT record for one home faecal immunochemical test kit outcome: review context, participant identification, eligibility and invitation, kit return and sample adequacy, the measured faecal haemoglobin concentration and programme threshold, and red-flag symptoms. Result classification, fired rules, and flags live in child tables."

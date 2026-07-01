@@ -1,4 +1,4 @@
-# Generated from sql-migrations/. Do not edit by hand.
+# Generated from sql/. Do not edit by hand.
 # SOURCE: blood_cross_match_test_request_grade_rule
 openapi: 3.1.0
 info:

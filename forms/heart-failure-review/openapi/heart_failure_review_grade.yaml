@@ -1,0 +1,182 @@
+# Generated from sql/. Do not edit by hand.
+# SOURCE: heart_failure_review_grade
+openapi: 3.1.0
+info:
+  title: Heart Failure Review — HeartFailureReviewGrade
+  version: 1.0.0
+  description: "Computed classification and completeness grading result for a heart-failure annual review: NYHA functional status, medication-optimisation status against the indicated pillar set, review-completeness status and score, and the indicated / prescribed / missing pillar breakdown. 1:1 with the parent review."
+paths:
+  /heart-failure-review-grades:
+    get:
+      summary: List HeartFailureReviewGrade records
+      operationId: listHeartFailureReviewGrade
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of HeartFailureReviewGrade records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/HeartFailureReviewGrade"
+    post:
+      summary: Create a new HeartFailureReviewGrade
+      operationId: createHeartFailureReviewGrade
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/HeartFailureReviewGrade"
+      responses:
+        "201":
+          description: The newly created HeartFailureReviewGrade
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/HeartFailureReviewGrade"
+        "400":
+          description: Validation error
+  /heart-failure-review-grades/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one HeartFailureReviewGrade by id
+      operationId: getHeartFailureReviewGrade
+      responses:
+        "200":
+          description: The requested HeartFailureReviewGrade
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/HeartFailureReviewGrade"
+        "404":
+          description: HeartFailureReviewGrade not found
+    patch:
+      summary: Update an existing HeartFailureReviewGrade
+      operationId: updateHeartFailureReviewGrade
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/HeartFailureReviewGrade"
+      responses:
+        "200":
+          description: The updated HeartFailureReviewGrade
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/HeartFailureReviewGrade"
+        "404":
+          description: HeartFailureReviewGrade not found
+    delete:
+      summary: Soft-delete a HeartFailureReviewGrade
+      operationId: deleteHeartFailureReviewGrade
+      responses:
+        "204":
+          description: HeartFailureReviewGrade deleted
+        "404":
+          description: HeartFailureReviewGrade not found
+components:
+  schemas:
+    HeartFailureReviewGrade:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was most recently updated.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was soft-deleted.
+        heart_failure_review_id:
+          type: string
+          format: uuid
+          description: Foreign key to the parent heart-failure review (unique, 1:1).
+        nyha_status:
+          type: string
+          enum:
+            - stable
+            - symptomatic
+            - advanced
+            - unknown
+            - ""
+          description: "NYHA functional status: stable (NYHA I-II), symptomatic (NYHA III), advanced (NYHA IV), or unknown (class not recorded)."
+        medication_optimisation_status:
+          type: string
+          enum:
+            - optimised
+            - partial
+            - suboptimal
+            - not-applicable
+            - ""
+          description: "Medication-optimisation status against the indicated pillar set: optimised, partial, suboptimal, or not-applicable."
+        review_status:
+          type: string
+          enum:
+            - complete
+            - partial
+            - incomplete
+            - ""
+          description: "Review completeness: complete, partial, or incomplete."
+        indicated_pillars:
+          type: integer
+          format: int32
+          description: Count of medication pillars indicated for this heart-failure subtype (4 for HFrEF, 1 for HFmrEF/HFpEF, 0 for unknown).
+        prescribed_pillars:
+          type: integer
+          format: int32
+          description: Count of indicated pillars whose status is prescribed.
+        missing_pillars:
+          type: string
+          maxLength: 200
+          description: Comma-separated list of indicated pillars documented as not-prescribed without a contraindication.
+        completeness_score:
+          type: integer
+          format: int32
+          description: Review-completeness score 0-100 (round of 100 * documented domains / 6).
+        graded_at:
+          type: string
+          format: date-time
+          description: Timestamp when the engine last computed the grade.
+      required:
+        - created_at
+        - updated_at
+        - heart_failure_review_id
+        - nyha_status
+        - medication_optimisation_status
+        - review_status
+        - missing_pillars
+        - graded_at
+      description: "Computed classification and completeness grading result for a heart-failure annual review: NYHA functional status, medication-optimisation status against the indicated pillar set, review-completeness status and score, and the indicated / prescribed / missing pillar breakdown. 1:1 with the parent review."

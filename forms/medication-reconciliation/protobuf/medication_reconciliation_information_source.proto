@@ -1,0 +1,29 @@
+// Generated from sql/. Do not edit by hand.
+// SOURCE: medication_reconciliation_information_source
+
+syntax = "proto3";
+
+package form_examples.medication_reconciliation;
+
+enum MedicationReconciliationInformationSourceSourceTypeEnum {
+  SOURCETYPE_UNSPECIFIED = 0;
+  SOURCETYPE_PATIENT_INTERVIEW = 1;  // patient-interview
+  SOURCETYPE_CARER_INTERVIEW = 2;  // carer-interview
+  SOURCETYPE_GP_RECORD = 3;  // gp-record
+  SOURCETYPE_REPEAT_PRESCRIPTION = 4;  // repeat-prescription
+  SOURCETYPE_COMMUNITY_PHARMACY = 5;  // community-pharmacy
+  SOURCETYPE_DISPENSING_HISTORY = 6;  // dispensing-history
+  SOURCETYPE_PREVIOUS_DISCHARGE_SUMMARY = 7;  // previous-discharge-summary
+  SOURCETYPE_OWN_DRUGS_BAG = 8;  // own-drugs-bag
+  SOURCETYPE_CARE_HOME_MAR = 9;  // care-home-mar
+}
+
+message MedicationReconciliationInformationSource {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string medication_reconciliation_id = 5;  // UUID — uuid
+  MedicationReconciliationInformationSourceSourceTypeEnum source_type = 6;  // VARCHAR(30)
+  bool verified = 7;  // BOOLEAN
+}

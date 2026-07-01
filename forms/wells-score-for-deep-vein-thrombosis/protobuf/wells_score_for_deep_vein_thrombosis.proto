@@ -1,0 +1,124 @@
+// Generated from sql/. Do not edit by hand.
+// SOURCE: wells_score_for_deep_vein_thrombosis
+
+syntax = "proto3";
+
+package form_examples.wells_score_for_deep_vein_thrombosis;
+
+enum WellsScoreForDeepVeinThrombosisStatusEnum {
+  STATUS_UNSPECIFIED = 0;
+  STATUS_DRAFT = 1;  // draft
+  STATUS_SUBMITTED = 2;  // submitted
+  STATUS_AMENDED = 3;  // amended
+  STATUS_SIGNED = 4;  // signed
+}
+
+enum WellsScoreForDeepVeinThrombosisCareSettingEnum {
+  CARESETTING_UNSPECIFIED = 0;
+  CARESETTING_EMERGENCY_DEPARTMENT = 1;  // emergency-department
+  CARESETTING_AMBULATORY = 2;  // ambulatory
+  CARESETTING_ACUTE_MEDICAL_UNIT = 3;  // acute-medical-unit
+  CARESETTING_DVT_CLINIC = 4;  // dvt-clinic
+  CARESETTING_OTHER = 5;  // other
+}
+
+enum WellsScoreForDeepVeinThrombosisAgeBandEnum {
+  AGEBAND_UNSPECIFIED = 0;
+  AGEBAND_V_18_39 = 1;  // 18-39
+  AGEBAND_V_40_64 = 2;  // 40-64
+  AGEBAND_V_65_74 = 3;  // 65-74
+  AGEBAND_V_75_84 = 4;  // 75-84
+  AGEBAND_V_85_PLUS = 5;  // 85-plus
+}
+
+enum WellsScoreForDeepVeinThrombosisSymptomaticLegEnum {
+  SYMPTOMATICLEG_UNSPECIFIED = 0;
+  SYMPTOMATICLEG_LEFT = 1;  // left
+  SYMPTOMATICLEG_RIGHT = 2;  // right
+}
+
+enum WellsScoreForDeepVeinThrombosisActiveCancerEnum {
+  ACTIVECANCER_UNSPECIFIED = 0;
+  ACTIVECANCER_YES = 1;  // yes
+  ACTIVECANCER_NO = 2;  // no
+}
+
+enum WellsScoreForDeepVeinThrombosisParalysisOrImmobilisationEnum {
+  PARALYSISORIMMOBILISATION_UNSPECIFIED = 0;
+  PARALYSISORIMMOBILISATION_YES = 1;  // yes
+  PARALYSISORIMMOBILISATION_NO = 2;  // no
+}
+
+enum WellsScoreForDeepVeinThrombosisRecentlyBedriddenOrSurgeryEnum {
+  RECENTLYBEDRIDDENORSURGERY_UNSPECIFIED = 0;
+  RECENTLYBEDRIDDENORSURGERY_YES = 1;  // yes
+  RECENTLYBEDRIDDENORSURGERY_NO = 2;  // no
+}
+
+enum WellsScoreForDeepVeinThrombosisLocalisedTendernessEnum {
+  LOCALISEDTENDERNESS_UNSPECIFIED = 0;
+  LOCALISEDTENDERNESS_YES = 1;  // yes
+  LOCALISEDTENDERNESS_NO = 2;  // no
+}
+
+enum WellsScoreForDeepVeinThrombosisEntireLegSwollenEnum {
+  ENTIRELEGSWOLLEN_UNSPECIFIED = 0;
+  ENTIRELEGSWOLLEN_YES = 1;  // yes
+  ENTIRELEGSWOLLEN_NO = 2;  // no
+}
+
+enum WellsScoreForDeepVeinThrombosisCalfSwellingOver3cmEnum {
+  CALFSWELLINGOVER3CM_UNSPECIFIED = 0;
+  CALFSWELLINGOVER3CM_YES = 1;  // yes
+  CALFSWELLINGOVER3CM_NO = 2;  // no
+}
+
+enum WellsScoreForDeepVeinThrombosisPittingOedemaEnum {
+  PITTINGOEDEMA_UNSPECIFIED = 0;
+  PITTINGOEDEMA_YES = 1;  // yes
+  PITTINGOEDEMA_NO = 2;  // no
+}
+
+enum WellsScoreForDeepVeinThrombosisCollateralSuperficialVeinsEnum {
+  COLLATERALSUPERFICIALVEINS_UNSPECIFIED = 0;
+  COLLATERALSUPERFICIALVEINS_YES = 1;  // yes
+  COLLATERALSUPERFICIALVEINS_NO = 2;  // no
+}
+
+enum WellsScoreForDeepVeinThrombosisPreviouslyDocumentedDvtEnum {
+  PREVIOUSLYDOCUMENTEDDVT_UNSPECIFIED = 0;
+  PREVIOUSLYDOCUMENTEDDVT_YES = 1;  // yes
+  PREVIOUSLYDOCUMENTEDDVT_NO = 2;  // no
+}
+
+enum WellsScoreForDeepVeinThrombosisAlternativeDiagnosisAsLikelyEnum {
+  ALTERNATIVEDIAGNOSISASLIKELY_UNSPECIFIED = 0;
+  ALTERNATIVEDIAGNOSISASLIKELY_YES = 1;  // yes
+  ALTERNATIVEDIAGNOSISASLIKELY_NO = 2;  // no
+}
+
+message WellsScoreForDeepVeinThrombosis {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string patient_id = 5;  // UUID — uuid
+  string clinician_id = 6;  // UUID — uuid
+  WellsScoreForDeepVeinThrombosisStatusEnum status = 7;  // VARCHAR(20)
+  string patient_identifier = 8;  // VARCHAR(64) — max 64 chars
+  string assessed_at = 9;  // TIMESTAMPTZ — iso 8601
+  WellsScoreForDeepVeinThrombosisCareSettingEnum care_setting = 10;  // VARCHAR(30)
+  WellsScoreForDeepVeinThrombosisAgeBandEnum age_band = 11;  // VARCHAR(10)
+  WellsScoreForDeepVeinThrombosisSymptomaticLegEnum symptomatic_leg = 12;  // VARCHAR(10)
+  WellsScoreForDeepVeinThrombosisActiveCancerEnum active_cancer = 13;  // VARCHAR(5)
+  WellsScoreForDeepVeinThrombosisParalysisOrImmobilisationEnum paralysis_or_immobilisation = 14;  // VARCHAR(5)
+  WellsScoreForDeepVeinThrombosisRecentlyBedriddenOrSurgeryEnum recently_bedridden_or_surgery = 15;  // VARCHAR(5)
+  WellsScoreForDeepVeinThrombosisLocalisedTendernessEnum localised_tenderness = 16;  // VARCHAR(5)
+  WellsScoreForDeepVeinThrombosisEntireLegSwollenEnum entire_leg_swollen = 17;  // VARCHAR(5)
+  WellsScoreForDeepVeinThrombosisCalfSwellingOver3cmEnum calf_swelling_over_3cm = 18;  // VARCHAR(5)
+  WellsScoreForDeepVeinThrombosisPittingOedemaEnum pitting_oedema = 19;  // VARCHAR(5)
+  WellsScoreForDeepVeinThrombosisCollateralSuperficialVeinsEnum collateral_superficial_veins = 20;  // VARCHAR(5)
+  WellsScoreForDeepVeinThrombosisPreviouslyDocumentedDvtEnum previously_documented_dvt = 21;  // VARCHAR(5)
+  WellsScoreForDeepVeinThrombosisAlternativeDiagnosisAsLikelyEnum alternative_diagnosis_as_likely = 22;  // VARCHAR(5)
+  string clinical_notes = 23;  // TEXT
+}

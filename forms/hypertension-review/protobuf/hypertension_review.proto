@@ -1,0 +1,146 @@
+// Generated from sql/. Do not edit by hand.
+// SOURCE: hypertension_review
+
+syntax = "proto3";
+
+package form_examples.hypertension_review;
+
+enum HypertensionReviewClinicianRoleEnum {
+  CLINICIANROLE_UNSPECIFIED = 0;
+  CLINICIANROLE_GP = 1;  // gp
+  CLINICIANROLE_PRACTICE_NURSE = 2;  // practice-nurse
+  CLINICIANROLE_PHARMACIST = 3;  // pharmacist
+  CLINICIANROLE_OTHER = 4;  // other
+}
+
+enum HypertensionReviewAgeBandEnum {
+  AGEBAND_UNSPECIFIED = 0;
+  AGEBAND_V_18_39 = 1;  // 18-39
+  AGEBAND_V_40_59 = 2;  // 40-59
+  AGEBAND_V_60_79 = 3;  // 60-79
+  AGEBAND_V_80 = 4;  // >=80
+}
+
+enum HypertensionReviewSexEnum {
+  SEX_UNSPECIFIED = 0;
+  SEX_FEMALE = 1;  // female
+  SEX_MALE = 2;  // male
+  SEX_INTERSEX = 3;  // intersex
+  SEX_UNKNOWN = 4;  // unknown
+}
+
+enum HypertensionReviewEthnicityEnum {
+  ETHNICITY_UNSPECIFIED = 0;
+  ETHNICITY_WHITE = 1;  // white
+  ETHNICITY_BLACK_AFRICAN_CARIBBEAN = 2;  // black-african-caribbean
+  ETHNICITY_SOUTH_ASIAN = 3;  // south-asian
+  ETHNICITY_MIXED = 4;  // mixed
+  ETHNICITY_OTHER = 5;  // other
+}
+
+enum HypertensionReviewType2DiabetesEnum {
+  TYPE2DIABETES_UNSPECIFIED = 0;
+  TYPE2DIABETES_YES = 1;  // yes
+  TYPE2DIABETES_NO = 2;  // no
+}
+
+enum HypertensionReviewChronicKidneyDiseaseEnum {
+  CHRONICKIDNEYDISEASE_UNSPECIFIED = 0;
+  CHRONICKIDNEYDISEASE_YES = 1;  // yes
+  CHRONICKIDNEYDISEASE_NO = 2;  // no
+}
+
+enum HypertensionReviewEstablishedCvdEnum {
+  ESTABLISHEDCVD_UNSPECIFIED = 0;
+  ESTABLISHEDCVD_YES = 1;  // yes
+  ESTABLISHEDCVD_NO = 2;  // no
+}
+
+enum HypertensionReviewAtrialFibrillationEnum {
+  ATRIALFIBRILLATION_UNSPECIFIED = 0;
+  ATRIALFIBRILLATION_YES = 1;  // yes
+  ATRIALFIBRILLATION_NO = 2;  // no
+}
+
+enum HypertensionReviewMonitoringMethodEnum {
+  MONITORINGMETHOD_UNSPECIFIED = 0;
+  MONITORINGMETHOD_CLINIC_ONLY = 1;  // clinic-only
+  MONITORINGMETHOD_HBPM = 2;  // hbpm
+  MONITORINGMETHOD_ABPM = 3;  // abpm
+}
+
+enum HypertensionReviewPosturalDropEnum {
+  POSTURALDROP_UNSPECIFIED = 0;
+  POSTURALDROP_YES = 1;  // yes
+  POSTURALDROP_NO = 2;  // no
+}
+
+enum HypertensionReviewAdherenceEnum {
+  ADHERENCE_UNSPECIFIED = 0;
+  ADHERENCE_GOOD = 1;  // good
+  ADHERENCE_PARTIAL = 2;  // partial
+  ADHERENCE_POOR = 3;  // poor
+}
+
+enum HypertensionReviewSideEffectsEnum {
+  SIDEEFFECTS_UNSPECIFIED = 0;
+  SIDEEFFECTS_YES = 1;  // yes
+  SIDEEFFECTS_NO = 2;  // no
+}
+
+enum HypertensionReviewSmokingStatusEnum {
+  SMOKINGSTATUS_UNSPECIFIED = 0;
+  SMOKINGSTATUS_NEVER = 1;  // never
+  SMOKINGSTATUS_EX = 2;  // ex
+  SMOKINGSTATUS_CURRENT = 3;  // current
+}
+
+enum HypertensionReviewStatinTherapyEnum {
+  STATINTHERAPY_UNSPECIFIED = 0;
+  STATINTHERAPY_YES = 1;  // yes
+  STATINTHERAPY_NO = 2;  // no
+}
+
+message HypertensionReview {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string patient_id = 5;  // UUID — uuid
+  string clinician_id = 6;  // UUID — uuid
+  HypertensionReviewClinicianRoleEnum clinician_role = 7;  // VARCHAR(20)
+  string reviewed_at = 8;  // DATE — iso 8601 date
+  string practice_site = 9;  // VARCHAR(200) — max 200 chars
+  string patient_identifier = 10;  // VARCHAR(100) — max 100 chars
+  HypertensionReviewAgeBandEnum age_band = 11;  // VARCHAR(10)
+  HypertensionReviewSexEnum sex = 12;  // VARCHAR(20)
+  HypertensionReviewEthnicityEnum ethnicity = 13;  // VARCHAR(30)
+  string diagnosis_date = 14;  // DATE — iso 8601 date
+  HypertensionReviewType2DiabetesEnum type2_diabetes = 15;  // VARCHAR(5)
+  HypertensionReviewChronicKidneyDiseaseEnum chronic_kidney_disease = 16;  // VARCHAR(5)
+  HypertensionReviewEstablishedCvdEnum established_cvd = 17;  // VARCHAR(5)
+  HypertensionReviewAtrialFibrillationEnum atrial_fibrillation = 18;  // VARCHAR(5)
+  int32 clinic_systolic = 19;  // INTEGER
+  int32 clinic_diastolic = 20;  // INTEGER
+  int32 home_systolic = 21;  // INTEGER
+  int32 home_diastolic = 22;  // INTEGER
+  HypertensionReviewMonitoringMethodEnum monitoring_method = 23;  // VARCHAR(15)
+  HypertensionReviewPosturalDropEnum postural_drop = 24;  // VARCHAR(5)
+  int32 antihypertensive_agents = 25;  // INTEGER
+  HypertensionReviewAdherenceEnum adherence = 26;  // VARCHAR(10)
+  HypertensionReviewSideEffectsEnum side_effects = 27;  // VARCHAR(5)
+  double qrisk_percent = 28;  // NUMERIC(4,1) — numeric(4,1)
+  HypertensionReviewSmokingStatusEnum smoking_status = 29;  // VARCHAR(10)
+  HypertensionReviewStatinTherapyEnum statin_therapy = 30;  // VARCHAR(5)
+  double bmi = 31;  // NUMERIC(4,1) — numeric(4,1)
+  string lifestyle_advice = 32;  // TEXT
+  double serum_creatinine = 33;  // NUMERIC(5,1) — numeric(5,1)
+  double egfr = 34;  // NUMERIC(5,1) — numeric(5,1)
+  double serum_potassium = 35;  // NUMERIC(3,1) — numeric(3,1)
+  double hba1c = 36;  // NUMERIC(4,1) — numeric(4,1)
+  double total_cholesterol = 37;  // NUMERIC(3,1) — numeric(3,1)
+  double hdl_cholesterol = 38;  // NUMERIC(3,1) — numeric(3,1)
+  double urine_acr = 39;  // NUMERIC(6,1) — numeric(6,1)
+  string complications = 40;  // TEXT
+  string review_context = 41;  // TEXT
+}

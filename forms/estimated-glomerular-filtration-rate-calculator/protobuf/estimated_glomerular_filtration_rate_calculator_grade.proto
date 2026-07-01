@@ -1,0 +1,29 @@
+// Generated from sql/. Do not edit by hand.
+// SOURCE: estimated_glomerular_filtration_rate_calculator_grade
+
+syntax = "proto3";
+
+package form_examples.estimated_glomerular_filtration_rate_calculator;
+
+enum EstimatedGlomerularFiltrationRateCalculatorGradeGStageEnum {
+  GSTAGE_UNSPECIFIED = 0;
+  GSTAGE_G1 = 1;  // G1
+  GSTAGE_G2 = 2;  // G2
+  GSTAGE_G3A = 3;  // G3a
+  GSTAGE_G3B = 4;  // G3b
+  GSTAGE_G4 = 5;  // G4
+  GSTAGE_G5 = 6;  // G5
+}
+
+message EstimatedGlomerularFiltrationRateCalculatorGrade {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string estimated_glomerular_filtration_rate_calculator_id = 5;  // UUID — uuid
+  double serum_creatinine_mg_dl = 6;  // NUMERIC(6,3) — numeric(6,3)
+  double egfr_ml_min_1_73m2 = 7;  // NUMERIC(6,1) — numeric(6,1)
+  EstimatedGlomerularFiltrationRateCalculatorGradeGStageEnum g_stage = 8;  // VARCHAR(3)
+  string g_stage_label = 9;  // VARCHAR(60) — max 60 chars
+  string graded_at = 10;  // TIMESTAMPTZ — iso 8601
+}

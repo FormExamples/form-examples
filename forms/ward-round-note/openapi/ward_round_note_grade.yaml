@@ -1,0 +1,213 @@
+# Generated from sql/. Do not edit by hand.
+# SOURCE: ward_round_note_grade
+openapi: 3.1.0
+info:
+  title: Ward Round Note — WardRoundNoteGrade
+  version: 1.0.0
+  description: "Computed documentation-completeness grading result for a ward-round note: status (complete/partial/incomplete), completeness percentage over the eight required components, and per-component presence flags."
+paths:
+  /ward-round-note-grades:
+    get:
+      summary: List WardRoundNoteGrade records
+      operationId: listWardRoundNoteGrade
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of WardRoundNoteGrade records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/WardRoundNoteGrade"
+    post:
+      summary: Create a new WardRoundNoteGrade
+      operationId: createWardRoundNoteGrade
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/WardRoundNoteGrade"
+      responses:
+        "201":
+          description: The newly created WardRoundNoteGrade
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/WardRoundNoteGrade"
+        "400":
+          description: Validation error
+  /ward-round-note-grades/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one WardRoundNoteGrade by id
+      operationId: getWardRoundNoteGrade
+      responses:
+        "200":
+          description: The requested WardRoundNoteGrade
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/WardRoundNoteGrade"
+        "404":
+          description: WardRoundNoteGrade not found
+    patch:
+      summary: Update an existing WardRoundNoteGrade
+      operationId: updateWardRoundNoteGrade
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/WardRoundNoteGrade"
+      responses:
+        "200":
+          description: The updated WardRoundNoteGrade
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/WardRoundNoteGrade"
+        "404":
+          description: WardRoundNoteGrade not found
+    delete:
+      summary: Soft-delete a WardRoundNoteGrade
+      operationId: deleteWardRoundNoteGrade
+      responses:
+        "204":
+          description: WardRoundNoteGrade deleted
+        "404":
+          description: WardRoundNoteGrade not found
+components:
+  schemas:
+    WardRoundNoteGrade:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was most recently updated.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was soft-deleted.
+        ward_round_note_id:
+          type: string
+          format: uuid
+          description: Foreign key to the parent ward-round note (unique, 1:1).
+        status:
+          type: string
+          enum:
+            - complete
+            - partial
+            - incomplete
+            - ""
+          description: "Completeness status: complete, partial, or incomplete."
+        completeness_percent:
+          type: integer
+          format: int32
+          description: "Completeness percentage (0..100): documented required components / 8 x 100."
+        header_documented:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Whether the header component is documented (yes/no).
+        problems_documented:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Whether the problems component is documented (yes/no).
+        examination_documented:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Whether the examination component is documented (yes/no).
+        investigations_documented:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Whether the investigations component is documented (yes/no).
+        vte_documented:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Whether the VTE component is documented (yes/no).
+        medication_documented:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Whether the medication component is documented (yes/no).
+        plan_documented:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Whether the plan component is documented (yes/no).
+        escalation_documented:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Whether the escalation component is documented (yes/no).
+        graded_at:
+          type: string
+          format: date-time
+          description: Timestamp when the engine last computed the grade.
+      required:
+        - created_at
+        - updated_at
+        - ward_round_note_id
+        - status
+        - header_documented
+        - problems_documented
+        - examination_documented
+        - investigations_documented
+        - vte_documented
+        - medication_documented
+        - plan_documented
+        - escalation_documented
+        - graded_at
+      description: "Computed documentation-completeness grading result for a ward-round note: status (complete/partial/incomplete), completeness percentage over the eight required components, and per-component presence flags."

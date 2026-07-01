@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE qrisk3_cardiovascular_disease_risk_score SYSTEM "qrisk3_cardiovascular_disease_risk_score.dtd">
+<qrisk3_cardiovascular_disease_risk_score>
+<id>770e8400-e29b-41d4-a716-446655440002</id>
+<created_at>2026-04-09T10:00:00Z</created_at>
+<updated_at>2026-04-09T10:00:00Z</updated_at>
+<deleted_at>2026-04-09T10:00:00Z</deleted_at>
+<patient_id>550e8400-e29b-41d4-a716-446655440000</patient_id>
+<clinician_id>660e8400-e29b-41d4-a716-446655440001</clinician_id>
+<clinician_name>Example</clinician_name>
+<clinician_role>gp</clinician_role>
+<assessed_at>2026-04-09T10:00:00Z</assessed_at>
+<care_setting>general-practice</care_setting>
+<patient_identifier></patient_identifier>
+<age>0.0</age>
+<sex>female</sex>
+<ethnicity>white-or-not-stated</ethnicity>
+<townsend_score>5.0</townsend_score>
+<postcode>SW1A 1AA</postcode>
+<smoking_status>non</smoking_status>
+<body_mass_index>0.0</body_mass_index>
+<diabetes_status>none</diabetes_status>
+<cholesterol_hdl_ratio>1.5</cholesterol_hdl_ratio>
+<systolic_blood_pressure>120.0</systolic_blood_pressure>
+<systolic_blood_pressure_sd>120.0</systolic_blood_pressure_sd>
+<on_blood_pressure_treatment>yes</on_blood_pressure_treatment>
+<family_history_chd>yes</family_history_chd>
+<atrial_fibrillation>yes</atrial_fibrillation>
+<chronic_kidney_disease_stage>none</chronic_kidney_disease_stage>
+<migraine>yes</migraine>
+<rheumatoid_arthritis>yes</rheumatoid_arthritis>
+<systemic_lupus_erythematosus>yes</systemic_lupus_erythematosus>
+<severe_mental_illness>yes</severe_mental_illness>
+<erectile_dysfunction>yes</erectile_dysfunction>
+<on_atypical_antipsychotics>yes</on_atypical_antipsychotics>
+<on_corticosteroids>yes</on_corticosteroids>
+<has_established_cvd>yes</has_established_cvd>
+<has_familial_hypercholesterolaemia>yes</has_familial_hypercholesterolaemia>
+<clinical_note>Example Hospital</clinical_note>
+</qrisk3_cardiovascular_disease_risk_score>

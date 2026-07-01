@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE toxicology_test_result SYSTEM "toxicology_test_result.dtd">
+<toxicology_test_result>
+<id>770e8400-e29b-41d4-a716-446655440002</id>
+<created_at>2026-04-09T10:00:00Z</created_at>
+<updated_at>2026-04-09T10:00:00Z</updated_at>
+<deleted_at>2026-04-09T10:00:00Z</deleted_at>
+<patient_id>550e8400-e29b-41d4-a716-446655440000</patient_id>
+<clinician_id>660e8400-e29b-41d4-a716-446655440001</clinician_id>
+<originating_request_reference></originating_request_reference>
+<report_status>preliminary</report_status>
+<performed_date>2026-01-15</performed_date>
+<reported_date>2026-01-15</reported_date>
+<specimen_condition>satisfactory</specimen_condition>
+<clinical_history>Example text.</clinical_history>
+<suspected_agent></suspected_agent>
+<time_since_ingestion_hours>0.0</time_since_ingestion_hours>
+<paracetamol_level_mg_l>5.0</paracetamol_level_mg_l>
+<salicylate_level_mg_l>5.0</salicylate_level_mg_l>
+<ethanol_level>5.0</ethanol_level>
+<lithium_level_mmol_l>5.0</lithium_level_mmol_l>
+<digoxin_level>5.0</digoxin_level>
+<carboxyhaemoglobin_percent>50.0</carboxyhaemoglobin_percent>
+<drugs_of_abuse_screen>Paracetamol</drugs_of_abuse_screen>
+<specific_drug_level>Paracetamol</specific_drug_level>
+<paracetamol_nomogram>above-treatment-line</paracetamol_nomogram>
+<overall_result_status>normal</overall_result_status>
+<toxic_level_present>true</toxic_level_present>
+<findings_narrative>Example text.</findings_narrative>
+<impression>Example text.</impression>
+<reporting_category>General</reporting_category>
+<recommended_follow_up></recommended_follow_up>
+<critical_result_communicated>true</critical_result_communicated>
+<reported_to></reported_to>
+</toxicology_test_result>

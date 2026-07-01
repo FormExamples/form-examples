@@ -1,0 +1,384 @@
+# Generated from sql/. Do not edit by hand.
+# SOURCE: chronic_obstructive_pulmonary_disease_review
+openapi: 3.1.0
+info:
+  title: Chronic Obstructive Pulmonary Disease Review — ChronicObstructivePulmonaryDiseaseReview
+  version: 1.0.0
+  description: "Main COPD annual-review record (NICE NG115, GOLD 2023+): patient and clinician identification, review context, diagnosis and exposure history, post-bronchodilator spirometry, symptom burden (MRC / mMRC / CAT), exacerbation history, smoking and cessation, inhaler therapy, technique and adherence, vaccinations, pulmonary rehabilitation, oxygen, comorbidities, and self-management plan. The computed GOLD airflow grade, ABE group, review-completeness grade, fired rules, and flags live in child tables."
+paths:
+  /chronic-obstructive-pulmonary-disease-reviews:
+    get:
+      summary: List ChronicObstructivePulmonaryDiseaseReview records
+      operationId: listChronicObstructivePulmonaryDiseaseReview
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of ChronicObstructivePulmonaryDiseaseReview records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/ChronicObstructivePulmonaryDiseaseReview"
+    post:
+      summary: Create a new ChronicObstructivePulmonaryDiseaseReview
+      operationId: createChronicObstructivePulmonaryDiseaseReview
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ChronicObstructivePulmonaryDiseaseReview"
+      responses:
+        "201":
+          description: The newly created ChronicObstructivePulmonaryDiseaseReview
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ChronicObstructivePulmonaryDiseaseReview"
+        "400":
+          description: Validation error
+  /chronic-obstructive-pulmonary-disease-reviews/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one ChronicObstructivePulmonaryDiseaseReview by id
+      operationId: getChronicObstructivePulmonaryDiseaseReview
+      responses:
+        "200":
+          description: The requested ChronicObstructivePulmonaryDiseaseReview
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ChronicObstructivePulmonaryDiseaseReview"
+        "404":
+          description: ChronicObstructivePulmonaryDiseaseReview not found
+    patch:
+      summary: Update an existing ChronicObstructivePulmonaryDiseaseReview
+      operationId: updateChronicObstructivePulmonaryDiseaseReview
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ChronicObstructivePulmonaryDiseaseReview"
+      responses:
+        "200":
+          description: The updated ChronicObstructivePulmonaryDiseaseReview
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ChronicObstructivePulmonaryDiseaseReview"
+        "404":
+          description: ChronicObstructivePulmonaryDiseaseReview not found
+    delete:
+      summary: Soft-delete a ChronicObstructivePulmonaryDiseaseReview
+      operationId: deleteChronicObstructivePulmonaryDiseaseReview
+      responses:
+        "204":
+          description: ChronicObstructivePulmonaryDiseaseReview deleted
+        "404":
+          description: ChronicObstructivePulmonaryDiseaseReview not found
+components:
+  schemas:
+    ChronicObstructivePulmonaryDiseaseReview:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was updated most-recently.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was deleted a.k.a. soft-removed.
+        patient_id:
+          type: string
+          format: uuid
+          description: Foreign key to the patient this review documents (restrict delete).
+        clinician_id:
+          type: string
+          format: uuid
+          description: Foreign key to the reviewing clinician (restrict delete); optional.
+        clinician_name:
+          type: string
+          description: Name of the reviewing clinician as recorded on the review.
+        clinician_role:
+          type: string
+          enum:
+            - gp
+            - practice-nurse
+            - respiratory-nurse
+            - pharmacist
+            - other
+            - ""
+          description: "Reviewing clinician role: gp, practice-nurse, respiratory-nurse, pharmacist, or other."
+        reviewed_at:
+          type: string
+          format: date
+          description: Date the annual review was conducted.
+        review_type:
+          type: string
+          enum:
+            - routine-annual
+            - post-exacerbation
+            - opportunistic
+            - ""
+          description: "Type of review: routine-annual, post-exacerbation, or opportunistic."
+        patient_identifier:
+          type: string
+          maxLength: 100
+          description: NHS number or local patient identifier as recorded on the review.
+        age_band:
+          type: string
+          enum:
+            - 18-39
+            - 40-59
+            - 60-79
+            - >=80
+            - ""
+          description: "Adult age band: 18-39, 40-59, 60-79, or >=80."
+        sex:
+          type: string
+          enum:
+            - female
+            - male
+            - intersex
+            - unknown
+            - ""
+          description: "Patient sex: female, male, intersex, or unknown."
+        diagnosis_year:
+          type: integer
+          format: int32
+          description: Year the COPD diagnosis was made.
+        spirometry_confirmed:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Whether the COPD diagnosis was confirmed on spirometry (yes/no).
+        exposure_notes:
+          type: string
+          description: Free-text record of occupational or environmental exposures.
+        fev1_litres:
+          type: number
+          format: double
+          description: Post-bronchodilator FEV1 in litres.
+        fev1_percent_predicted:
+          type: number
+          format: double
+          description: Post-bronchodilator FEV1 as a percentage of predicted; drives the GOLD airflow-limitation grade.
+        fvc_litres:
+          type: number
+          format: double
+          description: Forced vital capacity (FVC) in litres.
+        fev1_fvc_ratio:
+          type: number
+          format: double
+          description: FEV1/FVC ratio; airflow obstruction is confirmed when < 0.70.
+        spirometry_date:
+          type: string
+          format: date
+          description: Date the spirometry was performed.
+        mrc_grade:
+          type: integer
+          format: int32
+          description: MRC dyspnoea grade (1-5); >= 3 is a pulmonary-rehabilitation trigger.
+        mmrc_grade:
+          type: integer
+          format: int32
+          description: mMRC dyspnoea grade (0-4); >= 2 drives the high symptom axis.
+        cat_score:
+          type: integer
+          format: int32
+          description: COPD Assessment Test (CAT) total (0-40); >= 10 drives the high symptom axis.
+        exacerbations_last_12m:
+          type: integer
+          format: int32
+          description: Count of moderate exacerbations in the past 12 months; >= 2 drives high exacerbation risk.
+        hospitalisations_last_12m:
+          type: integer
+          format: int32
+          description: Count of exacerbations needing hospital admission in the past 12 months; >= 1 drives high exacerbation risk.
+        last_exacerbation_date:
+          type: string
+          format: date
+          description: Date of the most recent exacerbation.
+        rescue_pack_courses:
+          type: integer
+          format: int32
+          description: Count of rescue-pack courses used in the past 12 months.
+        smoking_status:
+          type: string
+          enum:
+            - current
+            - ex
+            - never
+            - ""
+          description: "Smoking status: current, ex, or never."
+        pack_years:
+          type: number
+          format: double
+          description: Cumulative smoking exposure in pack-years.
+        cessation_support_offered:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Whether brief advice or a stop-smoking referral was offered (yes/no).
+        inhaled_therapy:
+          type: string
+          description: Free-text record of the current SABA/LABA/LAMA/ICS inhaled regimen.
+        device_type:
+          type: string
+          description: Free-text record of the inhaler device(s) in use.
+        inhaler_technique_checked:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Whether inhaler technique was checked this review (yes/no).
+        inhaler_technique_adequate:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Whether inhaler technique was assessed as adequate (yes/no).
+        adherence:
+          type: string
+          enum:
+            - good
+            - partial
+            - poor
+            - ""
+          description: "Self-reported medication adherence: good, partial, or poor."
+        influenza_vaccine:
+          type: string
+          enum:
+            - up-to-date
+            - due
+            - declined
+            - ""
+          description: "Influenza vaccination status: up-to-date, due, or declined."
+        pneumococcal_vaccine:
+          type: string
+          enum:
+            - up-to-date
+            - due
+            - declined
+            - ""
+          description: "Pneumococcal vaccination status: up-to-date, due, or declined."
+        covid_vaccine:
+          type: string
+          enum:
+            - up-to-date
+            - due
+            - declined
+            - ""
+          description: "COVID-19 vaccination status: up-to-date, due, or declined."
+        pulmonary_rehab_status:
+          type: string
+          enum:
+            - completed
+            - referred
+            - eligible-not-referred
+            - not-indicated
+            - ""
+          description: "Pulmonary-rehabilitation status: completed, referred, eligible-not-referred, or not-indicated."
+        oxygen_use:
+          type: string
+          enum:
+            - none
+            - long-term
+            - ambulatory
+            - ""
+          description: "Home-oxygen use: none, long-term, or ambulatory."
+        resting_spo2:
+          type: integer
+          format: int32
+          description: Resting oxygen saturation (SpO2) on room air, as a percentage.
+        comorbidities:
+          type: string
+          description: Free-text record of recorded comorbidities.
+        self_management_plan:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Whether a personalised self-management plan is in place (yes/no).
+        rescue_pack_supplied:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Whether a rescue pack was supplied (yes/no).
+        next_review_interval:
+          type: string
+          description: Free-text interval (months) to the next scheduled review.
+        clinician_note:
+          type: string
+          description: Free-text clinician summary shown in the report.
+      required:
+        - created_at
+        - updated_at
+        - patient_id
+        - clinician_name
+        - clinician_role
+        - review_type
+        - patient_identifier
+        - age_band
+        - sex
+        - spirometry_confirmed
+        - exposure_notes
+        - smoking_status
+        - cessation_support_offered
+        - inhaled_therapy
+        - device_type
+        - inhaler_technique_checked
+        - inhaler_technique_adequate
+        - adherence
+        - influenza_vaccine
+        - pneumococcal_vaccine
+        - covid_vaccine
+        - pulmonary_rehab_status
+        - oxygen_use
+        - comorbidities
+        - self_management_plan
+        - rescue_pack_supplied
+        - next_review_interval
+        - clinician_note
+      description: "Main COPD annual-review record (NICE NG115, GOLD 2023+): patient and clinician identification, review context, diagnosis and exposure history, post-bronchodilator spirometry, symptom burden (MRC / mMRC / CAT), exacerbation history, smoking and cessation, inhaler therapy, technique and adherence, vaccinations, pulmonary rehabilitation, oxygen, comorbidities, and self-management plan. The computed GOLD airflow grade, ABE group, review-completeness grade, fired rules, and flags live in child tables."

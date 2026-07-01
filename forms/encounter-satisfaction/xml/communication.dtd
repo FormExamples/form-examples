@@ -1,10 +1,10 @@
-<!ELEMENT communication (id,created_at,updated_at,deleted_at,encounter_satisfaction_id,NULL,explaining_condition,answering_questions,time_spent)>
+<!ELEMENT communication (id,created_at,updated_at,deleted_at,encounter_satisfaction_id,listening,explaining_condition,answering_questions,time_spent)>
 <!ELEMENT id (#PCDATA)>
 <!ELEMENT created_at (#PCDATA)>
 <!ELEMENT updated_at (#PCDATA)>
 <!ELEMENT deleted_at (#PCDATA)>
 <!ELEMENT encounter_satisfaction_id (#PCDATA)>
-<!ELEMENT NULL (#PCDATA)>
+<!ELEMENT listening (#PCDATA)>
 <!ELEMENT explaining_condition (#PCDATA)>
 <!ELEMENT answering_questions (#PCDATA)>
 <!ELEMENT time_spent (#PCDATA)>

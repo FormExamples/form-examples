@@ -1,0 +1,174 @@
+# Generated from sql/. Do not edit by hand.
+# SOURCE: rockall_score_for_upper_gastrointestinal_bleeding_grade
+openapi: 3.1.0
+info:
+  title: Rockall Score For Upper Gastrointestinal Bleeding — RockallScoreForUpperGastrointestinalBleedingGrade
+  version: 1.0.0
+  description: "Computed Rockall grading result: per-parameter points, the pre-endoscopy clinical score (0-7), the full post-endoscopy score (0-11 or null), and the derived risk band."
+paths:
+  /rockall-score-for-upper-gastrointestinal-bleeding-grades:
+    get:
+      summary: List RockallScoreForUpperGastrointestinalBleedingGrade records
+      operationId: listRockallScoreForUpperGastrointestinalBleedingGrade
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of RockallScoreForUpperGastrointestinalBleedingGrade records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/RockallScoreForUpperGastrointestinalBleedingGrade"
+    post:
+      summary: Create a new RockallScoreForUpperGastrointestinalBleedingGrade
+      operationId: createRockallScoreForUpperGastrointestinalBleedingGrade
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/RockallScoreForUpperGastrointestinalBleedingGrade"
+      responses:
+        "201":
+          description: The newly created RockallScoreForUpperGastrointestinalBleedingGrade
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/RockallScoreForUpperGastrointestinalBleedingGrade"
+        "400":
+          description: Validation error
+  /rockall-score-for-upper-gastrointestinal-bleeding-grades/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one RockallScoreForUpperGastrointestinalBleedingGrade by id
+      operationId: getRockallScoreForUpperGastrointestinalBleedingGrade
+      responses:
+        "200":
+          description: The requested RockallScoreForUpperGastrointestinalBleedingGrade
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/RockallScoreForUpperGastrointestinalBleedingGrade"
+        "404":
+          description: RockallScoreForUpperGastrointestinalBleedingGrade not found
+    patch:
+      summary: Update an existing RockallScoreForUpperGastrointestinalBleedingGrade
+      operationId: updateRockallScoreForUpperGastrointestinalBleedingGrade
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/RockallScoreForUpperGastrointestinalBleedingGrade"
+      responses:
+        "200":
+          description: The updated RockallScoreForUpperGastrointestinalBleedingGrade
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/RockallScoreForUpperGastrointestinalBleedingGrade"
+        "404":
+          description: RockallScoreForUpperGastrointestinalBleedingGrade not found
+    delete:
+      summary: Soft-delete a RockallScoreForUpperGastrointestinalBleedingGrade
+      operationId: deleteRockallScoreForUpperGastrointestinalBleedingGrade
+      responses:
+        "204":
+          description: RockallScoreForUpperGastrointestinalBleedingGrade deleted
+        "404":
+          description: RockallScoreForUpperGastrointestinalBleedingGrade not found
+components:
+  schemas:
+    RockallScoreForUpperGastrointestinalBleedingGrade:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was most recently updated.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was soft-deleted.
+        rockall_score_for_upper_gastrointestinal_bleeding_id:
+          type: string
+          format: uuid
+          description: Foreign key to the parent assessment (unique, 1:1).
+        age_points:
+          type: integer
+          format: int32
+          description: Points (0-2) awarded for the age parameter.
+        shock_points:
+          type: integer
+          format: int32
+          description: Points (0-2) awarded for the shock parameter, derived from systolic blood pressure and pulse.
+        comorbidity_points:
+          type: integer
+          format: int32
+          description: Points (0, 2, or 3) awarded for the comorbidity parameter.
+        clinical_score:
+          type: integer
+          format: int32
+          description: "Pre-endoscopy clinical Rockall score: age + shock + comorbidity points (0-7)."
+        diagnosis_points:
+          type: integer
+          format: int32
+          description: Points (0-2) awarded for the diagnosis parameter (full score only).
+        stigmata_points:
+          type: integer
+          format: int32
+          description: Points (0 or 2) awarded for the stigmata-of-recent-haemorrhage parameter (full score only).
+        full_score:
+          type: integer
+          format: int32
+          description: "Full post-endoscopy Rockall score: clinical + diagnosis + stigmata points (0-11); null when endoscopy has not been performed."
+        risk_band:
+          type: string
+          enum:
+            - low
+            - intermediate
+            - high
+            - clinical-only
+            - ""
+          description: "Derived risk band: low (full <= 2, or clinical 0), intermediate (full 3-4), high (full >= 5), or clinical-only (no endoscopy and clinical > 0)."
+        graded_at:
+          type: string
+          format: date-time
+          description: Timestamp when the engine last computed the grade.
+      required:
+        - created_at
+        - updated_at
+        - rockall_score_for_upper_gastrointestinal_bleeding_id
+        - risk_band
+        - graded_at
+      description: "Computed Rockall grading result: per-parameter points, the pre-endoscopy clinical score (0-7), the full post-endoscopy score (0-11 or null), and the derived risk band."

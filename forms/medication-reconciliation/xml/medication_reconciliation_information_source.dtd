@@ -1,0 +1,8 @@
+<!ELEMENT medication_reconciliation_information_source (id,created_at,updated_at,deleted_at,medication_reconciliation_id,source_type,verified)>
+<!ELEMENT id (#PCDATA)>
+<!ELEMENT created_at (#PCDATA)>
+<!ELEMENT updated_at (#PCDATA)>
+<!ELEMENT deleted_at (#PCDATA)>
+<!ELEMENT medication_reconciliation_id (#PCDATA)>
+<!ELEMENT source_type (#PCDATA)>
+<!ELEMENT verified (#PCDATA)>

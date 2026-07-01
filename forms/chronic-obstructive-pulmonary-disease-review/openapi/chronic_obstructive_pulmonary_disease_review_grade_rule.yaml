@@ -1,0 +1,157 @@
+# Generated from sql/. Do not edit by hand.
+# SOURCE: chronic_obstructive_pulmonary_disease_review_grade_rule
+openapi: 3.1.0
+info:
+  title: Chronic Obstructive Pulmonary Disease Review — ChronicObstructivePulmonaryDiseaseReviewGradeRule
+  version: 1.0.0
+  description: "Audit trail of every classification or completeness rule that fired during grading: section, category, and description."
+paths:
+  /chronic-obstructive-pulmonary-disease-review-grade-rules:
+    get:
+      summary: List ChronicObstructivePulmonaryDiseaseReviewGradeRule records
+      operationId: listChronicObstructivePulmonaryDiseaseReviewGradeRule
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of ChronicObstructivePulmonaryDiseaseReviewGradeRule records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/ChronicObstructivePulmonaryDiseaseReviewGradeRule"
+    post:
+      summary: Create a new ChronicObstructivePulmonaryDiseaseReviewGradeRule
+      operationId: createChronicObstructivePulmonaryDiseaseReviewGradeRule
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ChronicObstructivePulmonaryDiseaseReviewGradeRule"
+      responses:
+        "201":
+          description: The newly created ChronicObstructivePulmonaryDiseaseReviewGradeRule
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ChronicObstructivePulmonaryDiseaseReviewGradeRule"
+        "400":
+          description: Validation error
+  /chronic-obstructive-pulmonary-disease-review-grade-rules/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one ChronicObstructivePulmonaryDiseaseReviewGradeRule by id
+      operationId: getChronicObstructivePulmonaryDiseaseReviewGradeRule
+      responses:
+        "200":
+          description: The requested ChronicObstructivePulmonaryDiseaseReviewGradeRule
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ChronicObstructivePulmonaryDiseaseReviewGradeRule"
+        "404":
+          description: ChronicObstructivePulmonaryDiseaseReviewGradeRule not found
+    patch:
+      summary: Update an existing ChronicObstructivePulmonaryDiseaseReviewGradeRule
+      operationId: updateChronicObstructivePulmonaryDiseaseReviewGradeRule
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ChronicObstructivePulmonaryDiseaseReviewGradeRule"
+      responses:
+        "200":
+          description: The updated ChronicObstructivePulmonaryDiseaseReviewGradeRule
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ChronicObstructivePulmonaryDiseaseReviewGradeRule"
+        "404":
+          description: ChronicObstructivePulmonaryDiseaseReviewGradeRule not found
+    delete:
+      summary: Soft-delete a ChronicObstructivePulmonaryDiseaseReviewGradeRule
+      operationId: deleteChronicObstructivePulmonaryDiseaseReviewGradeRule
+      responses:
+        "204":
+          description: ChronicObstructivePulmonaryDiseaseReviewGradeRule deleted
+        "404":
+          description: ChronicObstructivePulmonaryDiseaseReviewGradeRule not found
+components:
+  schemas:
+    ChronicObstructivePulmonaryDiseaseReviewGradeRule:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was most recently updated.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was soft-deleted.
+        chronic_obstructive_pulmonary_disease_review_grade_id:
+          type: string
+          format: uuid
+          description: Foreign key to the parent grade.
+        rule_id:
+          type: string
+          maxLength: 40
+          description: Stable rule identifier (e.g. R-GOLD-GRADE-2-01).
+        section:
+          type: string
+          enum:
+            - gold
+            - symptom
+            - exacerbation
+            - abe
+            - completeness
+            - ""
+          description: "Section the rule concerns: gold, symptom, exacerbation, abe, or completeness."
+        category:
+          type: string
+          maxLength: 50
+          description: Subject category (e.g. airflow-grading, symptom-axis, exacerbation-axis, abe-grouping, required-component).
+        description:
+          type: string
+          maxLength: 500
+          description: Human-readable description of why the rule fired.
+      required:
+        - created_at
+        - updated_at
+        - chronic_obstructive_pulmonary_disease_review_grade_id
+        - rule_id
+        - section
+        - category
+        - description
+      description: "Audit trail of every classification or completeness rule that fired during grading: section, category, and description."

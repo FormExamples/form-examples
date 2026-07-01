@@ -1,0 +1,311 @@
+# Generated from sql/. Do not edit by hand.
+# SOURCE: history_and_physical_examination
+openapi: 3.1.0
+info:
+  title: History And Physical Examination — HistoryAndPhysicalExamination
+  version: 1.0.0
+  description: "Main H&P clerking record for one patient encounter: encounter context, patient and clinician identification, the full history, vital signs, examination by body system, investigations, impression, and management plan as free text. Completeness grade, fired rules, and flags live in child tables."
+paths:
+  /history-and-physical-examinations:
+    get:
+      summary: List HistoryAndPhysicalExamination records
+      operationId: listHistoryAndPhysicalExamination
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of HistoryAndPhysicalExamination records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/HistoryAndPhysicalExamination"
+    post:
+      summary: Create a new HistoryAndPhysicalExamination
+      operationId: createHistoryAndPhysicalExamination
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/HistoryAndPhysicalExamination"
+      responses:
+        "201":
+          description: The newly created HistoryAndPhysicalExamination
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/HistoryAndPhysicalExamination"
+        "400":
+          description: Validation error
+  /history-and-physical-examinations/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one HistoryAndPhysicalExamination by id
+      operationId: getHistoryAndPhysicalExamination
+      responses:
+        "200":
+          description: The requested HistoryAndPhysicalExamination
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/HistoryAndPhysicalExamination"
+        "404":
+          description: HistoryAndPhysicalExamination not found
+    patch:
+      summary: Update an existing HistoryAndPhysicalExamination
+      operationId: updateHistoryAndPhysicalExamination
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/HistoryAndPhysicalExamination"
+      responses:
+        "200":
+          description: The updated HistoryAndPhysicalExamination
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/HistoryAndPhysicalExamination"
+        "404":
+          description: HistoryAndPhysicalExamination not found
+    delete:
+      summary: Soft-delete a HistoryAndPhysicalExamination
+      operationId: deleteHistoryAndPhysicalExamination
+      responses:
+        "204":
+          description: HistoryAndPhysicalExamination deleted
+        "404":
+          description: HistoryAndPhysicalExamination not found
+components:
+  schemas:
+    HistoryAndPhysicalExamination:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was updated most-recently.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was deleted a.k.a. soft-removed.
+        patient_id:
+          type: string
+          format: uuid
+          description: Foreign key to the patient this clerking documents (restrict delete).
+        clinician_id:
+          type: string
+          format: uuid
+          description: Foreign key to the clerking clinician (restrict delete); optional.
+        clerked_at:
+          type: string
+          format: date-time
+          description: Date and time of clerking.
+        clinician_role:
+          type: string
+          enum:
+            - doctor
+            - acp
+            - physician-associate
+            - other
+            - ""
+          description: "Clerking clinician role: doctor, acp, physician-associate, or other."
+        registration_number:
+          type: string
+          maxLength: 50
+          description: Clerking clinician professional registration number (GMC / NMC / HCPC).
+        care_setting:
+          type: string
+          enum:
+            - emergency-department
+            - acute-medical-unit
+            - ward
+            - other
+            - ""
+          description: "Care setting: emergency-department, acute-medical-unit, ward, or other."
+        admission_source:
+          type: string
+          enum:
+            - self
+            - gp
+            - ambulance
+            - transfer
+            - other
+            - ""
+          description: "Admission source: self, gp, ambulance, transfer, or other."
+        patient_identifier:
+          type: string
+          maxLength: 100
+          description: Local patient or encounter identifier as recorded on the clerking.
+        age_band:
+          type: string
+          enum:
+            - 18-39
+            - 40-64
+            - 65-79
+            - 80-plus
+            - ""
+          description: "Adult age band: 18-39, 40-64, 65-79, or 80-plus."
+        sex:
+          type: string
+          enum:
+            - female
+            - male
+            - intersex
+            - unknown
+            - ""
+          description: "Patient sex recorded for clinical purposes: female, male, intersex, or unknown."
+        presenting_complaint:
+          type: string
+          description: "History: the presenting complaint (required component)."
+        history_of_presenting_complaint:
+          type: string
+          description: "History: the history of the presenting complaint (required component)."
+        past_medical_surgical_history:
+          type: string
+          description: "History: past medical and surgical history, or an explicit \"nil\" (required component)."
+        drug_history:
+          type: string
+          description: "History: current medications / drug history (required component)."
+        allergy_status:
+          type: string
+          enum:
+            - none-known
+            - has-allergies
+            - not-documented
+            - ""
+          description: "Allergy status: none-known, has-allergies, or not-documented; not-documented (or empty) is a blocking flag."
+        allergy_detail:
+          type: string
+          description: "Allergy detail: reactions recorded when allergy_status is has-allergies."
+        family_history:
+          type: string
+          description: "History: family history, or an explicit \"nil\" (optional component)."
+        social_history:
+          type: string
+          description: "History: social history — smoking, alcohol, occupation, living situation (required component)."
+        systems_review:
+          type: string
+          description: "History: systems review narrative or structured findings (required component)."
+        temperature:
+          type: number
+          format: double
+          description: "Vital sign: temperature in degrees Celsius; normal range 36.1-38.0. Null when not measured."
+        heart_rate:
+          type: integer
+          format: int32
+          description: "Vital sign: heart rate in beats per minute; normal range 51-90. Null when not measured."
+        respiratory_rate:
+          type: integer
+          format: int32
+          description: "Vital sign: respiratory rate in breaths per minute; normal range 12-20. Null when not measured."
+        systolic_blood_pressure:
+          type: integer
+          format: int32
+          description: "Vital sign: systolic blood pressure in mmHg; normal range 111-219. Null when not measured."
+        oxygen_saturation:
+          type: integer
+          format: int32
+          description: "Vital sign: oxygen saturation as a percentage; normal >= 96. Null when not measured."
+        consciousness_level:
+          type: string
+          enum:
+            - alert
+            - voice
+            - pain
+            - unresponsive
+            - ""
+          description: "Vital sign: consciousness level (AVPU) — alert, voice, pain, or unresponsive; anything other than alert is flagged."
+        exam_cardiovascular:
+          type: string
+          description: "Examination: cardiovascular system findings, or explicit \"deferred\" (core system)."
+        exam_respiratory:
+          type: string
+          description: "Examination: respiratory system findings, or explicit \"deferred\" (core system)."
+        exam_abdominal:
+          type: string
+          description: "Examination: abdominal system findings, or explicit \"deferred\" (core system)."
+        exam_neurological:
+          type: string
+          description: "Examination: neurological system findings, or explicit \"deferred\" (core system)."
+        exam_other:
+          type: string
+          description: "Examination: other systems / general inspection findings (optional)."
+        investigations:
+          type: string
+          description: "Investigations: bedside, laboratory, and imaging results (optional)."
+        impression:
+          type: string
+          description: Working impression / problem list (required component).
+        red_flag_findings:
+          type: string
+          description: Red-flag examination or history findings; drives the red-flag-no-plan flag.
+        management_plan:
+          type: string
+          description: "Management plan: treatment, referrals, escalation, disposition (required component)."
+        clinical_note:
+          type: string
+          description: Optional free-text narrative shown in the summary.
+      required:
+        - created_at
+        - updated_at
+        - patient_id
+        - clinician_role
+        - registration_number
+        - care_setting
+        - admission_source
+        - patient_identifier
+        - age_band
+        - sex
+        - presenting_complaint
+        - history_of_presenting_complaint
+        - past_medical_surgical_history
+        - drug_history
+        - allergy_status
+        - allergy_detail
+        - family_history
+        - social_history
+        - systems_review
+        - consciousness_level
+        - exam_cardiovascular
+        - exam_respiratory
+        - exam_abdominal
+        - exam_neurological
+        - exam_other
+        - investigations
+        - impression
+        - red_flag_findings
+        - management_plan
+        - clinical_note
+      description: "Main H&P clerking record for one patient encounter: encounter context, patient and clinician identification, the full history, vital signs, examination by body system, investigations, impression, and management plan as free text. Completeness grade, fired rules, and flags live in child tables."

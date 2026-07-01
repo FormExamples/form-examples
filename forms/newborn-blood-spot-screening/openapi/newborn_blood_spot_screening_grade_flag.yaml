@@ -1,0 +1,169 @@
+# Generated from sql/. Do not edit by hand.
+# SOURCE: newborn_blood_spot_screening_grade_flag
+openapi: 3.1.0
+info:
+  title: Newborn Blood Spot Screening — NewbornBloodSpotScreeningGradeFlag
+  version: 1.0.0
+  description: Safety flags that fire independently of the overall outcome, with priority and a suggested action for the sample-taker or screening service.
+paths:
+  /newborn-blood-spot-screening-grade-flags:
+    get:
+      summary: List NewbornBloodSpotScreeningGradeFlag records
+      operationId: listNewbornBloodSpotScreeningGradeFlag
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of NewbornBloodSpotScreeningGradeFlag records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/NewbornBloodSpotScreeningGradeFlag"
+    post:
+      summary: Create a new NewbornBloodSpotScreeningGradeFlag
+      operationId: createNewbornBloodSpotScreeningGradeFlag
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/NewbornBloodSpotScreeningGradeFlag"
+      responses:
+        "201":
+          description: The newly created NewbornBloodSpotScreeningGradeFlag
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/NewbornBloodSpotScreeningGradeFlag"
+        "400":
+          description: Validation error
+  /newborn-blood-spot-screening-grade-flags/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one NewbornBloodSpotScreeningGradeFlag by id
+      operationId: getNewbornBloodSpotScreeningGradeFlag
+      responses:
+        "200":
+          description: The requested NewbornBloodSpotScreeningGradeFlag
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/NewbornBloodSpotScreeningGradeFlag"
+        "404":
+          description: NewbornBloodSpotScreeningGradeFlag not found
+    patch:
+      summary: Update an existing NewbornBloodSpotScreeningGradeFlag
+      operationId: updateNewbornBloodSpotScreeningGradeFlag
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/NewbornBloodSpotScreeningGradeFlag"
+      responses:
+        "200":
+          description: The updated NewbornBloodSpotScreeningGradeFlag
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/NewbornBloodSpotScreeningGradeFlag"
+        "404":
+          description: NewbornBloodSpotScreeningGradeFlag not found
+    delete:
+      summary: Soft-delete a NewbornBloodSpotScreeningGradeFlag
+      operationId: deleteNewbornBloodSpotScreeningGradeFlag
+      responses:
+        "204":
+          description: NewbornBloodSpotScreeningGradeFlag deleted
+        "404":
+          description: NewbornBloodSpotScreeningGradeFlag not found
+components:
+  schemas:
+    NewbornBloodSpotScreeningGradeFlag:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was most recently updated.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was soft-deleted.
+        newborn_blood_spot_screening_grade_id:
+          type: string
+          format: uuid
+          description: Foreign key to the parent grade.
+        flag_id:
+          type: string
+          maxLength: 50
+          description: Stable flag identifier (e.g. F-URGENT-REFERRAL-001).
+        category:
+          type: string
+          enum:
+            - urgent-referral
+            - inadequate-sample
+            - out-of-window-sample
+            - avoidable-repeat
+            - carrier
+            - declined
+            - incomplete
+            - other
+            - ""
+          description: "Flag category: urgent-referral, inadequate-sample, out-of-window-sample, avoidable-repeat, carrier, declined, incomplete, or other (invalid result class maps to other)."
+        priority:
+          type: string
+          enum:
+            - low
+            - medium
+            - high
+            - ""
+          description: "Priority: low, medium, high."
+        description:
+          type: string
+          maxLength: 500
+          description: Human-readable description of what fired the flag.
+        suggested_action:
+          type: string
+          maxLength: 500
+          description: "Suggested clinical or service action (e.g. \"refer urgently to the named specialist service\", \"repeat the sample\")."
+      required:
+        - created_at
+        - updated_at
+        - newborn_blood_spot_screening_grade_id
+        - flag_id
+        - category
+        - priority
+        - description
+        - suggested_action
+      description: Safety flags that fire independently of the overall outcome, with priority and a suggested action for the sample-taker or screening service.

@@ -1,0 +1,157 @@
+# Generated from sql/. Do not edit by hand.
+# SOURCE: bowel_cancer_screening_fit_grade_rule
+openapi: 3.1.0
+info:
+  title: Bowel Cancer Screening With Faecal Immunochemical Test — BowelCancerScreeningFitGradeRule
+  version: 1.0.0
+  description: "Audit trail of every classification rule that fired during grading: pathway stage, category, and description."
+paths:
+  /bowel-cancer-screening-fit-grade-rules:
+    get:
+      summary: List BowelCancerScreeningFitGradeRule records
+      operationId: listBowelCancerScreeningFitGradeRule
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of BowelCancerScreeningFitGradeRule records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/BowelCancerScreeningFitGradeRule"
+    post:
+      summary: Create a new BowelCancerScreeningFitGradeRule
+      operationId: createBowelCancerScreeningFitGradeRule
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/BowelCancerScreeningFitGradeRule"
+      responses:
+        "201":
+          description: The newly created BowelCancerScreeningFitGradeRule
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/BowelCancerScreeningFitGradeRule"
+        "400":
+          description: Validation error
+  /bowel-cancer-screening-fit-grade-rules/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one BowelCancerScreeningFitGradeRule by id
+      operationId: getBowelCancerScreeningFitGradeRule
+      responses:
+        "200":
+          description: The requested BowelCancerScreeningFitGradeRule
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/BowelCancerScreeningFitGradeRule"
+        "404":
+          description: BowelCancerScreeningFitGradeRule not found
+    patch:
+      summary: Update an existing BowelCancerScreeningFitGradeRule
+      operationId: updateBowelCancerScreeningFitGradeRule
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/BowelCancerScreeningFitGradeRule"
+      responses:
+        "200":
+          description: The updated BowelCancerScreeningFitGradeRule
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/BowelCancerScreeningFitGradeRule"
+        "404":
+          description: BowelCancerScreeningFitGradeRule not found
+    delete:
+      summary: Soft-delete a BowelCancerScreeningFitGradeRule
+      operationId: deleteBowelCancerScreeningFitGradeRule
+      responses:
+        "204":
+          description: BowelCancerScreeningFitGradeRule deleted
+        "404":
+          description: BowelCancerScreeningFitGradeRule not found
+components:
+  schemas:
+    BowelCancerScreeningFitGradeRule:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was most recently updated.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was soft-deleted.
+        bowel_cancer_screening_fit_grade_id:
+          type: string
+          format: uuid
+          description: Foreign key to the parent grade.
+        rule_id:
+          type: string
+          maxLength: 40
+          description: Stable rule identifier (e.g. R-FIT-RESULT-POSITIVE-01).
+        stage:
+          type: string
+          enum:
+            - kit-return
+            - adequacy
+            - fit-result
+            - symptom
+            - completeness
+            - ""
+          description: "Pathway stage the rule concerns: kit-return, adequacy, fit-result, symptom, or completeness."
+        category:
+          type: string
+          maxLength: 50
+          description: Subject category (e.g. gate, classification, conditional-requirement).
+        description:
+          type: string
+          maxLength: 500
+          description: Human-readable description of why the rule fired.
+      required:
+        - created_at
+        - updated_at
+        - bowel_cancer_screening_fit_grade_id
+        - rule_id
+        - stage
+        - category
+        - description
+      description: "Audit trail of every classification rule that fired during grading: pathway stage, category, and description."

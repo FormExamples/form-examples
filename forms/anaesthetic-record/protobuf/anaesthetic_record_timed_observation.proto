@@ -1,0 +1,23 @@
+// Generated from sql/. Do not edit by hand.
+// SOURCE: anaesthetic_record_timed_observation
+
+syntax = "proto3";
+
+package form_examples.anaesthetic_record;
+
+message AnaestheticRecordTimedObservation {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string anaesthetic_record_id = 5;  // UUID — uuid
+  string observed_at = 6;  // TIMESTAMPTZ — iso 8601
+  double systolic_blood_pressure = 7;  // NUMERIC(5,1) — numeric(5,1)
+  double diastolic_blood_pressure = 8;  // NUMERIC(5,1) — numeric(5,1)
+  double heart_rate = 9;  // NUMERIC(5,1) — numeric(5,1)
+  double spo2 = 10;  // NUMERIC(5,1) — numeric(5,1)
+  double end_tidal_co2 = 11;  // NUMERIC(5,1) — numeric(5,1)
+  double temperature = 12;  // NUMERIC(4,1) — numeric(4,1)
+  double agent_percent = 13;  // NUMERIC(4,1) — numeric(4,1)
+  double fresh_gas_flow_l = 14;  // NUMERIC(4,1) — numeric(4,1)
+}

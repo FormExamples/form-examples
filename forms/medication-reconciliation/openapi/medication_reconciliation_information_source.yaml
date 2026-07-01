@@ -1,0 +1,150 @@
+# Generated from sql/. Do not edit by hand.
+# SOURCE: medication_reconciliation_information_source
+openapi: 3.1.0
+info:
+  title: Medication Reconciliation — MedicationReconciliationInformationSource
+  version: 1.0.0
+  description: Information sources used to build the best-possible medication history (BPMH), cascading from the parent reconciliation.
+paths:
+  /medication-reconciliation-information-sources:
+    get:
+      summary: List MedicationReconciliationInformationSource records
+      operationId: listMedicationReconciliationInformationSource
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of MedicationReconciliationInformationSource records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/MedicationReconciliationInformationSource"
+    post:
+      summary: Create a new MedicationReconciliationInformationSource
+      operationId: createMedicationReconciliationInformationSource
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/MedicationReconciliationInformationSource"
+      responses:
+        "201":
+          description: The newly created MedicationReconciliationInformationSource
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/MedicationReconciliationInformationSource"
+        "400":
+          description: Validation error
+  /medication-reconciliation-information-sources/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one MedicationReconciliationInformationSource by id
+      operationId: getMedicationReconciliationInformationSource
+      responses:
+        "200":
+          description: The requested MedicationReconciliationInformationSource
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/MedicationReconciliationInformationSource"
+        "404":
+          description: MedicationReconciliationInformationSource not found
+    patch:
+      summary: Update an existing MedicationReconciliationInformationSource
+      operationId: updateMedicationReconciliationInformationSource
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/MedicationReconciliationInformationSource"
+      responses:
+        "200":
+          description: The updated MedicationReconciliationInformationSource
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/MedicationReconciliationInformationSource"
+        "404":
+          description: MedicationReconciliationInformationSource not found
+    delete:
+      summary: Soft-delete a MedicationReconciliationInformationSource
+      operationId: deleteMedicationReconciliationInformationSource
+      responses:
+        "204":
+          description: MedicationReconciliationInformationSource deleted
+        "404":
+          description: MedicationReconciliationInformationSource not found
+components:
+  schemas:
+    MedicationReconciliationInformationSource:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was most recently updated.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was soft-deleted.
+        medication_reconciliation_id:
+          type: string
+          format: uuid
+          description: Foreign key to the parent medication reconciliation.
+        source_type:
+          type: string
+          enum:
+            - patient-interview
+            - carer-interview
+            - gp-record
+            - repeat-prescription
+            - community-pharmacy
+            - dispensing-history
+            - previous-discharge-summary
+            - own-drugs-bag
+            - care-home-mar
+            - ""
+          description: "Type of source: patient-interview, carer-interview, gp-record, repeat-prescription, community-pharmacy, dispensing-history, previous-discharge-summary, own-drugs-bag, or care-home-mar."
+        verified:
+          type: boolean
+          description: Whether the source was directly checked by the reconciling clinician.
+      required:
+        - created_at
+        - updated_at
+        - medication_reconciliation_id
+        - source_type
+        - verified
+      description: Information sources used to build the best-possible medication history (BPMH), cascading from the parent reconciliation.

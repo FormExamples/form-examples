@@ -1,0 +1,91 @@
+// Generated from sql/. Do not edit by hand.
+// SOURCE: mammography_test_result
+
+syntax = "proto3";
+
+package form_examples.mammography_test_result;
+
+enum MammographyTestResultReportStatusEnum {
+  REPORTSTATUS_UNSPECIFIED = 0;
+  REPORTSTATUS_PRELIMINARY = 1;  // preliminary
+  REPORTSTATUS_FINAL = 2;  // final
+  REPORTSTATUS_AMENDED = 3;  // amended
+  REPORTSTATUS_CANCELLED = 4;  // cancelled
+}
+
+enum MammographyTestResultExamTypeEnum {
+  EXAMTYPE_UNSPECIFIED = 0;
+  EXAMTYPE_SCREENING = 1;  // screening
+  EXAMTYPE_DIAGNOSTIC = 2;  // diagnostic
+  EXAMTYPE_SYMPTOMATIC = 3;  // symptomatic
+  EXAMTYPE_SURVEILLANCE = 4;  // surveillance
+  EXAMTYPE_OTHER = 5;  // other
+}
+
+enum MammographyTestResultLateralityEnum {
+  LATERALITY_UNSPECIFIED = 0;
+  LATERALITY_LEFT = 1;  // left
+  LATERALITY_RIGHT = 2;  // right
+  LATERALITY_BILATERAL = 3;  // bilateral
+}
+
+enum MammographyTestResultExaminationAdequacyEnum {
+  EXAMINATIONADEQUACY_UNSPECIFIED = 0;
+  EXAMINATIONADEQUACY_ADEQUATE = 1;  // adequate
+  EXAMINATIONADEQUACY_LIMITED = 2;  // limited
+  EXAMINATIONADEQUACY_NON_DIAGNOSTIC = 3;  // non-diagnostic
+}
+
+enum MammographyTestResultBreastDensityEnum {
+  BREASTDENSITY_UNSPECIFIED = 0;
+  BREASTDENSITY_A = 1;  // a
+  BREASTDENSITY_B = 2;  // b
+  BREASTDENSITY_C = 3;  // c
+  BREASTDENSITY_D = 4;  // d
+}
+
+enum MammographyTestResultBiRadsCategoryEnum {
+  BIRADSCATEGORY_UNSPECIFIED = 0;
+  BIRADSCATEGORY_V_0 = 1;  // 0
+  BIRADSCATEGORY_V_1 = 2;  // 1
+  BIRADSCATEGORY_V_2 = 3;  // 2
+  BIRADSCATEGORY_V_3 = 4;  // 3
+  BIRADSCATEGORY_V_4A = 5;  // 4a
+  BIRADSCATEGORY_V_4B = 6;  // 4b
+  BIRADSCATEGORY_V_4C = 7;  // 4c
+  BIRADSCATEGORY_V_5 = 8;  // 5
+  BIRADSCATEGORY_V_6 = 9;  // 6
+}
+
+message MammographyTestResult {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string patient_id = 5;  // UUID — uuid
+  string clinician_id = 6;  // UUID — uuid
+  string originating_request_reference = 7;  // VARCHAR(255) — max 255 chars
+  MammographyTestResultReportStatusEnum report_status = 8;  // VARCHAR(15)
+  string performed_date = 9;  // DATE — iso 8601 date
+  string reported_date = 10;  // DATE — iso 8601 date
+  MammographyTestResultExamTypeEnum exam_type = 11;  // VARCHAR(15)
+  MammographyTestResultLateralityEnum laterality = 12;  // VARCHAR(15)
+  MammographyTestResultExaminationAdequacyEnum examination_adequacy = 13;  // VARCHAR(15)
+  MammographyTestResultBreastDensityEnum breast_density = 14;  // VARCHAR(1)
+  string clinical_history = 15;  // VARCHAR(1000) — max 1000 chars
+  string comparison_with_previous = 16;  // VARCHAR(1000) — max 1000 chars
+  string findings_narrative = 17;  // VARCHAR(2000) — max 2000 chars
+  bool mass = 18;  // BOOLEAN
+  bool calcifications = 19;  // BOOLEAN
+  bool architectural_distortion = 20;  // BOOLEAN
+  bool asymmetry = 21;  // BOOLEAN
+  bool skin_or_nipple_change = 22;  // BOOLEAN
+  bool lymphadenopathy = 23;  // BOOLEAN
+  bool incidental_finding = 24;  // BOOLEAN
+  double largest_lesion_size_mm = 25;  // NUMERIC(6,1) — numeric(6,1)
+  string impression = 26;  // VARCHAR(2000) — max 2000 chars
+  MammographyTestResultBiRadsCategoryEnum bi_rads_category = 27;  // VARCHAR(2)
+  string recommended_follow_up = 28;  // VARCHAR(1000) — max 1000 chars
+  bool critical_result_communicated = 29;  // BOOLEAN
+  string reported_to = 30;  // VARCHAR(500) — max 500 chars
+}

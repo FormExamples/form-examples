@@ -1,0 +1,33 @@
+// Generated from sql/. Do not edit by hand.
+// SOURCE: has_bled_score_for_major_bleeding_risk_grade_rule
+
+syntax = "proto3";
+
+package form_examples.has_bled_score_for_major_bleeding_risk;
+
+enum HasBledScoreForMajorBleedingRiskGradeRuleCriterionEnum {
+  CRITERION_UNSPECIFIED = 0;
+  CRITERION_HYPERTENSION = 1;  // hypertension
+  CRITERION_RENAL = 2;  // renal
+  CRITERION_LIVER = 3;  // liver
+  CRITERION_STROKE = 4;  // stroke
+  CRITERION_BLEEDING = 5;  // bleeding
+  CRITERION_LABILE_INR = 6;  // labile-inr
+  CRITERION_ELDERLY = 7;  // elderly
+  CRITERION_DRUGS = 8;  // drugs
+  CRITERION_ALCOHOL = 9;  // alcohol
+  CRITERION_BAND = 10;  // band
+}
+
+message HasBledScoreForMajorBleedingRiskGradeRule {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string has_bled_score_for_major_bleeding_risk_grade_id = 5;  // UUID — uuid
+  string rule_id = 6;  // VARCHAR(40) — max 40 chars
+  HasBledScoreForMajorBleedingRiskGradeRuleCriterionEnum criterion = 7;  // VARCHAR(20)
+  int32 points = 8;  // INT
+  string category = 9;  // VARCHAR(50) — max 50 chars
+  string description = 10;  // VARCHAR(500) — max 500 chars
+}

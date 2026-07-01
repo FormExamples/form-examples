@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE curb_65_pneumonia_severity_score_grade SYSTEM "curb_65_pneumonia_severity_score_grade.dtd">
+<curb_65_pneumonia_severity_score_grade>
+<id>880e8400-e29b-41d4-a716-446655440003</id>
+<created_at>2026-04-09T10:00:00Z</created_at>
+<updated_at>2026-04-09T10:00:00Z</updated_at>
+<deleted_at>2026-04-09T10:00:00Z</deleted_at>
+<curb_65_pneumonia_severity_score_id>770e8400-e29b-41d4-a716-446655440002</curb_65_pneumonia_severity_score_id>
+<confusion_score>5</confusion_score>
+<urea_score>5</urea_score>
+<respiratory_rate_score>5</respiratory_rate_score>
+<blood_pressure_score>5</blood_pressure_score>
+<age_score>5</age_score>
+<total_score>5</total_score>
+<score_variant>curb-65</score_variant>
+<risk_band>low</risk_band>
+<recommended_setting></recommended_setting>
+<graded_at>2026-04-09T10:00:00Z</graded_at>
+</curb_65_pneumonia_severity_score_grade>

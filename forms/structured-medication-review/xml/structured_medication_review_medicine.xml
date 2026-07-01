@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE structured_medication_review_medicine SYSTEM "structured_medication_review_medicine.dtd">
+<structured_medication_review_medicine>
+<id>880e8400-e29b-41d4-a716-446655440003</id>
+<created_at>2026-04-09T10:00:00Z</created_at>
+<updated_at>2026-04-09T10:00:00Z</updated_at>
+<deleted_at>2026-04-09T10:00:00Z</deleted_at>
+<structured_medication_review_id>770e8400-e29b-41d4-a716-446655440002</structured_medication_review_id>
+<drug_name>Example</drug_name>
+<form_strength></form_strength>
+<dose_regimen>500mg</dose_regimen>
+<indication></indication>
+<indication_recorded>yes</indication_recorded>
+<is_regular>yes</is_regular>
+<is_high_risk>yes</is_high_risk>
+<high_risk_class>anticoagulant</high_risk_class>
+<adherence>good</adherence>
+<anticholinergic_burden_points>1</anticholinergic_burden_points>
+<monitoring_required>yes</monitoring_required>
+<monitoring_up_to_date>yes</monitoring_up_to_date>
+<deprescribing_candidate>yes</deprescribing_candidate>
+<stopp_criterion></stopp_criterion>
+<start_criterion></start_criterion>
+</structured_medication_review_medicine>

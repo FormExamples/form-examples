@@ -1,0 +1,17 @@
+<!ELEMENT medication_reconciliation (id,created_at,updated_at,deleted_at,patient_id,clinician_id,reconciliation_type,care_setting,reconciled_at,clinician_name,clinician_role,patient_identifier,age_band,sex,weight_kg,allergy_status)>
+<!ELEMENT id (#PCDATA)>
+<!ELEMENT created_at (#PCDATA)>
+<!ELEMENT updated_at (#PCDATA)>
+<!ELEMENT deleted_at (#PCDATA)>
+<!ELEMENT patient_id (#PCDATA)>
+<!ELEMENT clinician_id (#PCDATA)>
+<!ELEMENT reconciliation_type (#PCDATA)>
+<!ELEMENT care_setting (#PCDATA)>
+<!ELEMENT reconciled_at (#PCDATA)>
+<!ELEMENT clinician_name (#PCDATA)>
+<!ELEMENT clinician_role (#PCDATA)>
+<!ELEMENT patient_identifier (#PCDATA)>
+<!ELEMENT age_band (#PCDATA)>
+<!ELEMENT sex (#PCDATA)>
+<!ELEMENT weight_kg (#PCDATA)>
+<!ELEMENT allergy_status (#PCDATA)>

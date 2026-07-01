@@ -1,0 +1,165 @@
+# Generated from sql/. Do not edit by hand.
+# SOURCE: ottawa_ankle_rules_grade_rule
+openapi: 3.1.0
+info:
+  title: Ottawa Ankle Rules — OttawaAnkleRulesGradeRule
+  version: 1.0.0
+  description: "Audit trail of every decision-rule criterion that fired during the Ottawa Ankle Rules computation: instrument, imaging region, category, and description."
+paths:
+  /ottawa-ankle-rules-grade-rules:
+    get:
+      summary: List OttawaAnkleRulesGradeRule records
+      operationId: listOttawaAnkleRulesGradeRule
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of OttawaAnkleRulesGradeRule records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/OttawaAnkleRulesGradeRule"
+    post:
+      summary: Create a new OttawaAnkleRulesGradeRule
+      operationId: createOttawaAnkleRulesGradeRule
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/OttawaAnkleRulesGradeRule"
+      responses:
+        "201":
+          description: The newly created OttawaAnkleRulesGradeRule
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/OttawaAnkleRulesGradeRule"
+        "400":
+          description: Validation error
+  /ottawa-ankle-rules-grade-rules/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one OttawaAnkleRulesGradeRule by id
+      operationId: getOttawaAnkleRulesGradeRule
+      responses:
+        "200":
+          description: The requested OttawaAnkleRulesGradeRule
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/OttawaAnkleRulesGradeRule"
+        "404":
+          description: OttawaAnkleRulesGradeRule not found
+    patch:
+      summary: Update an existing OttawaAnkleRulesGradeRule
+      operationId: updateOttawaAnkleRulesGradeRule
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/OttawaAnkleRulesGradeRule"
+      responses:
+        "200":
+          description: The updated OttawaAnkleRulesGradeRule
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/OttawaAnkleRulesGradeRule"
+        "404":
+          description: OttawaAnkleRulesGradeRule not found
+    delete:
+      summary: Soft-delete a OttawaAnkleRulesGradeRule
+      operationId: deleteOttawaAnkleRulesGradeRule
+      responses:
+        "204":
+          description: OttawaAnkleRulesGradeRule deleted
+        "404":
+          description: OttawaAnkleRulesGradeRule not found
+components:
+  schemas:
+    OttawaAnkleRulesGradeRule:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was most recently updated.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was soft-deleted.
+        ottawa_ankle_rules_grade_id:
+          type: string
+          format: uuid
+          description: Foreign key to the parent grade.
+        rule_id:
+          type: string
+          maxLength: 40
+          description: Stable rule identifier (e.g. R-ANKLE-A1-LATERAL-MALLEOLUS-01).
+        instrument:
+          type: string
+          enum:
+            - precondition
+            - ankle-criterion
+            - foot-criterion
+            - weight-bearing
+            - decision
+          description: "Decision instrument the criterion belongs to: precondition, ankle-criterion, foot-criterion, weight-bearing, or decision."
+        region:
+          type: string
+          enum:
+            - ankle
+            - foot
+            - both
+            - ""
+          description: "Imaging region the criterion informs: ankle, foot, or both (unable-to-bear-weight feeds both)."
+        category:
+          type: string
+          maxLength: 50
+          description: Subject category (e.g. zone-pain, bone-tenderness, weight-bearing).
+        description:
+          type: string
+          maxLength: 500
+          description: Human-readable description of why the criterion fired.
+      required:
+        - created_at
+        - updated_at
+        - ottawa_ankle_rules_grade_id
+        - rule_id
+        - instrument
+        - region
+        - category
+        - description
+      description: "Audit trail of every decision-rule criterion that fired during the Ottawa Ankle Rules computation: instrument, imaging region, category, and description."

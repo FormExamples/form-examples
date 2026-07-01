@@ -1,0 +1,252 @@
+# Generated from sql/. Do not edit by hand.
+# SOURCE: abdominal_aortic_aneurysm_screening
+openapi: 3.1.0
+info:
+  title: Abdominal Aortic Aneurysm Screening — AbdominalAorticAneurysmScreening
+  version: 1.0.0
+  description: "Main abdominal-aortic-aneurysm-screening record for one aortic ultrasound scan: scan context, patient identification and eligibility, consent, the ultrasound measurement (maximum antero-posterior aortic diameter), and clinical observations. Classification, fired rules, and flags live in child tables."
+paths:
+  /abdominal-aortic-aneurysm-screenings:
+    get:
+      summary: List AbdominalAorticAneurysmScreening records
+      operationId: listAbdominalAorticAneurysmScreening
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of AbdominalAorticAneurysmScreening records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/AbdominalAorticAneurysmScreening"
+    post:
+      summary: Create a new AbdominalAorticAneurysmScreening
+      operationId: createAbdominalAorticAneurysmScreening
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/AbdominalAorticAneurysmScreening"
+      responses:
+        "201":
+          description: The newly created AbdominalAorticAneurysmScreening
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AbdominalAorticAneurysmScreening"
+        "400":
+          description: Validation error
+  /abdominal-aortic-aneurysm-screenings/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one AbdominalAorticAneurysmScreening by id
+      operationId: getAbdominalAorticAneurysmScreening
+      responses:
+        "200":
+          description: The requested AbdominalAorticAneurysmScreening
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AbdominalAorticAneurysmScreening"
+        "404":
+          description: AbdominalAorticAneurysmScreening not found
+    patch:
+      summary: Update an existing AbdominalAorticAneurysmScreening
+      operationId: updateAbdominalAorticAneurysmScreening
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/AbdominalAorticAneurysmScreening"
+      responses:
+        "200":
+          description: The updated AbdominalAorticAneurysmScreening
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AbdominalAorticAneurysmScreening"
+        "404":
+          description: AbdominalAorticAneurysmScreening not found
+    delete:
+      summary: Soft-delete a AbdominalAorticAneurysmScreening
+      operationId: deleteAbdominalAorticAneurysmScreening
+      responses:
+        "204":
+          description: AbdominalAorticAneurysmScreening deleted
+        "404":
+          description: AbdominalAorticAneurysmScreening not found
+components:
+  schemas:
+    AbdominalAorticAneurysmScreening:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was updated most-recently.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was deleted a.k.a. soft-removed.
+        patient_id:
+          type: string
+          format: uuid
+          description: Foreign key to the patient this screening documents (restrict delete).
+        clinician_id:
+          type: string
+          format: uuid
+          description: Foreign key to the screening technician clinician (restrict delete); optional.
+        technician_name:
+          type: string
+          description: Name of the screening technician performing the scan.
+        technician_role:
+          type: string
+          enum:
+            - screening-technician
+            - clinical-skills-trainer
+            - other
+            - ""
+          description: "Role of the person performing the scan: screening-technician, clinical-skills-trainer, or other."
+        clinic_site:
+          type: string
+          description: Clinic or site name where the scan was performed.
+        scanned_at:
+          type: string
+          format: date-time
+          description: Date and time the ultrasound scan was performed.
+        device_identifier:
+          type: string
+          description: Ultrasound device identifier.
+        patient_identifier:
+          type: string
+          maxLength: 100
+          description: NHS number or local patient identifier as recorded on the record.
+        age:
+          type: integer
+          format: int32
+          description: Patient age in years.
+        sex:
+          type: string
+          enum:
+            - female
+            - male
+            - intersex
+            - unknown
+            - ""
+          description: "Patient sex: female, male, intersex, or unknown."
+        eligibility_route:
+          type: string
+          enum:
+            - routine-year-of-65
+            - self-referral-over-65
+            - other
+            - ""
+          description: "Route into screening: routine-year-of-65, self-referral-over-65, or other."
+        scan_type:
+          type: string
+          enum:
+            - first-scan
+            - surveillance-rescan
+            - ""
+          description: "Scan type: first-scan or surveillance-rescan."
+        consent_given:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Whether informed consent to the scan was given (yes/no); anything other than yes raises the incomplete flag.
+        leaflet_provided:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Whether the information leaflet was given to the patient (yes/no).
+        consent_note:
+          type: string
+          description: Free-text detail of any refusal or consent query.
+        aorta_visualised:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Whether the aorta was adequately visualised (yes/no); no forces the non-visualised classification and re-scan.
+        max_aortic_diameter_cm:
+          type: number
+          format: double
+          description: Maximum antero-posterior aortic diameter in centimetres; the value that drives classification.
+        prior_max_diameter_cm:
+          type: number
+          format: double
+          description: Prior maximum aortic diameter in centimetres (surveillance patients); with the current diameter yields growth.
+        prior_scan_date:
+          type: string
+          format: date
+          description: Date of the prior scan (surveillance patients).
+        symptomatic:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Whether the patient reports abdominal or back pain or tenderness (yes/no); yes with an aneurysm present raises the symptomatic-aneurysm flag.
+        incidental_findings:
+          type: string
+          description: Free-text incidental findings noted during the scan.
+        result_note:
+          type: string
+          description: Optional free-text result note shown in the summary.
+      required:
+        - created_at
+        - updated_at
+        - patient_id
+        - technician_name
+        - technician_role
+        - clinic_site
+        - device_identifier
+        - patient_identifier
+        - sex
+        - eligibility_route
+        - scan_type
+        - consent_given
+        - leaflet_provided
+        - consent_note
+        - aorta_visualised
+        - symptomatic
+        - incidental_findings
+        - result_note
+      description: "Main abdominal-aortic-aneurysm-screening record for one aortic ultrasound scan: scan context, patient identification and eligibility, consent, the ultrasound measurement (maximum antero-posterior aortic diameter), and clinical observations. Classification, fired rules, and flags live in child tables."

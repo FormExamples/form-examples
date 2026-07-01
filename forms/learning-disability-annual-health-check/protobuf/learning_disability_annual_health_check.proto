@@ -1,0 +1,288 @@
+// Generated from sql/. Do not edit by hand.
+// SOURCE: learning_disability_annual_health_check
+
+syntax = "proto3";
+
+package form_examples.learning_disability_annual_health_check;
+
+enum LearningDisabilityAnnualHealthCheckClinicianRoleEnum {
+  CLINICIANROLE_UNSPECIFIED = 0;
+  CLINICIANROLE_GP = 1;  // gp
+  CLINICIANROLE_PRACTICE_NURSE = 2;  // practice-nurse
+  CLINICIANROLE_HEALTHCARE_ASSISTANT = 3;  // healthcare-assistant
+  CLINICIANROLE_LD_TEAM = 4;  // ld-team
+  CLINICIANROLE_OTHER = 5;  // other
+}
+
+enum LearningDisabilityAnnualHealthCheckEasyReadInvitationSentEnum {
+  EASYREADINVITATIONSENT_UNSPECIFIED = 0;
+  EASYREADINVITATIONSENT_YES = 1;  // yes
+  EASYREADINVITATIONSENT_NO = 2;  // no
+}
+
+enum LearningDisabilityAnnualHealthCheckPreCheckDoneEnum {
+  PRECHECKDONE_UNSPECIFIED = 0;
+  PRECHECKDONE_YES = 1;  // yes
+  PRECHECKDONE_NO = 2;  // no
+}
+
+enum LearningDisabilityAnnualHealthCheckAgeBandEnum {
+  AGEBAND_UNSPECIFIED = 0;
+  AGEBAND_V_14_17 = 1;  // 14-17
+  AGEBAND_V_18_24 = 2;  // 18-24
+  AGEBAND_V_25_44 = 3;  // 25-44
+  AGEBAND_V_45_64 = 4;  // 45-64
+  AGEBAND_V_65 = 5;  // 65+
+}
+
+enum LearningDisabilityAnnualHealthCheckSexEnum {
+  SEX_UNSPECIFIED = 0;
+  SEX_FEMALE = 1;  // female
+  SEX_MALE = 2;  // male
+  SEX_INTERSEX = 3;  // intersex
+  SEX_UNKNOWN = 4;  // unknown
+}
+
+enum LearningDisabilityAnnualHealthCheckLdRegisterStatusEnum {
+  LDREGISTERSTATUS_UNSPECIFIED = 0;
+  LDREGISTERSTATUS_ON_REGISTER = 1;  // on-register
+  LDREGISTERSTATUS_NOT_ON_REGISTER = 2;  // not-on-register
+  LDREGISTERSTATUS_NEWLY_ADDED = 3;  // newly-added
+}
+
+enum LearningDisabilityAnnualHealthCheckReasonableAdjustmentsRecordedEnum {
+  REASONABLEADJUSTMENTSRECORDED_UNSPECIFIED = 0;
+  REASONABLEADJUSTMENTSRECORDED_YES = 1;  // yes
+  REASONABLEADJUSTMENTSRECORDED_NO = 2;  // no
+}
+
+enum LearningDisabilityAnnualHealthCheckHealthPassportEnum {
+  HEALTHPASSPORT_UNSPECIFIED = 0;
+  HEALTHPASSPORT_YES = 1;  // yes
+  HEALTHPASSPORT_NO = 2;  // no
+  HEALTHPASSPORT_NOT_APPLICABLE = 3;  // not-applicable
+}
+
+enum LearningDisabilityAnnualHealthCheckWeightBmiStatusEnum {
+  WEIGHTBMISTATUS_UNSPECIFIED = 0;
+  WEIGHTBMISTATUS_RECORDED = 1;  // recorded
+  WEIGHTBMISTATUS_NOT_RECORDED = 2;  // not-recorded
+  WEIGHTBMISTATUS_DECLINED = 3;  // declined
+}
+
+enum LearningDisabilityAnnualHealthCheckBloodPressureStatusEnum {
+  BLOODPRESSURESTATUS_UNSPECIFIED = 0;
+  BLOODPRESSURESTATUS_NORMAL = 1;  // normal
+  BLOODPRESSURESTATUS_RAISED = 2;  // raised
+  BLOODPRESSURESTATUS_RECORDED = 3;  // recorded
+  BLOODPRESSURESTATUS_NOT_RECORDED = 4;  // not-recorded
+}
+
+enum LearningDisabilityAnnualHealthCheckEpilepsyStatusEnum {
+  EPILEPSYSTATUS_UNSPECIFIED = 0;
+  EPILEPSYSTATUS_REVIEWED = 1;  // reviewed
+  EPILEPSYSTATUS_NOT_REVIEWED = 2;  // not-reviewed
+  EPILEPSYSTATUS_NOT_APPLICABLE = 3;  // not-applicable
+}
+
+enum LearningDisabilityAnnualHealthCheckConstipationStatusEnum {
+  CONSTIPATIONSTATUS_UNSPECIFIED = 0;
+  CONSTIPATIONSTATUS_NONE = 1;  // none
+  CONSTIPATIONSTATUS_PRESENT = 2;  // present
+  CONSTIPATIONSTATUS_NOT_ASSESSED = 3;  // not-assessed
+}
+
+enum LearningDisabilityAnnualHealthCheckDysphagiaStatusEnum {
+  DYSPHAGIASTATUS_UNSPECIFIED = 0;
+  DYSPHAGIASTATUS_NONE = 1;  // none
+  DYSPHAGIASTATUS_PRESENT = 2;  // present
+  DYSPHAGIASTATUS_NOT_ASSESSED = 3;  // not-assessed
+}
+
+enum LearningDisabilityAnnualHealthCheckContinenceStatusEnum {
+  CONTINENCESTATUS_UNSPECIFIED = 0;
+  CONTINENCESTATUS_OK = 1;  // ok
+  CONTINENCESTATUS_ISSUE = 2;  // issue
+  CONTINENCESTATUS_NOT_ASSESSED = 3;  // not-assessed
+}
+
+enum LearningDisabilityAnnualHealthCheckMobilityFallsStatusEnum {
+  MOBILITYFALLSSTATUS_UNSPECIFIED = 0;
+  MOBILITYFALLSSTATUS_OK = 1;  // ok
+  MOBILITYFALLSSTATUS_ISSUE = 2;  // issue
+  MOBILITYFALLSSTATUS_NOT_ASSESSED = 3;  // not-assessed
+}
+
+enum LearningDisabilityAnnualHealthCheckDentalStatusEnum {
+  DENTALSTATUS_UNSPECIFIED = 0;
+  DENTALSTATUS_OK = 1;  // ok
+  DENTALSTATUS_ISSUE = 2;  // issue
+  DENTALSTATUS_NOT_ASSESSED = 3;  // not-assessed
+}
+
+enum LearningDisabilityAnnualHealthCheckVisionStatusEnum {
+  VISIONSTATUS_UNSPECIFIED = 0;
+  VISIONSTATUS_OK = 1;  // ok
+  VISIONSTATUS_ISSUE = 2;  // issue
+  VISIONSTATUS_NOT_ASSESSED = 3;  // not-assessed
+}
+
+enum LearningDisabilityAnnualHealthCheckHearingStatusEnum {
+  HEARINGSTATUS_UNSPECIFIED = 0;
+  HEARINGSTATUS_OK = 1;  // ok
+  HEARINGSTATUS_ISSUE = 2;  // issue
+  HEARINGSTATUS_NOT_ASSESSED = 3;  // not-assessed
+}
+
+enum LearningDisabilityAnnualHealthCheckFootHealthStatusEnum {
+  FOOTHEALTHSTATUS_UNSPECIFIED = 0;
+  FOOTHEALTHSTATUS_OK = 1;  // ok
+  FOOTHEALTHSTATUS_ISSUE = 2;  // issue
+  FOOTHEALTHSTATUS_NOT_ASSESSED = 3;  // not-assessed
+}
+
+enum LearningDisabilityAnnualHealthCheckSkinStatusEnum {
+  SKINSTATUS_UNSPECIFIED = 0;
+  SKINSTATUS_OK = 1;  // ok
+  SKINSTATUS_ISSUE = 2;  // issue
+  SKINSTATUS_NOT_ASSESSED = 3;  // not-assessed
+}
+
+enum LearningDisabilityAnnualHealthCheckCancerScreeningStatusEnum {
+  CANCERSCREENINGSTATUS_UNSPECIFIED = 0;
+  CANCERSCREENINGSTATUS_UP_TO_DATE = 1;  // up-to-date
+  CANCERSCREENINGSTATUS_DECLINED = 2;  // declined
+  CANCERSCREENINGSTATUS_NOT_ELIGIBLE = 3;  // not-eligible
+  CANCERSCREENINGSTATUS_NOT_RECORDED = 4;  // not-recorded
+}
+
+enum LearningDisabilityAnnualHealthCheckOtherScreeningStatusEnum {
+  OTHERSCREENINGSTATUS_UNSPECIFIED = 0;
+  OTHERSCREENINGSTATUS_UP_TO_DATE = 1;  // up-to-date
+  OTHERSCREENINGSTATUS_DECLINED = 2;  // declined
+  OTHERSCREENINGSTATUS_NOT_ELIGIBLE = 3;  // not-eligible
+  OTHERSCREENINGSTATUS_NOT_RECORDED = 4;  // not-recorded
+}
+
+enum LearningDisabilityAnnualHealthCheckImmunisationStatusEnum {
+  IMMUNISATIONSTATUS_UNSPECIFIED = 0;
+  IMMUNISATIONSTATUS_UP_TO_DATE = 1;  // up-to-date
+  IMMUNISATIONSTATUS_DECLINED = 2;  // declined
+  IMMUNISATIONSTATUS_NOT_RECORDED = 3;  // not-recorded
+}
+
+enum LearningDisabilityAnnualHealthCheckMedicationReconciledEnum {
+  MEDICATIONRECONCILED_UNSPECIFIED = 0;
+  MEDICATIONRECONCILED_YES = 1;  // yes
+  MEDICATIONRECONCILED_NO = 2;  // no
+}
+
+enum LearningDisabilityAnnualHealthCheckPsychotropicPrescribedEnum {
+  PSYCHOTROPICPRESCRIBED_UNSPECIFIED = 0;
+  PSYCHOTROPICPRESCRIBED_YES = 1;  // yes
+  PSYCHOTROPICPRESCRIBED_NO = 2;  // no
+}
+
+enum LearningDisabilityAnnualHealthCheckStompDiscussedEnum {
+  STOMPDISCUSSED_UNSPECIFIED = 0;
+  STOMPDISCUSSED_YES = 1;  // yes
+  STOMPDISCUSSED_NO = 2;  // no
+  STOMPDISCUSSED_NOT_APPLICABLE = 3;  // not-applicable
+}
+
+enum LearningDisabilityAnnualHealthCheckMentalHealthStatusEnum {
+  MENTALHEALTHSTATUS_UNSPECIFIED = 0;
+  MENTALHEALTHSTATUS_OK = 1;  // ok
+  MENTALHEALTHSTATUS_CONCERN = 2;  // concern
+  MENTALHEALTHSTATUS_NOT_ASSESSED = 3;  // not-assessed
+}
+
+enum LearningDisabilityAnnualHealthCheckBehaviourStatusEnum {
+  BEHAVIOURSTATUS_UNSPECIFIED = 0;
+  BEHAVIOURSTATUS_NONE = 1;  // none
+  BEHAVIOURSTATUS_CHALLENGING = 2;  // challenging
+  BEHAVIOURSTATUS_NOT_ASSESSED = 3;  // not-assessed
+}
+
+enum LearningDisabilityAnnualHealthCheckSyndromeSpecificStatusEnum {
+  SYNDROMESPECIFICSTATUS_UNSPECIFIED = 0;
+  SYNDROMESPECIFICSTATUS_DONE = 1;  // done
+  SYNDROMESPECIFICSTATUS_NOT_APPLICABLE = 2;  // not-applicable
+  SYNDROMESPECIFICSTATUS_NOT_DONE = 3;  // not-done
+}
+
+enum LearningDisabilityAnnualHealthCheckCarerNeedsStatusEnum {
+  CARERNEEDSSTATUS_UNSPECIFIED = 0;
+  CARERNEEDSSTATUS_ASSESSED = 1;  // assessed
+  CARERNEEDSSTATUS_NOT_ASSESSED = 2;  // not-assessed
+  CARERNEEDSSTATUS_NO_CARER = 3;  // no-carer
+}
+
+enum LearningDisabilityAnnualHealthCheckHealthActionPlanProducedEnum {
+  HEALTHACTIONPLANPRODUCED_UNSPECIFIED = 0;
+  HEALTHACTIONPLANPRODUCED_YES = 1;  // yes
+  HEALTHACTIONPLANPRODUCED_NO = 2;  // no
+}
+
+enum LearningDisabilityAnnualHealthCheckHealthActionPlanSharedEnum {
+  HEALTHACTIONPLANSHARED_UNSPECIFIED = 0;
+  HEALTHACTIONPLANSHARED_YES = 1;  // yes
+  HEALTHACTIONPLANSHARED_NO = 2;  // no
+}
+
+message LearningDisabilityAnnualHealthCheck {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string patient_id = 5;  // UUID — uuid
+  string clinician_id = 6;  // UUID — uuid
+  string clinician_name = 7;  // TEXT
+  LearningDisabilityAnnualHealthCheckClinicianRoleEnum clinician_role = 8;  // VARCHAR(20)
+  string checked_on = 9;  // DATE — iso 8601 date
+  string practice_name = 10;  // TEXT
+  LearningDisabilityAnnualHealthCheckEasyReadInvitationSentEnum easy_read_invitation_sent = 11;  // VARCHAR(5)
+  LearningDisabilityAnnualHealthCheckPreCheckDoneEnum pre_check_done = 12;  // VARCHAR(5)
+  string person_identifier = 13;  // VARCHAR(100) — max 100 chars
+  LearningDisabilityAnnualHealthCheckAgeBandEnum age_band = 14;  // VARCHAR(10)
+  LearningDisabilityAnnualHealthCheckSexEnum sex = 15;  // VARCHAR(20)
+  LearningDisabilityAnnualHealthCheckLdRegisterStatusEnum ld_register_status = 16;  // VARCHAR(20)
+  string main_carer = 17;  // TEXT
+  string communication_needs = 18;  // TEXT
+  LearningDisabilityAnnualHealthCheckReasonableAdjustmentsRecordedEnum reasonable_adjustments_recorded = 19;  // VARCHAR(5)
+  LearningDisabilityAnnualHealthCheckHealthPassportEnum health_passport = 20;  // VARCHAR(15)
+  string consent_capacity_note = 21;  // TEXT
+  LearningDisabilityAnnualHealthCheckWeightBmiStatusEnum weight_bmi_status = 22;  // VARCHAR(15)
+  double bmi = 23;  // NUMERIC(4,1) — numeric(4,1)
+  LearningDisabilityAnnualHealthCheckBloodPressureStatusEnum blood_pressure_status = 24;  // VARCHAR(15)
+  LearningDisabilityAnnualHealthCheckEpilepsyStatusEnum epilepsy_status = 25;  // VARCHAR(15)
+  LearningDisabilityAnnualHealthCheckConstipationStatusEnum constipation_status = 26;  // VARCHAR(15)
+  LearningDisabilityAnnualHealthCheckDysphagiaStatusEnum dysphagia_status = 27;  // VARCHAR(15)
+  LearningDisabilityAnnualHealthCheckContinenceStatusEnum continence_status = 28;  // VARCHAR(15)
+  LearningDisabilityAnnualHealthCheckMobilityFallsStatusEnum mobility_falls_status = 29;  // VARCHAR(15)
+  LearningDisabilityAnnualHealthCheckDentalStatusEnum dental_status = 30;  // VARCHAR(15)
+  LearningDisabilityAnnualHealthCheckVisionStatusEnum vision_status = 31;  // VARCHAR(15)
+  LearningDisabilityAnnualHealthCheckHearingStatusEnum hearing_status = 32;  // VARCHAR(15)
+  LearningDisabilityAnnualHealthCheckFootHealthStatusEnum foot_health_status = 33;  // VARCHAR(15)
+  LearningDisabilityAnnualHealthCheckSkinStatusEnum skin_status = 34;  // VARCHAR(15)
+  string physical_health_actions = 35;  // TEXT
+  LearningDisabilityAnnualHealthCheckCancerScreeningStatusEnum cancer_screening_status = 36;  // VARCHAR(15)
+  LearningDisabilityAnnualHealthCheckOtherScreeningStatusEnum other_screening_status = 37;  // VARCHAR(15)
+  LearningDisabilityAnnualHealthCheckImmunisationStatusEnum immunisation_status = 38;  // VARCHAR(15)
+  LearningDisabilityAnnualHealthCheckMedicationReconciledEnum medication_reconciled = 39;  // VARCHAR(5)
+  LearningDisabilityAnnualHealthCheckPsychotropicPrescribedEnum psychotropic_prescribed = 40;  // VARCHAR(5)
+  string psychotropic_indication = 41;  // TEXT
+  string psychotropic_last_reviewed = 42;  // DATE — iso 8601 date
+  LearningDisabilityAnnualHealthCheckStompDiscussedEnum stomp_discussed = 43;  // VARCHAR(15)
+  string medication_side_effects = 44;  // TEXT
+  LearningDisabilityAnnualHealthCheckMentalHealthStatusEnum mental_health_status = 45;  // VARCHAR(15)
+  LearningDisabilityAnnualHealthCheckBehaviourStatusEnum behaviour_status = 46;  // VARCHAR(15)
+  string behaviour_triggers = 47;  // TEXT
+  LearningDisabilityAnnualHealthCheckSyndromeSpecificStatusEnum syndrome_specific_status = 48;  // VARCHAR(15)
+  LearningDisabilityAnnualHealthCheckCarerNeedsStatusEnum carer_needs_status = 49;  // VARCHAR(15)
+  string social_circumstances = 50;  // TEXT
+  LearningDisabilityAnnualHealthCheckHealthActionPlanProducedEnum health_action_plan_produced = 51;  // VARCHAR(5)
+  LearningDisabilityAnnualHealthCheckHealthActionPlanSharedEnum health_action_plan_shared = 52;  // VARCHAR(5)
+  string health_action_plan_actions = 53;  // TEXT
+  string clinician_note = 54;  // TEXT
+}

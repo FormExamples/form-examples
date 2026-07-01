@@ -1,0 +1,11 @@
+<!ELEMENT respect_grade_rule (id,created_at,updated_at,deleted_at,respect_grade_id,rule_id,section,satisfied,category,description)>
+<!ELEMENT id (#PCDATA)>
+<!ELEMENT created_at (#PCDATA)>
+<!ELEMENT updated_at (#PCDATA)>
+<!ELEMENT deleted_at (#PCDATA)>
+<!ELEMENT respect_grade_id (#PCDATA)>
+<!ELEMENT rule_id (#PCDATA)>
+<!ELEMENT section (#PCDATA)>
+<!ELEMENT satisfied (#PCDATA)>
+<!ELEMENT category (#PCDATA)>
+<!ELEMENT description (#PCDATA)>

@@ -1,0 +1,14 @@
+<!ELEMENT structured_medication_review_grade (id,created_at,updated_at,deleted_at,structured_medication_review_id,review_status,anticholinergic_burden_score,anticholinergic_band,polypharmacy_band,burden_band,medicine_count,regular_medicine_count,graded_at)>
+<!ELEMENT id (#PCDATA)>
+<!ELEMENT created_at (#PCDATA)>
+<!ELEMENT updated_at (#PCDATA)>
+<!ELEMENT deleted_at (#PCDATA)>
+<!ELEMENT structured_medication_review_id (#PCDATA)>
+<!ELEMENT review_status (#PCDATA)>
+<!ELEMENT anticholinergic_burden_score (#PCDATA)>
+<!ELEMENT anticholinergic_band (#PCDATA)>
+<!ELEMENT polypharmacy_band (#PCDATA)>
+<!ELEMENT burden_band (#PCDATA)>
+<!ELEMENT medicine_count (#PCDATA)>
+<!ELEMENT regular_medicine_count (#PCDATA)>
+<!ELEMENT graded_at (#PCDATA)>

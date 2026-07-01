@@ -1,0 +1,322 @@
+// Generated from sql/. Do not edit by hand.
+// SOURCE: caprini_venous_thromboembolism_risk_assessment
+
+syntax = "proto3";
+
+package form_examples.caprini_venous_thromboembolism_risk_assessment;
+
+enum CapriniVenousThromboembolismRiskAssessmentClinicianRoleEnum {
+  CLINICIANROLE_UNSPECIFIED = 0;
+  CLINICIANROLE_DOCTOR = 1;  // doctor
+  CLINICIANROLE_SURGEON = 2;  // surgeon
+  CLINICIANROLE_NURSE = 3;  // nurse
+  CLINICIANROLE_PHARMACIST = 4;  // pharmacist
+  CLINICIANROLE_OTHER = 5;  // other
+}
+
+enum CapriniVenousThromboembolismRiskAssessmentCareSettingEnum {
+  CARESETTING_UNSPECIFIED = 0;
+  CARESETTING_SURGICAL_WARD = 1;  // surgical-ward
+  CARESETTING_MEDICAL_WARD = 2;  // medical-ward
+  CARESETTING_PRE_OPERATIVE_CLINIC = 3;  // pre-operative-clinic
+  CARESETTING_OTHER = 4;  // other
+}
+
+enum CapriniVenousThromboembolismRiskAssessmentAdmissionTypeEnum {
+  ADMISSIONTYPE_UNSPECIFIED = 0;
+  ADMISSIONTYPE_SURGICAL = 1;  // surgical
+  ADMISSIONTYPE_MEDICAL = 2;  // medical
+}
+
+enum CapriniVenousThromboembolismRiskAssessmentAgeBandEnum {
+  AGEBAND_UNSPECIFIED = 0;
+  AGEBAND_UNDER_41 = 1;  // under-41
+  AGEBAND_V_41_60 = 2;  // 41-60
+  AGEBAND_V_61_74 = 3;  // 61-74
+  AGEBAND_V_75_PLUS = 4;  // 75-plus
+}
+
+enum CapriniVenousThromboembolismRiskAssessmentSexEnum {
+  SEX_UNSPECIFIED = 0;
+  SEX_FEMALE = 1;  // female
+  SEX_MALE = 2;  // male
+  SEX_INTERSEX = 3;  // intersex
+  SEX_UNKNOWN = 4;  // unknown
+}
+
+enum CapriniVenousThromboembolismRiskAssessmentMinorSurgeryEnum {
+  MINORSURGERY_UNSPECIFIED = 0;
+  MINORSURGERY_YES = 1;  // yes
+  MINORSURGERY_NO = 2;  // no
+}
+
+enum CapriniVenousThromboembolismRiskAssessmentRecentMajorSurgeryEnum {
+  RECENTMAJORSURGERY_UNSPECIFIED = 0;
+  RECENTMAJORSURGERY_YES = 1;  // yes
+  RECENTMAJORSURGERY_NO = 2;  // no
+}
+
+enum CapriniVenousThromboembolismRiskAssessmentVaricoseVeinsEnum {
+  VARICOSEVEINS_UNSPECIFIED = 0;
+  VARICOSEVEINS_YES = 1;  // yes
+  VARICOSEVEINS_NO = 2;  // no
+}
+
+enum CapriniVenousThromboembolismRiskAssessmentInflammatoryBowelDiseaseEnum {
+  INFLAMMATORYBOWELDISEASE_UNSPECIFIED = 0;
+  INFLAMMATORYBOWELDISEASE_YES = 1;  // yes
+  INFLAMMATORYBOWELDISEASE_NO = 2;  // no
+}
+
+enum CapriniVenousThromboembolismRiskAssessmentSwollenLegsEnum {
+  SWOLLENLEGS_UNSPECIFIED = 0;
+  SWOLLENLEGS_YES = 1;  // yes
+  SWOLLENLEGS_NO = 2;  // no
+}
+
+enum CapriniVenousThromboembolismRiskAssessmentObesityEnum {
+  OBESITY_UNSPECIFIED = 0;
+  OBESITY_YES = 1;  // yes
+  OBESITY_NO = 2;  // no
+}
+
+enum CapriniVenousThromboembolismRiskAssessmentAcuteMyocardialInfarctionEnum {
+  ACUTEMYOCARDIALINFARCTION_UNSPECIFIED = 0;
+  ACUTEMYOCARDIALINFARCTION_YES = 1;  // yes
+  ACUTEMYOCARDIALINFARCTION_NO = 2;  // no
+}
+
+enum CapriniVenousThromboembolismRiskAssessmentCongestiveHeartFailureEnum {
+  CONGESTIVEHEARTFAILURE_UNSPECIFIED = 0;
+  CONGESTIVEHEARTFAILURE_YES = 1;  // yes
+  CONGESTIVEHEARTFAILURE_NO = 2;  // no
+}
+
+enum CapriniVenousThromboembolismRiskAssessmentSepsisEnum {
+  SEPSIS_UNSPECIFIED = 0;
+  SEPSIS_YES = 1;  // yes
+  SEPSIS_NO = 2;  // no
+}
+
+enum CapriniVenousThromboembolismRiskAssessmentSeriousLungDiseaseEnum {
+  SERIOUSLUNGDISEASE_UNSPECIFIED = 0;
+  SERIOUSLUNGDISEASE_YES = 1;  // yes
+  SERIOUSLUNGDISEASE_NO = 2;  // no
+}
+
+enum CapriniVenousThromboembolismRiskAssessmentAbnormalPulmonaryFunctionEnum {
+  ABNORMALPULMONARYFUNCTION_UNSPECIFIED = 0;
+  ABNORMALPULMONARYFUNCTION_YES = 1;  // yes
+  ABNORMALPULMONARYFUNCTION_NO = 2;  // no
+}
+
+enum CapriniVenousThromboembolismRiskAssessmentMedicalPatientBedRestEnum {
+  MEDICALPATIENTBEDREST_UNSPECIFIED = 0;
+  MEDICALPATIENTBEDREST_YES = 1;  // yes
+  MEDICALPATIENTBEDREST_NO = 2;  // no
+}
+
+enum CapriniVenousThromboembolismRiskAssessmentOralContraceptiveOrHrtEnum {
+  ORALCONTRACEPTIVEORHRT_UNSPECIFIED = 0;
+  ORALCONTRACEPTIVEORHRT_YES = 1;  // yes
+  ORALCONTRACEPTIVEORHRT_NO = 2;  // no
+}
+
+enum CapriniVenousThromboembolismRiskAssessmentPregnancyOrPostpartumEnum {
+  PREGNANCYORPOSTPARTUM_UNSPECIFIED = 0;
+  PREGNANCYORPOSTPARTUM_YES = 1;  // yes
+  PREGNANCYORPOSTPARTUM_NO = 2;  // no
+}
+
+enum CapriniVenousThromboembolismRiskAssessmentAdversePregnancyHistoryEnum {
+  ADVERSEPREGNANCYHISTORY_UNSPECIFIED = 0;
+  ADVERSEPREGNANCYHISTORY_YES = 1;  // yes
+  ADVERSEPREGNANCYHISTORY_NO = 2;  // no
+}
+
+enum CapriniVenousThromboembolismRiskAssessmentArthroscopicSurgeryEnum {
+  ARTHROSCOPICSURGERY_UNSPECIFIED = 0;
+  ARTHROSCOPICSURGERY_YES = 1;  // yes
+  ARTHROSCOPICSURGERY_NO = 2;  // no
+}
+
+enum CapriniVenousThromboembolismRiskAssessmentMajorOpenSurgeryEnum {
+  MAJOROPENSURGERY_UNSPECIFIED = 0;
+  MAJOROPENSURGERY_YES = 1;  // yes
+  MAJOROPENSURGERY_NO = 2;  // no
+}
+
+enum CapriniVenousThromboembolismRiskAssessmentLaparoscopicSurgeryEnum {
+  LAPAROSCOPICSURGERY_UNSPECIFIED = 0;
+  LAPAROSCOPICSURGERY_YES = 1;  // yes
+  LAPAROSCOPICSURGERY_NO = 2;  // no
+}
+
+enum CapriniVenousThromboembolismRiskAssessmentMalignancyEnum {
+  MALIGNANCY_UNSPECIFIED = 0;
+  MALIGNANCY_YES = 1;  // yes
+  MALIGNANCY_NO = 2;  // no
+}
+
+enum CapriniVenousThromboembolismRiskAssessmentConfinedToBedEnum {
+  CONFINEDTOBED_UNSPECIFIED = 0;
+  CONFINEDTOBED_YES = 1;  // yes
+  CONFINEDTOBED_NO = 2;  // no
+}
+
+enum CapriniVenousThromboembolismRiskAssessmentImmobilisingCastEnum {
+  IMMOBILISINGCAST_UNSPECIFIED = 0;
+  IMMOBILISINGCAST_YES = 1;  // yes
+  IMMOBILISINGCAST_NO = 2;  // no
+}
+
+enum CapriniVenousThromboembolismRiskAssessmentCentralVenousAccessEnum {
+  CENTRALVENOUSACCESS_UNSPECIFIED = 0;
+  CENTRALVENOUSACCESS_YES = 1;  // yes
+  CENTRALVENOUSACCESS_NO = 2;  // no
+}
+
+enum CapriniVenousThromboembolismRiskAssessmentHistoryOfVteEnum {
+  HISTORYOFVTE_UNSPECIFIED = 0;
+  HISTORYOFVTE_YES = 1;  // yes
+  HISTORYOFVTE_NO = 2;  // no
+}
+
+enum CapriniVenousThromboembolismRiskAssessmentFamilyHistoryOfThrombosisEnum {
+  FAMILYHISTORYOFTHROMBOSIS_UNSPECIFIED = 0;
+  FAMILYHISTORYOFTHROMBOSIS_YES = 1;  // yes
+  FAMILYHISTORYOFTHROMBOSIS_NO = 2;  // no
+}
+
+enum CapriniVenousThromboembolismRiskAssessmentFactorVLeidenEnum {
+  FACTORVLEIDEN_UNSPECIFIED = 0;
+  FACTORVLEIDEN_YES = 1;  // yes
+  FACTORVLEIDEN_NO = 2;  // no
+}
+
+enum CapriniVenousThromboembolismRiskAssessmentProthrombin20210aEnum {
+  PROTHROMBIN20210A_UNSPECIFIED = 0;
+  PROTHROMBIN20210A_YES = 1;  // yes
+  PROTHROMBIN20210A_NO = 2;  // no
+}
+
+enum CapriniVenousThromboembolismRiskAssessmentLupusAnticoagulantEnum {
+  LUPUSANTICOAGULANT_UNSPECIFIED = 0;
+  LUPUSANTICOAGULANT_YES = 1;  // yes
+  LUPUSANTICOAGULANT_NO = 2;  // no
+}
+
+enum CapriniVenousThromboembolismRiskAssessmentAnticardiolipinAntibodiesEnum {
+  ANTICARDIOLIPINANTIBODIES_UNSPECIFIED = 0;
+  ANTICARDIOLIPINANTIBODIES_YES = 1;  // yes
+  ANTICARDIOLIPINANTIBODIES_NO = 2;  // no
+}
+
+enum CapriniVenousThromboembolismRiskAssessmentElevatedHomocysteineEnum {
+  ELEVATEDHOMOCYSTEINE_UNSPECIFIED = 0;
+  ELEVATEDHOMOCYSTEINE_YES = 1;  // yes
+  ELEVATEDHOMOCYSTEINE_NO = 2;  // no
+}
+
+enum CapriniVenousThromboembolismRiskAssessmentHeparinInducedThrombocytopeniaEnum {
+  HEPARININDUCEDTHROMBOCYTOPENIA_UNSPECIFIED = 0;
+  HEPARININDUCEDTHROMBOCYTOPENIA_YES = 1;  // yes
+  HEPARININDUCEDTHROMBOCYTOPENIA_NO = 2;  // no
+}
+
+enum CapriniVenousThromboembolismRiskAssessmentOtherThrombophiliaEnum {
+  OTHERTHROMBOPHILIA_UNSPECIFIED = 0;
+  OTHERTHROMBOPHILIA_YES = 1;  // yes
+  OTHERTHROMBOPHILIA_NO = 2;  // no
+}
+
+enum CapriniVenousThromboembolismRiskAssessmentStrokeEnum {
+  STROKE_UNSPECIFIED = 0;
+  STROKE_YES = 1;  // yes
+  STROKE_NO = 2;  // no
+}
+
+enum CapriniVenousThromboembolismRiskAssessmentElectiveArthroplastyEnum {
+  ELECTIVEARTHROPLASTY_UNSPECIFIED = 0;
+  ELECTIVEARTHROPLASTY_YES = 1;  // yes
+  ELECTIVEARTHROPLASTY_NO = 2;  // no
+}
+
+enum CapriniVenousThromboembolismRiskAssessmentHipPelvisLegFractureEnum {
+  HIPPELVISLEGFRACTURE_UNSPECIFIED = 0;
+  HIPPELVISLEGFRACTURE_YES = 1;  // yes
+  HIPPELVISLEGFRACTURE_NO = 2;  // no
+}
+
+enum CapriniVenousThromboembolismRiskAssessmentAcuteSpinalCordInjuryEnum {
+  ACUTESPINALCORDINJURY_UNSPECIFIED = 0;
+  ACUTESPINALCORDINJURY_YES = 1;  // yes
+  ACUTESPINALCORDINJURY_NO = 2;  // no
+}
+
+enum CapriniVenousThromboembolismRiskAssessmentMultipleTraumaEnum {
+  MULTIPLETRAUMA_UNSPECIFIED = 0;
+  MULTIPLETRAUMA_YES = 1;  // yes
+  MULTIPLETRAUMA_NO = 2;  // no
+}
+
+enum CapriniVenousThromboembolismRiskAssessmentHighBleedingRiskEnum {
+  HIGHBLEEDINGRISK_UNSPECIFIED = 0;
+  HIGHBLEEDINGRISK_YES = 1;  // yes
+  HIGHBLEEDINGRISK_NO = 2;  // no
+}
+
+message CapriniVenousThromboembolismRiskAssessment {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string patient_id = 5;  // UUID — uuid
+  string clinician_id = 6;  // UUID — uuid
+  string clinician_name = 7;  // VARCHAR(255) — max 255 chars
+  CapriniVenousThromboembolismRiskAssessmentClinicianRoleEnum clinician_role = 8;  // VARCHAR(20)
+  string assessed_at = 9;  // TIMESTAMPTZ — iso 8601
+  CapriniVenousThromboembolismRiskAssessmentCareSettingEnum care_setting = 10;  // VARCHAR(30)
+  CapriniVenousThromboembolismRiskAssessmentAdmissionTypeEnum admission_type = 11;  // VARCHAR(20)
+  string patient_identifier = 12;  // VARCHAR(100) — max 100 chars
+  CapriniVenousThromboembolismRiskAssessmentAgeBandEnum age_band = 13;  // VARCHAR(10)
+  CapriniVenousThromboembolismRiskAssessmentSexEnum sex = 14;  // VARCHAR(20)
+  CapriniVenousThromboembolismRiskAssessmentMinorSurgeryEnum minor_surgery = 15;  // VARCHAR(5)
+  CapriniVenousThromboembolismRiskAssessmentRecentMajorSurgeryEnum recent_major_surgery = 16;  // VARCHAR(5)
+  CapriniVenousThromboembolismRiskAssessmentVaricoseVeinsEnum varicose_veins = 17;  // VARCHAR(5)
+  CapriniVenousThromboembolismRiskAssessmentInflammatoryBowelDiseaseEnum inflammatory_bowel_disease = 18;  // VARCHAR(5)
+  CapriniVenousThromboembolismRiskAssessmentSwollenLegsEnum swollen_legs = 19;  // VARCHAR(5)
+  CapriniVenousThromboembolismRiskAssessmentObesityEnum obesity = 20;  // VARCHAR(5)
+  CapriniVenousThromboembolismRiskAssessmentAcuteMyocardialInfarctionEnum acute_myocardial_infarction = 21;  // VARCHAR(5)
+  CapriniVenousThromboembolismRiskAssessmentCongestiveHeartFailureEnum congestive_heart_failure = 22;  // VARCHAR(5)
+  CapriniVenousThromboembolismRiskAssessmentSepsisEnum sepsis = 23;  // VARCHAR(5)
+  CapriniVenousThromboembolismRiskAssessmentSeriousLungDiseaseEnum serious_lung_disease = 24;  // VARCHAR(5)
+  CapriniVenousThromboembolismRiskAssessmentAbnormalPulmonaryFunctionEnum abnormal_pulmonary_function = 25;  // VARCHAR(5)
+  CapriniVenousThromboembolismRiskAssessmentMedicalPatientBedRestEnum medical_patient_bed_rest = 26;  // VARCHAR(5)
+  CapriniVenousThromboembolismRiskAssessmentOralContraceptiveOrHrtEnum oral_contraceptive_or_hrt = 27;  // VARCHAR(5)
+  CapriniVenousThromboembolismRiskAssessmentPregnancyOrPostpartumEnum pregnancy_or_postpartum = 28;  // VARCHAR(5)
+  CapriniVenousThromboembolismRiskAssessmentAdversePregnancyHistoryEnum adverse_pregnancy_history = 29;  // VARCHAR(5)
+  CapriniVenousThromboembolismRiskAssessmentArthroscopicSurgeryEnum arthroscopic_surgery = 30;  // VARCHAR(5)
+  CapriniVenousThromboembolismRiskAssessmentMajorOpenSurgeryEnum major_open_surgery = 31;  // VARCHAR(5)
+  CapriniVenousThromboembolismRiskAssessmentLaparoscopicSurgeryEnum laparoscopic_surgery = 32;  // VARCHAR(5)
+  CapriniVenousThromboembolismRiskAssessmentMalignancyEnum malignancy = 33;  // VARCHAR(5)
+  CapriniVenousThromboembolismRiskAssessmentConfinedToBedEnum confined_to_bed = 34;  // VARCHAR(5)
+  CapriniVenousThromboembolismRiskAssessmentImmobilisingCastEnum immobilising_cast = 35;  // VARCHAR(5)
+  CapriniVenousThromboembolismRiskAssessmentCentralVenousAccessEnum central_venous_access = 36;  // VARCHAR(5)
+  CapriniVenousThromboembolismRiskAssessmentHistoryOfVteEnum history_of_vte = 37;  // VARCHAR(5)
+  CapriniVenousThromboembolismRiskAssessmentFamilyHistoryOfThrombosisEnum family_history_of_thrombosis = 38;  // VARCHAR(5)
+  CapriniVenousThromboembolismRiskAssessmentFactorVLeidenEnum factor_v_leiden = 39;  // VARCHAR(5)
+  CapriniVenousThromboembolismRiskAssessmentProthrombin20210aEnum prothrombin_20210a = 40;  // VARCHAR(5)
+  CapriniVenousThromboembolismRiskAssessmentLupusAnticoagulantEnum lupus_anticoagulant = 41;  // VARCHAR(5)
+  CapriniVenousThromboembolismRiskAssessmentAnticardiolipinAntibodiesEnum anticardiolipin_antibodies = 42;  // VARCHAR(5)
+  CapriniVenousThromboembolismRiskAssessmentElevatedHomocysteineEnum elevated_homocysteine = 43;  // VARCHAR(5)
+  CapriniVenousThromboembolismRiskAssessmentHeparinInducedThrombocytopeniaEnum heparin_induced_thrombocytopenia = 44;  // VARCHAR(5)
+  CapriniVenousThromboembolismRiskAssessmentOtherThrombophiliaEnum other_thrombophilia = 45;  // VARCHAR(5)
+  CapriniVenousThromboembolismRiskAssessmentStrokeEnum stroke = 46;  // VARCHAR(5)
+  CapriniVenousThromboembolismRiskAssessmentElectiveArthroplastyEnum elective_arthroplasty = 47;  // VARCHAR(5)
+  CapriniVenousThromboembolismRiskAssessmentHipPelvisLegFractureEnum hip_pelvis_leg_fracture = 48;  // VARCHAR(5)
+  CapriniVenousThromboembolismRiskAssessmentAcuteSpinalCordInjuryEnum acute_spinal_cord_injury = 49;  // VARCHAR(5)
+  CapriniVenousThromboembolismRiskAssessmentMultipleTraumaEnum multiple_trauma = 50;  // VARCHAR(5)
+  CapriniVenousThromboembolismRiskAssessmentHighBleedingRiskEnum high_bleeding_risk = 51;  // VARCHAR(5)
+  string clinical_note = 52;  // TEXT
+}

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sequential_organ_failure_assessment_grade_flag SYSTEM "sequential_organ_failure_assessment_grade_flag.dtd">
+<sequential_organ_failure_assessment_grade_flag>
+<id>aa0e8400-e29b-41d4-a716-446655440005</id>
+<created_at>2026-04-09T10:00:00Z</created_at>
+<updated_at>2026-04-09T10:00:00Z</updated_at>
+<deleted_at>2026-04-09T10:00:00Z</deleted_at>
+<sequential_organ_failure_assessment_grade_id>880e8400-e29b-41d4-a716-446655440003</sequential_organ_failure_assessment_grade_id>
+<flag_id>660e8400-e29b-41d4-a716-446655440001</flag_id>
+<category>severe-single-organ-failure</category>
+<priority>low</priority>
+<description>Example text.</description>
+<suggested_action></suggested_action>
+</sequential_organ_failure_assessment_grade_flag>

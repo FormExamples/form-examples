@@ -1,0 +1,10 @@
+<!ELEMENT mental_health_act_assessment_grade_rule (id,created_at,updated_at,deleted_at,mental_health_act_assessment_grade_id,rule_id,section,category,description)>
+<!ELEMENT id (#PCDATA)>
+<!ELEMENT created_at (#PCDATA)>
+<!ELEMENT updated_at (#PCDATA)>
+<!ELEMENT deleted_at (#PCDATA)>
+<!ELEMENT mental_health_act_assessment_grade_id (#PCDATA)>
+<!ELEMENT rule_id (#PCDATA)>
+<!ELEMENT section (#PCDATA)>
+<!ELEMENT category (#PCDATA)>
+<!ELEMENT description (#PCDATA)>

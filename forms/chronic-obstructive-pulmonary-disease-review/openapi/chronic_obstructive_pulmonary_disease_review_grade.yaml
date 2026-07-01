@@ -1,0 +1,180 @@
+# Generated from sql/. Do not edit by hand.
+# SOURCE: chronic_obstructive_pulmonary_disease_review_grade
+openapi: 3.1.0
+info:
+  title: Chronic Obstructive Pulmonary Disease Review — ChronicObstructivePulmonaryDiseaseReviewGrade
+  version: 1.0.0
+  description: "Computed GOLD airflow-grade, ABE-group and completeness grading result for a COPD annual review: GOLD airflow-limitation grade (1-4), symptom and exacerbation axes, combined ABE assessment group, and review-completeness status. 1:1 with the parent review."
+paths:
+  /chronic-obstructive-pulmonary-disease-review-grades:
+    get:
+      summary: List ChronicObstructivePulmonaryDiseaseReviewGrade records
+      operationId: listChronicObstructivePulmonaryDiseaseReviewGrade
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of ChronicObstructivePulmonaryDiseaseReviewGrade records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/ChronicObstructivePulmonaryDiseaseReviewGrade"
+    post:
+      summary: Create a new ChronicObstructivePulmonaryDiseaseReviewGrade
+      operationId: createChronicObstructivePulmonaryDiseaseReviewGrade
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ChronicObstructivePulmonaryDiseaseReviewGrade"
+      responses:
+        "201":
+          description: The newly created ChronicObstructivePulmonaryDiseaseReviewGrade
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ChronicObstructivePulmonaryDiseaseReviewGrade"
+        "400":
+          description: Validation error
+  /chronic-obstructive-pulmonary-disease-review-grades/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one ChronicObstructivePulmonaryDiseaseReviewGrade by id
+      operationId: getChronicObstructivePulmonaryDiseaseReviewGrade
+      responses:
+        "200":
+          description: The requested ChronicObstructivePulmonaryDiseaseReviewGrade
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ChronicObstructivePulmonaryDiseaseReviewGrade"
+        "404":
+          description: ChronicObstructivePulmonaryDiseaseReviewGrade not found
+    patch:
+      summary: Update an existing ChronicObstructivePulmonaryDiseaseReviewGrade
+      operationId: updateChronicObstructivePulmonaryDiseaseReviewGrade
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ChronicObstructivePulmonaryDiseaseReviewGrade"
+      responses:
+        "200":
+          description: The updated ChronicObstructivePulmonaryDiseaseReviewGrade
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ChronicObstructivePulmonaryDiseaseReviewGrade"
+        "404":
+          description: ChronicObstructivePulmonaryDiseaseReviewGrade not found
+    delete:
+      summary: Soft-delete a ChronicObstructivePulmonaryDiseaseReviewGrade
+      operationId: deleteChronicObstructivePulmonaryDiseaseReviewGrade
+      responses:
+        "204":
+          description: ChronicObstructivePulmonaryDiseaseReviewGrade deleted
+        "404":
+          description: ChronicObstructivePulmonaryDiseaseReviewGrade not found
+components:
+  schemas:
+    ChronicObstructivePulmonaryDiseaseReviewGrade:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was most recently updated.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was soft-deleted.
+        chronic_obstructive_pulmonary_disease_review_id:
+          type: string
+          format: uuid
+          description: Foreign key to the parent COPD review (unique, 1:1).
+        gold_airflow_grade:
+          type: string
+          enum:
+            - "1"
+            - "2"
+            - "3"
+            - "4"
+            - ""
+          description: "GOLD airflow-limitation grade banded from FEV1 % predicted: 1 (>=80), 2 (>=50), 3 (>=30), 4 (<30); empty when FEV1 % predicted is unrecorded."
+        symptom_burden:
+          type: string
+          enum:
+            - low
+            - high
+            - ""
+          description: "Symptom axis: high when mMRC >= 2 or CAT >= 10, else low."
+        exacerbation_risk:
+          type: string
+          enum:
+            - low
+            - high
+            - ""
+          description: "Exacerbation axis: high when >= 2 moderate or >= 1 hospitalised exacerbation in 12 months, else low."
+        abe_group:
+          type: string
+          enum:
+            - A
+            - B
+            - E
+            - ""
+          description: "Combined ABE assessment group: E when exacerbation risk high; else B when symptom burden high; else A; empty when no symptom/exacerbation data."
+        review_status:
+          type: string
+          enum:
+            - complete
+            - partial
+            - incomplete
+            - ""
+          description: "Review completeness: complete, partial, or incomplete."
+        graded_at:
+          type: string
+          format: date-time
+          description: Timestamp when the engine last computed the grade.
+      required:
+        - created_at
+        - updated_at
+        - chronic_obstructive_pulmonary_disease_review_id
+        - gold_airflow_grade
+        - symptom_burden
+        - exacerbation_risk
+        - abe_group
+        - review_status
+        - graded_at
+      description: "Computed GOLD airflow-grade, ABE-group and completeness grading result for a COPD annual review: GOLD airflow-limitation grade (1-4), symptom and exacerbation axes, combined ABE assessment group, and review-completeness status. 1:1 with the parent review."

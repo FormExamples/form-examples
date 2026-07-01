@@ -1,0 +1,140 @@
+{
+  "resourceType": "Observation",
+  "id": "bb0e8400-e29b-41d4-a716-446655440006",
+  "meta": {
+    "profile": [
+      "http://hl7.org/fhir/StructureDefinition/Observation"
+    ],
+    "lastUpdated": "2026-04-09T10:00:00+00:00"
+  },
+  "status": "final",
+  "category": [
+    {
+      "coding": [
+        {
+          "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+          "code": "survey",
+          "display": "Survey"
+        }
+      ]
+    }
+  ],
+  "code": {
+    "coding": [
+      {
+        "system": "urn:form-examples:medication-reconciliation",
+        "code": "medication_reconciliation_discrepancy",
+        "display": "Medication Reconciliation Discrepancy"
+      }
+    ]
+  },
+  "subject": {
+    "reference": "Patient/550e8400-e29b-41d4-a716-446655440000"
+  },
+  "encounter": {
+    "reference": "Encounter/ff0e8400-e29b-41d4-a716-44665544000a"
+  },
+  "effectiveDateTime": "2026-04-09T10:00:00+00:00",
+  "component": [
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:medication-reconciliation",
+            "code": "deleted_at",
+            "display": "Deleted At"
+          }
+        ]
+      },
+      "valueDateTime": "2026-04-09T10:00:00+00:00"
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:medication-reconciliation",
+            "code": "discrepancy_type",
+            "display": "Discrepancy Type"
+          }
+        ]
+      },
+      "valueCodeableConcept": {
+        "coding": [
+          {
+            "system": "urn:form-examples:medication-reconciliation:discrepancy_type",
+            "code": "omission",
+            "display": "Omission"
+          }
+        ]
+      }
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:medication-reconciliation",
+            "code": "bpmh_item_ref",
+            "display": "Bpmh Item Ref"
+          }
+        ]
+      },
+      "valueString": ""
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:medication-reconciliation",
+            "code": "inpatient_item_ref",
+            "display": "Inpatient Item Ref"
+          }
+        ]
+      },
+      "valueString": ""
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:medication-reconciliation",
+            "code": "intended_action",
+            "display": "Intended Action"
+          }
+        ]
+      },
+      "valueCodeableConcept": {
+        "coding": [
+          {
+            "system": "urn:form-examples:medication-reconciliation:intended_action",
+            "code": "continue",
+            "display": "Continue"
+          }
+        ]
+      }
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:medication-reconciliation",
+            "code": "rationale",
+            "display": "Rationale"
+          }
+        ]
+      },
+      "valueString": ""
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:medication-reconciliation",
+            "code": "intentional",
+            "display": "Intentional"
+          }
+        ]
+      },
+      "valueBoolean": true
+    }
+  ]
+}

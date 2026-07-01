@@ -1,0 +1,346 @@
+{
+  "resourceType": "Observation",
+  "id": "770e8400-e29b-41d4-a716-446655440002",
+  "meta": {
+    "profile": [
+      "http://hl7.org/fhir/StructureDefinition/Observation"
+    ],
+    "lastUpdated": "2026-04-09T10:00:00+00:00"
+  },
+  "status": "final",
+  "category": [
+    {
+      "coding": [
+        {
+          "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+          "code": "survey",
+          "display": "Survey"
+        }
+      ]
+    }
+  ],
+  "code": {
+    "coding": [
+      {
+        "system": "urn:form-examples:edinburgh-postnatal-depression-scale",
+        "code": "edinburgh_postnatal_depression_scale",
+        "display": "Edinburgh Postnatal Depression Scale"
+      }
+    ]
+  },
+  "subject": {
+    "reference": "Patient/550e8400-e29b-41d4-a716-446655440000"
+  },
+  "encounter": {
+    "reference": "Encounter/bb0e8400-e29b-41d4-a716-446655440006"
+  },
+  "effectiveDateTime": "2026-04-09T10:00:00+00:00",
+  "component": [
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:edinburgh-postnatal-depression-scale",
+            "code": "deleted_at",
+            "display": "Deleted At"
+          }
+        ]
+      },
+      "valueDateTime": "2026-04-09T10:00:00+00:00"
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:edinburgh-postnatal-depression-scale",
+            "code": "clinician_name",
+            "display": "Clinician Name"
+          }
+        ]
+      },
+      "valueString": "Example"
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:edinburgh-postnatal-depression-scale",
+            "code": "clinician_role",
+            "display": "Clinician Role"
+          }
+        ]
+      },
+      "valueCodeableConcept": {
+        "coding": [
+          {
+            "system": "urn:form-examples:edinburgh-postnatal-depression-scale:clinician_role",
+            "code": "midwife",
+            "display": "Midwife"
+          }
+        ]
+      }
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:edinburgh-postnatal-depression-scale",
+            "code": "care_setting",
+            "display": "Care Setting"
+          }
+        ]
+      },
+      "valueCodeableConcept": {
+        "coding": [
+          {
+            "system": "urn:form-examples:edinburgh-postnatal-depression-scale:care_setting",
+            "code": "maternity",
+            "display": "Maternity"
+          }
+        ]
+      }
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:edinburgh-postnatal-depression-scale",
+            "code": "assessed_at",
+            "display": "Assessed At"
+          }
+        ]
+      },
+      "valueDateTime": "2026-04-09T10:00:00+00:00"
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:edinburgh-postnatal-depression-scale",
+            "code": "perinatal_stage",
+            "display": "Perinatal Stage"
+          }
+        ]
+      },
+      "valueCodeableConcept": {
+        "coding": [
+          {
+            "system": "urn:form-examples:edinburgh-postnatal-depression-scale:perinatal_stage",
+            "code": "antenatal",
+            "display": "Antenatal"
+          }
+        ]
+      }
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:edinburgh-postnatal-depression-scale",
+            "code": "perinatal_week",
+            "display": "Perinatal Week"
+          }
+        ]
+      },
+      "valueQuantity": {
+        "value": 0.0
+      }
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:edinburgh-postnatal-depression-scale",
+            "code": "respondent_identifier",
+            "display": "Respondent Identifier"
+          }
+        ]
+      },
+      "valueString": ""
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:edinburgh-postnatal-depression-scale",
+            "code": "age_band",
+            "display": "Age Band"
+          }
+        ]
+      },
+      "valueCodeableConcept": {
+        "coding": [
+          {
+            "system": "urn:form-examples:edinburgh-postnatal-depression-scale:age_band",
+            "code": "under-20",
+            "display": "Under-20"
+          }
+        ]
+      }
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:edinburgh-postnatal-depression-scale",
+            "code": "preferred_language",
+            "display": "Preferred Language"
+          }
+        ]
+      },
+      "valueString": ""
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:edinburgh-postnatal-depression-scale",
+            "code": "assistance_needed",
+            "display": "Assistance Needed"
+          }
+        ]
+      },
+      "valueCodeableConcept": {
+        "coding": [
+          {
+            "system": "urn:form-examples:edinburgh-postnatal-depression-scale:assistance_needed",
+            "code": "none",
+            "display": "None"
+          }
+        ]
+      }
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:edinburgh-postnatal-depression-scale",
+            "code": "item_1",
+            "display": "Item 1"
+          }
+        ]
+      },
+      "valueInteger": 1
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:edinburgh-postnatal-depression-scale",
+            "code": "item_2",
+            "display": "Item 2"
+          }
+        ]
+      },
+      "valueInteger": 1
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:edinburgh-postnatal-depression-scale",
+            "code": "item_3",
+            "display": "Item 3"
+          }
+        ]
+      },
+      "valueInteger": 1
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:edinburgh-postnatal-depression-scale",
+            "code": "item_4",
+            "display": "Item 4"
+          }
+        ]
+      },
+      "valueInteger": 1
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:edinburgh-postnatal-depression-scale",
+            "code": "item_5",
+            "display": "Item 5"
+          }
+        ]
+      },
+      "valueInteger": 1
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:edinburgh-postnatal-depression-scale",
+            "code": "item_6",
+            "display": "Item 6"
+          }
+        ]
+      },
+      "valueInteger": 1
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:edinburgh-postnatal-depression-scale",
+            "code": "item_7",
+            "display": "Item 7"
+          }
+        ]
+      },
+      "valueInteger": 1
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:edinburgh-postnatal-depression-scale",
+            "code": "item_8",
+            "display": "Item 8"
+          }
+        ]
+      },
+      "valueInteger": 1
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:edinburgh-postnatal-depression-scale",
+            "code": "item_9",
+            "display": "Item 9"
+          }
+        ]
+      },
+      "valueInteger": 1
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:edinburgh-postnatal-depression-scale",
+            "code": "item_10",
+            "display": "Item 10"
+          }
+        ]
+      },
+      "valueInteger": 1
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:edinburgh-postnatal-depression-scale",
+            "code": "clinical_note",
+            "display": "Clinical Note"
+          }
+        ]
+      },
+      "valueString": ""
+    }
+  ]
+}

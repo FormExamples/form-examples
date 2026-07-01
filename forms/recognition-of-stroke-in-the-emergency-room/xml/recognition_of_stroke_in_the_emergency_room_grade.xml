@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE recognition_of_stroke_in_the_emergency_room_grade SYSTEM "recognition_of_stroke_in_the_emergency_room_grade.dtd">
+<recognition_of_stroke_in_the_emergency_room_grade>
+<id>880e8400-e29b-41d4-a716-446655440003</id>
+<created_at>2026-04-09T10:00:00Z</created_at>
+<updated_at>2026-04-09T10:00:00Z</updated_at>
+<deleted_at>2026-04-09T10:00:00Z</deleted_at>
+<recognition_of_stroke_in_the_emergency_room_id>770e8400-e29b-41d4-a716-446655440002</recognition_of_stroke_in_the_emergency_room_id>
+<rosier_score>5</rosier_score>
+<stroke_likely>stroke-unlikely</stroke_likely>
+<glucose_excluded>yes</glucose_excluded>
+<graded_at>2026-04-09T10:00:00Z</graded_at>
+</recognition_of_stroke_in_the_emergency_room_grade>

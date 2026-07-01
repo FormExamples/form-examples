@@ -1,0 +1,173 @@
+# Generated from sql/. Do not edit by hand.
+# SOURCE: fluid_balance_chart
+openapi: 3.1.0
+info:
+  title: Fluid Balance Chart — FluidBalanceChart
+  version: 1.0.0
+  description: "Parent fluid balance chart header: charting context, patient identification, charting period, and patient weight enabling the mL/kg/h urine output rate."
+paths:
+  /fluid-balance-charts:
+    get:
+      summary: List FluidBalanceChart records
+      operationId: listFluidBalanceChart
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of FluidBalanceChart records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/FluidBalanceChart"
+    post:
+      summary: Create a new FluidBalanceChart
+      operationId: createFluidBalanceChart
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/FluidBalanceChart"
+      responses:
+        "201":
+          description: The newly created FluidBalanceChart
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/FluidBalanceChart"
+        "400":
+          description: Validation error
+  /fluid-balance-charts/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one FluidBalanceChart by id
+      operationId: getFluidBalanceChart
+      responses:
+        "200":
+          description: The requested FluidBalanceChart
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/FluidBalanceChart"
+        "404":
+          description: FluidBalanceChart not found
+    patch:
+      summary: Update an existing FluidBalanceChart
+      operationId: updateFluidBalanceChart
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/FluidBalanceChart"
+      responses:
+        "200":
+          description: The updated FluidBalanceChart
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/FluidBalanceChart"
+        "404":
+          description: FluidBalanceChart not found
+    delete:
+      summary: Soft-delete a FluidBalanceChart
+      operationId: deleteFluidBalanceChart
+      responses:
+        "204":
+          description: FluidBalanceChart deleted
+        "404":
+          description: FluidBalanceChart not found
+components:
+  schemas:
+    FluidBalanceChart:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was updated most-recently.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was deleted a.k.a. soft-removed.
+        patient_id:
+          type: string
+          format: uuid
+          description: Foreign key to the patient this chart is for (restricted delete).
+        clinician_id:
+          type: string
+          format: uuid
+          description: Foreign key to the charting clinician (restricted delete); optional.
+        clinician_name:
+          type: string
+          description: Name of the charting clinician as entered on the chart.
+        clinician_role:
+          type: string
+          enum:
+            - nurse
+            - doctor
+            - healthcare-assistant
+            - other
+            - ""
+          description: "Role of the charting clinician: nurse, doctor, healthcare-assistant, or other."
+        patient_identifier:
+          type: string
+          description: Local patient identifier as entered on the chart.
+        ward_or_unit:
+          type: string
+          description: Ward or unit name where the chart is being kept.
+        chart_start_at:
+          type: string
+          format: date-time
+          description: Date and time the charting period starts.
+        chart_period_hours:
+          type: number
+          format: double
+          description: Charting period in hours (default 24); used to scale balance thresholds and compute the mL/kg/h rate.
+        weight_kg:
+          type: number
+          format: double
+          description: Patient weight in kilograms; enables the urine output rate in mL/kg/h.
+        clinical_note:
+          type: string
+          description: Free-text summary note for the chart.
+      required:
+        - created_at
+        - updated_at
+        - patient_id
+        - clinician_name
+        - clinician_role
+        - patient_identifier
+        - ward_or_unit
+        - clinical_note
+      description: "Parent fluid balance chart header: charting context, patient identification, charting period, and patient weight enabling the mL/kg/h urine output rate."

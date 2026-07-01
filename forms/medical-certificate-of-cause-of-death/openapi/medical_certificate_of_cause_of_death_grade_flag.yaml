@@ -1,0 +1,169 @@
+# Generated from sql/. Do not edit by hand.
+# SOURCE: medical_certificate_of_cause_of_death_grade_flag
+openapi: 3.1.0
+info:
+  title: Medical Certificate Of Cause Of Death — MedicalCertificateOfCauseOfDeathGradeFlag
+  version: 1.0.0
+  description: Flagged issues that fire independently of the validity class, with priority and a suggested action for the certifying doctor, coroner, or medical examiner.
+paths:
+  /medical-certificate-of-cause-of-death-grade-flags:
+    get:
+      summary: List MedicalCertificateOfCauseOfDeathGradeFlag records
+      operationId: listMedicalCertificateOfCauseOfDeathGradeFlag
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of MedicalCertificateOfCauseOfDeathGradeFlag records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/MedicalCertificateOfCauseOfDeathGradeFlag"
+    post:
+      summary: Create a new MedicalCertificateOfCauseOfDeathGradeFlag
+      operationId: createMedicalCertificateOfCauseOfDeathGradeFlag
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/MedicalCertificateOfCauseOfDeathGradeFlag"
+      responses:
+        "201":
+          description: The newly created MedicalCertificateOfCauseOfDeathGradeFlag
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/MedicalCertificateOfCauseOfDeathGradeFlag"
+        "400":
+          description: Validation error
+  /medical-certificate-of-cause-of-death-grade-flags/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one MedicalCertificateOfCauseOfDeathGradeFlag by id
+      operationId: getMedicalCertificateOfCauseOfDeathGradeFlag
+      responses:
+        "200":
+          description: The requested MedicalCertificateOfCauseOfDeathGradeFlag
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/MedicalCertificateOfCauseOfDeathGradeFlag"
+        "404":
+          description: MedicalCertificateOfCauseOfDeathGradeFlag not found
+    patch:
+      summary: Update an existing MedicalCertificateOfCauseOfDeathGradeFlag
+      operationId: updateMedicalCertificateOfCauseOfDeathGradeFlag
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/MedicalCertificateOfCauseOfDeathGradeFlag"
+      responses:
+        "200":
+          description: The updated MedicalCertificateOfCauseOfDeathGradeFlag
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/MedicalCertificateOfCauseOfDeathGradeFlag"
+        "404":
+          description: MedicalCertificateOfCauseOfDeathGradeFlag not found
+    delete:
+      summary: Soft-delete a MedicalCertificateOfCauseOfDeathGradeFlag
+      operationId: deleteMedicalCertificateOfCauseOfDeathGradeFlag
+      responses:
+        "204":
+          description: MedicalCertificateOfCauseOfDeathGradeFlag deleted
+        "404":
+          description: MedicalCertificateOfCauseOfDeathGradeFlag not found
+components:
+  schemas:
+    MedicalCertificateOfCauseOfDeathGradeFlag:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was most recently updated.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was soft-deleted.
+        medical_certificate_of_cause_of_death_grade_id:
+          type: string
+          format: uuid
+          description: Foreign key to the parent grade.
+        flag_id:
+          type: string
+          maxLength: 50
+          description: Stable flag identifier (e.g. F-CORONER-REFERRAL-REQUIRED-001).
+        category:
+          type: string
+          enum:
+            - coroner-referral-required
+            - unacceptable-sole-cause
+            - missing-part-i
+            - illogical-sequence
+            - medical-examiner-scrutiny
+            - missing-interval
+            - incomplete-certifier
+            - other
+            - ""
+          description: "Flag category: coroner-referral-required, unacceptable-sole-cause, missing-part-i, illogical-sequence, medical-examiner-scrutiny, missing-interval, incomplete-certifier, or other."
+        priority:
+          type: string
+          enum:
+            - low
+            - medium
+            - high
+            - ""
+          description: "Priority: low, medium, high."
+        description:
+          type: string
+          maxLength: 500
+          description: Human-readable description of what fired the flag.
+        suggested_action:
+          type: string
+          maxLength: 500
+          description: "Suggested clinical or statutory action (e.g. \"refer to the coroner before issuing the MCCD\", \"state the underlying disease, not the mode of death\")."
+      required:
+        - created_at
+        - updated_at
+        - medical_certificate_of_cause_of_death_grade_id
+        - flag_id
+        - category
+        - priority
+        - description
+        - suggested_action
+      description: Flagged issues that fire independently of the validity class, with priority and a suggested action for the certifying doctor, coroner, or medical examiner.

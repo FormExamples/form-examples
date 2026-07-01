@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE pet_scan_test_result SYSTEM "pet_scan_test_result.dtd">
+<pet_scan_test_result>
+<id>770e8400-e29b-41d4-a716-446655440002</id>
+<created_at>2026-04-09T10:00:00Z</created_at>
+<updated_at>2026-04-09T10:00:00Z</updated_at>
+<deleted_at>2026-04-09T10:00:00Z</deleted_at>
+<patient_id>550e8400-e29b-41d4-a716-446655440000</patient_id>
+<clinician_id>660e8400-e29b-41d4-a716-446655440001</clinician_id>
+<originating_request_reference></originating_request_reference>
+<scan_type>fdg-pet-ct</scan_type>
+<report_status>preliminary</report_status>
+<performed_date>2026-01-15</performed_date>
+<reported_date>2026-01-15</reported_date>
+<clinical_history>Example text.</clinical_history>
+<blood_glucose_mmol_l>0.0</blood_glucose_mmol_l>
+<injected_activity_mbq>0.0</injected_activity_mbq>
+<examination_adequacy>adequate</examination_adequacy>
+<findings_narrative>Example text.</findings_narrative>
+<hypermetabolic_lesion>true</hypermetabolic_lesion>
+<nodal_uptake>true</nodal_uptake>
+<distant_metastasis>true</distant_metastasis>
+<no_abnormal_uptake>true</no_abnormal_uptake>
+<physiological_uptake_only>true</physiological_uptake_only>
+<incidental_finding>true</incidental_finding>
+<suv_max>0.0</suv_max>
+<largest_lesion_size_mm>0.0</largest_lesion_size_mm>
+<comparison_with_previous></comparison_with_previous>
+<treatment_response>complete</treatment_response>
+<impression>Example text.</impression>
+<reporting_category>General</reporting_category>
+<recommended_follow_up></recommended_follow_up>
+<critical_result_communicated>true</critical_result_communicated>
+<reported_to></reported_to>
+</pet_scan_test_result>

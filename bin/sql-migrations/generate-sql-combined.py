@@ -1,9 +1,9 @@
 #!/usr/bin/env python3
-"""Combine each form's numbered SQL migrations into one sql-migrations/schema.sql file.
+"""Combine each form's numbered SQL migrations into one sql/schema.sql file.
 
-For each form with a `sql-migrations/` directory, concatenates every
+For each form with a `sql/` directory, concatenates every
 `NN-*.sql` migration file (in numeric order) into a single `schema.sql`
-file at `forms/<slug>/sql-migrations/schema.sql`. The combined file is
+file at `forms/<slug>/sql/schema.sql`. The combined file is
 a convenience rollup of the whole schema suitable for one-shot apply in
 development databases, editor inspection, or LLM context windows.
 
@@ -14,7 +14,7 @@ ignores `schema.sql` itself so re-running is idempotent.
 import sys
 from pathlib import Path
 
-TOP = Path(__file__).resolve().parent.parent
+TOP = Path(__file__).resolve().parent.parent.parent
 FORMS_DIR = TOP / "forms"
 
 COMBINED_NAME = "schema.sql"
@@ -58,7 +58,7 @@ def render_combined(form_slug: str, files) -> str:
 
 
 def process_form(form_dir: Path) -> int:
-    sql_dir = form_dir / "sql-migrations"
+    sql_dir = form_dir / "sql"
     if not sql_dir.is_dir():
         return 0
 
@@ -76,13 +76,13 @@ def main():
     total_files = 0
     form_dirs = sorted(d for d in FORMS_DIR.iterdir() if d.is_dir())
     for form_dir in form_dirs:
-        if not (form_dir / "sql-migrations").is_dir():
+        if not (form_dir / "sql").is_dir():
             continue
         n = process_form(form_dir)
         if n > 0:
             total_forms += 1
             total_files += n
-            print(f"  {form_dir.name}: combined {n} files -> sql-migrations/{COMBINED_NAME}")
+            print(f"  {form_dir.name}: combined {n} files -> sql/{COMBINED_NAME}")
 
     print(f"\nTotal: {total_forms} forms, {total_files} source files combined")
 

@@ -1,0 +1,48 @@
+// Generated from sql/. Do not edit by hand.
+// SOURCE: paediatric_early_warning_score_grade
+
+syntax = "proto3";
+
+package form_examples.paediatric_early_warning_score;
+
+enum PaediatricEarlyWarningScoreGradeRiskBandEnum {
+  RISKBAND_UNSPECIFIED = 0;
+  RISKBAND_ROUTINE = 1;  // routine
+  RISKBAND_LOW = 2;  // low
+  RISKBAND_MEDIUM = 3;  // medium
+  RISKBAND_HIGH = 4;  // high
+}
+
+enum PaediatricEarlyWarningScoreGradeSingleParameterTriggerEnum {
+  SINGLEPARAMETERTRIGGER_UNSPECIFIED = 0;
+  SINGLEPARAMETERTRIGGER_YES = 1;  // yes
+  SINGLEPARAMETERTRIGGER_NO = 2;  // no
+}
+
+enum PaediatricEarlyWarningScoreGradeConcernTriggerEnum {
+  CONCERNTRIGGER_UNSPECIFIED = 0;
+  CONCERNTRIGGER_YES = 1;  // yes
+  CONCERNTRIGGER_NO = 2;  // no
+}
+
+message PaediatricEarlyWarningScoreGrade {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string paediatric_early_warning_score_id = 5;  // UUID — uuid
+  int32 aggregate_score = 6;  // INTEGER
+  int32 max_parameter_score = 7;  // INTEGER
+  int32 respiratory_rate_score = 8;  // INTEGER
+  int32 respiratory_effort_score = 9;  // INTEGER
+  int32 oxygen_saturation_score = 10;  // INTEGER
+  int32 supplemental_oxygen_score = 11;  // INTEGER
+  int32 heart_rate_score = 12;  // INTEGER
+  int32 capillary_refill_score = 13;  // INTEGER
+  int32 consciousness_score = 14;  // INTEGER
+  PaediatricEarlyWarningScoreGradeRiskBandEnum risk_band = 15;  // VARCHAR(15)
+  PaediatricEarlyWarningScoreGradeSingleParameterTriggerEnum single_parameter_trigger = 16;  // VARCHAR(5)
+  PaediatricEarlyWarningScoreGradeConcernTriggerEnum concern_trigger = 17;  // VARCHAR(5)
+  string monitoring_frequency = 18;  // TEXT
+  string graded_at = 19;  // TIMESTAMPTZ — iso 8601
+}

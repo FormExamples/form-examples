@@ -1,0 +1,185 @@
+# Generated from sql/. Do not edit by hand.
+# SOURCE: glasgow_blatchford_bleeding_score_grade
+openapi: 3.1.0
+info:
+  title: Glasgow Blatchford Bleeding Score — GlasgowBlatchfordBleedingScoreGrade
+  version: 1.0.0
+  description: "Computed Glasgow-Blatchford grading result: per-parameter points, summed total (0-23), derived risk band, and recommended management."
+paths:
+  /glasgow-blatchford-bleeding-score-grades:
+    get:
+      summary: List GlasgowBlatchfordBleedingScoreGrade records
+      operationId: listGlasgowBlatchfordBleedingScoreGrade
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of GlasgowBlatchfordBleedingScoreGrade records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/GlasgowBlatchfordBleedingScoreGrade"
+    post:
+      summary: Create a new GlasgowBlatchfordBleedingScoreGrade
+      operationId: createGlasgowBlatchfordBleedingScoreGrade
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/GlasgowBlatchfordBleedingScoreGrade"
+      responses:
+        "201":
+          description: The newly created GlasgowBlatchfordBleedingScoreGrade
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GlasgowBlatchfordBleedingScoreGrade"
+        "400":
+          description: Validation error
+  /glasgow-blatchford-bleeding-score-grades/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one GlasgowBlatchfordBleedingScoreGrade by id
+      operationId: getGlasgowBlatchfordBleedingScoreGrade
+      responses:
+        "200":
+          description: The requested GlasgowBlatchfordBleedingScoreGrade
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GlasgowBlatchfordBleedingScoreGrade"
+        "404":
+          description: GlasgowBlatchfordBleedingScoreGrade not found
+    patch:
+      summary: Update an existing GlasgowBlatchfordBleedingScoreGrade
+      operationId: updateGlasgowBlatchfordBleedingScoreGrade
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/GlasgowBlatchfordBleedingScoreGrade"
+      responses:
+        "200":
+          description: The updated GlasgowBlatchfordBleedingScoreGrade
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GlasgowBlatchfordBleedingScoreGrade"
+        "404":
+          description: GlasgowBlatchfordBleedingScoreGrade not found
+    delete:
+      summary: Soft-delete a GlasgowBlatchfordBleedingScoreGrade
+      operationId: deleteGlasgowBlatchfordBleedingScoreGrade
+      responses:
+        "204":
+          description: GlasgowBlatchfordBleedingScoreGrade deleted
+        "404":
+          description: GlasgowBlatchfordBleedingScoreGrade not found
+components:
+  schemas:
+    GlasgowBlatchfordBleedingScoreGrade:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was most recently updated.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was soft-deleted.
+        glasgow_blatchford_bleeding_score_id:
+          type: string
+          format: uuid
+          description: Foreign key to the parent assessment (unique, 1:1).
+        blood_urea_points:
+          type: integer
+          format: int32
+          description: Points awarded for parameter 1, blood urea (0, 2, 3, 4, or 6).
+        haemoglobin_points:
+          type: integer
+          format: int32
+          description: Points awarded for parameters 2/3, haemoglobin (0, 1, 3, or 6; sex-specific bands).
+        systolic_blood_pressure_points:
+          type: integer
+          format: int32
+          description: Points awarded for parameter 4, systolic blood pressure (0, 1, 2, or 3).
+        pulse_point:
+          type: integer
+          format: int32
+          description: Point awarded for parameter 5, pulse >= 100 (0 or 1).
+        melaena_point:
+          type: integer
+          format: int32
+          description: Point awarded for parameter 6, melaena present (0 or 1).
+        syncope_point:
+          type: integer
+          format: int32
+          description: Points awarded for parameter 7, syncope present (0 or 2).
+        hepatic_disease_point:
+          type: integer
+          format: int32
+          description: Points awarded for parameter 8, hepatic disease (0 or 2).
+        cardiac_failure_point:
+          type: integer
+          format: int32
+          description: Points awarded for parameter 9, cardiac failure (0 or 2).
+        total_score:
+          type: integer
+          format: int32
+          description: Summed Glasgow-Blatchford score across all parameters (0-23 when complete).
+        risk_band:
+          type: string
+          enum:
+            - very-low
+            - low-moderate
+            - high
+            - ""
+          description: "Derived risk band: very-low (0), low-moderate (1-5), or high (>= 6)."
+        recommended_management:
+          type: string
+          description: Recommended management for the band (e.g. consider outpatient management; admit and arrange urgent endoscopy).
+        graded_at:
+          type: string
+          format: date-time
+          description: Timestamp when the engine last computed the grade.
+      required:
+        - created_at
+        - updated_at
+        - glasgow_blatchford_bleeding_score_id
+        - risk_band
+        - recommended_management
+        - graded_at
+      description: "Computed Glasgow-Blatchford grading result: per-parameter points, summed total (0-23), derived risk band, and recommended management."

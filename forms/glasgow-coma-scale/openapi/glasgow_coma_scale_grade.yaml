@@ -1,0 +1,179 @@
+# Generated from sql/. Do not edit by hand.
+# SOURCE: glasgow_coma_scale_grade
+openapi: 3.1.0
+info:
+  title: Glasgow Coma Scale — GlasgowComaScaleGrade
+  version: 1.0.0
+  description: "Computed Glasgow Coma Scale grading result: resolved component scores (null when NT), summed total (3-15, null when any component is NT), breakdown and total-display strings, severity band, Pupil Reactivity Score, and the secondary GCS-Pupils score."
+paths:
+  /glasgow-coma-scale-grades:
+    get:
+      summary: List GlasgowComaScaleGrade records
+      operationId: listGlasgowComaScaleGrade
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of GlasgowComaScaleGrade records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/GlasgowComaScaleGrade"
+    post:
+      summary: Create a new GlasgowComaScaleGrade
+      operationId: createGlasgowComaScaleGrade
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/GlasgowComaScaleGrade"
+      responses:
+        "201":
+          description: The newly created GlasgowComaScaleGrade
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GlasgowComaScaleGrade"
+        "400":
+          description: Validation error
+  /glasgow-coma-scale-grades/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one GlasgowComaScaleGrade by id
+      operationId: getGlasgowComaScaleGrade
+      responses:
+        "200":
+          description: The requested GlasgowComaScaleGrade
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GlasgowComaScaleGrade"
+        "404":
+          description: GlasgowComaScaleGrade not found
+    patch:
+      summary: Update an existing GlasgowComaScaleGrade
+      operationId: updateGlasgowComaScaleGrade
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/GlasgowComaScaleGrade"
+      responses:
+        "200":
+          description: The updated GlasgowComaScaleGrade
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GlasgowComaScaleGrade"
+        "404":
+          description: GlasgowComaScaleGrade not found
+    delete:
+      summary: Soft-delete a GlasgowComaScaleGrade
+      operationId: deleteGlasgowComaScaleGrade
+      responses:
+        "204":
+          description: GlasgowComaScaleGrade deleted
+        "404":
+          description: GlasgowComaScaleGrade not found
+components:
+  schemas:
+    GlasgowComaScaleGrade:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was most recently updated.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was soft-deleted.
+        glasgow_coma_scale_id:
+          type: string
+          format: uuid
+          description: Foreign key to the parent assessment (unique, 1:1).
+        eye_score:
+          type: integer
+          format: int32
+          description: Resolved eye-opening score (1-4), or null when the eye component is not testable.
+        verbal_score:
+          type: integer
+          format: int32
+          description: Resolved verbal-response score (1-5), or null when the verbal component is not testable.
+        motor_score:
+          type: integer
+          format: int32
+          description: Resolved motor-response score (1-6), or null when the motor component is not testable.
+        total_score:
+          type: integer
+          format: int32
+          description: Summed total GCS (E + V + M, 3-15); null when any component is not testable.
+        breakdown:
+          type: string
+          maxLength: 30
+          description: "E/V/M breakdown string with any NT component marked (e.g. \"E3 V4 M5\" or \"E3 V-NT M5\")."
+        total_display:
+          type: string
+          maxLength: 10
+          description: "Reported total display, using the trailing \"T\" convention for an intubated verbal NT (e.g. \"12\" or \"9T\")."
+        severity_band:
+          type: string
+          enum:
+            - mild
+            - moderate
+            - severe
+            - ""
+          description: "Derived severity band: mild (13-15), moderate (9-12), or severe (3-8); empty when the total is undefined."
+        pupil_reactivity_score:
+          type: integer
+          format: int32
+          description: "Pupil Reactivity Score (PRS): count of pupils unreactive to light (0-2); null when both pupils were not examined."
+        gcs_p:
+          type: integer
+          format: int32
+          description: Secondary GCS-Pupils score = total - PRS (1-15); null when total or PRS is undefined.
+        graded_at:
+          type: string
+          format: date-time
+          description: Timestamp when the engine last computed the grade.
+      required:
+        - created_at
+        - updated_at
+        - glasgow_coma_scale_id
+        - breakdown
+        - total_display
+        - severity_band
+        - graded_at
+      description: "Computed Glasgow Coma Scale grading result: resolved component scores (null when NT), summed total (3-15, null when any component is NT), breakdown and total-display strings, severity band, Pupil Reactivity Score, and the secondary GCS-Pupils score."

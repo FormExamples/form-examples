@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sequential_organ_failure_assessment_grade SYSTEM "sequential_organ_failure_assessment_grade.dtd">
+<sequential_organ_failure_assessment_grade>
+<id>880e8400-e29b-41d4-a716-446655440003</id>
+<created_at>2026-04-09T10:00:00Z</created_at>
+<updated_at>2026-04-09T10:00:00Z</updated_at>
+<deleted_at>2026-04-09T10:00:00Z</deleted_at>
+<sequential_organ_failure_assessment_id>770e8400-e29b-41d4-a716-446655440002</sequential_organ_failure_assessment_id>
+<respiration_score>5</respiration_score>
+<coagulation_score>5</coagulation_score>
+<liver_score>5</liver_score>
+<cardiovascular_score>5</cardiovascular_score>
+<cns_score>5</cns_score>
+<renal_score>5</renal_score>
+<total_score>5</total_score>
+<delta_sofa>1</delta_sofa>
+<mortality_band>low</mortality_band>
+<sepsis3>true</sepsis3>
+<graded_at>2026-04-09T10:00:00Z</graded_at>
+</sequential_organ_failure_assessment_grade>

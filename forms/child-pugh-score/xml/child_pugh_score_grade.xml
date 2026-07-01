@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE child_pugh_score_grade SYSTEM "child_pugh_score_grade.dtd">
+<child_pugh_score_grade>
+<id>880e8400-e29b-41d4-a716-446655440003</id>
+<created_at>2026-04-09T10:00:00Z</created_at>
+<updated_at>2026-04-09T10:00:00Z</updated_at>
+<deleted_at>2026-04-09T10:00:00Z</deleted_at>
+<child_pugh_score_id>770e8400-e29b-41d4-a716-446655440002</child_pugh_score_id>
+<bilirubin_points>1</bilirubin_points>
+<albumin_points>1</albumin_points>
+<coagulation_points>1</coagulation_points>
+<ascites_points>1</ascites_points>
+<encephalopathy_points>1</encephalopathy_points>
+<total_score>5</total_score>
+<child_pugh_class>A</child_pugh_class>
+<one_year_survival></one_year_survival>
+<two_year_survival></two_year_survival>
+<surgical_risk>low</surgical_risk>
+<graded_at>2026-04-09T10:00:00Z</graded_at>
+</child_pugh_score_grade>

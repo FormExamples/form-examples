@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE quick_sequential_organ_failure_assessment_grade SYSTEM "quick_sequential_organ_failure_assessment_grade.dtd">
+<quick_sequential_organ_failure_assessment_grade>
+<id>880e8400-e29b-41d4-a716-446655440003</id>
+<created_at>2026-04-09T10:00:00Z</created_at>
+<updated_at>2026-04-09T10:00:00Z</updated_at>
+<deleted_at>2026-04-09T10:00:00Z</deleted_at>
+<quick_sequential_organ_failure_assessment_id>770e8400-e29b-41d4-a716-446655440002</quick_sequential_organ_failure_assessment_id>
+<respiratory_rate_point>1</respiratory_rate_point>
+<mentation_point>1</mentation_point>
+<systolic_blood_pressure_point>1</systolic_blood_pressure_point>
+<total_score>5</total_score>
+<risk_band>lower</risk_band>
+<threshold_met>yes</threshold_met>
+<graded_at>2026-04-09T10:00:00Z</graded_at>
+</quick_sequential_organ_failure_assessment_grade>

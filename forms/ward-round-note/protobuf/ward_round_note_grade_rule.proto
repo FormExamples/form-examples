@@ -1,0 +1,33 @@
+// Generated from sql/. Do not edit by hand.
+// SOURCE: ward_round_note_grade_rule
+
+syntax = "proto3";
+
+package form_examples.ward_round_note;
+
+enum WardRoundNoteGradeRuleComponentEnum {
+  COMPONENT_UNSPECIFIED = 0;
+  COMPONENT_HEADER = 1;  // header
+  COMPONENT_PROBLEMS = 2;  // problems
+  COMPONENT_EXAMINATION = 3;  // examination
+  COMPONENT_INVESTIGATIONS = 4;  // investigations
+  COMPONENT_VTE = 5;  // vte
+  COMPONENT_MEDICATION = 6;  // medication
+  COMPONENT_PLAN = 7;  // plan
+  COMPONENT_ESCALATION = 8;  // escalation
+  COMPONENT_OVERNIGHT_EVENTS = 9;  // overnight-events
+  COMPONENT_ESTIMATED_DISCHARGE = 10;  // estimated-discharge
+  COMPONENT_COMPLETENESS = 11;  // completeness
+}
+
+message WardRoundNoteGradeRule {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string ward_round_note_grade_id = 5;  // UUID — uuid
+  string rule_id = 6;  // VARCHAR(40) — max 40 chars
+  WardRoundNoteGradeRuleComponentEnum component = 7;  // VARCHAR(20)
+  string category = 8;  // VARCHAR(50) — max 50 chars
+  string description = 9;  // VARCHAR(500) — max 500 chars
+}

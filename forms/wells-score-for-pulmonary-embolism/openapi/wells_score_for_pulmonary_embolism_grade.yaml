@@ -1,0 +1,161 @@
+# Generated from sql/. Do not edit by hand.
+# SOURCE: wells_score_for_pulmonary_embolism_grade
+openapi: 3.1.0
+info:
+  title: Wells Score For Pulmonary Embolism — WellsScoreForPulmonaryEmbolismGrade
+  version: 1.0.0
+  description: "Computed Wells PE grading result: total score, two-level band, three-level band, and recommended diagnostic pathway. One-to-one with the parent assessment."
+paths:
+  /wells-score-for-pulmonary-embolism-grades:
+    get:
+      summary: List WellsScoreForPulmonaryEmbolismGrade records
+      operationId: listWellsScoreForPulmonaryEmbolismGrade
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of WellsScoreForPulmonaryEmbolismGrade records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/WellsScoreForPulmonaryEmbolismGrade"
+    post:
+      summary: Create a new WellsScoreForPulmonaryEmbolismGrade
+      operationId: createWellsScoreForPulmonaryEmbolismGrade
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/WellsScoreForPulmonaryEmbolismGrade"
+      responses:
+        "201":
+          description: The newly created WellsScoreForPulmonaryEmbolismGrade
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/WellsScoreForPulmonaryEmbolismGrade"
+        "400":
+          description: Validation error
+  /wells-score-for-pulmonary-embolism-grades/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one WellsScoreForPulmonaryEmbolismGrade by id
+      operationId: getWellsScoreForPulmonaryEmbolismGrade
+      responses:
+        "200":
+          description: The requested WellsScoreForPulmonaryEmbolismGrade
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/WellsScoreForPulmonaryEmbolismGrade"
+        "404":
+          description: WellsScoreForPulmonaryEmbolismGrade not found
+    patch:
+      summary: Update an existing WellsScoreForPulmonaryEmbolismGrade
+      operationId: updateWellsScoreForPulmonaryEmbolismGrade
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/WellsScoreForPulmonaryEmbolismGrade"
+      responses:
+        "200":
+          description: The updated WellsScoreForPulmonaryEmbolismGrade
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/WellsScoreForPulmonaryEmbolismGrade"
+        "404":
+          description: WellsScoreForPulmonaryEmbolismGrade not found
+    delete:
+      summary: Soft-delete a WellsScoreForPulmonaryEmbolismGrade
+      operationId: deleteWellsScoreForPulmonaryEmbolismGrade
+      responses:
+        "204":
+          description: WellsScoreForPulmonaryEmbolismGrade deleted
+        "404":
+          description: WellsScoreForPulmonaryEmbolismGrade not found
+components:
+  schemas:
+    WellsScoreForPulmonaryEmbolismGrade:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was most recently updated.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was soft-deleted.
+        wells_score_for_pulmonary_embolism_id:
+          type: string
+          format: uuid
+          description: Foreign key to the parent assessment (unique, 1:1).
+        wells_score:
+          type: number
+          format: double
+          description: Total Wells score computed by the engine, range 0..12.5 (weights include 1.5-point items).
+        two_level_band:
+          type: string
+          enum:
+            - likely
+            - unlikely
+            - ""
+          description: "Two-level band: likely (score > 4) or unlikely (score <= 4)."
+        three_level_band:
+          type: string
+          enum:
+            - low
+            - moderate
+            - high
+            - ""
+          description: "Informational three-level band: low (< 2), moderate (2-6), or high (> 6)."
+        recommended_pathway:
+          type: string
+          description: "Recommended diagnostic pathway: CTPA when PE likely, otherwise D-dimer."
+        graded_at:
+          type: string
+          format: date-time
+          description: Timestamp when the engine last computed the grade.
+      required:
+        - created_at
+        - updated_at
+        - wells_score_for_pulmonary_embolism_id
+        - two_level_band
+        - three_level_band
+        - recommended_pathway
+        - graded_at
+      description: "Computed Wells PE grading result: total score, two-level band, three-level band, and recommended diagnostic pathway. One-to-one with the parent assessment."

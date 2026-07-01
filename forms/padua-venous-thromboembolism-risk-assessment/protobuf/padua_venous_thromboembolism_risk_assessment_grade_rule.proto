@@ -1,0 +1,35 @@
+// Generated from sql/. Do not edit by hand.
+// SOURCE: padua_venous_thromboembolism_risk_assessment_grade_rule
+
+syntax = "proto3";
+
+package form_examples.padua_venous_thromboembolism_risk_assessment;
+
+enum PaduaVenousThromboembolismRiskAssessmentGradeRuleFactorEnum {
+  FACTOR_UNSPECIFIED = 0;
+  FACTOR_ACTIVE_CANCER = 1;  // active-cancer
+  FACTOR_PREVIOUS_VTE = 2;  // previous-vte
+  FACTOR_REDUCED_MOBILITY = 3;  // reduced-mobility
+  FACTOR_KNOWN_THROMBOPHILIA = 4;  // known-thrombophilia
+  FACTOR_RECENT_TRAUMA_OR_SURGERY = 5;  // recent-trauma-or-surgery
+  FACTOR_ELDERLY_AGE = 6;  // elderly-age
+  FACTOR_HEART_OR_RESPIRATORY_FAILURE = 7;  // heart-or-respiratory-failure
+  FACTOR_ACUTE_MI_OR_ISCHAEMIC_STROKE = 8;  // acute-mi-or-ischaemic-stroke
+  FACTOR_ACUTE_INFECTION_OR_RHEUMATOLOGICAL = 9;  // acute-infection-or-rheumatological
+  FACTOR_OBESITY = 10;  // obesity
+  FACTOR_ONGOING_HORMONAL_TREATMENT = 11;  // ongoing-hormonal-treatment
+  FACTOR_BAND = 12;  // band
+}
+
+message PaduaVenousThromboembolismRiskAssessmentGradeRule {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string padua_venous_thromboembolism_risk_assessment_grade_id = 5;  // UUID — uuid
+  string rule_id = 6;  // VARCHAR(60) — max 60 chars
+  PaduaVenousThromboembolismRiskAssessmentGradeRuleFactorEnum factor = 7;  // VARCHAR(40)
+  int32 points = 8;  // INT
+  string category = 9;  // VARCHAR(50) — max 50 chars
+  string description = 10;  // VARCHAR(500) — max 500 chars
+}

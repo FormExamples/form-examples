@@ -1,0 +1,45 @@
+// Generated from sql/. Do not edit by hand.
+// SOURCE: heart_failure_review_grade
+
+syntax = "proto3";
+
+package form_examples.heart_failure_review;
+
+enum HeartFailureReviewGradeNyhaStatusEnum {
+  NYHASTATUS_UNSPECIFIED = 0;
+  NYHASTATUS_STABLE = 1;  // stable
+  NYHASTATUS_SYMPTOMATIC = 2;  // symptomatic
+  NYHASTATUS_ADVANCED = 3;  // advanced
+  NYHASTATUS_UNKNOWN = 4;  // unknown
+}
+
+enum HeartFailureReviewGradeMedicationOptimisationStatusEnum {
+  MEDICATIONOPTIMISATIONSTATUS_UNSPECIFIED = 0;
+  MEDICATIONOPTIMISATIONSTATUS_OPTIMISED = 1;  // optimised
+  MEDICATIONOPTIMISATIONSTATUS_PARTIAL = 2;  // partial
+  MEDICATIONOPTIMISATIONSTATUS_SUBOPTIMAL = 3;  // suboptimal
+  MEDICATIONOPTIMISATIONSTATUS_NOT_APPLICABLE = 4;  // not-applicable
+}
+
+enum HeartFailureReviewGradeReviewStatusEnum {
+  REVIEWSTATUS_UNSPECIFIED = 0;
+  REVIEWSTATUS_COMPLETE = 1;  // complete
+  REVIEWSTATUS_PARTIAL = 2;  // partial
+  REVIEWSTATUS_INCOMPLETE = 3;  // incomplete
+}
+
+message HeartFailureReviewGrade {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string heart_failure_review_id = 5;  // UUID — uuid
+  HeartFailureReviewGradeNyhaStatusEnum nyha_status = 6;  // VARCHAR(15)
+  HeartFailureReviewGradeMedicationOptimisationStatusEnum medication_optimisation_status = 7;  // VARCHAR(15)
+  HeartFailureReviewGradeReviewStatusEnum review_status = 8;  // VARCHAR(15)
+  int32 indicated_pillars = 9;  // INTEGER
+  int32 prescribed_pillars = 10;  // INTEGER
+  string missing_pillars = 11;  // VARCHAR(200) — max 200 chars
+  int32 completeness_score = 12;  // INTEGER
+  string graded_at = 13;  // TIMESTAMPTZ — iso 8601
+}

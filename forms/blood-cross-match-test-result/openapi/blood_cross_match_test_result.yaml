@@ -1,0 +1,285 @@
+# Generated from sql/. Do not edit by hand.
+# SOURCE: blood_cross_match_test_result
+openapi: 3.1.0
+info:
+  title: Blood Cross Match Test Result — BloodCrossMatchTestResult
+  version: 1.0.0
+  description: Blood cross-match / transfusion compatibility test result (report). Captures the ABO/Rh group, antibody screen and identification, the crossmatch / compatibility outcome and component availability, two-sample-rule and historical-group concordance for identity safety, special component requirements, the overall result status, narrative findings, impression, and critical-result communication. This is the source-of-truth record that the four-axis interpretation grade is computed from.
+paths:
+  /blood-cross-match-test-results:
+    get:
+      summary: List BloodCrossMatchTestResult records
+      operationId: listBloodCrossMatchTestResult
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of BloodCrossMatchTestResult records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/BloodCrossMatchTestResult"
+    post:
+      summary: Create a new BloodCrossMatchTestResult
+      operationId: createBloodCrossMatchTestResult
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/BloodCrossMatchTestResult"
+      responses:
+        "201":
+          description: The newly created BloodCrossMatchTestResult
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/BloodCrossMatchTestResult"
+        "400":
+          description: Validation error
+  /blood-cross-match-test-results/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one BloodCrossMatchTestResult by id
+      operationId: getBloodCrossMatchTestResult
+      responses:
+        "200":
+          description: The requested BloodCrossMatchTestResult
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/BloodCrossMatchTestResult"
+        "404":
+          description: BloodCrossMatchTestResult not found
+    patch:
+      summary: Update an existing BloodCrossMatchTestResult
+      operationId: updateBloodCrossMatchTestResult
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/BloodCrossMatchTestResult"
+      responses:
+        "200":
+          description: The updated BloodCrossMatchTestResult
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/BloodCrossMatchTestResult"
+        "404":
+          description: BloodCrossMatchTestResult not found
+    delete:
+      summary: Soft-delete a BloodCrossMatchTestResult
+      operationId: deleteBloodCrossMatchTestResult
+      responses:
+        "204":
+          description: BloodCrossMatchTestResult deleted
+        "404":
+          description: BloodCrossMatchTestResult not found
+components:
+  schemas:
+    BloodCrossMatchTestResult:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was updated most-recently.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was deleted a.k.a. soft-removed.
+        patient_id:
+          type: string
+          format: uuid
+          description: Foreign key to the patient.
+        clinician_id:
+          type: string
+          format: uuid
+          description: Foreign key to the reporting clinician (biomedical scientist / transfusion practitioner / consultant haematologist).
+        originating_request_reference:
+          type: string
+          maxLength: 255
+          description: Free-text reference linking this report back to the originating blood cross-match request (referral).
+        report_status:
+          type: string
+          enum:
+            - preliminary
+            - final
+            - amended
+            - cancelled
+            - ""
+          description: "Report lifecycle status: preliminary, final, amended, cancelled."
+        performed_date:
+          type: string
+          format: date
+          description: Date the test was performed in the transfusion laboratory.
+        reported_date:
+          type: string
+          format: date
+          description: Date the report was authored / signed.
+        request_type:
+          type: string
+          enum:
+            - group-and-save
+            - crossmatch
+            - antibody-screen
+            - emergency-issue
+            - ""
+          description: "Test the result reports against: group-and-save, crossmatch, antibody-screen, emergency-issue."
+        clinical_history:
+          type: string
+          maxLength: 1000
+          description: Clinical history / transfusion indication relevant to interpreting the result.
+        abo_group:
+          type: string
+          enum:
+            - a
+            - b
+            - o
+            - ab
+            - ""
+          description: "Determined ABO group: a, b, o, ab."
+        rhd_group:
+          type: string
+          enum:
+            - positive
+            - negative
+            - ""
+          description: "Determined RhD group: positive, negative."
+        antibody_screen_result:
+          type: string
+          enum:
+            - negative
+            - positive
+            - ""
+          description: "Antibody screen result: negative, positive."
+        antibodies_identified:
+          type: string
+          maxLength: 1000
+          description: Specificity of any red-cell alloantibodies identified (free text), and antigen-negative requirements arising.
+        crossmatch_result:
+          type: string
+          enum:
+            - compatible
+            - incompatible
+            - electronic-issue
+            - not-performed
+            - ""
+          description: "Crossmatch / compatibility outcome: compatible, incompatible, electronic-issue, not-performed."
+        component:
+          type: string
+          enum:
+            - red-cells
+            - platelets
+            - fresh-frozen-plasma
+            - cryoprecipitate
+            - none
+            - ""
+          description: "Blood component the result relates to: red-cells, platelets, fresh-frozen-plasma, cryoprecipitate, none."
+        units_crossmatched:
+          type: integer
+          format: int32
+          description: Number of units crossmatched / tested (0-50).
+        units_available:
+          type: integer
+          format: int32
+          description: Number of compatible units available for issue (0-50).
+        two_sample_rule_met:
+          type: boolean
+          description: Whether the BSH/SHOT two-sample (group-check) rule was satisfied for this patient before issue.
+        special_requirements:
+          type: string
+          maxLength: 1000
+          description: Special component requirements met or required (e.g. irradiated, CMV-negative, antigen-negative, washed).
+        historical_group_concordant:
+          type: boolean
+          description: Whether the current ABO/Rh group is concordant with the patient historical group on record.
+        overall_result_status:
+          type: string
+          enum:
+            - normal
+            - abnormal
+            - critical
+            - ""
+          description: "Overall result status: normal, abnormal, critical."
+        findings_narrative:
+          type: string
+          maxLength: 2000
+          description: Narrative description of the laboratory findings (the body of the report).
+        impression:
+          type: string
+          maxLength: 2000
+          description: Summary impression / conclusion answering the compatibility question.
+        reporting_category:
+          type: string
+          maxLength: 50
+          description: Structured reporting category / label (e.g. an antibody-significance or compatibility-status category).
+        recommended_follow_up:
+          type: string
+          maxLength: 1000
+          description: "Recommended follow-up: repeat sample, further investigation, referral, or issue instructions."
+        critical_result_communicated:
+          type: boolean
+          description: Whether a critical or unexpected significant result (e.g. ABO discrepancy, incompatibility) was communicated directly to the requester.
+        reported_to:
+          type: string
+          maxLength: 500
+          description: Who the critical / urgent result was communicated to, with date and time if applicable.
+      required:
+        - created_at
+        - updated_at
+        - patient_id
+        - clinician_id
+        - originating_request_reference
+        - report_status
+        - request_type
+        - clinical_history
+        - abo_group
+        - rhd_group
+        - antibody_screen_result
+        - antibodies_identified
+        - crossmatch_result
+        - component
+        - two_sample_rule_met
+        - special_requirements
+        - historical_group_concordant
+        - overall_result_status
+        - findings_narrative
+        - impression
+        - reporting_category
+        - recommended_follow_up
+        - critical_result_communicated
+        - reported_to
+      description: Blood cross-match / transfusion compatibility test result (report). Captures the ABO/Rh group, antibody screen and identification, the crossmatch / compatibility outcome and component availability, two-sample-rule and historical-group concordance for identity safety, special component requirements, the overall result status, narrative findings, impression, and critical-result communication. This is the source-of-truth record that the four-axis interpretation grade is computed from.

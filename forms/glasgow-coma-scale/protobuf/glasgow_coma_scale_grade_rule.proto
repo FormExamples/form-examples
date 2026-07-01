@@ -1,0 +1,31 @@
+// Generated from sql/. Do not edit by hand.
+// SOURCE: glasgow_coma_scale_grade_rule
+
+syntax = "proto3";
+
+package form_examples.glasgow_coma_scale;
+
+enum GlasgowComaScaleGradeRuleComponentEnum {
+  COMPONENT_UNSPECIFIED = 0;
+  COMPONENT_EYE = 1;  // eye
+  COMPONENT_VERBAL = 2;  // verbal
+  COMPONENT_MOTOR = 3;  // motor
+  COMPONENT_TOTAL = 4;  // total
+  COMPONENT_PUPILS = 5;  // pupils
+  COMPONENT_GCS_P = 6;  // gcs-p
+  COMPONENT_TREND = 7;  // trend
+  COMPONENT_OTHER = 8;  // other
+}
+
+message GlasgowComaScaleGradeRule {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string glasgow_coma_scale_grade_id = 5;  // UUID — uuid
+  string rule_id = 6;  // VARCHAR(40) — max 40 chars
+  GlasgowComaScaleGradeRuleComponentEnum component = 7;  // VARCHAR(20)
+  int32 points = 8;  // INT
+  string category = 9;  // VARCHAR(50) — max 50 chars
+  string description = 10;  // VARCHAR(500) — max 500 chars
+}

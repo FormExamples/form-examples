@@ -1,0 +1,82 @@
+// Generated from sql/. Do not edit by hand.
+// SOURCE: padua_venous_thromboembolism_risk_assessment
+
+syntax = "proto3";
+
+package form_examples.padua_venous_thromboembolism_risk_assessment;
+
+enum PaduaVenousThromboembolismRiskAssessmentClinicianRoleEnum {
+  CLINICIANROLE_UNSPECIFIED = 0;
+  CLINICIANROLE_DOCTOR = 1;  // doctor
+  CLINICIANROLE_NURSE = 2;  // nurse
+  CLINICIANROLE_PHARMACIST = 3;  // pharmacist
+  CLINICIANROLE_OTHER = 4;  // other
+}
+
+enum PaduaVenousThromboembolismRiskAssessmentCareSettingEnum {
+  CARESETTING_UNSPECIFIED = 0;
+  CARESETTING_ACUTE_MEDICAL = 1;  // acute-medical
+  CARESETTING_GENERAL_MEDICAL = 2;  // general-medical
+  CARESETTING_ADMISSIONS_UNIT = 3;  // admissions-unit
+  CARESETTING_OTHER = 4;  // other
+}
+
+enum PaduaVenousThromboembolismRiskAssessmentSexEnum {
+  SEX_UNSPECIFIED = 0;
+  SEX_FEMALE = 1;  // female
+  SEX_MALE = 2;  // male
+  SEX_INTERSEX = 3;  // intersex
+  SEX_UNKNOWN = 4;  // unknown
+}
+
+enum PaduaVenousThromboembolismRiskAssessmentActiveCancerEnum {
+  ACTIVECANCER_UNSPECIFIED = 0;
+  ACTIVECANCER_YES = 1;  // yes
+  ACTIVECANCER_NO = 2;  // no
+}
+
+enum PaduaVenousThromboembolismRiskAssessmentPreviousVteEnum {
+  PREVIOUSVTE_UNSPECIFIED = 0;
+  PREVIOUSVTE_YES = 1;  // yes
+  PREVIOUSVTE_NO = 2;  // no
+}
+
+enum PaduaVenousThromboembolismRiskAssessmentReducedMobilityEnum {
+  REDUCEDMOBILITY_UNSPECIFIED = 0;
+  REDUCEDMOBILITY_YES = 1;  // yes
+  REDUCEDMOBILITY_NO = 2;  // no
+}
+
+enum PaduaVenousThromboembolismRiskAssessmentKnownThrombophiliaEnum {
+  KNOWNTHROMBOPHILIA_UNSPECIFIED = 0;
+  KNOWNTHROMBOPHILIA_YES = 1;  // yes
+  KNOWNTHROMBOPHILIA_NO = 2;  // no
+}
+
+enum PaduaVenousThromboembolismRiskAssessmentRecentTraumaOrSurgeryEnum {
+  RECENTTRAUMAORSURGERY_UNSPECIFIED = 0;
+  RECENTTRAUMAORSURGERY_YES = 1;  // yes
+  RECENTTRAUMAORSURGERY_NO = 2;  // no
+}
+
+message PaduaVenousThromboembolismRiskAssessment {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string patient_id = 5;  // UUID — uuid
+  string clinician_id = 6;  // UUID — uuid
+  string clinician_name = 7;  // VARCHAR(255) — max 255 chars
+  PaduaVenousThromboembolismRiskAssessmentClinicianRoleEnum clinician_role = 8;  // VARCHAR(20)
+  string assessed_at = 9;  // TIMESTAMPTZ — iso 8601
+  PaduaVenousThromboembolismRiskAssessmentCareSettingEnum care_setting = 10;  // VARCHAR(20)
+  string admission_reason = 11;  // TEXT
+  string patient_identifier = 12;  // VARCHAR(100) — max 100 chars
+  double age_years = 13;  // NUMERIC(4,1) — numeric(4,1)
+  PaduaVenousThromboembolismRiskAssessmentSexEnum sex = 14;  // VARCHAR(20)
+  PaduaVenousThromboembolismRiskAssessmentActiveCancerEnum active_cancer = 15;  // VARCHAR(10)
+  PaduaVenousThromboembolismRiskAssessmentPreviousVteEnum previous_vte = 16;  // VARCHAR(10)
+  PaduaVenousThromboembolismRiskAssessmentReducedMobilityEnum reduced_mobility = 17;  // VARCHAR(10)
+  PaduaVenousThromboembolismRiskAssessmentKnownThrombophiliaEnum known_thrombophilia = 18;  // VARCHAR(10)
+  PaduaVenousThromboembolismRiskAssessmentRecentTraumaOrSurgeryEnum recent_trauma_or_surgery = 19;  // VARCHAR(10)
+}

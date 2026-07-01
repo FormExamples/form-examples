@@ -1,0 +1,224 @@
+# Generated from sql/. Do not edit by hand.
+# SOURCE: anion_gap_calculator
+openapi: 3.1.0
+info:
+  title: Anion Gap Calculator — AnionGapCalculator
+  version: 1.0.0
+  description: "Main anion-gap calculation record: context and identification, plus the electrolyte-panel inputs (sodium, chloride, bicarbonate, optional potassium) and the optional albumin used for the correction."
+paths:
+  /anion-gap-calculators:
+    get:
+      summary: List AnionGapCalculator records
+      operationId: listAnionGapCalculator
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of AnionGapCalculator records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/AnionGapCalculator"
+    post:
+      summary: Create a new AnionGapCalculator
+      operationId: createAnionGapCalculator
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/AnionGapCalculator"
+      responses:
+        "201":
+          description: The newly created AnionGapCalculator
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AnionGapCalculator"
+        "400":
+          description: Validation error
+  /anion-gap-calculators/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one AnionGapCalculator by id
+      operationId: getAnionGapCalculator
+      responses:
+        "200":
+          description: The requested AnionGapCalculator
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AnionGapCalculator"
+        "404":
+          description: AnionGapCalculator not found
+    patch:
+      summary: Update an existing AnionGapCalculator
+      operationId: updateAnionGapCalculator
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/AnionGapCalculator"
+      responses:
+        "200":
+          description: The updated AnionGapCalculator
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AnionGapCalculator"
+        "404":
+          description: AnionGapCalculator not found
+    delete:
+      summary: Soft-delete a AnionGapCalculator
+      operationId: deleteAnionGapCalculator
+      responses:
+        "204":
+          description: AnionGapCalculator deleted
+        "404":
+          description: AnionGapCalculator not found
+components:
+  schemas:
+    AnionGapCalculator:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was most recently updated.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was soft-deleted.
+        patient_id:
+          type: string
+          format: uuid
+          description: Foreign key to the patient this calculation is for (restricted delete).
+        clinician_id:
+          type: string
+          format: uuid
+          description: Foreign key to the clinician who recorded the calculation (optional, restricted delete).
+        clinician_name:
+          type: string
+          maxLength: 255
+          description: Assessing clinician name as recorded on the form.
+        clinician_role:
+          type: string
+          enum:
+            - doctor
+            - nurse
+            - scientist
+            - pharmacist
+            - other
+            - ""
+          description: "Assessing clinician role: doctor, nurse, scientist, pharmacist, or other."
+        calculated_at:
+          type: string
+          format: date-time
+          description: Date and time the calculation was performed.
+        care_setting:
+          type: string
+          enum:
+            - emergency-department
+            - ward
+            - intensive-care
+            - laboratory
+            - other
+            - ""
+          description: "Care setting: emergency-department, ward, intensive-care, laboratory, or other."
+        clinical_context:
+          type: string
+          description: Free-text indication or clinical context for the calculation.
+        patient_identifier:
+          type: string
+          maxLength: 100
+          description: Local patient identifier as recorded on the form.
+        age_band:
+          type: string
+          enum:
+            - 18-39
+            - 40-64
+            - 65-74
+            - 75-84
+            - 85-plus
+            - ""
+          description: "Adult age band: 18-39, 40-64, 65-74, 75-84, or 85-plus."
+        sex:
+          type: string
+          enum:
+            - female
+            - male
+            - intersex
+            - unknown
+            - ""
+          description: "Patient sex recorded for clinical purposes: female, male, intersex, or unknown."
+        sodium_mmol_l:
+          type: number
+          format: double
+          description: Serum sodium in mmol/L; required input (null when unanswered).
+        potassium_mmol_l:
+          type: number
+          format: double
+          description: Serum potassium in mmol/L; optional input that selects the potassium-inclusive formula and reference range (null when unanswered).
+        chloride_mmol_l:
+          type: number
+          format: double
+          description: Serum chloride in mmol/L; required input (null when unanswered).
+        bicarbonate_mmol_l:
+          type: number
+          format: double
+          description: Serum bicarbonate (HCO3-) in mmol/L; required input (null when unanswered).
+        albumin_g_l:
+          type: number
+          format: double
+          description: Serum albumin in g/L; optional input that enables the albumin correction (null when unanswered).
+        include_potassium:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: "Whether potassium is included in the anion-gap formula: yes or no."
+      required:
+        - created_at
+        - updated_at
+        - patient_id
+        - clinician_name
+        - clinician_role
+        - care_setting
+        - clinical_context
+        - patient_identifier
+        - age_band
+        - sex
+        - include_potassium
+      description: "Main anion-gap calculation record: context and identification, plus the electrolyte-panel inputs (sodium, chloride, bicarbonate, optional potassium) and the optional albumin used for the correction."

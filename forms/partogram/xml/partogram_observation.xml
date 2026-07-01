@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE partogram_observation SYSTEM "partogram_observation.dtd">
+<partogram_observation>
+<id>880e8400-e29b-41d4-a716-446655440003</id>
+<created_at>2026-04-09T10:00:00Z</created_at>
+<updated_at>2026-04-09T10:00:00Z</updated_at>
+<deleted_at>2026-04-09T10:00:00Z</deleted_at>
+<partogram_id>770e8400-e29b-41d4-a716-446655440002</partogram_id>
+<observed_at>2026-04-09T10:00:00Z</observed_at>
+<cervical_dilatation_cm>0.0</cervical_dilatation_cm>
+<descent_fifths>0.0</descent_fifths>
+<contractions_per_10_min>0.0</contractions_per_10_min>
+<contraction_duration_band><20s</contraction_duration_band>
+<contraction_strength>mild</contraction_strength>
+<fetal_heart_rate>1</fetal_heart_rate>
+<liquor_state>intact</liquor_state>
+<moulding>0</moulding>
+<systolic_blood_pressure>1</systolic_blood_pressure>
+<diastolic_blood_pressure>1</diastolic_blood_pressure>
+<pulse>1</pulse>
+<temperature>0.0</temperature>
+<urine_volume_ml>0.0</urine_volume_ml>
+<urine_protein>negative</urine_protein>
+<urine_ketones>negative</urine_ketones>
+<urine_glucose>negative</urine_glucose>
+<oxytocin_rate>72.0</oxytocin_rate>
+<drugs_and_fluids>Paracetamol</drugs_and_fluids>
+</partogram_observation>

@@ -1,0 +1,293 @@
+# Generated from sql/. Do not edit by hand.
+# SOURCE: lumbar_puncture_test_result
+openapi: 3.1.0
+info:
+  title: Lumbar Puncture Test Result — LumbarPunctureTestResult
+  version: 1.0.0
+  description: Lumbar puncture (LP) / cerebrospinal-fluid (CSF) analysis result (report). Captures the manometry opening pressure, CSF macroscopic appearance, cell counts, biochemistry (protein, glucose, CSF:serum glucose ratio, lactate), microbiology (Gram stain, culture, PCR), specialist tests (oligoclonal bands, xanthochromia spectrophotometry), the narrative and structured interpretive findings, the impression, recommended follow-up, and critical-result communication. This is the source-of-truth record that the four-axis interpretation grade is computed from.
+paths:
+  /lumbar-puncture-test-results:
+    get:
+      summary: List LumbarPunctureTestResult records
+      operationId: listLumbarPunctureTestResult
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of LumbarPunctureTestResult records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/LumbarPunctureTestResult"
+    post:
+      summary: Create a new LumbarPunctureTestResult
+      operationId: createLumbarPunctureTestResult
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/LumbarPunctureTestResult"
+      responses:
+        "201":
+          description: The newly created LumbarPunctureTestResult
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/LumbarPunctureTestResult"
+        "400":
+          description: Validation error
+  /lumbar-puncture-test-results/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one LumbarPunctureTestResult by id
+      operationId: getLumbarPunctureTestResult
+      responses:
+        "200":
+          description: The requested LumbarPunctureTestResult
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/LumbarPunctureTestResult"
+        "404":
+          description: LumbarPunctureTestResult not found
+    patch:
+      summary: Update an existing LumbarPunctureTestResult
+      operationId: updateLumbarPunctureTestResult
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/LumbarPunctureTestResult"
+      responses:
+        "200":
+          description: The updated LumbarPunctureTestResult
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/LumbarPunctureTestResult"
+        "404":
+          description: LumbarPunctureTestResult not found
+    delete:
+      summary: Soft-delete a LumbarPunctureTestResult
+      operationId: deleteLumbarPunctureTestResult
+      responses:
+        "204":
+          description: LumbarPunctureTestResult deleted
+        "404":
+          description: LumbarPunctureTestResult not found
+components:
+  schemas:
+    LumbarPunctureTestResult:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was updated most-recently.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was deleted a.k.a. soft-removed.
+        patient_id:
+          type: string
+          format: uuid
+          description: Foreign key to the patient.
+        clinician_id:
+          type: string
+          format: uuid
+          description: Foreign key to the reporting clinician (neurologist / hospital doctor / microbiologist).
+        originating_request_reference:
+          type: string
+          maxLength: 255
+          description: Free-text reference linking this report back to the originating lumbar puncture request (referral).
+        report_status:
+          type: string
+          enum:
+            - preliminary
+            - final
+            - amended
+            - cancelled
+            - ""
+          description: "Report lifecycle status: preliminary, final, amended, cancelled."
+        performed_date:
+          type: string
+          format: date
+          description: Date the lumbar puncture was performed.
+        reported_date:
+          type: string
+          format: date
+          description: Date the report was authored / signed.
+        clinical_history:
+          type: string
+          maxLength: 1000
+          description: Clinical history and the question the lumbar puncture was performed to answer.
+        opening_pressure_cmh2o:
+          type: number
+          format: double
+          description: Manometry opening pressure in cm of CSF (normal adult range approximately 6-25 cmH2O when relaxed and laterally recumbent).
+        csf_appearance:
+          type: string
+          enum:
+            - clear
+            - cloudy
+            - turbid
+            - blood-stained
+            - xanthochromic
+            - ""
+          description: "Macroscopic CSF appearance: clear, cloudy, turbid, blood-stained, xanthochromic."
+        csf_white_cell_count:
+          type: number
+          format: double
+          description: CSF white cell count in cells per microlitre (normal adult typically <5/uL; neutrophil predominance suggests bacterial infection).
+        csf_red_cell_count:
+          type: number
+          format: double
+          description: CSF red cell count in cells per microlitre (raised in traumatic tap or subarachnoid haemorrhage).
+        csf_protein_g_l:
+          type: number
+          format: double
+          description: CSF total protein in g/L (normal adult typically 0.15-0.45 g/L; raised in bacterial meningitis and many other conditions).
+        csf_glucose_mmol_l:
+          type: number
+          format: double
+          description: CSF glucose in mmol/L (interpret against paired serum glucose; low in bacterial meningitis).
+        csf_serum_glucose_ratio:
+          type: number
+          format: double
+          description: CSF:serum glucose ratio (normal approximately 0.6; <0.4 suggests bacterial meningitis).
+        csf_lactate_mmol_l:
+          type: number
+          format: double
+          description: CSF lactate in mmol/L (raised, typically >3.5 mmol/L, supports bacterial meningitis).
+        gram_stain_result:
+          type: string
+          maxLength: 500
+          description: Free-text Gram stain result and organisms seen.
+        culture_result:
+          type: string
+          maxLength: 500
+          description: Free-text CSF culture result and organisms grown (a positive culture is a critical result).
+        pcr_result:
+          type: string
+          maxLength: 500
+          description: Free-text molecular / PCR result (e.g. meningococcal, pneumococcal, herpes simplex, enterovirus).
+        oligoclonal_bands:
+          type: string
+          enum:
+            - positive
+            - negative
+            - not-tested
+            - ""
+          description: "CSF oligoclonal bands result: positive, negative, not-tested (supports demyelination / multiple sclerosis when CSF-specific)."
+        xanthochromia:
+          type: string
+          enum:
+            - positive
+            - negative
+            - not-tested
+            - ""
+          description: "CSF xanthochromia (bilirubin) spectrophotometry result: positive, negative, not-tested (a positive result supports subarachnoid haemorrhage when LP performed >=12 h after headache onset)."
+        raised_protein:
+          type: boolean
+          description: Whether the CSF protein is raised.
+        pleocytosis:
+          type: boolean
+          description: Whether a raised CSF white cell count (pleocytosis) is present.
+        low_glucose:
+          type: boolean
+          description: Whether the CSF glucose / CSF:serum glucose ratio is low.
+        bacterial_meningitis_pattern:
+          type: boolean
+          description: Whether the overall CSF profile fits a bacterial meningitis pattern (neutrophil pleocytosis, raised protein, low glucose, raised lactate) — a critical result.
+        viral_pattern:
+          type: boolean
+          description: Whether the overall CSF profile fits a viral / aseptic meningitis pattern (lymphocytic pleocytosis, normal-to-mildly-raised protein, normal glucose).
+        subarachnoid_haemorrhage_suggested:
+          type: boolean
+          description: Whether the result (xanthochromia and/or red-cell pattern) suggests subarachnoid haemorrhage — a critical result.
+        normal_csf:
+          type: boolean
+          description: Whether the CSF analysis is within normal limits across all measured parameters.
+        findings_narrative:
+          type: string
+          maxLength: 2000
+          description: Narrative description of the CSF findings (the body of the report).
+        impression:
+          type: string
+          maxLength: 2000
+          description: Summary impression / conclusion answering the clinical question.
+        reporting_category:
+          type: string
+          maxLength: 50
+          description: Structured-reporting category / pattern label (e.g. bacterial-pattern, viral-pattern, SAH-pattern, normal, inflammatory-demyelinating).
+        recommended_follow_up:
+          type: string
+          maxLength: 1000
+          description: Recommended follow-up investigation, referral, or management.
+        critical_result_communicated:
+          type: boolean
+          description: Whether a critical or unexpected significant result was communicated directly to the requesting / responsible clinician.
+        reported_to:
+          type: string
+          maxLength: 500
+          description: Who the critical / urgent result was communicated to, with date and time if applicable.
+      required:
+        - created_at
+        - updated_at
+        - patient_id
+        - clinician_id
+        - originating_request_reference
+        - report_status
+        - clinical_history
+        - csf_appearance
+        - gram_stain_result
+        - culture_result
+        - pcr_result
+        - oligoclonal_bands
+        - xanthochromia
+        - raised_protein
+        - pleocytosis
+        - low_glucose
+        - bacterial_meningitis_pattern
+        - viral_pattern
+        - subarachnoid_haemorrhage_suggested
+        - normal_csf
+        - findings_narrative
+        - impression
+        - reporting_category
+        - recommended_follow_up
+        - critical_result_communicated
+        - reported_to
+      description: Lumbar puncture (LP) / cerebrospinal-fluid (CSF) analysis result (report). Captures the manometry opening pressure, CSF macroscopic appearance, cell counts, biochemistry (protein, glucose, CSF:serum glucose ratio, lactate), microbiology (Gram stain, culture, PCR), specialist tests (oligoclonal bands, xanthochromia spectrophotometry), the narrative and structured interpretive findings, the impression, recommended follow-up, and critical-result communication. This is the source-of-truth record that the four-axis interpretation grade is computed from.

@@ -1,0 +1,81 @@
+// Generated from sql/. Do not edit by hand.
+// SOURCE: rockall_score_for_upper_gastrointestinal_bleeding
+
+syntax = "proto3";
+
+package form_examples.rockall_score_for_upper_gastrointestinal_bleeding;
+
+enum RockallScoreForUpperGastrointestinalBleedingClinicianRoleEnum {
+  CLINICIANROLE_UNSPECIFIED = 0;
+  CLINICIANROLE_DOCTOR = 1;  // doctor
+  CLINICIANROLE_NURSE = 2;  // nurse
+  CLINICIANROLE_GASTROENTEROLOGIST = 3;  // gastroenterologist
+  CLINICIANROLE_ENDOSCOPIST = 4;  // endoscopist
+  CLINICIANROLE_OTHER = 5;  // other
+}
+
+enum RockallScoreForUpperGastrointestinalBleedingCareSettingEnum {
+  CARESETTING_UNSPECIFIED = 0;
+  CARESETTING_EMERGENCY_DEPARTMENT = 1;  // emergency-department
+  CARESETTING_WARD = 2;  // ward
+  CARESETTING_ENDOSCOPY_UNIT = 3;  // endoscopy-unit
+  CARESETTING_OTHER = 4;  // other
+}
+
+enum RockallScoreForUpperGastrointestinalBleedingSexEnum {
+  SEX_UNSPECIFIED = 0;
+  SEX_FEMALE = 1;  // female
+  SEX_MALE = 2;  // male
+  SEX_INTERSEX = 3;  // intersex
+  SEX_UNKNOWN = 4;  // unknown
+}
+
+enum RockallScoreForUpperGastrointestinalBleedingComorbidityEnum {
+  COMORBIDITY_UNSPECIFIED = 0;
+  COMORBIDITY_NONE = 1;  // none
+  COMORBIDITY_MAJOR = 2;  // major
+  COMORBIDITY_SEVERE = 3;  // severe
+}
+
+enum RockallScoreForUpperGastrointestinalBleedingEndoscopyPerformedEnum {
+  ENDOSCOPYPERFORMED_UNSPECIFIED = 0;
+  ENDOSCOPYPERFORMED_YES = 1;  // yes
+  ENDOSCOPYPERFORMED_NO = 2;  // no
+}
+
+enum RockallScoreForUpperGastrointestinalBleedingDiagnosisEnum {
+  DIAGNOSIS_UNSPECIFIED = 0;
+  DIAGNOSIS_MALLORY_WEISS_OR_NONE = 1;  // mallory-weiss-or-none
+  DIAGNOSIS_ALL_OTHER = 2;  // all-other
+  DIAGNOSIS_UPPER_GI_MALIGNANCY = 3;  // upper-gi-malignancy
+}
+
+enum RockallScoreForUpperGastrointestinalBleedingStigmataRecentHaemorrhageEnum {
+  STIGMATARECENTHAEMORRHAGE_UNSPECIFIED = 0;
+  STIGMATARECENTHAEMORRHAGE_NONE_OR_DARK_SPOT = 1;  // none-or-dark-spot
+  STIGMATARECENTHAEMORRHAGE_HIGH_RISK = 2;  // high-risk
+}
+
+message RockallScoreForUpperGastrointestinalBleeding {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string patient_id = 5;  // UUID — uuid
+  string clinician_id = 6;  // UUID — uuid
+  string clinician_name = 7;  // VARCHAR(255) — max 255 chars
+  RockallScoreForUpperGastrointestinalBleedingClinicianRoleEnum clinician_role = 8;  // VARCHAR(20)
+  string assessed_at = 9;  // TIMESTAMPTZ — iso 8601
+  RockallScoreForUpperGastrointestinalBleedingCareSettingEnum care_setting = 10;  // VARCHAR(20)
+  string presenting_complaint = 11;  // TEXT
+  string patient_identifier = 12;  // VARCHAR(100) — max 100 chars
+  int32 age_years = 13;  // INT
+  RockallScoreForUpperGastrointestinalBleedingSexEnum sex = 14;  // VARCHAR(20)
+  int32 systolic_blood_pressure_mmhg = 15;  // INT
+  int32 heart_rate_bpm = 16;  // INT
+  RockallScoreForUpperGastrointestinalBleedingComorbidityEnum comorbidity = 17;  // VARCHAR(20)
+  RockallScoreForUpperGastrointestinalBleedingEndoscopyPerformedEnum endoscopy_performed = 18;  // VARCHAR(10)
+  RockallScoreForUpperGastrointestinalBleedingDiagnosisEnum diagnosis = 19;  // VARCHAR(30)
+  RockallScoreForUpperGastrointestinalBleedingStigmataRecentHaemorrhageEnum stigmata_recent_haemorrhage = 20;  // VARCHAR(20)
+  string clinical_note = 21;  // TEXT
+}

@@ -1,0 +1,35 @@
+// Generated from sql/. Do not edit by hand.
+// SOURCE: padua_venous_thromboembolism_risk_assessment_grade
+
+syntax = "proto3";
+
+package form_examples.padua_venous_thromboembolism_risk_assessment;
+
+enum PaduaVenousThromboembolismRiskAssessmentGradeRiskBandEnum {
+  RISKBAND_UNSPECIFIED = 0;
+  RISKBAND_LOW = 1;  // low
+  RISKBAND_HIGH = 2;  // high
+}
+
+message PaduaVenousThromboembolismRiskAssessmentGrade {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string padua_venous_thromboembolism_risk_assessment_id = 5;  // UUID — uuid
+  int32 active_cancer_points = 6;  // INT
+  int32 previous_vte_points = 7;  // INT
+  int32 reduced_mobility_points = 8;  // INT
+  int32 known_thrombophilia_points = 9;  // INT
+  int32 recent_trauma_or_surgery_points = 10;  // INT
+  int32 elderly_age_points = 11;  // INT
+  int32 heart_or_respiratory_failure_points = 12;  // INT
+  int32 acute_mi_or_ischaemic_stroke_points = 13;  // INT
+  int32 acute_infection_or_rheumatological_points = 14;  // INT
+  int32 obesity_points = 15;  // INT
+  int32 ongoing_hormonal_treatment_points = 16;  // INT
+  int32 total_score = 17;  // INT
+  PaduaVenousThromboembolismRiskAssessmentGradeRiskBandEnum risk_band = 18;  // VARCHAR(10)
+  string prophylaxis_recommendation = 19;  // TEXT
+  string graded_at = 20;  // TIMESTAMPTZ — iso 8601
+}

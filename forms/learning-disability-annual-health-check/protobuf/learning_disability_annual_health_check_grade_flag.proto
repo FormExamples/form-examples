@@ -1,0 +1,38 @@
+// Generated from sql/. Do not edit by hand.
+// SOURCE: learning_disability_annual_health_check_grade_flag
+
+syntax = "proto3";
+
+package form_examples.learning_disability_annual_health_check;
+
+enum LearningDisabilityAnnualHealthCheckGradeFlagCategoryEnum {
+  CATEGORY_UNSPECIFIED = 0;
+  CATEGORY_STOMP = 1;  // stomp
+  CATEGORY_MISSING_SCREENING_UPTAKE = 2;  // missing-screening-uptake
+  CATEGORY_UNADDRESSED_PHYSICAL_HEALTH = 3;  // unaddressed-physical-health
+  CATEGORY_NO_HEALTH_ACTION_PLAN = 4;  // no-health-action-plan
+  CATEGORY_REASONABLE_ADJUSTMENTS_NOT_RECORDED = 5;  // reasonable-adjustments-not-recorded
+  CATEGORY_DYSPHAGIA_CONSTIPATION_RISK = 6;  // dysphagia-constipation-risk
+  CATEGORY_INCOMPLETE = 7;  // incomplete
+  CATEGORY_OTHER = 8;  // other
+}
+
+enum LearningDisabilityAnnualHealthCheckGradeFlagPriorityEnum {
+  PRIORITY_UNSPECIFIED = 0;
+  PRIORITY_LOW = 1;  // low
+  PRIORITY_MEDIUM = 2;  // medium
+  PRIORITY_HIGH = 3;  // high
+}
+
+message LearningDisabilityAnnualHealthCheckGradeFlag {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string learning_disability_annual_health_check_grade_id = 5;  // UUID — uuid
+  string flag_id = 6;  // VARCHAR(50) — max 50 chars
+  LearningDisabilityAnnualHealthCheckGradeFlagCategoryEnum category = 7;  // VARCHAR(50)
+  LearningDisabilityAnnualHealthCheckGradeFlagPriorityEnum priority = 8;  // VARCHAR(10)
+  string description = 9;  // VARCHAR(500) — max 500 chars
+  string suggested_action = 10;  // VARCHAR(500) — max 500 chars
+}

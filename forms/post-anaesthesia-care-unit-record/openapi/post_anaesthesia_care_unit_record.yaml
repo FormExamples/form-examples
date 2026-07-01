@@ -1,0 +1,346 @@
+# Generated from sql/. Do not edit by hand.
+# SOURCE: post_anaesthesia_care_unit_record
+openapi: 3.1.0
+info:
+  title: Post Anaesthesia Care Unit Record — PostAnaesthesiaCareUnitRecord
+  version: 1.0.0
+  description: "Main PACU recovery record: recovery context, patient identification, the five Modified Aldrete parameter inputs, airway / pain / PONV observations, and the optional PADSS criterion inputs for day-surgery discharge."
+paths:
+  /post-anaesthesia-care-unit-records:
+    get:
+      summary: List PostAnaesthesiaCareUnitRecord records
+      operationId: listPostAnaesthesiaCareUnitRecord
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of PostAnaesthesiaCareUnitRecord records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/PostAnaesthesiaCareUnitRecord"
+    post:
+      summary: Create a new PostAnaesthesiaCareUnitRecord
+      operationId: createPostAnaesthesiaCareUnitRecord
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/PostAnaesthesiaCareUnitRecord"
+      responses:
+        "201":
+          description: The newly created PostAnaesthesiaCareUnitRecord
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PostAnaesthesiaCareUnitRecord"
+        "400":
+          description: Validation error
+  /post-anaesthesia-care-unit-records/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one PostAnaesthesiaCareUnitRecord by id
+      operationId: getPostAnaesthesiaCareUnitRecord
+      responses:
+        "200":
+          description: The requested PostAnaesthesiaCareUnitRecord
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PostAnaesthesiaCareUnitRecord"
+        "404":
+          description: PostAnaesthesiaCareUnitRecord not found
+    patch:
+      summary: Update an existing PostAnaesthesiaCareUnitRecord
+      operationId: updatePostAnaesthesiaCareUnitRecord
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/PostAnaesthesiaCareUnitRecord"
+      responses:
+        "200":
+          description: The updated PostAnaesthesiaCareUnitRecord
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PostAnaesthesiaCareUnitRecord"
+        "404":
+          description: PostAnaesthesiaCareUnitRecord not found
+    delete:
+      summary: Soft-delete a PostAnaesthesiaCareUnitRecord
+      operationId: deletePostAnaesthesiaCareUnitRecord
+      responses:
+        "204":
+          description: PostAnaesthesiaCareUnitRecord deleted
+        "404":
+          description: PostAnaesthesiaCareUnitRecord not found
+components:
+  schemas:
+    PostAnaesthesiaCareUnitRecord:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was updated most-recently.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was deleted a.k.a. soft-removed.
+        patient_id:
+          type: string
+          format: uuid
+          description: Foreign key to the patient in recovery (delete restricted).
+        clinician_id:
+          type: string
+          format: uuid
+          description: Foreign key to the recording recovery clinician (optional; delete restricted).
+        nurse_name:
+          type: string
+          maxLength: 255
+          description: Name of the recording recovery nurse as documented on the record.
+        nurse_role:
+          type: string
+          enum:
+            - recovery-nurse
+            - odp
+            - anaesthetist
+            - other
+            - ""
+          description: "Role of the recording staff member: recovery-nurse, odp, anaesthetist, or other."
+        anaesthetist_name:
+          type: string
+          maxLength: 255
+          description: Name of the supervising anaesthetist responsible for the case.
+        admitted_at:
+          type: string
+          format: date-time
+          description: Date and time of admission to the post-anaesthesia care unit.
+        anaesthetic_technique:
+          type: string
+          enum:
+            - general
+            - regional
+            - sedation
+            - combined
+            - ""
+          description: "Anaesthetic technique used: general, regional, sedation, or combined."
+        procedure:
+          type: string
+          description: Operation or procedure performed before recovery.
+        patient_identifier:
+          type: string
+          maxLength: 100
+          description: Local patient identifier as recorded on the record.
+        age_band:
+          type: string
+          enum:
+            - 16-39
+            - 40-59
+            - 60-74
+            - 75-plus
+            - ""
+          description: "Adult age band: 16-39, 40-59, 60-74, or 75-plus."
+        sex:
+          type: string
+          enum:
+            - female
+            - male
+            - intersex
+            - unknown
+            - ""
+          description: "Patient sex recorded for the record: female, male, intersex, or unknown."
+        asa_status:
+          type: string
+          enum:
+            - I
+            - II
+            - III
+            - IV
+            - V
+            - ""
+          description: ASA physical status (I-V) carried over from the pre-anaesthetic assessment.
+        baseline_systolic_bp:
+          type: number
+          format: double
+          description: Pre-anaesthetic baseline systolic blood pressure in mmHg, used as the circulation reference.
+        ambulatory_case:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: "Whether this is a day-surgery (ambulatory) case: yes enables PADSS street-fitness scoring."
+        activity:
+          type: string
+          enum:
+            - all-four
+            - two
+            - none
+            - ""
+          description: "Aldrete activity parameter: all-four (moves all four limbs, 2), two (moves two limbs, 1), or none (unable to move, 0)."
+        respiration:
+          type: string
+          enum:
+            - deep-cough
+            - limited
+            - apnoeic
+            - ""
+          description: "Aldrete respiration parameter: deep-cough (breathes deeply and coughs freely, 2), limited (dyspnoea or limited breathing, 1), or apnoeic (0)."
+        circulation:
+          type: string
+          enum:
+            - within-20
+            - within-50
+            - over-50
+            - ""
+          description: "Aldrete circulation parameter versus baseline systolic BP: within-20 (within 20 mmHg, 2), within-50 (within 20-50 mmHg, 1), or over-50 (more than 50 mmHg, 0)."
+        consciousness:
+          type: string
+          enum:
+            - awake
+            - arousable
+            - unresponsive
+            - ""
+          description: "Aldrete consciousness parameter: awake (fully awake, 2), arousable (arousable on calling, 1), or unresponsive (0)."
+        oxygen_saturation:
+          type: string
+          enum:
+            - room-air
+            - needs-o2
+            - low-on-o2
+            - ""
+          description: "Aldrete oxygen-saturation parameter: room-air (SpO2 > 92% on room air, 2), needs-o2 (needs oxygen to maintain SpO2 > 90%, 1), or low-on-o2 (SpO2 < 90% even with oxygen, 0)."
+        airway_status:
+          type: string
+          enum:
+            - patent
+            - oral-airway
+            - other
+            - ""
+          description: "Airway status in recovery: patent, oral-airway (oral/nasal airway in situ), or other support."
+        pain_score:
+          type: number
+          format: double
+          description: Pain score on the verbal / numeric rating scale (0-10).
+        ponv_severity:
+          type: string
+          enum:
+            - none
+            - mild
+            - moderate
+            - severe
+            - ""
+          description: "Post-operative nausea and vomiting severity: none, mild, moderate, or severe."
+        analgesia_given:
+          type: string
+          description: Free-text record of analgesics administered in the PACU.
+        antiemetics_given:
+          type: string
+          description: Free-text record of antiemetics administered in the PACU.
+        padss_vital_signs:
+          type: string
+          enum:
+            - within-20
+            - within-40
+            - over-40
+            - ""
+          description: "PADSS vital-signs criterion versus baseline: within-20 (within 20%, 2), within-40 (20-40%, 1), or over-40 (more than 40%, 0)."
+        padss_ambulation:
+          type: string
+          enum:
+            - steady
+            - with-assistance
+            - unable
+            - ""
+          description: "PADSS ambulation criterion: steady (steady gait, no dizziness, 2), with-assistance (needs assistance, 1), or unable (unable / dizzy, 0)."
+        padss_nausea_vomiting:
+          type: string
+          enum:
+            - minimal
+            - moderate
+            - severe
+            - ""
+          description: "PADSS nausea-and-vomiting criterion: minimal (2), moderate (1), or severe (0)."
+        padss_pain:
+          type: string
+          enum:
+            - minimal
+            - moderate
+            - severe
+            - ""
+          description: "PADSS pain criterion: minimal (2), moderate (1), or severe (0)."
+        padss_surgical_bleeding:
+          type: string
+          enum:
+            - minimal
+            - moderate
+            - severe
+            - ""
+          description: "PADSS surgical-bleeding criterion: minimal (2), moderate (1), or severe (0)."
+        recovery_note:
+          type: string
+          description: Free-text recovery note recorded with the assessment.
+      required:
+        - created_at
+        - updated_at
+        - patient_id
+        - nurse_name
+        - nurse_role
+        - anaesthetist_name
+        - anaesthetic_technique
+        - procedure
+        - patient_identifier
+        - age_band
+        - sex
+        - asa_status
+        - ambulatory_case
+        - activity
+        - respiration
+        - circulation
+        - consciousness
+        - oxygen_saturation
+        - airway_status
+        - ponv_severity
+        - analgesia_given
+        - antiemetics_given
+        - padss_vital_signs
+        - padss_ambulation
+        - padss_nausea_vomiting
+        - padss_pain
+        - padss_surgical_bleeding
+        - recovery_note
+      description: "Main PACU recovery record: recovery context, patient identification, the five Modified Aldrete parameter inputs, airway / pain / PONV observations, and the optional PADSS criterion inputs for day-surgery discharge."

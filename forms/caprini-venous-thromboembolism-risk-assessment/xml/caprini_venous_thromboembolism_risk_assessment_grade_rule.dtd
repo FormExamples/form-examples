@@ -1,0 +1,12 @@
+<!ELEMENT caprini_venous_thromboembolism_risk_assessment_grade_rule (id,created_at,updated_at,deleted_at,caprini_venous_thromboembolism_risk_assessment_grade_id,rule_id,factor,weight_group,points,category,description)>
+<!ELEMENT id (#PCDATA)>
+<!ELEMENT created_at (#PCDATA)>
+<!ELEMENT updated_at (#PCDATA)>
+<!ELEMENT deleted_at (#PCDATA)>
+<!ELEMENT caprini_venous_thromboembolism_risk_assessment_grade_id (#PCDATA)>
+<!ELEMENT rule_id (#PCDATA)>
+<!ELEMENT factor (#PCDATA)>
+<!ELEMENT weight_group (#PCDATA)>
+<!ELEMENT points (#PCDATA)>
+<!ELEMENT category (#PCDATA)>
+<!ELEMENT description (#PCDATA)>

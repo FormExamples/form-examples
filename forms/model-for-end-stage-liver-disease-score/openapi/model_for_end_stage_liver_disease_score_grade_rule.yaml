@@ -1,0 +1,164 @@
+# Generated from sql/. Do not edit by hand.
+# SOURCE: model_for_end_stage_liver_disease_score_grade_rule
+openapi: 3.1.0
+info:
+  title: Model For End Stage Liver Disease Score — ModelForEndStageLiverDiseaseScoreGradeRule
+  version: 1.0.0
+  description: "Audit trail of every calculation rule that fired during MELD computation: formula component, numeric contribution, category, and description."
+paths:
+  /model-for-end-stage-liver-disease-score-grade-rules:
+    get:
+      summary: List ModelForEndStageLiverDiseaseScoreGradeRule records
+      operationId: listModelForEndStageLiverDiseaseScoreGradeRule
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of ModelForEndStageLiverDiseaseScoreGradeRule records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/ModelForEndStageLiverDiseaseScoreGradeRule"
+    post:
+      summary: Create a new ModelForEndStageLiverDiseaseScoreGradeRule
+      operationId: createModelForEndStageLiverDiseaseScoreGradeRule
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ModelForEndStageLiverDiseaseScoreGradeRule"
+      responses:
+        "201":
+          description: The newly created ModelForEndStageLiverDiseaseScoreGradeRule
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ModelForEndStageLiverDiseaseScoreGradeRule"
+        "400":
+          description: Validation error
+  /model-for-end-stage-liver-disease-score-grade-rules/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one ModelForEndStageLiverDiseaseScoreGradeRule by id
+      operationId: getModelForEndStageLiverDiseaseScoreGradeRule
+      responses:
+        "200":
+          description: The requested ModelForEndStageLiverDiseaseScoreGradeRule
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ModelForEndStageLiverDiseaseScoreGradeRule"
+        "404":
+          description: ModelForEndStageLiverDiseaseScoreGradeRule not found
+    patch:
+      summary: Update an existing ModelForEndStageLiverDiseaseScoreGradeRule
+      operationId: updateModelForEndStageLiverDiseaseScoreGradeRule
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ModelForEndStageLiverDiseaseScoreGradeRule"
+      responses:
+        "200":
+          description: The updated ModelForEndStageLiverDiseaseScoreGradeRule
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ModelForEndStageLiverDiseaseScoreGradeRule"
+        "404":
+          description: ModelForEndStageLiverDiseaseScoreGradeRule not found
+    delete:
+      summary: Soft-delete a ModelForEndStageLiverDiseaseScoreGradeRule
+      operationId: deleteModelForEndStageLiverDiseaseScoreGradeRule
+      responses:
+        "204":
+          description: ModelForEndStageLiverDiseaseScoreGradeRule deleted
+        "404":
+          description: ModelForEndStageLiverDiseaseScoreGradeRule not found
+components:
+  schemas:
+    ModelForEndStageLiverDiseaseScoreGradeRule:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was most recently updated.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was soft-deleted.
+        model_for_end_stage_liver_disease_score_grade_id:
+          type: string
+          format: uuid
+          description: Foreign key to the parent grade.
+        rule_id:
+          type: string
+          maxLength: 40
+          description: Stable rule identifier (e.g. R-CREATININE-DIALYSIS-01).
+        component:
+          type: string
+          enum:
+            - bilirubin
+            - inr
+            - creatinine
+            - sodium
+            - albumin
+            - dialysis
+            - variant
+            - band
+            - other
+          description: "Formula component the rule belongs to: bilirubin, inr, creatinine, sodium, albumin, dialysis, variant, band, or other."
+        contribution:
+          type: number
+          format: double
+          description: Numeric contribution this rule made to the score (e.g. a weighted-log term or an applied bound/clamp value).
+        category:
+          type: string
+          maxLength: 50
+          description: Subject category (e.g. unit-conversion, dialysis-rule, bound, sodium-correction, band-map).
+        description:
+          type: string
+          maxLength: 500
+          description: Human-readable description of why the rule fired.
+      required:
+        - created_at
+        - updated_at
+        - model_for_end_stage_liver_disease_score_grade_id
+        - rule_id
+        - component
+        - category
+        - description
+      description: "Audit trail of every calculation rule that fired during MELD computation: formula component, numeric contribution, category, and description."

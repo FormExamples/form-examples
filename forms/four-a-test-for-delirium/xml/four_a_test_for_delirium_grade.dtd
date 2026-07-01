@@ -1,0 +1,13 @@
+<!ELEMENT four_a_test_for_delirium_grade (id,created_at,updated_at,deleted_at,four_a_test_for_delirium_id,item1_score,item2_score,item3_score,item4_score,total_score,interpretation,graded_at)>
+<!ELEMENT id (#PCDATA)>
+<!ELEMENT created_at (#PCDATA)>
+<!ELEMENT updated_at (#PCDATA)>
+<!ELEMENT deleted_at (#PCDATA)>
+<!ELEMENT four_a_test_for_delirium_id (#PCDATA)>
+<!ELEMENT item1_score (#PCDATA)>
+<!ELEMENT item2_score (#PCDATA)>
+<!ELEMENT item3_score (#PCDATA)>
+<!ELEMENT item4_score (#PCDATA)>
+<!ELEMENT total_score (#PCDATA)>
+<!ELEMENT interpretation (#PCDATA)>
+<!ELEMENT graded_at (#PCDATA)>

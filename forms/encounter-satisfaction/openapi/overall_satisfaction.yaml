@@ -1,4 +1,4 @@
-# Generated from sql-migrations/. Do not edit by hand.
+# Generated from sql/. Do not edit by hand.
 # SOURCE: overall_satisfaction
 openapi: 3.1.0
 info:
@@ -124,9 +124,10 @@ components:
           type: string
           format: uuid
           description: FK to encounter_satisfaction (UNIQUE = 1:1 relationship).
-        "NULL":
-          type: string
-          description: Null.
+        overall_rating:
+          type: integer
+          format: int32
+          description: Overall satisfaction rating (1-5 Likert). NULL if unanswered.
         likely_to_recommend:
           type: integer
           format: int32

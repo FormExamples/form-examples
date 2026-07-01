@@ -1,0 +1,148 @@
+// Generated from sql/. Do not edit by hand.
+// SOURCE: waterlow_pressure_ulcer_risk_assessment
+
+syntax = "proto3";
+
+package form_examples.waterlow_pressure_ulcer_risk_assessment;
+
+enum WaterlowPressureUlcerRiskAssessmentNurseRoleEnum {
+  NURSEROLE_UNSPECIFIED = 0;
+  NURSEROLE_REGISTERED_NURSE = 1;  // registered-nurse
+  NURSEROLE_HEALTHCARE_ASSISTANT = 2;  // healthcare-assistant
+  NURSEROLE_TISSUE_VIABILITY = 3;  // tissue-viability
+  NURSEROLE_OTHER = 4;  // other
+}
+
+enum WaterlowPressureUlcerRiskAssessmentCareSettingEnum {
+  CARESETTING_UNSPECIFIED = 0;
+  CARESETTING_ACUTE_WARD = 1;  // acute-ward
+  CARESETTING_COMMUNITY = 2;  // community
+  CARESETTING_CARE_HOME = 3;  // care-home
+  CARESETTING_HOSPICE = 4;  // hospice
+  CARESETTING_OTHER = 5;  // other
+}
+
+enum WaterlowPressureUlcerRiskAssessmentAssessmentReasonEnum {
+  ASSESSMENTREASON_UNSPECIFIED = 0;
+  ASSESSMENTREASON_ADMISSION = 1;  // admission
+  ASSESSMENTREASON_ROUTINE = 2;  // routine
+  ASSESSMENTREASON_CHANGE_IN_CONDITION = 3;  // change-in-condition
+}
+
+enum WaterlowPressureUlcerRiskAssessmentAgeBandEnum {
+  AGEBAND_UNSPECIFIED = 0;
+  AGEBAND_V_14_49 = 1;  // 14-49
+  AGEBAND_V_50_64 = 2;  // 50-64
+  AGEBAND_V_65_74 = 3;  // 65-74
+  AGEBAND_V_75_80 = 4;  // 75-80
+  AGEBAND_V_81_PLUS = 5;  // 81-plus
+}
+
+enum WaterlowPressureUlcerRiskAssessmentSexEnum {
+  SEX_UNSPECIFIED = 0;
+  SEX_FEMALE = 1;  // female
+  SEX_MALE = 2;  // male
+}
+
+enum WaterlowPressureUlcerRiskAssessmentBuildWeightForHeightEnum {
+  BUILDWEIGHTFORHEIGHT_UNSPECIFIED = 0;
+  BUILDWEIGHTFORHEIGHT_AVERAGE = 1;  // average
+  BUILDWEIGHTFORHEIGHT_ABOVE_AVERAGE = 2;  // above-average
+  BUILDWEIGHTFORHEIGHT_OBESE = 3;  // obese
+  BUILDWEIGHTFORHEIGHT_BELOW_AVERAGE = 4;  // below-average
+}
+
+enum WaterlowPressureUlcerRiskAssessmentSkinTypeEnum {
+  SKINTYPE_UNSPECIFIED = 0;
+  SKINTYPE_HEALTHY = 1;  // healthy
+  SKINTYPE_TISSUE_PAPER = 2;  // tissue-paper
+  SKINTYPE_DRY = 3;  // dry
+  SKINTYPE_OEDEMATOUS = 4;  // oedematous
+  SKINTYPE_CLAMMY_PYREXIAL = 5;  // clammy-pyrexial
+  SKINTYPE_DISCOLOURED = 6;  // discoloured
+  SKINTYPE_BROKEN = 7;  // broken
+}
+
+enum WaterlowPressureUlcerRiskAssessmentContinenceEnum {
+  CONTINENCE_UNSPECIFIED = 0;
+  CONTINENCE_COMPLETE_CATHETERISED = 1;  // complete-catheterised
+  CONTINENCE_INCONTINENT_URINE = 2;  // incontinent-urine
+  CONTINENCE_INCONTINENT_FAECES = 3;  // incontinent-faeces
+  CONTINENCE_DOUBLY_INCONTINENT = 4;  // doubly-incontinent
+}
+
+enum WaterlowPressureUlcerRiskAssessmentMobilityEnum {
+  MOBILITY_UNSPECIFIED = 0;
+  MOBILITY_FULLY_MOBILE = 1;  // fully-mobile
+  MOBILITY_RESTLESS = 2;  // restless
+  MOBILITY_APATHETIC = 3;  // apathetic
+  MOBILITY_RESTRICTED = 4;  // restricted
+  MOBILITY_BEDBOUND = 5;  // bedbound
+  MOBILITY_CHAIRBOUND = 6;  // chairbound
+}
+
+enum WaterlowPressureUlcerRiskAssessmentTissueMalnutritionEnum {
+  TISSUEMALNUTRITION_UNSPECIFIED = 0;
+  TISSUEMALNUTRITION_NONE = 1;  // none
+  TISSUEMALNUTRITION_SMOKING = 2;  // smoking
+  TISSUEMALNUTRITION_ANAEMIA = 3;  // anaemia
+  TISSUEMALNUTRITION_PERIPHERAL_VASCULAR_DISEASE = 4;  // peripheral-vascular-disease
+  TISSUEMALNUTRITION_SINGLE_ORGAN_FAILURE = 5;  // single-organ-failure
+  TISSUEMALNUTRITION_MULTIPLE_ORGAN_FAILURE = 6;  // multiple-organ-failure
+  TISSUEMALNUTRITION_TERMINAL_CACHEXIA = 7;  // terminal-cachexia
+}
+
+enum WaterlowPressureUlcerRiskAssessmentNeurologicalDeficitEnum {
+  NEUROLOGICALDEFICIT_UNSPECIFIED = 0;
+  NEUROLOGICALDEFICIT_NONE = 1;  // none
+  NEUROLOGICALDEFICIT_MILD = 2;  // mild
+  NEUROLOGICALDEFICIT_MODERATE = 3;  // moderate
+  NEUROLOGICALDEFICIT_SEVERE = 4;  // severe
+}
+
+enum WaterlowPressureUlcerRiskAssessmentMajorSurgeryTraumaEnum {
+  MAJORSURGERYTRAUMA_UNSPECIFIED = 0;
+  MAJORSURGERYTRAUMA_NONE = 1;  // none
+  MAJORSURGERYTRAUMA_ORTHOPAEDIC_SPINAL = 2;  // orthopaedic-spinal
+  MAJORSURGERYTRAUMA_ON_TABLE_OVER_2H = 3;  // on-table-over-2h
+  MAJORSURGERYTRAUMA_ON_TABLE_OVER_6H = 4;  // on-table-over-6h
+}
+
+enum WaterlowPressureUlcerRiskAssessmentMedicationEnum {
+  MEDICATION_UNSPECIFIED = 0;
+  MEDICATION_NONE = 1;  // none
+  MEDICATION_HIGH_DOSE_STEROIDS_CYTOTOXICS_ANTI_INFLAMMATORY = 2;  // high-dose-steroids-cytotoxics-anti-inflammatory
+}
+
+enum WaterlowPressureUlcerRiskAssessmentExistingPressureDamageEnum {
+  EXISTINGPRESSUREDAMAGE_UNSPECIFIED = 0;
+  EXISTINGPRESSUREDAMAGE_NO = 1;  // no
+  EXISTINGPRESSUREDAMAGE_YES = 2;  // yes
+}
+
+message WaterlowPressureUlcerRiskAssessment {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string patient_id = 5;  // UUID — uuid
+  string clinician_id = 6;  // UUID — uuid
+  string nurse_name = 7;  // VARCHAR(255) — max 255 chars
+  WaterlowPressureUlcerRiskAssessmentNurseRoleEnum nurse_role = 8;  // VARCHAR(30)
+  string assessed_at = 9;  // TIMESTAMPTZ — iso 8601
+  WaterlowPressureUlcerRiskAssessmentCareSettingEnum care_setting = 10;  // VARCHAR(20)
+  WaterlowPressureUlcerRiskAssessmentAssessmentReasonEnum assessment_reason = 11;  // VARCHAR(30)
+  string patient_identifier = 12;  // VARCHAR(100) — max 100 chars
+  WaterlowPressureUlcerRiskAssessmentAgeBandEnum age_band = 13;  // VARCHAR(10)
+  WaterlowPressureUlcerRiskAssessmentSexEnum sex = 14;  // VARCHAR(20)
+  WaterlowPressureUlcerRiskAssessmentBuildWeightForHeightEnum build_weight_for_height = 15;  // VARCHAR(20)
+  WaterlowPressureUlcerRiskAssessmentSkinTypeEnum skin_type = 16;  // VARCHAR(20)
+  WaterlowPressureUlcerRiskAssessmentContinenceEnum continence = 17;  // VARCHAR(30)
+  WaterlowPressureUlcerRiskAssessmentMobilityEnum mobility = 18;  // VARCHAR(20)
+  WaterlowPressureUlcerRiskAssessmentTissueMalnutritionEnum tissue_malnutrition = 19;  // VARCHAR(30)
+  WaterlowPressureUlcerRiskAssessmentNeurologicalDeficitEnum neurological_deficit = 20;  // VARCHAR(20)
+  WaterlowPressureUlcerRiskAssessmentMajorSurgeryTraumaEnum major_surgery_trauma = 21;  // VARCHAR(30)
+  WaterlowPressureUlcerRiskAssessmentMedicationEnum medication = 22;  // VARCHAR(50)
+  WaterlowPressureUlcerRiskAssessmentExistingPressureDamageEnum existing_pressure_damage = 23;  // VARCHAR(5)
+  string clinical_note = 24;  // TEXT
+}

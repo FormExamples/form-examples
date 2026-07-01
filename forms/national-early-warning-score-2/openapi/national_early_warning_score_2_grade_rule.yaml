@@ -1,0 +1,174 @@
+# Generated from sql/. Do not edit by hand.
+# SOURCE: national_early_warning_score_2_grade_rule
+openapi: 3.1.0
+info:
+  title: National Early Warning Score 2 — NationalEarlyWarningScore2GradeRule
+  version: 1.0.0
+  description: "Audit trail of every grading rule that fired during NEWS2 computation: instrument, band, points contributed, category, and description."
+paths:
+  /national-early-warning-score-2-grade-rules:
+    get:
+      summary: List NationalEarlyWarningScore2GradeRule records
+      operationId: listNationalEarlyWarningScore2GradeRule
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of NationalEarlyWarningScore2GradeRule records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/NationalEarlyWarningScore2GradeRule"
+    post:
+      summary: Create a new NationalEarlyWarningScore2GradeRule
+      operationId: createNationalEarlyWarningScore2GradeRule
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/NationalEarlyWarningScore2GradeRule"
+      responses:
+        "201":
+          description: The newly created NationalEarlyWarningScore2GradeRule
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/NationalEarlyWarningScore2GradeRule"
+        "400":
+          description: Validation error
+  /national-early-warning-score-2-grade-rules/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one NationalEarlyWarningScore2GradeRule by id
+      operationId: getNationalEarlyWarningScore2GradeRule
+      responses:
+        "200":
+          description: The requested NationalEarlyWarningScore2GradeRule
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/NationalEarlyWarningScore2GradeRule"
+        "404":
+          description: NationalEarlyWarningScore2GradeRule not found
+    patch:
+      summary: Update an existing NationalEarlyWarningScore2GradeRule
+      operationId: updateNationalEarlyWarningScore2GradeRule
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/NationalEarlyWarningScore2GradeRule"
+      responses:
+        "200":
+          description: The updated NationalEarlyWarningScore2GradeRule
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/NationalEarlyWarningScore2GradeRule"
+        "404":
+          description: NationalEarlyWarningScore2GradeRule not found
+    delete:
+      summary: Soft-delete a NationalEarlyWarningScore2GradeRule
+      operationId: deleteNationalEarlyWarningScore2GradeRule
+      responses:
+        "204":
+          description: NationalEarlyWarningScore2GradeRule deleted
+        "404":
+          description: NationalEarlyWarningScore2GradeRule not found
+components:
+  schemas:
+    NationalEarlyWarningScore2GradeRule:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was most recently updated.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was soft-deleted.
+        national_early_warning_score_2_grade_id:
+          type: string
+          format: uuid
+          description: Foreign key to the parent grade.
+        rule_id:
+          type: string
+          maxLength: 40
+          description: Stable rule identifier (e.g. R-RESP-RATE-3-HIGH-01).
+        instrument:
+          type: string
+          enum:
+            - respiratory-rate
+            - spo2
+            - oxygen
+            - blood-pressure
+            - pulse
+            - consciousness
+            - temperature
+            - aggregate
+            - red-score
+          description: "Scoring instrument the rule belongs to: respiratory-rate, spo2, oxygen, blood-pressure, pulse, consciousness, temperature, aggregate, or red-score."
+        band:
+          type: string
+          enum:
+            - low
+            - low-medium
+            - medium
+            - high
+            - ""
+          description: "Clinical-risk band contributed by this rule: low, low-medium, medium, or high."
+        points:
+          type: integer
+          format: int32
+          description: Subscore points contributed by this rule (0-3); NULL for non-scoring rules.
+        category:
+          type: string
+          maxLength: 50
+          description: Subject category (e.g. tachypnoea, hypoxia, hypotension, new-confusion).
+        description:
+          type: string
+          maxLength: 500
+          description: Human-readable description of why the rule fired.
+      required:
+        - created_at
+        - updated_at
+        - national_early_warning_score_2_grade_id
+        - rule_id
+        - instrument
+        - band
+        - category
+        - description
+      description: "Audit trail of every grading rule that fired during NEWS2 computation: instrument, band, points contributed, category, and description."

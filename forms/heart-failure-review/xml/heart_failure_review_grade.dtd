@@ -1,0 +1,14 @@
+<!ELEMENT heart_failure_review_grade (id,created_at,updated_at,deleted_at,heart_failure_review_id,nyha_status,medication_optimisation_status,review_status,indicated_pillars,prescribed_pillars,missing_pillars,completeness_score,graded_at)>
+<!ELEMENT id (#PCDATA)>
+<!ELEMENT created_at (#PCDATA)>
+<!ELEMENT updated_at (#PCDATA)>
+<!ELEMENT deleted_at (#PCDATA)>
+<!ELEMENT heart_failure_review_id (#PCDATA)>
+<!ELEMENT nyha_status (#PCDATA)>
+<!ELEMENT medication_optimisation_status (#PCDATA)>
+<!ELEMENT review_status (#PCDATA)>
+<!ELEMENT indicated_pillars (#PCDATA)>
+<!ELEMENT prescribed_pillars (#PCDATA)>
+<!ELEMENT missing_pillars (#PCDATA)>
+<!ELEMENT completeness_score (#PCDATA)>
+<!ELEMENT graded_at (#PCDATA)>

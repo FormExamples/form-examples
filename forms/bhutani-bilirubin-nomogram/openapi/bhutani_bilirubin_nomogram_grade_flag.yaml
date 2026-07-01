@@ -1,0 +1,169 @@
+# Generated from sql/. Do not edit by hand.
+# SOURCE: bhutani_bilirubin_nomogram_grade_flag
+openapi: 3.1.0
+info:
+  title: Bhutani Bilirubin Nomogram — BhutaniBilirubinNomogramGradeFlag
+  version: 1.0.0
+  description: Red-flag issues that fire independently of the risk zone, with priority and a suggested action for the clinical team.
+paths:
+  /bhutani-bilirubin-nomogram-grade-flags:
+    get:
+      summary: List BhutaniBilirubinNomogramGradeFlag records
+      operationId: listBhutaniBilirubinNomogramGradeFlag
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of BhutaniBilirubinNomogramGradeFlag records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/BhutaniBilirubinNomogramGradeFlag"
+    post:
+      summary: Create a new BhutaniBilirubinNomogramGradeFlag
+      operationId: createBhutaniBilirubinNomogramGradeFlag
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/BhutaniBilirubinNomogramGradeFlag"
+      responses:
+        "201":
+          description: The newly created BhutaniBilirubinNomogramGradeFlag
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/BhutaniBilirubinNomogramGradeFlag"
+        "400":
+          description: Validation error
+  /bhutani-bilirubin-nomogram-grade-flags/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one BhutaniBilirubinNomogramGradeFlag by id
+      operationId: getBhutaniBilirubinNomogramGradeFlag
+      responses:
+        "200":
+          description: The requested BhutaniBilirubinNomogramGradeFlag
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/BhutaniBilirubinNomogramGradeFlag"
+        "404":
+          description: BhutaniBilirubinNomogramGradeFlag not found
+    patch:
+      summary: Update an existing BhutaniBilirubinNomogramGradeFlag
+      operationId: updateBhutaniBilirubinNomogramGradeFlag
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/BhutaniBilirubinNomogramGradeFlag"
+      responses:
+        "200":
+          description: The updated BhutaniBilirubinNomogramGradeFlag
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/BhutaniBilirubinNomogramGradeFlag"
+        "404":
+          description: BhutaniBilirubinNomogramGradeFlag not found
+    delete:
+      summary: Soft-delete a BhutaniBilirubinNomogramGradeFlag
+      operationId: deleteBhutaniBilirubinNomogramGradeFlag
+      responses:
+        "204":
+          description: BhutaniBilirubinNomogramGradeFlag deleted
+        "404":
+          description: BhutaniBilirubinNomogramGradeFlag not found
+components:
+  schemas:
+    BhutaniBilirubinNomogramGradeFlag:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was most recently updated.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was soft-deleted.
+        bhutani_bilirubin_nomogram_grade_id:
+          type: string
+          format: uuid
+          description: Foreign key to the parent grade.
+        flag_id:
+          type: string
+          maxLength: 50
+          description: Stable flag identifier (e.g. F-ABOVE-EXCHANGE-001).
+        category:
+          type: string
+          enum:
+            - above-exchange
+            - above-phototherapy
+            - high-risk-zone
+            - rapid-rise
+            - early-jaundice
+            - risk-factors
+            - incomplete
+            - other
+            - ""
+          description: "Flag category: above-exchange, above-phototherapy, high-risk-zone, rapid-rise, early-jaundice, risk-factors, incomplete, or other."
+        priority:
+          type: string
+          enum:
+            - low
+            - medium
+            - high
+            - ""
+          description: "Priority: low, medium, high."
+        description:
+          type: string
+          maxLength: 500
+          description: Human-readable description of what fired the flag.
+        suggested_action:
+          type: string
+          maxLength: 500
+          description: "Suggested clinical action (e.g. \"urgent neonatal review and prepare for exchange transfusion\")."
+      required:
+        - created_at
+        - updated_at
+        - bhutani_bilirubin_nomogram_grade_id
+        - flag_id
+        - category
+        - priority
+        - description
+        - suggested_action
+      description: Red-flag issues that fire independently of the risk zone, with priority and a suggested action for the clinical team.

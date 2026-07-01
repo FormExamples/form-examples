@@ -1,0 +1,168 @@
+# Generated from sql/. Do not edit by hand.
+# SOURCE: emergency_department_triage_note_grade_flag
+openapi: 3.1.0
+info:
+  title: Emergency Department Triage Note — EmergencyDepartmentTriageNoteGradeFlag
+  version: 1.0.0
+  description: Red-flag issues that fire independently of the assigned priority level, with priority and a suggested action for the triage and resuscitation team.
+paths:
+  /emergency-department-triage-note-grade-flags:
+    get:
+      summary: List EmergencyDepartmentTriageNoteGradeFlag records
+      operationId: listEmergencyDepartmentTriageNoteGradeFlag
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of EmergencyDepartmentTriageNoteGradeFlag records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/EmergencyDepartmentTriageNoteGradeFlag"
+    post:
+      summary: Create a new EmergencyDepartmentTriageNoteGradeFlag
+      operationId: createEmergencyDepartmentTriageNoteGradeFlag
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/EmergencyDepartmentTriageNoteGradeFlag"
+      responses:
+        "201":
+          description: The newly created EmergencyDepartmentTriageNoteGradeFlag
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/EmergencyDepartmentTriageNoteGradeFlag"
+        "400":
+          description: Validation error
+  /emergency-department-triage-note-grade-flags/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one EmergencyDepartmentTriageNoteGradeFlag by id
+      operationId: getEmergencyDepartmentTriageNoteGradeFlag
+      responses:
+        "200":
+          description: The requested EmergencyDepartmentTriageNoteGradeFlag
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/EmergencyDepartmentTriageNoteGradeFlag"
+        "404":
+          description: EmergencyDepartmentTriageNoteGradeFlag not found
+    patch:
+      summary: Update an existing EmergencyDepartmentTriageNoteGradeFlag
+      operationId: updateEmergencyDepartmentTriageNoteGradeFlag
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/EmergencyDepartmentTriageNoteGradeFlag"
+      responses:
+        "200":
+          description: The updated EmergencyDepartmentTriageNoteGradeFlag
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/EmergencyDepartmentTriageNoteGradeFlag"
+        "404":
+          description: EmergencyDepartmentTriageNoteGradeFlag not found
+    delete:
+      summary: Soft-delete a EmergencyDepartmentTriageNoteGradeFlag
+      operationId: deleteEmergencyDepartmentTriageNoteGradeFlag
+      responses:
+        "204":
+          description: EmergencyDepartmentTriageNoteGradeFlag deleted
+        "404":
+          description: EmergencyDepartmentTriageNoteGradeFlag not found
+components:
+  schemas:
+    EmergencyDepartmentTriageNoteGradeFlag:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was most recently updated.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was soft-deleted.
+        emergency_department_triage_note_grade_id:
+          type: string
+          format: uuid
+          description: Foreign key to the parent grade.
+        flag_id:
+          type: string
+          maxLength: 50
+          description: Stable flag identifier (e.g. F-RESUS-IMMEDIATE-001).
+        category:
+          type: string
+          enum:
+            - resus-immediate
+            - sepsis-escalate
+            - chest-pain
+            - stroke
+            - paediatric-red-flag
+            - incomplete-vitals
+            - other
+            - ""
+          description: "Flag category: resus-immediate, sepsis-escalate, chest-pain, stroke, paediatric-red-flag, incomplete-vitals, or other."
+        priority:
+          type: string
+          enum:
+            - low
+            - medium
+            - high
+            - ""
+          description: "Priority: low, medium, high."
+        description:
+          type: string
+          maxLength: 500
+          description: Human-readable description of what fired the flag.
+        suggested_action:
+          type: string
+          maxLength: 500
+          description: "Suggested clinical action (e.g. \"move to resuscitation immediately\", \"start sepsis screen\")."
+      required:
+        - created_at
+        - updated_at
+        - emergency_department_triage_note_grade_id
+        - flag_id
+        - category
+        - priority
+        - description
+        - suggested_action
+      description: Red-flag issues that fire independently of the assigned priority level, with priority and a suggested action for the triage and resuscitation team.

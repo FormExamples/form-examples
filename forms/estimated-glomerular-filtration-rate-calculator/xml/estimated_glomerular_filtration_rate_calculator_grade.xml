@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE estimated_glomerular_filtration_rate_calculator_grade SYSTEM "estimated_glomerular_filtration_rate_calculator_grade.dtd">
+<estimated_glomerular_filtration_rate_calculator_grade>
+<id>880e8400-e29b-41d4-a716-446655440003</id>
+<created_at>2026-04-09T10:00:00Z</created_at>
+<updated_at>2026-04-09T10:00:00Z</updated_at>
+<deleted_at>2026-04-09T10:00:00Z</deleted_at>
+<estimated_glomerular_filtration_rate_calculator_id>770e8400-e29b-41d4-a716-446655440002</estimated_glomerular_filtration_rate_calculator_id>
+<serum_creatinine_mg_dl>0.0</serum_creatinine_mg_dl>
+<egfr_ml_min_1_73m2>0.0</egfr_ml_min_1_73m2>
+<g_stage>G1</g_stage>
+<g_stage_label></g_stage_label>
+<graded_at>2026-04-09T10:00:00Z</graded_at>
+</estimated_glomerular_filtration_rate_calculator_grade>

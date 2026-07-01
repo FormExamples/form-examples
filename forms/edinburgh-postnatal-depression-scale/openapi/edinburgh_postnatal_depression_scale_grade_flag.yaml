@@ -1,0 +1,168 @@
+# Generated from sql/. Do not edit by hand.
+# SOURCE: edinburgh_postnatal_depression_scale_grade_flag
+openapi: 3.1.0
+info:
+  title: Edinburgh Postnatal Depression Scale — EdinburghPostnatalDepressionScaleGradeFlag
+  version: 1.0.0
+  description: Red-flag issues that fire independently of the band, with priority and a suggested action for the clinical team.
+paths:
+  /edinburgh-postnatal-depression-scale-grade-flags:
+    get:
+      summary: List EdinburghPostnatalDepressionScaleGradeFlag records
+      operationId: listEdinburghPostnatalDepressionScaleGradeFlag
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of EdinburghPostnatalDepressionScaleGradeFlag records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/EdinburghPostnatalDepressionScaleGradeFlag"
+    post:
+      summary: Create a new EdinburghPostnatalDepressionScaleGradeFlag
+      operationId: createEdinburghPostnatalDepressionScaleGradeFlag
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/EdinburghPostnatalDepressionScaleGradeFlag"
+      responses:
+        "201":
+          description: The newly created EdinburghPostnatalDepressionScaleGradeFlag
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/EdinburghPostnatalDepressionScaleGradeFlag"
+        "400":
+          description: Validation error
+  /edinburgh-postnatal-depression-scale-grade-flags/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one EdinburghPostnatalDepressionScaleGradeFlag by id
+      operationId: getEdinburghPostnatalDepressionScaleGradeFlag
+      responses:
+        "200":
+          description: The requested EdinburghPostnatalDepressionScaleGradeFlag
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/EdinburghPostnatalDepressionScaleGradeFlag"
+        "404":
+          description: EdinburghPostnatalDepressionScaleGradeFlag not found
+    patch:
+      summary: Update an existing EdinburghPostnatalDepressionScaleGradeFlag
+      operationId: updateEdinburghPostnatalDepressionScaleGradeFlag
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/EdinburghPostnatalDepressionScaleGradeFlag"
+      responses:
+        "200":
+          description: The updated EdinburghPostnatalDepressionScaleGradeFlag
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/EdinburghPostnatalDepressionScaleGradeFlag"
+        "404":
+          description: EdinburghPostnatalDepressionScaleGradeFlag not found
+    delete:
+      summary: Soft-delete a EdinburghPostnatalDepressionScaleGradeFlag
+      operationId: deleteEdinburghPostnatalDepressionScaleGradeFlag
+      responses:
+        "204":
+          description: EdinburghPostnatalDepressionScaleGradeFlag deleted
+        "404":
+          description: EdinburghPostnatalDepressionScaleGradeFlag not found
+components:
+  schemas:
+    EdinburghPostnatalDepressionScaleGradeFlag:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was most recently updated.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was soft-deleted.
+        edinburgh_postnatal_depression_scale_grade_id:
+          type: string
+          format: uuid
+          description: Foreign key to the parent grade.
+        flag_id:
+          type: string
+          maxLength: 50
+          description: Stable flag identifier (e.g. F-SELF-HARM-URGENT-001).
+        category:
+          type: string
+          enum:
+            - self-harm-urgent
+            - likely-depression
+            - possible-depression
+            - elevated-anxiety
+            - incomplete
+            - other
+            - ""
+          description: Flag category (see CHECK constraint for enumeration).
+        priority:
+          type: string
+          enum:
+            - low
+            - medium
+            - high
+            - urgent
+            - ""
+          description: "Priority: low, medium, high, or urgent (self-harm overrides all bands)."
+        description:
+          type: string
+          maxLength: 500
+          description: Human-readable description of what fired the flag.
+        suggested_action:
+          type: string
+          maxLength: 500
+          description: "Suggested clinical action (e.g. \"perform an immediate self-harm risk assessment\")."
+      required:
+        - created_at
+        - updated_at
+        - edinburgh_postnatal_depression_scale_grade_id
+        - flag_id
+        - category
+        - priority
+        - description
+        - suggested_action
+      description: Red-flag issues that fire independently of the band, with priority and a suggested action for the clinical team.

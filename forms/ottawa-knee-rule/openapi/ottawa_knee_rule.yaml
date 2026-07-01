@@ -1,0 +1,244 @@
+# Generated from sql/. Do not edit by hand.
+# SOURCE: ottawa_knee_rule
+openapi: 3.1.0
+info:
+  title: Ottawa Knee Rule — OttawaKneeRule
+  version: 1.0.0
+  description: "Main Ottawa Knee Rule assessment record: identification, context, and the five objective bedside criterion inputs. A decision rule (ANY-of), not a score."
+paths:
+  /ottawa-knee-rules:
+    get:
+      summary: List OttawaKneeRule records
+      operationId: listOttawaKneeRule
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of OttawaKneeRule records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/OttawaKneeRule"
+    post:
+      summary: Create a new OttawaKneeRule
+      operationId: createOttawaKneeRule
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/OttawaKneeRule"
+      responses:
+        "201":
+          description: The newly created OttawaKneeRule
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/OttawaKneeRule"
+        "400":
+          description: Validation error
+  /ottawa-knee-rules/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one OttawaKneeRule by id
+      operationId: getOttawaKneeRule
+      responses:
+        "200":
+          description: The requested OttawaKneeRule
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/OttawaKneeRule"
+        "404":
+          description: OttawaKneeRule not found
+    patch:
+      summary: Update an existing OttawaKneeRule
+      operationId: updateOttawaKneeRule
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/OttawaKneeRule"
+      responses:
+        "200":
+          description: The updated OttawaKneeRule
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/OttawaKneeRule"
+        "404":
+          description: OttawaKneeRule not found
+    delete:
+      summary: Soft-delete a OttawaKneeRule
+      operationId: deleteOttawaKneeRule
+      responses:
+        "204":
+          description: OttawaKneeRule deleted
+        "404":
+          description: OttawaKneeRule not found
+components:
+  schemas:
+    OttawaKneeRule:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was updated most-recently.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was deleted a.k.a. soft-removed.
+        patient_id:
+          type: string
+          format: uuid
+          description: Foreign key to the patient being assessed (restricts delete).
+        clinician_id:
+          type: string
+          format: uuid
+          description: Foreign key to the assessing clinician (restricts delete).
+        status:
+          type: string
+          enum:
+            - draft
+            - submitted
+            - amended
+            - signed
+            - ""
+          description: "Workflow status: draft, submitted, amended, or signed."
+        patient_identifier:
+          type: string
+          maxLength: 64
+          description: Local patient identifier as recorded at the point of assessment.
+        assessed_at:
+          type: string
+          format: date-time
+          description: Date and time the assessment was carried out.
+        care_setting:
+          type: string
+          enum:
+            - emergency-department
+            - minor-injuries-unit
+            - urgent-care
+            - other
+            - ""
+          description: "Care setting: emergency-department, minor-injuries-unit, urgent-care, or other."
+        injury_mechanism:
+          type: string
+          enum:
+            - blunt-trauma
+            - twisting
+            - fall
+            - other
+            - ""
+          description: "Mechanism of injury: blunt-trauma, twisting, fall, or other."
+        hours_since_injury:
+          type: number
+          format: double
+          description: Hours elapsed since the injury; supports the applicability check (the rule is validated for acute injury).
+        sex:
+          type: string
+          enum:
+            - female
+            - male
+            - intersex
+            - unknown
+            - ""
+          description: "Patient sex recorded for clinical purposes: female, male, intersex, or unknown."
+        injured_side:
+          type: string
+          enum:
+            - left
+            - right
+            - ""
+          description: "Injured knee side: left or right."
+        age_years:
+          type: integer
+          format: int32
+          description: "Criterion 1: patient age in years; the criterion fires when age >= 55. Null when unanswered."
+        patellar_tenderness:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: "Criterion 2 input: tenderness at the patella. Fires the isolated-patellar criterion only when other_bony_tenderness is no."
+        other_bony_tenderness:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: "Criterion 2 modifier: bony tenderness other than the patella; when yes it prevents the isolated-patellar criterion from firing and raises a flag."
+        fibular_head_tenderness:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: "Criterion 3: tenderness at the head of the fibula."
+        unable_to_flex_90:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: "Criterion 4: inability to flex the knee to 90 degrees."
+        unable_to_bear_weight:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: "Criterion 5: inability to bear weight (take four steps) both immediately after injury and in the emergency department."
+        clinical_notes:
+          type: string
+          description: Free-text clinical notes captured alongside the assessment.
+      required:
+        - created_at
+        - updated_at
+        - patient_id
+        - status
+        - patient_identifier
+        - care_setting
+        - injury_mechanism
+        - sex
+        - injured_side
+        - patellar_tenderness
+        - other_bony_tenderness
+        - fibular_head_tenderness
+        - unable_to_flex_90
+        - unable_to_bear_weight
+        - clinical_notes
+      description: "Main Ottawa Knee Rule assessment record: identification, context, and the five objective bedside criterion inputs. A decision rule (ANY-of), not a score."

@@ -1,0 +1,15 @@
+<!ELEMENT rockall_score_for_upper_gastrointestinal_bleeding_grade (id,created_at,updated_at,deleted_at,rockall_score_for_upper_gastrointestinal_bleeding_id,age_points,shock_points,comorbidity_points,clinical_score,diagnosis_points,stigmata_points,full_score,risk_band,graded_at)>
+<!ELEMENT id (#PCDATA)>
+<!ELEMENT created_at (#PCDATA)>
+<!ELEMENT updated_at (#PCDATA)>
+<!ELEMENT deleted_at (#PCDATA)>
+<!ELEMENT rockall_score_for_upper_gastrointestinal_bleeding_id (#PCDATA)>
+<!ELEMENT age_points (#PCDATA)>
+<!ELEMENT shock_points (#PCDATA)>
+<!ELEMENT comorbidity_points (#PCDATA)>
+<!ELEMENT clinical_score (#PCDATA)>
+<!ELEMENT diagnosis_points (#PCDATA)>
+<!ELEMENT stigmata_points (#PCDATA)>
+<!ELEMENT full_score (#PCDATA)>
+<!ELEMENT risk_band (#PCDATA)>
+<!ELEMENT graded_at (#PCDATA)>

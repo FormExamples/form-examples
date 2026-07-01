@@ -1,0 +1,900 @@
+{
+  "resourceType": "Observation",
+  "id": "770e8400-e29b-41d4-a716-446655440002",
+  "meta": {
+    "profile": [
+      "http://hl7.org/fhir/StructureDefinition/Observation"
+    ],
+    "lastUpdated": "2026-04-09T10:00:00+00:00"
+  },
+  "status": "final",
+  "category": [
+    {
+      "coding": [
+        {
+          "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+          "code": "survey",
+          "display": "Survey"
+        }
+      ]
+    }
+  ],
+  "code": {
+    "coding": [
+      {
+        "system": "urn:form-examples:mental-state-examination",
+        "code": "mental_state_examination",
+        "display": "Mental State Examination"
+      }
+    ]
+  },
+  "subject": {
+    "reference": "Patient/550e8400-e29b-41d4-a716-446655440000"
+  },
+  "encounter": {
+    "reference": "Encounter/bb0e8400-e29b-41d4-a716-446655440006"
+  },
+  "effectiveDateTime": "2026-04-09T10:00:00+00:00",
+  "component": [
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:mental-state-examination",
+            "code": "deleted_at",
+            "display": "Deleted At"
+          }
+        ]
+      },
+      "valueDateTime": "2026-04-09T10:00:00+00:00"
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:mental-state-examination",
+            "code": "clinician_name",
+            "display": "Clinician Name"
+          }
+        ]
+      },
+      "valueString": "Example"
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:mental-state-examination",
+            "code": "clinician_role",
+            "display": "Clinician Role"
+          }
+        ]
+      },
+      "valueCodeableConcept": {
+        "coding": [
+          {
+            "system": "urn:form-examples:mental-state-examination:clinician_role",
+            "code": "psychiatrist",
+            "display": "Psychiatrist"
+          }
+        ]
+      }
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:mental-state-examination",
+            "code": "assessed_at",
+            "display": "Assessed At"
+          }
+        ]
+      },
+      "valueDateTime": "2026-04-09T10:00:00+00:00"
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:mental-state-examination",
+            "code": "care_setting",
+            "display": "Care Setting"
+          }
+        ]
+      },
+      "valueCodeableConcept": {
+        "coding": [
+          {
+            "system": "urn:form-examples:mental-state-examination:care_setting",
+            "code": "outpatient",
+            "display": "Outpatient"
+          }
+        ]
+      }
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:mental-state-examination",
+            "code": "assessment_reason",
+            "display": "Assessment Reason"
+          }
+        ]
+      },
+      "valueString": "Example text."
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:mental-state-examination",
+            "code": "patient_identifier",
+            "display": "Patient Identifier"
+          }
+        ]
+      },
+      "valueString": ""
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:mental-state-examination",
+            "code": "age_band",
+            "display": "Age Band"
+          }
+        ]
+      },
+      "valueCodeableConcept": {
+        "coding": [
+          {
+            "system": "urn:form-examples:mental-state-examination:age_band",
+            "code": "under-18",
+            "display": "Under-18"
+          }
+        ]
+      }
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:mental-state-examination",
+            "code": "sex",
+            "display": "Sex"
+          }
+        ]
+      },
+      "valueCodeableConcept": {
+        "coding": [
+          {
+            "system": "urn:form-examples:mental-state-examination:sex",
+            "code": "female",
+            "display": "Female"
+          }
+        ]
+      }
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:mental-state-examination",
+            "code": "appearance_grooming",
+            "display": "Appearance Grooming"
+          }
+        ]
+      },
+      "valueCodeableConcept": {
+        "coding": [
+          {
+            "system": "urn:form-examples:mental-state-examination:appearance_grooming",
+            "code": "well-kempt",
+            "display": "Well-Kempt"
+          }
+        ]
+      }
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:mental-state-examination",
+            "code": "appearance_eye_contact",
+            "display": "Appearance Eye Contact"
+          }
+        ]
+      },
+      "valueCodeableConcept": {
+        "coding": [
+          {
+            "system": "urn:form-examples:mental-state-examination:appearance_eye_contact",
+            "code": "normal",
+            "display": "Normal"
+          }
+        ]
+      }
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:mental-state-examination",
+            "code": "appearance_rapport",
+            "display": "Appearance Rapport"
+          }
+        ]
+      },
+      "valueCodeableConcept": {
+        "coding": [
+          {
+            "system": "urn:form-examples:mental-state-examination:appearance_rapport",
+            "code": "good",
+            "display": "Good"
+          }
+        ]
+      }
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:mental-state-examination",
+            "code": "appearance_psychomotor",
+            "display": "Appearance Psychomotor"
+          }
+        ]
+      },
+      "valueCodeableConcept": {
+        "coding": [
+          {
+            "system": "urn:form-examples:mental-state-examination:appearance_psychomotor",
+            "code": "normal",
+            "display": "Normal"
+          }
+        ]
+      }
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:mental-state-examination",
+            "code": "appearance_abnormal_movements",
+            "display": "Appearance Abnormal Movements"
+          }
+        ]
+      },
+      "valueString": ""
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:mental-state-examination",
+            "code": "appearance_notes",
+            "display": "Appearance Notes"
+          }
+        ]
+      },
+      "valueString": "Example text."
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:mental-state-examination",
+            "code": "speech_rate",
+            "display": "Speech Rate"
+          }
+        ]
+      },
+      "valueCodeableConcept": {
+        "coding": [
+          {
+            "system": "urn:form-examples:mental-state-examination:speech_rate",
+            "code": "normal",
+            "display": "Normal"
+          }
+        ]
+      }
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:mental-state-examination",
+            "code": "speech_volume",
+            "display": "Speech Volume"
+          }
+        ]
+      },
+      "valueCodeableConcept": {
+        "coding": [
+          {
+            "system": "urn:form-examples:mental-state-examination:speech_volume",
+            "code": "normal",
+            "display": "Normal"
+          }
+        ]
+      }
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:mental-state-examination",
+            "code": "speech_quantity",
+            "display": "Speech Quantity"
+          }
+        ]
+      },
+      "valueCodeableConcept": {
+        "coding": [
+          {
+            "system": "urn:form-examples:mental-state-examination:speech_quantity",
+            "code": "normal",
+            "display": "Normal"
+          }
+        ]
+      }
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:mental-state-examination",
+            "code": "speech_fluency",
+            "display": "Speech Fluency"
+          }
+        ]
+      },
+      "valueCodeableConcept": {
+        "coding": [
+          {
+            "system": "urn:form-examples:mental-state-examination:speech_fluency",
+            "code": "fluent",
+            "display": "Fluent"
+          }
+        ]
+      }
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:mental-state-examination",
+            "code": "speech_notes",
+            "display": "Speech Notes"
+          }
+        ]
+      },
+      "valueString": "Example text."
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:mental-state-examination",
+            "code": "mood_subjective",
+            "display": "Mood Subjective"
+          }
+        ]
+      },
+      "valueString": ""
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:mental-state-examination",
+            "code": "mood_descriptor",
+            "display": "Mood Descriptor"
+          }
+        ]
+      },
+      "valueCodeableConcept": {
+        "coding": [
+          {
+            "system": "urn:form-examples:mental-state-examination:mood_descriptor",
+            "code": "euthymic",
+            "display": "Euthymic"
+          }
+        ]
+      }
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:mental-state-examination",
+            "code": "affect_range",
+            "display": "Affect Range"
+          }
+        ]
+      },
+      "valueCodeableConcept": {
+        "coding": [
+          {
+            "system": "urn:form-examples:mental-state-examination:affect_range",
+            "code": "full",
+            "display": "Full"
+          }
+        ]
+      }
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:mental-state-examination",
+            "code": "affect_congruence",
+            "display": "Affect Congruence"
+          }
+        ]
+      },
+      "valueCodeableConcept": {
+        "coding": [
+          {
+            "system": "urn:form-examples:mental-state-examination:affect_congruence",
+            "code": "congruent",
+            "display": "Congruent"
+          }
+        ]
+      }
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:mental-state-examination",
+            "code": "affect_reactivity",
+            "display": "Affect Reactivity"
+          }
+        ]
+      },
+      "valueCodeableConcept": {
+        "coding": [
+          {
+            "system": "urn:form-examples:mental-state-examination:affect_reactivity",
+            "code": "reactive",
+            "display": "Reactive"
+          }
+        ]
+      }
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:mental-state-examination",
+            "code": "emotion_notes",
+            "display": "Emotion Notes"
+          }
+        ]
+      },
+      "valueString": "Example text."
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:mental-state-examination",
+            "code": "hallucinations_present",
+            "display": "Hallucinations Present"
+          }
+        ]
+      },
+      "valueCodeableConcept": {
+        "coding": [
+          {
+            "system": "urn:form-examples:mental-state-examination:hallucinations_present",
+            "code": "none",
+            "display": "None"
+          }
+        ]
+      }
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:mental-state-examination",
+            "code": "command_hallucinations",
+            "display": "Command Hallucinations"
+          }
+        ]
+      },
+      "valueCodeableConcept": {
+        "coding": [
+          {
+            "system": "urn:form-examples:mental-state-examination:command_hallucinations",
+            "code": "yes",
+            "display": "Yes"
+          }
+        ]
+      }
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:mental-state-examination",
+            "code": "illusions",
+            "display": "Illusions"
+          }
+        ]
+      },
+      "valueCodeableConcept": {
+        "coding": [
+          {
+            "system": "urn:form-examples:mental-state-examination:illusions",
+            "code": "present",
+            "display": "Present"
+          }
+        ]
+      }
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:mental-state-examination",
+            "code": "depersonalisation",
+            "display": "Depersonalisation"
+          }
+        ]
+      },
+      "valueCodeableConcept": {
+        "coding": [
+          {
+            "system": "urn:form-examples:mental-state-examination:depersonalisation",
+            "code": "present",
+            "display": "Present"
+          }
+        ]
+      }
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:mental-state-examination",
+            "code": "derealisation",
+            "display": "Derealisation"
+          }
+        ]
+      },
+      "valueCodeableConcept": {
+        "coding": [
+          {
+            "system": "urn:form-examples:mental-state-examination:derealisation",
+            "code": "present",
+            "display": "Present"
+          }
+        ]
+      }
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:mental-state-examination",
+            "code": "perception_notes",
+            "display": "Perception Notes"
+          }
+        ]
+      },
+      "valueString": "Example text."
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:mental-state-examination",
+            "code": "thought_form",
+            "display": "Thought Form"
+          }
+        ]
+      },
+      "valueCodeableConcept": {
+        "coding": [
+          {
+            "system": "urn:form-examples:mental-state-examination:thought_form",
+            "code": "linear",
+            "display": "Linear"
+          }
+        ]
+      }
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:mental-state-examination",
+            "code": "delusions",
+            "display": "Delusions"
+          }
+        ]
+      },
+      "valueCodeableConcept": {
+        "coding": [
+          {
+            "system": "urn:form-examples:mental-state-examination:delusions",
+            "code": "none",
+            "display": "None"
+          }
+        ]
+      }
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:mental-state-examination",
+            "code": "obsessions",
+            "display": "Obsessions"
+          }
+        ]
+      },
+      "valueCodeableConcept": {
+        "coding": [
+          {
+            "system": "urn:form-examples:mental-state-examination:obsessions",
+            "code": "present",
+            "display": "Present"
+          }
+        ]
+      }
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:mental-state-examination",
+            "code": "suicidal_ideation",
+            "display": "Suicidal Ideation"
+          }
+        ]
+      },
+      "valueCodeableConcept": {
+        "coding": [
+          {
+            "system": "urn:form-examples:mental-state-examination:suicidal_ideation",
+            "code": "none",
+            "display": "None"
+          }
+        ]
+      }
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:mental-state-examination",
+            "code": "homicidal_ideation",
+            "display": "Homicidal Ideation"
+          }
+        ]
+      },
+      "valueCodeableConcept": {
+        "coding": [
+          {
+            "system": "urn:form-examples:mental-state-examination:homicidal_ideation",
+            "code": "none",
+            "display": "None"
+          }
+        ]
+      }
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:mental-state-examination",
+            "code": "self_harm_thoughts",
+            "display": "Self Harm Thoughts"
+          }
+        ]
+      },
+      "valueCodeableConcept": {
+        "coding": [
+          {
+            "system": "urn:form-examples:mental-state-examination:self_harm_thoughts",
+            "code": "none",
+            "display": "None"
+          }
+        ]
+      }
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:mental-state-examination",
+            "code": "thought_notes",
+            "display": "Thought Notes"
+          }
+        ]
+      },
+      "valueString": "Example text."
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:mental-state-examination",
+            "code": "insight_level",
+            "display": "Insight Level"
+          }
+        ]
+      },
+      "valueCodeableConcept": {
+        "coding": [
+          {
+            "system": "urn:form-examples:mental-state-examination:insight_level",
+            "code": "full",
+            "display": "Full"
+          }
+        ]
+      }
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:mental-state-examination",
+            "code": "treatment_understanding",
+            "display": "Treatment Understanding"
+          }
+        ]
+      },
+      "valueCodeableConcept": {
+        "coding": [
+          {
+            "system": "urn:form-examples:mental-state-examination:treatment_understanding",
+            "code": "accepts",
+            "display": "Accepts"
+          }
+        ]
+      }
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:mental-state-examination",
+            "code": "judgement",
+            "display": "Judgement"
+          }
+        ]
+      },
+      "valueCodeableConcept": {
+        "coding": [
+          {
+            "system": "urn:form-examples:mental-state-examination:judgement",
+            "code": "intact",
+            "display": "Intact"
+          }
+        ]
+      }
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:mental-state-examination",
+            "code": "insight_notes",
+            "display": "Insight Notes"
+          }
+        ]
+      },
+      "valueString": "Example text."
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:mental-state-examination",
+            "code": "orientation",
+            "display": "Orientation"
+          }
+        ]
+      },
+      "valueCodeableConcept": {
+        "coding": [
+          {
+            "system": "urn:form-examples:mental-state-examination:orientation",
+            "code": "orientated",
+            "display": "Orientated"
+          }
+        ]
+      }
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:mental-state-examination",
+            "code": "attention",
+            "display": "Attention"
+          }
+        ]
+      },
+      "valueCodeableConcept": {
+        "coding": [
+          {
+            "system": "urn:form-examples:mental-state-examination:attention",
+            "code": "normal",
+            "display": "Normal"
+          }
+        ]
+      }
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:mental-state-examination",
+            "code": "memory",
+            "display": "Memory"
+          }
+        ]
+      },
+      "valueCodeableConcept": {
+        "coding": [
+          {
+            "system": "urn:form-examples:mental-state-examination:memory",
+            "code": "intact",
+            "display": "Intact"
+          }
+        ]
+      }
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:mental-state-examination",
+            "code": "cognitive_impression",
+            "display": "Cognitive Impression"
+          }
+        ]
+      },
+      "valueCodeableConcept": {
+        "coding": [
+          {
+            "system": "urn:form-examples:mental-state-examination:cognitive_impression",
+            "code": "no-concern",
+            "display": "No-Concern"
+          }
+        ]
+      }
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:mental-state-examination",
+            "code": "cognition_notes",
+            "display": "Cognition Notes"
+          }
+        ]
+      },
+      "valueString": "Example text."
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:mental-state-examination",
+            "code": "clinical_formulation",
+            "display": "Clinical Formulation"
+          }
+        ]
+      },
+      "valueString": ""
+    }
+  ]
+}

@@ -1,0 +1,178 @@
+# Generated from sql/. Do not edit by hand.
+# SOURCE: fluid_balance_chart_grade
+openapi: 3.1.0
+info:
+  title: Fluid Balance Chart — FluidBalanceChartGrade
+  version: 1.0.0
+  description: "Computed grading result for a fluid balance chart: intake/output totals, net balance, urine output rate, and the classified fluid status; 1:1 with the chart."
+paths:
+  /fluid-balance-chart-grades:
+    get:
+      summary: List FluidBalanceChartGrade records
+      operationId: listFluidBalanceChartGrade
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of FluidBalanceChartGrade records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/FluidBalanceChartGrade"
+    post:
+      summary: Create a new FluidBalanceChartGrade
+      operationId: createFluidBalanceChartGrade
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/FluidBalanceChartGrade"
+      responses:
+        "201":
+          description: The newly created FluidBalanceChartGrade
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/FluidBalanceChartGrade"
+        "400":
+          description: Validation error
+  /fluid-balance-chart-grades/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one FluidBalanceChartGrade by id
+      operationId: getFluidBalanceChartGrade
+      responses:
+        "200":
+          description: The requested FluidBalanceChartGrade
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/FluidBalanceChartGrade"
+        "404":
+          description: FluidBalanceChartGrade not found
+    patch:
+      summary: Update an existing FluidBalanceChartGrade
+      operationId: updateFluidBalanceChartGrade
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/FluidBalanceChartGrade"
+      responses:
+        "200":
+          description: The updated FluidBalanceChartGrade
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/FluidBalanceChartGrade"
+        "404":
+          description: FluidBalanceChartGrade not found
+    delete:
+      summary: Soft-delete a FluidBalanceChartGrade
+      operationId: deleteFluidBalanceChartGrade
+      responses:
+        "204":
+          description: FluidBalanceChartGrade deleted
+        "404":
+          description: FluidBalanceChartGrade not found
+components:
+  schemas:
+    FluidBalanceChartGrade:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was most recently updated.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was soft-deleted.
+        fluid_balance_chart_id:
+          type: string
+          format: uuid
+          description: Foreign key to the parent fluid balance chart (unique, 1:1).
+        total_intake_ml:
+          type: number
+          format: double
+          description: Sum of all recorded intake volumes in millilitres.
+        total_output_ml:
+          type: number
+          format: double
+          description: Sum of all recorded output volumes in millilitres.
+        net_balance_ml:
+          type: number
+          format: double
+          description: Net balance in millilitres (total intake minus total output); positive is a net gain.
+        urine_output_ml:
+          type: number
+          format: double
+          description: Total urine output in millilitres (sum of output entries with category urine).
+        hours_observed:
+          type: number
+          format: double
+          description: Hours over which the chart was observed (chart period, or the span of entries); null when unknown.
+        weight_kg:
+          type: number
+          format: double
+          description: Patient weight in kilograms used for the mL/kg/h calculation; null when unknown.
+        urine_output_ml_kg_h:
+          type: number
+          format: double
+          description: Urine output rate in millilitres per kilogram per hour; null when weight or hours are unknown.
+        fluid_status:
+          type: string
+          enum:
+            - balanced
+            - positive
+            - negative
+            - oliguria
+            - ""
+          description: "Classified fluid status: balanced, positive, negative, or oliguria."
+        graded_at:
+          type: string
+          format: date-time
+          description: Timestamp when the engine last computed the grade.
+      required:
+        - created_at
+        - updated_at
+        - fluid_balance_chart_id
+        - total_intake_ml
+        - total_output_ml
+        - net_balance_ml
+        - urine_output_ml
+        - fluid_status
+        - graded_at
+      description: "Computed grading result for a fluid balance chart: intake/output totals, net balance, urine output rate, and the classified fluid status; 1:1 with the chart."

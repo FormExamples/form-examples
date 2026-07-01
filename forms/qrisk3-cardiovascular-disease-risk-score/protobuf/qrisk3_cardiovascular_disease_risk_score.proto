@@ -1,0 +1,176 @@
+// Generated from sql/. Do not edit by hand.
+// SOURCE: qrisk3_cardiovascular_disease_risk_score
+
+syntax = "proto3";
+
+package form_examples.qrisk3_cardiovascular_disease_risk_score;
+
+enum Qrisk3CardiovascularDiseaseRiskScoreClinicianRoleEnum {
+  CLINICIANROLE_UNSPECIFIED = 0;
+  CLINICIANROLE_GP = 1;  // gp
+  CLINICIANROLE_NURSE = 2;  // nurse
+  CLINICIANROLE_PHARMACIST = 3;  // pharmacist
+  CLINICIANROLE_OTHER = 4;  // other
+}
+
+enum Qrisk3CardiovascularDiseaseRiskScoreCareSettingEnum {
+  CARESETTING_UNSPECIFIED = 0;
+  CARESETTING_GENERAL_PRACTICE = 1;  // general-practice
+  CARESETTING_PHARMACY = 2;  // pharmacy
+  CARESETTING_NHS_HEALTH_CHECK = 3;  // nhs-health-check
+  CARESETTING_OTHER = 4;  // other
+}
+
+enum Qrisk3CardiovascularDiseaseRiskScoreSexEnum {
+  SEX_UNSPECIFIED = 0;
+  SEX_FEMALE = 1;  // female
+  SEX_MALE = 2;  // male
+}
+
+enum Qrisk3CardiovascularDiseaseRiskScoreEthnicityEnum {
+  ETHNICITY_UNSPECIFIED = 0;
+  ETHNICITY_WHITE_OR_NOT_STATED = 1;  // white-or-not-stated
+  ETHNICITY_INDIAN = 2;  // indian
+  ETHNICITY_PAKISTANI = 3;  // pakistani
+  ETHNICITY_BANGLADESHI = 4;  // bangladeshi
+  ETHNICITY_OTHER_ASIAN = 5;  // other-asian
+  ETHNICITY_BLACK_CARIBBEAN = 6;  // black-caribbean
+  ETHNICITY_BLACK_AFRICAN = 7;  // black-african
+  ETHNICITY_CHINESE = 8;  // chinese
+  ETHNICITY_OTHER = 9;  // other
+}
+
+enum Qrisk3CardiovascularDiseaseRiskScoreSmokingStatusEnum {
+  SMOKINGSTATUS_UNSPECIFIED = 0;
+  SMOKINGSTATUS_NON = 1;  // non
+  SMOKINGSTATUS_EX = 2;  // ex
+  SMOKINGSTATUS_LIGHT = 3;  // light
+  SMOKINGSTATUS_MODERATE = 4;  // moderate
+  SMOKINGSTATUS_HEAVY = 5;  // heavy
+}
+
+enum Qrisk3CardiovascularDiseaseRiskScoreDiabetesStatusEnum {
+  DIABETESSTATUS_UNSPECIFIED = 0;
+  DIABETESSTATUS_NONE = 1;  // none
+  DIABETESSTATUS_TYPE1 = 2;  // type1
+  DIABETESSTATUS_TYPE2 = 3;  // type2
+}
+
+enum Qrisk3CardiovascularDiseaseRiskScoreOnBloodPressureTreatmentEnum {
+  ONBLOODPRESSURETREATMENT_UNSPECIFIED = 0;
+  ONBLOODPRESSURETREATMENT_YES = 1;  // yes
+  ONBLOODPRESSURETREATMENT_NO = 2;  // no
+}
+
+enum Qrisk3CardiovascularDiseaseRiskScoreFamilyHistoryChdEnum {
+  FAMILYHISTORYCHD_UNSPECIFIED = 0;
+  FAMILYHISTORYCHD_YES = 1;  // yes
+  FAMILYHISTORYCHD_NO = 2;  // no
+}
+
+enum Qrisk3CardiovascularDiseaseRiskScoreAtrialFibrillationEnum {
+  ATRIALFIBRILLATION_UNSPECIFIED = 0;
+  ATRIALFIBRILLATION_YES = 1;  // yes
+  ATRIALFIBRILLATION_NO = 2;  // no
+}
+
+enum Qrisk3CardiovascularDiseaseRiskScoreChronicKidneyDiseaseStageEnum {
+  CHRONICKIDNEYDISEASESTAGE_UNSPECIFIED = 0;
+  CHRONICKIDNEYDISEASESTAGE_NONE = 1;  // none
+  CHRONICKIDNEYDISEASESTAGE_STAGE3 = 2;  // stage3
+  CHRONICKIDNEYDISEASESTAGE_STAGE4 = 3;  // stage4
+  CHRONICKIDNEYDISEASESTAGE_STAGE5 = 4;  // stage5
+}
+
+enum Qrisk3CardiovascularDiseaseRiskScoreMigraineEnum {
+  MIGRAINE_UNSPECIFIED = 0;
+  MIGRAINE_YES = 1;  // yes
+  MIGRAINE_NO = 2;  // no
+}
+
+enum Qrisk3CardiovascularDiseaseRiskScoreRheumatoidArthritisEnum {
+  RHEUMATOIDARTHRITIS_UNSPECIFIED = 0;
+  RHEUMATOIDARTHRITIS_YES = 1;  // yes
+  RHEUMATOIDARTHRITIS_NO = 2;  // no
+}
+
+enum Qrisk3CardiovascularDiseaseRiskScoreSystemicLupusErythematosusEnum {
+  SYSTEMICLUPUSERYTHEMATOSUS_UNSPECIFIED = 0;
+  SYSTEMICLUPUSERYTHEMATOSUS_YES = 1;  // yes
+  SYSTEMICLUPUSERYTHEMATOSUS_NO = 2;  // no
+}
+
+enum Qrisk3CardiovascularDiseaseRiskScoreSevereMentalIllnessEnum {
+  SEVEREMENTALILLNESS_UNSPECIFIED = 0;
+  SEVEREMENTALILLNESS_YES = 1;  // yes
+  SEVEREMENTALILLNESS_NO = 2;  // no
+}
+
+enum Qrisk3CardiovascularDiseaseRiskScoreErectileDysfunctionEnum {
+  ERECTILEDYSFUNCTION_UNSPECIFIED = 0;
+  ERECTILEDYSFUNCTION_YES = 1;  // yes
+  ERECTILEDYSFUNCTION_NO = 2;  // no
+}
+
+enum Qrisk3CardiovascularDiseaseRiskScoreOnAtypicalAntipsychoticsEnum {
+  ONATYPICALANTIPSYCHOTICS_UNSPECIFIED = 0;
+  ONATYPICALANTIPSYCHOTICS_YES = 1;  // yes
+  ONATYPICALANTIPSYCHOTICS_NO = 2;  // no
+}
+
+enum Qrisk3CardiovascularDiseaseRiskScoreOnCorticosteroidsEnum {
+  ONCORTICOSTEROIDS_UNSPECIFIED = 0;
+  ONCORTICOSTEROIDS_YES = 1;  // yes
+  ONCORTICOSTEROIDS_NO = 2;  // no
+}
+
+enum Qrisk3CardiovascularDiseaseRiskScoreHasEstablishedCvdEnum {
+  HASESTABLISHEDCVD_UNSPECIFIED = 0;
+  HASESTABLISHEDCVD_YES = 1;  // yes
+  HASESTABLISHEDCVD_NO = 2;  // no
+}
+
+enum Qrisk3CardiovascularDiseaseRiskScoreHasFamilialHypercholesterolaemiaEnum {
+  HASFAMILIALHYPERCHOLESTEROLAEMIA_UNSPECIFIED = 0;
+  HASFAMILIALHYPERCHOLESTEROLAEMIA_YES = 1;  // yes
+  HASFAMILIALHYPERCHOLESTEROLAEMIA_NO = 2;  // no
+}
+
+message Qrisk3CardiovascularDiseaseRiskScore {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string patient_id = 5;  // UUID — uuid
+  string clinician_id = 6;  // UUID — uuid
+  string clinician_name = 7;  // VARCHAR(255) — max 255 chars
+  Qrisk3CardiovascularDiseaseRiskScoreClinicianRoleEnum clinician_role = 8;  // VARCHAR(20)
+  string assessed_at = 9;  // TIMESTAMPTZ — iso 8601
+  Qrisk3CardiovascularDiseaseRiskScoreCareSettingEnum care_setting = 10;  // VARCHAR(20)
+  string patient_identifier = 11;  // VARCHAR(100) — max 100 chars
+  double age = 12;  // NUMERIC(4,1) — numeric(4,1)
+  Qrisk3CardiovascularDiseaseRiskScoreSexEnum sex = 13;  // VARCHAR(10)
+  Qrisk3CardiovascularDiseaseRiskScoreEthnicityEnum ethnicity = 14;  // VARCHAR(25)
+  double townsend_score = 15;  // NUMERIC(6,3) — numeric(6,3)
+  string postcode = 16;  // VARCHAR(10) — max 10 chars
+  Qrisk3CardiovascularDiseaseRiskScoreSmokingStatusEnum smoking_status = 17;  // VARCHAR(10)
+  double body_mass_index = 18;  // NUMERIC(4,1) — numeric(4,1)
+  Qrisk3CardiovascularDiseaseRiskScoreDiabetesStatusEnum diabetes_status = 19;  // VARCHAR(10)
+  double cholesterol_hdl_ratio = 20;  // NUMERIC(4,2) — numeric(4,2)
+  double systolic_blood_pressure = 21;  // NUMERIC(5,1) — numeric(5,1)
+  double systolic_blood_pressure_sd = 22;  // NUMERIC(5,1) — numeric(5,1)
+  Qrisk3CardiovascularDiseaseRiskScoreOnBloodPressureTreatmentEnum on_blood_pressure_treatment = 23;  // VARCHAR(5)
+  Qrisk3CardiovascularDiseaseRiskScoreFamilyHistoryChdEnum family_history_chd = 24;  // VARCHAR(5)
+  Qrisk3CardiovascularDiseaseRiskScoreAtrialFibrillationEnum atrial_fibrillation = 25;  // VARCHAR(5)
+  Qrisk3CardiovascularDiseaseRiskScoreChronicKidneyDiseaseStageEnum chronic_kidney_disease_stage = 26;  // VARCHAR(10)
+  Qrisk3CardiovascularDiseaseRiskScoreMigraineEnum migraine = 27;  // VARCHAR(5)
+  Qrisk3CardiovascularDiseaseRiskScoreRheumatoidArthritisEnum rheumatoid_arthritis = 28;  // VARCHAR(5)
+  Qrisk3CardiovascularDiseaseRiskScoreSystemicLupusErythematosusEnum systemic_lupus_erythematosus = 29;  // VARCHAR(5)
+  Qrisk3CardiovascularDiseaseRiskScoreSevereMentalIllnessEnum severe_mental_illness = 30;  // VARCHAR(5)
+  Qrisk3CardiovascularDiseaseRiskScoreErectileDysfunctionEnum erectile_dysfunction = 31;  // VARCHAR(5)
+  Qrisk3CardiovascularDiseaseRiskScoreOnAtypicalAntipsychoticsEnum on_atypical_antipsychotics = 32;  // VARCHAR(5)
+  Qrisk3CardiovascularDiseaseRiskScoreOnCorticosteroidsEnum on_corticosteroids = 33;  // VARCHAR(5)
+  Qrisk3CardiovascularDiseaseRiskScoreHasEstablishedCvdEnum has_established_cvd = 34;  // VARCHAR(5)
+  Qrisk3CardiovascularDiseaseRiskScoreHasFamilialHypercholesterolaemiaEnum has_familial_hypercholesterolaemia = 35;  // VARCHAR(5)
+  string clinical_note = 36;  // TEXT
+}

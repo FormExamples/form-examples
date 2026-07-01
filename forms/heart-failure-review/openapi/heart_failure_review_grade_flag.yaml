@@ -1,0 +1,168 @@
+# Generated from sql/. Do not edit by hand.
+# SOURCE: heart_failure_review_grade_flag
+openapi: 3.1.0
+info:
+  title: Heart Failure Review — HeartFailureReviewGradeFlag
+  version: 1.0.0
+  description: Flags that fire independently of the classification and completeness status, with priority and a suggested action for the clinician or governance team.
+paths:
+  /heart-failure-review-grade-flags:
+    get:
+      summary: List HeartFailureReviewGradeFlag records
+      operationId: listHeartFailureReviewGradeFlag
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of HeartFailureReviewGradeFlag records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/HeartFailureReviewGradeFlag"
+    post:
+      summary: Create a new HeartFailureReviewGradeFlag
+      operationId: createHeartFailureReviewGradeFlag
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/HeartFailureReviewGradeFlag"
+      responses:
+        "201":
+          description: The newly created HeartFailureReviewGradeFlag
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/HeartFailureReviewGradeFlag"
+        "400":
+          description: Validation error
+  /heart-failure-review-grade-flags/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one HeartFailureReviewGradeFlag by id
+      operationId: getHeartFailureReviewGradeFlag
+      responses:
+        "200":
+          description: The requested HeartFailureReviewGradeFlag
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/HeartFailureReviewGradeFlag"
+        "404":
+          description: HeartFailureReviewGradeFlag not found
+    patch:
+      summary: Update an existing HeartFailureReviewGradeFlag
+      operationId: updateHeartFailureReviewGradeFlag
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/HeartFailureReviewGradeFlag"
+      responses:
+        "200":
+          description: The updated HeartFailureReviewGradeFlag
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/HeartFailureReviewGradeFlag"
+        "404":
+          description: HeartFailureReviewGradeFlag not found
+    delete:
+      summary: Soft-delete a HeartFailureReviewGradeFlag
+      operationId: deleteHeartFailureReviewGradeFlag
+      responses:
+        "204":
+          description: HeartFailureReviewGradeFlag deleted
+        "404":
+          description: HeartFailureReviewGradeFlag not found
+components:
+  schemas:
+    HeartFailureReviewGradeFlag:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was most recently updated.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was soft-deleted.
+        heart_failure_review_grade_id:
+          type: string
+          format: uuid
+          description: Foreign key to the parent grade.
+        flag_id:
+          type: string
+          maxLength: 50
+          description: Stable flag identifier (e.g. F-URGENT-REVIEW-001).
+        category:
+          type: string
+          enum:
+            - urgent-review
+            - optimisation-gap
+            - deranged-u-e-hyperkalaemia
+            - fluid-overload
+            - missing-monitoring
+            - incomplete
+            - other
+            - ""
+          description: "Flag category: urgent-review, optimisation-gap, deranged-u-e-hyperkalaemia, fluid-overload, missing-monitoring, incomplete, or other."
+        priority:
+          type: string
+          enum:
+            - low
+            - medium
+            - high
+            - ""
+          description: "Priority: low, medium, high."
+        description:
+          type: string
+          maxLength: 500
+          description: Human-readable description of what fired the flag.
+        suggested_action:
+          type: string
+          maxLength: 500
+          description: "Suggested clinical or governance action (e.g. \"arrange prompt clinical review\", \"review RAAS inhibitor and MRA dosing\")."
+      required:
+        - created_at
+        - updated_at
+        - heart_failure_review_grade_id
+        - flag_id
+        - category
+        - priority
+        - description
+        - suggested_action
+      description: Flags that fire independently of the classification and completeness status, with priority and a suggested action for the clinician or governance team.

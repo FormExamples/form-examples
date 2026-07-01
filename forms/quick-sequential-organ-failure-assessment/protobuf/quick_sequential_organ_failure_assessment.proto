@@ -1,0 +1,66 @@
+// Generated from sql/. Do not edit by hand.
+// SOURCE: quick_sequential_organ_failure_assessment
+
+syntax = "proto3";
+
+package form_examples.quick_sequential_organ_failure_assessment;
+
+enum QuickSequentialOrganFailureAssessmentClinicianRoleEnum {
+  CLINICIANROLE_UNSPECIFIED = 0;
+  CLINICIANROLE_DOCTOR = 1;  // doctor
+  CLINICIANROLE_NURSE = 2;  // nurse
+  CLINICIANROLE_PARAMEDIC = 3;  // paramedic
+  CLINICIANROLE_OTHER = 4;  // other
+}
+
+enum QuickSequentialOrganFailureAssessmentCareSettingEnum {
+  CARESETTING_UNSPECIFIED = 0;
+  CARESETTING_EMERGENCY_DEPARTMENT = 1;  // emergency-department
+  CARESETTING_WARD = 2;  // ward
+  CARESETTING_PRE_HOSPITAL = 3;  // pre-hospital
+  CARESETTING_OTHER = 4;  // other
+}
+
+enum QuickSequentialOrganFailureAssessmentAgeBandEnum {
+  AGEBAND_UNSPECIFIED = 0;
+  AGEBAND_V_16_39 = 1;  // 16-39
+  AGEBAND_V_40_59 = 2;  // 40-59
+  AGEBAND_V_60_74 = 3;  // 60-74
+  AGEBAND_V_75_PLUS = 4;  // 75-plus
+}
+
+enum QuickSequentialOrganFailureAssessmentSexEnum {
+  SEX_UNSPECIFIED = 0;
+  SEX_FEMALE = 1;  // female
+  SEX_MALE = 2;  // male
+  SEX_INTERSEX = 3;  // intersex
+  SEX_UNKNOWN = 4;  // unknown
+}
+
+enum QuickSequentialOrganFailureAssessmentMentationAlteredEnum {
+  MENTATIONALTERED_UNSPECIFIED = 0;
+  MENTATIONALTERED_YES = 1;  // yes
+  MENTATIONALTERED_NO = 2;  // no
+}
+
+message QuickSequentialOrganFailureAssessment {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string patient_id = 5;  // UUID — uuid
+  string clinician_id = 6;  // UUID — uuid
+  string clinician_name = 7;  // VARCHAR(255) — max 255 chars
+  QuickSequentialOrganFailureAssessmentClinicianRoleEnum clinician_role = 8;  // VARCHAR(20)
+  string assessed_at = 9;  // TIMESTAMPTZ — iso 8601
+  QuickSequentialOrganFailureAssessmentCareSettingEnum care_setting = 10;  // VARCHAR(20)
+  string suspected_source = 11;  // TEXT
+  string patient_identifier = 12;  // VARCHAR(100) — max 100 chars
+  QuickSequentialOrganFailureAssessmentAgeBandEnum age_band = 13;  // VARCHAR(10)
+  QuickSequentialOrganFailureAssessmentSexEnum sex = 14;  // VARCHAR(20)
+  double respiratory_rate = 15;  // NUMERIC(4,1) — numeric(4,1)
+  int32 glasgow_coma_scale = 16;  // INT
+  QuickSequentialOrganFailureAssessmentMentationAlteredEnum mentation_altered = 17;  // VARCHAR(10)
+  double systolic_blood_pressure = 18;  // NUMERIC(4,1) — numeric(4,1)
+  string clinical_note = 19;  // TEXT
+}

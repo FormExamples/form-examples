@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE chronic_kidney_disease_review SYSTEM "chronic_kidney_disease_review.dtd">
+<chronic_kidney_disease_review>
+<id>770e8400-e29b-41d4-a716-446655440002</id>
+<created_at>2026-04-09T10:00:00Z</created_at>
+<updated_at>2026-04-09T10:00:00Z</updated_at>
+<deleted_at>2026-04-09T10:00:00Z</deleted_at>
+<patient_id>550e8400-e29b-41d4-a716-446655440000</patient_id>
+<clinician_id>660e8400-e29b-41d4-a716-446655440001</clinician_id>
+<clinician_name>Example</clinician_name>
+<clinician_role>gp</clinician_role>
+<reviewed_at>2026-01-15</reviewed_at>
+<care_setting>general-practice</care_setting>
+<review_type>annual</review_type>
+<patient_identifier></patient_identifier>
+<age_band>18-39</age_band>
+<sex>female</sex>
+<diabetes_status>none</diabetes_status>
+<primary_cause>diabetic</primary_cause>
+<months_since_diagnosis>1</months_since_diagnosis>
+<egfr>0.0</egfr>
+<egfr_sample_date>2026-01-15</egfr_sample_date>
+<previous_egfr>0.0</previous_egfr>
+<previous_egfr_date>2026-01-15</previous_egfr_date>
+<acr>0.0</acr>
+<acr_sample_date>2026-01-15</acr_sample_date>
+<acr_measured>yes</acr_measured>
+<systolic_blood_pressure>1</systolic_blood_pressure>
+<diastolic_blood_pressure>1</diastolic_blood_pressure>
+<acei_or_arb_prescribed>yes</acei_or_arb_prescribed>
+<sglt2i_prescribed>yes</sglt2i_prescribed>
+<statin_prescribed>yes</statin_prescribed>
+<nephrotoxic_drug_present>yes</nephrotoxic_drug_present>
+<nephrotoxic_dose_adjusted>yes</nephrotoxic_dose_adjusted>
+<medication_review_completed>yes</medication_review_completed>
+<hba1c>0.0</hba1c>
+<potassium>0.0</potassium>
+<bicarbonate>0.0</bicarbonate>
+<calcium>0.0</calcium>
+<phosphate>0.0</phosphate>
+<pth>0.0</pth>
+<haemoglobin>0.0</haemoglobin>
+<referral_decision>none</referral_decision>
+<clinical_note>Example Hospital</clinical_note>
+</chronic_kidney_disease_review>

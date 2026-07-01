@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE modified_early_warning_score_grade_rule SYSTEM "modified_early_warning_score_grade_rule.dtd">
+<modified_early_warning_score_grade_rule>
+<id>990e8400-e29b-41d4-a716-446655440004</id>
+<created_at>2026-04-09T10:00:00Z</created_at>
+<updated_at>2026-04-09T10:00:00Z</updated_at>
+<deleted_at>2026-04-09T10:00:00Z</deleted_at>
+<modified_early_warning_score_grade_id>880e8400-e29b-41d4-a716-446655440003</modified_early_warning_score_grade_id>
+<rule_id>660e8400-e29b-41d4-a716-446655440001</rule_id>
+<instrument>systolic-blood-pressure</instrument>
+<band>low</band>
+<points>1</points>
+<category>General</category>
+<description>Example text.</description>
+</modified_early_warning_score_grade_rule>

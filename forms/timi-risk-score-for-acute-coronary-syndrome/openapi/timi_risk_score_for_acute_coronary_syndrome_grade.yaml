@@ -1,0 +1,157 @@
+# Generated from sql/. Do not edit by hand.
+# SOURCE: timi_risk_score_for_acute_coronary_syndrome_grade
+openapi: 3.1.0
+info:
+  title: Timi Risk Score For Acute Coronary Syndrome — TimiRiskScoreForAcuteCoronarySyndromeGrade
+  version: 1.0.0
+  description: "Computed TIMI grading result: summed total score (0-7), derived risk band (low/intermediate/high), looked-up 14-day composite-event risk percentage, and a management recommendation."
+paths:
+  /timi-risk-score-for-acute-coronary-syndrome-grades:
+    get:
+      summary: List TimiRiskScoreForAcuteCoronarySyndromeGrade records
+      operationId: listTimiRiskScoreForAcuteCoronarySyndromeGrade
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of TimiRiskScoreForAcuteCoronarySyndromeGrade records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/TimiRiskScoreForAcuteCoronarySyndromeGrade"
+    post:
+      summary: Create a new TimiRiskScoreForAcuteCoronarySyndromeGrade
+      operationId: createTimiRiskScoreForAcuteCoronarySyndromeGrade
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/TimiRiskScoreForAcuteCoronarySyndromeGrade"
+      responses:
+        "201":
+          description: The newly created TimiRiskScoreForAcuteCoronarySyndromeGrade
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/TimiRiskScoreForAcuteCoronarySyndromeGrade"
+        "400":
+          description: Validation error
+  /timi-risk-score-for-acute-coronary-syndrome-grades/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one TimiRiskScoreForAcuteCoronarySyndromeGrade by id
+      operationId: getTimiRiskScoreForAcuteCoronarySyndromeGrade
+      responses:
+        "200":
+          description: The requested TimiRiskScoreForAcuteCoronarySyndromeGrade
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/TimiRiskScoreForAcuteCoronarySyndromeGrade"
+        "404":
+          description: TimiRiskScoreForAcuteCoronarySyndromeGrade not found
+    patch:
+      summary: Update an existing TimiRiskScoreForAcuteCoronarySyndromeGrade
+      operationId: updateTimiRiskScoreForAcuteCoronarySyndromeGrade
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/TimiRiskScoreForAcuteCoronarySyndromeGrade"
+      responses:
+        "200":
+          description: The updated TimiRiskScoreForAcuteCoronarySyndromeGrade
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/TimiRiskScoreForAcuteCoronarySyndromeGrade"
+        "404":
+          description: TimiRiskScoreForAcuteCoronarySyndromeGrade not found
+    delete:
+      summary: Soft-delete a TimiRiskScoreForAcuteCoronarySyndromeGrade
+      operationId: deleteTimiRiskScoreForAcuteCoronarySyndromeGrade
+      responses:
+        "204":
+          description: TimiRiskScoreForAcuteCoronarySyndromeGrade deleted
+        "404":
+          description: TimiRiskScoreForAcuteCoronarySyndromeGrade not found
+components:
+  schemas:
+    TimiRiskScoreForAcuteCoronarySyndromeGrade:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was most recently updated.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was soft-deleted.
+        timi_risk_score_for_acute_coronary_syndrome_id:
+          type: string
+          format: uuid
+          description: Foreign key to the parent assessment (unique, 1:1).
+        total_score:
+          type: integer
+          format: int32
+          description: Summed TIMI score across the seven criteria (0-7 when complete).
+        risk_band:
+          type: string
+          enum:
+            - low
+            - intermediate
+            - high
+            - ""
+          description: "Derived risk band: low (0-1), intermediate (2-4), or high (5-7)."
+        fourteen_day_event_risk_percent:
+          type: number
+          format: double
+          description: "Looked-up 14-day risk (%) of the composite end point: all-cause death, new/recurrent MI, or severe recurrent ischaemia requiring urgent revascularisation."
+        management:
+          type: string
+          description: Free-text management recommendation associated with the risk band (e.g. early invasive strategy).
+        graded_at:
+          type: string
+          format: date-time
+          description: Timestamp when the engine last computed the grade.
+      required:
+        - created_at
+        - updated_at
+        - timi_risk_score_for_acute_coronary_syndrome_id
+        - risk_band
+        - management
+        - graded_at
+      description: "Computed TIMI grading result: summed total score (0-7), derived risk band (low/intermediate/high), looked-up 14-day composite-event risk percentage, and a management recommendation."

@@ -1,0 +1,166 @@
+# Generated from sql/. Do not edit by hand.
+# SOURCE: cage_alcohol_questionnaire_grade_flag
+openapi: 3.1.0
+info:
+  title: Cage Alcohol Questionnaire — CageAlcoholQuestionnaireGradeFlag
+  version: 1.0.0
+  description: Red-flag issues that fire independently of the total score, with priority and a suggested action for the clinical team.
+paths:
+  /cage-alcohol-questionnaire-grade-flags:
+    get:
+      summary: List CageAlcoholQuestionnaireGradeFlag records
+      operationId: listCageAlcoholQuestionnaireGradeFlag
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of CageAlcoholQuestionnaireGradeFlag records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/CageAlcoholQuestionnaireGradeFlag"
+    post:
+      summary: Create a new CageAlcoholQuestionnaireGradeFlag
+      operationId: createCageAlcoholQuestionnaireGradeFlag
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CageAlcoholQuestionnaireGradeFlag"
+      responses:
+        "201":
+          description: The newly created CageAlcoholQuestionnaireGradeFlag
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CageAlcoholQuestionnaireGradeFlag"
+        "400":
+          description: Validation error
+  /cage-alcohol-questionnaire-grade-flags/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one CageAlcoholQuestionnaireGradeFlag by id
+      operationId: getCageAlcoholQuestionnaireGradeFlag
+      responses:
+        "200":
+          description: The requested CageAlcoholQuestionnaireGradeFlag
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CageAlcoholQuestionnaireGradeFlag"
+        "404":
+          description: CageAlcoholQuestionnaireGradeFlag not found
+    patch:
+      summary: Update an existing CageAlcoholQuestionnaireGradeFlag
+      operationId: updateCageAlcoholQuestionnaireGradeFlag
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CageAlcoholQuestionnaireGradeFlag"
+      responses:
+        "200":
+          description: The updated CageAlcoholQuestionnaireGradeFlag
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CageAlcoholQuestionnaireGradeFlag"
+        "404":
+          description: CageAlcoholQuestionnaireGradeFlag not found
+    delete:
+      summary: Soft-delete a CageAlcoholQuestionnaireGradeFlag
+      operationId: deleteCageAlcoholQuestionnaireGradeFlag
+      responses:
+        "204":
+          description: CageAlcoholQuestionnaireGradeFlag deleted
+        "404":
+          description: CageAlcoholQuestionnaireGradeFlag not found
+components:
+  schemas:
+    CageAlcoholQuestionnaireGradeFlag:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was most recently updated.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was soft-deleted.
+        cage_alcohol_questionnaire_grade_id:
+          type: string
+          format: uuid
+          description: Foreign key to the parent grade.
+        flag_id:
+          type: string
+          maxLength: 50
+          description: Stable flag identifier (e.g. F-POSITIVE-SCREEN-001).
+        category:
+          type: string
+          enum:
+            - positive-screen
+            - eye-opener-dependence-marker
+            - further-assessment
+            - incomplete
+            - other
+            - ""
+          description: Flag category (see CHECK constraint for enumeration).
+        priority:
+          type: string
+          enum:
+            - low
+            - medium
+            - high
+            - ""
+          description: "Priority: low, medium, high."
+        description:
+          type: string
+          maxLength: 500
+          description: Human-readable description of what fired the flag.
+        suggested_action:
+          type: string
+          maxLength: 500
+          description: "Suggested clinical action (e.g. \"undertake a fuller assessment of drinking\")."
+      required:
+        - created_at
+        - updated_at
+        - cage_alcohol_questionnaire_grade_id
+        - flag_id
+        - category
+        - priority
+        - description
+        - suggested_action
+      description: Red-flag issues that fire independently of the total score, with priority and a suggested action for the clinical team.

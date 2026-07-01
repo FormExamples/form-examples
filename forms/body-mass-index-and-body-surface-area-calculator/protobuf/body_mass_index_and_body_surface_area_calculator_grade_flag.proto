@@ -1,0 +1,37 @@
+// Generated from sql/. Do not edit by hand.
+// SOURCE: body_mass_index_and_body_surface_area_calculator_grade_flag
+
+syntax = "proto3";
+
+package form_examples.body_mass_index_and_body_surface_area_calculator;
+
+enum BodyMassIndexAndBodySurfaceAreaCalculatorGradeFlagCategoryEnum {
+  CATEGORY_UNSPECIFIED = 0;
+  CATEGORY_SEVERE_OBESITY = 1;  // severe-obesity
+  CATEGORY_UNDERWEIGHT = 2;  // underweight
+  CATEGORY_EXTREME_VALUE = 3;  // extreme-value
+  CATEGORY_ASIAN_HIGH_RISK = 4;  // asian-high-risk
+  CATEGORY_ASIAN_INCREASED_RISK = 5;  // asian-increased-risk
+  CATEGORY_INCOMPLETE = 6;  // incomplete
+  CATEGORY_OTHER = 7;  // other
+}
+
+enum BodyMassIndexAndBodySurfaceAreaCalculatorGradeFlagPriorityEnum {
+  PRIORITY_UNSPECIFIED = 0;
+  PRIORITY_LOW = 1;  // low
+  PRIORITY_MEDIUM = 2;  // medium
+  PRIORITY_HIGH = 3;  // high
+}
+
+message BodyMassIndexAndBodySurfaceAreaCalculatorGradeFlag {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string body_mass_index_and_body_surface_area_calculator_grade_id = 5;  // UUID — uuid
+  string flag_id = 6;  // VARCHAR(50) — max 50 chars
+  BodyMassIndexAndBodySurfaceAreaCalculatorGradeFlagCategoryEnum category = 7;  // VARCHAR(30)
+  BodyMassIndexAndBodySurfaceAreaCalculatorGradeFlagPriorityEnum priority = 8;  // VARCHAR(10)
+  string description = 9;  // VARCHAR(500) — max 500 chars
+  string suggested_action = 10;  // VARCHAR(500) — max 500 chars
+}

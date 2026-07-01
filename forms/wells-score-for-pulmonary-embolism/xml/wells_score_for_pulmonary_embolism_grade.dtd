@@ -1,0 +1,11 @@
+<!ELEMENT wells_score_for_pulmonary_embolism_grade (id,created_at,updated_at,deleted_at,wells_score_for_pulmonary_embolism_id,wells_score,two_level_band,three_level_band,recommended_pathway,graded_at)>
+<!ELEMENT id (#PCDATA)>
+<!ELEMENT created_at (#PCDATA)>
+<!ELEMENT updated_at (#PCDATA)>
+<!ELEMENT deleted_at (#PCDATA)>
+<!ELEMENT wells_score_for_pulmonary_embolism_id (#PCDATA)>
+<!ELEMENT wells_score (#PCDATA)>
+<!ELEMENT two_level_band (#PCDATA)>
+<!ELEMENT three_level_band (#PCDATA)>
+<!ELEMENT recommended_pathway (#PCDATA)>
+<!ELEMENT graded_at (#PCDATA)>

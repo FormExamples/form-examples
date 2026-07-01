@@ -1,0 +1,194 @@
+# Generated from sql/. Do not edit by hand.
+# SOURCE: hypertension_review_grade
+openapi: 3.1.0
+info:
+  title: Hypertension Review — HypertensionReviewGrade
+  version: 1.0.0
+  description: "Computed control-classification and completeness grading result for a hypertension annual review: control status, hypertension stage, review status, the primary reading source, the selected blood-pressure target and its driving group. 1:1 with the parent review."
+paths:
+  /hypertension-review-grades:
+    get:
+      summary: List HypertensionReviewGrade records
+      operationId: listHypertensionReviewGrade
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of HypertensionReviewGrade records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/HypertensionReviewGrade"
+    post:
+      summary: Create a new HypertensionReviewGrade
+      operationId: createHypertensionReviewGrade
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/HypertensionReviewGrade"
+      responses:
+        "201":
+          description: The newly created HypertensionReviewGrade
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/HypertensionReviewGrade"
+        "400":
+          description: Validation error
+  /hypertension-review-grades/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one HypertensionReviewGrade by id
+      operationId: getHypertensionReviewGrade
+      responses:
+        "200":
+          description: The requested HypertensionReviewGrade
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/HypertensionReviewGrade"
+        "404":
+          description: HypertensionReviewGrade not found
+    patch:
+      summary: Update an existing HypertensionReviewGrade
+      operationId: updateHypertensionReviewGrade
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/HypertensionReviewGrade"
+      responses:
+        "200":
+          description: The updated HypertensionReviewGrade
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/HypertensionReviewGrade"
+        "404":
+          description: HypertensionReviewGrade not found
+    delete:
+      summary: Soft-delete a HypertensionReviewGrade
+      operationId: deleteHypertensionReviewGrade
+      responses:
+        "204":
+          description: HypertensionReviewGrade deleted
+        "404":
+          description: HypertensionReviewGrade not found
+components:
+  schemas:
+    HypertensionReviewGrade:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was most recently updated.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was soft-deleted.
+        hypertension_review_id:
+          type: string
+          format: uuid
+          description: Foreign key to the parent hypertension review (unique, 1:1).
+        control_status:
+          type: string
+          enum:
+            - controlled
+            - uncontrolled
+            - severe-uncontrolled
+            - ""
+          description: "Blood-pressure control class against the target: controlled, uncontrolled, or severe-uncontrolled."
+        hypertension_stage:
+          type: string
+          enum:
+            - none
+            - stage-1
+            - stage-2
+            - stage-3-severe
+            - ""
+          description: "Hypertension stage from the raw readings: none, stage-1, stage-2, or stage-3-severe."
+        review_status:
+          type: string
+          enum:
+            - complete
+            - partial
+            - incomplete
+            - ""
+          description: "Review completeness: complete, partial, or incomplete."
+        primary_source:
+          type: string
+          enum:
+            - home
+            - clinic
+            - none
+            - ""
+          description: "Primary reading source used for control classification: home (if present) else clinic, or none."
+        target_group:
+          type: string
+          maxLength: 50
+          description: Label of the comorbidity/age group that selected the tightest applicable target (e.g. default, over-80, ckd-tight).
+        clinic_target_systolic:
+          type: integer
+          format: int32
+          description: Selected clinic systolic target in mmHg.
+        clinic_target_diastolic:
+          type: integer
+          format: int32
+          description: Selected clinic diastolic target in mmHg.
+        home_target_systolic:
+          type: integer
+          format: int32
+          description: Selected home/ambulatory systolic target in mmHg (5 mmHg below the clinic target).
+        home_target_diastolic:
+          type: integer
+          format: int32
+          description: Selected home/ambulatory diastolic target in mmHg (5 mmHg below the clinic target).
+        graded_at:
+          type: string
+          format: date-time
+          description: Timestamp when the engine last computed the grade.
+      required:
+        - created_at
+        - updated_at
+        - hypertension_review_id
+        - control_status
+        - hypertension_stage
+        - review_status
+        - primary_source
+        - target_group
+        - graded_at
+      description: "Computed control-classification and completeness grading result for a hypertension annual review: control status, hypertension stage, review status, the primary reading source, the selected blood-pressure target and its driving group. 1:1 with the parent review."

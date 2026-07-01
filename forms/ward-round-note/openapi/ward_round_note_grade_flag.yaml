@@ -1,0 +1,168 @@
+# Generated from sql/. Do not edit by hand.
+# SOURCE: ward_round_note_grade_flag
+openapi: 3.1.0
+info:
+  title: Ward Round Note — WardRoundNoteGradeFlag
+  version: 1.0.0
+  description: Safety flags that fire independently of the completeness status, with priority and a suggested action for the clinician or governance team.
+paths:
+  /ward-round-note-grade-flags:
+    get:
+      summary: List WardRoundNoteGradeFlag records
+      operationId: listWardRoundNoteGradeFlag
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of WardRoundNoteGradeFlag records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/WardRoundNoteGradeFlag"
+    post:
+      summary: Create a new WardRoundNoteGradeFlag
+      operationId: createWardRoundNoteGradeFlag
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/WardRoundNoteGradeFlag"
+      responses:
+        "201":
+          description: The newly created WardRoundNoteGradeFlag
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/WardRoundNoteGradeFlag"
+        "400":
+          description: Validation error
+  /ward-round-note-grade-flags/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one WardRoundNoteGradeFlag by id
+      operationId: getWardRoundNoteGradeFlag
+      responses:
+        "200":
+          description: The requested WardRoundNoteGradeFlag
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/WardRoundNoteGradeFlag"
+        "404":
+          description: WardRoundNoteGradeFlag not found
+    patch:
+      summary: Update an existing WardRoundNoteGradeFlag
+      operationId: updateWardRoundNoteGradeFlag
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/WardRoundNoteGradeFlag"
+      responses:
+        "200":
+          description: The updated WardRoundNoteGradeFlag
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/WardRoundNoteGradeFlag"
+        "404":
+          description: WardRoundNoteGradeFlag not found
+    delete:
+      summary: Soft-delete a WardRoundNoteGradeFlag
+      operationId: deleteWardRoundNoteGradeFlag
+      responses:
+        "204":
+          description: WardRoundNoteGradeFlag deleted
+        "404":
+          description: WardRoundNoteGradeFlag not found
+components:
+  schemas:
+    WardRoundNoteGradeFlag:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was most recently updated.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was soft-deleted.
+        ward_round_note_grade_id:
+          type: string
+          format: uuid
+          description: Foreign key to the parent grade.
+        flag_id:
+          type: string
+          maxLength: 50
+          description: Stable flag identifier (e.g. F-DETERIORATING-NEWS2-001).
+        category:
+          type: string
+          enum:
+            - deteriorating-news2-escalation
+            - vte-not-done
+            - no-plan-jobs
+            - abnormal-results-not-actioned
+            - no-senior-review
+            - incomplete-entry
+            - other
+            - ""
+          description: "Flag category: deteriorating-news2-escalation, vte-not-done, no-plan-jobs, abnormal-results-not-actioned, no-senior-review, incomplete-entry, or other."
+        priority:
+          type: string
+          enum:
+            - low
+            - medium
+            - high
+            - ""
+          description: "Priority: low, medium, high."
+        description:
+          type: string
+          maxLength: 500
+          description: Human-readable description of what fired the flag.
+        suggested_action:
+          type: string
+          maxLength: 500
+          description: "Suggested clinical or governance action (e.g. \"escalate to the senior on call\", \"complete the VTE assessment\")."
+      required:
+        - created_at
+        - updated_at
+        - ward_round_note_grade_id
+        - flag_id
+        - category
+        - priority
+        - description
+        - suggested_action
+      description: Safety flags that fire independently of the completeness status, with priority and a suggested action for the clinician or governance team.

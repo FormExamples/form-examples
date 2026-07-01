@@ -1,0 +1,96 @@
+// Generated from sql/. Do not edit by hand.
+// SOURCE: glasgow_blatchford_bleeding_score
+
+syntax = "proto3";
+
+package form_examples.glasgow_blatchford_bleeding_score;
+
+enum GlasgowBlatchfordBleedingScoreClinicianRoleEnum {
+  CLINICIANROLE_UNSPECIFIED = 0;
+  CLINICIANROLE_DOCTOR = 1;  // doctor
+  CLINICIANROLE_NURSE = 2;  // nurse
+  CLINICIANROLE_ADVANCED_PRACTITIONER = 3;  // advanced-practitioner
+  CLINICIANROLE_OTHER = 4;  // other
+}
+
+enum GlasgowBlatchfordBleedingScoreCareSettingEnum {
+  CARESETTING_UNSPECIFIED = 0;
+  CARESETTING_EMERGENCY_DEPARTMENT = 1;  // emergency-department
+  CARESETTING_ACUTE_MEDICAL_UNIT = 2;  // acute-medical-unit
+  CARESETTING_WARD = 3;  // ward
+  CARESETTING_OTHER = 4;  // other
+}
+
+enum GlasgowBlatchfordBleedingScorePresentingComplaintEnum {
+  PRESENTINGCOMPLAINT_UNSPECIFIED = 0;
+  PRESENTINGCOMPLAINT_HAEMATEMESIS = 1;  // haematemesis
+  PRESENTINGCOMPLAINT_COFFEE_GROUND = 2;  // coffee-ground
+  PRESENTINGCOMPLAINT_MELAENA = 3;  // melaena
+  PRESENTINGCOMPLAINT_OTHER = 4;  // other
+}
+
+enum GlasgowBlatchfordBleedingScoreAgeBandEnum {
+  AGEBAND_UNSPECIFIED = 0;
+  AGEBAND_V_16_39 = 1;  // 16-39
+  AGEBAND_V_40_59 = 2;  // 40-59
+  AGEBAND_V_60_74 = 3;  // 60-74
+  AGEBAND_V_75_PLUS = 4;  // 75-plus
+}
+
+enum GlasgowBlatchfordBleedingScoreSexEnum {
+  SEX_UNSPECIFIED = 0;
+  SEX_FEMALE = 1;  // female
+  SEX_MALE = 2;  // male
+  SEX_INTERSEX = 3;  // intersex
+  SEX_UNKNOWN = 4;  // unknown
+}
+
+enum GlasgowBlatchfordBleedingScoreMelaenaPresentEnum {
+  MELAENAPRESENT_UNSPECIFIED = 0;
+  MELAENAPRESENT_YES = 1;  // yes
+  MELAENAPRESENT_NO = 2;  // no
+}
+
+enum GlasgowBlatchfordBleedingScoreSyncopeEnum {
+  SYNCOPE_UNSPECIFIED = 0;
+  SYNCOPE_YES = 1;  // yes
+  SYNCOPE_NO = 2;  // no
+}
+
+enum GlasgowBlatchfordBleedingScoreHepaticDiseaseEnum {
+  HEPATICDISEASE_UNSPECIFIED = 0;
+  HEPATICDISEASE_YES = 1;  // yes
+  HEPATICDISEASE_NO = 2;  // no
+}
+
+enum GlasgowBlatchfordBleedingScoreCardiacFailureEnum {
+  CARDIACFAILURE_UNSPECIFIED = 0;
+  CARDIACFAILURE_YES = 1;  // yes
+  CARDIACFAILURE_NO = 2;  // no
+}
+
+message GlasgowBlatchfordBleedingScore {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string patient_id = 5;  // UUID — uuid
+  string clinician_id = 6;  // UUID — uuid
+  string clinician_name = 7;  // VARCHAR(255) — max 255 chars
+  GlasgowBlatchfordBleedingScoreClinicianRoleEnum clinician_role = 8;  // VARCHAR(30)
+  string assessed_at = 9;  // TIMESTAMPTZ — iso 8601
+  GlasgowBlatchfordBleedingScoreCareSettingEnum care_setting = 10;  // VARCHAR(30)
+  GlasgowBlatchfordBleedingScorePresentingComplaintEnum presenting_complaint = 11;  // VARCHAR(20)
+  string patient_identifier = 12;  // VARCHAR(100) — max 100 chars
+  GlasgowBlatchfordBleedingScoreAgeBandEnum age_band = 13;  // VARCHAR(10)
+  GlasgowBlatchfordBleedingScoreSexEnum sex = 14;  // VARCHAR(20)
+  double blood_urea_mmol_l = 15;  // NUMERIC(6,1) — numeric(6,1)
+  double haemoglobin_g_l = 16;  // NUMERIC(5,1) — numeric(5,1)
+  int32 systolic_blood_pressure_mmhg = 17;  // INT
+  int32 pulse_beats_per_min = 18;  // INT
+  GlasgowBlatchfordBleedingScoreMelaenaPresentEnum melaena_present = 19;  // VARCHAR(5)
+  GlasgowBlatchfordBleedingScoreSyncopeEnum syncope = 20;  // VARCHAR(5)
+  GlasgowBlatchfordBleedingScoreHepaticDiseaseEnum hepatic_disease = 21;  // VARCHAR(5)
+  GlasgowBlatchfordBleedingScoreCardiacFailureEnum cardiac_failure = 22;  // VARCHAR(5)
+  string clinical_note = 23;  // TEXT
+}

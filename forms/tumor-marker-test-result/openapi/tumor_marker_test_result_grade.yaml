@@ -1,0 +1,204 @@
+# Generated from sql/. Do not edit by hand.
+# SOURCE: tumor_marker_test_result_grade
+openapi: 3.1.0
+info:
+  title: Tumor Marker Test Result — TumorMarkerTestResultGrade
+  version: 1.0.0
+  description: "Computed four-axis interpretation grade: result classification, abnormality severity / structured-reporting category, report completeness, and follow-up urgency. A markedly elevated value or rising trend on treatment drives an abnormal/urgent oncology review; a very high AFP / beta-hCG (suggesting a germ-cell tumour) auto-escalates the follow-up urgency to critical-alert regardless of the other axes."
+paths:
+  /tumor-marker-test-result-grades:
+    get:
+      summary: List TumorMarkerTestResultGrade records
+      operationId: listTumorMarkerTestResultGrade
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of TumorMarkerTestResultGrade records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/TumorMarkerTestResultGrade"
+    post:
+      summary: Create a new TumorMarkerTestResultGrade
+      operationId: createTumorMarkerTestResultGrade
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/TumorMarkerTestResultGrade"
+      responses:
+        "201":
+          description: The newly created TumorMarkerTestResultGrade
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/TumorMarkerTestResultGrade"
+        "400":
+          description: Validation error
+  /tumor-marker-test-result-grades/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one TumorMarkerTestResultGrade by id
+      operationId: getTumorMarkerTestResultGrade
+      responses:
+        "200":
+          description: The requested TumorMarkerTestResultGrade
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/TumorMarkerTestResultGrade"
+        "404":
+          description: TumorMarkerTestResultGrade not found
+    patch:
+      summary: Update an existing TumorMarkerTestResultGrade
+      operationId: updateTumorMarkerTestResultGrade
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/TumorMarkerTestResultGrade"
+      responses:
+        "200":
+          description: The updated TumorMarkerTestResultGrade
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/TumorMarkerTestResultGrade"
+        "404":
+          description: TumorMarkerTestResultGrade not found
+    delete:
+      summary: Soft-delete a TumorMarkerTestResultGrade
+      operationId: deleteTumorMarkerTestResultGrade
+      responses:
+        "204":
+          description: TumorMarkerTestResultGrade deleted
+        "404":
+          description: TumorMarkerTestResultGrade not found
+components:
+  schemas:
+    TumorMarkerTestResultGrade:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was updated most-recently.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was deleted a.k.a. soft-removed.
+        tumor_marker_test_result_id:
+          type: string
+          format: uuid
+          description: Foreign key to the parent result (unique, 1:1).
+        result_classification:
+          type: string
+          enum:
+            - normal
+            - abnormal
+            - critical
+            - inconclusive
+            - ""
+          description: "Axis A overall classification: normal, abnormal, critical, inconclusive."
+        abnormality_severity:
+          type: string
+          enum:
+            - none
+            - minor
+            - moderate
+            - major
+            - ""
+          description: "Axis B abnormality severity: none, minor, moderate, major."
+        reporting_category:
+          type: string
+          maxLength: 50
+          description: Axis B structured-reporting score / category label (e.g. a germ-cell-marker pattern or monitoring-trend category).
+        report_completeness_percent:
+          type: integer
+          format: int32
+          description: Axis C report completeness as a percentage of mandatory report sections (0-100).
+        follow_up_urgency:
+          type: string
+          enum:
+            - routine
+            - recommended
+            - urgent
+            - critical-alert
+            - ""
+          description: "Axis D follow-up urgency: routine, recommended, urgent, critical-alert."
+        target_timeframe:
+          type: string
+          maxLength: 50
+          description: Target timeframe for the recommended follow-up implied by the urgency.
+        recommended_action:
+          type: string
+          maxLength: 500
+          description: Axis D concise recommended action derived from the urgency.
+        recommendation:
+          type: string
+          enum:
+            - no-action
+            - routine-follow-up
+            - repeat-marker
+            - specialist-referral
+            - urgent-review
+            - ""
+          description: "Overall recommendation: no-action, routine-follow-up, repeat-marker, specialist-referral, urgent-review."
+        clinician_notes:
+          type: string
+          description: Free-text interpretation / sign-off notes.
+        signed_at:
+          type: string
+          format: date-time
+          description: Timestamp of the reporting clinician electronic signature.
+        graded_at:
+          type: string
+          format: date-time
+          description: Timestamp when the engine last computed the result.
+      required:
+        - created_at
+        - updated_at
+        - tumor_marker_test_result_id
+        - result_classification
+        - abnormality_severity
+        - reporting_category
+        - follow_up_urgency
+        - target_timeframe
+        - recommended_action
+        - recommendation
+        - clinician_notes
+        - graded_at
+      description: "Computed four-axis interpretation grade: result classification, abnormality severity / structured-reporting category, report completeness, and follow-up urgency. A markedly elevated value or rising trend on treatment drives an abnormal/urgent oncology review; a very high AFP / beta-hCG (suggesting a germ-cell tumour) auto-escalates the follow-up urgency to critical-alert regardless of the other axes."

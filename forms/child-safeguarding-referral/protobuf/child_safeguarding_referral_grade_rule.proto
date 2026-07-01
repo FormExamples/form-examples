@@ -1,0 +1,31 @@
+// Generated from sql/. Do not edit by hand.
+// SOURCE: child_safeguarding_referral_grade_rule
+
+syntax = "proto3";
+
+package form_examples.child_safeguarding_referral;
+
+enum ChildSafeguardingReferralGradeRuleSectionEnum {
+  SECTION_UNSPECIFIED = 0;
+  SECTION_REFERRER = 1;  // referrer
+  SECTION_CHILD = 2;  // child
+  SECTION_CONCERN = 3;  // concern
+  SECTION_CATEGORY = 4;  // category
+  SECTION_RISK = 5;  // risk
+  SECTION_CONSENT = 6;  // consent
+  SECTION_INFORMED = 7;  // informed
+  SECTION_COMPLETENESS = 8;  // completeness
+  SECTION_URGENCY = 9;  // urgency
+}
+
+message ChildSafeguardingReferralGradeRule {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string child_safeguarding_referral_grade_id = 5;  // UUID — uuid
+  string rule_id = 6;  // VARCHAR(40) — max 40 chars
+  ChildSafeguardingReferralGradeRuleSectionEnum section = 7;  // VARCHAR(20)
+  string category = 8;  // VARCHAR(50) — max 50 chars
+  string description = 9;  // VARCHAR(500) — max 500 chars
+}

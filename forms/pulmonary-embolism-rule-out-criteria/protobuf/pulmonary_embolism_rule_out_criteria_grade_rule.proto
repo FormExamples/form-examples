@@ -1,0 +1,43 @@
+// Generated from sql/. Do not edit by hand.
+// SOURCE: pulmonary_embolism_rule_out_criteria_grade_rule
+
+syntax = "proto3";
+
+package form_examples.pulmonary_embolism_rule_out_criteria;
+
+enum PulmonaryEmbolismRuleOutCriteriaGradeRuleInstrumentEnum {
+  INSTRUMENT_UNSPECIFIED = 0;
+  INSTRUMENT_CRITERION = 1;  // criterion
+  INSTRUMENT_GATE = 2;  // gate
+  INSTRUMENT_COMPOSITE = 3;  // composite
+}
+
+enum PulmonaryEmbolismRuleOutCriteriaGradeRuleSatisfiedEnum {
+  SATISFIED_UNSPECIFIED = 0;
+  SATISFIED_YES = 1;  // yes
+  SATISFIED_NO = 2;  // no
+}
+
+enum PulmonaryEmbolismRuleOutCriteriaGradeRuleOutcomeEnum {
+  OUTCOME_UNSPECIFIED = 0;
+  OUTCOME_SATISFIED = 1;  // satisfied
+  OUTCOME_FAILED = 2;  // failed
+  OUTCOME_APPLICABLE = 3;  // applicable
+  OUTCOME_NOT_APPLICABLE = 4;  // not-applicable
+  OUTCOME_PERC_NEGATIVE = 5;  // perc-negative
+  OUTCOME_PERC_POSITIVE = 6;  // perc-positive
+}
+
+message PulmonaryEmbolismRuleOutCriteriaGradeRule {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string pulmonary_embolism_rule_out_criteria_grade_id = 5;  // UUID — uuid
+  string rule_id = 6;  // VARCHAR(40) — max 40 chars
+  PulmonaryEmbolismRuleOutCriteriaGradeRuleInstrumentEnum instrument = 7;  // VARCHAR(20)
+  PulmonaryEmbolismRuleOutCriteriaGradeRuleSatisfiedEnum satisfied = 8;  // VARCHAR(5)
+  PulmonaryEmbolismRuleOutCriteriaGradeRuleOutcomeEnum outcome = 9;  // VARCHAR(20)
+  string category = 10;  // VARCHAR(50) — max 50 chars
+  string description = 11;  // VARCHAR(500) — max 500 chars
+}

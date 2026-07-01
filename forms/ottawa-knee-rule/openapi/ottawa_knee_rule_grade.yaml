@@ -1,0 +1,156 @@
+# Generated from sql/. Do not edit by hand.
+# SOURCE: ottawa_knee_rule_grade
+openapi: 3.1.0
+info:
+  title: Ottawa Knee Rule — OttawaKneeRuleGrade
+  version: 1.0.0
+  description: "Computed Ottawa Knee Rule grading result: the binary imaging decision (xray_indicated) and decision label. One-to-one with the parent assessment."
+paths:
+  /ottawa-knee-rule-grades:
+    get:
+      summary: List OttawaKneeRuleGrade records
+      operationId: listOttawaKneeRuleGrade
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of OttawaKneeRuleGrade records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/OttawaKneeRuleGrade"
+    post:
+      summary: Create a new OttawaKneeRuleGrade
+      operationId: createOttawaKneeRuleGrade
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/OttawaKneeRuleGrade"
+      responses:
+        "201":
+          description: The newly created OttawaKneeRuleGrade
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/OttawaKneeRuleGrade"
+        "400":
+          description: Validation error
+  /ottawa-knee-rule-grades/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one OttawaKneeRuleGrade by id
+      operationId: getOttawaKneeRuleGrade
+      responses:
+        "200":
+          description: The requested OttawaKneeRuleGrade
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/OttawaKneeRuleGrade"
+        "404":
+          description: OttawaKneeRuleGrade not found
+    patch:
+      summary: Update an existing OttawaKneeRuleGrade
+      operationId: updateOttawaKneeRuleGrade
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/OttawaKneeRuleGrade"
+      responses:
+        "200":
+          description: The updated OttawaKneeRuleGrade
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/OttawaKneeRuleGrade"
+        "404":
+          description: OttawaKneeRuleGrade not found
+    delete:
+      summary: Soft-delete a OttawaKneeRuleGrade
+      operationId: deleteOttawaKneeRuleGrade
+      responses:
+        "204":
+          description: OttawaKneeRuleGrade deleted
+        "404":
+          description: OttawaKneeRuleGrade not found
+components:
+  schemas:
+    OttawaKneeRuleGrade:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was most recently updated.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was soft-deleted.
+        ottawa_knee_rule_id:
+          type: string
+          format: uuid
+          description: Foreign key to the parent assessment (unique, 1:1).
+        xray_indicated:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: "Whether a knee radiograph is indicated: yes when any one criterion fires, no when all five are absent."
+        decision:
+          type: string
+          enum:
+            - xray-indicated
+            - xray-not-indicated
+            - ""
+          description: "Decision label: xray-indicated or xray-not-indicated."
+        recommended_action:
+          type: string
+          description: "Recommended action: obtain a knee radiograph per local protocol when indicated, otherwise imaging is not required by the rule."
+        graded_at:
+          type: string
+          format: date-time
+          description: Timestamp when the engine last computed the grade.
+      required:
+        - created_at
+        - updated_at
+        - ottawa_knee_rule_id
+        - xray_indicated
+        - decision
+        - recommended_action
+        - graded_at
+      description: "Computed Ottawa Knee Rule grading result: the binary imaging decision (xray_indicated) and decision label. One-to-one with the parent assessment."

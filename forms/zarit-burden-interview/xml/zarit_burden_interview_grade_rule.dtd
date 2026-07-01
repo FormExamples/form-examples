@@ -1,0 +1,11 @@
+<!ELEMENT zarit_burden_interview_grade_rule (id,created_at,updated_at,deleted_at,zarit_burden_interview_grade_id,rule_id,item_number,points,category,description)>
+<!ELEMENT id (#PCDATA)>
+<!ELEMENT created_at (#PCDATA)>
+<!ELEMENT updated_at (#PCDATA)>
+<!ELEMENT deleted_at (#PCDATA)>
+<!ELEMENT zarit_burden_interview_grade_id (#PCDATA)>
+<!ELEMENT rule_id (#PCDATA)>
+<!ELEMENT item_number (#PCDATA)>
+<!ELEMENT points (#PCDATA)>
+<!ELEMENT category (#PCDATA)>
+<!ELEMENT description (#PCDATA)>

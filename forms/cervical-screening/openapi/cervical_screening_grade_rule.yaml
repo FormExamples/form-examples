@@ -1,0 +1,157 @@
+# Generated from sql/. Do not edit by hand.
+# SOURCE: cervical_screening_grade_rule
+openapi: 3.1.0
+info:
+  title: Cervical Screening — CervicalScreeningGradeRule
+  version: 1.0.0
+  description: "Audit trail of every classification rule that fired during grading: pathway stage, category, and description."
+paths:
+  /cervical-screening-grade-rules:
+    get:
+      summary: List CervicalScreeningGradeRule records
+      operationId: listCervicalScreeningGradeRule
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of CervicalScreeningGradeRule records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/CervicalScreeningGradeRule"
+    post:
+      summary: Create a new CervicalScreeningGradeRule
+      operationId: createCervicalScreeningGradeRule
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CervicalScreeningGradeRule"
+      responses:
+        "201":
+          description: The newly created CervicalScreeningGradeRule
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CervicalScreeningGradeRule"
+        "400":
+          description: Validation error
+  /cervical-screening-grade-rules/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one CervicalScreeningGradeRule by id
+      operationId: getCervicalScreeningGradeRule
+      responses:
+        "200":
+          description: The requested CervicalScreeningGradeRule
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CervicalScreeningGradeRule"
+        "404":
+          description: CervicalScreeningGradeRule not found
+    patch:
+      summary: Update an existing CervicalScreeningGradeRule
+      operationId: updateCervicalScreeningGradeRule
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CervicalScreeningGradeRule"
+      responses:
+        "200":
+          description: The updated CervicalScreeningGradeRule
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CervicalScreeningGradeRule"
+        "404":
+          description: CervicalScreeningGradeRule not found
+    delete:
+      summary: Soft-delete a CervicalScreeningGradeRule
+      operationId: deleteCervicalScreeningGradeRule
+      responses:
+        "204":
+          description: CervicalScreeningGradeRule deleted
+        "404":
+          description: CervicalScreeningGradeRule not found
+components:
+  schemas:
+    CervicalScreeningGradeRule:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was most recently updated.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was soft-deleted.
+        cervical_screening_grade_id:
+          type: string
+          format: uuid
+          description: Foreign key to the parent grade.
+        rule_id:
+          type: string
+          maxLength: 40
+          description: Stable rule identifier (e.g. R-ELIGIBILITY-CEASE-01).
+        stage:
+          type: string
+          enum:
+            - eligibility
+            - adequacy
+            - hpv
+            - cytology
+            - completeness
+            - ""
+          description: "Pathway stage the rule concerns: eligibility, adequacy, hpv, cytology, or completeness."
+        category:
+          type: string
+          maxLength: 50
+          description: Subject category (e.g. gate, classification, conditional-requirement).
+        description:
+          type: string
+          maxLength: 500
+          description: Human-readable description of why the rule fired.
+      required:
+        - created_at
+        - updated_at
+        - cervical_screening_grade_id
+        - rule_id
+        - stage
+        - category
+        - description
+      description: "Audit trail of every classification rule that fired during grading: pathway stage, category, and description."

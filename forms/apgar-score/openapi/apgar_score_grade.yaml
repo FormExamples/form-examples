@@ -1,0 +1,194 @@
+# Generated from sql/. Do not edit by hand.
+# SOURCE: apgar_score_grade
+openapi: 3.1.0
+info:
+  title: Apgar Score — ApgarScoreGrade
+  version: 1.0.0
+  description: "Computed Apgar grading result (1:1): per-timepoint totals and bands for the canonical 1/5/10-minute timepoints, an overall summary band, and the trend across scored timepoints."
+paths:
+  /apgar-score-grades:
+    get:
+      summary: List ApgarScoreGrade records
+      operationId: listApgarScoreGrade
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of ApgarScoreGrade records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/ApgarScoreGrade"
+    post:
+      summary: Create a new ApgarScoreGrade
+      operationId: createApgarScoreGrade
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ApgarScoreGrade"
+      responses:
+        "201":
+          description: The newly created ApgarScoreGrade
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ApgarScoreGrade"
+        "400":
+          description: Validation error
+  /apgar-score-grades/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one ApgarScoreGrade by id
+      operationId: getApgarScoreGrade
+      responses:
+        "200":
+          description: The requested ApgarScoreGrade
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ApgarScoreGrade"
+        "404":
+          description: ApgarScoreGrade not found
+    patch:
+      summary: Update an existing ApgarScoreGrade
+      operationId: updateApgarScoreGrade
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ApgarScoreGrade"
+      responses:
+        "200":
+          description: The updated ApgarScoreGrade
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ApgarScoreGrade"
+        "404":
+          description: ApgarScoreGrade not found
+    delete:
+      summary: Soft-delete a ApgarScoreGrade
+      operationId: deleteApgarScoreGrade
+      responses:
+        "204":
+          description: ApgarScoreGrade deleted
+        "404":
+          description: ApgarScoreGrade not found
+components:
+  schemas:
+    ApgarScoreGrade:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was most recently updated.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was soft-deleted.
+        apgar_score_id:
+          type: string
+          format: uuid
+          description: Foreign key to the parent assessment (unique, 1:1).
+        total_one_minute:
+          type: integer
+          format: int32
+          description: Derived total (0-10) at the 1-minute timepoint, when scored.
+        total_five_minute:
+          type: integer
+          format: int32
+          description: Derived total (0-10) at the 5-minute timepoint, when scored.
+        total_ten_minute:
+          type: integer
+          format: int32
+          description: Derived total (0-10) at the 10-minute timepoint, when scored (expected whenever the 5-minute total is below 7).
+        band_one_minute:
+          type: string
+          enum:
+            - reassuring
+            - moderately-low
+            - low
+            - ""
+          description: "Derived band at the 1-minute timepoint: reassuring (7-10), moderately-low (4-6), or low (0-3)."
+        band_five_minute:
+          type: string
+          enum:
+            - reassuring
+            - moderately-low
+            - low
+            - ""
+          description: "Derived band at the 5-minute timepoint: reassuring (7-10), moderately-low (4-6), or low (0-3)."
+        band_ten_minute:
+          type: string
+          enum:
+            - reassuring
+            - moderately-low
+            - low
+            - ""
+          description: "Derived band at the 10-minute timepoint: reassuring (7-10), moderately-low (4-6), or low (0-3)."
+        summary_band:
+          type: string
+          enum:
+            - reassuring
+            - moderately-low
+            - low
+            - ""
+          description: "Overall summary band: the worst (lowest) band observed across scored timepoints."
+        trend:
+          type: string
+          enum:
+            - improving
+            - static
+            - falling
+            - insufficient
+            - ""
+          description: "Trend across consecutive scored timepoints: improving, static, falling, or insufficient (fewer than two scored timepoints)."
+        graded_at:
+          type: string
+          format: date-time
+          description: Timestamp when the engine last computed the grade.
+      required:
+        - created_at
+        - updated_at
+        - apgar_score_id
+        - band_one_minute
+        - band_five_minute
+        - band_ten_minute
+        - summary_band
+        - trend
+        - graded_at
+      description: "Computed Apgar grading result (1:1): per-timepoint totals and bands for the canonical 1/5/10-minute timepoints, an overall summary band, and the trend across scored timepoints."

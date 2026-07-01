@@ -1,0 +1,58 @@
+// Generated from sql/. Do not edit by hand.
+// SOURCE: coagulation_test_result_grade
+
+syntax = "proto3";
+
+package form_examples.coagulation_test_result;
+
+enum CoagulationTestResultGradeResultClassificationEnum {
+  RESULTCLASSIFICATION_UNSPECIFIED = 0;
+  RESULTCLASSIFICATION_NORMAL = 1;  // normal
+  RESULTCLASSIFICATION_ABNORMAL = 2;  // abnormal
+  RESULTCLASSIFICATION_CRITICAL = 3;  // critical
+  RESULTCLASSIFICATION_INCONCLUSIVE = 4;  // inconclusive
+}
+
+enum CoagulationTestResultGradeAbnormalitySeverityEnum {
+  ABNORMALITYSEVERITY_UNSPECIFIED = 0;
+  ABNORMALITYSEVERITY_NONE = 1;  // none
+  ABNORMALITYSEVERITY_MINOR = 2;  // minor
+  ABNORMALITYSEVERITY_MODERATE = 3;  // moderate
+  ABNORMALITYSEVERITY_MAJOR = 4;  // major
+}
+
+enum CoagulationTestResultGradeFollowUpUrgencyEnum {
+  FOLLOWUPURGENCY_UNSPECIFIED = 0;
+  FOLLOWUPURGENCY_ROUTINE = 1;  // routine
+  FOLLOWUPURGENCY_RECOMMENDED = 2;  // recommended
+  FOLLOWUPURGENCY_URGENT = 3;  // urgent
+  FOLLOWUPURGENCY_CRITICAL_ALERT = 4;  // critical-alert
+}
+
+enum CoagulationTestResultGradeRecommendationEnum {
+  RECOMMENDATION_UNSPECIFIED = 0;
+  RECOMMENDATION_NO_ACTION = 1;  // no-action
+  RECOMMENDATION_ROUTINE_FOLLOW_UP = 2;  // routine-follow-up
+  RECOMMENDATION_FURTHER_TESTING = 3;  // further-testing
+  RECOMMENDATION_SPECIALIST_REFERRAL = 4;  // specialist-referral
+  RECOMMENDATION_URGENT_REVIEW = 5;  // urgent-review
+}
+
+message CoagulationTestResultGrade {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string coagulation_test_result_id = 5;  // UUID — uuid
+  CoagulationTestResultGradeResultClassificationEnum result_classification = 6;  // VARCHAR(15)
+  CoagulationTestResultGradeAbnormalitySeverityEnum abnormality_severity = 7;  // VARCHAR(10)
+  string reporting_category = 8;  // VARCHAR(50) — max 50 chars
+  int32 report_completeness_percent = 9;  // INTEGER
+  CoagulationTestResultGradeFollowUpUrgencyEnum follow_up_urgency = 10;  // VARCHAR(15)
+  string target_timeframe = 11;  // VARCHAR(50) — max 50 chars
+  string recommended_action = 12;  // VARCHAR(500) — max 500 chars
+  CoagulationTestResultGradeRecommendationEnum recommendation = 13;  // VARCHAR(20)
+  string clinician_notes = 14;  // TEXT
+  string signed_at = 15;  // TIMESTAMPTZ — iso 8601
+  string graded_at = 16;  // TIMESTAMPTZ — iso 8601
+}

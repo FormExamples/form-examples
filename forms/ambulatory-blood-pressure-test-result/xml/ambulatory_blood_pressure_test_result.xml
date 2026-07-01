@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE ambulatory_blood_pressure_test_result SYSTEM "ambulatory_blood_pressure_test_result.dtd">
+<ambulatory_blood_pressure_test_result>
+<id>770e8400-e29b-41d4-a716-446655440002</id>
+<created_at>2026-04-09T10:00:00Z</created_at>
+<updated_at>2026-04-09T10:00:00Z</updated_at>
+<deleted_at>2026-04-09T10:00:00Z</deleted_at>
+<patient_id>550e8400-e29b-41d4-a716-446655440000</patient_id>
+<clinician_id>660e8400-e29b-41d4-a716-446655440001</clinician_id>
+<originating_request_reference></originating_request_reference>
+<monitoring_type>24-hour-abpm</monitoring_type>
+<report_status>preliminary</report_status>
+<performed_date>2026-01-15</performed_date>
+<reported_date>2026-01-15</reported_date>
+<valid_readings_percent>50.0</valid_readings_percent>
+<recording_adequate>true</recording_adequate>
+<clinical_history>Example text.</clinical_history>
+<daytime_average_systolic>0.0</daytime_average_systolic>
+<daytime_average_diastolic>0.0</daytime_average_diastolic>
+<nighttime_average_systolic>0.0</nighttime_average_systolic>
+<nighttime_average_diastolic>0.0</nighttime_average_diastolic>
+<twenty_four_hour_average_systolic>0.0</twenty_four_hour_average_systolic>
+<twenty_four_hour_average_diastolic>0.0</twenty_four_hour_average_diastolic>
+<nocturnal_dip_percent>50.0</nocturnal_dip_percent>
+<dipper_status>dipper</dipper_status>
+<hypertension_confirmed>true</hypertension_confirmed>
+<white_coat_effect>true</white_coat_effect>
+<masked_hypertension>true</masked_hypertension>
+<severe_hypertension>true</severe_hypertension>
+<nocturnal_hypertension>true</nocturnal_hypertension>
+<normal_study>true</normal_study>
+<findings_narrative>Example text.</findings_narrative>
+<comparison_with_previous></comparison_with_previous>
+<impression>Example text.</impression>
+<reporting_category>General</reporting_category>
+<recommended_follow_up></recommended_follow_up>
+<critical_result_communicated>true</critical_result_communicated>
+<reported_to></reported_to>
+</ambulatory_blood_pressure_test_result>

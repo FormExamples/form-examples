@@ -1,0 +1,39 @@
+// Generated from sql/. Do not edit by hand.
+// SOURCE: bowel_cancer_screening_fit_grade
+
+syntax = "proto3";
+
+package form_examples.bowel_cancer_screening_with_faecal_immunochemical_test;
+
+enum BowelCancerScreeningFitGradeResultClassEnum {
+  RESULTCLASS_UNSPECIFIED = 0;
+  RESULTCLASS_NEGATIVE = 1;  // negative
+  RESULTCLASS_POSITIVE = 2;  // positive
+  RESULTCLASS_SPOILT = 3;  // spoilt
+}
+
+enum BowelCancerScreeningFitGradeManagementActionEnum {
+  MANAGEMENTACTION_UNSPECIFIED = 0;
+  MANAGEMENTACTION_ROUTINE_RECALL = 1;  // routine-recall
+  MANAGEMENTACTION_REFER_COLONOSCOPY = 2;  // refer-colonoscopy
+  MANAGEMENTACTION_REPEAT_KIT = 3;  // repeat-kit
+}
+
+enum BowelCancerScreeningFitGradeStatusEnum {
+  STATUS_UNSPECIFIED = 0;
+  STATUS_COMPLETE = 1;  // complete
+  STATUS_INCOMPLETE = 2;  // incomplete
+}
+
+message BowelCancerScreeningFitGrade {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string bowel_cancer_screening_fit_id = 5;  // UUID — uuid
+  BowelCancerScreeningFitGradeResultClassEnum result_class = 6;  // VARCHAR(15)
+  BowelCancerScreeningFitGradeManagementActionEnum management_action = 7;  // VARCHAR(20)
+  bool symptomatic_pathway = 8;  // BOOLEAN
+  BowelCancerScreeningFitGradeStatusEnum status = 9;  // VARCHAR(15)
+  string graded_at = 10;  // TIMESTAMPTZ — iso 8601
+}

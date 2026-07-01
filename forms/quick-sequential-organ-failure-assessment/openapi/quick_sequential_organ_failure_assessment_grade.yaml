@@ -1,0 +1,168 @@
+# Generated from sql/. Do not edit by hand.
+# SOURCE: quick_sequential_organ_failure_assessment_grade
+openapi: 3.1.0
+info:
+  title: Quick Sequential Organ Failure Assessment — QuickSequentialOrganFailureAssessmentGrade
+  version: 1.0.0
+  description: "Computed qSOFA grading result: per-criterion 0-1 points, summed total (0-3), derived risk band (lower/higher), and whether the >= 2 escalation threshold was met."
+paths:
+  /quick-sequential-organ-failure-assessment-grades:
+    get:
+      summary: List QuickSequentialOrganFailureAssessmentGrade records
+      operationId: listQuickSequentialOrganFailureAssessmentGrade
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of QuickSequentialOrganFailureAssessmentGrade records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/QuickSequentialOrganFailureAssessmentGrade"
+    post:
+      summary: Create a new QuickSequentialOrganFailureAssessmentGrade
+      operationId: createQuickSequentialOrganFailureAssessmentGrade
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/QuickSequentialOrganFailureAssessmentGrade"
+      responses:
+        "201":
+          description: The newly created QuickSequentialOrganFailureAssessmentGrade
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/QuickSequentialOrganFailureAssessmentGrade"
+        "400":
+          description: Validation error
+  /quick-sequential-organ-failure-assessment-grades/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one QuickSequentialOrganFailureAssessmentGrade by id
+      operationId: getQuickSequentialOrganFailureAssessmentGrade
+      responses:
+        "200":
+          description: The requested QuickSequentialOrganFailureAssessmentGrade
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/QuickSequentialOrganFailureAssessmentGrade"
+        "404":
+          description: QuickSequentialOrganFailureAssessmentGrade not found
+    patch:
+      summary: Update an existing QuickSequentialOrganFailureAssessmentGrade
+      operationId: updateQuickSequentialOrganFailureAssessmentGrade
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/QuickSequentialOrganFailureAssessmentGrade"
+      responses:
+        "200":
+          description: The updated QuickSequentialOrganFailureAssessmentGrade
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/QuickSequentialOrganFailureAssessmentGrade"
+        "404":
+          description: QuickSequentialOrganFailureAssessmentGrade not found
+    delete:
+      summary: Soft-delete a QuickSequentialOrganFailureAssessmentGrade
+      operationId: deleteQuickSequentialOrganFailureAssessmentGrade
+      responses:
+        "204":
+          description: QuickSequentialOrganFailureAssessmentGrade deleted
+        "404":
+          description: QuickSequentialOrganFailureAssessmentGrade not found
+components:
+  schemas:
+    QuickSequentialOrganFailureAssessmentGrade:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was most recently updated.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was soft-deleted.
+        quick_sequential_organ_failure_assessment_id:
+          type: string
+          format: uuid
+          description: Foreign key to the parent assessment (unique, 1:1).
+        respiratory_rate_point:
+          type: integer
+          format: int32
+          description: Point (0 or 1) awarded for criterion 1, respiratory rate (>= 22 breaths/min).
+        mentation_point:
+          type: integer
+          format: int32
+          description: Point (0 or 1) awarded for criterion 2, mentation (GCS < 15 or altered mentation).
+        systolic_blood_pressure_point:
+          type: integer
+          format: int32
+          description: Point (0 or 1) awarded for criterion 3, systolic blood pressure (<= 100 mmHg).
+        total_score:
+          type: integer
+          format: int32
+          description: Summed qSOFA score across the three criteria (0-3).
+        risk_band:
+          type: string
+          enum:
+            - lower
+            - higher
+            - ""
+          description: "Derived risk band: lower (< 2) or higher (>= 2)."
+        threshold_met:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: "Whether the qSOFA >= 2 positive-screen escalation threshold was met: yes or no."
+        graded_at:
+          type: string
+          format: date-time
+          description: Timestamp when the engine last computed the grade.
+      required:
+        - created_at
+        - updated_at
+        - quick_sequential_organ_failure_assessment_id
+        - risk_band
+        - threshold_met
+        - graded_at
+      description: "Computed qSOFA grading result: per-criterion 0-1 points, summed total (0-3), derived risk band (lower/higher), and whether the >= 2 escalation threshold was met."

@@ -1,0 +1,37 @@
+// Generated from sql/. Do not edit by hand.
+// SOURCE: estimated_glomerular_filtration_rate_calculator_grade_rule
+
+syntax = "proto3";
+
+package form_examples.estimated_glomerular_filtration_rate_calculator;
+
+enum EstimatedGlomerularFiltrationRateCalculatorGradeRuleInstrumentEnum {
+  INSTRUMENT_UNSPECIFIED = 0;
+  INSTRUMENT_CONVERSION = 1;  // conversion
+  INSTRUMENT_EQUATION = 2;  // equation
+  INSTRUMENT_BANDING = 3;  // banding
+  INSTRUMENT_COMPOSITE = 4;  // composite
+}
+
+enum EstimatedGlomerularFiltrationRateCalculatorGradeRuleBandEnum {
+  BAND_UNSPECIFIED = 0;
+  BAND_G1 = 1;  // G1
+  BAND_G2 = 2;  // G2
+  BAND_G3A = 3;  // G3a
+  BAND_G3B = 4;  // G3b
+  BAND_G4 = 5;  // G4
+  BAND_G5 = 6;  // G5
+}
+
+message EstimatedGlomerularFiltrationRateCalculatorGradeRule {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string estimated_glomerular_filtration_rate_calculator_grade_id = 5;  // UUID — uuid
+  string rule_id = 6;  // VARCHAR(40) — max 40 chars
+  EstimatedGlomerularFiltrationRateCalculatorGradeRuleInstrumentEnum instrument = 7;  // VARCHAR(20)
+  EstimatedGlomerularFiltrationRateCalculatorGradeRuleBandEnum band = 8;  // VARCHAR(3)
+  string category = 9;  // VARCHAR(50) — max 50 chars
+  string description = 10;  // VARCHAR(500) — max 500 chars
+}

@@ -1,0 +1,11 @@
+<!ELEMENT medication_reconciliation_grade (id,created_at,updated_at,deleted_at,medication_reconciliation_id,status,source_count,unintentional_count,high_risk_unintentional_count,graded_at)>
+<!ELEMENT id (#PCDATA)>
+<!ELEMENT created_at (#PCDATA)>
+<!ELEMENT updated_at (#PCDATA)>
+<!ELEMENT deleted_at (#PCDATA)>
+<!ELEMENT medication_reconciliation_id (#PCDATA)>
+<!ELEMENT status (#PCDATA)>
+<!ELEMENT source_count (#PCDATA)>
+<!ELEMENT unintentional_count (#PCDATA)>
+<!ELEMENT high_risk_unintentional_count (#PCDATA)>
+<!ELEMENT graded_at (#PCDATA)>

@@ -1,0 +1,330 @@
+{
+  "resourceType": "Observation",
+  "id": "770e8400-e29b-41d4-a716-446655440002",
+  "meta": {
+    "profile": [
+      "http://hl7.org/fhir/StructureDefinition/Observation"
+    ],
+    "lastUpdated": "2026-04-09T10:00:00+00:00"
+  },
+  "status": "final",
+  "category": [
+    {
+      "coding": [
+        {
+          "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+          "code": "survey",
+          "display": "Survey"
+        }
+      ]
+    }
+  ],
+  "code": {
+    "coding": [
+      {
+        "system": "urn:form-examples:grace-score-for-acute-coronary-syndrome",
+        "code": "grace_score_for_acute_coronary_syndrome",
+        "display": "Grace Score For Acute Coronary Syndrome"
+      }
+    ]
+  },
+  "subject": {
+    "reference": "Patient/550e8400-e29b-41d4-a716-446655440000"
+  },
+  "encounter": {
+    "reference": "Encounter/bb0e8400-e29b-41d4-a716-446655440006"
+  },
+  "effectiveDateTime": "2026-04-09T10:00:00+00:00",
+  "component": [
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:grace-score-for-acute-coronary-syndrome",
+            "code": "deleted_at",
+            "display": "Deleted At"
+          }
+        ]
+      },
+      "valueDateTime": "2026-04-09T10:00:00+00:00"
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:grace-score-for-acute-coronary-syndrome",
+            "code": "clinician_name",
+            "display": "Clinician Name"
+          }
+        ]
+      },
+      "valueString": "Example"
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:grace-score-for-acute-coronary-syndrome",
+            "code": "clinician_role",
+            "display": "Clinician Role"
+          }
+        ]
+      },
+      "valueCodeableConcept": {
+        "coding": [
+          {
+            "system": "urn:form-examples:grace-score-for-acute-coronary-syndrome:clinician_role",
+            "code": "emergency-physician",
+            "display": "Emergency-Physician"
+          }
+        ]
+      }
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:grace-score-for-acute-coronary-syndrome",
+            "code": "assessed_at",
+            "display": "Assessed At"
+          }
+        ]
+      },
+      "valueDateTime": "2026-04-09T10:00:00+00:00"
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:grace-score-for-acute-coronary-syndrome",
+            "code": "care_setting",
+            "display": "Care Setting"
+          }
+        ]
+      },
+      "valueCodeableConcept": {
+        "coding": [
+          {
+            "system": "urn:form-examples:grace-score-for-acute-coronary-syndrome:care_setting",
+            "code": "emergency-department",
+            "display": "Emergency-Department"
+          }
+        ]
+      }
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:grace-score-for-acute-coronary-syndrome",
+            "code": "presentation_type",
+            "display": "Presentation Type"
+          }
+        ]
+      },
+      "valueCodeableConcept": {
+        "coding": [
+          {
+            "system": "urn:form-examples:grace-score-for-acute-coronary-syndrome:presentation_type",
+            "code": "nstemi",
+            "display": "Nstemi"
+          }
+        ]
+      }
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:grace-score-for-acute-coronary-syndrome",
+            "code": "patient_identifier",
+            "display": "Patient Identifier"
+          }
+        ]
+      },
+      "valueString": ""
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:grace-score-for-acute-coronary-syndrome",
+            "code": "age_years",
+            "display": "Age Years"
+          }
+        ]
+      },
+      "valueInteger": 45
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:grace-score-for-acute-coronary-syndrome",
+            "code": "sex",
+            "display": "Sex"
+          }
+        ]
+      },
+      "valueCodeableConcept": {
+        "coding": [
+          {
+            "system": "urn:form-examples:grace-score-for-acute-coronary-syndrome:sex",
+            "code": "female",
+            "display": "Female"
+          }
+        ]
+      }
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:grace-score-for-acute-coronary-syndrome",
+            "code": "heart_rate",
+            "display": "Heart Rate"
+          }
+        ]
+      },
+      "valueInteger": 1
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:grace-score-for-acute-coronary-syndrome",
+            "code": "systolic_blood_pressure",
+            "display": "Systolic Blood Pressure"
+          }
+        ]
+      },
+      "valueInteger": 1
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:grace-score-for-acute-coronary-syndrome",
+            "code": "serum_creatinine",
+            "display": "Serum Creatinine"
+          }
+        ]
+      },
+      "valueQuantity": {
+        "value": 0.0
+      }
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:grace-score-for-acute-coronary-syndrome",
+            "code": "serum_creatinine_unit",
+            "display": "Serum Creatinine Unit"
+          }
+        ]
+      },
+      "valueCodeableConcept": {
+        "coding": [
+          {
+            "system": "urn:form-examples:grace-score-for-acute-coronary-syndrome:serum_creatinine_unit",
+            "code": "mg/dL",
+            "display": "Mg/Dl"
+          }
+        ]
+      }
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:grace-score-for-acute-coronary-syndrome",
+            "code": "killip_class",
+            "display": "Killip Class"
+          }
+        ]
+      },
+      "valueCodeableConcept": {
+        "coding": [
+          {
+            "system": "urn:form-examples:grace-score-for-acute-coronary-syndrome:killip_class",
+            "code": "I",
+            "display": "I"
+          }
+        ]
+      }
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:grace-score-for-acute-coronary-syndrome",
+            "code": "cardiac_arrest_at_admission",
+            "display": "Cardiac Arrest At Admission"
+          }
+        ]
+      },
+      "valueCodeableConcept": {
+        "coding": [
+          {
+            "system": "urn:form-examples:grace-score-for-acute-coronary-syndrome:cardiac_arrest_at_admission",
+            "code": "yes",
+            "display": "Yes"
+          }
+        ]
+      }
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:grace-score-for-acute-coronary-syndrome",
+            "code": "st_segment_deviation",
+            "display": "St Segment Deviation"
+          }
+        ]
+      },
+      "valueCodeableConcept": {
+        "coding": [
+          {
+            "system": "urn:form-examples:grace-score-for-acute-coronary-syndrome:st_segment_deviation",
+            "code": "yes",
+            "display": "Yes"
+          }
+        ]
+      }
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:grace-score-for-acute-coronary-syndrome",
+            "code": "elevated_cardiac_enzymes",
+            "display": "Elevated Cardiac Enzymes"
+          }
+        ]
+      },
+      "valueCodeableConcept": {
+        "coding": [
+          {
+            "system": "urn:form-examples:grace-score-for-acute-coronary-syndrome:elevated_cardiac_enzymes",
+            "code": "yes",
+            "display": "Yes"
+          }
+        ]
+      }
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:grace-score-for-acute-coronary-syndrome",
+            "code": "clinical_note",
+            "display": "Clinical Note"
+          }
+        ]
+      },
+      "valueString": ""
+    }
+  ]
+}

@@ -1,0 +1,348 @@
+{
+  "resourceType": "Observation",
+  "id": "880e8400-e29b-41d4-a716-446655440003",
+  "meta": {
+    "profile": [
+      "http://hl7.org/fhir/StructureDefinition/Observation"
+    ],
+    "lastUpdated": "2026-04-09T10:00:00+00:00"
+  },
+  "status": "final",
+  "category": [
+    {
+      "coding": [
+        {
+          "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+          "code": "survey",
+          "display": "Survey"
+        }
+      ]
+    }
+  ],
+  "code": {
+    "coding": [
+      {
+        "system": "urn:form-examples:partogram",
+        "code": "partogram_observation",
+        "display": "Partogram Observation"
+      }
+    ]
+  },
+  "subject": {
+    "reference": "Patient/550e8400-e29b-41d4-a716-446655440000"
+  },
+  "encounter": {
+    "reference": "Encounter/cc0e8400-e29b-41d4-a716-446655440007"
+  },
+  "effectiveDateTime": "2026-04-09T10:00:00+00:00",
+  "component": [
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:partogram",
+            "code": "deleted_at",
+            "display": "Deleted At"
+          }
+        ]
+      },
+      "valueDateTime": "2026-04-09T10:00:00+00:00"
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:partogram",
+            "code": "observed_at",
+            "display": "Observed At"
+          }
+        ]
+      },
+      "valueDateTime": "2026-04-09T10:00:00+00:00"
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:partogram",
+            "code": "cervical_dilatation_cm",
+            "display": "Cervical Dilatation Cm"
+          }
+        ]
+      },
+      "valueQuantity": {
+        "value": 0.0
+      }
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:partogram",
+            "code": "descent_fifths",
+            "display": "Descent Fifths"
+          }
+        ]
+      },
+      "valueQuantity": {
+        "value": 0.0
+      }
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:partogram",
+            "code": "contractions_per_10_min",
+            "display": "Contractions Per 10 Min"
+          }
+        ]
+      },
+      "valueQuantity": {
+        "value": 0.0
+      }
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:partogram",
+            "code": "contraction_duration_band",
+            "display": "Contraction Duration Band"
+          }
+        ]
+      },
+      "valueCodeableConcept": {
+        "coding": [
+          {
+            "system": "urn:form-examples:partogram:contraction_duration_band",
+            "code": "<20s",
+            "display": "<20S"
+          }
+        ]
+      }
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:partogram",
+            "code": "contraction_strength",
+            "display": "Contraction Strength"
+          }
+        ]
+      },
+      "valueCodeableConcept": {
+        "coding": [
+          {
+            "system": "urn:form-examples:partogram:contraction_strength",
+            "code": "mild",
+            "display": "Mild"
+          }
+        ]
+      }
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:partogram",
+            "code": "fetal_heart_rate",
+            "display": "Fetal Heart Rate"
+          }
+        ]
+      },
+      "valueInteger": 1
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:partogram",
+            "code": "liquor_state",
+            "display": "Liquor State"
+          }
+        ]
+      },
+      "valueCodeableConcept": {
+        "coding": [
+          {
+            "system": "urn:form-examples:partogram:liquor_state",
+            "code": "intact",
+            "display": "Intact"
+          }
+        ]
+      }
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:partogram",
+            "code": "moulding",
+            "display": "Moulding"
+          }
+        ]
+      },
+      "valueCodeableConcept": {
+        "coding": [
+          {
+            "system": "urn:form-examples:partogram:moulding",
+            "code": "0",
+            "display": "0"
+          }
+        ]
+      }
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:partogram",
+            "code": "systolic_blood_pressure",
+            "display": "Systolic Blood Pressure"
+          }
+        ]
+      },
+      "valueInteger": 1
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:partogram",
+            "code": "diastolic_blood_pressure",
+            "display": "Diastolic Blood Pressure"
+          }
+        ]
+      },
+      "valueInteger": 1
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:partogram",
+            "code": "pulse",
+            "display": "Pulse"
+          }
+        ]
+      },
+      "valueInteger": 1
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:partogram",
+            "code": "temperature",
+            "display": "Temperature"
+          }
+        ]
+      },
+      "valueQuantity": {
+        "value": 0.0
+      }
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:partogram",
+            "code": "urine_volume_ml",
+            "display": "Urine Volume Ml"
+          }
+        ]
+      },
+      "valueQuantity": {
+        "value": 0.0
+      }
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:partogram",
+            "code": "urine_protein",
+            "display": "Urine Protein"
+          }
+        ]
+      },
+      "valueCodeableConcept": {
+        "coding": [
+          {
+            "system": "urn:form-examples:partogram:urine_protein",
+            "code": "negative",
+            "display": "Negative"
+          }
+        ]
+      }
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:partogram",
+            "code": "urine_ketones",
+            "display": "Urine Ketones"
+          }
+        ]
+      },
+      "valueCodeableConcept": {
+        "coding": [
+          {
+            "system": "urn:form-examples:partogram:urine_ketones",
+            "code": "negative",
+            "display": "Negative"
+          }
+        ]
+      }
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:partogram",
+            "code": "urine_glucose",
+            "display": "Urine Glucose"
+          }
+        ]
+      },
+      "valueCodeableConcept": {
+        "coding": [
+          {
+            "system": "urn:form-examples:partogram:urine_glucose",
+            "code": "negative",
+            "display": "Negative"
+          }
+        ]
+      }
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:partogram",
+            "code": "oxytocin_rate",
+            "display": "Oxytocin Rate"
+          }
+        ]
+      },
+      "valueQuantity": {
+        "value": 72.0
+      }
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:partogram",
+            "code": "drugs_and_fluids",
+            "display": "Drugs And Fluids"
+          }
+        ]
+      },
+      "valueString": "Paracetamol"
+    }
+  ]
+}

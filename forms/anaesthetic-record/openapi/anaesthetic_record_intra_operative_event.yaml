@@ -1,0 +1,154 @@
+# Generated from sql/. Do not edit by hand.
+# SOURCE: anaesthetic_record_intra_operative_event
+openapi: 3.1.0
+info:
+  title: Anaesthetic Record — AnaestheticRecordIntraOperativeEvent
+  version: 1.0.0
+  description: "Intra-operative events recorded during the anaesthetic: event type, time, and management."
+paths:
+  /anaesthetic-record-intra-operative-events:
+    get:
+      summary: List AnaestheticRecordIntraOperativeEvent records
+      operationId: listAnaestheticRecordIntraOperativeEvent
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of AnaestheticRecordIntraOperativeEvent records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/AnaestheticRecordIntraOperativeEvent"
+    post:
+      summary: Create a new AnaestheticRecordIntraOperativeEvent
+      operationId: createAnaestheticRecordIntraOperativeEvent
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/AnaestheticRecordIntraOperativeEvent"
+      responses:
+        "201":
+          description: The newly created AnaestheticRecordIntraOperativeEvent
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AnaestheticRecordIntraOperativeEvent"
+        "400":
+          description: Validation error
+  /anaesthetic-record-intra-operative-events/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one AnaestheticRecordIntraOperativeEvent by id
+      operationId: getAnaestheticRecordIntraOperativeEvent
+      responses:
+        "200":
+          description: The requested AnaestheticRecordIntraOperativeEvent
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AnaestheticRecordIntraOperativeEvent"
+        "404":
+          description: AnaestheticRecordIntraOperativeEvent not found
+    patch:
+      summary: Update an existing AnaestheticRecordIntraOperativeEvent
+      operationId: updateAnaestheticRecordIntraOperativeEvent
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/AnaestheticRecordIntraOperativeEvent"
+      responses:
+        "200":
+          description: The updated AnaestheticRecordIntraOperativeEvent
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AnaestheticRecordIntraOperativeEvent"
+        "404":
+          description: AnaestheticRecordIntraOperativeEvent not found
+    delete:
+      summary: Soft-delete a AnaestheticRecordIntraOperativeEvent
+      operationId: deleteAnaestheticRecordIntraOperativeEvent
+      responses:
+        "204":
+          description: AnaestheticRecordIntraOperativeEvent deleted
+        "404":
+          description: AnaestheticRecordIntraOperativeEvent not found
+components:
+  schemas:
+    AnaestheticRecordIntraOperativeEvent:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was most recently updated.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was soft-deleted.
+        anaesthetic_record_id:
+          type: string
+          format: uuid
+          description: Foreign key to the parent anaesthetic record.
+        event_type:
+          type: string
+          enum:
+            - desaturation
+            - hypotension
+            - arrhythmia
+            - laryngospasm
+            - bronchospasm
+            - anaphylaxis
+            - difficult-airway
+            - awareness
+            - other
+            - ""
+          description: "Event type: desaturation, hypotension, arrhythmia, laryngospasm, bronchospasm, anaphylaxis, difficult-airway, awareness, or other."
+        occurred_at:
+          type: string
+          format: date-time
+          description: Timestamp when the event occurred.
+        management:
+          type: string
+          description: How the event was managed.
+      required:
+        - created_at
+        - updated_at
+        - anaesthetic_record_id
+        - event_type
+        - management
+      description: "Intra-operative events recorded during the anaesthetic: event type, time, and management."

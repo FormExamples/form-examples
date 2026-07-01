@@ -1,0 +1,172 @@
+# Generated from sql/. Do not edit by hand.
+# SOURCE: parkland_formula_for_burns_grade
+openapi: 3.1.0
+info:
+  title: Parkland Formula For Burns — ParklandFormulaForBurnsGrade
+  version: 1.0.0
+  description: "Computed Parkland-formula result: total 24-hour volume, phase volumes and rates (time-offset), and the urine-output titration band (1:1 with the parent calculation record)."
+paths:
+  /parkland-formula-for-burns-grades:
+    get:
+      summary: List ParklandFormulaForBurnsGrade records
+      operationId: listParklandFormulaForBurnsGrade
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of ParklandFormulaForBurnsGrade records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/ParklandFormulaForBurnsGrade"
+    post:
+      summary: Create a new ParklandFormulaForBurnsGrade
+      operationId: createParklandFormulaForBurnsGrade
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ParklandFormulaForBurnsGrade"
+      responses:
+        "201":
+          description: The newly created ParklandFormulaForBurnsGrade
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ParklandFormulaForBurnsGrade"
+        "400":
+          description: Validation error
+  /parkland-formula-for-burns-grades/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one ParklandFormulaForBurnsGrade by id
+      operationId: getParklandFormulaForBurnsGrade
+      responses:
+        "200":
+          description: The requested ParklandFormulaForBurnsGrade
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ParklandFormulaForBurnsGrade"
+        "404":
+          description: ParklandFormulaForBurnsGrade not found
+    patch:
+      summary: Update an existing ParklandFormulaForBurnsGrade
+      operationId: updateParklandFormulaForBurnsGrade
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ParklandFormulaForBurnsGrade"
+      responses:
+        "200":
+          description: The updated ParklandFormulaForBurnsGrade
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ParklandFormulaForBurnsGrade"
+        "404":
+          description: ParklandFormulaForBurnsGrade not found
+    delete:
+      summary: Soft-delete a ParklandFormulaForBurnsGrade
+      operationId: deleteParklandFormulaForBurnsGrade
+      responses:
+        "204":
+          description: ParklandFormulaForBurnsGrade deleted
+        "404":
+          description: ParklandFormulaForBurnsGrade not found
+components:
+  schemas:
+    ParklandFormulaForBurnsGrade:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was most recently updated.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was soft-deleted.
+        parkland_formula_for_burns_id:
+          type: string
+          format: uuid
+          description: Foreign key to the parent calculation record (unique, 1:1).
+        total_24h_volume_ml:
+          type: number
+          format: double
+          description: "Total 24-hour crystalloid volume in mL: 4 x weight_kg x tbsa_percent (null when weight or %TBSA is missing)."
+        first_8h_volume_ml:
+          type: number
+          format: double
+          description: "First-8-hour phase volume in mL: half of the total 24-hour volume (null when the total is null)."
+        next_16h_volume_ml:
+          type: number
+          format: double
+          description: "Next-16-hour phase volume in mL: half of the total 24-hour volume (null when the total is null)."
+        hours_since_injury:
+          type: number
+          format: double
+          description: Hours elapsed from time of injury to assessment, clamped at >= 0 (null when injury_at or assessed_at is missing).
+        remaining_first_8h_hours:
+          type: number
+          format: double
+          description: "Hours remaining in the first-8-hour window from injury: max(8 - hours_since_injury, 0); defaults to 8 when hours_since_injury is unknown."
+        first_8h_rate_ml_h:
+          type: number
+          format: double
+          description: "First-phase infusion rate in mL/hour: first_8h_volume_ml / remaining_first_8h_hours (null when overdue, i.e. the first-8-hour window has passed)."
+        next_16h_rate_ml_h:
+          type: number
+          format: double
+          description: "Second-phase infusion rate in mL/hour: next_16h_volume_ml / 16 (null when the next-16-hour volume is null)."
+        urine_output_target_min_ml_h:
+          type: number
+          format: double
+          description: "Lower urine-output titration target in mL/hour: 0.5 x weight_kg (null when weight is missing)."
+        urine_output_target_max_ml_h:
+          type: number
+          format: double
+          description: "Upper urine-output titration target in mL/hour: 1.0 x weight_kg (null when weight is missing)."
+        graded_at:
+          type: string
+          format: date-time
+          description: Timestamp when the engine last computed the result.
+      required:
+        - created_at
+        - updated_at
+        - parkland_formula_for_burns_id
+        - graded_at
+      description: "Computed Parkland-formula result: total 24-hour volume, phase volumes and rates (time-offset), and the urine-output titration band (1:1 with the parent calculation record)."

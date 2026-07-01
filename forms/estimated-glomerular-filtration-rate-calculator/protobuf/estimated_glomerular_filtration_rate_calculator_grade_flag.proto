@@ -1,0 +1,38 @@
+// Generated from sql/. Do not edit by hand.
+// SOURCE: estimated_glomerular_filtration_rate_calculator_grade_flag
+
+syntax = "proto3";
+
+package form_examples.estimated_glomerular_filtration_rate_calculator;
+
+enum EstimatedGlomerularFiltrationRateCalculatorGradeFlagCategoryEnum {
+  CATEGORY_UNSPECIFIED = 0;
+  CATEGORY_G5_NEPHROLOGY_REFERRAL = 1;  // g5-nephrology-referral
+  CATEGORY_G4_NEPHROLOGY_REFERRAL = 2;  // g4-nephrology-referral
+  CATEGORY_DRUG_DOSING_REVIEW = 3;  // drug-dosing-review
+  CATEGORY_ACUTE_DROP_AKI = 4;  // acute-drop-aki
+  CATEGORY_REDUCED_FUNCTION = 5;  // reduced-function
+  CATEGORY_CONFIRM_CKD = 6;  // confirm-ckd
+  CATEGORY_INCOMPLETE = 7;  // incomplete
+  CATEGORY_OTHER = 8;  // other
+}
+
+enum EstimatedGlomerularFiltrationRateCalculatorGradeFlagPriorityEnum {
+  PRIORITY_UNSPECIFIED = 0;
+  PRIORITY_LOW = 1;  // low
+  PRIORITY_MEDIUM = 2;  // medium
+  PRIORITY_HIGH = 3;  // high
+}
+
+message EstimatedGlomerularFiltrationRateCalculatorGradeFlag {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string estimated_glomerular_filtration_rate_calculator_grade_id = 5;  // UUID — uuid
+  string flag_id = 6;  // VARCHAR(50) — max 50 chars
+  EstimatedGlomerularFiltrationRateCalculatorGradeFlagCategoryEnum category = 7;  // VARCHAR(30)
+  EstimatedGlomerularFiltrationRateCalculatorGradeFlagPriorityEnum priority = 8;  // VARCHAR(10)
+  string description = 9;  // VARCHAR(500) — max 500 chars
+  string suggested_action = 10;  // VARCHAR(500) — max 500 chars
+}

@@ -1,0 +1,26 @@
+// Generated from sql/. Do not edit by hand.
+// SOURCE: abdominal_aortic_aneurysm_screening_grade_rule
+
+syntax = "proto3";
+
+package form_examples.abdominal_aortic_aneurysm_screening;
+
+enum AbdominalAorticAneurysmScreeningGradeRuleStageEnum {
+  STAGE_UNSPECIFIED = 0;
+  STAGE_VISUALISATION = 1;  // visualisation
+  STAGE_CLASSIFICATION = 2;  // classification
+  STAGE_GROWTH = 3;  // growth
+  STAGE_COMPLETENESS = 4;  // completeness
+}
+
+message AbdominalAorticAneurysmScreeningGradeRule {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string abdominal_aortic_aneurysm_screening_grade_id = 5;  // UUID — uuid
+  string rule_id = 6;  // VARCHAR(40) — max 40 chars
+  AbdominalAorticAneurysmScreeningGradeRuleStageEnum stage = 7;  // VARCHAR(20)
+  string category = 8;  // VARCHAR(50) — max 50 chars
+  string description = 9;  // VARCHAR(500) — max 500 chars
+}

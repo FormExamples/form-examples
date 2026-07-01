@@ -1,0 +1,54 @@
+// Generated from sql/. Do not edit by hand.
+// SOURCE: chronic_obstructive_pulmonary_disease_review_grade
+
+syntax = "proto3";
+
+package form_examples.chronic_obstructive_pulmonary_disease_review;
+
+enum ChronicObstructivePulmonaryDiseaseReviewGradeGoldAirflowGradeEnum {
+  GOLDAIRFLOWGRADE_UNSPECIFIED = 0;
+  GOLDAIRFLOWGRADE_V_1 = 1;  // 1
+  GOLDAIRFLOWGRADE_V_2 = 2;  // 2
+  GOLDAIRFLOWGRADE_V_3 = 3;  // 3
+  GOLDAIRFLOWGRADE_V_4 = 4;  // 4
+}
+
+enum ChronicObstructivePulmonaryDiseaseReviewGradeSymptomBurdenEnum {
+  SYMPTOMBURDEN_UNSPECIFIED = 0;
+  SYMPTOMBURDEN_LOW = 1;  // low
+  SYMPTOMBURDEN_HIGH = 2;  // high
+}
+
+enum ChronicObstructivePulmonaryDiseaseReviewGradeExacerbationRiskEnum {
+  EXACERBATIONRISK_UNSPECIFIED = 0;
+  EXACERBATIONRISK_LOW = 1;  // low
+  EXACERBATIONRISK_HIGH = 2;  // high
+}
+
+enum ChronicObstructivePulmonaryDiseaseReviewGradeAbeGroupEnum {
+  ABEGROUP_UNSPECIFIED = 0;
+  ABEGROUP_A = 1;  // A
+  ABEGROUP_B = 2;  // B
+  ABEGROUP_E = 3;  // E
+}
+
+enum ChronicObstructivePulmonaryDiseaseReviewGradeReviewStatusEnum {
+  REVIEWSTATUS_UNSPECIFIED = 0;
+  REVIEWSTATUS_COMPLETE = 1;  // complete
+  REVIEWSTATUS_PARTIAL = 2;  // partial
+  REVIEWSTATUS_INCOMPLETE = 3;  // incomplete
+}
+
+message ChronicObstructivePulmonaryDiseaseReviewGrade {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string chronic_obstructive_pulmonary_disease_review_id = 5;  // UUID — uuid
+  ChronicObstructivePulmonaryDiseaseReviewGradeGoldAirflowGradeEnum gold_airflow_grade = 6;  // VARCHAR(1)
+  ChronicObstructivePulmonaryDiseaseReviewGradeSymptomBurdenEnum symptom_burden = 7;  // VARCHAR(5)
+  ChronicObstructivePulmonaryDiseaseReviewGradeExacerbationRiskEnum exacerbation_risk = 8;  // VARCHAR(5)
+  ChronicObstructivePulmonaryDiseaseReviewGradeAbeGroupEnum abe_group = 9;  // VARCHAR(1)
+  ChronicObstructivePulmonaryDiseaseReviewGradeReviewStatusEnum review_status = 10;  // VARCHAR(15)
+  string graded_at = 11;  // TIMESTAMPTZ — iso 8601
+}

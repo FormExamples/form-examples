@@ -1,0 +1,37 @@
+// Generated from sql/. Do not edit by hand.
+// SOURCE: qrisk3_cardiovascular_disease_risk_score_grade_flag
+
+syntax = "proto3";
+
+package form_examples.qrisk3_cardiovascular_disease_risk_score;
+
+enum Qrisk3CardiovascularDiseaseRiskScoreGradeFlagCategoryEnum {
+  CATEGORY_UNSPECIFIED = 0;
+  CATEGORY_STATIN_RECOMMENDED = 1;  // statin-recommended
+  CATEGORY_SEVERE_RISK = 2;  // severe-risk
+  CATEGORY_NOT_ELIGIBLE = 3;  // not-eligible
+  CATEGORY_MISSING_CHOLESTEROL = 4;  // missing-cholesterol
+  CATEGORY_INCOMPLETE = 5;  // incomplete
+  CATEGORY_SEVERE_HYPERTENSION = 6;  // severe-hypertension
+  CATEGORY_OTHER = 7;  // other
+}
+
+enum Qrisk3CardiovascularDiseaseRiskScoreGradeFlagPriorityEnum {
+  PRIORITY_UNSPECIFIED = 0;
+  PRIORITY_LOW = 1;  // low
+  PRIORITY_MEDIUM = 2;  // medium
+  PRIORITY_HIGH = 3;  // high
+}
+
+message Qrisk3CardiovascularDiseaseRiskScoreGradeFlag {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string qrisk3_cardiovascular_disease_risk_score_grade_id = 5;  // UUID — uuid
+  string flag_id = 6;  // VARCHAR(50) — max 50 chars
+  Qrisk3CardiovascularDiseaseRiskScoreGradeFlagCategoryEnum category = 7;  // VARCHAR(50)
+  Qrisk3CardiovascularDiseaseRiskScoreGradeFlagPriorityEnum priority = 8;  // VARCHAR(10)
+  string description = 9;  // VARCHAR(500) — max 500 chars
+  string suggested_action = 10;  // VARCHAR(500) — max 500 chars
+}

@@ -1,0 +1,163 @@
+# Generated from sql/. Do not edit by hand.
+# SOURCE: recognition_of_stroke_in_the_emergency_room_grade_rule
+openapi: 3.1.0
+info:
+  title: Recognition Of Stroke In The Emergency Room — RecognitionOfStrokeInTheEmergencyRoomGradeRule
+  version: 1.0.0
+  description: "Audit trail of every grading rule that fired during ROSIER computation: criterion, signed points contributed, category, and description."
+paths:
+  /recognition-of-stroke-in-the-emergency-room-grade-rules:
+    get:
+      summary: List RecognitionOfStrokeInTheEmergencyRoomGradeRule records
+      operationId: listRecognitionOfStrokeInTheEmergencyRoomGradeRule
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of RecognitionOfStrokeInTheEmergencyRoomGradeRule records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/RecognitionOfStrokeInTheEmergencyRoomGradeRule"
+    post:
+      summary: Create a new RecognitionOfStrokeInTheEmergencyRoomGradeRule
+      operationId: createRecognitionOfStrokeInTheEmergencyRoomGradeRule
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/RecognitionOfStrokeInTheEmergencyRoomGradeRule"
+      responses:
+        "201":
+          description: The newly created RecognitionOfStrokeInTheEmergencyRoomGradeRule
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/RecognitionOfStrokeInTheEmergencyRoomGradeRule"
+        "400":
+          description: Validation error
+  /recognition-of-stroke-in-the-emergency-room-grade-rules/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one RecognitionOfStrokeInTheEmergencyRoomGradeRule by id
+      operationId: getRecognitionOfStrokeInTheEmergencyRoomGradeRule
+      responses:
+        "200":
+          description: The requested RecognitionOfStrokeInTheEmergencyRoomGradeRule
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/RecognitionOfStrokeInTheEmergencyRoomGradeRule"
+        "404":
+          description: RecognitionOfStrokeInTheEmergencyRoomGradeRule not found
+    patch:
+      summary: Update an existing RecognitionOfStrokeInTheEmergencyRoomGradeRule
+      operationId: updateRecognitionOfStrokeInTheEmergencyRoomGradeRule
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/RecognitionOfStrokeInTheEmergencyRoomGradeRule"
+      responses:
+        "200":
+          description: The updated RecognitionOfStrokeInTheEmergencyRoomGradeRule
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/RecognitionOfStrokeInTheEmergencyRoomGradeRule"
+        "404":
+          description: RecognitionOfStrokeInTheEmergencyRoomGradeRule not found
+    delete:
+      summary: Soft-delete a RecognitionOfStrokeInTheEmergencyRoomGradeRule
+      operationId: deleteRecognitionOfStrokeInTheEmergencyRoomGradeRule
+      responses:
+        "204":
+          description: RecognitionOfStrokeInTheEmergencyRoomGradeRule deleted
+        "404":
+          description: RecognitionOfStrokeInTheEmergencyRoomGradeRule not found
+components:
+  schemas:
+    RecognitionOfStrokeInTheEmergencyRoomGradeRule:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was most recently updated.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was soft-deleted.
+        recognition_of_stroke_in_the_emergency_room_grade_id:
+          type: string
+          format: uuid
+          description: Foreign key to the parent grade.
+        rule_id:
+          type: string
+          maxLength: 40
+          description: Stable rule identifier (e.g. R-FACIAL-WEAKNESS-01).
+        criterion:
+          type: string
+          enum:
+            - loss-of-consciousness
+            - seizure-activity
+            - facial-weakness
+            - arm-weakness
+            - leg-weakness
+            - speech-disturbance
+            - visual-field-defect
+            - band
+          description: "Criterion the rule belongs to: loss-of-consciousness, seizure-activity, facial-weakness, arm-weakness, leg-weakness, speech-disturbance, visual-field-defect, or band."
+        points:
+          type: integer
+          format: int32
+          description: Signed points contributed by this rule (-1 for a mimic, +1 for a sign).
+        category:
+          type: string
+          maxLength: 50
+          description: Subject category (e.g. mimic, sign, band).
+        description:
+          type: string
+          maxLength: 500
+          description: Human-readable description of why the rule fired.
+      required:
+        - created_at
+        - updated_at
+        - recognition_of_stroke_in_the_emergency_room_grade_id
+        - rule_id
+        - criterion
+        - category
+        - description
+      description: "Audit trail of every grading rule that fired during ROSIER computation: criterion, signed points contributed, category, and description."

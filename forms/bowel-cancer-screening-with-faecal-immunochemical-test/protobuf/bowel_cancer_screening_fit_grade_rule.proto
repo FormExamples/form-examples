@@ -1,0 +1,27 @@
+// Generated from sql/. Do not edit by hand.
+// SOURCE: bowel_cancer_screening_fit_grade_rule
+
+syntax = "proto3";
+
+package form_examples.bowel_cancer_screening_with_faecal_immunochemical_test;
+
+enum BowelCancerScreeningFitGradeRuleStageEnum {
+  STAGE_UNSPECIFIED = 0;
+  STAGE_KIT_RETURN = 1;  // kit-return
+  STAGE_ADEQUACY = 2;  // adequacy
+  STAGE_FIT_RESULT = 3;  // fit-result
+  STAGE_SYMPTOM = 4;  // symptom
+  STAGE_COMPLETENESS = 5;  // completeness
+}
+
+message BowelCancerScreeningFitGradeRule {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string bowel_cancer_screening_fit_grade_id = 5;  // UUID — uuid
+  string rule_id = 6;  // VARCHAR(40) — max 40 chars
+  BowelCancerScreeningFitGradeRuleStageEnum stage = 7;  // VARCHAR(20)
+  string category = 8;  // VARCHAR(50) — max 50 chars
+  string description = 9;  // VARCHAR(500) — max 500 chars
+}

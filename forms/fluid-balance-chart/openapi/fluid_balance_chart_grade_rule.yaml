@@ -1,0 +1,146 @@
+# Generated from sql/. Do not edit by hand.
+# SOURCE: fluid_balance_chart_grade_rule
+openapi: 3.1.0
+info:
+  title: Fluid Balance Chart — FluidBalanceChartGradeRule
+  version: 1.0.0
+  description: "Audit trail of every classification rule that fired during grading: category and description."
+paths:
+  /fluid-balance-chart-grade-rules:
+    get:
+      summary: List FluidBalanceChartGradeRule records
+      operationId: listFluidBalanceChartGradeRule
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of FluidBalanceChartGradeRule records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/FluidBalanceChartGradeRule"
+    post:
+      summary: Create a new FluidBalanceChartGradeRule
+      operationId: createFluidBalanceChartGradeRule
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/FluidBalanceChartGradeRule"
+      responses:
+        "201":
+          description: The newly created FluidBalanceChartGradeRule
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/FluidBalanceChartGradeRule"
+        "400":
+          description: Validation error
+  /fluid-balance-chart-grade-rules/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one FluidBalanceChartGradeRule by id
+      operationId: getFluidBalanceChartGradeRule
+      responses:
+        "200":
+          description: The requested FluidBalanceChartGradeRule
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/FluidBalanceChartGradeRule"
+        "404":
+          description: FluidBalanceChartGradeRule not found
+    patch:
+      summary: Update an existing FluidBalanceChartGradeRule
+      operationId: updateFluidBalanceChartGradeRule
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/FluidBalanceChartGradeRule"
+      responses:
+        "200":
+          description: The updated FluidBalanceChartGradeRule
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/FluidBalanceChartGradeRule"
+        "404":
+          description: FluidBalanceChartGradeRule not found
+    delete:
+      summary: Soft-delete a FluidBalanceChartGradeRule
+      operationId: deleteFluidBalanceChartGradeRule
+      responses:
+        "204":
+          description: FluidBalanceChartGradeRule deleted
+        "404":
+          description: FluidBalanceChartGradeRule not found
+components:
+  schemas:
+    FluidBalanceChartGradeRule:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was most recently updated.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was soft-deleted.
+        fluid_balance_chart_grade_id:
+          type: string
+          format: uuid
+          description: Foreign key to the parent grade.
+        rule_id:
+          type: string
+          maxLength: 40
+          description: Stable rule identifier (e.g. R-STATUS-OLIGURIA-01).
+        category:
+          type: string
+          maxLength: 50
+          description: Subject category (e.g. fluid-status, threshold-scaling).
+        description:
+          type: string
+          maxLength: 500
+          description: Human-readable description of why the rule fired.
+      required:
+        - created_at
+        - updated_at
+        - fluid_balance_chart_grade_id
+        - rule_id
+        - category
+        - description
+      description: "Audit trail of every classification rule that fired during grading: category and description."

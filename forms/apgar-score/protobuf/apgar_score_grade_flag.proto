@@ -1,0 +1,37 @@
+// Generated from sql/. Do not edit by hand.
+// SOURCE: apgar_score_grade_flag
+
+syntax = "proto3";
+
+package form_examples.apgar_score;
+
+enum ApgarScoreGradeFlagCategoryEnum {
+  CATEGORY_UNSPECIFIED = 0;
+  CATEGORY_RESUSCITATION_NEEDED = 1;  // resuscitation-needed
+  CATEGORY_CONTINUE_SCORING = 2;  // continue-scoring
+  CATEGORY_FALLING_TREND = 3;  // falling-trend
+  CATEGORY_SUPPORT_AND_STIMULATION = 4;  // support-and-stimulation
+  CATEGORY_MISSING_TEN_MINUTE_SCORE = 5;  // missing-ten-minute-score
+  CATEGORY_INCOMPLETE_ASSESSMENT = 6;  // incomplete-assessment
+  CATEGORY_OTHER = 7;  // other
+}
+
+enum ApgarScoreGradeFlagPriorityEnum {
+  PRIORITY_UNSPECIFIED = 0;
+  PRIORITY_LOW = 1;  // low
+  PRIORITY_MEDIUM = 2;  // medium
+  PRIORITY_HIGH = 3;  // high
+}
+
+message ApgarScoreGradeFlag {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string apgar_score_grade_id = 5;  // UUID — uuid
+  string flag_id = 6;  // VARCHAR(50) — max 50 chars
+  ApgarScoreGradeFlagCategoryEnum category = 7;  // VARCHAR(50)
+  ApgarScoreGradeFlagPriorityEnum priority = 8;  // VARCHAR(10)
+  string description = 9;  // VARCHAR(500) — max 500 chars
+  string suggested_action = 10;  // VARCHAR(500) — max 500 chars
+}

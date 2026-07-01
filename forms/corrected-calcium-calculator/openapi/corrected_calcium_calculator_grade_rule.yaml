@@ -1,0 +1,165 @@
+# Generated from sql/. Do not edit by hand.
+# SOURCE: corrected_calcium_calculator_grade_rule
+openapi: 3.1.0
+info:
+  title: Corrected Calcium Calculator — CorrectedCalciumCalculatorGradeRule
+  version: 1.0.0
+  description: "Audit trail of every rule that fired during corrected-calcium computation: instrument, band, category, and description."
+paths:
+  /corrected-calcium-calculator-grade-rules:
+    get:
+      summary: List CorrectedCalciumCalculatorGradeRule records
+      operationId: listCorrectedCalciumCalculatorGradeRule
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of CorrectedCalciumCalculatorGradeRule records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/CorrectedCalciumCalculatorGradeRule"
+    post:
+      summary: Create a new CorrectedCalciumCalculatorGradeRule
+      operationId: createCorrectedCalciumCalculatorGradeRule
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CorrectedCalciumCalculatorGradeRule"
+      responses:
+        "201":
+          description: The newly created CorrectedCalciumCalculatorGradeRule
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CorrectedCalciumCalculatorGradeRule"
+        "400":
+          description: Validation error
+  /corrected-calcium-calculator-grade-rules/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one CorrectedCalciumCalculatorGradeRule by id
+      operationId: getCorrectedCalciumCalculatorGradeRule
+      responses:
+        "200":
+          description: The requested CorrectedCalciumCalculatorGradeRule
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CorrectedCalciumCalculatorGradeRule"
+        "404":
+          description: CorrectedCalciumCalculatorGradeRule not found
+    patch:
+      summary: Update an existing CorrectedCalciumCalculatorGradeRule
+      operationId: updateCorrectedCalciumCalculatorGradeRule
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CorrectedCalciumCalculatorGradeRule"
+      responses:
+        "200":
+          description: The updated CorrectedCalciumCalculatorGradeRule
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CorrectedCalciumCalculatorGradeRule"
+        "404":
+          description: CorrectedCalciumCalculatorGradeRule not found
+    delete:
+      summary: Soft-delete a CorrectedCalciumCalculatorGradeRule
+      operationId: deleteCorrectedCalciumCalculatorGradeRule
+      responses:
+        "204":
+          description: CorrectedCalciumCalculatorGradeRule deleted
+        "404":
+          description: CorrectedCalciumCalculatorGradeRule not found
+components:
+  schemas:
+    CorrectedCalciumCalculatorGradeRule:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was most recently updated.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was soft-deleted.
+        corrected_calcium_calculator_grade_id:
+          type: string
+          format: uuid
+          description: Foreign key to the parent grade.
+        rule_id:
+          type: string
+          maxLength: 40
+          description: Stable rule identifier (e.g. R-CLASSIFY-HYPERCALCAEMIA-01).
+        instrument:
+          type: string
+          enum:
+            - correction
+            - classification
+            - severity
+            - composite
+          description: "Instrument the rule belongs to: correction, classification, severity, or composite."
+        band:
+          type: string
+          enum:
+            - hypocalcaemia
+            - normal
+            - hypercalcaemia
+            - unknown
+            - ""
+          description: "Classification band contributed by this rule: hypocalcaemia, normal, hypercalcaemia, or unknown."
+        category:
+          type: string
+          maxLength: 50
+          description: Subject category (e.g. reference-range, severity-threshold, missing-input).
+        description:
+          type: string
+          maxLength: 500
+          description: Human-readable description of why the rule fired.
+      required:
+        - created_at
+        - updated_at
+        - corrected_calcium_calculator_grade_id
+        - rule_id
+        - instrument
+        - band
+        - category
+        - description
+      description: "Audit trail of every rule that fired during corrected-calcium computation: instrument, band, category, and description."

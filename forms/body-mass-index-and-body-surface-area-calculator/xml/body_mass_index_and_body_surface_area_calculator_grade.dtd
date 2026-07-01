@@ -1,0 +1,11 @@
+<!ELEMENT body_mass_index_and_body_surface_area_calculator_grade (id,created_at,updated_at,deleted_at,body_mass_index_and_body_surface_area_calculator_id,bmi,bmi_category,bsa_mosteller,bsa_du_bois,graded_at)>
+<!ELEMENT id (#PCDATA)>
+<!ELEMENT created_at (#PCDATA)>
+<!ELEMENT updated_at (#PCDATA)>
+<!ELEMENT deleted_at (#PCDATA)>
+<!ELEMENT body_mass_index_and_body_surface_area_calculator_id (#PCDATA)>
+<!ELEMENT bmi (#PCDATA)>
+<!ELEMENT bmi_category (#PCDATA)>
+<!ELEMENT bsa_mosteller (#PCDATA)>
+<!ELEMENT bsa_du_bois (#PCDATA)>
+<!ELEMENT graded_at (#PCDATA)>

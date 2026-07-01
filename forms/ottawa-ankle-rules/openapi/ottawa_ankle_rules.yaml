@@ -1,0 +1,266 @@
+# Generated from sql/. Do not edit by hand.
+# SOURCE: ottawa_ankle_rules
+openapi: 3.1.0
+info:
+  title: Ottawa Ankle Rules — OttawaAnkleRules
+  version: 1.0.0
+  description: "Main Ottawa Ankle Rules assessment record: identification, context, the applicability flag, and the eight objective bedside criterion inputs."
+paths:
+  /ottawa-ankle-ruleses:
+    get:
+      summary: List OttawaAnkleRules records
+      operationId: listOttawaAnkleRules
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of OttawaAnkleRules records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/OttawaAnkleRules"
+    post:
+      summary: Create a new OttawaAnkleRules
+      operationId: createOttawaAnkleRules
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/OttawaAnkleRules"
+      responses:
+        "201":
+          description: The newly created OttawaAnkleRules
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/OttawaAnkleRules"
+        "400":
+          description: Validation error
+  /ottawa-ankle-ruleses/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one OttawaAnkleRules by id
+      operationId: getOttawaAnkleRules
+      responses:
+        "200":
+          description: The requested OttawaAnkleRules
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/OttawaAnkleRules"
+        "404":
+          description: OttawaAnkleRules not found
+    patch:
+      summary: Update an existing OttawaAnkleRules
+      operationId: updateOttawaAnkleRules
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/OttawaAnkleRules"
+      responses:
+        "200":
+          description: The updated OttawaAnkleRules
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/OttawaAnkleRules"
+        "404":
+          description: OttawaAnkleRules not found
+    delete:
+      summary: Soft-delete a OttawaAnkleRules
+      operationId: deleteOttawaAnkleRules
+      responses:
+        "204":
+          description: OttawaAnkleRules deleted
+        "404":
+          description: OttawaAnkleRules not found
+components:
+  schemas:
+    OttawaAnkleRules:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was updated most-recently.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was deleted a.k.a. soft-removed.
+        patient_id:
+          type: string
+          format: uuid
+          description: Foreign key to the patient being assessed (restricts delete).
+        clinician_id:
+          type: string
+          format: uuid
+          description: Foreign key to the assessing clinician (restricts delete).
+        status:
+          type: string
+          enum:
+            - draft
+            - submitted
+            - amended
+            - signed
+            - ""
+          description: "Workflow status: draft, submitted, amended, or signed."
+        patient_identifier:
+          type: string
+          maxLength: 64
+          description: Local patient identifier as recorded at the point of assessment.
+        assessed_at:
+          type: string
+          format: date-time
+          description: Date and time the assessment was carried out.
+        care_setting:
+          type: string
+          enum:
+            - emergency-department
+            - minor-injury-unit
+            - urgent-care
+            - other
+            - ""
+          description: "Care setting: emergency-department, minor-injury-unit, urgent-care, or other."
+        injured_side:
+          type: string
+          enum:
+            - left
+            - right
+            - ""
+          description: "Injured side: left or right."
+        hours_since_injury:
+          type: number
+          format: double
+          description: Time elapsed since the injury, in hours.
+        age_years:
+          type: integer
+          format: int32
+          description: Patient age in years; ages below 18 raise an applicability flag.
+        sex:
+          type: string
+          enum:
+            - female
+            - male
+            - intersex
+            - unknown
+            - ""
+          description: "Sex recorded for clinical purposes: female, male, intersex, or unknown."
+        assessment_reliable:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: "Applicability: no intoxication, distracting injury, or sensory deficit that could invalidate the rule (yes/no)."
+        malleolar_zone_pain:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: "Ankle precondition: pain in the malleolar zone (yes/no)."
+        lateral_malleolus_tenderness:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: "Ankle criterion A1: bone tenderness at the posterior edge or tip of the lateral malleolus (yes/no)."
+        medial_malleolus_tenderness:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: "Ankle criterion A2: bone tenderness at the posterior edge or tip of the medial malleolus (yes/no)."
+        midfoot_zone_pain:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: "Foot precondition: pain in the midfoot zone (yes/no)."
+        fifth_metatarsal_base_tenderness:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: "Foot criterion F1: bone tenderness at the base of the fifth metatarsal (yes/no)."
+        navicular_tenderness:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: "Foot criterion F2: bone tenderness at the navicular (yes/no)."
+        able_to_bear_weight_immediately:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Able to bear weight (take four steps) immediately after the injury (yes/no).
+        able_to_bear_weight_now:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Able to bear weight (take four steps) at the time of assessment (yes/no).
+        clinical_notes:
+          type: string
+          description: Free-text clinical notes captured alongside the assessment.
+      required:
+        - created_at
+        - updated_at
+        - patient_id
+        - status
+        - patient_identifier
+        - care_setting
+        - injured_side
+        - sex
+        - assessment_reliable
+        - malleolar_zone_pain
+        - lateral_malleolus_tenderness
+        - medial_malleolus_tenderness
+        - midfoot_zone_pain
+        - fifth_metatarsal_base_tenderness
+        - navicular_tenderness
+        - able_to_bear_weight_immediately
+        - able_to_bear_weight_now
+        - clinical_notes
+      description: "Main Ottawa Ankle Rules assessment record: identification, context, the applicability flag, and the eight objective bedside criterion inputs."

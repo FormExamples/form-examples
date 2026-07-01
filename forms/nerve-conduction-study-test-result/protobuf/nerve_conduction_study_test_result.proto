@@ -1,0 +1,99 @@
+// Generated from sql/. Do not edit by hand.
+// SOURCE: nerve_conduction_study_test_result
+
+syntax = "proto3";
+
+package form_examples.nerve_conduction_study_test_result;
+
+enum NerveConductionStudyTestResultReportStatusEnum {
+  REPORTSTATUS_UNSPECIFIED = 0;
+  REPORTSTATUS_PRELIMINARY = 1;  // preliminary
+  REPORTSTATUS_FINAL = 2;  // final
+  REPORTSTATUS_AMENDED = 3;  // amended
+  REPORTSTATUS_CANCELLED = 4;  // cancelled
+}
+
+enum NerveConductionStudyTestResultStudyTypeEnum {
+  STUDYTYPE_UNSPECIFIED = 0;
+  STUDYTYPE_NERVE_CONDUCTION = 1;  // nerve-conduction
+  STUDYTYPE_EMG = 2;  // emg
+  STUDYTYPE_NERVE_CONDUCTION_AND_EMG = 3;  // nerve-conduction-and-emg
+  STUDYTYPE_REPETITIVE_STIMULATION = 4;  // repetitive-stimulation
+  STUDYTYPE_OTHER = 5;  // other
+}
+
+enum NerveConductionStudyTestResultRegionEnum {
+  REGION_UNSPECIFIED = 0;
+  REGION_UPPER_LIMB = 1;  // upper-limb
+  REGION_LOWER_LIMB = 2;  // lower-limb
+  REGION_ALL_LIMBS = 3;  // all-limbs
+  REGION_CRANIAL = 4;  // cranial
+  REGION_GENERALISED = 5;  // generalised
+  REGION_OTHER = 6;  // other
+}
+
+enum NerveConductionStudyTestResultLateralityEnum {
+  LATERALITY_UNSPECIFIED = 0;
+  LATERALITY_LEFT = 1;  // left
+  LATERALITY_RIGHT = 2;  // right
+  LATERALITY_BILATERAL = 3;  // bilateral
+  LATERALITY_NOT_APPLICABLE = 4;  // not-applicable
+}
+
+enum NerveConductionStudyTestResultStudyAdequacyEnum {
+  STUDYADEQUACY_UNSPECIFIED = 0;
+  STUDYADEQUACY_ADEQUATE = 1;  // adequate
+  STUDYADEQUACY_LIMITED = 2;  // limited
+  STUDYADEQUACY_NON_DIAGNOSTIC = 3;  // non-diagnostic
+}
+
+enum NerveConductionStudyTestResultSeverityEnum {
+  SEVERITY_UNSPECIFIED = 0;
+  SEVERITY_MILD = 1;  // mild
+  SEVERITY_MODERATE = 2;  // moderate
+  SEVERITY_SEVERE = 3;  // severe
+  SEVERITY_NOT_APPLICABLE = 4;  // not-applicable
+}
+
+enum NerveConductionStudyTestResultPatternEnum {
+  PATTERN_UNSPECIFIED = 0;
+  PATTERN_DEMYELINATING = 1;  // demyelinating
+  PATTERN_AXONAL = 2;  // axonal
+  PATTERN_MIXED = 3;  // mixed
+  PATTERN_NOT_APPLICABLE = 4;  // not-applicable
+}
+
+message NerveConductionStudyTestResult {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string patient_id = 5;  // UUID — uuid
+  string clinician_id = 6;  // UUID — uuid
+  string originating_request_reference = 7;  // VARCHAR(255) — max 255 chars
+  NerveConductionStudyTestResultReportStatusEnum report_status = 8;  // VARCHAR(15)
+  string performed_date = 9;  // DATE — iso 8601 date
+  string reported_date = 10;  // DATE — iso 8601 date
+  NerveConductionStudyTestResultStudyTypeEnum study_type = 11;  // VARCHAR(35)
+  NerveConductionStudyTestResultRegionEnum region = 12;  // VARCHAR(15)
+  NerveConductionStudyTestResultLateralityEnum laterality = 13;  // VARCHAR(15)
+  NerveConductionStudyTestResultStudyAdequacyEnum study_adequacy = 14;  // VARCHAR(15)
+  string clinical_history = 15;  // VARCHAR(1000) — max 1000 chars
+  string comparison_with_previous = 16;  // VARCHAR(1000) — max 1000 chars
+  string nerve_conduction_findings = 17;  // VARCHAR(2000) — max 2000 chars
+  string emg_findings = 18;  // VARCHAR(2000) — max 2000 chars
+  bool carpal_tunnel_syndrome = 19;  // BOOLEAN
+  bool peripheral_neuropathy = 20;  // BOOLEAN
+  bool radiculopathy = 21;  // BOOLEAN
+  bool motor_neurone_disease_features = 22;  // BOOLEAN
+  bool myopathy = 23;  // BOOLEAN
+  bool neuromuscular_junction_disorder = 24;  // BOOLEAN
+  bool normal_study = 25;  // BOOLEAN
+  NerveConductionStudyTestResultSeverityEnum severity = 26;  // VARCHAR(15)
+  NerveConductionStudyTestResultPatternEnum pattern = 27;  // VARCHAR(15)
+  string impression = 28;  // VARCHAR(2000) — max 2000 chars
+  string reporting_category = 29;  // VARCHAR(100) — max 100 chars
+  string recommended_follow_up = 30;  // VARCHAR(1000) — max 1000 chars
+  bool critical_result_communicated = 31;  // BOOLEAN
+  string reported_to = 32;  // VARCHAR(500) — max 500 chars
+}

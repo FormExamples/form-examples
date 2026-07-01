@@ -1,0 +1,156 @@
+# Generated from sql/. Do not edit by hand.
+# SOURCE: eye_vision_test_result_grade_rule
+openapi: 3.1.0
+info:
+  title: Eye Vision Test Result — EyeVisionTestResultGradeRule
+  version: 1.0.0
+  description: Audit trail of every classification / severity / completeness / follow-up rule that fired for this result.
+paths:
+  /eye-vision-test-result-grade-rules:
+    get:
+      summary: List EyeVisionTestResultGradeRule records
+      operationId: listEyeVisionTestResultGradeRule
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of EyeVisionTestResultGradeRule records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/EyeVisionTestResultGradeRule"
+    post:
+      summary: Create a new EyeVisionTestResultGradeRule
+      operationId: createEyeVisionTestResultGradeRule
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/EyeVisionTestResultGradeRule"
+      responses:
+        "201":
+          description: The newly created EyeVisionTestResultGradeRule
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/EyeVisionTestResultGradeRule"
+        "400":
+          description: Validation error
+  /eye-vision-test-result-grade-rules/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one EyeVisionTestResultGradeRule by id
+      operationId: getEyeVisionTestResultGradeRule
+      responses:
+        "200":
+          description: The requested EyeVisionTestResultGradeRule
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/EyeVisionTestResultGradeRule"
+        "404":
+          description: EyeVisionTestResultGradeRule not found
+    patch:
+      summary: Update an existing EyeVisionTestResultGradeRule
+      operationId: updateEyeVisionTestResultGradeRule
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/EyeVisionTestResultGradeRule"
+      responses:
+        "200":
+          description: The updated EyeVisionTestResultGradeRule
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/EyeVisionTestResultGradeRule"
+        "404":
+          description: EyeVisionTestResultGradeRule not found
+    delete:
+      summary: Soft-delete a EyeVisionTestResultGradeRule
+      operationId: deleteEyeVisionTestResultGradeRule
+      responses:
+        "204":
+          description: EyeVisionTestResultGradeRule deleted
+        "404":
+          description: EyeVisionTestResultGradeRule not found
+components:
+  schemas:
+    EyeVisionTestResultGradeRule:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was updated most-recently.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was deleted a.k.a. soft-removed.
+        eye_vision_test_result_grade_id:
+          type: string
+          format: uuid
+          description: Foreign key to the parent grade.
+        rule_id:
+          type: string
+          maxLength: 40
+          description: Stable rule identifier (e.g. R-CLASS-CRITICAL-01).
+        axis:
+          type: string
+          enum:
+            - classification
+            - severity
+            - completeness
+            - follow-up
+            - ""
+          description: "Scoring axis the rule belongs to: classification, severity, completeness, follow-up."
+        category:
+          type: string
+          maxLength: 50
+          description: Category or finding the rule relates to.
+        description:
+          type: string
+          maxLength: 500
+          description: Human-readable description of why the rule fired.
+      required:
+        - created_at
+        - updated_at
+        - eye_vision_test_result_grade_id
+        - rule_id
+        - axis
+        - category
+        - description
+      description: Audit trail of every classification / severity / completeness / follow-up rule that fired for this result.

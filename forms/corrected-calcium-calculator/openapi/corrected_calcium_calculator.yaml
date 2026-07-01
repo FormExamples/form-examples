@@ -1,0 +1,214 @@
+# Generated from sql/. Do not edit by hand.
+# SOURCE: corrected_calcium_calculator
+openapi: 3.1.0
+info:
+  title: Corrected Calcium Calculator — CorrectedCalciumCalculator
+  version: 1.0.0
+  description: "Main corrected-calcium calculation record: context and identification, plus the measured total calcium and albumin inputs and the symptomatic flag."
+paths:
+  /corrected-calcium-calculators:
+    get:
+      summary: List CorrectedCalciumCalculator records
+      operationId: listCorrectedCalciumCalculator
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of CorrectedCalciumCalculator records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/CorrectedCalciumCalculator"
+    post:
+      summary: Create a new CorrectedCalciumCalculator
+      operationId: createCorrectedCalciumCalculator
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CorrectedCalciumCalculator"
+      responses:
+        "201":
+          description: The newly created CorrectedCalciumCalculator
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CorrectedCalciumCalculator"
+        "400":
+          description: Validation error
+  /corrected-calcium-calculators/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one CorrectedCalciumCalculator by id
+      operationId: getCorrectedCalciumCalculator
+      responses:
+        "200":
+          description: The requested CorrectedCalciumCalculator
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CorrectedCalciumCalculator"
+        "404":
+          description: CorrectedCalciumCalculator not found
+    patch:
+      summary: Update an existing CorrectedCalciumCalculator
+      operationId: updateCorrectedCalciumCalculator
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CorrectedCalciumCalculator"
+      responses:
+        "200":
+          description: The updated CorrectedCalciumCalculator
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CorrectedCalciumCalculator"
+        "404":
+          description: CorrectedCalciumCalculator not found
+    delete:
+      summary: Soft-delete a CorrectedCalciumCalculator
+      operationId: deleteCorrectedCalciumCalculator
+      responses:
+        "204":
+          description: CorrectedCalciumCalculator deleted
+        "404":
+          description: CorrectedCalciumCalculator not found
+components:
+  schemas:
+    CorrectedCalciumCalculator:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was most recently updated.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was soft-deleted.
+        patient_id:
+          type: string
+          format: uuid
+          description: Foreign key to the patient this calculation is for (restricted delete).
+        clinician_id:
+          type: string
+          format: uuid
+          description: Foreign key to the clinician who recorded the calculation (optional, restricted delete).
+        clinician_name:
+          type: string
+          maxLength: 255
+          description: Assessing clinician name as recorded on the form.
+        clinician_role:
+          type: string
+          enum:
+            - doctor
+            - nurse
+            - pharmacist
+            - laboratory-staff
+            - other
+            - ""
+          description: "Assessing clinician role: doctor, nurse, pharmacist, laboratory-staff, or other."
+        assessed_at:
+          type: string
+          format: date-time
+          description: Date and time the calculation was assessed.
+        care_setting:
+          type: string
+          enum:
+            - general-practice
+            - ward
+            - emergency-department
+            - outpatient
+            - laboratory
+            - other
+            - ""
+          description: "Care setting: general-practice, ward, emergency-department, outpatient, laboratory, or other."
+        sample_reference:
+          type: string
+          maxLength: 100
+          description: Sample or collection reference for the blood specimen.
+        patient_identifier:
+          type: string
+          maxLength: 100
+          description: Local patient identifier as recorded on the form.
+        age_band:
+          type: string
+          enum:
+            - 18-39
+            - 40-64
+            - 65-74
+            - 75-84
+            - 85-plus
+            - ""
+          description: "Adult age band: 18-39, 40-64, 65-74, 75-84, or 85-plus."
+        sex:
+          type: string
+          enum:
+            - female
+            - male
+            - intersex
+            - unknown
+            - ""
+          description: "Patient sex recorded for clinical purposes: female, male, intersex, or unknown."
+        total_calcium_mmol_l:
+          type: number
+          format: double
+          description: Measured total serum calcium in mmol/L (null when unanswered).
+        albumin_g_l:
+          type: number
+          format: double
+          description: Measured serum albumin in g/L (null when unanswered).
+        symptomatic:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: "Whether calcium-related symptoms are present: yes or no."
+      required:
+        - created_at
+        - updated_at
+        - patient_id
+        - clinician_name
+        - clinician_role
+        - care_setting
+        - sample_reference
+        - patient_identifier
+        - age_band
+        - sex
+        - symptomatic
+      description: "Main corrected-calcium calculation record: context and identification, plus the measured total calcium and albumin inputs and the symptomatic flag."

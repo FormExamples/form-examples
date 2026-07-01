@@ -1,0 +1,36 @@
+// Generated from sql/. Do not edit by hand.
+// SOURCE: four_a_test_for_delirium_grade_flag
+
+syntax = "proto3";
+
+package form_examples.four_a_test_for_delirium;
+
+enum FourATestForDeliriumGradeFlagCategoryEnum {
+  CATEGORY_UNSPECIFIED = 0;
+  CATEGORY_POSSIBLE_DELIRIUM = 1;  // possible-delirium
+  CATEGORY_ABNORMAL_ALERTNESS = 2;  // abnormal-alertness
+  CATEGORY_ACUTE_CHANGE_PRESENT = 3;  // acute-change-present
+  CATEGORY_POSSIBLE_COGNITIVE_IMPAIRMENT = 4;  // possible-cognitive-impairment
+  CATEGORY_INCOMPLETE_ACUTE_CHANGE = 5;  // incomplete-acute-change
+  CATEGORY_OTHER = 6;  // other
+}
+
+enum FourATestForDeliriumGradeFlagPriorityEnum {
+  PRIORITY_UNSPECIFIED = 0;
+  PRIORITY_LOW = 1;  // low
+  PRIORITY_MEDIUM = 2;  // medium
+  PRIORITY_HIGH = 3;  // high
+}
+
+message FourATestForDeliriumGradeFlag {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string four_a_test_for_delirium_grade_id = 5;  // UUID — uuid
+  string flag_id = 6;  // VARCHAR(50) — max 50 chars
+  FourATestForDeliriumGradeFlagCategoryEnum category = 7;  // VARCHAR(50)
+  FourATestForDeliriumGradeFlagPriorityEnum priority = 8;  // VARCHAR(10)
+  string description = 9;  // VARCHAR(500) — max 500 chars
+  string suggested_action = 10;  // VARCHAR(500) — max 500 chars
+}

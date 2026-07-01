@@ -1,0 +1,300 @@
+# Generated from sql/. Do not edit by hand.
+# SOURCE: microbiology_culture_test_result
+openapi: 3.1.0
+info:
+  title: Microbiology Culture Test Result — MicrobiologyCultureTestResult
+  version: 1.0.0
+  description: Microbiology culture test result (report). Captures the specimen and its condition, the clinical history, the Gram-stain and culture results, the organism(s) isolated and colony count, antibiotic sensitivities and key resistance markers (MRSA / ESBL / CPE), specialised tests (C. difficile toxin, acid-fast bacilli, PCR), the narrative findings, impression, recommended follow-up, and critical-result communication. This is the source-of-truth record that the four-axis interpretation grade is computed from.
+paths:
+  /microbiology-culture-test-results:
+    get:
+      summary: List MicrobiologyCultureTestResult records
+      operationId: listMicrobiologyCultureTestResult
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of MicrobiologyCultureTestResult records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/MicrobiologyCultureTestResult"
+    post:
+      summary: Create a new MicrobiologyCultureTestResult
+      operationId: createMicrobiologyCultureTestResult
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/MicrobiologyCultureTestResult"
+      responses:
+        "201":
+          description: The newly created MicrobiologyCultureTestResult
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/MicrobiologyCultureTestResult"
+        "400":
+          description: Validation error
+  /microbiology-culture-test-results/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one MicrobiologyCultureTestResult by id
+      operationId: getMicrobiologyCultureTestResult
+      responses:
+        "200":
+          description: The requested MicrobiologyCultureTestResult
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/MicrobiologyCultureTestResult"
+        "404":
+          description: MicrobiologyCultureTestResult not found
+    patch:
+      summary: Update an existing MicrobiologyCultureTestResult
+      operationId: updateMicrobiologyCultureTestResult
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/MicrobiologyCultureTestResult"
+      responses:
+        "200":
+          description: The updated MicrobiologyCultureTestResult
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/MicrobiologyCultureTestResult"
+        "404":
+          description: MicrobiologyCultureTestResult not found
+    delete:
+      summary: Soft-delete a MicrobiologyCultureTestResult
+      operationId: deleteMicrobiologyCultureTestResult
+      responses:
+        "204":
+          description: MicrobiologyCultureTestResult deleted
+        "404":
+          description: MicrobiologyCultureTestResult not found
+components:
+  schemas:
+    MicrobiologyCultureTestResult:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was updated most-recently.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was deleted a.k.a. soft-removed.
+        patient_id:
+          type: string
+          format: uuid
+          description: Foreign key to the patient.
+        clinician_id:
+          type: string
+          format: uuid
+          description: Foreign key to the reporting clinician (consultant microbiologist / biomedical scientist).
+        originating_request_reference:
+          type: string
+          maxLength: 255
+          description: Free-text reference linking this report back to the originating microbiology culture request (referral).
+        report_status:
+          type: string
+          enum:
+            - preliminary
+            - interim
+            - final
+            - amended
+            - cancelled
+            - ""
+          description: "Report lifecycle status: preliminary, interim, final, amended, cancelled."
+        performed_date:
+          type: string
+          format: date
+          description: Date the specimen was processed / the examination was performed.
+        reported_date:
+          type: string
+          format: date
+          description: Date the report was authored / signed.
+        specimen_type:
+          type: string
+          enum:
+            - blood-culture
+            - urine
+            - wound-swab
+            - sputum
+            - throat-swab
+            - stool
+            - csf
+            - tissue
+            - catheter-tip
+            - genital-swab
+            - other
+            - ""
+          description: "Specimen type cultured: blood-culture, urine, wound-swab, sputum, throat-swab, stool, csf, tissue, catheter-tip, genital-swab, other."
+        specimen_site_detail:
+          type: string
+          maxLength: 255
+          description: Free-text anatomical site / source detail for the specimen.
+        specimen_condition:
+          type: string
+          enum:
+            - satisfactory
+            - contaminated
+            - insufficient
+            - delayed
+            - ""
+          description: "Pre-analytical specimen condition on receipt: satisfactory, contaminated, insufficient, delayed."
+        clinical_history:
+          type: string
+          maxLength: 1000
+          description: Clinical history / indication that the specimen was taken to investigate.
+        gram_stain_result:
+          type: string
+          maxLength: 1000
+          description: Gram-stain microscopy result narrative (e.g. Gram-positive cocci in clusters).
+        culture_result:
+          type: string
+          enum:
+            - no-growth
+            - mixed-growth
+            - significant-growth
+            - positive
+            - ""
+          description: "Overall culture outcome: no-growth, mixed-growth, significant-growth, positive."
+        organism_isolated:
+          type: string
+          maxLength: 500
+          description: Primary organism isolated and identified.
+        second_organism_isolated:
+          type: string
+          maxLength: 500
+          description: Second organism isolated and identified, where applicable.
+        colony_count:
+          type: string
+          maxLength: 255
+          description: Colony count / quantification (e.g. >100,000 CFU/mL for urine).
+        antibiotic_sensitivities:
+          type: string
+          maxLength: 2000
+          description: Antibiotic susceptibility results narrative (sensitive / resistant per agent).
+        resistance_mrsa:
+          type: boolean
+          description: Whether meticillin-resistant Staphylococcus aureus (MRSA) was identified.
+        resistance_esbl:
+          type: boolean
+          description: Whether an extended-spectrum beta-lactamase (ESBL) producer was identified.
+        resistance_cpe:
+          type: boolean
+          description: Whether a carbapenemase-producing Enterobacterales (CPE) organism was identified.
+        c_difficile_toxin:
+          type: string
+          enum:
+            - positive
+            - negative
+            - not-tested
+            - ""
+          description: "Clostridioides difficile toxin result: positive, negative, not-tested."
+        acid_fast_bacilli:
+          type: string
+          enum:
+            - positive
+            - negative
+            - not-tested
+            - ""
+          description: "Acid-fast bacilli (AFB / TB) microscopy result: positive, negative, not-tested."
+        pcr_result:
+          type: string
+          maxLength: 1000
+          description: Molecular / PCR test result narrative.
+        critical_organism:
+          type: boolean
+          description: Whether a critical / alert organism (e.g. positive blood culture, CSF isolate, CPE) requiring urgent communication is present.
+        findings_narrative:
+          type: string
+          maxLength: 2000
+          description: Narrative description of the microbiology findings (the body of the report).
+        impression:
+          type: string
+          maxLength: 2000
+          description: Summary impression / interpretation answering the clinical question.
+        reporting_category:
+          type: string
+          maxLength: 50
+          description: Structured-reporting category / label for the result (free-text, e.g. an infection-significance category).
+        recommended_follow_up:
+          type: string
+          maxLength: 1000
+          description: Recommended follow-up testing, antimicrobial advice, or management.
+        critical_result_communicated:
+          type: boolean
+          description: Whether a critical or unexpected significant result was communicated directly to the requester / clinical team.
+        reported_to:
+          type: string
+          maxLength: 500
+          description: Who the critical / urgent result was communicated to, with date and time if applicable.
+      required:
+        - created_at
+        - updated_at
+        - patient_id
+        - clinician_id
+        - originating_request_reference
+        - report_status
+        - specimen_type
+        - specimen_site_detail
+        - specimen_condition
+        - clinical_history
+        - gram_stain_result
+        - culture_result
+        - organism_isolated
+        - second_organism_isolated
+        - colony_count
+        - antibiotic_sensitivities
+        - resistance_mrsa
+        - resistance_esbl
+        - resistance_cpe
+        - c_difficile_toxin
+        - acid_fast_bacilli
+        - pcr_result
+        - critical_organism
+        - findings_narrative
+        - impression
+        - reporting_category
+        - recommended_follow_up
+        - critical_result_communicated
+        - reported_to
+      description: Microbiology culture test result (report). Captures the specimen and its condition, the clinical history, the Gram-stain and culture results, the organism(s) isolated and colony count, antibiotic sensitivities and key resistance markers (MRSA / ESBL / CPE), specialised tests (C. difficile toxin, acid-fast bacilli, PCR), the narrative findings, impression, recommended follow-up, and critical-result communication. This is the source-of-truth record that the four-axis interpretation grade is computed from.

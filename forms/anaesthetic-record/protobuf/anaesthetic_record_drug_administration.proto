@@ -1,0 +1,59 @@
+// Generated from sql/. Do not edit by hand.
+// SOURCE: anaesthetic_record_drug_administration
+
+syntax = "proto3";
+
+package form_examples.anaesthetic_record;
+
+enum AnaestheticRecordDrugAdministrationDoseUnitEnum {
+  DOSEUNIT_UNSPECIFIED = 0;
+  DOSEUNIT_MG = 1;  // mg
+  DOSEUNIT_MCG = 2;  // mcg
+  DOSEUNIT_G = 3;  // g
+  DOSEUNIT_ML = 4;  // ml
+  DOSEUNIT_UNITS = 5;  // units
+  DOSEUNIT_MMOL = 6;  // mmol
+  DOSEUNIT_PUFF = 7;  // puff
+  DOSEUNIT_OTHER = 8;  // other
+}
+
+enum AnaestheticRecordDrugAdministrationRouteEnum {
+  ROUTE_UNSPECIFIED = 0;
+  ROUTE_IV = 1;  // iv
+  ROUTE_IM = 2;  // im
+  ROUTE_SUBCUTANEOUS = 3;  // subcutaneous
+  ROUTE_INHALATIONAL = 4;  // inhalational
+  ROUTE_ORAL = 5;  // oral
+  ROUTE_TOPICAL = 6;  // topical
+  ROUTE_NEURAXIAL = 7;  // neuraxial
+  ROUTE_INFUSION = 8;  // infusion
+  ROUTE_OTHER = 9;  // other
+}
+
+enum AnaestheticRecordDrugAdministrationCategoryEnum {
+  CATEGORY_UNSPECIFIED = 0;
+  CATEGORY_INDUCTION = 1;  // induction
+  CATEGORY_NEUROMUSCULAR_BLOCKER = 2;  // neuromuscular-blocker
+  CATEGORY_MAINTENANCE = 3;  // maintenance
+  CATEGORY_REVERSAL = 4;  // reversal
+  CATEGORY_ANALGESIA = 5;  // analgesia
+  CATEGORY_ANTIEMETIC = 6;  // antiemetic
+  CATEGORY_ANTIBIOTIC = 7;  // antibiotic
+  CATEGORY_VASOACTIVE = 8;  // vasoactive
+  CATEGORY_LOCAL_ANAESTHETIC = 9;  // local-anaesthetic
+  CATEGORY_OTHER = 10;  // other
+}
+
+message AnaestheticRecordDrugAdministration {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string anaesthetic_record_id = 5;  // UUID — uuid
+  string drug_name = 6;  // VARCHAR(255) — max 255 chars
+  double dose = 7;  // NUMERIC(10,3) — numeric(10,3)
+  AnaestheticRecordDrugAdministrationDoseUnitEnum dose_unit = 8;  // VARCHAR(10)
+  AnaestheticRecordDrugAdministrationRouteEnum route = 9;  // VARCHAR(20)
+  AnaestheticRecordDrugAdministrationCategoryEnum category = 10;  // VARCHAR(30)
+  string administered_at = 11;  // TIMESTAMPTZ — iso 8601
+}

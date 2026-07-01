@@ -1,0 +1,586 @@
+{
+  "resourceType": "Observation",
+  "id": "770e8400-e29b-41d4-a716-446655440002",
+  "meta": {
+    "profile": [
+      "http://hl7.org/fhir/StructureDefinition/Observation"
+    ],
+    "lastUpdated": "2026-04-09T10:00:00+00:00"
+  },
+  "status": "final",
+  "category": [
+    {
+      "coding": [
+        {
+          "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+          "code": "survey",
+          "display": "Survey"
+        }
+      ]
+    }
+  ],
+  "code": {
+    "coding": [
+      {
+        "system": "urn:form-examples:emergency-department-triage-note",
+        "code": "emergency_department_triage_note",
+        "display": "Emergency Department Triage Note"
+      }
+    ]
+  },
+  "subject": {
+    "reference": "Patient/550e8400-e29b-41d4-a716-446655440000"
+  },
+  "encounter": {
+    "reference": "Encounter/bb0e8400-e29b-41d4-a716-446655440006"
+  },
+  "effectiveDateTime": "2026-04-09T10:00:00+00:00",
+  "component": [
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:emergency-department-triage-note",
+            "code": "deleted_at",
+            "display": "Deleted At"
+          }
+        ]
+      },
+      "valueDateTime": "2026-04-09T10:00:00+00:00"
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:emergency-department-triage-note",
+            "code": "status",
+            "display": "Status"
+          }
+        ]
+      },
+      "valueCodeableConcept": {
+        "coding": [
+          {
+            "system": "urn:form-examples:emergency-department-triage-note:status",
+            "code": "draft",
+            "display": "Draft"
+          }
+        ]
+      }
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:emergency-department-triage-note",
+            "code": "nurse_name",
+            "display": "Nurse Name"
+          }
+        ]
+      },
+      "valueString": "Example"
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:emergency-department-triage-note",
+            "code": "triaged_at",
+            "display": "Triaged At"
+          }
+        ]
+      },
+      "valueDateTime": "2026-04-09T10:00:00+00:00"
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:emergency-department-triage-note",
+            "code": "care_setting",
+            "display": "Care Setting"
+          }
+        ]
+      },
+      "valueCodeableConcept": {
+        "coding": [
+          {
+            "system": "urn:form-examples:emergency-department-triage-note:care_setting",
+            "code": "emergency-department",
+            "display": "Emergency-Department"
+          }
+        ]
+      }
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:emergency-department-triage-note",
+            "code": "arrival_mode",
+            "display": "Arrival Mode"
+          }
+        ]
+      },
+      "valueCodeableConcept": {
+        "coding": [
+          {
+            "system": "urn:form-examples:emergency-department-triage-note:arrival_mode",
+            "code": "walk-in",
+            "display": "Walk-In"
+          }
+        ]
+      }
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:emergency-department-triage-note",
+            "code": "arrived_at",
+            "display": "Arrived At"
+          }
+        ]
+      },
+      "valueDateTime": "2026-04-09T10:00:00+00:00"
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:emergency-department-triage-note",
+            "code": "referral_source",
+            "display": "Referral Source"
+          }
+        ]
+      },
+      "valueString": ""
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:emergency-department-triage-note",
+            "code": "patient_identifier",
+            "display": "Patient Identifier"
+          }
+        ]
+      },
+      "valueString": ""
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:emergency-department-triage-note",
+            "code": "age_band",
+            "display": "Age Band"
+          }
+        ]
+      },
+      "valueCodeableConcept": {
+        "coding": [
+          {
+            "system": "urn:form-examples:emergency-department-triage-note:age_band",
+            "code": "paediatric",
+            "display": "Paediatric"
+          }
+        ]
+      }
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:emergency-department-triage-note",
+            "code": "presenting_complaint",
+            "display": "Presenting Complaint"
+          }
+        ]
+      },
+      "valueString": ""
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:emergency-department-triage-note",
+            "code": "brief_history",
+            "display": "Brief History"
+          }
+        ]
+      },
+      "valueString": "Example text."
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:emergency-department-triage-note",
+            "code": "symptom_onset",
+            "display": "Symptom Onset"
+          }
+        ]
+      },
+      "valueString": "Fatigue"
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:emergency-department-triage-note",
+            "code": "respiratory_rate",
+            "display": "Respiratory Rate"
+          }
+        ]
+      },
+      "valueInteger": 1
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:emergency-department-triage-note",
+            "code": "spo2",
+            "display": "Spo2"
+          }
+        ]
+      },
+      "valueInteger": 1
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:emergency-department-triage-note",
+            "code": "on_oxygen",
+            "display": "On Oxygen"
+          }
+        ]
+      },
+      "valueCodeableConcept": {
+        "coding": [
+          {
+            "system": "urn:form-examples:emergency-department-triage-note:on_oxygen",
+            "code": "air",
+            "display": "Air"
+          }
+        ]
+      }
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:emergency-department-triage-note",
+            "code": "systolic_bp",
+            "display": "Systolic Bp"
+          }
+        ]
+      },
+      "valueInteger": 1
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:emergency-department-triage-note",
+            "code": "pulse",
+            "display": "Pulse"
+          }
+        ]
+      },
+      "valueInteger": 1
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:emergency-department-triage-note",
+            "code": "consciousness_acvpu",
+            "display": "Consciousness Acvpu"
+          }
+        ]
+      },
+      "valueCodeableConcept": {
+        "coding": [
+          {
+            "system": "urn:form-examples:emergency-department-triage-note:consciousness_acvpu",
+            "code": "A",
+            "display": "A"
+          }
+        ]
+      }
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:emergency-department-triage-note",
+            "code": "temperature",
+            "display": "Temperature"
+          }
+        ]
+      },
+      "valueQuantity": {
+        "value": 0.0
+      }
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:emergency-department-triage-note",
+            "code": "glasgow_coma_scale",
+            "display": "Glasgow Coma Scale"
+          }
+        ]
+      },
+      "valueInteger": 1
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:emergency-department-triage-note",
+            "code": "pain_score",
+            "display": "Pain Score"
+          }
+        ]
+      },
+      "valueInteger": 5
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:emergency-department-triage-note",
+            "code": "airway_threat",
+            "display": "Airway Threat"
+          }
+        ]
+      },
+      "valueCodeableConcept": {
+        "coding": [
+          {
+            "system": "urn:form-examples:emergency-department-triage-note:airway_threat",
+            "code": "yes",
+            "display": "Yes"
+          }
+        ]
+      }
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:emergency-department-triage-note",
+            "code": "breathing_inadequate",
+            "display": "Breathing Inadequate"
+          }
+        ]
+      },
+      "valueCodeableConcept": {
+        "coding": [
+          {
+            "system": "urn:form-examples:emergency-department-triage-note:breathing_inadequate",
+            "code": "yes",
+            "display": "Yes"
+          }
+        ]
+      }
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:emergency-department-triage-note",
+            "code": "circulation_shock",
+            "display": "Circulation Shock"
+          }
+        ]
+      },
+      "valueCodeableConcept": {
+        "coding": [
+          {
+            "system": "urn:form-examples:emergency-department-triage-note:circulation_shock",
+            "code": "yes",
+            "display": "Yes"
+          }
+        ]
+      }
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:emergency-department-triage-note",
+            "code": "haemorrhage_major",
+            "display": "Haemorrhage Major"
+          }
+        ]
+      },
+      "valueCodeableConcept": {
+        "coding": [
+          {
+            "system": "urn:form-examples:emergency-department-triage-note:haemorrhage_major",
+            "code": "yes",
+            "display": "Yes"
+          }
+        ]
+      }
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:emergency-department-triage-note",
+            "code": "consciousness_reduced",
+            "display": "Consciousness Reduced"
+          }
+        ]
+      },
+      "valueCodeableConcept": {
+        "coding": [
+          {
+            "system": "urn:form-examples:emergency-department-triage-note:consciousness_reduced",
+            "code": "yes",
+            "display": "Yes"
+          }
+        ]
+      }
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:emergency-department-triage-note",
+            "code": "seizure_active",
+            "display": "Seizure Active"
+          }
+        ]
+      },
+      "valueCodeableConcept": {
+        "coding": [
+          {
+            "system": "urn:form-examples:emergency-department-triage-note:seizure_active",
+            "code": "yes",
+            "display": "Yes"
+          }
+        ]
+      }
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:emergency-department-triage-note",
+            "code": "focal_neurology",
+            "display": "Focal Neurology"
+          }
+        ]
+      },
+      "valueCodeableConcept": {
+        "coding": [
+          {
+            "system": "urn:form-examples:emergency-department-triage-note:focal_neurology",
+            "code": "yes",
+            "display": "Yes"
+          }
+        ]
+      }
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:emergency-department-triage-note",
+            "code": "sepsis_features",
+            "display": "Sepsis Features"
+          }
+        ]
+      },
+      "valueCodeableConcept": {
+        "coding": [
+          {
+            "system": "urn:form-examples:emergency-department-triage-note:sepsis_features",
+            "code": "yes",
+            "display": "Yes"
+          }
+        ]
+      }
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:emergency-department-triage-note",
+            "code": "chest_pain_cardiac",
+            "display": "Chest Pain Cardiac"
+          }
+        ]
+      },
+      "valueCodeableConcept": {
+        "coding": [
+          {
+            "system": "urn:form-examples:emergency-department-triage-note:chest_pain_cardiac",
+            "code": "yes",
+            "display": "Yes"
+          }
+        ]
+      }
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:emergency-department-triage-note",
+            "code": "stroke_features",
+            "display": "Stroke Features"
+          }
+        ]
+      },
+      "valueCodeableConcept": {
+        "coding": [
+          {
+            "system": "urn:form-examples:emergency-department-triage-note:stroke_features",
+            "code": "yes",
+            "display": "Yes"
+          }
+        ]
+      }
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:emergency-department-triage-note",
+            "code": "paediatric_red_flag",
+            "display": "Paediatric Red Flag"
+          }
+        ]
+      },
+      "valueCodeableConcept": {
+        "coding": [
+          {
+            "system": "urn:form-examples:emergency-department-triage-note:paediatric_red_flag",
+            "code": "yes",
+            "display": "Yes"
+          }
+        ]
+      }
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:emergency-department-triage-note",
+            "code": "clinical_notes",
+            "display": "Clinical Notes"
+          }
+        ]
+      },
+      "valueString": "Example text."
+    }
+  ]
+}

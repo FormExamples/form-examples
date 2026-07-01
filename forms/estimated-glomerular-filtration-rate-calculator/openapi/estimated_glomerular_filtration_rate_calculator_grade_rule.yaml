@@ -1,0 +1,167 @@
+# Generated from sql/. Do not edit by hand.
+# SOURCE: estimated_glomerular_filtration_rate_calculator_grade_rule
+openapi: 3.1.0
+info:
+  title: Estimated Glomerular Filtration Rate Calculator — EstimatedGlomerularFiltrationRateCalculatorGradeRule
+  version: 1.0.0
+  description: "Audit trail of every rule that fired during eGFR computation: instrument, CKD G-stage band, category, and description."
+paths:
+  /estimated-glomerular-filtration-rate-calculator-grade-rules:
+    get:
+      summary: List EstimatedGlomerularFiltrationRateCalculatorGradeRule records
+      operationId: listEstimatedGlomerularFiltrationRateCalculatorGradeRule
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of EstimatedGlomerularFiltrationRateCalculatorGradeRule records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/EstimatedGlomerularFiltrationRateCalculatorGradeRule"
+    post:
+      summary: Create a new EstimatedGlomerularFiltrationRateCalculatorGradeRule
+      operationId: createEstimatedGlomerularFiltrationRateCalculatorGradeRule
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/EstimatedGlomerularFiltrationRateCalculatorGradeRule"
+      responses:
+        "201":
+          description: The newly created EstimatedGlomerularFiltrationRateCalculatorGradeRule
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/EstimatedGlomerularFiltrationRateCalculatorGradeRule"
+        "400":
+          description: Validation error
+  /estimated-glomerular-filtration-rate-calculator-grade-rules/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one EstimatedGlomerularFiltrationRateCalculatorGradeRule by id
+      operationId: getEstimatedGlomerularFiltrationRateCalculatorGradeRule
+      responses:
+        "200":
+          description: The requested EstimatedGlomerularFiltrationRateCalculatorGradeRule
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/EstimatedGlomerularFiltrationRateCalculatorGradeRule"
+        "404":
+          description: EstimatedGlomerularFiltrationRateCalculatorGradeRule not found
+    patch:
+      summary: Update an existing EstimatedGlomerularFiltrationRateCalculatorGradeRule
+      operationId: updateEstimatedGlomerularFiltrationRateCalculatorGradeRule
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/EstimatedGlomerularFiltrationRateCalculatorGradeRule"
+      responses:
+        "200":
+          description: The updated EstimatedGlomerularFiltrationRateCalculatorGradeRule
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/EstimatedGlomerularFiltrationRateCalculatorGradeRule"
+        "404":
+          description: EstimatedGlomerularFiltrationRateCalculatorGradeRule not found
+    delete:
+      summary: Soft-delete a EstimatedGlomerularFiltrationRateCalculatorGradeRule
+      operationId: deleteEstimatedGlomerularFiltrationRateCalculatorGradeRule
+      responses:
+        "204":
+          description: EstimatedGlomerularFiltrationRateCalculatorGradeRule deleted
+        "404":
+          description: EstimatedGlomerularFiltrationRateCalculatorGradeRule not found
+components:
+  schemas:
+    EstimatedGlomerularFiltrationRateCalculatorGradeRule:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was most recently updated.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was soft-deleted.
+        estimated_glomerular_filtration_rate_calculator_grade_id:
+          type: string
+          format: uuid
+          description: Foreign key to the parent grade.
+        rule_id:
+          type: string
+          maxLength: 40
+          description: Stable rule identifier (e.g. R-BAND-G3A-01).
+        instrument:
+          type: string
+          enum:
+            - conversion
+            - equation
+            - banding
+            - composite
+          description: "Instrument the rule belongs to: conversion, equation, banding, or composite."
+        band:
+          type: string
+          enum:
+            - G1
+            - G2
+            - G3a
+            - G3b
+            - G4
+            - G5
+            - ""
+          description: "CKD G-stage band contributed by this rule: G1, G2, G3a, G3b, G4, or G5."
+        category:
+          type: string
+          maxLength: 50
+          description: Subject category (e.g. unit-conversion, equation-term, stage-threshold, missing-input).
+        description:
+          type: string
+          maxLength: 500
+          description: Human-readable description of why the rule fired.
+      required:
+        - created_at
+        - updated_at
+        - estimated_glomerular_filtration_rate_calculator_grade_id
+        - rule_id
+        - instrument
+        - band
+        - category
+        - description
+      description: "Audit trail of every rule that fired during eGFR computation: instrument, CKD G-stage band, category, and description."

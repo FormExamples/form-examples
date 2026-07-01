@@ -1,0 +1,36 @@
+// Generated from sql/. Do not edit by hand.
+// SOURCE: newborn_blood_spot_screening_grade
+
+syntax = "proto3";
+
+package form_examples.newborn_blood_spot_screening;
+
+enum NewbornBloodSpotScreeningGradeOverallOutcomeEnum {
+  OVERALLOUTCOME_UNSPECIFIED = 0;
+  OVERALLOUTCOME_REFERRAL_REQUIRED = 1;  // referral-required
+  OVERALLOUTCOME_REPEAT_REQUIRED = 2;  // repeat-required
+  OVERALLOUTCOME_INCOMPLETE = 3;  // incomplete
+  OVERALLOUTCOME_DECLINED_ONLY_OUTSTANDING = 4;  // declined-only-outstanding
+  OVERALLOUTCOME_ALL_NOT_SUSPECTED = 5;  // all-not-suspected
+}
+
+enum NewbornBloodSpotScreeningGradeReferralStatusEnum {
+  REFERRALSTATUS_UNSPECIFIED = 0;
+  REFERRALSTATUS_ROUTINE = 1;  // routine
+  REFERRALSTATUS_REPEAT = 2;  // repeat
+  REFERRALSTATUS_URGENT = 3;  // urgent
+}
+
+message NewbornBloodSpotScreeningGrade {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string newborn_blood_spot_screening_id = 5;  // UUID — uuid
+  NewbornBloodSpotScreeningGradeOverallOutcomeEnum overall_outcome = 6;  // VARCHAR(30)
+  NewbornBloodSpotScreeningGradeReferralStatusEnum referral_status = 7;  // VARCHAR(10)
+  bool sample_adequate = 8;  // BOOLEAN
+  bool within_window = 9;  // BOOLEAN
+  bool avoidable_repeat = 10;  // BOOLEAN
+  string graded_at = 11;  // TIMESTAMPTZ — iso 8601
+}

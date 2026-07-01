@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE holter_monitor_test_result_grade_flag SYSTEM "holter_monitor_test_result_grade_flag.dtd">
+<holter_monitor_test_result_grade_flag>
+<id>aa0e8400-e29b-41d4-a716-446655440005</id>
+<created_at>2026-04-09T10:00:00Z</created_at>
+<updated_at>2026-04-09T10:00:00Z</updated_at>
+<deleted_at>2026-04-09T10:00:00Z</deleted_at>
+<holter_monitor_test_result_grade_id>880e8400-e29b-41d4-a716-446655440003</holter_monitor_test_result_grade_id>
+<flag_id>660e8400-e29b-41d4-a716-446655440001</flag_id>
+<category>critical-result-alert</category>
+<priority>low</priority>
+<description>Example text.</description>
+<suggested_action></suggested_action>
+</holter_monitor_test_result_grade_flag>

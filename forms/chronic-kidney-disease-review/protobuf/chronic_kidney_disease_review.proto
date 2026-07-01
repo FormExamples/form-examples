@@ -1,0 +1,162 @@
+// Generated from sql/. Do not edit by hand.
+// SOURCE: chronic_kidney_disease_review
+
+syntax = "proto3";
+
+package form_examples.chronic_kidney_disease_review;
+
+enum ChronicKidneyDiseaseReviewClinicianRoleEnum {
+  CLINICIANROLE_UNSPECIFIED = 0;
+  CLINICIANROLE_GP = 1;  // gp
+  CLINICIANROLE_NURSE = 2;  // nurse
+  CLINICIANROLE_PHARMACIST = 3;  // pharmacist
+  CLINICIANROLE_NEPHROLOGY = 4;  // nephrology
+  CLINICIANROLE_OTHER = 5;  // other
+}
+
+enum ChronicKidneyDiseaseReviewCareSettingEnum {
+  CARESETTING_UNSPECIFIED = 0;
+  CARESETTING_GENERAL_PRACTICE = 1;  // general-practice
+  CARESETTING_LONG_TERM_CONDITIONS_CLINIC = 2;  // long-term-conditions-clinic
+  CARESETTING_COMMUNITY_NEPHROLOGY = 3;  // community-nephrology
+  CARESETTING_OTHER = 4;  // other
+}
+
+enum ChronicKidneyDiseaseReviewReviewTypeEnum {
+  REVIEWTYPE_UNSPECIFIED = 0;
+  REVIEWTYPE_ANNUAL = 1;  // annual
+  REVIEWTYPE_INTERVAL = 2;  // interval
+  REVIEWTYPE_POST_REFERRAL = 3;  // post-referral
+}
+
+enum ChronicKidneyDiseaseReviewAgeBandEnum {
+  AGEBAND_UNSPECIFIED = 0;
+  AGEBAND_V_18_39 = 1;  // 18-39
+  AGEBAND_V_40_59 = 2;  // 40-59
+  AGEBAND_V_60_79 = 3;  // 60-79
+  AGEBAND_V_80 = 4;  // >=80
+}
+
+enum ChronicKidneyDiseaseReviewSexEnum {
+  SEX_UNSPECIFIED = 0;
+  SEX_FEMALE = 1;  // female
+  SEX_MALE = 2;  // male
+  SEX_INTERSEX = 3;  // intersex
+  SEX_UNKNOWN = 4;  // unknown
+}
+
+enum ChronicKidneyDiseaseReviewDiabetesStatusEnum {
+  DIABETESSTATUS_UNSPECIFIED = 0;
+  DIABETESSTATUS_NONE = 1;  // none
+  DIABETESSTATUS_TYPE1 = 2;  // type1
+  DIABETESSTATUS_TYPE2 = 3;  // type2
+}
+
+enum ChronicKidneyDiseaseReviewPrimaryCauseEnum {
+  PRIMARYCAUSE_UNSPECIFIED = 0;
+  PRIMARYCAUSE_DIABETIC = 1;  // diabetic
+  PRIMARYCAUSE_HYPERTENSIVE = 2;  // hypertensive
+  PRIMARYCAUSE_GLOMERULAR = 3;  // glomerular
+  PRIMARYCAUSE_POLYCYSTIC = 4;  // polycystic
+  PRIMARYCAUSE_OBSTRUCTIVE = 5;  // obstructive
+  PRIMARYCAUSE_UNKNOWN = 6;  // unknown
+  PRIMARYCAUSE_OTHER = 7;  // other
+}
+
+enum ChronicKidneyDiseaseReviewAcrMeasuredEnum {
+  ACRMEASURED_UNSPECIFIED = 0;
+  ACRMEASURED_YES = 1;  // yes
+  ACRMEASURED_NO = 2;  // no
+}
+
+enum ChronicKidneyDiseaseReviewAceiOrArbPrescribedEnum {
+  ACEIORARBPRESCRIBED_UNSPECIFIED = 0;
+  ACEIORARBPRESCRIBED_YES = 1;  // yes
+  ACEIORARBPRESCRIBED_NO = 2;  // no
+  ACEIORARBPRESCRIBED_CONTRAINDICATED = 3;  // contraindicated
+}
+
+enum ChronicKidneyDiseaseReviewSglt2iPrescribedEnum {
+  SGLT2IPRESCRIBED_UNSPECIFIED = 0;
+  SGLT2IPRESCRIBED_YES = 1;  // yes
+  SGLT2IPRESCRIBED_NO = 2;  // no
+  SGLT2IPRESCRIBED_NOT_INDICATED = 3;  // not-indicated
+}
+
+enum ChronicKidneyDiseaseReviewStatinPrescribedEnum {
+  STATINPRESCRIBED_UNSPECIFIED = 0;
+  STATINPRESCRIBED_YES = 1;  // yes
+  STATINPRESCRIBED_NO = 2;  // no
+  STATINPRESCRIBED_DECLINED = 3;  // declined
+}
+
+enum ChronicKidneyDiseaseReviewNephrotoxicDrugPresentEnum {
+  NEPHROTOXICDRUGPRESENT_UNSPECIFIED = 0;
+  NEPHROTOXICDRUGPRESENT_YES = 1;  // yes
+  NEPHROTOXICDRUGPRESENT_NO = 2;  // no
+}
+
+enum ChronicKidneyDiseaseReviewNephrotoxicDoseAdjustedEnum {
+  NEPHROTOXICDOSEADJUSTED_UNSPECIFIED = 0;
+  NEPHROTOXICDOSEADJUSTED_YES = 1;  // yes
+  NEPHROTOXICDOSEADJUSTED_NO = 2;  // no
+  NEPHROTOXICDOSEADJUSTED_NOT_APPLICABLE = 3;  // not-applicable
+}
+
+enum ChronicKidneyDiseaseReviewMedicationReviewCompletedEnum {
+  MEDICATIONREVIEWCOMPLETED_UNSPECIFIED = 0;
+  MEDICATIONREVIEWCOMPLETED_YES = 1;  // yes
+  MEDICATIONREVIEWCOMPLETED_NO = 2;  // no
+}
+
+enum ChronicKidneyDiseaseReviewReferralDecisionEnum {
+  REFERRALDECISION_UNSPECIFIED = 0;
+  REFERRALDECISION_NONE = 1;  // none
+  REFERRALDECISION_MONITOR = 2;  // monitor
+  REFERRALDECISION_REFER_NEPHROLOGY = 3;  // refer-nephrology
+  REFERRALDECISION_ALREADY_UNDER_NEPHROLOGY = 4;  // already-under-nephrology
+}
+
+message ChronicKidneyDiseaseReview {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string patient_id = 5;  // UUID — uuid
+  string clinician_id = 6;  // UUID — uuid
+  string clinician_name = 7;  // VARCHAR(200) — max 200 chars
+  ChronicKidneyDiseaseReviewClinicianRoleEnum clinician_role = 8;  // VARCHAR(20)
+  string reviewed_at = 9;  // DATE — iso 8601 date
+  ChronicKidneyDiseaseReviewCareSettingEnum care_setting = 10;  // VARCHAR(35)
+  ChronicKidneyDiseaseReviewReviewTypeEnum review_type = 11;  // VARCHAR(15)
+  string patient_identifier = 12;  // VARCHAR(100) — max 100 chars
+  ChronicKidneyDiseaseReviewAgeBandEnum age_band = 13;  // VARCHAR(10)
+  ChronicKidneyDiseaseReviewSexEnum sex = 14;  // VARCHAR(20)
+  ChronicKidneyDiseaseReviewDiabetesStatusEnum diabetes_status = 15;  // VARCHAR(10)
+  ChronicKidneyDiseaseReviewPrimaryCauseEnum primary_cause = 16;  // VARCHAR(15)
+  int32 months_since_diagnosis = 17;  // INTEGER
+  double egfr = 18;  // NUMERIC(5,1) — numeric(5,1)
+  string egfr_sample_date = 19;  // DATE — iso 8601 date
+  double previous_egfr = 20;  // NUMERIC(5,1) — numeric(5,1)
+  string previous_egfr_date = 21;  // DATE — iso 8601 date
+  double acr = 22;  // NUMERIC(6,1) — numeric(6,1)
+  string acr_sample_date = 23;  // DATE — iso 8601 date
+  ChronicKidneyDiseaseReviewAcrMeasuredEnum acr_measured = 24;  // VARCHAR(5)
+  int32 systolic_blood_pressure = 25;  // INTEGER
+  int32 diastolic_blood_pressure = 26;  // INTEGER
+  ChronicKidneyDiseaseReviewAceiOrArbPrescribedEnum acei_or_arb_prescribed = 27;  // VARCHAR(15)
+  ChronicKidneyDiseaseReviewSglt2iPrescribedEnum sglt2i_prescribed = 28;  // VARCHAR(15)
+  ChronicKidneyDiseaseReviewStatinPrescribedEnum statin_prescribed = 29;  // VARCHAR(10)
+  ChronicKidneyDiseaseReviewNephrotoxicDrugPresentEnum nephrotoxic_drug_present = 30;  // VARCHAR(5)
+  ChronicKidneyDiseaseReviewNephrotoxicDoseAdjustedEnum nephrotoxic_dose_adjusted = 31;  // VARCHAR(15)
+  ChronicKidneyDiseaseReviewMedicationReviewCompletedEnum medication_review_completed = 32;  // VARCHAR(5)
+  double hba1c = 33;  // NUMERIC(4,1) — numeric(4,1)
+  double potassium = 34;  // NUMERIC(3,1) — numeric(3,1)
+  double bicarbonate = 35;  // NUMERIC(3,1) — numeric(3,1)
+  double calcium = 36;  // NUMERIC(4,2) — numeric(4,2)
+  double phosphate = 37;  // NUMERIC(4,2) — numeric(4,2)
+  double pth = 38;  // NUMERIC(5,1) — numeric(5,1)
+  double haemoglobin = 39;  // NUMERIC(4,1) — numeric(4,1)
+  ChronicKidneyDiseaseReviewReferralDecisionEnum referral_decision = 40;  // VARCHAR(30)
+  string clinical_note = 41;  // TEXT
+}

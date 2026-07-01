@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE diabetic_eye_screening_grade SYSTEM "diabetic_eye_screening_grade.dtd">
+<diabetic_eye_screening_grade>
+<id>880e8400-e29b-41d4-a716-446655440003</id>
+<created_at>2026-04-09T10:00:00Z</created_at>
+<updated_at>2026-04-09T10:00:00Z</updated_at>
+<deleted_at>2026-04-09T10:00:00Z</deleted_at>
+<diabetic_eye_screening_id>770e8400-e29b-41d4-a716-446655440002</diabetic_eye_screening_id>
+<worst_retinopathy>R0</worst_retinopathy>
+<worst_maculopathy>M0</worst_maculopathy>
+<any_ungradable>yes</any_ungradable>
+<outcome>refer-hes-urgent</outcome>
+<referral>none</referral>
+<recall_interval_months>1</recall_interval_months>
+<status>complete</status>
+<graded_at>2026-04-09T10:00:00Z</graded_at>
+</diabetic_eye_screening_grade>

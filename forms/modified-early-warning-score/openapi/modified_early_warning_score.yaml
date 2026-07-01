@@ -1,0 +1,197 @@
+# Generated from sql/. Do not edit by hand.
+# SOURCE: modified_early_warning_score
+openapi: 3.1.0
+info:
+  title: Modified Early Warning Score — ModifiedEarlyWarningScore
+  version: 1.0.0
+  description: "Main MEWS observation record: raw physiological observations for a single vital-sign set plus recording context (care setting, ward/location, observation timestamp) and the optional previous aggregate for the deteriorating-trend flag. Sub-scores, aggregate, risk band, rules, and flags live in child tables."
+paths:
+  /modified-early-warning-scores:
+    get:
+      summary: List ModifiedEarlyWarningScore records
+      operationId: listModifiedEarlyWarningScore
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of ModifiedEarlyWarningScore records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/ModifiedEarlyWarningScore"
+    post:
+      summary: Create a new ModifiedEarlyWarningScore
+      operationId: createModifiedEarlyWarningScore
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ModifiedEarlyWarningScore"
+      responses:
+        "201":
+          description: The newly created ModifiedEarlyWarningScore
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ModifiedEarlyWarningScore"
+        "400":
+          description: Validation error
+  /modified-early-warning-scores/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one ModifiedEarlyWarningScore by id
+      operationId: getModifiedEarlyWarningScore
+      responses:
+        "200":
+          description: The requested ModifiedEarlyWarningScore
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ModifiedEarlyWarningScore"
+        "404":
+          description: ModifiedEarlyWarningScore not found
+    patch:
+      summary: Update an existing ModifiedEarlyWarningScore
+      operationId: updateModifiedEarlyWarningScore
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ModifiedEarlyWarningScore"
+      responses:
+        "200":
+          description: The updated ModifiedEarlyWarningScore
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ModifiedEarlyWarningScore"
+        "404":
+          description: ModifiedEarlyWarningScore not found
+    delete:
+      summary: Soft-delete a ModifiedEarlyWarningScore
+      operationId: deleteModifiedEarlyWarningScore
+      responses:
+        "204":
+          description: ModifiedEarlyWarningScore deleted
+        "404":
+          description: ModifiedEarlyWarningScore not found
+components:
+  schemas:
+    ModifiedEarlyWarningScore:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was updated most-recently.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was deleted a.k.a. soft-removed.
+        patient_id:
+          type: string
+          format: uuid
+          description: "Foreign key to the patient observed (RESTRICT: patients are not deleted while observations exist)."
+        clinician_id:
+          type: string
+          format: uuid
+          description: Foreign key to the clinician who recorded the observation set (RESTRICT); NULL until assigned.
+        status:
+          type: string
+          enum:
+            - draft
+            - submitted
+            - amended
+            - signed
+          description: "Workflow status: draft, submitted, amended, or signed."
+        observation_at:
+          type: string
+          format: date-time
+          description: Date and time the observation set was taken; NULL when not yet recorded.
+        care_setting:
+          type: string
+          enum:
+            - acute-ward
+            - admissions-unit
+            - assessment-unit
+            - other
+            - ""
+          description: "Care setting where the observations were recorded: acute-ward, admissions-unit, assessment-unit, or other."
+        ward_or_location:
+          type: string
+          maxLength: 255
+          description: Ward or bed location where the observations were recorded.
+        systolic_blood_pressure:
+          type: integer
+          format: int32
+          description: Systolic blood pressure in mmHg; NULL when not recorded.
+        heart_rate:
+          type: integer
+          format: int32
+          description: Heart rate in beats per minute; NULL when not recorded.
+        respiratory_rate:
+          type: integer
+          format: int32
+          description: Respiratory rate in breaths per minute; NULL when not recorded.
+        temperature:
+          type: number
+          format: double
+          description: Body temperature in degrees Celsius; NULL when not recorded.
+        consciousness_avpu:
+          type: string
+          enum:
+            - A
+            - V
+            - P
+            - U
+            - ""
+          description: "Consciousness level on the AVPU scale: A (alert), V (voice), P (pain), U (unresponsive)."
+        previous_mews_score:
+          type: integer
+          format: int32
+          description: Aggregate MEWS from the previous observation set, used only to compute the deteriorating-trend flag; NULL when unavailable and never part of this aggregate.
+        clinical_notes:
+          type: string
+          description: Free-text clinical notes accompanying the observation set.
+      required:
+        - created_at
+        - updated_at
+        - patient_id
+        - status
+        - care_setting
+        - ward_or_location
+        - consciousness_avpu
+        - clinical_notes
+      description: "Main MEWS observation record: raw physiological observations for a single vital-sign set plus recording context (care setting, ward/location, observation timestamp) and the optional previous aggregate for the deteriorating-trend flag. Sub-scores, aggregate, risk band, rules, and flags live in child tables."

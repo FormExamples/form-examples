@@ -1,0 +1,12 @@
+<!ELEMENT ottawa_knee_rule_grade_rule (id,created_at,updated_at,deleted_at,ottawa_knee_rule_grade_id,rule_id,instrument,criterion,fired,category,description)>
+<!ELEMENT id (#PCDATA)>
+<!ELEMENT created_at (#PCDATA)>
+<!ELEMENT updated_at (#PCDATA)>
+<!ELEMENT deleted_at (#PCDATA)>
+<!ELEMENT ottawa_knee_rule_grade_id (#PCDATA)>
+<!ELEMENT rule_id (#PCDATA)>
+<!ELEMENT instrument (#PCDATA)>
+<!ELEMENT criterion (#PCDATA)>
+<!ELEMENT fired (#PCDATA)>
+<!ELEMENT category (#PCDATA)>
+<!ELEMENT description (#PCDATA)>

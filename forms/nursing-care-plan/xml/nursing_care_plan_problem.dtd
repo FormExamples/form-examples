@@ -1,0 +1,14 @@
+<!ELEMENT nursing_care_plan_problem (id,created_at,updated_at,deleted_at,nursing_care_plan_id,problem_statement,adl_category,actual_or_potential,assessment_data,linked_risk,evaluation_note,goal_met,next_review_date)>
+<!ELEMENT id (#PCDATA)>
+<!ELEMENT created_at (#PCDATA)>
+<!ELEMENT updated_at (#PCDATA)>
+<!ELEMENT deleted_at (#PCDATA)>
+<!ELEMENT nursing_care_plan_id (#PCDATA)>
+<!ELEMENT problem_statement (#PCDATA)>
+<!ELEMENT adl_category (#PCDATA)>
+<!ELEMENT actual_or_potential (#PCDATA)>
+<!ELEMENT assessment_data (#PCDATA)>
+<!ELEMENT linked_risk (#PCDATA)>
+<!ELEMENT evaluation_note (#PCDATA)>
+<!ELEMENT goal_met (#PCDATA)>
+<!ELEMENT next_review_date (#PCDATA)>

@@ -1,0 +1,181 @@
+# Generated from sql/. Do not edit by hand.
+# SOURCE: soap_note_grade
+openapi: 3.1.0
+info:
+  title: Soap Note — SoapNoteGrade
+  version: 1.0.0
+  description: "Computed documentation-completeness grading result for a SOAP note: status (complete/partial/incomplete), completeness percentage, and per-section presence flags."
+paths:
+  /soap-note-grades:
+    get:
+      summary: List SoapNoteGrade records
+      operationId: listSoapNoteGrade
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of SoapNoteGrade records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/SoapNoteGrade"
+    post:
+      summary: Create a new SoapNoteGrade
+      operationId: createSoapNoteGrade
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/SoapNoteGrade"
+      responses:
+        "201":
+          description: The newly created SoapNoteGrade
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SoapNoteGrade"
+        "400":
+          description: Validation error
+  /soap-note-grades/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one SoapNoteGrade by id
+      operationId: getSoapNoteGrade
+      responses:
+        "200":
+          description: The requested SoapNoteGrade
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SoapNoteGrade"
+        "404":
+          description: SoapNoteGrade not found
+    patch:
+      summary: Update an existing SoapNoteGrade
+      operationId: updateSoapNoteGrade
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/SoapNoteGrade"
+      responses:
+        "200":
+          description: The updated SoapNoteGrade
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SoapNoteGrade"
+        "404":
+          description: SoapNoteGrade not found
+    delete:
+      summary: Soft-delete a SoapNoteGrade
+      operationId: deleteSoapNoteGrade
+      responses:
+        "204":
+          description: SoapNoteGrade deleted
+        "404":
+          description: SoapNoteGrade not found
+components:
+  schemas:
+    SoapNoteGrade:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was most recently updated.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was soft-deleted.
+        soap_note_id:
+          type: string
+          format: uuid
+          description: Foreign key to the parent SOAP note (unique, 1:1).
+        status:
+          type: string
+          enum:
+            - complete
+            - partial
+            - incomplete
+            - ""
+          description: "Completeness status: complete, partial, or incomplete."
+        completeness_percent:
+          type: integer
+          format: int32
+          description: "Completeness percentage (0..100): present required components / total required components x 100."
+        subjective_present:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Whether the Subjective section is present (yes/no).
+        objective_present:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Whether the Objective section is present (yes/no).
+        assessment_present:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Whether the Assessment section is present (yes/no).
+        plan_present:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Whether the Plan section is present (yes/no).
+        graded_at:
+          type: string
+          format: date-time
+          description: Timestamp when the engine last computed the grade.
+      required:
+        - created_at
+        - updated_at
+        - soap_note_id
+        - status
+        - subjective_present
+        - objective_present
+        - assessment_present
+        - plan_present
+        - graded_at
+      description: "Computed documentation-completeness grading result for a SOAP note: status (complete/partial/incomplete), completeness percentage, and per-section presence flags."

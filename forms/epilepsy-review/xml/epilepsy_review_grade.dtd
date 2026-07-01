@@ -1,0 +1,10 @@
+<!ELEMENT epilepsy_review_grade (id,created_at,updated_at,deleted_at,epilepsy_review_id,seizure_control,review_status,completeness_score,graded_at)>
+<!ELEMENT id (#PCDATA)>
+<!ELEMENT created_at (#PCDATA)>
+<!ELEMENT updated_at (#PCDATA)>
+<!ELEMENT deleted_at (#PCDATA)>
+<!ELEMENT epilepsy_review_id (#PCDATA)>
+<!ELEMENT seizure_control (#PCDATA)>
+<!ELEMENT review_status (#PCDATA)>
+<!ELEMENT completeness_score (#PCDATA)>
+<!ELEMENT graded_at (#PCDATA)>

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE newborn_blood_spot_screening_grade SYSTEM "newborn_blood_spot_screening_grade.dtd">
+<newborn_blood_spot_screening_grade>
+<id>880e8400-e29b-41d4-a716-446655440003</id>
+<created_at>2026-04-09T10:00:00Z</created_at>
+<updated_at>2026-04-09T10:00:00Z</updated_at>
+<deleted_at>2026-04-09T10:00:00Z</deleted_at>
+<newborn_blood_spot_screening_id>770e8400-e29b-41d4-a716-446655440002</newborn_blood_spot_screening_id>
+<overall_outcome>referral-required</overall_outcome>
+<referral_status>routine</referral_status>
+<sample_adequate>true</sample_adequate>
+<within_window>true</within_window>
+<avoidable_repeat>true</avoidable_repeat>
+<graded_at>2026-04-09T10:00:00Z</graded_at>
+</newborn_blood_spot_screening_grade>

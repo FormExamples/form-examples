@@ -1,0 +1,36 @@
+// Generated from sql/. Do not edit by hand.
+// SOURCE: wells_score_for_deep_vein_thrombosis_grade_flag
+
+syntax = "proto3";
+
+package form_examples.wells_score_for_deep_vein_thrombosis;
+
+enum WellsScoreForDeepVeinThrombosisGradeFlagCategoryEnum {
+  CATEGORY_UNSPECIFIED = 0;
+  CATEGORY_DVT_LIKELY_ULTRASOUND = 1;  // dvt-likely-ultrasound
+  CATEGORY_DVT_UNLIKELY_D_DIMER = 2;  // dvt-unlikely-d-dimer
+  CATEGORY_ACTIVE_CANCER = 3;  // active-cancer
+  CATEGORY_PREVIOUS_DVT = 4;  // previous-dvt
+  CATEGORY_INCOMPLETE_ASSESSMENT = 5;  // incomplete-assessment
+  CATEGORY_OTHER = 6;  // other
+}
+
+enum WellsScoreForDeepVeinThrombosisGradeFlagPriorityEnum {
+  PRIORITY_UNSPECIFIED = 0;
+  PRIORITY_LOW = 1;  // low
+  PRIORITY_MEDIUM = 2;  // medium
+  PRIORITY_HIGH = 3;  // high
+}
+
+message WellsScoreForDeepVeinThrombosisGradeFlag {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string wells_score_for_deep_vein_thrombosis_grade_id = 5;  // UUID — uuid
+  string flag_id = 6;  // VARCHAR(50) — max 50 chars
+  WellsScoreForDeepVeinThrombosisGradeFlagCategoryEnum category = 7;  // VARCHAR(30)
+  WellsScoreForDeepVeinThrombosisGradeFlagPriorityEnum priority = 8;  // VARCHAR(10)
+  string description = 9;  // VARCHAR(500) — max 500 chars
+  string suggested_action = 10;  // VARCHAR(500) — max 500 chars
+}

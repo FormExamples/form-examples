@@ -1,0 +1,10 @@
+<!ELEMENT medical_certificate_of_cause_of_death_grade (id,created_at,updated_at,deleted_at,medical_certificate_of_cause_of_death_id,validity_class,underlying_cause,coroner_referral_indicated,graded_at)>
+<!ELEMENT id (#PCDATA)>
+<!ELEMENT created_at (#PCDATA)>
+<!ELEMENT updated_at (#PCDATA)>
+<!ELEMENT deleted_at (#PCDATA)>
+<!ELEMENT medical_certificate_of_cause_of_death_id (#PCDATA)>
+<!ELEMENT validity_class (#PCDATA)>
+<!ELEMENT underlying_cause (#PCDATA)>
+<!ELEMENT coroner_referral_indicated (#PCDATA)>
+<!ELEMENT graded_at (#PCDATA)>

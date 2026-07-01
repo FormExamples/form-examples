@@ -1,0 +1,80 @@
+// Generated from sql/. Do not edit by hand.
+// SOURCE: eye_vision_test_result
+
+syntax = "proto3";
+
+package form_examples.eye_vision_test_result;
+
+enum EyeVisionTestResultReportStatusEnum {
+  REPORTSTATUS_UNSPECIFIED = 0;
+  REPORTSTATUS_PRELIMINARY = 1;  // preliminary
+  REPORTSTATUS_FINAL = 2;  // final
+  REPORTSTATUS_AMENDED = 3;  // amended
+  REPORTSTATUS_CANCELLED = 4;  // cancelled
+}
+
+enum EyeVisionTestResultTestTypeEnum {
+  TESTTYPE_UNSPECIFIED = 0;
+  TESTTYPE_VISUAL_ACUITY = 1;  // visual-acuity
+  TESTTYPE_VISUAL_FIELDS = 2;  // visual-fields
+  TESTTYPE_REFRACTION = 3;  // refraction
+  TESTTYPE_FUNDUS_EXAMINATION = 4;  // fundus-examination
+  TESTTYPE_OPTICAL_COHERENCE_TOMOGRAPHY = 5;  // optical-coherence-tomography
+  TESTTYPE_FLUORESCEIN_ANGIOGRAPHY = 6;  // fluorescein-angiography
+  TESTTYPE_TONOMETRY = 7;  // tonometry
+  TESTTYPE_SLIT_LAMP = 8;  // slit-lamp
+  TESTTYPE_ORTHOPTIC_ASSESSMENT = 9;  // orthoptic-assessment
+  TESTTYPE_OTHER = 10;  // other
+}
+
+enum EyeVisionTestResultVisualFieldResultEnum {
+  VISUALFIELDRESULT_UNSPECIFIED = 0;
+  VISUALFIELDRESULT_FULL = 1;  // full
+  VISUALFIELDRESULT_DEFECT_RIGHT = 2;  // defect-right
+  VISUALFIELDRESULT_DEFECT_LEFT = 3;  // defect-left
+  VISUALFIELDRESULT_BILATERAL_DEFECT = 4;  // bilateral-defect
+}
+
+enum EyeVisionTestResultRetinopathyGradeEnum {
+  RETINOPATHYGRADE_UNSPECIFIED = 0;
+  RETINOPATHYGRADE_NONE = 1;  // none
+  RETINOPATHYGRADE_BACKGROUND = 2;  // background
+  RETINOPATHYGRADE_PRE_PROLIFERATIVE = 3;  // pre-proliferative
+  RETINOPATHYGRADE_PROLIFERATIVE = 4;  // proliferative
+  RETINOPATHYGRADE_MACULOPATHY = 5;  // maculopathy
+  RETINOPATHYGRADE_NOT_APPLICABLE = 6;  // not-applicable
+}
+
+message EyeVisionTestResult {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string patient_id = 5;  // UUID — uuid
+  string clinician_id = 6;  // UUID — uuid
+  string originating_request_reference = 7;  // VARCHAR(255) — max 255 chars
+  EyeVisionTestResultReportStatusEnum report_status = 8;  // VARCHAR(15)
+  EyeVisionTestResultTestTypeEnum test_type = 9;  // VARCHAR(35)
+  string performed_date = 10;  // DATE — iso 8601 date
+  string reported_date = 11;  // DATE — iso 8601 date
+  string clinical_history = 12;  // VARCHAR(1000) — max 1000 chars
+  string visual_acuity_right = 13;  // VARCHAR(20) — max 20 chars
+  string visual_acuity_left = 14;  // VARCHAR(20) — max 20 chars
+  double intraocular_pressure_right_mmhg = 15;  // NUMERIC(4,1) — numeric(4,1)
+  double intraocular_pressure_left_mmhg = 16;  // NUMERIC(4,1) — numeric(4,1)
+  EyeVisionTestResultVisualFieldResultEnum visual_field_result = 17;  // VARCHAR(20)
+  bool reduced_visual_acuity = 18;  // BOOLEAN
+  bool visual_field_defect = 19;  // BOOLEAN
+  bool raised_intraocular_pressure = 20;  // BOOLEAN
+  bool diabetic_retinopathy = 21;  // BOOLEAN
+  bool optic_disc_abnormality = 22;  // BOOLEAN
+  bool macular_abnormality = 23;  // BOOLEAN
+  bool normal_examination = 24;  // BOOLEAN
+  EyeVisionTestResultRetinopathyGradeEnum retinopathy_grade = 25;  // VARCHAR(20)
+  string findings_narrative = 26;  // VARCHAR(2000) — max 2000 chars
+  string impression = 27;  // VARCHAR(2000) — max 2000 chars
+  string reporting_category = 28;  // VARCHAR(100) — max 100 chars
+  string recommended_follow_up = 29;  // VARCHAR(1000) — max 1000 chars
+  bool critical_result_communicated = 30;  // BOOLEAN
+  string reported_to = 31;  // VARCHAR(500) — max 500 chars
+}

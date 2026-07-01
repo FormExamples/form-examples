@@ -1,0 +1,161 @@
+# Generated from sql/. Do not edit by hand.
+# SOURCE: edinburgh_postnatal_depression_scale_grade
+openapi: 3.1.0
+info:
+  title: Edinburgh Postnatal Depression Scale — EdinburghPostnatalDepressionScaleGrade
+  version: 1.0.0
+  description: "Computed EPDS grading result: summed total (0-30), interpretation band (lower/possible/likely), item 10 self-harm score, and mandatory self-harm flag."
+paths:
+  /edinburgh-postnatal-depression-scale-grades:
+    get:
+      summary: List EdinburghPostnatalDepressionScaleGrade records
+      operationId: listEdinburghPostnatalDepressionScaleGrade
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of EdinburghPostnatalDepressionScaleGrade records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/EdinburghPostnatalDepressionScaleGrade"
+    post:
+      summary: Create a new EdinburghPostnatalDepressionScaleGrade
+      operationId: createEdinburghPostnatalDepressionScaleGrade
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/EdinburghPostnatalDepressionScaleGrade"
+      responses:
+        "201":
+          description: The newly created EdinburghPostnatalDepressionScaleGrade
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/EdinburghPostnatalDepressionScaleGrade"
+        "400":
+          description: Validation error
+  /edinburgh-postnatal-depression-scale-grades/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one EdinburghPostnatalDepressionScaleGrade by id
+      operationId: getEdinburghPostnatalDepressionScaleGrade
+      responses:
+        "200":
+          description: The requested EdinburghPostnatalDepressionScaleGrade
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/EdinburghPostnatalDepressionScaleGrade"
+        "404":
+          description: EdinburghPostnatalDepressionScaleGrade not found
+    patch:
+      summary: Update an existing EdinburghPostnatalDepressionScaleGrade
+      operationId: updateEdinburghPostnatalDepressionScaleGrade
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/EdinburghPostnatalDepressionScaleGrade"
+      responses:
+        "200":
+          description: The updated EdinburghPostnatalDepressionScaleGrade
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/EdinburghPostnatalDepressionScaleGrade"
+        "404":
+          description: EdinburghPostnatalDepressionScaleGrade not found
+    delete:
+      summary: Soft-delete a EdinburghPostnatalDepressionScaleGrade
+      operationId: deleteEdinburghPostnatalDepressionScaleGrade
+      responses:
+        "204":
+          description: EdinburghPostnatalDepressionScaleGrade deleted
+        "404":
+          description: EdinburghPostnatalDepressionScaleGrade not found
+components:
+  schemas:
+    EdinburghPostnatalDepressionScaleGrade:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was most recently updated.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was soft-deleted.
+        edinburgh_postnatal_depression_scale_id:
+          type: string
+          format: uuid
+          description: Foreign key to the parent assessment (unique, 1:1).
+        total_score:
+          type: integer
+          format: int32
+          description: Summed EPDS score across the ten items (0-30 when complete; missing items contribute 0).
+        interpretation:
+          type: string
+          enum:
+            - lower
+            - possible
+            - likely
+            - ""
+          description: "Derived interpretation band: lower (< 10), possible (>= 10), or likely (>= 13) depression."
+        item_10_score:
+          type: integer
+          format: int32
+          description: Item 10 (thoughts of self-harm) score 0-3, retained for the safety flag audit.
+        self_harm_flag:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: "Mandatory self-harm flag: yes when item 10 > 0 (regardless of total), otherwise no."
+        graded_at:
+          type: string
+          format: date-time
+          description: Timestamp when the engine last computed the grade.
+      required:
+        - created_at
+        - updated_at
+        - edinburgh_postnatal_depression_scale_id
+        - interpretation
+        - self_harm_flag
+        - graded_at
+      description: "Computed EPDS grading result: summed total (0-30), interpretation band (lower/possible/likely), item 10 self-harm score, and mandatory self-harm flag."

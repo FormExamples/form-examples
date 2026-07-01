@@ -53,12 +53,12 @@
         "coding": [
           {
             "system": "urn:form-examples:encounter-satisfaction",
-            "code": "NULL",
-            "display": "Null"
+            "code": "reception_courtesy",
+            "display": "Reception Courtesy"
           }
         ]
       },
-      "valueString": ""
+      "valueInteger": 1
     },
     {
       "code": {

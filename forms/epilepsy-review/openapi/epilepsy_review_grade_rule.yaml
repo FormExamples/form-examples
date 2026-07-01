@@ -1,0 +1,154 @@
+# Generated from sql/. Do not edit by hand.
+# SOURCE: epilepsy_review_grade_rule
+openapi: 3.1.0
+info:
+  title: Epilepsy Review — EpilepsyReviewGradeRule
+  version: 1.0.0
+  description: "Audit trail of every classification or completeness rule that fired during grading: section, category, and description."
+paths:
+  /epilepsy-review-grade-rules:
+    get:
+      summary: List EpilepsyReviewGradeRule records
+      operationId: listEpilepsyReviewGradeRule
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of EpilepsyReviewGradeRule records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/EpilepsyReviewGradeRule"
+    post:
+      summary: Create a new EpilepsyReviewGradeRule
+      operationId: createEpilepsyReviewGradeRule
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/EpilepsyReviewGradeRule"
+      responses:
+        "201":
+          description: The newly created EpilepsyReviewGradeRule
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/EpilepsyReviewGradeRule"
+        "400":
+          description: Validation error
+  /epilepsy-review-grade-rules/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one EpilepsyReviewGradeRule by id
+      operationId: getEpilepsyReviewGradeRule
+      responses:
+        "200":
+          description: The requested EpilepsyReviewGradeRule
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/EpilepsyReviewGradeRule"
+        "404":
+          description: EpilepsyReviewGradeRule not found
+    patch:
+      summary: Update an existing EpilepsyReviewGradeRule
+      operationId: updateEpilepsyReviewGradeRule
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/EpilepsyReviewGradeRule"
+      responses:
+        "200":
+          description: The updated EpilepsyReviewGradeRule
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/EpilepsyReviewGradeRule"
+        "404":
+          description: EpilepsyReviewGradeRule not found
+    delete:
+      summary: Soft-delete a EpilepsyReviewGradeRule
+      operationId: deleteEpilepsyReviewGradeRule
+      responses:
+        "204":
+          description: EpilepsyReviewGradeRule deleted
+        "404":
+          description: EpilepsyReviewGradeRule not found
+components:
+  schemas:
+    EpilepsyReviewGradeRule:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was most recently updated.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was soft-deleted.
+        epilepsy_review_grade_id:
+          type: string
+          format: uuid
+          description: Foreign key to the parent grade.
+        rule_id:
+          type: string
+          maxLength: 40
+          description: Stable rule identifier (e.g. R-SEIZURE-CONTROL-UNCONTROLLED-01).
+        section:
+          type: string
+          enum:
+            - seizure-control
+            - completeness
+            - ""
+          description: "Section the rule concerns: seizure-control or completeness."
+        category:
+          type: string
+          maxLength: 50
+          description: Subject category (e.g. control-classification, required-domain).
+        description:
+          type: string
+          maxLength: 500
+          description: Human-readable description of why the rule fired.
+      required:
+        - created_at
+        - updated_at
+        - epilepsy_review_grade_id
+        - rule_id
+        - section
+        - category
+        - description
+      description: "Audit trail of every classification or completeness rule that fired during grading: section, category, and description."

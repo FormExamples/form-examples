@@ -1,0 +1,159 @@
+# Generated from sql/. Do not edit by hand.
+# SOURCE: audit_c_grade_rule
+openapi: 3.1.0
+info:
+  title: Alcohol Use Disorders Identification Test Consumption — AuditCGradeRule
+  version: 1.0.0
+  description: "Audit trail of every grading rule that fired during AUDIT-C computation: item, points contributed, category, and description."
+paths:
+  /audit-c-grade-rules:
+    get:
+      summary: List AuditCGradeRule records
+      operationId: listAuditCGradeRule
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of AuditCGradeRule records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/AuditCGradeRule"
+    post:
+      summary: Create a new AuditCGradeRule
+      operationId: createAuditCGradeRule
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/AuditCGradeRule"
+      responses:
+        "201":
+          description: The newly created AuditCGradeRule
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AuditCGradeRule"
+        "400":
+          description: Validation error
+  /audit-c-grade-rules/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one AuditCGradeRule by id
+      operationId: getAuditCGradeRule
+      responses:
+        "200":
+          description: The requested AuditCGradeRule
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AuditCGradeRule"
+        "404":
+          description: AuditCGradeRule not found
+    patch:
+      summary: Update an existing AuditCGradeRule
+      operationId: updateAuditCGradeRule
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/AuditCGradeRule"
+      responses:
+        "200":
+          description: The updated AuditCGradeRule
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AuditCGradeRule"
+        "404":
+          description: AuditCGradeRule not found
+    delete:
+      summary: Soft-delete a AuditCGradeRule
+      operationId: deleteAuditCGradeRule
+      responses:
+        "204":
+          description: AuditCGradeRule deleted
+        "404":
+          description: AuditCGradeRule not found
+components:
+  schemas:
+    AuditCGradeRule:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was most recently updated.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was soft-deleted.
+        audit_c_grade_id:
+          type: string
+          format: uuid
+          description: Foreign key to the parent grade.
+        rule_id:
+          type: string
+          maxLength: 40
+          description: Stable rule identifier (e.g. R-FREQUENCY-3POINT-01).
+        item:
+          type: string
+          enum:
+            - frequency
+            - quantity
+            - binge-frequency
+            - band
+          description: "Scored item the rule belongs to: frequency (Q1), quantity (Q2), binge-frequency (Q3), or band (total risk band)."
+        points:
+          type: integer
+          format: int32
+          description: Points (0-4) contributed by this rule for its item.
+        category:
+          type: string
+          maxLength: 50
+          description: Subject category (e.g. item-score, band).
+        description:
+          type: string
+          maxLength: 500
+          description: Human-readable description of why the rule fired.
+      required:
+        - created_at
+        - updated_at
+        - audit_c_grade_id
+        - rule_id
+        - item
+        - category
+        - description
+      description: "Audit trail of every grading rule that fired during AUDIT-C computation: item, points contributed, category, and description."

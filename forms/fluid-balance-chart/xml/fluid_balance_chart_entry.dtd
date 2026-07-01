@@ -1,0 +1,11 @@
+<!ELEMENT fluid_balance_chart_entry (id,created_at,updated_at,deleted_at,fluid_balance_chart_id,entry_at,direction,category,description,volume_ml)>
+<!ELEMENT id (#PCDATA)>
+<!ELEMENT created_at (#PCDATA)>
+<!ELEMENT updated_at (#PCDATA)>
+<!ELEMENT deleted_at (#PCDATA)>
+<!ELEMENT fluid_balance_chart_id (#PCDATA)>
+<!ELEMENT entry_at (#PCDATA)>
+<!ELEMENT direction (#PCDATA)>
+<!ELEMENT category (#PCDATA)>
+<!ELEMENT description (#PCDATA)>
+<!ELEMENT volume_ml (#PCDATA)>

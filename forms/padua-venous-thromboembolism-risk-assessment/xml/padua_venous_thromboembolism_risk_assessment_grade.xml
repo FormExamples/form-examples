@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE padua_venous_thromboembolism_risk_assessment_grade SYSTEM "padua_venous_thromboembolism_risk_assessment_grade.dtd">
+<padua_venous_thromboembolism_risk_assessment_grade>
+<id>880e8400-e29b-41d4-a716-446655440003</id>
+<created_at>2026-04-09T10:00:00Z</created_at>
+<updated_at>2026-04-09T10:00:00Z</updated_at>
+<deleted_at>2026-04-09T10:00:00Z</deleted_at>
+<padua_venous_thromboembolism_risk_assessment_id>770e8400-e29b-41d4-a716-446655440002</padua_venous_thromboembolism_risk_assessment_id>
+<active_cancer_points>1</active_cancer_points>
+<previous_vte_points>1</previous_vte_points>
+<reduced_mobility_points>1</reduced_mobility_points>
+<known_thrombophilia_points>1</known_thrombophilia_points>
+<recent_trauma_or_surgery_points>1</recent_trauma_or_surgery_points>
+<elderly_age_points>45</elderly_age_points>
+<heart_or_respiratory_failure_points>1</heart_or_respiratory_failure_points>
+<acute_mi_or_ischaemic_stroke_points>1</acute_mi_or_ischaemic_stroke_points>
+<acute_infection_or_rheumatological_points>1</acute_infection_or_rheumatological_points>
+<obesity_points>1</obesity_points>
+<ongoing_hormonal_treatment_points>1</ongoing_hormonal_treatment_points>
+<total_score>5</total_score>
+<risk_band>low</risk_band>
+<prophylaxis_recommendation>Example text.</prophylaxis_recommendation>
+<graded_at>2026-04-09T10:00:00Z</graded_at>
+</padua_venous_thromboembolism_risk_assessment_grade>

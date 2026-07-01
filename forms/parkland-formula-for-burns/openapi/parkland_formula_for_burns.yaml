@@ -1,0 +1,243 @@
+# Generated from sql/. Do not edit by hand.
+# SOURCE: parkland_formula_for_burns
+openapi: 3.1.0
+info:
+  title: Parkland Formula For Burns — ParklandFormulaForBurns
+  version: 1.0.0
+  description: "Main Parkland-formula burns record: context and identification, plus the body weight, %TBSA, and time-of-injury inputs and the injury-feature flags."
+paths:
+  /parkland-formula-for-burnses:
+    get:
+      summary: List ParklandFormulaForBurns records
+      operationId: listParklandFormulaForBurns
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of ParklandFormulaForBurns records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/ParklandFormulaForBurns"
+    post:
+      summary: Create a new ParklandFormulaForBurns
+      operationId: createParklandFormulaForBurns
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ParklandFormulaForBurns"
+      responses:
+        "201":
+          description: The newly created ParklandFormulaForBurns
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ParklandFormulaForBurns"
+        "400":
+          description: Validation error
+  /parkland-formula-for-burnses/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one ParklandFormulaForBurns by id
+      operationId: getParklandFormulaForBurns
+      responses:
+        "200":
+          description: The requested ParklandFormulaForBurns
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ParklandFormulaForBurns"
+        "404":
+          description: ParklandFormulaForBurns not found
+    patch:
+      summary: Update an existing ParklandFormulaForBurns
+      operationId: updateParklandFormulaForBurns
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ParklandFormulaForBurns"
+      responses:
+        "200":
+          description: The updated ParklandFormulaForBurns
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ParklandFormulaForBurns"
+        "404":
+          description: ParklandFormulaForBurns not found
+    delete:
+      summary: Soft-delete a ParklandFormulaForBurns
+      operationId: deleteParklandFormulaForBurns
+      responses:
+        "204":
+          description: ParklandFormulaForBurns deleted
+        "404":
+          description: ParklandFormulaForBurns not found
+components:
+  schemas:
+    ParklandFormulaForBurns:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was most recently updated.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was soft-deleted.
+        patient_id:
+          type: string
+          format: uuid
+          description: Foreign key to the patient this calculation is for (restricted delete).
+        clinician_id:
+          type: string
+          format: uuid
+          description: Foreign key to the clinician who recorded the calculation (optional, restricted delete).
+        clinician_name:
+          type: string
+          maxLength: 255
+          description: Assessing clinician name as recorded on the form.
+        clinician_role:
+          type: string
+          enum:
+            - doctor
+            - nurse
+            - paramedic
+            - other
+            - ""
+          description: "Assessing clinician role: doctor, nurse, paramedic, or other."
+        care_setting:
+          type: string
+          enum:
+            - emergency-department
+            - burns-unit
+            - intensive-care
+            - retrieval
+            - other
+            - ""
+          description: "Care setting: emergency-department, burns-unit, intensive-care, retrieval, or other."
+        assessed_at:
+          type: string
+          format: date-time
+          description: Date and time the calculation was assessed (used with injury_at to derive hours since injury).
+        patient_identifier:
+          type: string
+          maxLength: 100
+          description: Local patient identifier as recorded on the form.
+        age_band:
+          type: string
+          enum:
+            - adult
+            - child
+            - ""
+          description: "Age band that selects the major-burn referral threshold: adult (>=15% TBSA) or child (>=10% TBSA)."
+        sex:
+          type: string
+          enum:
+            - female
+            - male
+            - intersex
+            - unknown
+            - ""
+          description: "Patient sex recorded for clinical purposes: female, male, intersex, or unknown."
+        weight_kg:
+          type: number
+          format: double
+          description: Body weight in kilograms used in the Parkland formula (null when unanswered).
+        tbsa_percent:
+          type: number
+          format: double
+          description: Percentage total body surface area burned (partial-thickness or deeper; superficial excluded), 0-100 (null when unanswered).
+        tbsa_method:
+          type: string
+          enum:
+            - rule-of-nines
+            - lund-browder
+            - other
+            - ""
+          description: "Method used to estimate %TBSA: rule-of-nines, lund-browder, or other."
+        injury_at:
+          type: string
+          format: date-time
+          description: Date and time the burn occurred; the 8h/16h phase split is measured from this instant (null when unanswered).
+        injury_time_known:
+          type: string
+          enum:
+            - known
+            - estimated
+            - ""
+          description: Whether the time of injury is known or estimated.
+        inhalation_suspected:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: "Whether inhalation / airway injury is suspected: yes or no."
+        circumferential_or_deep:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: "Whether a circumferential or deep burn is present (escharotomy risk): yes or no."
+        mechanism:
+          type: string
+          enum:
+            - thermal
+            - electrical
+            - chemical
+            - other
+            - ""
+          description: "Burn mechanism: thermal, electrical, chemical, or other."
+      required:
+        - created_at
+        - updated_at
+        - patient_id
+        - clinician_name
+        - clinician_role
+        - care_setting
+        - patient_identifier
+        - age_band
+        - sex
+        - tbsa_method
+        - injury_time_known
+        - inhalation_suspected
+        - circumferential_or_deep
+        - mechanism
+      description: "Main Parkland-formula burns record: context and identification, plus the body weight, %TBSA, and time-of-injury inputs and the injury-feature flags."

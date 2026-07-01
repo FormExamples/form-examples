@@ -1,0 +1,150 @@
+# Generated from sql/. Do not edit by hand.
+# SOURCE: nursing_care_plan_grade
+openapi: 3.1.0
+info:
+  title: Nursing Care Plan — NursingCarePlanGrade
+  version: 1.0.0
+  description: "Computed completeness grading result for a nursing care plan: overall status and completeness percent."
+paths:
+  /nursing-care-plan-grades:
+    get:
+      summary: List NursingCarePlanGrade records
+      operationId: listNursingCarePlanGrade
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of NursingCarePlanGrade records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/NursingCarePlanGrade"
+    post:
+      summary: Create a new NursingCarePlanGrade
+      operationId: createNursingCarePlanGrade
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/NursingCarePlanGrade"
+      responses:
+        "201":
+          description: The newly created NursingCarePlanGrade
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/NursingCarePlanGrade"
+        "400":
+          description: Validation error
+  /nursing-care-plan-grades/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one NursingCarePlanGrade by id
+      operationId: getNursingCarePlanGrade
+      responses:
+        "200":
+          description: The requested NursingCarePlanGrade
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/NursingCarePlanGrade"
+        "404":
+          description: NursingCarePlanGrade not found
+    patch:
+      summary: Update an existing NursingCarePlanGrade
+      operationId: updateNursingCarePlanGrade
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/NursingCarePlanGrade"
+      responses:
+        "200":
+          description: The updated NursingCarePlanGrade
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/NursingCarePlanGrade"
+        "404":
+          description: NursingCarePlanGrade not found
+    delete:
+      summary: Soft-delete a NursingCarePlanGrade
+      operationId: deleteNursingCarePlanGrade
+      responses:
+        "204":
+          description: NursingCarePlanGrade deleted
+        "404":
+          description: NursingCarePlanGrade not found
+components:
+  schemas:
+    NursingCarePlanGrade:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was most recently updated.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was soft-deleted.
+        nursing_care_plan_id:
+          type: string
+          format: uuid
+          description: Foreign key to the parent nursing care plan (unique, 1:1).
+        status:
+          type: string
+          enum:
+            - complete
+            - partial
+            - incomplete
+            - ""
+          description: "Overall completeness status: complete, partial, or incomplete."
+        completeness_percent:
+          type: integer
+          format: int32
+          description: Proportion (0-100) of the three required elements (goal, intervention, evaluation) present across all problems.
+        graded_at:
+          type: string
+          format: date-time
+          description: Timestamp when the engine last computed the grade.
+      required:
+        - created_at
+        - updated_at
+        - nursing_care_plan_id
+        - status
+        - completeness_percent
+        - graded_at
+      description: "Computed completeness grading result for a nursing care plan: overall status and completeness percent."

@@ -1,0 +1,336 @@
+# Generated from sql/. Do not edit by hand.
+# SOURCE: nursing_care_plan
+openapi: 3.1.0
+info:
+  title: Nursing Care Plan — NursingCarePlan
+  version: 1.0.0
+  description: "Parent nursing care plan header: authoring context, patient identification, nursing model, plan-level review date, handover summary, and the four referenced risk-assessment groups."
+paths:
+  /nursing-care-plans:
+    get:
+      summary: List NursingCarePlan records
+      operationId: listNursingCarePlan
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of NursingCarePlan records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/NursingCarePlan"
+    post:
+      summary: Create a new NursingCarePlan
+      operationId: createNursingCarePlan
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/NursingCarePlan"
+      responses:
+        "201":
+          description: The newly created NursingCarePlan
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/NursingCarePlan"
+        "400":
+          description: Validation error
+  /nursing-care-plans/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one NursingCarePlan by id
+      operationId: getNursingCarePlan
+      responses:
+        "200":
+          description: The requested NursingCarePlan
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/NursingCarePlan"
+        "404":
+          description: NursingCarePlan not found
+    patch:
+      summary: Update an existing NursingCarePlan
+      operationId: updateNursingCarePlan
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/NursingCarePlan"
+      responses:
+        "200":
+          description: The updated NursingCarePlan
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/NursingCarePlan"
+        "404":
+          description: NursingCarePlan not found
+    delete:
+      summary: Soft-delete a NursingCarePlan
+      operationId: deleteNursingCarePlan
+      responses:
+        "204":
+          description: NursingCarePlan deleted
+        "404":
+          description: NursingCarePlan not found
+components:
+  schemas:
+    NursingCarePlan:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was updated most-recently.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was deleted a.k.a. soft-removed.
+        patient_id:
+          type: string
+          format: uuid
+          description: Foreign key to the patient this care plan is for (restricted delete).
+        clinician_id:
+          type: string
+          format: uuid
+          description: Foreign key to the authoring clinician (restricted delete); optional.
+        nurse_name:
+          type: string
+          description: Name of the authoring nurse.
+        nurse_role:
+          type: string
+          enum:
+            - registered-nurse
+            - nursing-associate
+            - student
+            - ""
+          description: "Role of the authoring nurse: registered-nurse, nursing-associate, or student."
+        nmc_number:
+          type: string
+          description: Professional registration number (NMC PIN) of the authoring nurse.
+        authored_at:
+          type: string
+          format: date-time
+          description: Date and time the care plan was authored.
+        care_setting:
+          type: string
+          enum:
+            - ward
+            - community
+            - care-home
+            - hospice
+            - other
+            - ""
+          description: "Care setting: ward, community, care-home, hospice, or other."
+        plan_type:
+          type: string
+          enum:
+            - admission
+            - ongoing
+            - discharge
+            - ""
+          description: "Plan type: admission, ongoing, or discharge."
+        model_used:
+          type: string
+          enum:
+            - roper-logan-tierney
+            - orem
+            - activities-of-living
+            - other
+            - ""
+          description: "Nursing model underpinning the plan: roper-logan-tierney, orem, activities-of-living, or other."
+        patient_identifier:
+          type: string
+          description: Local patient identifier as entered on the plan.
+        patient_name:
+          type: string
+          description: Patient name as entered on the plan.
+        date_of_birth:
+          type: string
+          format: date
+          description: Patient date of birth as entered on the plan.
+        sex:
+          type: string
+          enum:
+            - female
+            - male
+            - intersex
+            - unknown
+            - ""
+          description: "Patient sex: female, male, intersex, or unknown."
+        ward_location:
+          type: string
+          description: Ward or location where care is delivered.
+        handover_note:
+          type: string
+          description: Free-text handover summary for the care plan.
+        review_date:
+          type: string
+          format: date
+          description: Plan-level date the whole care plan is next due for review.
+        falls_risk_done:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: "Whether a falls risk assessment has been completed: yes or no."
+        falls_risk_level:
+          type: string
+          enum:
+            - low
+            - medium
+            - high
+            - ""
+          description: "Falls risk level: low, medium, or high."
+        falls_risk_assessed_on:
+          type: string
+          format: date
+          description: Date the falls risk assessment was carried out.
+        falls_risk_actioned:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: "Whether the falls risk has been actioned with an intervention: yes or no."
+        pressure_ulcer_risk_done:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: "Whether a pressure ulcer risk assessment has been completed: yes or no."
+        pressure_ulcer_risk_level:
+          type: string
+          enum:
+            - low
+            - medium
+            - high
+            - ""
+          description: "Pressure ulcer risk level: low, medium, or high."
+        pressure_ulcer_risk_assessed_on:
+          type: string
+          format: date
+          description: Date the pressure ulcer risk assessment was carried out.
+        pressure_ulcer_risk_actioned:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: "Whether the pressure ulcer risk has been actioned with an intervention: yes or no."
+        vte_risk_done:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: "Whether a venous thromboembolism (VTE) risk assessment has been completed: yes or no."
+        vte_risk_level:
+          type: string
+          enum:
+            - low
+            - medium
+            - high
+            - ""
+          description: "VTE risk level: low, medium, or high."
+        vte_risk_assessed_on:
+          type: string
+          format: date
+          description: Date the VTE risk assessment was carried out.
+        vte_risk_actioned:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: "Whether the VTE risk has been actioned with an intervention: yes or no."
+        nutrition_risk_done:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: "Whether a nutrition (MUST) risk assessment has been completed: yes or no."
+        nutrition_risk_level:
+          type: string
+          enum:
+            - low
+            - medium
+            - high
+            - ""
+          description: "Nutrition risk level: low, medium, or high."
+        nutrition_risk_assessed_on:
+          type: string
+          format: date
+          description: Date the nutrition risk assessment was carried out.
+        nutrition_risk_actioned:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: "Whether the nutrition risk has been actioned with an intervention: yes or no."
+      required:
+        - created_at
+        - updated_at
+        - patient_id
+        - nurse_name
+        - nurse_role
+        - nmc_number
+        - care_setting
+        - plan_type
+        - model_used
+        - patient_identifier
+        - patient_name
+        - sex
+        - ward_location
+        - handover_note
+        - falls_risk_done
+        - falls_risk_level
+        - falls_risk_actioned
+        - pressure_ulcer_risk_done
+        - pressure_ulcer_risk_level
+        - pressure_ulcer_risk_actioned
+        - vte_risk_done
+        - vte_risk_level
+        - vte_risk_actioned
+        - nutrition_risk_done
+        - nutrition_risk_level
+        - nutrition_risk_actioned
+      description: "Parent nursing care plan header: authoring context, patient identification, nursing model, plan-level review date, handover summary, and the four referenced risk-assessment groups."

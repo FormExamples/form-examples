@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE child_safeguarding_referral SYSTEM "child_safeguarding_referral.dtd">
+<child_safeguarding_referral>
+<id>770e8400-e29b-41d4-a716-446655440002</id>
+<created_at>2026-04-09T10:00:00Z</created_at>
+<updated_at>2026-04-09T10:00:00Z</updated_at>
+<deleted_at>2026-04-09T10:00:00Z</deleted_at>
+<patient_id>550e8400-e29b-41d4-a716-446655440000</patient_id>
+<clinician_id>660e8400-e29b-41d4-a716-446655440001</clinician_id>
+<referrer_organisation></referrer_organisation>
+<referred_at>2026-04-09T10:00:00Z</referred_at>
+<relationship_to_child>Spouse</relationship_to_child>
+<child_age>0.0</child_age>
+<child_setting></child_setting>
+<child_reference></child_reference>
+<child_ethnicity>White British</child_ethnicity>
+<child_first_language>English</child_first_language>
+<child_disability></child_disability>
+<carers></carers>
+<household_members></household_members>
+<other_children></other_children>
+<professionals_involved></professionals_involved>
+<concern_description>Example text.</concern_description>
+<concern_onset></concern_onset>
+<child_disclosed>yes</child_disclosed>
+<referrer_observations>Example text.</referrer_observations>
+<primary_category>physical</primary_category>
+<additional_categories></additional_categories>
+<presenting_evidence></presenting_evidence>
+<immediate_danger>yes</immediate_danger>
+<child_whereabouts></child_whereabouts>
+<who_with_child></who_with_child>
+<alleged_person_in_contact>yes</alleged_person_in_contact>
+<other_children_at_risk>yes</other_children_at_risk>
+<consent_sought>yes</consent_sought>
+<consent_status>given</consent_status>
+<sharing_basis_without_consent>risk-of-serious-harm</sharing_basis_without_consent>
+<family_aware>yes</family_aware>
+<unsafe_to_inform_reason>Example text.</unsafe_to_inform_reason>
+<agencies_contacted>07700900001</agencies_contacted>
+<strategy_discussion_held>yes</strategy_discussion_held>
+<previous_safeguarding_history>Example text.</previous_safeguarding_history>
+<requested_action></requested_action>
+<referrer_declaration>yes</referrer_declaration>
+<notes>Example text.</notes>
+</child_safeguarding_referral>

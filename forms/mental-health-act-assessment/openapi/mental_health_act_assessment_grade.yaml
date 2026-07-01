@@ -1,0 +1,166 @@
+# Generated from sql/. Do not edit by hand.
+# SOURCE: mental_health_act_assessment_grade
+openapi: 3.1.0
+info:
+  title: Mental Health Act Assessment — MentalHealthActAssessmentGrade
+  version: 1.0.0
+  description: "Computed legal-completeness and classification result for a Mental Health Act assessment: completeness status (valid/incomplete), recommended-section class, and urgency class. No automated detention decision is made."
+paths:
+  /mental-health-act-assessment-grades:
+    get:
+      summary: List MentalHealthActAssessmentGrade records
+      operationId: listMentalHealthActAssessmentGrade
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of MentalHealthActAssessmentGrade records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/MentalHealthActAssessmentGrade"
+    post:
+      summary: Create a new MentalHealthActAssessmentGrade
+      operationId: createMentalHealthActAssessmentGrade
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/MentalHealthActAssessmentGrade"
+      responses:
+        "201":
+          description: The newly created MentalHealthActAssessmentGrade
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/MentalHealthActAssessmentGrade"
+        "400":
+          description: Validation error
+  /mental-health-act-assessment-grades/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one MentalHealthActAssessmentGrade by id
+      operationId: getMentalHealthActAssessmentGrade
+      responses:
+        "200":
+          description: The requested MentalHealthActAssessmentGrade
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/MentalHealthActAssessmentGrade"
+        "404":
+          description: MentalHealthActAssessmentGrade not found
+    patch:
+      summary: Update an existing MentalHealthActAssessmentGrade
+      operationId: updateMentalHealthActAssessmentGrade
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/MentalHealthActAssessmentGrade"
+      responses:
+        "200":
+          description: The updated MentalHealthActAssessmentGrade
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/MentalHealthActAssessmentGrade"
+        "404":
+          description: MentalHealthActAssessmentGrade not found
+    delete:
+      summary: Soft-delete a MentalHealthActAssessmentGrade
+      operationId: deleteMentalHealthActAssessmentGrade
+      responses:
+        "204":
+          description: MentalHealthActAssessmentGrade deleted
+        "404":
+          description: MentalHealthActAssessmentGrade not found
+components:
+  schemas:
+    MentalHealthActAssessmentGrade:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was most recently updated.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was soft-deleted.
+        mental_health_act_assessment_id:
+          type: string
+          format: uuid
+          description: Foreign key to the parent assessment (unique, 1:1).
+        completeness_status:
+          type: string
+          enum:
+            - valid
+            - incomplete
+            - ""
+          description: "Legal-completeness status: valid or incomplete."
+        recommended_section_class:
+          type: string
+          enum:
+            - section-2
+            - section-3
+            - section-4
+            - section-5-2
+            - section-5-4
+            - section-136
+            - none
+            - ""
+          description: "Recommended-section classification: section-2, section-3, section-4, section-5-2, section-5-4, section-136, or none."
+        urgency:
+          type: string
+          enum:
+            - routine
+            - urgent
+            - emergency
+            - ""
+          description: "Urgency classification: routine, urgent, or emergency."
+        graded_at:
+          type: string
+          format: date-time
+          description: Timestamp when the engine last computed the grade.
+      required:
+        - created_at
+        - updated_at
+        - mental_health_act_assessment_id
+        - completeness_status
+        - recommended_section_class
+        - urgency
+        - graded_at
+      description: "Computed legal-completeness and classification result for a Mental Health Act assessment: completeness status (valid/incomplete), recommended-section class, and urgency class. No automated detention decision is made."

@@ -1,0 +1,11 @@
+<!ELEMENT body_mass_index_and_body_surface_area_calculator_grade_rule (id,created_at,updated_at,deleted_at,body_mass_index_and_body_surface_area_calculator_grade_id,rule_id,instrument,band,category,description)>
+<!ELEMENT id (#PCDATA)>
+<!ELEMENT created_at (#PCDATA)>
+<!ELEMENT updated_at (#PCDATA)>
+<!ELEMENT deleted_at (#PCDATA)>
+<!ELEMENT body_mass_index_and_body_surface_area_calculator_grade_id (#PCDATA)>
+<!ELEMENT rule_id (#PCDATA)>
+<!ELEMENT instrument (#PCDATA)>
+<!ELEMENT band (#PCDATA)>
+<!ELEMENT category (#PCDATA)>
+<!ELEMENT description (#PCDATA)>

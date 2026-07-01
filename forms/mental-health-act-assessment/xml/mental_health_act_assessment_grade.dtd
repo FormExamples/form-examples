@@ -1,0 +1,10 @@
+<!ELEMENT mental_health_act_assessment_grade (id,created_at,updated_at,deleted_at,mental_health_act_assessment_id,completeness_status,recommended_section_class,urgency,graded_at)>
+<!ELEMENT id (#PCDATA)>
+<!ELEMENT created_at (#PCDATA)>
+<!ELEMENT updated_at (#PCDATA)>
+<!ELEMENT deleted_at (#PCDATA)>
+<!ELEMENT mental_health_act_assessment_id (#PCDATA)>
+<!ELEMENT completeness_status (#PCDATA)>
+<!ELEMENT recommended_section_class (#PCDATA)>
+<!ELEMENT urgency (#PCDATA)>
+<!ELEMENT graded_at (#PCDATA)>

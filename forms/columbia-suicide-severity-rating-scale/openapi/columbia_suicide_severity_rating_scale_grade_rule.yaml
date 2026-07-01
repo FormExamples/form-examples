@@ -1,0 +1,165 @@
+# Generated from sql/. Do not edit by hand.
+# SOURCE: columbia_suicide_severity_rating_scale_grade_rule
+openapi: 3.1.0
+info:
+  title: Columbia Suicide Severity Rating Scale — ColumbiaSuicideSeverityRatingScaleGradeRule
+  version: 1.0.0
+  description: "Audit trail of every classification rule that fired during C-SSRS risk-tier computation: dimension, contributed tier, category, and description."
+paths:
+  /columbia-suicide-severity-rating-scale-grade-rules:
+    get:
+      summary: List ColumbiaSuicideSeverityRatingScaleGradeRule records
+      operationId: listColumbiaSuicideSeverityRatingScaleGradeRule
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of ColumbiaSuicideSeverityRatingScaleGradeRule records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/ColumbiaSuicideSeverityRatingScaleGradeRule"
+    post:
+      summary: Create a new ColumbiaSuicideSeverityRatingScaleGradeRule
+      operationId: createColumbiaSuicideSeverityRatingScaleGradeRule
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ColumbiaSuicideSeverityRatingScaleGradeRule"
+      responses:
+        "201":
+          description: The newly created ColumbiaSuicideSeverityRatingScaleGradeRule
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ColumbiaSuicideSeverityRatingScaleGradeRule"
+        "400":
+          description: Validation error
+  /columbia-suicide-severity-rating-scale-grade-rules/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one ColumbiaSuicideSeverityRatingScaleGradeRule by id
+      operationId: getColumbiaSuicideSeverityRatingScaleGradeRule
+      responses:
+        "200":
+          description: The requested ColumbiaSuicideSeverityRatingScaleGradeRule
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ColumbiaSuicideSeverityRatingScaleGradeRule"
+        "404":
+          description: ColumbiaSuicideSeverityRatingScaleGradeRule not found
+    patch:
+      summary: Update an existing ColumbiaSuicideSeverityRatingScaleGradeRule
+      operationId: updateColumbiaSuicideSeverityRatingScaleGradeRule
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ColumbiaSuicideSeverityRatingScaleGradeRule"
+      responses:
+        "200":
+          description: The updated ColumbiaSuicideSeverityRatingScaleGradeRule
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ColumbiaSuicideSeverityRatingScaleGradeRule"
+        "404":
+          description: ColumbiaSuicideSeverityRatingScaleGradeRule not found
+    delete:
+      summary: Soft-delete a ColumbiaSuicideSeverityRatingScaleGradeRule
+      operationId: deleteColumbiaSuicideSeverityRatingScaleGradeRule
+      responses:
+        "204":
+          description: ColumbiaSuicideSeverityRatingScaleGradeRule deleted
+        "404":
+          description: ColumbiaSuicideSeverityRatingScaleGradeRule not found
+components:
+  schemas:
+    ColumbiaSuicideSeverityRatingScaleGradeRule:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was most recently updated.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was soft-deleted.
+        columbia_suicide_severity_rating_scale_grade_id:
+          type: string
+          format: uuid
+          description: Foreign key to the parent grade.
+        rule_id:
+          type: string
+          maxLength: 40
+          description: Stable rule identifier (e.g. R-IDEATION-LEVEL5-01).
+        dimension:
+          type: string
+          enum:
+            - ideation
+            - behaviour
+            - lethality
+            - means
+            - tier
+          description: "Assessment dimension the rule belongs to: ideation, behaviour, lethality, means, or tier."
+        tier:
+          type: string
+          enum:
+            - low
+            - moderate
+            - high
+            - ""
+          description: "Risk tier contributed by this rule: low, moderate, or high."
+        category:
+          type: string
+          maxLength: 50
+          description: Subject category (e.g. ideation-level, recent-behaviour, high-lethality).
+        description:
+          type: string
+          maxLength: 500
+          description: Human-readable description of why the rule fired.
+      required:
+        - created_at
+        - updated_at
+        - columbia_suicide_severity_rating_scale_grade_id
+        - rule_id
+        - dimension
+        - tier
+        - category
+        - description
+      description: "Audit trail of every classification rule that fired during C-SSRS risk-tier computation: dimension, contributed tier, category, and description."

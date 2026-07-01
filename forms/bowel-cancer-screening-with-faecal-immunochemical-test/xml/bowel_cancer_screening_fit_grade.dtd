@@ -1,0 +1,11 @@
+<!ELEMENT bowel_cancer_screening_fit_grade (id,created_at,updated_at,deleted_at,bowel_cancer_screening_fit_id,result_class,management_action,symptomatic_pathway,status,graded_at)>
+<!ELEMENT id (#PCDATA)>
+<!ELEMENT created_at (#PCDATA)>
+<!ELEMENT updated_at (#PCDATA)>
+<!ELEMENT deleted_at (#PCDATA)>
+<!ELEMENT bowel_cancer_screening_fit_id (#PCDATA)>
+<!ELEMENT result_class (#PCDATA)>
+<!ELEMENT management_action (#PCDATA)>
+<!ELEMENT symptomatic_pathway (#PCDATA)>
+<!ELEMENT status (#PCDATA)>
+<!ELEMENT graded_at (#PCDATA)>

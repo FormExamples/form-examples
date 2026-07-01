@@ -1,0 +1,171 @@
+# Generated from sql/. Do not edit by hand.
+# SOURCE: tumor_marker_test_result_grade_flag
+openapi: 3.1.0
+info:
+  title: Tumor Marker Test Result — TumorMarkerTestResultGradeFlag
+  version: 1.0.0
+  description: Safety-critical flags that fire independently of the four axes, with priority and a suggested action for the reporting / requesting team.
+paths:
+  /tumor-marker-test-result-grade-flags:
+    get:
+      summary: List TumorMarkerTestResultGradeFlag records
+      operationId: listTumorMarkerTestResultGradeFlag
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of TumorMarkerTestResultGradeFlag records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/TumorMarkerTestResultGradeFlag"
+    post:
+      summary: Create a new TumorMarkerTestResultGradeFlag
+      operationId: createTumorMarkerTestResultGradeFlag
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/TumorMarkerTestResultGradeFlag"
+      responses:
+        "201":
+          description: The newly created TumorMarkerTestResultGradeFlag
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/TumorMarkerTestResultGradeFlag"
+        "400":
+          description: Validation error
+  /tumor-marker-test-result-grade-flags/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one TumorMarkerTestResultGradeFlag by id
+      operationId: getTumorMarkerTestResultGradeFlag
+      responses:
+        "200":
+          description: The requested TumorMarkerTestResultGradeFlag
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/TumorMarkerTestResultGradeFlag"
+        "404":
+          description: TumorMarkerTestResultGradeFlag not found
+    patch:
+      summary: Update an existing TumorMarkerTestResultGradeFlag
+      operationId: updateTumorMarkerTestResultGradeFlag
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/TumorMarkerTestResultGradeFlag"
+      responses:
+        "200":
+          description: The updated TumorMarkerTestResultGradeFlag
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/TumorMarkerTestResultGradeFlag"
+        "404":
+          description: TumorMarkerTestResultGradeFlag not found
+    delete:
+      summary: Soft-delete a TumorMarkerTestResultGradeFlag
+      operationId: deleteTumorMarkerTestResultGradeFlag
+      responses:
+        "204":
+          description: TumorMarkerTestResultGradeFlag deleted
+        "404":
+          description: TumorMarkerTestResultGradeFlag not found
+components:
+  schemas:
+    TumorMarkerTestResultGradeFlag:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was updated most-recently.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was deleted a.k.a. soft-removed.
+        tumor_marker_test_result_grade_id:
+          type: string
+          format: uuid
+          description: Foreign key to the parent grade.
+        flag_id:
+          type: string
+          maxLength: 50
+          description: Stable flag identifier (e.g. F-CRITICAL-RESULT-001).
+        category:
+          type: string
+          enum:
+            - critical-result-alert
+            - incidental-finding
+            - discrepancy-with-request
+            - abnormal-requiring-action
+            - urgent-referral
+            - inadequate-technique
+            - unexpected-finding
+            - missing-impression
+            - missing-measurement
+            - other
+            - ""
+          description: Flag category.
+        priority:
+          type: string
+          enum:
+            - low
+            - medium
+            - high
+            - ""
+          description: "Priority: low, medium, high."
+        description:
+          type: string
+          maxLength: 500
+          description: Human-readable description of what fired the flag.
+        suggested_action:
+          type: string
+          maxLength: 500
+          description: "Suggested clinical action (e.g. \"communicate critical result to requester and document\")."
+      required:
+        - created_at
+        - updated_at
+        - tumor_marker_test_result_grade_id
+        - flag_id
+        - category
+        - priority
+        - description
+        - suggested_action
+      description: Safety-critical flags that fire independently of the four axes, with priority and a suggested action for the reporting / requesting team.

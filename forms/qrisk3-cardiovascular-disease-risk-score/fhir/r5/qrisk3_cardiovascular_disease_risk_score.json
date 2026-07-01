@@ -1,0 +1,576 @@
+{
+  "resourceType": "Observation",
+  "id": "770e8400-e29b-41d4-a716-446655440002",
+  "meta": {
+    "profile": [
+      "http://hl7.org/fhir/StructureDefinition/Observation"
+    ],
+    "lastUpdated": "2026-04-09T10:00:00+00:00"
+  },
+  "status": "final",
+  "category": [
+    {
+      "coding": [
+        {
+          "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+          "code": "survey",
+          "display": "Survey"
+        }
+      ]
+    }
+  ],
+  "code": {
+    "coding": [
+      {
+        "system": "urn:form-examples:qrisk3-cardiovascular-disease-risk-score",
+        "code": "qrisk3_cardiovascular_disease_risk_score",
+        "display": "Qrisk3 Cardiovascular Disease Risk Score"
+      }
+    ]
+  },
+  "subject": {
+    "reference": "Patient/550e8400-e29b-41d4-a716-446655440000"
+  },
+  "encounter": {
+    "reference": "Encounter/bb0e8400-e29b-41d4-a716-446655440006"
+  },
+  "effectiveDateTime": "2026-04-09T10:00:00+00:00",
+  "component": [
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:qrisk3-cardiovascular-disease-risk-score",
+            "code": "deleted_at",
+            "display": "Deleted At"
+          }
+        ]
+      },
+      "valueDateTime": "2026-04-09T10:00:00+00:00"
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:qrisk3-cardiovascular-disease-risk-score",
+            "code": "clinician_name",
+            "display": "Clinician Name"
+          }
+        ]
+      },
+      "valueString": "Example"
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:qrisk3-cardiovascular-disease-risk-score",
+            "code": "clinician_role",
+            "display": "Clinician Role"
+          }
+        ]
+      },
+      "valueCodeableConcept": {
+        "coding": [
+          {
+            "system": "urn:form-examples:qrisk3-cardiovascular-disease-risk-score:clinician_role",
+            "code": "gp",
+            "display": "Gp"
+          }
+        ]
+      }
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:qrisk3-cardiovascular-disease-risk-score",
+            "code": "assessed_at",
+            "display": "Assessed At"
+          }
+        ]
+      },
+      "valueDateTime": "2026-04-09T10:00:00+00:00"
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:qrisk3-cardiovascular-disease-risk-score",
+            "code": "care_setting",
+            "display": "Care Setting"
+          }
+        ]
+      },
+      "valueCodeableConcept": {
+        "coding": [
+          {
+            "system": "urn:form-examples:qrisk3-cardiovascular-disease-risk-score:care_setting",
+            "code": "general-practice",
+            "display": "General-Practice"
+          }
+        ]
+      }
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:qrisk3-cardiovascular-disease-risk-score",
+            "code": "patient_identifier",
+            "display": "Patient Identifier"
+          }
+        ]
+      },
+      "valueString": ""
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:qrisk3-cardiovascular-disease-risk-score",
+            "code": "age",
+            "display": "Age"
+          }
+        ]
+      },
+      "valueQuantity": {
+        "value": 0.0
+      }
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:qrisk3-cardiovascular-disease-risk-score",
+            "code": "sex",
+            "display": "Sex"
+          }
+        ]
+      },
+      "valueCodeableConcept": {
+        "coding": [
+          {
+            "system": "urn:form-examples:qrisk3-cardiovascular-disease-risk-score:sex",
+            "code": "female",
+            "display": "Female"
+          }
+        ]
+      }
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:qrisk3-cardiovascular-disease-risk-score",
+            "code": "ethnicity",
+            "display": "Ethnicity"
+          }
+        ]
+      },
+      "valueCodeableConcept": {
+        "coding": [
+          {
+            "system": "urn:form-examples:qrisk3-cardiovascular-disease-risk-score:ethnicity",
+            "code": "white-or-not-stated",
+            "display": "White-Or-Not-Stated"
+          }
+        ]
+      }
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:qrisk3-cardiovascular-disease-risk-score",
+            "code": "townsend_score",
+            "display": "Townsend Score"
+          }
+        ]
+      },
+      "valueQuantity": {
+        "value": 5.0
+      }
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:qrisk3-cardiovascular-disease-risk-score",
+            "code": "postcode",
+            "display": "Postcode"
+          }
+        ]
+      },
+      "valueString": "SW1A 1AA"
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:qrisk3-cardiovascular-disease-risk-score",
+            "code": "smoking_status",
+            "display": "Smoking Status"
+          }
+        ]
+      },
+      "valueCodeableConcept": {
+        "coding": [
+          {
+            "system": "urn:form-examples:qrisk3-cardiovascular-disease-risk-score:smoking_status",
+            "code": "non",
+            "display": "Non"
+          }
+        ]
+      }
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:qrisk3-cardiovascular-disease-risk-score",
+            "code": "body_mass_index",
+            "display": "Body Mass Index"
+          }
+        ]
+      },
+      "valueQuantity": {
+        "value": 0.0
+      }
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:qrisk3-cardiovascular-disease-risk-score",
+            "code": "diabetes_status",
+            "display": "Diabetes Status"
+          }
+        ]
+      },
+      "valueCodeableConcept": {
+        "coding": [
+          {
+            "system": "urn:form-examples:qrisk3-cardiovascular-disease-risk-score:diabetes_status",
+            "code": "none",
+            "display": "None"
+          }
+        ]
+      }
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:qrisk3-cardiovascular-disease-risk-score",
+            "code": "cholesterol_hdl_ratio",
+            "display": "Cholesterol Hdl Ratio"
+          }
+        ]
+      },
+      "valueQuantity": {
+        "value": 0.0
+      }
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:qrisk3-cardiovascular-disease-risk-score",
+            "code": "systolic_blood_pressure",
+            "display": "Systolic Blood Pressure"
+          }
+        ]
+      },
+      "valueQuantity": {
+        "value": 120.0
+      }
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:qrisk3-cardiovascular-disease-risk-score",
+            "code": "systolic_blood_pressure_sd",
+            "display": "Systolic Blood Pressure Sd"
+          }
+        ]
+      },
+      "valueQuantity": {
+        "value": 120.0
+      }
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:qrisk3-cardiovascular-disease-risk-score",
+            "code": "on_blood_pressure_treatment",
+            "display": "On Blood Pressure Treatment"
+          }
+        ]
+      },
+      "valueCodeableConcept": {
+        "coding": [
+          {
+            "system": "urn:form-examples:qrisk3-cardiovascular-disease-risk-score:on_blood_pressure_treatment",
+            "code": "yes",
+            "display": "Yes"
+          }
+        ]
+      }
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:qrisk3-cardiovascular-disease-risk-score",
+            "code": "family_history_chd",
+            "display": "Family History Chd"
+          }
+        ]
+      },
+      "valueCodeableConcept": {
+        "coding": [
+          {
+            "system": "urn:form-examples:qrisk3-cardiovascular-disease-risk-score:family_history_chd",
+            "code": "yes",
+            "display": "Yes"
+          }
+        ]
+      }
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:qrisk3-cardiovascular-disease-risk-score",
+            "code": "atrial_fibrillation",
+            "display": "Atrial Fibrillation"
+          }
+        ]
+      },
+      "valueCodeableConcept": {
+        "coding": [
+          {
+            "system": "urn:form-examples:qrisk3-cardiovascular-disease-risk-score:atrial_fibrillation",
+            "code": "yes",
+            "display": "Yes"
+          }
+        ]
+      }
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:qrisk3-cardiovascular-disease-risk-score",
+            "code": "chronic_kidney_disease_stage",
+            "display": "Chronic Kidney Disease Stage"
+          }
+        ]
+      },
+      "valueCodeableConcept": {
+        "coding": [
+          {
+            "system": "urn:form-examples:qrisk3-cardiovascular-disease-risk-score:chronic_kidney_disease_stage",
+            "code": "none",
+            "display": "None"
+          }
+        ]
+      }
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:qrisk3-cardiovascular-disease-risk-score",
+            "code": "migraine",
+            "display": "Migraine"
+          }
+        ]
+      },
+      "valueCodeableConcept": {
+        "coding": [
+          {
+            "system": "urn:form-examples:qrisk3-cardiovascular-disease-risk-score:migraine",
+            "code": "yes",
+            "display": "Yes"
+          }
+        ]
+      }
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:qrisk3-cardiovascular-disease-risk-score",
+            "code": "rheumatoid_arthritis",
+            "display": "Rheumatoid Arthritis"
+          }
+        ]
+      },
+      "valueCodeableConcept": {
+        "coding": [
+          {
+            "system": "urn:form-examples:qrisk3-cardiovascular-disease-risk-score:rheumatoid_arthritis",
+            "code": "yes",
+            "display": "Yes"
+          }
+        ]
+      }
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:qrisk3-cardiovascular-disease-risk-score",
+            "code": "systemic_lupus_erythematosus",
+            "display": "Systemic Lupus Erythematosus"
+          }
+        ]
+      },
+      "valueCodeableConcept": {
+        "coding": [
+          {
+            "system": "urn:form-examples:qrisk3-cardiovascular-disease-risk-score:systemic_lupus_erythematosus",
+            "code": "yes",
+            "display": "Yes"
+          }
+        ]
+      }
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:qrisk3-cardiovascular-disease-risk-score",
+            "code": "severe_mental_illness",
+            "display": "Severe Mental Illness"
+          }
+        ]
+      },
+      "valueCodeableConcept": {
+        "coding": [
+          {
+            "system": "urn:form-examples:qrisk3-cardiovascular-disease-risk-score:severe_mental_illness",
+            "code": "yes",
+            "display": "Yes"
+          }
+        ]
+      }
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:qrisk3-cardiovascular-disease-risk-score",
+            "code": "erectile_dysfunction",
+            "display": "Erectile Dysfunction"
+          }
+        ]
+      },
+      "valueCodeableConcept": {
+        "coding": [
+          {
+            "system": "urn:form-examples:qrisk3-cardiovascular-disease-risk-score:erectile_dysfunction",
+            "code": "yes",
+            "display": "Yes"
+          }
+        ]
+      }
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:qrisk3-cardiovascular-disease-risk-score",
+            "code": "on_atypical_antipsychotics",
+            "display": "On Atypical Antipsychotics"
+          }
+        ]
+      },
+      "valueCodeableConcept": {
+        "coding": [
+          {
+            "system": "urn:form-examples:qrisk3-cardiovascular-disease-risk-score:on_atypical_antipsychotics",
+            "code": "yes",
+            "display": "Yes"
+          }
+        ]
+      }
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:qrisk3-cardiovascular-disease-risk-score",
+            "code": "on_corticosteroids",
+            "display": "On Corticosteroids"
+          }
+        ]
+      },
+      "valueCodeableConcept": {
+        "coding": [
+          {
+            "system": "urn:form-examples:qrisk3-cardiovascular-disease-risk-score:on_corticosteroids",
+            "code": "yes",
+            "display": "Yes"
+          }
+        ]
+      }
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:qrisk3-cardiovascular-disease-risk-score",
+            "code": "has_established_cvd",
+            "display": "Has Established Cvd"
+          }
+        ]
+      },
+      "valueCodeableConcept": {
+        "coding": [
+          {
+            "system": "urn:form-examples:qrisk3-cardiovascular-disease-risk-score:has_established_cvd",
+            "code": "yes",
+            "display": "Yes"
+          }
+        ]
+      }
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:qrisk3-cardiovascular-disease-risk-score",
+            "code": "has_familial_hypercholesterolaemia",
+            "display": "Has Familial Hypercholesterolaemia"
+          }
+        ]
+      },
+      "valueCodeableConcept": {
+        "coding": [
+          {
+            "system": "urn:form-examples:qrisk3-cardiovascular-disease-risk-score:has_familial_hypercholesterolaemia",
+            "code": "yes",
+            "display": "Yes"
+          }
+        ]
+      }
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:qrisk3-cardiovascular-disease-risk-score",
+            "code": "clinical_note",
+            "display": "Clinical Note"
+          }
+        ]
+      },
+      "valueString": ""
+    }
+  ]
+}

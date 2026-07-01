@@ -1,0 +1,167 @@
+# Generated from sql/. Do not edit by hand.
+# SOURCE: fluid_balance_chart_entry
+openapi: 3.1.0
+info:
+  title: Fluid Balance Chart — FluidBalanceChartEntry
+  version: 1.0.0
+  description: Timed intake and output line items for a fluid balance chart; cascades from the parent chart.
+paths:
+  /fluid-balance-chart-entries:
+    get:
+      summary: List FluidBalanceChartEntry records
+      operationId: listFluidBalanceChartEntry
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of FluidBalanceChartEntry records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/FluidBalanceChartEntry"
+    post:
+      summary: Create a new FluidBalanceChartEntry
+      operationId: createFluidBalanceChartEntry
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/FluidBalanceChartEntry"
+      responses:
+        "201":
+          description: The newly created FluidBalanceChartEntry
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/FluidBalanceChartEntry"
+        "400":
+          description: Validation error
+  /fluid-balance-chart-entries/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one FluidBalanceChartEntry by id
+      operationId: getFluidBalanceChartEntry
+      responses:
+        "200":
+          description: The requested FluidBalanceChartEntry
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/FluidBalanceChartEntry"
+        "404":
+          description: FluidBalanceChartEntry not found
+    patch:
+      summary: Update an existing FluidBalanceChartEntry
+      operationId: updateFluidBalanceChartEntry
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/FluidBalanceChartEntry"
+      responses:
+        "200":
+          description: The updated FluidBalanceChartEntry
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/FluidBalanceChartEntry"
+        "404":
+          description: FluidBalanceChartEntry not found
+    delete:
+      summary: Soft-delete a FluidBalanceChartEntry
+      operationId: deleteFluidBalanceChartEntry
+      responses:
+        "204":
+          description: FluidBalanceChartEntry deleted
+        "404":
+          description: FluidBalanceChartEntry not found
+components:
+  schemas:
+    FluidBalanceChartEntry:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was most recently updated.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was soft-deleted.
+        fluid_balance_chart_id:
+          type: string
+          format: uuid
+          description: Foreign key to the parent fluid balance chart.
+        entry_at:
+          type: string
+          format: date-time
+          description: Date and time the volume was recorded.
+        direction:
+          type: string
+          enum:
+            - intake
+            - output
+            - ""
+          description: "Direction of the volume: intake or output."
+        category:
+          type: string
+          enum:
+            - oral
+            - iv
+            - enteral
+            - blood-products
+            - other-intake
+            - urine
+            - drains
+            - vomit-ng
+            - stool
+            - insensible-other
+            - ""
+          description: "Fluid category: intake (oral, iv, enteral, blood-products, other-intake) or output (urine, drains, vomit-ng, stool, insensible-other)."
+        description:
+          type: string
+          description: Optional route or free-text description of the recorded volume.
+        volume_ml:
+          type: number
+          format: double
+          description: Recorded volume in millilitres; null when not recorded.
+      required:
+        - created_at
+        - updated_at
+        - fluid_balance_chart_id
+        - direction
+        - category
+        - description
+      description: Timed intake and output line items for a fluid balance chart; cascades from the parent chart.

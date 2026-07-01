@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE nursing_care_plan SYSTEM "nursing_care_plan.dtd">
+<nursing_care_plan>
+<id>770e8400-e29b-41d4-a716-446655440002</id>
+<created_at>2026-04-09T10:00:00Z</created_at>
+<updated_at>2026-04-09T10:00:00Z</updated_at>
+<deleted_at>2026-04-09T10:00:00Z</deleted_at>
+<patient_id>550e8400-e29b-41d4-a716-446655440000</patient_id>
+<clinician_id>660e8400-e29b-41d4-a716-446655440001</clinician_id>
+<nurse_name>Example</nurse_name>
+<nurse_role>registered-nurse</nurse_role>
+<nmc_number></nmc_number>
+<authored_at>2026-04-09T10:00:00Z</authored_at>
+<care_setting>ward</care_setting>
+<plan_type>admission</plan_type>
+<model_used>roper-logan-tierney</model_used>
+<patient_identifier></patient_identifier>
+<patient_name>Example</patient_name>
+<date_of_birth>1965-06-15</date_of_birth>
+<sex>female</sex>
+<ward_location>Example location</ward_location>
+<handover_note></handover_note>
+<review_date>2026-01-15</review_date>
+<falls_risk_done>yes</falls_risk_done>
+<falls_risk_level>low</falls_risk_level>
+<falls_risk_assessed_on>2026-01-15</falls_risk_assessed_on>
+<falls_risk_actioned>yes</falls_risk_actioned>
+<pressure_ulcer_risk_done>yes</pressure_ulcer_risk_done>
+<pressure_ulcer_risk_level>low</pressure_ulcer_risk_level>
+<pressure_ulcer_risk_assessed_on>2026-01-15</pressure_ulcer_risk_assessed_on>
+<pressure_ulcer_risk_actioned>yes</pressure_ulcer_risk_actioned>
+<vte_risk_done>yes</vte_risk_done>
+<vte_risk_level>low</vte_risk_level>
+<vte_risk_assessed_on>2026-01-15</vte_risk_assessed_on>
+<vte_risk_actioned>yes</vte_risk_actioned>
+<nutrition_risk_done>yes</nutrition_risk_done>
+<nutrition_risk_level>low</nutrition_risk_level>
+<nutrition_risk_assessed_on>2026-01-15</nutrition_risk_assessed_on>
+<nutrition_risk_actioned>yes</nutrition_risk_actioned>
+</nursing_care_plan>

@@ -1,0 +1,13 @@
+<!ELEMENT cage_alcohol_questionnaire_grade (id,created_at,updated_at,deleted_at,cage_alcohol_questionnaire_id,cut_down_point,annoyed_point,guilty_point,eye_opener_point,total_score,interpretation,graded_at)>
+<!ELEMENT id (#PCDATA)>
+<!ELEMENT created_at (#PCDATA)>
+<!ELEMENT updated_at (#PCDATA)>
+<!ELEMENT deleted_at (#PCDATA)>
+<!ELEMENT cage_alcohol_questionnaire_id (#PCDATA)>
+<!ELEMENT cut_down_point (#PCDATA)>
+<!ELEMENT annoyed_point (#PCDATA)>
+<!ELEMENT guilty_point (#PCDATA)>
+<!ELEMENT eye_opener_point (#PCDATA)>
+<!ELEMENT total_score (#PCDATA)>
+<!ELEMENT interpretation (#PCDATA)>
+<!ELEMENT graded_at (#PCDATA)>

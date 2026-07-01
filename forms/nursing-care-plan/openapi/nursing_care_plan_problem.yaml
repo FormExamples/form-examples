@@ -1,0 +1,195 @@
+# Generated from sql/. Do not edit by hand.
+# SOURCE: nursing_care_plan_problem
+openapi: 3.1.0
+info:
+  title: Nursing Care Plan — NursingCarePlanProblem
+  version: 1.0.0
+  description: "Nursing problems / needs identified for a care plan: RLT activity category, actual/potential, assessment data, linked risk, and inline evaluation."
+paths:
+  /nursing-care-plan-problems:
+    get:
+      summary: List NursingCarePlanProblem records
+      operationId: listNursingCarePlanProblem
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of NursingCarePlanProblem records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/NursingCarePlanProblem"
+    post:
+      summary: Create a new NursingCarePlanProblem
+      operationId: createNursingCarePlanProblem
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/NursingCarePlanProblem"
+      responses:
+        "201":
+          description: The newly created NursingCarePlanProblem
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/NursingCarePlanProblem"
+        "400":
+          description: Validation error
+  /nursing-care-plan-problems/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one NursingCarePlanProblem by id
+      operationId: getNursingCarePlanProblem
+      responses:
+        "200":
+          description: The requested NursingCarePlanProblem
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/NursingCarePlanProblem"
+        "404":
+          description: NursingCarePlanProblem not found
+    patch:
+      summary: Update an existing NursingCarePlanProblem
+      operationId: updateNursingCarePlanProblem
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/NursingCarePlanProblem"
+      responses:
+        "200":
+          description: The updated NursingCarePlanProblem
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/NursingCarePlanProblem"
+        "404":
+          description: NursingCarePlanProblem not found
+    delete:
+      summary: Soft-delete a NursingCarePlanProblem
+      operationId: deleteNursingCarePlanProblem
+      responses:
+        "204":
+          description: NursingCarePlanProblem deleted
+        "404":
+          description: NursingCarePlanProblem not found
+components:
+  schemas:
+    NursingCarePlanProblem:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was most recently updated.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was soft-deleted.
+        nursing_care_plan_id:
+          type: string
+          format: uuid
+          description: Foreign key to the parent nursing care plan.
+        problem_statement:
+          type: string
+          description: The identified nursing problem or need.
+        adl_category:
+          type: string
+          enum:
+            - safe-environment
+            - communication
+            - breathing
+            - eating-drinking
+            - elimination
+            - personal-cleansing-dressing
+            - body-temperature
+            - mobilising
+            - working-playing
+            - expressing-sexuality
+            - sleeping
+            - dying
+            - other
+            - ""
+          description: Roper-Logan-Tierney activity of living the problem relates to (e.g. breathing, eating-drinking, mobilising, elimination).
+        actual_or_potential:
+          type: string
+          enum:
+            - actual
+            - potential
+            - ""
+          description: Whether the problem is actual (present) or potential (at risk).
+        assessment_data:
+          type: string
+          description: Supporting observation or assessment data for the problem.
+        linked_risk:
+          type: string
+          enum:
+            - none
+            - falls
+            - pressure-ulcer
+            - vte
+            - nutrition
+            - ""
+          description: "Referenced risk assessment linked to this problem: none, falls, pressure-ulcer, vte, or nutrition."
+        evaluation_note:
+          type: string
+          description: Inline evaluation note (the E of ADPIE).
+        goal_met:
+          type: string
+          enum:
+            - met
+            - partially-met
+            - not-met
+            - not-evaluated
+            - ""
+          description: "Overall evaluation of whether the problem goal was met: met, partially-met, not-met, or not-evaluated."
+        next_review_date:
+          type: string
+          format: date
+          description: Date this problem is next due for review.
+      required:
+        - created_at
+        - updated_at
+        - nursing_care_plan_id
+        - problem_statement
+        - adl_category
+        - actual_or_potential
+        - assessment_data
+        - linked_risk
+        - evaluation_note
+        - goal_met
+      description: "Nursing problems / needs identified for a care plan: RLT activity category, actual/potential, assessment data, linked risk, and inline evaluation."

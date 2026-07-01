@@ -1,0 +1,11 @@
+<!ELEMENT breast_screening_grade (id,created_at,updated_at,deleted_at,breast_screening_id,eligibility_status,result_class,management_action,status,graded_at)>
+<!ELEMENT id (#PCDATA)>
+<!ELEMENT created_at (#PCDATA)>
+<!ELEMENT updated_at (#PCDATA)>
+<!ELEMENT deleted_at (#PCDATA)>
+<!ELEMENT breast_screening_id (#PCDATA)>
+<!ELEMENT eligibility_status (#PCDATA)>
+<!ELEMENT result_class (#PCDATA)>
+<!ELEMENT management_action (#PCDATA)>
+<!ELEMENT status (#PCDATA)>
+<!ELEMENT graded_at (#PCDATA)>

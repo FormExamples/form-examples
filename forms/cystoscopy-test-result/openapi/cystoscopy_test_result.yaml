@@ -1,0 +1,268 @@
+# Generated from sql/. Do not edit by hand.
+# SOURCE: cystoscopy_test_result
+openapi: 3.1.0
+info:
+  title: Cystoscopy Test Result — CystoscopyTestResult
+  version: 1.0.0
+  description: Cystoscopy (bladder endoscopy) result (report). Captures the performed procedure and anaesthesia, the clinical history, the narrative and structured endoscopic findings, tumour / lesion detail, any complication, the impression, recommended follow-up, and critical-result communication. This is the source-of-truth record that the four-axis interpretation grade is computed from.
+paths:
+  /cystoscopy-test-results:
+    get:
+      summary: List CystoscopyTestResult records
+      operationId: listCystoscopyTestResult
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of CystoscopyTestResult records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/CystoscopyTestResult"
+    post:
+      summary: Create a new CystoscopyTestResult
+      operationId: createCystoscopyTestResult
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CystoscopyTestResult"
+      responses:
+        "201":
+          description: The newly created CystoscopyTestResult
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CystoscopyTestResult"
+        "400":
+          description: Validation error
+  /cystoscopy-test-results/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one CystoscopyTestResult by id
+      operationId: getCystoscopyTestResult
+      responses:
+        "200":
+          description: The requested CystoscopyTestResult
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CystoscopyTestResult"
+        "404":
+          description: CystoscopyTestResult not found
+    patch:
+      summary: Update an existing CystoscopyTestResult
+      operationId: updateCystoscopyTestResult
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CystoscopyTestResult"
+      responses:
+        "200":
+          description: The updated CystoscopyTestResult
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CystoscopyTestResult"
+        "404":
+          description: CystoscopyTestResult not found
+    delete:
+      summary: Soft-delete a CystoscopyTestResult
+      operationId: deleteCystoscopyTestResult
+      responses:
+        "204":
+          description: CystoscopyTestResult deleted
+        "404":
+          description: CystoscopyTestResult not found
+components:
+  schemas:
+    CystoscopyTestResult:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was updated most-recently.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was deleted a.k.a. soft-removed.
+        patient_id:
+          type: string
+          format: uuid
+          description: Foreign key to the patient.
+        clinician_id:
+          type: string
+          format: uuid
+          description: Foreign key to the operating / reporting clinician (cystoscopy operator).
+        originating_request_reference:
+          type: string
+          maxLength: 255
+          description: Free-text reference linking this report back to the originating cystoscopy request (referral).
+        report_status:
+          type: string
+          enum:
+            - preliminary
+            - final
+            - amended
+            - cancelled
+            - ""
+          description: "Report lifecycle status: preliminary, final, amended, cancelled."
+        performed_date:
+          type: string
+          format: date
+          description: Date the cystoscopy was performed.
+        reported_date:
+          type: string
+          format: date
+          description: Date the report was authored / signed.
+        procedure:
+          type: string
+          enum:
+            - flexible-cystoscopy
+            - rigid-cystoscopy
+            - other
+            - ""
+          description: "Performed procedure: flexible-cystoscopy, rigid-cystoscopy, other."
+        anaesthesia:
+          type: string
+          enum:
+            - local
+            - sedation
+            - general
+            - ""
+          description: "Anaesthesia used: local, sedation, general."
+        clinical_history:
+          type: string
+          maxLength: 1000
+          description: Clinical history and the question the examination was performed to answer.
+        bladder_tumour:
+          type: boolean
+          description: Whether a bladder tumour or suspicious lesion was seen.
+        inflammation_cystitis:
+          type: boolean
+          description: Whether inflammation / cystitis was seen.
+        bladder_stones:
+          type: boolean
+          description: Whether bladder stones (calculi) were seen.
+        urethral_stricture:
+          type: boolean
+          description: Whether a urethral stricture was seen.
+        trabeculation:
+          type: boolean
+          description: Whether bladder-wall trabeculation was seen.
+        prostatic_enlargement:
+          type: boolean
+          description: Whether prostatic enlargement / obstruction was seen.
+        normal_examination:
+          type: boolean
+          description: Whether the examination was entirely normal with no abnormality seen.
+        tumour_size_mm:
+          type: number
+          format: double
+          description: Largest tumour / lesion size in millimetres, for categorisation and surveillance.
+        tumour_appearance:
+          type: string
+          enum:
+            - papillary
+            - solid
+            - flat
+            - not-applicable
+            - ""
+          description: "Tumour appearance: papillary, solid, flat, not-applicable."
+        biopsy_taken:
+          type: boolean
+          description: Whether a biopsy / sample was taken at the time of the procedure.
+        complication:
+          type: string
+          enum:
+            - none
+            - bleeding
+            - perforation
+            - uti
+            - other
+            - ""
+          description: "Procedure complication: none, bleeding, perforation, uti, other."
+        findings_narrative:
+          type: string
+          maxLength: 2000
+          description: Narrative description of the endoscopic findings (the body of the report).
+        impression:
+          type: string
+          maxLength: 2000
+          description: Summary impression / conclusion answering the clinical question.
+        reporting_category:
+          type: string
+          maxLength: 50
+          description: Free-text structured-reporting category label (e.g. an EAU NMIBC risk group or a suspected-tumour category).
+        recommended_follow_up:
+          type: string
+          maxLength: 1000
+          description: "Recommended follow-up: surveillance cystoscopy interval, referral, or further management."
+        critical_result_communicated:
+          type: boolean
+          description: Whether a critical or unexpected significant result (e.g. suspected bladder tumour) was communicated directly to the referrer / patient.
+        reported_to:
+          type: string
+          maxLength: 500
+          description: Who the critical / urgent result was communicated to, with date and time if applicable.
+      required:
+        - created_at
+        - updated_at
+        - patient_id
+        - clinician_id
+        - originating_request_reference
+        - report_status
+        - procedure
+        - anaesthesia
+        - clinical_history
+        - bladder_tumour
+        - inflammation_cystitis
+        - bladder_stones
+        - urethral_stricture
+        - trabeculation
+        - prostatic_enlargement
+        - normal_examination
+        - tumour_appearance
+        - biopsy_taken
+        - complication
+        - findings_narrative
+        - impression
+        - reporting_category
+        - recommended_follow_up
+        - critical_result_communicated
+        - reported_to
+      description: Cystoscopy (bladder endoscopy) result (report). Captures the performed procedure and anaesthesia, the clinical history, the narrative and structured endoscopic findings, tumour / lesion detail, any complication, the impression, recommended follow-up, and critical-result communication. This is the source-of-truth record that the four-axis interpretation grade is computed from.

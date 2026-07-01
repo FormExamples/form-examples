@@ -1,0 +1,158 @@
+# Generated from sql/. Do not edit by hand.
+# SOURCE: history_and_physical_examination_grade_rule
+openapi: 3.1.0
+info:
+  title: History And Physical Examination — HistoryAndPhysicalExaminationGradeRule
+  version: 1.0.0
+  description: "Audit trail of every completeness rule that fired during grading: section, category, and description."
+paths:
+  /history-and-physical-examination-grade-rules:
+    get:
+      summary: List HistoryAndPhysicalExaminationGradeRule records
+      operationId: listHistoryAndPhysicalExaminationGradeRule
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of HistoryAndPhysicalExaminationGradeRule records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/HistoryAndPhysicalExaminationGradeRule"
+    post:
+      summary: Create a new HistoryAndPhysicalExaminationGradeRule
+      operationId: createHistoryAndPhysicalExaminationGradeRule
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/HistoryAndPhysicalExaminationGradeRule"
+      responses:
+        "201":
+          description: The newly created HistoryAndPhysicalExaminationGradeRule
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/HistoryAndPhysicalExaminationGradeRule"
+        "400":
+          description: Validation error
+  /history-and-physical-examination-grade-rules/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one HistoryAndPhysicalExaminationGradeRule by id
+      operationId: getHistoryAndPhysicalExaminationGradeRule
+      responses:
+        "200":
+          description: The requested HistoryAndPhysicalExaminationGradeRule
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/HistoryAndPhysicalExaminationGradeRule"
+        "404":
+          description: HistoryAndPhysicalExaminationGradeRule not found
+    patch:
+      summary: Update an existing HistoryAndPhysicalExaminationGradeRule
+      operationId: updateHistoryAndPhysicalExaminationGradeRule
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/HistoryAndPhysicalExaminationGradeRule"
+      responses:
+        "200":
+          description: The updated HistoryAndPhysicalExaminationGradeRule
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/HistoryAndPhysicalExaminationGradeRule"
+        "404":
+          description: HistoryAndPhysicalExaminationGradeRule not found
+    delete:
+      summary: Soft-delete a HistoryAndPhysicalExaminationGradeRule
+      operationId: deleteHistoryAndPhysicalExaminationGradeRule
+      responses:
+        "204":
+          description: HistoryAndPhysicalExaminationGradeRule deleted
+        "404":
+          description: HistoryAndPhysicalExaminationGradeRule not found
+components:
+  schemas:
+    HistoryAndPhysicalExaminationGradeRule:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was most recently updated.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was soft-deleted.
+        history_and_physical_examination_grade_id:
+          type: string
+          format: uuid
+          description: Foreign key to the parent grade.
+        rule_id:
+          type: string
+          maxLength: 40
+          description: Stable rule identifier (e.g. R-HISTORY-PRESENT-01).
+        section:
+          type: string
+          enum:
+            - history
+            - examination
+            - vitals
+            - impression
+            - plan
+            - completeness
+            - ""
+          description: "Clerking section the rule concerns: history, examination, vitals, impression, plan, or completeness."
+        category:
+          type: string
+          maxLength: 50
+          description: Subject category (e.g. required-component, blocking-flag).
+        description:
+          type: string
+          maxLength: 500
+          description: Human-readable description of why the rule fired.
+      required:
+        - created_at
+        - updated_at
+        - history_and_physical_examination_grade_id
+        - rule_id
+        - section
+        - category
+        - description
+      description: "Audit trail of every completeness rule that fired during grading: section, category, and description."

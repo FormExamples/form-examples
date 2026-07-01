@@ -1,0 +1,296 @@
+# Generated from sql/. Do not edit by hand.
+# SOURCE: waterlow_pressure_ulcer_risk_assessment
+openapi: 3.1.0
+info:
+  title: Waterlow Pressure Ulcer Risk Assessment — WaterlowPressureUlcerRiskAssessment
+  version: 1.0.0
+  description: "Main Waterlow pressure ulcer risk assessment record: assessment context, patient identification, the five weighted core category inputs, the four special-risk group inputs, and the existing-pressure-damage flag."
+paths:
+  /waterlow-pressure-ulcer-risk-assessments:
+    get:
+      summary: List WaterlowPressureUlcerRiskAssessment records
+      operationId: listWaterlowPressureUlcerRiskAssessment
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of WaterlowPressureUlcerRiskAssessment records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/WaterlowPressureUlcerRiskAssessment"
+    post:
+      summary: Create a new WaterlowPressureUlcerRiskAssessment
+      operationId: createWaterlowPressureUlcerRiskAssessment
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/WaterlowPressureUlcerRiskAssessment"
+      responses:
+        "201":
+          description: The newly created WaterlowPressureUlcerRiskAssessment
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/WaterlowPressureUlcerRiskAssessment"
+        "400":
+          description: Validation error
+  /waterlow-pressure-ulcer-risk-assessments/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one WaterlowPressureUlcerRiskAssessment by id
+      operationId: getWaterlowPressureUlcerRiskAssessment
+      responses:
+        "200":
+          description: The requested WaterlowPressureUlcerRiskAssessment
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/WaterlowPressureUlcerRiskAssessment"
+        "404":
+          description: WaterlowPressureUlcerRiskAssessment not found
+    patch:
+      summary: Update an existing WaterlowPressureUlcerRiskAssessment
+      operationId: updateWaterlowPressureUlcerRiskAssessment
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/WaterlowPressureUlcerRiskAssessment"
+      responses:
+        "200":
+          description: The updated WaterlowPressureUlcerRiskAssessment
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/WaterlowPressureUlcerRiskAssessment"
+        "404":
+          description: WaterlowPressureUlcerRiskAssessment not found
+    delete:
+      summary: Soft-delete a WaterlowPressureUlcerRiskAssessment
+      operationId: deleteWaterlowPressureUlcerRiskAssessment
+      responses:
+        "204":
+          description: WaterlowPressureUlcerRiskAssessment deleted
+        "404":
+          description: WaterlowPressureUlcerRiskAssessment not found
+components:
+  schemas:
+    WaterlowPressureUlcerRiskAssessment:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was updated most-recently.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was deleted a.k.a. soft-removed.
+        patient_id:
+          type: string
+          format: uuid
+          description: Foreign key to the patient being assessed (delete restricted).
+        clinician_id:
+          type: string
+          format: uuid
+          description: Foreign key to the assessing clinician (optional; delete restricted).
+        nurse_name:
+          type: string
+          maxLength: 255
+          description: Name of the assessing nurse as recorded on the assessment.
+        nurse_role:
+          type: string
+          enum:
+            - registered-nurse
+            - healthcare-assistant
+            - tissue-viability
+            - other
+            - ""
+          description: "Role of the assessing nurse: registered-nurse, healthcare-assistant, tissue-viability, or other."
+        assessed_at:
+          type: string
+          format: date-time
+          description: Date and time the assessment was performed.
+        care_setting:
+          type: string
+          enum:
+            - acute-ward
+            - community
+            - care-home
+            - hospice
+            - other
+            - ""
+          description: "Care setting: acute-ward, community, care-home, hospice, or other."
+        assessment_reason:
+          type: string
+          enum:
+            - admission
+            - routine
+            - change-in-condition
+            - ""
+          description: "Reason the assessment was performed: admission, routine, or change-in-condition."
+        patient_identifier:
+          type: string
+          maxLength: 100
+          description: Local patient identifier as recorded on the assessment.
+        age_band:
+          type: string
+          enum:
+            - 14-49
+            - 50-64
+            - 65-74
+            - 75-80
+            - 81-plus
+            - ""
+          description: "Adult age band scoring the age category: 14-49, 50-64, 65-74, 75-80, or 81-plus."
+        sex:
+          type: string
+          enum:
+            - female
+            - male
+            - ""
+          description: "Patient sex scoring the sex category: female or male."
+        build_weight_for_height:
+          type: string
+          enum:
+            - average
+            - above-average
+            - obese
+            - below-average
+            - ""
+          description: "Core category — build / weight for height (BMI proxy): average, above-average, obese, or below-average."
+        skin_type:
+          type: string
+          enum:
+            - healthy
+            - tissue-paper
+            - dry
+            - oedematous
+            - clammy-pyrexial
+            - discoloured
+            - broken
+            - ""
+          description: "Core category — skin type / visual risk area: healthy, tissue-paper, dry, oedematous, clammy-pyrexial, discoloured, or broken."
+        continence:
+          type: string
+          enum:
+            - complete-catheterised
+            - incontinent-urine
+            - incontinent-faeces
+            - doubly-incontinent
+            - ""
+          description: "Core category — continence: complete-catheterised, incontinent-urine, incontinent-faeces, or doubly-incontinent."
+        mobility:
+          type: string
+          enum:
+            - fully-mobile
+            - restless
+            - apathetic
+            - restricted
+            - bedbound
+            - chairbound
+            - ""
+          description: "Core category — mobility: fully-mobile, restless, apathetic, restricted, bedbound, or chairbound."
+        tissue_malnutrition:
+          type: string
+          enum:
+            - none
+            - smoking
+            - anaemia
+            - peripheral-vascular-disease
+            - single-organ-failure
+            - multiple-organ-failure
+            - terminal-cachexia
+            - ""
+          description: "Special-risk group — tissue malnutrition: none, smoking, anaemia, peripheral-vascular-disease, single-organ-failure, multiple-organ-failure, or terminal-cachexia."
+        neurological_deficit:
+          type: string
+          enum:
+            - none
+            - mild
+            - moderate
+            - severe
+            - ""
+          description: "Special-risk group — neurological deficit: none, mild, moderate, or severe."
+        major_surgery_trauma:
+          type: string
+          enum:
+            - none
+            - orthopaedic-spinal
+            - on-table-over-2h
+            - on-table-over-6h
+            - ""
+          description: "Special-risk group — major surgery or trauma: none, orthopaedic-spinal, on-table-over-2h, or on-table-over-6h."
+        medication:
+          type: string
+          enum:
+            - none
+            - high-dose-steroids-cytotoxics-anti-inflammatory
+            - ""
+          description: "Special-risk group — medication: none, or high-dose-steroids-cytotoxics-anti-inflammatory."
+        existing_pressure_damage:
+          type: string
+          enum:
+            - "no"
+            - "yes"
+            - ""
+          description: "Whether existing pressure damage is present: no or yes. Drives an existing-pressure-damage flag."
+        clinical_note:
+          type: string
+          description: Free-text clinical note recorded with the assessment.
+      required:
+        - created_at
+        - updated_at
+        - patient_id
+        - nurse_name
+        - nurse_role
+        - care_setting
+        - assessment_reason
+        - patient_identifier
+        - age_band
+        - sex
+        - build_weight_for_height
+        - skin_type
+        - continence
+        - mobility
+        - tissue_malnutrition
+        - neurological_deficit
+        - major_surgery_trauma
+        - medication
+        - existing_pressure_damage
+        - clinical_note
+      description: "Main Waterlow pressure ulcer risk assessment record: assessment context, patient identification, the five weighted core category inputs, the four special-risk group inputs, and the existing-pressure-damage flag."

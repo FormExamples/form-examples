@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE pulmonary_embolism_rule_out_criteria SYSTEM "pulmonary_embolism_rule_out_criteria.dtd">
+<pulmonary_embolism_rule_out_criteria>
+<id>770e8400-e29b-41d4-a716-446655440002</id>
+<created_at>2026-04-09T10:00:00Z</created_at>
+<updated_at>2026-04-09T10:00:00Z</updated_at>
+<deleted_at>2026-04-09T10:00:00Z</deleted_at>
+<patient_id>550e8400-e29b-41d4-a716-446655440000</patient_id>
+<clinician_id>660e8400-e29b-41d4-a716-446655440001</clinician_id>
+<status>draft</status>
+<patient_identifier></patient_identifier>
+<assessed_at>2026-04-09T10:00:00Z</assessed_at>
+<care_setting>emergency-department</care_setting>
+<presenting_complaint></presenting_complaint>
+<age>0.0</age>
+<heart_rate>72.0</heart_rate>
+<oxygen_saturation>1.5</oxygen_saturation>
+<pretest_probability>low</pretest_probability>
+<age_under_50>yes</age_under_50>
+<heart_rate_under_100>yes</heart_rate_under_100>
+<spo2_at_least_95>yes</spo2_at_least_95>
+<no_unilateral_leg_swelling>yes</no_unilateral_leg_swelling>
+<no_haemoptysis>yes</no_haemoptysis>
+<no_recent_surgery_trauma>yes</no_recent_surgery_trauma>
+<no_prior_dvt_pe>yes</no_prior_dvt_pe>
+<no_oestrogen_use>yes</no_oestrogen_use>
+<clinical_notes>Example text.</clinical_notes>
+</pulmonary_embolism_rule_out_criteria>

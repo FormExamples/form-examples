@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE epilepsy_review_grade SYSTEM "epilepsy_review_grade.dtd">
+<epilepsy_review_grade>
+<id>880e8400-e29b-41d4-a716-446655440003</id>
+<created_at>2026-04-09T10:00:00Z</created_at>
+<updated_at>2026-04-09T10:00:00Z</updated_at>
+<deleted_at>2026-04-09T10:00:00Z</deleted_at>
+<epilepsy_review_id>770e8400-e29b-41d4-a716-446655440002</epilepsy_review_id>
+<seizure_control>seizure-free</seizure_control>
+<review_status>complete</review_status>
+<completeness_score>5</completeness_score>
+<graded_at>2026-04-09T10:00:00Z</graded_at>
+</epilepsy_review_grade>

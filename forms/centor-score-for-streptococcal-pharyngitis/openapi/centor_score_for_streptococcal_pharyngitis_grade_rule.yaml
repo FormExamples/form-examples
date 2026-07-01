@@ -1,0 +1,161 @@
+# Generated from sql/. Do not edit by hand.
+# SOURCE: centor_score_for_streptococcal_pharyngitis_grade_rule
+openapi: 3.1.0
+info:
+  title: Centor Score For Streptococcal Pharyngitis — CentorScoreForStreptococcalPharyngitisGradeRule
+  version: 1.0.0
+  description: "Audit trail of every grading rule that fired during Centor / McIsaac computation: criterion, points contributed, category, and description."
+paths:
+  /centor-score-for-streptococcal-pharyngitis-grade-rules:
+    get:
+      summary: List CentorScoreForStreptococcalPharyngitisGradeRule records
+      operationId: listCentorScoreForStreptococcalPharyngitisGradeRule
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of CentorScoreForStreptococcalPharyngitisGradeRule records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/CentorScoreForStreptococcalPharyngitisGradeRule"
+    post:
+      summary: Create a new CentorScoreForStreptococcalPharyngitisGradeRule
+      operationId: createCentorScoreForStreptococcalPharyngitisGradeRule
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CentorScoreForStreptococcalPharyngitisGradeRule"
+      responses:
+        "201":
+          description: The newly created CentorScoreForStreptococcalPharyngitisGradeRule
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CentorScoreForStreptococcalPharyngitisGradeRule"
+        "400":
+          description: Validation error
+  /centor-score-for-streptococcal-pharyngitis-grade-rules/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one CentorScoreForStreptococcalPharyngitisGradeRule by id
+      operationId: getCentorScoreForStreptococcalPharyngitisGradeRule
+      responses:
+        "200":
+          description: The requested CentorScoreForStreptococcalPharyngitisGradeRule
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CentorScoreForStreptococcalPharyngitisGradeRule"
+        "404":
+          description: CentorScoreForStreptococcalPharyngitisGradeRule not found
+    patch:
+      summary: Update an existing CentorScoreForStreptococcalPharyngitisGradeRule
+      operationId: updateCentorScoreForStreptococcalPharyngitisGradeRule
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CentorScoreForStreptococcalPharyngitisGradeRule"
+      responses:
+        "200":
+          description: The updated CentorScoreForStreptococcalPharyngitisGradeRule
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CentorScoreForStreptococcalPharyngitisGradeRule"
+        "404":
+          description: CentorScoreForStreptococcalPharyngitisGradeRule not found
+    delete:
+      summary: Soft-delete a CentorScoreForStreptococcalPharyngitisGradeRule
+      operationId: deleteCentorScoreForStreptococcalPharyngitisGradeRule
+      responses:
+        "204":
+          description: CentorScoreForStreptococcalPharyngitisGradeRule deleted
+        "404":
+          description: CentorScoreForStreptococcalPharyngitisGradeRule not found
+components:
+  schemas:
+    CentorScoreForStreptococcalPharyngitisGradeRule:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was most recently updated.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was soft-deleted.
+        centor_score_for_streptococcal_pharyngitis_grade_id:
+          type: string
+          format: uuid
+          description: Foreign key to the parent grade.
+        rule_id:
+          type: string
+          maxLength: 40
+          description: Stable rule identifier (e.g. R-FEVER-01).
+        criterion:
+          type: string
+          enum:
+            - tonsillar-exudate
+            - tender-nodes
+            - fever
+            - cough-absent
+            - age-modifier
+            - band
+          description: "Scored criterion the rule belongs to: tonsillar-exudate, tender-nodes, fever, cough-absent, age-modifier, or band."
+        points:
+          type: integer
+          format: int32
+          description: Points contributed by this rule (0 or 1 per criterion; -1..+1 for the age modifier).
+        category:
+          type: string
+          maxLength: 50
+          description: Subject category (e.g. criterion-point, age-band, risk-band).
+        description:
+          type: string
+          maxLength: 500
+          description: Human-readable description of why the rule fired.
+      required:
+        - created_at
+        - updated_at
+        - centor_score_for_streptococcal_pharyngitis_grade_id
+        - rule_id
+        - criterion
+        - category
+        - description
+      description: "Audit trail of every grading rule that fired during Centor / McIsaac computation: criterion, points contributed, category, and description."

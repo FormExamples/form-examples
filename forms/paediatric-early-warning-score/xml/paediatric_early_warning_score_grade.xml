@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE paediatric_early_warning_score_grade SYSTEM "paediatric_early_warning_score_grade.dtd">
+<paediatric_early_warning_score_grade>
+<id>880e8400-e29b-41d4-a716-446655440003</id>
+<created_at>2026-04-09T10:00:00Z</created_at>
+<updated_at>2026-04-09T10:00:00Z</updated_at>
+<deleted_at>2026-04-09T10:00:00Z</deleted_at>
+<paediatric_early_warning_score_id>770e8400-e29b-41d4-a716-446655440002</paediatric_early_warning_score_id>
+<aggregate_score>5</aggregate_score>
+<max_parameter_score>5</max_parameter_score>
+<respiratory_rate_score>5</respiratory_rate_score>
+<respiratory_effort_score>5</respiratory_effort_score>
+<oxygen_saturation_score>5</oxygen_saturation_score>
+<supplemental_oxygen_score>5</supplemental_oxygen_score>
+<heart_rate_score>5</heart_rate_score>
+<capillary_refill_score>5</capillary_refill_score>
+<consciousness_score>5</consciousness_score>
+<risk_band>routine</risk_band>
+<single_parameter_trigger>yes</single_parameter_trigger>
+<concern_trigger>yes</concern_trigger>
+<monitoring_frequency>twice daily</monitoring_frequency>
+<graded_at>2026-04-09T10:00:00Z</graded_at>
+</paediatric_early_warning_score_grade>

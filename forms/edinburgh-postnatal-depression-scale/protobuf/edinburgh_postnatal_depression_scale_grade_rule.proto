@@ -1,0 +1,29 @@
+// Generated from sql/. Do not edit by hand.
+// SOURCE: edinburgh_postnatal_depression_scale_grade_rule
+
+syntax = "proto3";
+
+package form_examples.edinburgh_postnatal_depression_scale;
+
+enum EdinburghPostnatalDepressionScaleGradeRuleParameterEnum {
+  PARAMETER_UNSPECIFIED = 0;
+  PARAMETER_ITEM = 1;  // item
+  PARAMETER_TOTAL = 2;  // total
+  PARAMETER_BAND = 3;  // band
+  PARAMETER_SELF_HARM = 4;  // self-harm
+  PARAMETER_ANXIETY_SUBSCALE = 5;  // anxiety-subscale
+  PARAMETER_OTHER = 6;  // other
+}
+
+message EdinburghPostnatalDepressionScaleGradeRule {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string edinburgh_postnatal_depression_scale_grade_id = 5;  // UUID — uuid
+  string rule_id = 6;  // VARCHAR(40) — max 40 chars
+  EdinburghPostnatalDepressionScaleGradeRuleParameterEnum parameter = 7;  // VARCHAR(20)
+  int32 points = 8;  // INT
+  string category = 9;  // VARCHAR(50) — max 50 chars
+  string description = 10;  // VARCHAR(500) — max 500 chars
+}

@@ -1,0 +1,172 @@
+# Generated from sql/. Do not edit by hand.
+# SOURCE: genetic_test_result_grade_flag
+openapi: 3.1.0
+info:
+  title: Genetic Test Result — GeneticTestResultGradeFlag
+  version: 1.0.0
+  description: Safety-critical flags that fire independently of the four axes, with priority and a suggested action for the reporting / referring team.
+paths:
+  /genetic-test-result-grade-flags:
+    get:
+      summary: List GeneticTestResultGradeFlag records
+      operationId: listGeneticTestResultGradeFlag
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of GeneticTestResultGradeFlag records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/GeneticTestResultGradeFlag"
+    post:
+      summary: Create a new GeneticTestResultGradeFlag
+      operationId: createGeneticTestResultGradeFlag
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/GeneticTestResultGradeFlag"
+      responses:
+        "201":
+          description: The newly created GeneticTestResultGradeFlag
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GeneticTestResultGradeFlag"
+        "400":
+          description: Validation error
+  /genetic-test-result-grade-flags/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one GeneticTestResultGradeFlag by id
+      operationId: getGeneticTestResultGradeFlag
+      responses:
+        "200":
+          description: The requested GeneticTestResultGradeFlag
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GeneticTestResultGradeFlag"
+        "404":
+          description: GeneticTestResultGradeFlag not found
+    patch:
+      summary: Update an existing GeneticTestResultGradeFlag
+      operationId: updateGeneticTestResultGradeFlag
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/GeneticTestResultGradeFlag"
+      responses:
+        "200":
+          description: The updated GeneticTestResultGradeFlag
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GeneticTestResultGradeFlag"
+        "404":
+          description: GeneticTestResultGradeFlag not found
+    delete:
+      summary: Soft-delete a GeneticTestResultGradeFlag
+      operationId: deleteGeneticTestResultGradeFlag
+      responses:
+        "204":
+          description: GeneticTestResultGradeFlag deleted
+        "404":
+          description: GeneticTestResultGradeFlag not found
+components:
+  schemas:
+    GeneticTestResultGradeFlag:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was updated most-recently.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was deleted a.k.a. soft-removed.
+        genetic_test_result_grade_id:
+          type: string
+          format: uuid
+          description: Foreign key to the parent grade.
+        flag_id:
+          type: string
+          maxLength: 50
+          description: Stable flag identifier (e.g. F-PATHOGENIC-VARIANT-001).
+        category:
+          type: string
+          enum:
+            - critical-result-alert
+            - pathogenic-variant-found
+            - secondary-finding
+            - variant-uncertain-significance
+            - cascade-testing-recommended
+            - discrepancy-with-request
+            - abnormal-requiring-action
+            - urgent-referral
+            - missing-impression
+            - missing-classification
+            - other
+            - ""
+          description: Flag category.
+        priority:
+          type: string
+          enum:
+            - low
+            - medium
+            - high
+            - ""
+          description: "Priority: low, medium, high."
+        description:
+          type: string
+          maxLength: 500
+          description: Human-readable description of what fired the flag.
+        suggested_action:
+          type: string
+          maxLength: 500
+          description: "Suggested clinical action (e.g. \"communicate actionable result to referrer and arrange cascade testing\")."
+      required:
+        - created_at
+        - updated_at
+        - genetic_test_result_grade_id
+        - flag_id
+        - category
+        - priority
+        - description
+        - suggested_action
+      description: Safety-critical flags that fire independently of the four axes, with priority and a suggested action for the reporting / referring team.

@@ -1,0 +1,102 @@
+// Generated from sql/. Do not edit by hand.
+// SOURCE: pulmonary_embolism_rule_out_criteria
+
+syntax = "proto3";
+
+package form_examples.pulmonary_embolism_rule_out_criteria;
+
+enum PulmonaryEmbolismRuleOutCriteriaStatusEnum {
+  STATUS_UNSPECIFIED = 0;
+  STATUS_DRAFT = 1;  // draft
+  STATUS_SUBMITTED = 2;  // submitted
+  STATUS_AMENDED = 3;  // amended
+  STATUS_SIGNED = 4;  // signed
+}
+
+enum PulmonaryEmbolismRuleOutCriteriaCareSettingEnum {
+  CARESETTING_UNSPECIFIED = 0;
+  CARESETTING_EMERGENCY_DEPARTMENT = 1;  // emergency-department
+  CARESETTING_ACUTE_AMBULATORY = 2;  // acute-ambulatory
+  CARESETTING_OTHER = 3;  // other
+}
+
+enum PulmonaryEmbolismRuleOutCriteriaPretestProbabilityEnum {
+  PRETESTPROBABILITY_UNSPECIFIED = 0;
+  PRETESTPROBABILITY_LOW = 1;  // low
+  PRETESTPROBABILITY_NOT_LOW = 2;  // not-low
+}
+
+enum PulmonaryEmbolismRuleOutCriteriaAgeUnder50Enum {
+  AGEUNDER50_UNSPECIFIED = 0;
+  AGEUNDER50_YES = 1;  // yes
+  AGEUNDER50_NO = 2;  // no
+}
+
+enum PulmonaryEmbolismRuleOutCriteriaHeartRateUnder100Enum {
+  HEARTRATEUNDER100_UNSPECIFIED = 0;
+  HEARTRATEUNDER100_YES = 1;  // yes
+  HEARTRATEUNDER100_NO = 2;  // no
+}
+
+enum PulmonaryEmbolismRuleOutCriteriaSpo2AtLeast95Enum {
+  SPO2ATLEAST95_UNSPECIFIED = 0;
+  SPO2ATLEAST95_YES = 1;  // yes
+  SPO2ATLEAST95_NO = 2;  // no
+}
+
+enum PulmonaryEmbolismRuleOutCriteriaNoUnilateralLegSwellingEnum {
+  NOUNILATERALLEGSWELLING_UNSPECIFIED = 0;
+  NOUNILATERALLEGSWELLING_YES = 1;  // yes
+  NOUNILATERALLEGSWELLING_NO = 2;  // no
+}
+
+enum PulmonaryEmbolismRuleOutCriteriaNoHaemoptysisEnum {
+  NOHAEMOPTYSIS_UNSPECIFIED = 0;
+  NOHAEMOPTYSIS_YES = 1;  // yes
+  NOHAEMOPTYSIS_NO = 2;  // no
+}
+
+enum PulmonaryEmbolismRuleOutCriteriaNoRecentSurgeryTraumaEnum {
+  NORECENTSURGERYTRAUMA_UNSPECIFIED = 0;
+  NORECENTSURGERYTRAUMA_YES = 1;  // yes
+  NORECENTSURGERYTRAUMA_NO = 2;  // no
+}
+
+enum PulmonaryEmbolismRuleOutCriteriaNoPriorDvtPeEnum {
+  NOPRIORDVTPE_UNSPECIFIED = 0;
+  NOPRIORDVTPE_YES = 1;  // yes
+  NOPRIORDVTPE_NO = 2;  // no
+}
+
+enum PulmonaryEmbolismRuleOutCriteriaNoOestrogenUseEnum {
+  NOOESTROGENUSE_UNSPECIFIED = 0;
+  NOOESTROGENUSE_YES = 1;  // yes
+  NOOESTROGENUSE_NO = 2;  // no
+}
+
+message PulmonaryEmbolismRuleOutCriteria {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string patient_id = 5;  // UUID — uuid
+  string clinician_id = 6;  // UUID — uuid
+  PulmonaryEmbolismRuleOutCriteriaStatusEnum status = 7;  // VARCHAR(20)
+  string patient_identifier = 8;  // VARCHAR(64) — max 64 chars
+  string assessed_at = 9;  // TIMESTAMPTZ — iso 8601
+  PulmonaryEmbolismRuleOutCriteriaCareSettingEnum care_setting = 10;  // VARCHAR(30)
+  string presenting_complaint = 11;  // TEXT
+  double age = 12;  // NUMERIC(3,0) — numeric(3,0)
+  double heart_rate = 13;  // NUMERIC(3,0) — numeric(3,0)
+  double oxygen_saturation = 14;  // NUMERIC(3,0) — numeric(3,0)
+  PulmonaryEmbolismRuleOutCriteriaPretestProbabilityEnum pretest_probability = 15;  // VARCHAR(10)
+  PulmonaryEmbolismRuleOutCriteriaAgeUnder50Enum age_under_50 = 16;  // VARCHAR(5)
+  PulmonaryEmbolismRuleOutCriteriaHeartRateUnder100Enum heart_rate_under_100 = 17;  // VARCHAR(5)
+  PulmonaryEmbolismRuleOutCriteriaSpo2AtLeast95Enum spo2_at_least_95 = 18;  // VARCHAR(5)
+  PulmonaryEmbolismRuleOutCriteriaNoUnilateralLegSwellingEnum no_unilateral_leg_swelling = 19;  // VARCHAR(5)
+  PulmonaryEmbolismRuleOutCriteriaNoHaemoptysisEnum no_haemoptysis = 20;  // VARCHAR(5)
+  PulmonaryEmbolismRuleOutCriteriaNoRecentSurgeryTraumaEnum no_recent_surgery_trauma = 21;  // VARCHAR(5)
+  PulmonaryEmbolismRuleOutCriteriaNoPriorDvtPeEnum no_prior_dvt_pe = 22;  // VARCHAR(5)
+  PulmonaryEmbolismRuleOutCriteriaNoOestrogenUseEnum no_oestrogen_use = 23;  // VARCHAR(5)
+  string clinical_notes = 24;  // TEXT
+}

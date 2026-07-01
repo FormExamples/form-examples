@@ -1,0 +1,39 @@
+// Generated from sql/. Do not edit by hand.
+// SOURCE: child_pugh_score_grade
+
+syntax = "proto3";
+
+package form_examples.child_pugh_score;
+
+enum ChildPughScoreGradeChildPughClassEnum {
+  CHILDPUGHCLASS_UNSPECIFIED = 0;
+  CHILDPUGHCLASS_A = 1;  // A
+  CHILDPUGHCLASS_B = 2;  // B
+  CHILDPUGHCLASS_C = 3;  // C
+}
+
+enum ChildPughScoreGradeSurgicalRiskEnum {
+  SURGICALRISK_UNSPECIFIED = 0;
+  SURGICALRISK_LOW = 1;  // low
+  SURGICALRISK_MODERATE = 2;  // moderate
+  SURGICALRISK_HIGH = 3;  // high
+}
+
+message ChildPughScoreGrade {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string child_pugh_score_id = 5;  // UUID — uuid
+  int32 bilirubin_points = 6;  // INT
+  int32 albumin_points = 7;  // INT
+  int32 coagulation_points = 8;  // INT
+  int32 ascites_points = 9;  // INT
+  int32 encephalopathy_points = 10;  // INT
+  int32 total_score = 11;  // INT
+  ChildPughScoreGradeChildPughClassEnum child_pugh_class = 12;  // VARCHAR(1)
+  string one_year_survival = 13;  // VARCHAR(20) — max 20 chars
+  string two_year_survival = 14;  // VARCHAR(20) — max 20 chars
+  ChildPughScoreGradeSurgicalRiskEnum surgical_risk = 15;  // VARCHAR(10)
+  string graded_at = 16;  // TIMESTAMPTZ — iso 8601
+}

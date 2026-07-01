@@ -1,0 +1,28 @@
+// Generated from sql/. Do not edit by hand.
+// SOURCE: four_a_test_for_delirium_grade_rule
+
+syntax = "proto3";
+
+package form_examples.four_a_test_for_delirium;
+
+enum FourATestForDeliriumGradeRuleItemEnum {
+  ITEM_UNSPECIFIED = 0;
+  ITEM_ALERTNESS = 1;  // alertness
+  ITEM_AMT4 = 2;  // amt4
+  ITEM_ATTENTION = 3;  // attention
+  ITEM_ACUTE_CHANGE = 4;  // acute-change
+  ITEM_BAND = 5;  // band
+}
+
+message FourATestForDeliriumGradeRule {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string four_a_test_for_delirium_grade_id = 5;  // UUID — uuid
+  string rule_id = 6;  // VARCHAR(40) — max 40 chars
+  FourATestForDeliriumGradeRuleItemEnum item = 7;  // VARCHAR(20)
+  int32 points = 8;  // INT
+  string category = 9;  // VARCHAR(50) — max 50 chars
+  string description = 10;  // VARCHAR(500) — max 500 chars
+}

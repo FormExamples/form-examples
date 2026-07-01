@@ -1,0 +1,53 @@
+// Generated from sql/. Do not edit by hand.
+// SOURCE: breast_screening_grade
+
+syntax = "proto3";
+
+package form_examples.breast_screening;
+
+enum BreastScreeningGradeEligibilityStatusEnum {
+  ELIGIBILITYSTATUS_UNSPECIFIED = 0;
+  ELIGIBILITYSTATUS_ELIGIBLE = 1;  // eligible
+  ELIGIBILITYSTATUS_OUTSIDE_AGE_RANGE = 2;  // outside-age-range
+  ELIGIBILITYSTATUS_HIGHER_RISK_SURVEILLANCE = 3;  // higher-risk-surveillance
+  ELIGIBILITYSTATUS_SYMPTOMATIC_REFERRAL = 4;  // symptomatic-referral
+}
+
+enum BreastScreeningGradeResultClassEnum {
+  RESULTCLASS_UNSPECIFIED = 0;
+  RESULTCLASS_ROUTINE = 1;  // routine
+  RESULTCLASS_REPEAT = 2;  // repeat
+  RESULTCLASS_ASSESSMENT = 3;  // assessment
+  RESULTCLASS_URGENT = 4;  // urgent
+  RESULTCLASS_REFERRAL = 5;  // referral
+  RESULTCLASS_INCOMPLETE = 6;  // incomplete
+}
+
+enum BreastScreeningGradeManagementActionEnum {
+  MANAGEMENTACTION_UNSPECIFIED = 0;
+  MANAGEMENTACTION_ROUTINE_RECALL = 1;  // routine-recall
+  MANAGEMENTACTION_TECHNICAL_REPEAT = 2;  // technical-repeat
+  MANAGEMENTACTION_RECALL_TO_ASSESSMENT_CLINIC = 3;  // recall-to-assessment-clinic
+  MANAGEMENTACTION_SHORT_INTERVAL_FOLLOW_UP = 4;  // short-interval-follow-up
+  MANAGEMENTACTION_URGENT_BREAST_CLINIC = 5;  // urgent-breast-clinic
+  MANAGEMENTACTION_SYMPTOMATIC_PATHWAY_REFERRAL = 6;  // symptomatic-pathway-referral
+}
+
+enum BreastScreeningGradeStatusEnum {
+  STATUS_UNSPECIFIED = 0;
+  STATUS_COMPLETE = 1;  // complete
+  STATUS_INCOMPLETE = 2;  // incomplete
+}
+
+message BreastScreeningGrade {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string breast_screening_id = 5;  // UUID — uuid
+  BreastScreeningGradeEligibilityStatusEnum eligibility_status = 6;  // VARCHAR(30)
+  BreastScreeningGradeResultClassEnum result_class = 7;  // VARCHAR(15)
+  BreastScreeningGradeManagementActionEnum management_action = 8;  // VARCHAR(30)
+  BreastScreeningGradeStatusEnum status = 9;  // VARCHAR(15)
+  string graded_at = 10;  // TIMESTAMPTZ — iso 8601
+}

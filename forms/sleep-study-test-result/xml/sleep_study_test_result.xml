@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sleep_study_test_result SYSTEM "sleep_study_test_result.dtd">
+<sleep_study_test_result>
+<id>770e8400-e29b-41d4-a716-446655440002</id>
+<created_at>2026-04-09T10:00:00Z</created_at>
+<updated_at>2026-04-09T10:00:00Z</updated_at>
+<deleted_at>2026-04-09T10:00:00Z</deleted_at>
+<patient_id>550e8400-e29b-41d4-a716-446655440000</patient_id>
+<clinician_id>660e8400-e29b-41d4-a716-446655440001</clinician_id>
+<originating_request_reference></originating_request_reference>
+<report_status>preliminary</report_status>
+<performed_date>2026-01-15</performed_date>
+<reported_date>2026-01-15</reported_date>
+<study_type>home-sleep-apnoea-test</study_type>
+<study_adequacy>adequate</study_adequacy>
+<clinical_history>Example text.</clinical_history>
+<comparison_with_previous></comparison_with_previous>
+<total_recording_time_hours>0.0</total_recording_time_hours>
+<total_sleep_time_hours>0.0</total_sleep_time_hours>
+<apnoea_hypopnoea_index>0.0</apnoea_hypopnoea_index>
+<oxygen_desaturation_index>1.5</oxygen_desaturation_index>
+<minimum_spo2_percent>50.0</minimum_spo2_percent>
+<time_below_90_percent_spo2>50.0</time_below_90_percent_spo2>
+<mean_heart_rate_bpm>1</mean_heart_rate_bpm>
+<osa_severity>none</osa_severity>
+<obstructive_sleep_apnoea>true</obstructive_sleep_apnoea>
+<central_sleep_apnoea>true</central_sleep_apnoea>
+<periodic_limb_movements>true</periodic_limb_movements>
+<nocturnal_hypoventilation>true</nocturnal_hypoventilation>
+<significant_desaturation>true</significant_desaturation>
+<normal_study>true</normal_study>
+<findings_narrative>Example text.</findings_narrative>
+<impression>Example text.</impression>
+<reporting_category>General</reporting_category>
+<recommended_follow_up></recommended_follow_up>
+<critical_result_communicated>true</critical_result_communicated>
+<reported_to></reported_to>
+</sleep_study_test_result>
