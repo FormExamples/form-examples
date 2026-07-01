@@ -9,7 +9,8 @@ engine, and generates a clinical report with flagged issues.
 ## Spec-driven development
 
 The system spec lives in [`spec.md`](spec.md) at the repo root. Each form
-has its own domain spec in [`forms/<slug>/spec.md`](forms/AGENTS.md).
+has its own domain spec directory [`forms/<slug>/spec/`](forms/AGENTS.md)
+(`index.md` + a `README.md` symlink).
 Update specs before changing code; regenerate derived artefacts after
 schema changes. See `spec.md` §10 for the spec-driven workflow.
 
@@ -57,7 +58,7 @@ schema changes. See `spec.md` §10 for the spec-driven workflow.
 
 ### Specs
 
-- `bin/generate-spec.py [--check] [<slug>…]` — generate per-form `spec.md` (living domain spec) from each form's `index.md`
+- `bin/generate-spec.py [--check] [<slug>…]` — generate per-form `spec/index.md` (living domain spec) from each form's `index.md`
 
 ## Form index
 
@@ -75,7 +76,7 @@ forms/<slug>/
   README.md -> index.md                            # Symlink for GitHub rendering
   AGENTS.md                                        # Agent instructions for this form
   CLAUDE.md                                        # Claude Code project instructions
-  spec.md                                          # Living spec for spec-driven development
+  spec/                                            # Living spec directory (index.md) for spec-driven development
   plan.md                                          # Implementation plan and status
   tasks.md                                         # Task tracking
   CHANGELOG.md                                     # Keep-a-Changelog 1.1.0 + SemVer per form
@@ -86,10 +87,8 @@ forms/<slug>/
   fhir-r5/                                         # FHIR HL7 R5 JSON per SQL entity (generated)
   protobuf/                                        # Protocol Buffers .proto schemas per SQL entity (generated)
   openapi/                                         # OpenAPI 3.1 .yaml specifications per SQL entity (generated)
-  front-end-form-with-html/                        # Questionnaire (HTML + Lily Design System)
-  front-end-form-with-svelte/                      # Questionnaire (SvelteKit)
-  front-end-dashboard-with-html/                   # Dashboard (HTML + table)
-  front-end-dashboard-with-svelte/                 # Dashboard (SvelteKit + SVAR Grid)
+  front-end-with-html/                             # Questionnaire + dashboard (HTML + Lily Design System; index.html + dashboard.html)
+  front-end-with-svelte/                           # Questionnaire + dashboard (SvelteKit + Lily; RESTful /<plural>/ list + /<plural>/[id] form)
   back-end-with-loco/                              # Back-end Rust JSON API (axum + Loco; no Tera/HTMX/Alpine/CSS)
   back-end-with-loco-setup                         # Scaffold generator (executable shell script of `cargo loco generate scaffold --api` calls; generated)
 ```
@@ -97,7 +96,7 @@ forms/<slug>/
 ## Standard workflow for a new form
 
 1. `bin/create-form <slug>` — scaffold the directory.
-2. Fill in `forms/<slug>/index.md`, `spec.md`, `AGENTS.md`, `plan.md`,
+2. Fill in `forms/<slug>/index.md`, `spec/index.md`, `AGENTS.md`, `plan.md`,
    `tasks.md` with the design spec.
 3. Author SQL migrations in `forms/<slug>/sql-migrations/`.
 4. Regenerate derived representations:
@@ -160,7 +159,7 @@ bin/lily-html-refactor --check --all  # Lily HTML contract drift detector
 bin/lily-sync --check                 # Lily HTML spec-snapshot drift detector
 bin/lily-svelte-refactor --check --all # Lily Svelte contract drift detector
 bin/lily-svelte-sync --check          # Lily Svelte spec-snapshot drift detector
-bin/generate-spec.py --check          # Per-form spec.md drift detector
+bin/generate-spec.py --check          # Per-form spec/index.md drift detector
 bin/generate-changelog-and-examples.py --check # CHANGELOG + examples/ drift detector
 bin/loco-config-refactor --check --all # Loco background-queue + observability drift detector
 ```

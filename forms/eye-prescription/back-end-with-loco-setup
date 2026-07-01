@@ -8,11 +8,15 @@ createdb --host=localhost --port=5432 --username=loco --owner=loco "${form_snake
 createdb --host=localhost --port=5432 --username=loco --owner=loco "${form_snake_case}_test" || :
 createdb --host=localhost --port=5432 --username=loco --owner=loco "${form_snake_case}_production" || :
 
-loco new --name "${form_kebab_case}" --db postgres --bg async --assets none
-cd "${form_kebab_case}"
+loco new --name "${form_snake_case}" --db postgres --bg async --assets none -a
+cd "${form_snake_case}"
+
+# Pin time to a version compatible with cookie 0.18.1 (a fresh loco
+# starter otherwise resolves time 0.3.52, which fails to compile).
+cargo update -p time --precise 0.3.47
 
 cargo loco generate scaffold patient \
-    deleted_at:ts \
+    deleted_at:tstz \
     name:string! \
     birth_date:date! \
     sex:string! \
@@ -25,7 +29,7 @@ cargo loco generate scaffold patient \
     --api
 
 cargo loco generate scaffold prescriber \
-    deleted_at:ts \
+    deleted_at:tstz \
     name:text! \
     goc_registration_number:string!^ \
     role:string! \
@@ -38,7 +42,7 @@ cargo loco generate scaffold prescriber \
     --api
 
 cargo loco generate scaffold eye_prescription \
-    deleted_at:ts \
+    deleted_at:tstz \
     patient:references \
     prescriber:references \
     status:string! \
@@ -53,7 +57,7 @@ cargo loco generate scaffold eye_prescription \
     --api
 
 cargo loco generate scaffold eye_prescription_eye \
-    deleted_at:ts \
+    deleted_at:tstz \
     eye_prescription:references \
     eye:string! \
     sphere_diopters:double \
@@ -68,7 +72,7 @@ cargo loco generate scaffold eye_prescription_eye \
     --api
 
 cargo loco generate scaffold eye_prescription_visual_acuity \
-    deleted_at:ts \
+    deleted_at:tstz \
     eye_prescription:references \
     distance_right_unaided:string! \
     distance_left_unaided:string! \
@@ -88,7 +92,7 @@ cargo loco generate scaffold eye_prescription_visual_acuity \
     --api
 
 cargo loco generate scaffold eye_prescription_pupillary_distance \
-    deleted_at:ts \
+    deleted_at:tstz \
     eye_prescription:references \
     distance_total_mm:double \
     distance_right_mm:double \
@@ -101,7 +105,7 @@ cargo loco generate scaffold eye_prescription_pupillary_distance \
     --api
 
 cargo loco generate scaffold eye_prescription_lens_recommendation \
-    deleted_at:ts \
+    deleted_at:tstz \
     eye_prescription:references \
     lens_type:string! \
     material:string! \
@@ -120,7 +124,7 @@ cargo loco generate scaffold eye_prescription_lens_recommendation \
     --api
 
 cargo loco generate scaffold eye_prescription_ocular_health_finding \
-    deleted_at:ts \
+    deleted_at:tstz \
     eye_prescription:references \
     slit_lamp_right:text! \
     slit_lamp_left:text! \
@@ -140,7 +144,7 @@ cargo loco generate scaffold eye_prescription_ocular_health_finding \
     --api
 
 cargo loco generate scaffold eye_prescription_grade \
-    deleted_at:ts \
+    deleted_at:tstz \
     eye_prescription:references \
     right_eye_sphere_class:string! \
     right_eye_cylinder_class:string! \
@@ -155,12 +159,12 @@ cargo loco generate scaffold eye_prescription_grade \
     override_reason:string! \
     follow_up_interval_months:int \
     prescriber_notes:text! \
-    signed_at:ts \
-    graded_at:ts! \
+    signed_at:tstz \
+    graded_at:tstz! \
     --api
 
 cargo loco generate scaffold eye_prescription_grade_rule \
-    deleted_at:ts \
+    deleted_at:tstz \
     eye_prescription_grade:references \
     rule_id:string! \
     instrument:string! \
@@ -171,7 +175,7 @@ cargo loco generate scaffold eye_prescription_grade_rule \
     --api
 
 cargo loco generate scaffold eye_prescription_grade_flag \
-    deleted_at:ts \
+    deleted_at:tstz \
     eye_prescription_grade:references \
     flag_id:string! \
     category:string! \

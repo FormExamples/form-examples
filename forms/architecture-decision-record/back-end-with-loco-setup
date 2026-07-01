@@ -8,11 +8,15 @@ createdb --host=localhost --port=5432 --username=loco --owner=loco "${form_snake
 createdb --host=localhost --port=5432 --username=loco --owner=loco "${form_snake_case}_test" || :
 createdb --host=localhost --port=5432 --username=loco --owner=loco "${form_snake_case}_production" || :
 
-loco new --name "${form_kebab_case}" --db postgres --bg async --assets none
-cd "${form_kebab_case}"
+loco new --name "${form_snake_case}" --db postgres --bg async --assets none -a
+cd "${form_snake_case}"
+
+# Pin time to a version compatible with cookie 0.18.1 (a fresh loco
+# starter otherwise resolves time 0.3.52, which fails to compile).
+cargo update -p time --precise 0.3.47
 
 cargo loco generate scaffold author \
-    deleted_at:ts \
+    deleted_at:tstz \
     name:text! \
     email:text! \
     phone:text! \
@@ -22,7 +26,7 @@ cargo loco generate scaffold author \
     --api
 
 cargo loco generate scaffold organization \
-    deleted_at:ts \
+    deleted_at:tstz \
     name:text! \
     legal_name:text! \
     industry:text! \
@@ -32,7 +36,7 @@ cargo loco generate scaffold organization \
     --api
 
 cargo loco generate scaffold architecture_decision_record \
-    deleted_at:ts \
+    deleted_at:tstz \
     author:references \
     organization:references \
     slug:text! \
@@ -52,7 +56,7 @@ cargo loco generate scaffold architecture_decision_record \
     related_artifacts:text! \
     related_principles:text! \
     signed_off_by:text! \
-    signed_off_at:ts \
+    signed_off_at:tstz \
     --api
 
 cargo loco generate scaffold architecture_decision_record_position \
@@ -68,7 +72,7 @@ cargo loco generate scaffold architecture_decision_record_position \
 
 cargo loco generate scaffold architecture_decision_record_note \
     architecture_decision_record:references \
-    noted_at:ts! \
+    noted_at:tstz! \
     noted_by:text! \
     body:text! \
     --api

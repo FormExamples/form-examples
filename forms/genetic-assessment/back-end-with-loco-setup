@@ -8,11 +8,15 @@ createdb --host=localhost --port=5432 --username=loco --owner=loco "${form_snake
 createdb --host=localhost --port=5432 --username=loco --owner=loco "${form_snake_case}_test" || :
 createdb --host=localhost --port=5432 --username=loco --owner=loco "${form_snake_case}_production" || :
 
-loco new --name "${form_kebab_case}" --db postgres --bg async --assets none
-cd "${form_kebab_case}"
+loco new --name "${form_snake_case}" --db postgres --bg async --assets none -a
+cd "${form_snake_case}"
+
+# Pin time to a version compatible with cookie 0.18.1 (a fresh loco
+# starter otherwise resolves time 0.3.52, which fails to compile).
+cargo update -p time --precise 0.3.47
 
 cargo loco generate scaffold patient \
-    deleted_at:ts \
+    deleted_at:tstz \
     name:string! \
     birth_date:date! \
     email:text \
@@ -30,7 +34,7 @@ cargo loco generate scaffold patient \
     --api
 
 cargo loco generate scaffold clinician \
-    deleted_at:ts \
+    deleted_at:tstz \
     name:text! \
     email:text \
     phone:text \
@@ -44,76 +48,14 @@ cargo loco generate scaffold clinician \
     --api
 
 cargo loco generate scaffold assessment \
-    deleted_at:ts \
+    deleted_at:tstz \
     patient:references \
     status:string! \
     --api
 
-cargo loco generate scaffold grade \
-    deleted_at:ts \
+cargo loco generate scaffold assessment_cancer_history \
+    deleted_at:tstz \
     assessment:references \
-    risk_level:string! \
-    total_risk_score:int! \
-    cancer_genetics_score:int! \
-    cardiovascular_genetics_score:int! \
-    neurogenetics_score:int! \
-    reproductive_genetics_score:int! \
-    graded_at:ts! \
-    --api
-
-cargo loco generate scaffold grading_fired_rule \
-    deleted_at:ts \
-    grade:references \
-    rule_id:string! \
-    category:string! \
-    description:text! \
-    risk_level:string! \
-    --api
-
-cargo loco generate scaffold grading_additional_flag \
-    deleted_at:ts \
-    grade:references \
-    flag_id:string! \
-    category:string! \
-    message:text! \
-    priority:string! \
-    --api
-
-cargo loco generate scaffold grade \
-    deleted_at:ts \
-    assessment:references \
-    risk_level:string! \
-    total_risk_score:int! \
-    cancer_genetics_score:int! \
-    cardiovascular_genetics_score:int! \
-    neurogenetics_score:int! \
-    reproductive_genetics_score:int! \
-    graded_at:ts! \
-    --api
-
-cargo loco generate scaffold grading_fired_rule \
-    deleted_at:ts \
-    grade:references \
-    rule_id:string! \
-    category:string! \
-    description:text! \
-    risk_level:string! \
-    --api
-
-cargo loco generate scaffold grading_additional_flag \
-    deleted_at:ts \
-    grade:references \
-    flag_id:string! \
-    category:string! \
-    message:text! \
-    priority:string! \
-    --api
-
-cargo loco generate scaffold assessment \
-    deleted_at:ts \
-    patient:references \
-    status:string! \
-    cancer_history_deleted_at:ts \
     family_cancer_history:string! \
     multiple_family_cancers:string! \
     early_onset_cancer:string! \
@@ -123,14 +65,21 @@ cargo loco generate scaffold assessment \
     known_cancer_syndrome:string! \
     cancer_syndrome_details:text! \
     cancer_risk_score:int \
-    cancer_history_item_deleted_at:ts \
+    --api
+
+cargo loco generate scaffold assessment_cancer_history_item \
+    deleted_at:tstz \
     cancer_history:references \
     relative_relationship:string! \
     cancer_type:string! \
     age_at_diagnosis:int \
     outcome:string! \
     sort_order:int! \
-    family_pedigree_deleted_at:ts \
+    --api
+
+cargo loco generate scaffold assessment_family_pedigree \
+    deleted_at:tstz \
+    assessment:references \
     total_first_degree_relatives:int \
     total_second_degree_relatives:int \
     consanguinity_in_family:string! \
@@ -138,7 +87,10 @@ cargo loco generate scaffold assessment \
     adoption_status:string! \
     pedigree_notes:text! \
     three_generation_pedigree_drawn:string! \
-    family_pedigree_member_deleted_at:ts \
+    --api
+
+cargo loco generate scaffold assessment_family_pedigree_member \
+    deleted_at:tstz \
     family_pedigree:references \
     relationship:string! \
     sex:string! \
@@ -147,46 +99,11 @@ cargo loco generate scaffold assessment \
     age_at_death:int \
     cause_of_death:string! \
     medical_conditions:text! \
-    family_pedigree_member_sort_order:int! \
-    cancer_history_deleted_at:ts \
-    cancer_history_family_cancer_history:string! \
-    cancer_history_multiple_family_cancers:string! \
-    cancer_history_early_onset_cancer:string! \
-    cancer_history_bilateral_cancer:string! \
-    cancer_history_rare_tumour_types:string! \
-    cancer_history_rare_tumour_details:text! \
-    cancer_history_known_cancer_syndrome:string! \
-    cancer_history_cancer_syndrome_details:text! \
-    cancer_history_cancer_risk_score:int \
-    cancer_history_item_deleted_at:ts \
-    cancer_history_item_cancer_history:references \
-    cancer_history_item_relative_relationship:string! \
-    cancer_history_item_cancer_type:string! \
-    cancer_history_item_age_at_diagnosis:int \
-    cancer_history_item_outcome:string! \
-    cancer_history_item_sort_order:int! \
-    family_pedigree_deleted_at:ts \
-    family_pedigree_total_first_degree_relatives:int \
-    family_pedigree_total_second_degree_relatives:int \
-    family_pedigree_consanguinity_in_family:string! \
-    family_pedigree_consanguinity_details:text! \
-    family_pedigree_adoption_status:string! \
-    family_pedigree_pedigree_notes:text! \
-    family_pedigree_three_generation_pedigree_drawn:string! \
-    family_pedigree_member_deleted_at:ts \
-    family_pedigree_member_family_pedigree:references \
-    family_pedigree_member_relationship:string! \
-    family_pedigree_member_sex:string! \
-    family_pedigree_member_age:int \
-    family_pedigree_member_alive:string! \
-    family_pedigree_member_age_at_death:int \
-    family_pedigree_member_cause_of_death:string! \
-    family_pedigree_member_medical_conditions:text! \
-    family_pedigree_member_sort_order:int! \
+    sort_order:int! \
     --api
 
 cargo loco generate scaffold grade \
-    deleted_at:ts \
+    deleted_at:tstz \
     assessment:references \
     risk_level:string! \
     total_risk_score:int! \
@@ -194,73 +111,11 @@ cargo loco generate scaffold grade \
     cardiovascular_genetics_score:int! \
     neurogenetics_score:int! \
     reproductive_genetics_score:int! \
-    graded_at:ts! \
+    graded_at:tstz! \
     --api
 
 cargo loco generate scaffold grading_fired_rule \
-    deleted_at:ts \
-    grade:references \
-    rule_id:string! \
-    category:string! \
-    description:text! \
-    risk_level:string! \
-    --api
-
-cargo loco generate scaffold patient \
-    deleted_at:ts \
-    name:string! \
-    birth_date:date! \
-    email:text \
-    phone:text \
-    postal_address_as_full_text:text \
-    country_as_iso_3166_1_alpha_2:string \
-    postcode:text \
-    united_kingdom_nhs_number:string^ \
-    waist_as_cm:double \
-    height_as_cm:double \
-    weight_as_kg:double \
-    body_mass_index:double \
-    waist_height_ratio:double \
-    vo2_max:double \
-    --api
-
-cargo loco generate scaffold clinician \
-    deleted_at:ts \
-    name:text! \
-    email:text \
-    phone:text \
-    postal_address_as_full_text:text \
-    country_as_iso_3166_1_alpha_2:string \
-    postcode:text \
-    role:text! \
-    registration_body:text! \
-    registration_number:text! \
-    united_kingdom_nhs_number:string^ \
-    --api
-
-cargo loco generate scaffold grading_additional_flag \
-    deleted_at:ts \
-    grade:references \
-    flag_id:string! \
-    category:string! \
-    message:text! \
-    priority:string! \
-    --api
-
-cargo loco generate scaffold grade \
-    deleted_at:ts \
-    assessment:references \
-    risk_level:string! \
-    total_risk_score:int! \
-    cancer_genetics_score:int! \
-    cardiovascular_genetics_score:int! \
-    neurogenetics_score:int! \
-    reproductive_genetics_score:int! \
-    graded_at:ts! \
-    --api
-
-cargo loco generate scaffold grading_fired_rule \
-    deleted_at:ts \
+    deleted_at:tstz \
     grade:references \
     rule_id:string! \
     category:string! \
@@ -269,7 +124,7 @@ cargo loco generate scaffold grading_fired_rule \
     --api
 
 cargo loco generate scaffold grading_additional_flag \
-    deleted_at:ts \
+    deleted_at:tstz \
     grade:references \
     flag_id:string! \
     category:string! \

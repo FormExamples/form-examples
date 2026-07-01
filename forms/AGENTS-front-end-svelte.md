@@ -1,7 +1,80 @@
-# AGENTS — `front-end-*-with-svelte/` (Lily Design System Svelte headless)
+# AGENTS — `front-end-with-svelte/` (Lily Design System Svelte headless)
 
-Conventions for every form's `front-end-form-with-svelte/` and
-`front-end-dashboard-with-svelte/` subprojects. Applies to all 133 forms.
+Conventions for every form's **consolidated** `front-end-with-svelte/`
+subproject — a single SvelteKit app that serves both the input form (wizard)
+and the dashboard from **RESTful, resource-oriented routes**, sharing one
+scoring engine (`src/lib/engine/`) and UI component set
+(`src/lib/components/ui/`). This consolidated single-app layout is the **gold
+standard**. Legacy forms may still have split `front-end-form-with-svelte/` +
+`front-end-dashboard-with-svelte/` directories, or the older flat
+`+page.svelte` (wizard) / `dashboard/+page.svelte` layout; migrate them to the
+RESTful routes below when touched.
+
+## Routing (RESTful, gold standard)
+
+The URL space is the form's **collection**, named by the **pluralised slug**
+(the form's resource name — e.g. `cardiology-requests`,
+`cardiology-responses`, `medical-operation-notes`). Collections use a plural
+base directory; individual items use a dynamic `[id]` route parameter:
+
+| Route file | URL | Purpose |
+| --- | --- | --- |
+| `src/routes/<plural>/+page.svelte` | `/<plural>/` | **Dashboard** — the collection list |
+| `src/routes/<plural>/[id]/+page.svelte` | `/<plural>/[id]` | **Input form** — the single-page wizard for one item (`[id] = new` to create) |
+| `src/routes/<plural>/[id]/report/+page.svelte` | `/<plural>/[id]/report` | Report view for one item (PDF via `report/pdf/+server.ts`) |
+| `src/routes/+page.svelte` | `/` | **Welcome page** — explains the work (purpose, spec, documentation) and shows prominent links to the form route and the dashboard route |
+
+So for `cardiology-requests`: `/cardiology-requests/` is the dashboard list and
+`/cardiology-requests/[id]` (e.g. `/cardiology-requests/new`) is the input form.
+Do **not** put the wizard at the app root (`/`) or the dashboard at
+`/dashboard` — those are the legacy flat layout.
+
+The app root (`/`) is a **welcome page**, not a form and not a dashboard. It is
+a plain `+page.svelte` (no redirect loader) that explains the form's purpose,
+specification, and documentation, then offers two prominent links: one to the
+input form (`/<plural>/new`) and one to the dashboard (`/<plural>/`). The nav in
+`+layout.svelte` links its brand to `/` and exposes Welcome / form / dashboard.
+Reference implementations: `forms/cardiology-request/` and
+`forms/cardiology-response/`.
+
+## Theming (Lily themes, gold standard)
+
+Every `front-end-with-svelte/` uses the **prebuilt Lily Design System theme
+system** — do not hand-roll theme CSS.
+
+- **Vendored themes.** All Lily theme stylesheets are copied to
+  `static/themes/<name>.css` (light, dark, dim, dracula, nord, the NHS
+  England/Scotland/Wales patient & practitioner themes, GDS, USWDS, …). Each is
+  a standalone file; load **exactly one at a time** via a swappable
+  `<link rel="stylesheet" href="{base}/themes/{theme}.css">` in `+layout.svelte`
+  (they cannot be `@import`-ed together — each includes a bare `:where(:root)`
+  block and they would collide).
+- **The default theme is the Lily light theme.** The `@theme` block in
+  `app.css` carries the Lily *light* token values, so the baseline render is
+  Lily light before any stylesheet loads; the persisted default selection is
+  `light` (`src/lib/config/themes.ts` `DEFAULT_THEME`). There is no "system"
+  option (it would 404 on a missing stylesheet).
+- **Prebuilt control.** Switch themes with the Lily `ThemeSelect` +
+  `ThemeSelectOption` components (`src/lib/components/ui/`), mirroring the
+  upstream headless API (classes `theme-select` / `theme-select-option`), bound
+  to the theme state and reflected onto `<html data-theme>`.
+- **Components consume Lily tokens, not hardcoded greys.** `app.css` registers
+  the Lily palette in `@theme` (`--color-base-100/200/300`, `--color-base-content`,
+  `--color-primary`, `--color-error`, …) so Tailwind emits `bg-base-100`,
+  `text-base-content`, `text-error`, etc. All chrome and pages use these token
+  utilities (no `bg-white` / `text-gray-*`). Lily's theme files are *unlayered*,
+  so they override Tailwind's layered `@theme` defaults at runtime — every theme
+  re-skins the whole app, including headings.
+
+## Dashboard grid (SVAR)
+
+The collection dashboard (`/<plural>/`) renders the data table with the **SVAR
+Svelte DataGrid** (`@svar-ui/svelte-grid`, `Grid` + `Willow`/`WillowDark`).
+Graded columns render through the shared engine label helpers. The grid is
+**client-only** (its packages are not SSR-safe), so the dashboard route sets
+`export const ssr = false;` in `+page.ts`. Pick `WillowDark` vs `Willow` from the
+active theme's `--color-base-100` lightness so the grid follows the Lily theme,
+and wire `api.on('select-row', …)` to open `/<plural>/[id]`.
 
 Companion docs: [`AGENTS-front-end-html.md`](AGENTS-front-end-html.md),
 [`plan.md`](plan.md), [`tasks.md`](tasks.md).
@@ -142,8 +215,8 @@ A consumer thus writes:
 
 ## 5. Page shell
 
-Every `front-end-form-with-svelte/src/routes/+page.svelte` follows this
-skeleton:
+Every input-form route (`front-end-with-svelte/src/routes/<plural>/[id]/+page.svelte`,
+the wizard) follows this skeleton:
 
 ```svelte
 <script lang="ts">
@@ -197,7 +270,7 @@ Dashboards follow the analogous `DataTable` shell.
   (typically `assessment.svelte.ts`). No legacy `writable` stores.
 - Public fields: `.data`, `.result`, `.currentStep`, `.reset()`,
   `.errors` (validation), plus form-specific helpers.
-- Persistence key: `<slug>.front-end-form-with-svelte.v1` (mirrors the HTML
+- Persistence key: `<slug>.front-end-with-svelte.v1` (mirrors the HTML
   convention to allow draft portability across stacks).
 
 ## 7. Validation pattern
@@ -221,13 +294,17 @@ Identical to the HTML contract (see [`AGENTS-front-end-html.md`](AGENTS-front-en
 
 ## 9. Canonical reference
 
-The canonical Lily-Svelte-shaped pair is (post-refactor):
+The canonical consolidated reference is:
 
-- `forms/pre-operative-assessment-by-clinician/front-end-form-with-svelte/`
-- `forms/pre-operative-assessment-by-clinician/front-end-dashboard-with-svelte/`
+- `forms/cardiology-response/front-end-with-svelte/` — RESTful routes:
+  dashboard list at `src/routes/cardiology-responses/+page.svelte`, input form
+  at `src/routes/cardiology-responses/[id]/+page.svelte`, one shared scoring
+  engine and UI component set.
 
-The pilot refactor proves the pattern; `bin/lily-svelte-refactor` propagates
-it across the remaining forms (see [`plan.md`](plan.md) Phase 5).
+Legacy split references (`front-end-form-with-svelte/` +
+`front-end-dashboard-with-svelte/`) remain in older forms such as
+`forms/pre-operative-assessment-by-clinician/` until consolidated.
+`bin/lily-svelte-refactor` propagates the Lily class contract across forms.
 
 ## 10. Upstream pin and drift detection
 

@@ -1,6 +1,6 @@
 # Tasks: WHO Surgical Safety Checklist — Full Stack (new)
 
-- [ ] Bootstrap a fresh Loco app inside this directory (`loco new --name who-surgical-safety-checklist --db postgres --bg async --assets serverside`)
+- [ ] Bootstrap a fresh Loco app inside this directory (`loco new --name who-surgical-safety-checklist --db postgres --bg async --assets none`)
 - [ ] Run `../back-end-with-loco-setup` to scaffold all four resources
 - [ ] Single-page three-phase wizard (Sign In, Time Out, Sign Out)
 - [ ] Inline team-roster sub-form during Time Out (HTMX add/remove rows)

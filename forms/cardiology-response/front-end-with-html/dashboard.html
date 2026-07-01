@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Cardiology Response — responses dashboard</title>
+  <meta name="description" content="Cardiology response dashboard: review the four-axis interpretation grade — response classification, condition severity, response completeness, and follow-up urgency — plus safety flags.">
+  <link rel="stylesheet" href="css/dashboard.css">
+</head>
+<body>
+  <a class="skip-link visually-hidden" href="#responses-table">Skip to responses table</a>
+
+  <header class="page-header">
+    <div class="page-header-inner">
+      <h1>Cardiology Response — Responses Dashboard</h1>
+      <p class="subtitle">
+        Review completed cardiology responses by classification, condition
+        severity, follow-up urgency, completeness, and safety flags.
+      </p>
+      <p class="subtitle"><a href="index.html">← New cardiology response</a></p>
+    </div>
+  </header>
+
+  <main>
+    <!-- Status banner: shown when backend fetch fails and we fall back -->
+    <div
+      id="status-banner"
+      class="alert"
+      data-type="warning"
+      role="status"
+      aria-live="polite"
+      hidden
+    ></div>
+
+    <!-- Filter bar -->
+    <section class="filter-bar" aria-labelledby="filter-bar-heading">
+      <h2 id="filter-bar-heading" class="visually-hidden">Filters</h2>
+
+      <div class="filter-grid">
+        <div class="filter-field filter-field-search field">
+          <label class="label" for="filter-search">Search</label>
+          <input
+            id="filter-search"
+            type="search"
+            class="search-input"
+            placeholder="Response id, patient, or consultation..."
+            autocomplete="off"
+          >
+        </div>
+
+        <div class="filter-field field">
+          <label class="label" for="filter-classification">Classification</label>
+          <select id="filter-classification" class="select">
+            <option value="">All classifications</option>
+            <option value="no-abnormality">No abnormality</option>
+            <option value="cardiac-condition">Cardiac condition</option>
+            <option value="critical">Critical</option>
+            <option value="inconclusive">Inconclusive</option>
+          </select>
+        </div>
+
+        <div class="filter-field field">
+          <label class="label" for="filter-urgency">Follow-up urgency</label>
+          <select id="filter-urgency" class="select">
+            <option value="">All urgencies</option>
+            <option value="routine">Routine</option>
+            <option value="recommended">Recommended</option>
+            <option value="urgent">Urgent</option>
+            <option value="critical-alert">Critical alert</option>
+          </select>
+        </div>
+
+        <div class="filter-field field">
+          <label class="label" for="filter-flags">Safety Flags</label>
+          <select id="filter-flags" class="select">
+            <option value="">All</option>
+            <option value="yes">With flags</option>
+            <option value="no">No flags</option>
+          </select>
+        </div>
+
+        <div class="filter-field filter-field-actions">
+          <button
+            type="button"
+            id="filter-clear-btn"
+            class="button"
+            data-variant="secondary"
+            hidden
+          >
+            Clear filters
+          </button>
+        </div>
+      </div>
+
+      <div class="filter-summary">
+        <span id="filter-count">Loading responses...</span>
+      </div>
+    </section>
+
+    <!-- Responses table -->
+    <section class="table-card" aria-labelledby="responses-table-heading">
+      <h2 id="responses-table-heading" class="visually-hidden">Responses</h2>
+
+      <div class="table-scroll">
+        <table id="responses-table" class="data-table">
+          <thead class="data-table-head">
+            <tr id="responses-table-head" class="data-table-row">
+              <!-- Sortable column headers built by dashboard-app.js -->
+            </tr>
+          </thead>
+          <tbody id="responses-table-body" class="data-table-body">
+            <!-- Data rows built by dashboard-app.js -->
+          </tbody>
+        </table>
+      </div>
+
+      <p id="responses-empty-message" class="empty-message" hidden>
+        No responses match the current filters.
+      </p>
+    </section>
+
+    <footer class="page-footer">
+      <p>
+        Four-axis interpretation is advisory clinical decision support; the
+        responding cardiology clinician remains responsible for the reply. A
+        critical result auto-escalates follow-up urgency to a critical alert
+        and raises the critical-finding flag. Response classification, condition
+        severity, response completeness, and follow-up urgency are computed by
+        the response engine.
+      </p>
+    </footer>
+  </main>
+
+  <!--
+    Classic <script> tags (no `type="module"`) so the page works when opened
+    directly via file:// — browsers block ES-module imports from file:// for
+    CORS reasons, but allow ordered classic scripts. Each file attaches its
+    public symbols to `window.CardiologyResponseDashboard`.
+
+    Load order: dashboard-types -> data -> api -> dashboard-app.
+  -->
+  <script src="js/dashboard-types.js"></script>
+  <script src="js/data.js"></script>
+  <script src="js/api.js"></script>
+  <script src="js/dashboard-app.js"></script>
+</body>
+</html>

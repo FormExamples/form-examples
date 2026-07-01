@@ -8,11 +8,15 @@ createdb --host=localhost --port=5432 --username=loco --owner=loco "${form_snake
 createdb --host=localhost --port=5432 --username=loco --owner=loco "${form_snake_case}_test" || :
 createdb --host=localhost --port=5432 --username=loco --owner=loco "${form_snake_case}_production" || :
 
-loco new --name "${form_kebab_case}" --db postgres --bg async --assets none
-cd "${form_kebab_case}"
+loco new --name "${form_snake_case}" --db postgres --bg async --assets none -a
+cd "${form_snake_case}"
+
+# Pin time to a version compatible with cookie 0.18.1 (a fresh loco
+# starter otherwise resolves time 0.3.52, which fails to compile).
+cargo update -p time --precise 0.3.47
 
 cargo loco generate scaffold patient \
-    deleted_at:ts \
+    deleted_at:tstz \
     name:string! \
     birth_date:date! \
     email:text \
@@ -30,7 +34,7 @@ cargo loco generate scaffold patient \
     --api
 
 cargo loco generate scaffold clinician \
-    deleted_at:ts \
+    deleted_at:tstz \
     name:text! \
     email:text \
     phone:text \
@@ -44,13 +48,13 @@ cargo loco generate scaffold clinician \
     --api
 
 cargo loco generate scaffold outpatient_outcome \
-    deleted_at:ts \
+    deleted_at:tstz \
     patient:references \
     status:string! \
     --api
 
 cargo loco generate scaffold outpatient_outcome_encounter \
-    deleted_at:ts \
+    deleted_at:tstz \
     outpatient_outcome:references \
     clinic_date:date \
     specialty:string! \
@@ -60,7 +64,7 @@ cargo loco generate scaffold outpatient_outcome_encounter \
     --api
 
 cargo loco generate scaffold outpatient_outcome_operational \
-    deleted_at:ts \
+    deleted_at:tstz \
     outpatient_outcome:references \
     referral_date:date \
     appointment_date:date \
@@ -70,7 +74,7 @@ cargo loco generate scaffold outpatient_outcome_operational \
     --api
 
 cargo loco generate scaffold outpatient_outcome_clinical \
-    deleted_at:ts \
+    deleted_at:tstz \
     outpatient_outcome:references \
     presenting_complaint:text! \
     diagnosis:text! \
@@ -79,31 +83,31 @@ cargo loco generate scaffold outpatient_outcome_clinical \
     --api
 
 cargo loco generate scaffold outpatient_outcome_prom_eq5d5l \
-    deleted_at:ts \
+    deleted_at:tstz \
     outpatient_outcome:references \
     --api
 
 cargo loco generate scaffold outpatient_outcome_prom_grc \
-    deleted_at:ts \
+    deleted_at:tstz \
     outpatient_outcome:references \
     global_rating_of_change:int \
     self_rated_health:string! \
     --api
 
 cargo loco generate scaffold outpatient_outcome_prom_promis \
-    deleted_at:ts \
+    deleted_at:tstz \
     outpatient_outcome:references \
     --api
 
 cargo loco generate scaffold outpatient_outcome_prem_fft \
-    deleted_at:ts \
+    deleted_at:tstz \
     outpatient_outcome:references \
     fft_response:string! \
     fft_comment:text! \
     --api
 
 cargo loco generate scaffold outpatient_outcome_followup \
-    deleted_at:ts \
+    deleted_at:tstz \
     outpatient_outcome:references \
     disposition:string! \
     next_appointment_date:date \
@@ -112,16 +116,16 @@ cargo loco generate scaffold outpatient_outcome_followup \
     --api
 
 cargo loco generate scaffold outpatient_outcome_signoff \
-    deleted_at:ts \
+    deleted_at:tstz \
     outpatient_outcome:references \
     reporting_clinician:references \
     reporting_clinician_name:string! \
     reporting_clinician_role:string! \
-    signed_off_at:ts \
+    signed_off_at:tstz \
     --api
 
 cargo loco generate scaffold outpatient_outcome_grade \
-    deleted_at:ts \
+    deleted_at:tstz \
     outpatient_outcome:references \
     overall_grade:string! \
     clinical_grade:string! \
@@ -129,11 +133,11 @@ cargo loco generate scaffold outpatient_outcome_grade \
     prem_grade:string! \
     operational_grade:string! \
     result_notes:text! \
-    graded_at:ts! \
+    graded_at:tstz! \
     --api
 
 cargo loco generate scaffold outpatient_outcome_grade_rule \
-    deleted_at:ts \
+    deleted_at:tstz \
     grade:references \
     rule_id:string! \
     category:string! \
@@ -142,7 +146,7 @@ cargo loco generate scaffold outpatient_outcome_grade_rule \
     --api
 
 cargo loco generate scaffold outpatient_outcome_grade_flag \
-    deleted_at:ts \
+    deleted_at:tstz \
     grade:references \
     flag_id:string! \
     category:string! \

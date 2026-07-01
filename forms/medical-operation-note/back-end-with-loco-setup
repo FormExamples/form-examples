@@ -8,11 +8,15 @@ createdb --host=localhost --port=5432 --username=loco --owner=loco "${form_snake
 createdb --host=localhost --port=5432 --username=loco --owner=loco "${form_snake_case}_test" || :
 createdb --host=localhost --port=5432 --username=loco --owner=loco "${form_snake_case}_production" || :
 
-loco new --name "${form_kebab_case}" --db postgres --bg async --assets none
-cd "${form_kebab_case}"
+loco new --name "${form_snake_case}" --db postgres --bg async --assets none -a
+cd "${form_snake_case}"
+
+# Pin time to a version compatible with cookie 0.18.1 (a fresh loco
+# starter otherwise resolves time 0.3.52, which fails to compile).
+cargo update -p time --precise 0.3.47
 
 cargo loco generate scaffold patient \
-    deleted_at:ts \
+    deleted_at:tstz \
     name:string! \
     birth_date:date! \
     sex:string! \
@@ -30,7 +34,7 @@ cargo loco generate scaffold patient \
     --api
 
 cargo loco generate scaffold clinician \
-    deleted_at:ts \
+    deleted_at:tstz \
     name:text! \
     email:text \
     phone:text \
@@ -43,18 +47,18 @@ cargo loco generate scaffold clinician \
     --api
 
 cargo loco generate scaffold medical_operation_note \
-    deleted_at:ts \
+    deleted_at:tstz \
     patient:references \
     lead_surgeon:references \
     status:string! \
     hospital_name:string! \
     theatre_number:string! \
     list_type:string! \
-    case_start_at:ts \
-    anaesthesia_start_at:ts \
-    knife_to_skin_at:ts \
-    end_of_surgery_at:ts \
-    case_end_at:ts \
+    case_start_at:tstz \
+    anaesthesia_start_at:tstz \
+    knife_to_skin_at:tstz \
+    end_of_surgery_at:tstz \
+    case_end_at:tstz \
     consent_status:string! \
     side_marked:string! \
     sign_in_completed:string! \
@@ -88,8 +92,8 @@ cargo loco generate scaffold medical_operation_note \
     tourniquet_used:string! \
     tourniquet_site:string! \
     tourniquet_pressure_mmhg:int \
-    tourniquet_on_at:ts \
-    tourniquet_off_at:ts \
+    tourniquet_on_at:tstz \
+    tourniquet_off_at:tstz \
     converted_to_open:string! \
     conversion_reason:text! \
     operative_findings_summary:text! \
@@ -133,22 +137,22 @@ cargo loco generate scaffold medical_operation_note \
     surgeon_override_reason:text! \
     attestation_text:text! \
     electronic_signature:text! \
-    dictated_at:ts \
-    signed_at:ts \
+    dictated_at:tstz \
+    signed_at:tstz \
     --api
 
 cargo loco generate scaffold medical_operation_note_team_member \
-    deleted_at:ts \
+    deleted_at:tstz \
     medical_operation_note:references \
     clinician:references \
     team_role:string! \
-    arrived_at:ts \
-    left_at:ts \
+    arrived_at:tstz \
+    left_at:tstz \
     notes:text! \
     --api
 
 cargo loco generate scaffold medical_operation_note_procedure \
-    deleted_at:ts \
+    deleted_at:tstz \
     medical_operation_note:references \
     role:string! \
     opcs4_code:string! \
@@ -159,7 +163,7 @@ cargo loco generate scaffold medical_operation_note_procedure \
     --api
 
 cargo loco generate scaffold medical_operation_note_step \
-    deleted_at:ts \
+    deleted_at:tstz \
     medical_operation_note:references \
     step_number:int! \
     title:string! \
@@ -167,7 +171,7 @@ cargo loco generate scaffold medical_operation_note_step \
     --api
 
 cargo loco generate scaffold medical_operation_note_implant \
-    deleted_at:ts \
+    deleted_at:tstz \
     medical_operation_note:references \
     category:string! \
     name:string! \
@@ -186,7 +190,7 @@ cargo loco generate scaffold medical_operation_note_implant \
     --api
 
 cargo loco generate scaffold medical_operation_note_drain \
-    deleted_at:ts \
+    deleted_at:tstz \
     medical_operation_note:references \
     device_type:string! \
     name:string! \
@@ -200,7 +204,7 @@ cargo loco generate scaffold medical_operation_note_drain \
     --api
 
 cargo loco generate scaffold medical_operation_note_specimen \
-    deleted_at:ts \
+    deleted_at:tstz \
     medical_operation_note:references \
     label:string! \
     specimen_type:string! \
@@ -215,19 +219,19 @@ cargo loco generate scaffold medical_operation_note_specimen \
     --api
 
 cargo loco generate scaffold medical_operation_note_complication \
-    deleted_at:ts \
+    deleted_at:tstz \
     medical_operation_note:references \
     category:string! \
     description:text! \
     clavien_dindo_grade:string! \
-    onset_at:ts \
+    onset_at:tstz \
     action_taken:text! \
     resolved_in_theatre:string! \
     reported_to_governance:string! \
     --api
 
 cargo loco generate scaffold medical_operation_note_grade \
-    deleted_at:ts \
+    deleted_at:tstz \
     medical_operation_note:references \
     computed_composite_risk:string! \
     final_composite_risk:string! \
@@ -239,12 +243,12 @@ cargo loco generate scaffold medical_operation_note_grade \
     never_event_suspected:string! \
     recommendation:string! \
     surgeon_notes:text! \
-    signed_at:ts \
-    graded_at:ts! \
+    signed_at:tstz \
+    graded_at:tstz! \
     --api
 
 cargo loco generate scaffold medical_operation_note_grade_rule \
-    deleted_at:ts \
+    deleted_at:tstz \
     medical_operation_note_grade:references \
     rule_id:string! \
     instrument:string! \
@@ -254,7 +258,7 @@ cargo loco generate scaffold medical_operation_note_grade_rule \
     --api
 
 cargo loco generate scaffold medical_operation_note_grade_flag \
-    deleted_at:ts \
+    deleted_at:tstz \
     medical_operation_note_grade:references \
     flag_id:string! \
     category:string! \

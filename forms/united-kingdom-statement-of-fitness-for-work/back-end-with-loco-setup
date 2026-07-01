@@ -8,11 +8,15 @@ createdb --host=localhost --port=5432 --username=loco --owner=loco "${form_snake
 createdb --host=localhost --port=5432 --username=loco --owner=loco "${form_snake_case}_test" || :
 createdb --host=localhost --port=5432 --username=loco --owner=loco "${form_snake_case}_production" || :
 
-loco new --name "${form_kebab_case}" --db postgres --bg async --assets none
-cd "${form_kebab_case}"
+loco new --name "${form_snake_case}" --db postgres --bg async --assets none -a
+cd "${form_snake_case}"
+
+# Pin time to a version compatible with cookie 0.18.1 (a fresh loco
+# starter otherwise resolves time 0.3.52, which fails to compile).
+cargo update -p time --precise 0.3.47
 
 cargo loco generate scaffold patient \
-    deleted_at:ts \
+    deleted_at:tstz \
     name:string! \
     birth_date:date \
     email:text \
@@ -26,7 +30,7 @@ cargo loco generate scaffold patient \
     --api
 
 cargo loco generate scaffold clinician \
-    deleted_at:ts \
+    deleted_at:tstz \
     name:text! \
     email:text \
     phone:text \
@@ -40,7 +44,7 @@ cargo loco generate scaffold clinician \
     --api
 
 cargo loco generate scaffold medical_practice \
-    deleted_at:ts \
+    deleted_at:tstz \
     name:text! \
     postal_address_as_full_text:text! \
     country_as_iso_3166_1_alpha_2:string \
@@ -52,7 +56,7 @@ cargo loco generate scaffold medical_practice \
     --api
 
 cargo loco generate scaffold united_kingdom_statement_of_fitness_for_work \
-    deleted_at:ts \
+    deleted_at:tstz \
     patient:references \
     clinician:references \
     medical_practice:references \
@@ -80,18 +84,18 @@ cargo loco generate scaffold united_kingdom_statement_of_fitness_for_work \
     period_to:date \
     will_assess_again:string! \
     planned_review_date:date \
-    issued_at:ts \
+    issued_at:tstz \
     issued_via:string! \
     issue_setting:string! \
     united_kingdom_statement_of_fitness_for_work:references \
     safeguarding_concern:string! \
     safeguarding_notes:text! \
     clinician_signature_svg:text! \
-    clinician_signed_at:ts \
+    clinician_signed_at:tstz \
     --api
 
 cargo loco generate scaffold united_kingdom_statement_of_fitness_for_work_grade \
-    deleted_at:ts \
+    deleted_at:tstz \
     united_kingdom_statement_of_fitness_for_work:references \
     fitness_category:string! \
     adaptation_intensity:string! \
@@ -102,14 +106,14 @@ cargo loco generate scaffold united_kingdom_statement_of_fitness_for_work_grade 
     is_within_first_six_months_of_condition:string! \
     is_valid:string! \
     grader_notes:text! \
-    graded_at:ts! \
+    graded_at:tstz! \
     clinician_override:string! \
     clinician_override_reason:string! \
     clinician_final_recommendation:string! \
     --api
 
 cargo loco generate scaffold united_kingdom_statement_of_fitness_for_work_grade_rule \
-    deleted_at:ts \
+    deleted_at:tstz \
     united_kingdom_statement_of_fitness_for_work_grade:references \
     rule_id:string! \
     rule_set:string! \
@@ -118,7 +122,7 @@ cargo loco generate scaffold united_kingdom_statement_of_fitness_for_work_grade_
     --api
 
 cargo loco generate scaffold united_kingdom_statement_of_fitness_for_work_grade_flag \
-    deleted_at:ts \
+    deleted_at:tstz \
     united_kingdom_statement_of_fitness_for_work_grade:references \
     flag_id:string! \
     category:string! \

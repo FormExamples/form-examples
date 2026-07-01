@@ -9,7 +9,7 @@ Not started. Empty redesign workspace.
 1. Bootstrap a fresh Loco app inside this directory:
 
    ```sh
-   loco new --name who-surgical-safety-checklist --db postgres --bg async --assets serverside
+   loco new --name who-surgical-safety-checklist --db postgres --bg async --assets none
    ```
 
 2. Run `../back-end-with-loco-setup` to scaffold the

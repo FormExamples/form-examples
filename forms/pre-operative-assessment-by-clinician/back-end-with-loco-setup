@@ -8,11 +8,15 @@ createdb --host=localhost --port=5432 --username=loco --owner=loco "${form_snake
 createdb --host=localhost --port=5432 --username=loco --owner=loco "${form_snake_case}_test" || :
 createdb --host=localhost --port=5432 --username=loco --owner=loco "${form_snake_case}_production" || :
 
-loco new --name "${form_kebab_case}" --db postgres --bg async --assets none
-cd "${form_kebab_case}"
+loco new --name "${form_snake_case}" --db postgres --bg async --assets none -a
+cd "${form_snake_case}"
+
+# Pin time to a version compatible with cookie 0.18.1 (a fresh loco
+# starter otherwise resolves time 0.3.52, which fails to compile).
+cargo update -p time --precise 0.3.47
 
 cargo loco generate scaffold patient \
-    deleted_at:ts \
+    deleted_at:tstz \
     name:string! \
     birth_date:date! \
     email:text \
@@ -30,7 +34,7 @@ cargo loco generate scaffold patient \
     --api
 
 cargo loco generate scaffold clinician \
-    deleted_at:ts \
+    deleted_at:tstz \
     name:text! \
     email:text \
     phone:text \
@@ -44,19 +48,19 @@ cargo loco generate scaffold clinician \
     --api
 
 cargo loco generate scaffold medication \
-    deleted_at:ts \
+    deleted_at:tstz \
     international_nonproprietary_name:text! \
     description:text! \
     --api
 
 cargo loco generate scaffold patient_medication \
-    deleted_at:ts \
+    deleted_at:tstz \
     patient:references \
     medication:references \
     --api
 
 cargo loco generate scaffold allergy \
-    deleted_at:ts \
+    deleted_at:tstz \
     scientific_name:text! \
     european_union_name:text! \
     united_states_name:text! \
@@ -64,13 +68,13 @@ cargo loco generate scaffold allergy \
     --api
 
 cargo loco generate scaffold patient_allergy \
-    deleted_at:ts \
+    deleted_at:tstz \
     patient:references \
     allergy:references \
     --api
 
 cargo loco generate scaffold pre_operative_assessment_by_clinician \
-    deleted_at:ts \
+    deleted_at:tstz \
     patient:references \
     clinician:references \
     status:string! \
@@ -220,8 +224,8 @@ cargo loco generate scaffold pre_operative_assessment_by_clinician \
     ng_tube:string! \
     stoma:string! \
     fasting_confirmed:string! \
-    last_solid_food_at:ts \
-    last_clear_fluid_at:ts \
+    last_solid_food_at:tstz \
+    last_clear_fluid_at:tstz \
     rapid_sequence_induction_needed:string! \
     spine_exam:string! \
     spine_notes:text! \
@@ -240,7 +244,7 @@ cargo loco generate scaffold pre_operative_assessment_by_clinician \
     class:string! \
     perioperative_action:string! \
     perioperative_notes:string! \
-    last_dose_at:ts \
+    last_dose_at:tstz \
     allergen:string! \
     category:string! \
     reaction_type:string! \
@@ -275,7 +279,7 @@ cargo loco generate scaffold pre_operative_assessment_by_clinician \
     --api
 
 cargo loco generate scaffold pre_operative_assessment_by_clinician_grade \
-    deleted_at:ts \
+    deleted_at:tstz \
     pre_operative_assessment_by_clinician:references \
     computed_asa_grade:string! \
     final_asa_grade:string! \
@@ -288,12 +292,12 @@ cargo loco generate scaffold pre_operative_assessment_by_clinician_grade \
     composite_risk:string! \
     recommendation:string! \
     clinician_notes:text! \
-    signed_at:ts \
-    graded_at:ts! \
+    signed_at:tstz \
+    graded_at:tstz! \
     --api
 
 cargo loco generate scaffold pre_operative_assessment_by_clinician_grade_rule \
-    deleted_at:ts \
+    deleted_at:tstz \
     grade:references \
     rule_id:string! \
     instrument:string! \
@@ -303,7 +307,7 @@ cargo loco generate scaffold pre_operative_assessment_by_clinician_grade_rule \
     --api
 
 cargo loco generate scaffold pre_operative_assessment_by_clinician_grade_flag \
-    deleted_at:ts \
+    deleted_at:tstz \
     pre_operative_assessment_by_clinician_grade:references \
     flag_id:string! \
     category:string! \

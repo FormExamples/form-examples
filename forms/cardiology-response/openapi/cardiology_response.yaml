@@ -1,0 +1,265 @@
+# Generated from sql-migrations/. Do not edit by hand.
+# SOURCE: cardiology_response
+openapi: 3.1.0
+info:
+  title: Cardiology Response — CardiologyResponse
+  version: 1.0.0
+  description: Cardiology response (consult reply) authored by a cardiology clinician in answer to a cardiology referral. Captures the consultation type, clinical summary and examination, investigations performed, structured findings, the diagnosis, the key left-ventricular ejection fraction measurement, the management plan and follow-up, and critical-result communication. This is the source-of-truth record that the four-axis interpretation grade is computed from.
+paths:
+  /cardiology-responses:
+    get:
+      summary: List CardiologyResponse records
+      operationId: listCardiologyResponse
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of CardiologyResponse records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/CardiologyResponse"
+    post:
+      summary: Create a new CardiologyResponse
+      operationId: createCardiologyResponse
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CardiologyResponse"
+      responses:
+        "201":
+          description: The newly created CardiologyResponse
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CardiologyResponse"
+        "400":
+          description: Validation error
+  /cardiology-responses/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one CardiologyResponse by id
+      operationId: getCardiologyResponse
+      responses:
+        "200":
+          description: The requested CardiologyResponse
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CardiologyResponse"
+        "404":
+          description: CardiologyResponse not found
+    patch:
+      summary: Update an existing CardiologyResponse
+      operationId: updateCardiologyResponse
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CardiologyResponse"
+      responses:
+        "200":
+          description: The updated CardiologyResponse
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CardiologyResponse"
+        "404":
+          description: CardiologyResponse not found
+    delete:
+      summary: Soft-delete a CardiologyResponse
+      operationId: deleteCardiologyResponse
+      responses:
+        "204":
+          description: CardiologyResponse deleted
+        "404":
+          description: CardiologyResponse not found
+components:
+  schemas:
+    CardiologyResponse:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was updated most-recently.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was deleted a.k.a. soft-removed.
+        patient_id:
+          type: string
+          format: uuid
+          description: Foreign key to the patient.
+        clinician_id:
+          type: string
+          format: uuid
+          description: Foreign key to the responding cardiology clinician (author / signer).
+        originating_request_reference:
+          type: string
+          maxLength: 255
+          description: Free-text reference linking this response back to the originating cardiology referral request.
+        response_status:
+          type: string
+          enum:
+            - preliminary
+            - final
+            - amended
+            - cancelled
+            - ""
+          description: "Response lifecycle status: preliminary, final, amended, cancelled."
+        consultation_type:
+          type: string
+          enum:
+            - clinic-review
+            - advice-and-guidance
+            - telephone
+            - inpatient-review
+            - virtual
+            - ""
+          description: "Type of cardiology consultation: clinic-review, advice-and-guidance, telephone, inpatient-review, virtual."
+        assessed_date:
+          type: string
+          format: date
+          description: Date the patient was assessed / reviewed.
+        responded_date:
+          type: string
+          format: date
+          description: Date the response was authored / signed.
+        clinical_summary:
+          type: string
+          maxLength: 2000
+          description: Narrative clinical summary of the assessment.
+        examination_findings:
+          type: string
+          maxLength: 1000
+          description: Cardiovascular examination findings.
+        investigations_performed:
+          type: string
+          maxLength: 1000
+          description: Investigations performed or reviewed (e.g. ECG, echocardiogram, stress test) and their findings.
+        ischaemia_or_cad:
+          type: boolean
+          description: "Structured finding: ischaemia or coronary artery disease present."
+        significant_arrhythmia:
+          type: boolean
+          description: "Structured finding: significant arrhythmia present."
+        reduced_ejection_fraction:
+          type: boolean
+          description: "Structured finding: reduced left-ventricular ejection fraction."
+        significant_valve_disease:
+          type: boolean
+          description: "Structured finding: significant (moderate or severe) valve disease."
+        structural_abnormality:
+          type: boolean
+          description: "Structured finding: structural cardiac abnormality (e.g. cardiomyopathy, congenital)."
+        uncontrolled_hypertension:
+          type: boolean
+          description: "Structured finding: uncontrolled hypertension."
+        non_cardiac_cause:
+          type: boolean
+          description: "Structured finding: a non-cardiac cause was identified or judged most likely."
+        primary_diagnosis_category:
+          type: string
+          enum:
+            - coronary-artery-disease
+            - heart-failure
+            - arrhythmia
+            - valve-disease
+            - hypertension
+            - cardiomyopathy
+            - non-cardiac
+            - no-abnormality
+            - other
+            - ""
+          description: "Primary diagnosis category: coronary-artery-disease, heart-failure, arrhythmia, valve-disease, hypertension, cardiomyopathy, non-cardiac, no-abnormality, other."
+        diagnosis_narrative:
+          type: string
+          maxLength: 2000
+          description: Narrative diagnosis answering the referral clinical question.
+        lv_ejection_fraction_percent:
+          type: number
+          format: double
+          description: Left-ventricular ejection fraction as a percentage (0-100), the key prognostic measurement.
+        management_plan:
+          type: string
+          maxLength: 2000
+          description: Management plan including investigations arranged and treatment.
+        medication_changes:
+          type: string
+          maxLength: 1000
+          description: Medication changes recommended or made.
+        recommended_follow_up:
+          type: string
+          maxLength: 1000
+          description: Recommended follow-up, including who should action it and when.
+        critical_result:
+          type: boolean
+          description: Whether a critical or unexpected significant cardiac result is present (e.g. critical arrhythmia, severe aortic stenosis, acute coronary syndrome).
+        critical_result_communicated:
+          type: boolean
+          description: Whether the critical result was communicated directly to the referrer / responsible team.
+        reported_to:
+          type: string
+          maxLength: 500
+          description: Who the critical / urgent result was communicated to, with date and time if applicable.
+      required:
+        - created_at
+        - updated_at
+        - patient_id
+        - clinician_id
+        - originating_request_reference
+        - response_status
+        - consultation_type
+        - clinical_summary
+        - examination_findings
+        - investigations_performed
+        - ischaemia_or_cad
+        - significant_arrhythmia
+        - reduced_ejection_fraction
+        - significant_valve_disease
+        - structural_abnormality
+        - uncontrolled_hypertension
+        - non_cardiac_cause
+        - primary_diagnosis_category
+        - diagnosis_narrative
+        - management_plan
+        - medication_changes
+        - recommended_follow_up
+        - critical_result
+        - critical_result_communicated
+        - reported_to
+      description: Cardiology response (consult reply) authored by a cardiology clinician in answer to a cardiology referral. Captures the consultation type, clinical summary and examination, investigations performed, structured findings, the diagnosis, the key left-ventricular ejection fraction measurement, the management plan and follow-up, and critical-result communication. This is the source-of-truth record that the four-axis interpretation grade is computed from.

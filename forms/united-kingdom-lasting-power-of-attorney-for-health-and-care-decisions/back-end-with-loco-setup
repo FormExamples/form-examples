@@ -8,11 +8,15 @@ createdb --host=localhost --port=5432 --username=loco --owner=loco "${form_snake
 createdb --host=localhost --port=5432 --username=loco --owner=loco "${form_snake_case}_test" || :
 createdb --host=localhost --port=5432 --username=loco --owner=loco "${form_snake_case}_production" || :
 
-loco new --name "${form_kebab_case}" --db postgres --bg async --assets none
-cd "${form_kebab_case}"
+loco new --name "${form_snake_case}" --db postgres --bg async --assets none -a
+cd "${form_snake_case}"
+
+# Pin time to a version compatible with cookie 0.18.1 (a fresh loco
+# starter otherwise resolves time 0.3.52, which fails to compile).
+cargo update -p time --precise 0.3.47
 
 cargo loco generate scaffold donor \
-    deleted_at:ts \
+    deleted_at:tstz \
     title:string! \
     given_names:string! \
     family_name:string! \
@@ -27,11 +31,11 @@ cargo loco generate scaffold donor \
     jurisdiction:string! \
     preferred_language:string! \
     capacity_declared:string! \
-    capacity_declared_at:ts \
+    capacity_declared_at:tstz \
     --api
 
 cargo loco generate scaffold attorney \
-    deleted_at:ts \
+    deleted_at:tstz \
     title:string! \
     given_names:string! \
     family_name:string! \
@@ -47,7 +51,7 @@ cargo loco generate scaffold attorney \
     --api
 
 cargo loco generate scaffold replacement_attorney \
-    deleted_at:ts \
+    deleted_at:tstz \
     title:string! \
     given_names:string! \
     family_name:string! \
@@ -63,7 +67,7 @@ cargo loco generate scaffold replacement_attorney \
     --api
 
 cargo loco generate scaffold certificate_provider \
-    deleted_at:ts \
+    deleted_at:tstz \
     title:string! \
     given_names:string! \
     family_name:string! \
@@ -83,7 +87,7 @@ cargo loco generate scaffold certificate_provider \
     --api
 
 cargo loco generate scaffold person_to_notify \
-    deleted_at:ts \
+    deleted_at:tstz \
     title:string! \
     given_names:string! \
     family_name:string! \
@@ -96,27 +100,27 @@ cargo loco generate scaffold person_to_notify \
     --api
 
 cargo loco generate scaffold lpa \
-    deleted_at:ts \
+    deleted_at:tstz \
     donor:references \
     certificate_provider:references \
     form_version:string! \
     jurisdiction:string! \
     status:string! \
     opg_reference:string! \
-    registered_at:ts \
-    effective_from:ts \
+    registered_at:tstz \
+    effective_from:tstz \
     notes:text! \
     --api
 
 cargo loco generate scaffold lpa_attorney \
-    deleted_at:ts \
+    deleted_at:tstz \
     lpa:references \
     attorney:references \
     order_position:int! \
     --api
 
 cargo loco generate scaffold lpa_replacement_attorney \
-    deleted_at:ts \
+    deleted_at:tstz \
     lpa:references \
     replacement_attorney:references \
     order_position:int! \
@@ -124,29 +128,29 @@ cargo loco generate scaffold lpa_replacement_attorney \
     --api
 
 cargo loco generate scaffold lpa_person_to_notify \
-    deleted_at:ts \
+    deleted_at:tstz \
     lpa:references \
     person_to_notify:references \
     order_position:int! \
     --api
 
 cargo loco generate scaffold lpa_decision_rule \
-    deleted_at:ts \
+    deleted_at:tstz \
     lpa:references \
     decision_rule:string! \
     joint_decision_set:text! \
     --api
 
 cargo loco generate scaffold lpa_lst_choice \
-    deleted_at:ts \
+    deleted_at:tstz \
     lpa:references \
     lst_choice:string! \
     donor_initialled:string! \
-    initialled_at:ts \
+    initialled_at:tstz \
     --api
 
 cargo loco generate scaffold lpa_preference \
-    deleted_at:ts \
+    deleted_at:tstz \
     lpa:references \
     order_position:int! \
     category:string! \
@@ -154,7 +158,7 @@ cargo loco generate scaffold lpa_preference \
     --api
 
 cargo loco generate scaffold lpa_instruction \
-    deleted_at:ts \
+    deleted_at:tstz \
     lpa:references \
     order_position:int! \
     category:string! \
@@ -164,44 +168,44 @@ cargo loco generate scaffold lpa_instruction \
     --api
 
 cargo loco generate scaffold lpa_signature \
-    deleted_at:ts \
+    deleted_at:tstz \
     lpa:references \
     signer_role:string! \
     signer_id:uuid \
-    signed_at:ts \
+    signed_at:tstz \
     signature_method:string! \
     signature_data:blob \
     witness_name:string! \
     witness_address:text! \
-    witness_signed_at:ts \
+    witness_signed_at:tstz \
     witness_is_attorney:string! \
     --api
 
 cargo loco generate scaffold lpa_registration_application \
-    deleted_at:ts \
+    deleted_at:tstz \
     lpa:references \
     applicant_role:string! \
-    applicant_signed_at:ts \
+    applicant_signed_at:tstz \
     fee_amount_pounds:double! \
     fee_remission:string! \
     fee_remission_reason:string! \
-    submitted_at:ts \
+    submitted_at:tstz \
     submission_channel:string! \
     --api
 
 cargo loco generate scaffold lpa_validity \
-    deleted_at:ts \
+    deleted_at:tstz \
     lpa:references \
     validity_status:string! \
     completeness_score:int! \
     effective_date:date \
-    computed_at:ts! \
+    computed_at:tstz! \
     engine_version:string! \
     notes:text! \
     --api
 
 cargo loco generate scaffold lpa_validity_fired_rule \
-    deleted_at:ts \
+    deleted_at:tstz \
     lpa_validity:references \
     rule_id:string! \
     severity:string! \
@@ -212,7 +216,7 @@ cargo loco generate scaffold lpa_validity_fired_rule \
     --api
 
 cargo loco generate scaffold lpa_validity_additional_flag \
-    deleted_at:ts \
+    deleted_at:tstz \
     lpa_validity:references \
     flag_id:string! \
     category:string! \

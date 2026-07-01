@@ -3,11 +3,11 @@
 Cross-cutting docs:
 
 - [`AGENTS-front-end-html.md`](AGENTS-front-end-html.md) — Lily Design
-  System HTML headless conventions for every form's
-  `front-end-form-with-html/` and `front-end-dashboard-with-html/`.
+  System HTML headless conventions for every form's consolidated
+  `front-end-with-html/` (`index.html` wizard + `dashboard.html`).
 - [`AGENTS-front-end-svelte.md`](AGENTS-front-end-svelte.md) — Lily Design
-  System Svelte headless conventions for every form's
-  `front-end-form-with-svelte/` and `front-end-dashboard-with-svelte/`.
+  System Svelte headless conventions for every form's consolidated
+  `front-end-with-svelte/` (RESTful routes: `/<plural>/` list + `/<plural>/[id]` form).
 - [`lily-version.md`](lily-version.md) / [`lily-svelte-version.md`](lily-svelte-version.md) — pinned upstream Lily commit hashes.
 - [`lily-spec/`](lily-spec) / [`lily-svelte-spec/`](lily-svelte-spec) — snapshot directories.
 - [`plan.md`](plan.md) / [`tasks.md`](tasks.md) — Lily refactor plan and tasks.
@@ -37,6 +37,8 @@ Subprojects:
 - [bronchoscopy test request](bronchoscopy-test-request)
 - [cardiac stress test request](cardiac-stress-test-request)
 - [cardiology assessment](cardiology-assessment)
+- [cardiology request](cardiology-request)
+- [cardiology response](cardiology-response)
 - [cardiopulmonary resuscitation training](cardiopulmonary-resuscitation-training)
 - [care privacy notice](care-privacy-notice)
 - [casualty card form](casualty-card-form)

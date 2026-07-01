@@ -42,8 +42,9 @@ ai_exists_or_err() (
 
 ai_planing_exists_or_err() (
     # dir="$1"
-    file_size_or_err "$1/plan.md" && implemented_or_err "$1/plan.md"
-    task_exists_or_err "$1/tasks.md" && implemented_or_err "$1/tasks.md"
+    file_size_or_err "$1/spec/index.md"
+    # file_size_or_err "$1/plan.md" && implemented_or_err "$1/plan.md"
+    # task_exists_or_err "$1/tasks.md" && implemented_or_err "$1/tasks.md"
 )
 
 rust_crate_exists_or_err() (

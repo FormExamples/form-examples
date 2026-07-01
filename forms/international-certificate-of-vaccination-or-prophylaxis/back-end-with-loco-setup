@@ -8,11 +8,15 @@ createdb --host=localhost --port=5432 --username=loco --owner=loco "${form_snake
 createdb --host=localhost --port=5432 --username=loco --owner=loco "${form_snake_case}_test" || :
 createdb --host=localhost --port=5432 --username=loco --owner=loco "${form_snake_case}_production" || :
 
-loco new --name "${form_kebab_case}" --db postgres --bg async --assets none
-cd "${form_kebab_case}"
+loco new --name "${form_snake_case}" --db postgres --bg async --assets none -a
+cd "${form_snake_case}"
+
+# Pin time to a version compatible with cookie 0.18.1 (a fresh loco
+# starter otherwise resolves time 0.3.52, which fails to compile).
+cargo update -p time --precise 0.3.47
 
 cargo loco generate scaffold patient \
-    deleted_at:ts \
+    deleted_at:tstz \
     surname:string! \
     given_names:string! \
     birth_date:date \
@@ -31,7 +35,7 @@ cargo loco generate scaffold patient \
     --api
 
 cargo loco generate scaffold clinician \
-    deleted_at:ts \
+    deleted_at:tstz \
     name:text! \
     professional_status:string! \
     email:text \
@@ -46,7 +50,7 @@ cargo loco generate scaffold clinician \
     --api
 
 cargo loco generate scaffold center \
-    deleted_at:ts \
+    deleted_at:tstz \
     name:text! \
     who_designation_reference:string! \
     national_authority_reference:string! \
@@ -63,13 +67,13 @@ cargo loco generate scaffold center \
     --api
 
 cargo loco generate scaffold international_certificate_of_vaccination_or_prophylaxis \
-    deleted_at:ts \
+    deleted_at:tstz \
     patient:references \
     clinician:references \
     center:references \
     status:string! \
-    issued_at:ts \
-    revoked_at:ts \
+    issued_at:tstz \
+    revoked_at:tstz \
     revocation_reason:text! \
     certificate_serial_number:string! \
     issuing_country_as_iso_3166_1_alpha_3:string! \
@@ -82,19 +86,19 @@ cargo loco generate scaffold international_certificate_of_vaccination_or_prophyl
     medical_waiver:string! \
     medical_waiver_reason:text! \
     medical_waiver_signed_by_clinician:references \
-    medical_waiver_signed_at:ts \
+    medical_waiver_signed_at:tstz \
     declared_pregnancy:string! \
     declared_breastfeeding:string! \
     declared_immunosuppression:string! \
     electronic_signature_data_url:text! \
-    electronic_signature_signed_at:ts \
+    electronic_signature_signed_at:tstz \
     overall_valid:string! \
-    validity_computed_at:ts \
+    validity_computed_at:tstz \
     notes:text! \
     --api
 
 cargo loco generate scaffold international_certificate_of_vaccination_or_prophylaxis_entry \
-    deleted_at:ts \
+    deleted_at:tstz \
     international_certificate_of_vaccination_or_prophylaxis:references \
     entry_index:int! \
     disease:string! \

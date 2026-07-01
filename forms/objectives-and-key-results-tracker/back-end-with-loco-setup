@@ -8,18 +8,22 @@ createdb --host=localhost --port=5432 --username=loco --owner=loco "${form_snake
 createdb --host=localhost --port=5432 --username=loco --owner=loco "${form_snake_case}_test" || :
 createdb --host=localhost --port=5432 --username=loco --owner=loco "${form_snake_case}_production" || :
 
-loco new --name "${form_kebab_case}" --db postgres --bg async --assets none
-cd "${form_kebab_case}"
+loco new --name "${form_snake_case}" --db postgres --bg async --assets none -a
+cd "${form_snake_case}"
+
+# Pin time to a version compatible with cookie 0.18.1 (a fresh loco
+# starter otherwise resolves time 0.3.52, which fails to compile).
+cargo update -p time --precise 0.3.47
 
 cargo loco generate scaffold reporter \
-    deleted_at:ts \
+    deleted_at:tstz \
     name:text! \
     email:text! \
     role:text! \
     --api
 
 cargo loco generate scaffold participant \
-    deleted_at:ts \
+    deleted_at:tstz \
     okr_objective_id:uuid! \
     role:text! \
     name:text! \
@@ -28,7 +32,7 @@ cargo loco generate scaffold participant \
     --api
 
 cargo loco generate scaffold okr_objective \
-    deleted_at:ts \
+    deleted_at:tstz \
     reporter:references \
     parent_objective:references \
     status:text! \
@@ -61,7 +65,7 @@ cargo loco generate scaffold okr_objective \
     --api
 
 cargo loco generate scaffold okr_key_result \
-    deleted_at:ts \
+    deleted_at:tstz \
     okr_objective:references \
     position:int! \
     title:text! \
@@ -78,9 +82,9 @@ cargo loco generate scaffold okr_key_result \
     --api
 
 cargo loco generate scaffold okr_check_in \
-    deleted_at:ts \
+    deleted_at:tstz \
     okr_objective:references \
-    checked_in_at:ts! \
+    checked_in_at:tstz! \
     narrative:text! \
     since_last_changes:text! \
     blockers:text! \
@@ -89,7 +93,7 @@ cargo loco generate scaffold okr_check_in \
     --api
 
 cargo loco generate scaffold okr_grade \
-    deleted_at:ts \
+    deleted_at:tstz \
     okr_objective:references \
     score_by_progress_percent:double \
     score_by_confidence_decile:int \
@@ -104,12 +108,12 @@ cargo loco generate scaffold okr_grade \
     recommendation:text! \
     triage_notes:text! \
     signed_by:text! \
-    signed_at:ts \
-    graded_at:ts! \
+    signed_at:tstz \
+    graded_at:tstz! \
     --api
 
 cargo loco generate scaffold okr_grade_rule \
-    deleted_at:ts \
+    deleted_at:tstz \
     okr_grade:references \
     rule_id:text! \
     instrument:text! \
@@ -119,7 +123,7 @@ cargo loco generate scaffold okr_grade_rule \
     --api
 
 cargo loco generate scaffold okr_grade_flag \
-    deleted_at:ts \
+    deleted_at:tstz \
     okr_grade:references \
     flag_code:text! \
     priority:text! \

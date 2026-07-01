@@ -8,11 +8,15 @@ createdb --host=localhost --port=5432 --username=loco --owner=loco "${form_snake
 createdb --host=localhost --port=5432 --username=loco --owner=loco "${form_snake_case}_test" || :
 createdb --host=localhost --port=5432 --username=loco --owner=loco "${form_snake_case}_production" || :
 
-loco new --name "${form_kebab_case}" --db postgres --bg async --assets none
-cd "${form_kebab_case}"
+loco new --name "${form_snake_case}" --db postgres --bg async --assets none -a
+cd "${form_snake_case}"
+
+# Pin time to a version compatible with cookie 0.18.1 (a fresh loco
+# starter otherwise resolves time 0.3.52, which fails to compile).
+cargo update -p time --precise 0.3.47
 
 cargo loco generate scaffold organizer \
-    deleted_at:ts \
+    deleted_at:tstz \
     name:string! \
     email:string! \
     phone:string! \
@@ -25,7 +29,7 @@ cargo loco generate scaffold organizer \
     --api
 
 cargo loco generate scaffold meeting \
-    deleted_at:ts \
+    deleted_at:tstz \
     organizer:references \
     status:string! \
     title:string! \
@@ -33,8 +37,8 @@ cargo loco generate scaffold meeting \
     long_description:text! \
     category:string! \
     visibility:string! \
-    scheduled_start_at:ts \
-    scheduled_end_at:ts \
+    scheduled_start_at:tstz \
+    scheduled_end_at:tstz \
     timezone:string! \
     location:string! \
     video_url:string! \
@@ -43,16 +47,16 @@ cargo loco generate scaffold meeting \
     joining_instructions:text! \
     calendar_uid:string! \
     summary:string! \
-    actual_start_at:ts \
-    actual_end_at:ts \
+    actual_start_at:tstz \
+    actual_end_at:tstz \
     overall_result:string! \
     additional_notes:text! \
     signed_by_name:string! \
-    signed_at:ts \
+    signed_at:tstz \
     --api
 
 cargo loco generate scaffold agenda_item \
-    deleted_at:ts \
+    deleted_at:tstz \
     meeting:references \
     position:int! \
     title:string! \
@@ -63,7 +67,7 @@ cargo loco generate scaffold agenda_item \
     --api
 
 cargo loco generate scaffold participant \
-    deleted_at:ts \
+    deleted_at:tstz \
     meeting:references \
     position:int! \
     name:string! \
@@ -76,7 +80,7 @@ cargo loco generate scaffold participant \
     --api
 
 cargo loco generate scaffold resource \
-    deleted_at:ts \
+    deleted_at:tstz \
     meeting:references \
     position:int! \
     resource_type:string! \
@@ -91,7 +95,7 @@ cargo loco generate scaffold resource \
     --api
 
 cargo loco generate scaffold recurring_rule \
-    deleted_at:ts \
+    deleted_at:tstz \
     meeting:references \
     frequency:string! \
     interval_count:int! \
@@ -100,13 +104,13 @@ cargo loco generate scaffold recurring_rule \
     by_set_position:int \
     by_month_of_year:int \
     series_count:int \
-    series_until:ts \
+    series_until:tstz \
     timezone:string! \
     rrule_text:string! \
     --api
 
 cargo loco generate scaffold action_item \
-    deleted_at:ts \
+    deleted_at:tstz \
     meeting:references \
     position:int! \
     title:string! \
@@ -116,12 +120,12 @@ cargo loco generate scaffold action_item \
     due_date:date \
     priority:string! \
     status:string! \
-    completed_at:ts \
+    completed_at:tstz \
     external_reference:string! \
     --api
 
 cargo loco generate scaffold meeting_output \
-    deleted_at:ts \
+    deleted_at:tstz \
     meeting:references \
     position:int! \
     title:string! \
@@ -132,7 +136,7 @@ cargo loco generate scaffold meeting_output \
     --api
 
 cargo loco generate scaffold meeting_outcome \
-    deleted_at:ts \
+    deleted_at:tstz \
     meeting:references \
     position:int! \
     title:string! \
@@ -143,7 +147,7 @@ cargo loco generate scaffold meeting_outcome \
     --api
 
 cargo loco generate scaffold meeting_grade \
-    deleted_at:ts \
+    deleted_at:tstz \
     meeting:references \
     duration_minutes:int \
     agenda_item_count:int! \
@@ -159,12 +163,12 @@ cargo loco generate scaffold meeting_grade \
     override_reason:string! \
     notes:text! \
     signed_by:string! \
-    signed_at:ts \
-    graded_at:ts! \
+    signed_at:tstz \
+    graded_at:tstz! \
     --api
 
 cargo loco generate scaffold meeting_grade_rule \
-    deleted_at:ts \
+    deleted_at:tstz \
     meeting_grade:references \
     rule_id:string! \
     instrument:string! \
@@ -174,7 +178,7 @@ cargo loco generate scaffold meeting_grade_rule \
     --api
 
 cargo loco generate scaffold meeting_grade_flag \
-    deleted_at:ts \
+    deleted_at:tstz \
     meeting_grade:references \
     flag_id:string! \
     category:string! \

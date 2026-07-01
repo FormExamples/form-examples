@@ -1,0 +1,132 @@
+// Generated from sql-migrations/. Do not edit by hand.
+// SOURCE: cardiology_request
+
+syntax = "proto3";
+
+package form_examples.cardiology_request;
+
+enum CardiologyRequestStatusEnum {
+  STATUS_UNSPECIFIED = 0;
+  STATUS_DRAFT = 1;  // draft
+  STATUS_SUBMITTED = 2;  // submitted
+  STATUS_TRIAGED = 3;  // triaged
+  STATUS_ACCEPTED = 4;  // accepted
+  STATUS_REDIRECTED = 5;  // redirected
+  STATUS_REJECTED = 6;  // rejected
+}
+
+enum CardiologyRequestSettingEnum {
+  SETTING_UNSPECIFIED = 0;
+  SETTING_OUTPATIENT = 1;  // outpatient
+  SETTING_INPATIENT = 2;  // inpatient
+  SETTING_COMMUNITY = 3;  // community
+  SETTING_EMERGENCY = 4;  // emergency
+}
+
+enum CardiologyRequestRequestedServiceEnum {
+  REQUESTEDSERVICE_UNSPECIFIED = 0;
+  REQUESTEDSERVICE_GENERAL_CARDIOLOGY = 1;  // general-cardiology
+  REQUESTEDSERVICE_RAPID_ACCESS_CHEST_PAIN = 2;  // rapid-access-chest-pain
+  REQUESTEDSERVICE_HEART_FAILURE = 3;  // heart-failure
+  REQUESTEDSERVICE_ARRHYTHMIA_EP = 4;  // arrhythmia-ep
+  REQUESTEDSERVICE_VALVE_CLINIC = 5;  // valve-clinic
+  REQUESTEDSERVICE_INHERITED_CARDIAC_CONDITIONS = 6;  // inherited-cardiac-conditions
+  REQUESTEDSERVICE_PRE_OPERATIVE_CARDIAC = 7;  // pre-operative-cardiac
+  REQUESTEDSERVICE_OTHER = 8;  // other
+}
+
+enum CardiologyRequestReferralReasonEnum {
+  REFERRALREASON_UNSPECIFIED = 0;
+  REFERRALREASON_CHEST_PAIN = 1;  // chest-pain
+  REFERRALREASON_BREATHLESSNESS = 2;  // breathlessness
+  REFERRALREASON_PALPITATIONS = 3;  // palpitations
+  REFERRALREASON_SYNCOPE = 4;  // syncope
+  REFERRALREASON_HEART_FAILURE_SYMPTOMS = 5;  // heart-failure-symptoms
+  REFERRALREASON_MURMUR_OR_VALVE = 6;  // murmur-or-valve
+  REFERRALREASON_ABNORMAL_ECG = 7;  // abnormal-ecg
+  REFERRALREASON_HYPERTENSION = 8;  // hypertension
+  REFERRALREASON_ARRHYTHMIA = 9;  // arrhythmia
+  REFERRALREASON_PRE_OPERATIVE_ASSESSMENT = 10;  // pre-operative-assessment
+  REFERRALREASON_OTHER = 11;  // other
+}
+
+enum CardiologyRequestChestPainCharacterEnum {
+  CHESTPAINCHARACTER_UNSPECIFIED = 0;
+  CHESTPAINCHARACTER_TYPICAL_ANGINA = 1;  // typical-angina
+  CHESTPAINCHARACTER_ATYPICAL = 2;  // atypical
+  CHESTPAINCHARACTER_NON_ANGINAL = 3;  // non-anginal
+  CHESTPAINCHARACTER_NONE = 4;  // none
+}
+
+enum CardiologyRequestNyhaClassEnum {
+  NYHACLASS_UNSPECIFIED = 0;
+  NYHACLASS_I = 1;  // i
+  NYHACLASS_II = 2;  // ii
+  NYHACLASS_III = 3;  // iii
+  NYHACLASS_IV = 4;  // iv
+}
+
+enum CardiologyRequestTroponinStatusEnum {
+  TROPONINSTATUS_UNSPECIFIED = 0;
+  TROPONINSTATUS_ELEVATED = 1;  // elevated
+  TROPONINSTATUS_NORMAL = 2;  // normal
+  TROPONINSTATUS_NOT_DONE = 3;  // not-done
+}
+
+enum CardiologyRequestBnpStatusEnum {
+  BNPSTATUS_UNSPECIFIED = 0;
+  BNPSTATUS_ELEVATED = 1;  // elevated
+  BNPSTATUS_NORMAL = 2;  // normal
+  BNPSTATUS_NOT_DONE = 3;  // not-done
+}
+
+enum CardiologyRequestUrgencyEnum {
+  URGENCY_UNSPECIFIED = 0;
+  URGENCY_ROUTINE = 1;  // routine
+  URGENCY_URGENT = 2;  // urgent
+  URGENCY_EMERGENCY = 3;  // emergency
+}
+
+message CardiologyRequest {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string patient_id = 5;  // UUID — uuid
+  string clinician_id = 6;  // UUID — uuid
+  CardiologyRequestStatusEnum status = 7;  // VARCHAR(20)
+  string site_name = 8;  // VARCHAR(255) — max 255 chars
+  CardiologyRequestSettingEnum setting = 9;  // VARCHAR(20)
+  string referral_date = 10;  // DATE — iso 8601 date
+  string requested_by_date = 11;  // DATE — iso 8601 date
+  CardiologyRequestRequestedServiceEnum requested_service = 12;  // VARCHAR(40)
+  CardiologyRequestReferralReasonEnum referral_reason = 13;  // VARCHAR(40)
+  string clinical_question = 14;  // VARCHAR(1000) — max 1000 chars
+  string relevant_history = 15;  // VARCHAR(1000) — max 1000 chars
+  bool symptom_chest_pain = 16;  // BOOLEAN
+  CardiologyRequestChestPainCharacterEnum chest_pain_character = 17;  // VARCHAR(15)
+  bool symptom_breathlessness = 18;  // BOOLEAN
+  CardiologyRequestNyhaClassEnum nyha_class = 19;  // VARCHAR(4)
+  bool symptom_palpitations = 20;  // BOOLEAN
+  bool symptom_syncope = 21;  // BOOLEAN
+  bool symptom_oedema = 22;  // BOOLEAN
+  bool suspected_acs = 23;  // BOOLEAN
+  bool exertional_syncope = 24;  // BOOLEAN
+  bool new_onset_heart_failure = 25;  // BOOLEAN
+  bool ecg_done = 26;  // BOOLEAN
+  string ecg_findings = 27;  // VARCHAR(1000) — max 1000 chars
+  CardiologyRequestTroponinStatusEnum troponin_status = 28;  // VARCHAR(10)
+  CardiologyRequestBnpStatusEnum bnp_status = 29;  // VARCHAR(10)
+  bool known_coronary_artery_disease = 30;  // BOOLEAN
+  bool previous_mi = 31;  // BOOLEAN
+  bool heart_failure = 32;  // BOOLEAN
+  bool valve_disease = 33;  // BOOLEAN
+  bool arrhythmia = 34;  // BOOLEAN
+  bool hypertension = 35;  // BOOLEAN
+  bool diabetes = 36;  // BOOLEAN
+  string current_medications = 37;  // VARCHAR(1000) — max 1000 chars
+  CardiologyRequestUrgencyEnum urgency = 38;  // VARCHAR(15)
+  string supervising_consultant = 39;  // VARCHAR(255) — max 255 chars
+  string requester_contact = 40;  // VARCHAR(255) — max 255 chars
+  string notes = 41;  // VARCHAR(1000) — max 1000 chars
+}

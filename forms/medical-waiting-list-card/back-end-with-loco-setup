@@ -8,11 +8,15 @@ createdb --host=localhost --port=5432 --username=loco --owner=loco "${form_snake
 createdb --host=localhost --port=5432 --username=loco --owner=loco "${form_snake_case}_test" || :
 createdb --host=localhost --port=5432 --username=loco --owner=loco "${form_snake_case}_production" || :
 
-loco new --name "${form_kebab_case}" --db postgres --bg async --assets none
-cd "${form_kebab_case}"
+loco new --name "${form_snake_case}" --db postgres --bg async --assets none -a
+cd "${form_snake_case}"
+
+# Pin time to a version compatible with cookie 0.18.1 (a fresh loco
+# starter otherwise resolves time 0.3.52, which fails to compile).
+cargo update -p time --precise 0.3.47
 
 cargo loco generate scaffold patient \
-    deleted_at:ts \
+    deleted_at:tstz \
     name:string! \
     birth_date:date! \
     sex:string! \
@@ -29,7 +33,7 @@ cargo loco generate scaffold patient \
     --api
 
 cargo loco generate scaffold practitioner \
-    deleted_at:ts \
+    deleted_at:tstz \
     name:string! \
     email:text \
     phone:text \
@@ -43,7 +47,7 @@ cargo loco generate scaffold practitioner \
     --api
 
 cargo loco generate scaffold medical_waiting_list_card \
-    deleted_at:ts \
+    deleted_at:tstz \
     patient:references \
     practitioner:references \
     status:string! \
@@ -69,11 +73,11 @@ cargo loco generate scaffold medical_waiting_list_card \
     consent_to_reminders:string! \
     communication_notes:text! \
     additional_notes:text! \
-    signed_at:ts \
+    signed_at:tstz \
     --api
 
 cargo loco generate scaffold medical_waiting_list_card_appointment \
-    deleted_at:ts \
+    deleted_at:tstz \
     medical_waiting_list_card:references \
     appointment_date:date \
     appointment_time:string \
@@ -91,7 +95,7 @@ cargo loco generate scaffold medical_waiting_list_card_appointment \
     --api
 
 cargo loco generate scaffold medical_waiting_list_card_grade \
-    deleted_at:ts \
+    deleted_at:tstz \
     medical_waiting_list_card:references \
     waiting_time_status:string! \
     clinical_priority:string! \
@@ -102,11 +106,11 @@ cargo loco generate scaffold medical_waiting_list_card_grade \
     days_to_breach:int \
     days_to_appointment:int \
     grader_notes:text! \
-    graded_at:ts! \
+    graded_at:tstz! \
     --api
 
 cargo loco generate scaffold medical_waiting_list_card_grade_rule \
-    deleted_at:ts \
+    deleted_at:tstz \
     medical_waiting_list_card_grade:references \
     rule_id:string! \
     instrument:string! \
@@ -116,7 +120,7 @@ cargo loco generate scaffold medical_waiting_list_card_grade_rule \
     --api
 
 cargo loco generate scaffold medical_waiting_list_card_grade_flag \
-    deleted_at:ts \
+    deleted_at:tstz \
     medical_waiting_list_card_grade:references \
     flag_id:string! \
     category:string! \

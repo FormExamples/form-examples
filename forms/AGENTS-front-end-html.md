@@ -1,7 +1,13 @@
-# AGENTS — `front-end-*-with-html/` (Lily Design System HTML headless)
+# AGENTS — `front-end-with-html/` (Lily Design System HTML headless)
 
-Conventions for every form's `front-end-form-with-html/` and
-`front-end-dashboard-with-html/` subprojects. Applies to all 133 forms.
+Conventions for every form's **consolidated** `front-end-with-html/`
+subproject — a single directory whose `index.html` is the single-page wizard
+and `dashboard.html` is the vetting dashboard, sharing one `css/` and `js/`
+(the scoring engine lives in `js/{types,rules,grader,flags}.js`; the wizard
+app in `js/form-app.js`, the dashboard app in `js/dashboard-app.js`). This
+consolidated single-directory layout is the **gold standard**. Legacy forms may
+still have split `front-end-form-with-html/` + `front-end-dashboard-with-html/`
+directories; consolidate them into `front-end-with-html/` when touched.
 
 Companion docs: [`plan.md`](plan.md), [`tasks.md`](tasks.md).
 
@@ -144,7 +150,7 @@ Filters above the table reuse `.text-input`, `.select`, and `.button`.
 
 ## 4. Page shell
 
-Every `front-end-form-with-html/index.html` follows this skeleton:
+Every `front-end-with-html/index.html` (the wizard) follows this skeleton:
 
 ```html
 <!DOCTYPE html>
@@ -201,7 +207,10 @@ Every `front-end-form-with-html/index.html` follows this skeleton:
 </html>
 ```
 
-Dashboards follow the analogous `.data-table-*` shell.
+The dashboard (`front-end-with-html/dashboard.html`) follows the analogous
+`.data-table-*` shell, links its own `css/dashboard.css`, and loads
+`js/dashboard-app.js` (with `js/dashboard-types.js`, `js/data.js`,
+`js/api.js`). The wizard and dashboard cross-link in their page headers.
 
 ## 5. JavaScript conventions
 
@@ -231,7 +240,7 @@ Dashboards follow the analogous `.data-table-*` shell.
 Key pattern, unchanged from current convention:
 
 ```
-{form-slug}.front-end-form-with-html.v1
+{form-slug}.front-end-with-html.v1
 ```
 
 Values are JSON-serialized form state. On load, app.js merges the stored
@@ -273,14 +282,14 @@ when only one error is involved.
 
 ## 9. Canonical reference
 
-The canonical Lily-shaped pair is:
+The canonical consolidated reference is:
 
-- `forms/pre-operative-assessment-by-clinician/front-end-form-with-html/`
-- `forms/pre-operative-assessment-by-clinician/front-end-dashboard-with-html/`
+- `forms/cardiology-request/front-end-with-html/` — `index.html` wizard +
+  `dashboard.html`, shared `css/` and `js/`, four-axis engine.
 
-The `bin/generate-front-end-form-with-html.py` and
-`bin/generate-front-end-dashboard-with-html.py` generators emit output
-equivalent to the canonical form for any other form's spec.
+Legacy split references (`front-end-form-with-html/` +
+`front-end-dashboard-with-html/`) remain in older forms such as
+`forms/pre-operative-assessment-by-clinician/` until consolidated.
 
 ## 10. CI drift check
 

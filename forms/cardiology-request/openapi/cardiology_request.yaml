@@ -1,0 +1,348 @@
+# Generated from sql-migrations/. Do not edit by hand.
+# SOURCE: cardiology_request
+openapi: 3.1.0
+info:
+  title: Cardiology Request — CardiologyRequest
+  version: 1.0.0
+  description: Cardiology referral / consult request (referral into cardiology). Captures the requested cardiology service and reason, the specific clinical question, presenting symptoms and functional class, acute red flags, investigations already performed (ECG, troponin, BNP), cardiac history and risk factors, and triage details. This is the source-of-truth record that the four-axis vetting grade is computed from.
+paths:
+  /cardiology-requests:
+    get:
+      summary: List CardiologyRequest records
+      operationId: listCardiologyRequest
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of CardiologyRequest records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/CardiologyRequest"
+    post:
+      summary: Create a new CardiologyRequest
+      operationId: createCardiologyRequest
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CardiologyRequest"
+      responses:
+        "201":
+          description: The newly created CardiologyRequest
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CardiologyRequest"
+        "400":
+          description: Validation error
+  /cardiology-requests/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one CardiologyRequest by id
+      operationId: getCardiologyRequest
+      responses:
+        "200":
+          description: The requested CardiologyRequest
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CardiologyRequest"
+        "404":
+          description: CardiologyRequest not found
+    patch:
+      summary: Update an existing CardiologyRequest
+      operationId: updateCardiologyRequest
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CardiologyRequest"
+      responses:
+        "200":
+          description: The updated CardiologyRequest
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CardiologyRequest"
+        "404":
+          description: CardiologyRequest not found
+    delete:
+      summary: Soft-delete a CardiologyRequest
+      operationId: deleteCardiologyRequest
+      responses:
+        "204":
+          description: CardiologyRequest deleted
+        "404":
+          description: CardiologyRequest not found
+components:
+  schemas:
+    CardiologyRequest:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was updated most-recently.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was deleted a.k.a. soft-removed.
+        patient_id:
+          type: string
+          format: uuid
+          description: Foreign key to the patient being referred.
+        clinician_id:
+          type: string
+          format: uuid
+          description: Foreign key to the referring clinician (referrer).
+        status:
+          type: string
+          enum:
+            - draft
+            - submitted
+            - triaged
+            - accepted
+            - redirected
+            - rejected
+            - ""
+          description: "Referral lifecycle status: draft, submitted, triaged, accepted, redirected, rejected."
+        site_name:
+          type: string
+          maxLength: 255
+          description: Name of the referring site / practice / ward.
+        setting:
+          type: string
+          enum:
+            - outpatient
+            - inpatient
+            - community
+            - emergency
+            - ""
+          description: "Care setting the referral originates from: outpatient, inpatient, community, emergency."
+        referral_date:
+          type: string
+          format: date
+          description: Date the referral was made.
+        requested_by_date:
+          type: string
+          format: date
+          description: Date by which the referrer requests the patient be seen.
+        requested_service:
+          type: string
+          enum:
+            - general-cardiology
+            - rapid-access-chest-pain
+            - heart-failure
+            - arrhythmia-ep
+            - valve-clinic
+            - inherited-cardiac-conditions
+            - pre-operative-cardiac
+            - other
+            - ""
+          description: "Requested cardiology service: general-cardiology, rapid-access-chest-pain, heart-failure, arrhythmia-ep, valve-clinic, inherited-cardiac-conditions, pre-operative-cardiac, other."
+        referral_reason:
+          type: string
+          enum:
+            - chest-pain
+            - breathlessness
+            - palpitations
+            - syncope
+            - heart-failure-symptoms
+            - murmur-or-valve
+            - abnormal-ecg
+            - hypertension
+            - arrhythmia
+            - pre-operative-assessment
+            - other
+            - ""
+          description: "Primary reason for referral: chest-pain, breathlessness, palpitations, syncope, heart-failure-symptoms, murmur-or-valve, abnormal-ecg, hypertension, arrhythmia, pre-operative-assessment, other."
+        clinical_question:
+          type: string
+          maxLength: 1000
+          description: Specific clinical question the cardiology team is asked to answer.
+        relevant_history:
+          type: string
+          maxLength: 1000
+          description: Relevant clinical history and context for the referral.
+        symptom_chest_pain:
+          type: boolean
+          description: Whether the patient has chest pain.
+        chest_pain_character:
+          type: string
+          enum:
+            - typical-angina
+            - atypical
+            - non-anginal
+            - none
+            - ""
+          description: "Character of chest pain per the angina typicality model: typical-angina, atypical, non-anginal, none."
+        symptom_breathlessness:
+          type: boolean
+          description: Whether the patient has breathlessness / dyspnoea.
+        nyha_class:
+          type: string
+          enum:
+            - i
+            - ii
+            - iii
+            - iv
+            - ""
+          description: "New York Heart Association functional class for breathlessness: i, ii, iii, iv."
+        symptom_palpitations:
+          type: boolean
+          description: Whether the patient has palpitations.
+        symptom_syncope:
+          type: boolean
+          description: Whether the patient has had syncope or blackout.
+        symptom_oedema:
+          type: boolean
+          description: Whether the patient has peripheral oedema.
+        suspected_acs:
+          type: boolean
+          description: "Red flag: suspected acute coronary syndrome (warrants emergency pathway, not routine referral)."
+        exertional_syncope:
+          type: boolean
+          description: "Red flag: syncope on exertion (possible structural / arrhythmic cause requiring urgent assessment)."
+        new_onset_heart_failure:
+          type: boolean
+          description: "Red flag: new-onset heart failure (warrants urgent assessment per NICE)."
+        ecg_done:
+          type: boolean
+          description: Whether a resting ECG has been performed prior to referral.
+        ecg_findings:
+          type: string
+          maxLength: 1000
+          description: Resting ECG findings, if performed.
+        troponin_status:
+          type: string
+          enum:
+            - elevated
+            - normal
+            - not-done
+            - ""
+          description: "Troponin result status: elevated, normal, not-done."
+        bnp_status:
+          type: string
+          enum:
+            - elevated
+            - normal
+            - not-done
+            - ""
+          description: "BNP / NT-proBNP result status: elevated, normal, not-done."
+        known_coronary_artery_disease:
+          type: boolean
+          description: "History: known coronary artery disease."
+        previous_mi:
+          type: boolean
+          description: "History: previous myocardial infarction."
+        heart_failure:
+          type: boolean
+          description: "History: established heart failure."
+        valve_disease:
+          type: boolean
+          description: "History: known valve disease."
+        arrhythmia:
+          type: boolean
+          description: "History: known arrhythmia."
+        hypertension:
+          type: boolean
+          description: "History: hypertension."
+        diabetes:
+          type: boolean
+          description: "History: diabetes mellitus."
+        current_medications:
+          type: string
+          maxLength: 1000
+          description: Current cardiac and other relevant medications.
+        urgency:
+          type: string
+          enum:
+            - routine
+            - urgent
+            - emergency
+            - ""
+          description: "Requested triage urgency: routine, urgent, emergency."
+        supervising_consultant:
+          type: string
+          maxLength: 255
+          description: Name of the supervising consultant, if the referrer is in training.
+        requester_contact:
+          type: string
+          maxLength: 255
+          description: Contact details for the referrer for any vetting queries.
+        notes:
+          type: string
+          maxLength: 1000
+          description: Free-text notes accompanying the referral.
+      required:
+        - created_at
+        - updated_at
+        - patient_id
+        - clinician_id
+        - status
+        - site_name
+        - setting
+        - requested_service
+        - referral_reason
+        - clinical_question
+        - relevant_history
+        - symptom_chest_pain
+        - chest_pain_character
+        - symptom_breathlessness
+        - nyha_class
+        - symptom_palpitations
+        - symptom_syncope
+        - symptom_oedema
+        - suspected_acs
+        - exertional_syncope
+        - new_onset_heart_failure
+        - ecg_done
+        - ecg_findings
+        - troponin_status
+        - bnp_status
+        - known_coronary_artery_disease
+        - previous_mi
+        - heart_failure
+        - valve_disease
+        - arrhythmia
+        - hypertension
+        - diabetes
+        - current_medications
+        - urgency
+        - supervising_consultant
+        - requester_contact
+        - notes
+      description: Cardiology referral / consult request (referral into cardiology). Captures the requested cardiology service and reason, the specific clinical question, presenting symptoms and functional class, acute red flags, investigations already performed (ECG, troponin, BNP), cardiac history and risk factors, and triage details. This is the source-of-truth record that the four-axis vetting grade is computed from.

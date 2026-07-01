@@ -8,11 +8,15 @@ createdb --host=localhost --port=5432 --username=loco --owner=loco "${form_snake
 createdb --host=localhost --port=5432 --username=loco --owner=loco "${form_snake_case}_test" || :
 createdb --host=localhost --port=5432 --username=loco --owner=loco "${form_snake_case}_production" || :
 
-loco new --name "${form_kebab_case}" --db postgres --bg async --assets none
-cd "${form_kebab_case}"
+loco new --name "${form_snake_case}" --db postgres --bg async --assets none -a
+cd "${form_snake_case}"
+
+# Pin time to a version compatible with cookie 0.18.1 (a fresh loco
+# starter otherwise resolves time 0.3.52, which fails to compile).
+cargo update -p time --precise 0.3.47
 
 cargo loco generate scaffold patient \
-    deleted_at:ts \
+    deleted_at:tstz \
     name:string! \
     birth_date:date! \
     email:text \
@@ -30,7 +34,7 @@ cargo loco generate scaffold patient \
     --api
 
 cargo loco generate scaffold clinician \
-    deleted_at:ts \
+    deleted_at:tstz \
     name:text! \
     email:text \
     phone:text \
@@ -44,68 +48,14 @@ cargo loco generate scaffold clinician \
     --api
 
 cargo loco generate scaffold assessment \
-    deleted_at:ts \
+    deleted_at:tstz \
     patient:references \
     status:string! \
     --api
 
-cargo loco generate scaffold grade \
-    deleted_at:ts \
+cargo loco generate scaffold assessment_medications \
+    deleted_at:tstz \
     assessment:references \
-    risk_level:string! \
-    risk_factor_count:int! \
-    graded_at:ts! \
-    --api
-
-cargo loco generate scaffold grading_fired_rule \
-    deleted_at:ts \
-    grade:references \
-    rule_id:string! \
-    category:string! \
-    description:text! \
-    severity_level:string! \
-    --api
-
-cargo loco generate scaffold grading_additional_flag \
-    deleted_at:ts \
-    grade:references \
-    flag_id:string! \
-    category:string! \
-    message:text! \
-    priority:string! \
-    --api
-
-cargo loco generate scaffold grade \
-    deleted_at:ts \
-    assessment:references \
-    risk_level:string! \
-    risk_factor_count:int! \
-    graded_at:ts! \
-    --api
-
-cargo loco generate scaffold grading_fired_rule \
-    deleted_at:ts \
-    grade:references \
-    rule_id:string! \
-    category:string! \
-    description:text! \
-    severity_level:string! \
-    --api
-
-cargo loco generate scaffold grading_additional_flag \
-    deleted_at:ts \
-    grade:references \
-    flag_id:string! \
-    category:string! \
-    message:text! \
-    priority:string! \
-    --api
-
-cargo loco generate scaffold assessment \
-    deleted_at:ts \
-    patient:references \
-    status:string! \
-    medications_deleted_at:ts \
     takes_medications:string! \
     takes_over_the_counter:string! \
     takes_supplements:string! \
@@ -114,7 +64,10 @@ cargo loco generate scaffold assessment \
     pharmacy_name:string! \
     pharmacy_phone:string! \
     medications_notes:text! \
-    medication_item_deleted_at:ts \
+    --api
+
+cargo loco generate scaffold assessment_medication_item \
+    deleted_at:tstz \
     medications:references \
     medication_name:string! \
     dose:string! \
@@ -124,7 +77,11 @@ cargo loco generate scaffold assessment \
     reason:string! \
     start_date:date \
     sort_order:int! \
-    allergies_deleted_at:ts \
+    --api
+
+cargo loco generate scaffold assessment_allergies \
+    deleted_at:tstz \
+    assessment:references \
     has_drug_allergies:string! \
     has_food_allergies:string! \
     has_environmental_allergies:string! \
@@ -134,119 +91,28 @@ cargo loco generate scaffold assessment \
     history_of_anaphylaxis:string! \
     carries_epipen:string! \
     allergies_notes:text! \
-    allergy_item_deleted_at:ts \
+    --api
+
+cargo loco generate scaffold assessment_allergy_item \
+    deleted_at:tstz \
     allergies:references \
     allergen:string! \
     allergy_type:string! \
     reaction:text! \
     severity:string! \
-    allergy_item_sort_order:int! \
-    medications_deleted_at:ts \
-    medications_takes_medications:string! \
-    medications_takes_over_the_counter:string! \
-    medications_takes_supplements:string! \
-    medications_supplement_details:text! \
-    medications_medication_adherence:string! \
-    medications_pharmacy_name:string! \
-    medications_pharmacy_phone:string! \
-    medications_medications_notes:text! \
-    medication_item_deleted_at:ts \
-    medication_item_medications:references \
-    medication_item_medication_name:string! \
-    medication_item_dose:string! \
-    medication_item_frequency:string! \
-    medication_item_route:string! \
-    medication_item_prescriber:string! \
-    medication_item_reason:string! \
-    medication_item_start_date:date \
-    medication_item_sort_order:int! \
-    allergies_deleted_at:ts \
-    allergies_has_drug_allergies:string! \
-    allergies_has_food_allergies:string! \
-    allergies_has_environmental_allergies:string! \
-    allergies_has_latex_allergy:string! \
-    allergies_has_contrast_allergy:string! \
-    allergies_has_anaesthetic_allergy:string! \
-    allergies_history_of_anaphylaxis:string! \
-    allergies_carries_epipen:string! \
-    allergies_allergies_notes:text! \
-    allergy_item_deleted_at:ts \
-    allergy_item_allergies:references \
-    allergy_item_allergen:string! \
-    allergy_item_allergy_type:string! \
-    allergy_item_reaction:text! \
-    allergy_item_severity:string! \
-    allergy_item_sort_order:int! \
+    sort_order:int! \
     --api
 
 cargo loco generate scaffold grade \
-    deleted_at:ts \
+    deleted_at:tstz \
     assessment:references \
     risk_level:string! \
     risk_factor_count:int! \
-    graded_at:ts! \
+    graded_at:tstz! \
     --api
 
 cargo loco generate scaffold grading_fired_rule \
-    deleted_at:ts \
-    grade:references \
-    rule_id:string! \
-    category:string! \
-    description:text! \
-    severity_level:string! \
-    --api
-
-cargo loco generate scaffold patient \
-    deleted_at:ts \
-    name:string! \
-    birth_date:date! \
-    email:text \
-    phone:text \
-    postal_address_as_full_text:text \
-    country_as_iso_3166_1_alpha_2:string \
-    postcode:text \
-    united_kingdom_nhs_number:string^ \
-    waist_as_cm:double \
-    height_as_cm:double \
-    weight_as_kg:double \
-    body_mass_index:double \
-    waist_height_ratio:double \
-    vo2_max:double \
-    --api
-
-cargo loco generate scaffold clinician \
-    deleted_at:ts \
-    name:text! \
-    email:text \
-    phone:text \
-    postal_address_as_full_text:text \
-    country_as_iso_3166_1_alpha_2:string \
-    postcode:text \
-    role:text! \
-    registration_body:text! \
-    registration_number:text! \
-    united_kingdom_nhs_number:string^ \
-    --api
-
-cargo loco generate scaffold grading_additional_flag \
-    deleted_at:ts \
-    grade:references \
-    flag_id:string! \
-    category:string! \
-    message:text! \
-    priority:string! \
-    --api
-
-cargo loco generate scaffold grade \
-    deleted_at:ts \
-    assessment:references \
-    risk_level:string! \
-    risk_factor_count:int! \
-    graded_at:ts! \
-    --api
-
-cargo loco generate scaffold grading_fired_rule \
-    deleted_at:ts \
+    deleted_at:tstz \
     grade:references \
     rule_id:string! \
     category:string! \
@@ -255,7 +121,7 @@ cargo loco generate scaffold grading_fired_rule \
     --api
 
 cargo loco generate scaffold grading_additional_flag \
-    deleted_at:ts \
+    deleted_at:tstz \
     grade:references \
     flag_id:string! \
     category:string! \

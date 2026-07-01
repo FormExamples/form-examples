@@ -114,7 +114,7 @@ def loco_type_for(col_type: str) -> str:
     if t_base in ("SMALLINT", "INT2", "INT", "INT4", "INTEGER", "SERIAL"):
         return "int"
     if t_base in ("BIGINT", "INT8", "BIGSERIAL"):
-        return "bigint"
+        return "big_int"
     if t_base in ("REAL", "FLOAT4"):
         return "float"
     if t_base in ("DOUBLE", "DOUBLE PRECISION", "FLOAT", "FLOAT8"):
@@ -127,7 +127,7 @@ def loco_type_for(col_type: str) -> str:
     if t_base == "DATE":
         return "date"
     if t_base in ("TIMESTAMPTZ", "TIMESTAMP", "TIMESTAMPZ"):
-        return "ts"
+        return "tstz"
     if t_base == "JSONB":
         return "jsonb"
     if t_base == "JSON":
@@ -255,8 +255,12 @@ def render_generate_sh(form_slug: str, tables: list) -> str:
         'createdb --host=localhost --port=5432 --username=loco --owner=loco "${form_snake_case}_test" || :',
         'createdb --host=localhost --port=5432 --username=loco --owner=loco "${form_snake_case}_production" || :',
         "",
-        'loco new --name "${form_kebab_case}" --db postgres --bg async --assets none',
-        'cd "${form_kebab_case}"',
+        'loco new --name "${form_snake_case}" --db postgres --bg async --assets none -a',
+        'cd "${form_snake_case}"',
+        "",
+        "# Pin time to a version compatible with cookie 0.18.1 (a fresh loco",
+        "# starter otherwise resolves time 0.3.52, which fails to compile).",
+        "cargo update -p time --precise 0.3.47",
         "",
     ]
 
@@ -391,9 +395,20 @@ def process_form(form_dir: Path) -> int:
         tables = parse_create_tables(sf.read_text(encoding="utf-8"))
         all_tables.extend(tables)
 
-    # Fold every `assessment_<section>` child into the `assessment` parent so
-    # the generator emits a single scaffold command for the whole assessment.
-    all_tables = merge_assessment_tables(all_tables)
+    # Relational per-table: emit one `cargo loco generate scaffold` per
+    # CREATE TABLE (no folding of `assessment_<section>` children into the
+    # parent). Dedupe by table name, keeping the first occurrence, so forms
+    # that also ship a combined `NN_schema.sql` alongside per-table files do
+    # not scaffold a table twice. First-occurrence order preserves the FK
+    # dependency order from the per-table migration files.
+    seen = set()
+    deduped = []
+    for name, cols in all_tables:
+        if name in seen:
+            continue
+        seen.add(name)
+        deduped.append((name, cols))
+    all_tables = deduped
 
     form_slug = form_dir.name
 

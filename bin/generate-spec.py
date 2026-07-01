@@ -1,24 +1,26 @@
 #!/usr/bin/env python3
-"""bin/generate-spec.py — Generate forms/<slug>/spec.md per form.
+"""bin/generate-spec.py — Generate forms/<slug>/spec/index.md per form.
 
 For every directory under forms/ that contains an index.md, write a
-spec.md that:
+spec/index.md that:
 
 - restates the form purpose (drawn from index.md),
 - lists the contract artefacts each implementation must satisfy
-  (SQL, XML, FHIR, protobuf, OpenAPI, four front-ends, Rust crate),
+  (SQL, XML, FHIR, protobuf, OpenAPI, consolidated front-ends, Rust crate),
 - records the acceptance criteria,
 - cross-links AGENTS.md, plan.md, tasks.md, doc/.
 
-The spec.md is the **living domain spec** for each form, the form-level
-counterpart to the top-level spec.md.
+The per-form spec is a **directory** `spec/` holding `index.md` (the living
+domain spec) plus a `README.md` symlink, the form-level counterpart to the
+top-level system spec. (Older forms used a single `spec.md` file; the gold
+standard is now the `spec/` directory.)
 
 Idempotent: re-running with no upstream change is a no-op (same bytes).
 
 Usage:
   bin/generate-spec.py            # generate for every form
   bin/generate-spec.py <slug> ... # generate only the named forms
-  bin/generate-spec.py --check    # exit non-zero if any spec.md would change
+  bin/generate-spec.py --check    # exit non-zero if any spec/index.md would change
 """
 
 from __future__ import annotations
@@ -86,7 +88,7 @@ def section(index_md: str, name: str) -> str:
 
 
 def count_sql(form_dir: Path) -> int:
-    sql_dir = form_dir / "sql-migrations"
+    sql_dir = form_dir / "sql"
     if not sql_dir.is_dir():
         return 0
     return len([p for p in sql_dir.glob("*.sql")])
@@ -96,15 +98,13 @@ def stack_inventory(form_dir: Path) -> list[tuple[str, str]]:
     """Return [(subdir, status)] for each artefact directory present."""
     items: list[tuple[str, str]] = []
     candidates = [
-        ("sql-migrations", "source of truth"),
-        ("xml-representations", "generated"),
-        ("fhir-r5", "generated"),
+        ("sql", "source of truth"),
+        ("xml", "generated"),
+        ("fhir", "generated"),
         ("protobuf", "generated"),
         ("openapi", "generated"),
-        ("front-end-form-with-html", "Lily contract"),
-        ("front-end-form-with-svelte", "SvelteKit"),
-        ("front-end-dashboard-with-html", "Lily contract"),
-        ("front-end-dashboard-with-svelte", "SvelteKit + SVAR"),
+        ("front-end-with-html", "HTML + Lily (wizard + dashboard)"),
+        ("front-end-with-svelte", "SvelteKit (wizard + dashboard)"),
         ("back-end-with-loco", "Rust + Loco JSON API"),
     ]
     for name, label in candidates:
@@ -144,7 +144,7 @@ def render_spec(slug: str, form_dir: Path) -> str:
     out.append("")
     out.append(purpose)
     out.append("")
-    out.append("Full design description: [`index.md`](index.md).")
+    out.append("Full design description: [`index.md`](../index.md).")
     out.append("")
     out.append("## 2. Scope")
     out.append("")
@@ -163,7 +163,7 @@ def render_spec(slug: str, form_dir: Path) -> str:
         out.append("## 3. Scoring system")
         out.append("")
         out.append(
-            "See [`index.md`](index.md) for the scoring instrument, ranges, and "
+            "See [`index.md`](../index.md) for the scoring instrument, ranges, and "
             "categories applicable to this form."
         )
         out.append("")
@@ -171,7 +171,7 @@ def render_spec(slug: str, form_dir: Path) -> str:
     out.append("")
     out.append(
         "**Inputs.** A typed assessment object whose shape mirrors the SQL schema "
-        "in `sql-migrations/` ({} migration files). Unanswered text and enum "
+        "in `sql/` ({} migration files). Unanswered text and enum "
         "fields default to `''`; unanswered numeric, date, and time fields "
         "default to `null`.".format(sql_count)
     )
@@ -196,7 +196,7 @@ def render_spec(slug: str, form_dir: Path) -> str:
     out.append(
         "Generated artefacts (XML, FHIR R5, Protocol Buffers, OpenAPI, Loco "
         "setup script) are never hand-edited; re-run the generators in "
-        "[`/AGENTS.md`](../../AGENTS.md) §Tools after schema changes."
+        "[`/AGENTS.md`](../../../AGENTS.md) §Tools after schema changes."
     )
     out.append("")
     out.append("## 6. Acceptance criteria")
@@ -204,15 +204,15 @@ def render_spec(slug: str, form_dir: Path) -> str:
     out.append("- `bin/test-form {}` exits cleanly.".format(slug))
     out.append("- The scoring engine is pure (no side effects, no I/O) and unit-tested.")
     out.append("- The HTML front-ends conform to the Lily HTML headless contract")
-    out.append("  ([`forms/AGENTS-front-end-html.md`](../AGENTS-front-end-html.md)).")
+    out.append("  ([`forms/AGENTS-front-end-html.md`](../../AGENTS-front-end-html.md)).")
     out.append("- The SvelteKit front-ends conform to the Lily Svelte headless contract")
-    out.append("  ([`forms/AGENTS-front-end-svelte.md`](../AGENTS-front-end-svelte.md))")
+    out.append("  ([`forms/AGENTS-front-end-svelte.md`](../../AGENTS-front-end-svelte.md))")
     out.append("  and pass `pnpm check` and `pnpm test`.")
     out.append("- The Rust crate builds (`cargo build`) and tests pass (`cargo test`).")
     out.append("- `bin/lily-html-refactor --check {}` reports no drift.".format(slug))
     out.append("- LocalStorage keys preserve draft state across reloads:")
-    out.append("  - `{}.front-end-form-with-html.v1` (HTML)".format(slug))
-    out.append("  - `{}.front-end-form-with-svelte.v1` (SvelteKit)".format(slug))
+    out.append("  - `{}.front-end-with-html.v1` (HTML)".format(slug))
+    out.append("  - `{}.front-end-with-svelte.v1` (SvelteKit)".format(slug))
     out.append("")
     out.append("## 7. Compliance")
     out.append("")
@@ -221,20 +221,20 @@ def render_spec(slug: str, form_dir: Path) -> str:
         "UK Medical Devices Regulations 2002, ISO/IEC/IEEE 26514:2022, UK MHRA "
         "Software and AI as a Medical Device. Form-specific classification (e.g. "
         "Class IIa where output drives clinical decisions) is recorded in "
-        "[`index.md`](index.md) and [`AGENTS.md`](AGENTS.md) where it differs "
+        "[`index.md`](../index.md) and [`AGENTS.md`](../AGENTS.md) where it differs "
         "from the baseline."
     )
     out.append("")
     out.append("## 8. References")
     out.append("")
-    out.append("- [`index.md`](index.md) — form description and scoring details")
-    out.append("- [`AGENTS.md`](AGENTS.md) — agent instructions")
-    out.append("- [`plan.md`](plan.md) — implementation roadmap")
-    out.append("- [`tasks.md`](tasks.md) — task tracking")
-    out.append("- [`/spec.md`](../../spec.md) — system-level specification")
-    out.append("- [`/AGENTS.md`](../../AGENTS.md) — cross-cutting agent instructions")
-    out.append("- [`../AGENTS-front-end-html.md`](../AGENTS-front-end-html.md) — Lily HTML contract")
-    out.append("- [`../AGENTS-front-end-svelte.md`](../AGENTS-front-end-svelte.md) — Lily Svelte contract")
+    out.append("- [`index.md`](../index.md) — form description and scoring details")
+    out.append("- [`AGENTS.md`](../AGENTS.md) — agent instructions")
+    out.append("- [`plan.md`](../plan.md) — implementation roadmap")
+    out.append("- [`tasks.md`](../tasks.md) — task tracking")
+    out.append("- [`/spec.md`](../../../spec.md) — system-level specification")
+    out.append("- [`/AGENTS.md`](../../../AGENTS.md) — cross-cutting agent instructions")
+    out.append("- [`../AGENTS-front-end-html.md`](../../AGENTS-front-end-html.md) — Lily HTML contract")
+    out.append("- [`../AGENTS-front-end-svelte.md`](../../AGENTS-front-end-svelte.md) — Lily Svelte contract")
     out.append("")
     out.append("## 9. Verify")
     out.append("")
@@ -254,7 +254,7 @@ def main() -> int:
     parser.add_argument(
         "--check",
         action="store_true",
-        help="Exit non-zero if any spec.md would change, no writes",
+        help="Exit non-zero if any spec/index.md would change, no writes",
     )
     args = parser.parse_args()
 
@@ -281,7 +281,8 @@ def main() -> int:
 
     written = unchanged = drift = 0
     for slug, d in targets:
-        spec_path = d / "spec.md"
+        spec_dir = d / "spec"
+        spec_path = spec_dir / "index.md"
         new_text = render_spec(slug, d)
         current = spec_path.read_text() if spec_path.is_file() else None
         if current == new_text:
@@ -290,7 +291,15 @@ def main() -> int:
             drift += 1
             print(f"drift: {spec_path.relative_to(REPO_ROOT)}")
         else:
+            spec_dir.mkdir(exist_ok=True)
             spec_path.write_text(new_text)
+            # README.md -> index.md symlink for GitHub rendering of the spec dir
+            readme = spec_dir / "README.md"
+            if not readme.exists():
+                try:
+                    readme.symlink_to("index.md")
+                except OSError:
+                    pass
             written += 1
 
     print(f"spec generator [{'CHECK' if args.check else 'WRITE'}]: "

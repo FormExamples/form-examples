@@ -8,11 +8,15 @@ createdb --host=localhost --port=5432 --username=loco --owner=loco "${form_snake
 createdb --host=localhost --port=5432 --username=loco --owner=loco "${form_snake_case}_test" || :
 createdb --host=localhost --port=5432 --username=loco --owner=loco "${form_snake_case}_production" || :
 
-loco new --name "${form_kebab_case}" --db postgres --bg async --assets none
-cd "${form_kebab_case}"
+loco new --name "${form_snake_case}" --db postgres --bg async --assets none -a
+cd "${form_snake_case}"
+
+# Pin time to a version compatible with cookie 0.18.1 (a fresh loco
+# starter otherwise resolves time 0.3.52, which fails to compile).
+cargo update -p time --precise 0.3.47
 
 cargo loco generate scaffold reporter \
-    deleted_at:ts \
+    deleted_at:tstz \
     name:string! \
     email:text! \
     phone:text! \
@@ -25,7 +29,7 @@ cargo loco generate scaffold reporter \
     --api
 
 cargo loco generate scaffold participant \
-    deleted_at:ts \
+    deleted_at:tstz \
     name:string! \
     email:text! \
     phone:text! \
@@ -36,13 +40,13 @@ cargo loco generate scaffold participant \
     --api
 
 cargo loco generate scaffold issue_tracker \
-    deleted_at:ts \
+    deleted_at:tstz \
     reporter:references \
     status:string! \
-    reported_at:ts! \
-    discovered_at:ts \
-    started_at:ts \
-    resolved_at:ts \
+    reported_at:tstz! \
+    discovered_at:tstz \
+    started_at:tstz \
+    resolved_at:tstz \
     issue_category:string! \
     environment:string! \
     system_name:string! \
@@ -64,7 +68,7 @@ cargo loco generate scaffold issue_tracker \
     sx_error_messages:text! \
     sx_screenshots_url:string! \
     sx_logs_url:string! \
-    sx_first_observed_at:ts \
+    sx_first_observed_at:tstz \
     fx_broken_components:text! \
     fx_failed_services:string! \
     fx_stuck_processes:string! \
@@ -89,7 +93,7 @@ cargo loco generate scaffold issue_tracker \
     tx_workaround:text! \
     tx_rollback_plan:text! \
     tx_communication_plan:string! \
-    px_expected_resolution_at:ts \
+    px_expected_resolution_at:tstz \
     px_residual_risk:text! \
     px_monitoring_plan:text! \
     px_recurrence_likelihood:string! \
@@ -104,7 +108,7 @@ cargo loco generate scaffold issue_tracker \
     --api
 
 cargo loco generate scaffold issue_tracker_grade \
-    deleted_at:ts \
+    deleted_at:tstz \
     issue_tracker:references \
     score_by_priority_rank:int \
     score_by_severity_of_impact:int \
@@ -119,12 +123,12 @@ cargo loco generate scaffold issue_tracker_grade \
     recommendation:string! \
     triage_notes:text! \
     signed_by:string! \
-    signed_at:ts \
-    graded_at:ts! \
+    signed_at:tstz \
+    graded_at:tstz! \
     --api
 
 cargo loco generate scaffold issue_tracker_grade_rule \
-    deleted_at:ts \
+    deleted_at:tstz \
     issue_tracker_grade:references \
     rule_id:string! \
     instrument:string! \
@@ -134,7 +138,7 @@ cargo loco generate scaffold issue_tracker_grade_rule \
     --api
 
 cargo loco generate scaffold issue_tracker_grade_flag \
-    deleted_at:ts \
+    deleted_at:tstz \
     issue_tracker_grade:references \
     flag_id:string! \
     category:string! \

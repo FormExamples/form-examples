@@ -8,11 +8,15 @@ createdb --host=localhost --port=5432 --username=loco --owner=loco "${form_snake
 createdb --host=localhost --port=5432 --username=loco --owner=loco "${form_snake_case}_test" || :
 createdb --host=localhost --port=5432 --username=loco --owner=loco "${form_snake_case}_production" || :
 
-loco new --name "${form_kebab_case}" --db postgres --bg async --assets none
-cd "${form_kebab_case}"
+loco new --name "${form_snake_case}" --db postgres --bg async --assets none -a
+cd "${form_snake_case}"
+
+# Pin time to a version compatible with cookie 0.18.1 (a fresh loco
+# starter otherwise resolves time 0.3.52, which fails to compile).
+cargo update -p time --precise 0.3.47
 
 cargo loco generate scaffold patient \
-    deleted_at:ts \
+    deleted_at:tstz \
     title:text! \
     surname:string! \
     forenames:string! \
@@ -30,7 +34,7 @@ cargo loco generate scaffold patient \
     --api
 
 cargo loco generate scaffold practitioner \
-    deleted_at:ts \
+    deleted_at:tstz \
     name:string! \
     email:text \
     phone:text \
@@ -47,7 +51,7 @@ cargo loco generate scaffold practitioner \
     --api
 
 cargo loco generate scaffold eligible_condition \
-    deleted_at:ts \
+    deleted_at:tstz \
     code:text!^ \
     label:string! \
     description:text! \
@@ -61,7 +65,7 @@ cargo loco generate scaffold eligible_condition \
     --api
 
 cargo loco generate scaffold application \
-    deleted_at:ts \
+    deleted_at:tstz \
     patient:references \
     practitioner:references \
     status:string! \
@@ -80,7 +84,7 @@ cargo loco generate scaffold application \
     --api
 
 cargo loco generate scaffold application_eligible_condition \
-    deleted_at:ts \
+    deleted_at:tstz \
     application:references \
     eligible_condition:references \
     diagnosis_date:date \
@@ -104,7 +108,7 @@ cargo loco generate scaffold application_eligible_condition \
     --api
 
 cargo loco generate scaffold grade \
-    deleted_at:ts \
+    deleted_at:tstz \
     application:references \
     outcome:text! \
     redirect_to:text! \
@@ -114,11 +118,11 @@ cargo loco generate scaffold grade \
     valid_from:date \
     valid_until:date \
     validity_years:int! \
-    graded_at:ts! \
+    graded_at:tstz! \
     --api
 
 cargo loco generate scaffold grade_fired_rule \
-    deleted_at:ts \
+    deleted_at:tstz \
     grade:references \
     rule_id:string! \
     category:string! \
@@ -128,7 +132,7 @@ cargo loco generate scaffold grade_fired_rule \
     --api
 
 cargo loco generate scaffold grade_additional_flag \
-    deleted_at:ts \
+    deleted_at:tstz \
     grade:references \
     flag_id:string! \
     category:string! \

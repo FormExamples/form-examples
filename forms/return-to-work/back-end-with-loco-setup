@@ -8,11 +8,15 @@ createdb --host=localhost --port=5432 --username=loco --owner=loco "${form_snake
 createdb --host=localhost --port=5432 --username=loco --owner=loco "${form_snake_case}_test" || :
 createdb --host=localhost --port=5432 --username=loco --owner=loco "${form_snake_case}_production" || :
 
-loco new --name "${form_kebab_case}" --db postgres --bg async --assets none
-cd "${form_kebab_case}"
+loco new --name "${form_snake_case}" --db postgres --bg async --assets none -a
+cd "${form_snake_case}"
+
+# Pin time to a version compatible with cookie 0.18.1 (a fresh loco
+# starter otherwise resolves time 0.3.52, which fails to compile).
+cargo update -p time --precise 0.3.47
 
 cargo loco generate scaffold patient \
-    deleted_at:ts \
+    deleted_at:tstz \
     name:string! \
     birth_date:date! \
     sex:string! \
@@ -32,7 +36,7 @@ cargo loco generate scaffold patient \
     --api
 
 cargo loco generate scaffold clinician \
-    deleted_at:ts \
+    deleted_at:tstz \
     name:text! \
     email:text \
     phone:text \
@@ -48,7 +52,7 @@ cargo loco generate scaffold clinician \
     --api
 
 cargo loco generate scaffold employer \
-    deleted_at:ts \
+    deleted_at:tstz \
     name:string! \
     industry_sector:string! \
     postal_address_as_full_text:text \
@@ -62,7 +66,7 @@ cargo loco generate scaffold employer \
     --api
 
 cargo loco generate scaffold return_to_work \
-    deleted_at:ts \
+    deleted_at:tstz \
     patient:references \
     clinician:references \
     employer:references \
@@ -122,11 +126,11 @@ cargo loco generate scaffold return_to_work \
     maternity_certificate_reference:string! \
     final_notes:text! \
     signature_svg:text! \
-    signed_at:ts \
+    signed_at:tstz \
     --api
 
 cargo loco generate scaffold return_to_work_restriction \
-    deleted_at:ts \
+    deleted_at:tstz \
     return_to_work:references \
     kind:string! \
     severity:string! \
@@ -138,17 +142,17 @@ cargo loco generate scaffold return_to_work_restriction \
     --api
 
 cargo loco generate scaffold return_to_work_grade \
-    deleted_at:ts \
+    deleted_at:tstz \
     return_to_work:references \
     fitness_statement:string! \
     restriction_priority:string! \
     rule_count:int! \
     flag_count:int! \
-    graded_at:ts! \
+    graded_at:tstz! \
     --api
 
 cargo loco generate scaffold return_to_work_grade_rule \
-    deleted_at:ts \
+    deleted_at:tstz \
     return_to_work_grade:references \
     rule_code:string! \
     rule_title:string! \
@@ -160,7 +164,7 @@ cargo loco generate scaffold return_to_work_grade_rule \
     --api
 
 cargo loco generate scaffold return_to_work_grade_flag \
-    deleted_at:ts \
+    deleted_at:tstz \
     return_to_work_grade:references \
     flag_code:string! \
     flag_title:string! \

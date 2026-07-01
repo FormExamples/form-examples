@@ -8,11 +8,15 @@ createdb --host=localhost --port=5432 --username=loco --owner=loco "${form_snake
 createdb --host=localhost --port=5432 --username=loco --owner=loco "${form_snake_case}_test" || :
 createdb --host=localhost --port=5432 --username=loco --owner=loco "${form_snake_case}_production" || :
 
-loco new --name "${form_kebab_case}" --db postgres --bg async --assets none
-cd "${form_kebab_case}"
+loco new --name "${form_snake_case}" --db postgres --bg async --assets none -a
+cd "${form_snake_case}"
+
+# Pin time to a version compatible with cookie 0.18.1 (a fresh loco
+# starter otherwise resolves time 0.3.52, which fails to compile).
+cargo update -p time --precise 0.3.47
 
 cargo loco generate scaffold patient \
-    deleted_at:ts \
+    deleted_at:tstz \
     name:string! \
     birth_date:date! \
     email:text \
@@ -30,7 +34,7 @@ cargo loco generate scaffold patient \
     --api
 
 cargo loco generate scaffold clinician \
-    deleted_at:ts \
+    deleted_at:tstz \
     name:text! \
     email:text \
     phone:text \
@@ -44,74 +48,14 @@ cargo loco generate scaffold clinician \
     --api
 
 cargo loco generate scaffold assessment \
-    deleted_at:ts \
+    deleted_at:tstz \
     patient:references \
     status:string! \
     --api
 
-cargo loco generate scaffold grade \
-    deleted_at:ts \
+cargo loco generate scaffold assessment_current_medications \
+    deleted_at:tstz \
     assessment:references \
-    gaf_score:int! \
-    gaf_category:string! \
-    symptom_severity:string! \
-    functional_impairment:string! \
-    risk_classification:string! \
-    graded_at:ts! \
-    --api
-
-cargo loco generate scaffold grading_fired_rule \
-    deleted_at:ts \
-    grade:references \
-    rule_id:string! \
-    category:string! \
-    description:text! \
-    gaf_impact:string! \
-    --api
-
-cargo loco generate scaffold grading_additional_flag \
-    deleted_at:ts \
-    grade:references \
-    flag_id:string! \
-    category:string! \
-    message:text! \
-    priority:string! \
-    --api
-
-cargo loco generate scaffold grade \
-    deleted_at:ts \
-    assessment:references \
-    gaf_score:int! \
-    gaf_category:string! \
-    symptom_severity:string! \
-    functional_impairment:string! \
-    risk_classification:string! \
-    graded_at:ts! \
-    --api
-
-cargo loco generate scaffold grading_fired_rule \
-    deleted_at:ts \
-    grade:references \
-    rule_id:string! \
-    category:string! \
-    description:text! \
-    gaf_impact:string! \
-    --api
-
-cargo loco generate scaffold grading_additional_flag \
-    deleted_at:ts \
-    grade:references \
-    flag_id:string! \
-    category:string! \
-    message:text! \
-    priority:string! \
-    --api
-
-cargo loco generate scaffold assessment \
-    deleted_at:ts \
-    patient:references \
-    status:string! \
-    current_medications_deleted_at:ts \
     takes_psychiatric_medications:string! \
     takes_other_medications:string! \
     medication_adherence:string! \
@@ -122,7 +66,10 @@ cargo loco generate scaffold assessment \
     depot_details:text! \
     adverse_drug_reactions:text! \
     additional_notes:text! \
-    medication_item_deleted_at:ts \
+    --api
+
+cargo loco generate scaffold assessment_medication_item \
+    deleted_at:tstz \
     current_medications:references \
     medication_name:string! \
     dose:string! \
@@ -131,41 +78,21 @@ cargo loco generate scaffold assessment \
     indication:text! \
     prescribing_clinician:string! \
     sort_order:int! \
-    current_medications_deleted_at:ts \
-    current_medications_takes_psychiatric_medications:string! \
-    current_medications_takes_other_medications:string! \
-    current_medications_medication_adherence:string! \
-    current_medications_adherence_barriers:text! \
-    current_medications_side_effects:text! \
-    current_medications_clozapine_registered:string! \
-    current_medications_depot_injection:string! \
-    current_medications_depot_details:text! \
-    current_medications_adverse_drug_reactions:text! \
-    current_medications_additional_notes:text! \
-    medication_item_deleted_at:ts \
-    medication_item_current_medications:references \
-    medication_item_medication_name:string! \
-    medication_item_dose:string! \
-    medication_item_frequency:string! \
-    medication_item_medication_type:string! \
-    medication_item_indication:text! \
-    medication_item_prescribing_clinician:string! \
-    medication_item_sort_order:int! \
     --api
 
 cargo loco generate scaffold grade \
-    deleted_at:ts \
+    deleted_at:tstz \
     assessment:references \
     gaf_score:int! \
     gaf_category:string! \
     symptom_severity:string! \
     functional_impairment:string! \
     risk_classification:string! \
-    graded_at:ts! \
+    graded_at:tstz! \
     --api
 
 cargo loco generate scaffold grading_fired_rule \
-    deleted_at:ts \
+    deleted_at:tstz \
     grade:references \
     rule_id:string! \
     category:string! \
@@ -174,68 +101,7 @@ cargo loco generate scaffold grading_fired_rule \
     --api
 
 cargo loco generate scaffold grading_additional_flag \
-    deleted_at:ts \
-    grade:references \
-    flag_id:string! \
-    category:string! \
-    message:text! \
-    priority:string! \
-    --api
-
-cargo loco generate scaffold patient \
-    deleted_at:ts \
-    name:string! \
-    birth_date:date! \
-    email:text \
-    phone:text \
-    postal_address_as_full_text:text \
-    country_as_iso_3166_1_alpha_2:string \
-    postcode:text \
-    united_kingdom_nhs_number:string^ \
-    waist_as_cm:double \
-    height_as_cm:double \
-    weight_as_kg:double \
-    body_mass_index:double \
-    waist_height_ratio:double \
-    vo2_max:double \
-    --api
-
-cargo loco generate scaffold clinician \
-    deleted_at:ts \
-    name:text! \
-    email:text \
-    phone:text \
-    postal_address_as_full_text:text \
-    country_as_iso_3166_1_alpha_2:string \
-    postcode:text \
-    role:text! \
-    registration_body:text! \
-    registration_number:text! \
-    united_kingdom_nhs_number:string^ \
-    --api
-
-cargo loco generate scaffold grade \
-    deleted_at:ts \
-    assessment:references \
-    gaf_score:int! \
-    gaf_category:string! \
-    symptom_severity:string! \
-    functional_impairment:string! \
-    risk_classification:string! \
-    graded_at:ts! \
-    --api
-
-cargo loco generate scaffold grading_fired_rule \
-    deleted_at:ts \
-    grade:references \
-    rule_id:string! \
-    category:string! \
-    description:text! \
-    gaf_impact:string! \
-    --api
-
-cargo loco generate scaffold grading_additional_flag \
-    deleted_at:ts \
+    deleted_at:tstz \
     grade:references \
     flag_id:string! \
     category:string! \

@@ -1,0 +1,204 @@
+# Generated from sql-migrations/. Do not edit by hand.
+# SOURCE: cardiology_response_grade
+openapi: 3.1.0
+info:
+  title: Cardiology Response — CardiologyResponseGrade
+  version: 1.0.0
+  description: "Computed four-axis interpretation grade: response classification, condition severity / category, response completeness, and follow-up urgency. A critical result auto-escalates the follow-up urgency to critical-alert regardless of the other axes."
+paths:
+  /cardiology-response-grades:
+    get:
+      summary: List CardiologyResponseGrade records
+      operationId: listCardiologyResponseGrade
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of CardiologyResponseGrade records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/CardiologyResponseGrade"
+    post:
+      summary: Create a new CardiologyResponseGrade
+      operationId: createCardiologyResponseGrade
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CardiologyResponseGrade"
+      responses:
+        "201":
+          description: The newly created CardiologyResponseGrade
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CardiologyResponseGrade"
+        "400":
+          description: Validation error
+  /cardiology-response-grades/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one CardiologyResponseGrade by id
+      operationId: getCardiologyResponseGrade
+      responses:
+        "200":
+          description: The requested CardiologyResponseGrade
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CardiologyResponseGrade"
+        "404":
+          description: CardiologyResponseGrade not found
+    patch:
+      summary: Update an existing CardiologyResponseGrade
+      operationId: updateCardiologyResponseGrade
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CardiologyResponseGrade"
+      responses:
+        "200":
+          description: The updated CardiologyResponseGrade
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CardiologyResponseGrade"
+        "404":
+          description: CardiologyResponseGrade not found
+    delete:
+      summary: Soft-delete a CardiologyResponseGrade
+      operationId: deleteCardiologyResponseGrade
+      responses:
+        "204":
+          description: CardiologyResponseGrade deleted
+        "404":
+          description: CardiologyResponseGrade not found
+components:
+  schemas:
+    CardiologyResponseGrade:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was updated most-recently.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was deleted a.k.a. soft-removed.
+        cardiology_response_id:
+          type: string
+          format: uuid
+          description: Foreign key to the parent response (unique, 1:1).
+        response_classification:
+          type: string
+          enum:
+            - no-abnormality
+            - cardiac-condition
+            - critical
+            - inconclusive
+            - ""
+          description: "Axis A overall classification: no-abnormality, cardiac-condition, critical, inconclusive."
+        severity:
+          type: string
+          enum:
+            - none
+            - minor
+            - moderate
+            - major
+            - ""
+          description: "Axis B condition severity: none, minor, moderate, major."
+        severity_category:
+          type: string
+          maxLength: 50
+          description: Axis B structured-finding category label (e.g. the dominant finding driving severity).
+        completeness_percent:
+          type: integer
+          format: int32
+          description: Axis C response completeness as a percentage of mandatory sections (0-100).
+        follow_up_urgency:
+          type: string
+          enum:
+            - routine
+            - recommended
+            - urgent
+            - critical-alert
+            - ""
+          description: "Axis D follow-up urgency: routine, recommended, urgent, critical-alert."
+        target_timeframe:
+          type: string
+          maxLength: 50
+          description: Target timeframe for the recommended follow-up implied by the urgency.
+        recommended_action:
+          type: string
+          maxLength: 500
+          description: Axis D concise recommended action derived from the urgency.
+        recommendation:
+          type: string
+          enum:
+            - no-action
+            - routine-follow-up
+            - further-investigation
+            - specialist-management
+            - urgent-review
+            - ""
+          description: "Overall recommendation: no-action, routine-follow-up, further-investigation, specialist-management, urgent-review."
+        clinician_notes:
+          type: string
+          description: Free-text interpretation / sign-off notes.
+        signed_at:
+          type: string
+          format: date-time
+          description: Timestamp of the responding clinician electronic signature.
+        graded_at:
+          type: string
+          format: date-time
+          description: Timestamp when the engine last computed the grade.
+      required:
+        - created_at
+        - updated_at
+        - cardiology_response_id
+        - response_classification
+        - severity
+        - severity_category
+        - follow_up_urgency
+        - target_timeframe
+        - recommended_action
+        - recommendation
+        - clinician_notes
+        - graded_at
+      description: "Computed four-axis interpretation grade: response classification, condition severity / category, response completeness, and follow-up urgency. A critical result auto-escalates the follow-up urgency to critical-alert regardless of the other axes."

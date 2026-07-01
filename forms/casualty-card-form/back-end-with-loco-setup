@@ -8,11 +8,15 @@ createdb --host=localhost --port=5432 --username=loco --owner=loco "${form_snake
 createdb --host=localhost --port=5432 --username=loco --owner=loco "${form_snake_case}_test" || :
 createdb --host=localhost --port=5432 --username=loco --owner=loco "${form_snake_case}_production" || :
 
-loco new --name "${form_kebab_case}" --db postgres --bg async --assets none
-cd "${form_kebab_case}"
+loco new --name "${form_snake_case}" --db postgres --bg async --assets none -a
+cd "${form_snake_case}"
+
+# Pin time to a version compatible with cookie 0.18.1 (a fresh loco
+# starter otherwise resolves time 0.3.52, which fails to compile).
+cargo update -p time --precise 0.3.47
 
 cargo loco generate scaffold patient \
-    deleted_at:ts \
+    deleted_at:tstz \
     name:string! \
     birth_date:date! \
     email:text \
@@ -30,7 +34,7 @@ cargo loco generate scaffold patient \
     --api
 
 cargo loco generate scaffold clinician \
-    deleted_at:ts \
+    deleted_at:tstz \
     name:text! \
     email:text \
     phone:text \
@@ -44,15 +48,15 @@ cargo loco generate scaffold clinician \
     --api
 
 cargo loco generate scaffold casualty_card \
-    deleted_at:ts \
+    deleted_at:tstz \
     patient:references \
     status:text! \
     attendance_date:date \
-    arrival_time:ts \
+    arrival_time:tstz \
     --api
 
 cargo loco generate scaffold casualty_card_demographics \
-    deleted_at:ts \
+    deleted_at:tstz \
     casualty_card:references \
     address:text! \
     postcode:text! \
@@ -64,7 +68,7 @@ cargo loco generate scaffold casualty_card_demographics \
     --api
 
 cargo loco generate scaffold casualty_card_next_of_kin \
-    deleted_at:ts \
+    deleted_at:tstz \
     casualty_card:references \
     name:text! \
     relationship:text! \
@@ -73,7 +77,7 @@ cargo loco generate scaffold casualty_card_next_of_kin \
     --api
 
 cargo loco generate scaffold casualty_card_gp \
-    deleted_at:ts \
+    deleted_at:tstz \
     casualty_card:references \
     name:text! \
     practice_name:text! \
@@ -82,13 +86,13 @@ cargo loco generate scaffold casualty_card_gp \
     --api
 
 cargo loco generate scaffold casualty_card_arrival_triage \
-    deleted_at:ts \
+    deleted_at:tstz \
     casualty_card:references \
     attendance_category:text! \
     arrival_mode:text! \
     referral_source:text! \
     ambulance_incident_number:text! \
-    triage_time:ts \
+    triage_time:tstz \
     triage_nurse:text! \
     mts_flowchart:text! \
     mts_category:text! \
@@ -96,7 +100,7 @@ cargo loco generate scaffold casualty_card_arrival_triage \
     --api
 
 cargo loco generate scaffold casualty_card_presenting_complaint \
-    deleted_at:ts \
+    deleted_at:tstz \
     casualty_card:references \
     chief_complaint:text! \
     history_of_presenting_complaint:text! \
@@ -114,7 +118,7 @@ cargo loco generate scaffold casualty_card_presenting_complaint \
     --api
 
 cargo loco generate scaffold casualty_card_pain_assessment \
-    deleted_at:ts \
+    deleted_at:tstz \
     casualty_card:references \
     pain_present:text! \
     pain_score:int \
@@ -125,7 +129,7 @@ cargo loco generate scaffold casualty_card_pain_assessment \
     --api
 
 cargo loco generate scaffold casualty_card_medical_history \
-    deleted_at:ts \
+    deleted_at:tstz \
     casualty_card:references \
     past_medical_history:text! \
     past_surgical_history:text! \
@@ -137,7 +141,7 @@ cargo loco generate scaffold casualty_card_medical_history \
     --api
 
 cargo loco generate scaffold casualty_card_medication \
-    deleted_at:ts \
+    deleted_at:tstz \
     casualty_card:references \
     name:text! \
     dose:text! \
@@ -146,7 +150,7 @@ cargo loco generate scaffold casualty_card_medication \
     --api
 
 cargo loco generate scaffold casualty_card_allergy \
-    deleted_at:ts \
+    deleted_at:tstz \
     casualty_card:references \
     allergen:text! \
     reaction:text! \
@@ -155,7 +159,7 @@ cargo loco generate scaffold casualty_card_allergy \
     --api
 
 cargo loco generate scaffold casualty_card_vital_signs \
-    deleted_at:ts \
+    deleted_at:tstz \
     casualty_card:references \
     heart_rate:int \
     systolic_bp:int \
@@ -176,7 +180,7 @@ cargo loco generate scaffold casualty_card_vital_signs \
     --api
 
 cargo loco generate scaffold casualty_card_primary_survey \
-    deleted_at:ts \
+    deleted_at:tstz \
     casualty_card:references \
     airway_status:text! \
     airway_adjuncts:text! \
@@ -204,7 +208,7 @@ cargo loco generate scaffold casualty_card_primary_survey \
     --api
 
 cargo loco generate scaffold casualty_card_clinical_examination \
-    deleted_at:ts \
+    deleted_at:tstz \
     casualty_card:references \
     general_appearance:text! \
     head_and_face:text! \
@@ -221,7 +225,7 @@ cargo loco generate scaffold casualty_card_clinical_examination \
     --api
 
 cargo loco generate scaffold casualty_card_investigations \
-    deleted_at:ts \
+    deleted_at:tstz \
     casualty_card:references \
     blood_tests:text! \
     urinalysis:text! \
@@ -232,7 +236,7 @@ cargo loco generate scaffold casualty_card_investigations \
     --api
 
 cargo loco generate scaffold casualty_card_treatment \
-    deleted_at:ts \
+    deleted_at:tstz \
     casualty_card:references \
     oxygen_therapy_device:text! \
     oxygen_therapy_flow_rate:text! \
@@ -240,7 +244,7 @@ cargo loco generate scaffold casualty_card_treatment \
     --api
 
 cargo loco generate scaffold casualty_card_assessment_plan \
-    deleted_at:ts \
+    deleted_at:tstz \
     casualty_card:references \
     working_diagnosis:text! \
     differential_diagnoses:text! \
@@ -249,7 +253,7 @@ cargo loco generate scaffold casualty_card_assessment_plan \
     --api
 
 cargo loco generate scaffold casualty_card_disposition \
-    deleted_at:ts \
+    deleted_at:tstz \
     casualty_card:references \
     disposition:text! \
     admitting_specialty:text! \
@@ -264,12 +268,12 @@ cargo loco generate scaffold casualty_card_disposition \
     receiving_hospital:text! \
     reason_for_transfer:text! \
     mode_of_transfer:text! \
-    discharge_time:ts \
+    discharge_time:tstz \
     total_time_in_department:text! \
     --api
 
 cargo loco generate scaffold casualty_card_safeguarding_consent \
-    deleted_at:ts \
+    deleted_at:tstz \
     casualty_card:references \
     safeguarding_concern:text! \
     safeguarding_type:text! \
@@ -284,308 +288,17 @@ cargo loco generate scaffold casualty_card_safeguarding_consent \
     --api
 
 cargo loco generate scaffold news2_result \
-    deleted_at:ts \
+    deleted_at:tstz \
     casualty_card:references \
     total_score:int! \
     clinical_response:text! \
     has_any_single_score_3:bool! \
     supplemental_oxygen:string! \
-    scored_at:ts! \
+    scored_at:tstz! \
     --api
 
 cargo loco generate scaffold flagged_issue \
-    deleted_at:ts \
-    news2_result:references \
-    flag_id:text! \
-    category:text! \
-    message:text! \
-    priority:text! \
-    --api
-
-cargo loco generate scaffold casualty_card \
-    deleted_at:ts \
-    patient:references \
-    status:text! \
-    attendance_date:date \
-    arrival_time:ts \
-    --api
-
-cargo loco generate scaffold casualty_card_demographics \
-    deleted_at:ts \
-    casualty_card:references \
-    address:text! \
-    postcode:text! \
-    phone:text! \
-    email:text! \
-    ethnicity:text! \
-    preferred_language:text! \
-    interpreter_required:text! \
-    --api
-
-cargo loco generate scaffold casualty_card_next_of_kin \
-    deleted_at:ts \
-    casualty_card:references \
-    name:text! \
-    relationship:text! \
-    phone:text! \
-    notified:text! \
-    --api
-
-cargo loco generate scaffold casualty_card_gp \
-    deleted_at:ts \
-    casualty_card:references \
-    name:text! \
-    practice_name:text! \
-    practice_address:text! \
-    practice_phone:text! \
-    --api
-
-cargo loco generate scaffold casualty_card_arrival_triage \
-    deleted_at:ts \
-    casualty_card:references \
-    attendance_category:text! \
-    arrival_mode:text! \
-    referral_source:text! \
-    ambulance_incident_number:text! \
-    triage_time:ts \
-    triage_nurse:text! \
-    mts_flowchart:text! \
-    mts_category:text! \
-    mts_discriminator:text! \
-    --api
-
-cargo loco generate scaffold casualty_card_presenting_complaint \
-    deleted_at:ts \
-    casualty_card:references \
-    chief_complaint:text! \
-    history_of_presenting_complaint:text! \
-    onset:text! \
-    duration:text! \
-    character:text! \
-    severity:text! \
-    location:text! \
-    radiation:text! \
-    aggravating_factors:text! \
-    relieving_factors:text! \
-    associated_symptoms:text! \
-    previous_episodes:text! \
-    treatment_prior_to_arrival:text! \
-    --api
-
-cargo loco generate scaffold casualty_card_pain_assessment \
-    deleted_at:ts \
-    casualty_card:references \
-    pain_present:text! \
-    pain_score:int \
-    pain_location:text! \
-    pain_character:text! \
-    pain_onset:text! \
-    pain_severity_category:text! \
-    --api
-
-cargo loco generate scaffold patient \
-    deleted_at:ts \
-    name:string! \
-    birth_date:date! \
-    email:text \
-    phone:text \
-    postal_address_as_full_text:text \
-    country_as_iso_3166_1_alpha_2:string \
-    postcode:text \
-    united_kingdom_nhs_number:string^ \
-    waist_as_cm:double \
-    height_as_cm:double \
-    weight_as_kg:double \
-    body_mass_index:double \
-    waist_height_ratio:double \
-    vo2_max:double \
-    --api
-
-cargo loco generate scaffold casualty_card_medical_history \
-    deleted_at:ts \
-    casualty_card:references \
-    past_medical_history:text! \
-    past_surgical_history:text! \
-    tetanus_status:text! \
-    smoking_status:text! \
-    alcohol_consumption:text! \
-    recreational_drug_use:text! \
-    last_oral_intake:text! \
-    --api
-
-cargo loco generate scaffold clinician \
-    deleted_at:ts \
-    name:text! \
-    email:text \
-    phone:text \
-    postal_address_as_full_text:text \
-    country_as_iso_3166_1_alpha_2:string \
-    postcode:text \
-    role:text! \
-    registration_body:text! \
-    registration_number:text! \
-    united_kingdom_nhs_number:string^ \
-    --api
-
-cargo loco generate scaffold casualty_card_medication \
-    deleted_at:ts \
-    casualty_card:references \
-    name:text! \
-    dose:text! \
-    frequency:text! \
-    sort_order:int! \
-    --api
-
-cargo loco generate scaffold casualty_card_allergy \
-    deleted_at:ts \
-    casualty_card:references \
-    allergen:text! \
-    reaction:text! \
-    severity:text! \
-    sort_order:int! \
-    --api
-
-cargo loco generate scaffold casualty_card_vital_signs \
-    deleted_at:ts \
-    casualty_card:references \
-    heart_rate:int \
-    systolic_bp:int \
-    diastolic_bp:int \
-    respiratory_rate:int \
-    oxygen_saturation:int \
-    supplemental_oxygen:text! \
-    oxygen_flow_rate:text! \
-    temperature:double \
-    blood_glucose:double \
-    consciousness_level:text! \
-    pupil_left_size:int \
-    pupil_left_reactive:text! \
-    pupil_right_size:int \
-    pupil_right_reactive:text! \
-    capillary_refill_time:text! \
-    weight:double \
-    --api
-
-cargo loco generate scaffold casualty_card_primary_survey \
-    deleted_at:ts \
-    casualty_card:references \
-    airway_status:text! \
-    airway_adjuncts:text! \
-    c_spine_immobilised:text! \
-    breathing_effort:text! \
-    chest_movement:text! \
-    breath_sounds:text! \
-    trachea_position:text! \
-    pulse_character:text! \
-    skin_colour:text! \
-    skin_temperature:text! \
-    capillary_refill:text! \
-    haemorrhage:text! \
-    iv_access:text! \
-    gcs_eye:int \
-    gcs_verbal:int \
-    gcs_motor:int \
-    gcs_total:int \
-    pupils:text! \
-    blood_glucose_disability:text! \
-    limb_movements:text! \
-    skin_examination:text! \
-    injuries_identified:text! \
-    log_roll_findings:text! \
-    --api
-
-cargo loco generate scaffold casualty_card_clinical_examination \
-    deleted_at:ts \
-    casualty_card:references \
-    general_appearance:text! \
-    head_and_face:text! \
-    neck:text! \
-    chest_cardiovascular:text! \
-    chest_respiratory:text! \
-    abdomen:text! \
-    pelvis:text! \
-    musculoskeletal_limbs:text! \
-    neurological:text! \
-    skin:text! \
-    mental_state:text! \
-    body_diagram_notes:text! \
-    --api
-
-cargo loco generate scaffold casualty_card_investigations \
-    deleted_at:ts \
-    casualty_card:references \
-    blood_tests:text! \
-    urinalysis:text! \
-    pregnancy_test:text! \
-    ecg_performed:text! \
-    ecg_findings:text! \
-    other_investigations:text! \
-    --api
-
-cargo loco generate scaffold casualty_card_treatment \
-    deleted_at:ts \
-    casualty_card:references \
-    oxygen_therapy_device:text! \
-    oxygen_therapy_flow_rate:text! \
-    tetanus_prophylaxis:text! \
-    --api
-
-cargo loco generate scaffold casualty_card_assessment_plan \
-    deleted_at:ts \
-    casualty_card:references \
-    working_diagnosis:text! \
-    differential_diagnoses:text! \
-    clinical_impression:text! \
-    risk_stratification:text! \
-    --api
-
-cargo loco generate scaffold casualty_card_disposition \
-    deleted_at:ts \
-    casualty_card:references \
-    disposition:text! \
-    admitting_specialty:text! \
-    admitting_consultant:text! \
-    ward:text! \
-    level_of_care:text! \
-    discharge_diagnosis:text! \
-    discharge_medications:text! \
-    discharge_instructions:text! \
-    follow_up:text! \
-    return_precautions:text! \
-    receiving_hospital:text! \
-    reason_for_transfer:text! \
-    mode_of_transfer:text! \
-    discharge_time:ts \
-    total_time_in_department:text! \
-    --api
-
-cargo loco generate scaffold casualty_card_safeguarding_consent \
-    deleted_at:ts \
-    casualty_card:references \
-    safeguarding_concern:text! \
-    safeguarding_type:text! \
-    referral_made:text! \
-    mental_capacity_assessment:text! \
-    mental_health_act_status:text! \
-    consent_for_treatment:text! \
-    completed_by_name:text! \
-    completed_by_role:text! \
-    completed_by_gmc_number:text! \
-    senior_reviewing_clinician:text! \
-    --api
-
-cargo loco generate scaffold news2_result \
-    deleted_at:ts \
-    casualty_card:references \
-    total_score:int! \
-    clinical_response:text! \
-    has_any_single_score_3:bool! \
-    supplemental_oxygen:string! \
-    scored_at:ts! \
-    --api
-
-cargo loco generate scaffold flagged_issue \
-    deleted_at:ts \
+    deleted_at:tstz \
     news2_result:references \
     flag_id:text! \
     category:text! \

@@ -1,0 +1,37 @@
+// Generated from sql-migrations/. Do not edit by hand.
+// SOURCE: cardiology_request_grade_flag
+
+syntax = "proto3";
+
+package form_examples.cardiology_request;
+
+enum CardiologyRequestGradeFlagCategoryEnum {
+  CATEGORY_UNSPECIFIED = 0;
+  CATEGORY_SUSPECTED_ACS = 1;  // suspected-acs
+  CATEGORY_EXERTIONAL_SYNCOPE = 2;  // exertional-syncope
+  CATEGORY_NEW_ONSET_HEART_FAILURE = 3;  // new-onset-heart-failure
+  CATEGORY_RED_FLAG_CHEST_PAIN = 4;  // red-flag-chest-pain
+  CATEGORY_MISSING_REASON = 5;  // missing-reason
+  CATEGORY_MISSING_CLINICAL_QUESTION = 6;  // missing-clinical-question
+  CATEGORY_OTHER = 7;  // other
+}
+
+enum CardiologyRequestGradeFlagPriorityEnum {
+  PRIORITY_UNSPECIFIED = 0;
+  PRIORITY_LOW = 1;  // low
+  PRIORITY_MEDIUM = 2;  // medium
+  PRIORITY_HIGH = 3;  // high
+}
+
+message CardiologyRequestGradeFlag {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string cardiology_request_grade_id = 5;  // UUID — uuid
+  string flag_id = 6;  // VARCHAR(50) — max 50 chars
+  CardiologyRequestGradeFlagCategoryEnum category = 7;  // VARCHAR(40)
+  CardiologyRequestGradeFlagPriorityEnum priority = 8;  // VARCHAR(10)
+  string description = 9;  // VARCHAR(500) — max 500 chars
+  string suggested_action = 10;  // VARCHAR(500) — max 500 chars
+}

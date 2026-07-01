@@ -8,11 +8,15 @@ createdb --host=localhost --port=5432 --username=loco --owner=loco "${form_snake
 createdb --host=localhost --port=5432 --username=loco --owner=loco "${form_snake_case}_test" || :
 createdb --host=localhost --port=5432 --username=loco --owner=loco "${form_snake_case}_production" || :
 
-loco new --name "${form_kebab_case}" --db postgres --bg async --assets none
-cd "${form_kebab_case}"
+loco new --name "${form_snake_case}" --db postgres --bg async --assets none -a
+cd "${form_snake_case}"
+
+# Pin time to a version compatible with cookie 0.18.1 (a fresh loco
+# starter otherwise resolves time 0.3.52, which fails to compile).
+cargo update -p time --precise 0.3.47
 
 cargo loco generate scaffold patient \
-    deleted_at:ts \
+    deleted_at:tstz \
     name:text! \
     birth_date:date \
     sex_at_birth:string! \
@@ -33,7 +37,7 @@ cargo loco generate scaffold patient \
     --api
 
 cargo loco generate scaffold clinician \
-    deleted_at:ts \
+    deleted_at:tstz \
     name:text! \
     specialty:text! \
     role:string! \
@@ -48,7 +52,7 @@ cargo loco generate scaffold clinician \
     --api
 
 cargo loco generate scaffold medical_information_form_for_air_travel \
-    deleted_at:ts \
+    deleted_at:tstz \
     patient:references \
     clinician:references \
     status:string! \
@@ -149,7 +153,7 @@ cargo loco generate scaffold medical_information_form_for_air_travel \
     --api
 
 cargo loco generate scaffold medical_information_form_for_air_travel_grade \
-    deleted_at:ts \
+    deleted_at:tstz \
     medical_information_form_for_air_travel:references \
     computed_fitness_band:string! \
     final_fitness_band:string! \
@@ -157,12 +161,12 @@ cargo loco generate scaffold medical_information_form_for_air_travel_grade \
     desk_recommendation:string! \
     physician_notes:text! \
     valid_until:date \
-    signed_at:ts \
-    graded_at:ts! \
+    signed_at:tstz \
+    graded_at:tstz! \
     --api
 
 cargo loco generate scaffold medical_information_form_for_air_travel_grade_rule \
-    deleted_at:ts \
+    deleted_at:tstz \
     medical_information_form_for_air_travel_grade:references \
     rule_id:string! \
     instrument:string! \
@@ -172,7 +176,7 @@ cargo loco generate scaffold medical_information_form_for_air_travel_grade_rule 
     --api
 
 cargo loco generate scaffold medical_information_form_for_air_travel_grade_flag \
-    deleted_at:ts \
+    deleted_at:tstz \
     medical_information_form_for_air_travel_grade:references \
     flag_id:string! \
     category:string! \

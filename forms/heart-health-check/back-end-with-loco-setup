@@ -8,11 +8,15 @@ createdb --host=localhost --port=5432 --username=loco --owner=loco "${form_snake
 createdb --host=localhost --port=5432 --username=loco --owner=loco "${form_snake_case}_test" || :
 createdb --host=localhost --port=5432 --username=loco --owner=loco "${form_snake_case}_production" || :
 
-loco new --name "${form_kebab_case}" --db postgres --bg async --assets none
-cd "${form_kebab_case}"
+loco new --name "${form_snake_case}" --db postgres --bg async --assets none -a
+cd "${form_snake_case}"
+
+# Pin time to a version compatible with cookie 0.18.1 (a fresh loco
+# starter otherwise resolves time 0.3.52, which fails to compile).
+cargo update -p time --precise 0.3.47
 
 cargo loco generate scaffold patient \
-    deleted_at:ts \
+    deleted_at:tstz \
     name:string! \
     birth_date:date! \
     email:text \
@@ -30,7 +34,7 @@ cargo loco generate scaffold patient \
     --api
 
 cargo loco generate scaffold clinician \
-    deleted_at:ts \
+    deleted_at:tstz \
     name:text! \
     email:text \
     phone:text \
@@ -44,13 +48,13 @@ cargo loco generate scaffold clinician \
     --api
 
 cargo loco generate scaffold assessment \
-    deleted_at:ts \
+    deleted_at:tstz \
     patient:references \
     status:string! \
     --api
 
 cargo loco generate scaffold demographics_ethnicity \
-    deleted_at:ts \
+    deleted_at:tstz \
     assessment:references \
     age:int \
     sex:string! \
@@ -59,7 +63,7 @@ cargo loco generate scaffold demographics_ethnicity \
     --api
 
 cargo loco generate scaffold blood_pressure \
-    deleted_at:ts \
+    deleted_at:tstz \
     assessment:references \
     systolic_bp:int \
     systolic_bp_sd:double \
@@ -69,7 +73,7 @@ cargo loco generate scaffold blood_pressure \
     --api
 
 cargo loco generate scaffold cholesterol \
-    deleted_at:ts \
+    deleted_at:tstz \
     assessment:references \
     total_cholesterol:double \
     hdl_cholesterol:double \
@@ -78,7 +82,7 @@ cargo loco generate scaffold cholesterol \
     --api
 
 cargo loco generate scaffold medical_conditions \
-    deleted_at:ts \
+    deleted_at:tstz \
     assessment:references \
     has_diabetes:string! \
     has_atrial_fibrillation:string! \
@@ -92,7 +96,7 @@ cargo loco generate scaffold medical_conditions \
     --api
 
 cargo loco generate scaffold family_history \
-    deleted_at:ts \
+    deleted_at:tstz \
     assessment:references \
     family_cvd_under_60:string! \
     family_cvd_relationship:string! \
@@ -100,7 +104,7 @@ cargo loco generate scaffold family_history \
     --api
 
 cargo loco generate scaffold smoking_alcohol \
-    deleted_at:ts \
+    deleted_at:tstz \
     assessment:references \
     smoking_status:string! \
     cigarettes_per_day:int \
@@ -110,7 +114,7 @@ cargo loco generate scaffold smoking_alcohol \
     --api
 
 cargo loco generate scaffold grading_additional_flag \
-    deleted_at:ts \
+    deleted_at:tstz \
     grade:references \
     flag_id:string! \
     category:string! \
@@ -119,7 +123,7 @@ cargo loco generate scaffold grading_additional_flag \
     --api
 
 cargo loco generate scaffold physical_activity_diet \
-    deleted_at:ts \
+    deleted_at:tstz \
     assessment:references \
     physical_activity_minutes_per_week:int \
     activity_intensity:string! \
@@ -129,7 +133,7 @@ cargo loco generate scaffold physical_activity_diet \
     --api
 
 cargo loco generate scaffold body_measurements \
-    deleted_at:ts \
+    deleted_at:tstz \
     assessment:references \
     height_cm:double \
     weight_kg:double \
@@ -138,7 +142,7 @@ cargo loco generate scaffold body_measurements \
     --api
 
 cargo loco generate scaffold review_calculate \
-    deleted_at:ts \
+    deleted_at:tstz \
     assessment:references \
     clinician_name:string! \
     review_date:date \
@@ -147,226 +151,19 @@ cargo loco generate scaffold review_calculate \
     --api
 
 cargo loco generate scaffold grade \
-    deleted_at:ts \
+    deleted_at:tstz \
     assessment:references \
     risk_category:string! \
     ten_year_risk_percent:double! \
     heart_age:int \
-    graded_at:ts \
+    graded_at:tstz \
     --api
 
 cargo loco generate scaffold grading_fired_rule \
-    deleted_at:ts \
+    deleted_at:tstz \
     grade:references \
     rule_id:string! \
     category:string! \
     description:text! \
     risk_level:string! \
-    --api
-
-cargo loco generate scaffold grade \
-    deleted_at:ts \
-    assessment:references \
-    risk_category:string! \
-    ten_year_risk_percent:double! \
-    heart_age:int \
-    graded_at:ts \
-    --api
-
-cargo loco generate scaffold grading_fired_rule \
-    deleted_at:ts \
-    grade:references \
-    rule_id:string! \
-    category:string! \
-    description:text! \
-    risk_level:string! \
-    --api
-
-cargo loco generate scaffold grading_additional_flag \
-    deleted_at:ts \
-    grade:references \
-    flag_id:string! \
-    category:string! \
-    message:text! \
-    priority:string! \
-    --api
-
-cargo loco generate scaffold assessment \
-    deleted_at:ts \
-    patient:references \
-    status:string! \
-    --api
-
-cargo loco generate scaffold demographics_ethnicity \
-    deleted_at:ts \
-    assessment:references \
-    age:int \
-    sex:string! \
-    ethnicity:string! \
-    townsend_deprivation:double \
-    --api
-
-cargo loco generate scaffold blood_pressure \
-    deleted_at:ts \
-    assessment:references \
-    systolic_bp:int \
-    systolic_bp_sd:double \
-    diastolic_bp:int \
-    on_bp_treatment:string! \
-    number_of_bp_medications:int \
-    --api
-
-cargo loco generate scaffold cholesterol \
-    deleted_at:ts \
-    assessment:references \
-    total_cholesterol:double \
-    hdl_cholesterol:double \
-    total_hdl_ratio:double \
-    on_statin:string! \
-    --api
-
-cargo loco generate scaffold medical_conditions \
-    deleted_at:ts \
-    assessment:references \
-    has_diabetes:string! \
-    has_atrial_fibrillation:string! \
-    has_rheumatoid_arthritis:string! \
-    has_chronic_kidney_disease:string! \
-    has_migraine:string! \
-    has_severe_mental_illness:string! \
-    has_erectile_dysfunction:string! \
-    on_atypical_antipsychotic:string! \
-    on_corticosteroids:string! \
-    --api
-
-cargo loco generate scaffold family_history \
-    deleted_at:ts \
-    assessment:references \
-    family_cvd_under_60:string! \
-    family_cvd_relationship:string! \
-    family_diabetes_history:string! \
-    --api
-
-cargo loco generate scaffold patient \
-    deleted_at:ts \
-    name:string! \
-    birth_date:date! \
-    email:text \
-    phone:text \
-    postal_address_as_full_text:text \
-    country_as_iso_3166_1_alpha_2:string \
-    postcode:text \
-    united_kingdom_nhs_number:string^ \
-    waist_as_cm:double \
-    height_as_cm:double \
-    weight_as_kg:double \
-    body_mass_index:double \
-    waist_height_ratio:double \
-    vo2_max:double \
-    --api
-
-cargo loco generate scaffold smoking_alcohol \
-    deleted_at:ts \
-    assessment:references \
-    smoking_status:string! \
-    cigarettes_per_day:int \
-    years_since_quit:int \
-    alcohol_units_per_week:double \
-    alcohol_frequency:string! \
-    --api
-
-cargo loco generate scaffold clinician \
-    deleted_at:ts \
-    name:text! \
-    email:text \
-    phone:text \
-    postal_address_as_full_text:text \
-    country_as_iso_3166_1_alpha_2:string \
-    postcode:text \
-    role:text! \
-    registration_body:text! \
-    registration_number:text! \
-    united_kingdom_nhs_number:string^ \
-    --api
-
-cargo loco generate scaffold physical_activity_diet \
-    deleted_at:ts \
-    assessment:references \
-    physical_activity_minutes_per_week:int \
-    activity_intensity:string! \
-    fruit_veg_portions_per_day:int \
-    diet_quality:string! \
-    salt_intake:string! \
-    --api
-
-cargo loco generate scaffold body_measurements \
-    deleted_at:ts \
-    assessment:references \
-    height_cm:double \
-    weight_kg:double \
-    bmi:double \
-    waist_circumference_cm:double \
-    --api
-
-cargo loco generate scaffold review_calculate \
-    deleted_at:ts \
-    assessment:references \
-    clinician_name:string! \
-    review_date:date \
-    clinical_notes:text! \
-    audit_score:int \
-    --api
-
-cargo loco generate scaffold grade \
-    deleted_at:ts \
-    assessment:references \
-    risk_category:string! \
-    ten_year_risk_percent:double! \
-    heart_age:int \
-    graded_at:ts \
-    --api
-
-cargo loco generate scaffold grading_fired_rule \
-    deleted_at:ts \
-    grade:references \
-    rule_id:string! \
-    category:string! \
-    description:text! \
-    risk_level:string! \
-    --api
-
-cargo loco generate scaffold grading_additional_flag \
-    deleted_at:ts \
-    grade:references \
-    flag_id:string! \
-    category:string! \
-    message:text! \
-    priority:string! \
-    --api
-
-cargo loco generate scaffold grade \
-    deleted_at:ts \
-    assessment:references \
-    risk_category:string! \
-    ten_year_risk_percent:double! \
-    heart_age:int \
-    graded_at:ts \
-    --api
-
-cargo loco generate scaffold grading_fired_rule \
-    deleted_at:ts \
-    grade:references \
-    rule_id:string! \
-    category:string! \
-    description:text! \
-    risk_level:string! \
-    --api
-
-cargo loco generate scaffold grading_additional_flag \
-    deleted_at:ts \
-    grade:references \
-    flag_id:string! \
-    category:string! \
-    message:text! \
-    priority:string! \
     --api

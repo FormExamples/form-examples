@@ -8,11 +8,15 @@ createdb --host=localhost --port=5432 --username=loco --owner=loco "${form_snake
 createdb --host=localhost --port=5432 --username=loco --owner=loco "${form_snake_case}_test" || :
 createdb --host=localhost --port=5432 --username=loco --owner=loco "${form_snake_case}_production" || :
 
-loco new --name "${form_kebab_case}" --db postgres --bg async --assets none
-cd "${form_kebab_case}"
+loco new --name "${form_snake_case}" --db postgres --bg async --assets none -a
+cd "${form_snake_case}"
+
+# Pin time to a version compatible with cookie 0.18.1 (a fresh loco
+# starter otherwise resolves time 0.3.52, which fails to compile).
+cargo update -p time --precise 0.3.47
 
 cargo loco generate scaffold architecture \
-    deleted_at:ts \
+    deleted_at:tstz \
     name:text! \
     version:text! \
     owner:text! \
@@ -21,7 +25,7 @@ cargo loco generate scaffold architecture \
     --api
 
 cargo loco generate scaffold arc42_documentation \
-    deleted_at:ts \
+    deleted_at:tstz \
     architecture:references \
     author_name:text! \
     author_role:text! \
@@ -39,11 +43,11 @@ cargo loco generate scaffold arc42_documentation \
     recommendation:text! \
     additional_notes:text! \
     signed_by:text! \
-    signed_at:ts \
+    signed_at:tstz \
     --api
 
 cargo loco generate scaffold business_goal \
-    deleted_at:ts \
+    deleted_at:tstz \
     arc42_documentation:references \
     ordinal:int! \
     name:text! \
@@ -51,7 +55,7 @@ cargo loco generate scaffold business_goal \
     --api
 
 cargo loco generate scaffold quality_goal \
-    deleted_at:ts \
+    deleted_at:tstz \
     arc42_documentation:references \
     ordinal:int! \
     name:text! \
@@ -60,7 +64,7 @@ cargo loco generate scaffold quality_goal \
     --api
 
 cargo loco generate scaffold stakeholder \
-    deleted_at:ts \
+    deleted_at:tstz \
     arc42_documentation:references \
     ordinal:int! \
     name:text! \
@@ -69,7 +73,7 @@ cargo loco generate scaffold stakeholder \
     --api
 
 cargo loco generate scaffold constraint_item \
-    deleted_at:ts \
+    deleted_at:tstz \
     arc42_documentation:references \
     ordinal:int! \
     kind:text! \
@@ -78,7 +82,7 @@ cargo loco generate scaffold constraint_item \
     --api
 
 cargo loco generate scaffold context_partner \
-    deleted_at:ts \
+    deleted_at:tstz \
     arc42_documentation:references \
     ordinal:int! \
     kind:text! \
@@ -89,7 +93,7 @@ cargo loco generate scaffold context_partner \
     --api
 
 cargo loco generate scaffold technology_decision \
-    deleted_at:ts \
+    deleted_at:tstz \
     arc42_documentation:references \
     ordinal:int! \
     category:text! \
@@ -98,7 +102,7 @@ cargo loco generate scaffold technology_decision \
     --api
 
 cargo loco generate scaffold building_block \
-    deleted_at:ts \
+    deleted_at:tstz \
     arc42_documentation:references \
     ordinal:int! \
     parent:references \
@@ -108,7 +112,7 @@ cargo loco generate scaffold building_block \
     --api
 
 cargo loco generate scaffold runtime_scenario \
-    deleted_at:ts \
+    deleted_at:tstz \
     arc42_documentation:references \
     ordinal:int! \
     name:text! \
@@ -117,7 +121,7 @@ cargo loco generate scaffold runtime_scenario \
     --api
 
 cargo loco generate scaffold deployment_node \
-    deleted_at:ts \
+    deleted_at:tstz \
     arc42_documentation:references \
     ordinal:int! \
     environment:text! \
@@ -126,7 +130,7 @@ cargo loco generate scaffold deployment_node \
     --api
 
 cargo loco generate scaffold crosscutting_concept \
-    deleted_at:ts \
+    deleted_at:tstz \
     arc42_documentation:references \
     ordinal:int! \
     name:text! \
@@ -134,7 +138,7 @@ cargo loco generate scaffold crosscutting_concept \
     --api
 
 cargo loco generate scaffold architectural_decision \
-    deleted_at:ts \
+    deleted_at:tstz \
     arc42_documentation:references \
     ordinal:int! \
     title:text! \
@@ -145,7 +149,7 @@ cargo loco generate scaffold architectural_decision \
     --api
 
 cargo loco generate scaffold quality_scenario \
-    deleted_at:ts \
+    deleted_at:tstz \
     arc42_documentation:references \
     ordinal:int! \
     source:text! \
@@ -156,7 +160,7 @@ cargo loco generate scaffold quality_scenario \
     --api
 
 cargo loco generate scaffold risk_item \
-    deleted_at:ts \
+    deleted_at:tstz \
     arc42_documentation:references \
     ordinal:int! \
     kind:text! \
@@ -167,7 +171,7 @@ cargo loco generate scaffold risk_item \
     --api
 
 cargo loco generate scaffold glossary_term \
-    deleted_at:ts \
+    deleted_at:tstz \
     arc42_documentation:references \
     ordinal:int! \
     term:text! \
@@ -175,7 +179,7 @@ cargo loco generate scaffold glossary_term \
     --api
 
 cargo loco generate scaffold arc42_documentation_grade \
-    deleted_at:ts \
+    deleted_at:tstz \
     arc42_documentation:references \
     computed_maturity:text! \
     final_maturity:text! \
@@ -195,7 +199,7 @@ cargo loco generate scaffold arc42_documentation_grade \
     --api
 
 cargo loco generate scaffold arc42_documentation_grade_rule \
-    deleted_at:ts \
+    deleted_at:tstz \
     arc42_documentation_grade:references \
     ordinal:int! \
     rule_id:text! \
@@ -204,7 +208,7 @@ cargo loco generate scaffold arc42_documentation_grade_rule \
     --api
 
 cargo loco generate scaffold arc42_documentation_grade_flag \
-    deleted_at:ts \
+    deleted_at:tstz \
     arc42_documentation_grade:references \
     ordinal:int! \
     category:text! \

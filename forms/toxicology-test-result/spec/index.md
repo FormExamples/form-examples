@@ -1,74 +1,100 @@
-# Toxicology Test Result — living spec
+# Toxicology Test Result — specification
 
-Living domain spec for the toxicology result (report) form. The schema in
-[`../sql/`](../sql) is the source of truth; this spec describes the behaviour the
-front-ends and back-end must implement identically.
+This file is the **living domain spec** for this form. It captures the contract each implementation (SQL schema, generated representations, front-ends, and Rust backend) must satisfy. Treat it as the source of truth for behaviour — update the spec before changing code.
 
-## Entities
+Slug: `toxicology-test-result`
 
-| Table | Role |
+## 1. Purpose
+
+A UK NHS–aligned **toxicology / poisons / therapeutic-drug-level test result
+(report)** that a reporting clinician completes after a toxicology assay has been
+performed. It is the **result/report counterpart** to *Toxicology Test Request*
+(a referral / vetting form): where the request captures which assays should be
+done and whether they are appropriate and well timed, this form records what the
+assays **found** — the measured **result values** — and a structured
+**interpretation**. It records the specimen condition, the clinical history and
+suspected agent, the assay levels (paracetamol, salicylate, ethanol, lithium,
+digoxin, carboxyhaemoglobin, a drugs-of-abuse screen, and a named specific drug),
+the paracetamol-nomogram interpretation, the overall result status, the narrative
+findings and impression, and recommended follow-up — then computes a **four-axis
+interpretation grade** (result classification, abnormality severity / structured
+reporting, report completeness, and follow-up urgency) plus a set of
+safety-critical flags including an automatic **critical-result alert**. The
+output is a structured toxicology report.
+
+This form is the clinical-toxicology result counterpart to the repository's other
+clinician-driven result forms, and mirrors the `ct-scan-test-result` gold
+template. It is completed by a clinical biochemist, toxicologist, emergency
+physician, or other reporting clinician rather than by the patient, and is
+aligned with TOXBASE / NPIS guidance, the MHRA paracetamol-overdose treatment
+nomogram (interpretable only at ≥ 4 h post-ingestion; a single 100 mg/L treatment
+line), and RCEM toxicology best-practice guidance.
+
+Full design description: [`index.md`](../index.md).
+
+## 2. Scope
+
+In scope: the schema, scoring engine, four front-ends (form + dashboard, each in HTML and SvelteKit), and the Rust full-stack crate listed in §5. Out of scope: hosted deployment, authentication, multi-tenancy.
+
+## 3. Scoring system
+
+See [`index.md`](../index.md) for the scoring instrument, ranges, and categories applicable to this form.
+
+## 4. Inputs and outputs
+
+**Inputs.** A typed assessment object whose shape mirrors the SQL schema in `sql/` (8 migration files). Unanswered text and enum fields default to `''`; unanswered numeric, date, and time fields default to `null`.
+
+**Outputs.** A grading object emitted by the engine: scoring result (per the instrument named in §3), `firedRules[]`, `additionalFlags[]`, and a clinical / administrative report. Rendered as HTML in the browser, exported as PDF via the SvelteKit endpoint, and convertible to FHIR R5 Bundle, XML, JSON, CSV, or TSV.
+
+## 5. Artefacts
+
+Required artefacts and their current status:
+
+| Subdirectory | Role |
 | --- | --- |
-| `patient` | Patient demographics. |
-| `clinician` | Reporting clinician (report author/signer). |
-| `toxicology_test_result` | Main result/report record (source of truth). |
-| `toxicology_test_result_grade` | Computed four-axis interpretation grade (1:1 with result). |
-| `toxicology_test_result_grade_rule` | Audit trail of fired scoring rules. |
-| `toxicology_test_result_grade_flag` | Safety-critical flags. |
+| `sql` | source of truth |
+| `xml` | generated |
+| `fhir` | generated |
+| `protobuf` | generated |
+| `openapi` | generated — not implemented |
+| `front-end-with-html` | HTML + Lily (wizard + dashboard) — not implemented |
+| `front-end-with-svelte` | SvelteKit (wizard + dashboard) |
+| `back-end-with-loco` | Rust + Loco JSON API |
 
-## Result record (`toxicology_test_result`)
+Generated artefacts (XML, FHIR R5, Protocol Buffers, OpenAPI, Loco setup script) are never hand-edited; re-run the generators in [`/AGENTS.md`](../../../AGENTS.md) §Tools after schema changes.
 
-- **Identification:** `patient_id`, `clinician_id`,
-  `originating_request_reference`, `report_status`
-  (preliminary / final / amended / cancelled), `performed_date`, `reported_date`.
-- **Specimen & context:** `specimen_condition` (satisfactory / insufficient /
-  delayed), `clinical_history`, `suspected_agent`, `time_since_ingestion_hours`.
-- **Result values:** `paracetamol_level_mg_l`, `salicylate_level_mg_l`,
-  `ethanol_level`, `lithium_level_mmol_l`, `digoxin_level`,
-  `carboxyhaemoglobin_percent`, `drugs_of_abuse_screen`, `specific_drug_level`.
-- **Interpretation:** `paracetamol_nomogram` (above-treatment-line /
-  below-treatment-line / not-applicable), `overall_result_status` (normal /
-  abnormal / critical), `toxic_level_present`, `findings_narrative` (≤2000).
-- **Conclusion:** `impression` (≤2000), `reporting_category`,
-  `recommended_follow_up`.
-- **Critical communication:** `critical_result_communicated`, `reported_to`.
+## 6. Acceptance criteria
 
-## Grade contract (`toxicology_test_result_grade`)
+- `bin/test-form toxicology-test-result` exits cleanly.
+- The scoring engine is pure (no side effects, no I/O) and unit-tested.
+- The HTML front-ends conform to the Lily HTML headless contract
+  ([`forms/AGENTS-front-end-html.md`](../../AGENTS-front-end-html.md)).
+- The SvelteKit front-ends conform to the Lily Svelte headless contract
+  ([`forms/AGENTS-front-end-svelte.md`](../../AGENTS-front-end-svelte.md))
+  and pass `pnpm check` and `pnpm test`.
+- The Rust crate builds (`cargo build`) and tests pass (`cargo test`).
+- `bin/lily-html-refactor --check toxicology-test-result` reports no drift.
+- LocalStorage keys preserve draft state across reloads:
+  - `toxicology-test-result.front-end-with-html.v1` (HTML)
+  - `toxicology-test-result.front-end-with-svelte.v1` (SvelteKit)
 
-Pure function over the result:
+## 7. Compliance
 
-| Axis | Field(s) | Domain |
-| --- | --- | --- |
-| A. classification | `result_classification` | normal / abnormal / critical / inconclusive |
-| B. severity | `abnormality_severity` + `reporting_category` | none / minor / moderate / major (+ label) |
-| C. completeness | `report_completeness_percent` | 0–100 |
-| D. follow-up urgency | `follow_up_urgency` + `target_timeframe` + `recommended_action` | routine / recommended / urgent / critical-alert |
+Inherits the monorepo compliance baseline: MDCG 2019-11 Rev.1 (EU MDR), UK Medical Devices Regulations 2002, ISO/IEC/IEEE 26514:2022, UK MHRA Software and AI as a Medical Device. Form-specific classification (e.g. Class IIa where output drives clinical decisions) is recorded in [`index.md`](../index.md) and [`AGENTS.md`](../AGENTS.md) where it differs from the baseline.
 
-Overall `recommendation`: no-action / routine-follow-up / further-imaging /
-specialist-referral / urgent-review. Sign-off via `signed_at`; engine timestamp
-`graded_at`.
+## 8. References
 
-### Escalation invariant
+- [`index.md`](../index.md) — form description and scoring details
+- [`AGENTS.md`](../AGENTS.md) — agent instructions
+- [`plan.md`](../plan.md) — implementation roadmap
+- [`tasks.md`](../tasks.md) — task tracking
+- [`/spec.md`](../../../spec.md) — system-level specification
+- [`/AGENTS.md`](../../../AGENTS.md) — cross-cutting agent instructions
+- [`../AGENTS-front-end-html.md`](../../AGENTS-front-end-html.md) — Lily HTML contract
+- [`../AGENTS-front-end-svelte.md`](../../AGENTS-front-end-svelte.md) — Lily Svelte contract
 
-If the result describes a toxic level — `paracetamol_nomogram =
-above-treatment-line`, or `toxic_level_present`, or `overall_result_status =
-critical` — then Axis A **must** be `critical`, Axis D **must** be
-`critical-alert` with an urgent antidote action (e.g. start N-acetylcysteine /
-NAC for paracetamol), and a `critical-result-alert` flag **must** be present,
-irrespective of the other axes.
+## 9. Verify
 
-## Rules and flags
-
-- `toxicology_test_result_grade_rule`: one row per fired rule with `rule_id`,
-  `axis` (classification / severity / completeness / follow-up), `category`,
-  `description`. Rule IDs are stable and shared across implementations.
-- `toxicology_test_result_grade_flag`: `flag_id`, `category`
-  (critical-result-alert, incidental-finding, discrepancy-with-request,
-  abnormal-requiring-action, urgent-referral, inadequate-technique,
-  unexpected-finding, missing-impression, missing-measurement, other),
-  `priority` (low / medium / high), `description`, `suggested_action`.
-
-## Conventions
-
-- camelCase in front-end serde; snake_case in SQL.
-- `''` for unanswered text / enum; `null` for unanswered numeric / date / time.
-- One continuous single-page wizard (~7 sections).
+```sh
+bin/test-form toxicology-test-result
+```

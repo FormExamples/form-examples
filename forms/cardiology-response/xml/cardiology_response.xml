@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE cardiology_response SYSTEM "cardiology_response.dtd">
+<cardiology_response>
+<id>770e8400-e29b-41d4-a716-446655440002</id>
+<created_at>2026-04-09T10:00:00Z</created_at>
+<updated_at>2026-04-09T10:00:00Z</updated_at>
+<deleted_at>2026-04-09T10:00:00Z</deleted_at>
+<patient_id>550e8400-e29b-41d4-a716-446655440000</patient_id>
+<clinician_id>660e8400-e29b-41d4-a716-446655440001</clinician_id>
+<originating_request_reference></originating_request_reference>
+<response_status>preliminary</response_status>
+<consultation_type>clinic-review</consultation_type>
+<assessed_date>2026-01-15</assessed_date>
+<responded_date>2026-01-15</responded_date>
+<clinical_summary>Example text.</clinical_summary>
+<examination_findings>Example text.</examination_findings>
+<investigations_performed></investigations_performed>
+<ischaemia_or_cad>true</ischaemia_or_cad>
+<significant_arrhythmia>true</significant_arrhythmia>
+<reduced_ejection_fraction>true</reduced_ejection_fraction>
+<significant_valve_disease>true</significant_valve_disease>
+<structural_abnormality>true</structural_abnormality>
+<uncontrolled_hypertension>true</uncontrolled_hypertension>
+<non_cardiac_cause>true</non_cardiac_cause>
+<primary_diagnosis_category>coronary-artery-disease</primary_diagnosis_category>
+<diagnosis_narrative>Example text.</diagnosis_narrative>
+<lv_ejection_fraction_percent>50.0</lv_ejection_fraction_percent>
+<management_plan>Example text.</management_plan>
+<medication_changes>Paracetamol</medication_changes>
+<recommended_follow_up></recommended_follow_up>
+<critical_result>true</critical_result>
+<critical_result_communicated>true</critical_result_communicated>
+<reported_to></reported_to>
+</cardiology_response>

@@ -6,7 +6,7 @@ development**: the spec is read before code is written, and code is changed
 *because* the spec changed — not the other way around.
 
 This file is the top-level system spec. Each form's domain spec lives in
-[`forms/<slug>/spec.md`](forms/AGENTS.md); together they form the contract
+[`forms/<slug>/spec/index.md`](forms/AGENTS.md); together they form the contract
 that the implementation must satisfy.
 
 ## 1. Purpose
@@ -47,7 +47,7 @@ Out of scope (today):
 forms/<slug>/index.md           (human-readable design)
         │
         ▼
-forms/<slug>/spec.md            (machine + human spec; the contract)
+forms/<slug>/spec/index.md      (machine + human spec; the contract)
         │
         ▼
 forms/<slug>/sql-migrations/    (source of truth for DATA SHAPE)
@@ -59,12 +59,10 @@ forms/<slug>/sql-migrations/    (source of truth for DATA SHAPE)
 ```
 
 ```
-forms/<slug>/spec.md            (source of truth for BEHAVIOUR)
+forms/<slug>/spec/index.md      (source of truth for BEHAVIOUR)
         │
-        ├──► front-end-form-with-html/        (HTML wizard)
-        ├──► front-end-form-with-svelte/      (SvelteKit wizard)
-        ├──► front-end-dashboard-with-html/   (HTML dashboard)
-        ├──► front-end-dashboard-with-svelte/ (SvelteKit dashboard)
+        ├──► front-end-with-html/             (HTML wizard + dashboard, one dir)
+        ├──► front-end-with-svelte/           (SvelteKit app; /<plural>/ list + /<plural>/[id] form)
         └──► back-end-with-loco/              (Rust JSON API back-end)
 ```
 
@@ -103,7 +101,7 @@ divergence.
 | `README.md` → `index.md`                        | author (symlink)    | no         |
 | `AGENTS.md`                                     | author              | no         |
 | `CLAUDE.md`                                     | author              | no         |
-| `spec.md`                                       | author              | no         |
+| `spec/index.md`                                 | author              | no         |
 | `plan.md`                                       | author              | no         |
 | `tasks.md`                                      | author              | no         |
 | `doc/`                                          | author              | no         |
@@ -112,10 +110,8 @@ divergence.
 | `fhir-r5/`                                      | `bin/fhir-r5/generate-fhir-r5-representations.py` | **yes** |
 | `protobuf/`                                     | `bin/protobuf/generate-protobuf-representations.py` | **yes** |
 | `openapi/`                                      | `bin/openapi/generate-openapi-representations.py` | **yes** |
-| `front-end-form-with-html/`                     | author + `bin/lily-html-refactor` for mechanical class swaps | partial |
-| `front-end-form-with-svelte/`                   | author              | no         |
-| `front-end-dashboard-with-html/`                | author              | partial    |
-| `front-end-dashboard-with-svelte/`              | author              | no         |
+| `front-end-with-html/`                          | author + `bin/lily-html-refactor` for mechanical class swaps | partial |
+| `front-end-with-svelte/`                        | author              | no         |
 | `back-end-with-loco/`                           | author              | no         |
 | `back-end-with-loco-setup`                      | `bin/back-end-with-loco/generate-back-end-with-loco-setup.py` | **yes** |
 
@@ -136,8 +132,8 @@ divergence.
 - **Tailwind CSS 4 + SVAR DataGrid (Willow)** is the styling layer that
   attaches to the Lily class names in SvelteKit projects.
 - **LocalStorage autosave.** Drafts persist under the key
-  `<slug>.front-end-form-with-html.v1` (HTML) or
-  `<slug>.front-end-form-with-svelte.v1` (SvelteKit). The shape is the
+  `<slug>.front-end-with-html.v1` (HTML) or
+  `<slug>.front-end-with-svelte.v1` (SvelteKit). The shape is the
   scoring engine's input type; missing fields are filled from the
   `emptyAssessment()` factory on load.
 - **Validation.** Submit-time validation populates a top-of-form
@@ -219,7 +215,7 @@ cargo build && cargo test && cargo clippy  # Loco/Rust
 
 ## 10. Spec-driven development workflow
 
-1. **Update `spec.md`** (this file, or `forms/<slug>/spec.md`) to declare
+1. **Update `spec.md`** (this file, or `forms/<slug>/spec/index.md`) to declare
    the new behaviour, contract change, or constraint.
 2. **Update `forms/<slug>/sql-migrations/`** if data shape changes.
 3. **Regenerate** the derived artefacts (XML, FHIR, protobuf, OpenAPI):

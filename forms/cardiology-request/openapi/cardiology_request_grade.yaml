@@ -1,0 +1,190 @@
+# Generated from sql-migrations/. Do not edit by hand.
+# SOURCE: cardiology_request_grade
+openapi: 3.1.0
+info:
+  title: Cardiology Request — CardiologyRequestGrade
+  version: 1.0.0
+  description: "Computed four-axis vetting grade: referral appropriateness, safety / red-flag, request completeness, and triage priority. A red flag (suspected acute coronary syndrome, exertional syncope, new-onset heart failure) drives the safety axis and auto-escalates the triage tier regardless of the other axes."
+paths:
+  /cardiology-request-grades:
+    get:
+      summary: List CardiologyRequestGrade records
+      operationId: listCardiologyRequestGrade
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of CardiologyRequestGrade records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/CardiologyRequestGrade"
+    post:
+      summary: Create a new CardiologyRequestGrade
+      operationId: createCardiologyRequestGrade
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CardiologyRequestGrade"
+      responses:
+        "201":
+          description: The newly created CardiologyRequestGrade
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CardiologyRequestGrade"
+        "400":
+          description: Validation error
+  /cardiology-request-grades/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one CardiologyRequestGrade by id
+      operationId: getCardiologyRequestGrade
+      responses:
+        "200":
+          description: The requested CardiologyRequestGrade
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CardiologyRequestGrade"
+        "404":
+          description: CardiologyRequestGrade not found
+    patch:
+      summary: Update an existing CardiologyRequestGrade
+      operationId: updateCardiologyRequestGrade
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CardiologyRequestGrade"
+      responses:
+        "200":
+          description: The updated CardiologyRequestGrade
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CardiologyRequestGrade"
+        "404":
+          description: CardiologyRequestGrade not found
+    delete:
+      summary: Soft-delete a CardiologyRequestGrade
+      operationId: deleteCardiologyRequestGrade
+      responses:
+        "204":
+          description: CardiologyRequestGrade deleted
+        "404":
+          description: CardiologyRequestGrade not found
+components:
+  schemas:
+    CardiologyRequestGrade:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was updated most-recently.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was deleted a.k.a. soft-removed.
+        cardiology_request_id:
+          type: string
+          format: uuid
+          description: Foreign key to the parent request (unique, 1:1).
+        appropriateness_band:
+          type: string
+          enum:
+            - usually-appropriate
+            - may-be-appropriate
+            - usually-not-appropriate
+            - ""
+          description: "Axis A appropriateness of referral to cardiology: usually-appropriate, may-be-appropriate, usually-not-appropriate."
+        safety_band:
+          type: string
+          enum:
+            - ok
+            - caution
+            - red-flag
+            - ""
+          description: "Axis B safety / red-flag band: ok, caution, red-flag."
+        completeness_percent:
+          type: integer
+          format: int32
+          description: Axis C request completeness as a percentage of mandatory fields (0-100).
+        triage_tier:
+          type: string
+          enum:
+            - routine
+            - urgent
+            - emergency
+            - ""
+          description: "Axis D triage priority: routine, urgent, emergency."
+        target_timeframe:
+          type: string
+          maxLength: 50
+          description: Target timeframe for the patient to be seen, implied by the triage tier.
+        recommendation:
+          type: string
+          enum:
+            - accept
+            - query-referrer
+            - redirect
+            - reject
+            - ""
+          description: "Overall vetting recommendation: accept, query-referrer, redirect, reject."
+        clinician_notes:
+          type: string
+          description: Free-text vetting / sign-off notes from the cardiology triage clinician.
+        signed_at:
+          type: string
+          format: date-time
+          description: Timestamp of the triage clinician electronic signature.
+        graded_at:
+          type: string
+          format: date-time
+          description: Timestamp when the engine last computed the grade.
+      required:
+        - created_at
+        - updated_at
+        - cardiology_request_id
+        - appropriateness_band
+        - safety_band
+        - triage_tier
+        - target_timeframe
+        - recommendation
+        - clinician_notes
+        - graded_at
+      description: "Computed four-axis vetting grade: referral appropriateness, safety / red-flag, request completeness, and triage priority. A red flag (suspected acute coronary syndrome, exertional syncope, new-onset heart failure) drives the safety axis and auto-escalates the triage tier regardless of the other axes."

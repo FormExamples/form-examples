@@ -175,7 +175,7 @@ createuser --host=localhost --port=5432 --username=postgres --login --createdb l
 createdb --host=localhost --port=5432 --username=postgres --owner=loco objectives_and_key_results_tracker_development || :
 createdb --host=localhost --port=5432 --username=postgres --owner=loco objectives_and_key_results_tracker_test || :
 createdb --host=localhost --port=5432 --username=postgres --owner=loco objectives_and_key_results_tracker_production || :
-loco new --name objectives-and-key-results-tracker --db postgres --bg async --assets serverside
+loco new --name objectives-and-key-results-tracker --db postgres --bg async --assets none
 ```
 
 - [ ] **Step 2: Run the setup script.** Loco's `new` creates a fresh directory, but we already have files. The recommended path: run `loco new` into a sibling temp directory, then copy the missing top-level files (Cargo workspace toml, `src/main.rs`, `config/`, `migration/Cargo.toml`, `tests/`, `assets/`) into the existing form sub-project, preserving our `Cargo.toml`, `src/scoring/`, and other Plan 1 artefacts.
