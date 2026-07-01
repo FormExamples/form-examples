@@ -1,0 +1,16 @@
+use ct_scan_test_result::app::App;
+use loco_rs::testing::prelude::*;
+use serial_test::serial;
+
+#[tokio::test]
+#[serial]
+async fn can_get_ct_scan_test_results() {
+    request::<App, _, _>(|request, _ctx| async move {
+        let res = request.get("/api/ct_scan_test_results/").await;
+        assert_eq!(res.status_code(), 200);
+
+        // you can assert content like this:
+        // assert_eq!(res.text(), "content");
+    })
+    .await;
+}

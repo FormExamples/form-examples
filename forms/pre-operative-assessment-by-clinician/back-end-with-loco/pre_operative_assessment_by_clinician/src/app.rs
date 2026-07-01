@@ -1,23 +1,22 @@
-//! Loco application hooks: route registration, workers, tasks, and lifecycle.
-
-use std::path::Path;
-
 use async_trait::async_trait;
 use loco_rs::{
     app::{AppContext, Hooks, Initializer},
-    bgworker::Queue,
+    bgworker::{BackgroundWorker, Queue},
     boot::{create_app, BootResult, StartMode},
     config::Config,
     controller::AppRoutes,
+    db::{self, truncate_table},
     environment::Environment,
     task::Tasks,
     Result,
 };
 use migration::Migrator;
+use std::path::Path;
 
-/// App.
+#[allow(unused_imports)]
+use crate::{controllers, models::_entities::users, tasks, workers::downloader::DownloadWorker};
+
 pub struct App;
-
 #[async_trait]
 impl Hooks for App {
     fn app_name() -> &'static str {
@@ -47,21 +46,33 @@ impl Hooks for App {
     }
 
     fn routes(_ctx: &AppContext) -> AppRoutes {
-        AppRoutes::with_default_routes()
+        AppRoutes::with_default_routes() // controller routes below
+            .add_route(controllers::pre_operative_assessment_by_clinician_grade::routes())
+            .add_route(controllers::pre_operative_assessment_by_clinician::routes())
+            .add_route(controllers::patient_allergy::routes())
+            .add_route(controllers::allergy::routes())
+            .add_route(controllers::patient_medication::routes())
+            .add_route(controllers::medication::routes())
+            .add_route(controllers::clinician::routes())
+            .add_route(controllers::patient::routes())
+            .add_route(controllers::auth::routes())
     }
-
-    async fn connect_workers(_ctx: &AppContext, _queue: &Queue) -> Result<()> {
+    async fn connect_workers(ctx: &AppContext, queue: &Queue) -> Result<()> {
+        queue.register(DownloadWorker::build(ctx)).await?;
         Ok(())
     }
 
     #[allow(unused_variables)]
-    fn register_tasks(tasks: &mut Tasks) {}
-
-    async fn truncate(_ctx: &AppContext) -> Result<()> {
+    fn register_tasks(tasks: &mut Tasks) {
+        // tasks-inject (do not remove)
+    }
+    async fn truncate(ctx: &AppContext) -> Result<()> {
+        truncate_table(&ctx.db, users::Entity).await?;
         Ok(())
     }
-
-    async fn seed(_ctx: &AppContext, _base: &Path) -> Result<()> {
+    async fn seed(ctx: &AppContext, base: &Path) -> Result<()> {
+        db::seed::<users::ActiveModel>(&ctx.db, &base.join("users.yaml").display().to_string())
+            .await?;
         Ok(())
     }
 }

@@ -6,7 +6,7 @@ CREATE TABLE care_quality (
     -- 1:1 relationship with encounter_satisfaction
     encounter_satisfaction_id   UUID NOT NULL UNIQUE REFERENCES encounter_satisfaction(id) ON DELETE CASCADE,
     -- Likert scores (1=Very Dissatisfied ... 5=Very Satisfied),
-    NULL if unanswered
+    -- NULL if unanswered
     involvement_in_decisions    SMALLINT CHECK (involvement_in_decisions BETWEEN 1 AND 5),
     treatment_plan_explanation  SMALLINT CHECK (treatment_plan_explanation BETWEEN 1 AND 5),
     confidence_in_care          SMALLINT CHECK (confidence_in_care BETWEEN 1 AND 5)
@@ -36,5 +36,3 @@ COMMENT ON COLUMN care_quality.updated_at IS
 COMMENT ON COLUMN care_quality.deleted_at IS
     'Timestamp when this row was deleted.';
 
-COMMENT ON COLUMN care_quality.NULL IS
-    'Null.';

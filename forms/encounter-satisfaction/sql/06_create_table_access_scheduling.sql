@@ -6,7 +6,7 @@ CREATE TABLE access_scheduling (
     -- 1:1 relationship with encounter_satisfaction
     encounter_satisfaction_id   UUID NOT NULL UNIQUE REFERENCES encounter_satisfaction(id) ON DELETE CASCADE,
     -- Likert scores (1=Very Dissatisfied ... 5=Very Satisfied),
-    NULL if unanswered
+    -- NULL if unanswered
     ease_of_scheduling          SMALLINT CHECK (ease_of_scheduling BETWEEN 1 AND 5),
     wait_for_appointment        SMALLINT CHECK (wait_for_appointment BETWEEN 1 AND 5),
     wait_in_waiting_room        SMALLINT CHECK (wait_in_waiting_room BETWEEN 1 AND 5)
@@ -36,5 +36,3 @@ COMMENT ON COLUMN access_scheduling.updated_at IS
 COMMENT ON COLUMN access_scheduling.deleted_at IS
     'Timestamp when this row was deleted.';
 
-COMMENT ON COLUMN access_scheduling.NULL IS
-    'Null.';

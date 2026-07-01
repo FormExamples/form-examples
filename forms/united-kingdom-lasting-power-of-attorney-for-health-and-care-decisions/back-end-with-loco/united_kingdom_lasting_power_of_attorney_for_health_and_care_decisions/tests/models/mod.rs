@@ -1,0 +1,20 @@
+mod users;
+
+mod donors;
+mod attorneys;
+mod replacement_attorneys;
+mod certificate_providers;
+mod person_to_notifies;
+mod lpas;
+mod lpa_attorneys;
+mod lpa_replacement_attorneys;
+mod lpa_person_to_notifies;
+mod lpa_decision_rules;
+mod lpa_lst_choices;
+mod lpa_preferences;
+mod lpa_instructions;
+mod lpa_signatures;
+mod lpa_registration_applications;
+mod lpa_validities;
+mod lpa_validity_fired_rules;
+mod lpa_validity_additional_flags;

@@ -171,7 +171,7 @@ CREATE TABLE access_scheduling (
     -- 1:1 relationship with encounter_satisfaction
     encounter_satisfaction_id   UUID NOT NULL UNIQUE REFERENCES encounter_satisfaction(id) ON DELETE CASCADE,
     -- Likert scores (1=Very Dissatisfied ... 5=Very Satisfied),
-    NULL if unanswered
+    -- NULL if unanswered
     ease_of_scheduling          SMALLINT CHECK (ease_of_scheduling BETWEEN 1 AND 5),
     wait_for_appointment        SMALLINT CHECK (wait_for_appointment BETWEEN 1 AND 5),
     wait_in_waiting_room        SMALLINT CHECK (wait_in_waiting_room BETWEEN 1 AND 5)
@@ -217,7 +217,7 @@ CREATE TABLE communication (
     -- 1:1 relationship with encounter_satisfaction
     encounter_satisfaction_id   UUID NOT NULL UNIQUE REFERENCES encounter_satisfaction(id) ON DELETE CASCADE,
     -- Likert scores (1=Very Dissatisfied ... 5=Very Satisfied),
-    NULL if unanswered
+    -- NULL if unanswered
     listening                   SMALLINT CHECK (listening BETWEEN 1 AND 5),
     explaining_condition        SMALLINT CHECK (explaining_condition BETWEEN 1 AND 5),
     answering_questions         SMALLINT CHECK (answering_questions BETWEEN 1 AND 5),
@@ -266,7 +266,7 @@ CREATE TABLE staff_professionalism (
     -- 1:1 relationship with encounter_satisfaction
     encounter_satisfaction_id   UUID NOT NULL UNIQUE REFERENCES encounter_satisfaction(id) ON DELETE CASCADE,
     -- Likert scores (1=Very Dissatisfied ... 5=Very Satisfied),
-    NULL if unanswered
+    -- NULL if unanswered
     reception_courtesy          SMALLINT CHECK (reception_courtesy BETWEEN 1 AND 5),
     nursing_courtesy            SMALLINT CHECK (nursing_courtesy BETWEEN 1 AND 5),
     respect_shown               SMALLINT CHECK (respect_shown BETWEEN 1 AND 5)
@@ -312,7 +312,7 @@ CREATE TABLE care_quality (
     -- 1:1 relationship with encounter_satisfaction
     encounter_satisfaction_id   UUID NOT NULL UNIQUE REFERENCES encounter_satisfaction(id) ON DELETE CASCADE,
     -- Likert scores (1=Very Dissatisfied ... 5=Very Satisfied),
-    NULL if unanswered
+    -- NULL if unanswered
     involvement_in_decisions    SMALLINT CHECK (involvement_in_decisions BETWEEN 1 AND 5),
     treatment_plan_explanation  SMALLINT CHECK (treatment_plan_explanation BETWEEN 1 AND 5),
     confidence_in_care          SMALLINT CHECK (confidence_in_care BETWEEN 1 AND 5)
@@ -358,7 +358,7 @@ CREATE TABLE environment (
     -- 1:1 relationship with encounter_satisfaction
     encounter_satisfaction_id   UUID NOT NULL UNIQUE REFERENCES encounter_satisfaction(id) ON DELETE CASCADE,
     -- Likert scores (1=Very Dissatisfied ... 5=Very Satisfied),
-    NULL if unanswered
+    -- NULL if unanswered
     cleanliness                 SMALLINT CHECK (cleanliness BETWEEN 1 AND 5),
     waiting_area_comfort        SMALLINT CHECK (waiting_area_comfort BETWEEN 1 AND 5),
     privacy                     SMALLINT CHECK (privacy BETWEEN 1 AND 5)
@@ -552,7 +552,7 @@ CREATE TABLE overall_satisfaction (
     -- 1:1 relationship with encounter_satisfaction
     encounter_satisfaction_id   UUID NOT NULL UNIQUE REFERENCES encounter_satisfaction(id) ON DELETE CASCADE,
     -- Likert scores (1=Very Dissatisfied ... 5=Very Satisfied),
-    NULL if unanswered
+    -- NULL if unanswered
     overall_rating              SMALLINT CHECK (overall_rating BETWEEN 1 AND 5),
     likely_to_recommend         SMALLINT CHECK (likely_to_recommend BETWEEN 1 AND 5),
     likely_to_return            SMALLINT CHECK (likely_to_return BETWEEN 1 AND 5),
@@ -711,21 +711,9 @@ COMMENT ON COLUMN flagged_issue.deleted_at IS
 -- END 13_create_table_flagged_issue.sql
 -- ========================================================================
 
-COMMENT ON COLUMN access_scheduling.NULL IS
-    'Null.';
-COMMENT ON COLUMN communication.NULL IS
-    'Null.';
-COMMENT ON COLUMN staff_professionalism.NULL IS
-    'Null.';
-COMMENT ON COLUMN care_quality.NULL IS
-    'Null.';
-COMMENT ON COLUMN environment.NULL IS
-    'Null.';
 COMMENT ON COLUMN patient.deleted_at IS
     'Soft-delete timestamp; NULL when the row is live.';
 COMMENT ON COLUMN patient.weight_as_kg IS
     'Weight as kg.';
 COMMENT ON COLUMN clinician.deleted_at IS
     'Soft-delete timestamp; NULL when the row is live.';
-COMMENT ON COLUMN overall_satisfaction.NULL IS
-    'Null.';

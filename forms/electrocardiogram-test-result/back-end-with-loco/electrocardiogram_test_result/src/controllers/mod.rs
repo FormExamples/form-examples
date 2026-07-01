@@ -1,0 +1,8 @@
+pub mod auth;
+
+pub mod patient;
+pub mod clinician;
+pub mod electrocardiogram_test_result;
+pub mod electrocardiogram_test_result_grade;
+pub mod electrocardiogram_test_result_grade_rule;
+pub mod electrocardiogram_test_result_grade_flag;

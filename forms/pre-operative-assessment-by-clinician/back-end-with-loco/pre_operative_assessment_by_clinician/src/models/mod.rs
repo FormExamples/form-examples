@@ -1,4 +1,10 @@
-//! Database models and their query helpers.
-
 pub mod _entities;
 pub mod users;
+pub mod patients;
+pub mod clinicians;
+pub mod medications;
+pub mod patient_medications;
+pub mod allergies;
+pub mod patient_allergies;
+pub mod pre_operative_assessment_by_clinicians;
+pub mod pre_operative_assessment_by_clinician_grades;

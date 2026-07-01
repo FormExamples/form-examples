@@ -1,5 +1,3 @@
-//! Main module.
-
 use loco_rs::cli;
 use migration::Migrator;
 use pre_operative_assessment_by_clinician::app::App;

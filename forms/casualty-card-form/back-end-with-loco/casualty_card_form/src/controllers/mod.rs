@@ -1,0 +1,24 @@
+pub mod auth;
+
+pub mod patient;
+pub mod clinician;
+pub mod casualty_card;
+pub mod casualty_card_demographics;
+pub mod casualty_card_next_of_kin;
+pub mod casualty_card_gp;
+pub mod casualty_card_arrival_triage;
+pub mod casualty_card_presenting_complaint;
+pub mod casualty_card_pain_assessment;
+pub mod casualty_card_medical_history;
+pub mod casualty_card_medication;
+pub mod casualty_card_allergy;
+pub mod casualty_card_vital_signs;
+pub mod casualty_card_primary_survey;
+pub mod casualty_card_clinical_examination;
+pub mod casualty_card_investigations;
+pub mod casualty_card_treatment;
+pub mod casualty_card_assessment_plan;
+pub mod casualty_card_disposition;
+pub mod casualty_card_safeguarding_consent;
+pub mod news2_result;
+pub mod flagged_issue;

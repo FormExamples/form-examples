@@ -15,7 +15,7 @@ to run.
    createdb    --host=localhost --port=5432 --username=postgres --owner=loco who_surgical_safety_checklist_development || :
    createdb    --host=localhost --port=5432 --username=postgres --owner=loco who_surgical_safety_checklist_test || :
    createdb    --host=localhost --port=5432 --username=postgres --owner=loco who_surgical_safety_checklist_production || :
-   loco new --name who-surgical-safety-checklist --db postgres --bg async --assets serverside
+   loco new --name who-surgical-safety-checklist --db postgres --bg async --assets none
    ```
 
 2. Run the generated setup script to scaffold the four resources

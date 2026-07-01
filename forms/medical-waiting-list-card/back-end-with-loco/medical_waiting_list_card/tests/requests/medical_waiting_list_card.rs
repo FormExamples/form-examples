@@ -1,0 +1,16 @@
+use medical_waiting_list_card::app::App;
+use loco_rs::testing::prelude::*;
+use serial_test::serial;
+
+#[tokio::test]
+#[serial]
+async fn can_get_medical_waiting_list_cards() {
+    request::<App, _, _>(|request, _ctx| async move {
+        let res = request.get("/api/medical_waiting_list_cards/").await;
+        assert_eq!(res.status_code(), 200);
+
+        // you can assert content like this:
+        // assert_eq!(res.text(), "content");
+    })
+    .await;
+}

@@ -1,0 +1,15 @@
+pub mod _entities;
+pub mod users;
+pub mod patients;
+pub mod hipaa_authorizations;
+pub mod signers;
+pub mod disclosing_sources;
+pub mod authorized_recipients;
+pub mod records_to_discloses;
+pub mod purpose_of_disclosures;
+pub mod expirations;
+pub mod patient_rights_acknowledgements;
+pub mod signature_witnesses;
+pub mod validation_results;
+pub mod validation_fired_rules;
+pub mod validation_additional_flags;

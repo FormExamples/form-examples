@@ -1,0 +1,119 @@
+use sea_orm_migration::prelude::*;
+
+#[derive(DeriveMigrationName)]
+pub struct Migration;
+
+#[async_trait::async_trait]
+impl MigrationTrait for Migration {
+    async fn up(&self, m: &SchemaManager) -> Result<(), DbErr> {
+        m.create_table(
+            Table::create()
+                .table(Alias::new("cardiology_response_grades"))
+                .if_not_exists()
+                .col(
+                    ColumnDef::new(Alias::new("id"))
+                        .uuid()
+                        .not_null()
+                        .default(Expr::cust("gen_random_uuid()"))
+                        .primary_key(),
+                )
+                .col(
+                    ColumnDef::new(Alias::new("created_at"))
+                        .timestamp_with_time_zone()
+                        .not_null()
+                        .default(Expr::current_timestamp()),
+                )
+                .col(
+                    ColumnDef::new(Alias::new("updated_at"))
+                        .timestamp_with_time_zone()
+                        .not_null()
+                        .default(Expr::current_timestamp()),
+                )
+                .col(
+                    ColumnDef::new(Alias::new("deleted_at"))
+                        .timestamp_with_time_zone()
+                        .null(),
+                )
+                .col(
+                    ColumnDef::new(Alias::new("cardiology_response_id"))
+                        .uuid()
+                        .not_null()
+                        .unique_key(),
+                )
+                .col(
+                    ColumnDef::new(Alias::new("response_classification"))
+                        .string()
+                        .not_null(),
+                )
+                .col(ColumnDef::new(Alias::new("severity")).string().not_null())
+                .col(
+                    ColumnDef::new(Alias::new("severity_category"))
+                        .string()
+                        .not_null(),
+                )
+                .col(
+                    ColumnDef::new(Alias::new("completeness_percent"))
+                        .integer()
+                        .null(),
+                )
+                .col(
+                    ColumnDef::new(Alias::new("follow_up_urgency"))
+                        .string()
+                        .not_null(),
+                )
+                .col(
+                    ColumnDef::new(Alias::new("target_timeframe"))
+                        .string()
+                        .not_null(),
+                )
+                .col(
+                    ColumnDef::new(Alias::new("recommended_action"))
+                        .string()
+                        .not_null(),
+                )
+                .col(
+                    ColumnDef::new(Alias::new("recommendation"))
+                        .string()
+                        .not_null(),
+                )
+                .col(
+                    ColumnDef::new(Alias::new("clinician_notes"))
+                        .text()
+                        .not_null(),
+                )
+                .col(
+                    ColumnDef::new(Alias::new("signed_at"))
+                        .timestamp_with_time_zone()
+                        .null(),
+                )
+                .col(
+                    ColumnDef::new(Alias::new("graded_at"))
+                        .timestamp_with_time_zone()
+                        .not_null()
+                        .default(Expr::current_timestamp()),
+                )
+                .foreign_key(
+                    ForeignKey::create()
+                        .name("fk_cardiology_response_grades_cardiology_response_id")
+                        .from(
+                            Alias::new("cardiology_response_grades"),
+                            Alias::new("cardiology_response_id"),
+                        )
+                        .to(Alias::new("cardiology_responses"), Alias::new("id"))
+                        .on_delete(ForeignKeyAction::Cascade)
+                        .on_update(ForeignKeyAction::Cascade),
+                )
+                .to_owned(),
+        )
+        .await
+    }
+
+    async fn down(&self, m: &SchemaManager) -> Result<(), DbErr> {
+        m.drop_table(
+            Table::drop()
+                .table(Alias::new("cardiology_response_grades"))
+                .to_owned(),
+        )
+        .await
+    }
+}

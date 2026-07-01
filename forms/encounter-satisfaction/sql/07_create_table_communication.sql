@@ -6,7 +6,7 @@ CREATE TABLE communication (
     -- 1:1 relationship with encounter_satisfaction
     encounter_satisfaction_id   UUID NOT NULL UNIQUE REFERENCES encounter_satisfaction(id) ON DELETE CASCADE,
     -- Likert scores (1=Very Dissatisfied ... 5=Very Satisfied),
-    NULL if unanswered
+    -- NULL if unanswered
     listening                   SMALLINT CHECK (listening BETWEEN 1 AND 5),
     explaining_condition        SMALLINT CHECK (explaining_condition BETWEEN 1 AND 5),
     answering_questions         SMALLINT CHECK (answering_questions BETWEEN 1 AND 5),
@@ -39,5 +39,3 @@ COMMENT ON COLUMN communication.updated_at IS
 COMMENT ON COLUMN communication.deleted_at IS
     'Timestamp when this row was deleted.';
 
-COMMENT ON COLUMN communication.NULL IS
-    'Null.';

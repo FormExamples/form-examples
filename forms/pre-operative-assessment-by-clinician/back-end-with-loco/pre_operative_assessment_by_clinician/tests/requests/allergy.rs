@@ -1,0 +1,16 @@
+use pre_operative_assessment_by_clinician::app::App;
+use loco_rs::testing::prelude::*;
+use serial_test::serial;
+
+#[tokio::test]
+#[serial]
+async fn can_get_allergies() {
+    request::<App, _, _>(|request, _ctx| async move {
+        let res = request.get("/api/allergies/").await;
+        assert_eq!(res.status_code(), 200);
+
+        // you can assert content like this:
+        // assert_eq!(res.text(), "content");
+    })
+    .await;
+}

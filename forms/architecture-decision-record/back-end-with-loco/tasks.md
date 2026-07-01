@@ -2,7 +2,7 @@
 
 ## Scaffold
 
-- [x] `loco new --name architecture_decision_record --db postgres --bg async --assets serverside`
+- [x] `loco new --name architecture_decision_record --db postgres --bg async --assets none`
 - [x] `Cargo.toml`, `src/`, `migration/`, `config/`, `tests/`, `assets/`
 - [x] `.gitignore`, `.rustfmt.toml`, `.cargo/`, `.github/`
 - [x] `templates/base.html.tera` with HTMX 2.0.8, Alpine.js 3.14.8, and

@@ -1,0 +1,135 @@
+#![allow(clippy::missing_errors_doc)]
+#![allow(clippy::unnecessary_struct_initialization)]
+#![allow(clippy::unused_async)]
+use loco_rs::prelude::*;
+use serde::{Deserialize, Serialize};
+
+use crate::models::_entities::mri_scan_test_requests::{ActiveModel, Entity, Model};
+
+#[derive(Clone, Debug, Serialize, Deserialize)]
+pub struct Params {
+    pub deleted_at: Option<DateTimeWithTimeZone>,
+    pub patient_id: i32,
+    pub clinician_id: i32,
+    pub status: String,
+    pub site_name: String,
+    pub setting: String,
+    pub referral_date: Option<Date>,
+    pub requested_by_date: Option<Date>,
+    pub body_region: String,
+    pub primary_indication: String,
+    pub clinical_question: String,
+    pub relevant_history: String,
+    pub contrast_required: String,
+    pub egfr: Option<f64>,
+    pub previous_gadolinium_reaction: String,
+    pub pregnancy_status: String,
+    pub pacemaker_or_icd: bool,
+    pub cochlear_implant: bool,
+    pub aneurysm_clip: bool,
+    pub metallic_foreign_body_eye: bool,
+    pub shrapnel_or_metal_fragments: bool,
+    pub programmable_shunt: bool,
+    pub neurostimulator: bool,
+    pub metal_implant_or_prosthesis: bool,
+    pub insulin_pump: bool,
+    pub claustrophobia: bool,
+    pub mri_safety_status: String,
+    pub weight_kg: Option<f64>,
+    pub relevant_previous_imaging: String,
+    pub urgency: String,
+    pub supervising_consultant: String,
+    pub notes: String,
+    }
+
+impl Params {
+    fn update(&self, item: &mut ActiveModel) {
+      item.deleted_at = Set(self.deleted_at);
+      item.patient_id = Set(self.patient_id);
+      item.clinician_id = Set(self.clinician_id);
+      item.status = Set(self.status.clone());
+      item.site_name = Set(self.site_name.clone());
+      item.setting = Set(self.setting.clone());
+      item.referral_date = Set(self.referral_date);
+      item.requested_by_date = Set(self.requested_by_date);
+      item.body_region = Set(self.body_region.clone());
+      item.primary_indication = Set(self.primary_indication.clone());
+      item.clinical_question = Set(self.clinical_question.clone());
+      item.relevant_history = Set(self.relevant_history.clone());
+      item.contrast_required = Set(self.contrast_required.clone());
+      item.egfr = Set(self.egfr);
+      item.previous_gadolinium_reaction = Set(self.previous_gadolinium_reaction.clone());
+      item.pregnancy_status = Set(self.pregnancy_status.clone());
+      item.pacemaker_or_icd = Set(self.pacemaker_or_icd);
+      item.cochlear_implant = Set(self.cochlear_implant);
+      item.aneurysm_clip = Set(self.aneurysm_clip);
+      item.metallic_foreign_body_eye = Set(self.metallic_foreign_body_eye);
+      item.shrapnel_or_metal_fragments = Set(self.shrapnel_or_metal_fragments);
+      item.programmable_shunt = Set(self.programmable_shunt);
+      item.neurostimulator = Set(self.neurostimulator);
+      item.metal_implant_or_prosthesis = Set(self.metal_implant_or_prosthesis);
+      item.insulin_pump = Set(self.insulin_pump);
+      item.claustrophobia = Set(self.claustrophobia);
+      item.mri_safety_status = Set(self.mri_safety_status.clone());
+      item.weight_kg = Set(self.weight_kg);
+      item.relevant_previous_imaging = Set(self.relevant_previous_imaging.clone());
+      item.urgency = Set(self.urgency.clone());
+      item.supervising_consultant = Set(self.supervising_consultant.clone());
+      item.notes = Set(self.notes.clone());
+      }
+}
+
+async fn load_item(ctx: &AppContext, id: i32) -> Result<Model> {
+    let item = Entity::find_by_id(id).one(&ctx.db).await?;
+    item.ok_or_else(|| Error::NotFound)
+}
+
+#[debug_handler]
+pub async fn list(State(ctx): State<AppContext>) -> Result<Response> {
+    format::json(Entity::find().all(&ctx.db).await?)
+}
+
+#[debug_handler]
+pub async fn add(State(ctx): State<AppContext>, Json(params): Json<Params>) -> Result<Response> {
+    let mut item = ActiveModel {
+        ..Default::default()
+    };
+    params.update(&mut item);
+    let item = item.insert(&ctx.db).await?;
+    format::json(item)
+}
+
+#[debug_handler]
+pub async fn update(
+    Path(id): Path<i32>,
+    State(ctx): State<AppContext>,
+    Json(params): Json<Params>,
+) -> Result<Response> {
+    let item = load_item(&ctx, id).await?;
+    let mut item = item.into_active_model();
+    params.update(&mut item);
+    let item = item.update(&ctx.db).await?;
+    format::json(item)
+}
+
+#[debug_handler]
+pub async fn remove(Path(id): Path<i32>, State(ctx): State<AppContext>) -> Result<Response> {
+    load_item(&ctx, id).await?.delete(&ctx.db).await?;
+    format::empty()
+}
+
+#[debug_handler]
+pub async fn get_one(Path(id): Path<i32>, State(ctx): State<AppContext>) -> Result<Response> {
+    format::json(load_item(&ctx, id).await?)
+}
+
+pub fn routes() -> Routes {
+    Routes::new()
+        .prefix("api/mri_scan_test_requests/")
+        .add("/", get(list))
+        .add("/", post(add))
+        .add("{id}", get(get_one))
+        .add("{id}", delete(remove))
+        .add("{id}", put(update))
+        .add("{id}", patch(update))
+}

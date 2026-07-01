@@ -1,0 +1,14 @@
+pub mod _entities;
+pub mod users;
+pub mod patients;
+pub mod clinicians;
+pub mod assessments;
+pub mod immunization_histories;
+pub mod childhood_vaccinations;
+pub mod adult_vaccinations;
+pub mod travel_vaccinations;
+pub mod occupational_vaccinations;
+pub mod contraindications_allergies;
+pub mod consent_informations;
+pub mod administration_records;
+pub mod clinical_reviews;

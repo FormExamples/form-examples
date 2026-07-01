@@ -6,7 +6,7 @@ CREATE TABLE staff_professionalism (
     -- 1:1 relationship with encounter_satisfaction
     encounter_satisfaction_id   UUID NOT NULL UNIQUE REFERENCES encounter_satisfaction(id) ON DELETE CASCADE,
     -- Likert scores (1=Very Dissatisfied ... 5=Very Satisfied),
-    NULL if unanswered
+    -- NULL if unanswered
     reception_courtesy          SMALLINT CHECK (reception_courtesy BETWEEN 1 AND 5),
     nursing_courtesy            SMALLINT CHECK (nursing_courtesy BETWEEN 1 AND 5),
     respect_shown               SMALLINT CHECK (respect_shown BETWEEN 1 AND 5)
@@ -36,5 +36,3 @@ COMMENT ON COLUMN staff_professionalism.updated_at IS
 COMMENT ON COLUMN staff_professionalism.deleted_at IS
     'Timestamp when this row was deleted.';
 
-COMMENT ON COLUMN staff_professionalism.NULL IS
-    'Null.';

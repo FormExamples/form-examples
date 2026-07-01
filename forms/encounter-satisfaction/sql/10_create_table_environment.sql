@@ -6,7 +6,7 @@ CREATE TABLE environment (
     -- 1:1 relationship with encounter_satisfaction
     encounter_satisfaction_id   UUID NOT NULL UNIQUE REFERENCES encounter_satisfaction(id) ON DELETE CASCADE,
     -- Likert scores (1=Very Dissatisfied ... 5=Very Satisfied),
-    NULL if unanswered
+    -- NULL if unanswered
     cleanliness                 SMALLINT CHECK (cleanliness BETWEEN 1 AND 5),
     waiting_area_comfort        SMALLINT CHECK (waiting_area_comfort BETWEEN 1 AND 5),
     privacy                     SMALLINT CHECK (privacy BETWEEN 1 AND 5)
@@ -36,5 +36,3 @@ COMMENT ON COLUMN environment.updated_at IS
 COMMENT ON COLUMN environment.deleted_at IS
     'Timestamp when this row was deleted.';
 
-COMMENT ON COLUMN environment.NULL IS
-    'Null.';

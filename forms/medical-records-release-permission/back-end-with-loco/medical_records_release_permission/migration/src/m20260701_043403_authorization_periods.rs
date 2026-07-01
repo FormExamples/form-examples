@@ -1,0 +1,29 @@
+use loco_rs::schema::*;
+use sea_orm_migration::prelude::*;
+
+#[derive(DeriveMigrationName)]
+pub struct Migration;
+
+#[async_trait::async_trait]
+impl MigrationTrait for Migration {
+    async fn up(&self, m: &SchemaManager) -> Result<(), DbErr> {
+        create_table(m, "authorization_periods",
+            &[
+            
+            ("id", ColType::PkAuto),
+            
+            ("deleted_at", ColType::TimestampWithTimeZoneNull),
+            ("start_date", ColType::Date),
+            ("end_date", ColType::Date),
+            ("single_use", ColType::String),
+            ],
+            &[
+            ("release_form", ""),
+            ]
+        ).await
+    }
+
+    async fn down(&self, m: &SchemaManager) -> Result<(), DbErr> {
+        drop_table(m, "authorization_periods").await
+    }
+}

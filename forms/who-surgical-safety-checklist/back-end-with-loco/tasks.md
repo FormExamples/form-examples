@@ -1,7 +1,7 @@
 # Tasks: WHO Surgical Safety Checklist — Full Stack
 
 - [x] Generate `back-end-with-loco-setup` from SQL migrations
-- [ ] Bootstrap Loco app with `loco new --name who-surgical-safety-checklist --db postgres --bg async --assets serverside`
+- [ ] Bootstrap Loco app with `loco new --name who-surgical-safety-checklist --db postgres --bg async --assets none`
 - [ ] Create `loco` Postgres role and `_development` / `_test` / `_production` databases
 - [ ] Run the setup script to scaffold `patient`, `clinician`, `who_surgical_safety_checklist`, `team_member`
 - [ ] Replace per-table CRUD with the single-page three-phase wizard (Sign In, Time Out, Sign Out)

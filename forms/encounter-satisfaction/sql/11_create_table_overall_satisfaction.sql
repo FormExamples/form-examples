@@ -6,7 +6,7 @@ CREATE TABLE overall_satisfaction (
     -- 1:1 relationship with encounter_satisfaction
     encounter_satisfaction_id   UUID NOT NULL UNIQUE REFERENCES encounter_satisfaction(id) ON DELETE CASCADE,
     -- Likert scores (1=Very Dissatisfied ... 5=Very Satisfied),
-    NULL if unanswered
+    -- NULL if unanswered
     overall_rating              SMALLINT CHECK (overall_rating BETWEEN 1 AND 5),
     likely_to_recommend         SMALLINT CHECK (likely_to_recommend BETWEEN 1 AND 5),
     likely_to_return            SMALLINT CHECK (likely_to_return BETWEEN 1 AND 5),
@@ -40,5 +40,3 @@ COMMENT ON COLUMN overall_satisfaction.updated_at IS
 COMMENT ON COLUMN overall_satisfaction.deleted_at IS
     'Timestamp when this row was deleted.';
 
-COMMENT ON COLUMN overall_satisfaction.NULL IS
-    'Null.';

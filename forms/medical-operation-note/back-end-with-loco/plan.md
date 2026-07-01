@@ -12,7 +12,7 @@ with the required HTMX/Alpine/`hx-boost` strings).
 - [x] `00-new.sh`: create `loco` postgres user and the
       `medical_operation_note_{development,test,production}` databases.
 - [x] `loco new --name medical-operation-note --db postgres --bg async
-      --assets serverside -a` to produce the SaaS starter, renamed to
+      --assets none -a` to produce the SaaS starter, renamed to
       snake_case `medical_operation_note/`.
 - [x] Outer-dir symlinks (`Cargo.toml`, `src`, `tests`, `assets`,
       `config`, `migration`, `target`, `.gitignore`) so `bin/test-form`

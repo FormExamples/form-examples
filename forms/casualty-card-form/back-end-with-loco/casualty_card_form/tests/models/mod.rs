@@ -1,0 +1,24 @@
+mod users;
+
+mod patients;
+mod clinicians;
+mod casualty_cards;
+mod casualty_card_demographics;
+mod casualty_card_next_of_kins;
+mod casualty_card_gps;
+mod casualty_card_arrival_triages;
+mod casualty_card_presenting_complaints;
+mod casualty_card_pain_assessments;
+mod casualty_card_medical_histories;
+mod casualty_card_medications;
+mod casualty_card_allergies;
+mod casualty_card_vital_signs;
+mod casualty_card_primary_surveys;
+mod casualty_card_clinical_examinations;
+mod casualty_card_investigations;
+mod casualty_card_treatments;
+mod casualty_card_assessment_plans;
+mod casualty_card_dispositions;
+mod casualty_card_safeguarding_consents;
+mod news2_results;
+mod flagged_issues;

@@ -1,0 +1,20 @@
+pub mod auth;
+
+pub mod donor;
+pub mod attorney;
+pub mod replacement_attorney;
+pub mod certificate_provider;
+pub mod person_to_notify;
+pub mod lpa;
+pub mod lpa_attorney;
+pub mod lpa_replacement_attorney;
+pub mod lpa_person_to_notify;
+pub mod lpa_decision_rule;
+pub mod lpa_lst_choice;
+pub mod lpa_preference;
+pub mod lpa_instruction;
+pub mod lpa_signature;
+pub mod lpa_registration_application;
+pub mod lpa_validity;
+pub mod lpa_validity_fired_rule;
+pub mod lpa_validity_additional_flag;

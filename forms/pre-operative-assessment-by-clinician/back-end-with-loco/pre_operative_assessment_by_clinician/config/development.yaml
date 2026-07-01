@@ -24,27 +24,18 @@ server:
   host: http://localhost
   # Out of the box middleware configuration. to disable middleware you can changed the `enable` field to `false` of comment the middleware block
   middlewares:
-    static:
-      enable: false
-      must_exist: false
-      precompressed: false
-      folder:
-        uri: "/static"
-        path: "assets/static"
-      fallback: "assets/static/404.html"
 
 # Worker Configuration
-# Mailer Configuration.
-
 workers:
-  mode: BackgroundQueue
+  # specifies the worker mode. Options:
+  #   - BackgroundQueue - Workers operate asynchronously in the background, processing queued.
+  #   - ForegroundBlocking - Workers operate in the foreground and block until tasks are completed.
+  #   - BackgroundAsync - Workers operate asynchronously in the background, processing tasks with async capabilities.
+  mode: BackgroundAsync
 
-queue:
-  kind: Postgres
-  uri: {{ get_env(name="DATABASE_URL", default="postgres://loco:loco@localhost:5432/pre_operative_assessment_by_clinician_development") }}
-  dangerously_flush: false
-  num_workers: 2
+  
 
+# Mailer Configuration.
 mailer:
   # SMTP mailer configuration.
   smtp:
@@ -95,6 +86,6 @@ auth:
   # JWT authentication
   jwt:
     # Secret key for token generation and verification
-    secret: nTpwAMksGHjOxMR7Iyze
+    secret: DuJeGQvf3c75NYNjsBH5
     # Token expiration time in seconds
     expiration: 604800 # 7 days
