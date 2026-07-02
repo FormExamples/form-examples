@@ -4,9 +4,12 @@ Implementation roadmap. See [`spec/index.md`](./spec/index.md) for the contract.
 
 ## Status
 
-Foundation docs authored (`index.md`, `spec/index.md`, `AGENTS.md`, `plan.md`,
-`tasks.md`). SQL, generated representations, front-ends, and back-end not yet
-built.
+All four layers are built (2026-07-02): foundation docs (`index.md`,
+`spec/index.md`, `AGENTS.md`, `plan.md`, `tasks.md`); SQL migrations plus
+generated representations (XML, FHIR R5, protobuf, OpenAPI, Loco setup);
+both consolidated front-ends (`front-end-with-html` and
+`front-end-with-svelte`, Lily-clean); and the `back-end-with-loco` Rust
+JSON-API crate. `CHANGELOG.md` and `examples/` are in place.
 
 ## Roadmap
 

@@ -1,0 +1,27 @@
+# Issue tracker
+
+> A general-purpose issue tracker that borrows the structure of a clinical **SOAP-style assessment** and applies it to any reportable problem — software defects, operational incidents, safety events, project blockers, customer complaints, and so on. Each issue is captured through a single-page, step-by-step questionnaire (nine SOAP-style sections) and graded with seven independent scoring scales drawn from medicine, aviation, civil engineering, and software-product practice. The output is a signed report with a composite priority and a list of safety-critical flags, suitable for triage and remediation tracking.
+
+## Docs
+
+- [Form description and scoring details](index.md)
+- [Living domain spec — the behavioural contract](spec/index.md)
+- [Agent instructions](AGENTS.md)
+- [Implementation plan](plan.md)
+- [Task tracking](tasks.md)
+- [Changelog](CHANGELOG.md)
+
+## Artefacts
+
+- [SQL migrations — source of truth for the data shape](sql/)
+- [Filled-form JSON fixture + FHIR R5 Bundle examples](examples/)
+- [HTML front-end — single-page wizard + dashboard](front-end-with-html/)
+- [SvelteKit front-end — RESTful wizard + dashboard](front-end-with-svelte/)
+- [Rust Loco JSON-API back-end](back-end-with-loco/)
+
+## Generated representations
+
+- [XML + DTD per SQL table](xml/)
+- [FHIR HL7 R5 JSON per SQL entity](fhir/r5/)
+- [Protocol Buffers schemas](protobuf/)
+- [OpenAPI 3.1 specifications](openapi/)

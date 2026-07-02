@@ -2,9 +2,11 @@
 
 ## Current status
 
-Foundation documentation authored (`index.md`, `AGENTS.md`, `spec/index.md`,
-`plan.md`, `tasks.md`). SQL schema, generated derivatives, front-ends, and the
-Loco back-end crate follow.
+All four layers are built as of 2026-07-02: foundation documentation
+(`index.md`, `AGENTS.md`, `spec/index.md`, `plan.md`, `tasks.md`); the SQL
+schema plus generated derivatives (XML, FHIR R5, protobuf, OpenAPI, Loco
+setup); both consolidated front-ends (HTML + Lily and SvelteKit + Lily); and
+the Loco JSON-API back-end crate — plus `CHANGELOG.md` and `examples/`.
 
 ## Why this form exists
 
@@ -36,13 +38,13 @@ escalation triggers (GCS ≤ 8, deterioration, abnormal pupils) fire consistentl
 
 1. [x] Foundation docs (`index.md`, `AGENTS.md`, `spec/index.md`, `plan.md`,
    `tasks.md`).
-2. [ ] SQL migrations (assessment + grading result / fired rule / flag).
-3. [ ] Generated representations (XML, FHIR R5, protobuf, OpenAPI).
-4. [ ] Loco setup script, examples, `CHANGELOG.md`.
-5. [ ] `front-end-with-html` (consolidated HTML wizard + dashboard + JS engine).
-6. [ ] `front-end-with-svelte` (consolidated SvelteKit wizard + dashboard + TS
+2. [x] SQL migrations (assessment + grading result / fired rule / flag).
+3. [x] Generated representations (XML, FHIR R5, protobuf, OpenAPI).
+4. [x] Loco setup script, examples, `CHANGELOG.md`.
+5. [x] `front-end-with-html` (consolidated HTML wizard + dashboard + JS engine).
+6. [x] `front-end-with-svelte` (consolidated SvelteKit wizard + dashboard + TS
    engine).
-7. [ ] `back-end-with-loco` (Rust JSON API crate; `cargo check` + engine tests).
+7. [x] `back-end-with-loco` (Rust JSON API crate; `cargo check` + engine tests).
 
 ## Future enhancements
 

@@ -1,0 +1,27 @@
+# Modified Early Warning Score (MEWS)
+
+> A bedside aggregate **track-and-trigger** score for adult inpatients. It records five routine physiological observations — **systolic blood pressure**, **heart rate**, **respiratory rate**, **temperature**, and **level of consciousness (AVPU)** — allocates each a sub-score of **0–3**, sums an aggregate of **0–14**, and triggers escalation when the aggregate is high or any single parameter scores the maximum. A high MEWS is not a diagnosis; it is a prompt to increase monitoring frequency, obtain urgent medical review, and consider critical-care outreach.
+
+## Docs
+
+- [Form description and scoring details](index.md)
+- [Living domain spec — the behavioural contract](spec/index.md)
+- [Agent instructions](AGENTS.md)
+- [Implementation plan](plan.md)
+- [Task tracking](tasks.md)
+- [Changelog](CHANGELOG.md)
+
+## Artefacts
+
+- [SQL migrations — source of truth for the data shape](sql/)
+- [Filled-form JSON fixture + FHIR R5 Bundle examples](examples/)
+- [HTML front-end — single-page wizard + dashboard](front-end-with-html/)
+- [SvelteKit front-end — RESTful wizard + dashboard](front-end-with-svelte/)
+- [Rust Loco JSON-API back-end](back-end-with-loco/)
+
+## Generated representations
+
+- [XML + DTD per SQL table](xml/)
+- [FHIR HL7 R5 JSON per SQL entity](fhir/r5/)
+- [Protocol Buffers schemas](protobuf/)
+- [OpenAPI 3.1 specifications](openapi/)

@@ -1,0 +1,5 @@
+# Wells Score for Deep Vein Thrombosis (DVT) — OpenAPI representations
+
+OpenAPI 3.1 `.yaml` specifications for the Wells Score for Deep Vein Thrombosis (DVT) form, generated per SQL entity. Do not hand-edit; re-run `bin/openapi/generate-openapi-representations.py`.
+
+See the form root [`../index.md`](../index.md) for the full design description.

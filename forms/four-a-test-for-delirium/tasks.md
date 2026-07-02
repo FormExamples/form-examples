@@ -15,25 +15,26 @@
 - [ ] `doc/nice-sign-alignment.md` — NICE CG103 / SIGN 157 cross-walk.
 
 ## Schema
-- [ ] `sql/` — patient/assessment table plus grading-result table.
+- [x] `sql/` — patient/assessment table plus grading-result table.
 
 ## Interchange representations
-- [ ] XML + DTD generated.
-- [ ] FHIR R5 JSON generated.
-- [ ] Protobuf generated.
-- [ ] OpenAPI generated.
-- [ ] Loco setup script generated.
+- [x] XML + DTD generated.
+- [x] FHIR R5 JSON generated.
+- [x] Protobuf generated.
+- [x] OpenAPI generated.
+- [x] Loco setup script generated.
 
 ## Front-ends
-- [ ] `front-end-with-html/` — Lily wizard + dashboard.
-- [ ] `front-end-with-svelte/` — Lily wizard + dashboard.
+- [x] `front-end-with-html/` — Lily wizard + dashboard.
+- [x] `front-end-with-svelte/` — Lily wizard + dashboard.
 
 ## Back-end
-- [ ] `back-end-with-loco/` — axum + Loco JSON API.
+- [x] `back-end-with-loco/` — axum + Loco JSON API.
 
 ## Tests
-- [ ] Vitest unit tests for the scoring engine.
-- [ ] `bin/test-form four-a-test-for-delirium` passes.
+- [x] Vitest unit tests for the scoring engine (`fourat-grader.test.ts`).
+- [ ] `bin/test-form four-a-test-for-delirium` passes (blocked by a repo-wide
+      `bin/test-form` harness issue, not by this form).
 
 ## Deferred / future
 - [ ] Collateral-history capture for item 4.

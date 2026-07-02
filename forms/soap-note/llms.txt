@@ -1,0 +1,27 @@
+# SOAP Note
+
+> A structured clinical progress note that records a single patient encounter in the four canonical **SOAP** sections — **Subjective**, **Objective**, **Assessment**, and **Plan** — and grades the note for **documentation completeness** rather than computing a clinical risk score. The engine checks the note against a set of required SOAP components, classifies it as **Complete**, **Partial**, or **Incomplete**, reports a completeness percentage, and raises safety flags (for example: an assessment or plan is missing, red-flag symptoms are documented without a corresponding plan, no safety-netting advice is recorded, or abnormal vitals are not addressed).
+
+## Docs
+
+- [Form description and scoring details](index.md)
+- [Living domain spec — the behavioural contract](spec/index.md)
+- [Agent instructions](AGENTS.md)
+- [Implementation plan](plan.md)
+- [Task tracking](tasks.md)
+- [Changelog](CHANGELOG.md)
+
+## Artefacts
+
+- [SQL migrations — source of truth for the data shape](sql/)
+- [Filled-form JSON fixture + FHIR R5 Bundle examples](examples/)
+- [HTML front-end — single-page wizard + dashboard](front-end-with-html/)
+- [SvelteKit front-end — RESTful wizard + dashboard](front-end-with-svelte/)
+- [Rust Loco JSON-API back-end](back-end-with-loco/)
+
+## Generated representations
+
+- [XML + DTD per SQL table](xml/)
+- [FHIR HL7 R5 JSON per SQL entity](fhir/r5/)
+- [Protocol Buffers schemas](protobuf/)
+- [OpenAPI 3.1 specifications](openapi/)

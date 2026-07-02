@@ -1,0 +1,27 @@
+# Medical Certificate of Cause of Death (MCCD)
+
+> A statutory documentation instrument used in the United Kingdom to record the cause of death of a person for the purpose of death registration. The certifying doctor (attending practitioner) records the deceased's details, the date and place of death, and the **cause-of-death structure** — Part I (the disease or condition directly leading to death, together with the antecedent and underlying conditions that gave rise to it) and Part II (other significant conditions contributing to the death but not related to the disease or condition causing it). Each condition carries an approximate interval between onset and death.
+
+## Docs
+
+- [Form description and scoring details](index.md)
+- [Living domain spec — the behavioural contract](spec/index.md)
+- [Agent instructions](AGENTS.md)
+- [Implementation plan](plan.md)
+- [Task tracking](tasks.md)
+- [Changelog](CHANGELOG.md)
+
+## Artefacts
+
+- [SQL migrations — source of truth for the data shape](sql/)
+- [Filled-form JSON fixture + FHIR R5 Bundle examples](examples/)
+- [HTML front-end — single-page wizard + dashboard](front-end-with-html/)
+- [SvelteKit front-end — RESTful wizard + dashboard](front-end-with-svelte/)
+- [Rust Loco JSON-API back-end](back-end-with-loco/)
+
+## Generated representations
+
+- [XML + DTD per SQL table](xml/)
+- [FHIR HL7 R5 JSON per SQL entity](fhir/r5/)
+- [Protocol Buffers schemas](protobuf/)
+- [OpenAPI 3.1 specifications](openapi/)

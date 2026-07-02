@@ -1,0 +1,27 @@
+# Structured Medication Review (SMR)
+
+> A comprehensive, patient-centred medication review for people with problematic polypharmacy, frailty, one or more long-term conditions, or high-risk medicines. It records the patient's **problems and priorities**, **every medicine with its indication and adherence**, opportunities to **deprescribe**, the patient's **anticholinergic burden**, **high-risk-medicine** checks, **monitoring** that is due, and the **shared decisions and agreed actions** reached with the patient. It then reports a **review status** (Complete / Incomplete), a **polypharmacy and anticholinergic burden indicator**, and a set of **flags** that prompt action.
+
+## Docs
+
+- [Form description and scoring details](index.md)
+- [Living domain spec — the behavioural contract](spec/index.md)
+- [Agent instructions](AGENTS.md)
+- [Implementation plan](plan.md)
+- [Task tracking](tasks.md)
+- [Changelog](CHANGELOG.md)
+
+## Artefacts
+
+- [SQL migrations — source of truth for the data shape](sql/)
+- [Filled-form JSON fixture + FHIR R5 Bundle examples](examples/)
+- [HTML front-end — single-page wizard + dashboard](front-end-with-html/)
+- [SvelteKit front-end — RESTful wizard + dashboard](front-end-with-svelte/)
+- [Rust Loco JSON-API back-end](back-end-with-loco/)
+
+## Generated representations
+
+- [XML + DTD per SQL table](xml/)
+- [FHIR HL7 R5 JSON per SQL entity](fhir/r5/)
+- [Protocol Buffers schemas](protobuf/)
+- [OpenAPI 3.1 specifications](openapi/)

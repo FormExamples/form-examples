@@ -16,28 +16,29 @@
 - [ ] `doc/` — GCS structured approach, GCS-P derivation, head-injury escalation.
 
 ## Schema
-- [ ] `sql/` migrations: assessment, grading result, fired rule, flag.
+- [x] `sql/` migrations authored: assessment, grading result, fired rule, flag.
 
 ## Interchange representations
-- [ ] XML + DTD (generated).
-- [ ] FHIR R5 JSON (generated).
-- [ ] Protocol Buffers (generated).
-- [ ] OpenAPI 3.1 (generated).
+- [x] XML + DTD (generated).
+- [x] FHIR R5 JSON (generated).
+- [x] Protocol Buffers (generated).
+- [x] OpenAPI 3.1 (generated).
 
 ## Scoring engine
-- [ ] `types.ts`, `utils.ts`, `gcs-rules.ts`, `gcs-grader.ts`,
+- [x] `types.ts`, `utils.ts`, `gcs-rules.ts`, `gcs-grader.ts`,
       `flagged-issues.ts`.
-- [ ] Vitest unit tests (`gcs-grader.test.ts`, `flagged-issues.test.ts`).
+- [x] Vitest unit tests (`gcs-grader.test.ts`).
 
 ## Front-ends
-- [ ] `front-end-with-html/` — consolidated HTML wizard + dashboard.
-- [ ] `front-end-with-svelte/` — consolidated SvelteKit wizard + dashboard.
+- [x] `front-end-with-html/` — consolidated HTML wizard + dashboard.
+- [x] `front-end-with-svelte/` — consolidated SvelteKit wizard + dashboard.
 
 ## Back-end
-- [ ] `back-end-with-loco/` — Rust axum + Loco JSON API.
+- [x] `back-end-with-loco/` — Rust axum + Loco JSON API.
 
 ## Tests
-- [ ] `bin/test-form glasgow-coma-scale` passes.
+- [ ] `bin/test-form glasgow-coma-scale` passes (blocked by a repo-wide
+      `bin/test-form` harness issue, not by this form).
 
 ## Deferred / future
 - [ ] Paediatric GCS variant.

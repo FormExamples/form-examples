@@ -1,0 +1,27 @@
+# United Kingdom Lasting Power of Attorney for Financial Decisions
+
+> A digital implementation of the Office of the Public Guardian (OPG) form **LP1F — Lasting power of attorney for property and financial affairs**. The LPA is a statutory deed under the Mental Capacity Act 2005 by which a donor ("the donor") appoints one or more attorneys to make decisions about their property and financial affairs. Once registered by the OPG it is the legal instrument that lets attorneys run bank accounts, sell property, manage investments, claim benefits, and pay bills on behalf of the donor.
+
+## Docs
+
+- [Form description and scoring details](index.md)
+- [Living domain spec — the behavioural contract](spec/index.md)
+- [Agent instructions](AGENTS.md)
+- [Implementation plan](plan.md)
+- [Task tracking](tasks.md)
+- [Changelog](CHANGELOG.md)
+
+## Artefacts
+
+- [SQL migrations — source of truth for the data shape](sql/)
+- [Filled-form JSON fixture + FHIR R5 Bundle examples](examples/)
+- [HTML front-end — single-page wizard + dashboard](front-end-with-html/)
+- [SvelteKit front-end — RESTful wizard + dashboard](front-end-with-svelte/)
+- [Rust Loco JSON-API back-end](back-end-with-loco/)
+
+## Generated representations
+
+- [XML + DTD per SQL table](xml/)
+- [FHIR HL7 R5 JSON per SQL entity](fhir/r5/)
+- [Protocol Buffers schemas](protobuf/)
+- [OpenAPI 3.1 specifications](openapi/)

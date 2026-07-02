@@ -1,0 +1,27 @@
+# GRACE Score for Acute Coronary Syndrome
+
+> The **GRACE** (Global Registry of Acute Coronary Events) score is a validated risk-stratification tool for adults presenting with an **acute coronary syndrome** (ACS), used above all in **non-ST-elevation ACS** (NSTEMI and unstable angina). It combines eight admission variables — **age**, **heart rate**, **systolic blood pressure**, **serum creatinine**, **Killip class**, **cardiac arrest at admission**, **ST-segment deviation**, and **elevated cardiac enzymes / troponin** — into a **weighted point total** that maps to an estimated **in-hospital** and **6-month all-cause mortality** risk, and to a **Low / Intermediate / High** risk category.
+
+## Docs
+
+- [Form description and scoring details](index.md)
+- [Living domain spec — the behavioural contract](spec/index.md)
+- [Agent instructions](AGENTS.md)
+- [Implementation plan](plan.md)
+- [Task tracking](tasks.md)
+- [Changelog](CHANGELOG.md)
+
+## Artefacts
+
+- [SQL migrations — source of truth for the data shape](sql/)
+- [Filled-form JSON fixture + FHIR R5 Bundle examples](examples/)
+- [HTML front-end — single-page wizard + dashboard](front-end-with-html/)
+- [SvelteKit front-end — RESTful wizard + dashboard](front-end-with-svelte/)
+- [Rust Loco JSON-API back-end](back-end-with-loco/)
+
+## Generated representations
+
+- [XML + DTD per SQL table](xml/)
+- [FHIR HL7 R5 JSON per SQL entity](fhir/r5/)
+- [Protocol Buffers schemas](protobuf/)
+- [OpenAPI 3.1 specifications](openapi/)

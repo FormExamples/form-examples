@@ -1,0 +1,27 @@
+# Electrocardiogram Test Result
+
+> A UK NHS–aligned **electrocardiogram (ECG) test result (report)** that a reporting clinician completes after an ECG examination has been recorded. It is the **result/report counterpart** to *Electrocardiogram Test Request* (a referral): where the request captures why an ECG should be done, this form records what the ECG **found** and a structured **interpretation**. It records the recorded ECG type and trace quality, the clinical history, the ventricular rate, the dominant rhythm and the PR / QRS / QT / QTc intervals and cardiac axis, the structured electrophysiological findings (ST elevation / depression, T-wave inversion, pathological Q waves, LVH, bundle branch block, ischaemia, normal), the narrative interpretation and impression, and recommended follow-up — then computes a **four-axis interpretation grade** (result classification, abnormality severity / structured reporting, report completeness, and follow-up urgency) plus a set of safety-critical flags including an automatic **critical-result alert**. The output is a structured cardiology report.
+
+## Docs
+
+- [Form description and scoring details](index.md)
+- [Living domain spec — the behavioural contract](spec/index.md)
+- [Agent instructions](AGENTS.md)
+- [Implementation plan](plan.md)
+- [Task tracking](tasks.md)
+- [Changelog](CHANGELOG.md)
+
+## Artefacts
+
+- [SQL migrations — source of truth for the data shape](sql/)
+- [Filled-form JSON fixture + FHIR R5 Bundle examples](examples/)
+- [HTML front-end — single-page wizard + dashboard](front-end-with-html/)
+- [SvelteKit front-end — RESTful wizard + dashboard](front-end-with-svelte/)
+- [Rust Loco JSON-API back-end](back-end-with-loco/)
+
+## Generated representations
+
+- [XML + DTD per SQL table](xml/)
+- [FHIR HL7 R5 JSON per SQL entity](fhir/r5/)
+- [Protocol Buffers schemas](protobuf/)
+- [OpenAPI 3.1 specifications](openapi/)

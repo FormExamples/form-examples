@@ -58,6 +58,7 @@ schema changes. See `spec.md` §10 for the spec-driven workflow.
 
 ### Specs
 
+- `bin/generate-llms-txt.py [--check] [<slug>…]` — generate per-form `llms.txt` (llmstxt.org format, derived from `index.md`); `--check` is the CI drift detector
 - `bin/generate-spec.py [--check] [--force] [<slug>…]` — scaffold per-form `spec/index.md` (hand-maintained living domain spec, seeded from `index.md`; never overwritten unless `--force <slug>`); `--check` verifies every form has a non-empty spec + README symlink
 
 ## Form index
@@ -159,6 +160,7 @@ bin/lily-html-refactor --check --all  # Lily HTML contract drift detector
 bin/lily-sync --check                 # Lily HTML spec-snapshot drift detector
 bin/lily-svelte-refactor --check --all # Lily Svelte contract drift detector
 bin/lily-svelte-sync --check          # Lily Svelte spec-snapshot drift detector
+bin/generate-llms-txt.py --check      # Per-form llms.txt drift detector
 bin/generate-spec.py --check          # Per-form spec/ presence check (specs are hand-maintained)
 bin/generate-changelog-and-examples.py --check # CHANGELOG + examples/ drift detector
 bin/loco-config-refactor --check --all # Loco background-queue + observability drift detector

@@ -1,0 +1,27 @@
+# Pulmonary Embolism Rule-out Criteria (PERC)
+
+> A bedside rule-out screen for adults in whom a clinician already judges the pre-test probability of pulmonary embolism (PE) to be **low**. It records eight objective criteria — age, heart rate, oxygen saturation, unilateral leg swelling, haemoptysis, recent surgery or trauma, prior venous thromboembolism, and exogenous oestrogen use — and asks whether the clinician's gestalt pre-test probability is low. When **all eight criteria are satisfied** *and* the pre-test probability is **low**, the patient is **PERC-negative**: PE can be excluded without a D-dimer or imaging. If any criterion fails, or the pre-test probability is not low, the patient is **PERC-positive** and further workup (D-dimer and/or imaging) is warranted.
+
+## Docs
+
+- [Form description and scoring details](index.md)
+- [Living domain spec — the behavioural contract](spec/index.md)
+- [Agent instructions](AGENTS.md)
+- [Implementation plan](plan.md)
+- [Task tracking](tasks.md)
+- [Changelog](CHANGELOG.md)
+
+## Artefacts
+
+- [SQL migrations — source of truth for the data shape](sql/)
+- [Filled-form JSON fixture + FHIR R5 Bundle examples](examples/)
+- [HTML front-end — single-page wizard + dashboard](front-end-with-html/)
+- [SvelteKit front-end — RESTful wizard + dashboard](front-end-with-svelte/)
+- [Rust Loco JSON-API back-end](back-end-with-loco/)
+
+## Generated representations
+
+- [XML + DTD per SQL table](xml/)
+- [FHIR HL7 R5 JSON per SQL entity](fhir/r5/)
+- [Protocol Buffers schemas](protobuf/)
+- [OpenAPI 3.1 specifications](openapi/)

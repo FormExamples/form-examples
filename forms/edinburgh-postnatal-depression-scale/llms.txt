@@ -1,0 +1,27 @@
+# Edinburgh Postnatal Depression Scale (EPDS)
+
+> A 10-item self-report screening questionnaire for **perinatal depression** — covering both the **antenatal** (during pregnancy) and **postnatal** (after birth) periods. The person completing it rates how they have felt **in the past seven days** across ten statements. Each item scores **0–3**, giving a total of **0–30**. A higher total indicates a greater likelihood of depression. A total of **≥ 10** suggests possible depression and **≥ 13** is a more specific threshold for likely depressive illness; either prompts **further clinical assessment**, not a diagnosis. Separately, **any positive response to item 10** (thoughts of self-harm) is a mandatory safety flag that requires **immediate risk assessment regardless of the total score**.
+
+## Docs
+
+- [Form description and scoring details](index.md)
+- [Living domain spec — the behavioural contract](spec/index.md)
+- [Agent instructions](AGENTS.md)
+- [Implementation plan](plan.md)
+- [Task tracking](tasks.md)
+- [Changelog](CHANGELOG.md)
+
+## Artefacts
+
+- [SQL migrations — source of truth for the data shape](sql/)
+- [Filled-form JSON fixture + FHIR R5 Bundle examples](examples/)
+- [HTML front-end — single-page wizard + dashboard](front-end-with-html/)
+- [SvelteKit front-end — RESTful wizard + dashboard](front-end-with-svelte/)
+- [Rust Loco JSON-API back-end](back-end-with-loco/)
+
+## Generated representations
+
+- [XML + DTD per SQL table](xml/)
+- [FHIR HL7 R5 JSON per SQL entity](fhir/r5/)
+- [Protocol Buffers schemas](protobuf/)
+- [OpenAPI 3.1 specifications](openapi/)

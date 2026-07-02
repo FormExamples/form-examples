@@ -1,0 +1,27 @@
+# CHA2DS2-VASc Score for Atrial Fibrillation Stroke Risk
+
+> A clinical prediction tool that estimates the annual risk of ischaemic stroke and systemic thromboembolism in adults with **non-valvular atrial fibrillation** (AF), and guides the decision to start oral anticoagulation. It records eight weighted risk factors — **C**ongestive heart failure, **H**ypertension, **A**ge ≥ 75, **D**iabetes, prior **S**troke/TIA/thromboembolism, **V**ascular disease, **A**ge 65–74, and **S**ex **c**ategory (female) — sums a total of **0–9**, and maps the total to a risk band with anticoagulation guidance and an estimated annual stroke rate.
+
+## Docs
+
+- [Form description and scoring details](index.md)
+- [Living domain spec — the behavioural contract](spec/index.md)
+- [Agent instructions](AGENTS.md)
+- [Implementation plan](plan.md)
+- [Task tracking](tasks.md)
+- [Changelog](CHANGELOG.md)
+
+## Artefacts
+
+- [SQL migrations — source of truth for the data shape](sql/)
+- [Filled-form JSON fixture + FHIR R5 Bundle examples](examples/)
+- [HTML front-end — single-page wizard + dashboard](front-end-with-html/)
+- [SvelteKit front-end — RESTful wizard + dashboard](front-end-with-svelte/)
+- [Rust Loco JSON-API back-end](back-end-with-loco/)
+
+## Generated representations
+
+- [XML + DTD per SQL table](xml/)
+- [FHIR HL7 R5 JSON per SQL entity](fhir/r5/)
+- [Protocol Buffers schemas](protobuf/)
+- [OpenAPI 3.1 specifications](openapi/)

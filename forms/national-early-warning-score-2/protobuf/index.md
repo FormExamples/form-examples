@@ -1,0 +1,5 @@
+# National Early Warning Score 2 (NEWS2) — Protocol Buffers representations
+
+Protocol Buffers `.proto` schemas for the National Early Warning Score 2 (NEWS2) form, generated per SQL entity. Do not hand-edit; re-run `bin/protobuf/generate-protobuf-representations.py`.
+
+See the form root [`../index.md`](../index.md) for the full design description.

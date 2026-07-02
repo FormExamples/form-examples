@@ -10,24 +10,26 @@
 - [x] `plan.md` — design principles and build order.
 - [x] `tasks.md` — this file.
 
-## Schema (not started)
-- [ ] `sql/` migrations (patient, assessment, six organ-system inputs, grading result).
-- [ ] `COMMENT ON TABLE` / `COMMENT ON COLUMN` on every migration.
+## Schema (done)
+- [x] `sql/` migrations authored (patient, assessment, six organ-system inputs, grading result).
+- [x] `COMMENT ON TABLE` / `COMMENT ON COLUMN` on every table migration.
 
-## Generated representations (not started)
-- [ ] `xml/`, `fhir/`, `protobuf/`, `openapi/`, `back-end-with-loco-setup`.
+## Generated representations (done)
+- [x] `xml/`, `fhir/`, `protobuf/`, `openapi/`, `back-end-with-loco-setup`
+      generated, plus `CHANGELOG.md` and `examples/`.
 
-## Scoring engine (not started)
-- [ ] `types.ts`, `sofa-rules.ts`, `sofa-grader.ts`, `flagged-issues.ts`, `utils.ts`.
-- [ ] `sofa-grader.test.ts` — per-system boundary cases, totals, delta-SOFA.
+## Scoring engine (done)
+- [x] `types.ts`, `sofa-rules.ts`, `sofa-grader.ts`, `flagged-issues.ts`, `utils.ts`.
+- [x] `sofa-grader.test.ts` — per-system boundary cases, totals, delta-SOFA.
 
-## Front-ends (not started)
-- [ ] `front-end-with-html/` — Lily wizard + dashboard.
-- [ ] `front-end-with-svelte/` — Lily RESTful list + form.
+## Front-ends (done)
+- [x] `front-end-with-html/` — Lily wizard + dashboard.
+- [x] `front-end-with-svelte/` — Lily RESTful list + form.
 
-## Back-end (not started)
-- [ ] `back-end-with-loco/` — Rust axum + Loco JSON API.
+## Back-end (done)
+- [x] `back-end-with-loco/` — Rust axum + Loco JSON API.
 
-## Verify (not started)
-- [ ] `bin/test-form sequential-organ-failure-assessment` exits cleanly.
-- [ ] Lily HTML and Svelte drift checks pass.
+## Verify
+- [ ] `bin/test-form sequential-organ-failure-assessment` exits cleanly
+      (blocked by a repo-wide `bin/test-form` harness issue, not by this form).
+- [x] Lily HTML and Svelte drift checks pass.

@@ -1,0 +1,27 @@
+# Chronic Kidney Disease Annual Review
+
+> A UK primary-care structured review that documents the annual (or interval) monitoring of an adult with chronic kidney disease (CKD) and classifies the patient on the **KDIGO GFR × albuminuria risk heat-map**. It records the two staging measurements — **estimated glomerular filtration rate (eGFR)** with its **G-stage (G1–G5)** and **urine albumin-to-creatinine ratio (ACR)** with its **albuminuria stage (A1–A3)** — derives the **KDIGO risk zone** (low / moderate / high / very high), grades how **complete** the review is against the recommended monitoring bundle, and raises **flags** that map to NICE NG203 referral and safety criteria.
+
+## Docs
+
+- [Form description and scoring details](index.md)
+- [Living domain spec — the behavioural contract](spec/index.md)
+- [Agent instructions](AGENTS.md)
+- [Implementation plan](plan.md)
+- [Task tracking](tasks.md)
+- [Changelog](CHANGELOG.md)
+
+## Artefacts
+
+- [SQL migrations — source of truth for the data shape](sql/)
+- [Filled-form JSON fixture + FHIR R5 Bundle examples](examples/)
+- [HTML front-end — single-page wizard + dashboard](front-end-with-html/)
+- [SvelteKit front-end — RESTful wizard + dashboard](front-end-with-svelte/)
+- [Rust Loco JSON-API back-end](back-end-with-loco/)
+
+## Generated representations
+
+- [XML + DTD per SQL table](xml/)
+- [FHIR HL7 R5 JSON per SQL entity](fhir/r5/)
+- [Protocol Buffers schemas](protobuf/)
+- [OpenAPI 3.1 specifications](openapi/)

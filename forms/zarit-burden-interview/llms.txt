@@ -1,0 +1,27 @@
+# Zarit Burden Interview (ZBI)
+
+> A caregiver self-report questionnaire that measures the subjective **burden** experienced by an informal carer looking after a person with dementia, chronic illness, or long-term disability. The carer rates **22 items** describing the emotional, physical, social, and financial strain of caregiving, each on a **0–4** frequency scale (0 = never … 4 = nearly always). The item ratings sum to a total of **0–88**, which is mapped to a burden band from *little or no burden* to *severe burden*. A high total is a prompt to arrange **carer support and respite** and to **screen the carer for depression and anxiety**.
+
+## Docs
+
+- [Form description and scoring details](index.md)
+- [Living domain spec — the behavioural contract](spec/index.md)
+- [Agent instructions](AGENTS.md)
+- [Implementation plan](plan.md)
+- [Task tracking](tasks.md)
+- [Changelog](CHANGELOG.md)
+
+## Artefacts
+
+- [SQL migrations — source of truth for the data shape](sql/)
+- [Filled-form JSON fixture + FHIR R5 Bundle examples](examples/)
+- [HTML front-end — single-page wizard + dashboard](front-end-with-html/)
+- [SvelteKit front-end — RESTful wizard + dashboard](front-end-with-svelte/)
+- [Rust Loco JSON-API back-end](back-end-with-loco/)
+
+## Generated representations
+
+- [XML + DTD per SQL table](xml/)
+- [FHIR HL7 R5 JSON per SQL entity](fhir/r5/)
+- [Protocol Buffers schemas](protobuf/)
+- [OpenAPI 3.1 specifications](openapi/)

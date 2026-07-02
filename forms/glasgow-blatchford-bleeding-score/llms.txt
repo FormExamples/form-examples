@@ -1,0 +1,27 @@
+# Glasgow-Blatchford Bleeding Score (GBS)
+
+> A pre-endoscopy risk-stratification score for adults presenting with suspected **acute upper gastrointestinal bleeding**. It combines eight weighted parameters — blood urea, haemoglobin, systolic blood pressure, pulse, melaena, syncope, hepatic disease, and cardiac failure — into a single total of **0–23**. The score predicts the likelihood that a patient will need a clinical intervention (blood transfusion, endoscopic therapy, interventional radiology, or surgery) or die. Crucially, a score of **0** (some services use **≤ 1**) identifies very-low-risk patients who may be considered for outpatient management or early discharge without inpatient endoscopy; higher scores prompt admission and endoscopy.
+
+## Docs
+
+- [Form description and scoring details](index.md)
+- [Living domain spec — the behavioural contract](spec/index.md)
+- [Agent instructions](AGENTS.md)
+- [Implementation plan](plan.md)
+- [Task tracking](tasks.md)
+- [Changelog](CHANGELOG.md)
+
+## Artefacts
+
+- [SQL migrations — source of truth for the data shape](sql/)
+- [Filled-form JSON fixture + FHIR R5 Bundle examples](examples/)
+- [HTML front-end — single-page wizard + dashboard](front-end-with-html/)
+- [SvelteKit front-end — RESTful wizard + dashboard](front-end-with-svelte/)
+- [Rust Loco JSON-API back-end](back-end-with-loco/)
+
+## Generated representations
+
+- [XML + DTD per SQL table](xml/)
+- [FHIR HL7 R5 JSON per SQL entity](fhir/r5/)
+- [Protocol Buffers schemas](protobuf/)
+- [OpenAPI 3.1 specifications](openapi/)

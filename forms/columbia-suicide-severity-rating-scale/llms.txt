@@ -1,0 +1,27 @@
+# Columbia Suicide Severity Rating Scale (C-SSRS)
+
+> A structured, evidence-based instrument for assessing suicide risk. It records the **severity of suicidal ideation** on a five-point ordinal scale, the presence of distinct categories of **suicidal behaviour**, and the **lethality** of any actual attempt, then classifies the patient into a **Low / Moderate / High** risk tier that drives a proportionate management response. The C-SSRS is a status- and severity-classification instrument: it is **not** a summed questionnaire score, and its output is a risk stratification, not a diagnosis.
+
+## Docs
+
+- [Form description and scoring details](index.md)
+- [Living domain spec — the behavioural contract](spec/index.md)
+- [Agent instructions](AGENTS.md)
+- [Implementation plan](plan.md)
+- [Task tracking](tasks.md)
+- [Changelog](CHANGELOG.md)
+
+## Artefacts
+
+- [SQL migrations — source of truth for the data shape](sql/)
+- [Filled-form JSON fixture + FHIR R5 Bundle examples](examples/)
+- [HTML front-end — single-page wizard + dashboard](front-end-with-html/)
+- [SvelteKit front-end — RESTful wizard + dashboard](front-end-with-svelte/)
+- [Rust Loco JSON-API back-end](back-end-with-loco/)
+
+## Generated representations
+
+- [XML + DTD per SQL table](xml/)
+- [FHIR HL7 R5 JSON per SQL entity](fhir/r5/)
+- [Protocol Buffers schemas](protobuf/)
+- [OpenAPI 3.1 specifications](openapi/)

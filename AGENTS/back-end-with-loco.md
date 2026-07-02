@@ -106,7 +106,8 @@ back-end-with-loco/
   tests/                      # Integration tests for the engine and JSON API
 ```
 
-There is no `templates/`, no `assets/`, no `src/views/`.
+There is no `templates/` and no `assets/`. (Loco's `src/views/` holds JSON
+response shapers only — never HTML.)
 
 ## Back-end pattern
 
@@ -194,7 +195,8 @@ Forbidden features (drift detector flags these):
 ### YAML config
 
 `config/development.yaml`, `config/test.yaml`, and `config/production.yaml`
-all carry a `workers:` block in `BackgroundQueue` mode and a `queue:` block
+all carry a `workers:` block (`BackgroundQueue` in development/production,
+`ForegroundBlocking` in test) and a `queue:` block
 pointing at Postgres. Reuse the same Postgres URI as the main `database:`
 block — Loco creates its own `loco_jobs` table on first start.
 
@@ -211,11 +213,13 @@ queue:
   num_workers: 2
 ```
 
-`config/test.yaml`:
+`config/test.yaml` (note **ForegroundBlocking** — the test environment runs
+queued jobs inline so the starter's mailer tests execute synchronously and
+stay green):
 
 ```yaml
 workers:
-  mode: BackgroundQueue
+  mode: ForegroundBlocking
 
 queue:
   kind: Postgres

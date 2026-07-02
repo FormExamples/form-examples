@@ -1,0 +1,27 @@
+# Waterlow Pressure Ulcer Risk Assessment
+
+> A bedside screening tool that estimates an adult patient's risk of developing a pressure ulcer (pressure sore, bedsore, decubitus ulcer). It records a set of weighted risk categories — build / weight for height (BMI), skin type and visual risk areas, sex and age, continence, and mobility — plus four groups of special risk factors (tissue malnutrition, neurological deficit, major surgery or trauma, and medication), **sums** the points into a single total, and places the patient in a risk band. A **higher total means higher risk**: the band drives escalation of pressure-relieving support surfaces, repositioning frequency, and skin-care review.
+
+## Docs
+
+- [Form description and scoring details](index.md)
+- [Living domain spec — the behavioural contract](spec/index.md)
+- [Agent instructions](AGENTS.md)
+- [Implementation plan](plan.md)
+- [Task tracking](tasks.md)
+- [Changelog](CHANGELOG.md)
+
+## Artefacts
+
+- [SQL migrations — source of truth for the data shape](sql/)
+- [Filled-form JSON fixture + FHIR R5 Bundle examples](examples/)
+- [HTML front-end — single-page wizard + dashboard](front-end-with-html/)
+- [SvelteKit front-end — RESTful wizard + dashboard](front-end-with-svelte/)
+- [Rust Loco JSON-API back-end](back-end-with-loco/)
+
+## Generated representations
+
+- [XML + DTD per SQL table](xml/)
+- [FHIR HL7 R5 JSON per SQL entity](fhir/r5/)
+- [Protocol Buffers schemas](protobuf/)
+- [OpenAPI 3.1 specifications](openapi/)

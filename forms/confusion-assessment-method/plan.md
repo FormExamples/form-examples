@@ -2,9 +2,12 @@
 
 ## Current status
 
-Foundation docs authored (`index.md`, `AGENTS.md`, `spec/index.md`, `plan.md`,
-`tasks.md`). Schema, generated representations, front-ends, and Rust back-end
-are not yet built.
+All four layers are built as of 2026-07-02: foundation docs (`index.md`,
+`AGENTS.md`, `spec/index.md`, `plan.md`, `tasks.md`); SQL migrations plus the
+generated representations (XML, FHIR R5, protobuf, OpenAPI, Loco setup); both
+consolidated front-ends (HTML + Lily and SvelteKit + Lily); and the Loco
+JSON-API back-end — plus `CHANGELOG.md` and `examples/`. The `doc/` clinical
+reference notes remain outstanding.
 
 ## Why this form exists
 
@@ -51,15 +54,15 @@ to `unableToAssess`.
 2. [x] Author foundation docs: `index.md`, `AGENTS.md`, `spec/index.md`,
        `plan.md`, `tasks.md`.
 3. [ ] Author clinical reference docs in `doc/`.
-4. [ ] Author SQL Liquibase migrations (assessment, features, result, fired
+4. [x] Author SQL Liquibase migrations (assessment, features, result, fired
        flags).
-5. [ ] Generate XML + DTD representations.
-6. [ ] Generate FHIR HL7 R5 JSON.
-7. [ ] Generate Protocol Buffers `.proto` schemas.
-8. [ ] Build the TypeScript classification engine + Vitest tests.
-9. [ ] Build the HTML front-end (wizard + dashboard, Lily).
-10. [ ] Build the SvelteKit front-end (wizard + dashboard, Lily).
-11. [ ] Build the Rust axum + Loco JSON API.
+5. [x] Generate XML + DTD representations.
+6. [x] Generate FHIR HL7 R5 JSON.
+7. [x] Generate Protocol Buffers `.proto` schemas.
+8. [x] Build the TypeScript classification engine + Vitest tests.
+9. [x] Build the HTML front-end (wizard + dashboard, Lily).
+10. [x] Build the SvelteKit front-end (wizard + dashboard, Lily).
+11. [x] Build the Rust axum + Loco JSON API.
 12. [ ] Run `bin/test-form confusion-assessment-method`.
 
 ## Future enhancements

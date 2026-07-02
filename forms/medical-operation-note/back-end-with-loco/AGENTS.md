@@ -25,7 +25,8 @@ back-end-with-loco/
   tests/                      # Engine + JSON API integration tests
 ```
 
-There is no `templates/`, no `assets/`, no `src/views/`. The Cargo
+There is no `templates/` and no `assets/` (Loco's `src/views/` holds JSON
+response shapers only — no HTML). The Cargo
 manifest does not depend on `tera`.
 
 ## JSON API

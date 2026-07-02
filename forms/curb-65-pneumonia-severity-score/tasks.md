@@ -16,25 +16,26 @@
 - [ ] `doc/bts-nice-alignment.md` — BTS 2009 / NICE NG138 cross-walk.
 
 ## Schema
-- [ ] `sql/` — assessment, grading_result, grading_flag migrations.
+- [x] `sql/` — assessment, grading_result, grading_flag migrations authored.
 
 ## Interchange representations
-- [ ] XML + DTD generated.
-- [ ] FHIR R5 JSON generated.
-- [ ] Protocol Buffers generated.
-- [ ] OpenAPI generated.
-- [ ] Loco setup script generated.
+- [x] XML + DTD generated.
+- [x] FHIR R5 JSON generated.
+- [x] Protocol Buffers generated.
+- [x] OpenAPI generated.
+- [x] Loco setup script generated.
 
 ## Front-ends
-- [ ] `front-end-with-html/` — Lily wizard + dashboard.
-- [ ] `front-end-with-svelte/` — Lily wizard + RESTful dashboard.
+- [x] `front-end-with-html/` — Lily wizard + dashboard.
+- [x] `front-end-with-svelte/` — Lily wizard + RESTful dashboard.
 
 ## Back-end
-- [ ] `back-end-with-loco/` — axum + Loco JSON API.
+- [x] `back-end-with-loco/` — axum + Loco JSON API.
 
 ## Tests
-- [ ] Vitest unit tests for `curb65-grader.ts` (all criterion boundaries + CRB-65).
-- [ ] `bin/test-form curb-65-pneumonia-severity-score` passes.
+- [x] Vitest unit tests for `curb65-grader.ts` (all criterion boundaries + CRB-65).
+- [ ] `bin/test-form curb-65-pneumonia-severity-score` passes (blocked by a
+      repo-wide `bin/test-form` harness issue, not by this form).
 
 ## Deferred / future
 - [ ] Automatic urea-unit detection.

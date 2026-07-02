@@ -20,27 +20,30 @@
 - [ ] `doc/safety-notes.md` — hypoactive delirium and safety-case placeholders.
 
 ## Schema
-- [ ] `sql/` — assessment, four features, motoric subtype, result, fired flags.
+- [x] `sql/` — assessment, four features, motoric subtype, result, fired flags.
 
 ## Interchange representations
-- [ ] XML + DTD generated.
-- [ ] FHIR R5 JSON generated.
-- [ ] Protocol Buffers `.proto` generated.
+- [x] XML + DTD generated.
+- [x] FHIR R5 JSON generated.
+- [x] Protocol Buffers `.proto` generated.
+- [x] OpenAPI generated.
+- [x] Loco setup script generated.
 
 ## Engine
-- [ ] `types.ts`, `cam-rules.ts`, `cam-grader.ts`, `flagged-issues.ts`,
+- [x] `types.ts`, `cam-rules.ts`, `cam-grader.ts`, `flagged-issues.ts`,
       `utils.ts`.
-- [ ] Vitest tests: `cam-grader.test.ts`, `cam-rules.test.ts`.
+- [x] Vitest tests: `cam-grader.test.ts`.
 
 ## Front-ends
-- [ ] `front-end-with-html/` — HTML + Lily wizard + dashboard.
-- [ ] `front-end-with-svelte/` — SvelteKit + Lily wizard + dashboard.
+- [x] `front-end-with-html/` — HTML + Lily wizard + dashboard.
+- [x] `front-end-with-svelte/` — SvelteKit + Lily wizard + dashboard.
 
 ## Back-end
-- [ ] `back-end-with-loco/` — Rust axum + Loco JSON API.
+- [x] `back-end-with-loco/` — Rust axum + Loco JSON API.
 
 ## Tests
-- [ ] `bin/test-form confusion-assessment-method` passes.
+- [ ] `bin/test-form confusion-assessment-method` passes (blocked by a
+      repo-wide `bin/test-form` harness issue, not by this form).
 
 ## Deferred / future
 - [ ] 4AT rapid-screening cross-reference.

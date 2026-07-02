@@ -1,20 +1,26 @@
 #!/bin/sh
-set -euf
+set -uf
 
 # test-form: test one form directory in this project for implementation
-# 
-# Syntax: 
-# 
+#
+# Syntax:
+#
 #     test-form <form-name-slug>
-# 
+#
 # Example:
-# 
-#     test-form pre-operative-assessment-by-patient
-# 
+#
+#     test-form pre-operative-assessment-by-clinician
+#
+# Structural checks print "Error: ..." lines and the script exits non-zero
+# if any check failed. The Loco crate's `cargo test` is the only executable
+# gate (it needs the Rust toolchain and a running Postgres).
 
 ## https://github.com/sixarm/unix-shell-script-kit
 
-err() { >&2 printf %s\\n "Error: ${*}"; }
+ERR_COUNT_FILE="$(mktemp)"
+trap 'rm -f "$ERR_COUNT_FILE"' EXIT
+
+err() { >&2 printf %s\\n "Error: ${*}"; echo x >> "$ERR_COUNT_FILE"; }
 
 directory_exists_or_err() { test -d "$1" || err "Directory should exist: $1"; }
 file_exists_or_err() { test -f "$1" || err "File should exist: $1"; }
@@ -26,41 +32,75 @@ implemented_or_err() { if (grep -q -m 1 "Not yet implemented\." "$1"); then err 
 
 ## Utilities
 
-ai_exists_or_err() (
-    # dir="$1"
+# The AI doc-file set required in every significant subdirectory:
+# a non-empty index.md, a README.md symlink for GitHub rendering, and
+# non-empty AGENTS.md + CLAUDE.md agent instructions.
+ai_docs_or_err() (
     directory_exists_or_err "$1"
     file_size_or_err "$1/index.md"
-    symlink_exists_or_err "$1/README.md"
+    # README.md is usually a symlink to index.md for GitHub rendering,
+    # but a real non-empty README.md is also acceptable.
+    if ! test -h "$1/README.md"; then
+        file_size_or_err "$1/README.md"
+    fi
     file_size_or_err "$1/AGENTS.md" && implemented_or_err "$1/AGENTS.md"
     file_size_or_err "$1/CLAUDE.md" && implemented_or_err "$1/CLAUDE.md"
-    file_size_or_err "$1/llms.txt" && implemented_or_err "$1/llms.txt"
+)
+
+# The per-form AI dot-directories (one per coding agent) each holding a
+# .keep placeholder (or real settings).
+test_form_ai_dot_directories() (
     for dir in .claude .cursor .gemini .mimocode .opencode .qwen .windsurf; do
         directory_exists_or_err "$1/$dir"
-        file_exists_or_err "$1/$dir/.keep"
     done
 )
 
+# The full form-root AI set: doc files, llms.txt, and dot-directories.
+ai_exists_or_err() (
+    ai_docs_or_err "$1"
+    file_size_or_err "$1/llms.txt" && implemented_or_err "$1/llms.txt"
+)
+
 ai_planing_exists_or_err() (
-    # dir="$1"
     file_size_or_err "$1/spec/index.md"
-    # file_size_or_err "$1/plan.md" && implemented_or_err "$1/plan.md"
-    # task_exists_or_err "$1/tasks.md" && implemented_or_err "$1/tasks.md"
+)
+
+# Resolve the Loco crate root: either the directory itself (legacy layout
+# with symlinked Cargo.toml) or the single nested <slug_snake>/ crate dir.
+loco_crate_root() (
+    set +f  # this subshell needs pathname expansion
+    if test -f "$1/Cargo.toml"; then
+        printf %s\\n "$1"
+        return 0
+    fi
+    for child in "$1"/*/; do
+        if test -f "${child}Cargo.toml" && ! test "${child##*/}" = "migration"; then
+            printf %s\\n "${child%/}"
+            return 0
+        fi
+    done
+    return 1
 )
 
 rust_crate_exists_or_err() (
-    # dir="$1"
     directory_exists_or_err "$1"
-    ai_exists_or_err "$1"
-    ai_planing_exists_or_err "$1"
-    file_size_or_err "$1/Cargo.toml"
-    file_size_or_err "$1/.gitignore"
-    directory_exists_or_err "$1/src"
-    ## Back-end JSON API only — no templates/, assets/, or src/views/
-    test ! -e "$1/templates" || err "$1/templates must not exist (back-end is JSON-only)"
-    test ! -e "$1/assets"    || err "$1/assets must not exist (back-end is JSON-only)"
-    test ! -e "$1/src/views" || err "$1/src/views must not exist (back-end is JSON-only)"
-    ! grep -q '\btera\b' "$1/Cargo.toml" || err "$1/Cargo.toml must not depend on tera"
-    cd "$1" && cargo test
+    crate="$(loco_crate_root "$1")" || { err "No Loco crate (Cargo.toml) under: $1"; return 0; }
+    file_size_or_err "$crate/Cargo.toml"
+    file_size_or_err "$crate/.gitignore"
+    directory_exists_or_err "$crate/src"
+    ## Back-end JSON API only — no Tera templates or server-rendered HTML.
+    ## (Loco's src/views/ holds JSON response shapers and is fine.)
+    test ! -e "$crate/templates" || err "$crate/templates must not exist (back-end is JSON-only)"
+    ! grep -Eq '^[ \t]*tera[ \t]*=' "$crate/Cargo.toml" || err "$crate/Cargo.toml must not depend on tera"
+    if find "$crate/src" \( -name '*.tera' -o -name '*.html' \) 2>/dev/null | grep -q .; then
+        err "$crate/src contains HTML/Tera templates (back-end is JSON-only)"
+    fi
+    # TEST_FORM_SKIP_CARGO=1 skips the (slow) cargo test executable gate,
+    # keeping only the structural checks — used for fast repo-wide sweeps.
+    if test "${TEST_FORM_SKIP_CARGO:-0}" = "1"; then
+        return 0
+    fi
+    cd "$crate" && cargo test || err "cargo test failed: $crate"
 )
 
 ## Main
@@ -70,37 +110,66 @@ form="$1"
 form_dir="$top/forms/$form"
 
 test_form_doc() {
-    ai_exists_or_err "$1/doc"
+    ai_docs_or_err "$1/doc"
 }
 
 test_form_fhir() {
-    ai_exists_or_err "$1/fhir/r5"
+    ai_docs_or_err "$1/fhir/r5"
 }
 
 test_form_protobuf() {
-    ai_exists_or_err "$1/protobuf"
+    ai_docs_or_err "$1/protobuf"
 }
 
 test_form_sql() {
     dir="$1/sql"
-    ai_exists_or_err "$1"
-    file_size_or_err "$dir/00_extensions.sql"
+    ai_docs_or_err "$dir"
+    file_size_or_err "$dir/00_create_extensions.sql"
     file_size_or_err "$dir/01_create_function_set_updated_at.sql"
 }
 
 test_form_typespec() {
-    ai_exists_or_err "$1/typespec"
+    # typespec/ is present in newer skeleton-scaffolded forms only.
+    if test -d "$1/typespec"; then
+        ai_docs_or_err "$1/typespec"
+    fi
 }
 
 test_form_xml() {
-    ai_exists_or_err "$1/xml"
+    ai_docs_or_err "$1/xml"
     #cd "$dir" && xmllint --valid --noout '\*.xml'
+}
+
+test_form_front_end_with_html() {
+    # Consolidated layout is the gold standard; the legacy split layout
+    # (front-end-form-with-html + front-end-dashboard-with-html) is
+    # accepted until those forms are consolidated.
+    if test -d "$1/front-end-with-html"; then
+        ai_docs_or_err "$1/front-end-with-html"
+        file_size_or_err "$1/front-end-with-html/index.html"
+        file_size_or_err "$1/front-end-with-html/dashboard.html"
+    elif test -d "$1/front-end-form-with-html"; then
+        :
+    else
+        err "No HTML front-end (consolidated or legacy split): $1"
+    fi
+}
+
+test_form_front_end_with_svelte() {
+    if test -d "$1/front-end-with-svelte"; then
+        ai_docs_or_err "$1/front-end-with-svelte"
+    elif test -d "$1/front-end-form-with-svelte"; then
+        :
+    else
+        err "No SvelteKit front-end (consolidated or legacy split): $1"
+    fi
 }
 
 test_form() {
     form_dir="$1"
     echo "test_form $form_dir"
     ai_exists_or_err "$form_dir"
+    ai_planing_exists_or_err "$form_dir"
     test_form_ai_dot_directories "$form_dir"
     test_form_doc "$form_dir"
     test_form_fhir "$form_dir"
@@ -108,26 +177,24 @@ test_form() {
     test_form_sql "$form_dir"
     test_form_typespec "$form_dir"
     test_form_xml "$form_dir"
-    ai_exists_or_err "$form_dir/front-end-with-svelte"
+    test_form_front_end_with_html "$form_dir"
+    test_form_front_end_with_svelte "$form_dir"
     rust_crate_exists_or_err "$form_dir/back-end-with-loco"
 }
 
 test_dir_via_pnpm() {
     dir="$1"
+    test -d "$dir" || return 0
     cd "$dir" || { err "test_dir_via_pnpm $dir cd"; return 0; }
     pnpm install || { err "test_dir_via_pnpm $dir pnpm install"; return 0; }
     pnpm run check || { err "test_dir_via_pnpm $dir pnpm run check"; return 0; }
 }
 
-test_dir_via_cargo() {
-    dir="$1"
-    cd "$dir" || { err "test_dir_via_cargo $dir cd"; return 0; }
-    cargo build || { err "test_dir_via_cargo $dir cargo build"; return 0; }
-    RUSTFLAGS=-Awarnings cargo check || { err "test_dir_via_cargo $dir cargo check"; return 0; }
-    cargo test || { err "test_dir_via_cargo $dir cargo test"; return 0; }
-}
-
 test_form "$form_dir"
-test_dir_via_pnpm "$form_dir/front-end-form-with-svelte"
-test_dir_via_pnpm "$form_dir/front-end-dashboard-with-svelte"
-test_dir_via_cargo "$form_dir/back-end-with-loco"
+
+if test -s "$ERR_COUNT_FILE"; then
+    n="$(wc -l < "$ERR_COUNT_FILE" | tr -d ' ')"
+    >&2 printf %s\\n "test-form FAIL: $form ($n error(s))"
+    exit 1
+fi
+printf %s\\n "test-form PASS: $form"

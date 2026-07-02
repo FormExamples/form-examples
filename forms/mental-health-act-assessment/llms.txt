@@ -1,0 +1,27 @@
+# Mental Health Act Assessment
+
+> A formal assessment under the **UK Mental Health Act 1983** (as amended by the Mental Health Act 2007) to determine whether a person with a mental disorder should be **detained in hospital** for assessment or treatment, admitted informally, or supported in the community. It records the coordinated assessment by an **Approved Mental Health Professional (AMHP)** together with the required medical recommendations from **two registered medical practitioners** (at least one of whom is **Section 12 approved**), documents the **statutory criteria** that must be satisfied, captures the **nearest relative / consultee** position, and records the **recommended section** and the **outcome**.
+
+## Docs
+
+- [Form description and scoring details](index.md)
+- [Living domain spec — the behavioural contract](spec/index.md)
+- [Agent instructions](AGENTS.md)
+- [Implementation plan](plan.md)
+- [Task tracking](tasks.md)
+- [Changelog](CHANGELOG.md)
+
+## Artefacts
+
+- [SQL migrations — source of truth for the data shape](sql/)
+- [Filled-form JSON fixture + FHIR R5 Bundle examples](examples/)
+- [HTML front-end — single-page wizard + dashboard](front-end-with-html/)
+- [SvelteKit front-end — RESTful wizard + dashboard](front-end-with-svelte/)
+- [Rust Loco JSON-API back-end](back-end-with-loco/)
+
+## Generated representations
+
+- [XML + DTD per SQL table](xml/)
+- [FHIR HL7 R5 JSON per SQL entity](fhir/r5/)
+- [Protocol Buffers schemas](protobuf/)
+- [OpenAPI 3.1 specifications](openapi/)

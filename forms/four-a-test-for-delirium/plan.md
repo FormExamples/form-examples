@@ -2,8 +2,11 @@
 
 ## Current status
 
-Foundation docs authored. Schema, generated representations, front-ends, and the
-Rust back-end are not yet implemented.
+All four layers are built as of 2026-07-02: foundation docs; SQL migrations
+plus the generated representations (XML, FHIR R5, protobuf, OpenAPI, Loco
+setup); both consolidated front-ends (HTML + Lily and SvelteKit + Lily); and
+the Loco JSON-API back-end — plus `CHANGELOG.md` and `examples/`. The `doc/`
+clinical reference notes remain outstanding.
 
 ## Why this form exists
 
@@ -49,13 +52,13 @@ impairment; 0 unlikely.
 2. [x] Foundation docs: `index.md`, `AGENTS.md`, `spec/index.md`, `plan.md`,
        `tasks.md`.
 3. [ ] Clinical reference docs under `doc/`.
-4. [ ] Author SQL Liquibase migrations in `sql/`.
-5. [ ] Generate XML + DTD, FHIR R5, Protobuf, OpenAPI, and the Loco setup
+4. [x] Author SQL Liquibase migrations in `sql/`.
+5. [x] Generate XML + DTD, FHIR R5, Protobuf, OpenAPI, and the Loco setup
        script.
-6. [ ] Build `front-end-with-html/` (Lily wizard + dashboard).
-7. [ ] Build `front-end-with-svelte/` (Lily wizard + dashboard).
-8. [ ] Build `back-end-with-loco/` (axum + Loco JSON API).
-9. [ ] Unit-test the scoring engine (Vitest).
+6. [x] Build `front-end-with-html/` (Lily wizard + dashboard).
+7. [x] Build `front-end-with-svelte/` (Lily wizard + dashboard).
+8. [x] Build `back-end-with-loco/` (axum + Loco JSON API).
+9. [x] Unit-test the scoring engine (Vitest).
 10. [ ] Run `bin/test-form four-a-test-for-delirium`.
 
 ## Future enhancements

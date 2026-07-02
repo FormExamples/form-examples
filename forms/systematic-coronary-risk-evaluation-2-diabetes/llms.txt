@@ -1,0 +1,27 @@
+# SCORE2-Diabetes
+
+> SCORE2-Diabetes predicts 10-year risk of fatal and non-fatal cardiovascular disease in individuals with type 2 diabetes without prior CVD, aged 40-69 years. It extends the SCORE2 model with diabetes-specific predictors (HbA1c, eGFR, and age at diagnosis). Reference: <https://www.mdcalc.com/calc/10510/score2-diabetes>.
+
+## Docs
+
+- [Form description and scoring details](index.md)
+- [Living domain spec — the behavioural contract](spec/index.md)
+- [Agent instructions](AGENTS.md)
+- [Implementation plan](plan.md)
+- [Task tracking](tasks.md)
+- [Changelog](CHANGELOG.md)
+
+## Artefacts
+
+- [SQL migrations — source of truth for the data shape](sql/)
+- [Filled-form JSON fixture + FHIR R5 Bundle examples](examples/)
+- [HTML front-end — single-page wizard + dashboard](front-end-with-html/)
+- [SvelteKit front-end — RESTful wizard + dashboard](front-end-with-svelte/)
+- [Rust Loco JSON-API back-end](back-end-with-loco/)
+
+## Generated representations
+
+- [XML + DTD per SQL table](xml/)
+- [FHIR HL7 R5 JSON per SQL entity](fhir/r5/)
+- [Protocol Buffers schemas](protobuf/)
+- [OpenAPI 3.1 specifications](openapi/)

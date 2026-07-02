@@ -1,0 +1,27 @@
+# Nursing Care Plan
+
+> A structured nursing care plan that documents patient care following the **nursing process** — Assessment, Diagnosis, Planning, Implementation, Evaluation (**ADPIE**) — and is commonly organised by activities of daily living using the **Roper–Logan–Tierney** model of nursing. The plan captures the identified nursing problems / needs, the goals set for each, the planned interventions, the record of implementation, the evaluation and review, and the risk assessments referenced (falls, pressure ulcer, venous thromboembolism, nutrition / MUST).
+
+## Docs
+
+- [Form description and scoring details](index.md)
+- [Living domain spec — the behavioural contract](spec/index.md)
+- [Agent instructions](AGENTS.md)
+- [Implementation plan](plan.md)
+- [Task tracking](tasks.md)
+- [Changelog](CHANGELOG.md)
+
+## Artefacts
+
+- [SQL migrations — source of truth for the data shape](sql/)
+- [Filled-form JSON fixture + FHIR R5 Bundle examples](examples/)
+- [HTML front-end — single-page wizard + dashboard](front-end-with-html/)
+- [SvelteKit front-end — RESTful wizard + dashboard](front-end-with-svelte/)
+- [Rust Loco JSON-API back-end](back-end-with-loco/)
+
+## Generated representations
+
+- [XML + DTD per SQL table](xml/)
+- [FHIR HL7 R5 JSON per SQL entity](fhir/r5/)
+- [Protocol Buffers schemas](protobuf/)
+- [OpenAPI 3.1 specifications](openapi/)

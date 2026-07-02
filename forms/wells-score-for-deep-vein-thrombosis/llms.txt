@@ -1,0 +1,27 @@
+# Wells Score for Deep Vein Thrombosis (DVT)
+
+> A bedside clinical prediction rule that estimates the pre-test probability of a first lower-limb **deep vein thrombosis (DVT)** in adults with a suspicious leg. It records nine clinical criteria — each scoring **+1** when present — subtracts **2** when an alternative diagnosis is judged at least as likely as DVT, sums a total of **−2 to 9**, and stratifies the patient so the right first investigation is chosen: a **proximal leg vein ultrasound** when DVT is *likely* or a **D-dimer** when DVT is *unlikely*. The score does not diagnose or exclude DVT on its own; it directs the diagnostic pathway.
+
+## Docs
+
+- [Form description and scoring details](index.md)
+- [Living domain spec — the behavioural contract](spec/index.md)
+- [Agent instructions](AGENTS.md)
+- [Implementation plan](plan.md)
+- [Task tracking](tasks.md)
+- [Changelog](CHANGELOG.md)
+
+## Artefacts
+
+- [SQL migrations — source of truth for the data shape](sql/)
+- [Filled-form JSON fixture + FHIR R5 Bundle examples](examples/)
+- [HTML front-end — single-page wizard + dashboard](front-end-with-html/)
+- [SvelteKit front-end — RESTful wizard + dashboard](front-end-with-svelte/)
+- [Rust Loco JSON-API back-end](back-end-with-loco/)
+
+## Generated representations
+
+- [XML + DTD per SQL table](xml/)
+- [FHIR HL7 R5 JSON per SQL entity](fhir/r5/)
+- [Protocol Buffers schemas](protobuf/)
+- [OpenAPI 3.1 specifications](openapi/)

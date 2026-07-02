@@ -1,0 +1,27 @@
+# Corrected Calcium Calculator
+
+> An albumin-adjusted (corrected) calcium calculator for adults. It takes a measured **total calcium** result and the patient's **serum albumin**, applies the standard albumin-correction formula, and reports a **corrected calcium** value in millimoles per litre (mmol/L). The corrected value is then classified against the adult reference range as **hypocalcaemia**, **normal**, or **hypercalcaemia**, and severe results are flagged for urgent action.
+
+## Docs
+
+- [Form description and scoring details](index.md)
+- [Living domain spec — the behavioural contract](spec/index.md)
+- [Agent instructions](AGENTS.md)
+- [Implementation plan](plan.md)
+- [Task tracking](tasks.md)
+- [Changelog](CHANGELOG.md)
+
+## Artefacts
+
+- [SQL migrations — source of truth for the data shape](sql/)
+- [Filled-form JSON fixture + FHIR R5 Bundle examples](examples/)
+- [HTML front-end — single-page wizard + dashboard](front-end-with-html/)
+- [SvelteKit front-end — RESTful wizard + dashboard](front-end-with-svelte/)
+- [Rust Loco JSON-API back-end](back-end-with-loco/)
+
+## Generated representations
+
+- [XML + DTD per SQL table](xml/)
+- [FHIR HL7 R5 JSON per SQL entity](fhir/r5/)
+- [Protocol Buffers schemas](protobuf/)
+- [OpenAPI 3.1 specifications](openapi/)

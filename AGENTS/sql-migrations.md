@@ -19,7 +19,7 @@ are created before referencing tables.
 
 ```
 sql/
-  00_extensions.sql                            # Required PostgreSQL extensions (pgcrypto)
+  00_create_extensions.sql                            # Required PostgreSQL extensions (pgcrypto)
   01_create_function_set_updated_at.sql        # Trigger function for updated_at
   02_create_table_patient.sql                  # Shared patient table
   03_create_table_clinician.sql                # Clinician identity (optional, per form)
@@ -31,9 +31,9 @@ sql/
   92_create_table_grading_additional_flag.sql  # Safety-critical flags
 ```
 
-Each form must have `00_extensions.sql` as the first migration so that
+Each form must have `00_create_extensions.sql` as the first migration so that
 `pgcrypto` (for `gen_random_uuid()`) is available before any table is created.
-`bin/test-form` asserts that `00_extensions.sql` exists.
+`bin/test-form` asserts that `00_create_extensions.sql` exists.
 
 ## Schema conventions
 
@@ -89,7 +89,7 @@ CREATE TABLE example (
 
 ## Required extensions
 
-The `00_extensions.sql` file enables every extension the form's schema depends
+The `00_create_extensions.sql` file enables every extension the form's schema depends
 on. The default minimum is `pgcrypto`:
 
 ```sql

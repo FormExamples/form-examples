@@ -1,0 +1,27 @@
+# Estimated Glomerular Filtration Rate (eGFR) Calculator
+
+> A formula calculator that estimates the **glomerular filtration rate (GFR)** — the volume of blood the kidneys filter each minute — from a single serum **creatinine** measurement together with the patient's **age** and **sex**. It returns an **eGFR in mL/min/1.73 m²** and classifies the result into a **chronic kidney disease (CKD) G-stage** (G1–G5). The calculator does not diagnose kidney disease; it standardises a laboratory result into a staged estimate that prompts monitoring, medication-dose review, or referral.
+
+## Docs
+
+- [Form description and scoring details](index.md)
+- [Living domain spec — the behavioural contract](spec/index.md)
+- [Agent instructions](AGENTS.md)
+- [Implementation plan](plan.md)
+- [Task tracking](tasks.md)
+- [Changelog](CHANGELOG.md)
+
+## Artefacts
+
+- [SQL migrations — source of truth for the data shape](sql/)
+- [Filled-form JSON fixture + FHIR R5 Bundle examples](examples/)
+- [HTML front-end — single-page wizard + dashboard](front-end-with-html/)
+- [SvelteKit front-end — RESTful wizard + dashboard](front-end-with-svelte/)
+- [Rust Loco JSON-API back-end](back-end-with-loco/)
+
+## Generated representations
+
+- [XML + DTD per SQL table](xml/)
+- [FHIR HL7 R5 JSON per SQL entity](fhir/r5/)
+- [Protocol Buffers schemas](protobuf/)
+- [OpenAPI 3.1 specifications](openapi/)

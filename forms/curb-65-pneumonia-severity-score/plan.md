@@ -3,8 +3,11 @@
 ## Current status
 
 Foundation docs authored 2026-07-01 (`index.md`, `spec/index.md`, `AGENTS.md`,
-`plan.md`, `tasks.md`). Schema, generated representations, front-ends, and the
-Rust Loco crate are not yet built.
+`plan.md`, `tasks.md`). All four layers built as of 2026-07-02: SQL migrations
+plus the generated representations (XML, FHIR R5, protobuf, OpenAPI, Loco
+setup), both consolidated front-ends (HTML + Lily and SvelteKit + Lily), and
+the Loco JSON-API back-end — plus `CHANGELOG.md` and `examples/`. The `doc/`
+clinical reference notes remain outstanding.
 
 ## Why this form exists
 
@@ -40,12 +43,12 @@ without immediate laboratory access.
        `tasks.md`.
 3. [ ] `doc/` clinical reference notes (criterion thresholds, mortality bands,
        CRB-65 mapping, BTS/NICE cross-walk).
-4. [ ] SQL Liquibase migrations (assessment, grading_result, grading_flag).
-5. [ ] Generate XML + DTD, FHIR R5, Protocol Buffers, OpenAPI, Loco setup script.
-6. [ ] Build `front-end-with-html/` (Lily wizard + dashboard).
-7. [ ] Build `front-end-with-svelte/` (Lily wizard + RESTful dashboard).
-8. [ ] Build `back-end-with-loco/` (axum + Loco JSON API).
-9. [ ] Unit-test `curb65-grader.ts` (Vitest) at every boundary.
+4. [x] SQL Liquibase migrations (assessment, grading_result, grading_flag).
+5. [x] Generate XML + DTD, FHIR R5, Protocol Buffers, OpenAPI, Loco setup script.
+6. [x] Build `front-end-with-html/` (Lily wizard + dashboard).
+7. [x] Build `front-end-with-svelte/` (Lily wizard + RESTful dashboard).
+8. [x] Build `back-end-with-loco/` (axum + Loco JSON API).
+9. [x] Unit-test `curb65-grader.ts` (Vitest) at every boundary.
 10. [ ] `bin/test-form curb-65-pneumonia-severity-score`.
 
 ## Future enhancements

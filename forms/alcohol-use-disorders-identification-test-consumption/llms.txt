@@ -1,0 +1,27 @@
+# Alcohol Use Disorders Identification Test — Consumption (AUDIT-C)
+
+> A brief, three-item alcohol screening questionnaire for adults. It records the three consumption items of the World Health Organization's Alcohol Use Disorders Identification Test — **frequency of drinking**, **typical quantity** (in UK units), and **frequency of heavy episodic drinking** — scores each **0–4**, and sums a total of **0–12**. A total of **≥ 5** indicates increasing- or higher-risk drinking and prompts a full 10-item AUDIT and a brief intervention.
+
+## Docs
+
+- [Form description and scoring details](index.md)
+- [Living domain spec — the behavioural contract](spec/index.md)
+- [Agent instructions](AGENTS.md)
+- [Implementation plan](plan.md)
+- [Task tracking](tasks.md)
+- [Changelog](CHANGELOG.md)
+
+## Artefacts
+
+- [SQL migrations — source of truth for the data shape](sql/)
+- [Filled-form JSON fixture + FHIR R5 Bundle examples](examples/)
+- [HTML front-end — single-page wizard + dashboard](front-end-with-html/)
+- [SvelteKit front-end — RESTful wizard + dashboard](front-end-with-svelte/)
+- [Rust Loco JSON-API back-end](back-end-with-loco/)
+
+## Generated representations
+
+- [XML + DTD per SQL table](xml/)
+- [FHIR HL7 R5 JSON per SQL entity](fhir/r5/)
+- [Protocol Buffers schemas](protobuf/)
+- [OpenAPI 3.1 specifications](openapi/)

@@ -1,0 +1,27 @@
+# Lumbar Puncture Test Result
+
+> A UK NHS–aligned **lumbar puncture (LP) / cerebrospinal-fluid (CSF) analysis result (report)** that a reporting clinician completes after a lumbar puncture has been performed. It is the **result/report counterpart** to *Lumbar Puncture Test Request* (a referral): where the request captures why CSF sampling and/or manometry should be done and whether it is safe, this form records what the analysis **found** and a structured **interpretation**. It records the manometry opening pressure, the CSF macroscopic appearance, the cell counts, the biochemistry (protein, glucose, CSF:serum glucose ratio, lactate), the microbiology (Gram stain, culture, PCR) and specialist tests (oligoclonal bands, xanthochromia spectrophotometry), the narrative and structured findings, the impression, and recommended follow-up — then computes a **four-axis interpretation grade** (result classification, abnormality severity / structured reporting, report completeness, and follow-up urgency) plus a set of safety-critical flags including an automatic **critical-result alert**. The output is a structured CSF analysis report.
+
+## Docs
+
+- [Form description and scoring details](index.md)
+- [Living domain spec — the behavioural contract](spec/index.md)
+- [Agent instructions](AGENTS.md)
+- [Implementation plan](plan.md)
+- [Task tracking](tasks.md)
+- [Changelog](CHANGELOG.md)
+
+## Artefacts
+
+- [SQL migrations — source of truth for the data shape](sql/)
+- [Filled-form JSON fixture + FHIR R5 Bundle examples](examples/)
+- [HTML front-end — single-page wizard + dashboard](front-end-with-html/)
+- [SvelteKit front-end — RESTful wizard + dashboard](front-end-with-svelte/)
+- [Rust Loco JSON-API back-end](back-end-with-loco/)
+
+## Generated representations
+
+- [XML + DTD per SQL table](xml/)
+- [FHIR HL7 R5 JSON per SQL entity](fhir/r5/)
+- [Protocol Buffers schemas](protobuf/)
+- [OpenAPI 3.1 specifications](openapi/)

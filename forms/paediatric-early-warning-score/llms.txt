@@ -1,0 +1,27 @@
+# Paediatric Early Warning Score (PEWS)
+
+> An age-banded **track-and-trigger** early-warning tool for children. It records a set of physiological observations across three domains — **respiratory**, **cardiovascular**, and **behaviour / neurological** — scores each parameter **0–3** against the **normal range for the child's age band**, sums an aggregate total, and maps that total (together with single-parameter and concern triggers) onto an **escalation band** with a recommended review timeframe. A high score, any single parameter scoring 3, or documented **nurse or parent/carer concern** each prompts escalation and senior review.
+
+## Docs
+
+- [Form description and scoring details](index.md)
+- [Living domain spec — the behavioural contract](spec/index.md)
+- [Agent instructions](AGENTS.md)
+- [Implementation plan](plan.md)
+- [Task tracking](tasks.md)
+- [Changelog](CHANGELOG.md)
+
+## Artefacts
+
+- [SQL migrations — source of truth for the data shape](sql/)
+- [Filled-form JSON fixture + FHIR R5 Bundle examples](examples/)
+- [HTML front-end — single-page wizard + dashboard](front-end-with-html/)
+- [SvelteKit front-end — RESTful wizard + dashboard](front-end-with-svelte/)
+- [Rust Loco JSON-API back-end](back-end-with-loco/)
+
+## Generated representations
+
+- [XML + DTD per SQL table](xml/)
+- [FHIR HL7 R5 JSON per SQL entity](fhir/r5/)
+- [Protocol Buffers schemas](protobuf/)
+- [OpenAPI 3.1 specifications](openapi/)

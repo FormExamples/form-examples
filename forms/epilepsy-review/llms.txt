@@ -1,0 +1,27 @@
+# Epilepsy Annual Review
+
+> A UK primary-care structured annual review for adults with epilepsy, aligned with **NICE NG217** (*Epilepsies in children, young people and adults*, 2022). It is a **documentation-completeness and control-classification** instrument rather than a numeric score: the clinician records what has happened since the last review — seizure type and frequency, seizure-free status, anti-seizure medication (ASM) and adherence and side effects, triggers, injuries and status epilepticus events, safety (driving, bathing, occupation), Sudden Unexpected Death in Epilepsy (SUDEP) risk discussion, valproate and pregnancy-prevention arrangements for women of childbearing potential, mental health, and the agreed care plan — and the engine classifies **seizure control**, grades **review completeness**, and raises **safety flags**.
+
+## Docs
+
+- [Form description and scoring details](index.md)
+- [Living domain spec — the behavioural contract](spec/index.md)
+- [Agent instructions](AGENTS.md)
+- [Implementation plan](plan.md)
+- [Task tracking](tasks.md)
+- [Changelog](CHANGELOG.md)
+
+## Artefacts
+
+- [SQL migrations — source of truth for the data shape](sql/)
+- [Filled-form JSON fixture + FHIR R5 Bundle examples](examples/)
+- [HTML front-end — single-page wizard + dashboard](front-end-with-html/)
+- [SvelteKit front-end — RESTful wizard + dashboard](front-end-with-svelte/)
+- [Rust Loco JSON-API back-end](back-end-with-loco/)
+
+## Generated representations
+
+- [XML + DTD per SQL table](xml/)
+- [FHIR HL7 R5 JSON per SQL entity](fhir/r5/)
+- [Protocol Buffers schemas](protobuf/)
+- [OpenAPI 3.1 specifications](openapi/)

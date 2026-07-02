@@ -4,7 +4,7 @@ filename convention used by bin/test-form.
 
 Canonical filename layout per form:
 
-    00_extensions.sql                        -- CREATE EXTENSION pgcrypto
+    00_create_extensions.sql                        -- CREATE EXTENSION pgcrypto
     01_create_function_set_updated_at.sql    -- trigger function
     02_create_table_patient.sql              -- canonical patient
     03_create_table_clinician.sql            -- canonical clinician
@@ -47,7 +47,7 @@ TOP = Path(__file__).resolve().parent.parent
 FORMS_DIR = TOP / "forms"
 
 CANONICAL_FILES = {
-    "00_extensions.sql",
+    "00_create_extensions.sql",
     "01_create_function_set_updated_at.sql",
     "02_create_table_patient.sql",
     "03_create_table_clinician.sql",
@@ -333,7 +333,7 @@ def process_form(form_dir: Path):
 
     # Gather every non-canonical numbered .sql file (positions 02+, since
     # 00 and 01 are extensions/function and are left alone).
-    KEEP_AS_IS = {"00_extensions.sql", "01_create_function_set_updated_at.sql"}
+    KEEP_AS_IS = {"00_create_extensions.sql", "01_create_function_set_updated_at.sql"}
     others = [
         f for f in sorted(sql_dir.iterdir())
         if f.is_file()
@@ -444,7 +444,7 @@ def write_index_md(sql_dir: Path, form_slug: str, tables: list):
         "",
         "## Canonical files",
         "",
-        "- `00_extensions.sql` — required extensions (pgcrypto).",
+        "- `00_create_extensions.sql` — required extensions (pgcrypto).",
         "- `01_create_function_set_updated_at.sql` — trigger function used by every `updated_at` column.",
         "- `02_create_table_patient.sql` — patient table.",
         "- `03_create_table_clinician.sql` — clinician table.",

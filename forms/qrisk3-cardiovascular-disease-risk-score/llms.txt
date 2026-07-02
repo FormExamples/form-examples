@@ -1,0 +1,27 @@
+# QRISK3 Cardiovascular Disease Risk Score
+
+> A primary-prevention risk calculator that estimates an adult's **10-year risk of a first cardiovascular disease (CVD) event** — coronary heart disease, stroke, or transient ischaemic attack — from routinely available clinical data. It records demographic, lifestyle, comorbidity, and measurement inputs on a single continuous single-page wizard, applies the published **QRISK3 Cox proportional-hazards model**, and returns a **10-year CVD risk percentage**, a risk band, and a **heart age**. A result of **≥ 10 %** meets the NICE threshold at which a lipid-lowering statin (atorvastatin 20 mg) should be offered alongside lifestyle advice.
+
+## Docs
+
+- [Form description and scoring details](index.md)
+- [Living domain spec — the behavioural contract](spec/index.md)
+- [Agent instructions](AGENTS.md)
+- [Implementation plan](plan.md)
+- [Task tracking](tasks.md)
+- [Changelog](CHANGELOG.md)
+
+## Artefacts
+
+- [SQL migrations — source of truth for the data shape](sql/)
+- [Filled-form JSON fixture + FHIR R5 Bundle examples](examples/)
+- [HTML front-end — single-page wizard + dashboard](front-end-with-html/)
+- [SvelteKit front-end — RESTful wizard + dashboard](front-end-with-svelte/)
+- [Rust Loco JSON-API back-end](back-end-with-loco/)
+
+## Generated representations
+
+- [XML + DTD per SQL table](xml/)
+- [FHIR HL7 R5 JSON per SQL entity](fhir/r5/)
+- [Protocol Buffers schemas](protobuf/)
+- [OpenAPI 3.1 specifications](openapi/)

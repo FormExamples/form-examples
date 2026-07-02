@@ -1,0 +1,5 @@
+# WHO Emergency Unit Form: General — OpenAPI representations
+
+OpenAPI 3.1 `.yaml` specifications for the WHO Emergency Unit Form: General form, generated per SQL entity. Do not hand-edit; re-run `bin/openapi/generate-openapi-representations.py`.
+
+See the form root [`../index.md`](../index.md) for the full design description.

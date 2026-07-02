@@ -1,0 +1,27 @@
+# Medical Information Form for Air Travel (MEDIF)
+
+> A **Medical Information Form (MEDIF)** is the standardised airline document used to determine whether a passenger with specific health needs is fit to fly and whether in-flight medical support (supplemental oxygen, stretcher, incubator, medical escort, battery-powered medical device) must be arranged in advance. It is completed in two parts: Part 1 by the passenger (or booking agent) and Part 2 by the attending physician, then forwarded to the airline's medical desk for clearance.
+
+## Docs
+
+- [Form description and scoring details](index.md)
+- [Living domain spec — the behavioural contract](spec/index.md)
+- [Agent instructions](AGENTS.md)
+- [Implementation plan](plan.md)
+- [Task tracking](tasks.md)
+- [Changelog](CHANGELOG.md)
+
+## Artefacts
+
+- [SQL migrations — source of truth for the data shape](sql/)
+- [Filled-form JSON fixture + FHIR R5 Bundle examples](examples/)
+- [HTML front-end — single-page wizard + dashboard](front-end-with-html/)
+- [SvelteKit front-end — RESTful wizard + dashboard](front-end-with-svelte/)
+- [Rust Loco JSON-API back-end](back-end-with-loco/)
+
+## Generated representations
+
+- [XML + DTD per SQL table](xml/)
+- [FHIR HL7 R5 JSON per SQL entity](fhir/r5/)
+- [Protocol Buffers schemas](protobuf/)
+- [OpenAPI 3.1 specifications](openapi/)

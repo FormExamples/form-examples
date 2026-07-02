@@ -1,0 +1,27 @@
+# Recommended Summary Plan for Emergency Care and Treatment (ReSPECT)
+
+> A UK personalised **emergency care and treatment plan** created through shared decision-making between a person and one or more clinicians. ReSPECT records a summary of what matters to the person, agreed clinical recommendations for their care in a future emergency in which they may be unable to make or express choices, an explicit **cardiopulmonary resuscitation (CPR) recommendation**, and agreed **ceilings of treatment**. It is a portable record that travels with the person across care settings.
+
+## Docs
+
+- [Form description and scoring details](index.md)
+- [Living domain spec — the behavioural contract](spec/index.md)
+- [Agent instructions](AGENTS.md)
+- [Implementation plan](plan.md)
+- [Task tracking](tasks.md)
+- [Changelog](CHANGELOG.md)
+
+## Artefacts
+
+- [SQL migrations — source of truth for the data shape](sql/)
+- [Filled-form JSON fixture + FHIR R5 Bundle examples](examples/)
+- [HTML front-end — single-page wizard + dashboard](front-end-with-html/)
+- [SvelteKit front-end — RESTful wizard + dashboard](front-end-with-svelte/)
+- [Rust Loco JSON-API back-end](back-end-with-loco/)
+
+## Generated representations
+
+- [XML + DTD per SQL table](xml/)
+- [FHIR HL7 R5 JSON per SQL entity](fhir/r5/)
+- [Protocol Buffers schemas](protobuf/)
+- [OpenAPI 3.1 specifications](openapi/)

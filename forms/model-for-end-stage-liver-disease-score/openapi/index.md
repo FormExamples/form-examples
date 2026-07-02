@@ -1,0 +1,5 @@
+# Model for End-Stage Liver Disease (MELD) Score — OpenAPI representations
+
+OpenAPI 3.1 `.yaml` specifications for the Model for End-Stage Liver Disease (MELD) Score form, generated per SQL entity. Do not hand-edit; re-run `bin/openapi/generate-openapi-representations.py`.
+
+See the form root [`../index.md`](../index.md) for the full design description.

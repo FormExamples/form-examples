@@ -1,0 +1,27 @@
+# Pulmonary Function Test Result
+
+> A UK NHS–aligned **pulmonary function test (lung-function / spirometry) result (report)** that a reporting clinician completes after a lung-function test has been performed. It is the **result/report counterpart** to *Pulmonary Function Test Request* (a referral): where the request captures why a test should be done, this form records what the test **found** and a structured **interpretation**. It records the performed test type and ATS/ERS quality grade, the clinical history, the measured spirometry and gas-transfer values (FEV1, FVC, FEV1/FVC ratio, PEF, DLCO), the structured ventilatory interpretation (pattern, severity, bronchodilator reversibility), the narrative and structured findings, the impression, and recommended follow-up — then computes a **four-axis interpretation grade** (result classification, abnormality severity / structured reporting, report completeness, and follow-up urgency) plus a set of safety-critical flags including an automatic **critical-result alert**. The output is a structured lung-function report.
+
+## Docs
+
+- [Form description and scoring details](index.md)
+- [Living domain spec — the behavioural contract](spec/index.md)
+- [Agent instructions](AGENTS.md)
+- [Implementation plan](plan.md)
+- [Task tracking](tasks.md)
+- [Changelog](CHANGELOG.md)
+
+## Artefacts
+
+- [SQL migrations — source of truth for the data shape](sql/)
+- [Filled-form JSON fixture + FHIR R5 Bundle examples](examples/)
+- [HTML front-end — single-page wizard + dashboard](front-end-with-html/)
+- [SvelteKit front-end — RESTful wizard + dashboard](front-end-with-svelte/)
+- [Rust Loco JSON-API back-end](back-end-with-loco/)
+
+## Generated representations
+
+- [XML + DTD per SQL table](xml/)
+- [FHIR HL7 R5 JSON per SQL entity](fhir/r5/)
+- [Protocol Buffers schemas](protobuf/)
+- [OpenAPI 3.1 specifications](openapi/)

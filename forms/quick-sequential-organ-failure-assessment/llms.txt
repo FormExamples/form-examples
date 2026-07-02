@@ -1,0 +1,27 @@
+# Quick Sequential Organ Failure Assessment (qSOFA)
+
+> A bedside sepsis-risk screen for adults with suspected or confirmed infection. It records three objective clinical criteria — **respiratory rate**, **mentation**, and **systolic blood pressure** — scores each as 0 or 1, sums a total of **0–3**, and flags the patient as **higher risk of a poor outcome** when the score is **≥ 2**. A high score is not a diagnosis of sepsis; it is a prompt to escalate: perform a full Sequential Organ Failure Assessment (SOFA), start a sepsis workup, and obtain senior review.
+
+## Docs
+
+- [Form description and scoring details](index.md)
+- [Living domain spec — the behavioural contract](spec/index.md)
+- [Agent instructions](AGENTS.md)
+- [Implementation plan](plan.md)
+- [Task tracking](tasks.md)
+- [Changelog](CHANGELOG.md)
+
+## Artefacts
+
+- [SQL migrations — source of truth for the data shape](sql/)
+- [Filled-form JSON fixture + FHIR R5 Bundle examples](examples/)
+- [HTML front-end — single-page wizard + dashboard](front-end-with-html/)
+- [SvelteKit front-end — RESTful wizard + dashboard](front-end-with-svelte/)
+- [Rust Loco JSON-API back-end](back-end-with-loco/)
+
+## Generated representations
+
+- [XML + DTD per SQL table](xml/)
+- [FHIR HL7 R5 JSON per SQL entity](fhir/r5/)
+- [Protocol Buffers schemas](protobuf/)
+- [OpenAPI 3.1 specifications](openapi/)

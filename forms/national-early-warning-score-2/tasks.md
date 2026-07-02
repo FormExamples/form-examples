@@ -13,34 +13,35 @@
 
 ## Schema and generated artefacts
 
-- [ ] `sql/` migrations: `assessment_context`, `patient`, `observations`,
-  `result`
-- [ ] Generate XML + DTD
-- [ ] Generate FHIR R5 JSON
-- [ ] Generate protobuf `.proto`
-- [ ] Generate OpenAPI 3.1 YAML
-- [ ] Generate Loco setup script
-- [ ] Generate `CHANGELOG.md` + `examples/`
+- [x] `sql/` migrations authored: `assessment_context`, `patient`,
+  `observations`, `result`
+- [x] Generated XML + DTD
+- [x] Generated FHIR R5 JSON
+- [x] Generated protobuf `.proto`
+- [x] Generated OpenAPI 3.1 YAML
+- [x] Generated Loco setup script
+- [x] Generated `CHANGELOG.md` + `examples/`
 
 ## Scoring engine
 
-- [ ] `types.ts`, `utils.ts`
-- [ ] `news2-rules.ts` — per-parameter band tables + Scale 1 / Scale 2 SpO₂ logic
-- [ ] `news2-grader.ts` — aggregate, red-score, band, monitoring, response
-- [ ] `flagged-issues.ts` — safety flags
-- [ ] Unit tests (RCP worked examples, band boundaries, red-score escalation)
+- [x] `types.ts`, `utils.ts`
+- [x] `news2-rules.ts` — per-parameter band tables + Scale 1 / Scale 2 SpO₂ logic
+- [x] `news2-grader.ts` — aggregate, red-score, band, monitoring, response
+- [x] `flagged-issues.ts` — safety flags
+- [x] Unit tests (RCP worked examples, band boundaries, red-score escalation)
 
 ## Front-ends
 
-- [ ] `front-end-with-html/` — Lily wizard + dashboard
-- [ ] `front-end-with-svelte/` — SvelteKit wizard + dashboard
+- [x] `front-end-with-html/` — Lily wizard + dashboard
+- [x] `front-end-with-svelte/` — SvelteKit wizard + dashboard
 
 ## Back-end
 
-- [ ] `back-end-with-loco/` — Rust axum + Loco JSON API (relational per-table)
+- [x] `back-end-with-loco/` — Rust axum + Loco JSON API (relational per-table)
 
 ## Verify
 
-- [ ] `bin/test-form national-early-warning-score-2`
-- [ ] `bin/lily-html-refactor --check national-early-warning-score-2`
-- [ ] `bin/generate-spec.py --check national-early-warning-score-2`
+- [ ] `bin/test-form national-early-warning-score-2` (blocked by a repo-wide
+  `bin/test-form` harness issue, not by this form)
+- [x] `bin/lily-html-refactor --check national-early-warning-score-2`
+- [x] `bin/generate-spec.py --check national-early-warning-score-2`

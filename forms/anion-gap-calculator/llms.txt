@@ -1,0 +1,27 @@
+# Anion Gap Calculator
+
+> A point-of-care calculator that derives the **serum anion gap** from a routine electrolyte panel, corrects it for the patient's serum albumin, and classifies the result as **low**, **normal**, or **high**. A high anion gap is the key laboratory signature of a **high anion gap metabolic acidosis (HAGMA)** and prompts a structured search for the underlying cause. The calculator does not diagnose; it turns four or five numbers into a computed gap, a corrected gap, a classification band, and a set of flagged issues that direct further investigation.
+
+## Docs
+
+- [Form description and scoring details](index.md)
+- [Living domain spec — the behavioural contract](spec/index.md)
+- [Agent instructions](AGENTS.md)
+- [Implementation plan](plan.md)
+- [Task tracking](tasks.md)
+- [Changelog](CHANGELOG.md)
+
+## Artefacts
+
+- [SQL migrations — source of truth for the data shape](sql/)
+- [Filled-form JSON fixture + FHIR R5 Bundle examples](examples/)
+- [HTML front-end — single-page wizard + dashboard](front-end-with-html/)
+- [SvelteKit front-end — RESTful wizard + dashboard](front-end-with-svelte/)
+- [Rust Loco JSON-API back-end](back-end-with-loco/)
+
+## Generated representations
+
+- [XML + DTD per SQL table](xml/)
+- [FHIR HL7 R5 JSON per SQL entity](fhir/r5/)
+- [Protocol Buffers schemas](protobuf/)
+- [OpenAPI 3.1 specifications](openapi/)

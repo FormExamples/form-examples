@@ -3,8 +3,10 @@
 ## Current status
 
 Foundation docs authored 2026-07-01 (`index.md`, `spec/index.md`, `AGENTS.md`,
-`plan.md`, `tasks.md`). Schema, generated representations, front-ends, and the
-Loco back-end are not yet built.
+`plan.md`, `tasks.md`). All four layers built as of 2026-07-02: SQL migrations
+plus the generated representations (XML, FHIR R5, protobuf, OpenAPI, Loco
+setup), both consolidated front-ends (HTML + Lily and SvelteKit + Lily), and
+the Loco JSON-API back-end — plus `CHANGELOG.md` and `examples/`.
 
 ## Why this form exists
 

@@ -1,0 +1,27 @@
+# Tumor Marker Test Request
+
+> A UK NHS–aligned **serum tumour-marker blood-test request (referral)** that a clinician completes to request one or more serum tumour markers for a patient. It records the requested markers, the clinical indication, relevant history, any known cancer site and prior marker value, and the requested urgency — then computes a **four-axis grading** (appropriateness, interpretation safety, request completeness, and urgency / triage priority) plus a set of safety-critical flags. The output is a vetting report that supports the laboratory's and requesting team's decision to accept, query, redirect, or reject the request.
+
+## Docs
+
+- [Form description and scoring details](index.md)
+- [Living domain spec — the behavioural contract](spec/index.md)
+- [Agent instructions](AGENTS.md)
+- [Implementation plan](plan.md)
+- [Task tracking](tasks.md)
+- [Changelog](CHANGELOG.md)
+
+## Artefacts
+
+- [SQL migrations — source of truth for the data shape](sql/)
+- [Filled-form JSON fixture + FHIR R5 Bundle examples](examples/)
+- [HTML front-end — single-page wizard + dashboard](front-end-with-html/)
+- [SvelteKit front-end — RESTful wizard + dashboard](front-end-with-svelte/)
+- [Rust Loco JSON-API back-end](back-end-with-loco/)
+
+## Generated representations
+
+- [XML + DTD per SQL table](xml/)
+- [FHIR HL7 R5 JSON per SQL entity](fhir/r5/)
+- [Protocol Buffers schemas](protobuf/)
+- [OpenAPI 3.1 specifications](openapi/)

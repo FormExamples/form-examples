@@ -1,0 +1,27 @@
+# Cytology Test Request
+
+> A UK NHS–aligned **cytology specimen request (referral)** that a clinician completes to request a cytology examination of a specimen — cervical smear, urine, sputum, serous-cavity effusion (pleural / ascitic), fine-needle aspiration (thyroid or breast), or cerebrospinal fluid. It records the requested specimen type and site, the clinical indication and specific question, the cervical-screening / cytology context, the specimen-collection (pre-analytical) details, and the requested urgency — then computes a **four-axis grading** (appropriateness, pre-analytical specimen adequacy, request completeness, and triage priority) plus a set of safety-critical flags. The output is a vetting report that supports the cytology / pathology laboratory's triage and acceptance decision.
+
+## Docs
+
+- [Form description and scoring details](index.md)
+- [Living domain spec — the behavioural contract](spec/index.md)
+- [Agent instructions](AGENTS.md)
+- [Implementation plan](plan.md)
+- [Task tracking](tasks.md)
+- [Changelog](CHANGELOG.md)
+
+## Artefacts
+
+- [SQL migrations — source of truth for the data shape](sql/)
+- [Filled-form JSON fixture + FHIR R5 Bundle examples](examples/)
+- [HTML front-end — single-page wizard + dashboard](front-end-with-html/)
+- [SvelteKit front-end — RESTful wizard + dashboard](front-end-with-svelte/)
+- [Rust Loco JSON-API back-end](back-end-with-loco/)
+
+## Generated representations
+
+- [XML + DTD per SQL table](xml/)
+- [FHIR HL7 R5 JSON per SQL entity](fhir/r5/)
+- [Protocol Buffers schemas](protobuf/)
+- [OpenAPI 3.1 specifications](openapi/)

@@ -1,0 +1,27 @@
+# Recognition Of Stroke In the Emergency Room (ROSIER)
+
+> A bedside stroke-recognition instrument for adults presenting acutely to the emergency department with suspected stroke or transient ischaemic attack. It first excludes two common stroke mimics — **loss of consciousness / syncope** and **seizure activity** — each subtracting a point, then records five new, acute-onset neurological signs — **asymmetric facial weakness**, **asymmetric arm weakness**, **asymmetric leg weakness**, **speech disturbance**, and **visual field defect** — each adding a point. The signed total runs from **−2 to +5**. A total **greater than 0** indicates that **stroke is likely** and the acute stroke pathway should be activated; a total of **0 or below** makes stroke unlikely but does **not** exclude it. Blood glucose must be measured and hypoglycaemia corrected before the score is interpreted, because hypoglycaemia is a treatable stroke mimic.
+
+## Docs
+
+- [Form description and scoring details](index.md)
+- [Living domain spec — the behavioural contract](spec/index.md)
+- [Agent instructions](AGENTS.md)
+- [Implementation plan](plan.md)
+- [Task tracking](tasks.md)
+- [Changelog](CHANGELOG.md)
+
+## Artefacts
+
+- [SQL migrations — source of truth for the data shape](sql/)
+- [Filled-form JSON fixture + FHIR R5 Bundle examples](examples/)
+- [HTML front-end — single-page wizard + dashboard](front-end-with-html/)
+- [SvelteKit front-end — RESTful wizard + dashboard](front-end-with-svelte/)
+- [Rust Loco JSON-API back-end](back-end-with-loco/)
+
+## Generated representations
+
+- [XML + DTD per SQL table](xml/)
+- [FHIR HL7 R5 JSON per SQL entity](fhir/r5/)
+- [Protocol Buffers schemas](protobuf/)
+- [OpenAPI 3.1 specifications](openapi/)

@@ -35,7 +35,7 @@ server:
 # Mailer Configuration.
 
 workers:
-  mode: BackgroundQueue
+  mode: ForegroundBlocking
 
 queue:
   kind: Postgres

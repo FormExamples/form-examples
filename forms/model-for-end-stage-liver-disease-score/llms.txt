@@ -1,0 +1,27 @@
+# Model for End-Stage Liver Disease (MELD) Score
+
+> A laboratory-based severity calculator for chronic liver disease. It takes a small number of objective blood results — **total bilirubin**, **INR**, **serum creatinine**, and (for MELD-Na) **serum sodium** — applies a validated weighted logarithmic formula, and produces an integer score of **6–40** that maps to an estimated **3-month mortality**. A higher score indicates more severe liver dysfunction and greater short-term mortality risk. The score is used to stratify disease severity and to prioritise candidates for liver transplantation.
+
+## Docs
+
+- [Form description and scoring details](index.md)
+- [Living domain spec — the behavioural contract](spec/index.md)
+- [Agent instructions](AGENTS.md)
+- [Implementation plan](plan.md)
+- [Task tracking](tasks.md)
+- [Changelog](CHANGELOG.md)
+
+## Artefacts
+
+- [SQL migrations — source of truth for the data shape](sql/)
+- [Filled-form JSON fixture + FHIR R5 Bundle examples](examples/)
+- [HTML front-end — single-page wizard + dashboard](front-end-with-html/)
+- [SvelteKit front-end — RESTful wizard + dashboard](front-end-with-svelte/)
+- [Rust Loco JSON-API back-end](back-end-with-loco/)
+
+## Generated representations
+
+- [XML + DTD per SQL table](xml/)
+- [FHIR HL7 R5 JSON per SQL entity](fhir/r5/)
+- [Protocol Buffers schemas](protobuf/)
+- [OpenAPI 3.1 specifications](openapi/)

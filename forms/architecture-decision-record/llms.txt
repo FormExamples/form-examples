@@ -1,0 +1,27 @@
+# Architecture Decision Record (Tyree & Akerman)
+
+> A structured form for capturing an Architecture Decision Record (ADR) using the Jeff Tyree & Art Akerman template ("Architecture Decisions: Demystifying Architecture", IEEE Software, 2005). The form walks an architect through a single-page, 16-step wizard, captures all 14 sections of the canonical template plus authorship metadata, and produces an ADR document as Markdown, FHIR R5–style structured JSON, and XML.
+
+## Docs
+
+- [Form description and scoring details](index.md)
+- [Living domain spec — the behavioural contract](spec/index.md)
+- [Agent instructions](AGENTS.md)
+- [Implementation plan](plan.md)
+- [Task tracking](tasks.md)
+- [Changelog](CHANGELOG.md)
+
+## Artefacts
+
+- [SQL migrations — source of truth for the data shape](sql/)
+- [Filled-form JSON fixture + FHIR R5 Bundle examples](examples/)
+- [HTML front-end — single-page wizard + dashboard](front-end-with-html/)
+- [SvelteKit front-end — RESTful wizard + dashboard](front-end-with-svelte/)
+- [Rust Loco JSON-API back-end](back-end-with-loco/)
+
+## Generated representations
+
+- [XML + DTD per SQL table](xml/)
+- [FHIR HL7 R5 JSON per SQL entity](fhir/r5/)
+- [Protocol Buffers schemas](protobuf/)
+- [OpenAPI 3.1 specifications](openapi/)
