@@ -1,26 +1,28 @@
 #!/usr/bin/env python3
-"""bin/generate-spec.py — Generate forms/<slug>/spec/index.md per form.
+"""bin/generate-spec.py — Scaffold forms/<slug>/spec/index.md per form.
 
-For every directory under forms/ that contains an index.md, write a
-spec/index.md that:
+For every directory under forms/ that contains an index.md, ensure a
+spec/ directory exists holding index.md (the living domain spec) plus a
+README.md symlink — the form-level counterpart to the top-level system
+spec. (Older forms used a single `spec.md` file; the gold standard is
+now the `spec/` directory.)
 
-- restates the form purpose (drawn from index.md),
-- lists the contract artefacts each implementation must satisfy
-  (SQL, XML, FHIR, protobuf, OpenAPI, consolidated front-ends, Rust crate),
-- records the acceptance criteria,
-- cross-links AGENTS.md, plan.md, tasks.md, doc/.
+The per-form spec is a HAND-MAINTAINED living document: it is the
+source of truth for behaviour, updated before code changes
+(spec-driven development). This tool therefore only SCAFFOLDS:
 
-The per-form spec is a **directory** `spec/` holding `index.md` (the living
-domain spec) plus a `README.md` symlink, the form-level counterpart to the
-top-level system spec. (Older forms used a single `spec.md` file; the gold
-standard is now the `spec/` directory.)
-
-Idempotent: re-running with no upstream change is a no-op (same bytes).
+- default: write spec/index.md only where it is missing or empty
+  (seeded from index.md), and repair a missing README.md symlink;
+- --force: deliberately regenerate the named forms' spec/index.md
+  from the template, overwriting hand edits (requires explicit slugs);
+- --check: exit non-zero if any form lacks a non-empty spec/index.md
+  or its README.md symlink. Hand-edited content is never "drift".
 
 Usage:
-  bin/generate-spec.py            # generate for every form
-  bin/generate-spec.py <slug> ... # generate only the named forms
-  bin/generate-spec.py --check    # exit non-zero if any spec/index.md would change
+  bin/generate-spec.py                    # scaffold all missing specs
+  bin/generate-spec.py <slug> ...         # scaffold only the named forms
+  bin/generate-spec.py --force <slug> ... # regenerate named forms (overwrite)
+  bin/generate-spec.py --check            # structural check, no writes
 """
 
 from __future__ import annotations
@@ -149,9 +151,11 @@ def render_spec(slug: str, form_dir: Path) -> str:
     out.append("## 2. Scope")
     out.append("")
     out.append(
-        "In scope: the schema, scoring engine, four front-ends (form + dashboard, "
-        "each in HTML and SvelteKit), and the Rust full-stack crate listed in §5. "
-        "Out of scope: hosted deployment, authentication, multi-tenancy."
+        "In scope: the schema, scoring engine, the two consolidated front-ends "
+        "(`front-end-with-html`, `front-end-with-svelte`), the Rust Loco JSON-API "
+        "crate, and the generated representations (XML, FHIR R5, protobuf, "
+        "OpenAPI) listed in §5. Out of scope: hosted deployment, authentication, "
+        "multi-tenancy."
     )
     out.append("")
     if scoring:
@@ -250,13 +254,24 @@ def main() -> int:
         description=__doc__,
         formatter_class=argparse.RawDescriptionHelpFormatter,
     )
-    parser.add_argument("slugs", nargs="*", help="Specific slugs to generate; omit for all")
+    parser.add_argument("slugs", nargs="*", help="Specific slugs to scaffold; omit for all")
     parser.add_argument(
         "--check",
         action="store_true",
-        help="Exit non-zero if any spec/index.md would change, no writes",
+        help="Exit non-zero if any form lacks spec/index.md or its README symlink",
+    )
+    parser.add_argument(
+        "--force",
+        action="store_true",
+        help="Regenerate spec/index.md from the template, overwriting hand edits "
+        "(requires explicit slugs)",
     )
     args = parser.parse_args()
+
+    if args.force and not args.slugs:
+        sys.exit("--force overwrites hand-maintained specs; name explicit slugs")
+    if args.force and args.check:
+        sys.exit("--force and --check are mutually exclusive")
 
     if not FORMS_DIR.is_dir():
         sys.exit(f"forms directory not found: {FORMS_DIR}")
@@ -279,33 +294,42 @@ def main() -> int:
                 continue
             targets.append((d.name, d))
 
-    written = unchanged = drift = 0
+    written = present = missing = 0
     for slug, d in targets:
         spec_dir = d / "spec"
         spec_path = spec_dir / "index.md"
-        new_text = render_spec(slug, d)
-        current = spec_path.read_text() if spec_path.is_file() else None
-        if current == new_text:
-            unchanged += 1
-        elif args.check:
-            drift += 1
-            print(f"drift: {spec_path.relative_to(REPO_ROOT)}")
+        readme = spec_dir / "README.md"
+        has_spec = spec_path.is_file() and spec_path.stat().st_size > 0
+        has_readme = readme.is_symlink() or readme.is_file()
+
+        if args.check:
+            if not has_spec:
+                missing += 1
+                print(f"missing spec: {spec_path.relative_to(REPO_ROOT)}")
+            elif not has_readme:
+                missing += 1
+                print(f"missing README symlink: {readme.relative_to(REPO_ROOT)}")
+            else:
+                present += 1
+            continue
+
+        if has_spec and not args.force:
+            present += 1
         else:
             spec_dir.mkdir(exist_ok=True)
-            spec_path.write_text(new_text)
-            # README.md -> index.md symlink for GitHub rendering of the spec dir
-            readme = spec_dir / "README.md"
-            if not readme.exists():
-                try:
-                    readme.symlink_to("index.md")
-                except OSError:
-                    pass
+            spec_path.write_text(render_spec(slug, d))
             written += 1
+        # README.md -> index.md symlink for GitHub rendering of the spec dir
+        if not has_readme:
+            try:
+                readme.symlink_to("index.md")
+            except OSError:
+                pass
 
-    print(f"spec generator [{'CHECK' if args.check else 'WRITE'}]: "
-          f"{len(targets)} target(s), unchanged={unchanged}, "
-          f"{'drift' if args.check else 'written'}={drift if args.check else written}")
-    if args.check and drift > 0:
+    print(f"spec scaffolder [{'CHECK' if args.check else 'WRITE'}]: "
+          f"{len(targets)} target(s), present={present}, "
+          f"{'missing' if args.check else 'written'}={missing if args.check else written}")
+    if args.check and missing > 0:
         return 1
     return 0
 

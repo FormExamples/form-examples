@@ -14,3 +14,94 @@ cd "${form_snake_case}"
 # Pin time to a version compatible with cookie 0.18.1 (a fresh loco
 # starter otherwise resolves time 0.3.52, which fails to compile).
 cargo update -p time --precise 0.3.47
+
+cargo loco generate scaffold patient \
+    deleted_at:tstz \
+    name:string! \
+    birth_date:date! \
+    sex:string! \
+    email:text \
+    phone:text \
+    postal_address_as_full_text:text \
+    country_as_iso_3166_1_alpha_2:string \
+    postcode:text \
+    united_kingdom_nhs_number:string^ \
+    hospital_mrn:string \
+    height_as_cm:double \
+    weight_as_kg:double \
+    body_mass_index:double \
+    allergies_summary:text! \
+    --api
+
+cargo loco generate scaffold clinician \
+    deleted_at:tstz \
+    name:text! \
+    email:text \
+    phone:text \
+    postal_address_as_full_text:text \
+    country_as_iso_3166_1_alpha_2:string \
+    postcode:text \
+    role:string! \
+    registration_body:string! \
+    registration_number:text! \
+    --api
+
+cargo loco generate scaffold diabetic_eye_screening \
+    deleted_at:tstz \
+    patient:references \
+    clinician:references \
+    grader_name:text! \
+    grader_role:string! \
+    graded_at:date \
+    image_captured_at:date \
+    imaging_media:string! \
+    patient_identifier:string! \
+    age_band:string! \
+    diabetes_type:string! \
+    years_since_diagnosis:double \
+    previous_screen_date:date \
+    previous_screen_result:string! \
+    right_retinopathy_grade:string! \
+    right_maculopathy_grade:string! \
+    right_photocoagulation:string! \
+    right_ungradable:string! \
+    right_visual_acuity:text! \
+    left_retinopathy_grade:string! \
+    left_maculopathy_grade:string! \
+    left_photocoagulation:string! \
+    left_ungradable:string! \
+    left_visual_acuity:text! \
+    clinical_context:text! \
+    --api
+
+cargo loco generate scaffold diabetic_eye_screening_grade \
+    deleted_at:tstz \
+    diabetic_eye_screening:references \
+    worst_retinopathy:string! \
+    worst_maculopathy:string! \
+    any_ungradable:string! \
+    outcome:string! \
+    referral:string! \
+    recall_interval_months:int \
+    status:string! \
+    graded_at:tstz! \
+    --api
+
+cargo loco generate scaffold diabetic_eye_screening_grade_rule \
+    deleted_at:tstz \
+    diabetic_eye_screening_grade:references \
+    rule_id:string! \
+    stage:string! \
+    category:string! \
+    description:string! \
+    --api
+
+cargo loco generate scaffold diabetic_eye_screening_grade_flag \
+    deleted_at:tstz \
+    diabetic_eye_screening_grade:references \
+    flag_id:string! \
+    category:string! \
+    priority:string! \
+    description:string! \
+    suggested_action:string! \
+    --api

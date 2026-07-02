@@ -14,3 +14,107 @@ cd "${form_snake_case}"
 # Pin time to a version compatible with cookie 0.18.1 (a fresh loco
 # starter otherwise resolves time 0.3.52, which fails to compile).
 cargo update -p time --precise 0.3.47
+
+cargo loco generate scaffold patient \
+    deleted_at:tstz \
+    name:string! \
+    birth_date:date! \
+    sex:string! \
+    email:text \
+    phone:text \
+    postal_address_as_full_text:text \
+    country_as_iso_3166_1_alpha_2:string \
+    postcode:text \
+    united_kingdom_nhs_number:string^ \
+    hospital_mrn:string \
+    height_as_cm:double \
+    weight_as_kg:double \
+    body_mass_index:double \
+    allergies_summary:text! \
+    --api
+
+cargo loco generate scaffold clinician \
+    deleted_at:tstz \
+    name:text! \
+    email:text \
+    phone:text \
+    postal_address_as_full_text:text \
+    country_as_iso_3166_1_alpha_2:string \
+    postcode:text \
+    role:string! \
+    registration_body:string! \
+    registration_number:text! \
+    --api
+
+cargo loco generate scaffold epilepsy_review \
+    deleted_at:tstz \
+    patient:references \
+    clinician:references \
+    reviewer_name:text! \
+    reviewer_role:string! \
+    reviewed_at:date \
+    care_setting:string! \
+    review_type:string! \
+    months_since_last_review:double \
+    patient_identifier:string! \
+    age_band:string! \
+    sex:string! \
+    epilepsy_type:string! \
+    age_at_onset:double \
+    years_since_diagnosis:double \
+    learning_disability:string! \
+    seizure_types:text! \
+    seizure_frequency:string! \
+    last_seizure_date:date \
+    seizure_free_months:double \
+    seizure_trend:string! \
+    current_asms:text! \
+    asm_adherence:string! \
+    asm_side_effects:string! \
+    drug_level:double \
+    triggers:text! \
+    sudep_discussed:string! \
+    status_epilepticus:string! \
+    seizure_injury:string! \
+    dvla_eligible:string! \
+    currently_driving:string! \
+    bathing_advice_given:string! \
+    woman_of_childbearing_potential:string! \
+    on_valproate:string! \
+    pregnancy_prevention_programme:string! \
+    folic_acid:string! \
+    contraception_interaction_reviewed:string! \
+    mental_health_concern:string! \
+    specialist_review_needed:string! \
+    next_review_due:date \
+    care_plan:text! \
+    review_context:text! \
+    --api
+
+cargo loco generate scaffold epilepsy_review_grade \
+    deleted_at:tstz \
+    epilepsy_review:references \
+    seizure_control:string! \
+    review_status:string! \
+    completeness_score:int \
+    graded_at:tstz! \
+    --api
+
+cargo loco generate scaffold epilepsy_review_grade_rule \
+    deleted_at:tstz \
+    epilepsy_review_grade:references \
+    rule_id:string! \
+    section:string! \
+    category:string! \
+    description:string! \
+    --api
+
+cargo loco generate scaffold epilepsy_review_grade_flag \
+    deleted_at:tstz \
+    epilepsy_review_grade:references \
+    flag_id:string! \
+    category:string! \
+    priority:string! \
+    description:string! \
+    suggested_action:string! \
+    --api

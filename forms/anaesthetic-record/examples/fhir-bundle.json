@@ -1,0 +1,1857 @@
+{
+  "resourceType": "Bundle",
+  "id": "550e8400-e29b-41d4-a716-000000000063",
+  "type": "document",
+  "timestamp": "2026-04-09T10:00:00+00:00",
+  "meta": {
+    "profile": [
+      "http://hl7.org/fhir/StructureDefinition/Bundle"
+    ],
+    "tag": [
+      {
+        "system": "https://github.com/joelparkerhenderson/form-examples",
+        "code": "example",
+        "display": "Anaesthetic Record example bundle"
+      }
+    ]
+  },
+  "entry": [
+    {
+      "fullUrl": "urn:uuid:770e8400-e29b-41d4-a716-446655440002",
+      "resource": {
+        "resourceType": "Observation",
+        "id": "770e8400-e29b-41d4-a716-446655440002",
+        "meta": {
+          "profile": [
+            "http://hl7.org/fhir/StructureDefinition/Observation"
+          ],
+          "lastUpdated": "2026-04-09T10:00:00+00:00"
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "survey",
+                "display": "Survey"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "urn:form-examples:anaesthetic-record",
+              "code": "anaesthetic_record",
+              "display": "Anaesthetic Record"
+            }
+          ]
+        },
+        "subject": {
+          "reference": "Patient/550e8400-e29b-41d4-a716-446655440000"
+        },
+        "encounter": {
+          "reference": "Encounter/ee0e8400-e29b-41d4-a716-446655440009"
+        },
+        "effectiveDateTime": "2026-04-09T10:00:00+00:00",
+        "component": [
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:anaesthetic-record",
+                  "code": "deleted_at",
+                  "display": "Deleted At"
+                }
+              ]
+            },
+            "valueDateTime": "2026-04-09T10:00:00+00:00"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:anaesthetic-record",
+                  "code": "theatre",
+                  "display": "Theatre"
+                }
+              ]
+            },
+            "valueString": ""
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:anaesthetic-record",
+                  "code": "operation_date",
+                  "display": "Operation Date"
+                }
+              ]
+            },
+            "valueDateTime": "2026-01-15"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:anaesthetic-record",
+                  "code": "anaesthetist_name",
+                  "display": "Anaesthetist Name"
+                }
+              ]
+            },
+            "valueString": "Example"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:anaesthetic-record",
+                  "code": "assistant_name",
+                  "display": "Assistant Name"
+                }
+              ]
+            },
+            "valueString": "Example"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:anaesthetic-record",
+                  "code": "surgeon_name",
+                  "display": "Surgeon Name"
+                }
+              ]
+            },
+            "valueString": "Example"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:anaesthetic-record",
+                  "code": "planned_procedure",
+                  "display": "Planned Procedure"
+                }
+              ]
+            },
+            "valueString": "Example text."
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:anaesthetic-record",
+                  "code": "urgency",
+                  "display": "Urgency"
+                }
+              ]
+            },
+            "valueCodeableConcept": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:anaesthetic-record:urgency",
+                  "code": "elective",
+                  "display": "Elective"
+                }
+              ]
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:anaesthetic-record",
+                  "code": "machine_checked",
+                  "display": "Machine Checked"
+                }
+              ]
+            },
+            "valueCodeableConcept": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:anaesthetic-record:machine_checked",
+                  "code": "yes",
+                  "display": "Yes"
+                }
+              ]
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:anaesthetic-record",
+                  "code": "who_sign_in",
+                  "display": "Who Sign In"
+                }
+              ]
+            },
+            "valueCodeableConcept": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:anaesthetic-record:who_sign_in",
+                  "code": "yes",
+                  "display": "Yes"
+                }
+              ]
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:anaesthetic-record",
+                  "code": "who_time_out",
+                  "display": "Who Time Out"
+                }
+              ]
+            },
+            "valueCodeableConcept": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:anaesthetic-record:who_time_out",
+                  "code": "yes",
+                  "display": "Yes"
+                }
+              ]
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:anaesthetic-record",
+                  "code": "consent_confirmed",
+                  "display": "Consent Confirmed"
+                }
+              ]
+            },
+            "valueCodeableConcept": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:anaesthetic-record:consent_confirmed",
+                  "code": "yes",
+                  "display": "Yes"
+                }
+              ]
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:anaesthetic-record",
+                  "code": "fasting_confirmed",
+                  "display": "Fasting Confirmed"
+                }
+              ]
+            },
+            "valueCodeableConcept": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:anaesthetic-record:fasting_confirmed",
+                  "code": "yes",
+                  "display": "Yes"
+                }
+              ]
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:anaesthetic-record",
+                  "code": "iv_access",
+                  "display": "Iv Access"
+                }
+              ]
+            },
+            "valueString": ""
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:anaesthetic-record",
+                  "code": "allergy_band_checked",
+                  "display": "Allergy Band Checked"
+                }
+              ]
+            },
+            "valueCodeableConcept": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:anaesthetic-record:allergy_band_checked",
+                  "code": "yes",
+                  "display": "Yes"
+                }
+              ]
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:anaesthetic-record",
+                  "code": "documented_allergies",
+                  "display": "Documented Allergies"
+                }
+              ]
+            },
+            "valueString": ""
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:anaesthetic-record",
+                  "code": "asa_status",
+                  "display": "Asa Status"
+                }
+              ]
+            },
+            "valueCodeableConcept": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:anaesthetic-record:asa_status",
+                  "code": "I",
+                  "display": "I"
+                }
+              ]
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:anaesthetic-record",
+                  "code": "asa_emergency_modifier",
+                  "display": "Asa Emergency Modifier"
+                }
+              ]
+            },
+            "valueCodeableConcept": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:anaesthetic-record:asa_emergency_modifier",
+                  "code": "yes",
+                  "display": "Yes"
+                }
+              ]
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:anaesthetic-record",
+                  "code": "mallampati_class",
+                  "display": "Mallampati Class"
+                }
+              ]
+            },
+            "valueInteger": 1
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:anaesthetic-record",
+                  "code": "mouth_opening_cm",
+                  "display": "Mouth Opening Cm"
+                }
+              ]
+            },
+            "valueQuantity": {
+              "value": 0.0
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:anaesthetic-record",
+                  "code": "thyromental_distance_cm",
+                  "display": "Thyromental Distance Cm"
+                }
+              ]
+            },
+            "valueQuantity": {
+              "value": 0.0
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:anaesthetic-record",
+                  "code": "dentition",
+                  "display": "Dentition"
+                }
+              ]
+            },
+            "valueString": ""
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:anaesthetic-record",
+                  "code": "anticipated_difficult_airway",
+                  "display": "Anticipated Difficult Airway"
+                }
+              ]
+            },
+            "valueCodeableConcept": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:anaesthetic-record:anticipated_difficult_airway",
+                  "code": "yes",
+                  "display": "Yes"
+                }
+              ]
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:anaesthetic-record",
+                  "code": "prior_difficult_intubation",
+                  "display": "Prior Difficult Intubation"
+                }
+              ]
+            },
+            "valueCodeableConcept": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:anaesthetic-record:prior_difficult_intubation",
+                  "code": "yes",
+                  "display": "Yes"
+                }
+              ]
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:anaesthetic-record",
+                  "code": "airway_technique",
+                  "display": "Airway Technique"
+                }
+              ]
+            },
+            "valueCodeableConcept": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:anaesthetic-record:airway_technique",
+                  "code": "facemask",
+                  "display": "Facemask"
+                }
+              ]
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:anaesthetic-record",
+                  "code": "device_size",
+                  "display": "Device Size"
+                }
+              ]
+            },
+            "valueString": ""
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:anaesthetic-record",
+                  "code": "tube_depth_cm",
+                  "display": "Tube Depth Cm"
+                }
+              ]
+            },
+            "valueQuantity": {
+              "value": 0.0
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:anaesthetic-record",
+                  "code": "cuffed",
+                  "display": "Cuffed"
+                }
+              ]
+            },
+            "valueCodeableConcept": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:anaesthetic-record:cuffed",
+                  "code": "yes",
+                  "display": "Yes"
+                }
+              ]
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:anaesthetic-record",
+                  "code": "cormack_lehane_grade",
+                  "display": "Cormack Lehane Grade"
+                }
+              ]
+            },
+            "valueInteger": 1
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:anaesthetic-record",
+                  "code": "intubation_attempts",
+                  "display": "Intubation Attempts"
+                }
+              ]
+            },
+            "valueInteger": 1
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:anaesthetic-record",
+                  "code": "capnography_confirmed",
+                  "display": "Capnography Confirmed"
+                }
+              ]
+            },
+            "valueCodeableConcept": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:anaesthetic-record:capnography_confirmed",
+                  "code": "yes",
+                  "display": "Yes"
+                }
+              ]
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:anaesthetic-record",
+                  "code": "monitoring_modalities",
+                  "display": "Monitoring Modalities"
+                }
+              ]
+            },
+            "valueString": ""
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:anaesthetic-record",
+                  "code": "anaesthetic_technique",
+                  "display": "Anaesthetic Technique"
+                }
+              ]
+            },
+            "valueCodeableConcept": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:anaesthetic-record:anaesthetic_technique",
+                  "code": "general",
+                  "display": "General"
+                }
+              ]
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:anaesthetic-record",
+                  "code": "crystalloid_ml",
+                  "display": "Crystalloid Ml"
+                }
+              ]
+            },
+            "valueQuantity": {
+              "value": 0.0
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:anaesthetic-record",
+                  "code": "colloid_ml",
+                  "display": "Colloid Ml"
+                }
+              ]
+            },
+            "valueQuantity": {
+              "value": 0.0
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:anaesthetic-record",
+                  "code": "blood_products_ml",
+                  "display": "Blood Products Ml"
+                }
+              ]
+            },
+            "valueQuantity": {
+              "value": 0.0
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:anaesthetic-record",
+                  "code": "estimated_blood_loss_ml",
+                  "display": "Estimated Blood Loss Ml"
+                }
+              ]
+            },
+            "valueQuantity": {
+              "value": 0.0
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:anaesthetic-record",
+                  "code": "urine_output_ml",
+                  "display": "Urine Output Ml"
+                }
+              ]
+            },
+            "valueQuantity": {
+              "value": 0.0
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:anaesthetic-record",
+                  "code": "cell_salvage_ml",
+                  "display": "Cell Salvage Ml"
+                }
+              ]
+            },
+            "valueQuantity": {
+              "value": 0.0
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:anaesthetic-record",
+                  "code": "regional_technique",
+                  "display": "Regional Technique"
+                }
+              ]
+            },
+            "valueCodeableConcept": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:anaesthetic-record:regional_technique",
+                  "code": "none",
+                  "display": "None"
+                }
+              ]
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:anaesthetic-record",
+                  "code": "regional_level",
+                  "display": "Regional Level"
+                }
+              ]
+            },
+            "valueString": ""
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:anaesthetic-record",
+                  "code": "regional_drug",
+                  "display": "Regional Drug"
+                }
+              ]
+            },
+            "valueString": "Paracetamol"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:anaesthetic-record",
+                  "code": "regional_dose_mg",
+                  "display": "Regional Dose Mg"
+                }
+              ]
+            },
+            "valueQuantity": {
+              "value": 0.0
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:anaesthetic-record",
+                  "code": "block_height",
+                  "display": "Block Height"
+                }
+              ]
+            },
+            "valueString": ""
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:anaesthetic-record",
+                  "code": "regional_complications",
+                  "display": "Regional Complications"
+                }
+              ]
+            },
+            "valueString": ""
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:anaesthetic-record",
+                  "code": "recovery_destination",
+                  "display": "Recovery Destination"
+                }
+              ]
+            },
+            "valueCodeableConcept": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:anaesthetic-record:recovery_destination",
+                  "code": "recovery",
+                  "display": "Recovery"
+                }
+              ]
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:anaesthetic-record",
+                  "code": "handover_airway_status",
+                  "display": "Handover Airway Status"
+                }
+              ]
+            },
+            "valueString": "active"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:anaesthetic-record",
+                  "code": "analgesia_plan",
+                  "display": "Analgesia Plan"
+                }
+              ]
+            },
+            "valueString": "Example text."
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:anaesthetic-record",
+                  "code": "antiemetic_plan",
+                  "display": "Antiemetic Plan"
+                }
+              ]
+            },
+            "valueString": "Example text."
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:anaesthetic-record",
+                  "code": "oxygen_plan",
+                  "display": "Oxygen Plan"
+                }
+              ]
+            },
+            "valueString": "Example text."
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:anaesthetic-record",
+                  "code": "outstanding_tasks",
+                  "display": "Outstanding Tasks"
+                }
+              ]
+            },
+            "valueString": ""
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:anaesthetic-record",
+                  "code": "handover_at",
+                  "display": "Handover At"
+                }
+              ]
+            },
+            "valueDateTime": "2026-04-09T10:00:00+00:00"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:anaesthetic-record",
+                  "code": "receiving_practitioner",
+                  "display": "Receiving Practitioner"
+                }
+              ]
+            },
+            "valueString": ""
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:anaesthetic-record",
+                  "code": "anaesthetist_signature",
+                  "display": "Anaesthetist Signature"
+                }
+              ]
+            },
+            "valueString": ""
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:anaesthetic-record",
+                  "code": "signed_at",
+                  "display": "Signed At"
+                }
+              ]
+            },
+            "valueDateTime": "2026-04-09T10:00:00+00:00"
+          }
+        ]
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:880e8400-e29b-41d4-a716-446655440003",
+      "resource": {
+        "resourceType": "Observation",
+        "id": "880e8400-e29b-41d4-a716-446655440003",
+        "meta": {
+          "profile": [
+            "http://hl7.org/fhir/StructureDefinition/Observation"
+          ],
+          "lastUpdated": "2026-04-09T10:00:00+00:00"
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "survey",
+                "display": "Survey"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "urn:form-examples:anaesthetic-record",
+              "code": "anaesthetic_record_drug_administration",
+              "display": "Anaesthetic Record Drug Administration"
+            }
+          ]
+        },
+        "subject": {
+          "reference": "Patient/550e8400-e29b-41d4-a716-446655440000"
+        },
+        "encounter": {
+          "reference": "Encounter/ee0e8400-e29b-41d4-a716-446655440009"
+        },
+        "effectiveDateTime": "2026-04-09T10:00:00+00:00",
+        "component": [
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:anaesthetic-record",
+                  "code": "deleted_at",
+                  "display": "Deleted At"
+                }
+              ]
+            },
+            "valueDateTime": "2026-04-09T10:00:00+00:00"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:anaesthetic-record",
+                  "code": "drug_name",
+                  "display": "Drug Name"
+                }
+              ]
+            },
+            "valueString": "Example"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:anaesthetic-record",
+                  "code": "dose",
+                  "display": "Dose"
+                }
+              ]
+            },
+            "valueQuantity": {
+              "value": 0.0
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:anaesthetic-record",
+                  "code": "dose_unit",
+                  "display": "Dose Unit"
+                }
+              ]
+            },
+            "valueCodeableConcept": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:anaesthetic-record:dose_unit",
+                  "code": "mg",
+                  "display": "Mg"
+                }
+              ]
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:anaesthetic-record",
+                  "code": "route",
+                  "display": "Route"
+                }
+              ]
+            },
+            "valueCodeableConcept": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:anaesthetic-record:route",
+                  "code": "iv",
+                  "display": "Iv"
+                }
+              ]
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:anaesthetic-record",
+                  "code": "category",
+                  "display": "Category"
+                }
+              ]
+            },
+            "valueCodeableConcept": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:anaesthetic-record:category",
+                  "code": "induction",
+                  "display": "Induction"
+                }
+              ]
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:anaesthetic-record",
+                  "code": "administered_at",
+                  "display": "Administered At"
+                }
+              ]
+            },
+            "valueDateTime": "2026-04-09T10:00:00+00:00"
+          }
+        ]
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:bb0e8400-e29b-41d4-a716-446655440006",
+      "resource": {
+        "resourceType": "Observation",
+        "id": "bb0e8400-e29b-41d4-a716-446655440006",
+        "meta": {
+          "profile": [
+            "http://hl7.org/fhir/StructureDefinition/Observation"
+          ],
+          "lastUpdated": "2026-04-09T10:00:00+00:00"
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "survey",
+                "display": "Survey"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "urn:form-examples:anaesthetic-record",
+              "code": "anaesthetic_record_grade",
+              "display": "Anaesthetic Record Grade"
+            }
+          ]
+        },
+        "subject": {
+          "reference": "Patient/550e8400-e29b-41d4-a716-446655440000"
+        },
+        "encounter": {
+          "reference": "Encounter/ee0e8400-e29b-41d4-a716-446655440009"
+        },
+        "effectiveDateTime": "2026-04-09T10:00:00+00:00",
+        "component": [
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:anaesthetic-record",
+                  "code": "deleted_at",
+                  "display": "Deleted At"
+                }
+              ]
+            },
+            "valueDateTime": "2026-04-09T10:00:00+00:00"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:anaesthetic-record",
+                  "code": "status",
+                  "display": "Status"
+                }
+              ]
+            },
+            "valueCodeableConcept": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:anaesthetic-record:status",
+                  "code": "complete",
+                  "display": "Complete"
+                }
+              ]
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:anaesthetic-record",
+                  "code": "completeness_percent",
+                  "display": "Completeness Percent"
+                }
+              ]
+            },
+            "valueInteger": 1
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:anaesthetic-record",
+                  "code": "graded_at",
+                  "display": "Graded At"
+                }
+              ]
+            },
+            "valueDateTime": "2026-04-09T10:00:00+00:00"
+          }
+        ]
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:dd0e8400-e29b-41d4-a716-446655440008",
+      "resource": {
+        "resourceType": "Observation",
+        "id": "dd0e8400-e29b-41d4-a716-446655440008",
+        "meta": {
+          "profile": [
+            "http://hl7.org/fhir/StructureDefinition/Observation"
+          ],
+          "lastUpdated": "2026-04-09T10:00:00+00:00"
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "survey",
+                "display": "Survey"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "urn:form-examples:anaesthetic-record",
+              "code": "anaesthetic_record_grade_flag",
+              "display": "Anaesthetic Record Grade Flag"
+            }
+          ]
+        },
+        "subject": {
+          "reference": "Patient/550e8400-e29b-41d4-a716-446655440000"
+        },
+        "encounter": {
+          "reference": "Encounter/ee0e8400-e29b-41d4-a716-446655440009"
+        },
+        "effectiveDateTime": "2026-04-09T10:00:00+00:00",
+        "component": [
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:anaesthetic-record",
+                  "code": "deleted_at",
+                  "display": "Deleted At"
+                }
+              ]
+            },
+            "valueDateTime": "2026-04-09T10:00:00+00:00"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:anaesthetic-record",
+                  "code": "category",
+                  "display": "Category"
+                }
+              ]
+            },
+            "valueCodeableConcept": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:anaesthetic-record:category",
+                  "code": "who-checklist-not-done",
+                  "display": "Who-Checklist-Not-Done"
+                }
+              ]
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:anaesthetic-record",
+                  "code": "priority",
+                  "display": "Priority"
+                }
+              ]
+            },
+            "valueCodeableConcept": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:anaesthetic-record:priority",
+                  "code": "low",
+                  "display": "Low"
+                }
+              ]
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:anaesthetic-record",
+                  "code": "description",
+                  "display": "Description"
+                }
+              ]
+            },
+            "valueString": "Example text."
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:anaesthetic-record",
+                  "code": "suggested_action",
+                  "display": "Suggested Action"
+                }
+              ]
+            },
+            "valueString": ""
+          }
+        ]
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:cc0e8400-e29b-41d4-a716-446655440007",
+      "resource": {
+        "resourceType": "Observation",
+        "id": "cc0e8400-e29b-41d4-a716-446655440007",
+        "meta": {
+          "profile": [
+            "http://hl7.org/fhir/StructureDefinition/Observation"
+          ],
+          "lastUpdated": "2026-04-09T10:00:00+00:00"
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "survey",
+                "display": "Survey"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "urn:form-examples:anaesthetic-record",
+              "code": "anaesthetic_record_grade_rule",
+              "display": "Anaesthetic Record Grade Rule"
+            }
+          ]
+        },
+        "subject": {
+          "reference": "Patient/550e8400-e29b-41d4-a716-446655440000"
+        },
+        "encounter": {
+          "reference": "Encounter/ee0e8400-e29b-41d4-a716-446655440009"
+        },
+        "effectiveDateTime": "2026-04-09T10:00:00+00:00",
+        "component": [
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:anaesthetic-record",
+                  "code": "deleted_at",
+                  "display": "Deleted At"
+                }
+              ]
+            },
+            "valueDateTime": "2026-04-09T10:00:00+00:00"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:anaesthetic-record",
+                  "code": "category",
+                  "display": "Category"
+                }
+              ]
+            },
+            "valueString": "General"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:anaesthetic-record",
+                  "code": "criticality",
+                  "display": "Criticality"
+                }
+              ]
+            },
+            "valueCodeableConcept": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:anaesthetic-record:criticality",
+                  "code": "critical",
+                  "display": "Critical"
+                }
+              ]
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:anaesthetic-record",
+                  "code": "satisfied",
+                  "display": "Satisfied"
+                }
+              ]
+            },
+            "valueBoolean": true
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:anaesthetic-record",
+                  "code": "description",
+                  "display": "Description"
+                }
+              ]
+            },
+            "valueString": "Example text."
+          }
+        ]
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:aa0e8400-e29b-41d4-a716-446655440005",
+      "resource": {
+        "resourceType": "Observation",
+        "id": "aa0e8400-e29b-41d4-a716-446655440005",
+        "meta": {
+          "profile": [
+            "http://hl7.org/fhir/StructureDefinition/Observation"
+          ],
+          "lastUpdated": "2026-04-09T10:00:00+00:00"
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "survey",
+                "display": "Survey"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "urn:form-examples:anaesthetic-record",
+              "code": "anaesthetic_record_intra_operative_event",
+              "display": "Anaesthetic Record Intra Operative Event"
+            }
+          ]
+        },
+        "subject": {
+          "reference": "Patient/550e8400-e29b-41d4-a716-446655440000"
+        },
+        "encounter": {
+          "reference": "Encounter/ee0e8400-e29b-41d4-a716-446655440009"
+        },
+        "effectiveDateTime": "2026-04-09T10:00:00+00:00",
+        "component": [
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:anaesthetic-record",
+                  "code": "deleted_at",
+                  "display": "Deleted At"
+                }
+              ]
+            },
+            "valueDateTime": "2026-04-09T10:00:00+00:00"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:anaesthetic-record",
+                  "code": "event_type",
+                  "display": "Event Type"
+                }
+              ]
+            },
+            "valueCodeableConcept": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:anaesthetic-record:event_type",
+                  "code": "desaturation",
+                  "display": "Desaturation"
+                }
+              ]
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:anaesthetic-record",
+                  "code": "occurred_at",
+                  "display": "Occurred At"
+                }
+              ]
+            },
+            "valueDateTime": "2026-04-09T10:00:00+00:00"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:anaesthetic-record",
+                  "code": "management",
+                  "display": "Management"
+                }
+              ]
+            },
+            "valueString": ""
+          }
+        ]
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:990e8400-e29b-41d4-a716-446655440004",
+      "resource": {
+        "resourceType": "Observation",
+        "id": "990e8400-e29b-41d4-a716-446655440004",
+        "meta": {
+          "profile": [
+            "http://hl7.org/fhir/StructureDefinition/Observation"
+          ],
+          "lastUpdated": "2026-04-09T10:00:00+00:00"
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "survey",
+                "display": "Survey"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "urn:form-examples:anaesthetic-record",
+              "code": "anaesthetic_record_timed_observation",
+              "display": "Anaesthetic Record Timed Observation"
+            }
+          ]
+        },
+        "subject": {
+          "reference": "Patient/550e8400-e29b-41d4-a716-446655440000"
+        },
+        "encounter": {
+          "reference": "Encounter/ee0e8400-e29b-41d4-a716-446655440009"
+        },
+        "effectiveDateTime": "2026-04-09T10:00:00+00:00",
+        "component": [
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:anaesthetic-record",
+                  "code": "deleted_at",
+                  "display": "Deleted At"
+                }
+              ]
+            },
+            "valueDateTime": "2026-04-09T10:00:00+00:00"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:anaesthetic-record",
+                  "code": "observed_at",
+                  "display": "Observed At"
+                }
+              ]
+            },
+            "valueDateTime": "2026-04-09T10:00:00+00:00"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:anaesthetic-record",
+                  "code": "systolic_blood_pressure",
+                  "display": "Systolic Blood Pressure"
+                }
+              ]
+            },
+            "valueQuantity": {
+              "value": 120.0
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:anaesthetic-record",
+                  "code": "diastolic_blood_pressure",
+                  "display": "Diastolic Blood Pressure"
+                }
+              ]
+            },
+            "valueQuantity": {
+              "value": 120.0
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:anaesthetic-record",
+                  "code": "heart_rate",
+                  "display": "Heart Rate"
+                }
+              ]
+            },
+            "valueQuantity": {
+              "value": 72.0
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:anaesthetic-record",
+                  "code": "spo2",
+                  "display": "Spo2"
+                }
+              ]
+            },
+            "valueQuantity": {
+              "value": 0.0
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:anaesthetic-record",
+                  "code": "end_tidal_co2",
+                  "display": "End Tidal Co2"
+                }
+              ]
+            },
+            "valueQuantity": {
+              "value": 0.0
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:anaesthetic-record",
+                  "code": "temperature",
+                  "display": "Temperature"
+                }
+              ]
+            },
+            "valueQuantity": {
+              "value": 0.0
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:anaesthetic-record",
+                  "code": "agent_percent",
+                  "display": "Agent Percent"
+                }
+              ]
+            },
+            "valueQuantity": {
+              "value": 0.0
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:anaesthetic-record",
+                  "code": "fresh_gas_flow_l",
+                  "display": "Fresh Gas Flow L"
+                }
+              ]
+            },
+            "valueQuantity": {
+              "value": 0.0
+            }
+          }
+        ]
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:660e8400-e29b-41d4-a716-446655440001",
+      "resource": {
+        "resourceType": "Observation",
+        "id": "660e8400-e29b-41d4-a716-446655440001",
+        "meta": {
+          "profile": [
+            "http://hl7.org/fhir/StructureDefinition/Observation"
+          ],
+          "lastUpdated": "2026-04-09T10:00:00+00:00"
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "survey",
+                "display": "Survey"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "urn:form-examples:anaesthetic-record",
+              "code": "clinician",
+              "display": "Clinician"
+            }
+          ]
+        },
+        "subject": {
+          "reference": "Patient/550e8400-e29b-41d4-a716-446655440000"
+        },
+        "encounter": {
+          "reference": "Encounter/ee0e8400-e29b-41d4-a716-446655440009"
+        },
+        "effectiveDateTime": "2026-04-09T10:00:00+00:00",
+        "component": [
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:anaesthetic-record",
+                  "code": "deleted_at",
+                  "display": "Deleted At"
+                }
+              ]
+            },
+            "valueDateTime": "2026-04-09T10:00:00+00:00"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:anaesthetic-record",
+                  "code": "name",
+                  "display": "Name"
+                }
+              ]
+            },
+            "valueString": "Example"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:anaesthetic-record",
+                  "code": "email",
+                  "display": "Email"
+                }
+              ]
+            },
+            "valueString": "jane.doe@example.com"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:anaesthetic-record",
+                  "code": "phone",
+                  "display": "Phone"
+                }
+              ]
+            },
+            "valueString": "07700900000"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:anaesthetic-record",
+                  "code": "postal_address_as_full_text",
+                  "display": "Postal Address As Full Text"
+                }
+              ]
+            },
+            "valueString": "Example text."
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:anaesthetic-record",
+                  "code": "country_as_iso_3166_1_alpha_2",
+                  "display": "Country As Iso 3166 1 Alpha 2"
+                }
+              ]
+            },
+            "valueString": ""
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:anaesthetic-record",
+                  "code": "postcode",
+                  "display": "Postcode"
+                }
+              ]
+            },
+            "valueString": "SW1A 1AA"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:anaesthetic-record",
+                  "code": "role",
+                  "display": "Role"
+                }
+              ]
+            },
+            "valueCodeableConcept": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:anaesthetic-record:role",
+                  "code": "consultant-anaesthetist",
+                  "display": "Consultant-Anaesthetist"
+                }
+              ]
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:anaesthetic-record",
+                  "code": "registration_body",
+                  "display": "Registration Body"
+                }
+              ]
+            },
+            "valueCodeableConcept": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:anaesthetic-record:registration_body",
+                  "code": "GMC",
+                  "display": "Gmc"
+                }
+              ]
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:anaesthetic-record",
+                  "code": "registration_number",
+                  "display": "Registration Number"
+                }
+              ]
+            },
+            "valueString": ""
+          }
+        ]
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:550e8400-e29b-41d4-a716-446655440000",
+      "resource": {
+        "resourceType": "Patient",
+        "id": "550e8400-e29b-41d4-a716-446655440000",
+        "meta": {
+          "profile": [
+            "http://hl7.org/fhir/StructureDefinition/Patient"
+          ],
+          "lastUpdated": "2026-04-09T10:00:00+00:00"
+        },
+        "name": [
+          {
+            "use": "official",
+            "family": "Doe",
+            "given": [
+              "Jane"
+            ]
+          }
+        ],
+        "birthDate": "1965-06-15",
+        "gender": "female",
+        "telecom": [
+          {
+            "system": "email",
+            "value": "jane.doe@example.com"
+          },
+          {
+            "system": "phone",
+            "value": "07700900000"
+          }
+        ],
+        "address": [
+          {
+            "postalCode": "SW1A 1AA"
+          }
+        ]
+      }
+    }
+  ]
+}

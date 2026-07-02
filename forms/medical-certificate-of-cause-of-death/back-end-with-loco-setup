@@ -14,3 +14,96 @@ cd "${form_snake_case}"
 # Pin time to a version compatible with cookie 0.18.1 (a fresh loco
 # starter otherwise resolves time 0.3.52, which fails to compile).
 cargo update -p time --precise 0.3.47
+
+cargo loco generate scaffold patient \
+    deleted_at:tstz \
+    name:string! \
+    birth_date:date! \
+    sex:string! \
+    email:text \
+    phone:text \
+    postal_address_as_full_text:text \
+    country_as_iso_3166_1_alpha_2:string \
+    postcode:text \
+    united_kingdom_nhs_number:string^ \
+    hospital_mrn:string \
+    height_as_cm:double \
+    weight_as_kg:double \
+    body_mass_index:double \
+    allergies_summary:text! \
+    --api
+
+cargo loco generate scaffold clinician \
+    deleted_at:tstz \
+    name:text! \
+    email:text \
+    phone:text \
+    postal_address_as_full_text:text \
+    country_as_iso_3166_1_alpha_2:string \
+    postcode:text \
+    role:string! \
+    registration_body:string! \
+    registration_number:text! \
+    --api
+
+cargo loco generate scaffold medical_certificate_of_cause_of_death \
+    deleted_at:tstz \
+    patient:references \
+    clinician:references \
+    certifying_doctor_name:text! \
+    certifying_doctor_grade:string! \
+    gmc_reference:string! \
+    place_of_certification:text! \
+    certification_date:date \
+    attended_deceased:string! \
+    last_seen_alive_date:date \
+    deceased_name:text! \
+    sex:string! \
+    date_of_birth:date \
+    age_years:int \
+    patient_identifier:string! \
+    date_of_death:date \
+    time_of_death:string \
+    place_of_death:text! \
+    seen_after_death_by:string! \
+    cause_ia_condition:text! \
+    cause_ia_interval:text! \
+    cause_ib_condition:text! \
+    cause_ib_interval:text! \
+    cause_ic_condition:text! \
+    cause_ic_interval:text! \
+    part_ii_conditions:text! \
+    part_ii_interval:text! \
+    referred_to_coroner:string! \
+    coroner_reason:string! \
+    medical_examiner_status:string! \
+    certifier_note:text! \
+    --api
+
+cargo loco generate scaffold medical_certificate_of_cause_of_death_grade \
+    deleted_at:tstz \
+    medical_certificate_of_cause_of_death:references \
+    validity_class:string! \
+    underlying_cause:text! \
+    coroner_referral_indicated:string! \
+    graded_at:tstz! \
+    --api
+
+cargo loco generate scaffold medical_certificate_of_cause_of_death_grade_rule \
+    deleted_at:tstz \
+    medical_certificate_of_cause_of_death_grade:references \
+    rule_id:string! \
+    dimension:string! \
+    category:string! \
+    description:string! \
+    --api
+
+cargo loco generate scaffold medical_certificate_of_cause_of_death_grade_flag \
+    deleted_at:tstz \
+    medical_certificate_of_cause_of_death_grade:references \
+    flag_id:string! \
+    category:string! \
+    priority:string! \
+    description:string! \
+    suggested_action:string! \
+    --api

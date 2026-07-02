@@ -14,3 +14,103 @@ cd "${form_snake_case}"
 # Pin time to a version compatible with cookie 0.18.1 (a fresh loco
 # starter otherwise resolves time 0.3.52, which fails to compile).
 cargo update -p time --precise 0.3.47
+
+cargo loco generate scaffold patient \
+    deleted_at:tstz \
+    name:string! \
+    birth_date:date! \
+    sex:string! \
+    email:text \
+    phone:text \
+    postal_address_as_full_text:text \
+    country_as_iso_3166_1_alpha_2:string \
+    postcode:text \
+    united_kingdom_nhs_number:string^ \
+    hospital_mrn:string \
+    height_as_cm:double \
+    weight_as_kg:double \
+    body_mass_index:double \
+    allergies_summary:text! \
+    --api
+
+cargo loco generate scaffold clinician \
+    deleted_at:tstz \
+    name:text! \
+    email:text \
+    phone:text \
+    postal_address_as_full_text:text \
+    country_as_iso_3166_1_alpha_2:string \
+    postcode:text \
+    role:string! \
+    registration_body:string! \
+    registration_number:text! \
+    --api
+
+cargo loco generate scaffold ward_round_note \
+    deleted_at:tstz \
+    patient:references \
+    clinician:references \
+    clinician_name:text! \
+    clinician_grade:string! \
+    reviewed_at:tstz \
+    ward:text! \
+    patient_identifier:string! \
+    admission_date:date \
+    primary_diagnosis:text! \
+    overnight_events:text! \
+    no_overnight_events:string! \
+    problem_list:text! \
+    examination_summary:text! \
+    news2_total:int \
+    news2_single_param_three:string! \
+    observation_trend:string! \
+    investigations_reviewed:text! \
+    no_investigations_outstanding:string! \
+    abnormal_result_flagged:string! \
+    abnormal_result_actioned:string! \
+    vte_status:string! \
+    vte_prophylaxis_in_place:string! \
+    medication_changes:text! \
+    no_medication_changes:string! \
+    plan_and_jobs:text! \
+    escalation_status:string! \
+    senior_review_present:string! \
+    estimated_discharge_date:date \
+    discharge_not_estimable:string! \
+    clinical_note:text! \
+    --api
+
+cargo loco generate scaffold ward_round_note_grade \
+    deleted_at:tstz \
+    ward_round_note:references \
+    status:string! \
+    completeness_percent:int \
+    header_documented:string! \
+    problems_documented:string! \
+    examination_documented:string! \
+    investigations_documented:string! \
+    vte_documented:string! \
+    medication_documented:string! \
+    plan_documented:string! \
+    escalation_documented:string! \
+    graded_at:tstz! \
+    --api
+
+cargo loco generate scaffold ward_round_note_grade_rule \
+    deleted_at:tstz \
+    ward_round_note_grade:references \
+    rule_id:string! \
+    component:string! \
+    category:string! \
+    description:string! \
+    --api
+
+cargo loco generate scaffold ward_round_note_grade_flag \
+    deleted_at:tstz \
+    ward_round_note_grade:references \
+    flag_id:string! \
+    category:string! \
+    priority:string! \
+    description:string! \
+    suggested_action:string! \
+    --api

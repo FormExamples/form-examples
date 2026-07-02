@@ -14,3 +14,97 @@ cd "${form_snake_case}"
 # Pin time to a version compatible with cookie 0.18.1 (a fresh loco
 # starter otherwise resolves time 0.3.52, which fails to compile).
 cargo update -p time --precise 0.3.47
+
+cargo loco generate scaffold patient \
+    deleted_at:tstz \
+    name:string! \
+    birth_date:date! \
+    sex:string! \
+    email:text \
+    phone:text \
+    postal_address_as_full_text:text \
+    country_as_iso_3166_1_alpha_2:string \
+    postcode:text \
+    united_kingdom_nhs_number:string^ \
+    hospital_mrn:string \
+    height_as_cm:double \
+    weight_as_kg:double \
+    body_mass_index:double \
+    allergies_summary:text! \
+    --api
+
+cargo loco generate scaffold clinician \
+    deleted_at:tstz \
+    name:text! \
+    email:text \
+    phone:text \
+    postal_address_as_full_text:text \
+    country_as_iso_3166_1_alpha_2:string \
+    postcode:text \
+    role:string! \
+    registration_body:string! \
+    registration_number:text! \
+    --api
+
+cargo loco generate scaffold newborn_blood_spot_screening \
+    deleted_at:tstz \
+    patient:references \
+    clinician:references \
+    sample_taker_role:string! \
+    care_setting:string! \
+    record_date:date \
+    time_of_birth:string \
+    gestation_weeks:double \
+    previously_screened:string! \
+    consent_given:string! \
+    decline_reason:text! \
+    sample_date:date \
+    sample_time:string \
+    age_at_sample_days:int \
+    sampling_site:string! \
+    sample_notes:text! \
+    sample_adequacy:string! \
+    spot_quality_issue:string! \
+    is_repeat:string! \
+    repeat_reason:string! \
+    scd_result:string! \
+    cf_result:string! \
+    cht_result:string! \
+    pku_result:string! \
+    mcadd_result:string! \
+    msud_result:string! \
+    iva_result:string! \
+    ga1_result:string! \
+    hcu_result:string! \
+    clinical_context:text! \
+    --api
+
+cargo loco generate scaffold newborn_blood_spot_screening_grade \
+    deleted_at:tstz \
+    newborn_blood_spot_screening:references \
+    overall_outcome:string! \
+    referral_status:string! \
+    sample_adequate:bool \
+    within_window:bool \
+    avoidable_repeat:bool \
+    graded_at:tstz! \
+    --api
+
+cargo loco generate scaffold newborn_blood_spot_screening_grade_rule \
+    deleted_at:tstz \
+    newborn_blood_spot_screening_grade:references \
+    rule_id:string! \
+    stage:string! \
+    category:string! \
+    description:string! \
+    --api
+
+cargo loco generate scaffold newborn_blood_spot_screening_grade_flag \
+    deleted_at:tstz \
+    newborn_blood_spot_screening_grade:references \
+    flag_id:string! \
+    category:string! \
+    priority:string! \
+    description:string! \
+    suggested_action:string! \
+    --api

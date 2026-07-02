@@ -14,3 +14,89 @@ cd "${form_snake_case}"
 # Pin time to a version compatible with cookie 0.18.1 (a fresh loco
 # starter otherwise resolves time 0.3.52, which fails to compile).
 cargo update -p time --precise 0.3.47
+
+cargo loco generate scaffold patient \
+    deleted_at:tstz \
+    name:string! \
+    birth_date:date! \
+    sex:string! \
+    email:text \
+    phone:text \
+    postal_address_as_full_text:text \
+    country_as_iso_3166_1_alpha_2:string \
+    postcode:text \
+    united_kingdom_nhs_number:string^ \
+    hospital_mrn:string \
+    height_as_cm:double \
+    weight_as_kg:double \
+    body_mass_index:double \
+    allergies_summary:text! \
+    --api
+
+cargo loco generate scaffold clinician \
+    deleted_at:tstz \
+    name:text! \
+    email:text \
+    phone:text \
+    postal_address_as_full_text:text \
+    country_as_iso_3166_1_alpha_2:string \
+    postcode:text \
+    role:string! \
+    registration_body:string! \
+    registration_number:text! \
+    --api
+
+cargo loco generate scaffold pulmonary_embolism_rule_out_criteria \
+    deleted_at:tstz \
+    patient:references \
+    clinician:references \
+    status:string! \
+    patient_identifier:string! \
+    assessed_at:tstz \
+    care_setting:string! \
+    presenting_complaint:text! \
+    age:double \
+    heart_rate:double \
+    oxygen_saturation:double \
+    pretest_probability:string! \
+    age_under_50:string! \
+    heart_rate_under_100:string! \
+    spo2_at_least_95:string! \
+    no_unilateral_leg_swelling:string! \
+    no_haemoptysis:string! \
+    no_recent_surgery_trauma:string! \
+    no_prior_dvt_pe:string! \
+    no_oestrogen_use:string! \
+    clinical_notes:text! \
+    --api
+
+cargo loco generate scaffold pulmonary_embolism_rule_out_criteria_grade \
+    deleted_at:tstz \
+    pulmonary_embolism_rule_out_criteria:references \
+    classification:string! \
+    all_criteria_satisfied:string! \
+    applicable:string! \
+    recommended_pathway:text! \
+    graded_at:tstz! \
+    --api
+
+cargo loco generate scaffold pulmonary_embolism_rule_out_criteria_grade_rule \
+    deleted_at:tstz \
+    pulmonary_embolism_rule_out_criteria_grade:references \
+    rule_id:string! \
+    instrument:string! \
+    satisfied:string! \
+    outcome:string! \
+    category:string! \
+    description:string! \
+    --api
+
+cargo loco generate scaffold pulmonary_embolism_rule_out_criteria_grade_flag \
+    deleted_at:tstz \
+    pulmonary_embolism_rule_out_criteria_grade:references \
+    flag_id:string! \
+    category:string! \
+    priority:string! \
+    description:string! \
+    suggested_action:string! \
+    --api

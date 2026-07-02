@@ -1,0 +1,1110 @@
+{
+  "resourceType": "Bundle",
+  "id": "550e8400-e29b-41d4-a716-000000000063",
+  "type": "document",
+  "timestamp": "2026-04-09T10:00:00+00:00",
+  "meta": {
+    "profile": [
+      "http://hl7.org/fhir/StructureDefinition/Bundle"
+    ],
+    "tag": [
+      {
+        "system": "https://github.com/joelparkerhenderson/form-examples",
+        "code": "example",
+        "display": "Nerve Conduction Study Test Result example bundle"
+      }
+    ]
+  },
+  "entry": [
+    {
+      "fullUrl": "urn:uuid:660e8400-e29b-41d4-a716-446655440001",
+      "resource": {
+        "resourceType": "Observation",
+        "id": "660e8400-e29b-41d4-a716-446655440001",
+        "meta": {
+          "profile": [
+            "http://hl7.org/fhir/StructureDefinition/Observation"
+          ],
+          "lastUpdated": "2026-04-09T10:00:00+00:00"
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "survey",
+                "display": "Survey"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "urn:form-examples:nerve-conduction-study-test-result",
+              "code": "clinician",
+              "display": "Clinician"
+            }
+          ]
+        },
+        "subject": {
+          "reference": "Patient/550e8400-e29b-41d4-a716-446655440000"
+        },
+        "encounter": {
+          "reference": "Encounter/bb0e8400-e29b-41d4-a716-446655440006"
+        },
+        "effectiveDateTime": "2026-04-09T10:00:00+00:00",
+        "component": [
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:nerve-conduction-study-test-result",
+                  "code": "deleted_at",
+                  "display": "Deleted At"
+                }
+              ]
+            },
+            "valueDateTime": "2026-04-09T10:00:00+00:00"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:nerve-conduction-study-test-result",
+                  "code": "name",
+                  "display": "Name"
+                }
+              ]
+            },
+            "valueString": "Example"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:nerve-conduction-study-test-result",
+                  "code": "email",
+                  "display": "Email"
+                }
+              ]
+            },
+            "valueString": "jane.doe@example.com"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:nerve-conduction-study-test-result",
+                  "code": "phone",
+                  "display": "Phone"
+                }
+              ]
+            },
+            "valueString": "07700900000"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:nerve-conduction-study-test-result",
+                  "code": "postal_address_as_full_text",
+                  "display": "Postal Address As Full Text"
+                }
+              ]
+            },
+            "valueString": "Example text."
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:nerve-conduction-study-test-result",
+                  "code": "country_as_iso_3166_1_alpha_2",
+                  "display": "Country As Iso 3166 1 Alpha 2"
+                }
+              ]
+            },
+            "valueString": ""
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:nerve-conduction-study-test-result",
+                  "code": "postcode",
+                  "display": "Postcode"
+                }
+              ]
+            },
+            "valueString": "SW1A 1AA"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:nerve-conduction-study-test-result",
+                  "code": "role",
+                  "display": "Role"
+                }
+              ]
+            },
+            "valueCodeableConcept": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:nerve-conduction-study-test-result:role",
+                  "code": "neurologist",
+                  "display": "Neurologist"
+                }
+              ]
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:nerve-conduction-study-test-result",
+                  "code": "registration_body",
+                  "display": "Registration Body"
+                }
+              ]
+            },
+            "valueCodeableConcept": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:nerve-conduction-study-test-result:registration_body",
+                  "code": "GMC",
+                  "display": "Gmc"
+                }
+              ]
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:nerve-conduction-study-test-result",
+                  "code": "registration_number",
+                  "display": "Registration Number"
+                }
+              ]
+            },
+            "valueString": ""
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:nerve-conduction-study-test-result",
+                  "code": "united_kingdom_nhs_number",
+                  "display": "United Kingdom Nhs Number"
+                }
+              ]
+            },
+            "valueString": "mg/dL"
+          }
+        ]
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:770e8400-e29b-41d4-a716-446655440002",
+      "resource": {
+        "resourceType": "Observation",
+        "id": "770e8400-e29b-41d4-a716-446655440002",
+        "meta": {
+          "profile": [
+            "http://hl7.org/fhir/StructureDefinition/Observation"
+          ],
+          "lastUpdated": "2026-04-09T10:00:00+00:00"
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "survey",
+                "display": "Survey"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "urn:form-examples:nerve-conduction-study-test-result",
+              "code": "nerve_conduction_study_test_result",
+              "display": "Nerve Conduction Study Test Result"
+            }
+          ]
+        },
+        "subject": {
+          "reference": "Patient/550e8400-e29b-41d4-a716-446655440000"
+        },
+        "encounter": {
+          "reference": "Encounter/bb0e8400-e29b-41d4-a716-446655440006"
+        },
+        "effectiveDateTime": "2026-04-09T10:00:00+00:00",
+        "component": [
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:nerve-conduction-study-test-result",
+                  "code": "deleted_at",
+                  "display": "Deleted At"
+                }
+              ]
+            },
+            "valueDateTime": "2026-04-09T10:00:00+00:00"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:nerve-conduction-study-test-result",
+                  "code": "originating_request_reference",
+                  "display": "Originating Request Reference"
+                }
+              ]
+            },
+            "valueString": ""
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:nerve-conduction-study-test-result",
+                  "code": "report_status",
+                  "display": "Report Status"
+                }
+              ]
+            },
+            "valueCodeableConcept": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:nerve-conduction-study-test-result:report_status",
+                  "code": "preliminary",
+                  "display": "Preliminary"
+                }
+              ]
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:nerve-conduction-study-test-result",
+                  "code": "performed_date",
+                  "display": "Performed Date"
+                }
+              ]
+            },
+            "valueDateTime": "2026-01-15"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:nerve-conduction-study-test-result",
+                  "code": "reported_date",
+                  "display": "Reported Date"
+                }
+              ]
+            },
+            "valueDateTime": "2026-01-15"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:nerve-conduction-study-test-result",
+                  "code": "study_type",
+                  "display": "Study Type"
+                }
+              ]
+            },
+            "valueCodeableConcept": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:nerve-conduction-study-test-result:study_type",
+                  "code": "nerve-conduction",
+                  "display": "Nerve-Conduction"
+                }
+              ]
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:nerve-conduction-study-test-result",
+                  "code": "region",
+                  "display": "Region"
+                }
+              ]
+            },
+            "valueCodeableConcept": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:nerve-conduction-study-test-result:region",
+                  "code": "upper-limb",
+                  "display": "Upper-Limb"
+                }
+              ]
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:nerve-conduction-study-test-result",
+                  "code": "laterality",
+                  "display": "Laterality"
+                }
+              ]
+            },
+            "valueCodeableConcept": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:nerve-conduction-study-test-result:laterality",
+                  "code": "left",
+                  "display": "Left"
+                }
+              ]
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:nerve-conduction-study-test-result",
+                  "code": "study_adequacy",
+                  "display": "Study Adequacy"
+                }
+              ]
+            },
+            "valueCodeableConcept": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:nerve-conduction-study-test-result:study_adequacy",
+                  "code": "adequate",
+                  "display": "Adequate"
+                }
+              ]
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:nerve-conduction-study-test-result",
+                  "code": "clinical_history",
+                  "display": "Clinical History"
+                }
+              ]
+            },
+            "valueString": "Example text."
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:nerve-conduction-study-test-result",
+                  "code": "comparison_with_previous",
+                  "display": "Comparison With Previous"
+                }
+              ]
+            },
+            "valueString": ""
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:nerve-conduction-study-test-result",
+                  "code": "nerve_conduction_findings",
+                  "display": "Nerve Conduction Findings"
+                }
+              ]
+            },
+            "valueString": "Example text."
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:nerve-conduction-study-test-result",
+                  "code": "emg_findings",
+                  "display": "Emg Findings"
+                }
+              ]
+            },
+            "valueString": "Example text."
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:nerve-conduction-study-test-result",
+                  "code": "carpal_tunnel_syndrome",
+                  "display": "Carpal Tunnel Syndrome"
+                }
+              ]
+            },
+            "valueBoolean": true
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:nerve-conduction-study-test-result",
+                  "code": "peripheral_neuropathy",
+                  "display": "Peripheral Neuropathy"
+                }
+              ]
+            },
+            "valueBoolean": true
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:nerve-conduction-study-test-result",
+                  "code": "radiculopathy",
+                  "display": "Radiculopathy"
+                }
+              ]
+            },
+            "valueBoolean": true
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:nerve-conduction-study-test-result",
+                  "code": "motor_neurone_disease_features",
+                  "display": "Motor Neurone Disease Features"
+                }
+              ]
+            },
+            "valueBoolean": true
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:nerve-conduction-study-test-result",
+                  "code": "myopathy",
+                  "display": "Myopathy"
+                }
+              ]
+            },
+            "valueBoolean": true
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:nerve-conduction-study-test-result",
+                  "code": "neuromuscular_junction_disorder",
+                  "display": "Neuromuscular Junction Disorder"
+                }
+              ]
+            },
+            "valueBoolean": true
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:nerve-conduction-study-test-result",
+                  "code": "normal_study",
+                  "display": "Normal Study"
+                }
+              ]
+            },
+            "valueBoolean": true
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:nerve-conduction-study-test-result",
+                  "code": "severity",
+                  "display": "Severity"
+                }
+              ]
+            },
+            "valueCodeableConcept": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:nerve-conduction-study-test-result:severity",
+                  "code": "mild",
+                  "display": "Mild"
+                }
+              ]
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:nerve-conduction-study-test-result",
+                  "code": "pattern",
+                  "display": "Pattern"
+                }
+              ]
+            },
+            "valueCodeableConcept": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:nerve-conduction-study-test-result:pattern",
+                  "code": "demyelinating",
+                  "display": "Demyelinating"
+                }
+              ]
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:nerve-conduction-study-test-result",
+                  "code": "impression",
+                  "display": "Impression"
+                }
+              ]
+            },
+            "valueString": "Example text."
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:nerve-conduction-study-test-result",
+                  "code": "reporting_category",
+                  "display": "Reporting Category"
+                }
+              ]
+            },
+            "valueString": "General"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:nerve-conduction-study-test-result",
+                  "code": "recommended_follow_up",
+                  "display": "Recommended Follow Up"
+                }
+              ]
+            },
+            "valueString": ""
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:nerve-conduction-study-test-result",
+                  "code": "critical_result_communicated",
+                  "display": "Critical Result Communicated"
+                }
+              ]
+            },
+            "valueBoolean": true
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:nerve-conduction-study-test-result",
+                  "code": "reported_to",
+                  "display": "Reported To"
+                }
+              ]
+            },
+            "valueString": ""
+          }
+        ]
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:880e8400-e29b-41d4-a716-446655440003",
+      "resource": {
+        "resourceType": "Observation",
+        "id": "880e8400-e29b-41d4-a716-446655440003",
+        "meta": {
+          "profile": [
+            "http://hl7.org/fhir/StructureDefinition/Observation"
+          ],
+          "lastUpdated": "2026-04-09T10:00:00+00:00"
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "survey",
+                "display": "Survey"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "urn:form-examples:nerve-conduction-study-test-result",
+              "code": "nerve_conduction_study_test_result_grade",
+              "display": "Nerve Conduction Study Test Result Grade"
+            }
+          ]
+        },
+        "subject": {
+          "reference": "Patient/550e8400-e29b-41d4-a716-446655440000"
+        },
+        "encounter": {
+          "reference": "Encounter/bb0e8400-e29b-41d4-a716-446655440006"
+        },
+        "effectiveDateTime": "2026-04-09T10:00:00+00:00",
+        "component": [
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:nerve-conduction-study-test-result",
+                  "code": "deleted_at",
+                  "display": "Deleted At"
+                }
+              ]
+            },
+            "valueDateTime": "2026-04-09T10:00:00+00:00"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:nerve-conduction-study-test-result",
+                  "code": "result_classification",
+                  "display": "Result Classification"
+                }
+              ]
+            },
+            "valueCodeableConcept": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:nerve-conduction-study-test-result:result_classification",
+                  "code": "normal",
+                  "display": "Normal"
+                }
+              ]
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:nerve-conduction-study-test-result",
+                  "code": "abnormality_severity",
+                  "display": "Abnormality Severity"
+                }
+              ]
+            },
+            "valueCodeableConcept": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:nerve-conduction-study-test-result:abnormality_severity",
+                  "code": "none",
+                  "display": "None"
+                }
+              ]
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:nerve-conduction-study-test-result",
+                  "code": "reporting_category",
+                  "display": "Reporting Category"
+                }
+              ]
+            },
+            "valueString": "General"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:nerve-conduction-study-test-result",
+                  "code": "report_completeness_percent",
+                  "display": "Report Completeness Percent"
+                }
+              ]
+            },
+            "valueInteger": 1
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:nerve-conduction-study-test-result",
+                  "code": "follow_up_urgency",
+                  "display": "Follow Up Urgency"
+                }
+              ]
+            },
+            "valueCodeableConcept": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:nerve-conduction-study-test-result:follow_up_urgency",
+                  "code": "routine",
+                  "display": "Routine"
+                }
+              ]
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:nerve-conduction-study-test-result",
+                  "code": "target_timeframe",
+                  "display": "Target Timeframe"
+                }
+              ]
+            },
+            "valueString": ""
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:nerve-conduction-study-test-result",
+                  "code": "recommended_action",
+                  "display": "Recommended Action"
+                }
+              ]
+            },
+            "valueString": ""
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:nerve-conduction-study-test-result",
+                  "code": "recommendation",
+                  "display": "Recommendation"
+                }
+              ]
+            },
+            "valueCodeableConcept": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:nerve-conduction-study-test-result:recommendation",
+                  "code": "no-action",
+                  "display": "No-Action"
+                }
+              ]
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:nerve-conduction-study-test-result",
+                  "code": "clinician_notes",
+                  "display": "Clinician Notes"
+                }
+              ]
+            },
+            "valueString": "Example text."
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:nerve-conduction-study-test-result",
+                  "code": "signed_at",
+                  "display": "Signed At"
+                }
+              ]
+            },
+            "valueDateTime": "2026-04-09T10:00:00+00:00"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:nerve-conduction-study-test-result",
+                  "code": "graded_at",
+                  "display": "Graded At"
+                }
+              ]
+            },
+            "valueDateTime": "2026-04-09T10:00:00+00:00"
+          }
+        ]
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:aa0e8400-e29b-41d4-a716-446655440005",
+      "resource": {
+        "resourceType": "Observation",
+        "id": "aa0e8400-e29b-41d4-a716-446655440005",
+        "meta": {
+          "profile": [
+            "http://hl7.org/fhir/StructureDefinition/Observation"
+          ],
+          "lastUpdated": "2026-04-09T10:00:00+00:00"
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "survey",
+                "display": "Survey"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "urn:form-examples:nerve-conduction-study-test-result",
+              "code": "nerve_conduction_study_test_result_grade_flag",
+              "display": "Nerve Conduction Study Test Result Grade Flag"
+            }
+          ]
+        },
+        "subject": {
+          "reference": "Patient/550e8400-e29b-41d4-a716-446655440000"
+        },
+        "encounter": {
+          "reference": "Encounter/bb0e8400-e29b-41d4-a716-446655440006"
+        },
+        "effectiveDateTime": "2026-04-09T10:00:00+00:00",
+        "component": [
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:nerve-conduction-study-test-result",
+                  "code": "deleted_at",
+                  "display": "Deleted At"
+                }
+              ]
+            },
+            "valueDateTime": "2026-04-09T10:00:00+00:00"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:nerve-conduction-study-test-result",
+                  "code": "category",
+                  "display": "Category"
+                }
+              ]
+            },
+            "valueCodeableConcept": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:nerve-conduction-study-test-result:category",
+                  "code": "critical-result-alert",
+                  "display": "Critical-Result-Alert"
+                }
+              ]
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:nerve-conduction-study-test-result",
+                  "code": "priority",
+                  "display": "Priority"
+                }
+              ]
+            },
+            "valueCodeableConcept": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:nerve-conduction-study-test-result:priority",
+                  "code": "low",
+                  "display": "Low"
+                }
+              ]
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:nerve-conduction-study-test-result",
+                  "code": "description",
+                  "display": "Description"
+                }
+              ]
+            },
+            "valueString": "Example text."
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:nerve-conduction-study-test-result",
+                  "code": "suggested_action",
+                  "display": "Suggested Action"
+                }
+              ]
+            },
+            "valueString": ""
+          }
+        ]
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:990e8400-e29b-41d4-a716-446655440004",
+      "resource": {
+        "resourceType": "Observation",
+        "id": "990e8400-e29b-41d4-a716-446655440004",
+        "meta": {
+          "profile": [
+            "http://hl7.org/fhir/StructureDefinition/Observation"
+          ],
+          "lastUpdated": "2026-04-09T10:00:00+00:00"
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "survey",
+                "display": "Survey"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "urn:form-examples:nerve-conduction-study-test-result",
+              "code": "nerve_conduction_study_test_result_grade_rule",
+              "display": "Nerve Conduction Study Test Result Grade Rule"
+            }
+          ]
+        },
+        "subject": {
+          "reference": "Patient/550e8400-e29b-41d4-a716-446655440000"
+        },
+        "encounter": {
+          "reference": "Encounter/bb0e8400-e29b-41d4-a716-446655440006"
+        },
+        "effectiveDateTime": "2026-04-09T10:00:00+00:00",
+        "component": [
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:nerve-conduction-study-test-result",
+                  "code": "deleted_at",
+                  "display": "Deleted At"
+                }
+              ]
+            },
+            "valueDateTime": "2026-04-09T10:00:00+00:00"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:nerve-conduction-study-test-result",
+                  "code": "axis",
+                  "display": "Axis"
+                }
+              ]
+            },
+            "valueCodeableConcept": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:nerve-conduction-study-test-result:axis",
+                  "code": "classification",
+                  "display": "Classification"
+                }
+              ]
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:nerve-conduction-study-test-result",
+                  "code": "category",
+                  "display": "Category"
+                }
+              ]
+            },
+            "valueString": "General"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:nerve-conduction-study-test-result",
+                  "code": "description",
+                  "display": "Description"
+                }
+              ]
+            },
+            "valueString": "Example text."
+          }
+        ]
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:550e8400-e29b-41d4-a716-446655440000",
+      "resource": {
+        "resourceType": "Patient",
+        "id": "550e8400-e29b-41d4-a716-446655440000",
+        "meta": {
+          "profile": [
+            "http://hl7.org/fhir/StructureDefinition/Patient"
+          ],
+          "lastUpdated": "2026-04-09T10:00:00+00:00"
+        },
+        "name": [
+          {
+            "use": "official",
+            "family": "Doe",
+            "given": [
+              "Jane"
+            ]
+          }
+        ],
+        "birthDate": "1965-06-15",
+        "gender": "unknown",
+        "telecom": [
+          {
+            "system": "email",
+            "value": "jane.doe@example.com"
+          },
+          {
+            "system": "phone",
+            "value": "07700900000"
+          }
+        ],
+        "address": [
+          {
+            "postalCode": "SW1A 1AA"
+          }
+        ]
+      }
+    }
+  ]
+}

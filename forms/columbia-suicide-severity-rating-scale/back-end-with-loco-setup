@@ -14,3 +14,105 @@ cd "${form_snake_case}"
 # Pin time to a version compatible with cookie 0.18.1 (a fresh loco
 # starter otherwise resolves time 0.3.52, which fails to compile).
 cargo update -p time --precise 0.3.47
+
+cargo loco generate scaffold patient \
+    deleted_at:tstz \
+    name:string! \
+    birth_date:date! \
+    sex:string! \
+    email:text \
+    phone:text \
+    postal_address_as_full_text:text \
+    country_as_iso_3166_1_alpha_2:string \
+    postcode:text \
+    united_kingdom_nhs_number:string^ \
+    hospital_mrn:string \
+    height_as_cm:double \
+    weight_as_kg:double \
+    body_mass_index:double \
+    allergies_summary:text! \
+    --api
+
+cargo loco generate scaffold clinician \
+    deleted_at:tstz \
+    name:text! \
+    email:text \
+    phone:text \
+    postal_address_as_full_text:text \
+    country_as_iso_3166_1_alpha_2:string \
+    postcode:text \
+    role:string! \
+    registration_body:string! \
+    registration_number:text! \
+    --api
+
+cargo loco generate scaffold columbia_suicide_severity_rating_scale \
+    deleted_at:tstz \
+    patient:references \
+    clinician:references \
+    clinician_name:string! \
+    clinician_role:string! \
+    assessed_at:tstz \
+    care_setting:string! \
+    scale_version:string! \
+    reason_for_assessment:text! \
+    patient_identifier:string! \
+    age_band:string! \
+    sex:string! \
+    wish_to_be_dead:string! \
+    non_specific_active_thoughts:string! \
+    active_ideation_methods:string! \
+    active_ideation_intent:string! \
+    active_ideation_plan:string! \
+    ideation_timeframe:string! \
+    ideation_frequency:int \
+    ideation_duration:int \
+    ideation_controllability:int \
+    ideation_deterrents:int \
+    ideation_reasons:int \
+    actual_attempt:string! \
+    interrupted_attempt:string! \
+    aborted_attempt:string! \
+    preparatory_acts:string! \
+    non_suicidal_self_injury:string! \
+    behaviour_recency:string! \
+    lifetime_attempt_count:int \
+    most_recent_attempt_date:date \
+    actual_lethality:int \
+    potential_lethality:int \
+    access_to_lethal_means:string! \
+    protective_factors:text! \
+    clinical_note:text! \
+    --api
+
+cargo loco generate scaffold columbia_suicide_severity_rating_scale_grade \
+    deleted_at:tstz \
+    columbia_suicide_severity_rating_scale:references \
+    ideation_level:int \
+    any_behaviour:string! \
+    recent_behaviour:string! \
+    risk_tier:string! \
+    positive_features:text! \
+    management_recommendation:text! \
+    graded_at:tstz! \
+    --api
+
+cargo loco generate scaffold columbia_suicide_severity_rating_scale_grade_rule \
+    deleted_at:tstz \
+    columbia_suicide_severity_rating_scale_grade:references \
+    rule_id:string! \
+    dimension:string! \
+    tier:string! \
+    category:string! \
+    description:string! \
+    --api
+
+cargo loco generate scaffold columbia_suicide_severity_rating_scale_grade_flag \
+    deleted_at:tstz \
+    columbia_suicide_severity_rating_scale_grade:references \
+    flag_id:string! \
+    category:string! \
+    priority:string! \
+    description:string! \
+    suggested_action:string! \
+    --api

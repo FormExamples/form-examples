@@ -14,3 +14,87 @@ cd "${form_snake_case}"
 # Pin time to a version compatible with cookie 0.18.1 (a fresh loco
 # starter otherwise resolves time 0.3.52, which fails to compile).
 cargo update -p time --precise 0.3.47
+
+cargo loco generate scaffold patient \
+    deleted_at:tstz \
+    name:string! \
+    birth_date:date! \
+    sex:string! \
+    email:text \
+    phone:text \
+    postal_address_as_full_text:text \
+    country_as_iso_3166_1_alpha_2:string \
+    postcode:text \
+    united_kingdom_nhs_number:string^ \
+    hospital_mrn:string \
+    height_as_cm:double \
+    weight_as_kg:double \
+    body_mass_index:double \
+    allergies_summary:text! \
+    --api
+
+cargo loco generate scaffold clinician \
+    deleted_at:tstz \
+    name:text! \
+    email:text \
+    phone:text \
+    postal_address_as_full_text:text \
+    country_as_iso_3166_1_alpha_2:string \
+    postcode:text \
+    role:string! \
+    registration_body:string! \
+    registration_number:text! \
+    --api
+
+cargo loco generate scaffold modified_early_warning_score \
+    deleted_at:tstz \
+    patient:references \
+    clinician:references \
+    status:string! \
+    observation_at:tstz \
+    care_setting:string! \
+    ward_or_location:string! \
+    systolic_blood_pressure:int \
+    heart_rate:int \
+    respiratory_rate:int \
+    temperature:double \
+    consciousness_avpu:string! \
+    previous_mews_score:int \
+    clinical_notes:text! \
+    --api
+
+cargo loco generate scaffold modified_early_warning_score_grade \
+    deleted_at:tstz \
+    modified_early_warning_score:references \
+    aggregate_score:int \
+    systolic_blood_pressure_score:int \
+    heart_rate_score:int \
+    respiratory_rate_score:int \
+    temperature_score:int \
+    avpu_score:int \
+    single_parameter_trigger:string! \
+    risk_band:string! \
+    monitoring_frequency:text! \
+    graded_at:tstz! \
+    --api
+
+cargo loco generate scaffold modified_early_warning_score_grade_rule \
+    deleted_at:tstz \
+    modified_early_warning_score_grade:references \
+    rule_id:string! \
+    instrument:string! \
+    band:string! \
+    points:int \
+    category:string! \
+    description:string! \
+    --api
+
+cargo loco generate scaffold modified_early_warning_score_grade_flag \
+    deleted_at:tstz \
+    modified_early_warning_score_grade:references \
+    flag_id:string! \
+    category:string! \
+    priority:string! \
+    description:string! \
+    suggested_action:string! \
+    --api

@@ -14,3 +14,155 @@ cd "${form_snake_case}"
 # Pin time to a version compatible with cookie 0.18.1 (a fresh loco
 # starter otherwise resolves time 0.3.52, which fails to compile).
 cargo update -p time --precise 0.3.47
+
+cargo loco generate scaffold patient \
+    deleted_at:tstz \
+    name:string! \
+    birth_date:date! \
+    sex:string! \
+    email:text \
+    phone:text \
+    postal_address_as_full_text:text \
+    country_as_iso_3166_1_alpha_2:string \
+    postcode:text \
+    united_kingdom_nhs_number:string^ \
+    hospital_mrn:string \
+    height_as_cm:double \
+    weight_as_kg:double \
+    body_mass_index:double \
+    allergies_summary:text! \
+    --api
+
+cargo loco generate scaffold clinician \
+    deleted_at:tstz \
+    name:text! \
+    email:text \
+    phone:text \
+    postal_address_as_full_text:text \
+    country_as_iso_3166_1_alpha_2:string \
+    postcode:text \
+    role:string! \
+    registration_body:string! \
+    registration_number:text! \
+    --api
+
+cargo loco generate scaffold anaesthetic_record \
+    deleted_at:tstz \
+    patient:references \
+    clinician:references \
+    theatre:string! \
+    operation_date:date \
+    anaesthetist_name:string! \
+    assistant_name:string! \
+    surgeon_name:string! \
+    planned_procedure:text! \
+    urgency:string! \
+    machine_checked:string! \
+    who_sign_in:string! \
+    who_time_out:string! \
+    consent_confirmed:string! \
+    fasting_confirmed:string! \
+    iv_access:text! \
+    allergy_band_checked:string! \
+    documented_allergies:text! \
+    asa_status:string! \
+    asa_emergency_modifier:string! \
+    mallampati_class:int \
+    mouth_opening_cm:double \
+    thyromental_distance_cm:double \
+    dentition:text! \
+    anticipated_difficult_airway:string! \
+    prior_difficult_intubation:string! \
+    airway_technique:string! \
+    device_size:string! \
+    tube_depth_cm:double \
+    cuffed:string! \
+    cormack_lehane_grade:int \
+    intubation_attempts:int \
+    capnography_confirmed:string! \
+    monitoring_modalities:text! \
+    anaesthetic_technique:string! \
+    crystalloid_ml:double \
+    colloid_ml:double \
+    blood_products_ml:double \
+    estimated_blood_loss_ml:double \
+    urine_output_ml:double \
+    cell_salvage_ml:double \
+    regional_technique:string! \
+    regional_level:string! \
+    regional_drug:string! \
+    regional_dose_mg:double \
+    block_height:string! \
+    regional_complications:text! \
+    recovery_destination:string! \
+    handover_airway_status:text! \
+    analgesia_plan:text! \
+    antiemetic_plan:text! \
+    oxygen_plan:text! \
+    outstanding_tasks:text! \
+    handover_at:tstz \
+    receiving_practitioner:string! \
+    anaesthetist_signature:text! \
+    signed_at:tstz \
+    --api
+
+cargo loco generate scaffold anaesthetic_record_drug_administration \
+    deleted_at:tstz \
+    anaesthetic_record:references \
+    drug_name:string! \
+    dose:double \
+    dose_unit:string! \
+    route:string! \
+    category:string! \
+    administered_at:tstz \
+    --api
+
+cargo loco generate scaffold anaesthetic_record_timed_observation \
+    deleted_at:tstz \
+    anaesthetic_record:references \
+    observed_at:tstz \
+    systolic_blood_pressure:double \
+    diastolic_blood_pressure:double \
+    heart_rate:double \
+    spo2:double \
+    end_tidal_co2:double \
+    temperature:double \
+    agent_percent:double \
+    fresh_gas_flow_l:double \
+    --api
+
+cargo loco generate scaffold anaesthetic_record_intra_operative_event \
+    deleted_at:tstz \
+    anaesthetic_record:references \
+    event_type:string! \
+    occurred_at:tstz \
+    management:text! \
+    --api
+
+cargo loco generate scaffold anaesthetic_record_grade \
+    deleted_at:tstz \
+    anaesthetic_record:references \
+    status:string! \
+    completeness_percent:int! \
+    graded_at:tstz! \
+    --api
+
+cargo loco generate scaffold anaesthetic_record_grade_rule \
+    deleted_at:tstz \
+    anaesthetic_record_grade:references \
+    rule_id:string! \
+    category:string! \
+    criticality:string! \
+    satisfied:bool! \
+    description:string! \
+    --api
+
+cargo loco generate scaffold anaesthetic_record_grade_flag \
+    deleted_at:tstz \
+    anaesthetic_record_grade:references \
+    flag_id:string! \
+    category:string! \
+    priority:string! \
+    description:string! \
+    suggested_action:string! \
+    --api

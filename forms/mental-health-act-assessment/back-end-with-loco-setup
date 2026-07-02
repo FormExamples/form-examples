@@ -14,3 +14,107 @@ cd "${form_snake_case}"
 # Pin time to a version compatible with cookie 0.18.1 (a fresh loco
 # starter otherwise resolves time 0.3.52, which fails to compile).
 cargo update -p time --precise 0.3.47
+
+cargo loco generate scaffold patient \
+    deleted_at:tstz \
+    name:string! \
+    birth_date:date! \
+    sex:string! \
+    email:text \
+    phone:text \
+    postal_address_as_full_text:text \
+    country_as_iso_3166_1_alpha_2:string \
+    postcode:text \
+    united_kingdom_nhs_number:string^ \
+    hospital_mrn:string \
+    height_as_cm:double \
+    weight_as_kg:double \
+    body_mass_index:double \
+    allergies_summary:text! \
+    --api
+
+cargo loco generate scaffold clinician \
+    deleted_at:tstz \
+    name:text! \
+    email:text \
+    phone:text \
+    postal_address_as_full_text:text \
+    country_as_iso_3166_1_alpha_2:string \
+    postcode:text \
+    role:string! \
+    registration_body:string! \
+    registration_number:text! \
+    --api
+
+cargo loco generate scaffold mental_health_act_assessment \
+    deleted_at:tstz \
+    patient:references \
+    clinician:references \
+    assessed_at:tstz \
+    location:string! \
+    referral_source:text! \
+    reason_for_assessment:text! \
+    person_identifier:string! \
+    age_band:string! \
+    sex:string! \
+    first_language:text! \
+    amhp_name:text! \
+    amhp_approved:string! \
+    doctor1_name:text! \
+    doctor1_gmc_number:text! \
+    doctor1_section12_approved:string! \
+    doctor1_examined_at:tstz \
+    doctor2_name:text! \
+    doctor2_gmc_number:text! \
+    doctor2_section12_approved:string! \
+    doctor2_examined_at:tstz \
+    prior_acquaintance:string! \
+    mental_disorder_present:string! \
+    mental_disorder_evidence:text! \
+    risk_to_own_health:string! \
+    risk_to_own_safety:string! \
+    risk_to_others:string! \
+    risk_evidence:text! \
+    risk_imminence:string! \
+    least_restrictive_met:string! \
+    alternatives_considered:text! \
+    appropriate_treatment_available:string! \
+    treatment_plan_summary:text! \
+    nearest_relative_identified:string! \
+    nearest_relative_consulted:string! \
+    nearest_relative_objection:string! \
+    consultation_record:text! \
+    recommended_section:string! \
+    outcome:string! \
+    bed_identified:string! \
+    conveyance:string! \
+    clinical_legal_note:text! \
+    --api
+
+cargo loco generate scaffold mental_health_act_assessment_grade \
+    deleted_at:tstz \
+    mental_health_act_assessment:references \
+    completeness_status:string! \
+    recommended_section_class:string! \
+    urgency:string! \
+    graded_at:tstz! \
+    --api
+
+cargo loco generate scaffold mental_health_act_assessment_grade_rule \
+    deleted_at:tstz \
+    mental_health_act_assessment_grade:references \
+    rule_id:string! \
+    section:string! \
+    category:string! \
+    description:string! \
+    --api
+
+cargo loco generate scaffold mental_health_act_assessment_grade_flag \
+    deleted_at:tstz \
+    mental_health_act_assessment_grade:references \
+    flag_id:string! \
+    category:string! \
+    priority:string! \
+    description:string! \
+    suggested_action:string! \
+    --api

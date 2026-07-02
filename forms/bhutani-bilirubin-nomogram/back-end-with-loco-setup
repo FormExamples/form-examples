@@ -14,3 +14,88 @@ cd "${form_snake_case}"
 # Pin time to a version compatible with cookie 0.18.1 (a fresh loco
 # starter otherwise resolves time 0.3.52, which fails to compile).
 cargo update -p time --precise 0.3.47
+
+cargo loco generate scaffold patient \
+    deleted_at:tstz \
+    name:string! \
+    birth_date:date! \
+    sex:string! \
+    email:text \
+    phone:text \
+    postal_address_as_full_text:text \
+    country_as_iso_3166_1_alpha_2:string \
+    postcode:text \
+    united_kingdom_nhs_number:string^ \
+    hospital_mrn:string \
+    height_as_cm:double \
+    weight_as_kg:double \
+    body_mass_index:double \
+    allergies_summary:text! \
+    --api
+
+cargo loco generate scaffold clinician \
+    deleted_at:tstz \
+    name:text! \
+    email:text \
+    phone:text \
+    postal_address_as_full_text:text \
+    country_as_iso_3166_1_alpha_2:string \
+    postcode:text \
+    role:string! \
+    registration_body:string! \
+    registration_number:text! \
+    --api
+
+cargo loco generate scaffold bhutani_bilirubin_nomogram \
+    deleted_at:tstz \
+    patient:references \
+    clinician:references \
+    clinician_name:string! \
+    clinician_role:string! \
+    assessed_at:tstz \
+    care_setting:string! \
+    infant_identifier:string! \
+    sex:string! \
+    born_at:tstz \
+    gestational_age_weeks:double \
+    age_hours:double \
+    total_serum_bilirubin_umol_l:double \
+    measurement_method:string! \
+    preterm_under_38:string! \
+    previous_sibling_jaundice:string! \
+    exclusive_breastfeeding:string! \
+    bruising:string! \
+    blood_group_incompatibility:string! \
+    early_onset_under_24h:string! \
+    clinical_note:text! \
+    --api
+
+cargo loco generate scaffold bhutani_bilirubin_nomogram_grade \
+    deleted_at:tstz \
+    bhutani_bilirubin_nomogram:references \
+    risk_zone:string! \
+    percentile_band:string! \
+    phototherapy_threshold_umol_l:double \
+    exchange_threshold_umol_l:double \
+    above_phototherapy_threshold:string! \
+    above_exchange_threshold:string! \
+    graded_at:tstz! \
+    --api
+
+cargo loco generate scaffold bhutani_bilirubin_nomogram_grade_rule \
+    deleted_at:tstz \
+    bhutani_bilirubin_nomogram_grade:references \
+    rule_id:string! \
+    category:string! \
+    description:string! \
+    --api
+
+cargo loco generate scaffold bhutani_bilirubin_nomogram_grade_flag \
+    deleted_at:tstz \
+    bhutani_bilirubin_nomogram_grade:references \
+    flag_id:string! \
+    category:string! \
+    priority:string! \
+    description:string! \
+    suggested_action:string! \
+    --api

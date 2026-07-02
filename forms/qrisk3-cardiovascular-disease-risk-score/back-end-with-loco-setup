@@ -14,3 +14,100 @@ cd "${form_snake_case}"
 # Pin time to a version compatible with cookie 0.18.1 (a fresh loco
 # starter otherwise resolves time 0.3.52, which fails to compile).
 cargo update -p time --precise 0.3.47
+
+cargo loco generate scaffold patient \
+    deleted_at:tstz \
+    name:string! \
+    birth_date:date! \
+    sex:string! \
+    email:text \
+    phone:text \
+    postal_address_as_full_text:text \
+    country_as_iso_3166_1_alpha_2:string \
+    postcode:text \
+    united_kingdom_nhs_number:string^ \
+    hospital_mrn:string \
+    height_as_cm:double \
+    weight_as_kg:double \
+    body_mass_index:double \
+    allergies_summary:text! \
+    --api
+
+cargo loco generate scaffold clinician \
+    deleted_at:tstz \
+    name:text! \
+    email:text \
+    phone:text \
+    postal_address_as_full_text:text \
+    country_as_iso_3166_1_alpha_2:string \
+    postcode:text \
+    role:string! \
+    registration_body:string! \
+    registration_number:text! \
+    --api
+
+cargo loco generate scaffold qrisk3_cardiovascular_disease_risk_score \
+    deleted_at:tstz \
+    patient:references \
+    clinician:references \
+    clinician_name:string! \
+    clinician_role:string! \
+    assessed_at:tstz \
+    care_setting:string! \
+    patient_identifier:string! \
+    age:double \
+    sex:string! \
+    ethnicity:string! \
+    townsend_score:double \
+    postcode:string! \
+    smoking_status:string! \
+    body_mass_index:double \
+    diabetes_status:string! \
+    cholesterol_hdl_ratio:double \
+    systolic_blood_pressure:double \
+    systolic_blood_pressure_sd:double \
+    on_blood_pressure_treatment:string! \
+    family_history_chd:string! \
+    atrial_fibrillation:string! \
+    chronic_kidney_disease_stage:string! \
+    migraine:string! \
+    rheumatoid_arthritis:string! \
+    systemic_lupus_erythematosus:string! \
+    severe_mental_illness:string! \
+    erectile_dysfunction:string! \
+    on_atypical_antipsychotics:string! \
+    on_corticosteroids:string! \
+    has_established_cvd:string! \
+    has_familial_hypercholesterolaemia:string! \
+    clinical_note:text! \
+    --api
+
+cargo loco generate scaffold qrisk3_cardiovascular_disease_risk_score_grade \
+    deleted_at:tstz \
+    qrisk3_cardiovascular_disease_risk_score:references \
+    ten_year_risk_percent:double \
+    risk_band:string! \
+    heart_age:double \
+    linear_predictor:double \
+    graded_at:tstz! \
+    --api
+
+cargo loco generate scaffold qrisk3_cardiovascular_disease_risk_score_grade_rule \
+    deleted_at:tstz \
+    qrisk3_cardiovascular_disease_risk_score_grade:references \
+    rule_id:string! \
+    component:string! \
+    contribution:double \
+    category:string! \
+    description:string! \
+    --api
+
+cargo loco generate scaffold qrisk3_cardiovascular_disease_risk_score_grade_flag \
+    deleted_at:tstz \
+    qrisk3_cardiovascular_disease_risk_score_grade:references \
+    flag_id:string! \
+    category:string! \
+    priority:string! \
+    description:string! \
+    suggested_action:string! \
+    --api

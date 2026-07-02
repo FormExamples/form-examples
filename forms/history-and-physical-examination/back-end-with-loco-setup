@@ -14,3 +14,100 @@ cd "${form_snake_case}"
 # Pin time to a version compatible with cookie 0.18.1 (a fresh loco
 # starter otherwise resolves time 0.3.52, which fails to compile).
 cargo update -p time --precise 0.3.47
+
+cargo loco generate scaffold patient \
+    deleted_at:tstz \
+    name:string! \
+    birth_date:date! \
+    sex:string! \
+    email:text \
+    phone:text \
+    postal_address_as_full_text:text \
+    country_as_iso_3166_1_alpha_2:string \
+    postcode:text \
+    united_kingdom_nhs_number:string^ \
+    hospital_mrn:string \
+    height_as_cm:double \
+    weight_as_kg:double \
+    body_mass_index:double \
+    allergies_summary:text! \
+    --api
+
+cargo loco generate scaffold clinician \
+    deleted_at:tstz \
+    name:text! \
+    email:text \
+    phone:text \
+    postal_address_as_full_text:text \
+    country_as_iso_3166_1_alpha_2:string \
+    postcode:text \
+    role:string! \
+    registration_body:string! \
+    registration_number:text! \
+    --api
+
+cargo loco generate scaffold history_and_physical_examination \
+    deleted_at:tstz \
+    patient:references \
+    clinician:references \
+    clerked_at:tstz \
+    clinician_role:string! \
+    registration_number:string! \
+    care_setting:string! \
+    admission_source:string! \
+    patient_identifier:string! \
+    age_band:string! \
+    sex:string! \
+    presenting_complaint:text! \
+    history_of_presenting_complaint:text! \
+    past_medical_surgical_history:text! \
+    drug_history:text! \
+    allergy_status:string! \
+    allergy_detail:text! \
+    family_history:text! \
+    social_history:text! \
+    systems_review:text! \
+    temperature:double \
+    heart_rate:int \
+    respiratory_rate:int \
+    systolic_blood_pressure:int \
+    oxygen_saturation:int \
+    consciousness_level:string! \
+    exam_cardiovascular:text! \
+    exam_respiratory:text! \
+    exam_abdominal:text! \
+    exam_neurological:text! \
+    exam_other:text! \
+    investigations:text! \
+    impression:text! \
+    red_flag_findings:text! \
+    management_plan:text! \
+    clinical_note:text! \
+    --api
+
+cargo loco generate scaffold history_and_physical_examination_grade \
+    deleted_at:tstz \
+    history_and_physical_examination:references \
+    status:string! \
+    completeness_percent:int \
+    graded_at:tstz! \
+    --api
+
+cargo loco generate scaffold history_and_physical_examination_grade_rule \
+    deleted_at:tstz \
+    history_and_physical_examination_grade:references \
+    rule_id:string! \
+    section:string! \
+    category:string! \
+    description:string! \
+    --api
+
+cargo loco generate scaffold history_and_physical_examination_grade_flag \
+    deleted_at:tstz \
+    history_and_physical_examination_grade:references \
+    flag_id:string! \
+    category:string! \
+    priority:string! \
+    description:string! \
+    suggested_action:string! \
+    --api

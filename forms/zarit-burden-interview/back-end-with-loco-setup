@@ -14,3 +14,104 @@ cd "${form_snake_case}"
 # Pin time to a version compatible with cookie 0.18.1 (a fresh loco
 # starter otherwise resolves time 0.3.52, which fails to compile).
 cargo update -p time --precise 0.3.47
+
+cargo loco generate scaffold patient \
+    deleted_at:tstz \
+    name:string! \
+    birth_date:date! \
+    sex:string! \
+    email:text \
+    phone:text \
+    postal_address_as_full_text:text \
+    country_as_iso_3166_1_alpha_2:string \
+    postcode:text \
+    united_kingdom_nhs_number:string^ \
+    hospital_mrn:string \
+    height_as_cm:double \
+    weight_as_kg:double \
+    body_mass_index:double \
+    allergies_summary:text! \
+    --api
+
+cargo loco generate scaffold clinician \
+    deleted_at:tstz \
+    name:text! \
+    email:text \
+    phone:text \
+    postal_address_as_full_text:text \
+    country_as_iso_3166_1_alpha_2:string \
+    postcode:text \
+    role:string! \
+    registration_body:string! \
+    registration_number:text! \
+    --api
+
+cargo loco generate scaffold zarit_burden_interview \
+    deleted_at:tstz \
+    patient:references \
+    clinician:references \
+    practitioner_name:string! \
+    practitioner_role:string! \
+    assessed_at:tstz \
+    care_setting:string! \
+    instrument_form:string! \
+    carer_identifier:string! \
+    carer_relationship:string! \
+    carer_co_resident:string! \
+    care_hours_per_week:double \
+    recipient_identifier:string! \
+    recipient_condition:string! \
+    item_1:int \
+    item_2:int \
+    item_3:int \
+    item_4:int \
+    item_5:int \
+    item_6:int \
+    item_7:int \
+    item_8:int \
+    item_9:int \
+    item_10:int \
+    item_11:int \
+    item_12:int \
+    item_13:int \
+    item_14:int \
+    item_15:int \
+    item_16:int \
+    item_17:int \
+    item_18:int \
+    item_19:int \
+    item_20:int \
+    item_21:int \
+    item_22:int \
+    clinical_note:text! \
+    --api
+
+cargo loco generate scaffold zarit_burden_interview_grade \
+    deleted_at:tstz \
+    zarit_burden_interview:references \
+    total_score:int \
+    max_score:int \
+    burden_band:string! \
+    short_form_score:int \
+    graded_at:tstz! \
+    --api
+
+cargo loco generate scaffold zarit_burden_interview_grade_rule \
+    deleted_at:tstz \
+    zarit_burden_interview_grade:references \
+    rule_id:string! \
+    item_number:int \
+    points:int \
+    category:string! \
+    description:string! \
+    --api
+
+cargo loco generate scaffold zarit_burden_interview_grade_flag \
+    deleted_at:tstz \
+    zarit_burden_interview_grade:references \
+    flag_id:string! \
+    category:string! \
+    priority:string! \
+    description:string! \
+    suggested_action:string! \
+    --api

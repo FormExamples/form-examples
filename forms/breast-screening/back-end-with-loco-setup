@@ -14,3 +14,89 @@ cd "${form_snake_case}"
 # Pin time to a version compatible with cookie 0.18.1 (a fresh loco
 # starter otherwise resolves time 0.3.52, which fails to compile).
 cargo update -p time --precise 0.3.47
+
+cargo loco generate scaffold patient \
+    deleted_at:tstz \
+    name:string! \
+    birth_date:date! \
+    sex:string! \
+    email:text \
+    phone:text \
+    postal_address_as_full_text:text \
+    country_as_iso_3166_1_alpha_2:string \
+    postcode:text \
+    united_kingdom_nhs_number:string^ \
+    hospital_mrn:string \
+    height_as_cm:double \
+    weight_as_kg:double \
+    body_mass_index:double \
+    allergies_summary:text! \
+    --api
+
+cargo loco generate scaffold clinician \
+    deleted_at:tstz \
+    name:text! \
+    email:text \
+    phone:text \
+    postal_address_as_full_text:text \
+    country_as_iso_3166_1_alpha_2:string \
+    postcode:text \
+    role:string! \
+    registration_body:string! \
+    registration_number:text! \
+    --api
+
+cargo loco generate scaffold breast_screening \
+    deleted_at:tstz \
+    patient:references \
+    clinician:references \
+    reporting_clinician_role:string! \
+    reported_at:tstz \
+    screening_unit:text! \
+    episode_type:string! \
+    patient_identifier:string! \
+    age_years:int \
+    last_screened_date:date \
+    higher_risk_surveillance:string! \
+    symptomatic:string! \
+    consent_given:string! \
+    views_taken:string! \
+    image_adequacy:string! \
+    first_read_opinion:string! \
+    second_read_opinion:string! \
+    arbitration_outcome:string! \
+    reading_outcome:string! \
+    assessment_performed:string! \
+    assessment_modalities:text! \
+    imaging_classification:int \
+    clinical_context:text! \
+    --api
+
+cargo loco generate scaffold breast_screening_grade \
+    deleted_at:tstz \
+    breast_screening:references \
+    eligibility_status:string! \
+    result_class:string! \
+    management_action:string! \
+    status:string! \
+    graded_at:tstz! \
+    --api
+
+cargo loco generate scaffold breast_screening_grade_rule \
+    deleted_at:tstz \
+    breast_screening_grade:references \
+    rule_id:string! \
+    stage:string! \
+    category:string! \
+    description:string! \
+    --api
+
+cargo loco generate scaffold breast_screening_grade_flag \
+    deleted_at:tstz \
+    breast_screening_grade:references \
+    flag_id:string! \
+    category:string! \
+    priority:string! \
+    description:string! \
+    suggested_action:string! \
+    --api

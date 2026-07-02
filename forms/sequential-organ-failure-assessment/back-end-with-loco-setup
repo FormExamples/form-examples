@@ -14,3 +14,102 @@ cd "${form_snake_case}"
 # Pin time to a version compatible with cookie 0.18.1 (a fresh loco
 # starter otherwise resolves time 0.3.52, which fails to compile).
 cargo update -p time --precise 0.3.47
+
+cargo loco generate scaffold patient \
+    deleted_at:tstz \
+    name:string! \
+    birth_date:date! \
+    sex:string! \
+    email:text \
+    phone:text \
+    postal_address_as_full_text:text \
+    country_as_iso_3166_1_alpha_2:string \
+    postcode:text \
+    united_kingdom_nhs_number:string^ \
+    hospital_mrn:string \
+    height_as_cm:double \
+    weight_as_kg:double \
+    body_mass_index:double \
+    allergies_summary:text! \
+    --api
+
+cargo loco generate scaffold clinician \
+    deleted_at:tstz \
+    name:text! \
+    email:text \
+    phone:text \
+    postal_address_as_full_text:text \
+    country_as_iso_3166_1_alpha_2:string \
+    postcode:text \
+    role:string! \
+    registration_body:string! \
+    registration_number:text! \
+    --api
+
+cargo loco generate scaffold sequential_organ_failure_assessment \
+    deleted_at:tstz \
+    patient:references \
+    clinician:references \
+    assessor_name:string! \
+    assessor_role:string! \
+    assessor_registration_number:string! \
+    assessed_at:tstz \
+    care_location:string! \
+    hours_since_admission:int \
+    patient_identifier:string! \
+    age_years:int \
+    sex:string! \
+    admission_diagnosis:text! \
+    suspected_infection:string! \
+    baseline_sofa_total:int \
+    pao2:double \
+    fio2:double \
+    pao2_fio2_ratio:double \
+    respiratory_support:string! \
+    platelets:double \
+    bilirubin:double \
+    map:double \
+    vasopressor:string! \
+    vasopressor_dose:double \
+    glasgow_coma_scale:int \
+    sedated:bool! \
+    creatinine:double \
+    urine_output:int \
+    clinical_note:text! \
+    --api
+
+cargo loco generate scaffold sequential_organ_failure_assessment_grade \
+    deleted_at:tstz \
+    sequential_organ_failure_assessment:references \
+    respiration_score:int \
+    coagulation_score:int \
+    liver_score:int \
+    cardiovascular_score:int \
+    cns_score:int \
+    renal_score:int \
+    total_score:int \
+    delta_sofa:int \
+    mortality_band:string! \
+    sepsis3:bool! \
+    graded_at:tstz! \
+    --api
+
+cargo loco generate scaffold sequential_organ_failure_assessment_grade_rule \
+    deleted_at:tstz \
+    sequential_organ_failure_assessment_grade:references \
+    rule_id:string! \
+    parameter:string! \
+    points:int \
+    category:string! \
+    description:string! \
+    --api
+
+cargo loco generate scaffold sequential_organ_failure_assessment_grade_flag \
+    deleted_at:tstz \
+    sequential_organ_failure_assessment_grade:references \
+    flag_id:string! \
+    category:string! \
+    priority:string! \
+    description:string! \
+    suggested_action:string! \
+    --api

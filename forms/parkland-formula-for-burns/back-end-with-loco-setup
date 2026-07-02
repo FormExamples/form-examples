@@ -14,3 +14,89 @@ cd "${form_snake_case}"
 # Pin time to a version compatible with cookie 0.18.1 (a fresh loco
 # starter otherwise resolves time 0.3.52, which fails to compile).
 cargo update -p time --precise 0.3.47
+
+cargo loco generate scaffold patient \
+    deleted_at:tstz \
+    name:string! \
+    birth_date:date! \
+    sex:string! \
+    email:text \
+    phone:text \
+    postal_address_as_full_text:text \
+    country_as_iso_3166_1_alpha_2:string \
+    postcode:text \
+    united_kingdom_nhs_number:string^ \
+    hospital_mrn:string \
+    height_as_cm:double \
+    weight_as_kg:double \
+    body_mass_index:double \
+    allergies_summary:text! \
+    --api
+
+cargo loco generate scaffold clinician \
+    deleted_at:tstz \
+    name:text! \
+    email:text \
+    phone:text \
+    postal_address_as_full_text:text \
+    country_as_iso_3166_1_alpha_2:string \
+    postcode:text \
+    role:string! \
+    registration_body:string! \
+    registration_number:text! \
+    --api
+
+cargo loco generate scaffold parkland_formula_for_burns \
+    deleted_at:tstz \
+    patient:references \
+    clinician:references \
+    clinician_name:string! \
+    clinician_role:string! \
+    care_setting:string! \
+    assessed_at:tstz \
+    patient_identifier:string! \
+    age_band:string! \
+    sex:string! \
+    weight_kg:double \
+    tbsa_percent:double \
+    tbsa_method:string! \
+    injury_at:tstz \
+    injury_time_known:string! \
+    inhalation_suspected:string! \
+    circumferential_or_deep:string! \
+    mechanism:string! \
+    --api
+
+cargo loco generate scaffold parkland_formula_for_burns_grade \
+    deleted_at:tstz \
+    parkland_formula_for_burns:references \
+    total_24h_volume_ml:double \
+    first_8h_volume_ml:double \
+    next_16h_volume_ml:double \
+    hours_since_injury:double \
+    remaining_first_8h_hours:double \
+    first_8h_rate_ml_h:double \
+    next_16h_rate_ml_h:double \
+    urine_output_target_min_ml_h:double \
+    urine_output_target_max_ml_h:double \
+    graded_at:tstz! \
+    --api
+
+cargo loco generate scaffold parkland_formula_for_burns_grade_rule \
+    deleted_at:tstz \
+    parkland_formula_for_burns_grade:references \
+    rule_id:string! \
+    instrument:string! \
+    category:string! \
+    description:string! \
+    --api
+
+cargo loco generate scaffold parkland_formula_for_burns_grade_flag \
+    deleted_at:tstz \
+    parkland_formula_for_burns_grade:references \
+    flag_id:string! \
+    category:string! \
+    priority:string! \
+    description:string! \
+    suggested_action:string! \
+    --api

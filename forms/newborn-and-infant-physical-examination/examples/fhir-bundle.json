@@ -1,0 +1,1572 @@
+{
+  "resourceType": "Bundle",
+  "id": "550e8400-e29b-41d4-a716-000000000063",
+  "type": "document",
+  "timestamp": "2026-04-09T10:00:00+00:00",
+  "meta": {
+    "profile": [
+      "http://hl7.org/fhir/StructureDefinition/Bundle"
+    ],
+    "tag": [
+      {
+        "system": "https://github.com/joelparkerhenderson/form-examples",
+        "code": "example",
+        "display": "Newborn and Infant Physical Examination (NIPE) example bundle"
+      }
+    ]
+  },
+  "entry": [
+    {
+      "fullUrl": "urn:uuid:660e8400-e29b-41d4-a716-446655440001",
+      "resource": {
+        "resourceType": "Observation",
+        "id": "660e8400-e29b-41d4-a716-446655440001",
+        "meta": {
+          "profile": [
+            "http://hl7.org/fhir/StructureDefinition/Observation"
+          ],
+          "lastUpdated": "2026-04-09T10:00:00+00:00"
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "survey",
+                "display": "Survey"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "urn:form-examples:newborn-and-infant-physical-examination",
+              "code": "clinician",
+              "display": "Clinician"
+            }
+          ]
+        },
+        "subject": {
+          "reference": "Patient/550e8400-e29b-41d4-a716-446655440000"
+        },
+        "encounter": {
+          "reference": "Encounter/bb0e8400-e29b-41d4-a716-446655440006"
+        },
+        "effectiveDateTime": "2026-04-09T10:00:00+00:00",
+        "component": [
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:newborn-and-infant-physical-examination",
+                  "code": "deleted_at",
+                  "display": "Deleted At"
+                }
+              ]
+            },
+            "valueDateTime": "2026-04-09T10:00:00+00:00"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:newborn-and-infant-physical-examination",
+                  "code": "name",
+                  "display": "Name"
+                }
+              ]
+            },
+            "valueString": "Example"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:newborn-and-infant-physical-examination",
+                  "code": "email",
+                  "display": "Email"
+                }
+              ]
+            },
+            "valueString": "jane.doe@example.com"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:newborn-and-infant-physical-examination",
+                  "code": "phone",
+                  "display": "Phone"
+                }
+              ]
+            },
+            "valueString": "07700900000"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:newborn-and-infant-physical-examination",
+                  "code": "postal_address_as_full_text",
+                  "display": "Postal Address As Full Text"
+                }
+              ]
+            },
+            "valueString": "Example text."
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:newborn-and-infant-physical-examination",
+                  "code": "country_as_iso_3166_1_alpha_2",
+                  "display": "Country As Iso 3166 1 Alpha 2"
+                }
+              ]
+            },
+            "valueString": ""
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:newborn-and-infant-physical-examination",
+                  "code": "postcode",
+                  "display": "Postcode"
+                }
+              ]
+            },
+            "valueString": "SW1A 1AA"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:newborn-and-infant-physical-examination",
+                  "code": "role",
+                  "display": "Role"
+                }
+              ]
+            },
+            "valueCodeableConcept": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:newborn-and-infant-physical-examination:role",
+                  "code": "midwife",
+                  "display": "Midwife"
+                }
+              ]
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:newborn-and-infant-physical-examination",
+                  "code": "registration_body",
+                  "display": "Registration Body"
+                }
+              ]
+            },
+            "valueCodeableConcept": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:newborn-and-infant-physical-examination:registration_body",
+                  "code": "GMC",
+                  "display": "Gmc"
+                }
+              ]
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:newborn-and-infant-physical-examination",
+                  "code": "registration_number",
+                  "display": "Registration Number"
+                }
+              ]
+            },
+            "valueString": ""
+          }
+        ]
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:770e8400-e29b-41d4-a716-446655440002",
+      "resource": {
+        "resourceType": "Observation",
+        "id": "770e8400-e29b-41d4-a716-446655440002",
+        "meta": {
+          "profile": [
+            "http://hl7.org/fhir/StructureDefinition/Observation"
+          ],
+          "lastUpdated": "2026-04-09T10:00:00+00:00"
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "survey",
+                "display": "Survey"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "urn:form-examples:newborn-and-infant-physical-examination",
+              "code": "newborn_and_infant_physical_examination",
+              "display": "Newborn And Infant Physical Examination"
+            }
+          ]
+        },
+        "subject": {
+          "reference": "Patient/550e8400-e29b-41d4-a716-446655440000"
+        },
+        "encounter": {
+          "reference": "Encounter/bb0e8400-e29b-41d4-a716-446655440006"
+        },
+        "effectiveDateTime": "2026-04-09T10:00:00+00:00",
+        "component": [
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:newborn-and-infant-physical-examination",
+                  "code": "deleted_at",
+                  "display": "Deleted At"
+                }
+              ]
+            },
+            "valueDateTime": "2026-04-09T10:00:00+00:00"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:newborn-and-infant-physical-examination",
+                  "code": "practitioner_name",
+                  "display": "Practitioner Name"
+                }
+              ]
+            },
+            "valueString": "Example"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:newborn-and-infant-physical-examination",
+                  "code": "practitioner_role",
+                  "display": "Practitioner Role"
+                }
+              ]
+            },
+            "valueCodeableConcept": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:newborn-and-infant-physical-examination:practitioner_role",
+                  "code": "midwife",
+                  "display": "Midwife"
+                }
+              ]
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:newborn-and-infant-physical-examination",
+                  "code": "examined_at",
+                  "display": "Examined At"
+                }
+              ]
+            },
+            "valueDateTime": "2026-04-09T10:00:00+00:00"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:newborn-and-infant-physical-examination",
+                  "code": "examination_context",
+                  "display": "Examination Context"
+                }
+              ]
+            },
+            "valueCodeableConcept": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:newborn-and-infant-physical-examination:examination_context",
+                  "code": "newborn-72h",
+                  "display": "Newborn-72H"
+                }
+              ]
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:newborn-and-infant-physical-examination",
+                  "code": "care_setting",
+                  "display": "Care Setting"
+                }
+              ]
+            },
+            "valueCodeableConcept": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:newborn-and-infant-physical-examination:care_setting",
+                  "code": "maternity-ward",
+                  "display": "Maternity-Ward"
+                }
+              ]
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:newborn-and-infant-physical-examination",
+                  "code": "baby_identifier",
+                  "display": "Baby Identifier"
+                }
+              ]
+            },
+            "valueString": ""
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:newborn-and-infant-physical-examination",
+                  "code": "baby_name",
+                  "display": "Baby Name"
+                }
+              ]
+            },
+            "valueString": "Example"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:newborn-and-infant-physical-examination",
+                  "code": "date_of_birth",
+                  "display": "Date Of Birth"
+                }
+              ]
+            },
+            "valueDateTime": "1965-06-15"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:newborn-and-infant-physical-examination",
+                  "code": "sex",
+                  "display": "Sex"
+                }
+              ]
+            },
+            "valueCodeableConcept": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:newborn-and-infant-physical-examination:sex",
+                  "code": "male",
+                  "display": "Male"
+                }
+              ]
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:newborn-and-infant-physical-examination",
+                  "code": "gestational_age_weeks",
+                  "display": "Gestational Age Weeks"
+                }
+              ]
+            },
+            "valueQuantity": {
+              "value": 0.0
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:newborn-and-infant-physical-examination",
+                  "code": "birth_weight_grams",
+                  "display": "Birth Weight Grams"
+                }
+              ]
+            },
+            "valueQuantity": {
+              "value": 70.0
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:newborn-and-infant-physical-examination",
+                  "code": "breech_presentation",
+                  "display": "Breech Presentation"
+                }
+              ]
+            },
+            "valueCodeableConcept": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:newborn-and-infant-physical-examination:breech_presentation",
+                  "code": "yes",
+                  "display": "Yes"
+                }
+              ]
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:newborn-and-infant-physical-examination",
+                  "code": "family_history_hip_problems",
+                  "display": "Family History Hip Problems"
+                }
+              ]
+            },
+            "valueCodeableConcept": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:newborn-and-infant-physical-examination:family_history_hip_problems",
+                  "code": "yes",
+                  "display": "Yes"
+                }
+              ]
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:newborn-and-infant-physical-examination",
+                  "code": "antenatal_concerns",
+                  "display": "Antenatal Concerns"
+                }
+              ]
+            },
+            "valueString": ""
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:newborn-and-infant-physical-examination",
+                  "code": "eyes_red_reflex_right",
+                  "display": "Eyes Red Reflex Right"
+                }
+              ]
+            },
+            "valueCodeableConcept": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:newborn-and-infant-physical-examination:eyes_red_reflex_right",
+                  "code": "present",
+                  "display": "Present"
+                }
+              ]
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:newborn-and-infant-physical-examination",
+                  "code": "eyes_red_reflex_left",
+                  "display": "Eyes Red Reflex Left"
+                }
+              ]
+            },
+            "valueCodeableConcept": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:newborn-and-infant-physical-examination:eyes_red_reflex_left",
+                  "code": "present",
+                  "display": "Present"
+                }
+              ]
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:newborn-and-infant-physical-examination",
+                  "code": "eyes_appearance",
+                  "display": "Eyes Appearance"
+                }
+              ]
+            },
+            "valueCodeableConcept": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:newborn-and-infant-physical-examination:eyes_appearance",
+                  "code": "normal",
+                  "display": "Normal"
+                }
+              ]
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:newborn-and-infant-physical-examination",
+                  "code": "heart_murmur",
+                  "display": "Heart Murmur"
+                }
+              ]
+            },
+            "valueCodeableConcept": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:newborn-and-infant-physical-examination:heart_murmur",
+                  "code": "none",
+                  "display": "None"
+                }
+              ]
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:newborn-and-infant-physical-examination",
+                  "code": "femoral_pulses_right",
+                  "display": "Femoral Pulses Right"
+                }
+              ]
+            },
+            "valueCodeableConcept": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:newborn-and-infant-physical-examination:femoral_pulses_right",
+                  "code": "present",
+                  "display": "Present"
+                }
+              ]
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:newborn-and-infant-physical-examination",
+                  "code": "femoral_pulses_left",
+                  "display": "Femoral Pulses Left"
+                }
+              ]
+            },
+            "valueCodeableConcept": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:newborn-and-infant-physical-examination:femoral_pulses_left",
+                  "code": "present",
+                  "display": "Present"
+                }
+              ]
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:newborn-and-infant-physical-examination",
+                  "code": "central_cyanosis",
+                  "display": "Central Cyanosis"
+                }
+              ]
+            },
+            "valueCodeableConcept": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:newborn-and-infant-physical-examination:central_cyanosis",
+                  "code": "absent",
+                  "display": "Absent"
+                }
+              ]
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:newborn-and-infant-physical-examination",
+                  "code": "oxygen_saturation_preductal",
+                  "display": "Oxygen Saturation Preductal"
+                }
+              ]
+            },
+            "valueQuantity": {
+              "value": 0.0
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:newborn-and-infant-physical-examination",
+                  "code": "oxygen_saturation_postductal",
+                  "display": "Oxygen Saturation Postductal"
+                }
+              ]
+            },
+            "valueQuantity": {
+              "value": 0.0
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:newborn-and-infant-physical-examination",
+                  "code": "barlow_test",
+                  "display": "Barlow Test"
+                }
+              ]
+            },
+            "valueCodeableConcept": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:newborn-and-infant-physical-examination:barlow_test",
+                  "code": "negative",
+                  "display": "Negative"
+                }
+              ]
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:newborn-and-infant-physical-examination",
+                  "code": "ortolani_test",
+                  "display": "Ortolani Test"
+                }
+              ]
+            },
+            "valueCodeableConcept": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:newborn-and-infant-physical-examination:ortolani_test",
+                  "code": "negative",
+                  "display": "Negative"
+                }
+              ]
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:newborn-and-infant-physical-examination",
+                  "code": "hip_abduction",
+                  "display": "Hip Abduction"
+                }
+              ]
+            },
+            "valueCodeableConcept": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:newborn-and-infant-physical-examination:hip_abduction",
+                  "code": "normal",
+                  "display": "Normal"
+                }
+              ]
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:newborn-and-infant-physical-examination",
+                  "code": "testis_right",
+                  "display": "Testis Right"
+                }
+              ]
+            },
+            "valueCodeableConcept": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:newborn-and-infant-physical-examination:testis_right",
+                  "code": "descended",
+                  "display": "Descended"
+                }
+              ]
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:newborn-and-infant-physical-examination",
+                  "code": "testis_left",
+                  "display": "Testis Left"
+                }
+              ]
+            },
+            "valueCodeableConcept": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:newborn-and-infant-physical-examination:testis_left",
+                  "code": "descended",
+                  "display": "Descended"
+                }
+              ]
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:newborn-and-infant-physical-examination",
+                  "code": "general_appearance",
+                  "display": "General Appearance"
+                }
+              ]
+            },
+            "valueCodeableConcept": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:newborn-and-infant-physical-examination:general_appearance",
+                  "code": "normal",
+                  "display": "Normal"
+                }
+              ]
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:newborn-and-infant-physical-examination",
+                  "code": "skin",
+                  "display": "Skin"
+                }
+              ]
+            },
+            "valueCodeableConcept": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:newborn-and-infant-physical-examination:skin",
+                  "code": "normal",
+                  "display": "Normal"
+                }
+              ]
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:newborn-and-infant-physical-examination",
+                  "code": "head_and_fontanelles",
+                  "display": "Head And Fontanelles"
+                }
+              ]
+            },
+            "valueCodeableConcept": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:newborn-and-infant-physical-examination:head_and_fontanelles",
+                  "code": "normal",
+                  "display": "Normal"
+                }
+              ]
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:newborn-and-infant-physical-examination",
+                  "code": "face_and_palate",
+                  "display": "Face And Palate"
+                }
+              ]
+            },
+            "valueCodeableConcept": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:newborn-and-infant-physical-examination:face_and_palate",
+                  "code": "normal",
+                  "display": "Normal"
+                }
+              ]
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:newborn-and-infant-physical-examination",
+                  "code": "neck_and_clavicles",
+                  "display": "Neck And Clavicles"
+                }
+              ]
+            },
+            "valueCodeableConcept": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:newborn-and-infant-physical-examination:neck_and_clavicles",
+                  "code": "normal",
+                  "display": "Normal"
+                }
+              ]
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:newborn-and-infant-physical-examination",
+                  "code": "chest_and_lungs",
+                  "display": "Chest And Lungs"
+                }
+              ]
+            },
+            "valueCodeableConcept": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:newborn-and-infant-physical-examination:chest_and_lungs",
+                  "code": "normal",
+                  "display": "Normal"
+                }
+              ]
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:newborn-and-infant-physical-examination",
+                  "code": "abdomen",
+                  "display": "Abdomen"
+                }
+              ]
+            },
+            "valueCodeableConcept": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:newborn-and-infant-physical-examination:abdomen",
+                  "code": "normal",
+                  "display": "Normal"
+                }
+              ]
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:newborn-and-infant-physical-examination",
+                  "code": "genitalia",
+                  "display": "Genitalia"
+                }
+              ]
+            },
+            "valueCodeableConcept": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:newborn-and-infant-physical-examination:genitalia",
+                  "code": "normal",
+                  "display": "Normal"
+                }
+              ]
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:newborn-and-infant-physical-examination",
+                  "code": "anus_and_spine",
+                  "display": "Anus And Spine"
+                }
+              ]
+            },
+            "valueCodeableConcept": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:newborn-and-infant-physical-examination:anus_and_spine",
+                  "code": "normal",
+                  "display": "Normal"
+                }
+              ]
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:newborn-and-infant-physical-examination",
+                  "code": "limbs_and_digits",
+                  "display": "Limbs And Digits"
+                }
+              ]
+            },
+            "valueCodeableConcept": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:newborn-and-infant-physical-examination:limbs_and_digits",
+                  "code": "normal",
+                  "display": "Normal"
+                }
+              ]
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:newborn-and-infant-physical-examination",
+                  "code": "feet",
+                  "display": "Feet"
+                }
+              ]
+            },
+            "valueCodeableConcept": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:newborn-and-infant-physical-examination:feet",
+                  "code": "normal",
+                  "display": "Normal"
+                }
+              ]
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:newborn-and-infant-physical-examination",
+                  "code": "tone_and_movement",
+                  "display": "Tone And Movement"
+                }
+              ]
+            },
+            "valueCodeableConcept": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:newborn-and-infant-physical-examination:tone_and_movement",
+                  "code": "normal",
+                  "display": "Normal"
+                }
+              ]
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:newborn-and-infant-physical-examination",
+                  "code": "weight_grams",
+                  "display": "Weight Grams"
+                }
+              ]
+            },
+            "valueQuantity": {
+              "value": 70.0
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:newborn-and-infant-physical-examination",
+                  "code": "head_circumference_cm",
+                  "display": "Head Circumference Cm"
+                }
+              ]
+            },
+            "valueQuantity": {
+              "value": 0.0
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:newborn-and-infant-physical-examination",
+                  "code": "length_cm",
+                  "display": "Length Cm"
+                }
+              ]
+            },
+            "valueQuantity": {
+              "value": 0.0
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:newborn-and-infant-physical-examination",
+                  "code": "eyes_result_recorded",
+                  "display": "Eyes Result Recorded"
+                }
+              ]
+            },
+            "valueCodeableConcept": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:newborn-and-infant-physical-examination:eyes_result_recorded",
+                  "code": "satisfactory",
+                  "display": "Satisfactory"
+                }
+              ]
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:newborn-and-infant-physical-examination",
+                  "code": "heart_result_recorded",
+                  "display": "Heart Result Recorded"
+                }
+              ]
+            },
+            "valueCodeableConcept": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:newborn-and-infant-physical-examination:heart_result_recorded",
+                  "code": "satisfactory",
+                  "display": "Satisfactory"
+                }
+              ]
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:newborn-and-infant-physical-examination",
+                  "code": "hips_result_recorded",
+                  "display": "Hips Result Recorded"
+                }
+              ]
+            },
+            "valueCodeableConcept": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:newborn-and-infant-physical-examination:hips_result_recorded",
+                  "code": "satisfactory",
+                  "display": "Satisfactory"
+                }
+              ]
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:newborn-and-infant-physical-examination",
+                  "code": "testes_result_recorded",
+                  "display": "Testes Result Recorded"
+                }
+              ]
+            },
+            "valueCodeableConcept": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:newborn-and-infant-physical-examination:testes_result_recorded",
+                  "code": "satisfactory",
+                  "display": "Satisfactory"
+                }
+              ]
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:newborn-and-infant-physical-examination",
+                  "code": "clinical_note",
+                  "display": "Clinical Note"
+                }
+              ]
+            },
+            "valueString": ""
+          }
+        ]
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:880e8400-e29b-41d4-a716-446655440003",
+      "resource": {
+        "resourceType": "Observation",
+        "id": "880e8400-e29b-41d4-a716-446655440003",
+        "meta": {
+          "profile": [
+            "http://hl7.org/fhir/StructureDefinition/Observation"
+          ],
+          "lastUpdated": "2026-04-09T10:00:00+00:00"
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "survey",
+                "display": "Survey"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "urn:form-examples:newborn-and-infant-physical-examination",
+              "code": "newborn_and_infant_physical_examination_grade",
+              "display": "Newborn And Infant Physical Examination Grade"
+            }
+          ]
+        },
+        "subject": {
+          "reference": "Patient/550e8400-e29b-41d4-a716-446655440000"
+        },
+        "encounter": {
+          "reference": "Encounter/bb0e8400-e29b-41d4-a716-446655440006"
+        },
+        "effectiveDateTime": "2026-04-09T10:00:00+00:00",
+        "component": [
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:newborn-and-infant-physical-examination",
+                  "code": "deleted_at",
+                  "display": "Deleted At"
+                }
+              ]
+            },
+            "valueDateTime": "2026-04-09T10:00:00+00:00"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:newborn-and-infant-physical-examination",
+                  "code": "eyes_result",
+                  "display": "Eyes Result"
+                }
+              ]
+            },
+            "valueCodeableConcept": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:newborn-and-infant-physical-examination:eyes_result",
+                  "code": "satisfactory",
+                  "display": "Satisfactory"
+                }
+              ]
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:newborn-and-infant-physical-examination",
+                  "code": "heart_result",
+                  "display": "Heart Result"
+                }
+              ]
+            },
+            "valueCodeableConcept": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:newborn-and-infant-physical-examination:heart_result",
+                  "code": "satisfactory",
+                  "display": "Satisfactory"
+                }
+              ]
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:newborn-and-infant-physical-examination",
+                  "code": "hips_result",
+                  "display": "Hips Result"
+                }
+              ]
+            },
+            "valueCodeableConcept": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:newborn-and-infant-physical-examination:hips_result",
+                  "code": "satisfactory",
+                  "display": "Satisfactory"
+                }
+              ]
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:newborn-and-infant-physical-examination",
+                  "code": "testes_result",
+                  "display": "Testes Result"
+                }
+              ]
+            },
+            "valueCodeableConcept": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:newborn-and-infant-physical-examination:testes_result",
+                  "code": "satisfactory",
+                  "display": "Satisfactory"
+                }
+              ]
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:newborn-and-infant-physical-examination",
+                  "code": "overall_outcome",
+                  "display": "Overall Outcome"
+                }
+              ]
+            },
+            "valueCodeableConcept": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:newborn-and-infant-physical-examination:overall_outcome",
+                  "code": "satisfactory",
+                  "display": "Satisfactory"
+                }
+              ]
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:newborn-and-infant-physical-examination",
+                  "code": "completeness",
+                  "display": "Completeness"
+                }
+              ]
+            },
+            "valueCodeableConcept": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:newborn-and-infant-physical-examination:completeness",
+                  "code": "complete",
+                  "display": "Complete"
+                }
+              ]
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:newborn-and-infant-physical-examination",
+                  "code": "completeness_percent",
+                  "display": "Completeness Percent"
+                }
+              ]
+            },
+            "valueInteger": 1
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:newborn-and-infant-physical-examination",
+                  "code": "graded_at",
+                  "display": "Graded At"
+                }
+              ]
+            },
+            "valueDateTime": "2026-04-09T10:00:00+00:00"
+          }
+        ]
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:aa0e8400-e29b-41d4-a716-446655440005",
+      "resource": {
+        "resourceType": "Observation",
+        "id": "aa0e8400-e29b-41d4-a716-446655440005",
+        "meta": {
+          "profile": [
+            "http://hl7.org/fhir/StructureDefinition/Observation"
+          ],
+          "lastUpdated": "2026-04-09T10:00:00+00:00"
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "survey",
+                "display": "Survey"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "urn:form-examples:newborn-and-infant-physical-examination",
+              "code": "newborn_and_infant_physical_examination_grade_flag",
+              "display": "Newborn And Infant Physical Examination Grade Flag"
+            }
+          ]
+        },
+        "subject": {
+          "reference": "Patient/550e8400-e29b-41d4-a716-446655440000"
+        },
+        "encounter": {
+          "reference": "Encounter/bb0e8400-e29b-41d4-a716-446655440006"
+        },
+        "effectiveDateTime": "2026-04-09T10:00:00+00:00",
+        "component": [
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:newborn-and-infant-physical-examination",
+                  "code": "deleted_at",
+                  "display": "Deleted At"
+                }
+              ]
+            },
+            "valueDateTime": "2026-04-09T10:00:00+00:00"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:newborn-and-infant-physical-examination",
+                  "code": "category",
+                  "display": "Category"
+                }
+              ]
+            },
+            "valueCodeableConcept": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:newborn-and-infant-physical-examination:category",
+                  "code": "urgent-ophthalmology",
+                  "display": "Urgent-Ophthalmology"
+                }
+              ]
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:newborn-and-infant-physical-examination",
+                  "code": "priority",
+                  "display": "Priority"
+                }
+              ]
+            },
+            "valueCodeableConcept": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:newborn-and-infant-physical-examination:priority",
+                  "code": "low",
+                  "display": "Low"
+                }
+              ]
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:newborn-and-infant-physical-examination",
+                  "code": "description",
+                  "display": "Description"
+                }
+              ]
+            },
+            "valueString": "Example text."
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:newborn-and-infant-physical-examination",
+                  "code": "suggested_action",
+                  "display": "Suggested Action"
+                }
+              ]
+            },
+            "valueString": ""
+          }
+        ]
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:990e8400-e29b-41d4-a716-446655440004",
+      "resource": {
+        "resourceType": "Observation",
+        "id": "990e8400-e29b-41d4-a716-446655440004",
+        "meta": {
+          "profile": [
+            "http://hl7.org/fhir/StructureDefinition/Observation"
+          ],
+          "lastUpdated": "2026-04-09T10:00:00+00:00"
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "survey",
+                "display": "Survey"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "urn:form-examples:newborn-and-infant-physical-examination",
+              "code": "newborn_and_infant_physical_examination_grade_rule",
+              "display": "Newborn And Infant Physical Examination Grade Rule"
+            }
+          ]
+        },
+        "subject": {
+          "reference": "Patient/550e8400-e29b-41d4-a716-446655440000"
+        },
+        "encounter": {
+          "reference": "Encounter/bb0e8400-e29b-41d4-a716-446655440006"
+        },
+        "effectiveDateTime": "2026-04-09T10:00:00+00:00",
+        "component": [
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:newborn-and-infant-physical-examination",
+                  "code": "deleted_at",
+                  "display": "Deleted At"
+                }
+              ]
+            },
+            "valueDateTime": "2026-04-09T10:00:00+00:00"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:newborn-and-infant-physical-examination",
+                  "code": "component",
+                  "display": "Component"
+                }
+              ]
+            },
+            "valueCodeableConcept": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:newborn-and-infant-physical-examination:component",
+                  "code": "eyes",
+                  "display": "Eyes"
+                }
+              ]
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:newborn-and-infant-physical-examination",
+                  "code": "category",
+                  "display": "Category"
+                }
+              ]
+            },
+            "valueString": "General"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:newborn-and-infant-physical-examination",
+                  "code": "description",
+                  "display": "Description"
+                }
+              ]
+            },
+            "valueString": "Example text."
+          }
+        ]
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:550e8400-e29b-41d4-a716-446655440000",
+      "resource": {
+        "resourceType": "Patient",
+        "id": "550e8400-e29b-41d4-a716-446655440000",
+        "meta": {
+          "profile": [
+            "http://hl7.org/fhir/StructureDefinition/Patient"
+          ],
+          "lastUpdated": "2026-04-09T10:00:00+00:00"
+        },
+        "name": [
+          {
+            "use": "official",
+            "family": "Doe",
+            "given": [
+              "Jane"
+            ]
+          }
+        ],
+        "birthDate": "1965-06-15",
+        "gender": "female",
+        "telecom": [
+          {
+            "system": "email",
+            "value": "jane.doe@example.com"
+          },
+          {
+            "system": "phone",
+            "value": "07700900000"
+          }
+        ],
+        "address": [
+          {
+            "postalCode": "SW1A 1AA"
+          }
+        ]
+      }
+    }
+  ]
+}

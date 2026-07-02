@@ -1,0 +1,972 @@
+{
+  "resourceType": "Bundle",
+  "id": "550e8400-e29b-41d4-a716-000000000063",
+  "type": "document",
+  "timestamp": "2026-04-09T10:00:00+00:00",
+  "meta": {
+    "profile": [
+      "http://hl7.org/fhir/StructureDefinition/Bundle"
+    ],
+    "tag": [
+      {
+        "system": "https://github.com/joelparkerhenderson/form-examples",
+        "code": "example",
+        "display": "CHA2DS2-VASc Score for Atrial Fibrillation Stroke Risk example bundle"
+      }
+    ]
+  },
+  "entry": [
+    {
+      "fullUrl": "urn:uuid:770e8400-e29b-41d4-a716-446655440002",
+      "resource": {
+        "resourceType": "Observation",
+        "id": "770e8400-e29b-41d4-a716-446655440002",
+        "meta": {
+          "profile": [
+            "http://hl7.org/fhir/StructureDefinition/Observation"
+          ],
+          "lastUpdated": "2026-04-09T10:00:00+00:00"
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "survey",
+                "display": "Survey"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "urn:form-examples:cha2ds2-vasc-score-for-atrial-fibrillation-stroke-risk",
+              "code": "cha2ds2_vasc",
+              "display": "Cha2Ds2 Vasc"
+            }
+          ]
+        },
+        "subject": {
+          "reference": "Patient/550e8400-e29b-41d4-a716-446655440000"
+        },
+        "encounter": {
+          "reference": "Encounter/bb0e8400-e29b-41d4-a716-446655440006"
+        },
+        "effectiveDateTime": "2026-04-09T10:00:00+00:00",
+        "component": [
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:cha2ds2-vasc-score-for-atrial-fibrillation-stroke-risk",
+                  "code": "deleted_at",
+                  "display": "Deleted At"
+                }
+              ]
+            },
+            "valueDateTime": "2026-04-09T10:00:00+00:00"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:cha2ds2-vasc-score-for-atrial-fibrillation-stroke-risk",
+                  "code": "clinician_name",
+                  "display": "Clinician Name"
+                }
+              ]
+            },
+            "valueString": "Example"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:cha2ds2-vasc-score-for-atrial-fibrillation-stroke-risk",
+                  "code": "clinician_role",
+                  "display": "Clinician Role"
+                }
+              ]
+            },
+            "valueCodeableConcept": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:cha2ds2-vasc-score-for-atrial-fibrillation-stroke-risk:clinician_role",
+                  "code": "doctor",
+                  "display": "Doctor"
+                }
+              ]
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:cha2ds2-vasc-score-for-atrial-fibrillation-stroke-risk",
+                  "code": "assessed_at",
+                  "display": "Assessed At"
+                }
+              ]
+            },
+            "valueDateTime": "2026-04-09T10:00:00+00:00"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:cha2ds2-vasc-score-for-atrial-fibrillation-stroke-risk",
+                  "code": "care_setting",
+                  "display": "Care Setting"
+                }
+              ]
+            },
+            "valueCodeableConcept": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:cha2ds2-vasc-score-for-atrial-fibrillation-stroke-risk:care_setting",
+                  "code": "primary-care",
+                  "display": "Primary-Care"
+                }
+              ]
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:cha2ds2-vasc-score-for-atrial-fibrillation-stroke-risk",
+                  "code": "atrial_fibrillation_type",
+                  "display": "Atrial Fibrillation Type"
+                }
+              ]
+            },
+            "valueCodeableConcept": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:cha2ds2-vasc-score-for-atrial-fibrillation-stroke-risk:atrial_fibrillation_type",
+                  "code": "paroxysmal",
+                  "display": "Paroxysmal"
+                }
+              ]
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:cha2ds2-vasc-score-for-atrial-fibrillation-stroke-risk",
+                  "code": "patient_identifier",
+                  "display": "Patient Identifier"
+                }
+              ]
+            },
+            "valueString": ""
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:cha2ds2-vasc-score-for-atrial-fibrillation-stroke-risk",
+                  "code": "age_years",
+                  "display": "Age Years"
+                }
+              ]
+            },
+            "valueInteger": 45
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:cha2ds2-vasc-score-for-atrial-fibrillation-stroke-risk",
+                  "code": "sex",
+                  "display": "Sex"
+                }
+              ]
+            },
+            "valueCodeableConcept": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:cha2ds2-vasc-score-for-atrial-fibrillation-stroke-risk:sex",
+                  "code": "female",
+                  "display": "Female"
+                }
+              ]
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:cha2ds2-vasc-score-for-atrial-fibrillation-stroke-risk",
+                  "code": "congestive_heart_failure",
+                  "display": "Congestive Heart Failure"
+                }
+              ]
+            },
+            "valueCodeableConcept": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:cha2ds2-vasc-score-for-atrial-fibrillation-stroke-risk:congestive_heart_failure",
+                  "code": "yes",
+                  "display": "Yes"
+                }
+              ]
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:cha2ds2-vasc-score-for-atrial-fibrillation-stroke-risk",
+                  "code": "hypertension",
+                  "display": "Hypertension"
+                }
+              ]
+            },
+            "valueCodeableConcept": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:cha2ds2-vasc-score-for-atrial-fibrillation-stroke-risk:hypertension",
+                  "code": "yes",
+                  "display": "Yes"
+                }
+              ]
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:cha2ds2-vasc-score-for-atrial-fibrillation-stroke-risk",
+                  "code": "diabetes",
+                  "display": "Diabetes"
+                }
+              ]
+            },
+            "valueCodeableConcept": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:cha2ds2-vasc-score-for-atrial-fibrillation-stroke-risk:diabetes",
+                  "code": "yes",
+                  "display": "Yes"
+                }
+              ]
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:cha2ds2-vasc-score-for-atrial-fibrillation-stroke-risk",
+                  "code": "stroke_tia_thromboembolism",
+                  "display": "Stroke Tia Thromboembolism"
+                }
+              ]
+            },
+            "valueCodeableConcept": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:cha2ds2-vasc-score-for-atrial-fibrillation-stroke-risk:stroke_tia_thromboembolism",
+                  "code": "yes",
+                  "display": "Yes"
+                }
+              ]
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:cha2ds2-vasc-score-for-atrial-fibrillation-stroke-risk",
+                  "code": "vascular_disease",
+                  "display": "Vascular Disease"
+                }
+              ]
+            },
+            "valueCodeableConcept": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:cha2ds2-vasc-score-for-atrial-fibrillation-stroke-risk:vascular_disease",
+                  "code": "yes",
+                  "display": "Yes"
+                }
+              ]
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:cha2ds2-vasc-score-for-atrial-fibrillation-stroke-risk",
+                  "code": "clinical_note",
+                  "display": "Clinical Note"
+                }
+              ]
+            },
+            "valueString": ""
+          }
+        ]
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:880e8400-e29b-41d4-a716-446655440003",
+      "resource": {
+        "resourceType": "Observation",
+        "id": "880e8400-e29b-41d4-a716-446655440003",
+        "meta": {
+          "profile": [
+            "http://hl7.org/fhir/StructureDefinition/Observation"
+          ],
+          "lastUpdated": "2026-04-09T10:00:00+00:00"
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "survey",
+                "display": "Survey"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "urn:form-examples:cha2ds2-vasc-score-for-atrial-fibrillation-stroke-risk",
+              "code": "cha2ds2_vasc_grade",
+              "display": "Cha2Ds2 Vasc Grade"
+            }
+          ]
+        },
+        "subject": {
+          "reference": "Patient/550e8400-e29b-41d4-a716-446655440000"
+        },
+        "encounter": {
+          "reference": "Encounter/bb0e8400-e29b-41d4-a716-446655440006"
+        },
+        "effectiveDateTime": "2026-04-09T10:00:00+00:00",
+        "component": [
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:cha2ds2-vasc-score-for-atrial-fibrillation-stroke-risk",
+                  "code": "deleted_at",
+                  "display": "Deleted At"
+                }
+              ]
+            },
+            "valueDateTime": "2026-04-09T10:00:00+00:00"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:cha2ds2-vasc-score-for-atrial-fibrillation-stroke-risk",
+                  "code": "congestive_heart_failure_points",
+                  "display": "Congestive Heart Failure Points"
+                }
+              ]
+            },
+            "valueInteger": 1
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:cha2ds2-vasc-score-for-atrial-fibrillation-stroke-risk",
+                  "code": "hypertension_points",
+                  "display": "Hypertension Points"
+                }
+              ]
+            },
+            "valueInteger": 1
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:cha2ds2-vasc-score-for-atrial-fibrillation-stroke-risk",
+                  "code": "age_points",
+                  "display": "Age Points"
+                }
+              ]
+            },
+            "valueInteger": 45
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:cha2ds2-vasc-score-for-atrial-fibrillation-stroke-risk",
+                  "code": "diabetes_points",
+                  "display": "Diabetes Points"
+                }
+              ]
+            },
+            "valueInteger": 1
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:cha2ds2-vasc-score-for-atrial-fibrillation-stroke-risk",
+                  "code": "stroke_points",
+                  "display": "Stroke Points"
+                }
+              ]
+            },
+            "valueInteger": 1
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:cha2ds2-vasc-score-for-atrial-fibrillation-stroke-risk",
+                  "code": "vascular_disease_points",
+                  "display": "Vascular Disease Points"
+                }
+              ]
+            },
+            "valueInteger": 1
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:cha2ds2-vasc-score-for-atrial-fibrillation-stroke-risk",
+                  "code": "sex_points",
+                  "display": "Sex Points"
+                }
+              ]
+            },
+            "valueInteger": 1
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:cha2ds2-vasc-score-for-atrial-fibrillation-stroke-risk",
+                  "code": "total_score",
+                  "display": "Total Score"
+                }
+              ]
+            },
+            "valueInteger": 5
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:cha2ds2-vasc-score-for-atrial-fibrillation-stroke-risk",
+                  "code": "risk_band",
+                  "display": "Risk Band"
+                }
+              ]
+            },
+            "valueCodeableConcept": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:cha2ds2-vasc-score-for-atrial-fibrillation-stroke-risk:risk_band",
+                  "code": "low",
+                  "display": "Low"
+                }
+              ]
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:cha2ds2-vasc-score-for-atrial-fibrillation-stroke-risk",
+                  "code": "annual_stroke_risk_percent",
+                  "display": "Annual Stroke Risk Percent"
+                }
+              ]
+            },
+            "valueQuantity": {
+              "value": 0.0
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:cha2ds2-vasc-score-for-atrial-fibrillation-stroke-risk",
+                  "code": "anticoagulation_recommendation",
+                  "display": "Anticoagulation Recommendation"
+                }
+              ]
+            },
+            "valueString": "Example text."
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:cha2ds2-vasc-score-for-atrial-fibrillation-stroke-risk",
+                  "code": "graded_at",
+                  "display": "Graded At"
+                }
+              ]
+            },
+            "valueDateTime": "2026-04-09T10:00:00+00:00"
+          }
+        ]
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:aa0e8400-e29b-41d4-a716-446655440005",
+      "resource": {
+        "resourceType": "Observation",
+        "id": "aa0e8400-e29b-41d4-a716-446655440005",
+        "meta": {
+          "profile": [
+            "http://hl7.org/fhir/StructureDefinition/Observation"
+          ],
+          "lastUpdated": "2026-04-09T10:00:00+00:00"
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "survey",
+                "display": "Survey"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "urn:form-examples:cha2ds2-vasc-score-for-atrial-fibrillation-stroke-risk",
+              "code": "cha2ds2_vasc_grade_flag",
+              "display": "Cha2Ds2 Vasc Grade Flag"
+            }
+          ]
+        },
+        "subject": {
+          "reference": "Patient/550e8400-e29b-41d4-a716-446655440000"
+        },
+        "encounter": {
+          "reference": "Encounter/bb0e8400-e29b-41d4-a716-446655440006"
+        },
+        "effectiveDateTime": "2026-04-09T10:00:00+00:00",
+        "component": [
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:cha2ds2-vasc-score-for-atrial-fibrillation-stroke-risk",
+                  "code": "deleted_at",
+                  "display": "Deleted At"
+                }
+              ]
+            },
+            "valueDateTime": "2026-04-09T10:00:00+00:00"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:cha2ds2-vasc-score-for-atrial-fibrillation-stroke-risk",
+                  "code": "category",
+                  "display": "Category"
+                }
+              ]
+            },
+            "valueCodeableConcept": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:cha2ds2-vasc-score-for-atrial-fibrillation-stroke-risk:category",
+                  "code": "anticoagulation-recommended",
+                  "display": "Anticoagulation-Recommended"
+                }
+              ]
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:cha2ds2-vasc-score-for-atrial-fibrillation-stroke-risk",
+                  "code": "priority",
+                  "display": "Priority"
+                }
+              ]
+            },
+            "valueCodeableConcept": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:cha2ds2-vasc-score-for-atrial-fibrillation-stroke-risk:priority",
+                  "code": "low",
+                  "display": "Low"
+                }
+              ]
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:cha2ds2-vasc-score-for-atrial-fibrillation-stroke-risk",
+                  "code": "description",
+                  "display": "Description"
+                }
+              ]
+            },
+            "valueString": "Example text."
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:cha2ds2-vasc-score-for-atrial-fibrillation-stroke-risk",
+                  "code": "suggested_action",
+                  "display": "Suggested Action"
+                }
+              ]
+            },
+            "valueString": ""
+          }
+        ]
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:990e8400-e29b-41d4-a716-446655440004",
+      "resource": {
+        "resourceType": "Observation",
+        "id": "990e8400-e29b-41d4-a716-446655440004",
+        "meta": {
+          "profile": [
+            "http://hl7.org/fhir/StructureDefinition/Observation"
+          ],
+          "lastUpdated": "2026-04-09T10:00:00+00:00"
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "survey",
+                "display": "Survey"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "urn:form-examples:cha2ds2-vasc-score-for-atrial-fibrillation-stroke-risk",
+              "code": "cha2ds2_vasc_grade_rule",
+              "display": "Cha2Ds2 Vasc Grade Rule"
+            }
+          ]
+        },
+        "subject": {
+          "reference": "Patient/550e8400-e29b-41d4-a716-446655440000"
+        },
+        "encounter": {
+          "reference": "Encounter/bb0e8400-e29b-41d4-a716-446655440006"
+        },
+        "effectiveDateTime": "2026-04-09T10:00:00+00:00",
+        "component": [
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:cha2ds2-vasc-score-for-atrial-fibrillation-stroke-risk",
+                  "code": "deleted_at",
+                  "display": "Deleted At"
+                }
+              ]
+            },
+            "valueDateTime": "2026-04-09T10:00:00+00:00"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:cha2ds2-vasc-score-for-atrial-fibrillation-stroke-risk",
+                  "code": "criterion",
+                  "display": "Criterion"
+                }
+              ]
+            },
+            "valueCodeableConcept": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:cha2ds2-vasc-score-for-atrial-fibrillation-stroke-risk:criterion",
+                  "code": "congestive-heart-failure",
+                  "display": "Congestive-Heart-Failure"
+                }
+              ]
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:cha2ds2-vasc-score-for-atrial-fibrillation-stroke-risk",
+                  "code": "points",
+                  "display": "Points"
+                }
+              ]
+            },
+            "valueInteger": 1
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:cha2ds2-vasc-score-for-atrial-fibrillation-stroke-risk",
+                  "code": "category",
+                  "display": "Category"
+                }
+              ]
+            },
+            "valueString": "General"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:cha2ds2-vasc-score-for-atrial-fibrillation-stroke-risk",
+                  "code": "description",
+                  "display": "Description"
+                }
+              ]
+            },
+            "valueString": "Example text."
+          }
+        ]
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:660e8400-e29b-41d4-a716-446655440001",
+      "resource": {
+        "resourceType": "Observation",
+        "id": "660e8400-e29b-41d4-a716-446655440001",
+        "meta": {
+          "profile": [
+            "http://hl7.org/fhir/StructureDefinition/Observation"
+          ],
+          "lastUpdated": "2026-04-09T10:00:00+00:00"
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "survey",
+                "display": "Survey"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "urn:form-examples:cha2ds2-vasc-score-for-atrial-fibrillation-stroke-risk",
+              "code": "clinician",
+              "display": "Clinician"
+            }
+          ]
+        },
+        "subject": {
+          "reference": "Patient/550e8400-e29b-41d4-a716-446655440000"
+        },
+        "encounter": {
+          "reference": "Encounter/bb0e8400-e29b-41d4-a716-446655440006"
+        },
+        "effectiveDateTime": "2026-04-09T10:00:00+00:00",
+        "component": [
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:cha2ds2-vasc-score-for-atrial-fibrillation-stroke-risk",
+                  "code": "deleted_at",
+                  "display": "Deleted At"
+                }
+              ]
+            },
+            "valueDateTime": "2026-04-09T10:00:00+00:00"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:cha2ds2-vasc-score-for-atrial-fibrillation-stroke-risk",
+                  "code": "name",
+                  "display": "Name"
+                }
+              ]
+            },
+            "valueString": "Example"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:cha2ds2-vasc-score-for-atrial-fibrillation-stroke-risk",
+                  "code": "email",
+                  "display": "Email"
+                }
+              ]
+            },
+            "valueString": "jane.doe@example.com"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:cha2ds2-vasc-score-for-atrial-fibrillation-stroke-risk",
+                  "code": "phone",
+                  "display": "Phone"
+                }
+              ]
+            },
+            "valueString": "07700900000"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:cha2ds2-vasc-score-for-atrial-fibrillation-stroke-risk",
+                  "code": "postal_address_as_full_text",
+                  "display": "Postal Address As Full Text"
+                }
+              ]
+            },
+            "valueString": "Example text."
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:cha2ds2-vasc-score-for-atrial-fibrillation-stroke-risk",
+                  "code": "country_as_iso_3166_1_alpha_2",
+                  "display": "Country As Iso 3166 1 Alpha 2"
+                }
+              ]
+            },
+            "valueString": ""
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:cha2ds2-vasc-score-for-atrial-fibrillation-stroke-risk",
+                  "code": "postcode",
+                  "display": "Postcode"
+                }
+              ]
+            },
+            "valueString": "SW1A 1AA"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:cha2ds2-vasc-score-for-atrial-fibrillation-stroke-risk",
+                  "code": "role",
+                  "display": "Role"
+                }
+              ]
+            },
+            "valueCodeableConcept": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:cha2ds2-vasc-score-for-atrial-fibrillation-stroke-risk:role",
+                  "code": "doctor",
+                  "display": "Doctor"
+                }
+              ]
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:cha2ds2-vasc-score-for-atrial-fibrillation-stroke-risk",
+                  "code": "registration_body",
+                  "display": "Registration Body"
+                }
+              ]
+            },
+            "valueCodeableConcept": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:cha2ds2-vasc-score-for-atrial-fibrillation-stroke-risk:registration_body",
+                  "code": "GMC",
+                  "display": "Gmc"
+                }
+              ]
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:cha2ds2-vasc-score-for-atrial-fibrillation-stroke-risk",
+                  "code": "registration_number",
+                  "display": "Registration Number"
+                }
+              ]
+            },
+            "valueString": ""
+          }
+        ]
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:550e8400-e29b-41d4-a716-446655440000",
+      "resource": {
+        "resourceType": "Patient",
+        "id": "550e8400-e29b-41d4-a716-446655440000",
+        "meta": {
+          "profile": [
+            "http://hl7.org/fhir/StructureDefinition/Patient"
+          ],
+          "lastUpdated": "2026-04-09T10:00:00+00:00"
+        },
+        "name": [
+          {
+            "use": "official",
+            "family": "Doe",
+            "given": [
+              "Jane"
+            ]
+          }
+        ],
+        "birthDate": "1965-06-15",
+        "gender": "female",
+        "telecom": [
+          {
+            "system": "email",
+            "value": "jane.doe@example.com"
+          },
+          {
+            "system": "phone",
+            "value": "07700900000"
+          }
+        ],
+        "address": [
+          {
+            "postalCode": "SW1A 1AA"
+          }
+        ]
+      }
+    }
+  ]
+}

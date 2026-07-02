@@ -14,3 +14,101 @@ cd "${form_snake_case}"
 # Pin time to a version compatible with cookie 0.18.1 (a fresh loco
 # starter otherwise resolves time 0.3.52, which fails to compile).
 cargo update -p time --precise 0.3.47
+
+cargo loco generate scaffold patient \
+    deleted_at:tstz \
+    name:string! \
+    birth_date:date! \
+    sex:string! \
+    email:text \
+    phone:text \
+    postal_address_as_full_text:text \
+    country_as_iso_3166_1_alpha_2:string \
+    postcode:text \
+    united_kingdom_nhs_number:string^ \
+    hospital_mrn:string \
+    height_as_cm:double \
+    weight_as_kg:double \
+    body_mass_index:double \
+    allergies_summary:text! \
+    --api
+
+cargo loco generate scaffold clinician \
+    deleted_at:tstz \
+    name:text! \
+    email:text \
+    phone:text \
+    postal_address_as_full_text:text \
+    country_as_iso_3166_1_alpha_2:string \
+    postcode:text \
+    role:string! \
+    registration_body:string! \
+    registration_number:text! \
+    --api
+
+cargo loco generate scaffold confusion_assessment_method \
+    deleted_at:tstz \
+    patient:references \
+    clinician:references \
+    assessor_name:string! \
+    assessor_role:string! \
+    assessed_at:tstz \
+    ward_unit:string! \
+    cam_variant:string! \
+    patient_identifier:string! \
+    age_band:string! \
+    sex:string! \
+    cognitive_baseline:string! \
+    collateral_source:string! \
+    feature_acute_onset_fluctuating:string! \
+    onset_timing:string! \
+    feature_inattention:string! \
+    attention_test:string! \
+    feature_disorganised_thinking:string! \
+    feature_altered_consciousness:string! \
+    consciousness_level:string! \
+    rass_score:int \
+    motoric_subtype:string! \
+    hallucinations:bool! \
+    delusions:bool! \
+    sleep_wake_disturbance:bool! \
+    deliriogenic_medication:bool! \
+    deliriogenic_medication_detail:text! \
+    suspected_precipitants:text! \
+    recommended_actions:text! \
+    clinical_note:text! \
+    --api
+
+cargo loco generate scaffold confusion_assessment_method_grade \
+    deleted_at:tstz \
+    confusion_assessment_method:references \
+    classification:string! \
+    delirium_present:bool \
+    feature_1_positive:bool \
+    feature_2_positive:bool \
+    feature_3_positive:bool \
+    feature_4_positive:bool \
+    positive_features:text! \
+    motoric_subtype:string! \
+    graded_at:tstz! \
+    --api
+
+cargo loco generate scaffold confusion_assessment_method_grade_rule \
+    deleted_at:tstz \
+    confusion_assessment_method_grade:references \
+    rule_id:string! \
+    feature:string! \
+    positive:bool \
+    category:string! \
+    description:string! \
+    --api
+
+cargo loco generate scaffold confusion_assessment_method_grade_flag \
+    deleted_at:tstz \
+    confusion_assessment_method_grade:references \
+    flag_id:string! \
+    category:string! \
+    priority:string! \
+    description:string! \
+    suggested_action:string! \
+    --api

@@ -14,3 +14,108 @@ cd "${form_snake_case}"
 # Pin time to a version compatible with cookie 0.18.1 (a fresh loco
 # starter otherwise resolves time 0.3.52, which fails to compile).
 cargo update -p time --precise 0.3.47
+
+cargo loco generate scaffold patient \
+    deleted_at:tstz \
+    name:string! \
+    birth_date:date! \
+    sex:string! \
+    email:text \
+    phone:text \
+    postal_address_as_full_text:text \
+    country_as_iso_3166_1_alpha_2:string \
+    postcode:text \
+    united_kingdom_nhs_number:string^ \
+    hospital_mrn:string \
+    height_as_cm:double \
+    weight_as_kg:double \
+    body_mass_index:double \
+    allergies_summary:text! \
+    --api
+
+cargo loco generate scaffold clinician \
+    deleted_at:tstz \
+    name:text! \
+    email:text \
+    phone:text \
+    postal_address_as_full_text:text \
+    country_as_iso_3166_1_alpha_2:string \
+    postcode:text \
+    role:string! \
+    registration_body:string! \
+    registration_number:text! \
+    --api
+
+cargo loco generate scaffold chronic_kidney_disease_review \
+    deleted_at:tstz \
+    patient:references \
+    clinician:references \
+    clinician_name:string! \
+    clinician_role:string! \
+    reviewed_at:date \
+    care_setting:string! \
+    review_type:string! \
+    patient_identifier:string! \
+    age_band:string! \
+    sex:string! \
+    diabetes_status:string! \
+    primary_cause:string! \
+    months_since_diagnosis:int \
+    egfr:double \
+    egfr_sample_date:date \
+    previous_egfr:double \
+    previous_egfr_date:date \
+    acr:double \
+    acr_sample_date:date \
+    acr_measured:string! \
+    systolic_blood_pressure:int \
+    diastolic_blood_pressure:int \
+    acei_or_arb_prescribed:string! \
+    sglt2i_prescribed:string! \
+    statin_prescribed:string! \
+    nephrotoxic_drug_present:string! \
+    nephrotoxic_dose_adjusted:string! \
+    medication_review_completed:string! \
+    hba1c:double \
+    potassium:double \
+    bicarbonate:double \
+    calcium:double \
+    phosphate:double \
+    pth:double \
+    haemoglobin:double \
+    referral_decision:string! \
+    clinical_note:text! \
+    --api
+
+cargo loco generate scaffold chronic_kidney_disease_review_grade \
+    deleted_at:tstz \
+    chronic_kidney_disease_review:references \
+    gfr_category:string! \
+    albuminuria_category:string! \
+    kdigo_risk_zone:string! \
+    review_status:string! \
+    blood_pressure_target_systolic:int \
+    blood_pressure_target_diastolic:int \
+    blood_pressure_at_target:bool \
+    completeness_score:int \
+    graded_at:tstz! \
+    --api
+
+cargo loco generate scaffold chronic_kidney_disease_review_grade_rule \
+    deleted_at:tstz \
+    chronic_kidney_disease_review_grade:references \
+    rule_id:string! \
+    section:string! \
+    category:string! \
+    description:string! \
+    --api
+
+cargo loco generate scaffold chronic_kidney_disease_review_grade_flag \
+    deleted_at:tstz \
+    chronic_kidney_disease_review_grade:references \
+    flag_id:string! \
+    category:string! \
+    priority:string! \
+    description:string! \
+    suggested_action:string! \
+    --api

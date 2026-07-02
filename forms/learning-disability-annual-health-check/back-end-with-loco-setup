@@ -14,3 +14,117 @@ cd "${form_snake_case}"
 # Pin time to a version compatible with cookie 0.18.1 (a fresh loco
 # starter otherwise resolves time 0.3.52, which fails to compile).
 cargo update -p time --precise 0.3.47
+
+cargo loco generate scaffold patient \
+    deleted_at:tstz \
+    name:string! \
+    birth_date:date! \
+    sex:string! \
+    email:text \
+    phone:text \
+    postal_address_as_full_text:text \
+    country_as_iso_3166_1_alpha_2:string \
+    postcode:text \
+    united_kingdom_nhs_number:string^ \
+    hospital_mrn:string \
+    height_as_cm:double \
+    weight_as_kg:double \
+    body_mass_index:double \
+    allergies_summary:text! \
+    --api
+
+cargo loco generate scaffold clinician \
+    deleted_at:tstz \
+    name:text! \
+    email:text \
+    phone:text \
+    postal_address_as_full_text:text \
+    country_as_iso_3166_1_alpha_2:string \
+    postcode:text \
+    role:string! \
+    registration_body:string! \
+    registration_number:text! \
+    --api
+
+cargo loco generate scaffold learning_disability_annual_health_check \
+    deleted_at:tstz \
+    patient:references \
+    clinician:references \
+    clinician_name:text! \
+    clinician_role:string! \
+    checked_on:date \
+    practice_name:text! \
+    easy_read_invitation_sent:string! \
+    pre_check_done:string! \
+    person_identifier:string! \
+    age_band:string! \
+    sex:string! \
+    ld_register_status:string! \
+    main_carer:text! \
+    communication_needs:text! \
+    reasonable_adjustments_recorded:string! \
+    health_passport:string! \
+    consent_capacity_note:text! \
+    weight_bmi_status:string! \
+    bmi:double \
+    blood_pressure_status:string! \
+    epilepsy_status:string! \
+    constipation_status:string! \
+    dysphagia_status:string! \
+    continence_status:string! \
+    mobility_falls_status:string! \
+    dental_status:string! \
+    vision_status:string! \
+    hearing_status:string! \
+    foot_health_status:string! \
+    skin_status:string! \
+    physical_health_actions:text! \
+    cancer_screening_status:string! \
+    other_screening_status:string! \
+    immunisation_status:string! \
+    medication_reconciled:string! \
+    psychotropic_prescribed:string! \
+    psychotropic_indication:text! \
+    psychotropic_last_reviewed:date \
+    stomp_discussed:string! \
+    medication_side_effects:text! \
+    mental_health_status:string! \
+    behaviour_status:string! \
+    behaviour_triggers:text! \
+    syndrome_specific_status:string! \
+    carer_needs_status:string! \
+    social_circumstances:text! \
+    health_action_plan_produced:string! \
+    health_action_plan_shared:string! \
+    health_action_plan_actions:text! \
+    clinician_note:text! \
+    --api
+
+cargo loco generate scaffold learning_disability_annual_health_check_grade \
+    deleted_at:tstz \
+    learning_disability_annual_health_check:references \
+    status:string! \
+    completeness_percent:int \
+    health_action_plan_complete:string! \
+    graded_at:tstz! \
+    --api
+
+cargo loco generate scaffold learning_disability_annual_health_check_grade_rule \
+    deleted_at:tstz \
+    learning_disability_annual_health_check_grade:references \
+    rule_id:string! \
+    component:string! \
+    completed:string! \
+    category:string! \
+    description:string! \
+    --api
+
+cargo loco generate scaffold learning_disability_annual_health_check_grade_flag \
+    deleted_at:tstz \
+    learning_disability_annual_health_check_grade:references \
+    flag_id:string! \
+    category:string! \
+    priority:string! \
+    description:string! \
+    suggested_action:string! \
+    --api

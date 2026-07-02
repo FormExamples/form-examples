@@ -14,3 +14,83 @@ cd "${form_snake_case}"
 # Pin time to a version compatible with cookie 0.18.1 (a fresh loco
 # starter otherwise resolves time 0.3.52, which fails to compile).
 cargo update -p time --precise 0.3.47
+
+cargo loco generate scaffold patient \
+    deleted_at:tstz \
+    name:string! \
+    birth_date:date! \
+    sex:string! \
+    email:text \
+    phone:text \
+    postal_address_as_full_text:text \
+    country_as_iso_3166_1_alpha_2:string \
+    postcode:text \
+    united_kingdom_nhs_number:string^ \
+    hospital_mrn:string \
+    height_as_cm:double \
+    weight_as_kg:double \
+    body_mass_index:double \
+    allergies_summary:text! \
+    --api
+
+cargo loco generate scaffold clinician \
+    deleted_at:tstz \
+    name:text! \
+    email:text \
+    phone:text \
+    postal_address_as_full_text:text \
+    country_as_iso_3166_1_alpha_2:string \
+    postcode:text \
+    role:string! \
+    registration_body:string! \
+    registration_number:text! \
+    --api
+
+cargo loco generate scaffold anion_gap_calculator \
+    deleted_at:tstz \
+    patient:references \
+    clinician:references \
+    clinician_name:string! \
+    clinician_role:string! \
+    calculated_at:tstz \
+    care_setting:string! \
+    clinical_context:text! \
+    patient_identifier:string! \
+    age_band:string! \
+    sex:string! \
+    sodium_mmol_l:double \
+    potassium_mmol_l:double \
+    chloride_mmol_l:double \
+    bicarbonate_mmol_l:double \
+    albumin_g_l:double \
+    include_potassium:string! \
+    --api
+
+cargo loco generate scaffold anion_gap_calculator_grade \
+    deleted_at:tstz \
+    anion_gap_calculator:references \
+    anion_gap:double \
+    corrected_anion_gap:double \
+    classification:string! \
+    graded_at:tstz! \
+    --api
+
+cargo loco generate scaffold anion_gap_calculator_grade_rule \
+    deleted_at:tstz \
+    anion_gap_calculator_grade:references \
+    rule_id:string! \
+    instrument:string! \
+    band:string! \
+    category:string! \
+    description:string! \
+    --api
+
+cargo loco generate scaffold anion_gap_calculator_grade_flag \
+    deleted_at:tstz \
+    anion_gap_calculator_grade:references \
+    flag_id:string! \
+    category:string! \
+    priority:string! \
+    description:string! \
+    suggested_action:string! \
+    --api

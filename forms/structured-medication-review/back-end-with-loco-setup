@@ -14,3 +14,111 @@ cd "${form_snake_case}"
 # Pin time to a version compatible with cookie 0.18.1 (a fresh loco
 # starter otherwise resolves time 0.3.52, which fails to compile).
 cargo update -p time --precise 0.3.47
+
+cargo loco generate scaffold patient \
+    deleted_at:tstz \
+    name:string! \
+    birth_date:date! \
+    sex:string! \
+    email:text \
+    phone:text \
+    postal_address_as_full_text:text \
+    country_as_iso_3166_1_alpha_2:string \
+    postcode:text \
+    united_kingdom_nhs_number:string^ \
+    hospital_mrn:string \
+    height_as_cm:double \
+    weight_as_kg:double \
+    body_mass_index:double \
+    allergies_summary:text! \
+    --api
+
+cargo loco generate scaffold clinician \
+    deleted_at:tstz \
+    name:text! \
+    email:text \
+    phone:text \
+    postal_address_as_full_text:text \
+    country_as_iso_3166_1_alpha_2:string \
+    postcode:text \
+    role:string! \
+    registration_body:string! \
+    registration_number:text! \
+    --api
+
+cargo loco generate scaffold structured_medication_review \
+    deleted_at:tstz \
+    patient:references \
+    clinician:references \
+    clinician_name:text! \
+    clinician_role:string! \
+    reviewed_at:tstz \
+    care_setting:string! \
+    consultation_mode:string! \
+    patient_identifier:text! \
+    age_band:string! \
+    sex:string! \
+    frailty_status:string! \
+    lives_in_care_home:string! \
+    long_term_conditions:text! \
+    presenting_problems:text! \
+    patient_reported_issues:text! \
+    what_matters_to_patient:text! \
+    shared_decisions:text! \
+    monitoring_due:text! \
+    overdue_monitoring_count:int \
+    follow_up_plan:text! \
+    follow_up_date:date \
+    review_completed:string! \
+    --api
+
+cargo loco generate scaffold structured_medication_review_medicine \
+    deleted_at:tstz \
+    structured_medication_review:references \
+    drug_name:text! \
+    form_strength:text! \
+    dose_regimen:text! \
+    indication:text! \
+    indication_recorded:string! \
+    is_regular:string! \
+    is_high_risk:string! \
+    high_risk_class:string! \
+    adherence:string! \
+    anticholinergic_burden_points:int \
+    monitoring_required:string! \
+    monitoring_up_to_date:string! \
+    deprescribing_candidate:string! \
+    stopp_criterion:text! \
+    start_criterion:text! \
+    --api
+
+cargo loco generate scaffold structured_medication_review_grade \
+    deleted_at:tstz \
+    structured_medication_review:references \
+    review_status:string! \
+    anticholinergic_burden_score:int! \
+    anticholinergic_band:string! \
+    polypharmacy_band:string! \
+    burden_band:string! \
+    medicine_count:int! \
+    regular_medicine_count:int! \
+    graded_at:tstz! \
+    --api
+
+cargo loco generate scaffold structured_medication_review_grade_rule \
+    deleted_at:tstz \
+    structured_medication_review_grade:references \
+    rule_id:string! \
+    category:string! \
+    description:string! \
+    --api
+
+cargo loco generate scaffold structured_medication_review_grade_flag \
+    deleted_at:tstz \
+    structured_medication_review_grade:references \
+    flag_id:string! \
+    category:string! \
+    priority:string! \
+    description:string! \
+    suggested_action:string! \
+    --api

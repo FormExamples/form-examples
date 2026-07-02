@@ -14,3 +14,120 @@ cd "${form_snake_case}"
 # Pin time to a version compatible with cookie 0.18.1 (a fresh loco
 # starter otherwise resolves time 0.3.52, which fails to compile).
 cargo update -p time --precise 0.3.47
+
+cargo loco generate scaffold patient \
+    deleted_at:tstz \
+    name:string! \
+    birth_date:date! \
+    sex:string! \
+    email:text \
+    phone:text \
+    postal_address_as_full_text:text \
+    country_as_iso_3166_1_alpha_2:string \
+    postcode:text \
+    united_kingdom_nhs_number:string^ \
+    hospital_mrn:string \
+    height_as_cm:double \
+    weight_as_kg:double \
+    body_mass_index:double \
+    allergies_summary:text! \
+    --api
+
+cargo loco generate scaffold clinician \
+    deleted_at:tstz \
+    name:text! \
+    email:text \
+    phone:text \
+    postal_address_as_full_text:text \
+    country_as_iso_3166_1_alpha_2:string \
+    postcode:text \
+    role:string! \
+    registration_body:string! \
+    registration_number:text! \
+    --api
+
+cargo loco generate scaffold newborn_and_infant_physical_examination \
+    deleted_at:tstz \
+    patient:references \
+    clinician:references \
+    practitioner_name:text! \
+    practitioner_role:string! \
+    examined_at:tstz \
+    examination_context:string! \
+    care_setting:string! \
+    baby_identifier:string! \
+    baby_name:string! \
+    date_of_birth:date \
+    sex:string! \
+    gestational_age_weeks:double \
+    birth_weight_grams:double \
+    breech_presentation:string! \
+    family_history_hip_problems:string! \
+    antenatal_concerns:text! \
+    eyes_red_reflex_right:string! \
+    eyes_red_reflex_left:string! \
+    eyes_appearance:string! \
+    heart_murmur:string! \
+    femoral_pulses_right:string! \
+    femoral_pulses_left:string! \
+    central_cyanosis:string! \
+    oxygen_saturation_preductal:double \
+    oxygen_saturation_postductal:double \
+    barlow_test:string! \
+    ortolani_test:string! \
+    hip_abduction:string! \
+    testis_right:string! \
+    testis_left:string! \
+    general_appearance:string! \
+    skin:string! \
+    head_and_fontanelles:string! \
+    face_and_palate:string! \
+    neck_and_clavicles:string! \
+    chest_and_lungs:string! \
+    abdomen:string! \
+    genitalia:string! \
+    anus_and_spine:string! \
+    limbs_and_digits:string! \
+    feet:string! \
+    tone_and_movement:string! \
+    weight_grams:double \
+    head_circumference_cm:double \
+    length_cm:double \
+    eyes_result_recorded:string! \
+    heart_result_recorded:string! \
+    hips_result_recorded:string! \
+    testes_result_recorded:string! \
+    clinical_note:text! \
+    --api
+
+cargo loco generate scaffold newborn_and_infant_physical_examination_grade \
+    deleted_at:tstz \
+    newborn_and_infant_physical_examination:references \
+    eyes_result:string! \
+    heart_result:string! \
+    hips_result:string! \
+    testes_result:string! \
+    overall_outcome:string! \
+    completeness:string! \
+    completeness_percent:int \
+    graded_at:tstz! \
+    --api
+
+cargo loco generate scaffold newborn_and_infant_physical_examination_grade_rule \
+    deleted_at:tstz \
+    newborn_and_infant_physical_examination_grade:references \
+    rule_id:string! \
+    component:string! \
+    category:string! \
+    description:string! \
+    --api
+
+cargo loco generate scaffold newborn_and_infant_physical_examination_grade_flag \
+    deleted_at:tstz \
+    newborn_and_infant_physical_examination_grade:references \
+    flag_id:string! \
+    category:string! \
+    priority:string! \
+    description:string! \
+    suggested_action:string! \
+    --api

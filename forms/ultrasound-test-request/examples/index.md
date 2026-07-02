@@ -1,1 +1,4 @@
-# Ultrasound Test Request — filled-form JSON fixtures + FHIR R5 Bundle
+# Examples
+
+Worked examples for the **Ultrasound Test Request** form. See [`AGENTS.md`](AGENTS.md) for the
+file list, generator command, and curation policy.

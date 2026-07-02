@@ -14,3 +14,124 @@ cd "${form_snake_case}"
 # Pin time to a version compatible with cookie 0.18.1 (a fresh loco
 # starter otherwise resolves time 0.3.52, which fails to compile).
 cargo update -p time --precise 0.3.47
+
+cargo loco generate scaffold patient \
+    deleted_at:tstz \
+    name:string! \
+    birth_date:date! \
+    sex:string! \
+    email:text \
+    phone:text \
+    postal_address_as_full_text:text \
+    country_as_iso_3166_1_alpha_2:string \
+    postcode:text \
+    united_kingdom_nhs_number:string^ \
+    hospital_mrn:string \
+    height_as_cm:double \
+    weight_as_kg:double \
+    body_mass_index:double \
+    allergies_summary:text! \
+    --api
+
+cargo loco generate scaffold clinician \
+    deleted_at:tstz \
+    name:text! \
+    email:text \
+    phone:text \
+    postal_address_as_full_text:text \
+    country_as_iso_3166_1_alpha_2:string \
+    postcode:text \
+    role:string! \
+    registration_body:string! \
+    registration_number:text! \
+    --api
+
+cargo loco generate scaffold nursing_care_plan \
+    deleted_at:tstz \
+    patient:references \
+    clinician:references \
+    nurse_name:text! \
+    nurse_role:string! \
+    nmc_number:text! \
+    authored_at:tstz \
+    care_setting:string! \
+    plan_type:string! \
+    model_used:string! \
+    patient_identifier:text! \
+    patient_name:text! \
+    date_of_birth:date \
+    sex:string! \
+    ward_location:text! \
+    handover_note:text! \
+    review_date:date \
+    falls_risk_done:string! \
+    falls_risk_level:string! \
+    falls_risk_assessed_on:date \
+    falls_risk_actioned:string! \
+    pressure_ulcer_risk_done:string! \
+    pressure_ulcer_risk_level:string! \
+    pressure_ulcer_risk_assessed_on:date \
+    pressure_ulcer_risk_actioned:string! \
+    vte_risk_done:string! \
+    vte_risk_level:string! \
+    vte_risk_assessed_on:date \
+    vte_risk_actioned:string! \
+    nutrition_risk_done:string! \
+    nutrition_risk_level:string! \
+    nutrition_risk_assessed_on:date \
+    nutrition_risk_actioned:string! \
+    --api
+
+cargo loco generate scaffold nursing_care_plan_problem \
+    deleted_at:tstz \
+    nursing_care_plan:references \
+    problem_statement:text! \
+    adl_category:string! \
+    actual_or_potential:string! \
+    assessment_data:text! \
+    linked_risk:string! \
+    evaluation_note:text! \
+    goal_met:string! \
+    next_review_date:date \
+    --api
+
+cargo loco generate scaffold nursing_care_plan_goal \
+    deleted_at:tstz \
+    nursing_care_plan_problem:references \
+    goal_text:text! \
+    target_date:date \
+    met:string! \
+    --api
+
+cargo loco generate scaffold nursing_care_plan_intervention \
+    deleted_at:tstz \
+    nursing_care_plan_problem:references \
+    intervention_text:text! \
+    carried_out:string! \
+    --api
+
+cargo loco generate scaffold nursing_care_plan_grade \
+    deleted_at:tstz \
+    nursing_care_plan:references \
+    status:string! \
+    completeness_percent:int! \
+    graded_at:tstz! \
+    --api
+
+cargo loco generate scaffold nursing_care_plan_grade_rule \
+    deleted_at:tstz \
+    nursing_care_plan_grade:references \
+    rule_id:string! \
+    category:string! \
+    description:string! \
+    --api
+
+cargo loco generate scaffold nursing_care_plan_grade_flag \
+    deleted_at:tstz \
+    nursing_care_plan_grade:references \
+    flag_id:string! \
+    category:string! \
+    priority:string! \
+    description:string! \
+    suggested_action:string! \
+    --api

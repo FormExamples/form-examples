@@ -14,3 +14,111 @@ cd "${form_snake_case}"
 # Pin time to a version compatible with cookie 0.18.1 (a fresh loco
 # starter otherwise resolves time 0.3.52, which fails to compile).
 cargo update -p time --precise 0.3.47
+
+cargo loco generate scaffold patient \
+    deleted_at:tstz \
+    name:string! \
+    birth_date:date! \
+    sex:string! \
+    email:text \
+    phone:text \
+    postal_address_as_full_text:text \
+    country_as_iso_3166_1_alpha_2:string \
+    postcode:text \
+    united_kingdom_nhs_number:string^ \
+    hospital_mrn:string \
+    height_as_cm:double \
+    weight_as_kg:double \
+    body_mass_index:double \
+    allergies_summary:text! \
+    --api
+
+cargo loco generate scaffold clinician \
+    deleted_at:tstz \
+    name:text! \
+    email:text \
+    phone:text \
+    postal_address_as_full_text:text \
+    country_as_iso_3166_1_alpha_2:string \
+    postcode:text \
+    role:string! \
+    registration_body:string! \
+    registration_number:text! \
+    --api
+
+cargo loco generate scaffold chronic_obstructive_pulmonary_disease_review \
+    deleted_at:tstz \
+    patient:references \
+    clinician:references \
+    clinician_name:text! \
+    clinician_role:string! \
+    reviewed_at:date \
+    review_type:string! \
+    patient_identifier:string! \
+    age_band:string! \
+    sex:string! \
+    diagnosis_year:int \
+    spirometry_confirmed:string! \
+    exposure_notes:text! \
+    fev1_litres:double \
+    fev1_percent_predicted:double \
+    fvc_litres:double \
+    fev1_fvc_ratio:double \
+    spirometry_date:date \
+    mrc_grade:int \
+    mmrc_grade:int \
+    cat_score:int \
+    exacerbations_last_12m:int \
+    hospitalisations_last_12m:int \
+    last_exacerbation_date:date \
+    rescue_pack_courses:int \
+    smoking_status:string! \
+    pack_years:double \
+    cessation_support_offered:string! \
+    inhaled_therapy:text! \
+    device_type:text! \
+    inhaler_technique_checked:string! \
+    inhaler_technique_adequate:string! \
+    adherence:string! \
+    influenza_vaccine:string! \
+    pneumococcal_vaccine:string! \
+    covid_vaccine:string! \
+    pulmonary_rehab_status:string! \
+    oxygen_use:string! \
+    resting_spo2:int \
+    comorbidities:text! \
+    self_management_plan:string! \
+    rescue_pack_supplied:string! \
+    next_review_interval:text! \
+    clinician_note:text! \
+    --api
+
+cargo loco generate scaffold chronic_obstructive_pulmonary_disease_review_grade \
+    deleted_at:tstz \
+    chronic_obstructive_pulmonary_disease_review:references \
+    gold_airflow_grade:string! \
+    symptom_burden:string! \
+    exacerbation_risk:string! \
+    abe_group:string! \
+    review_status:string! \
+    graded_at:tstz! \
+    --api
+
+cargo loco generate scaffold chronic_obstructive_pulmonary_disease_review_grade_rule \
+    deleted_at:tstz \
+    chronic_obstructive_pulmonary_disease_review_grade:references \
+    rule_id:string! \
+    section:string! \
+    category:string! \
+    description:string! \
+    --api
+
+cargo loco generate scaffold chronic_obstructive_pulmonary_disease_review_grade_flag \
+    deleted_at:tstz \
+    chronic_obstructive_pulmonary_disease_review_grade:references \
+    flag_id:string! \
+    category:string! \
+    priority:string! \
+    description:string! \
+    suggested_action:string! \
+    --api
