@@ -1,0 +1,11 @@
+pub mod _entities;
+pub mod users;
+pub mod patients;
+pub mod clinicians;
+pub mod anaesthetic_records;
+pub mod anaesthetic_record_drug_administrations;
+pub mod anaesthetic_record_timed_observations;
+pub mod anaesthetic_record_intra_operative_events;
+pub mod anaesthetic_record_grades;
+pub mod anaesthetic_record_grade_rules;
+pub mod anaesthetic_record_grade_flags;
