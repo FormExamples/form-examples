@@ -1,0 +1,16 @@
+use parkland_formula_for_burns::app::App;
+use loco_rs::testing::prelude::*;
+use serial_test::serial;
+
+#[tokio::test]
+#[serial]
+async fn can_get_parkland_formula_for_burns_grades() {
+    request::<App, _, _>(|request, _ctx| async move {
+        let res = request.get("/api/parkland_formula_for_burns_grades/").await;
+        assert_eq!(res.status_code(), 200);
+
+        // you can assert content like this:
+        // assert_eq!(res.text(), "content");
+    })
+    .await;
+}
