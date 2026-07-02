@@ -1,0 +1,8 @@
+mod users;
+
+mod patients;
+mod clinicians;
+mod wells_score_for_pulmonary_embolisms;
+mod wells_score_for_pulmonary_embolism_grades;
+mod wells_score_for_pulmonary_embolism_grade_rules;
+mod wells_score_for_pulmonary_embolism_grade_flags;

@@ -1,0 +1,8 @@
+mod users;
+
+mod patients;
+mod clinicians;
+mod wells_score_for_deep_vein_thrombosis_grades;
+mod wells_score_for_deep_vein_thrombosis_grade_rules;
+mod wells_score_for_deep_vein_thrombosis_grade_flags;
+mod wells_score_for_deep_vein_thromboses;

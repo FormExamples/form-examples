@@ -1,0 +1,8 @@
+mod users;
+
+mod patients;
+mod clinicians;
+mod recognition_of_stroke_in_the_emergency_rooms;
+mod recognition_of_stroke_in_the_emergency_room_grades;
+mod recognition_of_stroke_in_the_emergency_room_grade_rules;
+mod recognition_of_stroke_in_the_emergency_room_grade_flags;
