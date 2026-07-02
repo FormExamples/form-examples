@@ -1,0 +1,77 @@
+<script lang="ts">
+	// The app root is a welcome page: it explains the work and offers prominent
+	// links to the two working surfaces — the partogram wizard and the clinician
+	// dashboard.
+	const plural = 'partograms';
+</script>
+
+<main class="mx-auto max-w-4xl px-4 py-12">
+	<header class="mb-10">
+		<p class="text-sm font-semibold uppercase tracking-wide text-primary">Partogram</p>
+		<h1 class="mt-2 text-3xl font-bold text-base-content">Labour-progress record (partograph)</h1>
+		<p class="mt-4 text-base leading-relaxed text-base-content/70">
+			A graphical record of the progress of labour, completed as a single continuous wizard — labour
+			context, patient identification, admission findings, and a repeating series of timed
+			intrapartum observations (cervical dilatation, descent, contractions, fetal heart rate, liquor
+			and moulding, maternal vitals, urine, and drugs / oxytocin). The shared engine plots the latest
+			cervical dilatation against the alert line (4 + t cm) and the action line (t cm), classifies
+			labour progress (Normal, Alert-line crossed, or Action-line crossed), and — independently —
+			raises threshold flags across the whole observation series. It is not a validated numeric score.
+		</p>
+	</header>
+
+	<div class="grid gap-4 sm:grid-cols-2">
+		<a
+			href="/{plural}/new"
+			class="group rounded-lg border border-primary bg-primary p-6 text-primary-content shadow-sm transition hover:opacity-90"
+		>
+			<h2 class="text-lg font-semibold">Start a new partogram</h2>
+			<p class="mt-2 text-sm text-primary-content/80">
+				Open the step-by-step record. One continuous single-page wizard that classifies labour
+				progress and flags issues as you add timed observations.
+			</p>
+			<span class="mt-4 inline-block text-sm font-semibold">Open the form →</span>
+		</a>
+		<a
+			href="/{plural}"
+			class="group rounded-lg border border-base-300 bg-base-100 p-6 text-base-content shadow-sm transition hover:border-primary hover:shadow"
+		>
+			<h2 class="text-lg font-semibold">Clinician dashboard</h2>
+			<p class="mt-2 text-sm text-base-content/70">
+				Browse partograms with their computed progress classification, latest dilatation, elapsed
+				hours, and flag count, and filter by care setting and progress.
+			</p>
+			<span class="mt-4 inline-block text-sm font-semibold text-primary">Open the dashboard →</span>
+		</a>
+	</div>
+
+	<section class="mt-12">
+		<h2 class="text-lg font-semibold text-base-content">About this work</h2>
+		<dl class="mt-4 space-y-4 text-sm">
+			<div>
+				<dt class="font-semibold text-base-content">Purpose</dt>
+				<dd class="mt-1 text-base-content/70">
+					Record labour progress and produce a report — progress classification, reference-line
+					expectations, the observation series, and flagged issues — to support safe, auditable
+					intrapartum care.
+				</dd>
+			</div>
+			<div>
+				<dt class="font-semibold text-base-content">Specification</dt>
+				<dd class="mt-1 text-base-content/70">
+					Spec-driven: the living domain spec defines the data model, the alert / action reference-line
+					geometry, and the threshold-flag rules. The same engine drives both the form and the
+					dashboard.
+				</dd>
+			</div>
+			<div>
+				<dt class="font-semibold text-base-content">Documentation</dt>
+				<dd class="mt-1 text-base-content/70">
+					Drawn from the WHO Labour Care Guide (2020), WHO intrapartum-care recommendations (2018),
+					the Philpott and Castle cervicograph (1972), and NICE NG235 intrapartum care (2023). A
+					documentation and progress-monitoring instrument, not a diagnosis.
+				</dd>
+			</div>
+		</dl>
+	</section>
+</main>

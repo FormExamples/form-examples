@@ -1,0 +1,41 @@
+import type { StepConfig, AssessmentData } from '$lib/engine/types';
+
+export const TOTAL_STEPS = 7;
+
+export const steps: StepConfig[] = [
+	{ number: 1, title: 'Assessment context', shortTitle: 'Context', section: 'context' },
+	{
+		number: 2,
+		title: 'Participant identification',
+		shortTitle: 'Participant',
+		section: 'identification'
+	},
+	{ number: 3, title: 'Eligibility and invitation', shortTitle: 'Eligibility', section: 'eligibility' },
+	{ number: 4, title: 'Kit return and adequacy', shortTitle: 'Kit', section: 'kit' },
+	{ number: 5, title: 'FIT result', shortTitle: 'Result', section: 'result' },
+	{ number: 6, title: 'Symptoms', shortTitle: 'Symptoms', section: 'symptoms' },
+	{ number: 7, title: 'Summary and outcome', shortTitle: 'Summary', section: 'note' }
+];
+
+export function getVisibleSteps(_data: AssessmentData): StepConfig[] {
+	// All steps are always visible in the FIT screening wizard.
+	return steps;
+}
+
+export function getNextStep(current: number, data: AssessmentData): number | null {
+	const visible = getVisibleSteps(data);
+	const idx = visible.findIndex((s) => s.number === current);
+	if (idx === -1 || idx >= visible.length - 1) return null;
+	return visible[idx + 1].number;
+}
+
+export function getPrevStep(current: number, data: AssessmentData): number | null {
+	const visible = getVisibleSteps(data);
+	const idx = visible.findIndex((s) => s.number === current);
+	if (idx <= 0) return null;
+	return visible[idx - 1].number;
+}
+
+export function isStepVisible(stepNumber: number, _data: AssessmentData): boolean {
+	return steps.some((s) => s.number === stepNumber);
+}
