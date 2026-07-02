@@ -26,16 +26,17 @@ server:
   middlewares:
 
 # Worker Configuration
+# Mailer Configuration.
+
 workers:
-  # specifies the worker mode. Options:
-  #   - BackgroundQueue - Workers operate asynchronously in the background, processing queued.
-  #   - ForegroundBlocking - Workers operate in the foreground and block until tasks are completed.
-  #   - BackgroundAsync - Workers operate asynchronously in the background, processing tasks with async capabilities.
   mode: BackgroundQueue
 
-  
+queue:
+  kind: Postgres
+  uri: {{ get_env(name="DATABASE_URL", default="postgres://loco:loco@localhost:5432/centor_score_for_streptococcal_pharyngitis_development") }}
+  dangerously_flush: false
+  num_workers: 2
 
-# Mailer Configuration.
 mailer:
   # SMTP mailer configuration.
   smtp:

@@ -1,0 +1,57 @@
+<!-- statistic.html -->
+<!-- Statistic component -->
+<!--
+  Description: a numeric value display with title, prefix, and suffix
+
+  HTML tag: <div> with role="group"
+  CSS class: statistic
+  Keyboard: None (passive display)
+  Accessibility:
+    - role="group" — semantically groups the title and value as one unit
+    - aria-label — the accessible name. By default a consumer should set it
+      to "{title}: {value}" so screen readers announce both pieces together.
+      An explicit aria-label may override this default.
+
+  Behavior:
+    Renders a <div role="group"> containing:
+      - <div class="statistic-title">  — the label/heading text
+      - <div class="statistic-value">  — the value, optionally wrapped between
+        a <span class="statistic-prefix"> and a <span class="statistic-suffix">.
+    Purely passive: no script.
+
+  Usage:
+    <div class="statistic" role="group" aria-label="Active users: 1,234">
+      <div class="statistic-title">Active users</div>
+      <div class="statistic-value">
+        <span class="statistic-prefix">$</span>
+        1,234
+        <span class="statistic-suffix">USD</span>
+      </div>
+    </div>
+-->
+
+<div
+  class="statistic"
+  role="group"
+  aria-label=""
+>
+  <!-- Title: REQUIRED. The text label/heading for the statistic. -->
+  <div class="statistic-title">
+    <!-- Consumer provides the title text -->
+  </div>
+
+  <!-- Value: REQUIRED. The pre-formatted numeric value text. -->
+  <div class="statistic-value">
+    <!-- Optional prefix (e.g. currency symbol) -->
+    <span class="statistic-prefix">
+      <!-- Consumer provides the prefix content (or remove this span if unused) -->
+    </span>
+
+    <!-- Consumer inserts the value text directly here -->
+
+    <!-- Optional suffix (e.g. unit or percentage sign) -->
+    <span class="statistic-suffix">
+      <!-- Consumer provides the suffix content (or remove this span if unused) -->
+    </span>
+  </div>
+</div>

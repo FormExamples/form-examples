@@ -1,0 +1,32 @@
+<!-- popup.html -->
+<!-- Popup component -->
+<!--
+  Description: a temporary overlay that appears above page content
+  HTML tag: <div>
+  CSS class: popup
+  Keyboard: None (passive element)
+  Accessibility: aria-label for accessible name
+  Usage:
+    <div class="popup" aria-label="Example">
+      ...
+    </div>
+-->
+
+<div
+  class="popup"
+  aria-label=""
+  data-open="false"
+>
+  <!-- Consumer provides content -->
+</div>
+
+<script>
+  // Popup behavior
+  (function() {
+    'use strict';
+    // Popup: consumer implements interactive behavior
+    document.querySelectorAll('.popup').forEach(function(el) {
+      // Interactive behavior initialization
+    });
+  })();
+</script>

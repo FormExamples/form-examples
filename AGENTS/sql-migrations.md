@@ -1,7 +1,7 @@
 # SQL migrations
 
 PostgreSQL 18 with Liquibase SQL format for version-controlled database
-migrations. Each form owns its own schema under `forms/<slug>/sql-migrations/`.
+migrations. Each form owns its own schema under `forms/<slug>/sql/`.
 
 The SQL migrations are the **source of truth for data shape**. XML, FHIR R5,
 Protocol Buffers, and OpenAPI representations are all generated from them
@@ -9,7 +9,7 @@ Protocol Buffers, and OpenAPI representations are all generated from them
 
 Slug: sql-migrations
 
-- Search pattern: `forms/*/sql-migrations/*.sql`
+- Search pattern: `forms/*/sql/*.sql`
 
 ## Migration file naming
 
@@ -18,7 +18,7 @@ Two-digit, zero-padded sequence numbers with `_create_table_<name>.sql`
 are created before referencing tables.
 
 ```
-sql-migrations/
+sql/
   00_extensions.sql                            # Required PostgreSQL extensions (pgcrypto)
   01_create_function_set_updated_at.sql        # Trigger function for updated_at
   02_create_table_patient.sql                  # Shared patient table
@@ -148,7 +148,7 @@ Syntax-check every form's SQL migrations (dry-run against a PostgreSQL
 instance):
 
 ```sh
-for f in forms/*/sql-migrations/*.sql; do
+for f in forms/*/sql/*.sql; do
   psql -f "$f" --set ON_ERROR_STOP=1
 done
 ```

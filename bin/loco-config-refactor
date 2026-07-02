@@ -19,7 +19,8 @@ contents reference `loco-rs`):
     - Append OTel + Prometheus deps under `[dependencies]` if missing.
 
   config/development.yaml, config/test.yaml, config/production.yaml:
-    - Set `workers.mode: BackgroundQueue`.
+    - Set `workers.mode`: BackgroundQueue (development/production) or
+      ForegroundBlocking (test, so queued mailer jobs run inline).
     - Insert/replace a `queue:` block with `kind: Postgres`, reusing the
       same Postgres URI as the existing `database.uri` and setting
       `dangerously_flush` and `num_workers` per environment.
@@ -285,8 +286,12 @@ def extract_database_uri(text: str) -> str | None:
     return m.group(1).strip()
 
 
-def canonical_workers_block() -> str:
-    return "workers:\n  mode: BackgroundQueue\n"
+def canonical_workers_block(env: str) -> str:
+    # test runs workers inline so queued jobs (e.g. the auth mailer) execute
+    # synchronously and the starter test-suite stays green; dev/prod use the
+    # real Postgres-backed background queue.
+    mode = "ForegroundBlocking" if env == "test" else "BackgroundQueue"
+    return f"workers:\n  mode: {mode}\n"
 
 
 def canonical_queue_block(env: str, uri: str) -> str:
@@ -313,7 +318,7 @@ def rewrite_workers_and_queue(text: str, env: str) -> tuple[str, list[str], str 
     if not uri:
         return text, [], "no database.uri found — cannot derive queue uri"
 
-    workers_canonical = canonical_workers_block()
+    workers_canonical = canonical_workers_block(env)
     queue_canonical = canonical_queue_block(env, uri)
     combined = workers_canonical + "\n" + queue_canonical
 
@@ -361,7 +366,7 @@ def rewrite_workers_and_queue(text: str, env: str) -> tuple[str, list[str], str 
         new_text = body + "\n\n" + combined
 
     if not workers_was_canonical:
-        notes.append("workers.mode → BackgroundQueue")
+        notes.append(f"workers.mode → {'ForegroundBlocking' if env == 'test' else 'BackgroundQueue'}")
     if not queue_was_canonical:
         notes.append(f"queue: → Postgres ({env})")
 

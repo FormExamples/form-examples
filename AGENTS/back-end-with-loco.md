@@ -6,7 +6,7 @@ Design System, no CSS, no static assets. The crate is a pure back-end
 that exposes JSON endpoints consumed by the separate `front-end-*-with-html/`
 and `front-end-*-with-svelte/` subprojects. The contract each form's
 back-end must satisfy is documented in the per-form
-[`spec.md`](../forms/AGENTS.md); the system-wide back-end rules live in
+`forms/<slug>/spec/index.md`; the system-wide back-end rules live in
 [`../spec.md`](../spec.md) §6.
 
 Slug: back-end-with-loco

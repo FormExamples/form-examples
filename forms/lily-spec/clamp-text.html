@@ -1,0 +1,29 @@
+<!-- clamp-text.html -->
+<!-- ClampText component -->
+<!--
+  Description: a text container that truncates content to a maximum number of lines
+
+  HTML tag: <div>
+  CSS class: clamp-text
+  Keyboard: None (passive element)
+  Accessibility: aria-label optional; full text content remains in DOM for assistive technologies
+
+  Behavior:
+    Sets data-lines attribute and inline CSS custom property --clamp-text-lines
+    so consumer CSS can apply -webkit-line-clamp or modern line-clamp.
+    Component does NOT apply overflow: hidden — that is left to consumer styling.
+
+  Usage:
+    <div class="clamp-text" data-lines="2" style="--clamp-text-lines: 2;" aria-label="Article preview">
+      Long content that may overflow several lines...
+    </div>
+-->
+
+<div
+  class="clamp-text"
+  data-lines="2"
+  style="--clamp-text-lines: 2;"
+  aria-label=""
+>
+  <!-- Consumer provides text content; full text remains in DOM and accessible to screen readers -->
+</div>

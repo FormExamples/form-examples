@@ -1,5 +1,13 @@
 # Front-end with SvelteKit Tailwind SVAR (Lily Svelte headless)
 
+> **Legacy layout note.** This document describes the older *split* layout
+> (`front-end-form-with-svelte/` + `front-end-dashboard-with-svelte/`),
+> which survives only in unconsolidated forms. The gold standard is the
+> single consolidated `front-end-with-svelte/` app documented in
+> [`../forms/AGENTS-front-end-svelte.md`](../forms/AGENTS-front-end-svelte.md);
+> the technology stack below (SvelteKit + Tailwind 4 + SVAR + pure Svelte 5
+> engine) applies to both layouts.
+
 SvelteKit single-page form and SVAR-based dashboard, styled with Tailwind
 CSS 4 and powered by a pure Svelte 5 reactive scoring engine. The
 **Lily Design System Svelte headless** library defines the component
@@ -8,13 +16,14 @@ contract every form's `src/lib/components/ui/` must satisfy.
 The cross-stack UX rules live in [`../spec.md`](../spec.md) §5; the
 component contract lives in
 [`../forms/AGENTS-front-end-svelte.md`](../forms/AGENTS-front-end-svelte.md).
-The per-form domain spec is at `forms/<slug>/spec.md`.
+The per-form domain spec is at `forms/<slug>/spec/index.md`.
 
 Slug: front-end-with-sveltekit-tailwind-svar
 
-- Search patterns:
+- Search patterns (legacy split layout):
   - `forms/*/front-end-form-with-svelte` — patient questionnaire (single-page wizard)
   - `forms/*/front-end-dashboard-with-svelte` — dashboard (SVAR DataGrid)
+  - `forms/*/front-end-with-svelte` — consolidated app (gold standard)
 
 ## Technology stack
 

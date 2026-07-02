@@ -2,15 +2,15 @@
 
 Example XML instances and matching DTD schemas for each SQL table entity, so
 that a form's data can be exported, transmitted, or validated outside of the
-PostgreSQL database. **Generated** from `sql-migrations/` (the source of
+PostgreSQL database. **Generated** from `sql/` (the source of
 truth — see `spec.md` §3.1). Do not hand-edit; re-run the generator after
 schema changes.
 
 Slug: xml-representations
 
-- Search pattern: `forms/*/sql-migrations/*.sql`
-- Search pattern: `forms/*/xml-representations/*.xml`
-- Search pattern: `forms/*/xml-representations/*.dtd`
+- Search pattern: `forms/*/sql/*.sql`
+- Search pattern: `forms/*/xml/*.xml`
+- Search pattern: `forms/*/xml/*.dtd`
 - Generator: `bin/xml-representations/generate-xml-representations.py`
 
 ## Directory structure
@@ -21,7 +21,7 @@ sub-tables (`assessment_<section>`) are consolidated into a single nested
 one form has exactly one `assessment.*` pair.
 
 ```
-xml-representations/
+xml/
   <entity>.xml          # Example XML instance for an entity
   <entity>.dtd          # External DTD describing that entity
   ...
@@ -144,7 +144,7 @@ python3 bin/xml-representations/generate-xml-representations.py
 Validate every XML file in the monorepo against its DTD:
 
 ```sh
-for xml in forms/*/xml-representations/*.xml; do
+for xml in forms/*/xml/*.xml; do
   xmllint --valid --noout "$xml" || echo "FAIL: $xml"
 done
 ```

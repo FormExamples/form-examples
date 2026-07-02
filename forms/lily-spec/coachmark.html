@@ -1,0 +1,59 @@
+<!-- coachmark.html -->
+<!-- Coachmark component -->
+<!--
+  Description: an anchored popover that spotlights and explains a single feature
+
+  HTML tag: <div> with role="dialog"
+  CSS class: coachmark
+  Keyboard: Tab to focus the dismiss button, Enter or Space to dismiss.
+  Accessibility: role="dialog", aria-modal="false" (non-modal coachmark);
+                 aria-labelledby points at the title; aria-describedby points at
+                 the description when present; dismiss button has aria-label.
+
+  Behavior:
+    The embedded script wires the dismiss button to hide the coachmark by
+    setting the `hidden` attribute on the root element.
+
+  Usage:
+    <div class="coachmark" role="dialog" aria-modal="false"
+         aria-labelledby="coachmark-title-1"
+         aria-describedby="coachmark-desc-1">
+      <h2 class="coachmark-title" id="coachmark-title-1">Title</h2>
+      <p class="coachmark-description" id="coachmark-desc-1">Description</p>
+      <button class="coachmark-dismiss" type="button" aria-label="Dismiss">×</button>
+    </div>
+-->
+
+<div
+  class="coachmark"
+  role="dialog"
+  aria-modal="false"
+  aria-labelledby="coachmark-title-1"
+  aria-describedby="coachmark-desc-1"
+>
+  <h2 class="coachmark-title" id="coachmark-title-1"></h2>
+  <p class="coachmark-description" id="coachmark-desc-1"></p>
+  <button class="coachmark-dismiss" type="button" aria-label="">×</button>
+</div>
+
+<script>
+  // Coachmark behavior
+  // Wires each coachmark's dismiss button to hide the coachmark via the
+  // `hidden` attribute. Pure vanilla JavaScript — no framework, no styling.
+  (function () {
+    "use strict";
+
+    var coachmarks = document.querySelectorAll('div.coachmark');
+
+    coachmarks.forEach(function (coachmark) {
+      var dismiss = coachmark.querySelector('.coachmark-dismiss');
+      if (!dismiss) return;
+
+      dismiss.addEventListener('click', function () {
+        if (dismiss.disabled) return;
+        // Hide the coachmark dialog.
+        coachmark.setAttribute('hidden', '');
+      });
+    });
+  })();
+</script>

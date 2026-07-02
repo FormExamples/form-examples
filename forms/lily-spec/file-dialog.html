@@ -1,0 +1,35 @@
+<!-- file-dialog.html -->
+<!-- FileDialog component -->
+<!--
+  Description: a dialog for browsing and selecting files
+  HTML tag: <dialog>
+  CSS class: file-dialog
+  Keyboard: Tab to cycle focus within dialog, Escape to close
+  Accessibility: Implicit dialog role, aria-label for accessible name
+  Usage:
+    <dialog class="file-dialog" aria-label="Example">
+      ...
+    </dialog>
+-->
+
+<dialog
+  class="file-dialog"
+  aria-label=""
+  aria-modal="true"
+>
+  <!-- Consumer provides dialog content -->
+</dialog>
+
+<script>
+  // FileDialog behavior
+  (function() {
+    'use strict';
+    document.querySelectorAll('.file-dialog').forEach(function(el) {
+      el.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape') {
+          el.close ? el.close() : el.setAttribute('data-open', 'false');
+        }
+      });
+    });
+  })();
+</script>

@@ -1,0 +1,53 @@
+<!-- product-card.html -->
+<!-- ProductCard component -->
+<!--
+  Description: a specialized card for displaying a product with image, title, price, and actions
+
+  HTML tag: <article>
+  CSS class: product-card
+  Keyboard: None at the card level; nested links and buttons handle their own keyboard interaction
+  Accessibility: <article> is a sectioning landmark; aria-label sets the accessible name (defaults to the product name)
+
+  Behavior:
+    Renders an <article> containing an optional <img class="product-card-image">,
+    a <header class="product-card-header"> with the product name in a heading
+    and the price in a paragraph, followed by consumer-provided slot content
+    (description, actions, etc.). All text and image alt are consumer-supplied.
+
+  Usage:
+    <article class="product-card" aria-label="Wonder Widget">
+      <img class="product-card-image" src="..." alt="..." />
+      <header class="product-card-header">
+        <h3 class="product-card-name">Wonder Widget</h3>
+        <p class="product-card-price">$19.99</p>
+      </header>
+      <p>Description text...</p>
+      <button class="button">Add to cart</button>
+    </article>
+-->
+
+<article
+  class="product-card"
+  aria-label=""
+>
+  <!-- Optional product image (consumer provides src and alt) -->
+  <img
+    class="product-card-image"
+    src=""
+    alt=""
+  />
+
+  <!-- Required header with name and price -->
+  <header class="product-card-header">
+    <!-- Product name as a heading for the article landmark -->
+    <h3 class="product-card-name">
+      <!-- Consumer provides product name text -->
+    </h3>
+    <!-- Pre-formatted price text (consumer formats currency and locale) -->
+    <p class="product-card-price">
+      <!-- Consumer provides formatted price text -->
+    </p>
+  </header>
+
+  <!-- Consumer provides additional content: description, ratings, actions, etc. -->
+</article>

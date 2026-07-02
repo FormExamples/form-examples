@@ -13,7 +13,7 @@ Slug: back-end-with-loco-setup
 
 ## What the generator does
 
-For each form's `sql-migrations/` directory, the script parses every
+For each form's `sql/` directory, the script parses every
 `CREATE TABLE` statement and emits a single setup shell script
 containing:
 

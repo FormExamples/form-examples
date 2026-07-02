@@ -1,0 +1,29 @@
+<!-- flex-stack.html -->
+<!-- FlexStack component -->
+<!--
+  Description: a flex layout container for vertical or horizontal stacking with consistent gap
+
+  HTML tag: <div>
+  CSS class: flex-stack
+  Keyboard: None (passive element)
+  Accessibility: None — purely structural layout container
+
+  Behavior:
+    Inline style applies display: flex with consumer-controlled flex-direction and gap.
+    Optional align-items and justify-content can be added by consumer.
+    The data-direction attribute is exposed for consumer CSS hooks.
+
+  Usage:
+    <div class="flex-stack" data-direction="column"
+         style="display: flex; flex-direction: column; gap: 1rem;">
+      ...
+    </div>
+-->
+
+<div
+  class="flex-stack"
+  data-direction="column"
+  style="display: flex; flex-direction: column; gap: 1rem;"
+>
+  <!-- Consumer provides stacked children -->
+</div>

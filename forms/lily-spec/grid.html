@@ -1,0 +1,30 @@
+<!-- grid.html -->
+<!-- Grid component -->
+<!--
+  Description: a CSS grid layout container with configurable columns and gap
+
+  HTML tag: <div>
+  CSS class: grid
+  Keyboard: None (passive element)
+  Accessibility: None — purely structural layout container
+
+  Behavior:
+    Inline style applies display: grid with grid-template-columns and gap.
+    By default uses repeat(12, minmax(0, 1fr)) for a 12-column grid.
+    Consumers may set data-columns to a number (12) or a custom string
+    (e.g. "1fr 2fr 1fr") which is then used as-is.
+
+  Usage:
+    <div class="grid" data-columns="12"
+         style="display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); gap: 1rem;">
+      ...
+    </div>
+-->
+
+<div
+  class="grid"
+  data-columns="12"
+  style="display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); gap: 1rem;"
+>
+  <!-- Consumer provides grid items -->
+</div>

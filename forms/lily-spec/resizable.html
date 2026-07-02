@@ -1,0 +1,31 @@
+<!-- resizable.html -->
+<!-- Resizable component -->
+<!--
+  Description: a container that the user can resize by dragging
+  HTML tag: <div>
+  CSS class: resizable
+  Keyboard: None (passive element)
+  Accessibility: aria-label for accessible name
+  Usage:
+    <div class="resizable" aria-label="Example">
+      ...
+    </div>
+-->
+
+<div
+  class="resizable"
+  aria-label=""
+>
+  <!-- Consumer provides content -->
+</div>
+
+<script>
+  // Resizable behavior
+  (function() {
+    'use strict';
+    // Resizable: consumer implements interactive behavior
+    document.querySelectorAll('.resizable').forEach(function(el) {
+      // Interactive behavior initialization
+    });
+  })();
+</script>

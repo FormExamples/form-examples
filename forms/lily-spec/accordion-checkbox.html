@@ -1,0 +1,122 @@
+<!-- accordion-checkbox.html -->
+<!-- AccordionCheckbox component -->
+<!--
+  Description: a checkbox option that reveals an accordion panel when checked
+
+  HTML tag: <div>
+  CSS class: accordion-checkbox
+  Inner classes:
+    - accordion-checkbox-input  (on the <input type="checkbox">)
+    - accordion-checkbox-label  (on the <label>)
+    - accordion-checkbox-panel  (on the revealable <div>)
+
+  Attributes:
+    data-id          (optional) base id used to link the checkbox and panel
+                     (auto-generated if not provided so multiple instances do
+                     not collide)
+    data-label       accessible label for the checkbox
+    data-checked     "true" or "false" — initial checked state (default "false")
+
+  Accessibility:
+    - aria-controls on the checkbox references the panel id
+    - aria-expanded on the checkbox reflects the checked state
+    - role="region" + aria-labelledby on the panel announces it as a labeled
+      landmark tied to the checkbox
+    - hidden attribute on the panel removes it from the accessibility tree
+      when unchecked
+
+  Keyboard:
+    - Tab: moves focus onto the checkbox
+    - Space: toggles the checkbox (native), which reveals or hides the panel
+
+  Usage:
+    <div class="accordion-checkbox" data-label="I have additional comments">
+      <p>Tell us more in the text-area-input below.</p>
+      <textarea aria-label="Your comments"></textarea>
+    </div>
+
+    The script below promotes the inert template into the full
+    AccordionCheckbox structure on initialization.
+-->
+
+<div
+  class="accordion-checkbox"
+  data-label=""
+>
+  <!-- Consumer provides revealable panel content here -->
+</div>
+
+<script>
+  // AccordionCheckbox behavior
+  (function () {
+    "use strict";
+
+    function generateId() {
+      return "accordion-checkbox-" + Math.random().toString(36).slice(2, 9);
+    }
+
+    function init(root) {
+      if (root.dataset.lilyInit === "1") return;
+      root.dataset.lilyInit = "1";
+
+      var baseId = root.dataset.id || generateId();
+      var checkboxId = baseId + "-checkbox";
+      var panelId = baseId + "-panel";
+      var label = root.dataset.label || "";
+      var checked = root.dataset.checked === "true";
+
+      // Capture any pre-existing children as the panel content
+      var panelChildren = Array.prototype.slice.call(root.childNodes);
+
+      // Build the checkbox input
+      var input = document.createElement("input");
+      input.type = "checkbox";
+      input.className = "accordion-checkbox-input";
+      input.id = checkboxId;
+      input.setAttribute("aria-controls", panelId);
+      input.setAttribute("aria-expanded", checked ? "true" : "false");
+      if (checked) input.checked = true;
+
+      // Build the label
+      var labelEl = document.createElement("label");
+      labelEl.className = "accordion-checkbox-label";
+      labelEl.setAttribute("for", checkboxId);
+      labelEl.textContent = label;
+
+      // Build the panel
+      var panel = document.createElement("div");
+      panel.className = "accordion-checkbox-panel";
+      panel.id = panelId;
+      panel.setAttribute("role", "region");
+      panel.setAttribute("aria-labelledby", checkboxId);
+      if (!checked) panel.setAttribute("hidden", "");
+      panelChildren.forEach(function (n) {
+        panel.appendChild(n);
+      });
+
+      // Replace the root's children with the new structure
+      root.appendChild(input);
+      root.appendChild(labelEl);
+      root.appendChild(panel);
+
+      // Wire up the toggle
+      input.addEventListener("change", function () {
+        var isChecked = input.checked;
+        input.setAttribute("aria-expanded", isChecked ? "true" : "false");
+        if (isChecked) {
+          panel.removeAttribute("hidden");
+        } else {
+          panel.setAttribute("hidden", "");
+        }
+        root.dispatchEvent(
+          new CustomEvent("accordion-checkbox:change", {
+            detail: { checked: isChecked },
+            bubbles: true,
+          })
+        );
+      });
+    }
+
+    document.querySelectorAll(".accordion-checkbox").forEach(init);
+  })();
+</script>

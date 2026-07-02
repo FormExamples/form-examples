@@ -1,0 +1,55 @@
+<!-- info-state.html -->
+<!-- InfoState component -->
+<!--
+  Description: a composition of illustration, title, description, and action for empty, error, info, or success states
+
+  HTML tag: <section>
+  CSS class: info-state
+  Keyboard: None (passive container; nested action buttons handle their own keyboard interaction)
+  Accessibility: role="status" announces state changes politely; aria-label provides the accessible name (defaults to the title)
+
+  Behavior:
+    Renders a <section> landmark with role="status" and a data-level attribute
+    that consumer CSS may key on ("info", "empty", "error", "success").
+    Inner structure is consumer-supplied: typically an optional illustration,
+    a heading <h2 class="info-state-title">, an optional description
+    <p class="info-state-description">, and an optional action area
+    <div class="info-state-action">.
+
+  Usage:
+    <section class="info-state" role="status" data-level="empty" aria-label="No results">
+      <div class="info-state-illustration">...</div>
+      <h2 class="info-state-title">No results</h2>
+      <p class="info-state-description">Try adjusting your filters.</p>
+      <div class="info-state-action">
+        <button class="button">Reset</button>
+      </div>
+    </section>
+-->
+
+<section
+  class="info-state"
+  role="status"
+  data-level="info"
+  aria-label=""
+>
+  <!-- Optional illustration slot -->
+  <div class="info-state-illustration">
+    <!-- Consumer provides illustration content (SVG, image, etc.) -->
+  </div>
+
+  <!-- Required title heading -->
+  <h2 class="info-state-title">
+    <!-- Consumer provides title text -->
+  </h2>
+
+  <!-- Optional description -->
+  <p class="info-state-description">
+    <!-- Consumer provides description text -->
+  </p>
+
+  <!-- Optional action area for call-to-action buttons -->
+  <div class="info-state-action">
+    <!-- Consumer provides action buttons -->
+  </div>
+</section>

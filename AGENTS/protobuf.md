@@ -1,7 +1,7 @@
 # Protocol Buffers representations
 
 Protocol Buffers (`.proto`) schemas for each form, **generated** from
-`sql-migrations/` (the source of truth — see `spec.md` §3.1). One `.proto`
+`sql/` (the source of truth — see `spec.md` §3.1). One `.proto`
 file is produced per top-level SQL table entity, so that a form's data can
 be serialised, transmitted, or code-generated into any of the languages the
 protobuf compiler supports. Do not hand-edit; re-run the generator after
@@ -9,7 +9,7 @@ schema changes.
 
 Slug: protobuf
 
-- Search pattern: `forms/*/sql-migrations/*.sql`
+- Search pattern: `forms/*/sql/*.sql`
 - Search pattern: `forms/*/protobuf/*.proto`
 - Generator: `bin/protobuf/generate-protobuf-representations.py`
 
@@ -56,7 +56,7 @@ names on column-name collisions to keep every field unique.
 - Field names in `snake_case`, matching the source SQL column names.
 - Field numbers assigned sequentially starting at `1`, in SQL column order.
 - A header comment marking the file as generated:
-  `// Generated from sql-migrations/. Do not edit by hand.`
+  `// Generated from sql/. Do not edit by hand.`
 - A `// SOURCE: <table_name>` comment recording the originating SQL table.
 
 ## SQL → protobuf type mapping

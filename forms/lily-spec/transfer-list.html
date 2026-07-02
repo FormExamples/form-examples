@@ -1,0 +1,57 @@
+<!-- transfer-list.html -->
+<!-- TransferList component -->
+<!--
+  Description: a dual list box for moving items between two lists
+
+  HTML tag: <div> with role="group"
+  CSS class: transfer-list
+  Keyboard: None directly — consumer controls (typically a Listbox in each
+            section, plus action buttons in the middle) handle keyboard.
+  Accessibility:
+    - role="group" with aria-label — the entire transfer-list is a labeled group.
+    - Each side is a <section> with aria-label so screen readers can navigate
+      directly to the source and target lists as landmarks.
+    - The middle "transfer-list-actions" region holds the move-right /
+      move-left buttons that the consumer supplies.
+
+  Behavior:
+    Renders a <div role="group"> containing three regions:
+      - <section class="transfer-list-source"  aria-label="…"> — REQUIRED
+      - <div     class="transfer-list-actions"             > — optional
+      - <section class="transfer-list-target"  aria-label="…"> — REQUIRED
+    Purely passive: no script.
+
+  Usage:
+    <div class="transfer-list" role="group" aria-label="Choose features">
+      <section class="transfer-list-source" aria-label="Available features">
+        <!-- consumer-supplied source listbox -->
+      </section>
+      <div class="transfer-list-actions">
+        <!-- consumer-supplied move-right and move-left buttons -->
+      </div>
+      <section class="transfer-list-target" aria-label="Selected features">
+        <!-- consumer-supplied target listbox -->
+      </section>
+    </div>
+-->
+
+<div
+  class="transfer-list"
+  role="group"
+  aria-label=""
+>
+  <!-- Source list region: REQUIRED. -->
+  <section class="transfer-list-source" aria-label="">
+    <!-- Consumer provides the source list (typically a listbox) -->
+  </section>
+
+  <!-- Actions region: optional. Holds move-right / move-left buttons. -->
+  <div class="transfer-list-actions">
+    <!-- Consumer provides the action buttons (or remove this div if unused) -->
+  </div>
+
+  <!-- Target list region: REQUIRED. -->
+  <section class="transfer-list-target" aria-label="">
+    <!-- Consumer provides the target list (typically a listbox) -->
+  </section>
+</div>

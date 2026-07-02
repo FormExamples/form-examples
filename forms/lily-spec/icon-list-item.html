@@ -1,0 +1,30 @@
+<!-- icon-list-item.html -->
+<!-- IconListItem component -->
+<!--
+  Description: one item in an icon list with a leading icon slot
+
+  HTML tag: <li>
+  CSS class: icon-list-item
+  Keyboard: None (passive list item)
+  Accessibility:
+    - The leading icon span is decorative and uses aria-hidden="true"
+    - The text span carries the accessible content of the item
+
+  Usage:
+    <li class="icon-list-item">
+      <span class="icon-list-item-icon" aria-hidden="true">★</span>
+      <span class="icon-list-item-text">Benefit description</span>
+    </li>
+-->
+
+<li class="icon-list-item">
+  <span
+    class="icon-list-item-icon"
+    aria-hidden="true"
+  >
+    <!-- Consumer provides decorative icon content (svg, glyph, emoji) -->
+  </span>
+  <span class="icon-list-item-text">
+    <!-- Consumer provides accessible text content -->
+  </span>
+</li>

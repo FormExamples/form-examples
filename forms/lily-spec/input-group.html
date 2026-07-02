@@ -1,0 +1,41 @@
+<!-- input-group.html -->
+<!-- InputGroup component -->
+<!--
+  Description: a group wrapping an input with prefix and suffix addons
+
+  HTML tag: <div>
+  CSS class: input-group
+  Keyboard: None at the group level; the inner input handles its own keyboard interaction
+  Accessibility: role="group" with aria-label so assistive technology presents the prefix, input, and suffix as one unit
+
+  Behavior:
+    Renders a <div role="group"> containing optional prefix, the input
+    (consumer-supplied), and optional suffix. Prefix and suffix are wrapped
+    in <span> elements with the input-group-prefix / input-group-suffix
+    classes so consumer CSS can style them.
+
+  Usage:
+    <div class="input-group" role="group" aria-label="Amount">
+      <span class="input-group-prefix">$</span>
+      <input type="text" />
+      <span class="input-group-suffix">.00</span>
+    </div>
+-->
+
+<div
+  class="input-group"
+  role="group"
+  aria-label=""
+>
+  <!-- Optional prefix addon (e.g., currency symbol, icon) -->
+  <span class="input-group-prefix">
+    <!-- Consumer provides prefix content -->
+  </span>
+
+  <!-- Consumer-supplied input goes here -->
+
+  <!-- Optional suffix addon (e.g., unit, button, icon) -->
+  <span class="input-group-suffix">
+    <!-- Consumer provides suffix content -->
+  </span>
+</div>

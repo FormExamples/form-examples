@@ -1,0 +1,33 @@
+<!-- timer.html -->
+<!-- Timer component -->
+<!--
+  Description: a countdown or elapsed time display
+  HTML tag: <div>
+  CSS class: timer
+  Keyboard: None (passive element)
+  Accessibility: aria-label for accessible name
+  Usage:
+    <div class="timer" aria-label="Example">
+      ...
+    </div>
+-->
+
+<div
+  class="timer"
+  aria-label=""
+>
+  <!-- Consumer provides content -->
+</div>
+
+<script>
+  // Timer behavior
+  (function() {
+    'use strict';
+    document.querySelectorAll('.timer').forEach(function(el) {
+      var display = el.querySelector('[data-display]');
+      if (display) {
+        el.setAttribute('aria-live', 'polite');
+      }
+    });
+  })();
+</script>

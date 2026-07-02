@@ -1,0 +1,33 @@
+<!-- tooltip.html -->
+<!-- Tooltip component -->
+<!--
+  Description: a small popup showing descriptive text on hover or focus
+  HTML tag: <div>
+  CSS class: tooltip
+  Keyboard: None (passive element)
+  Accessibility: role="tooltip", aria-label for accessible name
+  Usage:
+    <div class="tooltip" role="tooltip" aria-label="Example">
+      ...
+    </div>
+-->
+
+<div
+  class="tooltip"
+  role="tooltip"
+  aria-label=""
+  aria-hidden="true"
+>
+  <!-- Consumer provides content -->
+</div>
+
+<script>
+  // Tooltip behavior
+  (function() {
+    'use strict';
+    // Tooltip: consumer implements interactive behavior
+    document.querySelectorAll('.tooltip').forEach(function(el) {
+      // Interactive behavior initialization
+    });
+  })();
+</script>

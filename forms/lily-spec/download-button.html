@@ -1,0 +1,34 @@
+<!-- download-button.html -->
+<!-- DownloadButton component -->
+<!--
+  Description: a download link styled as a button, with optional file size and format metadata
+  HTML tag: <a>
+  CSS class: download-button
+  Keyboard: Tab to focus, Enter to activate (native <a> behavior)
+  Accessibility:
+    - aria-label is REQUIRED — provides the descriptive name including download intent
+    - data-file-size and data-file-format expose file metadata for styling and screen readers
+    - native download attribute prompts the browser to save the linked resource
+  Usage:
+    <a
+      class="download-button"
+      href="/files/report.pdf"
+      aria-label="Download report (PDF, 2.4 MB)"
+      data-file-size="2.4 MB"
+      data-file-format="PDF"
+      download="report.pdf"
+    >
+      Download report
+    </a>
+-->
+
+<a
+  class="download-button"
+  href="#"
+  aria-label=""
+  data-file-size=""
+  data-file-format=""
+  download
+>
+  <!-- Consumer provides button content (defaults to label if omitted) -->
+</a>

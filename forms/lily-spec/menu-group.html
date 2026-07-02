@@ -1,0 +1,27 @@
+<!-- menu-group.html -->
+<!-- MenuGroup component -->
+<!--
+  Description: a labeled section of menu items within a menu
+
+  HTML tag: <div> with role="group"
+  CSS class: menu-group
+  Keyboard: None directly; menu-item children handle navigation in the parent menu.
+  Accessibility: role="group" with required aria-label; the visible heading is
+                 marked aria-hidden="true" since aria-label already conveys it
+                 to assistive technology.
+
+  Usage:
+    <div class="menu-group" role="group" aria-label="File">
+      <div class="menu-group-heading" aria-hidden="true">File</div>
+      <!-- consumer inserts menu-item children here -->
+    </div>
+-->
+
+<div
+  class="menu-group"
+  role="group"
+  aria-label=""
+>
+  <div class="menu-group-heading" aria-hidden="true"></div>
+  <!-- Consumer inserts menu-item children here -->
+</div>

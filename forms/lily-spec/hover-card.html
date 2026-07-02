@@ -1,0 +1,32 @@
+<!-- hover-card.html -->
+<!-- HoverCard component -->
+<!--
+  Description: a card that appears on hover over a trigger element
+  HTML tag: <div>
+  CSS class: hover-card
+  Keyboard: None (passive element)
+  Accessibility: aria-label for accessible name
+  Usage:
+    <div class="hover-card" aria-label="Example">
+      ...
+    </div>
+-->
+
+<div
+  class="hover-card"
+  aria-label=""
+  data-open="false"
+>
+  <!-- Consumer provides content -->
+</div>
+
+<script>
+  // HoverCard behavior
+  (function() {
+    'use strict';
+    // HoverCard: consumer implements interactive behavior
+    document.querySelectorAll('.hover-card').forEach(function(el) {
+      // Interactive behavior initialization
+    });
+  })();
+</script>

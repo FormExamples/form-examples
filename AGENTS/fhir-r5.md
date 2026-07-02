@@ -1,14 +1,14 @@
 # FHIR HL7 R5 representations
 
-FHIR HL7 R5 JSON resources for each form, **generated** from `sql-migrations/`
+FHIR HL7 R5 JSON resources for each form, **generated** from `sql/`
 (the source of truth — see `spec.md` §3.1). The directory where the JSON
-lives is `fhir-r5/` inside each form. Do not hand-edit; re-run the
+lives is `fhir/r5/` inside each form. Do not hand-edit; re-run the
 generator after schema changes.
 
 Slug: fhir-r5
 
-- Search pattern: `forms/*/sql-migrations/*.sql`
-- Search pattern: `forms/*/fhir-r5/*.json`
+- Search pattern: `forms/*/sql/*.sql`
+- Search pattern: `forms/*/fhir/r5/*.json`
 - Generator: `bin/fhir-r5/generate-fhir-r5-representations.py`
 
 ## FHIR R5 resource mapping
@@ -27,7 +27,7 @@ Each SQL table maps to a FHIR R5 resource type as follows:
 ## Directory structure
 
 ```
-fhir-r5/
+fhir/r5/
   patient.json                    # FHIR Patient resource
   assessment.json                 # FHIR Encounter resource
   assessment_<section>.json       # FHIR Observation resource per section
@@ -66,7 +66,7 @@ python3 bin/fhir-r5/generate-fhir-r5-representations.py
 Validate that every JSON file is well-formed and contains a `resourceType`:
 
 ```sh
-for f in forms/*/fhir-r5/*.json; do
+for f in forms/*/fhir/r5/*.json; do
   python3 -c "import json, sys; d = json.load(open('$f')); assert 'resourceType' in d, 'missing resourceType'" \
     || echo "FAIL: $f"
 done
@@ -75,5 +75,5 @@ done
 For full FHIR validation, run the official HL7 FHIR Validator:
 
 ```sh
-java -jar validator_cli.jar -version 5.0.0 forms/*/fhir-r5/*.json
+java -jar validator_cli.jar -version 5.0.0 forms/*/fhir/r5/*.json
 ```

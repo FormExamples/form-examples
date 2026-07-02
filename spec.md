@@ -50,10 +50,10 @@ forms/<slug>/index.md           (human-readable design)
 forms/<slug>/spec/index.md      (machine + human spec; the contract)
         │
         ▼
-forms/<slug>/sql-migrations/    (source of truth for DATA SHAPE)
+forms/<slug>/sql/               (source of truth for DATA SHAPE)
         │                       Generates ↓
-        ├──► xml-representations/         (XML + DTD)
-        ├──► fhir-r5/                     (FHIR HL7 R5 JSON)
+        ├──► xml/                         (XML + DTD)
+        ├──► fhir/r5/                     (FHIR HL7 R5 JSON)
         ├──► protobuf/                    (.proto schemas)
         └──► openapi/                     (OpenAPI 3.1 .yaml)
 ```
@@ -67,7 +67,7 @@ forms/<slug>/spec/index.md      (source of truth for BEHAVIOUR)
 ```
 
 **Rule:** generated artefacts are never hand-edited. Hand-edits to
-`xml-representations/`, `fhir-r5/`, `protobuf/`, or `openapi/` will be
+`xml/`, `fhir/r5/`, `protobuf/`, or `openapi/` will be
 overwritten by the next regenerator run; the test of correctness is
 regeneration idempotency.
 
@@ -105,9 +105,9 @@ divergence.
 | `plan.md`                                       | author              | no         |
 | `tasks.md`                                      | author              | no         |
 | `doc/`                                          | author              | no         |
-| `sql-migrations/`                               | author              | no (source of truth) |
-| `xml-representations/`                          | `bin/xml-representations/generate-xml-representations.py` | **yes** |
-| `fhir-r5/`                                      | `bin/fhir-r5/generate-fhir-r5-representations.py` | **yes** |
+| `sql/`                                          | author              | no (source of truth) |
+| `xml/`                                          | `bin/xml-representations/generate-xml-representations.py` | **yes** |
+| `fhir/r5/`                                      | `bin/fhir-r5/generate-fhir-r5-representations.py` | **yes** |
 | `protobuf/`                                     | `bin/protobuf/generate-protobuf-representations.py` | **yes** |
 | `openapi/`                                      | `bin/openapi/generate-openapi-representations.py` | **yes** |
 | `front-end-with-html/`                          | author + `bin/lily-html-refactor` for mechanical class swaps | partial |
@@ -167,7 +167,7 @@ Every form attests to:
 - **[UK MHRA Software and AI as a Medical Device](https://www.gov.uk/government/publications/software-and-artificial-intelligence-ai-as-a-medical-device/software-and-artificial-intelligence-ai-as-a-medical-device)**.
 
 Where a form's output drives clinical decisions (e.g. ASA grading), the
-classification is escalated; per-form `index.md` and `spec.md` record the
+classification is escalated; per-form `index.md` and `spec/index.md` record the
 declared classification.
 
 ## 8. Versioning and the Lily pin
@@ -217,7 +217,7 @@ cargo build && cargo test && cargo clippy  # Loco/Rust
 
 1. **Update `spec.md`** (this file, or `forms/<slug>/spec/index.md`) to declare
    the new behaviour, contract change, or constraint.
-2. **Update `forms/<slug>/sql-migrations/`** if data shape changes.
+2. **Update `forms/<slug>/sql/`** if data shape changes.
 3. **Regenerate** the derived artefacts (XML, FHIR, protobuf, OpenAPI):
 
    ```sh

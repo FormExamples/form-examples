@@ -1,0 +1,33 @@
+<!-- step-list-item.html -->
+<!-- StepListItem component -->
+<!--
+  Description: one step in a step list with status of waiting, in progress, finished, or error
+
+  HTML tag: <li>
+  CSS class: step-list-item
+  Keyboard: None directly (consumer-supplied child controls manage focus)
+  Accessibility:
+    - aria-current="step" indicates this is the user's current step
+      (per the WAI-ARIA spec for steppers / multi-step progress).
+    - data-status exposes the discrete step state to consumer CSS:
+        "waiting" | "in-progress" | "finished" | "error"
+    - aria-label is optional — overrides the default accessible name from the
+      contained title text.
+
+  Behavior:
+    Renders an <li class="step-list-item" data-status="…">. Purely passive: no script.
+
+  Usage:
+    <li class="step-list-item" data-status="in-progress" aria-current="step" aria-label="Step 2: Shipping">
+      <strong>Shipping</strong>
+      <span>Enter your address</span>
+    </li>
+-->
+
+<li
+  class="step-list-item"
+  data-status="waiting"
+  aria-label=""
+>
+  <!-- Consumer provides the step content (typically title and description) -->
+</li>

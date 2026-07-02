@@ -27,7 +27,7 @@ schema changes. See `spec.md` §10 for the spec-driven workflow.
 
 ### SQL
 
-- `bin/migrate-sql-filenames.py` — one-shot migration of each form's `sql-migrations/` to the canonical `NN_create_table_<name>.sql` layout
+- `bin/migrate-sql-filenames.py` — one-shot migration of each form's `sql/` to the canonical `NN_create_table_<name>.sql` layout
 - `bin/sql-migrations/generate-sql-comments.py` — append missing `COMMENT ON TABLE` / `COMMENT ON COLUMN` to numbered SQL migrations
 - `bin/sql-migrations/generate-sql-combined.py` — combine each form's numbered SQL migrations into `schema.sql`
 
@@ -82,9 +82,9 @@ forms/<slug>/
   CHANGELOG.md                                     # Keep-a-Changelog 1.1.0 + SemVer per form
   doc/                                             # Clinical/regulatory reference documentation
   examples/                                        # Filled-form JSON fixtures + FHIR R5 Bundle samples
-  sql-migrations/                                  # PostgreSQL Liquibase migrations (source of truth)
-  xml-representations/                             # XML + DTD per SQL table entity (generated)
-  fhir-r5/                                         # FHIR HL7 R5 JSON per SQL entity (generated)
+  sql/                                             # PostgreSQL Liquibase migrations (source of truth)
+  xml/                                             # XML + DTD per SQL table entity (generated)
+  fhir/r5/                                         # FHIR HL7 R5 JSON per SQL entity (generated)
   protobuf/                                        # Protocol Buffers .proto schemas per SQL entity (generated)
   openapi/                                         # OpenAPI 3.1 .yaml specifications per SQL entity (generated)
   front-end-with-html/                             # Questionnaire + dashboard (HTML + Lily Design System; index.html + dashboard.html)
@@ -98,7 +98,7 @@ forms/<slug>/
 1. `bin/create-form <slug>` — scaffold the directory.
 2. Fill in `forms/<slug>/index.md`, `spec/index.md`, `AGENTS.md`, `plan.md`,
    `tasks.md` with the design spec.
-3. Author SQL migrations in `forms/<slug>/sql-migrations/`.
+3. Author SQL migrations in `forms/<slug>/sql/`.
 4. Regenerate derived representations:
    - `python3 bin/xml-representations/generate-xml-representations.py`
    - `python3 bin/fhir-r5/generate-fhir-r5-representations.py`

@@ -1,0 +1,29 @@
+<!-- container-with-fluid-width.html -->
+<!-- ContainerWithFluidWidth component -->
+<!--
+  Description: a full-width content wrapper with horizontal padding
+
+  HTML tag: <div>
+  CSS class: container-with-fluid-width
+  Keyboard: None (passive element)
+  Accessibility: None — purely structural layout container
+
+  Behavior:
+    Inline style applies width: 100% so the container fills its parent,
+    and padding-inline so content does not touch the viewport edges.
+    The data-padding-inline attribute is exposed for consumer CSS hooks.
+
+  Usage:
+    <div class="container-with-fluid-width" data-padding-inline="1rem"
+         style="width: 100%; padding-inline: 1rem;">
+      ...
+    </div>
+-->
+
+<div
+  class="container-with-fluid-width"
+  data-padding-inline="1rem"
+  style="width: 100%; padding-inline: 1rem;"
+>
+  <!-- Consumer provides fluid-width content -->
+</div>

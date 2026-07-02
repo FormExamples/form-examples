@@ -1,0 +1,45 @@
+<!-- pictogram.html -->
+<!-- Pictogram component -->
+<!--
+  Description: an icon-based component pairing an icon with a title and description in a centered or side layout
+  HTML tag: <figure>
+  CSS class: pictogram
+  Keyboard: None (passive element)
+  Accessibility:
+    - <figure> semantics; accessible name comes from the heading or aria-label
+    - data-layout exposes "centered" or "side" for styling
+    - icon container uses aria-hidden="true" because it is decorative
+    - heading and description carry the meaningful text
+  Usage:
+    <figure
+      class="pictogram"
+      data-layout="centered"
+      aria-label="Privacy"
+    >
+      <div class="pictogram-icon" aria-hidden="true">
+        <svg>...</svg>
+      </div>
+      <figcaption class="pictogram-caption">
+        <h3 class="pictogram-heading">Privacy</h3>
+        <p class="pictogram-description">Your data stays on your device.</p>
+      </figcaption>
+    </figure>
+-->
+
+<figure
+  class="pictogram"
+  data-layout="centered"
+  aria-label=""
+>
+  <div class="pictogram-icon" aria-hidden="true">
+    <!-- Consumer provides icon content (SVG, emoji, illustration) -->
+  </div>
+  <figcaption class="pictogram-caption">
+    <h3 class="pictogram-heading">
+      <!-- Consumer provides heading text (optional) -->
+    </h3>
+    <p class="pictogram-description">
+      <!-- Consumer provides description text (optional) -->
+    </p>
+  </figcaption>
+</figure>

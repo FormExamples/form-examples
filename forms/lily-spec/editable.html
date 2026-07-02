@@ -1,0 +1,31 @@
+<!-- editable.html -->
+<!-- Editable component -->
+<!--
+  Description: an inline-editable text element that toggles between view and edit modes
+  HTML tag: <div>
+  CSS class: editable
+  Keyboard: None (passive element)
+  Accessibility: aria-label for accessible name
+  Usage:
+    <div class="editable" aria-label="Example">
+      ...
+    </div>
+-->
+
+<div
+  class="editable"
+  aria-label=""
+>
+  <!-- Consumer provides content -->
+</div>
+
+<script>
+  // Editable behavior
+  (function() {
+    'use strict';
+    // Editable: consumer implements interactive behavior
+    document.querySelectorAll('.editable').forEach(function(el) {
+      // Interactive behavior initialization
+    });
+  })();
+</script>

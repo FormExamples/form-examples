@@ -1,0 +1,31 @@
+<!-- time-picker-input.html -->
+<!-- TimePickerInput component -->
+<!--
+  Description: an input with a dropdown for picking a time
+  HTML tag: <input>
+  CSS class: time-picker-input
+  Keyboard: Tab to focus, standard input keyboard interactions
+  Accessibility: role="radiogroup", Implicit input role, aria-label for accessible name
+  Usage:
+    <input class="time-picker-input" role="radiogroup" aria-label="Example">
+      ...
+    
+-->
+
+<input
+  class="time-picker-input"
+  role="radiogroup"
+  type="time"
+  aria-label=""
+>
+
+<script>
+  // TimePickerInput behavior
+  (function() {
+    'use strict';
+    // TimePickerInput: consumer implements interactive behavior
+    document.querySelectorAll('.time-picker-input').forEach(function(el) {
+      // Interactive behavior initialization
+    });
+  })();
+</script>
