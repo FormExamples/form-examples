@@ -1,0 +1,16 @@
+use heart_failure_review::app::App;
+use loco_rs::testing::prelude::*;
+use serial_test::serial;
+
+#[tokio::test]
+#[serial]
+async fn can_get_heart_failure_review_grades() {
+    request::<App, _, _>(|request, _ctx| async move {
+        let res = request.get("/api/heart_failure_review_grades/").await;
+        assert_eq!(res.status_code(), 200);
+
+        // you can assert content like this:
+        // assert_eq!(res.text(), "content");
+    })
+    .await;
+}
