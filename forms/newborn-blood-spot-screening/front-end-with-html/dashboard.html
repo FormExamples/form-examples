@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Newborn Blood Spot Screening — dashboard</title>
+  <meta name="description" content="Newborn blood spot screening dashboard: review screening records with overall outcome, referral status, sample adequacy and timing, suspected-condition count, and carrier flags.">
+  <link rel="stylesheet" href="css/dashboard.css">
+</head>
+<body>
+  <a class="skip-link" href="#patients-table">Skip to screenings table</a>
+
+  <header class="page-header">
+    <div class="page-header-inner">
+      <h1>Newborn Blood Spot Screening — Dashboard</h1>
+      <p class="subtitle">
+        Screening records with overall outcome, referral status, sample
+        adequacy and day 5–8 timing, suspected-condition count, and carrier
+        flags.
+      </p>
+      <p class="subtitle"><a href="index.html">← New screening record</a></p>
+    </div>
+  </header>
+
+  <main>
+    <!-- Status banner: shown when backend fetch fails and we fall back -->
+    <div
+      id="status-banner"
+      class="alert" data-type="warning"
+      role="status"
+      aria-live="polite"
+      hidden
+    ></div>
+
+    <!-- Filter bar -->
+    <section
+      class="filter-bar"
+      aria-labelledby="filter-bar-heading"
+    >
+      <h2 id="filter-bar-heading" class="visually-hidden">Filters</h2>
+
+      <div class="filter-grid">
+        <div class="filter-field filter-field-search">
+          <label for="filter-search">Search</label>
+          <input
+            id="filter-search"
+            type="search"
+            class="text-input"
+            placeholder="NHS number or baby name..."
+            autocomplete="off"
+          >
+        </div>
+
+        <div class="filter-field">
+          <label for="filter-outcome">Overall Outcome</label>
+          <select id="filter-outcome" class="select">
+            <option value="">All Outcomes</option>
+            <option value="referral-required">Referral required</option>
+            <option value="repeat-required">Repeat required</option>
+            <option value="incomplete">Incomplete</option>
+            <option value="declined-only-outstanding">Some declined</option>
+            <option value="all-not-suspected">All not suspected</option>
+          </select>
+        </div>
+
+        <div class="filter-field">
+          <label for="filter-referral">Referral</label>
+          <select id="filter-referral" class="select">
+            <option value="">All Referrals</option>
+            <option value="urgent">Urgent</option>
+            <option value="repeat">Repeat</option>
+            <option value="routine">Routine</option>
+          </select>
+        </div>
+
+        <div class="filter-field">
+          <label for="filter-adequate">Adequate</label>
+          <select id="filter-adequate" class="select">
+            <option value="">All</option>
+            <option value="yes">Yes</option>
+            <option value="no">No</option>
+          </select>
+        </div>
+
+        <div class="filter-field">
+          <label for="filter-carrier">Carrier</label>
+          <select id="filter-carrier" class="select">
+            <option value="">All</option>
+            <option value="yes">Yes</option>
+            <option value="no">No</option>
+          </select>
+        </div>
+
+        <div class="filter-field filter-field-actions">
+          <button
+            type="button"
+            id="filter-clear-btn"
+            class="button" data-variant="secondary"
+            hidden
+          >
+            Clear filters
+          </button>
+        </div>
+      </div>
+
+      <div class="filter-summary">
+        <span id="filter-count">Loading screenings...</span>
+      </div>
+    </section>
+
+    <!-- Screenings table -->
+    <section
+      class="table-card"
+      aria-labelledby="patients-table-heading"
+    >
+      <h2 id="patients-table-heading" class="visually-hidden">Screenings</h2>
+
+      <div class="table-scroll">
+        <table id="patients-table" class="patients-table">
+          <thead>
+            <tr id="patients-table-head">
+              <!-- Sortable column headers built by dashboard-app.js -->
+            </tr>
+          </thead>
+          <tbody id="patients-table-body">
+            <!-- Data rows built by dashboard-app.js -->
+          </tbody>
+        </table>
+      </div>
+
+      <p
+        id="patients-empty-message"
+        class="empty-message"
+        hidden
+      >
+        No screenings match the current filters.
+      </p>
+    </section>
+
+    <footer class="page-footer">
+      <p>
+        This dashboard supports the NHS Newborn Blood Spot (NBS) Screening
+        Programme. A suspected screen is not a diagnosis; it identifies a baby
+        who needs urgent diagnostic assessment. This is a clinical-review tool.
+      </p>
+    </footer>
+  </main>
+
+  <!--
+    Classic <script> tags (no `type="module"`) so the page works when opened
+    directly via file:// — browsers block ES-module imports from file:// for
+    CORS reasons, but allow ordered classic scripts. Each file attaches its
+    public symbols to `window.NewbornBloodSpotScreeningDashboard`.
+
+    Load order: types -> data -> api -> app (each depends on those above).
+  -->
+  <script src="js/dashboard-types.js"></script>
+  <script src="js/data.js"></script>
+  <script src="js/api.js"></script>
+  <script src="js/dashboard-app.js"></script>
+</body>
+</html>

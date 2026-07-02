@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>NIPE — clinician dashboard</title>
+  <meta name="description" content="NIPE clinician dashboard: review newborn screening examinations with overall outcome (satisfactory / refer / incomplete), care setting, screening context, and referral flag.">
+  <link rel="stylesheet" href="css/dashboard.css">
+</head>
+<body>
+  <a class="skip-link" href="#patients-table">Skip to examinations table</a>
+
+  <header class="page-header">
+    <div class="page-header-inner">
+      <h1>NIPE — Clinician Dashboard</h1>
+      <p class="subtitle">
+        Newborn and Infant Physical Examination list with overall screening
+        outcome, care setting, screening context, and referral flag.
+      </p>
+      <p class="subtitle"><a href="index.html">← New NIPE examination</a></p>
+    </div>
+  </header>
+
+  <main>
+    <!-- Status banner: shown when backend fetch fails and we fall back -->
+    <div
+      id="status-banner"
+      class="alert" data-type="warning"
+      role="status"
+      aria-live="polite"
+      hidden
+    ></div>
+
+    <!-- Filter bar -->
+    <section
+      class="filter-bar"
+      aria-labelledby="filter-bar-heading"
+    >
+      <h2 id="filter-bar-heading" class="visually-hidden">Filters</h2>
+
+      <div class="filter-grid">
+        <div class="filter-field filter-field-search">
+          <label for="filter-search">Search</label>
+          <input
+            id="filter-search"
+            type="search"
+            class="text-input"
+            placeholder="NHS number, ID, or name..."
+            autocomplete="off"
+          >
+        </div>
+
+        <div class="filter-field">
+          <label for="filter-setting">Setting</label>
+          <select id="filter-setting" class="select">
+            <option value="">All settings</option>
+            <option value="maternity-ward">Maternity ward</option>
+            <option value="neonatal-unit">Neonatal unit</option>
+            <option value="community">Community</option>
+            <option value="gp-surgery">GP surgery</option>
+            <option value="home">Home</option>
+            <option value="other">Other</option>
+          </select>
+        </div>
+
+        <div class="filter-field">
+          <label for="filter-context">Context</label>
+          <select id="filter-context" class="select">
+            <option value="">All contexts</option>
+            <option value="newborn-72h">Newborn (72h)</option>
+            <option value="infant-6-8-week">Infant (6-8wk)</option>
+          </select>
+        </div>
+
+        <div class="filter-field">
+          <label for="filter-outcome">Outcome</label>
+          <select id="filter-outcome" class="select">
+            <option value="">All outcomes</option>
+            <option value="satisfactory">Satisfactory</option>
+            <option value="refer">Refer</option>
+            <option value="incomplete">Incomplete</option>
+          </select>
+        </div>
+
+        <div class="filter-field">
+          <label for="filter-referral">Referral</label>
+          <select id="filter-referral" class="select">
+            <option value="">All</option>
+            <option value="yes">Yes</option>
+            <option value="no">No</option>
+          </select>
+        </div>
+
+        <div class="filter-field filter-field-actions">
+          <button
+            type="button"
+            id="filter-clear-btn"
+            class="button" data-variant="secondary"
+            hidden
+          >
+            Clear filters
+          </button>
+        </div>
+      </div>
+
+      <div class="filter-summary">
+        <span id="filter-count">Loading examinations...</span>
+      </div>
+    </section>
+
+    <!-- Examinations table -->
+    <section
+      class="table-card"
+      aria-labelledby="patients-table-heading"
+    >
+      <h2 id="patients-table-heading" class="visually-hidden">Examinations</h2>
+
+      <div class="table-scroll">
+        <table id="patients-table" class="patients-table">
+          <thead>
+            <tr id="patients-table-head">
+              <!-- Sortable column headers built by dashboard-app.js -->
+            </tr>
+          </thead>
+          <tbody id="patients-table-body">
+            <!-- Data rows built by dashboard-app.js -->
+          </tbody>
+        </table>
+      </div>
+
+      <p
+        id="patients-empty-message"
+        class="empty-message"
+        hidden
+      >
+        No examinations match the current filters.
+      </p>
+    </section>
+
+    <footer class="page-footer">
+      <p>
+        NIPE is a UK National Screening Committee newborn screening programme.
+        This dashboard is a clinical-review tool and is not a diagnosis. A
+        <em>Refer</em> outcome means one or more key components require onward
+        referral along a defined pathway within a defined timeframe.
+      </p>
+    </footer>
+  </main>
+
+  <!--
+    Classic <script> tags (no `type="module"`) so the page works when opened
+    directly via file://. Each file attaches its public symbols to
+    `window.NewbornAndInfantPhysicalExaminationDashboard`.
+
+    Load order: types -> data -> api -> app (each depends on those above).
+  -->
+  <script src="js/dashboard-types.js"></script>
+  <script src="js/data.js"></script>
+  <script src="js/api.js"></script>
+  <script src="js/dashboard-app.js"></script>
+</body>
+</html>

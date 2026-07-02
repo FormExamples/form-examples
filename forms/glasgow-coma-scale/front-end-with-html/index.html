@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Glasgow Coma Scale (GCS) — neuro-observation assessment</title>
+  <meta name="description" content="Glasgow Coma Scale wizard: score Eye opening (1-4), Verbal response (1-5), and Motor response (1-6) for a total of 3-15, with not-testable (NT) handling, severity band, and the secondary GCS-Pupils (GCS-P) score.">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <a class="skip-link visually-hidden" href="#form-sections">Skip to questionnaire</a>
+
+  <header class="page-header">
+    <div class="page-header-inner">
+      <h1>Glasgow Coma Scale (GCS)</h1>
+      <p class="subtitle">Structured assessment of consciousness: Eye opening (E), Verbal response (V), and Motor response (M), summed to a total of 3-15.</p>
+      <p class="subtitle"><a href="dashboard.html">View the clinician dashboard →</a></p>
+
+      <progress
+        id="progress"
+        class="progress"
+        max="100"
+        value="0"
+        aria-label="Form completion"
+      ></progress>
+      <p id="progress-text" class="subtitle" aria-live="polite">0 fields answered (0%)</p>
+
+      <ol
+        id="step-list"
+        class="step-list"
+        aria-label="Glasgow Coma Scale assessment steps"
+        data-current="0"
+      ><!-- step-list-items injected by js/form-app.js --></ol>
+    </div>
+  </header>
+
+  <main>
+    <div class="intro">
+      <p>
+        Rate the <strong>best</strong> response observed for each of the three
+        components, using the 2014 Glasgow structured approach (check → observe
+        → stimulate → rate). The engine sums Eye + Verbal + Motor into the total
+        GCS (3-15), reports the E/V/M breakdown and a severity band, and derives
+        the secondary GCS-Pupils (GCS-P) score. Answers are saved automatically
+        in your browser as you go.
+      </p>
+      <p>
+        Always record the three components separately — the breakdown carries
+        more information than the total alone. When a component cannot be tested
+        (for example a swollen-shut eye, an intubated airway, or a paralysed
+        limb), select <strong>Not testable (NT)</strong>: the numeric total is
+        then left undefined rather than substituting an assumed value. The GCS
+        supports triage and monitoring but is not a diagnosis.
+      </p>
+    </div>
+
+    <form
+      id="assessment-form"
+      class="form"
+      autocomplete="off"
+      novalidate
+      onsubmit="return false;"
+      aria-label="Glasgow Coma Scale assessment"
+    >
+      <div
+        id="error-summary"
+        class="error-summary"
+        role="alert"
+        aria-label="Validation errors"
+        hidden
+      ></div>
+
+      <div id="form-sections">
+        <!-- Steps rendered by js/form-app.js: -->
+        <!-- 1 Assessment context, 2 Confounders, 3 Eye opening (E), -->
+        <!-- 4 Verbal response (V), 5 Motor response (M), 6 Pupils, -->
+        <!-- 7 Trend, 8 Summary and sign-off -->
+      </div>
+
+      <div class="button-group">
+        <button type="button" id="submit-btn" class="button" data-variant="primary">
+          Submit and view report
+        </button>
+        <button type="button" id="reset-btn" class="button" data-variant="secondary">
+          Start over
+        </button>
+      </div>
+    </form>
+
+    <section
+      id="report"
+      class="panel"
+      role="region"
+      aria-live="polite"
+      aria-label="Assessment report"
+    >
+      <p class="empty-message">Submit the form to see the report.</p>
+    </section>
+
+    <footer class="page-footer">
+      <p>
+        The Glasgow Coma Scale (Teasdale &amp; Jennett, Lancet 1974; Teasdale
+        et al., Lancet Neurology 2014) and the GCS-Pupils score (Brennan et al.,
+        J Neurosurg 2018) are validated instruments for assessing impaired
+        consciousness. This tool is for information only and is not a diagnosis;
+        escalate and treat in line with local head-injury policy (NICE NG232)
+        and clinical judgement.
+      </p>
+    </footer>
+  </main>
+
+  <!--
+    Classic <script> tags (no `type="module"`) so the page works when opened
+    directly via file:// — browsers block ES-module imports from file:// for
+    CORS reasons, but allow ordered classic scripts. Each file attaches its
+    public symbols to `window.GlasgowComaScale`.
+
+    Load order: types -> rules -> grader -> flags -> form-app.
+  -->
+  <script src="js/types.js"></script>
+  <script src="js/rules.js"></script>
+  <script src="js/grader.js"></script>
+  <script src="js/flags.js"></script>
+  <script src="js/form-app.js"></script>
+</body>
+</html>

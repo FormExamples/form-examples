@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Medical Certificate of Cause of Death</title>
+  <meta name="description" content="UK Medical Certificate of Cause of Death (MCCD): records the deceased's details, the date and place of death, the Part I direct causal sequence (I(a) to I(b) to I(c)) and the Part II contributory conditions, and the coroner / medical-examiner referral status. It classifies the certificate as valid, incomplete, or refer-to-coroner and raises flags. It is a documentation instrument, not a numeric score or a substitute for statutory judgement.">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <a class="skip-link visually-hidden" href="#form-sections">Skip to the certificate</a>
+
+  <header class="page-header">
+    <div class="page-header-inner">
+      <h1>Medical Certificate of Cause of Death</h1>
+      <p class="subtitle">A UK statutory instrument recording the cause of death for registration: the deceased's details, the Part I direct causal sequence and Part II contributory conditions, and the coroner / medical-examiner referral status — validated for completeness and consistency.</p>
+      <p class="subtitle"><a href="dashboard.html">View the certifier dashboard →</a></p>
+
+      <progress
+        id="progress"
+        class="progress"
+        max="100"
+        value="0"
+        aria-label="Certificate completion"
+      ></progress>
+      <p id="progress-text" class="subtitle" aria-live="polite">0 fields answered (0%)</p>
+
+      <ol
+        id="step-list"
+        class="step-list"
+        aria-label="Medical Certificate of Cause of Death steps"
+        data-current="0"
+      ><!-- step-list-items injected by js/form-app.js --></ol>
+    </div>
+  </header>
+
+  <main>
+    <div class="intro">
+      <p>
+        Complete the seven sections below to document a Medical Certificate of
+        Cause of Death. The engine does <strong>not</strong> compute a clinical
+        score and does <strong>not</strong> diagnose. It checks that the
+        certificate is internally <strong>complete</strong> and
+        <strong>consistent</strong> — that Part I(a) is present, that the causal
+        sequence reads downward in a plausible order, and that no unacceptable
+        "mode of death" (such as "cardiac arrest") stands as the only cause — and
+        it classifies the certificate as <strong>valid</strong>,
+        <strong>incomplete</strong>, or <strong>refer to coroner</strong>, derives
+        the underlying cause, and raises statutory, safety, and governance flags.
+        Answers are saved automatically in your browser as you go.
+      </p>
+      <p>
+        A classification of <strong>valid</strong> does <strong>not</strong>
+        discharge the certifying doctor's legal duty to consider referral to the
+        coroner, and every death not investigated by a coroner must be scrutinised
+        by an NHS medical examiner before registration. This tool documents and
+        validates the certificate; the prescribed statutory certificate remains
+        the definitive legal record.
+      </p>
+    </div>
+
+    <form
+      id="assessment-form"
+      class="form"
+      autocomplete="off"
+      novalidate
+      onsubmit="return false;"
+      aria-label="Medical Certificate of Cause of Death"
+    >
+      <div
+        id="error-summary"
+        class="error-summary"
+        role="alert"
+        aria-label="Validation errors"
+        hidden
+      ></div>
+
+      <div id="form-sections">
+        <!-- Steps rendered by js/form-app.js: -->
+        <!-- 1 Certification context, 2 Deceased identification, -->
+        <!-- 3 Death details, 4 Part I causal sequence, -->
+        <!-- 5 Part II contributory conditions, -->
+        <!-- 6 Coroner and medical-examiner referral, 7 Summary and validity -->
+      </div>
+
+      <div class="button-group">
+        <button type="button" id="submit-btn" class="button" data-variant="primary">
+          Submit and view report
+        </button>
+        <button type="button" id="reset-btn" class="button" data-variant="secondary">
+          Start over
+        </button>
+      </div>
+    </form>
+
+    <section
+      id="report"
+      class="panel"
+      role="region"
+      aria-live="polite"
+      aria-label="Validation report"
+    >
+      <p class="empty-message">Submit the form to see the report.</p>
+    </section>
+
+    <footer class="page-footer">
+      <p>
+        This certificate is governed by the UK death-certification framework: the
+        Births and Deaths Registration Act 1953, the Coroners and Justice Act 2009
+        and the Coroners (Investigations) Regulations 2013, the statutory NHS
+        medical-examiner system, and the Office for National Statistics guidance on
+        completing an MCCD. This tool documents and validates the certificate and
+        makes no diagnostic judgement; the prescribed statutory certificate remains
+        the definitive legal record, and referral and registration decisions rest
+        with the certifying doctor, coroner, and medical examiner.
+      </p>
+    </footer>
+  </main>
+
+  <!--
+    Classic <script> tags (no `type="module"`) so the page works when opened
+    directly via file:// — browsers block ES-module imports from file:// for
+    CORS reasons, but allow ordered classic scripts. Each file attaches its
+    public symbols to `window.MedicalCertificateOfCauseOfDeath`.
+
+    Load order: types -> rules -> grader -> flags -> form-app.
+  -->
+  <script src="js/types.js"></script>
+  <script src="js/rules.js"></script>
+  <script src="js/grader.js"></script>
+  <script src="js/flags.js"></script>
+  <script src="js/form-app.js"></script>
+</body>
+</html>

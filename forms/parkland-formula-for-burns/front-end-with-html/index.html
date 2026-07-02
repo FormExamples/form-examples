@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Parkland Formula for Burns — fluid-resuscitation calculator</title>
+  <meta name="description" content="Parkland (Baxter) fluid-resuscitation calculator for major thermal burns: enter body weight, %TBSA burned, and the time of injury to compute the total 24-hour crystalloid volume, the first-8-hour and next-16-hour phase volumes and rates, and a urine-output titration target, with safety flags.">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <a class="skip-link visually-hidden" href="#form-sections">Skip to questionnaire</a>
+
+  <header class="page-header">
+    <div class="page-header-inner">
+      <h1>Parkland Formula for Burns</h1>
+      <p class="subtitle">Fluid resuscitation for major thermal burns: total 24 h volume = 4 mL × weight (kg) × %TBSA, given as half in the first 8 h from injury and half over the next 16 h.</p>
+      <p class="subtitle"><a href="dashboard.html">View the clinician dashboard →</a></p>
+
+      <progress
+        id="progress"
+        class="progress"
+        max="100"
+        value="0"
+        aria-label="Form completion"
+      ></progress>
+      <p id="progress-text" class="subtitle" aria-live="polite">0 fields answered (0%)</p>
+
+      <ol
+        id="step-list"
+        class="step-list"
+        aria-label="Parkland formula assessment steps"
+        data-current="0"
+      ><!-- step-list-items injected by js/form-app.js --></ol>
+    </div>
+  </header>
+
+  <main>
+    <div class="intro">
+      <p>
+        Enter the patient's body weight (kg), the percentage of total body
+        surface area (%TBSA) with partial-thickness or deeper burns, and the time
+        the burn occurred. The calculator applies the Parkland formula to estimate
+        the first-24-hour crystalloid (Hartmann's / lactated Ringer's) volume,
+        splits it into the mandated first-8-hour and next-16-hour phases measured
+        from the time of injury, derives an hourly rate for each phase, and reports
+        a urine-output titration target. Answers are saved automatically in your
+        browser as you go.
+      </p>
+      <p>
+        The Parkland volume is a <strong>starting estimate only</strong>. Fluids
+        must then be titrated to physiological endpoints — chiefly a urine output
+        of 0.5–1.0 mL/kg/h in adults — and managed with a specialist burns service.
+        Superficial (epidermal) burns are excluded from the %TBSA. This tool does
+        not replace airway assessment, senior review, or specialist advice.
+      </p>
+    </div>
+
+    <form
+      id="assessment-form"
+      class="form"
+      autocomplete="off"
+      novalidate
+      onsubmit="return false;"
+      aria-label="Parkland formula assessment"
+    >
+      <div
+        id="error-summary"
+        class="error-summary"
+        role="alert"
+        aria-label="Validation errors"
+        hidden
+      ></div>
+
+      <div id="form-sections">
+        <!-- Steps rendered by js/form-app.js: -->
+        <!-- 1 Assessment context, 2 Patient identification, 3 Weight, -->
+        <!-- 4 Burn extent, 5 Time of injury, 6 Injury features, -->
+        <!-- 7 Summary and plan -->
+      </div>
+
+      <div class="button-group">
+        <button type="button" id="submit-btn" class="button" data-variant="primary">
+          Submit and view plan
+        </button>
+        <button type="button" id="reset-btn" class="button" data-variant="secondary">
+          Start over
+        </button>
+      </div>
+    </form>
+
+    <section
+      id="report"
+      class="panel"
+      role="region"
+      aria-live="polite"
+      aria-label="Resuscitation plan"
+    >
+      <p class="empty-message">Submit the form to see the resuscitation plan.</p>
+    </section>
+
+    <footer class="page-footer">
+      <p>
+        The Parkland (Baxter) formula is drawn from Baxter &amp; Shires (Ann N Y
+        Acad Sci 1968); %TBSA is estimated by the Wallace Rule of Nines or a
+        Lund–Browder chart. This calculator produces a starting fluid estimate for
+        a clinician to review and titrate; it is not a diagnosis and does not
+        administer therapy. Interpret in the clinical context and follow local
+        burns and major-trauma protocols.
+      </p>
+    </footer>
+  </main>
+
+  <!--
+    Classic <script> tags (no `type="module"`) so the page works when opened
+    directly via file:// — browsers block ES-module imports from file:// for
+    CORS reasons, but allow ordered classic scripts. Each file attaches its
+    public symbols to `window.ParklandFormulaForBurns`.
+
+    Load order: types -> rules -> grader -> flags -> form-app.
+  -->
+  <script src="js/types.js"></script>
+  <script src="js/rules.js"></script>
+  <script src="js/grader.js"></script>
+  <script src="js/flags.js"></script>
+  <script src="js/form-app.js"></script>
+</body>
+</html>

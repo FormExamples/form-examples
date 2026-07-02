@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Anaesthetic Record — intra-operative chart</title>
+  <meta name="description" content="Anaesthetic Record: the intra-operative anaesthesia chart. A parent record plus three repeating child lists (drug administrations, timed observations, intra-operative events); the engine grades completeness (Complete / Partial / Incomplete), reports a completeness percent, and raises safety flags.">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <a class="skip-link visually-hidden" href="#form-sections">Skip to questionnaire</a>
+
+  <header class="page-header">
+    <div class="page-header-inner">
+      <h1>Anaesthetic Record</h1>
+      <p class="subtitle">The intra-operative anaesthesia chart: case identification, pre-induction checks, drugs, airway, timed observations, events, and recovery handover.</p>
+      <p class="subtitle"><a href="dashboard.html">View the clinician dashboard →</a></p>
+
+      <progress
+        id="progress"
+        class="progress"
+        max="100"
+        value="0"
+        aria-label="Form completion"
+      ></progress>
+      <p id="progress-text" class="subtitle" aria-live="polite">0 fields answered (0%)</p>
+
+      <ol
+        id="step-list"
+        class="step-list"
+        aria-label="Anaesthetic record steps"
+        data-current="0"
+      ><!-- step-list-items injected by js/form-app.js --></ol>
+    </div>
+  </header>
+
+  <main>
+    <div class="intro">
+      <p>
+        Complete the intra-operative anaesthetic record below. Add one row per
+        drug in the Drugs step, one row per timed vital-sign set in the Timed
+        observations step, and one row per intra-operative event in the Events
+        step. The live indicator updates the completeness status (Complete /
+        Partial / Incomplete), the completeness percent, and the safety-flag
+        count as you go. Answers are saved automatically in your browser.
+      </p>
+      <p>
+        This is a documentation and completeness-checking instrument, not a
+        diagnostic test. It validates the record and raises safety flags; the
+        completeness status and flags support, but do not replace, the
+        anaesthetist's clinical judgement.
+      </p>
+    </div>
+
+    <form
+      id="assessment-form"
+      class="form"
+      autocomplete="off"
+      novalidate
+      onsubmit="return false;"
+      aria-label="Anaesthetic record"
+    >
+      <div
+        id="error-summary"
+        class="error-summary"
+        role="alert"
+        aria-label="Validation errors"
+        hidden
+      ></div>
+
+      <div id="form-sections">
+        <!-- Steps rendered by js/form-app.js: -->
+        <!-- 1 Case identification, 2 Pre-induction checks, 3 ASA & airway, -->
+        <!-- 4 Drugs & doses (repeating), 5 Airway management, 6 Monitoring, -->
+        <!-- 7 Timed observations (repeating), 8 Fluids & blood loss, -->
+        <!-- 9 Regional / neuraxial, 10 Events & complications (repeating), -->
+        <!-- 11 Recovery handover, 12 Summary & sign-off -->
+      </div>
+
+      <div class="button-group">
+        <button type="button" id="submit-btn" class="button" data-variant="primary">
+          Submit and view report
+        </button>
+        <button type="button" id="reset-btn" class="button" data-variant="secondary">
+          Start over
+        </button>
+      </div>
+    </form>
+
+    <section
+      id="report"
+      class="panel"
+      role="region"
+      aria-live="polite"
+      aria-label="Completeness report"
+    >
+      <p class="empty-message">Submit the form to see the report.</p>
+    </section>
+
+    <footer class="page-footer">
+      <p>
+        The Anaesthetic Record is a contemporaneous intra-operative clinical
+        record. It follows RCoA GPAS anaesthesia-records guidance, the
+        Association of Anaesthetists monitoring standards (2021), the WHO
+        Surgical Safety Checklist (2009), the ASA physical-status classification,
+        and Cormack–Lehane grading. This tool is for documentation and
+        completeness-checking only and is not a diagnosis; clinical decisions
+        rest with the anaesthetist.
+      </p>
+    </footer>
+  </main>
+
+  <!--
+    Classic <script> tags (no `type="module"`) so the page works when opened
+    directly via file:// — browsers block ES-module imports from file:// for
+    CORS reasons, but allow ordered classic scripts. Each file attaches its
+    public symbols to `window.AnaestheticRecord`.
+
+    Load order: types -> rules -> grader -> flags -> form-app.
+  -->
+  <script src="js/types.js"></script>
+  <script src="js/rules.js"></script>
+  <script src="js/grader.js"></script>
+  <script src="js/flags.js"></script>
+  <script src="js/form-app.js"></script>
+</body>
+</html>

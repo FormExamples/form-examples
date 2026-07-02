@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Columbia Suicide Severity Rating Scale (C-SSRS) — suicide-risk screen</title>
+  <meta name="description" content="C-SSRS suicide-risk assessment: five-point ordinal ideation level, categories of suicidal behaviour with recency, and lethality, classified into a Low / Moderate / High risk tier.">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <a class="skip-link visually-hidden" href="#form-sections">Skip to questionnaire</a>
+
+  <header class="page-header">
+    <div class="page-header-inner">
+      <h1>Columbia Suicide Severity Rating Scale (C-SSRS)</h1>
+      <p class="subtitle">Suicide-risk screen: five-point ideation level, suicidal behaviour, and lethality, classified into a Low / Moderate / High risk tier.</p>
+      <p class="subtitle"><a href="dashboard.html">View the clinician dashboard →</a></p>
+
+      <progress
+        id="progress"
+        class="progress"
+        max="100"
+        value="0"
+        aria-label="Form completion"
+      ></progress>
+      <p id="progress-text" class="subtitle" aria-live="polite">0 fields answered (0%)</p>
+
+      <ol
+        id="step-list"
+        class="step-list"
+        aria-label="C-SSRS assessment steps"
+        data-current="0"
+      ><!-- step-list-items injected by js/form-app.js --></ol>
+    </div>
+  </header>
+
+  <main>
+    <div class="intro">
+      <p>
+        Complete the C-SSRS below for the person being assessed. The scale
+        records the severity of suicidal ideation on a five-point ordinal scale
+        (levels 1-5), the categories of suicidal behaviour with their recency,
+        and the lethality of any actual attempt, then derives a
+        <strong>Low / Moderate / High</strong> risk tier and a management
+        recommendation. Answers are saved automatically in your browser as you go.
+      </p>
+      <p>
+        C-SSRS is a status- and severity-classification instrument, not a summed
+        score and not a diagnosis. It is a validated clinical screening tool used
+        by trained staff; it does not replace clinical judgement, direct
+        assessment, or local safeguarding and escalation policy. A Low tier does
+        not exclude risk — re-screen on any change. If the person is in immediate
+        danger, follow your local emergency and crisis protocol now.
+      </p>
+    </div>
+
+    <form
+      id="assessment-form"
+      class="form"
+      autocomplete="off"
+      novalidate
+      onsubmit="return false;"
+      aria-label="C-SSRS assessment"
+    >
+      <div
+        id="error-summary"
+        class="error-summary"
+        role="alert"
+        aria-label="Validation errors"
+        hidden
+      ></div>
+
+      <div id="form-sections">
+        <!-- Steps rendered by js/form-app.js: -->
+        <!-- 1 Assessment context, 2 Patient identification, -->
+        <!-- 3 Suicidal ideation, 4 Ideation intensity, -->
+        <!-- 5 Suicidal behaviour, 6 Lethality, -->
+        <!-- 7 Means and protective factors, 8 Summary and risk tier -->
+      </div>
+
+      <div class="button-group">
+        <button type="button" id="submit-btn" class="button" data-variant="primary">
+          Submit and view report
+        </button>
+        <button type="button" id="reset-btn" class="button" data-variant="secondary">
+          Start over
+        </button>
+      </div>
+    </form>
+
+    <section
+      id="report"
+      class="panel"
+      role="region"
+      aria-live="polite"
+      aria-label="Assessment report"
+    >
+      <p class="empty-message">Submit the form to see the report.</p>
+    </section>
+
+    <footer class="page-footer">
+      <p>
+        The Columbia Suicide Severity Rating Scale (C-SSRS) was developed by
+        Posner and colleagues at Columbia University (Posner et al., American
+        Journal of Psychiatry 2011) and is recognised in NICE NG225 and by the
+        US FDA and SAMHSA. This screening tool stratifies risk and prompts
+        escalation; it is not a diagnosis. Escalate and manage in line with local
+        safeguarding, crisis, and mental-health policy and clinical judgement.
+      </p>
+    </footer>
+  </main>
+
+  <!--
+    Classic <script> tags (no `type="module"`) so the page works when opened
+    directly via file:// — browsers block ES-module imports from file:// for
+    CORS reasons, but allow ordered classic scripts. Each file attaches its
+    public symbols to `window.ColumbiaSuicideSeverityRatingScale`.
+
+    Load order: types -> rules -> grader -> flags -> form-app.
+  -->
+  <script src="js/types.js"></script>
+  <script src="js/rules.js"></script>
+  <script src="js/grader.js"></script>
+  <script src="js/flags.js"></script>
+  <script src="js/form-app.js"></script>
+</body>
+</html>

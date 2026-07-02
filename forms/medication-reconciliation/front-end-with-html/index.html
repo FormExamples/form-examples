@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Medication Reconciliation — reconciliation wizard</title>
+  <meta name="description" content="Medication reconciliation at a transition of care: a parent header plus four repeating child lists (information sources, allergies, medication line items tagged BPMH or inpatient, and reconciliation discrepancies), reporting a completeness status and safety flags.">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <a class="skip-link visually-hidden" href="#form-sections">Skip to questionnaire</a>
+
+  <header class="page-header">
+    <div class="page-header-inner">
+      <h1>Medication Reconciliation</h1>
+      <p class="subtitle">Reconcile a patient's medicines at admission, transfer, or discharge: build the best-possible medication history from two or more sources, compare it with the inpatient list, and resolve every discrepancy.</p>
+      <p class="subtitle"><a href="dashboard.html">View the clinician dashboard →</a></p>
+
+      <progress
+        id="progress"
+        class="progress"
+        max="100"
+        value="0"
+        aria-label="Form completion"
+      ></progress>
+      <p id="progress-text" class="subtitle" aria-live="polite">0 fields answered (0%)</p>
+
+      <ol
+        id="step-list"
+        class="step-list"
+        aria-label="Medication reconciliation steps"
+        data-current="0"
+      ><!-- step-list-items injected by js/form-app.js --></ol>
+    </div>
+  </header>
+
+  <main>
+    <div class="intro">
+      <p>
+        Complete the reconciliation below at a transition of care. Add each
+        information source (two or more independent sources are required), record
+        the allergy status and any drug allergies, add one row per medicine on
+        the best-possible medication history (BPMH) or the inpatient list, then
+        classify every discrepancy and document its intended action and
+        rationale. The live indicator updates the status and counts as you go.
+        Answers are saved automatically in your browser.
+      </p>
+      <p>
+        This is a documentation-and-completeness instrument, not a numeric score
+        and not a definitive interaction checker. The status and flags support,
+        but do not replace, the pharmacist's and prescriber's clinical judgement.
+      </p>
+    </div>
+
+    <form
+      id="assessment-form"
+      class="form"
+      autocomplete="off"
+      novalidate
+      onsubmit="return false;"
+      aria-label="Medication reconciliation"
+    >
+      <div
+        id="error-summary"
+        class="error-summary"
+        role="alert"
+        aria-label="Validation errors"
+        hidden
+      ></div>
+
+      <div id="form-sections">
+        <!-- Steps rendered by js/form-app.js: -->
+        <!-- 1 Encounter context, 2 Patient identification, -->
+        <!-- 3 Information sources (repeating), 4 Allergies (repeating), -->
+        <!-- 5 Medication line items (repeating), 6 Reconciliation (repeating), -->
+        <!-- 7 Summary and sign-off -->
+      </div>
+
+      <div class="button-group">
+        <button type="button" id="submit-btn" class="button" data-variant="primary">
+          Submit and view report
+        </button>
+        <button type="button" id="reset-btn" class="button" data-variant="secondary">
+          Start over
+        </button>
+      </div>
+    </form>
+
+    <section
+      id="report"
+      class="panel"
+      role="region"
+      aria-live="polite"
+      aria-label="Reconciliation report"
+    >
+      <p class="empty-message">Submit the form to see the report.</p>
+    </section>
+
+    <footer class="page-footer">
+      <p>
+        Medication reconciliation is a WHO High 5s patient-safety intervention
+        and a NICE NG5 and Royal Pharmaceutical Society expectation at every
+        transfer of care. This tool documents the reconciliation and surfaces
+        completeness and safety prompts (insufficient sources, allergy conflict,
+        interaction, unresolved discrepancies); it is not a diagnosis and does
+        not replace clinical decision support. Prescribing decisions rest with
+        the clinician.
+      </p>
+    </footer>
+  </main>
+
+  <!--
+    Classic <script> tags (no `type="module"`) so the page works when opened
+    directly via file:// — browsers block ES-module imports from file:// for
+    CORS reasons, but allow ordered classic scripts. Each file attaches its
+    public symbols to `window.MedicationReconciliation`.
+
+    Load order: types -> rules -> grader -> flags -> form-app.
+  -->
+  <script src="js/types.js"></script>
+  <script src="js/rules.js"></script>
+  <script src="js/grader.js"></script>
+  <script src="js/flags.js"></script>
+  <script src="js/form-app.js"></script>
+</body>
+</html>

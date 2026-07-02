@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Chronic Obstructive Pulmonary Disease Review (COPD annual review)</title>
+  <meta name="description" content="UK primary-care COPD annual review: spirometry, symptoms, exacerbations, smoking, inhalers, vaccinations, rehab and self-management, deriving a GOLD airflow grade, ABE assessment group, and review-completeness grade.">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <a class="skip-link visually-hidden" href="#form-sections">Skip to questionnaire</a>
+
+  <header class="page-header">
+    <div class="page-header-inner">
+      <h1>Chronic Obstructive Pulmonary Disease Review</h1>
+      <p class="subtitle">UK primary-care COPD annual review: spirometry, symptoms, exacerbations, smoking, inhalers, vaccinations, rehabilitation, and self-management — deriving a GOLD airflow grade, ABE assessment group, and review-completeness grade.</p>
+      <p class="subtitle"><a href="dashboard.html">View the clinician dashboard →</a></p>
+
+      <progress
+        id="progress"
+        class="progress"
+        max="100"
+        value="0"
+        aria-label="Form completion"
+      ></progress>
+      <p id="progress-text" class="subtitle" aria-live="polite">0 fields answered (0%)</p>
+
+      <ol
+        id="step-list"
+        class="step-list"
+        aria-label="COPD review steps"
+        data-current="0"
+      ><!-- step-list-items injected by js/form-app.js --></ol>
+    </div>
+  </header>
+
+  <main>
+    <div class="intro">
+      <p>
+        Complete the annual-review sections below for an adult with a confirmed,
+        spirometry-supported diagnosis of COPD. The engine derives a GOLD
+        airflow-limitation grade (1–4) from FEV₁ % predicted, a combined ABE
+        assessment group from symptom burden and exacerbation risk, and a
+        review-completeness grade, alongside action flags. Answers are saved
+        automatically in your browser as you go.
+      </p>
+      <p>
+        This is a documentation and severity-classification tool aligned with
+        NICE NG115 and GOLD 2023+. It does not diagnose COPD or prescribe
+        treatment; use clinical judgement and local guidance when acting on the
+        flags.
+      </p>
+    </div>
+
+    <form
+      id="assessment-form"
+      class="form"
+      autocomplete="off"
+      novalidate
+      onsubmit="return false;"
+      aria-label="COPD annual review"
+    >
+      <div
+        id="error-summary"
+        class="error-summary"
+        role="alert"
+        aria-label="Validation errors"
+        hidden
+      ></div>
+
+      <div id="form-sections">
+        <!-- Steps rendered by js/form-app.js: -->
+        <!-- 1 Context, 2 Diagnosis, 3 Spirometry, 4 Symptoms, -->
+        <!-- 5 Exacerbations, 6 Smoking, 7 Inhaler, 8 Vaccinations, -->
+        <!-- 9 Rehab/oxygen, 10 Self-management, 11 Summary -->
+      </div>
+
+      <div class="button-group">
+        <button type="button" id="submit-btn" class="button" data-variant="primary">
+          Submit and view report
+        </button>
+        <button type="button" id="reset-btn" class="button" data-variant="secondary">
+          Start over
+        </button>
+      </div>
+    </form>
+
+    <section
+      id="report"
+      class="panel"
+      role="region"
+      aria-live="polite"
+      aria-label="Review report"
+    >
+      <p class="empty-message">Submit the form to see the report.</p>
+    </section>
+
+    <footer class="page-footer">
+      <p>
+        The GOLD airflow grade, ABE assessment group, and review-completeness
+        grade are drawn from NICE NG115 and the GOLD 2023+ report. This tool is
+        for documentation and clinical review only and is not a diagnosis;
+        manage COPD in line with local guidance and clinical judgement.
+      </p>
+    </footer>
+  </main>
+
+  <!--
+    Classic <script> tags (no `type="module"`) so the page works when opened
+    directly via file:// — browsers block ES-module imports from file:// for
+    CORS reasons, but allow ordered classic scripts. Each file attaches its
+    public symbols to `window.ChronicObstructivePulmonaryDiseaseReview`.
+
+    Load order: types -> rules -> grader -> flags -> form-app.
+  -->
+  <script src="js/types.js"></script>
+  <script src="js/rules.js"></script>
+  <script src="js/grader.js"></script>
+  <script src="js/flags.js"></script>
+  <script src="js/form-app.js"></script>
+</body>
+</html>

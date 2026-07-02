@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>COPD Review — clinician dashboard</title>
+  <meta name="description" content="COPD annual-review clinician dashboard: review list with GOLD airflow grade, ABE assessment group, review-completeness grade, and escalate-therapy flag.">
+  <link rel="stylesheet" href="css/dashboard.css">
+</head>
+<body>
+  <a class="skip-link" href="#patients-table">Skip to reviews table</a>
+
+  <header class="page-header">
+    <div class="page-header-inner">
+      <h1>COPD Review — Clinician Dashboard</h1>
+      <p class="subtitle">
+        COPD annual-review list with GOLD airflow grade, ABE assessment group,
+        review-completeness grade, and escalate-therapy flag.
+      </p>
+      <p class="subtitle"><a href="index.html">← New COPD review</a></p>
+    </div>
+  </header>
+
+  <main>
+    <!-- Status banner: shown when backend fetch fails and we fall back -->
+    <div
+      id="status-banner"
+      class="alert" data-type="warning"
+      role="status"
+      aria-live="polite"
+      hidden
+    ></div>
+
+    <!-- Filter bar -->
+    <section
+      class="filter-bar"
+      aria-labelledby="filter-bar-heading"
+    >
+      <h2 id="filter-bar-heading" class="visually-hidden">Filters</h2>
+
+      <div class="filter-grid">
+        <div class="filter-field filter-field-search">
+          <label for="filter-search">Search</label>
+          <input
+            id="filter-search"
+            type="search"
+            class="text-input"
+            placeholder="Patient ID or name..."
+            autocomplete="off"
+          >
+        </div>
+
+        <div class="filter-field">
+          <label for="filter-review-type">Review type</label>
+          <select id="filter-review-type" class="select">
+            <option value="">All types</option>
+            <option value="routine-annual">Routine annual</option>
+            <option value="post-exacerbation">Post-exacerbation</option>
+            <option value="opportunistic">Opportunistic</option>
+          </select>
+        </div>
+
+        <div class="filter-field">
+          <label for="filter-gold">GOLD</label>
+          <select id="filter-gold" class="select">
+            <option value="">All grades</option>
+            <option value="1">GOLD 1</option>
+            <option value="2">GOLD 2</option>
+            <option value="3">GOLD 3</option>
+            <option value="4">GOLD 4</option>
+          </select>
+        </div>
+
+        <div class="filter-field">
+          <label for="filter-abe">ABE group</label>
+          <select id="filter-abe" class="select">
+            <option value="">All groups</option>
+            <option value="A">Group A</option>
+            <option value="B">Group B</option>
+            <option value="E">Group E</option>
+          </select>
+        </div>
+
+        <div class="filter-field">
+          <label for="filter-status">Completeness</label>
+          <select id="filter-status" class="select">
+            <option value="">All</option>
+            <option value="complete">Complete</option>
+            <option value="partial">Partial</option>
+            <option value="incomplete">Incomplete</option>
+          </select>
+        </div>
+
+        <div class="filter-field">
+          <label for="filter-escalate">Escalate</label>
+          <select id="filter-escalate" class="select">
+            <option value="">All</option>
+            <option value="yes">Yes</option>
+            <option value="no">No</option>
+          </select>
+        </div>
+
+        <div class="filter-field filter-field-actions">
+          <button
+            type="button"
+            id="filter-clear-btn"
+            class="button" data-variant="secondary"
+            hidden
+          >
+            Clear filters
+          </button>
+        </div>
+      </div>
+
+      <div class="filter-summary">
+        <span id="filter-count">Loading reviews...</span>
+      </div>
+    </section>
+
+    <!-- Reviews table -->
+    <section
+      class="table-card"
+      aria-labelledby="patients-table-heading"
+    >
+      <h2 id="patients-table-heading" class="visually-hidden">Reviews</h2>
+
+      <div class="table-scroll">
+        <table id="patients-table" class="patients-table">
+          <thead>
+            <tr id="patients-table-head">
+              <!-- Sortable column headers built by dashboard-app.js -->
+            </tr>
+          </thead>
+          <tbody id="patients-table-body">
+            <!-- Data rows built by dashboard-app.js -->
+          </tbody>
+        </table>
+      </div>
+
+      <p
+        id="patients-empty-message"
+        class="empty-message"
+        hidden
+      >
+        No reviews match the current filters.
+      </p>
+    </section>
+
+    <footer class="page-footer">
+      <p>
+        The GOLD airflow grade, ABE assessment group, and review-completeness
+        grade are drawn from NICE NG115 and the GOLD 2023+ report. This
+        dashboard is a clinical-review tool and is not a diagnosis. ABE group E
+        (high exacerbation risk) raises an escalate-therapy flag.
+      </p>
+    </footer>
+  </main>
+
+  <!--
+    Classic <script> tags (no `type="module"`) so the page works when opened
+    directly via file://. Each file attaches its public symbols to
+    `window.ChronicObstructivePulmonaryDiseaseReviewDashboard`.
+
+    Load order: types -> data -> api -> app (each depends on those above).
+  -->
+  <script src="js/dashboard-types.js"></script>
+  <script src="js/data.js"></script>
+  <script src="js/api.js"></script>
+  <script src="js/dashboard-app.js"></script>
+</body>
+</html>

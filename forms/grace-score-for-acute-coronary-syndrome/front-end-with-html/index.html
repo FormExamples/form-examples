@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>GRACE Score for Acute Coronary Syndrome — admission risk assessment</title>
+  <meta name="description" content="GRACE admission risk-stratification for acute coronary syndrome: age, heart rate, systolic blood pressure, creatinine, Killip class, cardiac arrest, ST deviation, and elevated markers weighted into a point total mapped to in-hospital and 6-month mortality bands.">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <a class="skip-link visually-hidden" href="#form-sections">Skip to questionnaire</a>
+
+  <header class="page-header">
+    <div class="page-header-inner">
+      <h1>GRACE Score for Acute Coronary Syndrome</h1>
+      <p class="subtitle">Admission risk stratification: eight weighted variables mapped to in-hospital and 6-month mortality bands and an invasive-strategy recommendation.</p>
+      <p class="subtitle"><a href="dashboard.html">View the clinician dashboard →</a></p>
+
+      <progress
+        id="progress"
+        class="progress"
+        max="100"
+        value="0"
+        aria-label="Form completion"
+      ></progress>
+      <p id="progress-text" class="subtitle" aria-live="polite">0 fields answered (0%)</p>
+
+      <ol
+        id="step-list"
+        class="step-list"
+        aria-label="GRACE assessment steps"
+        data-current="0"
+      ><!-- step-list-items injected by js/form-app.js --></ol>
+    </div>
+  </header>
+
+  <main>
+    <div class="intro">
+      <p>
+        Complete the eight GRACE admission variables below for an adult with a
+        suspected or confirmed acute coronary syndrome. Each variable maps
+        through a weighted, banded lookup — this is not a simple tally — and the
+        points are summed into a total that maps to an estimated in-hospital and
+        6-month mortality band and an overall Low / Intermediate / High risk
+        category. Answers are saved automatically in your browser as you go.
+      </p>
+      <p>
+        GRACE quantifies prognosis and helps decide the timing of an invasive
+        (coronary angiography) strategy; it does not diagnose acute coronary
+        syndrome. A Low category does not exclude an evolving infarction or
+        high-risk anatomy — use clinical judgement alongside troponin pathways
+        and the ECG.
+      </p>
+    </div>
+
+    <form
+      id="assessment-form"
+      class="form"
+      autocomplete="off"
+      novalidate
+      onsubmit="return false;"
+      aria-label="GRACE assessment"
+    >
+      <div
+        id="error-summary"
+        class="error-summary"
+        role="alert"
+        aria-label="Validation errors"
+        hidden
+      ></div>
+
+      <div id="form-sections">
+        <!-- Steps rendered by js/form-app.js: -->
+        <!-- 1 Assessment context, 2 Patient identification, -->
+        <!-- 3 Haemodynamics, 4 Renal function, 5 Heart-failure severity, -->
+        <!-- 6 High-risk features, 7 Summary and score -->
+      </div>
+
+      <div class="button-group">
+        <button type="button" id="submit-btn" class="button" data-variant="primary">
+          Submit and view report
+        </button>
+        <button type="button" id="reset-btn" class="button" data-variant="secondary">
+          Start over
+        </button>
+      </div>
+    </form>
+
+    <section
+      id="report"
+      class="panel"
+      role="region"
+      aria-live="polite"
+      aria-label="Assessment report"
+    >
+      <p class="empty-message">Submit the form to see the report.</p>
+    </section>
+
+    <footer class="page-footer">
+      <p>
+        The GRACE (Global Registry of Acute Coronary Events) risk score is drawn
+        from Granger et al. (Arch Intern Med 2003), Fox et al. (BMJ 2006; BMJ
+        Open 2014, GRACE 2.0), the ESC acute coronary syndrome guidelines
+        (2023), and NICE NG185. This tool uses representative published GRACE
+        point tables and is for information only; it is not a diagnosis.
+        Escalate and treat in line with local policy and clinical judgement.
+      </p>
+    </footer>
+  </main>
+
+  <!--
+    Classic <script> tags (no `type="module"`) so the page works when opened
+    directly via file:// — browsers block ES-module imports from file:// for
+    CORS reasons, but allow ordered classic scripts. Each file attaches its
+    public symbols to `window.GraceScoreForAcuteCoronarySyndrome`.
+
+    Load order: types -> rules -> grader -> flags -> form-app.
+  -->
+  <script src="js/types.js"></script>
+  <script src="js/rules.js"></script>
+  <script src="js/grader.js"></script>
+  <script src="js/flags.js"></script>
+  <script src="js/form-app.js"></script>
+</body>
+</html>

@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Partogram — labour-record wizard</title>
+  <meta name="description" content="Partogram: a parent labour-record header plus a repeating list of timed intrapartum observations, computing a labour-progress classification (normal / alert-line crossed / action-line crossed) against the alert and action reference lines, plus safety flags.">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <a class="skip-link visually-hidden" href="#form-sections">Skip to questionnaire</a>
+
+  <header class="page-header">
+    <div class="page-header-inner">
+      <h1>Partogram</h1>
+      <p class="subtitle">A graphical record of the progress of labour: timed intrapartum observations plotted against the alert and action lines, with a live progress classification and safety flags.</p>
+      <p class="subtitle"><a href="dashboard.html">View the clinician dashboard →</a></p>
+
+      <progress
+        id="progress"
+        class="progress"
+        max="100"
+        value="0"
+        aria-label="Form completion"
+      ></progress>
+      <p id="progress-text" class="subtitle" aria-live="polite">0 fields answered (0%)</p>
+
+      <ol
+        id="step-list"
+        class="step-list"
+        aria-label="Partogram steps"
+        data-current="0"
+      ><!-- step-list-items injected by js/form-app.js --></ol>
+    </div>
+  </header>
+
+  <main>
+    <div class="intro">
+      <p>
+        Record the progress of labour. Enter the labour context and the
+        active-phase start time (dilatation 4 cm), the patient identification and
+        admission findings, then add one row per timed set of observations in the
+        Observation series step. The live indicator updates the labour-progress
+        classification, the latest dilatation and elapsed hours, the alert / action
+        line expectations, and the flagged issues as you go. Answers are saved
+        automatically in your browser.
+      </p>
+      <p>
+        This is a monitoring aid that classifies progress and prompts review; it
+        is not a validated numeric score, and it is not a diagnosis of obstructed
+        labour or fetal compromise. The classification and flags support clinical
+        judgement; they do not replace it.
+      </p>
+    </div>
+
+    <form
+      id="assessment-form"
+      class="form"
+      autocomplete="off"
+      novalidate
+      onsubmit="return false;"
+      aria-label="Partogram"
+    >
+      <div
+        id="error-summary"
+        class="error-summary"
+        role="alert"
+        aria-label="Validation errors"
+        hidden
+      ></div>
+
+      <div id="form-sections">
+        <!-- Steps rendered by js/form-app.js: -->
+        <!-- 1 Labour context, 2 Patient identification, 3 Admission findings, -->
+        <!-- 4 Observation series (repeating), 5 Summary and progress -->
+      </div>
+
+      <div class="button-group">
+        <button type="button" id="submit-btn" class="button" data-variant="primary">
+          Submit and view report
+        </button>
+        <button type="button" id="reset-btn" class="button" data-variant="secondary">
+          Start over
+        </button>
+      </div>
+    </form>
+
+    <section
+      id="report"
+      class="panel"
+      role="region"
+      aria-live="polite"
+      aria-label="Partogram report"
+    >
+      <p class="empty-message">Submit the form to see the report.</p>
+    </section>
+
+    <footer class="page-footer">
+      <p>
+        The Partogram is an intrapartum monitoring instrument. The alert line
+        (1 cm/hour from 4 cm) and the action line (four hours to its right), and
+        the threshold flags, draw on the WHO Labour Care Guide (2020), WHO
+        intrapartum care recommendations (2018), Philpott and Castle (1972), and
+        NICE NG235. This tool is for monitoring and decision support only and is
+        not a diagnosis; assessment and escalation decisions rest with the
+        clinician.
+      </p>
+    </footer>
+  </main>
+
+  <!--
+    Classic <script> tags (no `type="module"`) so the page works when opened
+    directly via file:// — browsers block ES-module imports from file:// for
+    CORS reasons, but allow ordered classic scripts. Each file attaches its
+    public symbols to `window.Partogram`.
+
+    Load order: types -> rules -> grader -> flags -> form-app.
+  -->
+  <script src="js/types.js"></script>
+  <script src="js/rules.js"></script>
+  <script src="js/grader.js"></script>
+  <script src="js/flags.js"></script>
+  <script src="js/form-app.js"></script>
+</body>
+</html>

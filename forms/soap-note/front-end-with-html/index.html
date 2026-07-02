@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>SOAP Note — clinical progress note</title>
+  <meta name="description" content="Structured clinical progress note in the four SOAP sections (Subjective, Objective, Assessment, Plan): documents an encounter, grades the note complete, partial, or incomplete with a completeness percentage, and raises safety flags.">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <a class="skip-link visually-hidden" href="#form-sections">Skip to note</a>
+
+  <header class="page-header">
+    <div class="page-header-inner">
+      <h1>SOAP Note</h1>
+      <p class="subtitle">Structured clinical progress note in the four SOAP sections, graded for documentation completeness.</p>
+      <p class="subtitle"><a href="dashboard.html">View the clinician dashboard →</a></p>
+
+      <progress
+        id="progress"
+        class="progress"
+        max="100"
+        value="0"
+        aria-label="Form completion"
+      ></progress>
+      <p id="progress-text" class="subtitle" aria-live="polite">0 fields answered (0%)</p>
+
+      <ol
+        id="step-list"
+        class="step-list"
+        aria-label="SOAP note steps"
+        data-current="0"
+      ><!-- step-list-items injected by js/form-app.js --></ol>
+    </div>
+  </header>
+
+  <main>
+    <div class="intro">
+      <p>
+        Record a single patient encounter as a SOAP note — Subjective,
+        Objective, Assessment, and Plan — plus encounter context, patient
+        identification, and a free-text summary. Answers are saved automatically
+        in your browser as you go.
+      </p>
+      <p>
+        This is a <strong>documentation and completeness</strong> instrument, not
+        a numeric clinical score. It grades the note Complete, Partial, or
+        Incomplete, computes a completeness percentage, and raises safety flags
+        (for example: a missing Assessment or Plan, red-flag symptoms without a
+        plan, or no safety-netting advice). A Complete grade means the note is
+        well documented so that another clinician can safely continue care — it
+        does not mean the clinical care was correct.
+      </p>
+    </div>
+
+    <form
+      id="assessment-form"
+      class="form"
+      autocomplete="off"
+      novalidate
+      onsubmit="return false;"
+      aria-label="SOAP note"
+    >
+      <div
+        id="error-summary"
+        class="error-summary"
+        role="alert"
+        aria-label="Validation errors"
+        hidden
+      ></div>
+
+      <div id="form-sections">
+        <!-- Steps rendered by js/form-app.js: -->
+        <!-- 1 Context, 2 Patient, 3 Subjective, 4 Objective, -->
+        <!-- 5 Assessment, 6 Plan, 7 Summary -->
+      </div>
+
+      <div class="button-group">
+        <button type="button" id="submit-btn" class="button" data-variant="primary">
+          Submit and view report
+        </button>
+        <button type="button" id="reset-btn" class="button" data-variant="secondary">
+          Start over
+        </button>
+      </div>
+    </form>
+
+    <section
+      id="report"
+      class="panel"
+      role="region"
+      aria-live="polite"
+      aria-label="Completeness report"
+    >
+      <p class="empty-message">Submit the form to see the report.</p>
+    </section>
+
+    <footer class="page-footer">
+      <p>
+        The SOAP format was introduced as part of Lawrence Weed's
+        problem-oriented medical record and is the most widely taught structure
+        for clinical progress notes. This tool grades the completeness of the
+        written record and prompts safety-netting; it is not a diagnosis, a risk
+        score, or a substitute for clinical judgement.
+      </p>
+    </footer>
+  </main>
+
+  <!--
+    Classic <script> tags (no `type="module"`) so the page works when opened
+    directly via file:// — browsers block ES-module imports from file:// for
+    CORS reasons, but allow ordered classic scripts. Each file attaches its
+    public symbols to `window.SoapNote`.
+
+    Load order: types -> rules -> flags -> grader -> form-app.
+  -->
+  <script src="js/types.js"></script>
+  <script src="js/rules.js"></script>
+  <script src="js/flags.js"></script>
+  <script src="js/grader.js"></script>
+  <script src="js/form-app.js"></script>
+</body>
+</html>

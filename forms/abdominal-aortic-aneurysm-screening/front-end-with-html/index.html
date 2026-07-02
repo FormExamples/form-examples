@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Abdominal Aortic Aneurysm (AAA) Screening</title>
+  <meta name="description" content="NHS AAA Screening Programme documentation and result-classification form: records an abdominal aortic ultrasound and classifies the maximum aortic diameter as normal, small, medium, or large, with the surveillance or referral action.">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <a class="skip-link visually-hidden" href="#form-sections">Skip to questionnaire</a>
+
+  <header class="page-header">
+    <div class="page-header-inner">
+      <h1>Abdominal Aortic Aneurysm (AAA) Screening</h1>
+      <p class="subtitle">Record an abdominal aortic ultrasound; classify the maximum aortic diameter (thresholds 3.0 / 4.5 / 5.5 cm) and set the surveillance or referral action.</p>
+      <p class="subtitle"><a href="dashboard.html">View the clinician dashboard →</a></p>
+
+      <progress
+        id="progress"
+        class="progress"
+        max="100"
+        value="0"
+        aria-label="Form completion"
+      ></progress>
+      <p id="progress-text" class="subtitle" aria-live="polite">0 fields answered (0%)</p>
+
+      <ol
+        id="step-list"
+        class="step-list"
+        aria-label="AAA screening steps"
+        data-current="0"
+      ><!-- step-list-items injected by js/form-app.js --></ol>
+    </div>
+  </header>
+
+  <main>
+    <div class="intro">
+      <p>
+        Complete the scan record below for one abdominal aortic ultrasound under
+        the NHS AAA Screening Programme. The maximum antero-posterior aortic
+        diameter classifies the aorta as normal (&lt; 3.0 cm), a small aneurysm
+        (3.0–4.4 cm), a medium aneurysm (4.5–5.4 cm), or a large aneurysm
+        (≥ 5.5 cm), and sets the corresponding surveillance or referral action.
+        Answers are saved automatically in your browser as you go.
+      </p>
+      <p>
+        This form documents the scan and derives the result; it does not
+        diagnose and does not decide on repair. An aorta that cannot be
+        adequately measured is recorded as non-visualised and a re-scan is
+        arranged. Use clinical judgement alongside the programme standards.
+      </p>
+    </div>
+
+    <form
+      id="assessment-form"
+      class="form"
+      autocomplete="off"
+      novalidate
+      onsubmit="return false;"
+      aria-label="AAA screening"
+    >
+      <div
+        id="error-summary"
+        class="error-summary"
+        role="alert"
+        aria-label="Validation errors"
+        hidden
+      ></div>
+
+      <div id="form-sections">
+        <!-- Steps rendered by js/form-app.js: -->
+        <!-- 1 Screening context, 2 Patient identification and eligibility, -->
+        <!-- 3 Consent, 4 Ultrasound measurement, 5 Clinical observations, -->
+        <!-- 6 Result and action -->
+      </div>
+
+      <div class="button-group">
+        <button type="button" id="submit-btn" class="button" data-variant="primary">
+          Submit and view report
+        </button>
+        <button type="button" id="reset-btn" class="button" data-variant="secondary">
+          Start over
+        </button>
+      </div>
+    </form>
+
+    <section
+      id="report"
+      class="panel"
+      role="region"
+      aria-live="polite"
+      aria-label="Screening report"
+    >
+      <p class="empty-message">Submit the form to see the report.</p>
+    </section>
+
+    <footer class="page-footer">
+      <p>
+        The diameter thresholds (3.0 / 4.5 / 5.5 cm) and recall intervals
+        (annual, three-monthly) are those of the NHS Abdominal Aortic Aneurysm
+        Screening Programme; management follows NICE NG156. This tool is for
+        documentation and result classification only and is not a diagnosis;
+        refer, recall, and treat in line with programme standards and clinical
+        judgement.
+      </p>
+    </footer>
+  </main>
+
+  <!--
+    Classic <script> tags (no `type="module"`) so the page works when opened
+    directly via file:// — browsers block ES-module imports from file:// for
+    CORS reasons, but allow ordered classic scripts. Each file attaches its
+    public symbols to `window.AbdominalAorticAneurysmScreening`.
+
+    Load order: types -> rules -> grader -> flags -> form-app.
+  -->
+  <script src="js/types.js"></script>
+  <script src="js/rules.js"></script>
+  <script src="js/grader.js"></script>
+  <script src="js/flags.js"></script>
+  <script src="js/form-app.js"></script>
+</body>
+</html>

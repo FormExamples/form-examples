@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Ward Round Note — clinician dashboard</title>
+  <meta name="description" content="Ward round note clinician dashboard: review daily inpatient entries by completeness status, completeness percentage, ward, reviewing-clinician grade, and safety flag.">
+  <link rel="stylesheet" href="css/dashboard.css">
+</head>
+<body>
+  <a class="skip-link" href="#patients-table">Skip to notes table</a>
+
+  <header class="page-header">
+    <div class="page-header-inner">
+      <h1>Ward Round Note — Clinician Dashboard</h1>
+      <p class="subtitle">
+        Daily inpatient review list with completeness status, completeness
+        percentage, ward, reviewing-clinician grade, and safety flag.
+      </p>
+      <p class="subtitle"><a href="index.html">← New ward round note</a></p>
+    </div>
+  </header>
+
+  <main>
+    <!-- Status banner: shown when backend fetch fails and we fall back -->
+    <div
+      id="status-banner"
+      class="alert" data-type="warning"
+      role="status"
+      aria-live="polite"
+      hidden
+    ></div>
+
+    <!-- Filter bar -->
+    <section
+      class="filter-bar"
+      aria-labelledby="filter-bar-heading"
+    >
+      <h2 id="filter-bar-heading" class="visually-hidden">Filters</h2>
+
+      <div class="filter-grid">
+        <div class="filter-field filter-field-search">
+          <label for="filter-search">Search</label>
+          <input
+            id="filter-search"
+            type="search"
+            class="text-input"
+            placeholder="Patient ID, name, or ward..."
+            autocomplete="off"
+          >
+        </div>
+
+        <div class="filter-field">
+          <label for="filter-grade">Grade</label>
+          <select id="filter-grade" class="select">
+            <option value="">All grades</option>
+            <option value="fy1">FY1</option>
+            <option value="fy2">FY2</option>
+            <option value="core-trainee">Core trainee</option>
+            <option value="specialty-registrar">Specialty registrar</option>
+            <option value="acp">ACP</option>
+            <option value="physician-associate">Physician associate</option>
+            <option value="consultant">Consultant</option>
+          </select>
+        </div>
+
+        <div class="filter-field">
+          <label for="filter-status">Status</label>
+          <select id="filter-status" class="select">
+            <option value="">All statuses</option>
+            <option value="complete">Complete</option>
+            <option value="partial">Partial</option>
+            <option value="incomplete">Incomplete</option>
+          </select>
+        </div>
+
+        <div class="filter-field">
+          <label for="filter-flag">Safety flag</label>
+          <select id="filter-flag" class="select">
+            <option value="">All</option>
+            <option value="yes">Yes</option>
+            <option value="no">No</option>
+          </select>
+        </div>
+
+        <div class="filter-field filter-field-actions">
+          <button
+            type="button"
+            id="filter-clear-btn"
+            class="button" data-variant="secondary"
+            hidden
+          >
+            Clear filters
+          </button>
+        </div>
+      </div>
+
+      <div class="filter-summary">
+        <span id="filter-count">Loading notes...</span>
+      </div>
+    </section>
+
+    <!-- Notes table -->
+    <section
+      class="table-card"
+      aria-labelledby="patients-table-heading"
+    >
+      <h2 id="patients-table-heading" class="visually-hidden">Notes</h2>
+
+      <div class="table-scroll">
+        <table id="patients-table" class="patients-table">
+          <thead>
+            <tr id="patients-table-head">
+              <!-- Sortable column headers built by dashboard-app.js -->
+            </tr>
+          </thead>
+          <tbody id="patients-table-body">
+            <!-- Data rows built by dashboard-app.js -->
+          </tbody>
+        </table>
+      </div>
+
+      <p
+        id="patients-empty-message"
+        class="empty-message"
+        hidden
+      >
+        No notes match the current filters.
+      </p>
+    </section>
+
+    <footer class="page-footer">
+      <p>
+        This dashboard is a clinical-review tool. The completeness status and
+        percentage document whether the daily entry is whole and can safely stand
+        alone between shifts; they are not a diagnosis. An Incomplete status or a
+        safety flag prompts the author to complete the record and follow local
+        escalation policy.
+      </p>
+    </footer>
+  </main>
+
+  <!--
+    Classic <script> tags (no `type="module"`) so the page works when opened
+    directly via file://. Each file attaches its public symbols to
+    `window.WardRoundNoteDashboard`.
+
+    Load order: types -> data -> api -> app (each depends on those above).
+  -->
+  <script src="js/dashboard-types.js"></script>
+  <script src="js/data.js"></script>
+  <script src="js/api.js"></script>
+  <script src="js/dashboard-app.js"></script>
+</body>
+</html>

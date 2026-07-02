@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>TIMI Risk Score for Acute Coronary Syndrome (UA/NSTEMI)</title>
+  <meta name="description" content="Bedside TIMI UA/NSTEMI risk-stratification tool for adults with unstable angina or NSTEMI: seven criteria scored 0-7, mapped to a risk band and 14-day event risk.">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <a class="skip-link visually-hidden" href="#form-sections">Skip to questionnaire</a>
+
+  <header class="page-header">
+    <div class="page-header-inner">
+      <h1>TIMI Risk Score for Acute Coronary Syndrome (UA/NSTEMI)</h1>
+      <p class="subtitle">Bedside risk stratification: seven clinical criteria scored 0-7, mapped to a risk band and 14-day event risk.</p>
+      <p class="subtitle"><a href="dashboard.html">View the clinician dashboard →</a></p>
+
+      <progress
+        id="progress"
+        class="progress"
+        max="100"
+        value="0"
+        aria-label="Form completion"
+      ></progress>
+      <p id="progress-text" class="subtitle" aria-live="polite">0 fields answered (0%)</p>
+
+      <ol
+        id="step-list"
+        class="step-list"
+        aria-label="TIMI assessment steps"
+        data-current="0"
+      ><!-- step-list-items injected by js/form-app.js --></ol>
+    </div>
+  </header>
+
+  <main>
+    <div class="intro">
+      <p>
+        Complete the seven TIMI criteria below for an adult with a working
+        diagnosis of unstable angina (UA) or non-ST-elevation myocardial
+        infarction (NSTEMI). Each criterion scores 1 point when present, for a
+        total of 0 to 7. The total maps to a risk band (0-1 low, 2-4
+        intermediate, 5-7 high) and the 14-day risk of death, myocardial
+        infarction, or urgent revascularisation. Answers are saved automatically
+        in your browser as you go.
+      </p>
+      <p>
+        This is the UA/NSTEMI version of the TIMI score and must not be used to
+        score a STEMI presentation (use the separate TIMI STEMI score). It is a
+        prognostic and therapeutic-decision aid, not a diagnostic test: a low
+        score does not exclude an acute coronary syndrome. Use clinical judgement
+        alongside serial troponin testing and your local ACS pathway.
+      </p>
+    </div>
+
+    <form
+      id="assessment-form"
+      class="form"
+      autocomplete="off"
+      novalidate
+      onsubmit="return false;"
+      aria-label="TIMI UA/NSTEMI assessment"
+    >
+      <div
+        id="error-summary"
+        class="error-summary"
+        role="alert"
+        aria-label="Validation errors"
+        hidden
+      ></div>
+
+      <div id="form-sections">
+        <!-- Steps rendered by js/form-app.js: -->
+        <!-- 1 Assessment context, 2 Patient identification, -->
+        <!-- 3 Age and risk factors, 4 Cardiac history and medication, -->
+        <!-- 5 Presentation, 6 Investigations, 7 Summary and score -->
+      </div>
+
+      <div class="button-group">
+        <button type="button" id="submit-btn" class="button" data-variant="primary">
+          Submit and view report
+        </button>
+        <button type="button" id="reset-btn" class="button" data-variant="secondary">
+          Start over
+        </button>
+      </div>
+    </form>
+
+    <section
+      id="report"
+      class="panel"
+      role="region"
+      aria-live="polite"
+      aria-label="Assessment report"
+    >
+      <p class="empty-message">Submit the form to see the report.</p>
+    </section>
+
+    <footer class="page-footer">
+      <p>
+        The TIMI risk score for UA/NSTEMI is derived from Antman et al. (JAMA
+        2000) from the TIMI 11B and ESSENCE cohorts, and is referenced in NICE
+        NG185 and the 2020 ESC ACS guidelines. This tool is for information only
+        and is not a diagnosis; treat and escalate in line with local ACS policy
+        and clinical judgement.
+      </p>
+    </footer>
+  </main>
+
+  <!--
+    Classic <script> tags (no `type="module"`) so the page works when opened
+    directly via file:// — browsers block ES-module imports from file:// for
+    CORS reasons, but allow ordered classic scripts. Each file attaches its
+    public symbols to `window.TimiRiskScoreForAcuteCoronarySyndrome`.
+
+    Load order: types -> rules -> grader -> flags -> form-app.
+  -->
+  <script src="js/types.js"></script>
+  <script src="js/rules.js"></script>
+  <script src="js/grader.js"></script>
+  <script src="js/flags.js"></script>
+  <script src="js/form-app.js"></script>
+</body>
+</html>

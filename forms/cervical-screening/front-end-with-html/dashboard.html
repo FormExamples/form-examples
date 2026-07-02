@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Cervical Screening — clinician dashboard</title>
+  <meta name="description" content="Cervical screening clinician dashboard: review records by result classification, management outcome, care setting, and urgent-colposcopy flag.">
+  <link rel="stylesheet" href="css/dashboard.css">
+</head>
+<body>
+  <a class="skip-link" href="#patients-table">Skip to screenings table</a>
+
+  <header class="page-header">
+    <div class="page-header-inner">
+      <h1>Cervical Screening — Clinician Dashboard</h1>
+      <p class="subtitle">
+        Cervical-screening records with result classification, management
+        outcome, care setting, and urgent-colposcopy flag.
+      </p>
+      <p class="subtitle"><a href="index.html">← New cervical screening record</a></p>
+    </div>
+  </header>
+
+  <main>
+    <!-- Status banner: shown when backend fetch fails and we fall back -->
+    <div
+      id="status-banner"
+      class="alert" data-type="warning"
+      role="status"
+      aria-live="polite"
+      hidden
+    ></div>
+
+    <!-- Filter bar -->
+    <section
+      class="filter-bar"
+      aria-labelledby="filter-bar-heading"
+    >
+      <h2 id="filter-bar-heading" class="visually-hidden">Filters</h2>
+
+      <div class="filter-grid">
+        <div class="filter-field filter-field-search">
+          <label for="filter-search">Search</label>
+          <input
+            id="filter-search"
+            type="search"
+            class="text-input"
+            placeholder="Patient ID or name..."
+            autocomplete="off"
+          >
+        </div>
+
+        <div class="filter-field">
+          <label for="filter-setting">Setting</label>
+          <select id="filter-setting" class="select">
+            <option value="">All settings</option>
+            <option value="general-practice">General practice</option>
+            <option value="sexual-health">Sexual health</option>
+            <option value="other">Other</option>
+          </select>
+        </div>
+
+        <div class="filter-field">
+          <label for="filter-result">Result</label>
+          <select id="filter-result" class="select">
+            <option value="">All results</option>
+            <option value="hpv-negative">HPV negative</option>
+            <option value="hpv-positive-cytology-normal">HPV+ cytology normal</option>
+            <option value="hpv-positive-cytology-abnormal-low">HPV+ abnormal (low)</option>
+            <option value="hpv-positive-cytology-abnormal-high">HPV+ abnormal (high)</option>
+            <option value="hpv-positive-cytology-pending">HPV+ cytology pending</option>
+            <option value="inadequate">Inadequate</option>
+            <option value="cease-not-eligible">Cease / not eligible</option>
+            <option value="pending">Pending</option>
+          </select>
+        </div>
+
+        <div class="filter-field">
+          <label for="filter-management">Management</label>
+          <select id="filter-management" class="select">
+            <option value="">All actions</option>
+            <option value="routine-recall">Routine recall</option>
+            <option value="early-repeat-12-months">Early repeat 12m</option>
+            <option value="colposcopy-referral">Colposcopy referral</option>
+            <option value="urgent-colposcopy-referral">Urgent colposcopy</option>
+            <option value="repeat-sample-3-months">Repeat sample 3m</option>
+            <option value="cease-screening">Cease screening</option>
+            <option value="awaiting-cytology">Awaiting cytology</option>
+            <option value="awaiting-result">Awaiting result</option>
+          </select>
+        </div>
+
+        <div class="filter-field">
+          <label for="filter-urgent">Urgent</label>
+          <select id="filter-urgent" class="select">
+            <option value="">All</option>
+            <option value="yes">Yes</option>
+            <option value="no">No</option>
+          </select>
+        </div>
+
+        <div class="filter-field filter-field-actions">
+          <button
+            type="button"
+            id="filter-clear-btn"
+            class="button" data-variant="secondary"
+            hidden
+          >
+            Clear filters
+          </button>
+        </div>
+      </div>
+
+      <div class="filter-summary">
+        <span id="filter-count">Loading screenings...</span>
+      </div>
+    </section>
+
+    <!-- Screenings table -->
+    <section
+      class="table-card"
+      aria-labelledby="patients-table-heading"
+    >
+      <h2 id="patients-table-heading" class="visually-hidden">Screenings</h2>
+
+      <div class="table-scroll">
+        <table id="patients-table" class="patients-table">
+          <thead>
+            <tr id="patients-table-head">
+              <!-- Sortable column headers built by dashboard-app.js -->
+            </tr>
+          </thead>
+          <tbody id="patients-table-body">
+            <!-- Data rows built by dashboard-app.js -->
+          </tbody>
+        </table>
+      </div>
+
+      <p
+        id="patients-empty-message"
+        class="empty-message"
+        hidden
+      >
+        No screenings match the current filters.
+      </p>
+    </section>
+
+    <footer class="page-footer">
+      <p>
+        This dashboard is a clinical-review tool and is not a diagnosis. An
+        HPV-positive high-grade cytology result requires urgent colposcopy
+        referral; manage and refer in line with the NHS Cervical Screening
+        Programme and local policy.
+      </p>
+    </footer>
+  </main>
+
+  <!--
+    Classic <script> tags (no `type="module"`) so the page works when opened
+    directly via file://. Each file attaches its public symbols to
+    `window.CervicalScreeningDashboard`.
+
+    Load order: types -> data -> api -> app (each depends on those above).
+  -->
+  <script src="js/dashboard-types.js"></script>
+  <script src="js/data.js"></script>
+  <script src="js/api.js"></script>
+  <script src="js/dashboard-app.js"></script>
+</body>
+</html>

@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Learning Disability Annual Health Check — clinician dashboard</title>
+  <meta name="description" content="Learning-disability annual health check clinician dashboard: review checks with completeness status, completeness percentage, Health Action Plan, and STOMP flag.">
+  <link rel="stylesheet" href="css/dashboard.css">
+</head>
+<body>
+  <a class="skip-link" href="#patients-table">Skip to checks table</a>
+
+  <header class="page-header">
+    <div class="page-header-inner">
+      <h1>Learning Disability Annual Health Check — Clinician Dashboard</h1>
+      <p class="subtitle">
+        Annual health check list with completeness status, completeness
+        percentage, Health Action Plan, and STOMP flag.
+      </p>
+      <p class="subtitle"><a href="index.html">← New annual health check</a></p>
+    </div>
+  </header>
+
+  <main>
+    <!-- Status banner: shown when backend fetch fails and we fall back -->
+    <div
+      id="status-banner"
+      class="alert" data-type="warning"
+      role="status"
+      aria-live="polite"
+      hidden
+    ></div>
+
+    <!-- Filter bar -->
+    <section
+      class="filter-bar"
+      aria-labelledby="filter-bar-heading"
+    >
+      <h2 id="filter-bar-heading" class="visually-hidden">Filters</h2>
+
+      <div class="filter-grid">
+        <div class="filter-field filter-field-search">
+          <label for="filter-search">Search</label>
+          <input
+            id="filter-search"
+            type="search"
+            class="text-input"
+            placeholder="Person ID, name, or practice..."
+            autocomplete="off"
+          >
+        </div>
+
+        <div class="filter-field">
+          <label for="filter-status">Status</label>
+          <select id="filter-status" class="select">
+            <option value="">All statuses</option>
+            <option value="complete">Complete</option>
+            <option value="incomplete">Incomplete</option>
+          </select>
+        </div>
+
+        <div class="filter-field">
+          <label for="filter-hap">Health Action Plan</label>
+          <select id="filter-hap" class="select">
+            <option value="">All</option>
+            <option value="yes">Produced &amp; shared</option>
+            <option value="no">Not produced</option>
+          </select>
+        </div>
+
+        <div class="filter-field">
+          <label for="filter-stomp">STOMP flag</label>
+          <select id="filter-stomp" class="select">
+            <option value="">All</option>
+            <option value="yes">Flagged</option>
+            <option value="no">Not flagged</option>
+          </select>
+        </div>
+
+        <div class="filter-field filter-field-actions">
+          <button
+            type="button"
+            id="filter-clear-btn"
+            class="button" data-variant="secondary"
+            hidden
+          >
+            Clear filters
+          </button>
+        </div>
+      </div>
+
+      <div class="filter-summary">
+        <span id="filter-count">Loading checks...</span>
+      </div>
+    </section>
+
+    <!-- Checks table -->
+    <section
+      class="table-card"
+      aria-labelledby="patients-table-heading"
+    >
+      <h2 id="patients-table-heading" class="visually-hidden">Checks</h2>
+
+      <div class="table-scroll">
+        <table id="patients-table" class="patients-table">
+          <thead>
+            <tr id="patients-table-head">
+              <!-- Sortable column headers built by dashboard-app.js -->
+            </tr>
+          </thead>
+          <tbody id="patients-table-body">
+            <!-- Data rows built by dashboard-app.js -->
+          </tbody>
+        </table>
+      </div>
+
+      <p
+        id="patients-empty-message"
+        class="empty-message"
+        hidden
+      >
+        No checks match the current filters.
+      </p>
+    </section>
+
+    <footer class="page-footer">
+      <p>
+        This dashboard is a documentation-quality review tool for the
+        learning-disability annual health check. A check is Complete only when
+        every required component was carried out and a Health Action Plan was
+        produced and shared. The STOMP flag prompts a medication review under the
+        Stopping Over-Medication with Psychotropics programme.
+      </p>
+    </footer>
+  </main>
+
+  <!--
+    Classic <script> tags (no `type="module"`) so the page works when opened
+    directly via file://. Each file attaches its public symbols to
+    `window.LearningDisabilityAnnualHealthCheckDashboard`.
+
+    Load order: types -> data -> api -> app (each depends on those above).
+  -->
+  <script src="js/dashboard-types.js"></script>
+  <script src="js/data.js"></script>
+  <script src="js/api.js"></script>
+  <script src="js/dashboard-app.js"></script>
+</body>
+</html>

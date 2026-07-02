@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>BMI and BSA Calculator — body mass index and body surface area</title>
+  <meta name="description" content="Anthropometric calculator for adults: enter height and weight to compute body mass index (BMI) with the WHO weight-status category and body surface area (BSA) by the Mosteller and Du Bois formulae, with safety flags.">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <a class="skip-link visually-hidden" href="#form-sections">Skip to questionnaire</a>
+
+  <header class="page-header">
+    <div class="page-header-inner">
+      <h1>BMI and BSA Calculator</h1>
+      <p class="subtitle">Body mass index (kg/m²) with the WHO weight-status category, and body surface area (m²) by Mosteller and Du Bois.</p>
+      <p class="subtitle"><a href="dashboard.html">View the clinician dashboard →</a></p>
+
+      <progress
+        id="progress"
+        class="progress"
+        max="100"
+        value="0"
+        aria-label="Form completion"
+      ></progress>
+      <p id="progress-text" class="subtitle" aria-live="polite">0 fields answered (0%)</p>
+
+      <ol
+        id="step-list"
+        class="step-list"
+        aria-label="BMI and BSA assessment steps"
+        data-current="0"
+      ><!-- step-list-items injected by js/form-app.js --></ol>
+    </div>
+  </header>
+
+  <main>
+    <div class="intro">
+      <p>
+        Enter the measured height (cm) and weight (kg) for an adult. The
+        calculator computes the body mass index (BMI) and bands it into the World
+        Health Organization adult weight-status categories, and computes the body
+        surface area (BSA) by the Mosteller formula (bedside default) and the Du
+        Bois formula (historical reference). Answers are saved automatically in
+        your browser as you go.
+      </p>
+      <p>
+        BMI is a screening prompt, not a diagnosis of malnutrition or obesity, and
+        does not distinguish muscle from fat. BSA is used to normalise
+        physiological parameters and, most importantly, to calculate
+        weight-and-size-appropriate drug doses; physiologically extreme heights or
+        weights are flagged for re-measurement before dosing.
+      </p>
+    </div>
+
+    <form
+      id="assessment-form"
+      class="form"
+      autocomplete="off"
+      novalidate
+      onsubmit="return false;"
+      aria-label="BMI and BSA assessment"
+    >
+      <div
+        id="error-summary"
+        class="error-summary"
+        role="alert"
+        aria-label="Validation errors"
+        hidden
+      ></div>
+
+      <div id="form-sections">
+        <!-- Steps rendered by js/form-app.js: -->
+        <!-- 1 Assessment context, 2 Patient identification, -->
+        <!-- 3 Height, 4 Weight, 5 Summary and results -->
+      </div>
+
+      <div class="button-group">
+        <button type="button" id="submit-btn" class="button" data-variant="primary">
+          Submit and view report
+        </button>
+        <button type="button" id="reset-btn" class="button" data-variant="secondary">
+          Start over
+        </button>
+      </div>
+    </form>
+
+    <section
+      id="report"
+      class="panel"
+      role="region"
+      aria-live="polite"
+      aria-label="Assessment report"
+    >
+      <p class="empty-message">Submit the form to see the report.</p>
+    </section>
+
+    <footer class="page-footer">
+      <p>
+        The BMI categories are the WHO adult weight-status bands (WHO TRS 894,
+        2000); the Asian lower action points follow the WHO Expert Consultation
+        (Lancet 2004). BSA uses the Mosteller (1987) and Du Bois (1916) formulae.
+        This calculator is a screening and dosing aid for information only and is
+        not a diagnosis; interpret in the clinical context and use age-and-sex
+        centile charts for paediatric patients.
+      </p>
+    </footer>
+  </main>
+
+  <!--
+    Classic <script> tags (no `type="module"`) so the page works when opened
+    directly via file:// — browsers block ES-module imports from file:// for
+    CORS reasons, but allow ordered classic scripts. Each file attaches its
+    public symbols to `window.BmiBsaCalculator`.
+
+    Load order: types -> rules -> grader -> flags -> form-app.
+  -->
+  <script src="js/types.js"></script>
+  <script src="js/rules.js"></script>
+  <script src="js/grader.js"></script>
+  <script src="js/flags.js"></script>
+  <script src="js/form-app.js"></script>
+</body>
+</html>

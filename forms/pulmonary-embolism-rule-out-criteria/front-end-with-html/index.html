@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Pulmonary Embolism Rule-out Criteria (PERC) — bedside rule-out screen</title>
+  <meta name="description" content="Bedside PERC rule-out screen for adults with a low pre-test probability of pulmonary embolism: eight objective criteria (age under 50, heart rate under 100, SpO2 at least 95%, no unilateral leg swelling, no haemoptysis, no recent surgery or trauma, no prior DVT/PE, no oestrogen) plus the clinician gestalt pre-test probability, classified as PERC-negative or PERC-positive.">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <a class="skip-link visually-hidden" href="#form-sections">Skip to questionnaire</a>
+
+  <header class="page-header">
+    <div class="page-header-inner">
+      <h1>Pulmonary Embolism Rule-out Criteria (PERC)</h1>
+      <p class="subtitle">Bedside rule-out screen: eight objective criteria plus the clinician pre-test probability, classified as PERC-negative or PERC-positive.</p>
+      <p class="subtitle"><a href="dashboard.html">View the clinician dashboard →</a></p>
+
+      <progress
+        id="progress"
+        class="progress"
+        max="100"
+        value="0"
+        aria-label="Form completion"
+      ></progress>
+      <p id="progress-text" class="subtitle" aria-live="polite">0 fields answered (0%)</p>
+
+      <ol
+        id="step-list"
+        class="step-list"
+        aria-label="PERC assessment steps"
+        data-current="0"
+      ><!-- step-list-items injected by js/form-app.js --></ol>
+    </div>
+  </header>
+
+  <main>
+    <div class="intro">
+      <p>
+        Complete the eight PERC criteria below for an adult in whom you have
+        already judged the pre-test probability of pulmonary embolism to be
+        <strong>low</strong>. PERC is not a numeric score: the result is
+        <strong>PERC-negative</strong> when the pre-test probability is
+        <strong>low</strong> AND <strong>all eight criteria are satisfied</strong>
+        — PE is excluded without a D-dimer or imaging — and
+        <strong>PERC-positive</strong> otherwise, meaning further workup is
+        warranted. Answers are saved automatically in your browser as you go.
+      </p>
+      <p>
+        The rule is deliberately conservative: a single failed criterion, or a
+        pre-test probability that is not low, makes the patient PERC-positive.
+        PERC does not apply to patients with moderate or high pre-test
+        probability, pregnant patients, or patients on anticoagulation. A
+        PERC-positive result is not a diagnosis of PE; it only means PE cannot be
+        ruled out by PERC alone.
+      </p>
+    </div>
+
+    <form
+      id="assessment-form"
+      class="form"
+      autocomplete="off"
+      novalidate
+      onsubmit="return false;"
+      aria-label="PERC assessment"
+    >
+      <div
+        id="error-summary"
+        class="error-summary"
+        role="alert"
+        aria-label="Validation errors"
+        hidden
+      ></div>
+
+      <div id="form-sections">
+        <!-- Steps rendered by js/form-app.js: -->
+        <!-- 1 Assessment context, 2 Patient identification, -->
+        <!-- 3 Pre-test probability, 4 Vital signs, -->
+        <!-- 5 Clinical criteria, 6 Summary and result -->
+      </div>
+
+      <div class="button-group">
+        <button type="button" id="submit-btn" class="button" data-variant="primary">
+          Submit and view report
+        </button>
+        <button type="button" id="reset-btn" class="button" data-variant="secondary">
+          Start over
+        </button>
+      </div>
+    </form>
+
+    <section
+      id="report"
+      class="panel"
+      role="region"
+      aria-live="polite"
+      aria-label="Assessment report"
+    >
+      <p class="empty-message">Submit the form to see the report.</p>
+    </section>
+
+    <footer class="page-footer">
+      <p>
+        The Pulmonary Embolism Rule-out Criteria (Kline et al., J Thromb Haemost
+        2004; validated 2008; PROPER trial, JAMA 2018) is a validated rule-out
+        instrument for low-risk emergency-department patients. This tool is for
+        information only and is not a diagnosis; assess, escalate, and investigate
+        in line with NICE NG158 and local venous-thromboembolism policy alongside
+        clinical judgement.
+      </p>
+    </footer>
+  </main>
+
+  <!--
+    Classic <script> tags (no `type="module"`) so the page works when opened
+    directly via file:// — browsers block ES-module imports from file:// for
+    CORS reasons, but allow ordered classic scripts. Each file attaches its
+    public symbols to `window.PulmonaryEmbolismRuleOutCriteria`.
+
+    Load order: types -> rules -> grader -> flags -> form-app.
+  -->
+  <script src="js/types.js"></script>
+  <script src="js/rules.js"></script>
+  <script src="js/grader.js"></script>
+  <script src="js/flags.js"></script>
+  <script src="js/form-app.js"></script>
+</body>
+</html>

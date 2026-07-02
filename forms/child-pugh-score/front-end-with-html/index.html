@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Child-Pugh Score (Child-Turcotte-Pugh) — liver-disease severity</title>
+  <meta name="description" content="Child-Pugh (Child-Turcotte-Pugh) score for chronic liver disease: total bilirubin, serum albumin, INR/prothrombin time, ascites, and encephalopathy scored 1-3 for a total of 5-15 and a class A/B/C with survival and surgical-risk estimates.">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <a class="skip-link visually-hidden" href="#form-sections">Skip to questionnaire</a>
+
+  <header class="page-header">
+    <div class="page-header-inner">
+      <h1>Child-Pugh Score (Child-Turcotte-Pugh)</h1>
+      <p class="subtitle">Prognostic severity score for chronic liver disease: five parameters scored 1-3 for a total of 5-15 and a class A/B/C.</p>
+      <p class="subtitle"><a href="dashboard.html">View the clinician dashboard →</a></p>
+
+      <progress
+        id="progress"
+        class="progress"
+        max="100"
+        value="0"
+        aria-label="Form completion"
+      ></progress>
+      <p id="progress-text" class="subtitle" aria-live="polite">0 fields answered (0%)</p>
+
+      <ol
+        id="step-list"
+        class="step-list"
+        aria-label="Child-Pugh assessment steps"
+        data-current="0"
+      ><!-- step-list-items injected by js/form-app.js --></ol>
+    </div>
+  </header>
+
+  <main>
+    <div class="intro">
+      <p>
+        Complete the five Child-Pugh parameters below for an adult (16 years or
+        over) with established chronic liver disease. Each parameter scores 1, 2,
+        or 3 points against fixed thresholds, for a total of 5 to 15. The total
+        maps to a class: A (5-6, well-compensated), B (7-9, significant
+        compromise), or C (10-15, decompensated), each with an estimated survival
+        and peri-operative-risk band. Answers are saved automatically in your
+        browser as you go.
+      </p>
+      <p>
+        The Child-Pugh score supports prognostic discussion, transplant
+        assessment, and surgical-risk stratification. It is not an
+        organ-allocation priority score (MELD / UKELD serve that role) and does
+        not replace clinical judgement.
+      </p>
+    </div>
+
+    <form
+      id="assessment-form"
+      class="form"
+      autocomplete="off"
+      novalidate
+      onsubmit="return false;"
+      aria-label="Child-Pugh assessment"
+    >
+      <div
+        id="error-summary"
+        class="error-summary"
+        role="alert"
+        aria-label="Validation errors"
+        hidden
+      ></div>
+
+      <div id="form-sections">
+        <!-- Steps rendered by js/form-app.js: -->
+        <!-- 1 Assessment context, 2 Patient identification, -->
+        <!-- 3 Total bilirubin, 4 Serum albumin, 5 Coagulation, -->
+        <!-- 6 Ascites, 7 Hepatic encephalopathy, 8 Summary and score -->
+      </div>
+
+      <div class="button-group">
+        <button type="button" id="submit-btn" class="button" data-variant="primary">
+          Submit and view report
+        </button>
+        <button type="button" id="reset-btn" class="button" data-variant="secondary">
+          Start over
+        </button>
+      </div>
+    </form>
+
+    <section
+      id="report"
+      class="panel"
+      role="region"
+      aria-live="polite"
+      aria-label="Assessment report"
+    >
+      <p class="empty-message">Submit the form to see the report.</p>
+    </section>
+
+    <footer class="page-footer">
+      <p>
+        The Child-Pugh (Child-Turcotte-Pugh) score was described by Child and
+        Turcotte (1964) and refined by Pugh et al. (1973). Survival and
+        surgical-risk figures are widely cited approximations from the original
+        and follow-up cohorts and support prognostic discussion; they are not
+        guarantees for an individual patient. This tool is for information only,
+        is not a diagnosis, and does not determine transplant priority — use it
+        alongside MELD / UKELD, local policy, and clinical judgement.
+      </p>
+    </footer>
+  </main>
+
+  <!--
+    Classic <script> tags (no `type="module"`) so the page works when opened
+    directly via file:// — browsers block ES-module imports from file:// for
+    CORS reasons, but allow ordered classic scripts. Each file attaches its
+    public symbols to `window.ChildPughScore`.
+
+    Load order: types -> rules -> grader -> flags -> form-app.
+  -->
+  <script src="js/types.js"></script>
+  <script src="js/rules.js"></script>
+  <script src="js/grader.js"></script>
+  <script src="js/flags.js"></script>
+  <script src="js/form-app.js"></script>
+</body>
+</html>

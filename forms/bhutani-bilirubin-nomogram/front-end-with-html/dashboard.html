@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Bhutani Bilirubin Nomogram — clinician dashboard</title>
+  <meta name="description" content="Bhutani bilirubin nomogram clinician dashboard: review neonatal assessments with age in hours, percentile risk zone, and the above-exchange-threshold flag.">
+  <link rel="stylesheet" href="css/dashboard.css">
+</head>
+<body>
+  <a class="skip-link" href="#patients-table">Skip to assessments table</a>
+
+  <header class="page-header">
+    <div class="page-header-inner">
+      <h1>Bhutani Bilirubin Nomogram — Clinician Dashboard</h1>
+      <p class="subtitle">
+        Neonatal jaundice assessment list with age in hours, percentile risk
+        zone, and the above-exchange-threshold flag.
+      </p>
+      <p class="subtitle"><a href="index.html">← New nomogram assessment</a></p>
+    </div>
+  </header>
+
+  <main>
+    <!-- Status banner: shown when backend fetch fails and we fall back -->
+    <div
+      id="status-banner"
+      class="alert" data-type="warning"
+      role="status"
+      aria-live="polite"
+      hidden
+    ></div>
+
+    <!-- Filter bar -->
+    <section
+      class="filter-bar"
+      aria-labelledby="filter-bar-heading"
+    >
+      <h2 id="filter-bar-heading" class="visually-hidden">Filters</h2>
+
+      <div class="filter-grid">
+        <div class="filter-field filter-field-search">
+          <label for="filter-search">Search</label>
+          <input
+            id="filter-search"
+            type="search"
+            class="text-input"
+            placeholder="Infant ID or name..."
+            autocomplete="off"
+          >
+        </div>
+
+        <div class="filter-field">
+          <label for="filter-setting">Setting</label>
+          <select id="filter-setting" class="select">
+            <option value="">All settings</option>
+            <option value="postnatal-ward">Postnatal ward</option>
+            <option value="neonatal-unit">Neonatal unit</option>
+            <option value="midwife-led-unit">Midwife-led unit</option>
+            <option value="community">Community</option>
+            <option value="other">Other</option>
+          </select>
+        </div>
+
+        <div class="filter-field">
+          <label for="filter-zone">Risk Zone</label>
+          <select id="filter-zone" class="select">
+            <option value="">All zones</option>
+            <option value="low">Low</option>
+            <option value="low-intermediate">Low-intermediate</option>
+            <option value="high-intermediate">High-intermediate</option>
+            <option value="high">High</option>
+          </select>
+        </div>
+
+        <div class="filter-field">
+          <label for="filter-exchange">Above Exchange</label>
+          <select id="filter-exchange" class="select">
+            <option value="">All</option>
+            <option value="yes">Yes</option>
+            <option value="no">No</option>
+          </select>
+        </div>
+
+        <div class="filter-field filter-field-actions">
+          <button
+            type="button"
+            id="filter-clear-btn"
+            class="button" data-variant="secondary"
+            hidden
+          >
+            Clear filters
+          </button>
+        </div>
+      </div>
+
+      <div class="filter-summary">
+        <span id="filter-count">Loading assessments...</span>
+      </div>
+    </section>
+
+    <!-- Assessments table -->
+    <section
+      class="table-card"
+      aria-labelledby="patients-table-heading"
+    >
+      <h2 id="patients-table-heading" class="visually-hidden">Assessments</h2>
+
+      <div class="table-scroll">
+        <table id="patients-table" class="patients-table">
+          <thead>
+            <tr id="patients-table-head">
+              <!-- Sortable column headers built by dashboard-app.js -->
+            </tr>
+          </thead>
+          <tbody id="patients-table-body">
+            <!-- Data rows built by dashboard-app.js -->
+          </tbody>
+        </table>
+      </div>
+
+      <p
+        id="patients-empty-message"
+        class="empty-message"
+        hidden
+      >
+        No assessments match the current filters.
+      </p>
+    </section>
+
+    <footer class="page-footer">
+      <p>
+        The Bhutani nomogram predicts the risk of subsequent significant
+        hyperbilirubinaemia; treatment follows the NICE gestation-specific
+        threshold graphs. This dashboard is a clinical-review tool and is not a
+        diagnosis. A TSB at or above the exchange-transfusion threshold is a
+        medical emergency.
+      </p>
+    </footer>
+  </main>
+
+  <!--
+    Classic <script> tags (no `type="module"`) so the page works when opened
+    directly via file://. Each file attaches its public symbols to
+    `window.BhutaniBilirubinNomogramDashboard`.
+
+    Load order: types -> data -> api -> app (each depends on those above).
+  -->
+  <script src="js/dashboard-types.js"></script>
+  <script src="js/data.js"></script>
+  <script src="js/api.js"></script>
+  <script src="js/dashboard-app.js"></script>
+</body>
+</html>

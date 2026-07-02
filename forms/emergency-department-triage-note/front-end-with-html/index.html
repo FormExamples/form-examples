@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Emergency Department Triage Note — first-contact triage</title>
+  <meta name="description" content="ED triage note: arrival, presenting complaint, triage vital signs, and pain score, classified into one of the five Manchester Triage System priority levels with target time and a supporting NEWS2 aggregate.">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <a class="skip-link visually-hidden" href="#form-sections">Skip to triage form</a>
+
+  <header class="page-header">
+    <div class="page-header-inner">
+      <h1>Emergency Department Triage Note</h1>
+      <p class="subtitle">First-contact triage: classify into one of the five Manchester Triage System priority levels (1 Red / Immediate → 5 Blue / Non-urgent) with a target time and a supporting NEWS2 aggregate.</p>
+      <p class="subtitle"><a href="dashboard.html">View the clinician dashboard →</a></p>
+
+      <progress
+        id="progress"
+        class="progress"
+        max="100"
+        value="0"
+        aria-label="Form completion"
+      ></progress>
+      <p id="progress-text" class="subtitle" aria-live="polite">0 fields answered (0%)</p>
+
+      <ol
+        id="step-list"
+        class="step-list"
+        aria-label="Triage steps"
+        data-current="0"
+      ><!-- step-list-items injected by js/form-app.js --></ol>
+    </div>
+  </header>
+
+  <main>
+    <div class="intro">
+      <p>
+        Record the first-contact triage findings below: arrival and context,
+        presenting complaint, triage vital signs, a pain score, and the
+        Manchester Triage System discriminators. The engine selects the most
+        urgent priority level justified by the findings, derives the target time
+        to first clinical assessment, computes a supporting NEWS2 aggregate, and
+        raises red-flag issues. Answers are saved automatically in your browser
+        as you go.
+      </p>
+      <p>
+        This is a prioritisation decision, not a diagnosis. It sets the maximum
+        time to first clinical assessment; it does not determine treatment. A
+        lower category never overrides a clinician's decision to see a patient
+        sooner.
+      </p>
+    </div>
+
+    <form
+      id="assessment-form"
+      class="form"
+      autocomplete="off"
+      novalidate
+      onsubmit="return false;"
+      aria-label="Emergency Department Triage Note"
+    >
+      <div
+        id="error-summary"
+        class="error-summary"
+        role="alert"
+        aria-label="Validation errors"
+        hidden
+      ></div>
+
+      <div id="form-sections">
+        <!-- Steps rendered by js/form-app.js: -->
+        <!-- 1 Triage context, 2 Arrival, 3 Patient identification, -->
+        <!-- 4 Presenting complaint, 5 Vital signs, 6 Pain score, -->
+        <!-- 7 Discriminators, 8 Summary and category -->
+      </div>
+
+      <div class="button-group">
+        <button type="button" id="submit-btn" class="button" data-variant="primary">
+          Submit and view report
+        </button>
+        <button type="button" id="reset-btn" class="button" data-variant="secondary">
+          Start over
+        </button>
+      </div>
+    </form>
+
+    <section
+      id="report"
+      class="panel"
+      role="region"
+      aria-live="polite"
+      aria-label="Triage report"
+    >
+      <p class="empty-message">Submit the form to see the report.</p>
+    </section>
+
+    <footer class="page-footer">
+      <p>
+        Triage categories follow the Manchester Triage System (Mackway-Jones et
+        al., 3rd ed.) supported by the Royal College of Physicians' NEWS2 (2017).
+        This tool is for information only and is not a diagnosis; escalate and
+        treat in line with local policy and clinical judgement.
+      </p>
+    </footer>
+  </main>
+
+  <!--
+    Classic <script> tags (no `type="module"`) so the page works when opened
+    directly via file:// — browsers block ES-module imports from file:// for
+    CORS reasons, but allow ordered classic scripts. Each file attaches its
+    public symbols to `window.EmergencyDepartmentTriageNote`.
+
+    Load order: types -> rules -> grader -> flags -> form-app.
+  -->
+  <script src="js/types.js"></script>
+  <script src="js/rules.js"></script>
+  <script src="js/grader.js"></script>
+  <script src="js/flags.js"></script>
+  <script src="js/form-app.js"></script>
+</body>
+</html>

@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Bowel Cancer Screening (FIT) — clinician dashboard</title>
+  <meta name="description" content="Bowel cancer screening FIT clinician dashboard: review kit outcomes with faecal haemoglobin, result class, management action, screening hub, and the symptomatic suspected-cancer pathway flag.">
+  <link rel="stylesheet" href="css/dashboard.css">
+</head>
+<body>
+  <a class="skip-link" href="#patients-table">Skip to assessments table</a>
+
+  <header class="page-header">
+    <div class="page-header-inner">
+      <h1>Bowel Cancer Screening (FIT) — Clinician Dashboard</h1>
+      <p class="subtitle">
+        FIT kit outcomes with the faecal haemoglobin value, result class,
+        management action, screening hub, and symptomatic-pathway flag.
+      </p>
+      <p class="subtitle"><a href="index.html">← New FIT result</a></p>
+    </div>
+  </header>
+
+  <main>
+    <!-- Status banner: shown when backend fetch fails and we fall back -->
+    <div
+      id="status-banner"
+      class="alert" data-type="warning"
+      role="status"
+      aria-live="polite"
+      hidden
+    ></div>
+
+    <!-- Filter bar -->
+    <section
+      class="filter-bar"
+      aria-labelledby="filter-bar-heading"
+    >
+      <h2 id="filter-bar-heading" class="visually-hidden">Filters</h2>
+
+      <div class="filter-grid">
+        <div class="filter-field filter-field-search">
+          <label for="filter-search">Search</label>
+          <input
+            id="filter-search"
+            type="search"
+            class="text-input"
+            placeholder="Participant ID or name..."
+            autocomplete="off"
+          >
+        </div>
+
+        <div class="filter-field">
+          <label for="filter-hub">Hub</label>
+          <select id="filter-hub" class="select">
+            <option value="">All hubs</option>
+            <option value="Southern Hub">Southern Hub</option>
+            <option value="Northern Hub">Northern Hub</option>
+            <option value="Eastern Hub">Eastern Hub</option>
+            <option value="Western Hub">Western Hub</option>
+          </select>
+        </div>
+
+        <div class="filter-field">
+          <label for="filter-result">Result</label>
+          <select id="filter-result" class="select">
+            <option value="">All results</option>
+            <option value="negative">Negative</option>
+            <option value="positive">Positive</option>
+            <option value="spoilt">Spoilt</option>
+            <option value="unclassified">Unclassified</option>
+          </select>
+        </div>
+
+        <div class="filter-field">
+          <label for="filter-symptomatic">Symptomatic</label>
+          <select id="filter-symptomatic" class="select">
+            <option value="">All</option>
+            <option value="yes">Yes</option>
+            <option value="no">No</option>
+          </select>
+        </div>
+
+        <div class="filter-field filter-field-actions">
+          <button
+            type="button"
+            id="filter-clear-btn"
+            class="button" data-variant="secondary"
+            hidden
+          >
+            Clear filters
+          </button>
+        </div>
+      </div>
+
+      <div class="filter-summary">
+        <span id="filter-count">Loading assessments...</span>
+      </div>
+    </section>
+
+    <!-- Assessments table -->
+    <section
+      class="table-card"
+      aria-labelledby="patients-table-heading"
+    >
+      <h2 id="patients-table-heading" class="visually-hidden">Assessments</h2>
+
+      <div class="table-scroll">
+        <table id="patients-table" class="patients-table">
+          <thead>
+            <tr id="patients-table-head">
+              <!-- Sortable column headers built by dashboard-app.js -->
+            </tr>
+          </thead>
+          <tbody id="patients-table-body">
+            <!-- Data rows built by dashboard-app.js -->
+          </tbody>
+        </table>
+      </div>
+
+      <p
+        id="patients-empty-message"
+        class="empty-message"
+        hidden
+      >
+        No assessments match the current filters.
+      </p>
+    </section>
+
+    <footer class="page-footer">
+      <p>
+        The FIT result class is a screening classification, not a diagnosis. A
+        positive screen (faecal Hb at or above the programme threshold) prompts
+        colonoscopy referral; reported red-flag symptoms route the participant to
+        the urgent suspected-cancer pathway regardless of the FIT result.
+        Interpret in the clinical context and follow local operational standards.
+      </p>
+    </footer>
+  </main>
+
+  <!--
+    Classic <script> tags (no `type="module"`) so the page works when opened
+    directly via file://. Each file attaches its public symbols to
+    `window.BowelCancerScreeningFitDashboard`.
+
+    Load order: types -> data -> api -> app (each depends on those above).
+  -->
+  <script src="js/dashboard-types.js"></script>
+  <script src="js/data.js"></script>
+  <script src="js/api.js"></script>
+  <script src="js/dashboard-app.js"></script>
+</body>
+</html>

@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Nursing Care Plan — nurse questionnaire</title>
+  <meta name="description" content="Structured nursing care plan following the nursing process (ADPIE) and the Roper–Logan–Tierney activities-of-living model: problems, SMART goals, interventions, evaluation, and referenced risk assessments, with a completeness grade.">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <a class="skip-link visually-hidden" href="#form-sections">Skip to questionnaire</a>
+
+  <header class="page-header">
+    <div class="page-header-inner">
+      <h1>Nursing Care Plan</h1>
+      <p class="subtitle">Documentation and completeness tool following the nursing process (ADPIE) and the Roper–Logan–Tierney model. Not a numeric score.</p>
+      <p class="subtitle"><a href="dashboard.html">View the clinician dashboard →</a></p>
+
+      <progress
+        id="progress"
+        class="progress"
+        max="100"
+        value="0"
+        aria-label="Form completion"
+      ></progress>
+      <p id="progress-text" class="subtitle" aria-live="polite">0 fields answered (0%)</p>
+
+      <ol
+        id="step-list"
+        class="step-list"
+        aria-label="Nursing Care Plan steps"
+        data-current="0"
+      ><!-- step-list-items injected by js/form-app.js --></ol>
+    </div>
+  </header>
+
+  <main>
+    <div class="intro">
+      <p>
+        Build the nursing care plan section by section. Record the identified
+        problems or needs, then for each problem set one or more SMART goals,
+        plan the interventions, and record the evaluation and review. The plan
+        also references the specialist risk assessments (falls, pressure ulcer,
+        VTE, and nutrition / MUST). All answers are saved automatically in your
+        browser as you go.
+      </p>
+      <p>
+        The completeness engine grades each problem (Complete / Partial /
+        Incomplete) and rolls the problems up to an overall care-plan status
+        with a completeness percentage and flagged issues. This is a
+        record-keeping aid, not a clinical decision or a substitute for the
+        specialist risk-assessment tools it references.
+      </p>
+    </div>
+
+    <form
+      id="assessment-form"
+      class="form"
+      autocomplete="off"
+      novalidate
+      onsubmit="return false;"
+      aria-label="Nursing Care Plan"
+    >
+      <div
+        id="error-summary"
+        class="error-summary"
+        role="alert"
+        aria-label="Validation errors"
+        hidden
+      ></div>
+
+      <div id="form-sections">
+        <!-- Sections rendered by js/form-app.js: -->
+        <!-- 1 Plan context, 2 Patient identification, -->
+        <!-- 3 Risk assessments referenced, -->
+        <!-- 4 Problems, goals, interventions and evaluation (repeating), -->
+        <!-- 5 Summary and completeness -->
+      </div>
+
+      <div class="button-group">
+        <button type="button" id="submit-btn" class="button" data-variant="primary">
+          Submit and view report
+        </button>
+        <button type="button" id="reset-btn" class="button" data-variant="secondary">
+          Start over
+        </button>
+      </div>
+    </form>
+
+    <section
+      id="report"
+      class="panel"
+      role="region"
+      aria-live="polite"
+      aria-label="Care-plan report"
+    >
+      <p class="empty-message">Submit the form to see the report.</p>
+    </section>
+
+    <footer class="page-footer">
+      <p>
+        This nursing care plan follows the nursing process (Assessment,
+        Diagnosis, Planning, Implementation, Evaluation — ADPIE) and the
+        Roper–Logan–Tierney activities-of-living model. It is a documentation
+        and completeness aid and is not a diagnosis or a prescription.
+      </p>
+    </footer>
+  </main>
+
+  <!--
+    Classic <script> tags (no `type="module"`) so the page works when opened
+    directly via file:// — browsers block ES-module imports from file:// for
+    CORS reasons, but allow ordered classic scripts. Each file attaches its
+    public symbols to `window.NursingCarePlan`.
+
+    Load order: types -> rules -> flags -> grader -> form-app.
+  -->
+  <script src="js/types.js"></script>
+  <script src="js/rules.js"></script>
+  <script src="js/flags.js"></script>
+  <script src="js/grader.js"></script>
+  <script src="js/form-app.js"></script>
+</body>
+</html>

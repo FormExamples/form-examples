@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Ottawa Ankle Rules (and Ottawa Foot Rules) — bedside decision rule</title>
+  <meta name="description" content="Bedside Ottawa Ankle / Foot Rules decision rule for adults after an acute ankle or midfoot injury: an ankle X-ray needs malleolar-zone pain plus malleolus tenderness or inability to bear weight; a foot X-ray needs midfoot-zone pain plus fifth-metatarsal-base or navicular tenderness or inability to bear weight. Two independent yes/no imaging decisions — not a score.">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <a class="skip-link visually-hidden" href="#form-sections">Skip to questionnaire</a>
+
+  <header class="page-header">
+    <div class="page-header-inner">
+      <h1>Ottawa Ankle Rules (and Ottawa Foot Rules)</h1>
+      <p class="subtitle">Bedside imaging decision rule: an ankle X-ray needs malleolar-zone pain AND (malleolus tenderness OR inability to bear weight); a foot X-ray needs midfoot-zone pain AND (fifth-metatarsal-base or navicular tenderness OR inability to bear weight).</p>
+      <p class="subtitle"><a href="dashboard.html">View the clinician dashboard →</a></p>
+
+      <progress
+        id="progress"
+        class="progress"
+        max="100"
+        value="0"
+        aria-label="Form completion"
+      ></progress>
+      <p id="progress-text" class="subtitle" aria-live="polite">0 fields answered (0%)</p>
+
+      <ol
+        id="step-list"
+        class="step-list"
+        aria-label="Ottawa Ankle Rules assessment steps"
+        data-current="0"
+      ><!-- step-list-items injected by js/form-app.js --></ol>
+    </div>
+  </header>
+
+  <main>
+    <div class="intro">
+      <p>
+        Complete the Ottawa Ankle / Foot Rules criteria below for an adult (18
+        years or over) with an acute ankle or midfoot injury. This is a
+        <strong>decision rule, not a score</strong>: there is nothing to add up.
+        An <strong>ankle X-ray</strong> is indicated when there is malleolar-zone
+        pain together with tenderness at the lateral or medial malleolus, or an
+        inability to bear weight. A <strong>foot X-ray</strong> is indicated when
+        there is midfoot-zone pain together with tenderness at the base of the
+        fifth metatarsal or the navicular, or an inability to bear weight. The
+        two decisions are independent. Answers are saved automatically in your
+        browser as you go.
+      </p>
+      <p>
+        The rule is deliberately highly sensitive: a negative result reduces but
+        does not formally exclude fracture. Apply caution in children (paediatric
+        guidance takes precedence) and when assessment is unreliable
+        (intoxication, distracting injury, sensory deficit, or gross swelling).
+        Use clinical judgement alongside the computed decision.
+      </p>
+    </div>
+
+    <form
+      id="assessment-form"
+      class="form"
+      autocomplete="off"
+      novalidate
+      onsubmit="return false;"
+      aria-label="Ottawa Ankle Rules assessment"
+    >
+      <div
+        id="error-summary"
+        class="error-summary"
+        role="alert"
+        aria-label="Validation errors"
+        hidden
+      ></div>
+
+      <div id="form-sections">
+        <!-- Steps rendered by js/form-app.js: -->
+        <!-- 1 Assessment context, 2 Patient identification, -->
+        <!-- 3 Applicability, 4 Pain zones, -->
+        <!-- 5 Ankle bone tenderness, 6 Foot bone tenderness, -->
+        <!-- 7 Weight-bearing, 8 Summary and decision -->
+      </div>
+
+      <div class="button-group">
+        <button type="button" id="submit-btn" class="button" data-variant="primary">
+          Submit and view report
+        </button>
+        <button type="button" id="reset-btn" class="button" data-variant="secondary">
+          Start over
+        </button>
+      </div>
+    </form>
+
+    <section
+      id="report"
+      class="panel"
+      role="region"
+      aria-live="polite"
+      aria-label="Assessment report"
+    >
+      <p class="empty-message">Submit the form to see the report.</p>
+    </section>
+
+    <footer class="page-footer">
+      <p>
+        The Ottawa Ankle Rules were derived and validated by Stiell et al. (Ann
+        Emerg Med 1992; JAMA 1993/1994) and are one of the most widely adopted
+        decision rules in emergency medicine. This tool is for information only
+        and is not a diagnosis; image, safety-net, and escalate in line with
+        local policy and clinical judgement.
+      </p>
+    </footer>
+  </main>
+
+  <!--
+    Classic <script> tags (no `type="module"`) so the page works when opened
+    directly via file:// — browsers block ES-module imports from file:// for
+    CORS reasons, but allow ordered classic scripts. Each file attaches its
+    public symbols to `window.OttawaAnkleRules`.
+
+    Load order: types -> rules -> grader -> flags -> form-app.
+  -->
+  <script src="js/types.js"></script>
+  <script src="js/rules.js"></script>
+  <script src="js/grader.js"></script>
+  <script src="js/flags.js"></script>
+  <script src="js/form-app.js"></script>
+</body>
+</html>

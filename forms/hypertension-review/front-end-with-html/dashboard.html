@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Hypertension Annual Review — clinician dashboard</title>
+  <meta name="description" content="Hypertension annual-review clinician dashboard: review records by blood-pressure control status, review completeness, hypertension stage, practice, and severe-hypertension flag.">
+  <link rel="stylesheet" href="css/dashboard.css">
+</head>
+<body>
+  <a class="skip-link" href="#patients-table">Skip to reviews table</a>
+
+  <header class="page-header">
+    <div class="page-header-inner">
+      <h1>Hypertension Annual Review — Clinician Dashboard</h1>
+      <p class="subtitle">
+        Review list with blood-pressure control status, review completeness,
+        hypertension stage, practice, and severe-hypertension flag.
+      </p>
+      <p class="subtitle"><a href="index.html">← New hypertension review</a></p>
+    </div>
+  </header>
+
+  <main>
+    <!-- Status banner: shown when backend fetch fails and we fall back -->
+    <div
+      id="status-banner"
+      class="alert" data-type="warning"
+      role="status"
+      aria-live="polite"
+      hidden
+    ></div>
+
+    <!-- Filter bar -->
+    <section
+      class="filter-bar"
+      aria-labelledby="filter-bar-heading"
+    >
+      <h2 id="filter-bar-heading" class="visually-hidden">Filters</h2>
+
+      <div class="filter-grid">
+        <div class="filter-field filter-field-search">
+          <label for="filter-search">Search</label>
+          <input
+            id="filter-search"
+            type="search"
+            class="text-input"
+            placeholder="Patient ID, name, or practice..."
+            autocomplete="off"
+          >
+        </div>
+
+        <div class="filter-field">
+          <label for="filter-control">Control</label>
+          <select id="filter-control" class="select">
+            <option value="">All control statuses</option>
+            <option value="controlled">Controlled</option>
+            <option value="uncontrolled">Uncontrolled</option>
+            <option value="severe-uncontrolled">Severe uncontrolled</option>
+          </select>
+        </div>
+
+        <div class="filter-field">
+          <label for="filter-review">Review</label>
+          <select id="filter-review" class="select">
+            <option value="">All review statuses</option>
+            <option value="complete">Complete</option>
+            <option value="partial">Partial</option>
+            <option value="incomplete">Incomplete</option>
+          </select>
+        </div>
+
+        <div class="filter-field">
+          <label for="filter-stage">Stage</label>
+          <select id="filter-stage" class="select">
+            <option value="">All stages</option>
+            <option value="none">None</option>
+            <option value="stage-1">Stage 1</option>
+            <option value="stage-2">Stage 2</option>
+            <option value="stage-3-severe">Stage 3 (severe)</option>
+          </select>
+        </div>
+
+        <div class="filter-field">
+          <label for="filter-flag">Severe flag</label>
+          <select id="filter-flag" class="select">
+            <option value="">All</option>
+            <option value="yes">Yes</option>
+            <option value="no">No</option>
+          </select>
+        </div>
+
+        <div class="filter-field filter-field-actions">
+          <button
+            type="button"
+            id="filter-clear-btn"
+            class="button" data-variant="secondary"
+            hidden
+          >
+            Clear filters
+          </button>
+        </div>
+      </div>
+
+      <div class="filter-summary">
+        <span id="filter-count">Loading reviews...</span>
+      </div>
+    </section>
+
+    <!-- Reviews table -->
+    <section
+      class="table-card"
+      aria-labelledby="patients-table-heading"
+    >
+      <h2 id="patients-table-heading" class="visually-hidden">Reviews</h2>
+
+      <div class="table-scroll">
+        <table id="patients-table" class="patients-table">
+          <thead>
+            <tr id="patients-table-head">
+              <!-- Sortable column headers built by dashboard-app.js -->
+            </tr>
+          </thead>
+          <tbody id="patients-table-body">
+            <!-- Data rows built by dashboard-app.js -->
+          </tbody>
+        </table>
+      </div>
+
+      <p
+        id="patients-empty-message"
+        class="empty-message"
+        hidden
+      >
+        No reviews match the current filters.
+      </p>
+    </section>
+
+    <footer class="page-footer">
+      <p>
+        This dashboard is a clinical-review tool. The control status, review
+        completeness, and hypertension stage document how well blood pressure is
+        controlled and whether the annual review is whole; they are not a
+        diagnosis. A severe-uncontrolled control status or a severe flag
+        (clinic BP &ge; 180/120 mmHg) prompts same-day clinical assessment.
+      </p>
+    </footer>
+  </main>
+
+  <!--
+    Classic <script> tags (no `type="module"`) so the page works when opened
+    directly via file://. Each file attaches its public symbols to
+    `window.HypertensionReviewDashboard`.
+
+    Load order: types -> data -> api -> app (each depends on those above).
+  -->
+  <script src="js/dashboard-types.js"></script>
+  <script src="js/data.js"></script>
+  <script src="js/api.js"></script>
+  <script src="js/dashboard-app.js"></script>
+</body>
+</html>

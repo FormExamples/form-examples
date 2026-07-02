@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Post-Anaesthesia Care Unit (PACU) Record — recovery wizard</title>
+  <meta name="description" content="PACU recovery record with the Modified Aldrete discharge-readiness scorer: five parameters (activity, respiration, circulation, consciousness, oxygen saturation) scored 0-10, plus an optional PADSS for day-surgery discharge.">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <a class="skip-link visually-hidden" href="#form-sections">Skip to record</a>
+
+  <header class="page-header">
+    <div class="page-header-inner">
+      <h1>Post-Anaesthesia Care Unit (PACU) Record</h1>
+      <p class="subtitle">Recovery record with the Modified Aldrete discharge-readiness scorer: five parameters scored 0-10.</p>
+      <p class="subtitle"><a href="dashboard.html">View the recovery-team dashboard →</a></p>
+
+      <progress
+        id="progress"
+        class="progress"
+        max="100"
+        value="0"
+        aria-label="Form completion"
+      ></progress>
+      <p id="progress-text" class="subtitle" aria-live="polite">0 fields answered (0%)</p>
+
+      <ol
+        id="step-list"
+        class="step-list"
+        aria-label="PACU record steps"
+        data-current="0"
+      ><!-- step-list-items injected by js/form-app.js --></ol>
+    </div>
+  </header>
+
+  <main>
+    <div class="intro">
+      <p>
+        Complete the recovery observations below for an adult emerging from
+        anaesthesia or sedation. The five Modified Aldrete parameters each score
+        0, 1, or 2, for a total of 0 to 10. A total of 9 or more <strong>with the
+        oxygen-saturation parameter scoring 2</strong> is the conventional
+        threshold for discharge from PACU. Answers are saved automatically in
+        your browser as you go.
+      </p>
+      <p>
+        A passing score confirms that documented discharge criteria are met; it
+        is not an instruction to discharge. The supervising anaesthetist retains
+        responsibility for the discharge decision. For day-surgery cases, the
+        optional PADSS assessment covers street fitness for discharge home.
+      </p>
+    </div>
+
+    <form
+      id="assessment-form"
+      class="form"
+      autocomplete="off"
+      novalidate
+      onsubmit="return false;"
+      aria-label="PACU recovery record"
+    >
+      <div
+        id="error-summary"
+        class="error-summary"
+        role="alert"
+        aria-label="Validation errors"
+        hidden
+      ></div>
+
+      <div id="form-sections">
+        <!-- Steps rendered by js/form-app.js: -->
+        <!-- 1 Recovery context, 2 Patient identification, -->
+        <!-- 3 Activity, 4 Respiration, 5 Circulation, 6 Consciousness, -->
+        <!-- 7 Oxygen saturation, 8 Airway/pain/PONV, 9 PADSS, 10 Summary -->
+      </div>
+
+      <div class="button-group">
+        <button type="button" id="submit-btn" class="button" data-variant="primary">
+          Submit and view report
+        </button>
+        <button type="button" id="reset-btn" class="button" data-variant="secondary">
+          Start over
+        </button>
+      </div>
+    </form>
+
+    <section
+      id="report"
+      class="panel"
+      role="region"
+      aria-live="polite"
+      aria-label="Recovery report"
+    >
+      <p class="empty-message">Submit the form to see the report.</p>
+    </section>
+
+    <footer class="page-footer">
+      <p>
+        The Modified Aldrete Score (Aldrete &amp; Kroulik, Anesth Analg 1970;
+        Aldrete, J Clin Anesth 1995) and the Post-Anaesthesia Discharge Scoring
+        System (Chung, Can J Anaesth 1995) are validated recovery instruments.
+        This tool documents that discharge criteria are met and is not a
+        discharge order; discharge from PACU remains subject to the supervising
+        anaesthetist's judgement and local policy.
+      </p>
+    </footer>
+  </main>
+
+  <!--
+    Classic <script> tags (no `type="module"`) so the page works when opened
+    directly via file:// — browsers block ES-module imports from file:// for
+    CORS reasons, but allow ordered classic scripts. Each file attaches its
+    public symbols to `window.PostAnaesthesiaCareUnitRecord`.
+
+    Load order: types -> rules -> grader -> flags -> form-app.
+  -->
+  <script src="js/types.js"></script>
+  <script src="js/rules.js"></script>
+  <script src="js/grader.js"></script>
+  <script src="js/flags.js"></script>
+  <script src="js/form-app.js"></script>
+</body>
+</html>

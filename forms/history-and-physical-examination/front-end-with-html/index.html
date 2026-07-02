@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>History and Physical Examination (H&P) — clerking document</title>
+  <meta name="description" content="Comprehensive H&P clerking wizard: history, vital signs, examination by system, impression, and management plan. A completeness engine grades the clerking Complete / Partial / Incomplete, reports a completeness percentage, and raises safety flags.">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <a class="skip-link visually-hidden" href="#form-sections">Skip to questionnaire</a>
+
+  <header class="page-header">
+    <div class="page-header-inner">
+      <h1>History and Physical Examination (H&amp;P)</h1>
+      <p class="subtitle">Comprehensive clerking document: history, examination, impression, and management plan, graded for documentation completeness.</p>
+      <p class="subtitle"><a href="dashboard.html">View the clinician dashboard →</a></p>
+
+      <progress
+        id="progress"
+        class="progress"
+        max="100"
+        value="0"
+        aria-label="Form completion"
+      ></progress>
+      <p id="progress-text" class="subtitle" aria-live="polite">0 fields answered (0%)</p>
+
+      <ol
+        id="step-list"
+        class="step-list"
+        aria-label="H&amp;P clerking steps"
+        data-current="0"
+      ><!-- step-list-items injected by js/form-app.js --></ol>
+    </div>
+  </header>
+
+  <main>
+    <div class="intro">
+      <p>
+        Complete the clerking sections below for an adult patient being admitted
+        or clerked. This is a <strong>documentation / completeness</strong> form,
+        not a scored instrument: it does not compute a diagnostic or risk score.
+        Instead a completeness engine grades how thoroughly the clerking has been
+        documented — <strong>Complete</strong>, <strong>Partial</strong>, or
+        <strong>Incomplete</strong> — against ten required components, reports a
+        completeness percentage, and raises safety flags. Answers are saved
+        automatically in your browser as you go.
+      </p>
+      <p>
+        Allergy status must be explicitly documented (record "no known drug
+        allergies" if none). Leaving allergy status undocumented, or recording
+        neither an impression nor a plan, raises a <strong>blocking</strong> flag
+        that forces an incomplete grade. A "Complete" grade means the document is
+        well-formed, not that the clinical reasoning is correct.
+      </p>
+    </div>
+
+    <form
+      id="assessment-form"
+      class="form"
+      autocomplete="off"
+      novalidate
+      onsubmit="return false;"
+      aria-label="H&amp;P clerking"
+    >
+      <div
+        id="error-summary"
+        class="error-summary"
+        role="alert"
+        aria-label="Validation errors"
+        hidden
+      ></div>
+
+      <div id="form-sections">
+        <!-- Steps rendered by js/form-app.js: -->
+        <!-- 1 Encounter and clinician, 2 Patient identification, -->
+        <!-- 3 Presenting complaint, 4 Past history and medications, -->
+        <!-- 5 Family and social history, 6 Systems review, 7 Vital signs, -->
+        <!-- 8 Physical examination, 9 Investigations, -->
+        <!-- 10 Impression and problem list, 11 Management plan, -->
+        <!-- 12 Summary and completeness -->
+      </div>
+
+      <div class="button-group">
+        <button type="button" id="submit-btn" class="button" data-variant="primary">
+          Submit and view report
+        </button>
+        <button type="button" id="reset-btn" class="button" data-variant="secondary">
+          Start over
+        </button>
+      </div>
+    </form>
+
+    <section
+      id="report"
+      class="panel"
+      role="region"
+      aria-live="polite"
+      aria-label="Clerking completeness report"
+    >
+      <p class="empty-message">Submit the form to see the report.</p>
+    </section>
+
+    <footer class="page-footer">
+      <p>
+        The H&amp;P clerking template follows conventional clinical clerking
+        structure (Macleod's Clinical Examination; Talley &amp; O'Connor; Geeky
+        Medics OSCE guides) with vital-sign reference ranges from the Royal
+        College of Physicians NEWS2 (2017). This tool grades documentation
+        completeness only and is not a diagnosis; use clinical judgement and
+        escalate in line with local policy.
+      </p>
+    </footer>
+  </main>
+
+  <!--
+    Classic <script> tags (no `type="module"`) so the page works when opened
+    directly via file:// — browsers block ES-module imports from file:// for
+    CORS reasons, but allow ordered classic scripts. Each file attaches its
+    public symbols to `window.HistoryAndPhysicalExamination`.
+
+    Load order: types -> rules -> grader -> flags -> form-app.
+  -->
+  <script src="js/types.js"></script>
+  <script src="js/rules.js"></script>
+  <script src="js/grader.js"></script>
+  <script src="js/flags.js"></script>
+  <script src="js/form-app.js"></script>
+</body>
+</html>

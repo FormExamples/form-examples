@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>General Practitioner Referral Letter</title>
+  <meta name="description" content="General Practitioner Referral Letter: a structured primary-care referral to a specialist or service — referrer and patient details, the referral destination, urgency, reason and history, examination and investigation findings, medications and allergies, and the patient's expectations, consent, and safety-netting. The engine grades the referral's completeness (Complete / Incomplete) with a completeness percentage, echoes its urgency (routine / urgent / two-week-wait suspected cancer / emergency), and raises flags.">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <a class="skip-link visually-hidden" href="#form-sections">Skip to the referral</a>
+
+  <header class="page-header">
+    <div class="page-header-inner">
+      <h1>General Practitioner Referral Letter</h1>
+      <p class="subtitle">A structured primary-care referral to a specialist or service: who is being referred, who is referring, where and why, and how urgently. The engine checks the letter carries every piece of information the receiving service needs.</p>
+      <p class="subtitle"><a href="dashboard.html">View the referrals dashboard →</a></p>
+
+      <progress
+        id="progress"
+        class="progress"
+        max="100"
+        value="0"
+        aria-label="Referral completion"
+      ></progress>
+      <p id="progress-text" class="subtitle" aria-live="polite">0 fields answered (0%)</p>
+
+      <ol
+        id="step-list"
+        class="step-list"
+        aria-label="General practitioner referral letter steps"
+        data-current="0"
+      ><!-- step-list-items injected by js/form-app.js --></ol>
+    </div>
+  </header>
+
+  <main>
+    <div class="intro">
+      <p class="alert" data-type="warning" role="alert">
+        <strong>If the patient has emergency features, arrange same-day assessment or call 999 now.</strong>
+        Completing this letter does not replace an emergency admission or an
+        urgent phone call when the patient needs to be seen immediately.
+      </p>
+      <p>
+        Complete the nine sections below. The engine does not compute a clinical
+        score and does not decide whether to refer — it checks whether the
+        referral is <strong>complete enough to send</strong>, reports a
+        completeness percentage, echoes the <strong>urgency</strong> (routine,
+        urgent, two-week-wait suspected cancer, or emergency), and raises
+        <strong>flags</strong> for the referrer to resolve before sending. The
+        urgency is shown even while the referral is incomplete so the correct
+        pathway is never hidden. Answers are saved automatically in your browser
+        as you go.
+      </p>
+    </div>
+
+    <form
+      id="assessment-form"
+      class="form"
+      autocomplete="off"
+      novalidate
+      onsubmit="return false;"
+      aria-label="General practitioner referral letter"
+    >
+      <div
+        id="error-summary"
+        class="error-summary"
+        role="alert"
+        aria-label="Validation errors"
+        hidden
+      ></div>
+
+      <div id="form-sections">
+        <!-- Steps rendered by js/form-app.js: -->
+        <!-- 1 Referrer details, 2 Patient identification, 3 Referral destination, -->
+        <!-- 4 Urgency, 5 Reason and history, 6 Examination and investigations, -->
+        <!-- 7 Medications and allergies, 8 Expectations, consent and safety-netting, -->
+        <!-- 9 Summary and review -->
+      </div>
+
+      <div class="button-group">
+        <button type="button" id="submit-btn" class="button" data-variant="primary">
+          Submit and view report
+        </button>
+        <button type="button" id="reset-btn" class="button" data-variant="secondary">
+          Start over
+        </button>
+      </div>
+    </form>
+
+    <section
+      id="report"
+      class="panel"
+      role="region"
+      aria-live="polite"
+      aria-label="Completeness and urgency report"
+    >
+      <p class="empty-message">Submit the form to see the report.</p>
+    </section>
+
+    <footer class="page-footer">
+      <p>
+        This tool structures and grades a primary-care referral letter under the
+        NHS e-Referral Service standards and NICE NG12 (suspected cancer). It is
+        an administrative documentation and completeness-checking aid; it does
+        not diagnose or treat, and it does not decide whether to refer or replace
+        local Directory-of-Services pathway rules. Consent follows Montgomery v
+        Lanarkshire Health Board (2015).
+      </p>
+    </footer>
+  </main>
+
+  <!--
+    Classic <script> tags (no `type="module"`) so the page works when opened
+    directly via file:// — browsers block ES-module imports from file:// for
+    CORS reasons, but allow ordered classic scripts. Each file attaches its
+    public symbols to `window.GeneralPractitionerReferralLetter`.
+
+    Load order: types -> rules -> grader -> flags -> form-app.
+  -->
+  <script src="js/types.js"></script>
+  <script src="js/rules.js"></script>
+  <script src="js/grader.js"></script>
+  <script src="js/flags.js"></script>
+  <script src="js/form-app.js"></script>
+</body>
+</html>

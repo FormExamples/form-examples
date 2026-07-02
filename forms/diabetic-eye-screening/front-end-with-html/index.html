@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Diabetic Eye Screening record — retinopathy / maculopathy grading</title>
+  <meta name="description" content="Diabetic eye screening record under the NHS Diabetic Eye Screening Programme: per-eye retinopathy (R) and maculopathy (M) grading with photocoagulation and ungradable markers, classified into a worst-eye recall / referral outcome.">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <a class="skip-link visually-hidden" href="#form-sections">Skip to questionnaire</a>
+
+  <header class="page-header">
+    <div class="page-header-inner">
+      <h1>Diabetic Eye Screening record</h1>
+      <p class="subtitle">Per-eye retinopathy (R) and maculopathy (M) grading with photocoagulation (P) and ungradable (U) markers, classified into a worst-eye recall or referral outcome.</p>
+      <p class="subtitle"><a href="dashboard.html">View the clinician dashboard →</a></p>
+
+      <progress
+        id="progress"
+        class="progress"
+        max="100"
+        value="0"
+        aria-label="Form completion"
+      ></progress>
+      <p id="progress-text" class="subtitle" aria-live="polite">0 fields answered (0%)</p>
+
+      <ol
+        id="step-list"
+        class="step-list"
+        aria-label="Diabetic eye screening steps"
+        data-current="0"
+      ><!-- step-list-items injected by js/form-app.js --></ol>
+    </div>
+  </header>
+
+  <main>
+    <div class="intro">
+      <p>
+        Complete the diabetic-eye-screening record below. For each eye, record
+        the retinopathy (R) grade, maculopathy (M) grade, photocoagulation (P)
+        marker, and ungradable (U) marker assigned to the retinal photographs.
+        The engine ranks retinopathy severity R0 &lt; R1 &lt; R2 &lt; R3S &lt; R3A,
+        takes the worst grade across both eyes, and classifies the recall or
+        referral outcome — urgent ophthalmology, hospital eye service referral,
+        slit-lamp re-screen, 6-monthly surveillance, or routine 12- / 24-monthly
+        recall — and raises safety flags. Answers are saved automatically in your
+        browser as you go.
+      </p>
+      <p>
+        This is a documentation and result-classification record, not an
+        interpretation of raw images. It records the grade a trained
+        screener/grader has assigned and applies the programme's deterministic
+        outcome rules; the output prompts recall or referral rather than
+        determining treatment.
+      </p>
+    </div>
+
+    <form
+      id="assessment-form"
+      class="form"
+      autocomplete="off"
+      novalidate
+      onsubmit="return false;"
+      aria-label="Diabetic eye screening record"
+    >
+      <div
+        id="error-summary"
+        class="error-summary"
+        role="alert"
+        aria-label="Validation errors"
+        hidden
+      ></div>
+
+      <div id="form-sections">
+        <!-- Steps rendered by js/form-app.js: -->
+        <!-- 1 Grading context, 2 Patient identification, -->
+        <!-- 3 Right eye grading, 4 Left eye grading, 5 Summary and outcome -->
+      </div>
+
+      <div class="button-group">
+        <button type="button" id="submit-btn" class="button" data-variant="primary">
+          Submit and view result
+        </button>
+        <button type="button" id="reset-btn" class="button" data-variant="secondary">
+          Start over
+        </button>
+      </div>
+    </form>
+
+    <section
+      id="report"
+      class="panel"
+      role="region"
+      aria-live="polite"
+      aria-label="Screening result"
+    >
+      <p class="empty-message">Submit the form to see the report.</p>
+    </section>
+
+    <footer class="page-footer">
+      <p>
+        This record mirrors the NHS Diabetic Eye Screening Programme (DESP)
+        grading feature classification (R0–R3, M0–M1, P, U) and pathway
+        standards (PHE / NHS England), and the Royal College of Ophthalmologists
+        Diabetic Retinopathy Guidelines. It is for information only and is not a
+        diagnosis; manage and refer in line with local policy and clinical
+        judgement.
+      </p>
+    </footer>
+  </main>
+
+  <!--
+    Classic <script> tags (no `type="module"`) so the page works when opened
+    directly via file:// — browsers block ES-module imports from file:// for
+    CORS reasons, but allow ordered classic scripts. Each file attaches its
+    public symbols to `window.DiabeticEyeScreening`.
+
+    Load order: types -> rules -> grader -> flags -> form-app.
+  -->
+  <script src="js/types.js"></script>
+  <script src="js/rules.js"></script>
+  <script src="js/grader.js"></script>
+  <script src="js/flags.js"></script>
+  <script src="js/form-app.js"></script>
+</body>
+</html>

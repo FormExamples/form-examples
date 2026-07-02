@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>CAGE Alcohol Questionnaire — brief alcohol screen</title>
+  <meta name="description" content="Brief four-item CAGE alcohol-misuse screen for adults: Cut down, Annoyed, Guilty, Eye-opener, each scored 0 or 1 for a total of 0-4, flagging CAGE >= 2 as a positive screen.">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <a class="skip-link visually-hidden" href="#form-sections">Skip to questionnaire</a>
+
+  <header class="page-header">
+    <div class="page-header-inner">
+      <h1>CAGE Alcohol Questionnaire</h1>
+      <p class="subtitle">Brief four-item alcohol-misuse screen: Cut down, Annoyed, Guilty, Eye-opener, scored 0-4.</p>
+      <p class="subtitle"><a href="dashboard.html">View the clinician dashboard →</a></p>
+
+      <progress
+        id="progress"
+        class="progress"
+        max="100"
+        value="0"
+        aria-label="Form completion"
+      ></progress>
+      <p id="progress-text" class="subtitle" aria-live="polite">0 fields answered (0%)</p>
+
+      <ol
+        id="step-list"
+        class="step-list"
+        aria-label="CAGE assessment steps"
+        data-current="0"
+      ><!-- step-list-items injected by js/form-app.js --></ol>
+    </div>
+  </header>
+
+  <main>
+    <div class="intro">
+      <p>
+        Complete the four lifetime CAGE questions below for an adult (16 years
+        or over). Each question scores 1 point for a "yes", for a total of 0 to
+        4. A score of 2 or more is a positive screen and prompts a fuller
+        assessment of drinking. Answers are saved automatically in your browser
+        as you go.
+      </p>
+      <p>
+        CAGE is a screening prompt, not a diagnosis of an alcohol-use disorder.
+        A score below 2 does not exclude hazardous or harmful drinking: a "yes"
+        to the eye-opener question is a strong marker of physical dependence,
+        and a consumption-focused tool such as AUDIT-C is more sensitive to
+        earlier at-risk drinking.
+      </p>
+    </div>
+
+    <form
+      id="assessment-form"
+      class="form"
+      autocomplete="off"
+      novalidate
+      onsubmit="return false;"
+      aria-label="CAGE alcohol questionnaire"
+    >
+      <div
+        id="error-summary"
+        class="error-summary"
+        role="alert"
+        aria-label="Validation errors"
+        hidden
+      ></div>
+
+      <div id="form-sections">
+        <!-- Steps rendered by js/form-app.js: -->
+        <!-- 1 Assessment context, 2 Patient identification, -->
+        <!-- 3 Cut down, 4 Annoyed, 5 Guilty, 6 Eye-opener, -->
+        <!-- 7 Summary and score -->
+      </div>
+
+      <div class="button-group">
+        <button type="button" id="submit-btn" class="button" data-variant="primary">
+          Submit and view report
+        </button>
+        <button type="button" id="reset-btn" class="button" data-variant="secondary">
+          Start over
+        </button>
+      </div>
+    </form>
+
+    <section
+      id="report"
+      class="panel"
+      role="region"
+      aria-live="polite"
+      aria-label="Assessment report"
+    >
+      <p class="empty-message">Submit the form to see the report.</p>
+    </section>
+
+    <footer class="page-footer">
+      <p>
+        The CAGE questionnaire was described by Ewing (JAMA 1984) and derived
+        from earlier work by Mayfield et al. (Am J Psychiatry 1974). This
+        screening tool is for information only and is not a diagnosis; a
+        positive screen (CAGE >= 2) is a prompt for a fuller assessment of
+        drinking and clinical judgement.
+      </p>
+    </footer>
+  </main>
+
+  <!--
+    Classic <script> tags (no `type="module"`) so the page works when opened
+    directly via file:// — browsers block ES-module imports from file:// for
+    CORS reasons, but allow ordered classic scripts. Each file attaches its
+    public symbols to `window.CageAlcoholQuestionnaire`.
+
+    Load order: types -> rules -> grader -> flags -> form-app.
+  -->
+  <script src="js/types.js"></script>
+  <script src="js/rules.js"></script>
+  <script src="js/grader.js"></script>
+  <script src="js/flags.js"></script>
+  <script src="js/form-app.js"></script>
+</body>
+</html>

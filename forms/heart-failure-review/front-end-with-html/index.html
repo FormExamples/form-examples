@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Heart Failure Annual Review</title>
+  <meta name="description" content="UK primary-care structured annual review for adults with established chronic heart failure (NICE NG106): NYHA functional status, four-pillar medication optimisation, review completeness, and safety flags.">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <a class="skip-link visually-hidden" href="#form-sections">Skip to review</a>
+
+  <header class="page-header">
+    <div class="page-header-inner">
+      <h1>Heart Failure Annual Review</h1>
+      <p class="subtitle">UK primary-care structured annual review: NYHA functional status, four-pillar medication optimisation, review completeness, and safety flags.</p>
+      <p class="subtitle"><a href="dashboard.html">View the clinician dashboard →</a></p>
+
+      <progress
+        id="progress"
+        class="progress"
+        max="100"
+        value="0"
+        aria-label="Form completion"
+      ></progress>
+      <p id="progress-text" class="subtitle" aria-live="polite">0 fields answered (0%)</p>
+
+      <ol
+        id="step-list"
+        class="step-list"
+        aria-label="Heart failure annual review steps"
+        data-current="0"
+      ><!-- step-list-items injected by js/form-app.js --></ol>
+    </div>
+  </header>
+
+  <main>
+    <div class="intro">
+      <p>
+        Complete the annual review below for an adult already on a heart-failure
+        register with a confirmed diagnosis of chronic heart failure. The engine
+        derives an <strong>NYHA functional status</strong>, a <strong>medication-
+        optimisation status</strong> against the four pillars of guideline-directed
+        medical therapy, a <strong>review-completeness grade</strong>, and a set of
+        safety flags. Answers are saved automatically in your browser as you go.
+      </p>
+      <p>
+        This is a documentation and status-classification form aligned with
+        <strong>NICE NG106</strong>; it does not diagnose heart failure or its
+        subtype and a "complete" review does not certify clinical stability. Use
+        clinical judgement alongside it.
+      </p>
+    </div>
+
+    <form
+      id="review-form"
+      class="form"
+      autocomplete="off"
+      novalidate
+      onsubmit="return false;"
+      aria-label="Heart failure annual review"
+    >
+      <div
+        id="error-summary"
+        class="error-summary"
+        role="alert"
+        aria-label="Validation errors"
+        hidden
+      ></div>
+
+      <div id="form-sections">
+        <!-- Steps rendered by js/form-app.js:
+             1 Review context, 2 Patient and diagnosis, 3 Functional status,
+             4 Fluid status and observations, 5 Investigations,
+             6 Medication optimisation, 7 Devices and procedures,
+             8 Vaccinations and self-management, 9 Summary and plan -->
+      </div>
+
+      <div class="button-group">
+        <button type="button" id="submit-btn" class="button" data-variant="primary">
+          Submit and view report
+        </button>
+        <button type="button" id="reset-btn" class="button" data-variant="secondary">
+          Start over
+        </button>
+      </div>
+    </form>
+
+    <section
+      id="report"
+      class="panel"
+      role="region"
+      aria-live="polite"
+      aria-label="Review report"
+    >
+      <p class="empty-message">Submit the form to see the report.</p>
+    </section>
+
+    <footer class="page-footer">
+      <p>
+        Aligned with NICE NG106 (Chronic heart failure in adults), the NICE
+        heart-failure quality standard, the NYHA Functional Classification, and
+        the 2021 ESC heart-failure guidelines. This tool supports the QOF
+        heart-failure annual review; it is for documentation and clinical
+        decision support only and is not a diagnosis. Escalate and treat in line
+        with local policy and clinical judgement.
+      </p>
+    </footer>
+  </main>
+
+  <!--
+    Classic <script> tags (no `type="module"`) so the page works when opened
+    directly via file://. Each file attaches its public symbols to
+    `window.HeartFailureReview`.
+
+    Load order: types -> rules -> grader -> flags -> form-app.
+  -->
+  <script src="js/types.js"></script>
+  <script src="js/rules.js"></script>
+  <script src="js/flags.js"></script>
+  <script src="js/grader.js"></script>
+  <script src="js/form-app.js"></script>
+</body>
+</html>

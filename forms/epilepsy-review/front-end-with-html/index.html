@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Epilepsy Annual Review — clinician record</title>
+  <meta name="description" content="UK primary-care annual epilepsy review (NICE NG217): records seizures and anti-seizure medication, triggers, SUDEP discussion, injuries and status epilepticus, safety (DVLA driving), valproate and pregnancy-prevention arrangements, and mental health; classifies seizure control, grades review completeness, and raises safety flags.">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <a class="skip-link visually-hidden" href="#form-sections">Skip to review</a>
+
+  <header class="page-header">
+    <div class="page-header-inner">
+      <h1>Epilepsy Annual Review</h1>
+      <p class="subtitle">Structured NICE NG217 annual review: seizure-control classification, review completeness, and safety flags.</p>
+      <p class="subtitle"><a href="dashboard.html">View the clinician dashboard →</a></p>
+
+      <progress
+        id="progress"
+        class="progress"
+        max="100"
+        value="0"
+        aria-label="Form completion"
+      ></progress>
+      <p id="progress-text" class="subtitle" aria-live="polite">0 fields answered (0%)</p>
+
+      <ol
+        id="step-list"
+        class="step-list"
+        aria-label="Epilepsy annual review steps"
+        data-current="0"
+      ><!-- step-list-items injected by js/form-app.js --></ol>
+    </div>
+  </header>
+
+  <main>
+    <div class="intro">
+      <p>
+        Record the annual epilepsy review for an adult on the epilepsy register.
+        Work through the eleven sections — context, patient and epilepsy profile,
+        seizure type and frequency, anti-seizure medication, triggers, SUDEP
+        discussion, injuries and status epilepticus, safety, women of childbearing
+        potential, mental health, and the care plan. Answers are saved
+        automatically in your browser as you go.
+      </p>
+      <p>
+        This is a <strong>control-classification and documentation-completeness</strong>
+        instrument, not a numeric score. It classifies seizure control as
+        <strong>seizure-free / controlled / uncontrolled</strong>, grades the
+        review Complete / Partial / Incomplete, and raises safety flags — most
+        importantly valproate in a woman of childbearing potential without a
+        pregnancy-prevention programme, status epilepticus, and driving while not
+        DVLA-eligible. It does not diagnose epilepsy or select medication.
+      </p>
+    </div>
+
+    <form
+      id="assessment-form"
+      class="form"
+      autocomplete="off"
+      novalidate
+      onsubmit="return false;"
+      aria-label="Epilepsy annual review"
+    >
+      <div
+        id="error-summary"
+        class="error-summary"
+        role="alert"
+        aria-label="Validation errors"
+        hidden
+      ></div>
+
+      <div id="form-sections">
+        <!-- Steps rendered by js/form-app.js: -->
+        <!-- 1 Context, 2 Profile, 3 Seizures, 4 Medication, 5 Triggers, -->
+        <!-- 6 SUDEP, 7 Injuries, 8 Safety, 9 Childbearing, 10 Mental health, -->
+        <!-- 11 Summary -->
+      </div>
+
+      <div class="button-group">
+        <button type="button" id="submit-btn" class="button" data-variant="primary">
+          Submit and view report
+        </button>
+        <button type="button" id="reset-btn" class="button" data-variant="secondary">
+          Start over
+        </button>
+      </div>
+    </form>
+
+    <section
+      id="report"
+      class="panel"
+      role="region"
+      aria-live="polite"
+      aria-label="Review report"
+    >
+      <p class="empty-message">Submit the form to see the report.</p>
+    </section>
+
+    <footer class="page-footer">
+      <p>
+        The annual review follows NICE NG217 (<em>Epilepsies in children, young
+        people and adults</em>), MHRA valproate guidance, and DVLA fitness-to-drive
+        rules. This tool documents findings, classifies seizure control, and
+        prompts escalation; it is not a diagnosis and does not replace clinical
+        judgement. A "seizure-free" classification does not by itself authorise
+        driving or medication withdrawal — those remain clinical and DVLA
+        decisions. Where a high-priority flag is raised (valproate without a
+        pregnancy-prevention programme, status epilepticus, or driving while not
+        DVLA-eligible), act on it promptly.
+      </p>
+    </footer>
+  </main>
+
+  <!--
+    Classic <script> tags (no `type="module"`) so the page works when opened
+    directly via file:// — browsers block ES-module imports from file:// for
+    CORS reasons, but allow ordered classic scripts. Each file attaches its
+    public symbols to `window.EpilepsyReview`.
+
+    Load order: types -> rules -> flags -> grader -> form-app.
+  -->
+  <script src="js/types.js"></script>
+  <script src="js/rules.js"></script>
+  <script src="js/flags.js"></script>
+  <script src="js/grader.js"></script>
+  <script src="js/form-app.js"></script>
+</body>
+</html>

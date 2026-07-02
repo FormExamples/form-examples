@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Mental Health Act Assessment</title>
+  <meta name="description" content="Mental Health Act 1983 (as amended 2007) assessment: records the AMHP-coordinated assessment and medical recommendations, documents the statutory criteria and required signatories, and validates legal completeness (valid / incomplete) while classifying the recommended section and its urgency. It is a documentation instrument, not an automated decision to detain.">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <a class="skip-link visually-hidden" href="#form-sections">Skip to the assessment</a>
+
+  <header class="page-header">
+    <div class="page-header-inner">
+      <h1>Mental Health Act Assessment</h1>
+      <p class="subtitle">A formal assessment under the UK Mental Health Act 1983 (as amended 2007): the AMHP-coordinated assessment, medical recommendations, statutory criteria, and the recommended section — validated for legal completeness.</p>
+      <p class="subtitle"><a href="dashboard.html">View the clinician dashboard →</a></p>
+
+      <progress
+        id="progress"
+        class="progress"
+        max="100"
+        value="0"
+        aria-label="Assessment completion"
+      ></progress>
+      <p id="progress-text" class="subtitle" aria-live="polite">0 fields answered (0%)</p>
+
+      <ol
+        id="step-list"
+        class="step-list"
+        aria-label="Mental Health Act Assessment steps"
+        data-current="0"
+      ><!-- step-list-items injected by js/form-app.js --></ol>
+    </div>
+  </header>
+
+  <main>
+    <div class="intro">
+      <p>
+        Complete the ten sections below to document a Mental Health Act
+        assessment. The engine does <strong>not</strong> compute a clinical
+        score and makes <strong>no automated decision to detain</strong>. It
+        validates whether the documentation the recommended section requires is
+        <strong>complete</strong> — every required signatory present and every
+        applicable statutory criterion met with evidence — reports a
+        legal-completeness status (<strong>valid</strong> or
+        <strong>incomplete</strong>), classifies the recommended section and its
+        urgency, and raises safety, legal, and governance flags. Answers are
+        saved automatically in your browser as you go.
+      </p>
+      <p>
+        Detention deprives a person of liberty. This tool documents and
+        validates the assessment; the statutory forms prescribed under the Act
+        remain the definitive legal record, and detention decisions rest with the
+        professionals, not this software.
+      </p>
+    </div>
+
+    <form
+      id="assessment-form"
+      class="form"
+      autocomplete="off"
+      novalidate
+      onsubmit="return false;"
+      aria-label="Mental Health Act Assessment"
+    >
+      <div
+        id="error-summary"
+        class="error-summary"
+        role="alert"
+        aria-label="Validation errors"
+        hidden
+      ></div>
+
+      <div id="form-sections">
+        <!-- Steps rendered by js/form-app.js: -->
+        <!-- 1 Assessment context, 2 Person identification, -->
+        <!-- 3 Assessing professionals, 4 Mental disorder, 5 Risk, -->
+        <!-- 6 Least-restrictive alternative, 7 Appropriate treatment, -->
+        <!-- 8 Nearest relative / consultees, 9 Recommended section and outcome, -->
+        <!-- 10 Summary and validation -->
+      </div>
+
+      <div class="button-group">
+        <button type="button" id="submit-btn" class="button" data-variant="primary">
+          Submit and view report
+        </button>
+        <button type="button" id="reset-btn" class="button" data-variant="secondary">
+          Start over
+        </button>
+      </div>
+    </form>
+
+    <section
+      id="report"
+      class="panel"
+      role="region"
+      aria-live="polite"
+      aria-label="Validation report"
+    >
+      <p class="empty-message">Submit the form to see the report.</p>
+    </section>
+
+    <footer class="page-footer">
+      <p>
+        This assessment is governed by the Mental Health Act 1983 (as amended by
+        the Mental Health Act 2007) and its Code of Practice (2015); the Human
+        Rights Act 1998 (Article 5, right to liberty) and the Mental Capacity Act
+        2005 are directly relevant. This tool documents and validates the
+        assessment and makes no automated detention decision. The statutory forms
+        prescribed under the Mental Health (Hospital, Guardianship and Treatment)
+        (England) Regulations remain the definitive legal record.
+      </p>
+    </footer>
+  </main>
+
+  <!--
+    Classic <script> tags (no `type="module"`) so the page works when opened
+    directly via file:// — browsers block ES-module imports from file:// for
+    CORS reasons, but allow ordered classic scripts. Each file attaches its
+    public symbols to `window.MentalHealthActAssessment`.
+
+    Load order: types -> rules -> grader -> flags -> form-app.
+  -->
+  <script src="js/types.js"></script>
+  <script src="js/rules.js"></script>
+  <script src="js/grader.js"></script>
+  <script src="js/flags.js"></script>
+  <script src="js/form-app.js"></script>
+</body>
+</html>
