@@ -1,0 +1,91 @@
+#![allow(clippy::missing_errors_doc)]
+#![allow(clippy::unnecessary_struct_initialization)]
+#![allow(clippy::unused_async)]
+use loco_rs::prelude::*;
+use serde::{Deserialize, Serialize};
+
+use crate::models::_entities::fluid_balance_chart_grades::{ActiveModel, Entity, Model};
+
+#[derive(Clone, Debug, Serialize, Deserialize)]
+pub struct Params {
+    pub fluid_balance_chart_id: i32,
+    pub total_intake_ml: f64,
+    pub total_output_ml: f64,
+    pub net_balance_ml: f64,
+    pub urine_output_ml: f64,
+    pub hours_observed: Option<f64>,
+    pub weight_kg: Option<f64>,
+    pub urine_output_ml_kg_h: Option<f64>,
+    pub fluid_status: String,
+    pub graded_at: DateTimeWithTimeZone,
+    }
+
+impl Params {
+    fn update(&self, item: &mut ActiveModel) {
+      item.fluid_balance_chart_id = Set(self.fluid_balance_chart_id);
+      item.total_intake_ml = Set(self.total_intake_ml);
+      item.total_output_ml = Set(self.total_output_ml);
+      item.net_balance_ml = Set(self.net_balance_ml);
+      item.urine_output_ml = Set(self.urine_output_ml);
+      item.hours_observed = Set(self.hours_observed);
+      item.weight_kg = Set(self.weight_kg);
+      item.urine_output_ml_kg_h = Set(self.urine_output_ml_kg_h);
+      item.fluid_status = Set(self.fluid_status.clone());
+      item.graded_at = Set(self.graded_at);
+      }
+}
+
+async fn load_item(ctx: &AppContext, id: i32) -> Result<Model> {
+    let item = Entity::find_by_id(id).one(&ctx.db).await?;
+    item.ok_or_else(|| Error::NotFound)
+}
+
+#[debug_handler]
+pub async fn list(State(ctx): State<AppContext>) -> Result<Response> {
+    format::json(Entity::find().all(&ctx.db).await?)
+}
+
+#[debug_handler]
+pub async fn add(State(ctx): State<AppContext>, Json(params): Json<Params>) -> Result<Response> {
+    let mut item = ActiveModel {
+        ..Default::default()
+    };
+    params.update(&mut item);
+    let item = item.insert(&ctx.db).await?;
+    format::json(item)
+}
+
+#[debug_handler]
+pub async fn update(
+    Path(id): Path<i32>,
+    State(ctx): State<AppContext>,
+    Json(params): Json<Params>,
+) -> Result<Response> {
+    let item = load_item(&ctx, id).await?;
+    let mut item = item.into_active_model();
+    params.update(&mut item);
+    let item = item.update(&ctx.db).await?;
+    format::json(item)
+}
+
+#[debug_handler]
+pub async fn remove(Path(id): Path<i32>, State(ctx): State<AppContext>) -> Result<Response> {
+    load_item(&ctx, id).await?.delete(&ctx.db).await?;
+    format::empty()
+}
+
+#[debug_handler]
+pub async fn get_one(Path(id): Path<i32>, State(ctx): State<AppContext>) -> Result<Response> {
+    format::json(load_item(&ctx, id).await?)
+}
+
+pub fn routes() -> Routes {
+    Routes::new()
+        .prefix("api/fluid_balance_chart_grades/")
+        .add("/", get(list))
+        .add("/", post(add))
+        .add("{id}", get(get_one))
+        .add("{id}", delete(remove))
+        .add("{id}", put(update))
+        .add("{id}", patch(update))
+}
