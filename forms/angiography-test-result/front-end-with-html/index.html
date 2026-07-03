@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Angiography Test Result — structured vascular-imaging report</title>
+  <meta name="description" content="Structured angiography result (report) for the reporting clinician: examination details, clinical history, narrative and structured vascular findings, measurements, impression, and sign-off, graded on four axes (classification, severity, completeness, follow-up urgency) with an automatic critical-result alert.">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <a class="skip-link visually-hidden" href="#form-sections">Skip to report form</a>
+
+  <header class="page-header">
+    <div class="page-header-inner">
+      <h1>Angiography Test Result</h1>
+      <p class="subtitle">Structured vascular-imaging report with a four-axis interpretation grade: classification, severity, completeness, and follow-up urgency.</p>
+      <p class="subtitle"><a href="dashboard.html">View the clinician dashboard →</a></p>
+
+      <progress
+        id="progress"
+        class="progress"
+        max="100"
+        value="0"
+        aria-label="Form completion"
+      ></progress>
+      <p id="progress-text" class="subtitle" aria-live="polite">0 fields answered (0%)</p>
+
+      <ol
+        id="step-list"
+        class="step-list"
+        aria-label="Angiography report steps"
+        data-current="0"
+      ><!-- step-list-items injected by js/form-app.js --></ol>
+    </div>
+  </header>
+
+  <main>
+    <div class="intro">
+      <p>
+        Complete the seven report sections below after a vascular angiographic
+        examination has been performed. The wizard is one continuous page: the
+        reporting clinician scrolls through the sections in order, and a live
+        four-axis interpretation grade updates in the final section as the
+        report is edited. Answers are saved automatically in your browser as
+        you go.
+      </p>
+      <p>
+        A critical structured finding — active extravasation, dissection,
+        occlusion, or a near-occlusive stenosis — auto-escalates the follow-up
+        urgency to a critical alert: communicate the result directly to the
+        referrer and record the conversation before sign-off, in line with RCR
+        standards for the interpretation and reporting of imaging
+        investigations.
+      </p>
+    </div>
+
+    <form
+      id="result-form"
+      class="form"
+      autocomplete="off"
+      novalidate
+      onsubmit="return false;"
+      aria-label="Angiography test result"
+    >
+      <div
+        id="error-summary"
+        class="error-summary"
+        role="alert"
+        aria-label="Validation errors"
+        hidden
+      ></div>
+
+      <div id="form-sections">
+        <!-- Steps rendered by js/form-app.js: -->
+        <!-- 1 Report Identification, 2 Examination Details, -->
+        <!-- 3 Clinical History, 4 Findings, 5 Measurements, -->
+        <!-- 6 Impression, 7 Interpretation & Sign-off -->
+      </div>
+
+      <div class="button-group">
+        <button type="button" id="submit-btn" class="button" data-variant="primary">
+          Submit and view report
+        </button>
+        <button type="button" id="reset-btn" class="button" data-variant="secondary">
+          Start over
+        </button>
+      </div>
+    </form>
+
+    <section
+      id="report"
+      class="panel"
+      role="region"
+      aria-live="polite"
+      aria-label="Interpretation report"
+    >
+      <p class="empty-message">Submit the form to see the report.</p>
+    </section>
+
+    <footer class="page-footer">
+      <p>
+        This structured angiography report is aligned with the Royal College of
+        Radiologists (RCR) standards for the interpretation and reporting of
+        imaging investigations, NASCET / ECST arterial-stenosis grading
+        conventions, and IR(ME)R 2017. The four-axis grade is a reporting aid,
+        not a diagnosis; interpret and escalate in line with local policy and
+        clinical judgement.
+      </p>
+    </footer>
+  </main>
+
+  <!--
+    Classic <script> tags (no `type="module"`) so the page works when opened
+    directly via file:// — browsers block ES-module imports from file:// for
+    CORS reasons, but allow ordered classic scripts. Each file attaches its
+    public symbols to `window.AngiographyTestResult`.
+
+    Load order: types -> rules -> grader -> flags -> form-app.
+  -->
+  <script src="js/types.js"></script>
+  <script src="js/rules.js"></script>
+  <script src="js/grader.js"></script>
+  <script src="js/flags.js"></script>
+  <script src="js/form-app.js"></script>
+</body>
+</html>

@@ -56,7 +56,7 @@ Required artefacts and their current status:
 | `fhir` | generated |
 | `protobuf` | generated |
 | `openapi` | generated — not implemented |
-| `front-end-with-html` | HTML + Lily (wizard + dashboard) — not implemented |
+| `front-end-with-html` | HTML + Lily (wizard + dashboard) |
 | `front-end-with-svelte` | SvelteKit (wizard + dashboard) |
 | `back-end-with-loco` | Rust + Loco JSON API |
 

@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Blood Test Result — structured pathology report</title>
+  <meta name="description" content="Clinician-completed blood / pathology test result: specimen details, quantitative analyte result values across the common panels, interpretation summary and impression, with a four-axis interpretation grade (classification, severity, completeness, follow-up urgency) and critical-result alerts.">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <a class="skip-link visually-hidden" href="#form-sections">Skip to questionnaire</a>
+
+  <header class="page-header">
+    <div class="page-header-inner">
+      <h1>Blood Test Result</h1>
+      <p class="subtitle">Structured pathology report: specimen, analyte result values, interpretation summary, impression, and a four-axis grade.</p>
+      <p class="subtitle"><a href="dashboard.html">View the clinician dashboard →</a></p>
+
+      <progress
+        id="progress"
+        class="progress"
+        max="100"
+        value="0"
+        aria-label="Form completion"
+      ></progress>
+      <p id="progress-text" class="subtitle" aria-live="polite">0 fields answered (0%)</p>
+
+      <ol
+        id="step-list"
+        class="step-list"
+        aria-label="Blood report steps"
+        data-current="0"
+      ><!-- step-list-items injected by js/form-app.js --></ol>
+    </div>
+  </header>
+
+  <main>
+    <div class="intro">
+      <p>
+        Complete the seven report sections below after a blood / pathology test
+        has been performed. Record the report identification, the specimen type
+        and condition, the clinical history and any comparison with previous
+        results, the quantitative analyte values the laboratory measured
+        (grouped by panel — FBC, U&amp;E / renal, LFT, inflammation, glycaemic,
+        endocrine, haematinics, coagulation), the structured interpretation
+        summary, and the impression. Answers are saved automatically in your
+        browser as you go.
+      </p>
+      <p>
+        Values are interpreted against laboratory reference ranges and critical
+        (panic) values. A critical (panic) value auto-escalates the result
+        classification to critical and the follow-up urgency to a critical
+        alert; communicate it directly to the requester and document the
+        conversation.
+      </p>
+    </div>
+
+    <form
+      id="report-form"
+      class="form"
+      autocomplete="off"
+      novalidate
+      onsubmit="return false;"
+      aria-label="Blood test result report"
+    >
+      <div
+        id="error-summary"
+        class="error-summary"
+        role="alert"
+        aria-label="Validation errors"
+        hidden
+      ></div>
+
+      <div id="form-sections">
+        <!-- Steps rendered by js/form-app.js: -->
+        <!-- 1 Report identification, 2 Specimen details, -->
+        <!-- 3 Clinical history, 4 Result values, -->
+        <!-- 5 Interpretation summary, 6 Impression, -->
+        <!-- 7 Interpretation and sign-off -->
+      </div>
+
+      <div class="button-group">
+        <button type="button" id="submit-btn" class="button" data-variant="primary">
+          Submit and view report
+        </button>
+        <button type="button" id="reset-btn" class="button" data-variant="secondary">
+          Start over
+        </button>
+      </div>
+    </form>
+
+    <section
+      id="report"
+      class="panel"
+      role="region"
+      aria-live="polite"
+      aria-label="Structured pathology report"
+    >
+      <p class="empty-message">Submit the form to see the structured report.</p>
+    </section>
+
+    <footer class="page-footer">
+      <p>
+        This structured pathology report is aligned with RCPath
+        actionable-reporting standards, NICE CKD (eGFR) staging, and the
+        WHO/IFCC HbA1c diagnostic thresholds, including critical (panic) value
+        communication requirements. It is a reporting aid, not a diagnosis;
+        interpret and act in line with local laboratory reference ranges,
+        critical-value policies, and clinical judgement.
+      </p>
+    </footer>
+  </main>
+
+  <!--
+    Classic <script> tags (no `type="module"`) so the page works when opened
+    directly via file:// — browsers block ES-module imports from file:// for
+    CORS reasons, but allow ordered classic scripts. Each file attaches its
+    public symbols to `window.BloodTestResult`.
+
+    Load order: types -> rules -> flags -> grader -> form-app
+    (grader.js composes the axis rules and the flag detector).
+  -->
+  <script src="js/types.js"></script>
+  <script src="js/rules.js"></script>
+  <script src="js/flags.js"></script>
+  <script src="js/grader.js"></script>
+  <script src="js/form-app.js"></script>
+</body>
+</html>

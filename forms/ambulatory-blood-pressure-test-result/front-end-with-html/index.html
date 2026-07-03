@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Ambulatory Blood Pressure (ABPM) Test Result — report entry</title>
+  <meta name="description" content="Ambulatory blood pressure (ABPM) test-result report entry: recording adequacy, averaged daytime/nighttime/24-hour blood pressures, nocturnal dipping, structured interpretation, and a four-axis interpretation grade with safety flags.">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <a class="skip-link visually-hidden" href="#form-sections">Skip to questionnaire</a>
+
+  <header class="page-header">
+    <div class="page-header-inner">
+      <h1>Ambulatory Blood Pressure (ABPM) Test Result</h1>
+      <p class="subtitle">Report entry: recording adequacy, averaged blood pressures, nocturnal dipping, interpretation, and sign-off.</p>
+      <p class="subtitle"><a href="dashboard.html">View the clinician dashboard →</a></p>
+
+      <progress
+        id="progress"
+        class="progress"
+        max="100"
+        value="0"
+        aria-label="Form completion"
+      ></progress>
+      <p id="progress-text" class="subtitle" aria-live="polite">0 fields answered (0%)</p>
+
+      <ol
+        id="step-list"
+        class="step-list"
+        aria-label="ABPM report sections"
+        data-current="0"
+      ><!-- step-list-items injected by js/form-app.js --></ol>
+    </div>
+  </header>
+
+  <main>
+    <div class="intro">
+      <p>
+        Complete the seven report sections below for an ambulatory blood
+        pressure (or home) monitoring study. The four-axis interpretation
+        grade — classification, abnormality severity, report completeness,
+        and follow-up urgency — is computed live as you type and finalised on
+        submission. Answers are saved automatically in your browser as you go.
+      </p>
+      <p>
+        Thresholds follow NICE NG136 / BIHS / ESH ambulatory averages: daytime
+        &gt;= 135/85 mmHg confirms hypertension, and any average &gt;= 150/95
+        mmHg (equivalent to clinic &gt;= 180/120) is a severe-hypertension
+        result that auto-escalates the follow-up urgency to a critical alert
+        requiring same-day specialist review.
+      </p>
+    </div>
+
+    <form
+      id="assessment-form"
+      class="form"
+      autocomplete="off"
+      novalidate
+      onsubmit="return false;"
+      aria-label="Ambulatory blood pressure test result"
+    >
+      <div
+        id="error-summary"
+        class="error-summary"
+        role="alert"
+        aria-label="Validation errors"
+        hidden
+      ></div>
+
+      <div id="form-sections">
+        <!-- Steps rendered by js/form-app.js: -->
+        <!-- 1 Report identification, 2 Recording adequacy, -->
+        <!-- 3 Clinical history, 4 Average blood pressures, -->
+        <!-- 5 Nocturnal dipping and findings, 6 Impression, -->
+        <!-- 7 Interpretation and sign-off -->
+      </div>
+
+      <div class="button-group">
+        <button type="button" id="submit-btn" class="button" data-variant="primary">
+          Compute grade and view report
+        </button>
+        <button type="button" id="reset-btn" class="button" data-variant="secondary">
+          Start over
+        </button>
+      </div>
+    </form>
+
+    <section
+      id="report"
+      class="panel"
+      role="region"
+      aria-live="polite"
+      aria-label="Graded report"
+    >
+      <p class="empty-message">Submit the form to see the graded report.</p>
+    </section>
+
+    <footer class="page-footer">
+      <p>
+        Interpretation thresholds are drawn from NICE NG136 (Hypertension in
+        adults: diagnosis and management), the British and Irish Hypertension
+        Society (BIHS) guidance, and the European Society of Hypertension
+        (ESH) ABPM position statements. This tool supports structured report
+        entry and is not a diagnosis; interpret and act in line with local
+        policy and clinical judgement.
+      </p>
+    </footer>
+  </main>
+
+  <!--
+    Classic <script> tags (no `type="module"`) so the page works when opened
+    directly via file:// — browsers block ES-module imports from file:// for
+    CORS reasons, but allow ordered classic scripts. Each file attaches its
+    public symbols to `window.AmbulatoryBloodPressureTestResult`.
+
+    Load order: types -> rules -> grader -> flags -> form-app.
+  -->
+  <script src="js/types.js"></script>
+  <script src="js/rules.js"></script>
+  <script src="js/grader.js"></script>
+  <script src="js/flags.js"></script>
+  <script src="js/form-app.js"></script>
+</body>
+</html>

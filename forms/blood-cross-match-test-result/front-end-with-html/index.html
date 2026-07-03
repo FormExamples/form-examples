@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Blood Cross-Match Test Result — transfusion-compatibility report</title>
+  <meta name="description" content="Blood cross-match / transfusion-compatibility result report: ABO/RhD grouping, antibody screen, crossmatch outcome, identity-safety checks, and a four-axis interpretation grade with an automatic critical-result alert.">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <a class="skip-link visually-hidden" href="#form-sections">Skip to report form</a>
+
+  <header class="page-header">
+    <div class="page-header-inner">
+      <h1>Blood Cross-Match Test Result</h1>
+      <p class="subtitle">Transfusion-compatibility report: ABO/RhD grouping, antibody screen, crossmatch outcome, identity-safety checks, and a four-axis interpretation grade.</p>
+      <p class="subtitle"><a href="dashboard.html">View the clinician dashboard →</a></p>
+
+      <progress
+        id="progress"
+        class="progress"
+        max="100"
+        value="0"
+        aria-label="Form completion"
+      ></progress>
+      <p id="progress-text" class="subtitle" aria-live="polite">0 fields answered (0%)</p>
+
+      <ol
+        id="step-list"
+        class="step-list"
+        aria-label="Blood cross-match report steps"
+        data-current="0"
+      ><!-- step-list-items injected by js/form-app.js --></ol>
+    </div>
+  </header>
+
+  <main>
+    <div class="intro">
+      <p>
+        Complete the seven report sections below after pre-transfusion testing
+        has been performed in the transfusion laboratory. The engine grades the
+        report on four axes — result classification, abnormality severity,
+        report completeness, and follow-up urgency — and raises safety-critical
+        flags, including an automatic critical-result alert for an incompatible
+        crossmatch, clinically-significant antibodies, an ABO discrepancy, or an
+        unmet two-sample group-check rule. Answers are saved automatically in
+        your browser as you go.
+      </p>
+      <p>
+        This report is the result counterpart to the blood cross-match test
+        request. It is completed by a biomedical scientist, transfusion
+        practitioner, or consultant haematologist — not by the patient — and is
+        aligned with BSH pre-transfusion compatibility guidance, NICE NG24, and
+        the SHOT recommendations on positive patient identification.
+      </p>
+    </div>
+
+    <form
+      id="report-form"
+      class="form"
+      autocomplete="off"
+      novalidate
+      onsubmit="return false;"
+      aria-label="Blood cross-match test result report"
+    >
+      <div
+        id="error-summary"
+        class="error-summary"
+        role="alert"
+        aria-label="Validation errors"
+        hidden
+      ></div>
+
+      <div id="form-sections">
+        <!-- Steps rendered by js/form-app.js: -->
+        <!-- 1 Report identification, 2 Clinical context, -->
+        <!-- 3 ABO / RhD grouping, 4 Antibody screen, -->
+        <!-- 5 Crossmatch and components, 6 Identity and overall result, -->
+        <!-- 7 Interpretation and sign-off -->
+      </div>
+
+      <div class="button-group">
+        <button type="button" id="submit-btn" class="button" data-variant="primary">
+          Submit and view report
+        </button>
+        <button type="button" id="reset-btn" class="button" data-variant="secondary">
+          Start over
+        </button>
+      </div>
+    </form>
+
+    <section
+      id="report"
+      class="panel"
+      role="region"
+      aria-live="polite"
+      aria-label="Interpretation report"
+    >
+      <p class="empty-message">Submit the form to see the report.</p>
+    </section>
+
+    <footer class="page-footer">
+      <p>
+        This transfusion-compatibility report form is aligned with British
+        Society for Haematology (BSH) pre-transfusion compatibility guidance,
+        NICE NG24 Blood transfusion, and the Serious Hazards of Transfusion
+        (SHOT) recommendations on the two-sample group-check rule and the
+        prevention of ABO-incompatible transfusion and Wrong Blood in Tube. It
+        is a documentation and decision-support tool, not a substitute for
+        laboratory standard operating procedures or clinical judgement.
+      </p>
+    </footer>
+  </main>
+
+  <!--
+    Classic <script> tags (no `type="module"`) so the page works when opened
+    directly via file:// — browsers block ES-module imports from file:// for
+    CORS reasons, but allow ordered classic scripts. Each file attaches its
+    public symbols to `window.BloodCrossMatchTestResult`.
+
+    Load order: types -> rules -> grader -> flags -> form-app.
+  -->
+  <script src="js/types.js"></script>
+  <script src="js/rules.js"></script>
+  <script src="js/grader.js"></script>
+  <script src="js/flags.js"></script>
+  <script src="js/form-app.js"></script>
+</body>
+</html>

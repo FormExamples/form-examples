@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Cardiac Stress Test Result — structured cardiac stress report</title>
+  <meta name="description" content="Clinician-completed cardiac stress test result: performed modality and protocol, haemodynamic and exercise response, structured findings, Duke treadmill score, interpretation and impression, with a four-axis interpretation grade (classification, severity, completeness, follow-up urgency) and critical-result alerts.">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <a class="skip-link visually-hidden" href="#form-sections">Skip to questionnaire</a>
+
+  <header class="page-header">
+    <div class="page-header-inner">
+      <h1>Cardiac Stress Test Result</h1>
+      <p class="subtitle">Structured cardiac stress report: modality and protocol, haemodynamic response, findings, Duke treadmill score, impression, and a four-axis grade.</p>
+      <p class="subtitle"><a href="dashboard.html">View the clinician dashboard →</a></p>
+
+      <progress
+        id="progress"
+        class="progress"
+        max="100"
+        value="0"
+        aria-label="Form completion"
+      ></progress>
+      <p id="progress-text" class="subtitle" aria-live="polite">0 fields answered (0%)</p>
+
+      <ol
+        id="step-list"
+        class="step-list"
+        aria-label="Cardiac stress report steps"
+        data-current="0"
+      ><!-- step-list-items injected by js/form-app.js --></ol>
+    </div>
+  </header>
+
+  <main>
+    <div class="intro">
+      <p>
+        Complete the seven report sections below after a cardiac stress test
+        has been performed. Record the performed modality and protocol, the
+        clinical history, the haemodynamic and exercise response (peak heart
+        rate, functional capacity in METs, and blood-pressure response), the
+        structured ECG / symptom / arrhythmia findings with the overall
+        conclusion, the Duke treadmill prognostic score, and the clinical
+        interpretation and impression. Answers are saved automatically in
+        your browser as you go.
+      </p>
+      <p>
+        A strongly positive test, exertional hypotension, ischaemia induced at
+        a low workload, or a high-risk Duke treadmill score (≤&nbsp;−11) is a
+        critical result: it auto-escalates the follow-up urgency to a critical
+        alert and must be communicated directly to the referrer.
+      </p>
+    </div>
+
+    <form
+      id="report-form"
+      class="form"
+      autocomplete="off"
+      novalidate
+      onsubmit="return false;"
+      aria-label="Cardiac stress test result report"
+    >
+      <div
+        id="error-summary"
+        class="error-summary"
+        role="alert"
+        aria-label="Validation errors"
+        hidden
+      ></div>
+
+      <div id="form-sections">
+        <!-- Steps rendered by js/form-app.js: -->
+        <!-- 1 Report identification, 2 Examination details, -->
+        <!-- 3 Haemodynamic and exercise response, 4 Findings, -->
+        <!-- 5 Prognostic score, 6 Impression, -->
+        <!-- 7 Interpretation and sign-off -->
+      </div>
+
+      <div class="button-group">
+        <button type="button" id="submit-btn" class="button" data-variant="primary">
+          Submit and view report
+        </button>
+        <button type="button" id="reset-btn" class="button" data-variant="secondary">
+          Start over
+        </button>
+      </div>
+    </form>
+
+    <section
+      id="report"
+      class="panel"
+      role="region"
+      aria-live="polite"
+      aria-label="Structured cardiac stress report"
+    >
+      <p class="empty-message">Submit the form to see the structured report.</p>
+    </section>
+
+    <footer class="page-footer">
+      <p>
+        This structured cardiac stress report is aligned with ACC/AHA
+        exercise-testing reporting standards, including the Duke treadmill
+        score risk bands (≥&nbsp;+5 low risk, −10 to +4 intermediate,
+        ≤&nbsp;−11 high risk), the ≥85% age-predicted heart-rate adequacy
+        threshold, and the critical-result triggers (strongly positive test,
+        exertional hypotension, ischaemia at low workload, high-risk Duke
+        score). It is a reporting aid, not a diagnosis; interpret and act in
+        line with local cardiology pathways and clinical judgement.
+      </p>
+    </footer>
+  </main>
+
+  <!--
+    Classic <script> tags (no `type="module"`) so the page works when opened
+    directly via file:// — browsers block ES-module imports from file:// for
+    CORS reasons, but allow ordered classic scripts. Each file attaches its
+    public symbols to `window.CardiacStressTestResult`.
+
+    Load order: types -> rules -> flags -> grader -> form-app
+    (grader.js composes the axis rules and the flag detector).
+  -->
+  <script src="js/types.js"></script>
+  <script src="js/rules.js"></script>
+  <script src="js/flags.js"></script>
+  <script src="js/grader.js"></script>
+  <script src="js/form-app.js"></script>
+</body>
+</html>
