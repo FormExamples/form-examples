@@ -1,0 +1,79 @@
+#!/bin/sh
+set -u
+
+# test-sql-apply: apply each form's numbered SQL migrations, in filename
+# order, to a fresh scratch PostgreSQL database. This is the gate that
+# proves the sql/ directory is a working migration set (no missing
+# extensions, no child-before-parent ordering, no duplicate CREATEs, no
+# syntax errors) — not just files that look right.
+#
+# Syntax:
+#
+#     test-sql-apply              # gate every form
+#     test-sql-apply <slug> ...   # gate only the named forms
+#
+# Environment:
+#
+#     PGHOST (default localhost), PGPORT (default 5432),
+#     PGUSER (default loco) — connection for createdb/dropdb/psql.
+#
+# Exit status is non-zero if any form fails, with one line per failure
+# naming the first file that errored and the first error line.
+
+PGHOST="${PGHOST:-localhost}"
+PGPORT="${PGPORT:-5432}"
+PGUSER="${PGUSER:-loco}"
+export PGHOST PGPORT PGUSER
+
+top="$(git rev-parse --show-toplevel)" || exit 1
+scratch_db="sql_apply_gate_$$"
+err_file="$(mktemp)"
+trap 'rm -f "$err_file"; dropdb --if-exists "$scratch_db" 2>/dev/null' EXIT
+
+if test "$#" -gt 0; then
+    forms="$*"
+else
+    forms="$(ls "$top/forms" | while read -r d; do
+        test -d "$top/forms/$d/sql" && echo "$d"
+    done)"
+fi
+
+pass=0
+fail=0
+for form in $forms; do
+    dir="$top/forms/$form/sql"
+    if ! test -d "$dir"; then
+        echo "FAIL $form :: no sql/ directory"
+        echo x >> "$err_file"
+        fail=$((fail + 1))
+        continue
+    fi
+    dropdb --if-exists "$scratch_db" 2>/dev/null
+    if ! createdb "$scratch_db" 2>/dev/null; then
+        echo "FAIL $form :: createdb $scratch_db failed (is Postgres up?)"
+        echo x >> "$err_file"
+        fail=$((fail + 1))
+        continue
+    fi
+    ok=1
+    for f in "$dir"/[0-9]*.sql; do
+        test -e "$f" || continue
+        if ! out="$(psql --dbname="$scratch_db" --quiet --file="$f" \
+                    -v ON_ERROR_STOP=1 2>&1 >/dev/null)"; then
+            first="$(printf %s "$out" | head -1)"
+            echo "FAIL $form :: ${f#"$top"/} :: $first"
+            echo x >> "$err_file"
+            ok=0
+            break
+        fi
+    done
+    if test "$ok" = 1; then
+        pass=$((pass + 1))
+    else
+        fail=$((fail + 1))
+    fi
+done
+
+echo "test-sql-apply: PASS=$pass FAIL=$fail"
+test -s "$err_file" && exit 1
+exit 0

@@ -21,6 +21,7 @@ schema changes. See `spec.md` §10 for the spec-driven workflow.
 - `bin/forms-as-kebab-case` — list all form directory slugs
 - `bin/test` — run all form validation tests
 - `bin/test-form <slug>` — test a single form by slug
+- `bin/test-sql-apply [<slug>…]` — apply every form's numbered SQL migrations in order to a fresh scratch Postgres database; the executable gate for `sql/` correctness
 - `bin/test-tools` — smoke-test every Lily-system tool's `--check` / `--counts` / `--help` modes
 - `bin/create-form <slug>` — scaffold a new form directory
 - `bin/update` — run the `update / upgrade / fix / harmonize / audit / test` Claude Code prompt against the repo
@@ -156,6 +157,7 @@ See the per-stack agent docs:
 
 ```sh
 bin/test                              # validates every form's structure
+bin/test-sql-apply                    # SQL apply gate: every form's migrations on a fresh scratch DB
 bin/lily-html-refactor --check --all  # Lily HTML contract drift detector
 bin/lily-sync --check                 # Lily HTML spec-snapshot drift detector
 bin/lily-svelte-refactor --check --all # Lily Svelte contract drift detector
