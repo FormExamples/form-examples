@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Hearing Test Result — structured audiology report</title>
+  <meta name="description" content="Clinician-completed hearing test result: performed test type and reliability, per-ear pure-tone averages and interpretation, tympanometry, structured findings, and impression, with a four-axis interpretation grade (classification, severity, completeness, follow-up urgency) and critical-result alerts.">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <a class="skip-link visually-hidden" href="#form-sections">Skip to questionnaire</a>
+
+  <header class="page-header">
+    <div class="page-header-inner">
+      <h1>Hearing Test Result</h1>
+      <p class="subtitle">Structured audiology report: test details, per-ear audiometry, structured findings, impression, and a four-axis grade.</p>
+      <p class="subtitle"><a href="dashboard.html">View the clinician dashboard →</a></p>
+
+      <progress
+        id="progress"
+        class="progress"
+        max="100"
+        value="0"
+        aria-label="Form completion"
+      ></progress>
+      <p id="progress-text" class="subtitle" aria-live="polite">0 fields answered (0%)</p>
+
+      <ol
+        id="step-list"
+        class="step-list"
+        aria-label="Audiology report steps"
+        data-current="0"
+      ><!-- step-list-items injected by js/form-app.js --></ol>
+    </div>
+  </header>
+
+  <main>
+    <div class="intro">
+      <p>
+        Complete the seven report sections below after an audiological
+        examination has been performed. Record the performed test and its
+        reliability, the clinical history, the per-ear pure-tone averages with
+        the hearing-loss type and severity (BSA audiometric descriptors) and
+        tympanogram types (Jerger), the narrative and structured findings, and
+        the clinical impression and recommended follow-up. Answers are saved
+        automatically in your browser as you go.
+      </p>
+      <p>
+        Sudden sensorineural hearing loss is an otological emergency, and a
+        marked asymmetry between ears is a red flag for retrocochlear
+        pathology: either finding auto-escalates the follow-up urgency to a
+        critical alert. Interpret every result against the clinical question
+        per BSA recommended procedures and NICE NG98.
+      </p>
+    </div>
+
+    <form
+      id="report-form"
+      class="form"
+      autocomplete="off"
+      novalidate
+      onsubmit="return false;"
+      aria-label="Hearing test result report"
+    >
+      <div
+        id="error-summary"
+        class="error-summary"
+        role="alert"
+        aria-label="Validation errors"
+        hidden
+      ></div>
+
+      <div id="form-sections">
+        <!-- Steps rendered by js/form-app.js: -->
+        <!-- 1 Report identification, 2 Test details, -->
+        <!-- 3 Clinical history, 4 Audiometry and interpretation, -->
+        <!-- 5 Findings, 6 Impression, -->
+        <!-- 7 Interpretation and sign-off -->
+      </div>
+
+      <div class="button-group">
+        <button type="button" id="submit-btn" class="button" data-variant="primary">
+          Submit and view report
+        </button>
+        <button type="button" id="reset-btn" class="button" data-variant="secondary">
+          Start over
+        </button>
+      </div>
+    </form>
+
+    <section
+      id="report"
+      class="panel"
+      role="region"
+      aria-live="polite"
+      aria-label="Structured audiology report"
+    >
+      <p class="empty-message">Submit the form to see the structured report.</p>
+    </section>
+
+    <footer class="page-footer">
+      <p>
+        This structured audiology report is aligned with the British Society
+        of Audiology recommended procedures and audiometric descriptors, NICE
+        NG98 (hearing loss in adults), NICE Quality Standard QS185, and ENT-UK
+        sudden sensorineural hearing loss guidance, including the automatic
+        critical-result alert for sudden sensorineural loss and marked
+        asymmetry. It is a reporting aid, not a diagnosis; interpret and act
+        in line with local audiology and ENT pathways and clinical judgement.
+      </p>
+    </footer>
+  </main>
+
+  <!--
+    Classic <script> tags (no `type="module"`) so the page works when opened
+    directly via file:// — browsers block ES-module imports from file:// for
+    CORS reasons, but allow ordered classic scripts. Each file attaches its
+    public symbols to `window.HearingTestResult`.
+
+    Load order: types -> rules -> flags -> grader -> form-app
+    (grader.js composes the axis rules and the flag detector).
+  -->
+  <script src="js/types.js"></script>
+  <script src="js/rules.js"></script>
+  <script src="js/flags.js"></script>
+  <script src="js/grader.js"></script>
+  <script src="js/form-app.js"></script>
+</body>
+</html>

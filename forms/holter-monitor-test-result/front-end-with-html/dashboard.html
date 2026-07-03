@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Holter Monitor Test Result — clinician dashboard</title>
+  <meta name="description" content="Holter monitor test result clinician dashboard: review graded ambulatory ECG reports with result classification, abnormality severity, follow-up urgency, report completeness, and safety-flag counts.">
+  <link rel="stylesheet" href="css/dashboard.css">
+</head>
+<body>
+  <a class="skip-link" href="#reports-table">Skip to reports table</a>
+
+  <header class="page-header">
+    <div class="page-header-inner">
+      <h1>Holter Monitor Test Result — Clinician Dashboard</h1>
+      <p class="subtitle">
+        Four-axis interpretation grades for completed ambulatory ECG (Holter)
+        reports: classification, severity, follow-up urgency, completeness,
+        and safety flags.
+      </p>
+      <p class="subtitle"><a href="index.html">← New Holter report</a></p>
+    </div>
+  </header>
+
+  <main>
+    <!-- Status banner: shown when backend fetch fails and we fall back -->
+    <div
+      id="status-banner"
+      class="alert" data-type="warning"
+      role="status"
+      aria-live="polite"
+      hidden
+    ></div>
+
+    <!-- Filter bar -->
+    <section
+      class="filter-bar"
+      aria-labelledby="filter-bar-heading"
+    >
+      <h2 id="filter-bar-heading" class="visually-hidden">Filters</h2>
+
+      <div class="filter-grid">
+        <div class="filter-field filter-field-search">
+          <label for="filter-search">Search</label>
+          <input
+            id="filter-search"
+            type="search"
+            class="text-input"
+            placeholder="Report ID or patient name..."
+            autocomplete="off"
+          >
+        </div>
+
+        <div class="filter-field">
+          <label for="filter-monitor-type">Monitor type</label>
+          <select id="filter-monitor-type" class="select">
+            <option value="">All monitor types</option>
+            <option value="24-hour">24-hour</option>
+            <option value="48-hour">48-hour</option>
+            <option value="7-day">7-day</option>
+            <option value="14-day">14-day</option>
+            <option value="event-recorder">Event recorder</option>
+            <option value="implantable-loop-recorder">Implantable loop recorder</option>
+            <option value="other">Other</option>
+          </select>
+        </div>
+
+        <div class="filter-field">
+          <label for="filter-classification">Classification</label>
+          <select id="filter-classification" class="select">
+            <option value="">All classifications</option>
+            <option value="normal">Normal</option>
+            <option value="abnormal">Abnormal</option>
+            <option value="critical">Critical</option>
+            <option value="inconclusive">Inconclusive</option>
+          </select>
+        </div>
+
+        <div class="filter-field">
+          <label for="filter-urgency">Follow-up urgency</label>
+          <select id="filter-urgency" class="select">
+            <option value="">All urgencies</option>
+            <option value="routine">Routine</option>
+            <option value="recommended">Recommended</option>
+            <option value="urgent">Urgent</option>
+            <option value="critical-alert">Critical alert</option>
+          </select>
+        </div>
+
+        <div class="filter-field filter-field-actions">
+          <button
+            type="button"
+            id="filter-clear-btn"
+            class="button" data-variant="secondary"
+            hidden
+          >
+            Clear filters
+          </button>
+        </div>
+      </div>
+
+      <div class="filter-summary">
+        <span id="filter-count">Loading reports...</span>
+      </div>
+    </section>
+
+    <!-- Reports table -->
+    <section
+      class="table-card"
+      aria-labelledby="reports-table-heading"
+    >
+      <h2 id="reports-table-heading" class="visually-hidden">Graded reports</h2>
+
+      <div class="table-scroll">
+        <table id="reports-table" class="patients-table">
+          <thead>
+            <tr id="reports-table-head">
+              <!-- Sortable column headers built by dashboard-app.js -->
+            </tr>
+          </thead>
+          <tbody id="reports-table-body">
+            <!-- Data rows built by dashboard-app.js -->
+          </tbody>
+        </table>
+      </div>
+
+      <p
+        id="reports-empty-message"
+        class="empty-message"
+        hidden
+      >
+        No reports match the current filters.
+      </p>
+    </section>
+
+    <footer class="page-footer">
+      <p>
+        The four-axis interpretation grade (result classification, abnormality
+        severity, report completeness, and follow-up urgency) is aligned with
+        ACC/AHA and ISHNE-HRS ambulatory ECG reporting guidance. This
+        dashboard is a clinical-review tool and is not a diagnosis; a critical
+        alert requires direct communication with the referrer per local
+        policy.
+      </p>
+    </footer>
+  </main>
+
+  <!--
+    Classic <script> tags (no `type="module"`) so the page works when opened
+    directly via file://. Each file attaches its public symbols to
+    `window.HolterMonitorTestResultDashboard` (display labels come from the
+    shared form namespace in js/types.js).
+
+    Load order: types -> dashboard-types -> data -> api -> app
+    (each depends on those above).
+  -->
+  <script src="js/types.js"></script>
+  <script src="js/dashboard-types.js"></script>
+  <script src="js/data.js"></script>
+  <script src="js/api.js"></script>
+  <script src="js/dashboard-app.js"></script>
+</body>
+</html>
