@@ -1,0 +1,146 @@
+// Safety-critical flag detection for the Nuclear Medicine Test Result.
+//
+// Faithful vanilla-JavaScript port of the SvelteKit engine module
+// `src/lib/engine/flagged-issues.ts`. Flag IDs, categories, priorities,
+// descriptions, and suggested actions are stable and identical across every
+// front-end and the back-end; categories mirror
+// `sql/07_create_table_nuclear_medicine_test_result_grade_flag.sql`.
+//
+// Flags are detected independently of the four grading axes and are returned
+// sorted high → medium → low priority.
+
+/**
+ * @typedef {import('./types.js').NuclearMedicineResult} NuclearMedicineResult
+ * @typedef {import('./types.js').Flag} Flag
+ * @typedef {import('./types.js').FlagPriority} FlagPriority
+ */
+
+// Wrapped in an IIFE; published via window.NuclearMedicineTestResult.
+// Depends on rules.js (hasCriticalFinding), so it must load after it.
+(function () {
+'use strict';
+window.NuclearMedicineTestResult = window.NuclearMedicineTestResult || {};
+const { hasCriticalFinding } = window.NuclearMedicineTestResult;
+
+/**
+ * Detect safety-critical flags independently of the four axes.
+ * @param {NuclearMedicineResult} r
+ * @returns {Flag[]} flags sorted high → medium → low priority
+ */
+function detectFlags(r) {
+  /** @type {Flag[]} */
+  const flags = [];
+
+  // --- critical-result-alert (auto-raised with a critical finding) ---
+  if (hasCriticalFinding(r)) {
+    flags.push({
+      flagId: 'F-CRITICAL-RESULT-001',
+      category: 'critical-result-alert',
+      priority: 'high',
+      description:
+        'A critical finding (high-probability PE on V/Q, or a widespread metastatic pattern) is present.',
+      suggestedAction:
+        'Communicate the critical result to the referrer immediately and document the communication.'
+    });
+
+    // critical result that has not yet been communicated
+    if (!r.criticalResultCommunicated) {
+      flags.push({
+        flagId: 'F-CRITICAL-RESULT-002',
+        category: 'critical-result-alert',
+        priority: 'high',
+        description: 'Critical finding present but the result has not been recorded as communicated.',
+        suggestedAction: 'Contact the referrer now and record who was informed, with date and time.'
+      });
+    }
+  }
+
+  // --- abnormal-requiring-action ---
+  if (r.abnormalUptake && !hasCriticalFinding(r)) {
+    flags.push({
+      flagId: 'F-ABNORMAL-ACTION-001',
+      category: 'abnormal-requiring-action',
+      priority: 'high',
+      description: 'Abnormal tracer uptake requiring timely action is present.',
+      suggestedAction: 'Ensure the referrer is alerted and a clear action plan is documented.'
+    });
+  }
+
+  // --- urgent-referral ---
+  if (r.perfusionDefect || r.photopenicArea) {
+    flags.push({
+      flagId: 'F-URGENT-REFERRAL-001',
+      category: 'urgent-referral',
+      priority: 'medium',
+      description: 'A perfusion defect or photopenic area is present and may warrant urgent referral.',
+      suggestedAction: 'Consider urgent referral to the appropriate specialist team.'
+    });
+  }
+
+  // --- inadequate-technique ---
+  if (r.examinationAdequacy === 'non-diagnostic' || r.examinationAdequacy === 'limited') {
+    flags.push({
+      flagId: 'F-INADEQUATE-TECHNIQUE-001',
+      category: 'inadequate-technique',
+      priority: r.examinationAdequacy === 'non-diagnostic' ? 'high' : 'medium',
+      description: `Examination adequacy is ${r.examinationAdequacy}; diagnostic confidence may be reduced.`,
+      suggestedAction: 'Consider repeating or supplementing the examination to reach diagnostic quality.'
+    });
+  }
+
+  // --- incidental-finding ---
+  if (r.incidentalFinding) {
+    flags.push({
+      flagId: 'F-INCIDENTAL-FINDING-001',
+      category: 'incidental-finding',
+      priority: 'low',
+      description: 'One or more incidental findings are documented.',
+      suggestedAction: 'Manage the incidental finding per the relevant structured pathway.'
+    });
+  }
+
+  // --- missing-impression ---
+  if (r.impression.trim() === '') {
+    flags.push({
+      flagId: 'F-MISSING-IMPRESSION-001',
+      category: 'missing-impression',
+      priority: 'medium',
+      description: 'No impression / conclusion has been recorded.',
+      suggestedAction: 'Add an impression that answers the clinical question.'
+    });
+  }
+
+  // --- missing-measurement ---
+  if (r.scanType === 'myocardial-perfusion' && r.ejectionFractionPercent === null) {
+    flags.push({
+      flagId: 'F-MISSING-MEASUREMENT-001',
+      category: 'missing-measurement',
+      priority: 'low',
+      description: 'A gated cardiac study is reported but no ejection fraction was recorded.',
+      suggestedAction: 'Record the left-ventricular ejection fraction percentage for the gated study.'
+    });
+  }
+
+  // --- unexpected-finding (abnormal but no originating request linked) ---
+  if ((r.abnormalUptake || r.metastaticPattern) && r.originatingRequestReference.trim() === '') {
+    flags.push({
+      flagId: 'F-UNEXPECTED-FINDING-001',
+      category: 'unexpected-finding',
+      priority: 'low',
+      description: 'A significant finding is present but no originating request reference is recorded.',
+      suggestedAction: 'Link the report to the originating request to support discrepancy review.'
+    });
+  }
+
+  // Sort: high > medium > low
+  /** @type {Record<FlagPriority, number>} */
+  const priorityOrder = { high: 0, medium: 1, low: 2 };
+  flags.sort((a, b) => priorityOrder[a.priority] - priorityOrder[b.priority]);
+
+  return flags;
+}
+
+Object.assign(window.NuclearMedicineTestResult, {
+  detectFlags
+});
+})();
