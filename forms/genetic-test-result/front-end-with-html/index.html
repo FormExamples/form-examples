@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Genetic Test Result — structured genomic report</title>
+  <meta name="description" content="Clinician-completed genetic / genomic test result: test type and genes analysed, detected variants and their ACMG/AMP (ACGS) classification, interpretation and impression, with a four-axis interpretation grade (classification, severity, completeness, follow-up urgency) and critical-result alerts.">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <a class="skip-link visually-hidden" href="#form-sections">Skip to questionnaire</a>
+
+  <header class="page-header">
+    <div class="page-header-inner">
+      <h1>Genetic Test Result</h1>
+      <p class="subtitle">Structured genomic report: test details, detected variants and ACMG/AMP classification, interpretation, and a four-axis grade.</p>
+      <p class="subtitle"><a href="dashboard.html">View the clinician dashboard →</a></p>
+
+      <progress
+        id="progress"
+        class="progress"
+        max="100"
+        value="0"
+        aria-label="Form completion"
+      ></progress>
+      <p id="progress-text" class="subtitle" aria-live="polite">0 fields answered (0%)</p>
+
+      <ol
+        id="step-list"
+        class="step-list"
+        aria-label="Genomic report steps"
+        data-current="0"
+      ><!-- step-list-items injected by js/form-app.js --></ol>
+    </div>
+  </header>
+
+  <main>
+    <div class="intro">
+      <p>
+        Complete the seven report sections below after a genetic / genomic test
+        has been performed. Record the report identification, the test type and
+        genes analysed, the clinical context and inheritance pattern, the
+        detected variant(s) with their ACMG/AMP (ACGS) five-tier classification
+        and zygosity, the structured findings, and the clinical interpretation
+        and impression. Answers are saved automatically in your browser as you
+        go.
+      </p>
+      <p>
+        A pathogenic or likely-pathogenic actionable variant classifies the
+        result as critical, auto-escalates the follow-up urgency to a critical
+        alert, and raises the critical-result-alert and pathogenic-variant-found
+        flags regardless of the other axes. A variant of uncertain significance
+        (VUS) is interpreted as inconclusive; do not act clinically on a VUS
+        alone.
+      </p>
+    </div>
+
+    <form
+      id="report-form"
+      class="form"
+      autocomplete="off"
+      novalidate
+      onsubmit="return false;"
+      aria-label="Genetic test result report"
+    >
+      <div
+        id="error-summary"
+        class="error-summary"
+        role="alert"
+        aria-label="Validation errors"
+        hidden
+      ></div>
+
+      <div id="form-sections">
+        <!-- Steps rendered by js/form-app.js: -->
+        <!-- 1 Report identification, 2 Test details, -->
+        <!-- 3 Clinical context, 4 Findings, -->
+        <!-- 5 Interpretation, 6 Follow-up, -->
+        <!-- 7 Interpretation and sign-off -->
+      </div>
+
+      <div class="button-group">
+        <button type="button" id="submit-btn" class="button" data-variant="primary">
+          Submit and view report
+        </button>
+        <button type="button" id="reset-btn" class="button" data-variant="secondary">
+          Start over
+        </button>
+      </div>
+    </form>
+
+    <section
+      id="report"
+      class="panel"
+      role="region"
+      aria-live="polite"
+      aria-label="Structured genomic report"
+    >
+      <p class="empty-message">Submit the form to see the structured report.</p>
+    </section>
+
+    <footer class="page-footer">
+      <p>
+        This structured genomic report is aligned with ACMG/AMP and ACGS
+        variant-classification and genomic-reporting guidance, including the
+        five-tier classification (pathogenic, likely-pathogenic, uncertain
+        significance, likely-benign, benign), secondary-findings review, and
+        cascade-testing of at-risk relatives. It is a reporting aid, not a
+        diagnosis; interpret and act in line with local genomics pathways and
+        clinical judgement.
+      </p>
+    </footer>
+  </main>
+
+  <!--
+    Classic <script> tags (no `type="module"`) so the page works when opened
+    directly via file:// — browsers block ES-module imports from file:// for
+    CORS reasons, but allow ordered classic scripts. Each file attaches its
+    public symbols to `window.GeneticTestResult`.
+
+    Load order: types -> rules -> flags -> grader -> form-app
+    (grader.js composes the axis rules and the flag detector).
+  -->
+  <script src="js/types.js"></script>
+  <script src="js/rules.js"></script>
+  <script src="js/flags.js"></script>
+  <script src="js/grader.js"></script>
+  <script src="js/form-app.js"></script>
+</body>
+</html>
