@@ -293,7 +293,7 @@ cargo loco generate scaffold news2_result \
     total_score:int! \
     clinical_response:text! \
     has_any_single_score_3:bool! \
-    supplemental_oxygen:string! \
+    parameter_scores:jsonb! \
     scored_at:tstz! \
     --api
 

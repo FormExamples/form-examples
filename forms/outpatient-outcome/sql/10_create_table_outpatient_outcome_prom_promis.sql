@@ -25,8 +25,8 @@ CREATE TABLE outpatient_outcome_prom_promis (
     global_mental_health_t_score NUMERIC(5,2)
 );
 
-CREATE TRIGGER trigger_assessment_prom_promis_updated_at
-    BEFORE UPDATE ON assessment_prom_promis
+CREATE TRIGGER trigger_outpatient_outcome_prom_promis_updated_at
+    BEFORE UPDATE ON outpatient_outcome_prom_promis
     FOR EACH ROW
     EXECUTE FUNCTION set_updated_at();
 

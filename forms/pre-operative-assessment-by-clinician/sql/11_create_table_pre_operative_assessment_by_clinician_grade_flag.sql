@@ -40,7 +40,7 @@ CREATE TABLE pre_operative_assessment_by_clinician_grade_flag (
 );
 
 CREATE INDEX index_pre_operative_assessment_by_clinician_grade_flag_grade_id
-    ON pre_operative_assessment_by_clinician_grade_flag(pre_operative_assessment_by_clinician_grade_flag_grade_id);
+    ON pre_operative_assessment_by_clinician_grade_flag(pre_operative_assessment_by_clinician_grade_id);
 
 CREATE TRIGGER trigger_pre_operative_assessment_by_clinician_grade_flag_updated_at
     BEFORE UPDATE ON pre_operative_assessment_by_clinician_grade_flag
@@ -57,8 +57,6 @@ COMMENT ON COLUMN pre_operative_assessment_by_clinician_grade_flag.updated_at IS
     'Timestamp when this row was updated most-recently.';
 COMMENT ON COLUMN pre_operative_assessment_by_clinician_grade_flag.deleted_at IS
     'Timestamp when the record was deleted a.k.a. soft-removed.';
-COMMENT ON COLUMN pre_operative_assessment_by_clinician_grade_flag.grade_id IS
-    'Foreign key to the parent grade.';
 COMMENT ON COLUMN pre_operative_assessment_by_clinician_grade_flag.flag_id IS
     'Stable flag identifier (e.g. F-DIFFICULT-AIRWAY-001).';
 COMMENT ON COLUMN pre_operative_assessment_by_clinician_grade_flag.category IS

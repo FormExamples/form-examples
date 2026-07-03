@@ -20,8 +20,8 @@ CREATE TABLE outpatient_outcome_followup (
     followup_notes TEXT NOT NULL DEFAULT ''
 );
 
-CREATE TRIGGER trigger_assessment_followup_updated_at
-    BEFORE UPDATE ON assessment_followup
+CREATE TRIGGER trigger_outpatient_outcome_followup_updated_at
+    BEFORE UPDATE ON outpatient_outcome_followup
     FOR EACH ROW
     EXECUTE FUNCTION set_updated_at();
 

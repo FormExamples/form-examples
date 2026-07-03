@@ -30,7 +30,7 @@ CREATE TABLE pre_operative_assessment_by_clinician_grade (
 );
 
 CREATE TRIGGER trigger_pre_operative_assessment_by_clinician_grade_updated_at
-    BEFORE UPDATE ON grade
+    BEFORE UPDATE ON pre_operative_assessment_by_clinician_grade
     FOR EACH ROW
     EXECUTE FUNCTION set_updated_at();
 
@@ -46,8 +46,6 @@ COMMENT ON COLUMN pre_operative_assessment_by_clinician_grade.deleted_at IS
     'Timestamp when the record was deleted a.k.a. soft-removed.';
 COMMENT ON COLUMN pre_operative_assessment_by_clinician_grade.pre_operative_assessment_by_clinician_id IS
     'Foreign key to the pre_operative_assessment_by_clinician table.';
-COMMENT ON COLUMN pre_operative_assessment_by_clinician_grade.assessment_id IS
-    'Foreign key to the parent assessment (unique, 1:1).';
 COMMENT ON COLUMN pre_operative_assessment_by_clinician_grade.computed_asa_grade IS
     'ASA grade computed by the engine from clinician-observed data.';
 COMMENT ON COLUMN pre_operative_assessment_by_clinician_grade.final_asa_grade IS

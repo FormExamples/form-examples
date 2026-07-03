@@ -4,7 +4,7 @@ CREATE TABLE grade (
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
     assessment_id UUID NOT NULL UNIQUE
-        REFERENCES assessment(id) ON DELETE CASCADE,
+        REFERENCES bone_marrow_donation_assessment(id) ON DELETE CASCADE,
     eligibility VARCHAR(30) NOT NULL DEFAULT ''
         CHECK (eligibility IN ('suitable', 'conditionally-suitable', 'unsuitable', '')),
     overall_risk_level VARCHAR(10) NOT NULL DEFAULT ''

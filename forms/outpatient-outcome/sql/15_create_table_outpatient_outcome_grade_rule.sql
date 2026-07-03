@@ -5,7 +5,7 @@ CREATE TABLE outpatient_outcome_grade_rule (
     deleted_at TIMESTAMPTZ DEFAULT NULL,
 
     grade_id UUID NOT NULL
-        REFERENCES grade(id) ON DELETE CASCADE,
+        REFERENCES outpatient_outcome_grade(id) ON DELETE CASCADE,
 
     rule_id VARCHAR(50) NOT NULL,
     category VARCHAR(100) NOT NULL DEFAULT '',
@@ -14,8 +14,8 @@ CREATE TABLE outpatient_outcome_grade_rule (
         CHECK (severity_level IN ('low', 'medium', 'high', 'critical', ''))
 );
 
-CREATE TRIGGER trigger_grade_rule_updated_at
-    BEFORE UPDATE ON grade_rule
+CREATE TRIGGER trigger_outpatient_outcome_grade_rule_updated_at
+    BEFORE UPDATE ON outpatient_outcome_grade_rule
     FOR EACH ROW
     EXECUTE FUNCTION set_updated_at();
 

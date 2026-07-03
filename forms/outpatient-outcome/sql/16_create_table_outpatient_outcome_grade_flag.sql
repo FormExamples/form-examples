@@ -5,7 +5,7 @@ CREATE TABLE outpatient_outcome_grade_flag (
     deleted_at TIMESTAMPTZ DEFAULT NULL,
 
     grade_id UUID NOT NULL
-        REFERENCES grade(id) ON DELETE CASCADE,
+        REFERENCES outpatient_outcome_grade(id) ON DELETE CASCADE,
 
     flag_id VARCHAR(50) NOT NULL,
     category VARCHAR(100) NOT NULL DEFAULT '',
@@ -14,13 +14,13 @@ CREATE TABLE outpatient_outcome_grade_flag (
         CHECK (priority IN ('low', 'medium', 'high', 'critical'))
 );
 
-CREATE TRIGGER trigger_grade_flag_updated_at
-    BEFORE UPDATE ON grade_flag
+CREATE TRIGGER trigger_outpatient_outcome_grade_flag_updated_at
+    BEFORE UPDATE ON outpatient_outcome_grade_flag
     FOR EACH ROW
     EXECUTE FUNCTION set_updated_at();
 
 CREATE UNIQUE INDEX idx_grade_flag_unique
-    ON grade_flag (grade_id, flag_id);
+    ON outpatient_outcome_grade_flag (grade_id, flag_id);
 
 COMMENT ON TABLE outpatient_outcome_grade_flag IS
     'Safety / data-quality flags raised alongside the OOCG grading result (DNA, PROM worsening, FFT Poor/Very Poor, wait-over-target, Worsened/Died, missing data).';

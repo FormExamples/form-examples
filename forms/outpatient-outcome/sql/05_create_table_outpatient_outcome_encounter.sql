@@ -16,8 +16,8 @@ CREATE TABLE outpatient_outcome_encounter (
         CHECK (appointment_type IN ('new', 'follow_up', 'pifu', ''))
 );
 
-CREATE TRIGGER trigger_assessment_encounter_updated_at
-    BEFORE UPDATE ON assessment_encounter
+CREATE TRIGGER trigger_outpatient_outcome_encounter_updated_at
+    BEFORE UPDATE ON outpatient_outcome_encounter
     FOR EACH ROW
     EXECUTE FUNCTION set_updated_at();
 

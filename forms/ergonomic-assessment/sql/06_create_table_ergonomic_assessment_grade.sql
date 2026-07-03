@@ -17,8 +17,7 @@ CREATE TABLE grade (
     override_reason         TEXT NOT NULL DEFAULT '',
     -- When the grading was computed
     graded_at               TIMESTAMPTZ NOT NULL DEFAULT NOW(),
-    -- If override is set,
-    a reason must be provided
+    -- If override is set, a reason must be provided
     CONSTRAINT chk_override_reason CHECK (
         reba_score_override IS NULL OR override_reason != ''
     )
@@ -51,6 +50,3 @@ COMMENT ON COLUMN grade.updated_at IS
     'Timestamp when this row was updated.';
 COMMENT ON COLUMN grade.deleted_at IS
     'Timestamp when this row was deleted.';
-
-COMMENT ON COLUMN grade.a IS
-    'A.';

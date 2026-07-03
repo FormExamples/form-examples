@@ -48,6 +48,7 @@ cargo loco generate scaffold clinician \
     --api
 
 cargo loco generate scaffold bone_marrow_donation_assessment \
+    deleted_at:tstz \
     patient:references \
     status:string! \
     --api

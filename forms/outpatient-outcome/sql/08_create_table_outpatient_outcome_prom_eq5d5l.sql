@@ -23,8 +23,8 @@ CREATE TABLE outpatient_outcome_prom_eq5d5l (
     after_vas SMALLINT CHECK (after_vas BETWEEN 0 AND 100)
 );
 
-CREATE TRIGGER trigger_assessment_prom_eq5d5l_updated_at
-    BEFORE UPDATE ON assessment_prom_eq5d5l
+CREATE TRIGGER trigger_outpatient_outcome_prom_eq5d5l_updated_at
+    BEFORE UPDATE ON outpatient_outcome_prom_eq5d5l
     FOR EACH ROW
     EXECUTE FUNCTION set_updated_at();
 

@@ -4,7 +4,7 @@ CREATE TABLE pre_operative_assessment_by_clinician_grade_rule (
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
     grade_id UUID NOT NULL
-        REFERENCES grade(id) ON DELETE CASCADE,
+        REFERENCES pre_operative_assessment_by_clinician_grade(id) ON DELETE CASCADE,
     rule_id VARCHAR(30) NOT NULL,
     instrument VARCHAR(20) NOT NULL
         CHECK (instrument IN ('asa', 'mallampati', 'rcri', 'stopbang', 'frailty')),
@@ -14,10 +14,10 @@ CREATE TABLE pre_operative_assessment_by_clinician_grade_rule (
 );
 
 CREATE INDEX index_grading_fired_rule_grade_id
-    ON grading_fired_rule(grade_id);
+    ON pre_operative_assessment_by_clinician_grade_rule(grade_id);
 
 CREATE TRIGGER trigger_pre_operative_assessment_by_clinician_grade_rule_updated_at
-    BEFORE UPDATE ON grading_fired_rule
+    BEFORE UPDATE ON pre_operative_assessment_by_clinician_grade_rule
     FOR EACH ROW
     EXECUTE FUNCTION set_updated_at();
 

@@ -99,6 +99,18 @@
         "coding": [
           {
             "system": "urn:form-examples:encounter-satisfaction",
+            "code": "domain_scores",
+            "display": "Domain Scores"
+          }
+        ]
+      },
+      "valueString": ""
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:encounter-satisfaction",
             "code": "scored_at",
             "display": "Scored At"
           }

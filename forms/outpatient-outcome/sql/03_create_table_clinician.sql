@@ -12,7 +12,7 @@ CREATE TABLE clinician (
     postal_address_as_full_text TEXT,
     country_as_iso_3166_1_alpha_2 CHAR(2),
     postcode TEXT,
-    role TEXT NOT NULL DEFAULT '' CHECK (clinician_role IN ( 'anaesthetist', 'surgeon', 'preop-nurse', 'perioperative-physician', 'geriatrician', 'pharmacist', 'other', '' )),
+    role TEXT NOT NULL DEFAULT '' CHECK (role IN ( 'anaesthetist', 'surgeon', 'preop-nurse', 'perioperative-physician', 'geriatrician', 'pharmacist', 'other', '' )),
     registration_body TEXT NOT NULL DEFAULT '' CHECK (registration_body IN ('GMC', 'NMC', 'HCPC', 'GPhC', 'other', '')),
     registration_number TEXT NOT NULL DEFAULT '',
     united_kingdom_nhs_number CHAR(12)UNIQUE

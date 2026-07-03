@@ -142,12 +142,3 @@ cargo loco generate scaffold grading_fired_rule \
     description:text! \
     completeness_level:string! \
     --api
-
-cargo loco generate scaffold grading_additional_flag \
-    deleted_at:tstz \
-    grade:references \
-    flag_id:string! \
-    category:string! \
-    message:text! \
-    priority:string! \
-    --api

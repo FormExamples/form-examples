@@ -22,8 +22,8 @@ CREATE TABLE outpatient_outcome_grade (
     graded_at TIMESTAMPTZ NOT NULL DEFAULT now()
 );
 
-CREATE TRIGGER trigger_grade_updated_at
-    BEFORE UPDATE ON grade
+CREATE TRIGGER trigger_outpatient_outcome_grade_updated_at
+    BEFORE UPDATE ON outpatient_outcome_grade
     FOR EACH ROW
     EXECUTE FUNCTION set_updated_at();
 

@@ -36,8 +36,6 @@ CREATE TRIGGER trigger_grade_updated_at
 
 COMMENT ON TABLE grade IS
     'Step 16: computed and signed-off grading result. Stores both the engine-computed ASA grade and the clinician-final grade with an override reason.';
-COMMENT ON COLUMN grade.assessment_id IS
-    'Foreign key to the parent assessment (unique, 1:1).';
 COMMENT ON COLUMN grade.computed_asa_grade IS
     'ASA grade computed by the engine from clinician-observed data.';
 COMMENT ON COLUMN grade.final_asa_grade IS

@@ -21,8 +21,8 @@ CREATE TABLE outpatient_outcome_clinical (
         ))
 );
 
-CREATE TRIGGER trigger_assessment_clinical_updated_at
-    BEFORE UPDATE ON assessment_clinical
+CREATE TRIGGER trigger_outpatient_outcome_clinical_updated_at
+    BEFORE UPDATE ON outpatient_outcome_clinical
     FOR EACH ROW
     EXECUTE FUNCTION set_updated_at();
 

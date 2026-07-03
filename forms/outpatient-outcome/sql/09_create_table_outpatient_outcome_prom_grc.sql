@@ -13,8 +13,8 @@ CREATE TABLE outpatient_outcome_prom_grc (
         CHECK (self_rated_health IN ('excellent', 'very_good', 'good', 'fair', 'poor', ''))
 );
 
-CREATE TRIGGER trigger_assessment_prom_grc_updated_at
-    BEFORE UPDATE ON assessment_prom_grc
+CREATE TRIGGER trigger_outpatient_outcome_prom_grc_updated_at
+    BEFORE UPDATE ON outpatient_outcome_prom_grc
     FOR EACH ROW
     EXECUTE FUNCTION set_updated_at();
 

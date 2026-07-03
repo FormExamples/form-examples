@@ -17,28 +17,14 @@ COMMENT ON COLUMN bone_marrow_donation_assessment.updated_at IS
     'Timestamp when this row was updated.';
 COMMENT ON COLUMN bone_marrow_donation_assessment.deleted_at IS
     'Timestamp when this row was deleted.';
-CREATE TRIGGER trigger_assessment_updated_at
-    BEFORE UPDATE ON assessment
+CREATE TRIGGER trigger_bone_marrow_donation_assessment_updated_at
+    BEFORE UPDATE ON bone_marrow_donation_assessment
     FOR EACH ROW
     EXECUTE FUNCTION set_updated_at();
 
-COMMENT ON TABLE assessment IS
-    'Bone marrow donation assessment form evaluating haematopoietic stem cell donor eligibility. Parent entity for all assessment sections.';
-COMMENT ON COLUMN assessment.id IS
-    'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN assessment.patient_id IS
-    'Foreign key to the patient who owns this assessment.';
-COMMENT ON COLUMN assessment.status IS
-    'Lifecycle status: draft, submitted, reviewed, or urgent.';
-
-COMMENT ON COLUMN assessment.created_at IS
-    'Timestamp when this row was created.';
-COMMENT ON COLUMN assessment.updated_at IS
-    'Timestamp when this row was updated.';
-
 COMMENT ON TABLE bone_marrow_donation_assessment IS
-    'Bone marrow donation assessment.';
+    'Bone marrow donation assessment form evaluating haematopoietic stem cell donor eligibility. Parent entity for all assessment sections.';
 COMMENT ON COLUMN bone_marrow_donation_assessment.patient_id IS
-    'Foreign key to the patient table.';
+    'Foreign key to the patient who owns this assessment.';
 COMMENT ON COLUMN bone_marrow_donation_assessment.status IS
-    'Lifecycle status of this row.';
+    'Lifecycle status: draft, submitted, reviewed, or urgent.';

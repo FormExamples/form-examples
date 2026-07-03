@@ -1,4 +1,4 @@
-<!ELEMENT grade (id,created_at,updated_at,deleted_at,assessment_id,reba_score,risk_level,reba_score_override,override_reason,graded_at,a)>
+<!ELEMENT grade (id,created_at,updated_at,deleted_at,assessment_id,reba_score,risk_level,reba_score_override,override_reason,graded_at)>
 <!ELEMENT id (#PCDATA)>
 <!ELEMENT created_at (#PCDATA)>
 <!ELEMENT updated_at (#PCDATA)>
@@ -9,4 +9,3 @@
 <!ELEMENT reba_score_override (#PCDATA)>
 <!ELEMENT override_reason (#PCDATA)>
 <!ELEMENT graded_at (#PCDATA)>
-<!ELEMENT a (#PCDATA)>

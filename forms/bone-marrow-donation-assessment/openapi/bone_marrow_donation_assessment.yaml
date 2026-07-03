@@ -4,7 +4,7 @@ openapi: 3.1.0
 info:
   title: Bone Marrow Donation Assessment — BoneMarrowDonationAssessment
   version: 1.0.0
-  description: Bone marrow donation assessment.
+  description: Bone marrow donation assessment form evaluating haematopoietic stem cell donor eligibility. Parent entity for all assessment sections.
 paths:
   /bone-marrow-donation-assessments:
     get:
@@ -123,7 +123,7 @@ components:
         patient_id:
           type: string
           format: uuid
-          description: Foreign key to the patient table.
+          description: Foreign key to the patient who owns this assessment.
         status:
           type: string
           enum:
@@ -131,10 +131,10 @@ components:
             - submitted
             - reviewed
             - urgent
-          description: Lifecycle status of this row.
+          description: "Lifecycle status: draft, submitted, reviewed, or urgent."
       required:
         - created_at
         - updated_at
         - patient_id
         - status
-      description: Bone marrow donation assessment.
+      description: Bone marrow donation assessment form evaluating haematopoietic stem cell donor eligibility. Parent entity for all assessment sections.

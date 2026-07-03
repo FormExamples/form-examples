@@ -165,6 +165,14 @@ cargo loco generate scaffold clinical_review \
     reviewing_clinician:string! \
     --api
 
+cargo loco generate scaffold grade \
+    deleted_at:tstz \
+    assessment:references \
+    vaccination_level:string! \
+    vaccination_score:int! \
+    graded_at:tstz \
+    --api
+
 cargo loco generate scaffold fired_rule \
     deleted_at:tstz \
     grade:references \
@@ -181,12 +189,4 @@ cargo loco generate scaffold additional_flag \
     category:string! \
     message:text! \
     priority:string! \
-    --api
-
-cargo loco generate scaffold grade \
-    deleted_at:tstz \
-    assessment:references \
-    vaccination_level:string! \
-    vaccination_score:int! \
-    graded_at:tstz \
     --api

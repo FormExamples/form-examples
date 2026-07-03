@@ -69,7 +69,6 @@ cargo loco generate scaffold grade \
     reba_score_override:int \
     override_reason:text! \
     graded_at:tstz! \
-    a:string \
     --api
 
 cargo loco generate scaffold grading_fired_rule \

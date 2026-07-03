@@ -15,12 +15,8 @@ CREATE TABLE satisfaction_result (
     answered_count              SMALLINT NOT NULL DEFAULT 0
                                 CHECK (answered_count >= 0 AND answered_count <= 19),
     -- Denormalized per-domain scores for audit trail
-    -- Keys: "Access & Scheduling",
-    "Communication",
-    "Staff & Professionalism",
-    --        "Care Quality",
-    "Environment",
-    "Overall Satisfaction"
+    -- Keys: "Access & Scheduling", "Communication", "Staff & Professionalism",
+    --       "Care Quality", "Environment", "Overall Satisfaction"
     domain_scores               JSONB NOT NULL DEFAULT '[]',
     -- Timestamp of when the ESS engine ran
     scored_at                   TIMESTAMPTZ NOT NULL DEFAULT NOW()

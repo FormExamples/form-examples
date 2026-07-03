@@ -4,7 +4,7 @@ openapi: 3.1.0
 info:
   title: Prescription Request — Clinician
   version: 1.0.0
-  description: Clinician demographic information for prescription requests.
+  description: Clinician
 paths:
   /clinicians:
     get:
@@ -111,40 +111,68 @@ components:
         created_at:
           type: string
           format: date-time
-          description: Timestamp when this row was created.
+          description: Timestamp when the record was created.
         updated_at:
           type: string
           format: date-time
-          description: Timestamp when this row was updated.
+          description: Timestamp when the record was updated most-recently.
         deleted_at:
           type: string
           format: date-time
-          description: Timestamp when this row was deleted.
-        first_name:
+          description: Soft-delete timestamp; NULL when the row is live.
+        name:
           type: string
-          maxLength: 255
-          description: Clinician given name.
-        last_name:
-          type: string
-          maxLength: 255
-          description: Clinician family name.
-        nhs_employee_number:
-          type: string
-          maxLength: 20
-          description: NHS employee number, unique per clinician.
-        phone:
-          type: string
-          maxLength: 30
-          description: Clinician phone number.
+          description: Name.
         email:
           type: string
-          maxLength: 255
-          description: Clinician email address.
+          description: Email address.
+        phone:
+          type: string
+          description: Phone number.
+        postal_address_as_full_text:
+          type: string
+          description: Postal address as full text.
+        country_as_iso_3166_1_alpha_2:
+          type: string
+          maxLength: 2
+          description: Country as ISO 3166-1 alpha-2 format, such as for validating the postal address.
+        postcode:
+          type: string
+          description: Postal code, such as for validating the postal address.
+        role:
+          type: string
+          enum:
+            - anaesthetist
+            - surgeon
+            - preop-nurse
+            - perioperative-physician
+            - geriatrician
+            - pharmacist
+            - other
+            - ""
+          description: Clinician role.
+        registration_body:
+          type: string
+          enum:
+            - GMC
+            - NMC
+            - HCPC
+            - GPhC
+            - other
+            - ""
+          description: Clinician registration body.
+        registration_number:
+          type: string
+          description: Clinician registration number.
+        united_kingdom_nhs_number:
+          type: string
+          maxLength: 12
+          description: United Kingdom NHS number, unique per person.
       required:
         - created_at
         - updated_at
-        - first_name
-        - last_name
-        - phone
-        - email
-      description: Clinician demographic information for prescription requests.
+        - name
+        - role
+        - registration_body
+        - registration_number
+      description: Clinician

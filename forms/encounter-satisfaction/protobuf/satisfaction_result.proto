@@ -24,5 +24,6 @@ message SatisfactionResult {
   double composite_score = 6;  // NUMERIC(3,2) — numeric(3,2)
   SatisfactionResultCategoryEnum category = 7;  // TEXT
   int32 answered_count = 8;  // SMALLINT
-  string scored_at = 9;  // TIMESTAMPTZ — iso 8601
+  string domain_scores = 9;  // JSONB — json
+  string scored_at = 10;  // TIMESTAMPTZ — iso 8601
 }

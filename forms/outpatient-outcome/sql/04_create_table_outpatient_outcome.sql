@@ -11,8 +11,8 @@ CREATE TABLE outpatient_outcome (
         CHECK (status IN ('draft', 'submitted', 'reviewed', 'urgent'))
 );
 
-CREATE TRIGGER trigger_assessment_updated_at
-    BEFORE UPDATE ON assessment
+CREATE TRIGGER trigger_outpatient_outcome_updated_at
+    BEFORE UPDATE ON outpatient_outcome
     FOR EACH ROW
     EXECUTE FUNCTION set_updated_at();
 

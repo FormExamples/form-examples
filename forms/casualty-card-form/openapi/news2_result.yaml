@@ -140,9 +140,9 @@ components:
         has_any_single_score_3:
           type: boolean
           description: TRUE if any single NEWS2 parameter scored 3. Triggers urgent ward review regardless of total.
-        supplemental_oxygen:
-          type: string
-          description: Supplemental oxygen.
+        parameter_scores:
+          type: object
+          description: "JSONB object with individual parameter scores. Keys: respiratory_rate, oxygen_saturation, systolic_bp, pulse, consciousness, temperature, supplemental_oxygen."
         scored_at:
           type: string
           format: date-time
@@ -154,6 +154,6 @@ components:
         - total_score
         - clinical_response
         - has_any_single_score_3
-        - supplemental_oxygen
+        - parameter_scores
         - scored_at
       description: 1:1 with casualty_card. Computed NEWS2 score with clinical response threshold and parameter breakdown.

@@ -22,6 +22,6 @@ message News2Result {
   int32 total_score = 6;  // INTEGER
   News2ResultClinicalResponseEnum clinical_response = 7;  // TEXT
   bool has_any_single_score_3 = 8;  // BOOLEAN
-  string supplemental_oxygen = 9;  // parameter_scores
+  string parameter_scores = 9;  // JSONB — json
   string scored_at = 10;  // TIMESTAMPTZ — iso 8601
 }

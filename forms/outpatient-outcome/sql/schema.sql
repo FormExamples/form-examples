@@ -6,7 +6,7 @@
 -- the generator after changing any NN-*.sql file.
 --
 -- Source files (17):
---   - 00_extensions.sql
+--   - 00_create_extensions.sql
 --   - 01_create_function_set_updated_at.sql
 --   - 02_create_table_patient.sql
 --   - 03_create_table_clinician.sql
@@ -26,14 +26,17 @@
 
 
 -- ========================================================================
--- BEGIN 00_extensions.sql
+-- BEGIN 00_create_extensions.sql
 -- ========================================================================
 
 -- pgcrypto provides gen_random_uuid() for UUID primary key generation.
 CREATE EXTENSION IF NOT EXISTS pgcrypto;
 
+-- pg_trgm provides trigram matching for the GIN name-search indexes.
+CREATE EXTENSION IF NOT EXISTS pg_trgm;
+
 -- ========================================================================
--- END 00_extensions.sql
+-- END 00_create_extensions.sql
 -- ========================================================================
 
 -- ========================================================================
@@ -158,7 +161,7 @@ CREATE TABLE clinician (
     postal_address_as_full_text TEXT,
     country_as_iso_3166_1_alpha_2 CHAR(2),
     postcode TEXT,
-    role TEXT NOT NULL DEFAULT '' CHECK (clinician_role IN ( 'anaesthetist', 'surgeon', 'preop-nurse', 'perioperative-physician', 'geriatrician', 'pharmacist', 'other', '' )),
+    role TEXT NOT NULL DEFAULT '' CHECK (role IN ( 'anaesthetist', 'surgeon', 'preop-nurse', 'perioperative-physician', 'geriatrician', 'pharmacist', 'other', '' )),
     registration_body TEXT NOT NULL DEFAULT '' CHECK (registration_body IN ('GMC', 'NMC', 'HCPC', 'GPhC', 'other', '')),
     registration_number TEXT NOT NULL DEFAULT '',
     united_kingdom_nhs_number CHAR(12)UNIQUE
@@ -227,8 +230,8 @@ CREATE TABLE outpatient_outcome (
         CHECK (status IN ('draft', 'submitted', 'reviewed', 'urgent'))
 );
 
-CREATE TRIGGER trigger_assessment_updated_at
-    BEFORE UPDATE ON assessment
+CREATE TRIGGER trigger_outpatient_outcome_updated_at
+    BEFORE UPDATE ON outpatient_outcome
     FOR EACH ROW
     EXECUTE FUNCTION set_updated_at();
 
@@ -273,8 +276,8 @@ CREATE TABLE outpatient_outcome_encounter (
         CHECK (appointment_type IN ('new', 'follow_up', 'pifu', ''))
 );
 
-CREATE TRIGGER trigger_assessment_encounter_updated_at
-    BEFORE UPDATE ON assessment_encounter
+CREATE TRIGGER trigger_outpatient_outcome_encounter_updated_at
+    BEFORE UPDATE ON outpatient_outcome_encounter
     FOR EACH ROW
     EXECUTE FUNCTION set_updated_at();
 
@@ -332,12 +335,12 @@ CREATE TABLE outpatient_outcome_operational (
             'cancelled_by_provider',
             'rebooked',
             ''
-        )),
+        ))
 
 );
 
-CREATE TRIGGER trigger_assessment_operational_updated_at
-    BEFORE UPDATE ON assessment_operational
+CREATE TRIGGER trigger_outpatient_outcome_operational_updated_at
+    BEFORE UPDATE ON outpatient_outcome_operational
     FOR EACH ROW
     EXECUTE FUNCTION set_updated_at();
 
@@ -395,8 +398,8 @@ CREATE TABLE outpatient_outcome_clinical (
         ))
 );
 
-CREATE TRIGGER trigger_assessment_clinical_updated_at
-    BEFORE UPDATE ON assessment_clinical
+CREATE TRIGGER trigger_outpatient_outcome_clinical_updated_at
+    BEFORE UPDATE ON outpatient_outcome_clinical
     FOR EACH ROW
     EXECUTE FUNCTION set_updated_at();
 
@@ -454,8 +457,8 @@ CREATE TABLE outpatient_outcome_prom_eq5d5l (
     after_vas SMALLINT CHECK (after_vas BETWEEN 0 AND 100)
 );
 
-CREATE TRIGGER trigger_assessment_prom_eq5d5l_updated_at
-    BEFORE UPDATE ON assessment_prom_eq5d5l
+CREATE TRIGGER trigger_outpatient_outcome_prom_eq5d5l_updated_at
+    BEFORE UPDATE ON outpatient_outcome_prom_eq5d5l
     FOR EACH ROW
     EXECUTE FUNCTION set_updated_at();
 
@@ -519,8 +522,8 @@ CREATE TABLE outpatient_outcome_prom_grc (
         CHECK (self_rated_health IN ('excellent', 'very_good', 'good', 'fair', 'poor', ''))
 );
 
-CREATE TRIGGER trigger_assessment_prom_grc_updated_at
-    BEFORE UPDATE ON assessment_prom_grc
+CREATE TRIGGER trigger_outpatient_outcome_prom_grc_updated_at
+    BEFORE UPDATE ON outpatient_outcome_prom_grc
     FOR EACH ROW
     EXECUTE FUNCTION set_updated_at();
 
@@ -576,8 +579,8 @@ CREATE TABLE outpatient_outcome_prom_promis (
     global_mental_health_t_score NUMERIC(5,2)
 );
 
-CREATE TRIGGER trigger_assessment_prom_promis_updated_at
-    BEFORE UPDATE ON assessment_prom_promis
+CREATE TRIGGER trigger_outpatient_outcome_prom_promis_updated_at
+    BEFORE UPDATE ON outpatient_outcome_prom_promis
     FOR EACH ROW
     EXECUTE FUNCTION set_updated_at();
 
@@ -648,8 +651,8 @@ CREATE TABLE outpatient_outcome_prem_fft (
     fft_comment TEXT NOT NULL DEFAULT ''
 );
 
-CREATE TRIGGER trigger_assessment_prem_fft_updated_at
-    BEFORE UPDATE ON assessment_prem_fft
+CREATE TRIGGER trigger_outpatient_outcome_prem_fft_updated_at
+    BEFORE UPDATE ON outpatient_outcome_prem_fft
     FOR EACH ROW
     EXECUTE FUNCTION set_updated_at();
 
@@ -700,8 +703,8 @@ CREATE TABLE outpatient_outcome_followup (
     followup_notes TEXT NOT NULL DEFAULT ''
 );
 
-CREATE TRIGGER trigger_assessment_followup_updated_at
-    BEFORE UPDATE ON assessment_followup
+CREATE TRIGGER trigger_outpatient_outcome_followup_updated_at
+    BEFORE UPDATE ON outpatient_outcome_followup
     FOR EACH ROW
     EXECUTE FUNCTION set_updated_at();
 
@@ -749,8 +752,8 @@ CREATE TABLE outpatient_outcome_signoff (
     signed_off_at TIMESTAMPTZ
 );
 
-CREATE TRIGGER trigger_assessment_signoff_updated_at
-    BEFORE UPDATE ON assessment_signoff
+CREATE TRIGGER trigger_outpatient_outcome_signoff_updated_at
+    BEFORE UPDATE ON outpatient_outcome_signoff
     FOR EACH ROW
     EXECUTE FUNCTION set_updated_at();
 
@@ -807,8 +810,8 @@ CREATE TABLE outpatient_outcome_grade (
     graded_at TIMESTAMPTZ NOT NULL DEFAULT now()
 );
 
-CREATE TRIGGER trigger_grade_updated_at
-    BEFORE UPDATE ON grade
+CREATE TRIGGER trigger_outpatient_outcome_grade_updated_at
+    BEFORE UPDATE ON outpatient_outcome_grade
     FOR EACH ROW
     EXECUTE FUNCTION set_updated_at();
 
@@ -855,7 +858,7 @@ CREATE TABLE outpatient_outcome_grade_rule (
     deleted_at TIMESTAMPTZ DEFAULT NULL,
 
     grade_id UUID NOT NULL
-        REFERENCES grade(id) ON DELETE CASCADE,
+        REFERENCES outpatient_outcome_grade(id) ON DELETE CASCADE,
 
     rule_id VARCHAR(50) NOT NULL,
     category VARCHAR(100) NOT NULL DEFAULT '',
@@ -864,8 +867,8 @@ CREATE TABLE outpatient_outcome_grade_rule (
         CHECK (severity_level IN ('low', 'medium', 'high', 'critical', ''))
 );
 
-CREATE TRIGGER trigger_grade_rule_updated_at
-    BEFORE UPDATE ON grade_rule
+CREATE TRIGGER trigger_outpatient_outcome_grade_rule_updated_at
+    BEFORE UPDATE ON outpatient_outcome_grade_rule
     FOR EACH ROW
     EXECUTE FUNCTION set_updated_at();
 
@@ -905,7 +908,7 @@ CREATE TABLE outpatient_outcome_grade_flag (
     deleted_at TIMESTAMPTZ DEFAULT NULL,
 
     grade_id UUID NOT NULL
-        REFERENCES grade(id) ON DELETE CASCADE,
+        REFERENCES outpatient_outcome_grade(id) ON DELETE CASCADE,
 
     flag_id VARCHAR(50) NOT NULL,
     category VARCHAR(100) NOT NULL DEFAULT '',
@@ -914,13 +917,13 @@ CREATE TABLE outpatient_outcome_grade_flag (
         CHECK (priority IN ('low', 'medium', 'high', 'critical'))
 );
 
-CREATE TRIGGER trigger_grade_flag_updated_at
-    BEFORE UPDATE ON grade_flag
+CREATE TRIGGER trigger_outpatient_outcome_grade_flag_updated_at
+    BEFORE UPDATE ON outpatient_outcome_grade_flag
     FOR EACH ROW
     EXECUTE FUNCTION set_updated_at();
 
 CREATE UNIQUE INDEX idx_grade_flag_unique
-    ON grade_flag (grade_id, flag_id);
+    ON outpatient_outcome_grade_flag (grade_id, flag_id);
 
 COMMENT ON TABLE outpatient_outcome_grade_flag IS
     'Safety / data-quality flags raised alongside the OOCG grading result (DNA, PROM worsening, FFT Poor/Very Poor, wait-over-target, Worsened/Died, missing data).';

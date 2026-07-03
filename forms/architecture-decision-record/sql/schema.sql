@@ -6,7 +6,7 @@
 -- the generator after changing any NN-*.sql file.
 --
 -- Source files (7):
---   - 00_extensions.sql
+--   - 00_create_extensions.sql
 --   - 01_create_function_set_updated_at.sql
 --   - 02_create_table_author.sql
 --   - 03_create_table_organization.sql
@@ -16,7 +16,7 @@
 
 
 -- ========================================================================
--- BEGIN 00_extensions.sql
+-- BEGIN 00_create_extensions.sql
 -- ========================================================================
 
 -- pgcrypto provides gen_random_uuid() for UUID primary key generation.
@@ -26,7 +26,7 @@ CREATE EXTENSION IF NOT EXISTS pgcrypto;
 CREATE EXTENSION IF NOT EXISTS pg_trgm;
 
 -- ========================================================================
--- END 00_extensions.sql
+-- END 00_create_extensions.sql
 -- ========================================================================
 
 -- ========================================================================

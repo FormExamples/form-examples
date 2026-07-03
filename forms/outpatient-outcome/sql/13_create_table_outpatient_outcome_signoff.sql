@@ -13,8 +13,8 @@ CREATE TABLE outpatient_outcome_signoff (
     signed_off_at TIMESTAMPTZ
 );
 
-CREATE TRIGGER trigger_assessment_signoff_updated_at
-    BEFORE UPDATE ON assessment_signoff
+CREATE TRIGGER trigger_outpatient_outcome_signoff_updated_at
+    BEFORE UPDATE ON outpatient_outcome_signoff
     FOR EACH ROW
     EXECUTE FUNCTION set_updated_at();
 

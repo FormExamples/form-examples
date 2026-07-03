@@ -14,13 +14,8 @@ CREATE TABLE news2_result (
     -- Whether any single parameter scored 3 (triggers urgent ward review)
     has_any_single_score_3  BOOLEAN NOT NULL DEFAULT FALSE,
     -- Denormalized individual parameter scores for audit trail
-    -- Keys: respiratory_rate,
-    oxygen_saturation,
-    systolic_bp,
-    pulse,
-    --        consciousness,
-    temperature,
-    supplemental_oxygen
+    -- Keys: respiratory_rate, oxygen_saturation, systolic_bp, pulse,
+    --       consciousness, temperature, supplemental_oxygen
     parameter_scores        JSONB NOT NULL DEFAULT '{}',
     -- Timestamp of when the NEWS2 engine ran
     scored_at               TIMESTAMPTZ NOT NULL DEFAULT NOW()
@@ -53,6 +48,3 @@ COMMENT ON COLUMN news2_result.updated_at IS
     'Timestamp when this row was updated.';
 COMMENT ON COLUMN news2_result.deleted_at IS
     'Timestamp when this row was deleted.';
-
-COMMENT ON COLUMN news2_result.supplemental_oxygen IS
-    'Supplemental oxygen.';

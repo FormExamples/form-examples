@@ -9,6 +9,6 @@
 <total_score>5</total_score>
 <clinical_response>low</clinical_response>
 <has_any_single_score_3>true</has_any_single_score_3>
-<supplemental_oxygen></supplemental_oxygen>
+<parameter_scores></parameter_scores>
 <scored_at>2026-04-09T10:00:00Z</scored_at>
 </news2_result>

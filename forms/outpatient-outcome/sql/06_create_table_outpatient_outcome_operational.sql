@@ -21,12 +21,12 @@ CREATE TABLE outpatient_outcome_operational (
             'cancelled_by_provider',
             'rebooked',
             ''
-        )),
+        ))
 
 );
 
-CREATE TRIGGER trigger_assessment_operational_updated_at
-    BEFORE UPDATE ON assessment_operational
+CREATE TRIGGER trigger_outpatient_outcome_operational_updated_at
+    BEFORE UPDATE ON outpatient_outcome_operational
     FOR EACH ROW
     EXECUTE FUNCTION set_updated_at();
 

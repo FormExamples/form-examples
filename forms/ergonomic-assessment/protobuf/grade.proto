@@ -25,5 +25,4 @@ message Grade {
   int32 reba_score_override = 8;  // INTEGER
   string override_reason = 9;  // TEXT
   string graded_at = 10;  // TIMESTAMPTZ — iso 8601
-  string a = 11;  // reason
 }

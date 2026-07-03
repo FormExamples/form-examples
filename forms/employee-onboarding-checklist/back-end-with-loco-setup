@@ -47,12 +47,6 @@ cargo loco generate scaffold clinician \
     united_kingdom_nhs_number:string^ \
     --api
 
-cargo loco generate scaffold assessment \
-    deleted_at:tstz \
-    employee:references \
-    status:string! \
-    --api
-
 cargo loco generate scaffold employee \
     deleted_at:tstz \
     first_name:string! \
@@ -64,6 +58,12 @@ cargo loco generate scaffold employee \
     job_title:string! \
     department:string! \
     start_date:date \
+    --api
+
+cargo loco generate scaffold assessment \
+    deleted_at:tstz \
+    employee:references \
+    status:string! \
     --api
 
 cargo loco generate scaffold grade \

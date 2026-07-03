@@ -5,9 +5,8 @@
 -- migration files in this directory. Do not edit by hand — re-run
 -- the generator after changing any NN-*.sql file.
 --
--- Source files (11):
+-- Source files (10):
 --   - 00_create_extensions.sql
---   - 00_extensions.sql
 --   - 01_create_function_set_updated_at.sql
 --   - 02_create_table_patient.sql
 --   - 03_create_table_clinician.sql
@@ -26,22 +25,11 @@
 -- pgcrypto provides gen_random_uuid() for UUID primary key generation.
 CREATE EXTENSION IF NOT EXISTS pgcrypto;
 
--- ========================================================================
--- END 00_create_extensions.sql
--- ========================================================================
-
--- ========================================================================
--- BEGIN 00_extensions.sql
--- ========================================================================
-
--- pgcrypto provides gen_random_uuid() for UUID primary key generation.
-CREATE EXTENSION IF NOT EXISTS pgcrypto;
-
 -- pg_trgm provides trigram operators for GIN indexes on free-text columns.
 CREATE EXTENSION IF NOT EXISTS pg_trgm;
 
 -- ========================================================================
--- END 00_extensions.sql
+-- END 00_create_extensions.sql
 -- ========================================================================
 
 -- ========================================================================

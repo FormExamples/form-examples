@@ -120,6 +120,7 @@ cargo loco generate scaffold satisfaction_result \
     composite_score:double! \
     category:text! \
     answered_count:int! \
+    domain_scores:jsonb! \
     scored_at:tstz! \
     --api
 

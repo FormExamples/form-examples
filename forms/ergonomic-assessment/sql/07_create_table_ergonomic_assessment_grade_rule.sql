@@ -5,7 +5,7 @@ CREATE TABLE grading_fired_rule (
     deleted_at TIMESTAMPTZ DEFAULT NULL,
     grade_id   UUID NOT NULL REFERENCES grade(id) ON DELETE CASCADE,
     -- The rule that fired
-    rule_id             TEXT NOT NULL REFERENCES reba_rule(id),
+    rule_id             TEXT NOT NULL REFERENCES reba_rule(code),
     -- Denormalized fields from the rule at time of grading
     system              TEXT NOT NULL,
     description         TEXT NOT NULL,

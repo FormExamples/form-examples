@@ -20,8 +20,8 @@ CREATE TABLE outpatient_outcome_prem_fft (
     fft_comment TEXT NOT NULL DEFAULT ''
 );
 
-CREATE TRIGGER trigger_assessment_prem_fft_updated_at
-    BEFORE UPDATE ON assessment_prem_fft
+CREATE TRIGGER trigger_outpatient_outcome_prem_fft_updated_at
+    BEFORE UPDATE ON outpatient_outcome_prem_fft
     FOR EACH ROW
     EXECUTE FUNCTION set_updated_at();
 

@@ -27,6 +27,9 @@
 -- pgcrypto provides gen_random_uuid() for UUID primary key generation.
 CREATE EXTENSION IF NOT EXISTS pgcrypto;
 
+-- pg_trgm provides trigram matching for the GIN name-search indexes.
+CREATE EXTENSION IF NOT EXISTS pg_trgm;
+
 -- ========================================================================
 -- END 00_create_extensions.sql
 -- ========================================================================
@@ -153,7 +156,7 @@ CREATE TABLE clinician (
     postal_address_as_full_text TEXT,
     country_as_iso_3166_1_alpha_2 CHAR(2),
     postcode TEXT,
-    role TEXT NOT NULL DEFAULT '' CHECK (clinician_role IN ( 'anaesthetist', 'surgeon', 'preop-nurse', 'perioperative-physician', 'geriatrician', 'pharmacist', 'other', '' )),
+    role TEXT NOT NULL DEFAULT '' CHECK (role IN ( 'anaesthetist', 'surgeon', 'preop-nurse', 'perioperative-physician', 'geriatrician', 'pharmacist', 'other', '' )),
     registration_body TEXT NOT NULL DEFAULT '' CHECK (registration_body IN ('GMC', 'NMC', 'HCPC', 'GPhC', 'other', '')),
     registration_number TEXT NOT NULL DEFAULT '',
     united_kingdom_nhs_number CHAR(12)UNIQUE
@@ -1067,7 +1070,7 @@ CREATE TABLE pre_operative_assessment_by_clinician_grade (
 );
 
 CREATE TRIGGER trigger_pre_operative_assessment_by_clinician_grade_updated_at
-    BEFORE UPDATE ON grade
+    BEFORE UPDATE ON pre_operative_assessment_by_clinician_grade
     FOR EACH ROW
     EXECUTE FUNCTION set_updated_at();
 
@@ -1083,8 +1086,6 @@ COMMENT ON COLUMN pre_operative_assessment_by_clinician_grade.deleted_at IS
     'Timestamp when the record was deleted a.k.a. soft-removed.';
 COMMENT ON COLUMN pre_operative_assessment_by_clinician_grade.pre_operative_assessment_by_clinician_id IS
     'Foreign key to the pre_operative_assessment_by_clinician table.';
-COMMENT ON COLUMN pre_operative_assessment_by_clinician_grade.assessment_id IS
-    'Foreign key to the parent assessment (unique, 1:1).';
 COMMENT ON COLUMN pre_operative_assessment_by_clinician_grade.computed_asa_grade IS
     'ASA grade computed by the engine from clinician-observed data.';
 COMMENT ON COLUMN pre_operative_assessment_by_clinician_grade.final_asa_grade IS
@@ -1126,7 +1127,7 @@ CREATE TABLE pre_operative_assessment_by_clinician_grade_rule (
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
     grade_id UUID NOT NULL
-        REFERENCES grade(id) ON DELETE CASCADE,
+        REFERENCES pre_operative_assessment_by_clinician_grade(id) ON DELETE CASCADE,
     rule_id VARCHAR(30) NOT NULL,
     instrument VARCHAR(20) NOT NULL
         CHECK (instrument IN ('asa', 'mallampati', 'rcri', 'stopbang', 'frailty')),
@@ -1136,10 +1137,10 @@ CREATE TABLE pre_operative_assessment_by_clinician_grade_rule (
 );
 
 CREATE INDEX index_grading_fired_rule_grade_id
-    ON grading_fired_rule(grade_id);
+    ON pre_operative_assessment_by_clinician_grade_rule(grade_id);
 
 CREATE TRIGGER trigger_pre_operative_assessment_by_clinician_grade_rule_updated_at
-    BEFORE UPDATE ON grading_fired_rule
+    BEFORE UPDATE ON pre_operative_assessment_by_clinician_grade_rule
     FOR EACH ROW
     EXECUTE FUNCTION set_updated_at();
 
@@ -1216,7 +1217,7 @@ CREATE TABLE pre_operative_assessment_by_clinician_grade_flag (
 );
 
 CREATE INDEX index_pre_operative_assessment_by_clinician_grade_flag_grade_id
-    ON pre_operative_assessment_by_clinician_grade_flag(pre_operative_assessment_by_clinician_grade_flag_grade_id);
+    ON pre_operative_assessment_by_clinician_grade_flag(pre_operative_assessment_by_clinician_grade_id);
 
 CREATE TRIGGER trigger_pre_operative_assessment_by_clinician_grade_flag_updated_at
     BEFORE UPDATE ON pre_operative_assessment_by_clinician_grade_flag
@@ -1233,8 +1234,6 @@ COMMENT ON COLUMN pre_operative_assessment_by_clinician_grade_flag.updated_at IS
     'Timestamp when this row was updated most-recently.';
 COMMENT ON COLUMN pre_operative_assessment_by_clinician_grade_flag.deleted_at IS
     'Timestamp when the record was deleted a.k.a. soft-removed.';
-COMMENT ON COLUMN pre_operative_assessment_by_clinician_grade_flag.grade_id IS
-    'Foreign key to the parent grade.';
 COMMENT ON COLUMN pre_operative_assessment_by_clinician_grade_flag.flag_id IS
     'Stable flag identifier (e.g. F-DIFFICULT-AIRWAY-001).';
 COMMENT ON COLUMN pre_operative_assessment_by_clinician_grade_flag.category IS

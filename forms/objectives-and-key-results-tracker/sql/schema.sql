@@ -6,7 +6,7 @@
 -- the generator after changing any NN-*.sql file.
 --
 -- Source files (10):
---   - 00_extensions.sql
+--   - 00_create_extensions.sql
 --   - 01_create_function_set_updated_at.sql
 --   - 02_create_table_reporter.sql
 --   - 03_create_table_participant.sql
@@ -19,7 +19,7 @@
 
 
 -- ========================================================================
--- BEGIN 00_extensions.sql
+-- BEGIN 00_create_extensions.sql
 -- ========================================================================
 
 --liquibase formatted sql
@@ -33,7 +33,7 @@ CREATE EXTENSION IF NOT EXISTS pg_trgm;
 --rollback DROP EXTENSION IF EXISTS pg_trgm;
 
 -- ========================================================================
--- END 00_extensions.sql
+-- END 00_create_extensions.sql
 -- ========================================================================
 
 -- ========================================================================
