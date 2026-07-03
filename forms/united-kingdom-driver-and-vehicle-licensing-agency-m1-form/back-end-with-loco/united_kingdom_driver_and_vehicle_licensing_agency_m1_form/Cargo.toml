@@ -10,7 +10,13 @@ default-run = "united_kingdom_driver_and_vehicle_licensing_agency_m1_form-cli"
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [workspace.dependencies]
-loco-rs = { version = "0.16" }
+loco-rs = { version = "0.16", default-features = false, features = [
+  "auth_jwt",
+  "bg_pg",
+  "cache_inmem",
+  "cli",
+  "with-db",
+] }
 
 [dependencies]
 loco-rs = { workspace = true  }
@@ -35,6 +41,11 @@ chrono = { version = "0.4" }
 validator = { version = "0.20" }
 uuid = { version = "1.6", features = ["v4"] }
 include_dir = { version = "0.7" }
+opentelemetry = "0.27"
+opentelemetry_sdk = { version = "0.27", features = ["rt-tokio", "metrics"] }
+opentelemetry-otlp = { version = "0.27", features = ["grpc-tonic", "metrics", "trace"] }
+tracing-opentelemetry = "0.28"
+axum-prometheus = "0.7"
 
 [[bin]]
 name = "united_kingdom_driver_and_vehicle_licensing_agency_m1_form-cli"

@@ -24,7 +24,7 @@ server:
         - Authorization
 
 workers:
-  mode: BackgroundQueue
+  mode: ForegroundBlocking
 
 queue:
   kind: Postgres
