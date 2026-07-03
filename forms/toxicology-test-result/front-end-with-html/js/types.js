@@ -1,0 +1,382 @@
+// Plain-JavaScript / JSDoc type definitions mirroring the SvelteKit
+// `src/lib/engine/types.ts` data model for the Toxicology Test Result form.
+//
+// The camelCase property names mirror the snake_case SQL columns in
+// `sql/04_create_table_toxicology_test_result.sql` and
+// `sql/05_create_table_toxicology_test_result_grade.sql`. This file builds
+// and exports the canonical empty ToxicologyResult shape used by the wizard,
+// so that newly-added fields automatically default correctly when older saved
+// state is rehydrated from localStorage. It also exports the display helpers
+// (labels + Lily badge-class mappers) shared by the form and the report.
+
+/**
+ * Report lifecycle status.
+ * @typedef {'preliminary' | 'final' | 'amended' | 'cancelled' | ''} ReportStatus
+ */
+
+/**
+ * Condition of the specimen on receipt.
+ * @typedef {'satisfactory' | 'insufficient' | 'delayed' | ''} SpecimenCondition
+ */
+
+/**
+ * Paracetamol treatment-nomogram interpretation.
+ * @typedef {'above-treatment-line' | 'below-treatment-line' |
+ *           'not-applicable' | ''} ParacetamolNomogram
+ */
+
+/**
+ * Overall result status recorded by the reporting clinician.
+ * @typedef {'normal' | 'abnormal' | 'critical' | ''} OverallResultStatus
+ */
+
+/**
+ * Axis A — overall result classification.
+ * @typedef {'normal' | 'abnormal' | 'critical' | 'inconclusive' | ''} ResultClassification
+ */
+
+/**
+ * Axis B — abnormality severity.
+ * @typedef {'none' | 'minor' | 'moderate' | 'major' | ''} AbnormalitySeverity
+ */
+
+/**
+ * Axis D — follow-up urgency.
+ * @typedef {'routine' | 'recommended' | 'urgent' | 'critical-alert' | ''} FollowUpUrgency
+ */
+
+/**
+ * Overall recommendation.
+ * @typedef {'no-action' | 'routine-follow-up' | 'further-imaging' |
+ *           'specialist-referral' | 'urgent-review' | ''} Recommendation
+ */
+
+/**
+ * A scoring axis, used in the fired-rule audit trail.
+ * @typedef {'classification' | 'severity' | 'completeness' | 'follow-up'} Axis
+ */
+
+/**
+ * Flag category (mirrors the sql/07 CHECK constraint).
+ * @typedef {'critical-result-alert' | 'incidental-finding' |
+ *           'discrepancy-with-request' | 'abnormal-requiring-action' |
+ *           'urgent-referral' | 'inadequate-technique' | 'unexpected-finding' |
+ *           'missing-impression' | 'missing-measurement' | 'other'} FlagCategory
+ */
+
+/**
+ * Flag priority.
+ * @typedef {'low' | 'medium' | 'high'} FlagPriority
+ */
+
+/**
+ * The toxicology test result (report) — the source-of-truth record the
+ * four-axis interpretation grade is computed from. Mirrors `ToxicologyResult`
+ * in `front-end-with-svelte/src/lib/engine/types.ts`.
+ *
+ * @typedef {Object} ToxicologyResult
+ * @property {string} reportingClinician
+ * @property {string} originatingRequestReference
+ * @property {ReportStatus} reportStatus
+ * @property {string} performedDate                     - ISO date (yyyy-mm-dd); '' when unset
+ * @property {string} reportedDate                      - ISO date (yyyy-mm-dd); '' when unset
+ * @property {SpecimenCondition} specimenCondition
+ * @property {string} clinicalHistory
+ * @property {string} suspectedAgent
+ * @property {number | null} timeSinceIngestionHours    - null when unanswered
+ * @property {number | null} paracetamolLevelMgL        - null when unanswered
+ * @property {number | null} salicylateLevelMgL         - null when unanswered
+ * @property {number | null} ethanolLevel               - null when unanswered
+ * @property {number | null} lithiumLevelMmolL          - null when unanswered
+ * @property {number | null} digoxinLevel               - null when unanswered
+ * @property {number | null} carboxyhaemoglobinPercent  - null when unanswered
+ * @property {string} drugsOfAbuseScreen
+ * @property {string} specificDrugLevel
+ * @property {ParacetamolNomogram} paracetamolNomogram
+ * @property {OverallResultStatus} overallResultStatus
+ * @property {boolean} toxicLevelPresent
+ * @property {string} findingsNarrative
+ * @property {string} impression
+ * @property {string} reportingCategory
+ * @property {string} recommendedFollowUp
+ * @property {boolean} criticalResultCommunicated
+ * @property {string} reportedTo
+ * @property {string} clinicianNotes
+ * @property {boolean} signed
+ */
+
+/**
+ * A single rule that fired during grading (audit trail).
+ * @typedef {Object} FiredRule
+ * @property {string} ruleId
+ * @property {Axis} axis
+ * @property {string} category
+ * @property {string} description
+ */
+
+/**
+ * A safety-critical flag, independent of the four axes.
+ * @typedef {Object} Flag
+ * @property {string} flagId
+ * @property {FlagCategory} category
+ * @property {FlagPriority} priority
+ * @property {string} description
+ * @property {string} suggestedAction
+ */
+
+/**
+ * The computed four-axis interpretation grade. Mirrors
+ * `sql/05_create_table_toxicology_test_result_grade.sql`.
+ *
+ * @typedef {Object} GradingResult
+ * @property {ResultClassification} resultClassification  - Axis A
+ * @property {AbnormalitySeverity} abnormalitySeverity    - Axis B
+ * @property {string} reportingCategory                    - Axis B structured label
+ * @property {number} reportCompletenessPercent           - Axis C (0-100)
+ * @property {FollowUpUrgency} followUpUrgency            - Axis D
+ * @property {string} targetTimeframe                      - Axis D
+ * @property {string} recommendedAction                    - Axis D
+ * @property {Recommendation} recommendation               - overall
+ * @property {FiredRule[]} firedRules
+ * @property {Flag[]} flags
+ * @property {string} gradedAt                             - ISO timestamp
+ */
+
+// Wrapped in an IIFE so locals stay scoped — this file is loaded as a
+// classic <script> (no ES modules) so the page can be opened directly via
+// `file://`. The IIFE attaches its public symbols to a single global
+// namespace, `window.ToxicologyTestResult`.
+(function () {
+'use strict';
+window.ToxicologyTestResult = window.ToxicologyTestResult || {};
+
+/**
+ * Build a fresh, fully-blank toxicology test result.
+ * Strings default to `''`; numeric assay levels default to `null`;
+ * booleans default to `false`.
+ * @returns {ToxicologyResult}
+ */
+function emptyResult() {
+  return {
+    // Report identification
+    reportingClinician: '',
+    originatingRequestReference: '',
+    reportStatus: '',
+    performedDate: '',
+    reportedDate: '',
+
+    // Specimen and clinical context
+    specimenCondition: '',
+    clinicalHistory: '',
+    suspectedAgent: '',
+    timeSinceIngestionHours: null,
+
+    // Result values (assay levels)
+    paracetamolLevelMgL: null,
+    salicylateLevelMgL: null,
+    ethanolLevel: null,
+    lithiumLevelMmolL: null,
+    digoxinLevel: null,
+    carboxyhaemoglobinPercent: null,
+    drugsOfAbuseScreen: '',
+    specificDrugLevel: '',
+
+    // Interpretation
+    paracetamolNomogram: '',
+    overallResultStatus: '',
+    toxicLevelPresent: false,
+    findingsNarrative: '',
+
+    // Impression and follow-up
+    impression: '',
+    reportingCategory: '',
+    recommendedFollowUp: '',
+
+    // Critical-result communication and sign-off
+    criticalResultCommunicated: false,
+    reportedTo: '',
+    clinicianNotes: '',
+    signed: false
+  };
+}
+
+/**
+ * The numeric (nullable) assay / timing fields. Used by the wizard for
+ * '' → null coercion on input and for null-safe localStorage rehydration.
+ * @type {string[]}
+ */
+const NUMERIC_FIELDS = [
+  'timeSinceIngestionHours',
+  'paracetamolLevelMgL',
+  'salicylateLevelMgL',
+  'ethanolLevel',
+  'lithiumLevelMmolL',
+  'digoxinLevel',
+  'carboxyhaemoglobinPercent'
+];
+
+// ----------------------------------------------------------------------
+// Display labels (mirror `src/lib/engine/utils.ts`)
+// ----------------------------------------------------------------------
+
+/** Axis A result-classification display label. */
+function resultClassificationLabel(value) {
+  switch (value) {
+    case 'normal': return 'Normal';
+    case 'abnormal': return 'Abnormal';
+    case 'critical': return 'Critical';
+    case 'inconclusive': return 'Inconclusive';
+    default: return 'Not graded';
+  }
+}
+
+/** Axis B abnormality-severity display label. */
+function abnormalitySeverityLabel(value) {
+  switch (value) {
+    case 'none': return 'None';
+    case 'minor': return 'Minor';
+    case 'moderate': return 'Moderate';
+    case 'major': return 'Major';
+    default: return 'Not graded';
+  }
+}
+
+/** Axis D follow-up-urgency display label. */
+function followUpUrgencyLabel(value) {
+  switch (value) {
+    case 'routine': return 'Routine';
+    case 'recommended': return 'Recommended';
+    case 'urgent': return 'Urgent';
+    case 'critical-alert': return 'Critical alert';
+    default: return 'Not graded';
+  }
+}
+
+/** Human-readable suspected-agent label (free text; passthrough). */
+function suspectedAgentLabel(value) {
+  return String(value ?? '').trim() === '' ? 'Unspecified' : value;
+}
+
+/** Human-readable paracetamol-nomogram label. */
+function paracetamolNomogramLabel(value) {
+  switch (value) {
+    case 'above-treatment-line': return 'Above treatment line';
+    case 'below-treatment-line': return 'Below treatment line';
+    case 'not-applicable': return 'Not applicable';
+    default: return 'Unspecified';
+  }
+}
+
+/** Human-readable overall-result-status label. */
+function overallResultStatusLabel(value) {
+  switch (value) {
+    case 'normal': return 'Normal';
+    case 'abnormal': return 'Abnormal';
+    case 'critical': return 'Critical';
+    default: return 'Unspecified';
+  }
+}
+
+/** Human-readable specimen-condition label. */
+function specimenConditionLabel(value) {
+  switch (value) {
+    case 'satisfactory': return 'Satisfactory';
+    case 'insufficient': return 'Insufficient';
+    case 'delayed': return 'Delayed';
+    default: return 'Unspecified';
+  }
+}
+
+/** Human-readable report-status label. */
+function reportStatusLabel(value) {
+  switch (value) {
+    case 'preliminary': return 'Preliminary';
+    case 'final': return 'Final';
+    case 'amended': return 'Amended';
+    case 'cancelled': return 'Cancelled';
+    default: return 'Unspecified';
+  }
+}
+
+/**
+ * Overall recommendation display label. The `further-imaging` enum value is
+ * verbatim from the shared engine / SQL CHECK constraint; for a laboratory
+ * assay it reads as "further testing".
+ */
+function recommendationLabel(value) {
+  switch (value) {
+    case 'no-action': return 'No action';
+    case 'routine-follow-up': return 'Routine follow-up';
+    case 'further-imaging': return 'Further testing';
+    case 'specialist-referral': return 'Specialist referral';
+    case 'urgent-review': return 'Urgent review';
+    default: return 'Not graded';
+  }
+}
+
+/** Flag-priority label. */
+function priorityLabel(priority) {
+  switch (priority) {
+    case 'high': return 'HIGH';
+    case 'medium': return 'MEDIUM';
+    case 'low': return 'LOW';
+    default: return '';
+  }
+}
+
+// ----------------------------------------------------------------------
+// Lily badge-class mappers (shared risk palette in css/style.css and
+// css/dashboard.css; replaces the Tailwind colour helpers in utils.ts)
+// ----------------------------------------------------------------------
+
+/** Axis A result-classification badge class. */
+function resultClassificationClass(value) {
+  switch (value) {
+    case 'normal': return 'risk-low';
+    case 'abnormal': return 'risk-moderate';
+    case 'critical': return 'risk-critical';
+    case 'inconclusive': return '';
+    default: return '';
+  }
+}
+
+/** Axis B abnormality-severity badge class. */
+function abnormalitySeverityClass(value) {
+  switch (value) {
+    case 'none': return 'risk-low';
+    case 'minor': return 'risk-moderate';
+    case 'moderate': return 'risk-high';
+    case 'major': return 'risk-critical';
+    default: return '';
+  }
+}
+
+/** Axis D follow-up-urgency badge class. */
+function followUpUrgencyClass(value) {
+  switch (value) {
+    case 'routine': return 'risk-low';
+    case 'recommended': return 'risk-moderate';
+    case 'urgent': return 'risk-high';
+    case 'critical-alert': return 'risk-critical';
+    default: return '';
+  }
+}
+
+Object.assign(window.ToxicologyTestResult, {
+  emptyResult,
+  NUMERIC_FIELDS,
+  resultClassificationLabel,
+  abnormalitySeverityLabel,
+  followUpUrgencyLabel,
+  suspectedAgentLabel,
+  paracetamolNomogramLabel,
+  overallResultStatusLabel,
+  specimenConditionLabel,
+  reportStatusLabel,
+  recommendationLabel,
+  priorityLabel,
+  resultClassificationClass,
+  abnormalitySeverityClass,
+  followUpUrgencyClass
+});
+})();

@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Pulmonary Function Test Result — structured lung-function report</title>
+  <meta name="description" content="Clinician-completed pulmonary function test result: performed test type, ATS/ERS test quality, measured spirometry and gas-transfer values, ventilatory interpretation and impression, with a four-axis interpretation grade (classification, severity, completeness, follow-up urgency) and critical-result alerts.">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <a class="skip-link visually-hidden" href="#form-sections">Skip to questionnaire</a>
+
+  <header class="page-header">
+    <div class="page-header-inner">
+      <h1>Pulmonary Function Test Result</h1>
+      <p class="subtitle">Structured lung-function report: test type, ATS/ERS quality, measured values, interpretation, and a four-axis grade.</p>
+      <p class="subtitle"><a href="dashboard.html">View the clinician dashboard →</a></p>
+
+      <progress
+        id="progress"
+        class="progress"
+        max="100"
+        value="0"
+        aria-label="Form completion"
+      ></progress>
+      <p id="progress-text" class="subtitle" aria-live="polite">0 fields answered (0%)</p>
+
+      <ol
+        id="step-list"
+        class="step-list"
+        aria-label="Lung-function report steps"
+        data-current="0"
+      ><!-- step-list-items injected by js/form-app.js --></ol>
+    </div>
+  </header>
+
+  <main>
+    <div class="intro">
+      <p>
+        Complete the seven report sections below after a pulmonary function
+        test has been performed. Record the performed test type, the ATS/ERS
+        acceptability and repeatability grade, the clinical history, the
+        measured spirometry and gas-transfer values (litres and percent
+        predicted), the structured ventilatory interpretation, and the
+        narrative findings and impression. Answers are saved automatically in
+        your browser as you go.
+      </p>
+      <p>
+        Interpret every value against the ATS/ERS 2022 interpretive standards
+        and GOLD percent-predicted banding. Severe or very-severe airflow
+        obstruction or restriction auto-escalates the follow-up urgency to a
+        critical alert.
+      </p>
+    </div>
+
+    <form
+      id="report-form"
+      class="form"
+      autocomplete="off"
+      novalidate
+      onsubmit="return false;"
+      aria-label="Pulmonary function test result report"
+    >
+      <div
+        id="error-summary"
+        class="error-summary"
+        role="alert"
+        aria-label="Validation errors"
+        hidden
+      ></div>
+
+      <div id="form-sections">
+        <!-- Steps rendered by js/form-app.js: -->
+        <!-- 1 Report identification, 2 Test quality, -->
+        <!-- 3 Measured values, 4 Interpretation, -->
+        <!-- 5 Findings, 6 Impression, -->
+        <!-- 7 Interpretation and sign-off -->
+      </div>
+
+      <div class="button-group">
+        <button type="button" id="submit-btn" class="button" data-variant="primary">
+          Submit and view report
+        </button>
+        <button type="button" id="reset-btn" class="button" data-variant="secondary">
+          Start over
+        </button>
+      </div>
+    </form>
+
+    <section
+      id="report"
+      class="panel"
+      role="region"
+      aria-live="polite"
+      aria-label="Structured lung-function report"
+    >
+      <p class="empty-message">Submit the form to see the structured report.</p>
+    </section>
+
+    <footer class="page-footer">
+      <p>
+        This structured lung-function report is aligned with the ATS/ERS 2022
+        interpretive standards and GOLD spirometric grading, including the
+        post-bronchodilator FEV1/FVC &lt; 0.70 obstruction threshold
+        (NICE NG115 / GOLD) and the percent-predicted severity bands. It is a
+        reporting aid, not a diagnosis; interpret and act in line with local
+        respiratory pathways and clinical judgement.
+      </p>
+    </footer>
+  </main>
+
+  <!--
+    Classic <script> tags (no `type="module"`) so the page works when opened
+    directly via file:// — browsers block ES-module imports from file:// for
+    CORS reasons, but allow ordered classic scripts. Each file attaches its
+    public symbols to `window.PulmonaryFunctionTestResult`.
+
+    Load order: types -> rules -> flags -> grader -> form-app
+    (grader.js composes the axis rules and the flag detector).
+  -->
+  <script src="js/types.js"></script>
+  <script src="js/rules.js"></script>
+  <script src="js/flags.js"></script>
+  <script src="js/grader.js"></script>
+  <script src="js/form-app.js"></script>
+</body>
+</html>
