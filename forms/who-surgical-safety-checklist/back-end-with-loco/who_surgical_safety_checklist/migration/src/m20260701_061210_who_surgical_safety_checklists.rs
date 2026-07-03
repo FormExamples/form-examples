@@ -54,12 +54,12 @@ impl MigrationTrait for Migration {
             ],
             &[
             ("patient", ""),
-            ("surgeon", ""),
-            ("anaesthetist", ""),
-            ("lead_nurse", ""),
-            ("sign_in_coordinator", ""),
-            ("time_out_coordinator", ""),
-            ("sign_out_coordinator", ""),
+            ("clinicians?", "surgeon_id"),
+            ("clinicians?", "anaesthetist_id"),
+            ("clinicians?", "lead_nurse_id"),
+            ("clinicians?", "sign_in_coordinator_id"),
+            ("clinicians?", "time_out_coordinator_id"),
+            ("clinicians?", "sign_out_coordinator_id"),
             ]
         ).await
     }

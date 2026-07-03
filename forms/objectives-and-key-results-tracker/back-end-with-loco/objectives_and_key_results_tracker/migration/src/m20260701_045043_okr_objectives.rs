@@ -43,7 +43,7 @@ impl MigrationTrait for Migration {
             ],
             &[
             ("reporter", ""),
-            ("parent_objective", ""),
+            ("okr_objective?", "parent_objective_id"),
             ]
         ).await
     }

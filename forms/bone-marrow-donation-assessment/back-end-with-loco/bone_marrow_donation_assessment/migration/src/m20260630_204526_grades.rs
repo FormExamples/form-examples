@@ -20,7 +20,7 @@ impl MigrationTrait for Migration {
             ("graded_at", ColType::TimestampWithTimeZone),
             ],
             &[
-            ("assessment", ""),
+            ("bone_marrow_donation_assessment", ""),
             ]
         ).await
     }

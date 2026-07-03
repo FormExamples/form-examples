@@ -19,7 +19,7 @@ impl MigrationTrait for Migration {
             ("priority", ColType::String),
             ],
             &[
-            ("grade", ""),
+            ("assessment", ""),
             ]
         ).await
     }

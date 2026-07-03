@@ -20,7 +20,7 @@ impl MigrationTrait for Migration {
             ],
             &[
             ("arc42_documentation", ""),
-            ("parent", ""),
+            ("building_blocks?", "parent_id"),
             ]
         ).await
     }

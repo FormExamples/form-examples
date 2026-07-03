@@ -22,7 +22,7 @@ impl MigrationTrait for Migration {
             ("sort_order", ColType::Integer),
             ],
             &[
-            ("polypharmacy_review", ""),
+            ("assessment_polypharmacy_review", ""),
             ]
         ).await
     }

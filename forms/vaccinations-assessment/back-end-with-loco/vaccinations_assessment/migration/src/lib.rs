@@ -15,6 +15,7 @@ mod m20260701_060508_contraindications_allergies;
 mod m20260701_060532_consent_informations;
 mod m20260701_060556_administration_records;
 mod m20260701_060625_clinical_reviews;
+mod m20260701_060640_grades;
 mod m20260701_060652_fired_rules;
 pub struct Migrator;
 
@@ -35,6 +36,7 @@ impl MigratorTrait for Migrator {
             Box::new(m20260701_060532_consent_informations::Migration),
             Box::new(m20260701_060556_administration_records::Migration),
             Box::new(m20260701_060625_clinical_reviews::Migration),
+            Box::new(m20260701_060640_grades::Migration),
             Box::new(m20260701_060652_fired_rules::Migration),
             // inject-above (do not remove this comment)
         ]

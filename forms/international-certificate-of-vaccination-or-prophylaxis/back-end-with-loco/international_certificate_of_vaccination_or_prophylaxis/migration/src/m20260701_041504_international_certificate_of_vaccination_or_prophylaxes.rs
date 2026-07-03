@@ -41,7 +41,7 @@ impl MigrationTrait for Migration {
             ("patient", ""),
             ("clinician", ""),
             ("center", ""),
-            ("medical_waiver_signed_by_clinician", ""),
+            ("clinician", "medical_waiver_signed_by_clinician_id"),
             ]
         ).await
     }

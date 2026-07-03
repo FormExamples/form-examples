@@ -20,7 +20,7 @@ impl MigrationTrait for Migration {
             ("description", ColType::String),
             ],
             &[
-            ("grade", ""),
+            ("pre_operative_assessment_by_clinician_grade", "grade_id"),
             ]
         ).await
     }

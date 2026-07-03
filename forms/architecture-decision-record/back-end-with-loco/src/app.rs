@@ -9,11 +9,17 @@ use loco_rs::{
     boot::{create_app, BootResult, StartMode},
     config::Config,
     controller::AppRoutes,
+    db::truncate_table,
     environment::Environment,
     task::Tasks,
     Result,
 };
 use migration::Migrator;
+
+use crate::models::_entities::{
+    architecture_decision_record_notes, architecture_decision_record_positions,
+    architecture_decision_records, authors, organizations,
+};
 
 /// App.
 pub struct App;
@@ -48,6 +54,8 @@ impl Hooks for App {
 
     fn routes(_ctx: &AppContext) -> AppRoutes {
         AppRoutes::with_default_routes()
+            .add_route(crate::controllers::architecture_decision_record::routes())
+            .add_route(crate::controllers::architecture_decision_record::api_routes())
     }
 
     async fn connect_workers(_ctx: &AppContext, _queue: &Queue) -> Result<()> {
@@ -57,7 +65,13 @@ impl Hooks for App {
     #[allow(unused_variables)]
     fn register_tasks(tasks: &mut Tasks) {}
 
-    async fn truncate(_ctx: &AppContext) -> Result<()> {
+    async fn truncate(ctx: &AppContext) -> Result<()> {
+        // Delete children before parents to satisfy FK constraints.
+        truncate_table(&ctx.db, architecture_decision_record_notes::Entity).await?;
+        truncate_table(&ctx.db, architecture_decision_record_positions::Entity).await?;
+        truncate_table(&ctx.db, architecture_decision_records::Entity).await?;
+        truncate_table(&ctx.db, authors::Entity).await?;
+        truncate_table(&ctx.db, organizations::Entity).await?;
         Ok(())
     }
 

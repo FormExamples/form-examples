@@ -21,7 +21,7 @@ impl MigrationTrait for Migration {
             ],
             &[
             ("meeting", ""),
-            ("related_action_item", ""),
+            ("action_item?", "related_action_item_id"),
             ]
         ).await
     }

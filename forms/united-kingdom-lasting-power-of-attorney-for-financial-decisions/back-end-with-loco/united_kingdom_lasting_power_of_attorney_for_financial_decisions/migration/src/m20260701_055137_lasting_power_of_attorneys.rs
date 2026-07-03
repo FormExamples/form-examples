@@ -24,7 +24,7 @@ impl MigrationTrait for Migration {
             ("status", ColType::Text),
             ],
             &[
-            ("donor_person", ""),
+            ("people", "donor_person_id"),
             ]
         ).await
     }

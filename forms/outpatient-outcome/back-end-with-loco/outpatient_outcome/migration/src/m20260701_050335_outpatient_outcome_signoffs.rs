@@ -19,7 +19,7 @@ impl MigrationTrait for Migration {
             ],
             &[
             ("outpatient_outcome", ""),
-            ("reporting_clinician", ""),
+            ("clinician", "reporting_clinician_id"),
             ]
         ).await
     }

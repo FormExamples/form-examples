@@ -22,7 +22,7 @@ impl MigrationTrait for Migration {
             ("sort_order", ColType::Integer),
             ],
             &[
-            ("range_of_motion", ""),
+            ("assessment_range_of_motion", ""),
             ]
         ).await
     }
