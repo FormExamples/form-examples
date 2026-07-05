@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
+	import { browser } from '$app/environment';
 	import { page } from '$app/state';
 	import { resultStore } from '$lib/stores/result.svelte';
 	import { calculateGrade } from '$lib/engine/grader';
@@ -24,23 +25,77 @@
 	const id = $derived(page.params.id ?? 'new');
 	const isNew = $derived(id === 'new');
 
-	// Load the draft for this id whenever the route param changes. For a known
-	// sample row, seed a blank draft with the row's worker / status fields.
+	// Request → response handoff: the request form's "Draft the employer response"
+	// action leaves the worker/manager identity and the requested adjustment
+	// categories in localStorage; consume them into a fresh draft.
+	const HANDOFF_KEY = 'neurodiversity-adjustment.handoff.v1';
+	const CATEGORY_LABELS: Record<string, string> = {
+		'working-environment': 'Working environment',
+		'equipment-technology': 'Equipment / technology',
+		'working-arrangements': 'Working arrangements',
+		communication: 'Communication',
+		'support-mentoring': 'Support / mentoring',
+		'recruitment-process': 'Recruitment process',
+		'policy-dress': 'Policy / dress code',
+		other: 'Other'
+	};
+	interface Handoff {
+		requestReference?: string;
+		worker?: { name?: string; jobTitle?: string; department?: string };
+		manager?: { name?: string; jobTitle?: string; department?: string };
+		requestedCategories?: string[];
+	}
+	let requestedCategories = $state<string[]>([]);
+
+	function readHandoff(): Handoff | null {
+		if (!browser) return null;
+		try {
+			const raw = localStorage.getItem(HANDOFF_KEY);
+			return raw ? (JSON.parse(raw) as Handoff) : null;
+		} catch {
+			return null;
+		}
+	}
+
+	// Load the draft for this id whenever the route param changes. A pending
+	// handoff (fresh drafts only) wins; otherwise seed from a known sample row.
 	$effect(() => {
 		const current = id;
-		if (resultStore.id !== current) {
-			const sample = sampleReports.find((r) => r.id === current);
-			resultStore.loadForId(
-				current,
-				sample
-					? {
-							workerName: sample.workerName,
-							responseStatus: sample.responseStatus,
-							respondedDate: sample.respondedDate
-						}
-					: undefined
-			);
+		if (resultStore.id === current) return;
+		if (current === 'new') {
+			const h = readHandoff();
+			if (h) {
+				resultStore.loadForId(current, {
+					workerName: h.worker?.name ?? '',
+					workerJobTitle: h.worker?.jobTitle ?? '',
+					workerDepartment: h.worker?.department ?? '',
+					managerName: h.manager?.name ?? '',
+					managerJobTitle: h.manager?.jobTitle ?? '',
+					managerDepartment: h.manager?.department ?? '',
+					requestReference: h.requestReference ?? ''
+				});
+				requestedCategories = h.requestedCategories ?? [];
+				if (browser) {
+					try {
+						localStorage.removeItem(HANDOFF_KEY);
+					} catch {
+						/* ignore */
+					}
+				}
+				return;
+			}
 		}
+		const sample = sampleReports.find((r) => r.id === current);
+		resultStore.loadForId(
+			current,
+			sample
+				? {
+						workerName: sample.workerName,
+						responseStatus: sample.responseStatus,
+						respondedDate: sample.respondedDate
+					}
+				: undefined
+		);
 	});
 
 	let errors = $state<{ id: string; message: string }[]>([]);
@@ -94,6 +149,19 @@
 			{/each}
 		</StepList>
 	</header>
+
+	{#if requestedCategories.length > 0}
+		<div
+			class="mb-6 rounded-md border-l-4 border-primary bg-primary/10 px-4 py-3 text-sm"
+			role="note"
+		>
+			<strong>Adjustments requested by the worker:</strong>
+			{requestedCategories.map((c) => CATEGORY_LABELS[c] ?? c).join(', ')}.
+			<span class="block text-base-content/70">
+				Mark each one agreed, offer an alternative, or record why it is declined.
+			</span>
+		</div>
+	{/if}
 
 	{#if errors.length > 0}
 		<ErrorSummary title="Please fix the following before submitting" class="mb-6">

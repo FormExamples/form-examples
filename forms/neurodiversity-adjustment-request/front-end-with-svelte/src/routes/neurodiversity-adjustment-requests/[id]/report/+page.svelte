@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
+	import { browser } from '$app/environment';
 	import { page } from '$app/state';
 	import { requestStore } from '$lib/stores/result.svelte';
 	import Badge from '$lib/components/ui/Badge.svelte';
@@ -25,6 +26,52 @@
 	const id = $derived(page.params.id ?? 'new');
 	const data = $derived(requestStore.data);
 	const result = $derived(requestStore.result);
+
+	// Request → response handoff (producer). Package the worker/manager identity
+	// and requested adjustment categories into a same-origin localStorage handoff
+	// that the sibling response app consumes to open a pre-filled response.
+	const HANDOFF_KEY = 'neurodiversity-adjustment.handoff.v1';
+	const ADJUSTMENT_CATEGORY: Record<string, string> = {
+		adjustmentWorkingEnvironment: 'working-environment',
+		adjustmentEquipmentTechnology: 'equipment-technology',
+		adjustmentWorkingArrangements: 'working-arrangements',
+		adjustmentCommunication: 'communication',
+		adjustmentSupportMentoring: 'support-mentoring',
+		adjustmentRecruitmentProcess: 'recruitment-process',
+		adjustmentPolicyDress: 'policy-dress',
+		adjustmentOther: 'other'
+	};
+	// Only offer the handoff where both apps are served together (monorepo layout).
+	const canHandoff = $derived(
+		browser && window.location.pathname.includes('/neurodiversity-adjustment-request/')
+	);
+
+	function draftResponse() {
+		if (!browser) return;
+		const d = requestStore.data as unknown as Record<string, unknown>;
+		const requestedCategories = Object.keys(ADJUSTMENT_CATEGORY).filter((k) => d[k] === true).map((k) => ADJUSTMENT_CATEGORY[k]);
+		const slug = (data.workerName || 'worker').toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '').slice(0, 24);
+		const now = new Date();
+		const stamp = `${now.getFullYear()}${String(now.getMonth() + 1).padStart(2, '0')}${String(now.getDate()).padStart(2, '0')}`;
+		const handoff = {
+			requestReference: `REQ-${stamp}-${slug || 'worker'}`,
+			worker: { name: data.workerName, jobTitle: data.workerJobTitle, department: data.workerDepartment },
+			manager: { name: data.managerName, jobTitle: data.managerJobTitle, department: data.managerDepartment },
+			requestedCategories,
+			createdAt: now.toISOString()
+		};
+		try {
+			localStorage.setItem(HANDOFF_KEY, JSON.stringify(handoff));
+		} catch {
+			/* ignore */
+		}
+		// Same-origin transform: swap the sibling form directory and target the
+		// response app's new-draft route, preserving any base-path prefix.
+		const url = window.location.href
+			.replace('/neurodiversity-adjustment-request/', '/neurodiversity-adjustment-response/')
+			.replace(/\/neurodiversity-adjustment-requests\/[^/]+\/report[^]*$/, '/neurodiversity-adjustment-responses/new');
+		window.location.href = url;
+	}
 
 	$effect(() => {
 		if (!requestStore.result) {
@@ -70,6 +117,9 @@
 			<div class="flex items-center gap-3">
 				{#if pdfError}
 					<span class="text-sm text-error">{pdfError}</span>
+				{/if}
+				{#if canHandoff}
+					<Button data-variant="secondary" onclick={draftResponse}>Draft the employer response →</Button>
 				{/if}
 				<Button data-variant="primary" onclick={downloadPDF}>Download PDF</Button>
 				<Button data-variant="secondary" onclick={() => window.print()}>Print</Button>

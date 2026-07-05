@@ -961,3 +961,19 @@ table.subscales td.num {
 :root.a11y-comfortable label,
 :root.a11y-comfortable li { max-width: 68ch; }
 :root.a11y-comfortable .field { margin-bottom: 1.25rem; }
+
+/* Request→response handoff banner (js/linkage.js). */
+.requested-banner {
+  margin: 0 0 1.25rem;
+  padding: 0.75rem 1rem;
+  border-left: 4px solid var(--color-primary, #2563eb);
+  background: var(--color-primary-light, #eff6ff);
+  border-radius: var(--radius-sm, 6px);
+  font-size: 0.9375rem;
+}
+.requested-banner .requested-hint {
+  display: block;
+  margin-top: 0.25rem;
+  color: var(--color-muted, #64748b);
+  font-size: 0.875rem;
+}
