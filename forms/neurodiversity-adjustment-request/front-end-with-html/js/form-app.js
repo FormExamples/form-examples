@@ -27,6 +27,7 @@ const {
 
 const STORAGE_KEY =
   'neurodiversity-adjustment-request.front-end-with-html.v1';
+try { window.__A11Y_DRAFT_KEY__ = STORAGE_KEY; } catch (e) {}
 const TOTAL_STEPS = 8;
 
 function loadState() {

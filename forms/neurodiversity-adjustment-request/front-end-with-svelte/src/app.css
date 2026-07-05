@@ -341,3 +341,16 @@
 	margin: 1.5rem 0;
 }
 .panel .empty-message { color: var(--color-muted); margin: 0; }
+
+/* Accessibility reading preferences (AccessibilityControls.svelte). */
+:root[data-a11y-scale="large"]  { font-size: 112.5%; }
+:root[data-a11y-scale="xlarge"] { font-size: 125%; }
+:root.a11y-comfortable body {
+	font-family: "Atkinson Hyperlegible", "Verdana", "Segoe UI", system-ui, sans-serif;
+	line-height: 1.8;
+	letter-spacing: 0.02em;
+	word-spacing: 0.08em;
+}
+:root.a11y-comfortable p,
+:root.a11y-comfortable label,
+:root.a11y-comfortable li { max-width: 68ch; }

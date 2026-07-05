@@ -5,6 +5,7 @@
 	import { page } from '$app/state';
 	import ThemeSelect from '$lib/components/ui/ThemeSelect.svelte';
 	import ThemeSelectOption from '$lib/components/ui/ThemeSelectOption.svelte';
+	import AccessibilityControls from '$lib/components/ui/AccessibilityControls.svelte';
 	import { THEME_OPTIONS, THEME_STORAGE_KEY, DEFAULT_THEME } from '$lib/config/themes';
 	let { children } = $props();
 
@@ -47,6 +48,7 @@
 						<ThemeSelectOption value={opt.value}>{opt.label}</ThemeSelectOption>
 					{/each}
 				</ThemeSelect>
+				<AccessibilityControls />
 			</div>
 		</div>
 	</nav>
