@@ -1,0 +1,1298 @@
+{
+  "resourceType": "Bundle",
+  "id": "550e8400-e29b-41d4-a716-000000000063",
+  "type": "document",
+  "timestamp": "2026-04-09T10:00:00+00:00",
+  "meta": {
+    "profile": [
+      "http://hl7.org/fhir/StructureDefinition/Bundle"
+    ],
+    "tag": [
+      {
+        "system": "https://github.com/joelparkerhenderson/form-examples",
+        "code": "example",
+        "display": "Neurodiversity Adjustment Response example bundle"
+      }
+    ]
+  },
+  "entry": [
+    {
+      "fullUrl": "urn:uuid:660e8400-e29b-41d4-a716-446655440001",
+      "resource": {
+        "resourceType": "Observation",
+        "id": "660e8400-e29b-41d4-a716-446655440001",
+        "meta": {
+          "profile": [
+            "http://hl7.org/fhir/StructureDefinition/Observation"
+          ],
+          "lastUpdated": "2026-04-09T10:00:00+00:00"
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "survey",
+                "display": "Survey"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "urn:form-examples:neurodiversity-adjustment-response",
+              "code": "manager",
+              "display": "Manager"
+            }
+          ]
+        },
+        "subject": {
+          "reference": "Patient/bb0e8400-e29b-41d4-a716-446655440006"
+        },
+        "encounter": {
+          "reference": "Encounter/cc0e8400-e29b-41d4-a716-446655440007"
+        },
+        "effectiveDateTime": "2026-04-09T10:00:00+00:00",
+        "component": [
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:neurodiversity-adjustment-response",
+                  "code": "deleted_at",
+                  "display": "Deleted At"
+                }
+              ]
+            },
+            "valueDateTime": "2026-04-09T10:00:00+00:00"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:neurodiversity-adjustment-response",
+                  "code": "name",
+                  "display": "Name"
+                }
+              ]
+            },
+            "valueString": "Example"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:neurodiversity-adjustment-response",
+                  "code": "email",
+                  "display": "Email"
+                }
+              ]
+            },
+            "valueString": "jane.doe@example.com"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:neurodiversity-adjustment-response",
+                  "code": "phone",
+                  "display": "Phone"
+                }
+              ]
+            },
+            "valueString": "07700900000"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:neurodiversity-adjustment-response",
+                  "code": "postal_address_as_full_text",
+                  "display": "Postal Address As Full Text"
+                }
+              ]
+            },
+            "valueString": "Example text."
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:neurodiversity-adjustment-response",
+                  "code": "country_as_iso_3166_1_alpha_2",
+                  "display": "Country As Iso 3166 1 Alpha 2"
+                }
+              ]
+            },
+            "valueString": ""
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:neurodiversity-adjustment-response",
+                  "code": "postcode",
+                  "display": "Postcode"
+                }
+              ]
+            },
+            "valueString": "SW1A 1AA"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:neurodiversity-adjustment-response",
+                  "code": "role",
+                  "display": "Role"
+                }
+              ]
+            },
+            "valueCodeableConcept": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:neurodiversity-adjustment-response:role",
+                  "code": "line-manager",
+                  "display": "Line-Manager"
+                }
+              ]
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:neurodiversity-adjustment-response",
+                  "code": "job_title",
+                  "display": "Job Title"
+                }
+              ]
+            },
+            "valueString": "Example Title"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:neurodiversity-adjustment-response",
+                  "code": "department",
+                  "display": "Department"
+                }
+              ]
+            },
+            "valueString": ""
+          }
+        ]
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:770e8400-e29b-41d4-a716-446655440002",
+      "resource": {
+        "resourceType": "Observation",
+        "id": "770e8400-e29b-41d4-a716-446655440002",
+        "meta": {
+          "profile": [
+            "http://hl7.org/fhir/StructureDefinition/Observation"
+          ],
+          "lastUpdated": "2026-04-09T10:00:00+00:00"
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "survey",
+                "display": "Survey"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "urn:form-examples:neurodiversity-adjustment-response",
+              "code": "neurodiversity_adjustment_response",
+              "display": "Neurodiversity Adjustment Response"
+            }
+          ]
+        },
+        "subject": {
+          "reference": "Patient/bb0e8400-e29b-41d4-a716-446655440006"
+        },
+        "encounter": {
+          "reference": "Encounter/cc0e8400-e29b-41d4-a716-446655440007"
+        },
+        "effectiveDateTime": "2026-04-09T10:00:00+00:00",
+        "component": [
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:neurodiversity-adjustment-response",
+                  "code": "deleted_at",
+                  "display": "Deleted At"
+                }
+              ]
+            },
+            "valueDateTime": "2026-04-09T10:00:00+00:00"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:neurodiversity-adjustment-response",
+                  "code": "response_status",
+                  "display": "Response Status"
+                }
+              ]
+            },
+            "valueCodeableConcept": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:neurodiversity-adjustment-response:response_status",
+                  "code": "draft",
+                  "display": "Draft"
+                }
+              ]
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:neurodiversity-adjustment-response",
+                  "code": "request_reference",
+                  "display": "Request Reference"
+                }
+              ]
+            },
+            "valueString": ""
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:neurodiversity-adjustment-response",
+                  "code": "handling_method",
+                  "display": "Handling Method"
+                }
+              ]
+            },
+            "valueCodeableConcept": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:neurodiversity-adjustment-response:handling_method",
+                  "code": "meeting",
+                  "display": "Meeting"
+                }
+              ]
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:neurodiversity-adjustment-response",
+                  "code": "assessed_date",
+                  "display": "Assessed Date"
+                }
+              ]
+            },
+            "valueDateTime": "2026-01-15"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:neurodiversity-adjustment-response",
+                  "code": "responded_date",
+                  "display": "Responded Date"
+                }
+              ]
+            },
+            "valueDateTime": "2026-01-15"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:neurodiversity-adjustment-response",
+                  "code": "effective_date",
+                  "display": "Effective Date"
+                }
+              ]
+            },
+            "valueDateTime": "2026-01-15"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:neurodiversity-adjustment-response",
+                  "code": "overall_decision",
+                  "display": "Overall Decision"
+                }
+              ]
+            },
+            "valueCodeableConcept": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:neurodiversity-adjustment-response:overall_decision",
+                  "code": "agreed",
+                  "display": "Agreed"
+                }
+              ]
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:neurodiversity-adjustment-response",
+                  "code": "decision_rationale",
+                  "display": "Decision Rationale"
+                }
+              ]
+            },
+            "valueString": ""
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:neurodiversity-adjustment-response",
+                  "code": "decline_reason_category",
+                  "display": "Decline Reason Category"
+                }
+              ]
+            },
+            "valueCodeableConcept": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:neurodiversity-adjustment-response:decline_reason_category",
+                  "code": "not-reasonable",
+                  "display": "Not-Reasonable"
+                }
+              ]
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:neurodiversity-adjustment-response",
+                  "code": "agreed_working_environment",
+                  "display": "Agreed Working Environment"
+                }
+              ]
+            },
+            "valueBoolean": true
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:neurodiversity-adjustment-response",
+                  "code": "agreed_equipment_technology",
+                  "display": "Agreed Equipment Technology"
+                }
+              ]
+            },
+            "valueBoolean": true
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:neurodiversity-adjustment-response",
+                  "code": "agreed_working_arrangements",
+                  "display": "Agreed Working Arrangements"
+                }
+              ]
+            },
+            "valueBoolean": true
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:neurodiversity-adjustment-response",
+                  "code": "agreed_communication",
+                  "display": "Agreed Communication"
+                }
+              ]
+            },
+            "valueBoolean": true
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:neurodiversity-adjustment-response",
+                  "code": "agreed_support_mentoring",
+                  "display": "Agreed Support Mentoring"
+                }
+              ]
+            },
+            "valueBoolean": true
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:neurodiversity-adjustment-response",
+                  "code": "agreed_recruitment_process",
+                  "display": "Agreed Recruitment Process"
+                }
+              ]
+            },
+            "valueBoolean": true
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:neurodiversity-adjustment-response",
+                  "code": "agreed_policy_dress",
+                  "display": "Agreed Policy Dress"
+                }
+              ]
+            },
+            "valueBoolean": true
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:neurodiversity-adjustment-response",
+                  "code": "agreed_other",
+                  "display": "Agreed Other"
+                }
+              ]
+            },
+            "valueBoolean": true
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:neurodiversity-adjustment-response",
+                  "code": "agreed_adjustments_detail",
+                  "display": "Agreed Adjustments Detail"
+                }
+              ]
+            },
+            "valueString": ""
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:neurodiversity-adjustment-response",
+                  "code": "alternative_adjustments_detail",
+                  "display": "Alternative Adjustments Detail"
+                }
+              ]
+            },
+            "valueString": ""
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:neurodiversity-adjustment-response",
+                  "code": "trial_period",
+                  "display": "Trial Period"
+                }
+              ]
+            },
+            "valueBoolean": true
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:neurodiversity-adjustment-response",
+                  "code": "trial_period_weeks",
+                  "display": "Trial Period Weeks"
+                }
+              ]
+            },
+            "valueInteger": 1
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:neurodiversity-adjustment-response",
+                  "code": "review_scheduled",
+                  "display": "Review Scheduled"
+                }
+              ]
+            },
+            "valueBoolean": true
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:neurodiversity-adjustment-response",
+                  "code": "review_date",
+                  "display": "Review Date"
+                }
+              ]
+            },
+            "valueDateTime": "2026-01-15"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:neurodiversity-adjustment-response",
+                  "code": "occupational_health_referred",
+                  "display": "Occupational Health Referred"
+                }
+              ]
+            },
+            "valueBoolean": true
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:neurodiversity-adjustment-response",
+                  "code": "access_to_work_referred",
+                  "display": "Access To Work Referred"
+                }
+              ]
+            },
+            "valueBoolean": true
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:neurodiversity-adjustment-response",
+                  "code": "support_resources_detail",
+                  "display": "Support Resources Detail"
+                }
+              ]
+            },
+            "valueString": ""
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:neurodiversity-adjustment-response",
+                  "code": "responsibilities_detail",
+                  "display": "Responsibilities Detail"
+                }
+              ]
+            },
+            "valueString": ""
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:neurodiversity-adjustment-response",
+                  "code": "point_of_contact",
+                  "display": "Point Of Contact"
+                }
+              ]
+            },
+            "valueString": ""
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:neurodiversity-adjustment-response",
+                  "code": "escalated",
+                  "display": "Escalated"
+                }
+              ]
+            },
+            "valueBoolean": true
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:neurodiversity-adjustment-response",
+                  "code": "escalation_detail",
+                  "display": "Escalation Detail"
+                }
+              ]
+            },
+            "valueString": ""
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:neurodiversity-adjustment-response",
+                  "code": "notes",
+                  "display": "Notes"
+                }
+              ]
+            },
+            "valueString": "Example text."
+          }
+        ]
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:880e8400-e29b-41d4-a716-446655440003",
+      "resource": {
+        "resourceType": "Observation",
+        "id": "880e8400-e29b-41d4-a716-446655440003",
+        "meta": {
+          "profile": [
+            "http://hl7.org/fhir/StructureDefinition/Observation"
+          ],
+          "lastUpdated": "2026-04-09T10:00:00+00:00"
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "survey",
+                "display": "Survey"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "urn:form-examples:neurodiversity-adjustment-response",
+              "code": "neurodiversity_adjustment_response_grade",
+              "display": "Neurodiversity Adjustment Response Grade"
+            }
+          ]
+        },
+        "subject": {
+          "reference": "Patient/bb0e8400-e29b-41d4-a716-446655440006"
+        },
+        "encounter": {
+          "reference": "Encounter/cc0e8400-e29b-41d4-a716-446655440007"
+        },
+        "effectiveDateTime": "2026-04-09T10:00:00+00:00",
+        "component": [
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:neurodiversity-adjustment-response",
+                  "code": "deleted_at",
+                  "display": "Deleted At"
+                }
+              ]
+            },
+            "valueDateTime": "2026-04-09T10:00:00+00:00"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:neurodiversity-adjustment-response",
+                  "code": "outcome_classification",
+                  "display": "Outcome Classification"
+                }
+              ]
+            },
+            "valueCodeableConcept": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:neurodiversity-adjustment-response:outcome_classification",
+                  "code": "fully-agreed",
+                  "display": "Fully-Agreed"
+                }
+              ]
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:neurodiversity-adjustment-response",
+                  "code": "legal_risk_band",
+                  "display": "Legal Risk Band"
+                }
+              ]
+            },
+            "valueCodeableConcept": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:neurodiversity-adjustment-response:legal_risk_band",
+                  "code": "ok",
+                  "display": "Ok"
+                }
+              ]
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:neurodiversity-adjustment-response",
+                  "code": "completeness_percent",
+                  "display": "Completeness Percent"
+                }
+              ]
+            },
+            "valueInteger": 1
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:neurodiversity-adjustment-response",
+                  "code": "follow_up_urgency",
+                  "display": "Follow Up Urgency"
+                }
+              ]
+            },
+            "valueCodeableConcept": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:neurodiversity-adjustment-response:follow_up_urgency",
+                  "code": "none",
+                  "display": "None"
+                }
+              ]
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:neurodiversity-adjustment-response",
+                  "code": "target_timeframe",
+                  "display": "Target Timeframe"
+                }
+              ]
+            },
+            "valueString": ""
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:neurodiversity-adjustment-response",
+                  "code": "recommendation",
+                  "display": "Recommendation"
+                }
+              ]
+            },
+            "valueCodeableConcept": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:neurodiversity-adjustment-response:recommendation",
+                  "code": "implement",
+                  "display": "Implement"
+                }
+              ]
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:neurodiversity-adjustment-response",
+                  "code": "manager_notes",
+                  "display": "Manager Notes"
+                }
+              ]
+            },
+            "valueString": "Example text."
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:neurodiversity-adjustment-response",
+                  "code": "signed_at",
+                  "display": "Signed At"
+                }
+              ]
+            },
+            "valueDateTime": "2026-04-09T10:00:00+00:00"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:neurodiversity-adjustment-response",
+                  "code": "graded_at",
+                  "display": "Graded At"
+                }
+              ]
+            },
+            "valueDateTime": "2026-04-09T10:00:00+00:00"
+          }
+        ]
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:aa0e8400-e29b-41d4-a716-446655440005",
+      "resource": {
+        "resourceType": "Observation",
+        "id": "aa0e8400-e29b-41d4-a716-446655440005",
+        "meta": {
+          "profile": [
+            "http://hl7.org/fhir/StructureDefinition/Observation"
+          ],
+          "lastUpdated": "2026-04-09T10:00:00+00:00"
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "survey",
+                "display": "Survey"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "urn:form-examples:neurodiversity-adjustment-response",
+              "code": "neurodiversity_adjustment_response_grade_flag",
+              "display": "Neurodiversity Adjustment Response Grade Flag"
+            }
+          ]
+        },
+        "subject": {
+          "reference": "Patient/bb0e8400-e29b-41d4-a716-446655440006"
+        },
+        "encounter": {
+          "reference": "Encounter/cc0e8400-e29b-41d4-a716-446655440007"
+        },
+        "effectiveDateTime": "2026-04-09T10:00:00+00:00",
+        "component": [
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:neurodiversity-adjustment-response",
+                  "code": "deleted_at",
+                  "display": "Deleted At"
+                }
+              ]
+            },
+            "valueDateTime": "2026-04-09T10:00:00+00:00"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:neurodiversity-adjustment-response",
+                  "code": "category",
+                  "display": "Category"
+                }
+              ]
+            },
+            "valueCodeableConcept": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:neurodiversity-adjustment-response:category",
+                  "code": "discrimination-risk",
+                  "display": "Discrimination-Risk"
+                }
+              ]
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:neurodiversity-adjustment-response",
+                  "code": "priority",
+                  "display": "Priority"
+                }
+              ]
+            },
+            "valueCodeableConcept": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:neurodiversity-adjustment-response:priority",
+                  "code": "low",
+                  "display": "Low"
+                }
+              ]
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:neurodiversity-adjustment-response",
+                  "code": "description",
+                  "display": "Description"
+                }
+              ]
+            },
+            "valueString": "Example text."
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:neurodiversity-adjustment-response",
+                  "code": "suggested_action",
+                  "display": "Suggested Action"
+                }
+              ]
+            },
+            "valueString": ""
+          }
+        ]
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:990e8400-e29b-41d4-a716-446655440004",
+      "resource": {
+        "resourceType": "Observation",
+        "id": "990e8400-e29b-41d4-a716-446655440004",
+        "meta": {
+          "profile": [
+            "http://hl7.org/fhir/StructureDefinition/Observation"
+          ],
+          "lastUpdated": "2026-04-09T10:00:00+00:00"
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "survey",
+                "display": "Survey"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "urn:form-examples:neurodiversity-adjustment-response",
+              "code": "neurodiversity_adjustment_response_grade_rule",
+              "display": "Neurodiversity Adjustment Response Grade Rule"
+            }
+          ]
+        },
+        "subject": {
+          "reference": "Patient/bb0e8400-e29b-41d4-a716-446655440006"
+        },
+        "encounter": {
+          "reference": "Encounter/cc0e8400-e29b-41d4-a716-446655440007"
+        },
+        "effectiveDateTime": "2026-04-09T10:00:00+00:00",
+        "component": [
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:neurodiversity-adjustment-response",
+                  "code": "deleted_at",
+                  "display": "Deleted At"
+                }
+              ]
+            },
+            "valueDateTime": "2026-04-09T10:00:00+00:00"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:neurodiversity-adjustment-response",
+                  "code": "axis",
+                  "display": "Axis"
+                }
+              ]
+            },
+            "valueCodeableConcept": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:neurodiversity-adjustment-response:axis",
+                  "code": "outcome",
+                  "display": "Outcome"
+                }
+              ]
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:neurodiversity-adjustment-response",
+                  "code": "category",
+                  "display": "Category"
+                }
+              ]
+            },
+            "valueString": "General"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:neurodiversity-adjustment-response",
+                  "code": "description",
+                  "display": "Description"
+                }
+              ]
+            },
+            "valueString": "Example text."
+          }
+        ]
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:550e8400-e29b-41d4-a716-446655440000",
+      "resource": {
+        "resourceType": "Observation",
+        "id": "550e8400-e29b-41d4-a716-446655440000",
+        "meta": {
+          "profile": [
+            "http://hl7.org/fhir/StructureDefinition/Observation"
+          ],
+          "lastUpdated": "2026-04-09T10:00:00+00:00"
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "survey",
+                "display": "Survey"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "urn:form-examples:neurodiversity-adjustment-response",
+              "code": "worker",
+              "display": "Worker"
+            }
+          ]
+        },
+        "subject": {
+          "reference": "Patient/bb0e8400-e29b-41d4-a716-446655440006"
+        },
+        "encounter": {
+          "reference": "Encounter/cc0e8400-e29b-41d4-a716-446655440007"
+        },
+        "effectiveDateTime": "2026-04-09T10:00:00+00:00",
+        "component": [
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:neurodiversity-adjustment-response",
+                  "code": "deleted_at",
+                  "display": "Deleted At"
+                }
+              ]
+            },
+            "valueDateTime": "2026-04-09T10:00:00+00:00"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:neurodiversity-adjustment-response",
+                  "code": "name",
+                  "display": "Name"
+                }
+              ]
+            },
+            "valueString": "Example"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:neurodiversity-adjustment-response",
+                  "code": "email",
+                  "display": "Email"
+                }
+              ]
+            },
+            "valueString": "jane.doe@example.com"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:neurodiversity-adjustment-response",
+                  "code": "phone",
+                  "display": "Phone"
+                }
+              ]
+            },
+            "valueString": "07700900000"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:neurodiversity-adjustment-response",
+                  "code": "postal_address_as_full_text",
+                  "display": "Postal Address As Full Text"
+                }
+              ]
+            },
+            "valueString": "Example text."
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:neurodiversity-adjustment-response",
+                  "code": "country_as_iso_3166_1_alpha_2",
+                  "display": "Country As Iso 3166 1 Alpha 2"
+                }
+              ]
+            },
+            "valueString": ""
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:neurodiversity-adjustment-response",
+                  "code": "postcode",
+                  "display": "Postcode"
+                }
+              ]
+            },
+            "valueString": "SW1A 1AA"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:neurodiversity-adjustment-response",
+                  "code": "employee_reference",
+                  "display": "Employee Reference"
+                }
+              ]
+            },
+            "valueString": ""
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:neurodiversity-adjustment-response",
+                  "code": "job_title",
+                  "display": "Job Title"
+                }
+              ]
+            },
+            "valueString": "Example Title"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:neurodiversity-adjustment-response",
+                  "code": "department",
+                  "display": "Department"
+                }
+              ]
+            },
+            "valueString": ""
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:neurodiversity-adjustment-response",
+                  "code": "employment_type",
+                  "display": "Employment Type"
+                }
+              ]
+            },
+            "valueCodeableConcept": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:neurodiversity-adjustment-response:employment_type",
+                  "code": "permanent",
+                  "display": "Permanent"
+                }
+              ]
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:neurodiversity-adjustment-response",
+                  "code": "work_pattern",
+                  "display": "Work Pattern"
+                }
+              ]
+            },
+            "valueCodeableConcept": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:neurodiversity-adjustment-response:work_pattern",
+                  "code": "full-time",
+                  "display": "Full-Time"
+                }
+              ]
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:neurodiversity-adjustment-response",
+                  "code": "work_location",
+                  "display": "Work Location"
+                }
+              ]
+            },
+            "valueCodeableConcept": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:neurodiversity-adjustment-response:work_location",
+                  "code": "office",
+                  "display": "Office"
+                }
+              ]
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:neurodiversity-adjustment-response",
+                  "code": "employment_start_date",
+                  "display": "Employment Start Date"
+                }
+              ]
+            },
+            "valueDateTime": "2026-01-15"
+          }
+        ]
+      }
+    }
+  ]
+}

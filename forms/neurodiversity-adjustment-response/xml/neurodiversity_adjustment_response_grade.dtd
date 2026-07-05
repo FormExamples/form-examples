@@ -1,0 +1,15 @@
+<!ELEMENT neurodiversity_adjustment_response_grade (id,created_at,updated_at,deleted_at,neurodiversity_adjustment_response_id,outcome_classification,legal_risk_band,completeness_percent,follow_up_urgency,target_timeframe,recommendation,manager_notes,signed_at,graded_at)>
+<!ELEMENT id (#PCDATA)>
+<!ELEMENT created_at (#PCDATA)>
+<!ELEMENT updated_at (#PCDATA)>
+<!ELEMENT deleted_at (#PCDATA)>
+<!ELEMENT neurodiversity_adjustment_response_id (#PCDATA)>
+<!ELEMENT outcome_classification (#PCDATA)>
+<!ELEMENT legal_risk_band (#PCDATA)>
+<!ELEMENT completeness_percent (#PCDATA)>
+<!ELEMENT follow_up_urgency (#PCDATA)>
+<!ELEMENT target_timeframe (#PCDATA)>
+<!ELEMENT recommendation (#PCDATA)>
+<!ELEMENT manager_notes (#PCDATA)>
+<!ELEMENT signed_at (#PCDATA)>
+<!ELEMENT graded_at (#PCDATA)>

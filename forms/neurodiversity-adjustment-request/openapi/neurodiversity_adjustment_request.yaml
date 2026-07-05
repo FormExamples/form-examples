@@ -1,0 +1,354 @@
+# Generated from sql/. Do not edit by hand.
+# SOURCE: neurodiversity_adjustment_request
+openapi: 3.1.0
+info:
+  title: Neurodiversity Adjustment Request — NeurodiversityAdjustmentRequest
+  version: 1.0.0
+  description: Neurodiversity workplace reasonable-adjustments request. Captures the worker's neurodivergent profile (conditions, diagnosis status, disability self-assessment, disclosure consent), the functional difficulties experienced across the ACAS functional areas, the specific adjustments requested across the ACAS adjustment categories, supporting evidence, and impact / urgency. This is the source-of-truth record that the four-axis grade is computed from. Aligned with ACAS reasonable-adjustments guidance and the Equality Act 2010 duty to make reasonable adjustments.
+paths:
+  /neurodiversity-adjustment-requests:
+    get:
+      summary: List NeurodiversityAdjustmentRequest records
+      operationId: listNeurodiversityAdjustmentRequest
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of NeurodiversityAdjustmentRequest records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/NeurodiversityAdjustmentRequest"
+    post:
+      summary: Create a new NeurodiversityAdjustmentRequest
+      operationId: createNeurodiversityAdjustmentRequest
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/NeurodiversityAdjustmentRequest"
+      responses:
+        "201":
+          description: The newly created NeurodiversityAdjustmentRequest
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/NeurodiversityAdjustmentRequest"
+        "400":
+          description: Validation error
+  /neurodiversity-adjustment-requests/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one NeurodiversityAdjustmentRequest by id
+      operationId: getNeurodiversityAdjustmentRequest
+      responses:
+        "200":
+          description: The requested NeurodiversityAdjustmentRequest
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/NeurodiversityAdjustmentRequest"
+        "404":
+          description: NeurodiversityAdjustmentRequest not found
+    patch:
+      summary: Update an existing NeurodiversityAdjustmentRequest
+      operationId: updateNeurodiversityAdjustmentRequest
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/NeurodiversityAdjustmentRequest"
+      responses:
+        "200":
+          description: The updated NeurodiversityAdjustmentRequest
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/NeurodiversityAdjustmentRequest"
+        "404":
+          description: NeurodiversityAdjustmentRequest not found
+    delete:
+      summary: Soft-delete a NeurodiversityAdjustmentRequest
+      operationId: deleteNeurodiversityAdjustmentRequest
+      responses:
+        "204":
+          description: NeurodiversityAdjustmentRequest deleted
+        "404":
+          description: NeurodiversityAdjustmentRequest not found
+components:
+  schemas:
+    NeurodiversityAdjustmentRequest:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was updated most-recently.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was deleted a.k.a. soft-removed.
+        worker_id:
+          type: string
+          format: uuid
+          description: Foreign key to the worker the request is for.
+        manager_id:
+          type: string
+          format: uuid
+          description: Foreign key to the manager / HR contact handling the request.
+        status:
+          type: string
+          enum:
+            - draft
+            - submitted
+            - under-review
+            - agreed
+            - partially-agreed
+            - declined
+            - withdrawn
+            - ""
+          description: "Request lifecycle status: draft, submitted, under-review, agreed, partially-agreed, declined, withdrawn."
+        requested_by:
+          type: string
+          enum:
+            - worker
+            - manager
+            - occupational-health
+            - other
+            - ""
+          description: "Who initiated the request: worker, manager, occupational-health, other."
+        request_date:
+          type: string
+          format: date
+          description: Date the request was made.
+        requested_start_date:
+          type: string
+          format: date
+          description: Proposed date for the requested adjustments to start.
+        condition_adhd:
+          type: boolean
+          description: "Neurodivergent profile: attention deficit hyperactivity disorder (ADHD)."
+        condition_autism:
+          type: boolean
+          description: "Neurodivergent profile: autism."
+        condition_dyslexia:
+          type: boolean
+          description: "Neurodivergent profile: dyslexia."
+        condition_dyspraxia:
+          type: boolean
+          description: "Neurodivergent profile: dyspraxia (developmental coordination disorder)."
+        condition_dyscalculia:
+          type: boolean
+          description: "Neurodivergent profile: dyscalculia."
+        condition_tourettes:
+          type: boolean
+          description: "Neurodivergent profile: Tourette's syndrome / tic disorder."
+        condition_other:
+          type: boolean
+          description: "Neurodivergent profile: another form of neurodivergence not separately listed."
+        condition_other_detail:
+          type: string
+          maxLength: 500
+          description: Free-text detail of the other neurodivergent condition(s).
+        diagnosis_status:
+          type: string
+          enum:
+            - diagnosed
+            - self-identified
+            - awaiting-assessment
+            - prefer-not-to-say
+            - ""
+          description: "Diagnosis status: diagnosed, self-identified, awaiting-assessment, prefer-not-to-say. A formal diagnosis is not required for the Equality Act duty to apply."
+        considers_disability:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - unsure
+            - prefer-not-to-say
+            - ""
+          description: "Whether the worker considers their neurodivergence a disability under the Equality Act 2010: yes, no, unsure, prefer-not-to-say."
+        substantial_long_term_impact:
+          type: boolean
+          description: Whether the neurodivergence has a substantial and long-term adverse effect on day-to-day activities (the Equality Act 2010 disability test).
+        disclosure_consent:
+          type: boolean
+          description: Whether the worker consents to their neurodivergence details being shared with HR / occupational health as needed to arrange adjustments.
+        difficulty_concentration:
+          type: boolean
+          description: "Functional difficulty: concentration / focus."
+        difficulty_written_communication:
+          type: boolean
+          description: "Functional difficulty: reading / writing / written communication."
+        difficulty_organisation_time:
+          type: boolean
+          description: "Functional difficulty: organisation and time management."
+        difficulty_sensory_overload:
+          type: boolean
+          description: "Functional difficulty: sensory overload (noise, light, busy environments)."
+        difficulty_balance_coordination:
+          type: boolean
+          description: "Functional difficulty: balance and coordination."
+        difficulty_social_communication:
+          type: boolean
+          description: "Functional difficulty: social interaction / verbal communication."
+        difficulty_memory:
+          type: boolean
+          description: "Functional difficulty: working memory / recall."
+        difficulty_burnout_wellbeing:
+          type: boolean
+          description: "Functional difficulty: fatigue, burnout, and wellbeing."
+        tasks_situations_affected:
+          type: string
+          maxLength: 1000
+          description: Specific tasks and situations at work where the difficulties cause a substantial disadvantage.
+        worker_strengths:
+          type: string
+          maxLength: 1000
+          description: "Strengths the worker brings that adjustments can help them make the most of (ACAS: strength utilisation)."
+        adjustment_working_environment:
+          type: boolean
+          description: "Requested adjustment category: changes to the physical working environment (quiet space, lighting, desk location, screens)."
+        adjustment_equipment_technology:
+          type: boolean
+          description: "Requested adjustment category: equipment or assistive technology (noise-cancelling headphones, screen reader, speech-to-text, ergonomic equipment)."
+        adjustment_working_arrangements:
+          type: boolean
+          description: "Requested adjustment category: changes to working arrangements (flexible hours, remote / hybrid working, phased return, planned breaks)."
+        adjustment_communication:
+          type: boolean
+          description: "Requested adjustment category: changes to communication (written instructions, tasks broken into clear steps, regular check-ins)."
+        adjustment_support_mentoring:
+          type: boolean
+          description: "Requested adjustment category: additional support (mentor / buddy, coaching, extra training, job aids)."
+        adjustment_recruitment_process:
+          type: boolean
+          description: "Requested adjustment category: adjustments to a recruitment, selection, or assessment process."
+        adjustment_policy_dress:
+          type: boolean
+          description: "Requested adjustment category: changes to policies (dress code / uniform for softer materials, absence-policy flexibility)."
+        adjustment_other:
+          type: boolean
+          description: "Requested adjustment category: another adjustment not separately listed."
+        adjustments_requested_detail:
+          type: string
+          maxLength: 2000
+          description: Free-text detail of the specific adjustments requested.
+        supporting_evidence_type:
+          type: string
+          enum:
+            - occupational-health
+            - gp-letter
+            - diagnostic-report
+            - access-to-work
+            - none
+            - ""
+          description: "Type of supporting evidence supplied: occupational-health, gp-letter, diagnostic-report, access-to-work, none."
+        occupational_health_involved:
+          type: boolean
+          description: Whether occupational health has been or should be involved.
+        access_to_work_involved:
+          type: boolean
+          description: Whether the government Access to Work scheme is involved or has been applied for.
+        current_impact:
+          type: string
+          enum:
+            - low
+            - moderate
+            - high
+            - severe
+            - ""
+          description: "Current impact of the unadjusted difficulties on the worker's work and wellbeing: low, moderate, high, severe."
+        at_risk_of_absence:
+          type: boolean
+          description: Whether the worker is at risk of sickness absence or burnout without adjustments.
+        urgency:
+          type: string
+          enum:
+            - routine
+            - soon
+            - urgent
+            - ""
+          description: "Requested handling urgency: routine, soon, urgent."
+        notes:
+          type: string
+          maxLength: 1000
+          description: Free-text notes accompanying the request.
+      required:
+        - created_at
+        - updated_at
+        - worker_id
+        - manager_id
+        - status
+        - requested_by
+        - condition_adhd
+        - condition_autism
+        - condition_dyslexia
+        - condition_dyspraxia
+        - condition_dyscalculia
+        - condition_tourettes
+        - condition_other
+        - condition_other_detail
+        - diagnosis_status
+        - considers_disability
+        - substantial_long_term_impact
+        - disclosure_consent
+        - difficulty_concentration
+        - difficulty_written_communication
+        - difficulty_organisation_time
+        - difficulty_sensory_overload
+        - difficulty_balance_coordination
+        - difficulty_social_communication
+        - difficulty_memory
+        - difficulty_burnout_wellbeing
+        - tasks_situations_affected
+        - worker_strengths
+        - adjustment_working_environment
+        - adjustment_equipment_technology
+        - adjustment_working_arrangements
+        - adjustment_communication
+        - adjustment_support_mentoring
+        - adjustment_recruitment_process
+        - adjustment_policy_dress
+        - adjustment_other
+        - adjustments_requested_detail
+        - supporting_evidence_type
+        - occupational_health_involved
+        - access_to_work_involved
+        - current_impact
+        - at_risk_of_absence
+        - urgency
+        - notes
+      description: Neurodiversity workplace reasonable-adjustments request. Captures the worker's neurodivergent profile (conditions, diagnosis status, disability self-assessment, disclosure consent), the functional difficulties experienced across the ACAS functional areas, the specific adjustments requested across the ACAS adjustment categories, supporting evidence, and impact / urgency. This is the source-of-truth record that the four-axis grade is computed from. Aligned with ACAS reasonable-adjustments guidance and the Equality Act 2010 duty to make reasonable adjustments.

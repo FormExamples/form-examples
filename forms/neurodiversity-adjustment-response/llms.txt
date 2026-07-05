@@ -1,0 +1,27 @@
+# Neurodiversity Adjustment Response
+
+> A UK–aligned **workplace reasonable-adjustments response for neurodiversity** that an employer (line manager, HR adviser, or occupational-health lead) completes in answer to a request for adjustments. It is the **response / confirmation counterpart** to [`neurodiversity-adjustment-request`](../neurodiversity-adjustment-request): where the request captures *what a neurodivergent worker needs and why*, this form records *what the employer has decided, what has been agreed, and how it will be reviewed*. It records the overall decision and its rationale, which adjustments were agreed (and any alternatives offered), the trial period and review date, support / resources / responsibilities, and any escalation — then computes a **four-axis grade** (outcome classification, legal / discrimination risk, response completeness, and follow-up / review urgency) plus a set of compliance-and-risk flags including an automatic **discrimination-risk alert**. The output is a structured confirmation-and-review record.
+
+## Docs
+
+- [Form description and scoring details](index.md)
+- [Living domain spec — the behavioural contract](spec/index.md)
+- [Agent instructions](AGENTS.md)
+- [Implementation plan](plan.md)
+- [Task tracking](tasks.md)
+- [Changelog](CHANGELOG.md)
+
+## Artefacts
+
+- [SQL migrations — source of truth for the data shape](sql/)
+- [Filled-form JSON fixture + FHIR R5 Bundle examples](examples/)
+- [HTML front-end — single-page wizard + dashboard](front-end-with-html/)
+- [SvelteKit front-end — RESTful wizard + dashboard](front-end-with-svelte/)
+- [Rust Loco JSON-API back-end](back-end-with-loco/)
+
+## Generated representations
+
+- [XML + DTD per SQL table](xml/)
+- [FHIR HL7 R5 JSON per SQL entity](fhir/r5/)
+- [Protocol Buffers schemas](protobuf/)
+- [OpenAPI 3.1 specifications](openapi/)

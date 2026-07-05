@@ -1,0 +1,55 @@
+// Generated from sql/. Do not edit by hand.
+// SOURCE: worker
+
+syntax = "proto3";
+
+package form_examples.neurodiversity_adjustment_response;
+
+enum WorkerEmploymentTypeEnum {
+  EMPLOYMENTTYPE_UNSPECIFIED = 0;
+  EMPLOYMENTTYPE_PERMANENT = 1;  // permanent
+  EMPLOYMENTTYPE_FIXED_TERM = 2;  // fixed-term
+  EMPLOYMENTTYPE_AGENCY = 3;  // agency
+  EMPLOYMENTTYPE_CONTRACTOR = 4;  // contractor
+  EMPLOYMENTTYPE_APPRENTICE = 5;  // apprentice
+  EMPLOYMENTTYPE_VOLUNTEER = 6;  // volunteer
+  EMPLOYMENTTYPE_OTHER = 7;  // other
+}
+
+enum WorkerWorkPatternEnum {
+  WORKPATTERN_UNSPECIFIED = 0;
+  WORKPATTERN_FULL_TIME = 1;  // full-time
+  WORKPATTERN_PART_TIME = 2;  // part-time
+  WORKPATTERN_SHIFT = 3;  // shift
+  WORKPATTERN_FLEXIBLE = 4;  // flexible
+  WORKPATTERN_OTHER = 5;  // other
+}
+
+enum WorkerWorkLocationEnum {
+  WORKLOCATION_UNSPECIFIED = 0;
+  WORKLOCATION_OFFICE = 1;  // office
+  WORKLOCATION_REMOTE = 2;  // remote
+  WORKLOCATION_HYBRID = 3;  // hybrid
+  WORKLOCATION_FIELD = 4;  // field
+  WORKLOCATION_OTHER = 5;  // other
+}
+
+message Worker {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string name = 5;  // VARCHAR(255) — max 255 chars
+  string email = 6;  // TEXT
+  string phone = 7;  // TEXT
+  string postal_address_as_full_text = 8;  // TEXT
+  string country_as_iso_3166_1_alpha_2 = 9;  // CHAR(2) — max 2 chars
+  string postcode = 10;  // TEXT
+  string employee_reference = 11;  // VARCHAR(64) — max 64 chars
+  string job_title = 12;  // VARCHAR(255) — max 255 chars
+  string department = 13;  // VARCHAR(255) — max 255 chars
+  WorkerEmploymentTypeEnum employment_type = 14;  // VARCHAR(20)
+  WorkerWorkPatternEnum work_pattern = 15;  // VARCHAR(20)
+  WorkerWorkLocationEnum work_location = 16;  // VARCHAR(20)
+  string employment_start_date = 17;  // DATE — iso 8601 date
+}

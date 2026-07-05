@@ -190,6 +190,8 @@ Subprojects:
 - [National Early Warning Score 2 (NEWS2)](national-early-warning-score-2)
 - [nerve conduction study test request](nerve-conduction-study-test-request)
 - [Nerve Conduction Study Test Result](nerve-conduction-study-test-result)
+- [Neurodiversity Adjustment Request](neurodiversity-adjustment-request)
+- [Neurodiversity Adjustment Response](neurodiversity-adjustment-response)
 - [neurology assessment](neurology-assessment)
 - [Newborn and Infant Physical Examination (NIPE)](newborn-and-infant-physical-examination)
 - [Newborn Blood Spot Screening](newborn-blood-spot-screening)

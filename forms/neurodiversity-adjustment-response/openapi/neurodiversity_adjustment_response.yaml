@@ -1,0 +1,301 @@
+# Generated from sql/. Do not edit by hand.
+# SOURCE: neurodiversity_adjustment_response
+openapi: 3.1.0
+info:
+  title: Neurodiversity Adjustment Response — NeurodiversityAdjustmentResponse
+  version: 1.0.0
+  description: "Neurodiversity reasonable-adjustments response: the employer's decision, written confirmation, and review arrangements in answer to a request. Captures the overall decision and rationale, which adjustments were agreed (and any alternatives offered), the trial period and review date, support / resources / responsibilities, and any escalation. This is the source-of-truth record that the four-axis grade is computed from. Aligned with the ACAS reasonable-adjustment confirmation and review templates and the Equality Act 2010 duty to make reasonable adjustments."
+paths:
+  /neurodiversity-adjustment-responses:
+    get:
+      summary: List NeurodiversityAdjustmentResponse records
+      operationId: listNeurodiversityAdjustmentResponse
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of NeurodiversityAdjustmentResponse records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/NeurodiversityAdjustmentResponse"
+    post:
+      summary: Create a new NeurodiversityAdjustmentResponse
+      operationId: createNeurodiversityAdjustmentResponse
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/NeurodiversityAdjustmentResponse"
+      responses:
+        "201":
+          description: The newly created NeurodiversityAdjustmentResponse
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/NeurodiversityAdjustmentResponse"
+        "400":
+          description: Validation error
+  /neurodiversity-adjustment-responses/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one NeurodiversityAdjustmentResponse by id
+      operationId: getNeurodiversityAdjustmentResponse
+      responses:
+        "200":
+          description: The requested NeurodiversityAdjustmentResponse
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/NeurodiversityAdjustmentResponse"
+        "404":
+          description: NeurodiversityAdjustmentResponse not found
+    patch:
+      summary: Update an existing NeurodiversityAdjustmentResponse
+      operationId: updateNeurodiversityAdjustmentResponse
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/NeurodiversityAdjustmentResponse"
+      responses:
+        "200":
+          description: The updated NeurodiversityAdjustmentResponse
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/NeurodiversityAdjustmentResponse"
+        "404":
+          description: NeurodiversityAdjustmentResponse not found
+    delete:
+      summary: Soft-delete a NeurodiversityAdjustmentResponse
+      operationId: deleteNeurodiversityAdjustmentResponse
+      responses:
+        "204":
+          description: NeurodiversityAdjustmentResponse deleted
+        "404":
+          description: NeurodiversityAdjustmentResponse not found
+components:
+  schemas:
+    NeurodiversityAdjustmentResponse:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was updated most-recently.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was deleted a.k.a. soft-removed.
+        worker_id:
+          type: string
+          format: uuid
+          description: Foreign key to the worker the response is for.
+        manager_id:
+          type: string
+          format: uuid
+          description: Foreign key to the manager / HR contact authoring the response.
+        response_status:
+          type: string
+          enum:
+            - draft
+            - agreed
+            - partially-agreed
+            - trial
+            - declined
+            - deferred
+            - cancelled
+            - ""
+          description: "Response lifecycle status: draft, agreed, partially-agreed, trial, declined, deferred, cancelled."
+        request_reference:
+          type: string
+          maxLength: 64
+          description: Reference to the originating reasonable-adjustments request.
+        handling_method:
+          type: string
+          enum:
+            - meeting
+            - occupational-health-referral
+            - email
+            - hr-review
+            - other
+            - ""
+          description: "How the request was handled: meeting, occupational-health-referral, email, hr-review, other."
+        assessed_date:
+          type: string
+          format: date
+          description: Date the request was assessed / discussed with the worker.
+        responded_date:
+          type: string
+          format: date
+          description: Date the response was issued to the worker.
+        effective_date:
+          type: string
+          format: date
+          description: Date the agreed adjustments take effect.
+        overall_decision:
+          type: string
+          enum:
+            - agreed
+            - partially-agreed
+            - alternative-offered
+            - declined
+            - deferred
+            - ""
+          description: "Overall decision: agreed, partially-agreed, alternative-offered, declined, deferred."
+        decision_rationale:
+          type: string
+          maxLength: 2000
+          description: Rationale for the decision, including the reasonableness justification where any adjustment is declined.
+        decline_reason_category:
+          type: string
+          enum:
+            - not-reasonable
+            - disproportionate-cost
+            - health-and-safety
+            - operational-impact
+            - alternative-provided
+            - insufficient-information
+            - none
+            - ""
+          description: "Where an adjustment is declined, the reasonableness category: not-reasonable, disproportionate-cost, health-and-safety, operational-impact, alternative-provided, insufficient-information, none."
+        agreed_working_environment:
+          type: boolean
+          description: "Agreed adjustment category: changes to the physical working environment."
+        agreed_equipment_technology:
+          type: boolean
+          description: "Agreed adjustment category: equipment or assistive technology."
+        agreed_working_arrangements:
+          type: boolean
+          description: "Agreed adjustment category: changes to working arrangements."
+        agreed_communication:
+          type: boolean
+          description: "Agreed adjustment category: changes to communication."
+        agreed_support_mentoring:
+          type: boolean
+          description: "Agreed adjustment category: additional support / mentoring."
+        agreed_recruitment_process:
+          type: boolean
+          description: "Agreed adjustment category: adjustments to a recruitment / assessment process."
+        agreed_policy_dress:
+          type: boolean
+          description: "Agreed adjustment category: changes to policies (dress code / uniform, absence policy)."
+        agreed_other:
+          type: boolean
+          description: "Agreed adjustment category: another adjustment not separately listed."
+        agreed_adjustments_detail:
+          type: string
+          maxLength: 2000
+          description: Free-text detail of the specific adjustments agreed.
+        alternative_adjustments_detail:
+          type: string
+          maxLength: 2000
+          description: Free-text detail of any alternative adjustments offered where the original request was not agreed as-is.
+        trial_period:
+          type: boolean
+          description: Whether the agreed adjustments are being tried for a time-limited trial period before permanent implementation.
+        trial_period_weeks:
+          type: integer
+          format: int32
+          description: Length of the trial period in weeks, if a trial applies (0-104).
+        review_scheduled:
+          type: boolean
+          description: Whether a review of the adjustments has been scheduled.
+        review_date:
+          type: string
+          format: date
+          description: Date the adjustments will be reviewed.
+        occupational_health_referred:
+          type: boolean
+          description: Whether the worker has been referred to occupational health.
+        access_to_work_referred:
+          type: boolean
+          description: Whether the worker has been signposted / referred to the government Access to Work scheme.
+        support_resources_detail:
+          type: string
+          maxLength: 1000
+          description: Free-text detail of support resources allocated (budget, equipment orders, training).
+        responsibilities_detail:
+          type: string
+          maxLength: 1000
+          description: Free-text detail of who is responsible for implementing each agreed adjustment.
+        point_of_contact:
+          type: string
+          maxLength: 255
+          description: Named point of contact for the worker to raise concerns about the adjustments.
+        escalated:
+          type: boolean
+          description: Whether the matter has been escalated (e.g. dispute, grievance, or appeal).
+        escalation_detail:
+          type: string
+          maxLength: 500
+          description: Free-text detail of any escalation, dispute, or appeal.
+        notes:
+          type: string
+          maxLength: 1000
+          description: Free-text notes accompanying the response.
+      required:
+        - created_at
+        - updated_at
+        - worker_id
+        - manager_id
+        - response_status
+        - request_reference
+        - handling_method
+        - overall_decision
+        - decision_rationale
+        - decline_reason_category
+        - agreed_working_environment
+        - agreed_equipment_technology
+        - agreed_working_arrangements
+        - agreed_communication
+        - agreed_support_mentoring
+        - agreed_recruitment_process
+        - agreed_policy_dress
+        - agreed_other
+        - agreed_adjustments_detail
+        - alternative_adjustments_detail
+        - trial_period
+        - review_scheduled
+        - occupational_health_referred
+        - access_to_work_referred
+        - support_resources_detail
+        - responsibilities_detail
+        - point_of_contact
+        - escalated
+        - escalation_detail
+        - notes
+      description: "Neurodiversity reasonable-adjustments response: the employer's decision, written confirmation, and review arrangements in answer to a request. Captures the overall decision and rationale, which adjustments were agreed (and any alternatives offered), the trial period and review date, support / resources / responsibilities, and any escalation. This is the source-of-truth record that the four-axis grade is computed from. Aligned with the ACAS reasonable-adjustment confirmation and review templates and the Equality Act 2010 duty to make reasonable adjustments."

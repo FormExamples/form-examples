@@ -1,0 +1,194 @@
+# Generated from sql/. Do not edit by hand.
+# SOURCE: neurodiversity_adjustment_response_grade
+openapi: 3.1.0
+info:
+  title: Neurodiversity Adjustment Response — NeurodiversityAdjustmentResponseGrade
+  version: 1.0.0
+  description: "Computed four-axis grade for a neurodiversity reasonable-adjustments response: outcome classification, legal / discrimination risk (reasonableness), response completeness, and follow-up / review urgency. Declining adjustments for a worker likely covered by the Equality Act 2010 without an adequate reasonableness justification or alternatives drives the legal-risk axis to high-risk and raises the discrimination-risk flag regardless of the other axes."
+paths:
+  /neurodiversity-adjustment-response-grades:
+    get:
+      summary: List NeurodiversityAdjustmentResponseGrade records
+      operationId: listNeurodiversityAdjustmentResponseGrade
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of NeurodiversityAdjustmentResponseGrade records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/NeurodiversityAdjustmentResponseGrade"
+    post:
+      summary: Create a new NeurodiversityAdjustmentResponseGrade
+      operationId: createNeurodiversityAdjustmentResponseGrade
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/NeurodiversityAdjustmentResponseGrade"
+      responses:
+        "201":
+          description: The newly created NeurodiversityAdjustmentResponseGrade
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/NeurodiversityAdjustmentResponseGrade"
+        "400":
+          description: Validation error
+  /neurodiversity-adjustment-response-grades/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one NeurodiversityAdjustmentResponseGrade by id
+      operationId: getNeurodiversityAdjustmentResponseGrade
+      responses:
+        "200":
+          description: The requested NeurodiversityAdjustmentResponseGrade
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/NeurodiversityAdjustmentResponseGrade"
+        "404":
+          description: NeurodiversityAdjustmentResponseGrade not found
+    patch:
+      summary: Update an existing NeurodiversityAdjustmentResponseGrade
+      operationId: updateNeurodiversityAdjustmentResponseGrade
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/NeurodiversityAdjustmentResponseGrade"
+      responses:
+        "200":
+          description: The updated NeurodiversityAdjustmentResponseGrade
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/NeurodiversityAdjustmentResponseGrade"
+        "404":
+          description: NeurodiversityAdjustmentResponseGrade not found
+    delete:
+      summary: Soft-delete a NeurodiversityAdjustmentResponseGrade
+      operationId: deleteNeurodiversityAdjustmentResponseGrade
+      responses:
+        "204":
+          description: NeurodiversityAdjustmentResponseGrade deleted
+        "404":
+          description: NeurodiversityAdjustmentResponseGrade not found
+components:
+  schemas:
+    NeurodiversityAdjustmentResponseGrade:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was updated most-recently.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was deleted a.k.a. soft-removed.
+        neurodiversity_adjustment_response_id:
+          type: string
+          format: uuid
+          description: Foreign key to the parent response (unique, 1:1).
+        outcome_classification:
+          type: string
+          enum:
+            - fully-agreed
+            - partially-agreed
+            - alternative-offered
+            - declined
+            - deferred
+            - ""
+          description: "Axis A outcome classification: fully-agreed, partially-agreed, alternative-offered, declined, deferred."
+        legal_risk_band:
+          type: string
+          enum:
+            - ok
+            - caution
+            - high-risk
+            - ""
+          description: "Axis B legal / discrimination risk band (reasonableness): ok, caution, high-risk."
+        completeness_percent:
+          type: integer
+          format: int32
+          description: Axis C response completeness as a percentage of mandatory sections (0-100).
+        follow_up_urgency:
+          type: string
+          enum:
+            - none
+            - review-scheduled
+            - urgent-review
+            - escalation-needed
+            - ""
+          description: "Axis D follow-up / review urgency: none, review-scheduled, urgent-review, escalation-needed."
+        target_timeframe:
+          type: string
+          maxLength: 50
+          description: Target timeframe for the next review or action, implied by the follow-up urgency.
+        recommendation:
+          type: string
+          enum:
+            - implement
+            - schedule-review
+            - seek-occupational-health
+            - reconsider-decision
+            - escalate-to-hr
+            - ""
+          description: "Overall recommendation: implement, schedule-review, seek-occupational-health, reconsider-decision, escalate-to-hr."
+        manager_notes:
+          type: string
+          description: Free-text sign-off notes from the manager or HR contact.
+        signed_at:
+          type: string
+          format: date-time
+          description: Timestamp of the manager / HR electronic signature.
+        graded_at:
+          type: string
+          format: date-time
+          description: Timestamp when the engine last computed the grade.
+      required:
+        - created_at
+        - updated_at
+        - neurodiversity_adjustment_response_id
+        - outcome_classification
+        - legal_risk_band
+        - follow_up_urgency
+        - target_timeframe
+        - recommendation
+        - manager_notes
+        - graded_at
+      description: "Computed four-axis grade for a neurodiversity reasonable-adjustments response: outcome classification, legal / discrimination risk (reasonableness), response completeness, and follow-up / review urgency. Declining adjustments for a worker likely covered by the Equality Act 2010 without an adequate reasonableness justification or alternatives drives the legal-risk axis to high-risk and raises the discrimination-risk flag regardless of the other axes."

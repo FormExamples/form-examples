@@ -1,0 +1,612 @@
+{
+  "resourceType": "Observation",
+  "id": "770e8400-e29b-41d4-a716-446655440002",
+  "meta": {
+    "profile": [
+      "http://hl7.org/fhir/StructureDefinition/Observation"
+    ],
+    "lastUpdated": "2026-04-09T10:00:00+00:00"
+  },
+  "status": "final",
+  "category": [
+    {
+      "coding": [
+        {
+          "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+          "code": "survey",
+          "display": "Survey"
+        }
+      ]
+    }
+  ],
+  "code": {
+    "coding": [
+      {
+        "system": "urn:form-examples:neurodiversity-adjustment-request",
+        "code": "neurodiversity_adjustment_request",
+        "display": "Neurodiversity Adjustment Request"
+      }
+    ]
+  },
+  "subject": {
+    "reference": "Patient/bb0e8400-e29b-41d4-a716-446655440006"
+  },
+  "encounter": {
+    "reference": "Encounter/cc0e8400-e29b-41d4-a716-446655440007"
+  },
+  "effectiveDateTime": "2026-04-09T10:00:00+00:00",
+  "component": [
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:neurodiversity-adjustment-request",
+            "code": "deleted_at",
+            "display": "Deleted At"
+          }
+        ]
+      },
+      "valueDateTime": "2026-04-09T10:00:00+00:00"
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:neurodiversity-adjustment-request",
+            "code": "status",
+            "display": "Status"
+          }
+        ]
+      },
+      "valueCodeableConcept": {
+        "coding": [
+          {
+            "system": "urn:form-examples:neurodiversity-adjustment-request:status",
+            "code": "draft",
+            "display": "Draft"
+          }
+        ]
+      }
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:neurodiversity-adjustment-request",
+            "code": "requested_by",
+            "display": "Requested By"
+          }
+        ]
+      },
+      "valueCodeableConcept": {
+        "coding": [
+          {
+            "system": "urn:form-examples:neurodiversity-adjustment-request:requested_by",
+            "code": "worker",
+            "display": "Worker"
+          }
+        ]
+      }
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:neurodiversity-adjustment-request",
+            "code": "request_date",
+            "display": "Request Date"
+          }
+        ]
+      },
+      "valueDateTime": "2026-01-15"
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:neurodiversity-adjustment-request",
+            "code": "requested_start_date",
+            "display": "Requested Start Date"
+          }
+        ]
+      },
+      "valueDateTime": "2026-01-15"
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:neurodiversity-adjustment-request",
+            "code": "condition_adhd",
+            "display": "Condition Adhd"
+          }
+        ]
+      },
+      "valueBoolean": true
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:neurodiversity-adjustment-request",
+            "code": "condition_autism",
+            "display": "Condition Autism"
+          }
+        ]
+      },
+      "valueBoolean": true
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:neurodiversity-adjustment-request",
+            "code": "condition_dyslexia",
+            "display": "Condition Dyslexia"
+          }
+        ]
+      },
+      "valueBoolean": true
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:neurodiversity-adjustment-request",
+            "code": "condition_dyspraxia",
+            "display": "Condition Dyspraxia"
+          }
+        ]
+      },
+      "valueBoolean": true
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:neurodiversity-adjustment-request",
+            "code": "condition_dyscalculia",
+            "display": "Condition Dyscalculia"
+          }
+        ]
+      },
+      "valueBoolean": true
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:neurodiversity-adjustment-request",
+            "code": "condition_tourettes",
+            "display": "Condition Tourettes"
+          }
+        ]
+      },
+      "valueBoolean": true
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:neurodiversity-adjustment-request",
+            "code": "condition_other",
+            "display": "Condition Other"
+          }
+        ]
+      },
+      "valueBoolean": true
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:neurodiversity-adjustment-request",
+            "code": "condition_other_detail",
+            "display": "Condition Other Detail"
+          }
+        ]
+      },
+      "valueString": ""
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:neurodiversity-adjustment-request",
+            "code": "diagnosis_status",
+            "display": "Diagnosis Status"
+          }
+        ]
+      },
+      "valueCodeableConcept": {
+        "coding": [
+          {
+            "system": "urn:form-examples:neurodiversity-adjustment-request:diagnosis_status",
+            "code": "diagnosed",
+            "display": "Diagnosed"
+          }
+        ]
+      }
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:neurodiversity-adjustment-request",
+            "code": "considers_disability",
+            "display": "Considers Disability"
+          }
+        ]
+      },
+      "valueCodeableConcept": {
+        "coding": [
+          {
+            "system": "urn:form-examples:neurodiversity-adjustment-request:considers_disability",
+            "code": "yes",
+            "display": "Yes"
+          }
+        ]
+      }
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:neurodiversity-adjustment-request",
+            "code": "substantial_long_term_impact",
+            "display": "Substantial Long Term Impact"
+          }
+        ]
+      },
+      "valueBoolean": true
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:neurodiversity-adjustment-request",
+            "code": "disclosure_consent",
+            "display": "Disclosure Consent"
+          }
+        ]
+      },
+      "valueBoolean": true
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:neurodiversity-adjustment-request",
+            "code": "difficulty_concentration",
+            "display": "Difficulty Concentration"
+          }
+        ]
+      },
+      "valueBoolean": true
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:neurodiversity-adjustment-request",
+            "code": "difficulty_written_communication",
+            "display": "Difficulty Written Communication"
+          }
+        ]
+      },
+      "valueBoolean": true
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:neurodiversity-adjustment-request",
+            "code": "difficulty_organisation_time",
+            "display": "Difficulty Organisation Time"
+          }
+        ]
+      },
+      "valueBoolean": true
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:neurodiversity-adjustment-request",
+            "code": "difficulty_sensory_overload",
+            "display": "Difficulty Sensory Overload"
+          }
+        ]
+      },
+      "valueBoolean": true
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:neurodiversity-adjustment-request",
+            "code": "difficulty_balance_coordination",
+            "display": "Difficulty Balance Coordination"
+          }
+        ]
+      },
+      "valueBoolean": true
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:neurodiversity-adjustment-request",
+            "code": "difficulty_social_communication",
+            "display": "Difficulty Social Communication"
+          }
+        ]
+      },
+      "valueBoolean": true
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:neurodiversity-adjustment-request",
+            "code": "difficulty_memory",
+            "display": "Difficulty Memory"
+          }
+        ]
+      },
+      "valueBoolean": true
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:neurodiversity-adjustment-request",
+            "code": "difficulty_burnout_wellbeing",
+            "display": "Difficulty Burnout Wellbeing"
+          }
+        ]
+      },
+      "valueBoolean": true
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:neurodiversity-adjustment-request",
+            "code": "tasks_situations_affected",
+            "display": "Tasks Situations Affected"
+          }
+        ]
+      },
+      "valueString": ""
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:neurodiversity-adjustment-request",
+            "code": "worker_strengths",
+            "display": "Worker Strengths"
+          }
+        ]
+      },
+      "valueString": ""
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:neurodiversity-adjustment-request",
+            "code": "adjustment_working_environment",
+            "display": "Adjustment Working Environment"
+          }
+        ]
+      },
+      "valueBoolean": true
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:neurodiversity-adjustment-request",
+            "code": "adjustment_equipment_technology",
+            "display": "Adjustment Equipment Technology"
+          }
+        ]
+      },
+      "valueBoolean": true
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:neurodiversity-adjustment-request",
+            "code": "adjustment_working_arrangements",
+            "display": "Adjustment Working Arrangements"
+          }
+        ]
+      },
+      "valueBoolean": true
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:neurodiversity-adjustment-request",
+            "code": "adjustment_communication",
+            "display": "Adjustment Communication"
+          }
+        ]
+      },
+      "valueBoolean": true
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:neurodiversity-adjustment-request",
+            "code": "adjustment_support_mentoring",
+            "display": "Adjustment Support Mentoring"
+          }
+        ]
+      },
+      "valueBoolean": true
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:neurodiversity-adjustment-request",
+            "code": "adjustment_recruitment_process",
+            "display": "Adjustment Recruitment Process"
+          }
+        ]
+      },
+      "valueBoolean": true
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:neurodiversity-adjustment-request",
+            "code": "adjustment_policy_dress",
+            "display": "Adjustment Policy Dress"
+          }
+        ]
+      },
+      "valueBoolean": true
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:neurodiversity-adjustment-request",
+            "code": "adjustment_other",
+            "display": "Adjustment Other"
+          }
+        ]
+      },
+      "valueBoolean": true
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:neurodiversity-adjustment-request",
+            "code": "adjustments_requested_detail",
+            "display": "Adjustments Requested Detail"
+          }
+        ]
+      },
+      "valueString": ""
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:neurodiversity-adjustment-request",
+            "code": "supporting_evidence_type",
+            "display": "Supporting Evidence Type"
+          }
+        ]
+      },
+      "valueCodeableConcept": {
+        "coding": [
+          {
+            "system": "urn:form-examples:neurodiversity-adjustment-request:supporting_evidence_type",
+            "code": "occupational-health",
+            "display": "Occupational-Health"
+          }
+        ]
+      }
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:neurodiversity-adjustment-request",
+            "code": "occupational_health_involved",
+            "display": "Occupational Health Involved"
+          }
+        ]
+      },
+      "valueBoolean": true
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:neurodiversity-adjustment-request",
+            "code": "access_to_work_involved",
+            "display": "Access To Work Involved"
+          }
+        ]
+      },
+      "valueBoolean": true
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:neurodiversity-adjustment-request",
+            "code": "current_impact",
+            "display": "Current Impact"
+          }
+        ]
+      },
+      "valueCodeableConcept": {
+        "coding": [
+          {
+            "system": "urn:form-examples:neurodiversity-adjustment-request:current_impact",
+            "code": "low",
+            "display": "Low"
+          }
+        ]
+      }
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:neurodiversity-adjustment-request",
+            "code": "at_risk_of_absence",
+            "display": "At Risk Of Absence"
+          }
+        ]
+      },
+      "valueBoolean": true
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:neurodiversity-adjustment-request",
+            "code": "urgency",
+            "display": "Urgency"
+          }
+        ]
+      },
+      "valueCodeableConcept": {
+        "coding": [
+          {
+            "system": "urn:form-examples:neurodiversity-adjustment-request:urgency",
+            "code": "routine",
+            "display": "Routine"
+          }
+        ]
+      }
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:neurodiversity-adjustment-request",
+            "code": "notes",
+            "display": "Notes"
+          }
+        ]
+      },
+      "valueString": "Example text."
+    }
+  ]
+}

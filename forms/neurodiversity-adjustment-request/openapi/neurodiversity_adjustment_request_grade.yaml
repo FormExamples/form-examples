@@ -1,0 +1,190 @@
+# Generated from sql/. Do not edit by hand.
+# SOURCE: neurodiversity_adjustment_request_grade
+openapi: 3.1.0
+info:
+  title: Neurodiversity Adjustment Request — NeurodiversityAdjustmentRequestGrade
+  version: 1.0.0
+  description: "Computed four-axis grade for a neurodiversity reasonable-adjustments request: Equality Act 2010 eligibility, impact / wellbeing risk, request completeness, and handling priority. Being neurodivergent will often amount to a disability under the Equality Act 2010; a substantial and long-term adverse effect drives the eligibility axis, and a worker at risk of absence / burnout auto-escalates the impact and priority axes."
+paths:
+  /neurodiversity-adjustment-request-grades:
+    get:
+      summary: List NeurodiversityAdjustmentRequestGrade records
+      operationId: listNeurodiversityAdjustmentRequestGrade
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of NeurodiversityAdjustmentRequestGrade records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/NeurodiversityAdjustmentRequestGrade"
+    post:
+      summary: Create a new NeurodiversityAdjustmentRequestGrade
+      operationId: createNeurodiversityAdjustmentRequestGrade
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/NeurodiversityAdjustmentRequestGrade"
+      responses:
+        "201":
+          description: The newly created NeurodiversityAdjustmentRequestGrade
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/NeurodiversityAdjustmentRequestGrade"
+        "400":
+          description: Validation error
+  /neurodiversity-adjustment-request-grades/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one NeurodiversityAdjustmentRequestGrade by id
+      operationId: getNeurodiversityAdjustmentRequestGrade
+      responses:
+        "200":
+          description: The requested NeurodiversityAdjustmentRequestGrade
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/NeurodiversityAdjustmentRequestGrade"
+        "404":
+          description: NeurodiversityAdjustmentRequestGrade not found
+    patch:
+      summary: Update an existing NeurodiversityAdjustmentRequestGrade
+      operationId: updateNeurodiversityAdjustmentRequestGrade
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/NeurodiversityAdjustmentRequestGrade"
+      responses:
+        "200":
+          description: The updated NeurodiversityAdjustmentRequestGrade
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/NeurodiversityAdjustmentRequestGrade"
+        "404":
+          description: NeurodiversityAdjustmentRequestGrade not found
+    delete:
+      summary: Soft-delete a NeurodiversityAdjustmentRequestGrade
+      operationId: deleteNeurodiversityAdjustmentRequestGrade
+      responses:
+        "204":
+          description: NeurodiversityAdjustmentRequestGrade deleted
+        "404":
+          description: NeurodiversityAdjustmentRequestGrade not found
+components:
+  schemas:
+    NeurodiversityAdjustmentRequestGrade:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was updated most-recently.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was deleted a.k.a. soft-removed.
+        neurodiversity_adjustment_request_id:
+          type: string
+          format: uuid
+          description: Foreign key to the parent request (unique, 1:1).
+        eligibility_band:
+          type: string
+          enum:
+            - likely-covered
+            - possibly-covered
+            - unclear
+            - ""
+          description: "Axis A Equality Act 2010 eligibility: likely-covered, possibly-covered, unclear."
+        impact_band:
+          type: string
+          enum:
+            - ok
+            - caution
+            - high-risk
+            - ""
+          description: "Axis B impact / wellbeing risk band: ok, caution, high-risk."
+        completeness_percent:
+          type: integer
+          format: int32
+          description: Axis C request completeness as a percentage of mandatory fields (0-100).
+        priority_tier:
+          type: string
+          enum:
+            - routine
+            - soon
+            - urgent
+            - ""
+          description: "Axis D handling priority: routine, soon, urgent."
+        target_timeframe:
+          type: string
+          maxLength: 50
+          description: Target timeframe for the employer to respond, implied by the priority tier (the Equality Act duty is to act without unreasonable delay).
+        recommendation:
+          type: string
+          enum:
+            - progress-to-meeting
+            - seek-occupational-health
+            - request-more-detail
+            - signpost-access-to-work
+            - ""
+          description: "Overall handling recommendation: progress-to-meeting, seek-occupational-health, request-more-detail, signpost-access-to-work."
+        manager_notes:
+          type: string
+          description: Free-text triage / sign-off notes from the manager or HR contact.
+        signed_at:
+          type: string
+          format: date-time
+          description: Timestamp of the manager / HR electronic signature.
+        graded_at:
+          type: string
+          format: date-time
+          description: Timestamp when the engine last computed the grade.
+      required:
+        - created_at
+        - updated_at
+        - neurodiversity_adjustment_request_id
+        - eligibility_band
+        - impact_band
+        - priority_tier
+        - target_timeframe
+        - recommendation
+        - manager_notes
+        - graded_at
+      description: "Computed four-axis grade for a neurodiversity reasonable-adjustments request: Equality Act 2010 eligibility, impact / wellbeing risk, request completeness, and handling priority. Being neurodivergent will often amount to a disability under the Equality Act 2010; a substantial and long-term adverse effect drives the eligibility axis, and a worker at risk of absence / burnout auto-escalates the impact and priority axes."

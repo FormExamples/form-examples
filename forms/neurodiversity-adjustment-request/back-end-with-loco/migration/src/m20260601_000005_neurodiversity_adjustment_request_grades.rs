@@ -1,0 +1,116 @@
+use sea_orm_migration::prelude::*;
+
+#[derive(DeriveMigrationName)]
+pub struct Migration;
+
+#[async_trait::async_trait]
+impl MigrationTrait for Migration {
+    async fn up(&self, m: &SchemaManager) -> Result<(), DbErr> {
+        m.create_table(
+            Table::create()
+                .table(Alias::new("neurodiversity_adjustment_request_grades"))
+                .if_not_exists()
+                .col(
+                    ColumnDef::new(Alias::new("id"))
+                        .uuid()
+                        .not_null()
+                        .default(Expr::cust("gen_random_uuid()"))
+                        .primary_key(),
+                )
+                .col(
+                    ColumnDef::new(Alias::new("created_at"))
+                        .timestamp_with_time_zone()
+                        .not_null()
+                        .default(Expr::current_timestamp()),
+                )
+                .col(
+                    ColumnDef::new(Alias::new("updated_at"))
+                        .timestamp_with_time_zone()
+                        .not_null()
+                        .default(Expr::current_timestamp()),
+                )
+                .col(
+                    ColumnDef::new(Alias::new("deleted_at"))
+                        .timestamp_with_time_zone()
+                        .null(),
+                )
+                .col(
+                    ColumnDef::new(Alias::new("neurodiversity_adjustment_request_id"))
+                        .uuid()
+                        .not_null()
+                        .unique_key(),
+                )
+                .col(
+                    ColumnDef::new(Alias::new("eligibility_band"))
+                        .string()
+                        .not_null(),
+                )
+                .col(
+                    ColumnDef::new(Alias::new("impact_band"))
+                        .string()
+                        .not_null(),
+                )
+                .col(
+                    ColumnDef::new(Alias::new("completeness_percent"))
+                        .integer()
+                        .null(),
+                )
+                .col(
+                    ColumnDef::new(Alias::new("priority_tier"))
+                        .string()
+                        .not_null(),
+                )
+                .col(
+                    ColumnDef::new(Alias::new("target_timeframe"))
+                        .string()
+                        .not_null(),
+                )
+                .col(
+                    ColumnDef::new(Alias::new("recommendation"))
+                        .string()
+                        .not_null(),
+                )
+                .col(
+                    ColumnDef::new(Alias::new("manager_notes"))
+                        .text()
+                        .not_null(),
+                )
+                .col(
+                    ColumnDef::new(Alias::new("signed_at"))
+                        .timestamp_with_time_zone()
+                        .null(),
+                )
+                .col(
+                    ColumnDef::new(Alias::new("graded_at"))
+                        .timestamp_with_time_zone()
+                        .not_null()
+                        .default(Expr::current_timestamp()),
+                )
+                .foreign_key(
+                    ForeignKey::create()
+                        .name("fk_neurodiversity_adjustment_request_grades_request_id")
+                        .from(
+                            Alias::new("neurodiversity_adjustment_request_grades"),
+                            Alias::new("neurodiversity_adjustment_request_id"),
+                        )
+                        .to(
+                            Alias::new("neurodiversity_adjustment_requests"),
+                            Alias::new("id"),
+                        )
+                        .on_delete(ForeignKeyAction::Cascade)
+                        .on_update(ForeignKeyAction::Cascade),
+                )
+                .to_owned(),
+        )
+        .await
+    }
+
+    async fn down(&self, m: &SchemaManager) -> Result<(), DbErr> {
+        m.drop_table(
+            Table::drop()
+                .table(Alias::new("neurodiversity_adjustment_request_grades"))
+                .to_owned(),
+        )
+        .await
+    }
+}

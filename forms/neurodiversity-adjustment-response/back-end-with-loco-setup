@@ -1,0 +1,116 @@
+#!/bin/sh
+set -euf
+
+form_kebab_case=neurodiversity-adjustment-response
+form_snake_case=neurodiversity_adjustment_response
+
+createdb --host=localhost --port=5432 --username=loco --owner=loco "${form_snake_case}_development" || :
+createdb --host=localhost --port=5432 --username=loco --owner=loco "${form_snake_case}_test" || :
+createdb --host=localhost --port=5432 --username=loco --owner=loco "${form_snake_case}_production" || :
+
+loco new --name "${form_snake_case}" --db postgres --bg async --assets none -a
+cd "${form_snake_case}"
+
+# Pin time to a version compatible with cookie 0.18.1 (a fresh loco
+# starter otherwise resolves time 0.3.52, which fails to compile).
+cargo update -p time --precise 0.3.47
+
+cargo loco generate scaffold worker \
+    deleted_at:tstz \
+    name:string! \
+    email:text \
+    phone:text \
+    postal_address_as_full_text:text \
+    country_as_iso_3166_1_alpha_2:string \
+    postcode:text \
+    employee_reference:string^ \
+    job_title:string! \
+    department:string! \
+    employment_type:string! \
+    work_pattern:string! \
+    work_location:string! \
+    employment_start_date:date \
+    --api
+
+cargo loco generate scaffold manager \
+    deleted_at:tstz \
+    name:text! \
+    email:text \
+    phone:text \
+    postal_address_as_full_text:text \
+    country_as_iso_3166_1_alpha_2:string \
+    postcode:text \
+    role:text! \
+    job_title:text! \
+    department:text! \
+    --api
+
+cargo loco generate scaffold neurodiversity_adjustment_response \
+    deleted_at:tstz \
+    worker:references \
+    manager:references \
+    response_status:string! \
+    request_reference:string! \
+    handling_method:string! \
+    assessed_date:date \
+    responded_date:date \
+    effective_date:date \
+    overall_decision:string! \
+    decision_rationale:string! \
+    decline_reason_category:string! \
+    agreed_working_environment:bool! \
+    agreed_equipment_technology:bool! \
+    agreed_working_arrangements:bool! \
+    agreed_communication:bool! \
+    agreed_support_mentoring:bool! \
+    agreed_recruitment_process:bool! \
+    agreed_policy_dress:bool! \
+    agreed_other:bool! \
+    agreed_adjustments_detail:string! \
+    alternative_adjustments_detail:string! \
+    trial_period:bool! \
+    trial_period_weeks:int \
+    review_scheduled:bool! \
+    review_date:date \
+    occupational_health_referred:bool! \
+    access_to_work_referred:bool! \
+    support_resources_detail:string! \
+    responsibilities_detail:string! \
+    point_of_contact:string! \
+    escalated:bool! \
+    escalation_detail:string! \
+    notes:string! \
+    --api
+
+cargo loco generate scaffold neurodiversity_adjustment_response_grade \
+    deleted_at:tstz \
+    neurodiversity_adjustment_response:references \
+    outcome_classification:string! \
+    legal_risk_band:string! \
+    completeness_percent:int \
+    follow_up_urgency:string! \
+    target_timeframe:string! \
+    recommendation:string! \
+    manager_notes:text! \
+    signed_at:tstz \
+    graded_at:tstz! \
+    --api
+
+cargo loco generate scaffold neurodiversity_adjustment_response_grade_rule \
+    deleted_at:tstz \
+    neurodiversity_adjustment_response_grade:references \
+    rule_id:string! \
+    axis:string! \
+    category:string! \
+    description:string! \
+    --api
+
+cargo loco generate scaffold neurodiversity_adjustment_response_grade_flag \
+    deleted_at:tstz \
+    neurodiversity_adjustment_response_grade:references \
+    flag_id:string! \
+    category:string! \
+    priority:string! \
+    description:string! \
+    suggested_action:string! \
+    --api

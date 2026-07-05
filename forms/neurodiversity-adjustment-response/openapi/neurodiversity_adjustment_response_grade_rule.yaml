@@ -1,0 +1,156 @@
+# Generated from sql/. Do not edit by hand.
+# SOURCE: neurodiversity_adjustment_response_grade_rule
+openapi: 3.1.0
+info:
+  title: Neurodiversity Adjustment Response — NeurodiversityAdjustmentResponseGradeRule
+  version: 1.0.0
+  description: Audit trail of every outcome / legal-risk / completeness / follow-up rule that fired for this response.
+paths:
+  /neurodiversity-adjustment-response-grade-rules:
+    get:
+      summary: List NeurodiversityAdjustmentResponseGradeRule records
+      operationId: listNeurodiversityAdjustmentResponseGradeRule
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of NeurodiversityAdjustmentResponseGradeRule records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/NeurodiversityAdjustmentResponseGradeRule"
+    post:
+      summary: Create a new NeurodiversityAdjustmentResponseGradeRule
+      operationId: createNeurodiversityAdjustmentResponseGradeRule
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/NeurodiversityAdjustmentResponseGradeRule"
+      responses:
+        "201":
+          description: The newly created NeurodiversityAdjustmentResponseGradeRule
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/NeurodiversityAdjustmentResponseGradeRule"
+        "400":
+          description: Validation error
+  /neurodiversity-adjustment-response-grade-rules/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one NeurodiversityAdjustmentResponseGradeRule by id
+      operationId: getNeurodiversityAdjustmentResponseGradeRule
+      responses:
+        "200":
+          description: The requested NeurodiversityAdjustmentResponseGradeRule
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/NeurodiversityAdjustmentResponseGradeRule"
+        "404":
+          description: NeurodiversityAdjustmentResponseGradeRule not found
+    patch:
+      summary: Update an existing NeurodiversityAdjustmentResponseGradeRule
+      operationId: updateNeurodiversityAdjustmentResponseGradeRule
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/NeurodiversityAdjustmentResponseGradeRule"
+      responses:
+        "200":
+          description: The updated NeurodiversityAdjustmentResponseGradeRule
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/NeurodiversityAdjustmentResponseGradeRule"
+        "404":
+          description: NeurodiversityAdjustmentResponseGradeRule not found
+    delete:
+      summary: Soft-delete a NeurodiversityAdjustmentResponseGradeRule
+      operationId: deleteNeurodiversityAdjustmentResponseGradeRule
+      responses:
+        "204":
+          description: NeurodiversityAdjustmentResponseGradeRule deleted
+        "404":
+          description: NeurodiversityAdjustmentResponseGradeRule not found
+components:
+  schemas:
+    NeurodiversityAdjustmentResponseGradeRule:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was updated most-recently.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was deleted a.k.a. soft-removed.
+        neurodiversity_adjustment_response_grade_id:
+          type: string
+          format: uuid
+          description: Foreign key to the parent grade.
+        rule_id:
+          type: string
+          maxLength: 40
+          description: Stable rule identifier (e.g. R-LEGAL-DECLINE-NO-RATIONALE-01).
+        axis:
+          type: string
+          enum:
+            - outcome
+            - legal-risk
+            - completeness
+            - follow-up
+            - ""
+          description: "Scoring axis the rule belongs to: outcome, legal-risk, completeness, follow-up."
+        category:
+          type: string
+          maxLength: 50
+          description: Category or reason the rule relates to.
+        description:
+          type: string
+          maxLength: 500
+          description: Human-readable description of why the rule fired.
+      required:
+        - created_at
+        - updated_at
+        - neurodiversity_adjustment_response_grade_id
+        - rule_id
+        - axis
+        - category
+        - description
+      description: Audit trail of every outcome / legal-risk / completeness / follow-up rule that fired for this response.

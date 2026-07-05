@@ -1,0 +1,116 @@
+// Generated from sql/. Do not edit by hand.
+// SOURCE: neurodiversity_adjustment_request
+
+syntax = "proto3";
+
+package form_examples.neurodiversity_adjustment_request;
+
+enum NeurodiversityAdjustmentRequestStatusEnum {
+  STATUS_UNSPECIFIED = 0;
+  STATUS_DRAFT = 1;  // draft
+  STATUS_SUBMITTED = 2;  // submitted
+  STATUS_UNDER_REVIEW = 3;  // under-review
+  STATUS_AGREED = 4;  // agreed
+  STATUS_PARTIALLY_AGREED = 5;  // partially-agreed
+  STATUS_DECLINED = 6;  // declined
+  STATUS_WITHDRAWN = 7;  // withdrawn
+}
+
+enum NeurodiversityAdjustmentRequestRequestedByEnum {
+  REQUESTEDBY_UNSPECIFIED = 0;
+  REQUESTEDBY_WORKER = 1;  // worker
+  REQUESTEDBY_MANAGER = 2;  // manager
+  REQUESTEDBY_OCCUPATIONAL_HEALTH = 3;  // occupational-health
+  REQUESTEDBY_OTHER = 4;  // other
+}
+
+enum NeurodiversityAdjustmentRequestDiagnosisStatusEnum {
+  DIAGNOSISSTATUS_UNSPECIFIED = 0;
+  DIAGNOSISSTATUS_DIAGNOSED = 1;  // diagnosed
+  DIAGNOSISSTATUS_SELF_IDENTIFIED = 2;  // self-identified
+  DIAGNOSISSTATUS_AWAITING_ASSESSMENT = 3;  // awaiting-assessment
+  DIAGNOSISSTATUS_PREFER_NOT_TO_SAY = 4;  // prefer-not-to-say
+}
+
+enum NeurodiversityAdjustmentRequestConsidersDisabilityEnum {
+  CONSIDERSDISABILITY_UNSPECIFIED = 0;
+  CONSIDERSDISABILITY_YES = 1;  // yes
+  CONSIDERSDISABILITY_NO = 2;  // no
+  CONSIDERSDISABILITY_UNSURE = 3;  // unsure
+  CONSIDERSDISABILITY_PREFER_NOT_TO_SAY = 4;  // prefer-not-to-say
+}
+
+enum NeurodiversityAdjustmentRequestSupportingEvidenceTypeEnum {
+  SUPPORTINGEVIDENCETYPE_UNSPECIFIED = 0;
+  SUPPORTINGEVIDENCETYPE_OCCUPATIONAL_HEALTH = 1;  // occupational-health
+  SUPPORTINGEVIDENCETYPE_GP_LETTER = 2;  // gp-letter
+  SUPPORTINGEVIDENCETYPE_DIAGNOSTIC_REPORT = 3;  // diagnostic-report
+  SUPPORTINGEVIDENCETYPE_ACCESS_TO_WORK = 4;  // access-to-work
+  SUPPORTINGEVIDENCETYPE_NONE = 5;  // none
+}
+
+enum NeurodiversityAdjustmentRequestCurrentImpactEnum {
+  CURRENTIMPACT_UNSPECIFIED = 0;
+  CURRENTIMPACT_LOW = 1;  // low
+  CURRENTIMPACT_MODERATE = 2;  // moderate
+  CURRENTIMPACT_HIGH = 3;  // high
+  CURRENTIMPACT_SEVERE = 4;  // severe
+}
+
+enum NeurodiversityAdjustmentRequestUrgencyEnum {
+  URGENCY_UNSPECIFIED = 0;
+  URGENCY_ROUTINE = 1;  // routine
+  URGENCY_SOON = 2;  // soon
+  URGENCY_URGENT = 3;  // urgent
+}
+
+message NeurodiversityAdjustmentRequest {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string worker_id = 5;  // UUID — uuid
+  string manager_id = 6;  // UUID — uuid
+  NeurodiversityAdjustmentRequestStatusEnum status = 7;  // VARCHAR(20)
+  NeurodiversityAdjustmentRequestRequestedByEnum requested_by = 8;  // VARCHAR(15)
+  string request_date = 9;  // DATE — iso 8601 date
+  string requested_start_date = 10;  // DATE — iso 8601 date
+  bool condition_adhd = 11;  // BOOLEAN
+  bool condition_autism = 12;  // BOOLEAN
+  bool condition_dyslexia = 13;  // BOOLEAN
+  bool condition_dyspraxia = 14;  // BOOLEAN
+  bool condition_dyscalculia = 15;  // BOOLEAN
+  bool condition_tourettes = 16;  // BOOLEAN
+  bool condition_other = 17;  // BOOLEAN
+  string condition_other_detail = 18;  // VARCHAR(500) — max 500 chars
+  NeurodiversityAdjustmentRequestDiagnosisStatusEnum diagnosis_status = 19;  // VARCHAR(20)
+  NeurodiversityAdjustmentRequestConsidersDisabilityEnum considers_disability = 20;  // VARCHAR(20)
+  bool substantial_long_term_impact = 21;  // BOOLEAN
+  bool disclosure_consent = 22;  // BOOLEAN
+  bool difficulty_concentration = 23;  // BOOLEAN
+  bool difficulty_written_communication = 24;  // BOOLEAN
+  bool difficulty_organisation_time = 25;  // BOOLEAN
+  bool difficulty_sensory_overload = 26;  // BOOLEAN
+  bool difficulty_balance_coordination = 27;  // BOOLEAN
+  bool difficulty_social_communication = 28;  // BOOLEAN
+  bool difficulty_memory = 29;  // BOOLEAN
+  bool difficulty_burnout_wellbeing = 30;  // BOOLEAN
+  string tasks_situations_affected = 31;  // VARCHAR(1000) — max 1000 chars
+  string worker_strengths = 32;  // VARCHAR(1000) — max 1000 chars
+  bool adjustment_working_environment = 33;  // BOOLEAN
+  bool adjustment_equipment_technology = 34;  // BOOLEAN
+  bool adjustment_working_arrangements = 35;  // BOOLEAN
+  bool adjustment_communication = 36;  // BOOLEAN
+  bool adjustment_support_mentoring = 37;  // BOOLEAN
+  bool adjustment_recruitment_process = 38;  // BOOLEAN
+  bool adjustment_policy_dress = 39;  // BOOLEAN
+  bool adjustment_other = 40;  // BOOLEAN
+  string adjustments_requested_detail = 41;  // VARCHAR(2000) — max 2000 chars
+  NeurodiversityAdjustmentRequestSupportingEvidenceTypeEnum supporting_evidence_type = 42;  // VARCHAR(25)
+  bool occupational_health_involved = 43;  // BOOLEAN
+  bool access_to_work_involved = 44;  // BOOLEAN
+  NeurodiversityAdjustmentRequestCurrentImpactEnum current_impact = 45;  // VARCHAR(10)
+  bool at_risk_of_absence = 46;  // BOOLEAN
+  NeurodiversityAdjustmentRequestUrgencyEnum urgency = 47;  // VARCHAR(10)
+  string notes = 48;  // VARCHAR(1000) — max 1000 chars
+}

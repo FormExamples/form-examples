@@ -1,0 +1,169 @@
+# Generated from sql/. Do not edit by hand.
+# SOURCE: neurodiversity_adjustment_request_grade_flag
+openapi: 3.1.0
+info:
+  title: Neurodiversity Adjustment Request — NeurodiversityAdjustmentRequestGradeFlag
+  version: 1.0.0
+  description: Compliance and wellbeing flags that fire independently of the four axes, with priority and a suggested action for the manager / HR contact.
+paths:
+  /neurodiversity-adjustment-request-grade-flags:
+    get:
+      summary: List NeurodiversityAdjustmentRequestGradeFlag records
+      operationId: listNeurodiversityAdjustmentRequestGradeFlag
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of NeurodiversityAdjustmentRequestGradeFlag records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/NeurodiversityAdjustmentRequestGradeFlag"
+    post:
+      summary: Create a new NeurodiversityAdjustmentRequestGradeFlag
+      operationId: createNeurodiversityAdjustmentRequestGradeFlag
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/NeurodiversityAdjustmentRequestGradeFlag"
+      responses:
+        "201":
+          description: The newly created NeurodiversityAdjustmentRequestGradeFlag
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/NeurodiversityAdjustmentRequestGradeFlag"
+        "400":
+          description: Validation error
+  /neurodiversity-adjustment-request-grade-flags/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one NeurodiversityAdjustmentRequestGradeFlag by id
+      operationId: getNeurodiversityAdjustmentRequestGradeFlag
+      responses:
+        "200":
+          description: The requested NeurodiversityAdjustmentRequestGradeFlag
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/NeurodiversityAdjustmentRequestGradeFlag"
+        "404":
+          description: NeurodiversityAdjustmentRequestGradeFlag not found
+    patch:
+      summary: Update an existing NeurodiversityAdjustmentRequestGradeFlag
+      operationId: updateNeurodiversityAdjustmentRequestGradeFlag
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/NeurodiversityAdjustmentRequestGradeFlag"
+      responses:
+        "200":
+          description: The updated NeurodiversityAdjustmentRequestGradeFlag
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/NeurodiversityAdjustmentRequestGradeFlag"
+        "404":
+          description: NeurodiversityAdjustmentRequestGradeFlag not found
+    delete:
+      summary: Soft-delete a NeurodiversityAdjustmentRequestGradeFlag
+      operationId: deleteNeurodiversityAdjustmentRequestGradeFlag
+      responses:
+        "204":
+          description: NeurodiversityAdjustmentRequestGradeFlag deleted
+        "404":
+          description: NeurodiversityAdjustmentRequestGradeFlag not found
+components:
+  schemas:
+    NeurodiversityAdjustmentRequestGradeFlag:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was updated most-recently.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was deleted a.k.a. soft-removed.
+        neurodiversity_adjustment_request_grade_id:
+          type: string
+          format: uuid
+          description: Foreign key to the parent grade.
+        flag_id:
+          type: string
+          maxLength: 50
+          description: Stable flag identifier (e.g. F-DISABILITY-DUTY-001).
+        category:
+          type: string
+          enum:
+            - disability-duty-engaged
+            - burnout-risk
+            - no-consent-to-share
+            - missing-adjustments
+            - missing-difficulties
+            - access-to-work-recommended
+            - occupational-health-recommended
+            - other
+            - ""
+          description: Flag category.
+        priority:
+          type: string
+          enum:
+            - low
+            - medium
+            - high
+            - ""
+          description: "Priority: low, medium, high."
+        description:
+          type: string
+          maxLength: 500
+          description: Human-readable description of what fired the flag.
+        suggested_action:
+          type: string
+          maxLength: 500
+          description: "Suggested action (e.g. \"treat the Equality Act duty to make reasonable adjustments as engaged; arrange a meeting without unreasonable delay\")."
+      required:
+        - created_at
+        - updated_at
+        - neurodiversity_adjustment_request_grade_id
+        - flag_id
+        - category
+        - priority
+        - description
+        - suggested_action
+      description: Compliance and wellbeing flags that fire independently of the four axes, with priority and a suggested action for the manager / HR contact.

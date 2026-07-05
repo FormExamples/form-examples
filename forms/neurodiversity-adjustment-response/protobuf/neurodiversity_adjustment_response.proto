@@ -1,0 +1,86 @@
+// Generated from sql/. Do not edit by hand.
+// SOURCE: neurodiversity_adjustment_response
+
+syntax = "proto3";
+
+package form_examples.neurodiversity_adjustment_response;
+
+enum NeurodiversityAdjustmentResponseResponseStatusEnum {
+  RESPONSESTATUS_UNSPECIFIED = 0;
+  RESPONSESTATUS_DRAFT = 1;  // draft
+  RESPONSESTATUS_AGREED = 2;  // agreed
+  RESPONSESTATUS_PARTIALLY_AGREED = 3;  // partially-agreed
+  RESPONSESTATUS_TRIAL = 4;  // trial
+  RESPONSESTATUS_DECLINED = 5;  // declined
+  RESPONSESTATUS_DEFERRED = 6;  // deferred
+  RESPONSESTATUS_CANCELLED = 7;  // cancelled
+}
+
+enum NeurodiversityAdjustmentResponseHandlingMethodEnum {
+  HANDLINGMETHOD_UNSPECIFIED = 0;
+  HANDLINGMETHOD_MEETING = 1;  // meeting
+  HANDLINGMETHOD_OCCUPATIONAL_HEALTH_REFERRAL = 2;  // occupational-health-referral
+  HANDLINGMETHOD_EMAIL = 3;  // email
+  HANDLINGMETHOD_HR_REVIEW = 4;  // hr-review
+  HANDLINGMETHOD_OTHER = 5;  // other
+}
+
+enum NeurodiversityAdjustmentResponseOverallDecisionEnum {
+  OVERALLDECISION_UNSPECIFIED = 0;
+  OVERALLDECISION_AGREED = 1;  // agreed
+  OVERALLDECISION_PARTIALLY_AGREED = 2;  // partially-agreed
+  OVERALLDECISION_ALTERNATIVE_OFFERED = 3;  // alternative-offered
+  OVERALLDECISION_DECLINED = 4;  // declined
+  OVERALLDECISION_DEFERRED = 5;  // deferred
+}
+
+enum NeurodiversityAdjustmentResponseDeclineReasonCategoryEnum {
+  DECLINEREASONCATEGORY_UNSPECIFIED = 0;
+  DECLINEREASONCATEGORY_NOT_REASONABLE = 1;  // not-reasonable
+  DECLINEREASONCATEGORY_DISPROPORTIONATE_COST = 2;  // disproportionate-cost
+  DECLINEREASONCATEGORY_HEALTH_AND_SAFETY = 3;  // health-and-safety
+  DECLINEREASONCATEGORY_OPERATIONAL_IMPACT = 4;  // operational-impact
+  DECLINEREASONCATEGORY_ALTERNATIVE_PROVIDED = 5;  // alternative-provided
+  DECLINEREASONCATEGORY_INSUFFICIENT_INFORMATION = 6;  // insufficient-information
+  DECLINEREASONCATEGORY_NONE = 7;  // none
+}
+
+message NeurodiversityAdjustmentResponse {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string worker_id = 5;  // UUID — uuid
+  string manager_id = 6;  // UUID — uuid
+  NeurodiversityAdjustmentResponseResponseStatusEnum response_status = 7;  // VARCHAR(20)
+  string request_reference = 8;  // VARCHAR(64) — max 64 chars
+  NeurodiversityAdjustmentResponseHandlingMethodEnum handling_method = 9;  // VARCHAR(25)
+  string assessed_date = 10;  // DATE — iso 8601 date
+  string responded_date = 11;  // DATE — iso 8601 date
+  string effective_date = 12;  // DATE — iso 8601 date
+  NeurodiversityAdjustmentResponseOverallDecisionEnum overall_decision = 13;  // VARCHAR(20)
+  string decision_rationale = 14;  // VARCHAR(2000) — max 2000 chars
+  NeurodiversityAdjustmentResponseDeclineReasonCategoryEnum decline_reason_category = 15;  // VARCHAR(25)
+  bool agreed_working_environment = 16;  // BOOLEAN
+  bool agreed_equipment_technology = 17;  // BOOLEAN
+  bool agreed_working_arrangements = 18;  // BOOLEAN
+  bool agreed_communication = 19;  // BOOLEAN
+  bool agreed_support_mentoring = 20;  // BOOLEAN
+  bool agreed_recruitment_process = 21;  // BOOLEAN
+  bool agreed_policy_dress = 22;  // BOOLEAN
+  bool agreed_other = 23;  // BOOLEAN
+  string agreed_adjustments_detail = 24;  // VARCHAR(2000) — max 2000 chars
+  string alternative_adjustments_detail = 25;  // VARCHAR(2000) — max 2000 chars
+  bool trial_period = 26;  // BOOLEAN
+  int32 trial_period_weeks = 27;  // INTEGER
+  bool review_scheduled = 28;  // BOOLEAN
+  string review_date = 29;  // DATE — iso 8601 date
+  bool occupational_health_referred = 30;  // BOOLEAN
+  bool access_to_work_referred = 31;  // BOOLEAN
+  string support_resources_detail = 32;  // VARCHAR(1000) — max 1000 chars
+  string responsibilities_detail = 33;  // VARCHAR(1000) — max 1000 chars
+  string point_of_contact = 34;  // VARCHAR(255) — max 255 chars
+  bool escalated = 35;  // BOOLEAN
+  string escalation_detail = 36;  // VARCHAR(500) — max 500 chars
+  string notes = 37;  // VARCHAR(1000) — max 1000 chars
+}

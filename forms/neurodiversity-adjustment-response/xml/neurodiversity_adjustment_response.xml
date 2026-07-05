@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE neurodiversity_adjustment_response SYSTEM "neurodiversity_adjustment_response.dtd">
+<neurodiversity_adjustment_response>
+<id>770e8400-e29b-41d4-a716-446655440002</id>
+<created_at>2026-04-09T10:00:00Z</created_at>
+<updated_at>2026-04-09T10:00:00Z</updated_at>
+<deleted_at>2026-04-09T10:00:00Z</deleted_at>
+<worker_id>550e8400-e29b-41d4-a716-446655440000</worker_id>
+<manager_id>660e8400-e29b-41d4-a716-446655440001</manager_id>
+<response_status>draft</response_status>
+<request_reference></request_reference>
+<handling_method>meeting</handling_method>
+<assessed_date>2026-01-15</assessed_date>
+<responded_date>2026-01-15</responded_date>
+<effective_date>2026-01-15</effective_date>
+<overall_decision>agreed</overall_decision>
+<decision_rationale></decision_rationale>
+<decline_reason_category>not-reasonable</decline_reason_category>
+<agreed_working_environment>true</agreed_working_environment>
+<agreed_equipment_technology>true</agreed_equipment_technology>
+<agreed_working_arrangements>true</agreed_working_arrangements>
+<agreed_communication>true</agreed_communication>
+<agreed_support_mentoring>true</agreed_support_mentoring>
+<agreed_recruitment_process>true</agreed_recruitment_process>
+<agreed_policy_dress>true</agreed_policy_dress>
+<agreed_other>true</agreed_other>
+<agreed_adjustments_detail></agreed_adjustments_detail>
+<alternative_adjustments_detail></alternative_adjustments_detail>
+<trial_period>true</trial_period>
+<trial_period_weeks>1</trial_period_weeks>
+<review_scheduled>true</review_scheduled>
+<review_date>2026-01-15</review_date>
+<occupational_health_referred>true</occupational_health_referred>
+<access_to_work_referred>true</access_to_work_referred>
+<support_resources_detail></support_resources_detail>
+<responsibilities_detail></responsibilities_detail>
+<point_of_contact>07700900001</point_of_contact>
+<escalated>true</escalated>
+<escalation_detail></escalation_detail>
+<notes>Example text.</notes>
+</neurodiversity_adjustment_response>

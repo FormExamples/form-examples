@@ -1,0 +1,127 @@
+#!/bin/sh
+set -euf
+
+form_kebab_case=neurodiversity-adjustment-request
+form_snake_case=neurodiversity_adjustment_request
+
+createdb --host=localhost --port=5432 --username=loco --owner=loco "${form_snake_case}_development" || :
+createdb --host=localhost --port=5432 --username=loco --owner=loco "${form_snake_case}_test" || :
+createdb --host=localhost --port=5432 --username=loco --owner=loco "${form_snake_case}_production" || :
+
+loco new --name "${form_snake_case}" --db postgres --bg async --assets none -a
+cd "${form_snake_case}"
+
+# Pin time to a version compatible with cookie 0.18.1 (a fresh loco
+# starter otherwise resolves time 0.3.52, which fails to compile).
+cargo update -p time --precise 0.3.47
+
+cargo loco generate scaffold worker \
+    deleted_at:tstz \
+    name:string! \
+    email:text \
+    phone:text \
+    postal_address_as_full_text:text \
+    country_as_iso_3166_1_alpha_2:string \
+    postcode:text \
+    employee_reference:string^ \
+    job_title:string! \
+    department:string! \
+    employment_type:string! \
+    work_pattern:string! \
+    work_location:string! \
+    employment_start_date:date \
+    --api
+
+cargo loco generate scaffold manager \
+    deleted_at:tstz \
+    name:text! \
+    email:text \
+    phone:text \
+    postal_address_as_full_text:text \
+    country_as_iso_3166_1_alpha_2:string \
+    postcode:text \
+    role:text! \
+    job_title:text! \
+    department:text! \
+    --api
+
+cargo loco generate scaffold neurodiversity_adjustment_request \
+    deleted_at:tstz \
+    worker:references \
+    manager:references \
+    status:string! \
+    requested_by:string! \
+    request_date:date \
+    requested_start_date:date \
+    condition_adhd:bool! \
+    condition_autism:bool! \
+    condition_dyslexia:bool! \
+    condition_dyspraxia:bool! \
+    condition_dyscalculia:bool! \
+    condition_tourettes:bool! \
+    condition_other:bool! \
+    condition_other_detail:string! \
+    diagnosis_status:string! \
+    considers_disability:string! \
+    substantial_long_term_impact:bool! \
+    disclosure_consent:bool! \
+    difficulty_concentration:bool! \
+    difficulty_written_communication:bool! \
+    difficulty_organisation_time:bool! \
+    difficulty_sensory_overload:bool! \
+    difficulty_balance_coordination:bool! \
+    difficulty_social_communication:bool! \
+    difficulty_memory:bool! \
+    difficulty_burnout_wellbeing:bool! \
+    tasks_situations_affected:string! \
+    worker_strengths:string! \
+    adjustment_working_environment:bool! \
+    adjustment_equipment_technology:bool! \
+    adjustment_working_arrangements:bool! \
+    adjustment_communication:bool! \
+    adjustment_support_mentoring:bool! \
+    adjustment_recruitment_process:bool! \
+    adjustment_policy_dress:bool! \
+    adjustment_other:bool! \
+    adjustments_requested_detail:string! \
+    supporting_evidence_type:string! \
+    occupational_health_involved:bool! \
+    access_to_work_involved:bool! \
+    current_impact:string! \
+    at_risk_of_absence:bool! \
+    urgency:string! \
+    notes:string! \
+    --api
+
+cargo loco generate scaffold neurodiversity_adjustment_request_grade \
+    deleted_at:tstz \
+    neurodiversity_adjustment_request:references \
+    eligibility_band:string! \
+    impact_band:string! \
+    completeness_percent:int \
+    priority_tier:string! \
+    target_timeframe:string! \
+    recommendation:string! \
+    manager_notes:text! \
+    signed_at:tstz \
+    graded_at:tstz! \
+    --api
+
+cargo loco generate scaffold neurodiversity_adjustment_request_grade_rule \
+    deleted_at:tstz \
+    neurodiversity_adjustment_request_grade:references \
+    rule_id:string! \
+    axis:string! \
+    category:string! \
+    description:string! \
+    --api
+
+cargo loco generate scaffold neurodiversity_adjustment_request_grade_flag \
+    deleted_at:tstz \
+    neurodiversity_adjustment_request_grade:references \
+    flag_id:string! \
+    category:string! \
+    priority:string! \
+    description:string! \
+    suggested_action:string! \
+    --api

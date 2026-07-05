@@ -1,0 +1,56 @@
+// Generated from sql/. Do not edit by hand.
+// SOURCE: neurodiversity_adjustment_response_grade
+
+syntax = "proto3";
+
+package form_examples.neurodiversity_adjustment_response;
+
+enum NeurodiversityAdjustmentResponseGradeOutcomeClassificationEnum {
+  OUTCOMECLASSIFICATION_UNSPECIFIED = 0;
+  OUTCOMECLASSIFICATION_FULLY_AGREED = 1;  // fully-agreed
+  OUTCOMECLASSIFICATION_PARTIALLY_AGREED = 2;  // partially-agreed
+  OUTCOMECLASSIFICATION_ALTERNATIVE_OFFERED = 3;  // alternative-offered
+  OUTCOMECLASSIFICATION_DECLINED = 4;  // declined
+  OUTCOMECLASSIFICATION_DEFERRED = 5;  // deferred
+}
+
+enum NeurodiversityAdjustmentResponseGradeLegalRiskBandEnum {
+  LEGALRISKBAND_UNSPECIFIED = 0;
+  LEGALRISKBAND_OK = 1;  // ok
+  LEGALRISKBAND_CAUTION = 2;  // caution
+  LEGALRISKBAND_HIGH_RISK = 3;  // high-risk
+}
+
+enum NeurodiversityAdjustmentResponseGradeFollowUpUrgencyEnum {
+  FOLLOWUPURGENCY_UNSPECIFIED = 0;
+  FOLLOWUPURGENCY_NONE = 1;  // none
+  FOLLOWUPURGENCY_REVIEW_SCHEDULED = 2;  // review-scheduled
+  FOLLOWUPURGENCY_URGENT_REVIEW = 3;  // urgent-review
+  FOLLOWUPURGENCY_ESCALATION_NEEDED = 4;  // escalation-needed
+}
+
+enum NeurodiversityAdjustmentResponseGradeRecommendationEnum {
+  RECOMMENDATION_UNSPECIFIED = 0;
+  RECOMMENDATION_IMPLEMENT = 1;  // implement
+  RECOMMENDATION_SCHEDULE_REVIEW = 2;  // schedule-review
+  RECOMMENDATION_SEEK_OCCUPATIONAL_HEALTH = 3;  // seek-occupational-health
+  RECOMMENDATION_RECONSIDER_DECISION = 4;  // reconsider-decision
+  RECOMMENDATION_ESCALATE_TO_HR = 5;  // escalate-to-hr
+}
+
+message NeurodiversityAdjustmentResponseGrade {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string neurodiversity_adjustment_response_id = 5;  // UUID — uuid
+  NeurodiversityAdjustmentResponseGradeOutcomeClassificationEnum outcome_classification = 6;  // VARCHAR(20)
+  NeurodiversityAdjustmentResponseGradeLegalRiskBandEnum legal_risk_band = 7;  // VARCHAR(15)
+  int32 completeness_percent = 8;  // INTEGER
+  NeurodiversityAdjustmentResponseGradeFollowUpUrgencyEnum follow_up_urgency = 9;  // VARCHAR(20)
+  string target_timeframe = 10;  // VARCHAR(50) — max 50 chars
+  NeurodiversityAdjustmentResponseGradeRecommendationEnum recommendation = 11;  // VARCHAR(25)
+  string manager_notes = 12;  // TEXT
+  string signed_at = 13;  // TIMESTAMPTZ — iso 8601
+  string graded_at = 14;  // TIMESTAMPTZ — iso 8601
+}

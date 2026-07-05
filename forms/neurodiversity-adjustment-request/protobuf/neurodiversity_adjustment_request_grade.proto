@@ -1,0 +1,52 @@
+// Generated from sql/. Do not edit by hand.
+// SOURCE: neurodiversity_adjustment_request_grade
+
+syntax = "proto3";
+
+package form_examples.neurodiversity_adjustment_request;
+
+enum NeurodiversityAdjustmentRequestGradeEligibilityBandEnum {
+  ELIGIBILITYBAND_UNSPECIFIED = 0;
+  ELIGIBILITYBAND_LIKELY_COVERED = 1;  // likely-covered
+  ELIGIBILITYBAND_POSSIBLY_COVERED = 2;  // possibly-covered
+  ELIGIBILITYBAND_UNCLEAR = 3;  // unclear
+}
+
+enum NeurodiversityAdjustmentRequestGradeImpactBandEnum {
+  IMPACTBAND_UNSPECIFIED = 0;
+  IMPACTBAND_OK = 1;  // ok
+  IMPACTBAND_CAUTION = 2;  // caution
+  IMPACTBAND_HIGH_RISK = 3;  // high-risk
+}
+
+enum NeurodiversityAdjustmentRequestGradePriorityTierEnum {
+  PRIORITYTIER_UNSPECIFIED = 0;
+  PRIORITYTIER_ROUTINE = 1;  // routine
+  PRIORITYTIER_SOON = 2;  // soon
+  PRIORITYTIER_URGENT = 3;  // urgent
+}
+
+enum NeurodiversityAdjustmentRequestGradeRecommendationEnum {
+  RECOMMENDATION_UNSPECIFIED = 0;
+  RECOMMENDATION_PROGRESS_TO_MEETING = 1;  // progress-to-meeting
+  RECOMMENDATION_SEEK_OCCUPATIONAL_HEALTH = 2;  // seek-occupational-health
+  RECOMMENDATION_REQUEST_MORE_DETAIL = 3;  // request-more-detail
+  RECOMMENDATION_SIGNPOST_ACCESS_TO_WORK = 4;  // signpost-access-to-work
+}
+
+message NeurodiversityAdjustmentRequestGrade {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string neurodiversity_adjustment_request_id = 5;  // UUID — uuid
+  NeurodiversityAdjustmentRequestGradeEligibilityBandEnum eligibility_band = 6;  // VARCHAR(20)
+  NeurodiversityAdjustmentRequestGradeImpactBandEnum impact_band = 7;  // VARCHAR(15)
+  int32 completeness_percent = 8;  // INTEGER
+  NeurodiversityAdjustmentRequestGradePriorityTierEnum priority_tier = 9;  // VARCHAR(10)
+  string target_timeframe = 10;  // VARCHAR(50) — max 50 chars
+  NeurodiversityAdjustmentRequestGradeRecommendationEnum recommendation = 11;  // VARCHAR(25)
+  string manager_notes = 12;  // TEXT
+  string signed_at = 13;  // TIMESTAMPTZ — iso 8601
+  string graded_at = 14;  // TIMESTAMPTZ — iso 8601
+}
