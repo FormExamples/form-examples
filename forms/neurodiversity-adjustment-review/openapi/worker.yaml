@@ -1,0 +1,200 @@
+# Generated from sql/. Do not edit by hand.
+# SOURCE: worker
+openapi: 3.1.0
+info:
+  title: Neurodiversity Adjustment Review — Worker
+  version: 1.0.0
+  description: Worker (the neurodivergent employee) who requests, or on whose behalf a manager requests, workplace reasonable adjustments.
+paths:
+  /workers:
+    get:
+      summary: List Worker records
+      operationId: listWorker
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of Worker records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Worker"
+    post:
+      summary: Create a new Worker
+      operationId: createWorker
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Worker"
+      responses:
+        "201":
+          description: The newly created Worker
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Worker"
+        "400":
+          description: Validation error
+  /workers/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one Worker by id
+      operationId: getWorker
+      responses:
+        "200":
+          description: The requested Worker
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Worker"
+        "404":
+          description: Worker not found
+    patch:
+      summary: Update an existing Worker
+      operationId: updateWorker
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Worker"
+      responses:
+        "200":
+          description: The updated Worker
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Worker"
+        "404":
+          description: Worker not found
+    delete:
+      summary: Soft-delete a Worker
+      operationId: deleteWorker
+      responses:
+        "204":
+          description: Worker deleted
+        "404":
+          description: Worker not found
+components:
+  schemas:
+    Worker:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was updated most-recently.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was deleted a.k.a. soft-removed.
+        name:
+          type: string
+          maxLength: 255
+          description: Name.
+        email:
+          type: string
+          description: Email address.
+        phone:
+          type: string
+          description: Phone number.
+        postal_address_as_full_text:
+          type: string
+          description: Postal address as full text.
+        country_as_iso_3166_1_alpha_2:
+          type: string
+          maxLength: 2
+          description: Country as ISO 3166-1 alpha-2 format, such as for validating the postal address.
+        postcode:
+          type: string
+          description: Postal code, such as for validating the postal address.
+        employee_reference:
+          type: string
+          maxLength: 64
+          description: Employer-assigned employee / payroll reference, unique per worker.
+        job_title:
+          type: string
+          maxLength: 255
+          description: Job title / role of the worker.
+        department:
+          type: string
+          maxLength: 255
+          description: Department / team the worker belongs to.
+        employment_type:
+          type: string
+          enum:
+            - permanent
+            - fixed-term
+            - agency
+            - contractor
+            - apprentice
+            - volunteer
+            - other
+            - ""
+          description: "Employment type: permanent, fixed-term, agency, contractor, apprentice, volunteer, other."
+        work_pattern:
+          type: string
+          enum:
+            - full-time
+            - part-time
+            - shift
+            - flexible
+            - other
+            - ""
+          description: "Working pattern: full-time, part-time, shift, flexible, other."
+        work_location:
+          type: string
+          enum:
+            - office
+            - remote
+            - hybrid
+            - field
+            - other
+            - ""
+          description: "Primary work location: office, remote, hybrid, field, other."
+        employment_start_date:
+          type: string
+          format: date
+          description: Date the worker started employment.
+      required:
+        - created_at
+        - updated_at
+        - name
+        - job_title
+        - department
+        - employment_type
+        - work_pattern
+        - work_location
+      description: Worker (the neurodivergent employee) who requests, or on whose behalf a manager requests, workplace reasonable adjustments.

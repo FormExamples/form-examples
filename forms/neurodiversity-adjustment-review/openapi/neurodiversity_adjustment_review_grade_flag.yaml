@@ -1,0 +1,169 @@
+# Generated from sql/. Do not edit by hand.
+# SOURCE: neurodiversity_adjustment_review_grade_flag
+openapi: 3.1.0
+info:
+  title: Neurodiversity Adjustment Review — NeurodiversityAdjustmentReviewGradeFlag
+  version: 1.0.0
+  description: Compliance and risk flags that fire independently of the four axes, with priority and a suggested action. The discrimination-risk flag (adjustments declined for a worker likely covered by the Equality Act 2010 without adequate justification or alternatives) is the highest-priority signal of a failure-to-make-reasonable-adjustments claim.
+paths:
+  /neurodiversity-adjustment-review-grade-flags:
+    get:
+      summary: List NeurodiversityAdjustmentReviewGradeFlag records
+      operationId: listNeurodiversityAdjustmentReviewGradeFlag
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of NeurodiversityAdjustmentReviewGradeFlag records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/NeurodiversityAdjustmentReviewGradeFlag"
+    post:
+      summary: Create a new NeurodiversityAdjustmentReviewGradeFlag
+      operationId: createNeurodiversityAdjustmentReviewGradeFlag
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/NeurodiversityAdjustmentReviewGradeFlag"
+      responses:
+        "201":
+          description: The newly created NeurodiversityAdjustmentReviewGradeFlag
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/NeurodiversityAdjustmentReviewGradeFlag"
+        "400":
+          description: Validation error
+  /neurodiversity-adjustment-review-grade-flags/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one NeurodiversityAdjustmentReviewGradeFlag by id
+      operationId: getNeurodiversityAdjustmentReviewGradeFlag
+      responses:
+        "200":
+          description: The requested NeurodiversityAdjustmentReviewGradeFlag
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/NeurodiversityAdjustmentReviewGradeFlag"
+        "404":
+          description: NeurodiversityAdjustmentReviewGradeFlag not found
+    patch:
+      summary: Update an existing NeurodiversityAdjustmentReviewGradeFlag
+      operationId: updateNeurodiversityAdjustmentReviewGradeFlag
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/NeurodiversityAdjustmentReviewGradeFlag"
+      responses:
+        "200":
+          description: The updated NeurodiversityAdjustmentReviewGradeFlag
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/NeurodiversityAdjustmentReviewGradeFlag"
+        "404":
+          description: NeurodiversityAdjustmentReviewGradeFlag not found
+    delete:
+      summary: Soft-delete a NeurodiversityAdjustmentReviewGradeFlag
+      operationId: deleteNeurodiversityAdjustmentReviewGradeFlag
+      responses:
+        "204":
+          description: NeurodiversityAdjustmentReviewGradeFlag deleted
+        "404":
+          description: NeurodiversityAdjustmentReviewGradeFlag not found
+components:
+  schemas:
+    NeurodiversityAdjustmentReviewGradeFlag:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was updated most-recently.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was deleted a.k.a. soft-removed.
+        neurodiversity_adjustment_review_grade_id:
+          type: string
+          format: uuid
+          description: Foreign key to the parent grade.
+        flag_id:
+          type: string
+          maxLength: 50
+          description: Stable flag identifier (e.g. F-ADJUSTMENTS-NOT-WORKING-001).
+        category:
+          type: string
+          enum:
+            - adjustments-not-working
+            - worker-dissatisfied
+            - wellbeing-declined
+            - changes-outstanding
+            - no-next-review
+            - escalation
+            - incomplete-review
+            - other
+            - ""
+          description: Flag category.
+        priority:
+          type: string
+          enum:
+            - low
+            - medium
+            - high
+            - ""
+          description: "Priority: low, medium, high."
+        description:
+          type: string
+          maxLength: 500
+          description: Human-readable description of what fired the flag.
+        suggested_action:
+          type: string
+          maxLength: 500
+          description: "Suggested action (e.g. \"reconsider the decision or record a reasonableness justification and offer alternatives before finalising\")."
+      required:
+        - created_at
+        - updated_at
+        - neurodiversity_adjustment_review_grade_id
+        - flag_id
+        - category
+        - priority
+        - description
+        - suggested_action
+      description: Compliance and risk flags that fire independently of the four axes, with priority and a suggested action. The discrimination-risk flag (adjustments declined for a worker likely covered by the Equality Act 2010 without adequate justification or alternatives) is the highest-priority signal of a failure-to-make-reasonable-adjustments claim.

@@ -1,0 +1,166 @@
+# Generated from sql/. Do not edit by hand.
+# SOURCE: manager
+openapi: 3.1.0
+info:
+  title: Neurodiversity Adjustment Review — Manager
+  version: 1.0.0
+  description: Manager / HR contact who receives and handles the worker's reasonable-adjustments request.
+paths:
+  /managers:
+    get:
+      summary: List Manager records
+      operationId: listManager
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of Manager records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Manager"
+    post:
+      summary: Create a new Manager
+      operationId: createManager
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Manager"
+      responses:
+        "201":
+          description: The newly created Manager
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Manager"
+        "400":
+          description: Validation error
+  /managers/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one Manager by id
+      operationId: getManager
+      responses:
+        "200":
+          description: The requested Manager
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Manager"
+        "404":
+          description: Manager not found
+    patch:
+      summary: Update an existing Manager
+      operationId: updateManager
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Manager"
+      responses:
+        "200":
+          description: The updated Manager
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Manager"
+        "404":
+          description: Manager not found
+    delete:
+      summary: Soft-delete a Manager
+      operationId: deleteManager
+      responses:
+        "204":
+          description: Manager deleted
+        "404":
+          description: Manager not found
+components:
+  schemas:
+    Manager:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was updated most-recently.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was deleted a.k.a. soft-removed.
+        name:
+          type: string
+          description: Name.
+        email:
+          type: string
+          description: Email address.
+        phone:
+          type: string
+          description: Phone number.
+        postal_address_as_full_text:
+          type: string
+          description: Postal address as full text.
+        country_as_iso_3166_1_alpha_2:
+          type: string
+          maxLength: 2
+          description: Country as ISO 3166-1 alpha-2 format, such as for validating the postal address.
+        postcode:
+          type: string
+          description: Postal code, such as for validating the postal address.
+        role:
+          type: string
+          enum:
+            - line-manager
+            - hr-adviser
+            - occupational-health
+            - diversity-lead
+            - senior-manager
+            - other
+            - ""
+          description: "Manager role handling the request: line-manager, hr-adviser, occupational-health, diversity-lead, senior-manager, other."
+        job_title:
+          type: string
+          description: Job title of the manager / HR contact.
+        department:
+          type: string
+          description: Department the manager / HR contact belongs to.
+      required:
+        - created_at
+        - updated_at
+        - name
+        - role
+        - job_title
+        - department
+      description: Manager / HR contact who receives and handles the worker's reasonable-adjustments request.

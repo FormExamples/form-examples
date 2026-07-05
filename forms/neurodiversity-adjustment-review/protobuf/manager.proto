@@ -1,0 +1,32 @@
+// Generated from sql/. Do not edit by hand.
+// SOURCE: manager
+
+syntax = "proto3";
+
+package form_examples.neurodiversity_adjustment_review;
+
+enum ManagerRoleEnum {
+  ROLE_UNSPECIFIED = 0;
+  ROLE_LINE_MANAGER = 1;  // line-manager
+  ROLE_HR_ADVISER = 2;  // hr-adviser
+  ROLE_OCCUPATIONAL_HEALTH = 3;  // occupational-health
+  ROLE_DIVERSITY_LEAD = 4;  // diversity-lead
+  ROLE_SENIOR_MANAGER = 5;  // senior-manager
+  ROLE_OTHER = 6;  // other
+}
+
+message Manager {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string name = 5;  // TEXT
+  string email = 6;  // TEXT
+  string phone = 7;  // TEXT
+  string postal_address_as_full_text = 8;  // TEXT
+  string country_as_iso_3166_1_alpha_2 = 9;  // CHAR(2) — max 2 chars
+  string postcode = 10;  // TEXT
+  ManagerRoleEnum role = 11;  // TEXT
+  string job_title = 12;  // TEXT
+  string department = 13;  // TEXT
+}

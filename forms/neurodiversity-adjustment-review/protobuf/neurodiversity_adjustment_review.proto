@@ -1,0 +1,135 @@
+// Generated from sql/. Do not edit by hand.
+// SOURCE: neurodiversity_adjustment_review
+
+syntax = "proto3";
+
+package form_examples.neurodiversity_adjustment_review;
+
+enum NeurodiversityAdjustmentReviewReviewStatusEnum {
+  REVIEWSTATUS_UNSPECIFIED = 0;
+  REVIEWSTATUS_DRAFT = 1;  // draft
+  REVIEWSTATUS_COMPLETED = 2;  // completed
+  REVIEWSTATUS_CHANGES_AGREED = 3;  // changes-agreed
+  REVIEWSTATUS_ESCALATED = 4;  // escalated
+  REVIEWSTATUS_CANCELLED = 5;  // cancelled
+}
+
+enum NeurodiversityAdjustmentReviewReviewMethodEnum {
+  REVIEWMETHOD_UNSPECIFIED = 0;
+  REVIEWMETHOD_MEETING = 1;  // meeting
+  REVIEWMETHOD_OCCUPATIONAL_HEALTH_REVIEW = 2;  // occupational-health-review
+  REVIEWMETHOD_EMAIL = 3;  // email
+  REVIEWMETHOD_HR_REVIEW = 4;  // hr-review
+  REVIEWMETHOD_OTHER = 5;  // other
+}
+
+enum NeurodiversityAdjustmentReviewEffectivenessWorkingEnvironmentEnum {
+  EFFECTIVENESSWORKINGENVIRONMENT_UNSPECIFIED = 0;
+  EFFECTIVENESSWORKINGENVIRONMENT_WORKING_WELL = 1;  // working-well
+  EFFECTIVENESSWORKINGENVIRONMENT_PARTIAL = 2;  // partial
+  EFFECTIVENESSWORKINGENVIRONMENT_NOT_WORKING = 3;  // not-working
+  EFFECTIVENESSWORKINGENVIRONMENT_NOT_IN_PLACE = 4;  // not-in-place
+}
+
+enum NeurodiversityAdjustmentReviewEffectivenessEquipmentTechnologyEnum {
+  EFFECTIVENESSEQUIPMENTTECHNOLOGY_UNSPECIFIED = 0;
+  EFFECTIVENESSEQUIPMENTTECHNOLOGY_WORKING_WELL = 1;  // working-well
+  EFFECTIVENESSEQUIPMENTTECHNOLOGY_PARTIAL = 2;  // partial
+  EFFECTIVENESSEQUIPMENTTECHNOLOGY_NOT_WORKING = 3;  // not-working
+  EFFECTIVENESSEQUIPMENTTECHNOLOGY_NOT_IN_PLACE = 4;  // not-in-place
+}
+
+enum NeurodiversityAdjustmentReviewEffectivenessWorkingArrangementsEnum {
+  EFFECTIVENESSWORKINGARRANGEMENTS_UNSPECIFIED = 0;
+  EFFECTIVENESSWORKINGARRANGEMENTS_WORKING_WELL = 1;  // working-well
+  EFFECTIVENESSWORKINGARRANGEMENTS_PARTIAL = 2;  // partial
+  EFFECTIVENESSWORKINGARRANGEMENTS_NOT_WORKING = 3;  // not-working
+  EFFECTIVENESSWORKINGARRANGEMENTS_NOT_IN_PLACE = 4;  // not-in-place
+}
+
+enum NeurodiversityAdjustmentReviewEffectivenessCommunicationEnum {
+  EFFECTIVENESSCOMMUNICATION_UNSPECIFIED = 0;
+  EFFECTIVENESSCOMMUNICATION_WORKING_WELL = 1;  // working-well
+  EFFECTIVENESSCOMMUNICATION_PARTIAL = 2;  // partial
+  EFFECTIVENESSCOMMUNICATION_NOT_WORKING = 3;  // not-working
+  EFFECTIVENESSCOMMUNICATION_NOT_IN_PLACE = 4;  // not-in-place
+}
+
+enum NeurodiversityAdjustmentReviewEffectivenessSupportMentoringEnum {
+  EFFECTIVENESSSUPPORTMENTORING_UNSPECIFIED = 0;
+  EFFECTIVENESSSUPPORTMENTORING_WORKING_WELL = 1;  // working-well
+  EFFECTIVENESSSUPPORTMENTORING_PARTIAL = 2;  // partial
+  EFFECTIVENESSSUPPORTMENTORING_NOT_WORKING = 3;  // not-working
+  EFFECTIVENESSSUPPORTMENTORING_NOT_IN_PLACE = 4;  // not-in-place
+}
+
+enum NeurodiversityAdjustmentReviewEffectivenessRecruitmentProcessEnum {
+  EFFECTIVENESSRECRUITMENTPROCESS_UNSPECIFIED = 0;
+  EFFECTIVENESSRECRUITMENTPROCESS_WORKING_WELL = 1;  // working-well
+  EFFECTIVENESSRECRUITMENTPROCESS_PARTIAL = 2;  // partial
+  EFFECTIVENESSRECRUITMENTPROCESS_NOT_WORKING = 3;  // not-working
+  EFFECTIVENESSRECRUITMENTPROCESS_NOT_IN_PLACE = 4;  // not-in-place
+}
+
+enum NeurodiversityAdjustmentReviewEffectivenessPolicyDressEnum {
+  EFFECTIVENESSPOLICYDRESS_UNSPECIFIED = 0;
+  EFFECTIVENESSPOLICYDRESS_WORKING_WELL = 1;  // working-well
+  EFFECTIVENESSPOLICYDRESS_PARTIAL = 2;  // partial
+  EFFECTIVENESSPOLICYDRESS_NOT_WORKING = 3;  // not-working
+  EFFECTIVENESSPOLICYDRESS_NOT_IN_PLACE = 4;  // not-in-place
+}
+
+enum NeurodiversityAdjustmentReviewEffectivenessOtherEnum {
+  EFFECTIVENESSOTHER_UNSPECIFIED = 0;
+  EFFECTIVENESSOTHER_WORKING_WELL = 1;  // working-well
+  EFFECTIVENESSOTHER_PARTIAL = 2;  // partial
+  EFFECTIVENESSOTHER_NOT_WORKING = 3;  // not-working
+  EFFECTIVENESSOTHER_NOT_IN_PLACE = 4;  // not-in-place
+}
+
+enum NeurodiversityAdjustmentReviewWorkerSatisfiedEnum {
+  WORKERSATISFIED_UNSPECIFIED = 0;
+  WORKERSATISFIED_YES = 1;  // yes
+  WORKERSATISFIED_PARTIALLY = 2;  // partially
+  WORKERSATISFIED_NO = 3;  // no
+}
+
+enum NeurodiversityAdjustmentReviewWellbeingChangeEnum {
+  WELLBEINGCHANGE_UNSPECIFIED = 0;
+  WELLBEINGCHANGE_IMPROVED = 1;  // improved
+  WELLBEINGCHANGE_UNCHANGED = 2;  // unchanged
+  WELLBEINGCHANGE_WORSE = 3;  // worse
+}
+
+message NeurodiversityAdjustmentReview {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string worker_id = 5;  // UUID — uuid
+  string manager_id = 6;  // UUID — uuid
+  NeurodiversityAdjustmentReviewReviewStatusEnum review_status = 7;  // VARCHAR(20)
+  string response_reference = 8;  // VARCHAR(64) — max 64 chars
+  NeurodiversityAdjustmentReviewReviewMethodEnum review_method = 9;  // VARCHAR(25)
+  string review_date = 10;  // DATE — iso 8601 date
+  string next_review_date = 11;  // DATE — iso 8601 date
+  NeurodiversityAdjustmentReviewEffectivenessWorkingEnvironmentEnum effectiveness_working_environment = 12;  // VARCHAR(15)
+  NeurodiversityAdjustmentReviewEffectivenessEquipmentTechnologyEnum effectiveness_equipment_technology = 13;  // VARCHAR(15)
+  NeurodiversityAdjustmentReviewEffectivenessWorkingArrangementsEnum effectiveness_working_arrangements = 14;  // VARCHAR(15)
+  NeurodiversityAdjustmentReviewEffectivenessCommunicationEnum effectiveness_communication = 15;  // VARCHAR(15)
+  NeurodiversityAdjustmentReviewEffectivenessSupportMentoringEnum effectiveness_support_mentoring = 16;  // VARCHAR(15)
+  NeurodiversityAdjustmentReviewEffectivenessRecruitmentProcessEnum effectiveness_recruitment_process = 17;  // VARCHAR(15)
+  NeurodiversityAdjustmentReviewEffectivenessPolicyDressEnum effectiveness_policy_dress = 18;  // VARCHAR(15)
+  NeurodiversityAdjustmentReviewEffectivenessOtherEnum effectiveness_other = 19;  // VARCHAR(15)
+  string worker_feedback = 20;  // VARCHAR(2000) — max 2000 chars
+  NeurodiversityAdjustmentReviewWorkerSatisfiedEnum worker_satisfied = 21;  // VARCHAR(12)
+  NeurodiversityAdjustmentReviewWellbeingChangeEnum wellbeing_change = 22;  // VARCHAR(12)
+  string barriers_detail = 23;  // VARCHAR(1000) — max 1000 chars
+  bool changes_needed = 24;  // BOOLEAN
+  string changes_detail = 25;  // VARCHAR(2000) — max 2000 chars
+  string updated_adjustments_detail = 26;  // VARCHAR(2000) — max 2000 chars
+  bool occupational_health_rereferral = 27;  // BOOLEAN
+  bool escalated = 28;  // BOOLEAN
+  string escalation_detail = 29;  // VARCHAR(500) — max 500 chars
+  string notes = 30;  // VARCHAR(1000) — max 1000 chars
+}

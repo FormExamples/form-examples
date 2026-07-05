@@ -1,0 +1,55 @@
+// Generated from sql/. Do not edit by hand.
+// SOURCE: neurodiversity_adjustment_review_grade
+
+syntax = "proto3";
+
+package form_examples.neurodiversity_adjustment_review;
+
+enum NeurodiversityAdjustmentReviewGradeEffectivenessBandEnum {
+  EFFECTIVENESSBAND_UNSPECIFIED = 0;
+  EFFECTIVENESSBAND_EFFECTIVE = 1;  // effective
+  EFFECTIVENESSBAND_PARTIALLY_EFFECTIVE = 2;  // partially-effective
+  EFFECTIVENESSBAND_INEFFECTIVE = 3;  // ineffective
+  EFFECTIVENESSBAND_NOT_YET_ASSESSED = 4;  // not-yet-assessed
+}
+
+enum NeurodiversityAdjustmentReviewGradeWellbeingRiskBandEnum {
+  WELLBEINGRISKBAND_UNSPECIFIED = 0;
+  WELLBEINGRISKBAND_OK = 1;  // ok
+  WELLBEINGRISKBAND_CAUTION = 2;  // caution
+  WELLBEINGRISKBAND_HIGH_RISK = 3;  // high-risk
+}
+
+enum NeurodiversityAdjustmentReviewGradeNextStepUrgencyEnum {
+  NEXTSTEPURGENCY_UNSPECIFIED = 0;
+  NEXTSTEPURGENCY_NONE = 1;  // none
+  NEXTSTEPURGENCY_REVIEW_SCHEDULED = 2;  // review-scheduled
+  NEXTSTEPURGENCY_ADJUST_NOW = 3;  // adjust-now
+  NEXTSTEPURGENCY_ESCALATE = 4;  // escalate
+}
+
+enum NeurodiversityAdjustmentReviewGradeRecommendationEnum {
+  RECOMMENDATION_UNSPECIFIED = 0;
+  RECOMMENDATION_MAINTAIN = 1;  // maintain
+  RECOMMENDATION_ADJUST_ADJUSTMENTS = 2;  // adjust-adjustments
+  RECOMMENDATION_SEEK_OCCUPATIONAL_HEALTH = 3;  // seek-occupational-health
+  RECOMMENDATION_SCHEDULE_NEXT_REVIEW = 4;  // schedule-next-review
+  RECOMMENDATION_ESCALATE_TO_HR = 5;  // escalate-to-hr
+}
+
+message NeurodiversityAdjustmentReviewGrade {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string neurodiversity_adjustment_review_id = 5;  // UUID — uuid
+  NeurodiversityAdjustmentReviewGradeEffectivenessBandEnum effectiveness_band = 6;  // VARCHAR(20)
+  NeurodiversityAdjustmentReviewGradeWellbeingRiskBandEnum wellbeing_risk_band = 7;  // VARCHAR(15)
+  int32 completeness_percent = 8;  // INTEGER
+  NeurodiversityAdjustmentReviewGradeNextStepUrgencyEnum next_step_urgency = 9;  // VARCHAR(20)
+  string target_timeframe = 10;  // VARCHAR(50) — max 50 chars
+  NeurodiversityAdjustmentReviewGradeRecommendationEnum recommendation = 11;  // VARCHAR(25)
+  string manager_notes = 12;  // TEXT
+  string signed_at = 13;  // TIMESTAMPTZ — iso 8601
+  string graded_at = 14;  // TIMESTAMPTZ — iso 8601
+}

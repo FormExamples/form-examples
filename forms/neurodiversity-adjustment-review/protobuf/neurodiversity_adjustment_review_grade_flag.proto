@@ -1,0 +1,38 @@
+// Generated from sql/. Do not edit by hand.
+// SOURCE: neurodiversity_adjustment_review_grade_flag
+
+syntax = "proto3";
+
+package form_examples.neurodiversity_adjustment_review;
+
+enum NeurodiversityAdjustmentReviewGradeFlagCategoryEnum {
+  CATEGORY_UNSPECIFIED = 0;
+  CATEGORY_ADJUSTMENTS_NOT_WORKING = 1;  // adjustments-not-working
+  CATEGORY_WORKER_DISSATISFIED = 2;  // worker-dissatisfied
+  CATEGORY_WELLBEING_DECLINED = 3;  // wellbeing-declined
+  CATEGORY_CHANGES_OUTSTANDING = 4;  // changes-outstanding
+  CATEGORY_NO_NEXT_REVIEW = 5;  // no-next-review
+  CATEGORY_ESCALATION = 6;  // escalation
+  CATEGORY_INCOMPLETE_REVIEW = 7;  // incomplete-review
+  CATEGORY_OTHER = 8;  // other
+}
+
+enum NeurodiversityAdjustmentReviewGradeFlagPriorityEnum {
+  PRIORITY_UNSPECIFIED = 0;
+  PRIORITY_LOW = 1;  // low
+  PRIORITY_MEDIUM = 2;  // medium
+  PRIORITY_HIGH = 3;  // high
+}
+
+message NeurodiversityAdjustmentReviewGradeFlag {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string neurodiversity_adjustment_review_grade_id = 5;  // UUID — uuid
+  string flag_id = 6;  // VARCHAR(50) — max 50 chars
+  NeurodiversityAdjustmentReviewGradeFlagCategoryEnum category = 7;  // VARCHAR(40)
+  NeurodiversityAdjustmentReviewGradeFlagPriorityEnum priority = 8;  // VARCHAR(10)
+  string description = 9;  // VARCHAR(500) — max 500 chars
+  string suggested_action = 10;  // VARCHAR(500) — max 500 chars
+}

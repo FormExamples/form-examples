@@ -1,0 +1,232 @@
+{
+  "resourceType": "Observation",
+  "id": "550e8400-e29b-41d4-a716-446655440000",
+  "meta": {
+    "profile": [
+      "http://hl7.org/fhir/StructureDefinition/Observation"
+    ],
+    "lastUpdated": "2026-04-09T10:00:00+00:00"
+  },
+  "status": "final",
+  "category": [
+    {
+      "coding": [
+        {
+          "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+          "code": "survey",
+          "display": "Survey"
+        }
+      ]
+    }
+  ],
+  "code": {
+    "coding": [
+      {
+        "system": "urn:form-examples:neurodiversity-adjustment-review",
+        "code": "worker",
+        "display": "Worker"
+      }
+    ]
+  },
+  "subject": {
+    "reference": "Patient/bb0e8400-e29b-41d4-a716-446655440006"
+  },
+  "encounter": {
+    "reference": "Encounter/cc0e8400-e29b-41d4-a716-446655440007"
+  },
+  "effectiveDateTime": "2026-04-09T10:00:00+00:00",
+  "component": [
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:neurodiversity-adjustment-review",
+            "code": "deleted_at",
+            "display": "Deleted At"
+          }
+        ]
+      },
+      "valueDateTime": "2026-04-09T10:00:00+00:00"
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:neurodiversity-adjustment-review",
+            "code": "name",
+            "display": "Name"
+          }
+        ]
+      },
+      "valueString": "Example"
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:neurodiversity-adjustment-review",
+            "code": "email",
+            "display": "Email"
+          }
+        ]
+      },
+      "valueString": "jane.doe@example.com"
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:neurodiversity-adjustment-review",
+            "code": "phone",
+            "display": "Phone"
+          }
+        ]
+      },
+      "valueString": "07700900000"
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:neurodiversity-adjustment-review",
+            "code": "postal_address_as_full_text",
+            "display": "Postal Address As Full Text"
+          }
+        ]
+      },
+      "valueString": "Example text."
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:neurodiversity-adjustment-review",
+            "code": "country_as_iso_3166_1_alpha_2",
+            "display": "Country As Iso 3166 1 Alpha 2"
+          }
+        ]
+      },
+      "valueString": ""
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:neurodiversity-adjustment-review",
+            "code": "postcode",
+            "display": "Postcode"
+          }
+        ]
+      },
+      "valueString": "SW1A 1AA"
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:neurodiversity-adjustment-review",
+            "code": "employee_reference",
+            "display": "Employee Reference"
+          }
+        ]
+      },
+      "valueString": ""
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:neurodiversity-adjustment-review",
+            "code": "job_title",
+            "display": "Job Title"
+          }
+        ]
+      },
+      "valueString": "Example Title"
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:neurodiversity-adjustment-review",
+            "code": "department",
+            "display": "Department"
+          }
+        ]
+      },
+      "valueString": ""
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:neurodiversity-adjustment-review",
+            "code": "employment_type",
+            "display": "Employment Type"
+          }
+        ]
+      },
+      "valueCodeableConcept": {
+        "coding": [
+          {
+            "system": "urn:form-examples:neurodiversity-adjustment-review:employment_type",
+            "code": "permanent",
+            "display": "Permanent"
+          }
+        ]
+      }
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:neurodiversity-adjustment-review",
+            "code": "work_pattern",
+            "display": "Work Pattern"
+          }
+        ]
+      },
+      "valueCodeableConcept": {
+        "coding": [
+          {
+            "system": "urn:form-examples:neurodiversity-adjustment-review:work_pattern",
+            "code": "full-time",
+            "display": "Full-Time"
+          }
+        ]
+      }
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:neurodiversity-adjustment-review",
+            "code": "work_location",
+            "display": "Work Location"
+          }
+        ]
+      },
+      "valueCodeableConcept": {
+        "coding": [
+          {
+            "system": "urn:form-examples:neurodiversity-adjustment-review:work_location",
+            "code": "office",
+            "display": "Office"
+          }
+        ]
+      }
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:neurodiversity-adjustment-review",
+            "code": "employment_start_date",
+            "display": "Employment Start Date"
+          }
+        ]
+      },
+      "valueDateTime": "2026-01-15"
+    }
+  ]
+}

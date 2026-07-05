@@ -1,0 +1,193 @@
+# Generated from sql/. Do not edit by hand.
+# SOURCE: neurodiversity_adjustment_review_grade
+openapi: 3.1.0
+info:
+  title: Neurodiversity Adjustment Review — NeurodiversityAdjustmentReviewGrade
+  version: 1.0.0
+  description: "Computed four-axis grade for a neurodiversity reasonable-adjustments review: overall effectiveness, wellbeing risk, review completeness, and next-step urgency. Any adjustment reported as not-working, a dissatisfied worker, declining wellbeing, or an escalation drives the wellbeing-risk axis and the next-step urgency regardless of the other axes."
+paths:
+  /neurodiversity-adjustment-review-grades:
+    get:
+      summary: List NeurodiversityAdjustmentReviewGrade records
+      operationId: listNeurodiversityAdjustmentReviewGrade
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of NeurodiversityAdjustmentReviewGrade records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/NeurodiversityAdjustmentReviewGrade"
+    post:
+      summary: Create a new NeurodiversityAdjustmentReviewGrade
+      operationId: createNeurodiversityAdjustmentReviewGrade
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/NeurodiversityAdjustmentReviewGrade"
+      responses:
+        "201":
+          description: The newly created NeurodiversityAdjustmentReviewGrade
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/NeurodiversityAdjustmentReviewGrade"
+        "400":
+          description: Validation error
+  /neurodiversity-adjustment-review-grades/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one NeurodiversityAdjustmentReviewGrade by id
+      operationId: getNeurodiversityAdjustmentReviewGrade
+      responses:
+        "200":
+          description: The requested NeurodiversityAdjustmentReviewGrade
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/NeurodiversityAdjustmentReviewGrade"
+        "404":
+          description: NeurodiversityAdjustmentReviewGrade not found
+    patch:
+      summary: Update an existing NeurodiversityAdjustmentReviewGrade
+      operationId: updateNeurodiversityAdjustmentReviewGrade
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/NeurodiversityAdjustmentReviewGrade"
+      responses:
+        "200":
+          description: The updated NeurodiversityAdjustmentReviewGrade
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/NeurodiversityAdjustmentReviewGrade"
+        "404":
+          description: NeurodiversityAdjustmentReviewGrade not found
+    delete:
+      summary: Soft-delete a NeurodiversityAdjustmentReviewGrade
+      operationId: deleteNeurodiversityAdjustmentReviewGrade
+      responses:
+        "204":
+          description: NeurodiversityAdjustmentReviewGrade deleted
+        "404":
+          description: NeurodiversityAdjustmentReviewGrade not found
+components:
+  schemas:
+    NeurodiversityAdjustmentReviewGrade:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was updated most-recently.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was deleted a.k.a. soft-removed.
+        neurodiversity_adjustment_review_id:
+          type: string
+          format: uuid
+          description: Foreign key to the parent review (unique, 1:1).
+        effectiveness_band:
+          type: string
+          enum:
+            - effective
+            - partially-effective
+            - ineffective
+            - not-yet-assessed
+            - ""
+          description: "Axis A overall effectiveness: effective, partially-effective, ineffective, not-yet-assessed."
+        wellbeing_risk_band:
+          type: string
+          enum:
+            - ok
+            - caution
+            - high-risk
+            - ""
+          description: "Axis B wellbeing risk band: ok, caution, high-risk."
+        completeness_percent:
+          type: integer
+          format: int32
+          description: Axis C review completeness as a percentage of mandatory fields (0-100).
+        next_step_urgency:
+          type: string
+          enum:
+            - none
+            - review-scheduled
+            - adjust-now
+            - escalate
+            - ""
+          description: "Axis D next-step urgency: none, review-scheduled, adjust-now, escalate."
+        target_timeframe:
+          type: string
+          maxLength: 50
+          description: Target timeframe for the next step, implied by the next-step urgency.
+        recommendation:
+          type: string
+          enum:
+            - maintain
+            - adjust-adjustments
+            - seek-occupational-health
+            - schedule-next-review
+            - escalate-to-hr
+            - ""
+          description: "Overall recommendation: maintain, adjust-adjustments, seek-occupational-health, schedule-next-review, escalate-to-hr."
+        manager_notes:
+          type: string
+          description: Free-text sign-off notes from the manager or HR contact.
+        signed_at:
+          type: string
+          format: date-time
+          description: Timestamp of the manager / HR electronic signature.
+        graded_at:
+          type: string
+          format: date-time
+          description: Timestamp when the engine last computed the grade.
+      required:
+        - created_at
+        - updated_at
+        - neurodiversity_adjustment_review_id
+        - effectiveness_band
+        - wellbeing_risk_band
+        - next_step_urgency
+        - target_timeframe
+        - recommendation
+        - manager_notes
+        - graded_at
+      description: "Computed four-axis grade for a neurodiversity reasonable-adjustments review: overall effectiveness, wellbeing risk, review completeness, and next-step urgency. Any adjustment reported as not-working, a dissatisfied worker, declining wellbeing, or an escalation drives the wellbeing-risk axis and the next-step urgency regardless of the other axes."
