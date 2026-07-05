@@ -302,7 +302,51 @@ function renderClearButton() {
   btn.hidden = !hasActiveFilters();
 }
 
+/** Percentage helper (integer, guards divide-by-zero). */
+function analyticsPct(n, d) {
+  return d === 0 ? 0 : Math.round((n / d) * 100);
+}
+
+/**
+ * Roll up the rows currently in view into a request overview: how many requests
+ * likely engage the Equality Act duty, the high-wellbeing-risk rate, the urgent
+ * rate, and average completeness. Reflects the active filters.
+ */
+function renderAnalytics() {
+  const el = document.getElementById('analytics');
+  if (!el) return;
+  const rows = visibleRows();
+  const total = rows.length;
+  const count = (pred) => rows.filter(pred).length;
+  const covered = count((r) => r.eligibilityBand === 'likely-covered');
+  const highRisk = count((r) => r.impactBand === 'high-risk');
+  const urgent = count((r) => r.priorityTier === 'urgent');
+  const avgComplete =
+    total === 0
+      ? 0
+      : Math.round(
+          rows.reduce((a, r) => a + (Number(r.completenessPercent) || 0), 0) / total
+        );
+
+  const stat = (labelText, value, tone) =>
+    '<div class="stat-card' +
+    (tone ? ' stat-' + tone : '') +
+    '"><span class="stat-value">' +
+    value +
+    '</span><span class="stat-label">' +
+    labelText +
+    '</span></div>';
+
+  el.innerHTML =
+    stat('Requests in view', String(total), '') +
+    stat('Duty likely engaged', analyticsPct(covered, total) + '%', 'good') +
+    stat('High wellbeing risk', analyticsPct(highRisk, total) + '%', highRisk ? 'bad' : '') +
+    stat('Urgent', analyticsPct(urgent, total) + '%', urgent ? 'warn' : '') +
+    stat('Avg completeness', avgComplete + '%', '');
+}
+
 function renderAll() {
+  renderAnalytics();
   renderTableHead();
   renderTableBody();
   renderFilterCount();

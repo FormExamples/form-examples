@@ -292,7 +292,67 @@ function renderClearButton() {
   btn.hidden = !hasActiveFilters();
 }
 
+/** Percentage helper (integer, guards divide-by-zero). */
+function analyticsPct(n, d) {
+  return d === 0 ? 0 : Math.round((n / d) * 100);
+}
+
+/**
+ * Roll up the rows currently in view into a compliance overview: outcome mix,
+ * discrimination-risk rate (legal-risk high-risk), escalation rate, and average
+ * completeness. Reflects the active filters, so slicing by department or outcome
+ * re-scopes the metrics.
+ */
+function renderAnalytics() {
+  const el = document.getElementById('analytics');
+  if (!el) return;
+  const rows = visibleRows();
+  const total = rows.length;
+  const count = (pred) => rows.filter(pred).length;
+  const agreed = count((r) =>
+    ['fully-agreed', 'partially-agreed', 'alternative-offered'].indexOf(
+      row_outcome(r)
+    ) >= 0
+  );
+  const declined = count((r) => row_outcome(r) === 'declined');
+  const highRisk = count((r) => r.legalRiskBand === 'high-risk');
+  const escalation = count((r) => r.followUpUrgency === 'escalation-needed');
+  const avgComplete =
+    total === 0
+      ? 0
+      : Math.round(
+          rows.reduce((a, r) => a + (Number(r.completenessPercent) || 0), 0) / total
+        );
+
+  const stat = (labelText, value, tone) =>
+    '<div class="stat-card' +
+    (tone ? ' stat-' + tone : '') +
+    '"><span class="stat-value">' +
+    value +
+    '</span><span class="stat-label">' +
+    labelText +
+    '</span></div>';
+
+  el.innerHTML =
+    stat('Responses in view', String(total), '') +
+    stat('Agreed (full / part)', analyticsPct(agreed, total) + '%', 'good') +
+    stat('Declined', analyticsPct(declined, total) + '%', declined ? 'warn' : '') +
+    stat(
+      'Discrimination-risk',
+      analyticsPct(highRisk, total) + '%',
+      highRisk ? 'bad' : 'good'
+    ) +
+    stat('Escalation', analyticsPct(escalation, total) + '%', escalation ? 'bad' : '') +
+    stat('Avg completeness', avgComplete + '%', '');
+}
+
+/** Read the outcome classification from a row, tolerating field naming. */
+function row_outcome(r) {
+  return r.outcomeClassification || '';
+}
+
 function renderAll() {
+  renderAnalytics();
   renderTableHead();
   renderTableBody();
   renderFilterCount();

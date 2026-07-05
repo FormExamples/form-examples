@@ -22,6 +22,35 @@
 		)
 	);
 
+	// Compliance overview — rolls up the rows currently in view. Reflects the
+	// active filters, so slicing by outcome or urgency re-scopes the metrics.
+	const cards = $derived.by(() => {
+		const total = rows.length;
+		const pct = (n: number) => (total === 0 ? 0 : Math.round((n / total) * 100));
+		const c = (pred: (r: (typeof rows)[number]) => boolean) => rows.filter(pred).length;
+		const agreedSet = ['fully-agreed', 'partially-agreed', 'alternative-offered'] as string[];
+		const agreed = pct(c((r) => agreedSet.includes(r.outcomeClassification)));
+		const declined = pct(c((r) => r.outcomeClassification === 'declined'));
+		const highRisk = pct(c((r) => r.legalRiskBand === 'high-risk'));
+		const escalation = pct(c((r) => r.followUpUrgency === 'escalation-needed'));
+		const avgComplete =
+			total === 0
+				? 0
+				: Math.round(rows.reduce((a, r) => a + (r.completenessPercent || 0), 0) / total);
+		return [
+			{ label: 'Responses in view', value: String(total), cls: '' },
+			{ label: 'Agreed (full / part)', value: agreed + '%', cls: 'text-success' },
+			{ label: 'Declined', value: declined + '%', cls: declined ? 'text-warning' : '' },
+			{
+				label: 'Discrimination-risk',
+				value: highRisk + '%',
+				cls: highRisk ? 'text-error' : 'text-success'
+			},
+			{ label: 'Escalation', value: escalation + '%', cls: escalation ? 'text-error' : '' },
+			{ label: 'Avg completeness', value: avgComplete + '%', cls: '' }
+		];
+	});
+
 	// Follow the active Lily theme: pick the dark SVAR skin when the theme's
 	// base surface is dark. Recomputed whenever <html data-theme> changes (after
 	// the new theme stylesheet has applied its tokens).
@@ -129,6 +158,17 @@
 			</select>
 		</label>
 	</div>
+
+	<section class="mb-4" aria-label="Compliance overview">
+		<div class="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-6">
+			{#each cards as card (card.label)}
+				<div class="rounded-lg border border-base-300 bg-base-100 px-3 py-2">
+					<div class="text-2xl font-bold tabular-nums {card.cls}">{card.value}</div>
+					<div class="text-xs text-base-content/60">{card.label}</div>
+				</div>
+			{/each}
+		</div>
+	</section>
 
 	<div class="overflow-hidden rounded-xl border border-base-300" style="height: 600px;">
 		<GridTheme>

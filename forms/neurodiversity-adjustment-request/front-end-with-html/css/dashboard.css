@@ -374,3 +374,37 @@ main {
   font-weight: 500;
 }
 .flag-empty { color: var(--color-muted); }
+/* Compliance analytics overview (js/dashboard-app.js renderAnalytics). */
+.analytics-card {
+  margin: 0 0 1.25rem;
+  padding: 1rem;
+  background: var(--color-surface, #fff);
+  border: 1px solid var(--color-border, #e2e8f0);
+  border-radius: var(--radius, 8px);
+}
+.analytics-heading {
+  margin: 0 0 0.75rem;
+  font-size: 1rem;
+  font-weight: 600;
+}
+.analytics-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0.75rem;
+}
+@media (min-width: 40rem) { .analytics-grid { grid-template-columns: repeat(3, 1fr); } }
+@media (min-width: 64rem) { .analytics-grid { grid-template-columns: repeat(6, 1fr); } }
+.stat-card {
+  display: flex;
+  flex-direction: column;
+  gap: 0.125rem;
+  padding: 0.625rem 0.75rem;
+  border: 1px solid var(--color-border, #e2e8f0);
+  border-radius: var(--radius-sm, 6px);
+  background: var(--color-bg, #f8fafc);
+}
+.stat-value { font-size: 1.375rem; font-weight: 700; font-variant-numeric: tabular-nums; }
+.stat-label { font-size: 0.75rem; color: var(--color-muted, #64748b); }
+.stat-good .stat-value { color: #047857; }
+.stat-warn .stat-value { color: #b45309; }
+.stat-bad  .stat-value { color: #b91c1c; }

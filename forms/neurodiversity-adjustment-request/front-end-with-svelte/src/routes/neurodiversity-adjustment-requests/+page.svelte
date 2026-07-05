@@ -23,6 +23,27 @@
 		)
 	);
 
+	// Request overview — rolls up the rows currently in view (reflects filters).
+	const cards = $derived.by(() => {
+		const total = rows.length;
+		const pct = (n: number) => (total === 0 ? 0 : Math.round((n / total) * 100));
+		const c = (pred: (r: (typeof rows)[number]) => boolean) => rows.filter(pred).length;
+		const covered = pct(c((r) => r.eligibilityBand === 'likely-covered'));
+		const highRisk = pct(c((r) => r.impactBand === 'high-risk'));
+		const urgent = pct(c((r) => r.priorityTier === 'urgent'));
+		const avgComplete =
+			total === 0
+				? 0
+				: Math.round(rows.reduce((a, r) => a + (r.completenessPercent || 0), 0) / total);
+		return [
+			{ label: 'Requests in view', value: String(total), cls: '' },
+			{ label: 'Duty likely engaged', value: covered + '%', cls: 'text-success' },
+			{ label: 'High wellbeing risk', value: highRisk + '%', cls: highRisk ? 'text-error' : '' },
+			{ label: 'Urgent', value: urgent + '%', cls: urgent ? 'text-warning' : '' },
+			{ label: 'Avg completeness', value: avgComplete + '%', cls: '' }
+		];
+	});
+
 	// Follow the active Lily theme: pick the dark SVAR skin when the theme's
 	// base surface is dark. Recomputed whenever <html data-theme> changes (after
 	// the new theme stylesheet has applied its tokens).
@@ -121,6 +142,17 @@
 			</select>
 		</label>
 	</div>
+
+	<section class="mb-4" aria-label="Request overview">
+		<div class="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-5">
+			{#each cards as card (card.label)}
+				<div class="rounded-lg border border-base-300 bg-base-100 px-3 py-2">
+					<div class="text-2xl font-bold tabular-nums {card.cls}">{card.value}</div>
+					<div class="text-xs text-base-content/60">{card.label}</div>
+				</div>
+			{/each}
+		</div>
+	</section>
 
 	<div class="overflow-hidden rounded-xl border border-base-300" style="height: 600px;">
 		<GridTheme>
