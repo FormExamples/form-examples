@@ -1,0 +1,47 @@
+//! `SeaORM` entity for the Loco-default `users` table.
+
+use sea_orm::entity::prelude::*;
+use serde::{Deserialize, Serialize};
+
+/// Model.
+#[derive(Clone, Debug, PartialEq, DeriveEntityModel, Eq, Serialize, Deserialize)]
+#[sea_orm(table_name = "users")]
+pub struct Model {
+    /// Created at.
+    pub created_at: DateTimeWithTimeZone,
+    /// Updated at.
+    pub updated_at: DateTimeWithTimeZone,
+    /// ID.
+    #[sea_orm(primary_key)]
+    pub id: i32,
+    /// Pid.
+    pub pid: Uuid,
+    /// Email.
+    #[sea_orm(unique)]
+    pub email: String,
+    /// Password.
+    pub password: String,
+    /// API key.
+    #[sea_orm(unique)]
+    pub api_key: String,
+    /// Name.
+    pub name: String,
+    /// Reset token.
+    pub reset_token: Option<String>,
+    /// Reset sent at.
+    pub reset_sent_at: Option<DateTimeWithTimeZone>,
+    /// Email verification token.
+    pub email_verification_token: Option<String>,
+    /// Email verification sent at.
+    pub email_verification_sent_at: Option<DateTimeWithTimeZone>,
+    /// Email verified at.
+    pub email_verified_at: Option<DateTimeWithTimeZone>,
+    /// Magic link token.
+    pub magic_link_token: Option<String>,
+    /// Magic link expiration.
+    pub magic_link_expiration: Option<DateTimeWithTimeZone>,
+}
+
+/// Relation.
+#[derive(Copy, Clone, Debug, EnumIter, DeriveRelation)]
+pub enum Relation {}
