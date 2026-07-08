@@ -241,7 +241,10 @@ def render_generate_sh(form_slug: str, tables: list) -> str:
     Header creates the per-form databases and the Loco project, then `cd`s
     into it; each SQL table becomes one standalone
     `cargo loco generate scaffold … --api` command (scaffolds are emitted in
-    `sql/` source order so FK targets already exist when referenced).
+    `sql/` source order so FK targets already exist when referenced). A final
+    step converts the freshly-scaffolded nested crate into the canonical route
+    layout (`back-end-with-loco/src/<form_snake_case>/`) via
+    `bin/route-loco-layout`.
     """
     form_snake_case = form_slug.replace("-", "_")
     out = [
@@ -267,6 +270,14 @@ def render_generate_sh(form_slug: str, tables: list) -> str:
     for table, cols in tables:
         out.extend(format_scaffold_lines(table, cols))
         out.append("")
+
+    out.extend([
+        "# Convert the freshly-scaffolded nested crate into the canonical route",
+        "# layout: back-end-with-loco/src/${form_snake_case}/*.rs",
+        'cd ..',
+        '"$(git rev-parse --show-toplevel)/bin/route-loco-layout" "${form_kebab_case}"',
+        "",
+    ])
 
     return "\n".join(out).rstrip("\n") + "\n"
 

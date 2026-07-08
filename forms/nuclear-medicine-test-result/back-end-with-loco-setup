@@ -112,3 +112,8 @@ cargo loco generate scaffold nuclear_medicine_test_result_grade_flag \
     description:string! \
     suggested_action:string! \
     --api
+
+# Convert the freshly-scaffolded nested crate into the canonical route
+# layout: back-end-with-loco/src/${form_snake_case}/*.rs
+cd ..
+"$(git rev-parse --show-toplevel)/bin/route-loco-layout" "${form_kebab_case}"
