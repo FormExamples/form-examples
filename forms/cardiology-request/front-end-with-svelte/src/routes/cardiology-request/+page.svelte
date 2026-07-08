@@ -24,7 +24,7 @@
 
 	<div class="grid gap-4 sm:grid-cols-2">
 		<a
-			href="/{plural}/new"
+			href="/cardiology-request/{plural}/new"
 			class="group rounded-lg border border-primary bg-primary p-6 text-primary-content shadow-sm transition hover:opacity-90"
 		>
 			<h2 class="text-lg font-semibold">Start a new referral</h2>
@@ -35,7 +35,7 @@
 			<span class="mt-4 inline-block text-sm font-semibold">Open the form →</span>
 		</a>
 		<a
-			href="/{plural}"
+			href="/cardiology-request/{plural}"
 			class="group rounded-lg border border-base-300 bg-base-100 p-6 text-base-content shadow-sm transition hover:border-primary hover:shadow"
 		>
 			<h2 class="text-lg font-semibold">Vetting dashboard</h2>

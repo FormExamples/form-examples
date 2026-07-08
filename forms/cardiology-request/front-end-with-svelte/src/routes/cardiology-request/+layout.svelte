@@ -37,11 +37,11 @@
 <div class="min-h-screen bg-base-200 text-base-content">
 	<nav class="border-b border-base-300 bg-base-100 shadow-sm no-print">
 		<div class="mx-auto flex max-w-5xl items-center justify-between px-4 py-3">
-			<a href="/" class="text-lg font-bold text-base-content">Cardiology Request</a>
+			<a href="/cardiology-request/" class="text-lg font-bold text-base-content">Cardiology Request</a>
 			<div class="flex items-center gap-1">
-				<a href="/" class={navClass('/')}>Welcome</a>
-				<a href="/cardiology-requests/new" class={navClass('/cardiology-requests/new')}>New referral</a>
-				<a href="/cardiology-requests" class={navClass('/cardiology-requests')}>Vetting dashboard</a>
+				<a href="/cardiology-request/" class={navClass('/')}>Welcome</a>
+				<a href="/cardiology-request/cardiology-requests/new" class={navClass('/cardiology-requests/new')}>New referral</a>
+				<a href="/cardiology-request/cardiology-requests" class={navClass('/cardiology-requests')}>Vetting dashboard</a>
 				<ThemeSelect label="Theme" class="ml-2" bind:value={theme}>
 					{#each THEME_OPTIONS as opt (opt.value)}
 						<ThemeSelectOption value={opt.value}>{opt.label}</ThemeSelectOption>

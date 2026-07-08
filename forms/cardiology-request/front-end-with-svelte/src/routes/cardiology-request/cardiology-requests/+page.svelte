@@ -110,7 +110,7 @@
 				Select a row to open the referral.
 			</p>
 		</div>
-		<a href="/cardiology-requests/new" class="button" data-variant="primary">New referral</a>
+		<a href="/cardiology-request/cardiology-requests/new" class="button" data-variant="primary">New referral</a>
 	</div>
 
 	<div class="mb-4 flex flex-wrap gap-4">
