@@ -17,10 +17,10 @@
   },
   "entry": [
     {
-      "fullUrl": "urn:uuid:770e8400-e29b-41d4-a716-446655440002",
+      "fullUrl": "urn:uuid:880e8400-e29b-41d4-a716-446655440003",
       "resource": {
         "resourceType": "Encounter",
-        "id": "770e8400-e29b-41d4-a716-446655440002",
+        "id": "880e8400-e29b-41d4-a716-446655440003",
         "meta": {
           "profile": [
             "http://hl7.org/fhir/StructureDefinition/Encounter"
@@ -95,7 +95,7 @@
           "reference": "Patient/550e8400-e29b-41d4-a716-446655440000"
         },
         "encounter": {
-          "reference": "Encounter/770e8400-e29b-41d4-a716-446655440002"
+          "reference": "Encounter/880e8400-e29b-41d4-a716-446655440003"
         },
         "effectiveDateTime": "2026-04-09T10:00:00+00:00",
         "component": [
@@ -251,10 +251,10 @@
       }
     },
     {
-      "fullUrl": "urn:uuid:880e8400-e29b-41d4-a716-446655440003",
+      "fullUrl": "urn:uuid:770e8400-e29b-41d4-a716-446655440002",
       "resource": {
         "resourceType": "Observation",
-        "id": "880e8400-e29b-41d4-a716-446655440003",
+        "id": "770e8400-e29b-41d4-a716-446655440002",
         "meta": {
           "profile": [
             "http://hl7.org/fhir/StructureDefinition/Observation"
@@ -286,7 +286,7 @@
           "reference": "Patient/550e8400-e29b-41d4-a716-446655440000"
         },
         "encounter": {
-          "reference": "Encounter/770e8400-e29b-41d4-a716-446655440002"
+          "reference": "Encounter/880e8400-e29b-41d4-a716-446655440003"
         },
         "effectiveDateTime": "2026-04-09T10:00:00+00:00",
         "component": [
@@ -429,7 +429,7 @@
           "reference": "Patient/550e8400-e29b-41d4-a716-446655440000"
         },
         "encounter": {
-          "reference": "Encounter/770e8400-e29b-41d4-a716-446655440002"
+          "reference": "Encounter/880e8400-e29b-41d4-a716-446655440003"
         },
         "effectiveDateTime": "2026-04-09T10:00:00+00:00",
         "date": "2026-04-09T10:00:00+00:00",
