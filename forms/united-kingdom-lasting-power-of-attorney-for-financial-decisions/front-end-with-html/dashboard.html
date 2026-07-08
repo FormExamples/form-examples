@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>UK Lasting Power of Attorney for Financial Decisions — Case Dashboard</title>
+  <meta name="description" content="LP1F case dashboard: validity band and composite risk for each lasting power of attorney for property and financial affairs, computed by the shared validation engine, with the fired statutory blocker rules.">
+  <link rel="stylesheet" href="css/dashboard.css">
+</head>
+<body>
+  <a class="skip-link visually-hidden" href="#lpa-table">Skip to LPA table</a>
+
+  <header class="page-header">
+    <div class="page-header-inner">
+      <h1>UK Lasting Power of Attorney — Case Dashboard</h1>
+      <p class="subtitle">
+        Review each LP1F deed by validity band, composite risk, decision mode,
+        OPG status, and the statutory blocker rules the validation engine fired.
+      </p>
+      <p class="subtitle"><a href="index.html">← New LPA</a></p>
+    </div>
+  </header>
+
+  <main>
+    <div
+      id="status-banner"
+      class="alert"
+      data-type="warning"
+      role="status"
+      aria-live="polite"
+      hidden
+    ></div>
+
+    <section class="filter-bar" aria-labelledby="filter-bar-heading">
+      <h2 id="filter-bar-heading" class="visually-hidden">Filters</h2>
+
+      <div class="filter-grid">
+        <div class="filter-field filter-field-search field">
+          <label class="label" for="filter-search">Search</label>
+          <input
+            id="filter-search"
+            type="search"
+            class="search-input"
+            placeholder="Donor, OPG reference, status, or rule id..."
+            autocomplete="off"
+          >
+        </div>
+
+        <div class="filter-field field">
+          <label class="label" for="filter-risk">Composite Risk</label>
+          <select id="filter-risk" class="select">
+            <option value="">All risks</option>
+            <option value="low">Low</option>
+            <option value="moderate">Moderate</option>
+            <option value="high">High</option>
+            <option value="critical">Critical</option>
+          </select>
+        </div>
+
+        <div class="filter-field field">
+          <label class="label" for="filter-mode">Decision Mode</label>
+          <select id="filter-mode" class="select">
+            <option value="">All modes</option>
+            <option value="single_attorney">Single attorney</option>
+            <option value="jointly_and_severally">Jointly and severally</option>
+            <option value="jointly">Jointly</option>
+            <option value="mixed">Mixed</option>
+          </select>
+        </div>
+
+        <div class="filter-field field">
+          <label class="label" for="filter-band">Validity</label>
+          <select id="filter-band" class="select">
+            <option value="">All bands</option>
+            <option value="draft">Draft</option>
+            <option value="ready_for_signing">Ready for signing</option>
+            <option value="partially_signed">Partially signed</option>
+            <option value="fully_signed">Fully signed</option>
+            <option value="ready_for_registration">Ready for registration</option>
+            <option value="submitted">Submitted</option>
+            <option value="registered">Registered</option>
+            <option value="rejected">Rejected</option>
+          </select>
+        </div>
+
+        <div class="filter-field field">
+          <label class="label" for="filter-blockers">Blockers</label>
+          <select id="filter-blockers" class="select">
+            <option value="">All</option>
+            <option value="yes">With blockers</option>
+            <option value="no">No blockers</option>
+          </select>
+        </div>
+
+        <div class="filter-field filter-field-actions">
+          <button
+            type="button"
+            id="filter-clear-btn"
+            class="button"
+            data-variant="secondary"
+            hidden
+          >
+            Clear filters
+          </button>
+        </div>
+      </div>
+
+      <div class="filter-summary">
+        <span id="filter-count">Loading LPAs...</span>
+      </div>
+    </section>
+
+    <section class="table-card" aria-labelledby="lpa-table-heading">
+      <h2 id="lpa-table-heading" class="visually-hidden">LPAs</h2>
+
+      <div class="table-scroll">
+        <table id="lpa-table" class="data-table">
+          <thead class="data-table-head">
+            <tr id="lpa-table-head" class="data-table-row">
+              <!-- Sortable column headers built by js/dashboard-app.js -->
+            </tr>
+          </thead>
+          <tbody id="lpa-table-body" class="data-table-body">
+            <!-- Data rows built by js/dashboard-app.js -->
+          </tbody>
+        </table>
+      </div>
+
+      <p id="lpa-empty-message" class="empty-message" hidden>
+        No LPAs match the current filters.
+      </p>
+    </section>
+
+    <footer class="page-footer">
+      <p>
+        Validity band and composite risk are advisory decision support computed
+        by the shared validation engine (Mental Capacity Act 2005 and the LPA
+        Regulations 2007). This is not legal advice and does not replace the
+        Office of the Public Guardian's own registration checks.
+      </p>
+    </footer>
+  </main>
+
+  <!--
+    Classic <script> tags (no `type="module"`) so the page works when opened
+    directly via file://. Each file attaches its public symbols to
+    `window.UkLpaFinancialDecisionsDashboard`.
+
+    Load order: types -> data -> api -> app (each depends on those above).
+  -->
+  <script src="js/dashboard-types.js"></script>
+  <script src="js/data.js"></script>
+  <script src="js/api.js"></script>
+  <script src="js/dashboard-app.js"></script>
+</body>
+</html>
