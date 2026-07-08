@@ -1,0 +1,116 @@
+<script lang="ts">
+	import { goto } from '$app/navigation';
+	import { page } from '$app/state';
+	import { assessment } from '$lib/stores/assessment.svelte';
+	import { calculateGrade } from '$lib/engine/risk-grader';
+	import { steps, TOTAL_STEPS } from '$lib/config/steps';
+	import { sampleAssessments } from '$lib/data/sample-reports';
+
+	import Form from '$lib/components/ui/Form.svelte';
+	import Button from '$lib/components/ui/Button.svelte';
+	import Progress from '$lib/components/ui/Progress.svelte';
+	import StepList from '$lib/components/ui/StepList.svelte';
+	import StepListItem from '$lib/components/ui/StepListItem.svelte';
+	import ErrorSummary from '$lib/components/ui/ErrorSummary.svelte';
+
+	import Step1Demographics from '$lib/components/steps/Step1Demographics.svelte';
+	import Step2ReferralInformation from '$lib/components/steps/Step2ReferralInformation.svelte';
+	import Step3PersonalMedicalHistory from '$lib/components/steps/Step3PersonalMedicalHistory.svelte';
+	import Step4CancerHistory from '$lib/components/steps/Step4CancerHistory.svelte';
+	import Step5FamilyPedigree from '$lib/components/steps/Step5FamilyPedigree.svelte';
+	import Step6CardiovascularGenetics from '$lib/components/steps/Step6CardiovascularGenetics.svelte';
+	import Step7Neurogenetics from '$lib/components/steps/Step7Neurogenetics.svelte';
+	import Step8ReproductiveGenetics from '$lib/components/steps/Step8ReproductiveGenetics.svelte';
+	import Step9EthnicBackground from '$lib/components/steps/Step9EthnicBackground.svelte';
+	import Step10GeneticTestingHistory from '$lib/components/steps/Step10GeneticTestingHistory.svelte';
+
+	let errors = $state<{ id: string; message: string }[]>([]);
+
+	const id = $derived(page.params.id ?? 'new');
+	const isNew = $derived(id === 'new');
+
+	// Hydrate the wizard whenever the route id changes: a saved draft for that id
+	// wins, otherwise seed from the matching sample assessment (existing id) or a
+	// blank draft (new).
+	$effect(() => {
+		const seed = sampleAssessments.find((s) => s.id === id)?.data;
+		if (assessment.id !== id) {
+			assessment.loadForId(id, seed);
+			errors = [];
+		}
+	});
+
+	function validate(): boolean {
+		const d = assessment.data;
+		const found: { id: string; message: string }[] = [];
+		if (d.demographics.lastName.trim() === '') {
+			found.push({ id: 'lastName', message: 'Patient last name is required.' });
+		}
+		if (d.demographics.dateOfBirth === '') {
+			found.push({ id: 'dob', message: 'Date of birth is required.' });
+		}
+		errors = found;
+		return found.length === 0;
+	}
+
+	function submit() {
+		if (!validate()) {
+			document.querySelector('.error-summary')?.scrollIntoView({ behavior: 'smooth' });
+			return;
+		}
+		assessment.result = calculateGrade(assessment.data);
+		goto(`/genetic-assessment/genetic-assessments/${id}/report`);
+	}
+
+	function startOver() {
+		const seed = sampleAssessments.find((s) => s.id === id)?.data;
+		assessment.reset();
+		assessment.loadForId(id, seed);
+		errors = [];
+	}
+</script>
+
+<main class="mx-auto max-w-3xl px-4 py-6">
+	<header class="mb-6 no-print">
+		<h1 class="text-2xl font-bold text-base-content">
+			{isNew ? 'New genetic assessment' : `Genetic assessment ${id}`}
+		</h1>
+		<p class="mt-1 text-sm text-base-content/70">
+			Complete the ten sections; the weighted risk score and level are computed on submit.
+		</p>
+		<Progress label="Assessment sections" value={TOTAL_STEPS} max={TOTAL_STEPS} />
+		<StepList label="Assessment sections" current={TOTAL_STEPS}>
+			{#each steps as step (step.number)}
+				<StepListItem status="finished" label={step.title}>{step.shortTitle}</StepListItem>
+			{/each}
+		</StepList>
+	</header>
+
+	{#if errors.length > 0}
+		<ErrorSummary title="Please fix the following before submitting" class="mb-6">
+			<ul>
+				{#each errors as e (e.id)}
+					<li><a href={`#${e.id}`}>{e.message}</a></li>
+				{/each}
+			</ul>
+		</ErrorSummary>
+	{/if}
+
+	<Form label="Genetic assessment" onsubmit={submit}>
+		<Step1Demographics />
+		<Step2ReferralInformation />
+		<Step3PersonalMedicalHistory />
+		<Step4CancerHistory />
+		<Step5FamilyPedigree />
+		<Step6CardiovascularGenetics />
+		<Step7Neurogenetics />
+		<Step8ReproductiveGenetics />
+		<Step9EthnicBackground />
+		<Step10GeneticTestingHistory />
+
+		<div class="button-group">
+			<Button type="submit" data-variant="primary">Compute risk &amp; view report</Button>
+			<Button data-variant="danger" onclick={startOver}>Start over</Button>
+		</div>
+	</Form>
+</main>

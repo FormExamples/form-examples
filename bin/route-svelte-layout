@@ -1,0 +1,30 @@
+#!/bin/sh
+# route-svelte-layout <slug> : nest a form's SvelteKit routes under
+# front-end-with-svelte/src/routes/<form-kebab-case>/  and prefix internal
+# absolute route links (href / goto / redirect, plus the "/" home link) with
+# /<slug>. /api/ fetch paths are left untouched. Idempotent (skips if routed).
+set -u
+
+slug="$1"
+top="$(git rev-parse --show-toplevel)"
+r="$top/forms/$slug/front-end-with-svelte/src/routes"
+
+test -d "$r" || { echo "SKIP $slug: no src/routes"; exit 2; }
+test -e "$r/$slug" && { echo "SKIP $slug: already routed"; exit 2; }
+
+cd "$r" || exit 1
+mkdir __routetmp
+for e in * .[!.]*; do
+  [ -e "$e" ] || continue
+  case "$e" in __routetmp) continue;; esac
+  git mv "$e" "__routetmp/$e" 2>/dev/null || mv "$e" "__routetmp/$e"
+done
+git mv __routetmp "$slug" 2>/dev/null || mv __routetmp "$slug"
+
+# prefix internal absolute route links with /<slug>
+SLUG="$slug" find "$slug" \( -name '*.svelte' -o -name '*.ts' -o -name '*.js' \) -exec perl -0pi -e '
+  my $s = $ENV{SLUG};
+  s{(href=|goto\(|redirect\(\s*\d+\s*,\s*)(["\x27`])/(?!api/|\Q$s\E/)}{$1$2/$s/}g;
+' {} +
+
+echo "OK $slug"
