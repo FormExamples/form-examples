@@ -15,5 +15,9 @@
       "Bash(bin/test-form pre-operative-assessment-by-clinician *)",
       "Bash(echo \"exit=$?\")"
     ]
-  }
+  },
+  "enabledMcpjsonServers": [
+    "svelte"
+  ],
+  "enableAllProjectMcpServers": true
 }

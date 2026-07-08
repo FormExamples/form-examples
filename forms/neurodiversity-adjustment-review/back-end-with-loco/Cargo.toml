@@ -46,7 +46,7 @@ axum-prometheus = "0.7"
 
 [[bin]]
 name = "neurodiversity-adjustment-review-loco-crate-cli"
-path = "src/bin/main.rs"
+path = "src/neurodiversity_adjustment_review/bin/main.rs"
 required-features = []
 
 [dev-dependencies]
@@ -54,3 +54,6 @@ loco-rs = { workspace = true, features = ["testing"] }
 serial_test = { version = "3.5.0" }
 rstest = { version = "0.25" }
 insta = { version = "1.48", features = ["redactions", "yaml", "filters"] }
+
+[lib]
+path = "src/neurodiversity_adjustment_review/lib.rs"

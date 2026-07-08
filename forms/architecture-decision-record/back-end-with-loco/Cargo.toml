@@ -54,7 +54,7 @@ axum-prometheus = "0.7"
 
 [[bin]]
 name = "architecture_decision_record-cli"
-path = "src/bin/main.rs"
+path = "src/architecture_decision_record/bin/main.rs"
 required-features = []
 
 [dev-dependencies]
@@ -62,3 +62,6 @@ loco-rs = { workspace = true, features = ["testing"] }
 serial_test = { version = "3.5.0" }
 rstest = { version = "0.25" }
 insta = { version = "1.48", features = ["redactions", "yaml", "filters"] }
+
+[lib]
+path = "src/architecture_decision_record/lib.rs"

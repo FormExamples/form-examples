@@ -1,0 +1,90 @@
+#!/bin/sh
+# route-loco-layout <slug> : move a form's Loco crate source into the
+# route layout  back-end-with-loco/src/<form_snake_case>/*.rs
+#   - flat   (src/*.rs)            -> src/<snake>/*.rs
+#   - nested (<snake>/src/*.rs +   -> src/<snake>/*.rs, crate files hoisted
+#             top-level symlinks)     to back-end-with-loco/
+# Idempotent: skips if src/<snake>/lib.rs already exists.
+set -u
+
+slug="$1"
+snake=$(printf %s "$slug" | tr '-' '_')
+top="$(git rev-parse --show-toplevel)"
+b="$top/forms/$slug/back-end-with-loco"
+
+test -d "$b" || { echo "SKIP $slug: no back-end-with-loco"; exit 2; }
+if test -f "$b/src/$snake/lib.rs"; then echo "SKIP $slug: already routed"; exit 2; fi
+
+cd "$b" || exit 1
+
+hoist_dotfiles_and_extras() {
+  # $1 = source crate dir (relative to $b). Move real crate files up to $b,
+  # discarding anything that already exists at $b.
+  cdir="$1"
+  for item in Cargo.toml config migration tests examples .cargo .github .rustfmt.toml README.md .gitignore Cargo.lock build.rs; do
+    if test -e "$cdir/$item" && ! test -L "$cdir/$item"; then
+      if test -e "$b/$item"; then
+        git rm -rq --cached "$cdir/$item" 2>/dev/null; rm -rf "$cdir/$item"   # duplicate: drop nested
+      else
+        git mv "$cdir/$item" "$item" 2>/dev/null || mv "$cdir/$item" "$item"
+      fi
+    fi
+  done
+}
+
+layout=""; cdir=""
+if test -L src; then
+  layout=nested
+  target="$(readlink src)"; cdir="${target%/src}"       # e.g. medical_operation_note/src -> medical_operation_note
+  # drop every top-level symlink that points into the nested crate dir
+  for l in $(ls -1a); do
+    if test -L "$l" && case "$(readlink "$l")" in "$cdir"/*) true;; *) false;; esac; then
+      git rm -q --cached "$l" 2>/dev/null; rm -f "$l"
+    fi
+  done
+elif test -d src && [ -n "$(find src -maxdepth 1 -name '*.rs' 2>/dev/null | head -1)" ]; then
+  layout=flat
+else
+  # ---- BARE NESTED (crate dir, no top-level symlinks) ----
+  for cand in */; do
+    cn="${cand%/}"
+    case "$cn" in src|migration|tests|config|examples|todo) continue;; esac
+    if test -f "$cn/Cargo.toml" && test -f "$cn/src/lib.rs"; then layout=nested; cdir="$cn"; break; fi
+  done
+  test -n "$layout" || { echo "SKIP $slug: unrecognized layout"; exit 2; }
+fi
+
+if test "$layout" = flat; then
+  # ---- FLAT: src/*.rs -> src/<snake>/*.rs ----
+  mkdir -p "src/$snake.tmp"
+  for f in src/* src/.[!.]*; do
+    test -e "$f" || continue
+    case "$(basename "$f")" in "$snake"|"$snake.tmp") continue;; esac
+    git mv "$f" "src/$snake.tmp/$(basename "$f")" 2>/dev/null || mv "$f" "src/$snake.tmp/$(basename "$f")"
+  done
+  git mv "src/$snake.tmp" "src/$snake" 2>/dev/null || mv "src/$snake.tmp" "src/$snake"
+else
+  # ---- NESTED / BARE-NESTED: hoist crate files, move src into src/<snake>/ ----
+  hoist_dotfiles_and_extras "$cdir"
+  mkdir -p "src/$snake"
+  for f in "$cdir"/src/* "$cdir"/src/.[!.]*; do
+    test -e "$f" || continue
+    git mv "$f" "src/$snake/$(basename "$f")" 2>/dev/null || mv "$f" "src/$snake/$(basename "$f")"
+  done
+  rm -rf "$cdir"
+fi
+
+# ---- Cargo.toml: repoint target paths + ensure [lib] path ----
+perl -0pi -e "s{path = \"src/}{path = \"src/$snake/}g" Cargo.toml
+if ! grep -q '^\[lib\]' Cargo.toml; then
+  printf '\n[lib]\npath = "src/%s/lib.rs"\n' "$snake" >> Cargo.toml
+elif ! perl -0ne 'exit(!/\[lib\][^\[]*path\s*=/s)' Cargo.toml; then
+  # [lib] exists but has no path key -> insert one
+  perl -0pi -e "s{\[lib\]\n}{[lib]\npath = \"src/$snake/lib.rs\"\n}" Cargo.toml
+fi
+
+# ---- rewrite crate-root-relative include_*!(\"src/...\") literals ----
+find "src/$snake" -name '*.rs' -exec perl -0pi -e \
+  "s{(include_(?:dir|str|bytes)!\\(\")src/}{\${1}src/$snake/}g" {} +
+
+echo "OK $slug"
