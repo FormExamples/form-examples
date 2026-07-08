@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Contraception Assessment — patient questionnaire</title>
+  <meta name="description" content="UKMEC (UK Medical Eligibility Criteria) screening for contraceptive method selection.">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <a class="skip-link visually-hidden" href="#form-sections">Skip to questionnaire</a>
+
+  <header class="page-header">
+    <div class="page-header-inner">
+      <h1>Contraception Assessment</h1>
+      <p class="subtitle">UKMEC eligibility screening across 11 contraceptive methods.</p>
+
+      <progress
+        id="progress"
+        class="progress"
+        max="100"
+        value="0"
+        aria-label="Form completion"
+      ></progress>
+      <p id="progress-text" class="subtitle" aria-live="polite">0 fields answered (0%)</p>
+
+      <ol
+        id="step-list"
+        class="step-list"
+        aria-label="Contraception Assessment steps"
+        data-current="0"
+      ><!-- step-list-items injected by js/form-app.js --></ol>
+    </div>
+  </header>
+
+  <main>
+    <div class="intro">
+      <p>
+        Please answer the questions below about your reproductive health,
+        medical history, and contraceptive preferences. Your answers help us
+        evaluate UK Medical Eligibility Criteria (UKMEC) categories for each
+        contraceptive method. All answers are saved automatically in your
+        browser as you go.
+      </p>
+      <p>
+        This screening tool is for information only and is not a prescription
+        or a clinical decision; please discuss your results with your
+        clinician.
+      </p>
+    </div>
+
+    <form
+      id="assessment-form"
+      class="form"
+      autocomplete="off"
+      novalidate
+      onsubmit="return false;"
+      aria-label="Contraception Assessment"
+    >
+      <div
+        id="error-summary"
+        class="error-summary"
+        role="alert"
+        aria-label="Validation errors"
+        hidden
+      ></div>
+
+      <div id="form-sections">
+        <!-- Sections rendered by js/form-app.js: -->
+        <!-- 1 Demographics, 2 Reproductive History, 3 Menstrual History, -->
+        <!-- 4 Current Contraception, 5 Medical History, 6 Cardiovascular Risk, -->
+        <!-- 7 Lifestyle Factors, 8 Preferences & Priorities, -->
+        <!-- 9 Breast & Cervical Screening, 10 Family Planning Goals -->
+      </div>
+
+      <div class="button-group">
+        <button type="button" id="submit-btn" class="button" data-variant="primary">
+          Submit and view report
+        </button>
+        <button type="button" id="reset-btn" class="button" data-variant="secondary">
+          Start over
+        </button>
+      </div>
+    </form>
+
+    <section
+      id="report"
+      class="panel"
+      role="region"
+      aria-live="polite"
+      aria-label="Assessment report"
+    >
+      <p class="empty-message">Submit the form to see the report.</p>
+    </section>
+
+    <footer class="page-footer">
+      <p>
+        UKMEC (UK Medical Eligibility Criteria) categorises each contraceptive
+        method on a 1-4 scale: 1 = no restriction, 2 = advantages outweigh
+        risks, 3 = risks outweigh advantages, 4 = unacceptable health risk.
+        This tool is for information only and does not replace a clinical
+        consultation.
+      </p>
+    </footer>
+  </main>
+
+  <!--
+    Classic <script> tags (no `type="module"`) so the page works when opened
+    directly via file:// — browsers block ES-module imports from file:// for
+    CORS reasons, but allow ordered classic scripts. Each file attaches its
+    public symbols to `window.ContraceptionAssessment`.
+  -->
+  <script src="js/types.js"></script>
+  <script src="js/ukmec-rules.js"></script>
+  <script src="js/ukmec-grader.js"></script>
+  <script src="js/flagged-issues.js"></script>
+  <script src="js/form-app.js"></script>
+</body>
+</html>

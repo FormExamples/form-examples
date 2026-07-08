@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Bone Marrow Donation Assessment — donor questionnaire</title>
+  <meta name="description" content="Haematopoietic stem cell donor evaluation: HLA typing, medical history, screening, anaesthetic fitness, and collection method suitability.">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <a class="skip-link visually-hidden" href="#form-sections">Skip to questionnaire</a>
+
+  <header class="page-header">
+    <div class="page-header-inner">
+      <h1>Bone Marrow Donation Assessment</h1>
+      <p class="subtitle">Donor evaluation: HLA matching, health screening, anaesthetic fitness, and collection method.</p>
+
+      <progress
+        id="progress"
+        class="progress"
+        max="100"
+        value="0"
+        aria-label="Form completion"
+      ></progress>
+      <p id="progress-text" class="subtitle" aria-live="polite">0 fields answered (0%)</p>
+
+      <ol
+        id="step-list"
+        class="step-list"
+        aria-label="Bone Marrow Donation Assessment steps"
+        data-current="0"
+      ><!-- step-list-items injected by js/form-app.js --></ol>
+    </div>
+  </header>
+
+  <main>
+    <div class="intro">
+      <p>
+        Please answer the questions below to assess your suitability as a
+        haematopoietic stem cell donor. The assessment covers HLA matching,
+        medical history, physical examination, laboratory results, infectious
+        disease screening, anaesthetic fitness, collection method, and
+        psychological readiness. All answers are saved automatically in your
+        browser as you go.
+      </p>
+      <p>
+        This form is part of clinical donor evaluation and does not by itself
+        determine final eligibility — the assessing clinician will review
+        every answer.
+      </p>
+    </div>
+
+    <form
+      id="assessment-form"
+      class="form"
+      autocomplete="off"
+      novalidate
+      onsubmit="return false;"
+      aria-label="Bone Marrow Donation Assessment"
+    >
+      <div
+        id="error-summary"
+        class="error-summary"
+        role="alert"
+        aria-label="Validation errors"
+        hidden
+      ></div>
+
+      <div id="form-sections">
+        <!-- Sections rendered by js/form-app.js: -->
+        <!-- 1 Demographics, 2 Donor Registration & HLA Typing, -->
+        <!-- 3 Medical History, 4 Physical Examination, -->
+        <!-- 5 Haematological Assessment, 6 Infectious Disease Screening, -->
+        <!-- 7 Anaesthetic Assessment, 8 Collection Method Assessment, -->
+        <!-- 9 Psychological Readiness, 10 Consent & Eligibility Decision -->
+      </div>
+
+      <div class="button-group">
+        <button type="button" id="submit-btn" class="button" data-variant="primary">
+          Submit and view report
+        </button>
+        <button type="button" id="reset-btn" class="button" data-variant="secondary">
+          Start over
+        </button>
+      </div>
+    </form>
+
+    <section
+      id="report"
+      class="panel"
+      role="region"
+      aria-live="polite"
+      aria-label="Donor eligibility report"
+    >
+      <p class="empty-message">Submit the form to see the report.</p>
+    </section>
+
+    <footer class="page-footer">
+      <p>
+        Bone marrow donation requires careful clinical assessment of HLA match
+        quality, donor health, anaesthetic fitness, and informed consent.
+        This screening tool supports evaluation but is not a substitute for
+        clinical judgement; results should be reviewed with the donor
+        assessment team.
+      </p>
+    </footer>
+  </main>
+
+  <!--
+    Classic <script> tags (no `type="module"`) so the page works when opened
+    directly via file:// — browsers block ES-module imports from file:// for
+    CORS reasons, but allow ordered classic scripts. Each file attaches its
+    public symbols to `window.BoneMarrowDonationAssessment`.
+  -->
+  <script src="js/types.js"></script>
+  <script src="js/donor-rules.js"></script>
+  <script src="js/donor-grader.js"></script>
+  <script src="js/flagged-issues.js"></script>
+  <script src="js/form-app.js"></script>
+</body>
+</html>

@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>FP92A — UK NHS England Medical Exemption Certificate</title>
+  <meta name="description" content="UK NHSBSA FP92A medical exemption certificate application — 10-step single-page practitioner wizard.">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <a class="skip-link visually-hidden" href="#wizard">Skip to wizard</a>
+
+  <header class="page-header">
+    <div class="page-header-inner">
+      <h1>FP92A — Medical Exemption Certificate</h1>
+      <p class="subtitle">UK NHS Business Services Authority. Completed by a doctor or health professional with access to the patient's medical records.</p>
+
+      <progress
+        id="progress"
+        class="progress"
+        max="100"
+        value="10"
+        aria-label="Form completion"
+      ></progress>
+      <p id="progress-text" class="subtitle" aria-live="polite">Step 1 of 10</p>
+
+      <ol
+        id="step-list"
+        class="step-list"
+        aria-label="FP92A steps"
+        data-current="0"
+      ><!-- step-list-items injected by js/form-app.js --></ol>
+    </div>
+  </header>
+
+  <main id="wizard">
+    <div class="intro">
+      <p>
+        The FP92A entitles a patient to a five-year NHS Medical Exemption
+        Certificate (MedEx) granting free NHS prescriptions. Only the closed
+        list of qualifying medical conditions defined by the NHSBSA confers
+        eligibility. NHSBSA only accepts the <strong>original paper FP92A</strong>
+        posted to Bridge House — this form is a practitioner-side staging tool.
+      </p>
+    </div>
+
+    <form id="application-form" class="form" autocomplete="off" novalidate onsubmit="return false;" aria-label="FP92A form">
+      <div
+        id="error-summary"
+        class="error-summary"
+        role="alert"
+        aria-label="Validation errors"
+        hidden
+      ></div>
+
+      <!-- STEP 1 — Practitioner identification -->
+      <fieldset class="step fieldset" data-step="1" id="step-1">
+        <legend class="fieldset-legend"><h2 class="section-title">Step 1 of 10 — Practitioner identification</h2></legend>
+        <p class="muted">Signing practitioner contact and registration details as printed on the FP92A.</p>
+        <div class="grid">
+          <label class="label">Practitioner name<input name="practitionerName" class="text-input" type="text" required data-required></label>
+          <label class="label">Role
+            <select name="practitionerRole" class="select">
+              <option value="">Choose…</option>
+              <option value="gp">GP</option>
+              <option value="hospital-doctor">Hospital doctor</option>
+              <option value="nurse-practitioner">Nurse practitioner</option>
+              <option value="pharmacist-prescriber">Pharmacist prescriber</option>
+              <option value="other">Other</option>
+            </select>
+          </label>
+          <label class="label">Registration body
+            <select name="registrationBody" class="select">
+              <option value="">Choose…</option>
+              <option value="GMC">GMC</option>
+              <option value="NMC">NMC</option>
+              <option value="HCPC">HCPC</option>
+              <option value="GPhC">GPhC</option>
+              <option value="other">Other</option>
+            </select>
+          </label>
+          <label class="label">Registration number<input name="registrationNumber" class="text-input" type="text"></label>
+          <label class="label">Practice / surgery name<input name="practiceName" class="text-input" type="text"></label>
+          <label class="label">Practice code<input name="practiceCode" class="text-input" type="text"></label>
+          <label class="label full">Practice address<textarea name="practiceAddress" class="text-area-input" rows="2"></textarea></label>
+          <label class="label">Practice postcode<input name="practicePostcode" class="text-input" type="text"></label>
+          <label class="label">Practice telephone<input name="practicePhone" class="tel-input" type="tel"></label>
+          <label class="label">Date of completion<input name="completedDate" class="date-input" type="date"></label>
+        </div>
+      </fieldset>
+
+      <!-- STEP 2 — Patient identification -->
+      <fieldset class="step fieldset" data-step="2" id="step-2" hidden>
+        <legend class="fieldset-legend"><h2 class="section-title">Step 2 of 10 — Patient identification</h2></legend>
+        <p class="muted">Patient demographic details as they will appear on the certificate.</p>
+        <div class="grid">
+          <label class="label">Title
+            <select name="patientTitle" class="select">
+              <option value="">Choose…</option>
+              <option>Mr</option><option>Mrs</option><option>Miss</option>
+              <option>Ms</option><option>Mx</option><option>Dr</option>
+              <option>Prof</option><option>Rev</option><option>Other</option>
+            </select>
+          </label>
+          <label class="label">Surname<input name="patientSurname" class="text-input" type="text"></label>
+          <label class="label">Forenames<input name="patientForenames" class="text-input" type="text"></label>
+          <label class="label">Date of birth<input name="patientBirthDate" class="date-input" type="date"></label>
+          <label class="label">Sex
+            <select name="patientSex" class="select">
+              <option value="">Choose…</option>
+              <option value="female">Female</option>
+              <option value="male">Male</option>
+              <option value="intersex">Intersex</option>
+              <option value="unknown">Unknown</option>
+            </select>
+          </label>
+          <label class="label">NHS number<input name="patientNhsNumber" class="text-input" type="text" pattern="\d{3}\s?\d{3}\s?\d{4}" placeholder="123 456 7890"></label>
+          <label class="label full">Address<textarea name="patientAddress" class="text-area-input" rows="2"></textarea></label>
+          <label class="label">Postcode<input name="patientPostcode" class="text-input" type="text"></label>
+          <label class="label">Telephone<input name="patientPhone" class="tel-input" type="tel"></label>
+          <label class="label">Email<input name="patientEmail" class="email-input" type="email"></label>
+        </div>
+      </fieldset>
+
+      <!-- STEP 3 — Existing exemption check -->
+      <fieldset class="step fieldset" data-step="3" id="step-3" hidden>
+        <legend class="fieldset-legend"><h2 class="section-title">Step 3 of 10 — Existing exemption check</h2></legend>
+        <p class="muted">Is the patient renewing or replacing an existing certificate?</p>
+        <div class="grid">
+          <label class="label">Application kind
+            <select name="applicationKind" class="select">
+              <option value="new">New application</option>
+              <option value="renewal">Renewal</option>
+              <option value="replacement">Replacement (lost)</option>
+            </select>
+          </label>
+          <label class="label">Previous certificate number<input name="previousCertificateNumber" class="text-input" type="text"></label>
+          <label class="label">Previous certificate expiry<input name="previousCertificateExpiry" class="date-input" type="date"></label>
+        </div>
+      </fieldset>
+
+      <!-- STEP 4 — Age-based exclusion check -->
+      <fieldset class="step fieldset" data-step="4" id="step-4" hidden>
+        <legend class="fieldset-legend"><h2 class="section-title">Step 4 of 10 — Age-based exclusion check</h2></legend>
+        <p class="muted">Patients aged under 16, 16-18 in full-time education, or 60+ are automatically entitled to free prescriptions on age grounds — no FP92A required.</p>
+        <div class="grid">
+          <label class="label">16-18 in full-time education?
+            <select name="fullTimeEducation" class="select">
+              <option value="">Choose…</option>
+              <option value="yes">Yes</option>
+              <option value="no">No</option>
+            </select>
+          </label>
+          <label class="label">Computed age<input name="ageDisplay" class="text-input" type="text" readonly placeholder="(from date of birth)"></label>
+        </div>
+        <div id="age-advice" class="alert advice" data-type="info" aria-live="polite"></div>
+      </fieldset>
+
+      <!-- STEP 5 — Pregnancy / maternity check -->
+      <fieldset class="step fieldset" data-step="5" id="step-5" hidden>
+        <legend class="fieldset-legend"><h2 class="section-title">Step 5 of 10 — Pregnancy / maternity check</h2></legend>
+        <p class="muted">Pregnant patients (or those within 12 months of giving birth) qualify for the <strong>FW8</strong> maternity exemption instead of FP92A.</p>
+        <div class="grid">
+          <label class="label">Pregnancy status
+            <select name="pregnancyStatus" class="select">
+              <option value="">Choose…</option>
+              <option value="not-pregnant">Not pregnant</option>
+              <option value="pregnant">Pregnant</option>
+              <option value="post-partum-within-12-months">Within 12 months post-partum</option>
+            </select>
+          </label>
+        </div>
+        <div id="pregnancy-advice" class="alert advice" data-type="info" aria-live="polite"></div>
+      </fieldset>
+
+      <!-- STEP 6 — Qualifying condition selection -->
+      <fieldset class="step fieldset" data-step="6" id="step-6" hidden>
+        <legend class="fieldset-legend"><h2 class="section-title">Step 6 of 10 — Qualifying condition selection</h2></legend>
+        <p class="muted">Select every NHSBSA-recognised qualifying condition that applies.</p>
+        <div class="checkbox-group conditions" role="group" aria-label="Closed list of eligible conditions">
+          <label><input class="checkbox-input" type="checkbox" name="condition" value="permanent-fistula"> Permanent fistula requiring continuous surgical dressing or appliance</label>
+          <label><input class="checkbox-input" type="checkbox" name="condition" value="hypoadrenalism"> Hypoadrenalism (e.g. Addison's disease) on substitution therapy</label>
+          <label><input class="checkbox-input" type="checkbox" name="condition" value="diabetes-insipidus-or-hypopituitarism"> Diabetes insipidus / other hypopituitarism</label>
+          <label><input class="checkbox-input" type="checkbox" name="condition" value="diabetes-mellitus-not-diet-only"> Diabetes mellitus (not diet-only)</label>
+          <label><input class="checkbox-input" type="checkbox" name="condition" value="hypoparathyroidism"> Hypoparathyroidism</label>
+          <label><input class="checkbox-input" type="checkbox" name="condition" value="myasthenia-gravis"> Myasthenia gravis</label>
+          <label><input class="checkbox-input" type="checkbox" name="condition" value="myxoedema"> Myxoedema (hypothyroidism on thyroid hormone replacement)</label>
+          <label><input class="checkbox-input" type="checkbox" name="condition" value="epilepsy-on-anticonvulsant"> Epilepsy on continuous anticonvulsant therapy</label>
+          <label><input class="checkbox-input" type="checkbox" name="condition" value="continuing-physical-disability"> Continuing physical disability — cannot leave home unaided</label>
+          <label><input class="checkbox-input" type="checkbox" name="condition" value="cancer-or-effects"> Cancer — active treatment, effects of cancer, or effects of cancer treatment</label>
+        </div>
+      </fieldset>
+
+      <!-- STEP 7 — Qualifying condition detail -->
+      <fieldset class="step fieldset" data-step="7" id="step-7" hidden>
+        <legend class="fieldset-legend"><h2 class="section-title">Step 7 of 10 — Qualifying condition detail</h2></legend>
+        <p class="muted">Diagnosis date, codes, and treatment regimen for each selected condition.</p>
+        <div class="grid">
+          <label class="label">Earliest diagnosis date<input name="diagnosisDate" class="date-input" type="date"></label>
+          <label class="label">SNOMED CT code<input name="snomedCode" class="text-input" type="text"></label>
+          <label class="label">ICD-10 code<input name="icd10Code" class="text-input" type="text"></label>
+          <label class="label full">Treatment detail<textarea name="treatmentDetail" class="text-area-input" rows="3" placeholder="e.g. levothyroxine 100 micrograms once daily; insulin glargine 24 units nocte; carbamazepine 200 mg twice daily"></textarea></label>
+          <label class="label">Diabetes treatment mode (if applicable)
+            <select name="diabetesTreatmentMode" class="select">
+              <option value="">N/A</option>
+              <option value="insulin">Insulin</option>
+              <option value="oral-hypoglycaemic">Oral hypoglycaemic</option>
+              <option value="insulin-and-oral">Insulin + oral</option>
+              <option value="glp1-agonist">GLP-1 agonist</option>
+              <option value="diet-only">Diet only (ineligible)</option>
+            </select>
+          </label>
+          <label class="label">Cancer site (if applicable)<input name="cancerSite" class="text-input" type="text"></label>
+          <label class="label">Cancer treatment phase (if applicable)
+            <select name="cancerTreatmentPhase" class="select">
+              <option value="">N/A</option>
+              <option value="active-treatment">Active treatment</option>
+              <option value="effects-of-cancer">Effects of cancer</option>
+              <option value="effects-of-treatment">Effects of treatment</option>
+              <option value="remission-with-ongoing-treatment">Remission with ongoing treatment</option>
+              <option value="palliative">Palliative</option>
+            </select>
+          </label>
+        </div>
+      </fieldset>
+
+      <!-- STEP 8 — Disability / appliance attestation -->
+      <fieldset class="step fieldset" data-step="8" id="step-8" hidden>
+        <legend class="fieldset-legend"><h2 class="section-title">Step 8 of 10 — Disability / appliance attestation</h2></legend>
+        <p class="muted">Required only when a fistula or continuing physical disability is selected.</p>
+        <div class="grid">
+          <label class="label">Fistula site (if applicable)
+            <select name="fistulaSite" class="select">
+              <option value="">N/A</option>
+              <option value="caecostomy">Caecostomy</option>
+              <option value="colostomy">Colostomy</option>
+              <option value="laryngostomy">Laryngostomy</option>
+              <option value="ileostomy">Ileostomy</option>
+              <option value="urostomy">Urostomy</option>
+              <option value="gastrostomy">Gastrostomy</option>
+              <option value="other">Other</option>
+            </select>
+          </label>
+          <label class="label">Appliance type
+            <select name="applianceType" class="select">
+              <option value="">N/A</option>
+              <option value="one-piece-bag">One-piece bag</option>
+              <option value="two-piece-bag">Two-piece bag</option>
+              <option value="continuous-dressing">Continuous surgical dressing</option>
+              <option value="irrigation-kit">Irrigation kit</option>
+              <option value="other">Other</option>
+            </select>
+          </label>
+          <label class="label">Cannot leave home unaided?
+            <select name="cannotLeaveHomeUnaided" class="select">
+              <option value="">N/A</option>
+              <option value="yes">Yes</option>
+              <option value="no">No</option>
+            </select>
+          </label>
+          <label class="label">Disability expected to be permanent?
+            <select name="disabilityPermanent" class="select">
+              <option value="">N/A</option>
+              <option value="yes">Yes</option>
+              <option value="no">No</option>
+            </select>
+          </label>
+          <label class="label full">Carer detail<textarea name="carerDetail" class="text-area-input" rows="2"></textarea></label>
+        </div>
+      </fieldset>
+
+      <!-- STEP 9 — Practitioner declaration -->
+      <fieldset class="step fieldset" data-step="9" id="step-9" hidden>
+        <legend class="fieldset-legend"><h2 class="section-title">Step 9 of 10 — Practitioner declaration</h2></legend>
+        <p class="muted">Confirm access to the patient's medical records and sign the declaration.</p>
+        <label class="label full">Declaration<textarea name="practitionerDeclaration" class="text-area-input" rows="3">I confirm that I am a registered practitioner with access to the patient's medical records and that the qualifying condition(s) indicated above are clinically supported.</textarea></label>
+        <div class="grid">
+          <label class="label">Practitioner signature present (ink)?
+            <select name="signaturePresent" class="select">
+              <option value="">Choose…</option>
+              <option value="yes">Yes</option>
+              <option value="no">No</option>
+            </select>
+          </label>
+          <label class="label">Signed date<input name="signedDate" class="date-input" type="date"></label>
+        </div>
+      </fieldset>
+
+      <!-- STEP 10 — Summary -->
+      <fieldset class="step fieldset" data-step="10" id="step-10" hidden>
+        <legend class="fieldset-legend"><h2 class="section-title">Step 10 of 10 — Summary, eligibility result &amp; sign-off</h2></legend>
+        <p class="muted">Review the computed outcome below, then print, sign in ink, and post the FP92A to NHSBSA Bridge House.</p>
+        <div id="summary" class="summary" aria-live="polite"></div>
+      </fieldset>
+
+      <div class="button-group">
+        <button type="button" id="prev-btn" class="button" data-variant="secondary">Previous</button>
+        <button type="button" id="next-btn" class="button" data-variant="primary">Next</button>
+        <button type="button" id="submit-btn" class="button" data-variant="primary" hidden>Compute eligibility</button>
+        <button type="button" id="reset-btn" class="button" data-variant="secondary">Reset</button>
+      </div>
+    </form>
+
+    <section
+      id="report"
+      class="panel"
+      role="region"
+      aria-live="polite"
+      aria-label="Validation report"
+    >
+      <p class="empty-message">The eligibility outcome will appear at Step 10.</p>
+    </section>
+
+    <footer class="page-footer">
+      <p>
+        FP92A — UK NHS Business Services Authority. Unofficial digital companion.
+        Eligibility outcomes are produced by the local rule engine and must be
+        reviewed and signed by the practitioner.
+      </p>
+    </footer>
+  </main>
+
+  <script src="js/types.js"></script>
+  <script src="js/fp92a-rules.js"></script>
+  <script src="js/flagged-issues.js"></script>
+  <script src="js/fp92a-validator.js"></script>
+  <script src="js/form-app.js"></script>
+</body>
+</html>

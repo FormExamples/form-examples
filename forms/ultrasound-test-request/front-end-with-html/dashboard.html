@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Ultrasound Test Request — vetting dashboard</title>
+  <meta name="description" content="Imaging vetting dashboard for general (non-obstetric) ultrasound requests: review appropriateness band, preparation / technical suitability, triage tier, completeness, and safety flags.">
+  <link rel="stylesheet" href="css/dashboard.css">
+</head>
+<body>
+  <a class="skip-link visually-hidden" href="#requests-table">Skip to requests table</a>
+
+  <header class="page-header">
+    <div class="page-header-inner">
+      <h1>Ultrasound Test Request — Vetting Dashboard</h1>
+      <p class="subtitle">
+        Review incoming general (non-obstetric) ultrasound requests by triage
+        tier, appropriateness band, preparation / technical suitability, and
+        safety flags.
+      </p>
+    </div>
+  </header>
+
+  <main>
+    <!-- Status banner: shown when backend fetch fails and we fall back -->
+    <div
+      id="status-banner"
+      class="alert"
+      data-type="warning"
+      role="status"
+      aria-live="polite"
+      hidden
+    ></div>
+
+    <!-- Filter bar -->
+    <section
+      class="filter-bar"
+      aria-labelledby="filter-bar-heading"
+    >
+      <h2 id="filter-bar-heading" class="visually-hidden">Filters</h2>
+
+      <div class="filter-grid">
+        <div class="filter-field filter-field-search field">
+          <label class="label" for="filter-search">Search</label>
+          <input
+            id="filter-search"
+            type="search"
+            class="search-input"
+            placeholder="NHS number, patient, region, indication, or clinician..."
+            autocomplete="off"
+          >
+        </div>
+
+        <div class="filter-field field">
+          <label class="label" for="filter-region">Body Region</label>
+          <select id="filter-region" class="select">
+            <option value="">All body regions</option>
+            <option value="abdomen">Abdomen</option>
+            <option value="pelvis">Pelvis</option>
+            <option value="renal-tract">Renal tract</option>
+            <option value="liver-biliary">Liver / biliary</option>
+            <option value="thyroid-neck">Thyroid / neck</option>
+            <option value="scrotum-testes">Scrotum / testes</option>
+            <option value="breast">Breast</option>
+            <option value="soft-tissue">Soft tissue</option>
+            <option value="vascular-doppler">Vascular Doppler</option>
+            <option value="dvt-leg">DVT (leg)</option>
+            <option value="carotid">Carotid</option>
+            <option value="msk-joint">MSK / joint</option>
+            <option value="other">Other</option>
+          </select>
+        </div>
+
+        <div class="filter-field field">
+          <label class="label" for="filter-triage">Triage Tier</label>
+          <select id="filter-triage" class="select">
+            <option value="">All triage tiers</option>
+            <option value="routine">Routine</option>
+            <option value="urgent">Urgent</option>
+            <option value="emergency">Emergency</option>
+          </select>
+        </div>
+
+        <div class="filter-field field">
+          <label class="label" for="filter-band">Appropriateness</label>
+          <select id="filter-band" class="select">
+            <option value="">All bands</option>
+            <option value="usually-appropriate">Usually appropriate</option>
+            <option value="may-be-appropriate">May be appropriate</option>
+            <option value="usually-not-appropriate">Usually not appropriate</option>
+          </select>
+        </div>
+
+        <div class="filter-field field">
+          <label class="label" for="filter-suitability">Suitability</label>
+          <select id="filter-suitability" class="select">
+            <option value="">All suitability</option>
+            <option value="ok">OK</option>
+            <option value="caution">Caution</option>
+            <option value="limited">Limited</option>
+          </select>
+        </div>
+
+        <div class="filter-field field">
+          <label class="label" for="filter-flags">Safety Flags</label>
+          <select id="filter-flags" class="select">
+            <option value="">All</option>
+            <option value="yes">With flags</option>
+            <option value="no">No flags</option>
+          </select>
+        </div>
+
+        <div class="filter-field filter-field-actions">
+          <button
+            type="button"
+            id="filter-clear-btn"
+            class="button"
+            data-variant="secondary"
+            hidden
+          >
+            Clear filters
+          </button>
+        </div>
+      </div>
+
+      <div class="filter-summary">
+        <span id="filter-count">Loading requests...</span>
+      </div>
+    </section>
+
+    <!-- Requests table -->
+    <section
+      class="table-card"
+      aria-labelledby="requests-table-heading"
+    >
+      <h2 id="requests-table-heading" class="visually-hidden">Requests</h2>
+
+      <div class="table-scroll">
+        <table id="requests-table" class="data-table">
+          <thead class="data-table-head">
+            <tr id="requests-table-head" class="data-table-row">
+              <!-- Sortable column headers built by app.js -->
+            </tr>
+          </thead>
+          <tbody id="requests-table-body" class="data-table-body">
+            <!-- Data rows built by app.js -->
+          </tbody>
+        </table>
+      </div>
+
+      <p
+        id="requests-empty-message"
+        class="empty-message"
+        hidden
+      >
+        No requests match the current filters.
+      </p>
+    </section>
+
+    <footer class="page-footer">
+      <p>
+        Four-axis grading is advisory clinical decision support; the final
+        triage and booking decision remains the responsibility of the vetting
+        clinician. Appropriateness (ACR / RCR iRefer), preparation / technical
+        suitability (BMUS / AIUM), completeness, and triage priority are
+        computed by the request engine.
+      </p>
+    </footer>
+  </main>
+
+  <!--
+    Classic <script> tags (no `type="module"`) so the page works when opened
+    directly via file:// — browsers block ES-module imports from file:// for
+    CORS reasons, but allow ordered classic scripts. Each file attaches its
+    public symbols to `window.UltrasoundTestRequestDashboard`.
+
+    Load order: types -> data -> api -> app (each depends on those above).
+  -->
+  <script src="js/dashboard-types.js"></script>
+  <script src="js/data.js"></script>
+  <script src="js/api.js"></script>
+  <script src="js/dashboard-app.js"></script>
+</body>
+</html>

@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Issue Tracker — Dashboard</title>
+  <link rel="stylesheet" href="css/dashboard.css">
+</head>
+<body>
+
+<header>
+  <h1>Issue Tracker — Dashboard</h1>
+  <p class="subtitle">Triage view across composite priority, severity, harm, failure-condition, environment, and free-text search.</p>
+</header>
+
+<main>
+
+<section id="filters" aria-label="Filters">
+  <label>Search
+    <input id="search" type="search" placeholder="Search CC, system, assignee">
+  </label>
+  <label>Composite priority
+    <select id="filter-composite" data-field="compositePriority">
+      <option value="">All</option>
+      <option>critical</option><option>high</option>
+      <option>moderate</option><option>low</option>
+    </select>
+  </label>
+  <label>Severity
+    <select id="filter-severity" data-field="scoreBySeverityOfImpact">
+      <option value="">All</option>
+      <option value="5">5 — catastrophic</option>
+      <option value="4">4 — major</option>
+      <option value="3">3 — moderate</option>
+      <option value="2">2 — minor</option>
+      <option value="1">1 — minimal</option>
+    </select>
+  </label>
+  <label>Harm grade
+    <select id="filter-harm" data-field="scoreByHarmGrade">
+      <option value="">All</option>
+      <option value="4">4 — fatal</option>
+      <option value="3">3 — severe</option>
+      <option value="2">2 — moderate</option>
+      <option value="1">1 — low</option>
+      <option value="0">0 — no harm</option>
+    </select>
+  </label>
+  <label>Failure
+    <select id="filter-failure" data-field="scoreByFailureCondition">
+      <option value="">All</option>
+      <option value="A">A — catastrophic</option>
+      <option value="B">B — hazardous</option>
+      <option value="C">C — major</option>
+      <option value="D">D — minor</option>
+      <option value="E">E — no effect</option>
+    </select>
+  </label>
+  <label>Environment
+    <select id="filter-environment" data-field="environment">
+      <option value="">All</option>
+      <option>production</option><option>staging</option><option>test</option>
+      <option>dev</option><option>on-prem</option><option>field</option>
+    </select>
+  </label>
+  <label>Status
+    <select id="filter-status" data-field="status">
+      <option value="">All</option>
+      <option>draft</option><option>open</option><option>in-progress</option>
+      <option>blocked</option><option>resolved</option><option>closed</option>
+      <option>duplicate</option><option>cancelled</option>
+    </select>
+  </label>
+</section>
+
+<p class="row-count" id="row-count"></p>
+
+<table id="issues" aria-label="Issues">
+  <thead>
+    <tr>
+      <th data-sort="id">ID</th>
+      <th data-sort="status">Status</th>
+      <th data-sort="compositePriority">Composite</th>
+      <th data-sort="scoreBySeverityOfImpact">Sev</th>
+      <th data-sort="scoreByHarmGrade">Harm</th>
+      <th data-sort="scoreByFailureCondition">Fail</th>
+      <th data-sort="scoreByPriorityRank">Pri</th>
+      <th data-sort="scoreByFrequencyPercent">Freq %</th>
+      <th data-sort="ccSummary">Chief complaint</th>
+      <th data-sort="systemName">System</th>
+      <th data-sort="environment">Env</th>
+      <th data-sort="ptAssignees">Assignee</th>
+      <th data-sort="reportedAt">Reported</th>
+    </tr>
+  </thead>
+  <tbody id="issues-body"></tbody>
+</table>
+
+</main>
+
+<footer>
+  <p>&copy; 2026 Issue Tracker — static HTML dashboard.</p>
+</footer>
+
+<!-- Classic <script> tags so the page works directly via file://. -->
+<script src="js/sample-data.js"></script>
+<script src="js/dashboard.js"></script>
+
+</body>
+</html>

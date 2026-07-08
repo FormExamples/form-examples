@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Code of Conduct Notice — compliance dashboard</title>
+  <meta name="description" content="Code of Conduct Notice compliance dashboard: track healthcare staff annual sign-offs, conflict-of-interest declarations, and training currency by department and role.">
+  <link rel="stylesheet" href="css/dashboard.css">
+</head>
+<body>
+  <a class="skip-link visually-hidden" href="#staff-table">Skip to staff table</a>
+
+  <header class="page-header">
+    <div class="page-header-inner">
+      <h1>Code of Conduct Notice — Compliance Dashboard</h1>
+      <p class="subtitle">
+        Healthcare staff acknowledgement tracking: annual sign-offs,
+        conflict-of-interest declarations, and training currency by
+        department and role.
+      </p>
+    </div>
+  </header>
+
+  <main>
+    <!-- Status banner: shown when backend fetch fails and we fall back -->
+    <div
+      id="status-banner"
+      class="alert" data-type="warning"
+      role="status"
+      aria-live="polite"
+      hidden
+    ></div>
+
+    <!-- Filter bar -->
+    <section
+      class="filter-bar"
+      aria-labelledby="filter-bar-heading"
+    >
+      <h2 id="filter-bar-heading" class="visually-hidden">Filters</h2>
+
+      <div class="filter-grid">
+        <div class="filter-field filter-field-search field">
+          <label class="label" for="filter-search">Search</label>
+          <input
+            id="filter-search"
+            type="search"
+            class="search-input"
+            placeholder="Employee ID, name, or role..."
+            autocomplete="off"
+          >
+        </div>
+
+        <div class="filter-field field">
+          <label class="label" for="filter-status">Acknowledgement Status</label>
+          <select id="filter-status" class="select">
+            <option value="">All statuses</option>
+            <option value="Acknowledged">Acknowledged</option>
+            <option value="Pending">Pending</option>
+            <option value="Overdue">Overdue</option>
+            <option value="Declined">Declined</option>
+          </select>
+        </div>
+
+        <div class="filter-field field">
+          <label class="label" for="filter-department">Department</label>
+          <select id="filter-department" class="select">
+            <option value="">All departments</option>
+            <option value="Nursing">Nursing</option>
+            <option value="Medical">Medical</option>
+            <option value="Admin">Admin</option>
+            <option value="Allied Health">Allied Health</option>
+            <option value="IT">IT</option>
+            <option value="Pharmacy">Pharmacy</option>
+          </select>
+        </div>
+
+        <div class="filter-field field">
+          <label class="label" for="filter-currency">Training Currency</label>
+          <select id="filter-currency" class="select">
+            <option value="">All</option>
+            <option value="Current">Current</option>
+            <option value="Due Soon">Due Soon</option>
+            <option value="Expired">Expired</option>
+          </select>
+        </div>
+
+        <div class="filter-field filter-field-actions">
+          <button
+            type="button"
+            id="filter-clear-btn"
+            class="button"
+            data-variant="secondary"
+            hidden
+          >
+            Clear filters
+          </button>
+        </div>
+      </div>
+
+      <div class="filter-summary">
+        <span id="filter-count">Loading staff...</span>
+      </div>
+    </section>
+
+    <!-- Staff table -->
+    <section
+      class="table-card"
+      aria-labelledby="staff-table-heading"
+    >
+      <h2 id="staff-table-heading" class="visually-hidden">Staff</h2>
+
+      <div class="table-scroll">
+        <table id="staff-table" class="data-table">
+          <thead class="data-table-head">
+            <tr id="staff-table-head" class="data-table-row">
+              <!-- Sortable column headers built by app.js -->
+            </tr>
+          </thead>
+          <tbody id="staff-table-body" class="data-table-body">
+            <!-- Data rows built by app.js -->
+          </tbody>
+        </table>
+      </div>
+
+      <p
+        id="staff-empty-message"
+        class="empty-message"
+        hidden
+      >
+        No staff match the current filters.
+      </p>
+    </section>
+
+    <footer class="page-footer">
+      <p>
+        The Code of Conduct Notice is a read-and-acknowledge instrument
+        recording annual sign-offs of the twelve core principles. This
+        dashboard is a compliance-tracking tool and does not replace
+        organisational HR or governance systems.
+      </p>
+    </footer>
+  </main>
+
+  <!--
+    Classic <script> tags (no `type="module"`) so the page works when opened
+    directly via file:// — browsers block ES-module imports from file:// for
+    CORS reasons, but allow ordered classic scripts. Each file attaches its
+    public symbols to `window.CodeOfConductNoticeDashboard`.
+
+    Load order: types -> data -> api -> app (each depends on those above).
+  -->
+  <script src="js/dashboard-types.js"></script>
+  <script src="js/data.js"></script>
+  <script src="js/api.js"></script>
+  <script src="js/dashboard-app.js"></script>
+</body>
+</html>

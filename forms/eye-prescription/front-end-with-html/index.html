@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Eye Prescription — spectacle prescription form</title>
+  <meta name="description" content="UK GOC-aligned 11-step single-page spectacle prescription with per-eye refractive classification, prescription complexity, and safety flags.">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <a class="skip-link visually-hidden" href="#form-sections">Skip to questionnaire</a>
+
+  <header class="page-header">
+    <div class="page-header-inner">
+      <h1>Eye Prescription</h1>
+      <p class="subtitle">UK GOC-aligned spectacle prescription with refractive classification, complexity grade, and safety flags.</p>
+
+      <progress
+        id="progress"
+        class="progress"
+        max="100"
+        value="0"
+        aria-label="Form completion"
+      ></progress>
+      <p id="progress-text" class="subtitle" aria-live="polite">0 fields answered (0%)</p>
+
+      <ol
+        id="step-list"
+        class="step-list"
+        aria-label="Eye Prescription steps"
+        data-current="0"
+      ><!-- step-list-items injected by js/form-app.js --></ol>
+    </div>
+  </header>
+
+  <main>
+    <div class="intro">
+      <p>
+        Eleven-step spectacle prescription wizard. Records refraction per
+        eye (sphere, cylinder, axis, addition, prism), pupillary distance,
+        visual acuity, optional ocular-health findings, and lens
+        recommendations. Computes per-eye refractive classification,
+        composite prescription complexity, and safety flags.
+      </p>
+      <p>
+        Storage convention is <strong>minus-cylinder</strong>. The
+        prescriber is responsible for the final signed prescription.
+      </p>
+    </div>
+
+    <form id="prescription-form" class="form" autocomplete="off" novalidate onsubmit="return false;" aria-label="Eye Prescription">
+      <div
+        id="error-summary"
+        class="error-summary"
+        role="alert"
+        aria-label="Validation errors"
+        hidden
+      ></div>
+
+      <div id="form-sections" class="form-sections">
+
+        <!-- Step 1 -->
+        <fieldset class="fieldset" data-step="1" id="step-1">
+          <legend class="fieldset-legend">
+            <span class="section-step">Step 1 of 11</span>
+            <span class="section-title">Prescriber identification</span>
+            <span class="section-description">GOC-registered optometrist or dispensing optician.</span>
+          </legend>
+          <div class="two-col">
+            <div class="field"><label class="label" for="presc-name">Prescriber name <span class="req">*</span></label><input id="presc-name" class="text-input" data-bind="prescriber.name" required></div>
+            <div class="field"><label class="label" for="presc-goc">GOC registration number <span class="req">*</span></label><input id="presc-goc" class="text-input" data-bind="prescriber.gocRegistrationNumber" required></div>
+            <div class="field"><label class="label" for="presc-role">Role</label>
+              <select id="presc-role" class="select" data-bind="prescriber.role">
+                <option value="">—</option>
+                <option value="optometrist">Optometrist</option>
+                <option value="dispensing-optician">Dispensing optician</option>
+                <option value="ophthalmologist">Ophthalmologist</option>
+                <option value="student">Student</option>
+              </select>
+            </div>
+            <div class="field"><label class="label" for="presc-practice">Practice name</label><input id="presc-practice" class="text-input" data-bind="prescriber.practiceName"></div>
+            <div class="field two-col-span"><label class="label" for="presc-addr">Practice address</label><input id="presc-addr" class="text-input" data-bind="prescriber.practiceAddress"></div>
+            <div class="field"><label class="label" for="presc-postcode">Postcode</label><input id="presc-postcode" class="text-input" data-bind="prescriber.postcode"></div>
+            <div class="field"><label class="label" for="presc-country">Country (ISO 3166-1 alpha-2)</label><input id="presc-country" class="text-input" data-bind="prescriber.countryAsIso31661Alpha2" maxlength="2" placeholder="GB"></div>
+            <div class="field"><label class="label" for="presc-email">Email</label><input id="presc-email" type="email" class="email-input" data-bind="prescriber.email"></div>
+            <div class="field"><label class="label" for="presc-phone">Phone</label><input id="presc-phone" type="tel" class="tel-input" data-bind="prescriber.phone"></div>
+          </div>
+        </fieldset>
+
+        <!-- Step 2 -->
+        <fieldset class="fieldset" data-step="2" id="step-2">
+          <legend class="fieldset-legend">
+            <span class="section-step">Step 2 of 11</span>
+            <span class="section-title">Patient identification</span>
+          </legend>
+          <div class="two-col">
+            <div class="field"><label class="label" for="pt-name">Patient name <span class="req">*</span></label><input id="pt-name" class="text-input" data-bind="patient.name" required></div>
+            <div class="field"><label class="label" for="pt-birth">Date of birth <span class="req">*</span></label><input id="pt-birth" type="date" class="date-input" data-bind="patient.birthDate" required></div>
+            <div class="field"><label class="label" for="pt-sex">Sex</label>
+              <select id="pt-sex" class="select" data-bind="patient.sex">
+                <option value="">—</option>
+                <option value="male">Male</option>
+                <option value="female">Female</option>
+                <option value="other">Other</option>
+                <option value="unknown">Unknown</option>
+              </select>
+            </div>
+            <div class="field"><label class="label" for="pt-nhs">NHS number</label><input id="pt-nhs" class="text-input" data-bind="patient.unitedKingdomNhsNumber" placeholder="123 456 7890"></div>
+            <div class="field two-col-span"><label class="label" for="pt-addr">Address</label><input id="pt-addr" class="text-input" data-bind="patient.postalAddressAsFullText"></div>
+            <div class="field"><label class="label" for="pt-postcode">Postcode</label><input id="pt-postcode" class="text-input" data-bind="patient.postcode"></div>
+            <div class="field"><label class="label" for="pt-country">Country</label><input id="pt-country" class="text-input" data-bind="patient.countryAsIso31661Alpha2" maxlength="2" placeholder="GB"></div>
+            <div class="field"><label class="label" for="pt-email">Email</label><input id="pt-email" type="email" class="email-input" data-bind="patient.email"></div>
+            <div class="field"><label class="label" for="pt-phone">Phone</label><input id="pt-phone" type="tel" class="tel-input" data-bind="patient.phone"></div>
+          </div>
+        </fieldset>
+
+        <!-- Step 3 -->
+        <fieldset class="fieldset" data-step="3" id="step-3">
+          <legend class="fieldset-legend">
+            <span class="section-step">Step 3 of 11</span>
+            <span class="section-title">Examination details</span>
+            <span class="section-description">Sight test date, issue date, expiry (default issue + 2 years; 1 year if &lt; 16 or ≥ 70).</span>
+          </legend>
+          <div class="two-col">
+            <div class="field"><label class="label" for="ex-date">Examination date <span class="req">*</span></label><input id="ex-date" type="date" class="date-input" data-bind="examination.examinationDate" required></div>
+            <div class="field"><label class="label" for="ex-time">Examination time</label><input id="ex-time" type="time" class="time-input" data-bind="examination.examinationTime"></div>
+            <div class="field"><label class="label" for="ex-issue">Issue date <span class="req">*</span></label><input id="ex-issue" type="date" class="date-input" data-bind="examination.issueDate" required></div>
+            <div class="field"><label class="label" for="ex-expiry">Expiry date <span class="req">*</span></label><input id="ex-expiry" type="date" class="date-input" data-bind="examination.expiryDate" required></div>
+            <div class="field"><label class="label" for="ex-reason">Reason for sight test</label>
+              <select id="ex-reason" class="select" data-bind="examination.reasonForSightTest">
+                <option value="">—</option>
+                <option value="routine">Routine</option>
+                <option value="symptoms">Symptoms</option>
+                <option value="follow-up">Follow-up</option>
+                <option value="pre-employment">Pre-employment</option>
+                <option value="driving-licence">Driving licence</option>
+                <option value="after-pathology">After pathology</option>
+                <option value="second-opinion">Second opinion</option>
+                <option value="other">Other</option>
+              </select>
+            </div>
+            <div class="field"><label class="label" for="ex-prior-date">Prior prescription date (if on file)</label><input id="ex-prior-date" type="date" class="date-input" data-bind="examination.priorPrescriptionDate"></div>
+            <div class="field"><label class="label" for="ex-prior-sph-r">Prior right sphere (for change detection)</label><input id="ex-prior-sph-r" type="number" step="0.25" min="-30" max="30" class="number-input" data-bind="examination.priorSphereRight"></div>
+            <div class="field"><label class="label" for="ex-prior-sph-l">Prior left sphere</label><input id="ex-prior-sph-l" type="number" step="0.25" min="-30" max="30" class="number-input" data-bind="examination.priorSphereLeft"></div>
+          </div>
+          <div class="field"><label class="label" for="ex-notes">Notes</label><textarea id="ex-notes" class="text-area-input" data-bind="examination.notes" rows="2"></textarea></div>
+        </fieldset>
+
+        <!-- Step 4 -->
+        <fieldset class="fieldset" data-step="4" id="step-4">
+          <legend class="fieldset-legend">
+            <span class="section-step">Step 4 of 11</span>
+            <span class="section-title">Visual acuity</span>
+            <span class="section-description">Snellen (e.g. 6/6, 6/9, 6/12) and dominant eye.</span>
+          </legend>
+          <h3>Distance</h3>
+          <div class="three-col">
+            <div class="field"><label class="label" for="va-d-r-u">Right unaided</label><input id="va-d-r-u" class="text-input" data-bind="visualAcuity.distanceRightUnaided" placeholder="6/12"></div>
+            <div class="field"><label class="label" for="va-d-l-u">Left unaided</label><input id="va-d-l-u" class="text-input" data-bind="visualAcuity.distanceLeftUnaided" placeholder="6/12"></div>
+            <div class="field"><label class="label" for="va-d-b-u">Binocular unaided</label><input id="va-d-b-u" class="text-input" data-bind="visualAcuity.distanceBinocularUnaided"></div>
+            <div class="field"><label class="label" for="va-d-r-c">Right corrected</label><input id="va-d-r-c" class="text-input" data-bind="visualAcuity.distanceRightCorrected" placeholder="6/6"></div>
+            <div class="field"><label class="label" for="va-d-l-c">Left corrected</label><input id="va-d-l-c" class="text-input" data-bind="visualAcuity.distanceLeftCorrected" placeholder="6/6"></div>
+            <div class="field"><label class="label" for="va-d-b-c">Binocular corrected</label><input id="va-d-b-c" class="text-input" data-bind="visualAcuity.distanceBinocularCorrected"></div>
+          </div>
+          <h3>Near</h3>
+          <div class="three-col">
+            <div class="field"><label class="label" for="va-n-r-u">Right unaided</label><input id="va-n-r-u" class="text-input" data-bind="visualAcuity.nearRightUnaided" placeholder="N5"></div>
+            <div class="field"><label class="label" for="va-n-l-u">Left unaided</label><input id="va-n-l-u" class="text-input" data-bind="visualAcuity.nearLeftUnaided"></div>
+            <div class="field"><label class="label" for="va-n-b-u">Binocular unaided</label><input id="va-n-b-u" class="text-input" data-bind="visualAcuity.nearBinocularUnaided"></div>
+            <div class="field"><label class="label" for="va-n-r-c">Right corrected</label><input id="va-n-r-c" class="text-input" data-bind="visualAcuity.nearRightCorrected"></div>
+            <div class="field"><label class="label" for="va-n-l-c">Left corrected</label><input id="va-n-l-c" class="text-input" data-bind="visualAcuity.nearLeftCorrected"></div>
+            <div class="field"><label class="label" for="va-n-b-c">Binocular corrected</label><input id="va-n-b-c" class="text-input" data-bind="visualAcuity.nearBinocularCorrected"></div>
+          </div>
+          <h3>Other</h3>
+          <div class="three-col">
+            <div class="field"><label class="label" for="va-pin-r">Pinhole right</label><input id="va-pin-r" class="text-input" data-bind="visualAcuity.pinholeRight"></div>
+            <div class="field"><label class="label" for="va-pin-l">Pinhole left</label><input id="va-pin-l" class="text-input" data-bind="visualAcuity.pinholeLeft"></div>
+            <div class="field"><label class="label" for="va-dom">Dominant eye</label>
+              <select id="va-dom" class="select" data-bind="visualAcuity.dominantEye">
+                <option value="">—</option>
+                <option value="right">Right</option>
+                <option value="left">Left</option>
+                <option value="none">None / unclear</option>
+              </select>
+            </div>
+          </div>
+        </fieldset>
+
+        <!-- Step 5 -->
+        <fieldset class="fieldset" data-step="5" id="step-5">
+          <legend class="fieldset-legend">
+            <span class="section-step">Step 5 of 11</span>
+            <span class="section-title">Right eye refraction (OD)</span>
+            <span class="section-description">Minus-cylinder convention. Sphere -30 to +30, cylinder -10 to 0, axis 1–180.</span>
+          </legend>
+          <div class="four-col">
+            <div class="field"><label class="label" for="r-sph">Sphere (D)</label><input id="r-sph" type="number" step="0.25" min="-30" max="30" class="number-input" data-bind="rightEye.sphereDiopters"></div>
+            <div class="field"><label class="label" for="r-cyl">Cylinder (D)</label><input id="r-cyl" type="number" step="0.25" min="-10" max="0" class="number-input" data-bind="rightEye.cylinderDiopters"></div>
+            <div class="field"><label class="label" for="r-axis">Axis (°)</label><input id="r-axis" type="number" step="1" min="1" max="180" class="number-input" data-bind="rightEye.axisDegrees"></div>
+            <div class="field"></div>
+          </div>
+          <h3>Prism (optional)</h3>
+          <div class="four-col">
+            <div class="field"><label class="label" for="r-prism-h">Horizontal Δ</label><input id="r-prism-h" type="number" step="0.25" min="0" max="20" class="number-input" data-bind="rightEye.prismHorizontalDiopters"></div>
+            <div class="field"><label class="label" for="r-base-h">Base</label>
+              <select id="r-base-h" class="select" data-bind="rightEye.baseHorizontal">
+                <option value="">—</option>
+                <option value="in">In</option>
+                <option value="out">Out</option>
+              </select>
+            </div>
+            <div class="field"><label class="label" for="r-prism-v">Vertical Δ</label><input id="r-prism-v" type="number" step="0.25" min="0" max="20" class="number-input" data-bind="rightEye.prismVerticalDiopters"></div>
+            <div class="field"><label class="label" for="r-base-v">Base</label>
+              <select id="r-base-v" class="select" data-bind="rightEye.baseVertical">
+                <option value="">—</option>
+                <option value="up">Up</option>
+                <option value="down">Down</option>
+              </select>
+            </div>
+          </div>
+        </fieldset>
+
+        <!-- Step 6 -->
+        <fieldset class="fieldset" data-step="6" id="step-6">
+          <legend class="fieldset-legend">
+            <span class="section-step">Step 6 of 11</span>
+            <span class="section-title">Left eye refraction (OS)</span>
+          </legend>
+          <div class="four-col">
+            <div class="field"><label class="label" for="l-sph">Sphere (D)</label><input id="l-sph" type="number" step="0.25" min="-30" max="30" class="number-input" data-bind="leftEye.sphereDiopters"></div>
+            <div class="field"><label class="label" for="l-cyl">Cylinder (D)</label><input id="l-cyl" type="number" step="0.25" min="-10" max="0" class="number-input" data-bind="leftEye.cylinderDiopters"></div>
+            <div class="field"><label class="label" for="l-axis">Axis (°)</label><input id="l-axis" type="number" step="1" min="1" max="180" class="number-input" data-bind="leftEye.axisDegrees"></div>
+            <div class="field"></div>
+          </div>
+          <h3>Prism (optional)</h3>
+          <div class="four-col">
+            <div class="field"><label class="label" for="l-prism-h">Horizontal Δ</label><input id="l-prism-h" type="number" step="0.25" min="0" max="20" class="number-input" data-bind="leftEye.prismHorizontalDiopters"></div>
+            <div class="field"><label class="label" for="l-base-h">Base</label>
+              <select id="l-base-h" class="select" data-bind="leftEye.baseHorizontal">
+                <option value="">—</option>
+                <option value="in">In</option>
+                <option value="out">Out</option>
+              </select>
+            </div>
+            <div class="field"><label class="label" for="l-prism-v">Vertical Δ</label><input id="l-prism-v" type="number" step="0.25" min="0" max="20" class="number-input" data-bind="leftEye.prismVerticalDiopters"></div>
+            <div class="field"><label class="label" for="l-base-v">Base</label>
+              <select id="l-base-v" class="select" data-bind="leftEye.baseVertical">
+                <option value="">—</option>
+                <option value="up">Up</option>
+                <option value="down">Down</option>
+              </select>
+            </div>
+          </div>
+        </fieldset>
+
+        <!-- Step 7 -->
+        <fieldset class="fieldset" data-step="7" id="step-7">
+          <legend class="fieldset-legend">
+            <span class="section-step">Step 7 of 11</span>
+            <span class="section-title">Addition for near</span>
+            <span class="section-description">Always positive. Typically equal between eyes. +0.75 to +3.50 D in 0.25 D steps.</span>
+          </legend>
+          <div class="four-col">
+            <div class="field"><label class="label" for="r-add">Right ADD (D)</label><input id="r-add" type="number" step="0.25" min="0" max="4" class="number-input" data-bind="rightEye.additionDiopters"></div>
+            <div class="field"><label class="label" for="l-add">Left ADD (D)</label><input id="l-add" type="number" step="0.25" min="0" max="4" class="number-input" data-bind="leftEye.additionDiopters"></div>
+            <div class="field"><label class="label" for="r-int">Right intermediate (D)</label><input id="r-int" type="number" step="0.25" min="0" max="4" class="number-input" data-bind="rightEye.intermediateAdditionDiopters"></div>
+            <div class="field"><label class="label" for="l-int">Left intermediate (D)</label><input id="l-int" type="number" step="0.25" min="0" max="4" class="number-input" data-bind="leftEye.intermediateAdditionDiopters"></div>
+          </div>
+        </fieldset>
+
+        <!-- Step 8 -->
+        <fieldset class="fieldset" data-step="8" id="step-8">
+          <legend class="fieldset-legend">
+            <span class="section-step">Step 8 of 11</span>
+            <span class="section-title">Pupillary distance</span>
+            <span class="section-description">Millimetres. Near PD is typically distance − 3 mm.</span>
+          </legend>
+          <h3>Distance</h3>
+          <div class="three-col">
+            <div class="field"><label class="label" for="pd-d-tot">Total (mm)</label><input id="pd-d-tot" type="number" step="0.5" min="40" max="80" class="number-input" data-bind="pupillaryDistance.distanceTotalMm"></div>
+            <div class="field"><label class="label" for="pd-d-r">Right monocular (mm)</label><input id="pd-d-r" type="number" step="0.5" min="20" max="45" class="number-input" data-bind="pupillaryDistance.distanceRightMm"></div>
+            <div class="field"><label class="label" for="pd-d-l">Left monocular (mm)</label><input id="pd-d-l" type="number" step="0.5" min="20" max="45" class="number-input" data-bind="pupillaryDistance.distanceLeftMm"></div>
+          </div>
+          <h3>Near</h3>
+          <div class="three-col">
+            <div class="field"><label class="label" for="pd-n-tot">Total (mm)</label><input id="pd-n-tot" type="number" step="0.5" min="40" max="80" class="number-input" data-bind="pupillaryDistance.nearTotalMm"></div>
+            <div class="field"><label class="label" for="pd-n-r">Right monocular (mm)</label><input id="pd-n-r" type="number" step="0.5" min="20" max="45" class="number-input" data-bind="pupillaryDistance.nearRightMm"></div>
+            <div class="field"><label class="label" for="pd-n-l">Left monocular (mm)</label><input id="pd-n-l" type="number" step="0.5" min="20" max="45" class="number-input" data-bind="pupillaryDistance.nearLeftMm"></div>
+          </div>
+          <h3>Segment height (for bifocal / varifocal)</h3>
+          <div class="three-col">
+            <div class="field"><label class="label" for="pd-seg-r">Right (mm)</label><input id="pd-seg-r" type="number" step="0.5" min="10" max="35" class="number-input" data-bind="pupillaryDistance.segmentHeightRightMm"></div>
+            <div class="field"><label class="label" for="pd-seg-l">Left (mm)</label><input id="pd-seg-l" type="number" step="0.5" min="10" max="35" class="number-input" data-bind="pupillaryDistance.segmentHeightLeftMm"></div>
+          </div>
+        </fieldset>
+
+        <!-- Step 9 -->
+        <fieldset class="fieldset" data-step="9" id="step-9">
+          <legend class="fieldset-legend">
+            <span class="section-step">Step 9 of 11</span>
+            <span class="section-title">Lens recommendation</span>
+          </legend>
+          <div class="two-col">
+            <div class="field"><label class="label" for="lens-type">Lens type</label>
+              <select id="lens-type" class="select" data-bind="lensRecommendation.lensType">
+                <option value="">—</option>
+                <option value="single-vision-distance">Single vision — distance</option>
+                <option value="single-vision-near">Single vision — near</option>
+                <option value="single-vision-intermediate">Single vision — intermediate</option>
+                <option value="bifocal">Bifocal</option>
+                <option value="trifocal">Trifocal</option>
+                <option value="varifocal">Varifocal / progressive</option>
+                <option value="occupational-varifocal">Occupational varifocal</option>
+              </select>
+            </div>
+            <div class="field"><label class="label" for="lens-mat">Material</label>
+              <select id="lens-mat" class="select" data-bind="lensRecommendation.material">
+                <option value="">—</option>
+                <option value="cr-39">CR-39 (1.498)</option>
+                <option value="trivex">Trivex (1.532)</option>
+                <option value="polycarbonate">Polycarbonate (1.586)</option>
+                <option value="mid-index-1.60">Mid-index (1.60)</option>
+                <option value="high-index-1.67">High-index (1.67)</option>
+                <option value="high-index-1.74">High-index (1.74)</option>
+                <option value="glass">Glass</option>
+              </select>
+            </div>
+            <div class="field"><label class="label" for="lens-idx">Refractive index</label><input id="lens-idx" type="number" step="0.001" min="1" max="2" class="number-input" data-bind="lensRecommendation.refractiveIndex"></div>
+            <div class="field"><label><input type="checkbox" class="checkbox-input" data-bind-bool="lensRecommendation.aspheric"> Aspheric design</label></div>
+          </div>
+          <h3>Coatings</h3>
+          <div class="checkbox-group three-col">
+            <div class="field"><label><input type="checkbox" class="checkbox-input" data-bind-bool="lensRecommendation.coatingAntiReflective"> Anti-reflective</label></div>
+            <div class="field"><label><input type="checkbox" class="checkbox-input" data-bind-bool="lensRecommendation.coatingScratchResistant"> Scratch-resistant</label></div>
+            <div class="field"><label><input type="checkbox" class="checkbox-input" data-bind-bool="lensRecommendation.coatingHydrophobic"> Hydrophobic</label></div>
+            <div class="field"><label><input type="checkbox" class="checkbox-input" data-bind-bool="lensRecommendation.coatingBlueLight"> Blue-light filter</label></div>
+            <div class="field"><label><input type="checkbox" class="checkbox-input" data-bind-bool="lensRecommendation.coatingPhotochromic"> Photochromic</label></div>
+            <div class="field"><label><input type="checkbox" class="checkbox-input" data-bind-bool="lensRecommendation.coatingPolarised"> Polarised</label></div>
+            <div class="field"><label><input type="checkbox" class="checkbox-input" data-bind-bool="lensRecommendation.coatingUv400"> UV-400</label></div>
+          </div>
+          <div class="two-col">
+            <div class="field"><label class="label" for="lens-tint">Tint description</label><input id="lens-tint" class="text-input" data-bind="lensRecommendation.tintDescription" placeholder="brown / grey / G15"></div>
+            <div class="field"><label class="label" for="lens-pct">Tint density (%)</label><input id="lens-pct" type="number" step="5" min="0" max="100" class="number-input" data-bind="lensRecommendation.tintPercent"></div>
+          </div>
+          <div class="field"><label class="label" for="lens-notes">Dispenser notes</label><textarea id="lens-notes" class="text-area-input" data-bind="lensRecommendation.dispenserNotes" rows="2"></textarea></div>
+        </fieldset>
+
+        <!-- Step 10 -->
+        <fieldset class="fieldset" data-step="10" id="step-10">
+          <legend class="fieldset-legend">
+            <span class="section-step">Step 10 of 11</span>
+            <span class="section-title">Ocular health findings (optional)</span>
+          </legend>
+          <div class="two-col">
+            <div class="field"><label class="label" for="oh-slit-r">Slit-lamp right</label><textarea id="oh-slit-r" class="text-area-input" data-bind="ocularHealth.slitLampRight" rows="2"></textarea></div>
+            <div class="field"><label class="label" for="oh-slit-l">Slit-lamp left</label><textarea id="oh-slit-l" class="text-area-input" data-bind="ocularHealth.slitLampLeft" rows="2"></textarea></div>
+            <div class="field"><label class="label" for="oh-fund-r">Fundus right</label><textarea id="oh-fund-r" class="text-area-input" data-bind="ocularHealth.fundusRight" rows="2"></textarea></div>
+            <div class="field"><label class="label" for="oh-fund-l">Fundus left</label><textarea id="oh-fund-l" class="text-area-input" data-bind="ocularHealth.fundusLeft" rows="2"></textarea></div>
+            <div class="field"><label class="label" for="oh-iop-r">IOP right (mmHg)</label><input id="oh-iop-r" type="number" step="0.1" min="0" max="80" class="number-input" data-bind="ocularHealth.intraocularPressureRightMmhg"></div>
+            <div class="field"><label class="label" for="oh-iop-l">IOP left (mmHg)</label><input id="oh-iop-l" type="number" step="0.1" min="0" max="80" class="number-input" data-bind="ocularHealth.intraocularPressureLeftMmhg"></div>
+            <div class="field"><label class="label" for="oh-cd-r">Cup-to-disc ratio right</label><input id="oh-cd-r" type="number" step="0.05" min="0" max="1" class="number-input" data-bind="ocularHealth.cupToDiscRatioRight"></div>
+            <div class="field"><label class="label" for="oh-cd-l">Cup-to-disc ratio left</label><input id="oh-cd-l" type="number" step="0.05" min="0" max="1" class="number-input" data-bind="ocularHealth.cupToDiscRatioLeft"></div>
+          </div>
+          <div class="checkbox-group three-col">
+            <div class="field"><label><input type="checkbox" class="checkbox-input" data-bind-bool="ocularHealth.octPerformed"> OCT performed</label></div>
+            <div class="field"><label><input type="checkbox" class="checkbox-input" data-bind-bool="ocularHealth.fieldsPerformed"> Visual fields performed</label></div>
+            <div class="field"><label><input type="checkbox" class="checkbox-input" data-bind-bool="ocularHealth.pathologyFlag"> Pathology identified</label></div>
+          </div>
+          <div class="field"><label class="label" for="oh-oct">OCT findings</label><textarea id="oh-oct" class="text-area-input" data-bind="ocularHealth.octFindings" rows="2"></textarea></div>
+          <div class="field"><label class="label" for="oh-fields">Fields findings</label><textarea id="oh-fields" class="text-area-input" data-bind="ocularHealth.fieldsFindings" rows="2"></textarea></div>
+          <div class="field"><label><input type="checkbox" class="checkbox-input" data-bind-bool="ocularHealth.referOphthalmology"> Refer to ophthalmology</label></div>
+          <div class="field"><label class="label" for="oh-refer">Referral reason</label><textarea id="oh-refer" class="text-area-input" data-bind="ocularHealth.referralReason" rows="2"></textarea></div>
+        </fieldset>
+
+        <!-- Step 11 -->
+        <fieldset class="fieldset" data-step="11" id="step-11">
+          <legend class="fieldset-legend">
+            <span class="section-step">Step 11 of 11</span>
+            <span class="section-title">Summary &amp; sign-off</span>
+            <span class="section-description">Live classification — recomputed as you fill the form above.</span>
+          </legend>
+          <div id="live-summary" class="live-summary" aria-live="polite"></div>
+          <div class="two-col">
+            <div class="field"><label class="label" for="sum-followup">Follow-up interval (months)</label><input id="sum-followup" type="number" step="1" min="1" max="60" class="number-input" data-bind="grade.followUpIntervalMonths"></div>
+            <div class="field"><label class="label" for="sum-override">Complexity override</label>
+              <select id="sum-override" class="select" data-bind="grade.overrideComplexity">
+                <option value="">Use computed</option>
+                <option value="simple">Simple</option>
+                <option value="moderate">Moderate</option>
+                <option value="complex">Complex</option>
+              </select>
+            </div>
+          </div>
+          <div class="field"><label class="label" for="sum-reason">Override reason</label><textarea id="sum-reason" class="text-area-input" data-bind="grade.overrideReason" rows="2"></textarea></div>
+          <div class="field"><label class="label" for="sum-notes">Prescriber notes</label><textarea id="sum-notes" class="text-area-input" data-bind="grade.prescriberNotes" rows="3"></textarea></div>
+          <div class="field"><label><input type="checkbox" class="checkbox-input" data-bind-bool="grade.signedAt"> I sign this prescription electronically</label></div>
+        </fieldset>
+
+      </div>
+
+      <div class="button-group">
+        <button type="button" id="submit-btn" class="button" data-variant="primary">Generate prescription</button>
+        <button type="button" id="reset-btn" class="button" data-variant="secondary">Start over</button>
+      </div>
+    </form>
+
+    <section id="report" class="panel" role="region" aria-live="polite" aria-label="Generated prescription">
+      <p class="empty-message">Submit the form to see the report.</p>
+    </section>
+
+    <footer class="page-footer">
+      <p>
+        Storage convention is <strong>minus-cylinder</strong> per UK GOC
+        practice and HL7 FHIR R5 <em>VisionPrescription</em>. Final
+        prescription validity is the responsibility of the signing
+        prescriber.
+      </p>
+    </footer>
+  </main>
+
+  <script src="js/types.js"></script>
+  <script src="js/rules.js"></script>
+  <script src="js/form-app.js"></script>
+</body>
+</html>

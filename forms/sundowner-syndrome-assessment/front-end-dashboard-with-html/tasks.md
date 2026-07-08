@@ -1,3 +1,0 @@
-# Tasks: HTML dashboard
-
-- [ ] Implement.

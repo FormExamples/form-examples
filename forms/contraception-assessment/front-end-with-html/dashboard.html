@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Contraception Assessment — clinician dashboard</title>
+  <meta name="description" content="UKMEC (UK Medical Eligibility Criteria) clinician dashboard: review patient submissions with UKMEC category, preferred and current contraceptive method, and review status.">
+  <link rel="stylesheet" href="css/dashboard.css">
+</head>
+<body>
+  <a class="skip-link" href="#patients-table">Skip to patients table</a>
+
+  <header class="page-header">
+    <div class="page-header-inner">
+      <h1>Contraception Assessment — Clinician Dashboard</h1>
+      <p class="subtitle">
+        UKMEC (UK Medical Eligibility Criteria) patient list with eligibility
+        category, preferred and current contraceptive method, and review
+        status.
+      </p>
+    </div>
+  </header>
+
+  <main>
+    <!-- Status banner: shown when backend fetch fails and we fall back -->
+    <div
+      id="status-banner"
+      class="alert" data-type="warning"
+      role="status"
+      aria-live="polite"
+      hidden
+    ></div>
+
+    <!-- Filter bar -->
+    <section
+      class="filter-bar"
+      aria-labelledby="filter-bar-heading"
+    >
+      <h2 id="filter-bar-heading" class="visually-hidden">Filters</h2>
+
+      <div class="filter-grid">
+        <div class="filter-field filter-field-search">
+          <label for="filter-search">Search</label>
+          <input
+            id="filter-search"
+            type="search"
+            class="text-input"
+            placeholder="NHS number, name, or method..."
+            autocomplete="off"
+          >
+        </div>
+
+        <div class="filter-field">
+          <label for="filter-ukmec">UKMEC Category</label>
+          <select id="filter-ukmec" class="select">
+            <option value="">All UKMEC categories</option>
+            <option value="1">UKMEC 1 - No restriction</option>
+            <option value="2">UKMEC 2 - Advantages outweigh risks</option>
+            <option value="3">UKMEC 3 - Risks outweigh advantages</option>
+            <option value="4">UKMEC 4 - Unacceptable risk</option>
+          </select>
+        </div>
+
+        <div class="filter-field">
+          <label for="filter-review">Review Status</label>
+          <select id="filter-review" class="select">
+            <option value="">All statuses</option>
+            <option value="Pending">Pending</option>
+            <option value="Requires review">Requires review</option>
+            <option value="Urgent">Urgent</option>
+            <option value="Completed">Completed</option>
+          </select>
+        </div>
+
+        <div class="filter-field">
+          <label for="filter-method">Preferred Method</label>
+          <select id="filter-method" class="select">
+            <option value="">All methods</option>
+            <option value="Combined oral contraceptive">Combined oral contraceptive</option>
+            <option value="Progestogen-only pill">Progestogen-only pill</option>
+            <option value="Injectable">Injectable</option>
+            <option value="Implant">Implant</option>
+            <option value="Copper IUD">Copper IUD</option>
+            <option value="LNG-IUS">LNG-IUS</option>
+            <option value="Contraceptive patch">Contraceptive patch</option>
+            <option value="Vaginal ring">Vaginal ring</option>
+            <option value="Barrier methods">Barrier methods</option>
+            <option value="Natural family planning">Natural family planning</option>
+          </select>
+        </div>
+
+        <div class="filter-field filter-field-actions">
+          <button
+            type="button"
+            id="filter-clear-btn"
+            class="button" data-variant="secondary"
+            hidden
+          >
+            Clear filters
+          </button>
+        </div>
+      </div>
+
+      <div class="filter-summary">
+        <span id="filter-count">Loading patients...</span>
+      </div>
+    </section>
+
+    <!-- Patients table -->
+    <section
+      class="table-card"
+      aria-labelledby="patients-table-heading"
+    >
+      <h2 id="patients-table-heading" class="visually-hidden">Patients</h2>
+
+      <div class="table-scroll">
+        <table id="patients-table" class="patients-table">
+          <thead>
+            <tr id="patients-table-head">
+              <!-- Sortable column headers built by app.js -->
+            </tr>
+          </thead>
+          <tbody id="patients-table-body">
+            <!-- Data rows built by app.js -->
+          </tbody>
+        </table>
+      </div>
+
+      <p
+        id="patients-empty-message"
+        class="empty-message"
+        hidden
+      >
+        No patients match the current filters.
+      </p>
+    </section>
+
+    <footer class="page-footer">
+      <p>
+        UKMEC (UK Medical Eligibility Criteria) is a clinical guideline for
+        prescribing contraception. This dashboard is a clinical-review tool
+        and is not a diagnosis.
+      </p>
+    </footer>
+  </main>
+
+  <!--
+    Classic <script> tags (no `type="module"`) so the page works when opened
+    directly via file:// — browsers block ES-module imports from file:// for
+    CORS reasons, but allow ordered classic scripts. Each file attaches its
+    public symbols to `window.ContraceptionAssessmentDashboard`.
+
+    Load order: types -> data -> api -> app (each depends on those above).
+  -->
+  <script src="js/dashboard-types.js"></script>
+  <script src="js/data.js"></script>
+  <script src="js/api.js"></script>
+  <script src="js/dashboard-app.js"></script>
+</body>
+</html>

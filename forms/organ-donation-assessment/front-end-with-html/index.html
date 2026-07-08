@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Organ Donation Assessment — donor questionnaire</title>
+  <meta name="description" content="Organ donor evaluation: medical history, organ function, infectious disease screening, immunological compatibility, and ethical/legal requirements.">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <a class="skip-link visually-hidden" href="#form-sections">Skip to questionnaire</a>
+
+  <header class="page-header">
+    <div class="page-header-inner">
+      <h1>Organ Donation Assessment</h1>
+      <p class="subtitle">Donor evaluation: living and deceased donor suitability for solid-organ transplantation.</p>
+
+      <progress
+        id="progress"
+        class="progress"
+        max="100"
+        value="0"
+        aria-label="Form completion"
+      ></progress>
+      <p id="progress-text" class="subtitle" aria-live="polite">0 fields answered (0%)</p>
+
+      <ol
+        id="step-list"
+        class="step-list"
+        aria-label="Organ Donation Assessment steps"
+        data-current="0"
+      ><!-- step-list-items injected by js/form-app.js --></ol>
+    </div>
+  </header>
+
+  <main>
+    <div class="intro">
+      <p>
+        Please complete the assessment below to evaluate organ donor
+        suitability. The form covers donor type and registration, medical
+        history, organ function, infectious disease screening, immunological
+        compatibility, surgical and (for living donors) psychological
+        assessment, and ethical / legal requirements. All answers are saved
+        automatically in your browser as you go.
+      </p>
+      <p>
+        This screening tool supports clinical evaluation but does not by
+        itself determine final eligibility — every answer is reviewed by the
+        donor assessment team and (for living donors in the UK) an Independent
+        Assessor under the Human Tissue Act 2004.
+      </p>
+    </div>
+
+    <form
+      id="assessment-form"
+      class="form"
+      autocomplete="off"
+      novalidate
+      onsubmit="return false;"
+      aria-label="Organ Donation Assessment"
+    >
+      <div
+        id="error-summary"
+        class="error-summary"
+        role="alert"
+        aria-label="Validation errors"
+        hidden
+      ></div>
+
+      <div id="form-sections">
+        <!-- Sections rendered by js/form-app.js: -->
+        <!-- 1 Demographics, 2 Donor Type & Registration, -->
+        <!-- 3 Medical History, 4 Organ Function Assessment, -->
+        <!-- 5 Infectious Disease Screening, 6 Immunological Assessment, -->
+        <!-- 7 Surgical Assessment, 8 Psychological Assessment (Living), -->
+        <!-- 9 Ethical & Legal Requirements, 10 Eligibility & Allocation -->
+      </div>
+
+      <div class="button-group">
+        <button type="button" id="submit-btn" class="button" data-variant="primary">
+          Submit and view report
+        </button>
+        <button type="button" id="reset-btn" class="button" data-variant="secondary">
+          Start over
+        </button>
+      </div>
+    </form>
+
+    <section
+      id="report"
+      class="panel"
+      role="region"
+      aria-live="polite"
+      aria-label="Donor eligibility report"
+    >
+      <p class="empty-message">Submit the form to see the report.</p>
+    </section>
+
+    <footer class="page-footer">
+      <p>
+        Organ donation requires comprehensive evaluation of donor risk index,
+        organ-specific suitability, and (for living donors) informed consent
+        free of coercion. Absolute contraindications include HIV, active
+        non-CNS malignancy, uncontrolled sepsis, and certain CJD risks.
+        Expanded-criteria donors (older age, hypertension, modest organ
+        dysfunction) may be conditionally suitable. Final eligibility is a
+        clinical decision.
+      </p>
+    </footer>
+  </main>
+
+  <!--
+    Classic <script> tags (no `type="module"`) so the page works when opened
+    directly via file:// — browsers block ES-module imports from file:// for
+    CORS reasons, but allow ordered classic scripts. Each file attaches its
+    public symbols to `window.OrganDonationAssessment`.
+  -->
+  <script src="js/types.js"></script>
+  <script src="js/donation-rules.js"></script>
+  <script src="js/donation-grader.js"></script>
+  <script src="js/flagged-issues.js"></script>
+  <script src="js/form-app.js"></script>
+</body>
+</html>

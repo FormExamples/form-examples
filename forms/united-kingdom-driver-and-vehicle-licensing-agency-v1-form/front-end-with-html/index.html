@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>DVLA V1 Form — confidential medical information (vision)</title>
+  <meta name="description" content="UK DVLA V1 — general confidential medical information (vision self-declaration) for fitness to drive.">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <a class="skip-link visually-hidden" href="#form-sections">Skip to questionnaire</a>
+
+  <header class="page-header">
+    <div class="page-header-inner">
+      <h1>DVLA V1 — Confidential Medical Information (Vision)</h1>
+      <p class="subtitle">Vision self-declaration for fitness to drive (UK Driver and Vehicle Licensing Agency).</p>
+
+      <progress
+        id="progress"
+        class="progress"
+        max="100"
+        value="0"
+        aria-label="Form completion"
+      ></progress>
+      <p id="progress-text" class="subtitle" aria-live="polite">0 fields answered (0%)</p>
+
+      <ol
+        id="step-list"
+        class="step-list"
+        aria-label="DVLA V1 steps"
+        data-current="0"
+      ><!-- step-list-items injected by js/form-app.js --></ol>
+    </div>
+  </header>
+
+  <main>
+    <div class="intro">
+      <p>
+        Please complete every section that applies to you. Some questions are
+        only shown when relevant to a previous answer (for example, the
+        monocular-vision questions appear only if you indicate you do not
+        have vision in both eyes). Your answers are saved automatically in
+        your browser as you go.
+      </p>
+      <p>
+        It is a criminal offence to make a false declaration to obtain a
+        driving licence. If you are unsure about a question, ask your
+        optician, GP or consultant before signing.
+      </p>
+    </div>
+
+    <form
+      id="assessment-form"
+      class="form"
+      autocomplete="off"
+      novalidate
+      onsubmit="return false;"
+      aria-label="DVLA V1 form"
+    >
+      <div
+        id="error-summary"
+        class="error-summary"
+        role="alert"
+        aria-label="Validation errors"
+        hidden
+      ></div>
+
+      <div id="form-sections"></div>
+
+      <div class="button-group">
+        <button type="button" id="submit-btn" class="button" data-variant="primary">
+          Submit and view report
+        </button>
+        <button type="button" id="reset-btn" class="button" data-variant="secondary">
+          Start over
+        </button>
+      </div>
+    </form>
+
+    <section
+      id="report"
+      class="panel"
+      role="region"
+      aria-live="polite"
+      aria-label="Validation report"
+    >
+      <p class="empty-message">Submit the form to see the report.</p>
+    </section>
+
+    <footer class="page-footer">
+      <p>
+        DVLA Form V1 — General confidential medical information (vision).
+        This is an unofficial digital companion. The official form is
+        published at gov.uk and remains the authoritative source.
+      </p>
+    </footer>
+  </main>
+
+  <!--
+    Classic <script> tags (no `type="module"`) so the page works when opened
+    directly via file:// — browsers block ES-module imports from file:// for
+    CORS reasons, but allow ordered classic scripts. Each file attaches its
+    public symbols to `window.DvlaV1Form`.
+  -->
+  <script src="js/types.js"></script>
+  <script src="js/v1-rules.js"></script>
+  <script src="js/v1-validator.js"></script>
+  <script src="js/flagged-issues.js"></script>
+  <script src="js/form-app.js"></script>
+</body>
+</html>

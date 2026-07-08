@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Autism Assessment — clinician dashboard</title>
+  <meta name="description" content="AQ-10 (Autism Spectrum Quotient - 10 item) clinician dashboard: review patient submissions with AQ-10 score, screening outcome, age group, and referral status.">
+  <link rel="stylesheet" href="css/dashboard.css">
+</head>
+<body>
+  <a class="skip-link" href="#patients-table">Skip to patients table</a>
+
+  <header class="page-header">
+    <div class="page-header-inner">
+      <h1>Autism Assessment — Clinician Dashboard</h1>
+      <p class="subtitle">
+        AQ-10 (Autism Spectrum Quotient - 10 item) patient list with screening
+        outcome, age group, and referral status.
+      </p>
+    </div>
+  </header>
+
+  <main>
+    <!-- Status banner: shown when backend fetch fails and we fall back -->
+    <div
+      id="status-banner"
+      class="alert" data-type="warning"
+      role="status"
+      aria-live="polite"
+      hidden
+    ></div>
+
+    <!-- Filter bar -->
+    <section
+      class="filter-bar"
+      aria-labelledby="filter-bar-heading"
+    >
+      <h2 id="filter-bar-heading" class="visually-hidden">Filters</h2>
+
+      <div class="filter-grid">
+        <div class="filter-field filter-field-search">
+          <label for="filter-search">Search</label>
+          <input
+            id="filter-search"
+            type="search"
+            class="text-input"
+            placeholder="NHS number, name, or referral status..."
+            autocomplete="off"
+          >
+        </div>
+
+        <div class="filter-field">
+          <label for="filter-aq10">AQ-10 Score</label>
+          <select id="filter-aq10" class="select">
+            <option value="">All AQ-10 scores</option>
+            <option value="0-3">Low (0-3)</option>
+            <option value="4-5">Borderline (4-5)</option>
+            <option value="6-8">Above threshold (6-8)</option>
+            <option value="9-10">High (9-10)</option>
+          </select>
+        </div>
+
+        <div class="filter-field">
+          <label for="filter-outcome">Outcome</label>
+          <select id="filter-outcome" class="select">
+            <option value="">All outcomes</option>
+            <option value="Below threshold">Below threshold</option>
+            <option value="At or above threshold">At or above threshold</option>
+          </select>
+        </div>
+
+        <div class="filter-field">
+          <label for="filter-age-group">Age Group</label>
+          <select id="filter-age-group" class="select">
+            <option value="">All age groups</option>
+            <option value="Child">Child</option>
+            <option value="Adolescent">Adolescent</option>
+            <option value="Adult">Adult</option>
+          </select>
+        </div>
+
+        <div class="filter-field filter-field-actions">
+          <button
+            type="button"
+            id="filter-clear-btn"
+            class="button" data-variant="secondary"
+            hidden
+          >
+            Clear filters
+          </button>
+        </div>
+      </div>
+
+      <div class="filter-summary">
+        <span id="filter-count">Loading patients...</span>
+      </div>
+    </section>
+
+    <!-- Patients table -->
+    <section
+      class="table-card"
+      aria-labelledby="patients-table-heading"
+    >
+      <h2 id="patients-table-heading" class="visually-hidden">Patients</h2>
+
+      <div class="table-scroll">
+        <table id="patients-table" class="patients-table">
+          <thead>
+            <tr id="patients-table-head">
+              <!-- Sortable column headers built by app.js -->
+            </tr>
+          </thead>
+          <tbody id="patients-table-body">
+            <!-- Data rows built by app.js -->
+          </tbody>
+        </table>
+      </div>
+
+      <p
+        id="patients-empty-message"
+        class="empty-message"
+        hidden
+      >
+        No patients match the current filters.
+      </p>
+    </section>
+
+    <footer class="page-footer">
+      <p>
+        AQ-10 (Autism Spectrum Quotient - 10 item) is a validated screening
+        instrument for identifying adults, adolescents, and children who may
+        benefit from a specialist diagnostic assessment for autism. This
+        dashboard is a clinical-review tool and is not a diagnosis.
+      </p>
+    </footer>
+  </main>
+
+  <!--
+    Classic <script> tags (no `type="module"`) so the page works when opened
+    directly via file:// — browsers block ES-module imports from file:// for
+    CORS reasons, but allow ordered classic scripts. Each file attaches its
+    public symbols to `window.AutismAssessmentDashboard`.
+
+    Load order: types -> data -> api -> app (each depends on those above).
+  -->
+  <script src="js/dashboard-types.js"></script>
+  <script src="js/data.js"></script>
+  <script src="js/api.js"></script>
+  <script src="js/dashboard-app.js"></script>
+</body>
+</html>

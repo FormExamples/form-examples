@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>WHO Prehospital Form (SCF Prehospital) — clinician questionnaire</title>
+  <meta name="description" content="World Health Organization standardised prehospital clinical documentation form for emergency medical services (EMS).">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <a class="skip-link visually-hidden" href="#form-sections">Skip to questionnaire</a>
+
+  <header class="page-header">
+    <div class="page-header-inner">
+      <h1>WHO Prehospital Form (SCF Prehospital)</h1>
+      <p class="subtitle">Structured prehospital documentation for emergency medical services. Sixteen sections cover caller &amp; scene, vital signs, ABCDE primary survey, history, exam, interventions, reassessment and disposition.</p>
+
+      <progress
+        id="progress"
+        class="progress"
+        max="100"
+        value="0"
+        aria-label="Form completion"
+      ></progress>
+      <p id="progress-text" class="subtitle" aria-live="polite">0 of 0 required fields answered (0%)</p>
+
+      <ol
+        id="step-list"
+        class="step-list"
+        aria-label="WHO prehospital form steps"
+        data-current="0"
+      ><!-- step-list-items injected by js/form-app.js --></ol>
+    </div>
+  </header>
+
+  <main>
+    <div class="intro">
+      <p>
+        This single-page wizard captures one prehospital encounter
+        end-to-end: from caller &amp; scene details and triage vital signs
+        through the ABCDE primary survey, SAMPLE history, injury details,
+        physical exam, interventions, up to three reassessments and final
+        disposition / handover.
+      </p>
+      <p>
+        Your answers are saved automatically in your browser as you go.
+        Conditional sections (RED-triage interventions, injury mechanism /
+        intent, bleeding control, drowning life vest, vehicle detail,
+        SAMPLE Unknown checkboxes) only become required when the answers
+        above them call for them.
+      </p>
+    </div>
+
+    <form
+      id="assessment-form"
+      class="form"
+      autocomplete="off"
+      novalidate
+      onsubmit="return false;"
+      aria-label="WHO Prehospital Form"
+    >
+      <div
+        id="error-summary"
+        class="error-summary"
+        role="alert"
+        aria-label="Validation errors"
+        hidden
+      ></div>
+
+      <div id="form-sections"><!-- fieldsets injected by js/form-app.js --></div>
+
+      <div class="button-group">
+        <button type="button" id="submit-btn" class="button" data-variant="primary">
+          Submit and view report
+        </button>
+        <button type="button" id="reset-btn" class="button" data-variant="secondary">
+          Start over
+        </button>
+      </div>
+    </form>
+
+    <section
+      id="report"
+      class="panel"
+      role="region"
+      aria-live="polite"
+      aria-label="Validation report"
+    >
+      <p class="empty-message">Submit the form to see the report.</p>
+    </section>
+
+    <footer class="page-footer">
+      <p>
+        WHO Prehospital Form (SCF Prehospital) — unofficial digital
+        companion based on the World Health Organization standardised
+        prehospital clinical documentation form. The published WHO PDF
+        remains the authoritative source.
+      </p>
+    </footer>
+  </main>
+
+  <!--
+    Classic <script> tags (no `type="module"`) so the page works when opened
+    directly via file:// — browsers block ES-module imports from file:// for
+    CORS reasons, but allow ordered classic scripts. Each file attaches its
+    public symbols to `window.WhoPrehospitalForm`.
+  -->
+  <script src="js/types.js"></script>
+  <script src="js/prehospital-rules.js"></script>
+  <script src="js/prehospital-validator.js"></script>
+  <script src="js/flagged-issues.js"></script>
+  <script src="js/form-app.js"></script>
+</body>
+</html>

@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Birth Control Assessment — patient questionnaire</title>
+  <meta name="description" content="UK Medical Eligibility Criteria (UK MEC) contraceptive suitability self-assessment.">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <a class="skip-link visually-hidden" href="#form-sections">Skip to questionnaire</a>
+
+  <header class="page-header">
+    <div class="page-header-inner">
+      <h1>Birth Control Assessment</h1>
+      <p class="subtitle">UK Medical Eligibility Criteria (UK MEC) contraceptive suitability self-assessment.</p>
+
+      <progress
+        id="progress"
+        class="progress"
+        max="100"
+        value="0"
+        aria-label="Form completion"
+      ></progress>
+      <p id="progress-text" class="subtitle" aria-live="polite">0 fields answered (0%)</p>
+
+      <ol
+        id="step-list"
+        class="step-list"
+        aria-label="Birth Control Assessment steps"
+        data-current="0"
+      ><!-- step-list-items injected by js/form-app.js --></ol>
+    </div>
+  </header>
+
+  <main>
+    <div class="intro">
+      <p>
+        Please answer the questions below about your medical and contraceptive
+        history. A clinician will use your answers, together with the UK
+        Medical Eligibility Criteria (UK MEC), to assess which contraceptive
+        methods are safe and suitable for you. All answers are saved
+        automatically in your browser as you go.
+      </p>
+      <p>
+        This screening tool is for information only and is not a clinical
+        diagnosis or prescription. Please discuss your results with your
+        clinician before starting, stopping, or changing contraception.
+      </p>
+    </div>
+
+    <form
+      id="assessment-form"
+      class="form"
+      autocomplete="off"
+      novalidate
+      onsubmit="return false;"
+      aria-label="Birth Control Assessment"
+    >
+      <div
+        id="error-summary"
+        class="error-summary"
+        role="alert"
+        aria-label="Validation errors"
+        hidden
+      ></div>
+
+      <div id="form-sections">
+        <!-- Sections rendered by js/form-app.js: -->
+        <!-- 1 Demographics, 2 Menstrual History, 3 Contraceptive History, -->
+        <!-- 4 Medical History, 5 Cardiovascular Risk, 6 Thromboembolism Risk, -->
+        <!-- 7 Current Medications, 8 Lifestyle, 9 Preferences, 10 Recommendation -->
+      </div>
+
+      <div class="button-group">
+        <button type="button" id="submit-btn" class="button" data-variant="primary">
+          Submit and view report
+        </button>
+        <button type="button" id="reset-btn" class="button" data-variant="secondary">
+          Start over
+        </button>
+      </div>
+    </form>
+
+    <section
+      id="report"
+      class="panel"
+      role="region"
+      aria-live="polite"
+      aria-label="Assessment report"
+    >
+      <p class="empty-message">Submit the form to see the report.</p>
+    </section>
+
+    <footer class="page-footer">
+      <p>
+        Risk classification follows the UK Medical Eligibility Criteria for
+        Contraceptive Use (UK MEC). MEC 1 = no restriction; MEC 2 = advantages
+        outweigh risks; MEC 3 = risks usually outweigh advantages; MEC 4 =
+        unacceptable health risk. Always discuss results with a qualified
+        clinician.
+      </p>
+    </footer>
+  </main>
+
+  <!--
+    Classic <script> tags (no `type="module"`) so the page works when opened
+    directly via file:// — browsers block ES-module imports from file:// for
+    CORS reasons, but allow ordered classic scripts. Each file attaches its
+    public symbols to `window.BirthControlAssessment`.
+  -->
+  <script src="js/types.js"></script>
+  <script src="js/flagged-issues.js"></script>
+  <script src="js/mec-rules.js"></script>
+  <script src="js/mec-grader.js"></script>
+  <script src="js/form-app.js"></script>
+</body>
+</html>

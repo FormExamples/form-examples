@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>UK Statement of Fitness for Work — Dashboard</title>
+  <meta name="description" content="Review dashboard for UK Statement of Fitness for Work (Med 3 / fit note) submissions: filter by recommendation, fitness category, and issuer profession; sortable table of cases.">
+  <link rel="stylesheet" href="css/dashboard.css">
+</head>
+<body>
+  <a class="skip-link" href="#fit-notes-table">Skip to fit notes table</a>
+
+  <header class="page-header">
+    <div class="page-header-inner">
+      <h1>UK Statement of Fitness for Work — Dashboard</h1>
+      <p class="subtitle">
+        Review completed Med 3 fit notes by recommendation, fitness category,
+        adaptation intensity, period compliance, and safety flags.
+      </p>
+    </div>
+  </header>
+
+  <main>
+    <!-- Status banner: shown when backend fetch fails and we fall back. -->
+    <div
+      id="status-banner"
+      class="alert" data-type="warning"
+      role="status"
+      aria-live="polite"
+      hidden
+    ></div>
+
+    <!-- Summary statistics -->
+    <section
+      class="summary-section"
+      aria-labelledby="summary-heading"
+    >
+      <h2 id="summary-heading" class="visually-hidden">Summary statistics</h2>
+
+      <div class="summary-grid">
+        <div class="summary-card summary-card-total">
+          <span class="summary-card-label">Total fit notes</span>
+          <span class="summary-card-value" id="summary-total">0</span>
+        </div>
+
+        <div class="summary-card">
+          <span class="summary-card-label">May be fit</span>
+          <span class="summary-card-value" id="summary-may-be-fit">0</span>
+        </div>
+
+        <div class="summary-card">
+          <span class="summary-card-label">Not fit</span>
+          <span class="summary-card-value" id="summary-not-fit">0</span>
+        </div>
+
+        <div class="summary-card recommendation-standard">
+          <span class="summary-card-label">Standard</span>
+          <span class="summary-card-value" id="summary-rec-standard">0</span>
+        </div>
+
+        <div class="summary-card recommendation-refer_occupational_health">
+          <span class="summary-card-label">Refer to OH</span>
+          <span class="summary-card-value" id="summary-rec-oh">0</span>
+        </div>
+
+        <div class="summary-card recommendation-refer_access_to_work">
+          <span class="summary-card-label">Access to Work</span>
+          <span class="summary-card-value" id="summary-rec-atw">0</span>
+        </div>
+
+        <div class="summary-card recommendation-refer_employment_advisor">
+          <span class="summary-card-label">Employment advisor</span>
+          <span class="summary-card-value" id="summary-rec-ea">0</span>
+        </div>
+
+        <div class="summary-card recommendation-review_for_validity">
+          <span class="summary-card-label">Review for validity</span>
+          <span class="summary-card-value" id="summary-rec-review">0</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- Filter bar -->
+    <section
+      class="filter-bar"
+      aria-labelledby="filter-bar-heading"
+    >
+      <h2 id="filter-bar-heading" class="visually-hidden">Filters</h2>
+
+      <div class="filter-grid">
+        <div class="filter-field filter-field-search">
+          <label for="filter-search">Search</label>
+          <input
+            id="filter-search"
+            type="search"
+            class="text-input"
+            placeholder="Patient name, NHS number, profession, diagnosis..."
+            autocomplete="off"
+          >
+        </div>
+
+        <div class="filter-field">
+          <label for="filter-recommendation">Recommendation</label>
+          <select id="filter-recommendation" class="select">
+            <option value="">All recommendations</option>
+            <option value="standard">Standard</option>
+            <option value="refer_occupational_health">Refer to occupational health</option>
+            <option value="refer_access_to_work">Refer to Access to Work</option>
+            <option value="refer_employment_advisor">Refer to employment advisor</option>
+            <option value="review_for_validity">Review for validity</option>
+          </select>
+        </div>
+
+        <div class="filter-field">
+          <label for="filter-fitness">Fitness category</label>
+          <select id="filter-fitness" class="select">
+            <option value="">All categories</option>
+            <option value="may_be_fit">May be fit</option>
+            <option value="not_fit">Not fit</option>
+          </select>
+        </div>
+
+        <div class="filter-field">
+          <label for="filter-profession">Issuer profession</label>
+          <select id="filter-profession" class="select">
+            <option value="">All professions</option>
+            <option value="doctor">Doctor</option>
+            <option value="nurse">Nurse</option>
+            <option value="occupational_therapist">Occupational therapist</option>
+            <option value="pharmacist">Pharmacist</option>
+            <option value="physiotherapist">Physiotherapist</option>
+          </select>
+        </div>
+
+        <div class="filter-field filter-field-actions">
+          <button
+            type="button"
+            id="filter-clear-btn"
+            class="button" data-variant="secondary"
+            hidden
+          >
+            Clear filters
+          </button>
+        </div>
+      </div>
+
+      <div class="filter-summary">
+        <span id="filter-count">Loading fit notes...</span>
+      </div>
+    </section>
+
+    <!-- Fit notes table -->
+    <section
+      class="table-card"
+      aria-labelledby="fit-notes-table-heading"
+    >
+      <h2 id="fit-notes-table-heading" class="visually-hidden">Fit notes</h2>
+
+      <div class="table-scroll">
+        <table id="fit-notes-table" class="fit-notes-table">
+          <thead>
+            <tr id="fit-notes-table-head">
+              <!-- Sortable column headers built by app.js -->
+            </tr>
+          </thead>
+          <tbody id="fit-notes-table-body">
+            <!-- Data rows built by app.js -->
+          </tbody>
+        </table>
+      </div>
+
+      <p
+        id="fit-notes-empty-message"
+        class="empty-message"
+        hidden
+      >
+        No fit notes match the current filters.
+      </p>
+    </section>
+
+    <footer class="page-footer">
+      <p>
+        Recommendations are advisory clinical decision support based on DWP
+        policy 3.x and the rule-based grading engine. The final clinical
+        judgement remains the responsibility of the signing healthcare
+        professional. The fit note is the statutory Med 3 form under the
+        Social Security (Medical Evidence) Regulations.
+      </p>
+    </footer>
+  </main>
+
+  <!--
+    Classic <script> tags (no `type="module"`) so the page works when opened
+    directly via file:// — browsers block ES-module imports from file:// for
+    CORS reasons, but allow ordered classic scripts. Each file attaches its
+    public symbols to `window.UkFitNoteDashboard`.
+
+    Load order: sample-data -> app.
+  -->
+  <script src="js/sample-data.js"></script>
+  <script src="js/dashboard-app.js"></script>
+</body>
+</html>

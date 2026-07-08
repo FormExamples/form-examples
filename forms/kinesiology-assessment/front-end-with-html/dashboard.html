@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Kinesiology Assessment — clinician dashboard</title>
+  <meta name="description" content="FMS (Functional Movement Screen) clinician dashboard: review patient submissions with FMS total, risk band, painful tests, and asymmetric tests.">
+  <link rel="stylesheet" href="css/dashboard.css">
+</head>
+<body>
+  <a class="skip-link" href="#patients-table">Skip to patients table</a>
+
+  <header class="page-header">
+    <div class="page-header-inner">
+      <h1>Kinesiology Assessment — Clinician Dashboard</h1>
+      <p class="subtitle">
+        FMS (Functional Movement Screen) patient list with total score,
+        injury-risk band, and pain / asymmetry safety flags.
+      </p>
+    </div>
+  </header>
+
+  <main>
+    <!-- Status banner: shown when backend fetch fails and we fall back -->
+    <div
+      id="status-banner"
+      class="alert" data-type="warning"
+      role="status"
+      aria-live="polite"
+      hidden
+    ></div>
+
+    <!-- Filter bar -->
+    <section
+      class="filter-bar"
+      aria-labelledby="filter-bar-heading"
+    >
+      <h2 id="filter-bar-heading" class="visually-hidden">Filters</h2>
+
+      <div class="filter-grid">
+        <div class="filter-field filter-field-search">
+          <label for="filter-search">Search</label>
+          <input
+            id="filter-search"
+            type="search"
+            class="text-input"
+            placeholder="NHS number, patient name, or occupation..."
+            autocomplete="off"
+          >
+        </div>
+
+        <div class="filter-field">
+          <label for="filter-risk-band">Risk Band</label>
+          <select id="filter-risk-band" class="select">
+            <option value="">All risk bands</option>
+            <option value="low-risk">Low risk</option>
+            <option value="at-risk">At risk</option>
+          </select>
+        </div>
+
+        <div class="filter-field">
+          <label for="filter-pain">Painful Tests</label>
+          <select id="filter-pain" class="select">
+            <option value="">All</option>
+            <option value="yes">Any pain reported</option>
+            <option value="no">No pain reported</option>
+          </select>
+        </div>
+
+        <div class="filter-field">
+          <label for="filter-asymmetry">Asymmetric Tests</label>
+          <select id="filter-asymmetry" class="select">
+            <option value="">All</option>
+            <option value="yes">Any asymmetry</option>
+            <option value="no">No asymmetry</option>
+          </select>
+        </div>
+
+        <div class="filter-field filter-field-actions">
+          <button
+            type="button"
+            id="filter-clear-btn"
+            class="button" data-variant="secondary"
+            hidden
+          >
+            Clear filters
+          </button>
+        </div>
+      </div>
+
+      <div class="filter-summary">
+        <span id="filter-count">Loading patients...</span>
+      </div>
+    </section>
+
+    <!-- Patients table -->
+    <section
+      class="table-card"
+      aria-labelledby="patients-table-heading"
+    >
+      <h2 id="patients-table-heading" class="visually-hidden">Patients</h2>
+
+      <div class="table-scroll">
+        <table id="patients-table" class="patients-table">
+          <thead>
+            <tr id="patients-table-head">
+              <!-- Sortable column headers built by app.js -->
+            </tr>
+          </thead>
+          <tbody id="patients-table-body">
+            <!-- Data rows built by app.js -->
+          </tbody>
+        </table>
+      </div>
+
+      <p
+        id="patients-empty-message"
+        class="empty-message"
+        hidden
+      >
+        No patients match the current filters.
+      </p>
+    </section>
+
+    <footer class="page-footer">
+      <p>
+        FMS (Functional Movement Screen) is a screening instrument that
+        scores 7 movement patterns from 0 to 3, for a total of 0-21. A
+        total of 14 or below is widely associated with increased injury
+        risk. This dashboard is a clinical-review tool and is not a
+        diagnosis.
+      </p>
+    </footer>
+  </main>
+
+  <!--
+    Classic <script> tags (no `type="module"`) so the page works when opened
+    directly via file:// — browsers block ES-module imports from file:// for
+    CORS reasons, but allow ordered classic scripts. Each file attaches its
+    public symbols to `window.KinesiologyAssessmentDashboard`.
+
+    Load order: types -> data -> api -> app (each depends on those above).
+  -->
+  <script src="js/dashboard-types.js"></script>
+  <script src="js/data.js"></script>
+  <script src="js/api.js"></script>
+  <script src="js/dashboard-app.js"></script>
+</body>
+</html>

@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Agile Checklist — questionnaire</title>
+  <meta name="description" content="5-step single-page wizard auditing 57 agile behaviours across Teams, Stakeholders, and Practices, with composite maturity, fired rules, and operational flags." />
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+  <a class="skip-link visually-hidden" href="#form-sections">Skip to questionnaire</a>
+
+  <header class="page-header">
+    <div class="page-header-inner">
+      <h1>Agile Checklist</h1>
+      <p class="subtitle">57 concrete behaviours across Teams, Stakeholders, and Practices — composite maturity level and coaching action plan.</p>
+
+      <progress
+        id="progress"
+        class="progress"
+        max="100"
+        value="0"
+        aria-label="Form completion"
+      ></progress>
+      <p id="progress-text" class="subtitle" aria-live="polite">0 of 57 items answered (0%)</p>
+      <p id="saved-indicator" class="subtitle" role="status" aria-live="polite"></p>
+
+      <ol
+        id="step-list"
+        class="step-list"
+        aria-label="Agile checklist steps"
+        data-current="0"
+      ><!-- step-list-items injected by js/form-app.js --></ol>
+    </div>
+  </header>
+
+  <main>
+    <div id="draft-banner" class="alert" data-type="info" role="status" hidden>
+      <p><strong>Draft restored.</strong> A previous in-progress checklist was loaded from this browser.</p>
+      <div class="button-group">
+        <button type="button" id="draft-keep" class="button">Keep editing</button>
+        <button type="button" id="draft-discard" class="button" data-variant="danger">Discard draft</button>
+      </div>
+    </div>
+
+    <div class="intro">
+      <p>
+        Audit your team or organisation against 57 concrete agile behaviours
+        grouped in three sections — Teams, Stakeholders, and Practices.
+        Answer each item <strong>Yes</strong>, <strong>No</strong>, or
+        <strong>N/A</strong>. Answer at least 30 items for a composite-maturity
+        result.
+      </p>
+      <p>
+        The tool computes a per-section percentage of "yes" answers (N/A items
+        are excluded from the denominator), an overall maturity level
+        (Optimising, Mature, Developing, Initial, or Ad-hoc), per-section
+        coaching rules, and operational flags such as finished-work risk,
+        experimentation-blocked, and psychological-safety risk. Everything
+        runs client-side; nothing is sent to a server from this static page.
+      </p>
+    </div>
+
+    <form
+      id="assessment-form"
+      class="form"
+      autocomplete="off"
+      novalidate
+      onsubmit="return false;"
+      aria-label="Agile checklist"
+    >
+      <div
+        id="error-summary"
+        class="error-summary"
+        role="alert"
+        aria-label="Validation errors"
+        hidden
+      ></div>
+
+      <div id="form-sections">
+        <!-- Sections rendered by js/form-app.js as <fieldset class="fieldset"> nodes: -->
+        <!-- 1 Respondent, 2 Teams (25 items), 3 Stakeholders (14 items), -->
+        <!-- 4 Practices (18 items), 5 Summary and action plan -->
+      </div>
+
+      <div class="button-group">
+        <button type="button" id="submit-btn" class="button" data-variant="primary">
+          Generate report
+        </button>
+        <button type="button" id="reset-btn" class="button" data-variant="secondary">
+          Start over
+        </button>
+      </div>
+    </form>
+
+    <section
+      id="report"
+      class="panel"
+      role="region"
+      aria-live="polite"
+      aria-label="Checklist report"
+    >
+      <p class="empty-message">Submit the form to see the report.</p>
+    </section>
+
+    <footer class="page-footer">
+      <p>
+        Companion form to the Agile Principles Assessment. This checklist
+        measures observable behaviour; the principles assessment measures
+        intent and belief. Treat both as inputs to coaching conversations
+        rather than a final verdict.
+      </p>
+    </footer>
+  </main>
+
+  <!--
+    Classic <script> tags so the page works under file://. Each script
+    attaches its public symbols to window.AgileChecklist.
+  -->
+  <script src="js/items.js"></script>
+  <script src="js/engine.js"></script>
+  <script src="js/form-app.js"></script>
+</body>
+</html>

@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>First Aid Training Checklist — training coordinator dashboard</title>
+  <meta name="description" content="UK HSE First Aid at Work (FAW) training coordinator dashboard: review trainee Pass / Needs Development / Fail outcomes, certification currency, workplace role, and training centre.">
+  <link rel="stylesheet" href="css/dashboard.css">
+</head>
+<body>
+  <a class="skip-link visually-hidden" href="#trainees-table">Skip to trainees table</a>
+
+  <header class="page-header">
+    <div class="page-header-inner">
+      <h1>First Aid Training Checklist — Training Coordinator Dashboard</h1>
+      <p class="subtitle">
+        UK HSE First Aid at Work (FAW) trainee list with
+        Pass / Needs Development / Fail outcome and certification currency.
+      </p>
+    </div>
+  </header>
+
+  <main>
+    <!-- Status banner: shown when backend fetch fails and we fall back -->
+    <div
+      id="status-banner"
+      class="alert"
+      data-type="warning"
+      role="status"
+      aria-live="polite"
+      hidden
+    ></div>
+
+    <!-- Filter bar -->
+    <section
+      class="filter-bar"
+      aria-labelledby="filter-bar-heading"
+    >
+      <h2 id="filter-bar-heading" class="visually-hidden">Filters</h2>
+
+      <div class="filter-grid">
+        <div class="filter-field filter-field-search field">
+          <label class="label" for="filter-search">Search</label>
+          <input
+            id="filter-search"
+            type="search"
+            class="search-input"
+            placeholder="Trainee name, ID, training centre, or assessor..."
+            autocomplete="off"
+          >
+        </div>
+
+        <div class="filter-field field">
+          <label class="label" for="filter-outcome">Outcome</label>
+          <select id="filter-outcome" class="select">
+            <option value="">All outcomes</option>
+            <option value="Pass">Pass</option>
+            <option value="Needs Development">Needs Development</option>
+            <option value="Fail">Fail</option>
+          </select>
+        </div>
+
+        <div class="filter-field field">
+          <label class="label" for="filter-role">Workplace Role</label>
+          <select id="filter-role" class="select">
+            <option value="">All roles</option>
+            <option value="Designated First Aider">Designated First Aider</option>
+            <option value="Manager">Manager</option>
+            <option value="Lifeguard">Lifeguard</option>
+            <option value="School Teacher">School Teacher</option>
+            <option value="Security Officer">Security Officer</option>
+            <option value="Hotel Staff">Hotel Staff</option>
+            <option value="Factory Worker">Factory Worker</option>
+            <option value="NHS Reception">NHS Reception</option>
+          </select>
+        </div>
+
+        <div class="filter-field field">
+          <label class="label" for="filter-currency">Certification</label>
+          <select id="filter-currency" class="select">
+            <option value="">All certifications</option>
+            <option value="Current">Current</option>
+            <option value="Expiring Soon">Expiring Soon</option>
+            <option value="Expired">Expired</option>
+          </select>
+        </div>
+
+        <div class="filter-field field">
+          <label class="label" for="filter-centre">Training Centre</label>
+          <select id="filter-centre" class="select">
+            <option value="">All training centres</option>
+            <!-- Centre options populated by app.js -->
+          </select>
+        </div>
+
+        <div class="filter-field filter-field-actions">
+          <button
+            type="button"
+            id="filter-clear-btn"
+            class="button"
+            data-variant="secondary"
+            hidden
+          >
+            Clear filters
+          </button>
+        </div>
+      </div>
+
+      <div class="filter-summary">
+        <span id="filter-count">Loading trainees...</span>
+      </div>
+    </section>
+
+    <!-- Trainees table -->
+    <section
+      class="table-card"
+      aria-labelledby="trainees-table-heading"
+    >
+      <h2 id="trainees-table-heading" class="visually-hidden">Trainees</h2>
+
+      <div class="table-scroll">
+        <table id="trainees-table" class="data-table">
+          <thead class="data-table-head">
+            <tr id="trainees-table-head" class="data-table-row">
+              <!-- Sortable column headers built by app.js -->
+            </tr>
+          </thead>
+          <tbody id="trainees-table-body" class="data-table-body">
+            <!-- Data rows built by app.js -->
+          </tbody>
+        </table>
+      </div>
+
+      <p
+        id="trainees-empty-message"
+        class="empty-message"
+        hidden
+      >
+        No trainees match the current filters.
+      </p>
+    </section>
+
+    <footer class="page-footer">
+      <p>
+        UK HSE First Aid at Work (FAW) is a workplace competency assessment
+        used by approved training providers to verify scene assessment,
+        primary survey (DRABC), CPR/AED, choking, bleeding, burns,
+        fractures, medical emergencies, and handover skills. This dashboard
+        is a training-administration tool and is not a clinical record.
+        Standard certification validity is three years.
+      </p>
+    </footer>
+  </main>
+
+  <!--
+    Classic <script> tags (no `type="module"`) so the page works when opened
+    directly via file:// — browsers block ES-module imports from file:// for
+    CORS reasons, but allow ordered classic scripts. Each file attaches its
+    public symbols to `window.FirstAidTrainingChecklistDashboard`.
+
+    Load order: types -> data -> api -> app (each depends on those above).
+  -->
+  <script src="js/dashboard-types.js"></script>
+  <script src="js/data.js"></script>
+  <script src="js/api.js"></script>
+  <script src="js/dashboard-app.js"></script>
+</body>
+</html>

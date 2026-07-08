@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Genetic Assessment — clinician dashboard</title>
+  <meta name="description" content="Clinical genetics referral dashboard: review proband submissions with risk stratification, presenting concern, family-history counts, Manchester score, and recommended pathway.">
+  <link rel="stylesheet" href="css/dashboard.css">
+</head>
+<body>
+  <a class="skip-link" href="#patients-table">Skip to patients table</a>
+
+  <header class="page-header">
+    <div class="page-header-inner">
+      <h1>Genetic Assessment — Clinician Dashboard</h1>
+      <p class="subtitle">
+        Clinical genetics referral list with risk stratification (Low /
+        Moderate / High), presenting concern, family-history counts,
+        Manchester score for BRCA, and recommended pathway.
+      </p>
+    </div>
+  </header>
+
+  <main>
+    <!-- Status banner: shown when backend fetch fails and we fall back -->
+    <div
+      id="status-banner"
+      class="alert" data-type="warning"
+      role="status"
+      aria-live="polite"
+      hidden
+    ></div>
+
+    <!-- Filter bar -->
+    <section
+      class="filter-bar"
+      aria-labelledby="filter-bar-heading"
+    >
+      <h2 id="filter-bar-heading" class="visually-hidden">Filters</h2>
+
+      <div class="filter-grid">
+        <div class="filter-field filter-field-search">
+          <label for="filter-search">Search</label>
+          <input
+            id="filter-search"
+            type="search"
+            class="text-input"
+            placeholder="NHS number or patient name..."
+            autocomplete="off"
+          >
+        </div>
+
+        <div class="filter-field">
+          <label for="filter-risk">Risk Level</label>
+          <select id="filter-risk" class="select">
+            <option value="">All risk levels</option>
+            <option value="Low">Low</option>
+            <option value="Moderate">Moderate</option>
+            <option value="High">High</option>
+          </select>
+        </div>
+
+        <div class="filter-field">
+          <label for="filter-concern">Presenting Concern</label>
+          <select id="filter-concern" class="select">
+            <option value="">All concerns</option>
+            <option value="Breast/Ovarian Cancer">Breast/Ovarian Cancer</option>
+            <option value="Colorectal/Lynch">Colorectal/Lynch</option>
+            <option value="Cardiovascular">Cardiovascular</option>
+            <option value="Neurological">Neurological</option>
+            <option value="Paediatric">Paediatric</option>
+            <option value="Reproductive">Reproductive</option>
+          </select>
+        </div>
+
+        <div class="filter-field">
+          <label for="filter-recommendation">Recommendation</label>
+          <select id="filter-recommendation" class="select">
+            <option value="">All recommendations</option>
+            <option value="Routine follow-up">Routine follow-up</option>
+            <option value="Genetic counselling">Genetic counselling</option>
+            <option value="Urgent counselling">Urgent counselling</option>
+            <option value="Panel testing">Panel testing</option>
+            <option value="Predictive testing">Predictive testing</option>
+          </select>
+        </div>
+
+        <div class="filter-field filter-field-actions">
+          <button
+            type="button"
+            id="filter-clear-btn"
+            class="button" data-variant="secondary"
+            hidden
+          >
+            Clear filters
+          </button>
+        </div>
+      </div>
+
+      <div class="filter-summary">
+        <span id="filter-count">Loading patients...</span>
+      </div>
+    </section>
+
+    <!-- Patients table -->
+    <section
+      class="table-card"
+      aria-labelledby="patients-table-heading"
+    >
+      <h2 id="patients-table-heading" class="visually-hidden">Patients</h2>
+
+      <div class="table-scroll">
+        <table id="patients-table" class="patients-table">
+          <thead>
+            <tr id="patients-table-head">
+              <!-- Sortable column headers built by app.js -->
+            </tr>
+          </thead>
+          <tbody id="patients-table-body">
+            <!-- Data rows built by app.js -->
+          </tbody>
+        </table>
+      </div>
+
+      <p
+        id="patients-empty-message"
+        class="empty-message"
+        hidden
+      >
+        No patients match the current filters.
+      </p>
+    </section>
+
+    <footer class="page-footer">
+      <p>
+        Risk stratification combines weighted factor scoring with validated
+        instruments (Manchester Score for BRCA, Bethesda criteria for Lynch,
+        Tyrer-Cuzick, PREMM5). This dashboard is a clinical-review tool and
+        is not a diagnosis.
+      </p>
+    </footer>
+  </main>
+
+  <!--
+    Classic <script> tags (no `type="module"`) so the page works when opened
+    directly via file:// — browsers block ES-module imports from file:// for
+    CORS reasons, but allow ordered classic scripts. Each file attaches its
+    public symbols to `window.GeneticAssessmentDashboard`.
+
+    Load order: types -> data -> api -> app (each depends on those above).
+  -->
+  <script src="js/dashboard-types.js"></script>
+  <script src="js/data.js"></script>
+  <script src="js/api.js"></script>
+  <script src="js/dashboard-app.js"></script>
+</body>
+</html>

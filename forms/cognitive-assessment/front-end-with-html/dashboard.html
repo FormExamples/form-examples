@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Cognitive Assessment — clinician dashboard</title>
+  <meta name="description" content="MMSE (Mini-Mental State Examination) clinician dashboard: review patient submissions with MMSE score, cognitive level, age group, and referral source.">
+  <link rel="stylesheet" href="css/dashboard.css">
+</head>
+<body>
+  <a class="skip-link" href="#patients-table">Skip to patients table</a>
+
+  <header class="page-header">
+    <div class="page-header-inner">
+      <h1>Cognitive Assessment — Clinician Dashboard</h1>
+      <p class="subtitle">
+        MMSE (Mini-Mental State Examination) patient list with cognitive
+        level, age group, and referral source.
+      </p>
+    </div>
+  </header>
+
+  <main>
+    <!-- Status banner: shown when backend fetch fails and we fall back -->
+    <div
+      id="status-banner"
+      class="alert" data-type="warning"
+      role="status"
+      aria-live="polite"
+      hidden
+    ></div>
+
+    <!-- Filter bar -->
+    <section
+      class="filter-bar"
+      aria-labelledby="filter-bar-heading"
+    >
+      <h2 id="filter-bar-heading" class="visually-hidden">Filters</h2>
+
+      <div class="filter-grid">
+        <div class="filter-field filter-field-search">
+          <label for="filter-search">Search</label>
+          <input
+            id="filter-search"
+            type="search"
+            class="text-input"
+            placeholder="NHS number, name, or cognitive level..."
+            autocomplete="off"
+          >
+        </div>
+
+        <div class="filter-field">
+          <label for="filter-mmse">MMSE Score</label>
+          <select id="filter-mmse" class="select">
+            <option value="">All MMSE scores</option>
+            <option value="24-30">Normal (24-30)</option>
+            <option value="18-23">Mild (18-23)</option>
+            <option value="10-17">Moderate (10-17)</option>
+            <option value="0-9">Severe (0-9)</option>
+          </select>
+        </div>
+
+        <div class="filter-field">
+          <label for="filter-cognitive">Cognitive Level</label>
+          <select id="filter-cognitive" class="select">
+            <option value="">All levels</option>
+            <option value="Normal cognition">Normal cognition</option>
+            <option value="Mild cognitive impairment">Mild cognitive impairment</option>
+            <option value="Moderate cognitive impairment">Moderate cognitive impairment</option>
+            <option value="Severe cognitive impairment">Severe cognitive impairment</option>
+          </select>
+        </div>
+
+        <div class="filter-field">
+          <label for="filter-age">Age Group</label>
+          <select id="filter-age" class="select">
+            <option value="">All age groups</option>
+            <option value="55-64">55-64</option>
+            <option value="65-74">65-74</option>
+            <option value="75-84">75-84</option>
+            <option value="85+">85+</option>
+          </select>
+        </div>
+
+        <div class="filter-field">
+          <label for="filter-referral">Referral Source</label>
+          <select id="filter-referral" class="select">
+            <option value="">All referral sources</option>
+            <option value="GP">GP</option>
+            <option value="Neurologist">Neurologist</option>
+            <option value="Psychiatrist">Psychiatrist</option>
+            <option value="Geriatrician">Geriatrician</option>
+            <option value="Self">Self</option>
+            <option value="Family">Family</option>
+          </select>
+        </div>
+
+        <div class="filter-field filter-field-actions">
+          <button
+            type="button"
+            id="filter-clear-btn"
+            class="button" data-variant="secondary"
+            hidden
+          >
+            Clear filters
+          </button>
+        </div>
+      </div>
+
+      <div class="filter-summary">
+        <span id="filter-count">Loading patients...</span>
+      </div>
+    </section>
+
+    <!-- Patients table -->
+    <section
+      class="table-card"
+      aria-labelledby="patients-table-heading"
+    >
+      <h2 id="patients-table-heading" class="visually-hidden">Patients</h2>
+
+      <div class="table-scroll">
+        <table id="patients-table" class="patients-table">
+          <thead>
+            <tr id="patients-table-head">
+              <!-- Sortable column headers built by app.js -->
+            </tr>
+          </thead>
+          <tbody id="patients-table-body">
+            <!-- Data rows built by app.js -->
+          </tbody>
+        </table>
+      </div>
+
+      <p
+        id="patients-empty-message"
+        class="empty-message"
+        hidden
+      >
+        No patients match the current filters.
+      </p>
+    </section>
+
+    <footer class="page-footer">
+      <p>
+        MMSE (Mini-Mental State Examination) is a validated screening
+        instrument for assessing cognitive function. This dashboard is a
+        clinical-review tool and is not a diagnosis.
+      </p>
+    </footer>
+  </main>
+
+  <!--
+    Classic <script> tags (no `type="module"`) so the page works when opened
+    directly via file:// — browsers block ES-module imports from file:// for
+    CORS reasons, but allow ordered classic scripts. Each file attaches its
+    public symbols to `window.CognitiveAssessmentDashboard`.
+
+    Load order: types -> data -> api -> app (each depends on those above).
+  -->
+  <script src="js/dashboard-types.js"></script>
+  <script src="js/data.js"></script>
+  <script src="js/api.js"></script>
+  <script src="js/dashboard-app.js"></script>
+</body>
+</html>

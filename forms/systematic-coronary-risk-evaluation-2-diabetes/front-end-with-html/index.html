@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>SCORE2-Diabetes Assessment — clinician questionnaire</title>
+  <meta name="description" content="SCORE2-Diabetes 10-year cardiovascular disease risk assessment for adults with type 2 diabetes.">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <a class="skip-link visually-hidden" href="#form-sections">Skip to questionnaire</a>
+
+  <header class="page-header">
+    <div class="page-header-inner">
+      <h1>SCORE2-Diabetes Assessment</h1>
+      <p class="subtitle">10-year CVD risk assessment for adults with type 2 diabetes (ESC 2023).</p>
+
+      <progress
+        id="progress"
+        class="progress"
+        max="100"
+        value="0"
+        aria-label="Form completion"
+      ></progress>
+      <p id="progress-text" class="subtitle" aria-live="polite">0 fields answered (0%)</p>
+
+      <ol
+        id="step-list"
+        class="step-list"
+        aria-label="SCORE2-Diabetes assessment steps"
+        data-current="0"
+      ><!-- step-list-items injected by js/form-app.js --></ol>
+    </div>
+  </header>
+
+  <main>
+    <div class="intro">
+      <p>
+        This 10-step questionnaire collects the data needed to estimate
+        10-year cardiovascular disease risk in adults aged 40-69 with
+        type 2 diabetes and no prior CVD, using the ESC SCORE2-Diabetes
+        model. Sections include demographics, diabetes history,
+        cardiovascular history, blood pressure, lipid profile, renal
+        function, lifestyle, current medications, complications screening,
+        and a clinician summary. All answers are saved automatically in
+        your browser as you go.
+      </p>
+      <p>
+        For clinical use only. This screening tool is not a diagnosis;
+        always interpret in context with the full medical record.
+      </p>
+    </div>
+
+    <form
+      id="assessment-form"
+      class="form"
+      autocomplete="off"
+      novalidate
+      onsubmit="return false;"
+      aria-label="SCORE2-Diabetes assessment"
+    >
+      <div
+        id="error-summary"
+        class="error-summary"
+        role="alert"
+        aria-label="Validation errors"
+        hidden
+      ></div>
+
+      <div id="form-sections">
+        <!-- Sections rendered by js/form-app.js as <fieldset class="fieldset"> nodes: -->
+        <!-- 1 Patient Demographics, 2 Diabetes History, 3 Cardiovascular History, -->
+        <!-- 4 Blood Pressure, 5 Lipid Profile, 6 Renal Function, -->
+        <!-- 7 Lifestyle Factors, 8 Current Medications, -->
+        <!-- 9 Complications Screening, 10 Risk Assessment Summary -->
+      </div>
+
+      <div class="button-group">
+        <button
+          type="button"
+          id="submit-btn"
+          class="button"
+          data-variant="primary"
+        >
+          Submit and view report
+        </button>
+        <button
+          type="button"
+          id="reset-btn"
+          class="button"
+          data-variant="secondary"
+        >
+          Start over
+        </button>
+      </div>
+    </form>
+
+    <section
+      id="report"
+      class="panel"
+      role="region"
+      aria-live="polite"
+      aria-label="Assessment report"
+    >
+      <p class="empty-message">Submit the form to see the report.</p>
+    </section>
+
+    <footer class="page-footer">
+      <p>
+        SCORE2-Diabetes is the ESC 2023 risk model for predicting 10-year
+        fatal and non-fatal cardiovascular disease in adults aged 40-69
+        with type 2 diabetes and no prior CVD. Reference:
+        <a href="https://www.mdcalc.com/calc/10510/score2-diabetes">MDCalc — SCORE2-Diabetes</a>.
+        For clinical use only.
+      </p>
+    </footer>
+  </main>
+
+  <!--
+    Classic <script> tags (no `type="module"`) so the page works when opened
+    directly via file:// — browsers block ES-module imports from file:// for
+    CORS reasons, but allow ordered classic scripts. Each file attaches its
+    public symbols to `window.SystematicCoronaryRiskEvaluation2Diabetes`.
+  -->
+  <script src="js/types.js"></script>
+  <script src="js/utils.js"></script>
+  <script src="js/risk-rules.js"></script>
+  <script src="js/flagged-issues.js"></script>
+  <script src="js/risk-grader.js"></script>
+  <script src="js/form-app.js"></script>
+</body>
+</html>

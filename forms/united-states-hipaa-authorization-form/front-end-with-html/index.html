@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>US HIPAA Authorization — patient form</title>
+  <meta name="description" content="HIPAA Authorization for Release of Protected Health Information (PHI), modelled on Tennessee Department of Human Services HS-2557.">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <a class="skip-link visually-hidden" href="#form-sections">Skip to authorization form</a>
+
+  <header class="page-header">
+    <div class="page-header-inner">
+      <h1>HIPAA Authorization for Release of Protected Health Information</h1>
+      <p class="subtitle">9-step single-page authorization per 45 CFR &sect; 164.508.</p>
+
+      <progress
+        id="progress"
+        class="progress"
+        max="100"
+        value="0"
+        aria-label="Form completion"
+      ></progress>
+      <p id="progress-text" class="subtitle" aria-live="polite">0 fields answered (0%)</p>
+
+      <ol
+        id="step-list"
+        class="step-list"
+        aria-label="HIPAA authorization steps"
+        data-current="0"
+      ><!-- step-list-items injected by js/form-app.js --></ol>
+    </div>
+  </header>
+
+  <main>
+    <div class="intro">
+      <p>
+        This authorization permits a US health-care provider, health plan,
+        or other covered entity to use or disclose your Protected Health
+        Information for a stated purpose. <strong>You do not have to sign
+        this form.</strong> Your treatment, payment, and eligibility for
+        benefits may not be conditioned on your signing, with very narrow
+        exceptions. Your answers are saved automatically in your browser.
+      </p>
+    </div>
+
+    <form
+      id="assessment-form"
+      class="form"
+      autocomplete="off"
+      novalidate
+      onsubmit="return false;"
+      aria-label="HIPAA authorization"
+    >
+      <div
+        id="error-summary"
+        class="error-summary"
+        role="alert"
+        aria-label="Validation errors"
+        hidden
+      ></div>
+
+      <div id="form-sections">
+        <!-- Sections rendered by js/form-app.js as <fieldset class="fieldset"> nodes: -->
+        <!-- 1 Patient identification, 2 Signer identification, 3 Disclosing source, -->
+        <!-- 4 Authorized recipient, 5 Records to disclose, 6 Purpose of disclosure, -->
+        <!-- 7 Expiration, 8 Patient rights acknowledgements, 9 Signature, witness & date -->
+      </div>
+
+      <div class="button-group">
+        <button type="button" id="submit-btn" class="button" data-variant="primary">
+          Submit and view report
+        </button>
+        <button type="button" id="reset-btn" class="button" data-variant="secondary">
+          Start over
+        </button>
+      </div>
+    </form>
+
+    <section
+      id="report"
+      class="panel"
+      role="region"
+      aria-live="polite"
+      aria-label="Authorization report"
+    >
+      <p class="empty-message">Submit the form to see the report.</p>
+    </section>
+
+    <footer class="page-footer">
+      <p>
+        HIPAA Privacy Rule (45 CFR &sect; 164.508) governs authorization
+        content. Substance-use disorder records (42 CFR Part 2),
+        HIV/AIDS records, mental-health records, and psychotherapy notes
+        require additional, segregated authorization. Your answers stay
+        in your browser only until you start over.
+      </p>
+    </footer>
+  </main>
+
+  <script type="module" src="js/form-app.js"></script>
+</body>
+</html>

@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>International Patient Summary — clinician questionnaire</title>
+  <meta name="description" content="International Patient Summary (IPS) — ISO 27269 / HL7 FHIR R5 IPS completeness validation form for cross-border and unplanned care.">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <a class="skip-link visually-hidden" href="#form-sections">Skip to questionnaire</a>
+
+  <header class="page-header">
+    <div class="page-header-inner">
+      <h1>International Patient Summary</h1>
+      <p class="subtitle">ISO 27269 / HL7 FHIR R5 IPS completeness validation.</p>
+
+      <progress
+        id="progress"
+        class="progress"
+        max="100"
+        value="0"
+        aria-label="Form completion"
+      ></progress>
+      <p id="progress-text" class="subtitle" aria-live="polite">0 fields answered (0%)</p>
+
+      <ol
+        id="step-list"
+        class="step-list"
+        aria-label="IPS sections"
+        data-current="0"
+      ><!-- step-list-items injected by js/form-app.js --></ol>
+    </div>
+  </header>
+
+  <main>
+    <div class="intro">
+      <p>
+        Compile an International Patient Summary (IPS): the minimal,
+        specialty-agnostic, cross-border-ready record of the patient's
+        core clinical facts. The eight mandatory sections — problems,
+        medications, allergies, immunisations, procedures, results,
+        patient demographics, and the authoring clinician — must each
+        be populated for a complete IPS. All entries are saved
+        automatically in your browser as you go.
+      </p>
+      <p>
+        This form is for documentation only and does not replace
+        clinical judgement; verify and reconcile records with the
+        patient and with primary-source data before signoff.
+      </p>
+    </div>
+
+    <form
+      id="assessment-form"
+      class="form"
+      autocomplete="off"
+      novalidate
+      onsubmit="return false;"
+      aria-label="International Patient Summary"
+    >
+      <div
+        id="error-summary"
+        class="error-summary"
+        role="alert"
+        aria-label="Validation errors"
+        hidden
+      ></div>
+
+      <div id="form-sections">
+        <!-- Sections rendered by js/form-app.js as <fieldset class="fieldset"> nodes: -->
+        <!-- 1 Patient Demographics, 2 Problem List, 3 Medication Summary, -->
+        <!-- 4 Allergies & Intolerances, 5 Immunisations, 6 Procedures, -->
+        <!-- 7 Results & Investigations, 8 Medical Devices / Implants, -->
+        <!-- 9 Advance Directives & Consent, 10 Authoring Clinician & Signoff -->
+      </div>
+
+      <div class="button-group">
+        <button type="button" id="submit-btn" class="button" data-variant="primary">
+          Validate and view report
+        </button>
+        <button type="button" id="reset-btn" class="button" data-variant="secondary">
+          Start over
+        </button>
+      </div>
+    </form>
+
+    <section
+      id="report"
+      class="panel"
+      role="region"
+      aria-live="polite"
+      aria-label="IPS validation report"
+    >
+      <p class="empty-message">Submit the form to see the IPS validation report.</p>
+    </section>
+
+    <footer class="page-footer">
+      <p>
+        The International Patient Summary (IPS) follows ISO 27269:2021
+        and the HL7 FHIR International Patient Summary Implementation
+        Guide (R4 and R5). It is intended for cross-border and
+        unplanned care and must be reconciled with primary-source
+        clinical records by an authoring clinician.
+      </p>
+    </footer>
+  </main>
+
+  <script src="js/types.js"></script>
+  <script src="js/validation-rules.js"></script>
+  <script src="js/ips-validator.js"></script>
+  <script src="js/flagged-issues.js"></script>
+  <script src="js/form-app.js"></script>
+</body>
+</html>

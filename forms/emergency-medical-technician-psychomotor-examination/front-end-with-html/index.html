@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Emergency Medical Technician Psychomotor Examination — examiner form</title>
+  <meta name="description" content="NREMT Psychomotor Skills Examination (Medical Patient) — examiner-completed checklist with point-based scoring and critical-criteria audit.">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <a class="skip-link visually-hidden" href="#form-sections">Skip to checklist</a>
+
+  <header class="page-header">
+    <div class="page-header-inner">
+      <h1>Emergency Medical Technician Psychomotor Examination</h1>
+      <p class="subtitle">NREMT Psychomotor Skills — Medical Patient assessment, examiner-completed.</p>
+
+      <progress
+        id="progress"
+        class="progress"
+        max="100"
+        value="0"
+        aria-label="Checklist completion"
+      ></progress>
+      <p id="progress-text" class="subtitle" aria-live="polite">0 items assessed (0%)</p>
+
+      <ol
+        id="step-list"
+        class="step-list"
+        aria-label="Psychomotor examination sections"
+        data-current="0"
+      ><!-- step-list-items injected by js/form-app.js --></ol>
+    </div>
+  </header>
+
+  <main>
+    <div class="intro">
+      <p>
+        Use this checklist while observing a candidate perform the NREMT
+        Psychomotor Skills Examination on a medical patient. For each
+        scored item, mark whether the candidate performed the action
+        correctly, did not perform it, or whether the item was not
+        applicable to this scenario. Critical criteria are highlighted
+        in red; <strong>any</strong> critical-criterion failure results
+        in an automatic <strong>Fail</strong>, regardless of point total.
+      </p>
+      <p>
+        Pass criterion: at least 80% of available points <em>and</em>
+        no critical-criterion failure. Answers are saved to your browser
+        as you go, so a partial fill survives a page reload.
+      </p>
+    </div>
+
+    <form
+      id="assessment-form"
+      class="form"
+      autocomplete="off"
+      novalidate
+      onsubmit="return false;"
+      aria-label="Psychomotor examination"
+    >
+      <div
+        id="error-summary"
+        class="error-summary"
+        role="alert"
+        aria-label="Validation errors"
+        hidden
+      ></div>
+
+      <div id="form-sections">
+        <!-- Sections rendered by js/form-app.js as <fieldset class="fieldset"> nodes: -->
+        <!-- 1 Candidate/Examiner/Scenario, 2 Scene Size-Up, -->
+        <!-- 3 Primary Survey, 4 History & Secondary Assessment, -->
+        <!-- 5 Reassessment, 6 Critical Criteria Review -->
+      </div>
+
+      <div class="button-group">
+        <button type="button" id="submit-btn" class="button" data-variant="primary">
+          Grade and view report
+        </button>
+        <button type="button" id="reset-btn" class="button" data-variant="secondary">
+          Start over
+        </button>
+      </div>
+    </form>
+
+    <section
+      id="report"
+      class="panel"
+      role="region"
+      aria-live="polite"
+      aria-label="Psychomotor examination report"
+    >
+      <p class="empty-message">Submit the form to see the report.</p>
+    </section>
+
+    <footer class="page-footer">
+      <p>
+        The NREMT Psychomotor Skills Examination is a competency-based
+        instrument used to certify Emergency Medical Technicians on
+        scene size-up, primary survey, history-taking, secondary
+        assessment, and reassessment. This examiner tool records
+        observed performance and applies NREMT pass/fail criteria; it
+        is not a substitute for the lead evaluator's professional
+        judgement.
+      </p>
+    </footer>
+  </main>
+
+  <!--
+    Classic <script> tags so the page works via file://. Each file
+    attaches its public symbols to
+    `window.EmergencyMedicalTechnicianPsychomotorExamination`.
+  -->
+  <script src="js/types.js"></script>
+  <script src="js/rules.js"></script>
+  <script src="js/psychomotor-grader.js"></script>
+  <script src="js/flagged-issues.js"></script>
+  <script src="js/form-app.js"></script>
+</body>
+</html>

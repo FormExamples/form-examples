@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Psychiatry Assessment — patient questionnaire</title>
+  <meta name="description" content="Comprehensive psychiatric evaluation with GAF (Global Assessment of Functioning) scoring, mental status examination, risk assessment, and capacity evaluation.">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <a class="skip-link visually-hidden" href="#form-sections">Skip to questionnaire</a>
+
+  <header class="page-header">
+    <div class="page-header-inner">
+      <h1>Psychiatry Assessment</h1>
+      <p class="subtitle">Global Assessment of Functioning (GAF) plus structured mental health history.</p>
+
+      <progress
+        id="progress"
+        class="progress"
+        max="100"
+        value="0"
+        aria-label="Form completion"
+      ></progress>
+      <p id="progress-text" class="subtitle" aria-live="polite">0 fields answered (0%)</p>
+
+      <ol
+        id="step-list"
+        class="step-list"
+        aria-label="Psychiatry Assessment steps"
+        data-current="0"
+      ><!-- step-list-items injected by js/form-app.js --></ol>
+    </div>
+  </header>
+
+  <main>
+    <div class="intro">
+      <p>
+        Please answer the questions below as accurately as you can. The form
+        covers your current concerns, psychiatric history, mental state,
+        risk factors, mood and anxiety, substance use, medications, medical
+        history, social circumstances, and capacity. All answers are saved
+        automatically in your browser as you go.
+      </p>
+      <p>
+        If you are in immediate danger or feel you might harm yourself or
+        someone else right now, please call your local emergency number or a
+        crisis helpline immediately. This form is not a substitute for
+        emergency care.
+      </p>
+    </div>
+
+    <form
+      id="assessment-form"
+      class="form"
+      autocomplete="off"
+      novalidate
+      onsubmit="return false;"
+      aria-label="Psychiatry Assessment"
+    >
+      <div
+        id="error-summary"
+        class="error-summary"
+        role="alert"
+        aria-label="Validation errors"
+        hidden
+      ></div>
+
+      <div id="form-sections">
+        <!-- Sections rendered by js/form-app.js as <fieldset class="fieldset"> nodes: -->
+        <!-- 1 Demographics, 2 Presenting Complaint, 3 Psychiatric History, -->
+        <!-- 4 Mental Status Exam, 5 Risk Assessment, 6 Mood & Anxiety, -->
+        <!-- 7 Substance Use, 8 Current Medications, 9 Medical History, -->
+        <!-- 10 Social History, 11 Capacity & Consent -->
+      </div>
+
+      <div class="button-group">
+        <button type="button" id="submit-btn" class="button" data-variant="primary">
+          Submit and view report
+        </button>
+        <button type="button" id="reset-btn" class="button" data-variant="secondary">
+          Start over
+        </button>
+      </div>
+    </form>
+
+    <section
+      id="report"
+      class="panel"
+      role="region"
+      aria-live="polite"
+      aria-label="Assessment report"
+    >
+      <p class="empty-message">Submit the form to see the report.</p>
+    </section>
+
+    <footer class="page-footer">
+      <p>
+        The Global Assessment of Functioning (GAF) Scale rates psychological,
+        social, and occupational functioning on a 1-100 continuum. This
+        screening tool is for information only and is not a diagnosis;
+        please discuss results with your clinician.
+      </p>
+    </footer>
+  </main>
+
+  <!--
+    Classic <script> tags (no `type="module"`) so the page works when opened
+    directly via file:// — browsers block ES-module imports from file:// for
+    CORS reasons, but allow ordered classic scripts. Each file attaches its
+    public symbols to `window.PsychiatryAssessment`.
+  -->
+  <script src="js/types.js"></script>
+  <script src="js/gaf-rules.js"></script>
+  <script src="js/gaf-grader.js"></script>
+  <script src="js/flagged-issues.js"></script>
+  <script src="js/form-app.js"></script>
+</body>
+</html>
