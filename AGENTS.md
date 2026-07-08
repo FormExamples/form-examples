@@ -90,8 +90,8 @@ forms/<slug>/
   protobuf/                                        # Protocol Buffers .proto schemas per SQL entity (generated)
   openapi/                                         # OpenAPI 3.1 .yaml specifications per SQL entity (generated)
   front-end-with-html/                             # Questionnaire + dashboard (HTML + Lily Design System; index.html + dashboard.html)
-  front-end-with-svelte/                           # Questionnaire + dashboard (SvelteKit + Lily; RESTful /<plural>/ list + /<plural>/[id] form)
-  back-end-with-loco/                              # Back-end Rust JSON API (axum + Loco; no Tera/HTMX/Alpine/CSS)
+  front-end-with-svelte/                           # Questionnaire + dashboard (SvelteKit + Lily); routes nested under src/routes/<form-kebab-case>/ (served at /<slug>/)
+  back-end-with-loco/                              # Back-end Rust JSON API (axum + Loco; no Tera/HTMX/Alpine/CSS); crate source under src/<form_snake_case>/
   back-end-with-loco-setup                         # Scaffold generator (executable shell script of `cargo loco generate scaffold --api` calls; generated)
 ```
 
