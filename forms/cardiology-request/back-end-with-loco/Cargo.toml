@@ -8,6 +8,9 @@ edition = "2024"
 publish = false
 default-run = "cardiology-request-loco-crate-cli"
 
+[lib]
+path = "src/cardiology_request/lib.rs"
+
 [workspace.dependencies]
 loco-rs = { version = "0.16", default-features = false, features = [
   "auth_jwt",
@@ -46,7 +49,7 @@ axum-prometheus = "0.7"
 
 [[bin]]
 name = "cardiology-request-loco-crate-cli"
-path = "src/bin/main.rs"
+path = "src/cardiology_request/bin/main.rs"
 required-features = []
 
 [dev-dependencies]
