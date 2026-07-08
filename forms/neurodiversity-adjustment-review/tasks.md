@@ -8,11 +8,14 @@
 - [x] Generated derivatives (XML, FHIR R5, protobuf, OpenAPI, Loco setup,
       examples, CHANGELOG, llms.txt).
 
+- [x] Build `front-end-with-html` (single-page wizard + dashboard + JS engine).
+- [x] Build `front-end-with-svelte` (RESTful list + form routes + TS engine).
+- [x] Build `back-end-with-loco` (Rust JSON API crate; relational per-table schema).
+
 ## Next
 
-- [ ] Build `front-end-with-html` (single-page wizard + dashboard + JS engine).
-- [ ] Build `front-end-with-svelte` (RESTful list + form routes + TS engine).
-- [ ] Build `back-end-with-loco` (Rust JSON API crate; relational per-table schema).
+- [ ] Nothing outstanding — form is complete across all stacks. Completes the
+      ACAS neurodiversity-adjustment trilogy (request / response / review).
 
 ## Notes
 
