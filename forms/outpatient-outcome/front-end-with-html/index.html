@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Outpatient Outcome Report — clinician wizard</title>
+  <meta name="description" content="Structured outpatient outcome report covering clinical outcome, PROMs (EQ-5D-5L, GRC, PROMIS Global Health), PREM (Friends & Family Test), and operational efficiency, with a four-domain composite grade (OOCG).">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <a class="skip-link visually-hidden" href="#form-sections">Skip to outcome report form</a>
+
+  <header class="page-header">
+    <div class="page-header-inner">
+      <h1>Outpatient Outcome Report</h1>
+      <p class="subtitle">Clinical outcome, PROMs, PREM, and operational efficiency with a four-domain composite grade (OOCG). The overall grade is the worst of the four domains.</p>
+      <p class="subtitle"><a href="dashboard.html">View the outcomes dashboard →</a></p>
+
+      <progress
+        id="progress"
+        class="progress"
+        max="100"
+        value="0"
+        aria-label="Form completion"
+      ></progress>
+      <p id="progress-text" class="subtitle" aria-live="polite">0 fields answered (0%)</p>
+
+      <ol
+        id="step-list"
+        class="step-list"
+        aria-label="Outpatient outcome report steps"
+        data-current="0"
+      ><!-- step-list-items injected by js/form-app.js --></ol>
+    </div>
+  </header>
+
+  <main>
+    <div class="intro">
+      <p>
+        Structured outpatient outcome report. Record patient and encounter
+        details, operational efficiency (referral-to-appointment wait time
+        against the service target and the NHS Attendance Outcome code), the
+        clinician-rated clinical outcome, three patient-reported outcome
+        measures (EQ-5D-5L before/after, Global Rating of Change, and PROMIS
+        Global Health v1.2), the Friends &amp; Family Test patient-experience
+        measure, a follow-up plan, and clinician sign-off. The engine grades
+        four domains (Clinical, PROM, PREM, Operational) A–E and takes the
+        overall Outpatient Outcome Composite Grade (OOCG) as the worst of the
+        four, plus a set of flagged issues.
+      </p>
+      <p>
+        This is clinical decision support. The final clinical judgement and
+        any onward action remain the responsibility of the reporting clinician.
+      </p>
+    </div>
+
+    <form
+      id="assessment-form"
+      class="form"
+      autocomplete="off"
+      novalidate
+      onsubmit="return false;"
+      aria-label="Outpatient outcome report"
+    >
+      <div
+        id="error-summary"
+        class="error-summary"
+        role="alert"
+        aria-label="Validation errors"
+        hidden
+      ></div>
+
+      <div id="form-sections">
+        <!-- Sections rendered by js/form-app.js as <fieldset class="fieldset"> nodes: -->
+        <!-- 1 Patient, 2 Encounter, 3 Operational, 4 Clinical, 5 EQ-5D-5L, -->
+        <!-- 6 GRC, 7 PROMIS, 8 FFT, 9 Follow-up, 10 Sign-off, 11 Review -->
+      </div>
+
+      <div class="button-group">
+        <button
+          type="button"
+          id="submit-btn"
+          class="button"
+          data-variant="primary"
+        >
+          Submit and view report
+        </button>
+        <button
+          type="button"
+          id="reset-btn"
+          class="button"
+          data-variant="secondary"
+        >
+          Start over
+        </button>
+      </div>
+    </form>
+
+    <section
+      id="report"
+      class="panel"
+      role="region"
+      aria-live="polite"
+      aria-label="Outcome report"
+    >
+      <p class="empty-message">Submit the form to see the outcome report.</p>
+    </section>
+
+    <footer class="page-footer">
+      <p>
+        The Outpatient Outcome Composite Grade (OOCG) is advisory clinical
+        decision support. EQ-5D-5L and PROMIS item wording is paraphrased and
+        their scoring is approximate — see doc/licensing.md; production systems
+        must use the licensed instruments and official scoring. The final
+        clinical judgement remains the responsibility of the reporting clinician.
+      </p>
+    </footer>
+  </main>
+
+  <!--
+    Classic <script> tags (no `type="module"`) so the page works when opened
+    directly via file:// — browsers block ES-module imports from file:// for
+    CORS reasons, but allow ordered classic scripts. Each file attaches its
+    public symbols to `window.OutpatientOutcome`. Whole-file IIFE wrappers keep
+    top-level locals out of the global scope.
+
+    Load order: types -> rules -> flags -> grader -> app.
+  -->
+  <script src="js/types.js"></script>
+  <script src="js/rules.js"></script>
+  <script src="js/flags.js"></script>
+  <script src="js/grader.js"></script>
+  <script src="js/form-app.js"></script>
+</body>
+</html>
