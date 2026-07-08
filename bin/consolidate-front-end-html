@@ -1,0 +1,97 @@
+#!/bin/sh
+# consolidate-html <slug> : merge legacy split HTML front-ends
+#   front-end-form-with-html/ + front-end-dashboard-with-html/
+# into the canonical consolidated front-end-with-html/ layout.
+#
+# Deterministic and git-aware (uses git mv). Refuses to run unless the two
+# legacy dirs exist and the canonical dir does not.
+set -eu
+
+slug="$1"
+top="$(git rev-parse --show-toplevel)"
+root="$top/forms/$slug"
+form="$root/front-end-form-with-html"
+dash="$root/front-end-dashboard-with-html"
+new="$root/front-end-with-html"
+
+test -d "$form" || { echo "SKIP $slug: no front-end-form-with-html"; exit 2; }
+test -d "$dash" || { echo "SKIP $slug: no front-end-dashboard-with-html"; exit 2; }
+test -d "$new" && { echo "SKIP $slug: front-end-with-html already exists"; exit 2; }
+
+# Title from the legacy form AGENTS.md heading: "# <Title> — ..."
+title="$(sed -n '1s/^# //; 1s/ — .*//p' "$form/AGENTS.md")"
+test -n "$title" || title="$slug"
+
+mkdir -p "$new/css" "$new/js"
+
+# --- HTML pages ---
+git mv "$form/index.html" "$new/index.html"
+git mv "$dash/index.html" "$new/dashboard.html"
+
+# --- Form JS: app.js -> form-app.js, everything else verbatim ---
+for f in "$form"/js/*.js; do
+  base="$(basename "$f")"
+  case "$base" in
+    app.js) git mv "$f" "$new/js/form-app.js" ;;
+    *)      git mv "$f" "$new/js/$base" ;;
+  esac
+done
+
+# --- Dashboard JS: app.js -> dashboard-app.js, types.js -> dashboard-types.js ---
+for f in "$dash"/js/*.js; do
+  base="$(basename "$f")"
+  case "$base" in
+    app.js)   git mv "$f" "$new/js/dashboard-app.js" ;;
+    types.js) git mv "$f" "$new/js/dashboard-types.js" ;;
+    *)
+      if test -e "$new/js/$base"; then
+        echo "ERROR $slug: js/$base collides between form and dashboard" >&2
+        exit 1
+      fi
+      git mv "$f" "$new/js/$base" ;;
+  esac
+done
+
+# --- CSS: form style.css verbatim; dashboard style.css -> dashboard.css ---
+for f in "$form"/css/*.css; do
+  git mv "$f" "$new/css/$(basename "$f")"
+done
+for f in "$dash"/css/*.css; do
+  base="$(basename "$f")"
+  case "$base" in
+    style.css) git mv "$f" "$new/css/dashboard.css" ;;
+    *)
+      if test -e "$new/css/$base"; then
+        echo "ERROR $slug: css/$base collides" >&2; exit 1
+      fi
+      git mv "$f" "$new/css/$base" ;;
+  esac
+done
+
+# --- Rewrite asset references inside the two HTML pages ---
+# index.html: app.js -> form-app.js
+perl -0pi -e 's{\bjs/app\.js\b}{js/form-app.js}g' "$new/index.html"
+# dashboard.html: app.js -> dashboard-app.js, types.js -> dashboard-types.js, style.css -> dashboard.css
+perl -0pi -e 's{\bjs/app\.js\b}{js/dashboard-app.js}g;
+               s{\bjs/types\.js\b}{js/dashboard-types.js}g;
+               s{\bcss/style\.css\b}{css/dashboard.css}g' "$new/dashboard.html"
+
+# --- Canonical doc files ---
+cat > "$new/AGENTS.md" <<EOF
+# $title — HTML front-end (form + dashboard)
+
+Agent instructions for this directory. See the form root [\`../index.md\`](../index.md) and [\`../AGENTS.md\`](../AGENTS.md). Lily Design System headless conventions: [\`../../AGENTS-front-end-html.md\`](../../AGENTS-front-end-html.md).
+EOF
+printf '@AGENTS.md\n' > "$new/CLAUDE.md"
+cat > "$new/index.md" <<EOF
+# $title — HTML front-end (form + dashboard)
+
+Consolidated single-directory HTML front-end: \`index.html\` is the single-page
+wizard; \`dashboard.html\` is the dashboard. Shared \`css/\` and \`js/\`.
+EOF
+
+# --- Remove the now-empty legacy directories ---
+git rm -rq "$form" "$dash"
+rm -rf "$form" "$dash"
+
+echo "OK $slug"
