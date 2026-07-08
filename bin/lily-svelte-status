@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """bin/lily-svelte-status — Report each form's Lily Svelte conformance level.
 
-Inspects every `forms/<slug>/front-end-form-with-svelte/` and emits a
+Inspects every `forms/<slug>/front-end-with-svelte/` and emits a
 status line:
 
   PASS    — canonical Lily UI components present (Form, Fieldset, Field,
@@ -49,9 +49,9 @@ LEGACY_UI = (
 
 def classify(slug: str) -> tuple[str, str]:
     """Return (status, note)."""
-    form_dir = FORMS_DIR / slug / "front-end-form-with-svelte"
+    form_dir = FORMS_DIR / slug / "front-end-with-svelte"
     if not form_dir.is_dir():
-        return "EMPTY", "no front-end-form-with-svelte dir"
+        return "EMPTY", "no front-end-with-svelte dir"
 
     src_lib = form_dir / "src" / "lib"
     if not src_lib.is_dir():
@@ -127,7 +127,7 @@ def main() -> int:
         and not d.name.startswith(".")
         and not d.name.startswith("AGENTS")
         and d.name not in ("lily-spec", "lily-svelte-spec")
-        and (d / "front-end-form-with-svelte").is_dir()
+        and (d / "front-end-with-svelte").is_dir()
     )
 
     counts: dict[str, int] = {"PASS": 0, "PARTIAL": 0, "TODO": 0, "EMPTY": 0}
