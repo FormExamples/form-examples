@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>arc42 — architecture documentation</title>
+  <meta name="description" content="arc42 architecture-documentation wizard: guides an architect through the 12 arc42 sections, computes per-section completeness, derives a maturity band (Draft / Reviewable / Ready / Mature), and flags critical omissions.">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <a class="skip-link visually-hidden" href="#form-sections">Skip to documentation form</a>
+
+  <header class="page-header">
+    <div class="page-header-inner">
+      <h1>arc42 Architecture Documentation</h1>
+      <p class="subtitle">Work through the 12 arc42 sections. The engine grades each section empty / partial / complete, derives a maturity band, and flags critical omissions.</p>
+      <p class="subtitle"><a href="dashboard.html">View the architecture dashboard →</a></p>
+
+      <progress
+        id="progress"
+        class="progress"
+        max="100"
+        value="0"
+        aria-label="Documentation completion"
+      ></progress>
+      <p id="progress-text" class="subtitle" aria-live="polite">0 of 12 sections complete (0%)</p>
+
+      <ol
+        id="step-list"
+        class="step-list"
+        aria-label="arc42 documentation sections"
+        data-current="0"
+      ><!-- step-list-items injected by js/form-app.js --></ol>
+    </div>
+  </header>
+
+  <main>
+    <div class="intro">
+      <p>
+        arc42 is a template for documenting software and system architectures.
+        This single-page wizard walks through its 12 sections: introduction and
+        goals, constraints, context and scope, solution strategy, building block
+        view, runtime view, deployment view, crosscutting concepts,
+        architectural decisions, quality requirements, risks and technical debt,
+        and a summary with sign-off. The engine grades each section
+        <em>empty</em>, <em>partial</em>, or <em>complete</em>, derives a
+        composite maturity band (Draft / Reviewable / Ready / Mature) via a
+        max-grade algorithm, and fires independent flags for architecturally
+        critical omissions.
+      </p>
+      <p>
+        This is documentation-quality decision support aligned with
+        ISO/IEC/IEEE 26514:2022. The final maturity call remains the
+        responsibility of the reviewing architect, who may override the computed
+        band in the final step.
+      </p>
+    </div>
+
+    <form
+      id="assessment-form"
+      class="form"
+      autocomplete="off"
+      novalidate
+      onsubmit="return false;"
+      aria-label="arc42 architecture documentation"
+    >
+      <div
+        id="error-summary"
+        class="error-summary"
+        role="alert"
+        aria-label="Validation errors"
+        hidden
+      ></div>
+
+      <div id="form-sections">
+        <!-- Sections rendered by js/form-app.js as <fieldset class="fieldset"> nodes: -->
+        <!-- 1 Introduction & Goals, 2 Constraints, 3 Context & Scope, -->
+        <!-- 4 Solution Strategy, 5 Building Block View, 6 Runtime View, -->
+        <!-- 7 Deployment View, 8 Crosscutting Concepts, 9 Architectural Decisions, -->
+        <!-- 10 Quality Requirements, 11 Risks & Technical Debt, 12 Summary -->
+      </div>
+
+      <div class="button-group">
+        <button
+          type="button"
+          id="submit-btn"
+          class="button"
+          data-variant="primary"
+        >
+          Submit and view report
+        </button>
+        <button
+          type="button"
+          id="reset-btn"
+          class="button"
+          data-variant="secondary"
+        >
+          Start over
+        </button>
+      </div>
+    </form>
+
+    <section
+      id="report"
+      class="panel"
+      role="region"
+      aria-live="polite"
+      aria-label="Maturity report"
+    >
+      <p class="empty-message">Submit the form to see the maturity report.</p>
+    </section>
+
+    <footer class="page-footer">
+      <p>
+        The arc42 template is authored by Dr. Gernot Starke and Dr. Peter Hruschka
+        (arc42.org). Completeness thresholds and maturity bands here are advisory
+        documentation-quality decision support; the final maturity call remains
+        the responsibility of the reviewing architect.
+      </p>
+    </footer>
+  </main>
+
+  <!--
+    Classic <script> tags (no `type="module"`) so the page works when opened
+    directly via file:// — browsers block ES-module imports from file:// for
+    CORS reasons, but allow ordered classic scripts. Each file attaches its
+    public symbols to `window.Arc42`. Whole-file IIFE wrappers keep top-level
+    locals out of the global scope.
+
+    Load order: types -> rules -> flags -> grader -> app.
+  -->
+  <script src="js/types.js"></script>
+  <script src="js/rules.js"></script>
+  <script src="js/flags.js"></script>
+  <script src="js/grader.js"></script>
+  <script src="js/form-app.js"></script>
+</body>
+</html>
