@@ -11,8 +11,9 @@ const fixtures = fs.readdirSync(FIXTURES_DIR)
   .filter((f) => f.endsWith('.json'))
   .map((f) => ({ file: f, body: JSON.parse(fs.readFileSync(path.join(FIXTURES_DIR, f), 'utf8')) }));
 
-// Tiny static file server so the page (loaded over http://) can do ES-module
-// imports — browsers block module imports over the file:// scheme.
+// Tiny static file server rooted at this consolidated front-end directory so
+// the pages (loaded over http://) can do ES-module imports and fetch() —
+// browsers block both over the file:// scheme.
 const MIME = { '.html': 'text/html', '.js': 'application/javascript', '.css': 'text/css', '.mjs': 'application/javascript', '.json': 'application/json' };
 let server, baseUrl;
 
@@ -34,7 +35,7 @@ test.beforeAll(async () => {
 
 test.afterAll(async () => { await new Promise((r) => server.close(r)); });
 
-test.describe('engine.js — every fixture', () => {
+test.describe('engine.js — every fixture (index.html)', () => {
   for (const { file, body } of fixtures) {
     test(`${file}: ${body.name}`, async ({ page }) => {
       await page.goto(`${baseUrl}/index.html`);
@@ -46,4 +47,41 @@ test.describe('engine.js — every fixture', () => {
       expect(got).toEqual(want);
     });
   }
+});
+
+test.describe('dashboard.html', () => {
+  test('initial render shows 5 rows', async ({ page }) => {
+    await page.goto(`${baseUrl}/dashboard.html`);
+    await expect(page.locator('#grid tbody tr')).toHaveCount(5);
+  });
+
+  test('filter by RAG=red narrows to one row', async ({ page }) => {
+    await page.goto(`${baseUrl}/dashboard.html`);
+    await page.locator('#f-rag').selectOption('red');
+    await expect(page.locator('#grid tbody tr')).toHaveCount(1);
+    await expect(page.locator('#grid tbody tr td').first()).toContainText('Reduce p99 latency');
+  });
+
+  test('filter by level=team narrows to two rows', async ({ page }) => {
+    await page.goto(`${baseUrl}/dashboard.html`);
+    await page.locator('#f-level').selectOption('team');
+    await expect(page.locator('#grid tbody tr')).toHaveCount(2);
+  });
+
+  test('clicking a row expands a detail panel with KRs and flags', async ({ page }) => {
+    await page.goto(`${baseUrl}/dashboard.html`);
+    await page.locator('#grid tbody tr', { hasText: 'Reduce customer churn' }).click();
+    await expect(page.locator('tr.detail')).toHaveCount(1);
+    await expect(page.locator('tr.detail')).toContainText('Lift NPS from 32 to 50');
+    await expect(page.locator('tr.detail')).toContainText('pace-collapse');
+  });
+
+  test('sort by progress_percent toggles direction', async ({ page }) => {
+    await page.goto(`${baseUrl}/dashboard.html`);
+    await page.locator('th[data-sort="progress"]').click();
+    const firstAsc = await page.locator('#grid tbody tr td').nth(5).innerText();
+    await page.locator('th[data-sort="progress"]').click();
+    const firstDesc = await page.locator('#grid tbody tr td').nth(5).innerText();
+    expect(firstAsc).not.toEqual(firstDesc);
+  });
 });
