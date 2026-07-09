@@ -83,7 +83,7 @@ other
 - Front-end SvelteKit 2.x + Svelte 5 runes + Tailwind 4 + pdfmake (for PDF)
 - Front-end HTML: static HTML + Alpine.js, classic `<script>` tags so it
   works from `file://`
-- Full-stack: Rust edition 2024, Loco 0.16, axum 0.8, SeaORM 1.1, Tera, HTMX
+- Back-end: Rust edition 2024, Loco 0.16, axum 0.8, SeaORM 1.1 (JSON API)
   2.0.8, Alpine.js 3.14.8
 
 ## What this form is NOT

@@ -36,5 +36,5 @@ applies.
 - `../AGENTS.md` — agent instructions and airline-aligned rules summary.
 - `../sql/` — the authoritative data schema; rule predicates must
   reference column names that exist there.
-- `../fhir-r5/`, `../xml-representations/`, `../protobuf/`, `../typespec/` —
+- `../fhir/r5/`, `../xml/`, `../protobuf/`, `../typespec/` —
   representation schemas derived from the same SQL.

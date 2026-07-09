@@ -52,7 +52,7 @@ medical_information_form_for_air_travel_grade_flag.json
 ```
 
 See the canonical reference form
-[`../../pre-operative-assessment-by-clinician/fhir-r5/`](../../pre-operative-assessment-by-clinician/fhir-r5/)
+[`../../pre-operative-assessment-by-clinician/fhir/r5/`](../../pre-operative-assessment-by-clinician/fhir/r5/)
 for the wider one-file-per-SQL-entity pattern used across this monorepo.
 
 ## Verify

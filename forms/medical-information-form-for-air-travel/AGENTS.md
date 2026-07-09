@@ -17,15 +17,13 @@ See [`index.md`](./index.md) for the full design and the 14-step wizard table.
 - `./seed.md` — research seed sourced from public airline MEDIF references
 - `./doc/` — clinical reference notes (IATA, ASMA, airline-specific quirks)
 - `./sql/` — Liquibase-formatted PostgreSQL migrations
-- `./xml-representations/` — XML + DTD per SQL table
-- `./fhir-r5/` — FHIR HL7 R5 JSON per SQL entity
+- `./xml/` — XML + DTD per SQL table
+- `./fhir/r5/` — FHIR HL7 R5 JSON per SQL entity
 - `./protobuf/` — Protocol Buffers `.proto` schemas per SQL entity
 - `./typespec/` — TypeSpec interface definitions per SQL entity
-- `./front-end-form-with-html/` — static single-page MEDIF wizard
-- `./front-end-form-with-svelte/` — SvelteKit single-page MEDIF wizard
-- `./front-end-dashboard-with-html/` — HTML medical-desk dashboard
-- `./front-end-dashboard-with-svelte/` — SvelteKit SVAR DataGrid dashboard
-- `./back-end-with-loco/` — Rust backend + server-rendered HTMX UI
+- `./front-end-with-html/` — single-page HTML wizard (index.html) + dashboard (dashboard.html)
+- `./front-end-with-svelte/` — SvelteKit single-page wizard + dashboard (SVAR DataGrid)
+- `./back-end-with-loco/` — Rust axum + Loco JSON API back-end
 - `./back-end-with-loco-setup` — shell script of `cargo loco generate scaffold` calls
 
 ## Scoring engine
@@ -89,7 +87,7 @@ Where carriers diverge, the most conservative window is used:
 - `serde(rename_all = "camelCase")` on Rust structs shared with the front-end.
 - UUIDv4 primary keys; `created_at` + `updated_at` + `deleted_at` timestamps
   on every table.
-- The data-entry UI lives in `front-end-form-with-*` directories;
+- The data-entry UI lives in `front-end-with-*` directories;
   the submitting agent may be the passenger, an accessible-travel agent, or
   the attending physician.
 
@@ -112,7 +110,7 @@ Where carriers diverge, the most conservative window is used:
 - Rust edition 2024
 - Loco 0.16 framework on axum 0.8
 - SeaORM 1.1 with PostgreSQL 18
-- Tera templates with HTMX 2.0.8 and Alpine.js 3.14.8
+- a JSON API (no server-rendered templates)
 - `serde(rename_all = "camelCase")` for front-end interop
 
 ## Compliance

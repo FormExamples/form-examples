@@ -1,9 +1,9 @@
-# Full-Stack with Loco / Tera / HTMX / Alpine — UK NHS FP92A (NEW SCAFFOLD)
+# Full-Stack with Loco JSON API — UK NHS FP92A (NEW SCAFFOLD)
 
 **Placeholder directory** for the next-generation scaffold of the FP92A
 full-stack crate. The current production crate lives at the sibling
 [`../back-end-with-loco/`](../back-end-with-loco/),
-which is a minimal axum + Tera + HTMX + Alpine.js server with an in-memory
+which is a minimal axum + Loco JSON API server with an in-memory
 store.
 
 This `-new` directory will eventually hold the regenerated crate produced

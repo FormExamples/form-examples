@@ -2,11 +2,11 @@
 
 Golden-file fixtures used to verify engine parity between the
 TypeScript engine
-(`front-end-form-with-svelte/src/lib/engine/score-grader.ts`),
+(`front-end-with-svelte/src/lib/engine/score-grader.ts`),
 the Rust engine
 (`back-end-with-loco/src/scoring/grader.rs`),
 and the vanilla JavaScript engine
-(`front-end-form-with-html/index.html`, inline `<script>`).
+(`front-end-with-html/index.html`, inline `<script>`).
 
 ## Files
 
@@ -32,6 +32,6 @@ Both engines load `sample-assessment.json` and assert that their
 output equals `sample-grade.json` byte-for-byte (modulo
 JSON-key ordering):
 
-- TypeScript: `front-end-form-with-svelte/src/lib/engine/parity.test.ts`
+- TypeScript: `front-end-with-svelte/src/lib/engine/parity.test.ts`
 - Rust: `#[test]` in `back-end-with-loco/src/scoring/grader.rs`
   (loaded via `include_str!`)

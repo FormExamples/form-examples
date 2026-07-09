@@ -17,15 +17,13 @@ table.
 - `./tasks.md` — task tracking
 - `./doc/` — clinical and regulatory reference notes
 - `./sql/` — Liquibase Postgres schema (canonical data model)
-- `./xml-representations/` — generated XML + DTD per SQL table
-- `./fhir-r5/` — generated FHIR HL7 R5 JSON resources
+- `./xml/` — generated XML + DTD per SQL table
+- `./fhir/r5/` — generated FHIR HL7 R5 JSON resources
 - `./protobuf/` — generated Protocol Buffers `.proto` schemas
 - `./typespec/` — TypeSpec models for API-first integration
-- `./front-end-form-with-html/` — static single-page HTML wizard
-- `./front-end-form-with-svelte/` — SvelteKit single-page wizard
-- `./front-end-dashboard-with-html/` — static HTML review table
-- `./front-end-dashboard-with-svelte/` — SvelteKit + SVAR DataGrid dashboard
-- `./back-end-with-loco/` — Rust axum + Tera + HTMX + Alpine.js
+- `./front-end-with-html/` — single-page HTML wizard (index.html) + dashboard (dashboard.html)
+- `./front-end-with-svelte/` — SvelteKit single-page wizard + dashboard (SVAR DataGrid)
+- `./back-end-with-loco/` — Rust axum + Loco JSON API
 - `./back-end-with-loco-setup` — scaffold shell script
 
 ## Grading / eligibility engine
@@ -110,7 +108,7 @@ table.
 - Rust edition 2024
 - Loco 0.16 framework conventions on axum 0.8
 - SeaORM 1.1 with PostgreSQL
-- Tera templates with HTMX 2.0.8 and Alpine.js 3.14.8
+- a JSON API (no server-rendered templates)
 - `serde(rename_all = "camelCase")` for front-end interop
 
 ## Compliance

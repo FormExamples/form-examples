@@ -21,18 +21,18 @@ table.
   self-certification, ICD-10 / SNOMED mapping, phased-return guidance,
   RIDDOR / DVLA cross-walks, Equality Act adjustments)
 - `./sql/` — Liquibase-formatted Postgres schema
-- `./xml-representations/` — generated XML + DTD per SQL table
-- `./fhir-r5/` — generated FHIR HL7 R5 JSON per SQL entity
+- `./xml/` — generated XML + DTD per SQL table
+- `./fhir/r5/` — generated FHIR HL7 R5 JSON per SQL entity
 - `./protobuf/` — generated Protocol Buffers schemas
 - `./typespec/` — generated TypeSpec schemas
-- `./front-end-form-with-html/` — static single-page clinician wizard
-- `./front-end-form-with-svelte/` — SvelteKit single-page clinician
+- `./front-end-with-html/` — static single-page clinician wizard
+- `./front-end-with-svelte/` — SvelteKit single-page clinician
   wizard
-- `./front-end-dashboard-with-html/` — HTML review table
-- `./front-end-dashboard-with-svelte/` — SvelteKit SVAR DataGrid review
+- `./front-end-with-html/` — HTML review table
+- `./front-end-with-svelte/` — SvelteKit SVAR DataGrid review
   dashboard
 - `./back-end-with-loco/` — Rust backend with
-  server-rendered HTMX UI
+  a JSON API
 - `./back-end-with-loco-new/` — scaffold generator
 
 ## Scoring engine
@@ -116,7 +116,7 @@ PDF report and FHIR Bundle.
 - Rust edition 2024
 - Loco 0.16 framework on axum 0.8
 - SeaORM 1.1 with PostgreSQL
-- Tera templates with HTMX 2.0.8 and Alpine.js 3.14.8
+- a JSON API (no server-rendered templates)
 - `serde(rename_all = "camelCase")` for front-end interop
 
 ## Clinical grounding

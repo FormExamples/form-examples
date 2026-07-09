@@ -9,12 +9,10 @@ Read-and-acknowledge privacy notice form based on the BMA GDPR template for GP p
 - ./plan.md - Development roadmap
 - ./tasks.md - Task tracking
 - ./sql/ - PostgreSQL schema migrations
-- ./xml-representations/ - XML and DTD per SQL table entity
-- ./fhir-r5/ - FHIR HL7 R5 JSON per SQL table entity
-- ./front-end-form-with-html/ - Patient form (HTML)
-- ./front-end-form-with-svelte/ - Patient form (SvelteKit)
-- ./front-end-dashboard-with-html/ - Dashboard (HTML)
-- ./front-end-dashboard-with-svelte/ - Dashboard (SvelteKit)
+- ./xml/ - XML and DTD per SQL table entity
+- ./fhir/r5/ - FHIR HL7 R5 JSON per SQL table entity
+- ./front-end-with-html/ - single-page HTML wizard (index.html) + dashboard (dashboard.html)
+- ./front-end-with-svelte/ - SvelteKit single-page wizard + dashboard (SVAR DataGrid)
 
 ## Scoring system
 

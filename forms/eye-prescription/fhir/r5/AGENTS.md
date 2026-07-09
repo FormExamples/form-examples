@@ -43,5 +43,5 @@ reliable validator is the official
 [HL7 FHIR Validator](https://confluence.hl7.org/display/FHIR/Using+the+FHIR+Validator):
 
 ```sh
-java -jar validator_cli.jar fhir-r5/eye_prescription.json -version 5.0.0
+java -jar validator_cli.jar fhir/r5/eye_prescription.json -version 5.0.0
 ```

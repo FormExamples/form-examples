@@ -17,15 +17,13 @@ the validation rules.
 - `./tasks.md` — task tracking
 - `./doc/` — WHO / CDC / IHR reference documentation
 - `./sql/` — Liquibase-formatted Postgres schema
-- `./xml-representations/` — generated XML + DTD per SQL table
-- `./fhir-r5/` — generated FHIR HL7 R5 JSON per SQL entity
+- `./xml/` — generated XML + DTD per SQL table
+- `./fhir/r5/` — generated FHIR HL7 R5 JSON per SQL entity
 - `./protobuf/` — generated Protocol Buffers schemas per SQL entity
 - `./typespec/` — TypeSpec API definitions
-- `./front-end-form-with-html/` — static single-page HTML wizard
-- `./front-end-form-with-svelte/` — SvelteKit single-page wizard
-- `./front-end-dashboard-with-html/` — review dashboard (HTML table)
-- `./front-end-dashboard-with-svelte/` — SvelteKit SVAR DataGrid dashboard
-- `./back-end-with-loco/` — Rust backend with HTMX UI
+- `./front-end-with-html/` — single-page HTML wizard (index.html) + dashboard (dashboard.html)
+- `./front-end-with-svelte/` — SvelteKit single-page wizard + dashboard (SVAR DataGrid)
+- `./back-end-with-loco/` — Rust axum + Loco JSON API back-end
 - `./back-end-with-loco-setup` — Loco scaffold generator
 
 ## Domain model
@@ -81,7 +79,7 @@ clinician professional status, centre stamp image, optional medical waiver.
   10 days` (VAL003) and set `validUntil = 'lifetime'` unless the operator
   explicitly enters an end date (VAL004).
 - The certificate must be issued in English **and** in French, plus the
-  issuing country's official language (VAL012). The Tera and Svelte templates
+  issuing country's official language (VAL012). The Svelte templates
   expose `lang` slots for the secondary language.
 - The medical waiver is a free-text reason plus the clinician's electronic
   signature; destination countries may reject it.
@@ -123,7 +121,7 @@ clinician professional status, centre stamp image, optional medical waiver.
 - Rust edition 2024
 - Loco 0.16 framework on axum 0.8
 - SeaORM 1.1 with PostgreSQL
-- Tera templates with HTMX 2.0.8 and Alpine.js 3.14.8
+- a JSON API (no server-rendered templates)
 - `serde(rename_all = "camelCase")` for front-end interop
 - `printpdf` or `pdfmake-rs` for server-side PDF rendering
 

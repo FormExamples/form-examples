@@ -1,4 +1,4 @@
-# fhir-r5/ — Agent Instructions
+# fhir/r5/ — Agent Instructions
 
 Generated FHIR HL7 R5 JSON per SQL entity, plus a fit-note `Bundle`. Re-run
 the generator after any change to `../sql/`.

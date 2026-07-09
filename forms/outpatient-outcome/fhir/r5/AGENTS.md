@@ -1,4 +1,4 @@
-# Outpatient Outcome Report — fhir-r5/
+# Outpatient Outcome Report — fhir/r5/
 
 Generated artifacts: do not edit by hand. Regenerate via `bin/generate-fhir-r5-representations.py outpatient-outcome-report`.
 

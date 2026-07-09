@@ -12,12 +12,12 @@ legal-requirements-privacy-notice/
   tasks.md                                         # Task tracking
   seed.md                                          # Original seed content
   sql/                                  # PostgreSQL schema migrations
-  xml-representations/                             # XML and DTD per SQL table entity
-  fhir-r5/                                         # FHIR HL7 R5 JSON per SQL table entity
-  front-end-form-with-html/                        # Patient form (HTML)
-  front-end-form-with-svelte/                      # Patient form (SvelteKit)
-  front-end-dashboard-with-html/                   # Dashboard (HTML)
-  front-end-dashboard-with-svelte/                 # Dashboard (SvelteKit)
+  xml/                             # XML and DTD per SQL table entity
+  fhir/r5/                                         # FHIR HL7 R5 JSON per SQL table entity
+  front-end-with-html/                        # Patient form (HTML)
+  front-end-with-svelte/                      # Patient form (SvelteKit)
+  front-end-with-html/                   # Dashboard (HTML)
+  front-end-with-svelte/                 # Dashboard (SvelteKit)
 ```
 
 ## Form data model

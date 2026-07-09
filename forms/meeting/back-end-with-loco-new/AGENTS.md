@@ -35,7 +35,7 @@ implementation.
 ## Conventions
 
 - Inherits every convention from the canonical implementation —
-  Rust edition 2024, Loco 0.16, SeaORM 1.1, Tera + HTMX + Alpine.js,
+  Rust edition 2024, Loco 0.16, SeaORM 1.1, Loco JSON API,
   `serde(rename_all = "camelCase")` on shared structs.
 - No hand edits in this directory — anything authored here should be
   promoted into the canonical sibling and regenerated.

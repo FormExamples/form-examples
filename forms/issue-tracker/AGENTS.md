@@ -19,13 +19,11 @@ table.
 - `./seed.md` — original design seed (preserved verbatim)
 - `./doc/` — reference documentation (LFPSE, MoSCoW, Saffir-Simpson, etc.)
 - `./sql/` — Liquibase-formatted Postgres schema
-- `./xml-representations/` — generated XML + DTD per SQL table
-- `./fhir-r5/` — generated FHIR HL7 R5 JSON per SQL entity
-- `./front-end-form-with-html/` — static single-page issue wizard
-- `./front-end-form-with-svelte/` — SvelteKit single-page issue wizard
-- `./front-end-dashboard-with-html/` — HTML review table
-- `./front-end-dashboard-with-svelte/` — SvelteKit SVAR DataGrid review dashboard
-- `./back-end-with-loco/` — Rust backend with server-rendered HTMX UI
+- `./xml/` — generated XML + DTD per SQL table
+- `./fhir/r5/` — generated FHIR HL7 R5 JSON per SQL entity
+- `./front-end-with-html/` — single-page HTML wizard (index.html) + dashboard (dashboard.html)
+- `./front-end-with-svelte/` — SvelteKit single-page wizard + dashboard (SVAR DataGrid)
+- `./back-end-with-loco/` — Rust axum + Loco JSON API back-end
 
 ## Scoring engine
 
@@ -92,7 +90,7 @@ rendered in the report and FHIR Bundle.
 - UI components in `src/lib/components/ui/`.
 - `serde(rename_all = "camelCase")` on Rust structs shared with the front-end.
 - UUIDv4 primary keys; `created_at` + `updated_at` timestamps on every table.
-- The data-entry UI lives in `front-end-form-with-*` directories per
+- The data-entry UI lives in `front-end-with-*` directories per
   monorepo convention; even though this is a non-clinical form the
   same naming is retained.
 
@@ -117,7 +115,7 @@ rendered in the report and FHIR Bundle.
 - Rust edition 2024
 - Loco 0.16 framework on axum 0.8
 - SeaORM 1.1 with PostgreSQL 18
-- Tera templates with HTMX 2.0.8 and Alpine.js 3.14.8
+- a JSON API (no server-rendered templates)
 - `serde(rename_all = "camelCase")` for front-end interop
 
 ## Compliance

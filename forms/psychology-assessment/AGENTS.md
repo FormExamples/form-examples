@@ -12,14 +12,12 @@ subscale and raises safety flags on risk-screen items for clinician review.
 - `./tasks.md` — task tracking
 - `./doc/` — clinical reference documentation (DASS-21 scoring, risk policy)
 - `./sql/` — Liquibase-formatted Postgres schema
-- `./xml-representations/` — generated XML + DTD per SQL table
-- `./fhir-r5/` — generated FHIR HL7 R5 JSON per SQL entity
-- `./front-end-form-with-html/` — static single-page patient wizard
-- `./front-end-form-with-svelte/` — SvelteKit single-page patient wizard
-- `./front-end-dashboard-with-html/` — HTML review table
-- `./front-end-dashboard-with-svelte/` — SvelteKit SVAR DataGrid review
+- `./xml/` — generated XML + DTD per SQL table
+- `./fhir/r5/` — generated FHIR HL7 R5 JSON per SQL entity
+- `./front-end-with-html/` — single-page HTML wizard (index.html) + dashboard (dashboard.html)
+- `./front-end-with-svelte/` — SvelteKit single-page wizard + dashboard (SVAR DataGrid)
 - `./back-end-with-loco/` — Rust backend with
-  server-rendered HTMX UI
+  a JSON API
 
 ## Scoring system
 

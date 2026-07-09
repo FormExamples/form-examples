@@ -33,7 +33,7 @@ TypeSpec). See [`index.md`](./index.md) for the full file map.
    comments for the same table.
 3. Regenerate XML, FHIR, Protocol Buffers, and TypeSpec
    representations.
-4. Update `front-end-form-with-svelte/` and the Rust full-stack
+4. Update `front-end-with-svelte/` and the Rust full-stack
    templates to render the new field.
 
 ## Adding a new table
@@ -41,7 +41,7 @@ TypeSpec). See [`index.md`](./index.md) for the full file map.
 1. Pick the next available number `NN_create_table_<entity>.sql`.
 2. Re-render the entity diagram in `index.md`.
 3. Add the new entity to the FHIR HL7 R5 mapping table in
-   `../fhir-r5/index.md`.
+   `../fhir/r5/index.md`.
 4. Generate XML, FHIR, Protocol Buffers, and TypeSpec.
 
 ## Verify

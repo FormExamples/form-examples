@@ -1,4 +1,4 @@
-# Outpatient Outcome Report — xml-representations/
+# Outpatient Outcome Report — xml/
 
 Generated artifacts: do not edit by hand. Regenerate via `bin/generate-xml-representations.py outpatient-outcome-report`.
 

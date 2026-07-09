@@ -1,4 +1,4 @@
-# Outpatient Outcome Report — front-end-form-with-svelte
+# Outpatient Outcome Report — front-end-with-svelte
 
 SvelteKit 2 + Svelte 5 runes + Tailwind 4 scaffold. Single route (`+page.svelte`) currently holds a placeholder; step components and the OOCG scoring engine will live in `src/lib/` when implemented.
 

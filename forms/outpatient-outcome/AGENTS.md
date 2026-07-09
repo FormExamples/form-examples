@@ -10,12 +10,10 @@ Structured outpatient outcome report covering clinical outcome, PROMs, PREMs, an
 - ./tasks.md - Task tracking
 - ./doc/ - Reference material and licensing
 - ./sql/ - PostgreSQL migrations
-- ./xml-representations/ - XML + DTD per table
-- ./fhir-r5/ - FHIR HL7 R5 JSON per table
-- ./front-end-form-with-html/ - Static HTML wizard
-- ./front-end-form-with-svelte/ - SvelteKit + Svelte 5 + Tailwind 4
-- ./front-end-dashboard-with-html/ - Static HTML dashboard
-- ./front-end-dashboard-with-svelte/ - SvelteKit + SVAR DataGrid dashboard
+- ./xml/ - XML + DTD per table
+- ./fhir/r5/ - FHIR HL7 R5 JSON per table
+- ./front-end-with-html/ - single-page HTML wizard (index.html) + dashboard (dashboard.html)
+- ./front-end-with-svelte/ - SvelteKit single-page wizard + dashboard (SVAR DataGrid)
 - ./back-end-with-loco/ - Rust backend
 
 ## Scoring system

@@ -20,18 +20,18 @@ reference form on which the schema is modelled.
 - `./seed.md` / `./seed.pdf` — source materials
 - `./doc/` — HIPAA Privacy Rule, 42 CFR Part 2, and state-template notes
 - `./sql/` — Liquibase-formatted Postgres schema
-- `./xml-representations/` — generated XML + DTD per SQL table
-- `./fhir-r5/` — generated FHIR HL7 R5 JSON per SQL entity
+- `./xml/` — generated XML + DTD per SQL table
+- `./fhir/r5/` — generated FHIR HL7 R5 JSON per SQL entity
 - `./protobuf/` — generated Protocol Buffers `.proto` schemas
 - `./typespec/` — TypeSpec models
-- `./front-end-form-with-html/` — static single-page authorization wizard
-- `./front-end-form-with-svelte/` — SvelteKit single-page authorization
+- `./front-end-with-html/` — static single-page authorization wizard
+- `./front-end-with-svelte/` — SvelteKit single-page authorization
   wizard (primary data-entry UI)
-- `./front-end-dashboard-with-html/` — HTML review table
-- `./front-end-dashboard-with-svelte/` — SvelteKit + SVAR DataGrid review
+- `./front-end-with-html/` — HTML review table
+- `./front-end-with-svelte/` — SvelteKit + SVAR DataGrid review
   dashboard
 - `./back-end-with-loco/` — Rust backend with
-  server-rendered HTMX UI
+  a JSON API
 - `./back-end-with-loco-setup` — scaffold generator
   (executable shell script of `cargo loco generate scaffold` calls)
 
@@ -116,7 +116,7 @@ core-element check:
 - Rust edition 2024
 - Loco 0.16 framework on axum 0.8
 - SeaORM 1.1 with PostgreSQL
-- Tera templates with HTMX 2.0.8 and Alpine.js 3.14.8
+- a JSON API (no server-rendered templates)
 - `serde(rename_all = "camelCase")` for front-end interop
 
 ## Source documents

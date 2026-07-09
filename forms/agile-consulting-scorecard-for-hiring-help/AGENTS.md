@@ -25,16 +25,16 @@ table. The unmodified design seed lives in [`seed.md`](./seed.md).
   TypeScript and Rust sides
 - `./scripts/` — `demo.sh` runs the whole pipeline end-to-end in ~10s
 - `./sql/` — Liquibase-formatted Postgres schema (8 files)
-- `./xml-representations/` — generated XML + DTD per SQL table
-- `./fhir-r5/` — generated FHIR HL7 R5 JSON per SQL entity
-- `./front-end-form-with-html/` — static single-page wizard +
+- `./xml/` — generated XML + DTD per SQL table
+- `./fhir/r5/` — generated FHIR HL7 R5 JSON per SQL entity
+- `./front-end-with-html/` — static single-page wizard +
   printable report (`index.html`, `report.html`)
-- `./front-end-form-with-svelte/` — SvelteKit wizard with the scoring
+- `./front-end-with-svelte/` — SvelteKit wizard with the scoring
   engine, zod schema, pdfmake export, pre-tender summary, diff,
   recommendations, and `/report/pdf` server endpoint
-- `./front-end-dashboard-with-html/` — static reviewer table with
+- `./front-end-with-html/` — static reviewer table with
   inline samples
-- `./front-end-dashboard-with-svelte/` — SVAR DataGrid dashboard with
+- `./front-end-with-svelte/` — SVAR DataGrid dashboard with
   same-origin endpoints, per-row report drilldown at `/report/[id]`,
   bulk-import UI at `/import`, and a band-distribution stats panel
 - `./back-end-with-loco/` — Rust axum server (nine
@@ -128,7 +128,7 @@ rendered in the report and FHIR Bundle.
 - Rust edition 2024
 - Loco 0.16 framework on axum 0.8
 - SeaORM 1.1 with PostgreSQL 18
-- Tera templates with HTMX 2.0.8 and Alpine.js 3.14.8
+- a JSON API (no server-rendered templates)
 - `serde(rename_all = "camelCase")` for front-end interop
 
 ## Compliance

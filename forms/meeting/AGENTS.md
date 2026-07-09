@@ -17,16 +17,13 @@ See [`index.md`](./index.md) for the full design and the 10-step wizard table.
 - `./seed.md` — original design seed
 - `./doc/` — reference documentation (recurrence rules, FHIR mapping, ICS notes)
 - `./sql/` — Liquibase-formatted Postgres schema
-- `./xml-representations/` — generated XML + DTD per SQL table
-- `./fhir-r5/` — generated FHIR HL7 R5 JSON per SQL entity
+- `./xml/` — generated XML + DTD per SQL table
+- `./fhir/r5/` — generated FHIR HL7 R5 JSON per SQL entity
 - `./protobuf/` — generated Protocol Buffers `.proto` schemas
 - `./typespec/` — TypeSpec API surface definitions
-- `./front-end-form-with-html/` — static single-page wizard
-- `./front-end-form-with-svelte/` — SvelteKit single-page wizard
-- `./front-end-dashboard-with-html/` — HTML review table
-- `./front-end-dashboard-with-svelte/` — SvelteKit SVAR DataGrid review
-- `./back-end-with-loco/` — Rust backend with server-
-  rendered HTMX UI
+- `./front-end-with-html/` — single-page HTML wizard (index.html) + dashboard (dashboard.html)
+- `./front-end-with-svelte/` — SvelteKit single-page wizard + dashboard (SVAR DataGrid)
+- `./back-end-with-loco/` — Rust axum + Loco JSON API back-end
 
 ## Data model
 
@@ -120,7 +117,7 @@ emitted verbatim into the ICS export. Supported `frequency` values are
 - Rust edition 2024
 - Loco 0.16 framework on axum 0.8
 - SeaORM 1.1 with PostgreSQL
-- Tera templates with HTMX 2.0.8 and Alpine.js 3.14.8
+- a JSON API (no server-rendered templates)
 - `serde(rename_all = "camelCase")` for front-end interop
 
 ## Compliance

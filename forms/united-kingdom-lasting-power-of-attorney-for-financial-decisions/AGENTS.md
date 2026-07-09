@@ -20,16 +20,14 @@ and every validation rule.
   registration workflow, validation rules, glossary)
 - `./20260420-LPA-Finance-Complete-Pack/` — source PDFs from OPG
 - `./sql/` — Liquibase-formatted Postgres schema
-- `./xml-representations/` — generated XML + DTD per SQL table
-- `./fhir-r5/` — generated FHIR HL7 R5 JSON per SQL entity
+- `./xml/` — generated XML + DTD per SQL table
+- `./fhir/r5/` — generated FHIR HL7 R5 JSON per SQL entity
 - `./protobuf/` — generated Protocol Buffers `.proto` schemas
 - `./typespec/` — TypeSpec schemas
-- `./front-end-form-with-html/` — static single-page HTML wizard
-- `./front-end-form-with-svelte/` — SvelteKit single-page wizard
-- `./front-end-dashboard-with-html/` — HTML review table
-- `./front-end-dashboard-with-svelte/` — SvelteKit SVAR DataGrid dashboard
+- `./front-end-with-html/` — single-page HTML wizard (index.html) + dashboard (dashboard.html)
+- `./front-end-with-svelte/` — SvelteKit single-page wizard + dashboard (SVAR DataGrid)
 - `./back-end-with-loco/` — Rust backend with
-  server-rendered HTMX + Alpine.js UI
+  a JSON API
 
 ## Validation engine
 
@@ -97,7 +95,7 @@ remediation hint with a legal reference.
   front-end.
 - UUIDv4 primary keys; `created_at` + `updated_at` + `deleted_at`
   timestamps on every table.
-- The data-entry UI lives in `front-end-form-with-*` and is operated by
+- The data-entry UI lives in `front-end-with-*` and is operated by
   the donor (or a friend/relative helping the donor while the donor still
   has mental capacity).
 
@@ -137,7 +135,7 @@ remediation hint with a legal reference.
 - Rust edition 2024.
 - Loco 0.16 framework on axum 0.8.
 - SeaORM 1.1 with PostgreSQL.
-- Tera templates with HTMX 2.0.8 and Alpine.js 3.14.8.
+- a JSON API (no server-rendered templates).
 - `serde(rename_all = "camelCase")` for front-end interop.
 
 ## Legal grounding

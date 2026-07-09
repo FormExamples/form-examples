@@ -7,11 +7,10 @@ Prescription request form with priority classification engine (Routine / Urgent 
 - ./index.md - Project overview and documentation
 - ./AGENTS.md - Agent instructions (this file, referenced by CLAUDE.md)
 - ./plan.md - Development roadmap
-- ./front-end-form-with-svelte/ - Patient questionnaire; SvelteKit + Svelte 5 + Tailwind 4
-- ./front-end-dashboard-with-svelte/ - Dashboard; SvelteKit + SVAR DataGrid
+- ./front-end-with-svelte/ - SvelteKit single-page wizard + dashboard (SVAR DataGrid)
 - ./sql/ - PostgreSQL schema migrations
-- ./xml-representations/ - XML and DTD per SQL table entity
-- ./fhir-r5/ - FHIR HL7 R5 JSON per SQL table entity
+- ./xml/ - XML and DTD per SQL table entity
+- ./fhir/r5/ - FHIR HL7 R5 JSON per SQL table entity
 
 ## Scoring system
 

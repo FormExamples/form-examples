@@ -1,4 +1,4 @@
-# xml-representations/ — Agent Instructions
+# xml/ — Agent Instructions
 
 Generated XML + DTD per SQL table. Re-run the generator after any change
 to `../sql/`.

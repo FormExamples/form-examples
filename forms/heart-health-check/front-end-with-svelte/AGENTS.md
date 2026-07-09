@@ -16,7 +16,7 @@ Patient-facing 10-step Heart Health Check assessment form. Built with SvelteKit 
 ## Files
 
 ```
-front-end-form-with-svelte/
+front-end-with-svelte/
   package.json            # Dependencies (SvelteKit, Svelte 5, Tailwind)
   svelte.config.js        # SvelteKit auto adapter
   tsconfig.json           # TypeScript strict mode

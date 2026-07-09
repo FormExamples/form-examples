@@ -1,4 +1,4 @@
-# front-end-form-with-svelte — Agent Instructions
+# front-end-with-svelte — Agent Instructions
 
 SvelteKit 2 + Svelte 5 implementation of the ADR wizard.
 

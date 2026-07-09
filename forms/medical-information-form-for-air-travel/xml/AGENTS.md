@@ -25,12 +25,12 @@ medical_information_form_for_air_travel_grade_flag.xml                   medical
   values, to preserve column-order positions.
 - Dates are ISO 8601 (`YYYY-MM-DD`); timestamps are ISO 8601 with `Z`.
 - Example values are consistent with the FHIR R5 example scenario in
-  `../fhir-r5/` (passenger on supplemental oxygen flying Emirates EK002
+  `../fhir/r5/` (passenger on supplemental oxygen flying Emirates EK002
   LHR–DXB on 2026-06-12).
 
 ## Verify
 
 ```sh
 bin/test-form medical-information-form-for-air-travel
-xmllint --noout --dtdvalid xml-representations/patient.dtd xml-representations/patient.xml
+xmllint --noout --dtdvalid xml/patient.dtd xml/patient.xml
 ```

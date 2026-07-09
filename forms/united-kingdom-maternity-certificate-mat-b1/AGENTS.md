@@ -15,10 +15,8 @@ Maternity certificate issued by doctors or registered midwives for statutory mat
 - ./plan.md - Development roadmap
 - ./tasks.md - Task tracking
 - ./doc/ - Reference documentation
-- ./front-end-form-with-html/ - Patient questionnaire; HTML
-- ./front-end-form-with-svelte/ - Patient questionnaire; SvelteKit + Svelte 5 + Tailwind 4
-- ./front-end-dashboard-with-html/ - Dashboard; HTML
-- ./front-end-dashboard-with-svelte/ - Dashboard; SvelteKit + SVAR DataGrid
+- ./front-end-with-html/ - single-page HTML wizard (index.html) + dashboard (dashboard.html)
+- ./front-end-with-svelte/ - SvelteKit single-page wizard + dashboard (SVAR DataGrid)
 - ./back-end-with-loco/ - Back-end JSON API; Rust + axum + Loco
 
 ## Form parts

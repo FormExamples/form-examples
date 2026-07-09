@@ -8,8 +8,7 @@ Fall risk evaluation using the Morse Fall Scale (MFS) with comprehensive environ
 - ./AGENTS.md - Agent instructions (this file, referenced by CLAUDE.md)
 - ./plan.md - Development roadmap
 - ./tasks.md - Task tracking
-- ./front-end-form-with-svelte/ - Patient questionnaire; SvelteKit + Svelte 5 + Tailwind 4
-- ./front-end-dashboard-with-svelte/ - Dashboard; SvelteKit + SVAR DataGrid
+- ./front-end-with-svelte/ - SvelteKit single-page wizard + dashboard (SVAR DataGrid)
 - ./back-end-with-loco/ - Back-end JSON API; Rust + axum + Loco
 
 ## Scoring system

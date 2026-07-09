@@ -8,7 +8,7 @@ headless + SVAR DataGrid. Vitest for engine unit tests.
 - Engine: `src/lib/engine/` — `defaults.ts` (`createDefaultRequest`), `types.ts`,
   `rules.ts`, `flags.ts`, `grader.ts` (`calculateGrade`), `utils.ts`,
   `grader.test.ts`. Ported from the HTML reference engine
-  (`../front-end-form-with-html/js/`).
+  (`../front-end-with-html/js/`).
 - Routes: `/biopsy-test-requests/` (SVAR dashboard, `ssr = false`),
   `/biopsy-test-requests/[id]` (wizard), `[id]/report`, `[id]/report/pdf`.
 

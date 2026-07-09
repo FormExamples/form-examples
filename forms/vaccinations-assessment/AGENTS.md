@@ -8,8 +8,7 @@ Immunisation-schedule compliance assessment covering childhood, adult, travel, a
 - ./AGENTS.md - Agent instructions (this file, referenced by CLAUDE.md)
 - ./plan.md - Development roadmap
 - ./tasks.md - Task tracking
-- ./front-end-form-with-svelte/ - Patient questionnaire; SvelteKit + Svelte 5 + Tailwind 4
-- ./front-end-dashboard-with-svelte/ - Immunisation nurse dashboard; SvelteKit + SVAR DataGrid
+- ./front-end-with-svelte/ - SvelteKit single-page wizard + dashboard (SVAR DataGrid)
 - ./back-end-with-loco/ - Full-stack Rust backend
 
 ## Scoring system

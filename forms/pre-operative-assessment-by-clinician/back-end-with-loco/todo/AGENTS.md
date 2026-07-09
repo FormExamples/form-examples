@@ -5,7 +5,7 @@
 - Rust edition 2024
 - Loco 0.16 framework (axum 0.8)
 - SeaORM 1.1 with PostgreSQL
-- Tera + HTMX 2.0.8 + Alpine.js 3.14.8
+- Loco JSON API
 
 ## Conventions
 

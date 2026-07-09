@@ -18,12 +18,10 @@ See [`index.md`](./index.md) for the full design and the 12-step wizard table.
 - `./doc/` — reference documentation (arc42 overview, completeness rules,
   maturity rules, ADR format, safety-case notes)
 - `./sql/` — Liquibase-formatted Postgres schema
-- `./xml-representations/` — generated XML + DTD per SQL table
-- `./fhir-r5/` — generated FHIR HL7 R5 JSON per SQL entity
-- `./front-end-form-with-svelte/` — SvelteKit 12-step architect wizard
-- `./front-end-form-with-html/` — placeholder (follow-up session)
-- `./front-end-dashboard-with-html/` — placeholder
-- `./front-end-dashboard-with-svelte/` — placeholder
+- `./xml/` — generated XML + DTD per SQL table
+- `./fhir/r5/` — generated FHIR HL7 R5 JSON per SQL entity
+- `./front-end-with-svelte/` — SvelteKit single-page wizard + dashboard (SVAR DataGrid)
+- `./front-end-with-html/` — single-page HTML wizard (index.html) + dashboard (dashboard.html)
 - `./back-end-with-loco/` — placeholder
 
 ## Scoring engine

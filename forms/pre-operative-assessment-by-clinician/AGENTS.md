@@ -83,8 +83,9 @@ step 16 with a documented reason. Both the **computed** grade and the
 - UI components in `src/lib/components/ui/`.
 - `serde(rename_all = "camelCase")` on Rust structs shared with the front-end.
 - UUIDv4 primary keys; `created_at` + `updated_at` timestamps on every table.
-- The data-entry UI lives in `front-end-patient-form-with-*` directories to
-  match the monorepo convention even though the operator is a clinician.
+- The data-entry UI lives in the consolidated `front-end-with-html/` and
+  `front-end-with-svelte/` directories per the monorepo convention even though
+  the operator is a clinician.
 
 ## Front-end SvelteKit stack
 
@@ -107,7 +108,7 @@ step 16 with a documented reason. Both the **computed** grade and the
 - Rust edition 2024
 - Loco 0.16 framework on axum 0.8
 - SeaORM 1.1 with PostgreSQL
-- Tera templates with HTMX 2.0.8 and Alpine.js 3.14.8
+- a JSON API (no server-rendered templates)
 - `serde(rename_all = "camelCase")` for front-end interop
 
 ## Clinical grounding

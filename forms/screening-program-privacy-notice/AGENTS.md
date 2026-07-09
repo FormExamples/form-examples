@@ -12,10 +12,10 @@ screening-program-privacy-notice/
   tasks.md
   seed.md
   sql/
-  xml-representations/
-  fhir-r5/
-  front-end-form-with-html/
-  front-end-dashboard-with-html/
+  xml/
+  fhir/r5/
+  front-end-with-html/
+  front-end-with-html/
 ```
 
 ## Form data model
