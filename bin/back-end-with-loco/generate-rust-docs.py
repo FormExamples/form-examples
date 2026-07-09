@@ -467,6 +467,12 @@ def process_module(path, relpath):
 def process_crate(crate_dir):
     slug = os.path.basename(os.path.dirname(crate_dir))
     src_dir = os.path.join(crate_dir, "src")
+    # Route layout: crate source lives in src/<form_snake_case>/ rather than
+    # directly under src/. Descend into it so lib.rs / controllers / engine
+    # resolve correctly.
+    routed = os.path.join(src_dir, slug.replace("-", "_"))
+    if os.path.isfile(os.path.join(routed, "lib.rs")):
+        src_dir = routed
     if not os.path.isdir(src_dir):
         return False
     cargo = os.path.join(crate_dir, "Cargo.toml")

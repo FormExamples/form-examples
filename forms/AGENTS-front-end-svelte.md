@@ -12,28 +12,34 @@ RESTful routes below when touched.
 
 ## Routing (RESTful, gold standard)
 
-The URL space is the form's **collection**, named by the **pluralised slug**
-(the form's resource name — e.g. `cardiology-requests`,
-`cardiology-responses`, `medical-operation-notes`). Collections use a plural
-base directory; individual items use a dynamic `[id]` route parameter:
+**Route layout (canonical):** every route is nested under a per-form directory
+named by the **form's kebab-case slug** (`src/routes/<form-kebab-case>/`), so
+the app is served at `/<slug>/`. Within it, the URL space is the form's
+**collection**, named by the **pluralised slug** (the form's resource name —
+e.g. `cardiology-requests`, `medical-operation-notes`). Collections use a
+plural base directory; individual items use a dynamic `[id]` route parameter:
 
 | Route file | URL | Purpose |
 | --- | --- | --- |
-| `src/routes/<plural>/+page.svelte` | `/<plural>/` | **Dashboard** — the collection list |
-| `src/routes/<plural>/[id]/+page.svelte` | `/<plural>/[id]` | **Input form** — the single-page wizard for one item (`[id] = new` to create) |
-| `src/routes/<plural>/[id]/report/+page.svelte` | `/<plural>/[id]/report` | Report view for one item (PDF via `report/pdf/+server.ts`) |
-| `src/routes/+page.svelte` | `/` | **Welcome page** — explains the work (purpose, spec, documentation) and shows prominent links to the form route and the dashboard route |
+| `src/routes/<slug>/<plural>/+page.svelte` | `/<slug>/<plural>/` | **Dashboard** — the collection list |
+| `src/routes/<slug>/<plural>/[id]/+page.svelte` | `/<slug>/<plural>/[id]` | **Input form** — the single-page wizard for one item (`[id] = new` to create) |
+| `src/routes/<slug>/<plural>/[id]/report/+page.svelte` | `/<slug>/<plural>/[id]/report` | Report view for one item (PDF via `report/pdf/+server.ts`) |
+| `src/routes/<slug>/+page.svelte` | `/<slug>/` | **Welcome page** — explains the work (purpose, spec, documentation) and shows prominent links to the form route and the dashboard route |
 
-So for `cardiology-requests`: `/cardiology-requests/` is the dashboard list and
-`/cardiology-requests/[id]` (e.g. `/cardiology-requests/new`) is the input form.
-Do **not** put the wizard at the app root (`/`) or the dashboard at
-`/dashboard` — those are the legacy flat layout.
+So for the `cardiology-request` form (slug), everything lives under
+`src/routes/cardiology-request/`: `/cardiology-request/cardiology-requests/` is
+the dashboard list and `/cardiology-request/cardiology-requests/[id]` (e.g.
+`…/new`) is the input form. Internal route links (`href`/`goto`) are absolute
+and include the `/<slug>` prefix; `/api/` fetch paths do not. Do **not** put
+routes directly under `src/routes/` (no `<slug>/` parent) — that is the legacy
+layout.
 
-The app root (`/`) is a **welcome page**, not a form and not a dashboard. It is
-a plain `+page.svelte` (no redirect loader) that explains the form's purpose,
-specification, and documentation, then offers two prominent links: one to the
-input form (`/<plural>/new`) and one to the dashboard (`/<plural>/`). The nav in
-`+layout.svelte` links its brand to `/` and exposes Welcome / form / dashboard.
+The form-root (`/<slug>/`) is a **welcome page**, not a form and not a
+dashboard. It is a plain `+page.svelte` (no redirect loader) that explains the
+form's purpose, specification, and documentation, then offers two prominent
+links: one to the input form (`/<slug>/<plural>/new`) and one to the dashboard
+(`/<slug>/<plural>/`). The nav in `+layout.svelte` links its brand to
+`/<slug>/` and exposes Welcome / form / dashboard.
 Reference implementations: `forms/cardiology-request/` and
 `forms/cardiology-response/`.
 
@@ -68,13 +74,13 @@ system** — do not hand-roll theme CSS.
 
 ## Dashboard grid (SVAR)
 
-The collection dashboard (`/<plural>/`) renders the data table with the **SVAR
+The collection dashboard (`/<slug>/<plural>/`) renders the data table with the **SVAR
 Svelte DataGrid** (`@svar-ui/svelte-grid`, `Grid` + `Willow`/`WillowDark`).
 Graded columns render through the shared engine label helpers. The grid is
 **client-only** (its packages are not SSR-safe), so the dashboard route sets
 `export const ssr = false;` in `+page.ts`. Pick `WillowDark` vs `Willow` from the
 active theme's `--color-base-100` lightness so the grid follows the Lily theme,
-and wire `api.on('select-row', …)` to open `/<plural>/[id]`.
+and wire `api.on('select-row', …)` to open `/<slug>/<plural>/[id]`.
 
 Companion docs: [`AGENTS-front-end-html.md`](AGENTS-front-end-html.md),
 [`plan.md`](plan.md), [`tasks.md`](tasks.md).
@@ -215,7 +221,7 @@ A consumer thus writes:
 
 ## 5. Page shell
 
-Every input-form route (`front-end-with-svelte/src/routes/<plural>/[id]/+page.svelte`,
+Every input-form route (`front-end-with-svelte/src/routes/<slug>/<plural>/[id]/+page.svelte`,
 the wizard) follows this skeleton:
 
 ```svelte
@@ -297,8 +303,8 @@ Identical to the HTML contract (see [`AGENTS-front-end-html.md`](AGENTS-front-en
 The canonical consolidated reference is:
 
 - `forms/cardiology-response/front-end-with-svelte/` — RESTful routes:
-  dashboard list at `src/routes/cardiology-responses/+page.svelte`, input form
-  at `src/routes/cardiology-responses/[id]/+page.svelte`, one shared scoring
+  dashboard list at `src/routes/cardiology-response/cardiology-responses/+page.svelte`, input form
+  at `src/routes/cardiology-response/cardiology-responses/[id]/+page.svelte`, one shared scoring
   engine and UI component set.
 
 Legacy split references (`front-end-form-with-svelte/` +

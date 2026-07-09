@@ -82,19 +82,24 @@ cargo loco generate scaffold [model] [field]:[type] [field]:[type] [field]:[type
 
 Each form's back-end crate is a Cargo workspace with a `migration` sub-crate:
 
+Route layout: all crate source lives under `src/<form_snake_case>/`; the crate
+root (Cargo.toml, config/, migration/, tests/) stays at `back-end-with-loco/`.
+
 ```txt
 back-end-with-loco/
-  Cargo.toml                  # Workspace + package manifest
+  Cargo.toml                  # Workspace + package manifest; [lib] path + [[bin]] path point into src/<form_snake_case>/
   .gitignore                  # ignore /target, /node_modules, etc.
   src/
-    bin/
-      main.rs                 # Single binary — runs both the HTTP server and the Loco management CLI
-    app.rs                    # Loco App trait impl
-    controllers/              # axum handlers per resource (JSON in, JSON out)
-    engine/                   # Pure scoring / grading engine
-    models/                   # SeaORM active-model wrappers + domain logic
-    tasks/                    # Loco background tasks (optional)
-    workers/                  # Loco workers (optional)
+    <form_snake_case>/        # All crate source nested here (route layout)
+      bin/
+        main.rs               # Single binary — runs both the HTTP server and the Loco management CLI
+      lib.rs                  # Crate root ([lib] path = src/<form_snake_case>/lib.rs)
+      app.rs                  # Loco App trait impl
+      controllers/            # axum handlers per resource (JSON in, JSON out)
+      engine/                 # Pure scoring / grading engine
+      models/                 # SeaORM active-model wrappers + domain logic
+      tasks/                  # Loco background tasks (optional)
+      workers/                # Loco workers (optional)
   config/
     development.yaml          # Loco development config
     test.yaml                 # Loco test config
@@ -105,6 +110,9 @@ back-end-with-loco/
       m*.rs                   # Migration files
   tests/                      # Integration tests for the engine and JSON API
 ```
+
+Note: `include_dir!("src/...")` / `include_str!` literals in the source are
+crate-root-relative, so they must reference `src/<form_snake_case>/...`.
 
 There is no `templates/` and no `assets/`. (Loco's `src/views/` holds JSON
 response shapers only — never HTML.)
