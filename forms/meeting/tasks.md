@@ -18,15 +18,15 @@
 - [x] Author SQL migration `11_create_table_meeting_grade.sql`.
 - [x] Author SQL migration `12_create_table_meeting_grade_rule.sql`.
 - [x] Author SQL migration `13_create_table_meeting_grade_flag.sql`.
-- [x] Generate `xml-representations/` via the XML generator script.
-- [x] Generate `fhir-r5/` via the FHIR R5 generator script.
+- [x] Generate `xml/` via the XML generator script.
+- [x] Generate `fhir/r5/` via the FHIR R5 generator script.
 - [x] Generate `protobuf/` via the protobuf generator script.
 - [x] Author docs for each subproject (`AGENTS.md`, `CLAUDE.md`,
       `index.md`, `plan.md`, `tasks.md`).
-- [x] Build `front-end-form-with-html/` static single-page wizard.
-- [x] Build `front-end-dashboard-with-html/` static review table.
-- [ ] Build `front-end-form-with-svelte/` SvelteKit single-page wizard.
-- [ ] Build `front-end-dashboard-with-svelte/` SVAR DataGrid dashboard.
+- [x] Build `front-end-with-html/` static single-page wizard.
+- [x] Build `front-end-with-html/` static review table.
+- [ ] Build `front-end-with-svelte/` SvelteKit single-page wizard.
+- [ ] Build `front-end-with-svelte/` SVAR DataGrid dashboard.
 - [ ] Build `back-end-with-loco-setup` scaffold script.
 - [ ] Build `back-end-with-loco/` Rust crate.
 - [ ] Author `typespec/` TypeSpec API definitions.

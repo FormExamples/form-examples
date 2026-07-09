@@ -30,8 +30,8 @@ Structured diabetes review aligned with NICE NG28 (type 2) / NG17 (type 1) and t
 
 ```
 diabetes-assessment/
-  front-end-form-with-svelte/
-  front-end-dashboard-with-svelte/
+  front-end-with-svelte/
+  front-end-with-svelte/
   back-end-with-loco/
 ```
 

@@ -42,14 +42,14 @@
 - [x] TypeSpec models authored in `typespec/`.
 
 ## Front-ends
-- [x] `front-end-form-with-svelte/` — SvelteKit 2 + Svelte 5 + Tailwind 4.
-- [x] `front-end-form-with-html/` — single-page static HTML + Alpine.js.
-- [x] `front-end-dashboard-with-svelte/` — SVAR DataGrid review.
-- [x] `front-end-dashboard-with-html/` — HTML review table.
+- [x] `front-end-with-svelte/` — SvelteKit 2 + Svelte 5 + Tailwind 4.
+- [x] `front-end-with-html/` — single-page static HTML + Alpine.js.
+- [x] `front-end-with-svelte/` — SVAR DataGrid review.
+- [x] `front-end-with-html/` — HTML review table.
 
 ## Full-stack backend
 - [x] `back-end-with-loco/` — Loco 0.16 + axum 0.8 +
-      SeaORM + Tera + HTMX + Alpine.
+      SeaORM + Loco JSON API + Alpine.
 - [x] `back-end-with-loco-setup` — scaffold generator.
 
 ## Tests

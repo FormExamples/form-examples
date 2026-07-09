@@ -125,15 +125,15 @@ medical-operation-note/
   seed.md                                           # source seed material
   doc/                                              # clinical reference documentation
   sql/                                   # Liquibase Postgres migrations
-  xml-representations/                              # XML + DTD per SQL table (generated)
-  fhir-r5/                                          # FHIR HL7 R5 JSON per SQL entity (generated)
+  xml/                              # XML + DTD per SQL table (generated)
+  fhir/r5/                                          # FHIR HL7 R5 JSON per SQL entity (generated)
   protobuf/                                         # Protocol Buffers .proto per SQL entity (generated)
   openapi/                                          # OpenAPI 3.1 .yaml per SQL entity (generated)
-  front-end-form-with-html/                         # static single-page op-note wizard
-  front-end-form-with-svelte/                       # SvelteKit single-page op-note wizard
-  front-end-dashboard-with-html/                    # HTML review table
-  front-end-dashboard-with-svelte/                  # SvelteKit SVAR DataGrid review dashboard
-  back-end-with-loco/            # Rust backend with server-rendered HTMX UI
+  front-end-with-html/                         # static single-page op-note wizard
+  front-end-with-svelte/                       # SvelteKit single-page op-note wizard
+  front-end-with-html/                    # HTML review table
+  front-end-with-svelte/                  # SvelteKit SVAR DataGrid review dashboard
+  back-end-with-loco/            # Rust axum + Loco JSON API back-end
   back-end-with-loco-setup       # cargo loco scaffold script (generated)
 ```
 

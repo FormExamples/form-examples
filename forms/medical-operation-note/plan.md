@@ -29,25 +29,25 @@
 
 ## Phase 3 — Generated artefacts (this commit)
 
-- [ ] `xml-representations/` — XML + DTD per SQL table.
-- [ ] `fhir-r5/` — FHIR R5 JSON per SQL entity.
+- [ ] `xml/` — XML + DTD per SQL table.
+- [ ] `fhir/r5/` — FHIR R5 JSON per SQL entity.
 - [ ] `protobuf/` — `.proto` per SQL entity.
 - [ ] `openapi/` — OpenAPI 3.1 `.yaml` per SQL entity.
 - [ ] `back-end-with-loco-setup` — Loco scaffold script.
 
 ## Phase 4 — Front-ends (deferred, parallel subagents)
 
-- [ ] `front-end-form-with-html/` — static single-page wizard, Lily
+- [ ] `front-end-with-html/` — static single-page wizard, Lily
       Design System headless.
-- [ ] `front-end-form-with-svelte/` — SvelteKit single-page wizard,
+- [ ] `front-end-with-svelte/` — SvelteKit single-page wizard,
       Lily Svelte headless.
-- [ ] `front-end-dashboard-with-html/` — HTML review table.
-- [ ] `front-end-dashboard-with-svelte/` — SvelteKit SVAR DataGrid.
+- [ ] `front-end-with-html/` — HTML review table.
+- [ ] `front-end-with-svelte/` — SvelteKit SVAR DataGrid.
 
 ## Phase 5 — Backend (deferred)
 
 - [ ] `back-end-with-loco/` — Rust Loco backend with
-      Tera + HTMX + Alpine.js.
+      Loco JSON API.
 
 ## Phase 6 — Verification
 

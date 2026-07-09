@@ -26,8 +26,8 @@ Document for recording a patient's wishes and preferences about future care, inc
 
 ```
 advance-statement-about-care/
-  front-end-form-with-svelte/
-  front-end-dashboard-with-svelte/
+  front-end-with-svelte/
+  front-end-with-svelte/
   back-end-with-loco/
 ```
 

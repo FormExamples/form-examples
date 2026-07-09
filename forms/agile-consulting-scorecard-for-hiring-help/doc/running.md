@@ -22,7 +22,7 @@ The 6-step wizard with the live score preview, the `/report` page
 button), and the `/diff` page (compare against a prior snapshot).
 
 ```sh
-cd front-end-form-with-svelte
+cd front-end-with-svelte
 pnpm install
 pnpm run dev            # http://localhost:5173 by default
 pnpm run check          # svelte-check + 64 Vitest cases
@@ -40,7 +40,7 @@ per-scorecard report drilldown at `/report/[id]`, and the
 `/import` bulk-import UI.
 
 ```sh
-cd front-end-dashboard-with-svelte
+cd front-end-with-svelte
 pnpm install
 pnpm run dev            # http://localhost:5173 by default
 pnpm run check          # svelte-check + 13 Vitest cases
@@ -73,19 +73,19 @@ The endpoints are documented in [`api-reference.md`](./api-reference.md).
 Three single-file pages that work without any dev server, framework,
 or backend:
 
-- `front-end-form-with-html/index.html` — the 6-step wizard with a
+- `front-end-with-html/index.html` — the 6-step wizard with a
   sticky live preview and JSON export.
-- `front-end-form-with-html/report.html` — printable readiness report
+- `front-end-with-html/report.html` — printable readiness report
   (file-input / paste-JSON / load-sample, `@media print` stylesheet).
-- `front-end-dashboard-with-html/index.html` — sortable / filterable
+- `front-end-with-html/index.html` — sortable / filterable
   11-column table with 12 inline samples.
 
 Open any of them directly in a browser:
 
 ```sh
-open front-end-form-with-html/index.html
-open front-end-form-with-html/report.html
-open front-end-dashboard-with-html/index.html
+open front-end-with-html/index.html
+open front-end-with-html/report.html
+open front-end-with-html/index.html
 ```
 
 ## Test everything

@@ -6,9 +6,9 @@ SvelteKit patient front-end implemented. WHO emergency unit general (non-trauma)
 
 Remaining work:
 
-- Build front-end-dashboard-with-svelte (SVAR DataGrid)
+- Build front-end-with-svelte (SVAR DataGrid)
 - Build back-end-with-loco Rust backend (axum + Loco +
-  Tera + HTMX + Alpine.js)
+  Loco JSON API)
 - PDF report generation via SvelteKit server endpoint
 - End-to-end Playwright tests
 - Clinical safety case documentation

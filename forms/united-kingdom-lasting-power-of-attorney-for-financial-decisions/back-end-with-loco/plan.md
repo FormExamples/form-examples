@@ -14,7 +14,7 @@ files (`Cargo.toml`, `.gitignore`, `src/`, `target/`, `templates/`,
    Loco app + Postgres (this generates SeaORM entities, controllers, and
    templates for the 16 tables).
 2. Port the validation engine from the TypeScript front-end
-   (`front-end-form-with-svelte/src/lib/engine`) into
+   (`front-end-with-svelte/src/lib/engine`) into
    `src/services/validator.rs` with one Rust function per fired-rule
    and per additional-flag.
 3. Add controller routes for the 15-step wizard (`/lpa/new`, step

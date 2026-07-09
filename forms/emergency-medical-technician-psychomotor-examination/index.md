@@ -26,8 +26,8 @@ NREMT-style psychomotor skills examination for Emergency Medical Technicians, sc
 
 ```
 emergency-medical-technician-psychomotor-examination/
-  front-end-form-with-svelte/
-  front-end-dashboard-with-svelte/
+  front-end-with-svelte/
+  front-end-with-svelte/
 ```
 
 ## Technology

@@ -27,9 +27,9 @@ General patient intake form collecting demographics, insurance, medical history,
 
 ```
 patient-intake/
-  front-end-form-with-svelte/
-  front-end-dashboard-with-svelte/
-  full-stack-with-rust-axum-loco-tera/
+  front-end-with-svelte/
+  front-end-with-svelte/
+  back-end-with-loco/
 ```
 
 ## Technology

@@ -30,8 +30,8 @@ Urological evaluation using the IPSS (International Prostate Symptom Score) with
 
 ```
 urology-assessment/
-  front-end-form-with-svelte/
-  front-end-dashboard-with-svelte/
+  front-end-with-svelte/
+  front-end-with-svelte/
   back-end-with-loco/
 ```
 

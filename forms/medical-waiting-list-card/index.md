@@ -104,15 +104,15 @@ medical-waiting-list-card/
   seed.md                                           # original seed brief
   doc/                                              # documentation
   sql/                                   # Liquibase Postgres migrations
-  xml-representations/                              # XML + DTD per SQL table
-  fhir-r5/                                          # FHIR HL7 R5 JSON resources
+  xml/                              # XML + DTD per SQL table
+  fhir/r5/                                          # FHIR HL7 R5 JSON resources
   protobuf/                                         # Protocol Buffers per SQL table
   openapi/                                          # OpenAPI 3.1 per SQL table
-  front-end-form-with-html/                         # static single-page practitioner wizard
-  front-end-form-with-svelte/                       # SvelteKit single-page wizard
-  front-end-dashboard-with-html/                    # static dashboard
-  front-end-dashboard-with-svelte/                  # SvelteKit + SVAR DataGrid
-  back-end-with-loco/            # Rust backend with HTMX UI
+  front-end-with-html/                         # static single-page practitioner wizard
+  front-end-with-svelte/                       # SvelteKit single-page wizard
+  front-end-with-html/                    # static dashboard
+  front-end-with-svelte/                  # SvelteKit + SVAR DataGrid
+  back-end-with-loco/            # Rust axum + Loco JSON API back-end
   back-end-with-loco-setup       # generated scaffold script
 ```
 

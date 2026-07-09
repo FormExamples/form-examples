@@ -7,8 +7,8 @@
 - [x] SQL migrations
       (`agile_checklist`, `agile_checklist_grade`,
       `agile_checklist_grade_rule`, `agile_checklist_grade_flag`)
-- [x] Generate `xml-representations/` from SQL via the monorepo helper
-- [x] Generate `fhir-r5/` JSON from SQL via the monorepo helper
+- [x] Generate `xml/` from SQL via the monorepo helper
+- [x] Generate `fhir/r5/` JSON from SQL via the monorepo helper
 - [x] SvelteKit front-end form (5-step wizard, scoring engine, PDF report)
       — `pnpm test` 21/21, `pnpm run check` clean, browser smoke-tested
 - [x] SvelteKit dashboard (individuals + teams views, sparkline trend,
@@ -26,7 +26,7 @@
       aggregated teams view with SVG sparkline, filters, CSV export)
       — browser smoke-tested, output matches Svelte dashboard exactly
 
-- [x] Rust full-stack (axum + Tera + HTMX + Alpine) with Rust port of the
+- [x] Rust full-stack (axum + Loco JSON API + Alpine) with Rust port of the
       engine — `cargo test` 8/8, `cargo build` clean, browser smoke-tested,
       MATURE 89% matches SvelteKit and static-HTML outputs identically
 - [x] Author background notes in `doc/` (scoring-algorithm, coaching-rules,

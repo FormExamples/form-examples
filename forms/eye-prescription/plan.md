@@ -101,7 +101,7 @@ medium / high), a human-readable description, and a suggested action
 12. [ ] Build HTML front-end form (static, Alpine.js).
 13. [ ] Build SvelteKit dashboard (SVAR DataGrid).
 14. [ ] Build HTML dashboard (static review table).
-15. [ ] Build Rust full-stack with axum / Loco / Tera / HTMX / Alpine.
+15. [ ] Build Rust full-stack with axum / Loco JSON API.
 16. [ ] Unit-test classification engine (Vitest).
 17. [ ] Run `bin/test-form eye-prescription`.
 

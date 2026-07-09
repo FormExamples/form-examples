@@ -2,7 +2,7 @@
 
 Quick reference for the nine HTTP endpoints exposed by the Rust axum
 server at `back-end-with-loco/`. The SvelteKit
-front-ends (`front-end-form-with-svelte`, `front-end-dashboard-with-svelte`)
+front-ends (`front-end-with-svelte`)
 mount a subset of these at the same paths via `+server.ts` so they
 work standalone against the bundled sample data when no backend is
 running.
@@ -244,10 +244,10 @@ Response:
 
 All endpoints return camelCase JSON. The `ScorecardRow` shape is
 identical to the SvelteKit dashboard's `ScorecardRow` type
-(`front-end-dashboard-with-svelte/src/lib/types.ts`). The
+(`front-end-with-svelte/src/lib/types.ts`). The
 `AgileConsultingScorecardAssessment` and `GradeResult` shapes are
 identical between the TypeScript engine
-(`front-end-form-with-svelte/src/lib/engine/types.ts`) and the Rust
+(`front-end-with-svelte/src/lib/engine/types.ts`) and the Rust
 engine (`back-end-with-loco/src/scoring/types.rs`).
 The two engines are parity-tested against
 `samples/sample-assessment.json` / `samples/sample-grade.json` so any

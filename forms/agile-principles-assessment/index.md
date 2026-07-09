@@ -102,12 +102,12 @@ agile-principles-assessment/
   doc/                                              # background reference
   seed.md                                           # the 12 principles (source)
   sql/                                   # Liquibase Postgres migrations
-  xml-representations/                              # XML + DTD per SQL table
-  fhir-r5/                                          # FHIR R5 JSON resources
-  front-end-form-with-html/                         # static single-page wizard
-  front-end-form-with-svelte/                       # SvelteKit single-page wizard
-  front-end-dashboard-with-html/                    # review dashboard (HTML)
-  front-end-dashboard-with-svelte/                  # review dashboard (Svelte + table)
+  xml/                              # XML + DTD per SQL table
+  fhir/r5/                                          # FHIR R5 JSON resources
+  front-end-with-html/                         # static single-page wizard
+  front-end-with-svelte/                       # SvelteKit single-page wizard
+  front-end-with-html/                    # review dashboard (HTML)
+  front-end-with-svelte/                  # review dashboard (Svelte + table)
   back-end-with-loco/            # Rust backend + server-rendered UI
 ```
 

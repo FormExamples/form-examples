@@ -269,8 +269,8 @@ Free text (include summary and differential AND plan for imaging, meds/intervent
 
 ```
 who-emergency-unit-general-form/
-  front-end-form-with-svelte/                         # Patient questionnaire
-  front-end-dashboard-with-svelte/                    # Dashboard
+  front-end-with-svelte/                         # Patient questionnaire
+  front-end-with-svelte/                    # Dashboard
   back-end-with-loco/    # Full-stack option
 ```
 

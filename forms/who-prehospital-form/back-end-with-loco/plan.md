@@ -11,7 +11,7 @@ script). Rust crate not yet authored.
    scaffold the Loco app and run `cargo loco generate scaffold` for each
    table in `sql/`.
 2. Author engine types, rules, grader, and flagged-issues mirroring the
-   front-end-form-with-svelte engine, with `serde(rename_all = "camelCase")`
+   front-end-with-svelte engine, with `serde(rename_all = "camelCase")`
    on shared structs.
 3. Wire HTTP routes: `GET /` landing, `POST /assessment/new`,
    `GET /assessment/{id}` form, `POST /assessment/{id}/submit`,

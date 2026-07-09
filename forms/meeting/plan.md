@@ -69,7 +69,7 @@ and kept in sync via `cargo test`).
 8. [x] Build static HTML dashboard.
 9. [ ] Build SvelteKit single-page wizard (deferred — requires `pnpm install`).
 10. [ ] Build SvelteKit dashboard with SVAR DataGrid (deferred).
-11. [ ] Build Rust full-stack with axum/Loco/Tera/HTMX/Alpine (deferred —
+11. [ ] Build Rust full-stack with axum/Loco JSON API (deferred —
         requires `cargo build`).
 12. [ ] Unit-test validation engine (Vitest) (deferred with SvelteKit).
 13. [ ] Run `bin/test-form meeting`.

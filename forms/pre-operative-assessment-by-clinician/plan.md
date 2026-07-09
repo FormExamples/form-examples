@@ -74,7 +74,7 @@ infusion for anaemia, insulin sliding scale for uncontrolled diabetes).
 7. [x] Build HTML patient-form (static single-page, Alpine.js).
 8. [x] Build clinician-dashboard SvelteKit (SVAR DataGrid).
 9. [x] Build clinician-dashboard HTML (static review table).
-10. [x] Build Rust full-stack with axum/Loco/Tera/HTMX/Alpine.
+10. [x] Build Rust full-stack with axum/Loco JSON API.
 11. [x] Unit-test composite grader (Vitest).
 12. [x] Run `bin/test-form pre-operative-assessment-by-clinician`.
 

@@ -73,4 +73,4 @@ Recommendation is the worst-severity match of the rules above.
 ## Test fixtures
 
 Each rule has at least one positive and one negative fixture in
-`front-end-form-with-svelte/src/lib/grading/grader.test.ts`.
+`front-end-with-svelte/src/lib/grading/grader.test.ts`.

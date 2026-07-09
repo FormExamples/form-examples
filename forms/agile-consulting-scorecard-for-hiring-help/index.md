@@ -138,12 +138,12 @@ agile-consulting-scorecard-for-hiring-help/
   samples/                                          # golden-file fixtures for engine-parity tests
   scripts/                                          # demo.sh — end-to-end pipeline smoke test
   sql/                                   # Liquibase Postgres migrations (8 files, 7 tables)
-  xml-representations/                              # XML + DTD per SQL table
-  fhir-r5/                                          # FHIR HL7 R5 JSON resources
-  front-end-form-with-html/                         # static single-page wizard + printable report
-  front-end-form-with-svelte/                       # SvelteKit wizard + /report + /report/pdf + /diff
-  front-end-dashboard-with-html/                    # static reviewer table (11 columns)
-  front-end-dashboard-with-svelte/                  # SVAR Grid dashboard + /report/[id] + /import + stats panel
+  xml/                              # XML + DTD per SQL table
+  fhir/r5/                                          # FHIR HL7 R5 JSON resources
+  front-end-with-html/                         # static single-page wizard + printable report
+  front-end-with-svelte/                       # SvelteKit wizard + /report + /report/pdf + /diff
+  front-end-with-html/                    # static reviewer table (11 columns)
+  front-end-with-svelte/                  # SVAR Grid dashboard + /report/[id] + /import + stats panel
   back-end-with-loco/            # Rust axum server + scoring engine + CLI
   back-end-with-loco-setup       # Loco scaffold-generator shell script
 ```

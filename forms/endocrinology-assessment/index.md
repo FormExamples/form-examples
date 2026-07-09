@@ -30,8 +30,8 @@ General endocrinology consultation assessment covering the thyroid, adrenal, glu
 
 ```
 endocrinology-assessment/
-  front-end-form-with-svelte/
-  front-end-dashboard-with-svelte/
+  front-end-with-svelte/
+  front-end-with-svelte/
 ```
 
 ## Technology

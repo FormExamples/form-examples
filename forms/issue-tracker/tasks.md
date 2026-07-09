@@ -25,7 +25,7 @@
 ### Scoring engine
 
 - [x] Author `types.ts` for the `IssueTrackerAssessment` input
-      (`front-end-form-with-svelte/src/lib/engine/types.ts`)
+      (`front-end-with-svelte/src/lib/engine/types.ts`)
 - [x] Author `priority-rules.ts`, `severity-rules.ts`, `magnitude-rules.ts`,
       `harm-rules.ts`, `failure-rules.ts`, `moscow-rules.ts`,
       `frequency-rules.ts`

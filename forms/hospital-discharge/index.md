@@ -30,8 +30,8 @@ Hospital discharge summary form aligned with UK NICE NG27 and the SAFER patient-
 
 ```
 hospital-discharge/
-  front-end-form-with-svelte/
-  front-end-dashboard-with-svelte/
+  front-end-with-svelte/
+  front-end-with-svelte/
 ```
 
 ## Technology

@@ -29,8 +29,8 @@ Clinical genetics assessment capturing proband medical history, detailed three-g
 
 ```
 genetics-assessment/
-  front-end-form-with-svelte/
-  front-end-dashboard-with-svelte/
+  front-end-with-svelte/
+  front-end-with-svelte/
 ```
 
 ## Technology

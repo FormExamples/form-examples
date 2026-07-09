@@ -1,6 +1,6 @@
 # Plan: back-end-with-loco
 
-Rust full-stack implementation using Loco + axum + Tera + HTMX + Alpine.
+Rust full-stack implementation using Loco + axum + Loco JSON API + Alpine.
 
 ## Build order
 

@@ -74,7 +74,7 @@ The recommendation is the worst-severity match across the fired flags, with
 8. [ ] Build HTML form (static single-page Alpine.js).
 9. [ ] Build dashboard SvelteKit (SVAR DataGrid).
 10. [ ] Build dashboard HTML (review table).
-11. [ ] Build Rust full-stack with axum/Loco/Tera/HTMX/Alpine.
+11. [ ] Build Rust full-stack with axum/Loco JSON API.
 12. [ ] Unit-test grader (Vitest).
 13. [ ] Run `bin/test-form united-kingdom-statement-of-fitness-for-work`.
 

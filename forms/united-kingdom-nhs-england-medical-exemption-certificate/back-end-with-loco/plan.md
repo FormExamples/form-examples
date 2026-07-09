@@ -1,4 +1,4 @@
-# Plan — Full-Stack Loco / Tera / HTMX / Alpine — UK NHS FP92A
+# Plan — Full-Stack Loco JSON API — UK NHS FP92A
 
 ## Status
 

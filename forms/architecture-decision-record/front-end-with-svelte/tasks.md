@@ -1,4 +1,4 @@
-# front-end-form-with-svelte — Tasks
+# front-end-with-svelte — Tasks
 
 - [x] `package.json`, `svelte.config.js`, `vite.config.ts`, `tsconfig.json`
 - [x] `src/app.html`, `src/app.css`, `src/app.d.ts`

@@ -31,8 +31,8 @@ Pre-participation physical evaluation (PPE) for athletes and sportspeople, align
 
 ```
 sports-medicine-assessment/
-  front-end-form-with-svelte/
-  front-end-dashboard-with-svelte/
+  front-end-with-svelte/
+  front-end-with-svelte/
 ```
 
 ## Technology

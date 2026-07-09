@@ -31,7 +31,7 @@
 
 ## FHIR export
 - [ ] `src/fhir/vision_prescription.rs`.
-- [ ] Round-trip test against the JSON in `../fhir-r5/`.
+- [ ] Round-trip test against the JSON in `../fhir/r5/`.
 
 ## Verify
 - [ ] `cargo build` passes.

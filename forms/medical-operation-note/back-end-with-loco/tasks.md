@@ -33,7 +33,7 @@
 - [ ] Replace the `download_pdf` text/plain stub with a real
       `printpdf`/`weasyprint` signed-PDF generator
 - [ ] Emit FHIR R5 `Procedure` bundle from the persisted row (mirror
-      the schemas in `forms/medical-operation-note/fhir-r5/`)
+      the schemas in `forms/medical-operation-note/fhir/r5/`)
 - [ ] Move the live grade preview from Alpine.js to a real HTMX
       partial endpoint (`hx-post=/operation-note/preview`) that
       reuses the Rust grader so the front-end and back-end agree

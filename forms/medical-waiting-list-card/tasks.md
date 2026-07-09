@@ -25,28 +25,28 @@
 - [x] `sql/09_schema.sql` — combined schema (generated).
 
 ## Generated artefacts
-- [ ] `xml-representations/` — generate XML + DTD per SQL table.
-- [ ] `fhir-r5/` — generate FHIR R5 JSON per SQL table.
+- [ ] `xml/` — generate XML + DTD per SQL table.
+- [ ] `fhir/r5/` — generate FHIR R5 JSON per SQL table.
 - [ ] `protobuf/` — generate `.proto` per SQL table.
 - [ ] `openapi/` — generate `.yaml` per SQL table.
 - [ ] `back-end-with-loco-setup` — generate Loco scaffold script.
 
-## SvelteKit practitioner form (`front-end-form-with-svelte/`)
+## SvelteKit practitioner form (`front-end-with-svelte/`)
 - [ ] Engine: `types.ts`, `utils.ts`, `priority-targets.ts`,
       `waiting-time-rules.ts`, `composite-grader.ts`, `flagged-issues.ts`.
 - [ ] Vitest tests for the composite grader and waiting-time rules.
 - [ ] Step components `Step1Practitioner.svelte` through `Step7Signoff.svelte`.
 - [ ] PDF rendering via `pdfmake` at `/report/pdf`.
 
-## Static HTML practitioner form (`front-end-form-with-html/`)
+## Static HTML practitioner form (`front-end-with-html/`)
 - [ ] Single-page Alpine.js wizard mirroring the SvelteKit version.
 
-## SvelteKit dashboard (`front-end-dashboard-with-svelte/`)
+## SvelteKit dashboard (`front-end-with-svelte/`)
 - [ ] SVAR DataGrid with sortable columns and dropdown filters on
       specialty, clinical priority, and Waiting Time Status.
 - [ ] Backend API client with sample-data fallback.
 
-## Static HTML dashboard (`front-end-dashboard-with-html/`)
+## Static HTML dashboard (`front-end-with-html/`)
 - [ ] Sortable HTML table mirroring the SvelteKit dashboard.
 
 ## Rust full-stack (`back-end-with-loco/`)

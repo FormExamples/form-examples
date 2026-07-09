@@ -1,4 +1,4 @@
-# Plan — Full stack with Loco / Tera / HTMX / Alpine.js
+# Plan — Full stack with Loco JSON API.js
 
 Implemented per [`docs/superpowers/plans/2026-05-10-okr-tracker-plan-6-full-stack-rust.md`](../../../docs/superpowers/plans/2026-05-10-okr-tracker-plan-6-full-stack-rust.md).
 

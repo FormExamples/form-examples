@@ -27,14 +27,14 @@ Implementation roadmap for the WHO Surgical Safety Checklist form.
       table.
 - [ ] Author TypeSpec definitions per table under `typespec/`.
 
-## Phase 4 — Static HTML wizard (`front-end-form-with-html`)
+## Phase 4 — Static HTML wizard (`front-end-with-html`)
 
 - [ ] Single-page wizard: case details → Sign In → Time Out → Sign Out →
       Summary.
 - [ ] LocalStorage persistence, JSON / XML / CSV / TSV export.
 - [ ] Print-friendly summary page.
 
-## Phase 5 — SvelteKit wizard (`front-end-form-with-svelte`)
+## Phase 5 — SvelteKit wizard (`front-end-with-svelte`)
 
 - [ ] Scaffold with `npm create svelte@latest` (TypeScript + Tailwind 4).
 - [ ] Implement step components `Step0CaseDetails`, `Step1SignIn`,
@@ -44,11 +44,11 @@ Implementation roadmap for the WHO Surgical Safety Checklist form.
 - [ ] PDF export with `pdfmake`.
 - [ ] Vitest tests for `flags.ts` and `completion.ts`.
 
-## Phase 6 — HTML dashboard (`front-end-dashboard-with-html`)
+## Phase 6 — HTML dashboard (`front-end-with-html`)
 
 - [ ] Static HTML table view of completed checklists with filter / sort.
 
-## Phase 7 — SvelteKit dashboard (`front-end-dashboard-with-svelte`)
+## Phase 7 — SvelteKit dashboard (`front-end-with-svelte`)
 
 - [ ] SVAR DataGrid review dashboard with status / specialty / flag filters.
 

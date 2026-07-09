@@ -32,8 +32,8 @@ Workplace climate assessment measuring organisational culture, psychological saf
 
 ```
 workplace-climate-assessment/
-  front-end-form-with-svelte/
-  front-end-dashboard-with-svelte/
+  front-end-with-svelte/
+  front-end-with-svelte/
 ```
 
 ## Technology

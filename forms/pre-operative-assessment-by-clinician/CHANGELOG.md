@@ -19,7 +19,7 @@ file only records changes scoped to the **Pre-operative Assessment by Clinician*
   new front-end steps, new clinical references, new examples, etc._
 
 ### Changed
-- Linked the patient counterpart in `index.md`; corrected stale directory/architecture references in `AGENTS.md` (dedup consolidated dirs, `xml-representations/`→`xml/`, `fhir-r5/`→`fhir/r5/`, HTMX→JSON API).
+- Linked the patient counterpart in `index.md`; corrected stale directory/architecture references in `AGENTS.md` (dedup consolidated dirs, `xml/`→`xml/`, `fhir/r5/`→`fhir/r5/`, HTMX→JSON API).
 - Renamed the HTML front-end localStorage key to the canonical `pre-operative-assessment-by-clinician.front-end-with-html.v1`.
 - _Pending Ã¢ÂÂ record schema migrations, scoring-engine behaviour changes,
   re-banding of composite risk, front-end UX changes, breaking renames._

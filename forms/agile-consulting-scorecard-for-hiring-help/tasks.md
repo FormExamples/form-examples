@@ -61,12 +61,12 @@
 
 ## Front-end (static HTML)
 
-- [x] Self-contained `front-end-form-with-html/index.html` — 6-step
+- [x] Self-contained `front-end-with-html/index.html` — 6-step
       wizard with sticky live preview, JSON export
-- [x] Self-contained `front-end-form-with-html/report.html` — printable
+- [x] Self-contained `front-end-with-html/report.html` — printable
       readiness report (file input / paste JSON / sample loader,
       `@media print` stylesheet)
-- [x] Self-contained `front-end-dashboard-with-html/index.html` —
+- [x] Self-contained `front-end-with-html/index.html` —
       sortable / filterable 11-column table with 12 inline samples
 
 ## Rust backend

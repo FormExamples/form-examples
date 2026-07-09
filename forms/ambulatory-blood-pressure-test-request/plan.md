@@ -33,9 +33,9 @@ consistent, auditable, and aligned with NICE NG136 and BIHS guidance.
 2. [ ] Generated representations (XML, FHIR R5, protobuf, OpenAPI)
 3. [ ] Loco setup script, examples, spec.md, CHANGELOG.md
 4. [x] index.md / AGENTS.md / plan.md / tasks.md / doc
-5. [ ] front-end-form-with-html (HTML wizard + JS four-axis engine)
-6. [ ] front-end-form-with-svelte (SvelteKit wizard + TS engine)
-7. [ ] front-end-dashboard-with-html / front-end-dashboard-with-svelte
+5. [ ] front-end-with-html (HTML wizard + JS four-axis engine)
+6. [ ] front-end-with-svelte (SvelteKit wizard + TS engine)
+7. [ ] front-end-with-html / front-end-with-svelte
 8. [ ] back-end-with-loco (Rust JSON API; cargo test requires Postgres)
 
 ## Future enhancements

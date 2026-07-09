@@ -18,8 +18,8 @@ ahead of printing and posting to NHSBSA Bridge House.
 
 ## Phase 2 — Representations (derived from SQL)
 
-- [x] `xml-representations/` — XML + DTD per SQL table.
-- [x] `fhir-r5/` — FHIR HL7 R5 JSON resources mapped to the schema.
+- [x] `xml/` — XML + DTD per SQL table.
+- [x] `fhir/r5/` — FHIR HL7 R5 JSON resources mapped to the schema.
 - [x] `protobuf/` — `.proto` schemas per SQL table.
 - [x] `typespec/` — TypeSpec models for API-first integration.
 - [x] `doc/` — reference notes covering NHSBSA guidance and the 10
@@ -27,17 +27,16 @@ ahead of printing and posting to NHSBSA Bridge House.
 
 ## Phase 3 — Front-ends
 
-- [x] `front-end-form-with-html/` — single-page HTML wizard.
-- [x] `front-end-form-with-svelte/` — SvelteKit wizard scaffold.
-- [x] `front-end-dashboard-with-html/` — static HTML review table.
-- [x] `front-end-dashboard-with-svelte/` — SVAR DataGrid dashboard scaffold.
+- [x] `front-end-with-html/` — single-page HTML wizard.
+- [x] `front-end-with-svelte/` — SvelteKit wizard scaffold.
+- [x] `front-end-with-html/` — static HTML review table.
+- [x] `front-end-with-svelte/` — SVAR DataGrid dashboard scaffold.
 
 ## Phase 4 — Full stack
 
 - [x] `back-end-with-loco-setup` — shell script of
       `cargo loco generate scaffold` calls aligned with the SQL.
-- [x] `back-end-with-loco/` — Rust axum + Tera + HTMX +
-      Alpine.js crate with a working wizard and grade report.
+- [x] `back-end-with-loco/` — Rust axum + Loco JSON API crate with a working wizard and grade report.
 
 ## Phase 5 — Verification
 

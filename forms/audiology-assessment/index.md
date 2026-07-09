@@ -26,9 +26,9 @@ Comprehensive hearing evaluation covering audiometric testing, tinnitus, vestibu
 
 ```
 audiology-assessment/
-  front-end-form-with-svelte/             # Patient questionnaire
-  front-end-dashboard-with-svelte/        # Dashboard
-  full-stack-with-rust-axum-loco-tera/    # Full-stack option
+  front-end-with-svelte/             # Patient questionnaire
+  front-end-with-svelte/        # Dashboard
+  back-end-with-loco/    # Full-stack option
 ```
 
 ## Technology

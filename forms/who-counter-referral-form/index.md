@@ -102,8 +102,8 @@ Note: Attach copy of medication chart at discharge or list of current medication
 
 ```
 who-counter-referral-form/
-  front-end-form-with-svelte/                         # Patient questionnaire
-  front-end-dashboard-with-svelte/                    # Dashboard
+  front-end-with-svelte/                         # Patient questionnaire
+  front-end-with-svelte/                    # Dashboard
   back-end-with-loco/    # Full-stack option
 ```
 

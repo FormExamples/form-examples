@@ -30,8 +30,8 @@ Structured offboarding checklist ensuring every departing employee completes the
 
 ```
 employee-offboarding-checklist/
-  front-end-form-with-svelte/
-  front-end-dashboard-with-svelte/
+  front-end-with-svelte/
+  front-end-with-svelte/
 ```
 
 ## Technology

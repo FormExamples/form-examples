@@ -29,9 +29,9 @@ Patient encounter satisfaction survey for collecting feedback on healthcare expe
 
 ```
 encounter-satisfaction/
-  front-end-form-with-svelte/
-  front-end-dashboard-with-svelte/
-  full-stack-with-rust-axum-loco-tera/
+  front-end-with-svelte/
+  front-end-with-svelte/
+  back-end-with-loco/
 ```
 
 ## Technology

@@ -117,8 +117,8 @@ parser.
 
 ## Related Artifacts
 - forms/architecture-decision-record/sql/
-- forms/architecture-decision-record/front-end-form-with-html/js/app.js
-- forms/architecture-decision-record/front-end-form-with-svelte/src/lib/report/build-markdown.ts
+- forms/architecture-decision-record/front-end-with-html/js/app.js
+- forms/architecture-decision-record/front-end-with-svelte/src/lib/report/build-markdown.ts
 
 ## Related Principles
 - P-01 — SQL migrations are the source of truth; other formats are generated

@@ -25,8 +25,8 @@ Clinical Welsh-language (Cymraeg) speaking assessment for healthcare professiona
 
 ```
 medical-language-speaking-assessment-for-cymraeg/
-  front-end-form-with-svelte/
-  front-end-dashboard-with-svelte/
+  front-end-with-svelte/
+  front-end-with-svelte/
 ```
 
 ## Technology

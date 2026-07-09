@@ -88,15 +88,15 @@ rule → `needs-correction`; otherwise `ready-to-register`.
        backbone).
 7. [ ] Generate Protocol Buffer schemas with
        `bin/protobuf/generate-protobuf-representations.py`.
-8. [ ] Build SvelteKit single-page wizard (front-end-form-with-svelte).
-9. [ ] Build static HTML wizard (front-end-form-with-html) with
+8. [ ] Build SvelteKit single-page wizard (front-end-with-svelte).
+9. [ ] Build static HTML wizard (front-end-with-html) with
        Alpine.js.
 10. [ ] Build SvelteKit + SVAR Grid review dashboard
-        (front-end-dashboard-with-svelte).
-11. [ ] Build HTML review table (front-end-dashboard-with-html).
+        (front-end-with-svelte).
+11. [ ] Build HTML review table (front-end-with-html).
 12. [ ] Run `cargo loco generate scaffold` via
         `back-end-with-loco-new/00-new.sh`.
-13. [ ] Build Rust full-stack with axum/Loco/Tera/HTMX/Alpine.
+13. [ ] Build Rust full-stack with axum/Loco JSON API.
 14. [ ] Unit-test validity engine (Vitest).
 15. [ ] Run `bin/test-form united-kingdom-lasting-power-of-attorney-for-health-and-care-decisions`.
 

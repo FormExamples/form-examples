@@ -1,4 +1,4 @@
-# front-end-form-with-svelte — Plan
+# front-end-with-svelte — Plan
 
 SvelteKit 2 + Svelte 5 implementation of the 16-step ADR wizard.
 

@@ -41,7 +41,7 @@ to commit.
 7. [ ] Front-end form (SvelteKit + Svelte 5 + Tailwind 4)
 8. [ ] Front-end dashboard (HTML, decision register table)
 9. [ ] Front-end dashboard (SvelteKit + SVAR DataGrid)
-10. [ ] Full-stack (Rust + Loco + Tera + HTMX + Alpine.js)
+10. [ ] Full-stack (Rust + Loco + Loco JSON API)
 11. [ ] `bin/test-form architecture-decision-record` passes
 
 ## Output formats

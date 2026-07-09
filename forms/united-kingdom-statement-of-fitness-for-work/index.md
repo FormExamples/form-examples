@@ -139,15 +139,15 @@ united-kingdom-statement-of-fitness-for-work/
   seed.md                                         # source material from gov.uk
   doc/                                            # clinical and policy references
   sql/                                 # Liquibase Postgres migrations
-  xml-representations/                            # XML + DTD per SQL table
-  fhir-r5/                                        # FHIR HL7 R5 JSON resources
+  xml/                            # XML + DTD per SQL table
+  fhir/r5/                                        # FHIR HL7 R5 JSON resources
   protobuf/                                       # Protocol Buffers schemas
   typespec/                                       # Microsoft TypeSpec schemas
-  front-end-form-with-html/                       # static HTML wizard
-  front-end-form-with-svelte/                     # SvelteKit wizard
-  front-end-dashboard-with-html/                  # HTML review table
-  front-end-dashboard-with-svelte/                # SVAR DataGrid review dashboard
-  back-end-with-loco/          # Rust backend (axum + Loco + Tera + HTMX + Alpine)
+  front-end-with-html/                       # static HTML wizard
+  front-end-with-svelte/                     # SvelteKit wizard
+  front-end-with-html/                  # HTML review table
+  front-end-with-svelte/                # SVAR DataGrid review dashboard
+  back-end-with-loco/          # Rust backend (axum + Loco + Loco JSON API + Alpine)
   back-end-with-loco-setup     # cargo loco scaffold generator (shell script)
 ```
 

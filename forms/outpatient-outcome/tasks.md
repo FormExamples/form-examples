@@ -11,7 +11,7 @@
 - [x] Scaffold HTML dashboard
 - [x] Build SvelteKit patient form (OOCG engine + 11 step components + 50 Vitest tests)
 - [x] Build SvelteKit dashboard (SVAR DataGrid + 20 sample rows + filters)
-- [x] Build Rust full-stack crate (axum + Tera + HTMX with stub controllers/views)
+- [x] Build Rust full-stack crate (axum + Loco JSON API with stub controllers/views)
 - [x] Run `bin/test-form outpatient-outcome-report`
 - [ ] Add PROMIS official T-score calibration tables
 - [ ] Obtain EuroQol EQ-5D-5L licence for production use

@@ -70,9 +70,9 @@ where in the team's lifecycle the ADR is being captured.
 ### Author a new ADR
 
 1. Open one of the wizards:
-   - `front-end-form-with-html/index.html` — static, opens from
+   - `front-end-with-html/index.html` — static, opens from
      `file://`, no build step
-   - `front-end-form-with-svelte/` — `pnpm dev`, then visit
+   - `front-end-with-svelte/` — `pnpm dev`, then visit
      `http://localhost:5173`
    - `back-end-with-loco/` — `cargo loco start`,
      then visit `http://localhost:5150/architecture_decision_records/new`
@@ -92,10 +92,10 @@ where in the team's lifecycle the ADR is being captured.
 
 ### Browse the register
 
-- `front-end-dashboard-with-html/index.html` — static, reads sample
+- `front-end-with-html/index.html` — static, reads sample
   data from `js/data.js`. Replace with a generated `data/adrs.json`
   when wiring to a real backend.
-- `front-end-dashboard-with-svelte/` — sortable / filterable register
+- `front-end-with-svelte/` — sortable / filterable register
   with status pills. Set `VITE_API_BASE_URL=http://localhost:5150` in
   `.env.local` to read live from the Loco backend's `/api/adrs`
   endpoint. Clicking a row navigates to `/{slug}` for an inline
@@ -135,13 +135,13 @@ architecture-decision-record/
   tasks.md
   doc/                                          References and template source
   sql/                                PostgreSQL Liquibase migrations
-  xml-representations/                           XML + DTD per SQL table
-  fhir-r5/                                       FHIR HL7 R5 JSON per SQL table
-  front-end-form-with-html/                      Static HTML + Alpine.js wizard
-  front-end-form-with-svelte/                    SvelteKit 2 + Svelte 5 wizard
-  front-end-dashboard-with-html/                 Decision register (HTML table)
-  front-end-dashboard-with-svelte/               Decision register (SVAR Grid)
-  back-end-with-loco/         Rust + Loco + Tera + HTMX + Alpine
+  xml/                           XML + DTD per SQL table
+  fhir/r5/                                       FHIR HL7 R5 JSON per SQL table
+  front-end-with-html/                      Static HTML + Alpine.js wizard
+  front-end-with-svelte/                    SvelteKit 2 + Svelte 5 wizard
+  front-end-with-html/                 Decision register (HTML table)
+  front-end-with-svelte/               Decision register (SVAR Grid)
+  back-end-with-loco/         Rust + Loco + Loco JSON API + Alpine
 ```
 
 ## References

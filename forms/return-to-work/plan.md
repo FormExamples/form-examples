@@ -61,7 +61,7 @@ scope** for this clinician-operated form.
 9. [ ] Build HTML clinician-form (static single-page, Alpine.js).
 10. [ ] Build clinician-dashboard SvelteKit (SVAR DataGrid).
 11. [ ] Build clinician-dashboard HTML (static review table).
-12. [ ] Build Rust full-stack with axum/Loco/Tera/HTMX/Alpine.
+12. [ ] Build Rust full-stack with axum/Loco JSON API.
 13. [ ] Unit-test composite grader (Vitest).
 14. [ ] Run `bin/test-form return-to-work`.
 

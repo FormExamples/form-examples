@@ -8,7 +8,7 @@
        SeaORM migrations under `migration/src/`.
 3. [ ] Generate SeaORM entities (`cargo loco generate scaffold`).
 4. [ ] Port the composite grader from
-       `../front-end-form-with-svelte/src/lib/engine/` to
+       `../front-end-with-svelte/src/lib/engine/` to
        `src/services/grader/`.
 5. [ ] Build the Tera templates that mirror the 12-step wizard.
 6. [ ] Wire HTMX step-navigation endpoints.

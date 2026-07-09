@@ -111,14 +111,14 @@ eye-prescription/
   seed.md                                           # source seed material
   doc/                                              # documentation
   sql/                                   # Liquibase Postgres migrations
-  xml-representations/                              # XML + DTD per SQL table
-  fhir-r5/                                          # FHIR HL7 R5 JSON resources
+  xml/                              # XML + DTD per SQL table
+  fhir/r5/                                          # FHIR HL7 R5 JSON resources
   protobuf/                                         # Protocol Buffers .proto schemas
   typespec/                                         # TypeSpec API definitions
-  front-end-form-with-html/                         # static single-page HTML wizard
-  front-end-form-with-svelte/                       # SvelteKit single-page wizard
-  front-end-dashboard-with-html/                    # HTML review table
-  front-end-dashboard-with-svelte/                  # SvelteKit SVAR DataGrid
+  front-end-with-html/                         # static single-page HTML wizard
+  front-end-with-svelte/                       # SvelteKit single-page wizard
+  front-end-with-html/                    # HTML review table
+  front-end-with-svelte/                  # SvelteKit SVAR DataGrid
   back-end-with-loco/            # Rust backend + server-rendered UI
   back-end-with-loco-setup       # generator shell script
 ```

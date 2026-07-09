@@ -45,16 +45,16 @@
 
 ### Front-ends
 
-- `front-end-form-with-html/` — single-page op-note wizard with Lily
+- `front-end-with-html/` — single-page op-note wizard with Lily
   Design System.
-- `front-end-form-with-svelte/` — SvelteKit op-note wizard with Lily
+- `front-end-with-svelte/` — SvelteKit op-note wizard with Lily
   Svelte components.
-- `front-end-dashboard-with-html/` — review table.
-- `front-end-dashboard-with-svelte/` — SVAR DataGrid review dashboard.
+- `front-end-with-html/` — review table.
+- `front-end-with-svelte/` — SVAR DataGrid review dashboard.
 
 ### Backend
 
-- `back-end-with-loco/` — Loco / Tera / HTMX / Alpine
+- `back-end-with-loco/` — Loco JSON API
   full-stack implementation.
 
 ### Verification

@@ -132,14 +132,14 @@ medical-information-form-for-air-travel/
   seed.md                                           # research seed
   doc/                                              # clinical references
   sql/                                   # Liquibase Postgres migrations
-  xml-representations/                              # XML + DTD per SQL table
-  fhir-r5/                                          # FHIR HL7 R5 JSON resources
+  xml/                              # XML + DTD per SQL table
+  fhir/r5/                                          # FHIR HL7 R5 JSON resources
   protobuf/                                         # Protocol Buffers .proto schemas
   typespec/                                         # TypeSpec interface definitions
-  front-end-form-with-html/                         # static single-page HTML wizard
-  front-end-form-with-svelte/                       # SvelteKit single-page wizard
-  front-end-dashboard-with-html/                    # review dashboard (HTML table)
-  front-end-dashboard-with-svelte/                  # review dashboard (SVAR Grid)
+  front-end-with-html/                         # static single-page HTML wizard
+  front-end-with-svelte/                       # SvelteKit single-page wizard
+  front-end-with-html/                    # review dashboard (HTML table)
+  front-end-with-svelte/                  # review dashboard (SVAR Grid)
   back-end-with-loco/            # Rust backend + server-rendered UI
   back-end-with-loco-setup       # Rust scaffold setup script
 ```

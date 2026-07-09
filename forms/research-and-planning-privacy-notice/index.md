@@ -22,8 +22,8 @@ Read-and-acknowledge privacy notice covering the use of patient data for researc
 
 ```
 research-and-planning-privacy-notice/
-  front-end-form-with-svelte/
-  front-end-dashboard-with-svelte/
+  front-end-with-svelte/
+  front-end-with-svelte/
   back-end-with-loco/
 ```
 

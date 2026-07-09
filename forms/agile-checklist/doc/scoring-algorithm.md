@@ -86,5 +86,5 @@ makes the disparity visible.
 JS) is a pure function with no side effects and no I/O. The Rust and
 TypeScript implementations produce **byte-identical** results for the
 same input (see browser smoke tests in each front-end's `tasks.md` and
-the engine unit tests in `front-end-form-with-svelte/` and
+the engine unit tests in `front-end-with-svelte/` and
 `back-end-with-loco/`).

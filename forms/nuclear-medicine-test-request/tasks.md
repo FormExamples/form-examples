@@ -9,8 +9,8 @@
 
 ## Generated representations
 
-- [ ] XML + DTD (`xml-representations/`)
-- [ ] FHIR R5 JSON (`fhir-r5/`)
+- [ ] XML + DTD (`xml/`)
+- [ ] FHIR R5 JSON (`fhir/r5/`)
 - [ ] Protocol Buffers (`protobuf/`)
 - [ ] OpenAPI 3.1 (`openapi/`)
 - [ ] Loco setup script (`back-end-with-loco-setup`)
@@ -24,10 +24,10 @@
 
 ## Front-ends
 
-- [ ] `front-end-form-with-html`
-- [ ] `front-end-form-with-svelte`
-- [ ] `front-end-dashboard-with-html`
-- [ ] `front-end-dashboard-with-svelte`
+- [ ] `front-end-with-html`
+- [ ] `front-end-with-svelte`
+- [ ] `front-end-with-html`
+- [ ] `front-end-with-svelte`
 
 ## Back-end
 

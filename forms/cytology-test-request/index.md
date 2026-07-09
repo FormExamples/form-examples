@@ -96,14 +96,14 @@ cytology-test-request/
   doc/                              # clinical reference documentation
   examples/                         # filled-form JSON fixture + FHIR R5 Bundle
   sql/                   # PostgreSQL migrations (source of truth)
-  xml-representations/              # XML + DTD per SQL table (generated)
-  fhir-r5/                          # FHIR HL7 R5 JSON per SQL entity (generated)
+  xml/              # XML + DTD per SQL table (generated)
+  fhir/r5/                          # FHIR HL7 R5 JSON per SQL entity (generated)
   protobuf/                         # Protocol Buffers schemas (generated)
   openapi/                          # OpenAPI 3.1 specs (generated)
-  front-end-form-with-html/         # single-page HTML wizard
-  front-end-form-with-svelte/       # SvelteKit single-page wizard
-  front-end-dashboard-with-html/    # vetting dashboard (HTML table)
-  front-end-dashboard-with-svelte/  # vetting dashboard (SVAR Grid)
+  front-end-with-html/         # single-page HTML wizard
+  front-end-with-svelte/       # SvelteKit single-page wizard
+  front-end-with-html/    # vetting dashboard (HTML table)
+  front-end-with-svelte/  # vetting dashboard (SVAR Grid)
   back-end-with-loco/               # Rust axum + Loco JSON API
   back-end-with-loco-setup          # scaffold generator (generated)
 ```

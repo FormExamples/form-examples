@@ -51,7 +51,7 @@ final decision under the IATA Medical Manual.
 8. [x] Build SvelteKit single-page MEDIF wizard.
 9. [x] Build HTML single-page MEDIF wizard.
 10. [x] Build medical-desk dashboard (SvelteKit + HTML).
-11. [x] Build Rust full-stack with axum / Loco / Tera / HTMX / Alpine.
+11. [x] Build Rust full-stack with axum / Loco JSON API.
 12. [x] Vitest unit tests for the fitness-to-fly engine.
 13. [x] Run `bin/test-form medical-information-form-for-air-travel`.
 

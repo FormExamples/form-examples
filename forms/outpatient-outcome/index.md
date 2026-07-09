@@ -32,14 +32,14 @@ Structured outpatient outcome report documenting encounter details, operational 
 
 ```
 outpatient-outcome-report/
-  front-end-form-with-html/
-  front-end-form-with-svelte/
-  front-end-dashboard-with-html/
-  front-end-dashboard-with-svelte/
+  front-end-with-html/
+  front-end-with-svelte/
+  front-end-with-html/
+  front-end-with-svelte/
   back-end-with-loco/
   sql/
-  xml-representations/
-  fhir-r5/
+  xml/
+  fhir/r5/
   doc/
 ```
 

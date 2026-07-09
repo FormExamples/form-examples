@@ -73,7 +73,7 @@ Safety / operational flags fire independently and surface as
 10. [ ] Build static HTML practitioner form (Alpine.js).
 11. [ ] Build SvelteKit dashboard (SVAR DataGrid).
 12. [ ] Build static HTML dashboard (sortable table).
-13. [ ] Build Rust full-stack with axum / Loco / Tera / HTMX / Alpine.
+13. [ ] Build Rust full-stack with axum / Loco JSON API.
 14. [ ] Unit-test composite grader (Vitest).
 15. [ ] Run `bin/test-form medical-waiting-list-card`.
 

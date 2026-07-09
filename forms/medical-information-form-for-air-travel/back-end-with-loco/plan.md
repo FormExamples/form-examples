@@ -1,4 +1,4 @@
-# Plan — Full-stack with Loco / Tera / HTMX / Alpine
+# Plan — Full-stack with Loco JSON API
 
 ## Phase 0 — Scaffold (done)
 
@@ -35,7 +35,7 @@
 
 ## Phase 3 — Grading engine (Rust port)
 
-Port the TypeScript engine in `front-end-form-with-svelte/src/lib/engine/`:
+Port the TypeScript engine in `front-end-with-svelte/src/lib/engine/`:
 
 - `engine/cardiorespiratory.rs`
 - `engine/recent_event.rs`

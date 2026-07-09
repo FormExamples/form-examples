@@ -45,17 +45,17 @@
       script of `cargo loco generate scaffold` calls.
 
 ## Front-ends
-- [x] `front-end-form-with-svelte/` — SvelteKit 2 + Svelte 5 + Tailwind 4.
+- [x] `front-end-with-svelte/` — SvelteKit 2 + Svelte 5 + Tailwind 4.
       11-step wizard, typed engine, browser + Vitest tests passing.
-- [x] `front-end-form-with-html/` — single-page 11-step wizard, vanilla JS
+- [x] `front-end-with-html/` — single-page 11-step wizard, vanilla JS
       with browser smoke test passing (all flags + complexity verified).
-- [ ] `front-end-dashboard-with-svelte/` — SVAR DataGrid review.
-- [x] `front-end-dashboard-with-html/` — sortable / filterable review
+- [ ] `front-end-with-svelte/` — SVAR DataGrid review.
+- [x] `front-end-with-html/` — sortable / filterable review
       table with sample data, browser smoke test passing.
 
 ## Full-stack backend
 - [ ] `back-end-with-loco/` — Loco 0.16 + axum 0.8 +
-      SeaORM + Tera + HTMX + Alpine.
+      SeaORM + Loco JSON API + Alpine.
 
 ## Tests
 - [x] Vitest unit tests for the engine — 17/17 passing in the SvelteKit

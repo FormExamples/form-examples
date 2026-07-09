@@ -132,15 +132,15 @@ united-states-hipaa-authorization-form/
   seed.pdf                                   # Tennessee DHS HS-2557 reference
   doc/                                       # HIPAA Privacy Rule reference
   sql/                            # PostgreSQL Liquibase schema
-  xml-representations/                       # XML + DTD per SQL table
-  fhir-r5/                                   # FHIR HL7 R5 JSON per SQL entity
+  xml/                       # XML + DTD per SQL table
+  fhir/r5/                                   # FHIR HL7 R5 JSON per SQL entity
   protobuf/                                  # Protocol Buffers .proto schemas
   typespec/                                  # TypeSpec models
-  front-end-form-with-html/                  # static single-page HTML wizard
-  front-end-form-with-svelte/                # SvelteKit single-page wizard
-  front-end-dashboard-with-html/             # HTML review table
-  front-end-dashboard-with-svelte/           # SVAR DataGrid review
-  back-end-with-loco/     # Rust backend + HTMX UI
+  front-end-with-html/                  # static single-page HTML wizard
+  front-end-with-svelte/                # SvelteKit single-page wizard
+  front-end-with-html/             # HTML review table
+  front-end-with-svelte/           # SVAR DataGrid review
+  back-end-with-loco/     # Rust axum + Loco JSON API back-end
   back-end-with-loco-setup  # scaffold generator
 ```
 

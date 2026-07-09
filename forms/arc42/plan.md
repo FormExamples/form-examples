@@ -66,7 +66,7 @@ The composite grader runs a single pass over the 12 sections:
 - HTML form (static single-page, Alpine.js).
 - Dashboard SvelteKit (SVAR DataGrid).
 - Dashboard HTML (static review table).
-- Rust full-stack with axum/Loco/Tera/HTMX/Alpine.
+- Rust full-stack with axum/Loco JSON API.
 - Zod runtime validation on the SvelteKit client.
 - Axe-core accessibility audit.
 - End-to-end tests with Playwright.

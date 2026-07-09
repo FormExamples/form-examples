@@ -15,7 +15,7 @@ domain logic still needs to be filled out.
 - One PostgreSQL schema per form, generated XML + DTD per SQL entity, and
   generated FHIR HL7 R5 JSON resources.
 - Four front-ends (form and dashboard, each in HTML and SvelteKit), and one
-  Rust full-stack crate (axum + Loco + Tera + HTMX + Alpine.js).
+  Rust full-stack crate (axum + Loco + Loco JSON API).
 
 ## Roadmap
 
@@ -67,7 +67,7 @@ domain logic still needs to be filled out.
 - SLA timers per composite priority.
 - ✅ Trend dashboards: issue count by month, harm grade by system,
   severity by environment — pure aggregator at
-  `front-end-form-with-svelte/src/lib/dashboard/trends.ts`
+  `front-end-with-svelte/src/lib/dashboard/trends.ts`
   (`countByField`, `countByMonth`, `countByCompositeAndMonth`,
   `numericStatsByField`, `topNByField`); 13 vitest tests passing.
   Wiring to a chart component is left for the SvelteKit dashboard.

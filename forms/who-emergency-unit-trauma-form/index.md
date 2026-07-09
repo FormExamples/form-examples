@@ -276,8 +276,8 @@ Up to 10 procedure entries with Time field
 
 ```
 who-emergency-unit-trauma-form/
-  front-end-form-with-svelte/                         # Patient questionnaire
-  front-end-dashboard-with-svelte/                    # Dashboard
+  front-end-with-svelte/                         # Patient questionnaire
+  front-end-with-svelte/                    # Dashboard
   back-end-with-loco/    # Full-stack option
 ```
 

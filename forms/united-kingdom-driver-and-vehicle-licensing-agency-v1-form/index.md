@@ -194,8 +194,8 @@ Important information about fitness to drive:
 
 ```
 united-kingdom-driver-and-vehicle-licensing-agency-v1-form/
-  front-end-form-with-svelte/                         # Patient questionnaire
-  front-end-dashboard-with-svelte/                    # Dashboard
+  front-end-with-svelte/                         # Patient questionnaire
+  front-end-with-svelte/                    # Dashboard
   back-end-with-loco/    # Full-stack option
 ```
 

@@ -97,8 +97,8 @@ pre-operative-assessment-by-clinician/
   doc/                                              # documentation
   seeds/                                            # reference source materials
   sql/                                   # Liquibase Postgres migrations
-  xml-representations/                              # XML + DTD per SQL table
-  fhir-r5/                                          # FHIR HL7 R5 JSON resources
+  xml/                              # XML + DTD per SQL table
+  fhir/r5/                                          # FHIR HL7 R5 JSON resources
   front-end-with-html/                              # static single-page HTML wizard
   front-end-with-svelte/                            # SvelteKit single-page wizard
   front-end-with-html/                              # review dashboard (HTML table)

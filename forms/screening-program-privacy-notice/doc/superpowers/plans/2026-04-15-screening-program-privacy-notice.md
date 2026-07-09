@@ -85,10 +85,10 @@ screening-program-privacy-notice/
   tasks.md
   seed.md
   sql/
-  xml-representations/
-  fhir-r5/
-  front-end-form-with-html/
-  front-end-dashboard-with-html/
+  xml/
+  fhir/r5/
+  front-end-with-html/
+  front-end-with-html/
 
 ## Form data model
 
@@ -266,10 +266,10 @@ git commit -m "feat(screening-program-privacy-notice): add SQL migrations"
 ### Task 3: XML representations
 
 **Files:**
-- Create: `xml-representations/patient.xml`
-- Create: `xml-representations/patient.dtd`
-- Create: `xml-representations/acknowledgment.xml`
-- Create: `xml-representations/acknowledgment.dtd`
+- Create: `xml/patient.xml`
+- Create: `xml/patient.dtd`
+- Create: `xml/acknowledgment.xml`
+- Create: `xml/acknowledgment.dtd`
 
 - [ ] **Step 1: Create patient XML and DTD**
 
@@ -330,7 +330,7 @@ acknowledgment.xml:
 - [ ] **Step 3: Commit**
 
 ```bash
-git add xml-representations/
+git add xml/
 git commit -m "feat(screening-program-privacy-notice): add XML representations"
 ```
 
@@ -339,8 +339,8 @@ git commit -m "feat(screening-program-privacy-notice): add XML representations"
 ### Task 4: FHIR R5 representations
 
 **Files:**
-- Create: `fhir-r5/patient.json`
-- Create: `fhir-r5/acknowledgment.json`
+- Create: `fhir/r5/patient.json`
+- Create: `fhir/r5/acknowledgment.json`
 
 - [ ] **Step 1: Create patient.json**
 
@@ -437,7 +437,7 @@ git commit -m "feat(screening-program-privacy-notice): add XML representations"
 - [ ] **Step 3: Commit**
 
 ```bash
-git add fhir-r5/
+git add fhir/r5/
 git commit -m "feat(screening-program-privacy-notice): add FHIR R5 representations"
 ```
 
@@ -446,7 +446,7 @@ git commit -m "feat(screening-program-privacy-notice): add FHIR R5 representatio
 ### Task 5: HTML patient form
 
 **Files:**
-- Create: `front-end-form-with-html/index.html`
+- Create: `front-end-with-html/index.html`
 
 - [ ] **Step 1: Create index.html**
 
@@ -471,12 +471,12 @@ Single-page HTML file with:
 - Inline CSS following NHS design system colors
 - XSS protection via textContent assignment
 
-See full HTML implementation in the task execution — follows the exact pattern from `legal-requirements-privacy-notice/front-end-form-with-html/index.html` with the addition of `practiceConfig` and config-value span population.
+See full HTML implementation in the task execution — follows the exact pattern from `legal-requirements-privacy-notice/front-end-with-html/index.html` with the addition of `practiceConfig` and config-value span population.
 
 - [ ] **Step 2: Commit**
 
 ```bash
-git add front-end-form-with-html/
+git add front-end-with-html/
 git commit -m "feat(screening-program-privacy-notice): add HTML patient form with practice config"
 ```
 
@@ -485,7 +485,7 @@ git commit -m "feat(screening-program-privacy-notice): add HTML patient form wit
 ### Task 6: HTML clinician dashboard
 
 **Files:**
-- Create: `front-end-dashboard-with-html/index.html`
+- Create: `front-end-with-html/index.html`
 
 - [ ] **Step 1: Create index.html**
 
@@ -501,12 +501,12 @@ Single-page HTML file with:
 - On page load: reads localStorage `screeningProgramAcknowledgments`, merges with sample data
 - `escapeHtml()` function for XSS protection
 - Footer with GDPR article references
-- Follows exact pattern from `legal-requirements-privacy-notice/front-end-dashboard-with-html/index.html`
+- Follows exact pattern from `legal-requirements-privacy-notice/front-end-with-html/index.html`
 
 - [ ] **Step 2: Commit**
 
 ```bash
-git add front-end-dashboard-with-html/
+git add front-end-with-html/
 git commit -m "feat(screening-program-privacy-notice): add HTML clinician dashboard"
 ```
 

@@ -36,8 +36,8 @@ Specific learning difficulty evaluation using standardised scores for reading, w
 
 ```
 dyslexia-assessment/
-  front-end-form-with-svelte/
-  front-end-dashboard-with-svelte/
+  front-end-with-svelte/
+  front-end-with-svelte/
 ```
 
 ## Technology

@@ -92,7 +92,7 @@ into a single registration-readiness band.
 13. [ ] Build SvelteKit dashboard (SVAR DataGrid).
 14. [ ] Build HTML dashboard (static review table).
 15. [ ] Write `back-end-with-loco-setup` shell script.
-16. [ ] Build Rust full-stack with axum/Loco/Tera/HTMX/Alpine.
+16. [ ] Build Rust full-stack with axum/Loco JSON API.
 17. [ ] Unit-test validator (Vitest).
 18. [ ] Run `bin/test-form united-kingdom-lasting-power-of-attorney-for-financial-decisions`.
 

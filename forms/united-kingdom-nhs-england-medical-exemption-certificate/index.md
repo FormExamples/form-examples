@@ -136,15 +136,15 @@ united-kingdom-nhs-england-medical-exemption-certificate/
   tasks.md                                        # task tracking
   doc/                                            # documentation and references
   sql/                                 # Postgres Liquibase migrations
-  xml-representations/                            # XML + DTD per SQL table
-  fhir-r5/                                        # FHIR R5 JSON resources
+  xml/                            # XML + DTD per SQL table
+  fhir/r5/                                        # FHIR R5 JSON resources
   protobuf/                                       # Protocol Buffers .proto schemas
   typespec/                                       # TypeSpec models
-  front-end-form-with-html/                       # static single-page wizard
-  front-end-form-with-svelte/                     # SvelteKit single-page wizard
-  front-end-dashboard-with-html/                  # static HTML review dashboard
-  front-end-dashboard-with-svelte/                # SVAR DataGrid dashboard
-  back-end-with-loco/          # Rust axum + Tera + HTMX + Alpine.js
+  front-end-with-html/                       # static single-page wizard
+  front-end-with-svelte/                     # SvelteKit single-page wizard
+  front-end-with-html/                  # static HTML review dashboard
+  front-end-with-svelte/                # SVAR DataGrid dashboard
+  back-end-with-loco/          # Rust axum + Loco JSON API
   back-end-with-loco-setup     # scaffold generator (shell script)
 ```
 

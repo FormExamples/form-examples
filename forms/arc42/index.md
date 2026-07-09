@@ -56,12 +56,12 @@ arc42/
   tasks.md
   doc/                                              # arc42 + grading docs
   sql/                                   # Liquibase Postgres migrations
-  xml-representations/                              # generated XML + DTD
-  fhir-r5/                                          # generated FHIR R5 JSON
-  front-end-form-with-svelte/                       # SvelteKit 12-step wizard
-  front-end-form-with-html/                         # placeholder (follow-up session)
-  front-end-dashboard-with-html/                    # placeholder
-  front-end-dashboard-with-svelte/                  # placeholder
+  xml/                              # generated XML + DTD
+  fhir/r5/                                          # generated FHIR R5 JSON
+  front-end-with-svelte/                       # SvelteKit 12-step wizard
+  front-end-with-html/                         # placeholder (follow-up session)
+  front-end-with-html/                    # placeholder
+  front-end-with-svelte/                  # placeholder
   back-end-with-loco/            # placeholder
 ```
 

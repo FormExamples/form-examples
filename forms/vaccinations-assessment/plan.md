@@ -20,7 +20,7 @@ requirements based on the destination country.
 
 ## Future enhancements
 
-- Build front-end-dashboard-with-svelte with SVAR DataGrid
+- Build front-end-with-svelte with SVAR DataGrid
 - Build back-end-with-loco Rust backend
 - Add input validation with Zod schemas
 - Add accessibility audit (axe-core)

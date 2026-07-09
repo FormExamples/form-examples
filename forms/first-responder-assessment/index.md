@@ -31,8 +31,8 @@ First responder fitness and competency evaluation for paramedics, EMTs, and firs
 
 ```
 first-responder-assessment/
-  front-end-form-with-svelte/
-  front-end-dashboard-with-svelte/
+  front-end-with-svelte/
+  front-end-with-svelte/
 ```
 
 ## Technology

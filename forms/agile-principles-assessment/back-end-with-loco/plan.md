@@ -3,7 +3,7 @@
 ## Goal
 
 Stand up a server-rendered Rust web app that mirrors the SvelteKit form,
-backed by PostgreSQL via SeaORM, with Tera + HTMX + Alpine.js views.
+backed by PostgreSQL via SeaORM, with Loco JSON API views.
 
 ## Stages
 
@@ -13,7 +13,7 @@ backed by PostgreSQL via SeaORM, with Tera + HTMX + Alpine.js views.
    scaffolds for all five tables.
 3. Apply the migrations against a local Postgres instance.
 4. Port the maturity-engine logic from
-   `front-end-form-with-svelte/src/lib/engine/` into a Rust module
+   `front-end-with-svelte/src/lib/engine/` into a Rust module
    (`src/grading/`). Keep the same rule IDs and flag categories.
 5. Add a controller `POST /assessments/:id/grade` that re-grades the
    assessment and upserts the grade + child rules/flags.

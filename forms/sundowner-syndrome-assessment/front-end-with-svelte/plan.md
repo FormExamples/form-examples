@@ -4,7 +4,7 @@
 
 Implemented. Consolidated gold front-end built from the canonical
 `cardiology-assessment/front-end-with-svelte` template, with the scoring
-engine, steps, and content ported from `../front-end-form-with-html/`.
+engine, steps, and content ported from `../front-end-with-html/`.
 
 - Scoring engine in `src/lib/engine/` (CMAI + NPI) with Vitest tests.
 - Ten step components in `src/lib/components/steps/`.

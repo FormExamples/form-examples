@@ -34,8 +34,8 @@ Organ donation assessment evaluates potential organ donors (living and deceased)
 
 ```
 organ-donation-assessment/
-  front-end-form-with-svelte/
-  front-end-dashboard-with-svelte/
+  front-end-with-svelte/
+  front-end-with-svelte/
 ```
 
 ## Technology

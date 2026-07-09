@@ -53,7 +53,7 @@
 
 ## Full-stack backend
 - [x] `back-end-with-loco/` — Loco 0.16 + axum 0.8
-      + SeaORM + Tera + HTMX + Alpine.
+      + SeaORM + Loco JSON API + Alpine.
 
 ## Tests
 - [x] Vitest unit tests for `composite-grader.ts`.

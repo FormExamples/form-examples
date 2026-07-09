@@ -21,11 +21,11 @@ Prescription request form collecting patient information, clinician details, med
 ## Directory structure
 
     prescription-request/
-      front-end-form-with-svelte/
-      front-end-dashboard-with-svelte/
+      front-end-with-svelte/
+      front-end-with-svelte/
       sql/
-      xml-representations/
-      fhir-r5/
+      xml/
+      fhir/r5/
 
 ## Technology
 

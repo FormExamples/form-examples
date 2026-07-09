@@ -14,13 +14,13 @@ with a coaching action plan.
 | `index.md`, `AGENTS.md`, `plan.md`, `tasks.md` | Done |
 | `seed.md` (57 items) | Done (provided) |
 | `sql/` | Done |
-| `xml-representations/` | Done |
-| `fhir-r5/` | Done |
-| `front-end-form-with-svelte/` | Done — `pnpm test` 21/21, `pnpm run check` clean, browser smoke-tested |
-| `front-end-dashboard-with-svelte/` | Done — `pnpm test` 15/15, `pnpm run check` clean, browser smoke-tested |
-| `front-end-form-with-html/` | Done — static, dependency-free, mirrors Svelte engine output exactly, browser smoke-tested |
-| `front-end-dashboard-with-html/` | Done — static, dependency-free, mirrors Svelte dashboard output exactly, browser smoke-tested |
-| `back-end-with-loco/` | Done — axum + Tera + HTMX + Alpine, Rust port of engine + dashboard + sister-form comparison, SQLite persistence, JSON `/api/checklists` with CORS, server-rendered `/dashboard`, `/submission/:id`, `/comparison` (CSV or DB-backed behaviour source), `cargo test` 27/27, browser smoke-tested (Postgres+SeaORM deferred) |
+| `xml/` | Done |
+| `fhir/r5/` | Done |
+| `front-end-with-svelte/` | Done — `pnpm test` 21/21, `pnpm run check` clean, browser smoke-tested |
+| `front-end-with-svelte/` | Done — `pnpm test` 15/15, `pnpm run check` clean, browser smoke-tested |
+| `front-end-with-html/` | Done — static, dependency-free, mirrors Svelte engine output exactly, browser smoke-tested |
+| `front-end-with-html/` | Done — static, dependency-free, mirrors Svelte dashboard output exactly, browser smoke-tested |
+| `back-end-with-loco/` | Done — axum + Loco JSON API + Alpine, Rust port of engine + dashboard + sister-form comparison, SQLite persistence, JSON `/api/checklists` with CORS, server-rendered `/dashboard`, `/submission/:id`, `/comparison` (CSV or DB-backed behaviour source), `cargo test` 27/27, browser smoke-tested (Postgres+SeaORM deferred) |
 
 ## Engine design
 

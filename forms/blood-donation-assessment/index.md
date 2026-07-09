@@ -30,8 +30,8 @@ Blood donation eligibility screening aligned with the JPAC Donor Selection Guide
 
 ```
 blood-donation-assessment/
-  front-end-form-with-svelte/
-  front-end-dashboard-with-svelte/
+  front-end-with-svelte/
+  front-end-with-svelte/
 ```
 
 ## Technology

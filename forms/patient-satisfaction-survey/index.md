@@ -32,8 +32,8 @@ Patient satisfaction survey measuring healthcare experience quality using Likert
 
 ```
 patient-satisfaction-survey/
-  front-end-form-with-svelte/
-  front-end-dashboard-with-svelte/
+  front-end-with-svelte/
+  front-end-with-svelte/
 ```
 
 ## Technology

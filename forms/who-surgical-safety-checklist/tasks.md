@@ -6,10 +6,10 @@
 - [ ] Author SQL migrations 02–05 (patient, clinician, checklist, team_member).
 - [ ] Run generator scripts (XML, FHIR R5, protobuf).
 - [ ] Author TypeSpec definitions.
-- [ ] Build `front-end-form-with-html` single-page wizard.
-- [ ] Build `front-end-form-with-svelte` single-page wizard.
-- [ ] Build `front-end-dashboard-with-html`.
-- [ ] Build `front-end-dashboard-with-svelte`.
+- [ ] Build `front-end-with-html` single-page wizard.
+- [ ] Build `front-end-with-svelte` single-page wizard.
+- [ ] Build `front-end-with-html`.
+- [ ] Build `front-end-with-svelte`.
 - [ ] Build `back-end-with-loco` + setup script.
 - [ ] `bin/test-form who-surgical-safety-checklist` passes.
 

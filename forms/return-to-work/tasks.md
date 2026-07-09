@@ -45,16 +45,16 @@
 - [ ] TypeSpec `.tsp` files.
 
 ## Front-ends
-- [ ] `front-end-form-with-svelte/` — SvelteKit 2 + Svelte 5 +
+- [ ] `front-end-with-svelte/` — SvelteKit 2 + Svelte 5 +
       Tailwind 4.
-- [ ] `front-end-form-with-html/` — single-page static HTML +
+- [ ] `front-end-with-html/` — single-page static HTML +
       Alpine.js.
-- [ ] `front-end-dashboard-with-svelte/` — SVAR DataGrid review.
-- [ ] `front-end-dashboard-with-html/` — HTML review table.
+- [ ] `front-end-with-svelte/` — SVAR DataGrid review.
+- [ ] `front-end-with-html/` — HTML review table.
 
 ## Full-stack backend
 - [ ] `back-end-with-loco/` — Loco 0.16 + axum 0.8
-      + SeaORM + Tera + HTMX + Alpine.
+      + SeaORM + Loco JSON API + Alpine.
 - [ ] `back-end-with-loco-new/` — scaffold
       generator (`00-new.sh`).
 

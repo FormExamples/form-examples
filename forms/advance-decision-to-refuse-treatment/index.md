@@ -27,9 +27,9 @@ Legal document allowing patients to record treatment refusal decisions in advanc
 
 ```
 advance-decision-to-refuse-treatment/
-  front-end-form-with-svelte/             # Patient questionnaire
-  front-end-dashboard-with-svelte/        # Dashboard
-  full-stack-with-rust-axum-loco-tera/    # Full-stack option
+  front-end-with-svelte/             # Patient questionnaire
+  front-end-with-svelte/        # Dashboard
+  back-end-with-loco/    # Full-stack option
 ```
 
 ## Technology

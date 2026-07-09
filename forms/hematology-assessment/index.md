@@ -31,8 +31,8 @@ Haematological evaluation covering complete blood count, coagulation studies, pe
 
 ```
 hematology-assessment/
-  front-end-form-with-svelte/
-  front-end-dashboard-with-svelte/
+  front-end-with-svelte/
+  front-end-with-svelte/
   back-end-with-loco/
 ```
 

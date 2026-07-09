@@ -7,7 +7,7 @@
       and the `form_to_fit_note()` parser.
 - [x] Author `src/views/fit_note.rs` with `build_form_context` and
       `build_report_context`.
-- [x] Port `front-end-form-with-html/js/grader.js` to
+- [x] Port `front-end-with-html/js/grader.js` to
       `src/grading/*.rs` preserving rule IDs and flag IDs.
 - [x] Author `templates/base.html.tera` with the pinned HTMX 2.0.8 and
       Alpine.js 3.14.8 `<script defer>` tags and `<body hx-boost="true">`.

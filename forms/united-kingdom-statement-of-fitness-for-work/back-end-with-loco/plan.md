@@ -16,7 +16,7 @@ it requires a running `loco` Postgres user and database. See
 
 ## Implementation plan
 
-1. Port `front-end-form-with-html/js/grader.js` to `src/grading/*.rs`
+1. Port `front-end-with-html/js/grader.js` to `src/grading/*.rs`
    preserving rule IDs (`R-VALID-*`, `R-ADAPT-*`, `R-PERIOD-*`,
    `R-SAFE-*`) and flag IDs (`F-VALID-*`, `F-AUTO-DISABILITY`,
    `F-PERIOD-MAX`, etc.) so the grader output is interoperable across

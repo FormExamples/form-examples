@@ -25,7 +25,7 @@
 
 ## Front-end form
 
-- [ ] HTML static 8-step wizard (`front-end-form-with-html/`)
+- [ ] HTML static 8-step wizard (`front-end-with-html/`)
 - [ ] SvelteKit 8-step wizard with Svelte 5 runes and Tailwind 4
 
 ## Front-end dashboard

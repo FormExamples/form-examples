@@ -35,15 +35,15 @@ computes severity categories per subscale, and flags safety-critical items
 
 ```
 psychology-assessment/
-  front-end-form-with-html/
-  front-end-form-with-svelte/
-  front-end-dashboard-with-html/
-  front-end-dashboard-with-svelte/
+  front-end-with-html/
+  front-end-with-svelte/
+  front-end-with-html/
+  front-end-with-svelte/
   back-end-with-loco/
   doc/
   sql/
-  xml-representations/
-  fhir-r5/
+  xml/
+  fhir/r5/
 ```
 
 ## Documentation

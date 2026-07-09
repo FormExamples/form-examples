@@ -37,8 +37,8 @@ Combined audiology and vestibular (balance) assessment capturing presenting symp
 
 ```
 audio-vestibular-assessment/
-  front-end-form-with-svelte/
-  front-end-dashboard-with-svelte/
+  front-end-with-svelte/
+  front-end-with-svelte/
 ```
 
 ## Technology

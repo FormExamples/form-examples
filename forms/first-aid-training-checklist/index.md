@@ -30,8 +30,8 @@ First Aid at Work (FAW) competency assessment aligned with UK HSE guidance and t
 
 ```
 first-aid-training-checklist/
-  front-end-form-with-svelte/
-  front-end-dashboard-with-svelte/
+  front-end-with-svelte/
+  front-end-with-svelte/
 ```
 
 ## Technology

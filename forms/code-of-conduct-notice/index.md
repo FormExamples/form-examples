@@ -22,8 +22,8 @@ Read-and-acknowledge code of conduct notice presenting the twelve core principle
 
 ```
 code-of-conduct-notice/
-  front-end-form-with-svelte/
-  front-end-dashboard-with-svelte/
+  front-end-with-svelte/
+  front-end-with-svelte/
 ```
 
 ## Technology

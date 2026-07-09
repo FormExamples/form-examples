@@ -29,8 +29,8 @@ Inter-provider handover form for transferring a patient's care between clinician
 
 ```
 provider-transfer-request/
-  front-end-form-with-svelte/
-  front-end-dashboard-with-svelte/
+  front-end-with-svelte/
+  front-end-with-svelte/
 ```
 
 ## Technology

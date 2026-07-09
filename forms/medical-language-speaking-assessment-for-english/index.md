@@ -26,8 +26,8 @@ Clinical English-language speaking assessment for internationally educated healt
 
 ```
 medical-language-speaking-assessment-for-english/
-  front-end-form-with-svelte/
-  front-end-dashboard-with-svelte/
+  front-end-with-svelte/
+  front-end-with-svelte/
 ```
 
 ## Technology

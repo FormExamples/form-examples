@@ -20,17 +20,17 @@
 
 ## Phase 3 — Generated representations
 
-- [ ] `xml-representations/*.xml` + `*.dtd` (via `bin/xml-representations/generate-xml-representations.py`)
-- [ ] `fhir-r5/*.json` (via `bin/fhir-r5/generate-fhir-r5-representations.py`)
+- [ ] `xml/*.xml` + `*.dtd` (via `bin/xml-representations/generate-xml-representations.py`)
+- [ ] `fhir/r5/*.json` (via `bin/fhir-r5/generate-fhir-r5-representations.py`)
 - [ ] `protobuf/*.proto` (via `bin/protobuf/generate-protobuf-representations.py`)
 - [ ] `typespec/main.tsp`
 
 ## Phase 4 — Front-ends
 
-- [ ] `front-end-form-with-html/` — static 8-step wizard
-- [ ] `front-end-form-with-svelte/` — SvelteKit 5 + Tailwind 4 wizard
-- [ ] `front-end-dashboard-with-html/` — static review table
-- [ ] `front-end-dashboard-with-svelte/` — SVAR DataGrid review dashboard
+- [ ] `front-end-with-html/` — static 8-step wizard
+- [ ] `front-end-with-svelte/` — SvelteKit 5 + Tailwind 4 wizard
+- [ ] `front-end-with-html/` — static review table
+- [ ] `front-end-with-svelte/` — SVAR DataGrid review dashboard
 
 ## Phase 5 — Full-stack backend
 

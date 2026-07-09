@@ -35,7 +35,7 @@ A future enhancement will emit:
 
 - `openapi.yaml` (API documentation).
 - `types.ts` (TypeScript client types, dropped into
-  `front-end-form-with-svelte/src/lib/api/`).
+  `front-end-with-svelte/src/lib/api/`).
 
 ## Verify
 

@@ -4,7 +4,7 @@
 
 Consolidated gold front-end built: anonymous questionnaire wizard + SVAR
 leadership dashboard + report + PDF, sharing one pure scoring engine. Replaces
-the legacy split `front-end-form-with-svelte` / `front-end-dashboard-with-svelte`
+the legacy split `front-end-with-svelte`
 stubs.
 
 ## Structure

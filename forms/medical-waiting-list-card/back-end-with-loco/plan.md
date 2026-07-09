@@ -46,7 +46,7 @@ crate. The crate mirrors the canonical layout used by
 - Cargo workspace and migration crate: implemented.
 - App hooks, controllers, models, views: implemented.
 - Scoring engine: implemented (ported from the TypeScript engine in
-  `front-end-form-with-html/js/`).
+  `front-end-with-html/js/`).
 - Templates: implemented (single-page 7-step wizard).
 - Engine tests: implemented.
 - `cargo build` and `cargo check`: pass.

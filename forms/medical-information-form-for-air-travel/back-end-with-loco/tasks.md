@@ -1,4 +1,4 @@
-# Tasks — Full-stack with Loco / Tera / HTMX / Alpine
+# Tasks — Full-stack with Loco JSON API
 
 ## Scaffold
 

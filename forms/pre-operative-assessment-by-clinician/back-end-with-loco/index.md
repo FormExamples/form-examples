@@ -6,8 +6,7 @@ Design System.
 
 The HTTP contract is `/api/assessments` (list, create, read, update,
 submit, result) plus `/api/dashboard`. The companion front-ends in
-`../front-end-with-svelte/`, `../front-end-with-html/`,
-`../front-end-with-svelte/`, and `../front-end-with-html/`
+`../front-end-with-svelte/` and `../front-end-with-html/`
 consume this API.
 
 See [AGENTS.md](AGENTS.md) for the planned project layout, [spec.md](spec.md)

@@ -33,8 +33,8 @@ See `doc/` and `docs/superpowers/specs/2026-04-16-anesthesiology-assessment-desi
 
 ```
 anesthesiology-assessment/
-  front-end-form-with-svelte/
-  front-end-dashboard-with-svelte/
+  front-end-with-svelte/
+  front-end-with-svelte/
   back-end-with-loco/
 ```
 

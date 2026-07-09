@@ -2,7 +2,7 @@
 
 - [x] Implement the Rust scoring engine in `src/scoring/` mirroring the
       TypeScript engine in
-      `../front-end-form-with-svelte/src/lib/engine/`
+      `../front-end-with-svelte/src/lib/engine/`
 - [x] Author `tests/scoring_tests.rs` covering every rule and the
       composite grader (17 tests, all passing)
 - [x] Author the CLI binary `src/bin/main.rs`
