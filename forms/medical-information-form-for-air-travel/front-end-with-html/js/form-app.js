@@ -11,7 +11,7 @@
 //   4. renders the post-submit report and offers a JSON download.
 //
 // Field IDs use camelCase that maps 1:1 onto the snake_case SQL columns
-// in ../sql-migrations/04_create_table_medical_information_form_for_air_travel.sql.
+// in ../sql/04_create_table_medical_information_form_for_air_travel.sql.
 //
 // Wrapped in an IIFE so no top-level identifiers leak to window.
 (function () {

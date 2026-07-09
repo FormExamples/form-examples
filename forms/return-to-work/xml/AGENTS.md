@@ -6,7 +6,7 @@ Generated XML and DTD files for the Return to Work form. See
 ## Authoring rules
 
 - **Do not hand-edit generated files.** Edit
-  `../sql-migrations/*.sql` and re-run the generator.
+  `../sql/*.sql` and re-run the generator.
 - Element names mirror SQL column names (snake_case).
 - Empty strings emit as empty elements; SQL NULL emits as a missing
   element.

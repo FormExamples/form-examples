@@ -58,7 +58,7 @@ Update the spec before changing code. See `spec.md` §10 for the workflow.
 │   ├── back-end-with-loco-setup.md
 │   ├── openapi.md
 │   ├── protobuf.md
-│   ├── sql-migrations.md
+│   ├── sql.md
 │   └── xml-representations.md
 ├── bin/                            # Tools: generators, refactor, sync, scaffold, test
 ├── forms/                          # All form projects
@@ -93,7 +93,7 @@ forms/<slug>/
   plan.md                                          # Implementation plan and status
   tasks.md                                         # Task tracking
   doc/                                             # Documentation and references
-  sql-migrations/                                  # PostgreSQL Liquibase migrations (source of truth)
+  sql/                                  # PostgreSQL Liquibase migrations (source of truth)
   xml-representations/                             # XML + DTD per SQL entity (generated)
   fhir-r5/                                         # FHIR HL7 R5 JSON per SQL entity (generated)
   protobuf/                                        # Protocol Buffers .proto schemas (generated)
@@ -140,7 +140,7 @@ See the per-stack agent docs:
 - [Front-end with SvelteKit / Tailwind / SVAR](AGENTS/front-end-with-sveltekit-tailwind-svar.md)
 - [Back-end with Rust / axum / Loco (JSON API)](AGENTS/back-end-with-loco.md)
 - [Back-end scaffold generator (setup script)](AGENTS/back-end-with-loco-setup.md)
-- [SQL migrations](AGENTS/sql-migrations.md)
+- [SQL migrations](AGENTS/sql.md)
 - [XML representations](AGENTS/xml-representations.md)
 - [FHIR HL7 R5 representations](AGENTS/fhir-r5.md)
 - [Protocol Buffers representations](AGENTS/protobuf.md)
@@ -153,9 +153,9 @@ See the per-stack agent docs:
 - `bin/test` — validate structure of all forms
 - `bin/test-form <slug>` — validate one form
 - `bin/update` — run the update/upgrade/fix/harmonize/audit/test prompt via Claude Code
-- `bin/migrate-sql-filenames.py` — canonicalise `sql-migrations/` filenames
-- `bin/sql-migrations/generate-sql-comments.py` — append missing SQL comments
-- `bin/sql-migrations/generate-sql-combined.py` — combine numbered migrations into `schema.sql`
+- `bin/migrate-sql-filenames.py` — canonicalise `sql/` filenames
+- `bin/sql/generate-sql-comments.py` — append missing SQL comments
+- `bin/sql/generate-sql-combined.py` — combine numbered migrations into `schema.sql`
 - `bin/xml-representations/generate-xml-representations.py` — XML + DTD per SQL entity
 - `bin/fhir-r5/generate-fhir-r5-representations.py` — FHIR R5 JSON per SQL entity
 - `bin/protobuf/generate-protobuf-representations.py` — Protocol Buffers per SQL entity

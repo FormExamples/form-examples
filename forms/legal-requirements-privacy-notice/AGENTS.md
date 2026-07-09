@@ -11,7 +11,7 @@ legal-requirements-privacy-notice/
   plan.md                                          # Implementation plan and status
   tasks.md                                         # Task tracking
   seed.md                                          # Original seed content
-  sql-migrations/                                  # PostgreSQL schema migrations
+  sql/                                  # PostgreSQL schema migrations
   xml-representations/                             # XML and DTD per SQL table entity
   fhir-r5/                                         # FHIR HL7 R5 JSON per SQL table entity
   front-end-form-with-html/                        # Patient form (HTML)

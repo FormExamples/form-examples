@@ -11,7 +11,7 @@ screening-program-privacy-notice/
   plan.md
   tasks.md
   seed.md
-  sql-migrations/
+  sql/
   xml-representations/
   fhir-r5/
   front-end-form-with-html/

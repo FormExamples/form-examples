@@ -131,7 +131,7 @@ medical-information-form-for-air-travel/
   tasks.md                                          # task tracking
   seed.md                                           # research seed
   doc/                                              # clinical references
-  sql-migrations/                                   # Liquibase Postgres migrations
+  sql/                                   # Liquibase Postgres migrations
   xml-representations/                              # XML + DTD per SQL table
   fhir-r5/                                          # FHIR HL7 R5 JSON resources
   protobuf/                                         # Protocol Buffers .proto schemas

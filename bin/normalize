@@ -6,7 +6,7 @@ top="$(git rev-parse --show-toplevel)"
 while read -r kebab; do
     echo "normalize $kebab"
     snake=$(echo "$kebab" | snake-case)
-    cd "$top/forms/$kebab/sql-migrations"
+    cd "$top/forms/$kebab/sql"
     pwd
 
     # find . -name "*_create_table_assessment_*" |

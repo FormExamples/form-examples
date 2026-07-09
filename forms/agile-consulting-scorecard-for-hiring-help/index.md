@@ -137,7 +137,7 @@ agile-consulting-scorecard-for-hiring-help/
   doc/                                              # documentation (AGENTS, running, api-reference)
   samples/                                          # golden-file fixtures for engine-parity tests
   scripts/                                          # demo.sh — end-to-end pipeline smoke test
-  sql-migrations/                                   # Liquibase Postgres migrations (8 files, 7 tables)
+  sql/                                   # Liquibase Postgres migrations (8 files, 7 tables)
   xml-representations/                              # XML + DTD per SQL table
   fhir-r5/                                          # FHIR HL7 R5 JSON resources
   front-end-form-with-html/                         # static single-page wizard + printable report

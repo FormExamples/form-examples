@@ -2,7 +2,7 @@
 
 One XML file plus its DTD is generated per SQL table by
 `bin/xml-representations/generate-xml-representations.py`. Do not hand-edit —
-regenerate from the form's `../sql-migrations/` directory instead.
+regenerate from the form's `../sql/` directory instead.
 
 ## Files
 

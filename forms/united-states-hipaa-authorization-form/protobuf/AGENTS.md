@@ -1,7 +1,7 @@
 # protobuf — Agent Instructions
 
 Protocol Buffers `.proto` schemas derived from
-`../sql-migrations/*.sql`. See
+`../sql/*.sql`. See
 [`AGENTS/protobuf.md`](../../../AGENTS/protobuf.md) for conventions.
 
 ## Regenerate

@@ -1,6 +1,6 @@
 # fhir-r5 — Agent Instructions
 
-These files are generated from `sql-migrations/`. Do not edit them by hand;
+These files are generated from `sql/`. Do not edit them by hand;
 edit the SQL and re-run the generator.
 
 FHIR R5 is a clinical data interchange standard, applied here to a

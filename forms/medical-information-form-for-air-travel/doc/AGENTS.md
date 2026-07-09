@@ -34,7 +34,7 @@ applies.
 
 - `../index.md` — form overview and 14-step wizard table.
 - `../AGENTS.md` — agent instructions and airline-aligned rules summary.
-- `../sql-migrations/` — the authoritative data schema; rule predicates must
+- `../sql/` — the authoritative data schema; rule predicates must
   reference column names that exist there.
 - `../fhir-r5/`, `../xml-representations/`, `../protobuf/`, `../typespec/` —
   representation schemas derived from the same SQL.

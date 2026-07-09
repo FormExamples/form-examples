@@ -945,7 +945,7 @@ git commit -m "Add reusable components: CategoryTable, CodeBlock, ReferenceCard,
 <CodeBlock>{`forms/<slug>/
   index.md                                  # Form description + scoring system
   AGENTS.md                                 # Agent instructions
-  sql-migrations/                           # PostgreSQL Liquibase migrations
+  sql/                           # PostgreSQL Liquibase migrations
   xml-representations/                      # XML + DTD per SQL table entity
   fhir-r5/                                  # FHIR HL7 R5 JSON per SQL entity
   front-end-form-with-html/                 # Patient questionnaire (HTML)
@@ -1097,7 +1097,7 @@ git commit -m "Add Forms page for formexamples site"
   plan.md                                   # Implementation plan and status
   tasks.md                                  # Task tracking
   doc/                                      # Documentation and references
-  sql-migrations/                           # PostgreSQL Liquibase migrations
+  sql/                           # PostgreSQL Liquibase migrations
   xml-representations/                      # XML + DTD per SQL table entity
   fhir-r5/                                  # FHIR HL7 R5 JSON per SQL entity
   front-end-form-with-html/                 # Patient questionnaire (HTML)
@@ -1237,13 +1237,13 @@ git commit -m "Add Architecture page for formexamples site"
 
 <h2 id="sql" class="mt-10 text-xl font-semibold">SQL migrations</h2>
 <p class="mt-4">
-  Each form has PostgreSQL migrations in Liquibase SQL format under <code>sql-migrations/</code>. Filenames
+  Each form has PostgreSQL migrations in Liquibase SQL format under <code>sql/</code>. Filenames
   follow <code>NN_create_table_&lt;name&gt;.sql</code>, with <code>COMMENT ON TABLE</code> and <code>COMMENT ON COLUMN</code>
   statements for every column. Primary keys are UUIDv4 and every table has <code>created_at</code> +
   <code>updated_at</code> timestamps.
 </p>
 <p class="mt-4">
-  <a href={agentDoc('sql-migrations.md')} rel="noopener noreferrer">Read the SQL migrations doc →</a>
+  <a href={agentDoc('sql.md')} rel="noopener noreferrer">Read the SQL migrations doc →</a>
 </p>
 
 <h2 id="xml" class="mt-10 text-xl font-semibold">XML representations</h2>
@@ -1413,7 +1413,7 @@ CREATE DATABASE pre_operative_assessment_by_clinician_test OWNER loco;`}</CodeBl
 
 <h2 class="mt-10 text-xl font-semibold">Scaffold a new form</h2>
 <CodeBlock>{`bin/create-form my-new-form`}</CodeBlock>
-<p class="mt-4">This creates <code>forms/my-new-form/</code> with the standard directory layout (index.md, AGENTS.md, sql-migrations/, front-end-form-with-svelte/, etc.).</p>
+<p class="mt-4">This creates <code>forms/my-new-form/</code> with the standard directory layout (index.md, AGENTS.md, sql/, front-end-form-with-svelte/, etc.).</p>
 
 <h2 class="mt-10 text-xl font-semibold">Verify</h2>
 <CodeBlock>{`bin/test`}</CodeBlock>

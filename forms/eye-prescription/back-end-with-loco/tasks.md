@@ -6,7 +6,7 @@
 - [ ] Confirm `cargo loco start` serves the empty scaffold.
 
 ## Schema
-- [ ] Re-author SeaORM migrations from `../sql-migrations/`.
+- [ ] Re-author SeaORM migrations from `../sql/`.
 - [ ] CHECK constraints preserved.
 - [ ] COMMENT statements preserved.
 

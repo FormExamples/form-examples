@@ -1,7 +1,7 @@
 # Meeting — XML Representations Agent Instructions
 
 Generated XML + DTD per SQL table. These are generated artefacts — do not
-edit by hand; regenerate from `../sql-migrations/` instead.
+edit by hand; regenerate from `../sql/` instead.
 
 ## Tools
 

@@ -124,7 +124,7 @@ medical-operation-note/
   tasks.md                                          # task tracking
   seed.md                                           # source seed material
   doc/                                              # clinical reference documentation
-  sql-migrations/                                   # Liquibase Postgres migrations
+  sql/                                   # Liquibase Postgres migrations
   xml-representations/                              # XML + DTD per SQL table (generated)
   fhir-r5/                                          # FHIR HL7 R5 JSON per SQL entity (generated)
   protobuf/                                         # Protocol Buffers .proto per SQL entity (generated)

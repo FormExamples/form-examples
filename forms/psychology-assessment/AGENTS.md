@@ -11,7 +11,7 @@ subscale and raises safety flags on risk-screen items for clinician review.
 - `./plan.md` — development roadmap
 - `./tasks.md` — task tracking
 - `./doc/` — clinical reference documentation (DASS-21 scoring, risk policy)
-- `./sql-migrations/` — Liquibase-formatted Postgres schema
+- `./sql/` — Liquibase-formatted Postgres schema
 - `./xml-representations/` — generated XML + DTD per SQL table
 - `./fhir-r5/` — generated FHIR HL7 R5 JSON per SQL entity
 - `./front-end-form-with-html/` — static single-page patient wizard

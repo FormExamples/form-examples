@@ -1,5 +1,5 @@
 // Domain types for the UK Lasting Power of Attorney for Health and Welfare
-// (LP1H) validity engine. Mirrors the SQL schema in ../../../sql-migrations/.
+// (LP1H) validity engine. Mirrors the SQL schema in ../../../sql/.
 
 export type YesNo = 'yes' | 'no' | '';
 

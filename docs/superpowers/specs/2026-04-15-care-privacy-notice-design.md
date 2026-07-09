@@ -105,7 +105,7 @@ Same stacks as all other forms:
 All standard form directory artifacts:
 - `index.md`, `README.md` (symlink), `AGENTS.md`, `CLAUDE.md`, `plan.md`, `tasks.md`
 - `doc/` — reference documentation
-- `sql-migrations/` — PostgreSQL schema
+- `sql/` — PostgreSQL schema
 - `xml-representations/` — generated from SQL
 - `fhir-r5/` — generated from SQL
 - `front-end-form-with-html/`

@@ -11,12 +11,12 @@ Implementation roadmap for the WHO Surgical Safety Checklist form.
 
 ## Phase 2 — Data layer
 
-- [x] `sql-migrations/00_create_extensions.sql` (pgcrypto).
-- [x] `sql-migrations/01_create_function_set_updated_at.sql`.
-- [ ] `sql-migrations/02_create_table_patient.sql`.
-- [ ] `sql-migrations/03_create_table_clinician.sql`.
-- [ ] `sql-migrations/04_create_table_who_surgical_safety_checklist.sql`.
-- [ ] `sql-migrations/05_create_table_team_member.sql`.
+- [x] `sql/00_create_extensions.sql` (pgcrypto).
+- [x] `sql/01_create_function_set_updated_at.sql`.
+- [ ] `sql/02_create_table_patient.sql`.
+- [ ] `sql/03_create_table_clinician.sql`.
+- [ ] `sql/04_create_table_who_surgical_safety_checklist.sql`.
+- [ ] `sql/05_create_table_team_member.sql`.
 
 ## Phase 3 — Generated representations
 

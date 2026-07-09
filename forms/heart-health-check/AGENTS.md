@@ -14,7 +14,7 @@ NHS Heart Health Check for cardiovascular risk assessment using simplified QRISK
 - ./front-end-form-with-svelte/ - Patient form; SvelteKit + Svelte 5 + Tailwind 4
 - ./front-end-dashboard-with-svelte/ - Dashboard; SvelteKit + SVAR DataGrid
 - ./back-end-with-loco/ - Full-stack backend; Rust + Loco 0.16 + Tera
-- ./sql-migrations/ - PostgreSQL schema migrations (15 files)
+- ./sql/ - PostgreSQL schema migrations (15 files)
 
 ## Scoring system
 

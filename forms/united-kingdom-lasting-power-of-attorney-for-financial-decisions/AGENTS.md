@@ -19,7 +19,7 @@ and every validation rule.
 - `./doc/` — reference documentation (LP1F structure, MCA 2005 framework,
   registration workflow, validation rules, glossary)
 - `./20260420-LPA-Finance-Complete-Pack/` — source PDFs from OPG
-- `./sql-migrations/` — Liquibase-formatted Postgres schema
+- `./sql/` — Liquibase-formatted Postgres schema
 - `./xml-representations/` — generated XML + DTD per SQL table
 - `./fhir-r5/` — generated FHIR HL7 R5 JSON per SQL entity
 - `./protobuf/` — generated Protocol Buffers `.proto` schemas

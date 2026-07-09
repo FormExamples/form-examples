@@ -101,7 +101,7 @@ agile-principles-assessment/
   tasks.md                                          # task tracking
   doc/                                              # background reference
   seed.md                                           # the 12 principles (source)
-  sql-migrations/                                   # Liquibase Postgres migrations
+  sql/                                   # Liquibase Postgres migrations
   xml-representations/                              # XML + DTD per SQL table
   fhir-r5/                                          # FHIR R5 JSON resources
   front-end-form-with-html/                         # static single-page wizard

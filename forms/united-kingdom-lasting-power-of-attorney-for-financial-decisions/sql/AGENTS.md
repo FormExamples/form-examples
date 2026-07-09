@@ -7,7 +7,7 @@ primary keys (`id UUID PRIMARY KEY DEFAULT gen_random_uuid()`), `created_at`
 table and column. Child `lpa_*` tables reference
 `lasting_power_of_attorney(id) ON DELETE CASCADE`.
 
-See root [`AGENTS/sql-migrations.md`](../../../AGENTS/sql-migrations.md) for
+See root [`AGENTS/sql.md`](../../../AGENTS/sql.md) for
 the full conventions and the table-naming pattern.
 
 ## Table-by-table map

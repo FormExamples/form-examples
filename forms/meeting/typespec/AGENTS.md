@@ -3,7 +3,7 @@
 Planned TypeSpec API surface for the meeting form. No generator script
 exists yet — the files in this directory are authored by hand until
 `bin/typespec/generate-typespec-representations.py` is written. The
-schema mirrors the SQL migrations in `../sql-migrations/`.
+schema mirrors the SQL migrations in `../sql/`.
 
 ## Tools
 

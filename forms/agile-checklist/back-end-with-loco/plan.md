@@ -4,13 +4,13 @@
 
 A Loco / axum / SeaORM / Tera / HTMX / Alpine.js implementation of the
 agile-checklist form, sharing the canonical PostgreSQL schema in
-`../sql-migrations/`.
+`../sql/`.
 
 ## Build order
 
 1. Run the scaffolding script in
    `../back-end-with-loco-new/00-new.sh`.
-2. Apply the SQL migrations from `../sql-migrations/`.
+2. Apply the SQL migrations from `../sql/`.
 3. Generate SeaORM entities via `cargo loco db entities`.
 4. Define routes for: index, new submission wizard, submit, list,
    detail, report (PDF).

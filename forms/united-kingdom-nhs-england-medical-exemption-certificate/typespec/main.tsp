@@ -1,5 +1,5 @@
-// Generated from sql-migrations/. Do not edit by hand.
-// SOURCE: forms/united-kingdom-nhs-england-medical-exemption-certificate/sql-migrations/
+// Generated from sql/. Do not edit by hand.
+// SOURCE: forms/united-kingdom-nhs-england-medical-exemption-certificate/sql/
 
 import "@typespec/openapi3";
 

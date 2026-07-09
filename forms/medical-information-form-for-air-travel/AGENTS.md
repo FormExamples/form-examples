@@ -16,7 +16,7 @@ See [`index.md`](./index.md) for the full design and the 14-step wizard table.
 - `./tasks.md` — task tracking
 - `./seed.md` — research seed sourced from public airline MEDIF references
 - `./doc/` — clinical reference notes (IATA, ASMA, airline-specific quirks)
-- `./sql-migrations/` — Liquibase-formatted PostgreSQL migrations
+- `./sql/` — Liquibase-formatted PostgreSQL migrations
 - `./xml-representations/` — XML + DTD per SQL table
 - `./fhir-r5/` — FHIR HL7 R5 JSON per SQL entity
 - `./protobuf/` — Protocol Buffers `.proto` schemas per SQL entity

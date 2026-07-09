@@ -5,7 +5,7 @@ and the LPC continuation sheets 1–4. Used as the authoritative source
 for:
 
 - the TypeScript `Lpa` type,
-- the SQL schema in `../sql-migrations/`,
+- the SQL schema in `../sql/`,
 - the FHIR / XML / Protobuf / TypeSpec generators,
 - the on-screen help in the front-end wizard.
 

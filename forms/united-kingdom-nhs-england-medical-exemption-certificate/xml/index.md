@@ -1,6 +1,6 @@
 # united-kingdom-nhs-england-medical-exemption-certificate — XML representations
 
-One XML file plus its DTD per SQL table from `../sql-migrations/`:
+One XML file plus its DTD per SQL table from `../sql/`:
 
 - `patient` — applicant demographics
 - `practitioner` — signing practitioner

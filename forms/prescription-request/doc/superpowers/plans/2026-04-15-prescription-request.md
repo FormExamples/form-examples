@@ -13,28 +13,28 @@
 ### Task 1: SQL Migrations
 
 **Files:**
-- Create: `sql-migrations/AGENTS.md`
-- Create: `sql-migrations/CLAUDE.md`
-- Create: `sql-migrations/00-extensions.sql`
-- Create: `sql-migrations/01-patient.sql`
-- Create: `sql-migrations/02-clinician.sql`
-- Create: `sql-migrations/03-prescription-request.sql`
-- Create: `sql-migrations/04-prescription-details.sql`
-- Create: `sql-migrations/05-prescription-substitution-options.sql`
-- Create: `sql-migrations/06-prescription-request-type.sql`
-- Create: `sql-migrations/07-grading-result.sql`
-- Create: `sql-migrations/08-grading-fired-rule.sql`
-- Create: `sql-migrations/09-grading-additional-flag.sql`
+- Create: `sql/AGENTS.md`
+- Create: `sql/CLAUDE.md`
+- Create: `sql/00-extensions.sql`
+- Create: `sql/01-patient.sql`
+- Create: `sql/02-clinician.sql`
+- Create: `sql/03-prescription-request.sql`
+- Create: `sql/04-prescription-details.sql`
+- Create: `sql/05-prescription-substitution-options.sql`
+- Create: `sql/06-prescription-request-type.sql`
+- Create: `sql/07-grading-result.sql`
+- Create: `sql/08-grading-fired-rule.sql`
+- Create: `sql/09-grading-additional-flag.sql`
 
 - [ ] **Step 1: Create AGENTS.md and CLAUDE.md**
 
 ```markdown
-<!-- sql-migrations/CLAUDE.md -->
+<!-- sql/CLAUDE.md -->
 @AGENTS.md
 ```
 
 ```markdown
-<!-- sql-migrations/AGENTS.md -->
+<!-- sql/AGENTS.md -->
 # SQL Migrations for Prescription Request
 
 PostgreSQL 18 with Liquibase SQL format.
@@ -401,7 +401,7 @@ COMMENT ON COLUMN grading_additional_flag.priority IS 'Priority level: high, med
 - [ ] **Step 12: Commit SQL migrations**
 
 ```bash
-git add sql-migrations/
+git add sql/
 git commit -m "feat(prescription-request): add SQL migrations for prescription request form"
 ```
 
@@ -2654,7 +2654,7 @@ Prescription request form collecting patient information, clinician details, med
 prescription-request/
   front-end-form-with-svelte/
   front-end-dashboard-with-svelte/
-  sql-migrations/
+  sql/
   xml-representations/
   fhir-r5/
 ```
@@ -2684,7 +2684,7 @@ Prescription request form with priority classification engine (Routine / Urgent 
 - ./plan.md - Development roadmap
 - ./front-end-form-with-svelte/ - Patient questionnaire; SvelteKit + Svelte 5 + Tailwind 4
 - ./front-end-dashboard-with-svelte/ - Dashboard; SvelteKit + SVAR DataGrid
-- ./sql-migrations/ - PostgreSQL schema migrations
+- ./sql/ - PostgreSQL schema migrations
 - ./xml-representations/ - XML and DTD per SQL table entity
 - ./fhir-r5/ - FHIR HL7 R5 JSON per SQL table entity
 

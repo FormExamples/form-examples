@@ -1,7 +1,7 @@
 # Medical Information Form for Air Travel — TypeSpec
 
 [TypeSpec](https://typespec.io) interface definitions, one `.tsp` file per
-SQL table in `../sql-migrations/`. TypeSpec is the API-modelling DSL used in
+SQL table in `../sql/`. TypeSpec is the API-modelling DSL used in
 this monorepo as the camelCase source of truth for OpenAPI 3 and TypeScript
 client generation.
 

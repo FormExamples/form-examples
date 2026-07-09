@@ -95,7 +95,7 @@ pre-operative-assessment-by-clinician/
   tasks.md                                          # task tracking
   doc/                                              # documentation
   seeds/                                            # reference source materials
-  sql-migrations/                                   # Liquibase Postgres migrations
+  sql/                                   # Liquibase Postgres migrations
   xml-representations/                              # XML + DTD per SQL table
   fhir-r5/                                          # FHIR HL7 R5 JSON resources
   front-end-form-with-html/                         # static single-page HTML wizard

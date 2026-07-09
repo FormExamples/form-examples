@@ -15,7 +15,7 @@ source files live here yet.
    ../back-end-with-loco-setup
    ```
    This runs `cargo loco generate scaffold` for the 8 FP92A tables in the
-   order defined by `../sql-migrations/`.
+   order defined by `../sql/`.
 3. Port the engine (`src/engine/`), controllers, views, and Tera templates
    from `../back-end-with-loco/`.
 4. Confirm `cargo build` succeeds.

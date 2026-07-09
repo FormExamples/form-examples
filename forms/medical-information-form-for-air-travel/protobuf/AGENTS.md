@@ -1,7 +1,7 @@
 # Medical Information Form for Air Travel — Protocol Buffers
 
 Protocol Buffers (proto3) schemas, one `.proto` file per SQL table in
-`../sql-migrations/`. Use for binary wire encoding (gRPC, Kafka, S3 archives)
+`../sql/`. Use for binary wire encoding (gRPC, Kafka, S3 archives)
 when the JSON/XML representations are too verbose.
 
 ## Files

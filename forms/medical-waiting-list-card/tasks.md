@@ -13,16 +13,16 @@
 - [x] `doc/index.md` — clinical / policy reference notes.
 
 ## Schema
-- [x] `sql-migrations/00_create_extensions.sql`
-- [x] `sql-migrations/01_create_function_set_updated_at.sql`
-- [x] `sql-migrations/02_create_table_patient.sql`
-- [x] `sql-migrations/03_create_table_practitioner.sql`
-- [x] `sql-migrations/04_create_table_waiting_list_card.sql`
-- [x] `sql-migrations/05_create_table_waiting_list_card_appointment.sql`
-- [x] `sql-migrations/06_create_table_waiting_list_card_grade.sql`
-- [x] `sql-migrations/07_create_table_waiting_list_card_grade_rule.sql`
-- [x] `sql-migrations/08_create_table_waiting_list_card_grade_flag.sql`
-- [x] `sql-migrations/09_schema.sql` — combined schema (generated).
+- [x] `sql/00_create_extensions.sql`
+- [x] `sql/01_create_function_set_updated_at.sql`
+- [x] `sql/02_create_table_patient.sql`
+- [x] `sql/03_create_table_practitioner.sql`
+- [x] `sql/04_create_table_waiting_list_card.sql`
+- [x] `sql/05_create_table_waiting_list_card_appointment.sql`
+- [x] `sql/06_create_table_waiting_list_card_grade.sql`
+- [x] `sql/07_create_table_waiting_list_card_grade_rule.sql`
+- [x] `sql/08_create_table_waiting_list_card_grade_flag.sql`
+- [x] `sql/09_schema.sql` — combined schema (generated).
 
 ## Generated artefacts
 - [ ] `xml-representations/` — generate XML + DTD per SQL table.

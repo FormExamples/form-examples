@@ -5,7 +5,7 @@ fires. Mirrors the *Airline-aligned rules* section in `../AGENTS.md`. The
 engine evaluates each rule and applies max-grade: the worst band wins.
 
 The `instrument` column matches the `instrument` enum in
-`../sql-migrations/06_create_table_medical_information_form_for_air_travel_grade_rule.sql`.
+`../sql/06_create_table_medical_information_form_for_air_travel_grade_rule.sql`.
 
 The `predicate` column references column names from the
 `medical_information_form_for_air_travel` table. Dates are compared against

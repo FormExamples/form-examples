@@ -7,7 +7,7 @@ The SQL migrations are the **source of truth for data shape**. XML, FHIR R5,
 Protocol Buffers, and OpenAPI representations are all generated from them
 (see `spec.md` §3.1).
 
-Slug: sql-migrations
+Slug: sql
 
 - Search pattern: `forms/*/sql/*.sql`
 
@@ -156,7 +156,7 @@ done
 For a per-form apply-and-rollback smoke test (requires a fresh database):
 
 ```sh
-for d in forms/*/sql-migrations; do
+for d in forms/*/sql; do
   createdb test_migrations_$$
   for f in "$d"/*.sql; do
     psql -d test_migrations_$$ -f "$f" --set ON_ERROR_STOP=1 || echo "FAIL: $f"

@@ -6,7 +6,7 @@ Generated TypeSpec schemas for the Return to Work form. See
 ## Authoring rules
 
 - **Do not hand-edit generated files.** Edit
-  `../sql-migrations/*.sql` and re-run the generator.
+  `../sql/*.sql` and re-run the generator.
 - Model property names are camelCase.
 - Use `@format("uuid")` on UUID columns, `utcDateTime` on TIMESTAMPTZ,
   `plainDate` on DATE, `plainTime` on TIME, `decimal` on NUMERIC.

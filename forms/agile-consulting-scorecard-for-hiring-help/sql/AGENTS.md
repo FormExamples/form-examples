@@ -25,5 +25,5 @@ explicit answers.
 | 06 | `06_create_table_agile_consulting_scorecard_for_hiring_help_grade_rule.sql` | Audit trail of fired rules |
 | 07 | `07_create_table_agile_consulting_scorecard_for_hiring_help_grade_flag.sql` | Readiness flags |
 
-See root [`AGENTS/sql-migrations.md`](../../../AGENTS/sql-migrations.md) for the
+See root [`AGENTS/sql.md`](../../../AGENTS/sql.md) for the
 full conventions.

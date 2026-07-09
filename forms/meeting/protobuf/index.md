@@ -2,7 +2,7 @@
 
 Generated Protocol Buffers `.proto` schemas, one file per SQL table.
 Produced by `bin/protobuf/generate-protobuf-representations.py` from the
-migrations in [`../sql-migrations/`](../sql-migrations/).
+migrations in [`../sql/`](../sql/).
 
 The schemas serve as the service-to-service interchange format for
 backends that prefer protobuf over JSON. The wire field numbers are

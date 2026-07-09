@@ -1,11 +1,11 @@
-# sql-migrations — Agent Instructions
+# sql — Agent Instructions
 
 PostgreSQL Liquibase migrations for the HIPAA authorization form. Each
 file creates one table that maps 1:1 to a section of the 45 CFR
 § 164.508 authorization document.
 
 See the monorepo conventions in
-[`AGENTS/sql-migrations.md`](../../../AGENTS/sql-migrations.md).
+[`AGENTS/sql.md`](../../../AGENTS/sql.md).
 
 ## Naming
 
@@ -16,7 +16,7 @@ See the monorepo conventions in
 - `04`..`11` — one child table per § 164.508(c)(1)/(2) section.
 - `12`..`14` — validation result, fired rules, additional flags.
 - `15_schema.sql` — generated concatenation; regenerate via
-  `bin/sql-migrations/generate-sql-combined.py`.
+  `bin/sql/generate-sql-combined.py`.
 
 ## Conventions
 
@@ -34,7 +34,7 @@ See the monorepo conventions in
 ## Regenerate downstream artefacts
 
 ```sh
-bin/sql-migrations/generate-sql-combined.py
+bin/sql/generate-sql-combined.py
 bin/xml-representations/generate-xml-representations.py
 bin/fhir-r5/generate-fhir-r5-representations.py
 bin/protobuf/generate-protobuf-representations.py

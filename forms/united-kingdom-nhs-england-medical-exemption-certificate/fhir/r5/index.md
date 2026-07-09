@@ -1,6 +1,6 @@
 # UK NHS England Medical Exemption Certificate (FP92A) — FHIR HL7 R5 JSON
 
-FHIR HL7 R5 JSON resources, one file per SQL table from `../sql-migrations/`.
+FHIR HL7 R5 JSON resources, one file per SQL table from `../sql/`.
 
 | File | FHIR resource | Source table |
 | --- | --- | --- |

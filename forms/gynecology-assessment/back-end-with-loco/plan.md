@@ -2,14 +2,14 @@
 
 ## Current status
 
-Pending implementation. Scaffold present (sql-migrations, generated setup
+Pending implementation. Scaffold present (sql, generated setup
 script). Rust crate not yet authored.
 
 ## Implementation plan
 
 1. Run the generated `back-end-with-loco-setup` script to
    scaffold the Loco app and run `cargo loco generate scaffold` for each
-   table in `sql-migrations/`.
+   table in `sql/`.
 2. Author engine types, rules, grader, and flagged-issues mirroring the
    front-end-form-with-svelte engine, with `serde(rename_all = "camelCase")`
    on shared structs.

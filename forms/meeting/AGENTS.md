@@ -16,7 +16,7 @@ See [`index.md`](./index.md) for the full design and the 10-step wizard table.
 - `./tasks.md` — task tracking
 - `./seed.md` — original design seed
 - `./doc/` — reference documentation (recurrence rules, FHIR mapping, ICS notes)
-- `./sql-migrations/` — Liquibase-formatted Postgres schema
+- `./sql/` — Liquibase-formatted Postgres schema
 - `./xml-representations/` — generated XML + DTD per SQL table
 - `./fhir-r5/` — generated FHIR HL7 R5 JSON per SQL entity
 - `./protobuf/` — generated Protocol Buffers `.proto` schemas

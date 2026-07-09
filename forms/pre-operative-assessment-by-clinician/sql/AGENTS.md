@@ -7,4 +7,4 @@ keys (`id UUID PRIMARY KEY DEFAULT gen_random_uuid()`), `created_at` +
 `assessment_*` tables reference `assessment(id) ON DELETE CASCADE` with a UNIQUE
 constraint on `assessment_id` to enforce 1:1.
 
-See root [`AGENTS/sql-migrations.md`](../../../AGENTS/sql-migrations.md) for the full conventions and the table-naming pattern.
+See root [`AGENTS/sql.md`](../../../AGENTS/sql.md) for the full conventions and the table-naming pattern.

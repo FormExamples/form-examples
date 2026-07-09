@@ -19,7 +19,7 @@ SvelteKit 2 + Svelte 5 implementation of the ADR wizard.
 
 ## When adding fields
 
-1. Update the SQL migration in `../sql-migrations/`.
+1. Update the SQL migration in `../sql/`.
 2. Update `lib/types.ts` and `lib/stores/adr.svelte.ts` (`emptyAdrFormData`).
 3. Update the relevant `Step*.svelte`.
 4. Update `lib/report/build-markdown.ts` if the field appears in the

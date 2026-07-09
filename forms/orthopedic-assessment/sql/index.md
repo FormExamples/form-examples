@@ -1,7 +1,7 @@
-# orthopedic-assessment — sql-migrations
+# orthopedic-assessment — sql
 
 PostgreSQL migrations for this form. See
-`AGENTS/sql-migrations.md` for conventions.
+`AGENTS/sql.md` for conventions.
 
 ## Canonical files
 

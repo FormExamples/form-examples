@@ -37,7 +37,7 @@ outpatient-outcome-report/
   front-end-dashboard-with-html/
   front-end-dashboard-with-svelte/
   back-end-with-loco/
-  sql-migrations/
+  sql/
   xml-representations/
   fhir-r5/
   doc/

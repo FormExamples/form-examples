@@ -16,7 +16,7 @@ the validation rules.
 - `./plan.md` — development roadmap and status
 - `./tasks.md` — task tracking
 - `./doc/` — WHO / CDC / IHR reference documentation
-- `./sql-migrations/` — Liquibase-formatted Postgres schema
+- `./sql/` — Liquibase-formatted Postgres schema
 - `./xml-representations/` — generated XML + DTD per SQL table
 - `./fhir-r5/` — generated FHIR HL7 R5 JSON per SQL entity
 - `./protobuf/` — generated Protocol Buffers schemas per SQL entity

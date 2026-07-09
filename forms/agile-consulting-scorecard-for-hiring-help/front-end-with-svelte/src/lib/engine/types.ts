@@ -4,7 +4,7 @@
 // Conventions: empty string for unanswered text/enum fields; null for
 // unanswered booleans (item not yet answered). camelCase property names.
 // Field names match the SQL column names in
-// `sql-migrations/04_create_table_agile_consulting_scorecard_for_hiring_help.sql`
+// `sql/04_create_table_agile_consulting_scorecard_for_hiring_help.sql`
 // after snake_case → camelCase conversion.
 
 // ──────────────────────────────────────────────

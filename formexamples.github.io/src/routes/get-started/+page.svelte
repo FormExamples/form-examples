@@ -33,7 +33,7 @@ CREATE DATABASE pre_operative_assessment_by_clinician_test OWNER loco;`}</CodeBl
 
 <h2 class="mt-10 text-xl font-semibold">Scaffold a new form</h2>
 <CodeBlock>{`bin/create-form my-new-form`}</CodeBlock>
-<p class="mt-4">This creates <code>forms/my-new-form/</code> with the standard directory layout (index.md, AGENTS.md, sql-migrations/, front-end-form-with-svelte/, etc.).</p>
+<p class="mt-4">This creates <code>forms/my-new-form/</code> with the standard directory layout (index.md, AGENTS.md, sql/, front-end-form-with-svelte/, etc.).</p>
 
 <h2 class="mt-10 text-xl font-semibold">Verify</h2>
 <CodeBlock>{`bin/test`}</CodeBlock>

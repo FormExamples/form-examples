@@ -1,7 +1,7 @@
 # xml-representations/ — Agent Instructions
 
 Generated XML + DTD per SQL table. Re-run the generator after any change
-to `../sql-migrations/`.
+to `../sql/`.
 
 ```sh
 bin/xml-representations/generate-xml-representations.py united-kingdom-statement-of-fitness-for-work

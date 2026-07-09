@@ -1,6 +1,6 @@
 # Medical Information Form for Air Travel — FHIR HL7 R5
 
-FHIR HL7 R5 JSON resources, one file per SQL table in `../sql-migrations/`.
+FHIR HL7 R5 JSON resources, one file per SQL table in `../sql/`.
 The MEDIF maps onto a small set of FHIR R5 resource types:
 
 | SQL table | FHIR R5 resource | Profile |

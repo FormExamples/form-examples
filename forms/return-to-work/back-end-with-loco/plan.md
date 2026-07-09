@@ -4,7 +4,7 @@
 
 1. [ ] Run `../back-end-with-loco-new/00-new.sh`
        to scaffold a Loco project.
-2. [ ] Port the Liquibase migrations from `../sql-migrations/` into
+2. [ ] Port the Liquibase migrations from `../sql/` into
        SeaORM migrations under `migration/src/`.
 3. [ ] Generate SeaORM entities (`cargo loco generate scaffold`).
 4. [ ] Port the composite grader from

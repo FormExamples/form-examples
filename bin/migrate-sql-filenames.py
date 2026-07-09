@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Full forward migration of every form's sql-migrations/ to the canonical
+"""Full forward migration of every form's sql/ to the canonical
 filename convention used by bin/test-form.
 
 Canonical filename layout per form:
@@ -245,7 +245,7 @@ def fix_canonical_files(sql_dir: Path):
 
 
 def legacy_candidates(sql_dir: Path):
-    """Return numbered sql-migrations files that are not in the canonical four
+    """Return numbered sql files that are not in the canonical four
     and don't already match the `NN_create_table_*.sql` target convention.
 
     Also includes files without `.sql` extension that start with
@@ -311,7 +311,7 @@ def looks_broken_clinician(block: str) -> bool:
 def process_form(form_dir: Path):
     if form_dir.name.startswith("."):
         return "skip-hidden"
-    sql_dir = form_dir / "sql-migrations"
+    sql_dir = form_dir / "sql"
     if not sql_dir.is_dir():
         return "skip"
 
@@ -416,7 +416,7 @@ def process_form(form_dir: Path):
         written += 1
         final_tables.append(table)
 
-    # Write or refresh sql-migrations/index.md (test-form requires it).
+    # Write or refresh sql/index.md (test-form requires it).
     write_index_md(sql_dir, form_dir.name, final_tables)
 
     # xml-representations/index.md is also required by test-form; ensure it
@@ -437,10 +437,10 @@ def process_form(form_dir: Path):
 
 def write_index_md(sql_dir: Path, form_slug: str, tables: list):
     lines = [
-        f"# {form_slug} — sql-migrations",
+        f"# {form_slug} — sql",
         "",
         "PostgreSQL migrations for this form. See",
-        "`AGENTS/sql-migrations.md` for conventions.",
+        "`AGENTS/sql.md` for conventions.",
         "",
         "## Canonical files",
         "",

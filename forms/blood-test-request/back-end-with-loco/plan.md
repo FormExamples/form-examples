@@ -4,8 +4,8 @@ Rust axum + Loco JSON API for the blood test request. The generated scaffold is
 driven by `../back-end-with-loco-setup` (one `cargo loco generate scaffold --api`
 per SQL table, in FK-dependency order).
 
-- [x] SQL schema in `../sql-migrations/` is the source of truth
-- [ ] Setup script generated from `sql-migrations/`
+- [x] SQL schema in `../sql/` is the source of truth
+- [ ] Setup script generated from `sql/`
 - [ ] `cargo loco new` crate materialised (requires loco CLI + Postgres)
 - [ ] Four-axis grading engine port (`src/engine/`)
 - [ ] JSON API: CRUD + submit/grade + dashboard

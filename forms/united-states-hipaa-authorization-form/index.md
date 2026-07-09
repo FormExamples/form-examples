@@ -131,7 +131,7 @@ united-states-hipaa-authorization-form/
   seed.md                                    # plain-text seed brief
   seed.pdf                                   # Tennessee DHS HS-2557 reference
   doc/                                       # HIPAA Privacy Rule reference
-  sql-migrations/                            # PostgreSQL Liquibase schema
+  sql/                            # PostgreSQL Liquibase schema
   xml-representations/                       # XML + DTD per SQL table
   fhir-r5/                                   # FHIR HL7 R5 JSON per SQL entity
   protobuf/                                  # Protocol Buffers .proto schemas

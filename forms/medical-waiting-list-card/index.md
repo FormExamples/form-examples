@@ -103,7 +103,7 @@ medical-waiting-list-card/
   spec.md                                           # living domain spec
   seed.md                                           # original seed brief
   doc/                                              # documentation
-  sql-migrations/                                   # Liquibase Postgres migrations
+  sql/                                   # Liquibase Postgres migrations
   xml-representations/                              # XML + DTD per SQL table
   fhir-r5/                                          # FHIR HL7 R5 JSON resources
   protobuf/                                         # Protocol Buffers per SQL table

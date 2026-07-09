@@ -1,7 +1,7 @@
 # xml-representations — Agent Instructions
 
 Per-table XML examples and DTD schemas derived from
-`../sql-migrations/*.sql`. Every `.xml` is a minimal example record
+`../sql/*.sql`. Every `.xml` is a minimal example record
 matching the `.dtd` in the same directory.
 
 See [`AGENTS/xml-representations.md`](../../../AGENTS/xml-representations.md)

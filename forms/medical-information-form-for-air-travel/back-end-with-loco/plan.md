@@ -17,7 +17,7 @@
 
 ## Phase 1 — Schema and models
 
-- Port SQL migrations from `sql-migrations/02_*.sql` ... `07_*.sql` to
+- Port SQL migrations from `sql/02_*.sql` ... `07_*.sql` to
   SeaORM migrations under `migration/src/`
 - Generate `src/models/_entities/` via `sea-orm-cli generate entity`
 - Add domain models for `patient`, `clinician`,
@@ -75,4 +75,4 @@ pub struct MedifResult {
 
 - Tailwind CDN swap to local build
 - Production Docker image with multi-stage build
-- Liquibase parity check against `sql-migrations/`
+- Liquibase parity check against `sql/`

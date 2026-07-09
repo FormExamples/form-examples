@@ -1,4 +1,4 @@
-// Generated from sql-migrations/. Do not edit by hand.
+// Generated from sql/. Do not edit by hand.
 // SOURCE: united-kingdom-lasting-power-of-attorney-for-financial-decisions
 
 import "@typespec/http";

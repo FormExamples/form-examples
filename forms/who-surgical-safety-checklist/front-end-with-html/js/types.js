@@ -1,7 +1,7 @@
 // Plain-JavaScript / JSDoc type definitions for the WHO Surgical Safety
 // Checklist. Mirrors the canonical column list in
-// sql-migrations/04_create_table_who_surgical_safety_checklist.sql and
-// the team-member roster in sql-migrations/05_create_table_team_member.sql.
+// sql/04_create_table_who_surgical_safety_checklist.sql and
+// the team-member roster in sql/05_create_table_team_member.sql.
 //
 // Builds the canonical empty checklist shape so newly-added fields
 // default correctly when older saved state is rehydrated from

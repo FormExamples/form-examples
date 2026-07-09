@@ -29,6 +29,6 @@ migrations.
 
 ## Combined schema
 
-Run `bin/sql-migrations/generate-sql-combined.py
+Run `bin/sql/generate-sql-combined.py
 united-kingdom-statement-of-fitness-for-work` to produce a single
 `schema.sql` from the numbered migrations.

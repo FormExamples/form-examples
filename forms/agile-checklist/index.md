@@ -112,7 +112,7 @@ agile-checklist/
   tasks.md                                          # task tracking
   seed.md                                           # the 57 checklist items (source)
   doc/                                              # background reference
-  sql-migrations/                                   # Liquibase Postgres migrations
+  sql/                                   # Liquibase Postgres migrations
   xml-representations/                              # XML + DTD per SQL table
   fhir-r5/                                          # FHIR R5 JSON resources
   front-end-form-with-html/                         # static single-page wizard

@@ -38,5 +38,5 @@ Conventions:
 - Statutory rule identifiers stored as text (`'R-MCA-S9-AGE'`) for stable
   audit trails across releases
 
-See root [`AGENTS/sql-migrations.md`](../../../AGENTS/sql-migrations.md)
+See root [`AGENTS/sql.md`](../../../AGENTS/sql.md)
 for the full conventions and the table-naming pattern.

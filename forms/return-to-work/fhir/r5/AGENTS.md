@@ -7,7 +7,7 @@ by `bin/fhir-r5/generate-fhir-r5-representations.py`. See
 ## Authoring rules
 
 - **Do not hand-edit generated files.** Edit
-  `../sql-migrations/*.sql` and re-run the generator.
+  `../sql/*.sql` and re-run the generator.
 - Resource files are named after the source SQL entity in
   snake_case with the `.json` extension.
 - Every generated resource must validate against the FHIR R5

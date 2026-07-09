@@ -1,7 +1,7 @@
 # bowel-cancer-screening-with-faecal-immunochemical-test — sql
 
 PostgreSQL migrations for this form (source of truth). See
-`AGENTS/sql-migrations.md` for conventions.
+`AGENTS/sql.md` for conventions.
 
 Because the form slug is long, every table, column, index, and trigger uses the
 short base **`bowel_cancer_screening_fit`** to stay within PostgreSQL's 63-byte

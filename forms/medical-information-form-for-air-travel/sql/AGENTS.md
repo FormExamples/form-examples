@@ -32,5 +32,5 @@ trigger, `COMMENT ON TABLE` and `COMMENT ON COLUMN` for every table and column).
 
 ```sh
 bin/test-form medical-information-form-for-air-travel
-psql -f sql-migrations/02_create_table_patient.sql --set ON_ERROR_STOP=1
+psql -f sql/02_create_table_patient.sql --set ON_ERROR_STOP=1
 ```

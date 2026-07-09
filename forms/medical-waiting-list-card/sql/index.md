@@ -1,7 +1,7 @@
-# medical-waiting-list-card — sql-migrations
+# medical-waiting-list-card — sql
 
 PostgreSQL migrations for this form. See
-[`AGENTS/sql-migrations.md`](../../../AGENTS/sql-migrations.md) for conventions.
+[`AGENTS/sql.md`](../../../AGENTS/sql.md) for conventions.
 
 ## Canonical files
 

@@ -195,7 +195,7 @@ united-kingdom-lasting-power-of-attorney-for-financial-decisions/
   tasks.md                                              # task tracking
   doc/                                                  # documentation
   20260420-LPA-Finance-Complete-Pack/                   # source PDFs (LP1F, LP12, LP3, LPC, LPA120)
-  sql-migrations/                                       # Liquibase Postgres migrations
+  sql/                                       # Liquibase Postgres migrations
   xml-representations/                                  # XML + DTD per SQL table
   fhir-r5/                                              # FHIR HL7 R5 JSON resources
   protobuf/                                             # Protobuf .proto schemas

@@ -128,7 +128,7 @@ positive flag for recognition.
 ## 5. SQL data model
 
 Liquibase PostgreSQL migrations under
-`forms/objectives-and-key-results-tracker/sql-migrations/`. Most fields are
+`forms/objectives-and-key-results-tracker/sql/`. Most fields are
 inline on the parent `okr_objective` table with section-prefixed columns
 (following the issue-tracker pattern); child tables exist only for true
 1-to-many relationships (Key Results and Check-ins).

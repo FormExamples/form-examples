@@ -1,7 +1,7 @@
 # UK NHS England Medical Exemption Certificate (FP92A) — Protocol Buffers
 
 Protocol Buffers (proto3) message definitions, one `.proto` file per SQL table
-from `../sql-migrations/`. All messages share the `fp92a` package.
+from `../sql/`. All messages share the `fp92a` package.
 
 | File | Message | Source table |
 | --- | --- | --- |

@@ -4,7 +4,7 @@ Rust axum + Loco JSON API for the bronchoscopy request. The generated scaffold
 is driven by `../back-end-with-loco-setup` (one `cargo loco generate scaffold
 --api` per SQL table, in FK-dependency order).
 
-- [ ] Setup script generated from `sql-migrations/`
+- [ ] Setup script generated from `sql/`
 - [ ] `cargo loco new` crate materialised (requires loco CLI + Postgres)
 - [ ] Four-axis grading engine port (`src/engine/`)
 - [ ] JSON API: CRUD + submit/grade + dashboard

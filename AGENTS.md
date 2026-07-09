@@ -29,8 +29,8 @@ schema changes. See `spec.md` §10 for the spec-driven workflow.
 ### SQL
 
 - `bin/migrate-sql-filenames.py` — one-shot migration of each form's `sql/` to the canonical `NN_create_table_<name>.sql` layout
-- `bin/sql-migrations/generate-sql-comments.py` — append missing `COMMENT ON TABLE` / `COMMENT ON COLUMN` to numbered SQL migrations
-- `bin/sql-migrations/generate-sql-combined.py` — combine each form's numbered SQL migrations into `schema.sql`
+- `bin/sql/generate-sql-comments.py` — append missing `COMMENT ON TABLE` / `COMMENT ON COLUMN` to numbered SQL migrations
+- `bin/sql/generate-sql-combined.py` — combine each form's numbered SQL migrations into `schema.sql`
 
 ### Loco back-end refactor
 
@@ -128,7 +128,7 @@ See the per-stack agent docs:
 - [Front-end with SvelteKit / Tailwind / SVAR](AGENTS/front-end-with-sveltekit-tailwind-svar.md)
 - [Back-end with Rust / axum / Loco (JSON API)](AGENTS/back-end-with-loco.md)
 - [Back-end scaffold generator (setup script)](AGENTS/back-end-with-loco-setup.md)
-- [SQL migrations](AGENTS/sql-migrations.md)
+- [SQL migrations](AGENTS/sql.md)
 - [XML representations](AGENTS/xml-representations.md)
 - [FHIR HL7 R5 representations](AGENTS/fhir-r5.md)
 - [Protocol Buffers representations](AGENTS/protobuf.md)

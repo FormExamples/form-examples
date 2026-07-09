@@ -21,7 +21,7 @@ plus two infrastructure migrations:
 ## Apply
 
 ```sh
-for f in sql-migrations/*.sql; do
+for f in sql/*.sql; do
   psql -f "$f" --set ON_ERROR_STOP=1
 done
 ```

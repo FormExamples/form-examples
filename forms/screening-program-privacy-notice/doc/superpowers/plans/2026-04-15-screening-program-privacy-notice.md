@@ -84,7 +84,7 @@ screening-program-privacy-notice/
   plan.md
   tasks.md
   seed.md
-  sql-migrations/
+  sql/
   xml-representations/
   fhir-r5/
   front-end-form-with-html/
@@ -168,9 +168,9 @@ git commit -m "feat(screening-program-privacy-notice): add documentation scaffol
 ### Task 2: SQL migrations
 
 **Files:**
-- Create: `sql-migrations/00-extensions.sql`
-- Create: `sql-migrations/01-patient.sql`
-- Create: `sql-migrations/02-acknowledgment.sql`
+- Create: `sql/00-extensions.sql`
+- Create: `sql/01-patient.sql`
+- Create: `sql/02-acknowledgment.sql`
 
 - [ ] **Step 1: Create 00-extensions.sql**
 
@@ -257,7 +257,7 @@ COMMENT ON COLUMN acknowledgment.updated_at IS 'Timestamp when the record was la
 - [ ] **Step 4: Commit**
 
 ```bash
-git add sql-migrations/
+git add sql/
 git commit -m "feat(screening-program-privacy-notice): add SQL migrations"
 ```
 

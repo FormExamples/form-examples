@@ -1,4 +1,4 @@
-// Generated from sql-migrations/06_create_table_medical_information_form_for_air_travel_grade_rule.sql.
+// Generated from sql/06_create_table_medical_information_form_for_air_travel_grade_rule.sql.
 
 import "@typespec/openapi3";
 

@@ -2,7 +2,7 @@
 
 Generated FHIR HL7 R5 JSON resources for the meeting form. One JSON file
 per SQL table. These are generated artefacts — do not edit by hand; regenerate
-from `../sql-migrations/` instead.
+from `../sql/` instead.
 
 ## Tools
 

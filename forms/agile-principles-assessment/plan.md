@@ -12,7 +12,7 @@ report with a coaching action plan.
 | --- | --- |
 | `index.md`, `AGENTS.md`, `plan.md`, `tasks.md` | Done |
 | `seed.md` (12 principles) | Done (provided) |
-| `sql-migrations/` | Done |
+| `sql/` | Done |
 | `xml-representations/` | Done (5 tables → 10 files via `bin/xml-representations/generate-xml-representations.py`) |
 | `fhir-r5/` | Done (5 resources via `bin/fhir-r5/generate-fhir-r5-representations.py`) |
 | `front-end-form-with-svelte/` | Done |

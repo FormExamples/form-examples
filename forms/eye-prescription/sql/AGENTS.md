@@ -41,8 +41,8 @@ for the rules that consume this schema.
 After modifying the SQL migrations, regenerate downstream representations:
 
 ```sh
-bin/sql-migrations/generate-sql-comments.py
-bin/sql-migrations/generate-sql-combined.py
+bin/sql/generate-sql-comments.py
+bin/sql/generate-sql-combined.py
 bin/xml-representations/generate-xml-representations.py
 bin/fhir-r5/generate-fhir-r5-representations.py
 bin/protobuf/generate-protobuf-representations.py

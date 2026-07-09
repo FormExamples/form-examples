@@ -11,5 +11,5 @@ Child `medical_waiting_list_card_*` tables reference
 `UNIQUE` constraint on its FK to enforce 1:1; the appointment, grade-rule,
 and grade-flag children are 1:many.
 
-See the root [`AGENTS/sql-migrations.md`](../../../AGENTS/sql-migrations.md)
+See the root [`AGENTS/sql.md`](../../../AGENTS/sql.md)
 for the full conventions and the table-naming pattern.

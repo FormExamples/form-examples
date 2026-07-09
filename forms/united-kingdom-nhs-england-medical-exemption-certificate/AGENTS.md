@@ -16,7 +16,7 @@ table.
 - `./plan.md` — development roadmap and status
 - `./tasks.md` — task tracking
 - `./doc/` — clinical and regulatory reference notes
-- `./sql-migrations/` — Liquibase Postgres schema (canonical data model)
+- `./sql/` — Liquibase Postgres schema (canonical data model)
 - `./xml-representations/` — generated XML + DTD per SQL table
 - `./fhir-r5/` — generated FHIR HL7 R5 JSON resources
 - `./protobuf/` — generated Protocol Buffers `.proto` schemas

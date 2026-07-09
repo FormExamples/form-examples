@@ -10,13 +10,13 @@
 
 ## Phase 2 — Schema & data model
 
-- [x] `sql-migrations/00_create_extensions.sql`
-- [x] `sql-migrations/01_create_function_set_updated_at.sql`
-- [x] `sql-migrations/02_create_table_patient.sql` — vaccinee
-- [x] `sql-migrations/03_create_table_clinician.sql` — supervising clinician
-- [x] `sql-migrations/04_create_table_center.sql` — WHO-designated centre
-- [x] `sql-migrations/05_create_table_international_certificate_of_vaccination_or_prophylaxis.sql`
-- [x] `sql-migrations/06_create_table_international_certificate_of_vaccination_or_prophylaxis_entry.sql`
+- [x] `sql/00_create_extensions.sql`
+- [x] `sql/01_create_function_set_updated_at.sql`
+- [x] `sql/02_create_table_patient.sql` — vaccinee
+- [x] `sql/03_create_table_clinician.sql` — supervising clinician
+- [x] `sql/04_create_table_center.sql` — WHO-designated centre
+- [x] `sql/05_create_table_international_certificate_of_vaccination_or_prophylaxis.sql`
+- [x] `sql/06_create_table_international_certificate_of_vaccination_or_prophylaxis_entry.sql`
 
 ## Phase 3 — Generated representations
 
@@ -37,7 +37,7 @@
 - [ ] `back-end-with-loco-setup` — scaffold generator script
 - [ ] `back-end-with-loco/` — Rust Loco crate
 - [ ] HTMX + Alpine.js base layout (`templates/base.html.tera`)
-- [ ] SeaORM migrations mirroring `sql-migrations/`
+- [ ] SeaORM migrations mirroring `sql/`
 - [ ] Validation engine port to Rust
 - [ ] Controller routes: GET show, POST submit, GET report
 

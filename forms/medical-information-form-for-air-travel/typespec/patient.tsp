@@ -1,4 +1,4 @@
-// Generated from sql-migrations/02_create_table_patient.sql.
+// Generated from sql/02_create_table_patient.sql.
 
 import "@typespec/openapi3";
 

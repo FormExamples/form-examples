@@ -15,7 +15,7 @@ See [`index.md`](./index.md) for the full design and the 7-step wizard table.
 - `./spec.md` — living domain spec for spec-driven development
 - `./seed.md` — original seed brief
 - `./doc/` — RTT / clinical-prioritisation reference notes
-- `./sql-migrations/` — Liquibase-formatted Postgres schema (source of truth)
+- `./sql/` — Liquibase-formatted Postgres schema (source of truth)
 - `./xml-representations/` — generated XML + DTD per SQL table
 - `./fhir-r5/` — generated FHIR HL7 R5 JSON per SQL entity
 - `./protobuf/` — generated Protocol Buffers per SQL entity

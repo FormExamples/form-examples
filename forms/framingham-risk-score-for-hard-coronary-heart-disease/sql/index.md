@@ -1,7 +1,7 @@
-# framingham-risk-score-for-hard-coronary-heart-disease — sql-migrations
+# framingham-risk-score-for-hard-coronary-heart-disease — sql
 
 PostgreSQL migrations for this form. See
-`AGENTS/sql-migrations.md` for conventions.
+`AGENTS/sql.md` for conventions.
 
 ## Canonical files
 

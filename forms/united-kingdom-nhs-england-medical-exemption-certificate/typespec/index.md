@@ -1,7 +1,7 @@
 # UK NHS England Medical Exemption Certificate (FP92A) — TypeSpec
 
 [TypeSpec](https://typespec.io/) models that mirror the SQL schema in
-`../sql-migrations/`. The single `main.tsp` file declares the `Fp92a` namespace
+`../sql/`. The single `main.tsp` file declares the `Fp92a` namespace
 with one model per SQL table — `Patient`, `Practitioner`, `EligibleCondition`,
 `Application`, `ApplicationEligibleCondition`, `Grade`, `GradeFiredRule`,
 `GradeAdditionalFlag`.

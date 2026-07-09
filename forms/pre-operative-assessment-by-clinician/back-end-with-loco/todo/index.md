@@ -8,7 +8,7 @@ Server-rendered clinician wizard. Loco 0.16 framework on axum 0.8; SeaORM
 - Rust edition 2024
 - `loco-rs` 0.16 (axum 0.8)
 - `sea-orm` 1.1 + `sea-orm-migration`
-- PostgreSQL (schema in `../sql-migrations/`)
+- PostgreSQL (schema in `../sql/`)
 - `tera` templates with HTMX + Alpine.js (served from CDN)
 - `serde` with `rename_all = "camelCase"` for TypeScript interop
 

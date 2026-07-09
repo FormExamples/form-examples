@@ -1,7 +1,7 @@
 # Eye Prescription — FHIR R5 Representations
 
 Generated HL7 FHIR R5 JSON resources per SQL table in
-[`../sql-migrations/`](../sql-migrations/). See
+[`../sql/`](../sql/). See
 [`../doc/fhir-vision-prescription-mapping.md`](../doc/fhir-vision-prescription-mapping.md)
 for the canonical SQL → FHIR mapping.
 

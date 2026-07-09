@@ -1,7 +1,7 @@
 # XML Representations — UK Statement of Fitness for Work
 
 XML + DTD representations of every SQL table in
-`../sql-migrations/`. Used for archival and import into legacy
+`../sql/`. Used for archival and import into legacy
 occupational-health systems.
 
 ## Files

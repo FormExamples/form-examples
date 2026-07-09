@@ -17,7 +17,7 @@ table.
 - `./tasks.md` — task tracking
 - `./doc/` — statutory references, OPG guidance, certificate-provider
   decision tree, rule catalogue
-- `./sql-migrations/` — Liquibase-formatted Postgres schema
+- `./sql/` — Liquibase-formatted Postgres schema
 - `./xml-representations/` — generated XML + DTD per SQL table
 - `./fhir-r5/` — generated FHIR HL7 R5 JSON per SQL entity
 - `./protobuf/` — generated Protocol Buffers schemas

@@ -19,7 +19,7 @@ See [`seed.md`](./seed.md) for the source brief.
 - `./seed.md` — source seed material
 - `./doc/` — clinical reference documentation (GOC standards, classification
   rules, lens recommendation matrix, safety case notes, FHIR mapping)
-- `./sql-migrations/` — Liquibase-formatted Postgres schema
+- `./sql/` — Liquibase-formatted Postgres schema
 - `./xml-representations/` — generated XML + DTD per SQL table
 - `./fhir-r5/` — generated FHIR HL7 R5 JSON per SQL entity
 - `./protobuf/` — generated Protocol Buffers .proto schemas

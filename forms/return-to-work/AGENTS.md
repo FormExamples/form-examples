@@ -20,7 +20,7 @@ table.
 - `./doc/` — clinical reference documentation (Med 3 guidance,
   self-certification, ICD-10 / SNOMED mapping, phased-return guidance,
   RIDDOR / DVLA cross-walks, Equality Act adjustments)
-- `./sql-migrations/` — Liquibase-formatted Postgres schema
+- `./sql/` — Liquibase-formatted Postgres schema
 - `./xml-representations/` — generated XML + DTD per SQL table
 - `./fhir-r5/` — generated FHIR HL7 R5 JSON per SQL entity
 - `./protobuf/` — generated Protocol Buffers schemas

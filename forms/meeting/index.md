@@ -103,7 +103,7 @@ meeting/
   tasks.md                                          # task tracking
   seed.md                                           # original design seed
   doc/                                              # documentation
-  sql-migrations/                                   # Liquibase Postgres migrations
+  sql/                                   # Liquibase Postgres migrations
   xml-representations/                              # XML + DTD per SQL table
   fhir-r5/                                          # FHIR HL7 R5 JSON per SQL entity
   protobuf/                                         # Protocol Buffers .proto schemas

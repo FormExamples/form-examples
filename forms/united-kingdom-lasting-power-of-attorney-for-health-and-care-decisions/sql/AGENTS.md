@@ -20,5 +20,5 @@ Statutory rule identifiers are stored as stable text values (e.g.
 `'R-MCA-S9-AGE'`) referenced from both the `lpa_validity_fired_rule` table
 and from the Vitest engine tests.
 
-See root [`AGENTS/sql-migrations.md`](../../../AGENTS/sql-migrations.md)
+See root [`AGENTS/sql.md`](../../../AGENTS/sql.md)
 for the full conventions and the table-naming pattern.

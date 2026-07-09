@@ -10,4 +10,4 @@ bin/xml-representations/generate-xml-representations.py
 ```
 
 Do not hand-edit files in this directory; edit the SQL migration
-(`../sql-migrations/`) and re-run the generator.
+(`../sql/`) and re-run the generator.

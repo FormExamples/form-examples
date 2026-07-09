@@ -134,7 +134,7 @@ architecture-decision-record/
   plan.md
   tasks.md
   doc/                                          References and template source
-  sql-migrations/                                PostgreSQL Liquibase migrations
+  sql/                                PostgreSQL Liquibase migrations
   xml-representations/                           XML + DTD per SQL table
   fhir-r5/                                       FHIR HL7 R5 JSON per SQL table
   front-end-form-with-html/                      Static HTML + Alpine.js wizard

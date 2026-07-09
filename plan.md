@@ -11,7 +11,7 @@
 ## Architecture
 
 - Monorepo with a consistent per-form layout: `index.md`, AI docs,
-  `sql-migrations/`, `xml-representations/`, `fhir-r5/`, four front-ends
+  `sql/`, `xml-representations/`, `fhir-r5/`, four front-ends
   (form + dashboard, each HTML and SvelteKit), and one Rust full-stack crate.
 - Pure scoring engines with no side effects for testability.
 - Svelte 5 runes with class-based reactive stores (no legacy `writable` stores).

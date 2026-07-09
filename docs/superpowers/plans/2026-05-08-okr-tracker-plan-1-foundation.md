@@ -40,7 +40,7 @@ Expected: prints `mkdir -p` lines and rsyncs the `skel/` template into `forms/ob
 ls forms/objectives-and-key-results-tracker
 ```
 
-Expected listing: `AGENTS.md  CLAUDE.md  doc/  fhir-r5/  front-end-dashboard-with-html/  front-end-dashboard-with-svelte/  front-end-form-with-html/  front-end-form-with-svelte/  full-stack-with-loco-tera-htmx-alpine/  full-stack-with-loco-tera-htmx-alpine-new/  index.md  plan.md  README.md  sql-migrations/  tasks.md  xml-representations/`
+Expected listing: `AGENTS.md  CLAUDE.md  doc/  fhir-r5/  front-end-dashboard-with-html/  front-end-dashboard-with-svelte/  front-end-form-with-html/  front-end-form-with-svelte/  full-stack-with-loco-tera-htmx-alpine/  full-stack-with-loco-tera-htmx-alpine-new/  index.md  plan.md  README.md  sql/  tasks.md  xml-representations/`
 
 - [ ] **Step 2: Move the seed file from the staging directory**
 
@@ -170,7 +170,7 @@ for the full data model.
 
 - [Front-end with SvelteKit / Tailwind / SVAR](../../AGENTS/front-end-with-sveltekit-tailwind-svar.md)
 - [Full-stack with Loco / Tera / HTMX / Alpine](../../AGENTS/full-stack-with-loco-tera-htmx-alpine.md)
-- [SQL migrations](../../AGENTS/sql-migrations.md)
+- [SQL migrations](../../AGENTS/sql.md)
 - [XML representations](../../AGENTS/xml-representations.md)
 - [FHIR HL7 R5](../../AGENTS/fhir-r5.md)
 ```
@@ -222,7 +222,7 @@ git commit -m "OKR tracker: author AGENTS.md, plan.md, tasks.md"
 
 All migrations are Liquibase SQL format (`--liquibase formatted sql`,
 `--changeset author:N`, matching `--rollback`). Conventions per
-[`AGENTS/sql-migrations.md`](../../AGENTS/sql-migrations.md): UUIDv4 PKs
+[`AGENTS/sql.md`](../../AGENTS/sql.md): UUIDv4 PKs
 via `gen_random_uuid()`, canonical first four columns, snake_case,
 comprehensive `COMMENT ON` for every table and column, GIN trigram
 indexes on free-text search columns.
@@ -230,7 +230,7 @@ indexes on free-text search columns.
 ### Task 4: `00_extensions.sql`
 
 **Files:**
-- Create: `forms/objectives-and-key-results-tracker/sql-migrations/00_extensions.sql`
+- Create: `forms/objectives-and-key-results-tracker/sql/00_extensions.sql`
 
 - [ ] **Step 1: Write the migration**
 
@@ -250,7 +250,7 @@ CREATE EXTENSION IF NOT EXISTS pg_trgm;
 
 ```sh
 createdb okr_scratch || true
-psql -d okr_scratch -v ON_ERROR_STOP=1 -f forms/objectives-and-key-results-tracker/sql-migrations/00_extensions.sql
+psql -d okr_scratch -v ON_ERROR_STOP=1 -f forms/objectives-and-key-results-tracker/sql/00_extensions.sql
 ```
 
 Expected: `CREATE EXTENSION` success messages with no error.
@@ -258,7 +258,7 @@ Expected: `CREATE EXTENSION` success messages with no error.
 - [ ] **Step 3: Commit**
 
 ```sh
-git add forms/objectives-and-key-results-tracker/sql-migrations/00_extensions.sql
+git add forms/objectives-and-key-results-tracker/sql/00_extensions.sql
 git commit -m "OKR tracker: SQL 00_extensions"
 ```
 
@@ -267,7 +267,7 @@ git commit -m "OKR tracker: SQL 00_extensions"
 ### Task 5: `01_create_function_set_updated_at.sql`
 
 **Files:**
-- Create: `forms/objectives-and-key-results-tracker/sql-migrations/01_create_function_set_updated_at.sql`
+- Create: `forms/objectives-and-key-results-tracker/sql/01_create_function_set_updated_at.sql`
 
 - [ ] **Step 1: Write the migration**
 
@@ -291,7 +291,7 @@ COMMENT ON FUNCTION set_updated_at() IS
 - [ ] **Step 2: Verify it loads**
 
 ```sh
-psql -d okr_scratch -v ON_ERROR_STOP=1 -f forms/objectives-and-key-results-tracker/sql-migrations/01_create_function_set_updated_at.sql
+psql -d okr_scratch -v ON_ERROR_STOP=1 -f forms/objectives-and-key-results-tracker/sql/01_create_function_set_updated_at.sql
 ```
 
 Expected: `CREATE FUNCTION`, `COMMENT`.
@@ -299,7 +299,7 @@ Expected: `CREATE FUNCTION`, `COMMENT`.
 - [ ] **Step 3: Commit**
 
 ```sh
-git add forms/objectives-and-key-results-tracker/sql-migrations/01_create_function_set_updated_at.sql
+git add forms/objectives-and-key-results-tracker/sql/01_create_function_set_updated_at.sql
 git commit -m "OKR tracker: SQL 01_create_function_set_updated_at"
 ```
 
@@ -308,13 +308,13 @@ git commit -m "OKR tracker: SQL 01_create_function_set_updated_at"
 ### Task 6: `02_create_table_reporter.sql`
 
 **Files:**
-- Create: `forms/objectives-and-key-results-tracker/sql-migrations/02_create_table_reporter.sql`
-- Reference: `forms/issue-tracker/sql-migrations/02_create_table_reporter.sql` (mirror structure)
+- Create: `forms/objectives-and-key-results-tracker/sql/02_create_table_reporter.sql`
+- Reference: `forms/issue-tracker/sql/02_create_table_reporter.sql` (mirror structure)
 
 - [ ] **Step 1: Read the issue-tracker reporter migration to mirror structure**
 
 ```sh
-cat forms/issue-tracker/sql-migrations/02_create_table_reporter.sql
+cat forms/issue-tracker/sql/02_create_table_reporter.sql
 ```
 
 - [ ] **Step 2: Write the OKR reporter migration** (identical schema; the table is generic)
@@ -355,7 +355,7 @@ COMMENT ON COLUMN reporter.role IS 'Free-text role label (e.g. team lead, OKR co
 - [ ] **Step 3: Apply and verify**
 
 ```sh
-psql -d okr_scratch -v ON_ERROR_STOP=1 -f forms/objectives-and-key-results-tracker/sql-migrations/02_create_table_reporter.sql
+psql -d okr_scratch -v ON_ERROR_STOP=1 -f forms/objectives-and-key-results-tracker/sql/02_create_table_reporter.sql
 psql -d okr_scratch -c "INSERT INTO reporter (name) VALUES ('Alice') RETURNING id;"
 ```
 
@@ -364,7 +364,7 @@ Expected: a UUID is printed.
 - [ ] **Step 4: Commit**
 
 ```sh
-git add forms/objectives-and-key-results-tracker/sql-migrations/02_create_table_reporter.sql
+git add forms/objectives-and-key-results-tracker/sql/02_create_table_reporter.sql
 git commit -m "OKR tracker: SQL 02_create_table_reporter"
 ```
 
@@ -373,7 +373,7 @@ git commit -m "OKR tracker: SQL 02_create_table_reporter"
 ### Task 7: `03_create_table_participant.sql`
 
 **Files:**
-- Create: `forms/objectives-and-key-results-tracker/sql-migrations/03_create_table_participant.sql`
+- Create: `forms/objectives-and-key-results-tracker/sql/03_create_table_participant.sql`
 
 - [ ] **Step 1: Write the migration**
 
@@ -424,13 +424,13 @@ Note: `okr_objective_id` cannot be a `REFERENCES` constraint here because `okr_o
 - [ ] **Step 2: Apply**
 
 ```sh
-psql -d okr_scratch -v ON_ERROR_STOP=1 -f forms/objectives-and-key-results-tracker/sql-migrations/03_create_table_participant.sql
+psql -d okr_scratch -v ON_ERROR_STOP=1 -f forms/objectives-and-key-results-tracker/sql/03_create_table_participant.sql
 ```
 
 - [ ] **Step 3: Commit**
 
 ```sh
-git add forms/objectives-and-key-results-tracker/sql-migrations/03_create_table_participant.sql
+git add forms/objectives-and-key-results-tracker/sql/03_create_table_participant.sql
 git commit -m "OKR tracker: SQL 03_create_table_participant"
 ```
 
@@ -441,7 +441,7 @@ git commit -m "OKR tracker: SQL 03_create_table_participant"
 This is the largest migration — the parent table.
 
 **Files:**
-- Create: `forms/objectives-and-key-results-tracker/sql-migrations/04_create_table_okr_objective.sql`
+- Create: `forms/objectives-and-key-results-tracker/sql/04_create_table_okr_objective.sql`
 
 - [ ] **Step 1: Write the migration**
 
@@ -585,7 +585,7 @@ COMMENT ON COLUMN okr_objective.score_by_pace_deviation_percent IS
 - [ ] **Step 2: Apply and verify a roundtrip**
 
 ```sh
-psql -d okr_scratch -v ON_ERROR_STOP=1 -f forms/objectives-and-key-results-tracker/sql-migrations/04_create_table_okr_objective.sql
+psql -d okr_scratch -v ON_ERROR_STOP=1 -f forms/objectives-and-key-results-tracker/sql/04_create_table_okr_objective.sql
 psql -d okr_scratch -c "INSERT INTO reporter (name) VALUES ('Alice') RETURNING id" >/tmp/r.txt
 RID=$(awk 'NR==3{print $1}' /tmp/r.txt)
 psql -d okr_scratch -c "INSERT INTO okr_objective (reporter_id, level, cycle, obj_title) VALUES ('$RID', 'team', 'quarterly', 'Reduce churn by 30%') RETURNING id"
@@ -604,7 +604,7 @@ Expected: prints `OK: rejected invalid level`.
 - [ ] **Step 4: Commit**
 
 ```sh
-git add forms/objectives-and-key-results-tracker/sql-migrations/04_create_table_okr_objective.sql
+git add forms/objectives-and-key-results-tracker/sql/04_create_table_okr_objective.sql
 git commit -m "OKR tracker: SQL 04_create_table_okr_objective"
 ```
 
@@ -613,7 +613,7 @@ git commit -m "OKR tracker: SQL 04_create_table_okr_objective"
 ### Task 9: `05_create_table_okr_key_result.sql`
 
 **Files:**
-- Create: `forms/objectives-and-key-results-tracker/sql-migrations/05_create_table_okr_key_result.sql`
+- Create: `forms/objectives-and-key-results-tracker/sql/05_create_table_okr_key_result.sql`
 
 - [ ] **Step 1: Write the migration**
 
@@ -684,7 +684,7 @@ COMMENT ON COLUMN okr_key_result.progress_fraction IS
 - [ ] **Step 2: Apply and verify**
 
 ```sh
-psql -d okr_scratch -v ON_ERROR_STOP=1 -f forms/objectives-and-key-results-tracker/sql-migrations/05_create_table_okr_key_result.sql
+psql -d okr_scratch -v ON_ERROR_STOP=1 -f forms/objectives-and-key-results-tracker/sql/05_create_table_okr_key_result.sql
 psql -d okr_scratch -c "INSERT INTO okr_key_result (okr_objective_id, position, title, kr_type) SELECT id, 1, 'Lift NPS to 50', 'numeric' FROM okr_objective LIMIT 1 RETURNING id"
 ```
 
@@ -699,7 +699,7 @@ psql -d okr_scratch -c "INSERT INTO okr_key_result (okr_objective_id, position, 
 - [ ] **Step 4: Commit**
 
 ```sh
-git add forms/objectives-and-key-results-tracker/sql-migrations/05_create_table_okr_key_result.sql
+git add forms/objectives-and-key-results-tracker/sql/05_create_table_okr_key_result.sql
 git commit -m "OKR tracker: SQL 05_create_table_okr_key_result"
 ```
 
@@ -708,7 +708,7 @@ git commit -m "OKR tracker: SQL 05_create_table_okr_key_result"
 ### Task 10: `06_create_table_okr_check_in.sql`
 
 **Files:**
-- Create: `forms/objectives-and-key-results-tracker/sql-migrations/06_create_table_okr_check_in.sql`
+- Create: `forms/objectives-and-key-results-tracker/sql/06_create_table_okr_check_in.sql`
 
 - [ ] **Step 1: Write the migration**
 
@@ -761,14 +761,14 @@ COMMENT ON COLUMN okr_check_in.confidence_decile_at_check_in IS
 - [ ] **Step 2: Apply and verify**
 
 ```sh
-psql -d okr_scratch -v ON_ERROR_STOP=1 -f forms/objectives-and-key-results-tracker/sql-migrations/06_create_table_okr_check_in.sql
+psql -d okr_scratch -v ON_ERROR_STOP=1 -f forms/objectives-and-key-results-tracker/sql/06_create_table_okr_check_in.sql
 psql -d okr_scratch -c "INSERT INTO okr_check_in (okr_objective_id, narrative, confidence_decile_at_check_in) SELECT id, 'Pilot results positive', 7 FROM okr_objective LIMIT 1 RETURNING id"
 ```
 
 - [ ] **Step 3: Commit**
 
 ```sh
-git add forms/objectives-and-key-results-tracker/sql-migrations/06_create_table_okr_check_in.sql
+git add forms/objectives-and-key-results-tracker/sql/06_create_table_okr_check_in.sql
 git commit -m "OKR tracker: SQL 06_create_table_okr_check_in"
 ```
 
@@ -777,7 +777,7 @@ git commit -m "OKR tracker: SQL 06_create_table_okr_check_in"
 ### Task 11: `07_create_table_okr_grade.sql`
 
 **Files:**
-- Create: `forms/objectives-and-key-results-tracker/sql-migrations/07_create_table_okr_grade.sql`
+- Create: `forms/objectives-and-key-results-tracker/sql/07_create_table_okr_grade.sql`
 
 - [ ] **Step 1: Write the migration**
 
@@ -861,14 +861,14 @@ COMMENT ON COLUMN okr_grade.graded_at IS 'Timestamp when the engine last compute
 - [ ] **Step 2: Apply and verify**
 
 ```sh
-psql -d okr_scratch -v ON_ERROR_STOP=1 -f forms/objectives-and-key-results-tracker/sql-migrations/07_create_table_okr_grade.sql
+psql -d okr_scratch -v ON_ERROR_STOP=1 -f forms/objectives-and-key-results-tracker/sql/07_create_table_okr_grade.sql
 psql -d okr_scratch -c "INSERT INTO okr_grade (okr_objective_id, computed_composite_rag) SELECT id, 'amber' FROM okr_objective LIMIT 1 RETURNING id"
 ```
 
 - [ ] **Step 3: Commit**
 
 ```sh
-git add forms/objectives-and-key-results-tracker/sql-migrations/07_create_table_okr_grade.sql
+git add forms/objectives-and-key-results-tracker/sql/07_create_table_okr_grade.sql
 git commit -m "OKR tracker: SQL 07_create_table_okr_grade"
 ```
 
@@ -877,13 +877,13 @@ git commit -m "OKR tracker: SQL 07_create_table_okr_grade"
 ### Task 12: `08_create_table_okr_grade_rule.sql`
 
 **Files:**
-- Create: `forms/objectives-and-key-results-tracker/sql-migrations/08_create_table_okr_grade_rule.sql`
-- Reference: `forms/issue-tracker/sql-migrations/06_create_table_issue_tracker_grade_rule.sql`
+- Create: `forms/objectives-and-key-results-tracker/sql/08_create_table_okr_grade_rule.sql`
+- Reference: `forms/issue-tracker/sql/06_create_table_issue_tracker_grade_rule.sql`
 
 - [ ] **Step 1: Read the reference**
 
 ```sh
-cat forms/issue-tracker/sql-migrations/06_create_table_issue_tracker_grade_rule.sql
+cat forms/issue-tracker/sql/06_create_table_issue_tracker_grade_rule.sql
 ```
 
 - [ ] **Step 2: Write the migration** (mirror the issue-tracker structure, swap the FK)
@@ -937,13 +937,13 @@ COMMENT ON COLUMN okr_grade_rule.description IS 'Human-readable rule description
 - [ ] **Step 3: Apply and verify**
 
 ```sh
-psql -d okr_scratch -v ON_ERROR_STOP=1 -f forms/objectives-and-key-results-tracker/sql-migrations/08_create_table_okr_grade_rule.sql
+psql -d okr_scratch -v ON_ERROR_STOP=1 -f forms/objectives-and-key-results-tracker/sql/08_create_table_okr_grade_rule.sql
 ```
 
 - [ ] **Step 4: Commit**
 
 ```sh
-git add forms/objectives-and-key-results-tracker/sql-migrations/08_create_table_okr_grade_rule.sql
+git add forms/objectives-and-key-results-tracker/sql/08_create_table_okr_grade_rule.sql
 git commit -m "OKR tracker: SQL 08_create_table_okr_grade_rule"
 ```
 
@@ -952,7 +952,7 @@ git commit -m "OKR tracker: SQL 08_create_table_okr_grade_rule"
 ### Task 13: `09_create_table_okr_grade_flag.sql`
 
 **Files:**
-- Create: `forms/objectives-and-key-results-tracker/sql-migrations/09_create_table_okr_grade_flag.sql`
+- Create: `forms/objectives-and-key-results-tracker/sql/09_create_table_okr_grade_flag.sql`
 
 - [ ] **Step 1: Write the migration**
 
@@ -1004,13 +1004,13 @@ COMMENT ON COLUMN okr_grade_flag.description IS 'Human-readable description of w
 - [ ] **Step 2: Apply and verify**
 
 ```sh
-psql -d okr_scratch -v ON_ERROR_STOP=1 -f forms/objectives-and-key-results-tracker/sql-migrations/09_create_table_okr_grade_flag.sql
+psql -d okr_scratch -v ON_ERROR_STOP=1 -f forms/objectives-and-key-results-tracker/sql/09_create_table_okr_grade_flag.sql
 ```
 
 - [ ] **Step 3: Commit**
 
 ```sh
-git add forms/objectives-and-key-results-tracker/sql-migrations/09_create_table_okr_grade_flag.sql
+git add forms/objectives-and-key-results-tracker/sql/09_create_table_okr_grade_flag.sql
 git commit -m "OKR tracker: SQL 09_create_table_okr_grade_flag"
 ```
 
@@ -1021,7 +1021,7 @@ git commit -m "OKR tracker: SQL 09_create_table_okr_grade_flag"
 ### Task 14: Author and run a roundtrip shell script
 
 **Files:**
-- Create: `forms/objectives-and-key-results-tracker/sql-migrations/_roundtrip-test.sh`
+- Create: `forms/objectives-and-key-results-tracker/sql/_roundtrip-test.sh`
 
 - [ ] **Step 1: Write the roundtrip test script**
 
@@ -1106,8 +1106,8 @@ echo "OK: roundtrip succeeded"
 - [ ] **Step 2: Make it executable and run it**
 
 ```sh
-chmod +x forms/objectives-and-key-results-tracker/sql-migrations/_roundtrip-test.sh
-forms/objectives-and-key-results-tracker/sql-migrations/_roundtrip-test.sh
+chmod +x forms/objectives-and-key-results-tracker/sql/_roundtrip-test.sh
+forms/objectives-and-key-results-tracker/sql/_roundtrip-test.sh
 ```
 
 Expected last lines:
@@ -1122,7 +1122,7 @@ OK: roundtrip succeeded
 - [ ] **Step 3: Commit**
 
 ```sh
-git add forms/objectives-and-key-results-tracker/sql-migrations/_roundtrip-test.sh
+git add forms/objectives-and-key-results-tracker/sql/_roundtrip-test.sh
 git commit -m "OKR tracker: SQL roundtrip test script"
 ```
 
@@ -3337,7 +3337,7 @@ git commit -m "OKR tracker: Rust fixture-driven integration test"
 - [ ] **Step 1: SQL roundtrip**
 
 ```sh
-forms/objectives-and-key-results-tracker/sql-migrations/_roundtrip-test.sh
+forms/objectives-and-key-results-tracker/sql/_roundtrip-test.sh
 ```
 
 Expected: ends with `OK: roundtrip succeeded` and the `1|1|1|1|1|1` row.

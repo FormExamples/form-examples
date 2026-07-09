@@ -2,7 +2,7 @@
 
 Generated FHIR HL7 R5 JSON resources, one file per SQL table. Produced by
 `bin/fhir-r5/generate-fhir-r5-representations.py` from the migrations in
-[`../sql-migrations/`](../sql-migrations/).
+[`../sql/`](../sql/).
 
 The mapping is one resource per top-level entity: `meeting` is the
 *Appointment* (or *Encounter* in the clinical MDT case), `participant`

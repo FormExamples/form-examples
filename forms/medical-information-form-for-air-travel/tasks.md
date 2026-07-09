@@ -14,14 +14,14 @@
 - [x] `doc/fitness-band-rules.md` — rule-by-rule table with predicates and priority.
 
 ## Schema
-- [x] `sql-migrations/00_extensions.sql`
-- [x] `sql-migrations/01_create_function_set_updated_at.sql`
-- [x] `sql-migrations/02_create_table_patient.sql`
-- [x] `sql-migrations/03_create_table_clinician.sql`
-- [x] `sql-migrations/04_create_table_medical_information_form_for_air_travel.sql`
-- [x] `sql-migrations/05_create_table_medical_information_form_for_air_travel_grade.sql`
-- [x] `sql-migrations/06_create_table_medical_information_form_for_air_travel_grade_rule.sql`
-- [x] `sql-migrations/07_create_table_medical_information_form_for_air_travel_grade_flag.sql`
+- [x] `sql/00_extensions.sql`
+- [x] `sql/01_create_function_set_updated_at.sql`
+- [x] `sql/02_create_table_patient.sql`
+- [x] `sql/03_create_table_clinician.sql`
+- [x] `sql/04_create_table_medical_information_form_for_air_travel.sql`
+- [x] `sql/05_create_table_medical_information_form_for_air_travel_grade.sql`
+- [x] `sql/06_create_table_medical_information_form_for_air_travel_grade_rule.sql`
+- [x] `sql/07_create_table_medical_information_form_for_air_travel_grade_flag.sql`
 
 ## Interchange representations
 - [x] XML + DTD per top-level entity.

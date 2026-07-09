@@ -35,7 +35,7 @@ update_claude() {
     - AGENTS/front-end-with-sveltekit-tailwind-svar.md
     - AGENTS/back-end-with-loco.md
     - AGENTS/back-end-with-loco-setup.md
-    - AGENTS/sql-migrations.md
+    - AGENTS/sql.md
     - AGENTS/xml-representations.md
     - plan.md
     - tasks.md

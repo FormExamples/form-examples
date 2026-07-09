@@ -18,7 +18,7 @@
 
 ## Schema
 
-The PostgreSQL schema is authored in `../sql-migrations/` using Liquibase.
+The PostgreSQL schema is authored in `../sql/` using Liquibase.
 SeaORM entities mirror the tables 1:1 with snake_case field names, but
 serialize as camelCase.
 

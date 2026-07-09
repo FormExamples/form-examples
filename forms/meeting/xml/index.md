@@ -3,7 +3,7 @@
 Generated XML + DTD representations of the meeting schema, one pair of
 files per SQL table. Produced by
 `bin/xml-representations/generate-xml-representations.py` from the
-migrations in [`../sql-migrations/`](../sql-migrations/).
+migrations in [`../sql/`](../sql/).
 
 Each `<entity>.xml` carries a single example row with the same column
 names as the SQL table, and the sibling `<entity>.dtd` declares the

@@ -5,7 +5,7 @@ Generated artifacts: do not edit by hand. Regenerate via
 
 ## Conventions
 
-- One `<table>.proto` per SQL table in `../sql-migrations/`.
+- One `<table>.proto` per SQL table in `../sql/`.
 - All files declare `syntax = "proto3";` and `package lpa.finance;`.
 - One `message <PascalCaseTable>` per file, fields numbered `1..N` in SQL
   column order.

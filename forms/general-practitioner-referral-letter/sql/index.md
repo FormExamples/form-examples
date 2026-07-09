@@ -1,7 +1,7 @@
 # general-practitioner-referral-letter — sql
 
 PostgreSQL migrations for this form (source of truth). See
-`AGENTS/sql-migrations.md` for conventions.
+`AGENTS/sql.md` for conventions.
 
 ## Canonical files
 

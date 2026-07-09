@@ -3,7 +3,7 @@
 - [ ] Run sibling `back-end-with-loco-new/00-new.sh`.
 - [ ] `Cargo.toml` with axum 0.8, loco-rs 0.16, sea-orm 1.1, tera, serde,
       uuid, chrono, anyhow, thiserror, quick-xml, genpdf.
-- [ ] Translate SQL migrations from `../sql-migrations/` into Loco
+- [ ] Translate SQL migrations from `../sql/` into Loco
       migrations.
 - [ ] Generate SeaORM entities from the database.
 - [ ] `src/models/lpa.rs`.

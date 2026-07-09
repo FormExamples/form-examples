@@ -1,7 +1,7 @@
 # UK NHS England Medical Exemption Certificate (FP92A) — TypeSpec
 
 TypeSpec models for the FP92A data model. The canonical source of truth is
-`../sql-migrations/`; these models mirror each SQL table 1:1.
+`../sql/`; these models mirror each SQL table 1:1.
 
 - `main.tsp` — namespace `Fp92a` with one model per SQL table.
 - TypeSpec primitives: `string`, `int32`, `float64`, `plainDate`, `utcDateTime`.

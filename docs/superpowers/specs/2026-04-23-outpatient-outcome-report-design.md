@@ -69,7 +69,7 @@ Single continuous page — no multi-page navigation. Step navigation via in-page
 PostgreSQL via Liquibase-style numbered migrations. One top-level `assessment` row per report; child `assessment_*` tables one-to-one per step (excluding meta steps 1, 10, 11).
 
 ```
-sql-migrations/
+sql/
   00_extensions.sql
   01_create_function_set_updated_at.sql
   02_create_table_patient.sql
@@ -148,7 +148,7 @@ Captured in `index.md` compliance section.
 - [ ] `index.md` with scoring system, steps table, directory structure, technology, compliance
 - [ ] `AGENTS.md`, `CLAUDE.md` (-> AGENTS.md), `plan.md`, `tasks.md`
 - [ ] `doc/licensing.md` with EuroQol / FFT / PROMIS / NHS attributions
-- [ ] `sql-migrations/` — 17 numbered files + generated `schema.sql` + `schema-flat.sql`
+- [ ] `sql/` — 17 numbered files + generated `schema.sql` + `schema-flat.sql`
 - [ ] `xml-representations/` + DTDs
 - [ ] `fhir-r5/` JSON
 - [ ] `cargo-loco-generate/` commands

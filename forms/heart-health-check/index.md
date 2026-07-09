@@ -34,7 +34,7 @@ heart-health-check/
   front-end-form-with-svelte/                       # Patient form (SvelteKit + Tailwind)
   front-end-dashboard-with-svelte/                  # Dashboard (SvelteKit + SVAR)
   back-end-with-loco/  # Backend (Rust + Loco + Tera)
-  sql-migrations/                               # PostgreSQL schema migrations
+  sql/                               # PostgreSQL schema migrations
 ```
 
 ## Technology

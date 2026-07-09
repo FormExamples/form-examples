@@ -1,6 +1,6 @@
 // Plain-JavaScript / JSDoc type definitions for the WHO Surgical Safety
 // Checklist review dashboard. Mirrors the SQL schema in
-// `../../sql-migrations/04_create_table_who_surgical_safety_checklist.sql`
+// `../../sql/04_create_table_who_surgical_safety_checklist.sql`
 // and the team-member roster in `05_create_table_team_member.sql`.
 //
 // This file deliberately exports nothing executable; it exists so other

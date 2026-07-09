@@ -6,7 +6,7 @@
       "Bash(python3 bin/xml-representations/generate-xml-representations.py)",
       "Bash(python3 bin/fhir-r5/generate-fhir-r5-representations.py)",
       "Bash(python3 bin/protobuf/generate-protobuf-representations.py)",
-      "Bash(python3 bin/sql-migrations/generate-sql-combined.py)",
+      "Bash(python3 bin/sql/generate-sql-combined.py)",
       "Bash(bin/test-form return-to-work *)",
       "Bash(loco --version)",
       "Bash(pg_isready -h localhost -p 5432)",

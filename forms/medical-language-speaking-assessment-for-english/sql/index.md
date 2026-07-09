@@ -1,7 +1,7 @@
-# medical-language-speaking-assessment-for-english — sql-migrations
+# medical-language-speaking-assessment-for-english — sql
 
 PostgreSQL migrations for this form. See
-`AGENTS/sql-migrations.md` for conventions.
+`AGENTS/sql.md` for conventions.
 
 ## Canonical files
 

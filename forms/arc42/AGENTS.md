@@ -17,7 +17,7 @@ See [`index.md`](./index.md) for the full design and the 12-step wizard table.
 - `./tasks.md` — task tracking
 - `./doc/` — reference documentation (arc42 overview, completeness rules,
   maturity rules, ADR format, safety-case notes)
-- `./sql-migrations/` — Liquibase-formatted Postgres schema
+- `./sql/` — Liquibase-formatted Postgres schema
 - `./xml-representations/` — generated XML + DTD per SQL table
 - `./fhir-r5/` — generated FHIR HL7 R5 JSON per SQL entity
 - `./front-end-form-with-svelte/` — SvelteKit 12-step architect wizard

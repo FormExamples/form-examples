@@ -1,6 +1,6 @@
 # Medical Information Form for Air Travel — XML representations
 
-XML and DTD representations, one pair per SQL table in `../sql-migrations/`.
+XML and DTD representations, one pair per SQL table in `../sql/`.
 The XML form is the archival export used to email an airline medical desk
 that cannot accept FHIR R5 JSON.
 

@@ -1,5 +1,5 @@
 // HipaaAuthorization shape and field defaults.
-// Mirrors ../../sql-migrations/ table columns.
+// Mirrors ../../sql/ table columns.
 
 export function emptyAuthorization() {
   return {

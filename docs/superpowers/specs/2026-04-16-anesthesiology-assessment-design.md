@@ -279,7 +279,7 @@ forms/anesthesiology-assessment/
   tasks.md
   seed.md (existing)
   doc/
-  sql-migrations/ (15 files)
+  sql/ (15 files)
   xml-representations/ (generated)
   fhir-r5/ (generated)
 

@@ -41,7 +41,7 @@ psychology-assessment/
   front-end-dashboard-with-svelte/
   back-end-with-loco/
   doc/
-  sql-migrations/
+  sql/
   xml-representations/
   fhir-r5/
 ```

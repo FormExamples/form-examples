@@ -7,7 +7,7 @@ keys (`id UUID PRIMARY KEY DEFAULT gen_random_uuid()`), `created_at` +
 tables reference `agile_checklist(id) ON DELETE CASCADE` with a UNIQUE
 constraint on the parent FK to enforce 1:1 where appropriate.
 
-See root [`AGENTS/sql-migrations.md`](../../../AGENTS/sql-migrations.md) for
+See root [`AGENTS/sql.md`](../../../AGENTS/sql.md) for
 the full conventions.
 
 ## Tables

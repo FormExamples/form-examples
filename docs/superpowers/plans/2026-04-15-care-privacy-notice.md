@@ -36,7 +36,7 @@ See spec for content. Key points:
 
 ### Task 2: SQL migrations
 
-Create `forms/care-privacy-notice/sql-migrations/` with 7 files following the consent-to-treatment pattern.
+Create `forms/care-privacy-notice/sql/` with 7 files following the consent-to-treatment pattern.
 
 - [ ] **Step 1: Create 00-extensions.sql** — pgcrypto + set_updated_at() trigger function
 - [ ] **Step 2: Create 01-patient.sql** — first_name, last_name, date_of_birth, nhs_number, sex

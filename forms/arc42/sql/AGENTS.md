@@ -32,5 +32,5 @@ keys (`id UUID PRIMARY KEY DEFAULT gen_random_uuid()`), `created_at` +
 | 19 | `19_create_table_arc42_documentation_grade_rule.sql` | `arc42_documentation_grade_rule` | rules that fired during grading |
 | 20 | `20_create_table_arc42_documentation_grade_flag.sql` | `arc42_documentation_grade_flag` | additional flags fired |
 
-See root [`AGENTS/sql-migrations.md`](../../../AGENTS/sql-migrations.md) for the
+See root [`AGENTS/sql.md`](../../../AGENTS/sql.md) for the
 full conventions.

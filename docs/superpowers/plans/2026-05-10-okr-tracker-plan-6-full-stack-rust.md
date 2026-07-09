@@ -224,7 +224,7 @@ Each `cargo loco generate model` creates:
   - `okr_key_result.position` has the `UNIQUE (okr_objective_id, position)` constraint
   - `pgcrypto` extension and the `set_updated_at` trigger function are added in `m20260510_000001_extensions.rs` (you'll need a `raw_sql` migration since SeaORM doesn't generate triggers)
 
-Cross-check each migration against the equivalent file in `forms/objectives-and-key-results-tracker/sql-migrations/`. The schemas must match column-for-column so the existing Plan 1 SQL migrations could (in principle) interoperate with this SeaORM schema.
+Cross-check each migration against the equivalent file in `forms/objectives-and-key-results-tracker/sql/`. The schemas must match column-for-column so the existing Plan 1 SQL migrations could (in principle) interoperate with this SeaORM schema.
 
 - [ ] **Step 5: Run migrations against the development DB**
 

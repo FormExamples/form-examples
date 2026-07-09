@@ -1,7 +1,7 @@
-# medical-records-release-permission — sql-migrations
+# medical-records-release-permission — sql
 
 PostgreSQL migrations for this form. See
-`AGENTS/sql-migrations.md` for conventions.
+`AGENTS/sql.md` for conventions.
 
 ## Canonical files
 

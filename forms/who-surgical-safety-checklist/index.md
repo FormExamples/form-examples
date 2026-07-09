@@ -135,7 +135,7 @@ who-surgical-safety-checklist/
   plan.md                                          # implementation roadmap
   tasks.md                                         # task tracking
   doc/                                             # documentation
-  sql-migrations/                                  # Liquibase Postgres migrations
+  sql/                                  # Liquibase Postgres migrations
   xml-representations/                             # XML + DTD per SQL table
   fhir-r5/                                         # FHIR HL7 R5 JSON resources
   protobuf/                                        # Protocol Buffers .proto schemas

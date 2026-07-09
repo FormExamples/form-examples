@@ -1,7 +1,7 @@
 # Medical Waiting List Card — FHIR R5
 
 Generated HL7 FHIR R5 JSON resources, one file per SQL table in
-[`../sql-migrations/`](../sql-migrations/). Regenerate with
+[`../sql/`](../sql/). Regenerate with
 [`bin/fhir-r5/generate-fhir-r5-representations.py`](../../../bin/fhir-r5/generate-fhir-r5-representations.py)
 after schema changes.
 

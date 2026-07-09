@@ -2,7 +2,7 @@
 
 Generated Protocol Buffers `.proto` schemas per SQL table. These are
 generated artefacts — do not edit by hand; regenerate from
-`../sql-migrations/` instead.
+`../sql/` instead.
 
 ## Tools
 

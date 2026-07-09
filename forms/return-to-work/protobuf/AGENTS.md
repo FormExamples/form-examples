@@ -6,7 +6,7 @@ form. See [`index.md`](./index.md) for the file map.
 ## Authoring rules
 
 - **Do not hand-edit generated files.** Edit
-  `../sql-migrations/*.sql` and re-run the generator.
+  `../sql/*.sql` and re-run the generator.
 - `syntax = "proto3";`
 - Package `formexamples.return_to_work.v1`.
 - Field names are snake_case.

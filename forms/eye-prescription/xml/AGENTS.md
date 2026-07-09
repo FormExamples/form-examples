@@ -1,7 +1,7 @@
 # Eye Prescription — XML Representations
 
 Generated XML + DTD per SQL table in
-[`../sql-migrations/`](../sql-migrations/). See [`index.md`](./index.md) for
+[`../sql/`](../sql/). See [`index.md`](./index.md) for
 the file map.
 
 ## Regenerate

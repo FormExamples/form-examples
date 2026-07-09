@@ -1,7 +1,7 @@
 # protobuf/ — Agent Instructions
 
 Generated Protocol Buffers (`proto3`) per SQL table. Re-run the generator
-after any change to `../sql-migrations/`.
+after any change to `../sql/`.
 
 ```sh
 bin/protobuf/generate-protobuf-representations.py united-kingdom-statement-of-fitness-for-work

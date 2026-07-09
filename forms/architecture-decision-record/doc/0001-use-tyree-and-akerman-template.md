@@ -116,7 +116,7 @@ parser.
 - REQ-3: Notes are append-only and timestamped
 
 ## Related Artifacts
-- forms/architecture-decision-record/sql-migrations/
+- forms/architecture-decision-record/sql/
 - forms/architecture-decision-record/front-end-form-with-html/js/app.js
 - forms/architecture-decision-record/front-end-form-with-svelte/src/lib/report/build-markdown.ts
 

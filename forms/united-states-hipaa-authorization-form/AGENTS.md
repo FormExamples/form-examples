@@ -19,7 +19,7 @@ reference form on which the schema is modelled.
 - `./tasks.md` — task tracking
 - `./seed.md` / `./seed.pdf` — source materials
 - `./doc/` — HIPAA Privacy Rule, 42 CFR Part 2, and state-template notes
-- `./sql-migrations/` — Liquibase-formatted Postgres schema
+- `./sql/` — Liquibase-formatted Postgres schema
 - `./xml-representations/` — generated XML + DTD per SQL table
 - `./fhir-r5/` — generated FHIR HL7 R5 JSON per SQL entity
 - `./protobuf/` — generated Protocol Buffers `.proto` schemas

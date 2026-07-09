@@ -22,7 +22,7 @@ table.
 - `./doc/` — clinical reference documentation (RCS Good Surgical Practice,
   WHO Safer Surgery Checklist, Never Events policy, Clavien–Dindo,
   OPCS-4 notes)
-- `./sql-migrations/` — Liquibase-formatted Postgres schema
+- `./sql/` — Liquibase-formatted Postgres schema
 - `./xml-representations/` — generated XML + DTD per SQL table
 - `./fhir-r5/` — generated FHIR HL7 R5 JSON per SQL entity
 - `./protobuf/` — generated Protocol Buffers `.proto` per SQL entity

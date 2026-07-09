@@ -19,6 +19,6 @@ for the full data model.
 
 - [Front-end with SvelteKit / Tailwind / SVAR](../../AGENTS/front-end-with-sveltekit-tailwind-svar.md)
 - [Full-stack with Loco / Tera / HTMX / Alpine](../../AGENTS/back-end-with-loco.md)
-- [SQL migrations](../../AGENTS/sql-migrations.md)
+- [SQL migrations](../../AGENTS/sql.md)
 - [XML representations](../../AGENTS/xml-representations.md)
 - [FHIR HL7 R5](../../AGENTS/fhir-r5.md)

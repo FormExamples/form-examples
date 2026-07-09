@@ -16,7 +16,7 @@ outcomes in PostgreSQL via SeaORM.
 
 1. Run `../back-end-with-loco-setup` to scaffold the
    project shell.
-2. Author SeaORM migrations mirroring `../sql-migrations/`.
+2. Author SeaORM migrations mirroring `../sql/`.
 3. Author entity models with `serde(rename_all = "camelCase")`.
 4. Author controllers for each entity — list, read, create, update,
    delete.

@@ -15,7 +15,7 @@ per phase, safety flag definitions, and completion semantics.
 - `./plan.md` — development roadmap and status
 - `./tasks.md` — task tracking
 - `./doc/` — reference documentation (WHO starter kit, implementation manual)
-- `./sql-migrations/` — Postgres schema migrations
+- `./sql/` — Postgres schema migrations
 - `./xml-representations/` — generated XML + DTD per SQL table
 - `./fhir-r5/` — generated FHIR HL7 R5 JSON per SQL entity
 - `./protobuf/` — Protocol Buffers schemas

@@ -12,7 +12,7 @@ Scaffolded 2026-05-18. The Loco scaffold script lives in the sibling
        to scaffold the Loco crate.
 2. [ ] `Cargo.toml` dependencies: axum 0.8, loco-rs 0.16, sea-orm 1.1,
        tera, serde, uuid, chrono, anyhow, thiserror.
-3. [ ] Translate SQL migrations from `../sql-migrations/` into Loco
+3. [ ] Translate SQL migrations from `../sql/` into Loco
        migration files.
 4. [ ] SeaORM entity generation from the database.
 5. [ ] `src/models/lpa.rs`, `src/models/attorney.rs`, `src/models/

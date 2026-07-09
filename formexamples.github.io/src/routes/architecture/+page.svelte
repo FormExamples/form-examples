@@ -28,7 +28,7 @@
   plan.md                                   # Implementation plan and status
   tasks.md                                  # Task tracking
   doc/                                      # Documentation and references
-  sql-migrations/                           # PostgreSQL Liquibase migrations
+  sql/                           # PostgreSQL Liquibase migrations
   xml-representations/                      # XML + DTD per SQL table entity
   fhir-r5/                                  # FHIR HL7 R5 JSON per SQL entity
   front-end-form-with-html/                 # Patient questionnaire (HTML)

@@ -1,7 +1,7 @@
 # Eye Prescription — Protocol Buffers Representations
 
 Generated `.proto` schemas per SQL table in
-[`../sql-migrations/`](../sql-migrations/). Useful for gRPC services, Kafka /
+[`../sql/`](../sql/). Useful for gRPC services, Kafka /
 Pulsar event payloads, or any cross-language integration that prefers
 binary-stable, schema-evolving messages.
 

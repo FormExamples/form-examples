@@ -1,6 +1,6 @@
 # WHO Surgical Safety Checklist — SQL migrations agent instructions
 
-See `./index.md` for the file index, and `../../AGENTS/sql-migrations.md` for
+See `./index.md` for the file index, and `../../AGENTS/sql.md` for
 the project-wide SQL conventions.
 
 Canonical first four fields of every table:

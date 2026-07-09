@@ -8,7 +8,7 @@ Read-and-acknowledge privacy notice form based on the BMA GDPR template for GP p
 - ./AGENTS.md - Agent instructions (this file, referenced by CLAUDE.md)
 - ./plan.md - Development roadmap
 - ./tasks.md - Task tracking
-- ./sql-migrations/ - PostgreSQL schema migrations
+- ./sql/ - PostgreSQL schema migrations
 - ./xml-representations/ - XML and DTD per SQL table entity
 - ./fhir-r5/ - FHIR HL7 R5 JSON per SQL table entity
 - ./front-end-form-with-html/ - Patient form (HTML)

@@ -1,7 +1,7 @@
 # Protocol Buffers — UK Statement of Fitness for Work
 
 Protocol Buffers schemas for high-volume RPC interop, generated from the
-SQL migrations in `../sql-migrations/`.
+SQL migrations in `../sql/`.
 
 ## Files
 

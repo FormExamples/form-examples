@@ -56,13 +56,13 @@
 
 <h2 id="sql" class="mt-10 text-xl font-semibold">SQL migrations</h2>
 <p class="mt-4">
-  Each form has PostgreSQL migrations in Liquibase SQL format under <code>sql-migrations/</code>. Filenames
+  Each form has PostgreSQL migrations in Liquibase SQL format under <code>sql/</code>. Filenames
   follow <code>NN_create_table_&lt;name&gt;.sql</code>, with <code>COMMENT ON TABLE</code> and <code>COMMENT ON COLUMN</code>
   statements for every column. Primary keys are UUIDv4 and every table has <code>created_at</code> +
   <code>updated_at</code> timestamps.
 </p>
 <p class="mt-4">
-  <a href={agentDoc('sql-migrations.md')} target="_blank" rel="noopener noreferrer">Read the SQL migrations doc →</a>
+  <a href={agentDoc('sql.md')} target="_blank" rel="noopener noreferrer">Read the SQL migrations doc →</a>
 </p>
 
 <h2 id="xml" class="mt-10 text-xl font-semibold">XML representations</h2>

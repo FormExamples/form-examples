@@ -16,7 +16,7 @@ table, and safety-flag catalogue.
 - `./tasks.md` — task tracking
 - `./seed.md` — source material from DWP fit-note guidance
 - `./doc/` — clinical and policy references
-- `./sql-migrations/` — Liquibase-formatted Postgres schema
+- `./sql/` — Liquibase-formatted Postgres schema
 - `./xml-representations/` — generated XML + DTD per SQL table
 - `./fhir-r5/` — generated FHIR HL7 R5 JSON per SQL entity
 - `./protobuf/` — generated Protocol Buffers `.proto` per SQL table

@@ -11,21 +11,21 @@
 
 ## Phase 2 — Schema (this commit)
 
-- [x] `sql-migrations/00_create_extensions.sql` (pre-scaffolded).
-- [x] `sql-migrations/01_create_function_set_updated_at.sql` (pre-scaffolded).
-- [ ] `sql-migrations/02_create_table_patient.sql`
-- [ ] `sql-migrations/03_create_table_clinician.sql`
-- [ ] `sql-migrations/04_create_table_medical_operation_note.sql`
-- [ ] `sql-migrations/05_create_table_medical_operation_note_team_member.sql`
-- [ ] `sql-migrations/06_create_table_medical_operation_note_procedure.sql`
-- [ ] `sql-migrations/07_create_table_medical_operation_note_step.sql`
-- [ ] `sql-migrations/08_create_table_medical_operation_note_implant.sql`
-- [ ] `sql-migrations/09_create_table_medical_operation_note_drain.sql`
-- [ ] `sql-migrations/10_create_table_medical_operation_note_specimen.sql`
-- [ ] `sql-migrations/11_create_table_medical_operation_note_complication.sql`
-- [ ] `sql-migrations/12_create_table_medical_operation_note_grade.sql`
-- [ ] `sql-migrations/13_create_table_medical_operation_note_grade_rule.sql`
-- [ ] `sql-migrations/14_create_table_medical_operation_note_grade_flag.sql`
+- [x] `sql/00_create_extensions.sql` (pre-scaffolded).
+- [x] `sql/01_create_function_set_updated_at.sql` (pre-scaffolded).
+- [ ] `sql/02_create_table_patient.sql`
+- [ ] `sql/03_create_table_clinician.sql`
+- [ ] `sql/04_create_table_medical_operation_note.sql`
+- [ ] `sql/05_create_table_medical_operation_note_team_member.sql`
+- [ ] `sql/06_create_table_medical_operation_note_procedure.sql`
+- [ ] `sql/07_create_table_medical_operation_note_step.sql`
+- [ ] `sql/08_create_table_medical_operation_note_implant.sql`
+- [ ] `sql/09_create_table_medical_operation_note_drain.sql`
+- [ ] `sql/10_create_table_medical_operation_note_specimen.sql`
+- [ ] `sql/11_create_table_medical_operation_note_complication.sql`
+- [ ] `sql/12_create_table_medical_operation_note_grade.sql`
+- [ ] `sql/13_create_table_medical_operation_note_grade_rule.sql`
+- [ ] `sql/14_create_table_medical_operation_note_grade_flag.sql`
 
 ## Phase 3 — Generated artefacts (this commit)
 

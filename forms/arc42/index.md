@@ -55,7 +55,7 @@ arc42/
   plan.md
   tasks.md
   doc/                                              # arc42 + grading docs
-  sql-migrations/                                   # Liquibase Postgres migrations
+  sql/                                   # Liquibase Postgres migrations
   xml-representations/                              # generated XML + DTD
   fhir-r5/                                          # generated FHIR R5 JSON
   front-end-form-with-svelte/                       # SvelteKit 12-step wizard

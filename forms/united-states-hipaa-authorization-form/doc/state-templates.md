@@ -1,7 +1,7 @@
 # Cross-walk — state-agency HIPAA authorization templates
 
 This document maps the fields of the canonical HIPAA-authorization
-schema in `sql-migrations/` to the state-agency templates that the
+schema in `sql/` to the state-agency templates that the
 schema must accommodate. The reference templates are:
 
 - **Tennessee Department of Human Services HS-2557 (revised 12-15)** —

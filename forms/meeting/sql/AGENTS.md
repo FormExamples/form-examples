@@ -5,10 +5,10 @@ migrations. Applied in lexical order.
 
 ## Tools
 
-- Author by hand following the [`AGENTS/sql-migrations.md`](../../../AGENTS/sql-migrations.md) guide.
-- `bin/sql-migrations/generate-sql-comments.py` — append missing
+- Author by hand following the [`AGENTS/sql.md`](../../../AGENTS/sql.md) guide.
+- `bin/sql/generate-sql-comments.py` — append missing
   `COMMENT ON TABLE` / `COMMENT ON COLUMN` statements.
-- `bin/sql-migrations/generate-sql-combined.py` — concatenate the numbered
+- `bin/sql/generate-sql-combined.py` — concatenate the numbered
   migrations into a single `schema.sql`.
 - `bin/migrate-sql-filenames.py` — one-shot rename helper to enforce the
   canonical `NN_create_table_<name>.sql` layout.

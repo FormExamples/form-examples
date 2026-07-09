@@ -1,6 +1,6 @@
 # united-kingdom-lasting-power-of-attorney-for-financial-decisions — FHIR HL7 R5 JSON
 
-FHIR HL7 R5 JSON resources, one file per SQL table in `../sql-migrations/`.
+FHIR HL7 R5 JSON resources, one file per SQL table in `../sql/`.
 Each file is a single, valid FHIR R5 resource (no Bundle wrapper). The
 closest semantic FHIR resource type is chosen for each table:
 

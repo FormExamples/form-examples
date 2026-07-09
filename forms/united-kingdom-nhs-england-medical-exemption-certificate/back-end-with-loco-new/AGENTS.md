@@ -47,4 +47,4 @@ once it builds and the engine has been ported across.
 
 - [`../back-end-with-loco/`](../back-end-with-loco/) — current working crate
 - [`../back-end-with-loco-setup`](../back-end-with-loco-setup) — scaffold shell script
-- [`../sql-migrations/`](../sql-migrations/) — canonical data model
+- [`../sql/`](../sql/) — canonical data model

@@ -1,6 +1,6 @@
 // Eye Prescription — TypeScript types.
 //
-// Mirrors forms/eye-prescription/sql-migrations/. camelCase per the
+// Mirrors forms/eye-prescription/sql/. camelCase per the
 // monorepo convention. Cylinder is stored in minus-cylinder convention
 // (≤ 0); addition is always positive; axis is 1..180.
 

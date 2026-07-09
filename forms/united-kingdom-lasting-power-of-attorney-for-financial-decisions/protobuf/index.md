@@ -1,6 +1,6 @@
 # united-kingdom-lasting-power-of-attorney-for-financial-decisions — Protocol Buffers
 
-One `.proto` schema per SQL table in `../sql-migrations/`. Each file declares
+One `.proto` schema per SQL table in `../sql/`. Each file declares
 `syntax = "proto3"` and `package lpa.finance;` with a single `message`
 whose fields are numbered 1..N matching the SQL columns.
 

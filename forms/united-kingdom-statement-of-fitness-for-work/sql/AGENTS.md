@@ -1,4 +1,4 @@
-# sql-migrations/ — Agent Instructions
+# sql/ — Agent Instructions
 
 PostgreSQL Liquibase migrations for the UK fit note. Migrations run in
 numerical order; each file creates exactly one extension, function, or

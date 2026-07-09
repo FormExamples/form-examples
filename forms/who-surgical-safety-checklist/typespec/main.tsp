@@ -1,5 +1,5 @@
-// Generated from sql-migrations/. Keep in sync by hand.
-// SOURCE: forms/who-surgical-safety-checklist/sql-migrations/
+// Generated from sql/. Keep in sync by hand.
+// SOURCE: forms/who-surgical-safety-checklist/sql/
 
 import "@typespec/openapi3";
 

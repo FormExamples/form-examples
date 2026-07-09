@@ -138,7 +138,7 @@ united-kingdom-statement-of-fitness-for-work/
   tasks.md                                        # task tracking
   seed.md                                         # source material from gov.uk
   doc/                                            # clinical and policy references
-  sql-migrations/                                 # Liquibase Postgres migrations
+  sql/                                 # Liquibase Postgres migrations
   xml-representations/                            # XML + DTD per SQL table
   fhir-r5/                                        # FHIR HL7 R5 JSON resources
   protobuf/                                       # Protocol Buffers schemas

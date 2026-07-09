@@ -2,7 +2,7 @@
   "permissions": {
     "allow": [
       "Read(//Users/jph/git/formexamples/form-examples/**)",
-      "Bash(python3 bin/sql-migrations/generate-sql-combined.py)",
+      "Bash(python3 bin/sql/generate-sql-combined.py)",
       "Bash(python3 -c ' *)",
       "Bash(python3 bin/xml-representations/generate-xml-representations.py)",
       "Bash(python3 bin/fhir-r5/generate-fhir-r5-representations.py)",

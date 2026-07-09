@@ -1,7 +1,7 @@
 # WHO Surgical Safety Checklist — TypeSpec
 
 TypeSpec models for the WHO Surgical Safety Checklist data model. The canonical
-source of truth is `../sql-migrations/`; these models mirror each SQL table 1:1.
+source of truth is `../sql/`; these models mirror each SQL table 1:1.
 
 - `main.tsp` — namespace `WhoSurgicalSafetyChecklist` with one model per SQL
   table.

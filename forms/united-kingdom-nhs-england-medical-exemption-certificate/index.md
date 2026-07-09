@@ -135,7 +135,7 @@ united-kingdom-nhs-england-medical-exemption-certificate/
   plan.md                                         # implementation roadmap
   tasks.md                                        # task tracking
   doc/                                            # documentation and references
-  sql-migrations/                                 # Postgres Liquibase migrations
+  sql/                                 # Postgres Liquibase migrations
   xml-representations/                            # XML + DTD per SQL table
   fhir-r5/                                        # FHIR R5 JSON resources
   protobuf/                                       # Protocol Buffers .proto schemas

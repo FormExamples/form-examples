@@ -13,7 +13,7 @@ with a coaching action plan.
 | --- | --- |
 | `index.md`, `AGENTS.md`, `plan.md`, `tasks.md` | Done |
 | `seed.md` (57 items) | Done (provided) |
-| `sql-migrations/` | Done |
+| `sql/` | Done |
 | `xml-representations/` | Done |
 | `fhir-r5/` | Done |
 | `front-end-form-with-svelte/` | Done — `pnpm test` 21/21, `pnpm run check` clean, browser smoke-tested |

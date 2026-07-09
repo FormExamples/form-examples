@@ -9,7 +9,7 @@ Structured outpatient outcome report covering clinical outcome, PROMs, PREMs, an
 - ./plan.md - Development roadmap
 - ./tasks.md - Task tracking
 - ./doc/ - Reference material and licensing
-- ./sql-migrations/ - PostgreSQL migrations
+- ./sql/ - PostgreSQL migrations
 - ./xml-representations/ - XML + DTD per table
 - ./fhir-r5/ - FHIR HL7 R5 JSON per table
 - ./front-end-form-with-html/ - Static HTML wizard

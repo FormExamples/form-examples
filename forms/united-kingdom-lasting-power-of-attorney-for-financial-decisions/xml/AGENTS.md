@@ -6,7 +6,7 @@ Generated artifacts: do not edit by hand. Regenerate via
 ## Conventions
 
 - One `<table>.xml` + one `<table>.dtd` pair per SQL table in
-  `../sql-migrations/02_create_table_*.sql` through `17_create_table_*.sql`.
+  `../sql/02_create_table_*.sql` through `17_create_table_*.sql`.
 - Element names mirror SQL column names exactly (snake_case).
 - Element order in the DTD matches the SQL column declaration order
   (`id`, audit columns, then domain columns).

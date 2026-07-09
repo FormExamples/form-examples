@@ -2,7 +2,7 @@
 
 See `./index.md` for the model index.
 
-- The canonical schema is `../sql-migrations/`. Keep `main.tsp` in sync with
+- The canonical schema is `../sql/`. Keep `main.tsp` in sync with
   the SQL tables: one TypeSpec model per `CREATE TABLE`, same column-to-property
   mapping (snake_case → camelCase), same `CHECK` enum → union string literal.
 - `@doc(...)` decorator text should mirror the SQL `COMMENT ON COLUMN` text.

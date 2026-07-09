@@ -23,7 +23,7 @@ Prescription request form collecting patient information, clinician details, med
     prescription-request/
       front-end-form-with-svelte/
       front-end-dashboard-with-svelte/
-      sql-migrations/
+      sql/
       xml-representations/
       fhir-r5/
 

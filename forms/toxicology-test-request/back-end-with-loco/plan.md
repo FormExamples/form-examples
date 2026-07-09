@@ -1,7 +1,7 @@
 # Toxicology Test Request — back-end-with-loco plan
 
 Rust axum + Loco JSON API for the toxicology test request. Mirrors the schema in
-[`../sql-migrations/`](../sql-migrations) and the four-axis scoring engine
+[`../sql/`](../sql) and the four-axis scoring engine
 contract in [`../AGENTS.md`](../AGENTS.md).
 
 ## Build order

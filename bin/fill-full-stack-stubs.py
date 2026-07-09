@@ -86,7 +86,7 @@ def index_md_template(title: str, oneline: str) -> str:
 
 ## Status
 
-Pending implementation. Scaffold present (sql-migrations, generated setup
+Pending implementation. Scaffold present (sql, generated setup
 script). Rust crate not yet authored.
 
 See [AGENTS.md](AGENTS.md) for the planned project layout, and the parent
@@ -100,14 +100,14 @@ def plan_md_template(title: str) -> str:
 
 ## Current status
 
-Pending implementation. Scaffold present (sql-migrations, generated setup
+Pending implementation. Scaffold present (sql, generated setup
 script). Rust crate not yet authored.
 
 ## Implementation plan
 
 1. Run the generated `back-end-with-loco-setup` script to scaffold the Loco
    app and run `cargo loco generate scaffold ... --api` for each table in
-   `sql-migrations/`.
+   `sql/`.
 2. Author engine types, rules, grader, and flagged-issues mirroring the
    front-end-form-with-svelte engine, with `serde(rename_all = "camelCase")`
    on shared structs.
@@ -132,7 +132,7 @@ def agents_md_template(title: str, oneline: str) -> str:
 
 ## Status
 
-Pending implementation. Scaffold present (sql-migrations, generated setup
+Pending implementation. Scaffold present (sql, generated setup
 script). Rust crate not yet authored.
 
 ## Project structure

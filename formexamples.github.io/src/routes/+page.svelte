@@ -37,7 +37,7 @@
 <CodeBlock>{`forms/<slug>/
   index.md                                  # Form description + scoring system
   AGENTS.md                                 # Agent instructions
-  sql-migrations/                           # PostgreSQL Liquibase migrations
+  sql/                           # PostgreSQL Liquibase migrations
   xml-representations/                      # XML + DTD per SQL table entity
   fhir-r5/                                  # FHIR HL7 R5 JSON per SQL entity
   front-end-form-with-html/                 # Patient questionnaire (HTML)

@@ -19,5 +19,5 @@ keys (`id UUID PRIMARY KEY DEFAULT gen_random_uuid()`), `created_at` +
 | 06 | `06_create_table_issue_tracker_grade_rule.sql` | Audit trail of fired rules |
 | 07 | `07_create_table_issue_tracker_grade_flag.sql` | Safety-critical flags |
 
-See root [`AGENTS/sql-migrations.md`](../../../AGENTS/sql-migrations.md) for the
+See root [`AGENTS/sql.md`](../../../AGENTS/sql.md) for the
 full conventions.

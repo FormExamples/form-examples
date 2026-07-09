@@ -24,7 +24,7 @@ table. The unmodified design seed lives in [`seed.md`](./seed.md).
   `sample-grade.json`) used by engine-parity tests on both the
   TypeScript and Rust sides
 - `./scripts/` — `demo.sh` runs the whole pipeline end-to-end in ~10s
-- `./sql-migrations/` — Liquibase-formatted Postgres schema (8 files)
+- `./sql/` — Liquibase-formatted Postgres schema (8 files)
 - `./xml-representations/` — generated XML + DTD per SQL table
 - `./fhir-r5/` — generated FHIR HL7 R5 JSON per SQL entity
 - `./front-end-form-with-html/` — static single-page wizard +

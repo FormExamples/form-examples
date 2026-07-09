@@ -1,7 +1,7 @@
 # united-kingdom-lasting-power-of-attorney-for-financial-decisions — TypeSpec
 
 Single-source TypeSpec schema definitions for the LPA. One `model` per SQL
-table in `../sql-migrations/` is declared in `main.tsp` inside the
+table in `../sql/` is declared in `main.tsp` inside the
 `LpaFinance` service namespace.
 
 Type mapping:

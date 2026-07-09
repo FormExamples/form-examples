@@ -1,4 +1,4 @@
-# sql-migrations — Agent Instructions
+# sql — Agent Instructions
 
 PostgreSQL migrations are the source of truth for this form's schema.
 Both the XML and FHIR R5 representations are generated from these files.

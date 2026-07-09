@@ -23,7 +23,7 @@ mkdir_with_ai_idempotent() (
 create_form_loco_script() {
     # form_dir="$1"
     # form_name_as_snake="$2"
-    file="$form_dir/back-end-with-loco/sql-migrations/00-new.sh"
+    file="$form_dir/back-end-with-loco/sql/00-new.sh"
     cat << EOF > "$file"
 #!/bin/sh
 set -euf

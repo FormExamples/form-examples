@@ -20,5 +20,5 @@ The full table-name `international_certificate_of_vaccination_or_prophylaxis`
 matches the form slug and is retained in full per the project convention
 (never abbreviated).
 
-See root [`AGENTS/sql-migrations.md`](../../../AGENTS/sql-migrations.md) for
+See root [`AGENTS/sql.md`](../../../AGENTS/sql.md) for
 the full conventions and the table-naming pattern.

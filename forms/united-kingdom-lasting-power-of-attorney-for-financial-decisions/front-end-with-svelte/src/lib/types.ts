@@ -1,5 +1,5 @@
 // Canonical TypeScript model of the LP1F lasting power of attorney.
-// One-to-one with the SQL migrations under ../sql-migrations/.
+// One-to-one with the SQL migrations under ../sql/.
 // Conventions:
 //   - empty string '' for unanswered text / enum fields
 //   - null for unanswered numeric and date fields

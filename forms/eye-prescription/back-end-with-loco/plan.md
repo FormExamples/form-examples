@@ -5,7 +5,7 @@
 1. Run `../back-end-with-loco-setup` to bootstrap a
    Loco project with axum routes, SeaORM entities, and Tera views for
    each of the 10 tables.
-2. Re-author the SeaORM migrations from `../sql-migrations/`. Preserve
+2. Re-author the SeaORM migrations from `../sql/`. Preserve
    every `CHECK` and `COMMENT` statement.
 3. Author `src/engine/refractive_rules.rs` with the sphere / cylinder /
    addition band tables. Mirror the TypeScript engine.

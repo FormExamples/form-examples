@@ -3,7 +3,7 @@
 Numbered Liquibase-format PostgreSQL 18 migrations. Apply in lexicographic
 order; never renumber or rewrite a published migration.
 
-Conventions documented in [`AGENTS/sql-migrations.md`](../../../AGENTS/sql-migrations.md):
+Conventions documented in [`AGENTS/sql.md`](../../../AGENTS/sql.md):
 
 - One CREATE TABLE per file.
 - File name: `NN_create_table_<entity>.sql` where `NN` is the two-digit prefix.

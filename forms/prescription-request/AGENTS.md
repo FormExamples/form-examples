@@ -9,7 +9,7 @@ Prescription request form with priority classification engine (Routine / Urgent 
 - ./plan.md - Development roadmap
 - ./front-end-form-with-svelte/ - Patient questionnaire; SvelteKit + Svelte 5 + Tailwind 4
 - ./front-end-dashboard-with-svelte/ - Dashboard; SvelteKit + SVAR DataGrid
-- ./sql-migrations/ - PostgreSQL schema migrations
+- ./sql/ - PostgreSQL schema migrations
 - ./xml-representations/ - XML and DTD per SQL table entity
 - ./fhir-r5/ - FHIR HL7 R5 JSON per SQL table entity
 

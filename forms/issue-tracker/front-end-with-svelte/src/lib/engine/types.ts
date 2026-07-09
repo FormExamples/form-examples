@@ -2,7 +2,7 @@
 //
 // Conventions: empty string for unanswered text/enum fields; null for
 // unanswered numeric fields. camelCase property names. Field names match
-// the SQL column names in `sql-migrations/04_create_table_issue_tracker.sql`
+// the SQL column names in `sql/04_create_table_issue_tracker.sql`
 // after snake_case → camelCase conversion.
 
 // ──────────────────────────────────────────────

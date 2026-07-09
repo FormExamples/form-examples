@@ -19,7 +19,7 @@ table. The 57 items are sourced verbatim from [`seed.md`](./seed.md).
 - `./tasks.md` — task tracking
 - `./seed.md` — the 57 checklist items (source text)
 - `./doc/` — background reference notes
-- `./sql-migrations/` — Liquibase-formatted Postgres schema
+- `./sql/` — Liquibase-formatted Postgres schema
 - `./xml-representations/` — generated XML + DTD per SQL table
 - `./fhir-r5/` — generated FHIR R5 JSON per SQL entity
 - `./front-end-form-with-html/` — static single-page assessment wizard

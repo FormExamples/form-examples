@@ -1,6 +1,6 @@
 # united-kingdom-lasting-power-of-attorney-for-financial-decisions — XML representations
 
-One XML file plus its DTD per SQL table in `../sql-migrations/`. Each XML
+One XML file plus its DTD per SQL table in `../sql/`. Each XML
 file is a single-row sample document with realistic placeholder data, and
 each DTD declares the element order matching the corresponding SQL column
 order. Column names are used directly as element names (snake_case).

@@ -8,7 +8,7 @@ tests, modelled as BOOLEAN columns on the main table.
 
 ## Source of truth
 
-`sql-migrations/` is the schema source of truth. After editing it, regenerate
+`sql/` is the schema source of truth. After editing it, regenerate
 derived artefacts (XML, FHIR R5, protobuf, OpenAPI, Loco setup, examples,
 `spec.md`, `CHANGELOG.md`) with the repo generators in `bin/` — never hand-edit
 generated files.

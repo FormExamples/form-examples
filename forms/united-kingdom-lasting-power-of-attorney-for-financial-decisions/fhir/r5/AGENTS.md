@@ -5,7 +5,7 @@ Generated artifacts: do not edit by hand. Regenerate via
 
 ## Conventions
 
-- One `<table>.json` per SQL table in `../sql-migrations/`.
+- One `<table>.json` per SQL table in `../sql/`.
 - Each file is a single valid FHIR R5 resource (no Bundle wrapper).
 - Resource `id` is a UUIDv4 echoing the SQL row `id`.
 - camelCase property names (FHIR convention).

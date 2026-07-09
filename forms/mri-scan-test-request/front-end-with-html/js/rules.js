@@ -1,6 +1,6 @@
 // Four-axis rule catalogue for the MRI Scan Test Request engine.
 //
-// Derived from index.md and sql-migrations/05: (A) appropriateness 1-9 + band
+// Derived from index.md and sql/05: (A) appropriateness 1-9 + band
 // by indication x body region (ACR Appropriateness Criteria); (B) MRI safety
 // band (cleared / conditional / needs-mri-physics-review / contraindicated)
 // from the implant screen, plus a gadolinium-vs-eGFR contrast-renal flag;

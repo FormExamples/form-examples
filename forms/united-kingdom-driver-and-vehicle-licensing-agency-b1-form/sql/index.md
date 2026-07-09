@@ -1,7 +1,7 @@
-# united-kingdom-driver-and-vehicle-licensing-agency-b1-form — sql-migrations
+# united-kingdom-driver-and-vehicle-licensing-agency-b1-form — sql
 
 PostgreSQL migrations for this form. See
-`AGENTS/sql-migrations.md` for conventions.
+`AGENTS/sql.md` for conventions.
 
 ## Canonical files
 

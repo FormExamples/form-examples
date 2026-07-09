@@ -111,7 +111,7 @@ blood-cross-match-test-request/
   CHANGELOG.md                      # per-form changelog
   doc/                              # clinical reference documentation
   examples/                         # filled-form JSON fixture + FHIR R5 Bundle
-  sql-migrations/                   # PostgreSQL migrations (source of truth)
+  sql/                   # PostgreSQL migrations (source of truth)
   xml-representations/              # XML + DTD per SQL table (generated)
   fhir-r5/                          # FHIR HL7 R5 JSON per SQL entity (generated)
   protobuf/                         # Protocol Buffers schemas (generated)

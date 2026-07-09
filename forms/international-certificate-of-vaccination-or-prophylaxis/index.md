@@ -133,7 +133,7 @@ international-certificate-of-vaccination-or-prophylaxis/
   plan.md                                            # implementation roadmap
   tasks.md                                           # task tracking
   doc/                                               # WHO/CDC reference material
-  sql-migrations/                                    # Liquibase Postgres migrations
+  sql/                                    # Liquibase Postgres migrations
   xml-representations/                               # XML + DTD per SQL table
   fhir-r5/                                           # FHIR HL7 R5 JSON resources
   protobuf/                                          # Protocol Buffers schemas

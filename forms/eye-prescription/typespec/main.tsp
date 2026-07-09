@@ -1,5 +1,5 @@
-// Authored from sql-migrations/. Edit by hand if SQL diverges.
-// SOURCE: forms/eye-prescription/sql-migrations/
+// Authored from sql/. Edit by hand if SQL diverges.
+// SOURCE: forms/eye-prescription/sql/
 
 import "@typespec/openapi3";
 

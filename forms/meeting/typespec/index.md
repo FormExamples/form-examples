@@ -10,7 +10,7 @@ The surface covers CRUD on each top-level entity — `meeting`,
 `meeting_outcome`, `recurring_rule` — plus a `validate` action that
 runs the shared validation engine against a candidate meeting and
 returns the fired rules and flags. The schema is derived from
-`../sql-migrations/`; once the generator script is in place the files
+`../sql/`; once the generator script is in place the files
 in this directory become generated artefacts.
 
 This directory is scaffolding only — there is no generator yet, so the

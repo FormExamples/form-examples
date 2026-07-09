@@ -1,7 +1,7 @@
-# palliative-assessment — sql-migrations
+# palliative-assessment — sql
 
 PostgreSQL migrations for this form. See
-`AGENTS/sql-migrations.md` for conventions.
+`AGENTS/sql.md` for conventions.
 
 ## Canonical files
 

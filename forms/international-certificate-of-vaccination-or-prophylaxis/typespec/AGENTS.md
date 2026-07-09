@@ -1,7 +1,7 @@
 # TypeSpec — agent instructions
 
 Hand-authored TypeSpec models that mirror the SQL schema. Keep in sync with
-`../sql-migrations/` by hand; there is no auto-generator yet.
+`../sql/` by hand; there is no auto-generator yet.
 
 Conventions:
 

@@ -160,7 +160,7 @@ united-kingdom-lasting-power-of-attorney-for-health-and-care-decisions/
   plan.md                               # implementation roadmap
   tasks.md                              # task tracking
   doc/                                  # statutory references, OPG guidance
-  sql-migrations/                       # Liquibase PostgreSQL migrations
+  sql/                       # Liquibase PostgreSQL migrations
   xml-representations/                  # XML + DTD per SQL table
   fhir-r5/                              # FHIR HL7 R5 JSON resources
   protobuf/                             # Protocol Buffers schemas

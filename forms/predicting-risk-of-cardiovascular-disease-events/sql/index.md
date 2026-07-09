@@ -1,7 +1,7 @@
-# predicting-risk-of-cardiovascular-disease-events — sql-migrations
+# predicting-risk-of-cardiovascular-disease-events — sql
 
 PostgreSQL migrations for this form. See
-`AGENTS/sql-migrations.md` for conventions.
+`AGENTS/sql.md` for conventions.
 
 ## Canonical files
 
