@@ -1,6 +1,6 @@
 # Plan: back-end-with-loco
 
-Rust full-stack implementation using Loco + axum + Loco JSON API + Alpine.
+Rust full-stack implementation using Loco + axum + Loco JSON API.
 
 ## Build order
 

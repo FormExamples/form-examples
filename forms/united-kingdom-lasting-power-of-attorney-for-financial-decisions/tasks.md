@@ -61,7 +61,7 @@
 - [ ] `back-end-with-loco-setup` shell script with all
       `cargo loco generate scaffold` calls.
 - [ ] `back-end-with-loco/` — Loco 0.16 + axum 0.8
-      + SeaORM + Loco JSON API + Alpine 3.14.8.
+      + SeaORM + Loco JSON API
 
 ## Tests
 - [ ] Vitest unit tests for `validator.ts`, `blocker-rules.ts`, `flag-rules.ts`.

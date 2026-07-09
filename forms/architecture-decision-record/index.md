@@ -141,7 +141,7 @@ architecture-decision-record/
   front-end-with-svelte/                    SvelteKit 2 + Svelte 5 wizard
   front-end-with-html/                 Decision register (HTML table)
   front-end-with-svelte/               Decision register (SVAR Grid)
-  back-end-with-loco/         Rust + Loco + Loco JSON API + Alpine
+  back-end-with-loco/         Rust + Loco JSON API
 ```
 
 ## References

@@ -15,7 +15,7 @@ domain logic still needs to be filled out.
 - One PostgreSQL schema per form, generated XML + DTD per SQL entity, and
   generated FHIR HL7 R5 JSON resources.
 - Four front-ends (form and dashboard, each in HTML and SvelteKit), and one
-  Rust full-stack crate (axum + Loco + Loco JSON API).
+  Rust full-stack crate (axum + Loco JSON API).
 
 ## Roadmap
 

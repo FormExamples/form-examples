@@ -55,7 +55,7 @@
 
 ## Full-stack backend
 - [ ] `back-end-with-loco/` — Loco 0.16 + axum 0.8 +
-      SeaORM + Loco JSON API + Alpine.
+      SeaORM + Loco JSON API.
 
 ## Tests
 - [x] Vitest unit tests for the engine — 17/17 passing in the SvelteKit

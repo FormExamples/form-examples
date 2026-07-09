@@ -47,7 +47,7 @@
 ## Full-stack backend
 
 - [x] `back-end-with-loco/` — Loco 0.16 + axum 0.8
-      + SeaORM + Loco JSON API + Alpine.
+      + SeaORM + Loco JSON API.
 - [x] `back-end-with-loco-setup` — cargo loco
       scaffold generator shell script.
 

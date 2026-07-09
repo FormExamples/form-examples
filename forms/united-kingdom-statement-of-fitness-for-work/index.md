@@ -147,7 +147,7 @@ united-kingdom-statement-of-fitness-for-work/
   front-end-with-svelte/                     # SvelteKit wizard
   front-end-with-html/                  # HTML review table
   front-end-with-svelte/                # SVAR DataGrid review dashboard
-  back-end-with-loco/          # Rust backend (axum + Loco + Loco JSON API + Alpine)
+  back-end-with-loco/          # Rust backend (axum + Loco JSON API)
   back-end-with-loco-setup     # cargo loco scaffold generator (shell script)
 ```
 

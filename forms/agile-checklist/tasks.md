@@ -26,7 +26,7 @@
       aggregated teams view with SVG sparkline, filters, CSV export)
       — browser smoke-tested, output matches Svelte dashboard exactly
 
-- [x] Rust full-stack (axum + Loco JSON API + Alpine) with Rust port of the
+- [x] Rust full-stack (axum + Loco JSON API) with Rust port of the
       engine — `cargo test` 8/8, `cargo build` clean, browser smoke-tested,
       MATURE 89% matches SvelteKit and static-HTML outputs identically
 - [x] Author background notes in `doc/` (scoring-algorithm, coaching-rules,

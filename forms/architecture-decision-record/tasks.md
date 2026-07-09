@@ -33,7 +33,7 @@
 - [x] SvelteKit dashboard with `VITE_API_BASE_URL` override, falls back
       to sample data when the backend is unreachable
 
-## Full-stack (Rust + Loco + Loco JSON API + Alpine)
+## Full-stack (Rust + Loco JSON API)
 
 - [x] Loco app scaffolded; 5 ADR tables generated via
       `cargo loco generate scaffold`; migrations applied

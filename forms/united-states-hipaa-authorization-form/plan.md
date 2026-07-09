@@ -99,7 +99,7 @@ and no high-priority flag is raised.
 10. [ ] Build HTML form (static single-page, Alpine.js).
 11. [ ] Build SvelteKit dashboard (SVAR DataGrid).
 12. [ ] Build HTML dashboard (static review table).
-13. [ ] Build Rust full-stack (Loco + axum + SeaORM + Loco JSON API + Alpine).
+13. [ ] Build Rust full-stack (Loco + axum + SeaORM + Loco JSON API).
 14. [ ] Unit-test the validation engine (Vitest).
 15. [ ] `bin/test-form united-states-hipaa-authorization-form` passes.
 

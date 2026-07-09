@@ -20,7 +20,7 @@ with a coaching action plan.
 | `front-end-with-svelte/` | Done — `pnpm test` 15/15, `pnpm run check` clean, browser smoke-tested |
 | `front-end-with-html/` | Done — static, dependency-free, mirrors Svelte engine output exactly, browser smoke-tested |
 | `front-end-with-html/` | Done — static, dependency-free, mirrors Svelte dashboard output exactly, browser smoke-tested |
-| `back-end-with-loco/` | Done — axum + Loco JSON API + Alpine, Rust port of engine + dashboard + sister-form comparison, SQLite persistence, JSON `/api/checklists` with CORS, server-rendered `/dashboard`, `/submission/:id`, `/comparison` (CSV or DB-backed behaviour source), `cargo test` 27/27, browser smoke-tested (Postgres+SeaORM deferred) |
+| `back-end-with-loco/` | Done — axum + Loco JSON API, Rust port of engine + dashboard + sister-form comparison, SQLite persistence, JSON `/api/checklists` with CORS, server-rendered `/dashboard`, `/submission/:id`, `/comparison` (CSV or DB-backed behaviour source), `cargo test` 27/27, browser smoke-tested (Postgres+SeaORM deferred) |
 
 ## Engine design
 
