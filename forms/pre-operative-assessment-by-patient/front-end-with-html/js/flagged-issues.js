@@ -5,7 +5,7 @@
 // pregnancy, sickle cell disease, recent URTI, insulin therapy, adrenal
 // insufficiency, dental issues, and emergency procedures.
 //
-// Mirrors `front-end-form-with-svelte/src/lib/engine/flagged-issues.ts`.
+// Mirrors `front-end-with-svelte/src/lib/engine/flagged-issues.ts`.
 
 /**
  * @typedef {import('./types.js').AssessmentData} AssessmentData

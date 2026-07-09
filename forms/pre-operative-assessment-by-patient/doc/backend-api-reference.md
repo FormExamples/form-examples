@@ -207,7 +207,7 @@ The engine is invoked via the `POST /api/assessments/{id}/grade` endpoint and st
 
 ## Database
 
-The backend currently uses a simplified JSONB schema with a single `assessments` table. The full normalized schema (23 tables in `./db/`) defines the target architecture. The JSONB approach stores assessment data and grading results as JSON values, with the ASA rules evaluated in application code.
+The backend currently uses a simplified JSONB schema with a single `assessments` table. The full normalized schema (23 tables in `./sql/`) defines the target architecture. The JSONB approach stores assessment data and grading results as JSON values, with the ASA rules evaluated in application code.
 
 ### Migration
 

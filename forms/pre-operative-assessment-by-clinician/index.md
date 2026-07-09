@@ -6,8 +6,9 @@ and computes an **ASA Physical Status grade** (I–VI), a composite perioperativ
 risk level, and a set of safety-critical flags. The output is a signed clinician
 report with an anaesthesia plan suitable for the pre-operative record.
 
-This form is the clinician counterpart to a patient self-report pre-operative
-questionnaire: it is completed by an anaesthetist, surgeon, pre-op assessment
+This form is the clinician counterpart to the patient self-report pre-operative
+questionnaire [`pre-operative-assessment-by-patient`](../pre-operative-assessment-by-patient):
+it is completed by an anaesthetist, surgeon, pre-op assessment
 nurse, or perioperative physician rather than by the patient. It is aligned with
 CPOC's *Preoperative Assessment and Optimisation for Adult Surgery* (June 2021)
 and the Geeky Medics *Anaesthetic Pre-operative Assessment OSCE Guide*, and is
@@ -98,10 +99,10 @@ pre-operative-assessment-by-clinician/
   sql/                                   # Liquibase Postgres migrations
   xml-representations/                              # XML + DTD per SQL table
   fhir-r5/                                          # FHIR HL7 R5 JSON resources
-  front-end-form-with-html/                         # static single-page HTML wizard
-  front-end-form-with-svelte/                       # SvelteKit single-page wizard
-  front-end-dashboard-with-html/                    # review dashboard (HTML table)
-  front-end-dashboard-with-svelte/                  # review dashboard (SVAR Grid)
+  front-end-with-html/                              # static single-page HTML wizard
+  front-end-with-svelte/                            # SvelteKit single-page wizard
+  front-end-with-html/                              # review dashboard (HTML table)
+  front-end-with-svelte/                            # review dashboard (SVAR Grid)
   back-end-with-loco/  # Rust backend + server-rendered UI
 ```
 

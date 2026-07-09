@@ -31,7 +31,10 @@ const {
 // Persistence
 // ----------------------------------------------------------------------
 
-const STORAGE_KEY = 'pre-operative-assessment-by-patient.front-end-form-with-html.v1';
+const STORAGE_KEY = 'pre-operative-assessment-by-patient.front-end-with-html.v1';
+// Expose the draft key so a later linkage / accessibility module can offer a
+// "clear saved answers" control without re-deriving the key.
+window.__A11Y_DRAFT_KEY__ = STORAGE_KEY;
 const TOTAL_STEPS = 16;
 
 /** @returns {import('./types.js').AssessmentData} */

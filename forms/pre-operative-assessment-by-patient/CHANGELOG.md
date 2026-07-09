@@ -13,10 +13,23 @@ file only records changes scoped to the **Pre-operative Assessment** form.
 ## [Unreleased]
 
 ### Added
+- Accessible-UX toolbar (`front-end-with-html/js/a11y.js`): comfortable-reading
+  mode, text-size control, read-aloud, and start-over — self-injecting on both
+  the wizard and dashboard.
+- Patient→clinician handoff (`front-end-with-html/js/linkage.js`): a "Send to
+  clinician assessment" action packages patient identity, anthropometrics, and a
+  self-report summary into a localStorage handoff and opens the
+  `pre-operative-assessment-by-clinician` form pre-filled.
 - _Pending — record new fields, new fired-rule categories, new schema columns,
   new front-end steps, new clinical references, new examples, etc._
 
 ### Changed
+- Rewrote `index.md` (correct "by Patient" title, scope/intended-users section,
+  current directory structure) and corrected stale directory/architecture
+  references throughout `AGENTS.md` and docs (`./db`→`./sql`, old split/SVAR/
+  JSONB descriptions → current consolidated layout + relational schema).
+- Renamed the HTML front-end localStorage key to the canonical
+  `pre-operative-assessment-by-patient.front-end-with-html.v1`.
 - _Pending — record schema migrations, scoring-engine behaviour changes,
   re-banding of composite risk, front-end UX changes, breaking renames._
 

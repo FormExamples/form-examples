@@ -1,6 +1,6 @@
-# Pre-operative Assessment
+# Pre-operative Assessment by Patient
 
-> Pre-operative assessment system that collects patient health data via a structured questionnaire, computes an ASA (American Society of Anesthesiologists) Physical Status Classification grade, and identifies safety-critical issues for anaesthetic planning.
+> A UK NHS–aligned, **patient self-report** pre-operative questionnaire that the patient (or their carer) completes before surgery. It collects patient-reported health data via a single-page, step-by-step wizard, computes an **ASA (American Society of Anesthesiologists) Physical Status Classification** grade, and flags safety-critical issues for anaesthetic planning.
 
 ## Docs
 

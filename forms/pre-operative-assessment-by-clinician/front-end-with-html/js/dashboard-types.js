@@ -31,7 +31,7 @@
  * Assessment row displayed in the clinician dashboard.
  *
  * Mirrors `AssessmentRow` in
- * `forms/pre-operative-assessment-by-clinician/front-end-dashboard-with-svelte/src/lib/data/sample.ts`.
+ * `forms/pre-operative-assessment-by-clinician/front-end-with-svelte/src/lib/data/sample.ts`.
  *
  * @typedef {Object} AssessmentRow
  * @property {string} id           - UUID / case identifier of the assessment

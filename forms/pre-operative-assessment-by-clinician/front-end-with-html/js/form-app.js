@@ -29,7 +29,8 @@ const {
 // ----------------------------------------------------------------------
 
 const STORAGE_KEY =
-  'pre-operative-assessment-by-clinician.front-end-form-with-html.v1';
+  'pre-operative-assessment-by-clinician.front-end-with-html.v1';
+window.__A11Y_DRAFT_KEY__ = STORAGE_KEY;
 const TOTAL_STEPS = 16;
 
 function loadState() {

@@ -4,7 +4,7 @@
 // grade is the maximum grade among all rules that fire (worst comorbidity
 // wins); ASA I is the default when no rules fire (healthy patient).
 //
-// Mirrors `front-end-form-with-svelte/src/lib/engine/asa-rules.ts`
+// Mirrors `front-end-with-svelte/src/lib/engine/asa-rules.ts`
 // rule-for-rule. Rule IDs are stable for clinical audit-trail purposes.
 
 /**

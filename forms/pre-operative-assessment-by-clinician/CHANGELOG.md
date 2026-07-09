@@ -1,4 +1,4 @@
-# Changelog — Pre-operative Assessment by Clinician
+# Changelog Ã¢ÂÂ Pre-operative Assessment by Clinician
 
 All notable changes to this form (schema, scoring engine, front-ends, and
 back-end) are recorded here.
@@ -13,11 +13,15 @@ file only records changes scoped to the **Pre-operative Assessment by Clinician*
 ## [Unreleased]
 
 ### Added
-- _Pending — record new fields, new fired-rule categories, new schema columns,
+- Accessible-UX toolbar (`front-end-with-html/js/a11y.js`): comfortable-reading mode, text-size, read-aloud, start-over.
+- Patientâclinician handoff consumer (`front-end-with-html/js/linkage.js`): when opened from the patient self-report form it pre-fills patient identity + anthropometrics and shows a patient-reported banner to verify against objective findings.
+- _Pending Ã¢ÂÂ record new fields, new fired-rule categories, new schema columns,
   new front-end steps, new clinical references, new examples, etc._
 
 ### Changed
-- _Pending — record schema migrations, scoring-engine behaviour changes,
+- Linked the patient counterpart in `index.md`; corrected stale directory/architecture references in `AGENTS.md` (dedup consolidated dirs, `xml-representations/`→`xml/`, `fhir-r5/`→`fhir/r5/`, HTMX→JSON API).
+- Renamed the HTML front-end localStorage key to the canonical `pre-operative-assessment-by-clinician.front-end-with-html.v1`.
+- _Pending Ã¢ÂÂ record schema migrations, scoring-engine behaviour changes,
   re-banding of composite risk, front-end UX changes, breaking renames._
 
 ### Deprecated
@@ -27,26 +31,26 @@ file only records changes scoped to the **Pre-operative Assessment by Clinician*
 - _Pending._
 
 ### Fixed
-- _Pending — record corrections to scoring rules, schema fixes, front-end
+- _Pending Ã¢ÂÂ record corrections to scoring rules, schema fixes, front-end
   regressions, FHIR mapping fixes._
 
 ### Security
-- _Pending — record fixes affecting PHI handling, audit logging, or access
+- _Pending Ã¢ÂÂ record fixes affecting PHI handling, audit logging, or access
   control._
 
 ## Versioning policy
 
-- **MAJOR** — incompatible schema or scoring change (renamed columns,
+- **MAJOR** Ã¢ÂÂ incompatible schema or scoring change (renamed columns,
   re-banded grades, reshaped FHIR Bundle).
-- **MINOR** — backwards-compatible additions (new optional fields, new fired
+- **MINOR** Ã¢ÂÂ backwards-compatible additions (new optional fields, new fired
   rules that only add flags, new examples).
-- **PATCH** — fixes that do not change the public contract (UI bugs, doc
+- **PATCH** Ã¢ÂÂ fixes that do not change the public contract (UI bugs, doc
   corrections, regenerated derived artefacts).
 
 ## See also
 
-- [`spec.md`](spec.md) — living domain spec.
-- [`plan.md`](plan.md) — development roadmap.
-- [`tasks.md`](tasks.md) — open and completed tasks.
-- [`examples/`](examples/) — filled-form JSON fixtures and FHIR Bundle samples
+- [`spec.md`](spec.md) Ã¢ÂÂ living domain spec.
+- [`plan.md`](plan.md) Ã¢ÂÂ development roadmap.
+- [`tasks.md`](tasks.md) Ã¢ÂÂ open and completed tasks.
+- [`examples/`](examples/) Ã¢ÂÂ filled-form JSON fixtures and FHIR Bundle samples
   used as referenced material for changelog entries.

@@ -17,7 +17,7 @@
  * Patient row displayed in the clinician dashboard.
  *
  * Mirrors `PatientRow` in
- * `forms/pre-operative-assessment-by-patient/front-end-dashboard-with-svelte/src/lib/types.ts`.
+ * `forms/pre-operative-assessment-by-patient/front-end-with-svelte/src/lib/types.ts`.
  *
  * @typedef {Object} PatientRow
  * @property {string} id                    - UUID of the assessment record

@@ -9,7 +9,7 @@
 //   - The overall grade is `max(grade of fired rules)`.
 //   - If no rules fire, default to ASA I (healthy patient).
 //
-// Mirrors `front-end-form-with-svelte/src/lib/engine/asa-grader.ts`.
+// Mirrors `front-end-with-svelte/src/lib/engine/asa-grader.ts`.
 
 /**
  * @typedef {import('./types.js').AssessmentData} AssessmentData

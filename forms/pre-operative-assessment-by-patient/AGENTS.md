@@ -4,16 +4,23 @@ Pre-op assessment system that collects patient health data via a structured
 questionnaire, computes an ASA (American Society of Anesthesiologists) Physical Status
 Classification grade, and identifies safety-critical issues for anaesthetic planning.
 
+This form is the **patient self-report** counterpart to
+[`pre-operative-assessment-by-clinician`](../pre-operative-assessment-by-clinician),
+which records the clinician's objective findings. The patient HTML front-end
+offers a "Send to clinician assessment" handoff that pre-fills the clinician
+form from this self-report.
+
 ## Directory structure
 
-- ./index.md always update this with new information; use Markdown
-- ./README.md is a symlink; use Bash(ln -sfn index.md README.md)
-- ./AGENTS.md always update this with new information; use Markdown
-- ./doc documentation; use Markdown
-- ./db database schema; use PostgreSQL with one SQL file per SQL table
-- ./front-end-patient-form front-end patient form intake questionnaire;use SvelteKit TypeScript + SVAR
-- ./front-end-clinician-dashboard front-end clinician dashboard with sort and filter; use SvelteKit TypeScript + SVAR + SVAR DataGrid
-- ./back back-end server application; use Rust Axum Loco
+- `./index.md` / `./README.md` (symlink) / `./AGENTS.md` — overview + agent instructions
+- `./doc/` — clinical reference documentation (Markdown)
+- `./sql/` — PostgreSQL schema, one numbered file per table (source of truth)
+- `./xml/`, `./fhir/r5/`, `./protobuf/`, `./openapi/` — generated representations
+- `./spec/` — living domain spec
+- `./examples/` — filled-form JSON fixture + FHIR R5 Bundle
+- `./front-end-with-html/` — patient wizard (`index.html`) + dashboard (`dashboard.html`); Lily Design System, no build; includes accessible-UX toolbar (`js/a11y.js`) and the clinician handoff (`js/linkage.js`)
+- `./front-end-with-svelte/` — SvelteKit patient wizard + SVAR DataGrid dashboard; routes under `src/routes/<form-kebab-case>/`
+- `./back-end-with-loco/` — Rust axum + Loco JSON API back-end; relational per-table schema; crate source under `src/<form_snake_case>/`
 
 ## Details
 
@@ -42,7 +49,7 @@ Comprehensive documentation:
 
 Put all the documentation files in ./doc directory.
 
-## Database schema using PostgreSQL in ./db
+## Database schema using PostgreSQL in ./sql
 
 - PostgreSQL 18 database schema
 - UUIDv4 primary key (gen_random_uuid() via pgcrypto)
@@ -52,7 +59,7 @@ Put all the documentation files in ./doc directory.
 - Auto-updated timestamps via shared trigger function (00-extensions.sql)
 - 42 ASA rules seeded in asa_rule table (19_asa_rule.sql)
 - Denormalized fired rules for clinical audit trail
-- Apply schema: `for f in db/*.sql; do psql -f "$f"; done`
+- Apply schema: `for f in sql/*.sql; do psql -f "$f"; done`
 - Comprehensive SQL comments about each table, column, and constraint
 
 Rules:
@@ -69,7 +76,7 @@ Rules:
 - Conditional CHECK constraints enforce dependent field validity (e.g., hypertension_controlled only when hypertension = 'yes')
 - Applies to: cardiovascular, respiratory, renal, hepatic, neurological tables
 
-## Front-end for patient using SvelteKit in ./front-end-for-patient
+## Front-end for patient using SvelteKit in ./front-end-with-svelte
 
 Patient intake questionnaire application:
 
@@ -81,9 +88,9 @@ Patient intake questionnaire application:
 - Safety flag detection (20+ alert categories)
 - PDF report generation (server-side pdfmake)
 - Vitest unit tests
-- See ./front-end-for-patient/AGENTS.md for specific instructions
+- See ./front-end-with-svelte/AGENTS.md for specific instructions
 
-## Front-end for clinician using SvelteKit in ./front-end-for-clinician
+## Front-end for clinician using SvelteKit in ./front-end-with-svelte
 
 Dashboard application:
 
@@ -94,14 +101,14 @@ Dashboard application:
 - Column sorting (click headers, Ctrl+click for multi-sort)
 - Text search across NHS number, patient name, procedure
 - Dropdown filters for ASA grade, allergy flag, adverse incident flag
-- See ./front-end-for-clinician/ for specific instructions
+- See ./front-end-with-svelte/ for specific instructions
 
-## Back-end application using Rust Axum Loco in ./backend
+## Back-end application using Rust Axum Loco in ./back-end-with-loco
 
 - Rust edition 2024
 - Axum web framework via Loco
 - SeaORM for database access
-- PostgreSQL 18 with JSONB storage
+- PostgreSQL 18, relational per-table schema (one table per entity)
 - REST API for assessment CRUD
 - ASA grading engine (42 rules, ported from frontend)
 - Safety flag detection
@@ -109,7 +116,7 @@ Dashboard application:
 - CORS configuration for frontend integration
 - Input validation on all write endpoints (POST, PUT)
 - Pagination capped at 100 per page
-- See ./backend/AGENTS.md for backend-specific instructions
+- See ./back-end-with-loco/AGENTS.md for backend-specific instructions
 
 ## American Society of Anesthesiologists (ASA) Physical Status Classification (PSC)
 
