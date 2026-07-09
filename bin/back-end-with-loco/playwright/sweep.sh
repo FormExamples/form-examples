@@ -1,7 +1,8 @@
 #!/usr/bin/env bash
 # Run the JSON API contract test against every back-end-with-loco crate
-# that follows the canonical layout (has src/models/_entities/assessments.rs,
-# src/app.rs, src/bin/main.rs, and migration/Cargo.toml).
+# that follows the canonical route layout (has
+# src/<form_snake_case>/models/_entities/assessments.rs, .../app.rs,
+# .../bin/main.rs, and migration/Cargo.toml).
 #
 # Prerequisites:
 #  - Postgres at localhost:5432 with user=postgres password=postgres
@@ -25,9 +26,10 @@ for d in sorted(Path('forms').iterdir()):
     if not d.is_dir() or d.name.startswith('.'): continue
     crate = d / 'back-end-with-loco'
     if not crate.is_dir(): continue
-    if not (crate / 'src/models/_entities/assessments.rs').is_file(): continue
-    if not (crate / 'src/app.rs').is_file(): continue
-    if not (crate / 'src/bin/main.rs').is_file(): continue
+    src = crate / 'src' / d.name.replace('-', '_')   # route layout: src/<form_snake_case>/
+    if not (src / 'models/_entities/assessments.rs').is_file(): continue
+    if not (src / 'app.rs').is_file(): continue
+    if not (src / 'bin/main.rs').is_file(): continue
     if not (crate / 'migration/Cargo.toml').is_file(): continue
     print(d.name)
 ")

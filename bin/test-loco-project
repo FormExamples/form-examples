@@ -15,10 +15,12 @@ implemented_or_err() { if (grep -q -m 1 "Not yet implemented\." "$1"); then err 
 
 ### Main
 test_loco_project() {
-    # dir="$1"
+    # dir="$1"  (a forms/<slug>/back-end-with-loco crate root)
     ai_exists_or_err "$1"
     echo "$1"
-    for file in "$1/src/lib.rs"; do
+    # Route layout: crate source lives in src/<form_snake_case>/
+    snake=$(basename "$(dirname "$1")" | tr '-' '_')
+    for file in "$1/src/$snake/lib.rs"; do
         file_exists_or_err "$file"
         grep_exists_or_err "#!\[warn(clippy::clippy::pedantic)\]" "$file"
         grep_exists_or_err "#!\[forbid(unsafe_code)\]" "$file"
