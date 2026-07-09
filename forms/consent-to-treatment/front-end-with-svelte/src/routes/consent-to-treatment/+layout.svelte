@@ -1,5 +1,5 @@
 <script lang="ts">
-	import '../app.css';
+	import '../../app.css';
 	import { base } from '$app/paths';
 	import { browser } from '$app/environment';
 	import { page } from '$app/state';
