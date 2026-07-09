@@ -96,6 +96,12 @@ loco new --name pre-operative-assessment-by-clinician --db postgres --bg pg --as
 Once the Loco app exists, run the generated setup script inside it to
 scaffold all resources at once.
 
+`loco new` creates the crate in a nested `<slug_snake>/` directory. The
+generated `back-end-with-loco-setup` script's final step converts this into the
+canonical **route layout** — crate source under `back-end-with-loco/src/<slug_snake>/`,
+crate root files (Cargo.toml, config/, migration/, tests/) at
+`back-end-with-loco/` — by invoking `bin/route-loco-layout <slug>`.
+
 ## Verify
 
 The setup file is asserted to exist by `bin/test-form`:
