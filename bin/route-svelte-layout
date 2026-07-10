@@ -27,4 +27,10 @@ SLUG="$slug" find "$slug" \( -name '*.svelte' -o -name '*.ts' -o -name '*.js' \)
   s{(href=|goto\(|redirect\(\s*\d+\s*,\s*)(["\x27`])/(?!api/|\Q$s\E/)}{$1$2/$s/}g;
 ' {} +
 
+# fix relative imports that reach out of src/routes/ to src/ (e.g. app.css):
+# nesting one level deeper means "../app.css" -> "../../app.css".
+find "$slug" \( -name '*.svelte' -o -name '*.ts' -o -name '*.js' \) -exec perl -0pi -e '
+  s{(["\x27`])\.\./app\.css\1}{$1../../app.css$1}g;
+' {} +
+
 echo "OK $slug"
