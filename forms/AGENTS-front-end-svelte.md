@@ -222,7 +222,9 @@ A consumer thus writes:
 ## 5. Page shell
 
 Every input-form route (`front-end-with-svelte/src/routes/<slug>/<plural>/[id]/+page.svelte`,
-the wizard) follows this skeleton:
+the wizard) follows this skeleton. The `.page-header` (and any page footer) is
+statically positioned — never `position: sticky`/`fixed` — so the whole page,
+header and footer included, scrolls with the content:
 
 ```svelte
 <script lang="ts">

@@ -121,6 +121,11 @@ divergence.
 
 - **Single-page wizard.** No multi-page forms. The whole questionnaire lives
   on one URL; the user moves through steps with in-page navigation.
+- **Fully scrollable page.** No fixed or sticky header or footer — the page
+  header, page footer, and wizard chrome scroll with the content so the entire
+  form is reachable by scrolling. `.page-header` / `.page-footer` are
+  statically positioned in every `front-end-with-html/` and
+  `front-end-with-svelte/`.
 - **Lily Design System HTML headless** is the class vocabulary for every
   `front-end-*-with-html/` directory. See
   [`forms/AGENTS-front-end-html.md`](forms/AGENTS-front-end-html.md) for the

@@ -84,9 +84,6 @@ body {
 .page-header {
   background: var(--color-surface);
   border-bottom: 1px solid var(--color-border);
-  position: sticky;
-  top: 0;
-  z-index: 10;
   box-shadow: var(--shadow-sm);
 }
 .page-header-inner {
@@ -560,9 +557,6 @@ main {
 /* Sticky page header so the step list & progress bar stay visible
    while scrolling through the 16-section wizard. */
 .page-header {
-  position: sticky;
-  top: 0;
-  z-index: 10;
 }
 
 /* Intro card above the form */

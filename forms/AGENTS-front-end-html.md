@@ -145,6 +145,8 @@ Filters above the table reuse `.text-input`, `.select`, and `.button`.
 
 - `.visually-hidden` — screen-reader-only utility
 - `.page-header`, `.page-header-inner`, `.subtitle` — page chrome
+  (statically positioned — never `position: sticky`/`fixed`; the whole page
+  scrolls, header and footer included)
 - `.skip-link` — top-of-page skip target
 - `.empty-message` — empty-state copy inside a region
 
