@@ -216,3 +216,16 @@ table.subscales td.num { text-align: right; white-space: nowrap; font-variant-nu
   .esas-tick { font-size: 0.75rem; padding: 0.4rem 0; min-height: 2rem; }
   .esas-row { padding: 0.625rem; }
 }
+
+/* print-report-styles v1 — print-friendly report output (hide wizard chrome). */
+@media print {
+  .step-list, .step-list-item, #progress, #progress-text, .progress, .progress-bar,
+  .form-actions, .button, button, #error-summary, .error-summary,
+  .theme-select, .theme-toggle, nav, .no-print { display: none !important; }
+  html, body { background: #fff !important; color: #000 !important; }
+  #report, .report, .report-card, .panel, .fieldset {
+    box-shadow: none !important; border-color: #ccc !important; break-inside: avoid;
+  }
+  a { color: #000 !important; text-decoration: none; }
+  @page { margin: 1.5cm; }
+}

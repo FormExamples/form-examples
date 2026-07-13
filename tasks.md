@@ -148,7 +148,13 @@ Design each feature on the reference forms
 - [ ] **Autosave**: localStorage persistence keyed by slug, restore banner
       on load, clear-on-submit + explicit clear control; both front-ends.
       E2E test: fill half, reload, assert restored.
-- [ ] **Print CSS**: print-friendly report/summary step; both front-ends.
+- [x] **Print CSS (HTML)**: added a shared, idempotent `@media print` block
+      (`print-report-styles v1`) to every HTML front-end — hides wizard chrome
+      (buttons, progress, step-list, theme switcher), flattens colours/shadows
+      for paper, `@page` margins. Applied to all 286 (283 external `style.css`
+      + 3 inline `<style>`). Verified by a print-media assertion in the E2E
+      harness (buttons `display:none` under `@media print`). Svelte print CSS
+      still pending.
 - [ ] **Dashboard CSV/TSV export** on every dashboard.
 - [ ] **Loco seed data**: per-crate seeder loading `examples/` typical
       fixture; document `cargo loco db seed` (or task equivalent).

@@ -422,3 +422,16 @@ main { max-width: var(--content-width); margin: 0 auto; padding: 1.5rem 1rem 4re
   color: var(--color-muted);
   border-top: 1px solid var(--color-border);
 }
+
+/* print-report-styles v1 — print-friendly report output (hide wizard chrome). */
+@media print {
+  .step-list, .step-list-item, #progress, #progress-text, .progress, .progress-bar,
+  .form-actions, .button, button, #error-summary, .error-summary,
+  .theme-select, .theme-toggle, nav, .no-print { display: none !important; }
+  html, body { background: #fff !important; color: #000 !important; }
+  #report, .report, .report-card, .panel, .fieldset {
+    box-shadow: none !important; border-color: #ccc !important; break-inside: avoid;
+  }
+  a { color: #000 !important; text-decoration: none; }
+  @page { margin: 1.5cm; }
+}

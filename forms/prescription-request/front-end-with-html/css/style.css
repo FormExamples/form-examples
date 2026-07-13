@@ -707,3 +707,16 @@ table.rules tbody th {
   display: flex;
   gap: 0.75rem;
 }
+
+/* print-report-styles v1 — print-friendly report output (hide wizard chrome). */
+@media print {
+  .step-list, .step-list-item, #progress, #progress-text, .progress, .progress-bar,
+  .form-actions, .button, button, #error-summary, .error-summary,
+  .theme-select, .theme-toggle, nav, .no-print { display: none !important; }
+  html, body { background: #fff !important; color: #000 !important; }
+  #report, .report, .report-card, .panel, .fieldset {
+    box-shadow: none !important; border-color: #ccc !important; break-inside: avoid;
+  }
+  a { color: #000 !important; text-decoration: none; }
+  @page { margin: 1.5cm; }
+}

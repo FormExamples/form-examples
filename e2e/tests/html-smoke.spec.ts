@@ -52,6 +52,17 @@ for (const slug of formSlugs()) {
           await page.waitForTimeout(200);
         }
 
+        // 4. Print stylesheet hides interactive chrome. Emulate print media
+        // and confirm a primary/action button is not displayed (the report is
+        // what should print, not the wizard controls).
+        await page.emulateMedia({ media: 'print' });
+        const anyButton = page.locator('button').first();
+        if (await anyButton.count() > 0) {
+          const display = await anyButton.evaluate((el) => getComputedStyle(el).display);
+          expect(display, 'buttons should be display:none under @media print').toBe('none');
+        }
+        await page.emulateMedia({ media: 'screen' });
+
         // No uncaught errors at any point.
         expect(pageErrors, pageErrors.join('\n')).toHaveLength(0);
       } finally {

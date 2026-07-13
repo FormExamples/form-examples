@@ -402,3 +402,16 @@ main { max-width: 80rem; margin: 0 auto; padding: 1.5rem; }
 .panel { background: var(--color-surface); border: 1px solid var(--color-border); border-radius: var(--radius); padding: 1.25rem; box-shadow: var(--shadow-sm); }
 .panel .empty-message { margin: 0; color: var(--color-muted); font-style: italic; }
 
+
+/* print-report-styles v1 — print-friendly report output (hide wizard chrome). */
+@media print {
+  .step-list, .step-list-item, #progress, #progress-text, .progress, .progress-bar,
+  .form-actions, .button, button, #error-summary, .error-summary,
+  .theme-select, .theme-toggle, nav, .no-print { display: none !important; }
+  html, body { background: #fff !important; color: #000 !important; }
+  #report, .report, .report-card, .panel, .fieldset {
+    box-shadow: none !important; border-color: #ccc !important; break-inside: avoid;
+  }
+  a { color: #000 !important; text-decoration: none; }
+  @page { margin: 1.5cm; }
+}
