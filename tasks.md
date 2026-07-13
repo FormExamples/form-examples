@@ -212,12 +212,21 @@ Design each feature on the reference forms
       (nothing currently wires the front-ends to the API). Fixing = add the
       rename to 283 crates + regenerate + refresh insta snapshots + cargo
       verify: a dedicated effort, not a quick sweep.
-- [ ] **FINDING — false-positive scaffold request tests (~1671 lines).** The
-      generated stub tests assert HTTP 200 on trailing-slash list routes
-      (`/api/<table>/`), which Loco routes to its welcome page (200) WITHOUT
-      reaching the handler — so they pass without testing anything. The real
-      handlers are at `/api/<table>` (no slash) and `/api/<table>/{id}`. Fix =
-      correct the scaffold test generation + regenerate; verify per crate.
+- [x] **FIXED — 1652 false-positive scaffold request tests.** They GET
+      `/api/<table>/` (trailing slash → Loco's HTML welcome page, 200) and
+      asserted 200, so they passed without reaching the handler (confirmed:
+      `/api/patients` → 200 `application/json` `[]`; `/api/patients/` → 200
+      `text/html` welcome page). Removed the trailing slash so each hits the
+      real list handler, and added a content-type assertion so it verifies the
+      JSON response, not the welcome page. Verified on a sample against real
+      Postgres — all domain list tests pass.
+- [ ] **FINDING — pre-existing auth magic-link tests fail without a mailer.**
+      Every crate's scaffold `tests/requests/auth.rs` has
+      `can_auth_with_magic_link` / `can_reject_invalid_magic_link_token` that
+      panic (auth.rs:320/395) without SMTP/mailer test config — so the CI
+      `rust` job's `cargo test` is red for this reason alone, independent of
+      the fix above. Fix = configure Loco's test/stub mailer per crate (or
+      `#[ignore]` the magic-link tests). Not caused by any change here.
 - [ ] **Loco API integration test rollout** (per crate) once the two findings
       above are resolved — the apgar template is the pattern.
 - [ ] **Serve OpenAPI**: static route in each crate serving its
