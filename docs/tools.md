@@ -2,7 +2,7 @@
 
 Auto-generated from each tool's source header by `bin/generate-tools-doc.py` — do not hand-edit. Run the generator after adding or re-documenting a tool.
 
-43 tools.
+44 tools.
 
 - [`bin/clean`](#clean)
 - [`bin/consolidate-front-end-html`](#consolidate-front-end-html)
@@ -35,6 +35,7 @@ Auto-generated from each tool's source header by `bin/generate-tools-doc.py` —
 - [`bin/test-examples-conformance`](#test-examples-conformance)
 - [`bin/test-form`](#test-form)
 - [`bin/test-loco-project`](#test-loco-project)
+- [`bin/test-loco-routes`](#test-loco-routes)
 - [`bin/test-personas`](#test-personas)
 - [`bin/test-sql-apply`](#test-sql-apply)
 - [`bin/test-tools`](#test-tools)
@@ -549,6 +550,22 @@ test-form: test one form directory in this project for implementation
 
 ```text
 https://github.com/sixarm/unix-shell-script-kit
+```
+
+<h2 id="test-loco-routes"><code>bin/test-loco-routes</code></h2>
+
+```text
+bin/test-loco-routes — assert every Loco crate exposes its domain HTTP API.
+
+ Each back-end-with-loco crate has a model per SQL table AND should register a
+ scaffold controller per domain table, wired into app.rs routes() via
+ `.add_route(controllers::<name>::routes())`. A crate whose routes() wires
+ only `auth::routes()` (a single add_route) has a full data layer but exposes
+ NO domain entities over HTTP — a real, easily-missed regression. This gate
+ catches it: every crate must wire at least two routes (auth + >=1 domain).
+
+ Usage: bin/test-loco-routes
+ Exit non-zero listing any crate that wires only auth.
 ```
 
 <h2 id="test-personas"><code>bin/test-personas</code></h2>

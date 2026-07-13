@@ -103,6 +103,12 @@ else
     red "test-personas (persona regression — see /tmp/test-tools-personas.log)"
 fi
 
+if bin/test-loco-routes >/tmp/test-tools-loco-routes.log 2>&1; then
+    green "test-loco-routes (every Loco crate exposes its domain API)"
+else
+    red "test-loco-routes (a crate wires only auth — see /tmp/test-tools-loco-routes.log)"
+fi
+
 # ---------------------------------------------------------------------------
 # 3. Conformance tracker reports the expected milestone.
 # ---------------------------------------------------------------------------

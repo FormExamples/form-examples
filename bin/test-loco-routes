@@ -1,0 +1,32 @@
+#!/bin/sh
+set -eu
+# bin/test-loco-routes — assert every Loco crate exposes its domain HTTP API.
+#
+# Each back-end-with-loco crate has a model per SQL table AND should register a
+# scaffold controller per domain table, wired into app.rs routes() via
+# `.add_route(controllers::<name>::routes())`. A crate whose routes() wires
+# only `auth::routes()` (a single add_route) has a full data layer but exposes
+# NO domain entities over HTTP — a real, easily-missed regression. This gate
+# catches it: every crate must wire at least two routes (auth + >=1 domain).
+#
+# Usage: bin/test-loco-routes
+# Exit non-zero listing any crate that wires only auth.
+
+top="$(git rev-parse --show-toplevel)"
+fail=0
+
+for app in "$top"/forms/*/back-end-with-loco/src/*/app.rs; do
+    [ -f "$app" ] || continue
+    slug=$(printf '%s' "$app" | sed -E 's#.*/forms/([^/]+)/.*#\1#')
+    n=$(grep -c 'add_route' "$app" 2>/dev/null || echo 0)
+    if [ "$n" -le 1 ]; then
+        echo "FAIL $slug: routes() wires only $n route(s) — no domain controllers exposed" >&2
+        fail=$((fail + 1))
+    fi
+done
+
+if [ "$fail" -gt 0 ]; then
+    echo "test-loco-routes: $fail crate(s) expose no domain API" >&2
+    exit 1
+fi
+echo "test-loco-routes: every Loco crate wires its domain controllers"

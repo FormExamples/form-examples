@@ -70,6 +70,9 @@ jobs:
       - name: HTML scoring engines load and run headless
         run: bin/test-engines
 
+      - name: Every Loco crate exposes its domain API
+        run: bin/test-loco-routes
+
       - name: Authored personas match engine output
         run: bin/test-personas
 
