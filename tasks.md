@@ -242,10 +242,14 @@ personas. Once the oracle exists, persona scaffolding + fill is mechanical
       engine loader at `bin/lib/engine-loader.js`. Template authored +
       verified for `apgar-score` (3 personas: reassuring 8/10, moderately-low
       4/9, low 2/3). Wired into `bin/test-tools` + CI.
-- [~] Reference batch of standard clinical scores in progress (cardiology,
-      PHQ-9/GAD-7, CURB-65, CHA₂DS₂-VASc, Wells DVT, GCS, NEWS2, PSQI).
-- [ ] Scaffold personas for the remaining forms in batches (subagents; the
-      form's `spec/index.md` scoring rules define what "flagged" means).
+- [x] Reference batch authored + verified (9 forms total): apgar-score,
+      cardiology-assessment, mental-health-assessment (PHQ-9), CURB-65,
+      CHA₂DS₂-VASc, Wells DVT, glasgow-coma-scale, NEWS2, PSQI —
+      `bin/test-personas` PASS 9 / FAIL 0, deterministic.
+- [ ] Scaffold personas for the remaining ~211 scorable forms in batches
+      (subagents on the proven rail; the form's `spec/index.md` scoring rules
+      define low/typical/flagged). Note: 63 forms are `test-engines` SKIPs
+      (ESM/inline/nonstandard engines) — those need a bespoke driver first.
 - [ ] `example-invalid.json` per form + expected validation errors list;
       assert in the E2E harness (wizard blocks submission).
 - [ ] CSV and TSV export samples per form matching the typical persona
