@@ -206,6 +206,19 @@ Design each feature on the reference forms
       values; regenerated (7 files); all 1850 specs now validate. Added an
       OpenAPI 3.1 validation step to the CI drift job (previously only XML +
       FHIR were validated).
+- [i] **FHIR R5 validity audit (2026-07-13): resources valid.** Ran the
+      authoritative HL7 `validator_cli.jar` (6.3.11) on sample resources +
+      bundle: individual FHIR resources validate with **0 errors** (one
+      best-practice "should have narrative" warning). A quick home-grown
+      structural reference check flagged ~282 bundles for "unresolved
+      references", but that was a FALSE POSITIVE — bundle references use the
+      `Type/id` form while entry `fullUrl`s use `urn:uuid:<id>`, which FHIR
+      tolerates (the HL7 validator does not error). Did NOT fabricate a fix
+      from a naive check contradicting the authoritative validator. Minor
+      best-practice nice-to-have (make document-bundle references use the
+      `urn:uuid:` fullUrl form) noted for a future FHIR-generator pass; not
+      worth regenerating 286 bundles for a validator-tolerated warning now.
+      (Full jar validation stays in the CI `fhir` job.)
 - [i] **Representation-coverage audit (2026-07-13): CLEAN.** Checked SQL
       tables vs XML/FHIR/protobuf/OpenAPI file counts across all forms. The
       apparent mismatch (XML per-table vs FHIR/proto/OpenAPI ~6-7) is
