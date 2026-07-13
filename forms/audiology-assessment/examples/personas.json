@@ -1,0 +1,351 @@
+{
+  "engine": "front-end-with-html",
+  "graderHint": "calculateHearingGrade",
+  "note": "Realistic filled-in states in the audiology engine's shape. Graded by calculateHearingGrade (better/worse-ear pure-tone-average dB HL classification — deterministic). `expected` is computed by `bin/test-personas --update` and verified by `bin/test-personas`.",
+  "personas": [
+    {
+      "name": "normal-hearing",
+      "description": "Pure-tone averages 15/20 dB HL — both ears within 25 dB: normal hearing.",
+      "state": {
+        "demographics": {
+          "firstName": "",
+          "lastName": "",
+          "dateOfBirth": "",
+          "sex": "female"
+        },
+        "chiefComplaint": {
+          "primaryConcern": "routine hearing check",
+          "affectedEar": "both",
+          "onset": "",
+          "duration": "",
+          "progression": ""
+        },
+        "hearingHistory": {
+          "noiseExposure": "",
+          "occupationalNoise": "",
+          "occupationalNoiseDetails": "",
+          "recreationalNoise": "",
+          "recreationalNoiseDetails": "",
+          "previousHearingTests": "",
+          "previousTestDetails": "",
+          "hearingAidUse": "",
+          "hearingAidDetails": ""
+        },
+        "audiometricResults": {
+          "pureToneAverageRight": 15,
+          "pureToneAverageLeft": 20,
+          "airConductionRight": "",
+          "airConductionLeft": "",
+          "boneConductionRight": "",
+          "boneConductionLeft": "",
+          "airBoneGapRight": null,
+          "airBoneGapLeft": null,
+          "speechRecognitionThresholdRight": null,
+          "speechRecognitionThresholdLeft": null,
+          "wordRecognitionScoreRight": null,
+          "wordRecognitionScoreLeft": null,
+          "hearingLossType": "none"
+        },
+        "tinnitusAssessment": {
+          "presence": "",
+          "affectedEar": "",
+          "character": "",
+          "severity": "",
+          "duration": "",
+          "impactOnDailyLife": "",
+          "tinnitusHandicapInventoryScore": null
+        },
+        "vestibularSymptoms": {
+          "vertigo": "",
+          "vertigoDetails": "",
+          "dizziness": "",
+          "balanceProblems": "",
+          "dixHallpike": "",
+          "nystagmus": "",
+          "fallsHistory": "",
+          "fallsFrequency": ""
+        },
+        "otoscopicFindings": {
+          "earCanalRight": "",
+          "earCanalLeft": "",
+          "tympanicMembraneRight": "",
+          "tympanicMembraneLeft": "",
+          "middleEarRight": "",
+          "middleEarLeft": "",
+          "earWaxRight": "",
+          "earWaxLeft": "",
+          "dischargeRight": "",
+          "dischargeLeft": "",
+          "previousSurgery": "",
+          "previousSurgeryDetails": ""
+        },
+        "medicalHistory": {
+          "ototoxicMedications": "",
+          "ototoxicMedicationDetails": "",
+          "autoimmune": "",
+          "autoimmuneDetails": "",
+          "menieres": "",
+          "otosclerosis": "",
+          "acousticNeuroma": "",
+          "infections": "",
+          "infectionDetails": ""
+        },
+        "functionalCommunication": {
+          "communicationDifficulties": "",
+          "communicationDetails": "",
+          "hearingAidCandidacy": "",
+          "assistiveDeviceNeeds": "",
+          "assistiveDeviceDetails": "",
+          "workImpact": "",
+          "socialImpact": "",
+          "hhieScore": null
+        }
+      },
+      "expected": {
+        "hearingGrade": "normal",
+        "firedRules": [],
+        "ptaGrade": "normal",
+        "rightGrade": "normal",
+        "leftGrade": "normal"
+      }
+    },
+    {
+      "name": "moderate-loss",
+      "description": "Pure-tone averages 50/45 dB HL in the 41-60 dB range: moderate hearing loss.",
+      "state": {
+        "demographics": {
+          "firstName": "",
+          "lastName": "",
+          "dateOfBirth": "",
+          "sex": "male"
+        },
+        "chiefComplaint": {
+          "primaryConcern": "difficulty hearing conversation",
+          "affectedEar": "both",
+          "onset": "",
+          "duration": "",
+          "progression": ""
+        },
+        "hearingHistory": {
+          "noiseExposure": "yes",
+          "occupationalNoise": "yes",
+          "occupationalNoiseDetails": "",
+          "recreationalNoise": "",
+          "recreationalNoiseDetails": "",
+          "previousHearingTests": "",
+          "previousTestDetails": "",
+          "hearingAidUse": "",
+          "hearingAidDetails": ""
+        },
+        "audiometricResults": {
+          "pureToneAverageRight": 50,
+          "pureToneAverageLeft": 45,
+          "airConductionRight": "",
+          "airConductionLeft": "",
+          "boneConductionRight": "",
+          "boneConductionLeft": "",
+          "airBoneGapRight": null,
+          "airBoneGapLeft": null,
+          "speechRecognitionThresholdRight": null,
+          "speechRecognitionThresholdLeft": null,
+          "wordRecognitionScoreRight": null,
+          "wordRecognitionScoreLeft": null,
+          "hearingLossType": "sensorineural"
+        },
+        "tinnitusAssessment": {
+          "presence": "",
+          "affectedEar": "",
+          "character": "",
+          "severity": "",
+          "duration": "",
+          "impactOnDailyLife": "",
+          "tinnitusHandicapInventoryScore": null
+        },
+        "vestibularSymptoms": {
+          "vertigo": "",
+          "vertigoDetails": "",
+          "dizziness": "",
+          "balanceProblems": "",
+          "dixHallpike": "",
+          "nystagmus": "",
+          "fallsHistory": "",
+          "fallsFrequency": ""
+        },
+        "otoscopicFindings": {
+          "earCanalRight": "",
+          "earCanalLeft": "",
+          "tympanicMembraneRight": "",
+          "tympanicMembraneLeft": "",
+          "middleEarRight": "",
+          "middleEarLeft": "",
+          "earWaxRight": "",
+          "earWaxLeft": "",
+          "dischargeRight": "",
+          "dischargeLeft": "",
+          "previousSurgery": "",
+          "previousSurgeryDetails": ""
+        },
+        "medicalHistory": {
+          "ototoxicMedications": "",
+          "ototoxicMedicationDetails": "",
+          "autoimmune": "",
+          "autoimmuneDetails": "",
+          "menieres": "",
+          "otosclerosis": "",
+          "acousticNeuroma": "",
+          "infections": "",
+          "infectionDetails": ""
+        },
+        "functionalCommunication": {
+          "communicationDifficulties": "",
+          "communicationDetails": "",
+          "hearingAidCandidacy": "",
+          "assistiveDeviceNeeds": "",
+          "assistiveDeviceDetails": "",
+          "workImpact": "",
+          "socialImpact": "",
+          "hhieScore": null
+        }
+      },
+      "expected": {
+        "hearingGrade": "moderate",
+        "firedRules": [
+          {
+            "id": "PTA-R-002",
+            "system": "Audiometric",
+            "description": "Right ear moderate hearing loss (PTA 41-60 dB HL)",
+            "grade": "moderate"
+          },
+          {
+            "id": "PTA-L-002",
+            "system": "Audiometric",
+            "description": "Left ear moderate hearing loss (PTA 41-60 dB HL)",
+            "grade": "moderate"
+          }
+        ],
+        "ptaGrade": "moderate",
+        "rightGrade": "moderate",
+        "leftGrade": "moderate"
+      }
+    },
+    {
+      "name": "severe-loss",
+      "description": "Pure-tone averages 72/78 dB HL in the 61-80 dB range: severe hearing loss.",
+      "state": {
+        "demographics": {
+          "firstName": "",
+          "lastName": "",
+          "dateOfBirth": "",
+          "sex": "male"
+        },
+        "chiefComplaint": {
+          "primaryConcern": "marked hearing loss",
+          "affectedEar": "both",
+          "onset": "",
+          "duration": "",
+          "progression": ""
+        },
+        "hearingHistory": {
+          "noiseExposure": "",
+          "occupationalNoise": "",
+          "occupationalNoiseDetails": "",
+          "recreationalNoise": "",
+          "recreationalNoiseDetails": "",
+          "previousHearingTests": "",
+          "previousTestDetails": "",
+          "hearingAidUse": "",
+          "hearingAidDetails": ""
+        },
+        "audiometricResults": {
+          "pureToneAverageRight": 72,
+          "pureToneAverageLeft": 78,
+          "airConductionRight": "",
+          "airConductionLeft": "",
+          "boneConductionRight": "",
+          "boneConductionLeft": "",
+          "airBoneGapRight": null,
+          "airBoneGapLeft": null,
+          "speechRecognitionThresholdRight": null,
+          "speechRecognitionThresholdLeft": null,
+          "wordRecognitionScoreRight": null,
+          "wordRecognitionScoreLeft": null,
+          "hearingLossType": "sensorineural"
+        },
+        "tinnitusAssessment": {
+          "presence": "",
+          "affectedEar": "",
+          "character": "",
+          "severity": "",
+          "duration": "",
+          "impactOnDailyLife": "",
+          "tinnitusHandicapInventoryScore": null
+        },
+        "vestibularSymptoms": {
+          "vertigo": "",
+          "vertigoDetails": "",
+          "dizziness": "",
+          "balanceProblems": "",
+          "dixHallpike": "",
+          "nystagmus": "",
+          "fallsHistory": "",
+          "fallsFrequency": ""
+        },
+        "otoscopicFindings": {
+          "earCanalRight": "",
+          "earCanalLeft": "",
+          "tympanicMembraneRight": "",
+          "tympanicMembraneLeft": "",
+          "middleEarRight": "",
+          "middleEarLeft": "",
+          "earWaxRight": "",
+          "earWaxLeft": "",
+          "dischargeRight": "",
+          "dischargeLeft": "",
+          "previousSurgery": "",
+          "previousSurgeryDetails": ""
+        },
+        "medicalHistory": {
+          "ototoxicMedications": "",
+          "ototoxicMedicationDetails": "",
+          "autoimmune": "",
+          "autoimmuneDetails": "",
+          "menieres": "",
+          "otosclerosis": "",
+          "acousticNeuroma": "",
+          "infections": "",
+          "infectionDetails": ""
+        },
+        "functionalCommunication": {
+          "communicationDifficulties": "",
+          "communicationDetails": "",
+          "hearingAidCandidacy": "",
+          "assistiveDeviceNeeds": "",
+          "assistiveDeviceDetails": "",
+          "workImpact": "",
+          "socialImpact": "",
+          "hhieScore": null
+        }
+      },
+      "expected": {
+        "hearingGrade": "severe",
+        "firedRules": [
+          {
+            "id": "PTA-R-003",
+            "system": "Audiometric",
+            "description": "Right ear severe hearing loss (PTA 61-80 dB HL)",
+            "grade": "severe"
+          },
+          {
+            "id": "PTA-L-003",
+            "system": "Audiometric",
+            "description": "Left ear severe hearing loss (PTA 61-80 dB HL)",
+            "grade": "severe"
+          }
+        ],
+        "ptaGrade": "severe",
+        "rightGrade": "severe",
+        "leftGrade": "severe"
+      }
+    }
+  ]
+}

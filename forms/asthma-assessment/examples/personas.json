@@ -1,0 +1,406 @@
+{
+  "engine": "front-end-with-html",
+  "graderHint": "calculateACT",
+  "note": "Realistic filled-in states in the asthma engine's shape. Graded by calculateACT (Asthma Control Test; sum of five 1-5 items, 5-25 — deterministic). `expected` is computed by `bin/test-personas --update` and verified by `bin/test-personas`.",
+  "personas": [
+    {
+      "name": "well-controlled",
+      "description": "No daytime or night-time symptoms, no rescue-inhaler use, no activity limitation: ACT 25, well controlled.",
+      "state": {
+        "demographics": {
+          "firstName": "",
+          "lastName": "",
+          "dateOfBirth": "",
+          "sex": "female",
+          "weight": 70,
+          "height": 168,
+          "bmi": null
+        },
+        "symptomFrequency": {
+          "daytimeSymptoms": "not-at-all",
+          "nighttimeAwakening": "not-at-all",
+          "rescueInhalerUse": "not-at-all",
+          "activityLimitation": "not-at-all",
+          "selfRatedControl": "completely-controlled"
+        },
+        "lungFunction": {
+          "fev1Percent": null,
+          "fev1Fvc": null,
+          "peakFlowBest": null,
+          "peakFlowCurrent": null,
+          "peakFlowPercent": null,
+          "spirometryDate": "",
+          "spirometryNotes": ""
+        },
+        "triggers": {
+          "allergens": "",
+          "allergenDetails": "",
+          "exercise": "",
+          "weather": "",
+          "weatherDetails": "",
+          "occupational": "",
+          "occupationalDetails": "",
+          "infections": "",
+          "smoke": "",
+          "stress": "",
+          "medications": "",
+          "medicationDetails": "",
+          "otherTriggers": ""
+        },
+        "currentMedications": {
+          "controllerMedications": [],
+          "rescueInhalers": [],
+          "biologics": [],
+          "oralSteroids": "",
+          "oralSteroidDetails": "",
+          "inhalerTechniqueReviewed": "",
+          "medicationAdherence": ""
+        },
+        "allergies": {
+          "drugAllergies": [],
+          "environmentalAllergies": [],
+          "allergyTestingDone": "",
+          "allergyTestResults": ""
+        },
+        "exacerbationHistory": {
+          "exacerbationsLastYear": 0,
+          "edVisitsLastYear": null,
+          "hospitalisationsLastYear": null,
+          "icuAdmissions": "",
+          "icuAdmissionCount": null,
+          "intubationHistory": "",
+          "oralSteroidCoursesLastYear": null,
+          "lastExacerbationDate": ""
+        },
+        "comorbidities": {
+          "allergicRhinitis": "",
+          "sinusitis": "",
+          "nasalPolyps": "",
+          "gord": "",
+          "obesity": "",
+          "anxiety": "",
+          "depression": "",
+          "eczema": "",
+          "sleepApnoea": "",
+          "vocalCordDysfunction": "",
+          "otherComorbidities": ""
+        },
+        "socialHistory": {
+          "smoking": "",
+          "smokingPackYears": null,
+          "vaping": "",
+          "occupationalExposures": "",
+          "occupationalExposureDetails": "",
+          "homeEnvironment": "",
+          "pets": "",
+          "petDetails": "",
+          "carpetInBedroom": "",
+          "moldExposure": ""
+        }
+      },
+      "expected": {
+        "actScore": 25,
+        "controlLevel": "well-controlled",
+        "answeredCount": 5,
+        "firedRules": [
+          {
+            "id": "ACT-001",
+            "category": "Activity Limitation",
+            "description": "How much of the time did your asthma keep you from getting as much done at work, school, or at home?",
+            "score": 5
+          },
+          {
+            "id": "ACT-002",
+            "category": "Daytime Symptoms",
+            "description": "How often have you had shortness of breath?",
+            "score": 5
+          },
+          {
+            "id": "ACT-003",
+            "category": "Nighttime Awakening",
+            "description": "How often did your asthma symptoms wake you up at night or earlier than usual in the morning?",
+            "score": 5
+          },
+          {
+            "id": "ACT-004",
+            "category": "Rescue Inhaler Use",
+            "description": "How often have you used your rescue inhaler or nebuliser medication?",
+            "score": 5
+          },
+          {
+            "id": "ACT-005",
+            "category": "Self-Rated Control",
+            "description": "How would you rate your asthma control during the past 4 weeks?",
+            "score": 5
+          }
+        ]
+      }
+    },
+    {
+      "name": "not-well-controlled",
+      "description": "Weekly night waking, several days of symptoms and rescue use: ACT 17, not well controlled.",
+      "state": {
+        "demographics": {
+          "firstName": "",
+          "lastName": "",
+          "dateOfBirth": "",
+          "sex": "male",
+          "weight": 82,
+          "height": 178,
+          "bmi": null
+        },
+        "symptomFrequency": {
+          "daytimeSymptoms": "once-or-twice",
+          "nighttimeAwakening": "once-a-week",
+          "rescueInhalerUse": "three-to-six",
+          "activityLimitation": "a-little",
+          "selfRatedControl": "somewhat-controlled"
+        },
+        "lungFunction": {
+          "fev1Percent": null,
+          "fev1Fvc": null,
+          "peakFlowBest": null,
+          "peakFlowCurrent": null,
+          "peakFlowPercent": null,
+          "spirometryDate": "",
+          "spirometryNotes": ""
+        },
+        "triggers": {
+          "allergens": "",
+          "allergenDetails": "",
+          "exercise": "",
+          "weather": "",
+          "weatherDetails": "",
+          "occupational": "",
+          "occupationalDetails": "",
+          "infections": "",
+          "smoke": "",
+          "stress": "",
+          "medications": "",
+          "medicationDetails": "",
+          "otherTriggers": ""
+        },
+        "currentMedications": {
+          "controllerMedications": [],
+          "rescueInhalers": [],
+          "biologics": [],
+          "oralSteroids": "",
+          "oralSteroidDetails": "",
+          "inhalerTechniqueReviewed": "",
+          "medicationAdherence": ""
+        },
+        "allergies": {
+          "drugAllergies": [],
+          "environmentalAllergies": [],
+          "allergyTestingDone": "",
+          "allergyTestResults": ""
+        },
+        "exacerbationHistory": {
+          "exacerbationsLastYear": 1,
+          "edVisitsLastYear": null,
+          "hospitalisationsLastYear": null,
+          "icuAdmissions": "",
+          "icuAdmissionCount": null,
+          "intubationHistory": "",
+          "oralSteroidCoursesLastYear": null,
+          "lastExacerbationDate": ""
+        },
+        "comorbidities": {
+          "allergicRhinitis": "",
+          "sinusitis": "",
+          "nasalPolyps": "",
+          "gord": "",
+          "obesity": "",
+          "anxiety": "",
+          "depression": "",
+          "eczema": "",
+          "sleepApnoea": "",
+          "vocalCordDysfunction": "",
+          "otherComorbidities": ""
+        },
+        "socialHistory": {
+          "smoking": "",
+          "smokingPackYears": null,
+          "vaping": "",
+          "occupationalExposures": "",
+          "occupationalExposureDetails": "",
+          "homeEnvironment": "",
+          "pets": "",
+          "petDetails": "",
+          "carpetInBedroom": "",
+          "moldExposure": ""
+        }
+      },
+      "expected": {
+        "actScore": 17,
+        "controlLevel": "not-well-controlled",
+        "answeredCount": 5,
+        "firedRules": [
+          {
+            "id": "ACT-001",
+            "category": "Activity Limitation",
+            "description": "How much of the time did your asthma keep you from getting as much done at work, school, or at home?",
+            "score": 4
+          },
+          {
+            "id": "ACT-002",
+            "category": "Daytime Symptoms",
+            "description": "How often have you had shortness of breath?",
+            "score": 4
+          },
+          {
+            "id": "ACT-003",
+            "category": "Nighttime Awakening",
+            "description": "How often did your asthma symptoms wake you up at night or earlier than usual in the morning?",
+            "score": 3
+          },
+          {
+            "id": "ACT-004",
+            "category": "Rescue Inhaler Use",
+            "description": "How often have you used your rescue inhaler or nebuliser medication?",
+            "score": 3
+          },
+          {
+            "id": "ACT-005",
+            "category": "Self-Rated Control",
+            "description": "How would you rate your asthma control during the past 4 weeks?",
+            "score": 3
+          }
+        ]
+      }
+    },
+    {
+      "name": "very-poorly-controlled",
+      "description": "Daily symptoms, frequent night waking and daily rescue use with four exacerbations: ACT 10, very poorly controlled.",
+      "state": {
+        "demographics": {
+          "firstName": "",
+          "lastName": "",
+          "dateOfBirth": "",
+          "sex": "female",
+          "weight": 95,
+          "height": 162,
+          "bmi": null
+        },
+        "symptomFrequency": {
+          "daytimeSymptoms": "once-a-day",
+          "nighttimeAwakening": "two-to-three-nights",
+          "rescueInhalerUse": "once-a-day",
+          "activityLimitation": "a-lot",
+          "selfRatedControl": "poorly-controlled"
+        },
+        "lungFunction": {
+          "fev1Percent": null,
+          "fev1Fvc": null,
+          "peakFlowBest": null,
+          "peakFlowCurrent": null,
+          "peakFlowPercent": null,
+          "spirometryDate": "",
+          "spirometryNotes": ""
+        },
+        "triggers": {
+          "allergens": "",
+          "allergenDetails": "",
+          "exercise": "",
+          "weather": "",
+          "weatherDetails": "",
+          "occupational": "",
+          "occupationalDetails": "",
+          "infections": "",
+          "smoke": "",
+          "stress": "",
+          "medications": "",
+          "medicationDetails": "",
+          "otherTriggers": ""
+        },
+        "currentMedications": {
+          "controllerMedications": [],
+          "rescueInhalers": [],
+          "biologics": [],
+          "oralSteroids": "",
+          "oralSteroidDetails": "",
+          "inhalerTechniqueReviewed": "",
+          "medicationAdherence": ""
+        },
+        "allergies": {
+          "drugAllergies": [],
+          "environmentalAllergies": [],
+          "allergyTestingDone": "",
+          "allergyTestResults": ""
+        },
+        "exacerbationHistory": {
+          "exacerbationsLastYear": 4,
+          "edVisitsLastYear": null,
+          "hospitalisationsLastYear": null,
+          "icuAdmissions": "",
+          "icuAdmissionCount": null,
+          "intubationHistory": "",
+          "oralSteroidCoursesLastYear": 3,
+          "lastExacerbationDate": ""
+        },
+        "comorbidities": {
+          "allergicRhinitis": "",
+          "sinusitis": "",
+          "nasalPolyps": "",
+          "gord": "",
+          "obesity": "",
+          "anxiety": "",
+          "depression": "",
+          "eczema": "",
+          "sleepApnoea": "",
+          "vocalCordDysfunction": "",
+          "otherComorbidities": ""
+        },
+        "socialHistory": {
+          "smoking": "",
+          "smokingPackYears": null,
+          "vaping": "",
+          "occupationalExposures": "",
+          "occupationalExposureDetails": "",
+          "homeEnvironment": "",
+          "pets": "",
+          "petDetails": "",
+          "carpetInBedroom": "",
+          "moldExposure": ""
+        }
+      },
+      "expected": {
+        "actScore": 10,
+        "controlLevel": "very-poorly-controlled",
+        "answeredCount": 5,
+        "firedRules": [
+          {
+            "id": "ACT-001",
+            "category": "Activity Limitation",
+            "description": "How much of the time did your asthma keep you from getting as much done at work, school, or at home?",
+            "score": 2
+          },
+          {
+            "id": "ACT-002",
+            "category": "Daytime Symptoms",
+            "description": "How often have you had shortness of breath?",
+            "score": 2
+          },
+          {
+            "id": "ACT-003",
+            "category": "Nighttime Awakening",
+            "description": "How often did your asthma symptoms wake you up at night or earlier than usual in the morning?",
+            "score": 2
+          },
+          {
+            "id": "ACT-004",
+            "category": "Rescue Inhaler Use",
+            "description": "How often have you used your rescue inhaler or nebuliser medication?",
+            "score": 2
+          },
+          {
+            "id": "ACT-005",
+            "category": "Self-Rated Control",
+            "description": "How would you rate your asthma control during the past 4 weeks?",
+            "score": 2
+          }
+        ]
+      }
+    }
+  ]
+}

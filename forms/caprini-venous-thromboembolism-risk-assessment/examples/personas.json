@@ -1,0 +1,399 @@
+{
+  "engine": "front-end-with-html",
+  "graderHint": "calculateCapriniGrade",
+  "note": "Realistic filled-in states in the Caprini VTE scoring engine's shape. `expected` is computed by `bin/test-personas --update` and verified by `bin/test-personas`.",
+  "personas": [
+    {
+      "name": "low-mechanical",
+      "description": "52-year-old having minor day-case surgery, no other risk factors: Caprini 2 (age 41-60 + minor surgery) — low risk, mechanical prophylaxis.",
+      "state": {
+        "context": {
+          "clinicianName": "",
+          "clinicianRole": "nurse",
+          "assessedAt": "",
+          "careSetting": "surgical-ward",
+          "admissionType": "surgical"
+        },
+        "identification": {
+          "patientIdentifier": "",
+          "ageBand": "41-60",
+          "sex": "female"
+        },
+        "onePoint": {
+          "minorSurgery": "yes",
+          "recentMajorSurgery": "no",
+          "varicoseVeins": "no",
+          "inflammatoryBowelDisease": "no",
+          "swollenLegs": "no",
+          "obesity": "no",
+          "acuteMyocardialInfarction": "no",
+          "congestiveHeartFailure": "no",
+          "sepsis": "no",
+          "seriousLungDisease": "no",
+          "abnormalPulmonaryFunction": "no",
+          "medicalPatientBedRest": "no",
+          "oralContraceptiveOrHrt": "no",
+          "pregnancyOrPostpartum": "no",
+          "adversePregnancyHistory": "no"
+        },
+        "twoPoint": {
+          "arthroscopicSurgery": "no",
+          "majorOpenSurgery": "no",
+          "laparoscopicSurgery": "no",
+          "malignancy": "no",
+          "confinedToBed": "no",
+          "immobilisingCast": "no",
+          "centralVenousAccess": "no"
+        },
+        "threePoint": {
+          "historyOfVte": "no",
+          "familyHistoryOfThrombosis": "no",
+          "factorVLeiden": "no",
+          "prothrombin20210a": "no",
+          "lupusAnticoagulant": "no",
+          "anticardiolipinAntibodies": "no",
+          "elevatedHomocysteine": "no",
+          "heparinInducedThrombocytopenia": "no",
+          "otherThrombophilia": "no"
+        },
+        "fivePoint": {
+          "stroke": "no",
+          "electiveArthroplasty": "no",
+          "hipPelvisLegFracture": "no",
+          "acuteSpinalCordInjury": "no",
+          "multipleTrauma": "no"
+        },
+        "bleeding": {
+          "highBleedingRisk": "no"
+        },
+        "note": {
+          "clinicalNote": ""
+        }
+      },
+      "expected": {
+        "ageBandPoints": 1,
+        "groupSubtotals": {
+          "1-point": 1,
+          "2-point": 0,
+          "3-point": 0,
+          "5-point": 0
+        },
+        "capriniScore": 2,
+        "riskBand": "low",
+        "baseProphylaxis": "mechanical",
+        "recommendedProphylaxis": "mechanical",
+        "bleedingDowngraded": false,
+        "firedFactors": [
+          {
+            "id": "R-AGE-BAND-01",
+            "factor": "age_band",
+            "weightGroup": "age",
+            "points": 1,
+            "category": "age-band",
+            "description": "Age band 41-60 contributes 1 point"
+          },
+          {
+            "id": "R-MINOR-SURGERY-1POINT-01",
+            "factor": "minor_surgery",
+            "weightGroup": "1-point",
+            "points": 1,
+            "category": "surgical",
+            "description": "Minor surgery planned (< 45 minutes)"
+          }
+        ],
+        "factorPoints": [
+          {
+            "id": "R-AGE-BAND-01",
+            "factor": "age_band",
+            "weightGroup": "age",
+            "points": 1,
+            "category": "age-band",
+            "description": "Age band 41-60 contributes 1 point"
+          },
+          {
+            "id": "R-MINOR-SURGERY-1POINT-01",
+            "factor": "minor_surgery",
+            "weightGroup": "1-point",
+            "points": 1,
+            "category": "surgical",
+            "description": "Minor surgery planned (< 45 minutes)"
+          }
+        ],
+        "flaggedIssues": [],
+        "timestamp": ""
+      }
+    },
+    {
+      "name": "moderate-pharmacological-or-mechanical",
+      "description": "55-year-old with active malignancy undergoing surgery: Caprini 3 (age 41-60 + malignancy) — moderate risk, pharmacological or mechanical prophylaxis.",
+      "state": {
+        "context": {
+          "clinicianName": "",
+          "clinicianRole": "surgeon",
+          "assessedAt": "",
+          "careSetting": "surgical-ward",
+          "admissionType": "surgical"
+        },
+        "identification": {
+          "patientIdentifier": "",
+          "ageBand": "41-60",
+          "sex": "male"
+        },
+        "onePoint": {
+          "minorSurgery": "no",
+          "recentMajorSurgery": "no",
+          "varicoseVeins": "no",
+          "inflammatoryBowelDisease": "no",
+          "swollenLegs": "no",
+          "obesity": "no",
+          "acuteMyocardialInfarction": "no",
+          "congestiveHeartFailure": "no",
+          "sepsis": "no",
+          "seriousLungDisease": "no",
+          "abnormalPulmonaryFunction": "no",
+          "medicalPatientBedRest": "no",
+          "oralContraceptiveOrHrt": "no",
+          "pregnancyOrPostpartum": "no",
+          "adversePregnancyHistory": "no"
+        },
+        "twoPoint": {
+          "arthroscopicSurgery": "no",
+          "majorOpenSurgery": "no",
+          "laparoscopicSurgery": "no",
+          "malignancy": "yes",
+          "confinedToBed": "no",
+          "immobilisingCast": "no",
+          "centralVenousAccess": "no"
+        },
+        "threePoint": {
+          "historyOfVte": "no",
+          "familyHistoryOfThrombosis": "no",
+          "factorVLeiden": "no",
+          "prothrombin20210a": "no",
+          "lupusAnticoagulant": "no",
+          "anticardiolipinAntibodies": "no",
+          "elevatedHomocysteine": "no",
+          "heparinInducedThrombocytopenia": "no",
+          "otherThrombophilia": "no"
+        },
+        "fivePoint": {
+          "stroke": "no",
+          "electiveArthroplasty": "no",
+          "hipPelvisLegFracture": "no",
+          "acuteSpinalCordInjury": "no",
+          "multipleTrauma": "no"
+        },
+        "bleeding": {
+          "highBleedingRisk": "no"
+        },
+        "note": {
+          "clinicalNote": ""
+        }
+      },
+      "expected": {
+        "ageBandPoints": 1,
+        "groupSubtotals": {
+          "1-point": 0,
+          "2-point": 2,
+          "3-point": 0,
+          "5-point": 0
+        },
+        "capriniScore": 3,
+        "riskBand": "moderate",
+        "baseProphylaxis": "pharmacological-or-mechanical",
+        "recommendedProphylaxis": "pharmacological-or-mechanical",
+        "bleedingDowngraded": false,
+        "firedFactors": [
+          {
+            "id": "R-AGE-BAND-01",
+            "factor": "age_band",
+            "weightGroup": "age",
+            "points": 1,
+            "category": "age-band",
+            "description": "Age band 41-60 contributes 1 point"
+          },
+          {
+            "id": "R-MALIGNANCY-2POINT-01",
+            "factor": "malignancy",
+            "weightGroup": "2-point",
+            "points": 2,
+            "category": "oncology",
+            "description": "Malignancy (present or previous)"
+          }
+        ],
+        "factorPoints": [
+          {
+            "id": "R-AGE-BAND-01",
+            "factor": "age_band",
+            "weightGroup": "age",
+            "points": 1,
+            "category": "age-band",
+            "description": "Age band 41-60 contributes 1 point"
+          },
+          {
+            "id": "R-MALIGNANCY-2POINT-01",
+            "factor": "malignancy",
+            "weightGroup": "2-point",
+            "points": 2,
+            "category": "oncology",
+            "description": "Malignancy (present or previous)"
+          }
+        ],
+        "flaggedIssues": [],
+        "timestamp": ""
+      }
+    },
+    {
+      "name": "high-pharmacological-plus-mechanical",
+      "description": "80-year-old with a hip fracture, active malignancy, and prior VTE: Caprini 13 (age 75+ 3 + hip/pelvis/leg fracture 5 + prior VTE 3 + malignancy 2) — high risk, pharmacological plus mechanical prophylaxis.",
+      "state": {
+        "context": {
+          "clinicianName": "",
+          "clinicianRole": "doctor",
+          "assessedAt": "",
+          "careSetting": "surgical-ward",
+          "admissionType": "surgical"
+        },
+        "identification": {
+          "patientIdentifier": "",
+          "ageBand": "75-plus",
+          "sex": "female"
+        },
+        "onePoint": {
+          "minorSurgery": "no",
+          "recentMajorSurgery": "no",
+          "varicoseVeins": "no",
+          "inflammatoryBowelDisease": "no",
+          "swollenLegs": "no",
+          "obesity": "no",
+          "acuteMyocardialInfarction": "no",
+          "congestiveHeartFailure": "no",
+          "sepsis": "no",
+          "seriousLungDisease": "no",
+          "abnormalPulmonaryFunction": "no",
+          "medicalPatientBedRest": "no",
+          "oralContraceptiveOrHrt": "no",
+          "pregnancyOrPostpartum": "no",
+          "adversePregnancyHistory": "no"
+        },
+        "twoPoint": {
+          "arthroscopicSurgery": "no",
+          "majorOpenSurgery": "no",
+          "laparoscopicSurgery": "no",
+          "malignancy": "yes",
+          "confinedToBed": "no",
+          "immobilisingCast": "no",
+          "centralVenousAccess": "no"
+        },
+        "threePoint": {
+          "historyOfVte": "yes",
+          "familyHistoryOfThrombosis": "no",
+          "factorVLeiden": "no",
+          "prothrombin20210a": "no",
+          "lupusAnticoagulant": "no",
+          "anticardiolipinAntibodies": "no",
+          "elevatedHomocysteine": "no",
+          "heparinInducedThrombocytopenia": "no",
+          "otherThrombophilia": "no"
+        },
+        "fivePoint": {
+          "stroke": "no",
+          "electiveArthroplasty": "no",
+          "hipPelvisLegFracture": "yes",
+          "acuteSpinalCordInjury": "no",
+          "multipleTrauma": "no"
+        },
+        "bleeding": {
+          "highBleedingRisk": "no"
+        },
+        "note": {
+          "clinicalNote": ""
+        }
+      },
+      "expected": {
+        "ageBandPoints": 3,
+        "groupSubtotals": {
+          "1-point": 0,
+          "2-point": 2,
+          "3-point": 3,
+          "5-point": 5
+        },
+        "capriniScore": 13,
+        "riskBand": "high",
+        "baseProphylaxis": "pharmacological-plus-mechanical",
+        "recommendedProphylaxis": "pharmacological-plus-mechanical",
+        "bleedingDowngraded": false,
+        "firedFactors": [
+          {
+            "id": "R-AGE-BAND-01",
+            "factor": "age_band",
+            "weightGroup": "age",
+            "points": 3,
+            "category": "age-band",
+            "description": "Age band 75-plus contributes 3 points"
+          },
+          {
+            "id": "R-MALIGNANCY-2POINT-01",
+            "factor": "malignancy",
+            "weightGroup": "2-point",
+            "points": 2,
+            "category": "oncology",
+            "description": "Malignancy (present or previous)"
+          },
+          {
+            "id": "R-HISTORY-OF-VTE-3POINT-01",
+            "factor": "history_of_vte",
+            "weightGroup": "3-point",
+            "points": 3,
+            "category": "thrombotic-history",
+            "description": "Personal history of venous thromboembolism (DVT or PE)"
+          },
+          {
+            "id": "R-HIP-PELVIS-LEG-FRACTURE-5POINT-01",
+            "factor": "hip_pelvis_leg_fracture",
+            "weightGroup": "5-point",
+            "points": 5,
+            "category": "trauma",
+            "description": "Hip, pelvis, or leg fracture"
+          }
+        ],
+        "factorPoints": [
+          {
+            "id": "R-AGE-BAND-01",
+            "factor": "age_band",
+            "weightGroup": "age",
+            "points": 3,
+            "category": "age-band",
+            "description": "Age band 75-plus contributes 3 points"
+          },
+          {
+            "id": "R-MALIGNANCY-2POINT-01",
+            "factor": "malignancy",
+            "weightGroup": "2-point",
+            "points": 2,
+            "category": "oncology",
+            "description": "Malignancy (present or previous)"
+          },
+          {
+            "id": "R-HISTORY-OF-VTE-3POINT-01",
+            "factor": "history_of_vte",
+            "weightGroup": "3-point",
+            "points": 3,
+            "category": "thrombotic-history",
+            "description": "Personal history of venous thromboembolism (DVT or PE)"
+          },
+          {
+            "id": "R-HIP-PELVIS-LEG-FRACTURE-5POINT-01",
+            "factor": "hip_pelvis_leg_fracture",
+            "weightGroup": "5-point",
+            "points": 5,
+            "category": "trauma",
+            "description": "Hip, pelvis, or leg fracture"
+          }
+        ],
+        "flaggedIssues": [],
+        "timestamp": ""
+      }
+    }
+  ]
+}

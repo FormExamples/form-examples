@@ -242,14 +242,26 @@ personas. Once the oracle exists, persona scaffolding + fill is mechanical
       engine loader at `bin/lib/engine-loader.js`. Template authored +
       verified for `apgar-score` (3 personas: reassuring 8/10, moderately-low
       4/9, low 2/3). Wired into `bin/test-tools` + CI.
-- [x] Reference batch authored + verified (9 forms total): apgar-score,
-      cardiology-assessment, mental-health-assessment (PHQ-9), CURB-65,
-      CHA₂DS₂-VASc, Wells DVT, glasgow-coma-scale, NEWS2, PSQI —
-      `bin/test-personas` PASS 9 / FAIL 0, deterministic.
-- [ ] Scaffold personas for the remaining ~211 scorable forms in batches
-      (subagents on the proven rail; the form's `spec/index.md` scoring rules
-      define low/typical/flagged). Note: 63 forms are `test-engines` SKIPs
-      (ESM/inline/nonstandard engines) — those need a bespoke driver first.
+- [x] **44 forms** now have verified, deterministic, clinically-coherent
+      personas (`bin/test-personas` PASS 44 / FAIL 0, twice-identical,
+      `--update` yields zero diff). Reference batch (9) + 4 parallel batches
+      (35): AAA, allergy, anaesthesiology, asthma, ADHD, audio-vestibular,
+      audiology, blood-donation, bone-marrow, FIT, breast, CAGE, Caprini,
+      Centor, cervical, Child-Pugh, COPD, C-SSRS, CAM, contraception, dental,
+      derm, diabetic-eye, EPDS, EMT, endocrine, epilepsy, ergonomic (REBA),
+      fall-risk (Morse), fertility, Framingham, gastro, Glasgow-Blatchford,
+      GRACE, HAS-BLED — plus the reference 9.
+- [ ] **Finding:** ~6 forms were skipped because their only whole-state
+      grader stamps a live `new Date()` timestamp (dyslexia-, endometriosis-,
+      first-responder-assessment; bhutani-bilirubin-nomogram;
+      birth-control-assessment) with no deterministic band-producing entry to
+      pin. Their `expected` cannot be reproduced. Worth a follow-up: refactor
+      those graders to take an injected clock / split the timestamp out, so
+      they become testable.
+- [ ] Continue persona batches for the remaining ~170 scorable forms
+      (subagents on the proven rail; `spec/index.md` defines the bands).
+      63 forms are `test-engines` SKIPs (ESM/inline/nonstandard) — those need
+      a bespoke driver first.
 - [ ] `example-invalid.json` per form + expected validation errors list;
       assert in the E2E harness (wizard blocks submission).
 - [ ] CSV and TSV export samples per form matching the typical persona

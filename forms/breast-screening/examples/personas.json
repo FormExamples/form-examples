@@ -1,0 +1,197 @@
+{
+  "engine": "front-end-with-html",
+  "graderHint": "calculateGrade",
+  "note": "Realistic filled-in states in the breast-screening classification engine's shape. `expected` is computed by `bin/test-personas --update` and verified by `bin/test-personas`.",
+  "personas": [
+    {
+      "name": "normal-routine-recall",
+      "description": "Eligible 58-year-old, adequate standard four-view mammogram read as normal: outcome routine 3-yearly recall (routine band).",
+      "state": {
+        "context": {
+          "clinicianName": "",
+          "clinicianRole": "breast-radiologist",
+          "reportedAt": "",
+          "screeningUnit": "City static unit",
+          "episodeType": "routine-recall"
+        },
+        "identification": {
+          "patientIdentifier": "",
+          "ageYears": 58,
+          "lastScreenedDate": "",
+          "higherRiskSurveillance": "no"
+        },
+        "eligibility": {
+          "symptomatic": "no",
+          "consentGiven": "yes"
+        },
+        "mammogram": {
+          "viewsTaken": "standard-four-view",
+          "imageAdequacy": "adequate"
+        },
+        "reading": {
+          "firstReadOpinion": "normal",
+          "secondReadOpinion": "normal",
+          "arbitrationOutcome": "not-required",
+          "readingOutcome": "normal-routine-recall"
+        },
+        "assessment": {
+          "assessmentPerformed": "no",
+          "assessmentModalities": [],
+          "imagingClassification": null
+        },
+        "note": {
+          "clinicalContext": ""
+        }
+      },
+      "expected": {
+        "eligibilityStatus": "eligible",
+        "readingOutcome": "normal-routine-recall",
+        "imagingClassification": null,
+        "screeningOutcome": "routine-recall",
+        "outcomeBand": "routine",
+        "status": "complete",
+        "firedRules": [
+          {
+            "id": "R-ELIGIBILITY-01",
+            "category": "eligibility",
+            "description": "Eligibility status derived as \"eligible\""
+          },
+          {
+            "id": "R-NORMAL-ROUTINE-01",
+            "category": "reading-outcome",
+            "description": "Reading outcome is normal — return to routine 3-yearly recall"
+          }
+        ]
+      }
+    },
+    {
+      "name": "recall-indeterminate-followup",
+      "description": "Recalled for assessment, imaged and classified 3 (indeterminate): outcome short-interval follow-up (assessment band).",
+      "state": {
+        "context": {
+          "clinicianName": "",
+          "clinicianRole": "breast-radiologist",
+          "reportedAt": "",
+          "screeningUnit": "Riverside static unit",
+          "episodeType": "routine-recall"
+        },
+        "identification": {
+          "patientIdentifier": "",
+          "ageYears": 63,
+          "lastScreenedDate": "",
+          "higherRiskSurveillance": "no"
+        },
+        "eligibility": {
+          "symptomatic": "no",
+          "consentGiven": "yes"
+        },
+        "mammogram": {
+          "viewsTaken": "additional-views",
+          "imageAdequacy": "adequate"
+        },
+        "reading": {
+          "firstReadOpinion": "recall",
+          "secondReadOpinion": "recall",
+          "arbitrationOutcome": "not-required",
+          "readingOutcome": "recall-for-assessment"
+        },
+        "assessment": {
+          "assessmentPerformed": "yes",
+          "assessmentModalities": [
+            "mammography",
+            "ultrasound"
+          ],
+          "imagingClassification": 3
+        },
+        "note": {
+          "clinicalContext": ""
+        }
+      },
+      "expected": {
+        "eligibilityStatus": "eligible",
+        "readingOutcome": "recall-for-assessment",
+        "imagingClassification": 3,
+        "screeningOutcome": "short-interval-follow-up",
+        "outcomeBand": "assessment",
+        "status": "complete",
+        "firedRules": [
+          {
+            "id": "R-ELIGIBILITY-01",
+            "category": "eligibility",
+            "description": "Eligibility status derived as \"eligible\""
+          },
+          {
+            "id": "R-ASSESS-CLASS-3-01",
+            "category": "assessment-result",
+            "description": "Assessment imaging classification 3 (indeterminate) — short-interval follow-up or biopsy"
+          }
+        ]
+      }
+    },
+    {
+      "name": "recall-malignant-urgent",
+      "description": "Recalled, assessed and classified 5 (malignant): outcome urgent breast-clinic referral (urgent band).",
+      "state": {
+        "context": {
+          "clinicianName": "",
+          "clinicianRole": "breast-radiologist",
+          "reportedAt": "",
+          "screeningUnit": "City static unit",
+          "episodeType": "routine-recall"
+        },
+        "identification": {
+          "patientIdentifier": "",
+          "ageYears": 67,
+          "lastScreenedDate": "",
+          "higherRiskSurveillance": "no"
+        },
+        "eligibility": {
+          "symptomatic": "no",
+          "consentGiven": "yes"
+        },
+        "mammogram": {
+          "viewsTaken": "additional-views",
+          "imageAdequacy": "adequate"
+        },
+        "reading": {
+          "firstReadOpinion": "recall",
+          "secondReadOpinion": "recall",
+          "arbitrationOutcome": "not-required",
+          "readingOutcome": "recall-for-assessment"
+        },
+        "assessment": {
+          "assessmentPerformed": "yes",
+          "assessmentModalities": [
+            "mammography",
+            "ultrasound",
+            "biopsy"
+          ],
+          "imagingClassification": 5
+        },
+        "note": {
+          "clinicalContext": ""
+        }
+      },
+      "expected": {
+        "eligibilityStatus": "eligible",
+        "readingOutcome": "recall-for-assessment",
+        "imagingClassification": 5,
+        "screeningOutcome": "urgent-breast-clinic",
+        "outcomeBand": "urgent",
+        "status": "complete",
+        "firedRules": [
+          {
+            "id": "R-ELIGIBILITY-01",
+            "category": "eligibility",
+            "description": "Eligibility status derived as \"eligible\""
+          },
+          {
+            "id": "R-ASSESS-CLASS-4-5-01",
+            "category": "assessment-result",
+            "description": "Assessment imaging classification 4–5 (suspicious/malignant) — urgent breast-clinic referral"
+          }
+        ]
+      }
+    }
+  ]
+}

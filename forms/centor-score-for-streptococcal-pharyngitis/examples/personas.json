@@ -1,0 +1,247 @@
+{
+  "engine": "front-end-with-html",
+  "graderHint": "calculateCentorGrade",
+  "note": "Realistic filled-in states in the Centor / McIsaac scoring engine's shape. `expected` is computed by `bin/test-personas --update` and verified by `bin/test-personas`.",
+  "personas": [
+    {
+      "name": "low-viral",
+      "description": "50-year-old with a cough and no fever, exudate, or tender nodes: Centor 0, McIsaac -1 (age >= 45) — low probability of strep, avoid antibiotics.",
+      "state": {
+        "context": {
+          "clinicianName": "",
+          "clinicianRole": "gp",
+          "assessedAt": "",
+          "careSetting": "general-practice"
+        },
+        "identification": {
+          "patientIdentifier": "",
+          "ageYears": 50,
+          "sex": "female"
+        },
+        "exudate": {
+          "tonsillarExudate": "no"
+        },
+        "nodes": {
+          "tenderAnteriorCervicalNodes": "no"
+        },
+        "fever": {
+          "feverOver38": "no",
+          "measuredTemperatureCelsius": 37.2
+        },
+        "cough": {
+          "absenceOfCough": "no"
+        },
+        "redFlags": {
+          "stridorOrBreathingDifficulty": "no",
+          "droolingOrCannotSwallow": "no",
+          "trismus": "no",
+          "muffledVoice": "no",
+          "unilateralNeckSwelling": "no"
+        },
+        "note": {
+          "clinicalNote": ""
+        }
+      },
+      "expected": {
+        "tonsillarExudatePoint": 0,
+        "tenderNodesPoint": 0,
+        "feverPoint": 0,
+        "coughAbsentPoint": 0,
+        "centorScore": 0,
+        "ageModifier": -1,
+        "mcIsaacScore": -1,
+        "riskBand": "low",
+        "firedCriteria": [
+          {
+            "id": "R-AGE-MODIFIER-01",
+            "criterion": "age-modifier",
+            "points": -1,
+            "category": "mcisaac-modifier",
+            "description": "Age 45 or over — McIsaac age modifier −1"
+          },
+          {
+            "id": "R-BAND-01",
+            "criterion": "band",
+            "points": 0,
+            "category": "risk-band",
+            "description": "McIsaac ≤ 1 — low probability of streptococcal pharyngitis"
+          }
+        ]
+      }
+    },
+    {
+      "name": "moderate-consider-testing",
+      "description": "30-year-old with tonsillar exudate and tender anterior cervical nodes but a cough and no fever: Centor 2, McIsaac 2 (age 15-44 modifier 0) — moderate probability, consider a rapid antigen test or swab.",
+      "state": {
+        "context": {
+          "clinicianName": "",
+          "clinicianRole": "nurse-practitioner",
+          "assessedAt": "",
+          "careSetting": "urgent-care"
+        },
+        "identification": {
+          "patientIdentifier": "",
+          "ageYears": 30,
+          "sex": "male"
+        },
+        "exudate": {
+          "tonsillarExudate": "yes"
+        },
+        "nodes": {
+          "tenderAnteriorCervicalNodes": "yes"
+        },
+        "fever": {
+          "feverOver38": "no",
+          "measuredTemperatureCelsius": 37.6
+        },
+        "cough": {
+          "absenceOfCough": "no"
+        },
+        "redFlags": {
+          "stridorOrBreathingDifficulty": "no",
+          "droolingOrCannotSwallow": "no",
+          "trismus": "no",
+          "muffledVoice": "no",
+          "unilateralNeckSwelling": "no"
+        },
+        "note": {
+          "clinicalNote": ""
+        }
+      },
+      "expected": {
+        "tonsillarExudatePoint": 1,
+        "tenderNodesPoint": 1,
+        "feverPoint": 0,
+        "coughAbsentPoint": 0,
+        "centorScore": 2,
+        "ageModifier": 0,
+        "mcIsaacScore": 2,
+        "riskBand": "moderate",
+        "firedCriteria": [
+          {
+            "id": "R-TONSILLAR-EXUDATE-01",
+            "criterion": "tonsillar-exudate",
+            "points": 1,
+            "category": "centor-criterion",
+            "description": "Tonsillar exudate or swelling present"
+          },
+          {
+            "id": "R-TENDER-NODES-01",
+            "criterion": "tender-nodes",
+            "points": 1,
+            "category": "centor-criterion",
+            "description": "Tender, swollen anterior cervical lymphadenopathy"
+          },
+          {
+            "id": "R-AGE-MODIFIER-01",
+            "criterion": "age-modifier",
+            "points": 0,
+            "category": "mcisaac-modifier",
+            "description": "Age 15–44 — McIsaac age modifier 0"
+          },
+          {
+            "id": "R-BAND-01",
+            "criterion": "band",
+            "points": 0,
+            "category": "risk-band",
+            "description": "McIsaac 2–3 — moderate probability of streptococcal pharyngitis"
+          }
+        ]
+      }
+    },
+    {
+      "name": "high-antibiotic-consideration",
+      "description": "8-year-old with tonsillar exudate, tender nodes, fever above 38 C, and no cough: Centor 4, McIsaac 5 (age 3-14 modifier +1) — high probability of strep, consider testing or empirical antibiotics.",
+      "state": {
+        "context": {
+          "clinicianName": "",
+          "clinicianRole": "gp",
+          "assessedAt": "",
+          "careSetting": "general-practice"
+        },
+        "identification": {
+          "patientIdentifier": "",
+          "ageYears": 8,
+          "sex": "female"
+        },
+        "exudate": {
+          "tonsillarExudate": "yes"
+        },
+        "nodes": {
+          "tenderAnteriorCervicalNodes": "yes"
+        },
+        "fever": {
+          "feverOver38": "yes",
+          "measuredTemperatureCelsius": 38.9
+        },
+        "cough": {
+          "absenceOfCough": "yes"
+        },
+        "redFlags": {
+          "stridorOrBreathingDifficulty": "no",
+          "droolingOrCannotSwallow": "no",
+          "trismus": "no",
+          "muffledVoice": "no",
+          "unilateralNeckSwelling": "no"
+        },
+        "note": {
+          "clinicalNote": ""
+        }
+      },
+      "expected": {
+        "tonsillarExudatePoint": 1,
+        "tenderNodesPoint": 1,
+        "feverPoint": 1,
+        "coughAbsentPoint": 1,
+        "centorScore": 4,
+        "ageModifier": 1,
+        "mcIsaacScore": 5,
+        "riskBand": "high",
+        "firedCriteria": [
+          {
+            "id": "R-TONSILLAR-EXUDATE-01",
+            "criterion": "tonsillar-exudate",
+            "points": 1,
+            "category": "centor-criterion",
+            "description": "Tonsillar exudate or swelling present"
+          },
+          {
+            "id": "R-TENDER-NODES-01",
+            "criterion": "tender-nodes",
+            "points": 1,
+            "category": "centor-criterion",
+            "description": "Tender, swollen anterior cervical lymphadenopathy"
+          },
+          {
+            "id": "R-FEVER-01",
+            "criterion": "fever",
+            "points": 1,
+            "category": "centor-criterion",
+            "description": "Fever — temperature > 38 °C or a history of fever"
+          },
+          {
+            "id": "R-COUGH-ABSENT-01",
+            "criterion": "cough-absent",
+            "points": 1,
+            "category": "centor-criterion",
+            "description": "Cough absent"
+          },
+          {
+            "id": "R-AGE-MODIFIER-01",
+            "criterion": "age-modifier",
+            "points": 1,
+            "category": "mcisaac-modifier",
+            "description": "Age 3–14 — McIsaac age modifier +1"
+          },
+          {
+            "id": "R-BAND-01",
+            "criterion": "band",
+            "points": 0,
+            "category": "risk-band",
+            "description": "McIsaac 4–5 — high probability of streptococcal pharyngitis"
+          }
+        ]
+      }
+    }
+  ]
+}

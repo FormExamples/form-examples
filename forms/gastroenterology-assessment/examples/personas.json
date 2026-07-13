@@ -1,0 +1,460 @@
+{
+  "engine": "front-end-with-html",
+  "graderHint": "calculateGISeverity",
+  "note": "Realistic filled-in states in the GI Symptom Severity engine's shape. `expected` is computed by `bin/test-personas --update` and verified by `bin/test-personas`.",
+  "personas": [
+    {
+      "name": "minimal-severity",
+      "description": "Moderate reflux symptoms with heartburn and nausea: GI severity 7 — minimal severity.",
+      "state": {
+        "demographics": {
+          "firstName": "",
+          "lastName": "",
+          "dateOfBirth": "",
+          "sex": "",
+          "weight": null,
+          "height": null,
+          "bmi": null
+        },
+        "chiefComplaint": {
+          "primarySymptom": "",
+          "symptomLocation": "",
+          "symptomOnset": "",
+          "symptomDuration": "",
+          "severityScore": 5
+        },
+        "upperGISymptoms": {
+          "dysphagia": "",
+          "dysphagiaDetails": "",
+          "odynophagia": "",
+          "heartburn": "yes",
+          "heartburnFrequency": "",
+          "nausea": "yes",
+          "vomiting": "",
+          "vomitingDetails": "",
+          "earlySatiety": ""
+        },
+        "lowerGISymptoms": {
+          "bowelHabitChange": "",
+          "bowelHabitDetails": "",
+          "diarrhoea": "",
+          "diarrhoeaFrequency": "",
+          "constipation": "",
+          "constipationDetails": "",
+          "rectalBleeding": "",
+          "rectalBleedingDetails": "",
+          "tenesmus": "",
+          "bristolStoolType": ""
+        },
+        "abdominalPainAssessment": {
+          "painLocation": "",
+          "painCharacter": "",
+          "painRadiation": "",
+          "aggravatingFactors": "",
+          "relievingFactors": "",
+          "painFrequency": ""
+        },
+        "liverPancreas": {
+          "jaundice": "",
+          "darkUrine": "",
+          "paleStools": "",
+          "alcoholIntake": "",
+          "alcoholUnitsPerWeek": null,
+          "hepatitisExposure": "",
+          "hepatitisDetails": ""
+        },
+        "previousGIHistory": {
+          "previousEndoscopy": "",
+          "endoscopyDetails": "",
+          "previousColonoscopy": "",
+          "colonoscopyDetails": "",
+          "previousGISurgery": "",
+          "surgeryDetails": "",
+          "ibd": "",
+          "ibdType": "",
+          "ibs": "",
+          "celiacDisease": "",
+          "polyps": "",
+          "polypDetails": "",
+          "giCancer": "",
+          "giCancerDetails": ""
+        },
+        "currentMedications": {
+          "ppis": "",
+          "ppiDetails": "",
+          "antacids": "",
+          "laxatives": "",
+          "laxativeDetails": "",
+          "antiDiarrhoeals": "",
+          "biologics": "",
+          "biologicDetails": "",
+          "steroids": "",
+          "steroidDetails": "",
+          "nsaids": "",
+          "nsaidDetails": "",
+          "otherMedications": []
+        },
+        "allergiesDiet": {
+          "drugAllergies": [],
+          "foodIntolerances": "",
+          "dietaryRestrictions": "",
+          "glutenIntolerance": "",
+          "lactoseIntolerance": ""
+        },
+        "redFlagsSocial": {
+          "unexplainedWeightLoss": "",
+          "weightLossAmount": "",
+          "appetiteChange": "",
+          "appetiteDetails": "",
+          "familyGICancer": "",
+          "familyCancerDetails": "",
+          "smoking": "",
+          "smokingPackYears": null,
+          "alcoholUse": ""
+        }
+      },
+      "expected": {
+        "severityScore": 7,
+        "severityLevel": "minimal",
+        "firedRules": [
+          {
+            "id": "CC-001",
+            "category": "Chief Complaint",
+            "description": "Symptom severity score 4-6 (moderate)",
+            "points": 3
+          },
+          {
+            "id": "UGI-003",
+            "category": "Upper GI",
+            "description": "Heartburn present",
+            "points": 2
+          },
+          {
+            "id": "UGI-004",
+            "category": "Upper GI",
+            "description": "Nausea present",
+            "points": 2
+          }
+        ]
+      }
+    },
+    {
+      "name": "moderate-severity",
+      "description": "Severe symptoms with dysphagia, rectal bleeding, constant pain and unexplained weight loss: GI severity 24 — moderate severity with red flags.",
+      "state": {
+        "demographics": {
+          "firstName": "",
+          "lastName": "",
+          "dateOfBirth": "",
+          "sex": "",
+          "weight": null,
+          "height": null,
+          "bmi": null
+        },
+        "chiefComplaint": {
+          "primarySymptom": "",
+          "symptomLocation": "",
+          "symptomOnset": "",
+          "symptomDuration": "",
+          "severityScore": 8
+        },
+        "upperGISymptoms": {
+          "dysphagia": "yes",
+          "dysphagiaDetails": "",
+          "odynophagia": "",
+          "heartburn": "",
+          "heartburnFrequency": "",
+          "nausea": "",
+          "vomiting": "",
+          "vomitingDetails": "",
+          "earlySatiety": ""
+        },
+        "lowerGISymptoms": {
+          "bowelHabitChange": "",
+          "bowelHabitDetails": "",
+          "diarrhoea": "",
+          "diarrhoeaFrequency": "",
+          "constipation": "",
+          "constipationDetails": "",
+          "rectalBleeding": "yes",
+          "rectalBleedingDetails": "",
+          "tenesmus": "",
+          "bristolStoolType": ""
+        },
+        "abdominalPainAssessment": {
+          "painLocation": "",
+          "painCharacter": "",
+          "painRadiation": "",
+          "aggravatingFactors": "",
+          "relievingFactors": "",
+          "painFrequency": "constant"
+        },
+        "liverPancreas": {
+          "jaundice": "",
+          "darkUrine": "",
+          "paleStools": "",
+          "alcoholIntake": "",
+          "alcoholUnitsPerWeek": null,
+          "hepatitisExposure": "",
+          "hepatitisDetails": ""
+        },
+        "previousGIHistory": {
+          "previousEndoscopy": "",
+          "endoscopyDetails": "",
+          "previousColonoscopy": "",
+          "colonoscopyDetails": "",
+          "previousGISurgery": "",
+          "surgeryDetails": "",
+          "ibd": "",
+          "ibdType": "",
+          "ibs": "",
+          "celiacDisease": "",
+          "polyps": "",
+          "polypDetails": "",
+          "giCancer": "",
+          "giCancerDetails": ""
+        },
+        "currentMedications": {
+          "ppis": "",
+          "ppiDetails": "",
+          "antacids": "",
+          "laxatives": "",
+          "laxativeDetails": "",
+          "antiDiarrhoeals": "",
+          "biologics": "",
+          "biologicDetails": "",
+          "steroids": "",
+          "steroidDetails": "",
+          "nsaids": "",
+          "nsaidDetails": "",
+          "otherMedications": []
+        },
+        "allergiesDiet": {
+          "drugAllergies": [],
+          "foodIntolerances": "",
+          "dietaryRestrictions": "",
+          "glutenIntolerance": "",
+          "lactoseIntolerance": ""
+        },
+        "redFlagsSocial": {
+          "unexplainedWeightLoss": "yes",
+          "weightLossAmount": "",
+          "appetiteChange": "",
+          "appetiteDetails": "",
+          "familyGICancer": "",
+          "familyCancerDetails": "",
+          "smoking": "",
+          "smokingPackYears": null,
+          "alcoholUse": ""
+        }
+      },
+      "expected": {
+        "severityScore": 24,
+        "severityLevel": "moderate",
+        "firedRules": [
+          {
+            "id": "CC-002",
+            "category": "Chief Complaint",
+            "description": "Symptom severity score 7-8 (severe)",
+            "points": 5
+          },
+          {
+            "id": "UGI-001",
+            "category": "Upper GI",
+            "description": "Dysphagia present",
+            "points": 5
+          },
+          {
+            "id": "LGI-004",
+            "category": "Lower GI",
+            "description": "Rectal bleeding present",
+            "points": 5
+          },
+          {
+            "id": "AP-001",
+            "category": "Abdominal Pain",
+            "description": "Constant abdominal pain",
+            "points": 4
+          },
+          {
+            "id": "RF-001",
+            "category": "Red Flags",
+            "description": "Unexplained weight loss",
+            "points": 5
+          }
+        ]
+      }
+    },
+    {
+      "name": "severe-severity",
+      "description": "Very severe multi-system disease — dysphagia, odynophagia, vomiting, rectal bleeding, jaundice, weight loss, constant pain and known IBD: GI severity 43 — very severe.",
+      "state": {
+        "demographics": {
+          "firstName": "",
+          "lastName": "",
+          "dateOfBirth": "",
+          "sex": "",
+          "weight": null,
+          "height": null,
+          "bmi": null
+        },
+        "chiefComplaint": {
+          "primarySymptom": "",
+          "symptomLocation": "",
+          "symptomOnset": "",
+          "symptomDuration": "",
+          "severityScore": 10
+        },
+        "upperGISymptoms": {
+          "dysphagia": "yes",
+          "dysphagiaDetails": "",
+          "odynophagia": "yes",
+          "heartburn": "",
+          "heartburnFrequency": "",
+          "nausea": "",
+          "vomiting": "yes",
+          "vomitingDetails": "",
+          "earlySatiety": ""
+        },
+        "lowerGISymptoms": {
+          "bowelHabitChange": "",
+          "bowelHabitDetails": "",
+          "diarrhoea": "",
+          "diarrhoeaFrequency": "",
+          "constipation": "",
+          "constipationDetails": "",
+          "rectalBleeding": "yes",
+          "rectalBleedingDetails": "",
+          "tenesmus": "",
+          "bristolStoolType": ""
+        },
+        "abdominalPainAssessment": {
+          "painLocation": "",
+          "painCharacter": "",
+          "painRadiation": "",
+          "aggravatingFactors": "",
+          "relievingFactors": "",
+          "painFrequency": "constant"
+        },
+        "liverPancreas": {
+          "jaundice": "yes",
+          "darkUrine": "",
+          "paleStools": "",
+          "alcoholIntake": "",
+          "alcoholUnitsPerWeek": null,
+          "hepatitisExposure": "",
+          "hepatitisDetails": ""
+        },
+        "previousGIHistory": {
+          "previousEndoscopy": "",
+          "endoscopyDetails": "",
+          "previousColonoscopy": "",
+          "colonoscopyDetails": "",
+          "previousGISurgery": "",
+          "surgeryDetails": "",
+          "ibd": "yes",
+          "ibdType": "",
+          "ibs": "",
+          "celiacDisease": "",
+          "polyps": "",
+          "polypDetails": "",
+          "giCancer": "",
+          "giCancerDetails": ""
+        },
+        "currentMedications": {
+          "ppis": "",
+          "ppiDetails": "",
+          "antacids": "",
+          "laxatives": "",
+          "laxativeDetails": "",
+          "antiDiarrhoeals": "",
+          "biologics": "",
+          "biologicDetails": "",
+          "steroids": "",
+          "steroidDetails": "",
+          "nsaids": "",
+          "nsaidDetails": "",
+          "otherMedications": []
+        },
+        "allergiesDiet": {
+          "drugAllergies": [],
+          "foodIntolerances": "",
+          "dietaryRestrictions": "",
+          "glutenIntolerance": "",
+          "lactoseIntolerance": ""
+        },
+        "redFlagsSocial": {
+          "unexplainedWeightLoss": "yes",
+          "weightLossAmount": "",
+          "appetiteChange": "",
+          "appetiteDetails": "",
+          "familyGICancer": "",
+          "familyCancerDetails": "",
+          "smoking": "",
+          "smokingPackYears": null,
+          "alcoholUse": ""
+        }
+      },
+      "expected": {
+        "severityScore": 43,
+        "severityLevel": "very-severe",
+        "firedRules": [
+          {
+            "id": "CC-003",
+            "category": "Chief Complaint",
+            "description": "Symptom severity score 9-10 (very severe)",
+            "points": 8
+          },
+          {
+            "id": "UGI-001",
+            "category": "Upper GI",
+            "description": "Dysphagia present",
+            "points": 5
+          },
+          {
+            "id": "UGI-002",
+            "category": "Upper GI",
+            "description": "Odynophagia present",
+            "points": 4
+          },
+          {
+            "id": "UGI-005",
+            "category": "Upper GI",
+            "description": "Vomiting present",
+            "points": 3
+          },
+          {
+            "id": "LGI-004",
+            "category": "Lower GI",
+            "description": "Rectal bleeding present",
+            "points": 5
+          },
+          {
+            "id": "AP-001",
+            "category": "Abdominal Pain",
+            "description": "Constant abdominal pain",
+            "points": 4
+          },
+          {
+            "id": "LP-001",
+            "category": "Liver & Pancreas",
+            "description": "Jaundice present",
+            "points": 5
+          },
+          {
+            "id": "PH-001",
+            "category": "Previous GI History",
+            "description": "Known IBD (Crohns or UC)",
+            "points": 4
+          },
+          {
+            "id": "RF-001",
+            "category": "Red Flags",
+            "description": "Unexplained weight loss",
+            "points": 5
+          }
+        ]
+      }
+    }
+  ]
+}

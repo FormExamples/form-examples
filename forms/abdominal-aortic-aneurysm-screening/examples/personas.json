@@ -1,0 +1,169 @@
+{
+  "engine": "front-end-with-html",
+  "graderHint": "classifyAaa",
+  "note": "Realistic filled-in states in the AAA screening engine's shape. Classified by classifyAaa on maximum antero-posterior aortic diameter (deterministic). `expected` is computed by `bin/test-personas --update` and verified by `bin/test-personas`.",
+  "personas": [
+    {
+      "name": "normal-discharge",
+      "description": "Aorta 2.4 cm — below 3.0 cm, normal category; discharge from screening.",
+      "state": {
+        "context": {
+          "technicianName": "",
+          "technicianRole": "screening-technician",
+          "clinicSite": "",
+          "scannedAt": "",
+          "deviceIdentifier": ""
+        },
+        "identification": {
+          "patientIdentifier": "",
+          "age": 66,
+          "sex": "male",
+          "eligibilityRoute": "",
+          "scanType": "first-scan"
+        },
+        "consent": {
+          "consentGiven": "yes",
+          "leafletProvided": "yes",
+          "consentNote": ""
+        },
+        "measurement": {
+          "aortaVisualised": "yes",
+          "maxAorticDiameterCm": 2.4,
+          "priorMaxDiameterCm": null,
+          "priorScanDate": ""
+        },
+        "observations": {
+          "symptomatic": "no",
+          "incidentalFindings": ""
+        },
+        "result": {
+          "resultNote": ""
+        }
+      },
+      "expected": {
+        "category": "normal",
+        "surveillanceBand": "discharge",
+        "recommendedAction": "No aneurysm. Discharge from screening; no further surveillance.",
+        "maxAorticDiameterCm": 2.4,
+        "growthCm": null,
+        "firedRules": [
+          {
+            "id": "R-CLASSIFY-NORMAL-01",
+            "instrument": "classification",
+            "band": "normal",
+            "category": "diameter-band",
+            "description": "Maximum aortic diameter below 3.0 cm — no aneurysm (normal)"
+          }
+        ]
+      }
+    },
+    {
+      "name": "medium-surveillance",
+      "description": "Aorta 4.8 cm — in the 4.5-5.4 cm band, medium category; three-monthly surveillance.",
+      "state": {
+        "context": {
+          "technicianName": "",
+          "technicianRole": "screening-technician",
+          "clinicSite": "",
+          "scannedAt": "",
+          "deviceIdentifier": ""
+        },
+        "identification": {
+          "patientIdentifier": "",
+          "age": 70,
+          "sex": "male",
+          "eligibilityRoute": "",
+          "scanType": "surveillance-rescan"
+        },
+        "consent": {
+          "consentGiven": "yes",
+          "leafletProvided": "yes",
+          "consentNote": ""
+        },
+        "measurement": {
+          "aortaVisualised": "yes",
+          "maxAorticDiameterCm": 4.8,
+          "priorMaxDiameterCm": 4.5,
+          "priorScanDate": "2025-07-01"
+        },
+        "observations": {
+          "symptomatic": "no",
+          "incidentalFindings": ""
+        },
+        "result": {
+          "resultNote": ""
+        }
+      },
+      "expected": {
+        "category": "medium",
+        "surveillanceBand": "three-monthly",
+        "recommendedAction": "Medium aneurysm. Three-monthly (quarterly) ultrasound surveillance.",
+        "maxAorticDiameterCm": 4.8,
+        "growthCm": 0.3,
+        "firedRules": [
+          {
+            "id": "R-CLASSIFY-MEDIUM-01",
+            "instrument": "classification",
+            "band": "medium",
+            "category": "diameter-band",
+            "description": "Maximum aortic diameter 4.5–5.4 cm — medium aneurysm"
+          }
+        ]
+      }
+    },
+    {
+      "name": "large-refer",
+      "description": "Aorta 6.2 cm — at or above 5.5 cm, large category; refer to vascular surgery.",
+      "state": {
+        "context": {
+          "technicianName": "",
+          "technicianRole": "screening-technician",
+          "clinicSite": "",
+          "scannedAt": "",
+          "deviceIdentifier": ""
+        },
+        "identification": {
+          "patientIdentifier": "",
+          "age": 74,
+          "sex": "male",
+          "eligibilityRoute": "",
+          "scanType": "surveillance-rescan"
+        },
+        "consent": {
+          "consentGiven": "yes",
+          "leafletProvided": "yes",
+          "consentNote": ""
+        },
+        "measurement": {
+          "aortaVisualised": "yes",
+          "maxAorticDiameterCm": 6.2,
+          "priorMaxDiameterCm": 5.4,
+          "priorScanDate": "2025-07-01"
+        },
+        "observations": {
+          "symptomatic": "no",
+          "incidentalFindings": ""
+        },
+        "result": {
+          "resultNote": ""
+        }
+      },
+      "expected": {
+        "category": "large",
+        "surveillanceBand": "refer-vascular",
+        "recommendedAction": "Large aneurysm. Refer to vascular surgery for assessment and consideration of elective repair.",
+        "maxAorticDiameterCm": 6.2,
+        "growthCm": 0.8,
+        "firedRules": [
+          {
+            "id": "R-CLASSIFY-LARGE-01",
+            "instrument": "classification",
+            "band": "large",
+            "category": "diameter-band",
+            "description": "Maximum aortic diameter 5.5 cm or more — large aneurysm"
+          }
+        ]
+      }
+    }
+  ]
+}

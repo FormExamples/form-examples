@@ -1,0 +1,289 @@
+{
+  "engine": "front-end-with-html",
+  "graderHint": "calculateChildPughGrade",
+  "note": "Realistic filled-in states in the Child-Pugh scoring engine's shape. `expected` is computed by `bin/test-personas --update` and verified by `bin/test-personas`.",
+  "personas": [
+    {
+      "name": "class-a-compensated",
+      "description": "Well-compensated cirrhosis with near-normal synthetic function: Child-Pugh total 5 — Class A, low peri-operative risk.",
+      "state": {
+        "context": {
+          "clinicianName": "",
+          "clinicianRole": "hepatologist",
+          "assessedAt": "",
+          "careSetting": "hepatology-clinic",
+          "aetiology": "viral-hepatitis"
+        },
+        "identification": {
+          "patientIdentifier": "",
+          "ageBand": "40-59",
+          "sex": "female"
+        },
+        "bilirubin": {
+          "totalBilirubin": 18
+        },
+        "albumin": {
+          "serumAlbumin": 42
+        },
+        "coagulation": {
+          "inr": 1.2,
+          "prothrombinTimeProlongation": null
+        },
+        "ascitesStep": {
+          "ascites": "none"
+        },
+        "encephalopathyStep": {
+          "encephalopathy": "none"
+        },
+        "note": {
+          "clinicalNote": ""
+        }
+      },
+      "expected": {
+        "bilirubinPoint": 1,
+        "albuminPoint": 1,
+        "coagulationPoint": 1,
+        "ascitesPoint": 1,
+        "encephalopathyPoint": 1,
+        "childPughScore": 5,
+        "childPughClass": "A",
+        "oneYearSurvival": "~100%",
+        "twoYearSurvival": "~85%",
+        "surgicalRisk": "low",
+        "complete": true,
+        "firedRules": [
+          {
+            "id": "R-BILIRUBIN-1POINT-01",
+            "parameter": "bilirubin",
+            "points": 1,
+            "category": "threshold-band",
+            "description": "Total bilirubin < 34 µmol/L (< 2 mg/dL)"
+          },
+          {
+            "id": "R-ALBUMIN-1POINT-01",
+            "parameter": "albumin",
+            "points": 1,
+            "category": "threshold-band",
+            "description": "Serum albumin > 35 g/L"
+          },
+          {
+            "id": "R-COAGULATION-1POINT-01",
+            "parameter": "coagulation",
+            "points": 1,
+            "category": "threshold-band",
+            "description": "INR < 1.7 (or prothrombin time < 4 s prolonged)"
+          },
+          {
+            "id": "R-ASCITES-1POINT-01",
+            "parameter": "ascites",
+            "points": 1,
+            "category": "ordinal-grade",
+            "description": "No ascites"
+          },
+          {
+            "id": "R-ENCEPHALOPATHY-1POINT-01",
+            "parameter": "encephalopathy",
+            "points": 1,
+            "category": "ordinal-grade",
+            "description": "No hepatic encephalopathy"
+          },
+          {
+            "id": "R-CLASS-A-01",
+            "parameter": "class",
+            "points": null,
+            "category": "class-band",
+            "description": "Child-Pugh total 5 → Class A; ~1-year survival ~100%, ~2-year survival ~85%; peri-operative risk low"
+          }
+        ]
+      }
+    },
+    {
+      "name": "class-b-significant-compromise",
+      "description": "Significant functional compromise with jaundice, hypoalbuminaemia and prolonged INR: Child-Pugh total 8 — Class B, moderate surgical risk.",
+      "state": {
+        "context": {
+          "clinicianName": "",
+          "clinicianRole": "physician",
+          "assessedAt": "",
+          "careSetting": "ward",
+          "aetiology": "alcohol"
+        },
+        "identification": {
+          "patientIdentifier": "",
+          "ageBand": "60-74",
+          "sex": "male"
+        },
+        "bilirubin": {
+          "totalBilirubin": 45
+        },
+        "albumin": {
+          "serumAlbumin": 30
+        },
+        "coagulation": {
+          "inr": 2,
+          "prothrombinTimeProlongation": null
+        },
+        "ascitesStep": {
+          "ascites": "none"
+        },
+        "encephalopathyStep": {
+          "encephalopathy": "none"
+        },
+        "note": {
+          "clinicalNote": ""
+        }
+      },
+      "expected": {
+        "bilirubinPoint": 2,
+        "albuminPoint": 2,
+        "coagulationPoint": 2,
+        "ascitesPoint": 1,
+        "encephalopathyPoint": 1,
+        "childPughScore": 8,
+        "childPughClass": "B",
+        "oneYearSurvival": "~80%",
+        "twoYearSurvival": "~60%",
+        "surgicalRisk": "moderate",
+        "complete": true,
+        "firedRules": [
+          {
+            "id": "R-BILIRUBIN-2POINT-01",
+            "parameter": "bilirubin",
+            "points": 2,
+            "category": "threshold-band",
+            "description": "Total bilirubin 34-50 µmol/L (2-3 mg/dL)"
+          },
+          {
+            "id": "R-ALBUMIN-2POINT-01",
+            "parameter": "albumin",
+            "points": 2,
+            "category": "threshold-band",
+            "description": "Serum albumin 28-35 g/L"
+          },
+          {
+            "id": "R-COAGULATION-2POINT-01",
+            "parameter": "coagulation",
+            "points": 2,
+            "category": "threshold-band",
+            "description": "INR 1.7-2.3 (or prothrombin time 4-6 s prolonged)"
+          },
+          {
+            "id": "R-ASCITES-1POINT-01",
+            "parameter": "ascites",
+            "points": 1,
+            "category": "ordinal-grade",
+            "description": "No ascites"
+          },
+          {
+            "id": "R-ENCEPHALOPATHY-1POINT-01",
+            "parameter": "encephalopathy",
+            "points": 1,
+            "category": "ordinal-grade",
+            "description": "No hepatic encephalopathy"
+          },
+          {
+            "id": "R-CLASS-B-01",
+            "parameter": "class",
+            "points": null,
+            "category": "class-band",
+            "description": "Child-Pugh total 8 → Class B; ~1-year survival ~80%, ~2-year survival ~60%; peri-operative risk moderate"
+          }
+        ]
+      }
+    },
+    {
+      "name": "class-c-decompensated",
+      "description": "Decompensated cirrhosis with deep jaundice, severe hypoalbuminaemia, coagulopathy, refractory ascites and encephalopathy: Child-Pugh total 14 — Class C, prohibitive surgical risk.",
+      "state": {
+        "context": {
+          "clinicianName": "",
+          "clinicianRole": "hepatologist",
+          "assessedAt": "",
+          "careSetting": "intensive-care",
+          "aetiology": "alcohol"
+        },
+        "identification": {
+          "patientIdentifier": "",
+          "ageBand": "60-74",
+          "sex": "male"
+        },
+        "bilirubin": {
+          "totalBilirubin": 80
+        },
+        "albumin": {
+          "serumAlbumin": 24
+        },
+        "coagulation": {
+          "inr": 2.8,
+          "prothrombinTimeProlongation": null
+        },
+        "ascitesStep": {
+          "ascites": "moderate-severe"
+        },
+        "encephalopathyStep": {
+          "encephalopathy": "grade-1-2"
+        },
+        "note": {
+          "clinicalNote": ""
+        }
+      },
+      "expected": {
+        "bilirubinPoint": 3,
+        "albuminPoint": 3,
+        "coagulationPoint": 3,
+        "ascitesPoint": 3,
+        "encephalopathyPoint": 2,
+        "childPughScore": 14,
+        "childPughClass": "C",
+        "oneYearSurvival": "~45%",
+        "twoYearSurvival": "~35%",
+        "surgicalRisk": "high",
+        "complete": true,
+        "firedRules": [
+          {
+            "id": "R-BILIRUBIN-3POINT-01",
+            "parameter": "bilirubin",
+            "points": 3,
+            "category": "threshold-band",
+            "description": "Total bilirubin > 50 µmol/L (> 3 mg/dL)"
+          },
+          {
+            "id": "R-ALBUMIN-3POINT-01",
+            "parameter": "albumin",
+            "points": 3,
+            "category": "threshold-band",
+            "description": "Serum albumin < 28 g/L"
+          },
+          {
+            "id": "R-COAGULATION-3POINT-01",
+            "parameter": "coagulation",
+            "points": 3,
+            "category": "threshold-band",
+            "description": "INR > 2.3 (or prothrombin time > 6 s prolonged)"
+          },
+          {
+            "id": "R-ASCITES-3POINT-01",
+            "parameter": "ascites",
+            "points": 3,
+            "category": "ordinal-grade",
+            "description": "Moderate-to-severe (diuretic-refractory) ascites"
+          },
+          {
+            "id": "R-ENCEPHALOPATHY-2POINT-01",
+            "parameter": "encephalopathy",
+            "points": 2,
+            "category": "ordinal-grade",
+            "description": "Grade 1-2 encephalopathy (or medically controlled)"
+          },
+          {
+            "id": "R-CLASS-C-01",
+            "parameter": "class",
+            "points": null,
+            "category": "class-band",
+            "description": "Child-Pugh total 14 → Class C; ~1-year survival ~45%, ~2-year survival ~35%; peri-operative risk high"
+          }
+        ]
+      }
+    }
+  ]
+}

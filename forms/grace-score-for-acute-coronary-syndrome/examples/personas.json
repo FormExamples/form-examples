@@ -1,0 +1,316 @@
+{
+  "engine": "front-end-with-html",
+  "graderHint": "calculateGraceGrade",
+  "note": "Realistic filled-in states in the GRACE Score engine's shape. `expected` is computed by `bin/test-personas --update` and verified by `bin/test-personas`.",
+  "personas": [
+    {
+      "name": "low-risk",
+      "description": "45-year-old with normal haemodynamics, normal creatinine, Killip I and no high-risk features: GRACE 75 — low in-hospital and 6-month mortality risk.",
+      "state": {
+        "context": {
+          "clinicianName": "",
+          "clinicianRole": "",
+          "assessedAt": "",
+          "careSetting": "",
+          "presentationType": ""
+        },
+        "identification": {
+          "patientIdentifier": "",
+          "ageYears": 45,
+          "sex": "male"
+        },
+        "haemodynamics": {
+          "heartRate": 70,
+          "systolicBloodPressure": 130
+        },
+        "renal": {
+          "serumCreatinine": 1,
+          "serumCreatinineUnit": "mg/dL"
+        },
+        "heartFailure": {
+          "killipClass": "I"
+        },
+        "highRiskFeatures": {
+          "cardiacArrestAtAdmission": "no",
+          "stSegmentDeviation": "no",
+          "elevatedCardiacEnzymes": "no"
+        },
+        "note": {
+          "clinicalNote": ""
+        }
+      },
+      "expected": {
+        "agePoints": 25,
+        "heartRatePoints": 9,
+        "sbpPoints": 34,
+        "creatininePoints": 7,
+        "killipPoints": 0,
+        "arrestPoints": 0,
+        "stPoints": 0,
+        "enzymePoints": 0,
+        "gracePoints": 75,
+        "inHospitalMortalityBand": "low",
+        "sixMonthMortalityBand": "low",
+        "riskCategory": "low",
+        "invasiveStrategy": "Selective invasive strategy: non-invasive testing for ischaemia first, with angiography if positive.",
+        "firedContributors": [
+          {
+            "id": "R-AGE-01",
+            "variable": "age",
+            "points": 25,
+            "category": "grace-variable",
+            "description": "Age band 40–49 years"
+          },
+          {
+            "id": "R-HEART-RATE-01",
+            "variable": "heart-rate",
+            "points": 9,
+            "category": "grace-variable",
+            "description": "Heart rate band 70–89 beats/min"
+          },
+          {
+            "id": "R-SYSTOLIC-BLOOD-PRESSURE-01",
+            "variable": "systolic-blood-pressure",
+            "points": 34,
+            "category": "grace-variable",
+            "description": "Systolic BP band 120–139 mmHg (inverse weight)"
+          },
+          {
+            "id": "R-CREATININE-01",
+            "variable": "creatinine",
+            "points": 7,
+            "category": "grace-variable",
+            "description": "Serum creatinine band 0.8–1.19 mg/dL"
+          },
+          {
+            "id": "R-KILLIP-01",
+            "variable": "killip",
+            "points": 0,
+            "category": "grace-variable",
+            "description": "Killip class I"
+          },
+          {
+            "id": "R-BAND-01",
+            "variable": "band",
+            "points": 0,
+            "category": "risk-band",
+            "description": "GRACE 75 — in-hospital low, 6-month low; overall low (worse band)."
+          }
+        ]
+      }
+    },
+    {
+      "name": "intermediate-risk",
+      "description": "65-year-old with mild tachycardia, borderline BP and mildly raised creatinine, Killip I: GRACE 117 — intermediate risk, invasive strategy within 72 hours.",
+      "state": {
+        "context": {
+          "clinicianName": "",
+          "clinicianRole": "",
+          "assessedAt": "",
+          "careSetting": "",
+          "presentationType": ""
+        },
+        "identification": {
+          "patientIdentifier": "",
+          "ageYears": 65,
+          "sex": "male"
+        },
+        "haemodynamics": {
+          "heartRate": 95,
+          "systolicBloodPressure": 125
+        },
+        "renal": {
+          "serumCreatinine": 1.3,
+          "serumCreatinineUnit": "mg/dL"
+        },
+        "heartFailure": {
+          "killipClass": "I"
+        },
+        "highRiskFeatures": {
+          "cardiacArrestAtAdmission": "no",
+          "stSegmentDeviation": "no",
+          "elevatedCardiacEnzymes": "no"
+        },
+        "note": {
+          "clinicalNote": ""
+        }
+      },
+      "expected": {
+        "agePoints": 58,
+        "heartRatePoints": 15,
+        "sbpPoints": 34,
+        "creatininePoints": 10,
+        "killipPoints": 0,
+        "arrestPoints": 0,
+        "stPoints": 0,
+        "enzymePoints": 0,
+        "gracePoints": 117,
+        "inHospitalMortalityBand": "intermediate",
+        "sixMonthMortalityBand": "intermediate",
+        "riskCategory": "intermediate",
+        "invasiveStrategy": "Invasive strategy: coronary angiography within 72 hours.",
+        "firedContributors": [
+          {
+            "id": "R-AGE-01",
+            "variable": "age",
+            "points": 58,
+            "category": "grace-variable",
+            "description": "Age band 60–69 years"
+          },
+          {
+            "id": "R-HEART-RATE-01",
+            "variable": "heart-rate",
+            "points": 15,
+            "category": "grace-variable",
+            "description": "Heart rate band 90–109 beats/min"
+          },
+          {
+            "id": "R-SYSTOLIC-BLOOD-PRESSURE-01",
+            "variable": "systolic-blood-pressure",
+            "points": 34,
+            "category": "grace-variable",
+            "description": "Systolic BP band 120–139 mmHg (inverse weight)"
+          },
+          {
+            "id": "R-CREATININE-01",
+            "variable": "creatinine",
+            "points": 10,
+            "category": "grace-variable",
+            "description": "Serum creatinine band 1.2–1.59 mg/dL"
+          },
+          {
+            "id": "R-KILLIP-01",
+            "variable": "killip",
+            "points": 0,
+            "category": "grace-variable",
+            "description": "Killip class I"
+          },
+          {
+            "id": "R-BAND-01",
+            "variable": "band",
+            "points": 0,
+            "category": "risk-band",
+            "description": "GRACE 117 — in-hospital intermediate, 6-month intermediate; overall intermediate (worse band)."
+          }
+        ]
+      }
+    },
+    {
+      "name": "high-risk",
+      "description": "82-year-old with tachycardia, hypotension, renal impairment, Killip III, cardiac arrest, ST-deviation and elevated enzymes: GRACE >300 — high risk, early invasive strategy.",
+      "state": {
+        "context": {
+          "clinicianName": "",
+          "clinicianRole": "",
+          "assessedAt": "",
+          "careSetting": "",
+          "presentationType": ""
+        },
+        "identification": {
+          "patientIdentifier": "",
+          "ageYears": 82,
+          "sex": "female"
+        },
+        "haemodynamics": {
+          "heartRate": 120,
+          "systolicBloodPressure": 85
+        },
+        "renal": {
+          "serumCreatinine": 2.5,
+          "serumCreatinineUnit": "mg/dL"
+        },
+        "heartFailure": {
+          "killipClass": "III"
+        },
+        "highRiskFeatures": {
+          "cardiacArrestAtAdmission": "yes",
+          "stSegmentDeviation": "yes",
+          "elevatedCardiacEnzymes": "yes"
+        },
+        "note": {
+          "clinicalNote": ""
+        }
+      },
+      "expected": {
+        "agePoints": 91,
+        "heartRatePoints": 24,
+        "sbpPoints": 53,
+        "creatininePoints": 21,
+        "killipPoints": 39,
+        "arrestPoints": 39,
+        "stPoints": 28,
+        "enzymePoints": 14,
+        "gracePoints": 309,
+        "inHospitalMortalityBand": "high",
+        "sixMonthMortalityBand": "high",
+        "riskCategory": "high",
+        "invasiveStrategy": "Early invasive strategy: coronary angiography within 24 hours, with senior cardiology review.",
+        "firedContributors": [
+          {
+            "id": "R-AGE-01",
+            "variable": "age",
+            "points": 91,
+            "category": "grace-variable",
+            "description": "Age band 80–89 years"
+          },
+          {
+            "id": "R-HEART-RATE-01",
+            "variable": "heart-rate",
+            "points": 24,
+            "category": "grace-variable",
+            "description": "Heart rate band 110–149 beats/min"
+          },
+          {
+            "id": "R-SYSTOLIC-BLOOD-PRESSURE-01",
+            "variable": "systolic-blood-pressure",
+            "points": 53,
+            "category": "grace-variable",
+            "description": "Systolic BP band 80–99 mmHg (inverse weight)"
+          },
+          {
+            "id": "R-CREATININE-01",
+            "variable": "creatinine",
+            "points": 21,
+            "category": "grace-variable",
+            "description": "Serum creatinine band 2.0–3.99 mg/dL"
+          },
+          {
+            "id": "R-KILLIP-01",
+            "variable": "killip",
+            "points": 39,
+            "category": "grace-variable",
+            "description": "Killip class III"
+          },
+          {
+            "id": "R-CARDIAC-ARREST-01",
+            "variable": "cardiac-arrest",
+            "points": 39,
+            "category": "grace-variable",
+            "description": "Cardiac arrest at admission"
+          },
+          {
+            "id": "R-ST-DEVIATION-01",
+            "variable": "st-deviation",
+            "points": 28,
+            "category": "grace-variable",
+            "description": "ST-segment deviation on admission ECG"
+          },
+          {
+            "id": "R-ELEVATED-ENZYMES-01",
+            "variable": "elevated-enzymes",
+            "points": 14,
+            "category": "grace-variable",
+            "description": "Elevated cardiac enzymes / troponin"
+          },
+          {
+            "id": "R-BAND-01",
+            "variable": "band",
+            "points": 0,
+            "category": "risk-band",
+            "description": "GRACE 309 — in-hospital high, 6-month high; overall high (worse band)."
+          }
+        ]
+      }
+    }
+  ]
+}

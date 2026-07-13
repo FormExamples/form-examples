@@ -1,0 +1,433 @@
+{
+  "engine": "front-end-with-html",
+  "graderHint": "calculateDLQI",
+  "note": "Realistic filled-in states in the DLQI scoring engine's shape. `expected` is computed by `bin/test-personas --update` and verified by `bin/test-personas`. The graderHint pins the DLQI severity engine (the auto-picked grader is the unrelated Fitzpatrick UV-risk helper).",
+  "personas": [
+    {
+      "name": "small-effect",
+      "description": "Mild hand eczema with limited day-to-day impact (DLQI 4): small effect on quality of life.",
+      "state": {
+        "demographics": {
+          "firstName": "",
+          "lastName": "",
+          "dateOfBirth": "1996-06-19",
+          "sex": "female",
+          "skinType": "III"
+        },
+        "chiefComplaint": {
+          "primaryConcern": "Dry, itchy patches on the hands",
+          "duration": "3 months",
+          "location": "Dorsum of both hands",
+          "progression": "fluctuating",
+          "previousTreatments": "Emollients"
+        },
+        "dlqiQuestionnaire": {
+          "q1": 1,
+          "q2": 1,
+          "q3": 0,
+          "q4": 1,
+          "q5": 1,
+          "q6": 0,
+          "q7": 0,
+          "q8": 0,
+          "q9": 0,
+          "q10": 0
+        },
+        "lesionCharacteristics": {
+          "type": "patch",
+          "color": "erythematous",
+          "border": "poorly-defined",
+          "sizeMillimeters": 20,
+          "distribution": "localized",
+          "number": "few",
+          "surface": "scaly"
+        },
+        "medicalHistory": {
+          "previousSkinConditions": "Childhood atopic eczema",
+          "autoimmuneDiseases": "no",
+          "autoimmuneDiseaseDetails": "",
+          "immunosuppression": "no",
+          "immunosuppressionDetails": "",
+          "cancerHistory": "no",
+          "cancerHistoryDetails": ""
+        },
+        "currentMedications": {
+          "topicals": [],
+          "systemics": [],
+          "biologics": [],
+          "otcProducts": "Emollient cream"
+        },
+        "allergies": {
+          "drugAllergies": [],
+          "contactAllergies": "",
+          "latexAllergy": "no"
+        },
+        "familyHistory": {
+          "psoriasis": "no",
+          "eczema": "yes",
+          "melanoma": "no",
+          "skinCancer": "no",
+          "autoimmune": "no",
+          "otherDetails": ""
+        },
+        "socialHistory": {
+          "sunExposure": "minimal",
+          "tanningHistory": "never",
+          "occupation": "Office worker",
+          "cosmeticsUse": "Fragrance-free products"
+        }
+      },
+      "expected": {
+        "dlqiScore": 4,
+        "dlqiCategoryLabel": "Small effect",
+        "answeredCount": 10,
+        "firedRules": [
+          {
+            "id": "DLQI-01",
+            "domain": "Symptoms and feelings",
+            "description": "Over the last week, how itchy, sore, painful or stinging has your skin been?",
+            "score": 1
+          },
+          {
+            "id": "DLQI-02",
+            "domain": "Symptoms and feelings",
+            "description": "Over the last week, how embarrassed or self-conscious have you been because of your skin?",
+            "score": 1
+          },
+          {
+            "id": "DLQI-03",
+            "domain": "Daily activities",
+            "description": "Over the last week, how much has your skin interfered with you going shopping or looking after your home or garden?",
+            "score": 0
+          },
+          {
+            "id": "DLQI-04",
+            "domain": "Daily activities",
+            "description": "Over the last week, how much has your skin influenced the clothes you wear?",
+            "score": 1
+          },
+          {
+            "id": "DLQI-05",
+            "domain": "Leisure",
+            "description": "Over the last week, how much has your skin affected any social or leisure activities?",
+            "score": 1
+          },
+          {
+            "id": "DLQI-06",
+            "domain": "Leisure",
+            "description": "Over the last week, how much has your skin made it difficult for you to do any sport?",
+            "score": 0
+          },
+          {
+            "id": "DLQI-07",
+            "domain": "Work and school",
+            "description": "Over the last week, has your skin prevented you from working or studying? If \"No\", over the last week how much has your skin been a problem at work or studying?",
+            "score": 0
+          },
+          {
+            "id": "DLQI-08",
+            "domain": "Relationships",
+            "description": "Over the last week, how much has your skin created problems with your partner or any of your close friends or relatives?",
+            "score": 0
+          },
+          {
+            "id": "DLQI-09",
+            "domain": "Relationships",
+            "description": "Over the last week, how much has your skin caused any sexual difficulties?",
+            "score": 0
+          },
+          {
+            "id": "DLQI-10",
+            "domain": "Treatment",
+            "description": "Over the last week, how much of a problem has the treatment for your skin been, for example by making your home messy, or by taking up time?",
+            "score": 0
+          }
+        ]
+      }
+    },
+    {
+      "name": "very-large-effect",
+      "description": "Moderate-to-severe plaque psoriasis affecting work and social life (DLQI 16): very large effect on quality of life.",
+      "state": {
+        "demographics": {
+          "firstName": "",
+          "lastName": "",
+          "dateOfBirth": "1982-02-11",
+          "sex": "male",
+          "skinType": "II"
+        },
+        "chiefComplaint": {
+          "primaryConcern": "Widespread scaly plaques",
+          "duration": "2 years",
+          "location": "Elbows, knees, scalp, trunk",
+          "progression": "worsening",
+          "previousTreatments": "Topical steroids, vitamin D analogues"
+        },
+        "dlqiQuestionnaire": {
+          "q1": 3,
+          "q2": 3,
+          "q3": 2,
+          "q4": 2,
+          "q5": 2,
+          "q6": 1,
+          "q7": 1,
+          "q8": 1,
+          "q9": 0,
+          "q10": 1
+        },
+        "lesionCharacteristics": {
+          "type": "plaque",
+          "color": "erythematous",
+          "border": "well-defined",
+          "sizeMillimeters": 50,
+          "distribution": "symmetrical",
+          "number": "multiple",
+          "surface": "scaly"
+        },
+        "medicalHistory": {
+          "previousSkinConditions": "Plaque psoriasis",
+          "autoimmuneDiseases": "no",
+          "autoimmuneDiseaseDetails": "",
+          "immunosuppression": "no",
+          "immunosuppressionDetails": "",
+          "cancerHistory": "no",
+          "cancerHistoryDetails": ""
+        },
+        "currentMedications": {
+          "topicals": [],
+          "systemics": [],
+          "biologics": [],
+          "otcProducts": "Coal tar shampoo"
+        },
+        "allergies": {
+          "drugAllergies": [],
+          "contactAllergies": "",
+          "latexAllergy": "no"
+        },
+        "familyHistory": {
+          "psoriasis": "yes",
+          "eczema": "no",
+          "melanoma": "no",
+          "skinCancer": "no",
+          "autoimmune": "no",
+          "otherDetails": ""
+        },
+        "socialHistory": {
+          "sunExposure": "moderate",
+          "tanningHistory": "occasional",
+          "occupation": "Sales representative",
+          "cosmeticsUse": ""
+        }
+      },
+      "expected": {
+        "dlqiScore": 16,
+        "dlqiCategoryLabel": "Very large effect",
+        "answeredCount": 10,
+        "firedRules": [
+          {
+            "id": "DLQI-01",
+            "domain": "Symptoms and feelings",
+            "description": "Over the last week, how itchy, sore, painful or stinging has your skin been?",
+            "score": 3
+          },
+          {
+            "id": "DLQI-02",
+            "domain": "Symptoms and feelings",
+            "description": "Over the last week, how embarrassed or self-conscious have you been because of your skin?",
+            "score": 3
+          },
+          {
+            "id": "DLQI-03",
+            "domain": "Daily activities",
+            "description": "Over the last week, how much has your skin interfered with you going shopping or looking after your home or garden?",
+            "score": 2
+          },
+          {
+            "id": "DLQI-04",
+            "domain": "Daily activities",
+            "description": "Over the last week, how much has your skin influenced the clothes you wear?",
+            "score": 2
+          },
+          {
+            "id": "DLQI-05",
+            "domain": "Leisure",
+            "description": "Over the last week, how much has your skin affected any social or leisure activities?",
+            "score": 2
+          },
+          {
+            "id": "DLQI-06",
+            "domain": "Leisure",
+            "description": "Over the last week, how much has your skin made it difficult for you to do any sport?",
+            "score": 1
+          },
+          {
+            "id": "DLQI-07",
+            "domain": "Work and school",
+            "description": "Over the last week, has your skin prevented you from working or studying? If \"No\", over the last week how much has your skin been a problem at work or studying?",
+            "score": 1
+          },
+          {
+            "id": "DLQI-08",
+            "domain": "Relationships",
+            "description": "Over the last week, how much has your skin created problems with your partner or any of your close friends or relatives?",
+            "score": 1
+          },
+          {
+            "id": "DLQI-09",
+            "domain": "Relationships",
+            "description": "Over the last week, how much has your skin caused any sexual difficulties?",
+            "score": 0
+          },
+          {
+            "id": "DLQI-10",
+            "domain": "Treatment",
+            "description": "Over the last week, how much of a problem has the treatment for your skin been, for example by making your home messy, or by taking up time?",
+            "score": 1
+          }
+        ]
+      }
+    },
+    {
+      "name": "extremely-large-effect",
+      "description": "Severe, widespread erythrodermic-tending psoriasis with major impact on every domain (DLQI 26): extremely large effect on quality of life.",
+      "state": {
+        "demographics": {
+          "firstName": "",
+          "lastName": "",
+          "dateOfBirth": "1970-10-05",
+          "sex": "female",
+          "skinType": "II"
+        },
+        "chiefComplaint": {
+          "primaryConcern": "Painful, extensive scaling covering most of the body",
+          "duration": "5 years",
+          "location": "Generalised",
+          "progression": "worsening",
+          "previousTreatments": "Topicals, phototherapy, methotrexate"
+        },
+        "dlqiQuestionnaire": {
+          "q1": 3,
+          "q2": 3,
+          "q3": 3,
+          "q4": 2,
+          "q5": 3,
+          "q6": 2,
+          "q7": 3,
+          "q8": 3,
+          "q9": 2,
+          "q10": 2
+        },
+        "lesionCharacteristics": {
+          "type": "plaque",
+          "color": "erythematous",
+          "border": "irregular",
+          "sizeMillimeters": 120,
+          "distribution": "generalized",
+          "number": "numerous",
+          "surface": "scaly"
+        },
+        "medicalHistory": {
+          "previousSkinConditions": "Chronic plaque psoriasis with psoriatic arthritis",
+          "autoimmuneDiseases": "yes",
+          "autoimmuneDiseaseDetails": "Psoriatic arthritis",
+          "immunosuppression": "no",
+          "immunosuppressionDetails": "",
+          "cancerHistory": "no",
+          "cancerHistoryDetails": ""
+        },
+        "currentMedications": {
+          "topicals": [],
+          "systemics": [],
+          "biologics": [],
+          "otcProducts": "Emollients"
+        },
+        "allergies": {
+          "drugAllergies": [],
+          "contactAllergies": "",
+          "latexAllergy": "no"
+        },
+        "familyHistory": {
+          "psoriasis": "yes",
+          "eczema": "no",
+          "melanoma": "no",
+          "skinCancer": "no",
+          "autoimmune": "yes",
+          "otherDetails": ""
+        },
+        "socialHistory": {
+          "sunExposure": "minimal",
+          "tanningHistory": "never",
+          "occupation": "Currently not working due to condition",
+          "cosmeticsUse": ""
+        }
+      },
+      "expected": {
+        "dlqiScore": 26,
+        "dlqiCategoryLabel": "Extremely large effect",
+        "answeredCount": 10,
+        "firedRules": [
+          {
+            "id": "DLQI-01",
+            "domain": "Symptoms and feelings",
+            "description": "Over the last week, how itchy, sore, painful or stinging has your skin been?",
+            "score": 3
+          },
+          {
+            "id": "DLQI-02",
+            "domain": "Symptoms and feelings",
+            "description": "Over the last week, how embarrassed or self-conscious have you been because of your skin?",
+            "score": 3
+          },
+          {
+            "id": "DLQI-03",
+            "domain": "Daily activities",
+            "description": "Over the last week, how much has your skin interfered with you going shopping or looking after your home or garden?",
+            "score": 3
+          },
+          {
+            "id": "DLQI-04",
+            "domain": "Daily activities",
+            "description": "Over the last week, how much has your skin influenced the clothes you wear?",
+            "score": 2
+          },
+          {
+            "id": "DLQI-05",
+            "domain": "Leisure",
+            "description": "Over the last week, how much has your skin affected any social or leisure activities?",
+            "score": 3
+          },
+          {
+            "id": "DLQI-06",
+            "domain": "Leisure",
+            "description": "Over the last week, how much has your skin made it difficult for you to do any sport?",
+            "score": 2
+          },
+          {
+            "id": "DLQI-07",
+            "domain": "Work and school",
+            "description": "Over the last week, has your skin prevented you from working or studying? If \"No\", over the last week how much has your skin been a problem at work or studying?",
+            "score": 3
+          },
+          {
+            "id": "DLQI-08",
+            "domain": "Relationships",
+            "description": "Over the last week, how much has your skin created problems with your partner or any of your close friends or relatives?",
+            "score": 3
+          },
+          {
+            "id": "DLQI-09",
+            "domain": "Relationships",
+            "description": "Over the last week, how much has your skin caused any sexual difficulties?",
+            "score": 2
+          },
+          {
+            "id": "DLQI-10",
+            "domain": "Treatment",
+            "description": "Over the last week, how much of a problem has the treatment for your skin been, for example by making your home messy, or by taking up time?",
+            "score": 2
+          }
+        ]
+      }
+    }
+  ]
+}

@@ -1,0 +1,385 @@
+{
+  "engine": "front-end-with-html",
+  "graderHint": "calculateREBA",
+  "note": "Realistic filled-in states in the REBA engine's shape. `expected` is computed by `bin/test-personas --update` and verified by `bin/test-personas`.",
+  "personas": [
+    {
+      "name": "low-risk",
+      "description": "Largely neutral posture — mild neck flexion with an upright trunk: REBA 2 — low risk, change may be needed.",
+      "state": {
+        "demographics": {
+          "firstName": "",
+          "lastName": "",
+          "dateOfBirth": "",
+          "sex": "",
+          "occupation": "",
+          "employer": "",
+          "jobTitle": "",
+          "yearsInRole": null
+        },
+        "workstationSetup": {
+          "deskHeight": "",
+          "chairType": "",
+          "chairAdjustability": "",
+          "monitorPosition": "",
+          "monitorDistance": "",
+          "monitorHeight": "",
+          "keyboardPlacement": "",
+          "mousePlacement": "",
+          "lighting": "",
+          "temperature": ""
+        },
+        "postureAssessment": {
+          "sittingPosture": "",
+          "standingPosture": "",
+          "neckAngle": "flexed-0-20",
+          "trunkAngle": "neutral",
+          "shoulderPosition": "",
+          "wristDeviation": "",
+          "neckScore": null,
+          "trunkScore": null,
+          "legScore": null,
+          "upperArmScore": null,
+          "lowerArmScore": null,
+          "wristScore": null
+        },
+        "repetitiveTasks": {
+          "taskDescription": "",
+          "frequency": "",
+          "durationPerSession": "",
+          "forceRequired": "",
+          "vibrationExposure": "",
+          "cycleTimeSeconds": null
+        },
+        "manualHandling": {
+          "liftingFrequency": "",
+          "loadWeightKg": null,
+          "carryDistanceMetres": null,
+          "pushPullForces": "",
+          "teamLifting": "",
+          "mechanicalAidsAvailable": ""
+        },
+        "currentSymptoms": {
+          "painLocations": [],
+          "painSeverity": null,
+          "onsetDate": "",
+          "duration": "",
+          "aggravatingFactors": "",
+          "relievingFactors": "",
+          "impactOnWork": ""
+        },
+        "medicalHistory": {
+          "musculoskeletalConditions": [],
+          "previousInjuries": "",
+          "surgeries": "",
+          "chronicPain": "",
+          "rsiCarpalTunnel": "",
+          "backProblems": ""
+        },
+        "currentInterventions": {
+          "ergonomicEquipment": [],
+          "physiotherapy": "",
+          "occupationalTherapy": "",
+          "workplaceAdjustments": "",
+          "medications": ""
+        },
+        "psychosocialFactors": {
+          "jobSatisfaction": "",
+          "workload": "",
+          "stressLevel": "",
+          "breaksTaken": "",
+          "autonomy": "",
+          "employerSupport": ""
+        },
+        "recommendations": {
+          "equipmentChanges": "",
+          "workstationModifications": "",
+          "trainingRequired": "",
+          "breakSchedule": "",
+          "followUpDate": "",
+          "referrals": ""
+        }
+      },
+      "expected": {
+        "rebaScore": 2,
+        "riskLevel": "Low risk",
+        "firedRules": [
+          {
+            "id": "NECK-001",
+            "system": "Neck",
+            "description": "Neck flexed 0-20 degrees",
+            "score": 1
+          },
+          {
+            "id": "TRUNK-001",
+            "system": "Trunk",
+            "description": "Trunk upright (neutral)",
+            "score": 1
+          }
+        ]
+      }
+    },
+    {
+      "name": "medium-risk",
+      "description": "Marked neck flexion, moderate trunk flexion and raised shoulders: REBA 7 — medium risk, investigate and change soon.",
+      "state": {
+        "demographics": {
+          "firstName": "",
+          "lastName": "",
+          "dateOfBirth": "",
+          "sex": "",
+          "occupation": "",
+          "employer": "",
+          "jobTitle": "",
+          "yearsInRole": null
+        },
+        "workstationSetup": {
+          "deskHeight": "",
+          "chairType": "",
+          "chairAdjustability": "",
+          "monitorPosition": "",
+          "monitorDistance": "",
+          "monitorHeight": "",
+          "keyboardPlacement": "",
+          "mousePlacement": "",
+          "lighting": "",
+          "temperature": ""
+        },
+        "postureAssessment": {
+          "sittingPosture": "",
+          "standingPosture": "",
+          "neckAngle": "flexed-20-plus",
+          "trunkAngle": "flexed-20-60",
+          "shoulderPosition": "raised",
+          "wristDeviation": "",
+          "neckScore": null,
+          "trunkScore": null,
+          "legScore": null,
+          "upperArmScore": null,
+          "lowerArmScore": null,
+          "wristScore": null
+        },
+        "repetitiveTasks": {
+          "taskDescription": "",
+          "frequency": "",
+          "durationPerSession": "",
+          "forceRequired": "",
+          "vibrationExposure": "",
+          "cycleTimeSeconds": null
+        },
+        "manualHandling": {
+          "liftingFrequency": "",
+          "loadWeightKg": null,
+          "carryDistanceMetres": null,
+          "pushPullForces": "",
+          "teamLifting": "",
+          "mechanicalAidsAvailable": ""
+        },
+        "currentSymptoms": {
+          "painLocations": [],
+          "painSeverity": null,
+          "onsetDate": "",
+          "duration": "",
+          "aggravatingFactors": "",
+          "relievingFactors": "",
+          "impactOnWork": ""
+        },
+        "medicalHistory": {
+          "musculoskeletalConditions": [],
+          "previousInjuries": "",
+          "surgeries": "",
+          "chronicPain": "",
+          "rsiCarpalTunnel": "",
+          "backProblems": ""
+        },
+        "currentInterventions": {
+          "ergonomicEquipment": [],
+          "physiotherapy": "",
+          "occupationalTherapy": "",
+          "workplaceAdjustments": "",
+          "medications": ""
+        },
+        "psychosocialFactors": {
+          "jobSatisfaction": "",
+          "workload": "",
+          "stressLevel": "",
+          "breaksTaken": "",
+          "autonomy": "",
+          "employerSupport": ""
+        },
+        "recommendations": {
+          "equipmentChanges": "",
+          "workstationModifications": "",
+          "trainingRequired": "",
+          "breakSchedule": "",
+          "followUpDate": "",
+          "referrals": ""
+        }
+      },
+      "expected": {
+        "rebaScore": 7,
+        "riskLevel": "Medium risk",
+        "firedRules": [
+          {
+            "id": "NECK-002",
+            "system": "Neck",
+            "description": "Neck flexed >20 degrees",
+            "score": 2
+          },
+          {
+            "id": "TRUNK-003",
+            "system": "Trunk",
+            "description": "Trunk flexed 20-60 degrees",
+            "score": 3
+          },
+          {
+            "id": "SHLDR-001",
+            "system": "Shoulder",
+            "description": "Shoulders raised or hunched",
+            "score": 2
+          }
+        ]
+      }
+    },
+    {
+      "name": "very-high-risk",
+      "description": "Twisted neck, deep trunk flexion, flexed shoulders, ulnar-deviated wrist, heavy lifting and severe pain: REBA 15 — very high risk, change immediately.",
+      "state": {
+        "demographics": {
+          "firstName": "",
+          "lastName": "",
+          "dateOfBirth": "",
+          "sex": "",
+          "occupation": "",
+          "employer": "",
+          "jobTitle": "",
+          "yearsInRole": null
+        },
+        "workstationSetup": {
+          "deskHeight": "",
+          "chairType": "",
+          "chairAdjustability": "",
+          "monitorPosition": "",
+          "monitorDistance": "",
+          "monitorHeight": "",
+          "keyboardPlacement": "",
+          "mousePlacement": "",
+          "lighting": "",
+          "temperature": ""
+        },
+        "postureAssessment": {
+          "sittingPosture": "",
+          "standingPosture": "",
+          "neckAngle": "twisted",
+          "trunkAngle": "flexed-60-plus",
+          "shoulderPosition": "flexed",
+          "wristDeviation": "ulnar-deviated",
+          "neckScore": null,
+          "trunkScore": null,
+          "legScore": null,
+          "upperArmScore": null,
+          "lowerArmScore": null,
+          "wristScore": null
+        },
+        "repetitiveTasks": {
+          "taskDescription": "",
+          "frequency": "",
+          "durationPerSession": "",
+          "forceRequired": "",
+          "vibrationExposure": "",
+          "cycleTimeSeconds": null
+        },
+        "manualHandling": {
+          "liftingFrequency": "",
+          "loadWeightKg": 25,
+          "carryDistanceMetres": null,
+          "pushPullForces": "",
+          "teamLifting": "",
+          "mechanicalAidsAvailable": ""
+        },
+        "currentSymptoms": {
+          "painLocations": [],
+          "painSeverity": 9,
+          "onsetDate": "",
+          "duration": "",
+          "aggravatingFactors": "",
+          "relievingFactors": "",
+          "impactOnWork": ""
+        },
+        "medicalHistory": {
+          "musculoskeletalConditions": [],
+          "previousInjuries": "",
+          "surgeries": "",
+          "chronicPain": "",
+          "rsiCarpalTunnel": "",
+          "backProblems": ""
+        },
+        "currentInterventions": {
+          "ergonomicEquipment": [],
+          "physiotherapy": "",
+          "occupationalTherapy": "",
+          "workplaceAdjustments": "",
+          "medications": ""
+        },
+        "psychosocialFactors": {
+          "jobSatisfaction": "",
+          "workload": "",
+          "stressLevel": "",
+          "breaksTaken": "",
+          "autonomy": "",
+          "employerSupport": ""
+        },
+        "recommendations": {
+          "equipmentChanges": "",
+          "workstationModifications": "",
+          "trainingRequired": "",
+          "breakSchedule": "",
+          "followUpDate": "",
+          "referrals": ""
+        }
+      },
+      "expected": {
+        "rebaScore": 15,
+        "riskLevel": "Very high risk",
+        "firedRules": [
+          {
+            "id": "NECK-004",
+            "system": "Neck",
+            "description": "Neck twisted or side-bending",
+            "score": 3
+          },
+          {
+            "id": "TRUNK-004",
+            "system": "Trunk",
+            "description": "Trunk flexed >60 degrees",
+            "score": 4
+          },
+          {
+            "id": "SHLDR-003",
+            "system": "Shoulder",
+            "description": "Arms flexed forward",
+            "score": 3
+          },
+          {
+            "id": "WRIST-003",
+            "system": "Wrist",
+            "description": "Wrist ulnar deviation",
+            "score": 3
+          },
+          {
+            "id": "MH-001",
+            "system": "Manual Handling",
+            "description": "Heavy load lifting (>20kg)",
+            "score": 3
+          },
+          {
+            "id": "SYM-001",
+            "system": "Symptoms",
+            "description": "Severe pain (8-10)",
+            "score": 3
+          }
+        ]
+      }
+    }
+  ]
+}

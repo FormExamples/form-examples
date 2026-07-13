@@ -1,0 +1,394 @@
+{
+  "engine": "front-end-with-html",
+  "graderHint": "calculateAllergySeverity",
+  "note": "Realistic filled-in states in the allergy scoring engine's shape. Graded by calculateAllergySeverity (rules-based; the overall severity is the highest fired rule level — deterministic). `expected` is computed by `bin/test-personas --update` and verified by `bin/test-personas`.",
+  "personas": [
+    {
+      "name": "mild-seasonal",
+      "description": "Seasonal pollen and dust-mite allergic rhinitis only, no systemic reactions: mild severity.",
+      "state": {
+        "demographics": {
+          "firstName": "",
+          "lastName": "",
+          "dateOfBirth": "",
+          "nhsNumber": "",
+          "sex": "female",
+          "weight": 68,
+          "height": 168,
+          "bmi": null
+        },
+        "allergyHistory": {
+          "ageOfOnset": 14,
+          "knownAllergens": "grass pollen, house dust mite",
+          "familyHistoryOfAtopy": "yes",
+          "familyAtopyDetails": "mother has hay fever",
+          "familyHistoryOfAllergy": "no",
+          "familyAllergyDetails": ""
+        },
+        "drugAllergies": {
+          "hasDrugAllergies": "no",
+          "drugAllergies": [],
+          "crossReactivityConcerns": ""
+        },
+        "foodAllergies": {
+          "hasFoodAllergies": "no",
+          "foodAllergies": [],
+          "igeType": "",
+          "oralAllergySyndrome": "",
+          "dietaryRestrictions": ""
+        },
+        "environmentalAllergies": {
+          "pollenAllergy": "yes",
+          "dustMiteAllergy": "yes",
+          "mouldAllergy": "no",
+          "animalDanderAllergy": "no",
+          "latexAllergy": "no",
+          "insectStingAllergy": "no",
+          "insectStingSeverity": "",
+          "seasonalPattern": "spring-summer",
+          "otherEnvironmentalAllergens": ""
+        },
+        "anaphylaxisHistory": {
+          "hasAnaphylaxisHistory": "no",
+          "numberOfEpisodes": null,
+          "episodes": [],
+          "adrenalineAutoInjectorPrescribed": "no",
+          "actionPlanInPlace": "no"
+        },
+        "testingResults": {
+          "skinPrickTestsDone": "yes",
+          "specificIgEDone": "no",
+          "componentResolvedDiagnosticsDone": "no",
+          "challengeTestsDone": "no",
+          "patchTestsDone": "no",
+          "testResults": []
+        },
+        "currentManagement": {
+          "antihistamines": "yes",
+          "antihistamineDetails": "cetirizine 10 mg daily in season",
+          "nasalSteroids": "yes",
+          "adrenalineAutoInjector": "no",
+          "immunotherapy": "no",
+          "immunotherapyDetails": "",
+          "biologics": "no",
+          "biologicDetails": "",
+          "allergenAvoidanceStrategies": "dust-mite covers",
+          "otherMedications": []
+        },
+        "comorbidities": {
+          "asthma": "no",
+          "asthmaSeverity": "",
+          "eczema": "no",
+          "eczemaSeverity": "",
+          "rhinitis": "yes",
+          "rhinitisSeverity": "mild",
+          "eosinophilicOesophagitis": "no",
+          "mastCellDisorders": "no",
+          "mastCellDetails": "",
+          "mentalHealthImpact": "no",
+          "mentalHealthDetails": ""
+        },
+        "impactActionPlan": {
+          "qualityOfLifeScore": 8,
+          "schoolWorkImpact": "minimal",
+          "schoolWorkImpactDetails": "",
+          "emergencyActionPlanStatus": "not-required",
+          "trainingProvided": "no",
+          "trainingDetails": "",
+          "followUpSchedule": "annual"
+        }
+      },
+      "expected": {
+        "severityLevel": "mild",
+        "firedRules": [
+          {
+            "id": "EA-004",
+            "category": "Environmental",
+            "description": "Pollen allergy",
+            "severityLevel": "mild"
+          },
+          {
+            "id": "EA-005",
+            "category": "Environmental",
+            "description": "Dust mite allergy",
+            "severityLevel": "mild"
+          }
+        ]
+      }
+    },
+    {
+      "name": "moderate-food-and-asthma",
+      "description": "IgE-mediated food allergy with asthma comorbidity but no anaphylaxis: moderate severity.",
+      "state": {
+        "demographics": {
+          "firstName": "",
+          "lastName": "",
+          "dateOfBirth": "",
+          "nhsNumber": "",
+          "sex": "male",
+          "weight": 40,
+          "height": 148,
+          "bmi": null
+        },
+        "allergyHistory": {
+          "ageOfOnset": 5,
+          "knownAllergens": "peanut, egg",
+          "familyHistoryOfAtopy": "yes",
+          "familyAtopyDetails": "sibling has eczema",
+          "familyHistoryOfAllergy": "yes",
+          "familyAllergyDetails": "father peanut allergy"
+        },
+        "drugAllergies": {
+          "hasDrugAllergies": "no",
+          "drugAllergies": [],
+          "crossReactivityConcerns": ""
+        },
+        "foodAllergies": {
+          "hasFoodAllergies": "yes",
+          "foodAllergies": [],
+          "igeType": "IgE-mediated",
+          "oralAllergySyndrome": "no",
+          "dietaryRestrictions": "strict peanut and egg avoidance"
+        },
+        "environmentalAllergies": {
+          "pollenAllergy": "yes",
+          "dustMiteAllergy": "no",
+          "mouldAllergy": "no",
+          "animalDanderAllergy": "no",
+          "latexAllergy": "no",
+          "insectStingAllergy": "no",
+          "insectStingSeverity": "",
+          "seasonalPattern": "spring",
+          "otherEnvironmentalAllergens": ""
+        },
+        "anaphylaxisHistory": {
+          "hasAnaphylaxisHistory": "no",
+          "numberOfEpisodes": null,
+          "episodes": [],
+          "adrenalineAutoInjectorPrescribed": "yes",
+          "actionPlanInPlace": "yes"
+        },
+        "testingResults": {
+          "skinPrickTestsDone": "yes",
+          "specificIgEDone": "yes",
+          "componentResolvedDiagnosticsDone": "no",
+          "challengeTestsDone": "no",
+          "patchTestsDone": "no",
+          "testResults": []
+        },
+        "currentManagement": {
+          "antihistamines": "yes",
+          "antihistamineDetails": "loratadine as required",
+          "nasalSteroids": "no",
+          "adrenalineAutoInjector": "yes",
+          "immunotherapy": "no",
+          "immunotherapyDetails": "",
+          "biologics": "no",
+          "biologicDetails": "",
+          "allergenAvoidanceStrategies": "reads all food labels",
+          "otherMedications": []
+        },
+        "comorbidities": {
+          "asthma": "yes",
+          "asthmaSeverity": "mild",
+          "eczema": "yes",
+          "eczemaSeverity": "mild",
+          "rhinitis": "yes",
+          "rhinitisSeverity": "moderate",
+          "eosinophilicOesophagitis": "no",
+          "mastCellDisorders": "no",
+          "mastCellDetails": "",
+          "mentalHealthImpact": "no",
+          "mentalHealthDetails": ""
+        },
+        "impactActionPlan": {
+          "qualityOfLifeScore": 5,
+          "schoolWorkImpact": "moderate",
+          "schoolWorkImpactDetails": "avoids school trips involving food",
+          "emergencyActionPlanStatus": "in-place",
+          "trainingProvided": "yes",
+          "trainingDetails": "school staff auto-injector training",
+          "followUpSchedule": "6-monthly"
+        }
+      },
+      "expected": {
+        "severityLevel": "moderate",
+        "firedRules": [
+          {
+            "id": "FA-004",
+            "category": "Food Allergy",
+            "description": "IgE-mediated food allergy",
+            "severityLevel": "moderate"
+          },
+          {
+            "id": "EA-004",
+            "category": "Environmental",
+            "description": "Pollen allergy",
+            "severityLevel": "mild"
+          },
+          {
+            "id": "CM-001",
+            "category": "Comorbidity",
+            "description": "Asthma comorbidity with allergies",
+            "severityLevel": "moderate"
+          }
+        ]
+      }
+    },
+    {
+      "name": "severe-anaphylaxis",
+      "description": "Recurrent anaphylaxis (multiple episodes) with severe asthma: severe severity.",
+      "state": {
+        "demographics": {
+          "firstName": "",
+          "lastName": "",
+          "dateOfBirth": "",
+          "nhsNumber": "",
+          "sex": "female",
+          "weight": 62,
+          "height": 165,
+          "bmi": null
+        },
+        "allergyHistory": {
+          "ageOfOnset": 3,
+          "knownAllergens": "peanut, tree nuts, bee sting",
+          "familyHistoryOfAtopy": "yes",
+          "familyAtopyDetails": "strong atopic family history",
+          "familyHistoryOfAllergy": "yes",
+          "familyAllergyDetails": "mother nut allergy"
+        },
+        "drugAllergies": {
+          "hasDrugAllergies": "no",
+          "drugAllergies": [],
+          "crossReactivityConcerns": ""
+        },
+        "foodAllergies": {
+          "hasFoodAllergies": "yes",
+          "foodAllergies": [],
+          "igeType": "IgE-mediated",
+          "oralAllergySyndrome": "no",
+          "dietaryRestrictions": "strict nut avoidance"
+        },
+        "environmentalAllergies": {
+          "pollenAllergy": "yes",
+          "dustMiteAllergy": "yes",
+          "mouldAllergy": "no",
+          "animalDanderAllergy": "yes",
+          "latexAllergy": "no",
+          "insectStingAllergy": "yes",
+          "insectStingSeverity": "anaphylaxis",
+          "seasonalPattern": "perennial",
+          "otherEnvironmentalAllergens": ""
+        },
+        "anaphylaxisHistory": {
+          "hasAnaphylaxisHistory": "yes",
+          "numberOfEpisodes": 3,
+          "episodes": [],
+          "adrenalineAutoInjectorPrescribed": "yes",
+          "actionPlanInPlace": "yes"
+        },
+        "testingResults": {
+          "skinPrickTestsDone": "yes",
+          "specificIgEDone": "yes",
+          "componentResolvedDiagnosticsDone": "yes",
+          "challengeTestsDone": "no",
+          "patchTestsDone": "no",
+          "testResults": []
+        },
+        "currentManagement": {
+          "antihistamines": "yes",
+          "antihistamineDetails": "daily cetirizine",
+          "nasalSteroids": "yes",
+          "adrenalineAutoInjector": "yes",
+          "immunotherapy": "yes",
+          "immunotherapyDetails": "venom immunotherapy",
+          "biologics": "no",
+          "biologicDetails": "",
+          "allergenAvoidanceStrategies": "carries two auto-injectors",
+          "otherMedications": []
+        },
+        "comorbidities": {
+          "asthma": "yes",
+          "asthmaSeverity": "severe",
+          "eczema": "yes",
+          "eczemaSeverity": "moderate",
+          "rhinitis": "yes",
+          "rhinitisSeverity": "severe",
+          "eosinophilicOesophagitis": "no",
+          "mastCellDisorders": "no",
+          "mastCellDetails": "",
+          "mentalHealthImpact": "yes",
+          "mentalHealthDetails": "anxiety about accidental exposure"
+        },
+        "impactActionPlan": {
+          "qualityOfLifeScore": 2,
+          "schoolWorkImpact": "severe",
+          "schoolWorkImpactDetails": "significant restriction of activities",
+          "emergencyActionPlanStatus": "in-place",
+          "trainingProvided": "yes",
+          "trainingDetails": "family and workplace trained",
+          "followUpSchedule": "3-monthly"
+        }
+      },
+      "expected": {
+        "severityLevel": "severe",
+        "firedRules": [
+          {
+            "id": "AN-001",
+            "category": "Anaphylaxis",
+            "description": "History of anaphylaxis",
+            "severityLevel": "severe"
+          },
+          {
+            "id": "AN-002",
+            "category": "Anaphylaxis",
+            "description": "Multiple anaphylaxis episodes (>=2)",
+            "severityLevel": "severe"
+          },
+          {
+            "id": "AN-005",
+            "category": "Anaphylaxis",
+            "description": "Insect sting allergy with anaphylaxis",
+            "severityLevel": "severe"
+          },
+          {
+            "id": "FA-004",
+            "category": "Food Allergy",
+            "description": "IgE-mediated food allergy",
+            "severityLevel": "moderate"
+          },
+          {
+            "id": "EA-002",
+            "category": "Environmental",
+            "description": "Multiple environmental allergies (>=4)",
+            "severityLevel": "moderate"
+          },
+          {
+            "id": "EA-004",
+            "category": "Environmental",
+            "description": "Pollen allergy",
+            "severityLevel": "mild"
+          },
+          {
+            "id": "EA-005",
+            "category": "Environmental",
+            "description": "Dust mite allergy",
+            "severityLevel": "mild"
+          },
+          {
+            "id": "CM-001",
+            "category": "Comorbidity",
+            "description": "Asthma comorbidity with allergies",
+            "severityLevel": "moderate"
+          },
+          {
+            "id": "CM-002",
+            "category": "Comorbidity",
+            "description": "Severe asthma comorbidity",
+            "severityLevel": "severe"
+          }
+        ]
+      }
+    }
+  ]
+}

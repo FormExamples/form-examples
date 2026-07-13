@@ -1,0 +1,361 @@
+{
+  "engine": "front-end-with-html",
+  "graderHint": "calculateDMFT",
+  "note": "Realistic filled-in states in the DMFT scoring engine's shape. `expected` is computed by `bin/test-personas --update` and verified by `bin/test-personas`.",
+  "personas": [
+    {
+      "name": "very-low-caries",
+      "description": "Well-maintained dentition with one small cavity and two old fillings (DMFT 3): very-low caries experience.",
+      "state": {
+        "demographics": {
+          "firstName": "",
+          "lastName": "",
+          "dateOfBirth": "1998-04-12",
+          "sex": "female",
+          "emergencyContactName": "",
+          "emergencyContactPhone": ""
+        },
+        "chiefComplaint": {
+          "primaryConcern": "Routine check-up",
+          "painLocation": "",
+          "painSeverity": null,
+          "painOnset": "",
+          "painDuration": ""
+        },
+        "dentalHistory": {
+          "lastDentalVisit": "2024-11-02",
+          "visitFrequency": "every-6-months",
+          "brushingFrequency": "twice-daily",
+          "flossingFrequency": "daily",
+          "dentalAnxietyLevel": "none"
+        },
+        "dmftAssessment": {
+          "decayedTeeth": 1,
+          "missingTeeth": 0,
+          "filledTeeth": 2,
+          "toothChartNotes": "One early occlusal lesion on 16; amalgam restorations on 36 and 46."
+        },
+        "periodontalAssessment": {
+          "gumBleeding": "no",
+          "pocketDepthsAboveNormal": "no",
+          "pocketDepthDetails": "",
+          "gumRecession": "no",
+          "gumRecessionDetails": "",
+          "toothMobility": "no",
+          "mobilityDetails": "",
+          "furcationInvolvement": "no",
+          "furcationDetails": ""
+        },
+        "oralExamination": {
+          "softTissueFindings": "Normal",
+          "tmjPain": "no",
+          "tmjClicking": "no",
+          "tmjLimitedOpening": "no",
+          "occlusion": "class-I",
+          "oralHygieneIndex": "good"
+        },
+        "medicalHistory": {
+          "cardiovascularDisease": "no",
+          "cardiovascularDetails": "",
+          "diabetes": "no",
+          "diabetesType": "",
+          "diabetesControlled": "",
+          "bleedingDisorder": "no",
+          "bleedingDetails": "",
+          "bisphosphonateUse": "no",
+          "bisphosphonateDetails": "",
+          "radiationTherapyHeadNeck": "no",
+          "radiationDetails": "",
+          "immunosuppression": "no",
+          "immunosuppressionDetails": ""
+        },
+        "currentMedications": {
+          "anticoagulantUse": "no",
+          "anticoagulantType": "",
+          "bisphosphonateCurrentUse": "no",
+          "bisphosphonateName": "",
+          "immunosuppressantUse": "no",
+          "immunosuppressantName": "",
+          "allergyToAnaesthetics": "no",
+          "anaestheticAllergyDetails": "",
+          "otherMedications": ""
+        },
+        "radiographicFindings": {
+          "panoramicFindings": "",
+          "periapicalFindings": "",
+          "bitewingFindings": "No interproximal caries",
+          "boneLossPattern": "none",
+          "boneLossDetails": ""
+        }
+      },
+      "expected": {
+        "dmftScore": 3,
+        "dmftCategory": "very-low",
+        "firedRules": [
+          {
+            "id": "DMFT-002",
+            "system": "DMFT",
+            "description": "Very low caries experience (DMFT 1-5)",
+            "category": "very-low"
+          }
+        ]
+      }
+    },
+    {
+      "name": "moderate-caries",
+      "description": "Multiple decayed and filled teeth with gingival bleeding (DMFT 12): moderate caries experience.",
+      "state": {
+        "demographics": {
+          "firstName": "",
+          "lastName": "",
+          "dateOfBirth": "1979-08-23",
+          "sex": "male",
+          "emergencyContactName": "",
+          "emergencyContactPhone": ""
+        },
+        "chiefComplaint": {
+          "primaryConcern": "Sensitivity to cold and occasional aching",
+          "painLocation": "Lower right quadrant",
+          "painSeverity": 4,
+          "painOnset": "gradual",
+          "painDuration": "several weeks"
+        },
+        "dentalHistory": {
+          "lastDentalVisit": "2022-03-15",
+          "visitFrequency": "rarely",
+          "brushingFrequency": "once-daily",
+          "flossingFrequency": "rarely",
+          "dentalAnxietyLevel": "mild"
+        },
+        "dmftAssessment": {
+          "decayedTeeth": 3,
+          "missingTeeth": 2,
+          "filledTeeth": 7,
+          "toothChartNotes": "Active carious lesions on 17, 26, 47; missing 36 and 46; multiple restorations across posterior teeth."
+        },
+        "periodontalAssessment": {
+          "gumBleeding": "yes",
+          "pocketDepthsAboveNormal": "no",
+          "pocketDepthDetails": "",
+          "gumRecession": "no",
+          "gumRecessionDetails": "",
+          "toothMobility": "no",
+          "mobilityDetails": "",
+          "furcationInvolvement": "no",
+          "furcationDetails": ""
+        },
+        "oralExamination": {
+          "softTissueFindings": "Generalised marginal gingivitis",
+          "tmjPain": "no",
+          "tmjClicking": "no",
+          "tmjLimitedOpening": "no",
+          "occlusion": "class-I",
+          "oralHygieneIndex": "fair"
+        },
+        "medicalHistory": {
+          "cardiovascularDisease": "no",
+          "cardiovascularDetails": "",
+          "diabetes": "no",
+          "diabetesType": "",
+          "diabetesControlled": "",
+          "bleedingDisorder": "no",
+          "bleedingDetails": "",
+          "bisphosphonateUse": "no",
+          "bisphosphonateDetails": "",
+          "radiationTherapyHeadNeck": "no",
+          "radiationDetails": "",
+          "immunosuppression": "no",
+          "immunosuppressionDetails": ""
+        },
+        "currentMedications": {
+          "anticoagulantUse": "no",
+          "anticoagulantType": "",
+          "bisphosphonateCurrentUse": "no",
+          "bisphosphonateName": "",
+          "immunosuppressantUse": "no",
+          "immunosuppressantName": "",
+          "allergyToAnaesthetics": "no",
+          "anaestheticAllergyDetails": "",
+          "otherMedications": ""
+        },
+        "radiographicFindings": {
+          "panoramicFindings": "Interproximal radiolucencies posteriorly",
+          "periapicalFindings": "",
+          "bitewingFindings": "Caries into dentine on 17 and 47",
+          "boneLossPattern": "horizontal",
+          "boneLossDetails": "Mild horizontal bone loss posteriorly"
+        }
+      },
+      "expected": {
+        "dmftScore": 12,
+        "dmftCategory": "moderate",
+        "firedRules": [
+          {
+            "id": "DMFT-004",
+            "system": "DMFT",
+            "description": "Moderate caries experience (DMFT 11-15)",
+            "category": "moderate"
+          },
+          {
+            "id": "PERIO-001",
+            "system": "Periodontal",
+            "description": "Gum bleeding present",
+            "category": "low"
+          },
+          {
+            "id": "RAD-001",
+            "system": "Radiographic",
+            "description": "Bone loss detected",
+            "category": "moderate"
+          }
+        ]
+      }
+    },
+    {
+      "name": "very-high-caries",
+      "description": "Extensive decay, several missing teeth and periodontal breakdown with poorly-controlled diabetes (DMFT 25): very-high caries experience.",
+      "state": {
+        "demographics": {
+          "firstName": "",
+          "lastName": "",
+          "dateOfBirth": "1962-01-30",
+          "sex": "male",
+          "emergencyContactName": "",
+          "emergencyContactPhone": ""
+        },
+        "chiefComplaint": {
+          "primaryConcern": "Loose teeth and persistent pain when chewing",
+          "painLocation": "Multiple sites",
+          "painSeverity": 7,
+          "painOnset": "gradual",
+          "painDuration": "several months"
+        },
+        "dentalHistory": {
+          "lastDentalVisit": "2019-07-08",
+          "visitFrequency": "never",
+          "brushingFrequency": "occasionally",
+          "flossingFrequency": "never",
+          "dentalAnxietyLevel": "severe"
+        },
+        "dmftAssessment": {
+          "decayedTeeth": 9,
+          "missingTeeth": 6,
+          "filledTeeth": 10,
+          "toothChartNotes": "Widespread active caries, multiple retained roots, six teeth previously extracted, extensive prior restorations now failing."
+        },
+        "periodontalAssessment": {
+          "gumBleeding": "yes",
+          "pocketDepthsAboveNormal": "yes",
+          "pocketDepthDetails": "Pockets 6-8 mm across posterior sextants",
+          "gumRecession": "yes",
+          "gumRecessionDetails": "Generalised 3-4 mm recession",
+          "toothMobility": "yes",
+          "mobilityDetails": "Grade II mobility on several lower incisors",
+          "furcationInvolvement": "yes",
+          "furcationDetails": "Grade II furcation on 36 and 46"
+        },
+        "oralExamination": {
+          "softTissueFindings": "Chronic generalised periodontitis with suppuration",
+          "tmjPain": "no",
+          "tmjClicking": "no",
+          "tmjLimitedOpening": "no",
+          "occlusion": "class-II",
+          "oralHygieneIndex": "poor"
+        },
+        "medicalHistory": {
+          "cardiovascularDisease": "yes",
+          "cardiovascularDetails": "Hypertension",
+          "diabetes": "yes",
+          "diabetesType": "type2",
+          "diabetesControlled": "no",
+          "bleedingDisorder": "no",
+          "bleedingDetails": "",
+          "bisphosphonateUse": "no",
+          "bisphosphonateDetails": "",
+          "radiationTherapyHeadNeck": "no",
+          "radiationDetails": "",
+          "immunosuppression": "no",
+          "immunosuppressionDetails": ""
+        },
+        "currentMedications": {
+          "anticoagulantUse": "no",
+          "anticoagulantType": "",
+          "bisphosphonateCurrentUse": "no",
+          "bisphosphonateName": "",
+          "immunosuppressantUse": "no",
+          "immunosuppressantName": "",
+          "allergyToAnaesthetics": "no",
+          "anaestheticAllergyDetails": "",
+          "otherMedications": "Metformin, amlodipine"
+        },
+        "radiographicFindings": {
+          "panoramicFindings": "Generalised advanced bone loss, multiple periapical radiolucencies",
+          "periapicalFindings": "Periapical pathology on 11, 21, 46",
+          "bitewingFindings": "Extensive interproximal and recurrent caries",
+          "boneLossPattern": "vertical",
+          "boneLossDetails": "Angular defects on 36 and 46"
+        }
+      },
+      "expected": {
+        "dmftScore": 25,
+        "dmftCategory": "very-high",
+        "firedRules": [
+          {
+            "id": "DMFT-006",
+            "system": "DMFT",
+            "description": "Very high caries experience (DMFT 21+)",
+            "category": "very-high"
+          },
+          {
+            "id": "PERIO-001",
+            "system": "Periodontal",
+            "description": "Gum bleeding present",
+            "category": "low"
+          },
+          {
+            "id": "PERIO-002",
+            "system": "Periodontal",
+            "description": "Elevated pocket depths",
+            "category": "moderate"
+          },
+          {
+            "id": "PERIO-003",
+            "system": "Periodontal",
+            "description": "Gum recession present",
+            "category": "moderate"
+          },
+          {
+            "id": "PERIO-004",
+            "system": "Periodontal",
+            "description": "Tooth mobility",
+            "category": "high"
+          },
+          {
+            "id": "PERIO-005",
+            "system": "Periodontal",
+            "description": "Furcation involvement",
+            "category": "high"
+          },
+          {
+            "id": "OH-001",
+            "system": "Oral Hygiene",
+            "description": "Poor oral hygiene",
+            "category": "moderate"
+          },
+          {
+            "id": "RAD-001",
+            "system": "Radiographic",
+            "description": "Bone loss detected",
+            "category": "moderate"
+          },
+          {
+            "id": "MED-001",
+            "system": "Medical",
+            "description": "Poorly controlled diabetes",
+            "category": "moderate"
+          }
+        ]
+      }
+    }
+  ]
+}

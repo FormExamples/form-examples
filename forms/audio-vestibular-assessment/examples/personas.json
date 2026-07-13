@@ -1,0 +1,1078 @@
+{
+  "engine": "front-end-with-html",
+  "graderHint": "grade",
+  "note": "Realistic filled-in states in the audio-vestibular engine's shape. Graded by grade: WHO pure-tone-average hearing-loss classification plus Dizziness Handicap Inventory (DHI 0-100) handicap banding — both deterministic. `expected` is computed by `bin/test-personas --update` and verified by `bin/test-personas`.",
+  "personas": [
+    {
+      "name": "normal-no-handicap",
+      "description": "Air-conduction thresholds ~15 dB (PTA <20) and DHI 0: normal hearing, no vestibular handicap.",
+      "state": {
+        "demographics": {
+          "firstName": "",
+          "lastName": "",
+          "dateOfBirth": "",
+          "sex": "female",
+          "assessmentDate": ""
+        },
+        "presentingSymptoms": {
+          "hearingLoss": "no",
+          "hearingLossSide": "",
+          "hearingLossOnset": "",
+          "hearingLossDurationMonths": null,
+          "tinnitus": "",
+          "tinnitusSide": "",
+          "otalgia": "",
+          "otorrhea": "",
+          "auralFullness": "",
+          "vertigo": "no",
+          "vertigoCharacter": "",
+          "vertigoEpisodeDurationSeconds": null,
+          "vertigoFrequencyPerWeek": null,
+          "imbalance": "no",
+          "falls": "",
+          "fallsLastYearCount": null,
+          "headacheMigraine": "",
+          "neurologicalSymptoms": "",
+          "otherSymptoms": ""
+        },
+        "otoscopicExamination": {
+          "rightEar": {
+            "canalStatus": "",
+            "tympanicMembrane": ""
+          },
+          "leftEar": {
+            "canalStatus": "",
+            "tympanicMembrane": ""
+          },
+          "notes": ""
+        },
+        "pureToneAudiometry": {
+          "rightEar": {
+            "airConduction": {
+              "hz500": 15,
+              "hz1000": 15,
+              "hz2000": 15,
+              "hz4000": 15
+            },
+            "boneConduction": {
+              "hz500": null,
+              "hz1000": null,
+              "hz2000": null,
+              "hz4000": null
+            },
+            "pureToneAverage": null
+          },
+          "leftEar": {
+            "airConduction": {
+              "hz500": 15,
+              "hz1000": 15,
+              "hz2000": 15,
+              "hz4000": 15
+            },
+            "boneConduction": {
+              "hz500": null,
+              "hz1000": null,
+              "hz2000": null,
+              "hz4000": null
+            },
+            "pureToneAverage": null
+          },
+          "betterEarPureToneAverage": null,
+          "asymmetryDb": null,
+          "audiometryNotes": ""
+        },
+        "speechAudiometry": {
+          "rightSrtDb": null,
+          "leftSrtDb": null,
+          "rightWordRecognitionPercent": null,
+          "leftWordRecognitionPercent": null,
+          "speechAudiometryNotes": ""
+        },
+        "tympanometryAcousticReflexes": {
+          "rightTympanogram": "",
+          "leftTympanogram": "",
+          "rightAcousticReflexes": "",
+          "leftAcousticReflexes": "",
+          "notes": ""
+        },
+        "vestibularScreening": {
+          "headImpulseTest": "",
+          "dixHallpike": "",
+          "rombergTest": "",
+          "tandemGait": "",
+          "nystagmus": "",
+          "fukudaSteppingTest": "",
+          "notes": ""
+        },
+        "dizzinessHandicapInventory": {
+          "q1": "no",
+          "q2": "no",
+          "q3": "no",
+          "q4": "no",
+          "q5": "no",
+          "q6": "no",
+          "q7": "no",
+          "q8": "no",
+          "q9": "no",
+          "q10": "no",
+          "q11": "no",
+          "q12": "no",
+          "q13": "no",
+          "q14": "no",
+          "q15": "no",
+          "q16": "no",
+          "q17": "no",
+          "q18": "no",
+          "q19": "no",
+          "q20": "no",
+          "q21": "no",
+          "q22": "no",
+          "q23": "no",
+          "q24": "no",
+          "q25": "no"
+        },
+        "clinicalImpressionReferral": {
+          "provisionalDiagnosis": "",
+          "hearingAidCandidate": "",
+          "vestibularRehabIndicated": "",
+          "ent_referral": "",
+          "neurologyReferral": "",
+          "imagingRequested": "",
+          "followUpWeeks": null,
+          "additionalNotes": ""
+        }
+      },
+      "expected": {
+        "rightPta": 15,
+        "leftPta": 15,
+        "betterEarPta": 15,
+        "asymmetry": 0,
+        "hearingLossGrade": "normal",
+        "rightHearingLossGrade": "normal",
+        "leftHearingLossGrade": "normal",
+        "dhiTotal": 0,
+        "dhiAnsweredCount": 25,
+        "dhiFunctional": 0,
+        "dhiEmotional": 0,
+        "dhiPhysical": 0,
+        "dhiHandicapLevel": "no-handicap",
+        "dhiFiredItems": [
+          {
+            "id": "DHI-01",
+            "num": 1,
+            "subscale": "P",
+            "text": "Does looking up increase your problem?",
+            "answer": "no",
+            "score": 0
+          },
+          {
+            "id": "DHI-02",
+            "num": 2,
+            "subscale": "E",
+            "text": "Because of your problem, do you feel frustrated?",
+            "answer": "no",
+            "score": 0
+          },
+          {
+            "id": "DHI-03",
+            "num": 3,
+            "subscale": "F",
+            "text": "Because of your problem, do you restrict your travel for business or recreation?",
+            "answer": "no",
+            "score": 0
+          },
+          {
+            "id": "DHI-04",
+            "num": 4,
+            "subscale": "P",
+            "text": "Does walking down the aisle of a supermarket increase your problem?",
+            "answer": "no",
+            "score": 0
+          },
+          {
+            "id": "DHI-05",
+            "num": 5,
+            "subscale": "F",
+            "text": "Because of your problem, do you have difficulty getting into or out of bed?",
+            "answer": "no",
+            "score": 0
+          },
+          {
+            "id": "DHI-06",
+            "num": 6,
+            "subscale": "F",
+            "text": "Does your problem significantly restrict your participation in social activities such as going out to dinner, going to the movies, dancing, or to parties?",
+            "answer": "no",
+            "score": 0
+          },
+          {
+            "id": "DHI-07",
+            "num": 7,
+            "subscale": "F",
+            "text": "Because of your problem, do you have difficulty reading?",
+            "answer": "no",
+            "score": 0
+          },
+          {
+            "id": "DHI-08",
+            "num": 8,
+            "subscale": "P",
+            "text": "Does performing more ambitious activities like sports, dancing, household chores such as sweeping or putting dishes away increase your problem?",
+            "answer": "no",
+            "score": 0
+          },
+          {
+            "id": "DHI-09",
+            "num": 9,
+            "subscale": "E",
+            "text": "Because of your problem, are you afraid to leave your home without having someone accompany you?",
+            "answer": "no",
+            "score": 0
+          },
+          {
+            "id": "DHI-10",
+            "num": 10,
+            "subscale": "E",
+            "text": "Because of your problem, have you been embarrassed in front of others?",
+            "answer": "no",
+            "score": 0
+          },
+          {
+            "id": "DHI-11",
+            "num": 11,
+            "subscale": "P",
+            "text": "Do quick movements of your head increase your problem?",
+            "answer": "no",
+            "score": 0
+          },
+          {
+            "id": "DHI-12",
+            "num": 12,
+            "subscale": "F",
+            "text": "Because of your problem, do you avoid heights?",
+            "answer": "no",
+            "score": 0
+          },
+          {
+            "id": "DHI-13",
+            "num": 13,
+            "subscale": "P",
+            "text": "Does turning over in bed increase your problem?",
+            "answer": "no",
+            "score": 0
+          },
+          {
+            "id": "DHI-14",
+            "num": 14,
+            "subscale": "F",
+            "text": "Because of your problem, is it difficult for you to do strenuous housework or yardwork?",
+            "answer": "no",
+            "score": 0
+          },
+          {
+            "id": "DHI-15",
+            "num": 15,
+            "subscale": "E",
+            "text": "Because of your problem, are you afraid people may think you are intoxicated?",
+            "answer": "no",
+            "score": 0
+          },
+          {
+            "id": "DHI-16",
+            "num": 16,
+            "subscale": "F",
+            "text": "Because of your problem, is it difficult for you to go for a walk by yourself?",
+            "answer": "no",
+            "score": 0
+          },
+          {
+            "id": "DHI-17",
+            "num": 17,
+            "subscale": "P",
+            "text": "Does walking down a sidewalk increase your problem?",
+            "answer": "no",
+            "score": 0
+          },
+          {
+            "id": "DHI-18",
+            "num": 18,
+            "subscale": "E",
+            "text": "Because of your problem, is it difficult for you to concentrate?",
+            "answer": "no",
+            "score": 0
+          },
+          {
+            "id": "DHI-19",
+            "num": 19,
+            "subscale": "F",
+            "text": "Because of your problem, is it difficult for you to walk around your house in the dark?",
+            "answer": "no",
+            "score": 0
+          },
+          {
+            "id": "DHI-20",
+            "num": 20,
+            "subscale": "E",
+            "text": "Because of your problem, are you afraid to stay home alone?",
+            "answer": "no",
+            "score": 0
+          },
+          {
+            "id": "DHI-21",
+            "num": 21,
+            "subscale": "E",
+            "text": "Because of your problem, do you feel handicapped?",
+            "answer": "no",
+            "score": 0
+          },
+          {
+            "id": "DHI-22",
+            "num": 22,
+            "subscale": "E",
+            "text": "Has the problem placed stress on your relationships with family or friends?",
+            "answer": "no",
+            "score": 0
+          },
+          {
+            "id": "DHI-23",
+            "num": 23,
+            "subscale": "E",
+            "text": "Because of your problem, are you depressed?",
+            "answer": "no",
+            "score": 0
+          },
+          {
+            "id": "DHI-24",
+            "num": 24,
+            "subscale": "F",
+            "text": "Does your problem interfere with your job or household responsibilities?",
+            "answer": "no",
+            "score": 0
+          },
+          {
+            "id": "DHI-25",
+            "num": 25,
+            "subscale": "P",
+            "text": "Does bending over increase your problem?",
+            "answer": "no",
+            "score": 0
+          }
+        ]
+      }
+    },
+    {
+      "name": "moderate-loss-mild-handicap",
+      "description": "Better-ear PTA ~42 dB (moderate loss) with DHI in the 18-36 range: moderate hearing loss, mild handicap.",
+      "state": {
+        "demographics": {
+          "firstName": "",
+          "lastName": "",
+          "dateOfBirth": "",
+          "sex": "male",
+          "assessmentDate": ""
+        },
+        "presentingSymptoms": {
+          "hearingLoss": "yes",
+          "hearingLossSide": "bilateral",
+          "hearingLossOnset": "",
+          "hearingLossDurationMonths": null,
+          "tinnitus": "",
+          "tinnitusSide": "",
+          "otalgia": "",
+          "otorrhea": "",
+          "auralFullness": "",
+          "vertigo": "yes",
+          "vertigoCharacter": "spinning",
+          "vertigoEpisodeDurationSeconds": null,
+          "vertigoFrequencyPerWeek": null,
+          "imbalance": "yes",
+          "falls": "",
+          "fallsLastYearCount": null,
+          "headacheMigraine": "",
+          "neurologicalSymptoms": "",
+          "otherSymptoms": ""
+        },
+        "otoscopicExamination": {
+          "rightEar": {
+            "canalStatus": "",
+            "tympanicMembrane": ""
+          },
+          "leftEar": {
+            "canalStatus": "",
+            "tympanicMembrane": ""
+          },
+          "notes": ""
+        },
+        "pureToneAudiometry": {
+          "rightEar": {
+            "airConduction": {
+              "hz500": 42,
+              "hz1000": 42,
+              "hz2000": 42,
+              "hz4000": 42
+            },
+            "boneConduction": {
+              "hz500": null,
+              "hz1000": null,
+              "hz2000": null,
+              "hz4000": null
+            },
+            "pureToneAverage": null
+          },
+          "leftEar": {
+            "airConduction": {
+              "hz500": 42,
+              "hz1000": 42,
+              "hz2000": 42,
+              "hz4000": 42
+            },
+            "boneConduction": {
+              "hz500": null,
+              "hz1000": null,
+              "hz2000": null,
+              "hz4000": null
+            },
+            "pureToneAverage": null
+          },
+          "betterEarPureToneAverage": null,
+          "asymmetryDb": null,
+          "audiometryNotes": ""
+        },
+        "speechAudiometry": {
+          "rightSrtDb": null,
+          "leftSrtDb": null,
+          "rightWordRecognitionPercent": null,
+          "leftWordRecognitionPercent": null,
+          "speechAudiometryNotes": ""
+        },
+        "tympanometryAcousticReflexes": {
+          "rightTympanogram": "",
+          "leftTympanogram": "",
+          "rightAcousticReflexes": "",
+          "leftAcousticReflexes": "",
+          "notes": ""
+        },
+        "vestibularScreening": {
+          "headImpulseTest": "",
+          "dixHallpike": "",
+          "rombergTest": "",
+          "tandemGait": "",
+          "nystagmus": "",
+          "fukudaSteppingTest": "",
+          "notes": ""
+        },
+        "dizzinessHandicapInventory": {
+          "q1": "yes",
+          "q2": "sometimes",
+          "q3": "no",
+          "q4": "yes",
+          "q5": "no",
+          "q6": "no",
+          "q7": "no",
+          "q8": "yes",
+          "q9": "no",
+          "q10": "sometimes",
+          "q11": "yes",
+          "q12": "no",
+          "q13": "no",
+          "q14": "no",
+          "q15": "no",
+          "q16": "no",
+          "q17": "yes",
+          "q18": "no",
+          "q19": "no",
+          "q20": "no",
+          "q21": "sometimes",
+          "q22": "no",
+          "q23": "no",
+          "q24": "no",
+          "q25": "no"
+        },
+        "clinicalImpressionReferral": {
+          "provisionalDiagnosis": "",
+          "hearingAidCandidate": "",
+          "vestibularRehabIndicated": "",
+          "ent_referral": "",
+          "neurologyReferral": "",
+          "imagingRequested": "",
+          "followUpWeeks": null,
+          "additionalNotes": ""
+        }
+      },
+      "expected": {
+        "rightPta": 42,
+        "leftPta": 42,
+        "betterEarPta": 42,
+        "asymmetry": 0,
+        "hearingLossGrade": "moderate",
+        "rightHearingLossGrade": "moderate",
+        "leftHearingLossGrade": "moderate",
+        "dhiTotal": 26,
+        "dhiAnsweredCount": 25,
+        "dhiFunctional": 0,
+        "dhiEmotional": 6,
+        "dhiPhysical": 20,
+        "dhiHandicapLevel": "mild",
+        "dhiFiredItems": [
+          {
+            "id": "DHI-01",
+            "num": 1,
+            "subscale": "P",
+            "text": "Does looking up increase your problem?",
+            "answer": "yes",
+            "score": 4
+          },
+          {
+            "id": "DHI-02",
+            "num": 2,
+            "subscale": "E",
+            "text": "Because of your problem, do you feel frustrated?",
+            "answer": "sometimes",
+            "score": 2
+          },
+          {
+            "id": "DHI-03",
+            "num": 3,
+            "subscale": "F",
+            "text": "Because of your problem, do you restrict your travel for business or recreation?",
+            "answer": "no",
+            "score": 0
+          },
+          {
+            "id": "DHI-04",
+            "num": 4,
+            "subscale": "P",
+            "text": "Does walking down the aisle of a supermarket increase your problem?",
+            "answer": "yes",
+            "score": 4
+          },
+          {
+            "id": "DHI-05",
+            "num": 5,
+            "subscale": "F",
+            "text": "Because of your problem, do you have difficulty getting into or out of bed?",
+            "answer": "no",
+            "score": 0
+          },
+          {
+            "id": "DHI-06",
+            "num": 6,
+            "subscale": "F",
+            "text": "Does your problem significantly restrict your participation in social activities such as going out to dinner, going to the movies, dancing, or to parties?",
+            "answer": "no",
+            "score": 0
+          },
+          {
+            "id": "DHI-07",
+            "num": 7,
+            "subscale": "F",
+            "text": "Because of your problem, do you have difficulty reading?",
+            "answer": "no",
+            "score": 0
+          },
+          {
+            "id": "DHI-08",
+            "num": 8,
+            "subscale": "P",
+            "text": "Does performing more ambitious activities like sports, dancing, household chores such as sweeping or putting dishes away increase your problem?",
+            "answer": "yes",
+            "score": 4
+          },
+          {
+            "id": "DHI-09",
+            "num": 9,
+            "subscale": "E",
+            "text": "Because of your problem, are you afraid to leave your home without having someone accompany you?",
+            "answer": "no",
+            "score": 0
+          },
+          {
+            "id": "DHI-10",
+            "num": 10,
+            "subscale": "E",
+            "text": "Because of your problem, have you been embarrassed in front of others?",
+            "answer": "sometimes",
+            "score": 2
+          },
+          {
+            "id": "DHI-11",
+            "num": 11,
+            "subscale": "P",
+            "text": "Do quick movements of your head increase your problem?",
+            "answer": "yes",
+            "score": 4
+          },
+          {
+            "id": "DHI-12",
+            "num": 12,
+            "subscale": "F",
+            "text": "Because of your problem, do you avoid heights?",
+            "answer": "no",
+            "score": 0
+          },
+          {
+            "id": "DHI-13",
+            "num": 13,
+            "subscale": "P",
+            "text": "Does turning over in bed increase your problem?",
+            "answer": "no",
+            "score": 0
+          },
+          {
+            "id": "DHI-14",
+            "num": 14,
+            "subscale": "F",
+            "text": "Because of your problem, is it difficult for you to do strenuous housework or yardwork?",
+            "answer": "no",
+            "score": 0
+          },
+          {
+            "id": "DHI-15",
+            "num": 15,
+            "subscale": "E",
+            "text": "Because of your problem, are you afraid people may think you are intoxicated?",
+            "answer": "no",
+            "score": 0
+          },
+          {
+            "id": "DHI-16",
+            "num": 16,
+            "subscale": "F",
+            "text": "Because of your problem, is it difficult for you to go for a walk by yourself?",
+            "answer": "no",
+            "score": 0
+          },
+          {
+            "id": "DHI-17",
+            "num": 17,
+            "subscale": "P",
+            "text": "Does walking down a sidewalk increase your problem?",
+            "answer": "yes",
+            "score": 4
+          },
+          {
+            "id": "DHI-18",
+            "num": 18,
+            "subscale": "E",
+            "text": "Because of your problem, is it difficult for you to concentrate?",
+            "answer": "no",
+            "score": 0
+          },
+          {
+            "id": "DHI-19",
+            "num": 19,
+            "subscale": "F",
+            "text": "Because of your problem, is it difficult for you to walk around your house in the dark?",
+            "answer": "no",
+            "score": 0
+          },
+          {
+            "id": "DHI-20",
+            "num": 20,
+            "subscale": "E",
+            "text": "Because of your problem, are you afraid to stay home alone?",
+            "answer": "no",
+            "score": 0
+          },
+          {
+            "id": "DHI-21",
+            "num": 21,
+            "subscale": "E",
+            "text": "Because of your problem, do you feel handicapped?",
+            "answer": "sometimes",
+            "score": 2
+          },
+          {
+            "id": "DHI-22",
+            "num": 22,
+            "subscale": "E",
+            "text": "Has the problem placed stress on your relationships with family or friends?",
+            "answer": "no",
+            "score": 0
+          },
+          {
+            "id": "DHI-23",
+            "num": 23,
+            "subscale": "E",
+            "text": "Because of your problem, are you depressed?",
+            "answer": "no",
+            "score": 0
+          },
+          {
+            "id": "DHI-24",
+            "num": 24,
+            "subscale": "F",
+            "text": "Does your problem interfere with your job or household responsibilities?",
+            "answer": "no",
+            "score": 0
+          },
+          {
+            "id": "DHI-25",
+            "num": 25,
+            "subscale": "P",
+            "text": "Does bending over increase your problem?",
+            "answer": "no",
+            "score": 0
+          }
+        ]
+      }
+    },
+    {
+      "name": "severe-loss-severe-handicap",
+      "description": "Better-ear PTA ~72 dB (severe loss) with DHI above 52: severe hearing loss, severe vestibular handicap.",
+      "state": {
+        "demographics": {
+          "firstName": "",
+          "lastName": "",
+          "dateOfBirth": "",
+          "sex": "male",
+          "assessmentDate": ""
+        },
+        "presentingSymptoms": {
+          "hearingLoss": "yes",
+          "hearingLossSide": "bilateral",
+          "hearingLossOnset": "",
+          "hearingLossDurationMonths": null,
+          "tinnitus": "",
+          "tinnitusSide": "",
+          "otalgia": "",
+          "otorrhea": "",
+          "auralFullness": "",
+          "vertigo": "yes",
+          "vertigoCharacter": "spinning",
+          "vertigoEpisodeDurationSeconds": null,
+          "vertigoFrequencyPerWeek": null,
+          "imbalance": "yes",
+          "falls": "yes",
+          "fallsLastYearCount": 3,
+          "headacheMigraine": "",
+          "neurologicalSymptoms": "",
+          "otherSymptoms": ""
+        },
+        "otoscopicExamination": {
+          "rightEar": {
+            "canalStatus": "",
+            "tympanicMembrane": ""
+          },
+          "leftEar": {
+            "canalStatus": "",
+            "tympanicMembrane": ""
+          },
+          "notes": ""
+        },
+        "pureToneAudiometry": {
+          "rightEar": {
+            "airConduction": {
+              "hz500": 72,
+              "hz1000": 72,
+              "hz2000": 72,
+              "hz4000": 72
+            },
+            "boneConduction": {
+              "hz500": null,
+              "hz1000": null,
+              "hz2000": null,
+              "hz4000": null
+            },
+            "pureToneAverage": null
+          },
+          "leftEar": {
+            "airConduction": {
+              "hz500": 72,
+              "hz1000": 72,
+              "hz2000": 72,
+              "hz4000": 72
+            },
+            "boneConduction": {
+              "hz500": null,
+              "hz1000": null,
+              "hz2000": null,
+              "hz4000": null
+            },
+            "pureToneAverage": null
+          },
+          "betterEarPureToneAverage": null,
+          "asymmetryDb": null,
+          "audiometryNotes": ""
+        },
+        "speechAudiometry": {
+          "rightSrtDb": null,
+          "leftSrtDb": null,
+          "rightWordRecognitionPercent": null,
+          "leftWordRecognitionPercent": null,
+          "speechAudiometryNotes": ""
+        },
+        "tympanometryAcousticReflexes": {
+          "rightTympanogram": "",
+          "leftTympanogram": "",
+          "rightAcousticReflexes": "",
+          "leftAcousticReflexes": "",
+          "notes": ""
+        },
+        "vestibularScreening": {
+          "headImpulseTest": "",
+          "dixHallpike": "",
+          "rombergTest": "",
+          "tandemGait": "",
+          "nystagmus": "",
+          "fukudaSteppingTest": "",
+          "notes": ""
+        },
+        "dizzinessHandicapInventory": {
+          "q1": "yes",
+          "q2": "yes",
+          "q3": "yes",
+          "q4": "sometimes",
+          "q5": "sometimes",
+          "q6": "sometimes",
+          "q7": "sometimes",
+          "q8": "sometimes",
+          "q9": "yes",
+          "q10": "sometimes",
+          "q11": "sometimes",
+          "q12": "sometimes",
+          "q13": "sometimes",
+          "q14": "sometimes",
+          "q15": "sometimes",
+          "q16": "sometimes",
+          "q17": "sometimes",
+          "q18": "sometimes",
+          "q19": "sometimes",
+          "q20": "yes",
+          "q21": "yes",
+          "q22": "yes",
+          "q23": "yes",
+          "q24": "sometimes",
+          "q25": "sometimes"
+        },
+        "clinicalImpressionReferral": {
+          "provisionalDiagnosis": "",
+          "hearingAidCandidate": "",
+          "vestibularRehabIndicated": "",
+          "ent_referral": "",
+          "neurologyReferral": "",
+          "imagingRequested": "",
+          "followUpWeeks": null,
+          "additionalNotes": ""
+        }
+      },
+      "expected": {
+        "rightPta": 72,
+        "leftPta": 72,
+        "betterEarPta": 72,
+        "asymmetry": 0,
+        "hearingLossGrade": "severe",
+        "rightHearingLossGrade": "severe",
+        "leftHearingLossGrade": "severe",
+        "dhiTotal": 66,
+        "dhiAnsweredCount": 25,
+        "dhiFunctional": 20,
+        "dhiEmotional": 30,
+        "dhiPhysical": 16,
+        "dhiHandicapLevel": "severe",
+        "dhiFiredItems": [
+          {
+            "id": "DHI-01",
+            "num": 1,
+            "subscale": "P",
+            "text": "Does looking up increase your problem?",
+            "answer": "yes",
+            "score": 4
+          },
+          {
+            "id": "DHI-02",
+            "num": 2,
+            "subscale": "E",
+            "text": "Because of your problem, do you feel frustrated?",
+            "answer": "yes",
+            "score": 4
+          },
+          {
+            "id": "DHI-03",
+            "num": 3,
+            "subscale": "F",
+            "text": "Because of your problem, do you restrict your travel for business or recreation?",
+            "answer": "yes",
+            "score": 4
+          },
+          {
+            "id": "DHI-04",
+            "num": 4,
+            "subscale": "P",
+            "text": "Does walking down the aisle of a supermarket increase your problem?",
+            "answer": "sometimes",
+            "score": 2
+          },
+          {
+            "id": "DHI-05",
+            "num": 5,
+            "subscale": "F",
+            "text": "Because of your problem, do you have difficulty getting into or out of bed?",
+            "answer": "sometimes",
+            "score": 2
+          },
+          {
+            "id": "DHI-06",
+            "num": 6,
+            "subscale": "F",
+            "text": "Does your problem significantly restrict your participation in social activities such as going out to dinner, going to the movies, dancing, or to parties?",
+            "answer": "sometimes",
+            "score": 2
+          },
+          {
+            "id": "DHI-07",
+            "num": 7,
+            "subscale": "F",
+            "text": "Because of your problem, do you have difficulty reading?",
+            "answer": "sometimes",
+            "score": 2
+          },
+          {
+            "id": "DHI-08",
+            "num": 8,
+            "subscale": "P",
+            "text": "Does performing more ambitious activities like sports, dancing, household chores such as sweeping or putting dishes away increase your problem?",
+            "answer": "sometimes",
+            "score": 2
+          },
+          {
+            "id": "DHI-09",
+            "num": 9,
+            "subscale": "E",
+            "text": "Because of your problem, are you afraid to leave your home without having someone accompany you?",
+            "answer": "yes",
+            "score": 4
+          },
+          {
+            "id": "DHI-10",
+            "num": 10,
+            "subscale": "E",
+            "text": "Because of your problem, have you been embarrassed in front of others?",
+            "answer": "sometimes",
+            "score": 2
+          },
+          {
+            "id": "DHI-11",
+            "num": 11,
+            "subscale": "P",
+            "text": "Do quick movements of your head increase your problem?",
+            "answer": "sometimes",
+            "score": 2
+          },
+          {
+            "id": "DHI-12",
+            "num": 12,
+            "subscale": "F",
+            "text": "Because of your problem, do you avoid heights?",
+            "answer": "sometimes",
+            "score": 2
+          },
+          {
+            "id": "DHI-13",
+            "num": 13,
+            "subscale": "P",
+            "text": "Does turning over in bed increase your problem?",
+            "answer": "sometimes",
+            "score": 2
+          },
+          {
+            "id": "DHI-14",
+            "num": 14,
+            "subscale": "F",
+            "text": "Because of your problem, is it difficult for you to do strenuous housework or yardwork?",
+            "answer": "sometimes",
+            "score": 2
+          },
+          {
+            "id": "DHI-15",
+            "num": 15,
+            "subscale": "E",
+            "text": "Because of your problem, are you afraid people may think you are intoxicated?",
+            "answer": "sometimes",
+            "score": 2
+          },
+          {
+            "id": "DHI-16",
+            "num": 16,
+            "subscale": "F",
+            "text": "Because of your problem, is it difficult for you to go for a walk by yourself?",
+            "answer": "sometimes",
+            "score": 2
+          },
+          {
+            "id": "DHI-17",
+            "num": 17,
+            "subscale": "P",
+            "text": "Does walking down a sidewalk increase your problem?",
+            "answer": "sometimes",
+            "score": 2
+          },
+          {
+            "id": "DHI-18",
+            "num": 18,
+            "subscale": "E",
+            "text": "Because of your problem, is it difficult for you to concentrate?",
+            "answer": "sometimes",
+            "score": 2
+          },
+          {
+            "id": "DHI-19",
+            "num": 19,
+            "subscale": "F",
+            "text": "Because of your problem, is it difficult for you to walk around your house in the dark?",
+            "answer": "sometimes",
+            "score": 2
+          },
+          {
+            "id": "DHI-20",
+            "num": 20,
+            "subscale": "E",
+            "text": "Because of your problem, are you afraid to stay home alone?",
+            "answer": "yes",
+            "score": 4
+          },
+          {
+            "id": "DHI-21",
+            "num": 21,
+            "subscale": "E",
+            "text": "Because of your problem, do you feel handicapped?",
+            "answer": "yes",
+            "score": 4
+          },
+          {
+            "id": "DHI-22",
+            "num": 22,
+            "subscale": "E",
+            "text": "Has the problem placed stress on your relationships with family or friends?",
+            "answer": "yes",
+            "score": 4
+          },
+          {
+            "id": "DHI-23",
+            "num": 23,
+            "subscale": "E",
+            "text": "Because of your problem, are you depressed?",
+            "answer": "yes",
+            "score": 4
+          },
+          {
+            "id": "DHI-24",
+            "num": 24,
+            "subscale": "F",
+            "text": "Does your problem interfere with your job or household responsibilities?",
+            "answer": "sometimes",
+            "score": 2
+          },
+          {
+            "id": "DHI-25",
+            "num": 25,
+            "subscale": "P",
+            "text": "Does bending over increase your problem?",
+            "answer": "sometimes",
+            "score": 2
+          }
+        ]
+      }
+    }
+  ]
+}

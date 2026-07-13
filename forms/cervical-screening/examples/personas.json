@@ -1,0 +1,184 @@
+{
+  "engine": "front-end-with-html",
+  "graderHint": "calculateGrade",
+  "note": "Realistic filled-in states in the cervical-screening classification engine's shape. `expected` is computed by `bin/test-personas --update` and verified by `bin/test-personas`.",
+  "personas": [
+    {
+      "name": "hpv-negative-routine-recall",
+      "description": "Adequate sample, high-risk HPV not detected: result class hpv-negative — return to routine recall at the age-appropriate interval.",
+      "state": {
+        "context": {
+          "sampleTakerName": "",
+          "sampleTakerRole": "practice-nurse",
+          "careSetting": "general-practice",
+          "sampleTakenAt": ""
+        },
+        "identification": {
+          "patientIdentifier": "",
+          "nhsNumber": "",
+          "age": 32,
+          "dateOfBirth": ""
+        },
+        "eligibility": {
+          "recallInterval": "three-yearly",
+          "screenDueDate": "",
+          "lastScreenDate": "",
+          "overdue": "no",
+          "previouslyCeased": "no"
+        },
+        "consent": {
+          "consentGiven": "yes"
+        },
+        "symptoms": {
+          "symptomatic": "no",
+          "symptomDetail": ""
+        },
+        "adequacy": {
+          "sampleAdequacy": "adequate",
+          "inadequateReason": ""
+        },
+        "hpv": {
+          "hpvResult": "negative"
+        },
+        "cytology": {
+          "cytologyGrade": "not-performed"
+        },
+        "note": {
+          "clinicalContext": ""
+        }
+      },
+      "expected": {
+        "resultClass": "hpv-negative",
+        "managementAction": "routine-recall",
+        "status": "complete",
+        "firedRules": [
+          {
+            "id": "R-HPV-NEGATIVE-01",
+            "category": "hpv-primary",
+            "resultClass": "hpv-negative",
+            "managementAction": "routine-recall",
+            "description": "hrHPV not detected on an adequate sample — return to routine recall at the age-appropriate interval."
+          }
+        ]
+      }
+    },
+    {
+      "name": "hpv-positive-cytology-normal-early-repeat",
+      "description": "Adequate sample, high-risk HPV detected with reflex cytology negative: result class hpv-positive-cytology-normal — early repeat HPV test at 12 months.",
+      "state": {
+        "context": {
+          "sampleTakerName": "",
+          "sampleTakerRole": "gp",
+          "careSetting": "general-practice",
+          "sampleTakenAt": ""
+        },
+        "identification": {
+          "patientIdentifier": "",
+          "nhsNumber": "",
+          "age": 45,
+          "dateOfBirth": ""
+        },
+        "eligibility": {
+          "recallInterval": "three-yearly",
+          "screenDueDate": "",
+          "lastScreenDate": "",
+          "overdue": "no",
+          "previouslyCeased": "no"
+        },
+        "consent": {
+          "consentGiven": "yes"
+        },
+        "symptoms": {
+          "symptomatic": "no",
+          "symptomDetail": ""
+        },
+        "adequacy": {
+          "sampleAdequacy": "adequate",
+          "inadequateReason": ""
+        },
+        "hpv": {
+          "hpvResult": "positive"
+        },
+        "cytology": {
+          "cytologyGrade": "negative"
+        },
+        "note": {
+          "clinicalContext": ""
+        }
+      },
+      "expected": {
+        "resultClass": "hpv-positive-cytology-normal",
+        "managementAction": "early-repeat-12-months",
+        "status": "complete",
+        "firedRules": [
+          {
+            "id": "R-HPV-POSITIVE-CYTOLOGY-NORMAL-01",
+            "category": "reflex-cytology",
+            "resultClass": "hpv-positive-cytology-normal",
+            "managementAction": "early-repeat-12-months",
+            "description": "hrHPV detected, reflex cytology negative — early repeat HPV test at 12 months."
+          }
+        ]
+      }
+    },
+    {
+      "name": "hpv-positive-high-grade-urgent-colposcopy",
+      "description": "Adequate sample, high-risk HPV detected with high-grade dyskaryosis: result class hpv-positive-cytology-abnormal-high — urgent colposcopy referral.",
+      "state": {
+        "context": {
+          "sampleTakerName": "",
+          "sampleTakerRole": "smear-taker",
+          "careSetting": "sexual-health",
+          "sampleTakenAt": ""
+        },
+        "identification": {
+          "patientIdentifier": "",
+          "nhsNumber": "",
+          "age": 52,
+          "dateOfBirth": ""
+        },
+        "eligibility": {
+          "recallInterval": "five-yearly",
+          "screenDueDate": "",
+          "lastScreenDate": "",
+          "overdue": "no",
+          "previouslyCeased": "no"
+        },
+        "consent": {
+          "consentGiven": "yes"
+        },
+        "symptoms": {
+          "symptomatic": "no",
+          "symptomDetail": ""
+        },
+        "adequacy": {
+          "sampleAdequacy": "adequate",
+          "inadequateReason": ""
+        },
+        "hpv": {
+          "hpvResult": "positive"
+        },
+        "cytology": {
+          "cytologyGrade": "high-grade"
+        },
+        "note": {
+          "clinicalContext": ""
+        }
+      },
+      "expected": {
+        "resultClass": "hpv-positive-cytology-abnormal-high",
+        "managementAction": "urgent-colposcopy-referral",
+        "status": "complete",
+        "firedRules": [
+          {
+            "id": "R-HPV-POSITIVE-CYTOLOGY-ABNORMAL-HIGH-01",
+            "category": "reflex-cytology",
+            "resultClass": "hpv-positive-cytology-abnormal-high",
+            "managementAction": "urgent-colposcopy-referral",
+            "description": "hrHPV detected, high-grade dyskaryosis / ?glandular / ?invasive — urgent colposcopy referral."
+          }
+        ]
+      }
+    }
+  ]
+}

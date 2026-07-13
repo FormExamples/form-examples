@@ -1,0 +1,1392 @@
+{
+  "engine": "front-end-with-html",
+  "graderHint": "gradePsychomotor",
+  "note": "Realistic filled-in states in the NREMT psychomotor scoring engine's shape. `expected` is computed by `bin/test-personas --update` and verified by `bin/test-personas`.",
+  "personas": [
+    {
+      "name": "clear-pass",
+      "description": "Competent candidate performs every checklist step correctly with no critical omissions — 40/40 points (100%), well above the 80% threshold: outcome Pass.",
+      "state": {
+        "candidateExaminerScenario": {
+          "candidateFirstName": "Maria",
+          "candidateLastName": "Alvarez",
+          "candidateId": "EMT-10421",
+          "attempt": "first-attempt",
+          "examinerName": "R. Okafor",
+          "sessionDate": "",
+          "stationLocation": "Station 3",
+          "scenarioSummary": "Adult male with acute shortness of breath.",
+          "chiefComplaintGiven": "Difficulty breathing"
+        },
+        "sceneSizeUp": {
+          "ppePrecautions": "yes",
+          "sceneSafe": "yes",
+          "mechanismOrNature": "yes",
+          "numberOfPatients": "yes",
+          "additionalResources": "yes",
+          "considersCspine": "yes"
+        },
+        "primarySurvey": {
+          "generalImpression": "yes",
+          "mentalStatus": "yes",
+          "airway": "yes",
+          "breathing": "yes",
+          "oxygenTherapy": "yes",
+          "circulation": "yes",
+          "transportPriority": "yes"
+        },
+        "historySecondaryAssessment": {
+          "chiefComplaint": "yes",
+          "historyOnsetOpqrst": "yes",
+          "sampleSignsSymptoms": "yes",
+          "sampleAllergies": "yes",
+          "sampleMedications": "yes",
+          "samplePastHistory": "yes",
+          "sampleLastIntake": "yes",
+          "sampleEvents": "yes",
+          "focusedExam": "yes",
+          "baselineVitalsBp": "yes",
+          "baselineVitalsPulse": "yes",
+          "baselineVitalsRespirations": "yes",
+          "fieldImpression": "yes",
+          "interventions": "yes"
+        },
+        "reassessment": {
+          "repeatsMentalStatus": "yes",
+          "repeatsAirway": "yes",
+          "repeatsBreathing": "yes",
+          "repeatsCirculation": "yes",
+          "repeatsVitals": "yes",
+          "repeatsFocusedExam": "yes",
+          "evaluatesInterventions": "yes",
+          "transportInterventions": "yes",
+          "fifteenMinuteCall": "yes"
+        },
+        "criticalCriteriaReview": {
+          "dangerousIntervention": "yes",
+          "spinalProtection": "yes",
+          "examinerNotes": "No critical criteria triggered.",
+          "debriefNotes": ""
+        }
+      },
+      "expected": {
+        "outcome": "pass",
+        "points": 40,
+        "maxPoints": 40,
+        "percent": 100,
+        "criticalFailures": [],
+        "firedRules": [
+          {
+            "id": "EMT-SS-PPE",
+            "step": 2,
+            "category": "Scene Size-Up",
+            "description": "Takes or verbalizes appropriate body-substance / PPE precautions.",
+            "critical": true,
+            "points": 1,
+            "status": "yes",
+            "pointsAwarded": 1
+          },
+          {
+            "id": "EMT-SS-SAFE",
+            "step": 2,
+            "category": "Scene Size-Up",
+            "description": "Determines the scene / situation is safe before approaching the patient.",
+            "critical": true,
+            "points": 1,
+            "status": "yes",
+            "pointsAwarded": 1
+          },
+          {
+            "id": "EMT-SS-MOI-NOI",
+            "step": 2,
+            "category": "Scene Size-Up",
+            "description": "Determines the mechanism of injury / nature of illness (MOI/NOI).",
+            "critical": false,
+            "points": 1,
+            "status": "yes",
+            "pointsAwarded": 1
+          },
+          {
+            "id": "EMT-SS-PATIENTS",
+            "step": 2,
+            "category": "Scene Size-Up",
+            "description": "Determines the number of patients on scene.",
+            "critical": false,
+            "points": 1,
+            "status": "yes",
+            "pointsAwarded": 1
+          },
+          {
+            "id": "EMT-SS-RESOURCES",
+            "step": 2,
+            "category": "Scene Size-Up",
+            "description": "Requests additional EMS / ALS / fire / law-enforcement resources as needed.",
+            "critical": false,
+            "points": 1,
+            "status": "yes",
+            "pointsAwarded": 1
+          },
+          {
+            "id": "EMT-SS-CSPINE",
+            "step": 2,
+            "category": "Scene Size-Up",
+            "description": "Considers stabilization of the spine when indicated by MOI.",
+            "critical": false,
+            "points": 1,
+            "status": "yes",
+            "pointsAwarded": 1
+          },
+          {
+            "id": "EMT-PS-IMPRESSION",
+            "step": 3,
+            "category": "Primary Survey",
+            "description": "Verbalizes a general impression of the patient.",
+            "critical": false,
+            "points": 1,
+            "status": "yes",
+            "pointsAwarded": 1
+          },
+          {
+            "id": "EMT-PS-MENTAL",
+            "step": 3,
+            "category": "Primary Survey",
+            "description": "Determines responsiveness / level of consciousness (AVPU).",
+            "critical": false,
+            "points": 1,
+            "status": "yes",
+            "pointsAwarded": 1
+          },
+          {
+            "id": "EMT-PS-AIRWAY",
+            "step": 3,
+            "category": "Primary Survey",
+            "description": "Assesses airway and initiates appropriate airway management.",
+            "critical": true,
+            "points": 1,
+            "status": "yes",
+            "pointsAwarded": 1
+          },
+          {
+            "id": "EMT-PS-BREATHING",
+            "step": 3,
+            "category": "Primary Survey",
+            "description": "Assesses breathing and initiates appropriate ventilatory support.",
+            "critical": true,
+            "points": 1,
+            "status": "yes",
+            "pointsAwarded": 1
+          },
+          {
+            "id": "EMT-PS-OXYGEN",
+            "step": 3,
+            "category": "Primary Survey",
+            "description": "Provides appropriate oxygen therapy when indicated.",
+            "critical": true,
+            "points": 1,
+            "status": "yes",
+            "pointsAwarded": 1
+          },
+          {
+            "id": "EMT-PS-CIRCULATION",
+            "step": 3,
+            "category": "Primary Survey",
+            "description": "Assesses circulation, controls major bleeding, and manages shock.",
+            "critical": true,
+            "points": 1,
+            "status": "yes",
+            "pointsAwarded": 1
+          },
+          {
+            "id": "EMT-PS-TRANSPORT",
+            "step": 3,
+            "category": "Primary Survey",
+            "description": "Identifies patient priority and makes a transport urgency decision.",
+            "critical": true,
+            "points": 1,
+            "status": "yes",
+            "pointsAwarded": 1
+          },
+          {
+            "id": "EMT-HX-CC",
+            "step": 4,
+            "category": "History",
+            "description": "Elicits the chief complaint clearly.",
+            "critical": false,
+            "points": 1,
+            "status": "yes",
+            "pointsAwarded": 1
+          },
+          {
+            "id": "EMT-HX-OPQRST",
+            "step": 4,
+            "category": "History",
+            "description": "Obtains OPQRST history of the present illness.",
+            "critical": false,
+            "points": 2,
+            "status": "yes",
+            "pointsAwarded": 2
+          },
+          {
+            "id": "EMT-HX-SAMPLE-S",
+            "step": 4,
+            "category": "SAMPLE History",
+            "description": "SAMPLE — Signs / Symptoms.",
+            "critical": false,
+            "points": 1,
+            "status": "yes",
+            "pointsAwarded": 1
+          },
+          {
+            "id": "EMT-HX-SAMPLE-A",
+            "step": 4,
+            "category": "SAMPLE History",
+            "description": "SAMPLE — Allergies.",
+            "critical": false,
+            "points": 1,
+            "status": "yes",
+            "pointsAwarded": 1
+          },
+          {
+            "id": "EMT-HX-SAMPLE-M",
+            "step": 4,
+            "category": "SAMPLE History",
+            "description": "SAMPLE — Medications.",
+            "critical": false,
+            "points": 1,
+            "status": "yes",
+            "pointsAwarded": 1
+          },
+          {
+            "id": "EMT-HX-SAMPLE-P",
+            "step": 4,
+            "category": "SAMPLE History",
+            "description": "SAMPLE — Past pertinent medical / surgical history.",
+            "critical": false,
+            "points": 1,
+            "status": "yes",
+            "pointsAwarded": 1
+          },
+          {
+            "id": "EMT-HX-SAMPLE-L",
+            "step": 4,
+            "category": "SAMPLE History",
+            "description": "SAMPLE — Last oral intake.",
+            "critical": false,
+            "points": 1,
+            "status": "yes",
+            "pointsAwarded": 1
+          },
+          {
+            "id": "EMT-HX-SAMPLE-E",
+            "step": 4,
+            "category": "SAMPLE History",
+            "description": "SAMPLE — Events leading up to the illness.",
+            "critical": false,
+            "points": 1,
+            "status": "yes",
+            "pointsAwarded": 1
+          },
+          {
+            "id": "EMT-SA-FOCUSED",
+            "step": 4,
+            "category": "Secondary Assessment",
+            "description": "Performs a focused / detailed physical exam appropriate to the chief complaint.",
+            "critical": false,
+            "points": 2,
+            "status": "yes",
+            "pointsAwarded": 2
+          },
+          {
+            "id": "EMT-SA-VITALS-BP",
+            "step": 4,
+            "category": "Baseline Vitals",
+            "description": "Obtains baseline blood pressure.",
+            "critical": false,
+            "points": 1,
+            "status": "yes",
+            "pointsAwarded": 1
+          },
+          {
+            "id": "EMT-SA-VITALS-PULSE",
+            "step": 4,
+            "category": "Baseline Vitals",
+            "description": "Obtains baseline pulse rate and quality.",
+            "critical": false,
+            "points": 1,
+            "status": "yes",
+            "pointsAwarded": 1
+          },
+          {
+            "id": "EMT-SA-VITALS-RESP",
+            "step": 4,
+            "category": "Baseline Vitals",
+            "description": "Obtains baseline respiratory rate and quality.",
+            "critical": false,
+            "points": 1,
+            "status": "yes",
+            "pointsAwarded": 1
+          },
+          {
+            "id": "EMT-SA-FIELD-IMPRESSION",
+            "step": 4,
+            "category": "Secondary Assessment",
+            "description": "States a field impression / working diagnosis.",
+            "critical": false,
+            "points": 1,
+            "status": "yes",
+            "pointsAwarded": 1
+          },
+          {
+            "id": "EMT-SA-INTERVENTIONS",
+            "step": 4,
+            "category": "Secondary Assessment",
+            "description": "Initiates appropriate interventions and verbalizes care plan.",
+            "critical": false,
+            "points": 1,
+            "status": "yes",
+            "pointsAwarded": 1
+          },
+          {
+            "id": "EMT-RA-MENTAL",
+            "step": 5,
+            "category": "Reassessment",
+            "description": "Repeats mental-status assessment.",
+            "critical": false,
+            "points": 1,
+            "status": "yes",
+            "pointsAwarded": 1
+          },
+          {
+            "id": "EMT-RA-AIRWAY",
+            "step": 5,
+            "category": "Reassessment",
+            "description": "Repeats airway assessment.",
+            "critical": false,
+            "points": 1,
+            "status": "yes",
+            "pointsAwarded": 1
+          },
+          {
+            "id": "EMT-RA-BREATHING",
+            "step": 5,
+            "category": "Reassessment",
+            "description": "Repeats breathing assessment.",
+            "critical": false,
+            "points": 1,
+            "status": "yes",
+            "pointsAwarded": 1
+          },
+          {
+            "id": "EMT-RA-CIRCULATION",
+            "step": 5,
+            "category": "Reassessment",
+            "description": "Repeats circulation assessment.",
+            "critical": false,
+            "points": 1,
+            "status": "yes",
+            "pointsAwarded": 1
+          },
+          {
+            "id": "EMT-RA-VITALS",
+            "step": 5,
+            "category": "Reassessment",
+            "description": "Repeats and records vital signs.",
+            "critical": false,
+            "points": 1,
+            "status": "yes",
+            "pointsAwarded": 1
+          },
+          {
+            "id": "EMT-RA-FOCUSED",
+            "step": 5,
+            "category": "Reassessment",
+            "description": "Repeats focused assessment regarding patient complaint or injuries.",
+            "critical": false,
+            "points": 1,
+            "status": "yes",
+            "pointsAwarded": 1
+          },
+          {
+            "id": "EMT-RA-EVAL-INT",
+            "step": 5,
+            "category": "Reassessment",
+            "description": "Evaluates effectiveness of interventions and adjusts as needed.",
+            "critical": false,
+            "points": 1,
+            "status": "yes",
+            "pointsAwarded": 1
+          },
+          {
+            "id": "EMT-RA-TRANSPORT-INT",
+            "step": 5,
+            "category": "Reassessment",
+            "description": "Manages and reassesses transport interventions en route.",
+            "critical": false,
+            "points": 1,
+            "status": "yes",
+            "pointsAwarded": 1
+          },
+          {
+            "id": "EMT-RA-FIFTEEN-MIN",
+            "step": 5,
+            "category": "Reassessment",
+            "description": "Provides patient hand-off / radio report within 15 minutes of arrival on scene.",
+            "critical": true,
+            "points": 1,
+            "status": "yes",
+            "pointsAwarded": 1
+          },
+          {
+            "id": "EMT-CC-DANGEROUS",
+            "step": 6,
+            "category": "Critical Criteria",
+            "description": "Did NOT perform any dangerous or harmful intervention.",
+            "critical": true,
+            "points": 1,
+            "status": "yes",
+            "pointsAwarded": 1
+          },
+          {
+            "id": "EMT-CC-SPINAL",
+            "step": 6,
+            "category": "Critical Criteria",
+            "description": "Provided spinal protection when indicated by MOI.",
+            "critical": true,
+            "points": 1,
+            "status": "yes",
+            "pointsAwarded": 1
+          }
+        ],
+        "answeredCount": 38,
+        "totalRules": 38
+      }
+    },
+    {
+      "name": "marginal-pass",
+      "description": "All critical criteria met but several non-critical items missed (incomplete OPQRST, partial focused exam, gaps in reassessment) — 33/40 points (82.5%), just above the 80% threshold: outcome Pass.",
+      "state": {
+        "candidateExaminerScenario": {
+          "candidateFirstName": "Devon",
+          "candidateLastName": "Pierce",
+          "candidateId": "EMT-10877",
+          "attempt": "first-attempt",
+          "examinerName": "R. Okafor",
+          "sessionDate": "",
+          "stationLocation": "Station 1",
+          "scenarioSummary": "Adult female with abdominal pain.",
+          "chiefComplaintGiven": "Abdominal pain"
+        },
+        "sceneSizeUp": {
+          "ppePrecautions": "yes",
+          "sceneSafe": "yes",
+          "mechanismOrNature": "yes",
+          "numberOfPatients": "yes",
+          "additionalResources": "yes",
+          "considersCspine": "yes"
+        },
+        "primarySurvey": {
+          "generalImpression": "yes",
+          "mentalStatus": "yes",
+          "airway": "yes",
+          "breathing": "yes",
+          "oxygenTherapy": "yes",
+          "circulation": "yes",
+          "transportPriority": "yes"
+        },
+        "historySecondaryAssessment": {
+          "chiefComplaint": "yes",
+          "historyOnsetOpqrst": "no",
+          "sampleSignsSymptoms": "yes",
+          "sampleAllergies": "yes",
+          "sampleMedications": "yes",
+          "samplePastHistory": "yes",
+          "sampleLastIntake": "yes",
+          "sampleEvents": "no",
+          "focusedExam": "no",
+          "baselineVitalsBp": "yes",
+          "baselineVitalsPulse": "yes",
+          "baselineVitalsRespirations": "yes",
+          "fieldImpression": "yes",
+          "interventions": "yes"
+        },
+        "reassessment": {
+          "repeatsMentalStatus": "yes",
+          "repeatsAirway": "yes",
+          "repeatsBreathing": "yes",
+          "repeatsCirculation": "yes",
+          "repeatsVitals": "yes",
+          "repeatsFocusedExam": "no",
+          "evaluatesInterventions": "yes",
+          "transportInterventions": "no",
+          "fifteenMinuteCall": "yes"
+        },
+        "criticalCriteriaReview": {
+          "dangerousIntervention": "yes",
+          "spinalProtection": "yes",
+          "examinerNotes": "Passed; coach on OPQRST and reassessment thoroughness.",
+          "debriefNotes": ""
+        }
+      },
+      "expected": {
+        "outcome": "pass",
+        "points": 33,
+        "maxPoints": 40,
+        "percent": 82.5,
+        "criticalFailures": [],
+        "firedRules": [
+          {
+            "id": "EMT-SS-PPE",
+            "step": 2,
+            "category": "Scene Size-Up",
+            "description": "Takes or verbalizes appropriate body-substance / PPE precautions.",
+            "critical": true,
+            "points": 1,
+            "status": "yes",
+            "pointsAwarded": 1
+          },
+          {
+            "id": "EMT-SS-SAFE",
+            "step": 2,
+            "category": "Scene Size-Up",
+            "description": "Determines the scene / situation is safe before approaching the patient.",
+            "critical": true,
+            "points": 1,
+            "status": "yes",
+            "pointsAwarded": 1
+          },
+          {
+            "id": "EMT-SS-MOI-NOI",
+            "step": 2,
+            "category": "Scene Size-Up",
+            "description": "Determines the mechanism of injury / nature of illness (MOI/NOI).",
+            "critical": false,
+            "points": 1,
+            "status": "yes",
+            "pointsAwarded": 1
+          },
+          {
+            "id": "EMT-SS-PATIENTS",
+            "step": 2,
+            "category": "Scene Size-Up",
+            "description": "Determines the number of patients on scene.",
+            "critical": false,
+            "points": 1,
+            "status": "yes",
+            "pointsAwarded": 1
+          },
+          {
+            "id": "EMT-SS-RESOURCES",
+            "step": 2,
+            "category": "Scene Size-Up",
+            "description": "Requests additional EMS / ALS / fire / law-enforcement resources as needed.",
+            "critical": false,
+            "points": 1,
+            "status": "yes",
+            "pointsAwarded": 1
+          },
+          {
+            "id": "EMT-SS-CSPINE",
+            "step": 2,
+            "category": "Scene Size-Up",
+            "description": "Considers stabilization of the spine when indicated by MOI.",
+            "critical": false,
+            "points": 1,
+            "status": "yes",
+            "pointsAwarded": 1
+          },
+          {
+            "id": "EMT-PS-IMPRESSION",
+            "step": 3,
+            "category": "Primary Survey",
+            "description": "Verbalizes a general impression of the patient.",
+            "critical": false,
+            "points": 1,
+            "status": "yes",
+            "pointsAwarded": 1
+          },
+          {
+            "id": "EMT-PS-MENTAL",
+            "step": 3,
+            "category": "Primary Survey",
+            "description": "Determines responsiveness / level of consciousness (AVPU).",
+            "critical": false,
+            "points": 1,
+            "status": "yes",
+            "pointsAwarded": 1
+          },
+          {
+            "id": "EMT-PS-AIRWAY",
+            "step": 3,
+            "category": "Primary Survey",
+            "description": "Assesses airway and initiates appropriate airway management.",
+            "critical": true,
+            "points": 1,
+            "status": "yes",
+            "pointsAwarded": 1
+          },
+          {
+            "id": "EMT-PS-BREATHING",
+            "step": 3,
+            "category": "Primary Survey",
+            "description": "Assesses breathing and initiates appropriate ventilatory support.",
+            "critical": true,
+            "points": 1,
+            "status": "yes",
+            "pointsAwarded": 1
+          },
+          {
+            "id": "EMT-PS-OXYGEN",
+            "step": 3,
+            "category": "Primary Survey",
+            "description": "Provides appropriate oxygen therapy when indicated.",
+            "critical": true,
+            "points": 1,
+            "status": "yes",
+            "pointsAwarded": 1
+          },
+          {
+            "id": "EMT-PS-CIRCULATION",
+            "step": 3,
+            "category": "Primary Survey",
+            "description": "Assesses circulation, controls major bleeding, and manages shock.",
+            "critical": true,
+            "points": 1,
+            "status": "yes",
+            "pointsAwarded": 1
+          },
+          {
+            "id": "EMT-PS-TRANSPORT",
+            "step": 3,
+            "category": "Primary Survey",
+            "description": "Identifies patient priority and makes a transport urgency decision.",
+            "critical": true,
+            "points": 1,
+            "status": "yes",
+            "pointsAwarded": 1
+          },
+          {
+            "id": "EMT-HX-CC",
+            "step": 4,
+            "category": "History",
+            "description": "Elicits the chief complaint clearly.",
+            "critical": false,
+            "points": 1,
+            "status": "yes",
+            "pointsAwarded": 1
+          },
+          {
+            "id": "EMT-HX-OPQRST",
+            "step": 4,
+            "category": "History",
+            "description": "Obtains OPQRST history of the present illness.",
+            "critical": false,
+            "points": 2,
+            "status": "no",
+            "pointsAwarded": 0
+          },
+          {
+            "id": "EMT-HX-SAMPLE-S",
+            "step": 4,
+            "category": "SAMPLE History",
+            "description": "SAMPLE — Signs / Symptoms.",
+            "critical": false,
+            "points": 1,
+            "status": "yes",
+            "pointsAwarded": 1
+          },
+          {
+            "id": "EMT-HX-SAMPLE-A",
+            "step": 4,
+            "category": "SAMPLE History",
+            "description": "SAMPLE — Allergies.",
+            "critical": false,
+            "points": 1,
+            "status": "yes",
+            "pointsAwarded": 1
+          },
+          {
+            "id": "EMT-HX-SAMPLE-M",
+            "step": 4,
+            "category": "SAMPLE History",
+            "description": "SAMPLE — Medications.",
+            "critical": false,
+            "points": 1,
+            "status": "yes",
+            "pointsAwarded": 1
+          },
+          {
+            "id": "EMT-HX-SAMPLE-P",
+            "step": 4,
+            "category": "SAMPLE History",
+            "description": "SAMPLE — Past pertinent medical / surgical history.",
+            "critical": false,
+            "points": 1,
+            "status": "yes",
+            "pointsAwarded": 1
+          },
+          {
+            "id": "EMT-HX-SAMPLE-L",
+            "step": 4,
+            "category": "SAMPLE History",
+            "description": "SAMPLE — Last oral intake.",
+            "critical": false,
+            "points": 1,
+            "status": "yes",
+            "pointsAwarded": 1
+          },
+          {
+            "id": "EMT-HX-SAMPLE-E",
+            "step": 4,
+            "category": "SAMPLE History",
+            "description": "SAMPLE — Events leading up to the illness.",
+            "critical": false,
+            "points": 1,
+            "status": "no",
+            "pointsAwarded": 0
+          },
+          {
+            "id": "EMT-SA-FOCUSED",
+            "step": 4,
+            "category": "Secondary Assessment",
+            "description": "Performs a focused / detailed physical exam appropriate to the chief complaint.",
+            "critical": false,
+            "points": 2,
+            "status": "no",
+            "pointsAwarded": 0
+          },
+          {
+            "id": "EMT-SA-VITALS-BP",
+            "step": 4,
+            "category": "Baseline Vitals",
+            "description": "Obtains baseline blood pressure.",
+            "critical": false,
+            "points": 1,
+            "status": "yes",
+            "pointsAwarded": 1
+          },
+          {
+            "id": "EMT-SA-VITALS-PULSE",
+            "step": 4,
+            "category": "Baseline Vitals",
+            "description": "Obtains baseline pulse rate and quality.",
+            "critical": false,
+            "points": 1,
+            "status": "yes",
+            "pointsAwarded": 1
+          },
+          {
+            "id": "EMT-SA-VITALS-RESP",
+            "step": 4,
+            "category": "Baseline Vitals",
+            "description": "Obtains baseline respiratory rate and quality.",
+            "critical": false,
+            "points": 1,
+            "status": "yes",
+            "pointsAwarded": 1
+          },
+          {
+            "id": "EMT-SA-FIELD-IMPRESSION",
+            "step": 4,
+            "category": "Secondary Assessment",
+            "description": "States a field impression / working diagnosis.",
+            "critical": false,
+            "points": 1,
+            "status": "yes",
+            "pointsAwarded": 1
+          },
+          {
+            "id": "EMT-SA-INTERVENTIONS",
+            "step": 4,
+            "category": "Secondary Assessment",
+            "description": "Initiates appropriate interventions and verbalizes care plan.",
+            "critical": false,
+            "points": 1,
+            "status": "yes",
+            "pointsAwarded": 1
+          },
+          {
+            "id": "EMT-RA-MENTAL",
+            "step": 5,
+            "category": "Reassessment",
+            "description": "Repeats mental-status assessment.",
+            "critical": false,
+            "points": 1,
+            "status": "yes",
+            "pointsAwarded": 1
+          },
+          {
+            "id": "EMT-RA-AIRWAY",
+            "step": 5,
+            "category": "Reassessment",
+            "description": "Repeats airway assessment.",
+            "critical": false,
+            "points": 1,
+            "status": "yes",
+            "pointsAwarded": 1
+          },
+          {
+            "id": "EMT-RA-BREATHING",
+            "step": 5,
+            "category": "Reassessment",
+            "description": "Repeats breathing assessment.",
+            "critical": false,
+            "points": 1,
+            "status": "yes",
+            "pointsAwarded": 1
+          },
+          {
+            "id": "EMT-RA-CIRCULATION",
+            "step": 5,
+            "category": "Reassessment",
+            "description": "Repeats circulation assessment.",
+            "critical": false,
+            "points": 1,
+            "status": "yes",
+            "pointsAwarded": 1
+          },
+          {
+            "id": "EMT-RA-VITALS",
+            "step": 5,
+            "category": "Reassessment",
+            "description": "Repeats and records vital signs.",
+            "critical": false,
+            "points": 1,
+            "status": "yes",
+            "pointsAwarded": 1
+          },
+          {
+            "id": "EMT-RA-FOCUSED",
+            "step": 5,
+            "category": "Reassessment",
+            "description": "Repeats focused assessment regarding patient complaint or injuries.",
+            "critical": false,
+            "points": 1,
+            "status": "no",
+            "pointsAwarded": 0
+          },
+          {
+            "id": "EMT-RA-EVAL-INT",
+            "step": 5,
+            "category": "Reassessment",
+            "description": "Evaluates effectiveness of interventions and adjusts as needed.",
+            "critical": false,
+            "points": 1,
+            "status": "yes",
+            "pointsAwarded": 1
+          },
+          {
+            "id": "EMT-RA-TRANSPORT-INT",
+            "step": 5,
+            "category": "Reassessment",
+            "description": "Manages and reassesses transport interventions en route.",
+            "critical": false,
+            "points": 1,
+            "status": "no",
+            "pointsAwarded": 0
+          },
+          {
+            "id": "EMT-RA-FIFTEEN-MIN",
+            "step": 5,
+            "category": "Reassessment",
+            "description": "Provides patient hand-off / radio report within 15 minutes of arrival on scene.",
+            "critical": true,
+            "points": 1,
+            "status": "yes",
+            "pointsAwarded": 1
+          },
+          {
+            "id": "EMT-CC-DANGEROUS",
+            "step": 6,
+            "category": "Critical Criteria",
+            "description": "Did NOT perform any dangerous or harmful intervention.",
+            "critical": true,
+            "points": 1,
+            "status": "yes",
+            "pointsAwarded": 1
+          },
+          {
+            "id": "EMT-CC-SPINAL",
+            "step": 6,
+            "category": "Critical Criteria",
+            "description": "Provided spinal protection when indicated by MOI.",
+            "critical": true,
+            "points": 1,
+            "status": "yes",
+            "pointsAwarded": 1
+          }
+        ],
+        "answeredCount": 38,
+        "totalRules": 38
+      }
+    },
+    {
+      "name": "critical-failure-fail",
+      "description": "Otherwise strong performance but candidate fails to provide oxygen to a hypoxic patient — a critical-criterion failure that forces an automatic Fail regardless of points earned: outcome Fail.",
+      "state": {
+        "candidateExaminerScenario": {
+          "candidateFirstName": "Tyler",
+          "candidateLastName": "Nguyen",
+          "candidateId": "EMT-11093",
+          "attempt": "retest",
+          "examinerName": "R. Okafor",
+          "sessionDate": "",
+          "stationLocation": "Station 2",
+          "scenarioSummary": "Adult male with chest pain and hypoxia.",
+          "chiefComplaintGiven": "Chest pain"
+        },
+        "sceneSizeUp": {
+          "ppePrecautions": "yes",
+          "sceneSafe": "yes",
+          "mechanismOrNature": "yes",
+          "numberOfPatients": "yes",
+          "additionalResources": "yes",
+          "considersCspine": "yes"
+        },
+        "primarySurvey": {
+          "generalImpression": "yes",
+          "mentalStatus": "yes",
+          "airway": "yes",
+          "breathing": "yes",
+          "oxygenTherapy": "no",
+          "circulation": "yes",
+          "transportPriority": "yes"
+        },
+        "historySecondaryAssessment": {
+          "chiefComplaint": "yes",
+          "historyOnsetOpqrst": "yes",
+          "sampleSignsSymptoms": "yes",
+          "sampleAllergies": "yes",
+          "sampleMedications": "yes",
+          "samplePastHistory": "yes",
+          "sampleLastIntake": "yes",
+          "sampleEvents": "yes",
+          "focusedExam": "yes",
+          "baselineVitalsBp": "yes",
+          "baselineVitalsPulse": "yes",
+          "baselineVitalsRespirations": "yes",
+          "fieldImpression": "yes",
+          "interventions": "yes"
+        },
+        "reassessment": {
+          "repeatsMentalStatus": "yes",
+          "repeatsAirway": "yes",
+          "repeatsBreathing": "yes",
+          "repeatsCirculation": "yes",
+          "repeatsVitals": "yes",
+          "repeatsFocusedExam": "yes",
+          "evaluatesInterventions": "yes",
+          "transportInterventions": "yes",
+          "fifteenMinuteCall": "yes"
+        },
+        "criticalCriteriaReview": {
+          "dangerousIntervention": "yes",
+          "spinalProtection": "yes",
+          "examinerNotes": "Automatic failure: oxygen not administered to a hypoxic patient.",
+          "debriefNotes": ""
+        }
+      },
+      "expected": {
+        "outcome": "fail",
+        "points": 39,
+        "maxPoints": 40,
+        "percent": 97.5,
+        "criticalFailures": [
+          {
+            "id": "EMT-PS-OXYGEN",
+            "step": 3,
+            "category": "Primary Survey",
+            "description": "Provides appropriate oxygen therapy when indicated.",
+            "critical": true,
+            "points": 1,
+            "status": "no",
+            "pointsAwarded": 0
+          }
+        ],
+        "firedRules": [
+          {
+            "id": "EMT-SS-PPE",
+            "step": 2,
+            "category": "Scene Size-Up",
+            "description": "Takes or verbalizes appropriate body-substance / PPE precautions.",
+            "critical": true,
+            "points": 1,
+            "status": "yes",
+            "pointsAwarded": 1
+          },
+          {
+            "id": "EMT-SS-SAFE",
+            "step": 2,
+            "category": "Scene Size-Up",
+            "description": "Determines the scene / situation is safe before approaching the patient.",
+            "critical": true,
+            "points": 1,
+            "status": "yes",
+            "pointsAwarded": 1
+          },
+          {
+            "id": "EMT-SS-MOI-NOI",
+            "step": 2,
+            "category": "Scene Size-Up",
+            "description": "Determines the mechanism of injury / nature of illness (MOI/NOI).",
+            "critical": false,
+            "points": 1,
+            "status": "yes",
+            "pointsAwarded": 1
+          },
+          {
+            "id": "EMT-SS-PATIENTS",
+            "step": 2,
+            "category": "Scene Size-Up",
+            "description": "Determines the number of patients on scene.",
+            "critical": false,
+            "points": 1,
+            "status": "yes",
+            "pointsAwarded": 1
+          },
+          {
+            "id": "EMT-SS-RESOURCES",
+            "step": 2,
+            "category": "Scene Size-Up",
+            "description": "Requests additional EMS / ALS / fire / law-enforcement resources as needed.",
+            "critical": false,
+            "points": 1,
+            "status": "yes",
+            "pointsAwarded": 1
+          },
+          {
+            "id": "EMT-SS-CSPINE",
+            "step": 2,
+            "category": "Scene Size-Up",
+            "description": "Considers stabilization of the spine when indicated by MOI.",
+            "critical": false,
+            "points": 1,
+            "status": "yes",
+            "pointsAwarded": 1
+          },
+          {
+            "id": "EMT-PS-IMPRESSION",
+            "step": 3,
+            "category": "Primary Survey",
+            "description": "Verbalizes a general impression of the patient.",
+            "critical": false,
+            "points": 1,
+            "status": "yes",
+            "pointsAwarded": 1
+          },
+          {
+            "id": "EMT-PS-MENTAL",
+            "step": 3,
+            "category": "Primary Survey",
+            "description": "Determines responsiveness / level of consciousness (AVPU).",
+            "critical": false,
+            "points": 1,
+            "status": "yes",
+            "pointsAwarded": 1
+          },
+          {
+            "id": "EMT-PS-AIRWAY",
+            "step": 3,
+            "category": "Primary Survey",
+            "description": "Assesses airway and initiates appropriate airway management.",
+            "critical": true,
+            "points": 1,
+            "status": "yes",
+            "pointsAwarded": 1
+          },
+          {
+            "id": "EMT-PS-BREATHING",
+            "step": 3,
+            "category": "Primary Survey",
+            "description": "Assesses breathing and initiates appropriate ventilatory support.",
+            "critical": true,
+            "points": 1,
+            "status": "yes",
+            "pointsAwarded": 1
+          },
+          {
+            "id": "EMT-PS-OXYGEN",
+            "step": 3,
+            "category": "Primary Survey",
+            "description": "Provides appropriate oxygen therapy when indicated.",
+            "critical": true,
+            "points": 1,
+            "status": "no",
+            "pointsAwarded": 0
+          },
+          {
+            "id": "EMT-PS-CIRCULATION",
+            "step": 3,
+            "category": "Primary Survey",
+            "description": "Assesses circulation, controls major bleeding, and manages shock.",
+            "critical": true,
+            "points": 1,
+            "status": "yes",
+            "pointsAwarded": 1
+          },
+          {
+            "id": "EMT-PS-TRANSPORT",
+            "step": 3,
+            "category": "Primary Survey",
+            "description": "Identifies patient priority and makes a transport urgency decision.",
+            "critical": true,
+            "points": 1,
+            "status": "yes",
+            "pointsAwarded": 1
+          },
+          {
+            "id": "EMT-HX-CC",
+            "step": 4,
+            "category": "History",
+            "description": "Elicits the chief complaint clearly.",
+            "critical": false,
+            "points": 1,
+            "status": "yes",
+            "pointsAwarded": 1
+          },
+          {
+            "id": "EMT-HX-OPQRST",
+            "step": 4,
+            "category": "History",
+            "description": "Obtains OPQRST history of the present illness.",
+            "critical": false,
+            "points": 2,
+            "status": "yes",
+            "pointsAwarded": 2
+          },
+          {
+            "id": "EMT-HX-SAMPLE-S",
+            "step": 4,
+            "category": "SAMPLE History",
+            "description": "SAMPLE — Signs / Symptoms.",
+            "critical": false,
+            "points": 1,
+            "status": "yes",
+            "pointsAwarded": 1
+          },
+          {
+            "id": "EMT-HX-SAMPLE-A",
+            "step": 4,
+            "category": "SAMPLE History",
+            "description": "SAMPLE — Allergies.",
+            "critical": false,
+            "points": 1,
+            "status": "yes",
+            "pointsAwarded": 1
+          },
+          {
+            "id": "EMT-HX-SAMPLE-M",
+            "step": 4,
+            "category": "SAMPLE History",
+            "description": "SAMPLE — Medications.",
+            "critical": false,
+            "points": 1,
+            "status": "yes",
+            "pointsAwarded": 1
+          },
+          {
+            "id": "EMT-HX-SAMPLE-P",
+            "step": 4,
+            "category": "SAMPLE History",
+            "description": "SAMPLE — Past pertinent medical / surgical history.",
+            "critical": false,
+            "points": 1,
+            "status": "yes",
+            "pointsAwarded": 1
+          },
+          {
+            "id": "EMT-HX-SAMPLE-L",
+            "step": 4,
+            "category": "SAMPLE History",
+            "description": "SAMPLE — Last oral intake.",
+            "critical": false,
+            "points": 1,
+            "status": "yes",
+            "pointsAwarded": 1
+          },
+          {
+            "id": "EMT-HX-SAMPLE-E",
+            "step": 4,
+            "category": "SAMPLE History",
+            "description": "SAMPLE — Events leading up to the illness.",
+            "critical": false,
+            "points": 1,
+            "status": "yes",
+            "pointsAwarded": 1
+          },
+          {
+            "id": "EMT-SA-FOCUSED",
+            "step": 4,
+            "category": "Secondary Assessment",
+            "description": "Performs a focused / detailed physical exam appropriate to the chief complaint.",
+            "critical": false,
+            "points": 2,
+            "status": "yes",
+            "pointsAwarded": 2
+          },
+          {
+            "id": "EMT-SA-VITALS-BP",
+            "step": 4,
+            "category": "Baseline Vitals",
+            "description": "Obtains baseline blood pressure.",
+            "critical": false,
+            "points": 1,
+            "status": "yes",
+            "pointsAwarded": 1
+          },
+          {
+            "id": "EMT-SA-VITALS-PULSE",
+            "step": 4,
+            "category": "Baseline Vitals",
+            "description": "Obtains baseline pulse rate and quality.",
+            "critical": false,
+            "points": 1,
+            "status": "yes",
+            "pointsAwarded": 1
+          },
+          {
+            "id": "EMT-SA-VITALS-RESP",
+            "step": 4,
+            "category": "Baseline Vitals",
+            "description": "Obtains baseline respiratory rate and quality.",
+            "critical": false,
+            "points": 1,
+            "status": "yes",
+            "pointsAwarded": 1
+          },
+          {
+            "id": "EMT-SA-FIELD-IMPRESSION",
+            "step": 4,
+            "category": "Secondary Assessment",
+            "description": "States a field impression / working diagnosis.",
+            "critical": false,
+            "points": 1,
+            "status": "yes",
+            "pointsAwarded": 1
+          },
+          {
+            "id": "EMT-SA-INTERVENTIONS",
+            "step": 4,
+            "category": "Secondary Assessment",
+            "description": "Initiates appropriate interventions and verbalizes care plan.",
+            "critical": false,
+            "points": 1,
+            "status": "yes",
+            "pointsAwarded": 1
+          },
+          {
+            "id": "EMT-RA-MENTAL",
+            "step": 5,
+            "category": "Reassessment",
+            "description": "Repeats mental-status assessment.",
+            "critical": false,
+            "points": 1,
+            "status": "yes",
+            "pointsAwarded": 1
+          },
+          {
+            "id": "EMT-RA-AIRWAY",
+            "step": 5,
+            "category": "Reassessment",
+            "description": "Repeats airway assessment.",
+            "critical": false,
+            "points": 1,
+            "status": "yes",
+            "pointsAwarded": 1
+          },
+          {
+            "id": "EMT-RA-BREATHING",
+            "step": 5,
+            "category": "Reassessment",
+            "description": "Repeats breathing assessment.",
+            "critical": false,
+            "points": 1,
+            "status": "yes",
+            "pointsAwarded": 1
+          },
+          {
+            "id": "EMT-RA-CIRCULATION",
+            "step": 5,
+            "category": "Reassessment",
+            "description": "Repeats circulation assessment.",
+            "critical": false,
+            "points": 1,
+            "status": "yes",
+            "pointsAwarded": 1
+          },
+          {
+            "id": "EMT-RA-VITALS",
+            "step": 5,
+            "category": "Reassessment",
+            "description": "Repeats and records vital signs.",
+            "critical": false,
+            "points": 1,
+            "status": "yes",
+            "pointsAwarded": 1
+          },
+          {
+            "id": "EMT-RA-FOCUSED",
+            "step": 5,
+            "category": "Reassessment",
+            "description": "Repeats focused assessment regarding patient complaint or injuries.",
+            "critical": false,
+            "points": 1,
+            "status": "yes",
+            "pointsAwarded": 1
+          },
+          {
+            "id": "EMT-RA-EVAL-INT",
+            "step": 5,
+            "category": "Reassessment",
+            "description": "Evaluates effectiveness of interventions and adjusts as needed.",
+            "critical": false,
+            "points": 1,
+            "status": "yes",
+            "pointsAwarded": 1
+          },
+          {
+            "id": "EMT-RA-TRANSPORT-INT",
+            "step": 5,
+            "category": "Reassessment",
+            "description": "Manages and reassesses transport interventions en route.",
+            "critical": false,
+            "points": 1,
+            "status": "yes",
+            "pointsAwarded": 1
+          },
+          {
+            "id": "EMT-RA-FIFTEEN-MIN",
+            "step": 5,
+            "category": "Reassessment",
+            "description": "Provides patient hand-off / radio report within 15 minutes of arrival on scene.",
+            "critical": true,
+            "points": 1,
+            "status": "yes",
+            "pointsAwarded": 1
+          },
+          {
+            "id": "EMT-CC-DANGEROUS",
+            "step": 6,
+            "category": "Critical Criteria",
+            "description": "Did NOT perform any dangerous or harmful intervention.",
+            "critical": true,
+            "points": 1,
+            "status": "yes",
+            "pointsAwarded": 1
+          },
+          {
+            "id": "EMT-CC-SPINAL",
+            "step": 6,
+            "category": "Critical Criteria",
+            "description": "Provided spinal protection when indicated by MOI.",
+            "critical": true,
+            "points": 1,
+            "status": "yes",
+            "pointsAwarded": 1
+          }
+        ],
+        "answeredCount": 38,
+        "totalRules": 38
+      }
+    }
+  ]
+}

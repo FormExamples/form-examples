@@ -1,0 +1,214 @@
+{
+  "engine": "front-end-with-html",
+  "graderHint": "calculateGrade",
+  "note": "Realistic filled-in states in the diabetic-eye-screening classification engine's shape. `expected` is computed by `bin/test-personas --update` and verified by `bin/test-personas`.",
+  "personas": [
+    {
+      "name": "low-risk-24-month",
+      "description": "Both eyes R0/M0 with a prior R0/M0 screen — worst-eye R0, low-risk eligible: routine 24-monthly (extended) recall, no referral.",
+      "state": {
+        "context": {
+          "graderName": "",
+          "graderRole": "primary-grader",
+          "gradedAt": "",
+          "imageCapturedAt": "",
+          "imagingMedia": "digital-fundus"
+        },
+        "identification": {
+          "patientIdentifier": "",
+          "ageBand": "18-64",
+          "diabetesType": "type-2",
+          "yearsSinceDiagnosis": 4,
+          "previousScreenDate": "",
+          "previousScreenResult": "r0m0"
+        },
+        "rightEye": {
+          "retinopathy": "R0",
+          "maculopathy": "M0",
+          "photocoagulation": "no",
+          "ungradable": "no",
+          "visualAcuity": "6/6"
+        },
+        "leftEye": {
+          "retinopathy": "R0",
+          "maculopathy": "M0",
+          "photocoagulation": "no",
+          "ungradable": "no",
+          "visualAcuity": "6/6"
+        },
+        "note": {
+          "clinicalContext": ""
+        }
+      },
+      "expected": {
+        "rightEyeGrade": {
+          "retinopathy": "R0",
+          "maculopathy": "M0",
+          "photocoagulation": "no",
+          "ungradable": "no",
+          "visualAcuity": "6/6"
+        },
+        "leftEyeGrade": {
+          "retinopathy": "R0",
+          "maculopathy": "M0",
+          "photocoagulation": "no",
+          "ungradable": "no",
+          "visualAcuity": "6/6"
+        },
+        "worstRetinopathy": "R0",
+        "worstMaculopathy": "M0",
+        "anyUngradable": false,
+        "recallPathway": "routine-24-month",
+        "recallIntervalMonths": 24,
+        "referral": "none",
+        "status": "complete",
+        "firedRules": [
+          {
+            "id": "R-RECALL-R0-LOWRISK-01",
+            "stage": "recall",
+            "category": "routine",
+            "description": "Both eyes R0/M0 and the previous screen was also R0/M0 — routine 24-monthly (extended, low-risk) screening."
+          }
+        ]
+      }
+    },
+    {
+      "name": "pre-proliferative-surveillance",
+      "description": "Worst-eye R2 (pre-proliferative) with no maculopathy or proliferative disease — 6-monthly digital surveillance, no referral.",
+      "state": {
+        "context": {
+          "graderName": "",
+          "graderRole": "secondary-grader",
+          "gradedAt": "",
+          "imageCapturedAt": "",
+          "imagingMedia": "mydriatic"
+        },
+        "identification": {
+          "patientIdentifier": "",
+          "ageBand": "18-64",
+          "diabetesType": "type-1",
+          "yearsSinceDiagnosis": 18,
+          "previousScreenDate": "",
+          "previousScreenResult": "background"
+        },
+        "rightEye": {
+          "retinopathy": "R2",
+          "maculopathy": "M0",
+          "photocoagulation": "no",
+          "ungradable": "no",
+          "visualAcuity": "6/9"
+        },
+        "leftEye": {
+          "retinopathy": "R1",
+          "maculopathy": "M0",
+          "photocoagulation": "no",
+          "ungradable": "no",
+          "visualAcuity": "6/6"
+        },
+        "note": {
+          "clinicalContext": ""
+        }
+      },
+      "expected": {
+        "rightEyeGrade": {
+          "retinopathy": "R2",
+          "maculopathy": "M0",
+          "photocoagulation": "no",
+          "ungradable": "no",
+          "visualAcuity": "6/9"
+        },
+        "leftEyeGrade": {
+          "retinopathy": "R1",
+          "maculopathy": "M0",
+          "photocoagulation": "no",
+          "ungradable": "no",
+          "visualAcuity": "6/6"
+        },
+        "worstRetinopathy": "R2",
+        "worstMaculopathy": "M0",
+        "anyUngradable": false,
+        "recallPathway": "surveillance-6-month",
+        "recallIntervalMonths": 6,
+        "referral": "none",
+        "status": "complete",
+        "firedRules": [
+          {
+            "id": "R-RECALL-R2-01",
+            "stage": "recall",
+            "category": "surveillance",
+            "description": "Worst-eye retinopathy R2 (pre-proliferative), no maculopathy / proliferative / ungradable — 6-monthly digital surveillance."
+          }
+        ]
+      }
+    },
+    {
+      "name": "active-proliferative-urgent",
+      "description": "Right eye R3A (active proliferative) with M1 maculopathy — worst-eye R3A: urgent fast-track referral to ophthalmology (HES).",
+      "state": {
+        "context": {
+          "graderName": "",
+          "graderRole": "ophthalmologist",
+          "gradedAt": "",
+          "imageCapturedAt": "",
+          "imagingMedia": "mydriatic"
+        },
+        "identification": {
+          "patientIdentifier": "",
+          "ageBand": "18-64",
+          "diabetesType": "type-1",
+          "yearsSinceDiagnosis": 27,
+          "previousScreenDate": "",
+          "previousScreenResult": "referable"
+        },
+        "rightEye": {
+          "retinopathy": "R3A",
+          "maculopathy": "M1",
+          "photocoagulation": "no",
+          "ungradable": "no",
+          "visualAcuity": "6/24"
+        },
+        "leftEye": {
+          "retinopathy": "R2",
+          "maculopathy": "M0",
+          "photocoagulation": "no",
+          "ungradable": "no",
+          "visualAcuity": "6/9"
+        },
+        "note": {
+          "clinicalContext": ""
+        }
+      },
+      "expected": {
+        "rightEyeGrade": {
+          "retinopathy": "R3A",
+          "maculopathy": "M1",
+          "photocoagulation": "no",
+          "ungradable": "no",
+          "visualAcuity": "6/24"
+        },
+        "leftEyeGrade": {
+          "retinopathy": "R2",
+          "maculopathy": "M0",
+          "photocoagulation": "no",
+          "ungradable": "no",
+          "visualAcuity": "6/9"
+        },
+        "worstRetinopathy": "R3A",
+        "worstMaculopathy": "M1",
+        "anyUngradable": false,
+        "recallPathway": "refer-hes-urgent",
+        "recallIntervalMonths": null,
+        "referral": "hes-urgent",
+        "status": "complete",
+        "firedRules": [
+          {
+            "id": "R-RECALL-R3A-01",
+            "stage": "recall",
+            "category": "urgent-proliferative",
+            "description": "Worst-eye retinopathy R3A (active proliferative) — urgent / fast-track referral to ophthalmology."
+          }
+        ]
+      }
+    }
+  ]
+}

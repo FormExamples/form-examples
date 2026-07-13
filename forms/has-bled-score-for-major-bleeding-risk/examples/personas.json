@@ -1,0 +1,279 @@
+{
+  "engine": "front-end-with-html",
+  "graderHint": "calculateHasBledGrade",
+  "note": "Realistic filled-in states in the HAS-BLED Score engine's shape. `expected` is computed by `bin/test-personas --update` and verified by `bin/test-personas`.",
+  "personas": [
+    {
+      "name": "low-risk",
+      "description": "60-year-old man with controlled BP, no organ dysfunction, no bleeding history and minimal alcohol: HAS-BLED 0 — low bleeding risk.",
+      "state": {
+        "context": {
+          "clinicianName": "",
+          "clinicianRole": "",
+          "assessedAt": "",
+          "careSetting": "",
+          "anticoagulationStatus": "",
+          "chaDsVascScore": null
+        },
+        "identification": {
+          "patientIdentifier": "",
+          "ageYears": 60,
+          "sex": "male"
+        },
+        "hypertension": {
+          "hypertensionUncontrolled": "no"
+        },
+        "organFunction": {
+          "abnormalRenalFunction": "no",
+          "abnormalLiverFunction": "no"
+        },
+        "stroke": {
+          "strokeHistory": "no"
+        },
+        "bleeding": {
+          "bleedingHistory": "no"
+        },
+        "labileInr": {
+          "labileInr": "no"
+        },
+        "drugsAlcohol": {
+          "antiplateletOrNsaid": "no",
+          "alcoholUnitsPerWeek": 2
+        },
+        "note": {
+          "clinicalNote": ""
+        }
+      },
+      "expected": {
+        "hypertensionPoints": 0,
+        "renalPoints": 0,
+        "liverPoints": 0,
+        "strokePoints": 0,
+        "bleedingPoints": 0,
+        "labileInrPoints": 0,
+        "elderlyPoints": 0,
+        "drugsPoints": 0,
+        "alcoholPoints": 0,
+        "totalScore": 0,
+        "riskBand": "low",
+        "modifiableFactors": "",
+        "firedCriteria": [
+          {
+            "id": "R-BAND-01",
+            "criterion": "band",
+            "points": 0,
+            "category": "risk-band",
+            "description": "HAS-BLED 0 — low estimated bleeding risk; low risk band"
+          }
+        ]
+      }
+    },
+    {
+      "name": "moderate-risk",
+      "description": "70-year-old with uncontrolled hypertension (age > 65 plus SBP > 160): HAS-BLED 2 — moderate bleeding risk, address modifiable factors.",
+      "state": {
+        "context": {
+          "clinicianName": "",
+          "clinicianRole": "",
+          "assessedAt": "",
+          "careSetting": "",
+          "anticoagulationStatus": "",
+          "chaDsVascScore": null
+        },
+        "identification": {
+          "patientIdentifier": "",
+          "ageYears": 70,
+          "sex": "male"
+        },
+        "hypertension": {
+          "hypertensionUncontrolled": "yes"
+        },
+        "organFunction": {
+          "abnormalRenalFunction": "no",
+          "abnormalLiverFunction": "no"
+        },
+        "stroke": {
+          "strokeHistory": "no"
+        },
+        "bleeding": {
+          "bleedingHistory": "no"
+        },
+        "labileInr": {
+          "labileInr": "no"
+        },
+        "drugsAlcohol": {
+          "antiplateletOrNsaid": "no",
+          "alcoholUnitsPerWeek": 3
+        },
+        "note": {
+          "clinicalNote": ""
+        }
+      },
+      "expected": {
+        "hypertensionPoints": 1,
+        "renalPoints": 0,
+        "liverPoints": 0,
+        "strokePoints": 0,
+        "bleedingPoints": 0,
+        "labileInrPoints": 0,
+        "elderlyPoints": 1,
+        "drugsPoints": 0,
+        "alcoholPoints": 0,
+        "totalScore": 2,
+        "riskBand": "moderate",
+        "modifiableFactors": "uncontrolled hypertension (SBP > 160 mmHg)",
+        "firedCriteria": [
+          {
+            "id": "R-HYPERTENSION-01",
+            "criterion": "hypertension",
+            "points": 1,
+            "category": "has-bled-criterion",
+            "description": "Uncontrolled hypertension — systolic blood pressure > 160 mmHg"
+          },
+          {
+            "id": "R-ELDERLY-01",
+            "criterion": "elderly",
+            "points": 1,
+            "category": "has-bled-criterion",
+            "description": "Elderly — age > 65 years"
+          },
+          {
+            "id": "R-BAND-01",
+            "criterion": "band",
+            "points": 0,
+            "category": "risk-band",
+            "description": "HAS-BLED 1-2 — moderate estimated bleeding risk; moderate risk band"
+          }
+        ]
+      }
+    },
+    {
+      "name": "high-risk",
+      "description": "80-year-old with uncontrolled hypertension, renal and liver impairment, prior stroke, bleeding history, labile INR, antiplatelet use and excess alcohol: HAS-BLED 9 — high bleeding risk.",
+      "state": {
+        "context": {
+          "clinicianName": "",
+          "clinicianRole": "",
+          "assessedAt": "",
+          "careSetting": "",
+          "anticoagulationStatus": "",
+          "chaDsVascScore": null
+        },
+        "identification": {
+          "patientIdentifier": "",
+          "ageYears": 80,
+          "sex": "male"
+        },
+        "hypertension": {
+          "hypertensionUncontrolled": "yes"
+        },
+        "organFunction": {
+          "abnormalRenalFunction": "yes",
+          "abnormalLiverFunction": "yes"
+        },
+        "stroke": {
+          "strokeHistory": "yes"
+        },
+        "bleeding": {
+          "bleedingHistory": "yes"
+        },
+        "labileInr": {
+          "labileInr": "yes"
+        },
+        "drugsAlcohol": {
+          "antiplateletOrNsaid": "yes",
+          "alcoholUnitsPerWeek": 12
+        },
+        "note": {
+          "clinicalNote": ""
+        }
+      },
+      "expected": {
+        "hypertensionPoints": 1,
+        "renalPoints": 1,
+        "liverPoints": 1,
+        "strokePoints": 1,
+        "bleedingPoints": 1,
+        "labileInrPoints": 1,
+        "elderlyPoints": 1,
+        "drugsPoints": 1,
+        "alcoholPoints": 1,
+        "totalScore": 9,
+        "riskBand": "high",
+        "modifiableFactors": "uncontrolled hypertension (SBP > 160 mmHg); labile INR / time in therapeutic range < 60%; concomitant antiplatelets or NSAIDs; alcohol >= 8 units per week",
+        "firedCriteria": [
+          {
+            "id": "R-HYPERTENSION-01",
+            "criterion": "hypertension",
+            "points": 1,
+            "category": "has-bled-criterion",
+            "description": "Uncontrolled hypertension — systolic blood pressure > 160 mmHg"
+          },
+          {
+            "id": "R-RENAL-01",
+            "criterion": "renal",
+            "points": 1,
+            "category": "has-bled-criterion",
+            "description": "Abnormal renal function — dialysis, transplant, or serum creatinine >= 200 umol/L"
+          },
+          {
+            "id": "R-LIVER-01",
+            "criterion": "liver",
+            "points": 1,
+            "category": "has-bled-criterion",
+            "description": "Abnormal liver function — chronic hepatic disease (e.g. cirrhosis) or bilirubin > 2x ULN with AST/ALT/ALP > 3x ULN"
+          },
+          {
+            "id": "R-STROKE-01",
+            "criterion": "stroke",
+            "points": 1,
+            "category": "has-bled-criterion",
+            "description": "Previous stroke history"
+          },
+          {
+            "id": "R-BLEEDING-01",
+            "criterion": "bleeding",
+            "points": 1,
+            "category": "has-bled-criterion",
+            "description": "Bleeding history or predisposition — prior major bleeding, bleeding diathesis, or anaemia"
+          },
+          {
+            "id": "R-LABILE-INR-01",
+            "criterion": "labile-inr",
+            "points": 1,
+            "category": "has-bled-criterion",
+            "description": "Labile INR — unstable or high INRs, or time in therapeutic range < 60%"
+          },
+          {
+            "id": "R-ELDERLY-01",
+            "criterion": "elderly",
+            "points": 1,
+            "category": "has-bled-criterion",
+            "description": "Elderly — age > 65 years"
+          },
+          {
+            "id": "R-DRUGS-01",
+            "criterion": "drugs",
+            "points": 1,
+            "category": "has-bled-criterion",
+            "description": "Drugs — concomitant antiplatelet agents or NSAIDs"
+          },
+          {
+            "id": "R-ALCOHOL-01",
+            "criterion": "alcohol",
+            "points": 1,
+            "category": "has-bled-criterion",
+            "description": "Alcohol — >= 8 units per week"
+          },
+          {
+            "id": "R-BAND-01",
+            "criterion": "band",
+            "points": 0,
+            "category": "risk-band",
+            "description": "HAS-BLED >= 3 — higher estimated risk of major bleeding; high risk band"
+          }
+        ]
+      }
+    }
+  ]
+}

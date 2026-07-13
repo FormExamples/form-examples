@@ -1,0 +1,211 @@
+{
+  "engine": "front-end-with-html",
+  "graderHint": "classifyControl",
+  "note": "Realistic filled-in states in the epilepsy-review engine's shape. The deterministic `classifyControl` classifier is pinned (the full `gradeEpilepsyReview` stamps a live timestamp). `expected` is computed by `bin/test-personas --update` and verified by `bin/test-personas`.",
+  "personas": [
+    {
+      "name": "seizure-free",
+      "description": "No seizures since the last review with a seizure-free trend: classified seizure-free.",
+      "state": {
+        "context": {
+          "reviewerName": "",
+          "reviewerRole": "",
+          "reviewedAt": "",
+          "careSetting": "",
+          "reviewType": "",
+          "monthsSinceLastReview": null
+        },
+        "profile": {
+          "patientIdentifier": "",
+          "ageBand": "",
+          "sex": "",
+          "epilepsyType": "",
+          "ageAtOnset": null,
+          "yearsSinceDiagnosis": null,
+          "learningDisability": ""
+        },
+        "seizures": {
+          "seizureTypes": "",
+          "seizureFrequency": "none",
+          "lastSeizureDate": "",
+          "seizureFreeMonths": null,
+          "seizureTrend": "seizure-free"
+        },
+        "medication": {
+          "currentAsms": "",
+          "asmAdherence": "",
+          "asmSideEffects": "",
+          "drugLevel": null
+        },
+        "triggers": {
+          "triggers": ""
+        },
+        "sudep": {
+          "sudepDiscussed": ""
+        },
+        "injuries": {
+          "statusEpilepticus": "no",
+          "seizureInjury": ""
+        },
+        "safety": {
+          "dvlaEligible": "",
+          "currentlyDriving": "",
+          "bathingAdviceGiven": ""
+        },
+        "childbearing": {
+          "womanOfChildbearingPotential": "",
+          "onValproate": "",
+          "pregnancyPreventionProgramme": "",
+          "folicAcid": "",
+          "contraceptionInteractionReviewed": ""
+        },
+        "mentalHealth": {
+          "mentalHealthConcern": ""
+        },
+        "summary": {
+          "specialistReviewNeeded": "",
+          "nextReviewDue": "",
+          "carePlan": "",
+          "reviewContext": ""
+        }
+      },
+      "expected": "seizure-free"
+    },
+    {
+      "name": "controlled",
+      "description": "Infrequent (less-than-monthly) seizures on a stable trend with no status epilepticus: classified controlled.",
+      "state": {
+        "context": {
+          "reviewerName": "",
+          "reviewerRole": "",
+          "reviewedAt": "",
+          "careSetting": "",
+          "reviewType": "",
+          "monthsSinceLastReview": null
+        },
+        "profile": {
+          "patientIdentifier": "",
+          "ageBand": "",
+          "sex": "",
+          "epilepsyType": "",
+          "ageAtOnset": null,
+          "yearsSinceDiagnosis": null,
+          "learningDisability": ""
+        },
+        "seizures": {
+          "seizureTypes": "",
+          "seizureFrequency": "less-than-monthly",
+          "lastSeizureDate": "",
+          "seizureFreeMonths": null,
+          "seizureTrend": "stable"
+        },
+        "medication": {
+          "currentAsms": "",
+          "asmAdherence": "",
+          "asmSideEffects": "",
+          "drugLevel": null
+        },
+        "triggers": {
+          "triggers": ""
+        },
+        "sudep": {
+          "sudepDiscussed": ""
+        },
+        "injuries": {
+          "statusEpilepticus": "no",
+          "seizureInjury": ""
+        },
+        "safety": {
+          "dvlaEligible": "",
+          "currentlyDriving": "",
+          "bathingAdviceGiven": ""
+        },
+        "childbearing": {
+          "womanOfChildbearingPotential": "",
+          "onValproate": "",
+          "pregnancyPreventionProgramme": "",
+          "folicAcid": "",
+          "contraceptionInteractionReviewed": ""
+        },
+        "mentalHealth": {
+          "mentalHealthConcern": ""
+        },
+        "summary": {
+          "specialistReviewNeeded": "",
+          "nextReviewDue": "",
+          "carePlan": "",
+          "reviewContext": ""
+        }
+      },
+      "expected": "controlled"
+    },
+    {
+      "name": "uncontrolled",
+      "description": "Weekly seizures on an increasing trend with status epilepticus since the last review: classified uncontrolled.",
+      "state": {
+        "context": {
+          "reviewerName": "",
+          "reviewerRole": "",
+          "reviewedAt": "",
+          "careSetting": "",
+          "reviewType": "",
+          "monthsSinceLastReview": null
+        },
+        "profile": {
+          "patientIdentifier": "",
+          "ageBand": "",
+          "sex": "",
+          "epilepsyType": "",
+          "ageAtOnset": null,
+          "yearsSinceDiagnosis": null,
+          "learningDisability": ""
+        },
+        "seizures": {
+          "seizureTypes": "",
+          "seizureFrequency": "weekly",
+          "lastSeizureDate": "",
+          "seizureFreeMonths": null,
+          "seizureTrend": "increasing"
+        },
+        "medication": {
+          "currentAsms": "",
+          "asmAdherence": "",
+          "asmSideEffects": "",
+          "drugLevel": null
+        },
+        "triggers": {
+          "triggers": ""
+        },
+        "sudep": {
+          "sudepDiscussed": ""
+        },
+        "injuries": {
+          "statusEpilepticus": "yes",
+          "seizureInjury": ""
+        },
+        "safety": {
+          "dvlaEligible": "",
+          "currentlyDriving": "",
+          "bathingAdviceGiven": ""
+        },
+        "childbearing": {
+          "womanOfChildbearingPotential": "",
+          "onValproate": "",
+          "pregnancyPreventionProgramme": "",
+          "folicAcid": "",
+          "contraceptionInteractionReviewed": ""
+        },
+        "mentalHealth": {
+          "mentalHealthConcern": ""
+        },
+        "summary": {
+          "specialistReviewNeeded": "",
+          "nextReviewDue": "",
+          "carePlan": "",
+          "reviewContext": ""
+        }
+      },
+      "expected": "uncontrolled"
+    }
+  ]
+}

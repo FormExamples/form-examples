@@ -1,0 +1,510 @@
+{
+  "engine": "front-end-with-html",
+  "graderHint": "evaluateUKMEC",
+  "note": "Realistic filled-in states in the UKMEC scoring engine's shape. `expected` is computed by `bin/test-personas --update` and verified by `bin/test-personas`.",
+  "personas": [
+    {
+      "name": "no-restriction",
+      "description": "Healthy 24-year-old non-smoker with no medical risk factors: every contraceptive method scores UKMEC 1 (no restriction).",
+      "state": {
+        "demographics": {
+          "firstName": "",
+          "lastName": "",
+          "dateOfBirth": "2001-05-14",
+          "sex": "female"
+        },
+        "reproductiveHistory": {
+          "gravida": 0,
+          "para": 0,
+          "lastDeliveryDate": "",
+          "breastfeeding": "no",
+          "pregnancyIntention": "not-now"
+        },
+        "menstrualHistory": {
+          "cycleLength": 28,
+          "cycleDuration": 5,
+          "flowHeaviness": "moderate",
+          "dysmenorrhea": "mild",
+          "lastMenstrualPeriod": ""
+        },
+        "currentContraception": {
+          "currentMethod": "barrier",
+          "durationOfUse": "2 years",
+          "reasonForChange": "wants more reliable method",
+          "sideEffects": ""
+        },
+        "medicalHistory": {
+          "hypertension": "no",
+          "migraineWithAura": "no",
+          "dvtHistory": "no",
+          "breastCancer": "no",
+          "liverDisease": "no",
+          "diabetes": "no",
+          "epilepsy": "no",
+          "hiv": "no",
+          "stiHistory": "no"
+        },
+        "cardiovascularRisk": {
+          "bmi": 23,
+          "smoking": "never",
+          "bloodPressureSystolic": 118,
+          "bloodPressureDiastolic": 74,
+          "familyHistoryCVD": "no",
+          "lipidDisorders": "no"
+        },
+        "lifestyleFactors": {
+          "smokingStatus": "never",
+          "alcoholUse": "occasional",
+          "drugUse": "none",
+          "occupation": "teacher",
+          "travelPlans": ""
+        },
+        "preferencesPriorities": {
+          "preferredMethod": "combined-oral",
+          "efficacyPriority": "high",
+          "conveniencePriority": "high",
+          "periodControlPriority": "moderate",
+          "fertilityReturnPriority": "moderate",
+          "hormoneFreePreference": "no-preference"
+        },
+        "breastCervicalScreening": {
+          "lastBreastScreening": "",
+          "lastCervicalScreening": "2024-01-10",
+          "hpvVaccination": "completed"
+        },
+        "familyPlanningGoals": {
+          "desireForChildren": "yes-future",
+          "timeframe": "3-5-years",
+          "partnerInvolvement": "involved"
+        }
+      },
+      "expected": {
+        "ukmecResults": [
+          {
+            "method": "combined-oral",
+            "methodLabel": "Combined Oral Contraceptive (COC)",
+            "category": 1,
+            "reasons": []
+          },
+          {
+            "method": "progestogen-only-pill",
+            "methodLabel": "Progestogen-Only Pill (POP)",
+            "category": 1,
+            "reasons": []
+          },
+          {
+            "method": "injectable",
+            "methodLabel": "Injectable (DMPA)",
+            "category": 1,
+            "reasons": []
+          },
+          {
+            "method": "implant",
+            "methodLabel": "Subdermal Implant",
+            "category": 1,
+            "reasons": []
+          },
+          {
+            "method": "copper-iud",
+            "methodLabel": "Copper IUD",
+            "category": 1,
+            "reasons": []
+          },
+          {
+            "method": "lng-ius",
+            "methodLabel": "LNG-IUS (Hormonal Coil)",
+            "category": 1,
+            "reasons": []
+          },
+          {
+            "method": "patch",
+            "methodLabel": "Contraceptive Patch",
+            "category": 1,
+            "reasons": []
+          },
+          {
+            "method": "vaginal-ring",
+            "methodLabel": "Vaginal Ring",
+            "category": 1,
+            "reasons": []
+          },
+          {
+            "method": "barrier",
+            "methodLabel": "Barrier Methods",
+            "category": 1,
+            "reasons": []
+          },
+          {
+            "method": "natural-methods",
+            "methodLabel": "Natural Family Planning",
+            "category": 1,
+            "reasons": []
+          },
+          {
+            "method": "sterilisation",
+            "methodLabel": "Sterilisation",
+            "category": 1,
+            "reasons": []
+          }
+        ],
+        "firedRules": []
+      }
+    },
+    {
+      "name": "chc-risks-outweigh",
+      "description": "Stage-1 hypertension (systolic 148) with type-2 diabetes: combined oral contraception reaches UKMEC 3 (risks outweigh advantages) while progestogen-only and intrauterine methods stay UKMEC 1.",
+      "state": {
+        "demographics": {
+          "firstName": "",
+          "lastName": "",
+          "dateOfBirth": "1985-09-02",
+          "sex": "female"
+        },
+        "reproductiveHistory": {
+          "gravida": 2,
+          "para": 2,
+          "lastDeliveryDate": "2021-06-18",
+          "breastfeeding": "no",
+          "pregnancyIntention": "not-now"
+        },
+        "menstrualHistory": {
+          "cycleLength": 30,
+          "cycleDuration": 6,
+          "flowHeaviness": "heavy",
+          "dysmenorrhea": "moderate",
+          "lastMenstrualPeriod": ""
+        },
+        "currentContraception": {
+          "currentMethod": "combined-oral",
+          "durationOfUse": "6 years",
+          "reasonForChange": "blood pressure now raised",
+          "sideEffects": "headaches"
+        },
+        "medicalHistory": {
+          "hypertension": "yes",
+          "migraineWithAura": "no",
+          "dvtHistory": "no",
+          "breastCancer": "no",
+          "liverDisease": "no",
+          "diabetes": "yes",
+          "epilepsy": "no",
+          "hiv": "no",
+          "stiHistory": "no"
+        },
+        "cardiovascularRisk": {
+          "bmi": 29,
+          "smoking": "never",
+          "bloodPressureSystolic": 148,
+          "bloodPressureDiastolic": 92,
+          "familyHistoryCVD": "yes",
+          "lipidDisorders": "no"
+        },
+        "lifestyleFactors": {
+          "smokingStatus": "never",
+          "alcoholUse": "occasional",
+          "drugUse": "none",
+          "occupation": "administrator",
+          "travelPlans": ""
+        },
+        "preferencesPriorities": {
+          "preferredMethod": "lng-ius",
+          "efficacyPriority": "very-high",
+          "conveniencePriority": "high",
+          "periodControlPriority": "high",
+          "fertilityReturnPriority": "low",
+          "hormoneFreePreference": "no-preference"
+        },
+        "breastCervicalScreening": {
+          "lastBreastScreening": "",
+          "lastCervicalScreening": "2023-05-20",
+          "hpvVaccination": "none"
+        },
+        "familyPlanningGoals": {
+          "desireForChildren": "no",
+          "timeframe": "not-applicable",
+          "partnerInvolvement": "involved"
+        }
+      },
+      "expected": {
+        "ukmecResults": [
+          {
+            "method": "combined-oral",
+            "methodLabel": "Combined Oral Contraceptive (COC)",
+            "category": 3,
+            "reasons": [
+              "Hypertension (systolic 140-159) - risks of CHC outweigh advantages",
+              "Diabetes - risks of CHC may outweigh advantages depending on complications"
+            ]
+          },
+          {
+            "method": "progestogen-only-pill",
+            "methodLabel": "Progestogen-Only Pill (POP)",
+            "category": 1,
+            "reasons": []
+          },
+          {
+            "method": "injectable",
+            "methodLabel": "Injectable (DMPA)",
+            "category": 1,
+            "reasons": []
+          },
+          {
+            "method": "implant",
+            "methodLabel": "Subdermal Implant",
+            "category": 1,
+            "reasons": []
+          },
+          {
+            "method": "copper-iud",
+            "methodLabel": "Copper IUD",
+            "category": 1,
+            "reasons": []
+          },
+          {
+            "method": "lng-ius",
+            "methodLabel": "LNG-IUS (Hormonal Coil)",
+            "category": 1,
+            "reasons": []
+          },
+          {
+            "method": "patch",
+            "methodLabel": "Contraceptive Patch",
+            "category": 1,
+            "reasons": []
+          },
+          {
+            "method": "vaginal-ring",
+            "methodLabel": "Vaginal Ring",
+            "category": 1,
+            "reasons": []
+          },
+          {
+            "method": "barrier",
+            "methodLabel": "Barrier Methods",
+            "category": 1,
+            "reasons": []
+          },
+          {
+            "method": "natural-methods",
+            "methodLabel": "Natural Family Planning",
+            "category": 1,
+            "reasons": []
+          },
+          {
+            "method": "sterilisation",
+            "methodLabel": "Sterilisation",
+            "category": 1,
+            "reasons": []
+          }
+        ],
+        "firedRules": [
+          {
+            "id": "UKMEC-CHC-HYPERTENSION-MODERATE",
+            "domain": "hypertension-moderate",
+            "description": "Hypertension (systolic 140-159) - risks of CHC outweigh advantages",
+            "score": 3
+          },
+          {
+            "id": "UKMEC-CHC-DIABETES",
+            "domain": "diabetes",
+            "description": "Diabetes - risks of CHC may outweigh advantages depending on complications",
+            "score": 3
+          }
+        ]
+      }
+    },
+    {
+      "name": "chc-contraindicated",
+      "description": "Migraine with aura plus prior deep-vein thrombosis: all combined hormonal methods (pill, patch, ring) are UKMEC 4 (unacceptable health risk / contraindicated).",
+      "state": {
+        "demographics": {
+          "firstName": "",
+          "lastName": "",
+          "dateOfBirth": "1990-11-27",
+          "sex": "female"
+        },
+        "reproductiveHistory": {
+          "gravida": 1,
+          "para": 1,
+          "lastDeliveryDate": "2019-03-04",
+          "breastfeeding": "no",
+          "pregnancyIntention": "not-now"
+        },
+        "menstrualHistory": {
+          "cycleLength": 27,
+          "cycleDuration": 5,
+          "flowHeaviness": "moderate",
+          "dysmenorrhea": "moderate",
+          "lastMenstrualPeriod": ""
+        },
+        "currentContraception": {
+          "currentMethod": "combined-oral",
+          "durationOfUse": "4 years",
+          "reasonForChange": "new aura symptoms and VTE history",
+          "sideEffects": "visual aura before migraines"
+        },
+        "medicalHistory": {
+          "hypertension": "no",
+          "migraineWithAura": "yes",
+          "dvtHistory": "yes",
+          "breastCancer": "no",
+          "liverDisease": "no",
+          "diabetes": "no",
+          "epilepsy": "no",
+          "hiv": "no",
+          "stiHistory": "no"
+        },
+        "cardiovascularRisk": {
+          "bmi": 26,
+          "smoking": "never",
+          "bloodPressureSystolic": 124,
+          "bloodPressureDiastolic": 78,
+          "familyHistoryCVD": "yes",
+          "lipidDisorders": "no"
+        },
+        "lifestyleFactors": {
+          "smokingStatus": "never",
+          "alcoholUse": "none",
+          "drugUse": "none",
+          "occupation": "nurse",
+          "travelPlans": ""
+        },
+        "preferencesPriorities": {
+          "preferredMethod": "copper-iud",
+          "efficacyPriority": "very-high",
+          "conveniencePriority": "high",
+          "periodControlPriority": "low",
+          "fertilityReturnPriority": "moderate",
+          "hormoneFreePreference": "prefer-hormone-free"
+        },
+        "breastCervicalScreening": {
+          "lastBreastScreening": "",
+          "lastCervicalScreening": "2024-02-14",
+          "hpvVaccination": "completed"
+        },
+        "familyPlanningGoals": {
+          "desireForChildren": "unsure",
+          "timeframe": "5-plus-years",
+          "partnerInvolvement": "involved"
+        }
+      },
+      "expected": {
+        "ukmecResults": [
+          {
+            "method": "combined-oral",
+            "methodLabel": "Combined Oral Contraceptive (COC)",
+            "category": 4,
+            "reasons": [
+              "Migraine with aura - CHC is contraindicated due to increased stroke risk",
+              "History of DVT/VTE - CHC is contraindicated"
+            ]
+          },
+          {
+            "method": "progestogen-only-pill",
+            "methodLabel": "Progestogen-Only Pill (POP)",
+            "category": 1,
+            "reasons": []
+          },
+          {
+            "method": "injectable",
+            "methodLabel": "Injectable (DMPA)",
+            "category": 1,
+            "reasons": []
+          },
+          {
+            "method": "implant",
+            "methodLabel": "Subdermal Implant",
+            "category": 1,
+            "reasons": []
+          },
+          {
+            "method": "copper-iud",
+            "methodLabel": "Copper IUD",
+            "category": 1,
+            "reasons": []
+          },
+          {
+            "method": "lng-ius",
+            "methodLabel": "LNG-IUS (Hormonal Coil)",
+            "category": 1,
+            "reasons": []
+          },
+          {
+            "method": "patch",
+            "methodLabel": "Contraceptive Patch",
+            "category": 4,
+            "reasons": [
+              "Migraine with aura - patch is contraindicated due to increased stroke risk",
+              "History of DVT/VTE - patch is contraindicated"
+            ]
+          },
+          {
+            "method": "vaginal-ring",
+            "methodLabel": "Vaginal Ring",
+            "category": 4,
+            "reasons": [
+              "Migraine with aura - vaginal ring is contraindicated due to increased stroke risk",
+              "History of DVT/VTE - vaginal ring is contraindicated"
+            ]
+          },
+          {
+            "method": "barrier",
+            "methodLabel": "Barrier Methods",
+            "category": 1,
+            "reasons": []
+          },
+          {
+            "method": "natural-methods",
+            "methodLabel": "Natural Family Planning",
+            "category": 1,
+            "reasons": []
+          },
+          {
+            "method": "sterilisation",
+            "methodLabel": "Sterilisation",
+            "category": 1,
+            "reasons": []
+          }
+        ],
+        "firedRules": [
+          {
+            "id": "UKMEC-CHC-MIGRAINE-AURA",
+            "domain": "migraineWithAura",
+            "description": "Migraine with aura - CHC is contraindicated due to increased stroke risk",
+            "score": 4
+          },
+          {
+            "id": "UKMEC-PATCH-MIGRAINE-AURA",
+            "domain": "migraineWithAura",
+            "description": "Migraine with aura - patch is contraindicated due to increased stroke risk",
+            "score": 4
+          },
+          {
+            "id": "UKMEC-RING-MIGRAINE-AURA",
+            "domain": "migraineWithAura",
+            "description": "Migraine with aura - vaginal ring is contraindicated due to increased stroke risk",
+            "score": 4
+          },
+          {
+            "id": "UKMEC-CHC-DVT",
+            "domain": "dvtHistory",
+            "description": "History of DVT/VTE - CHC is contraindicated",
+            "score": 4
+          },
+          {
+            "id": "UKMEC-PATCH-DVT",
+            "domain": "dvtHistory",
+            "description": "History of DVT/VTE - patch is contraindicated",
+            "score": 4
+          },
+          {
+            "id": "UKMEC-RING-DVT",
+            "domain": "dvtHistory",
+            "description": "History of DVT/VTE - vaginal ring is contraindicated",
+            "score": 4
+          }
+        ]
+      }
+    }
+  ]
+}

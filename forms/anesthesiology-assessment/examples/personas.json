@@ -1,0 +1,826 @@
+{
+  "engine": "front-end-with-html",
+  "graderHint": "gradeAssessment",
+  "note": "Realistic filled-in states in the anaesthetic pre-assessment engine's shape. Graded by gradeAssessment, the composite perioperative-risk grader (worst of ASA / Mallampati airway / RCRI / STOP-BANG — deterministic). `expected` is computed by `bin/test-personas --update` and verified by `bin/test-personas`.",
+  "personas": [
+    {
+      "name": "low-risk",
+      "description": "Fit ASA I patient, class I airway, no cardiac risk factors, negative STOP-BANG: overall low perioperative risk.",
+      "state": {
+        "demographics": {
+          "firstName": "",
+          "lastName": "",
+          "dateOfBirth": "",
+          "sex": "female",
+          "nhsNumber": "",
+          "addressLine1": "",
+          "addressLine2": "",
+          "city": "",
+          "postcode": "",
+          "phone": "",
+          "email": "",
+          "emergencyName": "",
+          "emergencyPhone": "",
+          "emergencyRelationship": "",
+          "gpName": "",
+          "gpPractice": "",
+          "gpPhone": ""
+        },
+        "plannedSurgery": {
+          "procedureName": "Laparoscopic cholecystectomy",
+          "surgeonName": "",
+          "surgeryDate": "",
+          "surgeryGrade": "intermediate",
+          "proposedAnaesthesia": "general"
+        },
+        "medicalHistory": {
+          "hypertension": "",
+          "ischaemicHeartDisease": "",
+          "heartFailure": "",
+          "valvularDisease": "",
+          "arrhythmia": "",
+          "peripheralVascularDisease": "",
+          "dvtPe": "",
+          "asthma": "",
+          "copd": "",
+          "sleepApnea": "",
+          "recentUrti": "",
+          "epilepsy": "",
+          "strokeTia": "",
+          "neuromuscularDisease": "",
+          "diabetesType1": "",
+          "diabetesType2": "",
+          "thyroidDisease": "",
+          "adrenalInsufficiency": "",
+          "chronicKidneyDisease": "",
+          "dialysis": "",
+          "liverDisease": "",
+          "jaundice": "",
+          "cirrhosis": "",
+          "anaemia": "",
+          "bleedingDisorder": "",
+          "clottingDisorder": "",
+          "gord": "",
+          "pepticUlcer": "",
+          "rheumatoidArthritis": "",
+          "limitedMobility": "",
+          "anxiety": "",
+          "depression": "",
+          "otherPsychiatric": "",
+          "otherDetails": ""
+        },
+        "medications": {
+          "list": [],
+          "onAnticoagulants": "",
+          "onAntiplatelets": "",
+          "onInsulin": "no",
+          "onSteroids": "",
+          "onMaois": ""
+        },
+        "allergies": {
+          "list": [],
+          "latexAllergy": ""
+        },
+        "previousAnaesthesia": {
+          "operations": [],
+          "difficultIntubation": false,
+          "ponv": false,
+          "awareness": false,
+          "slowRecovery": false,
+          "allergicReaction": false,
+          "otherComplication": false,
+          "otherComplicationDetails": "",
+          "malignantHyperthermia": "",
+          "familyAnaestheticComplications": "",
+          "familyAnaestheticDetails": ""
+        },
+        "socialHistory": {
+          "smoking": "never",
+          "packYears": null,
+          "alcoholUnitsPerWeek": null,
+          "recreationalDrugUse": "",
+          "recreationalDrugDetails": "",
+          "canClimbTwoFlights": "yes",
+          "exerciseTolerance": "",
+          "occupation": "",
+          "pregnancyStatus": "",
+          "snoresLoudly": "no",
+          "tiredDuringDay": "no",
+          "observedApnea": "no"
+        },
+        "vitalSigns": {
+          "systolicBp": null,
+          "diastolicBp": null,
+          "heartRate": null,
+          "respiratoryRate": null,
+          "spo2": null,
+          "temperature": null,
+          "height": 170,
+          "weight": 68,
+          "bmi": null,
+          "neckCircumference": null
+        },
+        "physicalExam": {
+          "mallampatiClass": "i",
+          "mouthOpening": null,
+          "thyromentalDistance": null,
+          "neckMobility": "normal",
+          "dentitionIntact": false,
+          "dentitionDentures": false,
+          "dentitionLooseTeeth": false,
+          "dentitionCrowns": false,
+          "dentitionProminentIncisors": false,
+          "jawProtrusion": "normal",
+          "heartSounds": "",
+          "peripheralEdema": "",
+          "jvp": "",
+          "breathSounds": "",
+          "accessoryMuscleUse": ""
+        },
+        "investigationsAndPlan": {
+          "fbcStatus": "",
+          "fbcNotes": "",
+          "ueStatus": "",
+          "ueNotes": "",
+          "lftsStatus": "",
+          "lftsNotes": "",
+          "coagStatus": "",
+          "coagNotes": "",
+          "hba1cStatus": "",
+          "hba1cNotes": "",
+          "ecgStatus": "",
+          "ecgNotes": "",
+          "cxrStatus": "",
+          "cxrNotes": "",
+          "echoStatus": "",
+          "echoNotes": "",
+          "otherInvestigation": "",
+          "otherInvestigationStatus": "",
+          "rcriIschaemicHeartDisease": "no",
+          "rcriCongestiveHeartFailure": "no",
+          "rcriCerebrovascularDisease": "no",
+          "rcriHighCreatinine": "no",
+          "asaClass": "i",
+          "emergencyCase": "no",
+          "proposedTechnique": "",
+          "airwayPlan": "",
+          "postOpDestination": "",
+          "specialRequirements": ""
+        }
+      },
+      "expected": {
+        "asa": {
+          "class": "i",
+          "emergency": false,
+          "riskLevel": "low",
+          "firedRules": [
+            {
+              "id": "ASA-001",
+              "category": "ASA Physical Status",
+              "description": "ASA I — Healthy",
+              "riskLevel": "low"
+            }
+          ]
+        },
+        "airway": {
+          "mallampatiClass": "i",
+          "mediumFactors": 0,
+          "riskLevel": "low",
+          "firedRules": []
+        },
+        "rcri": {
+          "score": 0,
+          "macePercent": 0.4,
+          "riskLevel": "low",
+          "firedRules": []
+        },
+        "stopbang": {
+          "score": 0,
+          "riskLevel": "low",
+          "firedRules": []
+        },
+        "overallRisk": "low",
+        "firedRules": [
+          {
+            "id": "ASA-001",
+            "category": "ASA Physical Status",
+            "description": "ASA I — Healthy",
+            "riskLevel": "low"
+          }
+        ]
+      }
+    },
+    {
+      "name": "moderate-risk",
+      "description": "ASA III with hypertension and ischaemic heart disease, class III airway, one RCRI factor: overall medium perioperative risk.",
+      "state": {
+        "demographics": {
+          "firstName": "",
+          "lastName": "",
+          "dateOfBirth": "",
+          "sex": "male",
+          "nhsNumber": "",
+          "addressLine1": "",
+          "addressLine2": "",
+          "city": "",
+          "postcode": "",
+          "phone": "",
+          "email": "",
+          "emergencyName": "",
+          "emergencyPhone": "",
+          "emergencyRelationship": "",
+          "gpName": "",
+          "gpPractice": "",
+          "gpPhone": ""
+        },
+        "plannedSurgery": {
+          "procedureName": "Elective total hip replacement",
+          "surgeonName": "",
+          "surgeryDate": "",
+          "surgeryGrade": "intermediate",
+          "proposedAnaesthesia": "spinal"
+        },
+        "medicalHistory": {
+          "hypertension": "yes",
+          "ischaemicHeartDisease": "yes",
+          "heartFailure": "",
+          "valvularDisease": "",
+          "arrhythmia": "",
+          "peripheralVascularDisease": "",
+          "dvtPe": "",
+          "asthma": "",
+          "copd": "",
+          "sleepApnea": "",
+          "recentUrti": "",
+          "epilepsy": "",
+          "strokeTia": "",
+          "neuromuscularDisease": "",
+          "diabetesType1": "",
+          "diabetesType2": "",
+          "thyroidDisease": "",
+          "adrenalInsufficiency": "",
+          "chronicKidneyDisease": "",
+          "dialysis": "",
+          "liverDisease": "",
+          "jaundice": "",
+          "cirrhosis": "",
+          "anaemia": "",
+          "bleedingDisorder": "",
+          "clottingDisorder": "",
+          "gord": "",
+          "pepticUlcer": "",
+          "rheumatoidArthritis": "",
+          "limitedMobility": "",
+          "anxiety": "",
+          "depression": "",
+          "otherPsychiatric": "",
+          "otherDetails": ""
+        },
+        "medications": {
+          "list": [],
+          "onAnticoagulants": "",
+          "onAntiplatelets": "",
+          "onInsulin": "no",
+          "onSteroids": "",
+          "onMaois": ""
+        },
+        "allergies": {
+          "list": [],
+          "latexAllergy": ""
+        },
+        "previousAnaesthesia": {
+          "operations": [],
+          "difficultIntubation": false,
+          "ponv": false,
+          "awareness": false,
+          "slowRecovery": false,
+          "allergicReaction": false,
+          "otherComplication": false,
+          "otherComplicationDetails": "",
+          "malignantHyperthermia": "",
+          "familyAnaestheticComplications": "",
+          "familyAnaestheticDetails": ""
+        },
+        "socialHistory": {
+          "smoking": "ex",
+          "packYears": null,
+          "alcoholUnitsPerWeek": null,
+          "recreationalDrugUse": "",
+          "recreationalDrugDetails": "",
+          "canClimbTwoFlights": "yes",
+          "exerciseTolerance": "",
+          "occupation": "",
+          "pregnancyStatus": "",
+          "snoresLoudly": "yes",
+          "tiredDuringDay": "no",
+          "observedApnea": "no"
+        },
+        "vitalSigns": {
+          "systolicBp": null,
+          "diastolicBp": null,
+          "heartRate": null,
+          "respiratoryRate": null,
+          "spo2": null,
+          "temperature": null,
+          "height": 175,
+          "weight": 92,
+          "bmi": null,
+          "neckCircumference": null
+        },
+        "physicalExam": {
+          "mallampatiClass": "iii",
+          "mouthOpening": null,
+          "thyromentalDistance": null,
+          "neckMobility": "normal",
+          "dentitionIntact": false,
+          "dentitionDentures": false,
+          "dentitionLooseTeeth": false,
+          "dentitionCrowns": false,
+          "dentitionProminentIncisors": false,
+          "jawProtrusion": "normal",
+          "heartSounds": "",
+          "peripheralEdema": "",
+          "jvp": "",
+          "breathSounds": "",
+          "accessoryMuscleUse": ""
+        },
+        "investigationsAndPlan": {
+          "fbcStatus": "",
+          "fbcNotes": "",
+          "ueStatus": "",
+          "ueNotes": "",
+          "lftsStatus": "",
+          "lftsNotes": "",
+          "coagStatus": "",
+          "coagNotes": "",
+          "hba1cStatus": "",
+          "hba1cNotes": "",
+          "ecgStatus": "",
+          "ecgNotes": "",
+          "cxrStatus": "",
+          "cxrNotes": "",
+          "echoStatus": "",
+          "echoNotes": "",
+          "otherInvestigation": "",
+          "otherInvestigationStatus": "",
+          "rcriIschaemicHeartDisease": "yes",
+          "rcriCongestiveHeartFailure": "no",
+          "rcriCerebrovascularDisease": "no",
+          "rcriHighCreatinine": "no",
+          "asaClass": "iii",
+          "emergencyCase": "no",
+          "proposedTechnique": "",
+          "airwayPlan": "",
+          "postOpDestination": "",
+          "specialRequirements": ""
+        }
+      },
+      "expected": {
+        "asa": {
+          "class": "iii",
+          "emergency": false,
+          "riskLevel": "medium",
+          "firedRules": [
+            {
+              "id": "ASA-001",
+              "category": "ASA Physical Status",
+              "description": "ASA III — Severe systemic disease",
+              "riskLevel": "medium"
+            }
+          ]
+        },
+        "airway": {
+          "mallampatiClass": "iii",
+          "mediumFactors": 1,
+          "riskLevel": "medium",
+          "firedRules": [
+            {
+              "id": "MALL-001",
+              "category": "Airway",
+              "description": "Mallampati Class III — moderate airway difficulty risk factor.",
+              "riskLevel": "medium"
+            }
+          ]
+        },
+        "rcri": {
+          "score": 1,
+          "macePercent": 1,
+          "riskLevel": "medium",
+          "firedRules": [
+            {
+              "id": "RCRI-002",
+              "category": "Cardiac",
+              "description": "History of ischaemic heart disease.",
+              "riskLevel": "medium"
+            }
+          ]
+        },
+        "stopbang": {
+          "score": 3,
+          "riskLevel": "medium",
+          "firedRules": [
+            {
+              "id": "SB-S",
+              "category": "OSA",
+              "description": "Snoring loudly.",
+              "riskLevel": "medium"
+            },
+            {
+              "id": "SB-P",
+              "category": "OSA",
+              "description": "Hypertension (Pressure).",
+              "riskLevel": "medium"
+            },
+            {
+              "id": "SB-G",
+              "category": "OSA",
+              "description": "Male sex.",
+              "riskLevel": "medium"
+            }
+          ]
+        },
+        "overallRisk": "medium",
+        "firedRules": [
+          {
+            "id": "ASA-001",
+            "category": "ASA Physical Status",
+            "description": "ASA III — Severe systemic disease",
+            "riskLevel": "medium"
+          },
+          {
+            "id": "MALL-001",
+            "category": "Airway",
+            "description": "Mallampati Class III — moderate airway difficulty risk factor.",
+            "riskLevel": "medium"
+          },
+          {
+            "id": "RCRI-002",
+            "category": "Cardiac",
+            "description": "History of ischaemic heart disease.",
+            "riskLevel": "medium"
+          },
+          {
+            "id": "SB-S",
+            "category": "OSA",
+            "description": "Snoring loudly.",
+            "riskLevel": "medium"
+          },
+          {
+            "id": "SB-P",
+            "category": "OSA",
+            "description": "Hypertension (Pressure).",
+            "riskLevel": "medium"
+          },
+          {
+            "id": "SB-G",
+            "category": "OSA",
+            "description": "Male sex.",
+            "riskLevel": "medium"
+          }
+        ]
+      }
+    },
+    {
+      "name": "high-risk",
+      "description": "ASA IV major vascular surgery, class IV airway, and positive STOP-BANG: overall high perioperative risk.",
+      "state": {
+        "demographics": {
+          "firstName": "",
+          "lastName": "",
+          "dateOfBirth": "",
+          "sex": "male",
+          "nhsNumber": "",
+          "addressLine1": "",
+          "addressLine2": "",
+          "city": "",
+          "postcode": "",
+          "phone": "",
+          "email": "",
+          "emergencyName": "",
+          "emergencyPhone": "",
+          "emergencyRelationship": "",
+          "gpName": "",
+          "gpPractice": "",
+          "gpPhone": ""
+        },
+        "plannedSurgery": {
+          "procedureName": "Elective open aortic aneurysm repair",
+          "surgeonName": "",
+          "surgeryDate": "",
+          "surgeryGrade": "major",
+          "proposedAnaesthesia": "general"
+        },
+        "medicalHistory": {
+          "hypertension": "yes",
+          "ischaemicHeartDisease": "yes",
+          "heartFailure": "",
+          "valvularDisease": "",
+          "arrhythmia": "",
+          "peripheralVascularDisease": "",
+          "dvtPe": "",
+          "asthma": "",
+          "copd": "",
+          "sleepApnea": "yes",
+          "recentUrti": "",
+          "epilepsy": "",
+          "strokeTia": "",
+          "neuromuscularDisease": "",
+          "diabetesType1": "",
+          "diabetesType2": "",
+          "thyroidDisease": "",
+          "adrenalInsufficiency": "",
+          "chronicKidneyDisease": "",
+          "dialysis": "",
+          "liverDisease": "",
+          "jaundice": "",
+          "cirrhosis": "",
+          "anaemia": "",
+          "bleedingDisorder": "",
+          "clottingDisorder": "",
+          "gord": "",
+          "pepticUlcer": "",
+          "rheumatoidArthritis": "",
+          "limitedMobility": "",
+          "anxiety": "",
+          "depression": "",
+          "otherPsychiatric": "",
+          "otherDetails": ""
+        },
+        "medications": {
+          "list": [],
+          "onAnticoagulants": "",
+          "onAntiplatelets": "",
+          "onInsulin": "no",
+          "onSteroids": "",
+          "onMaois": ""
+        },
+        "allergies": {
+          "list": [],
+          "latexAllergy": ""
+        },
+        "previousAnaesthesia": {
+          "operations": [],
+          "difficultIntubation": false,
+          "ponv": false,
+          "awareness": false,
+          "slowRecovery": false,
+          "allergicReaction": false,
+          "otherComplication": false,
+          "otherComplicationDetails": "",
+          "malignantHyperthermia": "",
+          "familyAnaestheticComplications": "",
+          "familyAnaestheticDetails": ""
+        },
+        "socialHistory": {
+          "smoking": "current",
+          "packYears": null,
+          "alcoholUnitsPerWeek": null,
+          "recreationalDrugUse": "",
+          "recreationalDrugDetails": "",
+          "canClimbTwoFlights": "no",
+          "exerciseTolerance": "",
+          "occupation": "",
+          "pregnancyStatus": "",
+          "snoresLoudly": "yes",
+          "tiredDuringDay": "yes",
+          "observedApnea": "yes"
+        },
+        "vitalSigns": {
+          "systolicBp": null,
+          "diastolicBp": null,
+          "heartRate": null,
+          "respiratoryRate": null,
+          "spo2": null,
+          "temperature": null,
+          "height": 172,
+          "weight": 104,
+          "bmi": null,
+          "neckCircumference": 44
+        },
+        "physicalExam": {
+          "mallampatiClass": "iv",
+          "mouthOpening": null,
+          "thyromentalDistance": null,
+          "neckMobility": "limited",
+          "dentitionIntact": false,
+          "dentitionDentures": false,
+          "dentitionLooseTeeth": false,
+          "dentitionCrowns": false,
+          "dentitionProminentIncisors": false,
+          "jawProtrusion": "limited",
+          "heartSounds": "",
+          "peripheralEdema": "",
+          "jvp": "",
+          "breathSounds": "",
+          "accessoryMuscleUse": ""
+        },
+        "investigationsAndPlan": {
+          "fbcStatus": "",
+          "fbcNotes": "",
+          "ueStatus": "",
+          "ueNotes": "",
+          "lftsStatus": "",
+          "lftsNotes": "",
+          "coagStatus": "",
+          "coagNotes": "",
+          "hba1cStatus": "",
+          "hba1cNotes": "",
+          "ecgStatus": "",
+          "ecgNotes": "",
+          "cxrStatus": "",
+          "cxrNotes": "",
+          "echoStatus": "",
+          "echoNotes": "",
+          "otherInvestigation": "",
+          "otherInvestigationStatus": "",
+          "rcriIschaemicHeartDisease": "yes",
+          "rcriCongestiveHeartFailure": "no",
+          "rcriCerebrovascularDisease": "no",
+          "rcriHighCreatinine": "no",
+          "asaClass": "iv",
+          "emergencyCase": "no",
+          "proposedTechnique": "",
+          "airwayPlan": "",
+          "postOpDestination": "",
+          "specialRequirements": ""
+        }
+      },
+      "expected": {
+        "asa": {
+          "class": "iv",
+          "emergency": false,
+          "riskLevel": "high",
+          "firedRules": [
+            {
+              "id": "ASA-001",
+              "category": "ASA Physical Status",
+              "description": "ASA IV — Severe disease, constant threat to life",
+              "riskLevel": "high"
+            }
+          ]
+        },
+        "airway": {
+          "mallampatiClass": "iv",
+          "mediumFactors": 2,
+          "riskLevel": "high",
+          "firedRules": [
+            {
+              "id": "MALL-002",
+              "category": "Airway",
+              "description": "Mallampati Class IV — high airway difficulty risk.",
+              "riskLevel": "high"
+            },
+            {
+              "id": "MALL-005",
+              "category": "Airway",
+              "description": "Neck mobility limited — restricted laryngoscopy.",
+              "riskLevel": "medium"
+            },
+            {
+              "id": "MALL-007",
+              "category": "Airway",
+              "description": "Limited jaw protrusion — reduced laryngoscopic view.",
+              "riskLevel": "medium"
+            }
+          ]
+        },
+        "rcri": {
+          "score": 2,
+          "macePercent": 2.4,
+          "riskLevel": "high",
+          "firedRules": [
+            {
+              "id": "RCRI-001",
+              "category": "Cardiac",
+              "description": "High-risk surgery (major).",
+              "riskLevel": "medium"
+            },
+            {
+              "id": "RCRI-002",
+              "category": "Cardiac",
+              "description": "History of ischaemic heart disease.",
+              "riskLevel": "medium"
+            }
+          ]
+        },
+        "stopbang": {
+          "score": 6,
+          "riskLevel": "high",
+          "firedRules": [
+            {
+              "id": "SB-S",
+              "category": "OSA",
+              "description": "Snoring loudly.",
+              "riskLevel": "medium"
+            },
+            {
+              "id": "SB-T",
+              "category": "OSA",
+              "description": "Tired or sleepy during the day.",
+              "riskLevel": "medium"
+            },
+            {
+              "id": "SB-O",
+              "category": "OSA",
+              "description": "Observed apnea during sleep.",
+              "riskLevel": "medium"
+            },
+            {
+              "id": "SB-P",
+              "category": "OSA",
+              "description": "Hypertension (Pressure).",
+              "riskLevel": "medium"
+            },
+            {
+              "id": "SB-N",
+              "category": "OSA",
+              "description": "Neck circumference 44 cm (>40cm).",
+              "riskLevel": "medium"
+            },
+            {
+              "id": "SB-G",
+              "category": "OSA",
+              "description": "Male sex.",
+              "riskLevel": "medium"
+            }
+          ]
+        },
+        "overallRisk": "high",
+        "firedRules": [
+          {
+            "id": "ASA-001",
+            "category": "ASA Physical Status",
+            "description": "ASA IV — Severe disease, constant threat to life",
+            "riskLevel": "high"
+          },
+          {
+            "id": "MALL-002",
+            "category": "Airway",
+            "description": "Mallampati Class IV — high airway difficulty risk.",
+            "riskLevel": "high"
+          },
+          {
+            "id": "MALL-005",
+            "category": "Airway",
+            "description": "Neck mobility limited — restricted laryngoscopy.",
+            "riskLevel": "medium"
+          },
+          {
+            "id": "MALL-007",
+            "category": "Airway",
+            "description": "Limited jaw protrusion — reduced laryngoscopic view.",
+            "riskLevel": "medium"
+          },
+          {
+            "id": "RCRI-001",
+            "category": "Cardiac",
+            "description": "High-risk surgery (major).",
+            "riskLevel": "medium"
+          },
+          {
+            "id": "RCRI-002",
+            "category": "Cardiac",
+            "description": "History of ischaemic heart disease.",
+            "riskLevel": "medium"
+          },
+          {
+            "id": "SB-S",
+            "category": "OSA",
+            "description": "Snoring loudly.",
+            "riskLevel": "medium"
+          },
+          {
+            "id": "SB-T",
+            "category": "OSA",
+            "description": "Tired or sleepy during the day.",
+            "riskLevel": "medium"
+          },
+          {
+            "id": "SB-O",
+            "category": "OSA",
+            "description": "Observed apnea during sleep.",
+            "riskLevel": "medium"
+          },
+          {
+            "id": "SB-P",
+            "category": "OSA",
+            "description": "Hypertension (Pressure).",
+            "riskLevel": "medium"
+          },
+          {
+            "id": "SB-N",
+            "category": "OSA",
+            "description": "Neck circumference 44 cm (>40cm).",
+            "riskLevel": "medium"
+          },
+          {
+            "id": "SB-G",
+            "category": "OSA",
+            "description": "Male sex.",
+            "riskLevel": "medium"
+          }
+        ]
+      }
+    }
+  ]
+}

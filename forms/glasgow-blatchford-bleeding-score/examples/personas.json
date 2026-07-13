@@ -1,0 +1,286 @@
+{
+  "engine": "front-end-with-html",
+  "graderHint": "calculateGbsGrade",
+  "note": "Realistic filled-in states in the Glasgow-Blatchford Bleeding Score engine's shape. `expected` is computed by `bin/test-personas --update` and verified by `bin/test-personas`.",
+  "personas": [
+    {
+      "name": "very-low-risk",
+      "description": "Haemodynamically stable young man, normal urea/haemoglobin/BP and no clinical markers: GBS 0 — very-low risk, consider outpatient management.",
+      "state": {
+        "context": {
+          "clinicianName": "",
+          "clinicianRole": "",
+          "assessedAt": "",
+          "careSetting": "",
+          "presentingComplaint": ""
+        },
+        "identification": {
+          "patientIdentifier": "",
+          "ageBand": "",
+          "sex": "male"
+        },
+        "labs": {
+          "bloodUrea": 5,
+          "haemoglobin": 150
+        },
+        "haemodynamics": {
+          "systolicBloodPressure": 120,
+          "pulse": 80
+        },
+        "clinicalMarkers": {
+          "melaenaPresent": "no",
+          "syncope": "no",
+          "hepaticDisease": "no",
+          "cardiacFailure": "no"
+        },
+        "note": {
+          "clinicalNote": ""
+        }
+      },
+      "expected": {
+        "bloodUreaPoints": 0,
+        "haemoglobinPoints": 0,
+        "systolicBloodPressurePoints": 0,
+        "pulsePoint": 0,
+        "melaenaPoint": 0,
+        "syncopePoint": 0,
+        "hepaticDiseasePoint": 0,
+        "cardiacFailurePoint": 0,
+        "gbsScore": 0,
+        "riskBand": "very-low",
+        "recommendedManagement": "Consider outpatient management / early discharge with planned outpatient review; inpatient endoscopy may be deferred. Verify no other admission indication.",
+        "complete": true,
+        "firedRules": [
+          {
+            "id": "R-BLOOD-UREA-0POINT-01",
+            "parameter": "blood-urea",
+            "points": 0,
+            "category": "threshold-band",
+            "description": "Blood urea < 6.5 mmol/L"
+          },
+          {
+            "id": "R-HAEMOGLOBIN-0POINT-01",
+            "parameter": "haemoglobin",
+            "points": 0,
+            "category": "threshold-band",
+            "description": "Haemoglobin in the normal sex-specific band (men >= 130, women >= 120 g/L)"
+          },
+          {
+            "id": "R-SYSTOLIC-BLOOD-PRESSURE-0POINT-01",
+            "parameter": "systolic-blood-pressure",
+            "points": 0,
+            "category": "threshold-band",
+            "description": "Systolic blood pressure >= 110 mmHg"
+          },
+          {
+            "id": "R-BAND-VERY-LOW-01",
+            "parameter": "band",
+            "points": null,
+            "category": "band-band",
+            "description": "GBS total 0 → very-low risk"
+          }
+        ]
+      }
+    },
+    {
+      "name": "low-moderate-risk",
+      "description": "Man with mild azotaemia, borderline anaemia, low-normal BP and melaena: GBS 5 — low-moderate risk, admit for inpatient endoscopy.",
+      "state": {
+        "context": {
+          "clinicianName": "",
+          "clinicianRole": "",
+          "assessedAt": "",
+          "careSetting": "",
+          "presentingComplaint": ""
+        },
+        "identification": {
+          "patientIdentifier": "",
+          "ageBand": "",
+          "sex": "male"
+        },
+        "labs": {
+          "bloodUrea": 7,
+          "haemoglobin": 125
+        },
+        "haemodynamics": {
+          "systolicBloodPressure": 105,
+          "pulse": 90
+        },
+        "clinicalMarkers": {
+          "melaenaPresent": "yes",
+          "syncope": "no",
+          "hepaticDisease": "no",
+          "cardiacFailure": "no"
+        },
+        "note": {
+          "clinicalNote": ""
+        }
+      },
+      "expected": {
+        "bloodUreaPoints": 2,
+        "haemoglobinPoints": 1,
+        "systolicBloodPressurePoints": 1,
+        "pulsePoint": 0,
+        "melaenaPoint": 1,
+        "syncopePoint": 0,
+        "hepaticDiseasePoint": 0,
+        "cardiacFailurePoint": 0,
+        "gbsScore": 5,
+        "riskBand": "low-moderate",
+        "recommendedManagement": "Admit for observation and inpatient upper GI endoscopy; monitor for deterioration.",
+        "complete": true,
+        "firedRules": [
+          {
+            "id": "R-BLOOD-UREA-2POINT-01",
+            "parameter": "blood-urea",
+            "points": 2,
+            "category": "threshold-band",
+            "description": "Blood urea 6.5-7.9 mmol/L"
+          },
+          {
+            "id": "R-HAEMOGLOBIN-1POINT-01",
+            "parameter": "haemoglobin",
+            "points": 1,
+            "category": "threshold-band",
+            "description": "Haemoglobin one-point band (men 120-129, women 100-119 g/L)"
+          },
+          {
+            "id": "R-SYSTOLIC-BLOOD-PRESSURE-1POINT-01",
+            "parameter": "systolic-blood-pressure",
+            "points": 1,
+            "category": "threshold-band",
+            "description": "Systolic blood pressure 100-109 mmHg"
+          },
+          {
+            "id": "R-MELAENA-1POINT-01",
+            "parameter": "melaena",
+            "points": 1,
+            "category": "marker",
+            "description": "Melaena present"
+          },
+          {
+            "id": "R-BAND-LOW-MODERATE-01",
+            "parameter": "band",
+            "points": null,
+            "category": "band-band",
+            "description": "GBS total 5 → low-moderate risk"
+          }
+        ]
+      }
+    },
+    {
+      "name": "high-risk",
+      "description": "Shocked woman with marked uraemia, severe anaemia, hypotension, tachycardia, melaena, syncope, hepatic disease and cardiac failure: GBS 23 — high risk, urgent endoscopy and resuscitation.",
+      "state": {
+        "context": {
+          "clinicianName": "",
+          "clinicianRole": "",
+          "assessedAt": "",
+          "careSetting": "",
+          "presentingComplaint": ""
+        },
+        "identification": {
+          "patientIdentifier": "",
+          "ageBand": "",
+          "sex": "female"
+        },
+        "labs": {
+          "bloodUrea": 30,
+          "haemoglobin": 85
+        },
+        "haemodynamics": {
+          "systolicBloodPressure": 85,
+          "pulse": 110
+        },
+        "clinicalMarkers": {
+          "melaenaPresent": "yes",
+          "syncope": "yes",
+          "hepaticDisease": "yes",
+          "cardiacFailure": "yes"
+        },
+        "note": {
+          "clinicalNote": ""
+        }
+      },
+      "expected": {
+        "bloodUreaPoints": 6,
+        "haemoglobinPoints": 6,
+        "systolicBloodPressurePoints": 3,
+        "pulsePoint": 1,
+        "melaenaPoint": 1,
+        "syncopePoint": 2,
+        "hepaticDiseasePoint": 2,
+        "cardiacFailurePoint": 2,
+        "gbsScore": 23,
+        "riskBand": "high",
+        "recommendedManagement": "Admit; high likelihood of needing intervention or transfusion. Arrange urgent upper GI endoscopy (within 24 h, or immediately after resuscitation for unstable patients) and active resuscitation.",
+        "complete": true,
+        "firedRules": [
+          {
+            "id": "R-BLOOD-UREA-6POINT-01",
+            "parameter": "blood-urea",
+            "points": 6,
+            "category": "threshold-band",
+            "description": "Blood urea >= 25.0 mmol/L"
+          },
+          {
+            "id": "R-HAEMOGLOBIN-6POINT-01",
+            "parameter": "haemoglobin",
+            "points": 6,
+            "category": "threshold-band",
+            "description": "Haemoglobin < 100 g/L (either sex)"
+          },
+          {
+            "id": "R-SYSTOLIC-BLOOD-PRESSURE-3POINT-01",
+            "parameter": "systolic-blood-pressure",
+            "points": 3,
+            "category": "threshold-band",
+            "description": "Systolic blood pressure < 90 mmHg"
+          },
+          {
+            "id": "R-PULSE-1POINT-01",
+            "parameter": "pulse",
+            "points": 1,
+            "category": "marker",
+            "description": "Pulse >= 100 beats/min (tachycardia)"
+          },
+          {
+            "id": "R-MELAENA-1POINT-01",
+            "parameter": "melaena",
+            "points": 1,
+            "category": "marker",
+            "description": "Melaena present"
+          },
+          {
+            "id": "R-SYNCOPE-2POINT-01",
+            "parameter": "syncope",
+            "points": 2,
+            "category": "marker",
+            "description": "Syncope present"
+          },
+          {
+            "id": "R-HEPATIC-DISEASE-2POINT-01",
+            "parameter": "hepatic-disease",
+            "points": 2,
+            "category": "marker",
+            "description": "History of hepatic disease"
+          },
+          {
+            "id": "R-CARDIAC-FAILURE-2POINT-01",
+            "parameter": "cardiac-failure",
+            "points": 2,
+            "category": "marker",
+            "description": "History of cardiac failure"
+          },
+          {
+            "id": "R-BAND-HIGH-01",
+            "parameter": "band",
+            "points": null,
+            "category": "band-band",
+            "description": "GBS total 23 → high risk"
+          }
+        ]
+      }
+    }
+  ]
+}

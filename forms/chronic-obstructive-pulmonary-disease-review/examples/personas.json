@@ -1,0 +1,331 @@
+{
+  "engine": "front-end-with-html",
+  "graderHint": "calculateGrade",
+  "note": "Realistic filled-in states in the COPD annual-review grading engine's shape. The engine derives four independent outputs (GOLD 1-4 airflow grade, ABE assessment group, symptom axis, exacerbation axis) plus a review-completeness status. All three personas are complete reviews spanning ABE group A to E. `expected` is computed by `bin/test-personas --update` and verified by `bin/test-personas`.",
+  "personas": [
+    {
+      "name": "well-controlled-group-a",
+      "description": "Mild airflow limitation, low symptom burden and no exacerbations: GOLD 1, ABE group A — well-controlled, complete review.",
+      "state": {
+        "context": {
+          "clinicianName": "",
+          "clinicianRole": "respiratory-nurse",
+          "reviewedAt": "",
+          "reviewType": "routine-annual",
+          "patientIdentifier": "",
+          "ageBand": "60-79",
+          "sex": "female"
+        },
+        "diagnosis": {
+          "diagnosisYear": 2019,
+          "spirometryConfirmed": "yes",
+          "exposureNotes": "Ex-smoker, 15 pack-years"
+        },
+        "spirometry": {
+          "fev1Litres": 2.1,
+          "fev1PercentPredicted": 82,
+          "fvcLitres": 3.4,
+          "fev1FvcRatio": 0.62,
+          "spirometryDate": "2026-05-10"
+        },
+        "symptoms": {
+          "mrcGrade": 1,
+          "mmrcGrade": 1,
+          "catScore": 6
+        },
+        "exacerbations": {
+          "exacerbationsLast12m": 0,
+          "hospitalisationsLast12m": 0,
+          "lastExacerbationDate": "",
+          "rescuePackCourses": 0
+        },
+        "smoking": {
+          "smokingStatus": "ex",
+          "packYears": 15,
+          "cessationSupportOffered": "no"
+        },
+        "inhaler": {
+          "inhaledTherapy": "LAMA",
+          "deviceType": "dry-powder-inhaler",
+          "inhalerTechniqueChecked": "yes",
+          "inhalerTechniqueAdequate": "yes",
+          "adherence": "good"
+        },
+        "vaccinations": {
+          "influenzaVaccine": "up-to-date",
+          "pneumococcalVaccine": "up-to-date",
+          "covidVaccine": "up-to-date"
+        },
+        "rehab": {
+          "pulmonaryRehabStatus": "not-indicated",
+          "oxygenUse": "none",
+          "restingSpo2": 97
+        },
+        "selfManagement": {
+          "comorbidities": "None significant",
+          "selfManagementPlan": "Reviewed and up to date",
+          "rescuePackSupplied": "no",
+          "nextReviewInterval": "12-months"
+        },
+        "note": {
+          "clinicianNote": ""
+        }
+      },
+      "expected": {
+        "goldGrade": 1,
+        "symptomBurden": "low",
+        "exacerbationRisk": "low",
+        "abeGroup": "A",
+        "reviewStatus": "complete",
+        "firedRules": [
+          {
+            "id": "R-GOLD-GRADE-1-01",
+            "section": "gold",
+            "category": "airflow-grading",
+            "description": "GOLD 1 (mild): post-bronchodilator FEV₁ % predicted ≥ 80"
+          },
+          {
+            "id": "R-SYMPTOM-LOW-01",
+            "section": "symptom",
+            "category": "symptom-axis",
+            "description": "Low symptom burden: mMRC < 2 and CAT < 10"
+          },
+          {
+            "id": "R-EXACERBATION-LOW-01",
+            "section": "exacerbation",
+            "category": "exacerbation-axis",
+            "description": "Low exacerbation risk: < 2 moderate and no hospitalised exacerbation in 12 months"
+          },
+          {
+            "id": "R-ABE-GROUP-A-01",
+            "section": "abe",
+            "category": "abe-grouping",
+            "description": "ABE group A: low symptom burden and low exacerbation risk"
+          },
+          {
+            "id": "R-COMPLETENESS-COMPLETE-01",
+            "section": "completeness",
+            "category": "review-status",
+            "description": "All core and supporting review elements recorded — review is complete"
+          }
+        ]
+      }
+    },
+    {
+      "name": "symptomatic-group-b",
+      "description": "Moderate airflow limitation with high symptom burden but low exacerbation risk: GOLD 2, ABE group B — symptomatic, complete review.",
+      "state": {
+        "context": {
+          "clinicianName": "",
+          "clinicianRole": "gp",
+          "reviewedAt": "",
+          "reviewType": "routine-annual",
+          "patientIdentifier": "",
+          "ageBand": "60-79",
+          "sex": "male"
+        },
+        "diagnosis": {
+          "diagnosisYear": 2015,
+          "spirometryConfirmed": "yes",
+          "exposureNotes": "Current smoker"
+        },
+        "spirometry": {
+          "fev1Litres": 1.6,
+          "fev1PercentPredicted": 62,
+          "fvcLitres": 3,
+          "fev1FvcRatio": 0.53,
+          "spirometryDate": "2026-04-22"
+        },
+        "symptoms": {
+          "mrcGrade": 3,
+          "mmrcGrade": 3,
+          "catScore": 18
+        },
+        "exacerbations": {
+          "exacerbationsLast12m": 1,
+          "hospitalisationsLast12m": 0,
+          "lastExacerbationDate": "2026-01-15",
+          "rescuePackCourses": 1
+        },
+        "smoking": {
+          "smokingStatus": "current",
+          "packYears": 32,
+          "cessationSupportOffered": "yes"
+        },
+        "inhaler": {
+          "inhaledTherapy": "LABA+LAMA",
+          "deviceType": "metered-dose-inhaler",
+          "inhalerTechniqueChecked": "yes",
+          "inhalerTechniqueAdequate": "yes",
+          "adherence": "partial"
+        },
+        "vaccinations": {
+          "influenzaVaccine": "up-to-date",
+          "pneumococcalVaccine": "up-to-date",
+          "covidVaccine": "due"
+        },
+        "rehab": {
+          "pulmonaryRehabStatus": "referred",
+          "oxygenUse": "none",
+          "restingSpo2": 94
+        },
+        "selfManagement": {
+          "comorbidities": "Hypertension",
+          "selfManagementPlan": "Updated with smoking-cessation goals",
+          "rescuePackSupplied": "yes",
+          "nextReviewInterval": "6-months"
+        },
+        "note": {
+          "clinicianNote": ""
+        }
+      },
+      "expected": {
+        "goldGrade": 2,
+        "symptomBurden": "high",
+        "exacerbationRisk": "low",
+        "abeGroup": "B",
+        "reviewStatus": "complete",
+        "firedRules": [
+          {
+            "id": "R-GOLD-GRADE-2-01",
+            "section": "gold",
+            "category": "airflow-grading",
+            "description": "GOLD 2 (moderate): post-bronchodilator FEV₁ % predicted 50 to < 80"
+          },
+          {
+            "id": "R-SYMPTOM-HIGH-01",
+            "section": "symptom",
+            "category": "symptom-axis",
+            "description": "High symptom burden: mMRC ≥ 2 or CAT ≥ 10"
+          },
+          {
+            "id": "R-EXACERBATION-LOW-01",
+            "section": "exacerbation",
+            "category": "exacerbation-axis",
+            "description": "Low exacerbation risk: < 2 moderate and no hospitalised exacerbation in 12 months"
+          },
+          {
+            "id": "R-ABE-GROUP-B-01",
+            "section": "abe",
+            "category": "abe-grouping",
+            "description": "ABE group B: high symptom burden and low exacerbation risk"
+          },
+          {
+            "id": "R-COMPLETENESS-COMPLETE-01",
+            "section": "completeness",
+            "category": "review-status",
+            "description": "All core and supporting review elements recorded — review is complete"
+          }
+        ]
+      }
+    },
+    {
+      "name": "high-risk-group-e",
+      "description": "Very severe airflow limitation with frequent and hospitalised exacerbations: GOLD 4, ABE group E — high-risk, poorly controlled, complete review.",
+      "state": {
+        "context": {
+          "clinicianName": "",
+          "clinicianRole": "gp",
+          "reviewedAt": "",
+          "reviewType": "post-exacerbation",
+          "patientIdentifier": "",
+          "ageBand": ">=80",
+          "sex": "male"
+        },
+        "diagnosis": {
+          "diagnosisYear": 2008,
+          "spirometryConfirmed": "yes",
+          "exposureNotes": "Current smoker, heavy occupational dust exposure"
+        },
+        "spirometry": {
+          "fev1Litres": 0.7,
+          "fev1PercentPredicted": 28,
+          "fvcLitres": 2.1,
+          "fev1FvcRatio": 0.33,
+          "spirometryDate": "2026-03-05"
+        },
+        "symptoms": {
+          "mrcGrade": 4,
+          "mmrcGrade": 4,
+          "catScore": 28
+        },
+        "exacerbations": {
+          "exacerbationsLast12m": 3,
+          "hospitalisationsLast12m": 2,
+          "lastExacerbationDate": "2026-02-28",
+          "rescuePackCourses": 4
+        },
+        "smoking": {
+          "smokingStatus": "current",
+          "packYears": 55,
+          "cessationSupportOffered": "yes"
+        },
+        "inhaler": {
+          "inhaledTherapy": "LABA+LAMA+ICS",
+          "deviceType": "metered-dose-inhaler",
+          "inhalerTechniqueChecked": "yes",
+          "inhalerTechniqueAdequate": "no",
+          "adherence": "poor"
+        },
+        "vaccinations": {
+          "influenzaVaccine": "declined",
+          "pneumococcalVaccine": "due",
+          "covidVaccine": "declined"
+        },
+        "rehab": {
+          "pulmonaryRehabStatus": "eligible-not-referred",
+          "oxygenUse": "long-term",
+          "restingSpo2": 88
+        },
+        "selfManagement": {
+          "comorbidities": "Heart failure, osteoporosis",
+          "selfManagementPlan": "Escalated; specialist referral in progress",
+          "rescuePackSupplied": "yes",
+          "nextReviewInterval": "3-months"
+        },
+        "note": {
+          "clinicianNote": ""
+        }
+      },
+      "expected": {
+        "goldGrade": 4,
+        "symptomBurden": "high",
+        "exacerbationRisk": "high",
+        "abeGroup": "E",
+        "reviewStatus": "complete",
+        "firedRules": [
+          {
+            "id": "R-GOLD-GRADE-4-01",
+            "section": "gold",
+            "category": "airflow-grading",
+            "description": "GOLD 4 (very severe): post-bronchodilator FEV₁ % predicted < 30"
+          },
+          {
+            "id": "R-SYMPTOM-HIGH-01",
+            "section": "symptom",
+            "category": "symptom-axis",
+            "description": "High symptom burden: mMRC ≥ 2 or CAT ≥ 10"
+          },
+          {
+            "id": "R-EXACERBATION-HIGH-01",
+            "section": "exacerbation",
+            "category": "exacerbation-axis",
+            "description": "High exacerbation risk: ≥ 2 moderate or ≥ 1 hospitalised exacerbation in 12 months"
+          },
+          {
+            "id": "R-ABE-GROUP-E-01",
+            "section": "abe",
+            "category": "abe-grouping",
+            "description": "ABE group E: high exacerbation risk (regardless of symptom burden)"
+          },
+          {
+            "id": "R-COMPLETENESS-COMPLETE-01",
+            "section": "completeness",
+            "category": "review-status",
+            "description": "All core and supporting review elements recorded — review is complete"
+          }
+        ]
+      }
+    }
+  ]
+}

@@ -1,0 +1,178 @@
+{
+  "engine": "front-end-with-html",
+  "graderHint": "calculateCageGrade",
+  "note": "Realistic filled-in states in the CAGE scoring engine's shape. `expected` is computed by `bin/test-personas --update` and verified by `bin/test-personas`.",
+  "personas": [
+    {
+      "name": "screen-negative",
+      "description": "Adult who answers no to all four items: CAGE 0 of 4 — negative screen, below the positive cut-off.",
+      "state": {
+        "context": {
+          "clinicianName": "",
+          "clinicianRole": "nurse",
+          "assessedAt": "",
+          "careSetting": "primary-care"
+        },
+        "identification": {
+          "patientIdentifier": "",
+          "ageBand": "40-59",
+          "sex": "female"
+        },
+        "criteria": {
+          "cutDown": "no",
+          "annoyed": "no",
+          "guilty": "no",
+          "eyeOpener": "no"
+        },
+        "note": {
+          "clinicalNote": ""
+        }
+      },
+      "expected": {
+        "cutDownPoint": 0,
+        "annoyedPoint": 0,
+        "guiltyPoint": 0,
+        "eyeOpenerPoint": 0,
+        "cageScore": 0,
+        "resultBand": "negative",
+        "firedCriteria": [
+          {
+            "id": "R-TOTAL-BAND-01",
+            "criterion": "total",
+            "points": 0,
+            "category": "total-band",
+            "description": "CAGE 0 of 4 — no positive items"
+          }
+        ]
+      }
+    },
+    {
+      "name": "positive-screen",
+      "description": "Two lifetime positive items (cut down, guilty): CAGE 2 of 4 — positive screen, clinically significant, warrants fuller assessment.",
+      "state": {
+        "context": {
+          "clinicianName": "",
+          "clinicianRole": "doctor",
+          "assessedAt": "",
+          "careSetting": "primary-care"
+        },
+        "identification": {
+          "patientIdentifier": "",
+          "ageBand": "40-59",
+          "sex": "male"
+        },
+        "criteria": {
+          "cutDown": "yes",
+          "annoyed": "no",
+          "guilty": "yes",
+          "eyeOpener": "no"
+        },
+        "note": {
+          "clinicalNote": ""
+        }
+      },
+      "expected": {
+        "cutDownPoint": 1,
+        "annoyedPoint": 0,
+        "guiltyPoint": 1,
+        "eyeOpenerPoint": 0,
+        "cageScore": 2,
+        "resultBand": "positive",
+        "firedCriteria": [
+          {
+            "id": "R-CUT-DOWN-1POINT-01",
+            "criterion": "cut-down",
+            "points": 1,
+            "category": "criterion-positive",
+            "description": "Felt they should cut down on their drinking"
+          },
+          {
+            "id": "R-GUILTY-1POINT-01",
+            "criterion": "guilty",
+            "points": 1,
+            "category": "criterion-positive",
+            "description": "Felt bad or guilty about their drinking"
+          },
+          {
+            "id": "R-TOTAL-BAND-01",
+            "criterion": "total",
+            "points": 0,
+            "category": "total-band",
+            "description": "CAGE 2 of 4 (>= 2) — positive screen"
+          }
+        ]
+      }
+    },
+    {
+      "name": "high-positive-dependence",
+      "description": "All four items positive including an eye-opener: CAGE 4 of 4 — strongly positive screen with a physical-dependence marker.",
+      "state": {
+        "context": {
+          "clinicianName": "",
+          "clinicianRole": "doctor",
+          "assessedAt": "",
+          "careSetting": "emergency-department"
+        },
+        "identification": {
+          "patientIdentifier": "",
+          "ageBand": "60-74",
+          "sex": "male"
+        },
+        "criteria": {
+          "cutDown": "yes",
+          "annoyed": "yes",
+          "guilty": "yes",
+          "eyeOpener": "yes"
+        },
+        "note": {
+          "clinicalNote": ""
+        }
+      },
+      "expected": {
+        "cutDownPoint": 1,
+        "annoyedPoint": 1,
+        "guiltyPoint": 1,
+        "eyeOpenerPoint": 1,
+        "cageScore": 4,
+        "resultBand": "positive",
+        "firedCriteria": [
+          {
+            "id": "R-CUT-DOWN-1POINT-01",
+            "criterion": "cut-down",
+            "points": 1,
+            "category": "criterion-positive",
+            "description": "Felt they should cut down on their drinking"
+          },
+          {
+            "id": "R-ANNOYED-1POINT-01",
+            "criterion": "annoyed",
+            "points": 1,
+            "category": "criterion-positive",
+            "description": "People have annoyed them by criticising their drinking"
+          },
+          {
+            "id": "R-GUILTY-1POINT-01",
+            "criterion": "guilty",
+            "points": 1,
+            "category": "criterion-positive",
+            "description": "Felt bad or guilty about their drinking"
+          },
+          {
+            "id": "R-EYE-OPENER-1POINT-01",
+            "criterion": "eye-opener",
+            "points": 1,
+            "category": "criterion-positive",
+            "description": "Had a morning drink to steady nerves or cure a hangover (an eye-opener)"
+          },
+          {
+            "id": "R-TOTAL-BAND-01",
+            "criterion": "total",
+            "points": 0,
+            "category": "total-band",
+            "description": "CAGE 4 of 4 (>= 2) — positive screen"
+          }
+        ]
+      }
+    }
+  ]
+}

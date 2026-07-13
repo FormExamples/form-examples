@@ -1,0 +1,175 @@
+{
+  "engine": "front-end-with-html",
+  "graderHint": "gradeFit",
+  "note": "Realistic filled-in states in the FIT classification engine's shape. `expected` is computed by `bin/test-personas --update` and verified by `bin/test-personas`.",
+  "personas": [
+    {
+      "name": "negative-routine-recall",
+      "description": "Returned, adequate kit with faecal Hb 15 ug Hb/g (below the 120 threshold) and no red-flag symptoms: negative screen, routine two-yearly recall.",
+      "state": {
+        "context": {
+          "clinicianName": "",
+          "clinicianRole": "screening-practitioner",
+          "reviewedAt": "",
+          "screeningHub": "Eastern Hub"
+        },
+        "identification": {
+          "participantIdentifier": "",
+          "nhsNumber": "",
+          "participantAge": 62,
+          "sex": "female"
+        },
+        "eligibility": {
+          "withinAgeRange": "eligible",
+          "recallInterval": "two-yearly",
+          "invitationDate": "",
+          "previousOutcome": "prior-negative"
+        },
+        "kit": {
+          "kitReturned": "yes",
+          "returnDate": "",
+          "sampleAdequacy": "adequate",
+          "spoiltReason": ""
+        },
+        "result": {
+          "faecalHaemoglobinUgG": 15,
+          "assay": "OC-Sensor",
+          "thresholdApplied": 120
+        },
+        "symptoms": {
+          "redFlagSymptoms": "no"
+        },
+        "note": {
+          "clinicalNote": ""
+        }
+      },
+      "expected": {
+        "resultClass": "negative",
+        "managementAction": "routine-recall",
+        "symptomaticPathway": false,
+        "status": "complete",
+        "firedRules": [
+          {
+            "id": "R-CLASSIFY-NEGATIVE-01",
+            "instrument": "classification",
+            "band": "negative",
+            "category": "threshold",
+            "description": "Faecal haemoglobin below the programme threshold — negative; routine two-yearly recall"
+          }
+        ]
+      }
+    },
+    {
+      "name": "positive-refer-colonoscopy",
+      "description": "Returned, adequate kit with faecal Hb 240 ug Hb/g (at or above the 120 threshold): positive screen, refer for colonoscopy.",
+      "state": {
+        "context": {
+          "clinicianName": "",
+          "clinicianRole": "ssp",
+          "reviewedAt": "",
+          "screeningHub": "Eastern Hub"
+        },
+        "identification": {
+          "participantIdentifier": "",
+          "nhsNumber": "",
+          "participantAge": 68,
+          "sex": "male"
+        },
+        "eligibility": {
+          "withinAgeRange": "eligible",
+          "recallInterval": "two-yearly",
+          "invitationDate": "",
+          "previousOutcome": "prior-negative"
+        },
+        "kit": {
+          "kitReturned": "yes",
+          "returnDate": "",
+          "sampleAdequacy": "adequate",
+          "spoiltReason": ""
+        },
+        "result": {
+          "faecalHaemoglobinUgG": 240,
+          "assay": "OC-Sensor",
+          "thresholdApplied": 120
+        },
+        "symptoms": {
+          "redFlagSymptoms": "no"
+        },
+        "note": {
+          "clinicalNote": ""
+        }
+      },
+      "expected": {
+        "resultClass": "positive",
+        "managementAction": "refer-colonoscopy",
+        "symptomaticPathway": false,
+        "status": "complete",
+        "firedRules": [
+          {
+            "id": "R-CLASSIFY-POSITIVE-01",
+            "instrument": "classification",
+            "band": "positive",
+            "category": "threshold",
+            "description": "Faecal haemoglobin at or above the programme threshold — positive; refer for colonoscopy"
+          }
+        ]
+      }
+    },
+    {
+      "name": "spoilt-repeat-kit",
+      "description": "Returned kit that leaked in transit and could not be analysed: sample spoilt, no numeric result, repeat kit issued.",
+      "state": {
+        "context": {
+          "clinicianName": "",
+          "clinicianRole": "screening-administrator",
+          "reviewedAt": "",
+          "screeningHub": "Eastern Hub"
+        },
+        "identification": {
+          "participantIdentifier": "",
+          "nhsNumber": "",
+          "participantAge": 71,
+          "sex": "female"
+        },
+        "eligibility": {
+          "withinAgeRange": "eligible",
+          "recallInterval": "two-yearly",
+          "invitationDate": "",
+          "previousOutcome": "first-invitation"
+        },
+        "kit": {
+          "kitReturned": "yes",
+          "returnDate": "",
+          "sampleAdequacy": "spoilt",
+          "spoiltReason": "leaked"
+        },
+        "result": {
+          "faecalHaemoglobinUgG": null,
+          "assay": "",
+          "thresholdApplied": 120
+        },
+        "symptoms": {
+          "redFlagSymptoms": "no"
+        },
+        "note": {
+          "clinicalNote": ""
+        }
+      },
+      "expected": {
+        "resultClass": "spoilt",
+        "managementAction": "repeat-kit",
+        "symptomaticPathway": false,
+        "status": "complete",
+        "firedRules": [
+          {
+            "id": "R-ADEQUACY-INADEQUATE-01",
+            "instrument": "adequacy",
+            "band": "spoilt",
+            "category": "sample-adequacy",
+            "description": "Sample not adequate (spoilt / insufficient / expired) — repeat kit required"
+          }
+        ]
+      }
+    }
+  ]
+}

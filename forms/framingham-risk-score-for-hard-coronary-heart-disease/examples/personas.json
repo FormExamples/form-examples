@@ -1,0 +1,361 @@
+{
+  "engine": "front-end-with-html",
+  "graderHint": "calculateRisk",
+  "note": "Realistic filled-in states in the Framingham hard-CHD risk engine's shape. `expected` is computed by `bin/test-personas --update` and verified by `bin/test-personas`.",
+  "personas": [
+    {
+      "name": "low-risk",
+      "description": "45-year-old non-smoking man with optimal BP and cholesterol who exercises: 10-year hard-CHD risk < 10% — low risk.",
+      "state": {
+        "patientInformation": {
+          "fullName": "",
+          "dateOfBirth": "",
+          "nhsNumber": "",
+          "address": "",
+          "telephone": "",
+          "email": "",
+          "gpName": "",
+          "gpPractice": ""
+        },
+        "demographics": {
+          "age": 45,
+          "sex": "male",
+          "ethnicity": "",
+          "heightCm": null,
+          "weightKg": null
+        },
+        "smokingHistory": {
+          "smokingStatus": "never",
+          "cigarettesPerDay": null,
+          "yearsSmoked": null,
+          "yearsSinceQuit": null
+        },
+        "bloodPressure": {
+          "systolicBp": 118,
+          "diastolicBp": 74,
+          "onBpTreatment": "no",
+          "bpMedicationName": "",
+          "bpMeasurementMethod": ""
+        },
+        "cholesterol": {
+          "totalCholesterol": 185,
+          "hdlCholesterol": 58,
+          "ldlCholesterol": null,
+          "triglycerides": null,
+          "cholesterolUnit": "mgDl",
+          "fastingSample": ""
+        },
+        "medicalHistory": {
+          "hasDiabetes": "",
+          "hasPriorChd": "",
+          "hasPeripheralVascularDisease": "",
+          "hasCerebrovascularDisease": "",
+          "hasHeartFailure": "",
+          "hasAtrialFibrillation": "",
+          "otherConditions": ""
+        },
+        "familyHistory": {
+          "familyChdHistory": "",
+          "familyChdAgeOnset": "",
+          "familyChdRelationship": "",
+          "familyStrokeHistory": "",
+          "familyDiabetesHistory": ""
+        },
+        "lifestyleFactors": {
+          "physicalActivity": "vigorous",
+          "alcoholConsumption": "",
+          "dietQuality": "",
+          "bmi": null,
+          "waistCircumferenceCm": null,
+          "stressLevel": ""
+        },
+        "currentMedications": {
+          "onStatin": "",
+          "statinName": "",
+          "onAspirin": "",
+          "onAntihypertensive": "",
+          "antihypertensiveName": "",
+          "otherMedications": ""
+        },
+        "reviewCalculate": {
+          "clinicianName": "",
+          "reviewDate": "",
+          "clinicalNotes": "",
+          "patientConsent": ""
+        }
+      },
+      "expected": {
+        "riskCategory": "low",
+        "tenYearRiskPercent": 1.7,
+        "firedRules": [
+          {
+            "id": "FRS-017",
+            "category": "Smoking",
+            "description": "Non-smoker",
+            "riskLevel": "low"
+          },
+          {
+            "id": "FRS-018",
+            "category": "Blood Pressure",
+            "description": "Normal BP (< 120/80) without treatment",
+            "riskLevel": "low"
+          },
+          {
+            "id": "FRS-019",
+            "category": "Cholesterol",
+            "description": "Total cholesterol < 200 mg/dL (optimal)",
+            "riskLevel": "low"
+          },
+          {
+            "id": "FRS-020",
+            "category": "Lifestyle",
+            "description": "Physically active (moderate or vigorous exercise)",
+            "riskLevel": "low"
+          }
+        ]
+      }
+    },
+    {
+      "name": "intermediate-risk",
+      "description": "60-year-old non-smoking man with stage-2 hypertension and elevated cholesterol: 10-year hard-CHD risk 10-19.9% — intermediate risk.",
+      "state": {
+        "patientInformation": {
+          "fullName": "",
+          "dateOfBirth": "",
+          "nhsNumber": "",
+          "address": "",
+          "telephone": "",
+          "email": "",
+          "gpName": "",
+          "gpPractice": ""
+        },
+        "demographics": {
+          "age": 60,
+          "sex": "male",
+          "ethnicity": "",
+          "heightCm": null,
+          "weightKg": null
+        },
+        "smokingHistory": {
+          "smokingStatus": "never",
+          "cigarettesPerDay": null,
+          "yearsSmoked": null,
+          "yearsSinceQuit": null
+        },
+        "bloodPressure": {
+          "systolicBp": 145,
+          "diastolicBp": null,
+          "onBpTreatment": "no",
+          "bpMedicationName": "",
+          "bpMeasurementMethod": ""
+        },
+        "cholesterol": {
+          "totalCholesterol": 240,
+          "hdlCholesterol": 45,
+          "ldlCholesterol": null,
+          "triglycerides": null,
+          "cholesterolUnit": "mgDl",
+          "fastingSample": ""
+        },
+        "medicalHistory": {
+          "hasDiabetes": "",
+          "hasPriorChd": "",
+          "hasPeripheralVascularDisease": "",
+          "hasCerebrovascularDisease": "",
+          "hasHeartFailure": "",
+          "hasAtrialFibrillation": "",
+          "otherConditions": ""
+        },
+        "familyHistory": {
+          "familyChdHistory": "",
+          "familyChdAgeOnset": "",
+          "familyChdRelationship": "",
+          "familyStrokeHistory": "",
+          "familyDiabetesHistory": ""
+        },
+        "lifestyleFactors": {
+          "physicalActivity": "",
+          "alcoholConsumption": "",
+          "dietQuality": "",
+          "bmi": null,
+          "waistCircumferenceCm": null,
+          "stressLevel": ""
+        },
+        "currentMedications": {
+          "onStatin": "",
+          "statinName": "",
+          "onAspirin": "",
+          "onAntihypertensive": "",
+          "antihypertensiveName": "",
+          "otherMedications": ""
+        },
+        "reviewCalculate": {
+          "clinicianName": "",
+          "reviewDate": "",
+          "clinicalNotes": "",
+          "patientConsent": ""
+        }
+      },
+      "expected": {
+        "riskCategory": "intermediate",
+        "tenYearRiskPercent": 13.8,
+        "firedRules": [
+          {
+            "id": "FRS-006",
+            "category": "Overall Risk",
+            "description": "10-year CHD risk 10-19.9% (intermediate risk)",
+            "riskLevel": "medium"
+          },
+          {
+            "id": "FRS-008",
+            "category": "Blood Pressure",
+            "description": "Systolic BP 140-179 mmHg (stage 2 hypertension)",
+            "riskLevel": "medium"
+          },
+          {
+            "id": "FRS-009",
+            "category": "Cholesterol",
+            "description": "Total cholesterol 240-309 mg/dL (elevated)",
+            "riskLevel": "medium"
+          },
+          {
+            "id": "FRS-017",
+            "category": "Smoking",
+            "description": "Non-smoker",
+            "riskLevel": "low"
+          }
+        ]
+      }
+    },
+    {
+      "name": "high-risk",
+      "description": "66-year-old male current smoker with hypertension, elevated total cholesterol and low HDL: 10-year hard-CHD risk >= 20% — high risk.",
+      "state": {
+        "patientInformation": {
+          "fullName": "",
+          "dateOfBirth": "",
+          "nhsNumber": "",
+          "address": "",
+          "telephone": "",
+          "email": "",
+          "gpName": "",
+          "gpPractice": ""
+        },
+        "demographics": {
+          "age": 66,
+          "sex": "male",
+          "ethnicity": "",
+          "heightCm": null,
+          "weightKg": null
+        },
+        "smokingHistory": {
+          "smokingStatus": "current",
+          "cigarettesPerDay": null,
+          "yearsSmoked": null,
+          "yearsSinceQuit": null
+        },
+        "bloodPressure": {
+          "systolicBp": 152,
+          "diastolicBp": null,
+          "onBpTreatment": "no",
+          "bpMedicationName": "",
+          "bpMeasurementMethod": ""
+        },
+        "cholesterol": {
+          "totalCholesterol": 245,
+          "hdlCholesterol": 34,
+          "ldlCholesterol": null,
+          "triglycerides": null,
+          "cholesterolUnit": "mgDl",
+          "fastingSample": ""
+        },
+        "medicalHistory": {
+          "hasDiabetes": "",
+          "hasPriorChd": "",
+          "hasPeripheralVascularDisease": "",
+          "hasCerebrovascularDisease": "",
+          "hasHeartFailure": "",
+          "hasAtrialFibrillation": "",
+          "otherConditions": ""
+        },
+        "familyHistory": {
+          "familyChdHistory": "",
+          "familyChdAgeOnset": "",
+          "familyChdRelationship": "",
+          "familyStrokeHistory": "",
+          "familyDiabetesHistory": ""
+        },
+        "lifestyleFactors": {
+          "physicalActivity": "",
+          "alcoholConsumption": "",
+          "dietQuality": "",
+          "bmi": null,
+          "waistCircumferenceCm": null,
+          "stressLevel": ""
+        },
+        "currentMedications": {
+          "onStatin": "",
+          "statinName": "",
+          "onAspirin": "",
+          "onAntihypertensive": "",
+          "antihypertensiveName": "",
+          "otherMedications": ""
+        },
+        "reviewCalculate": {
+          "clinicianName": "",
+          "reviewDate": "",
+          "clinicalNotes": "",
+          "patientConsent": ""
+        }
+      },
+      "expected": {
+        "riskCategory": "high",
+        "tenYearRiskPercent": 26.9,
+        "firedRules": [
+          {
+            "id": "FRS-001",
+            "category": "Overall Risk",
+            "description": "10-year CHD risk >= 20% (high risk)",
+            "riskLevel": "high"
+          },
+          {
+            "id": "FRS-005",
+            "category": "Combined Risk",
+            "description": "Multiple risk factors: age >= 60, smoker, BP >= 140, TC >= 240",
+            "riskLevel": "high"
+          },
+          {
+            "id": "FRS-007",
+            "category": "Smoking",
+            "description": "Current smoker",
+            "riskLevel": "medium"
+          },
+          {
+            "id": "FRS-008",
+            "category": "Blood Pressure",
+            "description": "Systolic BP 140-179 mmHg (stage 2 hypertension)",
+            "riskLevel": "medium"
+          },
+          {
+            "id": "FRS-009",
+            "category": "Cholesterol",
+            "description": "Total cholesterol 240-309 mg/dL (elevated)",
+            "riskLevel": "medium"
+          },
+          {
+            "id": "FRS-010",
+            "category": "Cholesterol",
+            "description": "HDL 30-39 mg/dL (low)",
+            "riskLevel": "medium"
+          },
+          {
+            "id": "FRS-015",
+            "category": "Demographics",
+            "description": "Age >= 65",
+            "riskLevel": "medium"
+          }
+        ]
+      }
+    }
+  ]
+}

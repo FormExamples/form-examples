@@ -1,0 +1,307 @@
+{
+  "engine": "front-end-with-html",
+  "graderHint": "calculateCssrsGrade",
+  "note": "Realistic filled-in states in the C-SSRS classification engine's shape. C-SSRS is an ordinal + categorical status classifier (Low / Moderate / High risk tier), not a summed score. `expected` is computed by `bin/test-personas --update` and verified by `bin/test-personas`.",
+  "personas": [
+    {
+      "name": "low-passive-ideation",
+      "description": "Passive wish to be dead only (ideation level 1), no active ideation and no suicidal behaviour — Low risk tier.",
+      "state": {
+        "context": {
+          "clinicianName": "",
+          "clinicianRole": "mental-health-practitioner",
+          "assessedAt": "",
+          "careSetting": "primary-care",
+          "scaleVersion": "full",
+          "reasonForAssessment": "Low mood at routine review"
+        },
+        "identification": {
+          "patientIdentifier": "",
+          "ageBand": "adult",
+          "sex": "female"
+        },
+        "ideation": {
+          "wishToBeDead": "yes",
+          "nonSpecificActiveThoughts": "no",
+          "activeIdeationMethods": "no",
+          "activeIdeationIntent": "no",
+          "activeIdeationPlan": "no",
+          "ideationTimeframe": "past-month"
+        },
+        "intensity": {
+          "ideationFrequency": 1,
+          "ideationDuration": 1,
+          "ideationControllability": 4,
+          "ideationDeterrents": 4,
+          "ideationReasons": 1
+        },
+        "behaviour": {
+          "actualAttempt": "no",
+          "interruptedAttempt": "no",
+          "abortedAttempt": "no",
+          "preparatoryActs": "no",
+          "nonSuicidalSelfInjury": "no",
+          "behaviourRecency": "",
+          "lifetimeAttemptCount": 0,
+          "mostRecentAttemptDate": ""
+        },
+        "lethality": {
+          "actualLethality": null,
+          "potentialLethality": null
+        },
+        "means": {
+          "accessToLethalMeans": "no",
+          "protectiveFactors": "Strong family support; engaged with care"
+        },
+        "summary": {
+          "clinicalNote": ""
+        }
+      },
+      "expected": {
+        "ideationLevel": 1,
+        "suicidalBehaviourPresent": false,
+        "recentBehaviour": false,
+        "highLethality": false,
+        "riskTier": "low",
+        "managementRecommendation": "Supportive response; document; discuss with a clinician; provide crisis resources (e.g. helpline); routine follow-up and re-screen on any change.",
+        "firedCriteria": [
+          {
+            "id": "R-IDEATION-01",
+            "criterion": "ideation",
+            "level": 1,
+            "category": "suicidal-ideation",
+            "description": "Level 1 — wish to be dead (passive)"
+          },
+          {
+            "id": "R-TIER-01",
+            "criterion": "tier",
+            "level": 0,
+            "category": "risk-tier",
+            "description": "Low risk tier — ideation level 1 with no suicidal behaviour"
+          }
+        ]
+      }
+    },
+    {
+      "name": "moderate-active-ideation-no-plan",
+      "description": "Active suicidal ideation with a method in mind but no specific plan or intent (ideation level 3), no suicidal behaviour — Moderate risk tier.",
+      "state": {
+        "context": {
+          "clinicianName": "",
+          "clinicianRole": "clinician",
+          "assessedAt": "",
+          "careSetting": "emergency-department",
+          "scaleVersion": "full",
+          "reasonForAssessment": "Self-presented in distress"
+        },
+        "identification": {
+          "patientIdentifier": "",
+          "ageBand": "adult",
+          "sex": "male"
+        },
+        "ideation": {
+          "wishToBeDead": "yes",
+          "nonSpecificActiveThoughts": "yes",
+          "activeIdeationMethods": "yes",
+          "activeIdeationIntent": "no",
+          "activeIdeationPlan": "no",
+          "ideationTimeframe": "past-month"
+        },
+        "intensity": {
+          "ideationFrequency": 3,
+          "ideationDuration": 2,
+          "ideationControllability": 2,
+          "ideationDeterrents": 2,
+          "ideationReasons": 2
+        },
+        "behaviour": {
+          "actualAttempt": "no",
+          "interruptedAttempt": "no",
+          "abortedAttempt": "no",
+          "preparatoryActs": "no",
+          "nonSuicidalSelfInjury": "no",
+          "behaviourRecency": "",
+          "lifetimeAttemptCount": 0,
+          "mostRecentAttemptDate": ""
+        },
+        "lethality": {
+          "actualLethality": null,
+          "potentialLethality": null
+        },
+        "means": {
+          "accessToLethalMeans": "unknown",
+          "protectiveFactors": "Cites responsibility to children"
+        },
+        "summary": {
+          "clinicalNote": ""
+        }
+      },
+      "expected": {
+        "ideationLevel": 3,
+        "suicidalBehaviourPresent": false,
+        "recentBehaviour": false,
+        "highLethality": false,
+        "riskTier": "moderate",
+        "managementRecommendation": "Timely mental-health / behavioural evaluation; safety planning; means-restriction counselling; increased monitoring and defined follow-up.",
+        "firedCriteria": [
+          {
+            "id": "R-IDEATION-01",
+            "criterion": "ideation",
+            "level": 1,
+            "category": "suicidal-ideation",
+            "description": "Level 1 — wish to be dead (passive)"
+          },
+          {
+            "id": "R-IDEATION-02",
+            "criterion": "ideation",
+            "level": 2,
+            "category": "suicidal-ideation",
+            "description": "Level 2 — non-specific active suicidal thoughts (no method, intent, or plan)"
+          },
+          {
+            "id": "R-IDEATION-03",
+            "criterion": "ideation",
+            "level": 3,
+            "category": "suicidal-ideation",
+            "description": "Level 3 — active ideation with any methods, no specific plan or intent"
+          },
+          {
+            "id": "R-TIER-01",
+            "criterion": "tier",
+            "level": 0,
+            "category": "risk-tier",
+            "description": "Moderate risk tier — ideation level 3"
+          }
+        ]
+      }
+    },
+    {
+      "name": "high-plan-intent-recent-attempt",
+      "description": "Active ideation with a specific plan and intent (ideation level 5) plus a recent high-lethality actual attempt within 3 months — High risk tier, immediate escalation.",
+      "state": {
+        "context": {
+          "clinicianName": "",
+          "clinicianRole": "crisis-worker",
+          "assessedAt": "",
+          "careSetting": "crisis-service",
+          "scaleVersion": "full",
+          "reasonForAssessment": "Post-attempt crisis assessment"
+        },
+        "identification": {
+          "patientIdentifier": "",
+          "ageBand": "adult",
+          "sex": "male"
+        },
+        "ideation": {
+          "wishToBeDead": "yes",
+          "nonSpecificActiveThoughts": "yes",
+          "activeIdeationMethods": "yes",
+          "activeIdeationIntent": "yes",
+          "activeIdeationPlan": "yes",
+          "ideationTimeframe": "past-month"
+        },
+        "intensity": {
+          "ideationFrequency": 5,
+          "ideationDuration": 4,
+          "ideationControllability": 1,
+          "ideationDeterrents": 1,
+          "ideationReasons": 4
+        },
+        "behaviour": {
+          "actualAttempt": "yes",
+          "interruptedAttempt": "no",
+          "abortedAttempt": "no",
+          "preparatoryActs": "yes",
+          "nonSuicidalSelfInjury": "no",
+          "behaviourRecency": "within-3-months",
+          "lifetimeAttemptCount": 2,
+          "mostRecentAttemptDate": "2026-06-20"
+        },
+        "lethality": {
+          "actualLethality": 4,
+          "potentialLethality": null
+        },
+        "means": {
+          "accessToLethalMeans": "yes",
+          "protectiveFactors": ""
+        },
+        "summary": {
+          "clinicalNote": ""
+        }
+      },
+      "expected": {
+        "ideationLevel": 5,
+        "suicidalBehaviourPresent": true,
+        "recentBehaviour": true,
+        "highLethality": true,
+        "riskTier": "high",
+        "managementRecommendation": "Urgent / immediate psychiatric or crisis response. Do not leave the person alone; ensure safety; remove or restrict access to lethal means; complete a safety plan; arrange emergency mental-health evaluation per local protocol.",
+        "firedCriteria": [
+          {
+            "id": "R-IDEATION-01",
+            "criterion": "ideation",
+            "level": 1,
+            "category": "suicidal-ideation",
+            "description": "Level 1 — wish to be dead (passive)"
+          },
+          {
+            "id": "R-IDEATION-02",
+            "criterion": "ideation",
+            "level": 2,
+            "category": "suicidal-ideation",
+            "description": "Level 2 — non-specific active suicidal thoughts (no method, intent, or plan)"
+          },
+          {
+            "id": "R-IDEATION-03",
+            "criterion": "ideation",
+            "level": 3,
+            "category": "suicidal-ideation",
+            "description": "Level 3 — active ideation with any methods, no specific plan or intent"
+          },
+          {
+            "id": "R-IDEATION-04",
+            "criterion": "ideation",
+            "level": 4,
+            "category": "suicidal-ideation",
+            "description": "Level 4 — active ideation with some intent to act, without a fully worked-out plan"
+          },
+          {
+            "id": "R-IDEATION-05",
+            "criterion": "ideation",
+            "level": 5,
+            "category": "suicidal-ideation",
+            "description": "Level 5 — active ideation with a specific plan and intent to act"
+          },
+          {
+            "id": "R-BEHAVIOUR-ACTUAL-ATTEMPT",
+            "criterion": "behaviour",
+            "level": 0,
+            "category": "suicidal-behaviour",
+            "description": "Actual attempt — a potentially self-injurious act with at least some intent to die"
+          },
+          {
+            "id": "R-BEHAVIOUR-PREPARATORY-ACTS",
+            "criterion": "behaviour",
+            "level": 0,
+            "category": "suicidal-behaviour",
+            "description": "Preparatory acts or behaviour — steps taken to prepare, e.g. acquiring means or writing a note"
+          },
+          {
+            "id": "R-LETHALITY-ACTUAL-HIGH",
+            "criterion": "lethality",
+            "level": 0,
+            "category": "lethality",
+            "description": "High actual lethality — medical damage of the most recent attempt is 3 or greater"
+          },
+          {
+            "id": "R-TIER-01",
+            "criterion": "tier",
+            "level": 0,
+            "category": "risk-tier",
+            "description": "High risk tier — ideation level 5, recent suicidal behaviour, high-lethality attempt"
+          }
+        ]
+      }
+    }
+  ]
+}

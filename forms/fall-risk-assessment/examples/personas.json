@@ -1,0 +1,478 @@
+{
+  "engine": "front-end-with-html",
+  "graderHint": "gradeFallRisk",
+  "note": "Realistic filled-in states in the Morse Fall Scale engine's shape. `expected` is computed by `bin/test-personas --update` and verified by `bin/test-personas`.",
+  "personas": [
+    {
+      "name": "low-risk",
+      "description": "Independent inpatient with a secondary diagnosis only, oriented and steady gait: MFS 15 — low fall risk.",
+      "state": {
+        "demographics": {
+          "firstName": "",
+          "lastName": "",
+          "dateOfBirth": "",
+          "sex": "",
+          "age": null,
+          "careSetting": "",
+          "primaryDiagnosis": ""
+        },
+        "fallHistory": {
+          "hasFallenInPastYear": "no",
+          "numberOfFallsPastYear": null,
+          "lastFallDate": "",
+          "mostRecentFallInjurious": "",
+          "mostRecentFallInjuryDetails": "",
+          "recurrentFallsWithInjury": "no",
+          "fearOfFalling": "",
+          "fallCircumstances": ""
+        },
+        "mfs": {
+          "historyOfFalling": 0,
+          "secondaryDiagnosis": 15,
+          "ambulatoryAid": 0,
+          "ivOrHeparinLock": 0,
+          "gaitTransferring": 0,
+          "mentalStatus": 0
+        },
+        "mobilityGait": {
+          "mobilityLevel": "",
+          "assistiveDeviceUsed": "",
+          "unsteadyGait": "",
+          "difficultyRisingFromChair": "",
+          "balanceImpairment": "",
+          "weaknessLowerExtremity": "",
+          "orthostaticHypotension": "",
+          "orthostaticHypotensionSevere": "",
+          "timedUpAndGoSeconds": "",
+          "mobilityNotes": ""
+        },
+        "medicationReview": {
+          "medications": [],
+          "polypharmacy": "",
+          "sedativesOrHypnotics": "",
+          "antihypertensives": "",
+          "diuretics": "",
+          "anticoagulants": "no",
+          "opioids": "",
+          "antidepressants": "",
+          "antipsychotics": "",
+          "recentMedicationChange": "",
+          "medicationNotes": ""
+        },
+        "visionSensory": {
+          "visionImpairment": "",
+          "visionCorrected": "",
+          "hearingImpairment": "",
+          "peripheralNeuropathy": "",
+          "cataracts": "",
+          "glaucoma": "",
+          "macularDegeneration": "",
+          "visionLastChecked": "",
+          "sensoryNotes": ""
+        },
+        "environmental": {
+          "loosThrowRugs": "",
+          "clutteredWalkways": "",
+          "poorLighting": "",
+          "stairsWithoutHandrails": "",
+          "bathroomGrabBarsAbsent": "",
+          "unsuitableFootwear": "",
+          "bedHeightProblem": "",
+          "hipProtectorsUsed": "",
+          "environmentalNotes": ""
+        },
+        "cognitive": {
+          "dementiaDiagnosis": "",
+          "confusionOrDisorientation": "",
+          "impulsivity": "",
+          "overestimatesAbility": "",
+          "delirium": "",
+          "cognitiveScreenTool": "",
+          "cognitiveScreenScore": "",
+          "cognitiveNotes": ""
+        },
+        "previousInterventions": {
+          "fallsClinicReferral": "",
+          "physiotherapyProvided": "",
+          "occupationalTherapyProvided": "",
+          "medicationReviewCompleted": "",
+          "homeSafetyAssessment": "",
+          "interventionDeclined": "",
+          "missedReferral": "",
+          "interventionNotes": ""
+        },
+        "preventionPlan": {
+          "bedAlarm": "",
+          "chairAlarm": "",
+          "nonSlipFootwear": "",
+          "hipProtectorsRecommended": "",
+          "exerciseProgramme": "",
+          "vitaminDSupplement": "",
+          "environmentalModifications": "",
+          "medicationDeprescribing": "",
+          "carerEducationProvided": "",
+          "planNotes": ""
+        }
+      },
+      "expected": {
+        "mfsScore": 15,
+        "severity": "low",
+        "criticalOverride": false,
+        "criticalReasons": [],
+        "answeredCount": 6,
+        "firedRules": [
+          {
+            "id": "MFS-001",
+            "category": "History of falling",
+            "description": "No",
+            "score": 0
+          },
+          {
+            "id": "MFS-002",
+            "category": "Secondary diagnosis",
+            "description": "Yes",
+            "score": 15
+          },
+          {
+            "id": "MFS-003",
+            "category": "Ambulatory aid",
+            "description": "None / bed rest / wheelchair / nurse",
+            "score": 0
+          },
+          {
+            "id": "MFS-004",
+            "category": "IV / heparin lock",
+            "description": "No",
+            "score": 0
+          },
+          {
+            "id": "MFS-005",
+            "category": "Gait / transferring",
+            "description": "Normal / bed rest / immobile",
+            "score": 0
+          },
+          {
+            "id": "MFS-006",
+            "category": "Mental status",
+            "description": "Oriented to own ability",
+            "score": 0
+          }
+        ]
+      }
+    },
+    {
+      "name": "moderate-risk",
+      "description": "Patient who has fallen recently and carries multiple diagnoses: MFS 40 — moderate fall risk.",
+      "state": {
+        "demographics": {
+          "firstName": "",
+          "lastName": "",
+          "dateOfBirth": "",
+          "sex": "",
+          "age": null,
+          "careSetting": "",
+          "primaryDiagnosis": ""
+        },
+        "fallHistory": {
+          "hasFallenInPastYear": "yes",
+          "numberOfFallsPastYear": null,
+          "lastFallDate": "",
+          "mostRecentFallInjurious": "",
+          "mostRecentFallInjuryDetails": "",
+          "recurrentFallsWithInjury": "no",
+          "fearOfFalling": "",
+          "fallCircumstances": ""
+        },
+        "mfs": {
+          "historyOfFalling": 25,
+          "secondaryDiagnosis": 15,
+          "ambulatoryAid": 0,
+          "ivOrHeparinLock": 0,
+          "gaitTransferring": 0,
+          "mentalStatus": 0
+        },
+        "mobilityGait": {
+          "mobilityLevel": "",
+          "assistiveDeviceUsed": "",
+          "unsteadyGait": "",
+          "difficultyRisingFromChair": "",
+          "balanceImpairment": "",
+          "weaknessLowerExtremity": "",
+          "orthostaticHypotension": "",
+          "orthostaticHypotensionSevere": "",
+          "timedUpAndGoSeconds": "",
+          "mobilityNotes": ""
+        },
+        "medicationReview": {
+          "medications": [],
+          "polypharmacy": "",
+          "sedativesOrHypnotics": "",
+          "antihypertensives": "",
+          "diuretics": "",
+          "anticoagulants": "no",
+          "opioids": "",
+          "antidepressants": "",
+          "antipsychotics": "",
+          "recentMedicationChange": "",
+          "medicationNotes": ""
+        },
+        "visionSensory": {
+          "visionImpairment": "",
+          "visionCorrected": "",
+          "hearingImpairment": "",
+          "peripheralNeuropathy": "",
+          "cataracts": "",
+          "glaucoma": "",
+          "macularDegeneration": "",
+          "visionLastChecked": "",
+          "sensoryNotes": ""
+        },
+        "environmental": {
+          "loosThrowRugs": "",
+          "clutteredWalkways": "",
+          "poorLighting": "",
+          "stairsWithoutHandrails": "",
+          "bathroomGrabBarsAbsent": "",
+          "unsuitableFootwear": "",
+          "bedHeightProblem": "",
+          "hipProtectorsUsed": "",
+          "environmentalNotes": ""
+        },
+        "cognitive": {
+          "dementiaDiagnosis": "",
+          "confusionOrDisorientation": "",
+          "impulsivity": "",
+          "overestimatesAbility": "",
+          "delirium": "",
+          "cognitiveScreenTool": "",
+          "cognitiveScreenScore": "",
+          "cognitiveNotes": ""
+        },
+        "previousInterventions": {
+          "fallsClinicReferral": "",
+          "physiotherapyProvided": "",
+          "occupationalTherapyProvided": "",
+          "medicationReviewCompleted": "",
+          "homeSafetyAssessment": "",
+          "interventionDeclined": "",
+          "missedReferral": "",
+          "interventionNotes": ""
+        },
+        "preventionPlan": {
+          "bedAlarm": "",
+          "chairAlarm": "",
+          "nonSlipFootwear": "",
+          "hipProtectorsRecommended": "",
+          "exerciseProgramme": "",
+          "vitaminDSupplement": "",
+          "environmentalModifications": "",
+          "medicationDeprescribing": "",
+          "carerEducationProvided": "",
+          "planNotes": ""
+        }
+      },
+      "expected": {
+        "mfsScore": 40,
+        "severity": "moderate",
+        "criticalOverride": false,
+        "criticalReasons": [],
+        "answeredCount": 6,
+        "firedRules": [
+          {
+            "id": "MFS-001",
+            "category": "History of falling",
+            "description": "Yes",
+            "score": 25
+          },
+          {
+            "id": "MFS-002",
+            "category": "Secondary diagnosis",
+            "description": "Yes",
+            "score": 15
+          },
+          {
+            "id": "MFS-003",
+            "category": "Ambulatory aid",
+            "description": "None / bed rest / wheelchair / nurse",
+            "score": 0
+          },
+          {
+            "id": "MFS-004",
+            "category": "IV / heparin lock",
+            "description": "No",
+            "score": 0
+          },
+          {
+            "id": "MFS-005",
+            "category": "Gait / transferring",
+            "description": "Normal / bed rest / immobile",
+            "score": 0
+          },
+          {
+            "id": "MFS-006",
+            "category": "Mental status",
+            "description": "Oriented to own ability",
+            "score": 0
+          }
+        ]
+      }
+    },
+    {
+      "name": "high-risk",
+      "description": "Patient with a recent fall, multiple diagnoses and an impaired gait: MFS 60 — high fall risk.",
+      "state": {
+        "demographics": {
+          "firstName": "",
+          "lastName": "",
+          "dateOfBirth": "",
+          "sex": "",
+          "age": null,
+          "careSetting": "",
+          "primaryDiagnosis": ""
+        },
+        "fallHistory": {
+          "hasFallenInPastYear": "yes",
+          "numberOfFallsPastYear": null,
+          "lastFallDate": "",
+          "mostRecentFallInjurious": "",
+          "mostRecentFallInjuryDetails": "",
+          "recurrentFallsWithInjury": "no",
+          "fearOfFalling": "",
+          "fallCircumstances": ""
+        },
+        "mfs": {
+          "historyOfFalling": 25,
+          "secondaryDiagnosis": 15,
+          "ambulatoryAid": 0,
+          "ivOrHeparinLock": 0,
+          "gaitTransferring": 20,
+          "mentalStatus": 0
+        },
+        "mobilityGait": {
+          "mobilityLevel": "",
+          "assistiveDeviceUsed": "",
+          "unsteadyGait": "",
+          "difficultyRisingFromChair": "",
+          "balanceImpairment": "",
+          "weaknessLowerExtremity": "",
+          "orthostaticHypotension": "",
+          "orthostaticHypotensionSevere": "",
+          "timedUpAndGoSeconds": "",
+          "mobilityNotes": ""
+        },
+        "medicationReview": {
+          "medications": [],
+          "polypharmacy": "",
+          "sedativesOrHypnotics": "",
+          "antihypertensives": "",
+          "diuretics": "",
+          "anticoagulants": "no",
+          "opioids": "",
+          "antidepressants": "",
+          "antipsychotics": "",
+          "recentMedicationChange": "",
+          "medicationNotes": ""
+        },
+        "visionSensory": {
+          "visionImpairment": "",
+          "visionCorrected": "",
+          "hearingImpairment": "",
+          "peripheralNeuropathy": "",
+          "cataracts": "",
+          "glaucoma": "",
+          "macularDegeneration": "",
+          "visionLastChecked": "",
+          "sensoryNotes": ""
+        },
+        "environmental": {
+          "loosThrowRugs": "",
+          "clutteredWalkways": "",
+          "poorLighting": "",
+          "stairsWithoutHandrails": "",
+          "bathroomGrabBarsAbsent": "",
+          "unsuitableFootwear": "",
+          "bedHeightProblem": "",
+          "hipProtectorsUsed": "",
+          "environmentalNotes": ""
+        },
+        "cognitive": {
+          "dementiaDiagnosis": "",
+          "confusionOrDisorientation": "",
+          "impulsivity": "",
+          "overestimatesAbility": "",
+          "delirium": "",
+          "cognitiveScreenTool": "",
+          "cognitiveScreenScore": "",
+          "cognitiveNotes": ""
+        },
+        "previousInterventions": {
+          "fallsClinicReferral": "",
+          "physiotherapyProvided": "",
+          "occupationalTherapyProvided": "",
+          "medicationReviewCompleted": "",
+          "homeSafetyAssessment": "",
+          "interventionDeclined": "",
+          "missedReferral": "",
+          "interventionNotes": ""
+        },
+        "preventionPlan": {
+          "bedAlarm": "",
+          "chairAlarm": "",
+          "nonSlipFootwear": "",
+          "hipProtectorsRecommended": "",
+          "exerciseProgramme": "",
+          "vitaminDSupplement": "",
+          "environmentalModifications": "",
+          "medicationDeprescribing": "",
+          "carerEducationProvided": "",
+          "planNotes": ""
+        }
+      },
+      "expected": {
+        "mfsScore": 60,
+        "severity": "high",
+        "criticalOverride": false,
+        "criticalReasons": [],
+        "answeredCount": 6,
+        "firedRules": [
+          {
+            "id": "MFS-001",
+            "category": "History of falling",
+            "description": "Yes",
+            "score": 25
+          },
+          {
+            "id": "MFS-002",
+            "category": "Secondary diagnosis",
+            "description": "Yes",
+            "score": 15
+          },
+          {
+            "id": "MFS-003",
+            "category": "Ambulatory aid",
+            "description": "None / bed rest / wheelchair / nurse",
+            "score": 0
+          },
+          {
+            "id": "MFS-004",
+            "category": "IV / heparin lock",
+            "description": "No",
+            "score": 0
+          },
+          {
+            "id": "MFS-005",
+            "category": "Gait / transferring",
+            "description": "Impaired (clutches, unsteady, jerky)",
+            "score": 20
+          },
+          {
+            "id": "MFS-006",
+            "category": "Mental status",
+            "description": "Oriented to own ability",
+            "score": 0
+          }
+        ]
+      }
+    }
+  ]
+}

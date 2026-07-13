@@ -1,0 +1,459 @@
+{
+  "engine": "front-end-with-html",
+  "graderHint": "calculateConcern",
+  "note": "Realistic filled-in states in the NICE CG156 fertility concern engine's shape. `expected` is computed by `bin/test-personas --update` and verified by `bin/test-personas`.",
+  "personas": [
+    {
+      "name": "low-concern",
+      "description": "Woman aged 30 trying for 8 months with regular cycles and a healthy BMI: concern score 0 — low concern.",
+      "state": {
+        "demographics": {
+          "patientFirstName": "",
+          "patientLastName": "",
+          "patientDateOfBirth": "1996-06-01",
+          "patientSex": "female",
+          "partnerFirstName": "",
+          "partnerLastName": "",
+          "partnerDateOfBirth": "",
+          "partnerSex": "",
+          "relationshipDuration": null,
+          "ethnicity": ""
+        },
+        "reproductiveHistory": {
+          "durationTryingMonths": 8,
+          "priorPregnancies": null,
+          "priorLiveBirths": null,
+          "priorMiscarriages": null,
+          "priorEctopic": null,
+          "priorTerminations": null,
+          "priorFertilityTreatment": "",
+          "priorTreatmentDetails": "",
+          "contraceptionStopped": "",
+          "contraceptionStoppedDate": ""
+        },
+        "menstrualCycle": {
+          "menarcheAge": null,
+          "cycleLengthDays": null,
+          "cycleRegularity": "regular",
+          "periodDurationDays": null,
+          "heavyBleeding": "",
+          "dysmenorrhoea": "",
+          "intermenstrualBleeding": "",
+          "lastMenstrualPeriod": "",
+          "cycleNotes": ""
+        },
+        "medicalSurgicalHistory": {
+          "pelvicInflammatoryDisease": "",
+          "endometriosis": "",
+          "polycysticOvarySyndrome": "",
+          "fibroids": "",
+          "thyroidDisorder": "",
+          "diabetes": "",
+          "cancerHistory": "",
+          "cancerTreatmentDetails": "",
+          "pelvicSurgery": "",
+          "pelvicSurgeryDetails": "",
+          "sexuallyTransmittedInfections": "",
+          "stiDetails": "",
+          "otherConditions": ""
+        },
+        "lifestyleFactors": {
+          "weight": null,
+          "height": null,
+          "bmi": 23,
+          "tobaccoStatus": "",
+          "cigarettesPerDay": null,
+          "alcoholLevel": "",
+          "alcoholUnitsPerWeek": null,
+          "caffeineLevel": "",
+          "recreationalDrugs": "",
+          "recreationalDrugDetails": "",
+          "exerciseFrequency": "",
+          "occupationalHazards": "",
+          "occupationalHazardDetails": ""
+        },
+        "medicationsSupplements": {
+          "currentMedications": [],
+          "folicAcid": "",
+          "folicAcidDoseMcg": null,
+          "vitaminD": "",
+          "otherSupplements": ""
+        },
+        "partnerSemen": {
+          "partnerAgeYears": null,
+          "partnerSmoking": "",
+          "partnerAlcohol": "",
+          "partnerOccupationalHazards": "",
+          "partnerMedicalHistory": "",
+          "semenAnalysisDone": "",
+          "semenAnalysisDate": "",
+          "semenVolumeMl": null,
+          "semenConcentrationMillionPerMl": null,
+          "semenTotalMotilityPercent": null,
+          "semenProgressiveMotilityPercent": null,
+          "semenNormalMorphologyPercent": null,
+          "semenNotes": ""
+        },
+        "hormoneProfile": {
+          "fsh": null,
+          "lh": null,
+          "amh": null,
+          "oestradiol": null,
+          "tsh": null,
+          "prolactin": null,
+          "testosterone": null,
+          "progesteroneDay21": null,
+          "hormoneTestDate": "",
+          "hormoneNotes": ""
+        },
+        "investigations": {
+          "transvaginalUltrasound": "",
+          "antralFollicleCount": null,
+          "hysterosalpingogramDone": "",
+          "hysterosalpingogramResult": "",
+          "hysteroscopyDone": "",
+          "hysteroscopyResult": "",
+          "laparoscopyDone": "",
+          "laparoscopyResult": "",
+          "otherInvestigations": ""
+        },
+        "clinicalRecommendation": {
+          "clinicianName": "",
+          "assessmentDate": "",
+          "recommendation": "",
+          "referralUrgency": "",
+          "additionalNotes": ""
+        }
+      },
+      "expected": {
+        "concernScore": 0,
+        "concernLevel": "low",
+        "firedRules": []
+      }
+    },
+    {
+      "name": "moderate-concern",
+      "description": "Woman aged 38 trying for 14 months with PCOS: concern score 5 — moderate concern, investigation indicated.",
+      "state": {
+        "demographics": {
+          "patientFirstName": "",
+          "patientLastName": "",
+          "patientDateOfBirth": "1988-03-01",
+          "patientSex": "female",
+          "partnerFirstName": "",
+          "partnerLastName": "",
+          "partnerDateOfBirth": "",
+          "partnerSex": "",
+          "relationshipDuration": null,
+          "ethnicity": ""
+        },
+        "reproductiveHistory": {
+          "durationTryingMonths": 14,
+          "priorPregnancies": null,
+          "priorLiveBirths": null,
+          "priorMiscarriages": null,
+          "priorEctopic": null,
+          "priorTerminations": null,
+          "priorFertilityTreatment": "",
+          "priorTreatmentDetails": "",
+          "contraceptionStopped": "",
+          "contraceptionStoppedDate": ""
+        },
+        "menstrualCycle": {
+          "menarcheAge": null,
+          "cycleLengthDays": null,
+          "cycleRegularity": "regular",
+          "periodDurationDays": null,
+          "heavyBleeding": "",
+          "dysmenorrhoea": "",
+          "intermenstrualBleeding": "",
+          "lastMenstrualPeriod": "",
+          "cycleNotes": ""
+        },
+        "medicalSurgicalHistory": {
+          "pelvicInflammatoryDisease": "",
+          "endometriosis": "",
+          "polycysticOvarySyndrome": "yes",
+          "fibroids": "",
+          "thyroidDisorder": "",
+          "diabetes": "",
+          "cancerHistory": "",
+          "cancerTreatmentDetails": "",
+          "pelvicSurgery": "",
+          "pelvicSurgeryDetails": "",
+          "sexuallyTransmittedInfections": "",
+          "stiDetails": "",
+          "otherConditions": ""
+        },
+        "lifestyleFactors": {
+          "weight": null,
+          "height": null,
+          "bmi": 24,
+          "tobaccoStatus": "",
+          "cigarettesPerDay": null,
+          "alcoholLevel": "",
+          "alcoholUnitsPerWeek": null,
+          "caffeineLevel": "",
+          "recreationalDrugs": "",
+          "recreationalDrugDetails": "",
+          "exerciseFrequency": "",
+          "occupationalHazards": "",
+          "occupationalHazardDetails": ""
+        },
+        "medicationsSupplements": {
+          "currentMedications": [],
+          "folicAcid": "",
+          "folicAcidDoseMcg": null,
+          "vitaminD": "",
+          "otherSupplements": ""
+        },
+        "partnerSemen": {
+          "partnerAgeYears": null,
+          "partnerSmoking": "",
+          "partnerAlcohol": "",
+          "partnerOccupationalHazards": "",
+          "partnerMedicalHistory": "",
+          "semenAnalysisDone": "",
+          "semenAnalysisDate": "",
+          "semenVolumeMl": null,
+          "semenConcentrationMillionPerMl": null,
+          "semenTotalMotilityPercent": null,
+          "semenProgressiveMotilityPercent": null,
+          "semenNormalMorphologyPercent": null,
+          "semenNotes": ""
+        },
+        "hormoneProfile": {
+          "fsh": null,
+          "lh": null,
+          "amh": null,
+          "oestradiol": null,
+          "tsh": null,
+          "prolactin": null,
+          "testosterone": null,
+          "progesteroneDay21": null,
+          "hormoneTestDate": "",
+          "hormoneNotes": ""
+        },
+        "investigations": {
+          "transvaginalUltrasound": "",
+          "antralFollicleCount": null,
+          "hysterosalpingogramDone": "",
+          "hysterosalpingogramResult": "",
+          "hysteroscopyDone": "",
+          "hysteroscopyResult": "",
+          "laparoscopyDone": "",
+          "laparoscopyResult": "",
+          "otherInvestigations": ""
+        },
+        "clinicalRecommendation": {
+          "clinicianName": "",
+          "assessmentDate": "",
+          "recommendation": "",
+          "referralUrgency": "",
+          "additionalNotes": ""
+        }
+      },
+      "expected": {
+        "concernScore": 5,
+        "concernLevel": "moderate",
+        "firedRules": [
+          {
+            "id": "FERT-AGE-001",
+            "category": "Age",
+            "description": "Female partner age >= 36 — earlier referral threshold (NICE CG156)",
+            "score": 2
+          },
+          {
+            "id": "FERT-DUR-001",
+            "category": "Duration",
+            "description": "Trying to conceive >= 12 months — investigation indicated",
+            "score": 1
+          },
+          {
+            "id": "FERT-DUR-002",
+            "category": "Duration",
+            "description": "Trying >= 6 months and female partner >= 36 — earlier investigation",
+            "score": 1
+          },
+          {
+            "id": "FERT-PEL-003",
+            "category": "Pelvic History",
+            "description": "Polycystic ovary syndrome (PCOS)",
+            "score": 1
+          }
+        ]
+      }
+    },
+    {
+      "name": "high-concern",
+      "description": "Woman aged 42 trying for 30 months with irregular cycles and low AMH (3.0 pmol/L): concern score 13 — high concern, prompt specialist referral.",
+      "state": {
+        "demographics": {
+          "patientFirstName": "",
+          "patientLastName": "",
+          "patientDateOfBirth": "1984-02-01",
+          "patientSex": "female",
+          "partnerFirstName": "",
+          "partnerLastName": "",
+          "partnerDateOfBirth": "",
+          "partnerSex": "",
+          "relationshipDuration": null,
+          "ethnicity": ""
+        },
+        "reproductiveHistory": {
+          "durationTryingMonths": 30,
+          "priorPregnancies": null,
+          "priorLiveBirths": null,
+          "priorMiscarriages": null,
+          "priorEctopic": null,
+          "priorTerminations": null,
+          "priorFertilityTreatment": "",
+          "priorTreatmentDetails": "",
+          "contraceptionStopped": "",
+          "contraceptionStoppedDate": ""
+        },
+        "menstrualCycle": {
+          "menarcheAge": null,
+          "cycleLengthDays": null,
+          "cycleRegularity": "irregular",
+          "periodDurationDays": null,
+          "heavyBleeding": "",
+          "dysmenorrhoea": "",
+          "intermenstrualBleeding": "",
+          "lastMenstrualPeriod": "",
+          "cycleNotes": ""
+        },
+        "medicalSurgicalHistory": {
+          "pelvicInflammatoryDisease": "",
+          "endometriosis": "",
+          "polycysticOvarySyndrome": "",
+          "fibroids": "",
+          "thyroidDisorder": "",
+          "diabetes": "",
+          "cancerHistory": "",
+          "cancerTreatmentDetails": "",
+          "pelvicSurgery": "",
+          "pelvicSurgeryDetails": "",
+          "sexuallyTransmittedInfections": "",
+          "stiDetails": "",
+          "otherConditions": ""
+        },
+        "lifestyleFactors": {
+          "weight": null,
+          "height": null,
+          "bmi": 24,
+          "tobaccoStatus": "",
+          "cigarettesPerDay": null,
+          "alcoholLevel": "",
+          "alcoholUnitsPerWeek": null,
+          "caffeineLevel": "",
+          "recreationalDrugs": "",
+          "recreationalDrugDetails": "",
+          "exerciseFrequency": "",
+          "occupationalHazards": "",
+          "occupationalHazardDetails": ""
+        },
+        "medicationsSupplements": {
+          "currentMedications": [],
+          "folicAcid": "",
+          "folicAcidDoseMcg": null,
+          "vitaminD": "",
+          "otherSupplements": ""
+        },
+        "partnerSemen": {
+          "partnerAgeYears": null,
+          "partnerSmoking": "",
+          "partnerAlcohol": "",
+          "partnerOccupationalHazards": "",
+          "partnerMedicalHistory": "",
+          "semenAnalysisDone": "",
+          "semenAnalysisDate": "",
+          "semenVolumeMl": null,
+          "semenConcentrationMillionPerMl": null,
+          "semenTotalMotilityPercent": null,
+          "semenProgressiveMotilityPercent": null,
+          "semenNormalMorphologyPercent": null,
+          "semenNotes": ""
+        },
+        "hormoneProfile": {
+          "fsh": null,
+          "lh": null,
+          "amh": 3,
+          "oestradiol": null,
+          "tsh": null,
+          "prolactin": null,
+          "testosterone": null,
+          "progesteroneDay21": null,
+          "hormoneTestDate": "",
+          "hormoneNotes": ""
+        },
+        "investigations": {
+          "transvaginalUltrasound": "",
+          "antralFollicleCount": null,
+          "hysterosalpingogramDone": "",
+          "hysterosalpingogramResult": "",
+          "hysteroscopyDone": "",
+          "hysteroscopyResult": "",
+          "laparoscopyDone": "",
+          "laparoscopyResult": "",
+          "otherInvestigations": ""
+        },
+        "clinicalRecommendation": {
+          "clinicianName": "",
+          "assessmentDate": "",
+          "recommendation": "",
+          "referralUrgency": "",
+          "additionalNotes": ""
+        }
+      },
+      "expected": {
+        "concernScore": 13,
+        "concernLevel": "high",
+        "firedRules": [
+          {
+            "id": "FERT-AGE-001",
+            "category": "Age",
+            "description": "Female partner age >= 36 — earlier referral threshold (NICE CG156)",
+            "score": 2
+          },
+          {
+            "id": "FERT-AGE-002",
+            "category": "Age",
+            "description": "Female partner age >= 40 — significant age-related decline",
+            "score": 2
+          },
+          {
+            "id": "FERT-DUR-001",
+            "category": "Duration",
+            "description": "Trying to conceive >= 12 months — investigation indicated",
+            "score": 1
+          },
+          {
+            "id": "FERT-DUR-002",
+            "category": "Duration",
+            "description": "Trying >= 6 months and female partner >= 36 — earlier investigation",
+            "score": 1
+          },
+          {
+            "id": "FERT-DUR-003",
+            "category": "Duration",
+            "description": "Trying >= 24 months — prolonged sub-fertility",
+            "score": 2
+          },
+          {
+            "id": "FERT-CYC-001",
+            "category": "Menstrual Cycle",
+            "description": "Irregular menstrual cycles — possible anovulation",
+            "score": 2
+          },
+          {
+            "id": "FERT-OR-001",
+            "category": "Ovarian Reserve",
+            "description": "AMH < 5.4 pmol/L — low ovarian reserve (NICE)",
+            "score": 3
+          }
+        ]
+      }
+    }
+  ]
+}

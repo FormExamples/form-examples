@@ -1,0 +1,526 @@
+{
+  "engine": "front-end-with-html",
+  "graderHint": "calculateGrades",
+  "note": "Realistic filled-in states in the endocrine axis-grading engine's shape; overall status is the most-severe axis. `expected` is computed by `bin/test-personas --update` and verified by `bin/test-personas`.",
+  "personas": [
+    {
+      "name": "euthyroid-normal",
+      "description": "Screening review with thyroid and glucose indices within reference range and no symptoms — every assessed axis normal: overall status Normal.",
+      "state": {
+        "demographics": {
+          "firstName": "Helen",
+          "lastName": "Barnes",
+          "dateOfBirth": "",
+          "sex": "female",
+          "weight": 68,
+          "height": 165,
+          "bmi": null,
+          "ethnicity": "white-british"
+        },
+        "presentingSymptoms": {
+          "fatigue": "no",
+          "weightChange": "",
+          "weightChangeDirection": "",
+          "heatIntolerance": "no",
+          "coldIntolerance": "no",
+          "palpitations": "no",
+          "tremor": "no",
+          "sweating": "",
+          "polyuria": "",
+          "polydipsia": "",
+          "mood": "",
+          "skinChanges": "",
+          "hairChanges": "",
+          "symptomDuration": "",
+          "otherSymptoms": ""
+        },
+        "thyroidAxis": {
+          "tsh": 2.1,
+          "ft4": 15,
+          "ft3": 5,
+          "antibodiesPositive": "no",
+          "goitre": "no",
+          "familyHistoryThyroid": "",
+          "thyroidNotes": ""
+        },
+        "adrenalAxis": {
+          "morningCortisol": null,
+          "acth": null,
+          "aldosterone": null,
+          "renin": null,
+          "hyperpigmentation": "",
+          "cushingoidFeatures": "",
+          "posturalHypotension": "",
+          "adrenalNotes": ""
+        },
+        "glucoseMetabolism": {
+          "hba1c": 36,
+          "fastingGlucose": 5,
+          "randomGlucose": null,
+          "knownDiabetes": "no",
+          "diabetesType": "",
+          "hypoglycaemiaEpisodes": "",
+          "glucoseNotes": ""
+        },
+        "reproductiveAxis": {
+          "fsh": null,
+          "lh": null,
+          "testosterone": null,
+          "oestradiol": null,
+          "menstrualIrregularity": "",
+          "infertility": "",
+          "libidoChange": "",
+          "galactorrhoea": "",
+          "reproductiveNotes": ""
+        },
+        "pituitaryFunction": {
+          "prolactin": null,
+          "igf1": null,
+          "growthHormone": null,
+          "headaches": "",
+          "visualDisturbance": "",
+          "acromegalicFeatures": "",
+          "pituitaryImagingDone": "",
+          "pituitaryImagingFindings": "",
+          "pituitaryNotes": ""
+        },
+        "boneCalcium": {
+          "pth": null,
+          "vitaminD": null,
+          "calciumCorrected": null,
+          "phosphate": null,
+          "fragilityFracture": "",
+          "bonePain": "",
+          "dexaScanDone": "",
+          "dexaResult": "",
+          "boneNotes": ""
+        },
+        "medicationsLifestyle": {
+          "currentMedications": [],
+          "steroidUse": "",
+          "steroidDetails": "",
+          "hormoneTherapy": "",
+          "hormoneTherapyDetails": "",
+          "smoking": "",
+          "alcoholUnits": "",
+          "exerciseLevel": "",
+          "dietPattern": "",
+          "familyHistoryEndocrine": ""
+        },
+        "clinicalImpression": {
+          "workingDiagnosis": "",
+          "differentialDiagnoses": "",
+          "investigationsRequested": "",
+          "managementPlan": "",
+          "followUpPlan": "",
+          "referralRequired": "",
+          "referralSpecialty": "",
+          "clinicianNotes": ""
+        }
+      },
+      "expected": {
+        "axisGrades": [
+          {
+            "axis": "Thyroid",
+            "status": "normal",
+            "rationale": "Indices within reference range.",
+            "contributingFindings": []
+          },
+          {
+            "axis": "Adrenal",
+            "status": "",
+            "rationale": "No data provided.",
+            "contributingFindings": []
+          },
+          {
+            "axis": "Glucose",
+            "status": "normal",
+            "rationale": "Indices within reference range.",
+            "contributingFindings": []
+          },
+          {
+            "axis": "Reproductive",
+            "status": "",
+            "rationale": "No data provided.",
+            "contributingFindings": []
+          },
+          {
+            "axis": "Pituitary",
+            "status": "",
+            "rationale": "No data provided.",
+            "contributingFindings": []
+          },
+          {
+            "axis": "Bone & Calcium",
+            "status": "",
+            "rationale": "No data provided.",
+            "contributingFindings": []
+          }
+        ],
+        "overallStatus": "normal",
+        "answeredCount": 2,
+        "firedRules": [
+          {
+            "id": "AXIS-THY",
+            "category": "Thyroid",
+            "description": "Thyroid axis grading from TSH/FT4/FT3 and clinical features.",
+            "status": "normal"
+          },
+          {
+            "id": "AXIS-GLU",
+            "category": "Glucose",
+            "description": "Glucose metabolism grading from HbA1c, fasting glucose, and history.",
+            "status": "normal"
+          }
+        ]
+      }
+    },
+    {
+      "name": "type2-diabetes-moderate",
+      "description": "Sub-optimally controlled type 2 diabetes (HbA1c 62 mmol/mol, fasting glucose 8.4 mmol/L) with normal thyroid — worst axis is glucose at moderate: overall status Moderate.",
+      "state": {
+        "demographics": {
+          "firstName": "Raymond",
+          "lastName": "Ellis",
+          "dateOfBirth": "",
+          "sex": "male",
+          "weight": 94,
+          "height": 178,
+          "bmi": null,
+          "ethnicity": "white-british"
+        },
+        "presentingSymptoms": {
+          "fatigue": "yes",
+          "weightChange": "",
+          "weightChangeDirection": "",
+          "heatIntolerance": "",
+          "coldIntolerance": "",
+          "palpitations": "",
+          "tremor": "",
+          "sweating": "",
+          "polyuria": "yes",
+          "polydipsia": "yes",
+          "mood": "",
+          "skinChanges": "",
+          "hairChanges": "",
+          "symptomDuration": "months",
+          "otherSymptoms": ""
+        },
+        "thyroidAxis": {
+          "tsh": 1.8,
+          "ft4": 14,
+          "ft3": null,
+          "antibodiesPositive": "no",
+          "goitre": "no",
+          "familyHistoryThyroid": "",
+          "thyroidNotes": ""
+        },
+        "adrenalAxis": {
+          "morningCortisol": null,
+          "acth": null,
+          "aldosterone": null,
+          "renin": null,
+          "hyperpigmentation": "",
+          "cushingoidFeatures": "",
+          "posturalHypotension": "",
+          "adrenalNotes": ""
+        },
+        "glucoseMetabolism": {
+          "hba1c": 62,
+          "fastingGlucose": 8.4,
+          "randomGlucose": null,
+          "knownDiabetes": "yes",
+          "diabetesType": "type-2",
+          "hypoglycaemiaEpisodes": "no",
+          "glucoseNotes": ""
+        },
+        "reproductiveAxis": {
+          "fsh": null,
+          "lh": null,
+          "testosterone": null,
+          "oestradiol": null,
+          "menstrualIrregularity": "",
+          "infertility": "",
+          "libidoChange": "",
+          "galactorrhoea": "",
+          "reproductiveNotes": ""
+        },
+        "pituitaryFunction": {
+          "prolactin": null,
+          "igf1": null,
+          "growthHormone": null,
+          "headaches": "",
+          "visualDisturbance": "",
+          "acromegalicFeatures": "",
+          "pituitaryImagingDone": "",
+          "pituitaryImagingFindings": "",
+          "pituitaryNotes": ""
+        },
+        "boneCalcium": {
+          "pth": null,
+          "vitaminD": null,
+          "calciumCorrected": null,
+          "phosphate": null,
+          "fragilityFracture": "",
+          "bonePain": "",
+          "dexaScanDone": "",
+          "dexaResult": "",
+          "boneNotes": ""
+        },
+        "medicationsLifestyle": {
+          "currentMedications": [],
+          "steroidUse": "",
+          "steroidDetails": "",
+          "hormoneTherapy": "",
+          "hormoneTherapyDetails": "",
+          "smoking": "",
+          "alcoholUnits": "",
+          "exerciseLevel": "",
+          "dietPattern": "",
+          "familyHistoryEndocrine": ""
+        },
+        "clinicalImpression": {
+          "workingDiagnosis": "",
+          "differentialDiagnoses": "",
+          "investigationsRequested": "",
+          "managementPlan": "",
+          "followUpPlan": "",
+          "referralRequired": "",
+          "referralSpecialty": "",
+          "clinicianNotes": ""
+        }
+      },
+      "expected": {
+        "axisGrades": [
+          {
+            "axis": "Thyroid",
+            "status": "normal",
+            "rationale": "Indices within reference range.",
+            "contributingFindings": []
+          },
+          {
+            "axis": "Adrenal",
+            "status": "",
+            "rationale": "No data provided.",
+            "contributingFindings": []
+          },
+          {
+            "axis": "Glucose",
+            "status": "moderate",
+            "rationale": "HbA1c 62 mmol/mol — sub-optimally controlled diabetes range. Fasting glucose 8.4 mmol/L — diabetes range.",
+            "contributingFindings": [
+              "HbA1c 62 mmol/mol — sub-optimally controlled diabetes range.",
+              "Fasting glucose 8.4 mmol/L — diabetes range."
+            ]
+          },
+          {
+            "axis": "Reproductive",
+            "status": "",
+            "rationale": "No data provided.",
+            "contributingFindings": []
+          },
+          {
+            "axis": "Pituitary",
+            "status": "",
+            "rationale": "No data provided.",
+            "contributingFindings": []
+          },
+          {
+            "axis": "Bone & Calcium",
+            "status": "",
+            "rationale": "No data provided.",
+            "contributingFindings": []
+          }
+        ],
+        "overallStatus": "moderate",
+        "answeredCount": 2,
+        "firedRules": [
+          {
+            "id": "AXIS-THY",
+            "category": "Thyroid",
+            "description": "Thyroid axis grading from TSH/FT4/FT3 and clinical features.",
+            "status": "normal"
+          },
+          {
+            "id": "AXIS-GLU",
+            "category": "Glucose",
+            "description": "Glucose metabolism grading from HbA1c, fasting glucose, and history.",
+            "status": "moderate"
+          }
+        ]
+      }
+    },
+    {
+      "name": "overt-hypothyroid-severe",
+      "description": "Overt autoimmune hypothyroidism (TSH 48 mIU/L, low FT4, positive antibodies, goitre) with classic symptoms — thyroid axis severe: overall status Severe.",
+      "state": {
+        "demographics": {
+          "firstName": "Priya",
+          "lastName": "Shah",
+          "dateOfBirth": "",
+          "sex": "female",
+          "weight": 71,
+          "height": 160,
+          "bmi": null,
+          "ethnicity": "asian-indian"
+        },
+        "presentingSymptoms": {
+          "fatigue": "yes",
+          "weightChange": "yes",
+          "weightChangeDirection": "gain",
+          "heatIntolerance": "",
+          "coldIntolerance": "yes",
+          "palpitations": "",
+          "tremor": "",
+          "sweating": "",
+          "polyuria": "",
+          "polydipsia": "",
+          "mood": "",
+          "skinChanges": "",
+          "hairChanges": "yes",
+          "symptomDuration": "months",
+          "otherSymptoms": ""
+        },
+        "thyroidAxis": {
+          "tsh": 48,
+          "ft4": 5,
+          "ft3": 2.8,
+          "antibodiesPositive": "yes",
+          "goitre": "yes",
+          "familyHistoryThyroid": "yes",
+          "thyroidNotes": ""
+        },
+        "adrenalAxis": {
+          "morningCortisol": null,
+          "acth": null,
+          "aldosterone": null,
+          "renin": null,
+          "hyperpigmentation": "",
+          "cushingoidFeatures": "",
+          "posturalHypotension": "",
+          "adrenalNotes": ""
+        },
+        "glucoseMetabolism": {
+          "hba1c": null,
+          "fastingGlucose": null,
+          "randomGlucose": null,
+          "knownDiabetes": "",
+          "diabetesType": "",
+          "hypoglycaemiaEpisodes": "",
+          "glucoseNotes": ""
+        },
+        "reproductiveAxis": {
+          "fsh": null,
+          "lh": null,
+          "testosterone": null,
+          "oestradiol": null,
+          "menstrualIrregularity": "",
+          "infertility": "",
+          "libidoChange": "",
+          "galactorrhoea": "",
+          "reproductiveNotes": ""
+        },
+        "pituitaryFunction": {
+          "prolactin": null,
+          "igf1": null,
+          "growthHormone": null,
+          "headaches": "",
+          "visualDisturbance": "",
+          "acromegalicFeatures": "",
+          "pituitaryImagingDone": "",
+          "pituitaryImagingFindings": "",
+          "pituitaryNotes": ""
+        },
+        "boneCalcium": {
+          "pth": null,
+          "vitaminD": null,
+          "calciumCorrected": null,
+          "phosphate": null,
+          "fragilityFracture": "",
+          "bonePain": "",
+          "dexaScanDone": "",
+          "dexaResult": "",
+          "boneNotes": ""
+        },
+        "medicationsLifestyle": {
+          "currentMedications": [],
+          "steroidUse": "",
+          "steroidDetails": "",
+          "hormoneTherapy": "",
+          "hormoneTherapyDetails": "",
+          "smoking": "",
+          "alcoholUnits": "",
+          "exerciseLevel": "",
+          "dietPattern": "",
+          "familyHistoryEndocrine": ""
+        },
+        "clinicalImpression": {
+          "workingDiagnosis": "",
+          "differentialDiagnoses": "",
+          "investigationsRequested": "",
+          "managementPlan": "",
+          "followUpPlan": "",
+          "referralRequired": "",
+          "referralSpecialty": "",
+          "clinicianNotes": ""
+        }
+      },
+      "expected": {
+        "axisGrades": [
+          {
+            "axis": "Thyroid",
+            "status": "severe",
+            "rationale": "TSH 48 mIU/L — overt hypothyroidism range. FT4 5 pmol/L — low. FT3 2.8 pmol/L — low. Positive thyroid autoantibodies. Goitre present on examination.",
+            "contributingFindings": [
+              "TSH 48 mIU/L — overt hypothyroidism range.",
+              "FT4 5 pmol/L — low.",
+              "FT3 2.8 pmol/L — low.",
+              "Positive thyroid autoantibodies.",
+              "Goitre present on examination."
+            ]
+          },
+          {
+            "axis": "Adrenal",
+            "status": "",
+            "rationale": "No data provided.",
+            "contributingFindings": []
+          },
+          {
+            "axis": "Glucose",
+            "status": "",
+            "rationale": "No data provided.",
+            "contributingFindings": []
+          },
+          {
+            "axis": "Reproductive",
+            "status": "",
+            "rationale": "No data provided.",
+            "contributingFindings": []
+          },
+          {
+            "axis": "Pituitary",
+            "status": "",
+            "rationale": "No data provided.",
+            "contributingFindings": []
+          },
+          {
+            "axis": "Bone & Calcium",
+            "status": "",
+            "rationale": "No data provided.",
+            "contributingFindings": []
+          }
+        ],
+        "overallStatus": "severe",
+        "answeredCount": 1,
+        "firedRules": [
+          {
+            "id": "AXIS-THY",
+            "category": "Thyroid",
+            "description": "Thyroid axis grading from TSH/FT4/FT3 and clinical features.",
+            "status": "severe"
+          }
+        ]
+      }
+    }
+  ]
+}

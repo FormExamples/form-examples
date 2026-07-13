@@ -1,0 +1,310 @@
+{
+  "engine": "front-end-with-html",
+  "graderHint": "gradeDonor",
+  "note": "Realistic filled-in states in the blood-donation engine's shape. Graded by gradeDonor (JPAC Donor Selection Guidelines; most-severe deferral wins — deterministic). `expected` is computed by `bin/test-personas --update` and verified by `bin/test-personas`.",
+  "personas": [
+    {
+      "name": "eligible",
+      "description": "Fit repeat donor, normal vitals, no medical, travel, or lifestyle risk factors: eligible to donate.",
+      "state": {
+        "donorDemographics": {
+          "firstName": "",
+          "lastName": "",
+          "dateOfBirth": "",
+          "sex": "male",
+          "weight": 80,
+          "height": 180,
+          "donorType": "repeat",
+          "lastDonationDate": ""
+        },
+        "generalHealth": {
+          "feelingWellToday": "yes",
+          "adequateSleep": "yes",
+          "adequateMealAndFluids": "yes",
+          "feelingFaintOrUnwell": "no"
+        },
+        "medicalHistory": {
+          "heartOrCirculatoryDisease": "no",
+          "cancer": "no",
+          "bleedingOrClottingDisorder": "no",
+          "diabetesOnInsulin": "no",
+          "epilepsyOrSeizures": "no",
+          "hivPositive": "no",
+          "hepatitisBOrC": "no",
+          "htlv": "no",
+          "cjdFamilyHistory": "no",
+          "receivedPituitaryHormone": "no",
+          "receivedDuraMaterGraft": "no",
+          "currentMedications": []
+        },
+        "recentIllness": {
+          "feverPastTwoWeeks": "no",
+          "infectionPastTwoWeeks": "no",
+          "antibioticsPastSevenDays": "no",
+          "dentalWorkPastWeek": "no",
+          "surgeryPastSixMonths": "no",
+          "covidPositivePastTwentyEightDays": "no",
+          "vaccinationPastFourWeeks": "no",
+          "vaccinationDetails": ""
+        },
+        "travelHistory": {
+          "recentTravel": [],
+          "malariaAreaPastTwelveMonths": "no",
+          "westNileVirusAreaPastTwentyEightDays": "no",
+          "ukResidence1980To1996Over12Months": "no",
+          "bloodTransfusionInUk": "no"
+        },
+        "lifestyleRisk": {
+          "ivDrugUseEver": "no",
+          "sexWithIvDrugUser": "no",
+          "sexInExchangePastTwelveMonths": "no",
+          "sexWithNewPartnerPastThreeMonths": "no",
+          "multipleSexualPartnersPastThreeMonths": "no",
+          "tattooOrPiercingPastFourMonths": "no",
+          "acupuncturePastFourMonths": "no",
+          "bodyOrEarPiercingPastFourMonths": "no",
+          "incarceratedPastTwelveMonths": "no"
+        },
+        "pregnancyTransfusion": {
+          "currentlyPregnant": "no",
+          "pregnancyPastSixMonths": "no",
+          "breastfeeding": "no",
+          "receivedTransfusionEver": "no",
+          "lastTransfusionDate": "",
+          "receivedTransplantEver": "no"
+        },
+        "vitalSigns": {
+          "hemoglobin": 15,
+          "systolicBp": 120,
+          "diastolicBp": 75,
+          "pulseBpm": 65,
+          "temperatureCelsius": 36.7
+        },
+        "informedConsent": {
+          "understoodInformation": "yes",
+          "consentToDonate": "yes",
+          "consentToTesting": "yes",
+          "consentToContact": "yes"
+        },
+        "donationPlan": {
+          "plannedDonationType": "whole-blood",
+          "preferredDonationDate": "",
+          "session": "morning",
+          "notes": ""
+        }
+      },
+      "expected": {
+        "eligibilityStatus": "eligible",
+        "deferralWindow": "",
+        "firedRules": []
+      }
+    },
+    {
+      "name": "temporarily-deferred",
+      "description": "Otherwise-fit donor with a tattoo in the past four months: temporarily deferred.",
+      "state": {
+        "donorDemographics": {
+          "firstName": "",
+          "lastName": "",
+          "dateOfBirth": "",
+          "sex": "female",
+          "weight": 65,
+          "height": 165,
+          "donorType": "repeat",
+          "lastDonationDate": ""
+        },
+        "generalHealth": {
+          "feelingWellToday": "yes",
+          "adequateSleep": "yes",
+          "adequateMealAndFluids": "yes",
+          "feelingFaintOrUnwell": "no"
+        },
+        "medicalHistory": {
+          "heartOrCirculatoryDisease": "no",
+          "cancer": "no",
+          "bleedingOrClottingDisorder": "no",
+          "diabetesOnInsulin": "no",
+          "epilepsyOrSeizures": "no",
+          "hivPositive": "no",
+          "hepatitisBOrC": "no",
+          "htlv": "no",
+          "cjdFamilyHistory": "no",
+          "receivedPituitaryHormone": "no",
+          "receivedDuraMaterGraft": "no",
+          "currentMedications": []
+        },
+        "recentIllness": {
+          "feverPastTwoWeeks": "no",
+          "infectionPastTwoWeeks": "no",
+          "antibioticsPastSevenDays": "no",
+          "dentalWorkPastWeek": "no",
+          "surgeryPastSixMonths": "no",
+          "covidPositivePastTwentyEightDays": "no",
+          "vaccinationPastFourWeeks": "no",
+          "vaccinationDetails": ""
+        },
+        "travelHistory": {
+          "recentTravel": [],
+          "malariaAreaPastTwelveMonths": "no",
+          "westNileVirusAreaPastTwentyEightDays": "no",
+          "ukResidence1980To1996Over12Months": "no",
+          "bloodTransfusionInUk": "no"
+        },
+        "lifestyleRisk": {
+          "ivDrugUseEver": "no",
+          "sexWithIvDrugUser": "no",
+          "sexInExchangePastTwelveMonths": "no",
+          "sexWithNewPartnerPastThreeMonths": "no",
+          "multipleSexualPartnersPastThreeMonths": "no",
+          "tattooOrPiercingPastFourMonths": "yes",
+          "acupuncturePastFourMonths": "no",
+          "bodyOrEarPiercingPastFourMonths": "no",
+          "incarceratedPastTwelveMonths": "no"
+        },
+        "pregnancyTransfusion": {
+          "currentlyPregnant": "no",
+          "pregnancyPastSixMonths": "no",
+          "breastfeeding": "no",
+          "receivedTransfusionEver": "no",
+          "lastTransfusionDate": "",
+          "receivedTransplantEver": "no"
+        },
+        "vitalSigns": {
+          "hemoglobin": 13.5,
+          "systolicBp": 120,
+          "diastolicBp": 75,
+          "pulseBpm": 65,
+          "temperatureCelsius": 36.7
+        },
+        "informedConsent": {
+          "understoodInformation": "yes",
+          "consentToDonate": "yes",
+          "consentToTesting": "yes",
+          "consentToContact": "yes"
+        },
+        "donationPlan": {
+          "plannedDonationType": "whole-blood",
+          "preferredDonationDate": "",
+          "session": "morning",
+          "notes": ""
+        }
+      },
+      "expected": {
+        "eligibilityStatus": "temporarily-deferred",
+        "deferralWindow": "4 months from procedure",
+        "firedRules": [
+          {
+            "id": "DSG-LIFE-006",
+            "category": "Lifestyle Risk",
+            "description": "Tattoo or semi-permanent make-up in past 4 months.",
+            "status": "temporarily-deferred",
+            "deferralWindow": "4 months from procedure"
+          }
+        ]
+      }
+    },
+    {
+      "name": "permanently-deferred",
+      "description": "Donor with a history of hepatitis B or C: permanently deferred.",
+      "state": {
+        "donorDemographics": {
+          "firstName": "",
+          "lastName": "",
+          "dateOfBirth": "",
+          "sex": "male",
+          "weight": 80,
+          "height": 180,
+          "donorType": "repeat",
+          "lastDonationDate": ""
+        },
+        "generalHealth": {
+          "feelingWellToday": "yes",
+          "adequateSleep": "yes",
+          "adequateMealAndFluids": "yes",
+          "feelingFaintOrUnwell": "no"
+        },
+        "medicalHistory": {
+          "heartOrCirculatoryDisease": "no",
+          "cancer": "no",
+          "bleedingOrClottingDisorder": "no",
+          "diabetesOnInsulin": "no",
+          "epilepsyOrSeizures": "no",
+          "hivPositive": "no",
+          "hepatitisBOrC": "yes",
+          "htlv": "no",
+          "cjdFamilyHistory": "no",
+          "receivedPituitaryHormone": "no",
+          "receivedDuraMaterGraft": "no",
+          "currentMedications": []
+        },
+        "recentIllness": {
+          "feverPastTwoWeeks": "no",
+          "infectionPastTwoWeeks": "no",
+          "antibioticsPastSevenDays": "no",
+          "dentalWorkPastWeek": "no",
+          "surgeryPastSixMonths": "no",
+          "covidPositivePastTwentyEightDays": "no",
+          "vaccinationPastFourWeeks": "no",
+          "vaccinationDetails": ""
+        },
+        "travelHistory": {
+          "recentTravel": [],
+          "malariaAreaPastTwelveMonths": "no",
+          "westNileVirusAreaPastTwentyEightDays": "no",
+          "ukResidence1980To1996Over12Months": "no",
+          "bloodTransfusionInUk": "no"
+        },
+        "lifestyleRisk": {
+          "ivDrugUseEver": "no",
+          "sexWithIvDrugUser": "no",
+          "sexInExchangePastTwelveMonths": "no",
+          "sexWithNewPartnerPastThreeMonths": "no",
+          "multipleSexualPartnersPastThreeMonths": "no",
+          "tattooOrPiercingPastFourMonths": "no",
+          "acupuncturePastFourMonths": "no",
+          "bodyOrEarPiercingPastFourMonths": "no",
+          "incarceratedPastTwelveMonths": "no"
+        },
+        "pregnancyTransfusion": {
+          "currentlyPregnant": "no",
+          "pregnancyPastSixMonths": "no",
+          "breastfeeding": "no",
+          "receivedTransfusionEver": "no",
+          "lastTransfusionDate": "",
+          "receivedTransplantEver": "no"
+        },
+        "vitalSigns": {
+          "hemoglobin": 15,
+          "systolicBp": 120,
+          "diastolicBp": 75,
+          "pulseBpm": 65,
+          "temperatureCelsius": 36.7
+        },
+        "informedConsent": {
+          "understoodInformation": "yes",
+          "consentToDonate": "yes",
+          "consentToTesting": "yes",
+          "consentToContact": "yes"
+        },
+        "donationPlan": {
+          "plannedDonationType": "whole-blood",
+          "preferredDonationDate": "",
+          "session": "morning",
+          "notes": ""
+        }
+      },
+      "expected": {
+        "eligibilityStatus": "permanently-deferred",
+        "deferralWindow": "",
+        "firedRules": [
+          {
+            "id": "DSG-MED-002",
+            "category": "Medical History",
+            "description": "Hepatitis B or C history — permanent deferral.",
+            "status": "permanently-deferred"
+          }
+        ]
+      }
+    }
+  ]
+}

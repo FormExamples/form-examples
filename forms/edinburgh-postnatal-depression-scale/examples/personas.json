@@ -1,0 +1,389 @@
+{
+  "engine": "front-end-with-html",
+  "graderHint": "calculateEpdsGrade",
+  "note": "Realistic filled-in states in the EPDS scoring engine's shape (item1..item10 are raw printed-option indices 0-3; reverse scoring is applied by the grader). `expected` is computed by `bin/test-personas --update` and verified by `bin/test-personas`.",
+  "personas": [
+    {
+      "name": "lower-likelihood",
+      "description": "Postnatal mother coping well: EPDS total 5 (< 10, lower-likelihood band) with item 10 answered 'Never' — no self-harm flag.",
+      "state": {
+        "context": {
+          "clinicianName": "",
+          "clinicianRole": "health-visitor",
+          "careSetting": "community",
+          "assessedAt": "",
+          "perinatalStage": "postnatal",
+          "perinatalWeek": 8
+        },
+        "identification": {
+          "respondentIdentifier": "",
+          "ageBand": "30-39",
+          "preferredLanguage": "en",
+          "assistanceNeeded": "none"
+        },
+        "items": {
+          "item1": 1,
+          "item2": 1,
+          "item3": 3,
+          "item4": 2,
+          "item5": 3,
+          "item6": 3,
+          "item7": 2,
+          "item8": 3,
+          "item9": 3,
+          "item10": 3
+        },
+        "note": {
+          "clinicalNote": ""
+        }
+      },
+      "expected": {
+        "itemScores": [
+          1,
+          1,
+          0,
+          2,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0
+        ],
+        "totalScore": 5,
+        "band": "lower",
+        "item10Score": 0,
+        "selfHarmFlag": false,
+        "firedItems": [
+          {
+            "id": "R-ITEM-1-SCORE",
+            "parameter": "item",
+            "points": 1,
+            "category": "item-score",
+            "description": "Item 1 (I have been able to laugh and see the funny side of things) scored 1 of 3"
+          },
+          {
+            "id": "R-ITEM-2-SCORE",
+            "parameter": "item",
+            "points": 1,
+            "category": "item-score",
+            "description": "Item 2 (I have looked forward with enjoyment to things) scored 1 of 3"
+          },
+          {
+            "id": "R-ITEM-4-SCORE",
+            "parameter": "item",
+            "points": 2,
+            "category": "item-score",
+            "description": "Item 4 (I have been anxious or worried for no good reason) scored 2 of 3"
+          },
+          {
+            "id": "R-ITEM-7-SCORE",
+            "parameter": "item",
+            "points": 1,
+            "category": "item-score",
+            "description": "Item 7 (I have been so unhappy that I have had difficulty sleeping) scored 1 of 3 (reverse-scored)"
+          },
+          {
+            "id": "R-TOTAL-SCORE",
+            "parameter": "total",
+            "points": 5,
+            "category": "total-score",
+            "description": "Summed EPDS total 5 of 30"
+          },
+          {
+            "id": "R-BAND",
+            "parameter": "band",
+            "points": 0,
+            "category": "band-threshold",
+            "description": "Total < 10 — lower-likelihood band"
+          }
+        ]
+      }
+    },
+    {
+      "name": "possible-depression",
+      "description": "Antenatal woman with mild low mood and anxiety: EPDS total 11 (10-12, possible-depression band) with item 10 'Never' — no self-harm flag.",
+      "state": {
+        "context": {
+          "clinicianName": "",
+          "clinicianRole": "midwife",
+          "careSetting": "maternity",
+          "assessedAt": "",
+          "perinatalStage": "antenatal",
+          "perinatalWeek": 28
+        },
+        "identification": {
+          "respondentIdentifier": "",
+          "ageBand": "20-29",
+          "preferredLanguage": "en",
+          "assistanceNeeded": "none"
+        },
+        "items": {
+          "item1": 2,
+          "item2": 1,
+          "item3": 1,
+          "item4": 2,
+          "item5": 2,
+          "item6": 2,
+          "item7": 2,
+          "item8": 2,
+          "item9": 3,
+          "item10": 3
+        },
+        "note": {
+          "clinicalNote": ""
+        }
+      },
+      "expected": {
+        "itemScores": [
+          2,
+          1,
+          2,
+          2,
+          1,
+          1,
+          1,
+          1,
+          0,
+          0
+        ],
+        "totalScore": 11,
+        "band": "possible",
+        "item10Score": 0,
+        "selfHarmFlag": false,
+        "firedItems": [
+          {
+            "id": "R-ITEM-1-SCORE",
+            "parameter": "item",
+            "points": 2,
+            "category": "item-score",
+            "description": "Item 1 (I have been able to laugh and see the funny side of things) scored 2 of 3"
+          },
+          {
+            "id": "R-ITEM-2-SCORE",
+            "parameter": "item",
+            "points": 1,
+            "category": "item-score",
+            "description": "Item 2 (I have looked forward with enjoyment to things) scored 1 of 3"
+          },
+          {
+            "id": "R-ITEM-3-SCORE",
+            "parameter": "item",
+            "points": 2,
+            "category": "item-score",
+            "description": "Item 3 (I have blamed myself unnecessarily when things went wrong) scored 2 of 3 (reverse-scored)"
+          },
+          {
+            "id": "R-ITEM-4-SCORE",
+            "parameter": "item",
+            "points": 2,
+            "category": "item-score",
+            "description": "Item 4 (I have been anxious or worried for no good reason) scored 2 of 3"
+          },
+          {
+            "id": "R-ITEM-5-SCORE",
+            "parameter": "item",
+            "points": 1,
+            "category": "item-score",
+            "description": "Item 5 (I have felt scared or panicky for no very good reason) scored 1 of 3 (reverse-scored)"
+          },
+          {
+            "id": "R-ITEM-6-SCORE",
+            "parameter": "item",
+            "points": 1,
+            "category": "item-score",
+            "description": "Item 6 (Things have been getting on top of me) scored 1 of 3 (reverse-scored)"
+          },
+          {
+            "id": "R-ITEM-7-SCORE",
+            "parameter": "item",
+            "points": 1,
+            "category": "item-score",
+            "description": "Item 7 (I have been so unhappy that I have had difficulty sleeping) scored 1 of 3 (reverse-scored)"
+          },
+          {
+            "id": "R-ITEM-8-SCORE",
+            "parameter": "item",
+            "points": 1,
+            "category": "item-score",
+            "description": "Item 8 (I have felt sad or miserable) scored 1 of 3 (reverse-scored)"
+          },
+          {
+            "id": "R-TOTAL-SCORE",
+            "parameter": "total",
+            "points": 11,
+            "category": "total-score",
+            "description": "Summed EPDS total 11 of 30"
+          },
+          {
+            "id": "R-BAND",
+            "parameter": "band",
+            "points": 0,
+            "category": "band-threshold",
+            "description": "Total >= 10 and < 13 — possible depression band"
+          },
+          {
+            "id": "R-ANXIETY-SUBSCALE",
+            "parameter": "anxiety-subscale",
+            "points": 5,
+            "category": "anxiety-subscale",
+            "description": "Anxiety subscale (items 3, 4, 5) scored 5 of 9 (EPDS-3A >= 4)"
+          }
+        ]
+      }
+    },
+    {
+      "name": "likely-depression-self-harm",
+      "description": "Postnatal mother with pervasive depressive symptoms: EPDS total 25 (>= 13, likely-depression band) with item 10 answered 'Sometimes' — mandatory self-harm safety flag.",
+      "state": {
+        "context": {
+          "clinicianName": "",
+          "clinicianRole": "perinatal-mh",
+          "careSetting": "perinatal-mh",
+          "assessedAt": "",
+          "perinatalStage": "postnatal",
+          "perinatalWeek": 6
+        },
+        "identification": {
+          "respondentIdentifier": "",
+          "ageBand": "20-29",
+          "preferredLanguage": "en",
+          "assistanceNeeded": "none"
+        },
+        "items": {
+          "item1": 3,
+          "item2": 2,
+          "item3": 0,
+          "item4": 3,
+          "item5": 1,
+          "item6": 0,
+          "item7": 1,
+          "item8": 0,
+          "item9": 1,
+          "item10": 1
+        },
+        "note": {
+          "clinicalNote": ""
+        }
+      },
+      "expected": {
+        "itemScores": [
+          3,
+          2,
+          3,
+          3,
+          2,
+          3,
+          2,
+          3,
+          2,
+          2
+        ],
+        "totalScore": 25,
+        "band": "likely",
+        "item10Score": 2,
+        "selfHarmFlag": true,
+        "firedItems": [
+          {
+            "id": "R-ITEM-1-SCORE",
+            "parameter": "item",
+            "points": 3,
+            "category": "item-score",
+            "description": "Item 1 (I have been able to laugh and see the funny side of things) scored 3 of 3"
+          },
+          {
+            "id": "R-ITEM-2-SCORE",
+            "parameter": "item",
+            "points": 2,
+            "category": "item-score",
+            "description": "Item 2 (I have looked forward with enjoyment to things) scored 2 of 3"
+          },
+          {
+            "id": "R-ITEM-3-SCORE",
+            "parameter": "item",
+            "points": 3,
+            "category": "item-score",
+            "description": "Item 3 (I have blamed myself unnecessarily when things went wrong) scored 3 of 3 (reverse-scored)"
+          },
+          {
+            "id": "R-ITEM-4-SCORE",
+            "parameter": "item",
+            "points": 3,
+            "category": "item-score",
+            "description": "Item 4 (I have been anxious or worried for no good reason) scored 3 of 3"
+          },
+          {
+            "id": "R-ITEM-5-SCORE",
+            "parameter": "item",
+            "points": 2,
+            "category": "item-score",
+            "description": "Item 5 (I have felt scared or panicky for no very good reason) scored 2 of 3 (reverse-scored)"
+          },
+          {
+            "id": "R-ITEM-6-SCORE",
+            "parameter": "item",
+            "points": 3,
+            "category": "item-score",
+            "description": "Item 6 (Things have been getting on top of me) scored 3 of 3 (reverse-scored)"
+          },
+          {
+            "id": "R-ITEM-7-SCORE",
+            "parameter": "item",
+            "points": 2,
+            "category": "item-score",
+            "description": "Item 7 (I have been so unhappy that I have had difficulty sleeping) scored 2 of 3 (reverse-scored)"
+          },
+          {
+            "id": "R-ITEM-8-SCORE",
+            "parameter": "item",
+            "points": 3,
+            "category": "item-score",
+            "description": "Item 8 (I have felt sad or miserable) scored 3 of 3 (reverse-scored)"
+          },
+          {
+            "id": "R-ITEM-9-SCORE",
+            "parameter": "item",
+            "points": 2,
+            "category": "item-score",
+            "description": "Item 9 (I have been so unhappy that I have been crying) scored 2 of 3 (reverse-scored)"
+          },
+          {
+            "id": "R-ITEM-10-SCORE",
+            "parameter": "item",
+            "points": 2,
+            "category": "item-score",
+            "description": "Item 10 (The thought of harming myself has occurred to me) scored 2 of 3 (reverse-scored)"
+          },
+          {
+            "id": "R-TOTAL-SCORE",
+            "parameter": "total",
+            "points": 25,
+            "category": "total-score",
+            "description": "Summed EPDS total 25 of 30"
+          },
+          {
+            "id": "R-BAND",
+            "parameter": "band",
+            "points": 0,
+            "category": "band-threshold",
+            "description": "Total >= 13 — likely depression band"
+          },
+          {
+            "id": "R-ITEM-10-SELF-HARM",
+            "parameter": "self-harm",
+            "points": 2,
+            "category": "safety",
+            "description": "Item 10 (thoughts of self-harm) scored 2 of 3 — mandatory self-harm flag regardless of the total score"
+          },
+          {
+            "id": "R-ANXIETY-SUBSCALE",
+            "parameter": "anxiety-subscale",
+            "points": 8,
+            "category": "anxiety-subscale",
+            "description": "Anxiety subscale (items 3, 4, 5) scored 8 of 9 (EPDS-3A >= 4)"
+          }
+        ]
+      }
+    }
+  ]
+}

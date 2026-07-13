@@ -1,0 +1,272 @@
+{
+  "engine": "front-end-with-html",
+  "graderHint": "calculateCamGrade",
+  "note": "Realistic filled-in states in the CAM scoring engine's shape. `expected` is computed by `bin/test-personas --update` and verified by `bin/test-personas`.",
+  "personas": [
+    {
+      "name": "delirium-present",
+      "description": "Acute fluctuating onset, inattention, disorganised thinking and drowsiness — CAM algorithm 1 AND 2 AND (3 OR 4) satisfied: delirium present (hyperactive subtype).",
+      "state": {
+        "context": {
+          "assessorName": "",
+          "assessorRole": "geriatrician",
+          "assessedAt": "",
+          "wardUnit": "acute-medical-unit",
+          "camVariant": "cam"
+        },
+        "identification": {
+          "patientIdentifier": "",
+          "ageBand": "80-plus",
+          "sex": "female",
+          "cognitiveBaseline": "independent",
+          "collateralSource": "family"
+        },
+        "feature1": {
+          "acuteOnsetFluctuating": "present",
+          "onsetTiming": "days"
+        },
+        "feature2": {
+          "inattention": "present",
+          "attentionTest": "months-backwards"
+        },
+        "feature3": {
+          "disorganisedThinking": "present"
+        },
+        "feature4": {
+          "alteredConsciousness": "present",
+          "consciousnessLevel": "lethargic",
+          "rassScore": -1
+        },
+        "observations": {
+          "motoricSubtype": "hyperactive",
+          "hallucinations": true,
+          "delusions": false,
+          "sleepWakeDisturbance": true,
+          "deliriogenicMedication": true,
+          "deliriogenicMedicationDetail": "oxycodone commenced post-operatively"
+        },
+        "result": {
+          "suspectedPrecipitants": "urinary tract infection; opioid analgesia",
+          "recommendedActions": "treat infection; review opioids; reorientation and hydration",
+          "clinicalNote": ""
+        }
+      },
+      "expected": {
+        "classification": "present",
+        "deliriumPresent": true,
+        "positiveFeatures": [
+          1,
+          2,
+          3,
+          4
+        ],
+        "feature1Positive": true,
+        "feature2Positive": true,
+        "feature3Positive": true,
+        "feature4Positive": true,
+        "motoricSubtype": "hyperactive",
+        "firedRules": [
+          {
+            "id": "R-FEATURE-1-POSITIVE-01",
+            "feature": "acute-onset-fluctuating",
+            "positive": true,
+            "category": "feature-evaluation",
+            "description": "Feature 1 — acute change in mental status from baseline with a fluctuating course — POSITIVE"
+          },
+          {
+            "id": "R-FEATURE-2-POSITIVE-01",
+            "feature": "inattention",
+            "positive": true,
+            "category": "feature-evaluation",
+            "description": "Feature 2 — difficulty focusing attention, confirmed by a formal attention test — POSITIVE"
+          },
+          {
+            "id": "R-FEATURE-3-POSITIVE-01",
+            "feature": "disorganised-thinking",
+            "positive": true,
+            "category": "feature-evaluation",
+            "description": "Feature 3 — disorganised or incoherent thinking (rambling, illogical, unpredictable switching) — POSITIVE"
+          },
+          {
+            "id": "R-FEATURE-4-POSITIVE-01",
+            "feature": "altered-consciousness",
+            "positive": true,
+            "category": "feature-evaluation",
+            "description": "Feature 4 — level of consciousness anything other than alert — POSITIVE"
+          },
+          {
+            "id": "R-ALGORITHM-01",
+            "feature": "algorithm",
+            "positive": null,
+            "category": "algorithm-combiner",
+            "description": "1 AND 2 AND (3 OR 4) satisfied — delirium present"
+          }
+        ]
+      }
+    },
+    {
+      "name": "delirium-absent",
+      "description": "Alert, attentive, coherent, no acute change from baseline — CAM algorithm not satisfied: delirium absent.",
+      "state": {
+        "context": {
+          "assessorName": "",
+          "assessorRole": "nurse",
+          "assessedAt": "",
+          "wardUnit": "elderly-care-ward",
+          "camVariant": "cam"
+        },
+        "identification": {
+          "patientIdentifier": "",
+          "ageBand": "60-79",
+          "sex": "male",
+          "cognitiveBaseline": "independent",
+          "collateralSource": "notes"
+        },
+        "feature1": {
+          "acuteOnsetFluctuating": "absent",
+          "onsetTiming": "unknown"
+        },
+        "feature2": {
+          "inattention": "absent",
+          "attentionTest": "digit-span"
+        },
+        "feature3": {
+          "disorganisedThinking": "absent"
+        },
+        "feature4": {
+          "alteredConsciousness": "absent",
+          "consciousnessLevel": "alert",
+          "rassScore": 0
+        },
+        "observations": {
+          "motoricSubtype": "normal",
+          "hallucinations": false,
+          "delusions": false,
+          "sleepWakeDisturbance": false,
+          "deliriogenicMedication": false,
+          "deliriogenicMedicationDetail": ""
+        },
+        "result": {
+          "suspectedPrecipitants": "",
+          "recommendedActions": "routine observation",
+          "clinicalNote": ""
+        }
+      },
+      "expected": {
+        "classification": "absent",
+        "deliriumPresent": false,
+        "positiveFeatures": [],
+        "feature1Positive": false,
+        "feature2Positive": false,
+        "feature3Positive": false,
+        "feature4Positive": false,
+        "motoricSubtype": "normal",
+        "firedRules": [
+          {
+            "id": "R-FEATURE-1-POSITIVE-01",
+            "feature": "acute-onset-fluctuating",
+            "positive": false,
+            "category": "feature-evaluation",
+            "description": "Feature 1 — acute change in mental status from baseline with a fluctuating course — negative"
+          },
+          {
+            "id": "R-FEATURE-2-POSITIVE-01",
+            "feature": "inattention",
+            "positive": false,
+            "category": "feature-evaluation",
+            "description": "Feature 2 — difficulty focusing attention, confirmed by a formal attention test — negative"
+          },
+          {
+            "id": "R-FEATURE-3-POSITIVE-01",
+            "feature": "disorganised-thinking",
+            "positive": false,
+            "category": "feature-evaluation",
+            "description": "Feature 3 — disorganised or incoherent thinking (rambling, illogical, unpredictable switching) — negative"
+          },
+          {
+            "id": "R-FEATURE-4-POSITIVE-01",
+            "feature": "altered-consciousness",
+            "positive": false,
+            "category": "feature-evaluation",
+            "description": "Feature 4 — level of consciousness anything other than alert — negative"
+          },
+          {
+            "id": "R-ALGORITHM-01",
+            "feature": "algorithm",
+            "positive": null,
+            "category": "algorithm-combiner",
+            "description": "1 AND 2 AND (3 OR 4) not satisfied — delirium absent"
+          }
+        ]
+      }
+    },
+    {
+      "name": "unable-to-assess",
+      "description": "Ventilated CAM-ICU patient, unrousable at RASS -5 — arousal gate blocks the algorithm: unable to assess.",
+      "state": {
+        "context": {
+          "assessorName": "",
+          "assessorRole": "doctor",
+          "assessedAt": "",
+          "wardUnit": "intensive-care-unit",
+          "camVariant": "cam-icu"
+        },
+        "identification": {
+          "patientIdentifier": "",
+          "ageBand": "40-59",
+          "sex": "male",
+          "cognitiveBaseline": "unknown",
+          "collateralSource": "none"
+        },
+        "feature1": {
+          "acuteOnsetFluctuating": "",
+          "onsetTiming": ""
+        },
+        "feature2": {
+          "inattention": "",
+          "attentionTest": "not-completable"
+        },
+        "feature3": {
+          "disorganisedThinking": ""
+        },
+        "feature4": {
+          "alteredConsciousness": "present",
+          "consciousnessLevel": "coma",
+          "rassScore": -5
+        },
+        "observations": {
+          "motoricSubtype": "",
+          "hallucinations": false,
+          "delusions": false,
+          "sleepWakeDisturbance": false,
+          "deliriogenicMedication": true,
+          "deliriogenicMedicationDetail": "sedation with propofol and fentanyl"
+        },
+        "result": {
+          "suspectedPrecipitants": "deep sedation",
+          "recommendedActions": "reassess when RASS improves to -3 or above",
+          "clinicalNote": ""
+        }
+      },
+      "expected": {
+        "classification": "unable-to-assess",
+        "deliriumPresent": null,
+        "positiveFeatures": [],
+        "feature1Positive": null,
+        "feature2Positive": null,
+        "feature3Positive": null,
+        "feature4Positive": null,
+        "motoricSubtype": "",
+        "firedRules": [
+          {
+            "id": "R-AROUSAL-GATE-01",
+            "feature": "arousal",
+            "positive": null,
+            "category": "arousal-gate",
+            "description": "CAM-ICU RASS -5 (unrousable) — cannot assess; classification unable-to-assess"
+          }
+        ]
+      }
+    }
+  ]
+}

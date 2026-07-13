@@ -1,0 +1,378 @@
+{
+  "engine": "front-end-with-html",
+  "graderHint": "calculateASRS",
+  "note": "Realistic filled-in states in the ADHD engine's shape. Graded by calculateASRS (Adult ADHD Self-Report Scale v1.1; Part A screener + 18-item total, 0-4 each — deterministic). `expected` is computed by `bin/test-personas --update` and verified by `bin/test-personas`.",
+  "personas": [
+    {
+      "name": "unlikely",
+      "description": "Rare inattentive or hyperactive symptoms, Part A screener negative: ADHD unlikely.",
+      "state": {
+        "demographics": {
+          "firstName": "",
+          "lastName": "",
+          "dateOfBirth": "",
+          "sex": "male",
+          "occupation": "",
+          "educationLevel": ""
+        },
+        "asrsPartA": {
+          "focusDifficulty": 1,
+          "organizationDifficulty": 0,
+          "rememberingDifficulty": 1,
+          "avoidingTasks": 0,
+          "fidgeting": 1,
+          "overlyActive": 0
+        },
+        "asrsPartB": {
+          "carelessMistakes": 1,
+          "attentionDifficulty": 0,
+          "concentrationDifficulty": 1,
+          "misplacingThings": 0,
+          "distractedByNoise": 1,
+          "leavingSeat": 0,
+          "restlessness": 0,
+          "difficultyRelaxing": 1,
+          "talkingTooMuch": 0,
+          "finishingSentences": 0,
+          "difficultyWaiting": 0,
+          "interruptingOthers": 0
+        },
+        "childhoodHistory": {
+          "childhoodSymptoms": "",
+          "childhoodSymptomsDetails": "",
+          "schoolPerformance": "",
+          "behaviouralReports": "",
+          "behaviouralReportsDetails": "",
+          "onsetBeforeAge12": "no"
+        },
+        "functionalImpact": {
+          "workAcademicImpact": "",
+          "relationshipImpact": "",
+          "dailyLivingImpact": "",
+          "financialManagementImpact": "",
+          "timeManagementImpact": ""
+        },
+        "comorbidConditions": {
+          "anxiety": "",
+          "anxietyDetails": "",
+          "depression": "",
+          "depressionDetails": "",
+          "substanceUse": "",
+          "substanceUseDetails": "",
+          "sleepDisorders": "",
+          "sleepDisordersDetails": "",
+          "learningDisabilities": "",
+          "learningDisabilitiesDetails": "",
+          "autismSpectrum": "",
+          "autismSpectrumDetails": ""
+        },
+        "medications": [],
+        "allergies": [],
+        "medicalHistory": {
+          "cardiovascularIssues": "",
+          "cardiovascularDetails": "",
+          "seizureHistory": "",
+          "seizureDetails": "",
+          "ticDisorder": "",
+          "ticDetails": "",
+          "thyroidDisease": "",
+          "thyroidDetails": "",
+          "headInjuries": "",
+          "headInjuryDetails": ""
+        },
+        "socialSupport": {
+          "familyHistoryADHD": "",
+          "familyHistoryDetails": "",
+          "supportSystems": "",
+          "copingStrategies": "",
+          "previousAssessments": "",
+          "previousAssessmentDetails": "",
+          "previousDiagnosis": "",
+          "previousDiagnosisDetails": ""
+        }
+      },
+      "expected": {
+        "asrsTotal": 7,
+        "partAScore": 3,
+        "partBScore": 4,
+        "inattentiveSubscore": 5,
+        "hyperactiveImpulsiveSubscore": 2,
+        "partAScreenerPositive": false,
+        "shadedCount": 0,
+        "classification": "unlikely",
+        "subtype": "unspecified",
+        "firedRules": []
+      }
+    },
+    {
+      "name": "possible",
+      "description": "Part A screener positive (shaded items) with a moderate total and childhood onset: ADHD possible.",
+      "state": {
+        "demographics": {
+          "firstName": "",
+          "lastName": "",
+          "dateOfBirth": "",
+          "sex": "female",
+          "occupation": "",
+          "educationLevel": ""
+        },
+        "asrsPartA": {
+          "focusDifficulty": 2,
+          "organizationDifficulty": 2,
+          "rememberingDifficulty": 2,
+          "avoidingTasks": 3,
+          "fidgeting": 3,
+          "overlyActive": 3
+        },
+        "asrsPartB": {
+          "carelessMistakes": 1,
+          "attentionDifficulty": 1,
+          "concentrationDifficulty": 1,
+          "misplacingThings": 1,
+          "distractedByNoise": 1,
+          "leavingSeat": 1,
+          "restlessness": 1,
+          "difficultyRelaxing": 1,
+          "talkingTooMuch": 1,
+          "finishingSentences": 1,
+          "difficultyWaiting": 0,
+          "interruptingOthers": 0
+        },
+        "childhoodHistory": {
+          "childhoodSymptoms": "yes",
+          "childhoodSymptomsDetails": "",
+          "schoolPerformance": "",
+          "behaviouralReports": "",
+          "behaviouralReportsDetails": "",
+          "onsetBeforeAge12": "yes"
+        },
+        "functionalImpact": {
+          "workAcademicImpact": "moderate",
+          "relationshipImpact": "",
+          "dailyLivingImpact": "",
+          "financialManagementImpact": "",
+          "timeManagementImpact": ""
+        },
+        "comorbidConditions": {
+          "anxiety": "",
+          "anxietyDetails": "",
+          "depression": "",
+          "depressionDetails": "",
+          "substanceUse": "",
+          "substanceUseDetails": "",
+          "sleepDisorders": "",
+          "sleepDisordersDetails": "",
+          "learningDisabilities": "",
+          "learningDisabilitiesDetails": "",
+          "autismSpectrum": "",
+          "autismSpectrumDetails": ""
+        },
+        "medications": [],
+        "allergies": [],
+        "medicalHistory": {
+          "cardiovascularIssues": "",
+          "cardiovascularDetails": "",
+          "seizureHistory": "",
+          "seizureDetails": "",
+          "ticDisorder": "",
+          "ticDetails": "",
+          "thyroidDisease": "",
+          "thyroidDetails": "",
+          "headInjuries": "",
+          "headInjuryDetails": ""
+        },
+        "socialSupport": {
+          "familyHistoryADHD": "",
+          "familyHistoryDetails": "",
+          "supportSystems": "",
+          "copingStrategies": "",
+          "previousAssessments": "",
+          "previousAssessmentDetails": "",
+          "previousDiagnosis": "",
+          "previousDiagnosisDetails": ""
+        }
+      },
+      "expected": {
+        "asrsTotal": 25,
+        "partAScore": 15,
+        "partBScore": 10,
+        "inattentiveSubscore": 11,
+        "hyperactiveImpulsiveSubscore": 14,
+        "partAScreenerPositive": true,
+        "shadedCount": 6,
+        "classification": "possible",
+        "subtype": "hyperactive-impulsive",
+        "firedRules": [
+          {
+            "id": "ASRS-PA-001",
+            "domain": "Part A Screener",
+            "description": "Part A screener positive (4+ items in shaded range)",
+            "classification": "likely"
+          },
+          {
+            "id": "ASRS-HI-002",
+            "domain": "Hyperactive-Impulsive",
+            "description": "Moderate hyperactive-impulsive symptom frequency (hyperactive subscore 14-19)",
+            "classification": "possible"
+          },
+          {
+            "id": "ASRS-TOT-003",
+            "domain": "Total Score",
+            "description": "ASRS total score mildly elevated (24-27 of 72)",
+            "classification": "possible"
+          },
+          {
+            "id": "ASRS-CH-001",
+            "domain": "Childhood History",
+            "description": "Childhood symptoms confirmed with onset before age 12",
+            "classification": "likely"
+          }
+        ]
+      }
+    },
+    {
+      "name": "highly-likely",
+      "description": "Very frequent symptoms across all items with childhood onset and functional impairment: ADHD highly likely, combined presentation.",
+      "state": {
+        "demographics": {
+          "firstName": "",
+          "lastName": "",
+          "dateOfBirth": "",
+          "sex": "male",
+          "occupation": "",
+          "educationLevel": ""
+        },
+        "asrsPartA": {
+          "focusDifficulty": 4,
+          "organizationDifficulty": 4,
+          "rememberingDifficulty": 4,
+          "avoidingTasks": 4,
+          "fidgeting": 4,
+          "overlyActive": 4
+        },
+        "asrsPartB": {
+          "carelessMistakes": 3,
+          "attentionDifficulty": 3,
+          "concentrationDifficulty": 3,
+          "misplacingThings": 3,
+          "distractedByNoise": 3,
+          "leavingSeat": 3,
+          "restlessness": 3,
+          "difficultyRelaxing": 3,
+          "talkingTooMuch": 3,
+          "finishingSentences": 3,
+          "difficultyWaiting": 3,
+          "interruptingOthers": 3
+        },
+        "childhoodHistory": {
+          "childhoodSymptoms": "yes",
+          "childhoodSymptomsDetails": "",
+          "schoolPerformance": "",
+          "behaviouralReports": "",
+          "behaviouralReportsDetails": "",
+          "onsetBeforeAge12": "yes"
+        },
+        "functionalImpact": {
+          "workAcademicImpact": "severe",
+          "relationshipImpact": "severe",
+          "dailyLivingImpact": "",
+          "financialManagementImpact": "",
+          "timeManagementImpact": ""
+        },
+        "comorbidConditions": {
+          "anxiety": "yes",
+          "anxietyDetails": "",
+          "depression": "",
+          "depressionDetails": "",
+          "substanceUse": "",
+          "substanceUseDetails": "",
+          "sleepDisorders": "",
+          "sleepDisordersDetails": "",
+          "learningDisabilities": "",
+          "learningDisabilitiesDetails": "",
+          "autismSpectrum": "",
+          "autismSpectrumDetails": ""
+        },
+        "medications": [],
+        "allergies": [],
+        "medicalHistory": {
+          "cardiovascularIssues": "",
+          "cardiovascularDetails": "",
+          "seizureHistory": "",
+          "seizureDetails": "",
+          "ticDisorder": "",
+          "ticDetails": "",
+          "thyroidDisease": "",
+          "thyroidDetails": "",
+          "headInjuries": "",
+          "headInjuryDetails": ""
+        },
+        "socialSupport": {
+          "familyHistoryADHD": "",
+          "familyHistoryDetails": "",
+          "supportSystems": "",
+          "copingStrategies": "",
+          "previousAssessments": "",
+          "previousAssessmentDetails": "",
+          "previousDiagnosis": "",
+          "previousDiagnosisDetails": ""
+        }
+      },
+      "expected": {
+        "asrsTotal": 60,
+        "partAScore": 24,
+        "partBScore": 36,
+        "inattentiveSubscore": 27,
+        "hyperactiveImpulsiveSubscore": 33,
+        "partAScreenerPositive": true,
+        "shadedCount": 6,
+        "classification": "highly-likely",
+        "subtype": "combined",
+        "firedRules": [
+          {
+            "id": "ASRS-PA-001",
+            "domain": "Part A Screener",
+            "description": "Part A screener positive (4+ items in shaded range)",
+            "classification": "likely"
+          },
+          {
+            "id": "ASRS-IN-001",
+            "domain": "Inattentive",
+            "description": "High inattentive symptom frequency (Part A Q1-3 + Part B Q7-11 total >= 20)",
+            "classification": "likely"
+          },
+          {
+            "id": "ASRS-HI-001",
+            "domain": "Hyperactive-Impulsive",
+            "description": "High hyperactive-impulsive symptom frequency (Part A Q4-6 + Part B Q12-18 total >= 20)",
+            "classification": "likely"
+          },
+          {
+            "id": "ASRS-TOT-001",
+            "domain": "Total Score",
+            "description": "ASRS total score highly elevated (>= 46 of 72)",
+            "classification": "highly-likely"
+          },
+          {
+            "id": "ASRS-CH-001",
+            "domain": "Childhood History",
+            "description": "Childhood symptoms confirmed with onset before age 12",
+            "classification": "likely"
+          },
+          {
+            "id": "ASRS-FI-001",
+            "domain": "Functional Impact",
+            "description": "Severe functional impairment in 2+ domains",
+            "classification": "likely"
+          },
+          {
+            "id": "ASRS-FI-002",
+            "domain": "Functional Impact",
+            "description": "Moderate functional impairment in 2+ domains",
+            "classification": "possible"
+          }
+        ]
+      }
+    }
+  ]
+}
