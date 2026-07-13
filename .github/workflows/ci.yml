@@ -44,7 +44,11 @@ jobs:
           python3 bin/fhir-r5/generate-fhir-r5-representations.py
           python3 bin/protobuf/generate-protobuf-representations.py
           python3 bin/openapi/generate-openapi-representations.py
+          python3 bin/openapi/generate-openapi-combined.py
           python3 bin/back-end-with-loco/generate-back-end-with-loco-setup.py
+
+      - name: Combined OpenAPI spec is current
+        run: python3 bin/openapi/generate-openapi-combined.py --check
 
       - name: forms.tsv is current
         run: python3 bin/generate-forms-tsv.py --check
@@ -126,7 +130,7 @@ jobs:
           from openapi_spec_validator import validate
           from openapi_spec_validator.readers import read_from_filename
           bad = []
-          for f in sorted(glob.glob("forms/*/openapi/*.yaml")):
+          for f in sorted(glob.glob("forms/*/openapi/**/*.yaml", recursive=True)):
               try:
                   spec, _ = read_from_filename(f)
                   validate(spec)

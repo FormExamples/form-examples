@@ -267,6 +267,14 @@ Design each feature on the reference forms
       crates without a users.yaml never call seed — genuinely fine.)
 - [ ] **Loco API integration test rollout** (per crate) once the two findings
       above are resolved — the apgar template is the pattern.
+- [x] **Combined OpenAPI spec per form** (the first half of "serve OpenAPI"):
+      `bin/openapi/generate-openapi-combined.py [--check]` merges each form's
+      per-entity `openapi/*.yaml` into one `openapi/combined/openapi.yaml`
+      (union of paths + component schemas, form-level info). Written to a
+      `combined/` subdir so the per-entity generator's non-recursive dir
+      cleanup never touches it. All 286 validate; wired into the CI drift
+      regenerate + `--check` + recursive OpenAPI validation. Useful directly
+      for Swagger UI / client codegen.
 - [ ] **Serve OpenAPI**: static route in each crate serving its
       `openapi/*.yaml` at `/api/openapi.yaml`.
 - [i] **Svelte build audit (2026-07-13): CLEAN.** Sampled `npm run build`

@@ -2,7 +2,7 @@
 
 Auto-generated from each tool's source header by `bin/generate-tools-doc.py` — do not hand-edit. Run the generator after adding or re-documenting a tool.
 
-45 tools.
+46 tools.
 
 - [`bin/clean`](#clean)
 - [`bin/consolidate-front-end-html`](#consolidate-front-end-html)
@@ -43,6 +43,7 @@ Auto-generated from each tool's source header by `bin/generate-tools-doc.py` —
 - [`bin/update`](#update)
 - [`bin/update-group-b-plans.py`](#update-group-b-planspy)
 - [`bin/protobuf/generate-protobuf-representations.py`](#protobufgenerate-protobuf-representationspy)
+- [`bin/openapi/generate-openapi-combined.py`](#openapigenerate-openapi-combinedpy)
 - [`bin/openapi/generate-openapi-representations.py`](#openapigenerate-openapi-representationspy)
 - [`bin/back-end-with-loco/generate-back-end-with-loco-setup.py`](#back-end-with-locogenerate-back-end-with-loco-setuppy)
 - [`bin/back-end-with-loco/generate-loco-agents.py`](#back-end-with-locogenerate-loco-agentspy)
@@ -677,6 +678,26 @@ Conventions documented in AGENTS/protobuf.md:
     message (mirrors the FHIR R5 and XML generators).
   - SQL CHECK (... IN (...)) constraints become proto enums with a
     leading _UNSPECIFIED = 0 value.
+```
+
+<h2 id="openapigenerate-openapi-combinedpy"><code>bin/openapi/generate-openapi-combined.py</code></h2>
+
+```text
+bin/openapi/generate-openapi-combined.py — one combined OpenAPI spec per form.
+
+The per-entity OpenAPI files (generate-openapi-representations.py) each describe
+a single table. API consumers (Swagger UI, client codegen) want ONE document
+per form, so this merges every `forms/<slug>/openapi/*.yaml` into a single
+`forms/<slug>/openapi/openapi.yaml` — the union of their `paths` and
+`components.schemas`, under a form-level `info` block. Paths and schema names do
+not collide across a form's entities, so the union is unambiguous.
+
+Generated artefact: do not hand-edit. Idempotent.
+
+Usage:
+  bin/openapi/generate-openapi-combined.py          # every form
+  bin/openapi/generate-openapi-combined.py <slug>…  # only named forms
+  bin/openapi/generate-openapi-combined.py --check  # exit non-zero if stale
 ```
 
 <h2 id="openapigenerate-openapi-representationspy"><code>bin/openapi/generate-openapi-representations.py</code></h2>
