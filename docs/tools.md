@@ -2,7 +2,7 @@
 
 Auto-generated from each tool's source header by `bin/generate-tools-doc.py` — do not hand-edit. Run the generator after adding or re-documenting a tool.
 
-44 tools.
+45 tools.
 
 - [`bin/clean`](#clean)
 - [`bin/consolidate-front-end-html`](#consolidate-front-end-html)
@@ -45,6 +45,7 @@ Auto-generated from each tool's source header by `bin/generate-tools-doc.py` —
 - [`bin/protobuf/generate-protobuf-representations.py`](#protobufgenerate-protobuf-representationspy)
 - [`bin/openapi/generate-openapi-representations.py`](#openapigenerate-openapi-representationspy)
 - [`bin/back-end-with-loco/generate-back-end-with-loco-setup.py`](#back-end-with-locogenerate-back-end-with-loco-setuppy)
+- [`bin/back-end-with-loco/generate-loco-agents.py`](#back-end-with-locogenerate-loco-agentspy)
 - [`bin/back-end-with-loco/generate-rust-docs.py`](#back-end-with-locogenerate-rust-docspy)
 - [`bin/sql/generate-sql-combined.py`](#sqlgenerate-sql-combinedpy)
 - [`bin/sql/generate-sql-comments.py`](#sqlgenerate-sql-commentspy)
@@ -721,6 +722,27 @@ Loco field-type syntax:
 - Suffix `!` marks NOT NULL, suffix `^` marks UNIQUE, no suffix means nullable.
 - `id`, `created_at`, `updated_at` are added automatically by Loco and are
   therefore skipped here.
+```
+
+<h2 id="back-end-with-locogenerate-loco-agentspy"><code>bin/back-end-with-loco/generate-loco-agents.py</code></h2>
+
+```text
+bin/back-end-with-loco/generate-loco-agents.py — back-end AGENTS.md docs.
+
+Regenerate a form's back-end-with-loco/AGENTS.md to describe the crate as it
+actually is: a Loco JSON API with a RESTful scaffold controller per domain
+table (the relational per-table design), nested under src/<snake>/.
+
+Historically many of these docs described an obsolete design — a single
+`assessments` table with a JSONB `data` column and an `/api/assessments`
+controller. That design no longer exists; this generator replaces such stale
+docs with an accurate description derived from the crate's real controllers.
+
+Usage:
+  bin/back-end-with-loco/generate-loco-agents.py <slug> ...   # named forms
+  bin/back-end-with-loco/generate-loco-agents.py --stale       # every crate
+                                                               # with stale docs
+  bin/back-end-with-loco/generate-loco-agents.py --list-stale  # just list them
 ```
 
 <h2 id="back-end-with-locogenerate-rust-docspy"><code>bin/back-end-with-loco/generate-rust-docs.py</code></h2>

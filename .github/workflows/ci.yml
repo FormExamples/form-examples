@@ -73,6 +73,9 @@ jobs:
       - name: Every Loco crate exposes its domain API
         run: bin/test-loco-routes
 
+      - name: Back-end AGENTS.md are not stale
+        run: test -z "$(bin/back-end-with-loco/generate-loco-agents.py --list-stale)"
+
       - name: Authored personas match engine output
         run: bin/test-personas
 

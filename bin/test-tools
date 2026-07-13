@@ -109,6 +109,12 @@ else
     red "test-loco-routes (a crate wires only auth — see /tmp/test-tools-loco-routes.log)"
 fi
 
+if [ -z "$(bin/back-end-with-loco/generate-loco-agents.py --list-stale 2>/dev/null)" ]; then
+    green "back-end AGENTS.md: no stale JSONB single-table docs"
+else
+    red "back-end AGENTS.md stale — run bin/back-end-with-loco/generate-loco-agents.py --stale"
+fi
+
 # ---------------------------------------------------------------------------
 # 3. Conformance tracker reports the expected milestone.
 # ---------------------------------------------------------------------------

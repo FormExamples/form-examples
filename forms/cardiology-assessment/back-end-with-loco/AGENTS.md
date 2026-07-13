@@ -6,59 +6,39 @@ Alpine.js, no CSS, no Lily Design System.**
 
 @../../../AGENTS/back-end-with-loco.md
 
-## Project structure
+## Layout
 
-```
-back-end-with-loco/
-  Cargo.toml
-  src/
-    bin/main.rs               # Entry point
-    lib.rs                    # Module declarations
-    app.rs                    # Loco App impl, route registration
-    controllers/
-      assessment.rs           # JSON CRUD on /api/assessments
-      dashboard.rs            # JSON list on /api/dashboard
-    engine/                   # Form-specific scoring/grading engine
-    models/                   # SeaORM entities + domain logic
-  config/                     # Loco YAML configs (dev / test / production)
-  migration/                  # SeaORM migration crate
-  tests/                      # Engine + JSON API integration tests
-```
-
-There is no `templates/`, no `assets/`, no `src/views/`. The Cargo
-manifest does not depend on `tera`.
+- [`cardiology_assessment/`](./cardiology_assessment/) — the Loco crate: `src/cardiology_assessment/` holds `app.rs`
+  (route registration), `controllers/`, `models/`, `bin/main.rs`; alongside
+  `migration/`, `config/` (dev / test / production YAML), and `tests/`.
+- **Relational per-table schema** mirroring [`../sql/`](../sql/): one SeaORM
+  model and one RESTful scaffold controller per SQL table — patients,
+  clinicians, the form's own tables, and (where the form is scored) the
+  grade / grade_rule / grade_flag tables. There is no single JSONB blob table.
 
 ## JSON API
 
-| Method | Route                          | Purpose                                                  |
-| ------ | ------------------------------ | -------------------------------------------------------- |
-| GET    | `/api/assessments`             | List assessments (most recent first)                     |
-| POST   | `/api/assessments`             | Create a new draft assessment                            |
-| GET    | `/api/assessments/{id}`        | Return the assessment record                             |
-| PATCH  | `/api/assessments/{id}`        | Merge a partial JSON body into the `data` JSONB column   |
-| POST   | `/api/assessments/{id}/submit` | Mark as completed and return the record                  |
-| GET    | `/api/assessments/{id}/result` | Return the stored grading result                         |
-| GET    | `/api/dashboard`               | List completed assessments (`?status=`, `?limit=`)       |
-| GET    | `/metrics`                     | Prometheus text-format scrape endpoint                   |
+A RESTful JSON resource is served per domain table under `/api/…`, each
+supporting list (`GET`), create (`POST`), and `GET` / `PUT` / `PATCH` /
+`DELETE` by id. All bodies are `application/json` with camelCase keys via
+`serde(rename_all = "camelCase")`. Prometheus metrics are exposed at
+`/metrics`. The registered domain controllers are:
 
-All request and response bodies are `application/json` with camelCase
-keys via `serde(rename_all = "camelCase")`.
+  - `assessment`
+  - `clinician`
+  - `grade`
+  - `grading_additional_flag`
+  - `grading_fired_rule`
+  - `patient`
 
 ## Engine
 
-The `src/engine/` module holds the form-specific scoring engine
-(`types.rs`, plus a grader / calculator + rules files, and
-`flagged_issues.rs`). The engine is exercised by `cargo test` and is
-the contract that the per-form `spec.md` describes.
+`src/cardiology_assessment/` also carries the form-specific scoring engine (types + a grader
+/ calculator + rules + flagged-issues), exercised by `cargo test` and matching
+the front-end engine and the form's `spec/`.
 
-## Database
-
-Single `assessments` table with JSONB `data` and `result` columns and
-UUIDv4 primary keys. Loco-managed columns (`id`, `created_at`,
-`updated_at`) come from SeaORM scaffolds.
-
-## Tests
+## Verify
 
 ```sh
-cargo test
+cd cardiology_assessment && cargo check --all-targets && cargo test
 ```
