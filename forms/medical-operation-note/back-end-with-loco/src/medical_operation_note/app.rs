@@ -50,7 +50,21 @@ impl Hooks for App {
     }
 
     fn routes(_ctx: &AppContext) -> AppRoutes {
-        AppRoutes::with_default_routes().add_route(crate::controllers::auth::routes())
+        AppRoutes::with_default_routes()
+            .add_route(crate::controllers::medical_operation_note_grade_flag::routes())
+            .add_route(crate::controllers::medical_operation_note_grade_rule::routes())
+            .add_route(crate::controllers::medical_operation_note_grade::routes())
+            .add_route(crate::controllers::medical_operation_note_team_member::routes())
+            .add_route(crate::controllers::medical_operation_note_procedure::routes())
+            .add_route(crate::controllers::medical_operation_note_step::routes())
+            .add_route(crate::controllers::medical_operation_note_specimen::routes())
+            .add_route(crate::controllers::medical_operation_note_complication::routes())
+            .add_route(crate::controllers::medical_operation_note_implant::routes())
+            .add_route(crate::controllers::medical_operation_note_drain::routes())
+            .add_route(crate::controllers::medical_operation_note::routes())
+            .add_route(crate::controllers::clinician::routes())
+            .add_route(crate::controllers::patient::routes())
+            .add_route(crate::controllers::auth::routes())
     }
 
     async fn connect_workers(_ctx: &AppContext, _queue: &Queue) -> Result<()> {

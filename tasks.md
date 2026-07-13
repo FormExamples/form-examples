@@ -170,6 +170,13 @@ Design each feature on the reference forms
       + a11y all pass.
 - [ ] **Loco seed data**: per-crate seeder loading `examples/` typical
       fixture; document `cargo loco db seed` (or task equivalent).
+- [~] **Fixing a real back-end bug found by audit:** `medical-operation-note`
+      — the crate the notes call the "gold reference" — was the ONLY crate of
+      286 missing its domain HTTP controllers (its `controllers/` had just
+      `auth.rs`; `app.rs routes()` wired only `auth`, vs 2–23 domain routes in
+      every other crate). Its API exposed no domain entities. Generating the
+      per-model controllers + wiring routes (mirroring apgar/stroke), verified
+      by `cargo check`.
 - [ ] **Loco API integration test**: POST fixture → GET back → assert
       round-trip, per crate (template test, mechanical rollout).
 - [ ] **Serve OpenAPI**: static route in each crate serving its
