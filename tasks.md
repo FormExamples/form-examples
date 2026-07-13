@@ -258,10 +258,21 @@ personas. Once the oracle exists, persona scaffolding + fill is mechanical
       pin. Their `expected` cannot be reproduced. Worth a follow-up: refactor
       those graders to take an injected clock / split the timestamp out, so
       they become testable.
-- [ ] Continue persona batches for the remaining ~170 scorable forms
+- [x] **80 forms** now have verified personas (`bin/test-personas` PASS 80 /
+      FAIL 0, deterministic across the full corpus). Rounds: 9 reference + 35
+      + 18 (F,H) + 18 (E,G re-authored).
+- [ ] Continue persona batches for the remaining ~130 scorable forms
       (subagents on the proven rail; `spec/index.md` defines the bands).
       63 forms are `test-engines` SKIPs (ESM/inline/nonstandard) — those need
       a bespoke driver first.
+- [!] **Parallel-subagent hazard (lesson):** a leftover bulk-generator script
+      in the shared scratchpad was found + run by two concurrent persona
+      subagents; each script's "clean up my strays" `rm` deleted the OTHER
+      batches' legitimate files (18 lost, then re-authored). When fanning out
+      writers over a shared tree, instruct them to Write only their own target
+      paths, never delete another item's output, and never run a pre-existing
+      scratchpad script. Audit new-file counts against the dispatched set
+      before committing.
 - [ ] `example-invalid.json` per form + expected validation errors list;
       assert in the E2E harness (wizard blocks submission).
 - [ ] CSV and TSV export samples per form matching the typical persona
