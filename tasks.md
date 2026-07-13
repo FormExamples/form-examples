@@ -196,11 +196,30 @@ Design each feature on the reference forms
       and FHIR additionally emits a synthetic `grading_result`
       (ClinicalImpression) with no SQL table. No generator bug — integrity
       confirmed.
-- [~] **Loco API round-trip integration test** (template, in progress on
-      apgar-score): POST a domain entity to `/api/<table>/`, GET it back,
-      assert the round-trip — verifies the scaffold controllers actually
-      function (not just compile). Once the template + auth handling are
-      proven on one crate, roll out per crate.
+- [x] **Loco API round-trip integration test** (template DONE on apgar-score):
+      `tests/requests/patients.rs` POSTs a patient to `/api/patients`, asserts
+      200 + id, GETs `/api/patients/{id}`, asserts every field round-trips, and
+      confirms list membership. Verified against a real Postgres (1 passed).
+      Domain routes need NO auth. Ports to other crates by swapping the field
+      set per that crate's `Params`. Also fixed apgar's stale `Cargo.lock` and
+      dropped `--locked` from the CI rust job (lock hygiene isn't maintained
+      across all 286 crates; matches `bin/test-loco-project`).
+- [ ] **FINDING — API serves snake_case, not camelCase (283/286 crates).**
+      The scaffold `Params`/`_entities` models derive plain serde with NO
+      `rename_all = "camelCase"`, so the Loco JSON API emits snake_case keys —
+      contradicting the repo convention ("camelCase on structs shared with the
+      front-end") and the camelCase front-ends. A latent contract mismatch
+      (nothing currently wires the front-ends to the API). Fixing = add the
+      rename to 283 crates + regenerate + refresh insta snapshots + cargo
+      verify: a dedicated effort, not a quick sweep.
+- [ ] **FINDING — false-positive scaffold request tests (~1671 lines).** The
+      generated stub tests assert HTTP 200 on trailing-slash list routes
+      (`/api/<table>/`), which Loco routes to its welcome page (200) WITHOUT
+      reaching the handler — so they pass without testing anything. The real
+      handlers are at `/api/<table>` (no slash) and `/api/<table>/{id}`. Fix =
+      correct the scaffold test generation + regenerate; verify per crate.
+- [ ] **Loco API integration test rollout** (per crate) once the two findings
+      above are resolved — the apgar template is the pattern.
 - [ ] **Serve OpenAPI**: static route in each crate serving its
       `openapi/*.yaml` at `/api/openapi.yaml`.
 - [ ] **i18n pilot**: extract UI strings behind a minimal message layer in
