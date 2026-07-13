@@ -1,0 +1,304 @@
+{
+  "engine": "front-end-with-html",
+  "graderHint": "calculateGcsGrade",
+  "note": "Realistic filled-in states in the Glasgow Coma Scale scoring engine's shape. `expected` is computed by `bin/test-personas --update` and verified by `bin/test-personas`.",
+  "personas": [
+    {
+      "name": "mild-e4v5m6",
+      "description": "Fully alert, orientated, obeying commands with reactive pupils: GCS 15 (E4 V5 M6) — mild band, GCS-Pupils 15.",
+      "state": {
+        "context": {
+          "assessorName": "",
+          "assessorRole": "",
+          "assessedAt": "",
+          "setting": "",
+          "reason": ""
+        },
+        "confounders": {
+          "intubated": "no",
+          "sedated": "no",
+          "paralysed": "no"
+        },
+        "eye": {
+          "eyeResponse": "spontaneous",
+          "eyeNotTestableReason": ""
+        },
+        "verbal": {
+          "verbalResponse": "orientated",
+          "verbalNotTestableReason": ""
+        },
+        "motor": {
+          "motorResponse": "obeys-commands",
+          "motorNotTestableReason": ""
+        },
+        "pupils": {
+          "leftPupilReactivity": "reactive",
+          "rightPupilReactivity": "reactive",
+          "leftPupilSizeMm": 3,
+          "rightPupilSizeMm": 3
+        },
+        "trend": {
+          "previousTotal": null,
+          "previousMotorScore": null,
+          "previousAssessedAt": ""
+        },
+        "note": {
+          "clinicalNote": ""
+        }
+      },
+      "expected": {
+        "eyeScore": 4,
+        "verbalScore": 5,
+        "motorScore": 6,
+        "totalScore": 15,
+        "breakdown": "E4 V5 M6",
+        "totalDisplay": "15",
+        "severityBand": "mild",
+        "pupilReactivityScore": 0,
+        "gcsP": 15,
+        "firedRules": [
+          {
+            "id": "R-EYE-SPONTANEOUS-01",
+            "component": "eye",
+            "points": 4,
+            "category": "component-score",
+            "description": "4 — Spontaneous (eyes open without stimulation)"
+          },
+          {
+            "id": "R-VERBAL-ORIENTATED-01",
+            "component": "verbal",
+            "points": 5,
+            "category": "component-score",
+            "description": "5 — Orientated (states name, place, and date)"
+          },
+          {
+            "id": "R-MOTOR-OBEYS-COMMANDS-01",
+            "component": "motor",
+            "points": 6,
+            "category": "component-score",
+            "description": "6 — Obeys commands (performs a two-part request)"
+          },
+          {
+            "id": "R-TOTAL-BAND-MILD-01",
+            "component": "total",
+            "points": 15,
+            "category": "severity-band",
+            "description": "Total GCS 15 — Mild impairment — normal-to-drowsy"
+          },
+          {
+            "id": "R-PUPIL-REACTIVITY-01",
+            "component": "pupils",
+            "points": 0,
+            "category": "pupil-reactivity",
+            "description": "Pupil Reactivity Score 0 (pupils unreactive to light)"
+          },
+          {
+            "id": "R-GCS-P-01",
+            "component": "gcs-p",
+            "points": 15,
+            "category": "gcs-pupils",
+            "description": "GCS-Pupils = total 15 − PRS 0 = 15"
+          }
+        ]
+      }
+    },
+    {
+      "name": "moderate-e3v4m5",
+      "description": "Opens eyes to sound, confused speech, localising to pain with reactive pupils: GCS 12 (E3 V4 M5) — moderate band, GCS-Pupils 12.",
+      "state": {
+        "context": {
+          "assessorName": "",
+          "assessorRole": "",
+          "assessedAt": "",
+          "setting": "",
+          "reason": ""
+        },
+        "confounders": {
+          "intubated": "no",
+          "sedated": "no",
+          "paralysed": "no"
+        },
+        "eye": {
+          "eyeResponse": "to-sound",
+          "eyeNotTestableReason": ""
+        },
+        "verbal": {
+          "verbalResponse": "confused",
+          "verbalNotTestableReason": ""
+        },
+        "motor": {
+          "motorResponse": "localising",
+          "motorNotTestableReason": ""
+        },
+        "pupils": {
+          "leftPupilReactivity": "reactive",
+          "rightPupilReactivity": "reactive",
+          "leftPupilSizeMm": 4,
+          "rightPupilSizeMm": 4
+        },
+        "trend": {
+          "previousTotal": null,
+          "previousMotorScore": null,
+          "previousAssessedAt": ""
+        },
+        "note": {
+          "clinicalNote": ""
+        }
+      },
+      "expected": {
+        "eyeScore": 3,
+        "verbalScore": 4,
+        "motorScore": 5,
+        "totalScore": 12,
+        "breakdown": "E3 V4 M5",
+        "totalDisplay": "12",
+        "severityBand": "moderate",
+        "pupilReactivityScore": 0,
+        "gcsP": 12,
+        "firedRules": [
+          {
+            "id": "R-EYE-TO-SOUND-01",
+            "component": "eye",
+            "points": 3,
+            "category": "component-score",
+            "description": "3 — To sound (opens to spoken/shouted request)"
+          },
+          {
+            "id": "R-VERBAL-CONFUSED-01",
+            "component": "verbal",
+            "points": 4,
+            "category": "component-score",
+            "description": "4 — Confused (converses but disorientated)"
+          },
+          {
+            "id": "R-MOTOR-LOCALISING-01",
+            "component": "motor",
+            "points": 5,
+            "category": "component-score",
+            "description": "5 — Localising (purposeful movement to stimulus)"
+          },
+          {
+            "id": "R-TOTAL-BAND-MODERATE-01",
+            "component": "total",
+            "points": 12,
+            "category": "severity-band",
+            "description": "Total GCS 12 — Moderate impairment"
+          },
+          {
+            "id": "R-PUPIL-REACTIVITY-01",
+            "component": "pupils",
+            "points": 0,
+            "category": "pupil-reactivity",
+            "description": "Pupil Reactivity Score 0 (pupils unreactive to light)"
+          },
+          {
+            "id": "R-GCS-P-01",
+            "component": "gcs-p",
+            "points": 12,
+            "category": "gcs-pupils",
+            "description": "GCS-Pupils = total 12 − PRS 0 = 12"
+          }
+        ]
+      }
+    },
+    {
+      "name": "severe-e1v1m2",
+      "description": "No eye opening, no verbal response, extensor posturing with one unreactive pupil: GCS 4 (E1 V1 M2) — severe band, airway at risk, GCS-Pupils 3.",
+      "state": {
+        "context": {
+          "assessorName": "",
+          "assessorRole": "",
+          "assessedAt": "",
+          "setting": "",
+          "reason": ""
+        },
+        "confounders": {
+          "intubated": "no",
+          "sedated": "no",
+          "paralysed": "no"
+        },
+        "eye": {
+          "eyeResponse": "none",
+          "eyeNotTestableReason": ""
+        },
+        "verbal": {
+          "verbalResponse": "none",
+          "verbalNotTestableReason": ""
+        },
+        "motor": {
+          "motorResponse": "extension",
+          "motorNotTestableReason": ""
+        },
+        "pupils": {
+          "leftPupilReactivity": "unreactive",
+          "rightPupilReactivity": "reactive",
+          "leftPupilSizeMm": 5,
+          "rightPupilSizeMm": 3
+        },
+        "trend": {
+          "previousTotal": null,
+          "previousMotorScore": null,
+          "previousAssessedAt": ""
+        },
+        "note": {
+          "clinicalNote": ""
+        }
+      },
+      "expected": {
+        "eyeScore": 1,
+        "verbalScore": 1,
+        "motorScore": 2,
+        "totalScore": 4,
+        "breakdown": "E1 V1 M2",
+        "totalDisplay": "4",
+        "severityBand": "severe",
+        "pupilReactivityScore": 1,
+        "gcsP": 3,
+        "firedRules": [
+          {
+            "id": "R-EYE-NONE-01",
+            "component": "eye",
+            "points": 1,
+            "category": "component-score",
+            "description": "1 — None (no eye opening to any stimulus)"
+          },
+          {
+            "id": "R-VERBAL-NONE-01",
+            "component": "verbal",
+            "points": 1,
+            "category": "component-score",
+            "description": "1 — None (no audible response)"
+          },
+          {
+            "id": "R-MOTOR-EXTENSION-01",
+            "component": "motor",
+            "points": 2,
+            "category": "component-score",
+            "description": "2 — Extension (decerebrate posturing)"
+          },
+          {
+            "id": "R-TOTAL-BAND-SEVERE-01",
+            "component": "total",
+            "points": 4,
+            "category": "severity-band",
+            "description": "Total GCS 4 — Severe impairment — coma; GCS <= 8 signals airway risk"
+          },
+          {
+            "id": "R-PUPIL-REACTIVITY-01",
+            "component": "pupils",
+            "points": 1,
+            "category": "pupil-reactivity",
+            "description": "Pupil Reactivity Score 1 (pupils unreactive to light)"
+          },
+          {
+            "id": "R-GCS-P-01",
+            "component": "gcs-p",
+            "points": 3,
+            "category": "gcs-pupils",
+            "description": "GCS-Pupils = total 4 − PRS 1 = 3"
+          }
+        ]
+      }
+    }
+  ]
+}

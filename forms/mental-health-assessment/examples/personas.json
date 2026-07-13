@@ -1,0 +1,409 @@
+{
+  "engine": "front-end-with-html",
+  "graderHint": "calculatePHQ9",
+  "note": "Realistic filled-in states in the mental-health scoring engine's shape. Graded on the PHQ-9 depression instrument (deterministic; the full gradeAssessment stamps a timestamp). `expected` is computed by `bin/test-personas --update` and verified by `bin/test-personas`.",
+  "personas": [
+    {
+      "name": "minimal-depression",
+      "description": "Occasional low interest and disturbed sleep only: PHQ-9 total 2 — minimal depression.",
+      "state": {
+        "demographics": {
+          "firstName": "",
+          "lastName": "",
+          "dateOfBirth": "",
+          "sex": "female",
+          "emergencyContactName": "",
+          "emergencyContactPhone": "",
+          "emergencyContactRelationship": ""
+        },
+        "phqResponses": {
+          "interest": 1,
+          "depression": 0,
+          "sleep": 1,
+          "energy": 0,
+          "appetite": 0,
+          "selfEsteem": 0,
+          "concentration": 0,
+          "psychomotor": 0,
+          "suicidalThoughts": 0
+        },
+        "gadResponses": {
+          "nervousness": 1,
+          "uncontrollableWorry": 0,
+          "excessiveWorry": 1,
+          "troubleRelaxing": 0,
+          "restlessness": 0,
+          "irritability": 0,
+          "fearfulness": 0
+        },
+        "moodAffect": {
+          "currentMood": "",
+          "sleepQuality": "",
+          "appetiteChanges": "",
+          "energyLevel": "",
+          "concentration": ""
+        },
+        "riskAssessment": {
+          "suicidalIdeation": "no",
+          "suicidalIdeationDetails": "",
+          "selfHarm": "no",
+          "selfHarmDetails": "",
+          "harmToOthers": "no",
+          "harmToOthersDetails": "",
+          "hasSafetyPlan": "",
+          "safetyPlanDetails": ""
+        },
+        "substanceUse": {
+          "alcoholFrequency": "",
+          "alcoholQuantity": "",
+          "bingeDrinking": "",
+          "drugUse": "",
+          "drugDetails": "",
+          "tobaccoUse": "",
+          "tobaccoDetails": ""
+        },
+        "currentMedications": {
+          "psychiatricMedications": [],
+          "otherMedications": []
+        },
+        "treatmentHistory": {
+          "previousTherapy": "",
+          "therapyDetails": "",
+          "previousHospitalizations": "",
+          "hospitalizationDetails": "",
+          "currentProviders": ""
+        },
+        "socialFunctional": {
+          "employmentStatus": "",
+          "relationshipStatus": "",
+          "housingStatus": "",
+          "supportSystem": "",
+          "functionalImpairment": "",
+          "additionalNotes": ""
+        }
+      },
+      "expected": {
+        "instrument": "PHQ-9",
+        "score": 2,
+        "maxScore": 27,
+        "severity": "minimal",
+        "label": "Minimal Depression (0-4)",
+        "itemScores": [
+          {
+            "id": "PHQ9-01",
+            "question": "Little interest or pleasure in doing things",
+            "score": 1
+          },
+          {
+            "id": "PHQ9-02",
+            "question": "Feeling down, depressed, or hopeless",
+            "score": 0
+          },
+          {
+            "id": "PHQ9-03",
+            "question": "Trouble falling or staying asleep, or sleeping too much",
+            "score": 1
+          },
+          {
+            "id": "PHQ9-04",
+            "question": "Feeling tired or having little energy",
+            "score": 0
+          },
+          {
+            "id": "PHQ9-05",
+            "question": "Poor appetite or overeating",
+            "score": 0
+          },
+          {
+            "id": "PHQ9-06",
+            "question": "Feeling bad about yourself, or that you are a failure, or have let yourself or your family down",
+            "score": 0
+          },
+          {
+            "id": "PHQ9-07",
+            "question": "Trouble concentrating on things, such as reading the newspaper or watching television",
+            "score": 0
+          },
+          {
+            "id": "PHQ9-08",
+            "question": "Moving or speaking so slowly that other people could have noticed, or the opposite — being so fidgety or restless",
+            "score": 0
+          },
+          {
+            "id": "PHQ9-09",
+            "question": "Thoughts that you would be better off dead, or of hurting yourself in some way",
+            "score": 0
+          }
+        ]
+      }
+    },
+    {
+      "name": "moderate-depression",
+      "description": "Most-days low mood, anhedonia, poor sleep and low energy: PHQ-9 total 11 — moderate depression.",
+      "state": {
+        "demographics": {
+          "firstName": "",
+          "lastName": "",
+          "dateOfBirth": "",
+          "sex": "male",
+          "emergencyContactName": "",
+          "emergencyContactPhone": "",
+          "emergencyContactRelationship": ""
+        },
+        "phqResponses": {
+          "interest": 2,
+          "depression": 2,
+          "sleep": 2,
+          "energy": 2,
+          "appetite": 1,
+          "selfEsteem": 1,
+          "concentration": 1,
+          "psychomotor": 0,
+          "suicidalThoughts": 0
+        },
+        "gadResponses": {
+          "nervousness": 2,
+          "uncontrollableWorry": 2,
+          "excessiveWorry": 1,
+          "troubleRelaxing": 1,
+          "restlessness": 1,
+          "irritability": 1,
+          "fearfulness": 0
+        },
+        "moodAffect": {
+          "currentMood": "",
+          "sleepQuality": "",
+          "appetiteChanges": "",
+          "energyLevel": "",
+          "concentration": ""
+        },
+        "riskAssessment": {
+          "suicidalIdeation": "no",
+          "suicidalIdeationDetails": "",
+          "selfHarm": "no",
+          "selfHarmDetails": "",
+          "harmToOthers": "no",
+          "harmToOthersDetails": "",
+          "hasSafetyPlan": "",
+          "safetyPlanDetails": ""
+        },
+        "substanceUse": {
+          "alcoholFrequency": "",
+          "alcoholQuantity": "",
+          "bingeDrinking": "",
+          "drugUse": "",
+          "drugDetails": "",
+          "tobaccoUse": "",
+          "tobaccoDetails": ""
+        },
+        "currentMedications": {
+          "psychiatricMedications": [],
+          "otherMedications": []
+        },
+        "treatmentHistory": {
+          "previousTherapy": "",
+          "therapyDetails": "",
+          "previousHospitalizations": "",
+          "hospitalizationDetails": "",
+          "currentProviders": ""
+        },
+        "socialFunctional": {
+          "employmentStatus": "",
+          "relationshipStatus": "",
+          "housingStatus": "",
+          "supportSystem": "",
+          "functionalImpairment": "",
+          "additionalNotes": ""
+        }
+      },
+      "expected": {
+        "instrument": "PHQ-9",
+        "score": 11,
+        "maxScore": 27,
+        "severity": "moderate",
+        "label": "Moderate Depression (10-14)",
+        "itemScores": [
+          {
+            "id": "PHQ9-01",
+            "question": "Little interest or pleasure in doing things",
+            "score": 2
+          },
+          {
+            "id": "PHQ9-02",
+            "question": "Feeling down, depressed, or hopeless",
+            "score": 2
+          },
+          {
+            "id": "PHQ9-03",
+            "question": "Trouble falling or staying asleep, or sleeping too much",
+            "score": 2
+          },
+          {
+            "id": "PHQ9-04",
+            "question": "Feeling tired or having little energy",
+            "score": 2
+          },
+          {
+            "id": "PHQ9-05",
+            "question": "Poor appetite or overeating",
+            "score": 1
+          },
+          {
+            "id": "PHQ9-06",
+            "question": "Feeling bad about yourself, or that you are a failure, or have let yourself or your family down",
+            "score": 1
+          },
+          {
+            "id": "PHQ9-07",
+            "question": "Trouble concentrating on things, such as reading the newspaper or watching television",
+            "score": 1
+          },
+          {
+            "id": "PHQ9-08",
+            "question": "Moving or speaking so slowly that other people could have noticed, or the opposite — being so fidgety or restless",
+            "score": 0
+          },
+          {
+            "id": "PHQ9-09",
+            "question": "Thoughts that you would be better off dead, or of hurting yourself in some way",
+            "score": 0
+          }
+        ]
+      }
+    },
+    {
+      "name": "severe-depression",
+      "description": "Nearly-every-day symptoms across most items with passive suicidal thoughts: PHQ-9 total 23 — severe depression.",
+      "state": {
+        "demographics": {
+          "firstName": "",
+          "lastName": "",
+          "dateOfBirth": "",
+          "sex": "female",
+          "emergencyContactName": "",
+          "emergencyContactPhone": "",
+          "emergencyContactRelationship": ""
+        },
+        "phqResponses": {
+          "interest": 3,
+          "depression": 3,
+          "sleep": 3,
+          "energy": 3,
+          "appetite": 3,
+          "selfEsteem": 3,
+          "concentration": 2,
+          "psychomotor": 1,
+          "suicidalThoughts": 2
+        },
+        "gadResponses": {
+          "nervousness": 3,
+          "uncontrollableWorry": 3,
+          "excessiveWorry": 2,
+          "troubleRelaxing": 2,
+          "restlessness": 2,
+          "irritability": 2,
+          "fearfulness": 2
+        },
+        "moodAffect": {
+          "currentMood": "",
+          "sleepQuality": "",
+          "appetiteChanges": "",
+          "energyLevel": "",
+          "concentration": ""
+        },
+        "riskAssessment": {
+          "suicidalIdeation": "yes",
+          "suicidalIdeationDetails": "",
+          "selfHarm": "no",
+          "selfHarmDetails": "",
+          "harmToOthers": "no",
+          "harmToOthersDetails": "",
+          "hasSafetyPlan": "no",
+          "safetyPlanDetails": ""
+        },
+        "substanceUse": {
+          "alcoholFrequency": "",
+          "alcoholQuantity": "",
+          "bingeDrinking": "",
+          "drugUse": "",
+          "drugDetails": "",
+          "tobaccoUse": "",
+          "tobaccoDetails": ""
+        },
+        "currentMedications": {
+          "psychiatricMedications": [],
+          "otherMedications": []
+        },
+        "treatmentHistory": {
+          "previousTherapy": "",
+          "therapyDetails": "",
+          "previousHospitalizations": "",
+          "hospitalizationDetails": "",
+          "currentProviders": ""
+        },
+        "socialFunctional": {
+          "employmentStatus": "",
+          "relationshipStatus": "",
+          "housingStatus": "",
+          "supportSystem": "",
+          "functionalImpairment": "",
+          "additionalNotes": ""
+        }
+      },
+      "expected": {
+        "instrument": "PHQ-9",
+        "score": 23,
+        "maxScore": 27,
+        "severity": "severe",
+        "label": "Severe Depression (20-27)",
+        "itemScores": [
+          {
+            "id": "PHQ9-01",
+            "question": "Little interest or pleasure in doing things",
+            "score": 3
+          },
+          {
+            "id": "PHQ9-02",
+            "question": "Feeling down, depressed, or hopeless",
+            "score": 3
+          },
+          {
+            "id": "PHQ9-03",
+            "question": "Trouble falling or staying asleep, or sleeping too much",
+            "score": 3
+          },
+          {
+            "id": "PHQ9-04",
+            "question": "Feeling tired or having little energy",
+            "score": 3
+          },
+          {
+            "id": "PHQ9-05",
+            "question": "Poor appetite or overeating",
+            "score": 3
+          },
+          {
+            "id": "PHQ9-06",
+            "question": "Feeling bad about yourself, or that you are a failure, or have let yourself or your family down",
+            "score": 3
+          },
+          {
+            "id": "PHQ9-07",
+            "question": "Trouble concentrating on things, such as reading the newspaper or watching television",
+            "score": 2
+          },
+          {
+            "id": "PHQ9-08",
+            "question": "Moving or speaking so slowly that other people could have noticed, or the opposite — being so fidgety or restless",
+            "score": 1
+          },
+          {
+            "id": "PHQ9-09",
+            "question": "Thoughts that you would be better off dead, or of hurting yourself in some way",
+            "score": 2
+          }
+        ]
+      }
+    }
+  ]
+}

@@ -1,0 +1,281 @@
+{
+  "engine": "front-end-with-html",
+  "graderHint": "calculateCurb65Grade",
+  "note": "Realistic filled-in states in the CURB-65 scoring engine's shape. `expected` is computed by `bin/test-personas --update` and verified by `bin/test-personas`.",
+  "personas": [
+    {
+      "name": "low-outpatient",
+      "description": "Fit 40-year-old with mild community-acquired pneumonia: CURB-65 0 — low mortality risk, suitable for outpatient management.",
+      "state": {
+        "context": {
+          "clinicianName": "",
+          "clinicianRole": "",
+          "assessedAt": "",
+          "careSetting": ""
+        },
+        "identification": {
+          "patientIdentifier": "",
+          "sex": "female"
+        },
+        "confusion": {
+          "confusionPresent": "no",
+          "amtScore": 10
+        },
+        "urea": {
+          "ureaMeasured": "yes",
+          "ureaMmolL": 5.4
+        },
+        "respiratory": {
+          "respiratoryRate": 18
+        },
+        "bloodPressure": {
+          "systolicBp": 124,
+          "diastolicBp": 78
+        },
+        "age": {
+          "ageYears": 40
+        },
+        "adjuncts": {
+          "oxygenSaturation": 97,
+          "temperatureC": 37.8,
+          "significantComorbidity": "no",
+          "multilobarChanges": "no"
+        },
+        "disposition": {
+          "clinicianOverrideBand": "",
+          "overrideReason": "",
+          "clinicalNote": ""
+        }
+      },
+      "expected": {
+        "confusionScore": 0,
+        "ureaScore": 0,
+        "respiratoryRateScore": 0,
+        "bloodPressureScore": 0,
+        "ageScore": 0,
+        "curb65Score": 0,
+        "crb65Score": null,
+        "totalScore": 0,
+        "scoreVariant": "curb-65",
+        "riskBand": "low",
+        "recommendedDisposition": "home-outpatient",
+        "recommendedSetting": "Consider treatment at home / outpatient management.",
+        "criteria": {
+          "confusion": false,
+          "urea": false,
+          "respiratoryRate": false,
+          "bloodPressure": false,
+          "ageOver65": false
+        },
+        "firedCriteria": [
+          {
+            "id": "R-BAND-01",
+            "criterion": "band",
+            "points": 0,
+            "category": "risk-band",
+            "description": "CURB-65 score 0 — low risk band"
+          }
+        ]
+      }
+    },
+    {
+      "name": "intermediate-shortstay",
+      "description": "70-year-old with raised urea: CURB-65 2 (age + urea) — intermediate risk, consider short-stay supervised care.",
+      "state": {
+        "context": {
+          "clinicianName": "",
+          "clinicianRole": "",
+          "assessedAt": "",
+          "careSetting": ""
+        },
+        "identification": {
+          "patientIdentifier": "",
+          "sex": "male"
+        },
+        "confusion": {
+          "confusionPresent": "no",
+          "amtScore": 10
+        },
+        "urea": {
+          "ureaMeasured": "yes",
+          "ureaMmolL": 8.6
+        },
+        "respiratory": {
+          "respiratoryRate": 22
+        },
+        "bloodPressure": {
+          "systolicBp": 118,
+          "diastolicBp": 72
+        },
+        "age": {
+          "ageYears": 70
+        },
+        "adjuncts": {
+          "oxygenSaturation": 94,
+          "temperatureC": 38.4,
+          "significantComorbidity": "yes",
+          "multilobarChanges": "no"
+        },
+        "disposition": {
+          "clinicianOverrideBand": "",
+          "overrideReason": "",
+          "clinicalNote": ""
+        }
+      },
+      "expected": {
+        "confusionScore": 0,
+        "ureaScore": 1,
+        "respiratoryRateScore": 0,
+        "bloodPressureScore": 0,
+        "ageScore": 1,
+        "curb65Score": 2,
+        "crb65Score": null,
+        "totalScore": 2,
+        "scoreVariant": "curb-65",
+        "riskBand": "intermediate",
+        "recommendedDisposition": "short-stay-supervised",
+        "recommendedSetting": "Consider short-stay inpatient care or hospital-supervised outpatient treatment.",
+        "criteria": {
+          "confusion": false,
+          "urea": true,
+          "respiratoryRate": false,
+          "bloodPressure": false,
+          "ageOver65": true
+        },
+        "firedCriteria": [
+          {
+            "id": "R-UREA-01",
+            "criterion": "urea",
+            "points": 1,
+            "category": "curb-65-criterion",
+            "description": "Serum urea > 7 mmol/L (blood urea nitrogen > 19 mg/dL)"
+          },
+          {
+            "id": "R-AGE-01",
+            "criterion": "age",
+            "points": 1,
+            "category": "curb-65-criterion",
+            "description": "Age >= 65 years"
+          },
+          {
+            "id": "R-BAND-01",
+            "criterion": "band",
+            "points": 0,
+            "category": "risk-band",
+            "description": "CURB-65 score 2 — intermediate risk band"
+          }
+        ]
+      }
+    },
+    {
+      "name": "high-admit",
+      "description": "Confused, hypotensive, tachypnoeic 82-year-old: CURB-65 5 — high risk severe pneumonia, hospitalise and assess for HDU/ICU.",
+      "state": {
+        "context": {
+          "clinicianName": "",
+          "clinicianRole": "",
+          "assessedAt": "",
+          "careSetting": ""
+        },
+        "identification": {
+          "patientIdentifier": "",
+          "sex": "male"
+        },
+        "confusion": {
+          "confusionPresent": "yes",
+          "amtScore": 6
+        },
+        "urea": {
+          "ureaMeasured": "yes",
+          "ureaMmolL": 12.3
+        },
+        "respiratory": {
+          "respiratoryRate": 32
+        },
+        "bloodPressure": {
+          "systolicBp": 84,
+          "diastolicBp": 54
+        },
+        "age": {
+          "ageYears": 82
+        },
+        "adjuncts": {
+          "oxygenSaturation": 89,
+          "temperatureC": 38.9,
+          "significantComorbidity": "yes",
+          "multilobarChanges": "yes"
+        },
+        "disposition": {
+          "clinicianOverrideBand": "",
+          "overrideReason": "",
+          "clinicalNote": ""
+        }
+      },
+      "expected": {
+        "confusionScore": 1,
+        "ureaScore": 1,
+        "respiratoryRateScore": 1,
+        "bloodPressureScore": 1,
+        "ageScore": 1,
+        "curb65Score": 5,
+        "crb65Score": null,
+        "totalScore": 5,
+        "scoreVariant": "curb-65",
+        "riskBand": "high",
+        "recommendedDisposition": "hospital-admission",
+        "recommendedSetting": "Hospitalise and manage as severe community-acquired pneumonia; for scores 4-5 assess for intensive-care / HDU admission.",
+        "criteria": {
+          "confusion": true,
+          "urea": true,
+          "respiratoryRate": true,
+          "bloodPressure": true,
+          "ageOver65": true
+        },
+        "firedCriteria": [
+          {
+            "id": "R-CONFUSION-01",
+            "criterion": "confusion",
+            "points": 1,
+            "category": "curb-65-criterion",
+            "description": "New-onset mental confusion (AMT <= 8, or new disorientation in person, place, or time)"
+          },
+          {
+            "id": "R-UREA-01",
+            "criterion": "urea",
+            "points": 1,
+            "category": "curb-65-criterion",
+            "description": "Serum urea > 7 mmol/L (blood urea nitrogen > 19 mg/dL)"
+          },
+          {
+            "id": "R-RESPIRATORY-RATE-01",
+            "criterion": "respiratory-rate",
+            "points": 1,
+            "category": "curb-65-criterion",
+            "description": "Respiratory rate >= 30 breaths per minute"
+          },
+          {
+            "id": "R-BLOOD-PRESSURE-01",
+            "criterion": "blood-pressure",
+            "points": 1,
+            "category": "curb-65-criterion",
+            "description": "Systolic blood pressure < 90 mmHg, or diastolic <= 60 mmHg"
+          },
+          {
+            "id": "R-AGE-01",
+            "criterion": "age",
+            "points": 1,
+            "category": "curb-65-criterion",
+            "description": "Age >= 65 years"
+          },
+          {
+            "id": "R-BAND-01",
+            "criterion": "band",
+            "points": 0,
+            "category": "risk-band",
+            "description": "CURB-65 score 5 — high risk band"
+          }
+        ]
+      }
+    }
+  ]
+}

@@ -1,0 +1,219 @@
+{
+  "engine": "front-end-with-html",
+  "graderHint": "calculateCha2ds2VascGrade",
+  "note": "Realistic filled-in states in the CHA2DS2-VASc scoring engine's shape. `expected` is computed by `bin/test-personas --update` and verified by `bin/test-personas`.",
+  "personas": [
+    {
+      "name": "low-male",
+      "description": "55-year-old man with lone paroxysmal AF and no risk factors: CHA2DS2-VASc 0 — low risk, no antithrombotic therapy indicated.",
+      "state": {
+        "context": {
+          "clinicianName": "",
+          "clinicianRole": "",
+          "assessedAt": "",
+          "careSetting": "",
+          "atrialFibrillationType": ""
+        },
+        "identification": {
+          "patientIdentifier": "",
+          "ageYears": 55,
+          "sex": "male"
+        },
+        "cardiac": {
+          "congestiveHeartFailure": "no",
+          "hypertension": "no",
+          "vascularDisease": "no"
+        },
+        "metabolic": {
+          "diabetes": "no",
+          "priorStrokeTiaThromboembolism": "no"
+        },
+        "note": {
+          "clinicalNote": ""
+        }
+      },
+      "expected": {
+        "congestiveHeartFailurePoint": 0,
+        "hypertensionPoint": 0,
+        "agePoint": 0,
+        "diabetesPoint": 0,
+        "strokePoint": 0,
+        "vascularDiseasePoint": 0,
+        "sexPoint": 0,
+        "cha2ds2VascScore": 0,
+        "riskBand": "low",
+        "annualStrokeRatePercent": 0.2,
+        "anticoagulationRecommendation": "none",
+        "firedCriteria": [
+          {
+            "id": "R-RISK-BAND-01",
+            "criterion": "risk-band",
+            "points": 0,
+            "category": "risk-band",
+            "description": "CHA2DS2-VASc 0 of 9 — low risk; estimated annual stroke rate 0.2%"
+          }
+        ]
+      }
+    },
+    {
+      "name": "intermediate-male",
+      "description": "68-year-old man, single age point only: CHA2DS2-VASc 1 — intermediate risk, consider oral anticoagulation.",
+      "state": {
+        "context": {
+          "clinicianName": "",
+          "clinicianRole": "",
+          "assessedAt": "",
+          "careSetting": "",
+          "atrialFibrillationType": ""
+        },
+        "identification": {
+          "patientIdentifier": "",
+          "ageYears": 68,
+          "sex": "male"
+        },
+        "cardiac": {
+          "congestiveHeartFailure": "no",
+          "hypertension": "no",
+          "vascularDisease": "no"
+        },
+        "metabolic": {
+          "diabetes": "no",
+          "priorStrokeTiaThromboembolism": "no"
+        },
+        "note": {
+          "clinicalNote": ""
+        }
+      },
+      "expected": {
+        "congestiveHeartFailurePoint": 0,
+        "hypertensionPoint": 0,
+        "agePoint": 1,
+        "diabetesPoint": 0,
+        "strokePoint": 0,
+        "vascularDiseasePoint": 0,
+        "sexPoint": 0,
+        "cha2ds2VascScore": 1,
+        "riskBand": "intermediate",
+        "annualStrokeRatePercent": 1.3,
+        "anticoagulationRecommendation": "consider",
+        "firedCriteria": [
+          {
+            "id": "R-AGE-1POINT-01",
+            "criterion": "age",
+            "points": 1,
+            "category": "criterion-fired",
+            "description": "Age 65 to 74 years inclusive"
+          },
+          {
+            "id": "R-RISK-BAND-01",
+            "criterion": "risk-band",
+            "points": 0,
+            "category": "risk-band",
+            "description": "CHA2DS2-VASc 1 of 9 — intermediate risk; estimated annual stroke rate 1.3%"
+          }
+        ]
+      }
+    },
+    {
+      "name": "high-female",
+      "description": "79-year-old woman with heart failure, hypertension, diabetes, vascular disease and prior stroke: CHA2DS2-VASc 9 — high risk, anticoagulation recommended.",
+      "state": {
+        "context": {
+          "clinicianName": "",
+          "clinicianRole": "",
+          "assessedAt": "",
+          "careSetting": "",
+          "atrialFibrillationType": ""
+        },
+        "identification": {
+          "patientIdentifier": "",
+          "ageYears": 79,
+          "sex": "female"
+        },
+        "cardiac": {
+          "congestiveHeartFailure": "yes",
+          "hypertension": "yes",
+          "vascularDisease": "yes"
+        },
+        "metabolic": {
+          "diabetes": "yes",
+          "priorStrokeTiaThromboembolism": "yes"
+        },
+        "note": {
+          "clinicalNote": ""
+        }
+      },
+      "expected": {
+        "congestiveHeartFailurePoint": 1,
+        "hypertensionPoint": 1,
+        "agePoint": 2,
+        "diabetesPoint": 1,
+        "strokePoint": 2,
+        "vascularDiseasePoint": 1,
+        "sexPoint": 1,
+        "cha2ds2VascScore": 9,
+        "riskBand": "high",
+        "annualStrokeRatePercent": 15.2,
+        "anticoagulationRecommendation": "recommended",
+        "firedCriteria": [
+          {
+            "id": "R-CONGESTIVE-HEART-FAILURE-01",
+            "criterion": "congestive-heart-failure",
+            "points": 1,
+            "category": "criterion-fired",
+            "description": "Congestive heart failure or left-ventricular dysfunction present"
+          },
+          {
+            "id": "R-HYPERTENSION-01",
+            "criterion": "hypertension",
+            "points": 1,
+            "category": "criterion-fired",
+            "description": "Hypertension: history of hypertension, on treatment, or BP > 140/90"
+          },
+          {
+            "id": "R-AGE-2POINT-01",
+            "criterion": "age",
+            "points": 2,
+            "category": "criterion-fired",
+            "description": "Age 75 years or older"
+          },
+          {
+            "id": "R-DIABETES-01",
+            "criterion": "diabetes",
+            "points": 1,
+            "category": "criterion-fired",
+            "description": "Diabetes mellitus: fasting glucose > 125 mg/dL (7 mmol/L) or on hypoglycaemic treatment"
+          },
+          {
+            "id": "R-STROKE-2POINT-01",
+            "criterion": "stroke",
+            "points": 2,
+            "category": "criterion-fired",
+            "description": "Prior stroke, transient ischaemic attack, or systemic thromboembolism"
+          },
+          {
+            "id": "R-VASCULAR-DISEASE-01",
+            "criterion": "vascular-disease",
+            "points": 1,
+            "category": "criterion-fired",
+            "description": "Vascular disease: prior myocardial infarction, peripheral artery disease, or aortic plaque"
+          },
+          {
+            "id": "R-SEX-FEMALE-01",
+            "criterion": "sex",
+            "points": 1,
+            "category": "criterion-fired",
+            "description": "Female sex category (risk modifier, not an independent risk factor)"
+          },
+          {
+            "id": "R-RISK-BAND-01",
+            "criterion": "risk-band",
+            "points": 0,
+            "category": "risk-band",
+            "description": "CHA2DS2-VASc 9 of 9 — high risk; estimated annual stroke rate 15.2%"
+          }
+        ]
+      }
+    }
+  ]
+}

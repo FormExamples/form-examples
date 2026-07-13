@@ -1,0 +1,269 @@
+{
+  "engine": "front-end-with-html",
+  "graderHint": "calculateWellsGrade",
+  "note": "Realistic filled-in states in the Wells DVT scoring engine's shape. `expected` is computed by `bin/test-personas --update` and verified by `bin/test-personas`.",
+  "personas": [
+    {
+      "name": "unlikely-low",
+      "description": "No Wells criteria present with a plausible alternative diagnosis not favoured: Wells 0 — DVT unlikely (two-level), low probability (three-level); offer a D-dimer.",
+      "state": {
+        "context": {
+          "clinicianName": "",
+          "clinicianRole": "",
+          "assessedAt": "",
+          "careSetting": ""
+        },
+        "identification": {
+          "patientIdentifier": "",
+          "ageBand": "",
+          "sex": "female",
+          "symptomaticLeg": ""
+        },
+        "predisposing": {
+          "activeCancer": "no",
+          "paralysisOrImmobilisation": "no",
+          "recentlyBedriddenOrSurgery": "no",
+          "previouslyDocumentedDvt": "no"
+        },
+        "examination": {
+          "localisedTenderness": "no",
+          "entireLegSwollen": "no",
+          "calfSwellingOver3cm": "no",
+          "pittingOedema": "no",
+          "collateralSuperficialVeins": "no"
+        },
+        "alternative": {
+          "alternativeDiagnosisAsLikely": "no"
+        },
+        "note": {
+          "clinicalNotes": ""
+        }
+      },
+      "expected": {
+        "criterionPoints": {
+          "active-cancer": 0,
+          "paralysis-or-immobilisation": 0,
+          "recently-bedridden-or-surgery": 0,
+          "localised-tenderness": 0,
+          "entire-leg-swollen": 0,
+          "calf-swelling-over-3cm": 0,
+          "pitting-oedema": 0,
+          "collateral-superficial-veins": 0,
+          "previously-documented-dvt": 0,
+          "alternative-diagnosis-as-likely": 0
+        },
+        "wellsScore": 0,
+        "twoLevelBand": "unlikely",
+        "threeLevelBand": "low",
+        "recommendedInvestigation": "d-dimer",
+        "firedCriteria": [
+          {
+            "id": "R-TWO-LEVEL-BAND-01",
+            "criterion": "two-level-band",
+            "points": 0,
+            "category": "risk-band",
+            "description": "Wells <= 1 — DVT unlikely; offer a D-dimer test"
+          },
+          {
+            "id": "R-THREE-LEVEL-BAND-01",
+            "criterion": "three-level-band",
+            "points": 0,
+            "category": "risk-band",
+            "description": "Wells <= 0 — low probability (original three-level rule)"
+          }
+        ]
+      }
+    },
+    {
+      "name": "likely-moderate",
+      "description": "Localised tenderness with calf swelling over 3 cm: Wells 2 — DVT likely (two-level), moderate probability (three-level); proceed to proximal leg vein ultrasound.",
+      "state": {
+        "context": {
+          "clinicianName": "",
+          "clinicianRole": "",
+          "assessedAt": "",
+          "careSetting": ""
+        },
+        "identification": {
+          "patientIdentifier": "",
+          "ageBand": "",
+          "sex": "male",
+          "symptomaticLeg": ""
+        },
+        "predisposing": {
+          "activeCancer": "no",
+          "paralysisOrImmobilisation": "no",
+          "recentlyBedriddenOrSurgery": "no",
+          "previouslyDocumentedDvt": "no"
+        },
+        "examination": {
+          "localisedTenderness": "yes",
+          "entireLegSwollen": "no",
+          "calfSwellingOver3cm": "yes",
+          "pittingOedema": "no",
+          "collateralSuperficialVeins": "no"
+        },
+        "alternative": {
+          "alternativeDiagnosisAsLikely": "no"
+        },
+        "note": {
+          "clinicalNotes": ""
+        }
+      },
+      "expected": {
+        "criterionPoints": {
+          "active-cancer": 0,
+          "paralysis-or-immobilisation": 0,
+          "recently-bedridden-or-surgery": 0,
+          "localised-tenderness": 1,
+          "entire-leg-swollen": 0,
+          "calf-swelling-over-3cm": 1,
+          "pitting-oedema": 0,
+          "collateral-superficial-veins": 0,
+          "previously-documented-dvt": 0,
+          "alternative-diagnosis-as-likely": 0
+        },
+        "wellsScore": 2,
+        "twoLevelBand": "likely",
+        "threeLevelBand": "moderate",
+        "recommendedInvestigation": "proximal-leg-vein-ultrasound",
+        "firedCriteria": [
+          {
+            "id": "R-LOCALISED-TENDERNESS-01",
+            "criterion": "localised-tenderness",
+            "points": 1,
+            "category": "wells-criterion",
+            "description": "Localised tenderness along the distribution of the deep venous system"
+          },
+          {
+            "id": "R-CALF-SWELLING-OVER-3CM-01",
+            "criterion": "calf-swelling-over-3cm",
+            "points": 1,
+            "category": "wells-criterion",
+            "description": "Calf swelling >= 3 cm larger than the asymptomatic side (measured 10 cm below the tibial tuberosity)"
+          },
+          {
+            "id": "R-TWO-LEVEL-BAND-01",
+            "criterion": "two-level-band",
+            "points": 0,
+            "category": "risk-band",
+            "description": "Wells >= 2 — DVT likely; offer a proximal leg vein ultrasound"
+          },
+          {
+            "id": "R-THREE-LEVEL-BAND-01",
+            "criterion": "three-level-band",
+            "points": 0,
+            "category": "risk-band",
+            "description": "Wells 1-2 — moderate probability (original three-level rule)"
+          }
+        ]
+      }
+    },
+    {
+      "name": "likely-high",
+      "description": "Active cancer with tenderness, whole-leg swelling, calf swelling over 3 cm and pitting oedema: Wells 5 — DVT likely (two-level), high probability (three-level).",
+      "state": {
+        "context": {
+          "clinicianName": "",
+          "clinicianRole": "",
+          "assessedAt": "",
+          "careSetting": ""
+        },
+        "identification": {
+          "patientIdentifier": "",
+          "ageBand": "",
+          "sex": "female",
+          "symptomaticLeg": ""
+        },
+        "predisposing": {
+          "activeCancer": "yes",
+          "paralysisOrImmobilisation": "no",
+          "recentlyBedriddenOrSurgery": "no",
+          "previouslyDocumentedDvt": "no"
+        },
+        "examination": {
+          "localisedTenderness": "yes",
+          "entireLegSwollen": "yes",
+          "calfSwellingOver3cm": "yes",
+          "pittingOedema": "yes",
+          "collateralSuperficialVeins": "no"
+        },
+        "alternative": {
+          "alternativeDiagnosisAsLikely": "no"
+        },
+        "note": {
+          "clinicalNotes": ""
+        }
+      },
+      "expected": {
+        "criterionPoints": {
+          "active-cancer": 1,
+          "paralysis-or-immobilisation": 0,
+          "recently-bedridden-or-surgery": 0,
+          "localised-tenderness": 1,
+          "entire-leg-swollen": 1,
+          "calf-swelling-over-3cm": 1,
+          "pitting-oedema": 1,
+          "collateral-superficial-veins": 0,
+          "previously-documented-dvt": 0,
+          "alternative-diagnosis-as-likely": 0
+        },
+        "wellsScore": 5,
+        "twoLevelBand": "likely",
+        "threeLevelBand": "high",
+        "recommendedInvestigation": "proximal-leg-vein-ultrasound",
+        "firedCriteria": [
+          {
+            "id": "R-ACTIVE-CANCER-01",
+            "criterion": "active-cancer",
+            "points": 1,
+            "category": "wells-criterion",
+            "description": "Active cancer — treatment ongoing, within the previous 6 months, or palliative"
+          },
+          {
+            "id": "R-LOCALISED-TENDERNESS-01",
+            "criterion": "localised-tenderness",
+            "points": 1,
+            "category": "wells-criterion",
+            "description": "Localised tenderness along the distribution of the deep venous system"
+          },
+          {
+            "id": "R-ENTIRE-LEG-SWOLLEN-01",
+            "criterion": "entire-leg-swollen",
+            "points": 1,
+            "category": "wells-criterion",
+            "description": "Entire leg swollen"
+          },
+          {
+            "id": "R-CALF-SWELLING-OVER-3CM-01",
+            "criterion": "calf-swelling-over-3cm",
+            "points": 1,
+            "category": "wells-criterion",
+            "description": "Calf swelling >= 3 cm larger than the asymptomatic side (measured 10 cm below the tibial tuberosity)"
+          },
+          {
+            "id": "R-PITTING-OEDEMA-01",
+            "criterion": "pitting-oedema",
+            "points": 1,
+            "category": "wells-criterion",
+            "description": "Pitting oedema confined to the symptomatic leg"
+          },
+          {
+            "id": "R-TWO-LEVEL-BAND-01",
+            "criterion": "two-level-band",
+            "points": 0,
+            "category": "risk-band",
+            "description": "Wells >= 2 — DVT likely; offer a proximal leg vein ultrasound"
+          },
+          {
+            "id": "R-THREE-LEVEL-BAND-01",
+            "criterion": "three-level-band",
+            "points": 0,
+            "category": "risk-band",
+            "description": "Wells >= 3 — high probability (original three-level rule)"
+          }
+        ]
+      }
+    }
+  ]
+}

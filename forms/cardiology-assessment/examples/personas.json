@@ -1,0 +1,517 @@
+{
+  "engine": "front-end-with-html",
+  "graderHint": "calculateCardioGrade",
+  "note": "Realistic filled-in states in the cardiology scoring engine's shape. `expected` is computed by `bin/test-personas --update` and verified by `bin/test-personas`.",
+  "personas": [
+    {
+      "name": "low-stable-angina",
+      "description": "CCS Class I exertional angina only, no other findings: overall cardiovascular risk low.",
+      "state": {
+        "demographics": {
+          "firstName": "",
+          "lastName": "",
+          "dateOfBirth": "1972-05-14",
+          "sex": "male",
+          "weight": null,
+          "height": null,
+          "bmi": null
+        },
+        "chestPainAngina": {
+          "chestPain": "yes",
+          "painCharacter": "",
+          "painLocation": "",
+          "painRadiation": "",
+          "ccsClass": "1",
+          "anginaFrequency": "",
+          "anginaDuration": "",
+          "unstableAngina": "no"
+        },
+        "heartFailureSymptoms": {
+          "dyspnoea": "",
+          "dyspnoeaOnExertion": "",
+          "orthopnoea": "no",
+          "pnd": "no",
+          "peripheralOedema": "no",
+          "nyhaClass": ""
+        },
+        "cardiacHistory": {
+          "previousMI": "no",
+          "miDate": "",
+          "recentMI": "no",
+          "recentMIWeeks": null,
+          "pci": "no",
+          "pciDetails": "",
+          "cabg": "no",
+          "cabgDetails": "",
+          "valvularDisease": "no",
+          "valvularDetails": "",
+          "cardiomyopathy": "no",
+          "cardiomyopathyType": "",
+          "pericarditis": "no"
+        },
+        "arrhythmiaConduction": {
+          "atrialFibrillation": "no",
+          "afType": "",
+          "otherArrhythmia": "no",
+          "otherArrhythmiaType": "",
+          "pacemaker": "no",
+          "pacemakerType": "",
+          "syncope": "no",
+          "syncopeDetails": "",
+          "palpitations": "no"
+        },
+        "riskFactors": {
+          "hypertension": "no",
+          "hypertensionControlled": "",
+          "diabetes": "no",
+          "diabetesType": "",
+          "hyperlipidaemia": "no",
+          "familyHistory": "no",
+          "familyHistoryDetails": "",
+          "obesity": "no"
+        },
+        "diagnosticResults": {
+          "ecgFindings": "",
+          "ecgNormal": "yes",
+          "echoPerformed": "no",
+          "echoLVEF": null,
+          "echoFindings": "",
+          "stressTestPerformed": "no",
+          "stressTestResult": "",
+          "stressTestDetails": "",
+          "cathPerformed": "no",
+          "cathFindings": ""
+        },
+        "currentMedications": {
+          "antiplatelets": "",
+          "antiplateletType": "",
+          "anticoagulants": "",
+          "anticoagulantType": "",
+          "betaBlockers": "",
+          "betaBlockerType": "",
+          "aceInhibitorsARBs": "",
+          "aceArbType": "",
+          "statins": "",
+          "statinType": "",
+          "diuretics": "",
+          "diureticType": "",
+          "otherCardiacMeds": ""
+        },
+        "allergies": {
+          "drugAllergies": "no",
+          "allergies": [],
+          "contrastAllergy": "no",
+          "contrastAllergyDetails": ""
+        },
+        "socialFunctional": {
+          "smoking": "never",
+          "smokingPackYears": null,
+          "alcohol": "moderate",
+          "alcoholUnitsPerWeek": null,
+          "exerciseTolerance": "",
+          "estimatedMETs": null,
+          "occupation": ""
+        }
+      },
+      "expected": {
+        "ccsClass": 1,
+        "nyhaClass": null,
+        "overallRisk": "low",
+        "firedRules": [
+          {
+            "id": "CP-001",
+            "system": "Chest Pain",
+            "description": "CCS Class I angina - strenuous exertion only",
+            "grade": 1
+          }
+        ]
+      }
+    },
+    {
+      "name": "moderate-angina-diabetes",
+      "description": "CCS Class II angina with diabetes mellitus and peripheral oedema: overall cardiovascular risk moderate.",
+      "state": {
+        "demographics": {
+          "firstName": "",
+          "lastName": "",
+          "dateOfBirth": "1960-09-02",
+          "sex": "female",
+          "weight": null,
+          "height": null,
+          "bmi": null
+        },
+        "chestPainAngina": {
+          "chestPain": "yes",
+          "painCharacter": "",
+          "painLocation": "",
+          "painRadiation": "",
+          "ccsClass": "2",
+          "anginaFrequency": "weekly",
+          "anginaDuration": "less-20-min",
+          "unstableAngina": "no"
+        },
+        "heartFailureSymptoms": {
+          "dyspnoea": "",
+          "dyspnoeaOnExertion": "yes",
+          "orthopnoea": "no",
+          "pnd": "no",
+          "peripheralOedema": "yes",
+          "nyhaClass": ""
+        },
+        "cardiacHistory": {
+          "previousMI": "no",
+          "miDate": "",
+          "recentMI": "no",
+          "recentMIWeeks": null,
+          "pci": "no",
+          "pciDetails": "",
+          "cabg": "no",
+          "cabgDetails": "",
+          "valvularDisease": "no",
+          "valvularDetails": "",
+          "cardiomyopathy": "no",
+          "cardiomyopathyType": "",
+          "pericarditis": "no"
+        },
+        "arrhythmiaConduction": {
+          "atrialFibrillation": "no",
+          "afType": "",
+          "otherArrhythmia": "no",
+          "otherArrhythmiaType": "",
+          "pacemaker": "no",
+          "pacemakerType": "",
+          "syncope": "no",
+          "syncopeDetails": "",
+          "palpitations": "no"
+        },
+        "riskFactors": {
+          "hypertension": "yes",
+          "hypertensionControlled": "yes",
+          "diabetes": "yes",
+          "diabetesType": "type-2",
+          "hyperlipidaemia": "yes",
+          "familyHistory": "no",
+          "familyHistoryDetails": "",
+          "obesity": "no"
+        },
+        "diagnosticResults": {
+          "ecgFindings": "",
+          "ecgNormal": "yes",
+          "echoPerformed": "no",
+          "echoLVEF": null,
+          "echoFindings": "",
+          "stressTestPerformed": "no",
+          "stressTestResult": "",
+          "stressTestDetails": "",
+          "cathPerformed": "no",
+          "cathFindings": ""
+        },
+        "currentMedications": {
+          "antiplatelets": "",
+          "antiplateletType": "",
+          "anticoagulants": "",
+          "anticoagulantType": "",
+          "betaBlockers": "",
+          "betaBlockerType": "",
+          "aceInhibitorsARBs": "",
+          "aceArbType": "",
+          "statins": "",
+          "statinType": "",
+          "diuretics": "",
+          "diureticType": "",
+          "otherCardiacMeds": ""
+        },
+        "allergies": {
+          "drugAllergies": "no",
+          "allergies": [],
+          "contrastAllergy": "no",
+          "contrastAllergyDetails": ""
+        },
+        "socialFunctional": {
+          "smoking": "never",
+          "smokingPackYears": null,
+          "alcohol": "moderate",
+          "alcoholUnitsPerWeek": null,
+          "exerciseTolerance": "",
+          "estimatedMETs": null,
+          "occupation": ""
+        }
+      },
+      "expected": {
+        "ccsClass": 2,
+        "nyhaClass": null,
+        "overallRisk": "moderate",
+        "firedRules": [
+          {
+            "id": "CP-002",
+            "system": "Chest Pain",
+            "description": "CCS Class II angina - slight limitation of ordinary activity",
+            "grade": 2
+          },
+          {
+            "id": "HF-007",
+            "system": "Heart Failure",
+            "description": "Peripheral oedema",
+            "grade": 2
+          },
+          {
+            "id": "RF-001",
+            "system": "Risk Factors",
+            "description": "Controlled hypertension",
+            "grade": 1
+          },
+          {
+            "id": "RF-003",
+            "system": "Risk Factors",
+            "description": "Diabetes mellitus",
+            "grade": 2
+          },
+          {
+            "id": "RF-004",
+            "system": "Risk Factors",
+            "description": "Hyperlipidaemia",
+            "grade": 1
+          }
+        ]
+      }
+    },
+    {
+      "name": "critical-acs",
+      "description": "CCS Class IV rest angina with unstable angina and a recent MI within 12 weeks: overall cardiovascular risk critical.",
+      "state": {
+        "demographics": {
+          "firstName": "",
+          "lastName": "",
+          "dateOfBirth": "1951-03-20",
+          "sex": "male",
+          "weight": null,
+          "height": null,
+          "bmi": null
+        },
+        "chestPainAngina": {
+          "chestPain": "yes",
+          "painCharacter": "",
+          "painLocation": "",
+          "painRadiation": "",
+          "ccsClass": "4",
+          "anginaFrequency": "daily",
+          "anginaDuration": "greater-20-min",
+          "unstableAngina": "yes"
+        },
+        "heartFailureSymptoms": {
+          "dyspnoea": "",
+          "dyspnoeaOnExertion": "yes",
+          "orthopnoea": "yes",
+          "pnd": "yes",
+          "peripheralOedema": "yes",
+          "nyhaClass": "3"
+        },
+        "cardiacHistory": {
+          "previousMI": "yes",
+          "miDate": "",
+          "recentMI": "yes",
+          "recentMIWeeks": 3,
+          "pci": "yes",
+          "pciDetails": "",
+          "cabg": "no",
+          "cabgDetails": "",
+          "valvularDisease": "no",
+          "valvularDetails": "",
+          "cardiomyopathy": "no",
+          "cardiomyopathyType": "",
+          "pericarditis": "no"
+        },
+        "arrhythmiaConduction": {
+          "atrialFibrillation": "yes",
+          "afType": "persistent",
+          "otherArrhythmia": "no",
+          "otherArrhythmiaType": "",
+          "pacemaker": "no",
+          "pacemakerType": "",
+          "syncope": "no",
+          "syncopeDetails": "",
+          "palpitations": "yes"
+        },
+        "riskFactors": {
+          "hypertension": "yes",
+          "hypertensionControlled": "no",
+          "diabetes": "yes",
+          "diabetesType": "type-2",
+          "hyperlipidaemia": "yes",
+          "familyHistory": "yes",
+          "familyHistoryDetails": "",
+          "obesity": "yes"
+        },
+        "diagnosticResults": {
+          "ecgFindings": "",
+          "ecgNormal": "no",
+          "echoPerformed": "yes",
+          "echoLVEF": 30,
+          "echoFindings": "",
+          "stressTestPerformed": "no",
+          "stressTestResult": "",
+          "stressTestDetails": "",
+          "cathPerformed": "yes",
+          "cathFindings": ""
+        },
+        "currentMedications": {
+          "antiplatelets": "",
+          "antiplateletType": "",
+          "anticoagulants": "",
+          "anticoagulantType": "",
+          "betaBlockers": "",
+          "betaBlockerType": "",
+          "aceInhibitorsARBs": "",
+          "aceArbType": "",
+          "statins": "",
+          "statinType": "",
+          "diuretics": "",
+          "diureticType": "",
+          "otherCardiacMeds": ""
+        },
+        "allergies": {
+          "drugAllergies": "no",
+          "allergies": [],
+          "contrastAllergy": "no",
+          "contrastAllergyDetails": ""
+        },
+        "socialFunctional": {
+          "smoking": "current",
+          "smokingPackYears": 30,
+          "alcohol": "moderate",
+          "alcoholUnitsPerWeek": null,
+          "exerciseTolerance": "",
+          "estimatedMETs": 3,
+          "occupation": ""
+        }
+      },
+      "expected": {
+        "ccsClass": 4,
+        "nyhaClass": 3,
+        "overallRisk": "critical",
+        "firedRules": [
+          {
+            "id": "CP-004",
+            "system": "Chest Pain",
+            "description": "CCS Class IV angina - angina at rest",
+            "grade": 4
+          },
+          {
+            "id": "CP-005",
+            "system": "Chest Pain",
+            "description": "Unstable angina",
+            "grade": 4
+          },
+          {
+            "id": "CP-006",
+            "system": "Chest Pain",
+            "description": "Daily angina episodes",
+            "grade": 3
+          },
+          {
+            "id": "CP-007",
+            "system": "Chest Pain",
+            "description": "Prolonged angina episodes (>20 min)",
+            "grade": 3
+          },
+          {
+            "id": "HF-003",
+            "system": "Heart Failure",
+            "description": "NYHA Class III - marked limitation",
+            "grade": 3
+          },
+          {
+            "id": "HF-005",
+            "system": "Heart Failure",
+            "description": "Orthopnoea present",
+            "grade": 3
+          },
+          {
+            "id": "HF-006",
+            "system": "Heart Failure",
+            "description": "Paroxysmal nocturnal dyspnoea (PND)",
+            "grade": 3
+          },
+          {
+            "id": "HF-007",
+            "system": "Heart Failure",
+            "description": "Peripheral oedema",
+            "grade": 2
+          },
+          {
+            "id": "CH-002",
+            "system": "Cardiac History",
+            "description": "Recent MI (<3 months)",
+            "grade": 4
+          },
+          {
+            "id": "CH-003",
+            "system": "Cardiac History",
+            "description": "Previous PCI (percutaneous coronary intervention)",
+            "grade": 2
+          },
+          {
+            "id": "AR-002",
+            "system": "Arrhythmia",
+            "description": "Persistent/permanent atrial fibrillation",
+            "grade": 3
+          },
+          {
+            "id": "RF-002",
+            "system": "Risk Factors",
+            "description": "Uncontrolled hypertension",
+            "grade": 3
+          },
+          {
+            "id": "RF-003",
+            "system": "Risk Factors",
+            "description": "Diabetes mellitus",
+            "grade": 2
+          },
+          {
+            "id": "RF-004",
+            "system": "Risk Factors",
+            "description": "Hyperlipidaemia",
+            "grade": 1
+          },
+          {
+            "id": "RF-005",
+            "system": "Risk Factors",
+            "description": "Family history of premature cardiovascular disease",
+            "grade": 1
+          },
+          {
+            "id": "RF-006",
+            "system": "Risk Factors",
+            "description": "Obesity",
+            "grade": 2
+          },
+          {
+            "id": "DX-001",
+            "system": "Diagnostics",
+            "description": "Abnormal ECG",
+            "grade": 2
+          },
+          {
+            "id": "DX-002",
+            "system": "Diagnostics",
+            "description": "Reduced LVEF (<40%)",
+            "grade": 3
+          },
+          {
+            "id": "FC-001",
+            "system": "Functional Capacity",
+            "description": "Poor functional capacity (<4 METs)",
+            "grade": 3
+          },
+          {
+            "id": "SH-001",
+            "system": "Social",
+            "description": "Current smoker",
+            "grade": 2
+          }
+        ]
+      }
+    }
+  ]
+}
