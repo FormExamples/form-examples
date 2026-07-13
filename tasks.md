@@ -258,10 +258,10 @@ personas. Once the oracle exists, persona scaffolding + fill is mechanical
       pin. Their `expected` cannot be reproduced. Worth a follow-up: refactor
       those graders to take an injected clock / split the timestamp out, so
       they become testable.
-- [x] **80 forms** now have verified personas (`bin/test-personas` PASS 80 /
+- [x] **99 forms** now have verified personas (`bin/test-personas` PASS 99 /
       FAIL 0, deterministic across the full corpus). Rounds: 9 reference + 35
-      + 18 (F,H) + 18 (E,G re-authored).
-- [ ] Continue persona batches for the remaining ~130 scorable forms
+      + 18 (F,H) + 18 (E,G re-authored) + 19 (I,J named scores + surveys).
+- [ ] Continue persona batches for the remaining scorable forms
       (subagents on the proven rail; `spec/index.md` defines the bands).
       63 forms are `test-engines` SKIPs (ESM/inline/nonstandard) — those need
       a bespoke driver first.
