@@ -139,7 +139,7 @@ components:
             - <40
             - 40-75
             - 75-95
-            - >=95
+            - ">=95"
             - ""
           description: "Percentile band mirroring the risk zone: <40, 40-75, 75-95, or >=95."
         phototherapy_threshold_umol_l:

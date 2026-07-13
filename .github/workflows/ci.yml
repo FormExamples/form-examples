@@ -105,6 +105,28 @@ jobs:
             exit 1
           fi
 
+      - name: Validate generated OpenAPI 3.1 specs
+        run: |
+          pip install --quiet openapi-spec-validator
+          python3 - <<'PY'
+          import glob, sys
+          from openapi_spec_validator import validate
+          from openapi_spec_validator.readers import read_from_filename
+          bad = []
+          for f in sorted(glob.glob("forms/*/openapi/*.yaml")):
+              try:
+                  spec, _ = read_from_filename(f)
+                  validate(spec)
+              except Exception as e:
+                  bad.append(f"{f}: {str(e).splitlines()[0]}")
+          if bad:
+              print("::error::%d invalid OpenAPI specs" % len(bad))
+              for b in bad:
+                  print("  " + b)
+              sys.exit(1)
+          print("all OpenAPI specs valid")
+          PY
+
       - name: Fail if any generator produced an uncommitted diff
         run: |
           if [ -n "$(git status --porcelain)" ]; then

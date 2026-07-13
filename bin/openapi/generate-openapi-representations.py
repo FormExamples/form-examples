@@ -346,6 +346,11 @@ def yaml_enum_value(s):
     if ': ' in s or '"' in s:
         body = s.replace('\\', '\\\\').replace('"', '\\"')
         return f'"{body}"'
+    # A leading YAML indicator character (e.g. '>' in '>=80', or '-', '?', '*')
+    # makes an unquoted scalar invalid — quote it.
+    if s[0] in '-?:,[]{}#&*!|>\'"%@`' or s[0].isspace() or s[-1].isspace():
+        body = s.replace('\\', '\\\\').replace('"', '\\"')
+        return f'"{body}"'
     return s
 
 

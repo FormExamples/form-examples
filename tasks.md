@@ -188,6 +188,15 @@ Design each feature on the reference forms
       from each crate's real controllers) + a `--list-stale` gate wired into
       `bin/test-tools` and CI; regenerated the 135, left the 151 correct
       hand-authored docs untouched.
+- [x] **FIXED — 7 invalid generated OpenAPI specs (found by audit).** The
+      OpenAPI generator emitted CHECK-enum values unquoted, so a value with a
+      leading YAML indicator char (`>=80`, an adult age band) parsed as a block
+      scalar → invalid YAML. Affected bhutani-bilirubin-nomogram, chronic-
+      kidney-disease-review, COPD-review, epilepsy-review, heart-failure-review,
+      hypertension-review, partogram. Fixed `yaml_enum_value()` to quote such
+      values; regenerated (7 files); all 1850 specs now validate. Added an
+      OpenAPI 3.1 validation step to the CI drift job (previously only XML +
+      FHIR were validated).
 - [i] **Representation-coverage audit (2026-07-13): CLEAN.** Checked SQL
       tables vs XML/FHIR/protobuf/OpenAPI file counts across all forms. The
       apparent mismatch (XML per-table vs FHIR/proto/OpenAPI ~6-7) is

@@ -155,7 +155,7 @@ components:
             - 18-39
             - 40-59
             - 60-79
-            - >=80
+            - ">=80"
             - ""
           description: "Adult age band that drives the blood-pressure target: 18-39, 40-59, 60-79, or >=80 (>=80 relaxes the clinic target to 150/90)."
         sex:

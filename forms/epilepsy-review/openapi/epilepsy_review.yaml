@@ -175,7 +175,7 @@ components:
             - 18-39
             - 40-59
             - 60-79
-            - >=80
+            - ">=80"
             - ""
           description: "Adult age band: 18-39, 40-59, 60-79, or >=80."
         sex:

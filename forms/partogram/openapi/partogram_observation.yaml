@@ -145,7 +145,7 @@ components:
           enum:
             - <20s
             - 20-40s
-            - >40s
+            - ">40s"
             - ""
           description: "Contraction duration band: <20s, 20-40s, or >40s."
         contraction_strength:
