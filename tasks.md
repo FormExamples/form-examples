@@ -235,9 +235,17 @@ personas. Once the oracle exists, persona scaffolding + fill is mechanical
       `example-minimal.json`, `example-typical.json` (rename of current),
       `example-flagged.json` — each with `expected` scores/flags. Update
       `bin/generate-changelog-and-examples.py` scaffold + `--check`.
-- [ ] Scaffold personas for all 286 forms mechanically, then fill
-      domain-specific values in batches (subagents; the form's
-      `spec/index.md` scoring rules define what "flagged" means).
+- [x] **Persona format + verifier built:** `bin/test-personas` — authors write
+      realistic filled states in the engine's shape under
+      `forms/<slug>/examples/personas.json`; `--update` computes `expected` by
+      running the engine, default mode verifies it (regression oracle). Shared
+      engine loader at `bin/lib/engine-loader.js`. Template authored +
+      verified for `apgar-score` (3 personas: reassuring 8/10, moderately-low
+      4/9, low 2/3). Wired into `bin/test-tools` + CI.
+- [~] Reference batch of standard clinical scores in progress (cardiology,
+      PHQ-9/GAD-7, CURB-65, CHA₂DS₂-VASc, Wells DVT, GCS, NEWS2, PSQI).
+- [ ] Scaffold personas for the remaining forms in batches (subagents; the
+      form's `spec/index.md` scoring rules define what "flagged" means).
 - [ ] `example-invalid.json` per form + expected validation errors list;
       assert in the E2E harness (wizard blocks submission).
 - [ ] CSV and TSV export samples per form matching the typical persona

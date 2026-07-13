@@ -2,7 +2,7 @@
 
 Auto-generated from each tool's source header by `bin/generate-tools-doc.py` — do not hand-edit. Run the generator after adding or re-documenting a tool.
 
-42 tools.
+43 tools.
 
 - [`bin/clean`](#clean)
 - [`bin/consolidate-front-end-html`](#consolidate-front-end-html)
@@ -35,6 +35,7 @@ Auto-generated from each tool's source header by `bin/generate-tools-doc.py` —
 - [`bin/test-examples-conformance`](#test-examples-conformance)
 - [`bin/test-form`](#test-form)
 - [`bin/test-loco-project`](#test-loco-project)
+- [`bin/test-personas`](#test-personas)
 - [`bin/test-sql-apply`](#test-sql-apply)
 - [`bin/test-tools`](#test-tools)
 - [`bin/test-tutorials`](#test-tutorials)
@@ -549,6 +550,10 @@ test-form: test one form directory in this project for implementation
 ```text
 https://github.com/sixarm/unix-shell-script-kit
 ```
+
+<h2 id="test-personas"><code>bin/test-personas</code></h2>
+
+_No header documentation._
 
 <h2 id="test-sql-apply"><code>bin/test-sql-apply</code></h2>
 

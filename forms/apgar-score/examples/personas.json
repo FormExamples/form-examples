@@ -1,0 +1,325 @@
+{
+  "engine": "front-end-with-html",
+  "graderHint": "calculateApgarGrade",
+  "note": "Realistic filled-in states in the scoring engine's shape. `expected` is computed by `bin/test-personas --update` and verified by `bin/test-personas`.",
+  "personas": [
+    {
+      "name": "reassuring",
+      "description": "Vigorous term newborn: 1-minute Apgar 8, 5-minute Apgar 10 — reassuring throughout.",
+      "state": {
+        "context": {
+          "clinicianName": "",
+          "clinicianRole": "midwife",
+          "bornAt": "",
+          "careSetting": "delivery-room",
+          "gestationalAgeWeeks": 40,
+          "modeOfDelivery": "spontaneous-vaginal"
+        },
+        "identification": {
+          "newbornIdentifier": "",
+          "sex": "female",
+          "birthOrder": 1
+        },
+        "timepoints": [
+          {
+            "timepointMinutes": 1,
+            "appearance": 1,
+            "pulse": 2,
+            "grimace": 2,
+            "activity": 2,
+            "respiration": 1
+          },
+          {
+            "timepointMinutes": 5,
+            "appearance": 2,
+            "pulse": 2,
+            "grimace": 2,
+            "activity": 2,
+            "respiration": 2
+          }
+        ]
+      },
+      "expected": {
+        "timepoints": [
+          {
+            "timepointMinutes": 1,
+            "total": 8,
+            "band": "reassuring",
+            "answeredCount": 5,
+            "scored": true
+          },
+          {
+            "timepointMinutes": 5,
+            "total": 10,
+            "band": "reassuring",
+            "answeredCount": 5,
+            "scored": true
+          }
+        ],
+        "trend": "improving",
+        "firedSigns": [
+          {
+            "id": "R-APPEARANCE-01",
+            "timepointMinutes": 1,
+            "sign": "appearance",
+            "points": 1,
+            "category": "apgar-sign",
+            "description": "Appearance (skin colour) — 0 blue/pale, 1 acrocyanosis, 2 completely pink"
+          },
+          {
+            "id": "R-RESPIRATION-01",
+            "timepointMinutes": 1,
+            "sign": "respiration",
+            "points": 1,
+            "category": "apgar-sign",
+            "description": "Respiration — 0 absent, 1 slow/irregular/weak cry, 2 strong regular cry"
+          }
+        ]
+      }
+    },
+    {
+      "name": "moderately-low-improving",
+      "description": "Depressed at birth then improving: 1-minute Apgar 4 (moderately low), 5-minute Apgar 9 (reassuring) after stimulation.",
+      "state": {
+        "context": {
+          "clinicianName": "",
+          "clinicianRole": "neonatal-nurse",
+          "bornAt": "",
+          "careSetting": "delivery-room",
+          "gestationalAgeWeeks": 38,
+          "modeOfDelivery": "assisted-vaginal"
+        },
+        "identification": {
+          "newbornIdentifier": "",
+          "sex": "male",
+          "birthOrder": 1
+        },
+        "timepoints": [
+          {
+            "timepointMinutes": 1,
+            "appearance": 1,
+            "pulse": 1,
+            "grimace": 0,
+            "activity": 1,
+            "respiration": 1
+          },
+          {
+            "timepointMinutes": 5,
+            "appearance": 2,
+            "pulse": 2,
+            "grimace": 1,
+            "activity": 2,
+            "respiration": 2
+          }
+        ]
+      },
+      "expected": {
+        "timepoints": [
+          {
+            "timepointMinutes": 1,
+            "total": 4,
+            "band": "moderately-low",
+            "answeredCount": 5,
+            "scored": true
+          },
+          {
+            "timepointMinutes": 5,
+            "total": 9,
+            "band": "reassuring",
+            "answeredCount": 5,
+            "scored": true
+          }
+        ],
+        "trend": "improving",
+        "firedSigns": [
+          {
+            "id": "R-APPEARANCE-01",
+            "timepointMinutes": 1,
+            "sign": "appearance",
+            "points": 1,
+            "category": "apgar-sign",
+            "description": "Appearance (skin colour) — 0 blue/pale, 1 acrocyanosis, 2 completely pink"
+          },
+          {
+            "id": "R-PULSE-01",
+            "timepointMinutes": 1,
+            "sign": "pulse",
+            "points": 1,
+            "category": "apgar-sign",
+            "description": "Pulse (heart rate) — 0 absent, 1 below 100/min, 2 at least 100/min"
+          },
+          {
+            "id": "R-GRIMACE-01",
+            "timepointMinutes": 1,
+            "sign": "grimace",
+            "points": 0,
+            "category": "apgar-sign",
+            "description": "Grimace (reflex irritability) — 0 no response, 1 grimace/feeble cry, 2 cry/cough/sneeze"
+          },
+          {
+            "id": "R-ACTIVITY-01",
+            "timepointMinutes": 1,
+            "sign": "activity",
+            "points": 1,
+            "category": "apgar-sign",
+            "description": "Activity (muscle tone) — 0 limp, 1 some flexion, 2 active movement"
+          },
+          {
+            "id": "R-RESPIRATION-01",
+            "timepointMinutes": 1,
+            "sign": "respiration",
+            "points": 1,
+            "category": "apgar-sign",
+            "description": "Respiration — 0 absent, 1 slow/irregular/weak cry, 2 strong regular cry"
+          },
+          {
+            "id": "R-GRIMACE-01",
+            "timepointMinutes": 5,
+            "sign": "grimace",
+            "points": 1,
+            "category": "apgar-sign",
+            "description": "Grimace (reflex irritability) — 0 no response, 1 grimace/feeble cry, 2 cry/cough/sneeze"
+          }
+        ]
+      }
+    },
+    {
+      "name": "low-persistent",
+      "description": "Severely depressed and not recovering: 1-minute Apgar 2, 5-minute Apgar 3 — low at both, escalation required.",
+      "state": {
+        "context": {
+          "clinicianName": "",
+          "clinicianRole": "neonatologist",
+          "bornAt": "",
+          "careSetting": "delivery-room",
+          "gestationalAgeWeeks": 34,
+          "modeOfDelivery": "emergency-caesarean"
+        },
+        "identification": {
+          "newbornIdentifier": "",
+          "sex": "female",
+          "birthOrder": 2
+        },
+        "timepoints": [
+          {
+            "timepointMinutes": 1,
+            "appearance": 0,
+            "pulse": 1,
+            "grimace": 0,
+            "activity": 0,
+            "respiration": 1
+          },
+          {
+            "timepointMinutes": 5,
+            "appearance": 1,
+            "pulse": 1,
+            "grimace": 0,
+            "activity": 0,
+            "respiration": 1
+          }
+        ]
+      },
+      "expected": {
+        "timepoints": [
+          {
+            "timepointMinutes": 1,
+            "total": 2,
+            "band": "low",
+            "answeredCount": 5,
+            "scored": true
+          },
+          {
+            "timepointMinutes": 5,
+            "total": 3,
+            "band": "low",
+            "answeredCount": 5,
+            "scored": true
+          }
+        ],
+        "trend": "improving",
+        "firedSigns": [
+          {
+            "id": "R-APPEARANCE-01",
+            "timepointMinutes": 1,
+            "sign": "appearance",
+            "points": 0,
+            "category": "apgar-sign",
+            "description": "Appearance (skin colour) — 0 blue/pale, 1 acrocyanosis, 2 completely pink"
+          },
+          {
+            "id": "R-PULSE-01",
+            "timepointMinutes": 1,
+            "sign": "pulse",
+            "points": 1,
+            "category": "apgar-sign",
+            "description": "Pulse (heart rate) — 0 absent, 1 below 100/min, 2 at least 100/min"
+          },
+          {
+            "id": "R-GRIMACE-01",
+            "timepointMinutes": 1,
+            "sign": "grimace",
+            "points": 0,
+            "category": "apgar-sign",
+            "description": "Grimace (reflex irritability) — 0 no response, 1 grimace/feeble cry, 2 cry/cough/sneeze"
+          },
+          {
+            "id": "R-ACTIVITY-01",
+            "timepointMinutes": 1,
+            "sign": "activity",
+            "points": 0,
+            "category": "apgar-sign",
+            "description": "Activity (muscle tone) — 0 limp, 1 some flexion, 2 active movement"
+          },
+          {
+            "id": "R-RESPIRATION-01",
+            "timepointMinutes": 1,
+            "sign": "respiration",
+            "points": 1,
+            "category": "apgar-sign",
+            "description": "Respiration — 0 absent, 1 slow/irregular/weak cry, 2 strong regular cry"
+          },
+          {
+            "id": "R-APPEARANCE-01",
+            "timepointMinutes": 5,
+            "sign": "appearance",
+            "points": 1,
+            "category": "apgar-sign",
+            "description": "Appearance (skin colour) — 0 blue/pale, 1 acrocyanosis, 2 completely pink"
+          },
+          {
+            "id": "R-PULSE-01",
+            "timepointMinutes": 5,
+            "sign": "pulse",
+            "points": 1,
+            "category": "apgar-sign",
+            "description": "Pulse (heart rate) — 0 absent, 1 below 100/min, 2 at least 100/min"
+          },
+          {
+            "id": "R-GRIMACE-01",
+            "timepointMinutes": 5,
+            "sign": "grimace",
+            "points": 0,
+            "category": "apgar-sign",
+            "description": "Grimace (reflex irritability) — 0 no response, 1 grimace/feeble cry, 2 cry/cough/sneeze"
+          },
+          {
+            "id": "R-ACTIVITY-01",
+            "timepointMinutes": 5,
+            "sign": "activity",
+            "points": 0,
+            "category": "apgar-sign",
+            "description": "Activity (muscle tone) — 0 limp, 1 some flexion, 2 active movement"
+          },
+          {
+            "id": "R-RESPIRATION-01",
+            "timepointMinutes": 5,
+            "sign": "respiration",
+            "points": 1,
+            "category": "apgar-sign",
+            "description": "Respiration — 0 absent, 1 slow/irregular/weak cry, 2 strong regular cry"
+          }
+        ]
+      }
+    }
+  ]
+}

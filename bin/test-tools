@@ -97,6 +97,12 @@ else
     red "test-engines (an engine failed to load — see /tmp/test-tools-engines.log)"
 fi
 
+if bin/test-personas >/tmp/test-tools-personas.log 2>&1; then
+    green "test-personas (authored personas match engine output)"
+else
+    red "test-personas (persona regression — see /tmp/test-tools-personas.log)"
+fi
+
 # ---------------------------------------------------------------------------
 # 3. Conformance tracker reports the expected milestone.
 # ---------------------------------------------------------------------------

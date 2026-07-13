@@ -1,0 +1,111 @@
+#!/usr/bin/env node
+/*
+ * bin/test-personas — verify hand-authored scoring personas against the engine.
+ *
+ * A persona is a realistic filled-in form state in the scoring engine's own
+ * shape, plus the grade the engine must produce for it. Authors write the
+ * state and a short description; this tool computes `expected` by running the
+ * engine (--update) and later verifies it still matches (--check). The
+ * personas double as worked examples and as a regression oracle for the
+ * scoring logic — richer than the type-defaulted examples/assessment.json
+ * fixtures, which are empty and score to the baseline.
+ *
+ * Persona file: forms/<slug>/examples/personas.json
+ *   {
+ *     "engine": "front-end-with-html",
+ *     "graderHint": "calculateApgarGrade",     // optional: pin the entry fn
+ *     "personas": [
+ *       { "name": "reassuring", "description": "...", "state": { ... },
+ *         "expected": { ... } }                 // filled by --update
+ *     ]
+ *   }
+ *
+ * Usage:
+ *   bin/test-personas                 # verify every form's personas (default)
+ *   bin/test-personas <slug> ...      # only the named forms
+ *   bin/test-personas --update [...]  # (re)compute and write `expected`
+ *
+ * Exit status is non-zero if any persona's recorded expected differs from the
+ * engine's output (or the grader cannot be run). Forms without a personas.json
+ * are simply skipped.
+ */
+
+'use strict';
+
+const fs = require('fs');
+const path = require('path');
+const { execSync } = require('child_process');
+const { loadEngine } = require('./lib/engine-loader.js');
+
+const REPO_ROOT = execSync('git rev-parse --show-toplevel').toString().trim();
+const FORMS = path.join(REPO_ROOT, 'forms');
+
+function canon(v) {
+  // Stable stringify for deep comparison (sorts object keys).
+  return JSON.stringify(v, function replacer(_k, val) {
+    if (val && typeof val === 'object' && !Array.isArray(val)) {
+      return Object.keys(val).sort().reduce((o, k) => { o[k] = val[k]; return o; }, {});
+    }
+    return val;
+  });
+}
+
+function personaFile(slug) {
+  return path.join(FORMS, slug, 'examples', 'personas.json');
+}
+
+function runForm(slug, update, problems) {
+  const file = personaFile(slug);
+  if (!fs.existsSync(file)) return null;
+  let doc;
+  try { doc = JSON.parse(fs.readFileSync(file, 'utf8')); }
+  catch (e) { problems.push(`${slug}: personas.json invalid JSON: ${e.message}`); return 'FAIL'; }
+
+  const eng = loadEngine(REPO_ROOT, slug);
+  if (eng.error || !eng.ns) { problems.push(`${slug}: engine not loadable (${eng.error || 'no ns'})`); return 'FAIL'; }
+  const graderName = doc.graderHint || eng.grader;
+  if (!graderName || typeof eng.ns[graderName] !== 'function') {
+    problems.push(`${slug}: grader "${graderName}" not found (set graderHint)`); return 'FAIL';
+  }
+  const grader = eng.ns[graderName];
+
+  let status = 'PASS';
+  for (const p of doc.personas || []) {
+    let result;
+    try { result = grader(JSON.parse(JSON.stringify(p.state))); }
+    catch (e) { problems.push(`${slug}/${p.name}: grader threw: ${String(e.message).split('\n')[0]}`); status = 'FAIL'; continue; }
+    if (update) {
+      p.expected = result;
+    } else if (!('expected' in p)) {
+      problems.push(`${slug}/${p.name}: no expected recorded — run --update`); status = 'FAIL';
+    } else if (canon(result) !== canon(p.expected)) {
+      problems.push(`${slug}/${p.name}: engine output changed vs recorded expected`); status = 'FAIL';
+    }
+  }
+  if (update) fs.writeFileSync(file, JSON.stringify(doc, null, 2) + '\n');
+  return status;
+}
+
+function main() {
+  const args = process.argv.slice(2);
+  const update = args.includes('--update');
+  let slugs = args.filter((a) => !a.startsWith('--'));
+  if (!slugs.length) {
+    slugs = execSync(path.join(REPO_ROOT, 'bin', 'forms-as-kebab-case'))
+      .toString().split('\n').map((s) => s.trim()).filter(Boolean);
+  }
+  const problems = [];
+  let pass = 0, fail = 0, none = 0;
+  for (const slug of slugs) {
+    const r = runForm(slug, update, problems);
+    if (r === null) none++;
+    else if (r === 'PASS') pass++;
+    else fail++;
+  }
+  for (const p of problems) console.error(p);
+  const verb = update ? 'updated' : 'verified';
+  console.log(`\ntest-personas: ${verb} — PASS ${pass}  FAIL ${fail}  (no personas: ${none})`);
+  process.exit(fail ? 1 : 0);
+}
+
+main();
