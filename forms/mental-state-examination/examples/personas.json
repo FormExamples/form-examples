@@ -1,0 +1,556 @@
+{
+  "engine": "front-end-with-html",
+  "graderHint": "assess",
+  "note": "Realistic filled-in states in the engine's shape. `expected` is computed by `bin/test-personas --update` and verified by `bin/test-personas`. Each persona documents all seven ASEPTIC domains (status complete); riskLevel is the highest-priority safety flag raised (none / low / moderate / high).",
+  "personas": [
+    {
+      "name": "complete-no-risk",
+      "description": "Routine outpatient review, all seven ASEPTIC domains documented with benign findings and no safety flags — status complete, risk level none.",
+      "state": {
+        "context": {
+          "clinicianName": "Dr A Fielding",
+          "clinicianRole": "psychiatrist",
+          "assessedAt": "2025-06-03T10:00",
+          "careSetting": "outpatient",
+          "assessmentReason": "Routine review of stable depression."
+        },
+        "identification": {
+          "patientIdentifier": "MSE-1001",
+          "ageBand": "40-64",
+          "sex": "female"
+        },
+        "appearance": {
+          "appearanceGrooming": "well-groomed",
+          "appearanceEyeContact": "appropriate",
+          "appearanceRapport": "good",
+          "appearancePsychomotor": "normal",
+          "appearanceAbnormalMovements": "none",
+          "appearanceNotes": "Calm and cooperative."
+        },
+        "speech": {
+          "speechRate": "normal",
+          "speechVolume": "normal",
+          "speechQuantity": "normal",
+          "speechFluency": "fluent",
+          "speechNotes": ""
+        },
+        "emotion": {
+          "moodSubjective": "\"pretty good\"",
+          "moodDescriptor": "euthymic",
+          "affectRange": "full",
+          "affectCongruence": "congruent",
+          "affectReactivity": "reactive",
+          "emotionNotes": ""
+        },
+        "perception": {
+          "hallucinationsPresent": "none",
+          "commandHallucinations": "no",
+          "illusions": "no",
+          "depersonalisation": "no",
+          "derealisation": "no",
+          "perceptionNotes": ""
+        },
+        "thought": {
+          "thoughtForm": "linear",
+          "delusions": "none",
+          "obsessions": "no",
+          "suicidalIdeation": "none",
+          "homicidalIdeation": "none",
+          "selfHarmThoughts": "none",
+          "thoughtNotes": "No abnormal thought content."
+        },
+        "insight": {
+          "insightLevel": "good",
+          "treatmentUnderstanding": "understands",
+          "judgement": "intact",
+          "insightNotes": ""
+        },
+        "cognition": {
+          "orientation": "oriented",
+          "attention": "intact",
+          "memory": "intact",
+          "cognitiveImpression": "normal",
+          "cognitionNotes": ""
+        },
+        "summary": {
+          "clinicalFormulation": "Stable mood, no active risk. Continue current management."
+        }
+      },
+      "expected": {
+        "status": "complete",
+        "riskLevel": "none",
+        "completenessPercent": 100,
+        "domainStatuses": [
+          {
+            "domain": "appearance-behaviour",
+            "label": "Appearance and behaviour",
+            "documented": true
+          },
+          {
+            "domain": "speech",
+            "label": "Speech",
+            "documented": true
+          },
+          {
+            "domain": "emotion",
+            "label": "Emotion (mood and affect)",
+            "documented": true
+          },
+          {
+            "domain": "perception",
+            "label": "Perception",
+            "documented": true
+          },
+          {
+            "domain": "thought",
+            "label": "Thought (form and content)",
+            "documented": true
+          },
+          {
+            "domain": "insight",
+            "label": "Insight and judgement",
+            "documented": true
+          },
+          {
+            "domain": "cognition",
+            "label": "Cognition",
+            "documented": true
+          }
+        ],
+        "firedRules": [
+          {
+            "id": "R-DOMAIN-01-APPEARANCE-BEHAVIOUR",
+            "domain": "appearance-behaviour",
+            "category": "domain-documentation",
+            "description": "Appearance and behaviour domain documented (at least one finding recorded)"
+          },
+          {
+            "id": "R-DOMAIN-02-SPEECH",
+            "domain": "speech",
+            "category": "domain-documentation",
+            "description": "Speech domain documented (at least one finding recorded)"
+          },
+          {
+            "id": "R-DOMAIN-03-EMOTION",
+            "domain": "emotion",
+            "category": "domain-documentation",
+            "description": "Emotion (mood and affect) domain documented (at least one finding recorded)"
+          },
+          {
+            "id": "R-DOMAIN-04-PERCEPTION",
+            "domain": "perception",
+            "category": "domain-documentation",
+            "description": "Perception domain documented (at least one finding recorded)"
+          },
+          {
+            "id": "R-DOMAIN-05-THOUGHT",
+            "domain": "thought",
+            "category": "domain-documentation",
+            "description": "Thought (form and content) domain documented (at least one finding recorded)"
+          },
+          {
+            "id": "R-DOMAIN-06-INSIGHT",
+            "domain": "insight",
+            "category": "domain-documentation",
+            "description": "Insight and judgement domain documented (at least one finding recorded)"
+          },
+          {
+            "id": "R-DOMAIN-07-COGNITION",
+            "domain": "cognition",
+            "category": "domain-documentation",
+            "description": "Cognition domain documented (at least one finding recorded)"
+          },
+          {
+            "id": "R-COMPLETENESS-01",
+            "domain": "completeness",
+            "category": "completeness",
+            "description": "All 7 ASEPTIC domains documented — examination complete (100%)"
+          },
+          {
+            "id": "R-RISK-01",
+            "domain": "risk",
+            "category": "risk",
+            "description": "No safety flags raised — risk level none"
+          }
+        ],
+        "flags": []
+      }
+    },
+    {
+      "name": "complete-moderate-risk",
+      "description": "Primary-care review documenting passive suicidal ideation without a plan across an otherwise complete examination — status complete, risk level moderate.",
+      "state": {
+        "context": {
+          "clinicianName": "Dr A Fielding",
+          "clinicianRole": "gp",
+          "assessedAt": "2025-06-03T11:30",
+          "careSetting": "primary-care",
+          "assessmentReason": "Low mood and passive thoughts of not wanting to be here."
+        },
+        "identification": {
+          "patientIdentifier": "MSE-1002",
+          "ageBand": "26-39",
+          "sex": "male"
+        },
+        "appearance": {
+          "appearanceGrooming": "adequate",
+          "appearanceEyeContact": "reduced",
+          "appearanceRapport": "guarded",
+          "appearancePsychomotor": "normal",
+          "appearanceAbnormalMovements": "none",
+          "appearanceNotes": "Tired-looking."
+        },
+        "speech": {
+          "speechRate": "slow",
+          "speechVolume": "quiet",
+          "speechQuantity": "reduced",
+          "speechFluency": "fluent",
+          "speechNotes": ""
+        },
+        "emotion": {
+          "moodSubjective": "\"low\"",
+          "moodDescriptor": "low",
+          "affectRange": "restricted",
+          "affectCongruence": "congruent",
+          "affectReactivity": "reduced",
+          "emotionNotes": ""
+        },
+        "perception": {
+          "hallucinationsPresent": "none",
+          "commandHallucinations": "no",
+          "illusions": "no",
+          "depersonalisation": "no",
+          "derealisation": "no",
+          "perceptionNotes": ""
+        },
+        "thought": {
+          "thoughtForm": "linear",
+          "delusions": "none",
+          "obsessions": "no",
+          "suicidalIdeation": "passive",
+          "homicidalIdeation": "none",
+          "selfHarmThoughts": "none",
+          "thoughtNotes": "Passive thoughts of being better off dead, no plan or intent."
+        },
+        "insight": {
+          "insightLevel": "partial",
+          "treatmentUnderstanding": "understands",
+          "judgement": "intact",
+          "insightNotes": ""
+        },
+        "cognition": {
+          "orientation": "oriented",
+          "attention": "intact",
+          "memory": "intact",
+          "cognitiveImpression": "normal",
+          "cognitionNotes": ""
+        },
+        "summary": {
+          "clinicalFormulation": "Moderate depressive episode with passive ideation; safety plan documented and follow-up arranged."
+        }
+      },
+      "expected": {
+        "status": "complete",
+        "riskLevel": "moderate",
+        "completenessPercent": 100,
+        "domainStatuses": [
+          {
+            "domain": "appearance-behaviour",
+            "label": "Appearance and behaviour",
+            "documented": true
+          },
+          {
+            "domain": "speech",
+            "label": "Speech",
+            "documented": true
+          },
+          {
+            "domain": "emotion",
+            "label": "Emotion (mood and affect)",
+            "documented": true
+          },
+          {
+            "domain": "perception",
+            "label": "Perception",
+            "documented": true
+          },
+          {
+            "domain": "thought",
+            "label": "Thought (form and content)",
+            "documented": true
+          },
+          {
+            "domain": "insight",
+            "label": "Insight and judgement",
+            "documented": true
+          },
+          {
+            "domain": "cognition",
+            "label": "Cognition",
+            "documented": true
+          }
+        ],
+        "firedRules": [
+          {
+            "id": "R-DOMAIN-01-APPEARANCE-BEHAVIOUR",
+            "domain": "appearance-behaviour",
+            "category": "domain-documentation",
+            "description": "Appearance and behaviour domain documented (at least one finding recorded)"
+          },
+          {
+            "id": "R-DOMAIN-02-SPEECH",
+            "domain": "speech",
+            "category": "domain-documentation",
+            "description": "Speech domain documented (at least one finding recorded)"
+          },
+          {
+            "id": "R-DOMAIN-03-EMOTION",
+            "domain": "emotion",
+            "category": "domain-documentation",
+            "description": "Emotion (mood and affect) domain documented (at least one finding recorded)"
+          },
+          {
+            "id": "R-DOMAIN-04-PERCEPTION",
+            "domain": "perception",
+            "category": "domain-documentation",
+            "description": "Perception domain documented (at least one finding recorded)"
+          },
+          {
+            "id": "R-DOMAIN-05-THOUGHT",
+            "domain": "thought",
+            "category": "domain-documentation",
+            "description": "Thought (form and content) domain documented (at least one finding recorded)"
+          },
+          {
+            "id": "R-DOMAIN-06-INSIGHT",
+            "domain": "insight",
+            "category": "domain-documentation",
+            "description": "Insight and judgement domain documented (at least one finding recorded)"
+          },
+          {
+            "id": "R-DOMAIN-07-COGNITION",
+            "domain": "cognition",
+            "category": "domain-documentation",
+            "description": "Cognition domain documented (at least one finding recorded)"
+          },
+          {
+            "id": "R-COMPLETENESS-01",
+            "domain": "completeness",
+            "category": "completeness",
+            "description": "All 7 ASEPTIC domains documented — examination complete (100%)"
+          },
+          {
+            "id": "R-RISK-01",
+            "domain": "risk",
+            "category": "risk",
+            "description": "Risk level moderate — driven by the highest-priority safety flag raised"
+          }
+        ],
+        "flags": [
+          {
+            "id": "F-SELF-HARM-THOUGHTS-001",
+            "category": "self-harm",
+            "priority": "moderate",
+            "description": "Passive suicidal ideation (thoughts of being better off dead) without active plan",
+            "suggestedAction": "Explore protective factors and intent; document a safety plan and arrange appropriate follow-up."
+          }
+        ]
+      }
+    },
+    {
+      "name": "complete-high-risk",
+      "description": "Crisis assessment documenting active suicidal ideation with a plan across a complete examination — status complete, risk level high.",
+      "state": {
+        "context": {
+          "clinicianName": "Dr N Okoro",
+          "clinicianRole": "liaison",
+          "assessedAt": "2025-06-03T22:15",
+          "careSetting": "crisis",
+          "assessmentReason": "Presented to emergency department in crisis."
+        },
+        "identification": {
+          "patientIdentifier": "MSE-1003",
+          "ageBand": "26-39",
+          "sex": "female"
+        },
+        "appearance": {
+          "appearanceGrooming": "unkempt",
+          "appearanceEyeContact": "poor",
+          "appearanceRapport": "difficult",
+          "appearancePsychomotor": "agitation",
+          "appearanceAbnormalMovements": "none",
+          "appearanceNotes": "Distressed and tearful."
+        },
+        "speech": {
+          "speechRate": "normal",
+          "speechVolume": "normal",
+          "speechQuantity": "normal",
+          "speechFluency": "fluent",
+          "speechNotes": ""
+        },
+        "emotion": {
+          "moodSubjective": "\"hopeless\"",
+          "moodDescriptor": "low",
+          "affectRange": "restricted",
+          "affectCongruence": "congruent",
+          "affectReactivity": "reduced",
+          "emotionNotes": ""
+        },
+        "perception": {
+          "hallucinationsPresent": "none",
+          "commandHallucinations": "no",
+          "illusions": "no",
+          "depersonalisation": "no",
+          "derealisation": "no",
+          "perceptionNotes": ""
+        },
+        "thought": {
+          "thoughtForm": "linear",
+          "delusions": "none",
+          "obsessions": "no",
+          "suicidalIdeation": "active-with-plan",
+          "homicidalIdeation": "none",
+          "selfHarmThoughts": "thoughts",
+          "thoughtNotes": "Active suicidal ideation with a specific plan."
+        },
+        "insight": {
+          "insightLevel": "partial",
+          "treatmentUnderstanding": "understands",
+          "judgement": "impaired",
+          "insightNotes": ""
+        },
+        "cognition": {
+          "orientation": "oriented",
+          "attention": "distractible",
+          "memory": "intact",
+          "cognitiveImpression": "normal",
+          "cognitionNotes": ""
+        },
+        "summary": {
+          "clinicalFormulation": "High acute suicide risk; urgent psychiatric review and constant observation initiated."
+        }
+      },
+      "expected": {
+        "status": "complete",
+        "riskLevel": "high",
+        "completenessPercent": 100,
+        "domainStatuses": [
+          {
+            "domain": "appearance-behaviour",
+            "label": "Appearance and behaviour",
+            "documented": true
+          },
+          {
+            "domain": "speech",
+            "label": "Speech",
+            "documented": true
+          },
+          {
+            "domain": "emotion",
+            "label": "Emotion (mood and affect)",
+            "documented": true
+          },
+          {
+            "domain": "perception",
+            "label": "Perception",
+            "documented": true
+          },
+          {
+            "domain": "thought",
+            "label": "Thought (form and content)",
+            "documented": true
+          },
+          {
+            "domain": "insight",
+            "label": "Insight and judgement",
+            "documented": true
+          },
+          {
+            "domain": "cognition",
+            "label": "Cognition",
+            "documented": true
+          }
+        ],
+        "firedRules": [
+          {
+            "id": "R-DOMAIN-01-APPEARANCE-BEHAVIOUR",
+            "domain": "appearance-behaviour",
+            "category": "domain-documentation",
+            "description": "Appearance and behaviour domain documented (at least one finding recorded)"
+          },
+          {
+            "id": "R-DOMAIN-02-SPEECH",
+            "domain": "speech",
+            "category": "domain-documentation",
+            "description": "Speech domain documented (at least one finding recorded)"
+          },
+          {
+            "id": "R-DOMAIN-03-EMOTION",
+            "domain": "emotion",
+            "category": "domain-documentation",
+            "description": "Emotion (mood and affect) domain documented (at least one finding recorded)"
+          },
+          {
+            "id": "R-DOMAIN-04-PERCEPTION",
+            "domain": "perception",
+            "category": "domain-documentation",
+            "description": "Perception domain documented (at least one finding recorded)"
+          },
+          {
+            "id": "R-DOMAIN-05-THOUGHT",
+            "domain": "thought",
+            "category": "domain-documentation",
+            "description": "Thought (form and content) domain documented (at least one finding recorded)"
+          },
+          {
+            "id": "R-DOMAIN-06-INSIGHT",
+            "domain": "insight",
+            "category": "domain-documentation",
+            "description": "Insight and judgement domain documented (at least one finding recorded)"
+          },
+          {
+            "id": "R-DOMAIN-07-COGNITION",
+            "domain": "cognition",
+            "category": "domain-documentation",
+            "description": "Cognition domain documented (at least one finding recorded)"
+          },
+          {
+            "id": "R-COMPLETENESS-01",
+            "domain": "completeness",
+            "category": "completeness",
+            "description": "All 7 ASEPTIC domains documented — examination complete (100%)"
+          },
+          {
+            "id": "R-RISK-01",
+            "domain": "risk",
+            "category": "risk",
+            "description": "Risk level high — driven by the highest-priority safety flag raised"
+          }
+        ],
+        "flags": [
+          {
+            "id": "F-SUICIDAL-IDEATION-001",
+            "category": "suicidal-ideation",
+            "priority": "high",
+            "description": "Active suicidal ideation with a plan",
+            "suggestedAction": "Complete a full suicide-risk assessment now and escalate per local safety policy; do not leave the patient unobserved if risk is imminent."
+          },
+          {
+            "id": "F-SELF-HARM-THOUGHTS-001",
+            "category": "self-harm",
+            "priority": "moderate",
+            "description": "Thoughts of self-harm without recent acts",
+            "suggestedAction": "Explore protective factors and intent; document a safety plan and arrange appropriate follow-up."
+          },
+          {
+            "id": "F-AGITATION-001",
+            "category": "other",
+            "priority": "low",
+            "description": "Psychomotor agitation observed",
+            "suggestedAction": "Use de-escalation, ensure staff and patient safety, and monitor for escalation."
+          }
+        ]
+      }
+    }
+  ]
+}

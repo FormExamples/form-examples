@@ -1,0 +1,586 @@
+{
+  "engine": "front-end-with-html",
+  "graderHint": "gradeDyslexia",
+  "note": "Realistic filled-in states in the scoring engine's shape. `expected` is computed by `bin/test-personas --update` and verified by `bin/test-personas`. Overall severity is driven by the lowest non-null standardised score (mean 100, SD 15): 85+ none, 70-84 mild, 55-69 moderate, <55 severe.",
+  "personas": [
+    {
+      "name": "no-dyslexia",
+      "description": "Year 5 pupil referred for a precautionary check: every standardised score is within average limits (lowest 92) — no dyslexia.",
+      "state": {
+        "demographics": {
+          "firstName": "Amelia",
+          "lastName": "Clarke",
+          "dateOfBirth": "2015-04-12",
+          "sex": "female",
+          "ageYears": 10,
+          "preferredLanguage": "english",
+          "firstLanguage": "english",
+          "handedness": "right",
+          "referralSource": "school-senco",
+          "referralReason": "Class teacher requested screening after a quiet term; no strong concerns."
+        },
+        "developmentalHistory": {
+          "pregnancyComplications": "no",
+          "pregnancyDetails": "",
+          "birthComplications": "no",
+          "birthDetails": "",
+          "earlyMilestones": "typical",
+          "speechDelay": "no",
+          "languageDelay": "no",
+          "hearingProblems": "no",
+          "visionProblems": "no",
+          "familyHistoryDyslexia": "no",
+          "familyHistoryDetails": "",
+          "otherDevelopmentalNotes": ""
+        },
+        "educationalBackground": {
+          "schoolType": "mainstream",
+          "currentYearGroup": "year-5",
+          "schoolChanges": "no",
+          "schoolChangeCount": 0,
+          "attendanceIssues": "no",
+          "attendanceDetails": "",
+          "eslLearner": "no",
+          "academicStrengths": "Mathematics and science.",
+          "academicWeaknesses": "",
+          "previousAssessments": "no",
+          "previousAssessmentDetails": ""
+        },
+        "readingAssessment": {
+          "readingFluencyScore": 98,
+          "readingComprehensionScore": 102,
+          "difficultyDecoding": "no",
+          "difficultyComprehension": "no",
+          "avoidsReading": "no",
+          "slowReadingSpeed": "no",
+          "losesPlaceWhenReading": "no",
+          "readingNotes": "Reads age-appropriate texts fluently."
+        },
+        "writingSpelling": {
+          "spellingAccuracyScore": 95,
+          "writtenExpressionScore": 100,
+          "difficultySpelling": "no",
+          "difficultyHandwriting": "no",
+          "difficultyOrganisingIdeas": "no",
+          "omitsLettersOrWords": "no",
+          "reversesLettersOrNumbers": "no",
+          "writingNotes": ""
+        },
+        "phonologicalProcessing": {
+          "phonologicalAwarenessScore": 97,
+          "phonologicalMemoryScore": 92,
+          "rapidNamingScore": 99,
+          "difficultyRhyming": "no",
+          "difficultySegmentingSounds": "no",
+          "difficultyBlendingSounds": "no",
+          "difficultyLearningLetterSounds": "no",
+          "phonologicalNotes": ""
+        },
+        "workingMemoryProcessingSpeed": {
+          "workingMemoryScore": 96,
+          "processingSpeedScore": 101,
+          "difficultyFollowingInstructions": "no",
+          "difficultyRememberingSequences": "no",
+          "slowToCompleteTasks": "no",
+          "difficultyTakingNotes": "no",
+          "memoryNotes": ""
+        },
+        "emotionalBehavioural": {
+          "lowSelfEsteem": "no",
+          "anxietyAboutSchool": "no",
+          "avoidanceBehaviour": "no",
+          "frustrationWithLearning": "no",
+          "peerRelationshipDifficulties": "no",
+          "sleepDisturbance": "no",
+          "mentalHealthConcerns": "no",
+          "mentalHealthDetails": "",
+          "behaviouralNotes": ""
+        },
+        "previousSupport": {
+          "previousIntervention": "no",
+          "interventionTypes": "",
+          "currentEhcpOrIep": "no",
+          "ehcpDetails": "",
+          "accessArrangements": "no",
+          "accessArrangementsList": [],
+          "tutorialSupport": "no",
+          "assistiveTechnologyUsed": "no",
+          "assistiveTechnologyDetails": "",
+          "previousSupportNotes": ""
+        },
+        "recommendationsSupportPlan": {
+          "recommendedSupports": [],
+          "structuredLiteracyRecommended": "no",
+          "assistiveTechRecommended": "no",
+          "extraTimeRecommended": "no",
+          "specialistAssessmentRecommended": "no",
+          "parentTrainingRecommended": "no",
+          "keyGoals": "Continue current provision; no additional support indicated.",
+          "reviewTimeframe": "12-months",
+          "additionalRecommendations": ""
+        }
+      },
+      "expected": {
+        "overallSeverity": "none",
+        "lowestScore": 92,
+        "answeredCount": 9,
+        "domainScores": [
+          {
+            "id": "DYS-001",
+            "category": "Reading",
+            "description": "Reading fluency standardised score",
+            "score": 98,
+            "severity": "none"
+          },
+          {
+            "id": "DYS-002",
+            "category": "Reading",
+            "description": "Reading comprehension standardised score",
+            "score": 102,
+            "severity": "none"
+          },
+          {
+            "id": "DYS-003",
+            "category": "Writing & Spelling",
+            "description": "Spelling accuracy standardised score",
+            "score": 95,
+            "severity": "none"
+          },
+          {
+            "id": "DYS-004",
+            "category": "Writing & Spelling",
+            "description": "Written expression standardised score",
+            "score": 100,
+            "severity": "none"
+          },
+          {
+            "id": "DYS-005",
+            "category": "Phonological Processing",
+            "description": "Phonological awareness standardised score",
+            "score": 97,
+            "severity": "none"
+          },
+          {
+            "id": "DYS-006",
+            "category": "Phonological Processing",
+            "description": "Phonological memory standardised score",
+            "score": 92,
+            "severity": "none"
+          },
+          {
+            "id": "DYS-007",
+            "category": "Phonological Processing",
+            "description": "Rapid naming standardised score",
+            "score": 99,
+            "severity": "none"
+          },
+          {
+            "id": "DYS-008",
+            "category": "Working Memory & Processing Speed",
+            "description": "Working memory standardised score",
+            "score": 96,
+            "severity": "none"
+          },
+          {
+            "id": "DYS-009",
+            "category": "Working Memory & Processing Speed",
+            "description": "Processing speed standardised score",
+            "score": 101,
+            "severity": "none"
+          }
+        ],
+        "additionalFlags": []
+      }
+    },
+    {
+      "name": "moderate-dyslexia",
+      "description": "Year 7 pupil with a consistent phonological profile: phonological awareness 62 and rapid naming 60 (lowest 60) — moderate dyslexia.",
+      "state": {
+        "demographics": {
+          "firstName": "Jacob",
+          "lastName": "Reid",
+          "dateOfBirth": "2013-09-03",
+          "sex": "male",
+          "ageYears": 12,
+          "preferredLanguage": "english",
+          "firstLanguage": "english",
+          "handedness": "left",
+          "referralSource": "school-senco",
+          "referralReason": "Persistent difficulty with reading and spelling despite intervention."
+        },
+        "developmentalHistory": {
+          "pregnancyComplications": "no",
+          "pregnancyDetails": "",
+          "birthComplications": "no",
+          "birthDetails": "",
+          "earlyMilestones": "typical",
+          "speechDelay": "yes",
+          "languageDelay": "no",
+          "hearingProblems": "no",
+          "visionProblems": "no",
+          "familyHistoryDyslexia": "yes",
+          "familyHistoryDetails": "Father and older brother both diagnosed with dyslexia.",
+          "otherDevelopmentalNotes": ""
+        },
+        "educationalBackground": {
+          "schoolType": "mainstream",
+          "currentYearGroup": "year-7",
+          "schoolChanges": "no",
+          "schoolChangeCount": 0,
+          "attendanceIssues": "no",
+          "attendanceDetails": "",
+          "eslLearner": "no",
+          "academicStrengths": "Verbal reasoning and problem solving.",
+          "academicWeaknesses": "Reading aloud, spelling, timed writing.",
+          "previousAssessments": "yes",
+          "previousAssessmentDetails": "School-based literacy screen flagged concerns in Year 4."
+        },
+        "readingAssessment": {
+          "readingFluencyScore": 74,
+          "readingComprehensionScore": 82,
+          "difficultyDecoding": "yes",
+          "difficultyComprehension": "no",
+          "avoidsReading": "yes",
+          "slowReadingSpeed": "yes",
+          "losesPlaceWhenReading": "yes",
+          "readingNotes": "Effortful decoding; comprehension better when read to."
+        },
+        "writingSpelling": {
+          "spellingAccuracyScore": 70,
+          "writtenExpressionScore": 78,
+          "difficultySpelling": "yes",
+          "difficultyHandwriting": "no",
+          "difficultyOrganisingIdeas": "yes",
+          "omitsLettersOrWords": "yes",
+          "reversesLettersOrNumbers": "no",
+          "writingNotes": ""
+        },
+        "phonologicalProcessing": {
+          "phonologicalAwarenessScore": 62,
+          "phonologicalMemoryScore": 68,
+          "rapidNamingScore": 60,
+          "difficultyRhyming": "yes",
+          "difficultySegmentingSounds": "yes",
+          "difficultyBlendingSounds": "yes",
+          "difficultyLearningLetterSounds": "no",
+          "phonologicalNotes": "Marked weakness in phonological awareness and rapid naming."
+        },
+        "workingMemoryProcessingSpeed": {
+          "workingMemoryScore": 79,
+          "processingSpeedScore": 76,
+          "difficultyFollowingInstructions": "yes",
+          "difficultyRememberingSequences": "yes",
+          "slowToCompleteTasks": "yes",
+          "difficultyTakingNotes": "yes",
+          "memoryNotes": ""
+        },
+        "emotionalBehavioural": {
+          "lowSelfEsteem": "yes",
+          "anxietyAboutSchool": "yes",
+          "avoidanceBehaviour": "yes",
+          "frustrationWithLearning": "yes",
+          "peerRelationshipDifficulties": "no",
+          "sleepDisturbance": "no",
+          "mentalHealthConcerns": "no",
+          "mentalHealthDetails": "",
+          "behaviouralNotes": ""
+        },
+        "previousSupport": {
+          "previousIntervention": "yes",
+          "interventionTypes": "Small-group phonics; guided reading.",
+          "currentEhcpOrIep": "iep",
+          "ehcpDetails": "Individual education plan in place.",
+          "accessArrangements": "no",
+          "accessArrangementsList": [],
+          "tutorialSupport": "yes",
+          "assistiveTechnologyUsed": "no",
+          "assistiveTechnologyDetails": "",
+          "previousSupportNotes": ""
+        },
+        "recommendationsSupportPlan": {
+          "recommendedSupports": [
+            "structured-literacy",
+            "extra-time"
+          ],
+          "structuredLiteracyRecommended": "yes",
+          "assistiveTechRecommended": "yes",
+          "extraTimeRecommended": "yes",
+          "specialistAssessmentRecommended": "no",
+          "parentTrainingRecommended": "yes",
+          "keyGoals": "Systematic synthetic phonics; assistive reading technology; 25% extra time.",
+          "reviewTimeframe": "6-months",
+          "additionalRecommendations": ""
+        }
+      },
+      "expected": {
+        "overallSeverity": "moderate",
+        "lowestScore": 60,
+        "answeredCount": 9,
+        "domainScores": [
+          {
+            "id": "DYS-001",
+            "category": "Reading",
+            "description": "Reading fluency standardised score",
+            "score": 74,
+            "severity": "mild"
+          },
+          {
+            "id": "DYS-002",
+            "category": "Reading",
+            "description": "Reading comprehension standardised score",
+            "score": 82,
+            "severity": "mild"
+          },
+          {
+            "id": "DYS-003",
+            "category": "Writing & Spelling",
+            "description": "Spelling accuracy standardised score",
+            "score": 70,
+            "severity": "mild"
+          },
+          {
+            "id": "DYS-004",
+            "category": "Writing & Spelling",
+            "description": "Written expression standardised score",
+            "score": 78,
+            "severity": "mild"
+          },
+          {
+            "id": "DYS-005",
+            "category": "Phonological Processing",
+            "description": "Phonological awareness standardised score",
+            "score": 62,
+            "severity": "moderate"
+          },
+          {
+            "id": "DYS-006",
+            "category": "Phonological Processing",
+            "description": "Phonological memory standardised score",
+            "score": 68,
+            "severity": "moderate"
+          },
+          {
+            "id": "DYS-007",
+            "category": "Phonological Processing",
+            "description": "Rapid naming standardised score",
+            "score": 60,
+            "severity": "moderate"
+          },
+          {
+            "id": "DYS-008",
+            "category": "Working Memory & Processing Speed",
+            "description": "Working memory standardised score",
+            "score": 79,
+            "severity": "mild"
+          },
+          {
+            "id": "DYS-009",
+            "category": "Working Memory & Processing Speed",
+            "description": "Processing speed standardised score",
+            "score": 76,
+            "severity": "mild"
+          }
+        ],
+        "additionalFlags": []
+      }
+    },
+    {
+      "name": "severe-dyslexia",
+      "description": "Year 4 pupil with pervasive, significantly-below-average scores: reading fluency 48 and spelling 50 (lowest 48) — severe dyslexia.",
+      "state": {
+        "demographics": {
+          "firstName": "Sofia",
+          "lastName": "Nowak",
+          "dateOfBirth": "2016-01-22",
+          "sex": "female",
+          "ageYears": 9,
+          "preferredLanguage": "english",
+          "firstLanguage": "polish",
+          "handedness": "right",
+          "referralSource": "educational-psychologist",
+          "referralReason": "Significant literacy failure across the curriculum despite sustained support."
+        },
+        "developmentalHistory": {
+          "pregnancyComplications": "no",
+          "pregnancyDetails": "",
+          "birthComplications": "no",
+          "birthDetails": "",
+          "earlyMilestones": "delayed",
+          "speechDelay": "yes",
+          "languageDelay": "yes",
+          "hearingProblems": "no",
+          "visionProblems": "no",
+          "familyHistoryDyslexia": "yes",
+          "familyHistoryDetails": "Mother reports lifelong reading difficulties.",
+          "otherDevelopmentalNotes": ""
+        },
+        "educationalBackground": {
+          "schoolType": "mainstream",
+          "currentYearGroup": "year-4",
+          "schoolChanges": "yes",
+          "schoolChangeCount": 2,
+          "attendanceIssues": "no",
+          "attendanceDetails": "",
+          "eslLearner": "yes",
+          "academicStrengths": "Art and practical tasks.",
+          "academicWeaknesses": "All literacy-based work.",
+          "previousAssessments": "yes",
+          "previousAssessmentDetails": "Two prior school literacy reviews; minimal progress."
+        },
+        "readingAssessment": {
+          "readingFluencyScore": 48,
+          "readingComprehensionScore": 55,
+          "difficultyDecoding": "yes",
+          "difficultyComprehension": "yes",
+          "avoidsReading": "yes",
+          "slowReadingSpeed": "yes",
+          "losesPlaceWhenReading": "yes",
+          "readingNotes": "Cannot decode unfamiliar single-syllable words reliably."
+        },
+        "writingSpelling": {
+          "spellingAccuracyScore": 50,
+          "writtenExpressionScore": 54,
+          "difficultySpelling": "yes",
+          "difficultyHandwriting": "yes",
+          "difficultyOrganisingIdeas": "yes",
+          "omitsLettersOrWords": "yes",
+          "reversesLettersOrNumbers": "yes",
+          "writingNotes": "Frequent letter reversals and phonetic misspellings."
+        },
+        "phonologicalProcessing": {
+          "phonologicalAwarenessScore": 52,
+          "phonologicalMemoryScore": 58,
+          "rapidNamingScore": 56,
+          "difficultyRhyming": "yes",
+          "difficultySegmentingSounds": "yes",
+          "difficultyBlendingSounds": "yes",
+          "difficultyLearningLetterSounds": "yes",
+          "phonologicalNotes": ""
+        },
+        "workingMemoryProcessingSpeed": {
+          "workingMemoryScore": 62,
+          "processingSpeedScore": 60,
+          "difficultyFollowingInstructions": "yes",
+          "difficultyRememberingSequences": "yes",
+          "slowToCompleteTasks": "yes",
+          "difficultyTakingNotes": "yes",
+          "memoryNotes": ""
+        },
+        "emotionalBehavioural": {
+          "lowSelfEsteem": "yes",
+          "anxietyAboutSchool": "yes",
+          "avoidanceBehaviour": "yes",
+          "frustrationWithLearning": "yes",
+          "peerRelationshipDifficulties": "yes",
+          "sleepDisturbance": "yes",
+          "mentalHealthConcerns": "yes",
+          "mentalHealthDetails": "Increasing school-related anxiety.",
+          "behaviouralNotes": ""
+        },
+        "previousSupport": {
+          "previousIntervention": "yes",
+          "interventionTypes": "Daily phonics; 1:1 teaching assistant support.",
+          "currentEhcpOrIep": "ehcp",
+          "ehcpDetails": "EHCP naming specific literacy provision.",
+          "accessArrangements": "yes",
+          "accessArrangementsList": [
+            "extra-time",
+            "reader",
+            "scribe"
+          ],
+          "tutorialSupport": "yes",
+          "assistiveTechnologyUsed": "yes",
+          "assistiveTechnologyDetails": "Text-to-speech on a school laptop.",
+          "previousSupportNotes": ""
+        },
+        "recommendationsSupportPlan": {
+          "recommendedSupports": [
+            "structured-literacy",
+            "assistive-tech",
+            "extra-time",
+            "specialist-assessment"
+          ],
+          "structuredLiteracyRecommended": "yes",
+          "assistiveTechRecommended": "yes",
+          "extraTimeRecommended": "yes",
+          "specialistAssessmentRecommended": "yes",
+          "parentTrainingRecommended": "yes",
+          "keyGoals": "Intensive specialist literacy programme with full access arrangements and assistive technology.",
+          "reviewTimeframe": "3-months",
+          "additionalRecommendations": "Refer to specialist dyslexia teacher."
+        }
+      },
+      "expected": {
+        "overallSeverity": "severe",
+        "lowestScore": 48,
+        "answeredCount": 9,
+        "domainScores": [
+          {
+            "id": "DYS-001",
+            "category": "Reading",
+            "description": "Reading fluency standardised score",
+            "score": 48,
+            "severity": "severe"
+          },
+          {
+            "id": "DYS-002",
+            "category": "Reading",
+            "description": "Reading comprehension standardised score",
+            "score": 55,
+            "severity": "moderate"
+          },
+          {
+            "id": "DYS-003",
+            "category": "Writing & Spelling",
+            "description": "Spelling accuracy standardised score",
+            "score": 50,
+            "severity": "severe"
+          },
+          {
+            "id": "DYS-004",
+            "category": "Writing & Spelling",
+            "description": "Written expression standardised score",
+            "score": 54,
+            "severity": "severe"
+          },
+          {
+            "id": "DYS-005",
+            "category": "Phonological Processing",
+            "description": "Phonological awareness standardised score",
+            "score": 52,
+            "severity": "severe"
+          },
+          {
+            "id": "DYS-006",
+            "category": "Phonological Processing",
+            "description": "Phonological memory standardised score",
+            "score": 58,
+            "severity": "moderate"
+          },
+          {
+            "id": "DYS-007",
+            "category": "Phonological Processing",
+            "description": "Rapid naming standardised score",
+            "score": 56,
+            "severity": "moderate"
+          },
+          {
+            "id": "DYS-008",
+            "category": "Working Memory & Processing Speed",
+            "description": "Working memory standardised score",
+            "score": 62,
+            "severity": "moderate"
+          },
+          {
+            "id": "DYS-009",
+            "category": "Working Memory & Processing Speed",
+            "description": "Processing speed standardised score",
+            "score": 60,
+            "severity": "moderate"
+          }
+        ],
+        "additionalFlags": []
+      }
+    }
+  ]
+}

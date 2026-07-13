@@ -1,0 +1,398 @@
+{
+  "engine": "front-end-with-html",
+  "graderHint": "calculateReturnToWork",
+  "note": "Realistic filled-in states in the scoring engine's shape. `expected` is computed by `bin/test-personas --update` and verified by `bin/test-personas`. The fitness statement comes from the clinician's outcome; the restriction priority is the max grade of the fired restriction rules (routine / standard / restricted / high-risk).",
+  "personas": [
+    {
+      "name": "fit-routine",
+      "description": "Fully recovered office worker returning to unrestricted duties; no adjustments — fit for work, routine restriction priority.",
+      "state": {
+        "clinician": {
+          "name": "Dr H Patel",
+          "role": "gp",
+          "registrationNumber": "GMC1234567",
+          "site": "Riverside Medical Practice",
+          "signature": "H Patel",
+          "date": "2025-06-01"
+        },
+        "patient": {
+          "nhsNumber": "4000000011",
+          "firstName": "Sarah",
+          "lastName": "Nolan",
+          "dateOfBirth": "1990-05-14",
+          "sex": "female",
+          "phone": "07700900011",
+          "email": "sarah.nolan@example.com",
+          "employerName": "Acme Ltd",
+          "employerOhContact": ""
+        },
+        "job": {
+          "jobTitle": "Administrator",
+          "roleDescription": "Office-based administrative work.",
+          "contractedHours": 37,
+          "shiftPattern": "days",
+          "safetyCritical": "no",
+          "dvlaNotifiableRole": "no",
+          "industrySector": "office"
+        },
+        "absence": {
+          "firstDayOfAbsence": "2025-05-06",
+          "totalDaysAbsent": 14,
+          "priorMed3Ref": "",
+          "previousSelfCertification": "yes"
+        },
+        "diagnosis": {
+          "primaryDiagnosis": "Viral labyrinthitis, resolved.",
+          "diagnosisCode": "H83.0",
+          "comorbidConditions": "",
+          "mechanism": "illness",
+          "workplaceCause": "no",
+          "riddorReference": ""
+        },
+        "treatment": {
+          "currentMedications": "None.",
+          "ongoingTherapy": "None.",
+          "lastConsultationDate": "2025-05-30",
+          "recoveryTrajectory": "full-recovery"
+        },
+        "functional": {
+          "mobility": "normal",
+          "manualHandling": "normal",
+          "cognition": "normal",
+          "mood": "normal",
+          "sleep": "normal",
+          "pain": 0,
+          "drivingCapacity": "full",
+          "standingTolerance": "full",
+          "sittingTolerance": "full",
+          "screenTolerance": "full",
+          "adlIndependence": "independent"
+        },
+        "fitness": {
+          "outcome": "fit",
+          "clinicianConfidence": "high",
+          "validFrom": "2025-06-02",
+          "validTo": "",
+          "validWeeks": null,
+          "reassessmentRequired": "no"
+        },
+        "phasedReturn": {
+          "applicable": "no",
+          "startHoursPerWeek": null,
+          "targetFullHoursDate": "",
+          "daysPerWeek": null,
+          "supportContact": ""
+        },
+        "adjustments": {
+          "alteredHours": false,
+          "amendedDuties": false,
+          "workplaceAdaptations": false,
+          "noHeavyLifting": false,
+          "liftingKgLimit": null,
+          "noDriving": false,
+          "noOperatingMachinery": false,
+          "noWorkingAtHeight": false,
+          "noLoneWorking": false,
+          "noNightShifts": false,
+          "noPatientContact": false,
+          "sedentaryOnly": false,
+          "noExposure": "",
+          "screenBreakFrequency": "",
+          "workstationReviewRequired": "",
+          "additionalAdjustments": ""
+        },
+        "followUp": {
+          "reviewClinic": "",
+          "reviewDate": "",
+          "ohReferralMade": "no",
+          "dvlaNotificationRequired": "no",
+          "employerOhNotified": "no"
+        },
+        "signOff": {
+          "clinicianOverride": "no",
+          "overrideOutcome": "",
+          "overrideReason": "",
+          "finalNotes": "Fit to resume full duties.",
+          "signature": "H Patel"
+        }
+      },
+      "expected": {
+        "fitnessStatement": "fit",
+        "computedFitness": "fit",
+        "overridden": false,
+        "restrictionPriority": "routine",
+        "firedRules": [],
+        "additionalFlags": []
+      }
+    },
+    {
+      "name": "may-be-fit-restricted",
+      "description": "Warehouse worker recovering from a back injury, phased return with no heavy lifting and amended duties (grade-3 restrictions) — may be fit for work, restricted restriction priority.",
+      "state": {
+        "clinician": {
+          "name": "Dr H Patel",
+          "role": "gp",
+          "registrationNumber": "GMC1234567",
+          "site": "Riverside Medical Practice",
+          "signature": "H Patel",
+          "date": "2025-06-01"
+        },
+        "patient": {
+          "nhsNumber": "4000000022",
+          "firstName": "David",
+          "lastName": "Okafor",
+          "dateOfBirth": "1985-09-22",
+          "sex": "male",
+          "phone": "07700900022",
+          "email": "david.okafor@example.com",
+          "employerName": "Logistics Co",
+          "employerOhContact": "oh@logisticsco.example.com"
+        },
+        "job": {
+          "jobTitle": "Warehouse operative",
+          "roleDescription": "Manual handling and order picking.",
+          "contractedHours": 40,
+          "shiftPattern": "rotating",
+          "safetyCritical": "no",
+          "dvlaNotifiableRole": "no",
+          "industrySector": "logistics"
+        },
+        "absence": {
+          "firstDayOfAbsence": "2025-04-14",
+          "totalDaysAbsent": 45,
+          "priorMed3Ref": "M3-2025-0012",
+          "previousSelfCertification": "no"
+        },
+        "diagnosis": {
+          "primaryDiagnosis": "Mechanical lower back pain.",
+          "diagnosisCode": "M54.5",
+          "comorbidConditions": "",
+          "mechanism": "injury",
+          "workplaceCause": "yes",
+          "riddorReference": "RIDDOR-2025-0456"
+        },
+        "treatment": {
+          "currentMedications": "Paracetamol as required.",
+          "ongoingTherapy": "Physiotherapy.",
+          "lastConsultationDate": "2025-05-28",
+          "recoveryTrajectory": "improving"
+        },
+        "functional": {
+          "mobility": "mildly-reduced",
+          "manualHandling": "significantly-reduced",
+          "cognition": "normal",
+          "mood": "normal",
+          "sleep": "mildly-reduced",
+          "pain": 4,
+          "drivingCapacity": "full",
+          "standingTolerance": "reduced",
+          "sittingTolerance": "reduced",
+          "screenTolerance": "full",
+          "adlIndependence": "independent"
+        },
+        "fitness": {
+          "outcome": "may-be-fit",
+          "clinicianConfidence": "moderate",
+          "validFrom": "2025-06-02",
+          "validTo": "2025-07-14",
+          "validWeeks": 6,
+          "reassessmentRequired": "yes"
+        },
+        "phasedReturn": {
+          "applicable": "yes",
+          "startHoursPerWeek": 20,
+          "targetFullHoursDate": "2025-07-14",
+          "daysPerWeek": 3,
+          "supportContact": "Line manager"
+        },
+        "adjustments": {
+          "alteredHours": true,
+          "amendedDuties": true,
+          "workplaceAdaptations": false,
+          "noHeavyLifting": true,
+          "liftingKgLimit": 5,
+          "noDriving": false,
+          "noOperatingMachinery": false,
+          "noWorkingAtHeight": false,
+          "noLoneWorking": false,
+          "noNightShifts": false,
+          "noPatientContact": false,
+          "sedentaryOnly": false,
+          "noExposure": "",
+          "screenBreakFrequency": "",
+          "workstationReviewRequired": "no",
+          "additionalAdjustments": "Light duties on return."
+        },
+        "followUp": {
+          "reviewClinic": "GP",
+          "reviewDate": "2025-07-10",
+          "ohReferralMade": "yes",
+          "dvlaNotificationRequired": "no",
+          "employerOhNotified": "yes"
+        },
+        "signOff": {
+          "clinicianOverride": "no",
+          "overrideOutcome": "",
+          "overrideReason": "",
+          "finalNotes": "Phased return with lifting restriction and amended duties.",
+          "signature": "H Patel"
+        }
+      },
+      "expected": {
+        "fitnessStatement": "may-be-fit",
+        "computedFitness": "may-be-fit",
+        "overridden": false,
+        "restrictionPriority": "restricted",
+        "firedRules": [
+          {
+            "id": "RST-001",
+            "system": "Phased return",
+            "description": "Phased return to work in place",
+            "grade": 2
+          },
+          {
+            "id": "RST-002",
+            "system": "Hours",
+            "description": "Altered hours requested",
+            "grade": 2
+          },
+          {
+            "id": "RST-010",
+            "system": "Manual handling",
+            "description": "No heavy lifting",
+            "grade": 3
+          },
+          {
+            "id": "RST-014",
+            "system": "Duties",
+            "description": "Two or more adjustments combined",
+            "grade": 3
+          }
+        ],
+        "additionalFlags": []
+      }
+    },
+    {
+      "name": "not-fit",
+      "description": "Employee signed off entirely following surgery, no workplace adjustments yet applicable — not fit for work, routine restriction priority.",
+      "state": {
+        "clinician": {
+          "name": "Dr H Patel",
+          "role": "gp",
+          "registrationNumber": "GMC1234567",
+          "site": "Riverside Medical Practice",
+          "signature": "H Patel",
+          "date": "2025-06-01"
+        },
+        "patient": {
+          "nhsNumber": "4000000033",
+          "firstName": "Angela",
+          "lastName": "Ferris",
+          "dateOfBirth": "1972-12-03",
+          "sex": "female",
+          "phone": "07700900033",
+          "email": "angela.ferris@example.com",
+          "employerName": "County Council",
+          "employerOhContact": ""
+        },
+        "job": {
+          "jobTitle": "Teaching assistant",
+          "roleDescription": "Classroom support.",
+          "contractedHours": 30,
+          "shiftPattern": "days",
+          "safetyCritical": "no",
+          "dvlaNotifiableRole": "no",
+          "industrySector": "education"
+        },
+        "absence": {
+          "firstDayOfAbsence": "2025-05-19",
+          "totalDaysAbsent": 21,
+          "priorMed3Ref": "",
+          "previousSelfCertification": "no"
+        },
+        "diagnosis": {
+          "primaryDiagnosis": "Recovery from abdominal surgery.",
+          "diagnosisCode": "Z48.0",
+          "comorbidConditions": "",
+          "mechanism": "surgery",
+          "workplaceCause": "no",
+          "riddorReference": ""
+        },
+        "treatment": {
+          "currentMedications": "Analgesia as required.",
+          "ongoingTherapy": "Surgical follow-up.",
+          "lastConsultationDate": "2025-05-30",
+          "recoveryTrajectory": "improving"
+        },
+        "functional": {
+          "mobility": "significantly-reduced",
+          "manualHandling": "significantly-reduced",
+          "cognition": "normal",
+          "mood": "mildly-reduced",
+          "sleep": "reduced",
+          "pain": 6,
+          "drivingCapacity": "none",
+          "standingTolerance": "significantly-reduced",
+          "sittingTolerance": "reduced",
+          "screenTolerance": "full",
+          "adlIndependence": "needs-some-help"
+        },
+        "fitness": {
+          "outcome": "not-fit",
+          "clinicianConfidence": "high",
+          "validFrom": "2025-06-02",
+          "validTo": "2025-06-30",
+          "validWeeks": 4,
+          "reassessmentRequired": "yes"
+        },
+        "phasedReturn": {
+          "applicable": "no",
+          "startHoursPerWeek": null,
+          "targetFullHoursDate": "",
+          "daysPerWeek": null,
+          "supportContact": ""
+        },
+        "adjustments": {
+          "alteredHours": false,
+          "amendedDuties": false,
+          "workplaceAdaptations": false,
+          "noHeavyLifting": false,
+          "liftingKgLimit": null,
+          "noDriving": false,
+          "noOperatingMachinery": false,
+          "noWorkingAtHeight": false,
+          "noLoneWorking": false,
+          "noNightShifts": false,
+          "noPatientContact": false,
+          "sedentaryOnly": false,
+          "noExposure": "",
+          "screenBreakFrequency": "",
+          "workstationReviewRequired": "",
+          "additionalAdjustments": ""
+        },
+        "followUp": {
+          "reviewClinic": "GP",
+          "reviewDate": "2025-06-27",
+          "ohReferralMade": "no",
+          "dvlaNotificationRequired": "no",
+          "employerOhNotified": "no"
+        },
+        "signOff": {
+          "clinicianOverride": "no",
+          "overrideOutcome": "",
+          "overrideReason": "",
+          "finalNotes": "Not fit for work during post-operative recovery; review before return.",
+          "signature": "H Patel"
+        }
+      },
+      "expected": {
+        "fitnessStatement": "not-fit",
+        "computedFitness": "not-fit",
+        "overridden": false,
+        "restrictionPriority": "routine",
+        "firedRules": [],
+        "additionalFlags": []
+      }
+    }
+  ]
+}

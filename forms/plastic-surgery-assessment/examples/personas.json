@@ -1,0 +1,774 @@
+{
+  "engine": "front-end-with-html",
+  "graderHint": "calculatePlasticsGrade",
+  "note": "Realistic filled-in states in the scoring engine's shape. `expected` is computed by `bin/test-personas --update` and verified by `bin/test-personas`. Overall risk reduces the worst fired-rule grade and the ASA / wound / complexity classifications to low / moderate / high / critical.",
+  "personas": [
+    {
+      "name": "elective-minor-low",
+      "description": "Fit ASA I patient for a routine minor clean lesion excision, complexity 1, no comorbidities — low overall risk.",
+      "state": {
+        "demographics": {
+          "firstName": "George",
+          "lastName": "Hale",
+          "dateOfBirth": "1990-04-05",
+          "sex": "male",
+          "weight": 78,
+          "height": 180,
+          "bmi": 24.1
+        },
+        "reasonForReferral": {
+          "referralType": "elective",
+          "referralTypeOther": "",
+          "urgency": "routine",
+          "primaryComplaint": "Benign mole on forearm for removal.",
+          "affectedBodyArea": "upper-limb",
+          "affectedBodyAreaOther": "",
+          "laterality": "left",
+          "durationOfCondition": "2-years",
+          "previousConsultations": "no",
+          "previousConsultationsDetails": ""
+        },
+        "medicalSurgicalHistory": {
+          "previousPlasticSurgery": "no",
+          "previousPlasticSurgeryDetails": "",
+          "previousGeneralSurgery": "no",
+          "previousGeneralSurgeryDetails": "",
+          "woundHealingProblems": "no",
+          "woundHealingDetails": "",
+          "keloidScarring": "no",
+          "scarringDetails": "",
+          "diabetes": "no",
+          "diabetesControlled": "",
+          "hypertension": "no",
+          "cardiacDisease": "no",
+          "cardiacDiseaseDetails": "",
+          "respiratoryDisease": "no",
+          "respiratoryDiseaseDetails": "",
+          "autoimmuneDisease": "no",
+          "autoimmuneDiseaseDetails": "",
+          "bleedingDisorder": "no",
+          "bleedingDisorderDetails": "",
+          "immunosuppressed": "no",
+          "immunosuppressedDetails": "",
+          "cancerHistory": "no",
+          "cancerHistoryDetails": ""
+        },
+        "currentCondition": {
+          "conditionCategory": "benign-lesion",
+          "conditionDescription": "Small pigmented naevus.",
+          "lesionLengthMm": 6,
+          "lesionWidthMm": 5,
+          "lesionDepthMm": 2,
+          "tissueLoss": "no",
+          "tissueLossPercentage": null,
+          "functionalImpairment": "none",
+          "functionalImpairmentDetails": "",
+          "painLevel": 0,
+          "cosmeticConcern": "mild",
+          "impactOnDailyActivities": "none"
+        },
+        "woundTissueAssessment": {
+          "hasOpenWound": "no",
+          "woundClassification": "clean",
+          "woundAge": "",
+          "woundAetiology": "",
+          "woundBedTissue": "",
+          "woundExudate": "",
+          "woundInfectionSigns": "no",
+          "woundInfectionDetails": "",
+          "tissueViability": "viable",
+          "surroundingSkin": "healthy",
+          "vascularSupply": "normal",
+          "sensoryStatus": "normal",
+          "previousWoundTreatments": ""
+        },
+        "psychologicalAssessment": {
+          "bodyDysmorphicConcern": "no",
+          "bodyDysmorphicDetails": "",
+          "realisticExpectations": "yes",
+          "expectationsDetails": "",
+          "motivation": "functional",
+          "motivationOther": "",
+          "previousMentalHealth": "no",
+          "mentalHealthDetails": "",
+          "anxietyLevel": "none",
+          "depressionScreen": "negative",
+          "socialImpact": "minimal",
+          "socialImpactDetails": "",
+          "psychologicalReferralNeeded": "no"
+        },
+        "anaestheticRisk": {
+          "asaClass": "1",
+          "previousAnaesthetic": "yes",
+          "anaestheticComplications": "no",
+          "anaestheticComplicationsDetails": "",
+          "difficultAirway": "no",
+          "difficultAirwayDetails": "",
+          "malignantHyperthermiaRisk": "no",
+          "familyAnaestheticProblems": "no",
+          "familyAnaestheticDetails": "",
+          "smokingStatus": "never",
+          "packYears": 0,
+          "alcoholConsumption": "within-guidelines",
+          "recreationalDrugs": "no",
+          "recreationalDrugsDetails": "",
+          "obstructiveSleepApnoea": "no",
+          "anaestheticPreference": "local"
+        },
+        "photographyDocumentation": {
+          "clinicalPhotosTaken": "yes",
+          "photoConsentObtained": "yes",
+          "numberOfPhotos": 2,
+          "photoViewsTaken": "single",
+          "standardisedViews": "yes",
+          "measurementsRecorded": "yes",
+          "measurementDetails": "6 x 5 mm",
+          "diagramsDrawn": "no",
+          "diagramNotes": "",
+          "previousImaging": "no",
+          "previousImagingType": "",
+          "previousImagingFindings": ""
+        },
+        "medicationsAllergies": {
+          "onAnticoagulants": "no",
+          "anticoagulantDetails": "",
+          "onAntiplatelets": "no",
+          "antiplateletDetails": "",
+          "onSteroids": "no",
+          "steroidDetails": "",
+          "onImmunosuppressants": "no",
+          "immunosuppressantDetails": "",
+          "onChemotherapy": "no",
+          "chemotherapyDetails": "",
+          "onHormoneTherapy": "no",
+          "hormoneTherapyDetails": "",
+          "otherMedications": "",
+          "hasDrugAllergies": "no",
+          "allergies": [],
+          "latexAllergy": "no",
+          "adhesiveAllergy": "no",
+          "otherAllergies": ""
+        },
+        "procedurePlanningConsent": {
+          "proposedProcedure": "Excision of benign naevus under local anaesthetic.",
+          "procedureComplexity": "1",
+          "surgicalApproach": "direct-closure",
+          "expectedDurationMinutes": 30,
+          "expectedHospitalStay": "day-case",
+          "flapType": "none",
+          "implantRequired": "no",
+          "implantDetails": "",
+          "vteRisk": "low",
+          "antibioticProphylaxis": "no",
+          "anticipatedRisks": "Scar, bleeding, infection.",
+          "alternativeTreatments": "Monitoring.",
+          "consentDiscussion": "Discussed.",
+          "consentFormSigned": "yes",
+          "coolingOffPeriodOffered": "not-applicable",
+          "followUpPlan": "Suture removal at 10 days."
+        }
+      },
+      "expected": {
+        "asaClass": 1,
+        "woundClass": 1,
+        "complexityScore": 1,
+        "overallRisk": "low",
+        "firedRules": [
+          {
+            "id": "ASA-001",
+            "category": "Anaesthetic Risk",
+            "description": "ASA Class I - normal healthy patient",
+            "grade": 1
+          },
+          {
+            "id": "WND-001",
+            "category": "Wound",
+            "description": "Clean wound (Class I)",
+            "grade": 1
+          },
+          {
+            "id": "CX-001",
+            "category": "Surgical Complexity",
+            "description": "Minor procedure (Complexity 1)",
+            "grade": 1
+          }
+        ],
+        "additionalFlags": []
+      }
+    },
+    {
+      "name": "asa3-urgent-high",
+      "description": "ASA III patient with diabetes for an urgent major (complexity 3) reconstruction — high overall risk.",
+      "state": {
+        "demographics": {
+          "firstName": "Margaret",
+          "lastName": "Coyle",
+          "dateOfBirth": "1957-10-12",
+          "sex": "female",
+          "weight": 84,
+          "height": 162,
+          "bmi": 32
+        },
+        "reasonForReferral": {
+          "referralType": "reconstruction",
+          "referralTypeOther": "",
+          "urgency": "urgent",
+          "primaryComplaint": "Non-healing lower-limb wound requiring flap cover.",
+          "affectedBodyArea": "lower-limb",
+          "affectedBodyAreaOther": "",
+          "laterality": "right",
+          "durationOfCondition": "3-months",
+          "previousConsultations": "yes",
+          "previousConsultationsDetails": "Vascular and diabetic foot clinics."
+        },
+        "medicalSurgicalHistory": {
+          "previousPlasticSurgery": "no",
+          "previousPlasticSurgeryDetails": "",
+          "previousGeneralSurgery": "yes",
+          "previousGeneralSurgeryDetails": "Appendicectomy.",
+          "woundHealingProblems": "yes",
+          "woundHealingDetails": "Slow healing due to diabetes.",
+          "keloidScarring": "no",
+          "scarringDetails": "",
+          "diabetes": "type-2",
+          "diabetesControlled": "no",
+          "hypertension": "yes",
+          "cardiacDisease": "yes",
+          "cardiacDiseaseDetails": "Stable angina.",
+          "respiratoryDisease": "no",
+          "respiratoryDiseaseDetails": "",
+          "autoimmuneDisease": "no",
+          "autoimmuneDiseaseDetails": "",
+          "bleedingDisorder": "no",
+          "bleedingDisorderDetails": "",
+          "immunosuppressed": "no",
+          "immunosuppressedDetails": "",
+          "cancerHistory": "no",
+          "cancerHistoryDetails": ""
+        },
+        "currentCondition": {
+          "conditionCategory": "wound",
+          "conditionDescription": "Chronic lower-limb ulcer.",
+          "lesionLengthMm": 40,
+          "lesionWidthMm": 30,
+          "lesionDepthMm": 8,
+          "tissueLoss": "yes",
+          "tissueLossPercentage": 15,
+          "functionalImpairment": "moderate",
+          "functionalImpairmentDetails": "Impaired mobility.",
+          "painLevel": 5,
+          "cosmeticConcern": "moderate",
+          "impactOnDailyActivities": "significant"
+        },
+        "woundTissueAssessment": {
+          "hasOpenWound": "yes",
+          "woundClassification": "clean-contaminated",
+          "woundAge": "chronic",
+          "woundAetiology": "diabetic",
+          "woundBedTissue": "granulating",
+          "woundExudate": "moderate",
+          "woundInfectionSigns": "no",
+          "woundInfectionDetails": "",
+          "tissueViability": "viable",
+          "surroundingSkin": "fragile",
+          "vascularSupply": "reduced",
+          "sensoryStatus": "reduced",
+          "previousWoundTreatments": "Debridement and dressings."
+        },
+        "psychologicalAssessment": {
+          "bodyDysmorphicConcern": "no",
+          "bodyDysmorphicDetails": "",
+          "realisticExpectations": "yes",
+          "expectationsDetails": "",
+          "motivation": "functional",
+          "motivationOther": "",
+          "previousMentalHealth": "no",
+          "mentalHealthDetails": "",
+          "anxietyLevel": "mild",
+          "depressionScreen": "negative",
+          "socialImpact": "moderate",
+          "socialImpactDetails": "",
+          "psychologicalReferralNeeded": "no"
+        },
+        "anaestheticRisk": {
+          "asaClass": "3",
+          "previousAnaesthetic": "yes",
+          "anaestheticComplications": "no",
+          "anaestheticComplicationsDetails": "",
+          "difficultAirway": "no",
+          "difficultAirwayDetails": "",
+          "malignantHyperthermiaRisk": "no",
+          "familyAnaestheticProblems": "no",
+          "familyAnaestheticDetails": "",
+          "smokingStatus": "ex-smoker",
+          "packYears": 20,
+          "alcoholConsumption": "within-guidelines",
+          "recreationalDrugs": "no",
+          "recreationalDrugsDetails": "",
+          "obstructiveSleepApnoea": "no",
+          "anaestheticPreference": "general"
+        },
+        "photographyDocumentation": {
+          "clinicalPhotosTaken": "yes",
+          "photoConsentObtained": "yes",
+          "numberOfPhotos": 4,
+          "photoViewsTaken": "multiple",
+          "standardisedViews": "yes",
+          "measurementsRecorded": "yes",
+          "measurementDetails": "40 x 30 mm",
+          "diagramsDrawn": "yes",
+          "diagramNotes": "Wound mapped.",
+          "previousImaging": "yes",
+          "previousImagingType": "duplex",
+          "previousImagingFindings": "Reduced distal flow."
+        },
+        "medicationsAllergies": {
+          "onAnticoagulants": "no",
+          "anticoagulantDetails": "",
+          "onAntiplatelets": "yes",
+          "antiplateletDetails": "Aspirin 75 mg.",
+          "onSteroids": "no",
+          "steroidDetails": "",
+          "onImmunosuppressants": "no",
+          "immunosuppressantDetails": "",
+          "onChemotherapy": "no",
+          "chemotherapyDetails": "",
+          "onHormoneTherapy": "no",
+          "hormoneTherapyDetails": "",
+          "otherMedications": "Metformin, ramipril.",
+          "hasDrugAllergies": "no",
+          "allergies": [],
+          "latexAllergy": "no",
+          "adhesiveAllergy": "no",
+          "otherAllergies": ""
+        },
+        "procedurePlanningConsent": {
+          "proposedProcedure": "Local flap reconstruction of lower-limb wound.",
+          "procedureComplexity": "3",
+          "surgicalApproach": "local-flap",
+          "expectedDurationMinutes": 180,
+          "expectedHospitalStay": "inpatient",
+          "flapType": "local",
+          "implantRequired": "no",
+          "implantDetails": "",
+          "vteRisk": "moderate",
+          "antibioticProphylaxis": "yes",
+          "anticipatedRisks": "Flap failure, infection, delayed healing.",
+          "alternativeTreatments": "Ongoing conservative wound care.",
+          "consentDiscussion": "Discussed at length.",
+          "consentFormSigned": "yes",
+          "coolingOffPeriodOffered": "not-applicable",
+          "followUpPlan": "Inpatient monitoring; wound clinic follow-up."
+        }
+      },
+      "expected": {
+        "asaClass": 3,
+        "woundClass": 2,
+        "complexityScore": 3,
+        "overallRisk": "high",
+        "firedRules": [
+          {
+            "id": "ASA-003",
+            "category": "Anaesthetic Risk",
+            "description": "ASA Class III - severe systemic disease",
+            "grade": 3
+          },
+          {
+            "id": "WND-002",
+            "category": "Wound",
+            "description": "Clean-contaminated wound (Class II)",
+            "grade": 2
+          },
+          {
+            "id": "CX-003",
+            "category": "Surgical Complexity",
+            "description": "Major procedure (Complexity 3)",
+            "grade": 3
+          },
+          {
+            "id": "CM-001",
+            "category": "Comorbidity",
+            "description": "Diabetes mellitus",
+            "grade": 2
+          },
+          {
+            "id": "CM-002",
+            "category": "Comorbidity",
+            "description": "Uncontrolled diabetes",
+            "grade": 3
+          },
+          {
+            "id": "CM-003",
+            "category": "Comorbidity",
+            "description": "Wound healing problems history",
+            "grade": 2
+          },
+          {
+            "id": "CM-008",
+            "category": "Comorbidity",
+            "description": "Cardiac disease",
+            "grade": 2
+          },
+          {
+            "id": "RF-002",
+            "category": "Referral",
+            "description": "Urgent referral",
+            "grade": 3
+          }
+        ],
+        "additionalFlags": [
+          {
+            "id": "FLAG-DM-001",
+            "category": "Comorbidity",
+            "message": "Uncontrolled diabetes - optimise glycaemic control before elective surgery",
+            "priority": "medium"
+          }
+        ]
+      }
+    },
+    {
+      "name": "emergency-trauma-critical",
+      "description": "ASA IV emergency trauma referral with a dirty wound and complexity-4 reconstruction — critical overall risk.",
+      "state": {
+        "demographics": {
+          "firstName": "Thomas",
+          "lastName": "Byrne",
+          "dateOfBirth": "1968-02-28",
+          "sex": "male",
+          "weight": 90,
+          "height": 176,
+          "bmi": 29
+        },
+        "reasonForReferral": {
+          "referralType": "trauma",
+          "referralTypeOther": "",
+          "urgency": "emergency",
+          "primaryComplaint": "Severe degloving injury to the hand after industrial accident.",
+          "affectedBodyArea": "hand",
+          "affectedBodyAreaOther": "",
+          "laterality": "right",
+          "durationOfCondition": "hours",
+          "previousConsultations": "no",
+          "previousConsultationsDetails": ""
+        },
+        "medicalSurgicalHistory": {
+          "previousPlasticSurgery": "no",
+          "previousPlasticSurgeryDetails": "",
+          "previousGeneralSurgery": "no",
+          "previousGeneralSurgeryDetails": "",
+          "woundHealingProblems": "no",
+          "woundHealingDetails": "",
+          "keloidScarring": "no",
+          "scarringDetails": "",
+          "diabetes": "no",
+          "diabetesControlled": "",
+          "hypertension": "yes",
+          "cardiacDisease": "yes",
+          "cardiacDiseaseDetails": "Previous myocardial infarction.",
+          "respiratoryDisease": "yes",
+          "respiratoryDiseaseDetails": "COPD.",
+          "autoimmuneDisease": "no",
+          "autoimmuneDiseaseDetails": "",
+          "bleedingDisorder": "no",
+          "bleedingDisorderDetails": "",
+          "immunosuppressed": "no",
+          "immunosuppressedDetails": "",
+          "cancerHistory": "no",
+          "cancerHistoryDetails": ""
+        },
+        "currentCondition": {
+          "conditionCategory": "trauma",
+          "conditionDescription": "Degloving injury with exposed tendon.",
+          "lesionLengthMm": 90,
+          "lesionWidthMm": 60,
+          "lesionDepthMm": 20,
+          "tissueLoss": "yes",
+          "tissueLossPercentage": 40,
+          "functionalImpairment": "severe",
+          "functionalImpairmentDetails": "Loss of hand function.",
+          "painLevel": 9,
+          "cosmeticConcern": "severe",
+          "impactOnDailyActivities": "severe"
+        },
+        "woundTissueAssessment": {
+          "hasOpenWound": "yes",
+          "woundClassification": "dirty",
+          "woundAge": "acute",
+          "woundAetiology": "traumatic",
+          "woundBedTissue": "necrotic",
+          "woundExudate": "heavy",
+          "woundInfectionSigns": "yes",
+          "woundInfectionDetails": "Contaminated with debris.",
+          "tissueViability": "non-viable",
+          "surroundingSkin": "damaged",
+          "vascularSupply": "compromised",
+          "sensoryStatus": "absent",
+          "previousWoundTreatments": "Emergency debridement."
+        },
+        "psychologicalAssessment": {
+          "bodyDysmorphicConcern": "no",
+          "bodyDysmorphicDetails": "",
+          "realisticExpectations": "yes",
+          "expectationsDetails": "",
+          "motivation": "functional",
+          "motivationOther": "",
+          "previousMentalHealth": "no",
+          "mentalHealthDetails": "",
+          "anxietyLevel": "severe",
+          "depressionScreen": "not-done",
+          "socialImpact": "severe",
+          "socialImpactDetails": "",
+          "psychologicalReferralNeeded": "yes"
+        },
+        "anaestheticRisk": {
+          "asaClass": "4",
+          "previousAnaesthetic": "yes",
+          "anaestheticComplications": "no",
+          "anaestheticComplicationsDetails": "",
+          "difficultAirway": "no",
+          "difficultAirwayDetails": "",
+          "malignantHyperthermiaRisk": "no",
+          "familyAnaestheticProblems": "no",
+          "familyAnaestheticDetails": "",
+          "smokingStatus": "current",
+          "packYears": 35,
+          "alcoholConsumption": "above-guidelines",
+          "recreationalDrugs": "no",
+          "recreationalDrugsDetails": "",
+          "obstructiveSleepApnoea": "yes",
+          "anaestheticPreference": "general"
+        },
+        "photographyDocumentation": {
+          "clinicalPhotosTaken": "yes",
+          "photoConsentObtained": "yes",
+          "numberOfPhotos": 6,
+          "photoViewsTaken": "multiple",
+          "standardisedViews": "no",
+          "measurementsRecorded": "yes",
+          "measurementDetails": "90 x 60 mm defect",
+          "diagramsDrawn": "yes",
+          "diagramNotes": "Injury mapped.",
+          "previousImaging": "yes",
+          "previousImagingType": "xray",
+          "previousImagingFindings": "No bony injury."
+        },
+        "medicationsAllergies": {
+          "onAnticoagulants": "no",
+          "anticoagulantDetails": "",
+          "onAntiplatelets": "yes",
+          "antiplateletDetails": "Aspirin, clopidogrel.",
+          "onSteroids": "no",
+          "steroidDetails": "",
+          "onImmunosuppressants": "no",
+          "immunosuppressantDetails": "",
+          "onChemotherapy": "no",
+          "chemotherapyDetails": "",
+          "onHormoneTherapy": "no",
+          "hormoneTherapyDetails": "",
+          "otherMedications": "Bisoprolol, inhalers.",
+          "hasDrugAllergies": "no",
+          "allergies": [],
+          "latexAllergy": "no",
+          "adhesiveAllergy": "no",
+          "otherAllergies": ""
+        },
+        "procedurePlanningConsent": {
+          "proposedProcedure": "Emergency free-flap reconstruction of the hand.",
+          "procedureComplexity": "4",
+          "surgicalApproach": "microsurgical",
+          "expectedDurationMinutes": 420,
+          "expectedHospitalStay": "inpatient",
+          "flapType": "free",
+          "implantRequired": "no",
+          "implantDetails": "",
+          "vteRisk": "high",
+          "antibioticProphylaxis": "yes",
+          "anticipatedRisks": "Flap failure, bleeding, cardiac event, prolonged recovery.",
+          "alternativeTreatments": "Amputation.",
+          "consentDiscussion": "Emergency consent obtained.",
+          "consentFormSigned": "yes",
+          "coolingOffPeriodOffered": "not-applicable",
+          "followUpPlan": "ITU/HDU post-operatively; microsurgery monitoring."
+        }
+      },
+      "expected": {
+        "asaClass": 4,
+        "woundClass": 4,
+        "complexityScore": 4,
+        "overallRisk": "critical",
+        "firedRules": [
+          {
+            "id": "ASA-004",
+            "category": "Anaesthetic Risk",
+            "description": "ASA Class IV - severe systemic disease, constant threat to life",
+            "grade": 4
+          },
+          {
+            "id": "WND-004",
+            "category": "Wound",
+            "description": "Dirty/infected wound (Class IV)",
+            "grade": 4
+          },
+          {
+            "id": "WND-005",
+            "category": "Wound",
+            "description": "Active wound infection signs",
+            "grade": 3
+          },
+          {
+            "id": "WND-006",
+            "category": "Wound",
+            "description": "Necrotic wound bed tissue",
+            "grade": 3
+          },
+          {
+            "id": "WND-007",
+            "category": "Wound",
+            "description": "Non-viable tissue",
+            "grade": 4
+          },
+          {
+            "id": "WND-008",
+            "category": "Wound",
+            "description": "Compromised vascular supply",
+            "grade": 3
+          },
+          {
+            "id": "CX-004",
+            "category": "Surgical Complexity",
+            "description": "Major plus / emergency reconstruction (Complexity 4)",
+            "grade": 4
+          },
+          {
+            "id": "CX-005",
+            "category": "Surgical Complexity",
+            "description": "Free flap reconstruction required",
+            "grade": 3
+          },
+          {
+            "id": "CX-006",
+            "category": "Surgical Complexity",
+            "description": "Microsurgical approach required",
+            "grade": 3
+          },
+          {
+            "id": "CM-008",
+            "category": "Comorbidity",
+            "description": "Cardiac disease",
+            "grade": 2
+          },
+          {
+            "id": "CD-001",
+            "category": "Condition",
+            "description": "Severe functional impairment",
+            "grade": 3
+          },
+          {
+            "id": "CD-002",
+            "category": "Condition",
+            "description": "Significant tissue loss",
+            "grade": 3
+          },
+          {
+            "id": "CD-003",
+            "category": "Condition",
+            "description": "Severe pain (NRS >= 7)",
+            "grade": 2
+          },
+          {
+            "id": "RF-001",
+            "category": "Referral",
+            "description": "Emergency referral",
+            "grade": 4
+          },
+          {
+            "id": "RF-003",
+            "category": "Referral",
+            "description": "Trauma referral",
+            "grade": 3
+          },
+          {
+            "id": "AN-004",
+            "category": "Anaesthetic",
+            "description": "Obstructive sleep apnoea",
+            "grade": 2
+          },
+          {
+            "id": "SH-001",
+            "category": "Social",
+            "description": "Current smoker",
+            "grade": 2
+          },
+          {
+            "id": "SH-002",
+            "category": "Social",
+            "description": "Above-guidelines alcohol consumption",
+            "grade": 2
+          },
+          {
+            "id": "PS-003",
+            "category": "Psychological",
+            "description": "Severe anxiety",
+            "grade": 2
+          },
+          {
+            "id": "VTE-001",
+            "category": "VTE Risk",
+            "description": "High VTE risk",
+            "grade": 3
+          }
+        ],
+        "additionalFlags": [
+          {
+            "id": "FLAG-EMERG-001",
+            "category": "Referral",
+            "message": "Emergency referral - URGENT SURGICAL EVALUATION REQUIRED",
+            "priority": "high"
+          },
+          {
+            "id": "FLAG-ASA-001",
+            "category": "Anaesthetic",
+            "message": "ASA Class 4 - high anaesthetic risk, senior anaesthetic review required",
+            "priority": "high"
+          },
+          {
+            "id": "FLAG-WOUND-001",
+            "category": "Wound",
+            "message": "Dirty/infected wound - antibiotic therapy and wound preparation required",
+            "priority": "high"
+          },
+          {
+            "id": "FLAG-INFECT-001",
+            "category": "Wound",
+            "message": "Active wound infection: Contaminated with debris. - treat infection before elective surgery",
+            "priority": "high"
+          },
+          {
+            "id": "FLAG-TISSUE-001",
+            "category": "Wound",
+            "message": "Non-viable tissue present - debridement required",
+            "priority": "high"
+          },
+          {
+            "id": "FLAG-SMOKE-001",
+            "category": "Social",
+            "message": "Current smoker - counsel on smoking cessation (wound healing impairment)",
+            "priority": "medium"
+          },
+          {
+            "id": "FLAG-PSYCH-001",
+            "category": "Psychological",
+            "message": "Psychological referral recommended before proceeding",
+            "priority": "medium"
+          },
+          {
+            "id": "FLAG-VTE-001",
+            "category": "VTE Risk",
+            "message": "High VTE risk - ensure thromboprophylaxis plan in place",
+            "priority": "medium"
+          }
+        ]
+      }
+    }
+  ]
+}

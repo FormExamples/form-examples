@@ -1,0 +1,492 @@
+{
+  "engine": "front-end-with-html",
+  "graderHint": "calculateMECGrade",
+  "note": "Realistic filled-in states in the scoring engine's shape. `expected` is computed by `bin/test-personas --update` and verified by `bin/test-personas`. Overall risk maps the worst UK MEC category across methods: MEC 1 low, MEC 2 moderate, MEC 3 high, MEC 4 critical.",
+  "personas": [
+    {
+      "name": "no-restriction-low",
+      "description": "Healthy 24-year-old non-smoker with no medical, cardiovascular, or thromboembolic risk factors — UK MEC 1, low risk.",
+      "state": {
+        "demographics": {
+          "firstName": "Emily",
+          "lastName": "Turner",
+          "dateOfBirth": "2001-03-18",
+          "sex": "female",
+          "weight": 62,
+          "height": 167,
+          "bmi": 22.2
+        },
+        "menstrualHistory": {
+          "menarcheAge": 13,
+          "cycleRegularity": "regular",
+          "cycleLengthDays": 28,
+          "periodDurationDays": 5,
+          "flowHeaviness": "moderate",
+          "intermenstrualBleeding": "no",
+          "postcoitalBleeding": "no",
+          "dysmenorrhoea": "mild",
+          "lastMenstrualPeriod": "2025-05-20",
+          "amenorrhoea": "no",
+          "amenorrhoeaDurationMonths": null
+        },
+        "contraceptiveHistory": {
+          "previousContraception": "yes",
+          "previousCOC": "yes",
+          "cocDetails": "Used for 2 years, no problems.",
+          "previousPOP": "no",
+          "popDetails": "",
+          "previousImplant": "no",
+          "implantDetails": "",
+          "previousInjection": "no",
+          "injectionDetails": "",
+          "previousIUD": "no",
+          "iudDetails": "",
+          "previousIUS": "no",
+          "iusDetails": "",
+          "previousPatchRing": "no",
+          "reasonForChange": "Reviewing options.",
+          "adverseEffects": ""
+        },
+        "medicalHistory": {
+          "migraine": "no",
+          "migraineWithAura": "",
+          "migraineFrequency": "",
+          "breastCancer": "no",
+          "cervicalCancer": "no",
+          "liverDisease": "no",
+          "gallbladderDisease": "no",
+          "inflammatoryBowelDisease": "no",
+          "sle": "no",
+          "sleAntiphospholipid": "",
+          "epilepsy": "no",
+          "diabetes": "no",
+          "diabetesComplications": "",
+          "sti": "no",
+          "stiDetails": "",
+          "pid": "no"
+        },
+        "cardiovascularRisk": {
+          "hypertension": "no",
+          "systolicBP": 116,
+          "diastolicBP": 72,
+          "bpControlled": "",
+          "ischaemicHeartDisease": "no",
+          "strokeHistory": "no",
+          "valvularHeartDisease": "no",
+          "valvularComplications": "",
+          "hyperlipidaemia": "no",
+          "familyHistoryVTE": "no",
+          "familyHistoryCVD": "no",
+          "familyCVDDetails": ""
+        },
+        "thromboembolismRisk": {
+          "previousDVT": "no",
+          "dvtDetails": "",
+          "previousPE": "no",
+          "peDetails": "",
+          "knownThrombophilia": "no",
+          "thrombophiliaType": "",
+          "immobilityRisk": "no",
+          "immobilityDetails": "",
+          "recentMajorSurgery": "no",
+          "surgeryDetails": "",
+          "longHaulTravel": "no"
+        },
+        "currentMedications": {
+          "enzymeInducingDrugs": "no",
+          "enzymeInducingDetails": "",
+          "anticoagulants": "no",
+          "anticoagulantDetails": "",
+          "antiepileptics": "no",
+          "antiepilepticDetails": "",
+          "antiretrovirals": "no",
+          "antiretroviralDetails": "",
+          "antibiotics": "no",
+          "antibioticDetails": "",
+          "ssriSnri": "no",
+          "ssriSnriDetails": "",
+          "herbalRemedies": "no",
+          "herbalDetails": "",
+          "otherMedications": "",
+          "drugAllergies": "no",
+          "drugAllergyDetails": ""
+        },
+        "lifestyleAssessment": {
+          "smoking": "never",
+          "cigarettesPerDay": null,
+          "ageOver35Smoker": "no",
+          "alcohol": "occasional",
+          "alcoholUnitsPerWeek": 4,
+          "recreationalDrugUse": "no",
+          "recreationalDrugDetails": "",
+          "exerciseFrequency": "regular",
+          "sexualActivity": "yes",
+          "numberOfPartners": "1"
+        },
+        "contraceptivePreferences": {
+          "preferredMethod": "coc",
+          "hormonalAcceptable": "yes",
+          "longActingAcceptable": "yes",
+          "dailyPillAcceptable": "yes",
+          "intrauterineAcceptable": "yes",
+          "fertilityPlans": "not-now",
+          "breastfeeding": "no",
+          "postpartumWeeks": null,
+          "concerns": ""
+        },
+        "clinicalRecommendation": {
+          "clinicalNotes": "No restriction to any method."
+        }
+      },
+      "expected": {
+        "methodMEC": {
+          "coc": 1,
+          "pop": 1,
+          "implant": 1,
+          "injection": 1,
+          "iud": 1,
+          "ius": 1
+        },
+        "overallRisk": "low",
+        "firedRules": [],
+        "additionalFlags": []
+      }
+    },
+    {
+      "name": "family-vte-high",
+      "description": "38-year-old with a first-degree family history of venous thromboembolism — combined oral contraceptive reaches UK MEC 3, high risk.",
+      "state": {
+        "demographics": {
+          "firstName": "Laura",
+          "lastName": "Bennett",
+          "dateOfBirth": "1987-06-09",
+          "sex": "female",
+          "weight": 68,
+          "height": 165,
+          "bmi": 25
+        },
+        "menstrualHistory": {
+          "menarcheAge": 12,
+          "cycleRegularity": "regular",
+          "cycleLengthDays": 30,
+          "periodDurationDays": 5,
+          "flowHeaviness": "moderate",
+          "intermenstrualBleeding": "no",
+          "postcoitalBleeding": "no",
+          "dysmenorrhoea": "moderate",
+          "lastMenstrualPeriod": "2025-05-15",
+          "amenorrhoea": "no",
+          "amenorrhoeaDurationMonths": null
+        },
+        "contraceptiveHistory": {
+          "previousContraception": "yes",
+          "previousCOC": "yes",
+          "cocDetails": "",
+          "previousPOP": "no",
+          "popDetails": "",
+          "previousImplant": "no",
+          "implantDetails": "",
+          "previousInjection": "no",
+          "injectionDetails": "",
+          "previousIUD": "no",
+          "iudDetails": "",
+          "previousIUS": "no",
+          "iusDetails": "",
+          "previousPatchRing": "no",
+          "reasonForChange": "Family VTE history raised.",
+          "adverseEffects": ""
+        },
+        "medicalHistory": {
+          "migraine": "no",
+          "migraineWithAura": "",
+          "migraineFrequency": "",
+          "breastCancer": "no",
+          "cervicalCancer": "no",
+          "liverDisease": "no",
+          "gallbladderDisease": "no",
+          "inflammatoryBowelDisease": "no",
+          "sle": "no",
+          "sleAntiphospholipid": "",
+          "epilepsy": "no",
+          "diabetes": "no",
+          "diabetesComplications": "",
+          "sti": "no",
+          "stiDetails": "",
+          "pid": "no"
+        },
+        "cardiovascularRisk": {
+          "hypertension": "no",
+          "systolicBP": 122,
+          "diastolicBP": 78,
+          "bpControlled": "",
+          "ischaemicHeartDisease": "no",
+          "strokeHistory": "no",
+          "valvularHeartDisease": "no",
+          "valvularComplications": "",
+          "hyperlipidaemia": "no",
+          "familyHistoryVTE": "yes",
+          "familyHistoryCVD": "no",
+          "familyCVDDetails": "Mother had a DVT aged 46."
+        },
+        "thromboembolismRisk": {
+          "previousDVT": "no",
+          "dvtDetails": "",
+          "previousPE": "no",
+          "peDetails": "",
+          "knownThrombophilia": "no",
+          "thrombophiliaType": "",
+          "immobilityRisk": "no",
+          "immobilityDetails": "",
+          "recentMajorSurgery": "no",
+          "surgeryDetails": "",
+          "longHaulTravel": "no"
+        },
+        "currentMedications": {
+          "enzymeInducingDrugs": "no",
+          "enzymeInducingDetails": "",
+          "anticoagulants": "no",
+          "anticoagulantDetails": "",
+          "antiepileptics": "no",
+          "antiepilepticDetails": "",
+          "antiretrovirals": "no",
+          "antiretroviralDetails": "",
+          "antibiotics": "no",
+          "antibioticDetails": "",
+          "ssriSnri": "no",
+          "ssriSnriDetails": "",
+          "herbalRemedies": "no",
+          "herbalDetails": "",
+          "otherMedications": "",
+          "drugAllergies": "no",
+          "drugAllergyDetails": ""
+        },
+        "lifestyleAssessment": {
+          "smoking": "never",
+          "cigarettesPerDay": null,
+          "ageOver35Smoker": "no",
+          "alcohol": "occasional",
+          "alcoholUnitsPerWeek": 6,
+          "recreationalDrugUse": "no",
+          "recreationalDrugDetails": "",
+          "exerciseFrequency": "occasional",
+          "sexualActivity": "yes",
+          "numberOfPartners": "1"
+        },
+        "contraceptivePreferences": {
+          "preferredMethod": "undecided",
+          "hormonalAcceptable": "yes",
+          "longActingAcceptable": "yes",
+          "dailyPillAcceptable": "yes",
+          "intrauterineAcceptable": "yes",
+          "fertilityPlans": "not-now",
+          "breastfeeding": "no",
+          "postpartumWeeks": null,
+          "concerns": "Worried about clot risk on the pill."
+        },
+        "clinicalRecommendation": {
+          "clinicalNotes": "Progestogen-only or intrauterine methods preferred over COC."
+        }
+      },
+      "expected": {
+        "methodMEC": {
+          "coc": 3,
+          "pop": 1,
+          "implant": 1,
+          "injection": 1,
+          "iud": 1,
+          "ius": 1
+        },
+        "overallRisk": "high",
+        "firedRules": [
+          {
+            "id": "VTE-006",
+            "category": "Thromboembolism",
+            "description": "Family history of VTE in first-degree relative (UK MEC 3 for COC)",
+            "mecCategory": 3,
+            "affectedMethods": [
+              "coc"
+            ]
+          }
+        ],
+        "additionalFlags": []
+      }
+    },
+    {
+      "name": "migraine-aura-critical",
+      "description": "32-year-old with migraine with aura — combined oral contraceptive is UK MEC 4 (unacceptable risk), critical.",
+      "state": {
+        "demographics": {
+          "firstName": "Zara",
+          "lastName": "Hussain",
+          "dateOfBirth": "1993-01-27",
+          "sex": "female",
+          "weight": 66,
+          "height": 162,
+          "bmi": 25.1
+        },
+        "menstrualHistory": {
+          "menarcheAge": 13,
+          "cycleRegularity": "regular",
+          "cycleLengthDays": 28,
+          "periodDurationDays": 4,
+          "flowHeaviness": "moderate",
+          "intermenstrualBleeding": "no",
+          "postcoitalBleeding": "no",
+          "dysmenorrhoea": "mild",
+          "lastMenstrualPeriod": "2025-05-22",
+          "amenorrhoea": "no",
+          "amenorrhoeaDurationMonths": null
+        },
+        "contraceptiveHistory": {
+          "previousContraception": "yes",
+          "previousCOC": "yes",
+          "cocDetails": "Stopped due to migraines.",
+          "previousPOP": "no",
+          "popDetails": "",
+          "previousImplant": "no",
+          "implantDetails": "",
+          "previousInjection": "no",
+          "injectionDetails": "",
+          "previousIUD": "no",
+          "iudDetails": "",
+          "previousIUS": "no",
+          "iusDetails": "",
+          "previousPatchRing": "no",
+          "reasonForChange": "Aura symptoms developed.",
+          "adverseEffects": "Aura with visual disturbance."
+        },
+        "medicalHistory": {
+          "migraine": "yes",
+          "migraineWithAura": "yes",
+          "migraineFrequency": "monthly",
+          "breastCancer": "no",
+          "cervicalCancer": "no",
+          "liverDisease": "no",
+          "gallbladderDisease": "no",
+          "inflammatoryBowelDisease": "no",
+          "sle": "no",
+          "sleAntiphospholipid": "",
+          "epilepsy": "no",
+          "diabetes": "no",
+          "diabetesComplications": "",
+          "sti": "no",
+          "stiDetails": "",
+          "pid": "no"
+        },
+        "cardiovascularRisk": {
+          "hypertension": "no",
+          "systolicBP": 118,
+          "diastolicBP": 74,
+          "bpControlled": "",
+          "ischaemicHeartDisease": "no",
+          "strokeHistory": "no",
+          "valvularHeartDisease": "no",
+          "valvularComplications": "",
+          "hyperlipidaemia": "no",
+          "familyHistoryVTE": "no",
+          "familyHistoryCVD": "no",
+          "familyCVDDetails": ""
+        },
+        "thromboembolismRisk": {
+          "previousDVT": "no",
+          "dvtDetails": "",
+          "previousPE": "no",
+          "peDetails": "",
+          "knownThrombophilia": "no",
+          "thrombophiliaType": "",
+          "immobilityRisk": "no",
+          "immobilityDetails": "",
+          "recentMajorSurgery": "no",
+          "surgeryDetails": "",
+          "longHaulTravel": "no"
+        },
+        "currentMedications": {
+          "enzymeInducingDrugs": "no",
+          "enzymeInducingDetails": "",
+          "anticoagulants": "no",
+          "anticoagulantDetails": "",
+          "antiepileptics": "no",
+          "antiepilepticDetails": "",
+          "antiretrovirals": "no",
+          "antiretroviralDetails": "",
+          "antibiotics": "no",
+          "antibioticDetails": "",
+          "ssriSnri": "no",
+          "ssriSnriDetails": "",
+          "herbalRemedies": "no",
+          "herbalDetails": "",
+          "otherMedications": "",
+          "drugAllergies": "no",
+          "drugAllergyDetails": ""
+        },
+        "lifestyleAssessment": {
+          "smoking": "never",
+          "cigarettesPerDay": null,
+          "ageOver35Smoker": "no",
+          "alcohol": "occasional",
+          "alcoholUnitsPerWeek": 3,
+          "recreationalDrugUse": "no",
+          "recreationalDrugDetails": "",
+          "exerciseFrequency": "regular",
+          "sexualActivity": "yes",
+          "numberOfPartners": "1"
+        },
+        "contraceptivePreferences": {
+          "preferredMethod": "ius",
+          "hormonalAcceptable": "yes",
+          "longActingAcceptable": "yes",
+          "dailyPillAcceptable": "no",
+          "intrauterineAcceptable": "yes",
+          "fertilityPlans": "not-now",
+          "breastfeeding": "no",
+          "postpartumWeeks": null,
+          "concerns": "Wants a non-oestrogen method."
+        },
+        "clinicalRecommendation": {
+          "clinicalNotes": "Avoid combined hormonal contraception; offer progestogen-only or intrauterine methods."
+        }
+      },
+      "expected": {
+        "methodMEC": {
+          "coc": 4,
+          "pop": 2,
+          "implant": 2,
+          "injection": 2,
+          "iud": 1,
+          "ius": 1
+        },
+        "overallRisk": "critical",
+        "firedRules": [
+          {
+            "id": "MIG-001",
+            "category": "Migraine",
+            "description": "Migraine with aura at any age (UK MEC 4 for COC)",
+            "mecCategory": 4,
+            "affectedMethods": [
+              "coc"
+            ]
+          },
+          {
+            "id": "MIG-002",
+            "category": "Migraine",
+            "description": "Migraine with aura (UK MEC 2 for POP/implant/injection)",
+            "mecCategory": 2,
+            "affectedMethods": [
+              "pop",
+              "implant",
+              "injection"
+            ]
+          }
+        ],
+        "additionalFlags": [
+          {
+            "id": "FLAG-MIGRAINE-001",
+            "category": "Migraine",
+            "message": "Migraine with aura - COC CONTRAINDICATED (UK MEC 4)",
+            "priority": "high"
+          }
+        ]
+      }
+    }
+  ]
+}

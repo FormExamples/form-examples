@@ -1,0 +1,239 @@
+{
+  "engine": "front-end-with-html",
+  "graderHint": "gradeBhutani",
+  "note": "Realistic filled-in states in the classifier's shape. `expected` is computed by `bin/test-personas --update` and verified by `bin/test-personas`. The measured (ageHours, TSB) point is banded against the interpolated Bhutani percentile tracks; at 24 h the term tracks are p40=101, p75=135, p95=169 µmol/L.",
+  "personas": [
+    {
+      "name": "low-zone-reassuring",
+      "description": "Term infant, 24 h old, TSB 80 µmol/L (below the 40th percentile) — low risk zone, below both treatment thresholds.",
+      "state": {
+        "context": {
+          "clinicianName": "S Ahmed",
+          "clinicianRole": "midwife",
+          "assessedAt": "2025-06-02T09:30",
+          "careSetting": "postnatal-ward"
+        },
+        "identification": {
+          "infantIdentifier": "NB-0001",
+          "sex": "female",
+          "bornAt": "2025-06-01T09:30",
+          "gestationalAgeWeeks": 39
+        },
+        "measurement": {
+          "ageHours": 24,
+          "totalSerumBilirubinUmolL": 80,
+          "measurementMethod": "serum"
+        },
+        "riskFactors": {
+          "pretermUnder38": "no",
+          "previousSiblingJaundice": "no",
+          "exclusiveBreastfeeding": "yes",
+          "bruising": "no",
+          "bloodGroupIncompatibility": "no",
+          "earlyOnsetUnder24h": "no"
+        },
+        "note": {
+          "clinicalNote": "Well baby, feeding established, no visible jaundice."
+        }
+      },
+      "expected": {
+        "ageHours": 24,
+        "riskZone": "low",
+        "percentileBand": "<40",
+        "p40": 101,
+        "p75": 135,
+        "p95": 169,
+        "gestationBand": "term",
+        "phototherapyThreshold": 200,
+        "exchangeThreshold": 250,
+        "abovePhototherapy": false,
+        "aboveExchange": false,
+        "outOfRange": false,
+        "firedRiskFactors": [
+          {
+            "id": "exclusiveBreastfeeding",
+            "label": "Exclusively breastfed"
+          }
+        ],
+        "firedRules": [
+          {
+            "id": "R-ZONE-LOW-01",
+            "category": "zone-lookup",
+            "description": "TSB 80 µmol/L at 24 h vs tracks p40=101, p75=135, p95=169 µmol/L → low zone (<40 percentile)"
+          },
+          {
+            "id": "R-PHOTOTHERAPY-THRESHOLD-01",
+            "category": "phototherapy-threshold",
+            "description": "Phototherapy threshold (term) at 24 h = 200 µmol/L → TSB is below threshold"
+          },
+          {
+            "id": "R-EXCHANGE-THRESHOLD-01",
+            "category": "exchange-threshold",
+            "description": "Exchange-transfusion threshold (term) at 24 h = 250 µmol/L → TSB is below threshold"
+          }
+        ],
+        "flaggedIssues": []
+      }
+    },
+    {
+      "name": "high-intermediate-zone",
+      "description": "Term infant, 24 h old, TSB 150 µmol/L (between the 75th and 95th percentiles) — high-intermediate risk zone with feeding and sibling-jaundice risk factors.",
+      "state": {
+        "context": {
+          "clinicianName": "S Ahmed",
+          "clinicianRole": "neonatal-nurse",
+          "assessedAt": "2025-06-02T14:00",
+          "careSetting": "postnatal-ward"
+        },
+        "identification": {
+          "infantIdentifier": "NB-0002",
+          "sex": "male",
+          "bornAt": "2025-06-01T14:00",
+          "gestationalAgeWeeks": 38
+        },
+        "measurement": {
+          "ageHours": 24,
+          "totalSerumBilirubinUmolL": 150,
+          "measurementMethod": "serum"
+        },
+        "riskFactors": {
+          "pretermUnder38": "no",
+          "previousSiblingJaundice": "yes",
+          "exclusiveBreastfeeding": "yes",
+          "bruising": "no",
+          "bloodGroupIncompatibility": "no",
+          "earlyOnsetUnder24h": "no"
+        },
+        "note": {
+          "clinicalNote": "Visible jaundice to chest; repeat SBR planned."
+        }
+      },
+      "expected": {
+        "ageHours": 24,
+        "riskZone": "high-intermediate",
+        "percentileBand": "75-95",
+        "p40": 101,
+        "p75": 135,
+        "p95": 169,
+        "gestationBand": "term",
+        "phototherapyThreshold": 200,
+        "exchangeThreshold": 250,
+        "abovePhototherapy": false,
+        "aboveExchange": false,
+        "outOfRange": false,
+        "firedRiskFactors": [
+          {
+            "id": "previousSiblingJaundice",
+            "label": "Previous sibling with neonatal jaundice"
+          },
+          {
+            "id": "exclusiveBreastfeeding",
+            "label": "Exclusively breastfed"
+          }
+        ],
+        "firedRules": [
+          {
+            "id": "R-ZONE-HIGH-INTERMEDIATE-01",
+            "category": "zone-lookup",
+            "description": "TSB 150 µmol/L at 24 h vs tracks p40=101, p75=135, p95=169 µmol/L → high-intermediate zone (75-95 percentile)"
+          },
+          {
+            "id": "R-PHOTOTHERAPY-THRESHOLD-01",
+            "category": "phototherapy-threshold",
+            "description": "Phototherapy threshold (term) at 24 h = 200 µmol/L → TSB is below threshold"
+          },
+          {
+            "id": "R-EXCHANGE-THRESHOLD-01",
+            "category": "exchange-threshold",
+            "description": "Exchange-transfusion threshold (term) at 24 h = 250 µmol/L → TSB is below threshold"
+          }
+        ],
+        "flaggedIssues": []
+      }
+    },
+    {
+      "name": "high-zone-urgent",
+      "description": "Term infant, 24 h old, TSB 210 µmol/L (at or above the 95th percentile and above the phototherapy threshold) — high risk zone, phototherapy indicated.",
+      "state": {
+        "context": {
+          "clinicianName": "Dr R Lowe",
+          "clinicianRole": "paediatrician",
+          "assessedAt": "2025-06-02T15:30",
+          "careSetting": "neonatal-unit"
+        },
+        "identification": {
+          "infantIdentifier": "NB-0003",
+          "sex": "female",
+          "bornAt": "2025-06-01T15:30",
+          "gestationalAgeWeeks": 39
+        },
+        "measurement": {
+          "ageHours": 24,
+          "totalSerumBilirubinUmolL": 210,
+          "measurementMethod": "serum"
+        },
+        "riskFactors": {
+          "pretermUnder38": "no",
+          "previousSiblingJaundice": "yes",
+          "exclusiveBreastfeeding": "yes",
+          "bruising": "yes",
+          "bloodGroupIncompatibility": "yes",
+          "earlyOnsetUnder24h": "no"
+        },
+        "note": {
+          "clinicalNote": "Significant jaundice; phototherapy commenced, ABO incompatibility."
+        }
+      },
+      "expected": {
+        "ageHours": 24,
+        "riskZone": "high",
+        "percentileBand": ">=95",
+        "p40": 101,
+        "p75": 135,
+        "p95": 169,
+        "gestationBand": "term",
+        "phototherapyThreshold": 200,
+        "exchangeThreshold": 250,
+        "abovePhototherapy": true,
+        "aboveExchange": false,
+        "outOfRange": false,
+        "firedRiskFactors": [
+          {
+            "id": "previousSiblingJaundice",
+            "label": "Previous sibling with neonatal jaundice"
+          },
+          {
+            "id": "exclusiveBreastfeeding",
+            "label": "Exclusively breastfed"
+          },
+          {
+            "id": "bruising",
+            "label": "Significant bruising or cephalohaematoma"
+          },
+          {
+            "id": "bloodGroupIncompatibility",
+            "label": "Blood-group incompatibility or positive DAT"
+          }
+        ],
+        "firedRules": [
+          {
+            "id": "R-ZONE-HIGH-01",
+            "category": "zone-lookup",
+            "description": "TSB 210 µmol/L at 24 h vs tracks p40=101, p75=135, p95=169 µmol/L → high zone (>=95 percentile)"
+          },
+          {
+            "id": "R-PHOTOTHERAPY-THRESHOLD-01",
+            "category": "phototherapy-threshold",
+            "description": "Phototherapy threshold (term) at 24 h = 200 µmol/L → TSB is at or above threshold"
+          },
+          {
+            "id": "R-EXCHANGE-THRESHOLD-01",
+            "category": "exchange-threshold",
+            "description": "Exchange-transfusion threshold (term) at 24 h = 250 µmol/L → TSB is below threshold"
+          }
+        ],
+        "flaggedIssues": []
+      }
+    }
+  ]
+}

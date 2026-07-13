@@ -1,0 +1,602 @@
+{
+  "engine": "front-end-with-html",
+  "graderHint": "calculateResponderGrade",
+  "note": "Realistic filled-in states in the scoring engine's shape. `expected` is computed by `bin/test-personas --update` and verified by `bin/test-personas`. The overall fitness decision is auto-derived (fitnessDecision.overallFitness left blank) from the worst competency domain and the highest fired-rule grade.",
+  "personas": [
+    {
+      "name": "fit-for-duty-expert",
+      "description": "Experienced paramedic, expert across every competency domain, all checks passed and no rules fired — fit for duty, expert competency, low risk.",
+      "state": {
+        "demographics": {
+          "firstName": "Daniel",
+          "lastName": "Whitfield",
+          "dateOfBirth": "1986-02-11",
+          "sex": "male",
+          "weight": 82,
+          "height": 181,
+          "bmi": 25
+        },
+        "roleQualifications": {
+          "roleType": "paramedic",
+          "roleTypeOther": "",
+          "employerOrganisation": "Regional Ambulance Service",
+          "stationBase": "Central",
+          "yearsOfService": 14,
+          "registrationNumber": "PA123456",
+          "registrationBody": "hcpc",
+          "registrationExpiryDate": "2027-03-31",
+          "highestQualification": "bachelors",
+          "qualificationDetails": "BSc Paramedic Science",
+          "drivingLicenceCategory": "c1",
+          "blueLightTrained": "yes"
+        },
+        "physicalFitness": {
+          "cardiovascularFitness": "expert",
+          "shuttleRunLevel": 11,
+          "vo2Max": 52,
+          "muscularStrength": "expert",
+          "gripStrengthKg": 55,
+          "manualHandlingCompetency": "expert",
+          "patientCarryAbility": "yes",
+          "flexibilityMobility": "expert",
+          "balanceCoordination": "expert",
+          "restingHeartRateBpm": 56,
+          "bloodPressureSystolic": 118,
+          "bloodPressureDiastolic": 74,
+          "physicalFitnessNotes": ""
+        },
+        "clinicalSkills": {
+          "basicLifeSupport": "expert",
+          "advancedLifeSupport": "expert",
+          "airwayManagement": "expert",
+          "ivCannulation": "expert",
+          "drugAdministration": "expert",
+          "traumaAssessment": "expert",
+          "immobilisationSplinting": "expert",
+          "ecgInterpretation": "expert",
+          "patientAssessment": "expert",
+          "triageCompetency": "expert",
+          "paediatricCompetency": "competent",
+          "obstetricCompetency": "competent",
+          "clinicalSkillsNotes": ""
+        },
+        "equipmentVehicle": {
+          "defibrillatorCompetency": "expert",
+          "monitorCompetency": "expert",
+          "ventilatorCompetency": "expert",
+          "suctionCompetency": "expert",
+          "stretcherCompetency": "expert",
+          "scoopCompetency": "expert",
+          "ambulanceDriving": "expert",
+          "emergencyDriving": "expert",
+          "vehicleDailyInspection": "yes",
+          "equipmentCheckCompetency": "expert",
+          "radioCommunications": "expert",
+          "equipmentVehicleNotes": ""
+        },
+        "communicationSkills": {
+          "patientCommunication": "expert",
+          "relativeCommunication": "expert",
+          "handoverCompetency": "expert",
+          "documentationCompetency": "expert",
+          "multidisciplinaryTeamwork": "expert",
+          "conflictResolution": "expert",
+          "safeguardingAwareness": "expert",
+          "breakingBadNews": "expert",
+          "communicationNotes": ""
+        },
+        "psychologicalReadiness": {
+          "stressManagement": "expert",
+          "resilienceLevel": "excellent",
+          "ptsdScreening": "yes",
+          "ptsdScreeningResult": "negative",
+          "criticalIncidentExposure": "yes",
+          "criticalIncidentDetails": "Major RTC last year.",
+          "criticalIncidentDebriefed": "yes",
+          "sleepQuality": "good",
+          "burnoutRisk": "low",
+          "decisionMakingUnderPressure": "expert",
+          "emotionalRegulation": "expert",
+          "psychologicalNotes": ""
+        },
+        "occupationalHealth": {
+          "visionTest": "pass",
+          "visionCorrected": "no",
+          "hearingTest": "pass",
+          "hearingAidRequired": "no",
+          "immunisationStatus": "up-to-date",
+          "hepatitisBImmune": "yes",
+          "currentMedications": "",
+          "substanceMisuseScreen": "negative",
+          "musculoskeletalIssues": "no",
+          "musculoskeletalDetails": "",
+          "respiratoryIssues": "no",
+          "respiratoryDetails": "",
+          "skinConditions": "no",
+          "skinConditionDetails": "",
+          "sicknessAbsenceDays": 3,
+          "occupationalHealthNotes": ""
+        },
+        "cpdTraining": {
+          "cpdHoursLastYear": 40,
+          "cpdHoursRequired": 30,
+          "mandatoryTrainingComplete": "yes",
+          "blsRecertificationDate": "2025-01-15",
+          "alsRecertificationDate": "2025-01-15",
+          "manualHandlingRecertificationDate": "2025-02-01",
+          "safeguardingTrainingDate": "2025-01-20",
+          "infectionControlTrainingDate": "2025-01-20",
+          "majorIncidentTraining": "yes",
+          "majorIncidentTrainingDate": "2024-11-10",
+          "mentoringCapability": "expert",
+          "clinicalSupervisionAttendance": "yes",
+          "reflectivePractice": "expert",
+          "cpdTrainingNotes": ""
+        },
+        "fitnessDecision": {
+          "overallFitness": "",
+          "restrictionsDetails": "",
+          "reassessmentRequired": "no",
+          "reassessmentDate": "",
+          "remedialActions": "",
+          "referralsRequired": "",
+          "assessorName": "Dr M Shah",
+          "assessorRole": "Occupational Health Physician",
+          "assessorRegistration": "GMC7654321",
+          "assessmentDate": "2025-06-01",
+          "countersignatureName": "",
+          "countersignatureDate": "",
+          "fitnessDecisionNotes": ""
+        }
+      },
+      "expected": {
+        "overallCompetency": "expert",
+        "overallFitness": "fit-for-duty",
+        "overallRisk": "low",
+        "domainLevels": {
+          "physicalFitness": "expert",
+          "clinicalSkills": "expert",
+          "equipmentVehicle": "expert",
+          "communication": "expert",
+          "psychological": "expert"
+        },
+        "firedRules": [],
+        "additionalFlags": []
+      }
+    },
+    {
+      "name": "fit-with-restrictions-developing",
+      "description": "Competent EMT with developing cardiovascular fitness and a low VO2 max (grade-2 findings) — fit with restrictions, developing competency, moderate risk.",
+      "state": {
+        "demographics": {
+          "firstName": "Chloe",
+          "lastName": "Adeyemi",
+          "dateOfBirth": "1994-08-25",
+          "sex": "female",
+          "weight": 74,
+          "height": 168,
+          "bmi": 26.2
+        },
+        "roleQualifications": {
+          "roleType": "emt",
+          "roleTypeOther": "",
+          "employerOrganisation": "Regional Ambulance Service",
+          "stationBase": "North",
+          "yearsOfService": 3,
+          "registrationNumber": "EM998877",
+          "registrationBody": "other",
+          "registrationExpiryDate": "2026-09-30",
+          "highestQualification": "diploma",
+          "qualificationDetails": "Diploma in Emergency Medical Care",
+          "drivingLicenceCategory": "c1",
+          "blueLightTrained": "yes"
+        },
+        "physicalFitness": {
+          "cardiovascularFitness": "developing",
+          "shuttleRunLevel": 6,
+          "vo2Max": 32,
+          "muscularStrength": "competent",
+          "gripStrengthKg": 38,
+          "manualHandlingCompetency": "competent",
+          "patientCarryAbility": "yes",
+          "flexibilityMobility": "competent",
+          "balanceCoordination": "competent",
+          "restingHeartRateBpm": 72,
+          "bloodPressureSystolic": 124,
+          "bloodPressureDiastolic": 80,
+          "physicalFitnessNotes": "Cardiovascular conditioning programme recommended."
+        },
+        "clinicalSkills": {
+          "basicLifeSupport": "competent",
+          "advancedLifeSupport": "developing",
+          "airwayManagement": "competent",
+          "ivCannulation": "developing",
+          "drugAdministration": "competent",
+          "traumaAssessment": "competent",
+          "immobilisationSplinting": "competent",
+          "ecgInterpretation": "developing",
+          "patientAssessment": "competent",
+          "triageCompetency": "competent",
+          "paediatricCompetency": "developing",
+          "obstetricCompetency": "developing",
+          "clinicalSkillsNotes": ""
+        },
+        "equipmentVehicle": {
+          "defibrillatorCompetency": "competent",
+          "monitorCompetency": "competent",
+          "ventilatorCompetency": "developing",
+          "suctionCompetency": "competent",
+          "stretcherCompetency": "competent",
+          "scoopCompetency": "competent",
+          "ambulanceDriving": "competent",
+          "emergencyDriving": "competent",
+          "vehicleDailyInspection": "yes",
+          "equipmentCheckCompetency": "competent",
+          "radioCommunications": "competent",
+          "equipmentVehicleNotes": ""
+        },
+        "communicationSkills": {
+          "patientCommunication": "competent",
+          "relativeCommunication": "competent",
+          "handoverCompetency": "competent",
+          "documentationCompetency": "competent",
+          "multidisciplinaryTeamwork": "competent",
+          "conflictResolution": "developing",
+          "safeguardingAwareness": "competent",
+          "breakingBadNews": "developing",
+          "communicationNotes": ""
+        },
+        "psychologicalReadiness": {
+          "stressManagement": "competent",
+          "resilienceLevel": "good",
+          "ptsdScreening": "yes",
+          "ptsdScreeningResult": "negative",
+          "criticalIncidentExposure": "no",
+          "criticalIncidentDetails": "",
+          "criticalIncidentDebriefed": "",
+          "sleepQuality": "fair",
+          "burnoutRisk": "moderate",
+          "decisionMakingUnderPressure": "competent",
+          "emotionalRegulation": "competent",
+          "psychologicalNotes": ""
+        },
+        "occupationalHealth": {
+          "visionTest": "pass",
+          "visionCorrected": "yes",
+          "hearingTest": "pass",
+          "hearingAidRequired": "no",
+          "immunisationStatus": "up-to-date",
+          "hepatitisBImmune": "yes",
+          "currentMedications": "",
+          "substanceMisuseScreen": "negative",
+          "musculoskeletalIssues": "no",
+          "musculoskeletalDetails": "",
+          "respiratoryIssues": "no",
+          "respiratoryDetails": "",
+          "skinConditions": "no",
+          "skinConditionDetails": "",
+          "sicknessAbsenceDays": 8,
+          "occupationalHealthNotes": ""
+        },
+        "cpdTraining": {
+          "cpdHoursLastYear": 28,
+          "cpdHoursRequired": 30,
+          "mandatoryTrainingComplete": "yes",
+          "blsRecertificationDate": "2025-02-10",
+          "alsRecertificationDate": "",
+          "manualHandlingRecertificationDate": "2025-03-01",
+          "safeguardingTrainingDate": "2025-02-15",
+          "infectionControlTrainingDate": "2025-02-15",
+          "majorIncidentTraining": "no",
+          "majorIncidentTrainingDate": "",
+          "mentoringCapability": "developing",
+          "clinicalSupervisionAttendance": "yes",
+          "reflectivePractice": "competent",
+          "cpdTrainingNotes": ""
+        },
+        "fitnessDecision": {
+          "overallFitness": "",
+          "restrictionsDetails": "",
+          "reassessmentRequired": "yes",
+          "reassessmentDate": "2025-12-01",
+          "remedialActions": "Cardiovascular conditioning; complete outstanding CPD hours.",
+          "referralsRequired": "",
+          "assessorName": "Dr M Shah",
+          "assessorRole": "Occupational Health Physician",
+          "assessorRegistration": "GMC7654321",
+          "assessmentDate": "2025-06-01",
+          "countersignatureName": "",
+          "countersignatureDate": "",
+          "fitnessDecisionNotes": ""
+        }
+      },
+      "expected": {
+        "overallCompetency": "developing",
+        "overallFitness": "fit-with-restrictions",
+        "overallRisk": "moderate",
+        "domainLevels": {
+          "physicalFitness": "developing",
+          "clinicalSkills": "developing",
+          "equipmentVehicle": "competent",
+          "communication": "competent",
+          "psychological": "competent"
+        },
+        "firedRules": [
+          {
+            "id": "PF-002",
+            "domain": "Physical Fitness",
+            "description": "Cardiovascular fitness developing",
+            "grade": 2
+          },
+          {
+            "id": "PF-005",
+            "domain": "Physical Fitness",
+            "description": "Low VO2 max (<35 ml/kg/min)",
+            "grade": 2
+          },
+          {
+            "id": "TR-002",
+            "domain": "Training",
+            "description": "CPD hours below requirement",
+            "grade": 2
+          }
+        ],
+        "additionalFlags": [
+          {
+            "id": "FLAG-CPD-001",
+            "category": "Training",
+            "message": "CPD shortfall: 28 of 30 required hours completed",
+            "priority": "low"
+          }
+        ]
+      }
+    },
+    {
+      "name": "permanently-unfit-substance-screen",
+      "description": "Community responder with clinical skills intact but a positive substance-misuse screen (grade-4 finding) plus poor sleep, high burnout and developing psychological readiness — permanently unfit, developing overall competency, critical risk.",
+      "state": {
+        "demographics": {
+          "firstName": "Mark",
+          "lastName": "Donnelly",
+          "dateOfBirth": "1979-12-04",
+          "sex": "male",
+          "weight": 95,
+          "height": 178,
+          "bmi": 30
+        },
+        "roleQualifications": {
+          "roleType": "community-responder",
+          "roleTypeOther": "",
+          "employerOrganisation": "Regional Ambulance Service",
+          "stationBase": "West",
+          "yearsOfService": 9,
+          "registrationNumber": "CR445566",
+          "registrationBody": "other",
+          "registrationExpiryDate": "2026-01-31",
+          "highestQualification": "certificate",
+          "qualificationDetails": "Community First Responder certificate",
+          "drivingLicenceCategory": "b",
+          "blueLightTrained": "no"
+        },
+        "physicalFitness": {
+          "cardiovascularFitness": "competent",
+          "shuttleRunLevel": 8,
+          "vo2Max": 40,
+          "muscularStrength": "competent",
+          "gripStrengthKg": 48,
+          "manualHandlingCompetency": "competent",
+          "patientCarryAbility": "yes",
+          "flexibilityMobility": "competent",
+          "balanceCoordination": "competent",
+          "restingHeartRateBpm": 68,
+          "bloodPressureSystolic": 138,
+          "bloodPressureDiastolic": 86,
+          "physicalFitnessNotes": ""
+        },
+        "clinicalSkills": {
+          "basicLifeSupport": "competent",
+          "advancedLifeSupport": "developing",
+          "airwayManagement": "competent",
+          "ivCannulation": "developing",
+          "drugAdministration": "competent",
+          "traumaAssessment": "competent",
+          "immobilisationSplinting": "competent",
+          "ecgInterpretation": "developing",
+          "patientAssessment": "competent",
+          "triageCompetency": "competent",
+          "paediatricCompetency": "developing",
+          "obstetricCompetency": "developing",
+          "clinicalSkillsNotes": ""
+        },
+        "equipmentVehicle": {
+          "defibrillatorCompetency": "competent",
+          "monitorCompetency": "competent",
+          "ventilatorCompetency": "developing",
+          "suctionCompetency": "competent",
+          "stretcherCompetency": "competent",
+          "scoopCompetency": "competent",
+          "ambulanceDriving": "competent",
+          "emergencyDriving": "competent",
+          "vehicleDailyInspection": "yes",
+          "equipmentCheckCompetency": "competent",
+          "radioCommunications": "competent",
+          "equipmentVehicleNotes": ""
+        },
+        "communicationSkills": {
+          "patientCommunication": "competent",
+          "relativeCommunication": "competent",
+          "handoverCompetency": "competent",
+          "documentationCompetency": "competent",
+          "multidisciplinaryTeamwork": "competent",
+          "conflictResolution": "competent",
+          "safeguardingAwareness": "competent",
+          "breakingBadNews": "developing",
+          "communicationNotes": ""
+        },
+        "psychologicalReadiness": {
+          "stressManagement": "developing",
+          "resilienceLevel": "moderate",
+          "ptsdScreening": "yes",
+          "ptsdScreeningResult": "inconclusive",
+          "criticalIncidentExposure": "yes",
+          "criticalIncidentDetails": "Repeated exposure without debrief.",
+          "criticalIncidentDebriefed": "no",
+          "sleepQuality": "poor",
+          "burnoutRisk": "high",
+          "decisionMakingUnderPressure": "competent",
+          "emotionalRegulation": "developing",
+          "psychologicalNotes": ""
+        },
+        "occupationalHealth": {
+          "visionTest": "pass",
+          "visionCorrected": "no",
+          "hearingTest": "pass",
+          "hearingAidRequired": "no",
+          "immunisationStatus": "up-to-date",
+          "hepatitisBImmune": "yes",
+          "currentMedications": "",
+          "substanceMisuseScreen": "positive",
+          "musculoskeletalIssues": "yes",
+          "musculoskeletalDetails": "Chronic lower back pain.",
+          "respiratoryIssues": "no",
+          "respiratoryDetails": "",
+          "skinConditions": "no",
+          "skinConditionDetails": "",
+          "sicknessAbsenceDays": 24,
+          "occupationalHealthNotes": ""
+        },
+        "cpdTraining": {
+          "cpdHoursLastYear": 15,
+          "cpdHoursRequired": 30,
+          "mandatoryTrainingComplete": "no",
+          "blsRecertificationDate": "2024-06-10",
+          "alsRecertificationDate": "",
+          "manualHandlingRecertificationDate": "2024-06-15",
+          "safeguardingTrainingDate": "2024-06-20",
+          "infectionControlTrainingDate": "2024-06-20",
+          "majorIncidentTraining": "no",
+          "majorIncidentTrainingDate": "",
+          "mentoringCapability": "developing",
+          "clinicalSupervisionAttendance": "no",
+          "reflectivePractice": "developing",
+          "cpdTrainingNotes": ""
+        },
+        "fitnessDecision": {
+          "overallFitness": "",
+          "restrictionsDetails": "",
+          "reassessmentRequired": "yes",
+          "reassessmentDate": "",
+          "remedialActions": "Occupational health and substance-misuse support referral.",
+          "referralsRequired": "Occupational health; employee assistance programme.",
+          "assessorName": "Dr M Shah",
+          "assessorRole": "Occupational Health Physician",
+          "assessorRegistration": "GMC7654321",
+          "assessmentDate": "2025-06-01",
+          "countersignatureName": "",
+          "countersignatureDate": "",
+          "fitnessDecisionNotes": ""
+        }
+      },
+      "expected": {
+        "overallCompetency": "developing",
+        "overallFitness": "permanently-unfit",
+        "overallRisk": "critical",
+        "domainLevels": {
+          "physicalFitness": "competent",
+          "clinicalSkills": "developing",
+          "equipmentVehicle": "competent",
+          "communication": "competent",
+          "psychological": "developing"
+        },
+        "firedRules": [
+          {
+            "id": "PS-002",
+            "domain": "Psychological",
+            "description": "High burnout risk",
+            "grade": 3
+          },
+          {
+            "id": "PS-003",
+            "domain": "Psychological",
+            "description": "Poor sleep quality",
+            "grade": 2
+          },
+          {
+            "id": "PS-005",
+            "domain": "Psychological",
+            "description": "Critical incident exposure without debriefing",
+            "grade": 2
+          },
+          {
+            "id": "OH-003",
+            "domain": "Occupational Health",
+            "description": "Positive substance misuse screen",
+            "grade": 4
+          },
+          {
+            "id": "OH-005",
+            "domain": "Occupational Health",
+            "description": "Musculoskeletal issues present",
+            "grade": 2
+          },
+          {
+            "id": "OH-006",
+            "domain": "Occupational Health",
+            "description": "Excessive sickness absence (>20 days)",
+            "grade": 2
+          },
+          {
+            "id": "TR-001",
+            "domain": "Training",
+            "description": "Mandatory training incomplete",
+            "grade": 3
+          },
+          {
+            "id": "TR-002",
+            "domain": "Training",
+            "description": "CPD hours below requirement",
+            "grade": 2
+          }
+        ],
+        "additionalFlags": [
+          {
+            "id": "FLAG-SUBSTANCE-001",
+            "category": "Occupational Health",
+            "message": "Positive substance misuse screening - IMMEDIATE MANAGEMENT REFERRAL",
+            "priority": "high"
+          },
+          {
+            "id": "FLAG-DEBRIEF-001",
+            "category": "Psychological",
+            "message": "Critical incident exposure without debriefing: Repeated exposure without debrief.",
+            "priority": "medium"
+          },
+          {
+            "id": "FLAG-BURNOUT-001",
+            "category": "Psychological",
+            "message": "High burnout risk - consider workload review and wellbeing support",
+            "priority": "medium"
+          },
+          {
+            "id": "FLAG-TRAINING-001",
+            "category": "Training",
+            "message": "Mandatory training incomplete - schedule completion urgently",
+            "priority": "medium"
+          },
+          {
+            "id": "FLAG-MSK-001",
+            "category": "Occupational Health",
+            "message": "Musculoskeletal issues: Chronic lower back pain.",
+            "priority": "medium"
+          },
+          {
+            "id": "FLAG-CPD-001",
+            "category": "Training",
+            "message": "CPD shortfall: 15 of 30 required hours completed",
+            "priority": "low"
+          }
+        ]
+      }
+    }
+  ]
+}

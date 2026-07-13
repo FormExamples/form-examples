@@ -1,0 +1,481 @@
+{
+  "engine": "front-end-with-html",
+  "graderHint": "gradeBloodspot",
+  "note": "Realistic filled-in states in the classifier's shape. `expected` is computed by `bin/test-personas --update` and verified by `bin/test-personas`. Overall outcome is derived by precedence (referral-required > repeat-required > incomplete > declined-only-outstanding > all-not-suspected); referral status follows the outcome.",
+  "personas": [
+    {
+      "name": "all-clear-routine",
+      "description": "Day-5 sample, adequate spots, all nine conditions not suspected — outcome all-not-suspected, routine referral status.",
+      "state": {
+        "sampleTaker": {
+          "sampleTakerName": "J Morgan",
+          "sampleTakerRole": "midwife",
+          "careSetting": "home",
+          "recordDate": "2025-01-06"
+        },
+        "babyId": {
+          "nhsNumber": "9990000011",
+          "babyName": "Baby Grace Miller",
+          "dateOfBirth": "2025-01-01",
+          "timeOfBirth": "08:15",
+          "sex": "female",
+          "gestationWeeks": 40
+        },
+        "eligibility": {
+          "previouslyScreened": "no",
+          "consentGiven": "yes",
+          "declineReason": ""
+        },
+        "sampleEvent": {
+          "sampleDate": "2025-01-06",
+          "sampleTime": "10:30",
+          "ageAtSampleDays": 5,
+          "samplingSite": "heel",
+          "sampleNotes": "Four good spots obtained."
+        },
+        "sampleQuality": {
+          "sampleAdequacy": "adequate",
+          "spotQualityIssue": "no",
+          "isRepeat": "no",
+          "repeatReason": "not-applicable"
+        },
+        "conditions": {
+          "scdResult": "not-suspected",
+          "cfResult": "not-suspected",
+          "chtResult": "not-suspected",
+          "pkuResult": "not-suspected",
+          "mcaddResult": "not-suspected",
+          "msudResult": "not-suspected",
+          "ivaResult": "not-suspected",
+          "ga1Result": "not-suspected",
+          "hcuResult": "not-suspected"
+        },
+        "summary": {
+          "clinicalContext": "Well term baby, feeding well."
+        }
+      },
+      "expected": {
+        "ageAtSampleDays": 5,
+        "conditionResults": [
+          {
+            "code": "scd",
+            "label": "Sickle cell disease",
+            "short": "SCD",
+            "result": "not-suspected",
+            "effectiveResult": "not-suspected",
+            "referralTarget": "Haemoglobinopathy / haematology service",
+            "invalidCarrier": false
+          },
+          {
+            "code": "cf",
+            "label": "Cystic fibrosis",
+            "short": "CF",
+            "result": "not-suspected",
+            "effectiveResult": "not-suspected",
+            "referralTarget": "Cystic fibrosis centre",
+            "invalidCarrier": false
+          },
+          {
+            "code": "cht",
+            "label": "Congenital hypothyroidism",
+            "short": "CHT",
+            "result": "not-suspected",
+            "effectiveResult": "not-suspected",
+            "referralTarget": "Paediatric endocrinology",
+            "invalidCarrier": false
+          },
+          {
+            "code": "pku",
+            "label": "Phenylketonuria",
+            "short": "PKU",
+            "result": "not-suspected",
+            "effectiveResult": "not-suspected",
+            "referralTarget": "Inherited metabolic disease centre",
+            "invalidCarrier": false
+          },
+          {
+            "code": "mcadd",
+            "label": "Medium-chain acyl-CoA dehydrogenase deficiency",
+            "short": "MCADD",
+            "result": "not-suspected",
+            "effectiveResult": "not-suspected",
+            "referralTarget": "Inherited metabolic disease centre",
+            "invalidCarrier": false
+          },
+          {
+            "code": "msud",
+            "label": "Maple syrup urine disease",
+            "short": "MSUD",
+            "result": "not-suspected",
+            "effectiveResult": "not-suspected",
+            "referralTarget": "Inherited metabolic disease centre",
+            "invalidCarrier": false
+          },
+          {
+            "code": "iva",
+            "label": "Isovaleric acidaemia",
+            "short": "IVA",
+            "result": "not-suspected",
+            "effectiveResult": "not-suspected",
+            "referralTarget": "Inherited metabolic disease centre",
+            "invalidCarrier": false
+          },
+          {
+            "code": "ga1",
+            "label": "Glutaric aciduria type 1",
+            "short": "GA1",
+            "result": "not-suspected",
+            "effectiveResult": "not-suspected",
+            "referralTarget": "Inherited metabolic disease centre",
+            "invalidCarrier": false
+          },
+          {
+            "code": "hcu",
+            "label": "Homocystinuria (pyridoxine unresponsive)",
+            "short": "HCU",
+            "result": "not-suspected",
+            "effectiveResult": "not-suspected",
+            "referralTarget": "Inherited metabolic disease centre",
+            "invalidCarrier": false
+          }
+        ],
+        "referrals": [],
+        "overallOutcome": "all-not-suspected",
+        "referralStatus": "routine",
+        "sampleQuality": {
+          "adequate": true,
+          "withinWindow": true,
+          "avoidableRepeat": false
+        },
+        "flaggedIssues": [
+          {
+            "id": "FLAG-SAMPLE-001",
+            "category": "Sample quality",
+            "message": "Inadequate blood spot sample — cannot be reliably screened; a repeat sample is required.",
+            "priority": "high"
+          }
+        ]
+      }
+    },
+    {
+      "name": "cf-suspected-urgent",
+      "description": "Day-6 sample with cystic fibrosis suspected; all other conditions not suspected — outcome referral-required, urgent referral status.",
+      "state": {
+        "sampleTaker": {
+          "sampleTakerName": "J Morgan",
+          "sampleTakerRole": "midwife",
+          "careSetting": "community-clinic",
+          "recordDate": "2025-01-07"
+        },
+        "babyId": {
+          "nhsNumber": "9990000022",
+          "babyName": "Baby Oliver Reid",
+          "dateOfBirth": "2025-01-01",
+          "timeOfBirth": "14:40",
+          "sex": "male",
+          "gestationWeeks": 39
+        },
+        "eligibility": {
+          "previouslyScreened": "no",
+          "consentGiven": "yes",
+          "declineReason": ""
+        },
+        "sampleEvent": {
+          "sampleDate": "2025-01-07",
+          "sampleTime": "09:00",
+          "ageAtSampleDays": 6,
+          "samplingSite": "heel",
+          "sampleNotes": ""
+        },
+        "sampleQuality": {
+          "sampleAdequacy": "adequate",
+          "spotQualityIssue": "no",
+          "isRepeat": "no",
+          "repeatReason": "not-applicable"
+        },
+        "conditions": {
+          "scdResult": "not-suspected",
+          "cfResult": "suspected",
+          "chtResult": "not-suspected",
+          "pkuResult": "not-suspected",
+          "mcaddResult": "not-suspected",
+          "msudResult": "not-suspected",
+          "ivaResult": "not-suspected",
+          "ga1Result": "not-suspected",
+          "hcuResult": "not-suspected"
+        },
+        "summary": {
+          "clinicalContext": "Raised IRT; CF suspected. Urgent referral to CF centre."
+        }
+      },
+      "expected": {
+        "ageAtSampleDays": 6,
+        "conditionResults": [
+          {
+            "code": "scd",
+            "label": "Sickle cell disease",
+            "short": "SCD",
+            "result": "not-suspected",
+            "effectiveResult": "not-suspected",
+            "referralTarget": "Haemoglobinopathy / haematology service",
+            "invalidCarrier": false
+          },
+          {
+            "code": "cf",
+            "label": "Cystic fibrosis",
+            "short": "CF",
+            "result": "suspected",
+            "effectiveResult": "suspected",
+            "referralTarget": "Cystic fibrosis centre",
+            "invalidCarrier": false
+          },
+          {
+            "code": "cht",
+            "label": "Congenital hypothyroidism",
+            "short": "CHT",
+            "result": "not-suspected",
+            "effectiveResult": "not-suspected",
+            "referralTarget": "Paediatric endocrinology",
+            "invalidCarrier": false
+          },
+          {
+            "code": "pku",
+            "label": "Phenylketonuria",
+            "short": "PKU",
+            "result": "not-suspected",
+            "effectiveResult": "not-suspected",
+            "referralTarget": "Inherited metabolic disease centre",
+            "invalidCarrier": false
+          },
+          {
+            "code": "mcadd",
+            "label": "Medium-chain acyl-CoA dehydrogenase deficiency",
+            "short": "MCADD",
+            "result": "not-suspected",
+            "effectiveResult": "not-suspected",
+            "referralTarget": "Inherited metabolic disease centre",
+            "invalidCarrier": false
+          },
+          {
+            "code": "msud",
+            "label": "Maple syrup urine disease",
+            "short": "MSUD",
+            "result": "not-suspected",
+            "effectiveResult": "not-suspected",
+            "referralTarget": "Inherited metabolic disease centre",
+            "invalidCarrier": false
+          },
+          {
+            "code": "iva",
+            "label": "Isovaleric acidaemia",
+            "short": "IVA",
+            "result": "not-suspected",
+            "effectiveResult": "not-suspected",
+            "referralTarget": "Inherited metabolic disease centre",
+            "invalidCarrier": false
+          },
+          {
+            "code": "ga1",
+            "label": "Glutaric aciduria type 1",
+            "short": "GA1",
+            "result": "not-suspected",
+            "effectiveResult": "not-suspected",
+            "referralTarget": "Inherited metabolic disease centre",
+            "invalidCarrier": false
+          },
+          {
+            "code": "hcu",
+            "label": "Homocystinuria (pyridoxine unresponsive)",
+            "short": "HCU",
+            "result": "not-suspected",
+            "effectiveResult": "not-suspected",
+            "referralTarget": "Inherited metabolic disease centre",
+            "invalidCarrier": false
+          }
+        ],
+        "referrals": [
+          {
+            "code": "cf",
+            "service": "Cystic fibrosis centre",
+            "urgency": "urgent"
+          }
+        ],
+        "overallOutcome": "referral-required",
+        "referralStatus": "urgent",
+        "sampleQuality": {
+          "adequate": true,
+          "withinWindow": true,
+          "avoidableRepeat": false
+        },
+        "flaggedIssues": [
+          {
+            "id": "FLAG-REFERRAL-001",
+            "category": "Referral",
+            "message": "Suspected screen positive (CF) — refer urgently to each named specialist service without waiting for the other results.",
+            "priority": "high"
+          },
+          {
+            "id": "FLAG-SAMPLE-001",
+            "category": "Sample quality",
+            "message": "Inadequate blood spot sample — cannot be reliably screened; a repeat sample is required.",
+            "priority": "high"
+          }
+        ]
+      }
+    },
+    {
+      "name": "cht-repeat-required",
+      "description": "Day-7 sample with a borderline congenital hypothyroidism result requiring a repeat; all other conditions not suspected — outcome repeat-required, repeat referral status.",
+      "state": {
+        "sampleTaker": {
+          "sampleTakerName": "J Morgan",
+          "sampleTakerRole": "neonatal-nurse",
+          "careSetting": "postnatal-ward",
+          "recordDate": "2025-01-08"
+        },
+        "babyId": {
+          "nhsNumber": "9990000033",
+          "babyName": "Baby Amara Singh",
+          "dateOfBirth": "2025-01-01",
+          "timeOfBirth": "03:20",
+          "sex": "female",
+          "gestationWeeks": 38
+        },
+        "eligibility": {
+          "previouslyScreened": "no",
+          "consentGiven": "yes",
+          "declineReason": ""
+        },
+        "sampleEvent": {
+          "sampleDate": "2025-01-08",
+          "sampleTime": "11:15",
+          "ageAtSampleDays": 7,
+          "samplingSite": "heel",
+          "sampleNotes": ""
+        },
+        "sampleQuality": {
+          "sampleAdequacy": "adequate",
+          "spotQualityIssue": "no",
+          "isRepeat": "no",
+          "repeatReason": "not-applicable"
+        },
+        "conditions": {
+          "scdResult": "not-suspected",
+          "cfResult": "not-suspected",
+          "chtResult": "repeat-required",
+          "pkuResult": "not-suspected",
+          "mcaddResult": "not-suspected",
+          "msudResult": "not-suspected",
+          "ivaResult": "not-suspected",
+          "ga1Result": "not-suspected",
+          "hcuResult": "not-suspected"
+        },
+        "summary": {
+          "clinicalContext": "Borderline TSH; repeat sample requested per protocol."
+        }
+      },
+      "expected": {
+        "ageAtSampleDays": 7,
+        "conditionResults": [
+          {
+            "code": "scd",
+            "label": "Sickle cell disease",
+            "short": "SCD",
+            "result": "not-suspected",
+            "effectiveResult": "not-suspected",
+            "referralTarget": "Haemoglobinopathy / haematology service",
+            "invalidCarrier": false
+          },
+          {
+            "code": "cf",
+            "label": "Cystic fibrosis",
+            "short": "CF",
+            "result": "not-suspected",
+            "effectiveResult": "not-suspected",
+            "referralTarget": "Cystic fibrosis centre",
+            "invalidCarrier": false
+          },
+          {
+            "code": "cht",
+            "label": "Congenital hypothyroidism",
+            "short": "CHT",
+            "result": "repeat-required",
+            "effectiveResult": "repeat-required",
+            "referralTarget": "Paediatric endocrinology",
+            "invalidCarrier": false
+          },
+          {
+            "code": "pku",
+            "label": "Phenylketonuria",
+            "short": "PKU",
+            "result": "not-suspected",
+            "effectiveResult": "not-suspected",
+            "referralTarget": "Inherited metabolic disease centre",
+            "invalidCarrier": false
+          },
+          {
+            "code": "mcadd",
+            "label": "Medium-chain acyl-CoA dehydrogenase deficiency",
+            "short": "MCADD",
+            "result": "not-suspected",
+            "effectiveResult": "not-suspected",
+            "referralTarget": "Inherited metabolic disease centre",
+            "invalidCarrier": false
+          },
+          {
+            "code": "msud",
+            "label": "Maple syrup urine disease",
+            "short": "MSUD",
+            "result": "not-suspected",
+            "effectiveResult": "not-suspected",
+            "referralTarget": "Inherited metabolic disease centre",
+            "invalidCarrier": false
+          },
+          {
+            "code": "iva",
+            "label": "Isovaleric acidaemia",
+            "short": "IVA",
+            "result": "not-suspected",
+            "effectiveResult": "not-suspected",
+            "referralTarget": "Inherited metabolic disease centre",
+            "invalidCarrier": false
+          },
+          {
+            "code": "ga1",
+            "label": "Glutaric aciduria type 1",
+            "short": "GA1",
+            "result": "not-suspected",
+            "effectiveResult": "not-suspected",
+            "referralTarget": "Inherited metabolic disease centre",
+            "invalidCarrier": false
+          },
+          {
+            "code": "hcu",
+            "label": "Homocystinuria (pyridoxine unresponsive)",
+            "short": "HCU",
+            "result": "not-suspected",
+            "effectiveResult": "not-suspected",
+            "referralTarget": "Inherited metabolic disease centre",
+            "invalidCarrier": false
+          }
+        ],
+        "referrals": [],
+        "overallOutcome": "repeat-required",
+        "referralStatus": "repeat",
+        "sampleQuality": {
+          "adequate": true,
+          "withinWindow": true,
+          "avoidableRepeat": false
+        },
+        "flaggedIssues": [
+          {
+            "id": "FLAG-SAMPLE-001",
+            "category": "Sample quality",
+            "message": "Inadequate blood spot sample — cannot be reliably screened; a repeat sample is required.",
+            "priority": "high"
+          }
+        ]
+      }
+    }
+  ]
+}

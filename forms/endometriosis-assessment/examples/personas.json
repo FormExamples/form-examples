@@ -1,0 +1,688 @@
+{
+  "engine": "front-end-with-html",
+  "graderHint": "calculateEndoGrade",
+  "note": "Realistic filled-in states in the scoring engine's shape. `expected` is computed by `bin/test-personas --update` and verified by `bin/test-personas`. Overall severity (mild / moderate / severe / critical) is driven by the worst fired-rule grade and derived ASRM stage.",
+  "personas": [
+    {
+      "name": "minimal-mild",
+      "description": "Irregular cycles and mild cyclical bloating only; no significant pain or organ involvement — ASRM Stage I, mild severity.",
+      "state": {
+        "demographics": {
+          "firstName": "Hannah",
+          "lastName": "Price",
+          "dateOfBirth": "1996-05-14",
+          "sex": "female",
+          "weight": 64,
+          "height": 166,
+          "bmi": 23.2
+        },
+        "menstrualHistory": {
+          "ageAtMenarche": 13,
+          "cycleRegularity": "irregular",
+          "cycleLengthDays": 32,
+          "periodDurationDays": 5,
+          "flowHeaviness": "moderate",
+          "clotsPresent": "no",
+          "intermenstrualBleeding": "no",
+          "postcoitalBleeding": "no",
+          "dysmenorrhoeaSeverity": "mild",
+          "daysOffWorkPerCycle": 0,
+          "currentContraception": "none",
+          "menstrualNotes": ""
+        },
+        "painAssessment": {
+          "hasPelvicPain": "no",
+          "pelvicPainSeverity": null,
+          "pelvicPainCharacter": "",
+          "pelvicPainLocation": "",
+          "pelvicPainTiming": "",
+          "dyspareunia": "no",
+          "dyspareuniaSeverity": null,
+          "dyschezia": "no",
+          "dyscheziaCyclical": "",
+          "backPain": "no",
+          "legPain": "no",
+          "painWorseWithActivity": "no",
+          "painNotes": ""
+        },
+        "gastrointestinalSymptoms": {
+          "hasGiSymptoms": "yes",
+          "bloating": "yes",
+          "bloatingCyclical": "yes",
+          "nausea": "no",
+          "constipation": "no",
+          "diarrhoea": "no",
+          "alternatingBowelHabit": "no",
+          "rectalBleeding": "no",
+          "rectalBleedingCyclical": "",
+          "bowelObstructionSymptoms": "no",
+          "giNotes": ""
+        },
+        "urinarySymptoms": {
+          "hasUrinarySymptoms": "no",
+          "frequency": "no",
+          "urgency": "no",
+          "dysuria": "no",
+          "haematuria": "no",
+          "haematuriaCyclical": "",
+          "flankPain": "no",
+          "urinaryObstructionSymptoms": "no",
+          "recurrentUtis": "no",
+          "urinaryNotes": ""
+        },
+        "fertilityAssessment": {
+          "tryingToConceive": "no",
+          "durationTryingMonths": null,
+          "previousPregnancies": 0,
+          "liveBirths": 0,
+          "miscarriages": 0,
+          "ectopicPregnancies": 0,
+          "previousFertilityTreatment": "no",
+          "fertilityTreatmentDetails": "",
+          "amhLevel": null,
+          "partnerSemenAnalysis": "",
+          "futureFertilityConcerns": "no",
+          "fertilityNotes": ""
+        },
+        "previousTreatments": {
+          "nsaidsTried": "yes",
+          "nsaidsEffective": "effective",
+          "paracetamolTried": "yes",
+          "opioidsTried": "no",
+          "opioidsCurrent": "no",
+          "combinedPillTried": "no",
+          "combinedPillEffective": "",
+          "progesteroneTried": "no",
+          "progesteroneType": "",
+          "gnrhAgonistTried": "no",
+          "gnrhAgonistDurationMonths": null,
+          "mirenaIusTried": "no",
+          "otherTreatments": "",
+          "treatmentNotes": ""
+        },
+        "surgicalHistory": {
+          "previousLaparoscopy": "no",
+          "numberOfLaparoscopies": 0,
+          "mostRecentLaparoscopyDate": "",
+          "endometriosisConfirmedSurgically": "no",
+          "histologicalConfirmation": "",
+          "asrmStageAtSurgery": "",
+          "sitesFound": "",
+          "excisionPerformed": "",
+          "ablationPerformed": "",
+          "adhesiolysisPerformed": "",
+          "endometriomaDrained": "no",
+          "bowelSurgery": "no",
+          "bladderSurgery": "no",
+          "otherPelvicSurgery": "no",
+          "surgicalComplications": "",
+          "surgicalNotes": ""
+        },
+        "qualityOfLife": {
+          "painDomainScore": 20,
+          "controlPowerlessnessScore": 18,
+          "emotionalWellbeingScore": 22,
+          "socialSupportScore": 15,
+          "selfImageScore": 20,
+          "workImpact": "minimal",
+          "relationshipImpact": "minimal",
+          "sleepImpact": "minimal",
+          "mentalHealthImpact": "minimal",
+          "exerciseImpact": "minimal",
+          "qolNotes": ""
+        },
+        "treatmentPlanning": {
+          "treatmentGoals": "Symptom monitoring.",
+          "preferredApproach": "medical",
+          "surgeryConsidered": "no",
+          "surgeryTypeConsidered": "",
+          "fertilityPreservationNeeded": "no",
+          "mdtReferralNeeded": "no",
+          "painManagementReferral": "no",
+          "psychologyReferral": "no",
+          "physiotherapyReferral": "no",
+          "fertilityClinicReferral": "no",
+          "imagingRequested": "no",
+          "followUpInterval": "12-months",
+          "planningNotes": ""
+        }
+      },
+      "expected": {
+        "asrmStage": 1,
+        "asrmPoints": 2,
+        "ehp30Score": 19,
+        "overallSeverity": "mild",
+        "firedRules": [
+          {
+            "id": "MH-005",
+            "category": "Menstrual",
+            "description": "Irregular or absent menstrual cycles",
+            "grade": 1
+          },
+          {
+            "id": "GI-003",
+            "category": "Gastrointestinal",
+            "description": "Cyclical bloating",
+            "grade": 1
+          }
+        ]
+      }
+    },
+    {
+      "name": "moderate-stage-two",
+      "description": "Moderate dysmenorrhoea with painful defecation and a documented endometrioma; worst rule grade 2 — ASRM Stage II, moderate severity.",
+      "state": {
+        "demographics": {
+          "firstName": "Priya",
+          "lastName": "Kaur",
+          "dateOfBirth": "1992-11-02",
+          "sex": "female",
+          "weight": 70,
+          "height": 163,
+          "bmi": 26.3
+        },
+        "menstrualHistory": {
+          "ageAtMenarche": 12,
+          "cycleRegularity": "regular",
+          "cycleLengthDays": 28,
+          "periodDurationDays": 6,
+          "flowHeaviness": "heavy",
+          "clotsPresent": "yes",
+          "intermenstrualBleeding": "no",
+          "postcoitalBleeding": "no",
+          "dysmenorrhoeaSeverity": "moderate",
+          "daysOffWorkPerCycle": 1,
+          "currentContraception": "combined-pill",
+          "menstrualNotes": ""
+        },
+        "painAssessment": {
+          "hasPelvicPain": "yes",
+          "pelvicPainSeverity": 6,
+          "pelvicPainCharacter": "cramping",
+          "pelvicPainLocation": "bilateral",
+          "pelvicPainTiming": "cyclical",
+          "dyspareunia": "no",
+          "dyspareuniaSeverity": null,
+          "dyschezia": "yes",
+          "dyscheziaCyclical": "no",
+          "backPain": "yes",
+          "legPain": "no",
+          "painWorseWithActivity": "yes",
+          "painNotes": ""
+        },
+        "gastrointestinalSymptoms": {
+          "hasGiSymptoms": "yes",
+          "bloating": "yes",
+          "bloatingCyclical": "no",
+          "nausea": "yes",
+          "constipation": "yes",
+          "diarrhoea": "no",
+          "alternatingBowelHabit": "no",
+          "rectalBleeding": "no",
+          "rectalBleedingCyclical": "",
+          "bowelObstructionSymptoms": "no",
+          "giNotes": ""
+        },
+        "urinarySymptoms": {
+          "hasUrinarySymptoms": "no",
+          "frequency": "no",
+          "urgency": "no",
+          "dysuria": "no",
+          "haematuria": "no",
+          "haematuriaCyclical": "",
+          "flankPain": "no",
+          "urinaryObstructionSymptoms": "no",
+          "recurrentUtis": "no",
+          "urinaryNotes": ""
+        },
+        "fertilityAssessment": {
+          "tryingToConceive": "no",
+          "durationTryingMonths": null,
+          "previousPregnancies": 0,
+          "liveBirths": 0,
+          "miscarriages": 0,
+          "ectopicPregnancies": 0,
+          "previousFertilityTreatment": "no",
+          "fertilityTreatmentDetails": "",
+          "amhLevel": null,
+          "partnerSemenAnalysis": "",
+          "futureFertilityConcerns": "yes",
+          "fertilityNotes": ""
+        },
+        "previousTreatments": {
+          "nsaidsTried": "yes",
+          "nsaidsEffective": "partial",
+          "paracetamolTried": "yes",
+          "opioidsTried": "no",
+          "opioidsCurrent": "no",
+          "combinedPillTried": "yes",
+          "combinedPillEffective": "partial",
+          "progesteroneTried": "no",
+          "progesteroneType": "",
+          "gnrhAgonistTried": "no",
+          "gnrhAgonistDurationMonths": null,
+          "mirenaIusTried": "no",
+          "otherTreatments": "",
+          "treatmentNotes": ""
+        },
+        "surgicalHistory": {
+          "previousLaparoscopy": "yes",
+          "numberOfLaparoscopies": 1,
+          "mostRecentLaparoscopyDate": "2023-03-10",
+          "endometriosisConfirmedSurgically": "yes",
+          "histologicalConfirmation": "yes",
+          "asrmStageAtSurgery": "",
+          "sitesFound": "Ovarian, uterosacral.",
+          "excisionPerformed": "yes",
+          "ablationPerformed": "no",
+          "adhesiolysisPerformed": "no",
+          "endometriomaDrained": "yes",
+          "bowelSurgery": "no",
+          "bladderSurgery": "no",
+          "otherPelvicSurgery": "no",
+          "surgicalComplications": "",
+          "surgicalNotes": ""
+        },
+        "qualityOfLife": {
+          "painDomainScore": 55,
+          "controlPowerlessnessScore": 48,
+          "emotionalWellbeingScore": 50,
+          "socialSupportScore": 40,
+          "selfImageScore": 45,
+          "workImpact": "moderate",
+          "relationshipImpact": "moderate",
+          "sleepImpact": "moderate",
+          "mentalHealthImpact": "moderate",
+          "exerciseImpact": "moderate",
+          "qolNotes": ""
+        },
+        "treatmentPlanning": {
+          "treatmentGoals": "Improve pain control and preserve fertility options.",
+          "preferredApproach": "medical",
+          "surgeryConsidered": "no",
+          "surgeryTypeConsidered": "",
+          "fertilityPreservationNeeded": "no",
+          "mdtReferralNeeded": "no",
+          "painManagementReferral": "yes",
+          "psychologyReferral": "no",
+          "physiotherapyReferral": "no",
+          "fertilityClinicReferral": "no",
+          "imagingRequested": "yes",
+          "followUpInterval": "6-months",
+          "planningNotes": ""
+        }
+      },
+      "expected": {
+        "asrmStage": 2,
+        "asrmPoints": 25,
+        "ehp30Score": 48,
+        "overallSeverity": "moderate",
+        "firedRules": [
+          {
+            "id": "MH-002",
+            "category": "Menstrual",
+            "description": "Moderate dysmenorrhoea",
+            "grade": 2
+          },
+          {
+            "id": "PAIN-002",
+            "category": "Pain",
+            "description": "Moderate pelvic pain (VAS 5-7)",
+            "grade": 2
+          },
+          {
+            "id": "PAIN-005",
+            "category": "Pain",
+            "description": "Dyschezia (painful defecation)",
+            "grade": 2
+          },
+          {
+            "id": "FERT-004",
+            "category": "Fertility",
+            "description": "Future fertility concerns",
+            "grade": 2
+          },
+          {
+            "id": "SURG-006",
+            "category": "Surgical",
+            "description": "Endometrioma documented",
+            "grade": 2
+          }
+        ]
+      }
+    },
+    {
+      "name": "critical-deep-disease",
+      "description": "Severe constant pelvic pain (VAS 9), unable to work, and cyclical bowel-obstruction symptoms; worst rule grade 4 — ASRM Stage IV, critical severity.",
+      "state": {
+        "demographics": {
+          "firstName": "Rebecca",
+          "lastName": "Osei",
+          "dateOfBirth": "1988-07-19",
+          "sex": "female",
+          "weight": 62,
+          "height": 160,
+          "bmi": 24.2
+        },
+        "menstrualHistory": {
+          "ageAtMenarche": 11,
+          "cycleRegularity": "irregular",
+          "cycleLengthDays": 26,
+          "periodDurationDays": 8,
+          "flowHeaviness": "very-heavy",
+          "clotsPresent": "yes",
+          "intermenstrualBleeding": "yes",
+          "postcoitalBleeding": "no",
+          "dysmenorrhoeaSeverity": "severe",
+          "daysOffWorkPerCycle": 4,
+          "currentContraception": "progesterone-only",
+          "menstrualNotes": ""
+        },
+        "painAssessment": {
+          "hasPelvicPain": "yes",
+          "pelvicPainSeverity": 9,
+          "pelvicPainCharacter": "sharp",
+          "pelvicPainLocation": "diffuse",
+          "pelvicPainTiming": "constant",
+          "dyspareunia": "deep",
+          "dyspareuniaSeverity": 8,
+          "dyschezia": "yes",
+          "dyscheziaCyclical": "yes",
+          "backPain": "yes",
+          "legPain": "yes",
+          "painWorseWithActivity": "yes",
+          "painNotes": "Debilitating chronic pelvic pain."
+        },
+        "gastrointestinalSymptoms": {
+          "hasGiSymptoms": "yes",
+          "bloating": "yes",
+          "bloatingCyclical": "yes",
+          "nausea": "yes",
+          "constipation": "yes",
+          "diarrhoea": "no",
+          "alternatingBowelHabit": "yes",
+          "rectalBleeding": "yes",
+          "rectalBleedingCyclical": "yes",
+          "bowelObstructionSymptoms": "yes",
+          "giNotes": "Cyclical obstructive symptoms."
+        },
+        "urinarySymptoms": {
+          "hasUrinarySymptoms": "yes",
+          "frequency": "yes",
+          "urgency": "yes",
+          "dysuria": "yes",
+          "haematuria": "yes",
+          "haematuriaCyclical": "yes",
+          "flankPain": "yes",
+          "urinaryObstructionSymptoms": "no",
+          "recurrentUtis": "no",
+          "urinaryNotes": ""
+        },
+        "fertilityAssessment": {
+          "tryingToConceive": "yes",
+          "durationTryingMonths": 24,
+          "previousPregnancies": 1,
+          "liveBirths": 0,
+          "miscarriages": 0,
+          "ectopicPregnancies": 1,
+          "previousFertilityTreatment": "yes",
+          "fertilityTreatmentDetails": "One failed IVF cycle.",
+          "amhLevel": 3.2,
+          "partnerSemenAnalysis": "normal",
+          "futureFertilityConcerns": "yes",
+          "fertilityNotes": ""
+        },
+        "previousTreatments": {
+          "nsaidsTried": "yes",
+          "nsaidsEffective": "ineffective",
+          "paracetamolTried": "yes",
+          "opioidsTried": "yes",
+          "opioidsCurrent": "yes",
+          "combinedPillTried": "yes",
+          "combinedPillEffective": "ineffective",
+          "progesteroneTried": "yes",
+          "progesteroneType": "norethisterone",
+          "gnrhAgonistTried": "yes",
+          "gnrhAgonistDurationMonths": 6,
+          "mirenaIusTried": "yes",
+          "otherTreatments": "",
+          "treatmentNotes": ""
+        },
+        "surgicalHistory": {
+          "previousLaparoscopy": "yes",
+          "numberOfLaparoscopies": 3,
+          "mostRecentLaparoscopyDate": "2024-09-01",
+          "endometriosisConfirmedSurgically": "yes",
+          "histologicalConfirmation": "yes",
+          "asrmStageAtSurgery": "IV",
+          "sitesFound": "Deep infiltrating disease; rectovaginal, bowel, bladder.",
+          "excisionPerformed": "yes",
+          "ablationPerformed": "no",
+          "adhesiolysisPerformed": "yes",
+          "endometriomaDrained": "yes",
+          "bowelSurgery": "yes",
+          "bladderSurgery": "yes",
+          "otherPelvicSurgery": "yes",
+          "surgicalComplications": "Adhesions.",
+          "surgicalNotes": ""
+        },
+        "qualityOfLife": {
+          "painDomainScore": 88,
+          "controlPowerlessnessScore": 82,
+          "emotionalWellbeingScore": 85,
+          "socialSupportScore": 70,
+          "selfImageScore": 80,
+          "workImpact": "unable-to-work",
+          "relationshipImpact": "severe",
+          "sleepImpact": "severe",
+          "mentalHealthImpact": "severe",
+          "exerciseImpact": "severe",
+          "qolNotes": ""
+        },
+        "treatmentPlanning": {
+          "treatmentGoals": "Complex MDT management; consider definitive surgery and fertility pathway.",
+          "preferredApproach": "surgical",
+          "surgeryConsidered": "yes",
+          "surgeryTypeConsidered": "excision",
+          "fertilityPreservationNeeded": "yes",
+          "mdtReferralNeeded": "yes",
+          "painManagementReferral": "yes",
+          "psychologyReferral": "yes",
+          "physiotherapyReferral": "yes",
+          "fertilityClinicReferral": "yes",
+          "imagingRequested": "yes",
+          "followUpInterval": "6-weeks",
+          "planningNotes": ""
+        }
+      },
+      "expected": {
+        "asrmStage": 4,
+        "asrmPoints": 231,
+        "ehp30Score": 81,
+        "overallSeverity": "critical",
+        "firedRules": [
+          {
+            "id": "MH-001",
+            "category": "Menstrual",
+            "description": "Severe dysmenorrhoea",
+            "grade": 3
+          },
+          {
+            "id": "MH-003",
+            "category": "Menstrual",
+            "description": "Very heavy menstrual flow",
+            "grade": 2
+          },
+          {
+            "id": "MH-004",
+            "category": "Menstrual",
+            "description": "Significant days off work per cycle (>=3)",
+            "grade": 3
+          },
+          {
+            "id": "MH-005",
+            "category": "Menstrual",
+            "description": "Irregular or absent menstrual cycles",
+            "grade": 1
+          },
+          {
+            "id": "PAIN-001",
+            "category": "Pain",
+            "description": "Severe pelvic pain (VAS 8-10)",
+            "grade": 4
+          },
+          {
+            "id": "PAIN-003",
+            "category": "Pain",
+            "description": "Constant pelvic pain",
+            "grade": 3
+          },
+          {
+            "id": "PAIN-004",
+            "category": "Pain",
+            "description": "Deep dyspareunia",
+            "grade": 3
+          },
+          {
+            "id": "PAIN-005",
+            "category": "Pain",
+            "description": "Dyschezia (painful defecation)",
+            "grade": 2
+          },
+          {
+            "id": "PAIN-006",
+            "category": "Pain",
+            "description": "Cyclical dyschezia suggesting bowel endometriosis",
+            "grade": 3
+          },
+          {
+            "id": "GI-001",
+            "category": "Gastrointestinal",
+            "description": "Bowel obstruction symptoms",
+            "grade": 4
+          },
+          {
+            "id": "GI-002",
+            "category": "Gastrointestinal",
+            "description": "Cyclical rectal bleeding",
+            "grade": 3
+          },
+          {
+            "id": "GI-003",
+            "category": "Gastrointestinal",
+            "description": "Cyclical bloating",
+            "grade": 1
+          },
+          {
+            "id": "GI-004",
+            "category": "Gastrointestinal",
+            "description": "Alternating bowel habit",
+            "grade": 1
+          },
+          {
+            "id": "UR-002",
+            "category": "Urinary",
+            "description": "Cyclical haematuria suggesting bladder endometriosis",
+            "grade": 3
+          },
+          {
+            "id": "UR-003",
+            "category": "Urinary",
+            "description": "Dysuria",
+            "grade": 1
+          },
+          {
+            "id": "FERT-001",
+            "category": "Fertility",
+            "description": "Infertility (trying >12 months)",
+            "grade": 3
+          },
+          {
+            "id": "FERT-002",
+            "category": "Fertility",
+            "description": "History of ectopic pregnancy",
+            "grade": 3
+          },
+          {
+            "id": "FERT-003",
+            "category": "Fertility",
+            "description": "Low AMH level (<5.4 pmol/L)",
+            "grade": 3
+          },
+          {
+            "id": "FERT-004",
+            "category": "Fertility",
+            "description": "Future fertility concerns",
+            "grade": 2
+          },
+          {
+            "id": "SURG-001",
+            "category": "Surgical",
+            "description": "ASRM Stage IV at surgery",
+            "grade": 4
+          },
+          {
+            "id": "SURG-003",
+            "category": "Surgical",
+            "description": "Previous bowel surgery for endometriosis",
+            "grade": 3
+          },
+          {
+            "id": "SURG-004",
+            "category": "Surgical",
+            "description": "Previous bladder surgery for endometriosis",
+            "grade": 3
+          },
+          {
+            "id": "SURG-005",
+            "category": "Surgical",
+            "description": "Multiple laparoscopies (>=3)",
+            "grade": 2
+          },
+          {
+            "id": "SURG-006",
+            "category": "Surgical",
+            "description": "Endometrioma documented",
+            "grade": 2
+          },
+          {
+            "id": "TX-001",
+            "category": "Treatment",
+            "description": "Current opioid use",
+            "grade": 3
+          },
+          {
+            "id": "TX-002",
+            "category": "Treatment",
+            "description": "Failed multiple hormonal treatments",
+            "grade": 2
+          },
+          {
+            "id": "QOL-001",
+            "category": "Quality of Life",
+            "description": "Severe quality of life impact (EHP-30 pain domain >75)",
+            "grade": 3
+          },
+          {
+            "id": "QOL-002",
+            "category": "Quality of Life",
+            "description": "Unable to work due to endometriosis",
+            "grade": 4
+          },
+          {
+            "id": "QOL-003",
+            "category": "Quality of Life",
+            "description": "Severe mental health impact",
+            "grade": 3
+          },
+          {
+            "id": "QOL-004",
+            "category": "Quality of Life",
+            "description": "Severe sleep impact",
+            "grade": 2
+          }
+        ]
+      }
+    }
+  ]
+}
