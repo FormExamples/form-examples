@@ -6,11 +6,19 @@ use serial_test::serial;
 #[serial]
 async fn can_get_centor_score_for_streptococcal_pharyngitis_grade_rules() {
     request::<App, _, _>(|request, _ctx| async move {
-        let res = request.get("/api/centor_score_for_streptococcal_pharyngitis_grade_rules/").await;
+        let res = request.get("/api/centor_score_for_streptococcal_pharyngitis_grade_rules").await;
         assert_eq!(res.status_code(), 200);
-
-        // you can assert content like this:
-        // assert_eq!(res.text(), "content");
+        // Assert the JSON list handler answered — not Loco's HTML welcome page,
+        // which a trailing-slash URL falls through to (also returning 200).
+        let content_type = res
+            .headers()
+            .get("content-type")
+            .and_then(|v| v.to_str().ok())
+            .unwrap_or("");
+        assert!(
+            content_type.contains("json"),
+            "expected JSON from the list handler, got content-type {content_type:?}"
+        );
     })
     .await;
 }

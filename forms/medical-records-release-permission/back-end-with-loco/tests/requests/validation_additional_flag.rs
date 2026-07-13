@@ -6,11 +6,19 @@ use serial_test::serial;
 #[serial]
 async fn can_get_validation_additional_flags() {
     request::<App, _, _>(|request, _ctx| async move {
-        let res = request.get("/api/validation_additional_flags/").await;
+        let res = request.get("/api/validation_additional_flags").await;
         assert_eq!(res.status_code(), 200);
-
-        // you can assert content like this:
-        // assert_eq!(res.text(), "content");
+        // Assert the JSON list handler answered — not Loco's HTML welcome page,
+        // which a trailing-slash URL falls through to (also returning 200).
+        let content_type = res
+            .headers()
+            .get("content-type")
+            .and_then(|v| v.to_str().ok())
+            .unwrap_or("");
+        assert!(
+            content_type.contains("json"),
+            "expected JSON from the list handler, got content-type {content_type:?}"
+        );
     })
     .await;
 }
