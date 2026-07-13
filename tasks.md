@@ -162,10 +162,12 @@ Design each feature on the reference forms
       escaping. Rolled out mechanically (283 via `<script src>`, 3 inline for
       the no-`js/` dashboards). Verified by `e2e/tests/dashboard-export.spec.ts`
       (buttons present, CSV downloads with a real header) → 286/286.
-      **Finding:** `mobility-assessment`'s dashboard-app.js doesn't render its
-      table client-side (no renderTableHead/Body/sample-fallback like peers) —
-      a pre-existing dashboard-data bug, not an export bug; export is wired but
-      has nothing to serialise. Worth a follow-up fix.
+- [x] **Fixed `mobility-assessment`'s stub dashboard** (found via the export
+      harness): its `dashboard-app.js` was a 2-line "Implementation pending"
+      scaffold — the ONLY unimplemented front-end across all 286 forms
+      (audited: 0 stubs remain). Implemented it (12 Tinetti sample rows, 6
+      columns, filters, sort) + its scaffold CSS; html-smoke + dashboard-export
+      + a11y all pass.
 - [ ] **Loco seed data**: per-crate seeder loading `examples/` typical
       fixture; document `cargo loco db seed` (or task equivalent).
 - [ ] **Loco API integration test**: POST fixture → GET back → assert
