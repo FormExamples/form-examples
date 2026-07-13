@@ -2,7 +2,7 @@
 
 Auto-generated from each tool's source header by `bin/generate-tools-doc.py` — do not hand-edit. Run the generator after adding or re-documenting a tool.
 
-41 tools.
+42 tools.
 
 - [`bin/clean`](#clean)
 - [`bin/consolidate-front-end-html`](#consolidate-front-end-html)
@@ -31,6 +31,7 @@ Auto-generated from each tool's source header by `bin/generate-tools-doc.py` —
 - [`bin/sync-from-skel-to-forms`](#sync-from-skel-to-forms)
 - [`bin/test`](#test)
 - [`bin/test-e2e`](#test-e2e)
+- [`bin/test-engines`](#test-engines)
 - [`bin/test-examples-conformance`](#test-examples-conformance)
 - [`bin/test-form`](#test-form)
 - [`bin/test-loco-project`](#test-loco-project)
@@ -493,6 +494,10 @@ bin/test-e2e — run the Playwright smoke + accessibility sweep over form
  Requires e2e/ deps installed (cd e2e && npm ci) and browsers
  (cd e2e && npx playwright install chromium).
 ```
+
+<h2 id="test-engines"><code>bin/test-engines</code></h2>
+
+_No header documentation._
 
 <h2 id="test-examples-conformance"><code>bin/test-examples-conformance</code></h2>
 

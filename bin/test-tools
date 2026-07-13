@@ -91,6 +91,12 @@ else
     red "test-examples-conformance (fixture drift — see /tmp/test-tools-examples.log)"
 fi
 
+if bin/test-engines >/tmp/test-tools-engines.log 2>&1; then
+    green "test-engines (no HTML scoring engine broken at load)"
+else
+    red "test-engines (an engine failed to load — see /tmp/test-tools-engines.log)"
+fi
+
 # ---------------------------------------------------------------------------
 # 3. Conformance tracker reports the expected milestone.
 # ---------------------------------------------------------------------------

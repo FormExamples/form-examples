@@ -221,6 +221,16 @@ and records the result — reused by both the Phase 2 `expected` block and these
 personas. Once the oracle exists, persona scaffolding + fill is mechanical
 (subagents, per-form spec defines what "flagged" means).
 
+- [x] **Oracle foundation built:** `bin/test-engines` — a headless Node gate
+      that loads each HTML front-end's scoring engine (retry-until-stable,
+      types→rules→flags→grader order), discovers the grader + default-state
+      factory, runs the grader over the default state, and asserts structured
+      output. **PASS 220 / SKIP 63 / FAIL 0** (0 broken engines; 63 SKIP are
+      ESM engines, inline computation, or unrecognised entry points, reported
+      honestly via `--verbose`). Wired into `bin/test-tools` + CI. This is the
+      reusable engine-execution half of the oracle; the remaining work is the
+      per-form fixture→engine-state adapter that yields the actual `expected`
+      score/grade/flags.
 - [ ] Extend the fixture convention to three personas per form:
       `example-minimal.json`, `example-typical.json` (rename of current),
       `example-flagged.json` — each with `expected` scores/flags. Update

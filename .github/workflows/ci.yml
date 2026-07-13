@@ -67,6 +67,9 @@ jobs:
       - name: Tutorials reference only existing tools/paths
         run: bin/test-tutorials
 
+      - name: HTML scoring engines load and run headless
+        run: bin/test-engines
+
       - name: Lily HTML contract has no drift
         run: bin/lily-html-refactor --check --all
 
