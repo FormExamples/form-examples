@@ -215,6 +215,8 @@ jobs:
         with:
           shared-key: loco-shard-${{ matrix.shard }}
           workspaces: forms/*/back-end-with-loco
+      # Plain cargo (no --locked): lock hygiene is not maintained across all
+      # 286 crates, matching the repo's own bin/test-loco-project.
       - name: check / clippy / test each crate in this shard
         run: |
           fail=0
@@ -227,11 +229,11 @@ jobs:
             createdb "$db" 2>/dev/null || true
             ( cd "$crate" \
               && DATABASE_URL="postgres://loco:loco@localhost:5432/$db" \
-                 cargo check --all-targets --locked \
+                 cargo check --all-targets \
               && DATABASE_URL="postgres://loco:loco@localhost:5432/$db" \
-                 cargo clippy --all-targets --locked -- -D warnings \
+                 cargo clippy --all-targets -- -D warnings \
               && DATABASE_URL="postgres://loco:loco@localhost:5432/$db" \
-                 cargo test --locked ) || { echo "::error::$slug failed"; fail=1; }
+                 cargo test ) || { echo "::error::$slug failed"; fail=1; }
             dropdb --if-exists "$db" 2>/dev/null || true
             echo "::endgroup::"
           done
