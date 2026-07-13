@@ -179,6 +179,15 @@ Design each feature on the reference forms
       `/api/<table>/`. `cargo check --all-targets` clean; loco-config-refactor
       `--check` still passes. (A cross-crate `add_route`-count audit is a cheap
       future gate to prevent recurrence.)
+- [x] **Fixed 135 stale back-end `AGENTS.md`** (found following the
+      medical-operation-note fix): 135/286 crate docs still described the
+      obsolete single-`assessments`-table JSONB API (`/api/assessments`,
+      `data JSONB`, `src/bin/main.rs` layout) that no longer exists — the
+      crates are relational per-table. Added
+      `bin/back-end-with-loco/generate-loco-agents.py` (emits an accurate doc
+      from each crate's real controllers) + a `--list-stale` gate wired into
+      `bin/test-tools` and CI; regenerated the 135, left the 151 correct
+      hand-authored docs untouched.
 - [ ] **Loco API integration test**: POST fixture → GET back → assert
       round-trip, per crate (template test, mechanical rollout).
 - [ ] **Serve OpenAPI**: static route in each crate serving its
