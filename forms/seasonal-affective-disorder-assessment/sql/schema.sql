@@ -5,7 +5,7 @@
 -- migration files in this directory. Do not edit by hand — re-run
 -- the generator after changing any NN-*.sql file.
 --
--- Source files (7):
+-- Source files (8):
 --   - 00_create_extensions.sql
 --   - 01_create_function_set_updated_at.sql
 --   - 02_create_table_patient.sql
@@ -13,6 +13,7 @@
 --   - 04_create_table_seasonal_affective_disorder_assessment.sql
 --   - 05_create_table_seasonal_affective_disorder_assessment_grade.sql
 --   - 06_create_table_seasonal_affective_disorder_assessment_grade_rule.sql
+--   - 92_create_table_seasonal_affective_disorder_assessment_grade_flag.sql
 
 
 -- ========================================================================
@@ -352,4 +353,53 @@ COMMENT ON COLUMN grading_fired_rule.deleted_at IS
 
 -- ========================================================================
 -- END 06_create_table_seasonal_affective_disorder_assessment_grade_rule.sql
+-- ========================================================================
+
+-- ========================================================================
+-- BEGIN 92_create_table_seasonal_affective_disorder_assessment_grade_flag.sql
+-- ========================================================================
+
+CREATE TABLE grading_additional_flag (
+    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+    created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
+    updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
+    deleted_at TIMESTAMPTZ DEFAULT NULL,
+    grade_id UUID NOT NULL
+        REFERENCES grade(id) ON DELETE CASCADE,
+    flag_id VARCHAR(30) NOT NULL,
+    category VARCHAR(100) NOT NULL DEFAULT '',
+    message TEXT NOT NULL DEFAULT '',
+    priority VARCHAR(10) NOT NULL DEFAULT 'medium'
+        CHECK (priority IN ('high', 'medium', 'low'))
+);
+
+CREATE TRIGGER trigger_grading_additional_flag_updated_at
+    BEFORE UPDATE ON grading_additional_flag
+    FOR EACH ROW
+    EXECUTE FUNCTION set_updated_at();
+
+COMMENT ON TABLE grading_additional_flag IS
+    'Additional safety-critical flags detected during SAD assessment grading (e.g. suicidal ideation, severe PHQ-9 score).';
+COMMENT ON COLUMN grading_additional_flag.grade_id IS
+    'Foreign key to the parent grading result.';
+COMMENT ON COLUMN grading_additional_flag.flag_id IS
+    'Identifier of the flag (e.g. FLAG-SUICIDE-001, FLAG-PHQ9-001).';
+COMMENT ON COLUMN grading_additional_flag.category IS
+    'Category of the flag (e.g. Risk Assessment, Depression Severity, Sleep).';
+COMMENT ON COLUMN grading_additional_flag.message IS
+    'Human-readable description of the flagged issue.';
+COMMENT ON COLUMN grading_additional_flag.priority IS
+    'Priority level: high, medium, or low.';
+
+COMMENT ON COLUMN grading_additional_flag.id IS
+    'Primary key UUID, auto-generated.';
+COMMENT ON COLUMN grading_additional_flag.created_at IS
+    'Timestamp when this row was created.';
+COMMENT ON COLUMN grading_additional_flag.updated_at IS
+    'Timestamp when this row was updated.';
+COMMENT ON COLUMN grading_additional_flag.deleted_at IS
+    'Timestamp when this row was deleted.';
+
+-- ========================================================================
+-- END 92_create_table_seasonal_affective_disorder_assessment_grade_flag.sql
 -- ========================================================================

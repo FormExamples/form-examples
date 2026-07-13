@@ -1,7 +1,5 @@
 <script lang="ts">
 	// StepList — Lily Svelte headless contract.
-	//
-	// Emits: <ol class="step-list" aria-label="…" data-current="…">.
 	import type { Snippet } from 'svelte';
 
 	let {

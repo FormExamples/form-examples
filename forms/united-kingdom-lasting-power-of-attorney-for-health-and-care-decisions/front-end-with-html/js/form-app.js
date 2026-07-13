@@ -537,7 +537,9 @@ function renderStep14() {
     }
   } }, 'Copy JSON');
   exportSection.appendChild(copyBtn);
-  exportSection.appendChild(el('pre', null, json));
+  // tabindex + aria-label so the scrollable code block is keyboard-focusable
+  // (WCAG 2.1.1 — scrollable regions must have keyboard access).
+  exportSection.appendChild(el('pre', { tabindex: '0', role: 'region', 'aria-label': 'JSON export' }, json));
   wrapper.appendChild(exportSection);
   return renderStep(14, 'computed', 'Validity summary and export', 'Live validity result; export the JSON packet for OPG submission.', wrapper);
 }

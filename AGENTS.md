@@ -14,6 +14,15 @@ has its own domain spec directory [`forms/<slug>/spec/`](forms/AGENTS.md)
 Update specs before changing code; regenerate derived artefacts after
 schema changes. See `spec.md` §10 for the spec-driven workflow.
 
+## Documentation
+
+- [`docs/index.md`](docs/index.md) — guides (architecture, data model,
+  generator pipeline, scoring engines, Lily, back end, verification, i18n,
+  tools reference) and [`docs/tutorials/`](docs/tutorials).
+- [`arc42/index.md`](arc42/index.md) — full arc42 architecture document.
+- [`CONTRIBUTING.md`](CONTRIBUTING.md) — how to work in this repo and the
+  verify gates.
+
 ## Tools
 
 ### Structure and validation

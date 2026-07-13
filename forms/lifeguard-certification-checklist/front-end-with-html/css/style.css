@@ -28,11 +28,11 @@
   --color-border: #e2e8f0;
   --color-border-strong: #cbd5e1;
   --color-focus: #0ea5e9;
-  --color-danger: #dc2626;
+  --color-danger: #b91c1c;
   --color-danger-bg: #fee2e2;
-  --color-warning: #d97706;
+  --color-warning: #b45309;
   --color-warning-bg: #fef3c7;
-  --color-success: #059669;
+  --color-success: #047857;
   --color-success-bg: #d1fae5;
 
   --radius: 0.5rem;
@@ -190,7 +190,7 @@ main {
 }
 .step-list-item[data-status="in-progress"],
 .step-list-item[aria-current="step"] {
-  color: var(--color-primary);
+  color: #1e40af;
   border-color: var(--color-primary);
   background: var(--color-primary-light);
   font-weight: 600;

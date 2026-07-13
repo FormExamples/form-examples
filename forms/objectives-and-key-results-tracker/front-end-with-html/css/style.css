@@ -8,7 +8,7 @@
   --color-bg: #f9fafb;
   --color-surface: #ffffff;
   --color-text: #111827;
-  --color-muted: #6b7280;
+  --color-muted: #4b5563;
   --color-border: #e5e7eb;
   --color-border-strong: #d1d5db;
   --color-focus: #3b82f6;
@@ -125,7 +125,7 @@ body {
 }
 .step-list-item[data-status="in-progress"],
 .step-list-item[aria-current="step"] {
-  color: var(--color-primary);
+  color: #1e40af;
   border-color: var(--color-primary);
   background: var(--color-primary-light);
   font-weight: 600;

@@ -1,0 +1,168 @@
+#!/usr/bin/env python3
+"""bin/test-examples-conformance — check example fixtures against SQL schema.
+
+Each form's examples/assessment.json is an entity-keyed, camelCase filled-form
+fixture. Its shape must track the form's sql/ migrations (the source of truth):
+every top-level key must name a real table, and every property must name a real
+column of that table. This gate catches fixtures that drift after a schema
+change — a renamed column, a dropped table, a typo'd property.
+
+Name matching is separator-insensitive: a JSON key and a SQL identifier match
+when they are equal after lowercasing and removing underscores. This tolerates
+the ambiguous digit boundaries in legacy identifiers (countryAsIso31661Alpha2
+<-> country_as_iso_3166_1_alpha_2) without a brittle camel<->snake round-trip.
+
+A light type check also flags a numeric column holding a boolean value, or a
+boolean column holding a number — hard mismatches that indicate real drift.
+
+Usage:
+  bin/test-examples-conformance            # every form
+  bin/test-examples-conformance <slug> ... # only the named forms
+
+Exit status is non-zero if any fixture does not conform, with one line per
+problem.
+"""
+
+from __future__ import annotations
+
+import json
+import re
+import sys
+from pathlib import Path
+
+REPO_ROOT = Path(__file__).resolve().parent.parent
+FORMS_DIR = REPO_ROOT / "forms"
+
+CREATE_TABLE_RE = re.compile(r"CREATE TABLE\s+(?:IF NOT EXISTS\s+)?\"?([a-z0-9_]+)\"?\s*\(", re.I)
+# A column definition line: leading identifier followed by a type token.
+COLUMN_RE = re.compile(r'^\s*"?([a-z_][a-z0-9_]*)"?\s+([A-Za-z]+)')
+# Line-leading tokens that begin a table constraint, not a column.
+CONSTRAINT_KEYWORDS = {
+    "primary", "foreign", "constraint", "unique", "check", "exclude",
+}
+
+NUMERIC_TYPES = {
+    "int", "integer", "bigint", "smallint", "serial", "bigserial",
+    "numeric", "decimal", "real", "double", "float",
+}
+BOOLEAN_TYPES = {"boolean", "bool"}
+
+
+def norm(name: str) -> str:
+    return name.lower().replace("_", "")
+
+
+def parse_tables(sql_dir: Path) -> dict[str, dict[str, str]]:
+    """Return {norm(table): {norm(col): sql_type}} across all migrations."""
+    tables: dict[str, dict[str, str]] = {}
+    for sql_path in sorted(sql_dir.glob("*create_table*.sql")):
+        text = sql_path.read_text()
+        for m in CREATE_TABLE_RE.finditer(text):
+            table = m.group(1)
+            body = text[m.end():]
+            depth = 1
+            i = 0
+            while i < len(body) and depth > 0:
+                c = body[i]
+                if c == "(":
+                    depth += 1
+                elif c == ")":
+                    depth -= 1
+                i += 1
+            block = body[: i - 1]
+            cols: dict[str, str] = {}
+            for line in block.splitlines():
+                stripped = line.strip()
+                if not stripped or stripped.startswith("--"):
+                    continue
+                first = stripped.split(None, 1)[0].strip('"').lower()
+                if first in CONSTRAINT_KEYWORDS:
+                    continue
+                cm = COLUMN_RE.match(line)
+                if cm:
+                    cols[norm(cm.group(1))] = cm.group(2).lower()
+            if cols:
+                tables[norm(table)] = cols
+    return tables
+
+
+def type_mismatch(sql_type: str, value: object) -> bool:
+    if value is None or value == "":
+        return False
+    if sql_type in NUMERIC_TYPES:
+        return isinstance(value, bool) or not isinstance(value, (int, float))
+    if sql_type in BOOLEAN_TYPES:
+        return not isinstance(value, bool)
+    return False
+
+
+def check_entity(entity: str, obj: dict, tables: dict, problems: list) -> None:
+    key = norm(entity)
+    if key not in tables:
+        problems.append(f"unknown entity '{entity}' (no matching table)")
+        return
+    cols = tables[key]
+    for prop, value in obj.items():
+        pk = norm(prop)
+        if pk not in cols:
+            problems.append(f"{entity}.{prop}: no matching column")
+            continue
+        if type_mismatch(cols[pk], value):
+            problems.append(
+                f"{entity}.{prop}: value {value!r} conflicts with SQL type {cols[pk]}"
+            )
+
+
+def check_form(slug: str) -> list[str]:
+    form_dir = FORMS_DIR / slug
+    sql_dir = form_dir / "sql"
+    fixture = form_dir / "examples" / "assessment.json"
+    if not sql_dir.is_dir() or not fixture.is_file():
+        return []
+    tables = parse_tables(sql_dir)
+    if not tables:
+        return [f"{slug}: no CREATE TABLE parsed from sql/"]
+    try:
+        data = json.loads(fixture.read_text())
+    except json.JSONDecodeError as e:
+        return [f"{slug}: assessment.json is not valid JSON: {e}"]
+
+    problems: list[str] = []
+    if not isinstance(data, dict):
+        return [f"{slug}: assessment.json top level is not an object"]
+    for entity, value in data.items():
+        if isinstance(value, dict):
+            check_entity(entity, value, tables, problems)
+        elif isinstance(value, list):
+            for row in value:
+                if isinstance(row, dict):
+                    check_entity(entity, row, tables, problems)
+    return [f"{slug}: {p}" for p in problems]
+
+
+def main() -> int:
+    slugs = sys.argv[1:]
+    if not slugs:
+        slugs = sorted(
+            p.name for p in FORMS_DIR.iterdir()
+            if (p / "examples" / "assessment.json").is_file()
+        )
+    all_problems: list[str] = []
+    for slug in slugs:
+        all_problems.extend(check_form(slug))
+
+    if all_problems:
+        for p in all_problems:
+            print(p, file=sys.stderr)
+        print(
+            f"\n{len(all_problems)} conformance problem(s) across "
+            f"{len(slugs)} form(s)",
+            file=sys.stderr,
+        )
+        return 1
+    print(f"examples conform to SQL schema ({len(slugs)} forms)")
+    return 0
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())

@@ -1,0 +1,123 @@
+#!/bin/sh
+# bin/test-tutorials — honest, fast doc-rot check for docs/tutorials/.
+#
+# What it does
+# ------------
+# For every `docs/tutorials/*.md` file it:
+#   1. extracts the fenced ```sh code blocks (only ```sh, not ```ts/```json/…);
+#   2. scans each line for `bin/...` and `forms/...` path tokens;
+#   3. asserts each referenced path is real:
+#        • bin/<tool>            — must exist; if it has no filename extension
+#                                  (a directly-invoked shell tool such as
+#                                  bin/create-form) it must also be executable.
+#                                  Scripts with an extension (bin/foo.py) are
+#                                  invoked via an interpreter (python3 foo.py),
+#                                  so only existence is required.
+#        • forms/<slug>/...      — must exist, UNLESS it is a disposable example
+#                                  the tutorial itself creates then deletes
+#                                  (any path matching forms/example-*), which is
+#                                  skipped.
+#
+# What it does NOT do
+# -------------------
+# It starts no servers, runs no builds, and executes none of the tutorial
+# commands. It is a static reference check: it catches a tutorial pointing at a
+# tool or form path that has been renamed or removed (doc rot). It is fast and
+# deterministic.
+#
+# Usage: bin/test-tutorials
+# Exit status: 0 if every referenced path resolves, 1 otherwise.
+
+set -u
+
+top="$(git rev-parse --show-toplevel 2>/dev/null || echo "$PWD")"
+cd "$top" || exit 2
+
+tut_dir="docs/tutorials"
+if [ ! -d "$tut_dir" ]; then
+  echo "FAIL: no $tut_dir directory"
+  exit 1
+fi
+
+fail=0
+checked=0
+skipped=0
+tab="$(printf '\t')"
+
+is_disposable() {
+  # Throwaway example forms a tutorial scaffolds then `rm -rf`s.
+  case "$1" in
+    forms/example-*) return 0 ;;
+  esac
+  return 1
+}
+
+check_token() {
+  file="$1"
+  tok="$2"
+  # Strip a single trailing punctuation/slash the grep may have swept up.
+  tok="${tok%[.,:/]}"
+  case "$tok" in
+    bin/*)
+      if [ ! -e "$tok" ]; then
+        echo "FAIL [$file] missing tool: $tok"
+        fail=$((fail + 1))
+        return
+      fi
+      base="${tok##*/}"
+      case "$base" in
+        *.*) : ;;  # interpreter-invoked script: existence is enough
+        *)
+          if [ ! -x "$tok" ]; then
+            echo "FAIL [$file] not executable: $tok"
+            fail=$((fail + 1))
+            return
+          fi
+          ;;
+      esac
+      checked=$((checked + 1))
+      ;;
+    forms/*)
+      if is_disposable "$tok"; then
+        skipped=$((skipped + 1))
+        return
+      fi
+      if [ ! -e "$tok" ]; then
+        echo "FAIL [$file] missing path: $tok"
+        fail=$((fail + 1))
+        return
+      fi
+      checked=$((checked + 1))
+      ;;
+  esac
+}
+
+tmp="$(mktemp)"
+trap 'rm -f "$tmp"' EXIT
+
+# Collect "<file>\t<token>" lines from every ```sh block. The inner pipeline
+# runs in a subshell (it only appends to $tmp); the verification loop below
+# reads from the file with a plain redirect so its counters persist.
+for f in "$tut_dir"/*.md; do
+  [ -e "$f" ] || continue
+  awk '/^```sh$/ { inb = 1; next } /^```$/ { inb = 0; next } inb' "$f" \
+    | grep -oE '(bin|forms)/[A-Za-z0-9._/-]+' \
+    | while IFS= read -r tok; do
+        printf '%s%s%s\n' "$f" "$tab" "$tok"
+      done >> "$tmp"
+done
+
+while IFS="$tab" read -r f tok; do
+  [ -n "$tok" ] || continue
+  check_token "$f" "$tok"
+done < "$tmp"
+
+echo "-----"
+echo "tutorials: $(ls "$tut_dir"/*.md 2>/dev/null | wc -l | tr -d ' ')  references-checked: $checked  disposable-skipped: $skipped  failures: $fail"
+
+if [ "$fail" -ne 0 ]; then
+  echo "RESULT: FAIL"
+  exit 1
+fi
+echo "RESULT: PASS"
+exit 0

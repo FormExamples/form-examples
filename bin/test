@@ -40,10 +40,24 @@ ai_exists_or_err() (
 
 top="$(git rev-parse --show-toplevel)"
 
+forms_tsv_current_or_err() {
+    # forms.tsv is generated from forms/ by bin/generate-forms-tsv.py.
+    "$top/bin/generate-forms-tsv.py" --check >/dev/null 2>&1 ||
+        err "forms.tsv is stale — run bin/generate-forms-tsv.py"
+}
+
+examples_conform_or_err() {
+    # Each form's examples/assessment.json must match its sql/ schema.
+    "$top/bin/test-examples-conformance" >/dev/null 2>&1 ||
+        err "example fixtures do not conform to SQL schema — run bin/test-examples-conformance"
+}
+
 test_repository() {
     echo "test_repository $top"
     repo_setup_exists_or_err "$top"
     ai_exists_or_err "$top"
+    forms_tsv_current_or_err
+    examples_conform_or_err
     file_exists_or_err "$top/AGENTS/front-end-with-sveltekit-tailwind-svar.md"
     file_exists_or_err "$top/AGENTS/back-end-with-loco.md"
     file_exists_or_err "$top/AGENTS/back-end-with-loco-setup.md"

@@ -1,0 +1,153 @@
+# Generated from sql/. Do not edit by hand.
+# SOURCE: grading_additional_flag
+openapi: 3.1.0
+info:
+  title: Dental Assessment — GradingAdditionalFlag
+  version: 1.0.0
+  description: Additional safety-critical flags detected during dental assessment grading (e.g. bisphosphonate use, bleeding disorder, oral pathology suspicion).
+paths:
+  /grading-additional-flags:
+    get:
+      summary: List GradingAdditionalFlag records
+      operationId: listGradingAdditionalFlag
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of GradingAdditionalFlag records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/GradingAdditionalFlag"
+    post:
+      summary: Create a new GradingAdditionalFlag
+      operationId: createGradingAdditionalFlag
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/GradingAdditionalFlag"
+      responses:
+        "201":
+          description: The newly created GradingAdditionalFlag
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GradingAdditionalFlag"
+        "400":
+          description: Validation error
+  /grading-additional-flags/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one GradingAdditionalFlag by id
+      operationId: getGradingAdditionalFlag
+      responses:
+        "200":
+          description: The requested GradingAdditionalFlag
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GradingAdditionalFlag"
+        "404":
+          description: GradingAdditionalFlag not found
+    patch:
+      summary: Update an existing GradingAdditionalFlag
+      operationId: updateGradingAdditionalFlag
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/GradingAdditionalFlag"
+      responses:
+        "200":
+          description: The updated GradingAdditionalFlag
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GradingAdditionalFlag"
+        "404":
+          description: GradingAdditionalFlag not found
+    delete:
+      summary: Soft-delete a GradingAdditionalFlag
+      operationId: deleteGradingAdditionalFlag
+      responses:
+        "204":
+          description: GradingAdditionalFlag deleted
+        "404":
+          description: GradingAdditionalFlag not found
+components:
+  schemas:
+    GradingAdditionalFlag:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was updated.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was deleted.
+        grade_id:
+          type: string
+          format: uuid
+          description: Foreign key to the parent grading result.
+        flag_id:
+          type: string
+          maxLength: 30
+          description: Identifier of the flag (e.g. FLAG-BISPHOS-001, FLAG-BLEED-001).
+        category:
+          type: string
+          maxLength: 100
+          description: Category of the flag (e.g. Medication Risk, Infection Control, Oral Pathology).
+        message:
+          type: string
+          description: Human-readable description of the flagged concern.
+        priority:
+          type: string
+          enum:
+            - high
+            - medium
+            - low
+          description: "Priority level: high, medium, or low."
+      required:
+        - created_at
+        - updated_at
+        - grade_id
+        - flag_id
+        - category
+        - message
+        - priority
+      description: Additional safety-critical flags detected during dental assessment grading (e.g. bisphosphonate use, bleeding disorder, oral pathology suspicion).

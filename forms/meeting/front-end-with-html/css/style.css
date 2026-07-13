@@ -14,19 +14,19 @@
   --color-bg: #f7f7f8;
   --color-surface: #ffffff;
   --color-text: #1f2937;
-  --color-muted: #6b7280;
+  --color-muted: #4b5563;
   --color-border: #d4d4d8;
   --color-border-strong: #a1a1aa;
   --color-focus: #3b82f6;
-  --color-danger: #dc2626;
+  --color-danger: #b91c1c;
   --color-danger-bg: #fee2e2;
   --color-warning: #ca8a04;
   --color-warning-bg: #fef3c7;
-  --color-success: #16a34a;
+  --color-success: #15803d;
   --color-success-bg: #dcfce7;
   --color-amber: #ca8a04;
-  --color-red: #dc2626;
-  --color-green: #16a34a;
+  --color-red: #b91c1c;
+  --color-green: #15803d;
 
   --radius: 0.5rem;
   --radius-sm: 0.25rem;
@@ -155,7 +155,7 @@ footer.page-footer {
 }
 .step-list-item[data-status="in-progress"],
 .step-list-item[aria-current="step"] {
-  color: var(--color-primary);
+  color: #1e40af;
   border-color: var(--color-primary);
   background: var(--color-primary-light);
   font-weight: 600;

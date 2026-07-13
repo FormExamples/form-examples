@@ -73,6 +73,24 @@ else
     red "generate-spec.py --check (spec drift — see /tmp/test-tools-spec.log)"
 fi
 
+if bin/generate-forms-tsv.py --check >/tmp/test-tools-forms-tsv.log 2>&1; then
+    green "generate-forms-tsv.py --check (forms.tsv in sync)"
+else
+    red "generate-forms-tsv.py --check (forms.tsv drift — see /tmp/test-tools-forms-tsv.log)"
+fi
+
+if bin/generate-tools-doc.py --check >/tmp/test-tools-tools-doc.log 2>&1; then
+    green "generate-tools-doc.py --check (docs/tools.md in sync)"
+else
+    red "generate-tools-doc.py --check (tools doc drift — see /tmp/test-tools-tools-doc.log)"
+fi
+
+if bin/test-examples-conformance >/tmp/test-tools-examples.log 2>&1; then
+    green "test-examples-conformance (fixtures match SQL schema)"
+else
+    red "test-examples-conformance (fixture drift — see /tmp/test-tools-examples.log)"
+fi
+
 # ---------------------------------------------------------------------------
 # 3. Conformance tracker reports the expected milestone.
 # ---------------------------------------------------------------------------

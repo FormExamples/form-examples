@@ -1,7 +1,5 @@
 <script lang="ts">
 	// StepListItem — Lily Svelte headless contract.
-	//
-	// Emits: <li class="step-list-item" data-status="…" aria-current="step|undefined">.
 	import type { Snippet } from 'svelte';
 
 	type Status = 'waiting' | 'in-progress' | 'finished' | 'error';

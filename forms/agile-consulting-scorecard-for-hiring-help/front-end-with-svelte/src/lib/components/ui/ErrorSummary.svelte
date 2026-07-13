@@ -1,7 +1,5 @@
 <script lang="ts">
 	// ErrorSummary — Lily Svelte headless contract.
-	//
-	// Emits: <div class="error-summary" role="alert" tabindex="-1">.
 	import type { Snippet } from 'svelte';
 
 	let {

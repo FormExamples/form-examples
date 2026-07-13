@@ -3,11 +3,11 @@
   --color-surface: #ffffff;
   --color-border: #d4d4d8;
   --color-text: #1f2937;
-  --color-muted: #6b7280;
+  --color-muted: #4b5563;
   --color-accent: #2563eb;
-  --color-green: #16a34a;
+  --color-green: #15803d;
   --color-amber: #ca8a04;
-  --color-red: #dc2626;
+  --color-red: #b91c1c;
 }
 
 * { box-sizing: border-box; }

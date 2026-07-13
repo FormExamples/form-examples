@@ -10,15 +10,15 @@
   --color-bg: #f9fafb;
   --color-surface: #ffffff;
   --color-text: #111827;
-  --color-muted: #6b7280;
+  --color-muted: #4b5563;
   --color-border: #e5e7eb;
   --color-border-strong: #d1d5db;
   --color-focus: #3b82f6;
-  --color-danger: #dc2626;
+  --color-danger: #b91c1c;
   --color-danger-bg: #fee2e2;
-  --color-warning: #d97706;
+  --color-warning: #b45309;
   --color-warning-bg: #fef3c7;
-  --color-success: #059669;
+  --color-success: #047857;
   --color-success-bg: #d1fae5;
 
   --radius: 0.5rem;
@@ -166,7 +166,7 @@ main {
 }
 .step-list-item[data-status="in-progress"],
 .step-list-item[aria-current="step"] {
-  color: var(--color-primary);
+  color: #1e40af;
   border-color: var(--color-primary);
   background: var(--color-primary-light);
   font-weight: 600;
@@ -584,9 +584,9 @@ main {
   white-space: nowrap;
   color: white;
 }
-.risk-pill-low      { background: #059669; }
-.risk-pill-moderate { background: #d97706; }
-.risk-pill-high     { background: #dc2626; }
+.risk-pill-low      { background: #047857; }
+.risk-pill-moderate { background: #b45309; }
+.risk-pill-high     { background: #b91c1c; }
 
 /* Per-rule table */
 table.subscales {

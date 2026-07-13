@@ -1,7 +1,5 @@
 <script lang="ts">
 	// Progress — Lily Svelte headless contract.
-	//
-	// Emits: <progress class="progress" aria-label="…" value max>.
 	let {
 		class: className = '',
 		label,

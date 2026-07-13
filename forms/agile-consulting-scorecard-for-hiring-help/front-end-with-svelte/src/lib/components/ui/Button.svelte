@@ -1,8 +1,5 @@
 <script lang="ts">
 	// Button — Lily Svelte headless contract.
-	//
-	// Emits: <button class="button">. Variants set via data-variant attribute
-	// passed through restProps (e.g. data-variant="primary").
 	import type { Snippet } from 'svelte';
 
 	let {

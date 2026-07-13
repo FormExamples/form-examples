@@ -4,6 +4,15 @@ This file is the **living domain spec** for this form. It captures the contract 
 
 Slug: `orthopedic-assessment`
 
+**Spelling decision (2026-07):** the human-facing title is the UK spelling
+**Orthopaedic Assessment** (used in every `index.md`, `AGENTS.md`, and
+front-end heading), while the directory slug and all machine identifiers stay
+the American-spelled `orthopedic-assessment`. The slug is deliberately *not*
+renamed: it is an immutable identifier threaded through the SQL table names,
+generated XML/FHIR/protobuf/OpenAPI artefacts, `forms.tsv`, and route paths, so
+renaming would churn every derived file for no clinical benefit. UK audiences
+see British spelling; the identifier stays stable.
+
 ## 1. Purpose
 
 Musculoskeletal evaluation using the DASH (Disabilities of the Arm, Shoulder and Hand) questionnaire with range of motion and functional assessment.

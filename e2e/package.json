@@ -1,0 +1,17 @@
+{
+  "name": "form-examples-e2e",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Shared Playwright end-to-end + accessibility harness for every form's front-end.",
+  "scripts": {
+    "test": "playwright test",
+    "test:html": "playwright test html-smoke",
+    "test:svelte": "playwright test svelte-smoke",
+    "report": "playwright show-report"
+  },
+  "devDependencies": {
+    "@axe-core/playwright": "^4.10.0",
+    "@playwright/test": "^1.48.0"
+  }
+}

@@ -9,16 +9,16 @@
   --color-bg: #f9fafb;
   --color-surface: #ffffff;
   --color-text: #111827;
-  --color-muted: #6b7280;
+  --color-muted: #4b5563;
   --color-border: #e5e7eb;
   --color-border-strong: #d1d5db;
   --color-focus: #3b82f6;
-  --color-danger: #dc2626;
+  --color-danger: #b91c1c;
   --color-danger-bg: #fee2e2;
   --color-danger-row-bg: #fef2f2;
-  --color-warning: #d97706;
+  --color-warning: #b45309;
   --color-warning-bg: #fef3c7;
-  --color-success: #059669;
+  --color-success: #047857;
   --color-success-bg: #d1fae5;
 
   --radius: 0.5rem;
@@ -301,7 +301,7 @@ main {
 .level-moderateAbnormality { background: #fef3c7; color: #92400e; border-color: #fcd34d; }
 .level-severeAbnormality   { background: #ffedd5; color: #9a3412; border-color: #fdba74; }
 .level-critical            { background: #fecaca; color: #7f1d1d; border-color: #f87171; }
-.level-draft               { background: #f3f4f6; color: #6b7280; border-color: var(--color-border-strong); }
+.level-draft               { background: #f3f4f6; color: #4b5563; border-color: var(--color-border-strong); }
 
 /* Score cell */
 .score-value {

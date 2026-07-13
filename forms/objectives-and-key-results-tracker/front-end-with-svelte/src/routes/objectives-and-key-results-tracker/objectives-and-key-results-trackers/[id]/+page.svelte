@@ -13,16 +13,16 @@
 	import StepListItem from '$lib/components/ui/StepListItem.svelte';
 	import ErrorSummary from '$lib/components/ui/ErrorSummary.svelte';
 
-	import Step01 from '$ui/Step01ReporterAndCycle.svelte';
-	import Step02 from '$ui/Step02Objective.svelte';
-	import Step03 from '$ui/Step03Participants.svelte';
-	import Step04 from '$ui/Step04StrategicAlignment.svelte';
-	import Step05 from '$ui/Step05KeyResults.svelte';
-	import Step06 from '$ui/Step06Initiatives.svelte';
-	import Step07 from '$ui/Step07Risks.svelte';
-	import Step08 from '$ui/Step08CheckIn.svelte';
-	import Step09 from '$ui/Step09Forecast.svelte';
-	import Step10 from '$ui/Step10ScoreAndSignOff.svelte';
+	import Step01 from '$lib/components/steps/Step01ReporterAndCycle.svelte';
+	import Step02 from '$lib/components/steps/Step02Objective.svelte';
+	import Step03 from '$lib/components/steps/Step03Participants.svelte';
+	import Step04 from '$lib/components/steps/Step04StrategicAlignment.svelte';
+	import Step05 from '$lib/components/steps/Step05KeyResults.svelte';
+	import Step06 from '$lib/components/steps/Step06Initiatives.svelte';
+	import Step07 from '$lib/components/steps/Step07Risks.svelte';
+	import Step08 from '$lib/components/steps/Step08CheckIn.svelte';
+	import Step09 from '$lib/components/steps/Step09Forecast.svelte';
+	import Step10 from '$lib/components/steps/Step10ScoreAndSignOff.svelte';
 
 	let errors = $state<{ id: string; message: string }[]>([]);
 

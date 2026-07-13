@@ -148,7 +148,7 @@ main {
   font-variant-numeric: tabular-nums;
 }
 .summary-card.recommendation-standard           { border-top-color: var(--colour-nhs-green); }
-.summary-card.recommendation-refer_occupational_health { border-top-color: #d97706; }
+.summary-card.recommendation-refer_occupational_health { border-top-color: #b45309; }
 .summary-card.recommendation-refer_access_to_work      { border-top-color: var(--colour-nhs-bright-blue); }
 .summary-card.recommendation-refer_employment_advisor  { border-top-color: #7c3aed; }
 .summary-card.recommendation-review_for_validity       { border-top-color: var(--colour-nhs-red); }

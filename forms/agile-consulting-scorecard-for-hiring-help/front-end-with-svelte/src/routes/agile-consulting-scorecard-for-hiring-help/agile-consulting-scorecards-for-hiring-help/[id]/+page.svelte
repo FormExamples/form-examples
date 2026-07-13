@@ -12,12 +12,12 @@
 	import StepListItem from '$lib/components/ui/StepListItem.svelte';
 	import ErrorSummary from '$lib/components/ui/ErrorSummary.svelte';
 
-	import Step1Organization from '$lib/steps/Step1Organization.svelte';
-	import Step2Manifesto from '$lib/steps/Step2Manifesto.svelte';
-	import Step3PrinciplesA from '$lib/steps/Step3PrinciplesA.svelte';
-	import Step4PrinciplesB from '$lib/steps/Step4PrinciplesB.svelte';
-	import Step5PrinciplesC from '$lib/steps/Step5PrinciplesC.svelte';
-	import Step6ScoreAndSignoff from '$lib/steps/Step6ScoreAndSignoff.svelte';
+	import Step1Organization from '$lib/components/steps/Step1Organization.svelte';
+	import Step2Manifesto from '$lib/components/steps/Step2Manifesto.svelte';
+	import Step3PrinciplesA from '$lib/components/steps/Step3PrinciplesA.svelte';
+	import Step4PrinciplesB from '$lib/components/steps/Step4PrinciplesB.svelte';
+	import Step5PrinciplesC from '$lib/components/steps/Step5PrinciplesC.svelte';
+	import Step6ScoreAndSignoff from '$lib/components/steps/Step6ScoreAndSignoff.svelte';
 
 	const plural = 'agile-consulting-scorecards-for-hiring-help';
 

@@ -1,0 +1,20 @@
+#!/bin/sh
+set -euf
+# bin/forms-shard <index> <total> — print the form slugs assigned to one
+# shard of a deterministic split of all forms into <total> groups.
+#
+# Slugs come from bin/forms-as-kebab-case (sorted). Form N (0-based) goes to
+# shard (N mod total). Used by CI matrix jobs to parallelize per-form work
+# (cargo, npm) across runners.
+#
+#   bin/forms-shard 0 8      # first of eight shards
+#
+# <index> is 0-based and must satisfy 0 <= index < total.
+
+index="${1:?usage: forms-shard <index> <total>}"
+total="${2:?usage: forms-shard <index> <total>}"
+top="$(git rev-parse --show-toplevel)"
+
+"$top/bin/forms-as-kebab-case" | awk -v idx="$index" -v tot="$total" '
+    (NR - 1) % tot == idx { print }
+'

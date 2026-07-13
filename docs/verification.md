@@ -1,0 +1,51 @@
+# Verification
+
+Every claim this repo makes about itself is backed by an executable gate. This
+page lists each gate, what it proves, and how it runs in CI
+([`.github/workflows/ci.yml`](../.github/workflows/ci.yml)).
+
+## The gates
+
+| Gate | Command | Proves |
+|------|---------|--------|
+| Structure | `bin/test` | Every form has the required files/symlinks; `forms.tsv` is current; example fixtures conform to SQL. |
+| SQL apply | `bin/test-sql-apply` | Every form's numbered `sql/` migrations apply, in order, to a fresh Postgres — no missing extension, bad ordering, duplicate CREATE, or syntax error. |
+| Example conformance | `bin/test-examples-conformance` | Each `examples/assessment.json` entity/property maps to a real SQL table/column (separator-insensitive), with light numeric/boolean type checks. |
+| Tools + drift | `bin/test-tools` | Every generator and Lily contract `--check` returns clean; `lily-svelte-status` reports 0 PARTIAL / 0 TODO. |
+| Lily HTML | `bin/lily-html-refactor --check --all` | Every HTML front-end matches the Lily class contract. |
+| Lily Svelte | `bin/lily-svelte-refactor --check --all` | Every SvelteKit front-end matches the Lily class contract. |
+| Lily snapshots | `bin/lily-sync --check`, `bin/lily-svelte-sync --check` | The vendored Lily component specs match the pinned upstream commit. |
+| Loco conventions | `bin/loco-config-refactor --check --all` | Every crate uses the canonical Postgres-only background queue + OpenTelemetry/Prometheus observability. |
+| Generator drift | each `bin/generate-*.py --check` | Committed generated output equals a fresh regeneration (no stale artefacts). |
+| FHIR validity | official HL7 `validator_cli.jar` (CI) | Generated `fhir/r5/*.json` and example Bundles are valid FHIR R5. |
+| XML validity | `xmllint --valid` (CI) | Generated `xml/*.xml` validate against their DTDs. |
+| Rust | `cargo check` + `cargo clippy -D warnings` + `cargo test` (CI, 8 shards) | Every Loco crate compiles, is lint-clean, and its model/request tests pass against Postgres. |
+| Svelte | `npm run check` + `npm run build` + `vitest run` (CI, 8 shards) | Every SvelteKit front-end type-checks, builds (catches the SVAR/SSR trap), and its engine tests pass. |
+| E2E + a11y | `bin/test-e2e --html` (nightly + changed-forms) | Every HTML front-end loads with no uncaught JS error and no serious/critical axe-core accessibility violation. |
+
+## CI job map
+
+- **structure** — `bin/test`.
+- **drift** — regenerates all artefacts, runs every `--check`, validates XML,
+  and fails on any uncommitted diff.
+- **sql-apply** — `bin/test-sql-apply` against a `postgres:18` service.
+- **fhir** — the HL7 validator over generated resources + example Bundles.
+- **rust** — an 8-way sharded matrix (`bin/forms-shard`), each shard with its
+  own Postgres-backed per-crate database.
+- **svelte** — an 8-way sharded matrix building and testing each front-end.
+- **e2e** — the Playwright + axe-core sweep; full on the nightly schedule,
+  changed-forms subset per PR.
+
+## Sharding
+
+`bin/forms-shard <index> <total>` deterministically splits the sorted form list
+so N runners cover the corpus with no overlap and no gaps
+(`sum(bin/forms-shard i N) == all forms`). The Rust and Svelte matrices use
+`total = 8`.
+
+## Local Postgres for the DB-backed gates
+
+`bin/test-sql-apply` and the Loco tests read `PGHOST` / `PGPORT` / `PGUSER`
+(default `localhost:5432`, user `loco`). See [`../CONTRIBUTING.md`](../CONTRIBUTING.md)
+for a throwaway-instance recipe (a short socket dir avoids the Unix-socket path
+length limit).

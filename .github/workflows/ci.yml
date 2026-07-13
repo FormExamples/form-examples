@@ -5,9 +5,17 @@ on:
     branches: [main]
   pull_request:
     branches: [main]
+  schedule:
+    # Nightly full sweep (E2E + heavy matrices). 03:17 UTC.
+    - cron: '17 3 * * *'
+
+# Cancel superseded runs on the same ref.
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
 
 jobs:
-  test:
+  structure:
     name: Structure validation
     runs-on: ubuntu-latest
     steps:
@@ -15,50 +23,251 @@ jobs:
       - name: Run bin/test
         run: bin/test
 
-  generators:
-    name: Verify generators produce valid output
+  drift:
+    name: Drift detectors (generators + Lily contracts)
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Set up Python
-        uses: actions/setup-python@v5
+      - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
       - name: Install xmllint
         run: sudo apt-get update && sudo apt-get install -y libxml2-utils
-      - name: Generate XML representations
-        run: python3 bin/generate-xml-representations.py
-      - name: Generate FHIR R5 representations
-        run: python3 bin/generate-fhir-r5-representations.py
+
+      # Regenerate every derived artefact, then fail if anything changed.
+      - name: Regenerate generated artefacts
+        run: |
+          python3 bin/generate-forms-tsv.py
+          python3 bin/generate-tools-doc.py
+          python3 bin/sql/generate-sql-combined.py
+          python3 bin/xml-representations/generate-xml-representations.py
+          python3 bin/fhir-r5/generate-fhir-r5-representations.py
+          python3 bin/protobuf/generate-protobuf-representations.py
+          python3 bin/openapi/generate-openapi-representations.py
+          python3 bin/back-end-with-loco/generate-back-end-with-loco-setup.py
+
+      - name: forms.tsv is current
+        run: python3 bin/generate-forms-tsv.py --check
+
+      - name: docs/tools.md is current
+        run: python3 bin/generate-tools-doc.py --check
+
+      - name: Per-form llms.txt is current
+        run: python3 bin/generate-llms-txt.py --check
+
+      - name: Per-form spec/ present
+        run: python3 bin/generate-spec.py --check
+
+      - name: CHANGELOG + examples are current
+        run: python3 bin/generate-changelog-and-examples.py --check
+
+      - name: Examples conform to SQL schema
+        run: bin/test-examples-conformance
+
+      - name: Tutorials reference only existing tools/paths
+        run: bin/test-tutorials
+
+      - name: Lily HTML contract has no drift
+        run: bin/lily-html-refactor --check --all
+
+      - name: Lily Svelte contract has no drift
+        run: bin/lily-svelte-refactor --check --all
+
+      # bin/lily-sync --check and bin/lily-svelte-sync --check compare the
+      # vendored forms/lily-spec snapshots against a LOCAL checkout of the Lily
+      # upstream repo (~/git/lilydesignsystem/…), which is not available in CI.
+      # They are a maintainer-run "has upstream changed?" check, not a
+      # repo-internal invariant, so they are intentionally not run here.
+
+      - name: Loco background-queue + observability has no drift
+        run: bin/loco-config-refactor --check --all
+
       - name: Validate XML against DTDs
         run: |
           failed=0
-          for xml in forms/*/xml-representations/*.xml; do
-            xmllint --valid --noout "$xml" 2>&1 || failed=$((failed+1))
+          for xml in forms/*/xml/*.xml; do
+            xmllint --valid --noout "$xml" 2>&1 || failed=$((failed + 1))
           done
           if [ "$failed" -gt 0 ]; then
             echo "::error::$failed XML files failed DTD validation"
             exit 1
           fi
-      - name: Validate FHIR R5 JSON well-formedness and resourceType
-        run: |
-          failed=0
-          for f in forms/*/fhir-r5/*.json; do
-            python3 -c "
-import json, sys
-d = json.load(open('$f'))
-assert 'resourceType' in d, 'missing resourceType'
-" || failed=$((failed+1))
-          done
-          if [ "$failed" -gt 0 ]; then
-            echo "::error::$failed FHIR R5 JSON files failed validation"
-            exit 1
-          fi
-      - name: Fail if generators produced uncommitted diffs
+
+      - name: Fail if any generator produced an uncommitted diff
         run: |
           if [ -n "$(git status --porcelain)" ]; then
-            echo "::error::Generator output differs from committed files. Run bin/generate-*.py locally and commit."
+            echo "::error::Generated output differs from committed files. Run the generators locally and commit."
             git status --short
             git --no-pager diff
             exit 1
           fi
+
+  sql-apply:
+    name: SQL apply gate
+    runs-on: ubuntu-latest
+    services:
+      postgres:
+        image: postgres:18
+        env:
+          POSTGRES_USER: loco
+          POSTGRES_PASSWORD: loco
+          POSTGRES_DB: loco
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd "pg_isready -U loco"
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+    env:
+      PGHOST: localhost
+      PGPORT: '5432'
+      PGUSER: loco
+      PGPASSWORD: loco
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install psql client
+        run: sudo apt-get update && sudo apt-get install -y postgresql-client
+      - name: Apply every form's migrations to a fresh scratch DB
+        run: bin/test-sql-apply
+
+  fhir:
+    name: FHIR R5 validation
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+      - name: Cache FHIR validator
+        id: cache-validator
+        uses: actions/cache@v4
+        with:
+          path: ~/validator_cli.jar
+          key: fhir-validator-6.3.11
+      - name: Download official HL7 FHIR validator
+        if: steps.cache-validator.outputs.cache-hit != 'true'
+        run: |
+          curl -sSL -o ~/validator_cli.jar \
+            https://github.com/hapifhir/org.hl7.fhir.core/releases/download/6.3.11/validator_cli.jar
+      - name: Validate generated FHIR R5 resources and example Bundles
+        run: |
+          # Validate against FHIR R5 (4.0 → 5.0). Collect every generated
+          # resource and every example Bundle; the validator batches them.
+          files=$(find forms/*/fhir/r5 -name '*.json' 2>/dev/null; \
+                  find forms/*/examples -name '*bundle*.json' 2>/dev/null)
+          if [ -z "$files" ]; then
+            echo "::error::no FHIR JSON found to validate"
+            exit 1
+          fi
+          # shellcheck disable=SC2086
+          java -jar ~/validator_cli.jar $files -version 5.0 -level errors
+
+  rust:
+    name: Rust (shard ${{ matrix.shard }}/8)
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        shard: [0, 1, 2, 3, 4, 5, 6, 7]
+    services:
+      postgres:
+        image: postgres:18
+        env:
+          POSTGRES_USER: loco
+          POSTGRES_PASSWORD: loco
+          POSTGRES_DB: loco
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd "pg_isready -U loco"
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+    env:
+      # Loco test config reads DATABASE_URL; each crate boots its own DB
+      # (created per crate below) and auto-migrates on boot_test.
+      PGHOST: localhost
+      PGPORT: '5432'
+      PGUSER: loco
+      PGPASSWORD: loco
+    steps:
+      - uses: actions/checkout@v4
+      - uses: dtolnay/rust-toolchain@stable
+        with:
+          components: clippy
+      - name: Install psql client
+        run: sudo apt-get update && sudo apt-get install -y postgresql-client
+      - uses: Swatinem/rust-cache@v2
+        with:
+          shared-key: loco-shard-${{ matrix.shard }}
+          workspaces: forms/*/back-end-with-loco
+      - name: check / clippy / test each crate in this shard
+        run: |
+          fail=0
+          for slug in $(bin/forms-shard ${{ matrix.shard }} 8); do
+            crate="forms/$slug/back-end-with-loco"
+            [ -f "$crate/Cargo.toml" ] || continue
+            snake=$(printf '%s' "$slug" | tr '-' '_')
+            db="${snake}_test"
+            echo "::group::$slug"
+            createdb "$db" 2>/dev/null || true
+            ( cd "$crate" \
+              && DATABASE_URL="postgres://loco:loco@localhost:5432/$db" \
+                 cargo check --all-targets --locked \
+              && DATABASE_URL="postgres://loco:loco@localhost:5432/$db" \
+                 cargo clippy --all-targets --locked -- -D warnings \
+              && DATABASE_URL="postgres://loco:loco@localhost:5432/$db" \
+                 cargo test --locked ) || { echo "::error::$slug failed"; fail=1; }
+            dropdb --if-exists "$db" 2>/dev/null || true
+            echo "::endgroup::"
+          done
+          exit $fail
+
+  svelte:
+    name: Svelte (shard ${{ matrix.shard }}/8)
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        shard: [0, 1, 2, 3, 4, 5, 6, 7]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: check / build / vitest each front-end in this shard
+        run: |
+          fail=0
+          for slug in $(bin/forms-shard ${{ matrix.shard }} 8); do
+            app="forms/$slug/front-end-with-svelte"
+            [ -f "$app/package.json" ] || continue
+            echo "::group::$slug"
+            ( cd "$app" \
+              && npm ci --no-audit --no-fund \
+              && npm run check \
+              && npm run build \
+              && npx vitest run ) || { echo "::error::$slug failed"; fail=1; }
+            echo "::endgroup::"
+          done
+          exit $fail
+
+  e2e:
+    name: End-to-end sweep (nightly)
+    if: github.event_name == 'schedule'
+    runs-on: ubuntu-latest
+    needs: [structure]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Install E2E harness deps
+        working-directory: e2e
+        run: npm ci --no-audit --no-fund
+      - name: Install Playwright browsers
+        working-directory: e2e
+        run: npx playwright install --with-deps chromium
+      - name: Run the full E2E + accessibility sweep
+        run: bin/test-e2e --all

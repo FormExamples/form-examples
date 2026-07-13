@@ -2,13 +2,13 @@
  * See forms/AGENTS-front-end-html.md for the class vocabulary. */
 
 :root {
-  --color-primary: #f57f17;
+  --color-primary: #b45309;
   --color-primary-dark: #e65100;
   --color-primary-light: #ffe082;
   --color-bg: #fff8e1;
   --color-surface: #ffffff;
   --color-text: #1a1a1a;
-  --color-muted: #6b7280;
+  --color-muted: #4b5563;
   --color-border: #d6d6d6;
   --color-border-strong: #cccccc;
   --color-focus: #1976d2;

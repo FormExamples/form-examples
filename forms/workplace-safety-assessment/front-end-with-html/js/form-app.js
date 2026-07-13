@@ -723,14 +723,15 @@ function renderActionItemsList() {
   const host = document.getElementById('action-items-list');
   if (!host) return;
   host.innerHTML = '';
+  const empty = document.getElementById('action-items-empty');
   const items = state.signoffActionPlan.actionItems;
   if (items.length === 0) {
-    const empty = document.createElement('p');
-    empty.className = 'muted';
-    empty.textContent = 'No action items yet. Add the first finding below.';
-    host.appendChild(empty);
+    // Keep the empty-state message OUTSIDE the <ol> so the list only ever
+    // contains <li> children (WCAG 1.3.1 — valid list structure).
+    if (empty) empty.hidden = false;
     return;
   }
+  if (empty) empty.hidden = true;
   items.forEach((item, i) => host.appendChild(actionItemRow(item, i)));
 }
 
@@ -746,6 +747,7 @@ function renderStep10() {
   planWrap.innerHTML = `
     <label class="label">Action plan</label>
     <ol id="action-items-list" class="action-items"></ol>
+    <p id="action-items-empty" class="muted">No action items yet. Add the first finding below.</p>
     <button type="button" id="add-action-btn" class="button" data-variant="secondary">+ Add action item</button>
   `;
   card.appendChild(planWrap);

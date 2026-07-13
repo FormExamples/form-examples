@@ -8,7 +8,7 @@ engine, and generates a clinical report with flagged issues.
 
 ## Contents
 
-- **134** form project directories under `forms/<slug>/`.
+- **286** form project directories under `forms/<slug>/`.
 - PostgreSQL SQL migrations in Liquibase SQL format (source of truth for data shape).
 - XML + DTD representations per SQL entity (generated).
 - FHIR HL7 R5 JSON resources per SQL entity (generated).
@@ -28,6 +28,16 @@ or run `bin/forms-as-kebab-case`.
 - [`forms/<slug>/spec.md`](forms/AGENTS.md) — per-form domain spec
 
 Update the spec before changing code. See `spec.md` §10 for the workflow.
+
+## Documentation
+
+- [`docs/`](docs/index.md) — architecture, data model, generator pipeline,
+  scoring engines, Lily, back end, verification, i18n, and the `bin/` tools
+  reference.
+- [`docs/tutorials/`](docs/tutorials) — hands-on walkthroughs (quickstart,
+  building a new form, scoring engines, the generator pipeline, the API, Lily).
+- [`arc42/`](arc42/index.md) — the full arc42 architecture document.
+- [`CONTRIBUTING.md`](CONTRIBUTING.md) — environment, workflow, verify gates.
 
 ## Form categories
 

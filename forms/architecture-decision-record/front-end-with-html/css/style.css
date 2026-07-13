@@ -180,7 +180,7 @@ main {
 }
 .step-list-item[data-status="in-progress"],
 .step-list-item[aria-current="step"] {
-  color: var(--color-primary);
+  color: #1e40af;
   border-color: var(--color-primary);
   background: var(--color-primary-light);
   font-weight: 600;

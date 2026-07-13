@@ -1,6 +1,6 @@
 {
   "patient": {
-    "id": "550e8400-e29b-41d4-a716-000000000094",
+    "id": "550e8400-e29b-41d4-a716-00000000004b",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
@@ -20,7 +20,7 @@
     "vo2Max": null
   },
   "clinician": {
-    "id": "550e8400-e29b-41d4-a716-0000000000a6",
+    "id": "550e8400-e29b-41d4-a716-00000000005d",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
@@ -36,15 +36,15 @@
     "unitedKingdomNhsNumber": ""
   },
   "assessment": {
-    "id": "550e8400-e29b-41d4-a716-000000000069",
+    "id": "550e8400-e29b-41d4-a716-00000000006b",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "patientId": "550e8400-e29b-41d4-a716-00000000006d",
+    "patientId": "550e8400-e29b-41d4-a716-00000000006f",
     "status": "in_progress"
   },
   "rebaRule": {
-    "id": "550e8400-e29b-41d4-a716-00000000006f",
+    "id": "550e8400-e29b-41d4-a716-000000000071",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
@@ -54,35 +54,34 @@
     "score": 0
   },
   "grade": {
-    "id": "550e8400-e29b-41d4-a716-0000000000b4",
+    "id": "550e8400-e29b-41d4-a716-000000000079",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "assessmentId": "550e8400-e29b-41d4-a716-0000000000b8",
+    "assessmentId": "550e8400-e29b-41d4-a716-00000000007d",
     "rebaScore": 0,
     "riskLevel": "Negligible risk",
     "rebaScoreOverride": null,
     "overrideReason": "",
-    "gradedAt": "2026-04-09T10:00:00+00:00",
-    "a": ""
+    "gradedAt": "2026-04-09T10:00:00+00:00"
   },
   "gradingFiredRule": {
-    "id": "550e8400-e29b-41d4-a716-0000000000bf",
+    "id": "550e8400-e29b-41d4-a716-000000000083",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "gradeId": "550e8400-e29b-41d4-a716-0000000000c3",
+    "gradeId": "550e8400-e29b-41d4-a716-000000000087",
     "ruleId": "",
     "system": "",
     "description": "",
     "score": 0
   },
   "gradingAdditionalFlag": {
-    "id": "550e8400-e29b-41d4-a716-0000000000c8",
+    "id": "550e8400-e29b-41d4-a716-00000000008c",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "gradeId": "550e8400-e29b-41d4-a716-0000000000cc",
+    "gradeId": "550e8400-e29b-41d4-a716-000000000090",
     "flagId": "",
     "category": "",
     "message": "",

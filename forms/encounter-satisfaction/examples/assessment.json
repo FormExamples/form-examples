@@ -1,6 +1,6 @@
 {
   "patient": {
-    "id": "550e8400-e29b-41d4-a716-0000000000b0",
+    "id": "550e8400-e29b-41d4-a716-000000000077",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
@@ -20,7 +20,7 @@
     "vo2Max": null
   },
   "clinician": {
-    "id": "550e8400-e29b-41d4-a716-0000000000c2",
+    "id": "550e8400-e29b-41d4-a716-000000000089",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
@@ -36,19 +36,19 @@
     "unitedKingdomNhsNumber": ""
   },
   "encounterSatisfaction": {
-    "id": "550e8400-e29b-41d4-a716-000000000076",
+    "id": "550e8400-e29b-41d4-a716-000000000097",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "patientId": "550e8400-e29b-41d4-a716-00000000007a",
+    "patientId": "550e8400-e29b-41d4-a716-00000000009b",
     "status": "in_progress"
   },
   "visitInformation": {
-    "id": "550e8400-e29b-41d4-a716-00000000007c",
+    "id": "550e8400-e29b-41d4-a716-00000000009d",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "encounterSatisfactionId": "550e8400-e29b-41d4-a716-000000000080",
+    "encounterSatisfactionId": "550e8400-e29b-41d4-a716-0000000000a1",
     "visitDate": null,
     "department": "",
     "providerName": "",
@@ -57,84 +57,85 @@
     "firstVisit": "yes"
   },
   "accessScheduling": {
-    "id": "550e8400-e29b-41d4-a716-000000000087",
-    "createdAt": "2026-04-09T10:00:00+00:00",
-    "updatedAt": "2026-04-09T10:00:00+00:00",
-    "deletedAt": null,
-    "encounterSatisfactionId": "550e8400-e29b-41d4-a716-00000000008b",
-    "null": 3,
-    "waitForAppointment": 3,
-    "waitInWaitingRoom": 3
-  },
-  "communication": {
-    "id": "550e8400-e29b-41d4-a716-00000000008f",
-    "createdAt": "2026-04-09T10:00:00+00:00",
-    "updatedAt": "2026-04-09T10:00:00+00:00",
-    "deletedAt": null,
-    "encounterSatisfactionId": "550e8400-e29b-41d4-a716-000000000093",
-    "null": 3,
-    "explainingCondition": 3,
-    "answeringQuestions": 3,
-    "timeSpent": 3
-  },
-  "staffProfessionalism": {
-    "id": "550e8400-e29b-41d4-a716-000000000098",
-    "createdAt": "2026-04-09T10:00:00+00:00",
-    "updatedAt": "2026-04-09T10:00:00+00:00",
-    "deletedAt": null,
-    "encounterSatisfactionId": "550e8400-e29b-41d4-a716-00000000009c",
-    "null": 3,
-    "nursingCourtesy": 3,
-    "respectShown": 3
-  },
-  "careQuality": {
-    "id": "550e8400-e29b-41d4-a716-0000000000a0",
-    "createdAt": "2026-04-09T10:00:00+00:00",
-    "updatedAt": "2026-04-09T10:00:00+00:00",
-    "deletedAt": null,
-    "encounterSatisfactionId": "550e8400-e29b-41d4-a716-0000000000a4",
-    "null": 3,
-    "treatmentPlanExplanation": 3,
-    "confidenceInCare": 3
-  },
-  "environment": {
     "id": "550e8400-e29b-41d4-a716-0000000000a8",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
     "encounterSatisfactionId": "550e8400-e29b-41d4-a716-0000000000ac",
-    "null": 3,
+    "easeOfScheduling": 3,
+    "waitForAppointment": 3,
+    "waitInWaitingRoom": 3
+  },
+  "communication": {
+    "id": "550e8400-e29b-41d4-a716-0000000000b0",
+    "createdAt": "2026-04-09T10:00:00+00:00",
+    "updatedAt": "2026-04-09T10:00:00+00:00",
+    "deletedAt": null,
+    "encounterSatisfactionId": "550e8400-e29b-41d4-a716-0000000000b4",
+    "listening": 3,
+    "explainingCondition": 3,
+    "answeringQuestions": 3,
+    "timeSpent": 3
+  },
+  "staffProfessionalism": {
+    "id": "550e8400-e29b-41d4-a716-0000000000b9",
+    "createdAt": "2026-04-09T10:00:00+00:00",
+    "updatedAt": "2026-04-09T10:00:00+00:00",
+    "deletedAt": null,
+    "encounterSatisfactionId": "550e8400-e29b-41d4-a716-0000000000bd",
+    "receptionCourtesy": 3,
+    "nursingCourtesy": 3,
+    "respectShown": 3
+  },
+  "careQuality": {
+    "id": "550e8400-e29b-41d4-a716-0000000000c1",
+    "createdAt": "2026-04-09T10:00:00+00:00",
+    "updatedAt": "2026-04-09T10:00:00+00:00",
+    "deletedAt": null,
+    "encounterSatisfactionId": "550e8400-e29b-41d4-a716-0000000000c5",
+    "involvementInDecisions": 3,
+    "treatmentPlanExplanation": 3,
+    "confidenceInCare": 3
+  },
+  "environment": {
+    "id": "550e8400-e29b-41d4-a716-0000000000c9",
+    "createdAt": "2026-04-09T10:00:00+00:00",
+    "updatedAt": "2026-04-09T10:00:00+00:00",
+    "deletedAt": null,
+    "encounterSatisfactionId": "550e8400-e29b-41d4-a716-0000000000cd",
+    "cleanliness": 3,
     "waitingAreaComfort": 3,
     "privacy": 3
   },
   "overallSatisfaction": {
-    "id": "550e8400-e29b-41d4-a716-0000000000d0",
+    "id": "550e8400-e29b-41d4-a716-0000000000d1",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "encounterSatisfactionId": "550e8400-e29b-41d4-a716-0000000000d4",
-    "null": 3,
+    "encounterSatisfactionId": "550e8400-e29b-41d4-a716-0000000000d5",
+    "overallRating": 3,
     "likelyToRecommend": 3,
     "likelyToReturn": 3,
     "comments": ""
   },
   "satisfactionResult": {
-    "id": "550e8400-e29b-41d4-a716-0000000000d9",
+    "id": "550e8400-e29b-41d4-a716-0000000000da",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "encounterSatisfactionId": "550e8400-e29b-41d4-a716-0000000000dd",
+    "encounterSatisfactionId": "550e8400-e29b-41d4-a716-0000000000de",
     "compositeScore": 0.0,
     "category": "Excellent",
     "answeredCount": 0,
+    "domainScores": {},
     "scoredAt": "2026-04-09T10:00:00+00:00"
   },
   "flaggedIssue": {
-    "id": "550e8400-e29b-41d4-a716-0000000000e2",
+    "id": "550e8400-e29b-41d4-a716-0000000000e4",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "satisfactionResultId": "550e8400-e29b-41d4-a716-0000000000e6",
+    "satisfactionResultId": "550e8400-e29b-41d4-a716-0000000000e8",
     "flagId": "",
     "category": "",
     "message": "",

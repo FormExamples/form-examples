@@ -56,12 +56,12 @@
         <h2>Patient Information</h2>
         <div class="form-row">
           <div class="form-group">
-            <label>Patient Name</label>
-            <input type="text" data-field="patientInformation.patientName" placeholder="Full name">
+            <label for="field-patientInformation-patientName">Patient Name</label>
+            <input type="text" data-field="patientInformation.patientName" placeholder="Full name" id="field-patientInformation-patientName">
           </div>
           <div class="form-group">
-            <label>Date of Birth</label>
-            <input type="date" data-field="patientInformation.dateOfBirth">
+            <label for="field-patientInformation-dateOfBirth">Date of Birth</label>
+            <input type="date" data-field="patientInformation.dateOfBirth" id="field-patientInformation-dateOfBirth">
           </div>
         </div>
         <div class="form-row">
@@ -74,28 +74,28 @@
             </div>
           </div>
           <div class="form-group">
-            <label>Age</label>
-            <input type="text" data-field="patientInformation.patientAge" placeholder="e.g. 35">
+            <label for="field-patientInformation-patientAge">Age</label>
+            <input type="text" data-field="patientInformation.patientAge" placeholder="e.g. 35" id="field-patientInformation-patientAge">
           </div>
         </div>
         <div class="form-row">
           <div class="form-group">
-            <label>NHS Number</label>
-            <input type="text" data-field="patientInformation.nhsNumber" placeholder="XXX XXX XXXX">
+            <label for="field-patientInformation-nhsNumber">NHS Number</label>
+            <input type="text" data-field="patientInformation.nhsNumber" placeholder="XXX XXX XXXX" id="field-patientInformation-nhsNumber">
           </div>
           <div class="form-group">
-            <label>GP Practice</label>
-            <input type="text" data-field="patientInformation.gpPractice" placeholder="Practice name">
+            <label for="field-patientInformation-gpPractice">GP Practice</label>
+            <input type="text" data-field="patientInformation.gpPractice" placeholder="Practice name" id="field-patientInformation-gpPractice">
           </div>
         </div>
         <div class="form-row">
           <div class="form-group">
-            <label>Phone</label>
-            <input type="tel" data-field="patientInformation.contactPhone" placeholder="Phone number">
+            <label for="field-patientInformation-contactPhone">Phone</label>
+            <input type="tel" data-field="patientInformation.contactPhone" placeholder="Phone number" id="field-patientInformation-contactPhone">
           </div>
           <div class="form-group">
-            <label>Email</label>
-            <input type="email" data-field="patientInformation.contactEmail" placeholder="Email address">
+            <label for="field-patientInformation-contactEmail">Email</label>
+            <input type="email" data-field="patientInformation.contactEmail" placeholder="Email address" id="field-patientInformation-contactEmail">
           </div>
         </div>
         <div class="step-nav">
@@ -116,8 +116,8 @@
         </div>
         <div class="form-row">
           <div class="form-group">
-            <label>Record Source</label>
-            <select data-field="immunizationHistory.recordSource">
+            <label for="field-immunizationHistory-recordSource">Record Source</label>
+            <select data-field="immunizationHistory.recordSource" id="field-immunizationHistory-recordSource">
               <option value="">-- Select --</option>
               <option value="redBook">Red Book</option>
               <option value="gpRecords">GP Records</option>
@@ -127,8 +127,8 @@
             </select>
           </div>
           <div class="form-group">
-            <label>Last Review Date</label>
-            <input type="date" data-field="immunizationHistory.lastReviewDate">
+            <label for="field-immunizationHistory-lastReviewDate">Last Review Date</label>
+            <input type="date" data-field="immunizationHistory.lastReviewDate" id="field-immunizationHistory-lastReviewDate">
           </div>
         </div>
         <div class="form-group">
@@ -140,8 +140,8 @@
         </div>
         <div class="conditional-field" data-show-if="immunizationHistory.previousAdverseReactions=yes">
           <div class="form-group">
-            <label>Adverse reaction details</label>
-            <textarea data-field="immunizationHistory.adverseReactionDetails" rows="3" placeholder="Describe the adverse reactions..."></textarea>
+            <label for="field-immunizationHistory-adverseReactionDetails">Adverse reaction details</label>
+            <textarea data-field="immunizationHistory.adverseReactionDetails" rows="3" placeholder="Describe the adverse reactions..." id="field-immunizationHistory-adverseReactionDetails"></textarea>
           </div>
         </div>
         <div class="form-group">
@@ -153,8 +153,8 @@
         </div>
         <div class="conditional-field" data-show-if="immunizationHistory.immunocompromised=yes">
           <div class="form-group">
-            <label>Immunocompromised details</label>
-            <textarea data-field="immunizationHistory.immunocompromisedDetails" rows="3" placeholder="Describe the condition..."></textarea>
+            <label for="field-immunizationHistory-immunocompromisedDetails">Immunocompromised details</label>
+            <textarea data-field="immunizationHistory.immunocompromisedDetails" rows="3" placeholder="Describe the condition..." id="field-immunizationHistory-immunocompromisedDetails"></textarea>
           </div>
         </div>
         <div class="step-nav">
@@ -166,8 +166,8 @@
         <h2>Childhood Vaccinations</h2>
         <p>Rate each: 0 = Not Given, 1 = Partial, 2 = Complete</p>
         <div class="form-group">
-          <label>DTaP/IPV/Hib/HepB (6-in-1)</label>
-          <select data-field="childhoodVaccinations.dtapIpvHibHepb" data-numeric>
+          <label for="field-childhoodVaccinations-dtapIpvHibHepb">DTaP/IPV/Hib/HepB (6-in-1)</label>
+          <select data-field="childhoodVaccinations.dtapIpvHibHepb" data-numeric id="field-childhoodVaccinations-dtapIpvHibHepb">
             <option value="">-- Select --</option>
             <option value="0">Not Given</option>
             <option value="1">Partial</option>
@@ -175,8 +175,8 @@
           </select>
         </div>
         <div class="form-group">
-          <label>Pneumococcal (PCV)</label>
-          <select data-field="childhoodVaccinations.pneumococcal" data-numeric>
+          <label for="field-childhoodVaccinations-pneumococcal">Pneumococcal (PCV)</label>
+          <select data-field="childhoodVaccinations.pneumococcal" data-numeric id="field-childhoodVaccinations-pneumococcal">
             <option value="">-- Select --</option>
             <option value="0">Not Given</option>
             <option value="1">Partial</option>
@@ -184,8 +184,8 @@
           </select>
         </div>
         <div class="form-group">
-          <label>Rotavirus</label>
-          <select data-field="childhoodVaccinations.rotavirus" data-numeric>
+          <label for="field-childhoodVaccinations-rotavirus">Rotavirus</label>
+          <select data-field="childhoodVaccinations.rotavirus" data-numeric id="field-childhoodVaccinations-rotavirus">
             <option value="">-- Select --</option>
             <option value="0">Not Given</option>
             <option value="1">Partial</option>
@@ -193,8 +193,8 @@
           </select>
         </div>
         <div class="form-group">
-          <label>Meningitis B (MenB)</label>
-          <select data-field="childhoodVaccinations.meningitisB" data-numeric>
+          <label for="field-childhoodVaccinations-meningitisB">Meningitis B (MenB)</label>
+          <select data-field="childhoodVaccinations.meningitisB" data-numeric id="field-childhoodVaccinations-meningitisB">
             <option value="">-- Select --</option>
             <option value="0">Not Given</option>
             <option value="1">Partial</option>
@@ -202,8 +202,8 @@
           </select>
         </div>
         <div class="form-group">
-          <label>MMR (Measles, Mumps, Rubella)</label>
-          <select data-field="childhoodVaccinations.mmr" data-numeric>
+          <label for="field-childhoodVaccinations-mmr">MMR (Measles, Mumps, Rubella)</label>
+          <select data-field="childhoodVaccinations.mmr" data-numeric id="field-childhoodVaccinations-mmr">
             <option value="">-- Select --</option>
             <option value="0">Not Given</option>
             <option value="1">Partial</option>
@@ -211,8 +211,8 @@
           </select>
         </div>
         <div class="form-group">
-          <label>Hib/MenC Booster</label>
-          <select data-field="childhoodVaccinations.hibMenc" data-numeric>
+          <label for="field-childhoodVaccinations-hibMenc">Hib/MenC Booster</label>
+          <select data-field="childhoodVaccinations.hibMenc" data-numeric id="field-childhoodVaccinations-hibMenc">
             <option value="">-- Select --</option>
             <option value="0">Not Given</option>
             <option value="1">Partial</option>
@@ -220,8 +220,8 @@
           </select>
         </div>
         <div class="form-group">
-          <label>Pre-school Booster (DTaP/IPV)</label>
-          <select data-field="childhoodVaccinations.preschoolBooster" data-numeric>
+          <label for="field-childhoodVaccinations-preschoolBooster">Pre-school Booster (DTaP/IPV)</label>
+          <select data-field="childhoodVaccinations.preschoolBooster" data-numeric id="field-childhoodVaccinations-preschoolBooster">
             <option value="">-- Select --</option>
             <option value="0">Not Given</option>
             <option value="1">Partial</option>
@@ -237,32 +237,32 @@
         <h2>Adult Vaccinations</h2>
         <p>Rate each: 0 = Not Given, 1 = Partial, 2 = Complete</p>
         <div class="form-group">
-          <label>Td/IPV Booster (Tetanus, Diphtheria, Polio)</label>
-          <select data-field="adultVaccinations.tdIpvBooster" data-numeric><option value="">-- Select --</option><option value="0">Not Given</option><option value="1">Partial</option><option value="2">Complete</option></select>
+          <label for="field-adultVaccinations-tdIpvBooster">Td/IPV Booster (Tetanus, Diphtheria, Polio)</label>
+          <select data-field="adultVaccinations.tdIpvBooster" data-numeric id="field-adultVaccinations-tdIpvBooster"><option value="">-- Select --</option><option value="0">Not Given</option><option value="1">Partial</option><option value="2">Complete</option></select>
         </div>
         <div class="form-group">
-          <label>HPV (Human Papillomavirus)</label>
-          <select data-field="adultVaccinations.hpv" data-numeric><option value="">-- Select --</option><option value="0">Not Given</option><option value="1">Partial</option><option value="2">Complete</option></select>
+          <label for="field-adultVaccinations-hpv">HPV (Human Papillomavirus)</label>
+          <select data-field="adultVaccinations.hpv" data-numeric id="field-adultVaccinations-hpv"><option value="">-- Select --</option><option value="0">Not Given</option><option value="1">Partial</option><option value="2">Complete</option></select>
         </div>
         <div class="form-group">
-          <label>Meningitis ACWY</label>
-          <select data-field="adultVaccinations.meningitisAcwy" data-numeric><option value="">-- Select --</option><option value="0">Not Given</option><option value="1">Partial</option><option value="2">Complete</option></select>
+          <label for="field-adultVaccinations-meningitisAcwy">Meningitis ACWY</label>
+          <select data-field="adultVaccinations.meningitisAcwy" data-numeric id="field-adultVaccinations-meningitisAcwy"><option value="">-- Select --</option><option value="0">Not Given</option><option value="1">Partial</option><option value="2">Complete</option></select>
         </div>
         <div class="form-group">
-          <label>Influenza (Annual)</label>
-          <select data-field="adultVaccinations.influenzaAnnual" data-numeric><option value="">-- Select --</option><option value="0">Not Given</option><option value="1">Partial</option><option value="2">Complete</option></select>
+          <label for="field-adultVaccinations-influenzaAnnual">Influenza (Annual)</label>
+          <select data-field="adultVaccinations.influenzaAnnual" data-numeric id="field-adultVaccinations-influenzaAnnual"><option value="">-- Select --</option><option value="0">Not Given</option><option value="1">Partial</option><option value="2">Complete</option></select>
         </div>
         <div class="form-group">
-          <label>COVID-19</label>
-          <select data-field="adultVaccinations.covid19" data-numeric><option value="">-- Select --</option><option value="0">Not Given</option><option value="1">Partial</option><option value="2">Complete</option></select>
+          <label for="field-adultVaccinations-covid19">COVID-19</label>
+          <select data-field="adultVaccinations.covid19" data-numeric id="field-adultVaccinations-covid19"><option value="">-- Select --</option><option value="0">Not Given</option><option value="1">Partial</option><option value="2">Complete</option></select>
         </div>
         <div class="form-group">
-          <label>Shingles (Herpes Zoster)</label>
-          <select data-field="adultVaccinations.shingles" data-numeric><option value="">-- Select --</option><option value="0">Not Given</option><option value="1">Partial</option><option value="2">Complete</option></select>
+          <label for="field-adultVaccinations-shingles">Shingles (Herpes Zoster)</label>
+          <select data-field="adultVaccinations.shingles" data-numeric id="field-adultVaccinations-shingles"><option value="">-- Select --</option><option value="0">Not Given</option><option value="1">Partial</option><option value="2">Complete</option></select>
         </div>
         <div class="form-group">
-          <label>Pneumococcal (PPV23)</label>
-          <select data-field="adultVaccinations.pneumococcalPpv" data-numeric><option value="">-- Select --</option><option value="0">Not Given</option><option value="1">Partial</option><option value="2">Complete</option></select>
+          <label for="field-adultVaccinations-pneumococcalPpv">Pneumococcal (PPV23)</label>
+          <select data-field="adultVaccinations.pneumococcalPpv" data-numeric id="field-adultVaccinations-pneumococcalPpv"><option value="">-- Select --</option><option value="0">Not Given</option><option value="1">Partial</option><option value="2">Complete</option></select>
         </div>
         <div class="step-nav">
         </div>
@@ -280,17 +280,17 @@
         </div>
         <div class="conditional-field" data-show-if="travelVaccinations.travelPlanned=yes">
           <div class="form-group">
-            <label>Travel Destination</label>
-            <input type="text" data-field="travelVaccinations.travelDestination" placeholder="e.g. Sub-Saharan Africa">
+            <label for="field-travelVaccinations-travelDestination">Travel Destination</label>
+            <input type="text" data-field="travelVaccinations.travelDestination" placeholder="e.g. Sub-Saharan Africa" id="field-travelVaccinations-travelDestination">
           </div>
         </div>
         <p>Rate each: 0 = Not Given, 1 = Partial, 2 = Complete</p>
-        <div class="form-group"><label>Hepatitis A</label><select data-field="travelVaccinations.hepatitisA" data-numeric><option value="">-- Select --</option><option value="0">Not Given</option><option value="1">Partial</option><option value="2">Complete</option></select></div>
-        <div class="form-group"><label>Hepatitis B</label><select data-field="travelVaccinations.hepatitisB" data-numeric><option value="">-- Select --</option><option value="0">Not Given</option><option value="1">Partial</option><option value="2">Complete</option></select></div>
-        <div class="form-group"><label>Typhoid</label><select data-field="travelVaccinations.typhoid" data-numeric><option value="">-- Select --</option><option value="0">Not Given</option><option value="1">Partial</option><option value="2">Complete</option></select></div>
-        <div class="form-group"><label>Yellow Fever</label><select data-field="travelVaccinations.yellowFever" data-numeric><option value="">-- Select --</option><option value="0">Not Given</option><option value="1">Partial</option><option value="2">Complete</option></select></div>
-        <div class="form-group"><label>Rabies</label><select data-field="travelVaccinations.rabies" data-numeric><option value="">-- Select --</option><option value="0">Not Given</option><option value="1">Partial</option><option value="2">Complete</option></select></div>
-        <div class="form-group"><label>Japanese Encephalitis</label><select data-field="travelVaccinations.japaneseEncephalitis" data-numeric><option value="">-- Select --</option><option value="0">Not Given</option><option value="1">Partial</option><option value="2">Complete</option></select></div>
+        <div class="form-group"><label for="field-travelVaccinations-hepatitisA">Hepatitis A</label><select data-field="travelVaccinations.hepatitisA" data-numeric id="field-travelVaccinations-hepatitisA"><option value="">-- Select --</option><option value="0">Not Given</option><option value="1">Partial</option><option value="2">Complete</option></select></div>
+        <div class="form-group"><label for="field-travelVaccinations-hepatitisB">Hepatitis B</label><select data-field="travelVaccinations.hepatitisB" data-numeric id="field-travelVaccinations-hepatitisB"><option value="">-- Select --</option><option value="0">Not Given</option><option value="1">Partial</option><option value="2">Complete</option></select></div>
+        <div class="form-group"><label for="field-travelVaccinations-typhoid">Typhoid</label><select data-field="travelVaccinations.typhoid" data-numeric id="field-travelVaccinations-typhoid"><option value="">-- Select --</option><option value="0">Not Given</option><option value="1">Partial</option><option value="2">Complete</option></select></div>
+        <div class="form-group"><label for="field-travelVaccinations-yellowFever">Yellow Fever</label><select data-field="travelVaccinations.yellowFever" data-numeric id="field-travelVaccinations-yellowFever"><option value="">-- Select --</option><option value="0">Not Given</option><option value="1">Partial</option><option value="2">Complete</option></select></div>
+        <div class="form-group"><label for="field-travelVaccinations-rabies">Rabies</label><select data-field="travelVaccinations.rabies" data-numeric id="field-travelVaccinations-rabies"><option value="">-- Select --</option><option value="0">Not Given</option><option value="1">Partial</option><option value="2">Complete</option></select></div>
+        <div class="form-group"><label for="field-travelVaccinations-japaneseEncephalitis">Japanese Encephalitis</label><select data-field="travelVaccinations.japaneseEncephalitis" data-numeric id="field-travelVaccinations-japaneseEncephalitis"><option value="">-- Select --</option><option value="0">Not Given</option><option value="1">Partial</option><option value="2">Complete</option></select></div>
         <div class="step-nav">
         </div>
       </section>
@@ -300,8 +300,8 @@
         <h2>Occupational Vaccinations</h2>
         <div class="form-row">
           <div class="form-group">
-            <label>Occupation</label>
-            <input type="text" data-field="occupationalVaccinations.occupation" placeholder="e.g. Nurse">
+            <label for="field-occupationalVaccinations-occupation">Occupation</label>
+            <input type="text" data-field="occupationalVaccinations.occupation" placeholder="e.g. Nurse" id="field-occupationalVaccinations-occupation">
           </div>
           <div class="form-group">
             <label>Healthcare worker?</label>
@@ -312,10 +312,10 @@
           </div>
         </div>
         <p>Rate each: 0 = Not Given, 1 = Partial, 2 = Complete</p>
-        <div class="form-group"><label>Hepatitis B (Occupational)</label><select data-field="occupationalVaccinations.hepatitisBOccupational" data-numeric><option value="">-- Select --</option><option value="0">Not Given</option><option value="1">Partial</option><option value="2">Complete</option></select></div>
-        <div class="form-group"><label>Influenza (Occupational)</label><select data-field="occupationalVaccinations.influenzaOccupational" data-numeric><option value="">-- Select --</option><option value="0">Not Given</option><option value="1">Partial</option><option value="2">Complete</option></select></div>
-        <div class="form-group"><label>Varicella (Chickenpox)</label><select data-field="occupationalVaccinations.varicella" data-numeric><option value="">-- Select --</option><option value="0">Not Given</option><option value="1">Partial</option><option value="2">Complete</option></select></div>
-        <div class="form-group"><label>BCG / Tuberculosis</label><select data-field="occupationalVaccinations.bcgTuberculosis" data-numeric><option value="">-- Select --</option><option value="0">Not Given</option><option value="1">Partial</option><option value="2">Complete</option></select></div>
+        <div class="form-group"><label for="field-occupationalVaccinations-hepatitisBOccupational">Hepatitis B (Occupational)</label><select data-field="occupationalVaccinations.hepatitisBOccupational" data-numeric id="field-occupationalVaccinations-hepatitisBOccupational"><option value="">-- Select --</option><option value="0">Not Given</option><option value="1">Partial</option><option value="2">Complete</option></select></div>
+        <div class="form-group"><label for="field-occupationalVaccinations-influenzaOccupational">Influenza (Occupational)</label><select data-field="occupationalVaccinations.influenzaOccupational" data-numeric id="field-occupationalVaccinations-influenzaOccupational"><option value="">-- Select --</option><option value="0">Not Given</option><option value="1">Partial</option><option value="2">Complete</option></select></div>
+        <div class="form-group"><label for="field-occupationalVaccinations-varicella">Varicella (Chickenpox)</label><select data-field="occupationalVaccinations.varicella" data-numeric id="field-occupationalVaccinations-varicella"><option value="">-- Select --</option><option value="0">Not Given</option><option value="1">Partial</option><option value="2">Complete</option></select></div>
+        <div class="form-group"><label for="field-occupationalVaccinations-bcgTuberculosis">BCG / Tuberculosis</label><select data-field="occupationalVaccinations.bcgTuberculosis" data-numeric id="field-occupationalVaccinations-bcgTuberculosis"><option value="">-- Select --</option><option value="0">Not Given</option><option value="1">Partial</option><option value="2">Complete</option></select></div>
         <div class="step-nav">
         </div>
       </section>
@@ -365,8 +365,8 @@
             </div>
           </div>
           <div class="form-group">
-            <label>If pregnant, weeks gestation</label>
-            <input type="text" data-field="contraindicationsAllergies.pregnancyWeeks" placeholder="e.g. 28">
+            <label for="field-contraindicationsAllergies-pregnancyWeeks">If pregnant, weeks gestation</label>
+            <input type="text" data-field="contraindicationsAllergies.pregnancyWeeks" placeholder="e.g. 28" id="field-contraindicationsAllergies-pregnancyWeeks">
           </div>
         </div>
         <div class="form-group">
@@ -385,8 +385,8 @@
         </div>
         <div class="conditional-field" data-show-if="contraindicationsAllergies.previousAnaphylaxis=yes">
           <div class="form-group">
-            <label>Anaphylaxis details</label>
-            <textarea data-field="contraindicationsAllergies.anaphylaxisDetails" rows="3" placeholder="Describe the anaphylactic reaction..."></textarea>
+            <label for="field-contraindicationsAllergies-anaphylaxisDetails">Anaphylaxis details</label>
+            <textarea data-field="contraindicationsAllergies.anaphylaxisDetails" rows="3" placeholder="Describe the anaphylactic reaction..." id="field-contraindicationsAllergies-anaphylaxisDetails"></textarea>
           </div>
         </div>
         <div class="step-nav">
@@ -397,10 +397,10 @@
       <section id="step-8" class="step-section card">
         <h2>Consent &amp; Information</h2>
         <p>Rate 1 (Very Poor) to 5 (Excellent)</p>
-        <div class="form-group"><label>Information provided about the vaccine</label><select data-field="consentInformation.informationProvided" data-numeric><option value="">-- Select --</option><option value="1">1 - Very Poor</option><option value="2">2 - Poor</option><option value="3">3 - Average</option><option value="4">4 - Good</option><option value="5">5 - Excellent</option></select></div>
-        <div class="form-group"><label>Risks explained</label><select data-field="consentInformation.risksExplained" data-numeric><option value="">-- Select --</option><option value="1">1 - Very Poor</option><option value="2">2 - Poor</option><option value="3">3 - Average</option><option value="4">4 - Good</option><option value="5">5 - Excellent</option></select></div>
-        <div class="form-group"><label>Benefits explained</label><select data-field="consentInformation.benefitsExplained" data-numeric><option value="">-- Select --</option><option value="1">1 - Very Poor</option><option value="2">2 - Poor</option><option value="3">3 - Average</option><option value="4">4 - Good</option><option value="5">5 - Excellent</option></select></div>
-        <div class="form-group"><label>Questions answered satisfactorily</label><select data-field="consentInformation.questionsAnswered" data-numeric><option value="">-- Select --</option><option value="1">1 - Very Poor</option><option value="2">2 - Poor</option><option value="3">3 - Average</option><option value="4">4 - Good</option><option value="5">5 - Excellent</option></select></div>
+        <div class="form-group"><label for="field-consentInformation-informationProvided">Information provided about the vaccine</label><select data-field="consentInformation.informationProvided" data-numeric id="field-consentInformation-informationProvided"><option value="">-- Select --</option><option value="1">1 - Very Poor</option><option value="2">2 - Poor</option><option value="3">3 - Average</option><option value="4">4 - Good</option><option value="5">5 - Excellent</option></select></div>
+        <div class="form-group"><label for="field-consentInformation-risksExplained">Risks explained</label><select data-field="consentInformation.risksExplained" data-numeric id="field-consentInformation-risksExplained"><option value="">-- Select --</option><option value="1">1 - Very Poor</option><option value="2">2 - Poor</option><option value="3">3 - Average</option><option value="4">4 - Good</option><option value="5">5 - Excellent</option></select></div>
+        <div class="form-group"><label for="field-consentInformation-benefitsExplained">Benefits explained</label><select data-field="consentInformation.benefitsExplained" data-numeric id="field-consentInformation-benefitsExplained"><option value="">-- Select --</option><option value="1">1 - Very Poor</option><option value="2">2 - Poor</option><option value="3">3 - Average</option><option value="4">4 - Good</option><option value="5">5 - Excellent</option></select></div>
+        <div class="form-group"><label for="field-consentInformation-questionsAnswered">Questions answered satisfactorily</label><select data-field="consentInformation.questionsAnswered" data-numeric id="field-consentInformation-questionsAnswered"><option value="">-- Select --</option><option value="1">1 - Very Poor</option><option value="2">2 - Poor</option><option value="3">3 - Average</option><option value="4">4 - Good</option><option value="5">5 - Excellent</option></select></div>
         <div class="form-row">
           <div class="form-group">
             <label>Consent given?</label>
@@ -410,8 +410,8 @@
             </div>
           </div>
           <div class="form-group">
-            <label>Consent Date</label>
-            <input type="date" data-field="consentInformation.consentDate">
+            <label for="field-consentInformation-consentDate">Consent Date</label>
+            <input type="date" data-field="consentInformation.consentDate" id="field-consentInformation-consentDate">
           </div>
         </div>
         <div class="form-group">
@@ -431,28 +431,28 @@
         <h2>Administration Record</h2>
         <div class="form-row">
           <div class="form-group">
-            <label>Vaccine Name</label>
-            <input type="text" data-field="administrationRecord.vaccineName" placeholder="e.g. Priorix (MMR)">
+            <label for="field-administrationRecord-vaccineName">Vaccine Name</label>
+            <input type="text" data-field="administrationRecord.vaccineName" placeholder="e.g. Priorix (MMR)" id="field-administrationRecord-vaccineName">
           </div>
           <div class="form-group">
-            <label>Batch Number</label>
-            <input type="text" data-field="administrationRecord.batchNumber" placeholder="e.g. ABCD1234">
-          </div>
-        </div>
-        <div class="form-row">
-          <div class="form-group">
-            <label>Expiry Date</label>
-            <input type="date" data-field="administrationRecord.expiryDate">
-          </div>
-          <div class="form-group">
-            <label>Administration Date</label>
-            <input type="date" data-field="administrationRecord.administrationDate">
+            <label for="field-administrationRecord-batchNumber">Batch Number</label>
+            <input type="text" data-field="administrationRecord.batchNumber" placeholder="e.g. ABCD1234" id="field-administrationRecord-batchNumber">
           </div>
         </div>
         <div class="form-row">
           <div class="form-group">
-            <label>Administration Site</label>
-            <select data-field="administrationRecord.administrationSite">
+            <label for="field-administrationRecord-expiryDate">Expiry Date</label>
+            <input type="date" data-field="administrationRecord.expiryDate" id="field-administrationRecord-expiryDate">
+          </div>
+          <div class="form-group">
+            <label for="field-administrationRecord-administrationDate">Administration Date</label>
+            <input type="date" data-field="administrationRecord.administrationDate" id="field-administrationRecord-administrationDate">
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label for="field-administrationRecord-administrationSite">Administration Site</label>
+            <select data-field="administrationRecord.administrationSite" id="field-administrationRecord-administrationSite">
               <option value="">-- Select --</option>
               <option value="leftDeltoid">Left Deltoid</option>
               <option value="rightDeltoid">Right Deltoid</option>
@@ -463,8 +463,8 @@
             </select>
           </div>
           <div class="form-group">
-            <label>Administration Route</label>
-            <select data-field="administrationRecord.administrationRoute">
+            <label for="field-administrationRecord-administrationRoute">Administration Route</label>
+            <select data-field="administrationRecord.administrationRoute" id="field-administrationRecord-administrationRoute">
               <option value="">-- Select --</option>
               <option value="intramuscular">Intramuscular (IM)</option>
               <option value="subcutaneous">Subcutaneous (SC)</option>
@@ -476,8 +476,8 @@
         </div>
         <div class="form-row">
           <div class="form-group">
-            <label>Dose Number</label>
-            <select data-field="administrationRecord.doseNumber">
+            <label for="field-administrationRecord-doseNumber">Dose Number</label>
+            <select data-field="administrationRecord.doseNumber" id="field-administrationRecord-doseNumber">
               <option value="">-- Select --</option>
               <option value="1">1st Dose</option>
               <option value="2">2nd Dose</option>
@@ -486,8 +486,8 @@
             </select>
           </div>
           <div class="form-group">
-            <label>Administered By</label>
-            <input type="text" data-field="administrationRecord.administeredBy" placeholder="e.g. Nurse Jones">
+            <label for="field-administrationRecord-administeredBy">Administered By</label>
+            <input type="text" data-field="administrationRecord.administeredBy" placeholder="e.g. Nurse Jones" id="field-administrationRecord-administeredBy">
           </div>
         </div>
         <div class="step-nav">
@@ -498,8 +498,8 @@
       <section id="step-10" class="step-section card">
         <h2>Clinical Review</h2>
         <div class="form-group">
-          <label>Post-vaccination observation (1-5)</label>
-          <select data-field="clinicalReview.postVaccinationObservation" data-numeric><option value="">-- Select --</option><option value="1">1 - Very Poor</option><option value="2">2 - Poor</option><option value="3">3 - Average</option><option value="4">4 - Good</option><option value="5">5 - Excellent</option></select>
+          <label for="field-clinicalReview-postVaccinationObservation">Post-vaccination observation (1-5)</label>
+          <select data-field="clinicalReview.postVaccinationObservation" data-numeric id="field-clinicalReview-postVaccinationObservation"><option value="">-- Select --</option><option value="1">1 - Very Poor</option><option value="2">2 - Poor</option><option value="3">3 - Average</option><option value="4">4 - Good</option><option value="5">5 - Excellent</option></select>
         </div>
         <div class="form-group">
           <label>Immediate adverse reaction?</label>
@@ -510,14 +510,14 @@
         </div>
         <div class="conditional-field" data-show-if="clinicalReview.immediateReaction=yes">
           <div class="form-group">
-            <label>Reaction details</label>
-            <textarea data-field="clinicalReview.reactionDetails" rows="3" placeholder="Describe the reaction..."></textarea>
+            <label for="field-clinicalReview-reactionDetails">Reaction details</label>
+            <textarea data-field="clinicalReview.reactionDetails" rows="3" placeholder="Describe the reaction..." id="field-clinicalReview-reactionDetails"></textarea>
           </div>
         </div>
         <div class="form-row">
           <div class="form-group">
-            <label>Next dose due date</label>
-            <input type="date" data-field="clinicalReview.nextDoseDue">
+            <label for="field-clinicalReview-nextDoseDue">Next dose due date</label>
+            <input type="date" data-field="clinicalReview.nextDoseDue" id="field-clinicalReview-nextDoseDue">
           </div>
           <div class="form-group">
             <label>Catch-up schedule needed?</label>
@@ -535,12 +535,12 @@
           </div>
         </div>
         <div class="form-group">
-          <label>Clinician Notes</label>
-          <textarea data-field="clinicalReview.clinicianNotes" rows="4" placeholder="Any additional clinical notes..."></textarea>
+          <label for="field-clinicalReview-clinicianNotes">Clinician Notes</label>
+          <textarea data-field="clinicalReview.clinicianNotes" rows="4" placeholder="Any additional clinical notes..." id="field-clinicalReview-clinicianNotes"></textarea>
         </div>
         <div class="form-group">
-          <label>Reviewing Clinician</label>
-          <input type="text" data-field="clinicalReview.reviewingClinician" placeholder="e.g. Dr Smith">
+          <label for="field-clinicalReview-reviewingClinician">Reviewing Clinician</label>
+          <input type="text" data-field="clinicalReview.reviewingClinician" placeholder="e.g. Dr Smith" id="field-clinicalReview-reviewingClinician">
         </div>
         <div class="step-nav">
           <button class="button" data-variant="primary" onclick="submitForm()">Submit &amp; View Report</button>

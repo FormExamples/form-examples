@@ -1,0 +1,89 @@
+import { describe, it, expect } from 'vitest';
+import { createDefaultAssessment } from '$lib/stores/assessment.svelte.js';
+import { calculateControl } from './diabetes-grader.js';
+import { calculateCompositeScore, hba1cMmolMol } from './utils.js';
+import type { AssessmentData } from './types.js';
+
+/** A blank assessment with an HbA1c filled in (unit is mmol/mol unless 'percent'). */
+function withHba1c(mmolMol: number): AssessmentData {
+  const data = createDefaultAssessment();
+  data.glycaemicControl.hba1cValue = mmolMol;
+  data.glycaemicControl.hba1cUnit = 'mmolMol';
+  return data;
+}
+
+describe('hba1cMmolMol', () => {
+  it('returns null when no HbA1c recorded', () => {
+    expect(hba1cMmolMol(createDefaultAssessment())).toBeNull();
+  });
+
+  it('passes through a mmol/mol value unchanged', () => {
+    expect(hba1cMmolMol(withHba1c(58))).toBe(58);
+  });
+
+  it('converts a percent value via the IFCC formula ((%-2.15)*10.929)', () => {
+    const data = createDefaultAssessment();
+    data.glycaemicControl.hba1cValue = 7.0;
+    data.glycaemicControl.hba1cUnit = 'percent';
+    // (7.0 - 2.15) * 10.929 ≈ 53.0
+    expect(hba1cMmolMol(data)).toBeCloseTo(53.0, 1);
+  });
+});
+
+describe('calculateCompositeScore', () => {
+  it('maps an at-target HbA1c (<=48 mmol/mol) to 100', () => {
+    expect(calculateCompositeScore(withHba1c(45))).toBe(100);
+  });
+
+  it('maps a mid-range HbA1c (54-64 mmol/mol band) to 60', () => {
+    expect(calculateCompositeScore(withHba1c(60))).toBe(60);
+  });
+
+  it('maps a very high HbA1c (>86 mmol/mol) to 0', () => {
+    expect(calculateCompositeScore(withHba1c(95))).toBe(0);
+  });
+
+  it('returns null when nothing scoreable is answered', () => {
+    expect(calculateCompositeScore(createDefaultAssessment())).toBeNull();
+  });
+});
+
+describe('calculateControl', () => {
+  it('returns draft when fewer than 2 items answered and no HbA1c', () => {
+    const r = calculateControl(createDefaultAssessment());
+    expect(r.controlLevel).toBe('draft');
+    expect(r.controlScore).toBe(0);
+    expect(r.firedRules).toEqual([]);
+  });
+
+  it('grades an at-target HbA1c as wellControlled with a full score', () => {
+    const r = calculateControl(withHba1c(45));
+    expect(r.controlScore).toBe(100);
+    expect(r.controlLevel).toBe('wellControlled');
+    // DM-016: HbA1c at target (<= 53 mmol/mol)
+    expect(r.firedRules.some((f) => f.id === 'DM-016')).toBe(true);
+  });
+
+  it('grades a very high HbA1c as veryPoor and fires the high-concern rule', () => {
+    const data = withHba1c(95);
+    data.glycaemicControl.severeHypoglycaemia = 'yes';
+    const r = calculateControl(data);
+    expect(r.controlScore).toBe(0);
+    expect(r.controlLevel).toBe('veryPoor');
+    // DM-001 (HbA1c >= 86) and DM-002 (severe hypoglycaemia) are high concern
+    expect(r.firedRules.some((f) => f.id === 'DM-001')).toBe(true);
+    expect(r.firedRules.some((f) => f.concernLevel === 'high')).toBe(true);
+  });
+
+  it('crosses the suboptimal boundary at a mid-range HbA1c (score < 65)', () => {
+    const r = calculateControl(withHba1c(60));
+    expect(r.controlScore).toBe(60);
+    expect(r.controlLevel).toBe('suboptimal');
+  });
+
+  it('scores worse glycaemic control below better control', () => {
+    const good = calculateControl(withHba1c(45));
+    const bad = calculateControl(withHba1c(95));
+    expect(bad.controlScore).toBeLessThan(good.controlScore);
+  });
+});

@@ -1,0 +1,73 @@
+#!/bin/sh
+set -eu
+# bin/test-e2e — run the Playwright smoke + accessibility sweep over form
+# front-ends. The HTML harness drives every form's single-page wizard from a
+# static server; the Svelte harness builds and previews each app, then checks
+# its welcome route.
+#
+# Usage:
+#   bin/test-e2e [--html] [--svelte] [--all | <slug> ...]
+#
+#   --html      run the HTML front-end sweep (default if neither flag given)
+#   --svelte    run the SvelteKit front-end sweep (build + preview per form)
+#   --all       every form (default when no slugs are listed)
+#   <slug> ...  restrict to the named forms
+#
+# Requires e2e/ deps installed (cd e2e && npm ci) and browsers
+# (cd e2e && npx playwright install chromium).
+
+top="$(git rev-parse --show-toplevel)"
+cd "$top"
+
+do_html=0
+do_svelte=0
+slugs=""
+for arg in "$@"; do
+    case "$arg" in
+        --html) do_html=1 ;;
+        --svelte) do_svelte=1 ;;
+        --all) slugs="" ;;
+        --*) echo "unknown flag: $arg" >&2; exit 2 ;;
+        *) slugs="$slugs $arg" ;;
+    esac
+done
+# Default target: HTML.
+if [ "$do_html" -eq 0 ] && [ "$do_svelte" -eq 0 ]; then
+    do_html=1
+fi
+
+# Resolve the slug set.
+if [ -n "$slugs" ]; then
+    FORMS="$(echo "$slugs" | xargs)"
+else
+    FORMS="$(bin/forms-as-kebab-case | xargs)"
+fi
+export FORMS
+
+if [ "$do_html" -eq 1 ]; then
+    echo "== HTML front-end E2E sweep =="
+    ( cd e2e && npx playwright test html-smoke )
+fi
+
+if [ "$do_svelte" -eq 1 ]; then
+    echo "== Svelte front-end E2E sweep =="
+    for slug in $FORMS; do
+        app="forms/$slug/front-end-with-svelte"
+        [ -f "$app/package.json" ] || continue
+        echo "-- $slug --"
+        ( cd "$app" && npm ci --no-audit --no-fund >/dev/null 2>&1 && npm run build >/dev/null 2>&1 )
+        # Preview on a fixed port; capture and kill afterward.
+        ( cd "$app" && npm run preview -- --port 4173 --host 127.0.0.1 >/dev/null 2>&1 ) &
+        preview_pid=$!
+        # Wait for the port to accept connections.
+        i=0
+        while [ "$i" -lt 30 ]; do
+            if curl -sf "http://127.0.0.1:4173/$slug/" >/dev/null 2>&1; then break; fi
+            i=$((i + 1)); sleep 1
+        done
+        BASE_URL="http://127.0.0.1:4173" SLUG="$slug" \
+            sh -c 'cd e2e && npx playwright test svelte-smoke' || true
+        kill "$preview_pid" 2>/dev/null || true
+        wait "$preview_pid" 2>/dev/null || true
+    done
+fi
