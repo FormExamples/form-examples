@@ -220,13 +220,20 @@ Design each feature on the reference forms
       real list handler, and added a content-type assertion so it verifies the
       JSON response, not the welcome page. Verified on a sample against real
       Postgres — all domain list tests pass.
-- [ ] **FINDING — pre-existing auth magic-link tests fail without a mailer.**
-      Every crate's scaffold `tests/requests/auth.rs` has
-      `can_auth_with_magic_link` / `can_reject_invalid_magic_link_token` that
-      panic (auth.rs:320/395) without SMTP/mailer test config — so the CI
-      `rust` job's `cargo test` is red for this reason alone, independent of
-      the fix above. Fix = configure Loco's test/stub mailer per crate (or
-      `#[ignore]` the magic-link tests). Not caused by any change here.
+- [x] **FIXED — broken seed path broke ~4000 tests (route-nesting regression).**
+      What looked like an "auth magic-link mailer" failure was really a broken
+      `App::seed`: the nesting refactor moved fixtures to
+      `src/<snake>/fixtures/users.yaml`, but `seed()` still used
+      `base.join("users.yaml")` where the harness's `base` resolves to the old
+      flat path → seed failed with "No such file or directory". Every seeding
+      test (models, requests, AND the magic-link tests, which seed first)
+      failed — ~14 per crate × 280 ≈ 4000 tests, silent because nothing ran the
+      full suite to completion. Fixed all 279 crates to seed via
+      `CARGO_MANIFEST_DIR`; verified full suites now pass 0-failed (apgar 38,
+      stroke 35, patient-intake 32, mental-health 32). This is what actually
+      unblocks the CI rust job's `cargo test`. Added a `bin/test-loco-routes`
+      gate rejecting the broken `base.join("users.yaml")` pattern. (The 6
+      crates without a users.yaml never call seed — genuinely fine.)
 - [ ] **Loco API integration test rollout** (per crate) once the two findings
       above are resolved — the apgar template is the pattern.
 - [ ] **Serve OpenAPI**: static route in each crate serving its

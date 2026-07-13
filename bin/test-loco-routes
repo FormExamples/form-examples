@@ -29,4 +29,16 @@ if [ "$fail" -gt 0 ]; then
     echo "test-loco-routes: $fail crate(s) expose no domain API" >&2
     exit 1
 fi
-echo "test-loco-routes: every Loco crate wires its domain controllers"
+
+# Seed path: the nested src/<snake>/ layout means fixtures live at
+# src/<snake>/fixtures/; App::seed must not use the old `base.join("users.yaml")`
+# (the test harness's `base` resolves to the flat path → seed fails → every
+# seeding test fails).
+stale_seed=$(grep -rl 'base.join("users.yaml")' "$top"/forms/*/back-end-with-loco/src/*/app.rs 2>/dev/null | wc -l | tr -d ' ')
+if [ "$stale_seed" != "0" ]; then
+    echo "FAIL: $stale_seed crate(s) use the broken base.join(\"users.yaml\") seed path" >&2
+    grep -rl 'base.join("users.yaml")' "$top"/forms/*/back-end-with-loco/src/*/app.rs 2>/dev/null | sed -E 's#.*/forms/([^/]+)/.*#  \1#' >&2
+    exit 1
+fi
+
+echo "test-loco-routes: every Loco crate wires its domain controllers and seeds from the nested fixtures path"
