@@ -81,7 +81,10 @@ impl Hooks for App {
         Ok(())
     }
     async fn seed(ctx: &AppContext, base: &Path) -> Result<()> {
-        db::seed::<users::ActiveModel>(&ctx.db, &base.join("users.yaml").display().to_string())
+        db::seed::<users::ActiveModel>(
+            &ctx.db,
+            &format!("{}/src/united_kingdom_lasting_power_of_attorney_for_health_and_care_decisions/fixtures/users.yaml", env!("CARGO_MANIFEST_DIR")),
+        )
             .await?;
         Ok(())
     }

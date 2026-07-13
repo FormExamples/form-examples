@@ -69,7 +69,10 @@ impl Hooks for App {
         Ok(())
     }
     async fn seed(ctx: &AppContext, base: &Path) -> Result<()> {
-        db::seed::<users::ActiveModel>(&ctx.db, &base.join("users.yaml").display().to_string())
+        db::seed::<users::ActiveModel>(
+            &ctx.db,
+            &format!("{}/src/echocardiogram_test_result/fixtures/users.yaml", env!("CARGO_MANIFEST_DIR")),
+        )
             .await?;
         Ok(())
     }

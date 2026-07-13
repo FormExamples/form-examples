@@ -69,7 +69,10 @@ impl Hooks for App {
         Ok(())
     }
     async fn seed(ctx: &AppContext, base: &Path) -> Result<()> {
-        db::seed::<users::ActiveModel>(&ctx.db, &base.join("users.yaml").display().to_string())
+        db::seed::<users::ActiveModel>(
+            &ctx.db,
+            &format!("{}/src/body_mass_index_and_body_surface_area_calculator/fixtures/users.yaml", env!("CARGO_MANIFEST_DIR")),
+        )
             .await?;
         Ok(())
     }

@@ -65,7 +65,10 @@ impl Hooks for App {
         Ok(())
     }
     async fn seed(ctx: &AppContext, base: &Path) -> Result<()> {
-        db::seed::<users::ActiveModel>(&ctx.db, &base.join("users.yaml").display().to_string())
+        db::seed::<users::ActiveModel>(
+            &ctx.db,
+            &format!("{}/src/objectives_and_key_results_tracker/fixtures/users.yaml", env!("CARGO_MANIFEST_DIR")),
+        )
             .await?;
         Ok(())
     }

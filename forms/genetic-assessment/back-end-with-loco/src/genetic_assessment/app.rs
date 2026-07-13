@@ -71,7 +71,10 @@ impl Hooks for App {
         Ok(())
     }
     async fn seed(ctx: &AppContext, base: &Path) -> Result<()> {
-        db::seed::<users::ActiveModel>(&ctx.db, &base.join("users.yaml").display().to_string()).await?;
+        db::seed::<users::ActiveModel>(
+            &ctx.db,
+            &format!("{}/src/genetic_assessment/fixtures/users.yaml", env!("CARGO_MANIFEST_DIR")),
+        ).await?;
         Ok(())
     }
 }
