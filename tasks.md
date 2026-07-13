@@ -238,10 +238,15 @@ Design each feature on the reference forms
       above are resolved — the apgar template is the pattern.
 - [ ] **Serve OpenAPI**: static route in each crate serving its
       `openapi/*.yaml` at `/api/openapi.yaml`.
-- [ ] **i18n pilot**: extract UI strings behind a minimal message layer in
-      one Svelte form; ship English + Welsh for the Cymraeg-relevant form;
-      write up the pattern in `docs/i18n.md`; defer full rollout (record as
-      future work in plan.md).
+- [i] **Svelte build audit (2026-07-13): CLEAN.** Sampled `npm run build`
+      across diverse forms (incl. the re-ported Lily forms + a test-request
+      form) → all build; `npm run check` + `vitest` also green on the sample.
+      Unlike the Rust suite, the Svelte CI job is genuinely sound.
+- [~] **i18n pilot** (in progress on `medical-language-speaking-assessment-for-
+      cymraeg`): minimal message layer (`src/lib/i18n/`) + a runes locale store
+      + a LocaleSelect switcher mirroring the theme switcher; en-GB + cy for the
+      welcome/layout chrome; `docs/i18n.md` updated to the pilot pattern. Step/
+      clinical content translation deferred (full rollout is future work).
 - [ ] Update every touched form's `CHANGELOG.md` (batchable; group features
       per release entry).
 
