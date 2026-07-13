@@ -1,0 +1,394 @@
+{
+  "engine": "front-end-with-html",
+  "graderHint": "gradeHHIES",
+  "note": "Realistic filled-in states in the hearing-aid-assessment scoring engine's shape. Graded on the Hearing Handicap Inventory for the Elderly — Screening (HHIE-S): 10 items each scored 0 (no), 2 (sometimes), or 4 (yes); total 0-40, banded No handicap (0-8), Mild to moderate handicap (10-22), Significant handicap (24-40). The auto-discovered grader is hearingLossGrade, a per-item PTA helper taking a bare number, so graderHint pins the state-taking gradeHHIES. `expected` is computed by `bin/test-personas --update` and verified by `bin/test-personas`.",
+  "personas": [
+    {
+      "name": "no-handicap",
+      "description": "Mild high-frequency loss with minimal self-perceived handicap: HHIE-S total 4 — No handicap.",
+      "state": {
+        "demographics": {
+          "firstName": "",
+          "lastName": "",
+          "dateOfBirth": "",
+          "sex": "female"
+        },
+        "hearingHistory": {
+          "onsetType": "gradual",
+          "duration": "1-5-years",
+          "affectedEar": "bilateral",
+          "familyHistory": "no",
+          "noiseExposure": "minimal",
+          "tinnitus": "no",
+          "vertigo": "no",
+          "earSurgery": "no",
+          "ototoxicMedications": "no"
+        },
+        "hhiesQuestionnaire": {
+          "q1": 2,
+          "q2": 0,
+          "q3": 2,
+          "q4": 0,
+          "q5": 0,
+          "q6": 0,
+          "q7": 0,
+          "q8": 0,
+          "q9": 0,
+          "q10": 0
+        },
+        "communicationDifficulties": {
+          "quietConversation": "no-difficulty",
+          "groupConversation": "some-difficulty",
+          "telephone": "no-difficulty",
+          "television": "some-difficulty",
+          "publicPlaces": "some-difficulty",
+          "workDifficulty": "no-difficulty"
+        },
+        "currentHearingAids": {
+          "hasHearingAids": "no",
+          "leftAidType": "",
+          "rightAidType": "",
+          "aidAge": "",
+          "satisfaction": "",
+          "dailyUseHours": null,
+          "difficulties": ""
+        },
+        "earExamination": {
+          "leftExternalEar": "normal",
+          "rightExternalEar": "normal",
+          "leftTympanicMembrane": "normal",
+          "rightTympanicMembrane": "normal",
+          "cerumenLeft": "none",
+          "cerumenRight": "none",
+          "abnormalities": ""
+        },
+        "audiogramResults": {
+          "leftPTA": 32,
+          "rightPTA": 30,
+          "leftSRT": 30,
+          "rightSRT": 30,
+          "leftWordRecognition": 96,
+          "rightWordRecognition": 96,
+          "hearingLossType": "sensorineural"
+        },
+        "lifestyleNeeds": {
+          "socialActivity": "moderate",
+          "occupationRequirements": "",
+          "hobbies": "",
+          "technologyComfort": "comfortable",
+          "dexterity": "normal",
+          "visionStatus": "normal"
+        },
+        "expectationsGoals": {
+          "primaryGoal": "group-conversation",
+          "realisticExpectations": "yes",
+          "willingnessToWear": "willing",
+          "budgetConcerns": "",
+          "cosmeticConcerns": ""
+        }
+      },
+      "expected": {
+        "score": 4,
+        "severity": "No handicap",
+        "firedRules": [
+          {
+            "id": "HHIES-01",
+            "domain": "Social/Situational",
+            "description": "Does a hearing problem cause you to feel embarrassed when meeting new people?",
+            "score": 2
+          },
+          {
+            "id": "HHIES-03",
+            "domain": "Social/Situational",
+            "description": "Do you have difficulty hearing when someone speaks in a whisper?",
+            "score": 2
+          }
+        ]
+      }
+    },
+    {
+      "name": "mild-to-moderate-handicap",
+      "description": "Moderate bilateral loss affecting conversation and telephone: HHIE-S total 16 — Mild to moderate handicap.",
+      "state": {
+        "demographics": {
+          "firstName": "",
+          "lastName": "",
+          "dateOfBirth": "",
+          "sex": "male"
+        },
+        "hearingHistory": {
+          "onsetType": "gradual",
+          "duration": "5-10-years",
+          "affectedEar": "bilateral",
+          "familyHistory": "yes",
+          "noiseExposure": "occupational",
+          "tinnitus": "yes",
+          "vertigo": "no",
+          "earSurgery": "no",
+          "ototoxicMedications": "no"
+        },
+        "hhiesQuestionnaire": {
+          "q1": 2,
+          "q2": 2,
+          "q3": 4,
+          "q4": 2,
+          "q5": 0,
+          "q6": 2,
+          "q7": 2,
+          "q8": 2,
+          "q9": 0,
+          "q10": 0
+        },
+        "communicationDifficulties": {
+          "quietConversation": "some-difficulty",
+          "groupConversation": "great-difficulty",
+          "telephone": "some-difficulty",
+          "television": "great-difficulty",
+          "publicPlaces": "great-difficulty",
+          "workDifficulty": "some-difficulty"
+        },
+        "currentHearingAids": {
+          "hasHearingAids": "no",
+          "leftAidType": "",
+          "rightAidType": "",
+          "aidAge": "",
+          "satisfaction": "",
+          "dailyUseHours": null,
+          "difficulties": ""
+        },
+        "earExamination": {
+          "leftExternalEar": "normal",
+          "rightExternalEar": "normal",
+          "leftTympanicMembrane": "normal",
+          "rightTympanicMembrane": "normal",
+          "cerumenLeft": "partial",
+          "cerumenRight": "none",
+          "abnormalities": ""
+        },
+        "audiogramResults": {
+          "leftPTA": 52,
+          "rightPTA": 48,
+          "leftSRT": 50,
+          "rightSRT": 45,
+          "leftWordRecognition": 84,
+          "rightWordRecognition": 88,
+          "hearingLossType": "sensorineural"
+        },
+        "lifestyleNeeds": {
+          "socialActivity": "active",
+          "occupationRequirements": "high",
+          "hobbies": "",
+          "technologyComfort": "comfortable",
+          "dexterity": "normal",
+          "visionStatus": "corrected"
+        },
+        "expectationsGoals": {
+          "primaryGoal": "work-communication",
+          "realisticExpectations": "yes",
+          "willingnessToWear": "willing",
+          "budgetConcerns": "some",
+          "cosmeticConcerns": "some"
+        }
+      },
+      "expected": {
+        "score": 16,
+        "severity": "Mild to moderate handicap",
+        "firedRules": [
+          {
+            "id": "HHIES-01",
+            "domain": "Social/Situational",
+            "description": "Does a hearing problem cause you to feel embarrassed when meeting new people?",
+            "score": 2
+          },
+          {
+            "id": "HHIES-02",
+            "domain": "Emotional",
+            "description": "Does a hearing problem cause you to feel frustrated when talking to members of your family?",
+            "score": 2
+          },
+          {
+            "id": "HHIES-03",
+            "domain": "Social/Situational",
+            "description": "Do you have difficulty hearing when someone speaks in a whisper?",
+            "score": 4
+          },
+          {
+            "id": "HHIES-04",
+            "domain": "Emotional",
+            "description": "Do you feel handicapped by a hearing problem?",
+            "score": 2
+          },
+          {
+            "id": "HHIES-06",
+            "domain": "Social/Situational",
+            "description": "Does a hearing problem cause you to attend religious services less often than you would like?",
+            "score": 2
+          },
+          {
+            "id": "HHIES-07",
+            "domain": "Emotional",
+            "description": "Does a hearing problem cause you to have arguments with family members?",
+            "score": 2
+          },
+          {
+            "id": "HHIES-08",
+            "domain": "Social/Situational",
+            "description": "Does a hearing problem cause you difficulty when listening to TV or radio?",
+            "score": 2
+          }
+        ]
+      }
+    },
+    {
+      "name": "significant-handicap",
+      "description": "Severe bilateral loss with pervasive daily-life impact: HHIE-S total 34 — Significant handicap.",
+      "state": {
+        "demographics": {
+          "firstName": "",
+          "lastName": "",
+          "dateOfBirth": "",
+          "sex": "female"
+        },
+        "hearingHistory": {
+          "onsetType": "gradual",
+          "duration": "more-than-10-years",
+          "affectedEar": "bilateral",
+          "familyHistory": "yes",
+          "noiseExposure": "occupational",
+          "tinnitus": "yes",
+          "vertigo": "no",
+          "earSurgery": "no",
+          "ototoxicMedications": "no"
+        },
+        "hhiesQuestionnaire": {
+          "q1": 4,
+          "q2": 4,
+          "q3": 4,
+          "q4": 4,
+          "q5": 2,
+          "q6": 4,
+          "q7": 4,
+          "q8": 4,
+          "q9": 2,
+          "q10": 2
+        },
+        "communicationDifficulties": {
+          "quietConversation": "great-difficulty",
+          "groupConversation": "great-difficulty",
+          "telephone": "great-difficulty",
+          "television": "great-difficulty",
+          "publicPlaces": "great-difficulty",
+          "workDifficulty": "great-difficulty"
+        },
+        "currentHearingAids": {
+          "hasHearingAids": "no",
+          "leftAidType": "",
+          "rightAidType": "",
+          "aidAge": "",
+          "satisfaction": "",
+          "dailyUseHours": null,
+          "difficulties": ""
+        },
+        "earExamination": {
+          "leftExternalEar": "normal",
+          "rightExternalEar": "normal",
+          "leftTympanicMembrane": "normal",
+          "rightTympanicMembrane": "normal",
+          "cerumenLeft": "none",
+          "cerumenRight": "none",
+          "abnormalities": ""
+        },
+        "audiogramResults": {
+          "leftPTA": 72,
+          "rightPTA": 76,
+          "leftSRT": 70,
+          "rightSRT": 75,
+          "leftWordRecognition": 62,
+          "rightWordRecognition": 58,
+          "hearingLossType": "sensorineural"
+        },
+        "lifestyleNeeds": {
+          "socialActivity": "withdrawn",
+          "occupationRequirements": "retired",
+          "hobbies": "",
+          "technologyComfort": "uncomfortable",
+          "dexterity": "reduced",
+          "visionStatus": "corrected"
+        },
+        "expectationsGoals": {
+          "primaryGoal": "family-conversation",
+          "realisticExpectations": "yes",
+          "willingnessToWear": "willing",
+          "budgetConcerns": "significant",
+          "cosmeticConcerns": "none"
+        }
+      },
+      "expected": {
+        "score": 34,
+        "severity": "Significant handicap",
+        "firedRules": [
+          {
+            "id": "HHIES-01",
+            "domain": "Social/Situational",
+            "description": "Does a hearing problem cause you to feel embarrassed when meeting new people?",
+            "score": 4
+          },
+          {
+            "id": "HHIES-02",
+            "domain": "Emotional",
+            "description": "Does a hearing problem cause you to feel frustrated when talking to members of your family?",
+            "score": 4
+          },
+          {
+            "id": "HHIES-03",
+            "domain": "Social/Situational",
+            "description": "Do you have difficulty hearing when someone speaks in a whisper?",
+            "score": 4
+          },
+          {
+            "id": "HHIES-04",
+            "domain": "Emotional",
+            "description": "Do you feel handicapped by a hearing problem?",
+            "score": 4
+          },
+          {
+            "id": "HHIES-05",
+            "domain": "Social/Situational",
+            "description": "Does a hearing problem cause you difficulty when visiting friends, relatives, or neighbours?",
+            "score": 2
+          },
+          {
+            "id": "HHIES-06",
+            "domain": "Social/Situational",
+            "description": "Does a hearing problem cause you to attend religious services less often than you would like?",
+            "score": 4
+          },
+          {
+            "id": "HHIES-07",
+            "domain": "Emotional",
+            "description": "Does a hearing problem cause you to have arguments with family members?",
+            "score": 4
+          },
+          {
+            "id": "HHIES-08",
+            "domain": "Social/Situational",
+            "description": "Does a hearing problem cause you difficulty when listening to TV or radio?",
+            "score": 4
+          },
+          {
+            "id": "HHIES-09",
+            "domain": "Emotional",
+            "description": "Do you feel that any difficulty with your hearing limits or hampers your personal or social life?",
+            "score": 2
+          },
+          {
+            "id": "HHIES-10",
+            "domain": "Emotional",
+            "description": "Does a hearing problem cause you difficulty when in a restaurant with relatives or friends?",
+            "score": 2
+          }
+        ]
+      }
+    }
+  ]
+}

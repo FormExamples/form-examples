@@ -1,0 +1,574 @@
+{
+  "engine": "front-end-with-html",
+  "graderHint": "calculateLD",
+  "note": "Realistic filled-in states in the learning-disability-assessment scoring engine's shape. Graded on the mean adaptive-functioning support level across ten conceptual/social/practical domains (independent 0, some-support 1, significant-support 2, full-support 3), banded mean <1 mild, 1-1.99 moderate, 2-2.59 severe, >=2.6 profound. The auto-discovered grader is levelScore, a per-item helper taking an enum string, so graderHint pins the state-taking calculateLD. `expected` is computed by `bin/test-personas --update` and verified by `bin/test-personas`.",
+  "personas": [
+    {
+      "name": "mild",
+      "description": "Largely independent adult needing occasional support with literacy and money: mean adaptive score 0.2 — Mild learning disability.",
+      "state": {
+        "demographics": {
+          "firstName": "",
+          "lastName": "",
+          "dateOfBirth": "",
+          "sex": "male",
+          "nhsNumber": "",
+          "gpPractice": "",
+          "preferredName": "",
+          "ethnicity": "white"
+        },
+        "carerSupport": {
+          "primaryCarerName": "",
+          "primaryCarerRelationship": "none",
+          "primaryCarerPhone": "",
+          "livesWithCarer": "no",
+          "livingArrangement": "supported-living",
+          "hasSupportPlan": "yes",
+          "hasSocialWorker": "no",
+          "socialWorkerName": "",
+          "otherSupports": ""
+        },
+        "communicationNeeds": {
+          "usesEasyRead": "yes",
+          "usesMakaton": "no",
+          "usesAac": "no",
+          "aacDetails": "",
+          "usesPictures": "no",
+          "needsInterpreter": "no",
+          "interpreterLanguage": "",
+          "verbalAbility": "fluent",
+          "preferredCommunicationMethod": "verbal",
+          "communicationNotes": ""
+        },
+        "medicalReview": {
+          "hasEpilepsy": "no",
+          "lastSeizureDate": "",
+          "seizuresPerMonth": null,
+          "hasMentalHealthDiagnosis": "no",
+          "mentalHealthDetails": "",
+          "takesPsychotropic": "no",
+          "stompReviewDone": "not-applicable",
+          "currentMedications": "",
+          "hasDysphagia": "no",
+          "hasConstipation": "no",
+          "hasIncontinence": "no",
+          "hasSleepProblems": "no",
+          "otherMedicalIssues": ""
+        },
+        "physicalExamination": {
+          "weight": 78,
+          "height": 178,
+          "bmi": 25,
+          "bloodPressureSystolic": 122,
+          "bloodPressureDiastolic": 78,
+          "pulse": 72,
+          "visionChecked": "yes",
+          "visionDate": "",
+          "hearingChecked": "yes",
+          "hearingDate": "",
+          "dentalChecked": "yes",
+          "dentalDate": "",
+          "vaccinationsUpToDate": "yes",
+          "cervicalScreening": "not-applicable",
+          "breastScreening": "not-applicable",
+          "bowelScreening": "up-to-date"
+        },
+        "adaptiveFunctioning": {
+          "conceptualLanguage": "independent",
+          "conceptualReadingWriting": "some-support",
+          "conceptualMoneyTime": "some-support",
+          "socialFriendships": "independent",
+          "socialEmpathy": "independent",
+          "socialCommunication": "independent",
+          "practicalSelfCare": "independent",
+          "practicalHomeLiving": "independent",
+          "practicalCommunity": "independent",
+          "practicalWorkSchool": "independent"
+        },
+        "behaviouralConcerns": {
+          "selfInjurious": "no",
+          "aggression": "no",
+          "propertyDamage": "no",
+          "absconding": "no",
+          "sexualisedBehaviour": "no",
+          "knownTriggers": "",
+          "calmingStrategies": "",
+          "hasBehaviourSupportPlan": "no",
+          "usesPrn": "no",
+          "prnDetails": ""
+        },
+        "mentalCapacityConsent": {
+          "canConsentToHealthCheck": "yes",
+          "canConsentToMedication": "yes",
+          "canConsentToFinances": "yes",
+          "hasLpa": "no",
+          "lpaDetails": "",
+          "hasDols": "no",
+          "bestInterestsRequired": "no",
+          "bestInterestsNotes": ""
+        },
+        "reasonableAdjustments": {
+          "needsLongerAppointments": "no",
+          "needsQuietRoom": "no",
+          "needsFamiliarStaff": "no",
+          "needsEasyReadLetters": "yes",
+          "needsHomeVisits": "no",
+          "needsDoubleAppointment": "no",
+          "flagOnRecord": "yes",
+          "otherAdjustments": ""
+        },
+        "healthActionPlan": {
+          "actions": [],
+          "nextReviewDate": "",
+          "sharedWith": "",
+          "planNotes": ""
+        }
+      },
+      "expected": {
+        "adaptiveScore": 0.2,
+        "severityCategory": "mild",
+        "answeredCount": 10,
+        "firedRules": [
+          {
+            "id": "LD-CON-001",
+            "category": "Conceptual",
+            "description": "Language and vocabulary",
+            "score": 0
+          },
+          {
+            "id": "LD-CON-002",
+            "category": "Conceptual",
+            "description": "Reading and writing",
+            "score": 1
+          },
+          {
+            "id": "LD-CON-003",
+            "category": "Conceptual",
+            "description": "Money, time and number concepts",
+            "score": 1
+          },
+          {
+            "id": "LD-SOC-001",
+            "category": "Social",
+            "description": "Friendships and relationships",
+            "score": 0
+          },
+          {
+            "id": "LD-SOC-002",
+            "category": "Social",
+            "description": "Empathy and social judgement",
+            "score": 0
+          },
+          {
+            "id": "LD-SOC-003",
+            "category": "Social",
+            "description": "Social communication",
+            "score": 0
+          },
+          {
+            "id": "LD-PRA-001",
+            "category": "Practical",
+            "description": "Personal self-care (washing, dressing, eating)",
+            "score": 0
+          },
+          {
+            "id": "LD-PRA-002",
+            "category": "Practical",
+            "description": "Home living (cooking, cleaning, household tasks)",
+            "score": 0
+          },
+          {
+            "id": "LD-PRA-003",
+            "category": "Practical",
+            "description": "Community use (shopping, transport, money)",
+            "score": 0
+          },
+          {
+            "id": "LD-PRA-004",
+            "category": "Practical",
+            "description": "Work or school skills",
+            "score": 0
+          }
+        ]
+      }
+    },
+    {
+      "name": "moderate",
+      "description": "Needs significant support across literacy, communication and household tasks: mean adaptive score 1.5 — Moderate learning disability.",
+      "state": {
+        "demographics": {
+          "firstName": "",
+          "lastName": "",
+          "dateOfBirth": "",
+          "sex": "female",
+          "nhsNumber": "",
+          "gpPractice": "",
+          "preferredName": "",
+          "ethnicity": "white"
+        },
+        "carerSupport": {
+          "primaryCarerName": "",
+          "primaryCarerRelationship": "parent",
+          "primaryCarerPhone": "",
+          "livesWithCarer": "yes",
+          "livingArrangement": "family-home",
+          "hasSupportPlan": "yes",
+          "hasSocialWorker": "yes",
+          "socialWorkerName": "",
+          "otherSupports": ""
+        },
+        "communicationNeeds": {
+          "usesEasyRead": "yes",
+          "usesMakaton": "yes",
+          "usesAac": "no",
+          "aacDetails": "",
+          "usesPictures": "yes",
+          "needsInterpreter": "no",
+          "interpreterLanguage": "",
+          "verbalAbility": "short-sentences",
+          "preferredCommunicationMethod": "verbal-and-signs",
+          "communicationNotes": ""
+        },
+        "medicalReview": {
+          "hasEpilepsy": "no",
+          "lastSeizureDate": "",
+          "seizuresPerMonth": null,
+          "hasMentalHealthDiagnosis": "yes",
+          "mentalHealthDetails": "Anxiety",
+          "takesPsychotropic": "no",
+          "stompReviewDone": "not-applicable",
+          "currentMedications": "",
+          "hasDysphagia": "no",
+          "hasConstipation": "yes",
+          "hasIncontinence": "no",
+          "hasSleepProblems": "yes",
+          "otherMedicalIssues": ""
+        },
+        "physicalExamination": {
+          "weight": 84,
+          "height": 164,
+          "bmi": 31,
+          "bloodPressureSystolic": 128,
+          "bloodPressureDiastolic": 80,
+          "pulse": 78,
+          "visionChecked": "yes",
+          "visionDate": "",
+          "hearingChecked": "yes",
+          "hearingDate": "",
+          "dentalChecked": "no",
+          "dentalDate": "",
+          "vaccinationsUpToDate": "yes",
+          "cervicalScreening": "declined",
+          "breastScreening": "not-applicable",
+          "bowelScreening": "not-applicable"
+        },
+        "adaptiveFunctioning": {
+          "conceptualLanguage": "some-support",
+          "conceptualReadingWriting": "significant-support",
+          "conceptualMoneyTime": "significant-support",
+          "socialFriendships": "some-support",
+          "socialEmpathy": "some-support",
+          "socialCommunication": "significant-support",
+          "practicalSelfCare": "some-support",
+          "practicalHomeLiving": "significant-support",
+          "practicalCommunity": "significant-support",
+          "practicalWorkSchool": "some-support"
+        },
+        "behaviouralConcerns": {
+          "selfInjurious": "no",
+          "aggression": "no",
+          "propertyDamage": "no",
+          "absconding": "no",
+          "sexualisedBehaviour": "no",
+          "knownTriggers": "Changes to routine",
+          "calmingStrategies": "Familiar staff, quiet space",
+          "hasBehaviourSupportPlan": "no",
+          "usesPrn": "no",
+          "prnDetails": ""
+        },
+        "mentalCapacityConsent": {
+          "canConsentToHealthCheck": "with-support",
+          "canConsentToMedication": "with-support",
+          "canConsentToFinances": "no",
+          "hasLpa": "no",
+          "lpaDetails": "",
+          "hasDols": "no",
+          "bestInterestsRequired": "yes",
+          "bestInterestsNotes": ""
+        },
+        "reasonableAdjustments": {
+          "needsLongerAppointments": "yes",
+          "needsQuietRoom": "yes",
+          "needsFamiliarStaff": "yes",
+          "needsEasyReadLetters": "yes",
+          "needsHomeVisits": "no",
+          "needsDoubleAppointment": "yes",
+          "flagOnRecord": "yes",
+          "otherAdjustments": ""
+        },
+        "healthActionPlan": {
+          "actions": [],
+          "nextReviewDate": "",
+          "sharedWith": "",
+          "planNotes": ""
+        }
+      },
+      "expected": {
+        "adaptiveScore": 1.5,
+        "severityCategory": "moderate",
+        "answeredCount": 10,
+        "firedRules": [
+          {
+            "id": "LD-CON-001",
+            "category": "Conceptual",
+            "description": "Language and vocabulary",
+            "score": 1
+          },
+          {
+            "id": "LD-CON-002",
+            "category": "Conceptual",
+            "description": "Reading and writing",
+            "score": 2
+          },
+          {
+            "id": "LD-CON-003",
+            "category": "Conceptual",
+            "description": "Money, time and number concepts",
+            "score": 2
+          },
+          {
+            "id": "LD-SOC-001",
+            "category": "Social",
+            "description": "Friendships and relationships",
+            "score": 1
+          },
+          {
+            "id": "LD-SOC-002",
+            "category": "Social",
+            "description": "Empathy and social judgement",
+            "score": 1
+          },
+          {
+            "id": "LD-SOC-003",
+            "category": "Social",
+            "description": "Social communication",
+            "score": 2
+          },
+          {
+            "id": "LD-PRA-001",
+            "category": "Practical",
+            "description": "Personal self-care (washing, dressing, eating)",
+            "score": 1
+          },
+          {
+            "id": "LD-PRA-002",
+            "category": "Practical",
+            "description": "Home living (cooking, cleaning, household tasks)",
+            "score": 2
+          },
+          {
+            "id": "LD-PRA-003",
+            "category": "Practical",
+            "description": "Community use (shopping, transport, money)",
+            "score": 2
+          },
+          {
+            "id": "LD-PRA-004",
+            "category": "Practical",
+            "description": "Work or school skills",
+            "score": 1
+          }
+        ]
+      }
+    },
+    {
+      "name": "profound",
+      "description": "Full support required across almost all adaptive domains with complex needs: mean adaptive score 2.8 — Profound learning disability.",
+      "state": {
+        "demographics": {
+          "firstName": "",
+          "lastName": "",
+          "dateOfBirth": "",
+          "sex": "male",
+          "nhsNumber": "",
+          "gpPractice": "",
+          "preferredName": "",
+          "ethnicity": "white"
+        },
+        "carerSupport": {
+          "primaryCarerName": "",
+          "primaryCarerRelationship": "paid-carer",
+          "primaryCarerPhone": "",
+          "livesWithCarer": "yes",
+          "livingArrangement": "residential-care",
+          "hasSupportPlan": "yes",
+          "hasSocialWorker": "yes",
+          "socialWorkerName": "",
+          "otherSupports": ""
+        },
+        "communicationNeeds": {
+          "usesEasyRead": "no",
+          "usesMakaton": "no",
+          "usesAac": "yes",
+          "aacDetails": "Objects of reference and eye-gaze",
+          "usesPictures": "yes",
+          "needsInterpreter": "no",
+          "interpreterLanguage": "",
+          "verbalAbility": "non-verbal",
+          "preferredCommunicationMethod": "non-verbal-cues",
+          "communicationNotes": ""
+        },
+        "medicalReview": {
+          "hasEpilepsy": "yes",
+          "lastSeizureDate": "",
+          "seizuresPerMonth": 3,
+          "hasMentalHealthDiagnosis": "no",
+          "mentalHealthDetails": "",
+          "takesPsychotropic": "yes",
+          "stompReviewDone": "yes",
+          "currentMedications": "Levetiracetam",
+          "hasDysphagia": "yes",
+          "hasConstipation": "yes",
+          "hasIncontinence": "yes",
+          "hasSleepProblems": "yes",
+          "otherMedicalIssues": "Cerebral palsy, gastrostomy fed"
+        },
+        "physicalExamination": {
+          "weight": 46,
+          "height": 158,
+          "bmi": 18,
+          "bloodPressureSystolic": 116,
+          "bloodPressureDiastolic": 72,
+          "pulse": 84,
+          "visionChecked": "yes",
+          "visionDate": "",
+          "hearingChecked": "yes",
+          "hearingDate": "",
+          "dentalChecked": "yes",
+          "dentalDate": "",
+          "vaccinationsUpToDate": "yes",
+          "cervicalScreening": "not-applicable",
+          "breastScreening": "not-applicable",
+          "bowelScreening": "not-applicable"
+        },
+        "adaptiveFunctioning": {
+          "conceptualLanguage": "full-support",
+          "conceptualReadingWriting": "full-support",
+          "conceptualMoneyTime": "full-support",
+          "socialFriendships": "full-support",
+          "socialEmpathy": "full-support",
+          "socialCommunication": "full-support",
+          "practicalSelfCare": "full-support",
+          "practicalHomeLiving": "full-support",
+          "practicalCommunity": "significant-support",
+          "practicalWorkSchool": "significant-support"
+        },
+        "behaviouralConcerns": {
+          "selfInjurious": "occasional",
+          "aggression": "no",
+          "propertyDamage": "no",
+          "absconding": "no",
+          "sexualisedBehaviour": "no",
+          "knownTriggers": "Pain, discomfort, overstimulation",
+          "calmingStrategies": "One-to-one, low-arousal environment",
+          "hasBehaviourSupportPlan": "yes",
+          "usesPrn": "yes",
+          "prnDetails": "As per positive behaviour support plan"
+        },
+        "mentalCapacityConsent": {
+          "canConsentToHealthCheck": "no",
+          "canConsentToMedication": "no",
+          "canConsentToFinances": "no",
+          "hasLpa": "yes",
+          "lpaDetails": "Health and welfare LPA held by family",
+          "hasDols": "yes",
+          "bestInterestsRequired": "yes",
+          "bestInterestsNotes": ""
+        },
+        "reasonableAdjustments": {
+          "needsLongerAppointments": "yes",
+          "needsQuietRoom": "yes",
+          "needsFamiliarStaff": "yes",
+          "needsEasyReadLetters": "no",
+          "needsHomeVisits": "yes",
+          "needsDoubleAppointment": "yes",
+          "flagOnRecord": "yes",
+          "otherAdjustments": ""
+        },
+        "healthActionPlan": {
+          "actions": [],
+          "nextReviewDate": "",
+          "sharedWith": "",
+          "planNotes": ""
+        }
+      },
+      "expected": {
+        "adaptiveScore": 2.8,
+        "severityCategory": "profound",
+        "answeredCount": 10,
+        "firedRules": [
+          {
+            "id": "LD-CON-001",
+            "category": "Conceptual",
+            "description": "Language and vocabulary",
+            "score": 3
+          },
+          {
+            "id": "LD-CON-002",
+            "category": "Conceptual",
+            "description": "Reading and writing",
+            "score": 3
+          },
+          {
+            "id": "LD-CON-003",
+            "category": "Conceptual",
+            "description": "Money, time and number concepts",
+            "score": 3
+          },
+          {
+            "id": "LD-SOC-001",
+            "category": "Social",
+            "description": "Friendships and relationships",
+            "score": 3
+          },
+          {
+            "id": "LD-SOC-002",
+            "category": "Social",
+            "description": "Empathy and social judgement",
+            "score": 3
+          },
+          {
+            "id": "LD-SOC-003",
+            "category": "Social",
+            "description": "Social communication",
+            "score": 3
+          },
+          {
+            "id": "LD-PRA-001",
+            "category": "Practical",
+            "description": "Personal self-care (washing, dressing, eating)",
+            "score": 3
+          },
+          {
+            "id": "LD-PRA-002",
+            "category": "Practical",
+            "description": "Home living (cooking, cleaning, household tasks)",
+            "score": 3
+          },
+          {
+            "id": "LD-PRA-003",
+            "category": "Practical",
+            "description": "Community use (shopping, transport, money)",
+            "score": 2
+          },
+          {
+            "id": "LD-PRA-004",
+            "category": "Practical",
+            "description": "Work or school skills",
+            "score": 2
+          }
+        ]
+      }
+    }
+  ]
+}

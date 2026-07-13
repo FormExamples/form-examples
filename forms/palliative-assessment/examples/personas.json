@@ -1,0 +1,614 @@
+{
+  "engine": "front-end-with-html",
+  "graderHint": "gradeESAS",
+  "note": "Realistic filled-in states in the ESAS-r engine's shape. `expected` is computed by `bin/test-personas --update` and verified by `bin/test-personas`.",
+  "personas": [
+    {
+      "name": "mild-symptom-burden",
+      "description": "Early palliative review with low symptom burden: ESAS-r total 18 — Mild band; no individual symptom reaches the severe (>= 7) threshold.",
+      "state": {
+        "demographics": {
+          "firstName": "",
+          "lastName": "",
+          "dateOfBirth": "",
+          "sex": "female",
+          "nhsOrMrnNumber": "",
+          "preferredLanguage": "English",
+          "ethnicity": "",
+          "reporterRole": "patient",
+          "reporterName": "",
+          "assessmentDate": "",
+          "assessmentSetting": "outpatient-clinic"
+        },
+        "primaryDiagnosisPrognosis": {
+          "primaryDiagnosis": "Metastatic breast cancer",
+          "secondaryDiagnoses": "",
+          "dateOfDiagnosis": "",
+          "stageOrSeverity": "Stage IV",
+          "diseaseProgressing": "no",
+          "prognosisHorizon": "months-to-years",
+          "surpriseQuestion": "no",
+          "prognosticIndicators": "",
+          "relevantTreatmentHistory": "On endocrine therapy"
+        },
+        "esasrSymptoms": {
+          "pain": 2,
+          "tiredness": 3,
+          "drowsiness": 2,
+          "nausea": 1,
+          "lackOfAppetite": 2,
+          "shortnessOfBreath": 1,
+          "depression": 2,
+          "anxiety": 2,
+          "wellbeing": 3,
+          "other": 0,
+          "otherLabel": "",
+          "symptomNotes": ""
+        },
+        "performanceStatus": {
+          "ppsScore": null,
+          "akpsScore": null,
+          "ecogScore": null,
+          "mobilityNotes": "",
+          "activityLevel": "",
+          "bedBound": "",
+          "requiresAssistanceWithAdls": "",
+          "adlNotes": ""
+        },
+        "goalsOfCareACP": {
+          "patientPrioritiesAndWishes": "",
+          "preferredPlaceOfCare": "",
+          "preferredPlaceOfDeath": "",
+          "respectFormCompleted": "",
+          "respectFormDate": "",
+          "adrtCompleted": "",
+          "adrtDate": "",
+          "lpaHealthAndWelfare": "",
+          "lpaName": "",
+          "dnacprDocumented": "",
+          "dnacprDate": "",
+          "ceilingOfTreatmentDiscussed": "",
+          "ceilingOfTreatmentNotes": ""
+        },
+        "medicationsSymptomControl": {
+          "regularMedications": [],
+          "asNeededMedications": [],
+          "syringeDriverInUse": "no",
+          "syringeDriverDetails": "",
+          "anticipatoryMedsPrescribed": "no",
+          "anticipatoryMedsNotes": "",
+          "symptomControlOverall": "good",
+          "barriersToControl": "",
+          "planNotes": ""
+        },
+        "psychosocialSpiritualConcerns": {
+          "moodConcerns": "no",
+          "moodNotes": "",
+          "anxietyConcerns": "no",
+          "anxietyNotes": "",
+          "existentialDistress": "no",
+          "existentialNotes": "",
+          "spiritualSupportRequested": "no",
+          "faithOrBelief": "",
+          "chaplaincyNotes": "",
+          "unresolvedConcerns": "no",
+          "unresolvedNotes": ""
+        },
+        "carerFamilySupport": {
+          "primaryCarerName": "",
+          "primaryCarerRelationship": "",
+          "carerLivesWithPatient": "",
+          "carerStrainReported": "",
+          "carerStrainLevel": "",
+          "carerStrainNotes": "",
+          "respiteRequired": "",
+          "respiteNotes": "",
+          "childrenInHousehold": "",
+          "childrenSupportNotes": "",
+          "bereavementRiskIdentified": "",
+          "bereavementNotes": ""
+        },
+        "multidisciplinaryPlan": {
+          "specialistPalliativeCareInvolved": "yes",
+          "communityNursingInvolved": "no",
+          "hospiceReferralMade": "no",
+          "socialWorkReferralMade": "no",
+          "occupationalTherapyReferralMade": "no",
+          "physiotherapyReferralMade": "no",
+          "dieticianReferralMade": "no",
+          "chaplaincyReferralMade": "no",
+          "psychologyReferralMade": "no",
+          "otherReferrals": "",
+          "reviewInterval": "4-weeks",
+          "keyWorkerName": "",
+          "planSummary": "Continue current management, routine review"
+        }
+      },
+      "expected": {
+        "esasTotal": 18,
+        "severityBand": "mild",
+        "answeredCount": 10,
+        "firedRules": [
+          {
+            "id": "PALL-ESAS-001",
+            "category": "Pain",
+            "description": "Pain intensity (ESAS-r 0-10).",
+            "score": 2
+          },
+          {
+            "id": "PALL-ESAS-002",
+            "category": "Tiredness",
+            "description": "Tiredness / lack of energy (ESAS-r 0-10).",
+            "score": 3
+          },
+          {
+            "id": "PALL-ESAS-003",
+            "category": "Drowsiness",
+            "description": "Drowsiness / feeling sleepy (ESAS-r 0-10).",
+            "score": 2
+          },
+          {
+            "id": "PALL-ESAS-004",
+            "category": "Nausea",
+            "description": "Nausea (ESAS-r 0-10).",
+            "score": 1
+          },
+          {
+            "id": "PALL-ESAS-005",
+            "category": "Lack of Appetite",
+            "description": "Lack of appetite (ESAS-r 0-10).",
+            "score": 2
+          },
+          {
+            "id": "PALL-ESAS-006",
+            "category": "Shortness of Breath",
+            "description": "Shortness of breath / dyspnoea (ESAS-r 0-10).",
+            "score": 1
+          },
+          {
+            "id": "PALL-ESAS-007",
+            "category": "Depression",
+            "description": "Depression / feeling sad (ESAS-r 0-10).",
+            "score": 2
+          },
+          {
+            "id": "PALL-ESAS-008",
+            "category": "Anxiety",
+            "description": "Anxiety / feeling nervous (ESAS-r 0-10).",
+            "score": 2
+          },
+          {
+            "id": "PALL-ESAS-009",
+            "category": "Wellbeing",
+            "description": "Overall wellbeing (ESAS-r 0-10; higher = worse).",
+            "score": 3
+          },
+          {
+            "id": "PALL-ESAS-010",
+            "category": "Other Symptom",
+            "description": "Other symptom (e.g. constipation, sleep, itch) (ESAS-r 0-10).",
+            "score": 0
+          }
+        ],
+        "individualFlags": []
+      }
+    },
+    {
+      "name": "moderate-symptom-burden",
+      "description": "Progressing disease with multiple moderate symptoms: ESAS-r total 41 — Moderate band; no single symptom reaches the severe (>= 7) threshold.",
+      "state": {
+        "demographics": {
+          "firstName": "",
+          "lastName": "",
+          "dateOfBirth": "",
+          "sex": "male",
+          "nhsOrMrnNumber": "",
+          "preferredLanguage": "English",
+          "ethnicity": "",
+          "reporterRole": "patient",
+          "reporterName": "",
+          "assessmentDate": "",
+          "assessmentSetting": "community"
+        },
+        "primaryDiagnosisPrognosis": {
+          "primaryDiagnosis": "Metastatic lung cancer",
+          "secondaryDiagnoses": "COPD",
+          "dateOfDiagnosis": "",
+          "stageOrSeverity": "Stage IV",
+          "diseaseProgressing": "yes",
+          "prognosisHorizon": "weeks-to-months",
+          "surpriseQuestion": "yes",
+          "prognosticIndicators": "Declining performance status",
+          "relevantTreatmentHistory": "Completed palliative chemotherapy"
+        },
+        "esasrSymptoms": {
+          "pain": 5,
+          "tiredness": 6,
+          "drowsiness": 4,
+          "nausea": 3,
+          "lackOfAppetite": 5,
+          "shortnessOfBreath": 3,
+          "depression": 4,
+          "anxiety": 4,
+          "wellbeing": 5,
+          "other": 2,
+          "otherLabel": "Constipation",
+          "symptomNotes": ""
+        },
+        "performanceStatus": {
+          "ppsScore": null,
+          "akpsScore": null,
+          "ecogScore": null,
+          "mobilityNotes": "",
+          "activityLevel": "",
+          "bedBound": "",
+          "requiresAssistanceWithAdls": "",
+          "adlNotes": ""
+        },
+        "goalsOfCareACP": {
+          "patientPrioritiesAndWishes": "",
+          "preferredPlaceOfCare": "",
+          "preferredPlaceOfDeath": "",
+          "respectFormCompleted": "",
+          "respectFormDate": "",
+          "adrtCompleted": "",
+          "adrtDate": "",
+          "lpaHealthAndWelfare": "",
+          "lpaName": "",
+          "dnacprDocumented": "",
+          "dnacprDate": "",
+          "ceilingOfTreatmentDiscussed": "",
+          "ceilingOfTreatmentNotes": ""
+        },
+        "medicationsSymptomControl": {
+          "regularMedications": [],
+          "asNeededMedications": [],
+          "syringeDriverInUse": "no",
+          "syringeDriverDetails": "",
+          "anticipatoryMedsPrescribed": "yes",
+          "anticipatoryMedsNotes": "",
+          "symptomControlOverall": "partial",
+          "barriersToControl": "",
+          "planNotes": ""
+        },
+        "psychosocialSpiritualConcerns": {
+          "moodConcerns": "yes",
+          "moodNotes": "Low mood related to declining function",
+          "anxietyConcerns": "yes",
+          "anxietyNotes": "",
+          "existentialDistress": "no",
+          "existentialNotes": "",
+          "spiritualSupportRequested": "no",
+          "faithOrBelief": "",
+          "chaplaincyNotes": "",
+          "unresolvedConcerns": "no",
+          "unresolvedNotes": ""
+        },
+        "carerFamilySupport": {
+          "primaryCarerName": "",
+          "primaryCarerRelationship": "",
+          "carerLivesWithPatient": "",
+          "carerStrainReported": "",
+          "carerStrainLevel": "",
+          "carerStrainNotes": "",
+          "respiteRequired": "",
+          "respiteNotes": "",
+          "childrenInHousehold": "",
+          "childrenSupportNotes": "",
+          "bereavementRiskIdentified": "",
+          "bereavementNotes": ""
+        },
+        "multidisciplinaryPlan": {
+          "specialistPalliativeCareInvolved": "yes",
+          "communityNursingInvolved": "yes",
+          "hospiceReferralMade": "no",
+          "socialWorkReferralMade": "no",
+          "occupationalTherapyReferralMade": "no",
+          "physiotherapyReferralMade": "no",
+          "dieticianReferralMade": "no",
+          "chaplaincyReferralMade": "no",
+          "psychologyReferralMade": "no",
+          "otherReferrals": "",
+          "reviewInterval": "2-weeks",
+          "keyWorkerName": "",
+          "planSummary": "Titrate analgesia and antiemetics; earlier review"
+        }
+      },
+      "expected": {
+        "esasTotal": 41,
+        "severityBand": "moderate",
+        "answeredCount": 10,
+        "firedRules": [
+          {
+            "id": "PALL-ESAS-001",
+            "category": "Pain",
+            "description": "Pain intensity (ESAS-r 0-10).",
+            "score": 5
+          },
+          {
+            "id": "PALL-ESAS-002",
+            "category": "Tiredness",
+            "description": "Tiredness / lack of energy (ESAS-r 0-10).",
+            "score": 6
+          },
+          {
+            "id": "PALL-ESAS-003",
+            "category": "Drowsiness",
+            "description": "Drowsiness / feeling sleepy (ESAS-r 0-10).",
+            "score": 4
+          },
+          {
+            "id": "PALL-ESAS-004",
+            "category": "Nausea",
+            "description": "Nausea (ESAS-r 0-10).",
+            "score": 3
+          },
+          {
+            "id": "PALL-ESAS-005",
+            "category": "Lack of Appetite",
+            "description": "Lack of appetite (ESAS-r 0-10).",
+            "score": 5
+          },
+          {
+            "id": "PALL-ESAS-006",
+            "category": "Shortness of Breath",
+            "description": "Shortness of breath / dyspnoea (ESAS-r 0-10).",
+            "score": 3
+          },
+          {
+            "id": "PALL-ESAS-007",
+            "category": "Depression",
+            "description": "Depression / feeling sad (ESAS-r 0-10).",
+            "score": 4
+          },
+          {
+            "id": "PALL-ESAS-008",
+            "category": "Anxiety",
+            "description": "Anxiety / feeling nervous (ESAS-r 0-10).",
+            "score": 4
+          },
+          {
+            "id": "PALL-ESAS-009",
+            "category": "Wellbeing",
+            "description": "Overall wellbeing (ESAS-r 0-10; higher = worse).",
+            "score": 5
+          },
+          {
+            "id": "PALL-ESAS-010",
+            "category": "Other Symptom",
+            "description": "Other symptom (e.g. constipation, sleep, itch) (ESAS-r 0-10).",
+            "score": 2
+          }
+        ],
+        "individualFlags": []
+      }
+    },
+    {
+      "name": "severe-symptom-burden",
+      "description": "Deteriorating patient with uncontrolled symptoms: ESAS-r total 66 — Severe band; pain, tiredness, lack of appetite, shortness of breath, anxiety and wellbeing each flagged as severe (>= 7).",
+      "state": {
+        "demographics": {
+          "firstName": "",
+          "lastName": "",
+          "dateOfBirth": "",
+          "sex": "female",
+          "nhsOrMrnNumber": "",
+          "preferredLanguage": "English",
+          "ethnicity": "",
+          "reporterRole": "patient",
+          "reporterName": "",
+          "assessmentDate": "",
+          "assessmentSetting": "inpatient-hospice"
+        },
+        "primaryDiagnosisPrognosis": {
+          "primaryDiagnosis": "Metastatic pancreatic cancer",
+          "secondaryDiagnoses": "",
+          "dateOfDiagnosis": "",
+          "stageOrSeverity": "Stage IV",
+          "diseaseProgressing": "yes",
+          "prognosisHorizon": "days-to-weeks",
+          "surpriseQuestion": "yes",
+          "prognosticIndicators": "Rapid deterioration",
+          "relevantTreatmentHistory": "Best supportive care"
+        },
+        "esasrSymptoms": {
+          "pain": 8,
+          "tiredness": 8,
+          "drowsiness": 6,
+          "nausea": 5,
+          "lackOfAppetite": 7,
+          "shortnessOfBreath": 7,
+          "depression": 6,
+          "anxiety": 7,
+          "wellbeing": 8,
+          "other": 4,
+          "otherLabel": "Constipation",
+          "symptomNotes": "Symptoms poorly controlled overnight"
+        },
+        "performanceStatus": {
+          "ppsScore": null,
+          "akpsScore": null,
+          "ecogScore": null,
+          "mobilityNotes": "",
+          "activityLevel": "",
+          "bedBound": "",
+          "requiresAssistanceWithAdls": "",
+          "adlNotes": ""
+        },
+        "goalsOfCareACP": {
+          "patientPrioritiesAndWishes": "",
+          "preferredPlaceOfCare": "",
+          "preferredPlaceOfDeath": "",
+          "respectFormCompleted": "",
+          "respectFormDate": "",
+          "adrtCompleted": "",
+          "adrtDate": "",
+          "lpaHealthAndWelfare": "",
+          "lpaName": "",
+          "dnacprDocumented": "",
+          "dnacprDate": "",
+          "ceilingOfTreatmentDiscussed": "",
+          "ceilingOfTreatmentNotes": ""
+        },
+        "medicationsSymptomControl": {
+          "regularMedications": [],
+          "asNeededMedications": [],
+          "syringeDriverInUse": "yes",
+          "syringeDriverDetails": "Morphine and midazolam",
+          "anticipatoryMedsPrescribed": "yes",
+          "anticipatoryMedsNotes": "",
+          "symptomControlOverall": "poor",
+          "barriersToControl": "Rapidly escalating requirements",
+          "planNotes": ""
+        },
+        "psychosocialSpiritualConcerns": {
+          "moodConcerns": "yes",
+          "moodNotes": "",
+          "anxietyConcerns": "yes",
+          "anxietyNotes": "Marked distress",
+          "existentialDistress": "yes",
+          "existentialNotes": "",
+          "spiritualSupportRequested": "yes",
+          "faithOrBelief": "",
+          "chaplaincyNotes": "",
+          "unresolvedConcerns": "yes",
+          "unresolvedNotes": ""
+        },
+        "carerFamilySupport": {
+          "primaryCarerName": "",
+          "primaryCarerRelationship": "",
+          "carerLivesWithPatient": "",
+          "carerStrainReported": "",
+          "carerStrainLevel": "",
+          "carerStrainNotes": "",
+          "respiteRequired": "",
+          "respiteNotes": "",
+          "childrenInHousehold": "",
+          "childrenSupportNotes": "",
+          "bereavementRiskIdentified": "",
+          "bereavementNotes": ""
+        },
+        "multidisciplinaryPlan": {
+          "specialistPalliativeCareInvolved": "yes",
+          "communityNursingInvolved": "no",
+          "hospiceReferralMade": "yes",
+          "socialWorkReferralMade": "no",
+          "occupationalTherapyReferralMade": "no",
+          "physiotherapyReferralMade": "no",
+          "dieticianReferralMade": "no",
+          "chaplaincyReferralMade": "yes",
+          "psychologyReferralMade": "no",
+          "otherReferrals": "",
+          "reviewInterval": "daily",
+          "keyWorkerName": "",
+          "planSummary": "Urgent symptom control review; anticipatory prescribing in place"
+        }
+      },
+      "expected": {
+        "esasTotal": 66,
+        "severityBand": "severe",
+        "answeredCount": 10,
+        "firedRules": [
+          {
+            "id": "PALL-ESAS-001",
+            "category": "Pain",
+            "description": "Pain intensity (ESAS-r 0-10).",
+            "score": 8
+          },
+          {
+            "id": "PALL-ESAS-002",
+            "category": "Tiredness",
+            "description": "Tiredness / lack of energy (ESAS-r 0-10).",
+            "score": 8
+          },
+          {
+            "id": "PALL-ESAS-003",
+            "category": "Drowsiness",
+            "description": "Drowsiness / feeling sleepy (ESAS-r 0-10).",
+            "score": 6
+          },
+          {
+            "id": "PALL-ESAS-004",
+            "category": "Nausea",
+            "description": "Nausea (ESAS-r 0-10).",
+            "score": 5
+          },
+          {
+            "id": "PALL-ESAS-005",
+            "category": "Lack of Appetite",
+            "description": "Lack of appetite (ESAS-r 0-10).",
+            "score": 7
+          },
+          {
+            "id": "PALL-ESAS-006",
+            "category": "Shortness of Breath",
+            "description": "Shortness of breath / dyspnoea (ESAS-r 0-10).",
+            "score": 7
+          },
+          {
+            "id": "PALL-ESAS-007",
+            "category": "Depression",
+            "description": "Depression / feeling sad (ESAS-r 0-10).",
+            "score": 6
+          },
+          {
+            "id": "PALL-ESAS-008",
+            "category": "Anxiety",
+            "description": "Anxiety / feeling nervous (ESAS-r 0-10).",
+            "score": 7
+          },
+          {
+            "id": "PALL-ESAS-009",
+            "category": "Wellbeing",
+            "description": "Overall wellbeing (ESAS-r 0-10; higher = worse).",
+            "score": 8
+          },
+          {
+            "id": "PALL-ESAS-010",
+            "category": "Other Symptom",
+            "description": "Other symptom (e.g. constipation, sleep, itch) (ESAS-r 0-10).",
+            "score": 4
+          },
+          {
+            "id": "PALL-ANC-001",
+            "category": "Uncontrolled Severe Symptom",
+            "description": "At least one ESAS-r symptom is severe (>= 7).",
+            "score": 8
+          }
+        ],
+        "individualFlags": [
+          {
+            "symptomKey": "pain",
+            "symptomLabel": "Pain",
+            "score": 8
+          },
+          {
+            "symptomKey": "tiredness",
+            "symptomLabel": "Tiredness (lack of energy)",
+            "score": 8
+          },
+          {
+            "symptomKey": "lackOfAppetite",
+            "symptomLabel": "Lack of appetite",
+            "score": 7
+          },
+          {
+            "symptomKey": "shortnessOfBreath",
+            "symptomLabel": "Shortness of breath",
+            "score": 7
+          },
+          {
+            "symptomKey": "anxiety",
+            "symptomLabel": "Anxiety (feeling nervous)",
+            "score": 7
+          },
+          {
+            "symptomKey": "wellbeing",
+            "symptomLabel": "Wellbeing (how you feel overall)",
+            "score": 8
+          }
+        ]
+      }
+    }
+  ]
+}

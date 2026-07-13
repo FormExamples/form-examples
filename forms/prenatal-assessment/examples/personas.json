@@ -1,0 +1,328 @@
+{
+  "engine": "front-end-with-html",
+  "graderHint": "calculateRisk",
+  "note": "Realistic filled-in states in the prenatal risk engine's shape. `expected` is computed by `bin/test-personas --update` and verified by `bin/test-personas`.",
+  "personas": [
+    {
+      "name": "low-risk",
+      "description": "Healthy pregnancy with a single prior caesarean as the only factor: cumulative risk score 1 — Low risk.",
+      "state": {
+        "demographics": {
+          "firstName": "",
+          "lastName": "",
+          "dateOfBirth": "",
+          "sex": "female"
+        },
+        "pregnancyDetails": {
+          "gestationalWeeks": 12,
+          "estimatedDueDate": "",
+          "conceptionMethod": "natural",
+          "multipleGestation": "no",
+          "placentaLocation": "fundal"
+        },
+        "obstetricHistory": {
+          "gravida": 2,
+          "para": 1,
+          "abortions": 0,
+          "livingChildren": 1,
+          "previousComplications": {
+            "preeclampsia": "no",
+            "gestationalDiabetes": "no",
+            "pretermBirth": "no",
+            "cesareanSection": "yes"
+          }
+        },
+        "medicalHistory": {
+          "chronicConditions": "",
+          "autoimmune": "no",
+          "thyroid": "no",
+          "diabetes": "no",
+          "hypertension": "no"
+        },
+        "currentSymptoms": {
+          "nausea": "yes",
+          "bleeding": "no",
+          "headache": "no",
+          "visionChanges": "no",
+          "edema": "no",
+          "abdominalPain": "no",
+          "reducedFetalMovement": "no"
+        },
+        "vitalSigns": {
+          "bloodPressureSystolic": 110,
+          "bloodPressureDiastolic": 70,
+          "weight": 65,
+          "height": 165,
+          "bmi": 24,
+          "fundalHeight": null,
+          "fetalHeartRate": 140
+        },
+        "laboratoryResults": {
+          "bloodType": "O",
+          "rhFactor": "positive",
+          "hemoglobin": 12.5,
+          "glucose": 5,
+          "urinalysis": "normal",
+          "gbs": "no"
+        },
+        "lifestyleNutrition": {
+          "smoking": "no",
+          "alcohol": "no",
+          "drugs": "no",
+          "exercise": "moderate",
+          "diet": "balanced",
+          "supplements": "",
+          "folicAcid": "yes"
+        },
+        "mentalHealthScreening": {
+          "edinburghScore": 4,
+          "anxietyLevel": "mild",
+          "supportSystem": "good",
+          "domesticViolenceScreen": "no"
+        },
+        "birthPlanPreferences": {
+          "deliveryPreference": "",
+          "painManagement": "",
+          "feedingPlan": "",
+          "specialRequests": ""
+        }
+      },
+      "expected": {
+        "riskScore": 1,
+        "riskLevel": "low",
+        "firedRules": [
+          {
+            "id": "RISK-OB-004",
+            "category": "Obstetric History",
+            "description": "Previous cesarean section",
+            "weight": 1
+          }
+        ]
+      }
+    },
+    {
+      "name": "moderate-risk",
+      "description": "History of gestational diabetes plus a thyroid disorder: cumulative risk score 4 — Moderate risk.",
+      "state": {
+        "demographics": {
+          "firstName": "",
+          "lastName": "",
+          "dateOfBirth": "",
+          "sex": "female"
+        },
+        "pregnancyDetails": {
+          "gestationalWeeks": 16,
+          "estimatedDueDate": "",
+          "conceptionMethod": "natural",
+          "multipleGestation": "no",
+          "placentaLocation": "fundal"
+        },
+        "obstetricHistory": {
+          "gravida": 3,
+          "para": 2,
+          "abortions": 0,
+          "livingChildren": 2,
+          "previousComplications": {
+            "preeclampsia": "no",
+            "gestationalDiabetes": "yes",
+            "pretermBirth": "no",
+            "cesareanSection": "no"
+          }
+        },
+        "medicalHistory": {
+          "chronicConditions": "Hypothyroidism",
+          "autoimmune": "no",
+          "thyroid": "yes",
+          "diabetes": "no",
+          "hypertension": "no"
+        },
+        "currentSymptoms": {
+          "nausea": "yes",
+          "bleeding": "no",
+          "headache": "no",
+          "visionChanges": "no",
+          "edema": "no",
+          "abdominalPain": "no",
+          "reducedFetalMovement": "no"
+        },
+        "vitalSigns": {
+          "bloodPressureSystolic": 118,
+          "bloodPressureDiastolic": 74,
+          "weight": 72,
+          "height": 168,
+          "bmi": 25.5,
+          "fundalHeight": null,
+          "fetalHeartRate": 145
+        },
+        "laboratoryResults": {
+          "bloodType": "A",
+          "rhFactor": "positive",
+          "hemoglobin": 11.8,
+          "glucose": 5.5,
+          "urinalysis": "normal",
+          "gbs": "no"
+        },
+        "lifestyleNutrition": {
+          "smoking": "no",
+          "alcohol": "no",
+          "drugs": "no",
+          "exercise": "light",
+          "diet": "balanced",
+          "supplements": "",
+          "folicAcid": "yes"
+        },
+        "mentalHealthScreening": {
+          "edinburghScore": 6,
+          "anxietyLevel": "mild",
+          "supportSystem": "good",
+          "domesticViolenceScreen": "no"
+        },
+        "birthPlanPreferences": {
+          "deliveryPreference": "",
+          "painManagement": "",
+          "feedingPlan": "",
+          "specialRequests": ""
+        }
+      },
+      "expected": {
+        "riskScore": 4,
+        "riskLevel": "moderate",
+        "firedRules": [
+          {
+            "id": "RISK-OB-002",
+            "category": "Obstetric History",
+            "description": "Previous gestational diabetes",
+            "weight": 2
+          },
+          {
+            "id": "RISK-MED-004",
+            "category": "Medical History",
+            "description": "Thyroid disorder",
+            "weight": 2
+          }
+        ]
+      }
+    },
+    {
+      "name": "very-high-risk",
+      "description": "Prior pre-eclampsia, chronic hypertension, raised blood pressure this visit, plus new visual disturbance and severe headache: cumulative risk score 13 — Very high risk.",
+      "state": {
+        "demographics": {
+          "firstName": "",
+          "lastName": "",
+          "dateOfBirth": "",
+          "sex": "female"
+        },
+        "pregnancyDetails": {
+          "gestationalWeeks": 34,
+          "estimatedDueDate": "",
+          "conceptionMethod": "natural",
+          "multipleGestation": "no",
+          "placentaLocation": "fundal"
+        },
+        "obstetricHistory": {
+          "gravida": 2,
+          "para": 1,
+          "abortions": 0,
+          "livingChildren": 1,
+          "previousComplications": {
+            "preeclampsia": "yes",
+            "gestationalDiabetes": "no",
+            "pretermBirth": "no",
+            "cesareanSection": "no"
+          }
+        },
+        "medicalHistory": {
+          "chronicConditions": "Chronic hypertension",
+          "autoimmune": "no",
+          "thyroid": "no",
+          "diabetes": "no",
+          "hypertension": "yes"
+        },
+        "currentSymptoms": {
+          "nausea": "no",
+          "bleeding": "no",
+          "headache": "yes",
+          "visionChanges": "yes",
+          "edema": "yes",
+          "abdominalPain": "no",
+          "reducedFetalMovement": "no"
+        },
+        "vitalSigns": {
+          "bloodPressureSystolic": 150,
+          "bloodPressureDiastolic": 95,
+          "weight": 78,
+          "height": 165,
+          "bmi": 28.7,
+          "fundalHeight": null,
+          "fetalHeartRate": 145
+        },
+        "laboratoryResults": {
+          "bloodType": "O",
+          "rhFactor": "positive",
+          "hemoglobin": 11.5,
+          "glucose": 5.2,
+          "urinalysis": "proteinuria",
+          "gbs": "no"
+        },
+        "lifestyleNutrition": {
+          "smoking": "no",
+          "alcohol": "no",
+          "drugs": "no",
+          "exercise": "light",
+          "diet": "balanced",
+          "supplements": "",
+          "folicAcid": "yes"
+        },
+        "mentalHealthScreening": {
+          "edinburghScore": 7,
+          "anxietyLevel": "moderate",
+          "supportSystem": "good",
+          "domesticViolenceScreen": "no"
+        },
+        "birthPlanPreferences": {
+          "deliveryPreference": "",
+          "painManagement": "",
+          "feedingPlan": "",
+          "specialRequests": ""
+        }
+      },
+      "expected": {
+        "riskScore": 13,
+        "riskLevel": "very-high",
+        "firedRules": [
+          {
+            "id": "RISK-OB-001",
+            "category": "Obstetric History",
+            "description": "Previous preeclampsia",
+            "weight": 3
+          },
+          {
+            "id": "RISK-MED-001",
+            "category": "Medical History",
+            "description": "Pre-existing hypertension",
+            "weight": 3
+          },
+          {
+            "id": "RISK-VITAL-001",
+            "category": "Vital Signs",
+            "description": "Elevated blood pressure (systolic >= 140 or diastolic >= 90)",
+            "weight": 3
+          },
+          {
+            "id": "RISK-SX-003",
+            "category": "Current Symptoms",
+            "description": "Vision changes",
+            "weight": 2
+          },
+          {
+            "id": "RISK-SX-004",
+            "category": "Current Symptoms",
+            "description": "Severe headache",
+            "weight": 2
+          }
+        ]
+      }
+    }
+  ]
+}

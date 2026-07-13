@@ -1,0 +1,820 @@
+{
+  "engine": "front-end-with-html",
+  "graderHint": "calculateSnot22",
+  "note": "Realistic filled-in states in the SNOT-22 engine's shape. `expected` is computed by `bin/test-personas --update` and verified by `bin/test-personas`.",
+  "personas": [
+    {
+      "name": "mild-minimal-impact",
+      "description": "Intermittent rhinitis with little day-to-day burden: SNOT-22 total 5 — Mild band (minimal impact on daily life).",
+      "state": {
+        "demographics": {
+          "firstName": "",
+          "lastName": "",
+          "dateOfBirth": "",
+          "sex": "female",
+          "occupation": "Administrator"
+        },
+        "presentingComplaint": {
+          "earSymptoms": "no",
+          "noseSymptoms": "yes",
+          "throatSymptoms": "no",
+          "neckSymptoms": "no",
+          "chiefComplaint": "Occasional runny nose"
+        },
+        "historyOfPresentIllness": {
+          "onsetDate": "",
+          "onsetType": "gradual",
+          "progression": "stable",
+          "laterality": "bilateral",
+          "previousEpisodes": "yes",
+          "aggravatingFactors": "Pollen",
+          "relievingFactors": "Antihistamines",
+          "associatedSymptoms": ""
+        },
+        "pastEntHistory": {
+          "priorEntSurgery": "no",
+          "priorEntSurgeryDetails": "",
+          "chronicSinusitis": "no",
+          "allergicRhinitis": "yes",
+          "hearingLoss": "no",
+          "tinnitus": "no",
+          "vertigo": "no",
+          "hearingAids": "no",
+          "headNeckCancer": "no",
+          "headNeckRadiotherapy": "no",
+          "smoking": "never",
+          "alcohol": "occasional"
+        },
+        "snot22": {
+          "needToBlowNose": 2,
+          "sneezing": 0,
+          "runnyNose": 1,
+          "nasalBlockage": 1,
+          "lossOfSmellTaste": 0,
+          "coughing": 0,
+          "postNasalDischarge": 1,
+          "thickNasalDischarge": 0,
+          "earFullness": 0,
+          "dizziness": 0,
+          "earPain": 0,
+          "facialPainPressure": 0,
+          "difficultyFallingAsleep": 0,
+          "wakingUpAtNight": 0,
+          "lackOfGoodNightsSleep": 0,
+          "wakingUpTired": 0,
+          "fatigue": 0,
+          "reducedProductivity": 0,
+          "reducedConcentration": 0,
+          "frustratedRestlessIrritable": 0,
+          "sad": 0,
+          "embarrassed": 0
+        },
+        "externalExamination": {
+          "facialAsymmetry": "no",
+          "facialSwelling": "no",
+          "skinLesions": "no",
+          "externalEarFindings": "",
+          "externalNoseFindings": "",
+          "examinationNotes": ""
+        },
+        "otoscopy": {
+          "right": {
+            "tympanicMembrane": "normal",
+            "canal": "clear",
+            "mobility": "normal"
+          },
+          "left": {
+            "tympanicMembrane": "normal",
+            "canal": "clear",
+            "mobility": "normal"
+          },
+          "otoscopyNotes": ""
+        },
+        "anteriorRhinoscopy": {
+          "right": {
+            "septum": "midline",
+            "mucosa": "mild-oedema",
+            "polyps": "none",
+            "discharge": "clear",
+            "turbinateHypertrophy": "mild"
+          },
+          "left": {
+            "septum": "midline",
+            "mucosa": "mild-oedema",
+            "polyps": "none",
+            "discharge": "clear",
+            "turbinateHypertrophy": "mild"
+          },
+          "rhinoscopyNotes": ""
+        },
+        "oropharyngealNeckExamination": {
+          "oralMucosa": "normal",
+          "tonsils": "normal",
+          "pharynx": "normal",
+          "palateMovement": "symmetrical",
+          "cervicalLymphadenopathy": "no",
+          "cervicalLymphadenopathyDetails": "",
+          "thyroidEnlarged": "no",
+          "neckMass": "no",
+          "neckMassDetails": "",
+          "examinationNotes": ""
+        },
+        "clinicalImpressionPlan": {
+          "workingDiagnosis": "Allergic rhinitis",
+          "differentialDiagnosis": "",
+          "investigationsRequired": "no",
+          "investigationsDetails": "",
+          "medicationPrescribed": "yes",
+          "medicationDetails": "Intranasal steroid",
+          "referralRequired": "no",
+          "referralDetails": "",
+          "surgeryConsidered": "no",
+          "surgeryDetails": "",
+          "followUpPlan": "Review in 6 weeks",
+          "patientEducation": "Allergen avoidance advice"
+        }
+      },
+      "expected": {
+        "totalScore": 5,
+        "severityLevel": "mild",
+        "answeredCount": 22,
+        "firedRules": [
+          {
+            "id": "SNOT22-001",
+            "category": "SNOT-22",
+            "description": "Need to blow nose",
+            "score": 2
+          },
+          {
+            "id": "SNOT22-002",
+            "category": "SNOT-22",
+            "description": "Sneezing",
+            "score": 0
+          },
+          {
+            "id": "SNOT22-003",
+            "category": "SNOT-22",
+            "description": "Runny nose",
+            "score": 1
+          },
+          {
+            "id": "SNOT22-004",
+            "category": "SNOT-22",
+            "description": "Nasal blockage",
+            "score": 1
+          },
+          {
+            "id": "SNOT22-005",
+            "category": "SNOT-22",
+            "description": "Loss of smell or taste",
+            "score": 0
+          },
+          {
+            "id": "SNOT22-006",
+            "category": "SNOT-22",
+            "description": "Cough",
+            "score": 0
+          },
+          {
+            "id": "SNOT22-007",
+            "category": "SNOT-22",
+            "description": "Post-nasal discharge",
+            "score": 1
+          },
+          {
+            "id": "SNOT22-008",
+            "category": "SNOT-22",
+            "description": "Thick nasal discharge",
+            "score": 0
+          },
+          {
+            "id": "SNOT22-009",
+            "category": "SNOT-22",
+            "description": "Ear fullness",
+            "score": 0
+          },
+          {
+            "id": "SNOT22-010",
+            "category": "SNOT-22",
+            "description": "Dizziness",
+            "score": 0
+          },
+          {
+            "id": "SNOT22-011",
+            "category": "SNOT-22",
+            "description": "Ear pain",
+            "score": 0
+          },
+          {
+            "id": "SNOT22-012",
+            "category": "SNOT-22",
+            "description": "Facial pain or pressure",
+            "score": 0
+          },
+          {
+            "id": "SNOT22-013",
+            "category": "SNOT-22",
+            "description": "Difficulty falling asleep",
+            "score": 0
+          },
+          {
+            "id": "SNOT22-014",
+            "category": "SNOT-22",
+            "description": "Waking up at night",
+            "score": 0
+          },
+          {
+            "id": "SNOT22-015",
+            "category": "SNOT-22",
+            "description": "Lack of a good night’s sleep",
+            "score": 0
+          },
+          {
+            "id": "SNOT22-016",
+            "category": "SNOT-22",
+            "description": "Waking up tired",
+            "score": 0
+          },
+          {
+            "id": "SNOT22-017",
+            "category": "SNOT-22",
+            "description": "Fatigue",
+            "score": 0
+          },
+          {
+            "id": "SNOT22-018",
+            "category": "SNOT-22",
+            "description": "Reduced productivity",
+            "score": 0
+          },
+          {
+            "id": "SNOT22-019",
+            "category": "SNOT-22",
+            "description": "Reduced concentration",
+            "score": 0
+          },
+          {
+            "id": "SNOT22-020",
+            "category": "SNOT-22",
+            "description": "Frustrated, restless, or irritable",
+            "score": 0
+          },
+          {
+            "id": "SNOT22-021",
+            "category": "SNOT-22",
+            "description": "Sad",
+            "score": 0
+          },
+          {
+            "id": "SNOT22-022",
+            "category": "SNOT-22",
+            "description": "Embarrassed",
+            "score": 0
+          }
+        ]
+      }
+    },
+    {
+      "name": "moderate-targeted-management",
+      "description": "Chronic rhinosinusitis with sleep and productivity impact: SNOT-22 total 14 — Moderate band (targeted management advised).",
+      "state": {
+        "demographics": {
+          "firstName": "",
+          "lastName": "",
+          "dateOfBirth": "",
+          "sex": "male",
+          "occupation": "Driver"
+        },
+        "presentingComplaint": {
+          "earSymptoms": "no",
+          "noseSymptoms": "yes",
+          "throatSymptoms": "yes",
+          "neckSymptoms": "no",
+          "chiefComplaint": "Persistent nasal congestion and post-nasal drip"
+        },
+        "historyOfPresentIllness": {
+          "onsetDate": "",
+          "onsetType": "gradual",
+          "progression": "worsening",
+          "laterality": "bilateral",
+          "previousEpisodes": "yes",
+          "aggravatingFactors": "Cold weather",
+          "relievingFactors": "Nasal irrigation",
+          "associatedSymptoms": "Cough"
+        },
+        "pastEntHistory": {
+          "priorEntSurgery": "no",
+          "priorEntSurgeryDetails": "",
+          "chronicSinusitis": "yes",
+          "allergicRhinitis": "yes",
+          "hearingLoss": "no",
+          "tinnitus": "no",
+          "vertigo": "no",
+          "hearingAids": "no",
+          "headNeckCancer": "no",
+          "headNeckRadiotherapy": "no",
+          "smoking": "never",
+          "alcohol": "occasional"
+        },
+        "snot22": {
+          "needToBlowNose": 2,
+          "sneezing": 0,
+          "runnyNose": 2,
+          "nasalBlockage": 3,
+          "lossOfSmellTaste": 0,
+          "coughing": 1,
+          "postNasalDischarge": 2,
+          "thickNasalDischarge": 0,
+          "earFullness": 0,
+          "dizziness": 0,
+          "earPain": 0,
+          "facialPainPressure": 0,
+          "difficultyFallingAsleep": 0,
+          "wakingUpAtNight": 0,
+          "lackOfGoodNightsSleep": 0,
+          "wakingUpTired": 0,
+          "fatigue": 2,
+          "reducedProductivity": 2,
+          "reducedConcentration": 0,
+          "frustratedRestlessIrritable": 0,
+          "sad": 0,
+          "embarrassed": 0
+        },
+        "externalExamination": {
+          "facialAsymmetry": "no",
+          "facialSwelling": "no",
+          "skinLesions": "no",
+          "externalEarFindings": "",
+          "externalNoseFindings": "",
+          "examinationNotes": ""
+        },
+        "otoscopy": {
+          "right": {
+            "tympanicMembrane": "normal",
+            "canal": "clear",
+            "mobility": "normal"
+          },
+          "left": {
+            "tympanicMembrane": "normal",
+            "canal": "clear",
+            "mobility": "normal"
+          },
+          "otoscopyNotes": ""
+        },
+        "anteriorRhinoscopy": {
+          "right": {
+            "septum": "midline",
+            "mucosa": "oedematous",
+            "polyps": "none",
+            "discharge": "mucopurulent",
+            "turbinateHypertrophy": "moderate"
+          },
+          "left": {
+            "septum": "midline",
+            "mucosa": "oedematous",
+            "polyps": "none",
+            "discharge": "mucopurulent",
+            "turbinateHypertrophy": "moderate"
+          },
+          "rhinoscopyNotes": ""
+        },
+        "oropharyngealNeckExamination": {
+          "oralMucosa": "normal",
+          "tonsils": "normal",
+          "pharynx": "cobblestoning",
+          "palateMovement": "symmetrical",
+          "cervicalLymphadenopathy": "no",
+          "cervicalLymphadenopathyDetails": "",
+          "thyroidEnlarged": "no",
+          "neckMass": "no",
+          "neckMassDetails": "",
+          "examinationNotes": ""
+        },
+        "clinicalImpressionPlan": {
+          "workingDiagnosis": "Chronic rhinosinusitis without polyps",
+          "differentialDiagnosis": "Allergic rhinitis",
+          "investigationsRequired": "yes",
+          "investigationsDetails": "CT sinuses",
+          "medicationPrescribed": "yes",
+          "medicationDetails": "Intranasal steroid, saline irrigation",
+          "referralRequired": "no",
+          "referralDetails": "",
+          "surgeryConsidered": "no",
+          "surgeryDetails": "",
+          "followUpPlan": "Review in 8 weeks",
+          "patientEducation": "Nasal irrigation technique"
+        }
+      },
+      "expected": {
+        "totalScore": 14,
+        "severityLevel": "moderate",
+        "answeredCount": 22,
+        "firedRules": [
+          {
+            "id": "SNOT22-001",
+            "category": "SNOT-22",
+            "description": "Need to blow nose",
+            "score": 2
+          },
+          {
+            "id": "SNOT22-002",
+            "category": "SNOT-22",
+            "description": "Sneezing",
+            "score": 0
+          },
+          {
+            "id": "SNOT22-003",
+            "category": "SNOT-22",
+            "description": "Runny nose",
+            "score": 2
+          },
+          {
+            "id": "SNOT22-004",
+            "category": "SNOT-22",
+            "description": "Nasal blockage",
+            "score": 3
+          },
+          {
+            "id": "SNOT22-005",
+            "category": "SNOT-22",
+            "description": "Loss of smell or taste",
+            "score": 0
+          },
+          {
+            "id": "SNOT22-006",
+            "category": "SNOT-22",
+            "description": "Cough",
+            "score": 1
+          },
+          {
+            "id": "SNOT22-007",
+            "category": "SNOT-22",
+            "description": "Post-nasal discharge",
+            "score": 2
+          },
+          {
+            "id": "SNOT22-008",
+            "category": "SNOT-22",
+            "description": "Thick nasal discharge",
+            "score": 0
+          },
+          {
+            "id": "SNOT22-009",
+            "category": "SNOT-22",
+            "description": "Ear fullness",
+            "score": 0
+          },
+          {
+            "id": "SNOT22-010",
+            "category": "SNOT-22",
+            "description": "Dizziness",
+            "score": 0
+          },
+          {
+            "id": "SNOT22-011",
+            "category": "SNOT-22",
+            "description": "Ear pain",
+            "score": 0
+          },
+          {
+            "id": "SNOT22-012",
+            "category": "SNOT-22",
+            "description": "Facial pain or pressure",
+            "score": 0
+          },
+          {
+            "id": "SNOT22-013",
+            "category": "SNOT-22",
+            "description": "Difficulty falling asleep",
+            "score": 0
+          },
+          {
+            "id": "SNOT22-014",
+            "category": "SNOT-22",
+            "description": "Waking up at night",
+            "score": 0
+          },
+          {
+            "id": "SNOT22-015",
+            "category": "SNOT-22",
+            "description": "Lack of a good night’s sleep",
+            "score": 0
+          },
+          {
+            "id": "SNOT22-016",
+            "category": "SNOT-22",
+            "description": "Waking up tired",
+            "score": 0
+          },
+          {
+            "id": "SNOT22-017",
+            "category": "SNOT-22",
+            "description": "Fatigue",
+            "score": 2
+          },
+          {
+            "id": "SNOT22-018",
+            "category": "SNOT-22",
+            "description": "Reduced productivity",
+            "score": 2
+          },
+          {
+            "id": "SNOT22-019",
+            "category": "SNOT-22",
+            "description": "Reduced concentration",
+            "score": 0
+          },
+          {
+            "id": "SNOT22-020",
+            "category": "SNOT-22",
+            "description": "Frustrated, restless, or irritable",
+            "score": 0
+          },
+          {
+            "id": "SNOT22-021",
+            "category": "SNOT-22",
+            "description": "Sad",
+            "score": 0
+          },
+          {
+            "id": "SNOT22-022",
+            "category": "SNOT-22",
+            "description": "Embarrassed",
+            "score": 0
+          }
+        ]
+      }
+    },
+    {
+      "name": "severe-specialist-referral",
+      "description": "Chronic rhinosinusitis with polyps and marked sleep, functional and emotional burden: SNOT-22 total 45 — Severe band (consider specialist referral).",
+      "state": {
+        "demographics": {
+          "firstName": "",
+          "lastName": "",
+          "dateOfBirth": "",
+          "sex": "male",
+          "occupation": "Teacher"
+        },
+        "presentingComplaint": {
+          "earSymptoms": "no",
+          "noseSymptoms": "yes",
+          "throatSymptoms": "yes",
+          "neckSymptoms": "no",
+          "chiefComplaint": "Nasal obstruction, loss of smell and poor sleep"
+        },
+        "historyOfPresentIllness": {
+          "onsetDate": "",
+          "onsetType": "gradual",
+          "progression": "worsening",
+          "laterality": "bilateral",
+          "previousEpisodes": "yes",
+          "aggravatingFactors": "Persistent throughout the year",
+          "relievingFactors": "None",
+          "associatedSymptoms": "Anosmia, facial pressure, fatigue"
+        },
+        "pastEntHistory": {
+          "priorEntSurgery": "yes",
+          "priorEntSurgeryDetails": "Previous polypectomy",
+          "chronicSinusitis": "yes",
+          "allergicRhinitis": "yes",
+          "hearingLoss": "no",
+          "tinnitus": "no",
+          "vertigo": "no",
+          "hearingAids": "no",
+          "headNeckCancer": "no",
+          "headNeckRadiotherapy": "no",
+          "smoking": "never",
+          "alcohol": "occasional"
+        },
+        "snot22": {
+          "needToBlowNose": 0,
+          "sneezing": 0,
+          "runnyNose": 0,
+          "nasalBlockage": 4,
+          "lossOfSmellTaste": 4,
+          "coughing": 0,
+          "postNasalDischarge": 3,
+          "thickNasalDischarge": 3,
+          "earFullness": 0,
+          "dizziness": 0,
+          "earPain": 0,
+          "facialPainPressure": 3,
+          "difficultyFallingAsleep": 3,
+          "wakingUpAtNight": 3,
+          "lackOfGoodNightsSleep": 4,
+          "wakingUpTired": 4,
+          "fatigue": 4,
+          "reducedProductivity": 3,
+          "reducedConcentration": 3,
+          "frustratedRestlessIrritable": 2,
+          "sad": 2,
+          "embarrassed": 0
+        },
+        "externalExamination": {
+          "facialAsymmetry": "no",
+          "facialSwelling": "no",
+          "skinLesions": "no",
+          "externalEarFindings": "",
+          "externalNoseFindings": "Nasal polyps visible",
+          "examinationNotes": ""
+        },
+        "otoscopy": {
+          "right": {
+            "tympanicMembrane": "normal",
+            "canal": "clear",
+            "mobility": "normal"
+          },
+          "left": {
+            "tympanicMembrane": "normal",
+            "canal": "clear",
+            "mobility": "normal"
+          },
+          "otoscopyNotes": ""
+        },
+        "anteriorRhinoscopy": {
+          "right": {
+            "septum": "midline",
+            "mucosa": "oedematous",
+            "polyps": "large",
+            "discharge": "mucopurulent",
+            "turbinateHypertrophy": "severe"
+          },
+          "left": {
+            "septum": "midline",
+            "mucosa": "oedematous",
+            "polyps": "large",
+            "discharge": "mucopurulent",
+            "turbinateHypertrophy": "severe"
+          },
+          "rhinoscopyNotes": ""
+        },
+        "oropharyngealNeckExamination": {
+          "oralMucosa": "normal",
+          "tonsils": "normal",
+          "pharynx": "cobblestoning",
+          "palateMovement": "symmetrical",
+          "cervicalLymphadenopathy": "no",
+          "cervicalLymphadenopathyDetails": "",
+          "thyroidEnlarged": "no",
+          "neckMass": "no",
+          "neckMassDetails": "",
+          "examinationNotes": ""
+        },
+        "clinicalImpressionPlan": {
+          "workingDiagnosis": "Chronic rhinosinusitis with nasal polyps",
+          "differentialDiagnosis": "",
+          "investigationsRequired": "yes",
+          "investigationsDetails": "CT sinuses, consider biologics assessment",
+          "medicationPrescribed": "yes",
+          "medicationDetails": "Oral corticosteroid course, intranasal steroid",
+          "referralRequired": "yes",
+          "referralDetails": "Rhinology specialist clinic",
+          "surgeryConsidered": "yes",
+          "surgeryDetails": "Revision endoscopic sinus surgery",
+          "followUpPlan": "Specialist review",
+          "patientEducation": "Discussed surgical and medical options"
+        }
+      },
+      "expected": {
+        "totalScore": 45,
+        "severityLevel": "severe",
+        "answeredCount": 22,
+        "firedRules": [
+          {
+            "id": "SNOT22-001",
+            "category": "SNOT-22",
+            "description": "Need to blow nose",
+            "score": 0
+          },
+          {
+            "id": "SNOT22-002",
+            "category": "SNOT-22",
+            "description": "Sneezing",
+            "score": 0
+          },
+          {
+            "id": "SNOT22-003",
+            "category": "SNOT-22",
+            "description": "Runny nose",
+            "score": 0
+          },
+          {
+            "id": "SNOT22-004",
+            "category": "SNOT-22",
+            "description": "Nasal blockage",
+            "score": 4
+          },
+          {
+            "id": "SNOT22-005",
+            "category": "SNOT-22",
+            "description": "Loss of smell or taste",
+            "score": 4
+          },
+          {
+            "id": "SNOT22-006",
+            "category": "SNOT-22",
+            "description": "Cough",
+            "score": 0
+          },
+          {
+            "id": "SNOT22-007",
+            "category": "SNOT-22",
+            "description": "Post-nasal discharge",
+            "score": 3
+          },
+          {
+            "id": "SNOT22-008",
+            "category": "SNOT-22",
+            "description": "Thick nasal discharge",
+            "score": 3
+          },
+          {
+            "id": "SNOT22-009",
+            "category": "SNOT-22",
+            "description": "Ear fullness",
+            "score": 0
+          },
+          {
+            "id": "SNOT22-010",
+            "category": "SNOT-22",
+            "description": "Dizziness",
+            "score": 0
+          },
+          {
+            "id": "SNOT22-011",
+            "category": "SNOT-22",
+            "description": "Ear pain",
+            "score": 0
+          },
+          {
+            "id": "SNOT22-012",
+            "category": "SNOT-22",
+            "description": "Facial pain or pressure",
+            "score": 3
+          },
+          {
+            "id": "SNOT22-013",
+            "category": "SNOT-22",
+            "description": "Difficulty falling asleep",
+            "score": 3
+          },
+          {
+            "id": "SNOT22-014",
+            "category": "SNOT-22",
+            "description": "Waking up at night",
+            "score": 3
+          },
+          {
+            "id": "SNOT22-015",
+            "category": "SNOT-22",
+            "description": "Lack of a good night’s sleep",
+            "score": 4
+          },
+          {
+            "id": "SNOT22-016",
+            "category": "SNOT-22",
+            "description": "Waking up tired",
+            "score": 4
+          },
+          {
+            "id": "SNOT22-017",
+            "category": "SNOT-22",
+            "description": "Fatigue",
+            "score": 4
+          },
+          {
+            "id": "SNOT22-018",
+            "category": "SNOT-22",
+            "description": "Reduced productivity",
+            "score": 3
+          },
+          {
+            "id": "SNOT22-019",
+            "category": "SNOT-22",
+            "description": "Reduced concentration",
+            "score": 3
+          },
+          {
+            "id": "SNOT22-020",
+            "category": "SNOT-22",
+            "description": "Frustrated, restless, or irritable",
+            "score": 2
+          },
+          {
+            "id": "SNOT22-021",
+            "category": "SNOT-22",
+            "description": "Sad",
+            "score": 2
+          },
+          {
+            "id": "SNOT22-022",
+            "category": "SNOT-22",
+            "description": "Embarrassed",
+            "score": 0
+          }
+        ]
+      }
+    }
+  ]
+}

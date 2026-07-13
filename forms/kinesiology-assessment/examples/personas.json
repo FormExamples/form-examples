@@ -1,0 +1,409 @@
+{
+  "engine": "front-end-with-html",
+  "graderHint": "gradeFMS",
+  "note": "Realistic filled-in states in the kinesiology-assessment scoring engine's shape. Graded on the Functional Movement Screen (FMS): seven patterns each 0-3 (bilateral patterns take the lower of left/right; pain during movement scores 0), summed 0-21, categorised >=18 Excellent, 14-17 Good, 10-13 Fair, <10 Poor, with an injury risk band (>=15 low-risk else at-risk). `expected` is computed by `bin/test-personas --update` and verified by `bin/test-personas`.",
+  "personas": [
+    {
+      "name": "excellent-low-risk",
+      "description": "Well-conditioned athlete with clean movement patterns and minor rotary-stability limitation: FMS total 20 — Excellent, low injury risk.",
+      "state": {
+        "demographics": {
+          "firstName": "",
+          "lastName": "",
+          "dateOfBirth": "",
+          "sex": "male"
+        },
+        "referralInfo": {
+          "referringProvider": "",
+          "referralReason": "Pre-season movement screen",
+          "referralDate": "",
+          "sportOrActivity": "football"
+        },
+        "movementHistory": {
+          "injuryHistory": "none",
+          "activityLevel": "high",
+          "sportParticipation": "competitive",
+          "currentPain": "no",
+          "currentPainDetails": "",
+          "previousTreatments": ""
+        },
+        "fmsPatterns": {
+          "deepSquat": {
+            "score": 3,
+            "painDuringMovement": false,
+            "leftScore": null,
+            "rightScore": null,
+            "asymmetryNotes": ""
+          },
+          "hurdleStep": {
+            "score": null,
+            "painDuringMovement": false,
+            "leftScore": 3,
+            "rightScore": 3,
+            "asymmetryNotes": ""
+          },
+          "inLineLunge": {
+            "score": null,
+            "painDuringMovement": false,
+            "leftScore": 3,
+            "rightScore": 3,
+            "asymmetryNotes": ""
+          },
+          "shoulderMobility": {
+            "score": null,
+            "painDuringMovement": false,
+            "leftScore": 3,
+            "rightScore": 3,
+            "asymmetryNotes": ""
+          },
+          "activeStraightLegRaise": {
+            "score": null,
+            "painDuringMovement": false,
+            "leftScore": 3,
+            "rightScore": 3,
+            "asymmetryNotes": ""
+          },
+          "trunkStabilityPushUp": {
+            "score": 3,
+            "painDuringMovement": false,
+            "leftScore": null,
+            "rightScore": null,
+            "asymmetryNotes": ""
+          },
+          "rotaryStability": {
+            "score": null,
+            "painDuringMovement": false,
+            "leftScore": 2,
+            "rightScore": 2,
+            "asymmetryNotes": "Symmetrical, unable to achieve unilateral pattern"
+          },
+          "clearingTests": {
+            "shoulderClearing": "negative",
+            "shoulderClearingPain": false,
+            "trunkFlexionClearing": "negative",
+            "trunkFlexionClearingPain": false,
+            "trunkExtensionClearing": "negative",
+            "trunkExtensionClearingPain": false
+          }
+        }
+      },
+      "expected": {
+        "totalScore": 20,
+        "fmsCategoryLabel": "Excellent",
+        "riskBand": "low-risk",
+        "firedRules": [
+          {
+            "id": "FMS-01",
+            "pattern": "Deep Squat",
+            "description": "Assesses bilateral, symmetrical, functional mobility of the hips, knees, and ankles. The dowel held overhead assesses bilateral, symmetrical mobility of the shoulders and thoracic spine.",
+            "score": 3
+          },
+          {
+            "id": "FMS-02",
+            "pattern": "Hurdle Step",
+            "description": "Assesses bilateral functional mobility and stability of the hips, knees, and ankles. Challenges the body's step and stride mechanics.",
+            "score": 3
+          },
+          {
+            "id": "FMS-03",
+            "pattern": "In-Line Lunge",
+            "description": "Assesses hip and trunk mobility and stability, quadriceps flexibility, and ankle and knee stability. Places the body in a position that challenges trunk and extremity mobility and stability.",
+            "score": 3
+          },
+          {
+            "id": "FMS-04",
+            "pattern": "Shoulder Mobility",
+            "description": "Assesses bilateral shoulder range of motion, combining internal rotation with adduction and external rotation with abduction. Requires normal scapular mobility and thoracic spine extension.",
+            "score": 3
+          },
+          {
+            "id": "FMS-05",
+            "pattern": "Active Straight Leg Raise",
+            "description": "Assesses active hamstring and gastroc-soleus flexibility while maintaining a stable pelvis and active extension of the opposite leg.",
+            "score": 3
+          },
+          {
+            "id": "FMS-06",
+            "pattern": "Trunk Stability Push-Up",
+            "description": "Assesses trunk stability in the sagittal plane while a symmetrical upper-extremity motion is performed. Tests the ability to stabilise the spine in an anterior and posterior plane during closed-chain upper body movement.",
+            "score": 3
+          },
+          {
+            "id": "FMS-07",
+            "pattern": "Rotary Stability",
+            "description": "Assesses multi-plane trunk stability during a combined upper and lower extremity motion. Challenges the body's ability to stabilise during combined movements.",
+            "score": 2
+          }
+        ]
+      }
+    },
+    {
+      "name": "fair-at-risk",
+      "description": "Recreational runner with a low lunge and left-right asymmetry: FMS total 12 — Fair, at injury risk.",
+      "state": {
+        "demographics": {
+          "firstName": "",
+          "lastName": "",
+          "dateOfBirth": "",
+          "sex": "female"
+        },
+        "referralInfo": {
+          "referringProvider": "",
+          "referralReason": "Recurrent lower-limb niggles",
+          "referralDate": "",
+          "sportOrActivity": "distance-running"
+        },
+        "movementHistory": {
+          "injuryHistory": "previous-ankle-sprain",
+          "activityLevel": "moderate",
+          "sportParticipation": "recreational",
+          "currentPain": "no",
+          "currentPainDetails": "",
+          "previousTreatments": "physiotherapy"
+        },
+        "fmsPatterns": {
+          "deepSquat": {
+            "score": 2,
+            "painDuringMovement": false,
+            "leftScore": null,
+            "rightScore": null,
+            "asymmetryNotes": ""
+          },
+          "hurdleStep": {
+            "score": null,
+            "painDuringMovement": false,
+            "leftScore": 2,
+            "rightScore": 2,
+            "asymmetryNotes": ""
+          },
+          "inLineLunge": {
+            "score": null,
+            "painDuringMovement": false,
+            "leftScore": 2,
+            "rightScore": 1,
+            "asymmetryNotes": "Loss of balance on right stance leg"
+          },
+          "shoulderMobility": {
+            "score": null,
+            "painDuringMovement": false,
+            "leftScore": 2,
+            "rightScore": 2,
+            "asymmetryNotes": ""
+          },
+          "activeStraightLegRaise": {
+            "score": null,
+            "painDuringMovement": false,
+            "leftScore": 2,
+            "rightScore": 2,
+            "asymmetryNotes": ""
+          },
+          "trunkStabilityPushUp": {
+            "score": 2,
+            "painDuringMovement": false,
+            "leftScore": null,
+            "rightScore": null,
+            "asymmetryNotes": ""
+          },
+          "rotaryStability": {
+            "score": null,
+            "painDuringMovement": false,
+            "leftScore": 1,
+            "rightScore": 1,
+            "asymmetryNotes": ""
+          },
+          "clearingTests": {
+            "shoulderClearing": "negative",
+            "shoulderClearingPain": false,
+            "trunkFlexionClearing": "negative",
+            "trunkFlexionClearingPain": false,
+            "trunkExtensionClearing": "negative",
+            "trunkExtensionClearingPain": false
+          }
+        }
+      },
+      "expected": {
+        "totalScore": 12,
+        "fmsCategoryLabel": "Fair",
+        "riskBand": "at-risk",
+        "firedRules": [
+          {
+            "id": "FMS-01",
+            "pattern": "Deep Squat",
+            "description": "Assesses bilateral, symmetrical, functional mobility of the hips, knees, and ankles. The dowel held overhead assesses bilateral, symmetrical mobility of the shoulders and thoracic spine.",
+            "score": 2
+          },
+          {
+            "id": "FMS-02",
+            "pattern": "Hurdle Step",
+            "description": "Assesses bilateral functional mobility and stability of the hips, knees, and ankles. Challenges the body's step and stride mechanics.",
+            "score": 2
+          },
+          {
+            "id": "FMS-03",
+            "pattern": "In-Line Lunge",
+            "description": "Assesses hip and trunk mobility and stability, quadriceps flexibility, and ankle and knee stability. Places the body in a position that challenges trunk and extremity mobility and stability.",
+            "score": 1
+          },
+          {
+            "id": "FMS-04",
+            "pattern": "Shoulder Mobility",
+            "description": "Assesses bilateral shoulder range of motion, combining internal rotation with adduction and external rotation with abduction. Requires normal scapular mobility and thoracic spine extension.",
+            "score": 2
+          },
+          {
+            "id": "FMS-05",
+            "pattern": "Active Straight Leg Raise",
+            "description": "Assesses active hamstring and gastroc-soleus flexibility while maintaining a stable pelvis and active extension of the opposite leg.",
+            "score": 2
+          },
+          {
+            "id": "FMS-06",
+            "pattern": "Trunk Stability Push-Up",
+            "description": "Assesses trunk stability in the sagittal plane while a symmetrical upper-extremity motion is performed. Tests the ability to stabilise the spine in an anterior and posterior plane during closed-chain upper body movement.",
+            "score": 2
+          },
+          {
+            "id": "FMS-07",
+            "pattern": "Rotary Stability",
+            "description": "Assesses multi-plane trunk stability during a combined upper and lower extremity motion. Challenges the body's ability to stabilise during combined movements.",
+            "score": 1
+          }
+        ]
+      }
+    },
+    {
+      "name": "poor-at-risk",
+      "description": "Deconditioned patient with pain on squat and lunge and multiple limited patterns: FMS total 5 — Poor, at injury risk.",
+      "state": {
+        "demographics": {
+          "firstName": "",
+          "lastName": "",
+          "dateOfBirth": "",
+          "sex": "male"
+        },
+        "referralInfo": {
+          "referringProvider": "",
+          "referralReason": "Chronic low back pain, return-to-activity screen",
+          "referralDate": "",
+          "sportOrActivity": "none"
+        },
+        "movementHistory": {
+          "injuryHistory": "chronic-low-back-pain",
+          "activityLevel": "sedentary",
+          "sportParticipation": "none",
+          "currentPain": "yes",
+          "currentPainDetails": "Lumbar pain provoked by squatting and lunging",
+          "previousTreatments": "analgesia"
+        },
+        "fmsPatterns": {
+          "deepSquat": {
+            "score": 0,
+            "painDuringMovement": true,
+            "leftScore": null,
+            "rightScore": null,
+            "asymmetryNotes": ""
+          },
+          "hurdleStep": {
+            "score": null,
+            "painDuringMovement": false,
+            "leftScore": 1,
+            "rightScore": 1,
+            "asymmetryNotes": ""
+          },
+          "inLineLunge": {
+            "score": 0,
+            "painDuringMovement": true,
+            "leftScore": null,
+            "rightScore": null,
+            "asymmetryNotes": "Lumbar pain reproduced"
+          },
+          "shoulderMobility": {
+            "score": null,
+            "painDuringMovement": false,
+            "leftScore": 2,
+            "rightScore": 1,
+            "asymmetryNotes": "Restricted right internal rotation"
+          },
+          "activeStraightLegRaise": {
+            "score": null,
+            "painDuringMovement": false,
+            "leftScore": 1,
+            "rightScore": 1,
+            "asymmetryNotes": ""
+          },
+          "trunkStabilityPushUp": {
+            "score": 1,
+            "painDuringMovement": false,
+            "leftScore": null,
+            "rightScore": null,
+            "asymmetryNotes": ""
+          },
+          "rotaryStability": {
+            "score": null,
+            "painDuringMovement": false,
+            "leftScore": 1,
+            "rightScore": 1,
+            "asymmetryNotes": ""
+          },
+          "clearingTests": {
+            "shoulderClearing": "negative",
+            "shoulderClearingPain": false,
+            "trunkFlexionClearing": "negative",
+            "trunkFlexionClearingPain": false,
+            "trunkExtensionClearing": "positive",
+            "trunkExtensionClearingPain": true
+          }
+        }
+      },
+      "expected": {
+        "totalScore": 5,
+        "fmsCategoryLabel": "Poor",
+        "riskBand": "at-risk",
+        "firedRules": [
+          {
+            "id": "FMS-01",
+            "pattern": "Deep Squat",
+            "description": "Pain during Deep Squat - score set to 0",
+            "score": 0
+          },
+          {
+            "id": "FMS-02",
+            "pattern": "Hurdle Step",
+            "description": "Assesses bilateral functional mobility and stability of the hips, knees, and ankles. Challenges the body's step and stride mechanics.",
+            "score": 1
+          },
+          {
+            "id": "FMS-03",
+            "pattern": "In-Line Lunge",
+            "description": "Pain during In-Line Lunge - score set to 0",
+            "score": 0
+          },
+          {
+            "id": "FMS-04",
+            "pattern": "Shoulder Mobility",
+            "description": "Assesses bilateral shoulder range of motion, combining internal rotation with adduction and external rotation with abduction. Requires normal scapular mobility and thoracic spine extension.",
+            "score": 1
+          },
+          {
+            "id": "FMS-05",
+            "pattern": "Active Straight Leg Raise",
+            "description": "Assesses active hamstring and gastroc-soleus flexibility while maintaining a stable pelvis and active extension of the opposite leg.",
+            "score": 1
+          },
+          {
+            "id": "FMS-06",
+            "pattern": "Trunk Stability Push-Up",
+            "description": "Assesses trunk stability in the sagittal plane while a symmetrical upper-extremity motion is performed. Tests the ability to stabilise the spine in an anterior and posterior plane during closed-chain upper body movement.",
+            "score": 1
+          },
+          {
+            "id": "FMS-07",
+            "pattern": "Rotary Stability",
+            "description": "Assesses multi-plane trunk stability during a combined upper and lower extremity motion. Challenges the body's ability to stabilise during combined movements.",
+            "score": 1
+          }
+        ]
+      }
+    }
+  ]
+}

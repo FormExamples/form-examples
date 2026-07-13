@@ -1,0 +1,319 @@
+{
+  "engine": "front-end-with-html",
+  "graderHint": "deriveFunctionalStatus",
+  "note": "Realistic filled-in states in the heart-failure-review scoring engine's shape. Graded on NYHA functional status derived from nyhaClass: <=2 stable, 3 symptomatic, 4 advanced. The full gradeReview stamps a live timestamp, so graderHint pins the deterministic state-taking deriveFunctionalStatus. `expected` is computed by `bin/test-personas --update` and verified by `bin/test-personas`.",
+  "personas": [
+    {
+      "name": "stable-nyha-2",
+      "description": "Well-optimised HFrEF on four-pillar therapy, mild exertional symptoms only: NYHA II — stable functional status.",
+      "state": {
+        "context": {
+          "clinicianName": "",
+          "clinicianRole": "gp",
+          "reviewDate": "",
+          "careSetting": "primary-care",
+          "reviewType": "annual",
+          "lastReviewDate": ""
+        },
+        "identification": {
+          "patientIdentifier": "",
+          "ageBand": "65-74",
+          "sex": "male"
+        },
+        "diagnosis": {
+          "yearOfDiagnosis": 2019,
+          "heartFailureType": "hfref",
+          "latestLvef": 34,
+          "lastEchoDate": "",
+          "aetiology": "ischaemic"
+        },
+        "functional": {
+          "nyhaClass": 2,
+          "breathlessness": "on-exertion",
+          "orthopnoea": "no",
+          "paroxysmalNocturnalDyspnoea": "no",
+          "fatigue": "mild",
+          "changeSinceLastReview": "unchanged",
+          "decompensation": "no"
+        },
+        "fluid": {
+          "weightKg": 82,
+          "weightChangeKg": 0,
+          "peripheralOedema": "none",
+          "raisedJvp": "no",
+          "lungCrackles": "no",
+          "systolicBloodPressure": 124,
+          "diastolicBloodPressure": 76,
+          "heartRate": 68,
+          "heartRhythm": "sinus"
+        },
+        "investigations": {
+          "ntProBnp": 620,
+          "sodium": 139,
+          "potassium": 4.4,
+          "urea": 6.1,
+          "creatinine": 96,
+          "egfr": 72,
+          "haemoglobin": 138,
+          "ferritin": 180,
+          "transferrinSaturation": 24,
+          "hba1c": 41,
+          "bloodsDate": ""
+        },
+        "medication": {
+          "raasInhibitorStatus": "prescribed",
+          "raasInhibitorAgent": "sacubitril-valsartan",
+          "raasInhibitorDose": "97/103mg BD",
+          "raasInhibitorAtTargetDose": "yes",
+          "raasInhibitorAdherence": "good",
+          "betaBlockerStatus": "prescribed",
+          "betaBlockerAgent": "bisoprolol",
+          "betaBlockerDose": "10mg OD",
+          "betaBlockerAtTargetDose": "yes",
+          "betaBlockerAdherence": "good",
+          "mraStatus": "prescribed",
+          "mraAgent": "spironolactone",
+          "mraDose": "25mg OD",
+          "mraAtTargetDose": "yes",
+          "mraAdherence": "good",
+          "sglt2InhibitorStatus": "prescribed",
+          "sglt2InhibitorAgent": "dapagliflozin",
+          "sglt2InhibitorDose": "10mg OD",
+          "sglt2InhibitorAtTargetDose": "yes",
+          "sglt2InhibitorAdherence": "good",
+          "loopDiureticAgent": "furosemide",
+          "loopDiureticDose": "40mg OD",
+          "otherMedications": ""
+        },
+        "devices": {
+          "icd": "no",
+          "crt": "no",
+          "pacemaker": "no",
+          "deviceCheckStatus": ""
+        },
+        "vaccinations": {
+          "influenzaVaccination": "yes",
+          "pneumococcalVaccination": "yes",
+          "covidVaccination": "yes",
+          "smokingStatus": "ex-smoker",
+          "alcoholStatus": "within-limits",
+          "dailyWeights": "yes",
+          "selfManagementPlan": "yes",
+          "cardiacRehab": "completed"
+        },
+        "summary": {
+          "reviewContext": ""
+        }
+      },
+      "expected": "stable"
+    },
+    {
+      "name": "symptomatic-nyha-3",
+      "description": "Marked limitation on ordinary activity with orthopnoea and early congestion: NYHA III — symptomatic functional status.",
+      "state": {
+        "context": {
+          "clinicianName": "",
+          "clinicianRole": "heart-failure-nurse",
+          "reviewDate": "",
+          "careSetting": "community-clinic",
+          "reviewType": "scheduled",
+          "lastReviewDate": ""
+        },
+        "identification": {
+          "patientIdentifier": "",
+          "ageBand": "75-84",
+          "sex": "female"
+        },
+        "diagnosis": {
+          "yearOfDiagnosis": 2016,
+          "heartFailureType": "hfref",
+          "latestLvef": 28,
+          "lastEchoDate": "",
+          "aetiology": "ischaemic"
+        },
+        "functional": {
+          "nyhaClass": 3,
+          "breathlessness": "minimal-exertion",
+          "orthopnoea": "yes",
+          "paroxysmalNocturnalDyspnoea": "yes",
+          "fatigue": "moderate",
+          "changeSinceLastReview": "worse",
+          "decompensation": "no"
+        },
+        "fluid": {
+          "weightKg": 74,
+          "weightChangeKg": 2,
+          "peripheralOedema": "moderate",
+          "raisedJvp": "yes",
+          "lungCrackles": "bibasal",
+          "systolicBloodPressure": 108,
+          "diastolicBloodPressure": 68,
+          "heartRate": 78,
+          "heartRhythm": "atrial-fibrillation"
+        },
+        "investigations": {
+          "ntProBnp": 2450,
+          "sodium": 136,
+          "potassium": 4.6,
+          "urea": 9.4,
+          "creatinine": 128,
+          "egfr": 48,
+          "haemoglobin": 118,
+          "ferritin": 62,
+          "transferrinSaturation": 16,
+          "hba1c": 44,
+          "bloodsDate": ""
+        },
+        "medication": {
+          "raasInhibitorStatus": "prescribed",
+          "raasInhibitorAgent": "ramipril",
+          "raasInhibitorDose": "5mg OD",
+          "raasInhibitorAtTargetDose": "no",
+          "raasInhibitorAdherence": "good",
+          "betaBlockerStatus": "prescribed",
+          "betaBlockerAgent": "bisoprolol",
+          "betaBlockerDose": "5mg OD",
+          "betaBlockerAtTargetDose": "no",
+          "betaBlockerAdherence": "good",
+          "mraStatus": "prescribed",
+          "mraAgent": "eplerenone",
+          "mraDose": "25mg OD",
+          "mraAtTargetDose": "yes",
+          "mraAdherence": "good",
+          "sglt2InhibitorStatus": "not-prescribed",
+          "sglt2InhibitorAgent": "",
+          "sglt2InhibitorDose": "",
+          "sglt2InhibitorAtTargetDose": "",
+          "sglt2InhibitorAdherence": "",
+          "loopDiureticAgent": "furosemide",
+          "loopDiureticDose": "80mg OD",
+          "otherMedications": ""
+        },
+        "devices": {
+          "icd": "yes",
+          "crt": "no",
+          "pacemaker": "no",
+          "deviceCheckStatus": "up-to-date"
+        },
+        "vaccinations": {
+          "influenzaVaccination": "yes",
+          "pneumococcalVaccination": "yes",
+          "covidVaccination": "yes",
+          "smokingStatus": "never",
+          "alcoholStatus": "within-limits",
+          "dailyWeights": "yes",
+          "selfManagementPlan": "yes",
+          "cardiacRehab": "declined"
+        },
+        "summary": {
+          "reviewContext": ""
+        }
+      },
+      "expected": "symptomatic"
+    },
+    {
+      "name": "advanced-nyha-4",
+      "description": "Symptoms at rest with recent decompensation and refractory congestion: NYHA IV — advanced functional status.",
+      "state": {
+        "context": {
+          "clinicianName": "",
+          "clinicianRole": "cardiologist",
+          "reviewDate": "",
+          "careSetting": "hospital-clinic",
+          "reviewType": "post-discharge",
+          "lastReviewDate": ""
+        },
+        "identification": {
+          "patientIdentifier": "",
+          "ageBand": "75-84",
+          "sex": "male"
+        },
+        "diagnosis": {
+          "yearOfDiagnosis": 2013,
+          "heartFailureType": "hfref",
+          "latestLvef": 20,
+          "lastEchoDate": "",
+          "aetiology": "dilated-cardiomyopathy"
+        },
+        "functional": {
+          "nyhaClass": 4,
+          "breathlessness": "at-rest",
+          "orthopnoea": "yes",
+          "paroxysmalNocturnalDyspnoea": "yes",
+          "fatigue": "severe",
+          "changeSinceLastReview": "worse",
+          "decompensation": "yes"
+        },
+        "fluid": {
+          "weightKg": 88,
+          "weightChangeKg": 4,
+          "peripheralOedema": "severe",
+          "raisedJvp": "yes",
+          "lungCrackles": "widespread",
+          "systolicBloodPressure": 96,
+          "diastolicBloodPressure": 60,
+          "heartRate": 92,
+          "heartRhythm": "atrial-fibrillation"
+        },
+        "investigations": {
+          "ntProBnp": 6800,
+          "sodium": 131,
+          "potassium": 4.9,
+          "urea": 16.2,
+          "creatinine": 172,
+          "egfr": 33,
+          "haemoglobin": 104,
+          "ferritin": 40,
+          "transferrinSaturation": 12,
+          "hba1c": 47,
+          "bloodsDate": ""
+        },
+        "medication": {
+          "raasInhibitorStatus": "not-tolerated",
+          "raasInhibitorAgent": "",
+          "raasInhibitorDose": "",
+          "raasInhibitorAtTargetDose": "",
+          "raasInhibitorAdherence": "",
+          "betaBlockerStatus": "prescribed",
+          "betaBlockerAgent": "carvedilol",
+          "betaBlockerDose": "3.125mg BD",
+          "betaBlockerAtTargetDose": "no",
+          "betaBlockerAdherence": "good",
+          "mraStatus": "not-tolerated",
+          "mraAgent": "",
+          "mraDose": "",
+          "mraAtTargetDose": "",
+          "mraAdherence": "",
+          "sglt2InhibitorStatus": "prescribed",
+          "sglt2InhibitorAgent": "empagliflozin",
+          "sglt2InhibitorDose": "10mg OD",
+          "sglt2InhibitorAtTargetDose": "yes",
+          "sglt2InhibitorAdherence": "good",
+          "loopDiureticAgent": "furosemide",
+          "loopDiureticDose": "120mg BD",
+          "otherMedications": ""
+        },
+        "devices": {
+          "icd": "yes",
+          "crt": "yes",
+          "pacemaker": "no",
+          "deviceCheckStatus": "up-to-date"
+        },
+        "vaccinations": {
+          "influenzaVaccination": "yes",
+          "pneumococcalVaccination": "yes",
+          "covidVaccination": "yes",
+          "smokingStatus": "ex-smoker",
+          "alcoholStatus": "abstinent",
+          "dailyWeights": "yes",
+          "selfManagementPlan": "yes",
+          "cardiacRehab": "not-eligible"
+        },
+        "summary": {
+          "reviewContext": ""
+        }
+      },
+      "expected": "advanced"
+    }
+  ]
+}

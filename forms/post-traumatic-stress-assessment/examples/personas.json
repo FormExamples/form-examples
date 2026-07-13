@@ -1,0 +1,178 @@
+{
+  "engine": "front-end-with-html",
+  "graderHint": "calculatePcl5",
+  "note": "Realistic filled-in states in the PCL-5 engine's shape. `expected` is computed by `bin/test-personas --update` and verified by `bin/test-personas`.",
+  "personas": [
+    {
+      "name": "minimal-below-cutoff",
+      "description": "Mild residual symptoms after a road traffic collision: PCL-5 total 10 — Minimal band, below the provisional PTSD cut-off of 33; no DSM-5 pattern.",
+      "state": {
+        "demographics": {
+          "firstName": "",
+          "lastName": "",
+          "dateOfBirth": "",
+          "sex": "female"
+        },
+        "traumaEvent": {
+          "eventDescription": "Road traffic collision six months ago",
+          "eventDate": "",
+          "isOngoing": false
+        },
+        "clusterBIntrusion": {
+          "item1RepeatedDisturbingMemories": 1,
+          "item2RepeatedDisturbingDreams": 1,
+          "item3FeelingReliving": 0,
+          "item4FeelingUpsetByReminders": 1,
+          "item5StrongPhysicalReactions": 0
+        },
+        "clusterCAvoidance": {
+          "item6AvoidingMemoriesThoughtsFeelings": 1,
+          "item7AvoidingExternalReminders": 0
+        },
+        "clusterDNegativeAlterations": {
+          "item8TroubleRememberingImportantParts": 1,
+          "item9StrongNegativeBeliefs": 0,
+          "item10BlamingSelfOrOthers": 0,
+          "item11StrongNegativeFeelings": 1,
+          "item12LossOfInterest": 0,
+          "item13FeelingDistantFromOthers": 1,
+          "item14TroubleExperiencingPositiveFeelings": 0
+        },
+        "clusterEArousalReactivity": {
+          "item15IrritableOrAggressive": 1,
+          "item16RecklessOrSelfDestructive": 0,
+          "item17SuperAlertOrOnGuard": 1,
+          "item18JumpyOrEasilyStartled": 0,
+          "item19DifficultyConcentrating": 1,
+          "item20TroubleSleeping": 0
+        }
+      },
+      "expected": {
+        "totalScore": 10,
+        "category": "Minimal",
+        "probableDsm5Diagnosis": false,
+        "clusterScores": {
+          "b": 3,
+          "c": 1,
+          "d": 3,
+          "e": 3
+        },
+        "answeredCount": 20
+      }
+    },
+    {
+      "name": "moderate-probable-ptsd",
+      "description": "Combat veteran meeting the provisional threshold: PCL-5 total 33 — Moderate band, at the cut-off of 33, DSM-5 symptom pattern satisfied (probable PTSD).",
+      "state": {
+        "demographics": {
+          "firstName": "",
+          "lastName": "",
+          "dateOfBirth": "",
+          "sex": "male"
+        },
+        "traumaEvent": {
+          "eventDescription": "Combat exposure during military deployment",
+          "eventDate": "",
+          "isOngoing": false
+        },
+        "clusterBIntrusion": {
+          "item1RepeatedDisturbingMemories": 2,
+          "item2RepeatedDisturbingDreams": 2,
+          "item3FeelingReliving": 2,
+          "item4FeelingUpsetByReminders": 2,
+          "item5StrongPhysicalReactions": 1
+        },
+        "clusterCAvoidance": {
+          "item6AvoidingMemoriesThoughtsFeelings": 2,
+          "item7AvoidingExternalReminders": 2
+        },
+        "clusterDNegativeAlterations": {
+          "item8TroubleRememberingImportantParts": 2,
+          "item9StrongNegativeBeliefs": 2,
+          "item10BlamingSelfOrOthers": 2,
+          "item11StrongNegativeFeelings": 2,
+          "item12LossOfInterest": 1,
+          "item13FeelingDistantFromOthers": 1,
+          "item14TroubleExperiencingPositiveFeelings": 1
+        },
+        "clusterEArousalReactivity": {
+          "item15IrritableOrAggressive": 2,
+          "item16RecklessOrSelfDestructive": 2,
+          "item17SuperAlertOrOnGuard": 2,
+          "item18JumpyOrEasilyStartled": 1,
+          "item19DifficultyConcentrating": 1,
+          "item20TroubleSleeping": 1
+        }
+      },
+      "expected": {
+        "totalScore": 33,
+        "category": "Moderate",
+        "probableDsm5Diagnosis": true,
+        "clusterScores": {
+          "b": 9,
+          "c": 4,
+          "d": 11,
+          "e": 9
+        },
+        "answeredCount": 20
+      }
+    },
+    {
+      "name": "severe-probable-ptsd",
+      "description": "Assault survivor with pervasive symptoms: PCL-5 total 47 — Severe band, well above cut-off, DSM-5 symptom pattern satisfied (probable PTSD).",
+      "state": {
+        "demographics": {
+          "firstName": "",
+          "lastName": "",
+          "dateOfBirth": "",
+          "sex": "female"
+        },
+        "traumaEvent": {
+          "eventDescription": "Physical assault, ongoing intrusive distress",
+          "eventDate": "",
+          "isOngoing": false
+        },
+        "clusterBIntrusion": {
+          "item1RepeatedDisturbingMemories": 3,
+          "item2RepeatedDisturbingDreams": 3,
+          "item3FeelingReliving": 3,
+          "item4FeelingUpsetByReminders": 2,
+          "item5StrongPhysicalReactions": 2
+        },
+        "clusterCAvoidance": {
+          "item6AvoidingMemoriesThoughtsFeelings": 3,
+          "item7AvoidingExternalReminders": 3
+        },
+        "clusterDNegativeAlterations": {
+          "item8TroubleRememberingImportantParts": 3,
+          "item9StrongNegativeBeliefs": 3,
+          "item10BlamingSelfOrOthers": 2,
+          "item11StrongNegativeFeelings": 2,
+          "item12LossOfInterest": 2,
+          "item13FeelingDistantFromOthers": 2,
+          "item14TroubleExperiencingPositiveFeelings": 1
+        },
+        "clusterEArousalReactivity": {
+          "item15IrritableOrAggressive": 3,
+          "item16RecklessOrSelfDestructive": 3,
+          "item17SuperAlertOrOnGuard": 2,
+          "item18JumpyOrEasilyStartled": 2,
+          "item19DifficultyConcentrating": 2,
+          "item20TroubleSleeping": 1
+        }
+      },
+      "expected": {
+        "totalScore": 47,
+        "category": "Severe",
+        "probableDsm5Diagnosis": true,
+        "clusterScores": {
+          "b": 13,
+          "c": 6,
+          "d": 15,
+          "e": 13
+        },
+        "answeredCount": 20
+      }
+    }
+  ]
+}

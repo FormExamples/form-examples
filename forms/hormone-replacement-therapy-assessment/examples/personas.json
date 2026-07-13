@@ -1,0 +1,328 @@
+{
+  "engine": "front-end-with-html",
+  "graderHint": "classifyHRTRisk",
+  "note": "Realistic filled-in states in the HRT-assessment scoring engine's shape. Graded on the HRT risk classification: absolute contraindications -> Contraindicated; >=2 relative-caution factors -> Cautious; 1 -> Acceptable; 0 -> Favourable. The auto-discovered grader already resolves to classifyHRTRisk (state-taking, deterministic); graderHint pins it explicitly. `expected` is computed by `bin/test-personas --update` and verified by `bin/test-personas`.",
+  "personas": [
+    {
+      "name": "favourable",
+      "description": "Recently menopausal woman with troublesome vasomotor symptoms and no risk factors: no contraindications, 0 caution factors — Favourable.",
+      "state": {
+        "demographics": {
+          "firstName": "",
+          "lastName": "",
+          "dateOfBirth": "",
+          "sex": "female",
+          "weight": 68,
+          "height": 165,
+          "bmi": 25
+        },
+        "menopauseStatus": {
+          "menopausalStatus": "perimenopausal",
+          "lastMenstrualPeriod": "",
+          "ageAtMenopause": null,
+          "surgicalMenopause": "no",
+          "surgicalMenopauseDetails": "",
+          "prematureOvarianInsufficiency": "no"
+        },
+        "mrsSymptomScale": {
+          "hotFlushes": 3,
+          "heartDiscomfort": 1,
+          "sleepProblems": 3,
+          "jointPain": 1,
+          "depressiveMood": 2,
+          "irritability": 2,
+          "anxiety": 1,
+          "fatigue": 2,
+          "sexualProblems": 1,
+          "bladderProblems": 0,
+          "vaginalDryness": 1
+        },
+        "vasomotorSymptoms": {
+          "hotFlushFrequency": "daily",
+          "hotFlushSeverity": "severe",
+          "nightSweats": "yes",
+          "nightSweatsFrequency": "nightly",
+          "triggers": ""
+        },
+        "boneHealth": {
+          "dexaScan": "no",
+          "dexaResult": "",
+          "dexaDate": "",
+          "fractureHistory": "no",
+          "fractureDetails": "",
+          "heightLoss": "no",
+          "heightLossCm": null,
+          "riskFactors": "",
+          "calciumIntake": "adequate",
+          "vitaminDIntake": "supplement"
+        },
+        "cardiovascularRisk": {
+          "systolicBP": 122,
+          "diastolicBP": 78,
+          "totalCholesterol": 4.8,
+          "hdlCholesterol": 1.6,
+          "ldlCholesterol": 2.6,
+          "triglycerides": 1.1,
+          "familyHistoryCVD": "no",
+          "diabetes": "no",
+          "diabetesType": "",
+          "smoking": "never",
+          "qriskScore": 4
+        },
+        "breastHealth": {
+          "lastMammogram": "",
+          "mammogramResult": "normal",
+          "breastExamNormal": "yes",
+          "familyHistoryBreastCancer": "no",
+          "familyHistoryOvarianCancer": "no",
+          "brcaStatus": "not-tested",
+          "brcaType": ""
+        },
+        "currentMedications": {
+          "currentHRT": "no",
+          "currentHRTDetails": "",
+          "currentHRTDuration": "",
+          "previousHRT": "no",
+          "previousHRTDetails": "",
+          "previousHRTReason": "",
+          "otherMedications": [],
+          "supplements": ""
+        },
+        "contraindicationsScreen": {
+          "vteHistory": "no",
+          "vteDetails": "",
+          "breastCancerHistory": "no",
+          "breastCancerDetails": "",
+          "liverDisease": "no",
+          "liverDiseaseDetails": "",
+          "undiagnosedVaginalBleeding": "no",
+          "pregnancy": "no",
+          "activeCardiovascularDisease": "no",
+          "activeCardiovascularDetails": ""
+        },
+        "treatmentPreferences": {
+          "routePreference": "transdermal",
+          "routePreferenceReason": "",
+          "concernsAboutHRT": "",
+          "lifestyleFactors": "",
+          "treatmentGoals": ""
+        }
+      },
+      "expected": "Favourable"
+    },
+    {
+      "name": "cautious",
+      "description": "Vasomotor symptoms with a personal VTE history and a first-degree family history of breast cancer: 2 relative-caution factors — Cautious.",
+      "state": {
+        "demographics": {
+          "firstName": "",
+          "lastName": "",
+          "dateOfBirth": "",
+          "sex": "female",
+          "weight": 82,
+          "height": 162,
+          "bmi": 31
+        },
+        "menopauseStatus": {
+          "menopausalStatus": "postmenopausal",
+          "lastMenstrualPeriod": "",
+          "ageAtMenopause": 51,
+          "surgicalMenopause": "no",
+          "surgicalMenopauseDetails": "",
+          "prematureOvarianInsufficiency": "no"
+        },
+        "mrsSymptomScale": {
+          "hotFlushes": 3,
+          "heartDiscomfort": 2,
+          "sleepProblems": 3,
+          "jointPain": 2,
+          "depressiveMood": 2,
+          "irritability": 2,
+          "anxiety": 2,
+          "fatigue": 3,
+          "sexualProblems": 2,
+          "bladderProblems": 1,
+          "vaginalDryness": 2
+        },
+        "vasomotorSymptoms": {
+          "hotFlushFrequency": "daily",
+          "hotFlushSeverity": "moderate",
+          "nightSweats": "yes",
+          "nightSweatsFrequency": "nightly",
+          "triggers": ""
+        },
+        "boneHealth": {
+          "dexaScan": "no",
+          "dexaResult": "",
+          "dexaDate": "",
+          "fractureHistory": "no",
+          "fractureDetails": "",
+          "heightLoss": "no",
+          "heightLossCm": null,
+          "riskFactors": "",
+          "calciumIntake": "adequate",
+          "vitaminDIntake": "none"
+        },
+        "cardiovascularRisk": {
+          "systolicBP": 134,
+          "diastolicBP": 84,
+          "totalCholesterol": 5.4,
+          "hdlCholesterol": 1.3,
+          "ldlCholesterol": 3.2,
+          "triglycerides": 1.7,
+          "familyHistoryCVD": "yes",
+          "diabetes": "no",
+          "diabetesType": "",
+          "smoking": "ex-smoker",
+          "qriskScore": 8
+        },
+        "breastHealth": {
+          "lastMammogram": "",
+          "mammogramResult": "normal",
+          "breastExamNormal": "yes",
+          "familyHistoryBreastCancer": "yes",
+          "familyHistoryOvarianCancer": "no",
+          "brcaStatus": "not-tested",
+          "brcaType": ""
+        },
+        "currentMedications": {
+          "currentHRT": "no",
+          "currentHRTDetails": "",
+          "currentHRTDuration": "",
+          "previousHRT": "no",
+          "previousHRTDetails": "",
+          "previousHRTReason": "",
+          "otherMedications": [],
+          "supplements": ""
+        },
+        "contraindicationsScreen": {
+          "vteHistory": "yes",
+          "vteDetails": "Provoked DVT post-surgery, 2018",
+          "breastCancerHistory": "no",
+          "breastCancerDetails": "",
+          "liverDisease": "no",
+          "liverDiseaseDetails": "",
+          "undiagnosedVaginalBleeding": "no",
+          "pregnancy": "no",
+          "activeCardiovascularDisease": "no",
+          "activeCardiovascularDetails": ""
+        },
+        "treatmentPreferences": {
+          "routePreference": "transdermal",
+          "routePreferenceReason": "Lower VTE risk than oral route",
+          "concernsAboutHRT": "",
+          "lifestyleFactors": "",
+          "treatmentGoals": ""
+        }
+      },
+      "expected": "Cautious"
+    },
+    {
+      "name": "contraindicated",
+      "description": "Personal history of breast cancer requesting HRT for vasomotor symptoms: absolute contraindication — Contraindicated.",
+      "state": {
+        "demographics": {
+          "firstName": "",
+          "lastName": "",
+          "dateOfBirth": "",
+          "sex": "female",
+          "weight": 70,
+          "height": 168,
+          "bmi": 25
+        },
+        "menopauseStatus": {
+          "menopausalStatus": "postmenopausal",
+          "lastMenstrualPeriod": "",
+          "ageAtMenopause": 48,
+          "surgicalMenopause": "no",
+          "surgicalMenopauseDetails": "",
+          "prematureOvarianInsufficiency": "no"
+        },
+        "mrsSymptomScale": {
+          "hotFlushes": 3,
+          "heartDiscomfort": 1,
+          "sleepProblems": 2,
+          "jointPain": 2,
+          "depressiveMood": 2,
+          "irritability": 1,
+          "anxiety": 1,
+          "fatigue": 2,
+          "sexualProblems": 2,
+          "bladderProblems": 1,
+          "vaginalDryness": 3
+        },
+        "vasomotorSymptoms": {
+          "hotFlushFrequency": "daily",
+          "hotFlushSeverity": "severe",
+          "nightSweats": "yes",
+          "nightSweatsFrequency": "nightly",
+          "triggers": ""
+        },
+        "boneHealth": {
+          "dexaScan": "yes",
+          "dexaResult": "osteopenia",
+          "dexaDate": "",
+          "fractureHistory": "no",
+          "fractureDetails": "",
+          "heightLoss": "no",
+          "heightLossCm": null,
+          "riskFactors": "",
+          "calciumIntake": "adequate",
+          "vitaminDIntake": "supplement"
+        },
+        "cardiovascularRisk": {
+          "systolicBP": 126,
+          "diastolicBP": 80,
+          "totalCholesterol": 5,
+          "hdlCholesterol": 1.5,
+          "ldlCholesterol": 2.9,
+          "triglycerides": 1.2,
+          "familyHistoryCVD": "no",
+          "diabetes": "no",
+          "diabetesType": "",
+          "smoking": "never",
+          "qriskScore": 6
+        },
+        "breastHealth": {
+          "lastMammogram": "",
+          "mammogramResult": "normal",
+          "breastExamNormal": "yes",
+          "familyHistoryBreastCancer": "no",
+          "familyHistoryOvarianCancer": "no",
+          "brcaStatus": "not-tested",
+          "brcaType": ""
+        },
+        "currentMedications": {
+          "currentHRT": "no",
+          "currentHRTDetails": "",
+          "currentHRTDuration": "",
+          "previousHRT": "no",
+          "previousHRTDetails": "",
+          "previousHRTReason": "",
+          "otherMedications": [],
+          "supplements": ""
+        },
+        "contraindicationsScreen": {
+          "vteHistory": "no",
+          "vteDetails": "",
+          "breastCancerHistory": "yes",
+          "breastCancerDetails": "ER-positive invasive ductal carcinoma treated 2021, on adjuvant endocrine therapy",
+          "liverDisease": "no",
+          "liverDiseaseDetails": "",
+          "undiagnosedVaginalBleeding": "no",
+          "pregnancy": "no",
+          "activeCardiovascularDisease": "no",
+          "activeCardiovascularDetails": ""
+        },
+        "treatmentPreferences": {
+          "routePreference": "",
+          "routePreferenceReason": "",
+          "concernsAboutHRT": "",
+          "lifestyleFactors": "",
+          "treatmentGoals": "Non-hormonal management of vasomotor symptoms"
+        }
+      },
+      "expected": "Contraindicated"
+    }
+  ]
+}

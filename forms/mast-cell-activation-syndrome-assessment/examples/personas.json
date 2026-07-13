@@ -1,0 +1,604 @@
+{
+  "engine": "front-end-with-html",
+  "graderHint": "calculateMCASScore",
+  "note": "Realistic filled-in states in the MCAS-assessment scoring engine's shape. Graded on a symptom-burden score summing severity (0-3) across 20 symptoms in 5 organ systems, capped at 40, banded <=10 Minimal, 11-20 Mild, 21-30 Moderate, >30 Severe. `expected` is computed by `bin/test-personas --update` and verified by `bin/test-personas`.",
+  "personas": [
+    {
+      "name": "minimal",
+      "description": "Occasional flushing, mild pruritus, bloating and fatigue across three systems: symptom score 8 — Minimal.",
+      "state": {
+        "demographics": {
+          "firstName": "",
+          "lastName": "",
+          "dateOfBirth": "",
+          "sex": "female"
+        },
+        "symptomOverview": {
+          "onsetDate": "",
+          "symptomDuration": "6-12-months",
+          "symptomFrequency": "occasional",
+          "qualityOfLife": "mildly-affected"
+        },
+        "dermatologicalSymptoms": {
+          "flushing": {
+            "severity": 2,
+            "frequency": "weekly"
+          },
+          "urticaria": {
+            "severity": null,
+            "frequency": ""
+          },
+          "angioedema": {
+            "severity": null,
+            "frequency": ""
+          },
+          "pruritus": {
+            "severity": 1,
+            "frequency": "occasional"
+          }
+        },
+        "gastrointestinalSymptoms": {
+          "abdominalPain": {
+            "severity": null,
+            "frequency": ""
+          },
+          "nausea": {
+            "severity": null,
+            "frequency": ""
+          },
+          "diarrhea": {
+            "severity": null,
+            "frequency": ""
+          },
+          "bloating": {
+            "severity": 1,
+            "frequency": "weekly"
+          }
+        },
+        "cardiovascularSymptoms": {
+          "tachycardia": {
+            "severity": null,
+            "frequency": ""
+          },
+          "hypotension": {
+            "severity": null,
+            "frequency": ""
+          },
+          "presyncope": {
+            "severity": null,
+            "frequency": ""
+          },
+          "syncope": {
+            "severity": null,
+            "frequency": ""
+          }
+        },
+        "respiratorySymptoms": {
+          "wheezing": {
+            "severity": null,
+            "frequency": ""
+          },
+          "dyspnea": {
+            "severity": null,
+            "frequency": ""
+          },
+          "nasalCongestion": {
+            "severity": null,
+            "frequency": ""
+          },
+          "throatTightening": {
+            "severity": null,
+            "frequency": ""
+          }
+        },
+        "neurologicalSymptoms": {
+          "headache": {
+            "severity": 2,
+            "frequency": "weekly"
+          },
+          "brainFog": {
+            "severity": null,
+            "frequency": ""
+          },
+          "dizziness": {
+            "severity": null,
+            "frequency": ""
+          },
+          "fatigue": {
+            "severity": 2,
+            "frequency": "daily"
+          }
+        },
+        "triggersPatterns": {
+          "foodTriggers": "",
+          "environmentalTriggers": "",
+          "stressTriggers": "yes",
+          "exerciseTrigger": "",
+          "temperatureTrigger": "",
+          "medicationTriggers": ""
+        },
+        "laboratoryResults": {
+          "serumTryptase": 5.2,
+          "histamine": null,
+          "prostaglandinD2": null,
+          "chromograninA": null
+        },
+        "currentTreatment": {
+          "antihistamines": "prn",
+          "mastCellStabilizers": "none",
+          "leukotrienInhibitors": "none",
+          "epinephrine": "none"
+        }
+      },
+      "expected": {
+        "symptomScore": 8,
+        "mcasCategoryLabel": "Minimal",
+        "organSystemsAffected": 3,
+        "firedRules": [
+          {
+            "id": "MCAS-DERM-FLUSHING",
+            "domain": "Dermatological",
+            "description": "Flushing: severity 2/3, frequency weekly",
+            "score": 2
+          },
+          {
+            "id": "MCAS-DERM-PRURITUS",
+            "domain": "Dermatological",
+            "description": "Pruritus: severity 1/3, frequency occasional",
+            "score": 1
+          },
+          {
+            "id": "MCAS-GI-BLOATING",
+            "domain": "Gastrointestinal",
+            "description": "Bloating: severity 1/3, frequency weekly",
+            "score": 1
+          },
+          {
+            "id": "MCAS-NEURO-HEADACHE",
+            "domain": "Neurological",
+            "description": "Headache: severity 2/3, frequency weekly",
+            "score": 2
+          },
+          {
+            "id": "MCAS-NEURO-FATIGUE",
+            "domain": "Neurological",
+            "description": "Fatigue: severity 2/3, frequency daily",
+            "score": 2
+          }
+        ]
+      }
+    },
+    {
+      "name": "moderate",
+      "description": "Multi-system involvement with GI, dermatological, cardiovascular and neurological symptoms: symptom score 24 — Moderate.",
+      "state": {
+        "demographics": {
+          "firstName": "",
+          "lastName": "",
+          "dateOfBirth": "",
+          "sex": "female"
+        },
+        "symptomOverview": {
+          "onsetDate": "",
+          "symptomDuration": "1-2-years",
+          "symptomFrequency": "frequent",
+          "qualityOfLife": "moderately-affected"
+        },
+        "dermatologicalSymptoms": {
+          "flushing": {
+            "severity": 3,
+            "frequency": "daily"
+          },
+          "urticaria": {
+            "severity": 2,
+            "frequency": "weekly"
+          },
+          "angioedema": {
+            "severity": null,
+            "frequency": ""
+          },
+          "pruritus": {
+            "severity": null,
+            "frequency": ""
+          }
+        },
+        "gastrointestinalSymptoms": {
+          "abdominalPain": {
+            "severity": 2,
+            "frequency": "daily"
+          },
+          "nausea": {
+            "severity": 2,
+            "frequency": "daily"
+          },
+          "diarrhea": {
+            "severity": 2,
+            "frequency": "weekly"
+          },
+          "bloating": {
+            "severity": null,
+            "frequency": ""
+          }
+        },
+        "cardiovascularSymptoms": {
+          "tachycardia": {
+            "severity": 2,
+            "frequency": "daily"
+          },
+          "hypotension": {
+            "severity": null,
+            "frequency": ""
+          },
+          "presyncope": {
+            "severity": 1,
+            "frequency": "weekly"
+          },
+          "syncope": {
+            "severity": null,
+            "frequency": ""
+          }
+        },
+        "respiratorySymptoms": {
+          "wheezing": {
+            "severity": null,
+            "frequency": ""
+          },
+          "dyspnea": {
+            "severity": null,
+            "frequency": ""
+          },
+          "nasalCongestion": {
+            "severity": 2,
+            "frequency": "daily"
+          },
+          "throatTightening": {
+            "severity": null,
+            "frequency": ""
+          }
+        },
+        "neurologicalSymptoms": {
+          "headache": {
+            "severity": null,
+            "frequency": ""
+          },
+          "brainFog": {
+            "severity": 3,
+            "frequency": "daily"
+          },
+          "dizziness": {
+            "severity": 2,
+            "frequency": "daily"
+          },
+          "fatigue": {
+            "severity": 3,
+            "frequency": "daily"
+          }
+        },
+        "triggersPatterns": {
+          "foodTriggers": "yes",
+          "environmentalTriggers": "yes",
+          "stressTriggers": "yes",
+          "exerciseTrigger": "",
+          "temperatureTrigger": "yes",
+          "medicationTriggers": ""
+        },
+        "laboratoryResults": {
+          "serumTryptase": 9.8,
+          "histamine": null,
+          "prostaglandinD2": null,
+          "chromograninA": null
+        },
+        "currentTreatment": {
+          "antihistamines": "daily-h1",
+          "mastCellStabilizers": "none",
+          "leukotrienInhibitors": "none",
+          "epinephrine": "prescribed"
+        }
+      },
+      "expected": {
+        "symptomScore": 24,
+        "mcasCategoryLabel": "Moderate",
+        "organSystemsAffected": 5,
+        "firedRules": [
+          {
+            "id": "MCAS-DERM-FLUSHING",
+            "domain": "Dermatological",
+            "description": "Flushing: severity 3/3, frequency daily",
+            "score": 3
+          },
+          {
+            "id": "MCAS-DERM-URTICARIA",
+            "domain": "Dermatological",
+            "description": "Urticaria: severity 2/3, frequency weekly",
+            "score": 2
+          },
+          {
+            "id": "MCAS-GI-ABDOMINAL-PAIN",
+            "domain": "Gastrointestinal",
+            "description": "Abdominal Pain: severity 2/3, frequency daily",
+            "score": 2
+          },
+          {
+            "id": "MCAS-GI-NAUSEA",
+            "domain": "Gastrointestinal",
+            "description": "Nausea: severity 2/3, frequency daily",
+            "score": 2
+          },
+          {
+            "id": "MCAS-GI-DIARRHEA",
+            "domain": "Gastrointestinal",
+            "description": "Diarrhea: severity 2/3, frequency weekly",
+            "score": 2
+          },
+          {
+            "id": "MCAS-CV-TACHYCARDIA",
+            "domain": "Cardiovascular",
+            "description": "Tachycardia: severity 2/3, frequency daily",
+            "score": 2
+          },
+          {
+            "id": "MCAS-CV-PRESYNCOPE",
+            "domain": "Cardiovascular",
+            "description": "Presyncope: severity 1/3, frequency weekly",
+            "score": 1
+          },
+          {
+            "id": "MCAS-RESP-NASAL-CONGESTION",
+            "domain": "Respiratory",
+            "description": "Nasal Congestion: severity 2/3, frequency daily",
+            "score": 2
+          },
+          {
+            "id": "MCAS-NEURO-BRAIN-FOG",
+            "domain": "Neurological",
+            "description": "Brain Fog: severity 3/3, frequency daily",
+            "score": 3
+          },
+          {
+            "id": "MCAS-NEURO-DIZZINESS",
+            "domain": "Neurological",
+            "description": "Dizziness: severity 2/3, frequency daily",
+            "score": 2
+          },
+          {
+            "id": "MCAS-NEURO-FATIGUE",
+            "domain": "Neurological",
+            "description": "Fatigue: severity 3/3, frequency daily",
+            "score": 3
+          }
+        ]
+      }
+    },
+    {
+      "name": "severe",
+      "description": "Severe symptoms across all five organ systems with anaphylactoid features: symptom score capped at 40 — Severe.",
+      "state": {
+        "demographics": {
+          "firstName": "",
+          "lastName": "",
+          "dateOfBirth": "",
+          "sex": "female"
+        },
+        "symptomOverview": {
+          "onsetDate": "",
+          "symptomDuration": "more-than-2-years",
+          "symptomFrequency": "daily",
+          "qualityOfLife": "severely-affected"
+        },
+        "dermatologicalSymptoms": {
+          "flushing": {
+            "severity": 3,
+            "frequency": "daily"
+          },
+          "urticaria": {
+            "severity": 3,
+            "frequency": "daily"
+          },
+          "angioedema": {
+            "severity": 3,
+            "frequency": "weekly"
+          },
+          "pruritus": {
+            "severity": 3,
+            "frequency": "daily"
+          }
+        },
+        "gastrointestinalSymptoms": {
+          "abdominalPain": {
+            "severity": 3,
+            "frequency": "daily"
+          },
+          "nausea": {
+            "severity": 3,
+            "frequency": "daily"
+          },
+          "diarrhea": {
+            "severity": 3,
+            "frequency": "daily"
+          },
+          "bloating": {
+            "severity": 2,
+            "frequency": "daily"
+          }
+        },
+        "cardiovascularSymptoms": {
+          "tachycardia": {
+            "severity": 3,
+            "frequency": "daily"
+          },
+          "hypotension": {
+            "severity": 2,
+            "frequency": "weekly"
+          },
+          "presyncope": {
+            "severity": 3,
+            "frequency": "daily"
+          },
+          "syncope": {
+            "severity": 2,
+            "frequency": "monthly"
+          }
+        },
+        "respiratorySymptoms": {
+          "wheezing": {
+            "severity": 2,
+            "frequency": "weekly"
+          },
+          "dyspnea": {
+            "severity": 3,
+            "frequency": "daily"
+          },
+          "nasalCongestion": {
+            "severity": null,
+            "frequency": ""
+          },
+          "throatTightening": {
+            "severity": null,
+            "frequency": ""
+          }
+        },
+        "neurologicalSymptoms": {
+          "headache": {
+            "severity": null,
+            "frequency": ""
+          },
+          "brainFog": {
+            "severity": 3,
+            "frequency": "daily"
+          },
+          "dizziness": {
+            "severity": null,
+            "frequency": ""
+          },
+          "fatigue": {
+            "severity": 3,
+            "frequency": "daily"
+          }
+        },
+        "triggersPatterns": {
+          "foodTriggers": "yes",
+          "environmentalTriggers": "yes",
+          "stressTriggers": "yes",
+          "exerciseTrigger": "yes",
+          "temperatureTrigger": "yes",
+          "medicationTriggers": "yes"
+        },
+        "laboratoryResults": {
+          "serumTryptase": 18.5,
+          "histamine": null,
+          "prostaglandinD2": null,
+          "chromograninA": null
+        },
+        "currentTreatment": {
+          "antihistamines": "daily-h1-h2",
+          "mastCellStabilizers": "cromolyn",
+          "leukotrienInhibitors": "montelukast",
+          "epinephrine": "prescribed"
+        }
+      },
+      "expected": {
+        "symptomScore": 40,
+        "mcasCategoryLabel": "Severe",
+        "organSystemsAffected": 5,
+        "firedRules": [
+          {
+            "id": "MCAS-DERM-FLUSHING",
+            "domain": "Dermatological",
+            "description": "Flushing: severity 3/3, frequency daily",
+            "score": 3
+          },
+          {
+            "id": "MCAS-DERM-URTICARIA",
+            "domain": "Dermatological",
+            "description": "Urticaria: severity 3/3, frequency daily",
+            "score": 3
+          },
+          {
+            "id": "MCAS-DERM-ANGIOEDEMA",
+            "domain": "Dermatological",
+            "description": "Angioedema: severity 3/3, frequency weekly",
+            "score": 3
+          },
+          {
+            "id": "MCAS-DERM-PRURITUS",
+            "domain": "Dermatological",
+            "description": "Pruritus: severity 3/3, frequency daily",
+            "score": 3
+          },
+          {
+            "id": "MCAS-GI-ABDOMINAL-PAIN",
+            "domain": "Gastrointestinal",
+            "description": "Abdominal Pain: severity 3/3, frequency daily",
+            "score": 3
+          },
+          {
+            "id": "MCAS-GI-NAUSEA",
+            "domain": "Gastrointestinal",
+            "description": "Nausea: severity 3/3, frequency daily",
+            "score": 3
+          },
+          {
+            "id": "MCAS-GI-DIARRHEA",
+            "domain": "Gastrointestinal",
+            "description": "Diarrhea: severity 3/3, frequency daily",
+            "score": 3
+          },
+          {
+            "id": "MCAS-GI-BLOATING",
+            "domain": "Gastrointestinal",
+            "description": "Bloating: severity 2/3, frequency daily",
+            "score": 2
+          },
+          {
+            "id": "MCAS-CV-TACHYCARDIA",
+            "domain": "Cardiovascular",
+            "description": "Tachycardia: severity 3/3, frequency daily",
+            "score": 3
+          },
+          {
+            "id": "MCAS-CV-HYPOTENSION",
+            "domain": "Cardiovascular",
+            "description": "Hypotension: severity 2/3, frequency weekly",
+            "score": 2
+          },
+          {
+            "id": "MCAS-CV-PRESYNCOPE",
+            "domain": "Cardiovascular",
+            "description": "Presyncope: severity 3/3, frequency daily",
+            "score": 3
+          },
+          {
+            "id": "MCAS-CV-SYNCOPE",
+            "domain": "Cardiovascular",
+            "description": "Syncope: severity 2/3, frequency monthly",
+            "score": 2
+          },
+          {
+            "id": "MCAS-RESP-WHEEZING",
+            "domain": "Respiratory",
+            "description": "Wheezing: severity 2/3, frequency weekly",
+            "score": 2
+          },
+          {
+            "id": "MCAS-RESP-DYSPNEA",
+            "domain": "Respiratory",
+            "description": "Dyspnea: severity 3/3, frequency daily",
+            "score": 3
+          },
+          {
+            "id": "MCAS-NEURO-BRAIN-FOG",
+            "domain": "Neurological",
+            "description": "Brain Fog: severity 3/3, frequency daily",
+            "score": 3
+          },
+          {
+            "id": "MCAS-NEURO-FATIGUE",
+            "domain": "Neurological",
+            "description": "Fatigue: severity 3/3, frequency daily",
+            "score": 3
+          }
+        ]
+      }
+    }
+  ]
+}

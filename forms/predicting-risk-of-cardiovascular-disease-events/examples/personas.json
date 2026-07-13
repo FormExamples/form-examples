@@ -1,0 +1,265 @@
+{
+  "engine": "front-end-with-html",
+  "graderHint": "estimateTenYearRisk",
+  "note": "Realistic filled-in states in the PREVENT-style risk engine's shape. `graderHint` pins the deterministic `estimateTenYearRisk` (returns the 10-year percentage) rather than `calculateRisk`, which stamps a live timestamp. `expected` is computed by `bin/test-personas --update` and verified by `bin/test-personas`.",
+  "personas": [
+    {
+      "name": "low-risk",
+      "description": "Healthy 52-year-old woman with favourable lipids and normal blood pressure: estimated 10-year CVD risk 0.9% — Low category (< 5%).",
+      "state": {
+        "patientInformation": {
+          "fullName": "",
+          "dateOfBirth": "",
+          "nhsNumber": "",
+          "address": "",
+          "telephone": "",
+          "email": "",
+          "gpName": "",
+          "gpPractice": ""
+        },
+        "demographics": {
+          "age": 52,
+          "sex": "female",
+          "ethnicity": "white",
+          "heightCm": 165,
+          "weightKg": 60,
+          "zipCode": ""
+        },
+        "bloodPressure": {
+          "systolicBp": 115,
+          "diastolicBp": 72,
+          "onAntihypertensive": "no",
+          "numberOfBpMedications": 0,
+          "bpAtTarget": "yes"
+        },
+        "cholesterolLipids": {
+          "totalCholesterol": 190,
+          "hdlCholesterol": 62,
+          "ldlCholesterol": 110,
+          "triglycerides": 90,
+          "nonHdlCholesterol": 128,
+          "onStatin": "no",
+          "statinName": ""
+        },
+        "metabolicHealth": {
+          "hasDiabetes": "no",
+          "diabetesType": "",
+          "hba1cValue": null,
+          "hba1cUnit": "",
+          "fastingGlucose": null,
+          "bmi": 22,
+          "waistCircumferenceCm": null
+        },
+        "renalFunction": {
+          "egfr": 92,
+          "creatinine": 70,
+          "urineAcr": null,
+          "ckdStage": ""
+        },
+        "smokingHistory": {
+          "smokingStatus": "never",
+          "cigarettesPerDay": null,
+          "yearsSmoked": null,
+          "yearsSinceQuit": null
+        },
+        "medicalHistory": {
+          "hasKnownCvd": "no",
+          "previousMi": "no",
+          "previousStroke": "no",
+          "heartFailure": "no",
+          "atrialFibrillation": "no",
+          "peripheralArterialDisease": "no",
+          "familyCvdHistory": "no",
+          "familyCvdDetails": ""
+        },
+        "currentMedications": {
+          "onAntihypertensiveDetail": "",
+          "onStatinDetail": "",
+          "onAspirin": "no",
+          "onAnticoagulant": "no",
+          "onDiabetesMedication": "no",
+          "otherMedications": ""
+        },
+        "reviewCalculate": {
+          "modelType": "prevent-base",
+          "clinicianName": "",
+          "reviewDate": "",
+          "clinicalNotes": ""
+        }
+      },
+      "expected": 0.9
+    },
+    {
+      "name": "intermediate-risk",
+      "description": "62-year-old man with raised total cholesterol, low HDL and stage-1 hypertension: estimated 10-year CVD risk in the Intermediate category (7.5-19.9%).",
+      "state": {
+        "patientInformation": {
+          "fullName": "",
+          "dateOfBirth": "",
+          "nhsNumber": "",
+          "address": "",
+          "telephone": "",
+          "email": "",
+          "gpName": "",
+          "gpPractice": ""
+        },
+        "demographics": {
+          "age": 62,
+          "sex": "male",
+          "ethnicity": "white",
+          "heightCm": 178,
+          "weightKg": 89,
+          "zipCode": ""
+        },
+        "bloodPressure": {
+          "systolicBp": 145,
+          "diastolicBp": 88,
+          "onAntihypertensive": "no",
+          "numberOfBpMedications": 0,
+          "bpAtTarget": "no"
+        },
+        "cholesterolLipids": {
+          "totalCholesterol": 250,
+          "hdlCholesterol": 38,
+          "ldlCholesterol": 170,
+          "triglycerides": 180,
+          "nonHdlCholesterol": 212,
+          "onStatin": "no",
+          "statinName": ""
+        },
+        "metabolicHealth": {
+          "hasDiabetes": "no",
+          "diabetesType": "",
+          "hba1cValue": null,
+          "hba1cUnit": "",
+          "fastingGlucose": null,
+          "bmi": 28,
+          "waistCircumferenceCm": null
+        },
+        "renalFunction": {
+          "egfr": null,
+          "creatinine": null,
+          "urineAcr": null,
+          "ckdStage": ""
+        },
+        "smokingHistory": {
+          "smokingStatus": "never",
+          "cigarettesPerDay": null,
+          "yearsSmoked": null,
+          "yearsSinceQuit": null
+        },
+        "medicalHistory": {
+          "hasKnownCvd": "no",
+          "previousMi": "no",
+          "previousStroke": "no",
+          "heartFailure": "no",
+          "atrialFibrillation": "no",
+          "peripheralArterialDisease": "no",
+          "familyCvdHistory": "yes",
+          "familyCvdDetails": "Father MI aged 60"
+        },
+        "currentMedications": {
+          "onAntihypertensiveDetail": "",
+          "onStatinDetail": "",
+          "onAspirin": "no",
+          "onAnticoagulant": "no",
+          "onDiabetesMedication": "no",
+          "otherMedications": ""
+        },
+        "reviewCalculate": {
+          "modelType": "prevent-base",
+          "clinicianName": "",
+          "reviewDate": "",
+          "clinicalNotes": ""
+        }
+      },
+      "expected": 12.8
+    },
+    {
+      "name": "high-risk",
+      "description": "65-year-old man who smokes, with diabetes, stage-2 hypertension and obesity: estimated 10-year CVD risk in the High category (>= 20%).",
+      "state": {
+        "patientInformation": {
+          "fullName": "",
+          "dateOfBirth": "",
+          "nhsNumber": "",
+          "address": "",
+          "telephone": "",
+          "email": "",
+          "gpName": "",
+          "gpPractice": ""
+        },
+        "demographics": {
+          "age": 65,
+          "sex": "male",
+          "ethnicity": "south-asian",
+          "heightCm": 175,
+          "weightKg": 95,
+          "zipCode": ""
+        },
+        "bloodPressure": {
+          "systolicBp": 150,
+          "diastolicBp": 92,
+          "onAntihypertensive": "no",
+          "numberOfBpMedications": 0,
+          "bpAtTarget": "no"
+        },
+        "cholesterolLipids": {
+          "totalCholesterol": 220,
+          "hdlCholesterol": 40,
+          "ldlCholesterol": 150,
+          "triglycerides": 200,
+          "nonHdlCholesterol": 180,
+          "onStatin": "no",
+          "statinName": ""
+        },
+        "metabolicHealth": {
+          "hasDiabetes": "yes",
+          "diabetesType": "type-2",
+          "hba1cValue": 58,
+          "hba1cUnit": "mmolMol",
+          "fastingGlucose": null,
+          "bmi": 31,
+          "waistCircumferenceCm": null
+        },
+        "renalFunction": {
+          "egfr": null,
+          "creatinine": null,
+          "urineAcr": null,
+          "ckdStage": ""
+        },
+        "smokingHistory": {
+          "smokingStatus": "current",
+          "cigarettesPerDay": 15,
+          "yearsSmoked": 30,
+          "yearsSinceQuit": null
+        },
+        "medicalHistory": {
+          "hasKnownCvd": "no",
+          "previousMi": "no",
+          "previousStroke": "no",
+          "heartFailure": "no",
+          "atrialFibrillation": "no",
+          "peripheralArterialDisease": "no",
+          "familyCvdHistory": "yes",
+          "familyCvdDetails": "Brother stroke aged 58"
+        },
+        "currentMedications": {
+          "onAntihypertensiveDetail": "",
+          "onStatinDetail": "",
+          "onAspirin": "no",
+          "onAnticoagulant": "no",
+          "onDiabetesMedication": "yes",
+          "otherMedications": "Metformin"
+        },
+        "reviewCalculate": {
+          "modelType": "prevent-base",
+          "clinicianName": "",
+          "reviewDate": "",
+          "clinicalNotes": ""
+        }
+      },
+      "expected": 45
+    }
+  ]
+}

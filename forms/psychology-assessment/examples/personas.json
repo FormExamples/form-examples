@@ -1,0 +1,730 @@
+{
+  "engine": "front-end-with-html",
+  "graderHint": "calculateDass21",
+  "note": "Realistic filled-in states in the DASS-21 engine's shape. `expected` is computed by `bin/test-personas --update` and verified by `bin/test-personas`.",
+  "personas": [
+    {
+      "name": "normal-across-subscales",
+      "description": "Adjustment stress with sub-clinical mood: DASS-21 depression scaled 8, anxiety scaled 6, stress scaled 12 — all in the Normal range.",
+      "state": {
+        "demographics": {
+          "firstName": "",
+          "lastName": "",
+          "dateOfBirth": "",
+          "sex": "female",
+          "occupation": "Teacher"
+        },
+        "reasonForAssessment": {
+          "reason": "self-referral",
+          "reasonDetails": "Work-related stress",
+          "primaryConcern": "Feeling under pressure at work",
+          "symptomDurationWeeks": 4
+        },
+        "dassDepression": {
+          "item3CouldNotExperiencePositive": 1,
+          "item5DifficultInitiating": 1,
+          "item10NothingToLookForwardTo": 0,
+          "item13DownheartedBlue": 1,
+          "item16UnableToBecomeEnthusiastic": 0,
+          "item17NotWorthMuch": 1,
+          "item21LifeMeaningless": 0
+        },
+        "dassAnxiety": {
+          "item2DrynessOfMouth": 1,
+          "item4BreathingDifficulty": 0,
+          "item7Trembling": 1,
+          "item9PanicWorry": 0,
+          "item15ClosedToPanic": 1,
+          "item19HeartActionAware": 0,
+          "item20ScaredWithoutReason": 0
+        },
+        "dassStress": {
+          "item1HardToWindDown": 1,
+          "item6OverReact": 1,
+          "item8NervousEnergy": 1,
+          "item11AgitatedEasily": 1,
+          "item12DifficultToRelax": 0,
+          "item14Intolerant": 1,
+          "item18TouchyEasily": 1
+        },
+        "functionalImpact": {
+          "workImpact": "mild",
+          "relationshipImpact": "none",
+          "dailyActivitiesImpact": "none",
+          "sleepImpact": "mild",
+          "notes": ""
+        },
+        "riskScreen": {
+          "suicidalIdeation": "no",
+          "suicidalIdeationDetails": "",
+          "selfHarm": "no",
+          "harmToOthers": "no",
+          "psychiatricEmergencyHistory": "no",
+          "hasSafetyPlan": ""
+        },
+        "supportAndHistory": {
+          "previousMentalHealthCare": "no",
+          "previousMentalHealthDetails": "",
+          "currentlyInTreatment": "no",
+          "currentTreatmentDetails": "",
+          "currentMedications": "",
+          "familyMentalHealthHistory": "no",
+          "familyMentalHealthDetails": "",
+          "socialSupport": "good",
+          "substanceUseConcern": "no"
+        }
+      },
+      "expected": {
+        "depression": {
+          "raw": 4,
+          "scaled": 8,
+          "severity": "normal",
+          "answered": 7
+        },
+        "anxiety": {
+          "raw": 3,
+          "scaled": 6,
+          "severity": "normal",
+          "answered": 7
+        },
+        "stress": {
+          "raw": 6,
+          "scaled": 12,
+          "severity": "normal",
+          "answered": 7
+        },
+        "firedRules": [
+          {
+            "id": "DASS-D-03",
+            "subscale": "depression",
+            "itemNumber": 3,
+            "description": "I couldn't seem to experience any positive feeling at all.",
+            "score": 1
+          },
+          {
+            "id": "DASS-D-05",
+            "subscale": "depression",
+            "itemNumber": 5,
+            "description": "I found it difficult to work up the initiative to do things.",
+            "score": 1
+          },
+          {
+            "id": "DASS-D-10",
+            "subscale": "depression",
+            "itemNumber": 10,
+            "description": "I felt that I had nothing to look forward to.",
+            "score": 0
+          },
+          {
+            "id": "DASS-D-13",
+            "subscale": "depression",
+            "itemNumber": 13,
+            "description": "I felt down-hearted and blue.",
+            "score": 1
+          },
+          {
+            "id": "DASS-D-16",
+            "subscale": "depression",
+            "itemNumber": 16,
+            "description": "I was unable to become enthusiastic about anything.",
+            "score": 0
+          },
+          {
+            "id": "DASS-D-17",
+            "subscale": "depression",
+            "itemNumber": 17,
+            "description": "I felt I wasn't worth much as a person.",
+            "score": 1
+          },
+          {
+            "id": "DASS-D-21",
+            "subscale": "depression",
+            "itemNumber": 21,
+            "description": "I felt that life was meaningless.",
+            "score": 0
+          },
+          {
+            "id": "DASS-A-02",
+            "subscale": "anxiety",
+            "itemNumber": 2,
+            "description": "I was aware of dryness of my mouth.",
+            "score": 1
+          },
+          {
+            "id": "DASS-A-04",
+            "subscale": "anxiety",
+            "itemNumber": 4,
+            "description": "I experienced breathing difficulty (e.g. excessively rapid breathing, breathlessness in the absence of physical exertion).",
+            "score": 0
+          },
+          {
+            "id": "DASS-A-07",
+            "subscale": "anxiety",
+            "itemNumber": 7,
+            "description": "I experienced trembling (e.g. in the hands).",
+            "score": 1
+          },
+          {
+            "id": "DASS-A-09",
+            "subscale": "anxiety",
+            "itemNumber": 9,
+            "description": "I was worried about situations in which I might panic and make a fool of myself.",
+            "score": 0
+          },
+          {
+            "id": "DASS-A-15",
+            "subscale": "anxiety",
+            "itemNumber": 15,
+            "description": "I felt I was close to panic.",
+            "score": 1
+          },
+          {
+            "id": "DASS-A-19",
+            "subscale": "anxiety",
+            "itemNumber": 19,
+            "description": "I was aware of the action of my heart in the absence of physical exertion (e.g. sense of heart rate increase, heart missing a beat).",
+            "score": 0
+          },
+          {
+            "id": "DASS-A-20",
+            "subscale": "anxiety",
+            "itemNumber": 20,
+            "description": "I felt scared without any good reason.",
+            "score": 0
+          },
+          {
+            "id": "DASS-S-01",
+            "subscale": "stress",
+            "itemNumber": 1,
+            "description": "I found it hard to wind down.",
+            "score": 1
+          },
+          {
+            "id": "DASS-S-06",
+            "subscale": "stress",
+            "itemNumber": 6,
+            "description": "I tended to over-react to situations.",
+            "score": 1
+          },
+          {
+            "id": "DASS-S-08",
+            "subscale": "stress",
+            "itemNumber": 8,
+            "description": "I felt that I was using a lot of nervous energy.",
+            "score": 1
+          },
+          {
+            "id": "DASS-S-11",
+            "subscale": "stress",
+            "itemNumber": 11,
+            "description": "I found myself getting agitated.",
+            "score": 1
+          },
+          {
+            "id": "DASS-S-12",
+            "subscale": "stress",
+            "itemNumber": 12,
+            "description": "I found it difficult to relax.",
+            "score": 0
+          },
+          {
+            "id": "DASS-S-14",
+            "subscale": "stress",
+            "itemNumber": 14,
+            "description": "I was intolerant of anything that kept me from getting on with what I was doing.",
+            "score": 1
+          },
+          {
+            "id": "DASS-S-18",
+            "subscale": "stress",
+            "itemNumber": 18,
+            "description": "I felt that I was rather touchy.",
+            "score": 1
+          }
+        ]
+      }
+    },
+    {
+      "name": "moderate-across-subscales",
+      "description": "Depressive-anxious presentation: DASS-21 depression scaled 16, anxiety scaled 12, stress scaled 22 — all in the Moderate range.",
+      "state": {
+        "demographics": {
+          "firstName": "",
+          "lastName": "",
+          "dateOfBirth": "",
+          "sex": "male",
+          "occupation": "Accountant"
+        },
+        "reasonForAssessment": {
+          "reason": "gp-referral",
+          "reasonDetails": "Low mood and worry",
+          "primaryConcern": "Persistent low mood with anxiety",
+          "symptomDurationWeeks": 12
+        },
+        "dassDepression": {
+          "item3CouldNotExperiencePositive": 2,
+          "item5DifficultInitiating": 1,
+          "item10NothingToLookForwardTo": 1,
+          "item13DownheartedBlue": 1,
+          "item16UnableToBecomeEnthusiastic": 1,
+          "item17NotWorthMuch": 1,
+          "item21LifeMeaningless": 1
+        },
+        "dassAnxiety": {
+          "item2DrynessOfMouth": 1,
+          "item4BreathingDifficulty": 1,
+          "item7Trembling": 1,
+          "item9PanicWorry": 1,
+          "item15ClosedToPanic": 1,
+          "item19HeartActionAware": 1,
+          "item20ScaredWithoutReason": 0
+        },
+        "dassStress": {
+          "item1HardToWindDown": 2,
+          "item6OverReact": 2,
+          "item8NervousEnergy": 2,
+          "item11AgitatedEasily": 1,
+          "item12DifficultToRelax": 2,
+          "item14Intolerant": 1,
+          "item18TouchyEasily": 1
+        },
+        "functionalImpact": {
+          "workImpact": "moderate",
+          "relationshipImpact": "mild",
+          "dailyActivitiesImpact": "moderate",
+          "sleepImpact": "moderate",
+          "notes": ""
+        },
+        "riskScreen": {
+          "suicidalIdeation": "no",
+          "suicidalIdeationDetails": "",
+          "selfHarm": "no",
+          "harmToOthers": "no",
+          "psychiatricEmergencyHistory": "no",
+          "hasSafetyPlan": ""
+        },
+        "supportAndHistory": {
+          "previousMentalHealthCare": "yes",
+          "previousMentalHealthDetails": "Counselling two years ago",
+          "currentlyInTreatment": "no",
+          "currentTreatmentDetails": "",
+          "currentMedications": "",
+          "familyMentalHealthHistory": "yes",
+          "familyMentalHealthDetails": "Maternal depression",
+          "socialSupport": "moderate",
+          "substanceUseConcern": "no"
+        }
+      },
+      "expected": {
+        "depression": {
+          "raw": 8,
+          "scaled": 16,
+          "severity": "moderate",
+          "answered": 7
+        },
+        "anxiety": {
+          "raw": 6,
+          "scaled": 12,
+          "severity": "moderate",
+          "answered": 7
+        },
+        "stress": {
+          "raw": 11,
+          "scaled": 22,
+          "severity": "moderate",
+          "answered": 7
+        },
+        "firedRules": [
+          {
+            "id": "DASS-D-03",
+            "subscale": "depression",
+            "itemNumber": 3,
+            "description": "I couldn't seem to experience any positive feeling at all.",
+            "score": 2
+          },
+          {
+            "id": "DASS-D-05",
+            "subscale": "depression",
+            "itemNumber": 5,
+            "description": "I found it difficult to work up the initiative to do things.",
+            "score": 1
+          },
+          {
+            "id": "DASS-D-10",
+            "subscale": "depression",
+            "itemNumber": 10,
+            "description": "I felt that I had nothing to look forward to.",
+            "score": 1
+          },
+          {
+            "id": "DASS-D-13",
+            "subscale": "depression",
+            "itemNumber": 13,
+            "description": "I felt down-hearted and blue.",
+            "score": 1
+          },
+          {
+            "id": "DASS-D-16",
+            "subscale": "depression",
+            "itemNumber": 16,
+            "description": "I was unable to become enthusiastic about anything.",
+            "score": 1
+          },
+          {
+            "id": "DASS-D-17",
+            "subscale": "depression",
+            "itemNumber": 17,
+            "description": "I felt I wasn't worth much as a person.",
+            "score": 1
+          },
+          {
+            "id": "DASS-D-21",
+            "subscale": "depression",
+            "itemNumber": 21,
+            "description": "I felt that life was meaningless.",
+            "score": 1
+          },
+          {
+            "id": "DASS-A-02",
+            "subscale": "anxiety",
+            "itemNumber": 2,
+            "description": "I was aware of dryness of my mouth.",
+            "score": 1
+          },
+          {
+            "id": "DASS-A-04",
+            "subscale": "anxiety",
+            "itemNumber": 4,
+            "description": "I experienced breathing difficulty (e.g. excessively rapid breathing, breathlessness in the absence of physical exertion).",
+            "score": 1
+          },
+          {
+            "id": "DASS-A-07",
+            "subscale": "anxiety",
+            "itemNumber": 7,
+            "description": "I experienced trembling (e.g. in the hands).",
+            "score": 1
+          },
+          {
+            "id": "DASS-A-09",
+            "subscale": "anxiety",
+            "itemNumber": 9,
+            "description": "I was worried about situations in which I might panic and make a fool of myself.",
+            "score": 1
+          },
+          {
+            "id": "DASS-A-15",
+            "subscale": "anxiety",
+            "itemNumber": 15,
+            "description": "I felt I was close to panic.",
+            "score": 1
+          },
+          {
+            "id": "DASS-A-19",
+            "subscale": "anxiety",
+            "itemNumber": 19,
+            "description": "I was aware of the action of my heart in the absence of physical exertion (e.g. sense of heart rate increase, heart missing a beat).",
+            "score": 1
+          },
+          {
+            "id": "DASS-A-20",
+            "subscale": "anxiety",
+            "itemNumber": 20,
+            "description": "I felt scared without any good reason.",
+            "score": 0
+          },
+          {
+            "id": "DASS-S-01",
+            "subscale": "stress",
+            "itemNumber": 1,
+            "description": "I found it hard to wind down.",
+            "score": 2
+          },
+          {
+            "id": "DASS-S-06",
+            "subscale": "stress",
+            "itemNumber": 6,
+            "description": "I tended to over-react to situations.",
+            "score": 2
+          },
+          {
+            "id": "DASS-S-08",
+            "subscale": "stress",
+            "itemNumber": 8,
+            "description": "I felt that I was using a lot of nervous energy.",
+            "score": 2
+          },
+          {
+            "id": "DASS-S-11",
+            "subscale": "stress",
+            "itemNumber": 11,
+            "description": "I found myself getting agitated.",
+            "score": 1
+          },
+          {
+            "id": "DASS-S-12",
+            "subscale": "stress",
+            "itemNumber": 12,
+            "description": "I found it difficult to relax.",
+            "score": 2
+          },
+          {
+            "id": "DASS-S-14",
+            "subscale": "stress",
+            "itemNumber": 14,
+            "description": "I was intolerant of anything that kept me from getting on with what I was doing.",
+            "score": 1
+          },
+          {
+            "id": "DASS-S-18",
+            "subscale": "stress",
+            "itemNumber": 18,
+            "description": "I felt that I was rather touchy.",
+            "score": 1
+          }
+        ]
+      }
+    },
+    {
+      "name": "extremely-severe-across-subscales",
+      "description": "Severe distress presentation: DASS-21 depression scaled 30, anxiety scaled 22, stress scaled 36 — all in the Extremely Severe range.",
+      "state": {
+        "demographics": {
+          "firstName": "",
+          "lastName": "",
+          "dateOfBirth": "",
+          "sex": "female",
+          "occupation": "Unemployed"
+        },
+        "reasonForAssessment": {
+          "reason": "gp-referral",
+          "reasonDetails": "Severe depression and anxiety",
+          "primaryConcern": "Overwhelming distress, unable to function",
+          "symptomDurationWeeks": 26
+        },
+        "dassDepression": {
+          "item3CouldNotExperiencePositive": 3,
+          "item5DifficultInitiating": 2,
+          "item10NothingToLookForwardTo": 2,
+          "item13DownheartedBlue": 2,
+          "item16UnableToBecomeEnthusiastic": 2,
+          "item17NotWorthMuch": 2,
+          "item21LifeMeaningless": 2
+        },
+        "dassAnxiety": {
+          "item2DrynessOfMouth": 2,
+          "item4BreathingDifficulty": 2,
+          "item7Trembling": 2,
+          "item9PanicWorry": 1,
+          "item15ClosedToPanic": 2,
+          "item19HeartActionAware": 1,
+          "item20ScaredWithoutReason": 1
+        },
+        "dassStress": {
+          "item1HardToWindDown": 3,
+          "item6OverReact": 3,
+          "item8NervousEnergy": 3,
+          "item11AgitatedEasily": 2,
+          "item12DifficultToRelax": 3,
+          "item14Intolerant": 2,
+          "item18TouchyEasily": 2
+        },
+        "functionalImpact": {
+          "workImpact": "severe",
+          "relationshipImpact": "severe",
+          "dailyActivitiesImpact": "severe",
+          "sleepImpact": "severe",
+          "notes": ""
+        },
+        "riskScreen": {
+          "suicidalIdeation": "passive",
+          "suicidalIdeationDetails": "Fleeting thoughts, no plan or intent",
+          "selfHarm": "no",
+          "harmToOthers": "no",
+          "psychiatricEmergencyHistory": "no",
+          "hasSafetyPlan": "yes"
+        },
+        "supportAndHistory": {
+          "previousMentalHealthCare": "yes",
+          "previousMentalHealthDetails": "Previous episode treated with antidepressants",
+          "currentlyInTreatment": "yes",
+          "currentTreatmentDetails": "Under community mental health team",
+          "currentMedications": "Sertraline 100 mg daily",
+          "familyMentalHealthHistory": "yes",
+          "familyMentalHealthDetails": "Family history of depression",
+          "socialSupport": "poor",
+          "substanceUseConcern": "no"
+        }
+      },
+      "expected": {
+        "depression": {
+          "raw": 15,
+          "scaled": 30,
+          "severity": "extremely-severe",
+          "answered": 7
+        },
+        "anxiety": {
+          "raw": 11,
+          "scaled": 22,
+          "severity": "extremely-severe",
+          "answered": 7
+        },
+        "stress": {
+          "raw": 18,
+          "scaled": 36,
+          "severity": "extremely-severe",
+          "answered": 7
+        },
+        "firedRules": [
+          {
+            "id": "DASS-D-03",
+            "subscale": "depression",
+            "itemNumber": 3,
+            "description": "I couldn't seem to experience any positive feeling at all.",
+            "score": 3
+          },
+          {
+            "id": "DASS-D-05",
+            "subscale": "depression",
+            "itemNumber": 5,
+            "description": "I found it difficult to work up the initiative to do things.",
+            "score": 2
+          },
+          {
+            "id": "DASS-D-10",
+            "subscale": "depression",
+            "itemNumber": 10,
+            "description": "I felt that I had nothing to look forward to.",
+            "score": 2
+          },
+          {
+            "id": "DASS-D-13",
+            "subscale": "depression",
+            "itemNumber": 13,
+            "description": "I felt down-hearted and blue.",
+            "score": 2
+          },
+          {
+            "id": "DASS-D-16",
+            "subscale": "depression",
+            "itemNumber": 16,
+            "description": "I was unable to become enthusiastic about anything.",
+            "score": 2
+          },
+          {
+            "id": "DASS-D-17",
+            "subscale": "depression",
+            "itemNumber": 17,
+            "description": "I felt I wasn't worth much as a person.",
+            "score": 2
+          },
+          {
+            "id": "DASS-D-21",
+            "subscale": "depression",
+            "itemNumber": 21,
+            "description": "I felt that life was meaningless.",
+            "score": 2
+          },
+          {
+            "id": "DASS-A-02",
+            "subscale": "anxiety",
+            "itemNumber": 2,
+            "description": "I was aware of dryness of my mouth.",
+            "score": 2
+          },
+          {
+            "id": "DASS-A-04",
+            "subscale": "anxiety",
+            "itemNumber": 4,
+            "description": "I experienced breathing difficulty (e.g. excessively rapid breathing, breathlessness in the absence of physical exertion).",
+            "score": 2
+          },
+          {
+            "id": "DASS-A-07",
+            "subscale": "anxiety",
+            "itemNumber": 7,
+            "description": "I experienced trembling (e.g. in the hands).",
+            "score": 2
+          },
+          {
+            "id": "DASS-A-09",
+            "subscale": "anxiety",
+            "itemNumber": 9,
+            "description": "I was worried about situations in which I might panic and make a fool of myself.",
+            "score": 1
+          },
+          {
+            "id": "DASS-A-15",
+            "subscale": "anxiety",
+            "itemNumber": 15,
+            "description": "I felt I was close to panic.",
+            "score": 2
+          },
+          {
+            "id": "DASS-A-19",
+            "subscale": "anxiety",
+            "itemNumber": 19,
+            "description": "I was aware of the action of my heart in the absence of physical exertion (e.g. sense of heart rate increase, heart missing a beat).",
+            "score": 1
+          },
+          {
+            "id": "DASS-A-20",
+            "subscale": "anxiety",
+            "itemNumber": 20,
+            "description": "I felt scared without any good reason.",
+            "score": 1
+          },
+          {
+            "id": "DASS-S-01",
+            "subscale": "stress",
+            "itemNumber": 1,
+            "description": "I found it hard to wind down.",
+            "score": 3
+          },
+          {
+            "id": "DASS-S-06",
+            "subscale": "stress",
+            "itemNumber": 6,
+            "description": "I tended to over-react to situations.",
+            "score": 3
+          },
+          {
+            "id": "DASS-S-08",
+            "subscale": "stress",
+            "itemNumber": 8,
+            "description": "I felt that I was using a lot of nervous energy.",
+            "score": 3
+          },
+          {
+            "id": "DASS-S-11",
+            "subscale": "stress",
+            "itemNumber": 11,
+            "description": "I found myself getting agitated.",
+            "score": 2
+          },
+          {
+            "id": "DASS-S-12",
+            "subscale": "stress",
+            "itemNumber": 12,
+            "description": "I found it difficult to relax.",
+            "score": 3
+          },
+          {
+            "id": "DASS-S-14",
+            "subscale": "stress",
+            "itemNumber": 14,
+            "description": "I was intolerant of anything that kept me from getting on with what I was doing.",
+            "score": 2
+          },
+          {
+            "id": "DASS-S-18",
+            "subscale": "stress",
+            "itemNumber": 18,
+            "description": "I felt that I was rather touchy.",
+            "score": 2
+          }
+        ]
+      }
+    }
+  ]
+}

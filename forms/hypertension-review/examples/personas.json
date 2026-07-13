@@ -1,0 +1,253 @@
+{
+  "engine": "front-end-with-html",
+  "graderHint": "computeControlStatus",
+  "note": "Realistic filled-in states in the hypertension-review scoring engine's shape. Graded on blood-pressure control against the NICE NG136 target: within target -> controlled; above target -> uncontrolled; clinic >=180/120 -> severe-uncontrolled; plus the derived hypertension stage. The auto-discovered classifyControl needs a second target argument and the full review stamps a live timestamp, so graderHint pins the deterministic state-taking computeControlStatus. `expected` is computed by `bin/test-personas --update` and verified by `bin/test-personas`.",
+  "personas": [
+    {
+      "name": "controlled",
+      "description": "Treated hypertensive, home readings within the 135/85 target: controlled, no stage criteria met.",
+      "state": {
+        "context": {
+          "clinicianName": "",
+          "clinicianRole": "gp",
+          "reviewedAt": "",
+          "practiceSite": ""
+        },
+        "identification": {
+          "patientIdentifier": "",
+          "ageBand": "50-64",
+          "sex": "female",
+          "ethnicity": "white"
+        },
+        "diagnosis": {
+          "diagnosisDate": "",
+          "type2Diabetes": "no",
+          "chronicKidneyDisease": "no",
+          "establishedCvd": "no",
+          "atrialFibrillation": "no"
+        },
+        "clinicBp": {
+          "clinicSystolic": 132,
+          "clinicDiastolic": 82,
+          "posturalDrop": "no"
+        },
+        "homeBp": {
+          "homeSystolic": 126,
+          "homeDiastolic": 78,
+          "monitoringMethod": "hbpm"
+        },
+        "medication": {
+          "antihypertensiveAgents": 1,
+          "adherence": "good",
+          "sideEffects": "none"
+        },
+        "cardiovascularRisk": {
+          "qriskPercent": 9,
+          "smokingStatus": "never",
+          "statinTherapy": "yes"
+        },
+        "bloods": {
+          "serumCreatinine": 74,
+          "egfr": 82,
+          "serumPotassium": 4.2,
+          "hba1c": 38,
+          "totalCholesterol": 4.4,
+          "hdlCholesterol": 1.6
+        },
+        "urine": {
+          "urineAcr": 1.2
+        },
+        "lifestyle": {
+          "bmi": 26,
+          "lifestyleAdvice": "reinforced"
+        },
+        "complications": {
+          "complications": "none"
+        },
+        "summary": {
+          "reviewContext": ""
+        }
+      },
+      "expected": {
+        "controlClass": "controlled",
+        "bpTarget": {
+          "clinic": {
+            "systolic": 140,
+            "diastolic": 90
+          },
+          "home": {
+            "systolic": 135,
+            "diastolic": 85
+          },
+          "group": "Age < 80, no qualifying comorbidity"
+        },
+        "primarySource": "home",
+        "hypertensionStage": "none"
+      }
+    },
+    {
+      "name": "uncontrolled-stage-1",
+      "description": "Above target on both clinic and home readings meeting stage-1 thresholds: uncontrolled, stage-1 hypertension.",
+      "state": {
+        "context": {
+          "clinicianName": "",
+          "clinicianRole": "practice-nurse",
+          "reviewedAt": "",
+          "practiceSite": ""
+        },
+        "identification": {
+          "patientIdentifier": "",
+          "ageBand": "50-64",
+          "sex": "male",
+          "ethnicity": "african"
+        },
+        "diagnosis": {
+          "diagnosisDate": "",
+          "type2Diabetes": "no",
+          "chronicKidneyDisease": "no",
+          "establishedCvd": "no",
+          "atrialFibrillation": "no"
+        },
+        "clinicBp": {
+          "clinicSystolic": 152,
+          "clinicDiastolic": 92,
+          "posturalDrop": "no"
+        },
+        "homeBp": {
+          "homeSystolic": 145,
+          "homeDiastolic": 88,
+          "monitoringMethod": "hbpm"
+        },
+        "medication": {
+          "antihypertensiveAgents": 1,
+          "adherence": "moderate",
+          "sideEffects": "none"
+        },
+        "cardiovascularRisk": {
+          "qriskPercent": 14,
+          "smokingStatus": "ex-smoker",
+          "statinTherapy": "yes"
+        },
+        "bloods": {
+          "serumCreatinine": 92,
+          "egfr": 76,
+          "serumPotassium": 4.4,
+          "hba1c": 40,
+          "totalCholesterol": 5.1,
+          "hdlCholesterol": 1.2
+        },
+        "urine": {
+          "urineAcr": 2.4
+        },
+        "lifestyle": {
+          "bmi": 29,
+          "lifestyleAdvice": "reinforced"
+        },
+        "complications": {
+          "complications": "none"
+        },
+        "summary": {
+          "reviewContext": ""
+        }
+      },
+      "expected": {
+        "controlClass": "uncontrolled",
+        "bpTarget": {
+          "clinic": {
+            "systolic": 140,
+            "diastolic": 90
+          },
+          "home": {
+            "systolic": 135,
+            "diastolic": 85
+          },
+          "group": "Age < 80, no qualifying comorbidity"
+        },
+        "primarySource": "home",
+        "hypertensionStage": "stage-1"
+      }
+    },
+    {
+      "name": "severe-uncontrolled",
+      "description": "Clinic reading at or above 180/120 with markedly elevated home readings: severe-uncontrolled, stage-3 severe hypertension.",
+      "state": {
+        "context": {
+          "clinicianName": "",
+          "clinicianRole": "gp",
+          "reviewedAt": "",
+          "practiceSite": ""
+        },
+        "identification": {
+          "patientIdentifier": "",
+          "ageBand": "65-79",
+          "sex": "male",
+          "ethnicity": "south-asian"
+        },
+        "diagnosis": {
+          "diagnosisDate": "",
+          "type2Diabetes": "yes",
+          "chronicKidneyDisease": "yes",
+          "establishedCvd": "no",
+          "atrialFibrillation": "no"
+        },
+        "clinicBp": {
+          "clinicSystolic": 184,
+          "clinicDiastolic": 122,
+          "posturalDrop": "no"
+        },
+        "homeBp": {
+          "homeSystolic": 168,
+          "homeDiastolic": 104,
+          "monitoringMethod": "hbpm"
+        },
+        "medication": {
+          "antihypertensiveAgents": 3,
+          "adherence": "poor",
+          "sideEffects": "ankle-swelling"
+        },
+        "cardiovascularRisk": {
+          "qriskPercent": 28,
+          "smokingStatus": "current",
+          "statinTherapy": "yes"
+        },
+        "bloods": {
+          "serumCreatinine": 138,
+          "egfr": 46,
+          "serumPotassium": 4.7,
+          "hba1c": 62,
+          "totalCholesterol": 5.6,
+          "hdlCholesterol": 1
+        },
+        "urine": {
+          "urineAcr": 18
+        },
+        "lifestyle": {
+          "bmi": 32,
+          "lifestyleAdvice": "reinforced"
+        },
+        "complications": {
+          "complications": "left-ventricular-hypertrophy"
+        },
+        "summary": {
+          "reviewContext": ""
+        }
+      },
+      "expected": {
+        "controlClass": "severe-uncontrolled",
+        "bpTarget": {
+          "clinic": {
+            "systolic": 130,
+            "diastolic": 80
+          },
+          "home": {
+            "systolic": 125,
+            "diastolic": 75
+          },
+          "group": "CKD with type 2 diabetes"
+        },
+        "primarySource": "home",
+        "hypertensionStage": "stage-3-severe"
+      }
+    }
+  ]
+}

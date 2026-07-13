@@ -1,0 +1,604 @@
+{
+  "engine": "front-end-with-html",
+  "graderHint": "gradeOET",
+  "note": "Realistic filled-in states in the Cymraeg (Welsh) medical-language speaking-assessment scoring engine's shape. Graded OET-style: four linguistic criteria (0-6, mean of two role-plays) plus five clinical-communication indicators (0-3) summed to a raw total out of 39, scaled to 0-500, banded A (>=450), B (>=350), C+ (>=300), C (>=200), D (>=100), E (<100); grades A/B are at or above the clinical threshold. The auto-discovered grader is classifyScaledScore, a per-item helper taking a bare number, so graderHint pins the state-taking gradeOET. `expected` is computed by `bin/test-personas --update` and verified by `bin/test-personas`.",
+  "personas": [
+    {
+      "name": "grade-b-clinically-safe",
+      "description": "Highly proficient Welsh-medium communicator, fluent and clinically appropriate: scaled score 423 — Grade B, at or above the clinical threshold.",
+      "state": {
+        "candidate": {
+          "candidateId": "",
+          "candidateName": "",
+          "examinerName": "",
+          "testCentre": "",
+          "testDate": "",
+          "profession": "medicine",
+          "firstLanguage": "welsh",
+          "countryOfTraining": "wales",
+          "yearsOfExperience": "5-10"
+        },
+        "rolePlay1": {
+          "scenarioTitle": "Explaining a new diabetes diagnosis",
+          "scenarioSummary": "",
+          "patientRole": "newly diagnosed patient",
+          "setting": "gp-surgery",
+          "safetyCriticality": "moderate",
+          "examinerNotes": ""
+        },
+        "rolePlay2": {
+          "scenarioTitle": "Discussing anticoagulation risks",
+          "scenarioSummary": "",
+          "patientRole": "anxious relative",
+          "setting": "hospital-ward",
+          "safetyCriticality": "high",
+          "examinerNotes": ""
+        },
+        "linguisticRolePlay1": {
+          "fluency": 5,
+          "grammar": 5,
+          "pronunciation": 5,
+          "clinicalAppropriateness": 5
+        },
+        "linguisticRolePlay2": {
+          "fluency": 5,
+          "grammar": 5,
+          "pronunciation": 5,
+          "clinicalAppropriateness": 5
+        },
+        "clinicalIndicators": {
+          "relationshipBuilding": 3,
+          "understandingPatientPerspective": 3,
+          "providingStructure": 2,
+          "informationGathering": 3,
+          "informationGiving": 2,
+          "examinerNotes": ""
+        }
+      },
+      "expected": {
+        "linguisticTotal": 20,
+        "clinicalTotal": 13,
+        "rawTotal": 33,
+        "scaledScore": 423,
+        "grade": "B",
+        "perCriterionScores": [
+          {
+            "id": "LING-FLU",
+            "domain": "linguistic",
+            "label": "Fluency (Rhuglder)",
+            "maxScore": 6,
+            "rolePlay1Score": 5,
+            "rolePlay2Score": 5,
+            "meanScore": 5
+          },
+          {
+            "id": "LING-GRM",
+            "domain": "linguistic",
+            "label": "Grammar (Gramadeg)",
+            "maxScore": 6,
+            "rolePlay1Score": 5,
+            "rolePlay2Score": 5,
+            "meanScore": 5
+          },
+          {
+            "id": "LING-PRO",
+            "domain": "linguistic",
+            "label": "Pronunciation (Ynganu)",
+            "maxScore": 6,
+            "rolePlay1Score": 5,
+            "rolePlay2Score": 5,
+            "meanScore": 5
+          },
+          {
+            "id": "LING-APP",
+            "domain": "linguistic",
+            "label": "Clinical Appropriateness (Priodoldeb Clinigol)",
+            "maxScore": 6,
+            "rolePlay1Score": 5,
+            "rolePlay2Score": 5,
+            "meanScore": 5
+          },
+          {
+            "id": "CLIN-REL",
+            "domain": "clinical",
+            "label": "Relationship-building",
+            "maxScore": 3,
+            "rolePlay1Score": null,
+            "rolePlay2Score": null,
+            "meanScore": 3
+          },
+          {
+            "id": "CLIN-UPP",
+            "domain": "clinical",
+            "label": "Understanding Patient’s Perspective",
+            "maxScore": 3,
+            "rolePlay1Score": null,
+            "rolePlay2Score": null,
+            "meanScore": 3
+          },
+          {
+            "id": "CLIN-STR",
+            "domain": "clinical",
+            "label": "Providing Structure",
+            "maxScore": 3,
+            "rolePlay1Score": null,
+            "rolePlay2Score": null,
+            "meanScore": 2
+          },
+          {
+            "id": "CLIN-IGT",
+            "domain": "clinical",
+            "label": "Information-gathering",
+            "maxScore": 3,
+            "rolePlay1Score": null,
+            "rolePlay2Score": null,
+            "meanScore": 3
+          },
+          {
+            "id": "CLIN-IGV",
+            "domain": "clinical",
+            "label": "Information-giving",
+            "maxScore": 3,
+            "rolePlay1Score": null,
+            "rolePlay2Score": null,
+            "meanScore": 2
+          }
+        ],
+        "firedRules": [
+          {
+            "id": "LING-FLU",
+            "category": "Linguistic",
+            "description": "Fluency (Rhuglder)",
+            "score": 5
+          },
+          {
+            "id": "LING-GRM",
+            "category": "Linguistic",
+            "description": "Grammar (Gramadeg)",
+            "score": 5
+          },
+          {
+            "id": "LING-PRO",
+            "category": "Linguistic",
+            "description": "Pronunciation (Ynganu)",
+            "score": 5
+          },
+          {
+            "id": "LING-APP",
+            "category": "Linguistic",
+            "description": "Clinical Appropriateness (Priodoldeb Clinigol)",
+            "score": 5
+          },
+          {
+            "id": "CLIN-REL",
+            "category": "Clinical Communication",
+            "description": "Relationship-building",
+            "score": 3
+          },
+          {
+            "id": "CLIN-UPP",
+            "category": "Clinical Communication",
+            "description": "Understanding Patient’s Perspective",
+            "score": 3
+          },
+          {
+            "id": "CLIN-STR",
+            "category": "Clinical Communication",
+            "description": "Providing Structure",
+            "score": 2
+          },
+          {
+            "id": "CLIN-IGT",
+            "category": "Clinical Communication",
+            "description": "Information-gathering",
+            "score": 3
+          },
+          {
+            "id": "CLIN-IGV",
+            "category": "Clinical Communication",
+            "description": "Information-giving",
+            "score": 2
+          }
+        ]
+      }
+    },
+    {
+      "name": "grade-c-below-threshold",
+      "description": "Competent but below the typical clinical threshold, adequate grammar with some communication gaps: scaled score 218 — Grade C.",
+      "state": {
+        "candidate": {
+          "candidateId": "",
+          "candidateName": "",
+          "examinerName": "",
+          "testCentre": "",
+          "testDate": "",
+          "profession": "medicine",
+          "firstLanguage": "english",
+          "countryOfTraining": "england",
+          "yearsOfExperience": "2-5"
+        },
+        "rolePlay1": {
+          "scenarioTitle": "Explaining a new diabetes diagnosis",
+          "scenarioSummary": "",
+          "patientRole": "newly diagnosed patient",
+          "setting": "gp-surgery",
+          "safetyCriticality": "moderate",
+          "examinerNotes": ""
+        },
+        "rolePlay2": {
+          "scenarioTitle": "Discussing anticoagulation risks",
+          "scenarioSummary": "",
+          "patientRole": "anxious relative",
+          "setting": "hospital-ward",
+          "safetyCriticality": "high",
+          "examinerNotes": ""
+        },
+        "linguisticRolePlay1": {
+          "fluency": 3,
+          "grammar": 3,
+          "pronunciation": 3,
+          "clinicalAppropriateness": 3
+        },
+        "linguisticRolePlay2": {
+          "fluency": 3,
+          "grammar": 3,
+          "pronunciation": 3,
+          "clinicalAppropriateness": 3
+        },
+        "clinicalIndicators": {
+          "relationshipBuilding": 1,
+          "understandingPatientPerspective": 1,
+          "providingStructure": 1,
+          "informationGathering": 1,
+          "informationGiving": 1,
+          "examinerNotes": ""
+        }
+      },
+      "expected": {
+        "linguisticTotal": 12,
+        "clinicalTotal": 5,
+        "rawTotal": 17,
+        "scaledScore": 218,
+        "grade": "C",
+        "perCriterionScores": [
+          {
+            "id": "LING-FLU",
+            "domain": "linguistic",
+            "label": "Fluency (Rhuglder)",
+            "maxScore": 6,
+            "rolePlay1Score": 3,
+            "rolePlay2Score": 3,
+            "meanScore": 3
+          },
+          {
+            "id": "LING-GRM",
+            "domain": "linguistic",
+            "label": "Grammar (Gramadeg)",
+            "maxScore": 6,
+            "rolePlay1Score": 3,
+            "rolePlay2Score": 3,
+            "meanScore": 3
+          },
+          {
+            "id": "LING-PRO",
+            "domain": "linguistic",
+            "label": "Pronunciation (Ynganu)",
+            "maxScore": 6,
+            "rolePlay1Score": 3,
+            "rolePlay2Score": 3,
+            "meanScore": 3
+          },
+          {
+            "id": "LING-APP",
+            "domain": "linguistic",
+            "label": "Clinical Appropriateness (Priodoldeb Clinigol)",
+            "maxScore": 6,
+            "rolePlay1Score": 3,
+            "rolePlay2Score": 3,
+            "meanScore": 3
+          },
+          {
+            "id": "CLIN-REL",
+            "domain": "clinical",
+            "label": "Relationship-building",
+            "maxScore": 3,
+            "rolePlay1Score": null,
+            "rolePlay2Score": null,
+            "meanScore": 1
+          },
+          {
+            "id": "CLIN-UPP",
+            "domain": "clinical",
+            "label": "Understanding Patient’s Perspective",
+            "maxScore": 3,
+            "rolePlay1Score": null,
+            "rolePlay2Score": null,
+            "meanScore": 1
+          },
+          {
+            "id": "CLIN-STR",
+            "domain": "clinical",
+            "label": "Providing Structure",
+            "maxScore": 3,
+            "rolePlay1Score": null,
+            "rolePlay2Score": null,
+            "meanScore": 1
+          },
+          {
+            "id": "CLIN-IGT",
+            "domain": "clinical",
+            "label": "Information-gathering",
+            "maxScore": 3,
+            "rolePlay1Score": null,
+            "rolePlay2Score": null,
+            "meanScore": 1
+          },
+          {
+            "id": "CLIN-IGV",
+            "domain": "clinical",
+            "label": "Information-giving",
+            "maxScore": 3,
+            "rolePlay1Score": null,
+            "rolePlay2Score": null,
+            "meanScore": 1
+          }
+        ],
+        "firedRules": [
+          {
+            "id": "LING-FLU",
+            "category": "Linguistic",
+            "description": "Fluency (Rhuglder)",
+            "score": 3
+          },
+          {
+            "id": "LING-GRM",
+            "category": "Linguistic",
+            "description": "Grammar (Gramadeg)",
+            "score": 3
+          },
+          {
+            "id": "LING-PRO",
+            "category": "Linguistic",
+            "description": "Pronunciation (Ynganu)",
+            "score": 3
+          },
+          {
+            "id": "LING-APP",
+            "category": "Linguistic",
+            "description": "Clinical Appropriateness (Priodoldeb Clinigol)",
+            "score": 3
+          },
+          {
+            "id": "CLIN-REL",
+            "category": "Clinical Communication",
+            "description": "Relationship-building",
+            "score": 1
+          },
+          {
+            "id": "CLIN-UPP",
+            "category": "Clinical Communication",
+            "description": "Understanding Patient’s Perspective",
+            "score": 1
+          },
+          {
+            "id": "CLIN-STR",
+            "category": "Clinical Communication",
+            "description": "Providing Structure",
+            "score": 1
+          },
+          {
+            "id": "CLIN-IGT",
+            "category": "Clinical Communication",
+            "description": "Information-gathering",
+            "score": 1
+          },
+          {
+            "id": "CLIN-IGV",
+            "category": "Clinical Communication",
+            "description": "Information-giving",
+            "score": 1
+          }
+        ]
+      }
+    },
+    {
+      "name": "grade-d-significant-concerns",
+      "description": "Modest Welsh-medium ability with limited fluency and frequent grammatical errors impeding clinical communication: scaled score 115 — Grade D.",
+      "state": {
+        "candidate": {
+          "candidateId": "",
+          "candidateName": "",
+          "examinerName": "",
+          "testCentre": "",
+          "testDate": "",
+          "profession": "medicine",
+          "firstLanguage": "english",
+          "countryOfTraining": "overseas",
+          "yearsOfExperience": "less-than-2"
+        },
+        "rolePlay1": {
+          "scenarioTitle": "Explaining a new diabetes diagnosis",
+          "scenarioSummary": "",
+          "patientRole": "newly diagnosed patient",
+          "setting": "gp-surgery",
+          "safetyCriticality": "moderate",
+          "examinerNotes": ""
+        },
+        "rolePlay2": {
+          "scenarioTitle": "Discussing anticoagulation risks",
+          "scenarioSummary": "",
+          "patientRole": "anxious relative",
+          "setting": "hospital-ward",
+          "safetyCriticality": "high",
+          "examinerNotes": ""
+        },
+        "linguisticRolePlay1": {
+          "fluency": 2,
+          "grammar": 1,
+          "pronunciation": 2,
+          "clinicalAppropriateness": 1
+        },
+        "linguisticRolePlay2": {
+          "fluency": 2,
+          "grammar": 1,
+          "pronunciation": 2,
+          "clinicalAppropriateness": 1
+        },
+        "clinicalIndicators": {
+          "relationshipBuilding": 1,
+          "understandingPatientPerspective": 1,
+          "providingStructure": 0,
+          "informationGathering": 1,
+          "informationGiving": 0,
+          "examinerNotes": ""
+        }
+      },
+      "expected": {
+        "linguisticTotal": 6,
+        "clinicalTotal": 3,
+        "rawTotal": 9,
+        "scaledScore": 115,
+        "grade": "D",
+        "perCriterionScores": [
+          {
+            "id": "LING-FLU",
+            "domain": "linguistic",
+            "label": "Fluency (Rhuglder)",
+            "maxScore": 6,
+            "rolePlay1Score": 2,
+            "rolePlay2Score": 2,
+            "meanScore": 2
+          },
+          {
+            "id": "LING-GRM",
+            "domain": "linguistic",
+            "label": "Grammar (Gramadeg)",
+            "maxScore": 6,
+            "rolePlay1Score": 1,
+            "rolePlay2Score": 1,
+            "meanScore": 1
+          },
+          {
+            "id": "LING-PRO",
+            "domain": "linguistic",
+            "label": "Pronunciation (Ynganu)",
+            "maxScore": 6,
+            "rolePlay1Score": 2,
+            "rolePlay2Score": 2,
+            "meanScore": 2
+          },
+          {
+            "id": "LING-APP",
+            "domain": "linguistic",
+            "label": "Clinical Appropriateness (Priodoldeb Clinigol)",
+            "maxScore": 6,
+            "rolePlay1Score": 1,
+            "rolePlay2Score": 1,
+            "meanScore": 1
+          },
+          {
+            "id": "CLIN-REL",
+            "domain": "clinical",
+            "label": "Relationship-building",
+            "maxScore": 3,
+            "rolePlay1Score": null,
+            "rolePlay2Score": null,
+            "meanScore": 1
+          },
+          {
+            "id": "CLIN-UPP",
+            "domain": "clinical",
+            "label": "Understanding Patient’s Perspective",
+            "maxScore": 3,
+            "rolePlay1Score": null,
+            "rolePlay2Score": null,
+            "meanScore": 1
+          },
+          {
+            "id": "CLIN-STR",
+            "domain": "clinical",
+            "label": "Providing Structure",
+            "maxScore": 3,
+            "rolePlay1Score": null,
+            "rolePlay2Score": null,
+            "meanScore": 0
+          },
+          {
+            "id": "CLIN-IGT",
+            "domain": "clinical",
+            "label": "Information-gathering",
+            "maxScore": 3,
+            "rolePlay1Score": null,
+            "rolePlay2Score": null,
+            "meanScore": 1
+          },
+          {
+            "id": "CLIN-IGV",
+            "domain": "clinical",
+            "label": "Information-giving",
+            "maxScore": 3,
+            "rolePlay1Score": null,
+            "rolePlay2Score": null,
+            "meanScore": 0
+          }
+        ],
+        "firedRules": [
+          {
+            "id": "LING-FLU",
+            "category": "Linguistic",
+            "description": "Fluency (Rhuglder)",
+            "score": 2
+          },
+          {
+            "id": "LING-GRM",
+            "category": "Linguistic",
+            "description": "Grammar (Gramadeg)",
+            "score": 1
+          },
+          {
+            "id": "LING-PRO",
+            "category": "Linguistic",
+            "description": "Pronunciation (Ynganu)",
+            "score": 2
+          },
+          {
+            "id": "LING-APP",
+            "category": "Linguistic",
+            "description": "Clinical Appropriateness (Priodoldeb Clinigol)",
+            "score": 1
+          },
+          {
+            "id": "CLIN-REL",
+            "category": "Clinical Communication",
+            "description": "Relationship-building",
+            "score": 1
+          },
+          {
+            "id": "CLIN-UPP",
+            "category": "Clinical Communication",
+            "description": "Understanding Patient’s Perspective",
+            "score": 1
+          },
+          {
+            "id": "CLIN-STR",
+            "category": "Clinical Communication",
+            "description": "Providing Structure",
+            "score": 0
+          },
+          {
+            "id": "CLIN-IGT",
+            "category": "Clinical Communication",
+            "description": "Information-gathering",
+            "score": 1
+          },
+          {
+            "id": "CLIN-IGV",
+            "category": "Clinical Communication",
+            "description": "Information-giving",
+            "score": 0
+          }
+        ]
+      }
+    }
+  ]
+}

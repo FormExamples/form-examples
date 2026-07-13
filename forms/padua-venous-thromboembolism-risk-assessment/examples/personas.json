@@ -1,0 +1,273 @@
+{
+  "engine": "front-end-with-html",
+  "graderHint": "calculatePaduaGrade",
+  "note": "Realistic filled-in states in the Padua Prediction Score engine's shape. `expected` is computed by `bin/test-personas --update` and verified by `bin/test-personas`.",
+  "personas": [
+    {
+      "name": "low-risk-no-prophylaxis",
+      "description": "Medical inpatient with reduced mobility (bed rest) as the only factor: Padua 3 — low risk band; pharmacological thromboprophylaxis not indicated on risk grounds.",
+      "state": {
+        "context": {
+          "clinicianName": "",
+          "clinicianRole": "doctor",
+          "assessedAt": "",
+          "careSetting": "medical-ward",
+          "admissionReason": "Community-acquired pneumonia"
+        },
+        "identification": {
+          "patientIdentifier": "",
+          "ageYears": 45,
+          "sex": "female"
+        },
+        "history": {
+          "activeCancer": "no",
+          "previousVte": "no",
+          "knownThrombophilia": "no"
+        },
+        "mobility": {
+          "reducedMobility": "yes",
+          "recentTraumaOrSurgery": "no"
+        },
+        "cardiorespiratory": {
+          "heartOrRespiratoryFailure": "no",
+          "acuteMiOrIschaemicStroke": "no",
+          "acuteInfectionOrRheumatological": "no"
+        },
+        "metabolic": {
+          "bodyMassIndex": 24,
+          "ongoingHormonalTreatment": "no"
+        },
+        "bleeding": {
+          "activeBleeding": "no",
+          "highBleedingRisk": "no"
+        },
+        "note": {
+          "clinicalNote": ""
+        }
+      },
+      "expected": {
+        "factorPoints": {
+          "activeCancer": 0,
+          "previousVte": 0,
+          "reducedMobility": 3,
+          "knownThrombophilia": 0,
+          "recentTraumaOrSurgery": 0,
+          "elderlyAge": 0,
+          "heartOrRespiratoryFailure": 0,
+          "acuteMiOrIschaemicStroke": 0,
+          "acuteInfectionOrRheumatological": 0,
+          "obesity": 0,
+          "ongoingHormonalTreatment": 0
+        },
+        "paduaScore": 3,
+        "riskBand": "low",
+        "prophylaxisRecommendation": "none",
+        "firedFactors": [
+          {
+            "id": "R-REDUCED-MOBILITY-01",
+            "factor": "reducedMobility",
+            "points": 3,
+            "category": "padua-factor",
+            "description": "Reduced mobility — bed rest with bathroom privileges for at least 3 days"
+          },
+          {
+            "id": "R-BAND-01",
+            "factor": "band",
+            "points": 0,
+            "category": "risk-band",
+            "description": "Padua < 4 — low risk band; routine pharmacological prophylaxis not indicated on risk grounds"
+          }
+        ]
+      }
+    },
+    {
+      "name": "high-risk-pharmacological",
+      "description": "Elderly patient (78) with reduced mobility, acute heart failure and acute infection: Padua 6 — high risk band; no bleeding contraindication, so pharmacological thromboprophylaxis recommended.",
+      "state": {
+        "context": {
+          "clinicianName": "",
+          "clinicianRole": "doctor",
+          "assessedAt": "",
+          "careSetting": "medical-ward",
+          "admissionReason": "Decompensated heart failure with chest sepsis"
+        },
+        "identification": {
+          "patientIdentifier": "",
+          "ageYears": 78,
+          "sex": "male"
+        },
+        "history": {
+          "activeCancer": "no",
+          "previousVte": "no",
+          "knownThrombophilia": "no"
+        },
+        "mobility": {
+          "reducedMobility": "yes",
+          "recentTraumaOrSurgery": "no"
+        },
+        "cardiorespiratory": {
+          "heartOrRespiratoryFailure": "yes",
+          "acuteMiOrIschaemicStroke": "no",
+          "acuteInfectionOrRheumatological": "yes"
+        },
+        "metabolic": {
+          "bodyMassIndex": 27,
+          "ongoingHormonalTreatment": "no"
+        },
+        "bleeding": {
+          "activeBleeding": "no",
+          "highBleedingRisk": "no"
+        },
+        "note": {
+          "clinicalNote": ""
+        }
+      },
+      "expected": {
+        "factorPoints": {
+          "activeCancer": 0,
+          "previousVte": 0,
+          "reducedMobility": 3,
+          "knownThrombophilia": 0,
+          "recentTraumaOrSurgery": 0,
+          "elderlyAge": 1,
+          "heartOrRespiratoryFailure": 1,
+          "acuteMiOrIschaemicStroke": 0,
+          "acuteInfectionOrRheumatological": 1,
+          "obesity": 0,
+          "ongoingHormonalTreatment": 0
+        },
+        "paduaScore": 6,
+        "riskBand": "high",
+        "prophylaxisRecommendation": "pharmacological",
+        "firedFactors": [
+          {
+            "id": "R-REDUCED-MOBILITY-01",
+            "factor": "reducedMobility",
+            "points": 3,
+            "category": "padua-factor",
+            "description": "Reduced mobility — bed rest with bathroom privileges for at least 3 days"
+          },
+          {
+            "id": "R-ELDERLY-AGE-01",
+            "factor": "elderlyAge",
+            "points": 1,
+            "category": "padua-factor",
+            "description": "Elderly age — 70 years or over"
+          },
+          {
+            "id": "R-HEART-OR-RESPIRATORY-FAILURE-01",
+            "factor": "heartOrRespiratoryFailure",
+            "points": 1,
+            "category": "padua-factor",
+            "description": "Acute heart failure and/or respiratory failure"
+          },
+          {
+            "id": "R-ACUTE-INFECTION-OR-RHEUMATOLOGICAL-01",
+            "factor": "acuteInfectionOrRheumatological",
+            "points": 1,
+            "category": "padua-factor",
+            "description": "Acute infection and/or rheumatological disorder"
+          },
+          {
+            "id": "R-BAND-01",
+            "factor": "band",
+            "points": 0,
+            "category": "risk-band",
+            "description": "Padua >= 4 — high risk band; consider pharmacological thromboprophylaxis subject to bleeding-risk check"
+          }
+        ]
+      }
+    },
+    {
+      "name": "high-risk-mechanical",
+      "description": "Oncology patient with active cancer, reduced mobility and recent surgery: Padua 8 — high risk band; active high bleeding risk contraindicates anticoagulation, so mechanical thromboprophylaxis recommended.",
+      "state": {
+        "context": {
+          "clinicianName": "",
+          "clinicianRole": "doctor",
+          "assessedAt": "",
+          "careSetting": "surgical-ward",
+          "admissionReason": "Post-operative colorectal cancer resection"
+        },
+        "identification": {
+          "patientIdentifier": "",
+          "ageYears": 64,
+          "sex": "female"
+        },
+        "history": {
+          "activeCancer": "yes",
+          "previousVte": "no",
+          "knownThrombophilia": "no"
+        },
+        "mobility": {
+          "reducedMobility": "yes",
+          "recentTraumaOrSurgery": "yes"
+        },
+        "cardiorespiratory": {
+          "heartOrRespiratoryFailure": "no",
+          "acuteMiOrIschaemicStroke": "no",
+          "acuteInfectionOrRheumatological": "no"
+        },
+        "metabolic": {
+          "bodyMassIndex": 26,
+          "ongoingHormonalTreatment": "no"
+        },
+        "bleeding": {
+          "activeBleeding": "no",
+          "highBleedingRisk": "yes"
+        },
+        "note": {
+          "clinicalNote": ""
+        }
+      },
+      "expected": {
+        "factorPoints": {
+          "activeCancer": 3,
+          "previousVte": 0,
+          "reducedMobility": 3,
+          "knownThrombophilia": 0,
+          "recentTraumaOrSurgery": 2,
+          "elderlyAge": 0,
+          "heartOrRespiratoryFailure": 0,
+          "acuteMiOrIschaemicStroke": 0,
+          "acuteInfectionOrRheumatological": 0,
+          "obesity": 0,
+          "ongoingHormonalTreatment": 0
+        },
+        "paduaScore": 8,
+        "riskBand": "high",
+        "prophylaxisRecommendation": "mechanical",
+        "firedFactors": [
+          {
+            "id": "R-ACTIVE-CANCER-01",
+            "factor": "activeCancer",
+            "points": 3,
+            "category": "padua-factor",
+            "description": "Active cancer — metastatic and/or chemo/radiotherapy in the previous 6 months"
+          },
+          {
+            "id": "R-REDUCED-MOBILITY-01",
+            "factor": "reducedMobility",
+            "points": 3,
+            "category": "padua-factor",
+            "description": "Reduced mobility — bed rest with bathroom privileges for at least 3 days"
+          },
+          {
+            "id": "R-RECENT-TRAUMA-OR-SURGERY-01",
+            "factor": "recentTraumaOrSurgery",
+            "points": 2,
+            "category": "padua-factor",
+            "description": "Recent (<= 1 month) trauma and/or surgery"
+          },
+          {
+            "id": "R-BAND-01",
+            "factor": "band",
+            "points": 0,
+            "category": "risk-band",
+            "description": "Padua >= 4 — high risk band; consider pharmacological thromboprophylaxis subject to bleeding-risk check"
+          }
+        ]
+      }
+    }
+  ]
+}

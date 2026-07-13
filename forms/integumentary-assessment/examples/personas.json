@@ -1,0 +1,451 @@
+{
+  "engine": "front-end-with-html",
+  "graderHint": "calculateBraden",
+  "note": "Realistic filled-in states in the integumentary-assessment scoring engine's shape. Graded on the Braden Scale for pressure-ulcer risk: six subscales summed (sensory/moisture/activity/mobility/nutrition 1-4, friction-shear 1-3; total 6-23), banded >=19 no-risk, 15-18 mild, 13-14 moderate, 10-12 high, <=9 very-high. The auto-discovered grader is classifyBradenScore, a per-item helper taking a bare number, so graderHint pins the state-taking calculateBraden. `expected` is computed by `bin/test-personas --update` and verified by `bin/test-personas`.",
+  "personas": [
+    {
+      "name": "no-risk",
+      "description": "Ambulant outpatient with a benign skin lesion, fully mobile and continent: Braden 23 — no risk.",
+      "state": {
+        "demographics": {
+          "firstName": "",
+          "lastName": "",
+          "dateOfBirth": "",
+          "sex": "female",
+          "weight": 68,
+          "height": 166,
+          "bmi": 25
+        },
+        "presentingSkinConcern": {
+          "chiefComplaint": "Changing mole on the left forearm",
+          "onset": "gradual",
+          "duration": "6-months",
+          "location": "left-forearm",
+          "pain": "no",
+          "painScore": null,
+          "itching": "occasional",
+          "bleeding": "no",
+          "discharge": "no",
+          "aggravatingFactors": "",
+          "relievingFactors": "",
+          "priorTreatment": "none"
+        },
+        "skinInspection": {
+          "colour": "normal",
+          "moisture": "normal",
+          "integrity": "intact",
+          "turgor": "normal",
+          "temperature": "normal",
+          "lesionTypes": [
+            "macule"
+          ],
+          "lesions": [],
+          "additionalNotes": ""
+        },
+        "hairScalpExamination": {
+          "hairDistribution": "normal",
+          "hairTexture": "normal",
+          "alopecia": "no",
+          "alopeciaPattern": "",
+          "scalpLesions": "no",
+          "scalpFindings": [],
+          "scalpNotes": ""
+        },
+        "nailExamination": {
+          "nailColour": "normal",
+          "nailShape": "normal",
+          "nailCapillaryRefill": "brisk",
+          "nailFindings": [],
+          "nailNotes": ""
+        },
+        "woundAssessment": {
+          "woundPresent": "no",
+          "woundLocation": "",
+          "woundStage": "",
+          "woundLength": null,
+          "woundWidth": null,
+          "woundDepth": null,
+          "tissueType": "",
+          "infectionSigns": "",
+          "moistureBalance": "",
+          "edgeCondition": "",
+          "exudateAmount": "",
+          "exudateType": "",
+          "woundOdour": "",
+          "woundNotes": ""
+        },
+        "bradenScale": {
+          "sensoryPerception": 4,
+          "moisture": 4,
+          "activity": 4,
+          "mobility": 4,
+          "nutrition": 4,
+          "frictionShear": 3
+        },
+        "photographyDocumentation": {
+          "consentObtained": "yes",
+          "photosTaken": "yes",
+          "photos": [],
+          "documentationNotes": ""
+        },
+        "clinicalImpressionCarePlan": {
+          "clinicalImpression": "Benign melanocytic naevus, dermoscopy reassuring",
+          "differentialDiagnoses": "",
+          "carePlan": "Routine monitoring, safety-netting advice",
+          "dressingRequired": "no",
+          "dressingType": "",
+          "pressureReliefRequired": "no",
+          "referralRequired": "no",
+          "referralDetails": "",
+          "followUpDate": "",
+          "clinicianName": ""
+        }
+      },
+      "expected": {
+        "bradenScore": 23,
+        "riskLevel": "no-risk",
+        "answeredCount": 6,
+        "firedRules": [
+          {
+            "id": "BRADEN-001",
+            "category": "Sensory Perception",
+            "description": "Ability to respond meaningfully to pressure-related discomfort.",
+            "score": 4,
+            "maxScore": 4
+          },
+          {
+            "id": "BRADEN-002",
+            "category": "Moisture",
+            "description": "Degree to which skin is exposed to moisture.",
+            "score": 4,
+            "maxScore": 4
+          },
+          {
+            "id": "BRADEN-003",
+            "category": "Activity",
+            "description": "Degree of physical activity.",
+            "score": 4,
+            "maxScore": 4
+          },
+          {
+            "id": "BRADEN-004",
+            "category": "Mobility",
+            "description": "Ability to change and control body position.",
+            "score": 4,
+            "maxScore": 4
+          },
+          {
+            "id": "BRADEN-005",
+            "category": "Nutrition",
+            "description": "Usual food intake pattern.",
+            "score": 4,
+            "maxScore": 4
+          },
+          {
+            "id": "BRADEN-006",
+            "category": "Friction and Shear",
+            "description": "Friction & shear during repositioning and transfers.",
+            "score": 3,
+            "maxScore": 3
+          }
+        ]
+      }
+    },
+    {
+      "name": "moderate-risk",
+      "description": "Older inpatient with reduced mobility and occasional incontinence: Braden 14 — moderate risk.",
+      "state": {
+        "demographics": {
+          "firstName": "",
+          "lastName": "",
+          "dateOfBirth": "",
+          "sex": "male",
+          "weight": 64,
+          "height": 172,
+          "bmi": 22
+        },
+        "presentingSkinConcern": {
+          "chiefComplaint": "Reddened area over the sacrum noted on ward round",
+          "onset": "gradual",
+          "duration": "3-days",
+          "location": "sacrum",
+          "pain": "mild",
+          "painScore": 3,
+          "itching": "no",
+          "bleeding": "no",
+          "discharge": "no",
+          "aggravatingFactors": "prolonged-sitting",
+          "relievingFactors": "repositioning",
+          "priorTreatment": "barrier-cream"
+        },
+        "skinInspection": {
+          "colour": "erythematous",
+          "moisture": "moist",
+          "integrity": "intact",
+          "turgor": "reduced",
+          "temperature": "warm",
+          "lesionTypes": [
+            "patch"
+          ],
+          "lesions": [],
+          "additionalNotes": "Non-blanching erythema over sacrum"
+        },
+        "hairScalpExamination": {
+          "hairDistribution": "normal",
+          "hairTexture": "normal",
+          "alopecia": "no",
+          "alopeciaPattern": "",
+          "scalpLesions": "no",
+          "scalpFindings": [],
+          "scalpNotes": ""
+        },
+        "nailExamination": {
+          "nailColour": "normal",
+          "nailShape": "normal",
+          "nailCapillaryRefill": "brisk",
+          "nailFindings": [],
+          "nailNotes": ""
+        },
+        "woundAssessment": {
+          "woundPresent": "no",
+          "woundLocation": "",
+          "woundStage": "",
+          "woundLength": null,
+          "woundWidth": null,
+          "woundDepth": null,
+          "tissueType": "",
+          "infectionSigns": "",
+          "moistureBalance": "",
+          "edgeCondition": "",
+          "exudateAmount": "",
+          "exudateType": "",
+          "woundOdour": "",
+          "woundNotes": ""
+        },
+        "bradenScale": {
+          "sensoryPerception": 3,
+          "moisture": 2,
+          "activity": 2,
+          "mobility": 3,
+          "nutrition": 2,
+          "frictionShear": 2
+        },
+        "photographyDocumentation": {
+          "consentObtained": "yes",
+          "photosTaken": "yes",
+          "photos": [],
+          "documentationNotes": ""
+        },
+        "clinicalImpressionCarePlan": {
+          "clinicalImpression": "Category 1 pressure injury over sacrum",
+          "differentialDiagnoses": "Moisture-associated skin damage",
+          "carePlan": "2-hourly repositioning, pressure-relieving mattress, skin care",
+          "dressingRequired": "no",
+          "dressingType": "",
+          "pressureReliefRequired": "yes",
+          "referralRequired": "yes",
+          "referralDetails": "Tissue viability nurse",
+          "followUpDate": "",
+          "clinicianName": ""
+        }
+      },
+      "expected": {
+        "bradenScore": 14,
+        "riskLevel": "moderate-risk",
+        "answeredCount": 6,
+        "firedRules": [
+          {
+            "id": "BRADEN-001",
+            "category": "Sensory Perception",
+            "description": "Ability to respond meaningfully to pressure-related discomfort.",
+            "score": 3,
+            "maxScore": 4
+          },
+          {
+            "id": "BRADEN-002",
+            "category": "Moisture",
+            "description": "Degree to which skin is exposed to moisture.",
+            "score": 2,
+            "maxScore": 4
+          },
+          {
+            "id": "BRADEN-003",
+            "category": "Activity",
+            "description": "Degree of physical activity.",
+            "score": 2,
+            "maxScore": 4
+          },
+          {
+            "id": "BRADEN-004",
+            "category": "Mobility",
+            "description": "Ability to change and control body position.",
+            "score": 3,
+            "maxScore": 4
+          },
+          {
+            "id": "BRADEN-005",
+            "category": "Nutrition",
+            "description": "Usual food intake pattern.",
+            "score": 2,
+            "maxScore": 4
+          },
+          {
+            "id": "BRADEN-006",
+            "category": "Friction and Shear",
+            "description": "Friction & shear during repositioning and transfers.",
+            "score": 2,
+            "maxScore": 3
+          }
+        ]
+      }
+    },
+    {
+      "name": "very-high-risk",
+      "description": "Bedbound critically ill patient with a sacral pressure ulcer, incontinence and poor nutrition: Braden 6 — very high risk.",
+      "state": {
+        "demographics": {
+          "firstName": "",
+          "lastName": "",
+          "dateOfBirth": "",
+          "sex": "female",
+          "weight": 52,
+          "height": 160,
+          "bmi": 20
+        },
+        "presentingSkinConcern": {
+          "chiefComplaint": "Deep sacral pressure ulcer with slough",
+          "onset": "gradual",
+          "duration": "2-weeks",
+          "location": "sacrum",
+          "pain": "moderate",
+          "painScore": 6,
+          "itching": "no",
+          "bleeding": "no",
+          "discharge": "yes",
+          "aggravatingFactors": "immobility",
+          "relievingFactors": "",
+          "priorTreatment": "foam-dressing"
+        },
+        "skinInspection": {
+          "colour": "erythematous",
+          "moisture": "moist",
+          "integrity": "broken",
+          "turgor": "reduced",
+          "temperature": "warm",
+          "lesionTypes": [
+            "ulcer"
+          ],
+          "lesions": [],
+          "additionalNotes": "Full-thickness tissue loss with slough at wound bed"
+        },
+        "hairScalpExamination": {
+          "hairDistribution": "normal",
+          "hairTexture": "normal",
+          "alopecia": "no",
+          "alopeciaPattern": "",
+          "scalpLesions": "no",
+          "scalpFindings": [],
+          "scalpNotes": ""
+        },
+        "nailExamination": {
+          "nailColour": "pale",
+          "nailShape": "normal",
+          "nailCapillaryRefill": "sluggish",
+          "nailFindings": [],
+          "nailNotes": ""
+        },
+        "woundAssessment": {
+          "woundPresent": "yes",
+          "woundLocation": "sacrum",
+          "woundStage": "stage-3",
+          "woundLength": 5.5,
+          "woundWidth": 4,
+          "woundDepth": 1.8,
+          "tissueType": "slough",
+          "infectionSigns": "localised",
+          "moistureBalance": "high-exudate",
+          "edgeCondition": "undermining",
+          "exudateAmount": "moderate",
+          "exudateType": "serous",
+          "woundOdour": "mild",
+          "woundNotes": ""
+        },
+        "bradenScale": {
+          "sensoryPerception": 1,
+          "moisture": 1,
+          "activity": 1,
+          "mobility": 1,
+          "nutrition": 1,
+          "frictionShear": 1
+        },
+        "photographyDocumentation": {
+          "consentObtained": "yes",
+          "photosTaken": "yes",
+          "photos": [],
+          "documentationNotes": ""
+        },
+        "clinicalImpressionCarePlan": {
+          "clinicalImpression": "Category 3 sacral pressure ulcer in a bedbound patient",
+          "differentialDiagnoses": "",
+          "carePlan": "Dynamic air mattress, hourly repositioning, dietitian input, wound debridement",
+          "dressingRequired": "yes",
+          "dressingType": "antimicrobial-foam",
+          "pressureReliefRequired": "yes",
+          "referralRequired": "yes",
+          "referralDetails": "Tissue viability and dietetics",
+          "followUpDate": "",
+          "clinicianName": ""
+        }
+      },
+      "expected": {
+        "bradenScore": 6,
+        "riskLevel": "very-high-risk",
+        "answeredCount": 6,
+        "firedRules": [
+          {
+            "id": "BRADEN-001",
+            "category": "Sensory Perception",
+            "description": "Ability to respond meaningfully to pressure-related discomfort.",
+            "score": 1,
+            "maxScore": 4
+          },
+          {
+            "id": "BRADEN-002",
+            "category": "Moisture",
+            "description": "Degree to which skin is exposed to moisture.",
+            "score": 1,
+            "maxScore": 4
+          },
+          {
+            "id": "BRADEN-003",
+            "category": "Activity",
+            "description": "Degree of physical activity.",
+            "score": 1,
+            "maxScore": 4
+          },
+          {
+            "id": "BRADEN-004",
+            "category": "Mobility",
+            "description": "Ability to change and control body position.",
+            "score": 1,
+            "maxScore": 4
+          },
+          {
+            "id": "BRADEN-005",
+            "category": "Nutrition",
+            "description": "Usual food intake pattern.",
+            "score": 1,
+            "maxScore": 4
+          },
+          {
+            "id": "BRADEN-006",
+            "category": "Friction and Shear",
+            "description": "Friction & shear during repositioning and transfers.",
+            "score": 1,
+            "maxScore": 3
+          }
+        ]
+      }
+    }
+  ]
+}
