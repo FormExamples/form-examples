@@ -188,6 +188,15 @@ Design each feature on the reference forms
       from each crate's real controllers) + a `--list-stale` gate wired into
       `bin/test-tools` and CI; regenerated the 135, left the 151 correct
       hand-authored docs untouched.
+- [x] **FIXED — 3 invalid generated Protocol Buffers (found by audit).** The
+      protobuf generator emitted `<FIELD>_UNSPECIFIED = 0` and then a CHECK
+      value literally `'unspecified'` produced the SAME constant at index N;
+      proto3 scopes enum value names to the package, so it was a duplicate →
+      `protoc` rejected it. Hit body-mass-index-…-calculator, international-
+      certificate-of-vaccination-or-prophylaxis, partogram. Fixed the generator
+      to dedup by generated constant name (pre-seeding the UNSPECIFIED
+      sentinel); regenerated (3 files); all 1850 `.proto` now compile. Added a
+      `protoc` validation step to the CI drift job.
 - [x] **FIXED — 7 invalid generated OpenAPI specs (found by audit).** The
       OpenAPI generator emitted CHECK-enum values unquoted, so a value with a
       leading YAML indicator char (`>=80`, an adult age band) parsed as a block

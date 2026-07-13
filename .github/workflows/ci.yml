@@ -105,6 +105,19 @@ jobs:
             exit 1
           fi
 
+      - name: Validate generated Protocol Buffers
+        run: |
+          sudo apt-get install -y protobuf-compiler
+          bad=0
+          for p in forms/*/protobuf/*.proto; do
+            protoc --proto_path="$(dirname "$p")" --descriptor_set_out=/dev/null \
+              "$(basename "$p")" || bad=$((bad + 1))
+          done
+          if [ "$bad" -gt 0 ]; then
+            echo "::error::$bad .proto files failed to compile"
+            exit 1
+          fi
+
       - name: Validate generated OpenAPI 3.1 specs
         run: |
           pip install --quiet openapi-spec-validator

@@ -245,14 +245,21 @@ def build_enum_block(message_name, col):
     name = enum_name(message_name, col['name'])
     lines = [f"enum {name} {{"]
     field_upper = re.sub(r'[^A-Z0-9_]', '_', snake_to_pascal(col['name']).upper())
-    lines.append(f"  {field_upper}_UNSPECIFIED = 0;")
-    seen = set()
+    unspecified = f"{field_upper}_UNSPECIFIED"
+    lines.append(f"  {unspecified} = 0;")
+    # proto3 scopes enum value names to the enclosing package, so every value
+    # name must be unique. Dedup by the GENERATED constant (not the raw CHECK
+    # value) and pre-seed the zero-value sentinel, so a CHECK value like
+    # 'unspecified' or a pair that tokenises to the same name does not collide.
+    seen = {unspecified}
     idx = 1
     for v in col['check_values']:
-        if v == "" or v in seen:
+        if v == "":
             continue
-        seen.add(v)
         const = enum_value_name(message_name, col['name'], v)
+        if const in seen:
+            continue
+        seen.add(const)
         lines.append(f"  {const} = {idx};  // {v}")
         idx += 1
     lines.append("}")

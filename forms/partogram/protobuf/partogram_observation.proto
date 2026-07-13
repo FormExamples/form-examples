@@ -32,8 +32,6 @@ enum PartogramObservationMouldingEnum {
   MOULDING_UNSPECIFIED = 0;
   MOULDING_V_0 = 1;  // 0
   MOULDING_EMPTY = 2;  // +
-  MOULDING_EMPTY = 3;  // ++
-  MOULDING_EMPTY = 4;  // +++
 }
 
 enum PartogramObservationUrineProteinEnum {
@@ -41,8 +39,6 @@ enum PartogramObservationUrineProteinEnum {
   URINEPROTEIN_NEGATIVE = 1;  // negative
   URINEPROTEIN_TRACE = 2;  // trace
   URINEPROTEIN_EMPTY = 3;  // +
-  URINEPROTEIN_EMPTY = 4;  // ++
-  URINEPROTEIN_EMPTY = 5;  // +++
 }
 
 enum PartogramObservationUrineKetonesEnum {
@@ -50,8 +46,6 @@ enum PartogramObservationUrineKetonesEnum {
   URINEKETONES_NEGATIVE = 1;  // negative
   URINEKETONES_TRACE = 2;  // trace
   URINEKETONES_EMPTY = 3;  // +
-  URINEKETONES_EMPTY = 4;  // ++
-  URINEKETONES_EMPTY = 5;  // +++
 }
 
 enum PartogramObservationUrineGlucoseEnum {
@@ -59,8 +53,6 @@ enum PartogramObservationUrineGlucoseEnum {
   URINEGLUCOSE_NEGATIVE = 1;  // negative
   URINEGLUCOSE_TRACE = 2;  // trace
   URINEGLUCOSE_EMPTY = 3;  // +
-  URINEGLUCOSE_EMPTY = 4;  // ++
-  URINEGLUCOSE_EMPTY = 5;  // +++
 }
 
 message PartogramObservation {

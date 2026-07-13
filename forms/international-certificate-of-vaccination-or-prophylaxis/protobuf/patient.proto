@@ -10,7 +10,6 @@ enum PatientSexEnum {
   SEX_MALE = 1;  // male
   SEX_FEMALE = 2;  // female
   SEX_OTHER = 3;  // other
-  SEX_UNSPECIFIED = 4;  // unspecified
 }
 
 enum PatientTravelDocumentKindEnum {
