@@ -1,0 +1,186 @@
+{
+  "engine": "front-end-with-html",
+  "graderHint": "calculateQsofaGrade",
+  "note": "Realistic filled-in states in the scoring engine's shape. `expected` is computed by `bin/test-personas --update` and verified by `bin/test-personas`.",
+  "personas": [
+    {
+      "name": "lower-score-0",
+      "description": "Normal respiratory rate, alert (GCS 15), normal blood pressure: qSOFA 0 — lower risk, continue standard monitoring.",
+      "state": {
+        "context": {
+          "clinicianName": "",
+          "clinicianRole": "nurse",
+          "assessedAt": "",
+          "careSetting": "ward",
+          "suspectedSource": ""
+        },
+        "identification": {
+          "patientIdentifier": "",
+          "ageBand": "45-64",
+          "sex": "female"
+        },
+        "respiratory": {
+          "respiratoryRate": 16
+        },
+        "mentation": {
+          "glasgowComaScale": 15,
+          "mentationAltered": "no"
+        },
+        "circulation": {
+          "systolicBloodPressure": 130
+        },
+        "note": {
+          "clinicalNote": ""
+        }
+      },
+      "expected": {
+        "respiratoryRatePoint": 0,
+        "mentationPoint": 0,
+        "systolicBloodPressurePoint": 0,
+        "qsofaScore": 0,
+        "riskBand": "lower",
+        "thresholdMet": "no",
+        "firedCriteria": [
+          {
+            "id": "R-BAND-01",
+            "criterion": "band",
+            "points": 0,
+            "category": "risk-band",
+            "description": "qSOFA < 2 — negative screen; lower risk band"
+          }
+        ]
+      }
+    },
+    {
+      "name": "higher-score-2",
+      "description": "Tachypnoea (RR 24) and hypotension (SBP 96), still alert: qSOFA 2 — positive screen, higher risk of poor outcome.",
+      "state": {
+        "context": {
+          "clinicianName": "",
+          "clinicianRole": "doctor",
+          "assessedAt": "",
+          "careSetting": "emergency-department",
+          "suspectedSource": ""
+        },
+        "identification": {
+          "patientIdentifier": "",
+          "ageBand": "65-79",
+          "sex": "male"
+        },
+        "respiratory": {
+          "respiratoryRate": 24
+        },
+        "mentation": {
+          "glasgowComaScale": 15,
+          "mentationAltered": "no"
+        },
+        "circulation": {
+          "systolicBloodPressure": 96
+        },
+        "note": {
+          "clinicalNote": ""
+        }
+      },
+      "expected": {
+        "respiratoryRatePoint": 1,
+        "mentationPoint": 0,
+        "systolicBloodPressurePoint": 1,
+        "qsofaScore": 2,
+        "riskBand": "higher",
+        "thresholdMet": "yes",
+        "firedCriteria": [
+          {
+            "id": "R-RESPIRATORY-RATE-01",
+            "criterion": "respiratory-rate",
+            "points": 1,
+            "category": "qsofa-criterion",
+            "description": "Respiratory rate >= 22 breaths per minute"
+          },
+          {
+            "id": "R-SYSTOLIC-BLOOD-PRESSURE-01",
+            "criterion": "systolic-blood-pressure",
+            "points": 1,
+            "category": "qsofa-criterion",
+            "description": "Systolic blood pressure <= 100 mmHg"
+          },
+          {
+            "id": "R-BAND-01",
+            "criterion": "band",
+            "points": 0,
+            "category": "risk-band",
+            "description": "qSOFA >= 2 — positive screen; higher risk band"
+          }
+        ]
+      }
+    },
+    {
+      "name": "higher-score-3",
+      "description": "Tachypnoea (RR 28), altered mentation (GCS 13) and hypotension (SBP 88): qSOFA 3 — positive screen, escalate for sepsis workup.",
+      "state": {
+        "context": {
+          "clinicianName": "",
+          "clinicianRole": "doctor",
+          "assessedAt": "",
+          "careSetting": "emergency-department",
+          "suspectedSource": ""
+        },
+        "identification": {
+          "patientIdentifier": "",
+          "ageBand": "80-plus",
+          "sex": "male"
+        },
+        "respiratory": {
+          "respiratoryRate": 28
+        },
+        "mentation": {
+          "glasgowComaScale": 13,
+          "mentationAltered": "yes"
+        },
+        "circulation": {
+          "systolicBloodPressure": 88
+        },
+        "note": {
+          "clinicalNote": ""
+        }
+      },
+      "expected": {
+        "respiratoryRatePoint": 1,
+        "mentationPoint": 1,
+        "systolicBloodPressurePoint": 1,
+        "qsofaScore": 3,
+        "riskBand": "higher",
+        "thresholdMet": "yes",
+        "firedCriteria": [
+          {
+            "id": "R-RESPIRATORY-RATE-01",
+            "criterion": "respiratory-rate",
+            "points": 1,
+            "category": "qsofa-criterion",
+            "description": "Respiratory rate >= 22 breaths per minute"
+          },
+          {
+            "id": "R-MENTATION-01",
+            "criterion": "mentation",
+            "points": 1,
+            "category": "qsofa-criterion",
+            "description": "Altered mentation — Glasgow Coma Scale < 15, or altered from baseline"
+          },
+          {
+            "id": "R-SYSTOLIC-BLOOD-PRESSURE-01",
+            "criterion": "systolic-blood-pressure",
+            "points": 1,
+            "category": "qsofa-criterion",
+            "description": "Systolic blood pressure <= 100 mmHg"
+          },
+          {
+            "id": "R-BAND-01",
+            "criterion": "band",
+            "points": 0,
+            "category": "risk-band",
+            "description": "qSOFA >= 2 — positive screen; higher risk band"
+          }
+        ]
+      }
+    }
+  ]
+}

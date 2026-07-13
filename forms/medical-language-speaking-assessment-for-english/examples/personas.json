@@ -1,0 +1,604 @@
+{
+  "engine": "front-end-with-html",
+  "graderHint": "gradeOET",
+  "note": "Realistic filled-in states in the OET speaking grader's shape. `expected` is computed by `bin/test-personas --update` and verified by `bin/test-personas`.",
+  "personas": [
+    {
+      "name": "grade-a-excellent",
+      "description": "Fluent, accurate, patient-centred performance across both role-plays: raw 39/39, scaled 500 — grade A.",
+      "state": {
+        "candidate": {
+          "candidateId": "",
+          "candidateName": "",
+          "examinerName": "",
+          "testCentre": "",
+          "testDate": "",
+          "profession": "medicine",
+          "firstLanguage": "Tagalog",
+          "countryOfTraining": "",
+          "yearsOfExperience": ""
+        },
+        "rolePlay1": {
+          "scenarioTitle": "",
+          "scenarioSummary": "",
+          "patientRole": "",
+          "setting": "",
+          "safetyCriticality": "",
+          "examinerNotes": ""
+        },
+        "rolePlay2": {
+          "scenarioTitle": "",
+          "scenarioSummary": "",
+          "patientRole": "",
+          "setting": "",
+          "safetyCriticality": "",
+          "examinerNotes": ""
+        },
+        "linguisticRolePlay1": {
+          "intelligibility": 6,
+          "fluency": 6,
+          "appropriatenessOfLanguage": 6,
+          "resourcesOfGrammarAndExpression": 6
+        },
+        "linguisticRolePlay2": {
+          "intelligibility": 6,
+          "fluency": 6,
+          "appropriatenessOfLanguage": 6,
+          "resourcesOfGrammarAndExpression": 6
+        },
+        "clinicalIndicators": {
+          "relationshipBuilding": 3,
+          "understandingPatientPerspective": 3,
+          "providingStructure": 3,
+          "informationGathering": 3,
+          "informationGiving": 3,
+          "examinerNotes": ""
+        }
+      },
+      "expected": {
+        "linguisticTotal": 24,
+        "clinicalTotal": 15,
+        "rawTotal": 39,
+        "scaledScore": 500,
+        "grade": "A",
+        "perCriterionScores": [
+          {
+            "id": "LING-INT",
+            "domain": "linguistic",
+            "label": "Intelligibility",
+            "maxScore": 6,
+            "rolePlay1Score": 6,
+            "rolePlay2Score": 6,
+            "meanScore": 6
+          },
+          {
+            "id": "LING-FLU",
+            "domain": "linguistic",
+            "label": "Fluency",
+            "maxScore": 6,
+            "rolePlay1Score": 6,
+            "rolePlay2Score": 6,
+            "meanScore": 6
+          },
+          {
+            "id": "LING-APP",
+            "domain": "linguistic",
+            "label": "Appropriateness of Language",
+            "maxScore": 6,
+            "rolePlay1Score": 6,
+            "rolePlay2Score": 6,
+            "meanScore": 6
+          },
+          {
+            "id": "LING-GRM",
+            "domain": "linguistic",
+            "label": "Resources of Grammar & Expression",
+            "maxScore": 6,
+            "rolePlay1Score": 6,
+            "rolePlay2Score": 6,
+            "meanScore": 6
+          },
+          {
+            "id": "CLIN-REL",
+            "domain": "clinical",
+            "label": "Relationship-building",
+            "maxScore": 3,
+            "rolePlay1Score": null,
+            "rolePlay2Score": null,
+            "meanScore": 3
+          },
+          {
+            "id": "CLIN-UPP",
+            "domain": "clinical",
+            "label": "Understanding Patient’s Perspective",
+            "maxScore": 3,
+            "rolePlay1Score": null,
+            "rolePlay2Score": null,
+            "meanScore": 3
+          },
+          {
+            "id": "CLIN-STR",
+            "domain": "clinical",
+            "label": "Providing Structure",
+            "maxScore": 3,
+            "rolePlay1Score": null,
+            "rolePlay2Score": null,
+            "meanScore": 3
+          },
+          {
+            "id": "CLIN-IGT",
+            "domain": "clinical",
+            "label": "Information-gathering",
+            "maxScore": 3,
+            "rolePlay1Score": null,
+            "rolePlay2Score": null,
+            "meanScore": 3
+          },
+          {
+            "id": "CLIN-IGV",
+            "domain": "clinical",
+            "label": "Information-giving",
+            "maxScore": 3,
+            "rolePlay1Score": null,
+            "rolePlay2Score": null,
+            "meanScore": 3
+          }
+        ],
+        "firedRules": [
+          {
+            "id": "LING-INT",
+            "category": "Linguistic",
+            "description": "Intelligibility",
+            "score": 6
+          },
+          {
+            "id": "LING-FLU",
+            "category": "Linguistic",
+            "description": "Fluency",
+            "score": 6
+          },
+          {
+            "id": "LING-APP",
+            "category": "Linguistic",
+            "description": "Appropriateness of Language",
+            "score": 6
+          },
+          {
+            "id": "LING-GRM",
+            "category": "Linguistic",
+            "description": "Resources of Grammar & Expression",
+            "score": 6
+          },
+          {
+            "id": "CLIN-REL",
+            "category": "Clinical Communication",
+            "description": "Relationship-building",
+            "score": 3
+          },
+          {
+            "id": "CLIN-UPP",
+            "category": "Clinical Communication",
+            "description": "Understanding Patient’s Perspective",
+            "score": 3
+          },
+          {
+            "id": "CLIN-STR",
+            "category": "Clinical Communication",
+            "description": "Providing Structure",
+            "score": 3
+          },
+          {
+            "id": "CLIN-IGT",
+            "category": "Clinical Communication",
+            "description": "Information-gathering",
+            "score": 3
+          },
+          {
+            "id": "CLIN-IGV",
+            "category": "Clinical Communication",
+            "description": "Information-giving",
+            "score": 3
+          }
+        ]
+      }
+    },
+    {
+      "name": "grade-c-borderline",
+      "description": "Generally intelligible but with lapses in fluency and clinical structure: raw 20/39, scaled 256 — grade C (below the typical B pass mark).",
+      "state": {
+        "candidate": {
+          "candidateId": "",
+          "candidateName": "",
+          "examinerName": "",
+          "testCentre": "",
+          "testDate": "",
+          "profession": "medicine",
+          "firstLanguage": "Arabic",
+          "countryOfTraining": "",
+          "yearsOfExperience": ""
+        },
+        "rolePlay1": {
+          "scenarioTitle": "",
+          "scenarioSummary": "",
+          "patientRole": "",
+          "setting": "",
+          "safetyCriticality": "",
+          "examinerNotes": ""
+        },
+        "rolePlay2": {
+          "scenarioTitle": "",
+          "scenarioSummary": "",
+          "patientRole": "",
+          "setting": "",
+          "safetyCriticality": "",
+          "examinerNotes": ""
+        },
+        "linguisticRolePlay1": {
+          "intelligibility": 4,
+          "fluency": 3,
+          "appropriatenessOfLanguage": 4,
+          "resourcesOfGrammarAndExpression": 3
+        },
+        "linguisticRolePlay2": {
+          "intelligibility": 4,
+          "fluency": 4,
+          "appropriatenessOfLanguage": 3,
+          "resourcesOfGrammarAndExpression": 3
+        },
+        "clinicalIndicators": {
+          "relationshipBuilding": 2,
+          "understandingPatientPerspective": 1,
+          "providingStructure": 1,
+          "informationGathering": 1,
+          "informationGiving": 1,
+          "examinerNotes": ""
+        }
+      },
+      "expected": {
+        "linguisticTotal": 14,
+        "clinicalTotal": 6,
+        "rawTotal": 20,
+        "scaledScore": 256,
+        "grade": "C",
+        "perCriterionScores": [
+          {
+            "id": "LING-INT",
+            "domain": "linguistic",
+            "label": "Intelligibility",
+            "maxScore": 6,
+            "rolePlay1Score": 4,
+            "rolePlay2Score": 4,
+            "meanScore": 4
+          },
+          {
+            "id": "LING-FLU",
+            "domain": "linguistic",
+            "label": "Fluency",
+            "maxScore": 6,
+            "rolePlay1Score": 3,
+            "rolePlay2Score": 4,
+            "meanScore": 3.5
+          },
+          {
+            "id": "LING-APP",
+            "domain": "linguistic",
+            "label": "Appropriateness of Language",
+            "maxScore": 6,
+            "rolePlay1Score": 4,
+            "rolePlay2Score": 3,
+            "meanScore": 3.5
+          },
+          {
+            "id": "LING-GRM",
+            "domain": "linguistic",
+            "label": "Resources of Grammar & Expression",
+            "maxScore": 6,
+            "rolePlay1Score": 3,
+            "rolePlay2Score": 3,
+            "meanScore": 3
+          },
+          {
+            "id": "CLIN-REL",
+            "domain": "clinical",
+            "label": "Relationship-building",
+            "maxScore": 3,
+            "rolePlay1Score": null,
+            "rolePlay2Score": null,
+            "meanScore": 2
+          },
+          {
+            "id": "CLIN-UPP",
+            "domain": "clinical",
+            "label": "Understanding Patient’s Perspective",
+            "maxScore": 3,
+            "rolePlay1Score": null,
+            "rolePlay2Score": null,
+            "meanScore": 1
+          },
+          {
+            "id": "CLIN-STR",
+            "domain": "clinical",
+            "label": "Providing Structure",
+            "maxScore": 3,
+            "rolePlay1Score": null,
+            "rolePlay2Score": null,
+            "meanScore": 1
+          },
+          {
+            "id": "CLIN-IGT",
+            "domain": "clinical",
+            "label": "Information-gathering",
+            "maxScore": 3,
+            "rolePlay1Score": null,
+            "rolePlay2Score": null,
+            "meanScore": 1
+          },
+          {
+            "id": "CLIN-IGV",
+            "domain": "clinical",
+            "label": "Information-giving",
+            "maxScore": 3,
+            "rolePlay1Score": null,
+            "rolePlay2Score": null,
+            "meanScore": 1
+          }
+        ],
+        "firedRules": [
+          {
+            "id": "LING-INT",
+            "category": "Linguistic",
+            "description": "Intelligibility",
+            "score": 4
+          },
+          {
+            "id": "LING-FLU",
+            "category": "Linguistic",
+            "description": "Fluency",
+            "score": 3.5
+          },
+          {
+            "id": "LING-APP",
+            "category": "Linguistic",
+            "description": "Appropriateness of Language",
+            "score": 3.5
+          },
+          {
+            "id": "LING-GRM",
+            "category": "Linguistic",
+            "description": "Resources of Grammar & Expression",
+            "score": 3
+          },
+          {
+            "id": "CLIN-REL",
+            "category": "Clinical Communication",
+            "description": "Relationship-building",
+            "score": 2
+          },
+          {
+            "id": "CLIN-UPP",
+            "category": "Clinical Communication",
+            "description": "Understanding Patient’s Perspective",
+            "score": 1
+          },
+          {
+            "id": "CLIN-STR",
+            "category": "Clinical Communication",
+            "description": "Providing Structure",
+            "score": 1
+          },
+          {
+            "id": "CLIN-IGT",
+            "category": "Clinical Communication",
+            "description": "Information-gathering",
+            "score": 1
+          },
+          {
+            "id": "CLIN-IGV",
+            "category": "Clinical Communication",
+            "description": "Information-giving",
+            "score": 1
+          }
+        ]
+      }
+    },
+    {
+      "name": "grade-e-below-standard",
+      "description": "Frequently unintelligible with breakdown of communication: raw 4/39, scaled 51 — grade E, well below the safe-practice threshold.",
+      "state": {
+        "candidate": {
+          "candidateId": "",
+          "candidateName": "",
+          "examinerName": "",
+          "testCentre": "",
+          "testDate": "",
+          "profession": "medicine",
+          "firstLanguage": "Mandarin",
+          "countryOfTraining": "",
+          "yearsOfExperience": ""
+        },
+        "rolePlay1": {
+          "scenarioTitle": "",
+          "scenarioSummary": "",
+          "patientRole": "",
+          "setting": "",
+          "safetyCriticality": "",
+          "examinerNotes": ""
+        },
+        "rolePlay2": {
+          "scenarioTitle": "",
+          "scenarioSummary": "",
+          "patientRole": "",
+          "setting": "",
+          "safetyCriticality": "",
+          "examinerNotes": ""
+        },
+        "linguisticRolePlay1": {
+          "intelligibility": 1,
+          "fluency": 1,
+          "appropriatenessOfLanguage": 1,
+          "resourcesOfGrammarAndExpression": 1
+        },
+        "linguisticRolePlay2": {
+          "intelligibility": 1,
+          "fluency": 1,
+          "appropriatenessOfLanguage": 1,
+          "resourcesOfGrammarAndExpression": 1
+        },
+        "clinicalIndicators": {
+          "relationshipBuilding": 0,
+          "understandingPatientPerspective": 0,
+          "providingStructure": 0,
+          "informationGathering": 0,
+          "informationGiving": 0,
+          "examinerNotes": ""
+        }
+      },
+      "expected": {
+        "linguisticTotal": 4,
+        "clinicalTotal": 0,
+        "rawTotal": 4,
+        "scaledScore": 51,
+        "grade": "E",
+        "perCriterionScores": [
+          {
+            "id": "LING-INT",
+            "domain": "linguistic",
+            "label": "Intelligibility",
+            "maxScore": 6,
+            "rolePlay1Score": 1,
+            "rolePlay2Score": 1,
+            "meanScore": 1
+          },
+          {
+            "id": "LING-FLU",
+            "domain": "linguistic",
+            "label": "Fluency",
+            "maxScore": 6,
+            "rolePlay1Score": 1,
+            "rolePlay2Score": 1,
+            "meanScore": 1
+          },
+          {
+            "id": "LING-APP",
+            "domain": "linguistic",
+            "label": "Appropriateness of Language",
+            "maxScore": 6,
+            "rolePlay1Score": 1,
+            "rolePlay2Score": 1,
+            "meanScore": 1
+          },
+          {
+            "id": "LING-GRM",
+            "domain": "linguistic",
+            "label": "Resources of Grammar & Expression",
+            "maxScore": 6,
+            "rolePlay1Score": 1,
+            "rolePlay2Score": 1,
+            "meanScore": 1
+          },
+          {
+            "id": "CLIN-REL",
+            "domain": "clinical",
+            "label": "Relationship-building",
+            "maxScore": 3,
+            "rolePlay1Score": null,
+            "rolePlay2Score": null,
+            "meanScore": 0
+          },
+          {
+            "id": "CLIN-UPP",
+            "domain": "clinical",
+            "label": "Understanding Patient’s Perspective",
+            "maxScore": 3,
+            "rolePlay1Score": null,
+            "rolePlay2Score": null,
+            "meanScore": 0
+          },
+          {
+            "id": "CLIN-STR",
+            "domain": "clinical",
+            "label": "Providing Structure",
+            "maxScore": 3,
+            "rolePlay1Score": null,
+            "rolePlay2Score": null,
+            "meanScore": 0
+          },
+          {
+            "id": "CLIN-IGT",
+            "domain": "clinical",
+            "label": "Information-gathering",
+            "maxScore": 3,
+            "rolePlay1Score": null,
+            "rolePlay2Score": null,
+            "meanScore": 0
+          },
+          {
+            "id": "CLIN-IGV",
+            "domain": "clinical",
+            "label": "Information-giving",
+            "maxScore": 3,
+            "rolePlay1Score": null,
+            "rolePlay2Score": null,
+            "meanScore": 0
+          }
+        ],
+        "firedRules": [
+          {
+            "id": "LING-INT",
+            "category": "Linguistic",
+            "description": "Intelligibility",
+            "score": 1
+          },
+          {
+            "id": "LING-FLU",
+            "category": "Linguistic",
+            "description": "Fluency",
+            "score": 1
+          },
+          {
+            "id": "LING-APP",
+            "category": "Linguistic",
+            "description": "Appropriateness of Language",
+            "score": 1
+          },
+          {
+            "id": "LING-GRM",
+            "category": "Linguistic",
+            "description": "Resources of Grammar & Expression",
+            "score": 1
+          },
+          {
+            "id": "CLIN-REL",
+            "category": "Clinical Communication",
+            "description": "Relationship-building",
+            "score": 0
+          },
+          {
+            "id": "CLIN-UPP",
+            "category": "Clinical Communication",
+            "description": "Understanding Patient’s Perspective",
+            "score": 0
+          },
+          {
+            "id": "CLIN-STR",
+            "category": "Clinical Communication",
+            "description": "Providing Structure",
+            "score": 0
+          },
+          {
+            "id": "CLIN-IGT",
+            "category": "Clinical Communication",
+            "description": "Information-gathering",
+            "score": 0
+          },
+          {
+            "id": "CLIN-IGV",
+            "category": "Clinical Communication",
+            "description": "Information-giving",
+            "score": 0
+          }
+        ]
+      }
+    }
+  ]
+}

@@ -1,0 +1,528 @@
+{
+  "engine": "front-end-with-html",
+  "graderHint": "calculatePercGrade",
+  "note": "Realistic filled-in states in the scoring engine's shape. `expected` is computed by `bin/test-personas --update` and verified by `bin/test-personas`.",
+  "personas": [
+    {
+      "name": "perc-negative",
+      "description": "Low gestalt pre-test probability, all eight criteria satisfied (young, normal vitals, no risk factors): PERC-negative — PE excluded without D-dimer or imaging.",
+      "state": {
+        "context": {
+          "clinicianName": "",
+          "clinicianRole": "emergency-physician",
+          "assessedAt": "",
+          "careSetting": "emergency-department",
+          "presentingComplaint": ""
+        },
+        "identification": {
+          "patientIdentifier": "",
+          "age": 34,
+          "sex": "female"
+        },
+        "pretest": {
+          "pretestProbability": "low"
+        },
+        "vitals": {
+          "heartRate": 78,
+          "oxygenSaturation": 98
+        },
+        "criteria": {
+          "unilateralLegSwelling": "no",
+          "haemoptysis": "no",
+          "recentSurgeryOrTrauma": "no",
+          "priorVenousThromboembolism": "no",
+          "oestrogenUse": "no"
+        },
+        "result": {
+          "clinicalNote": ""
+        }
+      },
+      "expected": {
+        "classification": "perc-negative",
+        "allCriteriaSatisfied": true,
+        "applicable": true,
+        "criterionResults": [
+          {
+            "number": 1,
+            "criterion": "age-under-50",
+            "satisfied": true,
+            "label": "Age under 50 years"
+          },
+          {
+            "number": 2,
+            "criterion": "heart-rate-under-100",
+            "satisfied": true,
+            "label": "Heart rate under 100 beats/min"
+          },
+          {
+            "number": 3,
+            "criterion": "spo2-at-least-95",
+            "satisfied": true,
+            "label": "Oxygen saturation at least 95%"
+          },
+          {
+            "number": 4,
+            "criterion": "no-unilateral-leg-swelling",
+            "satisfied": true,
+            "label": "No unilateral leg swelling"
+          },
+          {
+            "number": 5,
+            "criterion": "no-haemoptysis",
+            "satisfied": true,
+            "label": "No haemoptysis"
+          },
+          {
+            "number": 6,
+            "criterion": "no-recent-surgery-trauma",
+            "satisfied": true,
+            "label": "No recent surgery or trauma"
+          },
+          {
+            "number": 7,
+            "criterion": "no-prior-dvt-pe",
+            "satisfied": true,
+            "label": "No prior DVT or PE"
+          },
+          {
+            "number": 8,
+            "criterion": "no-oestrogen-use",
+            "satisfied": true,
+            "label": "No exogenous oestrogen"
+          }
+        ],
+        "failedCriteria": [],
+        "firedRules": [
+          {
+            "id": "R-AGE-UNDER-50-01",
+            "instrument": "criterion",
+            "satisfied": true,
+            "outcome": "satisfied",
+            "category": "age",
+            "description": "Criterion 1 — Age is under 50 years — SATISFIED"
+          },
+          {
+            "id": "R-HEART-RATE-UNDER-100-01",
+            "instrument": "criterion",
+            "satisfied": true,
+            "outcome": "satisfied",
+            "category": "heart-rate",
+            "description": "Criterion 2 — Heart rate is under 100 beats per minute — SATISFIED"
+          },
+          {
+            "id": "R-SPO2-AT-LEAST-95-01",
+            "instrument": "criterion",
+            "satisfied": true,
+            "outcome": "satisfied",
+            "category": "oxygenation",
+            "description": "Criterion 3 — Oxygen saturation (SpO2) is at least 95% on room air — SATISFIED"
+          },
+          {
+            "id": "R-NO-UNILATERAL-LEG-SWELLING-01",
+            "instrument": "criterion",
+            "satisfied": true,
+            "outcome": "satisfied",
+            "category": "clinical-sign",
+            "description": "Criterion 4 — No unilateral leg swelling — SATISFIED"
+          },
+          {
+            "id": "R-NO-HAEMOPTYSIS-01",
+            "instrument": "criterion",
+            "satisfied": true,
+            "outcome": "satisfied",
+            "category": "clinical-sign",
+            "description": "Criterion 5 — No haemoptysis — SATISFIED"
+          },
+          {
+            "id": "R-NO-RECENT-SURGERY-TRAUMA-01",
+            "instrument": "criterion",
+            "satisfied": true,
+            "outcome": "satisfied",
+            "category": "history",
+            "description": "Criterion 6 — No surgery or trauma requiring general anaesthesia within the past 4 weeks — SATISFIED"
+          },
+          {
+            "id": "R-NO-PRIOR-DVT-PE-01",
+            "instrument": "criterion",
+            "satisfied": true,
+            "outcome": "satisfied",
+            "category": "history",
+            "description": "Criterion 7 — No prior deep vein thrombosis or pulmonary embolism — SATISFIED"
+          },
+          {
+            "id": "R-NO-OESTROGEN-USE-01",
+            "instrument": "criterion",
+            "satisfied": true,
+            "outcome": "satisfied",
+            "category": "history",
+            "description": "Criterion 8 — No exogenous oestrogen use (oral contraceptive or HRT) — SATISFIED"
+          },
+          {
+            "id": "R-APPLICABILITY-GATE-01",
+            "instrument": "gate",
+            "satisfied": null,
+            "outcome": "applicable",
+            "category": "applicability",
+            "description": "Pre-test probability is low — PERC applies"
+          },
+          {
+            "id": "R-CLASSIFICATION-01",
+            "instrument": "composite",
+            "satisfied": null,
+            "outcome": "perc-negative",
+            "category": "classification",
+            "description": "Pre-test probability low AND all eight criteria satisfied — PERC-negative; PE excluded without D-dimer or imaging"
+          }
+        ]
+      }
+    },
+    {
+      "name": "perc-positive-applicable",
+      "description": "Low pre-test probability but one criterion fails (age 58): PERC-positive — the rule does not exclude PE; proceed to D-dimer / imaging.",
+      "state": {
+        "context": {
+          "clinicianName": "",
+          "clinicianRole": "emergency-physician",
+          "assessedAt": "",
+          "careSetting": "emergency-department",
+          "presentingComplaint": ""
+        },
+        "identification": {
+          "patientIdentifier": "",
+          "age": 58,
+          "sex": "male"
+        },
+        "pretest": {
+          "pretestProbability": "low"
+        },
+        "vitals": {
+          "heartRate": 88,
+          "oxygenSaturation": 97
+        },
+        "criteria": {
+          "unilateralLegSwelling": "no",
+          "haemoptysis": "no",
+          "recentSurgeryOrTrauma": "no",
+          "priorVenousThromboembolism": "no",
+          "oestrogenUse": "no"
+        },
+        "result": {
+          "clinicalNote": ""
+        }
+      },
+      "expected": {
+        "classification": "perc-positive",
+        "allCriteriaSatisfied": false,
+        "applicable": true,
+        "criterionResults": [
+          {
+            "number": 1,
+            "criterion": "age-under-50",
+            "satisfied": false,
+            "label": "Age under 50 years"
+          },
+          {
+            "number": 2,
+            "criterion": "heart-rate-under-100",
+            "satisfied": true,
+            "label": "Heart rate under 100 beats/min"
+          },
+          {
+            "number": 3,
+            "criterion": "spo2-at-least-95",
+            "satisfied": true,
+            "label": "Oxygen saturation at least 95%"
+          },
+          {
+            "number": 4,
+            "criterion": "no-unilateral-leg-swelling",
+            "satisfied": true,
+            "label": "No unilateral leg swelling"
+          },
+          {
+            "number": 5,
+            "criterion": "no-haemoptysis",
+            "satisfied": true,
+            "label": "No haemoptysis"
+          },
+          {
+            "number": 6,
+            "criterion": "no-recent-surgery-trauma",
+            "satisfied": true,
+            "label": "No recent surgery or trauma"
+          },
+          {
+            "number": 7,
+            "criterion": "no-prior-dvt-pe",
+            "satisfied": true,
+            "label": "No prior DVT or PE"
+          },
+          {
+            "number": 8,
+            "criterion": "no-oestrogen-use",
+            "satisfied": true,
+            "label": "No exogenous oestrogen"
+          }
+        ],
+        "failedCriteria": [
+          1
+        ],
+        "firedRules": [
+          {
+            "id": "R-AGE-UNDER-50-01",
+            "instrument": "criterion",
+            "satisfied": false,
+            "outcome": "failed",
+            "category": "age",
+            "description": "Criterion 1 — Age is under 50 years — FAILED"
+          },
+          {
+            "id": "R-HEART-RATE-UNDER-100-01",
+            "instrument": "criterion",
+            "satisfied": true,
+            "outcome": "satisfied",
+            "category": "heart-rate",
+            "description": "Criterion 2 — Heart rate is under 100 beats per minute — SATISFIED"
+          },
+          {
+            "id": "R-SPO2-AT-LEAST-95-01",
+            "instrument": "criterion",
+            "satisfied": true,
+            "outcome": "satisfied",
+            "category": "oxygenation",
+            "description": "Criterion 3 — Oxygen saturation (SpO2) is at least 95% on room air — SATISFIED"
+          },
+          {
+            "id": "R-NO-UNILATERAL-LEG-SWELLING-01",
+            "instrument": "criterion",
+            "satisfied": true,
+            "outcome": "satisfied",
+            "category": "clinical-sign",
+            "description": "Criterion 4 — No unilateral leg swelling — SATISFIED"
+          },
+          {
+            "id": "R-NO-HAEMOPTYSIS-01",
+            "instrument": "criterion",
+            "satisfied": true,
+            "outcome": "satisfied",
+            "category": "clinical-sign",
+            "description": "Criterion 5 — No haemoptysis — SATISFIED"
+          },
+          {
+            "id": "R-NO-RECENT-SURGERY-TRAUMA-01",
+            "instrument": "criterion",
+            "satisfied": true,
+            "outcome": "satisfied",
+            "category": "history",
+            "description": "Criterion 6 — No surgery or trauma requiring general anaesthesia within the past 4 weeks — SATISFIED"
+          },
+          {
+            "id": "R-NO-PRIOR-DVT-PE-01",
+            "instrument": "criterion",
+            "satisfied": true,
+            "outcome": "satisfied",
+            "category": "history",
+            "description": "Criterion 7 — No prior deep vein thrombosis or pulmonary embolism — SATISFIED"
+          },
+          {
+            "id": "R-NO-OESTROGEN-USE-01",
+            "instrument": "criterion",
+            "satisfied": true,
+            "outcome": "satisfied",
+            "category": "history",
+            "description": "Criterion 8 — No exogenous oestrogen use (oral contraceptive or HRT) — SATISFIED"
+          },
+          {
+            "id": "R-APPLICABILITY-GATE-01",
+            "instrument": "gate",
+            "satisfied": null,
+            "outcome": "applicable",
+            "category": "applicability",
+            "description": "Pre-test probability is low — PERC applies"
+          },
+          {
+            "id": "R-CLASSIFICATION-01",
+            "instrument": "composite",
+            "satisfied": null,
+            "outcome": "perc-positive",
+            "category": "classification",
+            "description": "Pre-test probability not low, or at least one criterion failed — PERC-positive; proceed to D-dimer and/or imaging"
+          }
+        ]
+      }
+    },
+    {
+      "name": "perc-positive-not-applicable",
+      "description": "Pre-test probability not low: PERC does not apply — PERC-positive regardless of the eight criteria; continue the diagnostic pathway.",
+      "state": {
+        "context": {
+          "clinicianName": "",
+          "clinicianRole": "emergency-physician",
+          "assessedAt": "",
+          "careSetting": "emergency-department",
+          "presentingComplaint": ""
+        },
+        "identification": {
+          "patientIdentifier": "",
+          "age": 44,
+          "sex": "male"
+        },
+        "pretest": {
+          "pretestProbability": "not-low"
+        },
+        "vitals": {
+          "heartRate": 82,
+          "oxygenSaturation": 98
+        },
+        "criteria": {
+          "unilateralLegSwelling": "no",
+          "haemoptysis": "no",
+          "recentSurgeryOrTrauma": "no",
+          "priorVenousThromboembolism": "no",
+          "oestrogenUse": "no"
+        },
+        "result": {
+          "clinicalNote": ""
+        }
+      },
+      "expected": {
+        "classification": "perc-positive",
+        "allCriteriaSatisfied": true,
+        "applicable": false,
+        "criterionResults": [
+          {
+            "number": 1,
+            "criterion": "age-under-50",
+            "satisfied": true,
+            "label": "Age under 50 years"
+          },
+          {
+            "number": 2,
+            "criterion": "heart-rate-under-100",
+            "satisfied": true,
+            "label": "Heart rate under 100 beats/min"
+          },
+          {
+            "number": 3,
+            "criterion": "spo2-at-least-95",
+            "satisfied": true,
+            "label": "Oxygen saturation at least 95%"
+          },
+          {
+            "number": 4,
+            "criterion": "no-unilateral-leg-swelling",
+            "satisfied": true,
+            "label": "No unilateral leg swelling"
+          },
+          {
+            "number": 5,
+            "criterion": "no-haemoptysis",
+            "satisfied": true,
+            "label": "No haemoptysis"
+          },
+          {
+            "number": 6,
+            "criterion": "no-recent-surgery-trauma",
+            "satisfied": true,
+            "label": "No recent surgery or trauma"
+          },
+          {
+            "number": 7,
+            "criterion": "no-prior-dvt-pe",
+            "satisfied": true,
+            "label": "No prior DVT or PE"
+          },
+          {
+            "number": 8,
+            "criterion": "no-oestrogen-use",
+            "satisfied": true,
+            "label": "No exogenous oestrogen"
+          }
+        ],
+        "failedCriteria": [],
+        "firedRules": [
+          {
+            "id": "R-AGE-UNDER-50-01",
+            "instrument": "criterion",
+            "satisfied": true,
+            "outcome": "satisfied",
+            "category": "age",
+            "description": "Criterion 1 — Age is under 50 years — SATISFIED"
+          },
+          {
+            "id": "R-HEART-RATE-UNDER-100-01",
+            "instrument": "criterion",
+            "satisfied": true,
+            "outcome": "satisfied",
+            "category": "heart-rate",
+            "description": "Criterion 2 — Heart rate is under 100 beats per minute — SATISFIED"
+          },
+          {
+            "id": "R-SPO2-AT-LEAST-95-01",
+            "instrument": "criterion",
+            "satisfied": true,
+            "outcome": "satisfied",
+            "category": "oxygenation",
+            "description": "Criterion 3 — Oxygen saturation (SpO2) is at least 95% on room air — SATISFIED"
+          },
+          {
+            "id": "R-NO-UNILATERAL-LEG-SWELLING-01",
+            "instrument": "criterion",
+            "satisfied": true,
+            "outcome": "satisfied",
+            "category": "clinical-sign",
+            "description": "Criterion 4 — No unilateral leg swelling — SATISFIED"
+          },
+          {
+            "id": "R-NO-HAEMOPTYSIS-01",
+            "instrument": "criterion",
+            "satisfied": true,
+            "outcome": "satisfied",
+            "category": "clinical-sign",
+            "description": "Criterion 5 — No haemoptysis — SATISFIED"
+          },
+          {
+            "id": "R-NO-RECENT-SURGERY-TRAUMA-01",
+            "instrument": "criterion",
+            "satisfied": true,
+            "outcome": "satisfied",
+            "category": "history",
+            "description": "Criterion 6 — No surgery or trauma requiring general anaesthesia within the past 4 weeks — SATISFIED"
+          },
+          {
+            "id": "R-NO-PRIOR-DVT-PE-01",
+            "instrument": "criterion",
+            "satisfied": true,
+            "outcome": "satisfied",
+            "category": "history",
+            "description": "Criterion 7 — No prior deep vein thrombosis or pulmonary embolism — SATISFIED"
+          },
+          {
+            "id": "R-NO-OESTROGEN-USE-01",
+            "instrument": "criterion",
+            "satisfied": true,
+            "outcome": "satisfied",
+            "category": "history",
+            "description": "Criterion 8 — No exogenous oestrogen use (oral contraceptive or HRT) — SATISFIED"
+          },
+          {
+            "id": "R-APPLICABILITY-GATE-01",
+            "instrument": "gate",
+            "satisfied": null,
+            "outcome": "not-applicable",
+            "category": "applicability",
+            "description": "Pre-test probability is not low — PERC does not apply; criteria are informational only"
+          },
+          {
+            "id": "R-CLASSIFICATION-01",
+            "instrument": "composite",
+            "satisfied": null,
+            "outcome": "perc-positive",
+            "category": "classification",
+            "description": "Pre-test probability not low, or at least one criterion failed — PERC-positive; proceed to D-dimer and/or imaging"
+          }
+        ]
+      }
+    }
+  ]
+}

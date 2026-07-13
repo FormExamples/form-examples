@@ -1,0 +1,619 @@
+{
+  "engine": "front-end-with-html",
+  "graderHint": "gradeSAD",
+  "note": "Realistic filled-in states in the scoring engine's shape. `expected` is computed by `bin/test-personas --update` and verified by `bin/test-personas`.",
+  "personas": [
+    {
+      "name": "no-sad",
+      "description": "Low seasonality (SPAQ 6) and minimal depressive symptoms (PHQ-9 0), no risk: combined severity no-sad.",
+      "state": {
+        "demographics": {
+          "firstName": "",
+          "lastName": "",
+          "dateOfBirth": "",
+          "sex": "female",
+          "latitude": "",
+          "country": "",
+          "yearsAtCurrentLatitude": null
+        },
+        "seasonalPatternHistory": {
+          "symptomsRecurAnnually": "",
+          "worstMonths": "",
+          "bestMonths": "",
+          "yearsAffected": null,
+          "familyHistorySad": "",
+          "firstOnsetAge": ""
+        },
+        "currentMood": {
+          "phq9": {
+            "q1": 0,
+            "q2": 0,
+            "q3": 0,
+            "q4": 0,
+            "q5": 0,
+            "q6": 0,
+            "q7": 0,
+            "q8": 0,
+            "q9": 0
+          },
+          "difficultyLevel": ""
+        },
+        "sleepEnergy": {
+          "spaq": {
+            "sleepLength": 1,
+            "energyLevel": 1
+          },
+          "hoursSleptWinter": null,
+          "hoursSleptSummer": null,
+          "hypersomnia": "",
+          "morningFatigue": "",
+          "energyNotes": ""
+        },
+        "appetiteWeight": {
+          "spaq": {
+            "appetite": 1,
+            "weight": 1
+          },
+          "carbohydrateCraving": "",
+          "winterWeightChangeKg": null,
+          "eatingPatternChanges": ""
+        },
+        "socialOccupational": {
+          "spaq": {
+            "mood": 1,
+            "socialActivity": 1
+          },
+          "workImpaired": "",
+          "relationshipsImpaired": "",
+          "socialWithdrawal": "",
+          "occupationalNotes": ""
+        },
+        "lightExposure": {
+          "dailyOutdoorMinutes": null,
+          "workIndoors": "",
+          "curtainsClosedDaytime": "",
+          "sunriseExposure": "",
+          "usesLightTherapyBox": "",
+          "lightTherapyDetails": "",
+          "lightTherapyAccess": ""
+        },
+        "previousTreatments": {
+          "antidepressants": "",
+          "antidepressantDetails": "",
+          "psychotherapy": "",
+          "psychotherapyDetails": "",
+          "lightTherapyHistory": "",
+          "lightTherapyHistoryDetails": "",
+          "currentTreatment": "",
+          "currentTreatmentDetails": ""
+        },
+        "riskAssessment": {
+          "suicidalIdeation": "no",
+          "suicidalIntent": "no",
+          "suicidalPlan": "",
+          "selfHarm": "no",
+          "selfHarmDetails": "",
+          "previousAttempt": "no",
+          "protectiveFactors": "",
+          "safetyPlanInPlace": ""
+        },
+        "treatmentPlan": {
+          "planLightTherapy": "",
+          "planAntidepressant": "",
+          "planPsychotherapy": "",
+          "planLifestyle": "",
+          "planCrisisReferral": "",
+          "followUpInterval": "",
+          "clinicianNotes": ""
+        }
+      },
+      "expected": {
+        "spaqScore": 6,
+        "spaqBand": "no-sad",
+        "phq9Score": 0,
+        "phq9Band": "minimal",
+        "combinedSeverity": "no-sad",
+        "firedRules": [
+          {
+            "id": "SPAQ-001",
+            "category": "SPAQ • Mood",
+            "description": "Sleep length — how much do the seasons change your sleep length?",
+            "score": 1
+          },
+          {
+            "id": "SPAQ-002",
+            "category": "SPAQ • Energy",
+            "description": "Social activity — how much do the seasons change your level of social activity?",
+            "score": 1
+          },
+          {
+            "id": "SPAQ-003",
+            "category": "SPAQ • Mood",
+            "description": "Mood (general well-being) — how much does it change with the seasons?",
+            "score": 1
+          },
+          {
+            "id": "SPAQ-004",
+            "category": "SPAQ • Weight",
+            "description": "Weight — how much does your weight change with the seasons?",
+            "score": 1
+          },
+          {
+            "id": "SPAQ-005",
+            "category": "SPAQ • Appetite",
+            "description": "Appetite — how much does your appetite change with the seasons?",
+            "score": 1
+          },
+          {
+            "id": "SPAQ-006",
+            "category": "SPAQ • Energy",
+            "description": "Energy level — how much does your energy change with the seasons?",
+            "score": 1
+          },
+          {
+            "id": "PHQ9-Q1",
+            "category": "PHQ-9 • Anhedonia",
+            "description": "Little interest or pleasure in doing things",
+            "score": 0
+          },
+          {
+            "id": "PHQ9-Q2",
+            "category": "PHQ-9 • Depressed Mood",
+            "description": "Feeling down, depressed, or hopeless",
+            "score": 0
+          },
+          {
+            "id": "PHQ9-Q3",
+            "category": "PHQ-9 • Sleep",
+            "description": "Trouble falling or staying asleep, or sleeping too much",
+            "score": 0
+          },
+          {
+            "id": "PHQ9-Q4",
+            "category": "PHQ-9 • Energy",
+            "description": "Feeling tired or having little energy",
+            "score": 0
+          },
+          {
+            "id": "PHQ9-Q5",
+            "category": "PHQ-9 • Appetite",
+            "description": "Poor appetite or overeating",
+            "score": 0
+          },
+          {
+            "id": "PHQ9-Q6",
+            "category": "PHQ-9 • Self-Esteem",
+            "description": "Feeling bad about yourself — or that you are a failure or have let yourself or your family down",
+            "score": 0
+          },
+          {
+            "id": "PHQ9-Q7",
+            "category": "PHQ-9 • Concentration",
+            "description": "Trouble concentrating on things, such as reading the newspaper or watching television",
+            "score": 0
+          },
+          {
+            "id": "PHQ9-Q8",
+            "category": "PHQ-9 • Psychomotor",
+            "description": "Moving or speaking so slowly that other people could have noticed; or the opposite — being so fidgety or restless that you have been moving around a lot more than usual",
+            "score": 0
+          },
+          {
+            "id": "PHQ9-Q9",
+            "category": "PHQ-9 • Self-Harm",
+            "description": "Thoughts that you would be better off dead, or of hurting yourself in some way",
+            "score": 0
+          }
+        ]
+      }
+    },
+    {
+      "name": "moderate",
+      "description": "High seasonality (SPAQ 12, sad-likely) with moderate depression (PHQ-9 12), no suicidality: combined severity moderate.",
+      "state": {
+        "demographics": {
+          "firstName": "",
+          "lastName": "",
+          "dateOfBirth": "",
+          "sex": "female",
+          "latitude": "",
+          "country": "",
+          "yearsAtCurrentLatitude": null
+        },
+        "seasonalPatternHistory": {
+          "symptomsRecurAnnually": "",
+          "worstMonths": "",
+          "bestMonths": "",
+          "yearsAffected": null,
+          "familyHistorySad": "",
+          "firstOnsetAge": ""
+        },
+        "currentMood": {
+          "phq9": {
+            "q1": 2,
+            "q2": 2,
+            "q3": 2,
+            "q4": 2,
+            "q5": 2,
+            "q6": 1,
+            "q7": 1,
+            "q8": 0,
+            "q9": 0
+          },
+          "difficultyLevel": ""
+        },
+        "sleepEnergy": {
+          "spaq": {
+            "sleepLength": 2,
+            "energyLevel": 2
+          },
+          "hoursSleptWinter": null,
+          "hoursSleptSummer": null,
+          "hypersomnia": "",
+          "morningFatigue": "",
+          "energyNotes": ""
+        },
+        "appetiteWeight": {
+          "spaq": {
+            "appetite": 2,
+            "weight": 2
+          },
+          "carbohydrateCraving": "",
+          "winterWeightChangeKg": null,
+          "eatingPatternChanges": ""
+        },
+        "socialOccupational": {
+          "spaq": {
+            "mood": 2,
+            "socialActivity": 2
+          },
+          "workImpaired": "",
+          "relationshipsImpaired": "",
+          "socialWithdrawal": "",
+          "occupationalNotes": ""
+        },
+        "lightExposure": {
+          "dailyOutdoorMinutes": null,
+          "workIndoors": "",
+          "curtainsClosedDaytime": "",
+          "sunriseExposure": "",
+          "usesLightTherapyBox": "",
+          "lightTherapyDetails": "",
+          "lightTherapyAccess": ""
+        },
+        "previousTreatments": {
+          "antidepressants": "",
+          "antidepressantDetails": "",
+          "psychotherapy": "",
+          "psychotherapyDetails": "",
+          "lightTherapyHistory": "",
+          "lightTherapyHistoryDetails": "",
+          "currentTreatment": "",
+          "currentTreatmentDetails": ""
+        },
+        "riskAssessment": {
+          "suicidalIdeation": "no",
+          "suicidalIntent": "no",
+          "suicidalPlan": "",
+          "selfHarm": "no",
+          "selfHarmDetails": "",
+          "previousAttempt": "no",
+          "protectiveFactors": "",
+          "safetyPlanInPlace": ""
+        },
+        "treatmentPlan": {
+          "planLightTherapy": "",
+          "planAntidepressant": "",
+          "planPsychotherapy": "",
+          "planLifestyle": "",
+          "planCrisisReferral": "",
+          "followUpInterval": "",
+          "clinicianNotes": ""
+        }
+      },
+      "expected": {
+        "spaqScore": 12,
+        "spaqBand": "sad-likely",
+        "phq9Score": 12,
+        "phq9Band": "moderate",
+        "combinedSeverity": "moderate",
+        "firedRules": [
+          {
+            "id": "SPAQ-001",
+            "category": "SPAQ • Mood",
+            "description": "Sleep length — how much do the seasons change your sleep length?",
+            "score": 2
+          },
+          {
+            "id": "SPAQ-002",
+            "category": "SPAQ • Energy",
+            "description": "Social activity — how much do the seasons change your level of social activity?",
+            "score": 2
+          },
+          {
+            "id": "SPAQ-003",
+            "category": "SPAQ • Mood",
+            "description": "Mood (general well-being) — how much does it change with the seasons?",
+            "score": 2
+          },
+          {
+            "id": "SPAQ-004",
+            "category": "SPAQ • Weight",
+            "description": "Weight — how much does your weight change with the seasons?",
+            "score": 2
+          },
+          {
+            "id": "SPAQ-005",
+            "category": "SPAQ • Appetite",
+            "description": "Appetite — how much does your appetite change with the seasons?",
+            "score": 2
+          },
+          {
+            "id": "SPAQ-006",
+            "category": "SPAQ • Energy",
+            "description": "Energy level — how much does your energy change with the seasons?",
+            "score": 2
+          },
+          {
+            "id": "PHQ9-Q1",
+            "category": "PHQ-9 • Anhedonia",
+            "description": "Little interest or pleasure in doing things",
+            "score": 2
+          },
+          {
+            "id": "PHQ9-Q2",
+            "category": "PHQ-9 • Depressed Mood",
+            "description": "Feeling down, depressed, or hopeless",
+            "score": 2
+          },
+          {
+            "id": "PHQ9-Q3",
+            "category": "PHQ-9 • Sleep",
+            "description": "Trouble falling or staying asleep, or sleeping too much",
+            "score": 2
+          },
+          {
+            "id": "PHQ9-Q4",
+            "category": "PHQ-9 • Energy",
+            "description": "Feeling tired or having little energy",
+            "score": 2
+          },
+          {
+            "id": "PHQ9-Q5",
+            "category": "PHQ-9 • Appetite",
+            "description": "Poor appetite or overeating",
+            "score": 2
+          },
+          {
+            "id": "PHQ9-Q6",
+            "category": "PHQ-9 • Self-Esteem",
+            "description": "Feeling bad about yourself — or that you are a failure or have let yourself or your family down",
+            "score": 1
+          },
+          {
+            "id": "PHQ9-Q7",
+            "category": "PHQ-9 • Concentration",
+            "description": "Trouble concentrating on things, such as reading the newspaper or watching television",
+            "score": 1
+          },
+          {
+            "id": "PHQ9-Q8",
+            "category": "PHQ-9 • Psychomotor",
+            "description": "Moving or speaking so slowly that other people could have noticed; or the opposite — being so fidgety or restless that you have been moving around a lot more than usual",
+            "score": 0
+          },
+          {
+            "id": "PHQ9-Q9",
+            "category": "PHQ-9 • Self-Harm",
+            "description": "Thoughts that you would be better off dead, or of hurting yourself in some way",
+            "score": 0
+          }
+        ]
+      }
+    },
+    {
+      "name": "critical",
+      "description": "Marked seasonality (SPAQ 18) with severe depression (PHQ-9 22) and active suicidal ideation: combined severity critical — urgent risk management.",
+      "state": {
+        "demographics": {
+          "firstName": "",
+          "lastName": "",
+          "dateOfBirth": "",
+          "sex": "female",
+          "latitude": "",
+          "country": "",
+          "yearsAtCurrentLatitude": null
+        },
+        "seasonalPatternHistory": {
+          "symptomsRecurAnnually": "",
+          "worstMonths": "",
+          "bestMonths": "",
+          "yearsAffected": null,
+          "familyHistorySad": "",
+          "firstOnsetAge": ""
+        },
+        "currentMood": {
+          "phq9": {
+            "q1": 3,
+            "q2": 3,
+            "q3": 3,
+            "q4": 3,
+            "q5": 2,
+            "q6": 2,
+            "q7": 2,
+            "q8": 2,
+            "q9": 2
+          },
+          "difficultyLevel": ""
+        },
+        "sleepEnergy": {
+          "spaq": {
+            "sleepLength": 3,
+            "energyLevel": 3
+          },
+          "hoursSleptWinter": null,
+          "hoursSleptSummer": null,
+          "hypersomnia": "",
+          "morningFatigue": "",
+          "energyNotes": ""
+        },
+        "appetiteWeight": {
+          "spaq": {
+            "appetite": 3,
+            "weight": 3
+          },
+          "carbohydrateCraving": "",
+          "winterWeightChangeKg": null,
+          "eatingPatternChanges": ""
+        },
+        "socialOccupational": {
+          "spaq": {
+            "mood": 3,
+            "socialActivity": 3
+          },
+          "workImpaired": "",
+          "relationshipsImpaired": "",
+          "socialWithdrawal": "",
+          "occupationalNotes": ""
+        },
+        "lightExposure": {
+          "dailyOutdoorMinutes": null,
+          "workIndoors": "",
+          "curtainsClosedDaytime": "",
+          "sunriseExposure": "",
+          "usesLightTherapyBox": "",
+          "lightTherapyDetails": "",
+          "lightTherapyAccess": ""
+        },
+        "previousTreatments": {
+          "antidepressants": "",
+          "antidepressantDetails": "",
+          "psychotherapy": "",
+          "psychotherapyDetails": "",
+          "lightTherapyHistory": "",
+          "lightTherapyHistoryDetails": "",
+          "currentTreatment": "",
+          "currentTreatmentDetails": ""
+        },
+        "riskAssessment": {
+          "suicidalIdeation": "yes",
+          "suicidalIntent": "no",
+          "suicidalPlan": "",
+          "selfHarm": "no",
+          "selfHarmDetails": "",
+          "previousAttempt": "no",
+          "protectiveFactors": "",
+          "safetyPlanInPlace": ""
+        },
+        "treatmentPlan": {
+          "planLightTherapy": "",
+          "planAntidepressant": "",
+          "planPsychotherapy": "",
+          "planLifestyle": "",
+          "planCrisisReferral": "",
+          "followUpInterval": "",
+          "clinicianNotes": ""
+        }
+      },
+      "expected": {
+        "spaqScore": 18,
+        "spaqBand": "sad-likely",
+        "phq9Score": 22,
+        "phq9Band": "severe",
+        "combinedSeverity": "critical",
+        "firedRules": [
+          {
+            "id": "SPAQ-001",
+            "category": "SPAQ • Mood",
+            "description": "Sleep length — how much do the seasons change your sleep length?",
+            "score": 3
+          },
+          {
+            "id": "SPAQ-002",
+            "category": "SPAQ • Energy",
+            "description": "Social activity — how much do the seasons change your level of social activity?",
+            "score": 3
+          },
+          {
+            "id": "SPAQ-003",
+            "category": "SPAQ • Mood",
+            "description": "Mood (general well-being) — how much does it change with the seasons?",
+            "score": 3
+          },
+          {
+            "id": "SPAQ-004",
+            "category": "SPAQ • Weight",
+            "description": "Weight — how much does your weight change with the seasons?",
+            "score": 3
+          },
+          {
+            "id": "SPAQ-005",
+            "category": "SPAQ • Appetite",
+            "description": "Appetite — how much does your appetite change with the seasons?",
+            "score": 3
+          },
+          {
+            "id": "SPAQ-006",
+            "category": "SPAQ • Energy",
+            "description": "Energy level — how much does your energy change with the seasons?",
+            "score": 3
+          },
+          {
+            "id": "PHQ9-Q1",
+            "category": "PHQ-9 • Anhedonia",
+            "description": "Little interest or pleasure in doing things",
+            "score": 3
+          },
+          {
+            "id": "PHQ9-Q2",
+            "category": "PHQ-9 • Depressed Mood",
+            "description": "Feeling down, depressed, or hopeless",
+            "score": 3
+          },
+          {
+            "id": "PHQ9-Q3",
+            "category": "PHQ-9 • Sleep",
+            "description": "Trouble falling or staying asleep, or sleeping too much",
+            "score": 3
+          },
+          {
+            "id": "PHQ9-Q4",
+            "category": "PHQ-9 • Energy",
+            "description": "Feeling tired or having little energy",
+            "score": 3
+          },
+          {
+            "id": "PHQ9-Q5",
+            "category": "PHQ-9 • Appetite",
+            "description": "Poor appetite or overeating",
+            "score": 2
+          },
+          {
+            "id": "PHQ9-Q6",
+            "category": "PHQ-9 • Self-Esteem",
+            "description": "Feeling bad about yourself — or that you are a failure or have let yourself or your family down",
+            "score": 2
+          },
+          {
+            "id": "PHQ9-Q7",
+            "category": "PHQ-9 • Concentration",
+            "description": "Trouble concentrating on things, such as reading the newspaper or watching television",
+            "score": 2
+          },
+          {
+            "id": "PHQ9-Q8",
+            "category": "PHQ-9 • Psychomotor",
+            "description": "Moving or speaking so slowly that other people could have noticed; or the opposite — being so fidgety or restless that you have been moving around a lot more than usual",
+            "score": 2
+          },
+          {
+            "id": "PHQ9-Q9",
+            "category": "PHQ-9 • Self-Harm",
+            "description": "Thoughts that you would be better off dead, or of hurting yourself in some way",
+            "score": 2
+          }
+        ]
+      }
+    }
+  ]
+}

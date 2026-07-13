@@ -1,0 +1,424 @@
+{
+  "engine": "front-end-with-html",
+  "graderHint": "calculateMUST",
+  "note": "Realistic filled-in states in the MUST scoring engine's shape (BMI + unplanned weight loss + acute-disease effect). `expected` is computed by `bin/test-personas --update`.",
+  "personas": [
+    {
+      "name": "low-well-nourished",
+      "description": "Healthy BMI, minimal weight loss and no acute disease effect: MUST score 0 — low risk, well nourished.",
+      "state": {
+        "demographics": {
+          "firstName": "",
+          "lastName": "",
+          "dateOfBirth": "",
+          "sex": "female",
+          "ethnicity": "",
+          "primaryLanguage": ""
+        },
+        "anthropometricMeasurements": {
+          "weightKg": null,
+          "heightCm": null,
+          "bmi": null,
+          "usualWeightKg": null,
+          "weightLossKg": null,
+          "weightLossPercent": null,
+          "midUpperArmCircumferenceCm": null,
+          "tricepsSkinfoldMm": null,
+          "measurementDate": ""
+        },
+        "dietaryHistory": {
+          "typicalDiet": "",
+          "dietPattern": "",
+          "dietPatternOther": "",
+          "mealsPerDay": null,
+          "snacksPerDay": null,
+          "appetiteDecreased": "",
+          "appetiteChangeNotes": "",
+          "foodIntakeReduced": "",
+          "reducedIntakeDays": null,
+          "fluidIntakeAdequate": "",
+          "fluidIntakeMlPerDay": null,
+          "alcoholUse": "",
+          "alcoholUnitsPerWeek": null,
+          "culturalReligiousRestrictions": "",
+          "culturalReligiousDetails": ""
+        },
+        "nutritionalScreening": {
+          "bmiCategory": ">=20",
+          "weightLossCategory": "<5",
+          "acuteDisease": "none",
+          "unintentionalWeightLoss": "",
+          "reducedAppetite7Days": "",
+          "additionalScreeningNotes": ""
+        },
+        "swallowingOralHealth": {
+          "swallowingDifficulty": "",
+          "coughingWhileEating": "",
+          "chokingEpisodes": "",
+          "dentureUse": "",
+          "denturesFitWell": "",
+          "dentalPain": "",
+          "mouthSores": "",
+          "dryMouth": "",
+          "tasteChanges": "",
+          "swallowingNotes": ""
+        },
+        "gastrointestinalFunction": {
+          "nausea": "",
+          "vomiting": "",
+          "diarrhea": "",
+          "constipation": "",
+          "abdominalPain": "",
+          "bloating": "",
+          "reflux": "",
+          "earlysatiety": "",
+          "bowelHabitNotes": ""
+        },
+        "foodAllergiesIntolerances": {
+          "foodAllergies": [],
+          "foodIntolerances": [],
+          "lactoseIntolerance": "",
+          "glutenIntolerance": "",
+          "allergyTestingDone": "",
+          "allergyTestResults": ""
+        },
+        "nutritionalRequirements": {
+          "estimatedEnergyKcal": null,
+          "estimatedProteinG": null,
+          "estimatedFluidMl": null,
+          "requirementsBasis": "",
+          "increasedRequirements": "",
+          "increasedRequirementsReason": ""
+        },
+        "currentNutritionalSupport": {
+          "oralSupplements": "",
+          "oralSupplementList": [],
+          "enteralFeeding": "",
+          "enteralRoute": "",
+          "enteralFormula": "",
+          "parenteralNutrition": "",
+          "parenteralDetails": "",
+          "vitaminMineralSupplements": "",
+          "vitaminMineralList": [],
+          "dieticianInvolvement": "",
+          "lastDieticianReviewDate": ""
+        },
+        "carePlanMonitoring": {
+          "nutritionGoals": "",
+          "interventionsPlanned": "",
+          "weightMonitoringPlanned": "",
+          "weightMonitoringFrequency": "",
+          "foodIntakeMonitoringPlanned": "",
+          "referralRequired": "",
+          "referralDetails": "",
+          "followUpDate": "",
+          "additionalNotes": ""
+        }
+      },
+      "expected": {
+        "mustScore": 0,
+        "mustRisk": "low",
+        "severity": "low",
+        "answeredCount": 3,
+        "firedRules": [
+          {
+            "id": "MUST-001",
+            "category": "BMI Score",
+            "description": "Body Mass Index (BMI) category.",
+            "score": 0
+          },
+          {
+            "id": "MUST-002",
+            "category": "Weight Loss Score",
+            "description": "Unplanned weight loss in the past 3-6 months.",
+            "score": 0
+          },
+          {
+            "id": "MUST-003",
+            "category": "Acute Disease Effect Score",
+            "description": "Acutely ill and there has been or is likely to be no nutritional intake for >5 days.",
+            "score": 0
+          }
+        ]
+      }
+    },
+    {
+      "name": "medium-monitor",
+      "description": "BMI in the 18.5-20 range with no significant weight loss or acute illness: MUST score 1 — medium risk, observe and repeat screening.",
+      "state": {
+        "demographics": {
+          "firstName": "",
+          "lastName": "",
+          "dateOfBirth": "",
+          "sex": "male",
+          "ethnicity": "",
+          "primaryLanguage": ""
+        },
+        "anthropometricMeasurements": {
+          "weightKg": null,
+          "heightCm": null,
+          "bmi": null,
+          "usualWeightKg": null,
+          "weightLossKg": null,
+          "weightLossPercent": null,
+          "midUpperArmCircumferenceCm": null,
+          "tricepsSkinfoldMm": null,
+          "measurementDate": ""
+        },
+        "dietaryHistory": {
+          "typicalDiet": "",
+          "dietPattern": "",
+          "dietPatternOther": "",
+          "mealsPerDay": null,
+          "snacksPerDay": null,
+          "appetiteDecreased": "",
+          "appetiteChangeNotes": "",
+          "foodIntakeReduced": "",
+          "reducedIntakeDays": null,
+          "fluidIntakeAdequate": "",
+          "fluidIntakeMlPerDay": null,
+          "alcoholUse": "",
+          "alcoholUnitsPerWeek": null,
+          "culturalReligiousRestrictions": "",
+          "culturalReligiousDetails": ""
+        },
+        "nutritionalScreening": {
+          "bmiCategory": "18.5-20",
+          "weightLossCategory": "<5",
+          "acuteDisease": "none",
+          "unintentionalWeightLoss": "",
+          "reducedAppetite7Days": "",
+          "additionalScreeningNotes": ""
+        },
+        "swallowingOralHealth": {
+          "swallowingDifficulty": "",
+          "coughingWhileEating": "",
+          "chokingEpisodes": "",
+          "dentureUse": "",
+          "denturesFitWell": "",
+          "dentalPain": "",
+          "mouthSores": "",
+          "dryMouth": "",
+          "tasteChanges": "",
+          "swallowingNotes": ""
+        },
+        "gastrointestinalFunction": {
+          "nausea": "",
+          "vomiting": "",
+          "diarrhea": "",
+          "constipation": "",
+          "abdominalPain": "",
+          "bloating": "",
+          "reflux": "",
+          "earlysatiety": "",
+          "bowelHabitNotes": ""
+        },
+        "foodAllergiesIntolerances": {
+          "foodAllergies": [],
+          "foodIntolerances": [],
+          "lactoseIntolerance": "",
+          "glutenIntolerance": "",
+          "allergyTestingDone": "",
+          "allergyTestResults": ""
+        },
+        "nutritionalRequirements": {
+          "estimatedEnergyKcal": null,
+          "estimatedProteinG": null,
+          "estimatedFluidMl": null,
+          "requirementsBasis": "",
+          "increasedRequirements": "",
+          "increasedRequirementsReason": ""
+        },
+        "currentNutritionalSupport": {
+          "oralSupplements": "",
+          "oralSupplementList": [],
+          "enteralFeeding": "",
+          "enteralRoute": "",
+          "enteralFormula": "",
+          "parenteralNutrition": "",
+          "parenteralDetails": "",
+          "vitaminMineralSupplements": "",
+          "vitaminMineralList": [],
+          "dieticianInvolvement": "",
+          "lastDieticianReviewDate": ""
+        },
+        "carePlanMonitoring": {
+          "nutritionGoals": "",
+          "interventionsPlanned": "",
+          "weightMonitoringPlanned": "",
+          "weightMonitoringFrequency": "",
+          "foodIntakeMonitoringPlanned": "",
+          "referralRequired": "",
+          "referralDetails": "",
+          "followUpDate": "",
+          "additionalNotes": ""
+        }
+      },
+      "expected": {
+        "mustScore": 1,
+        "mustRisk": "medium",
+        "severity": "moderate",
+        "answeredCount": 3,
+        "firedRules": [
+          {
+            "id": "MUST-001",
+            "category": "BMI Score",
+            "description": "Body Mass Index (BMI) category.",
+            "score": 1
+          },
+          {
+            "id": "MUST-002",
+            "category": "Weight Loss Score",
+            "description": "Unplanned weight loss in the past 3-6 months.",
+            "score": 0
+          },
+          {
+            "id": "MUST-003",
+            "category": "Acute Disease Effect Score",
+            "description": "Acutely ill and there has been or is likely to be no nutritional intake for >5 days.",
+            "score": 0
+          }
+        ]
+      }
+    },
+    {
+      "name": "high-critical",
+      "description": "Low BMI, marked unplanned weight loss and acutely ill with no intake for over five days: MUST score 6 — high risk, severity escalated to severe malnutrition with complications.",
+      "state": {
+        "demographics": {
+          "firstName": "",
+          "lastName": "",
+          "dateOfBirth": "",
+          "sex": "female",
+          "ethnicity": "",
+          "primaryLanguage": ""
+        },
+        "anthropometricMeasurements": {
+          "weightKg": null,
+          "heightCm": null,
+          "bmi": 15.5,
+          "usualWeightKg": null,
+          "weightLossKg": null,
+          "weightLossPercent": 18,
+          "midUpperArmCircumferenceCm": null,
+          "tricepsSkinfoldMm": null,
+          "measurementDate": ""
+        },
+        "dietaryHistory": {
+          "typicalDiet": "",
+          "dietPattern": "",
+          "dietPatternOther": "",
+          "mealsPerDay": null,
+          "snacksPerDay": null,
+          "appetiteDecreased": "",
+          "appetiteChangeNotes": "",
+          "foodIntakeReduced": "",
+          "reducedIntakeDays": null,
+          "fluidIntakeAdequate": "",
+          "fluidIntakeMlPerDay": null,
+          "alcoholUse": "",
+          "alcoholUnitsPerWeek": null,
+          "culturalReligiousRestrictions": "",
+          "culturalReligiousDetails": ""
+        },
+        "nutritionalScreening": {
+          "bmiCategory": "<18.5",
+          "weightLossCategory": ">10",
+          "acuteDisease": "acutely-ill-no-intake-5d",
+          "unintentionalWeightLoss": "",
+          "reducedAppetite7Days": "",
+          "additionalScreeningNotes": ""
+        },
+        "swallowingOralHealth": {
+          "swallowingDifficulty": "",
+          "coughingWhileEating": "",
+          "chokingEpisodes": "",
+          "dentureUse": "",
+          "denturesFitWell": "",
+          "dentalPain": "",
+          "mouthSores": "",
+          "dryMouth": "",
+          "tasteChanges": "",
+          "swallowingNotes": ""
+        },
+        "gastrointestinalFunction": {
+          "nausea": "",
+          "vomiting": "",
+          "diarrhea": "",
+          "constipation": "",
+          "abdominalPain": "",
+          "bloating": "",
+          "reflux": "",
+          "earlysatiety": "",
+          "bowelHabitNotes": ""
+        },
+        "foodAllergiesIntolerances": {
+          "foodAllergies": [],
+          "foodIntolerances": [],
+          "lactoseIntolerance": "",
+          "glutenIntolerance": "",
+          "allergyTestingDone": "",
+          "allergyTestResults": ""
+        },
+        "nutritionalRequirements": {
+          "estimatedEnergyKcal": null,
+          "estimatedProteinG": null,
+          "estimatedFluidMl": null,
+          "requirementsBasis": "",
+          "increasedRequirements": "",
+          "increasedRequirementsReason": ""
+        },
+        "currentNutritionalSupport": {
+          "oralSupplements": "",
+          "oralSupplementList": [],
+          "enteralFeeding": "",
+          "enteralRoute": "",
+          "enteralFormula": "",
+          "parenteralNutrition": "",
+          "parenteralDetails": "",
+          "vitaminMineralSupplements": "",
+          "vitaminMineralList": [],
+          "dieticianInvolvement": "",
+          "lastDieticianReviewDate": ""
+        },
+        "carePlanMonitoring": {
+          "nutritionGoals": "",
+          "interventionsPlanned": "",
+          "weightMonitoringPlanned": "",
+          "weightMonitoringFrequency": "",
+          "foodIntakeMonitoringPlanned": "",
+          "referralRequired": "",
+          "referralDetails": "",
+          "followUpDate": "",
+          "additionalNotes": ""
+        }
+      },
+      "expected": {
+        "mustScore": 6,
+        "mustRisk": "high",
+        "severity": "critical",
+        "answeredCount": 3,
+        "firedRules": [
+          {
+            "id": "MUST-001",
+            "category": "BMI Score",
+            "description": "Body Mass Index (BMI) category.",
+            "score": 2
+          },
+          {
+            "id": "MUST-002",
+            "category": "Weight Loss Score",
+            "description": "Unplanned weight loss in the past 3-6 months.",
+            "score": 2
+          },
+          {
+            "id": "MUST-003",
+            "category": "Acute Disease Effect Score",
+            "description": "Acutely ill and there has been or is likely to be no nutritional intake for >5 days.",
+            "score": 2
+          }
+        ]
+      }
+    }
+  ]
+}

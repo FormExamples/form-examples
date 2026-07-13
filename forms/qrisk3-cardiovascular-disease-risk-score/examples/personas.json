@@ -1,0 +1,376 @@
+{
+  "engine": "front-end-with-html",
+  "graderHint": "calculateQrisk3Grade",
+  "note": "Realistic filled-in states in the scoring engine's shape. `expected` is computed by `bin/test-personas --update` and verified by `bin/test-personas`.",
+  "personas": [
+    {
+      "name": "low",
+      "description": "Fit 42-year-old non-smoking woman, no comorbidities, favourable lipids and blood pressure: QRISK3 ~0.3% — low 10-year cardiovascular risk.",
+      "state": {
+        "context": {
+          "clinicianName": "",
+          "clinicianRole": "general-practitioner",
+          "assessedAt": "",
+          "careSetting": "primary-care"
+        },
+        "identification": {
+          "patientIdentifier": "",
+          "age": 42,
+          "sex": "female",
+          "ethnicity": "white-or-not-stated",
+          "townsendScore": null,
+          "postcode": ""
+        },
+        "eligibility": {
+          "hasEstablishedCvd": "no",
+          "hasFamilialHypercholesterolaemia": "no"
+        },
+        "lifestyle": {
+          "smokingStatus": "non",
+          "bodyMassIndex": 23.5
+        },
+        "cardiometabolic": {
+          "diabetesStatus": "none",
+          "cholesterolHdlRatio": 3.2,
+          "systolicBloodPressure": 118,
+          "systolicBloodPressureSd": null,
+          "onBloodPressureTreatment": "no"
+        },
+        "comorbidities": {
+          "familyHistoryChd": "no",
+          "atrialFibrillation": "no",
+          "chronicKidneyDiseaseStage": "none",
+          "migraine": "",
+          "rheumatoidArthritis": "",
+          "systemicLupusErythematosus": "",
+          "severeMentalIllness": "",
+          "erectileDysfunction": ""
+        },
+        "medication": {
+          "onAtypicalAntipsychotics": "",
+          "onCorticosteroids": ""
+        },
+        "note": {
+          "clinicalNote": ""
+        }
+      },
+      "expected": {
+        "linearPredictor": -1.493,
+        "tenYearRiskPercent": 0.3,
+        "riskBand": "low",
+        "heartAge": 40,
+        "computable": true,
+        "contributions": [
+          {
+            "id": "C-AGE",
+            "factor": "Age",
+            "value": "42 years",
+            "weight": -1.1880000000000002
+          },
+          {
+            "id": "C-BMI",
+            "factor": "Body mass index",
+            "value": "23.5 kg/m²",
+            "weight": -0.052500000000000005
+          },
+          {
+            "id": "C-CHOL",
+            "factor": "Cholesterol : HDL ratio",
+            "value": "3.2",
+            "weight": -0.11999999999999997
+          },
+          {
+            "id": "C-SBP",
+            "factor": "Systolic blood pressure",
+            "value": "118 mmHg",
+            "weight": -0.132
+          },
+          {
+            "id": "C-TOWNSEND",
+            "factor": "Townsend deprivation score",
+            "value": "Not recorded (cohort mean)",
+            "weight": 0
+          },
+          {
+            "id": "C-ETHNICITY",
+            "factor": "Ethnicity",
+            "value": "White or not stated",
+            "weight": 0
+          },
+          {
+            "id": "C-SMOKING",
+            "factor": "Smoking status",
+            "value": "Non-smoker",
+            "weight": 0
+          },
+          {
+            "id": "C-DIABETES",
+            "factor": "Diabetes status",
+            "value": "No diabetes",
+            "weight": 0
+          },
+          {
+            "id": "C-CKD",
+            "factor": "Chronic kidney disease",
+            "value": "No CKD",
+            "weight": 0
+          }
+        ]
+      }
+    },
+    {
+      "name": "raised",
+      "description": "62-year-old Pakistani man, moderate smoker with rheumatoid arthritis and a family history of CHD: QRISK3 ~15% — raised risk, statin discussion warranted.",
+      "state": {
+        "context": {
+          "clinicianName": "",
+          "clinicianRole": "general-practitioner",
+          "assessedAt": "",
+          "careSetting": "primary-care"
+        },
+        "identification": {
+          "patientIdentifier": "",
+          "age": 62,
+          "sex": "male",
+          "ethnicity": "pakistani",
+          "townsendScore": null,
+          "postcode": ""
+        },
+        "eligibility": {
+          "hasEstablishedCvd": "no",
+          "hasFamilialHypercholesterolaemia": "no"
+        },
+        "lifestyle": {
+          "smokingStatus": "moderate",
+          "bodyMassIndex": 29
+        },
+        "cardiometabolic": {
+          "diabetesStatus": "none",
+          "cholesterolHdlRatio": 5,
+          "systolicBloodPressure": 146,
+          "systolicBloodPressureSd": null,
+          "onBloodPressureTreatment": "no"
+        },
+        "comorbidities": {
+          "familyHistoryChd": "yes",
+          "atrialFibrillation": "no",
+          "chronicKidneyDiseaseStage": "none",
+          "migraine": "",
+          "rheumatoidArthritis": "yes",
+          "systemicLupusErythematosus": "",
+          "severeMentalIllness": "",
+          "erectileDysfunction": ""
+        },
+        "medication": {
+          "onAtypicalAntipsychotics": "",
+          "onCorticosteroids": ""
+        },
+        "note": {
+          "clinicalNote": ""
+        }
+      },
+      "expected": {
+        "linearPredictor": 1.935,
+        "tenYearRiskPercent": 14.7,
+        "riskBand": "raised",
+        "heartAge": 93,
+        "computable": true,
+        "contributions": [
+          {
+            "id": "C-AGE",
+            "factor": "Age",
+            "value": "62 years",
+            "weight": 0.116
+          },
+          {
+            "id": "C-BMI",
+            "factor": "Body mass index",
+            "value": "29 kg/m²",
+            "weight": 0.063
+          },
+          {
+            "id": "C-CHOL",
+            "factor": "Cholesterol : HDL ratio",
+            "value": "5",
+            "weight": 0.15
+          },
+          {
+            "id": "C-SBP",
+            "factor": "Systolic blood pressure",
+            "value": "146 mmHg",
+            "weight": 0.176
+          },
+          {
+            "id": "C-TOWNSEND",
+            "factor": "Townsend deprivation score",
+            "value": "Not recorded (cohort mean)",
+            "weight": 0
+          },
+          {
+            "id": "C-ETHNICITY",
+            "factor": "Ethnicity",
+            "value": "Pakistani",
+            "weight": 0.37
+          },
+          {
+            "id": "C-SMOKING",
+            "factor": "Smoking status",
+            "value": "Moderate smoker (10-19/day)",
+            "weight": 0.4
+          },
+          {
+            "id": "C-DIABETES",
+            "factor": "Diabetes status",
+            "value": "No diabetes",
+            "weight": 0
+          },
+          {
+            "id": "C-CKD",
+            "factor": "Chronic kidney disease",
+            "value": "No CKD",
+            "weight": 0
+          },
+          {
+            "id": "C-FH-CHD",
+            "factor": "Family history of CHD (< 60)",
+            "value": "Yes",
+            "weight": 0.44
+          },
+          {
+            "id": "C-RA",
+            "factor": "Rheumatoid arthritis",
+            "value": "Yes",
+            "weight": 0.22
+          }
+        ]
+      }
+    },
+    {
+      "name": "high",
+      "description": "64-year-old Indian man with type 2 diabetes, moderate smoking, treated hypertension and a family history of CHD: QRISK3 ~35% — high risk.",
+      "state": {
+        "context": {
+          "clinicianName": "",
+          "clinicianRole": "general-practitioner",
+          "assessedAt": "",
+          "careSetting": "primary-care"
+        },
+        "identification": {
+          "patientIdentifier": "",
+          "age": 64,
+          "sex": "male",
+          "ethnicity": "indian",
+          "townsendScore": null,
+          "postcode": ""
+        },
+        "eligibility": {
+          "hasEstablishedCvd": "no",
+          "hasFamilialHypercholesterolaemia": "no"
+        },
+        "lifestyle": {
+          "smokingStatus": "moderate",
+          "bodyMassIndex": 30
+        },
+        "cardiometabolic": {
+          "diabetesStatus": "type2",
+          "cholesterolHdlRatio": 5,
+          "systolicBloodPressure": 150,
+          "systolicBloodPressureSd": null,
+          "onBloodPressureTreatment": "yes"
+        },
+        "comorbidities": {
+          "familyHistoryChd": "yes",
+          "atrialFibrillation": "no",
+          "chronicKidneyDiseaseStage": "none",
+          "migraine": "",
+          "rheumatoidArthritis": "",
+          "systemicLupusErythematosus": "",
+          "severeMentalIllness": "",
+          "erectileDysfunction": ""
+        },
+        "medication": {
+          "onAtypicalAntipsychotics": "",
+          "onCorticosteroids": ""
+        },
+        "note": {
+          "clinicalNote": ""
+        }
+      },
+      "expected": {
+        "linearPredictor": 2.916,
+        "tenYearRiskPercent": 34.6,
+        "riskBand": "high",
+        "heartAge": 110,
+        "computable": true,
+        "contributions": [
+          {
+            "id": "C-AGE",
+            "factor": "Age",
+            "value": "64 years",
+            "weight": 0.232
+          },
+          {
+            "id": "C-BMI",
+            "factor": "Body mass index",
+            "value": "30 kg/m²",
+            "weight": 0.084
+          },
+          {
+            "id": "C-CHOL",
+            "factor": "Cholesterol : HDL ratio",
+            "value": "5",
+            "weight": 0.15
+          },
+          {
+            "id": "C-SBP",
+            "factor": "Systolic blood pressure",
+            "value": "150 mmHg",
+            "weight": 0.21999999999999997
+          },
+          {
+            "id": "C-TOWNSEND",
+            "factor": "Townsend deprivation score",
+            "value": "Not recorded (cohort mean)",
+            "weight": 0
+          },
+          {
+            "id": "C-ETHNICITY",
+            "factor": "Ethnicity",
+            "value": "Indian",
+            "weight": 0.28
+          },
+          {
+            "id": "C-SMOKING",
+            "factor": "Smoking status",
+            "value": "Moderate smoker (10-19/day)",
+            "weight": 0.4
+          },
+          {
+            "id": "C-DIABETES",
+            "factor": "Diabetes status",
+            "value": "Type 2 diabetes",
+            "weight": 0.56
+          },
+          {
+            "id": "C-CKD",
+            "factor": "Chronic kidney disease",
+            "value": "No CKD",
+            "weight": 0
+          },
+          {
+            "id": "C-BP-TREAT",
+            "factor": "On blood-pressure treatment",
+            "value": "Yes",
+            "weight": 0.55
+          },
+          {
+            "id": "C-FH-CHD",
+            "factor": "Family history of CHD (< 60)",
+            "value": "Yes",
+            "weight": 0.44
+          }
+        ]
+      }
+    }
+  ]
+}

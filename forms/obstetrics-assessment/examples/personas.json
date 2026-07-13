@@ -1,0 +1,491 @@
+{
+  "engine": "front-end-with-html",
+  "note": "Realistic filled-in states in the NICE NG201 antenatal-risk grader's shape. `expected` is computed by `bin/test-personas --update`.",
+  "personas": [
+    {
+      "name": "low-midwifery-led",
+      "description": "Healthy first pregnancy with no risk factors: overall antenatal risk low — midwifery-led care.",
+      "state": {
+        "maternalDemographics": {
+          "firstName": "",
+          "lastName": "",
+          "dateOfBirth": "",
+          "ageAtBooking": 28,
+          "ethnicity": "",
+          "weight": null,
+          "height": null,
+          "bmi": 23,
+          "occupation": "",
+          "partnerStatus": ""
+        },
+        "obstetricHistory": {
+          "gravidity": 1,
+          "parity": 0,
+          "previousMiscarriages": null,
+          "previousTerminations": null,
+          "previousStillbirths": null,
+          "previousNeonatalDeaths": null,
+          "previousPretermBirth": "",
+          "previousPreEclampsia": "",
+          "previousGestationalDiabetes": "",
+          "previousCaesarean": "",
+          "previousCaesareanCount": null,
+          "previousShoulderDystocia": "",
+          "previousPostpartumHaemorrhage": "",
+          "previousLargeBaby": "",
+          "previousSmallBaby": "",
+          "previousCongenitalAnomaly": "",
+          "obstetricNotes": ""
+        },
+        "medicalHistory": {
+          "chronicHypertension": "no",
+          "cardiacDisease": "",
+          "preExistingDiabetes": "no",
+          "thyroidDisease": "",
+          "renalDisease": "",
+          "epilepsy": "",
+          "asthma": "",
+          "autoimmuneDisease": "",
+          "hivPositive": "",
+          "hepatitis": "",
+          "previousVte": "",
+          "thrombophilia": "",
+          "mentalHealthHistory": "",
+          "bariatricSurgery": "",
+          "otherMedicalConditions": "",
+          "currentMedications": ""
+        },
+        "currentPregnancy": {
+          "lastMenstrualPeriod": "",
+          "estimatedDueDate": "",
+          "datingScanDate": "",
+          "gestationWeeks": null,
+          "gestationDays": null,
+          "multiplePregnancy": "no",
+          "chorionicity": "",
+          "ivfConception": "",
+          "folicAcidPreconception": "",
+          "firstAntenatalContact": "",
+          "bookingDate": ""
+        },
+        "lifestyleSocialFactors": {
+          "smokingStatus": "",
+          "cigarettesPerDay": null,
+          "alcoholUse": "",
+          "substanceUse": "",
+          "domesticAbuse": "",
+          "safeguardingConcerns": "",
+          "housingInsecurity": "",
+          "financialDifficulty": "",
+          "requiresInterpreter": "",
+          "interpreterLanguage": "",
+          "asylumOrRefugee": "",
+          "femaleGenitalMutilation": "",
+          "socialNotes": ""
+        },
+        "screeningResults": {
+          "combinedTestResult": "",
+          "combinedTestRisk": "",
+          "anomalyScanCompleted": "",
+          "anomalyScanFindings": "",
+          "gttResult": "",
+          "gttFasting": null,
+          "gttTwoHour": null,
+          "bloodGroup": "",
+          "rhesusStatus": "",
+          "antibodyScreenPositive": "",
+          "infectionScreenAbnormal": "",
+          "infectionScreenDetails": "",
+          "haemoglobin": "",
+          "screeningNotes": ""
+        },
+        "mentalHealthAssessment": {
+          "whooley1": "",
+          "whooley2": "",
+          "gad2Q1": "",
+          "gad2Q2": "",
+          "previousPostnatalDepression": "",
+          "previousSevereMentalIllness": "",
+          "currentlyOnPsychotropicMeds": "",
+          "selfHarmIdeation": "",
+          "mentalHealthNotes": ""
+        },
+        "fetalAssessment": {
+          "fundalHeight": null,
+          "fetalLie": "",
+          "fetalPresentation": "",
+          "engaged": "",
+          "fetalMovementsReported": "",
+          "fetalHeartRate": null,
+          "reducedFetalMovements": "",
+          "growthConcern": "",
+          "growthConcernDetails": "",
+          "fetalNotes": ""
+        },
+        "birthPreferences": {
+          "preferredBirthSetting": "",
+          "preferredAnalgesia": "",
+          "birthPartnerPlanned": "",
+          "birthPlanCompleted": "",
+          "feedingChoiceBreast": "",
+          "feedingChoiceFormula": "",
+          "vbacRequested": "",
+          "birthPreferenceNotes": ""
+        },
+        "carePlanFollowup": {
+          "recommendedCarePathway": "",
+          "consultantReferralRequired": "",
+          "mentalHealthReferralRequired": "",
+          "safeguardingReferralRequired": "",
+          "aspirinProphylaxisIndicated": "",
+          "vteProphylaxisIndicated": "",
+          "nextAppointmentDate": "",
+          "carePlanNotes": ""
+        }
+      },
+      "expected": {
+        "riskLevel": "low",
+        "answeredCount": 7,
+        "firedRules": []
+      }
+    },
+    {
+      "name": "moderate-obstetric-input",
+      "description": "Older mother with raised BMI and previous gestational diabetes: overall antenatal risk moderate — obstetric input at milestones.",
+      "state": {
+        "maternalDemographics": {
+          "firstName": "",
+          "lastName": "",
+          "dateOfBirth": "",
+          "ageAtBooking": 37,
+          "ethnicity": "",
+          "weight": null,
+          "height": null,
+          "bmi": 31,
+          "occupation": "",
+          "partnerStatus": ""
+        },
+        "obstetricHistory": {
+          "gravidity": 3,
+          "parity": 2,
+          "previousMiscarriages": null,
+          "previousTerminations": null,
+          "previousStillbirths": null,
+          "previousNeonatalDeaths": null,
+          "previousPretermBirth": "",
+          "previousPreEclampsia": "",
+          "previousGestationalDiabetes": "yes",
+          "previousCaesarean": "",
+          "previousCaesareanCount": null,
+          "previousShoulderDystocia": "",
+          "previousPostpartumHaemorrhage": "",
+          "previousLargeBaby": "",
+          "previousSmallBaby": "",
+          "previousCongenitalAnomaly": "",
+          "obstetricNotes": ""
+        },
+        "medicalHistory": {
+          "chronicHypertension": "no",
+          "cardiacDisease": "",
+          "preExistingDiabetes": "no",
+          "thyroidDisease": "",
+          "renalDisease": "",
+          "epilepsy": "",
+          "asthma": "",
+          "autoimmuneDisease": "",
+          "hivPositive": "",
+          "hepatitis": "",
+          "previousVte": "",
+          "thrombophilia": "",
+          "mentalHealthHistory": "",
+          "bariatricSurgery": "",
+          "otherMedicalConditions": "",
+          "currentMedications": ""
+        },
+        "currentPregnancy": {
+          "lastMenstrualPeriod": "",
+          "estimatedDueDate": "",
+          "datingScanDate": "",
+          "gestationWeeks": null,
+          "gestationDays": null,
+          "multiplePregnancy": "no",
+          "chorionicity": "",
+          "ivfConception": "",
+          "folicAcidPreconception": "",
+          "firstAntenatalContact": "",
+          "bookingDate": ""
+        },
+        "lifestyleSocialFactors": {
+          "smokingStatus": "",
+          "cigarettesPerDay": null,
+          "alcoholUse": "",
+          "substanceUse": "",
+          "domesticAbuse": "",
+          "safeguardingConcerns": "",
+          "housingInsecurity": "",
+          "financialDifficulty": "",
+          "requiresInterpreter": "",
+          "interpreterLanguage": "",
+          "asylumOrRefugee": "",
+          "femaleGenitalMutilation": "",
+          "socialNotes": ""
+        },
+        "screeningResults": {
+          "combinedTestResult": "",
+          "combinedTestRisk": "",
+          "anomalyScanCompleted": "",
+          "anomalyScanFindings": "",
+          "gttResult": "",
+          "gttFasting": null,
+          "gttTwoHour": null,
+          "bloodGroup": "",
+          "rhesusStatus": "",
+          "antibodyScreenPositive": "",
+          "infectionScreenAbnormal": "",
+          "infectionScreenDetails": "",
+          "haemoglobin": "",
+          "screeningNotes": ""
+        },
+        "mentalHealthAssessment": {
+          "whooley1": "",
+          "whooley2": "",
+          "gad2Q1": "",
+          "gad2Q2": "",
+          "previousPostnatalDepression": "",
+          "previousSevereMentalIllness": "",
+          "currentlyOnPsychotropicMeds": "",
+          "selfHarmIdeation": "",
+          "mentalHealthNotes": ""
+        },
+        "fetalAssessment": {
+          "fundalHeight": null,
+          "fetalLie": "",
+          "fetalPresentation": "",
+          "engaged": "",
+          "fetalMovementsReported": "",
+          "fetalHeartRate": null,
+          "reducedFetalMovements": "",
+          "growthConcern": "",
+          "growthConcernDetails": "",
+          "fetalNotes": ""
+        },
+        "birthPreferences": {
+          "preferredBirthSetting": "",
+          "preferredAnalgesia": "",
+          "birthPartnerPlanned": "",
+          "birthPlanCompleted": "",
+          "feedingChoiceBreast": "",
+          "feedingChoiceFormula": "",
+          "vbacRequested": "",
+          "birthPreferenceNotes": ""
+        },
+        "carePlanFollowup": {
+          "recommendedCarePathway": "",
+          "consultantReferralRequired": "",
+          "mentalHealthReferralRequired": "",
+          "safeguardingReferralRequired": "",
+          "aspirinProphylaxisIndicated": "",
+          "vteProphylaxisIndicated": "",
+          "nextAppointmentDate": "",
+          "carePlanNotes": ""
+        }
+      },
+      "expected": {
+        "riskLevel": "moderate",
+        "answeredCount": 8,
+        "firedRules": [
+          {
+            "id": "NG201-AGE-002",
+            "category": "Maternal Age",
+            "description": "Maternal age 35-39 at booking — moderate risk.",
+            "risk": "moderate"
+          },
+          {
+            "id": "NG201-BMI-002",
+            "category": "Body Mass Index",
+            "description": "BMI 30-34.9 — moderate risk.",
+            "risk": "moderate"
+          },
+          {
+            "id": "NG201-OBS-004",
+            "category": "Obstetric History",
+            "description": "Previous gestational diabetes — moderate risk.",
+            "risk": "moderate"
+          }
+        ]
+      }
+    },
+    {
+      "name": "high-consultant-led",
+      "description": "Advanced maternal age, obesity, chronic hypertension and a twin pregnancy: overall antenatal risk high — consultant-led multidisciplinary care.",
+      "state": {
+        "maternalDemographics": {
+          "firstName": "",
+          "lastName": "",
+          "dateOfBirth": "",
+          "ageAtBooking": 41,
+          "ethnicity": "",
+          "weight": null,
+          "height": null,
+          "bmi": 36,
+          "occupation": "",
+          "partnerStatus": ""
+        },
+        "obstetricHistory": {
+          "gravidity": 4,
+          "parity": 3,
+          "previousMiscarriages": null,
+          "previousTerminations": null,
+          "previousStillbirths": null,
+          "previousNeonatalDeaths": null,
+          "previousPretermBirth": "",
+          "previousPreEclampsia": "",
+          "previousGestationalDiabetes": "",
+          "previousCaesarean": "",
+          "previousCaesareanCount": null,
+          "previousShoulderDystocia": "",
+          "previousPostpartumHaemorrhage": "",
+          "previousLargeBaby": "",
+          "previousSmallBaby": "",
+          "previousCongenitalAnomaly": "",
+          "obstetricNotes": ""
+        },
+        "medicalHistory": {
+          "chronicHypertension": "yes",
+          "cardiacDisease": "",
+          "preExistingDiabetes": "no",
+          "thyroidDisease": "",
+          "renalDisease": "",
+          "epilepsy": "",
+          "asthma": "",
+          "autoimmuneDisease": "",
+          "hivPositive": "",
+          "hepatitis": "",
+          "previousVte": "",
+          "thrombophilia": "",
+          "mentalHealthHistory": "",
+          "bariatricSurgery": "",
+          "otherMedicalConditions": "",
+          "currentMedications": ""
+        },
+        "currentPregnancy": {
+          "lastMenstrualPeriod": "",
+          "estimatedDueDate": "",
+          "datingScanDate": "",
+          "gestationWeeks": null,
+          "gestationDays": null,
+          "multiplePregnancy": "yes",
+          "chorionicity": "",
+          "ivfConception": "",
+          "folicAcidPreconception": "",
+          "firstAntenatalContact": "",
+          "bookingDate": ""
+        },
+        "lifestyleSocialFactors": {
+          "smokingStatus": "",
+          "cigarettesPerDay": null,
+          "alcoholUse": "",
+          "substanceUse": "",
+          "domesticAbuse": "",
+          "safeguardingConcerns": "",
+          "housingInsecurity": "",
+          "financialDifficulty": "",
+          "requiresInterpreter": "",
+          "interpreterLanguage": "",
+          "asylumOrRefugee": "",
+          "femaleGenitalMutilation": "",
+          "socialNotes": ""
+        },
+        "screeningResults": {
+          "combinedTestResult": "",
+          "combinedTestRisk": "",
+          "anomalyScanCompleted": "",
+          "anomalyScanFindings": "",
+          "gttResult": "",
+          "gttFasting": null,
+          "gttTwoHour": null,
+          "bloodGroup": "",
+          "rhesusStatus": "",
+          "antibodyScreenPositive": "",
+          "infectionScreenAbnormal": "",
+          "infectionScreenDetails": "",
+          "haemoglobin": "",
+          "screeningNotes": ""
+        },
+        "mentalHealthAssessment": {
+          "whooley1": "",
+          "whooley2": "",
+          "gad2Q1": "",
+          "gad2Q2": "",
+          "previousPostnatalDepression": "",
+          "previousSevereMentalIllness": "",
+          "currentlyOnPsychotropicMeds": "",
+          "selfHarmIdeation": "",
+          "mentalHealthNotes": ""
+        },
+        "fetalAssessment": {
+          "fundalHeight": null,
+          "fetalLie": "",
+          "fetalPresentation": "",
+          "engaged": "",
+          "fetalMovementsReported": "",
+          "fetalHeartRate": null,
+          "reducedFetalMovements": "",
+          "growthConcern": "",
+          "growthConcernDetails": "",
+          "fetalNotes": ""
+        },
+        "birthPreferences": {
+          "preferredBirthSetting": "",
+          "preferredAnalgesia": "",
+          "birthPartnerPlanned": "",
+          "birthPlanCompleted": "",
+          "feedingChoiceBreast": "",
+          "feedingChoiceFormula": "",
+          "vbacRequested": "",
+          "birthPreferenceNotes": ""
+        },
+        "carePlanFollowup": {
+          "recommendedCarePathway": "",
+          "consultantReferralRequired": "",
+          "mentalHealthReferralRequired": "",
+          "safeguardingReferralRequired": "",
+          "aspirinProphylaxisIndicated": "",
+          "vteProphylaxisIndicated": "",
+          "nextAppointmentDate": "",
+          "carePlanNotes": ""
+        }
+      },
+      "expected": {
+        "riskLevel": "high",
+        "answeredCount": 7,
+        "firedRules": [
+          {
+            "id": "NG201-AGE-001",
+            "category": "Maternal Age",
+            "description": "Maternal age 40 or over at booking — high risk.",
+            "risk": "high"
+          },
+          {
+            "id": "NG201-BMI-001",
+            "category": "Body Mass Index",
+            "description": "BMI 35 or higher — high risk.",
+            "risk": "high"
+          },
+          {
+            "id": "NG201-MED-003",
+            "category": "Medical History",
+            "description": "Chronic hypertension — high risk.",
+            "risk": "high"
+          },
+          {
+            "id": "NG201-PREG-001",
+            "category": "Current Pregnancy",
+            "description": "Multiple pregnancy — high risk.",
+            "risk": "high"
+          }
+        ]
+      }
+    }
+  ]
+}

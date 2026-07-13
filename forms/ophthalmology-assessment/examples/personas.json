@@ -1,0 +1,392 @@
+{
+  "engine": "front-end-with-html",
+  "note": "Realistic filled-in states in the ophthalmology visual-acuity grader's shape (worst grade across VA, IOP, and structural findings). `expected` is computed by `bin/test-personas --update`.",
+  "personas": [
+    {
+      "name": "normal-acuity",
+      "description": "Best-corrected 6/6 in both eyes with normal intraocular pressures and exam: visual-acuity grade normal.",
+      "state": {
+        "demographics": {
+          "firstName": "",
+          "lastName": "",
+          "dateOfBirth": "",
+          "sex": "female"
+        },
+        "chiefComplaint": {
+          "primaryConcern": "",
+          "affectedEye": "",
+          "onsetType": "",
+          "durationValue": "",
+          "durationUnit": "",
+          "painPresent": "",
+          "painSeverity": ""
+        },
+        "visualAcuity": {
+          "distanceVaRightUncorrected": "",
+          "distanceVaRightCorrected": "6/6",
+          "distanceVaLeftUncorrected": "",
+          "distanceVaLeftCorrected": "6/6",
+          "nearVaRight": "",
+          "nearVaLeft": "",
+          "pinholeRight": "",
+          "pinholeLeft": "",
+          "refractionRight": "",
+          "refractionLeft": ""
+        },
+        "ocularHistory": {
+          "previousEyeConditions": "",
+          "previousEyeConditionDetails": "",
+          "previousEyeSurgery": "",
+          "previousEyeSurgeryDetails": "",
+          "laserTreatment": "",
+          "laserTreatmentDetails": "",
+          "ocularTrauma": "",
+          "ocularTraumaDetails": "",
+          "amblyopia": "",
+          "amblyopiaEye": ""
+        },
+        "anteriorSegment": {
+          "lidsNormal": "",
+          "lidsDetails": "",
+          "conjunctivaNormal": "",
+          "conjunctivaDetails": "",
+          "corneaNormal": "",
+          "corneaDetails": "",
+          "anteriorChamberNormal": "",
+          "anteriorChamberDetails": "",
+          "irisNormal": "",
+          "irisDetails": "",
+          "lensNormal": "",
+          "lensDetails": "",
+          "iopRight": 15,
+          "iopLeft": 16,
+          "iopMethod": ""
+        },
+        "posteriorSegment": {
+          "fundusNormal": "",
+          "fundusDetails": "",
+          "opticDiscNormal": "",
+          "opticDiscDetails": "",
+          "cupToDiscRatioRight": "",
+          "cupToDiscRatioLeft": "",
+          "maculaNormal": "",
+          "maculaDetails": "",
+          "retinalVesselsNormal": "",
+          "retinalVesselsDetails": "",
+          "vitreousNormal": "",
+          "vitreousDetails": ""
+        },
+        "visualFieldPupils": {
+          "visualFieldTestPerformed": "",
+          "visualFieldTestType": "",
+          "visualFieldResultRight": "",
+          "visualFieldResultLeft": "",
+          "visualFieldDetails": "",
+          "pupilReactionRight": "",
+          "pupilReactionLeft": "",
+          "rapdPresent": "no",
+          "rapdEye": "",
+          "colourVisionNormal": "",
+          "colourVisionDetails": ""
+        },
+        "currentMedications": {
+          "eyeDrops": [],
+          "oralMedications": [],
+          "ophthalmicDrugAllergies": []
+        },
+        "systemicConditions": {
+          "diabetes": "",
+          "diabetesType": "",
+          "diabetesControl": "",
+          "diabeticRetinopathy": "",
+          "diabeticRetinopathyStage": "",
+          "hypertension": "",
+          "hypertensionControlled": "",
+          "autoimmune": "",
+          "autoimmuneDetails": "",
+          "thyroidEyeDisease": "",
+          "thyroidEyeDiseaseDetails": "",
+          "neurological": "",
+          "neurologicalDetails": ""
+        },
+        "functionalImpact": {
+          "drivingStatus": "",
+          "drivingConcerns": "",
+          "readingAbility": "",
+          "adlLimitations": "",
+          "adlLimitationDetails": "",
+          "fallsRisk": "",
+          "fallsDetails": "",
+          "supportNeeds": "",
+          "supportDetails": ""
+        }
+      },
+      "expected": {
+        "vaGrade": "normal",
+        "firedRules": []
+      }
+    },
+    {
+      "name": "moderate-impairment",
+      "description": "Best-corrected acuity around 6/24 in both eyes: visual-acuity grade moderate impairment — referable low vision.",
+      "state": {
+        "demographics": {
+          "firstName": "",
+          "lastName": "",
+          "dateOfBirth": "",
+          "sex": "male"
+        },
+        "chiefComplaint": {
+          "primaryConcern": "",
+          "affectedEye": "",
+          "onsetType": "",
+          "durationValue": "",
+          "durationUnit": "",
+          "painPresent": "",
+          "painSeverity": ""
+        },
+        "visualAcuity": {
+          "distanceVaRightUncorrected": "",
+          "distanceVaRightCorrected": "6/24",
+          "distanceVaLeftUncorrected": "",
+          "distanceVaLeftCorrected": "6/24",
+          "nearVaRight": "",
+          "nearVaLeft": "",
+          "pinholeRight": "",
+          "pinholeLeft": "",
+          "refractionRight": "",
+          "refractionLeft": ""
+        },
+        "ocularHistory": {
+          "previousEyeConditions": "",
+          "previousEyeConditionDetails": "",
+          "previousEyeSurgery": "",
+          "previousEyeSurgeryDetails": "",
+          "laserTreatment": "",
+          "laserTreatmentDetails": "",
+          "ocularTrauma": "",
+          "ocularTraumaDetails": "",
+          "amblyopia": "",
+          "amblyopiaEye": ""
+        },
+        "anteriorSegment": {
+          "lidsNormal": "",
+          "lidsDetails": "",
+          "conjunctivaNormal": "",
+          "conjunctivaDetails": "",
+          "corneaNormal": "",
+          "corneaDetails": "",
+          "anteriorChamberNormal": "",
+          "anteriorChamberDetails": "",
+          "irisNormal": "",
+          "irisDetails": "",
+          "lensNormal": "",
+          "lensDetails": "",
+          "iopRight": 18,
+          "iopLeft": 17,
+          "iopMethod": ""
+        },
+        "posteriorSegment": {
+          "fundusNormal": "",
+          "fundusDetails": "",
+          "opticDiscNormal": "",
+          "opticDiscDetails": "",
+          "cupToDiscRatioRight": "",
+          "cupToDiscRatioLeft": "",
+          "maculaNormal": "",
+          "maculaDetails": "",
+          "retinalVesselsNormal": "",
+          "retinalVesselsDetails": "",
+          "vitreousNormal": "",
+          "vitreousDetails": ""
+        },
+        "visualFieldPupils": {
+          "visualFieldTestPerformed": "",
+          "visualFieldTestType": "",
+          "visualFieldResultRight": "",
+          "visualFieldResultLeft": "",
+          "visualFieldDetails": "",
+          "pupilReactionRight": "",
+          "pupilReactionLeft": "",
+          "rapdPresent": "no",
+          "rapdEye": "",
+          "colourVisionNormal": "",
+          "colourVisionDetails": ""
+        },
+        "currentMedications": {
+          "eyeDrops": [],
+          "oralMedications": [],
+          "ophthalmicDrugAllergies": []
+        },
+        "systemicConditions": {
+          "diabetes": "",
+          "diabetesType": "",
+          "diabetesControl": "",
+          "diabeticRetinopathy": "",
+          "diabeticRetinopathyStage": "",
+          "hypertension": "",
+          "hypertensionControlled": "",
+          "autoimmune": "",
+          "autoimmuneDetails": "",
+          "thyroidEyeDisease": "",
+          "thyroidEyeDiseaseDetails": "",
+          "neurological": "",
+          "neurologicalDetails": ""
+        },
+        "functionalImpact": {
+          "drivingStatus": "",
+          "drivingConcerns": "",
+          "readingAbility": "",
+          "adlLimitations": "",
+          "adlLimitationDetails": "",
+          "fallsRisk": "",
+          "fallsDetails": "",
+          "supportNeeds": "",
+          "supportDetails": ""
+        }
+      },
+      "expected": {
+        "vaGrade": "moderate",
+        "firedRules": [
+          {
+            "id": "VA-002",
+            "system": "Visual Acuity",
+            "description": "Moderate visual impairment (best corrected VA 6/18 to 6/60)",
+            "grade": "moderate"
+          }
+        ]
+      }
+    },
+    {
+      "name": "blindness",
+      "description": "Best-corrected acuity worse than 3/60 in both eyes: visual-acuity grade blindness — severe sight impairment.",
+      "state": {
+        "demographics": {
+          "firstName": "",
+          "lastName": "",
+          "dateOfBirth": "",
+          "sex": "female"
+        },
+        "chiefComplaint": {
+          "primaryConcern": "",
+          "affectedEye": "",
+          "onsetType": "",
+          "durationValue": "",
+          "durationUnit": "",
+          "painPresent": "",
+          "painSeverity": ""
+        },
+        "visualAcuity": {
+          "distanceVaRightUncorrected": "",
+          "distanceVaRightCorrected": "1/60",
+          "distanceVaLeftUncorrected": "",
+          "distanceVaLeftCorrected": "1/60",
+          "nearVaRight": "",
+          "nearVaLeft": "",
+          "pinholeRight": "",
+          "pinholeLeft": "",
+          "refractionRight": "",
+          "refractionLeft": ""
+        },
+        "ocularHistory": {
+          "previousEyeConditions": "",
+          "previousEyeConditionDetails": "",
+          "previousEyeSurgery": "",
+          "previousEyeSurgeryDetails": "",
+          "laserTreatment": "",
+          "laserTreatmentDetails": "",
+          "ocularTrauma": "",
+          "ocularTraumaDetails": "",
+          "amblyopia": "",
+          "amblyopiaEye": ""
+        },
+        "anteriorSegment": {
+          "lidsNormal": "",
+          "lidsDetails": "",
+          "conjunctivaNormal": "",
+          "conjunctivaDetails": "",
+          "corneaNormal": "",
+          "corneaDetails": "",
+          "anteriorChamberNormal": "",
+          "anteriorChamberDetails": "",
+          "irisNormal": "",
+          "irisDetails": "",
+          "lensNormal": "",
+          "lensDetails": "",
+          "iopRight": 19,
+          "iopLeft": 18,
+          "iopMethod": ""
+        },
+        "posteriorSegment": {
+          "fundusNormal": "",
+          "fundusDetails": "",
+          "opticDiscNormal": "",
+          "opticDiscDetails": "",
+          "cupToDiscRatioRight": "",
+          "cupToDiscRatioLeft": "",
+          "maculaNormal": "",
+          "maculaDetails": "",
+          "retinalVesselsNormal": "",
+          "retinalVesselsDetails": "",
+          "vitreousNormal": "",
+          "vitreousDetails": ""
+        },
+        "visualFieldPupils": {
+          "visualFieldTestPerformed": "",
+          "visualFieldTestType": "",
+          "visualFieldResultRight": "",
+          "visualFieldResultLeft": "",
+          "visualFieldDetails": "",
+          "pupilReactionRight": "",
+          "pupilReactionLeft": "",
+          "rapdPresent": "no",
+          "rapdEye": "",
+          "colourVisionNormal": "",
+          "colourVisionDetails": ""
+        },
+        "currentMedications": {
+          "eyeDrops": [],
+          "oralMedications": [],
+          "ophthalmicDrugAllergies": []
+        },
+        "systemicConditions": {
+          "diabetes": "",
+          "diabetesType": "",
+          "diabetesControl": "",
+          "diabeticRetinopathy": "",
+          "diabeticRetinopathyStage": "",
+          "hypertension": "",
+          "hypertensionControlled": "",
+          "autoimmune": "",
+          "autoimmuneDetails": "",
+          "thyroidEyeDisease": "",
+          "thyroidEyeDiseaseDetails": "",
+          "neurological": "",
+          "neurologicalDetails": ""
+        },
+        "functionalImpact": {
+          "drivingStatus": "",
+          "drivingConcerns": "",
+          "readingAbility": "",
+          "adlLimitations": "",
+          "adlLimitationDetails": "",
+          "fallsRisk": "",
+          "fallsDetails": "",
+          "supportNeeds": "",
+          "supportDetails": ""
+        }
+      },
+      "expected": {
+        "vaGrade": "blindness",
+        "firedRules": [
+          {
+            "id": "VA-004",
+            "system": "Visual Acuity",
+            "description": "Blindness (best corrected VA worse than 3/60)",
+            "grade": "blindness"
+          }
+        ]
+      }
+    }
+  ]
+}

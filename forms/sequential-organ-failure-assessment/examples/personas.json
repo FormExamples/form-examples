@@ -1,0 +1,390 @@
+{
+  "engine": "front-end-with-html",
+  "graderHint": "calculateSofaGrade",
+  "note": "Realistic filled-in states in the scoring engine's shape. `expected` is computed by `bin/test-personas --update` and verified by `bin/test-personas`.",
+  "personas": [
+    {
+      "name": "low",
+      "description": "Mild single-system derangements across all six organs (total SOFA 3): low predicted mortality band.",
+      "state": {
+        "context": {
+          "assessorName": "",
+          "assessorRole": "intensivist",
+          "assessorRegistrationNumber": "",
+          "assessedAt": "",
+          "careLocation": "icu",
+          "hoursSinceAdmission": null
+        },
+        "baseline": {
+          "patientIdentifier": "",
+          "ageYears": 58,
+          "sex": "male",
+          "admissionDiagnosis": "",
+          "suspectedInfection": "no",
+          "baselineSofaTotal": null
+        },
+        "respiration": {
+          "pao2": null,
+          "fio2": null,
+          "pao2Fio2Ratio": 450,
+          "respiratorySupport": "none"
+        },
+        "coagulation": {
+          "platelets": 130
+        },
+        "liver": {
+          "bilirubin": 25
+        },
+        "cardiovascular": {
+          "map": 80,
+          "vasopressor": "none",
+          "vasopressorDose": null
+        },
+        "cns": {
+          "glasgowComaScale": 15,
+          "sedated": "no"
+        },
+        "renal": {
+          "creatinine": 150,
+          "urineOutput": 1500
+        },
+        "note": {
+          "clinicalNote": ""
+        }
+      },
+      "expected": {
+        "subScores": {
+          "respiration": 0,
+          "coagulation": 1,
+          "liver": 1,
+          "cardiovascular": 0,
+          "cns": 0,
+          "renal": 1
+        },
+        "totalSofa": 3,
+        "complete": true,
+        "deltaSofa": null,
+        "mortalityBand": "low",
+        "sepsis3": false,
+        "firedRules": [
+          {
+            "id": "R-RESPIRATION-0",
+            "parameter": "respiration",
+            "points": 0,
+            "category": "threshold-band",
+            "description": "PaO2/FiO2 450 mmHg — respiration sub-score 0."
+          },
+          {
+            "id": "R-COAGULATION-1",
+            "parameter": "coagulation",
+            "points": 1,
+            "category": "threshold-band",
+            "description": "Platelets 130 x10^9/L — coagulation sub-score 1."
+          },
+          {
+            "id": "R-LIVER-1",
+            "parameter": "liver",
+            "points": 1,
+            "category": "threshold-band",
+            "description": "Bilirubin 25 umol/L — liver sub-score 1."
+          },
+          {
+            "id": "R-CARDIOVASCULAR-0",
+            "parameter": "cardiovascular",
+            "points": 0,
+            "category": "threshold-band",
+            "description": "Cardiovascular sub-score 0 (driven by MAP)."
+          },
+          {
+            "id": "R-CNS-0",
+            "parameter": "cns",
+            "points": 0,
+            "category": "threshold-band",
+            "description": "Glasgow Coma Scale 15 — CNS sub-score 0."
+          },
+          {
+            "id": "R-RENAL-1",
+            "parameter": "renal",
+            "points": 1,
+            "category": "threshold-band",
+            "description": "Renal sub-score 1 (driven by creatinine)."
+          },
+          {
+            "id": "R-TOTAL-01",
+            "parameter": "total",
+            "points": null,
+            "category": "total-score",
+            "description": "Total SOFA 3 of 24."
+          },
+          {
+            "id": "R-BAND-01",
+            "parameter": "band",
+            "points": null,
+            "category": "mortality-band",
+            "description": "Total 3 — low mortality-risk band."
+          }
+        ]
+      }
+    },
+    {
+      "name": "high",
+      "description": "Multi-organ dysfunction — ventilated P/F 180, platelets 45, bilirubin 60, MAP 65, GCS 13, creatinine 200 (total SOFA 12): high predicted mortality band.",
+      "state": {
+        "context": {
+          "assessorName": "",
+          "assessorRole": "intensivist",
+          "assessorRegistrationNumber": "",
+          "assessedAt": "",
+          "careLocation": "icu",
+          "hoursSinceAdmission": null
+        },
+        "baseline": {
+          "patientIdentifier": "",
+          "ageYears": 66,
+          "sex": "male",
+          "admissionDiagnosis": "",
+          "suspectedInfection": "yes",
+          "baselineSofaTotal": null
+        },
+        "respiration": {
+          "pao2": null,
+          "fio2": null,
+          "pao2Fio2Ratio": 180,
+          "respiratorySupport": "ventilated"
+        },
+        "coagulation": {
+          "platelets": 45
+        },
+        "liver": {
+          "bilirubin": 60
+        },
+        "cardiovascular": {
+          "map": 65,
+          "vasopressor": "none",
+          "vasopressorDose": null
+        },
+        "cns": {
+          "glasgowComaScale": 13,
+          "sedated": "no"
+        },
+        "renal": {
+          "creatinine": 200,
+          "urineOutput": 700
+        },
+        "note": {
+          "clinicalNote": ""
+        }
+      },
+      "expected": {
+        "subScores": {
+          "respiration": 3,
+          "coagulation": 3,
+          "liver": 2,
+          "cardiovascular": 1,
+          "cns": 1,
+          "renal": 2
+        },
+        "totalSofa": 12,
+        "complete": true,
+        "deltaSofa": null,
+        "mortalityBand": "high",
+        "sepsis3": false,
+        "firedRules": [
+          {
+            "id": "R-RESPIRATION-3",
+            "parameter": "respiration",
+            "points": 3,
+            "category": "threshold-band",
+            "description": "PaO2/FiO2 180 mmHg — respiration sub-score 3."
+          },
+          {
+            "id": "R-COAGULATION-3",
+            "parameter": "coagulation",
+            "points": 3,
+            "category": "threshold-band",
+            "description": "Platelets 45 x10^9/L — coagulation sub-score 3."
+          },
+          {
+            "id": "R-LIVER-2",
+            "parameter": "liver",
+            "points": 2,
+            "category": "threshold-band",
+            "description": "Bilirubin 60 umol/L — liver sub-score 2."
+          },
+          {
+            "id": "R-CARDIOVASCULAR-1",
+            "parameter": "cardiovascular",
+            "points": 1,
+            "category": "threshold-band",
+            "description": "Cardiovascular sub-score 1 (driven by MAP)."
+          },
+          {
+            "id": "R-CNS-1",
+            "parameter": "cns",
+            "points": 1,
+            "category": "threshold-band",
+            "description": "Glasgow Coma Scale 13 — CNS sub-score 1."
+          },
+          {
+            "id": "R-RENAL-2",
+            "parameter": "renal",
+            "points": 2,
+            "category": "threshold-band",
+            "description": "Renal sub-score 2 (driven by creatinine)."
+          },
+          {
+            "id": "R-TOTAL-01",
+            "parameter": "total",
+            "points": null,
+            "category": "total-score",
+            "description": "Total SOFA 12 of 24."
+          },
+          {
+            "id": "R-BAND-01",
+            "parameter": "band",
+            "points": null,
+            "category": "mortality-band",
+            "description": "Total 12 — high mortality-risk band."
+          }
+        ]
+      }
+    },
+    {
+      "name": "extreme",
+      "description": "Severe multi-organ failure — P/F 80 ventilated, platelets 15, bilirubin 250, high-dose noradrenaline, GCS 6, creatinine 450 (total SOFA 23): extreme predicted mortality, Sepsis-3 positive vs baseline 2.",
+      "state": {
+        "context": {
+          "assessorName": "",
+          "assessorRole": "intensivist",
+          "assessorRegistrationNumber": "",
+          "assessedAt": "",
+          "careLocation": "icu",
+          "hoursSinceAdmission": null
+        },
+        "baseline": {
+          "patientIdentifier": "",
+          "ageYears": 70,
+          "sex": "male",
+          "admissionDiagnosis": "",
+          "suspectedInfection": "yes",
+          "baselineSofaTotal": 2
+        },
+        "respiration": {
+          "pao2": null,
+          "fio2": null,
+          "pao2Fio2Ratio": 80,
+          "respiratorySupport": "ventilated"
+        },
+        "coagulation": {
+          "platelets": 15
+        },
+        "liver": {
+          "bilirubin": 250
+        },
+        "cardiovascular": {
+          "map": 55,
+          "vasopressor": "noradrenaline",
+          "vasopressorDose": 0.2
+        },
+        "cns": {
+          "glasgowComaScale": 6,
+          "sedated": "no"
+        },
+        "renal": {
+          "creatinine": 450,
+          "urineOutput": 150
+        },
+        "note": {
+          "clinicalNote": ""
+        }
+      },
+      "expected": {
+        "subScores": {
+          "respiration": 4,
+          "coagulation": 4,
+          "liver": 4,
+          "cardiovascular": 4,
+          "cns": 3,
+          "renal": 4
+        },
+        "totalSofa": 23,
+        "complete": true,
+        "deltaSofa": 21,
+        "mortalityBand": "extreme",
+        "sepsis3": true,
+        "firedRules": [
+          {
+            "id": "R-RESPIRATION-4",
+            "parameter": "respiration",
+            "points": 4,
+            "category": "threshold-band",
+            "description": "PaO2/FiO2 80 mmHg — respiration sub-score 4."
+          },
+          {
+            "id": "R-COAGULATION-4",
+            "parameter": "coagulation",
+            "points": 4,
+            "category": "threshold-band",
+            "description": "Platelets 15 x10^9/L — coagulation sub-score 4."
+          },
+          {
+            "id": "R-LIVER-4",
+            "parameter": "liver",
+            "points": 4,
+            "category": "threshold-band",
+            "description": "Bilirubin 250 umol/L — liver sub-score 4."
+          },
+          {
+            "id": "R-CARDIOVASCULAR-4",
+            "parameter": "cardiovascular",
+            "points": 4,
+            "category": "threshold-band",
+            "description": "Cardiovascular sub-score 4 (driven by vasopressor)."
+          },
+          {
+            "id": "R-CNS-3",
+            "parameter": "cns",
+            "points": 3,
+            "category": "threshold-band",
+            "description": "Glasgow Coma Scale 6 — CNS sub-score 3."
+          },
+          {
+            "id": "R-RENAL-4",
+            "parameter": "renal",
+            "points": 4,
+            "category": "threshold-band",
+            "description": "Renal sub-score 4 (driven by urine output)."
+          },
+          {
+            "id": "R-TOTAL-01",
+            "parameter": "total",
+            "points": null,
+            "category": "total-score",
+            "description": "Total SOFA 23 of 24."
+          },
+          {
+            "id": "R-DELTA-01",
+            "parameter": "delta",
+            "points": null,
+            "category": "delta-sofa",
+            "description": "Delta-SOFA +21 versus baseline 2."
+          },
+          {
+            "id": "R-BAND-01",
+            "parameter": "band",
+            "points": null,
+            "category": "mortality-band",
+            "description": "Total 23 — extreme mortality-risk band."
+          },
+          {
+            "id": "R-SEPSIS-01",
+            "parameter": "sepsis",
+            "points": null,
+            "category": "sepsis-criterion",
+            "description": "Suspected infection with delta-SOFA >= 2 — meets the Sepsis-3 criterion."
+          }
+        ]
+      }
+    }
+  ]
+}

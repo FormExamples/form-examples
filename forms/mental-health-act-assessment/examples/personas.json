@@ -1,0 +1,287 @@
+{
+  "engine": "front-end-with-html",
+  "graderHint": "gradeMentalHealthActAssessment",
+  "note": "Realistic filled-in states in the MHA legal-completeness grader's shape (documentation classifier — no automated detention decision). `expected` is computed by `bin/test-personas --update`.",
+  "personas": [
+    {
+      "name": "community-no-detention",
+      "description": "Assessed, criteria for detention not met, managed in the community: no detaining section, outcome resolved — completeness valid, urgency routine.",
+      "state": {
+        "context": {
+          "assessedAt": null,
+          "location": "community",
+          "referralSource": "",
+          "reasonForAssessment": ""
+        },
+        "identification": {
+          "personIdentifier": "",
+          "ageBand": "40-64",
+          "sex": "",
+          "firstLanguage": ""
+        },
+        "professionals": {
+          "amhpName": "",
+          "amhpApproved": "",
+          "doctor1Name": "",
+          "doctor1GmcNumber": "",
+          "doctor1Section12Approved": "",
+          "doctor1ExaminedAt": null,
+          "doctor2Name": "",
+          "doctor2GmcNumber": "",
+          "doctor2Section12Approved": "",
+          "doctor2ExaminedAt": null,
+          "priorAcquaintance": ""
+        },
+        "mentalDisorder": {
+          "mentalDisorderPresent": "",
+          "mentalDisorderEvidence": ""
+        },
+        "risk": {
+          "riskToOwnHealth": "",
+          "riskToOwnSafety": "",
+          "riskToOthers": "",
+          "riskEvidence": "",
+          "riskImminence": ""
+        },
+        "leastRestrictive": {
+          "leastRestrictiveMet": "",
+          "alternativesConsidered": ""
+        },
+        "treatment": {
+          "appropriateTreatmentAvailable": "",
+          "treatmentPlanSummary": ""
+        },
+        "nearestRelative": {
+          "nearestRelativeIdentified": "",
+          "nearestRelativeConsulted": "",
+          "nearestRelativeObjection": "",
+          "consultationRecord": ""
+        },
+        "recommendation": {
+          "recommendedSection": "none",
+          "outcome": "community",
+          "bedIdentified": "",
+          "conveyance": "",
+          "clinicalLegalNote": "Criteria for detention not met; crisis-team follow-up arranged."
+        }
+      },
+      "expected": {
+        "completenessStatus": "valid",
+        "recommendedSectionClass": "none",
+        "urgencyClass": "routine",
+        "requiredSignatories": [],
+        "criteriaSummary": []
+      }
+    },
+    {
+      "name": "section-2-admission",
+      "description": "Full Section 2 recommendation with AMHP application and two medical recommendations, all statutory criteria met with evidence: completeness valid, urgency urgent.",
+      "state": {
+        "context": {
+          "assessedAt": null,
+          "location": "hospital-ward",
+          "referralSource": "",
+          "reasonForAssessment": ""
+        },
+        "identification": {
+          "personIdentifier": "",
+          "ageBand": "18-39",
+          "sex": "",
+          "firstLanguage": ""
+        },
+        "professionals": {
+          "amhpName": "A. Okafor",
+          "amhpApproved": "yes",
+          "doctor1Name": "Dr R. Mensah",
+          "doctor1GmcNumber": "",
+          "doctor1Section12Approved": "yes",
+          "doctor1ExaminedAt": null,
+          "doctor2Name": "Dr L. Byrne",
+          "doctor2GmcNumber": "",
+          "doctor2Section12Approved": "no",
+          "doctor2ExaminedAt": null,
+          "priorAcquaintance": ""
+        },
+        "mentalDisorder": {
+          "mentalDisorderPresent": "met",
+          "mentalDisorderEvidence": "Acute psychotic episode with paranoid delusions and thought disorder."
+        },
+        "risk": {
+          "riskToOwnHealth": "",
+          "riskToOwnSafety": "met",
+          "riskToOthers": "",
+          "riskEvidence": "Self-neglect and impulsive behaviour placing own safety at risk.",
+          "riskImminence": "moderate"
+        },
+        "leastRestrictive": {
+          "leastRestrictiveMet": "met",
+          "alternativesConsidered": "Home treatment considered and declined; informal admission refused."
+        },
+        "treatment": {
+          "appropriateTreatmentAvailable": "",
+          "treatmentPlanSummary": ""
+        },
+        "nearestRelative": {
+          "nearestRelativeIdentified": "",
+          "nearestRelativeConsulted": "",
+          "nearestRelativeObjection": "",
+          "consultationRecord": ""
+        },
+        "recommendation": {
+          "recommendedSection": "2",
+          "outcome": "detain-under-section",
+          "bedIdentified": "yes",
+          "conveyance": "",
+          "clinicalLegalNote": ""
+        }
+      },
+      "expected": {
+        "completenessStatus": "valid",
+        "recommendedSectionClass": "section-2",
+        "urgencyClass": "urgent",
+        "requiredSignatories": [
+          {
+            "role": "amhp",
+            "label": "AMHP approval confirmed (or nearest-relative applicant)",
+            "present": true
+          },
+          {
+            "role": "doctor1",
+            "label": "First medical recommendation",
+            "present": true
+          },
+          {
+            "role": "doctor2",
+            "label": "Second medical recommendation",
+            "present": true
+          },
+          {
+            "role": "s12",
+            "label": "At least one doctor Section 12 approved",
+            "present": true
+          }
+        ],
+        "criteriaSummary": [
+          {
+            "criterion": "mental-disorder",
+            "label": "Mental disorder of a nature or degree (criterion 1)",
+            "status": "met",
+            "evidencePresent": true
+          },
+          {
+            "criterion": "risk",
+            "label": "Risk to own health, own safety, or others (criterion 2)",
+            "status": "met",
+            "evidencePresent": true
+          },
+          {
+            "criterion": "least-restrictive",
+            "label": "No less restrictive alternative (criterion 3)",
+            "status": "met",
+            "evidencePresent": true
+          }
+        ]
+      }
+    },
+    {
+      "name": "section-136-emergency",
+      "description": "Person removed to a place of safety with imminent risk to others; AMHP and doctor present and criteria met with evidence: completeness valid, urgency emergency.",
+      "state": {
+        "context": {
+          "assessedAt": null,
+          "location": "place-of-safety",
+          "referralSource": "",
+          "reasonForAssessment": ""
+        },
+        "identification": {
+          "personIdentifier": "",
+          "ageBand": "18-39",
+          "sex": "",
+          "firstLanguage": ""
+        },
+        "professionals": {
+          "amhpName": "S. Patel",
+          "amhpApproved": "",
+          "doctor1Name": "Dr H. Adeyemi",
+          "doctor1GmcNumber": "",
+          "doctor1Section12Approved": "",
+          "doctor1ExaminedAt": null,
+          "doctor2Name": "",
+          "doctor2GmcNumber": "",
+          "doctor2Section12Approved": "",
+          "doctor2ExaminedAt": null,
+          "priorAcquaintance": ""
+        },
+        "mentalDisorder": {
+          "mentalDisorderPresent": "met",
+          "mentalDisorderEvidence": "Presentation consistent with acute mental disorder; disorientated and responding to unseen stimuli."
+        },
+        "risk": {
+          "riskToOwnHealth": "",
+          "riskToOwnSafety": "",
+          "riskToOthers": "met",
+          "riskEvidence": "Aggression toward members of the public in a public place.",
+          "riskImminence": "imminent"
+        },
+        "leastRestrictive": {
+          "leastRestrictiveMet": "met",
+          "alternativesConsidered": "No less restrictive option available given imminent risk."
+        },
+        "treatment": {
+          "appropriateTreatmentAvailable": "",
+          "treatmentPlanSummary": ""
+        },
+        "nearestRelative": {
+          "nearestRelativeIdentified": "",
+          "nearestRelativeConsulted": "",
+          "nearestRelativeObjection": "",
+          "consultationRecord": ""
+        },
+        "recommendation": {
+          "recommendedSection": "136",
+          "outcome": "detain-under-section",
+          "bedIdentified": "",
+          "conveyance": "",
+          "clinicalLegalNote": ""
+        }
+      },
+      "expected": {
+        "completenessStatus": "valid",
+        "recommendedSectionClass": "section-136",
+        "urgencyClass": "emergency",
+        "requiredSignatories": [
+          {
+            "role": "amhp",
+            "label": "AMHP present at the place of safety",
+            "present": true
+          },
+          {
+            "role": "doctor1",
+            "label": "Doctor present at the place of safety",
+            "present": true
+          }
+        ],
+        "criteriaSummary": [
+          {
+            "criterion": "mental-disorder",
+            "label": "Mental disorder of a nature or degree (criterion 1)",
+            "status": "met",
+            "evidencePresent": true
+          },
+          {
+            "criterion": "risk",
+            "label": "Risk to own health, own safety, or others (criterion 2)",
+            "status": "met",
+            "evidencePresent": true
+          },
+          {
+            "criterion": "least-restrictive",
+            "label": "No less restrictive alternative (criterion 3)",
+            "status": "met",
+            "evidencePresent": true
+          }
+        ]
+      }
+    }
+  ]
+}

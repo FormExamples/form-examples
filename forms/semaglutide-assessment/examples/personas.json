@@ -1,0 +1,327 @@
+{
+  "engine": "front-end-with-html",
+  "graderHint": "evaluateEligibility",
+  "note": "Realistic filled-in states in the scoring engine's shape. `expected` is computed by `bin/test-personas --update` and verified by `bin/test-personas`.",
+  "personas": [
+    {
+      "name": "eligible",
+      "description": "BMI 32.9 for weight management, no contraindications on screening: Eligible for semaglutide therapy.",
+      "state": {
+        "demographics": {
+          "firstName": "",
+          "lastName": "",
+          "dob": "",
+          "sex": "female"
+        },
+        "indicationGoals": {
+          "primaryIndication": "weight-management",
+          "weightLossGoalPercent": null,
+          "previousWeightLossAttempts": "",
+          "motivationLevel": ""
+        },
+        "bodyComposition": {
+          "heightCm": 170,
+          "weightKg": 95,
+          "bmi": null,
+          "waistCircumference": null,
+          "bodyFatPercent": null,
+          "previousMaxWeight": null
+        },
+        "metabolicProfile": {
+          "hba1c": null,
+          "fastingGlucose": null,
+          "insulinLevel": null,
+          "totalCholesterol": null,
+          "ldl": null,
+          "hdl": null,
+          "triglycerides": null,
+          "thyroidFunction": ""
+        },
+        "cardiovascularRisk": {
+          "bloodPressureSystolic": null,
+          "bloodPressureDiastolic": null,
+          "heartRate": null,
+          "previousMI": "",
+          "heartFailure": "",
+          "peripheralVascularDisease": "",
+          "cerebrovascularDisease": "",
+          "qriskScore": null
+        },
+        "contraindicationsScreening": {
+          "personalHistoryMTC": "no",
+          "familyHistoryMTC": "no",
+          "men2Syndrome": "no",
+          "pancreatitisHistory": "no",
+          "severeGIDisease": "no",
+          "pregnancyPlanned": "no",
+          "breastfeeding": "no",
+          "type1Diabetes": "no",
+          "diabeticRetinopathySevere": "no",
+          "allergySemaglutide": "no"
+        },
+        "gastrointestinalHistory": {
+          "nauseaHistory": "",
+          "vomitingHistory": "",
+          "gastroparesis": "no",
+          "gallstoneHistory": "no",
+          "ibd": "",
+          "gerdHistory": "",
+          "previousBariatricSurgery": "",
+          "currentGISymptoms": ""
+        },
+        "currentMedications": {
+          "insulinTherapy": "",
+          "insulinType": "",
+          "sulfonylureas": "",
+          "otherDiabetesMedications": [],
+          "antihypertensives": [],
+          "lipidLowering": [],
+          "otherMedications": []
+        },
+        "mentalHealthScreening": {
+          "eatingDisorderHistory": "no",
+          "eatingDisorderDetails": "",
+          "depressionHistory": "",
+          "suicidalIdeation": "no",
+          "bodyDysmorphia": "",
+          "bingeDrinkingHistory": "",
+          "currentMentalHealthTreatment": ""
+        },
+        "treatmentPlan": {
+          "selectedFormulation": "",
+          "startingDose": "",
+          "titrationSchedule": "",
+          "monitoringFrequency": "",
+          "dietaryGuidance": "",
+          "exercisePlan": "",
+          "followUpWeeks": null
+        }
+      },
+      "expected": {
+        "eligibilityStatus": "Eligible",
+        "bmi": 32.9,
+        "bmiCategoryLabel": "Obesity class I",
+        "absoluteContraindications": [],
+        "relativeContraindications": []
+      }
+    },
+    {
+      "name": "conditional",
+      "description": "BMI 34.7 with a history of gallstones (relative contraindication): Conditional — proceed with clinician review and monitoring.",
+      "state": {
+        "demographics": {
+          "firstName": "",
+          "lastName": "",
+          "dob": "",
+          "sex": "female"
+        },
+        "indicationGoals": {
+          "primaryIndication": "weight-management",
+          "weightLossGoalPercent": null,
+          "previousWeightLossAttempts": "",
+          "motivationLevel": ""
+        },
+        "bodyComposition": {
+          "heightCm": 168,
+          "weightKg": 98,
+          "bmi": null,
+          "waistCircumference": null,
+          "bodyFatPercent": null,
+          "previousMaxWeight": null
+        },
+        "metabolicProfile": {
+          "hba1c": null,
+          "fastingGlucose": null,
+          "insulinLevel": null,
+          "totalCholesterol": null,
+          "ldl": null,
+          "hdl": null,
+          "triglycerides": null,
+          "thyroidFunction": ""
+        },
+        "cardiovascularRisk": {
+          "bloodPressureSystolic": null,
+          "bloodPressureDiastolic": null,
+          "heartRate": null,
+          "previousMI": "",
+          "heartFailure": "",
+          "peripheralVascularDisease": "",
+          "cerebrovascularDisease": "",
+          "qriskScore": null
+        },
+        "contraindicationsScreening": {
+          "personalHistoryMTC": "no",
+          "familyHistoryMTC": "no",
+          "men2Syndrome": "no",
+          "pancreatitisHistory": "no",
+          "severeGIDisease": "no",
+          "pregnancyPlanned": "no",
+          "breastfeeding": "no",
+          "type1Diabetes": "no",
+          "diabeticRetinopathySevere": "no",
+          "allergySemaglutide": "no"
+        },
+        "gastrointestinalHistory": {
+          "nauseaHistory": "",
+          "vomitingHistory": "",
+          "gastroparesis": "no",
+          "gallstoneHistory": "yes",
+          "ibd": "",
+          "gerdHistory": "",
+          "previousBariatricSurgery": "",
+          "currentGISymptoms": ""
+        },
+        "currentMedications": {
+          "insulinTherapy": "",
+          "insulinType": "",
+          "sulfonylureas": "",
+          "otherDiabetesMedications": [],
+          "antihypertensives": [],
+          "lipidLowering": [],
+          "otherMedications": []
+        },
+        "mentalHealthScreening": {
+          "eatingDisorderHistory": "no",
+          "eatingDisorderDetails": "",
+          "depressionHistory": "",
+          "suicidalIdeation": "no",
+          "bodyDysmorphia": "",
+          "bingeDrinkingHistory": "",
+          "currentMentalHealthTreatment": ""
+        },
+        "treatmentPlan": {
+          "selectedFormulation": "",
+          "startingDose": "",
+          "titrationSchedule": "",
+          "monitoringFrequency": "",
+          "dietaryGuidance": "",
+          "exercisePlan": "",
+          "followUpWeeks": null
+        }
+      },
+      "expected": {
+        "eligibilityStatus": "Conditional",
+        "bmi": 34.7,
+        "bmiCategoryLabel": "Obesity class I",
+        "absoluteContraindications": [],
+        "relativeContraindications": [
+          {
+            "id": "CONTRA-REL-002",
+            "category": "Gastrointestinal",
+            "description": "History of gallstones - GLP-1 RAs may increase cholelithiasis risk",
+            "type": "relative"
+          }
+        ]
+      }
+    },
+    {
+      "name": "ineligible",
+      "description": "Personal history of medullary thyroid carcinoma (absolute contraindication): Ineligible for semaglutide.",
+      "state": {
+        "demographics": {
+          "firstName": "",
+          "lastName": "",
+          "dob": "",
+          "sex": "male"
+        },
+        "indicationGoals": {
+          "primaryIndication": "weight-management",
+          "weightLossGoalPercent": null,
+          "previousWeightLossAttempts": "",
+          "motivationLevel": ""
+        },
+        "bodyComposition": {
+          "heightCm": 175,
+          "weightKg": 104,
+          "bmi": null,
+          "waistCircumference": null,
+          "bodyFatPercent": null,
+          "previousMaxWeight": null
+        },
+        "metabolicProfile": {
+          "hba1c": null,
+          "fastingGlucose": null,
+          "insulinLevel": null,
+          "totalCholesterol": null,
+          "ldl": null,
+          "hdl": null,
+          "triglycerides": null,
+          "thyroidFunction": ""
+        },
+        "cardiovascularRisk": {
+          "bloodPressureSystolic": null,
+          "bloodPressureDiastolic": null,
+          "heartRate": null,
+          "previousMI": "",
+          "heartFailure": "",
+          "peripheralVascularDisease": "",
+          "cerebrovascularDisease": "",
+          "qriskScore": null
+        },
+        "contraindicationsScreening": {
+          "personalHistoryMTC": "yes",
+          "familyHistoryMTC": "no",
+          "men2Syndrome": "no",
+          "pancreatitisHistory": "no",
+          "severeGIDisease": "no",
+          "pregnancyPlanned": "no",
+          "breastfeeding": "no",
+          "type1Diabetes": "no",
+          "diabeticRetinopathySevere": "no",
+          "allergySemaglutide": "no"
+        },
+        "gastrointestinalHistory": {
+          "nauseaHistory": "",
+          "vomitingHistory": "",
+          "gastroparesis": "no",
+          "gallstoneHistory": "no",
+          "ibd": "",
+          "gerdHistory": "",
+          "previousBariatricSurgery": "",
+          "currentGISymptoms": ""
+        },
+        "currentMedications": {
+          "insulinTherapy": "",
+          "insulinType": "",
+          "sulfonylureas": "",
+          "otherDiabetesMedications": [],
+          "antihypertensives": [],
+          "lipidLowering": [],
+          "otherMedications": []
+        },
+        "mentalHealthScreening": {
+          "eatingDisorderHistory": "no",
+          "eatingDisorderDetails": "",
+          "depressionHistory": "",
+          "suicidalIdeation": "no",
+          "bodyDysmorphia": "",
+          "bingeDrinkingHistory": "",
+          "currentMentalHealthTreatment": ""
+        },
+        "treatmentPlan": {
+          "selectedFormulation": "",
+          "startingDose": "",
+          "titrationSchedule": "",
+          "monitoringFrequency": "",
+          "dietaryGuidance": "",
+          "exercisePlan": "",
+          "followUpWeeks": null
+        }
+      },
+      "expected": {
+        "eligibilityStatus": "Ineligible",
+        "bmi": 34,
+        "bmiCategoryLabel": "Obesity class I",
+        "absoluteContraindications": [
+          {
+            "id": "CONTRA-ABS-001",
+            "category": "Endocrine",
+            "description": "Personal history of medullary thyroid carcinoma (MTC)",
+            "type": "absolute"
+          }
+        ],
+        "relativeContraindications": []
+      }
+    }
+  ]
+}

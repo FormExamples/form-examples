@@ -1,0 +1,372 @@
+{
+  "engine": "front-end-with-html",
+  "graderHint": "gradePPE",
+  "note": "Realistic filled-in states in the scoring engine's shape. `expected` is computed by `bin/test-personas --update` and verified by `bin/test-personas`.",
+  "personas": [
+    {
+      "name": "cleared",
+      "description": "Healthy athlete, no red flags on any screen, full range of motion and normal strength: cleared for sport.",
+      "state": {
+        "demographics": {
+          "firstName": "",
+          "lastName": "",
+          "dateOfBirth": "",
+          "sex": "male",
+          "weight": null,
+          "height": null,
+          "bmi": null,
+          "emergencyContactName": "",
+          "emergencyContactPhone": ""
+        },
+        "sportPositionDetails": {
+          "primarySport": "football",
+          "primaryPosition": "",
+          "contactLevel": "high",
+          "secondarySports": "",
+          "competitiveLevel": "",
+          "hoursPerWeek": null,
+          "previousClearanceIssue": "",
+          "previousClearanceDetails": ""
+        },
+        "medicalHistory": {
+          "chronicIllness": "no",
+          "chronicIllnessDetails": "",
+          "currentMedications": "",
+          "currentMedicationDetails": "",
+          "allergiesKnown": "",
+          "allergyDetails": "",
+          "priorSurgery": "",
+          "priorSurgeryDetails": "",
+          "hospitalisedLastYear": "no",
+          "asthmaOrExerciseInducedBronchospasm": "no",
+          "diabetes": "no",
+          "sickleCellTraitOrDisease": "no",
+          "heatIllnessHistory": "no",
+          "eatingDisorderHistory": "no"
+        },
+        "familyHistory": {
+          "suddenCardiacDeathUnder50": "no",
+          "suddenCardiacDeathRelation": "",
+          "hypertrophicCardiomyopathy": "no",
+          "marfanSyndrome": "no",
+          "longQTSyndrome": "no",
+          "arrhythmiaOrPacemaker": "no",
+          "unexplainedSeizureOrFainting": "no"
+        },
+        "menstrualHistoryREDS": {
+          "applicable": false,
+          "ageAtMenarche": null,
+          "regularPeriods": "",
+          "amenorrhoeaSixMonths": "",
+          "cyclesLast12Months": null,
+          "restrictiveEatingPattern": "",
+          "stressFractureHistory": "",
+          "lowEnergyAvailabilityConcern": ""
+        },
+        "cardiovascularScreening": {
+          "chestPainWithExertion": "no",
+          "unexplainedSyncope": "no",
+          "excessiveBreathlessness": "no",
+          "palpitationsOrIrregularBeat": "no",
+          "highBloodPressureDiagnosis": "no",
+          "heartMurmurDetected": "no",
+          "restrictedActivityForHeart": "no",
+          "restingSystolic": 118,
+          "restingDiastolic": 74,
+          "restingHeartRate": 60
+        },
+        "musculoskeletalScreening": {
+          "uncorrectedMajorInjury": "no",
+          "majorInjuryDetails": "",
+          "jointInstability": "no",
+          "jointInstabilityDetails": "",
+          "ongoingPainOrSwelling": "no",
+          "chronicJointDisease": "",
+          "useBraceOrAssistiveDevice": "",
+          "fullRangeOfMotion": "yes",
+          "normalStrengthBilateral": "yes"
+        },
+        "neurologicalConcussionBaseline": {
+          "totalConcussions": null,
+          "concussionLastSixMonths": "no",
+          "mostRecentConcussionDate": "",
+          "ongoingPostConcussiveSymptoms": "no",
+          "historyOfSeizures": "no",
+          "stinger": "no",
+          "historyOfHeadOrNeckSurgery": "",
+          "baselineHeadachesOrMigraine": ""
+        },
+        "visionSkin": {
+          "correctiveLensesWorn": "",
+          "monocularAthlete": "no",
+          "protectiveEyewearAvailable": "",
+          "activeSkinInfection": "",
+          "activeSkinInfectionDetails": "",
+          "herpesGladiatorum": "no",
+          "impetigoOrMRSA": "no",
+          "openWoundsOrLesions": "no"
+        },
+        "clearanceDecision": {
+          "preferredClearance": "",
+          "clearanceConditions": "",
+          "followUpRequired": "",
+          "clinicianName": "",
+          "clinicianSignatureDate": "",
+          "additionalNotes": ""
+        }
+      },
+      "expected": {
+        "clearance": "cleared",
+        "firedRules": []
+      }
+    },
+    {
+      "name": "conditional",
+      "description": "Well-controlled chronic illness reported (grade 2 finding), no higher-grade red flags: conditional clearance pending confirmation of optimised management.",
+      "state": {
+        "demographics": {
+          "firstName": "",
+          "lastName": "",
+          "dateOfBirth": "",
+          "sex": "male",
+          "weight": null,
+          "height": null,
+          "bmi": null,
+          "emergencyContactName": "",
+          "emergencyContactPhone": ""
+        },
+        "sportPositionDetails": {
+          "primarySport": "basketball",
+          "primaryPosition": "",
+          "contactLevel": "moderate",
+          "secondarySports": "",
+          "competitiveLevel": "",
+          "hoursPerWeek": null,
+          "previousClearanceIssue": "",
+          "previousClearanceDetails": ""
+        },
+        "medicalHistory": {
+          "chronicIllness": "yes",
+          "chronicIllnessDetails": "",
+          "currentMedications": "",
+          "currentMedicationDetails": "",
+          "allergiesKnown": "",
+          "allergyDetails": "",
+          "priorSurgery": "",
+          "priorSurgeryDetails": "",
+          "hospitalisedLastYear": "no",
+          "asthmaOrExerciseInducedBronchospasm": "no",
+          "diabetes": "no",
+          "sickleCellTraitOrDisease": "no",
+          "heatIllnessHistory": "no",
+          "eatingDisorderHistory": "no"
+        },
+        "familyHistory": {
+          "suddenCardiacDeathUnder50": "no",
+          "suddenCardiacDeathRelation": "",
+          "hypertrophicCardiomyopathy": "no",
+          "marfanSyndrome": "no",
+          "longQTSyndrome": "no",
+          "arrhythmiaOrPacemaker": "no",
+          "unexplainedSeizureOrFainting": "no"
+        },
+        "menstrualHistoryREDS": {
+          "applicable": false,
+          "ageAtMenarche": null,
+          "regularPeriods": "",
+          "amenorrhoeaSixMonths": "",
+          "cyclesLast12Months": null,
+          "restrictiveEatingPattern": "",
+          "stressFractureHistory": "",
+          "lowEnergyAvailabilityConcern": ""
+        },
+        "cardiovascularScreening": {
+          "chestPainWithExertion": "no",
+          "unexplainedSyncope": "no",
+          "excessiveBreathlessness": "no",
+          "palpitationsOrIrregularBeat": "no",
+          "highBloodPressureDiagnosis": "no",
+          "heartMurmurDetected": "no",
+          "restrictedActivityForHeart": "no",
+          "restingSystolic": 122,
+          "restingDiastolic": 78,
+          "restingHeartRate": 64
+        },
+        "musculoskeletalScreening": {
+          "uncorrectedMajorInjury": "no",
+          "majorInjuryDetails": "",
+          "jointInstability": "no",
+          "jointInstabilityDetails": "",
+          "ongoingPainOrSwelling": "no",
+          "chronicJointDisease": "",
+          "useBraceOrAssistiveDevice": "",
+          "fullRangeOfMotion": "yes",
+          "normalStrengthBilateral": "yes"
+        },
+        "neurologicalConcussionBaseline": {
+          "totalConcussions": null,
+          "concussionLastSixMonths": "no",
+          "mostRecentConcussionDate": "",
+          "ongoingPostConcussiveSymptoms": "no",
+          "historyOfSeizures": "no",
+          "stinger": "no",
+          "historyOfHeadOrNeckSurgery": "",
+          "baselineHeadachesOrMigraine": ""
+        },
+        "visionSkin": {
+          "correctiveLensesWorn": "",
+          "monocularAthlete": "no",
+          "protectiveEyewearAvailable": "",
+          "activeSkinInfection": "",
+          "activeSkinInfectionDetails": "",
+          "herpesGladiatorum": "no",
+          "impetigoOrMRSA": "no",
+          "openWoundsOrLesions": "no"
+        },
+        "clearanceDecision": {
+          "preferredClearance": "",
+          "clearanceConditions": "",
+          "followUpRequired": "",
+          "clinicianName": "",
+          "clinicianSignatureDate": "",
+          "additionalNotes": ""
+        }
+      },
+      "expected": {
+        "clearance": "conditional",
+        "firedRules": [
+          {
+            "id": "PPE-001",
+            "category": "Medical History",
+            "description": "Chronic illness reported — confirm management is optimised before sport.",
+            "grade": 2
+          }
+        ]
+      }
+    },
+    {
+      "name": "not-cleared",
+      "description": "Exertional chest pain reported (grade 4 red flag): not cleared — cardiology evaluation required before participation.",
+      "state": {
+        "demographics": {
+          "firstName": "",
+          "lastName": "",
+          "dateOfBirth": "",
+          "sex": "male",
+          "weight": null,
+          "height": null,
+          "bmi": null,
+          "emergencyContactName": "",
+          "emergencyContactPhone": ""
+        },
+        "sportPositionDetails": {
+          "primarySport": "rugby",
+          "primaryPosition": "",
+          "contactLevel": "high",
+          "secondarySports": "",
+          "competitiveLevel": "",
+          "hoursPerWeek": null,
+          "previousClearanceIssue": "",
+          "previousClearanceDetails": ""
+        },
+        "medicalHistory": {
+          "chronicIllness": "no",
+          "chronicIllnessDetails": "",
+          "currentMedications": "",
+          "currentMedicationDetails": "",
+          "allergiesKnown": "",
+          "allergyDetails": "",
+          "priorSurgery": "",
+          "priorSurgeryDetails": "",
+          "hospitalisedLastYear": "no",
+          "asthmaOrExerciseInducedBronchospasm": "no",
+          "diabetes": "no",
+          "sickleCellTraitOrDisease": "no",
+          "heatIllnessHistory": "no",
+          "eatingDisorderHistory": "no"
+        },
+        "familyHistory": {
+          "suddenCardiacDeathUnder50": "no",
+          "suddenCardiacDeathRelation": "",
+          "hypertrophicCardiomyopathy": "no",
+          "marfanSyndrome": "no",
+          "longQTSyndrome": "no",
+          "arrhythmiaOrPacemaker": "no",
+          "unexplainedSeizureOrFainting": "no"
+        },
+        "menstrualHistoryREDS": {
+          "applicable": false,
+          "ageAtMenarche": null,
+          "regularPeriods": "",
+          "amenorrhoeaSixMonths": "",
+          "cyclesLast12Months": null,
+          "restrictiveEatingPattern": "",
+          "stressFractureHistory": "",
+          "lowEnergyAvailabilityConcern": ""
+        },
+        "cardiovascularScreening": {
+          "chestPainWithExertion": "yes",
+          "unexplainedSyncope": "no",
+          "excessiveBreathlessness": "no",
+          "palpitationsOrIrregularBeat": "no",
+          "highBloodPressureDiagnosis": "no",
+          "heartMurmurDetected": "no",
+          "restrictedActivityForHeart": "no",
+          "restingSystolic": 126,
+          "restingDiastolic": 80,
+          "restingHeartRate": 66
+        },
+        "musculoskeletalScreening": {
+          "uncorrectedMajorInjury": "no",
+          "majorInjuryDetails": "",
+          "jointInstability": "no",
+          "jointInstabilityDetails": "",
+          "ongoingPainOrSwelling": "no",
+          "chronicJointDisease": "",
+          "useBraceOrAssistiveDevice": "",
+          "fullRangeOfMotion": "yes",
+          "normalStrengthBilateral": "yes"
+        },
+        "neurologicalConcussionBaseline": {
+          "totalConcussions": null,
+          "concussionLastSixMonths": "no",
+          "mostRecentConcussionDate": "",
+          "ongoingPostConcussiveSymptoms": "no",
+          "historyOfSeizures": "no",
+          "stinger": "no",
+          "historyOfHeadOrNeckSurgery": "",
+          "baselineHeadachesOrMigraine": ""
+        },
+        "visionSkin": {
+          "correctiveLensesWorn": "",
+          "monocularAthlete": "no",
+          "protectiveEyewearAvailable": "",
+          "activeSkinInfection": "",
+          "activeSkinInfectionDetails": "",
+          "herpesGladiatorum": "no",
+          "impetigoOrMRSA": "no",
+          "openWoundsOrLesions": "no"
+        },
+        "clearanceDecision": {
+          "preferredClearance": "",
+          "clearanceConditions": "",
+          "followUpRequired": "",
+          "clinicianName": "",
+          "clinicianSignatureDate": "",
+          "additionalNotes": ""
+        }
+      },
+      "expected": {
+        "clearance": "not-cleared",
+        "firedRules": [
+          {
+            "id": "PPE-030",
+            "category": "Cardiovascular",
+            "description": "Chest pain with exertion — cardiology evaluation before clearance.",
+            "grade": 4
+          }
+        ]
+      }
+    }
+  ]
+}

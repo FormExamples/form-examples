@@ -1,0 +1,308 @@
+{
+  "engine": "front-end-with-html",
+  "note": "Realistic filled-in states in the MEWS scoring engine's shape. `expected` is computed by `bin/test-personas --update` and verified by `bin/test-personas`.",
+  "personas": [
+    {
+      "name": "low-routine",
+      "description": "All parameters within normal range: MEWS aggregate 0 — low risk, routine ward observations.",
+      "state": {
+        "context": {
+          "clinicianName": "",
+          "clinicianRole": "nurse",
+          "observedAt": "",
+          "careSetting": "acute-ward",
+          "wardLocation": ""
+        },
+        "identification": {
+          "patientIdentifier": "",
+          "ageBand": "40-59",
+          "sex": "female"
+        },
+        "bloodPressure": {
+          "systolicBloodPressure": 122
+        },
+        "heartRate": {
+          "heartRate": 72
+        },
+        "respiratory": {
+          "respiratoryRate": 14
+        },
+        "temperature": {
+          "temperature": 36.8
+        },
+        "consciousness": {
+          "avpu": "alert"
+        },
+        "summary": {
+          "previousMewsScore": null,
+          "clinicalNotes": ""
+        }
+      },
+      "expected": {
+        "systolicBloodPressurePoint": 0,
+        "heartRatePoint": 0,
+        "respiratoryRatePoint": 0,
+        "temperaturePoint": 0,
+        "avpuPoint": 0,
+        "mewsScore": 0,
+        "riskBand": "low",
+        "singleParameterTrigger": false,
+        "monitoringFrequency": "Routine observations at the standard ward frequency.",
+        "firedParameters": [
+          {
+            "id": "R-SBP-0",
+            "instrument": "systolic-blood-pressure",
+            "points": 0,
+            "band": "",
+            "category": "parameter-sub-score",
+            "description": "Systolic blood pressure 122 mmHg scores 0"
+          },
+          {
+            "id": "R-HR-0",
+            "instrument": "heart-rate",
+            "points": 0,
+            "band": "",
+            "category": "parameter-sub-score",
+            "description": "Heart rate 72 bpm scores 0"
+          },
+          {
+            "id": "R-RR-0",
+            "instrument": "respiratory-rate",
+            "points": 0,
+            "band": "",
+            "category": "parameter-sub-score",
+            "description": "Respiratory rate 14 breaths/min scores 0"
+          },
+          {
+            "id": "R-TEMP-0",
+            "instrument": "temperature",
+            "points": 0,
+            "band": "",
+            "category": "parameter-sub-score",
+            "description": "Temperature 36.8 °C scores 0"
+          },
+          {
+            "id": "R-AVPU-0",
+            "instrument": "avpu",
+            "points": 0,
+            "band": "",
+            "category": "parameter-sub-score",
+            "description": "AVPU Alert scores 0"
+          },
+          {
+            "id": "R-AGGREGATE-low",
+            "instrument": "aggregate",
+            "points": 0,
+            "band": "low",
+            "category": "risk-band",
+            "description": "Aggregate MEWS 0 of 14 — low risk band. Routine observations at the standard ward frequency."
+          }
+        ]
+      }
+    },
+    {
+      "name": "medium-escalate",
+      "description": "Mild hypotension, borderline tachycardia and normal respiratory rate, no single parameter at maximum: MEWS aggregate 3 — medium risk, increased observations.",
+      "state": {
+        "context": {
+          "clinicianName": "",
+          "clinicianRole": "nurse",
+          "observedAt": "",
+          "careSetting": "admissions-unit",
+          "wardLocation": ""
+        },
+        "identification": {
+          "patientIdentifier": "",
+          "ageBand": "60-74",
+          "sex": "male"
+        },
+        "bloodPressure": {
+          "systolicBloodPressure": 95
+        },
+        "heartRate": {
+          "heartRate": 105
+        },
+        "respiratory": {
+          "respiratoryRate": 16
+        },
+        "temperature": {
+          "temperature": 37
+        },
+        "consciousness": {
+          "avpu": "alert"
+        },
+        "summary": {
+          "previousMewsScore": null,
+          "clinicalNotes": ""
+        }
+      },
+      "expected": {
+        "systolicBloodPressurePoint": 1,
+        "heartRatePoint": 1,
+        "respiratoryRatePoint": 1,
+        "temperaturePoint": 0,
+        "avpuPoint": 0,
+        "mewsScore": 3,
+        "riskBand": "medium",
+        "singleParameterTrigger": false,
+        "monitoringFrequency": "Increase observation frequency; inform the nurse in charge; consider medical review.",
+        "firedParameters": [
+          {
+            "id": "R-SBP-1",
+            "instrument": "systolic-blood-pressure",
+            "points": 1,
+            "band": "low",
+            "category": "parameter-sub-score",
+            "description": "Systolic blood pressure 95 mmHg scores 1"
+          },
+          {
+            "id": "R-HR-1",
+            "instrument": "heart-rate",
+            "points": 1,
+            "band": "low",
+            "category": "parameter-sub-score",
+            "description": "Heart rate 105 bpm scores 1"
+          },
+          {
+            "id": "R-RR-1",
+            "instrument": "respiratory-rate",
+            "points": 1,
+            "band": "low",
+            "category": "parameter-sub-score",
+            "description": "Respiratory rate 16 breaths/min scores 1"
+          },
+          {
+            "id": "R-TEMP-0",
+            "instrument": "temperature",
+            "points": 0,
+            "band": "",
+            "category": "parameter-sub-score",
+            "description": "Temperature 37 °C scores 0"
+          },
+          {
+            "id": "R-AVPU-0",
+            "instrument": "avpu",
+            "points": 0,
+            "band": "",
+            "category": "parameter-sub-score",
+            "description": "AVPU Alert scores 0"
+          },
+          {
+            "id": "R-AGGREGATE-medium",
+            "instrument": "aggregate",
+            "points": 0,
+            "band": "medium",
+            "category": "risk-band",
+            "description": "Aggregate MEWS 3 of 14 — medium risk band. Increase observation frequency; inform the nurse in charge; consider medical review."
+          }
+        ]
+      }
+    },
+    {
+      "name": "high-critical",
+      "description": "Profound hypotension, tachycardia, severe tachypnoea, hypothermia and reduced consciousness: MEWS aggregate 13 with single-parameter triggers — high risk, urgent review.",
+      "state": {
+        "context": {
+          "clinicianName": "",
+          "clinicianRole": "doctor",
+          "observedAt": "",
+          "careSetting": "acute-ward",
+          "wardLocation": ""
+        },
+        "identification": {
+          "patientIdentifier": "",
+          "ageBand": "75-plus",
+          "sex": "female"
+        },
+        "bloodPressure": {
+          "systolicBloodPressure": 68
+        },
+        "heartRate": {
+          "heartRate": 132
+        },
+        "respiratory": {
+          "respiratoryRate": 32
+        },
+        "temperature": {
+          "temperature": 34.5
+        },
+        "consciousness": {
+          "avpu": "pain"
+        },
+        "summary": {
+          "previousMewsScore": null,
+          "clinicalNotes": ""
+        }
+      },
+      "expected": {
+        "systolicBloodPressurePoint": 3,
+        "heartRatePoint": 3,
+        "respiratoryRatePoint": 3,
+        "temperaturePoint": 2,
+        "avpuPoint": 2,
+        "mewsScore": 13,
+        "riskBand": "high",
+        "singleParameterTrigger": true,
+        "monitoringFrequency": "Urgent medical review; consider critical-care outreach and continuous monitoring.",
+        "firedParameters": [
+          {
+            "id": "R-SBP-3",
+            "instrument": "systolic-blood-pressure",
+            "points": 3,
+            "band": "high",
+            "category": "parameter-sub-score",
+            "description": "Systolic blood pressure 68 mmHg scores 3"
+          },
+          {
+            "id": "R-HR-3",
+            "instrument": "heart-rate",
+            "points": 3,
+            "band": "high",
+            "category": "parameter-sub-score",
+            "description": "Heart rate 132 bpm scores 3"
+          },
+          {
+            "id": "R-RR-3",
+            "instrument": "respiratory-rate",
+            "points": 3,
+            "band": "high",
+            "category": "parameter-sub-score",
+            "description": "Respiratory rate 32 breaths/min scores 3"
+          },
+          {
+            "id": "R-TEMP-2",
+            "instrument": "temperature",
+            "points": 2,
+            "band": "medium",
+            "category": "parameter-sub-score",
+            "description": "Temperature 34.5 °C scores 2"
+          },
+          {
+            "id": "R-AVPU-2",
+            "instrument": "avpu",
+            "points": 2,
+            "band": "medium",
+            "category": "parameter-sub-score",
+            "description": "AVPU responds to pain scores 2"
+          },
+          {
+            "id": "R-AGGREGATE-high",
+            "instrument": "aggregate",
+            "points": 0,
+            "band": "high",
+            "category": "risk-band",
+            "description": "Aggregate MEWS 13 of 14 — high risk band. Urgent medical review; consider critical-care outreach and continuous monitoring."
+          },
+          {
+            "id": "R-SINGLE-PARAMETER-3",
+            "instrument": "single-parameter",
+            "points": 3,
+            "band": "high",
+            "category": "single-parameter-trigger",
+            "description": "Single-parameter trigger: systolic-blood-pressure, heart-rate, respiratory-rate scored 3 — urgent medical review regardless of aggregate."
+          }
+        ]
+      }
+    }
+  ]
+}

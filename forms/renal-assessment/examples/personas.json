@@ -1,0 +1,493 @@
+{
+  "engine": "front-end-with-html",
+  "graderHint": "calculateKdigo",
+  "note": "Realistic filled-in states in the scoring engine's shape. `expected` is computed by `bin/test-personas --update` and verified by `bin/test-personas`.",
+  "personas": [
+    {
+      "name": "low-risk-g1a1",
+      "description": "Preserved eGFR 95 with normal albuminuria (ACR 1.5): KDIGO G1 A1 — low composite risk.",
+      "state": {
+        "demographics": {
+          "firstName": "",
+          "lastName": "",
+          "dateOfBirth": "",
+          "sex": "female",
+          "ethnicity": "",
+          "age": 52,
+          "weight": null,
+          "height": null,
+          "bmi": null
+        },
+        "presentingSymptoms": {
+          "fatigue": "",
+          "edema": "",
+          "foamyUrine": "",
+          "nocturia": "",
+          "hematuria": "",
+          "flankPain": "",
+          "reducedUrineOutput": "",
+          "pruritus": "",
+          "nauseaVomiting": "",
+          "appetiteLoss": "",
+          "dyspnea": "",
+          "confusion": "",
+          "symptomDuration": "",
+          "otherSymptoms": ""
+        },
+        "ckdRiskFactors": {
+          "hypertension": "",
+          "diabetes": "",
+          "diabetesType": "",
+          "cardiovascularDisease": "",
+          "familyHistoryCkd": "",
+          "familyHistoryPolycysticKidney": "",
+          "priorAki": "",
+          "kidneyStones": "",
+          "recurrentUti": "",
+          "autoimmuneDisease": "",
+          "autoimmuneDetails": "",
+          "nephrotoxicDrugs": "",
+          "nephrotoxicDrugDetails": "",
+          "nsaidUse": "",
+          "smoking": "",
+          "obesity": ""
+        },
+        "physicalExamination": {
+          "systolicBp": null,
+          "diastolicBp": null,
+          "heartRate": null,
+          "peripheralEdema": "",
+          "pulmonaryEdema": "",
+          "jvdElevated": "",
+          "pallor": "",
+          "uremicSkin": "",
+          "flankTenderness": "",
+          "palpableKidneys": "",
+          "bladderDistension": "",
+          "examNotes": ""
+        },
+        "bloodTests": {
+          "serumCreatinine": 68,
+          "egfr": 95,
+          "bun": null,
+          "sodium": null,
+          "potassium": null,
+          "chloride": null,
+          "bicarbonate": null,
+          "calcium": null,
+          "phosphate": null,
+          "magnesium": null,
+          "albumin": null,
+          "hemoglobin": null,
+          "hba1c": null,
+          "pth": null,
+          "vitaminD": null,
+          "testDate": ""
+        },
+        "urineTests": {
+          "acr": 1.5,
+          "pcr": null,
+          "dipstickProtein": "",
+          "dipstickBlood": "",
+          "dipstickGlucose": "",
+          "dipstickLeukocytes": "",
+          "dipstickNitrites": "",
+          "microscopyCasts": "",
+          "castType": "",
+          "testDate": ""
+        },
+        "imagingBiopsy": {
+          "renalUltrasoundDone": "",
+          "ultrasoundFindings": "",
+          "rightKidneyLengthMm": null,
+          "leftKidneyLengthMm": null,
+          "cysts": "",
+          "hydronephrosis": "",
+          "stones": "",
+          "ctOrMri": "",
+          "ctMriFindings": "",
+          "biopsyDone": "",
+          "biopsyResult": "",
+          "biopsyDate": ""
+        },
+        "medicationReview": {
+          "currentMedications": [],
+          "aceiArb": "",
+          "sglt2Inhibitor": "",
+          "diuretic": "",
+          "statin": "",
+          "phosphateBinder": "",
+          "erythropoietinAgent": "",
+          "doseAdjustmentsNeeded": "",
+          "doseAdjustmentDetails": "",
+          "contrastImagingPlanned": "",
+          "medicationNotes": ""
+        },
+        "clinicalImpression": {
+          "gfrCategory": "",
+          "albuminuriaCategory": "",
+          "suspectedEtiology": "",
+          "aksuperimposedOnCkd": "",
+          "nephrologyReferral": "",
+          "referralUrgency": "",
+          "dialysisDiscussionNeeded": "",
+          "transplantCandidate": "",
+          "managementPlan": "",
+          "followUpInterval": "",
+          "clinicianNotes": ""
+        }
+      },
+      "expected": {
+        "gfrCategory": "G1",
+        "albuminuriaCategory": "A1",
+        "riskLevel": "low",
+        "egfr": 95,
+        "acr": 1.5,
+        "firedRules": [
+          {
+            "id": "KDIGO-001",
+            "category": "GFR Category",
+            "description": "GFR stage derived from eGFR (mL/min/1.73 m^2).",
+            "value": "G1: Normal or high (>=90)"
+          },
+          {
+            "id": "KDIGO-002",
+            "category": "Albuminuria Category",
+            "description": "Albuminuria stage derived from urine ACR (mg/mmol).",
+            "value": "A1: Normal to mildly increased (<3 mg/mmol)"
+          },
+          {
+            "id": "KDIGO-003",
+            "category": "Composite Risk",
+            "description": "KDIGO composite risk from GFR x Albuminuria heatmap.",
+            "value": "Low risk"
+          }
+        ]
+      }
+    },
+    {
+      "name": "high-risk-g3a-a2",
+      "description": "Moderately reduced eGFR 50 with moderate albuminuria (ACR 12): KDIGO G3a A2 — high composite risk.",
+      "state": {
+        "demographics": {
+          "firstName": "",
+          "lastName": "",
+          "dateOfBirth": "",
+          "sex": "male",
+          "ethnicity": "",
+          "age": 67,
+          "weight": null,
+          "height": null,
+          "bmi": null
+        },
+        "presentingSymptoms": {
+          "fatigue": "",
+          "edema": "",
+          "foamyUrine": "",
+          "nocturia": "",
+          "hematuria": "",
+          "flankPain": "",
+          "reducedUrineOutput": "",
+          "pruritus": "",
+          "nauseaVomiting": "",
+          "appetiteLoss": "",
+          "dyspnea": "",
+          "confusion": "",
+          "symptomDuration": "",
+          "otherSymptoms": ""
+        },
+        "ckdRiskFactors": {
+          "hypertension": "",
+          "diabetes": "",
+          "diabetesType": "",
+          "cardiovascularDisease": "",
+          "familyHistoryCkd": "",
+          "familyHistoryPolycysticKidney": "",
+          "priorAki": "",
+          "kidneyStones": "",
+          "recurrentUti": "",
+          "autoimmuneDisease": "",
+          "autoimmuneDetails": "",
+          "nephrotoxicDrugs": "",
+          "nephrotoxicDrugDetails": "",
+          "nsaidUse": "",
+          "smoking": "",
+          "obesity": ""
+        },
+        "physicalExamination": {
+          "systolicBp": null,
+          "diastolicBp": null,
+          "heartRate": null,
+          "peripheralEdema": "",
+          "pulmonaryEdema": "",
+          "jvdElevated": "",
+          "pallor": "",
+          "uremicSkin": "",
+          "flankTenderness": "",
+          "palpableKidneys": "",
+          "bladderDistension": "",
+          "examNotes": ""
+        },
+        "bloodTests": {
+          "serumCreatinine": 148,
+          "egfr": 50,
+          "bun": null,
+          "sodium": null,
+          "potassium": null,
+          "chloride": null,
+          "bicarbonate": null,
+          "calcium": null,
+          "phosphate": null,
+          "magnesium": null,
+          "albumin": null,
+          "hemoglobin": null,
+          "hba1c": null,
+          "pth": null,
+          "vitaminD": null,
+          "testDate": ""
+        },
+        "urineTests": {
+          "acr": 12,
+          "pcr": null,
+          "dipstickProtein": "",
+          "dipstickBlood": "",
+          "dipstickGlucose": "",
+          "dipstickLeukocytes": "",
+          "dipstickNitrites": "",
+          "microscopyCasts": "",
+          "castType": "",
+          "testDate": ""
+        },
+        "imagingBiopsy": {
+          "renalUltrasoundDone": "",
+          "ultrasoundFindings": "",
+          "rightKidneyLengthMm": null,
+          "leftKidneyLengthMm": null,
+          "cysts": "",
+          "hydronephrosis": "",
+          "stones": "",
+          "ctOrMri": "",
+          "ctMriFindings": "",
+          "biopsyDone": "",
+          "biopsyResult": "",
+          "biopsyDate": ""
+        },
+        "medicationReview": {
+          "currentMedications": [],
+          "aceiArb": "",
+          "sglt2Inhibitor": "",
+          "diuretic": "",
+          "statin": "",
+          "phosphateBinder": "",
+          "erythropoietinAgent": "",
+          "doseAdjustmentsNeeded": "",
+          "doseAdjustmentDetails": "",
+          "contrastImagingPlanned": "",
+          "medicationNotes": ""
+        },
+        "clinicalImpression": {
+          "gfrCategory": "",
+          "albuminuriaCategory": "",
+          "suspectedEtiology": "",
+          "aksuperimposedOnCkd": "",
+          "nephrologyReferral": "",
+          "referralUrgency": "",
+          "dialysisDiscussionNeeded": "",
+          "transplantCandidate": "",
+          "managementPlan": "",
+          "followUpInterval": "",
+          "clinicianNotes": ""
+        }
+      },
+      "expected": {
+        "gfrCategory": "G3a",
+        "albuminuriaCategory": "A2",
+        "riskLevel": "high",
+        "egfr": 50,
+        "acr": 12,
+        "firedRules": [
+          {
+            "id": "KDIGO-001",
+            "category": "GFR Category",
+            "description": "GFR stage derived from eGFR (mL/min/1.73 m^2).",
+            "value": "G3a: Mild to moderately decreased (45-59)"
+          },
+          {
+            "id": "KDIGO-002",
+            "category": "Albuminuria Category",
+            "description": "Albuminuria stage derived from urine ACR (mg/mmol).",
+            "value": "A2: Moderately increased (3-30 mg/mmol)"
+          },
+          {
+            "id": "KDIGO-003",
+            "category": "Composite Risk",
+            "description": "KDIGO composite risk from GFR x Albuminuria heatmap.",
+            "value": "High risk"
+          }
+        ]
+      }
+    },
+    {
+      "name": "very-high-risk-g4a3",
+      "description": "Severely reduced eGFR 22 with severe albuminuria (ACR 45): KDIGO G4 A3 — very high composite risk, nephrology referral.",
+      "state": {
+        "demographics": {
+          "firstName": "",
+          "lastName": "",
+          "dateOfBirth": "",
+          "sex": "male",
+          "ethnicity": "",
+          "age": 71,
+          "weight": null,
+          "height": null,
+          "bmi": null
+        },
+        "presentingSymptoms": {
+          "fatigue": "",
+          "edema": "",
+          "foamyUrine": "",
+          "nocturia": "",
+          "hematuria": "",
+          "flankPain": "",
+          "reducedUrineOutput": "",
+          "pruritus": "",
+          "nauseaVomiting": "",
+          "appetiteLoss": "",
+          "dyspnea": "",
+          "confusion": "",
+          "symptomDuration": "",
+          "otherSymptoms": ""
+        },
+        "ckdRiskFactors": {
+          "hypertension": "",
+          "diabetes": "",
+          "diabetesType": "",
+          "cardiovascularDisease": "",
+          "familyHistoryCkd": "",
+          "familyHistoryPolycysticKidney": "",
+          "priorAki": "",
+          "kidneyStones": "",
+          "recurrentUti": "",
+          "autoimmuneDisease": "",
+          "autoimmuneDetails": "",
+          "nephrotoxicDrugs": "",
+          "nephrotoxicDrugDetails": "",
+          "nsaidUse": "",
+          "smoking": "",
+          "obesity": ""
+        },
+        "physicalExamination": {
+          "systolicBp": null,
+          "diastolicBp": null,
+          "heartRate": null,
+          "peripheralEdema": "",
+          "pulmonaryEdema": "",
+          "jvdElevated": "",
+          "pallor": "",
+          "uremicSkin": "",
+          "flankTenderness": "",
+          "palpableKidneys": "",
+          "bladderDistension": "",
+          "examNotes": ""
+        },
+        "bloodTests": {
+          "serumCreatinine": 265,
+          "egfr": 22,
+          "bun": null,
+          "sodium": null,
+          "potassium": null,
+          "chloride": null,
+          "bicarbonate": null,
+          "calcium": null,
+          "phosphate": null,
+          "magnesium": null,
+          "albumin": null,
+          "hemoglobin": null,
+          "hba1c": null,
+          "pth": null,
+          "vitaminD": null,
+          "testDate": ""
+        },
+        "urineTests": {
+          "acr": 45,
+          "pcr": null,
+          "dipstickProtein": "",
+          "dipstickBlood": "",
+          "dipstickGlucose": "",
+          "dipstickLeukocytes": "",
+          "dipstickNitrites": "",
+          "microscopyCasts": "",
+          "castType": "",
+          "testDate": ""
+        },
+        "imagingBiopsy": {
+          "renalUltrasoundDone": "",
+          "ultrasoundFindings": "",
+          "rightKidneyLengthMm": null,
+          "leftKidneyLengthMm": null,
+          "cysts": "",
+          "hydronephrosis": "",
+          "stones": "",
+          "ctOrMri": "",
+          "ctMriFindings": "",
+          "biopsyDone": "",
+          "biopsyResult": "",
+          "biopsyDate": ""
+        },
+        "medicationReview": {
+          "currentMedications": [],
+          "aceiArb": "",
+          "sglt2Inhibitor": "",
+          "diuretic": "",
+          "statin": "",
+          "phosphateBinder": "",
+          "erythropoietinAgent": "",
+          "doseAdjustmentsNeeded": "",
+          "doseAdjustmentDetails": "",
+          "contrastImagingPlanned": "",
+          "medicationNotes": ""
+        },
+        "clinicalImpression": {
+          "gfrCategory": "",
+          "albuminuriaCategory": "",
+          "suspectedEtiology": "",
+          "aksuperimposedOnCkd": "",
+          "nephrologyReferral": "",
+          "referralUrgency": "",
+          "dialysisDiscussionNeeded": "",
+          "transplantCandidate": "",
+          "managementPlan": "",
+          "followUpInterval": "",
+          "clinicianNotes": ""
+        }
+      },
+      "expected": {
+        "gfrCategory": "G4",
+        "albuminuriaCategory": "A3",
+        "riskLevel": "very-high",
+        "egfr": 22,
+        "acr": 45,
+        "firedRules": [
+          {
+            "id": "KDIGO-001",
+            "category": "GFR Category",
+            "description": "GFR stage derived from eGFR (mL/min/1.73 m^2).",
+            "value": "G4: Severely decreased (15-29)"
+          },
+          {
+            "id": "KDIGO-002",
+            "category": "Albuminuria Category",
+            "description": "Albuminuria stage derived from urine ACR (mg/mmol).",
+            "value": "A3: Severely increased (>30 mg/mmol)"
+          },
+          {
+            "id": "KDIGO-003",
+            "category": "Composite Risk",
+            "description": "KDIGO composite risk from GFR x Albuminuria heatmap.",
+            "value": "Very high risk"
+          }
+        ]
+      }
+    }
+  ]
+}

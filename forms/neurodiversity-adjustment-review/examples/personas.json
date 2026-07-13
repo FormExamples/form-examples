@@ -1,0 +1,339 @@
+{
+  "engine": "front-end-with-html",
+  "note": "Realistic filled-in states in the neurodiversity adjustment review grader's shape (effectiveness / wellbeing-risk / completeness / next-step). `expected` is computed by `bin/test-personas --update`.",
+  "personas": [
+    {
+      "name": "effective-maintain",
+      "description": "Every adjustment working well, worker satisfied and wellbeing improved: effectiveness effective, wellbeing ok — maintain current arrangements.",
+      "state": {
+        "manager": {
+          "name": "J. Fielding",
+          "role": "",
+          "jobTitle": "",
+          "department": "",
+          "email": "",
+          "phone": ""
+        },
+        "worker": {
+          "name": "Sam Reyes",
+          "jobTitle": "",
+          "department": "",
+          "employeeReference": "",
+          "email": "",
+          "phone": ""
+        },
+        "review": {
+          "reviewStatus": "completed",
+          "responseReference": "",
+          "reviewMethod": "meeting",
+          "reviewDate": "2026-05-10",
+          "nextReviewDate": "2026-11-10"
+        },
+        "effectiveness": {
+          "effectivenessWorkingEnvironment": "working-well",
+          "effectivenessEquipmentTechnology": "working-well",
+          "effectivenessWorkingArrangements": "working-well",
+          "effectivenessCommunication": "working-well",
+          "effectivenessSupportMentoring": "working-well",
+          "effectivenessRecruitmentProcess": "not-in-place",
+          "effectivenessPolicyDress": "not-in-place",
+          "effectivenessOther": "not-in-place"
+        },
+        "experience": {
+          "workerFeedback": "Adjustments are working; feeling well supported.",
+          "workerSatisfied": "yes",
+          "wellbeingChange": "improved",
+          "barriersDetail": ""
+        },
+        "changes": {
+          "changesNeeded": false,
+          "changesDetail": "",
+          "updatedAdjustmentsDetail": "",
+          "occupationalHealthRereferral": false
+        },
+        "meta": {
+          "escalated": false,
+          "escalationDetail": "",
+          "notes": ""
+        }
+      },
+      "expected": {
+        "effectivenessBand": "effective",
+        "wellbeingRiskBand": "ok",
+        "completenessPercent": 100,
+        "nextStepUrgency": "review-scheduled",
+        "targetTimeframe": "2026-11-10",
+        "recommendation": "maintain",
+        "recommendationLabel": "Maintain the current adjustments",
+        "firedRules": [
+          {
+            "ruleId": "R-EFFECT-EFFECTIVE",
+            "axis": "effectiveness",
+            "category": "effective",
+            "description": "All rated adjustments are working well."
+          },
+          {
+            "ruleId": "R-WELL-OK",
+            "axis": "wellbeing",
+            "category": "ok",
+            "description": "No wellbeing risk detected from the review."
+          },
+          {
+            "ruleId": "R-NEXT-REVIEW-SCHEDULED",
+            "axis": "next-step",
+            "category": "review-scheduled",
+            "description": "Next review is scheduled."
+          }
+        ],
+        "flags": []
+      }
+    },
+    {
+      "name": "partially-effective-adjust",
+      "description": "Some adjustments only partially working and the worker partially satisfied, with changes needed: effectiveness partially-effective, wellbeing caution — refine adjustments.",
+      "state": {
+        "manager": {
+          "name": "J. Fielding",
+          "role": "",
+          "jobTitle": "",
+          "department": "",
+          "email": "",
+          "phone": ""
+        },
+        "worker": {
+          "name": "Alex Doyle",
+          "jobTitle": "",
+          "department": "",
+          "employeeReference": "",
+          "email": "",
+          "phone": ""
+        },
+        "review": {
+          "reviewStatus": "completed",
+          "responseReference": "",
+          "reviewMethod": "meeting",
+          "reviewDate": "2026-05-12",
+          "nextReviewDate": "2026-08-12"
+        },
+        "effectiveness": {
+          "effectivenessWorkingEnvironment": "working-well",
+          "effectivenessEquipmentTechnology": "partial",
+          "effectivenessWorkingArrangements": "partial",
+          "effectivenessCommunication": "working-well",
+          "effectivenessSupportMentoring": "partial",
+          "effectivenessRecruitmentProcess": "not-in-place",
+          "effectivenessPolicyDress": "not-in-place",
+          "effectivenessOther": "not-in-place"
+        },
+        "experience": {
+          "workerFeedback": "Noise-cancelling helps but flexible hours are not consistently honoured.",
+          "workerSatisfied": "partially",
+          "wellbeingChange": "unchanged",
+          "barriersDetail": ""
+        },
+        "changes": {
+          "changesNeeded": true,
+          "changesDetail": "Reconfirm flexible-hours arrangement with the team.",
+          "updatedAdjustmentsDetail": "",
+          "occupationalHealthRereferral": false
+        },
+        "meta": {
+          "escalated": false,
+          "escalationDetail": "",
+          "notes": ""
+        }
+      },
+      "expected": {
+        "effectivenessBand": "partially-effective",
+        "wellbeingRiskBand": "caution",
+        "completenessPercent": 100,
+        "nextStepUrgency": "adjust-now",
+        "targetTimeframe": "Within 2 weeks",
+        "recommendation": "adjust-adjustments",
+        "recommendationLabel": "Adjust the adjustments",
+        "firedRules": [
+          {
+            "ruleId": "R-EFFECT-PARTIAL",
+            "axis": "effectiveness",
+            "category": "partially-effective",
+            "description": "A mix of working and not-fully-working adjustments."
+          },
+          {
+            "ruleId": "R-WELL-PARTIAL-SATISFACTION",
+            "axis": "wellbeing",
+            "category": "caution",
+            "description": "Worker is only partially satisfied."
+          },
+          {
+            "ruleId": "R-NEXT-CHANGES",
+            "axis": "next-step",
+            "category": "adjust-now",
+            "description": "A failing adjustment or an agreed change needs action."
+          }
+        ],
+        "flags": [
+          {
+            "flagId": "F-WORKER-DISSATISFIED-001",
+            "category": "worker-dissatisfied",
+            "priority": "medium",
+            "description": "The worker is only partially satisfied.",
+            "suggestedAction": "Explore improvements with the worker."
+          }
+        ]
+      }
+    },
+    {
+      "name": "ineffective-escalate",
+      "description": "Adjustments not working, worker dissatisfied and wellbeing worse, review escalated: effectiveness ineffective, wellbeing high-risk — escalate to HR.",
+      "state": {
+        "manager": {
+          "name": "J. Fielding",
+          "role": "",
+          "jobTitle": "",
+          "department": "",
+          "email": "",
+          "phone": ""
+        },
+        "worker": {
+          "name": "Morgan Lee",
+          "jobTitle": "",
+          "department": "",
+          "employeeReference": "",
+          "email": "",
+          "phone": ""
+        },
+        "review": {
+          "reviewStatus": "escalated",
+          "responseReference": "",
+          "reviewMethod": "hr-review",
+          "reviewDate": "2026-05-14",
+          "nextReviewDate": ""
+        },
+        "effectiveness": {
+          "effectivenessWorkingEnvironment": "not-working",
+          "effectivenessEquipmentTechnology": "not-working",
+          "effectivenessWorkingArrangements": "not-working",
+          "effectivenessCommunication": "not-working",
+          "effectivenessSupportMentoring": "not-working",
+          "effectivenessRecruitmentProcess": "not-in-place",
+          "effectivenessPolicyDress": "not-in-place",
+          "effectivenessOther": "not-in-place"
+        },
+        "experience": {
+          "workerFeedback": "Adjustments have broken down and my workload is unmanageable.",
+          "workerSatisfied": "no",
+          "wellbeingChange": "worse",
+          "barriersDetail": ""
+        },
+        "changes": {
+          "changesNeeded": true,
+          "changesDetail": "",
+          "updatedAdjustmentsDetail": "",
+          "occupationalHealthRereferral": true
+        },
+        "meta": {
+          "escalated": true,
+          "escalationDetail": "Escalated to HR for formal reasonable-adjustments review.",
+          "notes": ""
+        }
+      },
+      "expected": {
+        "effectivenessBand": "ineffective",
+        "wellbeingRiskBand": "high-risk",
+        "completenessPercent": 88,
+        "nextStepUrgency": "escalate",
+        "targetTimeframe": "Escalate now",
+        "recommendation": "escalate-to-hr",
+        "recommendationLabel": "Escalate to HR",
+        "firedRules": [
+          {
+            "ruleId": "R-EFFECT-INEFFECTIVE",
+            "axis": "effectiveness",
+            "category": "ineffective",
+            "description": "No adjustment is working well and at least one is not working."
+          },
+          {
+            "ruleId": "R-WELL-ESCALATED",
+            "axis": "wellbeing",
+            "category": "high-risk",
+            "description": "Matter escalated."
+          },
+          {
+            "ruleId": "R-WELL-DECLINED",
+            "axis": "wellbeing",
+            "category": "high-risk",
+            "description": "Worker's wellbeing has worsened since the adjustments."
+          },
+          {
+            "ruleId": "R-WELL-DISSATISFIED",
+            "axis": "wellbeing",
+            "category": "high-risk",
+            "description": "Worker is not satisfied the adjustments meet their needs."
+          },
+          {
+            "ruleId": "R-WELL-NOT-WORKING",
+            "axis": "wellbeing",
+            "category": "caution",
+            "description": "At least one adjustment is not working."
+          },
+          {
+            "ruleId": "R-COMPLETE-NEXT-REVIEW",
+            "axis": "completeness",
+            "category": "missing-field",
+            "description": "Mandatory review field missing: next review date."
+          },
+          {
+            "ruleId": "R-NEXT-ESCALATED",
+            "axis": "next-step",
+            "category": "escalate",
+            "description": "Escalation in progress — follow the escalation procedure."
+          }
+        ],
+        "flags": [
+          {
+            "flagId": "F-ADJUSTMENTS-NOT-WORKING-001",
+            "category": "adjustments-not-working",
+            "priority": "high",
+            "description": "An agreed adjustment is no longer working.",
+            "suggestedAction": "Act promptly; update the adjustment or consider an occupational-health re-referral."
+          },
+          {
+            "flagId": "F-WORKER-DISSATISFIED-001",
+            "category": "worker-dissatisfied",
+            "priority": "high",
+            "description": "The worker is not satisfied the adjustments meet their needs.",
+            "suggestedAction": "Explore what would work with the worker."
+          },
+          {
+            "flagId": "F-WELLBEING-DECLINED-001",
+            "category": "wellbeing-declined",
+            "priority": "high",
+            "description": "The worker's wellbeing has worsened since the adjustments.",
+            "suggestedAction": "Review the adjustments and consider occupational-health input."
+          },
+          {
+            "flagId": "F-ESCALATION-001",
+            "category": "escalation",
+            "priority": "high",
+            "description": "The matter has been escalated.",
+            "suggestedAction": "Follow the escalation / grievance procedure."
+          },
+          {
+            "flagId": "F-CHANGES-OUTSTANDING-001",
+            "category": "changes-outstanding",
+            "priority": "medium",
+            "description": "Changes are needed but not yet detailed.",
+            "suggestedAction": "Record and action the required changes."
+          },
+          {
+            "flagId": "F-NO-NEXT-REVIEW-001",
+            "category": "no-next-review",
+            "priority": "medium",
+            "description": "No next review date has been set.",
+            "suggestedAction": "Schedule the next review."
+          }
+        ]
+      }
+    }
+  ]
+}

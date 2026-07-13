@@ -1,0 +1,300 @@
+{
+  "engine": "front-end-with-html",
+  "note": "Realistic filled-in states in the NIPE grader's shape (four key screening components rolled up to an overall outcome). `expected` is computed by `bin/test-personas --update`.",
+  "personas": [
+    {
+      "name": "satisfactory-complete",
+      "description": "Normal newborn examination across all key components (female — testes not applicable): overall outcome satisfactory, screening complete.",
+      "state": {
+        "context": {
+          "practitionerName": "",
+          "practitionerRole": "midwife",
+          "examinedAt": "",
+          "examinationContext": "newborn-72h",
+          "careSetting": "maternity-ward"
+        },
+        "identification": {
+          "babyIdentifier": "",
+          "babyName": "",
+          "dateOfBirth": "",
+          "sex": "female",
+          "gestationalAgeWeeks": 40,
+          "birthWeightGrams": 3400
+        },
+        "riskFactors": {
+          "breechPresentation": "no",
+          "familyHistoryHipProblems": "no",
+          "antenatalConcerns": ""
+        },
+        "eyes": {
+          "eyesRedReflexRight": "present",
+          "eyesRedReflexLeft": "present",
+          "eyesAppearance": "normal"
+        },
+        "heart": {
+          "heartMurmur": "none",
+          "femoralPulsesRight": "present",
+          "femoralPulsesLeft": "present",
+          "centralCyanosis": "absent",
+          "oxygenSaturationPreductal": 98,
+          "oxygenSaturationPostductal": 97
+        },
+        "hips": {
+          "barlowTest": "negative",
+          "ortolaniTest": "negative",
+          "hipAbduction": "normal"
+        },
+        "testes": {
+          "testisRight": "",
+          "testisLeft": ""
+        },
+        "systematic": {
+          "generalAppearance": "",
+          "skin": "",
+          "headAndFontanelles": "",
+          "faceAndPalate": "",
+          "neckAndClavicles": "",
+          "chestAndLungs": "",
+          "abdomen": "",
+          "genitalia": "",
+          "anusAndSpine": "",
+          "limbsAndDigits": "",
+          "feet": "",
+          "toneAndMovement": "",
+          "weightGrams": null,
+          "headCircumferenceCm": null,
+          "lengthCm": null
+        },
+        "summary": {
+          "eyesResultRecorded": "",
+          "heartResultRecorded": "",
+          "hipsResultRecorded": "",
+          "testesResultRecorded": "",
+          "clinicalNote": "Well baby, examination unremarkable."
+        }
+      },
+      "expected": {
+        "eyesResult": "satisfactory",
+        "heartResult": "satisfactory",
+        "hipsResult": "satisfactory",
+        "testesResult": "not-applicable",
+        "overallOutcome": "satisfactory",
+        "completeness": "complete",
+        "completenessPercent": 100,
+        "referrals": [],
+        "firedRules": [
+          {
+            "id": "R-OVERALL-01",
+            "component": "overall",
+            "category": "outcome-rollup",
+            "description": "All applicable key components examined and Satisfactory"
+          }
+        ]
+      }
+    },
+    {
+      "name": "refer-routine-hips",
+      "description": "Normal examination but breech presentation triggers a routine hip-ultrasound pathway (male, testes descended): overall outcome refer.",
+      "state": {
+        "context": {
+          "practitionerName": "",
+          "practitionerRole": "midwife",
+          "examinedAt": "",
+          "examinationContext": "newborn-72h",
+          "careSetting": "maternity-ward"
+        },
+        "identification": {
+          "babyIdentifier": "",
+          "babyName": "",
+          "dateOfBirth": "",
+          "sex": "male",
+          "gestationalAgeWeeks": 39,
+          "birthWeightGrams": 3500
+        },
+        "riskFactors": {
+          "breechPresentation": "yes",
+          "familyHistoryHipProblems": "no",
+          "antenatalConcerns": ""
+        },
+        "eyes": {
+          "eyesRedReflexRight": "present",
+          "eyesRedReflexLeft": "present",
+          "eyesAppearance": "normal"
+        },
+        "heart": {
+          "heartMurmur": "none",
+          "femoralPulsesRight": "present",
+          "femoralPulsesLeft": "present",
+          "centralCyanosis": "absent",
+          "oxygenSaturationPreductal": 99,
+          "oxygenSaturationPostductal": 98
+        },
+        "hips": {
+          "barlowTest": "negative",
+          "ortolaniTest": "negative",
+          "hipAbduction": "normal"
+        },
+        "testes": {
+          "testisRight": "descended",
+          "testisLeft": "descended"
+        },
+        "systematic": {
+          "generalAppearance": "",
+          "skin": "",
+          "headAndFontanelles": "",
+          "faceAndPalate": "",
+          "neckAndClavicles": "",
+          "chestAndLungs": "",
+          "abdomen": "",
+          "genitalia": "",
+          "anusAndSpine": "",
+          "limbsAndDigits": "",
+          "feet": "",
+          "toneAndMovement": "",
+          "weightGrams": null,
+          "headCircumferenceCm": null,
+          "lengthCm": null
+        },
+        "summary": {
+          "eyesResultRecorded": "",
+          "heartResultRecorded": "",
+          "hipsResultRecorded": "",
+          "testesResultRecorded": "",
+          "clinicalNote": "Breech in utero — routine hip ultrasound at 4-6 weeks."
+        }
+      },
+      "expected": {
+        "eyesResult": "satisfactory",
+        "heartResult": "satisfactory",
+        "hipsResult": "refer",
+        "testesResult": "satisfactory",
+        "overallOutcome": "refer",
+        "completeness": "complete",
+        "completenessPercent": 100,
+        "referrals": [
+          {
+            "component": "hips",
+            "pathway": "Hip ultrasound (developmental dysplasia of the hip)",
+            "urgency": "by-6-weeks"
+          }
+        ],
+        "firedRules": [
+          {
+            "id": "R-HIPS-REFER-01",
+            "component": "hips",
+            "category": "component-result",
+            "description": "Positive Barlow or Ortolani, limited hip abduction, or a hip risk factor (breech or first-degree family history)"
+          },
+          {
+            "id": "R-OVERALL-01",
+            "component": "overall",
+            "category": "outcome-rollup",
+            "description": "One or more key components classed Refer — referral pathway triggered"
+          }
+        ]
+      }
+    },
+    {
+      "name": "refer-urgent-heart",
+      "description": "Central cyanosis with low pre/post-ductal saturations indicating possible critical congenital heart disease: overall outcome refer, same-day cardiac review.",
+      "state": {
+        "context": {
+          "practitionerName": "",
+          "practitionerRole": "paediatrician",
+          "examinedAt": "",
+          "examinationContext": "newborn-72h",
+          "careSetting": "neonatal-unit"
+        },
+        "identification": {
+          "babyIdentifier": "",
+          "babyName": "",
+          "dateOfBirth": "",
+          "sex": "male",
+          "gestationalAgeWeeks": 38,
+          "birthWeightGrams": 3100
+        },
+        "riskFactors": {
+          "breechPresentation": "no",
+          "familyHistoryHipProblems": "no",
+          "antenatalConcerns": ""
+        },
+        "eyes": {
+          "eyesRedReflexRight": "present",
+          "eyesRedReflexLeft": "present",
+          "eyesAppearance": "normal"
+        },
+        "heart": {
+          "heartMurmur": "present",
+          "femoralPulsesRight": "weak",
+          "femoralPulsesLeft": "weak",
+          "centralCyanosis": "present",
+          "oxygenSaturationPreductal": 88,
+          "oxygenSaturationPostductal": 84
+        },
+        "hips": {
+          "barlowTest": "negative",
+          "ortolaniTest": "negative",
+          "hipAbduction": "normal"
+        },
+        "testes": {
+          "testisRight": "descended",
+          "testisLeft": "descended"
+        },
+        "systematic": {
+          "generalAppearance": "",
+          "skin": "",
+          "headAndFontanelles": "",
+          "faceAndPalate": "",
+          "neckAndClavicles": "",
+          "chestAndLungs": "",
+          "abdomen": "",
+          "genitalia": "",
+          "anusAndSpine": "",
+          "limbsAndDigits": "",
+          "feet": "",
+          "toneAndMovement": "",
+          "weightGrams": null,
+          "headCircumferenceCm": null,
+          "lengthCm": null
+        },
+        "summary": {
+          "eyesResultRecorded": "",
+          "heartResultRecorded": "",
+          "hipsResultRecorded": "",
+          "testesResultRecorded": "",
+          "clinicalNote": "Central cyanosis and weak femoral pulses — urgent neonatal cardiology."
+        }
+      },
+      "expected": {
+        "eyesResult": "satisfactory",
+        "heartResult": "refer",
+        "hipsResult": "satisfactory",
+        "testesResult": "satisfactory",
+        "overallOutcome": "refer",
+        "completeness": "complete",
+        "completenessPercent": 100,
+        "referrals": [
+          {
+            "component": "heart",
+            "pathway": "Urgent cardiac / neonatal review — possible critical congenital heart disease",
+            "urgency": "same-day"
+          }
+        ],
+        "firedRules": [
+          {
+            "id": "R-HEART-REFER-01",
+            "component": "heart",
+            "category": "component-result",
+            "description": "Heart murmur, weak or absent femoral pulse, central cyanosis, or oxygen saturation below 95%"
+          },
+          {
+            "id": "R-OVERALL-01",
+            "component": "overall",
+            "category": "outcome-rollup",
+            "description": "One or more key components classed Refer — referral pathway triggered"
+          }
+        ]
+      }
+    }
+  ]
+}
