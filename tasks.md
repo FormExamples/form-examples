@@ -258,9 +258,16 @@ personas. Once the oracle exists, persona scaffolding + fill is mechanical
       pin. Their `expected` cannot be reproduced. Worth a follow-up: refactor
       those graders to take an injected clock / split the timestamp out, so
       they become testable.
-- [x] **99 forms** now have verified personas (`bin/test-personas` PASS 99 /
+- [x] **108 forms** now have verified personas (`bin/test-personas` PASS 108 /
       FAIL 0, deterministic across the full corpus). Rounds: 9 reference + 35
-      + 18 (F,H) + 18 (E,G re-authored) + 19 (I,J named scores + surveys).
+      + 18 (F,H) + 18 (E,G re-authored) + 19 (I,J) + 9 (timestamp-unlocked).
+- [x] **Timestamp-skip category CLOSED:** `bin/test-personas` now strips
+      volatile timestamp fields (`timestamp`/`gradedAt`/…) before comparing,
+      so graders that stamp `new Date()` are coverable. Re-authored all 9
+      previously-skipped forms (dyslexia, endometriosis, first-responder,
+      bhutani-bilirubin, birth-control, mental-state-examination,
+      newborn-blood-spot, plastic-surgery, return-to-work). This obviated the
+      earlier "refactor the graders to an injected clock" follow-up.
 - [ ] Continue persona batches for the remaining scorable forms
       (subagents on the proven rail; `spec/index.md` defines the bands).
       63 forms are `test-engines` SKIPs (ESM/inline/nonstandard) — those need
