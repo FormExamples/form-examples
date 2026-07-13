@@ -4,7 +4,14 @@ Roadmap for the next round of work on the medical-forms monorepo:
 capabilities, functionality, documentation, tutorials, and examples.
 Companion file: [`tasks.md`](tasks.md) holds the executable task checklist.
 
-## Execution progress (2026-07-12)
+## Execution progress (2026-07-12 → 07-13)
+
+**See [`tasks.md`](tasks.md) "Status summary" for the current, authoritative
+state** (Phases 0/1/4/5 done; 2 done bar oracle-dependent `expected` blocks; 3
+partial; 6 at 108 personas), plus the full audit-fix-gate log (81 mangled SQL
+migrations, 170 READMEs, a stub dashboard, missing controllers, 135 stale docs,
+1652 false-positive tests, a ~4000-test seed regression, and invalid
+OpenAPI/protobuf — each fixed and gated). The original 07-12 highlights follow.
 
 Phases 0, 1, 4, 5 are **complete**; Phase 2 is complete except the
 engine-oracle-dependent fixture `expected` blocks; Phases 3 and 6 are

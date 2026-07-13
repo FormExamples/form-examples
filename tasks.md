@@ -14,6 +14,42 @@ bin/generate-changelog-and-examples.py --check
 bin/loco-config-refactor --check --all
 ```
 
+## Status summary (2026-07-13)
+
+Phases **0, 1, 4, 5 complete**; **2** complete bar the engine-oracle-dependent
+fixture `expected` blocks; **3** has print CSS + dashboard CSV/TSV export + the
+i18n pilot delivered (export/import + Loco seed/serve still open); **6** has the
+engine + persona oracle with **108 forms** carrying verified personas.
+
+Beyond the plan, an audit-fix-gate loop found and closed a long chain of latent
+bugs, each fenced with a new gate:
+
+- 81 mangled `*_grade_flag.sql` migrations (lost `.sql` extension) restored.
+- 170 missing `front-end-with-html/README.md` symlinks added.
+- `mobility-assessment`'s stub dashboard implemented.
+- `medical-operation-note` missing domain controllers → added; `bin/test-loco-routes`.
+- 135 stale back-end `AGENTS.md` (obsolete JSONB API) regenerated; `--list-stale` gate.
+- 1652 false-positive scaffold request tests (trailing-slash → welcome page) fixed.
+- **The big one:** a route-nesting seed-path regression had broken ~4000
+  back-end tests (every seeding test); fixed corpus-wide + gated.
+- 7 invalid OpenAPI specs (YAML-indicator enum values) + 3 invalid protobuf
+  (proto3 enum-name collisions) → generator fixes + `protoc`/`openapi` CI gates.
+- All 4 generated representation formats (XML, FHIR, OpenAPI, protobuf) now
+  validate end-to-end; a combined OpenAPI spec per form added.
+
+New verification tooling (all in CI): `bin/generate-forms-tsv.py`,
+`bin/test-examples-conformance`, `bin/forms-shard`, `bin/generate-tools-doc.py`,
+`e2e/` (Playwright + axe-core) + `bin/test-e2e`, `bin/test-engines`,
+`bin/test-personas`, `bin/test-loco-routes`, `bin/test-tutorials`,
+`bin/back-end-with-loco/generate-loco-agents.py`,
+`bin/openapi/generate-openapi-combined.py`.
+
+**Remaining large/deliberate items** (documented in-place below): snake_case↔
+camelCase API contract (283 crates + ~1400 insta-snapshot regen; latent),
+form export/import (per-form state seam), serve-OpenAPI second half (per-crate
+Rust route serving `combined/openapi.yaml`), and the Phase 6 persona rollout to
+the remaining scorable forms.
+
 ## Phase 0 — Repair & hygiene ✅ COMPLETE (2026-07-12)
 
 - [x] Regenerate `forms.tsv` to cover all 286 forms. Created
@@ -93,26 +129,6 @@ bin/loco-config-refactor --check --all
       fixture (Python generator cannot; needs a Node oracle harness). Pending.
 - [ ] Fill `expected` for all 286 typical fixtures (mechanical; needs oracle).
 - [ ] Wire changed-forms E2E subset into PR CI (nightly full sweep done).
-
-## Phase 2 — E2E and accessibility (WS2)
-
-- [ ] Extend the `examples/` fixture format with an `expected` block:
-      score(s), grade, and flag list the engine must produce. Update
-      `bin/generate-changelog-and-examples.py` scaffolding + `--check`.
-- [ ] Fill `expected` values for all 286 typical fixtures (mechanical batch
-      work; derive from each form's scoring spec in `spec/index.md`).
-- [ ] Build the shared Playwright harness at `e2e/`:
-  - [ ] `e2e/run-form.ts` — given a slug and fixture: serve
-        `front-end-with-html/index.html` statically, drive the wizard,
-        assert rendered score/flags against `expected`.
-  - [ ] Same flow against the built Svelte app (`npm run build && preview`),
-        route `/<slug>/`.
-  - [ ] Dashboard smoke test (loads, renders rows from fixture data).
-  - [ ] `bin/test-e2e [--html|--svelte] [--all|<slug>…]` wrapper.
-- [ ] Integrate `@axe-core/playwright` into the harness; fail on
-      serious/critical violations. Fix violations found (batch by pattern —
-      most will be shared markup, fixable via one refactor + rollout).
-- [ ] Wire changed-forms E2E subset into PR CI; full sweep into nightly.
 
 ## Phase 3 — Functionality rollout (WS3) — ASSESSED; remaining as batch rollout
 
