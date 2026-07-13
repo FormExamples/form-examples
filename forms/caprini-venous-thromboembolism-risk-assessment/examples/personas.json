@@ -119,8 +119,7 @@
             "description": "Minor surgery planned (< 45 minutes)"
           }
         ],
-        "flaggedIssues": [],
-        "timestamp": ""
+        "flaggedIssues": []
       }
     },
     {
@@ -239,8 +238,7 @@
             "description": "Malignancy (present or previous)"
           }
         ],
-        "flaggedIssues": [],
-        "timestamp": ""
+        "flaggedIssues": []
       }
     },
     {
@@ -391,8 +389,7 @@
             "description": "Hip, pelvis, or leg fracture"
           }
         ],
-        "flaggedIssues": [],
-        "timestamp": ""
+        "flaggedIssues": []
       }
     }
   ]

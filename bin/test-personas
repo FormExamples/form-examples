@@ -10,6 +10,11 @@
  * scoring logic — richer than the type-defaulted examples/assessment.json
  * fixtures, which are empty and score to the baseline.
  *
+ * Grader output keys stamped with the current wall-clock time (timestamp,
+ * gradedAt, generatedAt, …) are stripped before storing and comparing, so an
+ * engine that stamps its result with `new Date()` is still coverable — its
+ * score is deterministic even though the stamp is not.
+ *
  * Persona file: forms/<slug>/examples/personas.json
  *   {
  *     "engine": "front-end-with-html",
@@ -40,9 +45,28 @@ const { loadEngine } = require('./lib/engine-loader.js');
 const REPO_ROOT = execSync('git rev-parse --show-toplevel').toString().trim();
 const FORMS = path.join(REPO_ROOT, 'forms');
 
+// Grader-output keys stamped with the current wall-clock time. A pure score
+// should not depend on when it ran, so the oracle strips these before storing
+// or comparing — this lets engines that stamp a `timestamp` into their result
+// still be covered (their score is deterministic; only the stamp is not).
+const VOLATILE_KEY = /^(timestamp|graded_?at|generated_?at|calculated_?at|assessed_?at|evaluated_?at|reviewed_?at|computed_?at|scored_?at|ran_?at)$/i;
+
+function stripVolatile(v) {
+  if (Array.isArray(v)) return v.map(stripVolatile);
+  if (v && typeof v === 'object') {
+    const out = {};
+    for (const k of Object.keys(v)) {
+      if (VOLATILE_KEY.test(k)) continue;
+      out[k] = stripVolatile(v[k]);
+    }
+    return out;
+  }
+  return v;
+}
+
 function canon(v) {
-  // Stable stringify for deep comparison (sorts object keys).
-  return JSON.stringify(v, function replacer(_k, val) {
+  // Stable stringify for deep comparison: strip volatile stamps, sort keys.
+  return JSON.stringify(stripVolatile(v), function replacer(_k, val) {
     if (val && typeof val === 'object' && !Array.isArray(val)) {
       return Object.keys(val).sort().reduce((o, k) => { o[k] = val[k]; return o; }, {});
     }
@@ -75,7 +99,7 @@ function runForm(slug, update, problems) {
     try { result = grader(JSON.parse(JSON.stringify(p.state))); }
     catch (e) { problems.push(`${slug}/${p.name}: grader threw: ${String(e.message).split('\n')[0]}`); status = 'FAIL'; continue; }
     if (update) {
-      p.expected = result;
+      p.expected = stripVolatile(result);
     } else if (!('expected' in p)) {
       problems.push(`${slug}/${p.name}: no expected recorded — run --update`); status = 'FAIL';
     } else if (canon(result) !== canon(p.expected)) {
