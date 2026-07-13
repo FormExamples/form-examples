@@ -155,7 +155,17 @@ Design each feature on the reference forms
       + 3 inline `<style>`). Verified by a print-media assertion in the E2E
       harness (buttons `display:none` under `@media print`). Svelte print CSS
       still pending.
-- [ ] **Dashboard CSV/TSV export** on every dashboard.
+- [x] **Dashboard CSV/TSV export (HTML)** on all 286 dashboards. Shared,
+      form-agnostic `js/table-export.js` self-injects "Download CSV" / "Download
+      TSV" buttons above the dashboard's data table and serialises the rendered
+      header + visible rows (respecting filters/sort) with correct delimiter
+      escaping. Rolled out mechanically (283 via `<script src>`, 3 inline for
+      the no-`js/` dashboards). Verified by `e2e/tests/dashboard-export.spec.ts`
+      (buttons present, CSV downloads with a real header) → 286/286.
+      **Finding:** `mobility-assessment`'s dashboard-app.js doesn't render its
+      table client-side (no renderTableHead/Body/sample-fallback like peers) —
+      a pre-existing dashboard-data bug, not an export bug; export is wired but
+      has nothing to serialise. Worth a follow-up fix.
 - [ ] **Loco seed data**: per-crate seeder loading `examples/` typical
       fixture; document `cargo loco db seed` (or task equivalent).
 - [ ] **Loco API integration test**: POST fixture → GET back → assert

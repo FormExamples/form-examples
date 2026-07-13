@@ -45,8 +45,8 @@ fi
 export FORMS
 
 if [ "$do_html" -eq 1 ]; then
-    echo "== HTML front-end E2E sweep =="
-    ( cd e2e && npx playwright test html-smoke )
+    echo "== HTML front-end E2E sweep (wizard a11y + dashboard export) =="
+    ( cd e2e && npx playwright test html-smoke dashboard-export )
 fi
 
 if [ "$do_svelte" -eq 1 ]; then
