@@ -1,0 +1,334 @@
+{
+  "engine": "front-end-with-html",
+  "graderHint": "calculateRisk",
+  "note": "Realistic filled-in states in the Heart Health Check engine's shape. `calculateRisk` estimates a 10-year CVD risk percentage from a simplified QRISK3-shaped points model and classifies it: low (<10%), moderate (10-19.9%), high (>=20%); 'draft' when age or sex is missing. `calculateRisk` is deterministic (heart-age and rules take no timestamp). `expected` is computed by `bin/test-personas --update` and verified by `bin/test-personas`.",
+  "personas": [
+    {
+      "name": "low-risk",
+      "description": "Fit 45-year-old woman, non-smoker, normal blood pressure and healthy cholesterol, no comorbidities: 10-year CVD risk under 10% — low.",
+      "state": {
+        "patientInformation": {
+          "fullName": "",
+          "dateOfBirth": "",
+          "nhsNumber": "",
+          "address": "",
+          "postcode": "",
+          "telephone": "",
+          "email": "",
+          "gpName": "",
+          "gpPractice": ""
+        },
+        "demographicsEthnicity": {
+          "age": 45,
+          "sex": "female",
+          "ethnicity": "white",
+          "townsendDeprivation": null
+        },
+        "bloodPressure": {
+          "systolicBP": 122,
+          "systolicBPSD": null,
+          "diastolicBP": 78,
+          "onBPTreatment": "no",
+          "numberOfBPMedications": null
+        },
+        "cholesterol": {
+          "totalCholesterol": null,
+          "hdlCholesterol": null,
+          "totalHDLRatio": 3.8,
+          "onStatin": "no"
+        },
+        "medicalConditions": {
+          "hasDiabetes": "none",
+          "hasAtrialFibrillation": "no",
+          "hasRheumatoidArthritis": "no",
+          "hasChronicKidneyDisease": "no",
+          "hasMigraine": "no",
+          "hasSevereMentalIllness": "no",
+          "hasErectileDysfunction": "no",
+          "onAtypicalAntipsychotic": "no",
+          "onCorticosteroids": "no"
+        },
+        "familyHistory": {
+          "familyCVDUnder60": "no",
+          "familyCVDRelationship": "",
+          "familyDiabetesHistory": "no"
+        },
+        "smokingAlcohol": {
+          "smokingStatus": "nonSmoker",
+          "cigarettesPerDay": null,
+          "yearsSinceQuit": null,
+          "alcoholUnitsPerWeek": 6,
+          "alcoholFrequency": "monthly"
+        },
+        "physicalActivityDiet": {
+          "physicalActivityMinutesPerWeek": 180,
+          "activityIntensity": "moderate",
+          "fruitVegPortionsPerDay": 5,
+          "dietQuality": "good",
+          "saltIntake": "low"
+        },
+        "bodyMeasurements": {
+          "heightCm": 168,
+          "weightKg": 63,
+          "bmi": null,
+          "waistCircumferenceCm": 76
+        },
+        "reviewCalculate": {
+          "clinicianName": "",
+          "reviewDate": "",
+          "clinicalNotes": "",
+          "auditScore": null
+        }
+      },
+      "expected": {
+        "riskCategory": "low",
+        "tenYearRiskPercent": 4.7,
+        "heartAge": 45,
+        "firedRules": [
+          {
+            "id": "HHC-016",
+            "category": "Smoking",
+            "description": "Non-smoker",
+            "riskLevel": "low"
+          },
+          {
+            "id": "HHC-018",
+            "category": "Cholesterol",
+            "description": "Optimal TC/HDL ratio (below 4)",
+            "riskLevel": "low"
+          },
+          {
+            "id": "HHC-019",
+            "category": "Physical Activity",
+            "description": "Physically active (150+ minutes per week moderate intensity)",
+            "riskLevel": "low"
+          },
+          {
+            "id": "HHC-020",
+            "category": "Body Composition",
+            "description": "Normal BMI (18.5 to 24.9)",
+            "riskLevel": "low"
+          }
+        ]
+      }
+    },
+    {
+      "name": "moderate-risk",
+      "description": "55-year-old man with borderline-high blood pressure and mildly raised cholesterol ratio, non-smoker: 10-year CVD risk in the 10-19.9% band — moderate.",
+      "state": {
+        "patientInformation": {
+          "fullName": "",
+          "dateOfBirth": "",
+          "nhsNumber": "",
+          "address": "",
+          "postcode": "",
+          "telephone": "",
+          "email": "",
+          "gpName": "",
+          "gpPractice": ""
+        },
+        "demographicsEthnicity": {
+          "age": 55,
+          "sex": "male",
+          "ethnicity": "white",
+          "townsendDeprivation": null
+        },
+        "bloodPressure": {
+          "systolicBP": 132,
+          "systolicBPSD": null,
+          "diastolicBP": 84,
+          "onBPTreatment": "no",
+          "numberOfBPMedications": null
+        },
+        "cholesterol": {
+          "totalCholesterol": null,
+          "hdlCholesterol": null,
+          "totalHDLRatio": 3.6,
+          "onStatin": "no"
+        },
+        "medicalConditions": {
+          "hasDiabetes": "none",
+          "hasAtrialFibrillation": "no",
+          "hasRheumatoidArthritis": "no",
+          "hasChronicKidneyDisease": "no",
+          "hasMigraine": "no",
+          "hasSevereMentalIllness": "no",
+          "hasErectileDysfunction": "no",
+          "onAtypicalAntipsychotic": "no",
+          "onCorticosteroids": "no"
+        },
+        "familyHistory": {
+          "familyCVDUnder60": "no",
+          "familyCVDRelationship": "",
+          "familyDiabetesHistory": "no"
+        },
+        "smokingAlcohol": {
+          "smokingStatus": "nonSmoker",
+          "cigarettesPerDay": null,
+          "yearsSinceQuit": null,
+          "alcoholUnitsPerWeek": 14,
+          "alcoholFrequency": "weekly"
+        },
+        "physicalActivityDiet": {
+          "physicalActivityMinutesPerWeek": 90,
+          "activityIntensity": "light",
+          "fruitVegPortionsPerDay": 3,
+          "dietQuality": "average",
+          "saltIntake": "moderate"
+        },
+        "bodyMeasurements": {
+          "heightCm": 178,
+          "weightKg": 84,
+          "bmi": null,
+          "waistCircumferenceCm": 98
+        },
+        "reviewCalculate": {
+          "clinicianName": "",
+          "reviewDate": "",
+          "clinicalNotes": "",
+          "auditScore": null
+        }
+      },
+      "expected": {
+        "riskCategory": "moderate",
+        "tenYearRiskPercent": 18.4,
+        "heartAge": 57,
+        "firedRules": [
+          {
+            "id": "HHC-006",
+            "category": "Overall Risk",
+            "description": "10-year CVD risk between 10% and 19.9%",
+            "riskLevel": "medium"
+          },
+          {
+            "id": "HHC-016",
+            "category": "Smoking",
+            "description": "Non-smoker",
+            "riskLevel": "low"
+          },
+          {
+            "id": "HHC-018",
+            "category": "Cholesterol",
+            "description": "Optimal TC/HDL ratio (below 4)",
+            "riskLevel": "low"
+          }
+        ]
+      }
+    },
+    {
+      "name": "high-risk",
+      "description": "58-year-old man with hypertension and a high total-to-HDL cholesterol ratio: 10-year CVD risk at or above 20% — high.",
+      "state": {
+        "patientInformation": {
+          "fullName": "",
+          "dateOfBirth": "",
+          "nhsNumber": "",
+          "address": "",
+          "postcode": "",
+          "telephone": "",
+          "email": "",
+          "gpName": "",
+          "gpPractice": ""
+        },
+        "demographicsEthnicity": {
+          "age": 58,
+          "sex": "male",
+          "ethnicity": "white",
+          "townsendDeprivation": null
+        },
+        "bloodPressure": {
+          "systolicBP": 145,
+          "systolicBPSD": null,
+          "diastolicBP": 92,
+          "onBPTreatment": "no",
+          "numberOfBPMedications": null
+        },
+        "cholesterol": {
+          "totalCholesterol": null,
+          "hdlCholesterol": null,
+          "totalHDLRatio": 5,
+          "onStatin": "no"
+        },
+        "medicalConditions": {
+          "hasDiabetes": "none",
+          "hasAtrialFibrillation": "no",
+          "hasRheumatoidArthritis": "no",
+          "hasChronicKidneyDisease": "no",
+          "hasMigraine": "no",
+          "hasSevereMentalIllness": "no",
+          "hasErectileDysfunction": "no",
+          "onAtypicalAntipsychotic": "no",
+          "onCorticosteroids": "no"
+        },
+        "familyHistory": {
+          "familyCVDUnder60": "no",
+          "familyCVDRelationship": "",
+          "familyDiabetesHistory": "no"
+        },
+        "smokingAlcohol": {
+          "smokingStatus": "nonSmoker",
+          "cigarettesPerDay": null,
+          "yearsSinceQuit": null,
+          "alcoholUnitsPerWeek": 20,
+          "alcoholFrequency": "weekly"
+        },
+        "physicalActivityDiet": {
+          "physicalActivityMinutesPerWeek": 30,
+          "activityIntensity": "light",
+          "fruitVegPortionsPerDay": 2,
+          "dietQuality": "poor",
+          "saltIntake": "high"
+        },
+        "bodyMeasurements": {
+          "heightCm": 175,
+          "weightKg": 92,
+          "bmi": null,
+          "waistCircumferenceCm": 106
+        },
+        "reviewCalculate": {
+          "clinicianName": "",
+          "reviewDate": "",
+          "clinicalNotes": "",
+          "auditScore": null
+        }
+      },
+      "expected": {
+        "riskCategory": "high",
+        "tenYearRiskPercent": 51.5,
+        "heartAge": 70,
+        "firedRules": [
+          {
+            "id": "HHC-001",
+            "category": "Overall Risk",
+            "description": "10-year CVD risk 20% or higher",
+            "riskLevel": "high"
+          },
+          {
+            "id": "HHC-010",
+            "category": "Blood Pressure",
+            "description": "Systolic BP between 140 and 179",
+            "riskLevel": "medium"
+          },
+          {
+            "id": "HHC-013",
+            "category": "Body Composition",
+            "description": "BMI 30 or higher (obese)",
+            "riskLevel": "medium"
+          },
+          {
+            "id": "HHC-015",
+            "category": "Heart Age",
+            "description": "Heart age 10 or more years above chronological age",
+            "riskLevel": "medium"
+          },
+          {
+            "id": "HHC-016",
+            "category": "Smoking",
+            "description": "Non-smoker",
+            "riskLevel": "low"
+          }
+        ]
+      }
+    }
+  ]
+}

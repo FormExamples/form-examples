@@ -1,0 +1,238 @@
+{
+  "engine": "front-end-with-html",
+  "graderHint": "calculateRosierGrade",
+  "note": "Realistic filled-in states in the ROSIER scoring engine's shape. `expected` is computed by `bin/test-personas --update` and verified by `bin/test-personas`.",
+  "personas": [
+    {
+      "name": "stroke-unlikely-mimic",
+      "description": "Transient collapse with loss of consciousness and no focal neurology: ROSIER -1 — stroke unlikely, consider a stroke mimic (syncope).",
+      "state": {
+        "context": {
+          "clinicianName": "",
+          "clinicianRole": "doctor",
+          "assessedAt": "",
+          "careSetting": "emergency-department",
+          "symptomOnsetAt": ""
+        },
+        "identification": {
+          "patientIdentifier": "",
+          "ageBand": "40-59",
+          "sex": "female"
+        },
+        "precondition": {
+          "bloodGlucose": 5.4,
+          "hypoglycaemiaCorrected": "na"
+        },
+        "mimics": {
+          "lossOfConsciousness": "yes",
+          "seizureActivity": "no"
+        },
+        "signs": {
+          "facialWeakness": "no",
+          "armWeakness": "no",
+          "legWeakness": "no",
+          "speechDisturbance": "no",
+          "visualFieldDefect": "no"
+        },
+        "note": {
+          "clinicalNote": ""
+        }
+      },
+      "expected": {
+        "lossOfConsciousnessPoint": -1,
+        "seizureActivityPoint": 0,
+        "facialWeaknessPoint": 0,
+        "armWeaknessPoint": 0,
+        "legWeaknessPoint": 0,
+        "speechDisturbancePoint": 0,
+        "visualFieldDefectPoint": 0,
+        "rosierScore": -1,
+        "band": "stroke-unlikely",
+        "firedCriteria": [
+          {
+            "id": "R-LOSS-OF-CONSCIOUSNESS-01",
+            "criterion": "loss-of-consciousness",
+            "points": -1,
+            "category": "rosier-mimic",
+            "description": "Loss of consciousness or syncope (mimic) — subtracts 1 point"
+          },
+          {
+            "id": "R-BAND-01",
+            "criterion": "band",
+            "points": 0,
+            "category": "band",
+            "description": "ROSIER <= 0 — stroke unlikely but not excluded"
+          }
+        ]
+      }
+    },
+    {
+      "name": "stroke-likely-moderate",
+      "description": "Acute facial and arm weakness with slurred speech, no mimic features: ROSIER 3 — stroke likely, activate the acute stroke pathway.",
+      "state": {
+        "context": {
+          "clinicianName": "",
+          "clinicianRole": "doctor",
+          "assessedAt": "",
+          "careSetting": "emergency-department",
+          "symptomOnsetAt": ""
+        },
+        "identification": {
+          "patientIdentifier": "",
+          "ageBand": "60-74",
+          "sex": "male"
+        },
+        "precondition": {
+          "bloodGlucose": 6.1,
+          "hypoglycaemiaCorrected": "na"
+        },
+        "mimics": {
+          "lossOfConsciousness": "no",
+          "seizureActivity": "no"
+        },
+        "signs": {
+          "facialWeakness": "yes",
+          "armWeakness": "yes",
+          "legWeakness": "no",
+          "speechDisturbance": "yes",
+          "visualFieldDefect": "no"
+        },
+        "note": {
+          "clinicalNote": ""
+        }
+      },
+      "expected": {
+        "lossOfConsciousnessPoint": 0,
+        "seizureActivityPoint": 0,
+        "facialWeaknessPoint": 1,
+        "armWeaknessPoint": 1,
+        "legWeaknessPoint": 0,
+        "speechDisturbancePoint": 1,
+        "visualFieldDefectPoint": 0,
+        "rosierScore": 3,
+        "band": "stroke-likely",
+        "firedCriteria": [
+          {
+            "id": "R-FACIAL-WEAKNESS-01",
+            "criterion": "facial-weakness",
+            "points": 1,
+            "category": "rosier-sign",
+            "description": "New acute onset of asymmetric facial weakness — adds 1 point"
+          },
+          {
+            "id": "R-ARM-WEAKNESS-01",
+            "criterion": "arm-weakness",
+            "points": 1,
+            "category": "rosier-sign",
+            "description": "New acute onset of asymmetric arm weakness — adds 1 point"
+          },
+          {
+            "id": "R-SPEECH-DISTURBANCE-01",
+            "criterion": "speech-disturbance",
+            "points": 1,
+            "category": "rosier-sign",
+            "description": "New acute onset of speech disturbance — adds 1 point"
+          },
+          {
+            "id": "R-BAND-01",
+            "criterion": "band",
+            "points": 0,
+            "category": "band",
+            "description": "ROSIER > 0 — positive screen; stroke likely, activate the acute stroke pathway"
+          }
+        ]
+      }
+    },
+    {
+      "name": "stroke-likely-high",
+      "description": "Dense hemiparesis with facial, arm and leg weakness, dysphasia and a visual field defect: ROSIER 5 — stroke very likely.",
+      "state": {
+        "context": {
+          "clinicianName": "",
+          "clinicianRole": "doctor",
+          "assessedAt": "",
+          "careSetting": "emergency-department",
+          "symptomOnsetAt": ""
+        },
+        "identification": {
+          "patientIdentifier": "",
+          "ageBand": "75-plus",
+          "sex": "female"
+        },
+        "precondition": {
+          "bloodGlucose": 5.8,
+          "hypoglycaemiaCorrected": "na"
+        },
+        "mimics": {
+          "lossOfConsciousness": "no",
+          "seizureActivity": "no"
+        },
+        "signs": {
+          "facialWeakness": "yes",
+          "armWeakness": "yes",
+          "legWeakness": "yes",
+          "speechDisturbance": "yes",
+          "visualFieldDefect": "yes"
+        },
+        "note": {
+          "clinicalNote": ""
+        }
+      },
+      "expected": {
+        "lossOfConsciousnessPoint": 0,
+        "seizureActivityPoint": 0,
+        "facialWeaknessPoint": 1,
+        "armWeaknessPoint": 1,
+        "legWeaknessPoint": 1,
+        "speechDisturbancePoint": 1,
+        "visualFieldDefectPoint": 1,
+        "rosierScore": 5,
+        "band": "stroke-likely",
+        "firedCriteria": [
+          {
+            "id": "R-FACIAL-WEAKNESS-01",
+            "criterion": "facial-weakness",
+            "points": 1,
+            "category": "rosier-sign",
+            "description": "New acute onset of asymmetric facial weakness — adds 1 point"
+          },
+          {
+            "id": "R-ARM-WEAKNESS-01",
+            "criterion": "arm-weakness",
+            "points": 1,
+            "category": "rosier-sign",
+            "description": "New acute onset of asymmetric arm weakness — adds 1 point"
+          },
+          {
+            "id": "R-LEG-WEAKNESS-01",
+            "criterion": "leg-weakness",
+            "points": 1,
+            "category": "rosier-sign",
+            "description": "New acute onset of asymmetric leg weakness — adds 1 point"
+          },
+          {
+            "id": "R-SPEECH-DISTURBANCE-01",
+            "criterion": "speech-disturbance",
+            "points": 1,
+            "category": "rosier-sign",
+            "description": "New acute onset of speech disturbance — adds 1 point"
+          },
+          {
+            "id": "R-VISUAL-FIELD-DEFECT-01",
+            "criterion": "visual-field-defect",
+            "points": 1,
+            "category": "rosier-sign",
+            "description": "New acute onset of visual field defect — adds 1 point"
+          },
+          {
+            "id": "R-BAND-01",
+            "criterion": "band",
+            "points": 0,
+            "category": "band",
+            "description": "ROSIER > 0 — positive screen; stroke likely, activate the acute stroke pathway"
+          }
+        ]
+      }
+    }
+  ]
+}

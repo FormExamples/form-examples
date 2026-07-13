@@ -1,0 +1,274 @@
+{
+  "engine": "front-end-with-html",
+  "graderHint": "calculateWaterlowGrade",
+  "note": "Realistic filled-in states in the Waterlow scoring engine's shape. `expected` is computed by `bin/test-personas --update` and verified by `bin/test-personas`.",
+  "personas": [
+    {
+      "name": "at-risk",
+      "description": "Older woman with dry skin, urinary incontinence and restricted mobility: Waterlow 11 — at-risk band (10-14), commence a repositioning and skin-care plan.",
+      "state": {
+        "context": {
+          "nurseName": "",
+          "nurseRole": "registered-nurse",
+          "assessedAt": "",
+          "careSetting": "acute-ward",
+          "assessmentReason": "admission"
+        },
+        "identification": {
+          "patientIdentifier": "",
+          "ageBand": "75-80",
+          "sex": "female"
+        },
+        "core": {
+          "buildWeightForHeight": "average",
+          "skinType": "dry",
+          "continence": "incontinent-urine",
+          "mobility": "restricted"
+        },
+        "special": {
+          "tissueMalnutrition": "none",
+          "neurologicalDeficit": "none",
+          "majorSurgeryTrauma": "none",
+          "medication": "none",
+          "existingPressureDamage": "no"
+        },
+        "note": {
+          "clinicalNote": ""
+        }
+      },
+      "expected": {
+        "buildPoints": 0,
+        "skinPoints": 1,
+        "sexPoints": 2,
+        "agePoints": 4,
+        "continencePoints": 1,
+        "mobilityPoints": 3,
+        "tissueMalnutritionPoints": 0,
+        "neurologicalDeficitPoints": 0,
+        "majorSurgeryTraumaPoints": 0,
+        "medicationPoints": 0,
+        "waterlowScore": 11,
+        "riskBand": "at-risk",
+        "preventionAction": "Introduce a pressure-redistributing foam mattress and cushion; document a repositioning schedule; review nutrition and continence.",
+        "contributingCategories": [
+          {
+            "key": "skin",
+            "label": "Skin type / visual risk",
+            "optionLabel": "Dry (1 point)",
+            "points": 1
+          },
+          {
+            "key": "sex",
+            "label": "Sex",
+            "optionLabel": "Female (2 points)",
+            "points": 2
+          },
+          {
+            "key": "age",
+            "label": "Age band",
+            "optionLabel": "75-80 (4 points)",
+            "points": 4
+          },
+          {
+            "key": "continence",
+            "label": "Continence",
+            "optionLabel": "Incontinent of urine (1 point)",
+            "points": 1
+          },
+          {
+            "key": "mobility",
+            "label": "Mobility",
+            "optionLabel": "Restricted (3 points)",
+            "points": 3
+          }
+        ],
+        "flaggedIssues": [],
+        "timestamp": ""
+      }
+    },
+    {
+      "name": "high-risk",
+      "description": "Frail underweight woman over 80, bedbound with urinary incontinence: Waterlow 16 — high-risk band (15-19), high-specification foam mattress and 2-4 hourly repositioning.",
+      "state": {
+        "context": {
+          "nurseName": "",
+          "nurseRole": "registered-nurse",
+          "assessedAt": "",
+          "careSetting": "acute-ward",
+          "assessmentReason": "change-in-condition"
+        },
+        "identification": {
+          "patientIdentifier": "",
+          "ageBand": "81-plus",
+          "sex": "female"
+        },
+        "core": {
+          "buildWeightForHeight": "below-average",
+          "skinType": "dry",
+          "continence": "incontinent-urine",
+          "mobility": "bedbound"
+        },
+        "special": {
+          "tissueMalnutrition": "none",
+          "neurologicalDeficit": "none",
+          "majorSurgeryTrauma": "none",
+          "medication": "none",
+          "existingPressureDamage": "no"
+        },
+        "note": {
+          "clinicalNote": ""
+        }
+      },
+      "expected": {
+        "buildPoints": 3,
+        "skinPoints": 1,
+        "sexPoints": 2,
+        "agePoints": 5,
+        "continencePoints": 1,
+        "mobilityPoints": 4,
+        "tissueMalnutritionPoints": 0,
+        "neurologicalDeficitPoints": 0,
+        "majorSurgeryTraumaPoints": 0,
+        "medicationPoints": 0,
+        "waterlowScore": 16,
+        "riskBand": "high",
+        "preventionAction": "Escalate to an alternating-pressure / dynamic support surface; increase repositioning frequency; refer to tissue viability; formal skin-care plan.",
+        "contributingCategories": [
+          {
+            "key": "build",
+            "label": "Build / weight for height",
+            "optionLabel": "Below average — BMI under 20 (3 points)",
+            "points": 3
+          },
+          {
+            "key": "skin",
+            "label": "Skin type / visual risk",
+            "optionLabel": "Dry (1 point)",
+            "points": 1
+          },
+          {
+            "key": "sex",
+            "label": "Sex",
+            "optionLabel": "Female (2 points)",
+            "points": 2
+          },
+          {
+            "key": "age",
+            "label": "Age band",
+            "optionLabel": "81 and over (5 points)",
+            "points": 5
+          },
+          {
+            "key": "continence",
+            "label": "Continence",
+            "optionLabel": "Incontinent of urine (1 point)",
+            "points": 1
+          },
+          {
+            "key": "mobility",
+            "label": "Mobility",
+            "optionLabel": "Bedbound — e.g. traction (4 points)",
+            "points": 4
+          }
+        ],
+        "flaggedIssues": [],
+        "timestamp": ""
+      }
+    },
+    {
+      "name": "very-high-risk",
+      "description": "Bedbound, doubly incontinent woman over 80 with broken skin, anaemia and existing pressure damage: Waterlow 22 — very-high-risk band (>=20), dynamic pressure-redistributing surface and tissue-viability referral.",
+      "state": {
+        "context": {
+          "nurseName": "",
+          "nurseRole": "tissue-viability",
+          "assessedAt": "",
+          "careSetting": "hospice",
+          "assessmentReason": "change-in-condition"
+        },
+        "identification": {
+          "patientIdentifier": "",
+          "ageBand": "81-plus",
+          "sex": "female"
+        },
+        "core": {
+          "buildWeightForHeight": "below-average",
+          "skinType": "broken",
+          "continence": "doubly-incontinent",
+          "mobility": "bedbound"
+        },
+        "special": {
+          "tissueMalnutrition": "anaemia",
+          "neurologicalDeficit": "none",
+          "majorSurgeryTrauma": "none",
+          "medication": "none",
+          "existingPressureDamage": "yes"
+        },
+        "note": {
+          "clinicalNote": ""
+        }
+      },
+      "expected": {
+        "buildPoints": 3,
+        "skinPoints": 3,
+        "sexPoints": 2,
+        "agePoints": 5,
+        "continencePoints": 3,
+        "mobilityPoints": 4,
+        "tissueMalnutritionPoints": 2,
+        "neurologicalDeficitPoints": 0,
+        "majorSurgeryTraumaPoints": 0,
+        "medicationPoints": 0,
+        "waterlowScore": 22,
+        "riskBand": "very-high",
+        "preventionAction": "High-specification dynamic mattress; frequent repositioning; urgent tissue-viability review; treat reversible factors (nutrition, moisture, perfusion).",
+        "contributingCategories": [
+          {
+            "key": "build",
+            "label": "Build / weight for height",
+            "optionLabel": "Below average — BMI under 20 (3 points)",
+            "points": 3
+          },
+          {
+            "key": "skin",
+            "label": "Skin type / visual risk",
+            "optionLabel": "Broken / spot — category 2-4 (3 points)",
+            "points": 3
+          },
+          {
+            "key": "sex",
+            "label": "Sex",
+            "optionLabel": "Female (2 points)",
+            "points": 2
+          },
+          {
+            "key": "age",
+            "label": "Age band",
+            "optionLabel": "81 and over (5 points)",
+            "points": 5
+          },
+          {
+            "key": "continence",
+            "label": "Continence",
+            "optionLabel": "Doubly incontinent (3 points)",
+            "points": 3
+          },
+          {
+            "key": "mobility",
+            "label": "Mobility",
+            "optionLabel": "Bedbound — e.g. traction (4 points)",
+            "points": 4
+          },
+          {
+            "key": "tissueMalnutrition",
+            "label": "Tissue malnutrition",
+            "optionLabel": "Anaemia — Hb under 8 g/dL (2 points)",
+            "points": 2
+          }
+        ],
+        "flaggedIssues": [],
+        "timestamp": ""
+      }
+    }
+  ]
+}

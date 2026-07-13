@@ -1,0 +1,1192 @@
+{
+  "engine": "front-end-with-html",
+  "graderHint": "gradeStress",
+  "note": "Realistic filled-in states in the HSE Management Standards engine's shape. Each item is 1-5; negatively-worded (reverse-scored) items are transformed via (6 - raw) so a higher domain mean is always more favourable. Each domain mean is classified against HSE percentile benchmarks (low = good, then moderate, high, very-high); overall risk = the worst domain category. `expected` is computed by `bin/test-personas --update` and verified by `bin/test-personas`.",
+  "personas": [
+    {
+      "name": "low-risk",
+      "description": "Favourable answers throughout — low demands, high control and support: every domain benchmarks 'low' concern, overall risk low.",
+      "state": {
+        "demographics": {
+          "department": "administration",
+          "tenureBand": "5-to-10-years",
+          "hoursBand": "full-time-35-to-44"
+        },
+        "demands": {
+          "dem1": 1,
+          "dem2": 1,
+          "dem3": 2,
+          "dem4": 1,
+          "dem5": 1,
+          "dem6": 1,
+          "dem7": 2,
+          "dem8": 1
+        },
+        "control": {
+          "ctrl1": 5,
+          "ctrl2": 5,
+          "ctrl3": 4,
+          "ctrl4": 4,
+          "ctrl5": 5,
+          "ctrl6": 5
+        },
+        "managerSupport": {
+          "ms1": 5,
+          "ms2": 5,
+          "ms3": 4,
+          "ms4": 5,
+          "ms5": 5
+        },
+        "peerSupport": {
+          "ps1": 5,
+          "ps2": 5,
+          "ps3": 4,
+          "ps4": 5
+        },
+        "relationships": {
+          "rel1": 1,
+          "rel2": 1,
+          "rel3": 1,
+          "rel4": 1
+        },
+        "role": {
+          "role1": 5,
+          "role2": 5,
+          "role3": 5,
+          "role4": 5,
+          "role5": 5
+        },
+        "change": {
+          "chg1": 5,
+          "chg2": 4,
+          "chg3": 5
+        },
+        "additionalComments": {
+          "mostStressfulAspect": "Occasional busy periods around month-end.",
+          "suggestionsForImprovement": "",
+          "otherComments": ""
+        }
+      },
+      "expected": {
+        "domains": {
+          "demands": {
+            "mean": 4.75,
+            "answeredCount": 8,
+            "totalCount": 8,
+            "category": "low"
+          },
+          "control": {
+            "mean": 4.67,
+            "answeredCount": 6,
+            "totalCount": 6,
+            "category": "low"
+          },
+          "managerSupport": {
+            "mean": 4.8,
+            "answeredCount": 5,
+            "totalCount": 5,
+            "category": "low"
+          },
+          "peerSupport": {
+            "mean": 4.75,
+            "answeredCount": 4,
+            "totalCount": 4,
+            "category": "low"
+          },
+          "relationships": {
+            "mean": 5,
+            "answeredCount": 4,
+            "totalCount": 4,
+            "category": "low"
+          },
+          "role": {
+            "mean": 5,
+            "answeredCount": 5,
+            "totalCount": 5,
+            "category": "low"
+          },
+          "change": {
+            "mean": 4.67,
+            "answeredCount": 3,
+            "totalCount": 3,
+            "category": "low"
+          }
+        },
+        "overallRisk": "low",
+        "answeredCount": 35,
+        "firedRules": [
+          {
+            "id": "dem1",
+            "domain": "demands",
+            "label": "Different groups at work demand things from me that are hard to combine.",
+            "rawValue": 1,
+            "effectiveValue": 5,
+            "reverseScored": true
+          },
+          {
+            "id": "dem2",
+            "domain": "demands",
+            "label": "I have unachievable deadlines.",
+            "rawValue": 1,
+            "effectiveValue": 5,
+            "reverseScored": true
+          },
+          {
+            "id": "dem3",
+            "domain": "demands",
+            "label": "I have to work very intensively.",
+            "rawValue": 2,
+            "effectiveValue": 4,
+            "reverseScored": true
+          },
+          {
+            "id": "dem4",
+            "domain": "demands",
+            "label": "I have to neglect some tasks because I have too much to do.",
+            "rawValue": 1,
+            "effectiveValue": 5,
+            "reverseScored": true
+          },
+          {
+            "id": "dem5",
+            "domain": "demands",
+            "label": "I am unable to take sufficient breaks.",
+            "rawValue": 1,
+            "effectiveValue": 5,
+            "reverseScored": true
+          },
+          {
+            "id": "dem6",
+            "domain": "demands",
+            "label": "I am pressured to work long hours.",
+            "rawValue": 1,
+            "effectiveValue": 5,
+            "reverseScored": true
+          },
+          {
+            "id": "dem7",
+            "domain": "demands",
+            "label": "I have to work very fast.",
+            "rawValue": 2,
+            "effectiveValue": 4,
+            "reverseScored": true
+          },
+          {
+            "id": "dem8",
+            "domain": "demands",
+            "label": "I have unrealistic time pressures.",
+            "rawValue": 1,
+            "effectiveValue": 5,
+            "reverseScored": true
+          },
+          {
+            "id": "ctrl1",
+            "domain": "control",
+            "label": "I can decide when to take a break.",
+            "rawValue": 5,
+            "effectiveValue": 5,
+            "reverseScored": false
+          },
+          {
+            "id": "ctrl2",
+            "domain": "control",
+            "label": "I have a say in my own work speed.",
+            "rawValue": 5,
+            "effectiveValue": 5,
+            "reverseScored": false
+          },
+          {
+            "id": "ctrl3",
+            "domain": "control",
+            "label": "I have a choice in deciding how I do my work.",
+            "rawValue": 4,
+            "effectiveValue": 4,
+            "reverseScored": false
+          },
+          {
+            "id": "ctrl4",
+            "domain": "control",
+            "label": "I have a choice in deciding what I do at work.",
+            "rawValue": 4,
+            "effectiveValue": 4,
+            "reverseScored": false
+          },
+          {
+            "id": "ctrl5",
+            "domain": "control",
+            "label": "I have some say over the way I work.",
+            "rawValue": 5,
+            "effectiveValue": 5,
+            "reverseScored": false
+          },
+          {
+            "id": "ctrl6",
+            "domain": "control",
+            "label": "My working time can be flexible.",
+            "rawValue": 5,
+            "effectiveValue": 5,
+            "reverseScored": false
+          },
+          {
+            "id": "ms1",
+            "domain": "managerSupport",
+            "label": "I am given supportive feedback on the work I do.",
+            "rawValue": 5,
+            "effectiveValue": 5,
+            "reverseScored": false
+          },
+          {
+            "id": "ms2",
+            "domain": "managerSupport",
+            "label": "I can rely on my line manager to help me out with a work problem.",
+            "rawValue": 5,
+            "effectiveValue": 5,
+            "reverseScored": false
+          },
+          {
+            "id": "ms3",
+            "domain": "managerSupport",
+            "label": "I can talk to my line manager about something that has upset or annoyed me about work.",
+            "rawValue": 4,
+            "effectiveValue": 4,
+            "reverseScored": false
+          },
+          {
+            "id": "ms4",
+            "domain": "managerSupport",
+            "label": "I am supported through emotionally demanding work.",
+            "rawValue": 5,
+            "effectiveValue": 5,
+            "reverseScored": false
+          },
+          {
+            "id": "ms5",
+            "domain": "managerSupport",
+            "label": "My line manager encourages me at work.",
+            "rawValue": 5,
+            "effectiveValue": 5,
+            "reverseScored": false
+          },
+          {
+            "id": "ps1",
+            "domain": "peerSupport",
+            "label": "If work gets difficult, my colleagues will help me.",
+            "rawValue": 5,
+            "effectiveValue": 5,
+            "reverseScored": false
+          },
+          {
+            "id": "ps2",
+            "domain": "peerSupport",
+            "label": "I get help and support I need from colleagues.",
+            "rawValue": 5,
+            "effectiveValue": 5,
+            "reverseScored": false
+          },
+          {
+            "id": "ps3",
+            "domain": "peerSupport",
+            "label": "I receive the respect at work I deserve from my colleagues.",
+            "rawValue": 4,
+            "effectiveValue": 4,
+            "reverseScored": false
+          },
+          {
+            "id": "ps4",
+            "domain": "peerSupport",
+            "label": "My colleagues are willing to listen to my work-related problems.",
+            "rawValue": 5,
+            "effectiveValue": 5,
+            "reverseScored": false
+          },
+          {
+            "id": "rel1",
+            "domain": "relationships",
+            "label": "I am subject to personal harassment in the form of unkind words or behaviour.",
+            "rawValue": 1,
+            "effectiveValue": 5,
+            "reverseScored": true
+          },
+          {
+            "id": "rel2",
+            "domain": "relationships",
+            "label": "There is friction or anger between colleagues.",
+            "rawValue": 1,
+            "effectiveValue": 5,
+            "reverseScored": true
+          },
+          {
+            "id": "rel3",
+            "domain": "relationships",
+            "label": "I am subject to bullying at work.",
+            "rawValue": 1,
+            "effectiveValue": 5,
+            "reverseScored": true
+          },
+          {
+            "id": "rel4",
+            "domain": "relationships",
+            "label": "Relationships at work are strained.",
+            "rawValue": 1,
+            "effectiveValue": 5,
+            "reverseScored": true
+          },
+          {
+            "id": "role1",
+            "domain": "role",
+            "label": "I am clear what is expected of me at work.",
+            "rawValue": 5,
+            "effectiveValue": 5,
+            "reverseScored": false
+          },
+          {
+            "id": "role2",
+            "domain": "role",
+            "label": "I know how to go about getting my job done.",
+            "rawValue": 5,
+            "effectiveValue": 5,
+            "reverseScored": false
+          },
+          {
+            "id": "role3",
+            "domain": "role",
+            "label": "I am clear what my duties and responsibilities are.",
+            "rawValue": 5,
+            "effectiveValue": 5,
+            "reverseScored": false
+          },
+          {
+            "id": "role4",
+            "domain": "role",
+            "label": "I am clear about the goals and objectives for my department.",
+            "rawValue": 5,
+            "effectiveValue": 5,
+            "reverseScored": false
+          },
+          {
+            "id": "role5",
+            "domain": "role",
+            "label": "I understand how my work fits into the overall aim of the organisation.",
+            "rawValue": 5,
+            "effectiveValue": 5,
+            "reverseScored": false
+          },
+          {
+            "id": "chg1",
+            "domain": "change",
+            "label": "I have sufficient opportunities to question managers about change at work.",
+            "rawValue": 5,
+            "effectiveValue": 5,
+            "reverseScored": false
+          },
+          {
+            "id": "chg2",
+            "domain": "change",
+            "label": "Staff are always consulted about change at work.",
+            "rawValue": 4,
+            "effectiveValue": 4,
+            "reverseScored": false
+          },
+          {
+            "id": "chg3",
+            "domain": "change",
+            "label": "When changes are made at work, I am clear how they will work out in practice.",
+            "rawValue": 5,
+            "effectiveValue": 5,
+            "reverseScored": false
+          }
+        ]
+      }
+    },
+    {
+      "name": "moderate-risk",
+      "description": "Generally supported team but elevated demands and poorly-managed change: worst domain benchmarks 'moderate', overall risk moderate.",
+      "state": {
+        "demographics": {
+          "department": "clinical",
+          "tenureBand": "1-to-3-years",
+          "hoursBand": "full-time-35-to-44"
+        },
+        "demands": {
+          "dem1": 2,
+          "dem2": 2,
+          "dem3": 2,
+          "dem4": 2,
+          "dem5": 2,
+          "dem6": 2,
+          "dem7": 2,
+          "dem8": 2
+        },
+        "control": {
+          "ctrl1": 4,
+          "ctrl2": 4,
+          "ctrl3": 4,
+          "ctrl4": 4,
+          "ctrl5": 5,
+          "ctrl6": 4
+        },
+        "managerSupport": {
+          "ms1": 5,
+          "ms2": 5,
+          "ms3": 4,
+          "ms4": 4,
+          "ms5": 5
+        },
+        "peerSupport": {
+          "ps1": 5,
+          "ps2": 4,
+          "ps3": 4,
+          "ps4": 5
+        },
+        "relationships": {
+          "rel1": 1,
+          "rel2": 1,
+          "rel3": 1,
+          "rel4": 1
+        },
+        "role": {
+          "role1": 5,
+          "role2": 5,
+          "role3": 5,
+          "role4": 5,
+          "role5": 5
+        },
+        "change": {
+          "chg1": 3,
+          "chg2": 3,
+          "chg3": 4
+        },
+        "additionalComments": {
+          "mostStressfulAspect": "Workload has crept up and reorganisation was announced with little consultation.",
+          "suggestionsForImprovement": "Involve staff earlier in change planning.",
+          "otherComments": ""
+        }
+      },
+      "expected": {
+        "domains": {
+          "demands": {
+            "mean": 4,
+            "answeredCount": 8,
+            "totalCount": 8,
+            "category": "moderate"
+          },
+          "control": {
+            "mean": 4.17,
+            "answeredCount": 6,
+            "totalCount": 6,
+            "category": "low"
+          },
+          "managerSupport": {
+            "mean": 4.6,
+            "answeredCount": 5,
+            "totalCount": 5,
+            "category": "low"
+          },
+          "peerSupport": {
+            "mean": 4.5,
+            "answeredCount": 4,
+            "totalCount": 4,
+            "category": "low"
+          },
+          "relationships": {
+            "mean": 5,
+            "answeredCount": 4,
+            "totalCount": 4,
+            "category": "low"
+          },
+          "role": {
+            "mean": 5,
+            "answeredCount": 5,
+            "totalCount": 5,
+            "category": "low"
+          },
+          "change": {
+            "mean": 3.33,
+            "answeredCount": 3,
+            "totalCount": 3,
+            "category": "moderate"
+          }
+        },
+        "overallRisk": "moderate",
+        "answeredCount": 35,
+        "firedRules": [
+          {
+            "id": "dem1",
+            "domain": "demands",
+            "label": "Different groups at work demand things from me that are hard to combine.",
+            "rawValue": 2,
+            "effectiveValue": 4,
+            "reverseScored": true
+          },
+          {
+            "id": "dem2",
+            "domain": "demands",
+            "label": "I have unachievable deadlines.",
+            "rawValue": 2,
+            "effectiveValue": 4,
+            "reverseScored": true
+          },
+          {
+            "id": "dem3",
+            "domain": "demands",
+            "label": "I have to work very intensively.",
+            "rawValue": 2,
+            "effectiveValue": 4,
+            "reverseScored": true
+          },
+          {
+            "id": "dem4",
+            "domain": "demands",
+            "label": "I have to neglect some tasks because I have too much to do.",
+            "rawValue": 2,
+            "effectiveValue": 4,
+            "reverseScored": true
+          },
+          {
+            "id": "dem5",
+            "domain": "demands",
+            "label": "I am unable to take sufficient breaks.",
+            "rawValue": 2,
+            "effectiveValue": 4,
+            "reverseScored": true
+          },
+          {
+            "id": "dem6",
+            "domain": "demands",
+            "label": "I am pressured to work long hours.",
+            "rawValue": 2,
+            "effectiveValue": 4,
+            "reverseScored": true
+          },
+          {
+            "id": "dem7",
+            "domain": "demands",
+            "label": "I have to work very fast.",
+            "rawValue": 2,
+            "effectiveValue": 4,
+            "reverseScored": true
+          },
+          {
+            "id": "dem8",
+            "domain": "demands",
+            "label": "I have unrealistic time pressures.",
+            "rawValue": 2,
+            "effectiveValue": 4,
+            "reverseScored": true
+          },
+          {
+            "id": "ctrl1",
+            "domain": "control",
+            "label": "I can decide when to take a break.",
+            "rawValue": 4,
+            "effectiveValue": 4,
+            "reverseScored": false
+          },
+          {
+            "id": "ctrl2",
+            "domain": "control",
+            "label": "I have a say in my own work speed.",
+            "rawValue": 4,
+            "effectiveValue": 4,
+            "reverseScored": false
+          },
+          {
+            "id": "ctrl3",
+            "domain": "control",
+            "label": "I have a choice in deciding how I do my work.",
+            "rawValue": 4,
+            "effectiveValue": 4,
+            "reverseScored": false
+          },
+          {
+            "id": "ctrl4",
+            "domain": "control",
+            "label": "I have a choice in deciding what I do at work.",
+            "rawValue": 4,
+            "effectiveValue": 4,
+            "reverseScored": false
+          },
+          {
+            "id": "ctrl5",
+            "domain": "control",
+            "label": "I have some say over the way I work.",
+            "rawValue": 5,
+            "effectiveValue": 5,
+            "reverseScored": false
+          },
+          {
+            "id": "ctrl6",
+            "domain": "control",
+            "label": "My working time can be flexible.",
+            "rawValue": 4,
+            "effectiveValue": 4,
+            "reverseScored": false
+          },
+          {
+            "id": "ms1",
+            "domain": "managerSupport",
+            "label": "I am given supportive feedback on the work I do.",
+            "rawValue": 5,
+            "effectiveValue": 5,
+            "reverseScored": false
+          },
+          {
+            "id": "ms2",
+            "domain": "managerSupport",
+            "label": "I can rely on my line manager to help me out with a work problem.",
+            "rawValue": 5,
+            "effectiveValue": 5,
+            "reverseScored": false
+          },
+          {
+            "id": "ms3",
+            "domain": "managerSupport",
+            "label": "I can talk to my line manager about something that has upset or annoyed me about work.",
+            "rawValue": 4,
+            "effectiveValue": 4,
+            "reverseScored": false
+          },
+          {
+            "id": "ms4",
+            "domain": "managerSupport",
+            "label": "I am supported through emotionally demanding work.",
+            "rawValue": 4,
+            "effectiveValue": 4,
+            "reverseScored": false
+          },
+          {
+            "id": "ms5",
+            "domain": "managerSupport",
+            "label": "My line manager encourages me at work.",
+            "rawValue": 5,
+            "effectiveValue": 5,
+            "reverseScored": false
+          },
+          {
+            "id": "ps1",
+            "domain": "peerSupport",
+            "label": "If work gets difficult, my colleagues will help me.",
+            "rawValue": 5,
+            "effectiveValue": 5,
+            "reverseScored": false
+          },
+          {
+            "id": "ps2",
+            "domain": "peerSupport",
+            "label": "I get help and support I need from colleagues.",
+            "rawValue": 4,
+            "effectiveValue": 4,
+            "reverseScored": false
+          },
+          {
+            "id": "ps3",
+            "domain": "peerSupport",
+            "label": "I receive the respect at work I deserve from my colleagues.",
+            "rawValue": 4,
+            "effectiveValue": 4,
+            "reverseScored": false
+          },
+          {
+            "id": "ps4",
+            "domain": "peerSupport",
+            "label": "My colleagues are willing to listen to my work-related problems.",
+            "rawValue": 5,
+            "effectiveValue": 5,
+            "reverseScored": false
+          },
+          {
+            "id": "rel1",
+            "domain": "relationships",
+            "label": "I am subject to personal harassment in the form of unkind words or behaviour.",
+            "rawValue": 1,
+            "effectiveValue": 5,
+            "reverseScored": true
+          },
+          {
+            "id": "rel2",
+            "domain": "relationships",
+            "label": "There is friction or anger between colleagues.",
+            "rawValue": 1,
+            "effectiveValue": 5,
+            "reverseScored": true
+          },
+          {
+            "id": "rel3",
+            "domain": "relationships",
+            "label": "I am subject to bullying at work.",
+            "rawValue": 1,
+            "effectiveValue": 5,
+            "reverseScored": true
+          },
+          {
+            "id": "rel4",
+            "domain": "relationships",
+            "label": "Relationships at work are strained.",
+            "rawValue": 1,
+            "effectiveValue": 5,
+            "reverseScored": true
+          },
+          {
+            "id": "role1",
+            "domain": "role",
+            "label": "I am clear what is expected of me at work.",
+            "rawValue": 5,
+            "effectiveValue": 5,
+            "reverseScored": false
+          },
+          {
+            "id": "role2",
+            "domain": "role",
+            "label": "I know how to go about getting my job done.",
+            "rawValue": 5,
+            "effectiveValue": 5,
+            "reverseScored": false
+          },
+          {
+            "id": "role3",
+            "domain": "role",
+            "label": "I am clear what my duties and responsibilities are.",
+            "rawValue": 5,
+            "effectiveValue": 5,
+            "reverseScored": false
+          },
+          {
+            "id": "role4",
+            "domain": "role",
+            "label": "I am clear about the goals and objectives for my department.",
+            "rawValue": 5,
+            "effectiveValue": 5,
+            "reverseScored": false
+          },
+          {
+            "id": "role5",
+            "domain": "role",
+            "label": "I understand how my work fits into the overall aim of the organisation.",
+            "rawValue": 5,
+            "effectiveValue": 5,
+            "reverseScored": false
+          },
+          {
+            "id": "chg1",
+            "domain": "change",
+            "label": "I have sufficient opportunities to question managers about change at work.",
+            "rawValue": 3,
+            "effectiveValue": 3,
+            "reverseScored": false
+          },
+          {
+            "id": "chg2",
+            "domain": "change",
+            "label": "Staff are always consulted about change at work.",
+            "rawValue": 3,
+            "effectiveValue": 3,
+            "reverseScored": false
+          },
+          {
+            "id": "chg3",
+            "domain": "change",
+            "label": "When changes are made at work, I am clear how they will work out in practice.",
+            "rawValue": 4,
+            "effectiveValue": 4,
+            "reverseScored": false
+          }
+        ]
+      }
+    },
+    {
+      "name": "very-high-risk",
+      "description": "Unsustainable demands, no control or support, strained relationships and chaotic change: multiple domains benchmark 'very-high', overall risk very-high.",
+      "state": {
+        "demographics": {
+          "department": "customer-service",
+          "tenureBand": "less-than-1-year",
+          "hoursBand": "long-hours-45-plus"
+        },
+        "demands": {
+          "dem1": 5,
+          "dem2": 5,
+          "dem3": 5,
+          "dem4": 5,
+          "dem5": 5,
+          "dem6": 5,
+          "dem7": 5,
+          "dem8": 5
+        },
+        "control": {
+          "ctrl1": 1,
+          "ctrl2": 1,
+          "ctrl3": 1,
+          "ctrl4": 1,
+          "ctrl5": 1,
+          "ctrl6": 1
+        },
+        "managerSupport": {
+          "ms1": 1,
+          "ms2": 1,
+          "ms3": 1,
+          "ms4": 1,
+          "ms5": 1
+        },
+        "peerSupport": {
+          "ps1": 2,
+          "ps2": 1,
+          "ps3": 1,
+          "ps4": 2
+        },
+        "relationships": {
+          "rel1": 4,
+          "rel2": 5,
+          "rel3": 4,
+          "rel4": 5
+        },
+        "role": {
+          "role1": 2,
+          "role2": 2,
+          "role3": 2,
+          "role4": 1,
+          "role5": 2
+        },
+        "change": {
+          "chg1": 1,
+          "chg2": 1,
+          "chg3": 1
+        },
+        "additionalComments": {
+          "mostStressfulAspect": "Impossible deadlines, no support from my manager, and open conflict in the team.",
+          "suggestionsForImprovement": "Urgent review of staffing levels and management conduct.",
+          "otherComments": "I am considering leaving on health grounds."
+        }
+      },
+      "expected": {
+        "domains": {
+          "demands": {
+            "mean": 1,
+            "answeredCount": 8,
+            "totalCount": 8,
+            "category": "very-high"
+          },
+          "control": {
+            "mean": 1,
+            "answeredCount": 6,
+            "totalCount": 6,
+            "category": "very-high"
+          },
+          "managerSupport": {
+            "mean": 1,
+            "answeredCount": 5,
+            "totalCount": 5,
+            "category": "very-high"
+          },
+          "peerSupport": {
+            "mean": 1.5,
+            "answeredCount": 4,
+            "totalCount": 4,
+            "category": "very-high"
+          },
+          "relationships": {
+            "mean": 1.5,
+            "answeredCount": 4,
+            "totalCount": 4,
+            "category": "very-high"
+          },
+          "role": {
+            "mean": 1.8,
+            "answeredCount": 5,
+            "totalCount": 5,
+            "category": "very-high"
+          },
+          "change": {
+            "mean": 1,
+            "answeredCount": 3,
+            "totalCount": 3,
+            "category": "very-high"
+          }
+        },
+        "overallRisk": "very-high",
+        "answeredCount": 35,
+        "firedRules": [
+          {
+            "id": "dem1",
+            "domain": "demands",
+            "label": "Different groups at work demand things from me that are hard to combine.",
+            "rawValue": 5,
+            "effectiveValue": 1,
+            "reverseScored": true
+          },
+          {
+            "id": "dem2",
+            "domain": "demands",
+            "label": "I have unachievable deadlines.",
+            "rawValue": 5,
+            "effectiveValue": 1,
+            "reverseScored": true
+          },
+          {
+            "id": "dem3",
+            "domain": "demands",
+            "label": "I have to work very intensively.",
+            "rawValue": 5,
+            "effectiveValue": 1,
+            "reverseScored": true
+          },
+          {
+            "id": "dem4",
+            "domain": "demands",
+            "label": "I have to neglect some tasks because I have too much to do.",
+            "rawValue": 5,
+            "effectiveValue": 1,
+            "reverseScored": true
+          },
+          {
+            "id": "dem5",
+            "domain": "demands",
+            "label": "I am unable to take sufficient breaks.",
+            "rawValue": 5,
+            "effectiveValue": 1,
+            "reverseScored": true
+          },
+          {
+            "id": "dem6",
+            "domain": "demands",
+            "label": "I am pressured to work long hours.",
+            "rawValue": 5,
+            "effectiveValue": 1,
+            "reverseScored": true
+          },
+          {
+            "id": "dem7",
+            "domain": "demands",
+            "label": "I have to work very fast.",
+            "rawValue": 5,
+            "effectiveValue": 1,
+            "reverseScored": true
+          },
+          {
+            "id": "dem8",
+            "domain": "demands",
+            "label": "I have unrealistic time pressures.",
+            "rawValue": 5,
+            "effectiveValue": 1,
+            "reverseScored": true
+          },
+          {
+            "id": "ctrl1",
+            "domain": "control",
+            "label": "I can decide when to take a break.",
+            "rawValue": 1,
+            "effectiveValue": 1,
+            "reverseScored": false
+          },
+          {
+            "id": "ctrl2",
+            "domain": "control",
+            "label": "I have a say in my own work speed.",
+            "rawValue": 1,
+            "effectiveValue": 1,
+            "reverseScored": false
+          },
+          {
+            "id": "ctrl3",
+            "domain": "control",
+            "label": "I have a choice in deciding how I do my work.",
+            "rawValue": 1,
+            "effectiveValue": 1,
+            "reverseScored": false
+          },
+          {
+            "id": "ctrl4",
+            "domain": "control",
+            "label": "I have a choice in deciding what I do at work.",
+            "rawValue": 1,
+            "effectiveValue": 1,
+            "reverseScored": false
+          },
+          {
+            "id": "ctrl5",
+            "domain": "control",
+            "label": "I have some say over the way I work.",
+            "rawValue": 1,
+            "effectiveValue": 1,
+            "reverseScored": false
+          },
+          {
+            "id": "ctrl6",
+            "domain": "control",
+            "label": "My working time can be flexible.",
+            "rawValue": 1,
+            "effectiveValue": 1,
+            "reverseScored": false
+          },
+          {
+            "id": "ms1",
+            "domain": "managerSupport",
+            "label": "I am given supportive feedback on the work I do.",
+            "rawValue": 1,
+            "effectiveValue": 1,
+            "reverseScored": false
+          },
+          {
+            "id": "ms2",
+            "domain": "managerSupport",
+            "label": "I can rely on my line manager to help me out with a work problem.",
+            "rawValue": 1,
+            "effectiveValue": 1,
+            "reverseScored": false
+          },
+          {
+            "id": "ms3",
+            "domain": "managerSupport",
+            "label": "I can talk to my line manager about something that has upset or annoyed me about work.",
+            "rawValue": 1,
+            "effectiveValue": 1,
+            "reverseScored": false
+          },
+          {
+            "id": "ms4",
+            "domain": "managerSupport",
+            "label": "I am supported through emotionally demanding work.",
+            "rawValue": 1,
+            "effectiveValue": 1,
+            "reverseScored": false
+          },
+          {
+            "id": "ms5",
+            "domain": "managerSupport",
+            "label": "My line manager encourages me at work.",
+            "rawValue": 1,
+            "effectiveValue": 1,
+            "reverseScored": false
+          },
+          {
+            "id": "ps1",
+            "domain": "peerSupport",
+            "label": "If work gets difficult, my colleagues will help me.",
+            "rawValue": 2,
+            "effectiveValue": 2,
+            "reverseScored": false
+          },
+          {
+            "id": "ps2",
+            "domain": "peerSupport",
+            "label": "I get help and support I need from colleagues.",
+            "rawValue": 1,
+            "effectiveValue": 1,
+            "reverseScored": false
+          },
+          {
+            "id": "ps3",
+            "domain": "peerSupport",
+            "label": "I receive the respect at work I deserve from my colleagues.",
+            "rawValue": 1,
+            "effectiveValue": 1,
+            "reverseScored": false
+          },
+          {
+            "id": "ps4",
+            "domain": "peerSupport",
+            "label": "My colleagues are willing to listen to my work-related problems.",
+            "rawValue": 2,
+            "effectiveValue": 2,
+            "reverseScored": false
+          },
+          {
+            "id": "rel1",
+            "domain": "relationships",
+            "label": "I am subject to personal harassment in the form of unkind words or behaviour.",
+            "rawValue": 4,
+            "effectiveValue": 2,
+            "reverseScored": true
+          },
+          {
+            "id": "rel2",
+            "domain": "relationships",
+            "label": "There is friction or anger between colleagues.",
+            "rawValue": 5,
+            "effectiveValue": 1,
+            "reverseScored": true
+          },
+          {
+            "id": "rel3",
+            "domain": "relationships",
+            "label": "I am subject to bullying at work.",
+            "rawValue": 4,
+            "effectiveValue": 2,
+            "reverseScored": true
+          },
+          {
+            "id": "rel4",
+            "domain": "relationships",
+            "label": "Relationships at work are strained.",
+            "rawValue": 5,
+            "effectiveValue": 1,
+            "reverseScored": true
+          },
+          {
+            "id": "role1",
+            "domain": "role",
+            "label": "I am clear what is expected of me at work.",
+            "rawValue": 2,
+            "effectiveValue": 2,
+            "reverseScored": false
+          },
+          {
+            "id": "role2",
+            "domain": "role",
+            "label": "I know how to go about getting my job done.",
+            "rawValue": 2,
+            "effectiveValue": 2,
+            "reverseScored": false
+          },
+          {
+            "id": "role3",
+            "domain": "role",
+            "label": "I am clear what my duties and responsibilities are.",
+            "rawValue": 2,
+            "effectiveValue": 2,
+            "reverseScored": false
+          },
+          {
+            "id": "role4",
+            "domain": "role",
+            "label": "I am clear about the goals and objectives for my department.",
+            "rawValue": 1,
+            "effectiveValue": 1,
+            "reverseScored": false
+          },
+          {
+            "id": "role5",
+            "domain": "role",
+            "label": "I understand how my work fits into the overall aim of the organisation.",
+            "rawValue": 2,
+            "effectiveValue": 2,
+            "reverseScored": false
+          },
+          {
+            "id": "chg1",
+            "domain": "change",
+            "label": "I have sufficient opportunities to question managers about change at work.",
+            "rawValue": 1,
+            "effectiveValue": 1,
+            "reverseScored": false
+          },
+          {
+            "id": "chg2",
+            "domain": "change",
+            "label": "Staff are always consulted about change at work.",
+            "rawValue": 1,
+            "effectiveValue": 1,
+            "reverseScored": false
+          },
+          {
+            "id": "chg3",
+            "domain": "change",
+            "label": "When changes are made at work, I am clear how they will work out in practice.",
+            "rawValue": 1,
+            "effectiveValue": 1,
+            "reverseScored": false
+          }
+        ]
+      }
+    }
+  ]
+}

@@ -1,0 +1,245 @@
+{
+  "engine": "front-end-with-html",
+  "graderHint": "calculateTimiGrade",
+  "note": "Realistic filled-in states in the TIMI UA/NSTEMI scoring engine's shape. `expected` is computed by `bin/test-personas --update` and verified by `bin/test-personas`.",
+  "personas": [
+    {
+      "name": "low-risk",
+      "description": "Over-65 patient with chest pain but no other TIMI features and normal markers: TIMI 1 — low 14-day risk.",
+      "state": {
+        "context": {
+          "clinicianName": "",
+          "clinicianRole": "physician",
+          "assessedAt": "",
+          "careSetting": "emergency-department",
+          "workingDiagnosis": "unstable-angina"
+        },
+        "identification": {
+          "patientIdentifier": "",
+          "sex": "female"
+        },
+        "riskProfile": {
+          "ageOver65": "yes",
+          "threeOrMoreCadRiskFactors": "no"
+        },
+        "cardiacHistory": {
+          "knownCadStenosis": "no",
+          "aspirinUsePrior7Days": "no"
+        },
+        "presentation": {
+          "twoOrMoreAnginaEpisodes24h": "no"
+        },
+        "investigations": {
+          "stDeviation": "no",
+          "positiveCardiacMarker": "no"
+        },
+        "note": {
+          "clinicalNote": ""
+        }
+      },
+      "expected": {
+        "agePoint": 1,
+        "riskFactorPoint": 0,
+        "knownCadPoint": 0,
+        "aspirinPoint": 0,
+        "anginaPoint": 0,
+        "stDeviationPoint": 0,
+        "cardiacMarkerPoint": 0,
+        "timiScore": 1,
+        "riskBand": "low",
+        "fourteenDayRiskPercent": 4.7,
+        "firedCriteria": [
+          {
+            "id": "R-AGE-OVER-65-01",
+            "criterion": "age",
+            "points": 1,
+            "category": "timi-criterion",
+            "description": "Age 65 years or older"
+          },
+          {
+            "id": "R-BAND-01",
+            "criterion": "band",
+            "points": 0,
+            "category": "risk-band",
+            "description": "TIMI 1 of 7 — low risk band; ~4.7% 14-day risk of death, MI, or urgent revascularisation"
+          }
+        ]
+      }
+    },
+    {
+      "name": "intermediate-risk",
+      "description": "Multiple coronary risk factors with recurrent angina and a raised troponin: TIMI 3 — intermediate 14-day risk.",
+      "state": {
+        "context": {
+          "clinicianName": "",
+          "clinicianRole": "physician",
+          "assessedAt": "",
+          "careSetting": "chest-pain-unit",
+          "workingDiagnosis": "nstemi"
+        },
+        "identification": {
+          "patientIdentifier": "",
+          "sex": "male"
+        },
+        "riskProfile": {
+          "ageOver65": "no",
+          "threeOrMoreCadRiskFactors": "yes"
+        },
+        "cardiacHistory": {
+          "knownCadStenosis": "no",
+          "aspirinUsePrior7Days": "no"
+        },
+        "presentation": {
+          "twoOrMoreAnginaEpisodes24h": "yes"
+        },
+        "investigations": {
+          "stDeviation": "no",
+          "positiveCardiacMarker": "yes"
+        },
+        "note": {
+          "clinicalNote": ""
+        }
+      },
+      "expected": {
+        "agePoint": 0,
+        "riskFactorPoint": 1,
+        "knownCadPoint": 0,
+        "aspirinPoint": 0,
+        "anginaPoint": 1,
+        "stDeviationPoint": 0,
+        "cardiacMarkerPoint": 1,
+        "timiScore": 3,
+        "riskBand": "intermediate",
+        "fourteenDayRiskPercent": 13.2,
+        "firedCriteria": [
+          {
+            "id": "R-RISK-FACTORS-01",
+            "criterion": "risk-factors",
+            "points": 1,
+            "category": "timi-criterion",
+            "description": "Three or more coronary risk factors (hypertension, hypercholesterolaemia, diabetes, current smoking, family history of premature CAD)"
+          },
+          {
+            "id": "R-ANGINA-01",
+            "criterion": "angina",
+            "points": 1,
+            "category": "timi-criterion",
+            "description": "At least two anginal episodes in the prior 24 hours"
+          },
+          {
+            "id": "R-CARDIAC-MARKER-01",
+            "criterion": "cardiac-marker",
+            "points": 1,
+            "category": "timi-criterion",
+            "description": "Positive cardiac marker (elevated troponin or CK-MB)"
+          },
+          {
+            "id": "R-BAND-01",
+            "criterion": "band",
+            "points": 0,
+            "category": "risk-band",
+            "description": "TIMI 3 of 7 — intermediate risk band; ~13.2% 14-day risk of death, MI, or urgent revascularisation"
+          }
+        ]
+      }
+    },
+    {
+      "name": "high-risk",
+      "description": "Elderly patient with known coronary disease, multiple risk factors, prior aspirin, recurrent angina and ST deviation: TIMI 6 — high 14-day risk, early invasive strategy.",
+      "state": {
+        "context": {
+          "clinicianName": "",
+          "clinicianRole": "cardiologist",
+          "assessedAt": "",
+          "careSetting": "coronary-care",
+          "workingDiagnosis": "nstemi"
+        },
+        "identification": {
+          "patientIdentifier": "",
+          "sex": "male"
+        },
+        "riskProfile": {
+          "ageOver65": "yes",
+          "threeOrMoreCadRiskFactors": "yes"
+        },
+        "cardiacHistory": {
+          "knownCadStenosis": "yes",
+          "aspirinUsePrior7Days": "yes"
+        },
+        "presentation": {
+          "twoOrMoreAnginaEpisodes24h": "yes"
+        },
+        "investigations": {
+          "stDeviation": "yes",
+          "positiveCardiacMarker": "no"
+        },
+        "note": {
+          "clinicalNote": ""
+        }
+      },
+      "expected": {
+        "agePoint": 1,
+        "riskFactorPoint": 1,
+        "knownCadPoint": 1,
+        "aspirinPoint": 1,
+        "anginaPoint": 1,
+        "stDeviationPoint": 1,
+        "cardiacMarkerPoint": 0,
+        "timiScore": 6,
+        "riskBand": "high",
+        "fourteenDayRiskPercent": 40.9,
+        "firedCriteria": [
+          {
+            "id": "R-AGE-OVER-65-01",
+            "criterion": "age",
+            "points": 1,
+            "category": "timi-criterion",
+            "description": "Age 65 years or older"
+          },
+          {
+            "id": "R-RISK-FACTORS-01",
+            "criterion": "risk-factors",
+            "points": 1,
+            "category": "timi-criterion",
+            "description": "Three or more coronary risk factors (hypertension, hypercholesterolaemia, diabetes, current smoking, family history of premature CAD)"
+          },
+          {
+            "id": "R-KNOWN-CAD-01",
+            "criterion": "known-cad",
+            "points": 1,
+            "category": "timi-criterion",
+            "description": "Known coronary artery disease (prior stenosis >= 50%)"
+          },
+          {
+            "id": "R-ASPIRIN-01",
+            "criterion": "aspirin",
+            "points": 1,
+            "category": "timi-criterion",
+            "description": "Aspirin use in the prior 7 days"
+          },
+          {
+            "id": "R-ANGINA-01",
+            "criterion": "angina",
+            "points": 1,
+            "category": "timi-criterion",
+            "description": "At least two anginal episodes in the prior 24 hours"
+          },
+          {
+            "id": "R-ST-DEVIATION-01",
+            "criterion": "st-deviation",
+            "points": 1,
+            "category": "timi-criterion",
+            "description": "ST-segment deviation >= 0.5 mm on the presenting ECG"
+          },
+          {
+            "id": "R-BAND-01",
+            "criterion": "band",
+            "points": 0,
+            "category": "risk-band",
+            "description": "TIMI 6 of 7 — high risk band; ~40.9% 14-day risk of death, MI, or urgent revascularisation"
+          }
+        ]
+      }
+    }
+  ]
+}

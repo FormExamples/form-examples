@@ -1,0 +1,197 @@
+{
+  "engine": "front-end-with-html",
+  "graderHint": "gradeOttawaKnee",
+  "note": "Realistic filled-in states in the Ottawa Knee Rule scoring engine's shape. `expected` is computed by `bin/test-personas --update` and verified by `bin/test-personas`.",
+  "personas": [
+    {
+      "name": "no-xray",
+      "description": "Young adult twisting injury, under 55, no bony tenderness, can flex to 90 degrees and bear weight: no Ottawa knee criterion met — knee X-ray not indicated.",
+      "state": {
+        "context": {
+          "clinicianName": "",
+          "clinicianRole": "nurse-practitioner",
+          "assessedAt": "",
+          "careSetting": "minor-injuries-unit",
+          "injuryMechanism": "twisting",
+          "hoursSinceInjury": 4
+        },
+        "identification": {
+          "patientIdentifier": "",
+          "sex": "female",
+          "injuredSide": "left"
+        },
+        "age": {
+          "ageYears": 30
+        },
+        "tenderness": {
+          "patellarTenderness": "no",
+          "otherBonyTenderness": "no",
+          "fibularHeadTenderness": "no"
+        },
+        "flexion": {
+          "unableToFlex90": "no"
+        },
+        "weightBearing": {
+          "unableToBearWeight": "no"
+        },
+        "note": {
+          "clinicalNotes": ""
+        }
+      },
+      "expected": {
+        "ageCriterion": false,
+        "isolatedPatellarCriterion": false,
+        "fibularHeadCriterion": false,
+        "flexionCriterion": false,
+        "weightBearingCriterion": false,
+        "xrayIndicated": false,
+        "decision": "xray-not-indicated",
+        "firedCriteria": [
+          {
+            "id": "R-DECISION-01",
+            "criterion": "decision",
+            "fired": false,
+            "category": "decision",
+            "description": "All five criteria absent — a knee radiograph is not indicated by the rule"
+          }
+        ]
+      }
+    },
+    {
+      "name": "xray-fibular-head",
+      "description": "Blunt trauma with isolated tenderness over the head of the fibula, otherwise mobile: fibular-head criterion met — knee X-ray indicated.",
+      "state": {
+        "context": {
+          "clinicianName": "",
+          "clinicianRole": "doctor",
+          "assessedAt": "",
+          "careSetting": "emergency-department",
+          "injuryMechanism": "blunt-trauma",
+          "hoursSinceInjury": 2
+        },
+        "identification": {
+          "patientIdentifier": "",
+          "sex": "male",
+          "injuredSide": "right"
+        },
+        "age": {
+          "ageYears": 40
+        },
+        "tenderness": {
+          "patellarTenderness": "no",
+          "otherBonyTenderness": "no",
+          "fibularHeadTenderness": "yes"
+        },
+        "flexion": {
+          "unableToFlex90": "no"
+        },
+        "weightBearing": {
+          "unableToBearWeight": "no"
+        },
+        "note": {
+          "clinicalNotes": ""
+        }
+      },
+      "expected": {
+        "ageCriterion": false,
+        "isolatedPatellarCriterion": false,
+        "fibularHeadCriterion": true,
+        "flexionCriterion": false,
+        "weightBearingCriterion": false,
+        "xrayIndicated": true,
+        "decision": "xray-indicated",
+        "firedCriteria": [
+          {
+            "id": "R-FIBULAR-HEAD-01",
+            "criterion": "fibular-head-tenderness",
+            "fired": true,
+            "category": "bony-tenderness",
+            "description": "Tenderness at the head of the fibula"
+          },
+          {
+            "id": "R-DECISION-01",
+            "criterion": "decision",
+            "fired": true,
+            "category": "decision",
+            "description": "One or more criteria present — a knee radiograph is indicated (ANY-of)"
+          }
+        ]
+      }
+    },
+    {
+      "name": "xray-age-flexion-weightbearing",
+      "description": "Older patient after a fall, unable to flex the knee to 90 degrees and unable to bear weight for four steps: age, flexion and weight-bearing criteria all met — knee X-ray indicated.",
+      "state": {
+        "context": {
+          "clinicianName": "",
+          "clinicianRole": "doctor",
+          "assessedAt": "",
+          "careSetting": "emergency-department",
+          "injuryMechanism": "fall",
+          "hoursSinceInjury": 1
+        },
+        "identification": {
+          "patientIdentifier": "",
+          "sex": "female",
+          "injuredSide": "right"
+        },
+        "age": {
+          "ageYears": 58
+        },
+        "tenderness": {
+          "patellarTenderness": "no",
+          "otherBonyTenderness": "no",
+          "fibularHeadTenderness": "no"
+        },
+        "flexion": {
+          "unableToFlex90": "yes"
+        },
+        "weightBearing": {
+          "unableToBearWeight": "yes"
+        },
+        "note": {
+          "clinicalNotes": ""
+        }
+      },
+      "expected": {
+        "ageCriterion": true,
+        "isolatedPatellarCriterion": false,
+        "fibularHeadCriterion": false,
+        "flexionCriterion": true,
+        "weightBearingCriterion": true,
+        "xrayIndicated": true,
+        "decision": "xray-indicated",
+        "firedCriteria": [
+          {
+            "id": "R-AGE-01",
+            "criterion": "age",
+            "fired": true,
+            "category": "age",
+            "description": "Age 55 years or older"
+          },
+          {
+            "id": "R-FLEXION-01",
+            "criterion": "flexion",
+            "fired": true,
+            "category": "range-of-motion",
+            "description": "Inability to flex the knee to 90 degrees"
+          },
+          {
+            "id": "R-WEIGHT-BEARING-01",
+            "criterion": "weight-bearing",
+            "fired": true,
+            "category": "weight-bearing",
+            "description": "Inability to bear weight — take four steps (transferring weight twice onto each leg) — both immediately after the injury and in the emergency department"
+          },
+          {
+            "id": "R-DECISION-01",
+            "criterion": "decision",
+            "fired": true,
+            "category": "decision",
+            "description": "One or more criteria present — a knee radiograph is indicated (ANY-of)"
+          }
+        ]
+      }
+    }
+  ]
+}

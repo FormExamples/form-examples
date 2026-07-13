@@ -1,0 +1,642 @@
+{
+  "engine": "front-end-with-html",
+  "graderHint": "calculateZaritGrade",
+  "note": "Realistic filled-in states in the Zarit Burden Interview (ZBI-22) scoring engine's shape. `expected` is computed by `bin/test-personas --update` and verified by `bin/test-personas`.",
+  "personas": [
+    {
+      "name": "little-or-no-burden",
+      "description": "Well-supported spouse carer coping with early needs: mostly 'never/rarely' responses — ZBI-22 total 6, little-or-no-burden band.",
+      "state": {
+        "context": {
+          "practitionerName": "",
+          "practitionerRole": "nurse",
+          "assessedAt": "",
+          "careSetting": "general-practice",
+          "instrumentForm": "zbi22"
+        },
+        "carer": {
+          "carerIdentifier": "",
+          "carerRelationship": "spouse-partner",
+          "carerCoResident": "yes",
+          "careHoursPerWeek": 10
+        },
+        "recipient": {
+          "recipientIdentifier": "",
+          "recipientCondition": "chronic-illness"
+        },
+        "items": {
+          "item1": 1,
+          "item2": 0,
+          "item3": 1,
+          "item4": 0,
+          "item5": 0,
+          "item6": 0,
+          "item7": 1,
+          "item8": 0,
+          "item9": 0,
+          "item10": 1,
+          "item11": 0,
+          "item12": 0,
+          "item13": 0,
+          "item14": 0,
+          "item15": 0,
+          "item16": 1,
+          "item17": 0,
+          "item18": 0,
+          "item19": 1,
+          "item20": 0,
+          "item21": 0,
+          "item22": 0
+        },
+        "note": {
+          "clinicalNote": ""
+        }
+      },
+      "expected": {
+        "itemRatings": [
+          1,
+          0,
+          1,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0
+        ],
+        "totalScore": 6,
+        "maxScore": 88,
+        "burdenBand": "little-or-none",
+        "firedItems": [
+          {
+            "id": "R-ITEM-1-SCORE",
+            "parameter": "item",
+            "points": 1,
+            "category": "item-score",
+            "description": "Item 1 (You feel that you are asked to do more for your relative than you should.) rated 1 of 4"
+          },
+          {
+            "id": "R-ITEM-3-SCORE",
+            "parameter": "item",
+            "points": 1,
+            "category": "item-score",
+            "description": "Item 3 (You feel stressed between caring for your relative and your other responsibilities.) rated 1 of 4"
+          },
+          {
+            "id": "R-ITEM-7-SCORE",
+            "parameter": "item",
+            "points": 1,
+            "category": "item-score",
+            "description": "Item 7 (You feel afraid about what the future holds for your relative.) rated 1 of 4"
+          },
+          {
+            "id": "R-ITEM-10-SCORE",
+            "parameter": "item",
+            "points": 1,
+            "category": "item-score",
+            "description": "Item 10 (You feel that your health has suffered because of your involvement with your relative.) rated 1 of 4"
+          },
+          {
+            "id": "R-ITEM-16-SCORE",
+            "parameter": "item",
+            "points": 1,
+            "category": "item-score",
+            "description": "Item 16 (You feel that you will be unable to care for your relative much longer.) rated 1 of 4"
+          },
+          {
+            "id": "R-ITEM-19-SCORE",
+            "parameter": "item",
+            "points": 1,
+            "category": "item-score",
+            "description": "Item 19 (You feel uncertain about what to do about your relative.) rated 1 of 4"
+          },
+          {
+            "id": "R-TOTAL-SCORE",
+            "parameter": "total",
+            "points": 6,
+            "category": "total-score",
+            "description": "Summed ZBI-22 total 6 of 88"
+          },
+          {
+            "id": "R-BAND",
+            "parameter": "band",
+            "points": 0,
+            "category": "band-threshold",
+            "description": "Burden band derived from total: little-or-none"
+          }
+        ]
+      }
+    },
+    {
+      "name": "mild-to-moderate-burden",
+      "description": "Adult-child carer balancing work and caregiving with growing strain: mixed 'sometimes/quite frequently' responses — ZBI-22 total 33, mild-to-moderate-burden band.",
+      "state": {
+        "context": {
+          "practitionerName": "",
+          "practitionerRole": "social-care",
+          "assessedAt": "",
+          "careSetting": "community",
+          "instrumentForm": "zbi22"
+        },
+        "carer": {
+          "carerIdentifier": "",
+          "carerRelationship": "adult-child",
+          "carerCoResident": "no",
+          "careHoursPerWeek": 25
+        },
+        "recipient": {
+          "recipientIdentifier": "",
+          "recipientCondition": "dementia"
+        },
+        "items": {
+          "item1": 2,
+          "item2": 2,
+          "item3": 2,
+          "item4": 2,
+          "item5": 2,
+          "item6": 2,
+          "item7": 2,
+          "item8": 2,
+          "item9": 2,
+          "item10": 2,
+          "item11": 2,
+          "item12": 1,
+          "item13": 1,
+          "item14": 1,
+          "item15": 1,
+          "item16": 1,
+          "item17": 1,
+          "item18": 1,
+          "item19": 1,
+          "item20": 1,
+          "item21": 1,
+          "item22": 1
+        },
+        "note": {
+          "clinicalNote": ""
+        }
+      },
+      "expected": {
+        "itemRatings": [
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        "totalScore": 33,
+        "maxScore": 88,
+        "burdenBand": "mild-to-moderate",
+        "firedItems": [
+          {
+            "id": "R-ITEM-1-SCORE",
+            "parameter": "item",
+            "points": 2,
+            "category": "item-score",
+            "description": "Item 1 (You feel that you are asked to do more for your relative than you should.) rated 2 of 4"
+          },
+          {
+            "id": "R-ITEM-2-SCORE",
+            "parameter": "item",
+            "points": 2,
+            "category": "item-score",
+            "description": "Item 2 (You feel that, because of the time you spend caring, you do not have enough time for yourself.) rated 2 of 4"
+          },
+          {
+            "id": "R-ITEM-3-SCORE",
+            "parameter": "item",
+            "points": 2,
+            "category": "item-score",
+            "description": "Item 3 (You feel stressed between caring for your relative and your other responsibilities.) rated 2 of 4"
+          },
+          {
+            "id": "R-ITEM-4-SCORE",
+            "parameter": "item",
+            "points": 2,
+            "category": "item-score",
+            "description": "Item 4 (You feel embarrassed by your relative's behaviour.) rated 2 of 4"
+          },
+          {
+            "id": "R-ITEM-5-SCORE",
+            "parameter": "item",
+            "points": 2,
+            "category": "item-score",
+            "description": "Item 5 (You feel angry when you are around your relative.) rated 2 of 4"
+          },
+          {
+            "id": "R-ITEM-6-SCORE",
+            "parameter": "item",
+            "points": 2,
+            "category": "item-score",
+            "description": "Item 6 (You feel that your relative affects your relationships with other family members or friends in a negative way.) rated 2 of 4"
+          },
+          {
+            "id": "R-ITEM-7-SCORE",
+            "parameter": "item",
+            "points": 2,
+            "category": "item-score",
+            "description": "Item 7 (You feel afraid about what the future holds for your relative.) rated 2 of 4"
+          },
+          {
+            "id": "R-ITEM-8-SCORE",
+            "parameter": "item",
+            "points": 2,
+            "category": "item-score",
+            "description": "Item 8 (You feel that your relative is dependent on you.) rated 2 of 4"
+          },
+          {
+            "id": "R-ITEM-9-SCORE",
+            "parameter": "item",
+            "points": 2,
+            "category": "item-score",
+            "description": "Item 9 (You feel strained when you are around your relative.) rated 2 of 4"
+          },
+          {
+            "id": "R-ITEM-10-SCORE",
+            "parameter": "item",
+            "points": 2,
+            "category": "item-score",
+            "description": "Item 10 (You feel that your health has suffered because of your involvement with your relative.) rated 2 of 4"
+          },
+          {
+            "id": "R-ITEM-11-SCORE",
+            "parameter": "item",
+            "points": 2,
+            "category": "item-score",
+            "description": "Item 11 (You feel that you do not have as much privacy as you would like because of your relative.) rated 2 of 4"
+          },
+          {
+            "id": "R-ITEM-12-SCORE",
+            "parameter": "item",
+            "points": 1,
+            "category": "item-score",
+            "description": "Item 12 (You feel that your social life has suffered because you are caring for your relative.) rated 1 of 4"
+          },
+          {
+            "id": "R-ITEM-13-SCORE",
+            "parameter": "item",
+            "points": 1,
+            "category": "item-score",
+            "description": "Item 13 (You feel uncomfortable about having friends over because of your relative.) rated 1 of 4"
+          },
+          {
+            "id": "R-ITEM-14-SCORE",
+            "parameter": "item",
+            "points": 1,
+            "category": "item-score",
+            "description": "Item 14 (You feel that your relative expects you to care for them as if you were the only one they could depend on.) rated 1 of 4"
+          },
+          {
+            "id": "R-ITEM-15-SCORE",
+            "parameter": "item",
+            "points": 1,
+            "category": "item-score",
+            "description": "Item 15 (You feel that you do not have enough money to care for your relative in addition to the rest of your expenses.) rated 1 of 4"
+          },
+          {
+            "id": "R-ITEM-16-SCORE",
+            "parameter": "item",
+            "points": 1,
+            "category": "item-score",
+            "description": "Item 16 (You feel that you will be unable to care for your relative much longer.) rated 1 of 4"
+          },
+          {
+            "id": "R-ITEM-17-SCORE",
+            "parameter": "item",
+            "points": 1,
+            "category": "item-score",
+            "description": "Item 17 (You feel that you have lost control of your life since your relative's illness.) rated 1 of 4"
+          },
+          {
+            "id": "R-ITEM-18-SCORE",
+            "parameter": "item",
+            "points": 1,
+            "category": "item-score",
+            "description": "Item 18 (You wish you could leave the care of your relative to someone else.) rated 1 of 4"
+          },
+          {
+            "id": "R-ITEM-19-SCORE",
+            "parameter": "item",
+            "points": 1,
+            "category": "item-score",
+            "description": "Item 19 (You feel uncertain about what to do about your relative.) rated 1 of 4"
+          },
+          {
+            "id": "R-ITEM-20-SCORE",
+            "parameter": "item",
+            "points": 1,
+            "category": "item-score",
+            "description": "Item 20 (You feel that you should be doing more for your relative.) rated 1 of 4"
+          },
+          {
+            "id": "R-ITEM-21-SCORE",
+            "parameter": "item",
+            "points": 1,
+            "category": "item-score",
+            "description": "Item 21 (You feel that you could do a better job in caring for your relative.) rated 1 of 4"
+          },
+          {
+            "id": "R-ITEM-22-SCORE",
+            "parameter": "item",
+            "points": 1,
+            "category": "item-score",
+            "description": "Item 22 (Overall, how burdened do you feel in caring for your relative?) rated 1 of 4 (global burden item)"
+          },
+          {
+            "id": "R-TOTAL-SCORE",
+            "parameter": "total",
+            "points": 33,
+            "category": "total-score",
+            "description": "Summed ZBI-22 total 33 of 88"
+          },
+          {
+            "id": "R-BAND",
+            "parameter": "band",
+            "points": 0,
+            "category": "band-threshold",
+            "description": "Burden band derived from total: mild-to-moderate"
+          }
+        ]
+      }
+    },
+    {
+      "name": "severe-burden",
+      "description": "Exhausted co-resident spouse caring for a person with advanced dementia around the clock: predominantly 'nearly always' responses — ZBI-22 total 77, severe-burden band.",
+      "state": {
+        "context": {
+          "practitionerName": "",
+          "practitionerRole": "clinician",
+          "assessedAt": "",
+          "careSetting": "memory-service",
+          "instrumentForm": "zbi22"
+        },
+        "carer": {
+          "carerIdentifier": "",
+          "carerRelationship": "spouse-partner",
+          "carerCoResident": "yes",
+          "careHoursPerWeek": 90
+        },
+        "recipient": {
+          "recipientIdentifier": "",
+          "recipientCondition": "dementia"
+        },
+        "items": {
+          "item1": 3,
+          "item2": 3,
+          "item3": 3,
+          "item4": 3,
+          "item5": 3,
+          "item6": 3,
+          "item7": 3,
+          "item8": 3,
+          "item9": 3,
+          "item10": 3,
+          "item11": 3,
+          "item12": 4,
+          "item13": 4,
+          "item14": 4,
+          "item15": 4,
+          "item16": 4,
+          "item17": 4,
+          "item18": 4,
+          "item19": 4,
+          "item20": 4,
+          "item21": 4,
+          "item22": 4
+        },
+        "note": {
+          "clinicalNote": ""
+        }
+      },
+      "expected": {
+        "itemRatings": [
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          4,
+          4,
+          4,
+          4,
+          4,
+          4,
+          4,
+          4,
+          4,
+          4,
+          4
+        ],
+        "totalScore": 77,
+        "maxScore": 88,
+        "burdenBand": "severe",
+        "firedItems": [
+          {
+            "id": "R-ITEM-1-SCORE",
+            "parameter": "item",
+            "points": 3,
+            "category": "item-score",
+            "description": "Item 1 (You feel that you are asked to do more for your relative than you should.) rated 3 of 4"
+          },
+          {
+            "id": "R-ITEM-2-SCORE",
+            "parameter": "item",
+            "points": 3,
+            "category": "item-score",
+            "description": "Item 2 (You feel that, because of the time you spend caring, you do not have enough time for yourself.) rated 3 of 4"
+          },
+          {
+            "id": "R-ITEM-3-SCORE",
+            "parameter": "item",
+            "points": 3,
+            "category": "item-score",
+            "description": "Item 3 (You feel stressed between caring for your relative and your other responsibilities.) rated 3 of 4"
+          },
+          {
+            "id": "R-ITEM-4-SCORE",
+            "parameter": "item",
+            "points": 3,
+            "category": "item-score",
+            "description": "Item 4 (You feel embarrassed by your relative's behaviour.) rated 3 of 4"
+          },
+          {
+            "id": "R-ITEM-5-SCORE",
+            "parameter": "item",
+            "points": 3,
+            "category": "item-score",
+            "description": "Item 5 (You feel angry when you are around your relative.) rated 3 of 4"
+          },
+          {
+            "id": "R-ITEM-6-SCORE",
+            "parameter": "item",
+            "points": 3,
+            "category": "item-score",
+            "description": "Item 6 (You feel that your relative affects your relationships with other family members or friends in a negative way.) rated 3 of 4"
+          },
+          {
+            "id": "R-ITEM-7-SCORE",
+            "parameter": "item",
+            "points": 3,
+            "category": "item-score",
+            "description": "Item 7 (You feel afraid about what the future holds for your relative.) rated 3 of 4"
+          },
+          {
+            "id": "R-ITEM-8-SCORE",
+            "parameter": "item",
+            "points": 3,
+            "category": "item-score",
+            "description": "Item 8 (You feel that your relative is dependent on you.) rated 3 of 4"
+          },
+          {
+            "id": "R-ITEM-9-SCORE",
+            "parameter": "item",
+            "points": 3,
+            "category": "item-score",
+            "description": "Item 9 (You feel strained when you are around your relative.) rated 3 of 4"
+          },
+          {
+            "id": "R-ITEM-10-SCORE",
+            "parameter": "item",
+            "points": 3,
+            "category": "item-score",
+            "description": "Item 10 (You feel that your health has suffered because of your involvement with your relative.) rated 3 of 4"
+          },
+          {
+            "id": "R-ITEM-11-SCORE",
+            "parameter": "item",
+            "points": 3,
+            "category": "item-score",
+            "description": "Item 11 (You feel that you do not have as much privacy as you would like because of your relative.) rated 3 of 4"
+          },
+          {
+            "id": "R-ITEM-12-SCORE",
+            "parameter": "item",
+            "points": 4,
+            "category": "item-score",
+            "description": "Item 12 (You feel that your social life has suffered because you are caring for your relative.) rated 4 of 4"
+          },
+          {
+            "id": "R-ITEM-13-SCORE",
+            "parameter": "item",
+            "points": 4,
+            "category": "item-score",
+            "description": "Item 13 (You feel uncomfortable about having friends over because of your relative.) rated 4 of 4"
+          },
+          {
+            "id": "R-ITEM-14-SCORE",
+            "parameter": "item",
+            "points": 4,
+            "category": "item-score",
+            "description": "Item 14 (You feel that your relative expects you to care for them as if you were the only one they could depend on.) rated 4 of 4"
+          },
+          {
+            "id": "R-ITEM-15-SCORE",
+            "parameter": "item",
+            "points": 4,
+            "category": "item-score",
+            "description": "Item 15 (You feel that you do not have enough money to care for your relative in addition to the rest of your expenses.) rated 4 of 4"
+          },
+          {
+            "id": "R-ITEM-16-SCORE",
+            "parameter": "item",
+            "points": 4,
+            "category": "item-score",
+            "description": "Item 16 (You feel that you will be unable to care for your relative much longer.) rated 4 of 4"
+          },
+          {
+            "id": "R-ITEM-17-SCORE",
+            "parameter": "item",
+            "points": 4,
+            "category": "item-score",
+            "description": "Item 17 (You feel that you have lost control of your life since your relative's illness.) rated 4 of 4"
+          },
+          {
+            "id": "R-ITEM-18-SCORE",
+            "parameter": "item",
+            "points": 4,
+            "category": "item-score",
+            "description": "Item 18 (You wish you could leave the care of your relative to someone else.) rated 4 of 4"
+          },
+          {
+            "id": "R-ITEM-19-SCORE",
+            "parameter": "item",
+            "points": 4,
+            "category": "item-score",
+            "description": "Item 19 (You feel uncertain about what to do about your relative.) rated 4 of 4"
+          },
+          {
+            "id": "R-ITEM-20-SCORE",
+            "parameter": "item",
+            "points": 4,
+            "category": "item-score",
+            "description": "Item 20 (You feel that you should be doing more for your relative.) rated 4 of 4"
+          },
+          {
+            "id": "R-ITEM-21-SCORE",
+            "parameter": "item",
+            "points": 4,
+            "category": "item-score",
+            "description": "Item 21 (You feel that you could do a better job in caring for your relative.) rated 4 of 4"
+          },
+          {
+            "id": "R-ITEM-22-SCORE",
+            "parameter": "item",
+            "points": 4,
+            "category": "item-score",
+            "description": "Item 22 (Overall, how burdened do you feel in caring for your relative?) rated 4 of 4 (global burden item)"
+          },
+          {
+            "id": "R-TOTAL-SCORE",
+            "parameter": "total",
+            "points": 77,
+            "category": "total-score",
+            "description": "Summed ZBI-22 total 77 of 88"
+          },
+          {
+            "id": "R-BAND",
+            "parameter": "band",
+            "points": 0,
+            "category": "band-threshold",
+            "description": "Burden band derived from total: severe"
+          }
+        ]
+      }
+    }
+  ]
+}

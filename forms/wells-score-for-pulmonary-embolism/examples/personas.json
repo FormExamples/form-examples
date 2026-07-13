@@ -1,0 +1,265 @@
+{
+  "engine": "front-end-with-html",
+  "graderHint": "calculateWellsGrade",
+  "note": "Realistic filled-in states in the Wells PE scoring engine's shape. `expected` is computed by `bin/test-personas --update` and verified by `bin/test-personas`.",
+  "personas": [
+    {
+      "name": "unlikely-low",
+      "description": "Pleuritic chest pain but an alternative diagnosis at least as likely, no DVT signs and a normal heart rate: Wells 0 — PE unlikely (two-level), low probability (three-level); D-dimer pathway.",
+      "state": {
+        "context": {
+          "clinicianName": "",
+          "clinicianRole": "doctor",
+          "assessedAt": "",
+          "careSetting": "emergency-department"
+        },
+        "identification": {
+          "patientIdentifier": "",
+          "ageBand": "40-64",
+          "sex": "female"
+        },
+        "haemodynamic": {
+          "haemodynamicStatus": "stable"
+        },
+        "criteria": {
+          "dvtSigns": "no",
+          "peMostLikely": "no",
+          "immobilisationSurgery": "no",
+          "previousDvtPe": "no",
+          "haemoptysis": "no",
+          "malignancy": "no"
+        },
+        "observations": {
+          "heartRate": 78
+        },
+        "note": {
+          "clinicalNotes": ""
+        }
+      },
+      "expected": {
+        "criterionPoints": {
+          "dvt-signs": 0,
+          "pe-most-likely": 0,
+          "heart-rate-over-100": 0,
+          "immobilisation-surgery": 0,
+          "previous-dvt-pe": 0,
+          "haemoptysis": 0,
+          "malignancy": 0
+        },
+        "dvtSignsPoints": 0,
+        "peMostLikelyPoints": 0,
+        "heartRatePoints": 0,
+        "immobilisationSurgeryPoints": 0,
+        "previousDvtPePoints": 0,
+        "haemoptysisPoints": 0,
+        "malignancyPoints": 0,
+        "wellsScore": 0,
+        "twoLevelBand": "unlikely",
+        "threeLevelBand": "low",
+        "recommendedPathway": "d-dimer",
+        "firedCriteria": [
+          {
+            "id": "R-TWO-LEVEL-BAND-01",
+            "criterion": "two-level-band",
+            "points": 0,
+            "category": "risk-band",
+            "description": "Wells <= 4 — PE unlikely; arrange a D-dimer test"
+          },
+          {
+            "id": "R-THREE-LEVEL-BAND-01",
+            "criterion": "three-level-band",
+            "points": 0,
+            "category": "risk-band",
+            "description": "Wells < 2 — low probability (original three-level rule)"
+          }
+        ]
+      }
+    },
+    {
+      "name": "likely-moderate",
+      "description": "PE judged the most likely diagnosis with recent immobilisation and tachycardia: Wells 6 — PE likely (two-level), moderate probability (three-level); proceed to CTPA.",
+      "state": {
+        "context": {
+          "clinicianName": "",
+          "clinicianRole": "doctor",
+          "assessedAt": "",
+          "careSetting": "acute-medical-unit"
+        },
+        "identification": {
+          "patientIdentifier": "",
+          "ageBand": "65-74",
+          "sex": "male"
+        },
+        "haemodynamic": {
+          "haemodynamicStatus": "stable"
+        },
+        "criteria": {
+          "dvtSigns": "no",
+          "peMostLikely": "yes",
+          "immobilisationSurgery": "yes",
+          "previousDvtPe": "no",
+          "haemoptysis": "no",
+          "malignancy": "no"
+        },
+        "observations": {
+          "heartRate": 105
+        },
+        "note": {
+          "clinicalNotes": ""
+        }
+      },
+      "expected": {
+        "criterionPoints": {
+          "dvt-signs": 0,
+          "pe-most-likely": 3,
+          "heart-rate-over-100": 1.5,
+          "immobilisation-surgery": 1.5,
+          "previous-dvt-pe": 0,
+          "haemoptysis": 0,
+          "malignancy": 0
+        },
+        "dvtSignsPoints": 0,
+        "peMostLikelyPoints": 3,
+        "heartRatePoints": 1.5,
+        "immobilisationSurgeryPoints": 1.5,
+        "previousDvtPePoints": 0,
+        "haemoptysisPoints": 0,
+        "malignancyPoints": 0,
+        "wellsScore": 6,
+        "twoLevelBand": "likely",
+        "threeLevelBand": "moderate",
+        "recommendedPathway": "ctpa",
+        "firedCriteria": [
+          {
+            "id": "R-PE-MOST-LIKELY-01",
+            "criterion": "pe-most-likely",
+            "points": 3,
+            "category": "gestalt",
+            "description": "PE is the number-one diagnosis, or equally likely"
+          },
+          {
+            "id": "R-HEART-RATE-OVER-100-01",
+            "criterion": "heart-rate-over-100",
+            "points": 1.5,
+            "category": "tachycardia",
+            "description": "Heart rate greater than 100 beats per minute"
+          },
+          {
+            "id": "R-IMMOBILISATION-SURGERY-01",
+            "criterion": "immobilisation-surgery",
+            "points": 1.5,
+            "category": "immobilisation",
+            "description": "Immobilisation for at least 3 days, or surgery in the previous 4 weeks"
+          },
+          {
+            "id": "R-TWO-LEVEL-BAND-01",
+            "criterion": "two-level-band",
+            "points": 0,
+            "category": "risk-band",
+            "description": "Wells > 4 — PE likely; arrange an immediate CTPA"
+          },
+          {
+            "id": "R-THREE-LEVEL-BAND-01",
+            "criterion": "three-level-band",
+            "points": 0,
+            "category": "risk-band",
+            "description": "Wells 2-6 — moderate probability (original three-level rule)"
+          }
+        ]
+      }
+    },
+    {
+      "name": "likely-high",
+      "description": "Clinical DVT signs with PE the most likely diagnosis and tachycardia: Wells 7.5 — PE likely (two-level), high probability (three-level); proceed to CTPA.",
+      "state": {
+        "context": {
+          "clinicianName": "",
+          "clinicianRole": "doctor",
+          "assessedAt": "",
+          "careSetting": "emergency-department"
+        },
+        "identification": {
+          "patientIdentifier": "",
+          "ageBand": "75-84",
+          "sex": "female"
+        },
+        "haemodynamic": {
+          "haemodynamicStatus": "stable"
+        },
+        "criteria": {
+          "dvtSigns": "yes",
+          "peMostLikely": "yes",
+          "immobilisationSurgery": "no",
+          "previousDvtPe": "no",
+          "haemoptysis": "no",
+          "malignancy": "no"
+        },
+        "observations": {
+          "heartRate": 110
+        },
+        "note": {
+          "clinicalNotes": ""
+        }
+      },
+      "expected": {
+        "criterionPoints": {
+          "dvt-signs": 3,
+          "pe-most-likely": 3,
+          "heart-rate-over-100": 1.5,
+          "immobilisation-surgery": 0,
+          "previous-dvt-pe": 0,
+          "haemoptysis": 0,
+          "malignancy": 0
+        },
+        "dvtSignsPoints": 3,
+        "peMostLikelyPoints": 3,
+        "heartRatePoints": 1.5,
+        "immobilisationSurgeryPoints": 0,
+        "previousDvtPePoints": 0,
+        "haemoptysisPoints": 0,
+        "malignancyPoints": 0,
+        "wellsScore": 7.5,
+        "twoLevelBand": "likely",
+        "threeLevelBand": "high",
+        "recommendedPathway": "ctpa",
+        "firedCriteria": [
+          {
+            "id": "R-DVT-SIGNS-01",
+            "criterion": "dvt-signs",
+            "points": 3,
+            "category": "clinical-sign",
+            "description": "Clinical signs and symptoms of DVT (leg swelling and pain on palpation of the deep veins)"
+          },
+          {
+            "id": "R-PE-MOST-LIKELY-01",
+            "criterion": "pe-most-likely",
+            "points": 3,
+            "category": "gestalt",
+            "description": "PE is the number-one diagnosis, or equally likely"
+          },
+          {
+            "id": "R-HEART-RATE-OVER-100-01",
+            "criterion": "heart-rate-over-100",
+            "points": 1.5,
+            "category": "tachycardia",
+            "description": "Heart rate greater than 100 beats per minute"
+          },
+          {
+            "id": "R-TWO-LEVEL-BAND-01",
+            "criterion": "two-level-band",
+            "points": 0,
+            "category": "risk-band",
+            "description": "Wells > 4 — PE likely; arrange an immediate CTPA"
+          },
+          {
+            "id": "R-THREE-LEVEL-BAND-01",
+            "criterion": "three-level-band",
+            "points": 0,
+            "category": "risk-band",
+            "description": "Wells > 6 — high probability (original three-level rule)"
+          }
+        ]
+      }
+    }
+  ]
+}

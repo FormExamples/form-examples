@@ -1,0 +1,1075 @@
+{
+  "engine": "front-end-with-html",
+  "graderHint": "gradeClimate",
+  "note": "Realistic filled-in states in the Workplace Climate Index engine's shape. Each Likert item is 1-5; per-domain score = mean x 20; composite = mean of the eight graded domain scores; bands 85-100 thriving, 70-84 healthy, 50-69 developing, 25-49 strained, 0-24 critical. `expected` is computed by `bin/test-personas --update` and verified by `bin/test-personas`.",
+  "personas": [
+    {
+      "name": "thriving",
+      "description": "Strongly positive climate across every domain (all items rated 4-5): composite ~95 — thriving.",
+      "state": {
+        "demographics": {
+          "department": "clinical",
+          "tenureBand": "5-to-10-years",
+          "hoursBand": "full-time-35-to-44",
+          "roleLevel": "individual-contributor",
+          "workLocation": "on-site"
+        },
+        "leadership": {
+          "ld1": 5,
+          "ld2": 5,
+          "ld3": 4,
+          "ld4": 5,
+          "ld5": 5
+        },
+        "psychSafety": {
+          "ps1": 5,
+          "ps2": 5,
+          "ps3": 5,
+          "ps4": 4,
+          "ps5": 5
+        },
+        "inclusion": {
+          "in1": 5,
+          "in2": 4,
+          "in3": 5,
+          "in4": 5,
+          "in5": 5
+        },
+        "communication": {
+          "co1": 5,
+          "co2": 4,
+          "co3": 5,
+          "co4": 5
+        },
+        "collaboration": {
+          "cl1": 5,
+          "cl2": 5,
+          "cl3": 4,
+          "cl4": 5
+        },
+        "recognition": {
+          "re1": 4,
+          "re2": 5,
+          "re3": 5,
+          "re4": 5
+        },
+        "wellbeing": {
+          "we1": 5,
+          "we2": 4,
+          "we3": 5,
+          "we4": 5,
+          "we5": 5
+        },
+        "career": {
+          "ca1": 5,
+          "ca2": 4,
+          "ca3": 5,
+          "ca4": 5
+        },
+        "overall": {
+          "oc1": 5,
+          "oc2": 5,
+          "oc3": 5,
+          "recommendAsPlaceToWork": "strongly-agree",
+          "biggestStrength": "Supportive leadership and a genuinely inclusive team culture.",
+          "biggestImprovement": "More cross-team social events.",
+          "otherComments": ""
+        }
+      },
+      "expected": {
+        "compositeScore": 95.5,
+        "category": "thriving",
+        "domainScores": {
+          "leadership": {
+            "mean": 4.8,
+            "score": 96,
+            "answeredCount": 5,
+            "totalCount": 5,
+            "category": "thriving"
+          },
+          "psychSafety": {
+            "mean": 4.8,
+            "score": 96,
+            "answeredCount": 5,
+            "totalCount": 5,
+            "category": "thriving"
+          },
+          "inclusion": {
+            "mean": 4.8,
+            "score": 96,
+            "answeredCount": 5,
+            "totalCount": 5,
+            "category": "thriving"
+          },
+          "communication": {
+            "mean": 4.75,
+            "score": 95,
+            "answeredCount": 4,
+            "totalCount": 4,
+            "category": "thriving"
+          },
+          "collaboration": {
+            "mean": 4.75,
+            "score": 95,
+            "answeredCount": 4,
+            "totalCount": 4,
+            "category": "thriving"
+          },
+          "recognition": {
+            "mean": 4.75,
+            "score": 95,
+            "answeredCount": 4,
+            "totalCount": 4,
+            "category": "thriving"
+          },
+          "wellbeing": {
+            "mean": 4.8,
+            "score": 96,
+            "answeredCount": 5,
+            "totalCount": 5,
+            "category": "thriving"
+          },
+          "career": {
+            "mean": 4.75,
+            "score": 95,
+            "answeredCount": 4,
+            "totalCount": 4,
+            "category": "thriving"
+          }
+        },
+        "answeredCount": 36,
+        "totalCount": 36,
+        "firedRules": [
+          {
+            "id": "ld1",
+            "domain": "leadership",
+            "label": "I trust the senior leadership of this organisation.",
+            "rawValue": 5
+          },
+          {
+            "id": "ld2",
+            "domain": "leadership",
+            "label": "My line manager treats me with respect.",
+            "rawValue": 5
+          },
+          {
+            "id": "ld3",
+            "domain": "leadership",
+            "label": "Leaders make decisions that are consistent with the organisation’s stated values.",
+            "rawValue": 4
+          },
+          {
+            "id": "ld4",
+            "domain": "leadership",
+            "label": "My line manager supports my professional growth.",
+            "rawValue": 5
+          },
+          {
+            "id": "ld5",
+            "domain": "leadership",
+            "label": "Leadership communicates a clear direction for the organisation.",
+            "rawValue": 5
+          },
+          {
+            "id": "ps1",
+            "domain": "psychSafety",
+            "label": "I can raise difficult issues at work without fear of negative consequences.",
+            "rawValue": 5
+          },
+          {
+            "id": "ps2",
+            "domain": "psychSafety",
+            "label": "I can admit a mistake here without being humiliated or punished.",
+            "rawValue": 5
+          },
+          {
+            "id": "ps3",
+            "domain": "psychSafety",
+            "label": "My colleagues respect different opinions, including disagreement.",
+            "rawValue": 5
+          },
+          {
+            "id": "ps4",
+            "domain": "psychSafety",
+            "label": "When I raise a concern, it is taken seriously.",
+            "rawValue": 4
+          },
+          {
+            "id": "ps5",
+            "domain": "psychSafety",
+            "label": "I feel safe being myself at work.",
+            "rawValue": 5
+          },
+          {
+            "id": "in1",
+            "domain": "inclusion",
+            "label": "People from all backgrounds are treated fairly here.",
+            "rawValue": 5
+          },
+          {
+            "id": "in2",
+            "domain": "inclusion",
+            "label": "I feel a genuine sense of belonging at this organisation.",
+            "rawValue": 4
+          },
+          {
+            "id": "in3",
+            "domain": "inclusion",
+            "label": "My voice is heard and considered, regardless of my role or background.",
+            "rawValue": 5
+          },
+          {
+            "id": "in4",
+            "domain": "inclusion",
+            "label": "Inappropriate or disrespectful behaviour is addressed promptly when it occurs.",
+            "rawValue": 5
+          },
+          {
+            "id": "in5",
+            "domain": "inclusion",
+            "label": "Hiring, development and promotion decisions are made fairly.",
+            "rawValue": 5
+          },
+          {
+            "id": "co1",
+            "domain": "communication",
+            "label": "Important information reaches me in time for me to act on it.",
+            "rawValue": 5
+          },
+          {
+            "id": "co2",
+            "domain": "communication",
+            "label": "Decisions made by leadership are communicated openly and honestly.",
+            "rawValue": 4
+          },
+          {
+            "id": "co3",
+            "domain": "communication",
+            "label": "My line manager keeps me informed about things that affect my work.",
+            "rawValue": 5
+          },
+          {
+            "id": "co4",
+            "domain": "communication",
+            "label": "Two-way communication is encouraged here, not just top-down announcements.",
+            "rawValue": 5
+          },
+          {
+            "id": "cl1",
+            "domain": "collaboration",
+            "label": "My colleagues collaborate well with each other.",
+            "rawValue": 5
+          },
+          {
+            "id": "cl2",
+            "domain": "collaboration",
+            "label": "Teams across the organisation cooperate effectively.",
+            "rawValue": 5
+          },
+          {
+            "id": "cl3",
+            "domain": "collaboration",
+            "label": "Conflict is handled constructively when it arises.",
+            "rawValue": 4
+          },
+          {
+            "id": "cl4",
+            "domain": "collaboration",
+            "label": "People here are willing to help each other when needed.",
+            "rawValue": 5
+          },
+          {
+            "id": "re1",
+            "domain": "recognition",
+            "label": "I receive meaningful recognition when I do good work.",
+            "rawValue": 4
+          },
+          {
+            "id": "re2",
+            "domain": "recognition",
+            "label": "Pay decisions in this organisation are made fairly.",
+            "rawValue": 5
+          },
+          {
+            "id": "re3",
+            "domain": "recognition",
+            "label": "High performers are recognised and rewarded appropriately.",
+            "rawValue": 5
+          },
+          {
+            "id": "re4",
+            "domain": "recognition",
+            "label": "My contributions are valued by my team and manager.",
+            "rawValue": 5
+          },
+          {
+            "id": "we1",
+            "domain": "wellbeing",
+            "label": "My workload is manageable.",
+            "rawValue": 5
+          },
+          {
+            "id": "we2",
+            "domain": "wellbeing",
+            "label": "I am able to maintain a healthy balance between work and my personal life.",
+            "rawValue": 4
+          },
+          {
+            "id": "we3",
+            "domain": "wellbeing",
+            "label": "I rarely feel exhausted or burnt out at the end of the working week.",
+            "rawValue": 5
+          },
+          {
+            "id": "we4",
+            "domain": "wellbeing",
+            "label": "This organisation actively supports employee mental health.",
+            "rawValue": 5
+          },
+          {
+            "id": "we5",
+            "domain": "wellbeing",
+            "label": "I am able to take time off when I need it.",
+            "rawValue": 5
+          },
+          {
+            "id": "ca1",
+            "domain": "career",
+            "label": "I have meaningful opportunities to learn new skills here.",
+            "rawValue": 5
+          },
+          {
+            "id": "ca2",
+            "domain": "career",
+            "label": "I see a clear path for career progression.",
+            "rawValue": 4
+          },
+          {
+            "id": "ca3",
+            "domain": "career",
+            "label": "My manager actively supports my professional development.",
+            "rawValue": 5
+          },
+          {
+            "id": "ca4",
+            "domain": "career",
+            "label": "Training and development resources are available when I need them.",
+            "rawValue": 5
+          }
+        ]
+      }
+    },
+    {
+      "name": "developing",
+      "description": "Mixed climate with neutral-to-lukewarm responses (mostly 3s): composite ~60 — developing.",
+      "state": {
+        "demographics": {
+          "department": "operations",
+          "tenureBand": "1-to-3-years",
+          "hoursBand": "full-time-35-to-44",
+          "roleLevel": "team-lead",
+          "workLocation": "hybrid"
+        },
+        "leadership": {
+          "ld1": 3,
+          "ld2": 3,
+          "ld3": 3,
+          "ld4": 2,
+          "ld5": 3
+        },
+        "psychSafety": {
+          "ps1": 3,
+          "ps2": 3,
+          "ps3": 3,
+          "ps4": 3,
+          "ps5": 3
+        },
+        "inclusion": {
+          "in1": 3,
+          "in2": 3,
+          "in3": 4,
+          "in4": 3,
+          "in5": 3
+        },
+        "communication": {
+          "co1": 3,
+          "co2": 3,
+          "co3": 2,
+          "co4": 3
+        },
+        "collaboration": {
+          "cl1": 3,
+          "cl2": 4,
+          "cl3": 3,
+          "cl4": 3
+        },
+        "recognition": {
+          "re1": 3,
+          "re2": 2,
+          "re3": 3,
+          "re4": 3
+        },
+        "wellbeing": {
+          "we1": 3,
+          "we2": 3,
+          "we3": 3,
+          "we4": 3,
+          "we5": 2
+        },
+        "career": {
+          "ca1": 3,
+          "ca2": 3,
+          "ca3": 3,
+          "ca4": 3
+        },
+        "overall": {
+          "oc1": 3,
+          "oc2": 3,
+          "oc3": 3,
+          "recommendAsPlaceToWork": "neutral",
+          "biggestStrength": "Good day-to-day teamwork.",
+          "biggestImprovement": "Clearer communication from senior leadership and more recognition.",
+          "otherComments": ""
+        }
+      },
+      "expected": {
+        "compositeScore": 58.9,
+        "category": "developing",
+        "domainScores": {
+          "leadership": {
+            "mean": 2.8,
+            "score": 56,
+            "answeredCount": 5,
+            "totalCount": 5,
+            "category": "developing"
+          },
+          "psychSafety": {
+            "mean": 3,
+            "score": 60,
+            "answeredCount": 5,
+            "totalCount": 5,
+            "category": "developing"
+          },
+          "inclusion": {
+            "mean": 3.2,
+            "score": 64,
+            "answeredCount": 5,
+            "totalCount": 5,
+            "category": "developing"
+          },
+          "communication": {
+            "mean": 2.75,
+            "score": 55,
+            "answeredCount": 4,
+            "totalCount": 4,
+            "category": "developing"
+          },
+          "collaboration": {
+            "mean": 3.25,
+            "score": 65,
+            "answeredCount": 4,
+            "totalCount": 4,
+            "category": "developing"
+          },
+          "recognition": {
+            "mean": 2.75,
+            "score": 55,
+            "answeredCount": 4,
+            "totalCount": 4,
+            "category": "developing"
+          },
+          "wellbeing": {
+            "mean": 2.8,
+            "score": 56,
+            "answeredCount": 5,
+            "totalCount": 5,
+            "category": "developing"
+          },
+          "career": {
+            "mean": 3,
+            "score": 60,
+            "answeredCount": 4,
+            "totalCount": 4,
+            "category": "developing"
+          }
+        },
+        "answeredCount": 36,
+        "totalCount": 36,
+        "firedRules": [
+          {
+            "id": "ld1",
+            "domain": "leadership",
+            "label": "I trust the senior leadership of this organisation.",
+            "rawValue": 3
+          },
+          {
+            "id": "ld2",
+            "domain": "leadership",
+            "label": "My line manager treats me with respect.",
+            "rawValue": 3
+          },
+          {
+            "id": "ld3",
+            "domain": "leadership",
+            "label": "Leaders make decisions that are consistent with the organisation’s stated values.",
+            "rawValue": 3
+          },
+          {
+            "id": "ld4",
+            "domain": "leadership",
+            "label": "My line manager supports my professional growth.",
+            "rawValue": 2
+          },
+          {
+            "id": "ld5",
+            "domain": "leadership",
+            "label": "Leadership communicates a clear direction for the organisation.",
+            "rawValue": 3
+          },
+          {
+            "id": "ps1",
+            "domain": "psychSafety",
+            "label": "I can raise difficult issues at work without fear of negative consequences.",
+            "rawValue": 3
+          },
+          {
+            "id": "ps2",
+            "domain": "psychSafety",
+            "label": "I can admit a mistake here without being humiliated or punished.",
+            "rawValue": 3
+          },
+          {
+            "id": "ps3",
+            "domain": "psychSafety",
+            "label": "My colleagues respect different opinions, including disagreement.",
+            "rawValue": 3
+          },
+          {
+            "id": "ps4",
+            "domain": "psychSafety",
+            "label": "When I raise a concern, it is taken seriously.",
+            "rawValue": 3
+          },
+          {
+            "id": "ps5",
+            "domain": "psychSafety",
+            "label": "I feel safe being myself at work.",
+            "rawValue": 3
+          },
+          {
+            "id": "in1",
+            "domain": "inclusion",
+            "label": "People from all backgrounds are treated fairly here.",
+            "rawValue": 3
+          },
+          {
+            "id": "in2",
+            "domain": "inclusion",
+            "label": "I feel a genuine sense of belonging at this organisation.",
+            "rawValue": 3
+          },
+          {
+            "id": "in3",
+            "domain": "inclusion",
+            "label": "My voice is heard and considered, regardless of my role or background.",
+            "rawValue": 4
+          },
+          {
+            "id": "in4",
+            "domain": "inclusion",
+            "label": "Inappropriate or disrespectful behaviour is addressed promptly when it occurs.",
+            "rawValue": 3
+          },
+          {
+            "id": "in5",
+            "domain": "inclusion",
+            "label": "Hiring, development and promotion decisions are made fairly.",
+            "rawValue": 3
+          },
+          {
+            "id": "co1",
+            "domain": "communication",
+            "label": "Important information reaches me in time for me to act on it.",
+            "rawValue": 3
+          },
+          {
+            "id": "co2",
+            "domain": "communication",
+            "label": "Decisions made by leadership are communicated openly and honestly.",
+            "rawValue": 3
+          },
+          {
+            "id": "co3",
+            "domain": "communication",
+            "label": "My line manager keeps me informed about things that affect my work.",
+            "rawValue": 2
+          },
+          {
+            "id": "co4",
+            "domain": "communication",
+            "label": "Two-way communication is encouraged here, not just top-down announcements.",
+            "rawValue": 3
+          },
+          {
+            "id": "cl1",
+            "domain": "collaboration",
+            "label": "My colleagues collaborate well with each other.",
+            "rawValue": 3
+          },
+          {
+            "id": "cl2",
+            "domain": "collaboration",
+            "label": "Teams across the organisation cooperate effectively.",
+            "rawValue": 4
+          },
+          {
+            "id": "cl3",
+            "domain": "collaboration",
+            "label": "Conflict is handled constructively when it arises.",
+            "rawValue": 3
+          },
+          {
+            "id": "cl4",
+            "domain": "collaboration",
+            "label": "People here are willing to help each other when needed.",
+            "rawValue": 3
+          },
+          {
+            "id": "re1",
+            "domain": "recognition",
+            "label": "I receive meaningful recognition when I do good work.",
+            "rawValue": 3
+          },
+          {
+            "id": "re2",
+            "domain": "recognition",
+            "label": "Pay decisions in this organisation are made fairly.",
+            "rawValue": 2
+          },
+          {
+            "id": "re3",
+            "domain": "recognition",
+            "label": "High performers are recognised and rewarded appropriately.",
+            "rawValue": 3
+          },
+          {
+            "id": "re4",
+            "domain": "recognition",
+            "label": "My contributions are valued by my team and manager.",
+            "rawValue": 3
+          },
+          {
+            "id": "we1",
+            "domain": "wellbeing",
+            "label": "My workload is manageable.",
+            "rawValue": 3
+          },
+          {
+            "id": "we2",
+            "domain": "wellbeing",
+            "label": "I am able to maintain a healthy balance between work and my personal life.",
+            "rawValue": 3
+          },
+          {
+            "id": "we3",
+            "domain": "wellbeing",
+            "label": "I rarely feel exhausted or burnt out at the end of the working week.",
+            "rawValue": 3
+          },
+          {
+            "id": "we4",
+            "domain": "wellbeing",
+            "label": "This organisation actively supports employee mental health.",
+            "rawValue": 3
+          },
+          {
+            "id": "we5",
+            "domain": "wellbeing",
+            "label": "I am able to take time off when I need it.",
+            "rawValue": 2
+          },
+          {
+            "id": "ca1",
+            "domain": "career",
+            "label": "I have meaningful opportunities to learn new skills here.",
+            "rawValue": 3
+          },
+          {
+            "id": "ca2",
+            "domain": "career",
+            "label": "I see a clear path for career progression.",
+            "rawValue": 3
+          },
+          {
+            "id": "ca3",
+            "domain": "career",
+            "label": "My manager actively supports my professional development.",
+            "rawValue": 3
+          },
+          {
+            "id": "ca4",
+            "domain": "career",
+            "label": "Training and development resources are available when I need them.",
+            "rawValue": 3
+          }
+        ]
+      }
+    },
+    {
+      "name": "critical",
+      "description": "Severely unhealthy climate with strongly negative responses across the board (all items 1): composite 20 — critical.",
+      "state": {
+        "demographics": {
+          "department": "customer-service",
+          "tenureBand": "less-than-1-year",
+          "hoursBand": "long-hours-45-plus",
+          "roleLevel": "individual-contributor",
+          "workLocation": "on-site"
+        },
+        "leadership": {
+          "ld1": 1,
+          "ld2": 1,
+          "ld3": 1,
+          "ld4": 1,
+          "ld5": 1
+        },
+        "psychSafety": {
+          "ps1": 1,
+          "ps2": 1,
+          "ps3": 1,
+          "ps4": 1,
+          "ps5": 1
+        },
+        "inclusion": {
+          "in1": 1,
+          "in2": 1,
+          "in3": 1,
+          "in4": 1,
+          "in5": 1
+        },
+        "communication": {
+          "co1": 1,
+          "co2": 1,
+          "co3": 1,
+          "co4": 1
+        },
+        "collaboration": {
+          "cl1": 1,
+          "cl2": 1,
+          "cl3": 1,
+          "cl4": 1
+        },
+        "recognition": {
+          "re1": 1,
+          "re2": 1,
+          "re3": 1,
+          "re4": 1
+        },
+        "wellbeing": {
+          "we1": 1,
+          "we2": 1,
+          "we3": 1,
+          "we4": 1,
+          "we5": 1
+        },
+        "career": {
+          "ca1": 1,
+          "ca2": 1,
+          "ca3": 1,
+          "ca4": 1
+        },
+        "overall": {
+          "oc1": 1,
+          "oc2": 1,
+          "oc3": 1,
+          "recommendAsPlaceToWork": "strongly-disagree",
+          "biggestStrength": "",
+          "biggestImprovement": "Unsustainable workload, no psychological safety, and burnout across the team.",
+          "otherComments": "Actively looking to leave."
+        }
+      },
+      "expected": {
+        "compositeScore": 20,
+        "category": "critical",
+        "domainScores": {
+          "leadership": {
+            "mean": 1,
+            "score": 20,
+            "answeredCount": 5,
+            "totalCount": 5,
+            "category": "critical"
+          },
+          "psychSafety": {
+            "mean": 1,
+            "score": 20,
+            "answeredCount": 5,
+            "totalCount": 5,
+            "category": "critical"
+          },
+          "inclusion": {
+            "mean": 1,
+            "score": 20,
+            "answeredCount": 5,
+            "totalCount": 5,
+            "category": "critical"
+          },
+          "communication": {
+            "mean": 1,
+            "score": 20,
+            "answeredCount": 4,
+            "totalCount": 4,
+            "category": "critical"
+          },
+          "collaboration": {
+            "mean": 1,
+            "score": 20,
+            "answeredCount": 4,
+            "totalCount": 4,
+            "category": "critical"
+          },
+          "recognition": {
+            "mean": 1,
+            "score": 20,
+            "answeredCount": 4,
+            "totalCount": 4,
+            "category": "critical"
+          },
+          "wellbeing": {
+            "mean": 1,
+            "score": 20,
+            "answeredCount": 5,
+            "totalCount": 5,
+            "category": "critical"
+          },
+          "career": {
+            "mean": 1,
+            "score": 20,
+            "answeredCount": 4,
+            "totalCount": 4,
+            "category": "critical"
+          }
+        },
+        "answeredCount": 36,
+        "totalCount": 36,
+        "firedRules": [
+          {
+            "id": "ld1",
+            "domain": "leadership",
+            "label": "I trust the senior leadership of this organisation.",
+            "rawValue": 1
+          },
+          {
+            "id": "ld2",
+            "domain": "leadership",
+            "label": "My line manager treats me with respect.",
+            "rawValue": 1
+          },
+          {
+            "id": "ld3",
+            "domain": "leadership",
+            "label": "Leaders make decisions that are consistent with the organisation’s stated values.",
+            "rawValue": 1
+          },
+          {
+            "id": "ld4",
+            "domain": "leadership",
+            "label": "My line manager supports my professional growth.",
+            "rawValue": 1
+          },
+          {
+            "id": "ld5",
+            "domain": "leadership",
+            "label": "Leadership communicates a clear direction for the organisation.",
+            "rawValue": 1
+          },
+          {
+            "id": "ps1",
+            "domain": "psychSafety",
+            "label": "I can raise difficult issues at work without fear of negative consequences.",
+            "rawValue": 1
+          },
+          {
+            "id": "ps2",
+            "domain": "psychSafety",
+            "label": "I can admit a mistake here without being humiliated or punished.",
+            "rawValue": 1
+          },
+          {
+            "id": "ps3",
+            "domain": "psychSafety",
+            "label": "My colleagues respect different opinions, including disagreement.",
+            "rawValue": 1
+          },
+          {
+            "id": "ps4",
+            "domain": "psychSafety",
+            "label": "When I raise a concern, it is taken seriously.",
+            "rawValue": 1
+          },
+          {
+            "id": "ps5",
+            "domain": "psychSafety",
+            "label": "I feel safe being myself at work.",
+            "rawValue": 1
+          },
+          {
+            "id": "in1",
+            "domain": "inclusion",
+            "label": "People from all backgrounds are treated fairly here.",
+            "rawValue": 1
+          },
+          {
+            "id": "in2",
+            "domain": "inclusion",
+            "label": "I feel a genuine sense of belonging at this organisation.",
+            "rawValue": 1
+          },
+          {
+            "id": "in3",
+            "domain": "inclusion",
+            "label": "My voice is heard and considered, regardless of my role or background.",
+            "rawValue": 1
+          },
+          {
+            "id": "in4",
+            "domain": "inclusion",
+            "label": "Inappropriate or disrespectful behaviour is addressed promptly when it occurs.",
+            "rawValue": 1
+          },
+          {
+            "id": "in5",
+            "domain": "inclusion",
+            "label": "Hiring, development and promotion decisions are made fairly.",
+            "rawValue": 1
+          },
+          {
+            "id": "co1",
+            "domain": "communication",
+            "label": "Important information reaches me in time for me to act on it.",
+            "rawValue": 1
+          },
+          {
+            "id": "co2",
+            "domain": "communication",
+            "label": "Decisions made by leadership are communicated openly and honestly.",
+            "rawValue": 1
+          },
+          {
+            "id": "co3",
+            "domain": "communication",
+            "label": "My line manager keeps me informed about things that affect my work.",
+            "rawValue": 1
+          },
+          {
+            "id": "co4",
+            "domain": "communication",
+            "label": "Two-way communication is encouraged here, not just top-down announcements.",
+            "rawValue": 1
+          },
+          {
+            "id": "cl1",
+            "domain": "collaboration",
+            "label": "My colleagues collaborate well with each other.",
+            "rawValue": 1
+          },
+          {
+            "id": "cl2",
+            "domain": "collaboration",
+            "label": "Teams across the organisation cooperate effectively.",
+            "rawValue": 1
+          },
+          {
+            "id": "cl3",
+            "domain": "collaboration",
+            "label": "Conflict is handled constructively when it arises.",
+            "rawValue": 1
+          },
+          {
+            "id": "cl4",
+            "domain": "collaboration",
+            "label": "People here are willing to help each other when needed.",
+            "rawValue": 1
+          },
+          {
+            "id": "re1",
+            "domain": "recognition",
+            "label": "I receive meaningful recognition when I do good work.",
+            "rawValue": 1
+          },
+          {
+            "id": "re2",
+            "domain": "recognition",
+            "label": "Pay decisions in this organisation are made fairly.",
+            "rawValue": 1
+          },
+          {
+            "id": "re3",
+            "domain": "recognition",
+            "label": "High performers are recognised and rewarded appropriately.",
+            "rawValue": 1
+          },
+          {
+            "id": "re4",
+            "domain": "recognition",
+            "label": "My contributions are valued by my team and manager.",
+            "rawValue": 1
+          },
+          {
+            "id": "we1",
+            "domain": "wellbeing",
+            "label": "My workload is manageable.",
+            "rawValue": 1
+          },
+          {
+            "id": "we2",
+            "domain": "wellbeing",
+            "label": "I am able to maintain a healthy balance between work and my personal life.",
+            "rawValue": 1
+          },
+          {
+            "id": "we3",
+            "domain": "wellbeing",
+            "label": "I rarely feel exhausted or burnt out at the end of the working week.",
+            "rawValue": 1
+          },
+          {
+            "id": "we4",
+            "domain": "wellbeing",
+            "label": "This organisation actively supports employee mental health.",
+            "rawValue": 1
+          },
+          {
+            "id": "we5",
+            "domain": "wellbeing",
+            "label": "I am able to take time off when I need it.",
+            "rawValue": 1
+          },
+          {
+            "id": "ca1",
+            "domain": "career",
+            "label": "I have meaningful opportunities to learn new skills here.",
+            "rawValue": 1
+          },
+          {
+            "id": "ca2",
+            "domain": "career",
+            "label": "I see a clear path for career progression.",
+            "rawValue": 1
+          },
+          {
+            "id": "ca3",
+            "domain": "career",
+            "label": "My manager actively supports my professional development.",
+            "rawValue": 1
+          },
+          {
+            "id": "ca4",
+            "domain": "career",
+            "label": "Training and development resources are available when I need them.",
+            "rawValue": 1
+          }
+        ]
+      }
+    }
+  ]
+}

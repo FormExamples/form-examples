@@ -1,0 +1,472 @@
+{
+  "engine": "front-end-with-html",
+  "graderHint": "gradeFluidBalance",
+  "note": "Realistic filled-in chart states in the Fluid Balance engine's shape. `gradeFluidBalance` sums timed intake and output volumes, computes netBalanceMl = intake - output, the urine output rate (mL/kg/h), and classifies fluidStatus with precedence oliguria (urine rate < 0.5 mL/kg/h over >= 6 h), then positive (net >= +threshold), negative (net <= -threshold), else balanced. Threshold defaults to +/-1000 mL per 24 h. `gradeFluidBalance` is deterministic (the full grade appends a timestamp separately). `expected` is computed by `bin/test-personas --update` and verified by `bin/test-personas`.",
+  "personas": [
+    {
+      "name": "balanced",
+      "description": "24-hour chart with intake (2000 mL) close to output (1800 mL): net +200 mL, well within the +/-1000 mL threshold, adequate urine output — balanced.",
+      "state": {
+        "context": {
+          "clinicianName": "",
+          "clinicianRole": "registered-nurse",
+          "patientIdentifier": "",
+          "wardOrUnit": "ward-4b",
+          "chartStartAt": "2026-07-12T08:00:00Z",
+          "chartPeriodHours": 24
+        },
+        "patient": {
+          "weightKg": 70
+        },
+        "entries": [
+          {
+            "entryAt": "2026-07-12T08:00:00Z",
+            "direction": "intake",
+            "category": "oral",
+            "description": "Water",
+            "volumeMl": 500
+          },
+          {
+            "entryAt": "2026-07-12T10:00:00Z",
+            "direction": "intake",
+            "category": "iv",
+            "description": "0.9% saline",
+            "volumeMl": 500
+          },
+          {
+            "entryAt": "2026-07-12T12:00:00Z",
+            "direction": "intake",
+            "category": "oral",
+            "description": "Tea",
+            "volumeMl": 500
+          },
+          {
+            "entryAt": "2026-07-12T16:00:00Z",
+            "direction": "intake",
+            "category": "oral",
+            "description": "Water",
+            "volumeMl": 500
+          },
+          {
+            "entryAt": "2026-07-12T09:00:00Z",
+            "direction": "output",
+            "category": "urine",
+            "description": "Void",
+            "volumeMl": 600
+          },
+          {
+            "entryAt": "2026-07-12T13:00:00Z",
+            "direction": "output",
+            "category": "urine",
+            "description": "Void",
+            "volumeMl": 600
+          },
+          {
+            "entryAt": "2026-07-12T18:00:00Z",
+            "direction": "output",
+            "category": "urine",
+            "description": "Void",
+            "volumeMl": 600
+          }
+        ],
+        "note": {
+          "clinicalNote": "Patient stable, tolerating oral fluids."
+        }
+      },
+      "expected": {
+        "totalIntakeMl": 2000,
+        "totalOutputMl": 1800,
+        "netBalanceMl": 200,
+        "intakeByCategory": {
+          "oral": 1500,
+          "iv": 500
+        },
+        "outputByCategory": {
+          "urine": 1800
+        },
+        "runningBalance": [
+          {
+            "entryAt": "2026-07-12T08:00:00Z",
+            "balanceMl": 500
+          },
+          {
+            "entryAt": "2026-07-12T09:00:00Z",
+            "balanceMl": -100
+          },
+          {
+            "entryAt": "2026-07-12T10:00:00Z",
+            "balanceMl": 400
+          },
+          {
+            "entryAt": "2026-07-12T12:00:00Z",
+            "balanceMl": 900
+          },
+          {
+            "entryAt": "2026-07-12T13:00:00Z",
+            "balanceMl": 300
+          },
+          {
+            "entryAt": "2026-07-12T16:00:00Z",
+            "balanceMl": 800
+          },
+          {
+            "entryAt": "2026-07-12T18:00:00Z",
+            "balanceMl": 200
+          }
+        ],
+        "urineOutputMl": 1800,
+        "hoursObserved": 24,
+        "weightKg": 70,
+        "urineOutputRateMlPerKgPerHour": 1.0714285714285714,
+        "positiveThresholdMl": 1000,
+        "negativeThresholdMl": 1000,
+        "fluidStatus": "balanced",
+        "firedRules": [
+          {
+            "id": "R-TOTALS-01",
+            "category": "totals",
+            "description": "Intake 2000 mL, output 1800 mL"
+          },
+          {
+            "id": "R-NET-BALANCE-01",
+            "category": "net-balance",
+            "description": "Net balance +200 mL over 24 h"
+          },
+          {
+            "id": "R-URINE-RATE-01",
+            "category": "urine-rate",
+            "description": "Urine output rate 1.07 mL/kg/h"
+          },
+          {
+            "id": "R-FLUID-STATUS-01",
+            "category": "fluid-status",
+            "description": "Fluid status: Balanced"
+          },
+          {
+            "id": "R-INTAKE-SUBTOTAL-01",
+            "category": "intake-subtotal",
+            "description": "Oral intake 1500 mL"
+          },
+          {
+            "id": "R-INTAKE-SUBTOTAL-01",
+            "category": "intake-subtotal",
+            "description": "Intravenous (IV) intake 500 mL"
+          },
+          {
+            "id": "R-OUTPUT-SUBTOTAL-01",
+            "category": "output-subtotal",
+            "description": "Urine output 1800 mL"
+          }
+        ]
+      }
+    },
+    {
+      "name": "positive",
+      "description": "24-hour chart with heavy IV and oral intake (3500 mL) far exceeding output (1300 mL): net +2200 mL beyond the +1000 mL threshold — positive (fluid-overload risk).",
+      "state": {
+        "context": {
+          "clinicianName": "",
+          "clinicianRole": "registered-nurse",
+          "patientIdentifier": "",
+          "wardOrUnit": "hdu",
+          "chartStartAt": "2026-07-12T08:00:00Z",
+          "chartPeriodHours": 24
+        },
+        "patient": {
+          "weightKg": 70
+        },
+        "entries": [
+          {
+            "entryAt": "2026-07-12T08:00:00Z",
+            "direction": "intake",
+            "category": "oral",
+            "description": "Water",
+            "volumeMl": 600
+          },
+          {
+            "entryAt": "2026-07-12T10:00:00Z",
+            "direction": "intake",
+            "category": "iv",
+            "description": "Hartmann's",
+            "volumeMl": 1000
+          },
+          {
+            "entryAt": "2026-07-12T12:00:00Z",
+            "direction": "intake",
+            "category": "oral",
+            "description": "Soup",
+            "volumeMl": 600
+          },
+          {
+            "entryAt": "2026-07-12T14:00:00Z",
+            "direction": "intake",
+            "category": "iv",
+            "description": "0.9% saline",
+            "volumeMl": 500
+          },
+          {
+            "entryAt": "2026-07-12T16:00:00Z",
+            "direction": "intake",
+            "category": "oral",
+            "description": "Water",
+            "volumeMl": 800
+          },
+          {
+            "entryAt": "2026-07-12T09:00:00Z",
+            "direction": "output",
+            "category": "urine",
+            "description": "Void",
+            "volumeMl": 450
+          },
+          {
+            "entryAt": "2026-07-12T13:00:00Z",
+            "direction": "output",
+            "category": "urine",
+            "description": "Void",
+            "volumeMl": 450
+          },
+          {
+            "entryAt": "2026-07-12T18:00:00Z",
+            "direction": "output",
+            "category": "urine",
+            "description": "Void",
+            "volumeMl": 400
+          }
+        ],
+        "note": {
+          "clinicalNote": "Positive balance building; review IV rate and consider diuretic."
+        }
+      },
+      "expected": {
+        "totalIntakeMl": 3500,
+        "totalOutputMl": 1300,
+        "netBalanceMl": 2200,
+        "intakeByCategory": {
+          "oral": 2000,
+          "iv": 1500
+        },
+        "outputByCategory": {
+          "urine": 1300
+        },
+        "runningBalance": [
+          {
+            "entryAt": "2026-07-12T08:00:00Z",
+            "balanceMl": 600
+          },
+          {
+            "entryAt": "2026-07-12T09:00:00Z",
+            "balanceMl": 150
+          },
+          {
+            "entryAt": "2026-07-12T10:00:00Z",
+            "balanceMl": 1150
+          },
+          {
+            "entryAt": "2026-07-12T12:00:00Z",
+            "balanceMl": 1750
+          },
+          {
+            "entryAt": "2026-07-12T13:00:00Z",
+            "balanceMl": 1300
+          },
+          {
+            "entryAt": "2026-07-12T14:00:00Z",
+            "balanceMl": 1800
+          },
+          {
+            "entryAt": "2026-07-12T16:00:00Z",
+            "balanceMl": 2600
+          },
+          {
+            "entryAt": "2026-07-12T18:00:00Z",
+            "balanceMl": 2200
+          }
+        ],
+        "urineOutputMl": 1300,
+        "hoursObserved": 24,
+        "weightKg": 70,
+        "urineOutputRateMlPerKgPerHour": 0.7738095238095238,
+        "positiveThresholdMl": 1000,
+        "negativeThresholdMl": 1000,
+        "fluidStatus": "positive",
+        "firedRules": [
+          {
+            "id": "R-TOTALS-01",
+            "category": "totals",
+            "description": "Intake 3500 mL, output 1300 mL"
+          },
+          {
+            "id": "R-NET-BALANCE-01",
+            "category": "net-balance",
+            "description": "Net balance +2200 mL over 24 h"
+          },
+          {
+            "id": "R-URINE-RATE-01",
+            "category": "urine-rate",
+            "description": "Urine output rate 0.77 mL/kg/h"
+          },
+          {
+            "id": "R-FLUID-STATUS-01",
+            "category": "fluid-status",
+            "description": "Fluid status: Positive"
+          },
+          {
+            "id": "R-INTAKE-SUBTOTAL-01",
+            "category": "intake-subtotal",
+            "description": "Oral intake 2000 mL"
+          },
+          {
+            "id": "R-INTAKE-SUBTOTAL-01",
+            "category": "intake-subtotal",
+            "description": "Intravenous (IV) intake 1500 mL"
+          },
+          {
+            "id": "R-OUTPUT-SUBTOTAL-01",
+            "category": "output-subtotal",
+            "description": "Urine output 1300 mL"
+          }
+        ]
+      }
+    },
+    {
+      "name": "negative",
+      "description": "24-hour chart with low intake (1000 mL) and high output (2600 mL): net -1600 mL beyond the -1000 mL threshold, urine output well above the oliguria cut-off — negative (dehydration risk).",
+      "state": {
+        "context": {
+          "clinicianName": "",
+          "clinicianRole": "registered-nurse",
+          "patientIdentifier": "",
+          "wardOrUnit": "ward-2a",
+          "chartStartAt": "2026-07-12T08:00:00Z",
+          "chartPeriodHours": 24
+        },
+        "patient": {
+          "weightKg": 70
+        },
+        "entries": [
+          {
+            "entryAt": "2026-07-12T08:00:00Z",
+            "direction": "intake",
+            "category": "oral",
+            "description": "Sips of water",
+            "volumeMl": 500
+          },
+          {
+            "entryAt": "2026-07-12T14:00:00Z",
+            "direction": "intake",
+            "category": "oral",
+            "description": "Water",
+            "volumeMl": 500
+          },
+          {
+            "entryAt": "2026-07-12T09:00:00Z",
+            "direction": "output",
+            "category": "urine",
+            "description": "Void",
+            "volumeMl": 700
+          },
+          {
+            "entryAt": "2026-07-12T12:00:00Z",
+            "direction": "output",
+            "category": "urine",
+            "description": "Void",
+            "volumeMl": 700
+          },
+          {
+            "entryAt": "2026-07-12T15:00:00Z",
+            "direction": "output",
+            "category": "urine",
+            "description": "Void",
+            "volumeMl": 700
+          },
+          {
+            "entryAt": "2026-07-12T19:00:00Z",
+            "direction": "output",
+            "category": "urine",
+            "description": "Void",
+            "volumeMl": 500
+          }
+        ],
+        "note": {
+          "clinicalNote": "Poor oral intake and high urine output; encourage fluids, review losses."
+        }
+      },
+      "expected": {
+        "totalIntakeMl": 1000,
+        "totalOutputMl": 2600,
+        "netBalanceMl": -1600,
+        "intakeByCategory": {
+          "oral": 1000
+        },
+        "outputByCategory": {
+          "urine": 2600
+        },
+        "runningBalance": [
+          {
+            "entryAt": "2026-07-12T08:00:00Z",
+            "balanceMl": 500
+          },
+          {
+            "entryAt": "2026-07-12T09:00:00Z",
+            "balanceMl": -200
+          },
+          {
+            "entryAt": "2026-07-12T12:00:00Z",
+            "balanceMl": -900
+          },
+          {
+            "entryAt": "2026-07-12T14:00:00Z",
+            "balanceMl": -400
+          },
+          {
+            "entryAt": "2026-07-12T15:00:00Z",
+            "balanceMl": -1100
+          },
+          {
+            "entryAt": "2026-07-12T19:00:00Z",
+            "balanceMl": -1600
+          }
+        ],
+        "urineOutputMl": 2600,
+        "hoursObserved": 24,
+        "weightKg": 70,
+        "urineOutputRateMlPerKgPerHour": 1.5476190476190477,
+        "positiveThresholdMl": 1000,
+        "negativeThresholdMl": 1000,
+        "fluidStatus": "negative",
+        "firedRules": [
+          {
+            "id": "R-TOTALS-01",
+            "category": "totals",
+            "description": "Intake 1000 mL, output 2600 mL"
+          },
+          {
+            "id": "R-NET-BALANCE-01",
+            "category": "net-balance",
+            "description": "Net balance -1600 mL over 24 h"
+          },
+          {
+            "id": "R-URINE-RATE-01",
+            "category": "urine-rate",
+            "description": "Urine output rate 1.55 mL/kg/h"
+          },
+          {
+            "id": "R-FLUID-STATUS-01",
+            "category": "fluid-status",
+            "description": "Fluid status: Negative"
+          },
+          {
+            "id": "R-INTAKE-SUBTOTAL-01",
+            "category": "intake-subtotal",
+            "description": "Oral intake 1000 mL"
+          },
+          {
+            "id": "R-OUTPUT-SUBTOTAL-01",
+            "category": "output-subtotal",
+            "description": "Urine output 2600 mL"
+          }
+        ]
+      }
+    }
+  ]
+}

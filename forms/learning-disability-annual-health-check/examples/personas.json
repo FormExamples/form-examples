@@ -1,0 +1,787 @@
+{
+  "engine": "front-end-with-html",
+  "graderHint": "calculateGrade",
+  "note": "This is a documentation/completeness instrument, not a severity score. `calculateGrade` counts how many of the 18 required components carry a real recorded value (sentinels like not-recorded/not-assessed/'' do not count), derives completenessPercent (0-100), and sets status 'complete' only when every component is recorded AND the Health Action Plan was produced and shared; otherwise 'incomplete'. `calculateGrade` is deterministic (the full `assess` stamps a timestamp). Personas span the completeness range. `expected` is computed by `bin/test-personas --update` and verified by `bin/test-personas`.",
+  "personas": [
+    {
+      "name": "complete",
+      "description": "Thorough annual health check with every one of the 18 required components recorded and a Health Action Plan produced and shared: 100% — complete.",
+      "state": {
+        "context": {
+          "clinicianName": "",
+          "clinicianRole": "gp",
+          "checkedOn": "",
+          "practiceName": "",
+          "easyReadInvitationSent": "yes",
+          "preCheckDone": "yes"
+        },
+        "identification": {
+          "personIdentifier": "",
+          "ageBand": "25-34",
+          "sex": "female",
+          "ldRegisterStatus": "on-register",
+          "mainCarer": "family-carer"
+        },
+        "adjustments": {
+          "communicationNeeds": "easy-read",
+          "reasonableAdjustmentsRecorded": "yes",
+          "healthPassport": "yes",
+          "consentCapacityNote": "Capacity present for this check."
+        },
+        "physical": {
+          "weightBmiStatus": "recorded",
+          "bmi": 27.4,
+          "bloodPressureStatus": "recorded",
+          "epilepsyStatus": "not-applicable",
+          "constipationStatus": "no-concern",
+          "dysphagiaStatus": "no-concern",
+          "continenceStatus": "no-concern",
+          "mobilityFallsStatus": "no-concern",
+          "dentalStatus": "recorded",
+          "visionStatus": "recorded",
+          "hearingStatus": "recorded",
+          "footHealthStatus": "recorded",
+          "skinStatus": "no-concern",
+          "physicalHealthActions": "Refer to dietitian for weight support."
+        },
+        "screening": {
+          "cancerScreeningStatus": "up-to-date",
+          "otherScreeningStatus": "up-to-date",
+          "immunisationStatus": "up-to-date"
+        },
+        "medication": {
+          "medicationReconciled": "yes",
+          "psychotropicPrescribed": "no",
+          "psychotropicIndication": "",
+          "psychotropicLastReviewed": "",
+          "stompDiscussed": "not-applicable",
+          "medicationSideEffects": "none"
+        },
+        "mental": {
+          "mentalHealthStatus": "recorded",
+          "behaviourStatus": "no-concern",
+          "behaviourTriggers": ""
+        },
+        "syndrome": {
+          "syndromeSpecificStatus": "not-applicable"
+        },
+        "carer": {
+          "carerNeedsStatus": "assessed",
+          "socialCircumstances": "Lives with family, well supported."
+        },
+        "plan": {
+          "healthActionPlanProduced": "yes",
+          "healthActionPlanShared": "yes",
+          "healthActionPlanActions": "Dietitian referral; annual bloods; dental follow-up.",
+          "clinicianNote": ""
+        }
+      },
+      "expected": {
+        "status": "complete",
+        "completenessPercent": 100,
+        "healthActionPlanComplete": true,
+        "componentStatuses": [
+          {
+            "id": "reasonable-adjustments",
+            "group": "adjustments",
+            "label": "Reasonable adjustments & communication",
+            "completed": true
+          },
+          {
+            "id": "weight-bmi",
+            "group": "physical",
+            "label": "Weight and BMI",
+            "completed": true
+          },
+          {
+            "id": "blood-pressure",
+            "group": "physical",
+            "label": "Blood pressure",
+            "completed": true
+          },
+          {
+            "id": "epilepsy",
+            "group": "physical",
+            "label": "Epilepsy review",
+            "completed": true
+          },
+          {
+            "id": "constipation",
+            "group": "physical",
+            "label": "Constipation",
+            "completed": true
+          },
+          {
+            "id": "dysphagia",
+            "group": "physical",
+            "label": "Dysphagia (swallowing)",
+            "completed": true
+          },
+          {
+            "id": "continence",
+            "group": "physical",
+            "label": "Continence",
+            "completed": true
+          },
+          {
+            "id": "mobility-falls",
+            "group": "physical",
+            "label": "Mobility and falls",
+            "completed": true
+          },
+          {
+            "id": "dental",
+            "group": "physical",
+            "label": "Dental / oral health",
+            "completed": true
+          },
+          {
+            "id": "vision",
+            "group": "physical",
+            "label": "Vision",
+            "completed": true
+          },
+          {
+            "id": "hearing",
+            "group": "physical",
+            "label": "Hearing",
+            "completed": true
+          },
+          {
+            "id": "foot-health",
+            "group": "physical",
+            "label": "Foot health",
+            "completed": true
+          },
+          {
+            "id": "skin",
+            "group": "physical",
+            "label": "Skin",
+            "completed": true
+          },
+          {
+            "id": "screening-immunisation",
+            "group": "screening",
+            "label": "Screening & immunisation uptake",
+            "completed": true
+          },
+          {
+            "id": "medication-review",
+            "group": "medication",
+            "label": "Medication review (incl. STOMP)",
+            "completed": true
+          },
+          {
+            "id": "mental-health-behaviour",
+            "group": "mental",
+            "label": "Mental health & behaviour",
+            "completed": true
+          },
+          {
+            "id": "syndrome-specific",
+            "group": "syndrome",
+            "label": "Syndrome-specific checks",
+            "completed": true
+          },
+          {
+            "id": "carer-social",
+            "group": "carer",
+            "label": "Carer & social",
+            "completed": true
+          }
+        ],
+        "completedCount": 18,
+        "firedRules": [
+          {
+            "id": "R-COMPONENT-REASONABLE-ADJUSTMENTS",
+            "component": "reasonable-adjustments",
+            "category": "component",
+            "description": "Reasonable adjustments and communication needs considered and recorded"
+          },
+          {
+            "id": "R-COMPONENT-WEIGHT-BMI",
+            "component": "weight-bmi",
+            "category": "component",
+            "description": "Weight and body-mass index recorded (or declined)"
+          },
+          {
+            "id": "R-COMPONENT-BLOOD-PRESSURE",
+            "component": "blood-pressure",
+            "category": "component",
+            "description": "Blood pressure recorded"
+          },
+          {
+            "id": "R-COMPONENT-EPILEPSY",
+            "component": "epilepsy",
+            "category": "component",
+            "description": "Epilepsy reviewed (or not applicable)"
+          },
+          {
+            "id": "R-COMPONENT-CONSTIPATION",
+            "component": "constipation",
+            "category": "component",
+            "description": "Constipation assessed"
+          },
+          {
+            "id": "R-COMPONENT-DYSPHAGIA",
+            "component": "dysphagia",
+            "category": "component",
+            "description": "Swallowing / dysphagia assessed"
+          },
+          {
+            "id": "R-COMPONENT-CONTINENCE",
+            "component": "continence",
+            "category": "component",
+            "description": "Continence assessed"
+          },
+          {
+            "id": "R-COMPONENT-MOBILITY-FALLS",
+            "component": "mobility-falls",
+            "category": "component",
+            "description": "Mobility and falls assessed"
+          },
+          {
+            "id": "R-COMPONENT-DENTAL",
+            "component": "dental",
+            "category": "component",
+            "description": "Dental and oral health assessed"
+          },
+          {
+            "id": "R-COMPONENT-VISION",
+            "component": "vision",
+            "category": "component",
+            "description": "Vision assessed"
+          },
+          {
+            "id": "R-COMPONENT-HEARING",
+            "component": "hearing",
+            "category": "component",
+            "description": "Hearing assessed"
+          },
+          {
+            "id": "R-COMPONENT-FOOT-HEALTH",
+            "component": "foot-health",
+            "category": "component",
+            "description": "Foot health assessed"
+          },
+          {
+            "id": "R-COMPONENT-SKIN",
+            "component": "skin",
+            "category": "component",
+            "description": "Skin assessed"
+          },
+          {
+            "id": "R-COMPONENT-SCREENING-IMMUNISATION",
+            "component": "screening-immunisation",
+            "category": "component",
+            "description": "Eligible cancer-screening uptake and immunisation uptake recorded"
+          },
+          {
+            "id": "R-COMPONENT-MEDICATION-REVIEW",
+            "component": "medication-review",
+            "category": "component",
+            "description": "Medication list reconciled at the check"
+          },
+          {
+            "id": "R-COMPONENT-MENTAL-HEALTH-BEHAVIOUR",
+            "component": "mental-health-behaviour",
+            "category": "component",
+            "description": "Mental health and behaviour that challenges assessed"
+          },
+          {
+            "id": "R-COMPONENT-SYNDROME-SPECIFIC",
+            "component": "syndrome-specific",
+            "category": "component",
+            "description": "Syndrome-specific health checks done (or not applicable)"
+          },
+          {
+            "id": "R-COMPONENT-CARER-SOCIAL",
+            "component": "carer-social",
+            "category": "component",
+            "description": "Carer needs and social circumstances considered (or no carer)"
+          },
+          {
+            "id": "R-COMPLETENESS-01",
+            "component": "completeness",
+            "category": "completeness",
+            "description": "All 18 required components completed (100%)"
+          },
+          {
+            "id": "R-HEALTH-ACTION-PLAN-01",
+            "component": "health-action-plan",
+            "category": "health-action-plan",
+            "description": "Health Action Plan produced and shared with the person"
+          }
+        ]
+      }
+    },
+    {
+      "name": "partial",
+      "description": "Check partly done — 8 of the 18 required components recorded, many outstanding and no Health Action Plan yet: 44% — incomplete.",
+      "state": {
+        "context": {
+          "clinicianName": "",
+          "clinicianRole": "practice-nurse",
+          "checkedOn": "",
+          "practiceName": "",
+          "easyReadInvitationSent": "yes",
+          "preCheckDone": "no"
+        },
+        "identification": {
+          "personIdentifier": "",
+          "ageBand": "35-44",
+          "sex": "male",
+          "ldRegisterStatus": "on-register",
+          "mainCarer": "paid-carer"
+        },
+        "adjustments": {
+          "communicationNeeds": "pictures",
+          "reasonableAdjustmentsRecorded": "yes",
+          "healthPassport": "",
+          "consentCapacityNote": ""
+        },
+        "physical": {
+          "weightBmiStatus": "recorded",
+          "bmi": 31,
+          "bloodPressureStatus": "recorded",
+          "epilepsyStatus": "reviewed",
+          "constipationStatus": "no-concern",
+          "dysphagiaStatus": "no-concern",
+          "continenceStatus": "no-concern",
+          "mobilityFallsStatus": "no-concern",
+          "dentalStatus": "",
+          "visionStatus": "",
+          "hearingStatus": "",
+          "footHealthStatus": "",
+          "skinStatus": "",
+          "physicalHealthActions": ""
+        },
+        "screening": {
+          "cancerScreeningStatus": "",
+          "otherScreeningStatus": "",
+          "immunisationStatus": ""
+        },
+        "medication": {
+          "medicationReconciled": "",
+          "psychotropicPrescribed": "",
+          "psychotropicIndication": "",
+          "psychotropicLastReviewed": "",
+          "stompDiscussed": "",
+          "medicationSideEffects": ""
+        },
+        "mental": {
+          "mentalHealthStatus": "",
+          "behaviourStatus": "",
+          "behaviourTriggers": ""
+        },
+        "syndrome": {
+          "syndromeSpecificStatus": ""
+        },
+        "carer": {
+          "carerNeedsStatus": "",
+          "socialCircumstances": ""
+        },
+        "plan": {
+          "healthActionPlanProduced": "no",
+          "healthActionPlanShared": "",
+          "healthActionPlanActions": "",
+          "clinicianNote": "Second appointment booked to finish the check."
+        }
+      },
+      "expected": {
+        "status": "incomplete",
+        "completenessPercent": 44,
+        "healthActionPlanComplete": false,
+        "componentStatuses": [
+          {
+            "id": "reasonable-adjustments",
+            "group": "adjustments",
+            "label": "Reasonable adjustments & communication",
+            "completed": true
+          },
+          {
+            "id": "weight-bmi",
+            "group": "physical",
+            "label": "Weight and BMI",
+            "completed": true
+          },
+          {
+            "id": "blood-pressure",
+            "group": "physical",
+            "label": "Blood pressure",
+            "completed": true
+          },
+          {
+            "id": "epilepsy",
+            "group": "physical",
+            "label": "Epilepsy review",
+            "completed": true
+          },
+          {
+            "id": "constipation",
+            "group": "physical",
+            "label": "Constipation",
+            "completed": true
+          },
+          {
+            "id": "dysphagia",
+            "group": "physical",
+            "label": "Dysphagia (swallowing)",
+            "completed": true
+          },
+          {
+            "id": "continence",
+            "group": "physical",
+            "label": "Continence",
+            "completed": true
+          },
+          {
+            "id": "mobility-falls",
+            "group": "physical",
+            "label": "Mobility and falls",
+            "completed": true
+          },
+          {
+            "id": "dental",
+            "group": "physical",
+            "label": "Dental / oral health",
+            "completed": false
+          },
+          {
+            "id": "vision",
+            "group": "physical",
+            "label": "Vision",
+            "completed": false
+          },
+          {
+            "id": "hearing",
+            "group": "physical",
+            "label": "Hearing",
+            "completed": false
+          },
+          {
+            "id": "foot-health",
+            "group": "physical",
+            "label": "Foot health",
+            "completed": false
+          },
+          {
+            "id": "skin",
+            "group": "physical",
+            "label": "Skin",
+            "completed": false
+          },
+          {
+            "id": "screening-immunisation",
+            "group": "screening",
+            "label": "Screening & immunisation uptake",
+            "completed": false
+          },
+          {
+            "id": "medication-review",
+            "group": "medication",
+            "label": "Medication review (incl. STOMP)",
+            "completed": false
+          },
+          {
+            "id": "mental-health-behaviour",
+            "group": "mental",
+            "label": "Mental health & behaviour",
+            "completed": false
+          },
+          {
+            "id": "syndrome-specific",
+            "group": "syndrome",
+            "label": "Syndrome-specific checks",
+            "completed": false
+          },
+          {
+            "id": "carer-social",
+            "group": "carer",
+            "label": "Carer & social",
+            "completed": false
+          }
+        ],
+        "completedCount": 8,
+        "firedRules": [
+          {
+            "id": "R-COMPONENT-REASONABLE-ADJUSTMENTS",
+            "component": "reasonable-adjustments",
+            "category": "component",
+            "description": "Reasonable adjustments and communication needs considered and recorded"
+          },
+          {
+            "id": "R-COMPONENT-WEIGHT-BMI",
+            "component": "weight-bmi",
+            "category": "component",
+            "description": "Weight and body-mass index recorded (or declined)"
+          },
+          {
+            "id": "R-COMPONENT-BLOOD-PRESSURE",
+            "component": "blood-pressure",
+            "category": "component",
+            "description": "Blood pressure recorded"
+          },
+          {
+            "id": "R-COMPONENT-EPILEPSY",
+            "component": "epilepsy",
+            "category": "component",
+            "description": "Epilepsy reviewed (or not applicable)"
+          },
+          {
+            "id": "R-COMPONENT-CONSTIPATION",
+            "component": "constipation",
+            "category": "component",
+            "description": "Constipation assessed"
+          },
+          {
+            "id": "R-COMPONENT-DYSPHAGIA",
+            "component": "dysphagia",
+            "category": "component",
+            "description": "Swallowing / dysphagia assessed"
+          },
+          {
+            "id": "R-COMPONENT-CONTINENCE",
+            "component": "continence",
+            "category": "component",
+            "description": "Continence assessed"
+          },
+          {
+            "id": "R-COMPONENT-MOBILITY-FALLS",
+            "component": "mobility-falls",
+            "category": "component",
+            "description": "Mobility and falls assessed"
+          },
+          {
+            "id": "R-COMPLETENESS-01",
+            "component": "completeness",
+            "category": "completeness",
+            "description": "8 of 18 required components completed (44%)"
+          },
+          {
+            "id": "R-HEALTH-ACTION-PLAN-01",
+            "component": "health-action-plan",
+            "category": "health-action-plan",
+            "description": "Health Action Plan not produced and shared — required for a complete check"
+          }
+        ]
+      }
+    },
+    {
+      "name": "minimal",
+      "description": "Barely-started check with only a couple of components recorded and no Health Action Plan: ~11% — incomplete.",
+      "state": {
+        "context": {
+          "clinicianName": "",
+          "clinicianRole": "practice-nurse",
+          "checkedOn": "",
+          "practiceName": "",
+          "easyReadInvitationSent": "no",
+          "preCheckDone": "no"
+        },
+        "identification": {
+          "personIdentifier": "",
+          "ageBand": "18-24",
+          "sex": "female",
+          "ldRegisterStatus": "on-register",
+          "mainCarer": ""
+        },
+        "adjustments": {
+          "communicationNeeds": "",
+          "reasonableAdjustmentsRecorded": "yes",
+          "healthPassport": "",
+          "consentCapacityNote": ""
+        },
+        "physical": {
+          "weightBmiStatus": "recorded",
+          "bmi": null,
+          "bloodPressureStatus": "",
+          "epilepsyStatus": "",
+          "constipationStatus": "",
+          "dysphagiaStatus": "",
+          "continenceStatus": "",
+          "mobilityFallsStatus": "",
+          "dentalStatus": "",
+          "visionStatus": "",
+          "hearingStatus": "",
+          "footHealthStatus": "",
+          "skinStatus": "",
+          "physicalHealthActions": ""
+        },
+        "screening": {
+          "cancerScreeningStatus": "",
+          "otherScreeningStatus": "",
+          "immunisationStatus": ""
+        },
+        "medication": {
+          "medicationReconciled": "",
+          "psychotropicPrescribed": "",
+          "psychotropicIndication": "",
+          "psychotropicLastReviewed": "",
+          "stompDiscussed": "",
+          "medicationSideEffects": ""
+        },
+        "mental": {
+          "mentalHealthStatus": "",
+          "behaviourStatus": "",
+          "behaviourTriggers": ""
+        },
+        "syndrome": {
+          "syndromeSpecificStatus": ""
+        },
+        "carer": {
+          "carerNeedsStatus": "",
+          "socialCircumstances": ""
+        },
+        "plan": {
+          "healthActionPlanProduced": "",
+          "healthActionPlanShared": "",
+          "healthActionPlanActions": "",
+          "clinicianNote": "Patient left before the check could be completed."
+        }
+      },
+      "expected": {
+        "status": "incomplete",
+        "completenessPercent": 11,
+        "healthActionPlanComplete": false,
+        "componentStatuses": [
+          {
+            "id": "reasonable-adjustments",
+            "group": "adjustments",
+            "label": "Reasonable adjustments & communication",
+            "completed": true
+          },
+          {
+            "id": "weight-bmi",
+            "group": "physical",
+            "label": "Weight and BMI",
+            "completed": true
+          },
+          {
+            "id": "blood-pressure",
+            "group": "physical",
+            "label": "Blood pressure",
+            "completed": false
+          },
+          {
+            "id": "epilepsy",
+            "group": "physical",
+            "label": "Epilepsy review",
+            "completed": false
+          },
+          {
+            "id": "constipation",
+            "group": "physical",
+            "label": "Constipation",
+            "completed": false
+          },
+          {
+            "id": "dysphagia",
+            "group": "physical",
+            "label": "Dysphagia (swallowing)",
+            "completed": false
+          },
+          {
+            "id": "continence",
+            "group": "physical",
+            "label": "Continence",
+            "completed": false
+          },
+          {
+            "id": "mobility-falls",
+            "group": "physical",
+            "label": "Mobility and falls",
+            "completed": false
+          },
+          {
+            "id": "dental",
+            "group": "physical",
+            "label": "Dental / oral health",
+            "completed": false
+          },
+          {
+            "id": "vision",
+            "group": "physical",
+            "label": "Vision",
+            "completed": false
+          },
+          {
+            "id": "hearing",
+            "group": "physical",
+            "label": "Hearing",
+            "completed": false
+          },
+          {
+            "id": "foot-health",
+            "group": "physical",
+            "label": "Foot health",
+            "completed": false
+          },
+          {
+            "id": "skin",
+            "group": "physical",
+            "label": "Skin",
+            "completed": false
+          },
+          {
+            "id": "screening-immunisation",
+            "group": "screening",
+            "label": "Screening & immunisation uptake",
+            "completed": false
+          },
+          {
+            "id": "medication-review",
+            "group": "medication",
+            "label": "Medication review (incl. STOMP)",
+            "completed": false
+          },
+          {
+            "id": "mental-health-behaviour",
+            "group": "mental",
+            "label": "Mental health & behaviour",
+            "completed": false
+          },
+          {
+            "id": "syndrome-specific",
+            "group": "syndrome",
+            "label": "Syndrome-specific checks",
+            "completed": false
+          },
+          {
+            "id": "carer-social",
+            "group": "carer",
+            "label": "Carer & social",
+            "completed": false
+          }
+        ],
+        "completedCount": 2,
+        "firedRules": [
+          {
+            "id": "R-COMPONENT-REASONABLE-ADJUSTMENTS",
+            "component": "reasonable-adjustments",
+            "category": "component",
+            "description": "Reasonable adjustments and communication needs considered and recorded"
+          },
+          {
+            "id": "R-COMPONENT-WEIGHT-BMI",
+            "component": "weight-bmi",
+            "category": "component",
+            "description": "Weight and body-mass index recorded (or declined)"
+          },
+          {
+            "id": "R-COMPLETENESS-01",
+            "component": "completeness",
+            "category": "completeness",
+            "description": "2 of 18 required components completed (11%)"
+          },
+          {
+            "id": "R-HEALTH-ACTION-PLAN-01",
+            "component": "health-action-plan",
+            "category": "health-action-plan",
+            "description": "Health Action Plan not produced and shared — required for a complete check"
+          }
+        ]
+      }
+    }
+  ]
+}

@@ -1,0 +1,162 @@
+{
+  "engine": "front-end-with-html",
+  "graderHint": "calculateOttawaDecision",
+  "note": "Realistic filled-in states in the Ottawa Ankle/Foot Rules scoring engine's shape. `expected` is computed by `bin/test-personas --update` and verified by `bin/test-personas`.",
+  "personas": [
+    {
+      "name": "no-xray",
+      "description": "Twisted ankle with no bony tenderness and able to take four steps: neither ankle nor foot X-ray indicated — clinically significant fracture effectively excluded.",
+      "state": {
+        "context": {
+          "clinicianName": "",
+          "clinicianRole": "nurse-practitioner",
+          "assessedAt": "",
+          "careSetting": "minor-injury-unit",
+          "injuredSide": "left",
+          "hoursSinceInjury": 3
+        },
+        "identification": {
+          "patientIdentifier": "",
+          "ageYears": 28,
+          "sex": "female"
+        },
+        "applicability": {
+          "assessmentReliable": "yes"
+        },
+        "painZones": {
+          "malleolarZonePain": "yes",
+          "midfootZonePain": "no"
+        },
+        "ankleTenderness": {
+          "lateralMalleolusTenderness": "no",
+          "medialMalleolusTenderness": "no"
+        },
+        "footTenderness": {
+          "fifthMetatarsalBaseTenderness": "no",
+          "navicularTenderness": "no"
+        },
+        "weightBearing": {
+          "ableToBearWeightImmediately": "yes",
+          "ableToBearWeightNow": "yes"
+        },
+        "note": {
+          "clinicalNotes": ""
+        }
+      },
+      "expected": {
+        "unableToBearWeight": false,
+        "ankleXrayIndicated": false,
+        "footXrayIndicated": false,
+        "firedCriteria": []
+      }
+    },
+    {
+      "name": "ankle-xray",
+      "description": "Malleolar-zone pain with bony tenderness at the tip of the lateral malleolus, weight-bearing intact: ankle X-ray indicated, foot X-ray not indicated.",
+      "state": {
+        "context": {
+          "clinicianName": "",
+          "clinicianRole": "doctor",
+          "assessedAt": "",
+          "careSetting": "emergency-department",
+          "injuredSide": "right",
+          "hoursSinceInjury": 2
+        },
+        "identification": {
+          "patientIdentifier": "",
+          "ageYears": 41,
+          "sex": "male"
+        },
+        "applicability": {
+          "assessmentReliable": "yes"
+        },
+        "painZones": {
+          "malleolarZonePain": "yes",
+          "midfootZonePain": "no"
+        },
+        "ankleTenderness": {
+          "lateralMalleolusTenderness": "yes",
+          "medialMalleolusTenderness": "no"
+        },
+        "footTenderness": {
+          "fifthMetatarsalBaseTenderness": "no",
+          "navicularTenderness": "no"
+        },
+        "weightBearing": {
+          "ableToBearWeightImmediately": "yes",
+          "ableToBearWeightNow": "yes"
+        },
+        "note": {
+          "clinicalNotes": ""
+        }
+      },
+      "expected": {
+        "unableToBearWeight": false,
+        "ankleXrayIndicated": true,
+        "footXrayIndicated": false,
+        "firedCriteria": [
+          {
+            "id": "A1",
+            "region": "ankle",
+            "criterion": "lateral-malleolus-tenderness",
+            "description": "Bone tenderness at the posterior edge or tip of the lateral malleolus (distal 6 cm of the fibula)"
+          }
+        ]
+      }
+    },
+    {
+      "name": "foot-xray",
+      "description": "Midfoot-zone pain with bony tenderness at the base of the fifth metatarsal, weight-bearing intact: foot X-ray indicated, ankle X-ray not indicated.",
+      "state": {
+        "context": {
+          "clinicianName": "",
+          "clinicianRole": "paramedic",
+          "assessedAt": "",
+          "careSetting": "urgent-care",
+          "injuredSide": "left",
+          "hoursSinceInjury": 5
+        },
+        "identification": {
+          "patientIdentifier": "",
+          "ageYears": 34,
+          "sex": "female"
+        },
+        "applicability": {
+          "assessmentReliable": "yes"
+        },
+        "painZones": {
+          "malleolarZonePain": "no",
+          "midfootZonePain": "yes"
+        },
+        "ankleTenderness": {
+          "lateralMalleolusTenderness": "no",
+          "medialMalleolusTenderness": "no"
+        },
+        "footTenderness": {
+          "fifthMetatarsalBaseTenderness": "yes",
+          "navicularTenderness": "no"
+        },
+        "weightBearing": {
+          "ableToBearWeightImmediately": "yes",
+          "ableToBearWeightNow": "yes"
+        },
+        "note": {
+          "clinicalNotes": ""
+        }
+      },
+      "expected": {
+        "unableToBearWeight": false,
+        "ankleXrayIndicated": false,
+        "footXrayIndicated": true,
+        "firedCriteria": [
+          {
+            "id": "F1",
+            "region": "foot",
+            "criterion": "fifth-metatarsal-base-tenderness",
+            "description": "Bone tenderness at the base of the fifth metatarsal"
+          }
+        ]
+      }
+    }
+  ]
+}

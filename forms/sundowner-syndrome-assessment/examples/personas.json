@@ -1,0 +1,634 @@
+{
+  "engine": "front-end-with-html",
+  "graderHint": "gradeSundowner",
+  "note": "Realistic filled-in states in the Sundowner (CMAI + NPI) scoring engine's shape. `expected` is computed by `bin/test-personas --update` and verified by `bin/test-personas`.",
+  "personas": [
+    {
+      "name": "mild-sundowning",
+      "description": "Occasional early-evening restlessness, redirectable: CMAI 35 — mild severity band; NPI 12 mildly elevated.",
+      "state": {
+        "demographics": {
+          "firstName": "",
+          "lastName": "",
+          "dateOfBirth": "",
+          "sex": "female",
+          "ageYears": 79,
+          "primaryDiagnosis": "Alzheimer's disease",
+          "careSetting": "home-with-family"
+        },
+        "cognitiveStatus": {
+          "dementiaStage": "mild",
+          "cognitiveImpairment": "mild",
+          "mmseScore": 23,
+          "mmseDate": "",
+          "priorDeliriumHistory": "",
+          "cognitiveNotes": ""
+        },
+        "behaviouralSymptoms": {
+          "cmai": {
+            "cmai01": 2,
+            "cmai02": 2,
+            "cmai03": 2,
+            "cmai04": 2,
+            "cmai05": 2,
+            "cmai06": 2,
+            "cmai07": 1,
+            "cmai08": 1,
+            "cmai09": 1,
+            "cmai10": 1,
+            "cmai11": 1,
+            "cmai12": 1,
+            "cmai13": 1,
+            "cmai14": 1,
+            "cmai15": 1,
+            "cmai16": 1,
+            "cmai17": 1,
+            "cmai18": 1,
+            "cmai19": 1,
+            "cmai20": 1,
+            "cmai21": 1,
+            "cmai22": 1,
+            "cmai23": 1,
+            "cmai24": 1,
+            "cmai25": 1,
+            "cmai26": 1,
+            "cmai27": 1,
+            "cmai28": 1,
+            "cmai29": 1
+          },
+          "npi": {
+            "delusions": {
+              "frequency": 0,
+              "severity": 0
+            },
+            "hallucinations": {
+              "frequency": 0,
+              "severity": 0
+            },
+            "agitationAggression": {
+              "frequency": 2,
+              "severity": 2
+            },
+            "depressionDysphoria": {
+              "frequency": 0,
+              "severity": 0
+            },
+            "anxiety": {
+              "frequency": 1,
+              "severity": 2
+            },
+            "elationEuphoria": {
+              "frequency": 0,
+              "severity": 0
+            },
+            "apathyIndifference": {
+              "frequency": 0,
+              "severity": 0
+            },
+            "disinhibition": {
+              "frequency": 0,
+              "severity": 0
+            },
+            "irritabilityLability": {
+              "frequency": 0,
+              "severity": 0
+            },
+            "motorDisturbance": {
+              "frequency": 0,
+              "severity": 0
+            },
+            "sleep": {
+              "frequency": 3,
+              "severity": 2
+            },
+            "appetiteEating": {
+              "frequency": 0,
+              "severity": 0
+            }
+          },
+          "behaviouralNotes": ""
+        },
+        "temporalPattern": {
+          "typicalOnsetTime": "",
+          "typicalOffsetTime": "",
+          "peakTime": "",
+          "episodeFrequency": "",
+          "averageDurationMinutes": null,
+          "worseAtDusk": "",
+          "worseSeasonally": "",
+          "temporalNotes": ""
+        },
+        "triggerIdentification": {
+          "fatigue": "",
+          "hunger": "",
+          "pain": "",
+          "infection": "",
+          "dehydration": "",
+          "sensoryOverload": "",
+          "unfamiliarSurroundings": "",
+          "carerChange": "",
+          "lowLight": "",
+          "medicationTiming": "",
+          "otherTriggers": ""
+        },
+        "sleepWakeCycle": {
+          "bedtimeHourClock": null,
+          "averageHoursOfSleep": null,
+          "difficultyFallingAsleep": "",
+          "nighttimeWandering": "",
+          "earlyMorningWaking": "",
+          "daytimeNapping": "",
+          "nightAwakeningCount": null,
+          "reversedSleepCycle": "",
+          "sleepNotes": ""
+        },
+        "medicationReview": {
+          "currentMedications": [],
+          "anticholinergicBurden": "",
+          "sedativeUse": "",
+          "antipsychoticUse": "",
+          "recentMedicationChange": "",
+          "recentMedicationChangeDetails": "",
+          "medicationAdherence": "",
+          "medicationNotes": ""
+        },
+        "environmentalAssessment": {
+          "adequateDaylight": "",
+          "excessiveNoise": "",
+          "unfamiliarEnvironment": "",
+          "cluttered": "",
+          "mirrorsOrShadows": "",
+          "consistentRoutine": "",
+          "adequateSocialContact": "",
+          "environmentalNotes": ""
+        },
+        "carerImpact": {
+          "primaryCarer": "",
+          "carerRelationship": "",
+          "carerStrainLevel": "",
+          "carerSleepDisturbed": "",
+          "carerBurnoutSigns": "",
+          "respiteCareInPlace": "",
+          "formalSupportEngaged": "",
+          "carerNotes": ""
+        },
+        "managementPlan": {
+          "nonPharmacologicalPlan": "",
+          "nonPharmacologicalDetails": "",
+          "environmentalModifications": "",
+          "environmentalModificationDetails": "",
+          "medicationReviewRequired": "",
+          "referralRequired": "",
+          "referralDetails": "",
+          "reviewDate": "",
+          "planSummary": ""
+        }
+      },
+      "expected": {
+        "cmaiScore": 35,
+        "npiScore": 12,
+        "severity": "mild",
+        "cmaiAnsweredCount": 29,
+        "npiAnsweredCount": 3,
+        "firedRules": [
+          {
+            "id": "CMAI-BAND",
+            "category": "CMAI Total",
+            "description": "CMAI total 35 of 203 (29 of 29 items observed).",
+            "detail": "Severity band: Mild (CMAI thresholds: 29-45 mild, 46-75 moderate, 76-120 severe, >120 critical)."
+          },
+          {
+            "id": "NPI-TOTAL",
+            "category": "NPI Total",
+            "description": "NPI total 12 of 144 across 12 domains (3 domain(s) endorsed).",
+            "detail": "NPI total is mildly elevated."
+          },
+          {
+            "id": "NPI-DOMAINS",
+            "category": "NPI Domains",
+            "description": "2 NPI domain(s) with score >= 4.",
+            "detail": "Agitation / aggression (F2 x S2 = 4); Sleep / night-time behaviour (F3 x S2 = 6)"
+          }
+        ]
+      }
+    },
+    {
+      "name": "moderate-sundowning",
+      "description": "Daily late-afternoon agitation needing intervention: CMAI 67 — moderate severity band; NPI 33 moderately elevated.",
+      "state": {
+        "demographics": {
+          "firstName": "",
+          "lastName": "",
+          "dateOfBirth": "",
+          "sex": "male",
+          "ageYears": 83,
+          "primaryDiagnosis": "Vascular dementia",
+          "careSetting": "home-with-formal-care"
+        },
+        "cognitiveStatus": {
+          "dementiaStage": "moderate",
+          "cognitiveImpairment": "moderate",
+          "mmseScore": 17,
+          "mmseDate": "",
+          "priorDeliriumHistory": "",
+          "cognitiveNotes": ""
+        },
+        "behaviouralSymptoms": {
+          "cmai": {
+            "cmai01": 3,
+            "cmai02": 3,
+            "cmai03": 3,
+            "cmai04": 3,
+            "cmai05": 3,
+            "cmai06": 3,
+            "cmai07": 3,
+            "cmai08": 3,
+            "cmai09": 3,
+            "cmai10": 2,
+            "cmai11": 2,
+            "cmai12": 2,
+            "cmai13": 2,
+            "cmai14": 2,
+            "cmai15": 2,
+            "cmai16": 2,
+            "cmai17": 2,
+            "cmai18": 2,
+            "cmai19": 2,
+            "cmai20": 2,
+            "cmai21": 2,
+            "cmai22": 2,
+            "cmai23": 2,
+            "cmai24": 2,
+            "cmai25": 2,
+            "cmai26": 2,
+            "cmai27": 2,
+            "cmai28": 2,
+            "cmai29": 2
+          },
+          "npi": {
+            "delusions": {
+              "frequency": 0,
+              "severity": 0
+            },
+            "hallucinations": {
+              "frequency": 0,
+              "severity": 0
+            },
+            "agitationAggression": {
+              "frequency": 3,
+              "severity": 3
+            },
+            "depressionDysphoria": {
+              "frequency": 0,
+              "severity": 0
+            },
+            "anxiety": {
+              "frequency": 3,
+              "severity": 2
+            },
+            "elationEuphoria": {
+              "frequency": 0,
+              "severity": 0
+            },
+            "apathyIndifference": {
+              "frequency": 0,
+              "severity": 0
+            },
+            "disinhibition": {
+              "frequency": 0,
+              "severity": 0
+            },
+            "irritabilityLability": {
+              "frequency": 3,
+              "severity": 2
+            },
+            "motorDisturbance": {
+              "frequency": 2,
+              "severity": 2
+            },
+            "sleep": {
+              "frequency": 4,
+              "severity": 2
+            },
+            "appetiteEating": {
+              "frequency": 0,
+              "severity": 0
+            }
+          },
+          "behaviouralNotes": ""
+        },
+        "temporalPattern": {
+          "typicalOnsetTime": "",
+          "typicalOffsetTime": "",
+          "peakTime": "",
+          "episodeFrequency": "",
+          "averageDurationMinutes": null,
+          "worseAtDusk": "",
+          "worseSeasonally": "",
+          "temporalNotes": ""
+        },
+        "triggerIdentification": {
+          "fatigue": "",
+          "hunger": "",
+          "pain": "",
+          "infection": "",
+          "dehydration": "",
+          "sensoryOverload": "",
+          "unfamiliarSurroundings": "",
+          "carerChange": "",
+          "lowLight": "",
+          "medicationTiming": "",
+          "otherTriggers": ""
+        },
+        "sleepWakeCycle": {
+          "bedtimeHourClock": null,
+          "averageHoursOfSleep": null,
+          "difficultyFallingAsleep": "",
+          "nighttimeWandering": "",
+          "earlyMorningWaking": "",
+          "daytimeNapping": "",
+          "nightAwakeningCount": null,
+          "reversedSleepCycle": "",
+          "sleepNotes": ""
+        },
+        "medicationReview": {
+          "currentMedications": [],
+          "anticholinergicBurden": "",
+          "sedativeUse": "",
+          "antipsychoticUse": "",
+          "recentMedicationChange": "",
+          "recentMedicationChangeDetails": "",
+          "medicationAdherence": "",
+          "medicationNotes": ""
+        },
+        "environmentalAssessment": {
+          "adequateDaylight": "",
+          "excessiveNoise": "",
+          "unfamiliarEnvironment": "",
+          "cluttered": "",
+          "mirrorsOrShadows": "",
+          "consistentRoutine": "",
+          "adequateSocialContact": "",
+          "environmentalNotes": ""
+        },
+        "carerImpact": {
+          "primaryCarer": "",
+          "carerRelationship": "",
+          "carerStrainLevel": "",
+          "carerSleepDisturbed": "",
+          "carerBurnoutSigns": "",
+          "respiteCareInPlace": "",
+          "formalSupportEngaged": "",
+          "carerNotes": ""
+        },
+        "managementPlan": {
+          "nonPharmacologicalPlan": "",
+          "nonPharmacologicalDetails": "",
+          "environmentalModifications": "",
+          "environmentalModificationDetails": "",
+          "medicationReviewRequired": "",
+          "referralRequired": "",
+          "referralDetails": "",
+          "reviewDate": "",
+          "planSummary": ""
+        }
+      },
+      "expected": {
+        "cmaiScore": 67,
+        "npiScore": 33,
+        "severity": "moderate",
+        "cmaiAnsweredCount": 29,
+        "npiAnsweredCount": 5,
+        "firedRules": [
+          {
+            "id": "CMAI-BAND",
+            "category": "CMAI Total",
+            "description": "CMAI total 67 of 203 (29 of 29 items observed).",
+            "detail": "Severity band: Moderate (CMAI thresholds: 29-45 mild, 46-75 moderate, 76-120 severe, >120 critical)."
+          },
+          {
+            "id": "NPI-TOTAL",
+            "category": "NPI Total",
+            "description": "NPI total 33 of 144 across 12 domains (5 domain(s) endorsed).",
+            "detail": "NPI total is moderately elevated."
+          },
+          {
+            "id": "NPI-DOMAINS",
+            "category": "NPI Domains",
+            "description": "5 NPI domain(s) with score >= 4.",
+            "detail": "Agitation / aggression (F3 x S3 = 9); Anxiety (F3 x S2 = 6); Irritability / lability (F3 x S2 = 6); Aberrant motor disturbance (F2 x S2 = 4); Sleep / night-time behaviour (F4 x S2 = 8)"
+          }
+        ]
+      }
+    },
+    {
+      "name": "severe-sundowning",
+      "description": "Aggressive evening behaviour posing a safety risk: CMAI 97 — severe severity band; NPI 68 markedly elevated across multiple domains.",
+      "state": {
+        "demographics": {
+          "firstName": "",
+          "lastName": "",
+          "dateOfBirth": "",
+          "sex": "female",
+          "ageYears": 86,
+          "primaryDiagnosis": "Lewy-body dementia",
+          "careSetting": "nursing-home"
+        },
+        "cognitiveStatus": {
+          "dementiaStage": "severe",
+          "cognitiveImpairment": "severe",
+          "mmseScore": 9,
+          "mmseDate": "",
+          "priorDeliriumHistory": "",
+          "cognitiveNotes": ""
+        },
+        "behaviouralSymptoms": {
+          "cmai": {
+            "cmai01": 4,
+            "cmai02": 4,
+            "cmai03": 4,
+            "cmai04": 4,
+            "cmai05": 4,
+            "cmai06": 4,
+            "cmai07": 4,
+            "cmai08": 4,
+            "cmai09": 4,
+            "cmai10": 4,
+            "cmai11": 3,
+            "cmai12": 3,
+            "cmai13": 3,
+            "cmai14": 3,
+            "cmai15": 3,
+            "cmai16": 3,
+            "cmai17": 3,
+            "cmai18": 3,
+            "cmai19": 3,
+            "cmai20": 3,
+            "cmai21": 3,
+            "cmai22": 3,
+            "cmai23": 3,
+            "cmai24": 3,
+            "cmai25": 3,
+            "cmai26": 3,
+            "cmai27": 3,
+            "cmai28": 3,
+            "cmai29": 3
+          },
+          "npi": {
+            "delusions": {
+              "frequency": 3,
+              "severity": 2
+            },
+            "hallucinations": {
+              "frequency": 3,
+              "severity": 3
+            },
+            "agitationAggression": {
+              "frequency": 4,
+              "severity": 3
+            },
+            "depressionDysphoria": {
+              "frequency": 0,
+              "severity": 0
+            },
+            "anxiety": {
+              "frequency": 3,
+              "severity": 3
+            },
+            "elationEuphoria": {
+              "frequency": 0,
+              "severity": 0
+            },
+            "apathyIndifference": {
+              "frequency": 0,
+              "severity": 0
+            },
+            "disinhibition": {
+              "frequency": 0,
+              "severity": 0
+            },
+            "irritabilityLability": {
+              "frequency": 4,
+              "severity": 2
+            },
+            "motorDisturbance": {
+              "frequency": 4,
+              "severity": 3
+            },
+            "sleep": {
+              "frequency": 4,
+              "severity": 3
+            },
+            "appetiteEating": {
+              "frequency": 0,
+              "severity": 0
+            }
+          },
+          "behaviouralNotes": ""
+        },
+        "temporalPattern": {
+          "typicalOnsetTime": "",
+          "typicalOffsetTime": "",
+          "peakTime": "",
+          "episodeFrequency": "",
+          "averageDurationMinutes": null,
+          "worseAtDusk": "",
+          "worseSeasonally": "",
+          "temporalNotes": ""
+        },
+        "triggerIdentification": {
+          "fatigue": "",
+          "hunger": "",
+          "pain": "",
+          "infection": "",
+          "dehydration": "",
+          "sensoryOverload": "",
+          "unfamiliarSurroundings": "",
+          "carerChange": "",
+          "lowLight": "",
+          "medicationTiming": "",
+          "otherTriggers": ""
+        },
+        "sleepWakeCycle": {
+          "bedtimeHourClock": null,
+          "averageHoursOfSleep": null,
+          "difficultyFallingAsleep": "",
+          "nighttimeWandering": "",
+          "earlyMorningWaking": "",
+          "daytimeNapping": "",
+          "nightAwakeningCount": null,
+          "reversedSleepCycle": "",
+          "sleepNotes": ""
+        },
+        "medicationReview": {
+          "currentMedications": [],
+          "anticholinergicBurden": "",
+          "sedativeUse": "",
+          "antipsychoticUse": "",
+          "recentMedicationChange": "",
+          "recentMedicationChangeDetails": "",
+          "medicationAdherence": "",
+          "medicationNotes": ""
+        },
+        "environmentalAssessment": {
+          "adequateDaylight": "",
+          "excessiveNoise": "",
+          "unfamiliarEnvironment": "",
+          "cluttered": "",
+          "mirrorsOrShadows": "",
+          "consistentRoutine": "",
+          "adequateSocialContact": "",
+          "environmentalNotes": ""
+        },
+        "carerImpact": {
+          "primaryCarer": "",
+          "carerRelationship": "",
+          "carerStrainLevel": "",
+          "carerSleepDisturbed": "",
+          "carerBurnoutSigns": "",
+          "respiteCareInPlace": "",
+          "formalSupportEngaged": "",
+          "carerNotes": ""
+        },
+        "managementPlan": {
+          "nonPharmacologicalPlan": "",
+          "nonPharmacologicalDetails": "",
+          "environmentalModifications": "",
+          "environmentalModificationDetails": "",
+          "medicationReviewRequired": "",
+          "referralRequired": "",
+          "referralDetails": "",
+          "reviewDate": "",
+          "planSummary": ""
+        }
+      },
+      "expected": {
+        "cmaiScore": 97,
+        "npiScore": 68,
+        "severity": "severe",
+        "cmaiAnsweredCount": 29,
+        "npiAnsweredCount": 7,
+        "firedRules": [
+          {
+            "id": "CMAI-BAND",
+            "category": "CMAI Total",
+            "description": "CMAI total 97 of 203 (29 of 29 items observed).",
+            "detail": "Severity band: Severe (CMAI thresholds: 29-45 mild, 46-75 moderate, 76-120 severe, >120 critical)."
+          },
+          {
+            "id": "NPI-TOTAL",
+            "category": "NPI Total",
+            "description": "NPI total 68 of 144 across 12 domains (7 domain(s) endorsed).",
+            "detail": "NPI total is markedly elevated."
+          },
+          {
+            "id": "NPI-DOMAINS",
+            "category": "NPI Domains",
+            "description": "7 NPI domain(s) with score >= 4.",
+            "detail": "Delusions (F3 x S2 = 6); Hallucinations (F3 x S3 = 9); Agitation / aggression (F4 x S3 = 12); Anxiety (F3 x S3 = 9); Irritability / lability (F4 x S2 = 8); Aberrant motor disturbance (F4 x S3 = 12); Sleep / night-time behaviour (F4 x S3 = 12)"
+          }
+        ]
+      }
+    }
+  ]
+}

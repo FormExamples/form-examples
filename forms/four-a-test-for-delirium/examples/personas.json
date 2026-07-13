@@ -1,0 +1,189 @@
+{
+  "engine": "front-end-with-html",
+  "graderHint": "calculateFourATGrade",
+  "note": "Realistic filled-in states in the 4AT scoring engine's shape. `expected` is computed by `bin/test-personas --update` and verified by `bin/test-personas`.",
+  "personas": [
+    {
+      "name": "delirium-unlikely",
+      "description": "Fully alert, no AMT4 mistakes, months backwards correct, no acute change: 4AT 0 — delirium or severe cognitive impairment unlikely.",
+      "state": {
+        "identification": {
+          "patientIdentifier": "",
+          "patientName": "",
+          "dateOfBirth": null,
+          "assessmentDate": null,
+          "assessmentTime": null,
+          "setting": "acute",
+          "assessorName": "",
+          "assessorRole": ""
+        },
+        "item1": {
+          "alertness": "normal"
+        },
+        "item2": {
+          "amt4": "noMistakes"
+        },
+        "item3": {
+          "attentionMonths": "sevenOrMore"
+        },
+        "item4": {
+          "acuteChange": "no",
+          "acuteChangeSource": "collateral"
+        },
+        "note": {
+          "clinicalNotes": ""
+        }
+      },
+      "expected": {
+        "item1Score": 0,
+        "item2Score": 0,
+        "item3Score": 0,
+        "item4Score": 0,
+        "totalScore": 0,
+        "interpretationBand": "unlikely",
+        "firedRules": [
+          {
+            "id": "R-BAND-01",
+            "item": "band",
+            "points": 0,
+            "category": "interpretation-band",
+            "description": "Total 0 — delirium or severe cognitive impairment unlikely"
+          }
+        ]
+      }
+    },
+    {
+      "name": "possible-cognitive-impairment",
+      "description": "Alert but one AMT4 mistake and falters on months backwards, no acute change: 4AT 2 — possible cognitive impairment, warrants further cognitive testing.",
+      "state": {
+        "identification": {
+          "patientIdentifier": "",
+          "patientName": "",
+          "dateOfBirth": null,
+          "assessmentDate": null,
+          "assessmentTime": null,
+          "setting": "community",
+          "assessorName": "",
+          "assessorRole": ""
+        },
+        "item1": {
+          "alertness": "normal"
+        },
+        "item2": {
+          "amt4": "oneMistake"
+        },
+        "item3": {
+          "attentionMonths": "startsButUnderSevenOrRefuses"
+        },
+        "item4": {
+          "acuteChange": "no",
+          "acuteChangeSource": "records"
+        },
+        "note": {
+          "clinicalNotes": ""
+        }
+      },
+      "expected": {
+        "item1Score": 0,
+        "item2Score": 1,
+        "item3Score": 1,
+        "item4Score": 0,
+        "totalScore": 2,
+        "interpretationBand": "possibleCognitiveImpairment",
+        "firedRules": [
+          {
+            "id": "R-AMT4-01",
+            "item": "amt4",
+            "points": 1,
+            "category": "four-at-item",
+            "description": "AMT4 — 1 mistake across age, date of birth, place, and current year"
+          },
+          {
+            "id": "R-ATTENTION-01",
+            "item": "attention",
+            "points": 1,
+            "category": "four-at-item",
+            "description": "Attention — starts months backwards but scores < 7, or refuses to start"
+          },
+          {
+            "id": "R-BAND-01",
+            "item": "band",
+            "points": 0,
+            "category": "interpretation-band",
+            "description": "Total 1-3 — possible cognitive impairment; further cognitive testing"
+          }
+        ]
+      }
+    },
+    {
+      "name": "possible-delirium",
+      "description": "Inattentive and untestable on AMT4 with a documented acute fluctuating change over 2 weeks: 4AT 8 — possible delirium, prompt full delirium work-up.",
+      "state": {
+        "identification": {
+          "patientIdentifier": "",
+          "patientName": "",
+          "dateOfBirth": null,
+          "assessmentDate": null,
+          "assessmentTime": null,
+          "setting": "ed",
+          "assessorName": "",
+          "assessorRole": ""
+        },
+        "item1": {
+          "alertness": "normal"
+        },
+        "item2": {
+          "amt4": "twoOrMoreOrUntestable"
+        },
+        "item3": {
+          "attentionMonths": "untestable"
+        },
+        "item4": {
+          "acuteChange": "yes",
+          "acuteChangeSource": "collateral"
+        },
+        "note": {
+          "clinicalNotes": ""
+        }
+      },
+      "expected": {
+        "item1Score": 0,
+        "item2Score": 2,
+        "item3Score": 2,
+        "item4Score": 4,
+        "totalScore": 8,
+        "interpretationBand": "possibleDelirium",
+        "firedRules": [
+          {
+            "id": "R-AMT4-02",
+            "item": "amt4",
+            "points": 2,
+            "category": "four-at-item",
+            "description": "AMT4 — 2 or more mistakes, or untestable"
+          },
+          {
+            "id": "R-ATTENTION-02",
+            "item": "attention",
+            "points": 2,
+            "category": "four-at-item",
+            "description": "Attention — untestable (cannot start because unwell, drowsy, or inattentive)"
+          },
+          {
+            "id": "R-ACUTE-CHANGE-01",
+            "item": "acute-change",
+            "points": 4,
+            "category": "four-at-item",
+            "description": "Acute change or fluctuating course present over the last 2 weeks, still evident in the last 24 hours"
+          },
+          {
+            "id": "R-BAND-01",
+            "item": "band",
+            "points": 0,
+            "category": "interpretation-band",
+            "description": "Total 4 or more — possible delirium; prompt full clinical assessment"
+          }
+        ]
+      }
+    }
+  ]
+}

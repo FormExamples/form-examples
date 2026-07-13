@@ -1,0 +1,199 @@
+{
+  "engine": "front-end-with-html",
+  "graderHint": "calculateAuditcGrade",
+  "note": "Realistic filled-in states in the AUDIT-C scoring engine's shape. `expected` is computed by `bin/test-personas --update` and verified by `bin/test-personas`.",
+  "personas": [
+    {
+      "name": "lower-risk",
+      "description": "Occasional light drinker: Q1 1, Q2 0, Q3 0 — AUDIT-C 1, lower-risk band, negative screen.",
+      "state": {
+        "context": {
+          "clinicianName": "",
+          "clinicianRole": "gp",
+          "assessedAt": "",
+          "careSetting": "primary-care",
+          "administrationMode": "self-completed"
+        },
+        "identification": {
+          "patientIdentifier": "",
+          "ageBand": "40-59",
+          "sex": "female"
+        },
+        "items": {
+          "frequencyOfDrinking": 1,
+          "typicalQuantity": 0,
+          "heavyEpisodeFrequency": 0
+        },
+        "note": {
+          "clinicalNote": ""
+        }
+      },
+      "expected": {
+        "frequencyOfDrinkingPoint": 1,
+        "typicalQuantityPoint": 0,
+        "heavyEpisodeFrequencyPoint": 0,
+        "auditcScore": 1,
+        "riskBand": "lower",
+        "positiveScreen": false,
+        "firedItems": [
+          {
+            "id": "R-ITEM-1-FREQUENCY-01",
+            "item": "frequency-of-drinking",
+            "points": 1,
+            "category": "consumption-item",
+            "description": "Q1 — how often the patient has a drink containing alcohol"
+          },
+          {
+            "id": "R-ITEM-2-QUANTITY-01",
+            "item": "typical-quantity",
+            "points": 0,
+            "category": "consumption-item",
+            "description": "Q2 — typical number of UK units on a day when drinking"
+          },
+          {
+            "id": "R-ITEM-3-BINGE-01",
+            "item": "heavy-episode-frequency",
+            "points": 0,
+            "category": "consumption-item",
+            "description": "Q3 — how often the patient has >= 6 (female) / >= 8 (male) units in one session"
+          },
+          {
+            "id": "R-TOTAL-BAND-01",
+            "item": "total",
+            "points": 0,
+            "category": "total-band",
+            "description": "AUDIT-C 1 of 12 — below the positive-screen cut of 5 (lower risk)"
+          }
+        ]
+      }
+    },
+    {
+      "name": "increasing-risk",
+      "description": "Regular midweek drinker with occasional heavy sessions: Q1 2, Q2 2, Q3 2 — AUDIT-C 6, increasing-risk band, positive screen prompting brief advice and full AUDIT.",
+      "state": {
+        "context": {
+          "clinicianName": "",
+          "clinicianRole": "nurse",
+          "assessedAt": "",
+          "careSetting": "primary-care",
+          "administrationMode": "interview"
+        },
+        "identification": {
+          "patientIdentifier": "",
+          "ageBand": "40-59",
+          "sex": "male"
+        },
+        "items": {
+          "frequencyOfDrinking": 2,
+          "typicalQuantity": 2,
+          "heavyEpisodeFrequency": 2
+        },
+        "note": {
+          "clinicalNote": ""
+        }
+      },
+      "expected": {
+        "frequencyOfDrinkingPoint": 2,
+        "typicalQuantityPoint": 2,
+        "heavyEpisodeFrequencyPoint": 2,
+        "auditcScore": 6,
+        "riskBand": "increasing",
+        "positiveScreen": true,
+        "firedItems": [
+          {
+            "id": "R-ITEM-1-FREQUENCY-01",
+            "item": "frequency-of-drinking",
+            "points": 2,
+            "category": "consumption-item",
+            "description": "Q1 — how often the patient has a drink containing alcohol"
+          },
+          {
+            "id": "R-ITEM-2-QUANTITY-01",
+            "item": "typical-quantity",
+            "points": 2,
+            "category": "consumption-item",
+            "description": "Q2 — typical number of UK units on a day when drinking"
+          },
+          {
+            "id": "R-ITEM-3-BINGE-01",
+            "item": "heavy-episode-frequency",
+            "points": 2,
+            "category": "consumption-item",
+            "description": "Q3 — how often the patient has >= 6 (female) / >= 8 (male) units in one session"
+          },
+          {
+            "id": "R-TOTAL-BAND-01",
+            "item": "total",
+            "points": 0,
+            "category": "total-band",
+            "description": "AUDIT-C 6 of 12 (>= 5) — positive screen (increasing)"
+          }
+        ]
+      }
+    },
+    {
+      "name": "possible-dependence",
+      "description": "Daily heavy drinker: Q1 4, Q2 3, Q3 4 — AUDIT-C 11, possible-dependence band, positive screen warranting full AUDIT and likely specialist referral.",
+      "state": {
+        "context": {
+          "clinicianName": "",
+          "clinicianRole": "other",
+          "assessedAt": "",
+          "careSetting": "emergency-department",
+          "administrationMode": "interview"
+        },
+        "identification": {
+          "patientIdentifier": "",
+          "ageBand": "60-74",
+          "sex": "male"
+        },
+        "items": {
+          "frequencyOfDrinking": 4,
+          "typicalQuantity": 3,
+          "heavyEpisodeFrequency": 4
+        },
+        "note": {
+          "clinicalNote": ""
+        }
+      },
+      "expected": {
+        "frequencyOfDrinkingPoint": 4,
+        "typicalQuantityPoint": 3,
+        "heavyEpisodeFrequencyPoint": 4,
+        "auditcScore": 11,
+        "riskBand": "possible-dependence",
+        "positiveScreen": true,
+        "firedItems": [
+          {
+            "id": "R-ITEM-1-FREQUENCY-01",
+            "item": "frequency-of-drinking",
+            "points": 4,
+            "category": "consumption-item",
+            "description": "Q1 — how often the patient has a drink containing alcohol"
+          },
+          {
+            "id": "R-ITEM-2-QUANTITY-01",
+            "item": "typical-quantity",
+            "points": 3,
+            "category": "consumption-item",
+            "description": "Q2 — typical number of UK units on a day when drinking"
+          },
+          {
+            "id": "R-ITEM-3-BINGE-01",
+            "item": "heavy-episode-frequency",
+            "points": 4,
+            "category": "consumption-item",
+            "description": "Q3 — how often the patient has >= 6 (female) / >= 8 (male) units in one session"
+          },
+          {
+            "id": "R-TOTAL-BAND-01",
+            "item": "total",
+            "points": 0,
+            "category": "total-band",
+            "description": "AUDIT-C 11 of 12 (>= 5) — positive screen (possible-dependence)"
+          }
+        ]
+      }
+    }
+  ]
+}

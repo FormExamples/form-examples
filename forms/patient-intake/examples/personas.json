@@ -1,0 +1,381 @@
+{
+  "engine": "front-end-with-html",
+  "graderHint": "calculateRiskLevel",
+  "note": "Realistic filled-in states in the Patient Intake engine's shape. `calculateRiskLevel` evaluates every intake rule and returns the worst-fired risk level: low (no rules fire), medium (a medium-risk rule), high (a high-risk rule). `expected` is computed by `bin/test-personas --update` and verified by `bin/test-personas`.",
+  "personas": [
+    {
+      "name": "low-risk",
+      "description": "Healthy adult, routine visit, no chronic conditions, medications or allergies, consent given: no rules fire — risk level low.",
+      "state": {
+        "personalInformation": {
+          "fullName": "",
+          "dateOfBirth": "",
+          "sex": "female",
+          "addressLine1": "",
+          "addressLine2": "",
+          "city": "",
+          "postcode": "",
+          "phone": "",
+          "email": "",
+          "emergencyContactName": "",
+          "emergencyContactPhone": "",
+          "emergencyContactRelationship": ""
+        },
+        "insuranceAndId": {
+          "insuranceProvider": "",
+          "policyNumber": "",
+          "nhsNumber": "",
+          "gpName": "",
+          "gpPracticeName": "",
+          "gpPhone": ""
+        },
+        "reasonForVisit": {
+          "primaryReason": "Routine check-up",
+          "urgencyLevel": "routine",
+          "referringProvider": "",
+          "symptomDuration": "",
+          "additionalDetails": ""
+        },
+        "medicalHistory": {
+          "chronicConditions": [],
+          "previousSurgeries": "",
+          "previousHospitalizations": "",
+          "ongoingTreatments": ""
+        },
+        "medications": [],
+        "allergies": [],
+        "familyHistory": {
+          "heartDisease": "no",
+          "heartDiseaseDetails": "",
+          "cancer": "no",
+          "cancerDetails": "",
+          "diabetes": "no",
+          "diabetesDetails": "",
+          "stroke": "no",
+          "strokeDetails": "",
+          "mentalIllness": "no",
+          "mentalIllnessDetails": "",
+          "geneticConditions": "no",
+          "geneticConditionsDetails": ""
+        },
+        "socialHistory": {
+          "smokingStatus": "never",
+          "smokingPackYears": null,
+          "alcoholFrequency": "occasional",
+          "alcoholUnitsPerWeek": 4,
+          "drugUse": "never",
+          "drugDetails": "",
+          "occupation": "teacher",
+          "exerciseFrequency": "regular",
+          "dietQuality": "good"
+        },
+        "reviewOfSystems": {
+          "constitutional": "",
+          "heent": "",
+          "cardiovascular": "",
+          "respiratory": "",
+          "gastrointestinal": "",
+          "genitourinary": "",
+          "musculoskeletal": "",
+          "neurological": "",
+          "psychiatric": "",
+          "skin": ""
+        },
+        "consentAndPreferences": {
+          "consentToTreatment": "yes",
+          "privacyAcknowledgement": "yes",
+          "communicationPreference": "email",
+          "advanceDirectives": "no",
+          "advanceDirectiveDetails": ""
+        }
+      },
+      "expected": {
+        "riskLevel": "low",
+        "firedRules": []
+      }
+    },
+    {
+      "name": "medium-risk",
+      "description": "Urgent visit with two chronic conditions and a current smoker: medium-risk rules fire, no high-risk rules — risk level medium.",
+      "state": {
+        "personalInformation": {
+          "fullName": "",
+          "dateOfBirth": "",
+          "sex": "male",
+          "addressLine1": "",
+          "addressLine2": "",
+          "city": "",
+          "postcode": "",
+          "phone": "",
+          "email": "",
+          "emergencyContactName": "",
+          "emergencyContactPhone": "",
+          "emergencyContactRelationship": ""
+        },
+        "insuranceAndId": {
+          "insuranceProvider": "",
+          "policyNumber": "",
+          "nhsNumber": "",
+          "gpName": "",
+          "gpPracticeName": "",
+          "gpPhone": ""
+        },
+        "reasonForVisit": {
+          "primaryReason": "Worsening breathlessness",
+          "urgencyLevel": "urgent",
+          "referringProvider": "",
+          "symptomDuration": "2-weeks",
+          "additionalDetails": ""
+        },
+        "medicalHistory": {
+          "chronicConditions": [
+            "hypertension",
+            "asthma"
+          ],
+          "previousSurgeries": "",
+          "previousHospitalizations": "",
+          "ongoingTreatments": ""
+        },
+        "medications": [],
+        "allergies": [],
+        "familyHistory": {
+          "heartDisease": "yes",
+          "heartDiseaseDetails": "Father, angina",
+          "cancer": "no",
+          "cancerDetails": "",
+          "diabetes": "no",
+          "diabetesDetails": "",
+          "stroke": "no",
+          "strokeDetails": "",
+          "mentalIllness": "no",
+          "mentalIllnessDetails": "",
+          "geneticConditions": "no",
+          "geneticConditionsDetails": ""
+        },
+        "socialHistory": {
+          "smokingStatus": "current",
+          "smokingPackYears": 20,
+          "alcoholFrequency": "moderate",
+          "alcoholUnitsPerWeek": 12,
+          "drugUse": "never",
+          "drugDetails": "",
+          "occupation": "driver",
+          "exerciseFrequency": "rarely",
+          "dietQuality": "average"
+        },
+        "reviewOfSystems": {
+          "constitutional": "",
+          "heent": "",
+          "cardiovascular": "",
+          "respiratory": "",
+          "gastrointestinal": "",
+          "genitourinary": "",
+          "musculoskeletal": "",
+          "neurological": "",
+          "psychiatric": "",
+          "skin": ""
+        },
+        "consentAndPreferences": {
+          "consentToTreatment": "yes",
+          "privacyAcknowledgement": "yes",
+          "communicationPreference": "phone",
+          "advanceDirectives": "no",
+          "advanceDirectiveDetails": ""
+        }
+      },
+      "expected": {
+        "riskLevel": "medium",
+        "firedRules": [
+          {
+            "id": "MH-002",
+            "category": "Medical History",
+            "description": "One or two chronic conditions",
+            "riskLevel": "medium"
+          },
+          {
+            "id": "SH-001",
+            "category": "Social History",
+            "description": "Current smoker",
+            "riskLevel": "medium"
+          },
+          {
+            "id": "UR-002",
+            "category": "Urgency",
+            "description": "Urgent visit",
+            "riskLevel": "medium"
+          }
+        ]
+      }
+    },
+    {
+      "name": "high-risk",
+      "description": "Emergency presentation with three or more chronic conditions and polypharmacy: high-risk rules fire — risk level high.",
+      "state": {
+        "personalInformation": {
+          "fullName": "",
+          "dateOfBirth": "",
+          "sex": "male",
+          "addressLine1": "",
+          "addressLine2": "",
+          "city": "",
+          "postcode": "",
+          "phone": "",
+          "email": "",
+          "emergencyContactName": "",
+          "emergencyContactPhone": "",
+          "emergencyContactRelationship": ""
+        },
+        "insuranceAndId": {
+          "insuranceProvider": "",
+          "policyNumber": "",
+          "nhsNumber": "",
+          "gpName": "",
+          "gpPracticeName": "",
+          "gpPhone": ""
+        },
+        "reasonForVisit": {
+          "primaryReason": "Acute chest pain",
+          "urgencyLevel": "emergency",
+          "referringProvider": "",
+          "symptomDuration": "1-hour",
+          "additionalDetails": ""
+        },
+        "medicalHistory": {
+          "chronicConditions": [
+            "type-2-diabetes",
+            "hypertension",
+            "chronic-kidney-disease",
+            "copd"
+          ],
+          "previousSurgeries": "Coronary stent 2019",
+          "previousHospitalizations": "Admitted for MI 2019",
+          "ongoingTreatments": ""
+        },
+        "medications": [
+          {
+            "name": "Metformin",
+            "dose": "1g",
+            "frequency": "twice daily",
+            "route": "oral"
+          },
+          {
+            "name": "Ramipril",
+            "dose": "10mg",
+            "frequency": "once daily",
+            "route": "oral"
+          },
+          {
+            "name": "Atorvastatin",
+            "dose": "80mg",
+            "frequency": "once daily",
+            "route": "oral"
+          },
+          {
+            "name": "Aspirin",
+            "dose": "75mg",
+            "frequency": "once daily",
+            "route": "oral"
+          },
+          {
+            "name": "Bisoprolol",
+            "dose": "5mg",
+            "frequency": "once daily",
+            "route": "oral"
+          }
+        ],
+        "allergies": [],
+        "familyHistory": {
+          "heartDisease": "yes",
+          "heartDiseaseDetails": "Father MI at 55",
+          "cancer": "no",
+          "cancerDetails": "",
+          "diabetes": "yes",
+          "diabetesDetails": "Mother, type 2",
+          "stroke": "no",
+          "strokeDetails": "",
+          "mentalIllness": "no",
+          "mentalIllnessDetails": "",
+          "geneticConditions": "no",
+          "geneticConditionsDetails": ""
+        },
+        "socialHistory": {
+          "smokingStatus": "current",
+          "smokingPackYears": 35,
+          "alcoholFrequency": "moderate",
+          "alcoholUnitsPerWeek": 18,
+          "drugUse": "never",
+          "drugDetails": "",
+          "occupation": "retired",
+          "exerciseFrequency": "never",
+          "dietQuality": "poor"
+        },
+        "reviewOfSystems": {
+          "constitutional": "Fatigue",
+          "heent": "",
+          "cardiovascular": "Central crushing chest pain radiating to left arm",
+          "respiratory": "Shortness of breath",
+          "gastrointestinal": "",
+          "genitourinary": "",
+          "musculoskeletal": "",
+          "neurological": "",
+          "psychiatric": "",
+          "skin": ""
+        },
+        "consentAndPreferences": {
+          "consentToTreatment": "yes",
+          "privacyAcknowledgement": "yes",
+          "communicationPreference": "phone",
+          "advanceDirectives": "no",
+          "advanceDirectiveDetails": ""
+        }
+      },
+      "expected": {
+        "riskLevel": "high",
+        "firedRules": [
+          {
+            "id": "MH-001",
+            "category": "Medical History",
+            "description": "Multiple chronic conditions (3+)",
+            "riskLevel": "high"
+          },
+          {
+            "id": "MH-003",
+            "category": "Medical History",
+            "description": "Previous surgeries reported",
+            "riskLevel": "medium"
+          },
+          {
+            "id": "MH-004",
+            "category": "Medical History",
+            "description": "Previous hospitalizations reported",
+            "riskLevel": "medium"
+          },
+          {
+            "id": "RX-001",
+            "category": "Medications",
+            "description": "Polypharmacy (5+ medications)",
+            "riskLevel": "high"
+          },
+          {
+            "id": "SH-001",
+            "category": "Social History",
+            "description": "Current smoker",
+            "riskLevel": "medium"
+          },
+          {
+            "id": "ROS-001",
+            "category": "Review of Systems",
+            "description": "Cardiovascular symptoms reported",
+            "riskLevel": "medium"
+          },
+          {
+            "id": "UR-001",
+            "category": "Urgency",
+            "description": "Emergency visit",
+            "riskLevel": "high"
+          }
+        ]
+      }
+    }
+  ]
+}

@@ -1,0 +1,1063 @@
+{
+  "engine": "front-end-with-html",
+  "graderHint": "gradeSatisfaction",
+  "note": "Realistic filled-in states in the Employee Satisfaction engine's shape. Each Likert item is 1-5; per-domain score = mean x 20; composite = mean of the eight graded domain scores; bands 85-100 excellent, 70-84 good, 50-69 satisfactory, 25-49 poor, 0-24 very-poor. The overall recommendScore (0-10) is classified as promoter (9-10) / passive (7-8) / detractor (0-6). `expected` is computed by `bin/test-personas --update` and verified by `bin/test-personas`.",
+  "personas": [
+    {
+      "name": "excellent",
+      "description": "Highly engaged employee rating every domain top marks (all items 5) with a promoter eNPS of 10: composite 100 — excellent.",
+      "state": {
+        "demographics": {
+          "department": "engineering",
+          "tenureBand": "3-to-5-years",
+          "hoursBand": "full-time-35-to-44"
+        },
+        "roleTenure": {
+          "roleLevel": "individual-contributor",
+          "workLocation": "hybrid",
+          "rt1": 5,
+          "rt2": 5
+        },
+        "workload": {
+          "wl1": 5,
+          "wl2": 5,
+          "wl3": 5,
+          "wl4": 5,
+          "wl5": 5
+        },
+        "management": {
+          "mg1": 5,
+          "mg2": 5,
+          "mg3": 5,
+          "mg4": 5,
+          "mg5": 5
+        },
+        "growth": {
+          "gr1": 5,
+          "gr2": 5,
+          "gr3": 5,
+          "gr4": 5
+        },
+        "compensation": {
+          "cb1": 5,
+          "cb2": 5,
+          "cb3": 5,
+          "cb4": 5
+        },
+        "culture": {
+          "cu1": 5,
+          "cu2": 5,
+          "cu3": 5,
+          "cu4": 5,
+          "cu5": 5
+        },
+        "environment": {
+          "en1": 5,
+          "en2": 5,
+          "en3": 5,
+          "en4": 5
+        },
+        "recognition": {
+          "rc1": 5,
+          "rc2": 5,
+          "rc3": 5,
+          "rc4": 5
+        },
+        "overall": {
+          "ov1": 5,
+          "ov2": 5,
+          "ov3": 5,
+          "ov4": 5,
+          "recommendScore": 10,
+          "retentionIntent": "definitely-stay",
+          "suggestionsForImprovement": "Keep doing what you're doing.",
+          "otherComments": ""
+        }
+      },
+      "expected": {
+        "compositeScore": 100,
+        "category": "excellent",
+        "domainScores": {
+          "workload": {
+            "mean": 5,
+            "score": 100,
+            "answeredCount": 5,
+            "totalCount": 5,
+            "category": "excellent"
+          },
+          "management": {
+            "mean": 5,
+            "score": 100,
+            "answeredCount": 5,
+            "totalCount": 5,
+            "category": "excellent"
+          },
+          "growth": {
+            "mean": 5,
+            "score": 100,
+            "answeredCount": 4,
+            "totalCount": 4,
+            "category": "excellent"
+          },
+          "compensation": {
+            "mean": 5,
+            "score": 100,
+            "answeredCount": 4,
+            "totalCount": 4,
+            "category": "excellent"
+          },
+          "culture": {
+            "mean": 5,
+            "score": 100,
+            "answeredCount": 5,
+            "totalCount": 5,
+            "category": "excellent"
+          },
+          "environment": {
+            "mean": 5,
+            "score": 100,
+            "answeredCount": 4,
+            "totalCount": 4,
+            "category": "excellent"
+          },
+          "recognition": {
+            "mean": 5,
+            "score": 100,
+            "answeredCount": 4,
+            "totalCount": 4,
+            "category": "excellent"
+          },
+          "overall": {
+            "mean": 5,
+            "score": 100,
+            "answeredCount": 4,
+            "totalCount": 4,
+            "category": "excellent"
+          }
+        },
+        "eNPS": {
+          "score": 10,
+          "classification": "promoter"
+        },
+        "answeredCount": 35,
+        "totalCount": 35,
+        "firedRules": [
+          {
+            "id": "wl1",
+            "domain": "workload",
+            "label": "My workload is manageable.",
+            "rawValue": 5
+          },
+          {
+            "id": "wl2",
+            "domain": "workload",
+            "label": "I am able to maintain a healthy balance between work and my personal life.",
+            "rawValue": 5
+          },
+          {
+            "id": "wl3",
+            "domain": "workload",
+            "label": "I rarely feel exhausted or burnt out at the end of the working week.",
+            "rawValue": 5
+          },
+          {
+            "id": "wl4",
+            "domain": "workload",
+            "label": "I am able to take time off when I need it.",
+            "rawValue": 5
+          },
+          {
+            "id": "wl5",
+            "domain": "workload",
+            "label": "My working hours are reasonable for the role I do.",
+            "rawValue": 5
+          },
+          {
+            "id": "mg1",
+            "domain": "management",
+            "label": "My line manager treats me with respect.",
+            "rawValue": 5
+          },
+          {
+            "id": "mg2",
+            "domain": "management",
+            "label": "My line manager gives me clear direction and constructive feedback.",
+            "rawValue": 5
+          },
+          {
+            "id": "mg3",
+            "domain": "management",
+            "label": "I trust the senior leadership of this organisation.",
+            "rawValue": 5
+          },
+          {
+            "id": "mg4",
+            "domain": "management",
+            "label": "Decisions made by leadership are communicated openly.",
+            "rawValue": 5
+          },
+          {
+            "id": "mg5",
+            "domain": "management",
+            "label": "My line manager supports my wellbeing.",
+            "rawValue": 5
+          },
+          {
+            "id": "gr1",
+            "domain": "growth",
+            "label": "I have meaningful opportunities to learn new skills here.",
+            "rawValue": 5
+          },
+          {
+            "id": "gr2",
+            "domain": "growth",
+            "label": "I see a clear path for career progression.",
+            "rawValue": 5
+          },
+          {
+            "id": "gr3",
+            "domain": "growth",
+            "label": "My manager actively supports my professional development.",
+            "rawValue": 5
+          },
+          {
+            "id": "gr4",
+            "domain": "growth",
+            "label": "Training and development resources are available when I need them.",
+            "rawValue": 5
+          },
+          {
+            "id": "cb1",
+            "domain": "compensation",
+            "label": "I am paid fairly for the work I do.",
+            "rawValue": 5
+          },
+          {
+            "id": "cb2",
+            "domain": "compensation",
+            "label": "My benefits package meets my needs.",
+            "rawValue": 5
+          },
+          {
+            "id": "cb3",
+            "domain": "compensation",
+            "label": "Pay decisions in this organisation are made fairly.",
+            "rawValue": 5
+          },
+          {
+            "id": "cb4",
+            "domain": "compensation",
+            "label": "My total compensation is competitive with similar roles elsewhere.",
+            "rawValue": 5
+          },
+          {
+            "id": "cu1",
+            "domain": "culture",
+            "label": "I feel a sense of belonging at this organisation.",
+            "rawValue": 5
+          },
+          {
+            "id": "cu2",
+            "domain": "culture",
+            "label": "People from all backgrounds are treated fairly here.",
+            "rawValue": 5
+          },
+          {
+            "id": "cu3",
+            "domain": "culture",
+            "label": "I can be myself at work.",
+            "rawValue": 5
+          },
+          {
+            "id": "cu4",
+            "domain": "culture",
+            "label": "My colleagues collaborate well together.",
+            "rawValue": 5
+          },
+          {
+            "id": "cu5",
+            "domain": "culture",
+            "label": "Inappropriate behaviour is addressed promptly when it occurs.",
+            "rawValue": 5
+          },
+          {
+            "id": "en1",
+            "domain": "environment",
+            "label": "I have the tools and equipment I need to do my job well.",
+            "rawValue": 5
+          },
+          {
+            "id": "en2",
+            "domain": "environment",
+            "label": "My work environment (on-site or remote) supports productive work.",
+            "rawValue": 5
+          },
+          {
+            "id": "en3",
+            "domain": "environment",
+            "label": "I have access to the information and systems I need.",
+            "rawValue": 5
+          },
+          {
+            "id": "en4",
+            "domain": "environment",
+            "label": "Health and safety in my workplace are taken seriously.",
+            "rawValue": 5
+          },
+          {
+            "id": "rc1",
+            "domain": "recognition",
+            "label": "I receive meaningful recognition when I do good work.",
+            "rawValue": 5
+          },
+          {
+            "id": "rc2",
+            "domain": "recognition",
+            "label": "I feel motivated to go beyond what is strictly required.",
+            "rawValue": 5
+          },
+          {
+            "id": "rc3",
+            "domain": "recognition",
+            "label": "My contributions are valued by my team and manager.",
+            "rawValue": 5
+          },
+          {
+            "id": "rc4",
+            "domain": "recognition",
+            "label": "I find my day-to-day work engaging.",
+            "rawValue": 5
+          },
+          {
+            "id": "ov1",
+            "domain": "overall",
+            "label": "I am proud to tell people I work here.",
+            "rawValue": 5
+          },
+          {
+            "id": "ov2",
+            "domain": "overall",
+            "label": "I would recommend this organisation as a great place to work.",
+            "rawValue": 5
+          },
+          {
+            "id": "ov3",
+            "domain": "overall",
+            "label": "Knowing what I know now, I would still choose to join this organisation.",
+            "rawValue": 5
+          },
+          {
+            "id": "ov4",
+            "domain": "overall",
+            "label": "I expect to still be working here in twelve months.",
+            "rawValue": 5
+          }
+        ]
+      }
+    },
+    {
+      "name": "satisfactory",
+      "description": "Adequate but unremarkable experience with neutral responses (all items 3) and a passive eNPS of 7: composite 60 — satisfactory.",
+      "state": {
+        "demographics": {
+          "department": "finance",
+          "tenureBand": "1-to-3-years",
+          "hoursBand": "full-time-35-to-44"
+        },
+        "roleTenure": {
+          "roleLevel": "team-lead",
+          "workLocation": "on-site",
+          "rt1": 3,
+          "rt2": 3
+        },
+        "workload": {
+          "wl1": 3,
+          "wl2": 3,
+          "wl3": 3,
+          "wl4": 3,
+          "wl5": 3
+        },
+        "management": {
+          "mg1": 3,
+          "mg2": 3,
+          "mg3": 3,
+          "mg4": 3,
+          "mg5": 3
+        },
+        "growth": {
+          "gr1": 3,
+          "gr2": 3,
+          "gr3": 3,
+          "gr4": 3
+        },
+        "compensation": {
+          "cb1": 3,
+          "cb2": 3,
+          "cb3": 3,
+          "cb4": 3
+        },
+        "culture": {
+          "cu1": 3,
+          "cu2": 3,
+          "cu3": 3,
+          "cu4": 3,
+          "cu5": 3
+        },
+        "environment": {
+          "en1": 3,
+          "en2": 3,
+          "en3": 3,
+          "en4": 3
+        },
+        "recognition": {
+          "rc1": 3,
+          "rc2": 3,
+          "rc3": 3,
+          "rc4": 3
+        },
+        "overall": {
+          "ov1": 3,
+          "ov2": 3,
+          "ov3": 3,
+          "ov4": 3,
+          "recommendScore": 7,
+          "retentionIntent": "unsure",
+          "suggestionsForImprovement": "Clearer career progression and better recognition.",
+          "otherComments": ""
+        }
+      },
+      "expected": {
+        "compositeScore": 60,
+        "category": "satisfactory",
+        "domainScores": {
+          "workload": {
+            "mean": 3,
+            "score": 60,
+            "answeredCount": 5,
+            "totalCount": 5,
+            "category": "satisfactory"
+          },
+          "management": {
+            "mean": 3,
+            "score": 60,
+            "answeredCount": 5,
+            "totalCount": 5,
+            "category": "satisfactory"
+          },
+          "growth": {
+            "mean": 3,
+            "score": 60,
+            "answeredCount": 4,
+            "totalCount": 4,
+            "category": "satisfactory"
+          },
+          "compensation": {
+            "mean": 3,
+            "score": 60,
+            "answeredCount": 4,
+            "totalCount": 4,
+            "category": "satisfactory"
+          },
+          "culture": {
+            "mean": 3,
+            "score": 60,
+            "answeredCount": 5,
+            "totalCount": 5,
+            "category": "satisfactory"
+          },
+          "environment": {
+            "mean": 3,
+            "score": 60,
+            "answeredCount": 4,
+            "totalCount": 4,
+            "category": "satisfactory"
+          },
+          "recognition": {
+            "mean": 3,
+            "score": 60,
+            "answeredCount": 4,
+            "totalCount": 4,
+            "category": "satisfactory"
+          },
+          "overall": {
+            "mean": 3,
+            "score": 60,
+            "answeredCount": 4,
+            "totalCount": 4,
+            "category": "satisfactory"
+          }
+        },
+        "eNPS": {
+          "score": 7,
+          "classification": "passive"
+        },
+        "answeredCount": 35,
+        "totalCount": 35,
+        "firedRules": [
+          {
+            "id": "wl1",
+            "domain": "workload",
+            "label": "My workload is manageable.",
+            "rawValue": 3
+          },
+          {
+            "id": "wl2",
+            "domain": "workload",
+            "label": "I am able to maintain a healthy balance between work and my personal life.",
+            "rawValue": 3
+          },
+          {
+            "id": "wl3",
+            "domain": "workload",
+            "label": "I rarely feel exhausted or burnt out at the end of the working week.",
+            "rawValue": 3
+          },
+          {
+            "id": "wl4",
+            "domain": "workload",
+            "label": "I am able to take time off when I need it.",
+            "rawValue": 3
+          },
+          {
+            "id": "wl5",
+            "domain": "workload",
+            "label": "My working hours are reasonable for the role I do.",
+            "rawValue": 3
+          },
+          {
+            "id": "mg1",
+            "domain": "management",
+            "label": "My line manager treats me with respect.",
+            "rawValue": 3
+          },
+          {
+            "id": "mg2",
+            "domain": "management",
+            "label": "My line manager gives me clear direction and constructive feedback.",
+            "rawValue": 3
+          },
+          {
+            "id": "mg3",
+            "domain": "management",
+            "label": "I trust the senior leadership of this organisation.",
+            "rawValue": 3
+          },
+          {
+            "id": "mg4",
+            "domain": "management",
+            "label": "Decisions made by leadership are communicated openly.",
+            "rawValue": 3
+          },
+          {
+            "id": "mg5",
+            "domain": "management",
+            "label": "My line manager supports my wellbeing.",
+            "rawValue": 3
+          },
+          {
+            "id": "gr1",
+            "domain": "growth",
+            "label": "I have meaningful opportunities to learn new skills here.",
+            "rawValue": 3
+          },
+          {
+            "id": "gr2",
+            "domain": "growth",
+            "label": "I see a clear path for career progression.",
+            "rawValue": 3
+          },
+          {
+            "id": "gr3",
+            "domain": "growth",
+            "label": "My manager actively supports my professional development.",
+            "rawValue": 3
+          },
+          {
+            "id": "gr4",
+            "domain": "growth",
+            "label": "Training and development resources are available when I need them.",
+            "rawValue": 3
+          },
+          {
+            "id": "cb1",
+            "domain": "compensation",
+            "label": "I am paid fairly for the work I do.",
+            "rawValue": 3
+          },
+          {
+            "id": "cb2",
+            "domain": "compensation",
+            "label": "My benefits package meets my needs.",
+            "rawValue": 3
+          },
+          {
+            "id": "cb3",
+            "domain": "compensation",
+            "label": "Pay decisions in this organisation are made fairly.",
+            "rawValue": 3
+          },
+          {
+            "id": "cb4",
+            "domain": "compensation",
+            "label": "My total compensation is competitive with similar roles elsewhere.",
+            "rawValue": 3
+          },
+          {
+            "id": "cu1",
+            "domain": "culture",
+            "label": "I feel a sense of belonging at this organisation.",
+            "rawValue": 3
+          },
+          {
+            "id": "cu2",
+            "domain": "culture",
+            "label": "People from all backgrounds are treated fairly here.",
+            "rawValue": 3
+          },
+          {
+            "id": "cu3",
+            "domain": "culture",
+            "label": "I can be myself at work.",
+            "rawValue": 3
+          },
+          {
+            "id": "cu4",
+            "domain": "culture",
+            "label": "My colleagues collaborate well together.",
+            "rawValue": 3
+          },
+          {
+            "id": "cu5",
+            "domain": "culture",
+            "label": "Inappropriate behaviour is addressed promptly when it occurs.",
+            "rawValue": 3
+          },
+          {
+            "id": "en1",
+            "domain": "environment",
+            "label": "I have the tools and equipment I need to do my job well.",
+            "rawValue": 3
+          },
+          {
+            "id": "en2",
+            "domain": "environment",
+            "label": "My work environment (on-site or remote) supports productive work.",
+            "rawValue": 3
+          },
+          {
+            "id": "en3",
+            "domain": "environment",
+            "label": "I have access to the information and systems I need.",
+            "rawValue": 3
+          },
+          {
+            "id": "en4",
+            "domain": "environment",
+            "label": "Health and safety in my workplace are taken seriously.",
+            "rawValue": 3
+          },
+          {
+            "id": "rc1",
+            "domain": "recognition",
+            "label": "I receive meaningful recognition when I do good work.",
+            "rawValue": 3
+          },
+          {
+            "id": "rc2",
+            "domain": "recognition",
+            "label": "I feel motivated to go beyond what is strictly required.",
+            "rawValue": 3
+          },
+          {
+            "id": "rc3",
+            "domain": "recognition",
+            "label": "My contributions are valued by my team and manager.",
+            "rawValue": 3
+          },
+          {
+            "id": "rc4",
+            "domain": "recognition",
+            "label": "I find my day-to-day work engaging.",
+            "rawValue": 3
+          },
+          {
+            "id": "ov1",
+            "domain": "overall",
+            "label": "I am proud to tell people I work here.",
+            "rawValue": 3
+          },
+          {
+            "id": "ov2",
+            "domain": "overall",
+            "label": "I would recommend this organisation as a great place to work.",
+            "rawValue": 3
+          },
+          {
+            "id": "ov3",
+            "domain": "overall",
+            "label": "Knowing what I know now, I would still choose to join this organisation.",
+            "rawValue": 3
+          },
+          {
+            "id": "ov4",
+            "domain": "overall",
+            "label": "I expect to still be working here in twelve months.",
+            "rawValue": 3
+          }
+        ]
+      }
+    },
+    {
+      "name": "very-poor",
+      "description": "Deeply dissatisfied employee rating every domain lowest (all items 1) with a detractor eNPS of 1: composite 20 — very-poor.",
+      "state": {
+        "demographics": {
+          "department": "customer-service",
+          "tenureBand": "less-than-1-year",
+          "hoursBand": "long-hours-45-plus"
+        },
+        "roleTenure": {
+          "roleLevel": "individual-contributor",
+          "workLocation": "on-site",
+          "rt1": 1,
+          "rt2": 1
+        },
+        "workload": {
+          "wl1": 1,
+          "wl2": 1,
+          "wl3": 1,
+          "wl4": 1,
+          "wl5": 1
+        },
+        "management": {
+          "mg1": 1,
+          "mg2": 1,
+          "mg3": 1,
+          "mg4": 1,
+          "mg5": 1
+        },
+        "growth": {
+          "gr1": 1,
+          "gr2": 1,
+          "gr3": 1,
+          "gr4": 1
+        },
+        "compensation": {
+          "cb1": 1,
+          "cb2": 1,
+          "cb3": 1,
+          "cb4": 1
+        },
+        "culture": {
+          "cu1": 1,
+          "cu2": 1,
+          "cu3": 1,
+          "cu4": 1,
+          "cu5": 1
+        },
+        "environment": {
+          "en1": 1,
+          "en2": 1,
+          "en3": 1,
+          "en4": 1
+        },
+        "recognition": {
+          "rc1": 1,
+          "rc2": 1,
+          "rc3": 1,
+          "rc4": 1
+        },
+        "overall": {
+          "ov1": 1,
+          "ov2": 1,
+          "ov3": 1,
+          "ov4": 1,
+          "recommendScore": 1,
+          "retentionIntent": "actively-looking",
+          "suggestionsForImprovement": "Unmanageable workload, no support from management, and pay well below market.",
+          "otherComments": "Planning to leave within the next few months."
+        }
+      },
+      "expected": {
+        "compositeScore": 20,
+        "category": "very-poor",
+        "domainScores": {
+          "workload": {
+            "mean": 1,
+            "score": 20,
+            "answeredCount": 5,
+            "totalCount": 5,
+            "category": "very-poor"
+          },
+          "management": {
+            "mean": 1,
+            "score": 20,
+            "answeredCount": 5,
+            "totalCount": 5,
+            "category": "very-poor"
+          },
+          "growth": {
+            "mean": 1,
+            "score": 20,
+            "answeredCount": 4,
+            "totalCount": 4,
+            "category": "very-poor"
+          },
+          "compensation": {
+            "mean": 1,
+            "score": 20,
+            "answeredCount": 4,
+            "totalCount": 4,
+            "category": "very-poor"
+          },
+          "culture": {
+            "mean": 1,
+            "score": 20,
+            "answeredCount": 5,
+            "totalCount": 5,
+            "category": "very-poor"
+          },
+          "environment": {
+            "mean": 1,
+            "score": 20,
+            "answeredCount": 4,
+            "totalCount": 4,
+            "category": "very-poor"
+          },
+          "recognition": {
+            "mean": 1,
+            "score": 20,
+            "answeredCount": 4,
+            "totalCount": 4,
+            "category": "very-poor"
+          },
+          "overall": {
+            "mean": 1,
+            "score": 20,
+            "answeredCount": 4,
+            "totalCount": 4,
+            "category": "very-poor"
+          }
+        },
+        "eNPS": {
+          "score": 1,
+          "classification": "detractor"
+        },
+        "answeredCount": 35,
+        "totalCount": 35,
+        "firedRules": [
+          {
+            "id": "wl1",
+            "domain": "workload",
+            "label": "My workload is manageable.",
+            "rawValue": 1
+          },
+          {
+            "id": "wl2",
+            "domain": "workload",
+            "label": "I am able to maintain a healthy balance between work and my personal life.",
+            "rawValue": 1
+          },
+          {
+            "id": "wl3",
+            "domain": "workload",
+            "label": "I rarely feel exhausted or burnt out at the end of the working week.",
+            "rawValue": 1
+          },
+          {
+            "id": "wl4",
+            "domain": "workload",
+            "label": "I am able to take time off when I need it.",
+            "rawValue": 1
+          },
+          {
+            "id": "wl5",
+            "domain": "workload",
+            "label": "My working hours are reasonable for the role I do.",
+            "rawValue": 1
+          },
+          {
+            "id": "mg1",
+            "domain": "management",
+            "label": "My line manager treats me with respect.",
+            "rawValue": 1
+          },
+          {
+            "id": "mg2",
+            "domain": "management",
+            "label": "My line manager gives me clear direction and constructive feedback.",
+            "rawValue": 1
+          },
+          {
+            "id": "mg3",
+            "domain": "management",
+            "label": "I trust the senior leadership of this organisation.",
+            "rawValue": 1
+          },
+          {
+            "id": "mg4",
+            "domain": "management",
+            "label": "Decisions made by leadership are communicated openly.",
+            "rawValue": 1
+          },
+          {
+            "id": "mg5",
+            "domain": "management",
+            "label": "My line manager supports my wellbeing.",
+            "rawValue": 1
+          },
+          {
+            "id": "gr1",
+            "domain": "growth",
+            "label": "I have meaningful opportunities to learn new skills here.",
+            "rawValue": 1
+          },
+          {
+            "id": "gr2",
+            "domain": "growth",
+            "label": "I see a clear path for career progression.",
+            "rawValue": 1
+          },
+          {
+            "id": "gr3",
+            "domain": "growth",
+            "label": "My manager actively supports my professional development.",
+            "rawValue": 1
+          },
+          {
+            "id": "gr4",
+            "domain": "growth",
+            "label": "Training and development resources are available when I need them.",
+            "rawValue": 1
+          },
+          {
+            "id": "cb1",
+            "domain": "compensation",
+            "label": "I am paid fairly for the work I do.",
+            "rawValue": 1
+          },
+          {
+            "id": "cb2",
+            "domain": "compensation",
+            "label": "My benefits package meets my needs.",
+            "rawValue": 1
+          },
+          {
+            "id": "cb3",
+            "domain": "compensation",
+            "label": "Pay decisions in this organisation are made fairly.",
+            "rawValue": 1
+          },
+          {
+            "id": "cb4",
+            "domain": "compensation",
+            "label": "My total compensation is competitive with similar roles elsewhere.",
+            "rawValue": 1
+          },
+          {
+            "id": "cu1",
+            "domain": "culture",
+            "label": "I feel a sense of belonging at this organisation.",
+            "rawValue": 1
+          },
+          {
+            "id": "cu2",
+            "domain": "culture",
+            "label": "People from all backgrounds are treated fairly here.",
+            "rawValue": 1
+          },
+          {
+            "id": "cu3",
+            "domain": "culture",
+            "label": "I can be myself at work.",
+            "rawValue": 1
+          },
+          {
+            "id": "cu4",
+            "domain": "culture",
+            "label": "My colleagues collaborate well together.",
+            "rawValue": 1
+          },
+          {
+            "id": "cu5",
+            "domain": "culture",
+            "label": "Inappropriate behaviour is addressed promptly when it occurs.",
+            "rawValue": 1
+          },
+          {
+            "id": "en1",
+            "domain": "environment",
+            "label": "I have the tools and equipment I need to do my job well.",
+            "rawValue": 1
+          },
+          {
+            "id": "en2",
+            "domain": "environment",
+            "label": "My work environment (on-site or remote) supports productive work.",
+            "rawValue": 1
+          },
+          {
+            "id": "en3",
+            "domain": "environment",
+            "label": "I have access to the information and systems I need.",
+            "rawValue": 1
+          },
+          {
+            "id": "en4",
+            "domain": "environment",
+            "label": "Health and safety in my workplace are taken seriously.",
+            "rawValue": 1
+          },
+          {
+            "id": "rc1",
+            "domain": "recognition",
+            "label": "I receive meaningful recognition when I do good work.",
+            "rawValue": 1
+          },
+          {
+            "id": "rc2",
+            "domain": "recognition",
+            "label": "I feel motivated to go beyond what is strictly required.",
+            "rawValue": 1
+          },
+          {
+            "id": "rc3",
+            "domain": "recognition",
+            "label": "My contributions are valued by my team and manager.",
+            "rawValue": 1
+          },
+          {
+            "id": "rc4",
+            "domain": "recognition",
+            "label": "I find my day-to-day work engaging.",
+            "rawValue": 1
+          },
+          {
+            "id": "ov1",
+            "domain": "overall",
+            "label": "I am proud to tell people I work here.",
+            "rawValue": 1
+          },
+          {
+            "id": "ov2",
+            "domain": "overall",
+            "label": "I would recommend this organisation as a great place to work.",
+            "rawValue": 1
+          },
+          {
+            "id": "ov3",
+            "domain": "overall",
+            "label": "Knowing what I know now, I would still choose to join this organisation.",
+            "rawValue": 1
+          },
+          {
+            "id": "ov4",
+            "domain": "overall",
+            "label": "I expect to still be working here in twelve months.",
+            "rawValue": 1
+          }
+        ]
+      }
+    }
+  ]
+}
