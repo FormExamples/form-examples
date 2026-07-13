@@ -188,8 +188,19 @@ Design each feature on the reference forms
       from each crate's real controllers) + a `--list-stale` gate wired into
       `bin/test-tools` and CI; regenerated the 135, left the 151 correct
       hand-authored docs untouched.
-- [ ] **Loco API integration test**: POST fixture → GET back → assert
-      round-trip, per crate (template test, mechanical rollout).
+- [i] **Representation-coverage audit (2026-07-13): CLEAN.** Checked SQL
+      tables vs XML/FHIR/protobuf/OpenAPI file counts across all forms. The
+      apparent mismatch (XML per-table vs FHIR/proto/OpenAPI ~6-7) is
+      INTENTIONAL: those three fold `assessment_<section>` child tables into
+      the parent `assessment` entity (documented in the generator headers),
+      and FHIR additionally emits a synthetic `grading_result`
+      (ClinicalImpression) with no SQL table. No generator bug — integrity
+      confirmed.
+- [~] **Loco API round-trip integration test** (template, in progress on
+      apgar-score): POST a domain entity to `/api/<table>/`, GET it back,
+      assert the round-trip — verifies the scaffold controllers actually
+      function (not just compile). Once the template + auth handling are
+      proven on one crate, roll out per crate.
 - [ ] **Serve OpenAPI**: static route in each crate serving its
       `openapi/*.yaml` at `/api/openapi.yaml`.
 - [ ] **i18n pilot**: extract UI strings behind a minimal message layer in
