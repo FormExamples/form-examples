@@ -242,11 +242,14 @@ Design each feature on the reference forms
       across diverse forms (incl. the re-ported Lily forms + a test-request
       form) → all build; `npm run check` + `vitest` also green on the sample.
       Unlike the Rust suite, the Svelte CI job is genuinely sound.
-- [~] **i18n pilot** (in progress on `medical-language-speaking-assessment-for-
-      cymraeg`): minimal message layer (`src/lib/i18n/`) + a runes locale store
-      + a LocaleSelect switcher mirroring the theme switcher; en-GB + cy for the
-      welcome/layout chrome; `docs/i18n.md` updated to the pilot pattern. Step/
-      clinical content translation deferred (full rollout is future work).
+- [x] **i18n pilot DONE** on `medical-language-speaking-assessment-for-cymraeg`:
+      message layer (`src/lib/i18n/messages.ts` typed `{en,cy}` catalogue +
+      `locale.svelte.ts` runes store, localStorage-persisted, `t()` with en
+      fallback, mirrors `<html lang>` en-GB/cy) + `LocaleSelect` switcher
+      mirroring ThemeSelect. Welcome + layout chrome in en-GB + Cymraeg
+      (incl. NHS Wales "Mwy na Geiriau"). `npm run check` 0/0, build ok, Lily
+      no drift. Step/clinical content + other locales deferred; `docs/i18n.md`
+      updated to the shipped-pilot pattern.
 - [ ] Update every touched form's `CHANGELOG.md` (batchable; group features
       per release entry).
 
