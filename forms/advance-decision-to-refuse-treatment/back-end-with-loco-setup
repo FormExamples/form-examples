@@ -150,6 +150,15 @@ cargo loco generate scaffold grading_fired_rule \
     validity_level:string! \
     --api
 
+cargo loco generate scaffold grading_additional_flag \
+    deleted_at:tstz \
+    grade:references \
+    flag_id:string! \
+    category:string! \
+    message:text! \
+    priority:string! \
+    --api
+
 # Convert the freshly-scaffolded nested crate into the canonical route
 # layout: back-end-with-loco/src/${form_snake_case}/*.rs
 cd ..
