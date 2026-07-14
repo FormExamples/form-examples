@@ -17,10 +17,71 @@ window.submitForm = function () {
     additionalFlags,
     timestamp: new Date().toISOString()
   };
+  // Persist for the dashboard, then render the report inline: this is a
+  // single-page wizard, so the report appears in the `#report` region below
+  // the form rather than navigating away to a separate page.
   sessionStorage.setItem('vaccinationData', JSON.stringify(data));
   sessionStorage.setItem('vaccinationResult', JSON.stringify(result));
-  window.location.href = 'report.html';
+  renderReport(result);
 };
+
+// ─── Report rendering (inline, single-page) ────────────
+const LEVEL_LABELS = {
+  draft: 'Draft — incomplete',
+  contraindicated: 'Contraindicated',
+  overdue: 'Overdue',
+  partiallyComplete: 'Partially complete',
+  upToDate: 'Up to date'
+};
+
+function esc(s) {
+  return String(s == null ? '' : s).replace(/[&<>"']/g, (c) => (
+    { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]
+  ));
+}
+
+function priorityClass(p) {
+  const key = String(p || '').toLowerCase();
+  return key === 'high' ? 'flag-high' : key === 'medium' ? 'flag-medium' : 'flag-low';
+}
+
+function renderReport(result) {
+  const out = document.getElementById('report');
+  if (!out) return;
+
+  const { vaccinationLevel, vaccinationScore, firedRules, additionalFlags } = result;
+  const levelLabel = LEVEL_LABELS[vaccinationLevel] || vaccinationLevel;
+
+  const rulesList = firedRules.length === 0
+    ? `<p class="muted">No grading rules fired.</p>`
+    : `<ul class="flags">${firedRules.map((r) => `
+        <li class="${priorityClass(r.concernLevel)}">
+          <span class="flag-priority">${esc(String(r.concernLevel || '').toUpperCase())}</span>
+          <span class="flag-id">${esc(r.id)}</span>
+          <span class="flag-category">${esc(r.category)}</span>
+          <span class="flag-message">${esc(r.description)}</span>
+        </li>`).join('')}</ul>`;
+
+  const flagsList = additionalFlags.length === 0
+    ? `<p class="muted">No additional flags.</p>`
+    : `<ul class="flags">${additionalFlags.map((f) => `
+        <li class="${priorityClass(f.priority)}">
+          <span class="flag-priority">${esc(String(f.priority || '').toUpperCase())}</span>
+          <span class="flag-id">${esc(f.id)}</span>
+          <span class="flag-category">${esc(f.category)}</span>
+          <span class="flag-message">${esc(f.message)}</span>
+        </li>`).join('')}</ul>`;
+
+  out.innerHTML = `
+    <h2>Vaccination Assessment Report</h2>
+    <p class="report-level"><strong>Status:</strong> ${esc(levelLabel)}</p>
+    <p class="report-score"><strong>Score:</strong> ${esc(vaccinationScore)}</p>
+    <h3>Fired rules (${firedRules.length})</h3>
+    ${rulesList}
+    <h3>Additional flags (${additionalFlags.length})</h3>
+    ${flagsList}`;
+  out.scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
 
 // ─── Data binding: populate form from data ─────────────
 function populateStep(step) {
