@@ -294,6 +294,11 @@ Design each feature on the reference forms
       single-page convention. Verified with Playwright (no navigation, `#report`
       fills, 0 page errors; smoke+a11y green). **Stub audit was otherwise clean:
       psychology-assessment was the only stub SQL; no other broken submits.**
+      **Gated (`394bd2aa7`):** the html-smoke sweep now asserts the primary
+      action never changes the pathname (single-page-wizard invariant) — it
+      catches this whole class and passed 572/572 across all 286 forms with the
+      new assertion (the old sweep only checked for thrown JS errors, which a
+      404 navigation does not raise, so the bug had slipped through).
 - [ ] **Front-end conformance follow-ups (documented, not fixed):**
       (1) 3 forms use ES-module `<script type="module">` instead of the
       classic window-namespace scripts the repo standardises on (breaks under
