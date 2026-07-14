@@ -52,7 +52,7 @@
           }
         ],
         "subject": {
-          "reference": "Patient/550e8400-e29b-41d4-a716-446655440000"
+          "reference": "urn:uuid:550e8400-e29b-41d4-a716-446655440000"
         },
         "actualPeriod": {
           "start": "2026-04-09T10:00:00+00:00"
@@ -92,7 +92,7 @@
           ]
         },
         "subject": {
-          "reference": "Patient/550e8400-e29b-41d4-a716-446655440000"
+          "reference": "urn:uuid:550e8400-e29b-41d4-a716-446655440000"
         },
         "encounter": {
           "reference": "Encounter/551e8400-e29b-41d4-a716-44665544000f"
@@ -284,7 +284,7 @@
         },
         "severity": "low",
         "subject": {
-          "reference": "Patient/550e8400-e29b-41d4-a716-446655440000"
+          "reference": "urn:uuid:550e8400-e29b-41d4-a716-446655440000"
         },
         "identifiedDateTime": "2026-04-09T10:00:00+00:00",
         "detail": "Clinical flag detected."
@@ -324,7 +324,7 @@
         },
         "severity": "low",
         "subject": {
-          "reference": "Patient/550e8400-e29b-41d4-a716-446655440000"
+          "reference": "urn:uuid:550e8400-e29b-41d4-a716-446655440000"
         },
         "identifiedDateTime": "2026-04-09T10:00:00+00:00",
         "detail": "Example text."
@@ -343,10 +343,10 @@
         },
         "status": "completed",
         "subject": {
-          "reference": "Patient/550e8400-e29b-41d4-a716-446655440000"
+          "reference": "urn:uuid:550e8400-e29b-41d4-a716-446655440000"
         },
         "encounter": {
-          "reference": "Encounter/770e8400-e29b-41d4-a716-446655440002"
+          "reference": "urn:uuid:770e8400-e29b-41d4-a716-446655440002"
         },
         "effectiveDateTime": "2026-04-09T10:00:00+00:00",
         "date": "2026-04-09T10:00:00+00:00",
@@ -387,7 +387,7 @@
           ]
         },
         "subject": {
-          "reference": "Patient/550e8400-e29b-41d4-a716-446655440000"
+          "reference": "urn:uuid:550e8400-e29b-41d4-a716-446655440000"
         },
         "encounter": {
           "reference": "Encounter/551e8400-e29b-41d4-a716-44665544000f"
@@ -462,7 +462,7 @@
           ]
         },
         "subject": {
-          "reference": "Patient/550e8400-e29b-41d4-a716-446655440000"
+          "reference": "urn:uuid:550e8400-e29b-41d4-a716-446655440000"
         },
         "encounter": {
           "reference": "Encounter/551e8400-e29b-41d4-a716-44665544000f"
@@ -573,7 +573,7 @@
           ]
         },
         "subject": {
-          "reference": "Patient/550e8400-e29b-41d4-a716-446655440000"
+          "reference": "urn:uuid:550e8400-e29b-41d4-a716-446655440000"
         },
         "encounter": {
           "reference": "Encounter/551e8400-e29b-41d4-a716-44665544000f"
@@ -692,7 +692,7 @@
           ]
         },
         "subject": {
-          "reference": "Patient/550e8400-e29b-41d4-a716-446655440000"
+          "reference": "urn:uuid:550e8400-e29b-41d4-a716-446655440000"
         },
         "encounter": {
           "reference": "Encounter/551e8400-e29b-41d4-a716-44665544000f"
@@ -803,7 +803,7 @@
           ]
         },
         "subject": {
-          "reference": "Patient/550e8400-e29b-41d4-a716-446655440000"
+          "reference": "urn:uuid:550e8400-e29b-41d4-a716-446655440000"
         },
         "encounter": {
           "reference": "Encounter/551e8400-e29b-41d4-a716-44665544000f"
@@ -982,7 +982,7 @@
           ]
         },
         "subject": {
-          "reference": "Patient/550e8400-e29b-41d4-a716-446655440000"
+          "reference": "urn:uuid:550e8400-e29b-41d4-a716-446655440000"
         },
         "encounter": {
           "reference": "Encounter/551e8400-e29b-41d4-a716-44665544000f"
@@ -1081,7 +1081,7 @@
           ]
         },
         "subject": {
-          "reference": "Patient/550e8400-e29b-41d4-a716-446655440000"
+          "reference": "urn:uuid:550e8400-e29b-41d4-a716-446655440000"
         },
         "encounter": {
           "reference": "Encounter/551e8400-e29b-41d4-a716-44665544000f"
@@ -1180,7 +1180,7 @@
           ]
         },
         "subject": {
-          "reference": "Patient/550e8400-e29b-41d4-a716-446655440000"
+          "reference": "urn:uuid:550e8400-e29b-41d4-a716-446655440000"
         },
         "encounter": {
           "reference": "Encounter/551e8400-e29b-41d4-a716-44665544000f"
@@ -1303,7 +1303,7 @@
           ]
         },
         "subject": {
-          "reference": "Patient/550e8400-e29b-41d4-a716-446655440000"
+          "reference": "urn:uuid:550e8400-e29b-41d4-a716-446655440000"
         },
         "encounter": {
           "reference": "Encounter/551e8400-e29b-41d4-a716-44665544000f"
@@ -1390,7 +1390,7 @@
           ]
         },
         "subject": {
-          "reference": "Patient/550e8400-e29b-41d4-a716-446655440000"
+          "reference": "urn:uuid:550e8400-e29b-41d4-a716-446655440000"
         },
         "encounter": {
           "reference": "Encounter/551e8400-e29b-41d4-a716-44665544000f"
@@ -1445,7 +1445,7 @@
           ]
         },
         "subject": {
-          "reference": "Patient/550e8400-e29b-41d4-a716-446655440000"
+          "reference": "urn:uuid:550e8400-e29b-41d4-a716-446655440000"
         },
         "encounter": {
           "reference": "Encounter/551e8400-e29b-41d4-a716-44665544000f"
@@ -1532,7 +1532,7 @@
           ]
         },
         "subject": {
-          "reference": "Patient/550e8400-e29b-41d4-a716-446655440000"
+          "reference": "urn:uuid:550e8400-e29b-41d4-a716-446655440000"
         },
         "encounter": {
           "reference": "Encounter/551e8400-e29b-41d4-a716-44665544000f"
@@ -1587,7 +1587,7 @@
           ]
         },
         "subject": {
-          "reference": "Patient/550e8400-e29b-41d4-a716-446655440000"
+          "reference": "urn:uuid:550e8400-e29b-41d4-a716-446655440000"
         },
         "encounter": {
           "reference": "Encounter/551e8400-e29b-41d4-a716-44665544000f"

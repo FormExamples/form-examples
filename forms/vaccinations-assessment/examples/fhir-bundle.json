@@ -49,10 +49,10 @@
           ]
         },
         "subject": {
-          "reference": "Patient/550e8400-e29b-41d4-a716-446655440000"
+          "reference": "urn:uuid:550e8400-e29b-41d4-a716-446655440000"
         },
         "encounter": {
-          "reference": "Encounter/770e8400-e29b-41d4-a716-446655440002"
+          "reference": "urn:uuid:770e8400-e29b-41d4-a716-446655440002"
         },
         "effectiveDateTime": "2026-04-09T10:00:00+00:00",
         "component": [
@@ -148,10 +148,10 @@
           ]
         },
         "subject": {
-          "reference": "Patient/550e8400-e29b-41d4-a716-446655440000"
+          "reference": "urn:uuid:550e8400-e29b-41d4-a716-446655440000"
         },
         "encounter": {
-          "reference": "Encounter/770e8400-e29b-41d4-a716-446655440002"
+          "reference": "urn:uuid:770e8400-e29b-41d4-a716-446655440002"
         },
         "effectiveDateTime": "2026-04-09T10:00:00+00:00",
         "component": [
@@ -323,10 +323,10 @@
           ]
         },
         "subject": {
-          "reference": "Patient/550e8400-e29b-41d4-a716-446655440000"
+          "reference": "urn:uuid:550e8400-e29b-41d4-a716-446655440000"
         },
         "encounter": {
-          "reference": "Encounter/770e8400-e29b-41d4-a716-446655440002"
+          "reference": "urn:uuid:770e8400-e29b-41d4-a716-446655440002"
         },
         "effectiveDateTime": "2026-04-09T10:00:00+00:00",
         "component": [
@@ -465,7 +465,7 @@
           }
         ],
         "subject": {
-          "reference": "Patient/550e8400-e29b-41d4-a716-446655440000"
+          "reference": "urn:uuid:550e8400-e29b-41d4-a716-446655440000"
         },
         "actualPeriod": {
           "start": "2026-04-09T10:00:00+00:00"
@@ -505,10 +505,10 @@
           ]
         },
         "subject": {
-          "reference": "Patient/550e8400-e29b-41d4-a716-446655440000"
+          "reference": "urn:uuid:550e8400-e29b-41d4-a716-446655440000"
         },
         "encounter": {
-          "reference": "Encounter/770e8400-e29b-41d4-a716-446655440002"
+          "reference": "urn:uuid:770e8400-e29b-41d4-a716-446655440002"
         },
         "effectiveDateTime": "2026-04-09T10:00:00+00:00",
         "component": [
@@ -644,10 +644,10 @@
           ]
         },
         "subject": {
-          "reference": "Patient/550e8400-e29b-41d4-a716-446655440000"
+          "reference": "urn:uuid:550e8400-e29b-41d4-a716-446655440000"
         },
         "encounter": {
-          "reference": "Encounter/770e8400-e29b-41d4-a716-446655440002"
+          "reference": "urn:uuid:770e8400-e29b-41d4-a716-446655440002"
         },
         "effectiveDateTime": "2026-04-09T10:00:00+00:00",
         "component": [
@@ -819,10 +819,10 @@
           ]
         },
         "subject": {
-          "reference": "Patient/550e8400-e29b-41d4-a716-446655440000"
+          "reference": "urn:uuid:550e8400-e29b-41d4-a716-446655440000"
         },
         "encounter": {
-          "reference": "Encounter/770e8400-e29b-41d4-a716-446655440002"
+          "reference": "urn:uuid:770e8400-e29b-41d4-a716-446655440002"
         },
         "effectiveDateTime": "2026-04-09T10:00:00+00:00",
         "component": [
@@ -1010,10 +1010,10 @@
           ]
         },
         "subject": {
-          "reference": "Patient/550e8400-e29b-41d4-a716-446655440000"
+          "reference": "urn:uuid:550e8400-e29b-41d4-a716-446655440000"
         },
         "encounter": {
-          "reference": "Encounter/770e8400-e29b-41d4-a716-446655440002"
+          "reference": "urn:uuid:770e8400-e29b-41d4-a716-446655440002"
         },
         "effectiveDateTime": "2026-04-09T10:00:00+00:00",
         "component": [
@@ -1165,10 +1165,10 @@
           ]
         },
         "subject": {
-          "reference": "Patient/550e8400-e29b-41d4-a716-446655440000"
+          "reference": "urn:uuid:550e8400-e29b-41d4-a716-446655440000"
         },
         "encounter": {
-          "reference": "Encounter/770e8400-e29b-41d4-a716-446655440002"
+          "reference": "urn:uuid:770e8400-e29b-41d4-a716-446655440002"
         },
         "effectiveDateTime": "2026-04-09T10:00:00+00:00",
         "component": [
@@ -1384,10 +1384,10 @@
           ]
         },
         "subject": {
-          "reference": "Patient/550e8400-e29b-41d4-a716-446655440000"
+          "reference": "urn:uuid:550e8400-e29b-41d4-a716-446655440000"
         },
         "encounter": {
-          "reference": "Encounter/770e8400-e29b-41d4-a716-446655440002"
+          "reference": "urn:uuid:770e8400-e29b-41d4-a716-446655440002"
         },
         "effectiveDateTime": "2026-04-09T10:00:00+00:00",
         "component": [
@@ -1463,10 +1463,10 @@
         },
         "status": "completed",
         "subject": {
-          "reference": "Patient/550e8400-e29b-41d4-a716-446655440000"
+          "reference": "urn:uuid:550e8400-e29b-41d4-a716-446655440000"
         },
         "encounter": {
-          "reference": "Encounter/770e8400-e29b-41d4-a716-446655440002"
+          "reference": "urn:uuid:770e8400-e29b-41d4-a716-446655440002"
         },
         "effectiveDateTime": "2026-04-09T10:00:00+00:00",
         "date": "2026-04-09T10:00:00+00:00",
@@ -1531,10 +1531,10 @@
           ]
         },
         "subject": {
-          "reference": "Patient/550e8400-e29b-41d4-a716-446655440000"
+          "reference": "urn:uuid:550e8400-e29b-41d4-a716-446655440000"
         },
         "encounter": {
-          "reference": "Encounter/770e8400-e29b-41d4-a716-446655440002"
+          "reference": "urn:uuid:770e8400-e29b-41d4-a716-446655440002"
         },
         "effectiveDateTime": "2026-04-09T10:00:00+00:00",
         "component": [
@@ -1702,10 +1702,10 @@
           ]
         },
         "subject": {
-          "reference": "Patient/550e8400-e29b-41d4-a716-446655440000"
+          "reference": "urn:uuid:550e8400-e29b-41d4-a716-446655440000"
         },
         "encounter": {
-          "reference": "Encounter/770e8400-e29b-41d4-a716-446655440002"
+          "reference": "urn:uuid:770e8400-e29b-41d4-a716-446655440002"
         },
         "effectiveDateTime": "2026-04-09T10:00:00+00:00",
         "component": [
@@ -1876,10 +1876,10 @@
           ]
         },
         "subject": {
-          "reference": "Patient/550e8400-e29b-41d4-a716-446655440000"
+          "reference": "urn:uuid:550e8400-e29b-41d4-a716-446655440000"
         },
         "encounter": {
-          "reference": "Encounter/770e8400-e29b-41d4-a716-446655440002"
+          "reference": "urn:uuid:770e8400-e29b-41d4-a716-446655440002"
         },
         "effectiveDateTime": "2026-04-09T10:00:00+00:00",
         "component": [

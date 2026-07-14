@@ -49,7 +49,7 @@
           ]
         },
         "subject": {
-          "reference": "Patient/550e8400-e29b-41d4-a716-446655440000"
+          "reference": "urn:uuid:550e8400-e29b-41d4-a716-446655440000"
         },
         "encounter": {
           "reference": "Encounter/330e8400-e29b-41d4-a716-44665544000d"
@@ -148,7 +148,7 @@
           ]
         },
         "subject": {
-          "reference": "Patient/550e8400-e29b-41d4-a716-446655440000"
+          "reference": "urn:uuid:550e8400-e29b-41d4-a716-446655440000"
         },
         "encounter": {
           "reference": "Encounter/330e8400-e29b-41d4-a716-44665544000d"
@@ -275,7 +275,7 @@
           ]
         },
         "subject": {
-          "reference": "Patient/550e8400-e29b-41d4-a716-446655440000"
+          "reference": "urn:uuid:550e8400-e29b-41d4-a716-446655440000"
         },
         "encounter": {
           "reference": "Encounter/330e8400-e29b-41d4-a716-44665544000d"
@@ -505,7 +505,7 @@
           ]
         },
         "subject": {
-          "reference": "Patient/550e8400-e29b-41d4-a716-446655440000"
+          "reference": "urn:uuid:550e8400-e29b-41d4-a716-446655440000"
         },
         "encounter": {
           "reference": "Encounter/330e8400-e29b-41d4-a716-44665544000d"
@@ -620,7 +620,7 @@
           ]
         },
         "subject": {
-          "reference": "Patient/550e8400-e29b-41d4-a716-446655440000"
+          "reference": "urn:uuid:550e8400-e29b-41d4-a716-446655440000"
         },
         "encounter": {
           "reference": "Encounter/330e8400-e29b-41d4-a716-44665544000d"
@@ -707,7 +707,7 @@
           ]
         },
         "subject": {
-          "reference": "Patient/550e8400-e29b-41d4-a716-446655440000"
+          "reference": "urn:uuid:550e8400-e29b-41d4-a716-446655440000"
         },
         "encounter": {
           "reference": "Encounter/330e8400-e29b-41d4-a716-44665544000d"
@@ -822,7 +822,7 @@
           ]
         },
         "subject": {
-          "reference": "Patient/550e8400-e29b-41d4-a716-446655440000"
+          "reference": "urn:uuid:550e8400-e29b-41d4-a716-446655440000"
         },
         "encounter": {
           "reference": "Encounter/330e8400-e29b-41d4-a716-44665544000d"
@@ -897,7 +897,7 @@
           ]
         },
         "subject": {
-          "reference": "Patient/550e8400-e29b-41d4-a716-446655440000"
+          "reference": "urn:uuid:550e8400-e29b-41d4-a716-446655440000"
         },
         "encounter": {
           "reference": "Encounter/330e8400-e29b-41d4-a716-44665544000d"
@@ -1064,7 +1064,7 @@
           ]
         },
         "subject": {
-          "reference": "Patient/550e8400-e29b-41d4-a716-446655440000"
+          "reference": "urn:uuid:550e8400-e29b-41d4-a716-446655440000"
         },
         "encounter": {
           "reference": "Encounter/330e8400-e29b-41d4-a716-44665544000d"
@@ -1207,7 +1207,7 @@
           ]
         },
         "subject": {
-          "reference": "Patient/550e8400-e29b-41d4-a716-446655440000"
+          "reference": "urn:uuid:550e8400-e29b-41d4-a716-446655440000"
         },
         "encounter": {
           "reference": "Encounter/330e8400-e29b-41d4-a716-44665544000d"
@@ -1306,7 +1306,7 @@
           ]
         },
         "subject": {
-          "reference": "Patient/550e8400-e29b-41d4-a716-446655440000"
+          "reference": "urn:uuid:550e8400-e29b-41d4-a716-446655440000"
         },
         "encounter": {
           "reference": "Encounter/330e8400-e29b-41d4-a716-44665544000d"
@@ -1397,7 +1397,7 @@
           ]
         },
         "subject": {
-          "reference": "Patient/550e8400-e29b-41d4-a716-446655440000"
+          "reference": "urn:uuid:550e8400-e29b-41d4-a716-446655440000"
         },
         "encounter": {
           "reference": "Encounter/330e8400-e29b-41d4-a716-44665544000d"

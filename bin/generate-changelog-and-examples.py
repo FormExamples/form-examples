@@ -401,6 +401,7 @@ def gather_fhir_bundle(form_dir: Path, title: str) -> dict[str, Any]:
             "entry": [],
         }
     entries: list[dict[str, Any]] = []
+    resources: list[tuple[str, dict[str, Any]]] = []
     for path in sorted(fhir_dir.glob("*.json")):
         try:
             resource = json.loads(path.read_text())
@@ -412,6 +413,32 @@ def gather_fhir_bundle(form_dir: Path, title: str) -> dict[str, Any]:
         rid = resource.get("id", "")
         full_url = f"urn:uuid:{rid}" if rid else f"urn:uuid:{path.stem}"
         entries.append({"fullUrl": full_url, "resource": resource})
+        resources.append((full_url, resource))
+
+    # In a document Bundle, references should resolve to the entry fullUrls.
+    # The standalone fhir/r5/ resources use relative `Type/id` references (fine
+    # on their own); rewrite them here — on the bundled copies only — to the
+    # matching `urn:uuid:` fullUrl so the bundle is internally self-resolving.
+    ref_map: dict[str, str] = {}
+    for full_url, resource in resources:
+        rtype = resource["resourceType"]
+        rid = resource.get("id", "")
+        if rid:
+            ref_map[f"{rtype}/{rid}"] = full_url
+
+    def rewrite_refs(node: Any) -> None:
+        if isinstance(node, dict):
+            for key, value in node.items():
+                if key == "reference" and isinstance(value, str) and value in ref_map:
+                    node[key] = ref_map[value]
+                else:
+                    rewrite_refs(value)
+        elif isinstance(node, list):
+            for item in node:
+                rewrite_refs(item)
+
+    for _, resource in resources:
+        rewrite_refs(resource)
 
     return {
         "resourceType": "Bundle",

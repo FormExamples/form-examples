@@ -49,7 +49,7 @@
           ]
         },
         "subject": {
-          "reference": "Patient/550e8400-e29b-41d4-a716-446655440000"
+          "reference": "urn:uuid:550e8400-e29b-41d4-a716-446655440000"
         },
         "encounter": {
           "reference": "Encounter/ee0e8400-e29b-41d4-a716-446655440009"
@@ -220,7 +220,7 @@
         },
         "status": "completed",
         "subject": {
-          "reference": "Patient/550e8400-e29b-41d4-a716-446655440000"
+          "reference": "urn:uuid:550e8400-e29b-41d4-a716-446655440000"
         },
         "encounter": {
           "reference": "Encounter/ee0e8400-e29b-41d4-a716-446655440009"
@@ -265,7 +265,7 @@
         },
         "severity": "high",
         "subject": {
-          "reference": "Patient/550e8400-e29b-41d4-a716-446655440000"
+          "reference": "urn:uuid:550e8400-e29b-41d4-a716-446655440000"
         },
         "identifiedDateTime": "2026-04-09T10:00:00+00:00",
         "detail": "Clinical flag detected."
@@ -305,7 +305,7 @@
         },
         "severity": "routine",
         "subject": {
-          "reference": "Patient/550e8400-e29b-41d4-a716-446655440000"
+          "reference": "urn:uuid:550e8400-e29b-41d4-a716-446655440000"
         },
         "identifiedDateTime": "2026-04-09T10:00:00+00:00",
         "detail": "Example text."
@@ -407,7 +407,7 @@
           ]
         },
         "subject": {
-          "reference": "Patient/550e8400-e29b-41d4-a716-446655440000"
+          "reference": "urn:uuid:550e8400-e29b-41d4-a716-446655440000"
         },
         "encounter": {
           "reference": "Encounter/ee0e8400-e29b-41d4-a716-446655440009"
@@ -542,7 +542,7 @@
           ]
         },
         "subject": {
-          "reference": "Patient/550e8400-e29b-41d4-a716-446655440000"
+          "reference": "urn:uuid:550e8400-e29b-41d4-a716-446655440000"
         },
         "encounter": {
           "reference": "Encounter/ee0e8400-e29b-41d4-a716-446655440009"
@@ -617,7 +617,7 @@
           ]
         },
         "subject": {
-          "reference": "Patient/550e8400-e29b-41d4-a716-446655440000"
+          "reference": "urn:uuid:550e8400-e29b-41d4-a716-446655440000"
         },
         "encounter": {
           "reference": "Encounter/ee0e8400-e29b-41d4-a716-446655440009"
@@ -724,7 +724,7 @@
           ]
         },
         "subject": {
-          "reference": "Patient/550e8400-e29b-41d4-a716-446655440000"
+          "reference": "urn:uuid:550e8400-e29b-41d4-a716-446655440000"
         },
         "encounter": {
           "reference": "Encounter/ee0e8400-e29b-41d4-a716-446655440009"

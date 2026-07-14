@@ -222,19 +222,19 @@ Design each feature on the reference forms
       values; regenerated (7 files); all 1850 specs now validate. Added an
       OpenAPI 3.1 validation step to the CI drift job (previously only XML +
       FHIR were validated).
-- [i] **FHIR R5 validity audit (2026-07-13): resources valid.** Ran the
-      authoritative HL7 `validator_cli.jar` (6.3.11) on sample resources +
-      bundle: individual FHIR resources validate with **0 errors** (one
-      best-practice "should have narrative" warning). A quick home-grown
-      structural reference check flagged ~282 bundles for "unresolved
-      references", but that was a FALSE POSITIVE — bundle references use the
-      `Type/id` form while entry `fullUrl`s use `urn:uuid:<id>`, which FHIR
-      tolerates (the HL7 validator does not error). Did NOT fabricate a fix
-      from a naive check contradicting the authoritative validator. Minor
-      best-practice nice-to-have (make document-bundle references use the
-      `urn:uuid:` fullUrl form) noted for a future FHIR-generator pass; not
-      worth regenerating 286 bundles for a validator-tolerated warning now.
-      (Full jar validation stays in the CI `fhir` job.)
+- [x] **FHIR: bundle references now self-resolving (partial) + deeper finding.**
+      Ran the authoritative HL7 `validator_cli.jar` — resources validate with 0
+      errors. Made document-bundle references self-resolving: the bundle
+      generator (`gather_fhir_bundle`) now rewrites each bundled resource's
+      `Type/id` references to the matching `urn:uuid:` entry fullUrl (standalone
+      `fhir/r5/*.json` keep `Type/id`). 273 bundles improved, all 286 still
+      well-formed, idempotent. **Deeper finding (documented, not fixed):** forms
+      whose main table is form-specific (e.g. `apgar_score`, not literally
+      `assessment`) carry DANGLING `Encounter/<uuid>` references — the generator
+      derives the encounter ref from a hardcoded `get_uuid("assessment")` seed
+      that matches no generated resource, so no Encounter exists. The HL7
+      validator tolerates it (warning, not error); a proper fix is a dedicated
+      FHIR-generator pass to key the Encounter id off the actual main table.
 - [i] **Representation-coverage audit (2026-07-13): CLEAN.** Checked SQL
       tables vs XML/FHIR/protobuf/OpenAPI file counts across all forms. The
       apparent mismatch (XML per-table vs FHIR/proto/OpenAPI ~6-7) is
