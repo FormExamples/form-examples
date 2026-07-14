@@ -285,6 +285,30 @@ Design each feature on the reference forms
       idempotent; commit `f40c11605`). The generator had **no `--check` mode**,
       which is why this drifted silently — added `--check` + slug filtering and
       wired the gate into CI (commit `62b306f67`).
+- [x] **vaccinations-assessment broken submit — FIXED (`b22d0662d`).** Found by
+      auditing front-end architecture: its HTML wizard's submit navigated to
+      `report.html`, which does not exist → clinician landed on a 404 and never
+      saw the result. index.html already had the intended inline `#report`
+      region; replaced the redirect with an inline renderReport() (status,
+      score, fired rules, flags — escaped + priority-coloured), matching the
+      single-page convention. Verified with Playwright (no navigation, `#report`
+      fills, 0 page errors; smoke+a11y green). **Stub audit was otherwise clean:
+      psychology-assessment was the only stub SQL; no other broken submits.**
+- [ ] **Front-end conformance follow-ups (documented, not fixed):**
+      (1) 3 forms use ES-module `<script type="module">` instead of the
+      classic window-namespace scripts the repo standardises on (breaks under
+      `file://`, works under http): `objectives-and-key-results-tracker`,
+      `united-states-hipaa-authorization-form`, `vaccinations-assessment` — the
+      latter two render inline (not broken), just non-conforming.
+      (2) 6 forms with a `form-app.js` lack the `STORAGE_KEY` autosave the other
+      276 have (agile-principles-assessment, issue-tracker, meeting,
+      objectives-and-key-results-tracker, uk-lpa-health, vaccinations-assessment);
+      4 forms have no `form-app.js` at all (agile-consulting-scorecard,
+      medical-operation-note, the 2 privacy-notice forms). Assess per form
+      whether autosave applies before rolling out.
+      (3) `agile-consulting-scorecard-for-hiring-help` is genuinely multi-page
+      (has its own `report.html`) — the one real single-page-wizard violation;
+      it is also a known Lily-Svelte TODO form.
 - [i] **Representation-coverage audit — CORRECTED (2026-07-14).** The earlier
       audit (2026-07-13) wrongly called the FHIR-only extra file a "synthetic
       `grading_result`" and declared it intentional. It was NOT: `grading_result`
