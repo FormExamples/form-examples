@@ -48,8 +48,17 @@ for (const slug of formSlugs()) {
         // later step, which is valid — so this whole check is best-effort.
         const primary = page.locator('button[data-variant="primary"]').first();
         if ((await primary.count()) > 0 && (await primary.isVisible()) && (await primary.isEnabled())) {
+          const pathBefore = new URL(page.url()).pathname;
           await primary.click({ trial: false }).catch(() => {});
           await page.waitForTimeout(200);
+          // Single-page-wizard invariant: firing the primary action must render
+          // the result in-page, never navigate to a separate document. A submit
+          // that redirects to a non-existent report page (a 404) is the bug
+          // class this catches — the report must appear on index.html itself.
+          expect(
+            new URL(page.url()).pathname,
+            'primary action must not navigate away from the single-page wizard',
+          ).toBe(pathBefore);
         }
 
         // 4. Print stylesheet hides interactive chrome. Emulate print media
