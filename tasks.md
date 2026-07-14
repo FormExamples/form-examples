@@ -267,9 +267,15 @@ Design each feature on the reference forms
       migrations apply, full patient→assessment→grade→rule/flag insert chain
       succeeds, CHECK constraints reject invalid severities. Regenerated all
       representations; FHIR now emits the correct Encounter/ClinicalImpression/
-      DetectedIssue set. Commit `fcd9df60f`. (Follow-up: the back-end-with-loco
-      crate still carries only patient+clinician entities — a larger
-      crate-regeneration task, tracked under Phase 3.)
+      DetectedIssue set. Commit `fcd9df60f`.
+- [x] **psychology-assessment Loco crate — completed (`8ed5d7e40`).** The crate
+      lagged its schema (patient+clinician only). Added the full relational
+      stack for all four domain entities (assessment/grade/grading_fired_rule/
+      grading_additional_flag), mirroring the sibling autism-assessment crate:
+      SeaORM migrations, _entities with relations, model wrappers, JSON-API
+      controllers wired into app.rs, and model + request tests. Verified on
+      scratch Postgres 18 — cargo check clean; full suite 35 tests, 0 failed
+      (up from 27); loco route + config drift gates green.
 - [x] **Loco setup-script drift (81 forms) — FIXED + gated.** Surfaced while
       regenerating for psychology-assessment: 81 `back-end-with-loco-setup`
       scripts were missing the `grading_additional_flag` scaffold call. Root
