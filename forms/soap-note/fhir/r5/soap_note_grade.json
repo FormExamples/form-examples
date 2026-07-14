@@ -1,176 +1,21 @@
 {
-  "resourceType": "Observation",
+  "resourceType": "ClinicalImpression",
   "id": "880e8400-e29b-41d4-a716-446655440003",
   "meta": {
     "profile": [
-      "http://hl7.org/fhir/StructureDefinition/Observation"
+      "http://hl7.org/fhir/StructureDefinition/ClinicalImpression"
     ],
     "lastUpdated": "2026-04-09T10:00:00+00:00"
   },
-  "status": "final",
-  "category": [
-    {
-      "coding": [
-        {
-          "system": "http://terminology.hl7.org/CodeSystem/observation-category",
-          "code": "survey",
-          "display": "Survey"
-        }
-      ]
-    }
-  ],
-  "code": {
-    "coding": [
-      {
-        "system": "urn:form-examples:soap-note",
-        "code": "soap_note_grade",
-        "display": "Soap Note Grade"
-      }
-    ]
-  },
+  "status": "completed",
   "subject": {
     "reference": "Patient/550e8400-e29b-41d4-a716-446655440000"
   },
   "encounter": {
-    "reference": "Encounter/bb0e8400-e29b-41d4-a716-446655440006"
+    "reference": "Encounter/770e8400-e29b-41d4-a716-446655440002"
   },
   "effectiveDateTime": "2026-04-09T10:00:00+00:00",
-  "component": [
-    {
-      "code": {
-        "coding": [
-          {
-            "system": "urn:form-examples:soap-note",
-            "code": "deleted_at",
-            "display": "Deleted At"
-          }
-        ]
-      },
-      "valueDateTime": "2026-04-09T10:00:00+00:00"
-    },
-    {
-      "code": {
-        "coding": [
-          {
-            "system": "urn:form-examples:soap-note",
-            "code": "status",
-            "display": "Status"
-          }
-        ]
-      },
-      "valueCodeableConcept": {
-        "coding": [
-          {
-            "system": "urn:form-examples:soap-note:status",
-            "code": "complete",
-            "display": "Complete"
-          }
-        ]
-      }
-    },
-    {
-      "code": {
-        "coding": [
-          {
-            "system": "urn:form-examples:soap-note",
-            "code": "completeness_percent",
-            "display": "Completeness Percent"
-          }
-        ]
-      },
-      "valueInteger": 1
-    },
-    {
-      "code": {
-        "coding": [
-          {
-            "system": "urn:form-examples:soap-note",
-            "code": "subjective_present",
-            "display": "Subjective Present"
-          }
-        ]
-      },
-      "valueCodeableConcept": {
-        "coding": [
-          {
-            "system": "urn:form-examples:soap-note:subjective_present",
-            "code": "yes",
-            "display": "Yes"
-          }
-        ]
-      }
-    },
-    {
-      "code": {
-        "coding": [
-          {
-            "system": "urn:form-examples:soap-note",
-            "code": "objective_present",
-            "display": "Objective Present"
-          }
-        ]
-      },
-      "valueCodeableConcept": {
-        "coding": [
-          {
-            "system": "urn:form-examples:soap-note:objective_present",
-            "code": "yes",
-            "display": "Yes"
-          }
-        ]
-      }
-    },
-    {
-      "code": {
-        "coding": [
-          {
-            "system": "urn:form-examples:soap-note",
-            "code": "assessment_present",
-            "display": "Assessment Present"
-          }
-        ]
-      },
-      "valueCodeableConcept": {
-        "coding": [
-          {
-            "system": "urn:form-examples:soap-note:assessment_present",
-            "code": "yes",
-            "display": "Yes"
-          }
-        ]
-      }
-    },
-    {
-      "code": {
-        "coding": [
-          {
-            "system": "urn:form-examples:soap-note",
-            "code": "plan_present",
-            "display": "Plan Present"
-          }
-        ]
-      },
-      "valueCodeableConcept": {
-        "coding": [
-          {
-            "system": "urn:form-examples:soap-note:plan_present",
-            "code": "yes",
-            "display": "Yes"
-          }
-        ]
-      }
-    },
-    {
-      "code": {
-        "coding": [
-          {
-            "system": "urn:form-examples:soap-note",
-            "code": "graded_at",
-            "display": "Graded At"
-          }
-        ]
-      },
-      "valueDateTime": "2026-04-09T10:00:00+00:00"
-    }
-  ]
+  "date": "2026-04-09T10:00:00+00:00",
+  "description": "Soap Note grading result",
+  "summary": "Deleted At: 2026-04-09T10:00:00+00:00; Status: complete; Completeness Percent: 1; Subjective Present: yes; Objective Present: yes; Assessment Present: yes; Plan Present: yes"
 }

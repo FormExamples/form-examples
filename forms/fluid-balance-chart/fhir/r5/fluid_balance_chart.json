@@ -1,160 +1,40 @@
 {
-  "resourceType": "Observation",
+  "resourceType": "Encounter",
   "id": "770e8400-e29b-41d4-a716-446655440002",
   "meta": {
     "profile": [
-      "http://hl7.org/fhir/StructureDefinition/Observation"
+      "http://hl7.org/fhir/StructureDefinition/Encounter"
     ],
     "lastUpdated": "2026-04-09T10:00:00+00:00"
   },
-  "status": "final",
-  "category": [
+  "status": "planned",
+  "class": [
     {
       "coding": [
         {
-          "system": "http://terminology.hl7.org/CodeSystem/observation-category",
-          "code": "survey",
-          "display": "Survey"
+          "system": "http://terminology.hl7.org/CodeSystem/v3-ActCode",
+          "code": "AMB",
+          "display": "ambulatory"
         }
       ]
     }
   ],
-  "code": {
-    "coding": [
-      {
-        "system": "urn:form-examples:fluid-balance-chart",
-        "code": "fluid_balance_chart",
-        "display": "Fluid Balance Chart"
-      }
-    ]
-  },
+  "type": [
+    {
+      "coding": [
+        {
+          "system": "http://snomed.info/sct",
+          "code": "185349003",
+          "display": "Encounter for check up"
+        }
+      ],
+      "text": "Fluid Balance Chart"
+    }
+  ],
   "subject": {
     "reference": "Patient/550e8400-e29b-41d4-a716-446655440000"
   },
-  "encounter": {
-    "reference": "Encounter/cc0e8400-e29b-41d4-a716-446655440007"
-  },
-  "effectiveDateTime": "2026-04-09T10:00:00+00:00",
-  "component": [
-    {
-      "code": {
-        "coding": [
-          {
-            "system": "urn:form-examples:fluid-balance-chart",
-            "code": "deleted_at",
-            "display": "Deleted At"
-          }
-        ]
-      },
-      "valueDateTime": "2026-04-09T10:00:00+00:00"
-    },
-    {
-      "code": {
-        "coding": [
-          {
-            "system": "urn:form-examples:fluid-balance-chart",
-            "code": "clinician_name",
-            "display": "Clinician Name"
-          }
-        ]
-      },
-      "valueString": "Example"
-    },
-    {
-      "code": {
-        "coding": [
-          {
-            "system": "urn:form-examples:fluid-balance-chart",
-            "code": "clinician_role",
-            "display": "Clinician Role"
-          }
-        ]
-      },
-      "valueCodeableConcept": {
-        "coding": [
-          {
-            "system": "urn:form-examples:fluid-balance-chart:clinician_role",
-            "code": "nurse",
-            "display": "Nurse"
-          }
-        ]
-      }
-    },
-    {
-      "code": {
-        "coding": [
-          {
-            "system": "urn:form-examples:fluid-balance-chart",
-            "code": "patient_identifier",
-            "display": "Patient Identifier"
-          }
-        ]
-      },
-      "valueString": ""
-    },
-    {
-      "code": {
-        "coding": [
-          {
-            "system": "urn:form-examples:fluid-balance-chart",
-            "code": "ward_or_unit",
-            "display": "Ward Or Unit"
-          }
-        ]
-      },
-      "valueString": "mg/dL"
-    },
-    {
-      "code": {
-        "coding": [
-          {
-            "system": "urn:form-examples:fluid-balance-chart",
-            "code": "chart_start_at",
-            "display": "Chart Start At"
-          }
-        ]
-      },
-      "valueDateTime": "2026-04-09T10:00:00+00:00"
-    },
-    {
-      "code": {
-        "coding": [
-          {
-            "system": "urn:form-examples:fluid-balance-chart",
-            "code": "chart_period_hours",
-            "display": "Chart Period Hours"
-          }
-        ]
-      },
-      "valueQuantity": {
-        "value": 0.0
-      }
-    },
-    {
-      "code": {
-        "coding": [
-          {
-            "system": "urn:form-examples:fluid-balance-chart",
-            "code": "weight_kg",
-            "display": "Weight Kg"
-          }
-        ]
-      },
-      "valueQuantity": {
-        "value": 70.0
-      }
-    },
-    {
-      "code": {
-        "coding": [
-          {
-            "system": "urn:form-examples:fluid-balance-chart",
-            "code": "clinical_note",
-            "display": "Clinical Note"
-          }
-        ]
-      },
-      "valueString": ""
-    }
-  ]
+  "actualPeriod": {
+    "start": "2026-04-09T10:00:00+00:00"
+  }
 }

@@ -798,37 +798,85 @@ def build_additional_flag_resource(table_name, columns, form_slug):
     return resource
 
 
-def classify_table(table_name):
-    """Classify a SQL table name into a FHIR resource type."""
+def find_main_table(table_names):
+    """Identify a form's core assessment-record table.
+
+    Forms use two naming conventions: a generic `assessment` table, or a
+    form-specific one (e.g. `apgar_score`) that the child/grade tables are
+    prefixed with. The main table is the non-patient/clinician table that is a
+    prefix of the most other table names (ties → shortest name); falls back to
+    a literal `assessment`, else the first non-patient/clinician table.
+    """
+    def is_grade_role(t):
+        return (
+            t in ("grade", "grading_fired_rule", "grading_additional_flag")
+            or t.endswith("_grade")
+            or t.endswith("_grade_rule")
+            or t.endswith("_grade_flag")
+        )
+
+    candidates = [
+        t for t in table_names
+        if t not in ("patient", "clinician") and not is_grade_role(t)
+    ]
+    if not candidates:
+        return None
+    if "assessment" in candidates:
+        return "assessment"
+
+    def prefix_count(t):
+        return sum(1 for o in table_names if o != t and o.startswith(t + "_"))
+
+    ranked = sorted(candidates, key=lambda t: (-prefix_count(t), len(t), t))
+    top = ranked[0]
+    if prefix_count(top) > 0:
+        return top
+    return candidates[0]
+
+
+def classify_table(table_name, main_table=None):
+    """Classify a SQL table name into a FHIR resource type, by role.
+
+    Handles both the generic names (assessment / grade / grading_fired_rule /
+    grading_additional_flag) and the form-specific suffixed names
+    (<main>_grade / <main>_grade_rule / <main>_grade_flag).
+    """
     if table_name == 'patient':
         return 'patient'
-    if table_name == 'assessment':
-        return 'encounter'
-    if table_name == 'grade':
-        return 'clinical_impression'
-    if table_name == 'grading_fired_rule':
-        return 'fired_rule'
-    if table_name == 'grading_additional_flag':
+    if table_name == 'grading_additional_flag' or table_name.endswith('_grade_flag'):
         return 'additional_flag'
+    if table_name == 'grading_fired_rule' or table_name.endswith('_grade_rule'):
+        return 'fired_rule'
+    if table_name == 'grade' or table_name.endswith('_grade'):
+        return 'clinical_impression'
+    if table_name == 'assessment' or (main_table is not None and table_name == main_table):
+        return 'encounter'
     return 'observation'
 
 
-def build_fhir_resource(table_name, columns, form_slug):
+def build_fhir_resource(table_name, columns, form_slug, main_table=None):
     """Build the appropriate FHIR resource for a given table."""
-    classification = classify_table(table_name)
+    classification = classify_table(table_name, main_table)
 
     if classification == 'patient':
         return build_patient_resource(table_name, columns)
     elif classification == 'encounter':
         return build_encounter_resource(table_name, columns, form_slug)
     elif classification == 'clinical_impression':
-        return build_clinical_impression_resource(table_name, columns, form_slug)
+        resource = build_clinical_impression_resource(table_name, columns, form_slug)
     elif classification == 'fired_rule':
         return build_fired_rule_resource(table_name, columns, form_slug)
     elif classification == 'additional_flag':
         return build_additional_flag_resource(table_name, columns, form_slug)
     else:
-        return build_observation_resource(table_name, columns, form_slug)
+        resource = build_observation_resource(table_name, columns, form_slug)
+
+    # When a form has no core assessment table (e.g. an incomplete schema with
+    # only patient + clinician), there is no Encounter to reference — drop the
+    # dangling `encounter` element rather than point at a non-existent resource.
+    if main_table is None and isinstance(resource, dict):
+        resource.pop("encounter", None)
+    return resource
 
 
 def process_form(form_dir):
@@ -867,11 +915,20 @@ def process_form(form_dir):
     for table_name, _ in all_tables:
         get_uuid(table_name)
 
+    # Identify the core assessment table (the one classified as the Encounter)
+    # and alias the "assessment" seed to its UUID, so the encounter references
+    # emitted by observations/clinical-impressions resolve to the real
+    # Encounter resource even when the table is form-specific (e.g. apgar_score)
+    # rather than literally named "assessment".
+    main_table = find_main_table([t[0] for t in all_tables])
+    if main_table and main_table != "assessment":
+        table_uuid_map["assessment"] = get_uuid(main_table)
+
     fhir_dir.mkdir(parents=True, exist_ok=True)
 
     count = 0
     for table_name, columns in all_tables:
-        resource = build_fhir_resource(table_name, columns, form_slug)
+        resource = build_fhir_resource(table_name, columns, form_slug, main_table)
         output_path = fhir_dir / f"{table_name}.json"
         output_path.write_text(
             json.dumps(resource, indent=2, ensure_ascii=False) + "\n",

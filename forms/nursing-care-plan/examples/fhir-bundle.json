@@ -52,7 +52,7 @@
           "reference": "urn:uuid:550e8400-e29b-41d4-a716-446655440000"
         },
         "encounter": {
-          "reference": "Encounter/ee0e8400-e29b-41d4-a716-446655440009"
+          "reference": "urn:uuid:770e8400-e29b-41d4-a716-446655440002"
         },
         "effectiveDateTime": "2026-04-09T10:00:00+00:00",
         "component": [
@@ -198,552 +198,44 @@
     {
       "fullUrl": "urn:uuid:770e8400-e29b-41d4-a716-446655440002",
       "resource": {
-        "resourceType": "Observation",
+        "resourceType": "Encounter",
         "id": "770e8400-e29b-41d4-a716-446655440002",
         "meta": {
           "profile": [
-            "http://hl7.org/fhir/StructureDefinition/Observation"
+            "http://hl7.org/fhir/StructureDefinition/Encounter"
           ],
           "lastUpdated": "2026-04-09T10:00:00+00:00"
         },
-        "status": "final",
-        "category": [
+        "status": "planned",
+        "class": [
           {
             "coding": [
               {
-                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
-                "code": "survey",
-                "display": "Survey"
+                "system": "http://terminology.hl7.org/CodeSystem/v3-ActCode",
+                "code": "AMB",
+                "display": "ambulatory"
               }
             ]
           }
         ],
-        "code": {
-          "coding": [
-            {
-              "system": "urn:form-examples:nursing-care-plan",
-              "code": "nursing_care_plan",
-              "display": "Nursing Care Plan"
-            }
-          ]
-        },
+        "type": [
+          {
+            "coding": [
+              {
+                "system": "http://snomed.info/sct",
+                "code": "185349003",
+                "display": "Encounter for check up"
+              }
+            ],
+            "text": "Nursing Care Plan"
+          }
+        ],
         "subject": {
           "reference": "urn:uuid:550e8400-e29b-41d4-a716-446655440000"
         },
-        "encounter": {
-          "reference": "Encounter/ee0e8400-e29b-41d4-a716-446655440009"
-        },
-        "effectiveDateTime": "2026-04-09T10:00:00+00:00",
-        "component": [
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:nursing-care-plan",
-                  "code": "deleted_at",
-                  "display": "Deleted At"
-                }
-              ]
-            },
-            "valueDateTime": "2026-04-09T10:00:00+00:00"
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:nursing-care-plan",
-                  "code": "nurse_name",
-                  "display": "Nurse Name"
-                }
-              ]
-            },
-            "valueString": "Example"
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:nursing-care-plan",
-                  "code": "nurse_role",
-                  "display": "Nurse Role"
-                }
-              ]
-            },
-            "valueCodeableConcept": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:nursing-care-plan:nurse_role",
-                  "code": "registered-nurse",
-                  "display": "Registered-Nurse"
-                }
-              ]
-            }
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:nursing-care-plan",
-                  "code": "nmc_number",
-                  "display": "Nmc Number"
-                }
-              ]
-            },
-            "valueString": ""
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:nursing-care-plan",
-                  "code": "authored_at",
-                  "display": "Authored At"
-                }
-              ]
-            },
-            "valueDateTime": "2026-04-09T10:00:00+00:00"
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:nursing-care-plan",
-                  "code": "care_setting",
-                  "display": "Care Setting"
-                }
-              ]
-            },
-            "valueCodeableConcept": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:nursing-care-plan:care_setting",
-                  "code": "ward",
-                  "display": "Ward"
-                }
-              ]
-            }
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:nursing-care-plan",
-                  "code": "plan_type",
-                  "display": "Plan Type"
-                }
-              ]
-            },
-            "valueCodeableConcept": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:nursing-care-plan:plan_type",
-                  "code": "admission",
-                  "display": "Admission"
-                }
-              ]
-            }
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:nursing-care-plan",
-                  "code": "model_used",
-                  "display": "Model Used"
-                }
-              ]
-            },
-            "valueCodeableConcept": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:nursing-care-plan:model_used",
-                  "code": "roper-logan-tierney",
-                  "display": "Roper-Logan-Tierney"
-                }
-              ]
-            }
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:nursing-care-plan",
-                  "code": "patient_identifier",
-                  "display": "Patient Identifier"
-                }
-              ]
-            },
-            "valueString": ""
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:nursing-care-plan",
-                  "code": "patient_name",
-                  "display": "Patient Name"
-                }
-              ]
-            },
-            "valueString": "Example"
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:nursing-care-plan",
-                  "code": "date_of_birth",
-                  "display": "Date Of Birth"
-                }
-              ]
-            },
-            "valueDateTime": "1965-06-15"
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:nursing-care-plan",
-                  "code": "sex",
-                  "display": "Sex"
-                }
-              ]
-            },
-            "valueCodeableConcept": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:nursing-care-plan:sex",
-                  "code": "female",
-                  "display": "Female"
-                }
-              ]
-            }
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:nursing-care-plan",
-                  "code": "ward_location",
-                  "display": "Ward Location"
-                }
-              ]
-            },
-            "valueString": "Example location"
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:nursing-care-plan",
-                  "code": "handover_note",
-                  "display": "Handover Note"
-                }
-              ]
-            },
-            "valueString": ""
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:nursing-care-plan",
-                  "code": "review_date",
-                  "display": "Review Date"
-                }
-              ]
-            },
-            "valueDateTime": "2026-01-15"
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:nursing-care-plan",
-                  "code": "falls_risk_done",
-                  "display": "Falls Risk Done"
-                }
-              ]
-            },
-            "valueCodeableConcept": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:nursing-care-plan:falls_risk_done",
-                  "code": "yes",
-                  "display": "Yes"
-                }
-              ]
-            }
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:nursing-care-plan",
-                  "code": "falls_risk_level",
-                  "display": "Falls Risk Level"
-                }
-              ]
-            },
-            "valueCodeableConcept": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:nursing-care-plan:falls_risk_level",
-                  "code": "low",
-                  "display": "Low"
-                }
-              ]
-            }
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:nursing-care-plan",
-                  "code": "falls_risk_assessed_on",
-                  "display": "Falls Risk Assessed On"
-                }
-              ]
-            },
-            "valueDateTime": "2026-01-15"
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:nursing-care-plan",
-                  "code": "falls_risk_actioned",
-                  "display": "Falls Risk Actioned"
-                }
-              ]
-            },
-            "valueCodeableConcept": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:nursing-care-plan:falls_risk_actioned",
-                  "code": "yes",
-                  "display": "Yes"
-                }
-              ]
-            }
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:nursing-care-plan",
-                  "code": "pressure_ulcer_risk_done",
-                  "display": "Pressure Ulcer Risk Done"
-                }
-              ]
-            },
-            "valueCodeableConcept": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:nursing-care-plan:pressure_ulcer_risk_done",
-                  "code": "yes",
-                  "display": "Yes"
-                }
-              ]
-            }
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:nursing-care-plan",
-                  "code": "pressure_ulcer_risk_level",
-                  "display": "Pressure Ulcer Risk Level"
-                }
-              ]
-            },
-            "valueCodeableConcept": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:nursing-care-plan:pressure_ulcer_risk_level",
-                  "code": "low",
-                  "display": "Low"
-                }
-              ]
-            }
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:nursing-care-plan",
-                  "code": "pressure_ulcer_risk_assessed_on",
-                  "display": "Pressure Ulcer Risk Assessed On"
-                }
-              ]
-            },
-            "valueDateTime": "2026-01-15"
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:nursing-care-plan",
-                  "code": "pressure_ulcer_risk_actioned",
-                  "display": "Pressure Ulcer Risk Actioned"
-                }
-              ]
-            },
-            "valueCodeableConcept": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:nursing-care-plan:pressure_ulcer_risk_actioned",
-                  "code": "yes",
-                  "display": "Yes"
-                }
-              ]
-            }
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:nursing-care-plan",
-                  "code": "vte_risk_done",
-                  "display": "Vte Risk Done"
-                }
-              ]
-            },
-            "valueCodeableConcept": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:nursing-care-plan:vte_risk_done",
-                  "code": "yes",
-                  "display": "Yes"
-                }
-              ]
-            }
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:nursing-care-plan",
-                  "code": "vte_risk_level",
-                  "display": "Vte Risk Level"
-                }
-              ]
-            },
-            "valueCodeableConcept": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:nursing-care-plan:vte_risk_level",
-                  "code": "low",
-                  "display": "Low"
-                }
-              ]
-            }
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:nursing-care-plan",
-                  "code": "vte_risk_assessed_on",
-                  "display": "Vte Risk Assessed On"
-                }
-              ]
-            },
-            "valueDateTime": "2026-01-15"
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:nursing-care-plan",
-                  "code": "vte_risk_actioned",
-                  "display": "Vte Risk Actioned"
-                }
-              ]
-            },
-            "valueCodeableConcept": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:nursing-care-plan:vte_risk_actioned",
-                  "code": "yes",
-                  "display": "Yes"
-                }
-              ]
-            }
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:nursing-care-plan",
-                  "code": "nutrition_risk_done",
-                  "display": "Nutrition Risk Done"
-                }
-              ]
-            },
-            "valueCodeableConcept": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:nursing-care-plan:nutrition_risk_done",
-                  "code": "yes",
-                  "display": "Yes"
-                }
-              ]
-            }
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:nursing-care-plan",
-                  "code": "nutrition_risk_level",
-                  "display": "Nutrition Risk Level"
-                }
-              ]
-            },
-            "valueCodeableConcept": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:nursing-care-plan:nutrition_risk_level",
-                  "code": "low",
-                  "display": "Low"
-                }
-              ]
-            }
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:nursing-care-plan",
-                  "code": "nutrition_risk_assessed_on",
-                  "display": "Nutrition Risk Assessed On"
-                }
-              ]
-            },
-            "valueDateTime": "2026-01-15"
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:nursing-care-plan",
-                  "code": "nutrition_risk_actioned",
-                  "display": "Nutrition Risk Actioned"
-                }
-              ]
-            },
-            "valueCodeableConcept": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:nursing-care-plan:nutrition_risk_actioned",
-                  "code": "yes",
-                  "display": "Yes"
-                }
-              ]
-            }
-          }
-        ]
+        "actualPeriod": {
+          "start": "2026-04-09T10:00:00+00:00"
+        }
       }
     },
     {
@@ -782,7 +274,7 @@
           "reference": "urn:uuid:550e8400-e29b-41d4-a716-446655440000"
         },
         "encounter": {
-          "reference": "Encounter/ee0e8400-e29b-41d4-a716-446655440009"
+          "reference": "urn:uuid:770e8400-e29b-41d4-a716-446655440002"
         },
         "effectiveDateTime": "2026-04-09T10:00:00+00:00",
         "component": [
@@ -848,110 +340,35 @@
     {
       "fullUrl": "urn:uuid:bb0e8400-e29b-41d4-a716-446655440006",
       "resource": {
-        "resourceType": "Observation",
+        "resourceType": "ClinicalImpression",
         "id": "bb0e8400-e29b-41d4-a716-446655440006",
         "meta": {
           "profile": [
-            "http://hl7.org/fhir/StructureDefinition/Observation"
+            "http://hl7.org/fhir/StructureDefinition/ClinicalImpression"
           ],
           "lastUpdated": "2026-04-09T10:00:00+00:00"
         },
-        "status": "final",
-        "category": [
-          {
-            "coding": [
-              {
-                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
-                "code": "survey",
-                "display": "Survey"
-              }
-            ]
-          }
-        ],
-        "code": {
-          "coding": [
-            {
-              "system": "urn:form-examples:nursing-care-plan",
-              "code": "nursing_care_plan_grade",
-              "display": "Nursing Care Plan Grade"
-            }
-          ]
-        },
+        "status": "completed",
         "subject": {
           "reference": "urn:uuid:550e8400-e29b-41d4-a716-446655440000"
         },
         "encounter": {
-          "reference": "Encounter/ee0e8400-e29b-41d4-a716-446655440009"
+          "reference": "urn:uuid:770e8400-e29b-41d4-a716-446655440002"
         },
         "effectiveDateTime": "2026-04-09T10:00:00+00:00",
-        "component": [
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:nursing-care-plan",
-                  "code": "deleted_at",
-                  "display": "Deleted At"
-                }
-              ]
-            },
-            "valueDateTime": "2026-04-09T10:00:00+00:00"
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:nursing-care-plan",
-                  "code": "status",
-                  "display": "Status"
-                }
-              ]
-            },
-            "valueCodeableConcept": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:nursing-care-plan:status",
-                  "code": "complete",
-                  "display": "Complete"
-                }
-              ]
-            }
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:nursing-care-plan",
-                  "code": "completeness_percent",
-                  "display": "Completeness Percent"
-                }
-              ]
-            },
-            "valueInteger": 1
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:nursing-care-plan",
-                  "code": "graded_at",
-                  "display": "Graded At"
-                }
-              ]
-            },
-            "valueDateTime": "2026-04-09T10:00:00+00:00"
-          }
-        ]
+        "date": "2026-04-09T10:00:00+00:00",
+        "description": "Nursing Care Plan grading result",
+        "summary": "Deleted At: 2026-04-09T10:00:00+00:00; Status: complete; Completeness Percent: 1"
       }
     },
     {
       "fullUrl": "urn:uuid:dd0e8400-e29b-41d4-a716-446655440008",
       "resource": {
-        "resourceType": "Observation",
+        "resourceType": "DetectedIssue",
         "id": "dd0e8400-e29b-41d4-a716-446655440008",
         "meta": {
           "profile": [
-            "http://hl7.org/fhir/StructureDefinition/Observation"
+            "http://hl7.org/fhir/StructureDefinition/DetectedIssue"
           ],
           "lastUpdated": "2026-04-09T10:00:00+00:00"
         },
@@ -960,9 +377,9 @@
           {
             "coding": [
               {
-                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
-                "code": "survey",
-                "display": "Survey"
+                "system": "urn:form-examples:nursing-care-plan",
+                "code": "grading-additional-flag",
+                "display": "risk-without-intervention"
               }
             ]
           }
@@ -970,107 +387,28 @@
         "code": {
           "coding": [
             {
-              "system": "urn:form-examples:nursing-care-plan",
-              "code": "nursing_care_plan_grade_flag",
-              "display": "Nursing Care Plan Grade Flag"
+              "system": "urn:form-examples:nursing-care-plan:flags",
+              "code": "FLAG-001",
+              "display": "Safety flag"
             }
           ]
         },
+        "severity": "low",
         "subject": {
           "reference": "urn:uuid:550e8400-e29b-41d4-a716-446655440000"
         },
-        "encounter": {
-          "reference": "Encounter/ee0e8400-e29b-41d4-a716-446655440009"
-        },
-        "effectiveDateTime": "2026-04-09T10:00:00+00:00",
-        "component": [
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:nursing-care-plan",
-                  "code": "deleted_at",
-                  "display": "Deleted At"
-                }
-              ]
-            },
-            "valueDateTime": "2026-04-09T10:00:00+00:00"
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:nursing-care-plan",
-                  "code": "category",
-                  "display": "Category"
-                }
-              ]
-            },
-            "valueCodeableConcept": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:nursing-care-plan:category",
-                  "code": "risk-without-intervention",
-                  "display": "Risk-Without-Intervention"
-                }
-              ]
-            }
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:nursing-care-plan",
-                  "code": "priority",
-                  "display": "Priority"
-                }
-              ]
-            },
-            "valueCodeableConcept": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:nursing-care-plan:priority",
-                  "code": "low",
-                  "display": "Low"
-                }
-              ]
-            }
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:nursing-care-plan",
-                  "code": "description",
-                  "display": "Description"
-                }
-              ]
-            },
-            "valueString": "Example text."
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:nursing-care-plan",
-                  "code": "suggested_action",
-                  "display": "Suggested Action"
-                }
-              ]
-            },
-            "valueString": ""
-          }
-        ]
+        "identifiedDateTime": "2026-04-09T10:00:00+00:00",
+        "detail": "Clinical flag detected."
       }
     },
     {
       "fullUrl": "urn:uuid:cc0e8400-e29b-41d4-a716-446655440007",
       "resource": {
-        "resourceType": "Observation",
+        "resourceType": "DetectedIssue",
         "id": "cc0e8400-e29b-41d4-a716-446655440007",
         "meta": {
           "profile": [
-            "http://hl7.org/fhir/StructureDefinition/Observation"
+            "http://hl7.org/fhir/StructureDefinition/DetectedIssue"
           ],
           "lastUpdated": "2026-04-09T10:00:00+00:00"
         },
@@ -1079,9 +417,9 @@
           {
             "coding": [
               {
-                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
-                "code": "survey",
-                "display": "Survey"
+                "system": "urn:form-examples:nursing-care-plan",
+                "code": "grading-fired-rule",
+                "display": "General"
               }
             ]
           }
@@ -1089,57 +427,18 @@
         "code": {
           "coding": [
             {
-              "system": "urn:form-examples:nursing-care-plan",
-              "code": "nursing_care_plan_grade_rule",
-              "display": "Nursing Care Plan Grade Rule"
+              "system": "urn:form-examples:nursing-care-plan:rules",
+              "code": "RULE-001",
+              "display": "Example grading rule"
             }
           ]
         },
+        "severity": "moderate",
         "subject": {
           "reference": "urn:uuid:550e8400-e29b-41d4-a716-446655440000"
         },
-        "encounter": {
-          "reference": "Encounter/ee0e8400-e29b-41d4-a716-446655440009"
-        },
-        "effectiveDateTime": "2026-04-09T10:00:00+00:00",
-        "component": [
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:nursing-care-plan",
-                  "code": "deleted_at",
-                  "display": "Deleted At"
-                }
-              ]
-            },
-            "valueDateTime": "2026-04-09T10:00:00+00:00"
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:nursing-care-plan",
-                  "code": "category",
-                  "display": "Category"
-                }
-              ]
-            },
-            "valueString": "General"
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:nursing-care-plan",
-                  "code": "description",
-                  "display": "Description"
-                }
-              ]
-            },
-            "valueString": "Example text."
-          }
-        ]
+        "identifiedDateTime": "2026-04-09T10:00:00+00:00",
+        "detail": "Example text."
       }
     },
     {
@@ -1178,7 +477,7 @@
           "reference": "urn:uuid:550e8400-e29b-41d4-a716-446655440000"
         },
         "encounter": {
-          "reference": "Encounter/ee0e8400-e29b-41d4-a716-446655440009"
+          "reference": "urn:uuid:770e8400-e29b-41d4-a716-446655440002"
         },
         "effectiveDateTime": "2026-04-09T10:00:00+00:00",
         "component": [
@@ -1265,7 +564,7 @@
           "reference": "urn:uuid:550e8400-e29b-41d4-a716-446655440000"
         },
         "encounter": {
-          "reference": "Encounter/ee0e8400-e29b-41d4-a716-446655440009"
+          "reference": "urn:uuid:770e8400-e29b-41d4-a716-446655440002"
         },
         "effectiveDateTime": "2026-04-09T10:00:00+00:00",
         "component": [

@@ -52,7 +52,7 @@
           "reference": "urn:uuid:550e8400-e29b-41d4-a716-446655440000"
         },
         "encounter": {
-          "reference": "Encounter/cc0e8400-e29b-41d4-a716-446655440007"
+          "reference": "urn:uuid:880e8400-e29b-41d4-a716-446655440003"
         },
         "effectiveDateTime": "2026-04-09T10:00:00+00:00",
         "component": [
@@ -251,7 +251,7 @@
           "reference": "urn:uuid:550e8400-e29b-41d4-a716-446655440000"
         },
         "encounter": {
-          "reference": "Encounter/cc0e8400-e29b-41d4-a716-446655440007"
+          "reference": "urn:uuid:880e8400-e29b-41d4-a716-446655440003"
         },
         "effectiveDateTime": "2026-04-09T10:00:00+00:00",
         "component": [
@@ -422,861 +422,78 @@
     {
       "fullUrl": "urn:uuid:880e8400-e29b-41d4-a716-446655440003",
       "resource": {
-        "resourceType": "Observation",
+        "resourceType": "Encounter",
         "id": "880e8400-e29b-41d4-a716-446655440003",
         "meta": {
           "profile": [
-            "http://hl7.org/fhir/StructureDefinition/Observation"
+            "http://hl7.org/fhir/StructureDefinition/Encounter"
           ],
           "lastUpdated": "2026-04-09T10:00:00+00:00"
         },
-        "status": "final",
-        "category": [
+        "status": "planned",
+        "class": [
           {
             "coding": [
               {
-                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
-                "code": "survey",
-                "display": "Survey"
+                "system": "http://terminology.hl7.org/CodeSystem/v3-ActCode",
+                "code": "AMB",
+                "display": "ambulatory"
               }
             ]
           }
         ],
-        "code": {
-          "coding": [
-            {
-              "system": "urn:form-examples:united-kingdom-statement-of-fitness-for-work",
-              "code": "united_kingdom_statement_of_fitness_for_work",
-              "display": "United Kingdom Statement Of Fitness For Work"
-            }
-          ]
-        },
+        "type": [
+          {
+            "coding": [
+              {
+                "system": "http://snomed.info/sct",
+                "code": "185349003",
+                "display": "Encounter for check up"
+              }
+            ],
+            "text": "United Kingdom Statement Of Fitness For Work"
+          }
+        ],
         "subject": {
           "reference": "urn:uuid:550e8400-e29b-41d4-a716-446655440000"
         },
-        "encounter": {
-          "reference": "Encounter/cc0e8400-e29b-41d4-a716-446655440007"
-        },
-        "effectiveDateTime": "2026-04-09T10:00:00+00:00",
-        "component": [
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:united-kingdom-statement-of-fitness-for-work",
-                  "code": "deleted_at",
-                  "display": "Deleted At"
-                }
-              ]
-            },
-            "valueDateTime": "2026-04-09T10:00:00+00:00"
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:united-kingdom-statement-of-fitness-for-work",
-                  "code": "status",
-                  "display": "Status"
-                }
-              ]
-            },
-            "valueCodeableConcept": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:united-kingdom-statement-of-fitness-for-work:status",
-                  "code": "draft",
-                  "display": "Draft"
-                }
-              ]
-            }
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:united-kingdom-statement-of-fitness-for-work",
-                  "code": "assessment_date",
-                  "display": "Assessment Date"
-                }
-              ]
-            },
-            "valueDateTime": "2026-01-15"
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:united-kingdom-statement-of-fitness-for-work",
-                  "code": "assessment_method",
-                  "display": "Assessment Method"
-                }
-              ]
-            },
-            "valueCodeableConcept": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:united-kingdom-statement-of-fitness-for-work:assessment_method",
-                  "code": "in_person",
-                  "display": "In Person"
-                }
-              ]
-            }
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:united-kingdom-statement-of-fitness-for-work",
-                  "code": "general_fitness_considered",
-                  "display": "General Fitness Considered"
-                }
-              ]
-            },
-            "valueCodeableConcept": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:united-kingdom-statement-of-fitness-for-work:general_fitness_considered",
-                  "code": "yes",
-                  "display": "Yes"
-                }
-              ]
-            }
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:united-kingdom-statement-of-fitness-for-work",
-                  "code": "diagnosis_text",
-                  "display": "Diagnosis Text"
-                }
-              ]
-            },
-            "valueString": "Example text."
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:united-kingdom-statement-of-fitness-for-work",
-                  "code": "diagnosis_snomed_code",
-                  "display": "Diagnosis Snomed Code"
-                }
-              ]
-            },
-            "valueString": "Under investigation"
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:united-kingdom-statement-of-fitness-for-work",
-                  "code": "diagnosis_snomed_display",
-                  "display": "Diagnosis Snomed Display"
-                }
-              ]
-            },
-            "valueString": "Under investigation"
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:united-kingdom-statement-of-fitness-for-work",
-                  "code": "diagnosis_category",
-                  "display": "Diagnosis Category"
-                }
-              ]
-            },
-            "valueCodeableConcept": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:united-kingdom-statement-of-fitness-for-work:diagnosis_category",
-                  "code": "mental_health",
-                  "display": "Mental Health"
-                }
-              ]
-            }
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:united-kingdom-statement-of-fitness-for-work",
-                  "code": "condition_first_recorded_date",
-                  "display": "Condition First Recorded Date"
-                }
-              ]
-            },
-            "valueDateTime": "2026-01-15"
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:united-kingdom-statement-of-fitness-for-work",
-                  "code": "is_automatic_disability",
-                  "display": "Is Automatic Disability"
-                }
-              ]
-            },
-            "valueCodeableConcept": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:united-kingdom-statement-of-fitness-for-work:is_automatic_disability",
-                  "code": "yes",
-                  "display": "Yes"
-                }
-              ]
-            }
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:united-kingdom-statement-of-fitness-for-work",
-                  "code": "is_non_medical",
-                  "display": "Is Non Medical"
-                }
-              ]
-            },
-            "valueCodeableConcept": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:united-kingdom-statement-of-fitness-for-work:is_non_medical",
-                  "code": "yes",
-                  "display": "Yes"
-                }
-              ]
-            }
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:united-kingdom-statement-of-fitness-for-work",
-                  "code": "fitness_for_work",
-                  "display": "Fitness For Work"
-                }
-              ]
-            },
-            "valueCodeableConcept": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:united-kingdom-statement-of-fitness-for-work:fitness_for_work",
-                  "code": "not_fit",
-                  "display": "Not Fit"
-                }
-              ]
-            }
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:united-kingdom-statement-of-fitness-for-work",
-                  "code": "adaptation_phased_return",
-                  "display": "Adaptation Phased Return"
-                }
-              ]
-            },
-            "valueCodeableConcept": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:united-kingdom-statement-of-fitness-for-work:adaptation_phased_return",
-                  "code": "yes",
-                  "display": "Yes"
-                }
-              ]
-            }
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:united-kingdom-statement-of-fitness-for-work",
-                  "code": "adaptation_altered_hours",
-                  "display": "Adaptation Altered Hours"
-                }
-              ]
-            },
-            "valueCodeableConcept": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:united-kingdom-statement-of-fitness-for-work:adaptation_altered_hours",
-                  "code": "yes",
-                  "display": "Yes"
-                }
-              ]
-            }
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:united-kingdom-statement-of-fitness-for-work",
-                  "code": "adaptation_amended_duties",
-                  "display": "Adaptation Amended Duties"
-                }
-              ]
-            },
-            "valueCodeableConcept": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:united-kingdom-statement-of-fitness-for-work:adaptation_amended_duties",
-                  "code": "yes",
-                  "display": "Yes"
-                }
-              ]
-            }
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:united-kingdom-statement-of-fitness-for-work",
-                  "code": "adaptation_workplace_adaptations",
-                  "display": "Adaptation Workplace Adaptations"
-                }
-              ]
-            },
-            "valueCodeableConcept": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:united-kingdom-statement-of-fitness-for-work:adaptation_workplace_adaptations",
-                  "code": "yes",
-                  "display": "Yes"
-                }
-              ]
-            }
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:united-kingdom-statement-of-fitness-for-work",
-                  "code": "comments",
-                  "display": "Comments"
-                }
-              ]
-            },
-            "valueString": "Example text."
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:united-kingdom-statement-of-fitness-for-work",
-                  "code": "period_type",
-                  "display": "Period Type"
-                }
-              ]
-            },
-            "valueCodeableConcept": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:united-kingdom-statement-of-fitness-for-work:period_type",
-                  "code": "duration",
-                  "display": "Duration"
-                }
-              ]
-            }
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:united-kingdom-statement-of-fitness-for-work",
-                  "code": "period_duration_value",
-                  "display": "Period Duration Value"
-                }
-              ]
-            },
-            "valueInteger": 1
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:united-kingdom-statement-of-fitness-for-work",
-                  "code": "period_duration_unit",
-                  "display": "Period Duration Unit"
-                }
-              ]
-            },
-            "valueCodeableConcept": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:united-kingdom-statement-of-fitness-for-work:period_duration_unit",
-                  "code": "days",
-                  "display": "Days"
-                }
-              ]
-            }
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:united-kingdom-statement-of-fitness-for-work",
-                  "code": "period_from",
-                  "display": "Period From"
-                }
-              ]
-            },
-            "valueDateTime": "2026-01-15"
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:united-kingdom-statement-of-fitness-for-work",
-                  "code": "period_to",
-                  "display": "Period To"
-                }
-              ]
-            },
-            "valueDateTime": "2026-01-15"
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:united-kingdom-statement-of-fitness-for-work",
-                  "code": "will_assess_again",
-                  "display": "Will Assess Again"
-                }
-              ]
-            },
-            "valueCodeableConcept": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:united-kingdom-statement-of-fitness-for-work:will_assess_again",
-                  "code": "yes",
-                  "display": "Yes"
-                }
-              ]
-            }
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:united-kingdom-statement-of-fitness-for-work",
-                  "code": "planned_review_date",
-                  "display": "Planned Review Date"
-                }
-              ]
-            },
-            "valueDateTime": "2026-01-15"
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:united-kingdom-statement-of-fitness-for-work",
-                  "code": "issued_at",
-                  "display": "Issued At"
-                }
-              ]
-            },
-            "valueDateTime": "2026-04-09T10:00:00+00:00"
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:united-kingdom-statement-of-fitness-for-work",
-                  "code": "issued_via",
-                  "display": "Issued Via"
-                }
-              ]
-            },
-            "valueCodeableConcept": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:united-kingdom-statement-of-fitness-for-work:issued_via",
-                  "code": "digital",
-                  "display": "Digital"
-                }
-              ]
-            }
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:united-kingdom-statement-of-fitness-for-work",
-                  "code": "issue_setting",
-                  "display": "Issue Setting"
-                }
-              ]
-            },
-            "valueCodeableConcept": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:united-kingdom-statement-of-fitness-for-work:issue_setting",
-                  "code": "primary_care",
-                  "display": "Primary Care"
-                }
-              ]
-            }
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:united-kingdom-statement-of-fitness-for-work",
-                  "code": "is_duplicate_of",
-                  "display": "Is Duplicate Of"
-                }
-              ]
-            },
-            "valueString": ""
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:united-kingdom-statement-of-fitness-for-work",
-                  "code": "safeguarding_concern",
-                  "display": "Safeguarding Concern"
-                }
-              ]
-            },
-            "valueCodeableConcept": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:united-kingdom-statement-of-fitness-for-work:safeguarding_concern",
-                  "code": "yes",
-                  "display": "Yes"
-                }
-              ]
-            }
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:united-kingdom-statement-of-fitness-for-work",
-                  "code": "safeguarding_notes",
-                  "display": "Safeguarding Notes"
-                }
-              ]
-            },
-            "valueString": "Example text."
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:united-kingdom-statement-of-fitness-for-work",
-                  "code": "clinician_signature_svg",
-                  "display": "Clinician Signature Svg"
-                }
-              ]
-            },
-            "valueString": "Dr Smith"
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:united-kingdom-statement-of-fitness-for-work",
-                  "code": "clinician_signed_at",
-                  "display": "Clinician Signed At"
-                }
-              ]
-            },
-            "valueDateTime": "2026-04-09T10:00:00+00:00"
-          }
-        ]
+        "actualPeriod": {
+          "start": "2026-04-09T10:00:00+00:00"
+        }
       }
     },
     {
       "fullUrl": "urn:uuid:990e8400-e29b-41d4-a716-446655440004",
       "resource": {
-        "resourceType": "Observation",
+        "resourceType": "ClinicalImpression",
         "id": "990e8400-e29b-41d4-a716-446655440004",
         "meta": {
           "profile": [
-            "http://hl7.org/fhir/StructureDefinition/Observation"
+            "http://hl7.org/fhir/StructureDefinition/ClinicalImpression"
           ],
           "lastUpdated": "2026-04-09T10:00:00+00:00"
         },
-        "status": "final",
-        "category": [
-          {
-            "coding": [
-              {
-                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
-                "code": "survey",
-                "display": "Survey"
-              }
-            ]
-          }
-        ],
-        "code": {
-          "coding": [
-            {
-              "system": "urn:form-examples:united-kingdom-statement-of-fitness-for-work",
-              "code": "united_kingdom_statement_of_fitness_for_work_grade",
-              "display": "United Kingdom Statement Of Fitness For Work Grade"
-            }
-          ]
-        },
+        "status": "completed",
         "subject": {
           "reference": "urn:uuid:550e8400-e29b-41d4-a716-446655440000"
         },
         "encounter": {
-          "reference": "Encounter/cc0e8400-e29b-41d4-a716-446655440007"
+          "reference": "urn:uuid:880e8400-e29b-41d4-a716-446655440003"
         },
         "effectiveDateTime": "2026-04-09T10:00:00+00:00",
-        "component": [
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:united-kingdom-statement-of-fitness-for-work",
-                  "code": "deleted_at",
-                  "display": "Deleted At"
-                }
-              ]
-            },
-            "valueDateTime": "2026-04-09T10:00:00+00:00"
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:united-kingdom-statement-of-fitness-for-work",
-                  "code": "fitness_category",
-                  "display": "Fitness Category"
-                }
-              ]
-            },
-            "valueCodeableConcept": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:united-kingdom-statement-of-fitness-for-work:fitness_category",
-                  "code": "not_fit",
-                  "display": "Not Fit"
-                }
-              ]
-            }
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:united-kingdom-statement-of-fitness-for-work",
-                  "code": "adaptation_intensity",
-                  "display": "Adaptation Intensity"
-                }
-              ]
-            },
-            "valueCodeableConcept": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:united-kingdom-statement-of-fitness-for-work:adaptation_intensity",
-                  "code": "none",
-                  "display": "None"
-                }
-              ]
-            }
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:united-kingdom-statement-of-fitness-for-work",
-                  "code": "adaptation_count",
-                  "display": "Adaptation Count"
-                }
-              ]
-            },
-            "valueInteger": 2
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:united-kingdom-statement-of-fitness-for-work",
-                  "code": "period_days",
-                  "display": "Period Days"
-                }
-              ]
-            },
-            "valueInteger": 1
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:united-kingdom-statement-of-fitness-for-work",
-                  "code": "period_compliance",
-                  "display": "Period Compliance"
-                }
-              ]
-            },
-            "valueCodeableConcept": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:united-kingdom-statement-of-fitness-for-work:period_compliance",
-                  "code": "self_cert_range",
-                  "display": "Self Cert Range"
-                }
-              ]
-            }
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:united-kingdom-statement-of-fitness-for-work",
-                  "code": "recommendation",
-                  "display": "Recommendation"
-                }
-              ]
-            },
-            "valueCodeableConcept": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:united-kingdom-statement-of-fitness-for-work:recommendation",
-                  "code": "standard",
-                  "display": "Standard"
-                }
-              ]
-            }
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:united-kingdom-statement-of-fitness-for-work",
-                  "code": "is_within_first_six_months_of_condition",
-                  "display": "Is Within First Six Months Of Condition"
-                }
-              ]
-            },
-            "valueCodeableConcept": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:united-kingdom-statement-of-fitness-for-work:is_within_first_six_months_of_condition",
-                  "code": "yes",
-                  "display": "Yes"
-                }
-              ]
-            }
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:united-kingdom-statement-of-fitness-for-work",
-                  "code": "is_valid",
-                  "display": "Is Valid"
-                }
-              ]
-            },
-            "valueCodeableConcept": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:united-kingdom-statement-of-fitness-for-work:is_valid",
-                  "code": "yes",
-                  "display": "Yes"
-                }
-              ]
-            }
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:united-kingdom-statement-of-fitness-for-work",
-                  "code": "grader_notes",
-                  "display": "Grader Notes"
-                }
-              ]
-            },
-            "valueString": "Example text."
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:united-kingdom-statement-of-fitness-for-work",
-                  "code": "graded_at",
-                  "display": "Graded At"
-                }
-              ]
-            },
-            "valueDateTime": "2026-04-09T10:00:00+00:00"
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:united-kingdom-statement-of-fitness-for-work",
-                  "code": "clinician_override",
-                  "display": "Clinician Override"
-                }
-              ]
-            },
-            "valueCodeableConcept": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:united-kingdom-statement-of-fitness-for-work:clinician_override",
-                  "code": "yes",
-                  "display": "Yes"
-                }
-              ]
-            }
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:united-kingdom-statement-of-fitness-for-work",
-                  "code": "clinician_override_reason",
-                  "display": "Clinician Override Reason"
-                }
-              ]
-            },
-            "valueString": "Example text."
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:united-kingdom-statement-of-fitness-for-work",
-                  "code": "clinician_final_recommendation",
-                  "display": "Clinician Final Recommendation"
-                }
-              ]
-            },
-            "valueCodeableConcept": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:united-kingdom-statement-of-fitness-for-work:clinician_final_recommendation",
-                  "code": "standard",
-                  "display": "Standard"
-                }
-              ]
-            }
-          }
-        ]
+        "date": "2026-04-09T10:00:00+00:00",
+        "description": "United Kingdom Statement Of Fitness For Work grading result",
+        "summary": "Deleted At: 2026-04-09T10:00:00+00:00; Fitness Category: not_fit; Adaptation Intensity: none; Adaptation Count: 2; Period Days: 1; Period Compliance: self_cert_range; Recommendation: standard; Is Within First Six Months Of Condition: yes; Is Valid: yes; Grader Notes: Example text.; Clinician Override: yes; Clinician Override Reason: Example text.; Clinician Final Recommendation: standard"
       }
     },
     {
       "fullUrl": "urn:uuid:bb0e8400-e29b-41d4-a716-446655440006",
       "resource": {
-        "resourceType": "Observation",
+        "resourceType": "DetectedIssue",
         "id": "bb0e8400-e29b-41d4-a716-446655440006",
         "meta": {
           "profile": [
-            "http://hl7.org/fhir/StructureDefinition/Observation"
+            "http://hl7.org/fhir/StructureDefinition/DetectedIssue"
           ],
           "lastUpdated": "2026-04-09T10:00:00+00:00"
         },
@@ -1285,9 +502,9 @@
           {
             "coding": [
               {
-                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
-                "code": "survey",
-                "display": "Survey"
+                "system": "urn:form-examples:united-kingdom-statement-of-fitness-for-work",
+                "code": "grading-additional-flag",
+                "display": "invalid_no_name"
               }
             ]
           }
@@ -1295,107 +512,28 @@
         "code": {
           "coding": [
             {
-              "system": "urn:form-examples:united-kingdom-statement-of-fitness-for-work",
-              "code": "united_kingdom_statement_of_fitness_for_work_grade_flag",
-              "display": "United Kingdom Statement Of Fitness For Work Grade Flag"
+              "system": "urn:form-examples:united-kingdom-statement-of-fitness-for-work:flags",
+              "code": "FLAG-001",
+              "display": "Safety flag"
             }
           ]
         },
+        "severity": "low",
         "subject": {
           "reference": "urn:uuid:550e8400-e29b-41d4-a716-446655440000"
         },
-        "encounter": {
-          "reference": "Encounter/cc0e8400-e29b-41d4-a716-446655440007"
-        },
-        "effectiveDateTime": "2026-04-09T10:00:00+00:00",
-        "component": [
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:united-kingdom-statement-of-fitness-for-work",
-                  "code": "deleted_at",
-                  "display": "Deleted At"
-                }
-              ]
-            },
-            "valueDateTime": "2026-04-09T10:00:00+00:00"
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:united-kingdom-statement-of-fitness-for-work",
-                  "code": "category",
-                  "display": "Category"
-                }
-              ]
-            },
-            "valueCodeableConcept": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:united-kingdom-statement-of-fitness-for-work:category",
-                  "code": "invalid_no_name",
-                  "display": "Invalid No Name"
-                }
-              ]
-            }
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:united-kingdom-statement-of-fitness-for-work",
-                  "code": "priority",
-                  "display": "Priority"
-                }
-              ]
-            },
-            "valueCodeableConcept": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:united-kingdom-statement-of-fitness-for-work:priority",
-                  "code": "low",
-                  "display": "Low"
-                }
-              ]
-            }
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:united-kingdom-statement-of-fitness-for-work",
-                  "code": "description",
-                  "display": "Description"
-                }
-              ]
-            },
-            "valueString": "Example text."
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:united-kingdom-statement-of-fitness-for-work",
-                  "code": "suggested_action",
-                  "display": "Suggested Action"
-                }
-              ]
-            },
-            "valueString": ""
-          }
-        ]
+        "identifiedDateTime": "2026-04-09T10:00:00+00:00",
+        "detail": "Clinical flag detected."
       }
     },
     {
       "fullUrl": "urn:uuid:aa0e8400-e29b-41d4-a716-446655440005",
       "resource": {
-        "resourceType": "Observation",
+        "resourceType": "DetectedIssue",
         "id": "aa0e8400-e29b-41d4-a716-446655440005",
         "meta": {
           "profile": [
-            "http://hl7.org/fhir/StructureDefinition/Observation"
+            "http://hl7.org/fhir/StructureDefinition/DetectedIssue"
           ],
           "lastUpdated": "2026-04-09T10:00:00+00:00"
         },
@@ -1404,9 +542,9 @@
           {
             "coding": [
               {
-                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
-                "code": "survey",
-                "display": "Survey"
+                "system": "urn:form-examples:united-kingdom-statement-of-fitness-for-work",
+                "code": "grading-fired-rule",
+                "display": "Grading Fired Rule"
               }
             ]
           }
@@ -1414,85 +552,18 @@
         "code": {
           "coding": [
             {
-              "system": "urn:form-examples:united-kingdom-statement-of-fitness-for-work",
-              "code": "united_kingdom_statement_of_fitness_for_work_grade_rule",
-              "display": "United Kingdom Statement Of Fitness For Work Grade Rule"
+              "system": "urn:form-examples:united-kingdom-statement-of-fitness-for-work:rules",
+              "code": "RULE-001",
+              "display": "Example grading rule"
             }
           ]
         },
+        "severity": "moderate",
         "subject": {
           "reference": "urn:uuid:550e8400-e29b-41d4-a716-446655440000"
         },
-        "encounter": {
-          "reference": "Encounter/cc0e8400-e29b-41d4-a716-446655440007"
-        },
-        "effectiveDateTime": "2026-04-09T10:00:00+00:00",
-        "component": [
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:united-kingdom-statement-of-fitness-for-work",
-                  "code": "deleted_at",
-                  "display": "Deleted At"
-                }
-              ]
-            },
-            "valueDateTime": "2026-04-09T10:00:00+00:00"
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:united-kingdom-statement-of-fitness-for-work",
-                  "code": "rule_set",
-                  "display": "Rule Set"
-                }
-              ]
-            },
-            "valueCodeableConcept": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:united-kingdom-statement-of-fitness-for-work:rule_set",
-                  "code": "validity",
-                  "display": "Validity"
-                }
-              ]
-            }
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:united-kingdom-statement-of-fitness-for-work",
-                  "code": "severity",
-                  "display": "Severity"
-                }
-              ]
-            },
-            "valueCodeableConcept": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:united-kingdom-statement-of-fitness-for-work:severity",
-                  "code": "low",
-                  "display": "Low"
-                }
-              ]
-            }
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:united-kingdom-statement-of-fitness-for-work",
-                  "code": "description",
-                  "display": "Description"
-                }
-              ]
-            },
-            "valueString": "Example text."
-          }
-        ]
+        "identifiedDateTime": "2026-04-09T10:00:00+00:00",
+        "detail": "Example text."
       }
     }
   ]

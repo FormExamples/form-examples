@@ -52,7 +52,7 @@
           "reference": "urn:uuid:550e8400-e29b-41d4-a716-446655440000"
         },
         "encounter": {
-          "reference": "Encounter/bb0e8400-e29b-41d4-a716-446655440006"
+          "reference": "urn:uuid:770e8400-e29b-41d4-a716-446655440002"
         },
         "effectiveDateTime": "2026-04-09T10:00:00+00:00",
         "component": [
@@ -237,625 +237,78 @@
     {
       "fullUrl": "urn:uuid:770e8400-e29b-41d4-a716-446655440002",
       "resource": {
-        "resourceType": "Observation",
+        "resourceType": "Encounter",
         "id": "770e8400-e29b-41d4-a716-446655440002",
         "meta": {
           "profile": [
-            "http://hl7.org/fhir/StructureDefinition/Observation"
+            "http://hl7.org/fhir/StructureDefinition/Encounter"
           ],
           "lastUpdated": "2026-04-09T10:00:00+00:00"
         },
-        "status": "final",
-        "category": [
+        "status": "planned",
+        "class": [
           {
             "coding": [
               {
-                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
-                "code": "survey",
-                "display": "Survey"
+                "system": "http://terminology.hl7.org/CodeSystem/v3-ActCode",
+                "code": "AMB",
+                "display": "ambulatory"
               }
             ]
           }
         ],
-        "code": {
-          "coding": [
-            {
-              "system": "urn:form-examples:waterlow-pressure-ulcer-risk-assessment",
-              "code": "waterlow_pressure_ulcer_risk_assessment",
-              "display": "Waterlow Pressure Ulcer Risk Assessment"
-            }
-          ]
-        },
+        "type": [
+          {
+            "coding": [
+              {
+                "system": "http://snomed.info/sct",
+                "code": "185349003",
+                "display": "Encounter for check up"
+              }
+            ],
+            "text": "Waterlow Pressure Ulcer Risk Assessment"
+          }
+        ],
         "subject": {
           "reference": "urn:uuid:550e8400-e29b-41d4-a716-446655440000"
         },
-        "encounter": {
-          "reference": "Encounter/bb0e8400-e29b-41d4-a716-446655440006"
-        },
-        "effectiveDateTime": "2026-04-09T10:00:00+00:00",
-        "component": [
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:waterlow-pressure-ulcer-risk-assessment",
-                  "code": "deleted_at",
-                  "display": "Deleted At"
-                }
-              ]
-            },
-            "valueDateTime": "2026-04-09T10:00:00+00:00"
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:waterlow-pressure-ulcer-risk-assessment",
-                  "code": "nurse_name",
-                  "display": "Nurse Name"
-                }
-              ]
-            },
-            "valueString": "Example"
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:waterlow-pressure-ulcer-risk-assessment",
-                  "code": "nurse_role",
-                  "display": "Nurse Role"
-                }
-              ]
-            },
-            "valueCodeableConcept": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:waterlow-pressure-ulcer-risk-assessment:nurse_role",
-                  "code": "registered-nurse",
-                  "display": "Registered-Nurse"
-                }
-              ]
-            }
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:waterlow-pressure-ulcer-risk-assessment",
-                  "code": "assessed_at",
-                  "display": "Assessed At"
-                }
-              ]
-            },
-            "valueDateTime": "2026-04-09T10:00:00+00:00"
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:waterlow-pressure-ulcer-risk-assessment",
-                  "code": "care_setting",
-                  "display": "Care Setting"
-                }
-              ]
-            },
-            "valueCodeableConcept": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:waterlow-pressure-ulcer-risk-assessment:care_setting",
-                  "code": "acute-ward",
-                  "display": "Acute-Ward"
-                }
-              ]
-            }
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:waterlow-pressure-ulcer-risk-assessment",
-                  "code": "assessment_reason",
-                  "display": "Assessment Reason"
-                }
-              ]
-            },
-            "valueCodeableConcept": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:waterlow-pressure-ulcer-risk-assessment:assessment_reason",
-                  "code": "admission",
-                  "display": "Admission"
-                }
-              ]
-            }
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:waterlow-pressure-ulcer-risk-assessment",
-                  "code": "patient_identifier",
-                  "display": "Patient Identifier"
-                }
-              ]
-            },
-            "valueString": ""
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:waterlow-pressure-ulcer-risk-assessment",
-                  "code": "age_band",
-                  "display": "Age Band"
-                }
-              ]
-            },
-            "valueCodeableConcept": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:waterlow-pressure-ulcer-risk-assessment:age_band",
-                  "code": "14-49",
-                  "display": "14-49"
-                }
-              ]
-            }
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:waterlow-pressure-ulcer-risk-assessment",
-                  "code": "sex",
-                  "display": "Sex"
-                }
-              ]
-            },
-            "valueCodeableConcept": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:waterlow-pressure-ulcer-risk-assessment:sex",
-                  "code": "female",
-                  "display": "Female"
-                }
-              ]
-            }
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:waterlow-pressure-ulcer-risk-assessment",
-                  "code": "build_weight_for_height",
-                  "display": "Build Weight For Height"
-                }
-              ]
-            },
-            "valueCodeableConcept": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:waterlow-pressure-ulcer-risk-assessment:build_weight_for_height",
-                  "code": "average",
-                  "display": "Average"
-                }
-              ]
-            }
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:waterlow-pressure-ulcer-risk-assessment",
-                  "code": "skin_type",
-                  "display": "Skin Type"
-                }
-              ]
-            },
-            "valueCodeableConcept": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:waterlow-pressure-ulcer-risk-assessment:skin_type",
-                  "code": "healthy",
-                  "display": "Healthy"
-                }
-              ]
-            }
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:waterlow-pressure-ulcer-risk-assessment",
-                  "code": "continence",
-                  "display": "Continence"
-                }
-              ]
-            },
-            "valueCodeableConcept": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:waterlow-pressure-ulcer-risk-assessment:continence",
-                  "code": "complete-catheterised",
-                  "display": "Complete-Catheterised"
-                }
-              ]
-            }
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:waterlow-pressure-ulcer-risk-assessment",
-                  "code": "mobility",
-                  "display": "Mobility"
-                }
-              ]
-            },
-            "valueCodeableConcept": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:waterlow-pressure-ulcer-risk-assessment:mobility",
-                  "code": "fully-mobile",
-                  "display": "Fully-Mobile"
-                }
-              ]
-            }
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:waterlow-pressure-ulcer-risk-assessment",
-                  "code": "tissue_malnutrition",
-                  "display": "Tissue Malnutrition"
-                }
-              ]
-            },
-            "valueCodeableConcept": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:waterlow-pressure-ulcer-risk-assessment:tissue_malnutrition",
-                  "code": "none",
-                  "display": "None"
-                }
-              ]
-            }
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:waterlow-pressure-ulcer-risk-assessment",
-                  "code": "neurological_deficit",
-                  "display": "Neurological Deficit"
-                }
-              ]
-            },
-            "valueCodeableConcept": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:waterlow-pressure-ulcer-risk-assessment:neurological_deficit",
-                  "code": "none",
-                  "display": "None"
-                }
-              ]
-            }
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:waterlow-pressure-ulcer-risk-assessment",
-                  "code": "major_surgery_trauma",
-                  "display": "Major Surgery Trauma"
-                }
-              ]
-            },
-            "valueCodeableConcept": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:waterlow-pressure-ulcer-risk-assessment:major_surgery_trauma",
-                  "code": "none",
-                  "display": "None"
-                }
-              ]
-            }
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:waterlow-pressure-ulcer-risk-assessment",
-                  "code": "medication",
-                  "display": "Medication"
-                }
-              ]
-            },
-            "valueCodeableConcept": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:waterlow-pressure-ulcer-risk-assessment:medication",
-                  "code": "none",
-                  "display": "None"
-                }
-              ]
-            }
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:waterlow-pressure-ulcer-risk-assessment",
-                  "code": "existing_pressure_damage",
-                  "display": "Existing Pressure Damage"
-                }
-              ]
-            },
-            "valueCodeableConcept": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:waterlow-pressure-ulcer-risk-assessment:existing_pressure_damage",
-                  "code": "no",
-                  "display": "No"
-                }
-              ]
-            }
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:waterlow-pressure-ulcer-risk-assessment",
-                  "code": "clinical_note",
-                  "display": "Clinical Note"
-                }
-              ]
-            },
-            "valueString": ""
-          }
-        ]
+        "actualPeriod": {
+          "start": "2026-04-09T10:00:00+00:00"
+        }
       }
     },
     {
       "fullUrl": "urn:uuid:880e8400-e29b-41d4-a716-446655440003",
       "resource": {
-        "resourceType": "Observation",
+        "resourceType": "ClinicalImpression",
         "id": "880e8400-e29b-41d4-a716-446655440003",
         "meta": {
           "profile": [
-            "http://hl7.org/fhir/StructureDefinition/Observation"
+            "http://hl7.org/fhir/StructureDefinition/ClinicalImpression"
           ],
           "lastUpdated": "2026-04-09T10:00:00+00:00"
         },
-        "status": "final",
-        "category": [
-          {
-            "coding": [
-              {
-                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
-                "code": "survey",
-                "display": "Survey"
-              }
-            ]
-          }
-        ],
-        "code": {
-          "coding": [
-            {
-              "system": "urn:form-examples:waterlow-pressure-ulcer-risk-assessment",
-              "code": "waterlow_pressure_ulcer_risk_assessment_grade",
-              "display": "Waterlow Pressure Ulcer Risk Grade"
-            }
-          ]
-        },
+        "status": "completed",
         "subject": {
           "reference": "urn:uuid:550e8400-e29b-41d4-a716-446655440000"
         },
         "encounter": {
-          "reference": "Encounter/bb0e8400-e29b-41d4-a716-446655440006"
+          "reference": "urn:uuid:770e8400-e29b-41d4-a716-446655440002"
         },
         "effectiveDateTime": "2026-04-09T10:00:00+00:00",
-        "component": [
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:waterlow-pressure-ulcer-risk-assessment",
-                  "code": "deleted_at",
-                  "display": "Deleted At"
-                }
-              ]
-            },
-            "valueDateTime": "2026-04-09T10:00:00+00:00"
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:waterlow-pressure-ulcer-risk-assessment",
-                  "code": "build_points",
-                  "display": "Build Points"
-                }
-              ]
-            },
-            "valueInteger": 1
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:waterlow-pressure-ulcer-risk-assessment",
-                  "code": "skin_points",
-                  "display": "Skin Points"
-                }
-              ]
-            },
-            "valueInteger": 1
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:waterlow-pressure-ulcer-risk-assessment",
-                  "code": "sex_points",
-                  "display": "Sex Points"
-                }
-              ]
-            },
-            "valueInteger": 1
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:waterlow-pressure-ulcer-risk-assessment",
-                  "code": "age_points",
-                  "display": "Age Points"
-                }
-              ]
-            },
-            "valueInteger": 45
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:waterlow-pressure-ulcer-risk-assessment",
-                  "code": "continence_points",
-                  "display": "Continence Points"
-                }
-              ]
-            },
-            "valueInteger": 1
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:waterlow-pressure-ulcer-risk-assessment",
-                  "code": "mobility_points",
-                  "display": "Mobility Points"
-                }
-              ]
-            },
-            "valueInteger": 1
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:waterlow-pressure-ulcer-risk-assessment",
-                  "code": "tissue_malnutrition_points",
-                  "display": "Tissue Malnutrition Points"
-                }
-              ]
-            },
-            "valueInteger": 1
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:waterlow-pressure-ulcer-risk-assessment",
-                  "code": "neurological_deficit_points",
-                  "display": "Neurological Deficit Points"
-                }
-              ]
-            },
-            "valueInteger": 1
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:waterlow-pressure-ulcer-risk-assessment",
-                  "code": "major_surgery_trauma_points",
-                  "display": "Major Surgery Trauma Points"
-                }
-              ]
-            },
-            "valueInteger": 1
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:waterlow-pressure-ulcer-risk-assessment",
-                  "code": "medication_points",
-                  "display": "Medication Points"
-                }
-              ]
-            },
-            "valueInteger": 1
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:waterlow-pressure-ulcer-risk-assessment",
-                  "code": "total_score",
-                  "display": "Total Score"
-                }
-              ]
-            },
-            "valueInteger": 5
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:waterlow-pressure-ulcer-risk-assessment",
-                  "code": "risk_band",
-                  "display": "Risk Band"
-                }
-              ]
-            },
-            "valueCodeableConcept": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:waterlow-pressure-ulcer-risk-assessment:risk_band",
-                  "code": "low",
-                  "display": "Low"
-                }
-              ]
-            }
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:waterlow-pressure-ulcer-risk-assessment",
-                  "code": "prevention_actions",
-                  "display": "Prevention Actions"
-                }
-              ]
-            },
-            "valueString": ""
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:waterlow-pressure-ulcer-risk-assessment",
-                  "code": "graded_at",
-                  "display": "Graded At"
-                }
-              ]
-            },
-            "valueDateTime": "2026-04-09T10:00:00+00:00"
-          }
-        ]
+        "date": "2026-04-09T10:00:00+00:00",
+        "description": "Waterlow Pressure Ulcer Risk Assessment grading result",
+        "summary": "Deleted At: 2026-04-09T10:00:00+00:00; Build Points: 1; Skin Points: 1; Sex Points: 1; Age Points: 45; Continence Points: 1; Mobility Points: 1; Tissue Malnutrition Points: 1; Neurological Deficit Points: 1; Major Surgery Trauma Points: 1; Medication Points: 1; Total Score: 5; Risk Band: low; Prevention Actions: "
       }
     },
     {
       "fullUrl": "urn:uuid:aa0e8400-e29b-41d4-a716-446655440005",
       "resource": {
-        "resourceType": "Observation",
+        "resourceType": "DetectedIssue",
         "id": "aa0e8400-e29b-41d4-a716-446655440005",
         "meta": {
           "profile": [
-            "http://hl7.org/fhir/StructureDefinition/Observation"
+            "http://hl7.org/fhir/StructureDefinition/DetectedIssue"
           ],
           "lastUpdated": "2026-04-09T10:00:00+00:00"
         },
@@ -864,9 +317,9 @@
           {
             "coding": [
               {
-                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
-                "code": "survey",
-                "display": "Survey"
+                "system": "urn:form-examples:waterlow-pressure-ulcer-risk-assessment",
+                "code": "grading-additional-flag",
+                "display": "very-high-risk"
               }
             ]
           }
@@ -874,107 +327,28 @@
         "code": {
           "coding": [
             {
-              "system": "urn:form-examples:waterlow-pressure-ulcer-risk-assessment",
-              "code": "waterlow_pressure_ulcer_risk_assessment_grade_flag",
-              "display": "Waterlow Pressure Ulcer Risk Grade Flag"
+              "system": "urn:form-examples:waterlow-pressure-ulcer-risk-assessment:flags",
+              "code": "FLAG-001",
+              "display": "Safety flag"
             }
           ]
         },
+        "severity": "low",
         "subject": {
           "reference": "urn:uuid:550e8400-e29b-41d4-a716-446655440000"
         },
-        "encounter": {
-          "reference": "Encounter/bb0e8400-e29b-41d4-a716-446655440006"
-        },
-        "effectiveDateTime": "2026-04-09T10:00:00+00:00",
-        "component": [
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:waterlow-pressure-ulcer-risk-assessment",
-                  "code": "deleted_at",
-                  "display": "Deleted At"
-                }
-              ]
-            },
-            "valueDateTime": "2026-04-09T10:00:00+00:00"
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:waterlow-pressure-ulcer-risk-assessment",
-                  "code": "category",
-                  "display": "Category"
-                }
-              ]
-            },
-            "valueCodeableConcept": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:waterlow-pressure-ulcer-risk-assessment:category",
-                  "code": "very-high-risk",
-                  "display": "Very-High-Risk"
-                }
-              ]
-            }
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:waterlow-pressure-ulcer-risk-assessment",
-                  "code": "priority",
-                  "display": "Priority"
-                }
-              ]
-            },
-            "valueCodeableConcept": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:waterlow-pressure-ulcer-risk-assessment:priority",
-                  "code": "low",
-                  "display": "Low"
-                }
-              ]
-            }
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:waterlow-pressure-ulcer-risk-assessment",
-                  "code": "description",
-                  "display": "Description"
-                }
-              ]
-            },
-            "valueString": "Example text."
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:waterlow-pressure-ulcer-risk-assessment",
-                  "code": "suggested_action",
-                  "display": "Suggested Action"
-                }
-              ]
-            },
-            "valueString": ""
-          }
-        ]
+        "identifiedDateTime": "2026-04-09T10:00:00+00:00",
+        "detail": "Clinical flag detected."
       }
     },
     {
       "fullUrl": "urn:uuid:990e8400-e29b-41d4-a716-446655440004",
       "resource": {
-        "resourceType": "Observation",
+        "resourceType": "DetectedIssue",
         "id": "990e8400-e29b-41d4-a716-446655440004",
         "meta": {
           "profile": [
-            "http://hl7.org/fhir/StructureDefinition/Observation"
+            "http://hl7.org/fhir/StructureDefinition/DetectedIssue"
           ],
           "lastUpdated": "2026-04-09T10:00:00+00:00"
         },
@@ -983,9 +357,9 @@
           {
             "coding": [
               {
-                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
-                "code": "survey",
-                "display": "Survey"
+                "system": "urn:form-examples:waterlow-pressure-ulcer-risk-assessment",
+                "code": "grading-fired-rule",
+                "display": "build"
               }
             ]
           }
@@ -993,89 +367,18 @@
         "code": {
           "coding": [
             {
-              "system": "urn:form-examples:waterlow-pressure-ulcer-risk-assessment",
-              "code": "waterlow_pressure_ulcer_risk_assessment_grade_rule",
-              "display": "Waterlow Pressure Ulcer Risk Grade Rule"
+              "system": "urn:form-examples:waterlow-pressure-ulcer-risk-assessment:rules",
+              "code": "RULE-001",
+              "display": "Example grading rule"
             }
           ]
         },
+        "severity": "moderate",
         "subject": {
           "reference": "urn:uuid:550e8400-e29b-41d4-a716-446655440000"
         },
-        "encounter": {
-          "reference": "Encounter/bb0e8400-e29b-41d4-a716-446655440006"
-        },
-        "effectiveDateTime": "2026-04-09T10:00:00+00:00",
-        "component": [
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:waterlow-pressure-ulcer-risk-assessment",
-                  "code": "deleted_at",
-                  "display": "Deleted At"
-                }
-              ]
-            },
-            "valueDateTime": "2026-04-09T10:00:00+00:00"
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:waterlow-pressure-ulcer-risk-assessment",
-                  "code": "category",
-                  "display": "Category"
-                }
-              ]
-            },
-            "valueCodeableConcept": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:waterlow-pressure-ulcer-risk-assessment:category",
-                  "code": "build",
-                  "display": "Build"
-                }
-              ]
-            }
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:waterlow-pressure-ulcer-risk-assessment",
-                  "code": "points",
-                  "display": "Points"
-                }
-              ]
-            },
-            "valueInteger": 1
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:waterlow-pressure-ulcer-risk-assessment",
-                  "code": "label",
-                  "display": "Label"
-                }
-              ]
-            },
-            "valueString": ""
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:waterlow-pressure-ulcer-risk-assessment",
-                  "code": "description",
-                  "display": "Description"
-                }
-              ]
-            },
-            "valueString": "Example text."
-          }
-        ]
+        "identifiedDateTime": "2026-04-09T10:00:00+00:00",
+        "detail": "Example text."
       }
     }
   ]

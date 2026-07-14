@@ -52,7 +52,7 @@
           "reference": "urn:uuid:550e8400-e29b-41d4-a716-446655440000"
         },
         "encounter": {
-          "reference": "Encounter/bb0e8400-e29b-41d4-a716-446655440006"
+          "reference": "urn:uuid:770e8400-e29b-41d4-a716-446655440002"
         },
         "effectiveDateTime": "2026-04-09T10:00:00+00:00",
         "component": [
@@ -198,367 +198,78 @@
     {
       "fullUrl": "urn:uuid:770e8400-e29b-41d4-a716-446655440002",
       "resource": {
-        "resourceType": "Observation",
+        "resourceType": "Encounter",
         "id": "770e8400-e29b-41d4-a716-446655440002",
         "meta": {
           "profile": [
-            "http://hl7.org/fhir/StructureDefinition/Observation"
+            "http://hl7.org/fhir/StructureDefinition/Encounter"
           ],
           "lastUpdated": "2026-04-09T10:00:00+00:00"
         },
-        "status": "final",
-        "category": [
+        "status": "planned",
+        "class": [
           {
             "coding": [
               {
-                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
-                "code": "survey",
-                "display": "Survey"
+                "system": "http://terminology.hl7.org/CodeSystem/v3-ActCode",
+                "code": "AMB",
+                "display": "ambulatory"
               }
             ]
           }
         ],
-        "code": {
-          "coding": [
-            {
-              "system": "urn:form-examples:estimated-glomerular-filtration-rate-calculator",
-              "code": "estimated_glomerular_filtration_rate_calculator",
-              "display": "Estimated Glomerular Filtration Rate Calculator"
-            }
-          ]
-        },
+        "type": [
+          {
+            "coding": [
+              {
+                "system": "http://snomed.info/sct",
+                "code": "185349003",
+                "display": "Encounter for check up"
+              }
+            ],
+            "text": "Estimated Glomerular Filtration Rate Calculator"
+          }
+        ],
         "subject": {
           "reference": "urn:uuid:550e8400-e29b-41d4-a716-446655440000"
         },
-        "encounter": {
-          "reference": "Encounter/bb0e8400-e29b-41d4-a716-446655440006"
-        },
-        "effectiveDateTime": "2026-04-09T10:00:00+00:00",
-        "component": [
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:estimated-glomerular-filtration-rate-calculator",
-                  "code": "deleted_at",
-                  "display": "Deleted At"
-                }
-              ]
-            },
-            "valueDateTime": "2026-04-09T10:00:00+00:00"
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:estimated-glomerular-filtration-rate-calculator",
-                  "code": "clinician_name",
-                  "display": "Clinician Name"
-                }
-              ]
-            },
-            "valueString": "Example"
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:estimated-glomerular-filtration-rate-calculator",
-                  "code": "clinician_role",
-                  "display": "Clinician Role"
-                }
-              ]
-            },
-            "valueCodeableConcept": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:estimated-glomerular-filtration-rate-calculator:clinician_role",
-                  "code": "doctor",
-                  "display": "Doctor"
-                }
-              ]
-            }
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:estimated-glomerular-filtration-rate-calculator",
-                  "code": "assessed_at",
-                  "display": "Assessed At"
-                }
-              ]
-            },
-            "valueDateTime": "2026-04-09T10:00:00+00:00"
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:estimated-glomerular-filtration-rate-calculator",
-                  "code": "care_setting",
-                  "display": "Care Setting"
-                }
-              ]
-            },
-            "valueCodeableConcept": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:estimated-glomerular-filtration-rate-calculator:care_setting",
-                  "code": "primary-care",
-                  "display": "Primary-Care"
-                }
-              ]
-            }
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:estimated-glomerular-filtration-rate-calculator",
-                  "code": "equation",
-                  "display": "Equation"
-                }
-              ]
-            },
-            "valueCodeableConcept": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:estimated-glomerular-filtration-rate-calculator:equation",
-                  "code": "ckd-epi-2021-creatinine",
-                  "display": "Ckd-Epi-2021-Creatinine"
-                }
-              ]
-            }
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:estimated-glomerular-filtration-rate-calculator",
-                  "code": "patient_identifier",
-                  "display": "Patient Identifier"
-                }
-              ]
-            },
-            "valueString": ""
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:estimated-glomerular-filtration-rate-calculator",
-                  "code": "serum_creatinine_umol_l",
-                  "display": "Serum Creatinine Umol L"
-                }
-              ]
-            },
-            "valueQuantity": {
-              "value": 0.0
-            }
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:estimated-glomerular-filtration-rate-calculator",
-                  "code": "age_years",
-                  "display": "Age Years"
-                }
-              ]
-            },
-            "valueInteger": 45
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:estimated-glomerular-filtration-rate-calculator",
-                  "code": "sex",
-                  "display": "Sex"
-                }
-              ]
-            },
-            "valueCodeableConcept": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:estimated-glomerular-filtration-rate-calculator:sex",
-                  "code": "female",
-                  "display": "Female"
-                }
-              ]
-            }
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:estimated-glomerular-filtration-rate-calculator",
-                  "code": "specimen_date",
-                  "display": "Specimen Date"
-                }
-              ]
-            },
-            "valueDateTime": "2026-01-15"
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:estimated-glomerular-filtration-rate-calculator",
-                  "code": "steady_state",
-                  "display": "Steady State"
-                }
-              ]
-            },
-            "valueCodeableConcept": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:estimated-glomerular-filtration-rate-calculator:steady_state",
-                  "code": "yes",
-                  "display": "Yes"
-                }
-              ]
-            }
-          }
-        ]
+        "actualPeriod": {
+          "start": "2026-04-09T10:00:00+00:00"
+        }
       }
     },
     {
       "fullUrl": "urn:uuid:880e8400-e29b-41d4-a716-446655440003",
       "resource": {
-        "resourceType": "Observation",
+        "resourceType": "ClinicalImpression",
         "id": "880e8400-e29b-41d4-a716-446655440003",
         "meta": {
           "profile": [
-            "http://hl7.org/fhir/StructureDefinition/Observation"
+            "http://hl7.org/fhir/StructureDefinition/ClinicalImpression"
           ],
           "lastUpdated": "2026-04-09T10:00:00+00:00"
         },
-        "status": "final",
-        "category": [
-          {
-            "coding": [
-              {
-                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
-                "code": "survey",
-                "display": "Survey"
-              }
-            ]
-          }
-        ],
-        "code": {
-          "coding": [
-            {
-              "system": "urn:form-examples:estimated-glomerular-filtration-rate-calculator",
-              "code": "estimated_glomerular_filtration_rate_calculator_grade",
-              "display": "Estimated Glomerular Filtration Rate Calculator Grade"
-            }
-          ]
-        },
+        "status": "completed",
         "subject": {
           "reference": "urn:uuid:550e8400-e29b-41d4-a716-446655440000"
         },
         "encounter": {
-          "reference": "Encounter/bb0e8400-e29b-41d4-a716-446655440006"
+          "reference": "urn:uuid:770e8400-e29b-41d4-a716-446655440002"
         },
         "effectiveDateTime": "2026-04-09T10:00:00+00:00",
-        "component": [
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:estimated-glomerular-filtration-rate-calculator",
-                  "code": "deleted_at",
-                  "display": "Deleted At"
-                }
-              ]
-            },
-            "valueDateTime": "2026-04-09T10:00:00+00:00"
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:estimated-glomerular-filtration-rate-calculator",
-                  "code": "serum_creatinine_mg_dl",
-                  "display": "Serum Creatinine Mg Dl"
-                }
-              ]
-            },
-            "valueQuantity": {
-              "value": 0.0
-            }
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:estimated-glomerular-filtration-rate-calculator",
-                  "code": "egfr_ml_min_1_73m2",
-                  "display": "Egfr Ml Min 1 73M2"
-                }
-              ]
-            },
-            "valueQuantity": {
-              "value": 0.0
-            }
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:estimated-glomerular-filtration-rate-calculator",
-                  "code": "g_stage",
-                  "display": "G Stage"
-                }
-              ]
-            },
-            "valueCodeableConcept": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:estimated-glomerular-filtration-rate-calculator:g_stage",
-                  "code": "G1",
-                  "display": "G1"
-                }
-              ]
-            }
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:estimated-glomerular-filtration-rate-calculator",
-                  "code": "g_stage_label",
-                  "display": "G Stage Label"
-                }
-              ]
-            },
-            "valueString": ""
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:estimated-glomerular-filtration-rate-calculator",
-                  "code": "graded_at",
-                  "display": "Graded At"
-                }
-              ]
-            },
-            "valueDateTime": "2026-04-09T10:00:00+00:00"
-          }
-        ]
+        "date": "2026-04-09T10:00:00+00:00",
+        "description": "Estimated Glomerular Filtration Rate Calculator grading result",
+        "summary": "Deleted At: 2026-04-09T10:00:00+00:00; Serum Creatinine Mg Dl: 0.0; Egfr Ml Min 1 73M2: 0.0; G Stage: G1; G Stage Label: "
       }
     },
     {
       "fullUrl": "urn:uuid:aa0e8400-e29b-41d4-a716-446655440005",
       "resource": {
-        "resourceType": "Observation",
+        "resourceType": "DetectedIssue",
         "id": "aa0e8400-e29b-41d4-a716-446655440005",
         "meta": {
           "profile": [
-            "http://hl7.org/fhir/StructureDefinition/Observation"
+            "http://hl7.org/fhir/StructureDefinition/DetectedIssue"
           ],
           "lastUpdated": "2026-04-09T10:00:00+00:00"
         },
@@ -567,9 +278,9 @@
           {
             "coding": [
               {
-                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
-                "code": "survey",
-                "display": "Survey"
+                "system": "urn:form-examples:estimated-glomerular-filtration-rate-calculator",
+                "code": "grading-additional-flag",
+                "display": "g5-nephrology-referral"
               }
             ]
           }
@@ -577,107 +288,28 @@
         "code": {
           "coding": [
             {
-              "system": "urn:form-examples:estimated-glomerular-filtration-rate-calculator",
-              "code": "estimated_glomerular_filtration_rate_calculator_grade_flag",
-              "display": "Estimated Glomerular Filtration Rate Calculator Grade Flag"
+              "system": "urn:form-examples:estimated-glomerular-filtration-rate-calculator:flags",
+              "code": "FLAG-001",
+              "display": "Safety flag"
             }
           ]
         },
+        "severity": "low",
         "subject": {
           "reference": "urn:uuid:550e8400-e29b-41d4-a716-446655440000"
         },
-        "encounter": {
-          "reference": "Encounter/bb0e8400-e29b-41d4-a716-446655440006"
-        },
-        "effectiveDateTime": "2026-04-09T10:00:00+00:00",
-        "component": [
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:estimated-glomerular-filtration-rate-calculator",
-                  "code": "deleted_at",
-                  "display": "Deleted At"
-                }
-              ]
-            },
-            "valueDateTime": "2026-04-09T10:00:00+00:00"
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:estimated-glomerular-filtration-rate-calculator",
-                  "code": "category",
-                  "display": "Category"
-                }
-              ]
-            },
-            "valueCodeableConcept": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:estimated-glomerular-filtration-rate-calculator:category",
-                  "code": "g5-nephrology-referral",
-                  "display": "G5-Nephrology-Referral"
-                }
-              ]
-            }
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:estimated-glomerular-filtration-rate-calculator",
-                  "code": "priority",
-                  "display": "Priority"
-                }
-              ]
-            },
-            "valueCodeableConcept": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:estimated-glomerular-filtration-rate-calculator:priority",
-                  "code": "low",
-                  "display": "Low"
-                }
-              ]
-            }
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:estimated-glomerular-filtration-rate-calculator",
-                  "code": "description",
-                  "display": "Description"
-                }
-              ]
-            },
-            "valueString": "Example text."
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:estimated-glomerular-filtration-rate-calculator",
-                  "code": "suggested_action",
-                  "display": "Suggested Action"
-                }
-              ]
-            },
-            "valueString": ""
-          }
-        ]
+        "identifiedDateTime": "2026-04-09T10:00:00+00:00",
+        "detail": "Clinical flag detected."
       }
     },
     {
       "fullUrl": "urn:uuid:990e8400-e29b-41d4-a716-446655440004",
       "resource": {
-        "resourceType": "Observation",
+        "resourceType": "DetectedIssue",
         "id": "990e8400-e29b-41d4-a716-446655440004",
         "meta": {
           "profile": [
-            "http://hl7.org/fhir/StructureDefinition/Observation"
+            "http://hl7.org/fhir/StructureDefinition/DetectedIssue"
           ],
           "lastUpdated": "2026-04-09T10:00:00+00:00"
         },
@@ -686,9 +318,9 @@
           {
             "coding": [
               {
-                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
-                "code": "survey",
-                "display": "Survey"
+                "system": "urn:form-examples:estimated-glomerular-filtration-rate-calculator",
+                "code": "grading-fired-rule",
+                "display": "General"
               }
             ]
           }
@@ -696,97 +328,18 @@
         "code": {
           "coding": [
             {
-              "system": "urn:form-examples:estimated-glomerular-filtration-rate-calculator",
-              "code": "estimated_glomerular_filtration_rate_calculator_grade_rule",
-              "display": "Estimated Glomerular Filtration Rate Calculator Grade Rule"
+              "system": "urn:form-examples:estimated-glomerular-filtration-rate-calculator:rules",
+              "code": "RULE-001",
+              "display": "Example grading rule"
             }
           ]
         },
+        "severity": "moderate",
         "subject": {
           "reference": "urn:uuid:550e8400-e29b-41d4-a716-446655440000"
         },
-        "encounter": {
-          "reference": "Encounter/bb0e8400-e29b-41d4-a716-446655440006"
-        },
-        "effectiveDateTime": "2026-04-09T10:00:00+00:00",
-        "component": [
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:estimated-glomerular-filtration-rate-calculator",
-                  "code": "deleted_at",
-                  "display": "Deleted At"
-                }
-              ]
-            },
-            "valueDateTime": "2026-04-09T10:00:00+00:00"
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:estimated-glomerular-filtration-rate-calculator",
-                  "code": "instrument",
-                  "display": "Instrument"
-                }
-              ]
-            },
-            "valueCodeableConcept": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:estimated-glomerular-filtration-rate-calculator:instrument",
-                  "code": "conversion",
-                  "display": "Conversion"
-                }
-              ]
-            }
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:estimated-glomerular-filtration-rate-calculator",
-                  "code": "band",
-                  "display": "Band"
-                }
-              ]
-            },
-            "valueCodeableConcept": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:estimated-glomerular-filtration-rate-calculator:band",
-                  "code": "G1",
-                  "display": "G1"
-                }
-              ]
-            }
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:estimated-glomerular-filtration-rate-calculator",
-                  "code": "category",
-                  "display": "Category"
-                }
-              ]
-            },
-            "valueString": "General"
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:estimated-glomerular-filtration-rate-calculator",
-                  "code": "description",
-                  "display": "Description"
-                }
-              ]
-            },
-            "valueString": "Example text."
-          }
-        ]
+        "identifiedDateTime": "2026-04-09T10:00:00+00:00",
+        "detail": "Example text."
       }
     },
     {

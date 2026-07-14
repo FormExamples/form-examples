@@ -1,188 +1,40 @@
 {
-  "resourceType": "Observation",
+  "resourceType": "Encounter",
   "id": "770e8400-e29b-41d4-a716-446655440002",
   "meta": {
     "profile": [
-      "http://hl7.org/fhir/StructureDefinition/Observation"
+      "http://hl7.org/fhir/StructureDefinition/Encounter"
     ],
     "lastUpdated": "2026-04-09T10:00:00+00:00"
   },
-  "status": "final",
-  "category": [
+  "status": "planned",
+  "class": [
     {
       "coding": [
         {
-          "system": "http://terminology.hl7.org/CodeSystem/observation-category",
-          "code": "survey",
-          "display": "Survey"
+          "system": "http://terminology.hl7.org/CodeSystem/v3-ActCode",
+          "code": "AMB",
+          "display": "ambulatory"
         }
       ]
     }
   ],
-  "code": {
-    "coding": [
-      {
-        "system": "urn:form-examples:alcohol-use-disorders-identification-test-consumption",
-        "code": "audit_c",
-        "display": "Audit C"
-      }
-    ]
-  },
+  "type": [
+    {
+      "coding": [
+        {
+          "system": "http://snomed.info/sct",
+          "code": "185349003",
+          "display": "Encounter for check up"
+        }
+      ],
+      "text": "Alcohol Use Disorders Identification Test Consumption"
+    }
+  ],
   "subject": {
     "reference": "Patient/550e8400-e29b-41d4-a716-446655440000"
   },
-  "encounter": {
-    "reference": "Encounter/bb0e8400-e29b-41d4-a716-446655440006"
-  },
-  "effectiveDateTime": "2026-04-09T10:00:00+00:00",
-  "component": [
-    {
-      "code": {
-        "coding": [
-          {
-            "system": "urn:form-examples:alcohol-use-disorders-identification-test-consumption",
-            "code": "deleted_at",
-            "display": "Deleted At"
-          }
-        ]
-      },
-      "valueDateTime": "2026-04-09T10:00:00+00:00"
-    },
-    {
-      "code": {
-        "coding": [
-          {
-            "system": "urn:form-examples:alcohol-use-disorders-identification-test-consumption",
-            "code": "clinician_name",
-            "display": "Clinician Name"
-          }
-        ]
-      },
-      "valueString": "Example"
-    },
-    {
-      "code": {
-        "coding": [
-          {
-            "system": "urn:form-examples:alcohol-use-disorders-identification-test-consumption",
-            "code": "clinician_role",
-            "display": "Clinician Role"
-          }
-        ]
-      },
-      "valueCodeableConcept": {
-        "coding": [
-          {
-            "system": "urn:form-examples:alcohol-use-disorders-identification-test-consumption:clinician_role",
-            "code": "gp",
-            "display": "Gp"
-          }
-        ]
-      }
-    },
-    {
-      "code": {
-        "coding": [
-          {
-            "system": "urn:form-examples:alcohol-use-disorders-identification-test-consumption",
-            "code": "assessed_at",
-            "display": "Assessed At"
-          }
-        ]
-      },
-      "valueDateTime": "2026-04-09T10:00:00+00:00"
-    },
-    {
-      "code": {
-        "coding": [
-          {
-            "system": "urn:form-examples:alcohol-use-disorders-identification-test-consumption",
-            "code": "care_setting",
-            "display": "Care Setting"
-          }
-        ]
-      },
-      "valueCodeableConcept": {
-        "coding": [
-          {
-            "system": "urn:form-examples:alcohol-use-disorders-identification-test-consumption:care_setting",
-            "code": "primary-care",
-            "display": "Primary-Care"
-          }
-        ]
-      }
-    },
-    {
-      "code": {
-        "coding": [
-          {
-            "system": "urn:form-examples:alcohol-use-disorders-identification-test-consumption",
-            "code": "administration_mode",
-            "display": "Administration Mode"
-          }
-        ]
-      },
-      "valueCodeableConcept": {
-        "coding": [
-          {
-            "system": "urn:form-examples:alcohol-use-disorders-identification-test-consumption:administration_mode",
-            "code": "self-completed",
-            "display": "Self-Completed"
-          }
-        ]
-      }
-    },
-    {
-      "code": {
-        "coding": [
-          {
-            "system": "urn:form-examples:alcohol-use-disorders-identification-test-consumption",
-            "code": "patient_identifier",
-            "display": "Patient Identifier"
-          }
-        ]
-      },
-      "valueString": ""
-    },
-    {
-      "code": {
-        "coding": [
-          {
-            "system": "urn:form-examples:alcohol-use-disorders-identification-test-consumption",
-            "code": "age_band",
-            "display": "Age Band"
-          }
-        ]
-      },
-      "valueCodeableConcept": {
-        "coding": [
-          {
-            "system": "urn:form-examples:alcohol-use-disorders-identification-test-consumption:age_band",
-            "code": "16-24",
-            "display": "16-24"
-          }
-        ]
-      }
-    },
-    {
-      "code": {
-        "coding": [
-          {
-            "system": "urn:form-examples:alcohol-use-disorders-identification-test-consumption",
-            "code": "sex",
-            "display": "Sex"
-          }
-        ]
-      },
-      "valueCodeableConcept": {
-        "coding": [
-          {
-            "system": "urn:form-examples:alcohol-use-disorders-identification-test-consumption:sex",
-            "code": "female",
-            "display": "Female"
-          }
-        ]
-      }
-    }
-  ]
+  "actualPeriod": {
+    "start": "2026-04-09T10:00:00+00:00"
+  }
 }

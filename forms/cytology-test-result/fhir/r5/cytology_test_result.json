@@ -1,312 +1,40 @@
 {
-  "resourceType": "Observation",
+  "resourceType": "Encounter",
   "id": "770e8400-e29b-41d4-a716-446655440002",
   "meta": {
     "profile": [
-      "http://hl7.org/fhir/StructureDefinition/Observation"
+      "http://hl7.org/fhir/StructureDefinition/Encounter"
     ],
     "lastUpdated": "2026-04-09T10:00:00+00:00"
   },
-  "status": "final",
-  "category": [
+  "status": "planned",
+  "class": [
     {
       "coding": [
         {
-          "system": "http://terminology.hl7.org/CodeSystem/observation-category",
-          "code": "survey",
-          "display": "Survey"
+          "system": "http://terminology.hl7.org/CodeSystem/v3-ActCode",
+          "code": "AMB",
+          "display": "ambulatory"
         }
       ]
     }
   ],
-  "code": {
-    "coding": [
-      {
-        "system": "urn:form-examples:cytology-test-result",
-        "code": "cytology_test_result",
-        "display": "Cytology Test Result"
-      }
-    ]
-  },
+  "type": [
+    {
+      "coding": [
+        {
+          "system": "http://snomed.info/sct",
+          "code": "185349003",
+          "display": "Encounter for check up"
+        }
+      ],
+      "text": "Cytology Test Result"
+    }
+  ],
   "subject": {
     "reference": "Patient/550e8400-e29b-41d4-a716-446655440000"
   },
-  "encounter": {
-    "reference": "Encounter/bb0e8400-e29b-41d4-a716-446655440006"
-  },
-  "effectiveDateTime": "2026-04-09T10:00:00+00:00",
-  "component": [
-    {
-      "code": {
-        "coding": [
-          {
-            "system": "urn:form-examples:cytology-test-result",
-            "code": "deleted_at",
-            "display": "Deleted At"
-          }
-        ]
-      },
-      "valueDateTime": "2026-04-09T10:00:00+00:00"
-    },
-    {
-      "code": {
-        "coding": [
-          {
-            "system": "urn:form-examples:cytology-test-result",
-            "code": "originating_request_reference",
-            "display": "Originating Request Reference"
-          }
-        ]
-      },
-      "valueString": ""
-    },
-    {
-      "code": {
-        "coding": [
-          {
-            "system": "urn:form-examples:cytology-test-result",
-            "code": "report_status",
-            "display": "Report Status"
-          }
-        ]
-      },
-      "valueCodeableConcept": {
-        "coding": [
-          {
-            "system": "urn:form-examples:cytology-test-result:report_status",
-            "code": "preliminary",
-            "display": "Preliminary"
-          }
-        ]
-      }
-    },
-    {
-      "code": {
-        "coding": [
-          {
-            "system": "urn:form-examples:cytology-test-result",
-            "code": "performed_date",
-            "display": "Performed Date"
-          }
-        ]
-      },
-      "valueDateTime": "2026-01-15"
-    },
-    {
-      "code": {
-        "coding": [
-          {
-            "system": "urn:form-examples:cytology-test-result",
-            "code": "reported_date",
-            "display": "Reported Date"
-          }
-        ]
-      },
-      "valueDateTime": "2026-01-15"
-    },
-    {
-      "code": {
-        "coding": [
-          {
-            "system": "urn:form-examples:cytology-test-result",
-            "code": "specimen_type",
-            "display": "Specimen Type"
-          }
-        ]
-      },
-      "valueCodeableConcept": {
-        "coding": [
-          {
-            "system": "urn:form-examples:cytology-test-result:specimen_type",
-            "code": "cervical-smear",
-            "display": "Cervical-Smear"
-          }
-        ]
-      }
-    },
-    {
-      "code": {
-        "coding": [
-          {
-            "system": "urn:form-examples:cytology-test-result",
-            "code": "specimen_adequacy",
-            "display": "Specimen Adequacy"
-          }
-        ]
-      },
-      "valueCodeableConcept": {
-        "coding": [
-          {
-            "system": "urn:form-examples:cytology-test-result:specimen_adequacy",
-            "code": "satisfactory",
-            "display": "Satisfactory"
-          }
-        ]
-      }
-    },
-    {
-      "code": {
-        "coding": [
-          {
-            "system": "urn:form-examples:cytology-test-result",
-            "code": "clinical_history",
-            "display": "Clinical History"
-          }
-        ]
-      },
-      "valueString": "Example text."
-    },
-    {
-      "code": {
-        "coding": [
-          {
-            "system": "urn:form-examples:cytology-test-result",
-            "code": "comparison_with_previous",
-            "display": "Comparison With Previous"
-          }
-        ]
-      },
-      "valueString": ""
-    },
-    {
-      "code": {
-        "coding": [
-          {
-            "system": "urn:form-examples:cytology-test-result",
-            "code": "cytology_result_category",
-            "display": "Cytology Result Category"
-          }
-        ]
-      },
-      "valueString": "General"
-    },
-    {
-      "code": {
-        "coding": [
-          {
-            "system": "urn:form-examples:cytology-test-result",
-            "code": "hpv_result",
-            "display": "Hpv Result"
-          }
-        ]
-      },
-      "valueCodeableConcept": {
-        "coding": [
-          {
-            "system": "urn:form-examples:cytology-test-result:hpv_result",
-            "code": "positive",
-            "display": "Positive"
-          }
-        ]
-      }
-    },
-    {
-      "code": {
-        "coding": [
-          {
-            "system": "urn:form-examples:cytology-test-result",
-            "code": "malignancy_present",
-            "display": "Malignancy Present"
-          }
-        ]
-      },
-      "valueBoolean": true
-    },
-    {
-      "code": {
-        "coding": [
-          {
-            "system": "urn:form-examples:cytology-test-result",
-            "code": "dysplasia_present",
-            "display": "Dysplasia Present"
-          }
-        ]
-      },
-      "valueBoolean": true
-    },
-    {
-      "code": {
-        "coding": [
-          {
-            "system": "urn:form-examples:cytology-test-result",
-            "code": "microscopic_description",
-            "display": "Microscopic Description"
-          }
-        ]
-      },
-      "valueString": "Example text."
-    },
-    {
-      "code": {
-        "coding": [
-          {
-            "system": "urn:form-examples:cytology-test-result",
-            "code": "diagnosis",
-            "display": "Diagnosis"
-          }
-        ]
-      },
-      "valueString": "Under investigation"
-    },
-    {
-      "code": {
-        "coding": [
-          {
-            "system": "urn:form-examples:cytology-test-result",
-            "code": "impression",
-            "display": "Impression"
-          }
-        ]
-      },
-      "valueString": "Example text."
-    },
-    {
-      "code": {
-        "coding": [
-          {
-            "system": "urn:form-examples:cytology-test-result",
-            "code": "reporting_category",
-            "display": "Reporting Category"
-          }
-        ]
-      },
-      "valueString": "General"
-    },
-    {
-      "code": {
-        "coding": [
-          {
-            "system": "urn:form-examples:cytology-test-result",
-            "code": "recommended_follow_up",
-            "display": "Recommended Follow Up"
-          }
-        ]
-      },
-      "valueString": ""
-    },
-    {
-      "code": {
-        "coding": [
-          {
-            "system": "urn:form-examples:cytology-test-result",
-            "code": "critical_result_communicated",
-            "display": "Critical Result Communicated"
-          }
-        ]
-      },
-      "valueBoolean": true
-    },
-    {
-      "code": {
-        "coding": [
-          {
-            "system": "urn:form-examples:cytology-test-result",
-            "code": "reported_to",
-            "display": "Reported To"
-          }
-        ]
-      },
-      "valueString": ""
-    }
-  ]
+  "actualPeriod": {
+    "start": "2026-04-09T10:00:00+00:00"
+  }
 }

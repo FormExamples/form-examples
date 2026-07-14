@@ -19,599 +19,78 @@
     {
       "fullUrl": "urn:uuid:770e8400-e29b-41d4-a716-446655440002",
       "resource": {
-        "resourceType": "Observation",
+        "resourceType": "Encounter",
         "id": "770e8400-e29b-41d4-a716-446655440002",
         "meta": {
           "profile": [
-            "http://hl7.org/fhir/StructureDefinition/Observation"
+            "http://hl7.org/fhir/StructureDefinition/Encounter"
           ],
           "lastUpdated": "2026-04-09T10:00:00+00:00"
         },
-        "status": "final",
-        "category": [
+        "status": "planned",
+        "class": [
           {
             "coding": [
               {
-                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
-                "code": "survey",
-                "display": "Survey"
+                "system": "http://terminology.hl7.org/CodeSystem/v3-ActCode",
+                "code": "AMB",
+                "display": "ambulatory"
               }
             ]
           }
         ],
-        "code": {
-          "coding": [
-            {
-              "system": "urn:form-examples:cardiology-response",
-              "code": "cardiology_response",
-              "display": "Cardiology Response"
-            }
-          ]
-        },
+        "type": [
+          {
+            "coding": [
+              {
+                "system": "http://snomed.info/sct",
+                "code": "185349003",
+                "display": "Encounter for check up"
+              }
+            ],
+            "text": "Cardiology Response"
+          }
+        ],
         "subject": {
           "reference": "urn:uuid:550e8400-e29b-41d4-a716-446655440000"
         },
-        "encounter": {
-          "reference": "Encounter/bb0e8400-e29b-41d4-a716-446655440006"
-        },
-        "effectiveDateTime": "2026-04-09T10:00:00+00:00",
-        "component": [
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:cardiology-response",
-                  "code": "deleted_at",
-                  "display": "Deleted At"
-                }
-              ]
-            },
-            "valueDateTime": "2026-04-09T10:00:00+00:00"
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:cardiology-response",
-                  "code": "originating_request_reference",
-                  "display": "Originating Request Reference"
-                }
-              ]
-            },
-            "valueString": ""
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:cardiology-response",
-                  "code": "response_status",
-                  "display": "Response Status"
-                }
-              ]
-            },
-            "valueCodeableConcept": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:cardiology-response:response_status",
-                  "code": "preliminary",
-                  "display": "Preliminary"
-                }
-              ]
-            }
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:cardiology-response",
-                  "code": "consultation_type",
-                  "display": "Consultation Type"
-                }
-              ]
-            },
-            "valueCodeableConcept": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:cardiology-response:consultation_type",
-                  "code": "clinic-review",
-                  "display": "Clinic-Review"
-                }
-              ]
-            }
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:cardiology-response",
-                  "code": "assessed_date",
-                  "display": "Assessed Date"
-                }
-              ]
-            },
-            "valueDateTime": "2026-01-15"
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:cardiology-response",
-                  "code": "responded_date",
-                  "display": "Responded Date"
-                }
-              ]
-            },
-            "valueDateTime": "2026-01-15"
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:cardiology-response",
-                  "code": "clinical_summary",
-                  "display": "Clinical Summary"
-                }
-              ]
-            },
-            "valueString": "Example text."
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:cardiology-response",
-                  "code": "examination_findings",
-                  "display": "Examination Findings"
-                }
-              ]
-            },
-            "valueString": "Example text."
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:cardiology-response",
-                  "code": "investigations_performed",
-                  "display": "Investigations Performed"
-                }
-              ]
-            },
-            "valueString": ""
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:cardiology-response",
-                  "code": "ischaemia_or_cad",
-                  "display": "Ischaemia Or Cad"
-                }
-              ]
-            },
-            "valueBoolean": true
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:cardiology-response",
-                  "code": "significant_arrhythmia",
-                  "display": "Significant Arrhythmia"
-                }
-              ]
-            },
-            "valueBoolean": true
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:cardiology-response",
-                  "code": "reduced_ejection_fraction",
-                  "display": "Reduced Ejection Fraction"
-                }
-              ]
-            },
-            "valueBoolean": true
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:cardiology-response",
-                  "code": "significant_valve_disease",
-                  "display": "Significant Valve Disease"
-                }
-              ]
-            },
-            "valueBoolean": true
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:cardiology-response",
-                  "code": "structural_abnormality",
-                  "display": "Structural Abnormality"
-                }
-              ]
-            },
-            "valueBoolean": true
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:cardiology-response",
-                  "code": "uncontrolled_hypertension",
-                  "display": "Uncontrolled Hypertension"
-                }
-              ]
-            },
-            "valueBoolean": true
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:cardiology-response",
-                  "code": "non_cardiac_cause",
-                  "display": "Non Cardiac Cause"
-                }
-              ]
-            },
-            "valueBoolean": true
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:cardiology-response",
-                  "code": "primary_diagnosis_category",
-                  "display": "Primary Diagnosis Category"
-                }
-              ]
-            },
-            "valueCodeableConcept": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:cardiology-response:primary_diagnosis_category",
-                  "code": "coronary-artery-disease",
-                  "display": "Coronary-Artery-Disease"
-                }
-              ]
-            }
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:cardiology-response",
-                  "code": "diagnosis_narrative",
-                  "display": "Diagnosis Narrative"
-                }
-              ]
-            },
-            "valueString": "Example text."
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:cardiology-response",
-                  "code": "lv_ejection_fraction_percent",
-                  "display": "Lv Ejection Fraction Percent"
-                }
-              ]
-            },
-            "valueQuantity": {
-              "value": 0.0
-            }
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:cardiology-response",
-                  "code": "management_plan",
-                  "display": "Management Plan"
-                }
-              ]
-            },
-            "valueString": "Example text."
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:cardiology-response",
-                  "code": "medication_changes",
-                  "display": "Medication Changes"
-                }
-              ]
-            },
-            "valueString": "Paracetamol"
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:cardiology-response",
-                  "code": "recommended_follow_up",
-                  "display": "Recommended Follow Up"
-                }
-              ]
-            },
-            "valueString": ""
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:cardiology-response",
-                  "code": "critical_result",
-                  "display": "Critical Result"
-                }
-              ]
-            },
-            "valueBoolean": true
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:cardiology-response",
-                  "code": "critical_result_communicated",
-                  "display": "Critical Result Communicated"
-                }
-              ]
-            },
-            "valueBoolean": true
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:cardiology-response",
-                  "code": "reported_to",
-                  "display": "Reported To"
-                }
-              ]
-            },
-            "valueString": ""
-          }
-        ]
+        "actualPeriod": {
+          "start": "2026-04-09T10:00:00+00:00"
+        }
       }
     },
     {
       "fullUrl": "urn:uuid:880e8400-e29b-41d4-a716-446655440003",
       "resource": {
-        "resourceType": "Observation",
+        "resourceType": "ClinicalImpression",
         "id": "880e8400-e29b-41d4-a716-446655440003",
         "meta": {
           "profile": [
-            "http://hl7.org/fhir/StructureDefinition/Observation"
+            "http://hl7.org/fhir/StructureDefinition/ClinicalImpression"
           ],
           "lastUpdated": "2026-04-09T10:00:00+00:00"
         },
-        "status": "final",
-        "category": [
-          {
-            "coding": [
-              {
-                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
-                "code": "survey",
-                "display": "Survey"
-              }
-            ]
-          }
-        ],
-        "code": {
-          "coding": [
-            {
-              "system": "urn:form-examples:cardiology-response",
-              "code": "cardiology_response_grade",
-              "display": "Cardiology Response Grade"
-            }
-          ]
-        },
+        "status": "completed",
         "subject": {
           "reference": "urn:uuid:550e8400-e29b-41d4-a716-446655440000"
         },
         "encounter": {
-          "reference": "Encounter/bb0e8400-e29b-41d4-a716-446655440006"
+          "reference": "urn:uuid:770e8400-e29b-41d4-a716-446655440002"
         },
         "effectiveDateTime": "2026-04-09T10:00:00+00:00",
-        "component": [
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:cardiology-response",
-                  "code": "deleted_at",
-                  "display": "Deleted At"
-                }
-              ]
-            },
-            "valueDateTime": "2026-04-09T10:00:00+00:00"
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:cardiology-response",
-                  "code": "response_classification",
-                  "display": "Response Classification"
-                }
-              ]
-            },
-            "valueCodeableConcept": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:cardiology-response:response_classification",
-                  "code": "no-abnormality",
-                  "display": "No-Abnormality"
-                }
-              ]
-            }
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:cardiology-response",
-                  "code": "severity",
-                  "display": "Severity"
-                }
-              ]
-            },
-            "valueCodeableConcept": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:cardiology-response:severity",
-                  "code": "none",
-                  "display": "None"
-                }
-              ]
-            }
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:cardiology-response",
-                  "code": "severity_category",
-                  "display": "Severity Category"
-                }
-              ]
-            },
-            "valueString": "General"
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:cardiology-response",
-                  "code": "completeness_percent",
-                  "display": "Completeness Percent"
-                }
-              ]
-            },
-            "valueInteger": 1
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:cardiology-response",
-                  "code": "follow_up_urgency",
-                  "display": "Follow Up Urgency"
-                }
-              ]
-            },
-            "valueCodeableConcept": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:cardiology-response:follow_up_urgency",
-                  "code": "routine",
-                  "display": "Routine"
-                }
-              ]
-            }
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:cardiology-response",
-                  "code": "target_timeframe",
-                  "display": "Target Timeframe"
-                }
-              ]
-            },
-            "valueString": ""
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:cardiology-response",
-                  "code": "recommended_action",
-                  "display": "Recommended Action"
-                }
-              ]
-            },
-            "valueString": ""
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:cardiology-response",
-                  "code": "recommendation",
-                  "display": "Recommendation"
-                }
-              ]
-            },
-            "valueCodeableConcept": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:cardiology-response:recommendation",
-                  "code": "no-action",
-                  "display": "No-Action"
-                }
-              ]
-            }
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:cardiology-response",
-                  "code": "clinician_notes",
-                  "display": "Clinician Notes"
-                }
-              ]
-            },
-            "valueString": "Example text."
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:cardiology-response",
-                  "code": "signed_at",
-                  "display": "Signed At"
-                }
-              ]
-            },
-            "valueDateTime": "2026-04-09T10:00:00+00:00"
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:cardiology-response",
-                  "code": "graded_at",
-                  "display": "Graded At"
-                }
-              ]
-            },
-            "valueDateTime": "2026-04-09T10:00:00+00:00"
-          }
-        ]
+        "date": "2026-04-09T10:00:00+00:00",
+        "description": "Cardiology Response grading result",
+        "summary": "Deleted At: 2026-04-09T10:00:00+00:00; Response Classification: no-abnormality; Severity: none; Severity Category: General; Completeness Percent: 1; Follow Up Urgency: routine; Target Timeframe: ; Recommended Action: ; Recommendation: no-action; Clinician Notes: Example text.; Signed At: 2026-04-09T10:00:00+00:00"
       }
     },
     {
       "fullUrl": "urn:uuid:aa0e8400-e29b-41d4-a716-446655440005",
       "resource": {
-        "resourceType": "Observation",
+        "resourceType": "DetectedIssue",
         "id": "aa0e8400-e29b-41d4-a716-446655440005",
         "meta": {
           "profile": [
-            "http://hl7.org/fhir/StructureDefinition/Observation"
+            "http://hl7.org/fhir/StructureDefinition/DetectedIssue"
           ],
           "lastUpdated": "2026-04-09T10:00:00+00:00"
         },
@@ -620,9 +99,9 @@
           {
             "coding": [
               {
-                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
-                "code": "survey",
-                "display": "Survey"
+                "system": "urn:form-examples:cardiology-response",
+                "code": "grading-additional-flag",
+                "display": "critical-finding"
               }
             ]
           }
@@ -630,107 +109,28 @@
         "code": {
           "coding": [
             {
-              "system": "urn:form-examples:cardiology-response",
-              "code": "cardiology_response_grade_flag",
-              "display": "Cardiology Response Grade Flag"
+              "system": "urn:form-examples:cardiology-response:flags",
+              "code": "FLAG-001",
+              "display": "Safety flag"
             }
           ]
         },
+        "severity": "low",
         "subject": {
           "reference": "urn:uuid:550e8400-e29b-41d4-a716-446655440000"
         },
-        "encounter": {
-          "reference": "Encounter/bb0e8400-e29b-41d4-a716-446655440006"
-        },
-        "effectiveDateTime": "2026-04-09T10:00:00+00:00",
-        "component": [
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:cardiology-response",
-                  "code": "deleted_at",
-                  "display": "Deleted At"
-                }
-              ]
-            },
-            "valueDateTime": "2026-04-09T10:00:00+00:00"
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:cardiology-response",
-                  "code": "category",
-                  "display": "Category"
-                }
-              ]
-            },
-            "valueCodeableConcept": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:cardiology-response:category",
-                  "code": "critical-finding",
-                  "display": "Critical-Finding"
-                }
-              ]
-            }
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:cardiology-response",
-                  "code": "priority",
-                  "display": "Priority"
-                }
-              ]
-            },
-            "valueCodeableConcept": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:cardiology-response:priority",
-                  "code": "low",
-                  "display": "Low"
-                }
-              ]
-            }
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:cardiology-response",
-                  "code": "description",
-                  "display": "Description"
-                }
-              ]
-            },
-            "valueString": "Example text."
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:cardiology-response",
-                  "code": "suggested_action",
-                  "display": "Suggested Action"
-                }
-              ]
-            },
-            "valueString": ""
-          }
-        ]
+        "identifiedDateTime": "2026-04-09T10:00:00+00:00",
+        "detail": "Clinical flag detected."
       }
     },
     {
       "fullUrl": "urn:uuid:990e8400-e29b-41d4-a716-446655440004",
       "resource": {
-        "resourceType": "Observation",
+        "resourceType": "DetectedIssue",
         "id": "990e8400-e29b-41d4-a716-446655440004",
         "meta": {
           "profile": [
-            "http://hl7.org/fhir/StructureDefinition/Observation"
+            "http://hl7.org/fhir/StructureDefinition/DetectedIssue"
           ],
           "lastUpdated": "2026-04-09T10:00:00+00:00"
         },
@@ -739,9 +139,9 @@
           {
             "coding": [
               {
-                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
-                "code": "survey",
-                "display": "Survey"
+                "system": "urn:form-examples:cardiology-response",
+                "code": "grading-fired-rule",
+                "display": "General"
               }
             ]
           }
@@ -749,77 +149,18 @@
         "code": {
           "coding": [
             {
-              "system": "urn:form-examples:cardiology-response",
-              "code": "cardiology_response_grade_rule",
-              "display": "Cardiology Response Grade Rule"
+              "system": "urn:form-examples:cardiology-response:rules",
+              "code": "RULE-001",
+              "display": "Example grading rule"
             }
           ]
         },
+        "severity": "moderate",
         "subject": {
           "reference": "urn:uuid:550e8400-e29b-41d4-a716-446655440000"
         },
-        "encounter": {
-          "reference": "Encounter/bb0e8400-e29b-41d4-a716-446655440006"
-        },
-        "effectiveDateTime": "2026-04-09T10:00:00+00:00",
-        "component": [
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:cardiology-response",
-                  "code": "deleted_at",
-                  "display": "Deleted At"
-                }
-              ]
-            },
-            "valueDateTime": "2026-04-09T10:00:00+00:00"
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:cardiology-response",
-                  "code": "axis",
-                  "display": "Axis"
-                }
-              ]
-            },
-            "valueCodeableConcept": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:cardiology-response:axis",
-                  "code": "classification",
-                  "display": "Classification"
-                }
-              ]
-            }
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:cardiology-response",
-                  "code": "category",
-                  "display": "Category"
-                }
-              ]
-            },
-            "valueString": "General"
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:cardiology-response",
-                  "code": "description",
-                  "display": "Description"
-                }
-              ]
-            },
-            "valueString": "Example text."
-          }
-        ]
+        "identifiedDateTime": "2026-04-09T10:00:00+00:00",
+        "detail": "Example text."
       }
     },
     {
@@ -858,7 +199,7 @@
           "reference": "urn:uuid:550e8400-e29b-41d4-a716-446655440000"
         },
         "encounter": {
-          "reference": "Encounter/bb0e8400-e29b-41d4-a716-446655440006"
+          "reference": "urn:uuid:770e8400-e29b-41d4-a716-446655440002"
         },
         "effectiveDateTime": "2026-04-09T10:00:00+00:00",
         "component": [

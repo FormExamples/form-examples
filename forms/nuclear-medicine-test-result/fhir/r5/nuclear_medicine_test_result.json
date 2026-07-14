@@ -1,384 +1,40 @@
 {
-  "resourceType": "Observation",
+  "resourceType": "Encounter",
   "id": "770e8400-e29b-41d4-a716-446655440002",
   "meta": {
     "profile": [
-      "http://hl7.org/fhir/StructureDefinition/Observation"
+      "http://hl7.org/fhir/StructureDefinition/Encounter"
     ],
     "lastUpdated": "2026-04-09T10:00:00+00:00"
   },
-  "status": "final",
-  "category": [
+  "status": "planned",
+  "class": [
     {
       "coding": [
         {
-          "system": "http://terminology.hl7.org/CodeSystem/observation-category",
-          "code": "survey",
-          "display": "Survey"
+          "system": "http://terminology.hl7.org/CodeSystem/v3-ActCode",
+          "code": "AMB",
+          "display": "ambulatory"
         }
       ]
     }
   ],
-  "code": {
-    "coding": [
-      {
-        "system": "urn:form-examples:nuclear-medicine-test-result",
-        "code": "nuclear_medicine_test_result",
-        "display": "Nuclear Medicine Test Result"
-      }
-    ]
-  },
+  "type": [
+    {
+      "coding": [
+        {
+          "system": "http://snomed.info/sct",
+          "code": "185349003",
+          "display": "Encounter for check up"
+        }
+      ],
+      "text": "Nuclear Medicine Test Result"
+    }
+  ],
   "subject": {
     "reference": "Patient/550e8400-e29b-41d4-a716-446655440000"
   },
-  "encounter": {
-    "reference": "Encounter/bb0e8400-e29b-41d4-a716-446655440006"
-  },
-  "effectiveDateTime": "2026-04-09T10:00:00+00:00",
-  "component": [
-    {
-      "code": {
-        "coding": [
-          {
-            "system": "urn:form-examples:nuclear-medicine-test-result",
-            "code": "deleted_at",
-            "display": "Deleted At"
-          }
-        ]
-      },
-      "valueDateTime": "2026-04-09T10:00:00+00:00"
-    },
-    {
-      "code": {
-        "coding": [
-          {
-            "system": "urn:form-examples:nuclear-medicine-test-result",
-            "code": "originating_request_reference",
-            "display": "Originating Request Reference"
-          }
-        ]
-      },
-      "valueString": ""
-    },
-    {
-      "code": {
-        "coding": [
-          {
-            "system": "urn:form-examples:nuclear-medicine-test-result",
-            "code": "report_status",
-            "display": "Report Status"
-          }
-        ]
-      },
-      "valueCodeableConcept": {
-        "coding": [
-          {
-            "system": "urn:form-examples:nuclear-medicine-test-result:report_status",
-            "code": "preliminary",
-            "display": "Preliminary"
-          }
-        ]
-      }
-    },
-    {
-      "code": {
-        "coding": [
-          {
-            "system": "urn:form-examples:nuclear-medicine-test-result",
-            "code": "performed_date",
-            "display": "Performed Date"
-          }
-        ]
-      },
-      "valueDateTime": "2026-01-15"
-    },
-    {
-      "code": {
-        "coding": [
-          {
-            "system": "urn:form-examples:nuclear-medicine-test-result",
-            "code": "reported_date",
-            "display": "Reported Date"
-          }
-        ]
-      },
-      "valueDateTime": "2026-01-15"
-    },
-    {
-      "code": {
-        "coding": [
-          {
-            "system": "urn:form-examples:nuclear-medicine-test-result",
-            "code": "scan_type",
-            "display": "Scan Type"
-          }
-        ]
-      },
-      "valueCodeableConcept": {
-        "coding": [
-          {
-            "system": "urn:form-examples:nuclear-medicine-test-result:scan_type",
-            "code": "bone-scan",
-            "display": "Bone-Scan"
-          }
-        ]
-      }
-    },
-    {
-      "code": {
-        "coding": [
-          {
-            "system": "urn:form-examples:nuclear-medicine-test-result",
-            "code": "radiopharmaceutical",
-            "display": "Radiopharmaceutical"
-          }
-        ]
-      },
-      "valueString": ""
-    },
-    {
-      "code": {
-        "coding": [
-          {
-            "system": "urn:form-examples:nuclear-medicine-test-result",
-            "code": "injected_activity_mbq",
-            "display": "Injected Activity Mbq"
-          }
-        ]
-      },
-      "valueQuantity": {
-        "value": 0.0
-      }
-    },
-    {
-      "code": {
-        "coding": [
-          {
-            "system": "urn:form-examples:nuclear-medicine-test-result",
-            "code": "examination_adequacy",
-            "display": "Examination Adequacy"
-          }
-        ]
-      },
-      "valueCodeableConcept": {
-        "coding": [
-          {
-            "system": "urn:form-examples:nuclear-medicine-test-result:examination_adequacy",
-            "code": "adequate",
-            "display": "Adequate"
-          }
-        ]
-      }
-    },
-    {
-      "code": {
-        "coding": [
-          {
-            "system": "urn:form-examples:nuclear-medicine-test-result",
-            "code": "clinical_history",
-            "display": "Clinical History"
-          }
-        ]
-      },
-      "valueString": "Example text."
-    },
-    {
-      "code": {
-        "coding": [
-          {
-            "system": "urn:form-examples:nuclear-medicine-test-result",
-            "code": "comparison_with_previous",
-            "display": "Comparison With Previous"
-          }
-        ]
-      },
-      "valueString": ""
-    },
-    {
-      "code": {
-        "coding": [
-          {
-            "system": "urn:form-examples:nuclear-medicine-test-result",
-            "code": "findings_narrative",
-            "display": "Findings Narrative"
-          }
-        ]
-      },
-      "valueString": "Example text."
-    },
-    {
-      "code": {
-        "coding": [
-          {
-            "system": "urn:form-examples:nuclear-medicine-test-result",
-            "code": "abnormal_uptake",
-            "display": "Abnormal Uptake"
-          }
-        ]
-      },
-      "valueBoolean": true
-    },
-    {
-      "code": {
-        "coding": [
-          {
-            "system": "urn:form-examples:nuclear-medicine-test-result",
-            "code": "metastatic_pattern",
-            "display": "Metastatic Pattern"
-          }
-        ]
-      },
-      "valueBoolean": true
-    },
-    {
-      "code": {
-        "coding": [
-          {
-            "system": "urn:form-examples:nuclear-medicine-test-result",
-            "code": "perfusion_defect",
-            "display": "Perfusion Defect"
-          }
-        ]
-      },
-      "valueBoolean": true
-    },
-    {
-      "code": {
-        "coding": [
-          {
-            "system": "urn:form-examples:nuclear-medicine-test-result",
-            "code": "photopenic_area",
-            "display": "Photopenic Area"
-          }
-        ]
-      },
-      "valueBoolean": true
-    },
-    {
-      "code": {
-        "coding": [
-          {
-            "system": "urn:form-examples:nuclear-medicine-test-result",
-            "code": "no_significant_abnormality",
-            "display": "No Significant Abnormality"
-          }
-        ]
-      },
-      "valueBoolean": true
-    },
-    {
-      "code": {
-        "coding": [
-          {
-            "system": "urn:form-examples:nuclear-medicine-test-result",
-            "code": "incidental_finding",
-            "display": "Incidental Finding"
-          }
-        ]
-      },
-      "valueBoolean": true
-    },
-    {
-      "code": {
-        "coding": [
-          {
-            "system": "urn:form-examples:nuclear-medicine-test-result",
-            "code": "ejection_fraction_percent",
-            "display": "Ejection Fraction Percent"
-          }
-        ]
-      },
-      "valueQuantity": {
-        "value": 0.0
-      }
-    },
-    {
-      "code": {
-        "coding": [
-          {
-            "system": "urn:form-examples:nuclear-medicine-test-result",
-            "code": "split_function_left_percent",
-            "display": "Split Function Left Percent"
-          }
-        ]
-      },
-      "valueQuantity": {
-        "value": 0.0
-      }
-    },
-    {
-      "code": {
-        "coding": [
-          {
-            "system": "urn:form-examples:nuclear-medicine-test-result",
-            "code": "split_function_right_percent",
-            "display": "Split Function Right Percent"
-          }
-        ]
-      },
-      "valueQuantity": {
-        "value": 0.0
-      }
-    },
-    {
-      "code": {
-        "coding": [
-          {
-            "system": "urn:form-examples:nuclear-medicine-test-result",
-            "code": "impression",
-            "display": "Impression"
-          }
-        ]
-      },
-      "valueString": "Example text."
-    },
-    {
-      "code": {
-        "coding": [
-          {
-            "system": "urn:form-examples:nuclear-medicine-test-result",
-            "code": "reporting_category",
-            "display": "Reporting Category"
-          }
-        ]
-      },
-      "valueString": "General"
-    },
-    {
-      "code": {
-        "coding": [
-          {
-            "system": "urn:form-examples:nuclear-medicine-test-result",
-            "code": "recommended_follow_up",
-            "display": "Recommended Follow Up"
-          }
-        ]
-      },
-      "valueString": ""
-    },
-    {
-      "code": {
-        "coding": [
-          {
-            "system": "urn:form-examples:nuclear-medicine-test-result",
-            "code": "critical_result_communicated",
-            "display": "Critical Result Communicated"
-          }
-        ]
-      },
-      "valueBoolean": true
-    },
-    {
-      "code": {
-        "coding": [
-          {
-            "system": "urn:form-examples:nuclear-medicine-test-result",
-            "code": "reported_to",
-            "display": "Reported To"
-          }
-        ]
-      },
-      "valueString": ""
-    }
-  ]
+  "actualPeriod": {
+    "start": "2026-04-09T10:00:00+00:00"
+  }
 }

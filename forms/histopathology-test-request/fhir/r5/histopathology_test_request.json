@@ -1,340 +1,40 @@
 {
-  "resourceType": "Observation",
+  "resourceType": "Encounter",
   "id": "770e8400-e29b-41d4-a716-446655440002",
   "meta": {
     "profile": [
-      "http://hl7.org/fhir/StructureDefinition/Observation"
+      "http://hl7.org/fhir/StructureDefinition/Encounter"
     ],
     "lastUpdated": "2026-04-09T10:00:00+00:00"
   },
-  "status": "final",
-  "category": [
+  "status": "planned",
+  "class": [
     {
       "coding": [
         {
-          "system": "http://terminology.hl7.org/CodeSystem/observation-category",
-          "code": "survey",
-          "display": "Survey"
+          "system": "http://terminology.hl7.org/CodeSystem/v3-ActCode",
+          "code": "AMB",
+          "display": "ambulatory"
         }
       ]
     }
   ],
-  "code": {
-    "coding": [
-      {
-        "system": "urn:form-examples:histopathology-test-request",
-        "code": "histopathology_test_request",
-        "display": "Histopathology Test Request"
-      }
-    ]
-  },
+  "type": [
+    {
+      "coding": [
+        {
+          "system": "http://snomed.info/sct",
+          "code": "185349003",
+          "display": "Encounter for check up"
+        }
+      ],
+      "text": "Histopathology Test Request"
+    }
+  ],
   "subject": {
     "reference": "Patient/550e8400-e29b-41d4-a716-446655440000"
   },
-  "encounter": {
-    "reference": "Encounter/bb0e8400-e29b-41d4-a716-446655440006"
-  },
-  "effectiveDateTime": "2026-04-09T10:00:00+00:00",
-  "component": [
-    {
-      "code": {
-        "coding": [
-          {
-            "system": "urn:form-examples:histopathology-test-request",
-            "code": "deleted_at",
-            "display": "Deleted At"
-          }
-        ]
-      },
-      "valueDateTime": "2026-04-09T10:00:00+00:00"
-    },
-    {
-      "code": {
-        "coding": [
-          {
-            "system": "urn:form-examples:histopathology-test-request",
-            "code": "status",
-            "display": "Status"
-          }
-        ]
-      },
-      "valueCodeableConcept": {
-        "coding": [
-          {
-            "system": "urn:form-examples:histopathology-test-request:status",
-            "code": "draft",
-            "display": "Draft"
-          }
-        ]
-      }
-    },
-    {
-      "code": {
-        "coding": [
-          {
-            "system": "urn:form-examples:histopathology-test-request",
-            "code": "site_name",
-            "display": "Site Name"
-          }
-        ]
-      },
-      "valueString": "Example"
-    },
-    {
-      "code": {
-        "coding": [
-          {
-            "system": "urn:form-examples:histopathology-test-request",
-            "code": "setting",
-            "display": "Setting"
-          }
-        ]
-      },
-      "valueCodeableConcept": {
-        "coding": [
-          {
-            "system": "urn:form-examples:histopathology-test-request:setting",
-            "code": "outpatient",
-            "display": "Outpatient"
-          }
-        ]
-      }
-    },
-    {
-      "code": {
-        "coding": [
-          {
-            "system": "urn:form-examples:histopathology-test-request",
-            "code": "referral_date",
-            "display": "Referral Date"
-          }
-        ]
-      },
-      "valueDateTime": "2026-01-15"
-    },
-    {
-      "code": {
-        "coding": [
-          {
-            "system": "urn:form-examples:histopathology-test-request",
-            "code": "requested_by_date",
-            "display": "Requested By Date"
-          }
-        ]
-      },
-      "valueDateTime": "2026-01-15"
-    },
-    {
-      "code": {
-        "coding": [
-          {
-            "system": "urn:form-examples:histopathology-test-request",
-            "code": "specimen_type",
-            "display": "Specimen Type"
-          }
-        ]
-      },
-      "valueCodeableConcept": {
-        "coding": [
-          {
-            "system": "urn:form-examples:histopathology-test-request:specimen_type",
-            "code": "biopsy",
-            "display": "Biopsy"
-          }
-        ]
-      }
-    },
-    {
-      "code": {
-        "coding": [
-          {
-            "system": "urn:form-examples:histopathology-test-request",
-            "code": "specimen_site",
-            "display": "Specimen Site"
-          }
-        ]
-      },
-      "valueString": "Example location"
-    },
-    {
-      "code": {
-        "coding": [
-          {
-            "system": "urn:form-examples:histopathology-test-request",
-            "code": "number_of_specimens",
-            "display": "Number Of Specimens"
-          }
-        ]
-      },
-      "valueInteger": 2
-    },
-    {
-      "code": {
-        "coding": [
-          {
-            "system": "urn:form-examples:histopathology-test-request",
-            "code": "fixative",
-            "display": "Fixative"
-          }
-        ]
-      },
-      "valueCodeableConcept": {
-        "coding": [
-          {
-            "system": "urn:form-examples:histopathology-test-request:fixative",
-            "code": "formalin",
-            "display": "Formalin"
-          }
-        ]
-      }
-    },
-    {
-      "code": {
-        "coding": [
-          {
-            "system": "urn:form-examples:histopathology-test-request",
-            "code": "primary_indication",
-            "display": "Primary Indication"
-          }
-        ]
-      },
-      "valueCodeableConcept": {
-        "coding": [
-          {
-            "system": "urn:form-examples:histopathology-test-request:primary_indication",
-            "code": "suspected-malignancy",
-            "display": "Suspected-Malignancy"
-          }
-        ]
-      }
-    },
-    {
-      "code": {
-        "coding": [
-          {
-            "system": "urn:form-examples:histopathology-test-request",
-            "code": "clinical_question",
-            "display": "Clinical Question"
-          }
-        ]
-      },
-      "valueString": ""
-    },
-    {
-      "code": {
-        "coding": [
-          {
-            "system": "urn:form-examples:histopathology-test-request",
-            "code": "clinical_details",
-            "display": "Clinical Details"
-          }
-        ]
-      },
-      "valueString": "Example text."
-    },
-    {
-      "code": {
-        "coding": [
-          {
-            "system": "urn:form-examples:histopathology-test-request",
-            "code": "provisional_diagnosis",
-            "display": "Provisional Diagnosis"
-          }
-        ]
-      },
-      "valueString": "Under investigation"
-    },
-    {
-      "code": {
-        "coding": [
-          {
-            "system": "urn:form-examples:histopathology-test-request",
-            "code": "previous_histology",
-            "display": "Previous Histology"
-          }
-        ]
-      },
-      "valueString": ""
-    },
-    {
-      "code": {
-        "coding": [
-          {
-            "system": "urn:form-examples:histopathology-test-request",
-            "code": "urgent_frozen_section",
-            "display": "Urgent Frozen Section"
-          }
-        ]
-      },
-      "valueBoolean": true
-    },
-    {
-      "code": {
-        "coding": [
-          {
-            "system": "urn:form-examples:histopathology-test-request",
-            "code": "two_week_wait",
-            "display": "Two Week Wait"
-          }
-        ]
-      },
-      "valueBoolean": true
-    },
-    {
-      "code": {
-        "coding": [
-          {
-            "system": "urn:form-examples:histopathology-test-request",
-            "code": "urgency",
-            "display": "Urgency"
-          }
-        ]
-      },
-      "valueCodeableConcept": {
-        "coding": [
-          {
-            "system": "urn:form-examples:histopathology-test-request:urgency",
-            "code": "routine",
-            "display": "Routine"
-          }
-        ]
-      }
-    },
-    {
-      "code": {
-        "coding": [
-          {
-            "system": "urn:form-examples:histopathology-test-request",
-            "code": "supervising_consultant",
-            "display": "Supervising Consultant"
-          }
-        ]
-      },
-      "valueString": ""
-    },
-    {
-      "code": {
-        "coding": [
-          {
-            "system": "urn:form-examples:histopathology-test-request",
-            "code": "requester_contact",
-            "display": "Requester Contact"
-          }
-        ]
-      },
-      "valueString": ""
-    },
-    {
-      "code": {
-        "coding": [
-          {
-            "system": "urn:form-examples:histopathology-test-request",
-            "code": "notes",
-            "display": "Notes"
-          }
-        ]
-      },
-      "valueString": "Example text."
-    }
-  ]
+  "actualPeriod": {
+    "start": "2026-04-09T10:00:00+00:00"
+  }
 }

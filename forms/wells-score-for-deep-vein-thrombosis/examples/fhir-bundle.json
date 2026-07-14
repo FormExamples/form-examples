@@ -52,7 +52,7 @@
           "reference": "urn:uuid:550e8400-e29b-41d4-a716-446655440000"
         },
         "encounter": {
-          "reference": "Encounter/bb0e8400-e29b-41d4-a716-446655440006"
+          "reference": "urn:uuid:770e8400-e29b-41d4-a716-446655440002"
         },
         "effectiveDateTime": "2026-04-09T10:00:00+00:00",
         "component": [
@@ -237,513 +237,78 @@
     {
       "fullUrl": "urn:uuid:770e8400-e29b-41d4-a716-446655440002",
       "resource": {
-        "resourceType": "Observation",
+        "resourceType": "Encounter",
         "id": "770e8400-e29b-41d4-a716-446655440002",
         "meta": {
           "profile": [
-            "http://hl7.org/fhir/StructureDefinition/Observation"
+            "http://hl7.org/fhir/StructureDefinition/Encounter"
           ],
           "lastUpdated": "2026-04-09T10:00:00+00:00"
         },
-        "status": "final",
-        "category": [
+        "status": "planned",
+        "class": [
           {
             "coding": [
               {
-                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
-                "code": "survey",
-                "display": "Survey"
+                "system": "http://terminology.hl7.org/CodeSystem/v3-ActCode",
+                "code": "AMB",
+                "display": "ambulatory"
               }
             ]
           }
         ],
-        "code": {
-          "coding": [
-            {
-              "system": "urn:form-examples:wells-score-for-deep-vein-thrombosis",
-              "code": "wells_score_for_deep_vein_thrombosis",
-              "display": "Wells Score For Deep Vein Thrombosis"
-            }
-          ]
-        },
+        "type": [
+          {
+            "coding": [
+              {
+                "system": "http://snomed.info/sct",
+                "code": "185349003",
+                "display": "Encounter for check up"
+              }
+            ],
+            "text": "Wells Score For Deep Vein Thrombosis"
+          }
+        ],
         "subject": {
           "reference": "urn:uuid:550e8400-e29b-41d4-a716-446655440000"
         },
-        "encounter": {
-          "reference": "Encounter/bb0e8400-e29b-41d4-a716-446655440006"
-        },
-        "effectiveDateTime": "2026-04-09T10:00:00+00:00",
-        "component": [
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:wells-score-for-deep-vein-thrombosis",
-                  "code": "deleted_at",
-                  "display": "Deleted At"
-                }
-              ]
-            },
-            "valueDateTime": "2026-04-09T10:00:00+00:00"
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:wells-score-for-deep-vein-thrombosis",
-                  "code": "status",
-                  "display": "Status"
-                }
-              ]
-            },
-            "valueCodeableConcept": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:wells-score-for-deep-vein-thrombosis:status",
-                  "code": "draft",
-                  "display": "Draft"
-                }
-              ]
-            }
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:wells-score-for-deep-vein-thrombosis",
-                  "code": "patient_identifier",
-                  "display": "Patient Identifier"
-                }
-              ]
-            },
-            "valueString": ""
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:wells-score-for-deep-vein-thrombosis",
-                  "code": "assessed_at",
-                  "display": "Assessed At"
-                }
-              ]
-            },
-            "valueDateTime": "2026-04-09T10:00:00+00:00"
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:wells-score-for-deep-vein-thrombosis",
-                  "code": "care_setting",
-                  "display": "Care Setting"
-                }
-              ]
-            },
-            "valueCodeableConcept": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:wells-score-for-deep-vein-thrombosis:care_setting",
-                  "code": "emergency-department",
-                  "display": "Emergency-Department"
-                }
-              ]
-            }
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:wells-score-for-deep-vein-thrombosis",
-                  "code": "age_band",
-                  "display": "Age Band"
-                }
-              ]
-            },
-            "valueCodeableConcept": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:wells-score-for-deep-vein-thrombosis:age_band",
-                  "code": "18-39",
-                  "display": "18-39"
-                }
-              ]
-            }
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:wells-score-for-deep-vein-thrombosis",
-                  "code": "symptomatic_leg",
-                  "display": "Symptomatic Leg"
-                }
-              ]
-            },
-            "valueCodeableConcept": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:wells-score-for-deep-vein-thrombosis:symptomatic_leg",
-                  "code": "left",
-                  "display": "Left"
-                }
-              ]
-            }
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:wells-score-for-deep-vein-thrombosis",
-                  "code": "active_cancer",
-                  "display": "Active Cancer"
-                }
-              ]
-            },
-            "valueCodeableConcept": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:wells-score-for-deep-vein-thrombosis:active_cancer",
-                  "code": "yes",
-                  "display": "Yes"
-                }
-              ]
-            }
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:wells-score-for-deep-vein-thrombosis",
-                  "code": "paralysis_or_immobilisation",
-                  "display": "Paralysis Or Immobilisation"
-                }
-              ]
-            },
-            "valueCodeableConcept": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:wells-score-for-deep-vein-thrombosis:paralysis_or_immobilisation",
-                  "code": "yes",
-                  "display": "Yes"
-                }
-              ]
-            }
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:wells-score-for-deep-vein-thrombosis",
-                  "code": "recently_bedridden_or_surgery",
-                  "display": "Recently Bedridden Or Surgery"
-                }
-              ]
-            },
-            "valueCodeableConcept": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:wells-score-for-deep-vein-thrombosis:recently_bedridden_or_surgery",
-                  "code": "yes",
-                  "display": "Yes"
-                }
-              ]
-            }
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:wells-score-for-deep-vein-thrombosis",
-                  "code": "localised_tenderness",
-                  "display": "Localised Tenderness"
-                }
-              ]
-            },
-            "valueCodeableConcept": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:wells-score-for-deep-vein-thrombosis:localised_tenderness",
-                  "code": "yes",
-                  "display": "Yes"
-                }
-              ]
-            }
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:wells-score-for-deep-vein-thrombosis",
-                  "code": "entire_leg_swollen",
-                  "display": "Entire Leg Swollen"
-                }
-              ]
-            },
-            "valueCodeableConcept": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:wells-score-for-deep-vein-thrombosis:entire_leg_swollen",
-                  "code": "yes",
-                  "display": "Yes"
-                }
-              ]
-            }
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:wells-score-for-deep-vein-thrombosis",
-                  "code": "calf_swelling_over_3cm",
-                  "display": "Calf Swelling Over 3Cm"
-                }
-              ]
-            },
-            "valueCodeableConcept": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:wells-score-for-deep-vein-thrombosis:calf_swelling_over_3cm",
-                  "code": "yes",
-                  "display": "Yes"
-                }
-              ]
-            }
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:wells-score-for-deep-vein-thrombosis",
-                  "code": "pitting_oedema",
-                  "display": "Pitting Oedema"
-                }
-              ]
-            },
-            "valueCodeableConcept": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:wells-score-for-deep-vein-thrombosis:pitting_oedema",
-                  "code": "yes",
-                  "display": "Yes"
-                }
-              ]
-            }
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:wells-score-for-deep-vein-thrombosis",
-                  "code": "collateral_superficial_veins",
-                  "display": "Collateral Superficial Veins"
-                }
-              ]
-            },
-            "valueCodeableConcept": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:wells-score-for-deep-vein-thrombosis:collateral_superficial_veins",
-                  "code": "yes",
-                  "display": "Yes"
-                }
-              ]
-            }
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:wells-score-for-deep-vein-thrombosis",
-                  "code": "previously_documented_dvt",
-                  "display": "Previously Documented Dvt"
-                }
-              ]
-            },
-            "valueCodeableConcept": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:wells-score-for-deep-vein-thrombosis:previously_documented_dvt",
-                  "code": "yes",
-                  "display": "Yes"
-                }
-              ]
-            }
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:wells-score-for-deep-vein-thrombosis",
-                  "code": "alternative_diagnosis_as_likely",
-                  "display": "Alternative Diagnosis As Likely"
-                }
-              ]
-            },
-            "valueCodeableConcept": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:wells-score-for-deep-vein-thrombosis:alternative_diagnosis_as_likely",
-                  "code": "yes",
-                  "display": "Yes"
-                }
-              ]
-            }
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:wells-score-for-deep-vein-thrombosis",
-                  "code": "clinical_notes",
-                  "display": "Clinical Notes"
-                }
-              ]
-            },
-            "valueString": "Example text."
-          }
-        ]
+        "actualPeriod": {
+          "start": "2026-04-09T10:00:00+00:00"
+        }
       }
     },
     {
       "fullUrl": "urn:uuid:880e8400-e29b-41d4-a716-446655440003",
       "resource": {
-        "resourceType": "Observation",
+        "resourceType": "ClinicalImpression",
         "id": "880e8400-e29b-41d4-a716-446655440003",
         "meta": {
           "profile": [
-            "http://hl7.org/fhir/StructureDefinition/Observation"
+            "http://hl7.org/fhir/StructureDefinition/ClinicalImpression"
           ],
           "lastUpdated": "2026-04-09T10:00:00+00:00"
         },
-        "status": "final",
-        "category": [
-          {
-            "coding": [
-              {
-                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
-                "code": "survey",
-                "display": "Survey"
-              }
-            ]
-          }
-        ],
-        "code": {
-          "coding": [
-            {
-              "system": "urn:form-examples:wells-score-for-deep-vein-thrombosis",
-              "code": "wells_score_for_deep_vein_thrombosis_grade",
-              "display": "Wells Score For Deep Vein Thrombosis Grade"
-            }
-          ]
-        },
+        "status": "completed",
         "subject": {
           "reference": "urn:uuid:550e8400-e29b-41d4-a716-446655440000"
         },
         "encounter": {
-          "reference": "Encounter/bb0e8400-e29b-41d4-a716-446655440006"
+          "reference": "urn:uuid:770e8400-e29b-41d4-a716-446655440002"
         },
         "effectiveDateTime": "2026-04-09T10:00:00+00:00",
-        "component": [
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:wells-score-for-deep-vein-thrombosis",
-                  "code": "deleted_at",
-                  "display": "Deleted At"
-                }
-              ]
-            },
-            "valueDateTime": "2026-04-09T10:00:00+00:00"
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:wells-score-for-deep-vein-thrombosis",
-                  "code": "wells_score",
-                  "display": "Wells Score"
-                }
-              ]
-            },
-            "valueInteger": 5
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:wells-score-for-deep-vein-thrombosis",
-                  "code": "two_level_band",
-                  "display": "Two Level Band"
-                }
-              ]
-            },
-            "valueCodeableConcept": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:wells-score-for-deep-vein-thrombosis:two_level_band",
-                  "code": "likely",
-                  "display": "Likely"
-                }
-              ]
-            }
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:wells-score-for-deep-vein-thrombosis",
-                  "code": "three_level_band",
-                  "display": "Three Level Band"
-                }
-              ]
-            },
-            "valueCodeableConcept": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:wells-score-for-deep-vein-thrombosis:three_level_band",
-                  "code": "low",
-                  "display": "Low"
-                }
-              ]
-            }
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:wells-score-for-deep-vein-thrombosis",
-                  "code": "recommended_pathway",
-                  "display": "Recommended Pathway"
-                }
-              ]
-            },
-            "valueString": ""
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:wells-score-for-deep-vein-thrombosis",
-                  "code": "graded_at",
-                  "display": "Graded At"
-                }
-              ]
-            },
-            "valueDateTime": "2026-04-09T10:00:00+00:00"
-          }
-        ]
+        "date": "2026-04-09T10:00:00+00:00",
+        "description": "Wells Score For Deep Vein Thrombosis grading result",
+        "summary": "Deleted At: 2026-04-09T10:00:00+00:00; Wells Score: 5; Two Level Band: likely; Three Level Band: low; Recommended Pathway: "
       }
     },
     {
       "fullUrl": "urn:uuid:aa0e8400-e29b-41d4-a716-446655440005",
       "resource": {
-        "resourceType": "Observation",
+        "resourceType": "DetectedIssue",
         "id": "aa0e8400-e29b-41d4-a716-446655440005",
         "meta": {
           "profile": [
-            "http://hl7.org/fhir/StructureDefinition/Observation"
+            "http://hl7.org/fhir/StructureDefinition/DetectedIssue"
           ],
           "lastUpdated": "2026-04-09T10:00:00+00:00"
         },
@@ -752,9 +317,9 @@
           {
             "coding": [
               {
-                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
-                "code": "survey",
-                "display": "Survey"
+                "system": "urn:form-examples:wells-score-for-deep-vein-thrombosis",
+                "code": "grading-additional-flag",
+                "display": "dvt-likely-ultrasound"
               }
             ]
           }
@@ -762,107 +327,28 @@
         "code": {
           "coding": [
             {
-              "system": "urn:form-examples:wells-score-for-deep-vein-thrombosis",
-              "code": "wells_score_for_deep_vein_thrombosis_grade_flag",
-              "display": "Wells Score For Deep Vein Thrombosis Grade Flag"
+              "system": "urn:form-examples:wells-score-for-deep-vein-thrombosis:flags",
+              "code": "FLAG-001",
+              "display": "Safety flag"
             }
           ]
         },
+        "severity": "low",
         "subject": {
           "reference": "urn:uuid:550e8400-e29b-41d4-a716-446655440000"
         },
-        "encounter": {
-          "reference": "Encounter/bb0e8400-e29b-41d4-a716-446655440006"
-        },
-        "effectiveDateTime": "2026-04-09T10:00:00+00:00",
-        "component": [
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:wells-score-for-deep-vein-thrombosis",
-                  "code": "deleted_at",
-                  "display": "Deleted At"
-                }
-              ]
-            },
-            "valueDateTime": "2026-04-09T10:00:00+00:00"
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:wells-score-for-deep-vein-thrombosis",
-                  "code": "category",
-                  "display": "Category"
-                }
-              ]
-            },
-            "valueCodeableConcept": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:wells-score-for-deep-vein-thrombosis:category",
-                  "code": "dvt-likely-ultrasound",
-                  "display": "Dvt-Likely-Ultrasound"
-                }
-              ]
-            }
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:wells-score-for-deep-vein-thrombosis",
-                  "code": "priority",
-                  "display": "Priority"
-                }
-              ]
-            },
-            "valueCodeableConcept": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:wells-score-for-deep-vein-thrombosis:priority",
-                  "code": "low",
-                  "display": "Low"
-                }
-              ]
-            }
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:wells-score-for-deep-vein-thrombosis",
-                  "code": "description",
-                  "display": "Description"
-                }
-              ]
-            },
-            "valueString": "Example text."
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:wells-score-for-deep-vein-thrombosis",
-                  "code": "suggested_action",
-                  "display": "Suggested Action"
-                }
-              ]
-            },
-            "valueString": ""
-          }
-        ]
+        "identifiedDateTime": "2026-04-09T10:00:00+00:00",
+        "detail": "Clinical flag detected."
       }
     },
     {
       "fullUrl": "urn:uuid:990e8400-e29b-41d4-a716-446655440004",
       "resource": {
-        "resourceType": "Observation",
+        "resourceType": "DetectedIssue",
         "id": "990e8400-e29b-41d4-a716-446655440004",
         "meta": {
           "profile": [
-            "http://hl7.org/fhir/StructureDefinition/Observation"
+            "http://hl7.org/fhir/StructureDefinition/DetectedIssue"
           ],
           "lastUpdated": "2026-04-09T10:00:00+00:00"
         },
@@ -871,9 +357,9 @@
           {
             "coding": [
               {
-                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
-                "code": "survey",
-                "display": "Survey"
+                "system": "urn:form-examples:wells-score-for-deep-vein-thrombosis",
+                "code": "grading-fired-rule",
+                "display": "General"
               }
             ]
           }
@@ -881,109 +367,18 @@
         "code": {
           "coding": [
             {
-              "system": "urn:form-examples:wells-score-for-deep-vein-thrombosis",
-              "code": "wells_score_for_deep_vein_thrombosis_grade_rule",
-              "display": "Wells Score For Deep Vein Thrombosis Grade Rule"
+              "system": "urn:form-examples:wells-score-for-deep-vein-thrombosis:rules",
+              "code": "RULE-001",
+              "display": "Example grading rule"
             }
           ]
         },
+        "severity": "moderate",
         "subject": {
           "reference": "urn:uuid:550e8400-e29b-41d4-a716-446655440000"
         },
-        "encounter": {
-          "reference": "Encounter/bb0e8400-e29b-41d4-a716-446655440006"
-        },
-        "effectiveDateTime": "2026-04-09T10:00:00+00:00",
-        "component": [
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:wells-score-for-deep-vein-thrombosis",
-                  "code": "deleted_at",
-                  "display": "Deleted At"
-                }
-              ]
-            },
-            "valueDateTime": "2026-04-09T10:00:00+00:00"
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:wells-score-for-deep-vein-thrombosis",
-                  "code": "instrument",
-                  "display": "Instrument"
-                }
-              ]
-            },
-            "valueCodeableConcept": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:wells-score-for-deep-vein-thrombosis:instrument",
-                  "code": "criterion",
-                  "display": "Criterion"
-                }
-              ]
-            }
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:wells-score-for-deep-vein-thrombosis",
-                  "code": "points",
-                  "display": "Points"
-                }
-              ]
-            },
-            "valueInteger": 1
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:wells-score-for-deep-vein-thrombosis",
-                  "code": "band",
-                  "display": "Band"
-                }
-              ]
-            },
-            "valueCodeableConcept": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:wells-score-for-deep-vein-thrombosis:band",
-                  "code": "likely",
-                  "display": "Likely"
-                }
-              ]
-            }
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:wells-score-for-deep-vein-thrombosis",
-                  "code": "category",
-                  "display": "Category"
-                }
-              ]
-            },
-            "valueString": "General"
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:wells-score-for-deep-vein-thrombosis",
-                  "code": "description",
-                  "display": "Description"
-                }
-              ]
-            },
-            "valueString": "Example text."
-          }
-        ]
+        "identifiedDateTime": "2026-04-09T10:00:00+00:00",
+        "detail": "Example text."
       }
     }
   ]

@@ -19,1065 +19,78 @@
     {
       "fullUrl": "urn:uuid:770e8400-e29b-41d4-a716-446655440002",
       "resource": {
-        "resourceType": "Observation",
+        "resourceType": "Encounter",
         "id": "770e8400-e29b-41d4-a716-446655440002",
         "meta": {
           "profile": [
-            "http://hl7.org/fhir/StructureDefinition/Observation"
+            "http://hl7.org/fhir/StructureDefinition/Encounter"
           ],
           "lastUpdated": "2026-04-09T10:00:00+00:00"
         },
-        "status": "final",
-        "category": [
+        "status": "planned",
+        "class": [
           {
             "coding": [
               {
-                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
-                "code": "survey",
-                "display": "Survey"
+                "system": "http://terminology.hl7.org/CodeSystem/v3-ActCode",
+                "code": "AMB",
+                "display": "ambulatory"
               }
             ]
           }
         ],
-        "code": {
-          "coding": [
-            {
-              "system": "urn:form-examples:caprini-venous-thromboembolism-risk-assessment",
-              "code": "caprini_venous_thromboembolism_risk_assessment",
-              "display": "Caprini Venous Thromboembolism Risk Assessment"
-            }
-          ]
-        },
+        "type": [
+          {
+            "coding": [
+              {
+                "system": "http://snomed.info/sct",
+                "code": "185349003",
+                "display": "Encounter for check up"
+              }
+            ],
+            "text": "Caprini Venous Thromboembolism Risk Assessment"
+          }
+        ],
         "subject": {
           "reference": "urn:uuid:550e8400-e29b-41d4-a716-446655440000"
         },
-        "encounter": {
-          "reference": "Encounter/bb0e8400-e29b-41d4-a716-446655440006"
-        },
-        "effectiveDateTime": "2026-04-09T10:00:00+00:00",
-        "component": [
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:caprini-venous-thromboembolism-risk-assessment",
-                  "code": "deleted_at",
-                  "display": "Deleted At"
-                }
-              ]
-            },
-            "valueDateTime": "2026-04-09T10:00:00+00:00"
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:caprini-venous-thromboembolism-risk-assessment",
-                  "code": "clinician_name",
-                  "display": "Clinician Name"
-                }
-              ]
-            },
-            "valueString": "Example"
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:caprini-venous-thromboembolism-risk-assessment",
-                  "code": "clinician_role",
-                  "display": "Clinician Role"
-                }
-              ]
-            },
-            "valueCodeableConcept": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:caprini-venous-thromboembolism-risk-assessment:clinician_role",
-                  "code": "doctor",
-                  "display": "Doctor"
-                }
-              ]
-            }
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:caprini-venous-thromboembolism-risk-assessment",
-                  "code": "assessed_at",
-                  "display": "Assessed At"
-                }
-              ]
-            },
-            "valueDateTime": "2026-04-09T10:00:00+00:00"
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:caprini-venous-thromboembolism-risk-assessment",
-                  "code": "care_setting",
-                  "display": "Care Setting"
-                }
-              ]
-            },
-            "valueCodeableConcept": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:caprini-venous-thromboembolism-risk-assessment:care_setting",
-                  "code": "surgical-ward",
-                  "display": "Surgical-Ward"
-                }
-              ]
-            }
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:caprini-venous-thromboembolism-risk-assessment",
-                  "code": "admission_type",
-                  "display": "Admission Type"
-                }
-              ]
-            },
-            "valueCodeableConcept": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:caprini-venous-thromboembolism-risk-assessment:admission_type",
-                  "code": "surgical",
-                  "display": "Surgical"
-                }
-              ]
-            }
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:caprini-venous-thromboembolism-risk-assessment",
-                  "code": "patient_identifier",
-                  "display": "Patient Identifier"
-                }
-              ]
-            },
-            "valueString": ""
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:caprini-venous-thromboembolism-risk-assessment",
-                  "code": "age_band",
-                  "display": "Age Band"
-                }
-              ]
-            },
-            "valueCodeableConcept": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:caprini-venous-thromboembolism-risk-assessment:age_band",
-                  "code": "under-41",
-                  "display": "Under-41"
-                }
-              ]
-            }
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:caprini-venous-thromboembolism-risk-assessment",
-                  "code": "sex",
-                  "display": "Sex"
-                }
-              ]
-            },
-            "valueCodeableConcept": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:caprini-venous-thromboembolism-risk-assessment:sex",
-                  "code": "female",
-                  "display": "Female"
-                }
-              ]
-            }
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:caprini-venous-thromboembolism-risk-assessment",
-                  "code": "minor_surgery",
-                  "display": "Minor Surgery"
-                }
-              ]
-            },
-            "valueCodeableConcept": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:caprini-venous-thromboembolism-risk-assessment:minor_surgery",
-                  "code": "yes",
-                  "display": "Yes"
-                }
-              ]
-            }
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:caprini-venous-thromboembolism-risk-assessment",
-                  "code": "recent_major_surgery",
-                  "display": "Recent Major Surgery"
-                }
-              ]
-            },
-            "valueCodeableConcept": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:caprini-venous-thromboembolism-risk-assessment:recent_major_surgery",
-                  "code": "yes",
-                  "display": "Yes"
-                }
-              ]
-            }
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:caprini-venous-thromboembolism-risk-assessment",
-                  "code": "varicose_veins",
-                  "display": "Varicose Veins"
-                }
-              ]
-            },
-            "valueCodeableConcept": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:caprini-venous-thromboembolism-risk-assessment:varicose_veins",
-                  "code": "yes",
-                  "display": "Yes"
-                }
-              ]
-            }
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:caprini-venous-thromboembolism-risk-assessment",
-                  "code": "inflammatory_bowel_disease",
-                  "display": "Inflammatory Bowel Disease"
-                }
-              ]
-            },
-            "valueCodeableConcept": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:caprini-venous-thromboembolism-risk-assessment:inflammatory_bowel_disease",
-                  "code": "yes",
-                  "display": "Yes"
-                }
-              ]
-            }
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:caprini-venous-thromboembolism-risk-assessment",
-                  "code": "swollen_legs",
-                  "display": "Swollen Legs"
-                }
-              ]
-            },
-            "valueCodeableConcept": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:caprini-venous-thromboembolism-risk-assessment:swollen_legs",
-                  "code": "yes",
-                  "display": "Yes"
-                }
-              ]
-            }
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:caprini-venous-thromboembolism-risk-assessment",
-                  "code": "obesity",
-                  "display": "Obesity"
-                }
-              ]
-            },
-            "valueCodeableConcept": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:caprini-venous-thromboembolism-risk-assessment:obesity",
-                  "code": "yes",
-                  "display": "Yes"
-                }
-              ]
-            }
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:caprini-venous-thromboembolism-risk-assessment",
-                  "code": "acute_myocardial_infarction",
-                  "display": "Acute Myocardial Infarction"
-                }
-              ]
-            },
-            "valueCodeableConcept": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:caprini-venous-thromboembolism-risk-assessment:acute_myocardial_infarction",
-                  "code": "yes",
-                  "display": "Yes"
-                }
-              ]
-            }
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:caprini-venous-thromboembolism-risk-assessment",
-                  "code": "congestive_heart_failure",
-                  "display": "Congestive Heart Failure"
-                }
-              ]
-            },
-            "valueCodeableConcept": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:caprini-venous-thromboembolism-risk-assessment:congestive_heart_failure",
-                  "code": "yes",
-                  "display": "Yes"
-                }
-              ]
-            }
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:caprini-venous-thromboembolism-risk-assessment",
-                  "code": "sepsis",
-                  "display": "Sepsis"
-                }
-              ]
-            },
-            "valueCodeableConcept": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:caprini-venous-thromboembolism-risk-assessment:sepsis",
-                  "code": "yes",
-                  "display": "Yes"
-                }
-              ]
-            }
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:caprini-venous-thromboembolism-risk-assessment",
-                  "code": "serious_lung_disease",
-                  "display": "Serious Lung Disease"
-                }
-              ]
-            },
-            "valueCodeableConcept": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:caprini-venous-thromboembolism-risk-assessment:serious_lung_disease",
-                  "code": "yes",
-                  "display": "Yes"
-                }
-              ]
-            }
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:caprini-venous-thromboembolism-risk-assessment",
-                  "code": "abnormal_pulmonary_function",
-                  "display": "Abnormal Pulmonary Function"
-                }
-              ]
-            },
-            "valueCodeableConcept": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:caprini-venous-thromboembolism-risk-assessment:abnormal_pulmonary_function",
-                  "code": "yes",
-                  "display": "Yes"
-                }
-              ]
-            }
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:caprini-venous-thromboembolism-risk-assessment",
-                  "code": "medical_patient_bed_rest",
-                  "display": "Medical Patient Bed Rest"
-                }
-              ]
-            },
-            "valueCodeableConcept": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:caprini-venous-thromboembolism-risk-assessment:medical_patient_bed_rest",
-                  "code": "yes",
-                  "display": "Yes"
-                }
-              ]
-            }
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:caprini-venous-thromboembolism-risk-assessment",
-                  "code": "oral_contraceptive_or_hrt",
-                  "display": "Oral Contraceptive Or Hrt"
-                }
-              ]
-            },
-            "valueCodeableConcept": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:caprini-venous-thromboembolism-risk-assessment:oral_contraceptive_or_hrt",
-                  "code": "yes",
-                  "display": "Yes"
-                }
-              ]
-            }
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:caprini-venous-thromboembolism-risk-assessment",
-                  "code": "pregnancy_or_postpartum",
-                  "display": "Pregnancy Or Postpartum"
-                }
-              ]
-            },
-            "valueCodeableConcept": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:caprini-venous-thromboembolism-risk-assessment:pregnancy_or_postpartum",
-                  "code": "yes",
-                  "display": "Yes"
-                }
-              ]
-            }
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:caprini-venous-thromboembolism-risk-assessment",
-                  "code": "adverse_pregnancy_history",
-                  "display": "Adverse Pregnancy History"
-                }
-              ]
-            },
-            "valueCodeableConcept": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:caprini-venous-thromboembolism-risk-assessment:adverse_pregnancy_history",
-                  "code": "yes",
-                  "display": "Yes"
-                }
-              ]
-            }
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:caprini-venous-thromboembolism-risk-assessment",
-                  "code": "arthroscopic_surgery",
-                  "display": "Arthroscopic Surgery"
-                }
-              ]
-            },
-            "valueCodeableConcept": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:caprini-venous-thromboembolism-risk-assessment:arthroscopic_surgery",
-                  "code": "yes",
-                  "display": "Yes"
-                }
-              ]
-            }
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:caprini-venous-thromboembolism-risk-assessment",
-                  "code": "major_open_surgery",
-                  "display": "Major Open Surgery"
-                }
-              ]
-            },
-            "valueCodeableConcept": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:caprini-venous-thromboembolism-risk-assessment:major_open_surgery",
-                  "code": "yes",
-                  "display": "Yes"
-                }
-              ]
-            }
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:caprini-venous-thromboembolism-risk-assessment",
-                  "code": "laparoscopic_surgery",
-                  "display": "Laparoscopic Surgery"
-                }
-              ]
-            },
-            "valueCodeableConcept": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:caprini-venous-thromboembolism-risk-assessment:laparoscopic_surgery",
-                  "code": "yes",
-                  "display": "Yes"
-                }
-              ]
-            }
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:caprini-venous-thromboembolism-risk-assessment",
-                  "code": "malignancy",
-                  "display": "Malignancy"
-                }
-              ]
-            },
-            "valueCodeableConcept": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:caprini-venous-thromboembolism-risk-assessment:malignancy",
-                  "code": "yes",
-                  "display": "Yes"
-                }
-              ]
-            }
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:caprini-venous-thromboembolism-risk-assessment",
-                  "code": "confined_to_bed",
-                  "display": "Confined To Bed"
-                }
-              ]
-            },
-            "valueCodeableConcept": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:caprini-venous-thromboembolism-risk-assessment:confined_to_bed",
-                  "code": "yes",
-                  "display": "Yes"
-                }
-              ]
-            }
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:caprini-venous-thromboembolism-risk-assessment",
-                  "code": "immobilising_cast",
-                  "display": "Immobilising Cast"
-                }
-              ]
-            },
-            "valueCodeableConcept": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:caprini-venous-thromboembolism-risk-assessment:immobilising_cast",
-                  "code": "yes",
-                  "display": "Yes"
-                }
-              ]
-            }
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:caprini-venous-thromboembolism-risk-assessment",
-                  "code": "central_venous_access",
-                  "display": "Central Venous Access"
-                }
-              ]
-            },
-            "valueCodeableConcept": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:caprini-venous-thromboembolism-risk-assessment:central_venous_access",
-                  "code": "yes",
-                  "display": "Yes"
-                }
-              ]
-            }
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:caprini-venous-thromboembolism-risk-assessment",
-                  "code": "history_of_vte",
-                  "display": "History Of Vte"
-                }
-              ]
-            },
-            "valueCodeableConcept": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:caprini-venous-thromboembolism-risk-assessment:history_of_vte",
-                  "code": "yes",
-                  "display": "Yes"
-                }
-              ]
-            }
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:caprini-venous-thromboembolism-risk-assessment",
-                  "code": "family_history_of_thrombosis",
-                  "display": "Family History Of Thrombosis"
-                }
-              ]
-            },
-            "valueCodeableConcept": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:caprini-venous-thromboembolism-risk-assessment:family_history_of_thrombosis",
-                  "code": "yes",
-                  "display": "Yes"
-                }
-              ]
-            }
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:caprini-venous-thromboembolism-risk-assessment",
-                  "code": "factor_v_leiden",
-                  "display": "Factor V Leiden"
-                }
-              ]
-            },
-            "valueCodeableConcept": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:caprini-venous-thromboembolism-risk-assessment:factor_v_leiden",
-                  "code": "yes",
-                  "display": "Yes"
-                }
-              ]
-            }
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:caprini-venous-thromboembolism-risk-assessment",
-                  "code": "prothrombin_20210a",
-                  "display": "Prothrombin 20210A"
-                }
-              ]
-            },
-            "valueCodeableConcept": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:caprini-venous-thromboembolism-risk-assessment:prothrombin_20210a",
-                  "code": "yes",
-                  "display": "Yes"
-                }
-              ]
-            }
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:caprini-venous-thromboembolism-risk-assessment",
-                  "code": "lupus_anticoagulant",
-                  "display": "Lupus Anticoagulant"
-                }
-              ]
-            },
-            "valueCodeableConcept": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:caprini-venous-thromboembolism-risk-assessment:lupus_anticoagulant",
-                  "code": "yes",
-                  "display": "Yes"
-                }
-              ]
-            }
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:caprini-venous-thromboembolism-risk-assessment",
-                  "code": "anticardiolipin_antibodies",
-                  "display": "Anticardiolipin Antibodies"
-                }
-              ]
-            },
-            "valueCodeableConcept": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:caprini-venous-thromboembolism-risk-assessment:anticardiolipin_antibodies",
-                  "code": "yes",
-                  "display": "Yes"
-                }
-              ]
-            }
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:caprini-venous-thromboembolism-risk-assessment",
-                  "code": "elevated_homocysteine",
-                  "display": "Elevated Homocysteine"
-                }
-              ]
-            },
-            "valueCodeableConcept": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:caprini-venous-thromboembolism-risk-assessment:elevated_homocysteine",
-                  "code": "yes",
-                  "display": "Yes"
-                }
-              ]
-            }
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:caprini-venous-thromboembolism-risk-assessment",
-                  "code": "heparin_induced_thrombocytopenia",
-                  "display": "Heparin Induced Thrombocytopenia"
-                }
-              ]
-            },
-            "valueCodeableConcept": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:caprini-venous-thromboembolism-risk-assessment:heparin_induced_thrombocytopenia",
-                  "code": "yes",
-                  "display": "Yes"
-                }
-              ]
-            }
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:caprini-venous-thromboembolism-risk-assessment",
-                  "code": "other_thrombophilia",
-                  "display": "Other Thrombophilia"
-                }
-              ]
-            },
-            "valueCodeableConcept": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:caprini-venous-thromboembolism-risk-assessment:other_thrombophilia",
-                  "code": "yes",
-                  "display": "Yes"
-                }
-              ]
-            }
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:caprini-venous-thromboembolism-risk-assessment",
-                  "code": "stroke",
-                  "display": "Stroke"
-                }
-              ]
-            },
-            "valueCodeableConcept": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:caprini-venous-thromboembolism-risk-assessment:stroke",
-                  "code": "yes",
-                  "display": "Yes"
-                }
-              ]
-            }
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:caprini-venous-thromboembolism-risk-assessment",
-                  "code": "elective_arthroplasty",
-                  "display": "Elective Arthroplasty"
-                }
-              ]
-            },
-            "valueCodeableConcept": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:caprini-venous-thromboembolism-risk-assessment:elective_arthroplasty",
-                  "code": "yes",
-                  "display": "Yes"
-                }
-              ]
-            }
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:caprini-venous-thromboembolism-risk-assessment",
-                  "code": "hip_pelvis_leg_fracture",
-                  "display": "Hip Pelvis Leg Fracture"
-                }
-              ]
-            },
-            "valueCodeableConcept": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:caprini-venous-thromboembolism-risk-assessment:hip_pelvis_leg_fracture",
-                  "code": "yes",
-                  "display": "Yes"
-                }
-              ]
-            }
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:caprini-venous-thromboembolism-risk-assessment",
-                  "code": "acute_spinal_cord_injury",
-                  "display": "Acute Spinal Cord Injury"
-                }
-              ]
-            },
-            "valueCodeableConcept": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:caprini-venous-thromboembolism-risk-assessment:acute_spinal_cord_injury",
-                  "code": "yes",
-                  "display": "Yes"
-                }
-              ]
-            }
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:caprini-venous-thromboembolism-risk-assessment",
-                  "code": "multiple_trauma",
-                  "display": "Multiple Trauma"
-                }
-              ]
-            },
-            "valueCodeableConcept": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:caprini-venous-thromboembolism-risk-assessment:multiple_trauma",
-                  "code": "yes",
-                  "display": "Yes"
-                }
-              ]
-            }
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:caprini-venous-thromboembolism-risk-assessment",
-                  "code": "high_bleeding_risk",
-                  "display": "High Bleeding Risk"
-                }
-              ]
-            },
-            "valueCodeableConcept": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:caprini-venous-thromboembolism-risk-assessment:high_bleeding_risk",
-                  "code": "yes",
-                  "display": "Yes"
-                }
-              ]
-            }
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:caprini-venous-thromboembolism-risk-assessment",
-                  "code": "clinical_note",
-                  "display": "Clinical Note"
-                }
-              ]
-            },
-            "valueString": ""
-          }
-        ]
+        "actualPeriod": {
+          "start": "2026-04-09T10:00:00+00:00"
+        }
       }
     },
     {
       "fullUrl": "urn:uuid:880e8400-e29b-41d4-a716-446655440003",
       "resource": {
-        "resourceType": "Observation",
+        "resourceType": "ClinicalImpression",
         "id": "880e8400-e29b-41d4-a716-446655440003",
         "meta": {
           "profile": [
-            "http://hl7.org/fhir/StructureDefinition/Observation"
+            "http://hl7.org/fhir/StructureDefinition/ClinicalImpression"
           ],
           "lastUpdated": "2026-04-09T10:00:00+00:00"
         },
-        "status": "final",
-        "category": [
-          {
-            "coding": [
-              {
-                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
-                "code": "survey",
-                "display": "Survey"
-              }
-            ]
-          }
-        ],
-        "code": {
-          "coding": [
-            {
-              "system": "urn:form-examples:caprini-venous-thromboembolism-risk-assessment",
-              "code": "caprini_venous_thromboembolism_risk_assessment_grade",
-              "display": "Caprini Venous Thromboembolism Risk Grade"
-            }
-          ]
-        },
+        "status": "completed",
         "subject": {
           "reference": "urn:uuid:550e8400-e29b-41d4-a716-446655440000"
         },
         "encounter": {
-          "reference": "Encounter/bb0e8400-e29b-41d4-a716-446655440006"
+          "reference": "urn:uuid:770e8400-e29b-41d4-a716-446655440002"
         },
         "effectiveDateTime": "2026-04-09T10:00:00+00:00",
-        "component": [
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:caprini-venous-thromboembolism-risk-assessment",
-                  "code": "deleted_at",
-                  "display": "Deleted At"
-                }
-              ]
-            },
-            "valueDateTime": "2026-04-09T10:00:00+00:00"
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:caprini-venous-thromboembolism-risk-assessment",
-                  "code": "total_score",
-                  "display": "Total Score"
-                }
-              ]
-            },
-            "valueInteger": 5
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:caprini-venous-thromboembolism-risk-assessment",
-                  "code": "risk_band",
-                  "display": "Risk Band"
-                }
-              ]
-            },
-            "valueCodeableConcept": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:caprini-venous-thromboembolism-risk-assessment:risk_band",
-                  "code": "very-low",
-                  "display": "Very-Low"
-                }
-              ]
-            }
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:caprini-venous-thromboembolism-risk-assessment",
-                  "code": "prophylaxis_recommendation",
-                  "display": "Prophylaxis Recommendation"
-                }
-              ]
-            },
-            "valueString": "Example text."
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:caprini-venous-thromboembolism-risk-assessment",
-                  "code": "graded_at",
-                  "display": "Graded At"
-                }
-              ]
-            },
-            "valueDateTime": "2026-04-09T10:00:00+00:00"
-          }
-        ]
+        "date": "2026-04-09T10:00:00+00:00",
+        "description": "Caprini Venous Thromboembolism Risk Assessment grading result",
+        "summary": "Deleted At: 2026-04-09T10:00:00+00:00; Total Score: 5; Risk Band: very-low; Prophylaxis Recommendation: Example text."
       }
     },
     {
       "fullUrl": "urn:uuid:aa0e8400-e29b-41d4-a716-446655440005",
       "resource": {
-        "resourceType": "Observation",
+        "resourceType": "DetectedIssue",
         "id": "aa0e8400-e29b-41d4-a716-446655440005",
         "meta": {
           "profile": [
-            "http://hl7.org/fhir/StructureDefinition/Observation"
+            "http://hl7.org/fhir/StructureDefinition/DetectedIssue"
           ],
           "lastUpdated": "2026-04-09T10:00:00+00:00"
         },
@@ -1086,9 +99,9 @@
           {
             "coding": [
               {
-                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
-                "code": "survey",
-                "display": "Survey"
+                "system": "urn:form-examples:caprini-venous-thromboembolism-risk-assessment",
+                "code": "grading-additional-flag",
+                "display": "high-vte-risk"
               }
             ]
           }
@@ -1096,107 +109,28 @@
         "code": {
           "coding": [
             {
-              "system": "urn:form-examples:caprini-venous-thromboembolism-risk-assessment",
-              "code": "caprini_venous_thromboembolism_risk_assessment_grade_flag",
-              "display": "Caprini Venous Thromboembolism Risk Grade Flag"
+              "system": "urn:form-examples:caprini-venous-thromboembolism-risk-assessment:flags",
+              "code": "FLAG-001",
+              "display": "Safety flag"
             }
           ]
         },
+        "severity": "low",
         "subject": {
           "reference": "urn:uuid:550e8400-e29b-41d4-a716-446655440000"
         },
-        "encounter": {
-          "reference": "Encounter/bb0e8400-e29b-41d4-a716-446655440006"
-        },
-        "effectiveDateTime": "2026-04-09T10:00:00+00:00",
-        "component": [
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:caprini-venous-thromboembolism-risk-assessment",
-                  "code": "deleted_at",
-                  "display": "Deleted At"
-                }
-              ]
-            },
-            "valueDateTime": "2026-04-09T10:00:00+00:00"
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:caprini-venous-thromboembolism-risk-assessment",
-                  "code": "category",
-                  "display": "Category"
-                }
-              ]
-            },
-            "valueCodeableConcept": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:caprini-venous-thromboembolism-risk-assessment:category",
-                  "code": "high-vte-risk",
-                  "display": "High-Vte-Risk"
-                }
-              ]
-            }
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:caprini-venous-thromboembolism-risk-assessment",
-                  "code": "priority",
-                  "display": "Priority"
-                }
-              ]
-            },
-            "valueCodeableConcept": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:caprini-venous-thromboembolism-risk-assessment:priority",
-                  "code": "low",
-                  "display": "Low"
-                }
-              ]
-            }
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:caprini-venous-thromboembolism-risk-assessment",
-                  "code": "description",
-                  "display": "Description"
-                }
-              ]
-            },
-            "valueString": "Example text."
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:caprini-venous-thromboembolism-risk-assessment",
-                  "code": "suggested_action",
-                  "display": "Suggested Action"
-                }
-              ]
-            },
-            "valueString": ""
-          }
-        ]
+        "identifiedDateTime": "2026-04-09T10:00:00+00:00",
+        "detail": "Clinical flag detected."
       }
     },
     {
       "fullUrl": "urn:uuid:990e8400-e29b-41d4-a716-446655440004",
       "resource": {
-        "resourceType": "Observation",
+        "resourceType": "DetectedIssue",
         "id": "990e8400-e29b-41d4-a716-446655440004",
         "meta": {
           "profile": [
-            "http://hl7.org/fhir/StructureDefinition/Observation"
+            "http://hl7.org/fhir/StructureDefinition/DetectedIssue"
           ],
           "lastUpdated": "2026-04-09T10:00:00+00:00"
         },
@@ -1205,9 +139,9 @@
           {
             "coding": [
               {
-                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
-                "code": "survey",
-                "display": "Survey"
+                "system": "urn:form-examples:caprini-venous-thromboembolism-risk-assessment",
+                "code": "grading-fired-rule",
+                "display": "General"
               }
             ]
           }
@@ -1215,101 +149,18 @@
         "code": {
           "coding": [
             {
-              "system": "urn:form-examples:caprini-venous-thromboembolism-risk-assessment",
-              "code": "caprini_venous_thromboembolism_risk_assessment_grade_rule",
-              "display": "Caprini Venous Thromboembolism Risk Grade Rule"
+              "system": "urn:form-examples:caprini-venous-thromboembolism-risk-assessment:rules",
+              "code": "RULE-001",
+              "display": "Example grading rule"
             }
           ]
         },
+        "severity": "moderate",
         "subject": {
           "reference": "urn:uuid:550e8400-e29b-41d4-a716-446655440000"
         },
-        "encounter": {
-          "reference": "Encounter/bb0e8400-e29b-41d4-a716-446655440006"
-        },
-        "effectiveDateTime": "2026-04-09T10:00:00+00:00",
-        "component": [
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:caprini-venous-thromboembolism-risk-assessment",
-                  "code": "deleted_at",
-                  "display": "Deleted At"
-                }
-              ]
-            },
-            "valueDateTime": "2026-04-09T10:00:00+00:00"
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:caprini-venous-thromboembolism-risk-assessment",
-                  "code": "factor",
-                  "display": "Factor"
-                }
-              ]
-            },
-            "valueString": ""
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:caprini-venous-thromboembolism-risk-assessment",
-                  "code": "weight_group",
-                  "display": "Weight Group"
-                }
-              ]
-            },
-            "valueCodeableConcept": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:caprini-venous-thromboembolism-risk-assessment:weight_group",
-                  "code": "age",
-                  "display": "Age"
-                }
-              ]
-            }
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:caprini-venous-thromboembolism-risk-assessment",
-                  "code": "points",
-                  "display": "Points"
-                }
-              ]
-            },
-            "valueInteger": 1
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:caprini-venous-thromboembolism-risk-assessment",
-                  "code": "category",
-                  "display": "Category"
-                }
-              ]
-            },
-            "valueString": "General"
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:caprini-venous-thromboembolism-risk-assessment",
-                  "code": "description",
-                  "display": "Description"
-                }
-              ]
-            },
-            "valueString": "Example text."
-          }
-        ]
+        "identifiedDateTime": "2026-04-09T10:00:00+00:00",
+        "detail": "Example text."
       }
     },
     {
@@ -1348,7 +199,7 @@
           "reference": "urn:uuid:550e8400-e29b-41d4-a716-446655440000"
         },
         "encounter": {
-          "reference": "Encounter/bb0e8400-e29b-41d4-a716-446655440006"
+          "reference": "urn:uuid:770e8400-e29b-41d4-a716-446655440002"
         },
         "effectiveDateTime": "2026-04-09T10:00:00+00:00",
         "component": [

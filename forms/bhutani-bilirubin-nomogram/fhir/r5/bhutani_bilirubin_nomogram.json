@@ -1,354 +1,40 @@
 {
-  "resourceType": "Observation",
+  "resourceType": "Encounter",
   "id": "770e8400-e29b-41d4-a716-446655440002",
   "meta": {
     "profile": [
-      "http://hl7.org/fhir/StructureDefinition/Observation"
+      "http://hl7.org/fhir/StructureDefinition/Encounter"
     ],
     "lastUpdated": "2026-04-09T10:00:00+00:00"
   },
-  "status": "final",
-  "category": [
+  "status": "planned",
+  "class": [
     {
       "coding": [
         {
-          "system": "http://terminology.hl7.org/CodeSystem/observation-category",
-          "code": "survey",
-          "display": "Survey"
+          "system": "http://terminology.hl7.org/CodeSystem/v3-ActCode",
+          "code": "AMB",
+          "display": "ambulatory"
         }
       ]
     }
   ],
-  "code": {
-    "coding": [
-      {
-        "system": "urn:form-examples:bhutani-bilirubin-nomogram",
-        "code": "bhutani_bilirubin_nomogram",
-        "display": "Bhutani Bilirubin Nomogram"
-      }
-    ]
-  },
+  "type": [
+    {
+      "coding": [
+        {
+          "system": "http://snomed.info/sct",
+          "code": "185349003",
+          "display": "Encounter for check up"
+        }
+      ],
+      "text": "Bhutani Bilirubin Nomogram"
+    }
+  ],
   "subject": {
     "reference": "Patient/550e8400-e29b-41d4-a716-446655440000"
   },
-  "encounter": {
-    "reference": "Encounter/bb0e8400-e29b-41d4-a716-446655440006"
-  },
-  "effectiveDateTime": "2026-04-09T10:00:00+00:00",
-  "component": [
-    {
-      "code": {
-        "coding": [
-          {
-            "system": "urn:form-examples:bhutani-bilirubin-nomogram",
-            "code": "deleted_at",
-            "display": "Deleted At"
-          }
-        ]
-      },
-      "valueDateTime": "2026-04-09T10:00:00+00:00"
-    },
-    {
-      "code": {
-        "coding": [
-          {
-            "system": "urn:form-examples:bhutani-bilirubin-nomogram",
-            "code": "clinician_name",
-            "display": "Clinician Name"
-          }
-        ]
-      },
-      "valueString": "Example"
-    },
-    {
-      "code": {
-        "coding": [
-          {
-            "system": "urn:form-examples:bhutani-bilirubin-nomogram",
-            "code": "clinician_role",
-            "display": "Clinician Role"
-          }
-        ]
-      },
-      "valueCodeableConcept": {
-        "coding": [
-          {
-            "system": "urn:form-examples:bhutani-bilirubin-nomogram:clinician_role",
-            "code": "midwife",
-            "display": "Midwife"
-          }
-        ]
-      }
-    },
-    {
-      "code": {
-        "coding": [
-          {
-            "system": "urn:form-examples:bhutani-bilirubin-nomogram",
-            "code": "assessed_at",
-            "display": "Assessed At"
-          }
-        ]
-      },
-      "valueDateTime": "2026-04-09T10:00:00+00:00"
-    },
-    {
-      "code": {
-        "coding": [
-          {
-            "system": "urn:form-examples:bhutani-bilirubin-nomogram",
-            "code": "care_setting",
-            "display": "Care Setting"
-          }
-        ]
-      },
-      "valueCodeableConcept": {
-        "coding": [
-          {
-            "system": "urn:form-examples:bhutani-bilirubin-nomogram:care_setting",
-            "code": "postnatal-ward",
-            "display": "Postnatal-Ward"
-          }
-        ]
-      }
-    },
-    {
-      "code": {
-        "coding": [
-          {
-            "system": "urn:form-examples:bhutani-bilirubin-nomogram",
-            "code": "infant_identifier",
-            "display": "Infant Identifier"
-          }
-        ]
-      },
-      "valueString": ""
-    },
-    {
-      "code": {
-        "coding": [
-          {
-            "system": "urn:form-examples:bhutani-bilirubin-nomogram",
-            "code": "sex",
-            "display": "Sex"
-          }
-        ]
-      },
-      "valueCodeableConcept": {
-        "coding": [
-          {
-            "system": "urn:form-examples:bhutani-bilirubin-nomogram:sex",
-            "code": "female",
-            "display": "Female"
-          }
-        ]
-      }
-    },
-    {
-      "code": {
-        "coding": [
-          {
-            "system": "urn:form-examples:bhutani-bilirubin-nomogram",
-            "code": "born_at",
-            "display": "Born At"
-          }
-        ]
-      },
-      "valueDateTime": "2026-04-09T10:00:00+00:00"
-    },
-    {
-      "code": {
-        "coding": [
-          {
-            "system": "urn:form-examples:bhutani-bilirubin-nomogram",
-            "code": "gestational_age_weeks",
-            "display": "Gestational Age Weeks"
-          }
-        ]
-      },
-      "valueQuantity": {
-        "value": 0.0
-      }
-    },
-    {
-      "code": {
-        "coding": [
-          {
-            "system": "urn:form-examples:bhutani-bilirubin-nomogram",
-            "code": "age_hours",
-            "display": "Age Hours"
-          }
-        ]
-      },
-      "valueQuantity": {
-        "value": 0.0
-      }
-    },
-    {
-      "code": {
-        "coding": [
-          {
-            "system": "urn:form-examples:bhutani-bilirubin-nomogram",
-            "code": "total_serum_bilirubin_umol_l",
-            "display": "Total Serum Bilirubin Umol L"
-          }
-        ]
-      },
-      "valueQuantity": {
-        "value": 0.0
-      }
-    },
-    {
-      "code": {
-        "coding": [
-          {
-            "system": "urn:form-examples:bhutani-bilirubin-nomogram",
-            "code": "measurement_method",
-            "display": "Measurement Method"
-          }
-        ]
-      },
-      "valueCodeableConcept": {
-        "coding": [
-          {
-            "system": "urn:form-examples:bhutani-bilirubin-nomogram:measurement_method",
-            "code": "serum",
-            "display": "Serum"
-          }
-        ]
-      }
-    },
-    {
-      "code": {
-        "coding": [
-          {
-            "system": "urn:form-examples:bhutani-bilirubin-nomogram",
-            "code": "preterm_under_38",
-            "display": "Preterm Under 38"
-          }
-        ]
-      },
-      "valueCodeableConcept": {
-        "coding": [
-          {
-            "system": "urn:form-examples:bhutani-bilirubin-nomogram:preterm_under_38",
-            "code": "yes",
-            "display": "Yes"
-          }
-        ]
-      }
-    },
-    {
-      "code": {
-        "coding": [
-          {
-            "system": "urn:form-examples:bhutani-bilirubin-nomogram",
-            "code": "previous_sibling_jaundice",
-            "display": "Previous Sibling Jaundice"
-          }
-        ]
-      },
-      "valueCodeableConcept": {
-        "coding": [
-          {
-            "system": "urn:form-examples:bhutani-bilirubin-nomogram:previous_sibling_jaundice",
-            "code": "yes",
-            "display": "Yes"
-          }
-        ]
-      }
-    },
-    {
-      "code": {
-        "coding": [
-          {
-            "system": "urn:form-examples:bhutani-bilirubin-nomogram",
-            "code": "exclusive_breastfeeding",
-            "display": "Exclusive Breastfeeding"
-          }
-        ]
-      },
-      "valueCodeableConcept": {
-        "coding": [
-          {
-            "system": "urn:form-examples:bhutani-bilirubin-nomogram:exclusive_breastfeeding",
-            "code": "yes",
-            "display": "Yes"
-          }
-        ]
-      }
-    },
-    {
-      "code": {
-        "coding": [
-          {
-            "system": "urn:form-examples:bhutani-bilirubin-nomogram",
-            "code": "bruising",
-            "display": "Bruising"
-          }
-        ]
-      },
-      "valueCodeableConcept": {
-        "coding": [
-          {
-            "system": "urn:form-examples:bhutani-bilirubin-nomogram:bruising",
-            "code": "yes",
-            "display": "Yes"
-          }
-        ]
-      }
-    },
-    {
-      "code": {
-        "coding": [
-          {
-            "system": "urn:form-examples:bhutani-bilirubin-nomogram",
-            "code": "blood_group_incompatibility",
-            "display": "Blood Group Incompatibility"
-          }
-        ]
-      },
-      "valueCodeableConcept": {
-        "coding": [
-          {
-            "system": "urn:form-examples:bhutani-bilirubin-nomogram:blood_group_incompatibility",
-            "code": "yes",
-            "display": "Yes"
-          }
-        ]
-      }
-    },
-    {
-      "code": {
-        "coding": [
-          {
-            "system": "urn:form-examples:bhutani-bilirubin-nomogram",
-            "code": "early_onset_under_24h",
-            "display": "Early Onset Under 24H"
-          }
-        ]
-      },
-      "valueCodeableConcept": {
-        "coding": [
-          {
-            "system": "urn:form-examples:bhutani-bilirubin-nomogram:early_onset_under_24h",
-            "code": "yes",
-            "display": "Yes"
-          }
-        ]
-      }
-    },
-    {
-      "code": {
-        "coding": [
-          {
-            "system": "urn:form-examples:bhutani-bilirubin-nomogram",
-            "code": "clinical_note",
-            "display": "Clinical Note"
-          }
-        ]
-      },
-      "valueString": ""
-    }
-  ]
+  "actualPeriod": {
+    "start": "2026-04-09T10:00:00+00:00"
+  }
 }

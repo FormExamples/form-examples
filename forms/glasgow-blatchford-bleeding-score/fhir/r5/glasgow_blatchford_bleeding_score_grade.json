@@ -1,204 +1,21 @@
 {
-  "resourceType": "Observation",
+  "resourceType": "ClinicalImpression",
   "id": "880e8400-e29b-41d4-a716-446655440003",
   "meta": {
     "profile": [
-      "http://hl7.org/fhir/StructureDefinition/Observation"
+      "http://hl7.org/fhir/StructureDefinition/ClinicalImpression"
     ],
     "lastUpdated": "2026-04-09T10:00:00+00:00"
   },
-  "status": "final",
-  "category": [
-    {
-      "coding": [
-        {
-          "system": "http://terminology.hl7.org/CodeSystem/observation-category",
-          "code": "survey",
-          "display": "Survey"
-        }
-      ]
-    }
-  ],
-  "code": {
-    "coding": [
-      {
-        "system": "urn:form-examples:glasgow-blatchford-bleeding-score",
-        "code": "glasgow_blatchford_bleeding_score_grade",
-        "display": "Glasgow Blatchford Bleeding Score Grade"
-      }
-    ]
-  },
+  "status": "completed",
   "subject": {
     "reference": "Patient/550e8400-e29b-41d4-a716-446655440000"
   },
   "encounter": {
-    "reference": "Encounter/bb0e8400-e29b-41d4-a716-446655440006"
+    "reference": "Encounter/770e8400-e29b-41d4-a716-446655440002"
   },
   "effectiveDateTime": "2026-04-09T10:00:00+00:00",
-  "component": [
-    {
-      "code": {
-        "coding": [
-          {
-            "system": "urn:form-examples:glasgow-blatchford-bleeding-score",
-            "code": "deleted_at",
-            "display": "Deleted At"
-          }
-        ]
-      },
-      "valueDateTime": "2026-04-09T10:00:00+00:00"
-    },
-    {
-      "code": {
-        "coding": [
-          {
-            "system": "urn:form-examples:glasgow-blatchford-bleeding-score",
-            "code": "blood_urea_points",
-            "display": "Blood Urea Points"
-          }
-        ]
-      },
-      "valueInteger": 1
-    },
-    {
-      "code": {
-        "coding": [
-          {
-            "system": "urn:form-examples:glasgow-blatchford-bleeding-score",
-            "code": "haemoglobin_points",
-            "display": "Haemoglobin Points"
-          }
-        ]
-      },
-      "valueInteger": 1
-    },
-    {
-      "code": {
-        "coding": [
-          {
-            "system": "urn:form-examples:glasgow-blatchford-bleeding-score",
-            "code": "systolic_blood_pressure_points",
-            "display": "Systolic Blood Pressure Points"
-          }
-        ]
-      },
-      "valueInteger": 1
-    },
-    {
-      "code": {
-        "coding": [
-          {
-            "system": "urn:form-examples:glasgow-blatchford-bleeding-score",
-            "code": "pulse_point",
-            "display": "Pulse Point"
-          }
-        ]
-      },
-      "valueInteger": 1
-    },
-    {
-      "code": {
-        "coding": [
-          {
-            "system": "urn:form-examples:glasgow-blatchford-bleeding-score",
-            "code": "melaena_point",
-            "display": "Melaena Point"
-          }
-        ]
-      },
-      "valueInteger": 1
-    },
-    {
-      "code": {
-        "coding": [
-          {
-            "system": "urn:form-examples:glasgow-blatchford-bleeding-score",
-            "code": "syncope_point",
-            "display": "Syncope Point"
-          }
-        ]
-      },
-      "valueInteger": 1
-    },
-    {
-      "code": {
-        "coding": [
-          {
-            "system": "urn:form-examples:glasgow-blatchford-bleeding-score",
-            "code": "hepatic_disease_point",
-            "display": "Hepatic Disease Point"
-          }
-        ]
-      },
-      "valueInteger": 1
-    },
-    {
-      "code": {
-        "coding": [
-          {
-            "system": "urn:form-examples:glasgow-blatchford-bleeding-score",
-            "code": "cardiac_failure_point",
-            "display": "Cardiac Failure Point"
-          }
-        ]
-      },
-      "valueInteger": 1
-    },
-    {
-      "code": {
-        "coding": [
-          {
-            "system": "urn:form-examples:glasgow-blatchford-bleeding-score",
-            "code": "total_score",
-            "display": "Total Score"
-          }
-        ]
-      },
-      "valueInteger": 5
-    },
-    {
-      "code": {
-        "coding": [
-          {
-            "system": "urn:form-examples:glasgow-blatchford-bleeding-score",
-            "code": "risk_band",
-            "display": "Risk Band"
-          }
-        ]
-      },
-      "valueCodeableConcept": {
-        "coding": [
-          {
-            "system": "urn:form-examples:glasgow-blatchford-bleeding-score:risk_band",
-            "code": "very-low",
-            "display": "Very-Low"
-          }
-        ]
-      }
-    },
-    {
-      "code": {
-        "coding": [
-          {
-            "system": "urn:form-examples:glasgow-blatchford-bleeding-score",
-            "code": "recommended_management",
-            "display": "Recommended Management"
-          }
-        ]
-      },
-      "valueString": ""
-    },
-    {
-      "code": {
-        "coding": [
-          {
-            "system": "urn:form-examples:glasgow-blatchford-bleeding-score",
-            "code": "graded_at",
-            "display": "Graded At"
-          }
-        ]
-      },
-      "valueDateTime": "2026-04-09T10:00:00+00:00"
-    }
-  ]
+  "date": "2026-04-09T10:00:00+00:00",
+  "description": "Glasgow Blatchford Bleeding Score grading result",
+  "summary": "Deleted At: 2026-04-09T10:00:00+00:00; Blood Urea Points: 1; Haemoglobin Points: 1; Systolic Blood Pressure Points: 1; Pulse Point: 1; Melaena Point: 1; Syncope Point: 1; Hepatic Disease Point: 1; Cardiac Failure Point: 1; Total Score: 5; Risk Band: very-low; Recommended Management: "
 }

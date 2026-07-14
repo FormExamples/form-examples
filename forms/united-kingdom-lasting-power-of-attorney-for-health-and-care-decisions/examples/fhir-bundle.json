@@ -52,7 +52,7 @@
           "reference": "Patient/881e8400-e29b-41d4-a716-446655440012"
         },
         "encounter": {
-          "reference": "Encounter/991e8400-e29b-41d4-a716-446655440013"
+          "reference": "urn:uuid:aa0e8400-e29b-41d4-a716-446655440005"
         },
         "effectiveDateTime": "2026-04-09T10:00:00+00:00",
         "component": [
@@ -275,7 +275,7 @@
           "reference": "Patient/881e8400-e29b-41d4-a716-446655440012"
         },
         "encounter": {
-          "reference": "Encounter/991e8400-e29b-41d4-a716-446655440013"
+          "reference": "urn:uuid:aa0e8400-e29b-41d4-a716-446655440005"
         },
         "effectiveDateTime": "2026-04-09T10:00:00+00:00",
         "component": [
@@ -572,7 +572,7 @@
           "reference": "Patient/881e8400-e29b-41d4-a716-446655440012"
         },
         "encounter": {
-          "reference": "Encounter/991e8400-e29b-41d4-a716-446655440013"
+          "reference": "urn:uuid:aa0e8400-e29b-41d4-a716-446655440005"
         },
         "effectiveDateTime": "2026-04-09T10:00:00+00:00",
         "component": [
@@ -798,156 +798,44 @@
     {
       "fullUrl": "urn:uuid:aa0e8400-e29b-41d4-a716-446655440005",
       "resource": {
-        "resourceType": "Observation",
+        "resourceType": "Encounter",
         "id": "aa0e8400-e29b-41d4-a716-446655440005",
         "meta": {
           "profile": [
-            "http://hl7.org/fhir/StructureDefinition/Observation"
+            "http://hl7.org/fhir/StructureDefinition/Encounter"
           ],
           "lastUpdated": "2026-04-09T10:00:00+00:00"
         },
-        "status": "final",
-        "category": [
+        "status": "planned",
+        "class": [
           {
             "coding": [
               {
-                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
-                "code": "survey",
-                "display": "Survey"
+                "system": "http://terminology.hl7.org/CodeSystem/v3-ActCode",
+                "code": "AMB",
+                "display": "ambulatory"
               }
             ]
           }
         ],
-        "code": {
-          "coding": [
-            {
-              "system": "urn:form-examples:united-kingdom-lasting-power-of-attorney-for-health-and-care-decisions",
-              "code": "lpa",
-              "display": "Lpa"
-            }
-          ]
-        },
+        "type": [
+          {
+            "coding": [
+              {
+                "system": "http://snomed.info/sct",
+                "code": "185349003",
+                "display": "Encounter for check up"
+              }
+            ],
+            "text": "United Kingdom Lasting Power Of Attorney For Health And Care Decisions"
+          }
+        ],
         "subject": {
           "reference": "Patient/881e8400-e29b-41d4-a716-446655440012"
         },
-        "encounter": {
-          "reference": "Encounter/991e8400-e29b-41d4-a716-446655440013"
-        },
-        "effectiveDateTime": "2026-04-09T10:00:00+00:00",
-        "component": [
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:united-kingdom-lasting-power-of-attorney-for-health-and-care-decisions",
-                  "code": "deleted_at",
-                  "display": "Deleted At"
-                }
-              ]
-            },
-            "valueDateTime": "2026-04-09T10:00:00+00:00"
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:united-kingdom-lasting-power-of-attorney-for-health-and-care-decisions",
-                  "code": "form_version",
-                  "display": "Form Version"
-                }
-              ]
-            },
-            "valueString": ""
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:united-kingdom-lasting-power-of-attorney-for-health-and-care-decisions",
-                  "code": "jurisdiction",
-                  "display": "Jurisdiction"
-                }
-              ]
-            },
-            "valueCodeableConcept": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:united-kingdom-lasting-power-of-attorney-for-health-and-care-decisions:jurisdiction",
-                  "code": "england",
-                  "display": "England"
-                }
-              ]
-            }
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:united-kingdom-lasting-power-of-attorney-for-health-and-care-decisions",
-                  "code": "status",
-                  "display": "Status"
-                }
-              ]
-            },
-            "valueCodeableConcept": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:united-kingdom-lasting-power-of-attorney-for-health-and-care-decisions:status",
-                  "code": "draft",
-                  "display": "Draft"
-                }
-              ]
-            }
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:united-kingdom-lasting-power-of-attorney-for-health-and-care-decisions",
-                  "code": "opg_reference",
-                  "display": "Opg Reference"
-                }
-              ]
-            },
-            "valueString": ""
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:united-kingdom-lasting-power-of-attorney-for-health-and-care-decisions",
-                  "code": "registered_at",
-                  "display": "Registered At"
-                }
-              ]
-            },
-            "valueDateTime": "2026-04-09T10:00:00+00:00"
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:united-kingdom-lasting-power-of-attorney-for-health-and-care-decisions",
-                  "code": "effective_from",
-                  "display": "Effective From"
-                }
-              ]
-            },
-            "valueDateTime": "2026-04-09T10:00:00+00:00"
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:united-kingdom-lasting-power-of-attorney-for-health-and-care-decisions",
-                  "code": "notes",
-                  "display": "Notes"
-                }
-              ]
-            },
-            "valueString": "Example text."
-          }
-        ]
+        "actualPeriod": {
+          "start": "2026-04-09T10:00:00+00:00"
+        }
       }
     },
     {
@@ -986,7 +874,7 @@
           "reference": "Patient/881e8400-e29b-41d4-a716-446655440012"
         },
         "encounter": {
-          "reference": "Encounter/991e8400-e29b-41d4-a716-446655440013"
+          "reference": "urn:uuid:aa0e8400-e29b-41d4-a716-446655440005"
         },
         "effectiveDateTime": "2026-04-09T10:00:00+00:00",
         "component": [
@@ -1053,7 +941,7 @@
           "reference": "Patient/881e8400-e29b-41d4-a716-446655440012"
         },
         "encounter": {
-          "reference": "Encounter/991e8400-e29b-41d4-a716-446655440013"
+          "reference": "urn:uuid:aa0e8400-e29b-41d4-a716-446655440005"
         },
         "effectiveDateTime": "2026-04-09T10:00:00+00:00",
         "component": [
@@ -1140,7 +1028,7 @@
           "reference": "Patient/881e8400-e29b-41d4-a716-446655440012"
         },
         "encounter": {
-          "reference": "Encounter/991e8400-e29b-41d4-a716-446655440013"
+          "reference": "urn:uuid:aa0e8400-e29b-41d4-a716-446655440005"
         },
         "effectiveDateTime": "2026-04-09T10:00:00+00:00",
         "component": [
@@ -1279,7 +1167,7 @@
           "reference": "Patient/881e8400-e29b-41d4-a716-446655440012"
         },
         "encounter": {
-          "reference": "Encounter/991e8400-e29b-41d4-a716-446655440013"
+          "reference": "urn:uuid:aa0e8400-e29b-41d4-a716-446655440005"
         },
         "effectiveDateTime": "2026-04-09T10:00:00+00:00",
         "component": [
@@ -1386,7 +1274,7 @@
           "reference": "Patient/881e8400-e29b-41d4-a716-446655440012"
         },
         "encounter": {
-          "reference": "Encounter/991e8400-e29b-41d4-a716-446655440013"
+          "reference": "urn:uuid:aa0e8400-e29b-41d4-a716-446655440005"
         },
         "effectiveDateTime": "2026-04-09T10:00:00+00:00",
         "component": [
@@ -1453,7 +1341,7 @@
           "reference": "Patient/881e8400-e29b-41d4-a716-446655440012"
         },
         "encounter": {
-          "reference": "Encounter/991e8400-e29b-41d4-a716-446655440013"
+          "reference": "urn:uuid:aa0e8400-e29b-41d4-a716-446655440005"
         },
         "effectiveDateTime": "2026-04-09T10:00:00+00:00",
         "component": [
@@ -1552,7 +1440,7 @@
           "reference": "Patient/881e8400-e29b-41d4-a716-446655440012"
         },
         "encounter": {
-          "reference": "Encounter/991e8400-e29b-41d4-a716-446655440013"
+          "reference": "urn:uuid:aa0e8400-e29b-41d4-a716-446655440005"
         },
         "effectiveDateTime": "2026-04-09T10:00:00+00:00",
         "component": [
@@ -1725,7 +1613,7 @@
           "reference": "Patient/881e8400-e29b-41d4-a716-446655440012"
         },
         "encounter": {
-          "reference": "Encounter/991e8400-e29b-41d4-a716-446655440013"
+          "reference": "urn:uuid:aa0e8400-e29b-41d4-a716-446655440005"
         },
         "effectiveDateTime": "2026-04-09T10:00:00+00:00",
         "component": [
@@ -1804,7 +1692,7 @@
           "reference": "Patient/881e8400-e29b-41d4-a716-446655440012"
         },
         "encounter": {
-          "reference": "Encounter/991e8400-e29b-41d4-a716-446655440013"
+          "reference": "urn:uuid:aa0e8400-e29b-41d4-a716-446655440005"
         },
         "effectiveDateTime": "2026-04-09T10:00:00+00:00",
         "component": [
@@ -1979,7 +1867,7 @@
           "reference": "Patient/881e8400-e29b-41d4-a716-446655440012"
         },
         "encounter": {
-          "reference": "Encounter/991e8400-e29b-41d4-a716-446655440013"
+          "reference": "urn:uuid:aa0e8400-e29b-41d4-a716-446655440005"
         },
         "effectiveDateTime": "2026-04-09T10:00:00+00:00",
         "component": [
@@ -2114,7 +2002,7 @@
           "reference": "Patient/881e8400-e29b-41d4-a716-446655440012"
         },
         "encounter": {
-          "reference": "Encounter/991e8400-e29b-41d4-a716-446655440013"
+          "reference": "urn:uuid:aa0e8400-e29b-41d4-a716-446655440005"
         },
         "effectiveDateTime": "2026-04-09T10:00:00+00:00",
         "component": [
@@ -2233,7 +2121,7 @@
           "reference": "Patient/881e8400-e29b-41d4-a716-446655440012"
         },
         "encounter": {
-          "reference": "Encounter/991e8400-e29b-41d4-a716-446655440013"
+          "reference": "urn:uuid:aa0e8400-e29b-41d4-a716-446655440005"
         },
         "effectiveDateTime": "2026-04-09T10:00:00+00:00",
         "component": [
@@ -2364,7 +2252,7 @@
           "reference": "Patient/881e8400-e29b-41d4-a716-446655440012"
         },
         "encounter": {
-          "reference": "Encounter/991e8400-e29b-41d4-a716-446655440013"
+          "reference": "urn:uuid:aa0e8400-e29b-41d4-a716-446655440005"
         },
         "effectiveDateTime": "2026-04-09T10:00:00+00:00",
         "component": [
@@ -2535,7 +2423,7 @@
           "reference": "Patient/881e8400-e29b-41d4-a716-446655440012"
         },
         "encounter": {
-          "reference": "Encounter/991e8400-e29b-41d4-a716-446655440013"
+          "reference": "urn:uuid:aa0e8400-e29b-41d4-a716-446655440005"
         },
         "effectiveDateTime": "2026-04-09T10:00:00+00:00",
         "component": [

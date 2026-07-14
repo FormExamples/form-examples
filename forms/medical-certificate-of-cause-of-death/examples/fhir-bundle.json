@@ -52,7 +52,7 @@
           "reference": "urn:uuid:550e8400-e29b-41d4-a716-446655440000"
         },
         "encounter": {
-          "reference": "Encounter/bb0e8400-e29b-41d4-a716-446655440006"
+          "reference": "urn:uuid:770e8400-e29b-41d4-a716-446655440002"
         },
         "effectiveDateTime": "2026-04-09T10:00:00+00:00",
         "component": [
@@ -198,577 +198,78 @@
     {
       "fullUrl": "urn:uuid:770e8400-e29b-41d4-a716-446655440002",
       "resource": {
-        "resourceType": "Observation",
+        "resourceType": "Encounter",
         "id": "770e8400-e29b-41d4-a716-446655440002",
         "meta": {
           "profile": [
-            "http://hl7.org/fhir/StructureDefinition/Observation"
+            "http://hl7.org/fhir/StructureDefinition/Encounter"
           ],
           "lastUpdated": "2026-04-09T10:00:00+00:00"
         },
-        "status": "final",
-        "category": [
+        "status": "planned",
+        "class": [
           {
             "coding": [
               {
-                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
-                "code": "survey",
-                "display": "Survey"
+                "system": "http://terminology.hl7.org/CodeSystem/v3-ActCode",
+                "code": "AMB",
+                "display": "ambulatory"
               }
             ]
           }
         ],
-        "code": {
-          "coding": [
-            {
-              "system": "urn:form-examples:medical-certificate-of-cause-of-death",
-              "code": "medical_certificate_of_cause_of_death",
-              "display": "Medical Certificate Of Cause Of Death"
-            }
-          ]
-        },
+        "type": [
+          {
+            "coding": [
+              {
+                "system": "http://snomed.info/sct",
+                "code": "185349003",
+                "display": "Encounter for check up"
+              }
+            ],
+            "text": "Medical Certificate Of Cause Of Death"
+          }
+        ],
         "subject": {
           "reference": "urn:uuid:550e8400-e29b-41d4-a716-446655440000"
         },
-        "encounter": {
-          "reference": "Encounter/bb0e8400-e29b-41d4-a716-446655440006"
-        },
-        "effectiveDateTime": "2026-04-09T10:00:00+00:00",
-        "component": [
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:medical-certificate-of-cause-of-death",
-                  "code": "deleted_at",
-                  "display": "Deleted At"
-                }
-              ]
-            },
-            "valueDateTime": "2026-04-09T10:00:00+00:00"
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:medical-certificate-of-cause-of-death",
-                  "code": "certifying_doctor_name",
-                  "display": "Certifying Doctor Name"
-                }
-              ]
-            },
-            "valueString": "Example"
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:medical-certificate-of-cause-of-death",
-                  "code": "certifying_doctor_grade",
-                  "display": "Certifying Doctor Grade"
-                }
-              ]
-            },
-            "valueCodeableConcept": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:medical-certificate-of-cause-of-death:certifying_doctor_grade",
-                  "code": "consultant",
-                  "display": "Consultant"
-                }
-              ]
-            }
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:medical-certificate-of-cause-of-death",
-                  "code": "gmc_reference",
-                  "display": "Gmc Reference"
-                }
-              ]
-            },
-            "valueString": ""
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:medical-certificate-of-cause-of-death",
-                  "code": "place_of_certification",
-                  "display": "Place Of Certification"
-                }
-              ]
-            },
-            "valueString": ""
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:medical-certificate-of-cause-of-death",
-                  "code": "certification_date",
-                  "display": "Certification Date"
-                }
-              ]
-            },
-            "valueDateTime": "2026-01-15"
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:medical-certificate-of-cause-of-death",
-                  "code": "attended_deceased",
-                  "display": "Attended Deceased"
-                }
-              ]
-            },
-            "valueCodeableConcept": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:medical-certificate-of-cause-of-death:attended_deceased",
-                  "code": "yes",
-                  "display": "Yes"
-                }
-              ]
-            }
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:medical-certificate-of-cause-of-death",
-                  "code": "last_seen_alive_date",
-                  "display": "Last Seen Alive Date"
-                }
-              ]
-            },
-            "valueDateTime": "2026-01-15"
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:medical-certificate-of-cause-of-death",
-                  "code": "deceased_name",
-                  "display": "Deceased Name"
-                }
-              ]
-            },
-            "valueString": "Example"
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:medical-certificate-of-cause-of-death",
-                  "code": "sex",
-                  "display": "Sex"
-                }
-              ]
-            },
-            "valueCodeableConcept": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:medical-certificate-of-cause-of-death:sex",
-                  "code": "female",
-                  "display": "Female"
-                }
-              ]
-            }
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:medical-certificate-of-cause-of-death",
-                  "code": "date_of_birth",
-                  "display": "Date Of Birth"
-                }
-              ]
-            },
-            "valueDateTime": "1965-06-15"
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:medical-certificate-of-cause-of-death",
-                  "code": "age_years",
-                  "display": "Age Years"
-                }
-              ]
-            },
-            "valueInteger": 45
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:medical-certificate-of-cause-of-death",
-                  "code": "patient_identifier",
-                  "display": "Patient Identifier"
-                }
-              ]
-            },
-            "valueString": ""
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:medical-certificate-of-cause-of-death",
-                  "code": "date_of_death",
-                  "display": "Date Of Death"
-                }
-              ]
-            },
-            "valueDateTime": "2026-01-15"
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:medical-certificate-of-cause-of-death",
-                  "code": "time_of_death",
-                  "display": "Time Of Death"
-                }
-              ]
-            },
-            "valueString": ""
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:medical-certificate-of-cause-of-death",
-                  "code": "place_of_death",
-                  "display": "Place Of Death"
-                }
-              ]
-            },
-            "valueString": ""
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:medical-certificate-of-cause-of-death",
-                  "code": "seen_after_death_by",
-                  "display": "Seen After Death By"
-                }
-              ]
-            },
-            "valueCodeableConcept": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:medical-certificate-of-cause-of-death:seen_after_death_by",
-                  "code": "certifier",
-                  "display": "Certifier"
-                }
-              ]
-            }
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:medical-certificate-of-cause-of-death",
-                  "code": "cause_ia_condition",
-                  "display": "Cause Ia Condition"
-                }
-              ]
-            },
-            "valueString": ""
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:medical-certificate-of-cause-of-death",
-                  "code": "cause_ia_interval",
-                  "display": "Cause Ia Interval"
-                }
-              ]
-            },
-            "valueString": ""
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:medical-certificate-of-cause-of-death",
-                  "code": "cause_ib_condition",
-                  "display": "Cause Ib Condition"
-                }
-              ]
-            },
-            "valueString": ""
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:medical-certificate-of-cause-of-death",
-                  "code": "cause_ib_interval",
-                  "display": "Cause Ib Interval"
-                }
-              ]
-            },
-            "valueString": ""
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:medical-certificate-of-cause-of-death",
-                  "code": "cause_ic_condition",
-                  "display": "Cause Ic Condition"
-                }
-              ]
-            },
-            "valueString": ""
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:medical-certificate-of-cause-of-death",
-                  "code": "cause_ic_interval",
-                  "display": "Cause Ic Interval"
-                }
-              ]
-            },
-            "valueString": ""
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:medical-certificate-of-cause-of-death",
-                  "code": "part_ii_conditions",
-                  "display": "Part Ii Conditions"
-                }
-              ]
-            },
-            "valueString": ""
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:medical-certificate-of-cause-of-death",
-                  "code": "part_ii_interval",
-                  "display": "Part Ii Interval"
-                }
-              ]
-            },
-            "valueString": ""
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:medical-certificate-of-cause-of-death",
-                  "code": "referred_to_coroner",
-                  "display": "Referred To Coroner"
-                }
-              ]
-            },
-            "valueCodeableConcept": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:medical-certificate-of-cause-of-death:referred_to_coroner",
-                  "code": "yes",
-                  "display": "Yes"
-                }
-              ]
-            }
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:medical-certificate-of-cause-of-death",
-                  "code": "coroner_reason",
-                  "display": "Coroner Reason"
-                }
-              ]
-            },
-            "valueCodeableConcept": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:medical-certificate-of-cause-of-death:coroner_reason",
-                  "code": "unnatural",
-                  "display": "Unnatural"
-                }
-              ]
-            }
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:medical-certificate-of-cause-of-death",
-                  "code": "medical_examiner_status",
-                  "display": "Medical Examiner Status"
-                }
-              ]
-            },
-            "valueCodeableConcept": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:medical-certificate-of-cause-of-death:medical_examiner_status",
-                  "code": "scrutinised",
-                  "display": "Scrutinised"
-                }
-              ]
-            }
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:medical-certificate-of-cause-of-death",
-                  "code": "certifier_note",
-                  "display": "Certifier Note"
-                }
-              ]
-            },
-            "valueString": ""
-          }
-        ]
+        "actualPeriod": {
+          "start": "2026-04-09T10:00:00+00:00"
+        }
       }
     },
     {
       "fullUrl": "urn:uuid:880e8400-e29b-41d4-a716-446655440003",
       "resource": {
-        "resourceType": "Observation",
+        "resourceType": "ClinicalImpression",
         "id": "880e8400-e29b-41d4-a716-446655440003",
         "meta": {
           "profile": [
-            "http://hl7.org/fhir/StructureDefinition/Observation"
+            "http://hl7.org/fhir/StructureDefinition/ClinicalImpression"
           ],
           "lastUpdated": "2026-04-09T10:00:00+00:00"
         },
-        "status": "final",
-        "category": [
-          {
-            "coding": [
-              {
-                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
-                "code": "survey",
-                "display": "Survey"
-              }
-            ]
-          }
-        ],
-        "code": {
-          "coding": [
-            {
-              "system": "urn:form-examples:medical-certificate-of-cause-of-death",
-              "code": "medical_certificate_of_cause_of_death_grade",
-              "display": "Medical Certificate Of Cause Of Death Grade"
-            }
-          ]
-        },
+        "status": "completed",
         "subject": {
           "reference": "urn:uuid:550e8400-e29b-41d4-a716-446655440000"
         },
         "encounter": {
-          "reference": "Encounter/bb0e8400-e29b-41d4-a716-446655440006"
+          "reference": "urn:uuid:770e8400-e29b-41d4-a716-446655440002"
         },
         "effectiveDateTime": "2026-04-09T10:00:00+00:00",
-        "component": [
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:medical-certificate-of-cause-of-death",
-                  "code": "deleted_at",
-                  "display": "Deleted At"
-                }
-              ]
-            },
-            "valueDateTime": "2026-04-09T10:00:00+00:00"
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:medical-certificate-of-cause-of-death",
-                  "code": "validity_class",
-                  "display": "Validity Class"
-                }
-              ]
-            },
-            "valueCodeableConcept": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:medical-certificate-of-cause-of-death:validity_class",
-                  "code": "valid",
-                  "display": "Valid"
-                }
-              ]
-            }
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:medical-certificate-of-cause-of-death",
-                  "code": "underlying_cause",
-                  "display": "Underlying Cause"
-                }
-              ]
-            },
-            "valueString": ""
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:medical-certificate-of-cause-of-death",
-                  "code": "coroner_referral_indicated",
-                  "display": "Coroner Referral Indicated"
-                }
-              ]
-            },
-            "valueCodeableConcept": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:medical-certificate-of-cause-of-death:coroner_referral_indicated",
-                  "code": "yes",
-                  "display": "Yes"
-                }
-              ]
-            }
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:medical-certificate-of-cause-of-death",
-                  "code": "graded_at",
-                  "display": "Graded At"
-                }
-              ]
-            },
-            "valueDateTime": "2026-04-09T10:00:00+00:00"
-          }
-        ]
+        "date": "2026-04-09T10:00:00+00:00",
+        "description": "Medical Certificate Of Cause Of Death grading result",
+        "summary": "Deleted At: 2026-04-09T10:00:00+00:00; Validity Class: valid; Underlying Cause: ; Coroner Referral Indicated: yes"
       }
     },
     {
       "fullUrl": "urn:uuid:aa0e8400-e29b-41d4-a716-446655440005",
       "resource": {
-        "resourceType": "Observation",
+        "resourceType": "DetectedIssue",
         "id": "aa0e8400-e29b-41d4-a716-446655440005",
         "meta": {
           "profile": [
-            "http://hl7.org/fhir/StructureDefinition/Observation"
+            "http://hl7.org/fhir/StructureDefinition/DetectedIssue"
           ],
           "lastUpdated": "2026-04-09T10:00:00+00:00"
         },
@@ -777,9 +278,9 @@
           {
             "coding": [
               {
-                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
-                "code": "survey",
-                "display": "Survey"
+                "system": "urn:form-examples:medical-certificate-of-cause-of-death",
+                "code": "grading-additional-flag",
+                "display": "coroner-referral-required"
               }
             ]
           }
@@ -787,107 +288,28 @@
         "code": {
           "coding": [
             {
-              "system": "urn:form-examples:medical-certificate-of-cause-of-death",
-              "code": "medical_certificate_of_cause_of_death_grade_flag",
-              "display": "Medical Certificate Of Cause Of Death Grade Flag"
+              "system": "urn:form-examples:medical-certificate-of-cause-of-death:flags",
+              "code": "FLAG-001",
+              "display": "Safety flag"
             }
           ]
         },
+        "severity": "low",
         "subject": {
           "reference": "urn:uuid:550e8400-e29b-41d4-a716-446655440000"
         },
-        "encounter": {
-          "reference": "Encounter/bb0e8400-e29b-41d4-a716-446655440006"
-        },
-        "effectiveDateTime": "2026-04-09T10:00:00+00:00",
-        "component": [
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:medical-certificate-of-cause-of-death",
-                  "code": "deleted_at",
-                  "display": "Deleted At"
-                }
-              ]
-            },
-            "valueDateTime": "2026-04-09T10:00:00+00:00"
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:medical-certificate-of-cause-of-death",
-                  "code": "category",
-                  "display": "Category"
-                }
-              ]
-            },
-            "valueCodeableConcept": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:medical-certificate-of-cause-of-death:category",
-                  "code": "coroner-referral-required",
-                  "display": "Coroner-Referral-Required"
-                }
-              ]
-            }
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:medical-certificate-of-cause-of-death",
-                  "code": "priority",
-                  "display": "Priority"
-                }
-              ]
-            },
-            "valueCodeableConcept": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:medical-certificate-of-cause-of-death:priority",
-                  "code": "low",
-                  "display": "Low"
-                }
-              ]
-            }
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:medical-certificate-of-cause-of-death",
-                  "code": "description",
-                  "display": "Description"
-                }
-              ]
-            },
-            "valueString": "Example text."
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:medical-certificate-of-cause-of-death",
-                  "code": "suggested_action",
-                  "display": "Suggested Action"
-                }
-              ]
-            },
-            "valueString": ""
-          }
-        ]
+        "identifiedDateTime": "2026-04-09T10:00:00+00:00",
+        "detail": "Clinical flag detected."
       }
     },
     {
       "fullUrl": "urn:uuid:990e8400-e29b-41d4-a716-446655440004",
       "resource": {
-        "resourceType": "Observation",
+        "resourceType": "DetectedIssue",
         "id": "990e8400-e29b-41d4-a716-446655440004",
         "meta": {
           "profile": [
-            "http://hl7.org/fhir/StructureDefinition/Observation"
+            "http://hl7.org/fhir/StructureDefinition/DetectedIssue"
           ],
           "lastUpdated": "2026-04-09T10:00:00+00:00"
         },
@@ -896,9 +318,9 @@
           {
             "coding": [
               {
-                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
-                "code": "survey",
-                "display": "Survey"
+                "system": "urn:form-examples:medical-certificate-of-cause-of-death",
+                "code": "grading-fired-rule",
+                "display": "General"
               }
             ]
           }
@@ -906,77 +328,18 @@
         "code": {
           "coding": [
             {
-              "system": "urn:form-examples:medical-certificate-of-cause-of-death",
-              "code": "medical_certificate_of_cause_of_death_grade_rule",
-              "display": "Medical Certificate Of Cause Of Death Grade Rule"
+              "system": "urn:form-examples:medical-certificate-of-cause-of-death:rules",
+              "code": "RULE-001",
+              "display": "Example grading rule"
             }
           ]
         },
+        "severity": "moderate",
         "subject": {
           "reference": "urn:uuid:550e8400-e29b-41d4-a716-446655440000"
         },
-        "encounter": {
-          "reference": "Encounter/bb0e8400-e29b-41d4-a716-446655440006"
-        },
-        "effectiveDateTime": "2026-04-09T10:00:00+00:00",
-        "component": [
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:medical-certificate-of-cause-of-death",
-                  "code": "deleted_at",
-                  "display": "Deleted At"
-                }
-              ]
-            },
-            "valueDateTime": "2026-04-09T10:00:00+00:00"
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:medical-certificate-of-cause-of-death",
-                  "code": "dimension",
-                  "display": "Dimension"
-                }
-              ]
-            },
-            "valueCodeableConcept": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:medical-certificate-of-cause-of-death:dimension",
-                  "code": "part-i",
-                  "display": "Part-I"
-                }
-              ]
-            }
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:medical-certificate-of-cause-of-death",
-                  "code": "category",
-                  "display": "Category"
-                }
-              ]
-            },
-            "valueString": "General"
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:medical-certificate-of-cause-of-death",
-                  "code": "description",
-                  "display": "Description"
-                }
-              ]
-            },
-            "valueString": "Example text."
-          }
-        ]
+        "identifiedDateTime": "2026-04-09T10:00:00+00:00",
+        "detail": "Example text."
       }
     },
     {

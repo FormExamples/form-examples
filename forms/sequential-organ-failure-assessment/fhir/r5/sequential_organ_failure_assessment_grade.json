@@ -1,192 +1,21 @@
 {
-  "resourceType": "Observation",
+  "resourceType": "ClinicalImpression",
   "id": "880e8400-e29b-41d4-a716-446655440003",
   "meta": {
     "profile": [
-      "http://hl7.org/fhir/StructureDefinition/Observation"
+      "http://hl7.org/fhir/StructureDefinition/ClinicalImpression"
     ],
     "lastUpdated": "2026-04-09T10:00:00+00:00"
   },
-  "status": "final",
-  "category": [
-    {
-      "coding": [
-        {
-          "system": "http://terminology.hl7.org/CodeSystem/observation-category",
-          "code": "survey",
-          "display": "Survey"
-        }
-      ]
-    }
-  ],
-  "code": {
-    "coding": [
-      {
-        "system": "urn:form-examples:sequential-organ-failure-assessment",
-        "code": "sequential_organ_failure_assessment_grade",
-        "display": "Sequential Organ Failure Grade"
-      }
-    ]
-  },
+  "status": "completed",
   "subject": {
     "reference": "Patient/550e8400-e29b-41d4-a716-446655440000"
   },
   "encounter": {
-    "reference": "Encounter/bb0e8400-e29b-41d4-a716-446655440006"
+    "reference": "Encounter/770e8400-e29b-41d4-a716-446655440002"
   },
   "effectiveDateTime": "2026-04-09T10:00:00+00:00",
-  "component": [
-    {
-      "code": {
-        "coding": [
-          {
-            "system": "urn:form-examples:sequential-organ-failure-assessment",
-            "code": "deleted_at",
-            "display": "Deleted At"
-          }
-        ]
-      },
-      "valueDateTime": "2026-04-09T10:00:00+00:00"
-    },
-    {
-      "code": {
-        "coding": [
-          {
-            "system": "urn:form-examples:sequential-organ-failure-assessment",
-            "code": "respiration_score",
-            "display": "Respiration Score"
-          }
-        ]
-      },
-      "valueInteger": 5
-    },
-    {
-      "code": {
-        "coding": [
-          {
-            "system": "urn:form-examples:sequential-organ-failure-assessment",
-            "code": "coagulation_score",
-            "display": "Coagulation Score"
-          }
-        ]
-      },
-      "valueInteger": 5
-    },
-    {
-      "code": {
-        "coding": [
-          {
-            "system": "urn:form-examples:sequential-organ-failure-assessment",
-            "code": "liver_score",
-            "display": "Liver Score"
-          }
-        ]
-      },
-      "valueInteger": 5
-    },
-    {
-      "code": {
-        "coding": [
-          {
-            "system": "urn:form-examples:sequential-organ-failure-assessment",
-            "code": "cardiovascular_score",
-            "display": "Cardiovascular Score"
-          }
-        ]
-      },
-      "valueInteger": 5
-    },
-    {
-      "code": {
-        "coding": [
-          {
-            "system": "urn:form-examples:sequential-organ-failure-assessment",
-            "code": "cns_score",
-            "display": "Cns Score"
-          }
-        ]
-      },
-      "valueInteger": 5
-    },
-    {
-      "code": {
-        "coding": [
-          {
-            "system": "urn:form-examples:sequential-organ-failure-assessment",
-            "code": "renal_score",
-            "display": "Renal Score"
-          }
-        ]
-      },
-      "valueInteger": 5
-    },
-    {
-      "code": {
-        "coding": [
-          {
-            "system": "urn:form-examples:sequential-organ-failure-assessment",
-            "code": "total_score",
-            "display": "Total Score"
-          }
-        ]
-      },
-      "valueInteger": 5
-    },
-    {
-      "code": {
-        "coding": [
-          {
-            "system": "urn:form-examples:sequential-organ-failure-assessment",
-            "code": "delta_sofa",
-            "display": "Delta Sofa"
-          }
-        ]
-      },
-      "valueInteger": 1
-    },
-    {
-      "code": {
-        "coding": [
-          {
-            "system": "urn:form-examples:sequential-organ-failure-assessment",
-            "code": "mortality_band",
-            "display": "Mortality Band"
-          }
-        ]
-      },
-      "valueCodeableConcept": {
-        "coding": [
-          {
-            "system": "urn:form-examples:sequential-organ-failure-assessment:mortality_band",
-            "code": "low",
-            "display": "Low"
-          }
-        ]
-      }
-    },
-    {
-      "code": {
-        "coding": [
-          {
-            "system": "urn:form-examples:sequential-organ-failure-assessment",
-            "code": "sepsis3",
-            "display": "Sepsis3"
-          }
-        ]
-      },
-      "valueBoolean": true
-    },
-    {
-      "code": {
-        "coding": [
-          {
-            "system": "urn:form-examples:sequential-organ-failure-assessment",
-            "code": "graded_at",
-            "display": "Graded At"
-          }
-        ]
-      },
-      "valueDateTime": "2026-04-09T10:00:00+00:00"
-    }
-  ]
+  "date": "2026-04-09T10:00:00+00:00",
+  "description": "Sequential Organ Failure Assessment grading result",
+  "summary": "Deleted At: 2026-04-09T10:00:00+00:00; Respiration Score: 5; Coagulation Score: 5; Liver Score: 5; Cardiovascular Score: 5; Cns Score: 5; Renal Score: 5; Total Score: 5; Delta Sofa: 1; Mortality Band: low; Sepsis3: True"
 }

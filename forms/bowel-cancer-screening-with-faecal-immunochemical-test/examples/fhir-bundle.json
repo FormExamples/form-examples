@@ -19,493 +19,78 @@
     {
       "fullUrl": "urn:uuid:770e8400-e29b-41d4-a716-446655440002",
       "resource": {
-        "resourceType": "Observation",
+        "resourceType": "Encounter",
         "id": "770e8400-e29b-41d4-a716-446655440002",
         "meta": {
           "profile": [
-            "http://hl7.org/fhir/StructureDefinition/Observation"
+            "http://hl7.org/fhir/StructureDefinition/Encounter"
           ],
           "lastUpdated": "2026-04-09T10:00:00+00:00"
         },
-        "status": "final",
-        "category": [
+        "status": "planned",
+        "class": [
           {
             "coding": [
               {
-                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
-                "code": "survey",
-                "display": "Survey"
+                "system": "http://terminology.hl7.org/CodeSystem/v3-ActCode",
+                "code": "AMB",
+                "display": "ambulatory"
               }
             ]
           }
         ],
-        "code": {
-          "coding": [
-            {
-              "system": "urn:form-examples:bowel-cancer-screening-with-faecal-immunochemical-test",
-              "code": "bowel_cancer_screening_fit",
-              "display": "Bowel Cancer Screening Fit"
-            }
-          ]
-        },
+        "type": [
+          {
+            "coding": [
+              {
+                "system": "http://snomed.info/sct",
+                "code": "185349003",
+                "display": "Encounter for check up"
+              }
+            ],
+            "text": "Bowel Cancer Screening With Faecal Immunochemical Test"
+          }
+        ],
         "subject": {
           "reference": "urn:uuid:550e8400-e29b-41d4-a716-446655440000"
         },
-        "encounter": {
-          "reference": "Encounter/bb0e8400-e29b-41d4-a716-446655440006"
-        },
-        "effectiveDateTime": "2026-04-09T10:00:00+00:00",
-        "component": [
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:bowel-cancer-screening-with-faecal-immunochemical-test",
-                  "code": "deleted_at",
-                  "display": "Deleted At"
-                }
-              ]
-            },
-            "valueDateTime": "2026-04-09T10:00:00+00:00"
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:bowel-cancer-screening-with-faecal-immunochemical-test",
-                  "code": "reviewed_at",
-                  "display": "Reviewed At"
-                }
-              ]
-            },
-            "valueDateTime": "2026-04-09T10:00:00+00:00"
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:bowel-cancer-screening-with-faecal-immunochemical-test",
-                  "code": "screening_hub",
-                  "display": "Screening Hub"
-                }
-              ]
-            },
-            "valueString": ""
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:bowel-cancer-screening-with-faecal-immunochemical-test",
-                  "code": "participant_identifier",
-                  "display": "Participant Identifier"
-                }
-              ]
-            },
-            "valueString": ""
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:bowel-cancer-screening-with-faecal-immunochemical-test",
-                  "code": "age",
-                  "display": "Age"
-                }
-              ]
-            },
-            "valueInteger": 45
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:bowel-cancer-screening-with-faecal-immunochemical-test",
-                  "code": "within_age_range",
-                  "display": "Within Age Range"
-                }
-              ]
-            },
-            "valueCodeableConcept": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:bowel-cancer-screening-with-faecal-immunochemical-test:within_age_range",
-                  "code": "eligible",
-                  "display": "Eligible"
-                }
-              ]
-            }
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:bowel-cancer-screening-with-faecal-immunochemical-test",
-                  "code": "recall_interval",
-                  "display": "Recall Interval"
-                }
-              ]
-            },
-            "valueCodeableConcept": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:bowel-cancer-screening-with-faecal-immunochemical-test:recall_interval",
-                  "code": "two-yearly",
-                  "display": "Two-Yearly"
-                }
-              ]
-            }
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:bowel-cancer-screening-with-faecal-immunochemical-test",
-                  "code": "invitation_date",
-                  "display": "Invitation Date"
-                }
-              ]
-            },
-            "valueDateTime": "2026-01-15"
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:bowel-cancer-screening-with-faecal-immunochemical-test",
-                  "code": "previous_outcome",
-                  "display": "Previous Outcome"
-                }
-              ]
-            },
-            "valueCodeableConcept": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:bowel-cancer-screening-with-faecal-immunochemical-test:previous_outcome",
-                  "code": "first-invitation",
-                  "display": "First-Invitation"
-                }
-              ]
-            }
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:bowel-cancer-screening-with-faecal-immunochemical-test",
-                  "code": "last_screen_date",
-                  "display": "Last Screen Date"
-                }
-              ]
-            },
-            "valueDateTime": "2026-01-15"
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:bowel-cancer-screening-with-faecal-immunochemical-test",
-                  "code": "kit_returned",
-                  "display": "Kit Returned"
-                }
-              ]
-            },
-            "valueCodeableConcept": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:bowel-cancer-screening-with-faecal-immunochemical-test:kit_returned",
-                  "code": "yes",
-                  "display": "Yes"
-                }
-              ]
-            }
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:bowel-cancer-screening-with-faecal-immunochemical-test",
-                  "code": "return_date",
-                  "display": "Return Date"
-                }
-              ]
-            },
-            "valueDateTime": "2026-01-15"
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:bowel-cancer-screening-with-faecal-immunochemical-test",
-                  "code": "sample_adequacy",
-                  "display": "Sample Adequacy"
-                }
-              ]
-            },
-            "valueCodeableConcept": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:bowel-cancer-screening-with-faecal-immunochemical-test:sample_adequacy",
-                  "code": "adequate",
-                  "display": "Adequate"
-                }
-              ]
-            }
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:bowel-cancer-screening-with-faecal-immunochemical-test",
-                  "code": "spoilt_reason",
-                  "display": "Spoilt Reason"
-                }
-              ]
-            },
-            "valueCodeableConcept": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:bowel-cancer-screening-with-faecal-immunochemical-test:spoilt_reason",
-                  "code": "leaked",
-                  "display": "Leaked"
-                }
-              ]
-            }
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:bowel-cancer-screening-with-faecal-immunochemical-test",
-                  "code": "faecal_haemoglobin_ug_g",
-                  "display": "Faecal Haemoglobin Ug G"
-                }
-              ]
-            },
-            "valueQuantity": {
-              "value": 0.0
-            }
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:bowel-cancer-screening-with-faecal-immunochemical-test",
-                  "code": "assay",
-                  "display": "Assay"
-                }
-              ]
-            },
-            "valueString": ""
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:bowel-cancer-screening-with-faecal-immunochemical-test",
-                  "code": "threshold_applied",
-                  "display": "Threshold Applied"
-                }
-              ]
-            },
-            "valueQuantity": {
-              "value": 0.0
-            }
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:bowel-cancer-screening-with-faecal-immunochemical-test",
-                  "code": "red_flag_symptoms",
-                  "display": "Red Flag Symptoms"
-                }
-              ]
-            },
-            "valueCodeableConcept": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:bowel-cancer-screening-with-faecal-immunochemical-test:red_flag_symptoms",
-                  "code": "yes",
-                  "display": "Yes"
-                }
-              ]
-            }
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:bowel-cancer-screening-with-faecal-immunochemical-test",
-                  "code": "clinical_note",
-                  "display": "Clinical Note"
-                }
-              ]
-            },
-            "valueString": ""
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:bowel-cancer-screening-with-faecal-immunochemical-test",
-                  "code": "context",
-                  "display": "Context"
-                }
-              ]
-            },
-            "valueString": "Example text."
-          }
-        ]
+        "actualPeriod": {
+          "start": "2026-04-09T10:00:00+00:00"
+        }
       }
     },
     {
       "fullUrl": "urn:uuid:880e8400-e29b-41d4-a716-446655440003",
       "resource": {
-        "resourceType": "Observation",
+        "resourceType": "ClinicalImpression",
         "id": "880e8400-e29b-41d4-a716-446655440003",
         "meta": {
           "profile": [
-            "http://hl7.org/fhir/StructureDefinition/Observation"
+            "http://hl7.org/fhir/StructureDefinition/ClinicalImpression"
           ],
           "lastUpdated": "2026-04-09T10:00:00+00:00"
         },
-        "status": "final",
-        "category": [
-          {
-            "coding": [
-              {
-                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
-                "code": "survey",
-                "display": "Survey"
-              }
-            ]
-          }
-        ],
-        "code": {
-          "coding": [
-            {
-              "system": "urn:form-examples:bowel-cancer-screening-with-faecal-immunochemical-test",
-              "code": "bowel_cancer_screening_fit_grade",
-              "display": "Bowel Cancer Screening Fit Grade"
-            }
-          ]
-        },
+        "status": "completed",
         "subject": {
           "reference": "urn:uuid:550e8400-e29b-41d4-a716-446655440000"
         },
         "encounter": {
-          "reference": "Encounter/bb0e8400-e29b-41d4-a716-446655440006"
+          "reference": "urn:uuid:770e8400-e29b-41d4-a716-446655440002"
         },
         "effectiveDateTime": "2026-04-09T10:00:00+00:00",
-        "component": [
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:bowel-cancer-screening-with-faecal-immunochemical-test",
-                  "code": "deleted_at",
-                  "display": "Deleted At"
-                }
-              ]
-            },
-            "valueDateTime": "2026-04-09T10:00:00+00:00"
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:bowel-cancer-screening-with-faecal-immunochemical-test",
-                  "code": "result_class",
-                  "display": "Result Class"
-                }
-              ]
-            },
-            "valueCodeableConcept": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:bowel-cancer-screening-with-faecal-immunochemical-test:result_class",
-                  "code": "negative",
-                  "display": "Negative"
-                }
-              ]
-            }
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:bowel-cancer-screening-with-faecal-immunochemical-test",
-                  "code": "management_action",
-                  "display": "Management Action"
-                }
-              ]
-            },
-            "valueCodeableConcept": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:bowel-cancer-screening-with-faecal-immunochemical-test:management_action",
-                  "code": "routine-recall",
-                  "display": "Routine-Recall"
-                }
-              ]
-            }
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:bowel-cancer-screening-with-faecal-immunochemical-test",
-                  "code": "symptomatic_pathway",
-                  "display": "Symptomatic Pathway"
-                }
-              ]
-            },
-            "valueBoolean": true
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:bowel-cancer-screening-with-faecal-immunochemical-test",
-                  "code": "status",
-                  "display": "Status"
-                }
-              ]
-            },
-            "valueCodeableConcept": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:bowel-cancer-screening-with-faecal-immunochemical-test:status",
-                  "code": "complete",
-                  "display": "Complete"
-                }
-              ]
-            }
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:bowel-cancer-screening-with-faecal-immunochemical-test",
-                  "code": "graded_at",
-                  "display": "Graded At"
-                }
-              ]
-            },
-            "valueDateTime": "2026-04-09T10:00:00+00:00"
-          }
-        ]
+        "date": "2026-04-09T10:00:00+00:00",
+        "description": "Bowel Cancer Screening With Faecal Immunochemical Test grading result",
+        "summary": "Deleted At: 2026-04-09T10:00:00+00:00; Result Class: negative; Management Action: routine-recall; Symptomatic Pathway: True; Status: complete"
       }
     },
     {
       "fullUrl": "urn:uuid:aa0e8400-e29b-41d4-a716-446655440005",
       "resource": {
-        "resourceType": "Observation",
+        "resourceType": "DetectedIssue",
         "id": "aa0e8400-e29b-41d4-a716-446655440005",
         "meta": {
           "profile": [
-            "http://hl7.org/fhir/StructureDefinition/Observation"
+            "http://hl7.org/fhir/StructureDefinition/DetectedIssue"
           ],
           "lastUpdated": "2026-04-09T10:00:00+00:00"
         },
@@ -514,9 +99,9 @@
           {
             "coding": [
               {
-                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
-                "code": "survey",
-                "display": "Survey"
+                "system": "urn:form-examples:bowel-cancer-screening-with-faecal-immunochemical-test",
+                "code": "grading-additional-flag",
+                "display": "positive-colonoscopy-referral"
               }
             ]
           }
@@ -524,107 +109,28 @@
         "code": {
           "coding": [
             {
-              "system": "urn:form-examples:bowel-cancer-screening-with-faecal-immunochemical-test",
-              "code": "bowel_cancer_screening_fit_grade_flag",
-              "display": "Bowel Cancer Screening Fit Grade Flag"
+              "system": "urn:form-examples:bowel-cancer-screening-with-faecal-immunochemical-test:flags",
+              "code": "FLAG-001",
+              "display": "Safety flag"
             }
           ]
         },
+        "severity": "low",
         "subject": {
           "reference": "urn:uuid:550e8400-e29b-41d4-a716-446655440000"
         },
-        "encounter": {
-          "reference": "Encounter/bb0e8400-e29b-41d4-a716-446655440006"
-        },
-        "effectiveDateTime": "2026-04-09T10:00:00+00:00",
-        "component": [
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:bowel-cancer-screening-with-faecal-immunochemical-test",
-                  "code": "deleted_at",
-                  "display": "Deleted At"
-                }
-              ]
-            },
-            "valueDateTime": "2026-04-09T10:00:00+00:00"
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:bowel-cancer-screening-with-faecal-immunochemical-test",
-                  "code": "category",
-                  "display": "Category"
-                }
-              ]
-            },
-            "valueCodeableConcept": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:bowel-cancer-screening-with-faecal-immunochemical-test:category",
-                  "code": "positive-colonoscopy-referral",
-                  "display": "Positive-Colonoscopy-Referral"
-                }
-              ]
-            }
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:bowel-cancer-screening-with-faecal-immunochemical-test",
-                  "code": "priority",
-                  "display": "Priority"
-                }
-              ]
-            },
-            "valueCodeableConcept": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:bowel-cancer-screening-with-faecal-immunochemical-test:priority",
-                  "code": "low",
-                  "display": "Low"
-                }
-              ]
-            }
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:bowel-cancer-screening-with-faecal-immunochemical-test",
-                  "code": "description",
-                  "display": "Description"
-                }
-              ]
-            },
-            "valueString": "Example text."
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:bowel-cancer-screening-with-faecal-immunochemical-test",
-                  "code": "suggested_action",
-                  "display": "Suggested Action"
-                }
-              ]
-            },
-            "valueString": ""
-          }
-        ]
+        "identifiedDateTime": "2026-04-09T10:00:00+00:00",
+        "detail": "Clinical flag detected."
       }
     },
     {
       "fullUrl": "urn:uuid:990e8400-e29b-41d4-a716-446655440004",
       "resource": {
-        "resourceType": "Observation",
+        "resourceType": "DetectedIssue",
         "id": "990e8400-e29b-41d4-a716-446655440004",
         "meta": {
           "profile": [
-            "http://hl7.org/fhir/StructureDefinition/Observation"
+            "http://hl7.org/fhir/StructureDefinition/DetectedIssue"
           ],
           "lastUpdated": "2026-04-09T10:00:00+00:00"
         },
@@ -633,9 +139,9 @@
           {
             "coding": [
               {
-                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
-                "code": "survey",
-                "display": "Survey"
+                "system": "urn:form-examples:bowel-cancer-screening-with-faecal-immunochemical-test",
+                "code": "grading-fired-rule",
+                "display": "General"
               }
             ]
           }
@@ -643,77 +149,18 @@
         "code": {
           "coding": [
             {
-              "system": "urn:form-examples:bowel-cancer-screening-with-faecal-immunochemical-test",
-              "code": "bowel_cancer_screening_fit_grade_rule",
-              "display": "Bowel Cancer Screening Fit Grade Rule"
+              "system": "urn:form-examples:bowel-cancer-screening-with-faecal-immunochemical-test:rules",
+              "code": "RULE-001",
+              "display": "Example grading rule"
             }
           ]
         },
+        "severity": "moderate",
         "subject": {
           "reference": "urn:uuid:550e8400-e29b-41d4-a716-446655440000"
         },
-        "encounter": {
-          "reference": "Encounter/bb0e8400-e29b-41d4-a716-446655440006"
-        },
-        "effectiveDateTime": "2026-04-09T10:00:00+00:00",
-        "component": [
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:bowel-cancer-screening-with-faecal-immunochemical-test",
-                  "code": "deleted_at",
-                  "display": "Deleted At"
-                }
-              ]
-            },
-            "valueDateTime": "2026-04-09T10:00:00+00:00"
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:bowel-cancer-screening-with-faecal-immunochemical-test",
-                  "code": "stage",
-                  "display": "Stage"
-                }
-              ]
-            },
-            "valueCodeableConcept": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:bowel-cancer-screening-with-faecal-immunochemical-test:stage",
-                  "code": "kit-return",
-                  "display": "Kit-Return"
-                }
-              ]
-            }
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:bowel-cancer-screening-with-faecal-immunochemical-test",
-                  "code": "category",
-                  "display": "Category"
-                }
-              ]
-            },
-            "valueString": "General"
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:bowel-cancer-screening-with-faecal-immunochemical-test",
-                  "code": "description",
-                  "display": "Description"
-                }
-              ]
-            },
-            "valueString": "Example text."
-          }
-        ]
+        "identifiedDateTime": "2026-04-09T10:00:00+00:00",
+        "detail": "Example text."
       }
     },
     {
@@ -752,7 +199,7 @@
           "reference": "urn:uuid:550e8400-e29b-41d4-a716-446655440000"
         },
         "encounter": {
-          "reference": "Encounter/bb0e8400-e29b-41d4-a716-446655440006"
+          "reference": "urn:uuid:770e8400-e29b-41d4-a716-446655440002"
         },
         "effectiveDateTime": "2026-04-09T10:00:00+00:00",
         "component": [

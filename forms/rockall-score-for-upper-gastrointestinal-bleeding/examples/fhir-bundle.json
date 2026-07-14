@@ -52,7 +52,7 @@
           "reference": "urn:uuid:550e8400-e29b-41d4-a716-446655440000"
         },
         "encounter": {
-          "reference": "Encounter/bb0e8400-e29b-41d4-a716-446655440006"
+          "reference": "urn:uuid:770e8400-e29b-41d4-a716-446655440002"
         },
         "effectiveDateTime": "2026-04-09T10:00:00+00:00",
         "component": [
@@ -237,473 +237,78 @@
     {
       "fullUrl": "urn:uuid:770e8400-e29b-41d4-a716-446655440002",
       "resource": {
-        "resourceType": "Observation",
+        "resourceType": "Encounter",
         "id": "770e8400-e29b-41d4-a716-446655440002",
         "meta": {
           "profile": [
-            "http://hl7.org/fhir/StructureDefinition/Observation"
+            "http://hl7.org/fhir/StructureDefinition/Encounter"
           ],
           "lastUpdated": "2026-04-09T10:00:00+00:00"
         },
-        "status": "final",
-        "category": [
+        "status": "planned",
+        "class": [
           {
             "coding": [
               {
-                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
-                "code": "survey",
-                "display": "Survey"
+                "system": "http://terminology.hl7.org/CodeSystem/v3-ActCode",
+                "code": "AMB",
+                "display": "ambulatory"
               }
             ]
           }
         ],
-        "code": {
-          "coding": [
-            {
-              "system": "urn:form-examples:rockall-score-for-upper-gastrointestinal-bleeding",
-              "code": "rockall_score_for_upper_gastrointestinal_bleeding",
-              "display": "Rockall Score For Upper Gastrointestinal Bleeding"
-            }
-          ]
-        },
+        "type": [
+          {
+            "coding": [
+              {
+                "system": "http://snomed.info/sct",
+                "code": "185349003",
+                "display": "Encounter for check up"
+              }
+            ],
+            "text": "Rockall Score For Upper Gastrointestinal Bleeding"
+          }
+        ],
         "subject": {
           "reference": "urn:uuid:550e8400-e29b-41d4-a716-446655440000"
         },
-        "encounter": {
-          "reference": "Encounter/bb0e8400-e29b-41d4-a716-446655440006"
-        },
-        "effectiveDateTime": "2026-04-09T10:00:00+00:00",
-        "component": [
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:rockall-score-for-upper-gastrointestinal-bleeding",
-                  "code": "deleted_at",
-                  "display": "Deleted At"
-                }
-              ]
-            },
-            "valueDateTime": "2026-04-09T10:00:00+00:00"
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:rockall-score-for-upper-gastrointestinal-bleeding",
-                  "code": "clinician_name",
-                  "display": "Clinician Name"
-                }
-              ]
-            },
-            "valueString": "Example"
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:rockall-score-for-upper-gastrointestinal-bleeding",
-                  "code": "clinician_role",
-                  "display": "Clinician Role"
-                }
-              ]
-            },
-            "valueCodeableConcept": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:rockall-score-for-upper-gastrointestinal-bleeding:clinician_role",
-                  "code": "doctor",
-                  "display": "Doctor"
-                }
-              ]
-            }
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:rockall-score-for-upper-gastrointestinal-bleeding",
-                  "code": "assessed_at",
-                  "display": "Assessed At"
-                }
-              ]
-            },
-            "valueDateTime": "2026-04-09T10:00:00+00:00"
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:rockall-score-for-upper-gastrointestinal-bleeding",
-                  "code": "care_setting",
-                  "display": "Care Setting"
-                }
-              ]
-            },
-            "valueCodeableConcept": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:rockall-score-for-upper-gastrointestinal-bleeding:care_setting",
-                  "code": "emergency-department",
-                  "display": "Emergency-Department"
-                }
-              ]
-            }
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:rockall-score-for-upper-gastrointestinal-bleeding",
-                  "code": "presenting_complaint",
-                  "display": "Presenting Complaint"
-                }
-              ]
-            },
-            "valueString": ""
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:rockall-score-for-upper-gastrointestinal-bleeding",
-                  "code": "patient_identifier",
-                  "display": "Patient Identifier"
-                }
-              ]
-            },
-            "valueString": ""
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:rockall-score-for-upper-gastrointestinal-bleeding",
-                  "code": "age_years",
-                  "display": "Age Years"
-                }
-              ]
-            },
-            "valueInteger": 45
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:rockall-score-for-upper-gastrointestinal-bleeding",
-                  "code": "sex",
-                  "display": "Sex"
-                }
-              ]
-            },
-            "valueCodeableConcept": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:rockall-score-for-upper-gastrointestinal-bleeding:sex",
-                  "code": "female",
-                  "display": "Female"
-                }
-              ]
-            }
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:rockall-score-for-upper-gastrointestinal-bleeding",
-                  "code": "systolic_blood_pressure_mmhg",
-                  "display": "Systolic Blood Pressure Mmhg"
-                }
-              ]
-            },
-            "valueInteger": 1
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:rockall-score-for-upper-gastrointestinal-bleeding",
-                  "code": "heart_rate_bpm",
-                  "display": "Heart Rate Bpm"
-                }
-              ]
-            },
-            "valueInteger": 1
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:rockall-score-for-upper-gastrointestinal-bleeding",
-                  "code": "comorbidity",
-                  "display": "Comorbidity"
-                }
-              ]
-            },
-            "valueCodeableConcept": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:rockall-score-for-upper-gastrointestinal-bleeding:comorbidity",
-                  "code": "none",
-                  "display": "None"
-                }
-              ]
-            }
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:rockall-score-for-upper-gastrointestinal-bleeding",
-                  "code": "endoscopy_performed",
-                  "display": "Endoscopy Performed"
-                }
-              ]
-            },
-            "valueCodeableConcept": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:rockall-score-for-upper-gastrointestinal-bleeding:endoscopy_performed",
-                  "code": "yes",
-                  "display": "Yes"
-                }
-              ]
-            }
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:rockall-score-for-upper-gastrointestinal-bleeding",
-                  "code": "diagnosis",
-                  "display": "Diagnosis"
-                }
-              ]
-            },
-            "valueCodeableConcept": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:rockall-score-for-upper-gastrointestinal-bleeding:diagnosis",
-                  "code": "mallory-weiss-or-none",
-                  "display": "Mallory-Weiss-Or-None"
-                }
-              ]
-            }
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:rockall-score-for-upper-gastrointestinal-bleeding",
-                  "code": "stigmata_recent_haemorrhage",
-                  "display": "Stigmata Recent Haemorrhage"
-                }
-              ]
-            },
-            "valueCodeableConcept": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:rockall-score-for-upper-gastrointestinal-bleeding:stigmata_recent_haemorrhage",
-                  "code": "none-or-dark-spot",
-                  "display": "None-Or-Dark-Spot"
-                }
-              ]
-            }
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:rockall-score-for-upper-gastrointestinal-bleeding",
-                  "code": "clinical_note",
-                  "display": "Clinical Note"
-                }
-              ]
-            },
-            "valueString": ""
-          }
-        ]
+        "actualPeriod": {
+          "start": "2026-04-09T10:00:00+00:00"
+        }
       }
     },
     {
       "fullUrl": "urn:uuid:880e8400-e29b-41d4-a716-446655440003",
       "resource": {
-        "resourceType": "Observation",
+        "resourceType": "ClinicalImpression",
         "id": "880e8400-e29b-41d4-a716-446655440003",
         "meta": {
           "profile": [
-            "http://hl7.org/fhir/StructureDefinition/Observation"
+            "http://hl7.org/fhir/StructureDefinition/ClinicalImpression"
           ],
           "lastUpdated": "2026-04-09T10:00:00+00:00"
         },
-        "status": "final",
-        "category": [
-          {
-            "coding": [
-              {
-                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
-                "code": "survey",
-                "display": "Survey"
-              }
-            ]
-          }
-        ],
-        "code": {
-          "coding": [
-            {
-              "system": "urn:form-examples:rockall-score-for-upper-gastrointestinal-bleeding",
-              "code": "rockall_score_for_upper_gastrointestinal_bleeding_grade",
-              "display": "Rockall Score For Upper Gastrointestinal Bleeding Grade"
-            }
-          ]
-        },
+        "status": "completed",
         "subject": {
           "reference": "urn:uuid:550e8400-e29b-41d4-a716-446655440000"
         },
         "encounter": {
-          "reference": "Encounter/bb0e8400-e29b-41d4-a716-446655440006"
+          "reference": "urn:uuid:770e8400-e29b-41d4-a716-446655440002"
         },
         "effectiveDateTime": "2026-04-09T10:00:00+00:00",
-        "component": [
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:rockall-score-for-upper-gastrointestinal-bleeding",
-                  "code": "deleted_at",
-                  "display": "Deleted At"
-                }
-              ]
-            },
-            "valueDateTime": "2026-04-09T10:00:00+00:00"
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:rockall-score-for-upper-gastrointestinal-bleeding",
-                  "code": "age_points",
-                  "display": "Age Points"
-                }
-              ]
-            },
-            "valueInteger": 45
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:rockall-score-for-upper-gastrointestinal-bleeding",
-                  "code": "shock_points",
-                  "display": "Shock Points"
-                }
-              ]
-            },
-            "valueInteger": 1
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:rockall-score-for-upper-gastrointestinal-bleeding",
-                  "code": "comorbidity_points",
-                  "display": "Comorbidity Points"
-                }
-              ]
-            },
-            "valueInteger": 1
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:rockall-score-for-upper-gastrointestinal-bleeding",
-                  "code": "clinical_score",
-                  "display": "Clinical Score"
-                }
-              ]
-            },
-            "valueInteger": 5
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:rockall-score-for-upper-gastrointestinal-bleeding",
-                  "code": "diagnosis_points",
-                  "display": "Diagnosis Points"
-                }
-              ]
-            },
-            "valueInteger": 1
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:rockall-score-for-upper-gastrointestinal-bleeding",
-                  "code": "stigmata_points",
-                  "display": "Stigmata Points"
-                }
-              ]
-            },
-            "valueInteger": 1
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:rockall-score-for-upper-gastrointestinal-bleeding",
-                  "code": "full_score",
-                  "display": "Full Score"
-                }
-              ]
-            },
-            "valueInteger": 5
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:rockall-score-for-upper-gastrointestinal-bleeding",
-                  "code": "risk_band",
-                  "display": "Risk Band"
-                }
-              ]
-            },
-            "valueCodeableConcept": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:rockall-score-for-upper-gastrointestinal-bleeding:risk_band",
-                  "code": "low",
-                  "display": "Low"
-                }
-              ]
-            }
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:rockall-score-for-upper-gastrointestinal-bleeding",
-                  "code": "graded_at",
-                  "display": "Graded At"
-                }
-              ]
-            },
-            "valueDateTime": "2026-04-09T10:00:00+00:00"
-          }
-        ]
+        "date": "2026-04-09T10:00:00+00:00",
+        "description": "Rockall Score For Upper Gastrointestinal Bleeding grading result",
+        "summary": "Deleted At: 2026-04-09T10:00:00+00:00; Age Points: 45; Shock Points: 1; Comorbidity Points: 1; Clinical Score: 5; Diagnosis Points: 1; Stigmata Points: 1; Full Score: 5; Risk Band: low"
       }
     },
     {
       "fullUrl": "urn:uuid:aa0e8400-e29b-41d4-a716-446655440005",
       "resource": {
-        "resourceType": "Observation",
+        "resourceType": "DetectedIssue",
         "id": "aa0e8400-e29b-41d4-a716-446655440005",
         "meta": {
           "profile": [
-            "http://hl7.org/fhir/StructureDefinition/Observation"
+            "http://hl7.org/fhir/StructureDefinition/DetectedIssue"
           ],
           "lastUpdated": "2026-04-09T10:00:00+00:00"
         },
@@ -712,9 +317,9 @@
           {
             "coding": [
               {
-                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
-                "code": "survey",
-                "display": "Survey"
+                "system": "urn:form-examples:rockall-score-for-upper-gastrointestinal-bleeding",
+                "code": "grading-additional-flag",
+                "display": "high-mortality-risk"
               }
             ]
           }
@@ -722,107 +327,28 @@
         "code": {
           "coding": [
             {
-              "system": "urn:form-examples:rockall-score-for-upper-gastrointestinal-bleeding",
-              "code": "rockall_score_for_upper_gastrointestinal_bleeding_grade_flag",
-              "display": "Rockall Score For Upper Gastrointestinal Bleeding Grade Flag"
+              "system": "urn:form-examples:rockall-score-for-upper-gastrointestinal-bleeding:flags",
+              "code": "FLAG-001",
+              "display": "Safety flag"
             }
           ]
         },
+        "severity": "low",
         "subject": {
           "reference": "urn:uuid:550e8400-e29b-41d4-a716-446655440000"
         },
-        "encounter": {
-          "reference": "Encounter/bb0e8400-e29b-41d4-a716-446655440006"
-        },
-        "effectiveDateTime": "2026-04-09T10:00:00+00:00",
-        "component": [
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:rockall-score-for-upper-gastrointestinal-bleeding",
-                  "code": "deleted_at",
-                  "display": "Deleted At"
-                }
-              ]
-            },
-            "valueDateTime": "2026-04-09T10:00:00+00:00"
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:rockall-score-for-upper-gastrointestinal-bleeding",
-                  "code": "category",
-                  "display": "Category"
-                }
-              ]
-            },
-            "valueCodeableConcept": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:rockall-score-for-upper-gastrointestinal-bleeding:category",
-                  "code": "high-mortality-risk",
-                  "display": "High-Mortality-Risk"
-                }
-              ]
-            }
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:rockall-score-for-upper-gastrointestinal-bleeding",
-                  "code": "priority",
-                  "display": "Priority"
-                }
-              ]
-            },
-            "valueCodeableConcept": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:rockall-score-for-upper-gastrointestinal-bleeding:priority",
-                  "code": "low",
-                  "display": "Low"
-                }
-              ]
-            }
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:rockall-score-for-upper-gastrointestinal-bleeding",
-                  "code": "description",
-                  "display": "Description"
-                }
-              ]
-            },
-            "valueString": "Example text."
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:rockall-score-for-upper-gastrointestinal-bleeding",
-                  "code": "suggested_action",
-                  "display": "Suggested Action"
-                }
-              ]
-            },
-            "valueString": ""
-          }
-        ]
+        "identifiedDateTime": "2026-04-09T10:00:00+00:00",
+        "detail": "Clinical flag detected."
       }
     },
     {
       "fullUrl": "urn:uuid:990e8400-e29b-41d4-a716-446655440004",
       "resource": {
-        "resourceType": "Observation",
+        "resourceType": "DetectedIssue",
         "id": "990e8400-e29b-41d4-a716-446655440004",
         "meta": {
           "profile": [
-            "http://hl7.org/fhir/StructureDefinition/Observation"
+            "http://hl7.org/fhir/StructureDefinition/DetectedIssue"
           ],
           "lastUpdated": "2026-04-09T10:00:00+00:00"
         },
@@ -831,9 +357,9 @@
           {
             "coding": [
               {
-                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
-                "code": "survey",
-                "display": "Survey"
+                "system": "urn:form-examples:rockall-score-for-upper-gastrointestinal-bleeding",
+                "code": "grading-fired-rule",
+                "display": "General"
               }
             ]
           }
@@ -841,89 +367,18 @@
         "code": {
           "coding": [
             {
-              "system": "urn:form-examples:rockall-score-for-upper-gastrointestinal-bleeding",
-              "code": "rockall_score_for_upper_gastrointestinal_bleeding_grade_rule",
-              "display": "Rockall Score For Upper Gastrointestinal Bleeding Grade Rule"
+              "system": "urn:form-examples:rockall-score-for-upper-gastrointestinal-bleeding:rules",
+              "code": "RULE-001",
+              "display": "Example grading rule"
             }
           ]
         },
+        "severity": "moderate",
         "subject": {
           "reference": "urn:uuid:550e8400-e29b-41d4-a716-446655440000"
         },
-        "encounter": {
-          "reference": "Encounter/bb0e8400-e29b-41d4-a716-446655440006"
-        },
-        "effectiveDateTime": "2026-04-09T10:00:00+00:00",
-        "component": [
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:rockall-score-for-upper-gastrointestinal-bleeding",
-                  "code": "deleted_at",
-                  "display": "Deleted At"
-                }
-              ]
-            },
-            "valueDateTime": "2026-04-09T10:00:00+00:00"
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:rockall-score-for-upper-gastrointestinal-bleeding",
-                  "code": "parameter",
-                  "display": "Parameter"
-                }
-              ]
-            },
-            "valueCodeableConcept": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:rockall-score-for-upper-gastrointestinal-bleeding:parameter",
-                  "code": "age",
-                  "display": "Age"
-                }
-              ]
-            }
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:rockall-score-for-upper-gastrointestinal-bleeding",
-                  "code": "points",
-                  "display": "Points"
-                }
-              ]
-            },
-            "valueInteger": 1
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:rockall-score-for-upper-gastrointestinal-bleeding",
-                  "code": "category",
-                  "display": "Category"
-                }
-              ]
-            },
-            "valueString": "General"
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:rockall-score-for-upper-gastrointestinal-bleeding",
-                  "code": "description",
-                  "display": "Description"
-                }
-              ]
-            },
-            "valueString": "Example text."
-          }
-        ]
+        "identifiedDateTime": "2026-04-09T10:00:00+00:00",
+        "detail": "Example text."
       }
     }
   ]

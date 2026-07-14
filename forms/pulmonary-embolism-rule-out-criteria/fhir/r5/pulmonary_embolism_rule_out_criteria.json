@@ -1,362 +1,40 @@
 {
-  "resourceType": "Observation",
+  "resourceType": "Encounter",
   "id": "770e8400-e29b-41d4-a716-446655440002",
   "meta": {
     "profile": [
-      "http://hl7.org/fhir/StructureDefinition/Observation"
+      "http://hl7.org/fhir/StructureDefinition/Encounter"
     ],
     "lastUpdated": "2026-04-09T10:00:00+00:00"
   },
-  "status": "final",
-  "category": [
+  "status": "planned",
+  "class": [
     {
       "coding": [
         {
-          "system": "http://terminology.hl7.org/CodeSystem/observation-category",
-          "code": "survey",
-          "display": "Survey"
+          "system": "http://terminology.hl7.org/CodeSystem/v3-ActCode",
+          "code": "AMB",
+          "display": "ambulatory"
         }
       ]
     }
   ],
-  "code": {
-    "coding": [
-      {
-        "system": "urn:form-examples:pulmonary-embolism-rule-out-criteria",
-        "code": "pulmonary_embolism_rule_out_criteria",
-        "display": "Pulmonary Embolism Rule Out Criteria"
-      }
-    ]
-  },
+  "type": [
+    {
+      "coding": [
+        {
+          "system": "http://snomed.info/sct",
+          "code": "185349003",
+          "display": "Encounter for check up"
+        }
+      ],
+      "text": "Pulmonary Embolism Rule Out Criteria"
+    }
+  ],
   "subject": {
     "reference": "Patient/550e8400-e29b-41d4-a716-446655440000"
   },
-  "encounter": {
-    "reference": "Encounter/bb0e8400-e29b-41d4-a716-446655440006"
-  },
-  "effectiveDateTime": "2026-04-09T10:00:00+00:00",
-  "component": [
-    {
-      "code": {
-        "coding": [
-          {
-            "system": "urn:form-examples:pulmonary-embolism-rule-out-criteria",
-            "code": "deleted_at",
-            "display": "Deleted At"
-          }
-        ]
-      },
-      "valueDateTime": "2026-04-09T10:00:00+00:00"
-    },
-    {
-      "code": {
-        "coding": [
-          {
-            "system": "urn:form-examples:pulmonary-embolism-rule-out-criteria",
-            "code": "status",
-            "display": "Status"
-          }
-        ]
-      },
-      "valueCodeableConcept": {
-        "coding": [
-          {
-            "system": "urn:form-examples:pulmonary-embolism-rule-out-criteria:status",
-            "code": "draft",
-            "display": "Draft"
-          }
-        ]
-      }
-    },
-    {
-      "code": {
-        "coding": [
-          {
-            "system": "urn:form-examples:pulmonary-embolism-rule-out-criteria",
-            "code": "patient_identifier",
-            "display": "Patient Identifier"
-          }
-        ]
-      },
-      "valueString": ""
-    },
-    {
-      "code": {
-        "coding": [
-          {
-            "system": "urn:form-examples:pulmonary-embolism-rule-out-criteria",
-            "code": "assessed_at",
-            "display": "Assessed At"
-          }
-        ]
-      },
-      "valueDateTime": "2026-04-09T10:00:00+00:00"
-    },
-    {
-      "code": {
-        "coding": [
-          {
-            "system": "urn:form-examples:pulmonary-embolism-rule-out-criteria",
-            "code": "care_setting",
-            "display": "Care Setting"
-          }
-        ]
-      },
-      "valueCodeableConcept": {
-        "coding": [
-          {
-            "system": "urn:form-examples:pulmonary-embolism-rule-out-criteria:care_setting",
-            "code": "emergency-department",
-            "display": "Emergency-Department"
-          }
-        ]
-      }
-    },
-    {
-      "code": {
-        "coding": [
-          {
-            "system": "urn:form-examples:pulmonary-embolism-rule-out-criteria",
-            "code": "presenting_complaint",
-            "display": "Presenting Complaint"
-          }
-        ]
-      },
-      "valueString": ""
-    },
-    {
-      "code": {
-        "coding": [
-          {
-            "system": "urn:form-examples:pulmonary-embolism-rule-out-criteria",
-            "code": "age",
-            "display": "Age"
-          }
-        ]
-      },
-      "valueQuantity": {
-        "value": 0.0
-      }
-    },
-    {
-      "code": {
-        "coding": [
-          {
-            "system": "urn:form-examples:pulmonary-embolism-rule-out-criteria",
-            "code": "heart_rate",
-            "display": "Heart Rate"
-          }
-        ]
-      },
-      "valueQuantity": {
-        "value": 72.0
-      }
-    },
-    {
-      "code": {
-        "coding": [
-          {
-            "system": "urn:form-examples:pulmonary-embolism-rule-out-criteria",
-            "code": "oxygen_saturation",
-            "display": "Oxygen Saturation"
-          }
-        ]
-      },
-      "valueQuantity": {
-        "value": 0.0
-      }
-    },
-    {
-      "code": {
-        "coding": [
-          {
-            "system": "urn:form-examples:pulmonary-embolism-rule-out-criteria",
-            "code": "pretest_probability",
-            "display": "Pretest Probability"
-          }
-        ]
-      },
-      "valueCodeableConcept": {
-        "coding": [
-          {
-            "system": "urn:form-examples:pulmonary-embolism-rule-out-criteria:pretest_probability",
-            "code": "low",
-            "display": "Low"
-          }
-        ]
-      }
-    },
-    {
-      "code": {
-        "coding": [
-          {
-            "system": "urn:form-examples:pulmonary-embolism-rule-out-criteria",
-            "code": "age_under_50",
-            "display": "Age Under 50"
-          }
-        ]
-      },
-      "valueCodeableConcept": {
-        "coding": [
-          {
-            "system": "urn:form-examples:pulmonary-embolism-rule-out-criteria:age_under_50",
-            "code": "yes",
-            "display": "Yes"
-          }
-        ]
-      }
-    },
-    {
-      "code": {
-        "coding": [
-          {
-            "system": "urn:form-examples:pulmonary-embolism-rule-out-criteria",
-            "code": "heart_rate_under_100",
-            "display": "Heart Rate Under 100"
-          }
-        ]
-      },
-      "valueCodeableConcept": {
-        "coding": [
-          {
-            "system": "urn:form-examples:pulmonary-embolism-rule-out-criteria:heart_rate_under_100",
-            "code": "yes",
-            "display": "Yes"
-          }
-        ]
-      }
-    },
-    {
-      "code": {
-        "coding": [
-          {
-            "system": "urn:form-examples:pulmonary-embolism-rule-out-criteria",
-            "code": "spo2_at_least_95",
-            "display": "Spo2 At Least 95"
-          }
-        ]
-      },
-      "valueCodeableConcept": {
-        "coding": [
-          {
-            "system": "urn:form-examples:pulmonary-embolism-rule-out-criteria:spo2_at_least_95",
-            "code": "yes",
-            "display": "Yes"
-          }
-        ]
-      }
-    },
-    {
-      "code": {
-        "coding": [
-          {
-            "system": "urn:form-examples:pulmonary-embolism-rule-out-criteria",
-            "code": "no_unilateral_leg_swelling",
-            "display": "No Unilateral Leg Swelling"
-          }
-        ]
-      },
-      "valueCodeableConcept": {
-        "coding": [
-          {
-            "system": "urn:form-examples:pulmonary-embolism-rule-out-criteria:no_unilateral_leg_swelling",
-            "code": "yes",
-            "display": "Yes"
-          }
-        ]
-      }
-    },
-    {
-      "code": {
-        "coding": [
-          {
-            "system": "urn:form-examples:pulmonary-embolism-rule-out-criteria",
-            "code": "no_haemoptysis",
-            "display": "No Haemoptysis"
-          }
-        ]
-      },
-      "valueCodeableConcept": {
-        "coding": [
-          {
-            "system": "urn:form-examples:pulmonary-embolism-rule-out-criteria:no_haemoptysis",
-            "code": "yes",
-            "display": "Yes"
-          }
-        ]
-      }
-    },
-    {
-      "code": {
-        "coding": [
-          {
-            "system": "urn:form-examples:pulmonary-embolism-rule-out-criteria",
-            "code": "no_recent_surgery_trauma",
-            "display": "No Recent Surgery Trauma"
-          }
-        ]
-      },
-      "valueCodeableConcept": {
-        "coding": [
-          {
-            "system": "urn:form-examples:pulmonary-embolism-rule-out-criteria:no_recent_surgery_trauma",
-            "code": "yes",
-            "display": "Yes"
-          }
-        ]
-      }
-    },
-    {
-      "code": {
-        "coding": [
-          {
-            "system": "urn:form-examples:pulmonary-embolism-rule-out-criteria",
-            "code": "no_prior_dvt_pe",
-            "display": "No Prior Dvt Pe"
-          }
-        ]
-      },
-      "valueCodeableConcept": {
-        "coding": [
-          {
-            "system": "urn:form-examples:pulmonary-embolism-rule-out-criteria:no_prior_dvt_pe",
-            "code": "yes",
-            "display": "Yes"
-          }
-        ]
-      }
-    },
-    {
-      "code": {
-        "coding": [
-          {
-            "system": "urn:form-examples:pulmonary-embolism-rule-out-criteria",
-            "code": "no_oestrogen_use",
-            "display": "No Oestrogen Use"
-          }
-        ]
-      },
-      "valueCodeableConcept": {
-        "coding": [
-          {
-            "system": "urn:form-examples:pulmonary-embolism-rule-out-criteria:no_oestrogen_use",
-            "code": "yes",
-            "display": "Yes"
-          }
-        ]
-      }
-    },
-    {
-      "code": {
-        "coding": [
-          {
-            "system": "urn:form-examples:pulmonary-embolism-rule-out-criteria",
-            "code": "clinical_notes",
-            "display": "Clinical Notes"
-          }
-        ]
-      },
-      "valueString": "Example text."
-    }
-  ]
+  "actualPeriod": {
+    "start": "2026-04-09T10:00:00+00:00"
+  }
 }

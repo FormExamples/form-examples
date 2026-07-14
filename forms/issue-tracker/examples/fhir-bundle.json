@@ -19,1165 +19,78 @@
     {
       "fullUrl": "urn:uuid:770e8400-e29b-41d4-a716-446655440002",
       "resource": {
-        "resourceType": "Observation",
+        "resourceType": "Encounter",
         "id": "770e8400-e29b-41d4-a716-446655440002",
         "meta": {
           "profile": [
-            "http://hl7.org/fhir/StructureDefinition/Observation"
+            "http://hl7.org/fhir/StructureDefinition/Encounter"
           ],
           "lastUpdated": "2026-04-09T10:00:00+00:00"
         },
-        "status": "final",
-        "category": [
+        "status": "planned",
+        "class": [
           {
             "coding": [
               {
-                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
-                "code": "survey",
-                "display": "Survey"
+                "system": "http://terminology.hl7.org/CodeSystem/v3-ActCode",
+                "code": "AMB",
+                "display": "ambulatory"
               }
             ]
           }
         ],
-        "code": {
-          "coding": [
-            {
-              "system": "urn:form-examples:issue-tracker",
-              "code": "issue_tracker",
-              "display": "Issue Tracker"
-            }
-          ]
-        },
+        "type": [
+          {
+            "coding": [
+              {
+                "system": "http://snomed.info/sct",
+                "code": "185349003",
+                "display": "Encounter for check up"
+              }
+            ],
+            "text": "Issue Tracker"
+          }
+        ],
         "subject": {
           "reference": "Patient/bb0e8400-e29b-41d4-a716-446655440006"
         },
-        "encounter": {
-          "reference": "Encounter/cc0e8400-e29b-41d4-a716-446655440007"
-        },
-        "effectiveDateTime": "2026-04-09T10:00:00+00:00",
-        "component": [
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:issue-tracker",
-                  "code": "deleted_at",
-                  "display": "Deleted At"
-                }
-              ]
-            },
-            "valueDateTime": "2026-04-09T10:00:00+00:00"
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:issue-tracker",
-                  "code": "status",
-                  "display": "Status"
-                }
-              ]
-            },
-            "valueCodeableConcept": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:issue-tracker:status",
-                  "code": "draft",
-                  "display": "Draft"
-                }
-              ]
-            }
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:issue-tracker",
-                  "code": "reported_at",
-                  "display": "Reported At"
-                }
-              ]
-            },
-            "valueDateTime": "2026-04-09T10:00:00+00:00"
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:issue-tracker",
-                  "code": "discovered_at",
-                  "display": "Discovered At"
-                }
-              ]
-            },
-            "valueDateTime": "2026-04-09T10:00:00+00:00"
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:issue-tracker",
-                  "code": "started_at",
-                  "display": "Started At"
-                }
-              ]
-            },
-            "valueDateTime": "2026-04-09T10:00:00+00:00"
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:issue-tracker",
-                  "code": "resolved_at",
-                  "display": "Resolved At"
-                }
-              ]
-            },
-            "valueDateTime": "2026-04-09T10:00:00+00:00"
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:issue-tracker",
-                  "code": "issue_category",
-                  "display": "Issue Category"
-                }
-              ]
-            },
-            "valueCodeableConcept": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:issue-tracker:issue_category",
-                  "code": "software-defect",
-                  "display": "Software-Defect"
-                }
-              ]
-            }
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:issue-tracker",
-                  "code": "environment",
-                  "display": "Environment"
-                }
-              ]
-            },
-            "valueCodeableConcept": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:issue-tracker:environment",
-                  "code": "dev",
-                  "display": "Dev"
-                }
-              ]
-            }
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:issue-tracker",
-                  "code": "system_name",
-                  "display": "System Name"
-                }
-              ]
-            },
-            "valueString": "Example"
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:issue-tracker",
-                  "code": "component",
-                  "display": "Component"
-                }
-              ]
-            },
-            "valueString": ""
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:issue-tracker",
-                  "code": "customer_or_project_tag",
-                  "display": "Customer Or Project Tag"
-                }
-              ]
-            },
-            "valueString": ""
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:issue-tracker",
-                  "code": "external_reference",
-                  "display": "External Reference"
-                }
-              ]
-            },
-            "valueString": ""
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:issue-tracker",
-                  "code": "cc_summary",
-                  "display": "Cc Summary"
-                }
-              ]
-            },
-            "valueString": "Example text."
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:issue-tracker",
-                  "code": "cc_long_description",
-                  "display": "Cc Long Description"
-                }
-              ]
-            },
-            "valueString": "Example text."
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:issue-tracker",
-                  "code": "cc_reported_by_name",
-                  "display": "Cc Reported By Name"
-                }
-              ]
-            },
-            "valueString": "Example"
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:issue-tracker",
-                  "code": "cc_reported_via",
-                  "display": "Cc Reported Via"
-                }
-              ]
-            },
-            "valueCodeableConcept": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:issue-tracker:cc_reported_via",
-                  "code": "self",
-                  "display": "Self"
-                }
-              ]
-            }
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:issue-tracker",
-                  "code": "pt_discoverer_name",
-                  "display": "Pt Discoverer Name"
-                }
-              ]
-            },
-            "valueString": "Example"
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:issue-tracker",
-                  "code": "pt_affected_users_count",
-                  "display": "Pt Affected Users Count"
-                }
-              ]
-            },
-            "valueInteger": 2
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:issue-tracker",
-                  "code": "pt_affected_user_groups",
-                  "display": "Pt Affected User Groups"
-                }
-              ]
-            },
-            "valueString": ""
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:issue-tracker",
-                  "code": "pt_assignees",
-                  "display": "Pt Assignees"
-                }
-              ]
-            },
-            "valueString": ""
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:issue-tracker",
-                  "code": "pt_stakeholders_to_inform",
-                  "display": "Pt Stakeholders To Inform"
-                }
-              ]
-            },
-            "valueString": ""
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:issue-tracker",
-                  "code": "pt_observers",
-                  "display": "Pt Observers"
-                }
-              ]
-            },
-            "valueString": ""
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:issue-tracker",
-                  "code": "sx_external_signals",
-                  "display": "Sx External Signals"
-                }
-              ]
-            },
-            "valueString": ""
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:issue-tracker",
-                  "code": "sx_alert_ids",
-                  "display": "Sx Alert Ids"
-                }
-              ]
-            },
-            "valueString": ""
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:issue-tracker",
-                  "code": "sx_error_messages",
-                  "display": "Sx Error Messages"
-                }
-              ]
-            },
-            "valueString": "Clinical flag detected."
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:issue-tracker",
-                  "code": "sx_screenshots_url",
-                  "display": "Sx Screenshots Url"
-                }
-              ]
-            },
-            "valueString": ""
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:issue-tracker",
-                  "code": "sx_logs_url",
-                  "display": "Sx Logs Url"
-                }
-              ]
-            },
-            "valueString": ""
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:issue-tracker",
-                  "code": "sx_first_observed_at",
-                  "display": "Sx First Observed At"
-                }
-              ]
-            },
-            "valueDateTime": "2026-04-09T10:00:00+00:00"
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:issue-tracker",
-                  "code": "fx_broken_components",
-                  "display": "Fx Broken Components"
-                }
-              ]
-            },
-            "valueString": ""
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:issue-tracker",
-                  "code": "fx_failed_services",
-                  "display": "Fx Failed Services"
-                }
-              ]
-            },
-            "valueString": ""
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:issue-tracker",
-                  "code": "fx_stuck_processes",
-                  "display": "Fx Stuck Processes"
-                }
-              ]
-            },
-            "valueString": ""
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:issue-tracker",
-                  "code": "fx_hardware_faults",
-                  "display": "Fx Hardware Faults"
-                }
-              ]
-            },
-            "valueString": ""
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:issue-tracker",
-                  "code": "fx_data_corruption",
-                  "display": "Fx Data Corruption"
-                }
-              ]
-            },
-            "valueCodeableConcept": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:issue-tracker:fx_data_corruption",
-                  "code": "none",
-                  "display": "None"
-                }
-              ]
-            }
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:issue-tracker",
-                  "code": "hx_related_issues",
-                  "display": "Hx Related Issues"
-                }
-              ]
-            },
-            "valueString": ""
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:issue-tracker",
-                  "code": "hx_prior_occurrences",
-                  "display": "Hx Prior Occurrences"
-                }
-              ]
-            },
-            "valueInteger": 1
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:issue-tracker",
-                  "code": "hx_recent_change_url",
-                  "display": "Hx Recent Change Url"
-                }
-              ]
-            },
-            "valueString": ""
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:issue-tracker",
-                  "code": "hx_references",
-                  "display": "Hx References"
-                }
-              ]
-            },
-            "valueString": ""
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:issue-tracker",
-                  "code": "hx_timeline",
-                  "display": "Hx Timeline"
-                }
-              ]
-            },
-            "valueString": ""
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:issue-tracker",
-                  "code": "ix_hypotheses",
-                  "display": "Ix Hypotheses"
-                }
-              ]
-            },
-            "valueString": ""
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:issue-tracker",
-                  "code": "ix_repro_steps",
-                  "display": "Ix Repro Steps"
-                }
-              ]
-            },
-            "valueString": ""
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:issue-tracker",
-                  "code": "ix_diagnostic_queries",
-                  "display": "Ix Diagnostic Queries"
-                }
-              ]
-            },
-            "valueString": ""
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:issue-tracker",
-                  "code": "ix_tests_run",
-                  "display": "Ix Tests Run"
-                }
-              ]
-            },
-            "valueString": ""
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:issue-tracker",
-                  "code": "ix_blocking_unknowns",
-                  "display": "Ix Blocking Unknowns"
-                }
-              ]
-            },
-            "valueString": ""
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:issue-tracker",
-                  "code": "dx_root_cause",
-                  "display": "Dx Root Cause"
-                }
-              ]
-            },
-            "valueString": ""
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:issue-tracker",
-                  "code": "dx_contributing_causes",
-                  "display": "Dx Contributing Causes"
-                }
-              ]
-            },
-            "valueString": ""
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:issue-tracker",
-                  "code": "dx_scope",
-                  "display": "Dx Scope"
-                }
-              ]
-            },
-            "valueCodeableConcept": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:issue-tracker:dx_scope",
-                  "code": "single-instance",
-                  "display": "Single-Instance"
-                }
-              ]
-            }
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:issue-tracker",
-                  "code": "dx_confirmed",
-                  "display": "Dx Confirmed"
-                }
-              ]
-            },
-            "valueCodeableConcept": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:issue-tracker:dx_confirmed",
-                  "code": "yes",
-                  "display": "Yes"
-                }
-              ]
-            }
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:issue-tracker",
-                  "code": "tx_mitigation_steps",
-                  "display": "Tx Mitigation Steps"
-                }
-              ]
-            },
-            "valueString": ""
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:issue-tracker",
-                  "code": "tx_fix_plan",
-                  "display": "Tx Fix Plan"
-                }
-              ]
-            },
-            "valueString": "Example text."
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:issue-tracker",
-                  "code": "tx_workaround",
-                  "display": "Tx Workaround"
-                }
-              ]
-            },
-            "valueString": ""
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:issue-tracker",
-                  "code": "tx_rollback_plan",
-                  "display": "Tx Rollback Plan"
-                }
-              ]
-            },
-            "valueString": "Example text."
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:issue-tracker",
-                  "code": "tx_communication_plan",
-                  "display": "Tx Communication Plan"
-                }
-              ]
-            },
-            "valueString": "Example text."
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:issue-tracker",
-                  "code": "px_expected_resolution_at",
-                  "display": "Px Expected Resolution At"
-                }
-              ]
-            },
-            "valueDateTime": "2026-04-09T10:00:00+00:00"
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:issue-tracker",
-                  "code": "px_residual_risk",
-                  "display": "Px Residual Risk"
-                }
-              ]
-            },
-            "valueString": ""
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:issue-tracker",
-                  "code": "px_monitoring_plan",
-                  "display": "Px Monitoring Plan"
-                }
-              ]
-            },
-            "valueString": "Example text."
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:issue-tracker",
-                  "code": "px_recurrence_likelihood",
-                  "display": "Px Recurrence Likelihood"
-                }
-              ]
-            },
-            "valueCodeableConcept": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:issue-tracker:px_recurrence_likelihood",
-                  "code": "very-low",
-                  "display": "Very-Low"
-                }
-              ]
-            }
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:issue-tracker",
-                  "code": "px_lessons_learned",
-                  "display": "Px Lessons Learned"
-                }
-              ]
-            },
-            "valueString": ""
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:issue-tracker",
-                  "code": "score_by_priority_rank",
-                  "display": "Score By Priority Rank"
-                }
-              ]
-            },
-            "valueInteger": 5
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:issue-tracker",
-                  "code": "score_by_severity_of_impact",
-                  "display": "Score By Severity Of Impact"
-                }
-              ]
-            },
-            "valueInteger": 5
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:issue-tracker",
-                  "code": "score_by_magnitude_of_damage",
-                  "display": "Score By Magnitude Of Damage"
-                }
-              ]
-            },
-            "valueInteger": 5
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:issue-tracker",
-                  "code": "score_by_harm_grade",
-                  "display": "Score By Harm Grade"
-                }
-              ]
-            },
-            "valueInteger": 5
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:issue-tracker",
-                  "code": "score_by_failure_condition",
-                  "display": "Score By Failure Condition"
-                }
-              ]
-            },
-            "valueCodeableConcept": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:issue-tracker:score_by_failure_condition",
-                  "code": "A",
-                  "display": "A"
-                }
-              ]
-            }
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:issue-tracker",
-                  "code": "score_by_moscow_requirement",
-                  "display": "Score By Moscow Requirement"
-                }
-              ]
-            },
-            "valueInteger": 5
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:issue-tracker",
-                  "code": "score_by_frequency_percent",
-                  "display": "Score By Frequency Percent"
-                }
-              ]
-            },
-            "valueQuantity": {
-              "value": 5.0
-            }
-          }
-        ]
+        "actualPeriod": {
+          "start": "2026-04-09T10:00:00+00:00"
+        }
       }
     },
     {
       "fullUrl": "urn:uuid:880e8400-e29b-41d4-a716-446655440003",
       "resource": {
-        "resourceType": "Observation",
+        "resourceType": "ClinicalImpression",
         "id": "880e8400-e29b-41d4-a716-446655440003",
         "meta": {
           "profile": [
-            "http://hl7.org/fhir/StructureDefinition/Observation"
+            "http://hl7.org/fhir/StructureDefinition/ClinicalImpression"
           ],
           "lastUpdated": "2026-04-09T10:00:00+00:00"
         },
-        "status": "final",
-        "category": [
-          {
-            "coding": [
-              {
-                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
-                "code": "survey",
-                "display": "Survey"
-              }
-            ]
-          }
-        ],
-        "code": {
-          "coding": [
-            {
-              "system": "urn:form-examples:issue-tracker",
-              "code": "issue_tracker_grade",
-              "display": "Issue Tracker Grade"
-            }
-          ]
-        },
+        "status": "completed",
         "subject": {
           "reference": "Patient/bb0e8400-e29b-41d4-a716-446655440006"
         },
         "encounter": {
-          "reference": "Encounter/cc0e8400-e29b-41d4-a716-446655440007"
+          "reference": "urn:uuid:770e8400-e29b-41d4-a716-446655440002"
         },
         "effectiveDateTime": "2026-04-09T10:00:00+00:00",
-        "component": [
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:issue-tracker",
-                  "code": "deleted_at",
-                  "display": "Deleted At"
-                }
-              ]
-            },
-            "valueDateTime": "2026-04-09T10:00:00+00:00"
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:issue-tracker",
-                  "code": "score_by_priority_rank",
-                  "display": "Score By Priority Rank"
-                }
-              ]
-            },
-            "valueInteger": 5
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:issue-tracker",
-                  "code": "score_by_severity_of_impact",
-                  "display": "Score By Severity Of Impact"
-                }
-              ]
-            },
-            "valueInteger": 5
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:issue-tracker",
-                  "code": "score_by_magnitude_of_damage",
-                  "display": "Score By Magnitude Of Damage"
-                }
-              ]
-            },
-            "valueInteger": 5
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:issue-tracker",
-                  "code": "score_by_harm_grade",
-                  "display": "Score By Harm Grade"
-                }
-              ]
-            },
-            "valueInteger": 5
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:issue-tracker",
-                  "code": "score_by_failure_condition",
-                  "display": "Score By Failure Condition"
-                }
-              ]
-            },
-            "valueCodeableConcept": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:issue-tracker:score_by_failure_condition",
-                  "code": "A",
-                  "display": "A"
-                }
-              ]
-            }
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:issue-tracker",
-                  "code": "score_by_moscow_requirement",
-                  "display": "Score By Moscow Requirement"
-                }
-              ]
-            },
-            "valueInteger": 5
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:issue-tracker",
-                  "code": "score_by_frequency_percent",
-                  "display": "Score By Frequency Percent"
-                }
-              ]
-            },
-            "valueQuantity": {
-              "value": 5.0
-            }
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:issue-tracker",
-                  "code": "computed_composite_priority",
-                  "display": "Computed Composite Priority"
-                }
-              ]
-            },
-            "valueCodeableConcept": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:issue-tracker:computed_composite_priority",
-                  "code": "low",
-                  "display": "Low"
-                }
-              ]
-            }
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:issue-tracker",
-                  "code": "final_composite_priority",
-                  "display": "Final Composite Priority"
-                }
-              ]
-            },
-            "valueCodeableConcept": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:issue-tracker:final_composite_priority",
-                  "code": "low",
-                  "display": "Low"
-                }
-              ]
-            }
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:issue-tracker",
-                  "code": "override_reason",
-                  "display": "Override Reason"
-                }
-              ]
-            },
-            "valueString": "Example text."
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:issue-tracker",
-                  "code": "recommendation",
-                  "display": "Recommendation"
-                }
-              ]
-            },
-            "valueCodeableConcept": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:issue-tracker:recommendation",
-                  "code": "proceed",
-                  "display": "Proceed"
-                }
-              ]
-            }
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:issue-tracker",
-                  "code": "triage_notes",
-                  "display": "Triage Notes"
-                }
-              ]
-            },
-            "valueString": "Example text."
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:issue-tracker",
-                  "code": "signed_by",
-                  "display": "Signed By"
-                }
-              ]
-            },
-            "valueString": ""
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:issue-tracker",
-                  "code": "signed_at",
-                  "display": "Signed At"
-                }
-              ]
-            },
-            "valueDateTime": "2026-04-09T10:00:00+00:00"
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:issue-tracker",
-                  "code": "graded_at",
-                  "display": "Graded At"
-                }
-              ]
-            },
-            "valueDateTime": "2026-04-09T10:00:00+00:00"
-          }
-        ]
+        "date": "2026-04-09T10:00:00+00:00",
+        "description": "Issue Tracker grading result",
+        "summary": "Deleted At: 2026-04-09T10:00:00+00:00; Score By Priority Rank: 5; Score By Severity Of Impact: 5; Score By Magnitude Of Damage: 5; Score By Harm Grade: 5; Score By Failure Condition: A; Score By Moscow Requirement: 5; Score By Frequency Percent: 5.0; Computed Composite Priority: low; Final Composite Priority: low; Override Reason: Example text.; Recommendation: proceed; Triage Notes: Example text.; Signed By: ; Signed At: 2026-04-09T10:00:00+00:00"
       }
     },
     {
       "fullUrl": "urn:uuid:aa0e8400-e29b-41d4-a716-446655440005",
       "resource": {
-        "resourceType": "Observation",
+        "resourceType": "DetectedIssue",
         "id": "aa0e8400-e29b-41d4-a716-446655440005",
         "meta": {
           "profile": [
-            "http://hl7.org/fhir/StructureDefinition/Observation"
+            "http://hl7.org/fhir/StructureDefinition/DetectedIssue"
           ],
           "lastUpdated": "2026-04-09T10:00:00+00:00"
         },
@@ -1186,9 +99,9 @@
           {
             "coding": [
               {
-                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
-                "code": "survey",
-                "display": "Survey"
+                "system": "urn:form-examples:issue-tracker",
+                "code": "grading-additional-flag",
+                "display": "harm-fatal"
               }
             ]
           }
@@ -1196,107 +109,28 @@
         "code": {
           "coding": [
             {
-              "system": "urn:form-examples:issue-tracker",
-              "code": "issue_tracker_grade_flag",
-              "display": "Issue Tracker Grade Flag"
+              "system": "urn:form-examples:issue-tracker:flags",
+              "code": "FLAG-001",
+              "display": "Safety flag"
             }
           ]
         },
+        "severity": "low",
         "subject": {
           "reference": "Patient/bb0e8400-e29b-41d4-a716-446655440006"
         },
-        "encounter": {
-          "reference": "Encounter/cc0e8400-e29b-41d4-a716-446655440007"
-        },
-        "effectiveDateTime": "2026-04-09T10:00:00+00:00",
-        "component": [
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:issue-tracker",
-                  "code": "deleted_at",
-                  "display": "Deleted At"
-                }
-              ]
-            },
-            "valueDateTime": "2026-04-09T10:00:00+00:00"
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:issue-tracker",
-                  "code": "category",
-                  "display": "Category"
-                }
-              ]
-            },
-            "valueCodeableConcept": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:issue-tracker:category",
-                  "code": "harm-fatal",
-                  "display": "Harm-Fatal"
-                }
-              ]
-            }
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:issue-tracker",
-                  "code": "priority",
-                  "display": "Priority"
-                }
-              ]
-            },
-            "valueCodeableConcept": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:issue-tracker:priority",
-                  "code": "low",
-                  "display": "Low"
-                }
-              ]
-            }
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:issue-tracker",
-                  "code": "description",
-                  "display": "Description"
-                }
-              ]
-            },
-            "valueString": "Example text."
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:issue-tracker",
-                  "code": "suggested_action",
-                  "display": "Suggested Action"
-                }
-              ]
-            },
-            "valueString": ""
-          }
-        ]
+        "identifiedDateTime": "2026-04-09T10:00:00+00:00",
+        "detail": "Clinical flag detected."
       }
     },
     {
       "fullUrl": "urn:uuid:990e8400-e29b-41d4-a716-446655440004",
       "resource": {
-        "resourceType": "Observation",
+        "resourceType": "DetectedIssue",
         "id": "990e8400-e29b-41d4-a716-446655440004",
         "meta": {
           "profile": [
-            "http://hl7.org/fhir/StructureDefinition/Observation"
+            "http://hl7.org/fhir/StructureDefinition/DetectedIssue"
           ],
           "lastUpdated": "2026-04-09T10:00:00+00:00"
         },
@@ -1305,9 +139,9 @@
           {
             "coding": [
               {
-                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
-                "code": "survey",
-                "display": "Survey"
+                "system": "urn:form-examples:issue-tracker",
+                "code": "grading-fired-rule",
+                "display": "General"
               }
             ]
           }
@@ -1315,89 +149,18 @@
         "code": {
           "coding": [
             {
-              "system": "urn:form-examples:issue-tracker",
-              "code": "issue_tracker_grade_rule",
-              "display": "Issue Tracker Grade Rule"
+              "system": "urn:form-examples:issue-tracker:rules",
+              "code": "RULE-001",
+              "display": "Example grading rule"
             }
           ]
         },
+        "severity": "moderate",
         "subject": {
           "reference": "Patient/bb0e8400-e29b-41d4-a716-446655440006"
         },
-        "encounter": {
-          "reference": "Encounter/cc0e8400-e29b-41d4-a716-446655440007"
-        },
-        "effectiveDateTime": "2026-04-09T10:00:00+00:00",
-        "component": [
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:issue-tracker",
-                  "code": "deleted_at",
-                  "display": "Deleted At"
-                }
-              ]
-            },
-            "valueDateTime": "2026-04-09T10:00:00+00:00"
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:issue-tracker",
-                  "code": "instrument",
-                  "display": "Instrument"
-                }
-              ]
-            },
-            "valueCodeableConcept": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:issue-tracker:instrument",
-                  "code": "priority",
-                  "display": "Priority"
-                }
-              ]
-            }
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:issue-tracker",
-                  "code": "grade",
-                  "display": "Grade"
-                }
-              ]
-            },
-            "valueString": ""
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:issue-tracker",
-                  "code": "category",
-                  "display": "Category"
-                }
-              ]
-            },
-            "valueString": "General"
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:issue-tracker",
-                  "code": "description",
-                  "display": "Description"
-                }
-              ]
-            },
-            "valueString": "Example text."
-          }
-        ]
+        "identifiedDateTime": "2026-04-09T10:00:00+00:00",
+        "detail": "Example text."
       }
     },
     {
@@ -1436,7 +199,7 @@
           "reference": "Patient/bb0e8400-e29b-41d4-a716-446655440006"
         },
         "encounter": {
-          "reference": "Encounter/cc0e8400-e29b-41d4-a716-446655440007"
+          "reference": "urn:uuid:770e8400-e29b-41d4-a716-446655440002"
         },
         "effectiveDateTime": "2026-04-09T10:00:00+00:00",
         "component": [
@@ -1591,7 +354,7 @@
           "reference": "Patient/bb0e8400-e29b-41d4-a716-446655440006"
         },
         "encounter": {
-          "reference": "Encounter/cc0e8400-e29b-41d4-a716-446655440007"
+          "reference": "urn:uuid:770e8400-e29b-41d4-a716-446655440002"
         },
         "effectiveDateTime": "2026-04-09T10:00:00+00:00",
         "component": [

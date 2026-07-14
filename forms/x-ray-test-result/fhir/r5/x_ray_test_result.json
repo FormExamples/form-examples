@@ -1,384 +1,40 @@
 {
-  "resourceType": "Observation",
+  "resourceType": "Encounter",
   "id": "770e8400-e29b-41d4-a716-446655440002",
   "meta": {
     "profile": [
-      "http://hl7.org/fhir/StructureDefinition/Observation"
+      "http://hl7.org/fhir/StructureDefinition/Encounter"
     ],
     "lastUpdated": "2026-04-09T10:00:00+00:00"
   },
-  "status": "final",
-  "category": [
+  "status": "planned",
+  "class": [
     {
       "coding": [
         {
-          "system": "http://terminology.hl7.org/CodeSystem/observation-category",
-          "code": "survey",
-          "display": "Survey"
+          "system": "http://terminology.hl7.org/CodeSystem/v3-ActCode",
+          "code": "AMB",
+          "display": "ambulatory"
         }
       ]
     }
   ],
-  "code": {
-    "coding": [
-      {
-        "system": "urn:form-examples:x-ray-test-result",
-        "code": "x_ray_test_result",
-        "display": "X Ray Test Result"
-      }
-    ]
-  },
+  "type": [
+    {
+      "coding": [
+        {
+          "system": "http://snomed.info/sct",
+          "code": "185349003",
+          "display": "Encounter for check up"
+        }
+      ],
+      "text": "X Ray Test Result"
+    }
+  ],
   "subject": {
     "reference": "Patient/550e8400-e29b-41d4-a716-446655440000"
   },
-  "encounter": {
-    "reference": "Encounter/bb0e8400-e29b-41d4-a716-446655440006"
-  },
-  "effectiveDateTime": "2026-04-09T10:00:00+00:00",
-  "component": [
-    {
-      "code": {
-        "coding": [
-          {
-            "system": "urn:form-examples:x-ray-test-result",
-            "code": "deleted_at",
-            "display": "Deleted At"
-          }
-        ]
-      },
-      "valueDateTime": "2026-04-09T10:00:00+00:00"
-    },
-    {
-      "code": {
-        "coding": [
-          {
-            "system": "urn:form-examples:x-ray-test-result",
-            "code": "originating_request_reference",
-            "display": "Originating Request Reference"
-          }
-        ]
-      },
-      "valueString": ""
-    },
-    {
-      "code": {
-        "coding": [
-          {
-            "system": "urn:form-examples:x-ray-test-result",
-            "code": "report_status",
-            "display": "Report Status"
-          }
-        ]
-      },
-      "valueCodeableConcept": {
-        "coding": [
-          {
-            "system": "urn:form-examples:x-ray-test-result:report_status",
-            "code": "preliminary",
-            "display": "Preliminary"
-          }
-        ]
-      }
-    },
-    {
-      "code": {
-        "coding": [
-          {
-            "system": "urn:form-examples:x-ray-test-result",
-            "code": "performed_date",
-            "display": "Performed Date"
-          }
-        ]
-      },
-      "valueDateTime": "2026-01-15"
-    },
-    {
-      "code": {
-        "coding": [
-          {
-            "system": "urn:form-examples:x-ray-test-result",
-            "code": "reported_date",
-            "display": "Reported Date"
-          }
-        ]
-      },
-      "valueDateTime": "2026-01-15"
-    },
-    {
-      "code": {
-        "coding": [
-          {
-            "system": "urn:form-examples:x-ray-test-result",
-            "code": "body_region",
-            "display": "Body Region"
-          }
-        ]
-      },
-      "valueCodeableConcept": {
-        "coding": [
-          {
-            "system": "urn:form-examples:x-ray-test-result:body_region",
-            "code": "chest",
-            "display": "Chest"
-          }
-        ]
-      }
-    },
-    {
-      "code": {
-        "coding": [
-          {
-            "system": "urn:form-examples:x-ray-test-result",
-            "code": "laterality",
-            "display": "Laterality"
-          }
-        ]
-      },
-      "valueCodeableConcept": {
-        "coding": [
-          {
-            "system": "urn:form-examples:x-ray-test-result:laterality",
-            "code": "left",
-            "display": "Left"
-          }
-        ]
-      }
-    },
-    {
-      "code": {
-        "coding": [
-          {
-            "system": "urn:form-examples:x-ray-test-result",
-            "code": "projections",
-            "display": "Projections"
-          }
-        ]
-      },
-      "valueString": ""
-    },
-    {
-      "code": {
-        "coding": [
-          {
-            "system": "urn:form-examples:x-ray-test-result",
-            "code": "examination_adequacy",
-            "display": "Examination Adequacy"
-          }
-        ]
-      },
-      "valueCodeableConcept": {
-        "coding": [
-          {
-            "system": "urn:form-examples:x-ray-test-result:examination_adequacy",
-            "code": "adequate",
-            "display": "Adequate"
-          }
-        ]
-      }
-    },
-    {
-      "code": {
-        "coding": [
-          {
-            "system": "urn:form-examples:x-ray-test-result",
-            "code": "clinical_history",
-            "display": "Clinical History"
-          }
-        ]
-      },
-      "valueString": "Example text."
-    },
-    {
-      "code": {
-        "coding": [
-          {
-            "system": "urn:form-examples:x-ray-test-result",
-            "code": "comparison_with_previous",
-            "display": "Comparison With Previous"
-          }
-        ]
-      },
-      "valueString": ""
-    },
-    {
-      "code": {
-        "coding": [
-          {
-            "system": "urn:form-examples:x-ray-test-result",
-            "code": "findings_narrative",
-            "display": "Findings Narrative"
-          }
-        ]
-      },
-      "valueString": "Example text."
-    },
-    {
-      "code": {
-        "coding": [
-          {
-            "system": "urn:form-examples:x-ray-test-result",
-            "code": "fracture",
-            "display": "Fracture"
-          }
-        ]
-      },
-      "valueBoolean": true
-    },
-    {
-      "code": {
-        "coding": [
-          {
-            "system": "urn:form-examples:x-ray-test-result",
-            "code": "dislocation",
-            "display": "Dislocation"
-          }
-        ]
-      },
-      "valueBoolean": true
-    },
-    {
-      "code": {
-        "coding": [
-          {
-            "system": "urn:form-examples:x-ray-test-result",
-            "code": "consolidation",
-            "display": "Consolidation"
-          }
-        ]
-      },
-      "valueBoolean": true
-    },
-    {
-      "code": {
-        "coding": [
-          {
-            "system": "urn:form-examples:x-ray-test-result",
-            "code": "pneumothorax",
-            "display": "Pneumothorax"
-          }
-        ]
-      },
-      "valueBoolean": true
-    },
-    {
-      "code": {
-        "coding": [
-          {
-            "system": "urn:form-examples:x-ray-test-result",
-            "code": "pleural_effusion",
-            "display": "Pleural Effusion"
-          }
-        ]
-      },
-      "valueBoolean": true
-    },
-    {
-      "code": {
-        "coding": [
-          {
-            "system": "urn:form-examples:x-ray-test-result",
-            "code": "foreign_body",
-            "display": "Foreign Body"
-          }
-        ]
-      },
-      "valueBoolean": true
-    },
-    {
-      "code": {
-        "coding": [
-          {
-            "system": "urn:form-examples:x-ray-test-result",
-            "code": "free_air",
-            "display": "Free Air"
-          }
-        ]
-      },
-      "valueBoolean": true
-    },
-    {
-      "code": {
-        "coding": [
-          {
-            "system": "urn:form-examples:x-ray-test-result",
-            "code": "bony_lesion",
-            "display": "Bony Lesion"
-          }
-        ]
-      },
-      "valueBoolean": true
-    },
-    {
-      "code": {
-        "coding": [
-          {
-            "system": "urn:form-examples:x-ray-test-result",
-            "code": "incidental_finding",
-            "display": "Incidental Finding"
-          }
-        ]
-      },
-      "valueBoolean": true
-    },
-    {
-      "code": {
-        "coding": [
-          {
-            "system": "urn:form-examples:x-ray-test-result",
-            "code": "impression",
-            "display": "Impression"
-          }
-        ]
-      },
-      "valueString": "Example text."
-    },
-    {
-      "code": {
-        "coding": [
-          {
-            "system": "urn:form-examples:x-ray-test-result",
-            "code": "reporting_category",
-            "display": "Reporting Category"
-          }
-        ]
-      },
-      "valueString": "General"
-    },
-    {
-      "code": {
-        "coding": [
-          {
-            "system": "urn:form-examples:x-ray-test-result",
-            "code": "recommended_follow_up",
-            "display": "Recommended Follow Up"
-          }
-        ]
-      },
-      "valueString": ""
-    },
-    {
-      "code": {
-        "coding": [
-          {
-            "system": "urn:form-examples:x-ray-test-result",
-            "code": "critical_result_communicated",
-            "display": "Critical Result Communicated"
-          }
-        ]
-      },
-      "valueBoolean": true
-    },
-    {
-      "code": {
-        "coding": [
-          {
-            "system": "urn:form-examples:x-ray-test-result",
-            "code": "reported_to",
-            "display": "Reported To"
-          }
-        ]
-      },
-      "valueString": ""
-    }
-  ]
+  "actualPeriod": {
+    "start": "2026-04-09T10:00:00+00:00"
+  }
 }

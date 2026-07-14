@@ -1,196 +1,21 @@
 {
-  "resourceType": "Observation",
+  "resourceType": "ClinicalImpression",
   "id": "770e8400-e29b-41d4-a716-446655440002",
   "meta": {
     "profile": [
-      "http://hl7.org/fhir/StructureDefinition/Observation"
+      "http://hl7.org/fhir/StructureDefinition/ClinicalImpression"
     ],
     "lastUpdated": "2026-04-09T10:00:00+00:00"
   },
-  "status": "final",
-  "category": [
-    {
-      "coding": [
-        {
-          "system": "http://terminology.hl7.org/CodeSystem/observation-category",
-          "code": "survey",
-          "display": "Survey"
-        }
-      ]
-    }
-  ],
-  "code": {
-    "coding": [
-      {
-        "system": "urn:form-examples:agile-principles-assessment",
-        "code": "agile_principles_assessment_grade",
-        "display": "Agile Principles Grade"
-      }
-    ]
-  },
+  "status": "completed",
   "subject": {
     "reference": "Patient/aa0e8400-e29b-41d4-a716-446655440005"
   },
   "encounter": {
-    "reference": "Encounter/bb0e8400-e29b-41d4-a716-446655440006"
+    "reference": "Encounter/660e8400-e29b-41d4-a716-446655440001"
   },
   "effectiveDateTime": "2026-04-09T10:00:00+00:00",
-  "component": [
-    {
-      "code": {
-        "coding": [
-          {
-            "system": "urn:form-examples:agile-principles-assessment",
-            "code": "deleted_at",
-            "display": "Deleted At"
-          }
-        ]
-      },
-      "valueDateTime": "2026-04-09T10:00:00+00:00"
-    },
-    {
-      "code": {
-        "coding": [
-          {
-            "system": "urn:form-examples:agile-principles-assessment",
-            "code": "answered_count",
-            "display": "Answered Count"
-          }
-        ]
-      },
-      "valueInteger": 2
-    },
-    {
-      "code": {
-        "coding": [
-          {
-            "system": "urn:form-examples:agile-principles-assessment",
-            "code": "mean_score",
-            "display": "Mean Score"
-          }
-        ]
-      },
-      "valueQuantity": {
-        "value": 5.0
-      }
-    },
-    {
-      "code": {
-        "coding": [
-          {
-            "system": "urn:form-examples:agile-principles-assessment",
-            "code": "weighted_mean_score",
-            "display": "Weighted Mean Score"
-          }
-        ]
-      },
-      "valueQuantity": {
-        "value": 70.0
-      }
-    },
-    {
-      "code": {
-        "coding": [
-          {
-            "system": "urn:form-examples:agile-principles-assessment",
-            "code": "weights_customised",
-            "display": "Weights Customised"
-          }
-        ]
-      },
-      "valueBoolean": true
-    },
-    {
-      "code": {
-        "coding": [
-          {
-            "system": "urn:form-examples:agile-principles-assessment",
-            "code": "maturity",
-            "display": "Maturity"
-          }
-        ]
-      },
-      "valueCodeableConcept": {
-        "coding": [
-          {
-            "system": "urn:form-examples:agile-principles-assessment:maturity",
-            "code": "optimising",
-            "display": "Optimising"
-          }
-        ]
-      }
-    },
-    {
-      "code": {
-        "coding": [
-          {
-            "system": "urn:form-examples:agile-principles-assessment",
-            "code": "top_action_1",
-            "display": "Top Action 1"
-          }
-        ]
-      },
-      "valueString": ""
-    },
-    {
-      "code": {
-        "coding": [
-          {
-            "system": "urn:form-examples:agile-principles-assessment",
-            "code": "top_action_2",
-            "display": "Top Action 2"
-          }
-        ]
-      },
-      "valueString": ""
-    },
-    {
-      "code": {
-        "coding": [
-          {
-            "system": "urn:form-examples:agile-principles-assessment",
-            "code": "top_action_3",
-            "display": "Top Action 3"
-          }
-        ]
-      },
-      "valueString": ""
-    },
-    {
-      "code": {
-        "coding": [
-          {
-            "system": "urn:form-examples:agile-principles-assessment",
-            "code": "coach_notes",
-            "display": "Coach Notes"
-          }
-        ]
-      },
-      "valueString": "Example text."
-    },
-    {
-      "code": {
-        "coding": [
-          {
-            "system": "urn:form-examples:agile-principles-assessment",
-            "code": "signed_at",
-            "display": "Signed At"
-          }
-        ]
-      },
-      "valueDateTime": "2026-04-09T10:00:00+00:00"
-    },
-    {
-      "code": {
-        "coding": [
-          {
-            "system": "urn:form-examples:agile-principles-assessment",
-            "code": "graded_at",
-            "display": "Graded At"
-          }
-        ]
-      },
-      "valueDateTime": "2026-04-09T10:00:00+00:00"
-    }
-  ]
+  "date": "2026-04-09T10:00:00+00:00",
+  "description": "Agile Principles Assessment grading result",
+  "summary": "Deleted At: 2026-04-09T10:00:00+00:00; Answered Count: 2; Mean Score: 5.0; Weighted Mean Score: 70.0; Weights Customised: True; Maturity: optimising; Top Action 1: ; Top Action 2: ; Top Action 3: ; Coach Notes: Example text.; Signed At: 2026-04-09T10:00:00+00:00"
 }

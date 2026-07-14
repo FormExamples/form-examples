@@ -1,172 +1,21 @@
 {
-  "resourceType": "Observation",
+  "resourceType": "ClinicalImpression",
   "id": "880e8400-e29b-41d4-a716-446655440003",
   "meta": {
     "profile": [
-      "http://hl7.org/fhir/StructureDefinition/Observation"
+      "http://hl7.org/fhir/StructureDefinition/ClinicalImpression"
     ],
     "lastUpdated": "2026-04-09T10:00:00+00:00"
   },
-  "status": "final",
-  "category": [
-    {
-      "coding": [
-        {
-          "system": "http://terminology.hl7.org/CodeSystem/observation-category",
-          "code": "survey",
-          "display": "Survey"
-        }
-      ]
-    }
-  ],
-  "code": {
-    "coding": [
-      {
-        "system": "urn:form-examples:bhutani-bilirubin-nomogram",
-        "code": "bhutani_bilirubin_nomogram_grade",
-        "display": "Bhutani Bilirubin Nomogram Grade"
-      }
-    ]
-  },
+  "status": "completed",
   "subject": {
     "reference": "Patient/550e8400-e29b-41d4-a716-446655440000"
   },
   "encounter": {
-    "reference": "Encounter/bb0e8400-e29b-41d4-a716-446655440006"
+    "reference": "Encounter/770e8400-e29b-41d4-a716-446655440002"
   },
   "effectiveDateTime": "2026-04-09T10:00:00+00:00",
-  "component": [
-    {
-      "code": {
-        "coding": [
-          {
-            "system": "urn:form-examples:bhutani-bilirubin-nomogram",
-            "code": "deleted_at",
-            "display": "Deleted At"
-          }
-        ]
-      },
-      "valueDateTime": "2026-04-09T10:00:00+00:00"
-    },
-    {
-      "code": {
-        "coding": [
-          {
-            "system": "urn:form-examples:bhutani-bilirubin-nomogram",
-            "code": "risk_zone",
-            "display": "Risk Zone"
-          }
-        ]
-      },
-      "valueCodeableConcept": {
-        "coding": [
-          {
-            "system": "urn:form-examples:bhutani-bilirubin-nomogram:risk_zone",
-            "code": "low",
-            "display": "Low"
-          }
-        ]
-      }
-    },
-    {
-      "code": {
-        "coding": [
-          {
-            "system": "urn:form-examples:bhutani-bilirubin-nomogram",
-            "code": "percentile_band",
-            "display": "Percentile Band"
-          }
-        ]
-      },
-      "valueCodeableConcept": {
-        "coding": [
-          {
-            "system": "urn:form-examples:bhutani-bilirubin-nomogram:percentile_band",
-            "code": "<40",
-            "display": "<40"
-          }
-        ]
-      }
-    },
-    {
-      "code": {
-        "coding": [
-          {
-            "system": "urn:form-examples:bhutani-bilirubin-nomogram",
-            "code": "phototherapy_threshold_umol_l",
-            "display": "Phototherapy Threshold Umol L"
-          }
-        ]
-      },
-      "valueQuantity": {
-        "value": 0.0
-      }
-    },
-    {
-      "code": {
-        "coding": [
-          {
-            "system": "urn:form-examples:bhutani-bilirubin-nomogram",
-            "code": "exchange_threshold_umol_l",
-            "display": "Exchange Threshold Umol L"
-          }
-        ]
-      },
-      "valueQuantity": {
-        "value": 0.0
-      }
-    },
-    {
-      "code": {
-        "coding": [
-          {
-            "system": "urn:form-examples:bhutani-bilirubin-nomogram",
-            "code": "above_phototherapy_threshold",
-            "display": "Above Phototherapy Threshold"
-          }
-        ]
-      },
-      "valueCodeableConcept": {
-        "coding": [
-          {
-            "system": "urn:form-examples:bhutani-bilirubin-nomogram:above_phototherapy_threshold",
-            "code": "yes",
-            "display": "Yes"
-          }
-        ]
-      }
-    },
-    {
-      "code": {
-        "coding": [
-          {
-            "system": "urn:form-examples:bhutani-bilirubin-nomogram",
-            "code": "above_exchange_threshold",
-            "display": "Above Exchange Threshold"
-          }
-        ]
-      },
-      "valueCodeableConcept": {
-        "coding": [
-          {
-            "system": "urn:form-examples:bhutani-bilirubin-nomogram:above_exchange_threshold",
-            "code": "yes",
-            "display": "Yes"
-          }
-        ]
-      }
-    },
-    {
-      "code": {
-        "coding": [
-          {
-            "system": "urn:form-examples:bhutani-bilirubin-nomogram",
-            "code": "graded_at",
-            "display": "Graded At"
-          }
-        ]
-      },
-      "valueDateTime": "2026-04-09T10:00:00+00:00"
-    }
-  ]
+  "date": "2026-04-09T10:00:00+00:00",
+  "description": "Bhutani Bilirubin Nomogram grading result",
+  "summary": "Deleted At: 2026-04-09T10:00:00+00:00; Risk Zone: low; Percentile Band: <40; Phototherapy Threshold Umol L: 0.0; Exchange Threshold Umol L: 0.0; Above Phototherapy Threshold: yes; Above Exchange Threshold: yes"
 }

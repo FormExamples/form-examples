@@ -52,7 +52,7 @@
           "reference": "urn:uuid:550e8400-e29b-41d4-a716-446655440000"
         },
         "encounter": {
-          "reference": "Encounter/bb0e8400-e29b-41d4-a716-446655440006"
+          "reference": "urn:uuid:770e8400-e29b-41d4-a716-446655440002"
         },
         "effectiveDateTime": "2026-04-09T10:00:00+00:00",
         "component": [
@@ -198,681 +198,78 @@
     {
       "fullUrl": "urn:uuid:770e8400-e29b-41d4-a716-446655440002",
       "resource": {
-        "resourceType": "Observation",
+        "resourceType": "Encounter",
         "id": "770e8400-e29b-41d4-a716-446655440002",
         "meta": {
           "profile": [
-            "http://hl7.org/fhir/StructureDefinition/Observation"
+            "http://hl7.org/fhir/StructureDefinition/Encounter"
           ],
           "lastUpdated": "2026-04-09T10:00:00+00:00"
         },
-        "status": "final",
-        "category": [
+        "status": "planned",
+        "class": [
           {
             "coding": [
               {
-                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
-                "code": "survey",
-                "display": "Survey"
+                "system": "http://terminology.hl7.org/CodeSystem/v3-ActCode",
+                "code": "AMB",
+                "display": "ambulatory"
               }
             ]
           }
         ],
-        "code": {
-          "coding": [
-            {
-              "system": "urn:form-examples:confusion-assessment-method",
-              "code": "confusion_assessment_method",
-              "display": "Confusion Method"
-            }
-          ]
-        },
+        "type": [
+          {
+            "coding": [
+              {
+                "system": "http://snomed.info/sct",
+                "code": "185349003",
+                "display": "Encounter for check up"
+              }
+            ],
+            "text": "Confusion Assessment Method"
+          }
+        ],
         "subject": {
           "reference": "urn:uuid:550e8400-e29b-41d4-a716-446655440000"
         },
-        "encounter": {
-          "reference": "Encounter/bb0e8400-e29b-41d4-a716-446655440006"
-        },
-        "effectiveDateTime": "2026-04-09T10:00:00+00:00",
-        "component": [
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:confusion-assessment-method",
-                  "code": "deleted_at",
-                  "display": "Deleted At"
-                }
-              ]
-            },
-            "valueDateTime": "2026-04-09T10:00:00+00:00"
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:confusion-assessment-method",
-                  "code": "assessor_name",
-                  "display": "Assessor Name"
-                }
-              ]
-            },
-            "valueString": "Example"
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:confusion-assessment-method",
-                  "code": "assessor_role",
-                  "display": "Assessor Role"
-                }
-              ]
-            },
-            "valueCodeableConcept": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:confusion-assessment-method:assessor_role",
-                  "code": "nurse",
-                  "display": "Nurse"
-                }
-              ]
-            }
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:confusion-assessment-method",
-                  "code": "assessed_at",
-                  "display": "Assessed At"
-                }
-              ]
-            },
-            "valueDateTime": "2026-04-09T10:00:00+00:00"
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:confusion-assessment-method",
-                  "code": "ward_unit",
-                  "display": "Ward Unit"
-                }
-              ]
-            },
-            "valueString": "mg/dL"
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:confusion-assessment-method",
-                  "code": "cam_variant",
-                  "display": "Cam Variant"
-                }
-              ]
-            },
-            "valueCodeableConcept": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:confusion-assessment-method:cam_variant",
-                  "code": "cam",
-                  "display": "Cam"
-                }
-              ]
-            }
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:confusion-assessment-method",
-                  "code": "patient_identifier",
-                  "display": "Patient Identifier"
-                }
-              ]
-            },
-            "valueString": ""
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:confusion-assessment-method",
-                  "code": "age_band",
-                  "display": "Age Band"
-                }
-              ]
-            },
-            "valueCodeableConcept": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:confusion-assessment-method:age_band",
-                  "code": "16-39",
-                  "display": "16-39"
-                }
-              ]
-            }
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:confusion-assessment-method",
-                  "code": "sex",
-                  "display": "Sex"
-                }
-              ]
-            },
-            "valueCodeableConcept": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:confusion-assessment-method:sex",
-                  "code": "female",
-                  "display": "Female"
-                }
-              ]
-            }
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:confusion-assessment-method",
-                  "code": "cognitive_baseline",
-                  "display": "Cognitive Baseline"
-                }
-              ]
-            },
-            "valueCodeableConcept": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:confusion-assessment-method:cognitive_baseline",
-                  "code": "independent",
-                  "display": "Independent"
-                }
-              ]
-            }
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:confusion-assessment-method",
-                  "code": "collateral_source",
-                  "display": "Collateral Source"
-                }
-              ]
-            },
-            "valueCodeableConcept": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:confusion-assessment-method:collateral_source",
-                  "code": "family",
-                  "display": "Family"
-                }
-              ]
-            }
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:confusion-assessment-method",
-                  "code": "feature_acute_onset_fluctuating",
-                  "display": "Feature Acute Onset Fluctuating"
-                }
-              ]
-            },
-            "valueCodeableConcept": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:confusion-assessment-method:feature_acute_onset_fluctuating",
-                  "code": "present",
-                  "display": "Present"
-                }
-              ]
-            }
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:confusion-assessment-method",
-                  "code": "onset_timing",
-                  "display": "Onset Timing"
-                }
-              ]
-            },
-            "valueCodeableConcept": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:confusion-assessment-method:onset_timing",
-                  "code": "hours",
-                  "display": "Hours"
-                }
-              ]
-            }
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:confusion-assessment-method",
-                  "code": "feature_inattention",
-                  "display": "Feature Inattention"
-                }
-              ]
-            },
-            "valueCodeableConcept": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:confusion-assessment-method:feature_inattention",
-                  "code": "present",
-                  "display": "Present"
-                }
-              ]
-            }
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:confusion-assessment-method",
-                  "code": "attention_test",
-                  "display": "Attention Test"
-                }
-              ]
-            },
-            "valueCodeableConcept": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:confusion-assessment-method:attention_test",
-                  "code": "digit-span",
-                  "display": "Digit-Span"
-                }
-              ]
-            }
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:confusion-assessment-method",
-                  "code": "feature_disorganised_thinking",
-                  "display": "Feature Disorganised Thinking"
-                }
-              ]
-            },
-            "valueCodeableConcept": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:confusion-assessment-method:feature_disorganised_thinking",
-                  "code": "present",
-                  "display": "Present"
-                }
-              ]
-            }
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:confusion-assessment-method",
-                  "code": "feature_altered_consciousness",
-                  "display": "Feature Altered Consciousness"
-                }
-              ]
-            },
-            "valueCodeableConcept": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:confusion-assessment-method:feature_altered_consciousness",
-                  "code": "present",
-                  "display": "Present"
-                }
-              ]
-            }
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:confusion-assessment-method",
-                  "code": "consciousness_level",
-                  "display": "Consciousness Level"
-                }
-              ]
-            },
-            "valueCodeableConcept": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:confusion-assessment-method:consciousness_level",
-                  "code": "alert",
-                  "display": "Alert"
-                }
-              ]
-            }
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:confusion-assessment-method",
-                  "code": "rass_score",
-                  "display": "Rass Score"
-                }
-              ]
-            },
-            "valueInteger": 5
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:confusion-assessment-method",
-                  "code": "motoric_subtype",
-                  "display": "Motoric Subtype"
-                }
-              ]
-            },
-            "valueCodeableConcept": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:confusion-assessment-method:motoric_subtype",
-                  "code": "hypoactive",
-                  "display": "Hypoactive"
-                }
-              ]
-            }
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:confusion-assessment-method",
-                  "code": "hallucinations",
-                  "display": "Hallucinations"
-                }
-              ]
-            },
-            "valueBoolean": true
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:confusion-assessment-method",
-                  "code": "delusions",
-                  "display": "Delusions"
-                }
-              ]
-            },
-            "valueBoolean": true
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:confusion-assessment-method",
-                  "code": "sleep_wake_disturbance",
-                  "display": "Sleep Wake Disturbance"
-                }
-              ]
-            },
-            "valueBoolean": true
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:confusion-assessment-method",
-                  "code": "deliriogenic_medication",
-                  "display": "Deliriogenic Medication"
-                }
-              ]
-            },
-            "valueBoolean": true
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:confusion-assessment-method",
-                  "code": "deliriogenic_medication_detail",
-                  "display": "Deliriogenic Medication Detail"
-                }
-              ]
-            },
-            "valueString": "Paracetamol"
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:confusion-assessment-method",
-                  "code": "suspected_precipitants",
-                  "display": "Suspected Precipitants"
-                }
-              ]
-            },
-            "valueString": ""
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:confusion-assessment-method",
-                  "code": "recommended_actions",
-                  "display": "Recommended Actions"
-                }
-              ]
-            },
-            "valueString": ""
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:confusion-assessment-method",
-                  "code": "clinical_note",
-                  "display": "Clinical Note"
-                }
-              ]
-            },
-            "valueString": ""
-          }
-        ]
+        "actualPeriod": {
+          "start": "2026-04-09T10:00:00+00:00"
+        }
       }
     },
     {
       "fullUrl": "urn:uuid:880e8400-e29b-41d4-a716-446655440003",
       "resource": {
-        "resourceType": "Observation",
+        "resourceType": "ClinicalImpression",
         "id": "880e8400-e29b-41d4-a716-446655440003",
         "meta": {
           "profile": [
-            "http://hl7.org/fhir/StructureDefinition/Observation"
+            "http://hl7.org/fhir/StructureDefinition/ClinicalImpression"
           ],
           "lastUpdated": "2026-04-09T10:00:00+00:00"
         },
-        "status": "final",
-        "category": [
-          {
-            "coding": [
-              {
-                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
-                "code": "survey",
-                "display": "Survey"
-              }
-            ]
-          }
-        ],
-        "code": {
-          "coding": [
-            {
-              "system": "urn:form-examples:confusion-assessment-method",
-              "code": "confusion_assessment_method_grade",
-              "display": "Confusion Method Grade"
-            }
-          ]
-        },
+        "status": "completed",
         "subject": {
           "reference": "urn:uuid:550e8400-e29b-41d4-a716-446655440000"
         },
         "encounter": {
-          "reference": "Encounter/bb0e8400-e29b-41d4-a716-446655440006"
+          "reference": "urn:uuid:770e8400-e29b-41d4-a716-446655440002"
         },
         "effectiveDateTime": "2026-04-09T10:00:00+00:00",
-        "component": [
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:confusion-assessment-method",
-                  "code": "deleted_at",
-                  "display": "Deleted At"
-                }
-              ]
-            },
-            "valueDateTime": "2026-04-09T10:00:00+00:00"
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:confusion-assessment-method",
-                  "code": "classification",
-                  "display": "Classification"
-                }
-              ]
-            },
-            "valueCodeableConcept": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:confusion-assessment-method:classification",
-                  "code": "present",
-                  "display": "Present"
-                }
-              ]
-            }
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:confusion-assessment-method",
-                  "code": "delirium_present",
-                  "display": "Delirium Present"
-                }
-              ]
-            },
-            "valueBoolean": true
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:confusion-assessment-method",
-                  "code": "feature_1_positive",
-                  "display": "Feature 1 Positive"
-                }
-              ]
-            },
-            "valueBoolean": true
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:confusion-assessment-method",
-                  "code": "feature_2_positive",
-                  "display": "Feature 2 Positive"
-                }
-              ]
-            },
-            "valueBoolean": true
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:confusion-assessment-method",
-                  "code": "feature_3_positive",
-                  "display": "Feature 3 Positive"
-                }
-              ]
-            },
-            "valueBoolean": true
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:confusion-assessment-method",
-                  "code": "feature_4_positive",
-                  "display": "Feature 4 Positive"
-                }
-              ]
-            },
-            "valueBoolean": true
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:confusion-assessment-method",
-                  "code": "positive_features",
-                  "display": "Positive Features"
-                }
-              ]
-            },
-            "valueString": ""
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:confusion-assessment-method",
-                  "code": "motoric_subtype",
-                  "display": "Motoric Subtype"
-                }
-              ]
-            },
-            "valueCodeableConcept": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:confusion-assessment-method:motoric_subtype",
-                  "code": "hypoactive",
-                  "display": "Hypoactive"
-                }
-              ]
-            }
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:confusion-assessment-method",
-                  "code": "graded_at",
-                  "display": "Graded At"
-                }
-              ]
-            },
-            "valueDateTime": "2026-04-09T10:00:00+00:00"
-          }
-        ]
+        "date": "2026-04-09T10:00:00+00:00",
+        "description": "Confusion Assessment Method grading result",
+        "summary": "Deleted At: 2026-04-09T10:00:00+00:00; Classification: present; Delirium Present: True; Feature 1 Positive: True; Feature 2 Positive: True; Feature 3 Positive: True; Feature 4 Positive: True; Positive Features: ; Motoric Subtype: hypoactive"
       }
     },
     {
       "fullUrl": "urn:uuid:aa0e8400-e29b-41d4-a716-446655440005",
       "resource": {
-        "resourceType": "Observation",
+        "resourceType": "DetectedIssue",
         "id": "aa0e8400-e29b-41d4-a716-446655440005",
         "meta": {
           "profile": [
-            "http://hl7.org/fhir/StructureDefinition/Observation"
+            "http://hl7.org/fhir/StructureDefinition/DetectedIssue"
           ],
           "lastUpdated": "2026-04-09T10:00:00+00:00"
         },
@@ -881,9 +278,9 @@
           {
             "coding": [
               {
-                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
-                "code": "survey",
-                "display": "Survey"
+                "system": "urn:form-examples:confusion-assessment-method",
+                "code": "grading-additional-flag",
+                "display": "delirium-present"
               }
             ]
           }
@@ -891,107 +288,28 @@
         "code": {
           "coding": [
             {
-              "system": "urn:form-examples:confusion-assessment-method",
-              "code": "confusion_assessment_method_grade_flag",
-              "display": "Confusion Method Grade Flag"
+              "system": "urn:form-examples:confusion-assessment-method:flags",
+              "code": "FLAG-001",
+              "display": "Safety flag"
             }
           ]
         },
+        "severity": "low",
         "subject": {
           "reference": "urn:uuid:550e8400-e29b-41d4-a716-446655440000"
         },
-        "encounter": {
-          "reference": "Encounter/bb0e8400-e29b-41d4-a716-446655440006"
-        },
-        "effectiveDateTime": "2026-04-09T10:00:00+00:00",
-        "component": [
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:confusion-assessment-method",
-                  "code": "deleted_at",
-                  "display": "Deleted At"
-                }
-              ]
-            },
-            "valueDateTime": "2026-04-09T10:00:00+00:00"
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:confusion-assessment-method",
-                  "code": "category",
-                  "display": "Category"
-                }
-              ]
-            },
-            "valueCodeableConcept": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:confusion-assessment-method:category",
-                  "code": "delirium-present",
-                  "display": "Delirium-Present"
-                }
-              ]
-            }
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:confusion-assessment-method",
-                  "code": "priority",
-                  "display": "Priority"
-                }
-              ]
-            },
-            "valueCodeableConcept": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:confusion-assessment-method:priority",
-                  "code": "low",
-                  "display": "Low"
-                }
-              ]
-            }
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:confusion-assessment-method",
-                  "code": "description",
-                  "display": "Description"
-                }
-              ]
-            },
-            "valueString": "Example text."
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:confusion-assessment-method",
-                  "code": "suggested_action",
-                  "display": "Suggested Action"
-                }
-              ]
-            },
-            "valueString": ""
-          }
-        ]
+        "identifiedDateTime": "2026-04-09T10:00:00+00:00",
+        "detail": "Clinical flag detected."
       }
     },
     {
       "fullUrl": "urn:uuid:990e8400-e29b-41d4-a716-446655440004",
       "resource": {
-        "resourceType": "Observation",
+        "resourceType": "DetectedIssue",
         "id": "990e8400-e29b-41d4-a716-446655440004",
         "meta": {
           "profile": [
-            "http://hl7.org/fhir/StructureDefinition/Observation"
+            "http://hl7.org/fhir/StructureDefinition/DetectedIssue"
           ],
           "lastUpdated": "2026-04-09T10:00:00+00:00"
         },
@@ -1000,9 +318,9 @@
           {
             "coding": [
               {
-                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
-                "code": "survey",
-                "display": "Survey"
+                "system": "urn:form-examples:confusion-assessment-method",
+                "code": "grading-fired-rule",
+                "display": "General"
               }
             ]
           }
@@ -1010,89 +328,18 @@
         "code": {
           "coding": [
             {
-              "system": "urn:form-examples:confusion-assessment-method",
-              "code": "confusion_assessment_method_grade_rule",
-              "display": "Confusion Method Grade Rule"
+              "system": "urn:form-examples:confusion-assessment-method:rules",
+              "code": "RULE-001",
+              "display": "Example grading rule"
             }
           ]
         },
+        "severity": "moderate",
         "subject": {
           "reference": "urn:uuid:550e8400-e29b-41d4-a716-446655440000"
         },
-        "encounter": {
-          "reference": "Encounter/bb0e8400-e29b-41d4-a716-446655440006"
-        },
-        "effectiveDateTime": "2026-04-09T10:00:00+00:00",
-        "component": [
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:confusion-assessment-method",
-                  "code": "deleted_at",
-                  "display": "Deleted At"
-                }
-              ]
-            },
-            "valueDateTime": "2026-04-09T10:00:00+00:00"
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:confusion-assessment-method",
-                  "code": "feature",
-                  "display": "Feature"
-                }
-              ]
-            },
-            "valueCodeableConcept": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:confusion-assessment-method:feature",
-                  "code": "acute-onset-fluctuating",
-                  "display": "Acute-Onset-Fluctuating"
-                }
-              ]
-            }
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:confusion-assessment-method",
-                  "code": "positive",
-                  "display": "Positive"
-                }
-              ]
-            },
-            "valueBoolean": true
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:confusion-assessment-method",
-                  "code": "category",
-                  "display": "Category"
-                }
-              ]
-            },
-            "valueString": "General"
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:confusion-assessment-method",
-                  "code": "description",
-                  "display": "Description"
-                }
-              ]
-            },
-            "valueString": "Example text."
-          }
-        ]
+        "identifiedDateTime": "2026-04-09T10:00:00+00:00",
+        "detail": "Example text."
       }
     },
     {

@@ -1,180 +1,21 @@
 {
-  "resourceType": "Observation",
+  "resourceType": "ClinicalImpression",
   "id": "880e8400-e29b-41d4-a716-446655440003",
   "meta": {
     "profile": [
-      "http://hl7.org/fhir/StructureDefinition/Observation"
+      "http://hl7.org/fhir/StructureDefinition/ClinicalImpression"
     ],
     "lastUpdated": "2026-04-09T10:00:00+00:00"
   },
-  "status": "final",
-  "category": [
-    {
-      "coding": [
-        {
-          "system": "http://terminology.hl7.org/CodeSystem/observation-category",
-          "code": "survey",
-          "display": "Survey"
-        }
-      ]
-    }
-  ],
-  "code": {
-    "coding": [
-      {
-        "system": "urn:form-examples:glasgow-coma-scale",
-        "code": "glasgow_coma_scale_grade",
-        "display": "Glasgow Coma Scale Grade"
-      }
-    ]
-  },
+  "status": "completed",
   "subject": {
     "reference": "Patient/550e8400-e29b-41d4-a716-446655440000"
   },
   "encounter": {
-    "reference": "Encounter/bb0e8400-e29b-41d4-a716-446655440006"
+    "reference": "Encounter/770e8400-e29b-41d4-a716-446655440002"
   },
   "effectiveDateTime": "2026-04-09T10:00:00+00:00",
-  "component": [
-    {
-      "code": {
-        "coding": [
-          {
-            "system": "urn:form-examples:glasgow-coma-scale",
-            "code": "deleted_at",
-            "display": "Deleted At"
-          }
-        ]
-      },
-      "valueDateTime": "2026-04-09T10:00:00+00:00"
-    },
-    {
-      "code": {
-        "coding": [
-          {
-            "system": "urn:form-examples:glasgow-coma-scale",
-            "code": "eye_score",
-            "display": "Eye Score"
-          }
-        ]
-      },
-      "valueInteger": 5
-    },
-    {
-      "code": {
-        "coding": [
-          {
-            "system": "urn:form-examples:glasgow-coma-scale",
-            "code": "verbal_score",
-            "display": "Verbal Score"
-          }
-        ]
-      },
-      "valueInteger": 5
-    },
-    {
-      "code": {
-        "coding": [
-          {
-            "system": "urn:form-examples:glasgow-coma-scale",
-            "code": "motor_score",
-            "display": "Motor Score"
-          }
-        ]
-      },
-      "valueInteger": 5
-    },
-    {
-      "code": {
-        "coding": [
-          {
-            "system": "urn:form-examples:glasgow-coma-scale",
-            "code": "total_score",
-            "display": "Total Score"
-          }
-        ]
-      },
-      "valueInteger": 5
-    },
-    {
-      "code": {
-        "coding": [
-          {
-            "system": "urn:form-examples:glasgow-coma-scale",
-            "code": "breakdown",
-            "display": "Breakdown"
-          }
-        ]
-      },
-      "valueString": ""
-    },
-    {
-      "code": {
-        "coding": [
-          {
-            "system": "urn:form-examples:glasgow-coma-scale",
-            "code": "total_display",
-            "display": "Total Display"
-          }
-        ]
-      },
-      "valueString": ""
-    },
-    {
-      "code": {
-        "coding": [
-          {
-            "system": "urn:form-examples:glasgow-coma-scale",
-            "code": "severity_band",
-            "display": "Severity Band"
-          }
-        ]
-      },
-      "valueCodeableConcept": {
-        "coding": [
-          {
-            "system": "urn:form-examples:glasgow-coma-scale:severity_band",
-            "code": "mild",
-            "display": "Mild"
-          }
-        ]
-      }
-    },
-    {
-      "code": {
-        "coding": [
-          {
-            "system": "urn:form-examples:glasgow-coma-scale",
-            "code": "pupil_reactivity_score",
-            "display": "Pupil Reactivity Score"
-          }
-        ]
-      },
-      "valueInteger": 5
-    },
-    {
-      "code": {
-        "coding": [
-          {
-            "system": "urn:form-examples:glasgow-coma-scale",
-            "code": "gcs_p",
-            "display": "Gcs P"
-          }
-        ]
-      },
-      "valueInteger": 1
-    },
-    {
-      "code": {
-        "coding": [
-          {
-            "system": "urn:form-examples:glasgow-coma-scale",
-            "code": "graded_at",
-            "display": "Graded At"
-          }
-        ]
-      },
-      "valueDateTime": "2026-04-09T10:00:00+00:00"
-    }
-  ]
+  "date": "2026-04-09T10:00:00+00:00",
+  "description": "Glasgow Coma Scale grading result",
+  "summary": "Deleted At: 2026-04-09T10:00:00+00:00; Eye Score: 5; Verbal Score: 5; Motor Score: 5; Total Score: 5; Breakdown: ; Total Display: ; Severity Band: mild; Pupil Reactivity Score: 5; Gcs P: 1"
 }

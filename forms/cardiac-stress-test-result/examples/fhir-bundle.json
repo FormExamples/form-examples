@@ -19,653 +19,78 @@
     {
       "fullUrl": "urn:uuid:770e8400-e29b-41d4-a716-446655440002",
       "resource": {
-        "resourceType": "Observation",
+        "resourceType": "Encounter",
         "id": "770e8400-e29b-41d4-a716-446655440002",
         "meta": {
           "profile": [
-            "http://hl7.org/fhir/StructureDefinition/Observation"
+            "http://hl7.org/fhir/StructureDefinition/Encounter"
           ],
           "lastUpdated": "2026-04-09T10:00:00+00:00"
         },
-        "status": "final",
-        "category": [
+        "status": "planned",
+        "class": [
           {
             "coding": [
               {
-                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
-                "code": "survey",
-                "display": "Survey"
+                "system": "http://terminology.hl7.org/CodeSystem/v3-ActCode",
+                "code": "AMB",
+                "display": "ambulatory"
               }
             ]
           }
         ],
-        "code": {
-          "coding": [
-            {
-              "system": "urn:form-examples:cardiac-stress-test-result",
-              "code": "cardiac_stress_test_result",
-              "display": "Cardiac Stress Test Result"
-            }
-          ]
-        },
+        "type": [
+          {
+            "coding": [
+              {
+                "system": "http://snomed.info/sct",
+                "code": "185349003",
+                "display": "Encounter for check up"
+              }
+            ],
+            "text": "Cardiac Stress Test Result"
+          }
+        ],
         "subject": {
           "reference": "urn:uuid:550e8400-e29b-41d4-a716-446655440000"
         },
-        "encounter": {
-          "reference": "Encounter/bb0e8400-e29b-41d4-a716-446655440006"
-        },
-        "effectiveDateTime": "2026-04-09T10:00:00+00:00",
-        "component": [
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:cardiac-stress-test-result",
-                  "code": "deleted_at",
-                  "display": "Deleted At"
-                }
-              ]
-            },
-            "valueDateTime": "2026-04-09T10:00:00+00:00"
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:cardiac-stress-test-result",
-                  "code": "originating_request_reference",
-                  "display": "Originating Request Reference"
-                }
-              ]
-            },
-            "valueString": ""
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:cardiac-stress-test-result",
-                  "code": "report_status",
-                  "display": "Report Status"
-                }
-              ]
-            },
-            "valueCodeableConcept": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:cardiac-stress-test-result:report_status",
-                  "code": "preliminary",
-                  "display": "Preliminary"
-                }
-              ]
-            }
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:cardiac-stress-test-result",
-                  "code": "performed_date",
-                  "display": "Performed Date"
-                }
-              ]
-            },
-            "valueDateTime": "2026-01-15"
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:cardiac-stress-test-result",
-                  "code": "reported_date",
-                  "display": "Reported Date"
-                }
-              ]
-            },
-            "valueDateTime": "2026-01-15"
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:cardiac-stress-test-result",
-                  "code": "test_type",
-                  "display": "Test Type"
-                }
-              ]
-            },
-            "valueCodeableConcept": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:cardiac-stress-test-result:test_type",
-                  "code": "exercise-treadmill-ecg",
-                  "display": "Exercise-Treadmill-Ecg"
-                }
-              ]
-            }
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:cardiac-stress-test-result",
-                  "code": "protocol",
-                  "display": "Protocol"
-                }
-              ]
-            },
-            "valueString": ""
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:cardiac-stress-test-result",
-                  "code": "clinical_history",
-                  "display": "Clinical History"
-                }
-              ]
-            },
-            "valueString": "Example text."
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:cardiac-stress-test-result",
-                  "code": "comparison_with_previous",
-                  "display": "Comparison With Previous"
-                }
-              ]
-            },
-            "valueString": ""
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:cardiac-stress-test-result",
-                  "code": "maximum_heart_rate_bpm",
-                  "display": "Maximum Heart Rate Bpm"
-                }
-              ]
-            },
-            "valueInteger": 1
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:cardiac-stress-test-result",
-                  "code": "percent_predicted_heart_rate",
-                  "display": "Percent Predicted Heart Rate"
-                }
-              ]
-            },
-            "valueQuantity": {
-              "value": 72.0
-            }
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:cardiac-stress-test-result",
-                  "code": "exercise_duration_minutes",
-                  "display": "Exercise Duration Minutes"
-                }
-              ]
-            },
-            "valueQuantity": {
-              "value": 0.0
-            }
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:cardiac-stress-test-result",
-                  "code": "mets_achieved",
-                  "display": "Mets Achieved"
-                }
-              ]
-            },
-            "valueQuantity": {
-              "value": 0.0
-            }
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:cardiac-stress-test-result",
-                  "code": "peak_blood_pressure",
-                  "display": "Peak Blood Pressure"
-                }
-              ]
-            },
-            "valueString": ""
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:cardiac-stress-test-result",
-                  "code": "blood_pressure_response",
-                  "display": "Blood Pressure Response"
-                }
-              ]
-            },
-            "valueCodeableConcept": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:cardiac-stress-test-result:blood_pressure_response",
-                  "code": "normal",
-                  "display": "Normal"
-                }
-              ]
-            }
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:cardiac-stress-test-result",
-                  "code": "ischaemic_st_changes",
-                  "display": "Ischaemic St Changes"
-                }
-              ]
-            },
-            "valueBoolean": true
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:cardiac-stress-test-result",
-                  "code": "chest_pain_induced",
-                  "display": "Chest Pain Induced"
-                }
-              ]
-            },
-            "valueBoolean": true
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:cardiac-stress-test-result",
-                  "code": "arrhythmia_induced",
-                  "display": "Arrhythmia Induced"
-                }
-              ]
-            },
-            "valueBoolean": true
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:cardiac-stress-test-result",
-                  "code": "terminated_early",
-                  "display": "Terminated Early"
-                }
-              ]
-            },
-            "valueBoolean": true
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:cardiac-stress-test-result",
-                  "code": "test_positive",
-                  "display": "Test Positive"
-                }
-              ]
-            },
-            "valueBoolean": true
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:cardiac-stress-test-result",
-                  "code": "test_negative",
-                  "display": "Test Negative"
-                }
-              ]
-            },
-            "valueBoolean": true
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:cardiac-stress-test-result",
-                  "code": "test_inconclusive",
-                  "display": "Test Inconclusive"
-                }
-              ]
-            },
-            "valueBoolean": true
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:cardiac-stress-test-result",
-                  "code": "reason_for_termination",
-                  "display": "Reason For Termination"
-                }
-              ]
-            },
-            "valueString": "Example text."
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:cardiac-stress-test-result",
-                  "code": "duke_treadmill_score",
-                  "display": "Duke Treadmill Score"
-                }
-              ]
-            },
-            "valueQuantity": {
-              "value": 5.0
-            }
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:cardiac-stress-test-result",
-                  "code": "impression",
-                  "display": "Impression"
-                }
-              ]
-            },
-            "valueString": "Example text."
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:cardiac-stress-test-result",
-                  "code": "reporting_category",
-                  "display": "Reporting Category"
-                }
-              ]
-            },
-            "valueString": "General"
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:cardiac-stress-test-result",
-                  "code": "recommended_follow_up",
-                  "display": "Recommended Follow Up"
-                }
-              ]
-            },
-            "valueString": ""
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:cardiac-stress-test-result",
-                  "code": "critical_result_communicated",
-                  "display": "Critical Result Communicated"
-                }
-              ]
-            },
-            "valueBoolean": true
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:cardiac-stress-test-result",
-                  "code": "reported_to",
-                  "display": "Reported To"
-                }
-              ]
-            },
-            "valueString": ""
-          }
-        ]
+        "actualPeriod": {
+          "start": "2026-04-09T10:00:00+00:00"
+        }
       }
     },
     {
       "fullUrl": "urn:uuid:880e8400-e29b-41d4-a716-446655440003",
       "resource": {
-        "resourceType": "Observation",
+        "resourceType": "ClinicalImpression",
         "id": "880e8400-e29b-41d4-a716-446655440003",
         "meta": {
           "profile": [
-            "http://hl7.org/fhir/StructureDefinition/Observation"
+            "http://hl7.org/fhir/StructureDefinition/ClinicalImpression"
           ],
           "lastUpdated": "2026-04-09T10:00:00+00:00"
         },
-        "status": "final",
-        "category": [
-          {
-            "coding": [
-              {
-                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
-                "code": "survey",
-                "display": "Survey"
-              }
-            ]
-          }
-        ],
-        "code": {
-          "coding": [
-            {
-              "system": "urn:form-examples:cardiac-stress-test-result",
-              "code": "cardiac_stress_test_result_grade",
-              "display": "Cardiac Stress Test Result Grade"
-            }
-          ]
-        },
+        "status": "completed",
         "subject": {
           "reference": "urn:uuid:550e8400-e29b-41d4-a716-446655440000"
         },
         "encounter": {
-          "reference": "Encounter/bb0e8400-e29b-41d4-a716-446655440006"
+          "reference": "urn:uuid:770e8400-e29b-41d4-a716-446655440002"
         },
         "effectiveDateTime": "2026-04-09T10:00:00+00:00",
-        "component": [
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:cardiac-stress-test-result",
-                  "code": "deleted_at",
-                  "display": "Deleted At"
-                }
-              ]
-            },
-            "valueDateTime": "2026-04-09T10:00:00+00:00"
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:cardiac-stress-test-result",
-                  "code": "result_classification",
-                  "display": "Result Classification"
-                }
-              ]
-            },
-            "valueCodeableConcept": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:cardiac-stress-test-result:result_classification",
-                  "code": "normal",
-                  "display": "Normal"
-                }
-              ]
-            }
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:cardiac-stress-test-result",
-                  "code": "abnormality_severity",
-                  "display": "Abnormality Severity"
-                }
-              ]
-            },
-            "valueCodeableConcept": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:cardiac-stress-test-result:abnormality_severity",
-                  "code": "none",
-                  "display": "None"
-                }
-              ]
-            }
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:cardiac-stress-test-result",
-                  "code": "reporting_category",
-                  "display": "Reporting Category"
-                }
-              ]
-            },
-            "valueString": "General"
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:cardiac-stress-test-result",
-                  "code": "report_completeness_percent",
-                  "display": "Report Completeness Percent"
-                }
-              ]
-            },
-            "valueInteger": 1
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:cardiac-stress-test-result",
-                  "code": "follow_up_urgency",
-                  "display": "Follow Up Urgency"
-                }
-              ]
-            },
-            "valueCodeableConcept": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:cardiac-stress-test-result:follow_up_urgency",
-                  "code": "routine",
-                  "display": "Routine"
-                }
-              ]
-            }
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:cardiac-stress-test-result",
-                  "code": "target_timeframe",
-                  "display": "Target Timeframe"
-                }
-              ]
-            },
-            "valueString": ""
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:cardiac-stress-test-result",
-                  "code": "recommended_action",
-                  "display": "Recommended Action"
-                }
-              ]
-            },
-            "valueString": ""
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:cardiac-stress-test-result",
-                  "code": "recommendation",
-                  "display": "Recommendation"
-                }
-              ]
-            },
-            "valueCodeableConcept": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:cardiac-stress-test-result:recommendation",
-                  "code": "no-action",
-                  "display": "No-Action"
-                }
-              ]
-            }
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:cardiac-stress-test-result",
-                  "code": "clinician_notes",
-                  "display": "Clinician Notes"
-                }
-              ]
-            },
-            "valueString": "Example text."
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:cardiac-stress-test-result",
-                  "code": "signed_at",
-                  "display": "Signed At"
-                }
-              ]
-            },
-            "valueDateTime": "2026-04-09T10:00:00+00:00"
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:cardiac-stress-test-result",
-                  "code": "graded_at",
-                  "display": "Graded At"
-                }
-              ]
-            },
-            "valueDateTime": "2026-04-09T10:00:00+00:00"
-          }
-        ]
+        "date": "2026-04-09T10:00:00+00:00",
+        "description": "Cardiac Stress Test Result grading result",
+        "summary": "Deleted At: 2026-04-09T10:00:00+00:00; Result Classification: normal; Abnormality Severity: none; Reporting Category: General; Report Completeness Percent: 1; Follow Up Urgency: routine; Target Timeframe: ; Recommended Action: ; Recommendation: no-action; Clinician Notes: Example text.; Signed At: 2026-04-09T10:00:00+00:00"
       }
     },
     {
       "fullUrl": "urn:uuid:aa0e8400-e29b-41d4-a716-446655440005",
       "resource": {
-        "resourceType": "Observation",
+        "resourceType": "DetectedIssue",
         "id": "aa0e8400-e29b-41d4-a716-446655440005",
         "meta": {
           "profile": [
-            "http://hl7.org/fhir/StructureDefinition/Observation"
+            "http://hl7.org/fhir/StructureDefinition/DetectedIssue"
           ],
           "lastUpdated": "2026-04-09T10:00:00+00:00"
         },
@@ -674,9 +99,9 @@
           {
             "coding": [
               {
-                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
-                "code": "survey",
-                "display": "Survey"
+                "system": "urn:form-examples:cardiac-stress-test-result",
+                "code": "grading-additional-flag",
+                "display": "critical-result-alert"
               }
             ]
           }
@@ -684,107 +109,28 @@
         "code": {
           "coding": [
             {
-              "system": "urn:form-examples:cardiac-stress-test-result",
-              "code": "cardiac_stress_test_result_grade_flag",
-              "display": "Cardiac Stress Test Result Grade Flag"
+              "system": "urn:form-examples:cardiac-stress-test-result:flags",
+              "code": "FLAG-001",
+              "display": "Safety flag"
             }
           ]
         },
+        "severity": "low",
         "subject": {
           "reference": "urn:uuid:550e8400-e29b-41d4-a716-446655440000"
         },
-        "encounter": {
-          "reference": "Encounter/bb0e8400-e29b-41d4-a716-446655440006"
-        },
-        "effectiveDateTime": "2026-04-09T10:00:00+00:00",
-        "component": [
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:cardiac-stress-test-result",
-                  "code": "deleted_at",
-                  "display": "Deleted At"
-                }
-              ]
-            },
-            "valueDateTime": "2026-04-09T10:00:00+00:00"
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:cardiac-stress-test-result",
-                  "code": "category",
-                  "display": "Category"
-                }
-              ]
-            },
-            "valueCodeableConcept": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:cardiac-stress-test-result:category",
-                  "code": "critical-result-alert",
-                  "display": "Critical-Result-Alert"
-                }
-              ]
-            }
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:cardiac-stress-test-result",
-                  "code": "priority",
-                  "display": "Priority"
-                }
-              ]
-            },
-            "valueCodeableConcept": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:cardiac-stress-test-result:priority",
-                  "code": "low",
-                  "display": "Low"
-                }
-              ]
-            }
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:cardiac-stress-test-result",
-                  "code": "description",
-                  "display": "Description"
-                }
-              ]
-            },
-            "valueString": "Example text."
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:cardiac-stress-test-result",
-                  "code": "suggested_action",
-                  "display": "Suggested Action"
-                }
-              ]
-            },
-            "valueString": ""
-          }
-        ]
+        "identifiedDateTime": "2026-04-09T10:00:00+00:00",
+        "detail": "Clinical flag detected."
       }
     },
     {
       "fullUrl": "urn:uuid:990e8400-e29b-41d4-a716-446655440004",
       "resource": {
-        "resourceType": "Observation",
+        "resourceType": "DetectedIssue",
         "id": "990e8400-e29b-41d4-a716-446655440004",
         "meta": {
           "profile": [
-            "http://hl7.org/fhir/StructureDefinition/Observation"
+            "http://hl7.org/fhir/StructureDefinition/DetectedIssue"
           ],
           "lastUpdated": "2026-04-09T10:00:00+00:00"
         },
@@ -793,9 +139,9 @@
           {
             "coding": [
               {
-                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
-                "code": "survey",
-                "display": "Survey"
+                "system": "urn:form-examples:cardiac-stress-test-result",
+                "code": "grading-fired-rule",
+                "display": "General"
               }
             ]
           }
@@ -803,77 +149,18 @@
         "code": {
           "coding": [
             {
-              "system": "urn:form-examples:cardiac-stress-test-result",
-              "code": "cardiac_stress_test_result_grade_rule",
-              "display": "Cardiac Stress Test Result Grade Rule"
+              "system": "urn:form-examples:cardiac-stress-test-result:rules",
+              "code": "RULE-001",
+              "display": "Example grading rule"
             }
           ]
         },
+        "severity": "moderate",
         "subject": {
           "reference": "urn:uuid:550e8400-e29b-41d4-a716-446655440000"
         },
-        "encounter": {
-          "reference": "Encounter/bb0e8400-e29b-41d4-a716-446655440006"
-        },
-        "effectiveDateTime": "2026-04-09T10:00:00+00:00",
-        "component": [
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:cardiac-stress-test-result",
-                  "code": "deleted_at",
-                  "display": "Deleted At"
-                }
-              ]
-            },
-            "valueDateTime": "2026-04-09T10:00:00+00:00"
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:cardiac-stress-test-result",
-                  "code": "axis",
-                  "display": "Axis"
-                }
-              ]
-            },
-            "valueCodeableConcept": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:cardiac-stress-test-result:axis",
-                  "code": "classification",
-                  "display": "Classification"
-                }
-              ]
-            }
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:cardiac-stress-test-result",
-                  "code": "category",
-                  "display": "Category"
-                }
-              ]
-            },
-            "valueString": "General"
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:cardiac-stress-test-result",
-                  "code": "description",
-                  "display": "Description"
-                }
-              ]
-            },
-            "valueString": "Example text."
-          }
-        ]
+        "identifiedDateTime": "2026-04-09T10:00:00+00:00",
+        "detail": "Example text."
       }
     },
     {
@@ -912,7 +199,7 @@
           "reference": "urn:uuid:550e8400-e29b-41d4-a716-446655440000"
         },
         "encounter": {
-          "reference": "Encounter/bb0e8400-e29b-41d4-a716-446655440006"
+          "reference": "urn:uuid:770e8400-e29b-41d4-a716-446655440002"
         },
         "effectiveDateTime": "2026-04-09T10:00:00+00:00",
         "component": [

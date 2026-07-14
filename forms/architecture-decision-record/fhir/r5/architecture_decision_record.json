@@ -1,284 +1,40 @@
 {
-  "resourceType": "Observation",
+  "resourceType": "Encounter",
   "id": "770e8400-e29b-41d4-a716-446655440002",
   "meta": {
     "profile": [
-      "http://hl7.org/fhir/StructureDefinition/Observation"
+      "http://hl7.org/fhir/StructureDefinition/Encounter"
     ],
     "lastUpdated": "2026-04-09T10:00:00+00:00"
   },
-  "status": "final",
-  "category": [
+  "status": "planned",
+  "class": [
     {
       "coding": [
         {
-          "system": "http://terminology.hl7.org/CodeSystem/observation-category",
-          "code": "survey",
-          "display": "Survey"
+          "system": "http://terminology.hl7.org/CodeSystem/v3-ActCode",
+          "code": "AMB",
+          "display": "ambulatory"
         }
       ]
     }
   ],
-  "code": {
-    "coding": [
-      {
-        "system": "urn:form-examples:architecture-decision-record",
-        "code": "architecture_decision_record",
-        "display": "Architecture Decision Record"
-      }
-    ]
-  },
+  "type": [
+    {
+      "coding": [
+        {
+          "system": "http://snomed.info/sct",
+          "code": "185349003",
+          "display": "Encounter for check up"
+        }
+      ],
+      "text": "Architecture Decision Record"
+    }
+  ],
   "subject": {
     "reference": "Patient/aa0e8400-e29b-41d4-a716-446655440005"
   },
-  "encounter": {
-    "reference": "Encounter/bb0e8400-e29b-41d4-a716-446655440006"
-  },
-  "effectiveDateTime": "2026-04-09T10:00:00+00:00",
-  "component": [
-    {
-      "code": {
-        "coding": [
-          {
-            "system": "urn:form-examples:architecture-decision-record",
-            "code": "deleted_at",
-            "display": "Deleted At"
-          }
-        ]
-      },
-      "valueDateTime": "2026-04-09T10:00:00+00:00"
-    },
-    {
-      "code": {
-        "coding": [
-          {
-            "system": "urn:form-examples:architecture-decision-record",
-            "code": "slug",
-            "display": "Slug"
-          }
-        ]
-      },
-      "valueString": ""
-    },
-    {
-      "code": {
-        "coding": [
-          {
-            "system": "urn:form-examples:architecture-decision-record",
-            "code": "number",
-            "display": "Number"
-          }
-        ]
-      },
-      "valueInteger": 2
-    },
-    {
-      "code": {
-        "coding": [
-          {
-            "system": "urn:form-examples:architecture-decision-record",
-            "code": "title",
-            "display": "Title"
-          }
-        ]
-      },
-      "valueString": "Example Title"
-    },
-    {
-      "code": {
-        "coding": [
-          {
-            "system": "urn:form-examples:architecture-decision-record",
-            "code": "decision_date",
-            "display": "Decision Date"
-          }
-        ]
-      },
-      "valueDateTime": "2026-01-15"
-    },
-    {
-      "code": {
-        "coding": [
-          {
-            "system": "urn:form-examples:architecture-decision-record",
-            "code": "status",
-            "display": "Status"
-          }
-        ]
-      },
-      "valueCodeableConcept": {
-        "coding": [
-          {
-            "system": "urn:form-examples:architecture-decision-record:status",
-            "code": "pending",
-            "display": "Pending"
-          }
-        ]
-      }
-    },
-    {
-      "code": {
-        "coding": [
-          {
-            "system": "urn:form-examples:architecture-decision-record",
-            "code": "decision_group",
-            "display": "Decision Group"
-          }
-        ]
-      },
-      "valueCodeableConcept": {
-        "coding": [
-          {
-            "system": "urn:form-examples:architecture-decision-record:decision_group",
-            "code": "business",
-            "display": "Business"
-          }
-        ]
-      }
-    },
-    {
-      "code": {
-        "coding": [
-          {
-            "system": "urn:form-examples:architecture-decision-record",
-            "code": "issue",
-            "display": "Issue"
-          }
-        ]
-      },
-      "valueString": ""
-    },
-    {
-      "code": {
-        "coding": [
-          {
-            "system": "urn:form-examples:architecture-decision-record",
-            "code": "decision",
-            "display": "Decision"
-          }
-        ]
-      },
-      "valueString": ""
-    },
-    {
-      "code": {
-        "coding": [
-          {
-            "system": "urn:form-examples:architecture-decision-record",
-            "code": "assumptions",
-            "display": "Assumptions"
-          }
-        ]
-      },
-      "valueString": ""
-    },
-    {
-      "code": {
-        "coding": [
-          {
-            "system": "urn:form-examples:architecture-decision-record",
-            "code": "constraints",
-            "display": "Constraints"
-          }
-        ]
-      },
-      "valueString": ""
-    },
-    {
-      "code": {
-        "coding": [
-          {
-            "system": "urn:form-examples:architecture-decision-record",
-            "code": "argument",
-            "display": "Argument"
-          }
-        ]
-      },
-      "valueString": ""
-    },
-    {
-      "code": {
-        "coding": [
-          {
-            "system": "urn:form-examples:architecture-decision-record",
-            "code": "implications",
-            "display": "Implications"
-          }
-        ]
-      },
-      "valueString": ""
-    },
-    {
-      "code": {
-        "coding": [
-          {
-            "system": "urn:form-examples:architecture-decision-record",
-            "code": "related_decisions",
-            "display": "Related Decisions"
-          }
-        ]
-      },
-      "valueString": ""
-    },
-    {
-      "code": {
-        "coding": [
-          {
-            "system": "urn:form-examples:architecture-decision-record",
-            "code": "related_requirements",
-            "display": "Related Requirements"
-          }
-        ]
-      },
-      "valueString": ""
-    },
-    {
-      "code": {
-        "coding": [
-          {
-            "system": "urn:form-examples:architecture-decision-record",
-            "code": "related_artifacts",
-            "display": "Related Artifacts"
-          }
-        ]
-      },
-      "valueString": ""
-    },
-    {
-      "code": {
-        "coding": [
-          {
-            "system": "urn:form-examples:architecture-decision-record",
-            "code": "related_principles",
-            "display": "Related Principles"
-          }
-        ]
-      },
-      "valueString": ""
-    },
-    {
-      "code": {
-        "coding": [
-          {
-            "system": "urn:form-examples:architecture-decision-record",
-            "code": "signed_off_by",
-            "display": "Signed Off By"
-          }
-        ]
-      },
-      "valueString": ""
-    },
-    {
-      "code": {
-        "coding": [
-          {
-            "system": "urn:form-examples:architecture-decision-record",
-            "code": "signed_off_at",
-            "display": "Signed Off At"
-          }
-        ]
-      },
-      "valueDateTime": "2026-04-09T10:00:00+00:00"
-    }
-  ]
+  "actualPeriod": {
+    "start": "2026-04-09T10:00:00+00:00"
+  }
 }

@@ -1,180 +1,21 @@
 {
-  "resourceType": "Observation",
+  "resourceType": "ClinicalImpression",
   "id": "990e8400-e29b-41d4-a716-446655440004",
   "meta": {
     "profile": [
-      "http://hl7.org/fhir/StructureDefinition/Observation"
+      "http://hl7.org/fhir/StructureDefinition/ClinicalImpression"
     ],
     "lastUpdated": "2026-04-09T10:00:00+00:00"
   },
-  "status": "final",
-  "category": [
-    {
-      "coding": [
-        {
-          "system": "http://terminology.hl7.org/CodeSystem/observation-category",
-          "code": "survey",
-          "display": "Survey"
-        }
-      ]
-    }
-  ],
-  "code": {
-    "coding": [
-      {
-        "system": "urn:form-examples:structured-medication-review",
-        "code": "structured_medication_review_grade",
-        "display": "Structured Medication Review Grade"
-      }
-    ]
-  },
+  "status": "completed",
   "subject": {
     "reference": "Patient/550e8400-e29b-41d4-a716-446655440000"
   },
   "encounter": {
-    "reference": "Encounter/cc0e8400-e29b-41d4-a716-446655440007"
+    "reference": "Encounter/770e8400-e29b-41d4-a716-446655440002"
   },
   "effectiveDateTime": "2026-04-09T10:00:00+00:00",
-  "component": [
-    {
-      "code": {
-        "coding": [
-          {
-            "system": "urn:form-examples:structured-medication-review",
-            "code": "deleted_at",
-            "display": "Deleted At"
-          }
-        ]
-      },
-      "valueDateTime": "2026-04-09T10:00:00+00:00"
-    },
-    {
-      "code": {
-        "coding": [
-          {
-            "system": "urn:form-examples:structured-medication-review",
-            "code": "review_status",
-            "display": "Review Status"
-          }
-        ]
-      },
-      "valueCodeableConcept": {
-        "coding": [
-          {
-            "system": "urn:form-examples:structured-medication-review:review_status",
-            "code": "complete",
-            "display": "Complete"
-          }
-        ]
-      }
-    },
-    {
-      "code": {
-        "coding": [
-          {
-            "system": "urn:form-examples:structured-medication-review",
-            "code": "anticholinergic_burden_score",
-            "display": "Anticholinergic Burden Score"
-          }
-        ]
-      },
-      "valueInteger": 5
-    },
-    {
-      "code": {
-        "coding": [
-          {
-            "system": "urn:form-examples:structured-medication-review",
-            "code": "anticholinergic_band",
-            "display": "Anticholinergic Band"
-          }
-        ]
-      },
-      "valueCodeableConcept": {
-        "coding": [
-          {
-            "system": "urn:form-examples:structured-medication-review:anticholinergic_band",
-            "code": "low",
-            "display": "Low"
-          }
-        ]
-      }
-    },
-    {
-      "code": {
-        "coding": [
-          {
-            "system": "urn:form-examples:structured-medication-review",
-            "code": "polypharmacy_band",
-            "display": "Polypharmacy Band"
-          }
-        ]
-      },
-      "valueCodeableConcept": {
-        "coding": [
-          {
-            "system": "urn:form-examples:structured-medication-review:polypharmacy_band",
-            "code": "none",
-            "display": "None"
-          }
-        ]
-      }
-    },
-    {
-      "code": {
-        "coding": [
-          {
-            "system": "urn:form-examples:structured-medication-review",
-            "code": "burden_band",
-            "display": "Burden Band"
-          }
-        ]
-      },
-      "valueCodeableConcept": {
-        "coding": [
-          {
-            "system": "urn:form-examples:structured-medication-review:burden_band",
-            "code": "low",
-            "display": "Low"
-          }
-        ]
-      }
-    },
-    {
-      "code": {
-        "coding": [
-          {
-            "system": "urn:form-examples:structured-medication-review",
-            "code": "medicine_count",
-            "display": "Medicine Count"
-          }
-        ]
-      },
-      "valueInteger": 2
-    },
-    {
-      "code": {
-        "coding": [
-          {
-            "system": "urn:form-examples:structured-medication-review",
-            "code": "regular_medicine_count",
-            "display": "Regular Medicine Count"
-          }
-        ]
-      },
-      "valueInteger": 2
-    },
-    {
-      "code": {
-        "coding": [
-          {
-            "system": "urn:form-examples:structured-medication-review",
-            "code": "graded_at",
-            "display": "Graded At"
-          }
-        ]
-      },
-      "valueDateTime": "2026-04-09T10:00:00+00:00"
-    }
-  ]
+  "date": "2026-04-09T10:00:00+00:00",
+  "description": "Structured Medication Review grading result",
+  "summary": "Deleted At: 2026-04-09T10:00:00+00:00; Review Status: complete; Anticholinergic Burden Score: 5; Anticholinergic Band: low; Polypharmacy Band: none; Burden Band: low; Medicine Count: 2; Regular Medicine Count: 2"
 }

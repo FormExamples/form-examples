@@ -1,182 +1,21 @@
 {
-  "resourceType": "Observation",
+  "resourceType": "ClinicalImpression",
   "id": "990e8400-e29b-41d4-a716-446655440004",
   "meta": {
     "profile": [
-      "http://hl7.org/fhir/StructureDefinition/Observation"
+      "http://hl7.org/fhir/StructureDefinition/ClinicalImpression"
     ],
     "lastUpdated": "2026-04-09T10:00:00+00:00"
   },
-  "status": "final",
-  "category": [
-    {
-      "coding": [
-        {
-          "system": "http://terminology.hl7.org/CodeSystem/observation-category",
-          "code": "survey",
-          "display": "Survey"
-        }
-      ]
-    }
-  ],
-  "code": {
-    "coding": [
-      {
-        "system": "urn:form-examples:fluid-balance-chart",
-        "code": "fluid_balance_chart_grade",
-        "display": "Fluid Balance Chart Grade"
-      }
-    ]
-  },
+  "status": "completed",
   "subject": {
     "reference": "Patient/550e8400-e29b-41d4-a716-446655440000"
   },
   "encounter": {
-    "reference": "Encounter/cc0e8400-e29b-41d4-a716-446655440007"
+    "reference": "Encounter/770e8400-e29b-41d4-a716-446655440002"
   },
   "effectiveDateTime": "2026-04-09T10:00:00+00:00",
-  "component": [
-    {
-      "code": {
-        "coding": [
-          {
-            "system": "urn:form-examples:fluid-balance-chart",
-            "code": "deleted_at",
-            "display": "Deleted At"
-          }
-        ]
-      },
-      "valueDateTime": "2026-04-09T10:00:00+00:00"
-    },
-    {
-      "code": {
-        "coding": [
-          {
-            "system": "urn:form-examples:fluid-balance-chart",
-            "code": "total_intake_ml",
-            "display": "Total Intake Ml"
-          }
-        ]
-      },
-      "valueQuantity": {
-        "value": 0.0
-      }
-    },
-    {
-      "code": {
-        "coding": [
-          {
-            "system": "urn:form-examples:fluid-balance-chart",
-            "code": "total_output_ml",
-            "display": "Total Output Ml"
-          }
-        ]
-      },
-      "valueQuantity": {
-        "value": 0.0
-      }
-    },
-    {
-      "code": {
-        "coding": [
-          {
-            "system": "urn:form-examples:fluid-balance-chart",
-            "code": "net_balance_ml",
-            "display": "Net Balance Ml"
-          }
-        ]
-      },
-      "valueQuantity": {
-        "value": 0.0
-      }
-    },
-    {
-      "code": {
-        "coding": [
-          {
-            "system": "urn:form-examples:fluid-balance-chart",
-            "code": "urine_output_ml",
-            "display": "Urine Output Ml"
-          }
-        ]
-      },
-      "valueQuantity": {
-        "value": 0.0
-      }
-    },
-    {
-      "code": {
-        "coding": [
-          {
-            "system": "urn:form-examples:fluid-balance-chart",
-            "code": "hours_observed",
-            "display": "Hours Observed"
-          }
-        ]
-      },
-      "valueQuantity": {
-        "value": 0.0
-      }
-    },
-    {
-      "code": {
-        "coding": [
-          {
-            "system": "urn:form-examples:fluid-balance-chart",
-            "code": "weight_kg",
-            "display": "Weight Kg"
-          }
-        ]
-      },
-      "valueQuantity": {
-        "value": 70.0
-      }
-    },
-    {
-      "code": {
-        "coding": [
-          {
-            "system": "urn:form-examples:fluid-balance-chart",
-            "code": "urine_output_ml_kg_h",
-            "display": "Urine Output Ml Kg H"
-          }
-        ]
-      },
-      "valueQuantity": {
-        "value": 0.0
-      }
-    },
-    {
-      "code": {
-        "coding": [
-          {
-            "system": "urn:form-examples:fluid-balance-chart",
-            "code": "fluid_status",
-            "display": "Fluid Status"
-          }
-        ]
-      },
-      "valueCodeableConcept": {
-        "coding": [
-          {
-            "system": "urn:form-examples:fluid-balance-chart:fluid_status",
-            "code": "balanced",
-            "display": "Balanced"
-          }
-        ]
-      }
-    },
-    {
-      "code": {
-        "coding": [
-          {
-            "system": "urn:form-examples:fluid-balance-chart",
-            "code": "graded_at",
-            "display": "Graded At"
-          }
-        ]
-      },
-      "valueDateTime": "2026-04-09T10:00:00+00:00"
-    }
-  ]
+  "date": "2026-04-09T10:00:00+00:00",
+  "description": "Fluid Balance Chart grading result",
+  "summary": "Deleted At: 2026-04-09T10:00:00+00:00; Total Intake Ml: 0.0; Total Output Ml: 0.0; Net Balance Ml: 0.0; Urine Output Ml: 0.0; Hours Observed: 0.0; Weight Kg: 70.0; Urine Output Ml Kg H: 0.0; Fluid Status: balanced"
 }

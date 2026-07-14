@@ -19,729 +19,78 @@
     {
       "fullUrl": "urn:uuid:770e8400-e29b-41d4-a716-446655440002",
       "resource": {
-        "resourceType": "Observation",
+        "resourceType": "Encounter",
         "id": "770e8400-e29b-41d4-a716-446655440002",
         "meta": {
           "profile": [
-            "http://hl7.org/fhir/StructureDefinition/Observation"
+            "http://hl7.org/fhir/StructureDefinition/Encounter"
           ],
           "lastUpdated": "2026-04-09T10:00:00+00:00"
         },
-        "status": "final",
-        "category": [
+        "status": "planned",
+        "class": [
           {
             "coding": [
               {
-                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
-                "code": "survey",
-                "display": "Survey"
+                "system": "http://terminology.hl7.org/CodeSystem/v3-ActCode",
+                "code": "AMB",
+                "display": "ambulatory"
               }
             ]
           }
         ],
-        "code": {
-          "coding": [
-            {
-              "system": "urn:form-examples:agile-consulting-scorecard-for-hiring-help",
-              "code": "agile_consulting_scorecard_for_hiring_help",
-              "display": "Agile Consulting Scorecard For Hiring Help"
-            }
-          ]
-        },
+        "type": [
+          {
+            "coding": [
+              {
+                "system": "http://snomed.info/sct",
+                "code": "185349003",
+                "display": "Encounter for check up"
+              }
+            ],
+            "text": "Agile Consulting Scorecard For Hiring Help"
+          }
+        ],
         "subject": {
           "reference": "Patient/bb0e8400-e29b-41d4-a716-446655440006"
         },
-        "encounter": {
-          "reference": "Encounter/cc0e8400-e29b-41d4-a716-446655440007"
-        },
-        "effectiveDateTime": "2026-04-09T10:00:00+00:00",
-        "component": [
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:agile-consulting-scorecard-for-hiring-help",
-                  "code": "deleted_at",
-                  "display": "Deleted At"
-                }
-              ]
-            },
-            "valueDateTime": "2026-04-09T10:00:00+00:00"
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:agile-consulting-scorecard-for-hiring-help",
-                  "code": "status",
-                  "display": "Status"
-                }
-              ]
-            },
-            "valueCodeableConcept": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:agile-consulting-scorecard-for-hiring-help:status",
-                  "code": "draft",
-                  "display": "Draft"
-                }
-              ]
-            }
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:agile-consulting-scorecard-for-hiring-help",
-                  "code": "assessment_date",
-                  "display": "Assessment Date"
-                }
-              ]
-            },
-            "valueDateTime": "2026-01-15"
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:agile-consulting-scorecard-for-hiring-help",
-                  "code": "submitted_at",
-                  "display": "Submitted At"
-                }
-              ]
-            },
-            "valueDateTime": "2026-04-09T10:00:00+00:00"
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:agile-consulting-scorecard-for-hiring-help",
-                  "code": "finalized_at",
-                  "display": "Finalized At"
-                }
-              ]
-            },
-            "valueDateTime": "2026-04-09T10:00:00+00:00"
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:agile-consulting-scorecard-for-hiring-help",
-                  "code": "m1_done",
-                  "display": "M1 Done"
-                }
-              ]
-            },
-            "valueBoolean": true
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:agile-consulting-scorecard-for-hiring-help",
-                  "code": "m1_evidence",
-                  "display": "M1 Evidence"
-                }
-              ]
-            },
-            "valueString": ""
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:agile-consulting-scorecard-for-hiring-help",
-                  "code": "m2_done",
-                  "display": "M2 Done"
-                }
-              ]
-            },
-            "valueBoolean": true
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:agile-consulting-scorecard-for-hiring-help",
-                  "code": "m2_evidence",
-                  "display": "M2 Evidence"
-                }
-              ]
-            },
-            "valueString": ""
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:agile-consulting-scorecard-for-hiring-help",
-                  "code": "m3_done",
-                  "display": "M3 Done"
-                }
-              ]
-            },
-            "valueBoolean": true
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:agile-consulting-scorecard-for-hiring-help",
-                  "code": "m3_evidence",
-                  "display": "M3 Evidence"
-                }
-              ]
-            },
-            "valueString": ""
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:agile-consulting-scorecard-for-hiring-help",
-                  "code": "m4_done",
-                  "display": "M4 Done"
-                }
-              ]
-            },
-            "valueBoolean": true
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:agile-consulting-scorecard-for-hiring-help",
-                  "code": "m4_evidence",
-                  "display": "M4 Evidence"
-                }
-              ]
-            },
-            "valueString": ""
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:agile-consulting-scorecard-for-hiring-help",
-                  "code": "p1_done",
-                  "display": "P1 Done"
-                }
-              ]
-            },
-            "valueBoolean": true
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:agile-consulting-scorecard-for-hiring-help",
-                  "code": "p1_evidence",
-                  "display": "P1 Evidence"
-                }
-              ]
-            },
-            "valueString": ""
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:agile-consulting-scorecard-for-hiring-help",
-                  "code": "p2_done",
-                  "display": "P2 Done"
-                }
-              ]
-            },
-            "valueBoolean": true
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:agile-consulting-scorecard-for-hiring-help",
-                  "code": "p2_evidence",
-                  "display": "P2 Evidence"
-                }
-              ]
-            },
-            "valueString": ""
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:agile-consulting-scorecard-for-hiring-help",
-                  "code": "p3_done",
-                  "display": "P3 Done"
-                }
-              ]
-            },
-            "valueBoolean": true
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:agile-consulting-scorecard-for-hiring-help",
-                  "code": "p3_evidence",
-                  "display": "P3 Evidence"
-                }
-              ]
-            },
-            "valueString": ""
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:agile-consulting-scorecard-for-hiring-help",
-                  "code": "p4_done",
-                  "display": "P4 Done"
-                }
-              ]
-            },
-            "valueBoolean": true
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:agile-consulting-scorecard-for-hiring-help",
-                  "code": "p4_evidence",
-                  "display": "P4 Evidence"
-                }
-              ]
-            },
-            "valueString": ""
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:agile-consulting-scorecard-for-hiring-help",
-                  "code": "p5_done",
-                  "display": "P5 Done"
-                }
-              ]
-            },
-            "valueBoolean": true
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:agile-consulting-scorecard-for-hiring-help",
-                  "code": "p5_evidence",
-                  "display": "P5 Evidence"
-                }
-              ]
-            },
-            "valueString": ""
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:agile-consulting-scorecard-for-hiring-help",
-                  "code": "p6_done",
-                  "display": "P6 Done"
-                }
-              ]
-            },
-            "valueBoolean": true
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:agile-consulting-scorecard-for-hiring-help",
-                  "code": "p6_evidence",
-                  "display": "P6 Evidence"
-                }
-              ]
-            },
-            "valueString": ""
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:agile-consulting-scorecard-for-hiring-help",
-                  "code": "p7_done",
-                  "display": "P7 Done"
-                }
-              ]
-            },
-            "valueBoolean": true
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:agile-consulting-scorecard-for-hiring-help",
-                  "code": "p7_evidence",
-                  "display": "P7 Evidence"
-                }
-              ]
-            },
-            "valueString": ""
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:agile-consulting-scorecard-for-hiring-help",
-                  "code": "p8_done",
-                  "display": "P8 Done"
-                }
-              ]
-            },
-            "valueBoolean": true
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:agile-consulting-scorecard-for-hiring-help",
-                  "code": "p8_evidence",
-                  "display": "P8 Evidence"
-                }
-              ]
-            },
-            "valueString": ""
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:agile-consulting-scorecard-for-hiring-help",
-                  "code": "p9_done",
-                  "display": "P9 Done"
-                }
-              ]
-            },
-            "valueBoolean": true
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:agile-consulting-scorecard-for-hiring-help",
-                  "code": "p9_evidence",
-                  "display": "P9 Evidence"
-                }
-              ]
-            },
-            "valueString": ""
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:agile-consulting-scorecard-for-hiring-help",
-                  "code": "p10_done",
-                  "display": "P10 Done"
-                }
-              ]
-            },
-            "valueBoolean": true
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:agile-consulting-scorecard-for-hiring-help",
-                  "code": "p10_evidence",
-                  "display": "P10 Evidence"
-                }
-              ]
-            },
-            "valueString": ""
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:agile-consulting-scorecard-for-hiring-help",
-                  "code": "p11_done",
-                  "display": "P11 Done"
-                }
-              ]
-            },
-            "valueBoolean": true
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:agile-consulting-scorecard-for-hiring-help",
-                  "code": "p11_evidence",
-                  "display": "P11 Evidence"
-                }
-              ]
-            },
-            "valueString": ""
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:agile-consulting-scorecard-for-hiring-help",
-                  "code": "p12_done",
-                  "display": "P12 Done"
-                }
-              ]
-            },
-            "valueBoolean": true
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:agile-consulting-scorecard-for-hiring-help",
-                  "code": "p12_evidence",
-                  "display": "P12 Evidence"
-                }
-              ]
-            },
-            "valueString": ""
-          }
-        ]
+        "actualPeriod": {
+          "start": "2026-04-09T10:00:00+00:00"
+        }
       }
     },
     {
       "fullUrl": "urn:uuid:880e8400-e29b-41d4-a716-446655440003",
       "resource": {
-        "resourceType": "Observation",
+        "resourceType": "ClinicalImpression",
         "id": "880e8400-e29b-41d4-a716-446655440003",
         "meta": {
           "profile": [
-            "http://hl7.org/fhir/StructureDefinition/Observation"
+            "http://hl7.org/fhir/StructureDefinition/ClinicalImpression"
           ],
           "lastUpdated": "2026-04-09T10:00:00+00:00"
         },
-        "status": "final",
-        "category": [
-          {
-            "coding": [
-              {
-                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
-                "code": "survey",
-                "display": "Survey"
-              }
-            ]
-          }
-        ],
-        "code": {
-          "coding": [
-            {
-              "system": "urn:form-examples:agile-consulting-scorecard-for-hiring-help",
-              "code": "agile_consulting_scorecard_for_hiring_help_grade",
-              "display": "Agile Consulting Scorecard For Hiring Help Grade"
-            }
-          ]
-        },
+        "status": "completed",
         "subject": {
           "reference": "Patient/bb0e8400-e29b-41d4-a716-446655440006"
         },
         "encounter": {
-          "reference": "Encounter/cc0e8400-e29b-41d4-a716-446655440007"
+          "reference": "urn:uuid:770e8400-e29b-41d4-a716-446655440002"
         },
         "effectiveDateTime": "2026-04-09T10:00:00+00:00",
-        "component": [
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:agile-consulting-scorecard-for-hiring-help",
-                  "code": "deleted_at",
-                  "display": "Deleted At"
-                }
-              ]
-            },
-            "valueDateTime": "2026-04-09T10:00:00+00:00"
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:agile-consulting-scorecard-for-hiring-help",
-                  "code": "score_total",
-                  "display": "Score Total"
-                }
-              ]
-            },
-            "valueInteger": 5
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:agile-consulting-scorecard-for-hiring-help",
-                  "code": "manifesto_subtotal",
-                  "display": "Manifesto Subtotal"
-                }
-              ]
-            },
-            "valueInteger": 5
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:agile-consulting-scorecard-for-hiring-help",
-                  "code": "principles_subtotal",
-                  "display": "Principles Subtotal"
-                }
-              ]
-            },
-            "valueInteger": 5
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:agile-consulting-scorecard-for-hiring-help",
-                  "code": "computed_band",
-                  "display": "Computed Band"
-                }
-              ]
-            },
-            "valueCodeableConcept": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:agile-consulting-scorecard-for-hiring-help:computed_band",
-                  "code": "low",
-                  "display": "Low"
-                }
-              ]
-            }
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:agile-consulting-scorecard-for-hiring-help",
-                  "code": "final_band",
-                  "display": "Final Band"
-                }
-              ]
-            },
-            "valueCodeableConcept": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:agile-consulting-scorecard-for-hiring-help:final_band",
-                  "code": "low",
-                  "display": "Low"
-                }
-              ]
-            }
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:agile-consulting-scorecard-for-hiring-help",
-                  "code": "override_reason",
-                  "display": "Override Reason"
-                }
-              ]
-            },
-            "valueString": "Example text."
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:agile-consulting-scorecard-for-hiring-help",
-                  "code": "recommendation",
-                  "display": "Recommendation"
-                }
-              ]
-            },
-            "valueCodeableConcept": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:agile-consulting-scorecard-for-hiring-help:recommendation",
-                  "code": "do-not-hire-yet",
-                  "display": "Do-Not-Hire-Yet"
-                }
-              ]
-            }
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:agile-consulting-scorecard-for-hiring-help",
-                  "code": "recommended_focus_areas",
-                  "display": "Recommended Focus Areas"
-                }
-              ]
-            },
-            "valueString": ""
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:agile-consulting-scorecard-for-hiring-help",
-                  "code": "review_notes",
-                  "display": "Review Notes"
-                }
-              ]
-            },
-            "valueString": "Example text."
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:agile-consulting-scorecard-for-hiring-help",
-                  "code": "signed_by",
-                  "display": "Signed By"
-                }
-              ]
-            },
-            "valueString": ""
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:agile-consulting-scorecard-for-hiring-help",
-                  "code": "signed_at",
-                  "display": "Signed At"
-                }
-              ]
-            },
-            "valueDateTime": "2026-04-09T10:00:00+00:00"
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:agile-consulting-scorecard-for-hiring-help",
-                  "code": "graded_at",
-                  "display": "Graded At"
-                }
-              ]
-            },
-            "valueDateTime": "2026-04-09T10:00:00+00:00"
-          }
-        ]
+        "date": "2026-04-09T10:00:00+00:00",
+        "description": "Agile Consulting Scorecard For Hiring Help grading result",
+        "summary": "Deleted At: 2026-04-09T10:00:00+00:00; Score Total: 5; Manifesto Subtotal: 5; Principles Subtotal: 5; Computed Band: low; Final Band: low; Override Reason: Example text.; Recommendation: do-not-hire-yet; Recommended Focus Areas: ; Review Notes: Example text.; Signed By: ; Signed At: 2026-04-09T10:00:00+00:00"
       }
     },
     {
       "fullUrl": "urn:uuid:aa0e8400-e29b-41d4-a716-446655440005",
       "resource": {
-        "resourceType": "Observation",
+        "resourceType": "DetectedIssue",
         "id": "aa0e8400-e29b-41d4-a716-446655440005",
         "meta": {
           "profile": [
-            "http://hl7.org/fhir/StructureDefinition/Observation"
+            "http://hl7.org/fhir/StructureDefinition/DetectedIssue"
           ],
           "lastUpdated": "2026-04-09T10:00:00+00:00"
         },
@@ -750,9 +99,9 @@
           {
             "coding": [
               {
-                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
-                "code": "survey",
-                "display": "Survey"
+                "system": "urn:form-examples:agile-consulting-scorecard-for-hiring-help",
+                "code": "grading-additional-flag",
+                "display": "no-senior-leadership-buyin"
               }
             ]
           }
@@ -760,107 +109,28 @@
         "code": {
           "coding": [
             {
-              "system": "urn:form-examples:agile-consulting-scorecard-for-hiring-help",
-              "code": "agile_consulting_scorecard_for_hiring_help_grade_flag",
-              "display": "Agile Consulting Scorecard For Hiring Help Grade Flag"
+              "system": "urn:form-examples:agile-consulting-scorecard-for-hiring-help:flags",
+              "code": "FLAG-001",
+              "display": "Safety flag"
             }
           ]
         },
+        "severity": "low",
         "subject": {
           "reference": "Patient/bb0e8400-e29b-41d4-a716-446655440006"
         },
-        "encounter": {
-          "reference": "Encounter/cc0e8400-e29b-41d4-a716-446655440007"
-        },
-        "effectiveDateTime": "2026-04-09T10:00:00+00:00",
-        "component": [
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:agile-consulting-scorecard-for-hiring-help",
-                  "code": "deleted_at",
-                  "display": "Deleted At"
-                }
-              ]
-            },
-            "valueDateTime": "2026-04-09T10:00:00+00:00"
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:agile-consulting-scorecard-for-hiring-help",
-                  "code": "category",
-                  "display": "Category"
-                }
-              ]
-            },
-            "valueCodeableConcept": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:agile-consulting-scorecard-for-hiring-help:category",
-                  "code": "no-senior-leadership-buyin",
-                  "display": "No-Senior-Leadership-Buyin"
-                }
-              ]
-            }
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:agile-consulting-scorecard-for-hiring-help",
-                  "code": "priority",
-                  "display": "Priority"
-                }
-              ]
-            },
-            "valueCodeableConcept": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:agile-consulting-scorecard-for-hiring-help:priority",
-                  "code": "low",
-                  "display": "Low"
-                }
-              ]
-            }
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:agile-consulting-scorecard-for-hiring-help",
-                  "code": "description",
-                  "display": "Description"
-                }
-              ]
-            },
-            "valueString": "Example text."
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:agile-consulting-scorecard-for-hiring-help",
-                  "code": "suggested_action",
-                  "display": "Suggested Action"
-                }
-              ]
-            },
-            "valueString": ""
-          }
-        ]
+        "identifiedDateTime": "2026-04-09T10:00:00+00:00",
+        "detail": "Clinical flag detected."
       }
     },
     {
       "fullUrl": "urn:uuid:990e8400-e29b-41d4-a716-446655440004",
       "resource": {
-        "resourceType": "Observation",
+        "resourceType": "DetectedIssue",
         "id": "990e8400-e29b-41d4-a716-446655440004",
         "meta": {
           "profile": [
-            "http://hl7.org/fhir/StructureDefinition/Observation"
+            "http://hl7.org/fhir/StructureDefinition/DetectedIssue"
           ],
           "lastUpdated": "2026-04-09T10:00:00+00:00"
         },
@@ -869,9 +139,9 @@
           {
             "coding": [
               {
-                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
-                "code": "survey",
-                "display": "Survey"
+                "system": "urn:form-examples:agile-consulting-scorecard-for-hiring-help",
+                "code": "grading-fired-rule",
+                "display": "General"
               }
             ]
           }
@@ -879,121 +149,18 @@
         "code": {
           "coding": [
             {
-              "system": "urn:form-examples:agile-consulting-scorecard-for-hiring-help",
-              "code": "agile_consulting_scorecard_for_hiring_help_grade_rule",
-              "display": "Agile Consulting Scorecard For Hiring Help Grade Rule"
+              "system": "urn:form-examples:agile-consulting-scorecard-for-hiring-help:rules",
+              "code": "RULE-001",
+              "display": "Example grading rule"
             }
           ]
         },
+        "severity": "moderate",
         "subject": {
           "reference": "Patient/bb0e8400-e29b-41d4-a716-446655440006"
         },
-        "encounter": {
-          "reference": "Encounter/cc0e8400-e29b-41d4-a716-446655440007"
-        },
-        "effectiveDateTime": "2026-04-09T10:00:00+00:00",
-        "component": [
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:agile-consulting-scorecard-for-hiring-help",
-                  "code": "deleted_at",
-                  "display": "Deleted At"
-                }
-              ]
-            },
-            "valueDateTime": "2026-04-09T10:00:00+00:00"
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:agile-consulting-scorecard-for-hiring-help",
-                  "code": "instrument",
-                  "display": "Instrument"
-                }
-              ]
-            },
-            "valueCodeableConcept": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:agile-consulting-scorecard-for-hiring-help:instrument",
-                  "code": "manifesto",
-                  "display": "Manifesto"
-                }
-              ]
-            }
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:agile-consulting-scorecard-for-hiring-help",
-                  "code": "item_number",
-                  "display": "Item Number"
-                }
-              ]
-            },
-            "valueInteger": 2
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:agile-consulting-scorecard-for-hiring-help",
-                  "code": "grade",
-                  "display": "Grade"
-                }
-              ]
-            },
-            "valueCodeableConcept": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:agile-consulting-scorecard-for-hiring-help:grade",
-                  "code": "yes",
-                  "display": "Yes"
-                }
-              ]
-            }
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:agile-consulting-scorecard-for-hiring-help",
-                  "code": "points_awarded",
-                  "display": "Points Awarded"
-                }
-              ]
-            },
-            "valueInteger": 1
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:agile-consulting-scorecard-for-hiring-help",
-                  "code": "category",
-                  "display": "Category"
-                }
-              ]
-            },
-            "valueString": "General"
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:agile-consulting-scorecard-for-hiring-help",
-                  "code": "description",
-                  "display": "Description"
-                }
-              ]
-            },
-            "valueString": "Example text."
-          }
-        ]
+        "identifiedDateTime": "2026-04-09T10:00:00+00:00",
+        "detail": "Example text."
       }
     },
     {
@@ -1032,7 +199,7 @@
           "reference": "Patient/bb0e8400-e29b-41d4-a716-446655440006"
         },
         "encounter": {
-          "reference": "Encounter/cc0e8400-e29b-41d4-a716-446655440007"
+          "reference": "urn:uuid:770e8400-e29b-41d4-a716-446655440002"
         },
         "effectiveDateTime": "2026-04-09T10:00:00+00:00",
         "component": [
@@ -1211,7 +378,7 @@
           "reference": "Patient/bb0e8400-e29b-41d4-a716-446655440006"
         },
         "encounter": {
-          "reference": "Encounter/cc0e8400-e29b-41d4-a716-446655440007"
+          "reference": "urn:uuid:770e8400-e29b-41d4-a716-446655440002"
         },
         "effectiveDateTime": "2026-04-09T10:00:00+00:00",
         "component": [

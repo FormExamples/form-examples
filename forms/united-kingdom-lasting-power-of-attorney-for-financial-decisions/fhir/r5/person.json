@@ -1,184 +1,40 @@
 {
-  "resourceType": "Observation",
+  "resourceType": "Encounter",
   "id": "550e8400-e29b-41d4-a716-446655440000",
   "meta": {
     "profile": [
-      "http://hl7.org/fhir/StructureDefinition/Observation"
+      "http://hl7.org/fhir/StructureDefinition/Encounter"
     ],
     "lastUpdated": "2026-04-09T10:00:00+00:00"
   },
-  "status": "final",
-  "category": [
+  "status": "planned",
+  "class": [
     {
       "coding": [
         {
-          "system": "http://terminology.hl7.org/CodeSystem/observation-category",
-          "code": "survey",
-          "display": "Survey"
+          "system": "http://terminology.hl7.org/CodeSystem/v3-ActCode",
+          "code": "AMB",
+          "display": "ambulatory"
         }
       ]
     }
   ],
-  "code": {
-    "coding": [
-      {
-        "system": "urn:form-examples:united-kingdom-lasting-power-of-attorney-for-financial-decisions",
-        "code": "person",
-        "display": "Person"
-      }
-    ]
-  },
+  "type": [
+    {
+      "coding": [
+        {
+          "system": "http://snomed.info/sct",
+          "code": "185349003",
+          "display": "Encounter for check up"
+        }
+      ],
+      "text": "United Kingdom Lasting Power Of Attorney For Financial Decisions"
+    }
+  ],
   "subject": {
     "reference": "Patient/661e8400-e29b-41d4-a716-446655440010"
   },
-  "encounter": {
-    "reference": "Encounter/771e8400-e29b-41d4-a716-446655440011"
-  },
-  "effectiveDateTime": "2026-04-09T10:00:00+00:00",
-  "component": [
-    {
-      "code": {
-        "coding": [
-          {
-            "system": "urn:form-examples:united-kingdom-lasting-power-of-attorney-for-financial-decisions",
-            "code": "deleted_at",
-            "display": "Deleted At"
-          }
-        ]
-      },
-      "valueDateTime": "2026-04-09T10:00:00+00:00"
-    },
-    {
-      "code": {
-        "coding": [
-          {
-            "system": "urn:form-examples:united-kingdom-lasting-power-of-attorney-for-financial-decisions",
-            "code": "title",
-            "display": "Title"
-          }
-        ]
-      },
-      "valueString": "Example Title"
-    },
-    {
-      "code": {
-        "coding": [
-          {
-            "system": "urn:form-examples:united-kingdom-lasting-power-of-attorney-for-financial-decisions",
-            "code": "first_names",
-            "display": "First Names"
-          }
-        ]
-      },
-      "valueString": "Example"
-    },
-    {
-      "code": {
-        "coding": [
-          {
-            "system": "urn:form-examples:united-kingdom-lasting-power-of-attorney-for-financial-decisions",
-            "code": "last_name",
-            "display": "Last Name"
-          }
-        ]
-      },
-      "valueString": "Doe"
-    },
-    {
-      "code": {
-        "coding": [
-          {
-            "system": "urn:form-examples:united-kingdom-lasting-power-of-attorney-for-financial-decisions",
-            "code": "other_names",
-            "display": "Other Names"
-          }
-        ]
-      },
-      "valueString": "Example"
-    },
-    {
-      "code": {
-        "coding": [
-          {
-            "system": "urn:form-examples:united-kingdom-lasting-power-of-attorney-for-financial-decisions",
-            "code": "date_of_birth",
-            "display": "Date Of Birth"
-          }
-        ]
-      },
-      "valueDateTime": "1965-06-15"
-    },
-    {
-      "code": {
-        "coding": [
-          {
-            "system": "urn:form-examples:united-kingdom-lasting-power-of-attorney-for-financial-decisions",
-            "code": "email",
-            "display": "Email"
-          }
-        ]
-      },
-      "valueString": "jane.doe@example.com"
-    },
-    {
-      "code": {
-        "coding": [
-          {
-            "system": "urn:form-examples:united-kingdom-lasting-power-of-attorney-for-financial-decisions",
-            "code": "phone",
-            "display": "Phone"
-          }
-        ]
-      },
-      "valueString": "07700900000"
-    },
-    {
-      "code": {
-        "coding": [
-          {
-            "system": "urn:form-examples:united-kingdom-lasting-power-of-attorney-for-financial-decisions",
-            "code": "is_trust_corporation",
-            "display": "Is Trust Corporation"
-          }
-        ]
-      },
-      "valueBoolean": true
-    },
-    {
-      "code": {
-        "coding": [
-          {
-            "system": "urn:form-examples:united-kingdom-lasting-power-of-attorney-for-financial-decisions",
-            "code": "trust_corporation_number",
-            "display": "Trust Corporation Number"
-          }
-        ]
-      },
-      "valueString": ""
-    },
-    {
-      "code": {
-        "coding": [
-          {
-            "system": "urn:form-examples:united-kingdom-lasting-power-of-attorney-for-financial-decisions",
-            "code": "is_bankrupt",
-            "display": "Is Bankrupt"
-          }
-        ]
-      },
-      "valueBoolean": true
-    },
-    {
-      "code": {
-        "coding": [
-          {
-            "system": "urn:form-examples:united-kingdom-lasting-power-of-attorney-for-financial-decisions",
-            "code": "has_debt_relief_order",
-            "display": "Has Debt Relief Order"
-          }
-        ]
-      },
-      "valueBoolean": true
-    }
-  ]
+  "actualPeriod": {
+    "start": "2026-04-09T10:00:00+00:00"
+  }
 }

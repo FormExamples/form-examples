@@ -1,314 +1,40 @@
 {
-  "resourceType": "Observation",
+  "resourceType": "Encounter",
   "id": "770e8400-e29b-41d4-a716-446655440002",
   "meta": {
     "profile": [
-      "http://hl7.org/fhir/StructureDefinition/Observation"
+      "http://hl7.org/fhir/StructureDefinition/Encounter"
     ],
     "lastUpdated": "2026-04-09T10:00:00+00:00"
   },
-  "status": "final",
-  "category": [
+  "status": "planned",
+  "class": [
     {
       "coding": [
         {
-          "system": "http://terminology.hl7.org/CodeSystem/observation-category",
-          "code": "survey",
-          "display": "Survey"
+          "system": "http://terminology.hl7.org/CodeSystem/v3-ActCode",
+          "code": "AMB",
+          "display": "ambulatory"
         }
       ]
     }
   ],
-  "code": {
-    "coding": [
-      {
-        "system": "urn:form-examples:ottawa-knee-rule",
-        "code": "ottawa_knee_rule",
-        "display": "Ottawa Knee Rule"
-      }
-    ]
-  },
+  "type": [
+    {
+      "coding": [
+        {
+          "system": "http://snomed.info/sct",
+          "code": "185349003",
+          "display": "Encounter for check up"
+        }
+      ],
+      "text": "Ottawa Knee Rule"
+    }
+  ],
   "subject": {
     "reference": "Patient/550e8400-e29b-41d4-a716-446655440000"
   },
-  "encounter": {
-    "reference": "Encounter/bb0e8400-e29b-41d4-a716-446655440006"
-  },
-  "effectiveDateTime": "2026-04-09T10:00:00+00:00",
-  "component": [
-    {
-      "code": {
-        "coding": [
-          {
-            "system": "urn:form-examples:ottawa-knee-rule",
-            "code": "deleted_at",
-            "display": "Deleted At"
-          }
-        ]
-      },
-      "valueDateTime": "2026-04-09T10:00:00+00:00"
-    },
-    {
-      "code": {
-        "coding": [
-          {
-            "system": "urn:form-examples:ottawa-knee-rule",
-            "code": "status",
-            "display": "Status"
-          }
-        ]
-      },
-      "valueCodeableConcept": {
-        "coding": [
-          {
-            "system": "urn:form-examples:ottawa-knee-rule:status",
-            "code": "draft",
-            "display": "Draft"
-          }
-        ]
-      }
-    },
-    {
-      "code": {
-        "coding": [
-          {
-            "system": "urn:form-examples:ottawa-knee-rule",
-            "code": "patient_identifier",
-            "display": "Patient Identifier"
-          }
-        ]
-      },
-      "valueString": ""
-    },
-    {
-      "code": {
-        "coding": [
-          {
-            "system": "urn:form-examples:ottawa-knee-rule",
-            "code": "assessed_at",
-            "display": "Assessed At"
-          }
-        ]
-      },
-      "valueDateTime": "2026-04-09T10:00:00+00:00"
-    },
-    {
-      "code": {
-        "coding": [
-          {
-            "system": "urn:form-examples:ottawa-knee-rule",
-            "code": "care_setting",
-            "display": "Care Setting"
-          }
-        ]
-      },
-      "valueCodeableConcept": {
-        "coding": [
-          {
-            "system": "urn:form-examples:ottawa-knee-rule:care_setting",
-            "code": "emergency-department",
-            "display": "Emergency-Department"
-          }
-        ]
-      }
-    },
-    {
-      "code": {
-        "coding": [
-          {
-            "system": "urn:form-examples:ottawa-knee-rule",
-            "code": "injury_mechanism",
-            "display": "Injury Mechanism"
-          }
-        ]
-      },
-      "valueCodeableConcept": {
-        "coding": [
-          {
-            "system": "urn:form-examples:ottawa-knee-rule:injury_mechanism",
-            "code": "blunt-trauma",
-            "display": "Blunt-Trauma"
-          }
-        ]
-      }
-    },
-    {
-      "code": {
-        "coding": [
-          {
-            "system": "urn:form-examples:ottawa-knee-rule",
-            "code": "hours_since_injury",
-            "display": "Hours Since Injury"
-          }
-        ]
-      },
-      "valueQuantity": {
-        "value": 0.0
-      }
-    },
-    {
-      "code": {
-        "coding": [
-          {
-            "system": "urn:form-examples:ottawa-knee-rule",
-            "code": "sex",
-            "display": "Sex"
-          }
-        ]
-      },
-      "valueCodeableConcept": {
-        "coding": [
-          {
-            "system": "urn:form-examples:ottawa-knee-rule:sex",
-            "code": "female",
-            "display": "Female"
-          }
-        ]
-      }
-    },
-    {
-      "code": {
-        "coding": [
-          {
-            "system": "urn:form-examples:ottawa-knee-rule",
-            "code": "injured_side",
-            "display": "Injured Side"
-          }
-        ]
-      },
-      "valueCodeableConcept": {
-        "coding": [
-          {
-            "system": "urn:form-examples:ottawa-knee-rule:injured_side",
-            "code": "left",
-            "display": "Left"
-          }
-        ]
-      }
-    },
-    {
-      "code": {
-        "coding": [
-          {
-            "system": "urn:form-examples:ottawa-knee-rule",
-            "code": "age_years",
-            "display": "Age Years"
-          }
-        ]
-      },
-      "valueInteger": 45
-    },
-    {
-      "code": {
-        "coding": [
-          {
-            "system": "urn:form-examples:ottawa-knee-rule",
-            "code": "patellar_tenderness",
-            "display": "Patellar Tenderness"
-          }
-        ]
-      },
-      "valueCodeableConcept": {
-        "coding": [
-          {
-            "system": "urn:form-examples:ottawa-knee-rule:patellar_tenderness",
-            "code": "yes",
-            "display": "Yes"
-          }
-        ]
-      }
-    },
-    {
-      "code": {
-        "coding": [
-          {
-            "system": "urn:form-examples:ottawa-knee-rule",
-            "code": "other_bony_tenderness",
-            "display": "Other Bony Tenderness"
-          }
-        ]
-      },
-      "valueCodeableConcept": {
-        "coding": [
-          {
-            "system": "urn:form-examples:ottawa-knee-rule:other_bony_tenderness",
-            "code": "yes",
-            "display": "Yes"
-          }
-        ]
-      }
-    },
-    {
-      "code": {
-        "coding": [
-          {
-            "system": "urn:form-examples:ottawa-knee-rule",
-            "code": "fibular_head_tenderness",
-            "display": "Fibular Head Tenderness"
-          }
-        ]
-      },
-      "valueCodeableConcept": {
-        "coding": [
-          {
-            "system": "urn:form-examples:ottawa-knee-rule:fibular_head_tenderness",
-            "code": "yes",
-            "display": "Yes"
-          }
-        ]
-      }
-    },
-    {
-      "code": {
-        "coding": [
-          {
-            "system": "urn:form-examples:ottawa-knee-rule",
-            "code": "unable_to_flex_90",
-            "display": "Unable To Flex 90"
-          }
-        ]
-      },
-      "valueCodeableConcept": {
-        "coding": [
-          {
-            "system": "urn:form-examples:ottawa-knee-rule:unable_to_flex_90",
-            "code": "yes",
-            "display": "Yes"
-          }
-        ]
-      }
-    },
-    {
-      "code": {
-        "coding": [
-          {
-            "system": "urn:form-examples:ottawa-knee-rule",
-            "code": "unable_to_bear_weight",
-            "display": "Unable To Bear Weight"
-          }
-        ]
-      },
-      "valueCodeableConcept": {
-        "coding": [
-          {
-            "system": "urn:form-examples:ottawa-knee-rule:unable_to_bear_weight",
-            "code": "yes",
-            "display": "Yes"
-          }
-        ]
-      }
-    },
-    {
-      "code": {
-        "coding": [
-          {
-            "system": "urn:form-examples:ottawa-knee-rule",
-            "code": "clinical_notes",
-            "display": "Clinical Notes"
-          }
-        ]
-      },
-      "valueString": "Example text."
-    }
-  ]
+  "actualPeriod": {
+    "start": "2026-04-09T10:00:00+00:00"
+  }
 }

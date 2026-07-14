@@ -52,7 +52,7 @@
           "reference": "urn:uuid:550e8400-e29b-41d4-a716-446655440000"
         },
         "encounter": {
-          "reference": "Encounter/bb0e8400-e29b-41d4-a716-446655440006"
+          "reference": "urn:uuid:770e8400-e29b-41d4-a716-446655440002"
         },
         "effectiveDateTime": "2026-04-09T10:00:00+00:00",
         "component": [
@@ -237,601 +237,78 @@
     {
       "fullUrl": "urn:uuid:770e8400-e29b-41d4-a716-446655440002",
       "resource": {
-        "resourceType": "Observation",
+        "resourceType": "Encounter",
         "id": "770e8400-e29b-41d4-a716-446655440002",
         "meta": {
           "profile": [
-            "http://hl7.org/fhir/StructureDefinition/Observation"
+            "http://hl7.org/fhir/StructureDefinition/Encounter"
           ],
           "lastUpdated": "2026-04-09T10:00:00+00:00"
         },
-        "status": "final",
-        "category": [
+        "status": "planned",
+        "class": [
           {
             "coding": [
               {
-                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
-                "code": "survey",
-                "display": "Survey"
+                "system": "http://terminology.hl7.org/CodeSystem/v3-ActCode",
+                "code": "AMB",
+                "display": "ambulatory"
               }
             ]
           }
         ],
-        "code": {
-          "coding": [
-            {
-              "system": "urn:form-examples:recommended-summary-plan-for-emergency-care-and-treatment",
-              "code": "respect",
-              "display": "Respect"
-            }
-          ]
-        },
+        "type": [
+          {
+            "coding": [
+              {
+                "system": "http://snomed.info/sct",
+                "code": "185349003",
+                "display": "Encounter for check up"
+              }
+            ],
+            "text": "Recommended Summary Plan For Emergency Care And Treatment"
+          }
+        ],
         "subject": {
           "reference": "urn:uuid:550e8400-e29b-41d4-a716-446655440000"
         },
-        "encounter": {
-          "reference": "Encounter/bb0e8400-e29b-41d4-a716-446655440006"
-        },
-        "effectiveDateTime": "2026-04-09T10:00:00+00:00",
-        "component": [
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:recommended-summary-plan-for-emergency-care-and-treatment",
-                  "code": "deleted_at",
-                  "display": "Deleted At"
-                }
-              ]
-            },
-            "valueDateTime": "2026-04-09T10:00:00+00:00"
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:recommended-summary-plan-for-emergency-care-and-treatment",
-                  "code": "person_name",
-                  "display": "Person Name"
-                }
-              ]
-            },
-            "valueString": "Example"
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:recommended-summary-plan-for-emergency-care-and-treatment",
-                  "code": "date_of_birth",
-                  "display": "Date Of Birth"
-                }
-              ]
-            },
-            "valueDateTime": "1965-06-15"
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:recommended-summary-plan-for-emergency-care-and-treatment",
-                  "code": "identifier",
-                  "display": "Identifier"
-                }
-              ]
-            },
-            "valueString": ""
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:recommended-summary-plan-for-emergency-care-and-treatment",
-                  "code": "address",
-                  "display": "Address"
-                }
-              ]
-            },
-            "valueString": "123 Example Street"
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:recommended-summary-plan-for-emergency-care-and-treatment",
-                  "code": "key_contact",
-                  "display": "Key Contact"
-                }
-              ]
-            },
-            "valueString": ""
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:recommended-summary-plan-for-emergency-care-and-treatment",
-                  "code": "health_summary",
-                  "display": "Health Summary"
-                }
-              ]
-            },
-            "valueString": "Example text."
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:recommended-summary-plan-for-emergency-care-and-treatment",
-                  "code": "diagnoses",
-                  "display": "Diagnoses"
-                }
-              ]
-            },
-            "valueString": ""
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:recommended-summary-plan-for-emergency-care-and-treatment",
-                  "code": "existing_documents",
-                  "display": "Existing Documents"
-                }
-              ]
-            },
-            "valueString": ""
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:recommended-summary-plan-for-emergency-care-and-treatment",
-                  "code": "what_matters",
-                  "display": "What Matters"
-                }
-              ]
-            },
-            "valueString": ""
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:recommended-summary-plan-for-emergency-care-and-treatment",
-                  "code": "care_preferences",
-                  "display": "Care Preferences"
-                }
-              ]
-            },
-            "valueString": ""
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:recommended-summary-plan-for-emergency-care-and-treatment",
-                  "code": "priority_balance",
-                  "display": "Priority Balance"
-                }
-              ]
-            },
-            "valueCodeableConcept": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:recommended-summary-plan-for-emergency-care-and-treatment:priority_balance",
-                  "code": "sustain-life",
-                  "display": "Sustain-Life"
-                }
-              ]
-            }
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:recommended-summary-plan-for-emergency-care-and-treatment",
-                  "code": "recommended_interventions",
-                  "display": "Recommended Interventions"
-                }
-              ]
-            },
-            "valueString": ""
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:recommended-summary-plan-for-emergency-care-and-treatment",
-                  "code": "not_recommended_interventions",
-                  "display": "Not Recommended Interventions"
-                }
-              ]
-            },
-            "valueString": ""
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:recommended-summary-plan-for-emergency-care-and-treatment",
-                  "code": "cpr_recommendation",
-                  "display": "Cpr Recommendation"
-                }
-              ]
-            },
-            "valueCodeableConcept": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:recommended-summary-plan-for-emergency-care-and-treatment:cpr_recommendation",
-                  "code": "attempt",
-                  "display": "Attempt"
-                }
-              ]
-            }
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:recommended-summary-plan-for-emergency-care-and-treatment",
-                  "code": "cpr_rationale",
-                  "display": "Cpr Rationale"
-                }
-              ]
-            },
-            "valueString": ""
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:recommended-summary-plan-for-emergency-care-and-treatment",
-                  "code": "cpr_discussed",
-                  "display": "Cpr Discussed"
-                }
-              ]
-            },
-            "valueCodeableConcept": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:recommended-summary-plan-for-emergency-care-and-treatment:cpr_discussed",
-                  "code": "yes",
-                  "display": "Yes"
-                }
-              ]
-            }
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:recommended-summary-plan-for-emergency-care-and-treatment",
-                  "code": "hospital_transfer",
-                  "display": "Hospital Transfer"
-                }
-              ]
-            },
-            "valueCodeableConcept": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:recommended-summary-plan-for-emergency-care-and-treatment:hospital_transfer",
-                  "code": "appropriate",
-                  "display": "Appropriate"
-                }
-              ]
-            }
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:recommended-summary-plan-for-emergency-care-and-treatment",
-                  "code": "critical_care_admission",
-                  "display": "Critical Care Admission"
-                }
-              ]
-            },
-            "valueCodeableConcept": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:recommended-summary-plan-for-emergency-care-and-treatment:critical_care_admission",
-                  "code": "appropriate",
-                  "display": "Appropriate"
-                }
-              ]
-            }
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:recommended-summary-plan-for-emergency-care-and-treatment",
-                  "code": "treatment_ceilings",
-                  "display": "Treatment Ceilings"
-                }
-              ]
-            },
-            "valueString": ""
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:recommended-summary-plan-for-emergency-care-and-treatment",
-                  "code": "has_capacity",
-                  "display": "Has Capacity"
-                }
-              ]
-            },
-            "valueCodeableConcept": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:recommended-summary-plan-for-emergency-care-and-treatment:has_capacity",
-                  "code": "yes",
-                  "display": "Yes"
-                }
-              ]
-            }
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:recommended-summary-plan-for-emergency-care-and-treatment",
-                  "code": "capacity_assessment",
-                  "display": "Capacity Assessment"
-                }
-              ]
-            },
-            "valueString": ""
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:recommended-summary-plan-for-emergency-care-and-treatment",
-                  "code": "involvement",
-                  "display": "Involvement"
-                }
-              ]
-            },
-            "valueCodeableConcept": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:recommended-summary-plan-for-emergency-care-and-treatment:involvement",
-                  "code": "person",
-                  "display": "Person"
-                }
-              ]
-            }
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:recommended-summary-plan-for-emergency-care-and-treatment",
-                  "code": "proxy_details",
-                  "display": "Proxy Details"
-                }
-              ]
-            },
-            "valueString": "Example text."
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:recommended-summary-plan-for-emergency-care-and-treatment",
-                  "code": "clinician_name",
-                  "display": "Clinician Name"
-                }
-              ]
-            },
-            "valueString": "Example"
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:recommended-summary-plan-for-emergency-care-and-treatment",
-                  "code": "clinician_role",
-                  "display": "Clinician Role"
-                }
-              ]
-            },
-            "valueCodeableConcept": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:recommended-summary-plan-for-emergency-care-and-treatment:clinician_role",
-                  "code": "doctor",
-                  "display": "Doctor"
-                }
-              ]
-            }
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:recommended-summary-plan-for-emergency-care-and-treatment",
-                  "code": "clinician_registration",
-                  "display": "Clinician Registration"
-                }
-              ]
-            },
-            "valueString": "Dr Smith"
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:recommended-summary-plan-for-emergency-care-and-treatment",
-                  "code": "signature",
-                  "display": "Signature"
-                }
-              ]
-            },
-            "valueString": ""
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:recommended-summary-plan-for-emergency-care-and-treatment",
-                  "code": "signed_at",
-                  "display": "Signed At"
-                }
-              ]
-            },
-            "valueDateTime": "2026-04-09T10:00:00+00:00"
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:recommended-summary-plan-for-emergency-care-and-treatment",
-                  "code": "senior_endorsement",
-                  "display": "Senior Endorsement"
-                }
-              ]
-            },
-            "valueString": ""
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:recommended-summary-plan-for-emergency-care-and-treatment",
-                  "code": "emergency_contacts",
-                  "display": "Emergency Contacts"
-                }
-              ]
-            },
-            "valueString": ""
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:recommended-summary-plan-for-emergency-care-and-treatment",
-                  "code": "review_date",
-                  "display": "Review Date"
-                }
-              ]
-            },
-            "valueDateTime": "2026-01-15"
-          }
-        ]
+        "actualPeriod": {
+          "start": "2026-04-09T10:00:00+00:00"
+        }
       }
     },
     {
       "fullUrl": "urn:uuid:880e8400-e29b-41d4-a716-446655440003",
       "resource": {
-        "resourceType": "Observation",
+        "resourceType": "ClinicalImpression",
         "id": "880e8400-e29b-41d4-a716-446655440003",
         "meta": {
           "profile": [
-            "http://hl7.org/fhir/StructureDefinition/Observation"
+            "http://hl7.org/fhir/StructureDefinition/ClinicalImpression"
           ],
           "lastUpdated": "2026-04-09T10:00:00+00:00"
         },
-        "status": "final",
-        "category": [
-          {
-            "coding": [
-              {
-                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
-                "code": "survey",
-                "display": "Survey"
-              }
-            ]
-          }
-        ],
-        "code": {
-          "coding": [
-            {
-              "system": "urn:form-examples:recommended-summary-plan-for-emergency-care-and-treatment",
-              "code": "respect_grade",
-              "display": "Respect Grade"
-            }
-          ]
-        },
+        "status": "completed",
         "subject": {
           "reference": "urn:uuid:550e8400-e29b-41d4-a716-446655440000"
         },
         "encounter": {
-          "reference": "Encounter/bb0e8400-e29b-41d4-a716-446655440006"
+          "reference": "urn:uuid:770e8400-e29b-41d4-a716-446655440002"
         },
         "effectiveDateTime": "2026-04-09T10:00:00+00:00",
-        "component": [
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:recommended-summary-plan-for-emergency-care-and-treatment",
-                  "code": "deleted_at",
-                  "display": "Deleted At"
-                }
-              ]
-            },
-            "valueDateTime": "2026-04-09T10:00:00+00:00"
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:recommended-summary-plan-for-emergency-care-and-treatment",
-                  "code": "status",
-                  "display": "Status"
-                }
-              ]
-            },
-            "valueCodeableConcept": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:recommended-summary-plan-for-emergency-care-and-treatment:status",
-                  "code": "complete",
-                  "display": "Complete"
-                }
-              ]
-            }
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:recommended-summary-plan-for-emergency-care-and-treatment",
-                  "code": "completeness_percent",
-                  "display": "Completeness Percent"
-                }
-              ]
-            },
-            "valueInteger": 1
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:recommended-summary-plan-for-emergency-care-and-treatment",
-                  "code": "graded_at",
-                  "display": "Graded At"
-                }
-              ]
-            },
-            "valueDateTime": "2026-04-09T10:00:00+00:00"
-          }
-        ]
+        "date": "2026-04-09T10:00:00+00:00",
+        "description": "Recommended Summary Plan For Emergency Care And Treatment grading result",
+        "summary": "Deleted At: 2026-04-09T10:00:00+00:00; Status: complete; Completeness Percent: 1"
       }
     },
     {
       "fullUrl": "urn:uuid:aa0e8400-e29b-41d4-a716-446655440005",
       "resource": {
-        "resourceType": "Observation",
+        "resourceType": "DetectedIssue",
         "id": "aa0e8400-e29b-41d4-a716-446655440005",
         "meta": {
           "profile": [
-            "http://hl7.org/fhir/StructureDefinition/Observation"
+            "http://hl7.org/fhir/StructureDefinition/DetectedIssue"
           ],
           "lastUpdated": "2026-04-09T10:00:00+00:00"
         },
@@ -840,9 +317,9 @@
           {
             "coding": [
               {
-                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
-                "code": "survey",
-                "display": "Survey"
+                "system": "urn:form-examples:recommended-summary-plan-for-emergency-care-and-treatment",
+                "code": "grading-additional-flag",
+                "display": "cpr-not-documented"
               }
             ]
           }
@@ -850,107 +327,28 @@
         "code": {
           "coding": [
             {
-              "system": "urn:form-examples:recommended-summary-plan-for-emergency-care-and-treatment",
-              "code": "respect_grade_flag",
-              "display": "Respect Grade Flag"
+              "system": "urn:form-examples:recommended-summary-plan-for-emergency-care-and-treatment:flags",
+              "code": "FLAG-001",
+              "display": "Safety flag"
             }
           ]
         },
+        "severity": "low",
         "subject": {
           "reference": "urn:uuid:550e8400-e29b-41d4-a716-446655440000"
         },
-        "encounter": {
-          "reference": "Encounter/bb0e8400-e29b-41d4-a716-446655440006"
-        },
-        "effectiveDateTime": "2026-04-09T10:00:00+00:00",
-        "component": [
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:recommended-summary-plan-for-emergency-care-and-treatment",
-                  "code": "deleted_at",
-                  "display": "Deleted At"
-                }
-              ]
-            },
-            "valueDateTime": "2026-04-09T10:00:00+00:00"
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:recommended-summary-plan-for-emergency-care-and-treatment",
-                  "code": "category",
-                  "display": "Category"
-                }
-              ]
-            },
-            "valueCodeableConcept": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:recommended-summary-plan-for-emergency-care-and-treatment:category",
-                  "code": "cpr-not-documented",
-                  "display": "Cpr-Not-Documented"
-                }
-              ]
-            }
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:recommended-summary-plan-for-emergency-care-and-treatment",
-                  "code": "priority",
-                  "display": "Priority"
-                }
-              ]
-            },
-            "valueCodeableConcept": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:recommended-summary-plan-for-emergency-care-and-treatment:priority",
-                  "code": "low",
-                  "display": "Low"
-                }
-              ]
-            }
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:recommended-summary-plan-for-emergency-care-and-treatment",
-                  "code": "description",
-                  "display": "Description"
-                }
-              ]
-            },
-            "valueString": "Example text."
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:recommended-summary-plan-for-emergency-care-and-treatment",
-                  "code": "suggested_action",
-                  "display": "Suggested Action"
-                }
-              ]
-            },
-            "valueString": ""
-          }
-        ]
+        "identifiedDateTime": "2026-04-09T10:00:00+00:00",
+        "detail": "Clinical flag detected."
       }
     },
     {
       "fullUrl": "urn:uuid:990e8400-e29b-41d4-a716-446655440004",
       "resource": {
-        "resourceType": "Observation",
+        "resourceType": "DetectedIssue",
         "id": "990e8400-e29b-41d4-a716-446655440004",
         "meta": {
           "profile": [
-            "http://hl7.org/fhir/StructureDefinition/Observation"
+            "http://hl7.org/fhir/StructureDefinition/DetectedIssue"
           ],
           "lastUpdated": "2026-04-09T10:00:00+00:00"
         },
@@ -959,9 +357,9 @@
           {
             "coding": [
               {
-                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
-                "code": "survey",
-                "display": "Survey"
+                "system": "urn:form-examples:recommended-summary-plan-for-emergency-care-and-treatment",
+                "code": "grading-fired-rule",
+                "display": "General"
               }
             ]
           }
@@ -969,97 +367,18 @@
         "code": {
           "coding": [
             {
-              "system": "urn:form-examples:recommended-summary-plan-for-emergency-care-and-treatment",
-              "code": "respect_grade_rule",
-              "display": "Respect Grade Rule"
+              "system": "urn:form-examples:recommended-summary-plan-for-emergency-care-and-treatment:rules",
+              "code": "RULE-001",
+              "display": "Example grading rule"
             }
           ]
         },
+        "severity": "moderate",
         "subject": {
           "reference": "urn:uuid:550e8400-e29b-41d4-a716-446655440000"
         },
-        "encounter": {
-          "reference": "Encounter/bb0e8400-e29b-41d4-a716-446655440006"
-        },
-        "effectiveDateTime": "2026-04-09T10:00:00+00:00",
-        "component": [
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:recommended-summary-plan-for-emergency-care-and-treatment",
-                  "code": "deleted_at",
-                  "display": "Deleted At"
-                }
-              ]
-            },
-            "valueDateTime": "2026-04-09T10:00:00+00:00"
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:recommended-summary-plan-for-emergency-care-and-treatment",
-                  "code": "section",
-                  "display": "Section"
-                }
-              ]
-            },
-            "valueCodeableConcept": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:recommended-summary-plan-for-emergency-care-and-treatment:section",
-                  "code": "identity",
-                  "display": "Identity"
-                }
-              ]
-            }
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:recommended-summary-plan-for-emergency-care-and-treatment",
-                  "code": "satisfied",
-                  "display": "Satisfied"
-                }
-              ]
-            },
-            "valueCodeableConcept": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:recommended-summary-plan-for-emergency-care-and-treatment:satisfied",
-                  "code": "yes",
-                  "display": "Yes"
-                }
-              ]
-            }
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:recommended-summary-plan-for-emergency-care-and-treatment",
-                  "code": "category",
-                  "display": "Category"
-                }
-              ]
-            },
-            "valueString": "General"
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:recommended-summary-plan-for-emergency-care-and-treatment",
-                  "code": "description",
-                  "display": "Description"
-                }
-              ]
-            },
-            "valueString": "Example text."
-          }
-        ]
+        "identifiedDateTime": "2026-04-09T10:00:00+00:00",
+        "detail": "Example text."
       }
     }
   ]

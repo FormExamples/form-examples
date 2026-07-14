@@ -1,9 +1,9 @@
 {
-  "resourceType": "Observation",
+  "resourceType": "DetectedIssue",
   "id": "bb0e8400-e29b-41d4-a716-446655440006",
   "meta": {
     "profile": [
-      "http://hl7.org/fhir/StructureDefinition/Observation"
+      "http://hl7.org/fhir/StructureDefinition/DetectedIssue"
     ],
     "lastUpdated": "2026-04-09T10:00:00+00:00"
   },
@@ -12,9 +12,9 @@
     {
       "coding": [
         {
-          "system": "http://terminology.hl7.org/CodeSystem/observation-category",
-          "code": "survey",
-          "display": "Survey"
+          "system": "urn:form-examples:partogram",
+          "code": "grading-additional-flag",
+          "display": "action-line-crossed"
         }
       ]
     }
@@ -22,95 +22,16 @@
   "code": {
     "coding": [
       {
-        "system": "urn:form-examples:partogram",
-        "code": "partogram_grade_flag",
-        "display": "Partogram Grade Flag"
+        "system": "urn:form-examples:partogram:flags",
+        "code": "FLAG-001",
+        "display": "Safety flag"
       }
     ]
   },
+  "severity": "low",
   "subject": {
     "reference": "Patient/550e8400-e29b-41d4-a716-446655440000"
   },
-  "encounter": {
-    "reference": "Encounter/cc0e8400-e29b-41d4-a716-446655440007"
-  },
-  "effectiveDateTime": "2026-04-09T10:00:00+00:00",
-  "component": [
-    {
-      "code": {
-        "coding": [
-          {
-            "system": "urn:form-examples:partogram",
-            "code": "deleted_at",
-            "display": "Deleted At"
-          }
-        ]
-      },
-      "valueDateTime": "2026-04-09T10:00:00+00:00"
-    },
-    {
-      "code": {
-        "coding": [
-          {
-            "system": "urn:form-examples:partogram",
-            "code": "category",
-            "display": "Category"
-          }
-        ]
-      },
-      "valueCodeableConcept": {
-        "coding": [
-          {
-            "system": "urn:form-examples:partogram:category",
-            "code": "action-line-crossed",
-            "display": "Action-Line-Crossed"
-          }
-        ]
-      }
-    },
-    {
-      "code": {
-        "coding": [
-          {
-            "system": "urn:form-examples:partogram",
-            "code": "priority",
-            "display": "Priority"
-          }
-        ]
-      },
-      "valueCodeableConcept": {
-        "coding": [
-          {
-            "system": "urn:form-examples:partogram:priority",
-            "code": "low",
-            "display": "Low"
-          }
-        ]
-      }
-    },
-    {
-      "code": {
-        "coding": [
-          {
-            "system": "urn:form-examples:partogram",
-            "code": "description",
-            "display": "Description"
-          }
-        ]
-      },
-      "valueString": "Example text."
-    },
-    {
-      "code": {
-        "coding": [
-          {
-            "system": "urn:form-examples:partogram",
-            "code": "suggested_action",
-            "display": "Suggested Action"
-          }
-        ]
-      },
-      "valueString": ""
-    }
-  ]
+  "identifiedDateTime": "2026-04-09T10:00:00+00:00",
+  "detail": "Clinical flag detected."
 }

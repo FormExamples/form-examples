@@ -52,7 +52,7 @@
           "reference": "urn:uuid:550e8400-e29b-41d4-a716-446655440000"
         },
         "encounter": {
-          "reference": "Encounter/dd0e8400-e29b-41d4-a716-446655440008"
+          "reference": "urn:uuid:880e8400-e29b-41d4-a716-446655440003"
         },
         "effectiveDateTime": "2026-04-09T10:00:00+00:00",
         "component": [
@@ -267,7 +267,7 @@
           "reference": "urn:uuid:550e8400-e29b-41d4-a716-446655440000"
         },
         "encounter": {
-          "reference": "Encounter/dd0e8400-e29b-41d4-a716-446655440008"
+          "reference": "urn:uuid:880e8400-e29b-41d4-a716-446655440003"
         },
         "effectiveDateTime": "2026-04-09T10:00:00+00:00",
         "component": [
@@ -456,1083 +456,78 @@
     {
       "fullUrl": "urn:uuid:880e8400-e29b-41d4-a716-446655440003",
       "resource": {
-        "resourceType": "Observation",
+        "resourceType": "Encounter",
         "id": "880e8400-e29b-41d4-a716-446655440003",
         "meta": {
           "profile": [
-            "http://hl7.org/fhir/StructureDefinition/Observation"
+            "http://hl7.org/fhir/StructureDefinition/Encounter"
           ],
           "lastUpdated": "2026-04-09T10:00:00+00:00"
         },
-        "status": "final",
-        "category": [
+        "status": "planned",
+        "class": [
           {
             "coding": [
               {
-                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
-                "code": "survey",
-                "display": "Survey"
+                "system": "http://terminology.hl7.org/CodeSystem/v3-ActCode",
+                "code": "AMB",
+                "display": "ambulatory"
               }
             ]
           }
         ],
-        "code": {
-          "coding": [
-            {
-              "system": "urn:form-examples:return-to-work",
-              "code": "return_to_work",
-              "display": "Return To Work"
-            }
-          ]
-        },
+        "type": [
+          {
+            "coding": [
+              {
+                "system": "http://snomed.info/sct",
+                "code": "185349003",
+                "display": "Encounter for check up"
+              }
+            ],
+            "text": "Return To Work"
+          }
+        ],
         "subject": {
           "reference": "urn:uuid:550e8400-e29b-41d4-a716-446655440000"
         },
-        "encounter": {
-          "reference": "Encounter/dd0e8400-e29b-41d4-a716-446655440008"
-        },
-        "effectiveDateTime": "2026-04-09T10:00:00+00:00",
-        "component": [
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:return-to-work",
-                  "code": "deleted_at",
-                  "display": "Deleted At"
-                }
-              ]
-            },
-            "valueDateTime": "2026-04-09T10:00:00+00:00"
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:return-to-work",
-                  "code": "status",
-                  "display": "Status"
-                }
-              ]
-            },
-            "valueCodeableConcept": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:return-to-work:status",
-                  "code": "draft",
-                  "display": "Draft"
-                }
-              ]
-            }
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:return-to-work",
-                  "code": "statement_kind",
-                  "display": "Statement Kind"
-                }
-              ]
-            },
-            "valueCodeableConcept": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:return-to-work:statement_kind",
-                  "code": "fit-note",
-                  "display": "Fit-Note"
-                }
-              ]
-            }
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:return-to-work",
-                  "code": "assessment_date",
-                  "display": "Assessment Date"
-                }
-              ]
-            },
-            "valueDateTime": "2026-01-15"
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:return-to-work",
-                  "code": "assessment_time",
-                  "display": "Assessment Time"
-                }
-              ]
-            },
-            "valueString": ""
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:return-to-work",
-                  "code": "absence_first_day",
-                  "display": "Absence First Day"
-                }
-              ]
-            },
-            "valueDateTime": "2026-01-15"
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:return-to-work",
-                  "code": "absence_total_calendar_days",
-                  "display": "Absence Total Calendar Days"
-                }
-              ]
-            },
-            "valueInteger": 5
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:return-to-work",
-                  "code": "prior_med3_reference",
-                  "display": "Prior Med3 Reference"
-                }
-              ]
-            },
-            "valueString": ""
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:return-to-work",
-                  "code": "prior_self_certification_reference",
-                  "display": "Prior Self Certification Reference"
-                }
-              ]
-            },
-            "valueString": ""
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:return-to-work",
-                  "code": "primary_diagnosis_text",
-                  "display": "Primary Diagnosis Text"
-                }
-              ]
-            },
-            "valueString": "Example text."
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:return-to-work",
-                  "code": "primary_diagnosis_snomed",
-                  "display": "Primary Diagnosis Snomed"
-                }
-              ]
-            },
-            "valueString": "Under investigation"
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:return-to-work",
-                  "code": "primary_diagnosis_icd10",
-                  "display": "Primary Diagnosis Icd10"
-                }
-              ]
-            },
-            "valueString": "Under investigation"
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:return-to-work",
-                  "code": "comorbid_conditions",
-                  "display": "Comorbid Conditions"
-                }
-              ]
-            },
-            "valueString": ""
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:return-to-work",
-                  "code": "mechanism",
-                  "display": "Mechanism"
-                }
-              ]
-            },
-            "valueCodeableConcept": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:return-to-work:mechanism",
-                  "code": "illness",
-                  "display": "Illness"
-                }
-              ]
-            }
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:return-to-work",
-                  "code": "workplace_cause",
-                  "display": "Workplace Cause"
-                }
-              ]
-            },
-            "valueCodeableConcept": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:return-to-work:workplace_cause",
-                  "code": "yes",
-                  "display": "Yes"
-                }
-              ]
-            }
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:return-to-work",
-                  "code": "riddor_reference",
-                  "display": "Riddor Reference"
-                }
-              ]
-            },
-            "valueString": ""
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:return-to-work",
-                  "code": "current_medications",
-                  "display": "Current Medications"
-                }
-              ]
-            },
-            "valueString": "Paracetamol"
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:return-to-work",
-                  "code": "ongoing_therapy",
-                  "display": "Ongoing Therapy"
-                }
-              ]
-            },
-            "valueString": ""
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:return-to-work",
-                  "code": "last_consultation_date",
-                  "display": "Last Consultation Date"
-                }
-              ]
-            },
-            "valueDateTime": "2026-01-15"
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:return-to-work",
-                  "code": "anticipated_recovery_trajectory",
-                  "display": "Anticipated Recovery Trajectory"
-                }
-              ]
-            },
-            "valueCodeableConcept": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:return-to-work:anticipated_recovery_trajectory",
-                  "code": "full-recovery-imminent",
-                  "display": "Full-Recovery-Imminent"
-                }
-              ]
-            }
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:return-to-work",
-                  "code": "specialist_followup_required",
-                  "display": "Specialist Followup Required"
-                }
-              ]
-            },
-            "valueCodeableConcept": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:return-to-work:specialist_followup_required",
-                  "code": "yes",
-                  "display": "Yes"
-                }
-              ]
-            }
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:return-to-work",
-                  "code": "mobility",
-                  "display": "Mobility"
-                }
-              ]
-            },
-            "valueCodeableConcept": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:return-to-work:mobility",
-                  "code": "normal",
-                  "display": "Normal"
-                }
-              ]
-            }
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:return-to-work",
-                  "code": "manual_handling_capacity_kg",
-                  "display": "Manual Handling Capacity Kg"
-                }
-              ]
-            },
-            "valueQuantity": {
-              "value": 0.0
-            }
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:return-to-work",
-                  "code": "cognition",
-                  "display": "Cognition"
-                }
-              ]
-            },
-            "valueCodeableConcept": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:return-to-work:cognition",
-                  "code": "normal",
-                  "display": "Normal"
-                }
-              ]
-            }
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:return-to-work",
-                  "code": "mood",
-                  "display": "Mood"
-                }
-              ]
-            },
-            "valueCodeableConcept": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:return-to-work:mood",
-                  "code": "stable",
-                  "display": "Stable"
-                }
-              ]
-            }
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:return-to-work",
-                  "code": "sleep",
-                  "display": "Sleep"
-                }
-              ]
-            },
-            "valueCodeableConcept": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:return-to-work:sleep",
-                  "code": "normal",
-                  "display": "Normal"
-                }
-              ]
-            }
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:return-to-work",
-                  "code": "pain_score_0_10",
-                  "display": "Pain Score 0 10"
-                }
-              ]
-            },
-            "valueInteger": 5
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:return-to-work",
-                  "code": "driving_capacity",
-                  "display": "Driving Capacity"
-                }
-              ]
-            },
-            "valueCodeableConcept": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:return-to-work:driving_capacity",
-                  "code": "fit-to-drive",
-                  "display": "Fit-To-Drive"
-                }
-              ]
-            }
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:return-to-work",
-                  "code": "standing_tolerance_minutes",
-                  "display": "Standing Tolerance Minutes"
-                }
-              ]
-            },
-            "valueInteger": 1
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:return-to-work",
-                  "code": "sitting_tolerance_minutes",
-                  "display": "Sitting Tolerance Minutes"
-                }
-              ]
-            },
-            "valueInteger": 1
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:return-to-work",
-                  "code": "screen_tolerance_minutes",
-                  "display": "Screen Tolerance Minutes"
-                }
-              ]
-            },
-            "valueInteger": 1
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:return-to-work",
-                  "code": "adl_independence",
-                  "display": "Adl Independence"
-                }
-              ]
-            },
-            "valueCodeableConcept": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:return-to-work:adl_independence",
-                  "code": "independent",
-                  "display": "Independent"
-                }
-              ]
-            }
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:return-to-work",
-                  "code": "fitness_statement_computed",
-                  "display": "Fitness Statement Computed"
-                }
-              ]
-            },
-            "valueCodeableConcept": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:return-to-work:fitness_statement_computed",
-                  "code": "fit",
-                  "display": "Fit"
-                }
-              ]
-            }
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:return-to-work",
-                  "code": "fitness_statement_final",
-                  "display": "Fitness Statement Final"
-                }
-              ]
-            },
-            "valueCodeableConcept": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:return-to-work:fitness_statement_final",
-                  "code": "fit",
-                  "display": "Fit"
-                }
-              ]
-            }
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:return-to-work",
-                  "code": "clinician_override",
-                  "display": "Clinician Override"
-                }
-              ]
-            },
-            "valueCodeableConcept": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:return-to-work:clinician_override",
-                  "code": "yes",
-                  "display": "Yes"
-                }
-              ]
-            }
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:return-to-work",
-                  "code": "clinician_override_reason",
-                  "display": "Clinician Override Reason"
-                }
-              ]
-            },
-            "valueString": "Example text."
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:return-to-work",
-                  "code": "clinician_confidence",
-                  "display": "Clinician Confidence"
-                }
-              ]
-            },
-            "valueCodeableConcept": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:return-to-work:clinician_confidence",
-                  "code": "high",
-                  "display": "High"
-                }
-              ]
-            }
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:return-to-work",
-                  "code": "valid_from",
-                  "display": "Valid From"
-                }
-              ]
-            },
-            "valueDateTime": "2026-01-15"
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:return-to-work",
-                  "code": "valid_until",
-                  "display": "Valid Until"
-                }
-              ]
-            },
-            "valueDateTime": "2026-01-15"
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:return-to-work",
-                  "code": "validity_weeks",
-                  "display": "Validity Weeks"
-                }
-              ]
-            },
-            "valueInteger": 1
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:return-to-work",
-                  "code": "reassessment_required",
-                  "display": "Reassessment Required"
-                }
-              ]
-            },
-            "valueCodeableConcept": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:return-to-work:reassessment_required",
-                  "code": "yes",
-                  "display": "Yes"
-                }
-              ]
-            }
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:return-to-work",
-                  "code": "phased_return_applicable",
-                  "display": "Phased Return Applicable"
-                }
-              ]
-            },
-            "valueCodeableConcept": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:return-to-work:phased_return_applicable",
-                  "code": "yes",
-                  "display": "Yes"
-                }
-              ]
-            }
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:return-to-work",
-                  "code": "phased_return_template",
-                  "display": "Phased Return Template"
-                }
-              ]
-            },
-            "valueCodeableConcept": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:return-to-work:phased_return_template",
-                  "code": "2-week",
-                  "display": "2-Week"
-                }
-              ]
-            }
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:return-to-work",
-                  "code": "phased_return_target_date",
-                  "display": "Phased Return Target Date"
-                }
-              ]
-            },
-            "valueDateTime": "2026-01-15"
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:return-to-work",
-                  "code": "phased_return_schedule_json",
-                  "display": "Phased Return Schedule Json"
-                }
-              ]
-            },
-            "valueString": ""
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:return-to-work",
-                  "code": "phased_return_support_contact",
-                  "display": "Phased Return Support Contact"
-                }
-              ]
-            },
-            "valueString": ""
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:return-to-work",
-                  "code": "workstation_review_required",
-                  "display": "Workstation Review Required"
-                }
-              ]
-            },
-            "valueCodeableConcept": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:return-to-work:workstation_review_required",
-                  "code": "yes",
-                  "display": "Yes"
-                }
-              ]
-            }
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:return-to-work",
-                  "code": "additional_adjustments_text",
-                  "display": "Additional Adjustments Text"
-                }
-              ]
-            },
-            "valueString": "Example text."
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:return-to-work",
-                  "code": "review_location",
-                  "display": "Review Location"
-                }
-              ]
-            },
-            "valueCodeableConcept": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:return-to-work:review_location",
-                  "code": "gp",
-                  "display": "Gp"
-                }
-              ]
-            }
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:return-to-work",
-                  "code": "review_date",
-                  "display": "Review Date"
-                }
-              ]
-            },
-            "valueDateTime": "2026-01-15"
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:return-to-work",
-                  "code": "occupational_health_referral_made",
-                  "display": "Occupational Health Referral Made"
-                }
-              ]
-            },
-            "valueCodeableConcept": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:return-to-work:occupational_health_referral_made",
-                  "code": "yes",
-                  "display": "Yes"
-                }
-              ]
-            }
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:return-to-work",
-                  "code": "dvla_notification_required",
-                  "display": "Dvla Notification Required"
-                }
-              ]
-            },
-            "valueCodeableConcept": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:return-to-work:dvla_notification_required",
-                  "code": "yes",
-                  "display": "Yes"
-                }
-              ]
-            }
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:return-to-work",
-                  "code": "employer_oh_notified",
-                  "display": "Employer Oh Notified"
-                }
-              ]
-            },
-            "valueCodeableConcept": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:return-to-work:employer_oh_notified",
-                  "code": "yes",
-                  "display": "Yes"
-                }
-              ]
-            }
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:return-to-work",
-                  "code": "return_to_work_meeting_scheduled",
-                  "display": "Return To Work Meeting Scheduled"
-                }
-              ]
-            },
-            "valueCodeableConcept": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:return-to-work:return_to_work_meeting_scheduled",
-                  "code": "yes",
-                  "display": "Yes"
-                }
-              ]
-            }
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:return-to-work",
-                  "code": "maternity_certificate_reference",
-                  "display": "Maternity Certificate Reference"
-                }
-              ]
-            },
-            "valueString": ""
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:return-to-work",
-                  "code": "final_notes",
-                  "display": "Final Notes"
-                }
-              ]
-            },
-            "valueString": "Example text."
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:return-to-work",
-                  "code": "signature_svg",
-                  "display": "Signature Svg"
-                }
-              ]
-            },
-            "valueString": ""
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:return-to-work",
-                  "code": "signed_at",
-                  "display": "Signed At"
-                }
-              ]
-            },
-            "valueDateTime": "2026-04-09T10:00:00+00:00"
-          }
-        ]
+        "actualPeriod": {
+          "start": "2026-04-09T10:00:00+00:00"
+        }
       }
     },
     {
       "fullUrl": "urn:uuid:aa0e8400-e29b-41d4-a716-446655440005",
       "resource": {
-        "resourceType": "Observation",
+        "resourceType": "ClinicalImpression",
         "id": "aa0e8400-e29b-41d4-a716-446655440005",
         "meta": {
           "profile": [
-            "http://hl7.org/fhir/StructureDefinition/Observation"
+            "http://hl7.org/fhir/StructureDefinition/ClinicalImpression"
           ],
           "lastUpdated": "2026-04-09T10:00:00+00:00"
         },
-        "status": "final",
-        "category": [
-          {
-            "coding": [
-              {
-                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
-                "code": "survey",
-                "display": "Survey"
-              }
-            ]
-          }
-        ],
-        "code": {
-          "coding": [
-            {
-              "system": "urn:form-examples:return-to-work",
-              "code": "return_to_work_grade",
-              "display": "Return To Work Grade"
-            }
-          ]
-        },
+        "status": "completed",
         "subject": {
           "reference": "urn:uuid:550e8400-e29b-41d4-a716-446655440000"
         },
         "encounter": {
-          "reference": "Encounter/dd0e8400-e29b-41d4-a716-446655440008"
+          "reference": "urn:uuid:880e8400-e29b-41d4-a716-446655440003"
         },
         "effectiveDateTime": "2026-04-09T10:00:00+00:00",
-        "component": [
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:return-to-work",
-                  "code": "deleted_at",
-                  "display": "Deleted At"
-                }
-              ]
-            },
-            "valueDateTime": "2026-04-09T10:00:00+00:00"
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:return-to-work",
-                  "code": "fitness_statement",
-                  "display": "Fitness Statement"
-                }
-              ]
-            },
-            "valueCodeableConcept": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:return-to-work:fitness_statement",
-                  "code": "fit",
-                  "display": "Fit"
-                }
-              ]
-            }
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:return-to-work",
-                  "code": "restriction_priority",
-                  "display": "Restriction Priority"
-                }
-              ]
-            },
-            "valueCodeableConcept": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:return-to-work:restriction_priority",
-                  "code": "routine",
-                  "display": "Routine"
-                }
-              ]
-            }
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:return-to-work",
-                  "code": "rule_count",
-                  "display": "Rule Count"
-                }
-              ]
-            },
-            "valueInteger": 2
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:return-to-work",
-                  "code": "flag_count",
-                  "display": "Flag Count"
-                }
-              ]
-            },
-            "valueInteger": 2
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:return-to-work",
-                  "code": "graded_at",
-                  "display": "Graded At"
-                }
-              ]
-            },
-            "valueDateTime": "2026-04-09T10:00:00+00:00"
-          }
-        ]
+        "date": "2026-04-09T10:00:00+00:00",
+        "description": "Return To Work grading result",
+        "summary": "Deleted At: 2026-04-09T10:00:00+00:00; Fitness Statement: fit; Restriction Priority: routine; Rule Count: 2; Flag Count: 2"
       }
     },
     {
       "fullUrl": "urn:uuid:cc0e8400-e29b-41d4-a716-446655440007",
       "resource": {
-        "resourceType": "Observation",
+        "resourceType": "DetectedIssue",
         "id": "cc0e8400-e29b-41d4-a716-446655440007",
         "meta": {
           "profile": [
-            "http://hl7.org/fhir/StructureDefinition/Observation"
+            "http://hl7.org/fhir/StructureDefinition/DetectedIssue"
           ],
           "lastUpdated": "2026-04-09T10:00:00+00:00"
         },
@@ -1541,9 +536,9 @@
           {
             "coding": [
               {
-                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
-                "code": "survey",
-                "display": "Survey"
+                "system": "urn:form-examples:return-to-work",
+                "code": "grading-additional-flag",
+                "display": "Additional Safety Flag"
               }
             ]
           }
@@ -1551,131 +546,28 @@
         "code": {
           "coding": [
             {
-              "system": "urn:form-examples:return-to-work",
-              "code": "return_to_work_grade_flag",
-              "display": "Return To Work Grade Flag"
+              "system": "urn:form-examples:return-to-work:flags",
+              "code": "FLAG-001",
+              "display": "Safety flag"
             }
           ]
         },
+        "severity": "moderate",
         "subject": {
           "reference": "urn:uuid:550e8400-e29b-41d4-a716-446655440000"
         },
-        "encounter": {
-          "reference": "Encounter/dd0e8400-e29b-41d4-a716-446655440008"
-        },
-        "effectiveDateTime": "2026-04-09T10:00:00+00:00",
-        "component": [
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:return-to-work",
-                  "code": "deleted_at",
-                  "display": "Deleted At"
-                }
-              ]
-            },
-            "valueDateTime": "2026-04-09T10:00:00+00:00"
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:return-to-work",
-                  "code": "flag_code",
-                  "display": "Flag Code"
-                }
-              ]
-            },
-            "valueString": "ABC123"
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:return-to-work",
-                  "code": "flag_title",
-                  "display": "Flag Title"
-                }
-              ]
-            },
-            "valueString": "Example Title"
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:return-to-work",
-                  "code": "flag_category",
-                  "display": "Flag Category"
-                }
-              ]
-            },
-            "valueCodeableConcept": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:return-to-work:flag_category",
-                  "code": "safety-critical-role",
-                  "display": "Safety-Critical-Role"
-                }
-              ]
-            }
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:return-to-work",
-                  "code": "flag_priority",
-                  "display": "Flag Priority"
-                }
-              ]
-            },
-            "valueCodeableConcept": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:return-to-work:flag_priority",
-                  "code": "low",
-                  "display": "Low"
-                }
-              ]
-            }
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:return-to-work",
-                  "code": "flag_evidence",
-                  "display": "Flag Evidence"
-                }
-              ]
-            },
-            "valueString": ""
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:return-to-work",
-                  "code": "flag_recommendation",
-                  "display": "Flag Recommendation"
-                }
-              ]
-            },
-            "valueString": "Example text."
-          }
-        ]
+        "identifiedDateTime": "2026-04-09T10:00:00+00:00",
+        "detail": "Clinical flag detected."
       }
     },
     {
       "fullUrl": "urn:uuid:bb0e8400-e29b-41d4-a716-446655440006",
       "resource": {
-        "resourceType": "Observation",
+        "resourceType": "DetectedIssue",
         "id": "bb0e8400-e29b-41d4-a716-446655440006",
         "meta": {
           "profile": [
-            "http://hl7.org/fhir/StructureDefinition/Observation"
+            "http://hl7.org/fhir/StructureDefinition/DetectedIssue"
           ],
           "lastUpdated": "2026-04-09T10:00:00+00:00"
         },
@@ -1684,9 +576,9 @@
           {
             "coding": [
               {
-                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
-                "code": "survey",
-                "display": "Survey"
+                "system": "urn:form-examples:return-to-work",
+                "code": "grading-fired-rule",
+                "display": "Grading Fired Rule"
               }
             ]
           }
@@ -1694,141 +586,18 @@
         "code": {
           "coding": [
             {
-              "system": "urn:form-examples:return-to-work",
-              "code": "return_to_work_grade_rule",
-              "display": "Return To Work Grade Rule"
+              "system": "urn:form-examples:return-to-work:rules",
+              "code": "RULE-001",
+              "display": "Example grading rule"
             }
           ]
         },
+        "severity": "moderate",
         "subject": {
           "reference": "urn:uuid:550e8400-e29b-41d4-a716-446655440000"
         },
-        "encounter": {
-          "reference": "Encounter/dd0e8400-e29b-41d4-a716-446655440008"
-        },
-        "effectiveDateTime": "2026-04-09T10:00:00+00:00",
-        "component": [
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:return-to-work",
-                  "code": "deleted_at",
-                  "display": "Deleted At"
-                }
-              ]
-            },
-            "valueDateTime": "2026-04-09T10:00:00+00:00"
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:return-to-work",
-                  "code": "rule_code",
-                  "display": "Rule Code"
-                }
-              ]
-            },
-            "valueString": "ABC123"
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:return-to-work",
-                  "code": "rule_title",
-                  "display": "Rule Title"
-                }
-              ]
-            },
-            "valueString": "Example Title"
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:return-to-work",
-                  "code": "rule_band",
-                  "display": "Rule Band"
-                }
-              ]
-            },
-            "valueCodeableConcept": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:return-to-work:rule_band",
-                  "code": "routine",
-                  "display": "Routine"
-                }
-              ]
-            }
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:return-to-work",
-                  "code": "rule_priority",
-                  "display": "Rule Priority"
-                }
-              ]
-            },
-            "valueCodeableConcept": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:return-to-work:rule_priority",
-                  "code": "low",
-                  "display": "Low"
-                }
-              ]
-            }
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:return-to-work",
-                  "code": "rule_kind",
-                  "display": "Rule Kind"
-                }
-              ]
-            },
-            "valueCodeableConcept": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:return-to-work:rule_kind",
-                  "code": "fitness",
-                  "display": "Fitness"
-                }
-              ]
-            }
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:return-to-work",
-                  "code": "rule_evidence",
-                  "display": "Rule Evidence"
-                }
-              ]
-            },
-            "valueString": ""
-          },
-          {
-            "code": {
-              "coding": [
-                {
-                  "system": "urn:form-examples:return-to-work",
-                  "code": "rule_notes",
-                  "display": "Rule Notes"
-                }
-              ]
-            },
-            "valueString": "Example text."
-          }
-        ]
+        "identifiedDateTime": "2026-04-09T10:00:00+00:00",
+        "detail": "Example grading rule that evaluated to true during assessment scoring."
       }
     },
     {
@@ -1867,7 +636,7 @@
           "reference": "urn:uuid:550e8400-e29b-41d4-a716-446655440000"
         },
         "encounter": {
-          "reference": "Encounter/dd0e8400-e29b-41d4-a716-446655440008"
+          "reference": "urn:uuid:880e8400-e29b-41d4-a716-446655440003"
         },
         "effectiveDateTime": "2026-04-09T10:00:00+00:00",
         "component": [

@@ -32,7 +32,7 @@
     "reference": "Patient/881e8400-e29b-41d4-a716-446655440012"
   },
   "encounter": {
-    "reference": "Encounter/991e8400-e29b-41d4-a716-446655440013"
+    "reference": "Encounter/aa0e8400-e29b-41d4-a716-446655440005"
   },
   "effectiveDateTime": "2026-04-09T10:00:00+00:00",
   "component": [

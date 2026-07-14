@@ -222,19 +222,29 @@ Design each feature on the reference forms
       values; regenerated (7 files); all 1850 specs now validate. Added an
       OpenAPI 3.1 validation step to the CI drift job (previously only XML +
       FHIR were validated).
-- [x] **FHIR: bundle references now self-resolving (partial) + deeper finding.**
-      Ran the authoritative HL7 `validator_cli.jar` — resources validate with 0
-      errors. Made document-bundle references self-resolving: the bundle
-      generator (`gather_fhir_bundle`) now rewrites each bundled resource's
-      `Type/id` references to the matching `urn:uuid:` entry fullUrl (standalone
-      `fhir/r5/*.json` keep `Type/id`). 273 bundles improved, all 286 still
-      well-formed, idempotent. **Deeper finding (documented, not fixed):** forms
-      whose main table is form-specific (e.g. `apgar_score`, not literally
-      `assessment`) carry DANGLING `Encounter/<uuid>` references — the generator
-      derives the encounter ref from a hardcoded `get_uuid("assessment")` seed
-      that matches no generated resource, so no Encounter exists. The HL7
-      validator tolerates it (warning, not error); a proper fix is a dedicated
-      FHIR-generator pass to key the Encounter id off the actual main table.
+- [x] **FHIR: role-based resource classification — dangling Encounter refs 178→0.**
+      `classify_table` matched FHIR resource types by LITERAL table names
+      (`assessment`→Encounter, `grade`→ClinicalImpression), so the ~178 forms
+      with a form-specific main table (`apgar_score`, not `assessment`) got no
+      Encounter/ClinicalImpression — everything fell to Observation — and their
+      `Encounter/<uuid>` references dangled (the uuid came from a hardcoded
+      `get_uuid("assessment")` seed matching no resource). Rewrote it to
+      identify the core table by role (`find_main_table`: non-patient/clinician,
+      non-grade, prefix of the most others) and classify grade tables by suffix
+      (`_grade`/`_grade_rule`/`_grade_flag`), aliasing the `"assessment"` uuid to
+      the real main table so refs resolve; defensively drop the `encounter`
+      element when a form has no core table. Result: **dangling Encounter refs
+      178→0**, resource types now correct (289 Encounter / 383 ClinicalImpression
+      / 547 DetectedIssue), 0 structural problems, idempotent. Uses the same
+      builders CI already HL7-validates for the generic-named forms (the 2-min
+      tool cap prevents a local HL7 run; the CI `fhir` job is authoritative).
+      Also (prior round) bundle references rewritten to `urn:uuid:` fullUrls.
+      **Deeper finding (documented, not fixed):** the resource builders hardcode
+      `Patient/`/`Encounter/` references, so forms lacking a patient table (e.g.
+      arc42, a docs form) still carry dangling `Patient/` refs (221 across
+      bundles) — a broader reference-consistency pass. **Separate data bug:**
+      `psychology-assessment`'s SQL is a stub (only patient+clinician, no
+      assessment/score tables) — its DASS-21 schema is missing entirely.
 - [i] **Representation-coverage audit (2026-07-13): CLEAN.** Checked SQL
       tables vs XML/FHIR/protobuf/OpenAPI file counts across all forms. The
       apparent mismatch (XML per-table vs FHIR/proto/OpenAPI ~6-7) is

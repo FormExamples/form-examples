@@ -1,9 +1,9 @@
 {
-  "resourceType": "Observation",
+  "resourceType": "DetectedIssue",
   "id": "110e8400-e29b-41d4-a716-44665544000b",
   "meta": {
     "profile": [
-      "http://hl7.org/fhir/StructureDefinition/Observation"
+      "http://hl7.org/fhir/StructureDefinition/DetectedIssue"
     ],
     "lastUpdated": "2026-04-09T10:00:00+00:00"
   },
@@ -12,9 +12,9 @@
     {
       "coding": [
         {
-          "system": "http://terminology.hl7.org/CodeSystem/observation-category",
-          "code": "survey",
-          "display": "Survey"
+          "system": "urn:form-examples:meeting",
+          "code": "grading-additional-flag",
+          "display": "summary-over-limit"
         }
       ]
     }
@@ -22,95 +22,16 @@
   "code": {
     "coding": [
       {
-        "system": "urn:form-examples:meeting",
-        "code": "meeting_grade_flag",
-        "display": "Meeting Grade Flag"
+        "system": "urn:form-examples:meeting:flags",
+        "code": "FLAG-001",
+        "display": "Safety flag"
       }
     ]
   },
+  "severity": "low",
   "subject": {
     "reference": "Patient/220e8400-e29b-41d4-a716-44665544000c"
   },
-  "encounter": {
-    "reference": "Encounter/330e8400-e29b-41d4-a716-44665544000d"
-  },
-  "effectiveDateTime": "2026-04-09T10:00:00+00:00",
-  "component": [
-    {
-      "code": {
-        "coding": [
-          {
-            "system": "urn:form-examples:meeting",
-            "code": "deleted_at",
-            "display": "Deleted At"
-          }
-        ]
-      },
-      "valueDateTime": "2026-04-09T10:00:00+00:00"
-    },
-    {
-      "code": {
-        "coding": [
-          {
-            "system": "urn:form-examples:meeting",
-            "code": "category",
-            "display": "Category"
-          }
-        ]
-      },
-      "valueCodeableConcept": {
-        "coding": [
-          {
-            "system": "urn:form-examples:meeting:category",
-            "code": "summary-over-limit",
-            "display": "Summary-Over-Limit"
-          }
-        ]
-      }
-    },
-    {
-      "code": {
-        "coding": [
-          {
-            "system": "urn:form-examples:meeting",
-            "code": "priority",
-            "display": "Priority"
-          }
-        ]
-      },
-      "valueCodeableConcept": {
-        "coding": [
-          {
-            "system": "urn:form-examples:meeting:priority",
-            "code": "low",
-            "display": "Low"
-          }
-        ]
-      }
-    },
-    {
-      "code": {
-        "coding": [
-          {
-            "system": "urn:form-examples:meeting",
-            "code": "description",
-            "display": "Description"
-          }
-        ]
-      },
-      "valueString": "Example text."
-    },
-    {
-      "code": {
-        "coding": [
-          {
-            "system": "urn:form-examples:meeting",
-            "code": "suggested_action",
-            "display": "Suggested Action"
-          }
-        ]
-      },
-      "valueString": ""
-    }
-  ]
+  "identifiedDateTime": "2026-04-09T10:00:00+00:00",
+  "detail": "Clinical flag detected."
 }

@@ -1,122 +1,21 @@
 {
-  "resourceType": "Observation",
+  "resourceType": "ClinicalImpression",
   "id": "880e8400-e29b-41d4-a716-446655440003",
   "meta": {
     "profile": [
-      "http://hl7.org/fhir/StructureDefinition/Observation"
+      "http://hl7.org/fhir/StructureDefinition/ClinicalImpression"
     ],
     "lastUpdated": "2026-04-09T10:00:00+00:00"
   },
-  "status": "final",
-  "category": [
-    {
-      "coding": [
-        {
-          "system": "http://terminology.hl7.org/CodeSystem/observation-category",
-          "code": "survey",
-          "display": "Survey"
-        }
-      ]
-    }
-  ],
-  "code": {
-    "coding": [
-      {
-        "system": "urn:form-examples:timi-risk-score-for-acute-coronary-syndrome",
-        "code": "timi_risk_score_for_acute_coronary_syndrome_grade",
-        "display": "Timi Risk Score For Acute Coronary Syndrome Grade"
-      }
-    ]
-  },
+  "status": "completed",
   "subject": {
     "reference": "Patient/550e8400-e29b-41d4-a716-446655440000"
   },
   "encounter": {
-    "reference": "Encounter/bb0e8400-e29b-41d4-a716-446655440006"
+    "reference": "Encounter/770e8400-e29b-41d4-a716-446655440002"
   },
   "effectiveDateTime": "2026-04-09T10:00:00+00:00",
-  "component": [
-    {
-      "code": {
-        "coding": [
-          {
-            "system": "urn:form-examples:timi-risk-score-for-acute-coronary-syndrome",
-            "code": "deleted_at",
-            "display": "Deleted At"
-          }
-        ]
-      },
-      "valueDateTime": "2026-04-09T10:00:00+00:00"
-    },
-    {
-      "code": {
-        "coding": [
-          {
-            "system": "urn:form-examples:timi-risk-score-for-acute-coronary-syndrome",
-            "code": "total_score",
-            "display": "Total Score"
-          }
-        ]
-      },
-      "valueInteger": 5
-    },
-    {
-      "code": {
-        "coding": [
-          {
-            "system": "urn:form-examples:timi-risk-score-for-acute-coronary-syndrome",
-            "code": "risk_band",
-            "display": "Risk Band"
-          }
-        ]
-      },
-      "valueCodeableConcept": {
-        "coding": [
-          {
-            "system": "urn:form-examples:timi-risk-score-for-acute-coronary-syndrome:risk_band",
-            "code": "low",
-            "display": "Low"
-          }
-        ]
-      }
-    },
-    {
-      "code": {
-        "coding": [
-          {
-            "system": "urn:form-examples:timi-risk-score-for-acute-coronary-syndrome",
-            "code": "fourteen_day_event_risk_percent",
-            "display": "Fourteen Day Event Risk Percent"
-          }
-        ]
-      },
-      "valueQuantity": {
-        "value": 0.0
-      }
-    },
-    {
-      "code": {
-        "coding": [
-          {
-            "system": "urn:form-examples:timi-risk-score-for-acute-coronary-syndrome",
-            "code": "management",
-            "display": "Management"
-          }
-        ]
-      },
-      "valueString": ""
-    },
-    {
-      "code": {
-        "coding": [
-          {
-            "system": "urn:form-examples:timi-risk-score-for-acute-coronary-syndrome",
-            "code": "graded_at",
-            "display": "Graded At"
-          }
-        ]
-      },
-      "valueDateTime": "2026-04-09T10:00:00+00:00"
-    }
-  ]
+  "date": "2026-04-09T10:00:00+00:00",
+  "description": "Timi Risk Score For Acute Coronary Syndrome grading result",
+  "summary": "Deleted At: 2026-04-09T10:00:00+00:00; Total Score: 5; Risk Band: low; Fourteen Day Event Risk Percent: 0.0; Management: "
 }

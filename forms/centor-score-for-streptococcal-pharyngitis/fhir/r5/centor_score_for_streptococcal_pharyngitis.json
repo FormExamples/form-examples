@@ -1,358 +1,40 @@
 {
-  "resourceType": "Observation",
+  "resourceType": "Encounter",
   "id": "770e8400-e29b-41d4-a716-446655440002",
   "meta": {
     "profile": [
-      "http://hl7.org/fhir/StructureDefinition/Observation"
+      "http://hl7.org/fhir/StructureDefinition/Encounter"
     ],
     "lastUpdated": "2026-04-09T10:00:00+00:00"
   },
-  "status": "final",
-  "category": [
+  "status": "planned",
+  "class": [
     {
       "coding": [
         {
-          "system": "http://terminology.hl7.org/CodeSystem/observation-category",
-          "code": "survey",
-          "display": "Survey"
+          "system": "http://terminology.hl7.org/CodeSystem/v3-ActCode",
+          "code": "AMB",
+          "display": "ambulatory"
         }
       ]
     }
   ],
-  "code": {
-    "coding": [
-      {
-        "system": "urn:form-examples:centor-score-for-streptococcal-pharyngitis",
-        "code": "centor_score_for_streptococcal_pharyngitis",
-        "display": "Centor Score For Streptococcal Pharyngitis"
-      }
-    ]
-  },
+  "type": [
+    {
+      "coding": [
+        {
+          "system": "http://snomed.info/sct",
+          "code": "185349003",
+          "display": "Encounter for check up"
+        }
+      ],
+      "text": "Centor Score For Streptococcal Pharyngitis"
+    }
+  ],
   "subject": {
     "reference": "Patient/550e8400-e29b-41d4-a716-446655440000"
   },
-  "encounter": {
-    "reference": "Encounter/bb0e8400-e29b-41d4-a716-446655440006"
-  },
-  "effectiveDateTime": "2026-04-09T10:00:00+00:00",
-  "component": [
-    {
-      "code": {
-        "coding": [
-          {
-            "system": "urn:form-examples:centor-score-for-streptococcal-pharyngitis",
-            "code": "deleted_at",
-            "display": "Deleted At"
-          }
-        ]
-      },
-      "valueDateTime": "2026-04-09T10:00:00+00:00"
-    },
-    {
-      "code": {
-        "coding": [
-          {
-            "system": "urn:form-examples:centor-score-for-streptococcal-pharyngitis",
-            "code": "clinician_name",
-            "display": "Clinician Name"
-          }
-        ]
-      },
-      "valueString": "Example"
-    },
-    {
-      "code": {
-        "coding": [
-          {
-            "system": "urn:form-examples:centor-score-for-streptococcal-pharyngitis",
-            "code": "clinician_role",
-            "display": "Clinician Role"
-          }
-        ]
-      },
-      "valueCodeableConcept": {
-        "coding": [
-          {
-            "system": "urn:form-examples:centor-score-for-streptococcal-pharyngitis:clinician_role",
-            "code": "gp",
-            "display": "Gp"
-          }
-        ]
-      }
-    },
-    {
-      "code": {
-        "coding": [
-          {
-            "system": "urn:form-examples:centor-score-for-streptococcal-pharyngitis",
-            "code": "assessed_at",
-            "display": "Assessed At"
-          }
-        ]
-      },
-      "valueDateTime": "2026-04-09T10:00:00+00:00"
-    },
-    {
-      "code": {
-        "coding": [
-          {
-            "system": "urn:form-examples:centor-score-for-streptococcal-pharyngitis",
-            "code": "care_setting",
-            "display": "Care Setting"
-          }
-        ]
-      },
-      "valueCodeableConcept": {
-        "coding": [
-          {
-            "system": "urn:form-examples:centor-score-for-streptococcal-pharyngitis:care_setting",
-            "code": "general-practice",
-            "display": "General-Practice"
-          }
-        ]
-      }
-    },
-    {
-      "code": {
-        "coding": [
-          {
-            "system": "urn:form-examples:centor-score-for-streptococcal-pharyngitis",
-            "code": "patient_identifier",
-            "display": "Patient Identifier"
-          }
-        ]
-      },
-      "valueString": ""
-    },
-    {
-      "code": {
-        "coding": [
-          {
-            "system": "urn:form-examples:centor-score-for-streptococcal-pharyngitis",
-            "code": "age_years",
-            "display": "Age Years"
-          }
-        ]
-      },
-      "valueInteger": 45
-    },
-    {
-      "code": {
-        "coding": [
-          {
-            "system": "urn:form-examples:centor-score-for-streptococcal-pharyngitis",
-            "code": "sex",
-            "display": "Sex"
-          }
-        ]
-      },
-      "valueCodeableConcept": {
-        "coding": [
-          {
-            "system": "urn:form-examples:centor-score-for-streptococcal-pharyngitis:sex",
-            "code": "female",
-            "display": "Female"
-          }
-        ]
-      }
-    },
-    {
-      "code": {
-        "coding": [
-          {
-            "system": "urn:form-examples:centor-score-for-streptococcal-pharyngitis",
-            "code": "tonsillar_exudate",
-            "display": "Tonsillar Exudate"
-          }
-        ]
-      },
-      "valueDateTime": "2026-01-15"
-    },
-    {
-      "code": {
-        "coding": [
-          {
-            "system": "urn:form-examples:centor-score-for-streptococcal-pharyngitis",
-            "code": "tender_anterior_cervical_nodes",
-            "display": "Tender Anterior Cervical Nodes"
-          }
-        ]
-      },
-      "valueCodeableConcept": {
-        "coding": [
-          {
-            "system": "urn:form-examples:centor-score-for-streptococcal-pharyngitis:tender_anterior_cervical_nodes",
-            "code": "yes",
-            "display": "Yes"
-          }
-        ]
-      }
-    },
-    {
-      "code": {
-        "coding": [
-          {
-            "system": "urn:form-examples:centor-score-for-streptococcal-pharyngitis",
-            "code": "fever_over_38",
-            "display": "Fever Over 38"
-          }
-        ]
-      },
-      "valueCodeableConcept": {
-        "coding": [
-          {
-            "system": "urn:form-examples:centor-score-for-streptococcal-pharyngitis:fever_over_38",
-            "code": "yes",
-            "display": "Yes"
-          }
-        ]
-      }
-    },
-    {
-      "code": {
-        "coding": [
-          {
-            "system": "urn:form-examples:centor-score-for-streptococcal-pharyngitis",
-            "code": "measured_temperature_celsius",
-            "display": "Measured Temperature Celsius"
-          }
-        ]
-      },
-      "valueQuantity": {
-        "value": 0.0
-      }
-    },
-    {
-      "code": {
-        "coding": [
-          {
-            "system": "urn:form-examples:centor-score-for-streptococcal-pharyngitis",
-            "code": "absence_of_cough",
-            "display": "Absence Of Cough"
-          }
-        ]
-      },
-      "valueCodeableConcept": {
-        "coding": [
-          {
-            "system": "urn:form-examples:centor-score-for-streptococcal-pharyngitis:absence_of_cough",
-            "code": "yes",
-            "display": "Yes"
-          }
-        ]
-      }
-    },
-    {
-      "code": {
-        "coding": [
-          {
-            "system": "urn:form-examples:centor-score-for-streptococcal-pharyngitis",
-            "code": "stridor_or_breathing_difficulty",
-            "display": "Stridor Or Breathing Difficulty"
-          }
-        ]
-      },
-      "valueCodeableConcept": {
-        "coding": [
-          {
-            "system": "urn:form-examples:centor-score-for-streptococcal-pharyngitis:stridor_or_breathing_difficulty",
-            "code": "yes",
-            "display": "Yes"
-          }
-        ]
-      }
-    },
-    {
-      "code": {
-        "coding": [
-          {
-            "system": "urn:form-examples:centor-score-for-streptococcal-pharyngitis",
-            "code": "drooling_or_cannot_swallow",
-            "display": "Drooling Or Cannot Swallow"
-          }
-        ]
-      },
-      "valueCodeableConcept": {
-        "coding": [
-          {
-            "system": "urn:form-examples:centor-score-for-streptococcal-pharyngitis:drooling_or_cannot_swallow",
-            "code": "yes",
-            "display": "Yes"
-          }
-        ]
-      }
-    },
-    {
-      "code": {
-        "coding": [
-          {
-            "system": "urn:form-examples:centor-score-for-streptococcal-pharyngitis",
-            "code": "trismus",
-            "display": "Trismus"
-          }
-        ]
-      },
-      "valueCodeableConcept": {
-        "coding": [
-          {
-            "system": "urn:form-examples:centor-score-for-streptococcal-pharyngitis:trismus",
-            "code": "yes",
-            "display": "Yes"
-          }
-        ]
-      }
-    },
-    {
-      "code": {
-        "coding": [
-          {
-            "system": "urn:form-examples:centor-score-for-streptococcal-pharyngitis",
-            "code": "muffled_voice",
-            "display": "Muffled Voice"
-          }
-        ]
-      },
-      "valueCodeableConcept": {
-        "coding": [
-          {
-            "system": "urn:form-examples:centor-score-for-streptococcal-pharyngitis:muffled_voice",
-            "code": "yes",
-            "display": "Yes"
-          }
-        ]
-      }
-    },
-    {
-      "code": {
-        "coding": [
-          {
-            "system": "urn:form-examples:centor-score-for-streptococcal-pharyngitis",
-            "code": "unilateral_neck_swelling",
-            "display": "Unilateral Neck Swelling"
-          }
-        ]
-      },
-      "valueCodeableConcept": {
-        "coding": [
-          {
-            "system": "urn:form-examples:centor-score-for-streptococcal-pharyngitis:unilateral_neck_swelling",
-            "code": "yes",
-            "display": "Yes"
-          }
-        ]
-      }
-    },
-    {
-      "code": {
-        "coding": [
-          {
-            "system": "urn:form-examples:centor-score-for-streptococcal-pharyngitis",
-            "code": "clinical_note",
-            "display": "Clinical Note"
-          }
-        ]
-      },
-      "valueString": ""
-    }
-  ]
+  "actualPeriod": {
+    "start": "2026-04-09T10:00:00+00:00"
+  }
 }
