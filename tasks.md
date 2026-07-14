@@ -239,20 +239,35 @@ Design each feature on the reference forms
       builders CI already HL7-validates for the generic-named forms (the 2-min
       tool cap prevents a local HL7 run; the CI `fhir` job is authoritative).
       Also (prior round) bundle references rewritten to `urn:uuid:` fullUrls.
-      **Deeper finding (documented, not fixed):** the resource builders hardcode
-      `Patient/`/`Encounter/` references, so forms lacking a patient table (e.g.
-      arc42, a docs form) still carry dangling `Patient/` refs (221 across
-      bundles) — a broader reference-consistency pass. **Separate data bug:**
-      `psychology-assessment`'s SQL is a stub (only patient+clinician, no
-      assessment/score tables) — its DASS-21 schema is missing entirely.
-- [i] **Representation-coverage audit (2026-07-13): CLEAN.** Checked SQL
-      tables vs XML/FHIR/protobuf/OpenAPI file counts across all forms. The
-      apparent mismatch (XML per-table vs FHIR/proto/OpenAPI ~6-7) is
-      INTENTIONAL: those three fold `assessment_<section>` child tables into
-      the parent `assessment` entity (documented in the generator headers),
-      and FHIR additionally emits a synthetic `grading_result`
-      (ClinicalImpression) with no SQL table. No generator bug — integrity
-      confirmed.
+- [x] **FHIR: orphan cleanup + patient-aware refs — 0 dangling bundle refs.**
+      (Follow-up to the row above, now closed.) Two root causes remained:
+      (1) the generator never deleted stale `*.json` for renamed/dropped tables
+      (`grading_result`→`grade`, `arc42_documentation`→its split tables) — **139
+      orphans across 115 forms**, each duplicating a live resource and carrying
+      cross-refs baked against an older UUID assignment, which is what actually
+      produced the dangling `Encounter/<patient-uuid>` refs. Generalized the
+      cleanup from `assessment_*.json` to any `*.json` outside the current table
+      set. (2) builders hardcode `subject: Patient/<uuid>`, so the **13
+      non-clinical forms with no patient table** (arc42, meeting, issue-tracker,
+      agile/OKR/LPA/neurodiversity) dangled 118 `Patient/` refs. Made
+      `build_fhir_resource` reference-aware (`has_patient`): drop the optional
+      `subject` (Observation/Encounter/DetectedIssue) and downgrade the grade
+      table's ClinicalImpression (subject 1..1 required) to a neutral Observation
+      (subject 0..1). **Result: unresolved refs 0 across 0 forms** (was Patient
+      221 / Encounter 104 across 117); idempotent; xml/openapi/protobuf
+      unchanged; `--check` green. Commit `c779754a1`.
+- [ ] **Separate data bug (still open):** `psychology-assessment`'s SQL is a
+      stub (only patient+clinician, no assessment/score tables) — its DASS-21
+      schema is missing entirely.
+- [i] **Representation-coverage audit — CORRECTED (2026-07-14).** The earlier
+      audit (2026-07-13) wrongly called the FHIR-only extra file a "synthetic
+      `grading_result`" and declared it intentional. It was NOT: `grading_result`
+      was a stale ORPHAN left by the `grading_result`→`grade` table rename, now
+      deleted (see the orphan-cleanup row above). The one genuinely intentional
+      fold remains: XML is per-table, while FHIR/protobuf/OpenAPI fold
+      `assessment_<section>` children into the parent `assessment` entity
+      (documented in the generator headers). Post-cleanup, FHIR file counts match
+      the current table set exactly (0 orphans).
 - [x] **Loco API round-trip integration test** (template DONE on apgar-score):
       `tests/requests/patients.rs` POSTs a patient to `/api/patients`, asserts
       200 + id, GETs `/api/patients/{id}`, asserts every field round-trips, and
