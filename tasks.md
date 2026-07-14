@@ -256,9 +256,29 @@ Design each feature on the reference forms
       (subject 0..1). **Result: unresolved refs 0 across 0 forms** (was Patient
       221 / Encounter 104 across 117); idempotent; xml/openapi/protobuf
       unchanged; `--check` green. Commit `c779754a1`.
-- [ ] **Separate data bug (still open):** `psychology-assessment`'s SQL is a
-      stub (only patient+clinician, no assessment/score tables) — its DASS-21
-      schema is missing entirely.
+- [x] **psychology-assessment stub SQL — FIXED.** The form's SQL was a
+      patient+clinician stub with its entire DASS-21 schema absent (so every
+      generated representation was empty of domain content and it could not
+      score). Added the canonical four domain migrations mirroring the
+      item-based pattern (autism/attention-deficit): minimal `assessment`
+      parent, a `grade` child with the three DASS-21 subscale scores (0-42,
+      raw doubled) + severity categories, plus `grading_fired_rule` and
+      `grading_additional_flag`. Verified on scratch Postgres 18 — all 6
+      migrations apply, full patient→assessment→grade→rule/flag insert chain
+      succeeds, CHECK constraints reject invalid severities. Regenerated all
+      representations; FHIR now emits the correct Encounter/ClinicalImpression/
+      DetectedIssue set. Commit `fcd9df60f`. (Follow-up: the back-end-with-loco
+      crate still carries only patient+clinician entities — a larger
+      crate-regeneration task, tracked under Phase 3.)
+- [x] **Loco setup-script drift (81 forms) — FIXED + gated.** Surfaced while
+      regenerating for psychology-assessment: 81 `back-end-with-loco-setup`
+      scripts were missing the `grading_additional_flag` scaffold call. Root
+      cause: they were generated during Phase 0 while the 81
+      `92_*_grade_flag.sql` migrations still lacked their `.sql` extension, so
+      the grade_flag table was invisible. Regenerated all 81 (pure additions,
+      idempotent; commit `f40c11605`). The generator had **no `--check` mode**,
+      which is why this drifted silently — added `--check` + slug filtering and
+      wired the gate into CI (commit `62b306f67`).
 - [i] **Representation-coverage audit — CORRECTED (2026-07-14).** The earlier
       audit (2026-07-13) wrongly called the FHIR-only extra file a "synthetic
       `grading_result`" and declared it intentional. It was NOT: `grading_result`
