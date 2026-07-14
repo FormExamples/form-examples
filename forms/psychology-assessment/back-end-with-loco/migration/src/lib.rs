@@ -5,6 +5,10 @@ mod m20220101_000001_users;
 
 mod m20260701_052119_patients;
 mod m20260701_052147_clinicians;
+mod m20260701_052200_assessments;
+mod m20260701_052210_grades;
+mod m20260701_052220_grading_fired_rules;
+mod m20260701_052230_grading_additional_flags;
 pub struct Migrator;
 
 #[async_trait::async_trait]
@@ -14,6 +18,10 @@ impl MigratorTrait for Migrator {
             Box::new(m20220101_000001_users::Migration),
             Box::new(m20260701_052119_patients::Migration),
             Box::new(m20260701_052147_clinicians::Migration),
+            Box::new(m20260701_052200_assessments::Migration),
+            Box::new(m20260701_052210_grades::Migration),
+            Box::new(m20260701_052220_grading_fired_rules::Migration),
+            Box::new(m20260701_052230_grading_additional_flags::Migration),
             // inject-above (do not remove this comment)
         ]
     }
