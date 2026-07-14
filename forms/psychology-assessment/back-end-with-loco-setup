@@ -47,6 +47,43 @@ cargo loco generate scaffold clinician \
     united_kingdom_nhs_number:string^ \
     --api
 
+cargo loco generate scaffold assessment \
+    deleted_at:tstz \
+    patient:references \
+    status:string! \
+    --api
+
+cargo loco generate scaffold grade \
+    deleted_at:tstz \
+    assessment:references \
+    depression_score:int \
+    depression_severity:string! \
+    anxiety_score:int \
+    anxiety_severity:string! \
+    stress_score:int \
+    stress_severity:string! \
+    graded_at:tstz! \
+    --api
+
+cargo loco generate scaffold grading_fired_rule \
+    deleted_at:tstz \
+    grade:references \
+    rule_id:string! \
+    category:string! \
+    description:text! \
+    subscale:string! \
+    severity:string! \
+    --api
+
+cargo loco generate scaffold grading_additional_flag \
+    deleted_at:tstz \
+    grade:references \
+    flag_id:string! \
+    category:string! \
+    message:text! \
+    priority:string! \
+    --api
+
 # Convert the freshly-scaffolded nested crate into the canonical route
 # layout: back-end-with-loco/src/${form_snake_case}/*.rs
 cd ..

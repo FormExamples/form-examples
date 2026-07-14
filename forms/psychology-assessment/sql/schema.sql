@@ -5,11 +5,15 @@
 -- migration files in this directory. Do not edit by hand — re-run
 -- the generator after changing any NN-*.sql file.
 --
--- Source files (4):
+-- Source files (8):
 --   - 00_create_extensions.sql
 --   - 01_create_function_set_updated_at.sql
 --   - 02_create_table_patient.sql
 --   - 03_create_table_clinician.sql
+--   - 04_create_table_psychology_assessment.sql
+--   - 05_create_table_psychology_assessment_grade.sql
+--   - 06_create_table_psychology_assessment_grade_rule.sql
+--   - 92_create_table_psychology_assessment_grade_flag.sql
 
 
 -- ========================================================================
@@ -201,4 +205,209 @@ COMMENT ON COLUMN clinician.deleted_at IS
 
 -- ========================================================================
 -- END 03_create_table_clinician.sql
+-- ========================================================================
+
+-- ========================================================================
+-- BEGIN 04_create_table_psychology_assessment.sql
+-- ========================================================================
+
+CREATE TABLE assessment (
+    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+    created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
+    updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
+    deleted_at TIMESTAMPTZ DEFAULT NULL,
+    patient_id UUID NOT NULL
+        REFERENCES patient(id) ON DELETE CASCADE,
+    status VARCHAR(20) NOT NULL DEFAULT 'draft'
+        CHECK (status IN ('draft', 'submitted', 'reviewed', 'urgent'))
+);
+
+CREATE TRIGGER trigger_assessment_updated_at
+    BEFORE UPDATE ON assessment
+    FOR EACH ROW
+    EXECUTE FUNCTION set_updated_at();
+
+COMMENT ON TABLE assessment IS
+    'Psychology screening assessment using the DASS-21 (Depression Anxiety Stress Scales, 21-item) instrument. Parent entity for all assessment sections.';
+COMMENT ON COLUMN assessment.patient_id IS
+    'Foreign key to the patient who owns this assessment.';
+COMMENT ON COLUMN assessment.status IS
+    'Lifecycle status: draft, submitted, reviewed, or urgent.';
+
+COMMENT ON COLUMN assessment.id IS
+    'Primary key UUID, auto-generated.';
+COMMENT ON COLUMN assessment.created_at IS
+    'Timestamp when this row was created.';
+COMMENT ON COLUMN assessment.updated_at IS
+    'Timestamp when this row was updated.';
+COMMENT ON COLUMN assessment.deleted_at IS
+    'Timestamp when this row was deleted.';
+
+-- ========================================================================
+-- END 04_create_table_psychology_assessment.sql
+-- ========================================================================
+
+-- ========================================================================
+-- BEGIN 05_create_table_psychology_assessment_grade.sql
+-- ========================================================================
+
+CREATE TABLE grade (
+    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+    created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
+    updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
+    deleted_at TIMESTAMPTZ DEFAULT NULL,
+    assessment_id UUID NOT NULL UNIQUE
+        REFERENCES assessment(id) ON DELETE CASCADE,
+    depression_score INTEGER
+        CHECK (depression_score IS NULL OR (depression_score >= 0 AND depression_score <= 42)),
+    depression_severity VARCHAR(20) NOT NULL DEFAULT ''
+        CHECK (depression_severity IN ('normal', 'mild', 'moderate', 'severe', 'extremely_severe', '')),
+    anxiety_score INTEGER
+        CHECK (anxiety_score IS NULL OR (anxiety_score >= 0 AND anxiety_score <= 42)),
+    anxiety_severity VARCHAR(20) NOT NULL DEFAULT ''
+        CHECK (anxiety_severity IN ('normal', 'mild', 'moderate', 'severe', 'extremely_severe', '')),
+    stress_score INTEGER
+        CHECK (stress_score IS NULL OR (stress_score >= 0 AND stress_score <= 42)),
+    stress_severity VARCHAR(20) NOT NULL DEFAULT ''
+        CHECK (stress_severity IN ('normal', 'mild', 'moderate', 'severe', 'extremely_severe', '')),
+    graded_at TIMESTAMPTZ NOT NULL DEFAULT now()
+);
+
+CREATE TRIGGER trigger_grade_updated_at
+    BEFORE UPDATE ON grade
+    FOR EACH ROW
+    EXECUTE FUNCTION set_updated_at();
+
+COMMENT ON TABLE grade IS
+    'Computed DASS-21 grading result. Each subscale raw score (0-21) is doubled to align with DASS-42 norms, yielding a 0-42 range, and mapped to a severity category. One-to-one child of assessment.';
+COMMENT ON COLUMN grade.assessment_id IS
+    'Foreign key to the parent assessment (unique, enforcing 1:1).';
+COMMENT ON COLUMN grade.depression_score IS
+    'Depression subscale score, 0-42 (raw 0-21 doubled). NULL if incomplete.';
+COMMENT ON COLUMN grade.depression_severity IS
+    'Depression severity category: normal, mild, moderate, severe, or extremely_severe.';
+COMMENT ON COLUMN grade.anxiety_score IS
+    'Anxiety subscale score, 0-42 (raw 0-21 doubled). NULL if incomplete.';
+COMMENT ON COLUMN grade.anxiety_severity IS
+    'Anxiety severity category: normal, mild, moderate, severe, or extremely_severe.';
+COMMENT ON COLUMN grade.stress_score IS
+    'Stress subscale score, 0-42 (raw 0-21 doubled). NULL if incomplete.';
+COMMENT ON COLUMN grade.stress_severity IS
+    'Stress severity category: normal, mild, moderate, severe, or extremely_severe.';
+COMMENT ON COLUMN grade.graded_at IS
+    'Timestamp when the DASS-21 grading was computed.';
+
+COMMENT ON COLUMN grade.id IS
+    'Primary key UUID, auto-generated.';
+COMMENT ON COLUMN grade.created_at IS
+    'Timestamp when this row was created.';
+COMMENT ON COLUMN grade.updated_at IS
+    'Timestamp when this row was updated.';
+COMMENT ON COLUMN grade.deleted_at IS
+    'Timestamp when this row was deleted.';
+
+-- ========================================================================
+-- END 05_create_table_psychology_assessment_grade.sql
+-- ========================================================================
+
+-- ========================================================================
+-- BEGIN 06_create_table_psychology_assessment_grade_rule.sql
+-- ========================================================================
+
+CREATE TABLE grading_fired_rule (
+    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+    created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
+    updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
+    deleted_at TIMESTAMPTZ DEFAULT NULL,
+    grade_id UUID NOT NULL
+        REFERENCES grade(id) ON DELETE CASCADE,
+    rule_id VARCHAR(20) NOT NULL,
+    category VARCHAR(100) NOT NULL DEFAULT '',
+    description TEXT NOT NULL DEFAULT '',
+    subscale VARCHAR(20) NOT NULL DEFAULT ''
+        CHECK (subscale IN ('depression', 'anxiety', 'stress', '')),
+    severity VARCHAR(20) NOT NULL DEFAULT ''
+        CHECK (severity IN ('normal', 'mild', 'moderate', 'severe', 'extremely_severe', ''))
+);
+
+CREATE TRIGGER trigger_grading_fired_rule_updated_at
+    BEFORE UPDATE ON grading_fired_rule
+    FOR EACH ROW
+    EXECUTE FUNCTION set_updated_at();
+
+COMMENT ON TABLE grading_fired_rule IS
+    'Individual DASS-21 grading rules that evaluated to true during psychology grading (e.g. a subscale reaching a severity threshold).';
+COMMENT ON COLUMN grading_fired_rule.grade_id IS
+    'Foreign key to the parent grading result.';
+COMMENT ON COLUMN grading_fired_rule.rule_id IS
+    'Identifier of the rule that fired (e.g. DASS-D-SEVERE, DASS-A-MODERATE).';
+COMMENT ON COLUMN grading_fired_rule.category IS
+    'Category of the rule (e.g. Depression, Anxiety, Stress, Functional Impact).';
+COMMENT ON COLUMN grading_fired_rule.description IS
+    'Human-readable description of the rule condition.';
+COMMENT ON COLUMN grading_fired_rule.subscale IS
+    'DASS-21 subscale this rule pertains to: depression, anxiety, or stress.';
+COMMENT ON COLUMN grading_fired_rule.severity IS
+    'Severity category contributed by this rule: normal, mild, moderate, severe, or extremely_severe.';
+
+COMMENT ON COLUMN grading_fired_rule.id IS
+    'Primary key UUID, auto-generated.';
+COMMENT ON COLUMN grading_fired_rule.created_at IS
+    'Timestamp when this row was created.';
+COMMENT ON COLUMN grading_fired_rule.updated_at IS
+    'Timestamp when this row was updated.';
+COMMENT ON COLUMN grading_fired_rule.deleted_at IS
+    'Timestamp when this row was deleted.';
+
+-- ========================================================================
+-- END 06_create_table_psychology_assessment_grade_rule.sql
+-- ========================================================================
+
+-- ========================================================================
+-- BEGIN 92_create_table_psychology_assessment_grade_flag.sql
+-- ========================================================================
+
+CREATE TABLE grading_additional_flag (
+    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+    created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
+    updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
+    deleted_at TIMESTAMPTZ DEFAULT NULL,
+    grade_id UUID NOT NULL
+        REFERENCES grade(id) ON DELETE CASCADE,
+    flag_id VARCHAR(30) NOT NULL,
+    category VARCHAR(100) NOT NULL DEFAULT '',
+    message TEXT NOT NULL DEFAULT '',
+    priority VARCHAR(10) NOT NULL DEFAULT 'medium'
+        CHECK (priority IN ('high', 'medium', 'low'))
+);
+
+CREATE TRIGGER trigger_grading_additional_flag_updated_at
+    BEFORE UPDATE ON grading_additional_flag
+    FOR EACH ROW
+    EXECUTE FUNCTION set_updated_at();
+
+COMMENT ON TABLE grading_additional_flag IS
+    'Additional flags detected during psychology grading (e.g. safety-critical risk items such as suicidal ideation requiring urgent clinician review, extremely severe subscale scores).';
+COMMENT ON COLUMN grading_additional_flag.grade_id IS
+    'Foreign key to the parent grading result.';
+COMMENT ON COLUMN grading_additional_flag.flag_id IS
+    'Identifier of the flag (e.g. FLAG-RISK-001, FLAG-DEP-SEVERE).';
+COMMENT ON COLUMN grading_additional_flag.category IS
+    'Category of the flag (e.g. Risk, Depression, Anxiety, Stress, Functional Impact).';
+COMMENT ON COLUMN grading_additional_flag.message IS
+    'Human-readable description of the flagged issue.';
+COMMENT ON COLUMN grading_additional_flag.priority IS
+    'Priority level: high, medium, or low.';
+
+COMMENT ON COLUMN grading_additional_flag.id IS
+    'Primary key UUID, auto-generated.';
+COMMENT ON COLUMN grading_additional_flag.created_at IS
+    'Timestamp when this row was created.';
+COMMENT ON COLUMN grading_additional_flag.updated_at IS
+    'Timestamp when this row was updated.';
+COMMENT ON COLUMN grading_additional_flag.deleted_at IS
+    'Timestamp when this row was deleted.';
+
+-- ========================================================================
+-- END 92_create_table_psychology_assessment_grade_flag.sql
 -- ========================================================================

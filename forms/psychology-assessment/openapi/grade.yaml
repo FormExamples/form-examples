@@ -1,0 +1,181 @@
+# Generated from sql/. Do not edit by hand.
+# SOURCE: grade
+openapi: 3.1.0
+info:
+  title: Psychology Assessment — Grade
+  version: 1.0.0
+  description: Computed DASS-21 grading result. Each subscale raw score (0-21) is doubled to align with DASS-42 norms, yielding a 0-42 range, and mapped to a severity category. One-to-one child of assessment.
+paths:
+  /grades:
+    get:
+      summary: List Grade records
+      operationId: listGrade
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of Grade records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Grade"
+    post:
+      summary: Create a new Grade
+      operationId: createGrade
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Grade"
+      responses:
+        "201":
+          description: The newly created Grade
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Grade"
+        "400":
+          description: Validation error
+  /grades/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one Grade by id
+      operationId: getGrade
+      responses:
+        "200":
+          description: The requested Grade
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Grade"
+        "404":
+          description: Grade not found
+    patch:
+      summary: Update an existing Grade
+      operationId: updateGrade
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Grade"
+      responses:
+        "200":
+          description: The updated Grade
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Grade"
+        "404":
+          description: Grade not found
+    delete:
+      summary: Soft-delete a Grade
+      operationId: deleteGrade
+      responses:
+        "204":
+          description: Grade deleted
+        "404":
+          description: Grade not found
+components:
+  schemas:
+    Grade:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was updated.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was deleted.
+        assessment_id:
+          type: string
+          format: uuid
+          description: Foreign key to the parent assessment (unique, enforcing 1:1).
+        depression_score:
+          type: integer
+          format: int32
+          description: Depression subscale score, 0-42 (raw 0-21 doubled). NULL if incomplete.
+        depression_severity:
+          type: string
+          enum:
+            - normal
+            - mild
+            - moderate
+            - severe
+            - extremely_severe
+            - ""
+          description: "Depression severity category: normal, mild, moderate, severe, or extremely_severe."
+        anxiety_score:
+          type: integer
+          format: int32
+          description: Anxiety subscale score, 0-42 (raw 0-21 doubled). NULL if incomplete.
+        anxiety_severity:
+          type: string
+          enum:
+            - normal
+            - mild
+            - moderate
+            - severe
+            - extremely_severe
+            - ""
+          description: "Anxiety severity category: normal, mild, moderate, severe, or extremely_severe."
+        stress_score:
+          type: integer
+          format: int32
+          description: Stress subscale score, 0-42 (raw 0-21 doubled). NULL if incomplete.
+        stress_severity:
+          type: string
+          enum:
+            - normal
+            - mild
+            - moderate
+            - severe
+            - extremely_severe
+            - ""
+          description: "Stress severity category: normal, mild, moderate, severe, or extremely_severe."
+        graded_at:
+          type: string
+          format: date-time
+          description: Timestamp when the DASS-21 grading was computed.
+      required:
+        - created_at
+        - updated_at
+        - assessment_id
+        - depression_severity
+        - anxiety_severity
+        - stress_severity
+        - graded_at
+      description: Computed DASS-21 grading result. Each subscale raw score (0-21) is doubled to align with DASS-42 norms, yielding a 0-42 range, and mapped to a severity category. One-to-one child of assessment.

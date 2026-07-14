@@ -1,0 +1,48 @@
+// Generated from sql/. Do not edit by hand.
+// SOURCE: grade
+
+syntax = "proto3";
+
+package form_examples.psychology_assessment;
+
+enum GradeDepressionSeverityEnum {
+  DEPRESSIONSEVERITY_UNSPECIFIED = 0;
+  DEPRESSIONSEVERITY_NORMAL = 1;  // normal
+  DEPRESSIONSEVERITY_MILD = 2;  // mild
+  DEPRESSIONSEVERITY_MODERATE = 3;  // moderate
+  DEPRESSIONSEVERITY_SEVERE = 4;  // severe
+  DEPRESSIONSEVERITY_EXTREMELY_SEVERE = 5;  // extremely_severe
+}
+
+enum GradeAnxietySeverityEnum {
+  ANXIETYSEVERITY_UNSPECIFIED = 0;
+  ANXIETYSEVERITY_NORMAL = 1;  // normal
+  ANXIETYSEVERITY_MILD = 2;  // mild
+  ANXIETYSEVERITY_MODERATE = 3;  // moderate
+  ANXIETYSEVERITY_SEVERE = 4;  // severe
+  ANXIETYSEVERITY_EXTREMELY_SEVERE = 5;  // extremely_severe
+}
+
+enum GradeStressSeverityEnum {
+  STRESSSEVERITY_UNSPECIFIED = 0;
+  STRESSSEVERITY_NORMAL = 1;  // normal
+  STRESSSEVERITY_MILD = 2;  // mild
+  STRESSSEVERITY_MODERATE = 3;  // moderate
+  STRESSSEVERITY_SEVERE = 4;  // severe
+  STRESSSEVERITY_EXTREMELY_SEVERE = 5;  // extremely_severe
+}
+
+message Grade {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string assessment_id = 5;  // UUID — uuid
+  int32 depression_score = 6;  // INTEGER
+  GradeDepressionSeverityEnum depression_severity = 7;  // VARCHAR(20)
+  int32 anxiety_score = 8;  // INTEGER
+  GradeAnxietySeverityEnum anxiety_severity = 9;  // VARCHAR(20)
+  int32 stress_score = 10;  // INTEGER
+  GradeStressSeverityEnum stress_severity = 11;  // VARCHAR(20)
+  string graded_at = 12;  // TIMESTAMPTZ — iso 8601
+}

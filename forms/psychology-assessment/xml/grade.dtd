@@ -1,0 +1,13 @@
+<!ELEMENT grade (id,created_at,updated_at,deleted_at,assessment_id,depression_score,depression_severity,anxiety_score,anxiety_severity,stress_score,stress_severity,graded_at)>
+<!ELEMENT id (#PCDATA)>
+<!ELEMENT created_at (#PCDATA)>
+<!ELEMENT updated_at (#PCDATA)>
+<!ELEMENT deleted_at (#PCDATA)>
+<!ELEMENT assessment_id (#PCDATA)>
+<!ELEMENT depression_score (#PCDATA)>
+<!ELEMENT depression_severity (#PCDATA)>
+<!ELEMENT anxiety_score (#PCDATA)>
+<!ELEMENT anxiety_severity (#PCDATA)>
+<!ELEMENT stress_score (#PCDATA)>
+<!ELEMENT stress_severity (#PCDATA)>
+<!ELEMENT graded_at (#PCDATA)>
