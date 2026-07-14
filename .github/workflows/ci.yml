@@ -50,6 +50,9 @@ jobs:
       - name: Combined OpenAPI spec is current
         run: python3 bin/openapi/generate-openapi-combined.py --check
 
+      - name: Loco setup scripts are current
+        run: python3 bin/back-end-with-loco/generate-back-end-with-loco-setup.py --check
+
       - name: forms.tsv is current
         run: python3 bin/generate-forms-tsv.py --check
 

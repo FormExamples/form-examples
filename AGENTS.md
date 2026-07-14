@@ -51,7 +51,7 @@ schema changes. See `spec.md` §10 for the spec-driven workflow.
 - `bin/fhir-r5/generate-fhir-r5-representations.py` — generate FHIR HL7 R5 JSON per SQL entity
 - `bin/protobuf/generate-protobuf-representations.py` — generate Protocol Buffers `.proto` schemas per SQL entity
 - `bin/openapi/generate-openapi-representations.py` — generate OpenAPI 3.1 `.yaml` specifications per SQL entity
-- `bin/back-end-with-loco/generate-back-end-with-loco-setup.py` — emit each form's `cargo loco generate scaffold --api` setup script
+- `bin/back-end-with-loco/generate-back-end-with-loco-setup.py [--check] [<slug>…]` — emit each form's `cargo loco generate scaffold --api` setup script; `--check` is the CI drift detector
 - `bin/back-end-with-loco/generate-rust-docs.py <crate>…` — insert rustdoc (crate `//!`, module headers, `///` on every `pub` item) so each Loco crate compiles under `#![deny(missing_docs)]`; idempotent
 - `bin/generate-changelog-and-examples.py [--check] [<slug>…]` — scaffold per-form `CHANGELOG.md` and `examples/` (filled-form JSON fixture + FHIR R5 Bundle); `--check` is the CI drift detector
 
@@ -174,5 +174,6 @@ bin/lily-svelte-sync --check          # Lily Svelte spec-snapshot drift detector
 bin/generate-llms-txt.py --check      # Per-form llms.txt drift detector
 bin/generate-spec.py --check          # Per-form spec/ presence check (specs are hand-maintained)
 bin/generate-changelog-and-examples.py --check # CHANGELOG + examples/ drift detector
+bin/back-end-with-loco/generate-back-end-with-loco-setup.py --check # Loco setup-script drift detector
 bin/loco-config-refactor --check --all # Loco background-queue + observability drift detector
 ```

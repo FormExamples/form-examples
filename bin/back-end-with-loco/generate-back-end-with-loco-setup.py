@@ -19,6 +19,7 @@ Loco field-type syntax:
   therefore skipped here.
 """
 
+import argparse
 import os
 import re
 import sys
@@ -390,16 +391,22 @@ def write_file(path: Path, content: str, executable: bool = False):
         mode = path.stat().st_mode
         path.chmod(mode | 0o111)
 
-def process_form(form_dir: Path) -> int:
+def process_form(form_dir: Path, check: bool = False):
+    """Generate (or, when check=True, verify) a form's back-end-with-loco-setup.
+
+    Returns (table_count, drifted). In check mode drifted is True when the
+    on-disk script differs from freshly generated output; otherwise it is False
+    and the script is (re)written.
+    """
     sql_dir = form_dir / "sql"
     if not sql_dir.is_dir():
-        return 0
+        return 0, False
 
     # Only process numbered migration files; skip the combined schema.sql
     # produced by bin/generate-sql-combined.py.
     sql_files = sorted(f for f in sql_dir.glob("*.sql") if f.name[:1].isdigit())
     if not sql_files:
-        return 0
+        return 0, False
 
     all_tables = []
     for sf in sql_files:
@@ -422,28 +429,57 @@ def process_form(form_dir: Path) -> int:
     all_tables = deduped
 
     form_slug = form_dir.name
+    content = render_generate_sh(form_slug, all_tables)
+    out = form_dir / "back-end-with-loco-setup"
 
-    write_file(
-        form_dir / "back-end-with-loco-setup",
-        render_generate_sh(form_slug, all_tables),
-        executable=True,
-    )
-    return len(all_tables)
+    if check:
+        have = out.read_text(encoding="utf-8") if out.exists() else ""
+        return len(all_tables), have != content
+
+    write_file(out, content, executable=True)
+    return len(all_tables), False
 
 def main():
-    total_forms = 0
-    total_tables = 0
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("slugs", nargs="*", help="only these form slugs (default: all)")
+    parser.add_argument("--check", action="store_true",
+                        help="exit non-zero if any back-end-with-loco-setup is stale")
+    args = parser.parse_args()
 
     form_dirs = sorted(d for d in FORMS_DIR.iterdir() if d.is_dir())
+    if args.slugs:
+        wanted = set(args.slugs)
+        form_dirs = [d for d in form_dirs if d.name in wanted]
+
+    total_forms = 0
+    total_tables = 0
+    drift = []
     for form_dir in form_dirs:
         if not (form_dir / "sql").is_dir():
             continue
-        n = process_form(form_dir)
+        n, drifted = process_form(form_dir, check=args.check)
         total_forms += 1
         total_tables += n
-        print(f"  {form_dir.name}: {n} tables")
+        if drifted:
+            drift.append(form_dir.name)
+        elif not args.check:
+            print(f"  {form_dir.name}: {n} tables")
+
+    if args.check:
+        if drift:
+            print(f"back-end-with-loco-setup stale for {len(drift)} form(s) "
+                  f"(run: bin/back-end-with-loco/generate-back-end-with-loco-setup.py):",
+                  file=sys.stderr)
+            for s in drift[:20]:
+                print(f"  {s}", file=sys.stderr)
+            if len(drift) > 20:
+                print(f"  … and {len(drift) - 20} more", file=sys.stderr)
+            return 1
+        print(f"back-end-with-loco-setup: {total_forms} forms up to date")
+        return 0
 
     print(f"\nTotal: {total_forms} forms, {total_tables} tables scaffolded")
+    return 0
 
 if __name__ == "__main__":
-    main()
+    raise SystemExit(main())
