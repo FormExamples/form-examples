@@ -312,30 +312,6 @@
       }
     },
     {
-      "fullUrl": "urn:uuid:aa0e8400-e29b-41d4-a716-446655440005",
-      "resource": {
-        "resourceType": "ClinicalImpression",
-        "id": "aa0e8400-e29b-41d4-a716-446655440005",
-        "meta": {
-          "profile": [
-            "http://hl7.org/fhir/StructureDefinition/ClinicalImpression"
-          ],
-          "lastUpdated": "2026-04-09T10:00:00+00:00"
-        },
-        "status": "completed",
-        "subject": {
-          "reference": "Patient/cc0e8400-e29b-41d4-a716-446655440007"
-        },
-        "encounter": {
-          "reference": "Encounter/ee0e8400-e29b-41d4-a716-446655440009"
-        },
-        "effectiveDateTime": "2026-04-09T10:00:00+00:00",
-        "date": "2026-04-09T10:00:00+00:00",
-        "description": "Prescription Request grading result",
-        "summary": "Deleted At: 2026-04-09T10:00:00+00:00; Priority Level: routine; Rule Count: 2"
-      }
-    },
-    {
       "fullUrl": "urn:uuid:550e8400-e29b-41d4-a716-446655440000",
       "resource": {
         "resourceType": "Patient",

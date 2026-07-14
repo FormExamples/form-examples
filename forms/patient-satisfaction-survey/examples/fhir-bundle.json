@@ -355,30 +355,6 @@
       }
     },
     {
-      "fullUrl": "urn:uuid:880e8400-e29b-41d4-a716-446655440003",
-      "resource": {
-        "resourceType": "ClinicalImpression",
-        "id": "880e8400-e29b-41d4-a716-446655440003",
-        "meta": {
-          "profile": [
-            "http://hl7.org/fhir/StructureDefinition/ClinicalImpression"
-          ],
-          "lastUpdated": "2026-04-09T10:00:00+00:00"
-        },
-        "status": "completed",
-        "subject": {
-          "reference": "Patient/660e8400-e29b-41d4-a716-446655440001"
-        },
-        "encounter": {
-          "reference": "Encounter/550e8400-e29b-41d4-a716-446655440000"
-        },
-        "effectiveDateTime": "2026-04-09T10:00:00+00:00",
-        "date": "2026-04-09T10:00:00+00:00",
-        "description": "Patient Satisfaction Survey grading result",
-        "summary": "Deleted At: 2026-04-09T10:00:00+00:00; Normalized Score: 5.0; Satisfaction Category: excellent; Domain Access Score: 5.0; Domain Communication Score: 5.0; Domain Clinical Care Score: 5.0; Domain Staff Score: 5.0; Domain Environment Score: 5.0; Domain Discharge Score: 5.0; Domain Overall Score: 5.0"
-      }
-    },
-    {
       "fullUrl": "urn:uuid:550e8400-e29b-41d4-a716-446655440000",
       "resource": {
         "resourceType": "Patient",

@@ -28,9 +28,6 @@
       }
     ]
   },
-  "subject": {
-    "reference": "Patient/661e8400-e29b-41d4-a716-446655440010"
-  },
   "encounter": {
     "reference": "Encounter/550e8400-e29b-41d4-a716-446655440000"
   },

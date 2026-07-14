@@ -51,9 +51,6 @@
             "text": "Architecture Decision Record"
           }
         ],
-        "subject": {
-          "reference": "Patient/aa0e8400-e29b-41d4-a716-446655440005"
-        },
         "actualPeriod": {
           "start": "2026-04-09T10:00:00+00:00"
         }
@@ -90,9 +87,6 @@
               "display": "Architecture Decision Record Note"
             }
           ]
-        },
-        "subject": {
-          "reference": "Patient/aa0e8400-e29b-41d4-a716-446655440005"
         },
         "encounter": {
           "reference": "urn:uuid:770e8400-e29b-41d4-a716-446655440002"
@@ -169,9 +163,6 @@
               "display": "Architecture Decision Record Position"
             }
           ]
-        },
-        "subject": {
-          "reference": "Patient/aa0e8400-e29b-41d4-a716-446655440005"
         },
         "encounter": {
           "reference": "urn:uuid:770e8400-e29b-41d4-a716-446655440002"
@@ -296,9 +287,6 @@
               "display": "Author"
             }
           ]
-        },
-        "subject": {
-          "reference": "Patient/aa0e8400-e29b-41d4-a716-446655440005"
         },
         "encounter": {
           "reference": "urn:uuid:770e8400-e29b-41d4-a716-446655440002"
@@ -431,9 +419,6 @@
               "display": "Organization"
             }
           ]
-        },
-        "subject": {
-          "reference": "Patient/aa0e8400-e29b-41d4-a716-446655440005"
         },
         "encounter": {
           "reference": "urn:uuid:770e8400-e29b-41d4-a716-446655440002"

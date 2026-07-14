@@ -51,9 +51,6 @@
             "text": "Arc42"
           }
         ],
-        "subject": {
-          "reference": "Patient/991e8400-e29b-41d4-a716-446655440013"
-        },
         "actualPeriod": {
           "start": "2026-04-09T10:00:00+00:00"
         }
@@ -62,25 +59,345 @@
     {
       "fullUrl": "urn:uuid:661e8400-e29b-41d4-a716-446655440010",
       "resource": {
-        "resourceType": "ClinicalImpression",
+        "resourceType": "Observation",
         "id": "661e8400-e29b-41d4-a716-446655440010",
         "meta": {
           "profile": [
-            "http://hl7.org/fhir/StructureDefinition/ClinicalImpression"
+            "http://hl7.org/fhir/StructureDefinition/Observation"
           ],
           "lastUpdated": "2026-04-09T10:00:00+00:00"
         },
-        "status": "completed",
-        "subject": {
-          "reference": "Patient/991e8400-e29b-41d4-a716-446655440013"
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "survey",
+                "display": "Survey"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "urn:form-examples:arc42",
+              "code": "arc42_documentation_grade",
+              "display": "Arc42 Documentation Grade"
+            }
+          ]
         },
         "encounter": {
           "reference": "urn:uuid:660e8400-e29b-41d4-a716-446655440001"
         },
         "effectiveDateTime": "2026-04-09T10:00:00+00:00",
-        "date": "2026-04-09T10:00:00+00:00",
-        "description": "Arc42 grading result",
-        "summary": "Deleted At: 2026-04-09T10:00:00+00:00; Computed Maturity: draft; Final Maturity: draft; Override Reason: Example text.; Completeness Section 1: empty; Completeness Section 2: empty; Completeness Section 3: empty; Completeness Section 4: empty; Completeness Section 5: empty; Completeness Section 6: empty; Completeness Section 7: empty; Completeness Section 8: empty; Completeness Section 9: empty; Completeness Section 10: empty; Completeness Section 11: empty; Completeness Section 12: empty"
+        "component": [
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:arc42",
+                  "code": "deleted_at",
+                  "display": "Deleted At"
+                }
+              ]
+            },
+            "valueDateTime": "2026-04-09T10:00:00+00:00"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:arc42",
+                  "code": "computed_maturity",
+                  "display": "Computed Maturity"
+                }
+              ]
+            },
+            "valueCodeableConcept": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:arc42:computed_maturity",
+                  "code": "draft",
+                  "display": "Draft"
+                }
+              ]
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:arc42",
+                  "code": "final_maturity",
+                  "display": "Final Maturity"
+                }
+              ]
+            },
+            "valueCodeableConcept": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:arc42:final_maturity",
+                  "code": "draft",
+                  "display": "Draft"
+                }
+              ]
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:arc42",
+                  "code": "override_reason",
+                  "display": "Override Reason"
+                }
+              ]
+            },
+            "valueString": "Example text."
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:arc42",
+                  "code": "completeness_section_1",
+                  "display": "Completeness Section 1"
+                }
+              ]
+            },
+            "valueCodeableConcept": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:arc42:completeness_section_1",
+                  "code": "empty",
+                  "display": "Empty"
+                }
+              ]
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:arc42",
+                  "code": "completeness_section_2",
+                  "display": "Completeness Section 2"
+                }
+              ]
+            },
+            "valueCodeableConcept": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:arc42:completeness_section_2",
+                  "code": "empty",
+                  "display": "Empty"
+                }
+              ]
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:arc42",
+                  "code": "completeness_section_3",
+                  "display": "Completeness Section 3"
+                }
+              ]
+            },
+            "valueCodeableConcept": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:arc42:completeness_section_3",
+                  "code": "empty",
+                  "display": "Empty"
+                }
+              ]
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:arc42",
+                  "code": "completeness_section_4",
+                  "display": "Completeness Section 4"
+                }
+              ]
+            },
+            "valueCodeableConcept": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:arc42:completeness_section_4",
+                  "code": "empty",
+                  "display": "Empty"
+                }
+              ]
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:arc42",
+                  "code": "completeness_section_5",
+                  "display": "Completeness Section 5"
+                }
+              ]
+            },
+            "valueCodeableConcept": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:arc42:completeness_section_5",
+                  "code": "empty",
+                  "display": "Empty"
+                }
+              ]
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:arc42",
+                  "code": "completeness_section_6",
+                  "display": "Completeness Section 6"
+                }
+              ]
+            },
+            "valueCodeableConcept": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:arc42:completeness_section_6",
+                  "code": "empty",
+                  "display": "Empty"
+                }
+              ]
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:arc42",
+                  "code": "completeness_section_7",
+                  "display": "Completeness Section 7"
+                }
+              ]
+            },
+            "valueCodeableConcept": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:arc42:completeness_section_7",
+                  "code": "empty",
+                  "display": "Empty"
+                }
+              ]
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:arc42",
+                  "code": "completeness_section_8",
+                  "display": "Completeness Section 8"
+                }
+              ]
+            },
+            "valueCodeableConcept": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:arc42:completeness_section_8",
+                  "code": "empty",
+                  "display": "Empty"
+                }
+              ]
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:arc42",
+                  "code": "completeness_section_9",
+                  "display": "Completeness Section 9"
+                }
+              ]
+            },
+            "valueCodeableConcept": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:arc42:completeness_section_9",
+                  "code": "empty",
+                  "display": "Empty"
+                }
+              ]
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:arc42",
+                  "code": "completeness_section_10",
+                  "display": "Completeness Section 10"
+                }
+              ]
+            },
+            "valueCodeableConcept": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:arc42:completeness_section_10",
+                  "code": "empty",
+                  "display": "Empty"
+                }
+              ]
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:arc42",
+                  "code": "completeness_section_11",
+                  "display": "Completeness Section 11"
+                }
+              ]
+            },
+            "valueCodeableConcept": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:arc42:completeness_section_11",
+                  "code": "empty",
+                  "display": "Empty"
+                }
+              ]
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:arc42",
+                  "code": "completeness_section_12",
+                  "display": "Completeness Section 12"
+                }
+              ]
+            },
+            "valueCodeableConcept": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:arc42:completeness_section_12",
+                  "code": "empty",
+                  "display": "Empty"
+                }
+              ]
+            }
+          }
+        ]
       }
     },
     {
@@ -116,9 +433,6 @@
           ]
         },
         "severity": "high",
-        "subject": {
-          "reference": "Patient/991e8400-e29b-41d4-a716-446655440013"
-        },
         "identifiedDateTime": "2026-04-09T10:00:00+00:00",
         "detail": "Clinical flag detected."
       }
@@ -156,9 +470,6 @@
           ]
         },
         "severity": "moderate",
-        "subject": {
-          "reference": "Patient/991e8400-e29b-41d4-a716-446655440013"
-        },
         "identifiedDateTime": "2026-04-09T10:00:00+00:00",
         "detail": "Example text."
       }
@@ -194,9 +505,6 @@
               "display": "Architectural Decision"
             }
           ]
-        },
-        "subject": {
-          "reference": "Patient/991e8400-e29b-41d4-a716-446655440013"
         },
         "encounter": {
           "reference": "urn:uuid:660e8400-e29b-41d4-a716-446655440001"
@@ -330,9 +638,6 @@
             }
           ]
         },
-        "subject": {
-          "reference": "Patient/991e8400-e29b-41d4-a716-446655440013"
-        },
         "encounter": {
           "reference": "urn:uuid:660e8400-e29b-41d4-a716-446655440001"
         },
@@ -453,9 +758,6 @@
             }
           ]
         },
-        "subject": {
-          "reference": "Patient/991e8400-e29b-41d4-a716-446655440013"
-        },
         "encounter": {
           "reference": "urn:uuid:660e8400-e29b-41d4-a716-446655440001"
         },
@@ -556,9 +858,6 @@
             }
           ]
         },
-        "subject": {
-          "reference": "Patient/991e8400-e29b-41d4-a716-446655440013"
-        },
         "encounter": {
           "reference": "urn:uuid:660e8400-e29b-41d4-a716-446655440001"
         },
@@ -646,9 +945,6 @@
               "display": "Constraint Item"
             }
           ]
-        },
-        "subject": {
-          "reference": "Patient/991e8400-e29b-41d4-a716-446655440013"
         },
         "encounter": {
           "reference": "urn:uuid:660e8400-e29b-41d4-a716-446655440001"
@@ -757,9 +1053,6 @@
               "display": "Context Partner"
             }
           ]
-        },
-        "subject": {
-          "reference": "Patient/991e8400-e29b-41d4-a716-446655440013"
         },
         "encounter": {
           "reference": "urn:uuid:660e8400-e29b-41d4-a716-446655440001"
@@ -901,9 +1194,6 @@
             }
           ]
         },
-        "subject": {
-          "reference": "Patient/991e8400-e29b-41d4-a716-446655440013"
-        },
         "encounter": {
           "reference": "urn:uuid:660e8400-e29b-41d4-a716-446655440001"
         },
@@ -991,9 +1281,6 @@
               "display": "Deployment Node"
             }
           ]
-        },
-        "subject": {
-          "reference": "Patient/991e8400-e29b-41d4-a716-446655440013"
         },
         "encounter": {
           "reference": "urn:uuid:660e8400-e29b-41d4-a716-446655440001"
@@ -1103,9 +1390,6 @@
             }
           ]
         },
-        "subject": {
-          "reference": "Patient/991e8400-e29b-41d4-a716-446655440013"
-        },
         "encounter": {
           "reference": "urn:uuid:660e8400-e29b-41d4-a716-446655440001"
         },
@@ -1193,9 +1477,6 @@
               "display": "Quality Goal"
             }
           ]
-        },
-        "subject": {
-          "reference": "Patient/991e8400-e29b-41d4-a716-446655440013"
         },
         "encounter": {
           "reference": "urn:uuid:660e8400-e29b-41d4-a716-446655440001"
@@ -1304,9 +1585,6 @@
               "display": "Quality Scenario"
             }
           ]
-        },
-        "subject": {
-          "reference": "Patient/991e8400-e29b-41d4-a716-446655440013"
         },
         "encounter": {
           "reference": "urn:uuid:660e8400-e29b-41d4-a716-446655440001"
@@ -1431,9 +1709,6 @@
               "display": "Risk Item"
             }
           ]
-        },
-        "subject": {
-          "reference": "Patient/991e8400-e29b-41d4-a716-446655440013"
         },
         "encounter": {
           "reference": "urn:uuid:660e8400-e29b-41d4-a716-446655440001"
@@ -1583,9 +1858,6 @@
             }
           ]
         },
-        "subject": {
-          "reference": "Patient/991e8400-e29b-41d4-a716-446655440013"
-        },
         "encounter": {
           "reference": "urn:uuid:660e8400-e29b-41d4-a716-446655440001"
         },
@@ -1686,9 +1958,6 @@
             }
           ]
         },
-        "subject": {
-          "reference": "Patient/991e8400-e29b-41d4-a716-446655440013"
-        },
         "encounter": {
           "reference": "urn:uuid:660e8400-e29b-41d4-a716-446655440001"
         },
@@ -1788,9 +2057,6 @@
               "display": "Technology Decision"
             }
           ]
-        },
-        "subject": {
-          "reference": "Patient/991e8400-e29b-41d4-a716-446655440013"
         },
         "encounter": {
           "reference": "urn:uuid:660e8400-e29b-41d4-a716-446655440001"

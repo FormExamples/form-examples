@@ -60,49 +60,6 @@
       }
     },
     {
-      "fullUrl": "urn:uuid:770e8400-e29b-41d4-a716-446655440002",
-      "resource": {
-        "resourceType": "Encounter",
-        "id": "770e8400-e29b-41d4-a716-446655440002",
-        "meta": {
-          "profile": [
-            "http://hl7.org/fhir/StructureDefinition/Encounter"
-          ],
-          "lastUpdated": "2026-04-09T10:00:00+00:00"
-        },
-        "status": "planned",
-        "class": [
-          {
-            "coding": [
-              {
-                "system": "http://terminology.hl7.org/CodeSystem/v3-ActCode",
-                "code": "AMB",
-                "display": "ambulatory"
-              }
-            ]
-          }
-        ],
-        "type": [
-          {
-            "coding": [
-              {
-                "system": "http://snomed.info/sct",
-                "code": "185349003",
-                "display": "Encounter for check up"
-              }
-            ],
-            "text": "Bone Marrow Donation Assessment"
-          }
-        ],
-        "subject": {
-          "reference": "urn:uuid:550e8400-e29b-41d4-a716-446655440000"
-        },
-        "actualPeriod": {
-          "start": "2026-04-09T10:00:00+00:00"
-        }
-      }
-    },
-    {
       "fullUrl": "urn:uuid:660e8400-e29b-41d4-a716-446655440001",
       "resource": {
         "resourceType": "Observation",
@@ -395,30 +352,6 @@
         },
         "identifiedDateTime": "2026-04-09T10:00:00+00:00",
         "detail": "Example text."
-      }
-    },
-    {
-      "fullUrl": "urn:uuid:880e8400-e29b-41d4-a716-446655440003",
-      "resource": {
-        "resourceType": "ClinicalImpression",
-        "id": "880e8400-e29b-41d4-a716-446655440003",
-        "meta": {
-          "profile": [
-            "http://hl7.org/fhir/StructureDefinition/ClinicalImpression"
-          ],
-          "lastUpdated": "2026-04-09T10:00:00+00:00"
-        },
-        "status": "completed",
-        "subject": {
-          "reference": "Patient/660e8400-e29b-41d4-a716-446655440001"
-        },
-        "encounter": {
-          "reference": "Encounter/bb0e8400-e29b-41d4-a716-446655440006"
-        },
-        "effectiveDateTime": "2026-04-09T10:00:00+00:00",
-        "date": "2026-04-09T10:00:00+00:00",
-        "description": "Bone Marrow Donation Assessment grading result",
-        "summary": "Deleted At: 2026-04-09T10:00:00+00:00; Eligibility: suitable; Overall Risk Level: low; Hla Match Level: 10-of-10; Collection Method: pbsc"
       }
     },
     {

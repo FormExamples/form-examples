@@ -48,9 +48,6 @@
             }
           ]
         },
-        "subject": {
-          "reference": "Patient/881e8400-e29b-41d4-a716-446655440012"
-        },
         "encounter": {
           "reference": "urn:uuid:aa0e8400-e29b-41d4-a716-446655440005"
         },
@@ -270,9 +267,6 @@
               "display": "Certificate Provider"
             }
           ]
-        },
-        "subject": {
-          "reference": "Patient/881e8400-e29b-41d4-a716-446655440012"
         },
         "encounter": {
           "reference": "urn:uuid:aa0e8400-e29b-41d4-a716-446655440005"
@@ -568,9 +562,6 @@
             }
           ]
         },
-        "subject": {
-          "reference": "Patient/881e8400-e29b-41d4-a716-446655440012"
-        },
         "encounter": {
           "reference": "urn:uuid:aa0e8400-e29b-41d4-a716-446655440005"
         },
@@ -830,9 +821,6 @@
             "text": "United Kingdom Lasting Power Of Attorney For Health And Care Decisions"
           }
         ],
-        "subject": {
-          "reference": "Patient/881e8400-e29b-41d4-a716-446655440012"
-        },
         "actualPeriod": {
           "start": "2026-04-09T10:00:00+00:00"
         }
@@ -869,9 +857,6 @@
               "display": "Lpa Attorney"
             }
           ]
-        },
-        "subject": {
-          "reference": "Patient/881e8400-e29b-41d4-a716-446655440012"
         },
         "encounter": {
           "reference": "urn:uuid:aa0e8400-e29b-41d4-a716-446655440005"
@@ -936,9 +921,6 @@
               "display": "Lpa Decision Rule"
             }
           ]
-        },
-        "subject": {
-          "reference": "Patient/881e8400-e29b-41d4-a716-446655440012"
         },
         "encounter": {
           "reference": "urn:uuid:aa0e8400-e29b-41d4-a716-446655440005"
@@ -1023,9 +1005,6 @@
               "display": "Lpa Instruction"
             }
           ]
-        },
-        "subject": {
-          "reference": "Patient/881e8400-e29b-41d4-a716-446655440012"
         },
         "encounter": {
           "reference": "urn:uuid:aa0e8400-e29b-41d4-a716-446655440005"
@@ -1163,9 +1142,6 @@
             }
           ]
         },
-        "subject": {
-          "reference": "Patient/881e8400-e29b-41d4-a716-446655440012"
-        },
         "encounter": {
           "reference": "urn:uuid:aa0e8400-e29b-41d4-a716-446655440005"
         },
@@ -1270,9 +1246,6 @@
             }
           ]
         },
-        "subject": {
-          "reference": "Patient/881e8400-e29b-41d4-a716-446655440012"
-        },
         "encounter": {
           "reference": "urn:uuid:aa0e8400-e29b-41d4-a716-446655440005"
         },
@@ -1336,9 +1309,6 @@
               "display": "Lpa Preference"
             }
           ]
-        },
-        "subject": {
-          "reference": "Patient/881e8400-e29b-41d4-a716-446655440012"
         },
         "encounter": {
           "reference": "urn:uuid:aa0e8400-e29b-41d4-a716-446655440005"
@@ -1435,9 +1405,6 @@
               "display": "Lpa Registration Application"
             }
           ]
-        },
-        "subject": {
-          "reference": "Patient/881e8400-e29b-41d4-a716-446655440012"
         },
         "encounter": {
           "reference": "urn:uuid:aa0e8400-e29b-41d4-a716-446655440005"
@@ -1609,9 +1576,6 @@
             }
           ]
         },
-        "subject": {
-          "reference": "Patient/881e8400-e29b-41d4-a716-446655440012"
-        },
         "encounter": {
           "reference": "urn:uuid:aa0e8400-e29b-41d4-a716-446655440005"
         },
@@ -1687,9 +1651,6 @@
               "display": "Lpa Signature"
             }
           ]
-        },
-        "subject": {
-          "reference": "Patient/881e8400-e29b-41d4-a716-446655440012"
         },
         "encounter": {
           "reference": "urn:uuid:aa0e8400-e29b-41d4-a716-446655440005"
@@ -1863,9 +1824,6 @@
             }
           ]
         },
-        "subject": {
-          "reference": "Patient/881e8400-e29b-41d4-a716-446655440012"
-        },
         "encounter": {
           "reference": "urn:uuid:aa0e8400-e29b-41d4-a716-446655440005"
         },
@@ -1998,9 +1956,6 @@
             }
           ]
         },
-        "subject": {
-          "reference": "Patient/881e8400-e29b-41d4-a716-446655440012"
-        },
         "encounter": {
           "reference": "urn:uuid:aa0e8400-e29b-41d4-a716-446655440005"
         },
@@ -2116,9 +2071,6 @@
               "display": "Lpa Validity Fired Rule"
             }
           ]
-        },
-        "subject": {
-          "reference": "Patient/881e8400-e29b-41d4-a716-446655440012"
         },
         "encounter": {
           "reference": "urn:uuid:aa0e8400-e29b-41d4-a716-446655440005"
@@ -2247,9 +2199,6 @@
               "display": "Person To Notify"
             }
           ]
-        },
-        "subject": {
-          "reference": "Patient/881e8400-e29b-41d4-a716-446655440012"
         },
         "encounter": {
           "reference": "urn:uuid:aa0e8400-e29b-41d4-a716-446655440005"
@@ -2418,9 +2367,6 @@
               "display": "Replacement Attorney"
             }
           ]
-        },
-        "subject": {
-          "reference": "Patient/881e8400-e29b-41d4-a716-446655440012"
         },
         "encounter": {
           "reference": "urn:uuid:aa0e8400-e29b-41d4-a716-446655440005"

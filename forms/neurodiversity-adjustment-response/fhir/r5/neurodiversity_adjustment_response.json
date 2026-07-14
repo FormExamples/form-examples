@@ -31,9 +31,6 @@
       "text": "Neurodiversity Adjustment Response"
     }
   ],
-  "subject": {
-    "reference": "Patient/bb0e8400-e29b-41d4-a716-446655440006"
-  },
   "actualPeriod": {
     "start": "2026-04-09T10:00:00+00:00"
   }

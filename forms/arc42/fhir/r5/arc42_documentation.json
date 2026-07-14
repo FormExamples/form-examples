@@ -31,9 +31,6 @@
       "text": "Arc42"
     }
   ],
-  "subject": {
-    "reference": "Patient/991e8400-e29b-41d4-a716-446655440013"
-  },
   "actualPeriod": {
     "start": "2026-04-09T10:00:00+00:00"
   }

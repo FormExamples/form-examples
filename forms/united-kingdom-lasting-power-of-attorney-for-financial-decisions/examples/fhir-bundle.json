@@ -48,9 +48,6 @@
             }
           ]
         },
-        "subject": {
-          "reference": "Patient/661e8400-e29b-41d4-a716-446655440010"
-        },
         "encounter": {
           "reference": "urn:uuid:550e8400-e29b-41d4-a716-446655440000"
         },
@@ -162,9 +159,6 @@
               "display": "Lasting Power Of Attorney"
             }
           ]
-        },
-        "subject": {
-          "reference": "Patient/661e8400-e29b-41d4-a716-446655440010"
         },
         "encounter": {
           "reference": "urn:uuid:550e8400-e29b-41d4-a716-446655440000"
@@ -350,9 +344,6 @@
             }
           ]
         },
-        "subject": {
-          "reference": "Patient/661e8400-e29b-41d4-a716-446655440010"
-        },
         "encounter": {
           "reference": "urn:uuid:550e8400-e29b-41d4-a716-446655440000"
         },
@@ -416,9 +407,6 @@
               "display": "Lpa Certificate Provider"
             }
           ]
-        },
-        "subject": {
-          "reference": "Patient/661e8400-e29b-41d4-a716-446655440010"
         },
         "encounter": {
           "reference": "urn:uuid:550e8400-e29b-41d4-a716-446655440000"
@@ -540,9 +528,6 @@
             }
           ]
         },
-        "subject": {
-          "reference": "Patient/661e8400-e29b-41d4-a716-446655440010"
-        },
         "encounter": {
           "reference": "urn:uuid:550e8400-e29b-41d4-a716-446655440000"
         },
@@ -651,9 +636,6 @@
             }
           ]
         },
-        "subject": {
-          "reference": "Patient/661e8400-e29b-41d4-a716-446655440010"
-        },
         "encounter": {
           "reference": "urn:uuid:550e8400-e29b-41d4-a716-446655440000"
         },
@@ -717,9 +699,6 @@
               "display": "Lpa Preferences And Instructions"
             }
           ]
-        },
-        "subject": {
-          "reference": "Patient/661e8400-e29b-41d4-a716-446655440010"
         },
         "encounter": {
           "reference": "urn:uuid:550e8400-e29b-41d4-a716-446655440000"
@@ -820,9 +799,6 @@
               "display": "Lpa Registration Application"
             }
           ]
-        },
-        "subject": {
-          "reference": "Patient/661e8400-e29b-41d4-a716-446655440010"
         },
         "encounter": {
           "reference": "urn:uuid:550e8400-e29b-41d4-a716-446655440000"
@@ -1013,9 +989,6 @@
               "display": "Lpa Registration Recipient"
             }
           ]
-        },
-        "subject": {
-          "reference": "Patient/661e8400-e29b-41d4-a716-446655440010"
         },
         "encounter": {
           "reference": "urn:uuid:550e8400-e29b-41d4-a716-446655440000"
@@ -1245,9 +1218,6 @@
             }
           ]
         },
-        "subject": {
-          "reference": "Patient/661e8400-e29b-41d4-a716-446655440010"
-        },
         "encounter": {
           "reference": "urn:uuid:550e8400-e29b-41d4-a716-446655440000"
         },
@@ -1323,9 +1293,6 @@
               "display": "Lpa Signature"
             }
           ]
-        },
-        "subject": {
-          "reference": "Patient/661e8400-e29b-41d4-a716-446655440010"
         },
         "encounter": {
           "reference": "urn:uuid:550e8400-e29b-41d4-a716-446655440000"
@@ -1459,9 +1426,6 @@
             }
           ]
         },
-        "subject": {
-          "reference": "Patient/661e8400-e29b-41d4-a716-446655440010"
-        },
         "encounter": {
           "reference": "urn:uuid:550e8400-e29b-41d4-a716-446655440000"
         },
@@ -1582,9 +1546,6 @@
             }
           ]
         },
-        "subject": {
-          "reference": "Patient/661e8400-e29b-41d4-a716-446655440010"
-        },
         "encounter": {
           "reference": "urn:uuid:550e8400-e29b-41d4-a716-446655440000"
         },
@@ -1688,9 +1649,6 @@
               "display": "Lpa Validation Rule"
             }
           ]
-        },
-        "subject": {
-          "reference": "Patient/661e8400-e29b-41d4-a716-446655440010"
         },
         "encounter": {
           "reference": "urn:uuid:550e8400-e29b-41d4-a716-446655440000"
@@ -1812,9 +1770,6 @@
             }
           ]
         },
-        "subject": {
-          "reference": "Patient/661e8400-e29b-41d4-a716-446655440010"
-        },
         "encounter": {
           "reference": "urn:uuid:550e8400-e29b-41d4-a716-446655440000"
         },
@@ -1894,9 +1849,6 @@
             "text": "United Kingdom Lasting Power Of Attorney For Financial Decisions"
           }
         ],
-        "subject": {
-          "reference": "Patient/661e8400-e29b-41d4-a716-446655440010"
-        },
         "actualPeriod": {
           "start": "2026-04-09T10:00:00+00:00"
         }

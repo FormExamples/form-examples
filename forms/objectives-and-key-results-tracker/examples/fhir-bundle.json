@@ -48,9 +48,6 @@
             }
           ]
         },
-        "subject": {
-          "reference": "Patient/dd0e8400-e29b-41d4-a716-446655440008"
-        },
         "encounter": {
           "reference": "urn:uuid:550e8400-e29b-41d4-a716-446655440000"
         },
@@ -146,25 +143,261 @@
     {
       "fullUrl": "urn:uuid:aa0e8400-e29b-41d4-a716-446655440005",
       "resource": {
-        "resourceType": "ClinicalImpression",
+        "resourceType": "Observation",
         "id": "aa0e8400-e29b-41d4-a716-446655440005",
         "meta": {
           "profile": [
-            "http://hl7.org/fhir/StructureDefinition/ClinicalImpression"
+            "http://hl7.org/fhir/StructureDefinition/Observation"
           ],
           "lastUpdated": "2026-04-09T10:00:00+00:00"
         },
-        "status": "completed",
-        "subject": {
-          "reference": "Patient/dd0e8400-e29b-41d4-a716-446655440008"
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "survey",
+                "display": "Survey"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "urn:form-examples:objectives-and-key-results-tracker",
+              "code": "okr_grade",
+              "display": "Okr Grade"
+            }
+          ]
         },
         "encounter": {
           "reference": "urn:uuid:550e8400-e29b-41d4-a716-446655440000"
         },
         "effectiveDateTime": "2026-04-09T10:00:00+00:00",
-        "date": "2026-04-09T10:00:00+00:00",
-        "description": "Objectives And Key Results Tracker grading result",
-        "summary": "Deleted At: 2026-04-09T10:00:00+00:00; Score By Progress Percent: 5.0; Score By Confidence Decile: 5; Score By Stretch Tier: 5; Score By Alignment Grade: 5; Score By Impact Tier: 5; Score By Smart Quality: 5; Score By Pace Deviation Percent: 5.0; Computed Composite Rag: green; Final Composite Rag: green; Override Reason: Example text.; Recommendation: continue; Triage Notes: Example text.; Signed By: ; Signed At: 2026-04-09T10:00:00+00:00"
+        "component": [
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:objectives-and-key-results-tracker",
+                  "code": "deleted_at",
+                  "display": "Deleted At"
+                }
+              ]
+            },
+            "valueDateTime": "2026-04-09T10:00:00+00:00"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:objectives-and-key-results-tracker",
+                  "code": "score_by_progress_percent",
+                  "display": "Score By Progress Percent"
+                }
+              ]
+            },
+            "valueQuantity": {
+              "value": 5.0
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:objectives-and-key-results-tracker",
+                  "code": "score_by_confidence_decile",
+                  "display": "Score By Confidence Decile"
+                }
+              ]
+            },
+            "valueInteger": 5
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:objectives-and-key-results-tracker",
+                  "code": "score_by_stretch_tier",
+                  "display": "Score By Stretch Tier"
+                }
+              ]
+            },
+            "valueInteger": 5
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:objectives-and-key-results-tracker",
+                  "code": "score_by_alignment_grade",
+                  "display": "Score By Alignment Grade"
+                }
+              ]
+            },
+            "valueInteger": 5
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:objectives-and-key-results-tracker",
+                  "code": "score_by_impact_tier",
+                  "display": "Score By Impact Tier"
+                }
+              ]
+            },
+            "valueInteger": 5
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:objectives-and-key-results-tracker",
+                  "code": "score_by_smart_quality",
+                  "display": "Score By Smart Quality"
+                }
+              ]
+            },
+            "valueInteger": 5
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:objectives-and-key-results-tracker",
+                  "code": "score_by_pace_deviation_percent",
+                  "display": "Score By Pace Deviation Percent"
+                }
+              ]
+            },
+            "valueQuantity": {
+              "value": 5.0
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:objectives-and-key-results-tracker",
+                  "code": "computed_composite_rag",
+                  "display": "Computed Composite Rag"
+                }
+              ]
+            },
+            "valueCodeableConcept": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:objectives-and-key-results-tracker:computed_composite_rag",
+                  "code": "green",
+                  "display": "Green"
+                }
+              ]
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:objectives-and-key-results-tracker",
+                  "code": "final_composite_rag",
+                  "display": "Final Composite Rag"
+                }
+              ]
+            },
+            "valueCodeableConcept": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:objectives-and-key-results-tracker:final_composite_rag",
+                  "code": "green",
+                  "display": "Green"
+                }
+              ]
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:objectives-and-key-results-tracker",
+                  "code": "override_reason",
+                  "display": "Override Reason"
+                }
+              ]
+            },
+            "valueString": "Example text."
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:objectives-and-key-results-tracker",
+                  "code": "recommendation",
+                  "display": "Recommendation"
+                }
+              ]
+            },
+            "valueCodeableConcept": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:objectives-and-key-results-tracker:recommendation",
+                  "code": "continue",
+                  "display": "Continue"
+                }
+              ]
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:objectives-and-key-results-tracker",
+                  "code": "triage_notes",
+                  "display": "Triage Notes"
+                }
+              ]
+            },
+            "valueString": "Example text."
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:objectives-and-key-results-tracker",
+                  "code": "signed_by",
+                  "display": "Signed By"
+                }
+              ]
+            },
+            "valueString": ""
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:objectives-and-key-results-tracker",
+                  "code": "signed_at",
+                  "display": "Signed At"
+                }
+              ]
+            },
+            "valueDateTime": "2026-04-09T10:00:00+00:00"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:objectives-and-key-results-tracker",
+                  "code": "graded_at",
+                  "display": "Graded At"
+                }
+              ]
+            },
+            "valueDateTime": "2026-04-09T10:00:00+00:00"
+          }
+        ]
       }
     },
     {
@@ -200,9 +433,6 @@
           ]
         },
         "severity": "high",
-        "subject": {
-          "reference": "Patient/dd0e8400-e29b-41d4-a716-446655440008"
-        },
         "identifiedDateTime": "2026-04-09T10:00:00+00:00",
         "detail": "Clinical flag detected."
       }
@@ -240,9 +470,6 @@
           ]
         },
         "severity": "moderate",
-        "subject": {
-          "reference": "Patient/dd0e8400-e29b-41d4-a716-446655440008"
-        },
         "identifiedDateTime": "2026-04-09T10:00:00+00:00",
         "detail": "Example text."
       }
@@ -278,9 +505,6 @@
               "display": "Okr Key Result"
             }
           ]
-        },
-        "subject": {
-          "reference": "Patient/dd0e8400-e29b-41d4-a716-446655440008"
         },
         "encounter": {
           "reference": "urn:uuid:550e8400-e29b-41d4-a716-446655440000"
@@ -493,9 +717,6 @@
               "display": "Okr Objective"
             }
           ]
-        },
-        "subject": {
-          "reference": "Patient/dd0e8400-e29b-41d4-a716-446655440008"
         },
         "encounter": {
           "reference": "urn:uuid:550e8400-e29b-41d4-a716-446655440000"
@@ -901,9 +1122,6 @@
             }
           ]
         },
-        "subject": {
-          "reference": "Patient/dd0e8400-e29b-41d4-a716-446655440008"
-        },
         "encounter": {
           "reference": "urn:uuid:550e8400-e29b-41d4-a716-446655440000"
         },
@@ -1015,9 +1233,6 @@
             "text": "Objectives And Key Results Tracker"
           }
         ],
-        "subject": {
-          "reference": "Patient/dd0e8400-e29b-41d4-a716-446655440008"
-        },
         "actualPeriod": {
           "start": "2026-04-09T10:00:00+00:00"
         }
