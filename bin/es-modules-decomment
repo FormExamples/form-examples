@@ -1,0 +1,152 @@
+#!/usr/bin/env python3
+"""One-shot cleanup (already applied): remove the now-stale IIFE / namespace /
+classic-script comments left behind by the ES-module conversion (see
+spec/es-modules.md) — "Wrapped in an IIFE; published via window.X", the
+"Sibling files loaded as plain <script> tags …" preambles, and the "loaded as
+a classic <script> … opened directly via file://" namespace-guard blocks.
+
+Operates only on `//` line-comment blocks; JSDoc, code, and clean comment
+paragraphs are left byte-identical (every changed line is a comment or blank).
+Minimal diff: deletes fully-stale paragraphs and single lines, truncates
+trailing stale sentences, and collapses orphaned blank lines. Idempotent — a
+re-run over the already-cleaned tree changes nothing.
+
+Usage: bin/es-modules-decomment [--apply] [file ...]   (default: dry-run)
+"""
+import re, sys, glob
+
+STALE = re.compile(
+    r"wrapped in an IIFE|published via|Sibling files loaded|attach(?:es)?"
+    r" (?:their|its)|classic\s*<script|no ES modules|`?file://`?|single global"
+    r" namespace|top-level identifiers|Pulling them off|locals stay scoped|IIFE"
+    r" attaches|leak to the global|as (?:plain|classic) `?<script", re.I)
+
+CLINE = re.compile(r"^(?P<indent>\s*)//(?P<sp> ?)(?P<text>.*?)\s*$")
+
+
+def split_sentences(text):
+    return [s for s in re.split(r"(?<=\.)\s+", text) if s.strip()]
+
+
+def clean_paragraph(plines):
+    """plines: list of (indent, sp, text). Returns:
+       None           -> paragraph is clean, keep original lines
+       []             -> paragraph is entirely stale, drop it
+       [str, ...]     -> replacement comment lines"""
+    joined = " ".join(t for (_i, _s, t) in plines)
+    if not STALE.search(joined):
+        return None
+    sents = split_sentences(joined)
+    stale = [bool(STALE.search(s)) for s in sents]
+    if all(stale):
+        return []
+    first = stale.index(True)
+    if all(stale[first:]):  # trailing run of stale sentences
+        kept_len = len(" ".join(sents[:first]).rstrip())
+        out, pos = [], 0
+        for (ind, sp, t) in plines:
+            start = pos
+            end = pos + len(t)
+            if start >= kept_len:
+                break
+            if end <= kept_len:
+                out.append(f"{ind}//{sp}{t}")
+            else:
+                out.append(f"{ind}//{sp}{t[:kept_len - start]}".rstrip())
+                break
+            pos = end + 1  # +1 for the joining space
+        return out
+    # Stale sentence embedded mid-paragraph: reflow the kept sentences.
+    prose = " ".join(s for s, st in zip(sents, stale) if not st)
+    ind = plines[0][0]
+    line, out = "", []
+    for w in prose.split():
+        cand = (line + " " + w).strip()
+        if line and len(f"{ind}// {cand}") > 78:
+            out.append(f"{ind}// {line}")
+            line = w
+        else:
+            line = cand
+    if line:
+        out.append(f"{ind}// {line}")
+    return out
+
+
+def process_block(block):
+    # Split into segments: 'sep' (blank // line) and 'para' (run of // lines).
+    segs = []
+    for ln in block:
+        if CLINE.match(ln).group("text") == "":
+            segs.append(["sep", ln])
+        elif segs and segs[-1][0] == "para":
+            segs[-1][1].append(ln)
+        else:
+            segs.append(["para", [ln]])
+    out_segs = []
+    for kind, val in segs:
+        if kind == "sep":
+            out_segs.append(("sep", val))
+            continue
+        plines = [(m.group("indent"), m.group("sp"), m.group("text"))
+                  for m in (CLINE.match(l) for l in val)]
+        cleaned = clean_paragraph(plines)
+        if cleaned is None:
+            out_segs.append(("keep", val))       # verbatim
+        elif not cleaned:
+            out_segs.append(("drop", None))
+        else:
+            out_segs.append(("keep", cleaned))
+    # Emit, dropping separators orphaned by removed paragraphs.
+    result, pending_sep, emitted = [], None, False
+    for kind, val in out_segs:
+        if kind == "sep":
+            pending_sep = val
+        elif kind == "drop":
+            continue
+        else:
+            if emitted and pending_sep is not None:
+                result.append(pending_sep)
+            pending_sep = None
+            result.extend(val)
+            emitted = True
+    return result
+
+
+def process(text):
+    lines = text.split("\n")
+    out, i, n = [], 0, len(lines)
+    while i < n:
+        if not CLINE.match(lines[i]):
+            out.append(lines[i]); i += 1; continue
+        block = []
+        while i < n and CLINE.match(lines[i]):
+            block.append(lines[i]); i += 1
+        block_out = process_block(block)
+        if not block_out:
+            # A fully-removed comment block sitting between two blank lines would
+            # leave a double blank — drop the preceding blank to keep one.
+            if out and out[-1].strip() == "" and i < n and lines[i].strip() == "":
+                out.pop()
+            continue
+        out.extend(block_out)
+    return "\n".join(out)
+
+
+def main():
+    args = sys.argv[1:]
+    apply = "--apply" in args
+    files = [a for a in args if not a.startswith("--")] or \
+        glob.glob("forms/*/front-end-with-html/js/*.js")
+    changed = 0
+    for f in sorted(files):
+        old = open(f).read()
+        new = process(old)
+        if new != old:
+            changed += 1
+            if apply:
+                open(f, "w").write(new)
+    print(f"{'changed' if apply else 'would change'}: {changed}/{len(files)}")
+
+
+if __name__ == "__main__":
+    main()

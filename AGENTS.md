@@ -58,6 +58,7 @@ schema changes. See `spec.md` §10 for the spec-driven workflow.
 ### Lily Design System (HTML front-ends)
 
 - `bin/es-modules-refactor [--check] [--dry-run] [--all|<slug>…]` — convert each form's `front-end-with-html/` JavaScript from the classic `window.<Namespace>` global-sharing pattern to native ES modules (`import`/`export` + `<script type="module">`); `--check` is the CI drift detector. See [`spec/es-modules.md`](spec/es-modules.md)
+- `bin/es-modules-decomment [--apply] [file…]` — one-shot (already applied): strip the stale IIFE/namespace/classic-script comments the ES-module conversion left behind; comment-only, idempotent
 - `bin/lily-html-refactor [--check] [--dry-run] [--scope=form|dashboard|both] [--all|<slug>]` — mechanical Lily HTML class swaps; `--check` is the CI drift detector
 - `bin/lily-sync [--check] [--lily-dir PATH]` — snapshot Lily HTML component specs into `forms/lily-spec/` and record the pinned upstream commit in `forms/lily-version.md`
 
