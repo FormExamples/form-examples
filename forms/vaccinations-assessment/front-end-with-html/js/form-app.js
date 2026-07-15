@@ -5,6 +5,47 @@ import { TOTAL_STEPS, steps } from './steps.js';
 
 let data = createDefaultAssessment();
 
+// ─── Autosave (localStorage) ───────────────────────────
+// Persist the whole assessment to localStorage on every edit and rehydrate it
+// on load so a partial fill survives a page reload.
+const STORAGE_KEY = 'vaccinations-assessment.front-end-with-html.v1';
+
+function saveState() {
+  try {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+  } catch (e) {
+    console.warn('Could not save vaccinations-assessment draft to localStorage.', e);
+  }
+}
+
+function loadState() {
+  try {
+    const raw = localStorage.getItem(STORAGE_KEY);
+    if (raw) mergeInto(data, JSON.parse(raw));
+  } catch (e) {
+    console.warn('Could not read vaccinations-assessment draft from localStorage.', e);
+  }
+}
+
+// Deep-merge a saved snapshot onto the canonical `data` shape: nested objects
+// recurse, arrays and primitives are copied, unknown/renamed keys are ignored
+// so the shape from createDefaultAssessment() always wins for missing keys.
+function mergeInto(target, src) {
+  if (!src || typeof src !== 'object') return;
+  for (const key of Object.keys(target)) {
+    if (!(key in src)) continue;
+    const tv = target[key];
+    const sv = src[key];
+    if (Array.isArray(tv)) {
+      if (Array.isArray(sv)) target[key] = sv;
+    } else if (tv && typeof tv === 'object' && sv && typeof sv === 'object') {
+      mergeInto(tv, sv);
+    } else {
+      target[key] = sv;
+    }
+  }
+}
+
 // ─── Navigation ────────────────────────────────────────
 window.submitForm = function () {
   collectAllFields();
@@ -127,21 +168,46 @@ function updateConditionalFields() {
   });
 }
 
-// Listen for radio/select changes to update conditional fields
-document.addEventListener('change', (e) => {
-  const field = e.target.getAttribute('data-field');
-  if (!field) return;
-  if (e.target.type === 'radio' && e.target.checked) {
-    setNestedValue(data, field, e.target.value);
-  } else if (e.target.tagName === 'SELECT') {
-    if (e.target.hasAttribute('data-numeric')) {
-      setNestedValue(data, field, e.target.value === '' ? null : Number(e.target.value));
-    } else {
-      setNestedValue(data, field, e.target.value);
-    }
+// Apply a single control's current value into `data`. Returns true if the
+// element is a form field (has data-field), false otherwise.
+function applyFieldFromElement(el) {
+  const field = el && el.getAttribute && el.getAttribute('data-field');
+  if (!field) return false;
+  if (el.type === 'radio') {
+    if (el.checked) setNestedValue(data, field, el.value);
+  } else if (el.tagName === 'SELECT' && el.hasAttribute('data-numeric')) {
+    setNestedValue(data, field, el.value === '' ? null : Number(el.value));
+  } else {
+    setNestedValue(data, field, el.value);
   }
+  return true;
+}
+
+// Listen for any field edit: update `data`, refresh conditional fields, and
+// autosave. `change` covers radios/selects; `input` covers text/textarea typing.
+function handleFieldEvent(e) {
+  if (!applyFieldFromElement(e.target)) return;
   updateConditionalFields();
-});
+  saveState();
+}
+document.addEventListener('change', handleFieldEvent);
+document.addEventListener('input', handleFieldEvent);
+
+// Populate every control from `data` (used on load to rehydrate a saved draft).
+function hydrateFields() {
+  document.querySelectorAll('[data-field]').forEach(el => {
+    const path = el.getAttribute('data-field');
+    const val = getNestedValue(data, path);
+    if (el.type === 'radio') {
+      el.checked = (el.value === val);
+    } else if (el.tagName === 'SELECT' && el.hasAttribute('data-numeric')) {
+      el.value = (val !== null && val !== '') ? String(val) : '';
+    } else {
+      el.value = val == null ? '' : val;
+    }
+  });
+  updateConditionalFields();
+}
 
 // ─── Utilities ─────────────────────────────────────────
 function getNestedValue(obj, path) {
@@ -160,6 +226,8 @@ function setNestedValue(obj, path, value) {
 
 // Show form immediately (single-page layout)
 document.addEventListener('DOMContentLoaded', () => {
+  loadState();      // rehydrate any saved draft into `data` before…
+  hydrateFields();  // …reflecting it onto the rendered controls
   const form = document.getElementById('form-container');
   if (form) form.classList.remove('hidden');
 });

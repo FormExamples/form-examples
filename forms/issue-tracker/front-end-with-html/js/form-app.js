@@ -9,6 +9,65 @@ const progressEl = document.getElementById('progress');
 const progressTextEl = document.getElementById('progress-text');
 const errorSummary = document.getElementById('error-summary');
 
+// Autosave: persist a partial fill to localStorage on every edit and
+// rehydrate it on load so the draft survives a page reload. This form is
+// DOM-driven (no central state object), so we serialize every named control
+// by its `name` attribute rather than a state snapshot.
+const STORAGE_KEY = 'issue-tracker.front-end-with-html.v1';
+
+function saveState() {
+	try {
+		const out = {};
+		form.querySelectorAll('input, select, textarea').forEach((el) => {
+			const name = el.name;
+			if (!name) return;
+			if (el.type === 'checkbox') {
+				out[name] = el.checked;
+			} else if (el.type === 'radio') {
+				if (el.checked) out[name] = el.value;
+			} else {
+				out[name] = el.value;
+			}
+		});
+		localStorage.setItem(STORAGE_KEY, JSON.stringify(out));
+	} catch (e) {
+		console.warn('Could not save issue-tracker draft to localStorage.', e);
+	}
+}
+
+function loadState() {
+	try {
+		const raw = localStorage.getItem(STORAGE_KEY);
+		if (!raw) return;
+		const saved = JSON.parse(raw);
+		if (!saved || typeof saved !== 'object') return;
+		form.querySelectorAll('input, select, textarea').forEach((el) => {
+			const name = el.name;
+			if (!name || !(name in saved)) return;
+			const v = saved[name];
+			if (el.type === 'checkbox') {
+				el.checked = Boolean(v);
+			} else if (el.type === 'radio') {
+				el.checked = el.value === v;
+			} else {
+				el.value = v ?? '';
+			}
+		});
+		// Let existing handlers (e.g. updateProgress) re-run against restored values.
+		form.dispatchEvent(new Event('input', { bubbles: true }));
+	} catch (e) {
+		console.warn('Could not read issue-tracker draft from localStorage.', e);
+	}
+}
+
+function clearState() {
+	try {
+		localStorage.removeItem(STORAGE_KEY);
+	} catch (e) {
+		console.warn('Could not clear issue-tracker draft from localStorage.', e);
+	}
+}
+
 const NUMERIC_FIELDS = new Set([
 	'ptAffectedUsersCount',
 	'hxPriorOccurrences',
@@ -153,6 +212,8 @@ function updateProgress() {
 
 form.addEventListener('input', updateProgress);
 form.addEventListener('change', updateProgress);
+form.addEventListener('input', saveState);
+form.addEventListener('change', saveState);
 
 gradeButton.addEventListener('click', () => {
 	const data = readFormData();
@@ -171,7 +232,10 @@ form.addEventListener('reset', () => {
 		errorSummary.hidden = true;
 		errorSummary.innerHTML = '';
 	}
+	clearState();
 	setTimeout(updateProgress, 0);
 });
 
+// Rehydrate any saved draft, then paint the initial progress.
+loadState();
 updateProgress();

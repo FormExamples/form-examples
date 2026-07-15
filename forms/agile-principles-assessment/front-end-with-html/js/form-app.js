@@ -50,6 +50,53 @@ import { PRINCIPLES } from './principles.js';
     },
   };
 
+  // Autosave: persist the whole form state to localStorage on every edit and
+  // rehydrate it on load so a partial fill survives a page reload.
+  const STORAGE_KEY = 'agile-principles-assessment.front-end-with-html.v1';
+
+  function saveState() {
+    try {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+    } catch (e) {
+      console.warn('Could not save assessment draft to localStorage.', e);
+    }
+  }
+
+  function loadState() {
+    try {
+      const raw = localStorage.getItem(STORAGE_KEY);
+      if (raw) mergeInto(state, JSON.parse(raw));
+    } catch (e) {
+      console.warn('Could not read assessment draft from localStorage.', e);
+    }
+  }
+
+  function clearState() {
+    try {
+      localStorage.removeItem(STORAGE_KEY);
+    } catch (e) {
+      console.warn('Could not clear assessment draft from localStorage.', e);
+    }
+  }
+
+  // Deep-merge a saved snapshot onto the canonical `state` shape: nested
+  // objects recurse, arrays and primitives are copied, unknown keys ignored.
+  function mergeInto(target, src) {
+    if (!src || typeof src !== 'object') return;
+    for (const key of Object.keys(target)) {
+      if (!(key in src)) continue;
+      const tv = target[key];
+      const sv = src[key];
+      if (Array.isArray(tv)) {
+        if (Array.isArray(sv)) target[key] = sv;
+      } else if (tv && typeof tv === 'object' && sv && typeof sv === 'object') {
+        mergeInto(tv, sv);
+      } else {
+        target[key] = sv;
+      }
+    }
+  }
+
   function el(tag, attrs, children) {
     const e = document.createElement(tag);
     if (attrs) {
@@ -118,6 +165,7 @@ import { PRINCIPLES } from './principles.js';
         });
       }
       setIdentityDisabled(grid, checked);
+      saveState();
     });
 
     const anonLabel = el('label', { class: 'anon-toggle' }, [
@@ -214,6 +262,7 @@ import { PRINCIPLES } from './principles.js';
     comment.value = state.responses[index].comment;
     comment.addEventListener('input', function (ev) {
       state.responses[index].comment = ev.target.value;
+      saveState();
     });
 
     return el('fieldset', { class: 'fieldset', 'data-step': String(stepNumber), id: 'step-' + stepNumber }, [
@@ -239,6 +288,7 @@ import { PRINCIPLES } from './principles.js';
       input.addEventListener('input', function (ev) {
         const v = Number(ev.target.value);
         state.responses[i].weight = isNaN(v) ? 1.0 : v;
+        saveState();
       });
       list.appendChild(el('li', null, [
         el('span', null, ['P' + p.number + ' — ' + p.shortTitle]),
@@ -250,6 +300,7 @@ import { PRINCIPLES } from './principles.js';
     resetBtn.addEventListener('click', function () {
       state.responses.forEach(function (r) { r.weight = 1.0; });
       list.querySelectorAll('input').forEach(function (input) { input.value = '1'; });
+      saveState();
     });
 
     const details = document.createElement('details');
@@ -280,7 +331,7 @@ import { PRINCIPLES } from './principles.js';
   function labelTextarea(text, target, key) {
     const textarea = el('textarea', { id: 'f-' + key, class: 'text-area-input', rows: 3 });
     textarea.value = target[key];
-    textarea.addEventListener('input', function (ev) { target[key] = ev.target.value; });
+    textarea.addEventListener('input', function (ev) { target[key] = ev.target.value; saveState(); });
     return el('label', { class: 'stacked' }, [el('span', null, [text]), textarea]);
   }
 
@@ -383,6 +434,7 @@ import { PRINCIPLES } from './principles.js';
     if (progress) progress.value = pct;
     document.getElementById('progress-text').textContent = answered + ' of 12 principles scored (' + pct + '%)';
     updateStepListStatuses();
+    saveState();
   }
 
   function renderStepList() {
@@ -475,10 +527,12 @@ import { PRINCIPLES } from './principles.js';
     state.actionPlan = { topAction1: '', topAction2: '', topAction3: '', coachNotes: '', overallNotes: '' };
     const report = document.getElementById('report');
     if (report) report.innerHTML = '<p class="empty-message">Submit the form to see the report.</p>';
+    clearState();
     build();
   }
 
   document.addEventListener('DOMContentLoaded', function () {
+    loadState();
     build();
     document.getElementById('submit-btn').addEventListener('click', renderReport);
     document.getElementById('reset-btn').addEventListener('click', reset);

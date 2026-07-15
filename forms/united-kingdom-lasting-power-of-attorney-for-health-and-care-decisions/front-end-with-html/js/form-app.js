@@ -13,6 +13,51 @@ import { emptyAttorney, emptyCertificateProvider, emptyLpaApplication, emptyPers
 let application = emptyLpaApplication();
 let validity = calculateLpaValidity(application);
 
+// ---------------------------------------------------------------------------
+// Autosave — persist the whole application to localStorage on every edit and
+// rehydrate it on load so a partial fill survives a page reload.
+// ---------------------------------------------------------------------------
+
+const STORAGE_KEY = 'united-kingdom-lasting-power-of-attorney-for-health-and-care-decisions.front-end-with-html.v1';
+
+function saveState() {
+  try {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(application));
+  } catch (e) {
+    console.warn('Could not save LP1H draft to localStorage.', e);
+  }
+}
+
+function loadState() {
+  try {
+    const raw = localStorage.getItem(STORAGE_KEY);
+    if (raw) mergeInto(application, JSON.parse(raw));
+  } catch (e) {
+    console.warn('Could not read LP1H draft from localStorage.', e);
+  }
+}
+
+// Deep-merge a saved snapshot onto the canonical `application` shape: nested
+// objects recurse; arrays (attorneys, replacementAttorneys, peopleToNotify,
+// preferences, instructions, signatures) are copied wholesale so restored
+// entries reappear; primitives are copied; unknown keys are ignored. Handles
+// the `certificateProvider` slot that starts as null (assigned wholesale).
+function mergeInto(target, src) {
+  if (!src || typeof src !== 'object') return;
+  for (const key of Object.keys(target)) {
+    if (!(key in src)) continue;
+    const tv = target[key];
+    const sv = src[key];
+    if (Array.isArray(tv)) {
+      if (Array.isArray(sv)) target[key] = sv;
+    } else if (tv && typeof tv === 'object' && sv && typeof sv === 'object') {
+      mergeInto(tv, sv);
+    } else {
+      target[key] = sv;
+    }
+  }
+}
+
 const RELATIONSHIPS = [
   { value: 'spouse', label: 'Spouse' },
   { value: 'civil-partner', label: 'Civil partner' },
@@ -684,6 +729,9 @@ function updateStepListStatuses() {
 function recompute() {
   validity = calculateLpaValidity(application);
   renderReportAside();
+  // Single save choke point: every field edit calls recompute(), and every
+  // dynamic-list add/remove goes through rerenderAll() -> recompute().
+  saveState();
 }
 
 function rerenderAll() {
@@ -711,6 +759,10 @@ function rerenderAll() {
 }
 
 function boot() {
+  // Rehydrate BEFORE the first render so restored donor, attorneys, people to
+  // notify, and other dynamic-list entries render with their saved values
+  // (every input getter reads from `application`).
+  loadState();
   renderStepList();
   rerenderAll();
 }
