@@ -26,8 +26,6 @@ import { vaccinationRules } from './vaccination-rules.js';
  * @typedef {import('./types.js').GradingResult} GradingResult
  */
 
-// Wrapped in an IIFE; published via window.VaccinationsChecklist.
-
 /**
  * Determine whether childhood immunisation schedule is complete.
  * @param {AssessmentData} data

@@ -27,8 +27,6 @@
  * @property {boolean} global     - true for the global burden item (item 22)
  */
 
-// Wrapped in an IIFE; published via window.ZaritBurdenInterview.
-
 // The 12-item short-form subset (spec §3 / §4).
 const SHORT_FORM_ITEMS = [1, 2, 3, 6, 9, 10, 11, 12, 17, 20, 21, 22];
 

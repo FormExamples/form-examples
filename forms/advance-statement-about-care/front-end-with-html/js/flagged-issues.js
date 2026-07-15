@@ -12,8 +12,6 @@
  * @typedef {import('./types.js').FlaggedIssue} FlaggedIssue
  */
 
-// Wrapped in an IIFE; published via window.AdvanceStatementAboutCare.
-
 /**
  * @param {StatementData} data
  * @returns {FlaggedIssue[]}

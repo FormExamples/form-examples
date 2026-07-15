@@ -22,8 +22,6 @@
  * @typedef {import('./types.js').ReconciliationStatus} ReconciliationStatus
  */
 
-// Wrapped in an IIFE; published via window.MedicationReconciliation.
-
 /** The two-independent-source minimum for an adequate BPMH. */
 const MINIMUM_SOURCES = 2;
 

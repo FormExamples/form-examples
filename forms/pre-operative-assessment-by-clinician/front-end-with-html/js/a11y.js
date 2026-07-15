@@ -13,8 +13,6 @@
 // the saved draft. Reduced motion is handled in CSS. Preferences persist in
 // localStorage under a user-level key shared across the clinician and patient
 // pre-operative assessment forms.
-//
-// Wrapped in an IIFE; exposes nothing globally except an idempotent init.
 
 (function () {
 'use strict';

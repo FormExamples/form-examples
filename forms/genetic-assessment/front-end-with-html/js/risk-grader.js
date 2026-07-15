@@ -20,8 +20,6 @@ import { riskCategory } from './types.js';
  * @typedef {import('./types.js').RiskRuleDefinition} RiskRuleDefinition
  */
 
-// Wrapped in an IIFE; published via window.GeneticAssessment.
-
 /**
  * Look up a rule by id and push it onto firedRules; return its weight.
  * @param {string} id

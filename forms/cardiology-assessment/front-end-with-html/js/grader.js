@@ -19,8 +19,6 @@ import { cardioRules } from './rules.js';
  * @typedef {import('./types.js').FiredRule} FiredRule
  */
 
-// Wrapped in an IIFE; published via window.CardiologyAssessment.
-
 /**
  * Derive the patient-reported CCS Angina Class.
  * @param {AssessmentData} data

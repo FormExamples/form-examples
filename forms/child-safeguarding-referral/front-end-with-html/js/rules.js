@@ -34,8 +34,6 @@
  * @property {(r: SafeguardingReferral) => boolean} [applies] - counted in denominator?
  */
 
-// Wrapped in an IIFE; published via window.ChildSafeguardingReferral.
-
 const nonEmpty = (s) => typeof s === 'string' && s.trim() !== '';
 const hasNumber = (n) => typeof n === 'number' && !Number.isNaN(n);
 const hasDate = (d) => d !== null && d !== undefined && d !== '';

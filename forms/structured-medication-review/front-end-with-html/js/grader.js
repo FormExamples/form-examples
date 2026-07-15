@@ -25,8 +25,6 @@ import { anticholinergicBandLabel, burdenBandLabel, polypharmacyBandLabel, revie
  * @typedef {import('./types.js').MedicineFlag} MedicineFlag
  */
 
-// Wrapped in an IIFE; published via window.StructuredMedicationReview.
-
 /**
  * Sum the per-medicine anticholinergic burden points. A null / missing value
  * contributes 0.

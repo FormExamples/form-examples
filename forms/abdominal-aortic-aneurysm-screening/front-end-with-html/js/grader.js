@@ -28,8 +28,6 @@ import { classificationRules } from './rules.js';
  * @typedef {import('./types.js').FiredRule} FiredRule
  */
 
-// Wrapped in an IIFE; published via window.AbdominalAorticAneurysmScreening.
-
 /**
  * Map a diameter band to its surveillance / referral band and the recommended
  * action string.

@@ -21,8 +21,6 @@
  * @property {(correctedCalcium: number) => boolean} evaluate
  */
 
-// Wrapped in an IIFE; published via window.CorrectedCalciumCalculator.
-
 // ─── Correction constants (spec §4) ─────────────────────────────
 /** Reference (normal) albumin in g/L that results are corrected to. */
 const REF_ALBUMIN = 40;

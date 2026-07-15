@@ -34,8 +34,6 @@
  * @property {MfsOption[]} options
  */
 
-// Wrapped in an IIFE; published via window.FallRiskAssessment.
-
 /** @type {MfsItem[]} */
 const mfsItems = [
   {

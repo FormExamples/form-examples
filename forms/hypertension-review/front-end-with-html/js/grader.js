@@ -25,8 +25,6 @@ import { controlStatusLabel, hypertensionStageLabel, reviewStatusLabel } from '.
  * @typedef {import('./types.js').GradingResult} GradingResult
  */
 
-// Wrapped in an IIFE; published via window.HypertensionReview.
-
 /**
  * Evaluate each review component's documentation status.
  * @param {AssessmentData} data

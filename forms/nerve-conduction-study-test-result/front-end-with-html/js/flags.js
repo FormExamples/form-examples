@@ -14,8 +14,6 @@ import { hasAnyAbnormalFinding, hasCriticalFinding } from './rules.js';
  * @typedef {import('./types.js').FlagPriority} FlagPriority
  */
 
-// Wrapped in an IIFE; published via window.NerveConductionStudyTestResult.
-
 /**
  * Detect the safety-critical flags for a report.
  * @param {NerveConductionStudyResult} r

@@ -15,8 +15,6 @@
 // graphs. Values are clinically representative anchor points; the engine
 // linearly interpolates between them.
 
-// Wrapped in an IIFE; published via window.BhutaniBilirubinNomogram.
-
 // ─── Nomogram domain (spec §4) ──────────────────────────────────
 /** Lowest defined age on the nomogram (hours). */
 const AGE_MIN_HOURS = 0;

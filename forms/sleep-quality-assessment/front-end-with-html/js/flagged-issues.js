@@ -12,8 +12,6 @@ import { frequencyToScore } from './psqi-rules.js';
  * @typedef {import('./types.js').AdditionalFlag} AdditionalFlag
  */
 
-// Wrapped in an IIFE; published via window.SleepQualityAssessment.
-
 /**
  * Detect non-score-based clinical flags.
  * @param {AssessmentData} data

@@ -7,10 +7,6 @@ import { samplePatients } from './data.js';
 // fall back to sample data and show a small banner. The rendered table is
 // sortable (click any column header) and filterable (search box + status
 // dropdown).
-//
-// Sibling modules loaded as plain `<script>` tags attach their exports
-// to `window.CarePrivacyNoticeDashboard`. The whole file is wrapped in
-// an IIFE so its top-level identifiers do not leak.
 
 // ----------------------------------------------------------------------
 // State

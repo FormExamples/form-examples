@@ -13,11 +13,6 @@ import { actionTimeframe, emptyAssessment, findingLevelClass, gradeLabel, gradeT
 // report with an outcome badge, findings-by-category table, action-plan
 // summary, and a prioritised flagged-issues list. State is persisted to
 // localStorage so a partial fill survives a page reload.
-//
-// Sibling files loaded as plain `<script>` tags (in order: types →
-// rules → safety-grader → flagged-issues → app) attach their exports to
-// `window.WorkplaceSafetyAssessment`. The whole file is wrapped in an IIFE
-// so its top-level identifiers don't leak to the global scope.
 
 // ----------------------------------------------------------------------
 // Persistence

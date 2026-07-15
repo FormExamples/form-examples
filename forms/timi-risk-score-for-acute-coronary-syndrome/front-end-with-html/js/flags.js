@@ -18,8 +18,6 @@
  * @typedef {import('./types.js').FlaggedIssue} FlaggedIssue
  */
 
-// Wrapped in an IIFE; published via window.TimiRiskScoreForAcuteCoronarySyndrome.
-
 /**
  * @param {AssessmentData} data
  * @param {number} timiScore  - total 0-7 from the grader

@@ -9,8 +9,6 @@
 // Each domain grades A (best) through E (worst); '' means insufficient data.
 // Rule IDs are stable and identical across every front-end and the back-end.
 // Pure data + helpers; grader.js composes them into a GradingResult.
-//
-// Wrapped in an IIFE; published via `window.OutpatientOutcome`.
 
 // ----------------------------------------------------------------------
 // Grade utilities

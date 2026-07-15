@@ -5,7 +5,7 @@
 // dashboard endpoint returns a `DashboardPatientsResponse`. When the fetch
 // fails (CORS, network, server down) or returns an empty list, callers
 // fall back to the sample data shipped in `data.js` so the page remains
-// usable standalone (e.g. when opened directly via `file://`).
+// usable standalone (e.g.
 
 const API_BASE = 'http://localhost:5150';
 const PATIENTS_PATH = '/api/dashboard/patients';

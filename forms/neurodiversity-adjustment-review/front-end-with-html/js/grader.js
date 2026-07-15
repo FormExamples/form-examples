@@ -14,8 +14,6 @@ import { anyNotWorking, flatten, recommendationLabel } from './types.js';
 // declining wellbeing, or an escalation drives the wellbeing-risk axis and the
 // next-step urgency and raises the corresponding flag, regardless of the other
 // axes. The least-alarming band is chosen only when no rule fires.
-//
-// Wrapped in an IIFE; published via `window.NeurodiversityAdjustmentReview`.
 
 /**
  * Derive the overall recommendation from the review and graded axes.

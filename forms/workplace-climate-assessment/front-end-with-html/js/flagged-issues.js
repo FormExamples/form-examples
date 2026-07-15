@@ -28,8 +28,6 @@
  * @typedef {import('./types.js').ClimateCategory}  ClimateCategory
  */
 
-// Wrapped in an IIFE; published via window.WorkplaceClimateAssessment.
-
 const DOMAIN_LABELS = {
   leadership:    'Leadership & Management',
   psychSafety:   'Psychological Safety',

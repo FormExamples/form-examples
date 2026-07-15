@@ -26,9 +26,6 @@ import { auditcRules } from './rules.js';
  * @typedef {import('./types.js').FiredItem} FiredItem
  */
 
-// Wrapped in an IIFE; published via
-// window.AlcoholUseDisordersIdentificationTestConsumption.
-
 /**
  * Evaluate the three consumption-item rules and collect one fired record per
  * item, carrying the awarded 0-4 point value.

@@ -28,8 +28,6 @@ import { CONDITIONS } from './types.js';
  * @typedef {import('./types.js').SampleQualityResult} SampleQualityResult
  */
 
-// Wrapped in an IIFE; published via window.NewbornBloodSpotScreening.
-
 // Repeat reasons that indicate an avoidable repeat (sampling technique or card
 // fault, rather than a genuinely borderline result).
 const AVOIDABLE_REPEAT_REASONS = ['inadequate-sample', 'too-early', 'technical'];

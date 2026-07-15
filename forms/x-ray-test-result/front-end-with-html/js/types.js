@@ -144,11 +144,6 @@
  * @property {string} gradedAt                             - ISO timestamp
  */
 
-// Wrapped in an IIFE so locals stay scoped — this file is loaded as a
-// classic <script> (no ES modules) so the page can be opened directly via
-// `file://`. The IIFE attaches its public symbols to a single global
-// namespace, `window.XRayTestResult`.
-
 /**
  * Build a fresh, fully-blank X-ray test result.
  * Strings default to `''`; structured-findings booleans default to `false`.

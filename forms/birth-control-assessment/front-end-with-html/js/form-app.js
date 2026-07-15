@@ -9,10 +9,6 @@ import { bmiCategory, calculateAge, calculateBMI, emptyAssessment, mecCategoryCl
 // progress summary reflects how many fields have been answered. Submission
 // runs the pure UK MEC grading engine and renders an inline report. State
 // persists to localStorage so a partial fill survives a page reload.
-//
-// Sibling files loaded as plain `<script>` tags (in order) attach their
-// exports to `window.BirthControlAssessment`. The whole file is wrapped in
-// an IIFE so its top-level identifiers don't leak to the global scope.
 
 // ----------------------------------------------------------------------
 // Persistence

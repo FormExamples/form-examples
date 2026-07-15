@@ -16,10 +16,6 @@ import { completenessStatusClass, completenessStatusLabel, criterionLabel, empty
 //
 // This is a LEGAL and CLINICAL DOCUMENTATION instrument, NOT an automated
 // decision to detain. The engine validates documentation and classifies only.
-//
-// Sibling files loaded as plain `<script>` tags (in order) attach their exports
-// to `window.MentalHealthActAssessment`. The whole file is wrapped in an IIFE so
-// its top-level identifiers do not leak.
 
 // ----------------------------------------------------------------------
 // Persistence

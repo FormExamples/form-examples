@@ -19,8 +19,6 @@
  * @typedef {import('./types.js').FlaggedIssue} FlaggedIssue
  */
 
-// Wrapped in an IIFE; published via window.DiabeticEyeScreening.
-
 /** Whole months between two date strings (b - a); null when either unparseable. */
 function monthsBetween(aStr, bStr) {
   if (!aStr || !bStr) return null;

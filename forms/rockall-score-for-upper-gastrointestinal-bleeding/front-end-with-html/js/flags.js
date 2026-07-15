@@ -20,8 +20,6 @@
  * @typedef {import('./types.js').FlaggedIssue} FlaggedIssue
  */
 
-// Wrapped in an IIFE; published via window.RockallScoreForUpperGastrointestinalBleeding.
-
 /**
  * @param {AssessmentData} data
  * @param {GradingResult} grade - grading result from calculateRockallGrade

@@ -32,8 +32,6 @@ import { paduaRules } from './rules.js';
  * @typedef {import('./types.js').FiredFactor} FiredFactor
  */
 
-// Wrapped in an IIFE; published via window.PaduaVenousThromboembolismRiskAssessment.
-
 /**
  * Evaluate the eleven Padua factor rules and collect the ones that fired.
  * @param {AssessmentData} data

@@ -25,8 +25,6 @@
  * @property {(d: AssessmentData) => boolean} evaluate
  */
 
-// Wrapped in an IIFE; published via window.WellsScoreForPulmonaryEmbolism.
-
 /** @type {WellsRule[]} */
 const wellsRules = [
   // ─── CRITERION 1: CLINICAL SIGNS OF DVT (+3) ──────────────────

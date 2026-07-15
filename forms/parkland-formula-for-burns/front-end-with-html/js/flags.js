@@ -20,8 +20,6 @@ import { FIRST_PHASE_HOURS, referralThreshold } from './rules.js';
  * @typedef {import('./types.js').FlaggedIssue} FlaggedIssue
  */
 
-// Wrapped in an IIFE; published via window.ParklandFormulaForBurns.
-
 /**
  * @param {AssessmentData} data
  * @param {{ total24hVolumeMl: number|null, hoursSinceInjury: number|null }} grade

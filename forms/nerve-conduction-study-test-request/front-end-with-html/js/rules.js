@@ -10,8 +10,6 @@ import { involvesNeedleEmg } from './types.js';
 // urgent. Rule IDs are stable and identical across every front-end and the
 // back-end (R-APPROP-*, R-RISK-*, R-COMPLETE-*, R-TRIAGE-*). Pure data +
 // helpers; the grader composes them.
-//
-// Wrapped in an IIFE; published via `window.NerveConductionStudyTestRequest`.
 
 // ----------------------------------------------------------------------
 // Axis A — Appropriateness (AANEM / AAN electrodiagnostic, 1-9 ordinal)

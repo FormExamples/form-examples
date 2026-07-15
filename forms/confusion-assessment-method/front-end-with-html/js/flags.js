@@ -19,8 +19,6 @@
  * @typedef {import('./types.js').FlaggedIssue} FlaggedIssue
  */
 
-// Wrapped in an IIFE; published via window.ConfusionAssessmentMethod.
-
 /**
  * @param {AssessmentData} data
  * @param {{ classification: string }} grade  - result of calculateCamGrade

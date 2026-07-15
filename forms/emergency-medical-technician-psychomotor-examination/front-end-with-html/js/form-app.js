@@ -12,12 +12,6 @@ import { PASS_PERCENT_THRESHOLD, emptyAssessment, outcomeClass, outcomeLabel, tr
 // report with a Pass/Fail badge, point breakdown table by section, the
 // critical-criteria audit table, and the prioritised flagged-issues list.
 // State is persisted to localStorage so a partial fill survives a reload.
-//
-// Sibling files loaded as plain `<script>` tags (in order: types →
-// rules → psychomotor-grader → flagged-issues → app) attach their exports
-// to `window.EmergencyMedicalTechnicianPsychomotorExamination`. The whole
-// file is wrapped in an IIFE so its top-level identifiers don't leak to
-// the global scope.
 
 const TOTAL_STEPS = 6;
 

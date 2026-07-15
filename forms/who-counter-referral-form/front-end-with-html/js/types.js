@@ -167,11 +167,6 @@
  * @property {FlagPriority} priority
  */
 
-// Wrapped in an IIFE so locals stay scoped — this file is loaded as a
-// classic <script> (no ES modules) so the page can be opened directly via
-// `file://`. The IIFE attaches its public symbols to a single global
-// namespace, `window.WhoCounterReferralForm`.
-
 /**
  * Build a fresh, fully-blank counter-referral form.
  * Strings default to `''`; booleans default to `false`.

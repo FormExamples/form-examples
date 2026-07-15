@@ -20,8 +20,6 @@
  * @property {(d: AssessmentData) => boolean} evaluate
  */
 
-// Wrapped in an IIFE; published via window.CentorScoreForStreptococcalPharyngitis.
-
 /** @type {CentorRule[]} */
 const centorRules = [
   // ─── CRITERION 1: TONSILLAR EXUDATE ───────────────────────────

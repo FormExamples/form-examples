@@ -29,8 +29,6 @@ import { componentRules } from './rules.js';
  * @typedef {import('./types.js').GradingResult} GradingResult
  */
 
-// Wrapped in an IIFE; published via window.LearningDisabilityAnnualHealthCheck.
-
 /**
  * Evaluate each required-component rule against the record.
  * @param {AssessmentData} data

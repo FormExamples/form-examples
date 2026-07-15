@@ -10,8 +10,6 @@
 //   3 = Severe difficulty
 // Total range: 0–21.
 
-// Wrapped in an IIFE; published via window.SleepQualityAssessment.
-
 /**
  * @typedef {Object} PSQIComponentDefinition
  * @property {string} id

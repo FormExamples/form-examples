@@ -24,8 +24,6 @@
  * @property {(d: AssessmentData) => boolean} evaluate  - true when the feature is positive
  */
 
-// Wrapped in an IIFE; published via window.ConfusionAssessmentMethod.
-
 /** @type {CamRule[]} */
 const camRules = [
   // ─── FEATURE 1: ACUTE ONSET AND FLUCTUATING COURSE ────────────

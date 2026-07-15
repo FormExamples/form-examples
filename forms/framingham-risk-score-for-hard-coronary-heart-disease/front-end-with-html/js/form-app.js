@@ -11,10 +11,7 @@ import { calculateBmi, emptyAssessment, riskLevelClass, riskLevelLabel } from '.
 // an inline report. State persists to localStorage so a partial fill
 // survives a reload.
 //
-// Sibling files load as classic <script> tags (in order) and attach their
-// exports to `window.FraminghamRiskScore`. We pull them off here to keep
-// later code referring to short local names. Whole file is wrapped in an
-// IIFE so its top-level identifiers don't leak.
+// We pull them off here to keep later code referring to short local names.
 
 // ----------------------------------------------------------------------
 // Persistence

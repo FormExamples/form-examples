@@ -10,10 +10,6 @@ import { bandLabel, compositeRiskLabel, createEmptyCertificateProvider, createEm
 // report with the composite-risk banner, fired statutory blockers, additional
 // flags, and an LPA summary. State is persisted to localStorage so a partial
 // fill survives a page reload.
-//
-// Sibling files loaded as plain `<script>` tags (in order) attach their
-// exports to `window.UkLpaFinancialDecisions`. The whole file is wrapped in an
-// IIFE so its top-level identifiers do not leak to the global scope.
 
 // ----------------------------------------------------------------------
 // Persistence

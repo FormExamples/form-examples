@@ -20,8 +20,6 @@ import { isNum, missingInputs } from './grader.js';
  * @typedef {import('./types.js').FlaggedIssue} FlaggedIssue
  */
 
-// Wrapped in an IIFE; published via window.ModelForEndStageLiverDiseaseScore.
-
 /**
  * @param {AssessmentData} data
  * @param {GradingResult} result   - output of calculateMeld(data)

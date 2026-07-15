@@ -9,8 +9,6 @@ import { isBariumStudy, isIonisingStudy } from './types.js';
 // (D) triage tier with acuity escalation. Rule IDs are stable and identical
 // across every front-end and the back-end (R-APPROP-*, R-SAFETY-*, R-DOSE-*,
 // R-COMPLETE-*, R-TRIAGE-*). Pure data + helpers; the grader composes them.
-//
-// Wrapped in an IIFE; published via `window.FluoroscopyTestRequest`.
 
 // ----------------------------------------------------------------------
 // Axis A — Appropriateness (ACR Appropriateness Criteria / RCR iRefer 1-9)

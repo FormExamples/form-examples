@@ -18,8 +18,6 @@
  * @typedef {import('./types.js').FlaggedIssue} FlaggedIssue
  */
 
-// Wrapped in an IIFE; published via window.NewbornBloodSpotScreening.
-
 /**
  * @param {ScreeningData} data
  * @param {{ conditionResults: ConditionResult[], sampleQuality: SampleQualityResult, ageAtSampleDays: number | null }} ctx

@@ -41,8 +41,6 @@ import { PILLARS } from './types.js';
  * @typedef {import('./types.js').GradingResult} GradingResult
  */
 
-// Wrapped in an IIFE; published via window.HeartFailureReview.
-
 /**
  * Derive the NYHA functional status from the recorded NYHA class.
  * @param {ReviewData} data

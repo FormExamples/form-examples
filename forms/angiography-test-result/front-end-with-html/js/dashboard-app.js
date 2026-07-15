@@ -11,12 +11,6 @@ import { abnormalitySeverityClass, abnormalitySeverityLabel, bodyRegionLabel, fo
 // dropdown), mirroring the SvelteKit dashboard route's columns: Report,
 // Patient, Region, Status, Reported, Classification, Severity, Urgency,
 // Complete, Flags.
-//
-// Sibling modules loaded as plain `<script>` tags (in dependency order)
-// attach their exports to `window.AngiographyTestResultDashboard`; the
-// shared display labels live on `window.AngiographyTestResult` (types.js).
-// The whole file is wrapped in an IIFE so its top-level identifiers do not
-// leak.
 
 // ----------------------------------------------------------------------
 // State

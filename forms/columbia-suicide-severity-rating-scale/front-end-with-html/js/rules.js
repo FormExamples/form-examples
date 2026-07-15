@@ -21,8 +21,6 @@
  * @property {(d: AssessmentData) => boolean} evaluate
  */
 
-// Wrapped in an IIFE; published via window.ColumbiaSuicideSeverityRatingScale.
-
 /** @type {CssrsRule[]} */
 const cssrsRules = [
   // ─── SUICIDAL IDEATION (Q1-Q5; highest affirmative sets the level) ───

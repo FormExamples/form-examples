@@ -24,8 +24,6 @@ import { abeGroupOf, copdRules, coreComponents, exacerbationRiskOf, goldGradeOf,
  * @typedef {import('./types.js').FiredRule} FiredRule
  */
 
-// Wrapped in an IIFE; published via window.ChronicObstructivePulmonaryDiseaseReview.
-
 /**
  * Evaluate the declarative classification rules and collect the ones that fired
  * (one per gold / symptom / exacerbation / abe axis).

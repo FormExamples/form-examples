@@ -26,8 +26,6 @@
  * @property {(d: AssessmentData) => (number | null)} evaluate
  */
 
-// Wrapped in an IIFE; published via window.DyslexiaAssessment.
-
 /** @type {DyslexiaRule[]} */
 const dyslexiaRules = [
   {

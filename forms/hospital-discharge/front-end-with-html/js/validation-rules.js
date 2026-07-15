@@ -18,8 +18,6 @@
  * @property {(d: AssessmentData) => boolean} evaluate
  */
 
-// Wrapped in an IIFE; published via window.HospitalDischarge.
-
 /** Helper: a non-empty trimmed string. */
 function nonEmpty(s) {
   return typeof s === 'string' && s.trim().length > 0;

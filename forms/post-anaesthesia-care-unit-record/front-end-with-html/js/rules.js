@@ -13,8 +13,6 @@
  * @typedef {import('./types.js').PacuRecord} PacuRecord
  */
 
-// Wrapped in an IIFE; published via window.PostAnaesthesiaCareUnitRecord.
-
 // ─── Aldrete parameter enum → 0/1/2 level ─────────────────────────────
 const ALDRETE_SCORES = {
   activity:         { 'all-four': 2, 'two': 1, 'none': 0 },

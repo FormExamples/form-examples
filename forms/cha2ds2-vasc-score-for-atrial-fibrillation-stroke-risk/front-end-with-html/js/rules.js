@@ -20,9 +20,6 @@
  * @property {(d: AssessmentData) => boolean} evaluate
  */
 
-// Wrapped in an IIFE; published via
-// window.Cha2ds2VascScoreForAtrialFibrillationStrokeRisk.
-
 /** @type {Cha2ds2VascRule[]} */
 const cha2ds2VascRules = [
   // ─── C: CONGESTIVE HEART FAILURE / LV DYSFUNCTION (1) ─────────

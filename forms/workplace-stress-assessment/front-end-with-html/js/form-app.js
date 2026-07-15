@@ -13,12 +13,6 @@ import { emptyAssessment, riskLevelClass, riskLevelLabel } from './types.js';
 // category → overall worst category) and renders an inline report in the
 // `.panel` region. State is persisted to localStorage so a partial fill
 // survives a page reload.
-//
-// Sibling files loaded as plain `<script>` tags (in order) attach their
-// exports to `window.WorkplaceStressAssessment`. Pulling them off here
-// keeps the rest of this file referring to short local names. The whole
-// file is wrapped in an IIFE so its top-level identifiers don't leak to
-// the global scope.
 
 // ----------------------------------------------------------------------
 // Persistence

@@ -14,7 +14,6 @@ import { hasCriticalFinding, hasLowGradeCategory } from './rules.js';
  * @typedef {import('./types.js').FlagPriority} FlagPriority
  */
 
-// Wrapped in an IIFE; published via window.CytologyTestResult.
 // Depends on rules.js (hasCriticalFinding, hasLowGradeCategory), so it must
 // load after it.
 

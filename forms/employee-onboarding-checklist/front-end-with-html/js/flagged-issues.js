@@ -13,8 +13,6 @@ import { isDatePast } from './types.js';
  * @typedef {import('./types.js').AdditionalFlag} AdditionalFlag
  */
 
-// Wrapped in an IIFE; published via window.EmployeeOnboardingChecklist.
-
 /**
  * @param {AssessmentData} data
  * @returns {AdditionalFlag[]}

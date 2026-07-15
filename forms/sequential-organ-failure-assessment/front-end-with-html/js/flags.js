@@ -21,8 +21,6 @@ import { systemLabel } from './types.js';
  * @typedef {import('./types.js').FlaggedIssue} FlaggedIssue
  */
 
-// Wrapped in an IIFE; published via window.SequentialOrganFailureAssessment.
-
 /**
  * @param {AssessmentData} data
  * @param {{ subScores: SubScores, totalSofa: number, deltaSofa: number | null }} grade

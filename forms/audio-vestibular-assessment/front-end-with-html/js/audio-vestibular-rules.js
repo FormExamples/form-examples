@@ -26,8 +26,6 @@ import { DHI_ITEMS } from './types.js';
 // supplied; this function module is the rule registry, with each rule
 // being a per-frequency / per-ear measurement extractor.
 
-// Wrapped in an IIFE; published via window.AudioVestibularAssessment.
-
 /** Calculate a four-frequency PTA from {hz500, hz1000, hz2000, hz4000}. */
 function calculatePtaFromThresholds(thr) {
   if (!thr) return null;

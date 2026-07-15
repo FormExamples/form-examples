@@ -17,8 +17,6 @@
  * @typedef {import('./types.js').FlaggedIssue} FlaggedIssue
  */
 
-// Wrapped in an IIFE; published via window.PaduaVenousThromboembolismRiskAssessment.
-
 /**
  * @param {AssessmentData} data
  * @param {number} paduaScore  - total 0-20 from the grader

@@ -30,8 +30,6 @@ import { activeItemNumbers, maxScoreFor, ratingValue, zaritItems } from './rules
  * @typedef {import('./types.js').FiredItem} FiredItem
  */
 
-// Wrapped in an IIFE; published via window.ZaritBurdenInterview.
-
 /**
  * Derive the burden band from a total for the given instrument form.
  * @param {number} totalScore

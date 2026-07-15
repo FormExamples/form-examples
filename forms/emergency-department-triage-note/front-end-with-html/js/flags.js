@@ -19,8 +19,6 @@
  * @typedef {import('./types.js').FiredDiscriminator} FiredDiscriminator
  */
 
-// Wrapped in an IIFE; published via window.EmergencyDepartmentTriageNote.
-
 /**
  * @param {AssessmentData} data
  * @param {{ firedDiscriminators: FiredDiscriminator[], news2Total: number,

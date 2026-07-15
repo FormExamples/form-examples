@@ -17,10 +17,6 @@ import { acvpuLabel, ageBandLabel, arrivalModeLabel, careSettingLabel, emptyAsse
 //
 // This is a CLASSIFICATION form: the engine selects the most urgent level
 // justified by the findings; it does not sum a numeric total.
-//
-// Sibling files loaded as plain `<script>` tags (in order) attach their exports
-// to `window.EmergencyDepartmentTriageNote`. The whole file is wrapped in an
-// IIFE so its top-level identifiers don't leak.
 
 // ----------------------------------------------------------------------
 // Persistence

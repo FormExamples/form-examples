@@ -9,10 +9,6 @@ import { calculateGCSTotal, emptyCasualtyCard, news2ResponseClass, news2Response
 // been answered. Submission runs the pure NEWS2 calculator and renders an
 // inline aria-live report. State persists in localStorage so a partial
 // fill survives a reload.
-//
-// Sibling files loaded via classic <script> tags attach symbols to
-// `window.CasualtyCardForm`. The whole file is wrapped in an IIFE so its
-// top-level identifiers do not leak.
 
 // ----------------------------------------------------------------------
 // Persistence

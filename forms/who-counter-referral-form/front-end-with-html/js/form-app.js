@@ -8,11 +8,7 @@ import { emptyAssessment, priorityLabel, sectionLabel } from './types.js';
 // Situation, Background, Assessment, Recommendations, Provider Sign-off)
 // into the #form-sections host, wires up navigation via the step-list table
 // of contents, persists state to localStorage on every change, validates
-// required fields on submit, and renders an inline report. Sibling modules
-// (rules / validator / flagged-issues) are loaded as plain <script> tags and
-// attach their public symbols to `window.WhoCounterReferralForm`. The whole
-// file is wrapped in an IIFE so its top-level identifiers do not leak to
-// the global scope.
+// required fields on submit, and renders an inline report.
 
 // ----------------------------------------------------------------------
 // Persistence

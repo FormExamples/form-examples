@@ -15,8 +15,6 @@ import { deriveCompletionStatus } from './types.js';
  * @typedef {import('./types.js').FiredRule} FiredRule
  */
 
-// Wrapped in an IIFE; published via window.EmployeeOnboardingChecklist.
-
 /**
  * Pure function: evaluates all onboarding rules against employee data.
  * Returns completion percentage, status, risk level, and all fired rules.

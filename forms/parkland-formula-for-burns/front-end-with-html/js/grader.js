@@ -33,8 +33,6 @@ import { FIRST_PHASE_HOURS, PARKLAND_COEFFICIENT, SECOND_PHASE_HOURS, URINE_HIGH
  * @typedef {import('./types.js').FiredRule} FiredRule
  */
 
-// Wrapped in an IIFE; published via window.ParklandFormulaForBurns.
-
 /** Round a number to one decimal place (returns null unchanged). */
 function roundOne(n) {
   if (n === null || n === undefined || Number.isNaN(n)) return null;

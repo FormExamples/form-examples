@@ -24,8 +24,6 @@ import { wellsRules } from './rules.js';
  * @typedef {import('./types.js').FiredCriterion} FiredCriterion
  */
 
-// Wrapped in an IIFE; published via window.WellsScoreForPulmonaryEmbolism.
-
 /**
  * Evaluate the seven Wells rules and collect the ones that fired.
  * @param {AssessmentData} data

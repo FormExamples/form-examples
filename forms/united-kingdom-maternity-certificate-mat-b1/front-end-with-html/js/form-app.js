@@ -1,8 +1,6 @@
 import { validateMatB1 } from './mat-b1-validator.js';
 import { emptyAssessment, isFilled, priorityLabel } from './types.js';
 
-// MAT B1 maternity certificate - patient wizard (vanilla JS, classic <script>).
-//
 // Single-page continuous wizard: every section is rendered into the page in
 // document order. The user scrolls through them; a top-of-page progress
 // summary reflects how many tracked fields have been answered. Submission

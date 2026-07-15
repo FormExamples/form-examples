@@ -27,8 +27,6 @@ import { priorityColour, priorityName, targetMinutes } from './types.js';
  * @typedef {import('./types.js').PriorityLevel} PriorityLevel
  */
 
-// Wrapped in an IIFE; published via window.EmergencyDepartmentTriageNote.
-
 /** The six scored physiological parameters (oxygen weighting excluded). */
 const RED_SCORE_KEYS = [
   'respiratoryRate', 'spo2', 'systolicBp', 'pulse', 'consciousness', 'temperature'

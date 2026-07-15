@@ -6,8 +6,6 @@
 // red-flag auto-escalation. Rule IDs are stable and identical across every
 // front-end and the back-end (R-APPROP-*, R-WINDOW-*, R-COMPLETE-*,
 // R-TRIAGE-*). Pure data + helpers; the grader composes them.
-//
-// Wrapped in an IIFE; published via `window.PregnancyUltrasoundTestRequest`.
 
 // ----------------------------------------------------------------------
 // Axis A — Appropriateness (ACR Appropriateness Criteria 1-9 ordinal)

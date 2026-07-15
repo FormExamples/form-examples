@@ -18,8 +18,6 @@
  * @typedef {import('./types.js').Flag} Flag
  */
 
-// Wrapped in an IIFE; published via window.AnaestheticRecord.
-
 // Physiological limits for the derangement flag (spec §5).
 const SPO2_LOWER_LIMIT = 92;
 const SYSTOLIC_LOWER_LIMIT = 90;

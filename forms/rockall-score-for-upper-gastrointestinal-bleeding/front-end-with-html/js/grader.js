@@ -29,8 +29,6 @@ import { agePoints, comorbidityPoints, diagnosisPoints, riskBand, rockallRules, 
  * @typedef {import('./types.js').FiredRule} FiredRule
  */
 
-// Wrapped in an IIFE; published via window.RockallScoreForUpperGastrointestinalBleeding.
-
 /**
  * Evaluate the declarative rule table and collect the rows that fired.
  * @param {AssessmentData} data

@@ -3,8 +3,7 @@ import { riskCategory } from './types.js';
 
 // Pure prenatal risk grader.
 //
-// Mirrors `src/lib/engine/risk-grader.ts` from the SvelteKit reference. Loaded
-// as a classic <script>; attaches `calculateRisk` to `window.PrenatalAssessment`.
+// Mirrors `src/lib/engine/risk-grader.ts` from the SvelteKit reference.
 
 function fire(id, firedRules) {
   const rule = riskRules.find((r) => r.id === id);

@@ -4,8 +4,6 @@
 // composite-risk algorithm (grader.js) sets compositeRisk to the worst flag
 // priority when no statutory blocker has fired. Flag rule IDs and priorities
 // are stable and identical across every front-end and the back-end.
-//
-// Wrapped in an IIFE; published via `window.UkLpaFinancialDecisions`.
 
 function singleAttorneyNoReplacement(lpa) {
   if (lpa.attorneys.length !== 1) return null;

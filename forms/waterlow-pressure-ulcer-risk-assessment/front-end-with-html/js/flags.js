@@ -21,8 +21,6 @@
  * @typedef {import('./types.js').FlaggedIssue} FlaggedIssue
  */
 
-// Wrapped in an IIFE; published via window.WaterlowPressureUlcerRiskAssessment.
-
 // The six core category inputs (build, skin, sex, age, continence, mobility)
 // used for the completeness check. Each is [section, field].
 const CORE_INPUTS = [

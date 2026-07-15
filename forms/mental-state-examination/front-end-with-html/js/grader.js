@@ -30,8 +30,6 @@ import { domainRules } from './rules.js';
  * @typedef {import('./types.js').GradingResult} GradingResult
  */
 
-// Wrapped in an IIFE; published via window.MentalStateExamination.
-
 /**
  * Evaluate each domain-documentation rule against the record.
  * @param {AssessmentData} data

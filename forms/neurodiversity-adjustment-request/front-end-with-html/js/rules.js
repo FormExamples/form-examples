@@ -9,8 +9,6 @@
 // auto-escalation. Rule IDs are stable and identical across every front-end and
 // the back-end (R-ELIG-*, R-IMPACT-*, R-COMPLETE-*, R-PRIORITY-*). Pure data +
 // helpers; the grader composes them.
-//
-// Wrapped in an IIFE; published via `window.NeurodiversityAdjustmentRequest`.
 
 // ----------------------------------------------------------------------
 // Shared helpers

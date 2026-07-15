@@ -18,8 +18,6 @@
  * @typedef {import('./types.js').FlaggedIssue} FlaggedIssue
  */
 
-// Wrapped in an IIFE; published via window.PulmonaryEmbolismRuleOutCriteria.
-
 /**
  * True when any criterion input or the pre-test probability is unanswered.
  * @param {AssessmentData} data

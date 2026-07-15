@@ -14,8 +14,6 @@ import { hasAbnormalResult, hasAnyResultValue, hasCriticalValue } from './rules.
  * @typedef {import('./types.js').FlagPriority} FlagPriority
  */
 
-// Wrapped in an IIFE; published via window.BloodTestResult.
-
 /**
  * Detect the safety-critical flags for a report.
  * @param {BloodTestResult} r

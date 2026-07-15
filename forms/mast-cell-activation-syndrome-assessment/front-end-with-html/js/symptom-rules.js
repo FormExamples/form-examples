@@ -8,8 +8,6 @@
  * @property {string} description
  */
 
-// Wrapped in an IIFE; published via window.MastCellActivationSyndromeAssessment.
-
 /** @type {SymptomDomainDefinition[]} */
 const symptomDomains = [
   {

@@ -25,8 +25,6 @@
  * @property {(d: AssessmentData) => boolean} evaluate
  */
 
-// Wrapped in an IIFE; published via window.EmployeeOffboardingChecklist.
-
 /** "Outstanding" helper: yes-no field is anything other than 'yes'. */
 function notYes(v) { return v !== 'yes'; }
 

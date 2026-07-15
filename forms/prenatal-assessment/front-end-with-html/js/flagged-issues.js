@@ -1,7 +1,6 @@
 // Detects additional safety-critical flags independent of the cumulative risk
 // score. Mirrors `src/lib/engine/flagged-issues.ts` from the SvelteKit
-// reference. Loaded as a classic <script>; attaches `detectAdditionalFlags`
-// to `window.PrenatalAssessment`.
+// reference.
 
 function detectAdditionalFlags(data) {
   const flags = [];

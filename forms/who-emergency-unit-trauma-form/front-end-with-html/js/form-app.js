@@ -2,18 +2,16 @@ import { validateEuTrauma } from './eu-trauma-validator.js';
 import { detectFlaggedIssues } from './flagged-issues.js';
 import { emptyAssessment, hasNumber, priorityLabel, sectionLabel } from './types.js';
 
-// WHO Emergency Unit Form: Trauma — patient/clinician wizard (vanilla
-// JS, classic <script>). Single-page continuous wizard: every section
-// is rendered into the page in document order. Conditional rules (time
-// of death only when dead-on-arrival; spine stabilisation / GCS only
-// for RED triage; road-traffic mechanism details only when RTI is
-// ticked; with-life-vest only when drowning; FAST side indicator only
-// for matching chest finding; admit ward / transfer destination /
-// cause of death by disposition) are gated by the validator's
-// applies() so the report only counts a rule when its branch is
-// active. Submission runs the pure validator + flagged-issues engine
-// and renders an inline report. State is persisted to localStorage so
-// a partial fill survives a page reload.
+// Single-page continuous wizard: every section is rendered into the page in
+// document order. Conditional rules (time of death only when dead-on-arrival;
+// spine stabilisation / GCS only for RED triage; road-traffic mechanism
+// details only when RTI is ticked; with-life-vest only when drowning; FAST
+// side indicator only for matching chest finding; admit ward / transfer
+// destination / cause of death by disposition) are gated by the validator's
+// applies() so the report only counts a rule when its branch is active.
+// Submission runs the pure validator + flagged-issues engine and renders an
+// inline report. State is persisted to localStorage so a partial fill
+// survives a page reload.
 //
 // Structural Lily Design System HTML headless refactor (commit 5fffc50d
 // proven the pattern via who-surgical-safety-checklist). Builders emit
@@ -25,9 +23,6 @@ import { emptyAssessment, hasNumber, priorityLabel, sectionLabel } from './types
 // class="step-list" data-current> renders a table-of-contents with
 // per-section status. validateForm/renderErrorSummary/setFieldError/
 // clearFieldError gate Submit on required fields.
-//
-// The whole file is wrapped in an IIFE so its locals do not leak to
-// the global scope.
 
 // ----------------------------------------------------------------------
 // Persistence

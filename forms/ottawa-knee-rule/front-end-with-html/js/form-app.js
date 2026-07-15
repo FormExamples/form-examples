@@ -14,11 +14,6 @@ import { criterionLabel, decisionClass, decisionLabel, emptyAssessment, priority
 //
 // This is a DECISION RULE, not a score: there is no total. A knee radiograph is
 // indicated when ANY one of the five criteria is present.
-//
-// Sibling files loaded as plain `<script>` tags (in order) attach their exports
-// to `window.OttawaKneeRule`. Pulling them off here keeps the rest of this file
-// referring to short local names. The whole file is wrapped in an IIFE so its
-// top-level identifiers don't leak.
 
 // ----------------------------------------------------------------------
 // Persistence

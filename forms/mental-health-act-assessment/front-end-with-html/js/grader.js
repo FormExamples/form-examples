@@ -31,8 +31,6 @@ import { CRITERIA, SIGNATORIES, nonEmpty, sectionToClass } from './rules.js';
  * @typedef {import('./types.js').CriterionResult} CriterionResult
  */
 
-// Wrapped in an IIFE; published via window.MentalHealthActAssessment.
-
 /**
  * Build the required-signatory checklist for the recommended section.
  * @param {MentalHealthActAssessment} data

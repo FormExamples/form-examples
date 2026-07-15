@@ -9,10 +9,6 @@ import { abnormalitySeverityClass, abnormalitySeverityLabel, biopsySiteLabel, fo
 // rendered table is sortable (click any column header) and filterable (search
 // box + classification dropdown + follow-up-urgency dropdown), mirroring the
 // SvelteKit dashboard route's columns and filters.
-//
-// Sibling modules loaded as plain `<script>` tags (in dependency order) attach
-// their exports to `window.BiopsyTestResultDashboard`. The whole file is wrapped
-// in an IIFE so its top-level identifiers do not leak.
 
 // ----------------------------------------------------------------------
 // State

@@ -16,8 +16,6 @@ import { tinettiCategory } from './types.js';
  * @typedef {import('./types.js').FiredRule} FiredRule
  */
 
-// Wrapped in an IIFE; published via window.MobilityAssessment.
-
 /**
  * Calculate Tinetti score from assessment data.
  * @param {AssessmentData} data

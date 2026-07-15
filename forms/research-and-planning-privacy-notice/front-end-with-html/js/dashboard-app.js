@@ -14,13 +14,6 @@ import { samplePatients } from './data.js';
 // National Opt-Out, then Type 1 Opt-Out, then Not Recorded, then Opted In —
 // so the IG officer sees the highest-priority compliance signals without
 // scrolling.
-//
-// Sibling modules loaded as plain `<script>` tags (in dependency order)
-// attach their exports to
-// `window.ResearchAndPlanningPrivacyNoticeDashboard`. Pulling them off here
-// keeps the rest of this file referring to short local names. The whole file
-// is wrapped in an IIFE so its top-level identifiers do not leak to the
-// global scope.
 
 // ----------------------------------------------------------------------
 // State

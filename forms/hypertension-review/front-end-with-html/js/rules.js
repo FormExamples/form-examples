@@ -17,8 +17,6 @@
  * @typedef {import('./types.js').PrimarySource} PrimarySource
  */
 
-// Wrapped in an IIFE; published via window.HypertensionReview.
-
 /** A numeric field is present when it is neither null nor undefined. */
 function present(v) {
   return v !== null && v !== undefined && !Number.isNaN(v);

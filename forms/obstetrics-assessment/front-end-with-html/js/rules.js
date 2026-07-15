@@ -27,8 +27,6 @@
  * @property {(d: AssessmentData) => (RiskLevel | null)} evaluate
  */
 
-// Wrapped in an IIFE; published via window.ObstetricsAssessment.
-
 /** @type {NG201Rule[]} */
 const ng201Rules = [
   // ─── Maternal age ─────────────────────────────────────────

@@ -24,8 +24,6 @@ import { DOMAINS } from './types.js';
  * @property {(d: AssessmentData) => boolean} satisfied
  */
 
-// Wrapped in an IIFE; published via window.MentalStateExamination.
-
 /**
  * A domain is documented when at least one of its finding fields is non-blank.
  * @param {AssessmentData} data

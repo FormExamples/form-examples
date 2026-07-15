@@ -21,8 +21,6 @@ import { ASIAN_HIGH, ASIAN_INCREASED, BMI_MAX, BMI_MIN, BMI_NORMAL, BMI_OBESE_3,
  * @typedef {import('./types.js').FlaggedIssue} FlaggedIssue
  */
 
-// Wrapped in an IIFE; published via window.BmiBsaCalculator.
-
 /**
  * @param {AssessmentData} data
  * @param {number | null} bmi   - unrounded BMI, or null when inputs are missing

@@ -24,8 +24,6 @@
  * @property {boolean} [special]  - true for the four special-risk groups
  */
 
-// Wrapped in an IIFE; published via window.WaterlowPressureUlcerRiskAssessment.
-
 // Per-category option -> points maps (spec §4). An unlisted or '' value scores 0.
 const POINT_MAPS = {
   buildWeightForHeight: {

@@ -20,9 +20,6 @@
  * @property {(d: AssessmentData) => number} points  - 0-4 point value (0 when unanswered)
  */
 
-// Wrapped in an IIFE; published via
-// window.AlcoholUseDisordersIdentificationTestConsumption.
-
 /** Coerce an item value (number, numeric string, or null) to a 0-4 point. */
 function toPoint(v) {
   if (v === null || v === undefined || v === '') return 0;

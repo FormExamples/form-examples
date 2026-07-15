@@ -17,8 +17,6 @@
  * @typedef {import('./types.js').DeathCertificate} DeathCertificate
  */
 
-// Wrapped in an IIFE; published via window.MedicalCertificateOfCauseOfDeath.
-
 const nonEmpty = (s) => typeof s === 'string' && s.trim() !== '';
 
 /**

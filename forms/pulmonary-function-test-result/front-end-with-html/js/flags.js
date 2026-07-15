@@ -14,7 +14,6 @@ import { hasCriticalFinding } from './rules.js';
  * @typedef {import('./types.js').FlagPriority} FlagPriority
  */
 
-// Wrapped in an IIFE; published via window.PulmonaryFunctionTestResult.
 // Depends on rules.js (hasCriticalFinding), so it must load after it.
 
 /**

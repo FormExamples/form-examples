@@ -20,8 +20,6 @@ import { clavienDindoRuleByGrade } from './clavien-dindo-rules.js';
  * @typedef {import('./types.js').FiredRule} FiredRule
  */
 
-// Wrapped in an IIFE; published via window.PostOperativeReport.
-
 /** Friendly label for a Clavien-Dindo grade key. */
 function gradeLabel(grade) {
   const rule = clavienDindoRuleByGrade[grade];

@@ -4,7 +4,7 @@
 // Builds the canonical empty `UrinalysisRequest` shape so newly-added fields
 // default correctly when older saved state is rehydrated from localStorage.
 // Property names are camelCase to match the front-end serde / examples
-// convention. Wrapped in an IIFE; published via `window.UrinalysisTestRequest`.
+// convention.
 
 /**
  * Build a fresh, fully-blank urinalysis test request.

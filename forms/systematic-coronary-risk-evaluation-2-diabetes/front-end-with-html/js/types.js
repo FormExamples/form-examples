@@ -1,8 +1,4 @@
 // SCORE2-Diabetes - Types and factory functions.
-//
-// Classic <script> module: attaches its public symbols to
-// `window.SystematicCoronaryRiskEvaluation2Diabetes`. Wrapped in an IIFE
-// so its top-level identifiers do not leak.
 
 /**
  * @returns {Object} Empty AssessmentData record with all sections present.

@@ -33,8 +33,6 @@
  * @property {(ctx: WorstEyeContext) => boolean} evaluate
  */
 
-// Wrapped in an IIFE; published via window.DiabeticEyeScreening.
-
 // Retinopathy severity ranking: R0 < R1 < R2 < R3S < R3A. A stable treated
 // proliferative eye (R3S) ranks below an active proliferative eye (R3A) because
 // the active disease is the more urgent finding.

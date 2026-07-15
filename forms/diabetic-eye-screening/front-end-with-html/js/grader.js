@@ -29,8 +29,6 @@ import { classificationRules, deriveContext } from './rules.js';
  * @typedef {import('./types.js').FiredRule} FiredRule
  */
 
-// Wrapped in an IIFE; published via window.DiabeticEyeScreening.
-
 /**
  * Completeness of one eye's grading: it must carry an R and an M grade, unless
  * it is explicitly marked ungradable.

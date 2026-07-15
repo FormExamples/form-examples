@@ -1,5 +1,4 @@
-// Static HTML port of the SvelteKit engine. Plain JS, no ES modules, so the
-// page works opened directly via file://. Public symbols are attached to
+// Static HTML port of the SvelteKit engine. Public symbols are attached to
 // window.MedicalWaitingListCard.
 
   

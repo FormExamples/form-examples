@@ -14,8 +14,6 @@ import { categorizeScore, normalizeLikertScores } from './types.js';
  * @typedef {import('./types.js').FiredRule} FiredRule
  */
 
-// Wrapped in an IIFE; published via window.PatientSatisfactionSurvey.
-
 /**
  * Calculate normalized scores for each of the seven satisfaction domains.
  * @param {AssessmentData} data

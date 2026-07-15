@@ -30,8 +30,6 @@ import { ckdStageLabel, diabetesLabel, ethnicityLabel, smokingLabel } from './ty
  * @typedef {import('./types.js').Contribution} Contribution
  */
 
-// Wrapped in an IIFE; published via window.Qrisk3CardiovascularDiseaseRiskScore.
-
 const {
   MEANS, SEX_MODEL, CONTINUOUS_WEIGHTS, SMOKING_WEIGHTS, DIABETES_WEIGHTS,
   ETHNICITY_WEIGHTS, CKD_WEIGHTS, BINARY_WEIGHTS

@@ -5,8 +5,7 @@
 // default correctly when older saved state is rehydrated from localStorage.
 // Property names are camelCase to match the front-end serde / examples
 // convention. The requested tests are modelled as BOOLEAN fields, mirroring the
-// `test_*` columns in SQL migration 04. Wrapped in an IIFE; published via
-// `window.MicrobiologyCultureTestRequest`.
+// `test_*` columns in SQL migration 04.
 
 /**
  * Build a fresh, fully-blank microbiology culture request.

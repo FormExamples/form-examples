@@ -15,7 +15,6 @@ import { hasActionSignal, hasAnyMeasuredMarker, hasGermCellCriticalMarker, isCri
  * @typedef {import('./types.js').FlagPriority} FlagPriority
  */
 
-// Wrapped in an IIFE; published via window.TumorMarkerTestResult.
 // Depends on rules.js predicates, so it must load after rules.js.
 
 /**

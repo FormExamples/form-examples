@@ -16,8 +16,6 @@ import { calculateAllergyBurdenScore } from './types.js';
  * @typedef {import('./types.js').FiredRule} FiredRule
  */
 
-// Wrapped in an IIFE; published via window.AllergyAssessment.
-
 /**
  * Evaluate every severity rule against the assessment data and produce the
  * overall severity level plus per-rule audit trail.

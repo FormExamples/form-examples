@@ -21,8 +21,6 @@ import { mcasCategory } from './types.js';
  * @typedef {import('./types.js').SymptomDetail} SymptomDetail
  */
 
-// Wrapped in an IIFE; published via window.MastCellActivationSyndromeAssessment.
-
 /**
  * Score one organ system. Pushes a FiredRule for each symptom with severity
  * > 0 and returns the cumulative system score.

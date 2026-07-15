@@ -9,11 +9,6 @@ import { sampleRequests } from './data.js';
 // (search box + exam-type dropdown + triage-tier dropdown + appropriateness-
 // band dropdown + priority-band dropdown + two-week-wait dropdown + safety-
 // flags dropdown).
-//
-// Sibling modules loaded as plain `<script>` tags (in dependency order) attach
-// their exports to `window.MammographyTestRequestDashboard`. The whole file is
-// wrapped in an IIFE so its top-level identifiers do not leak to the global
-// scope.
 
 // ----------------------------------------------------------------------
 // State

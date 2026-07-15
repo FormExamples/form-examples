@@ -11,8 +11,6 @@ import { countSelectedAssays } from './types.js';
 // stable and identical across every front-end and the back-end (R-APPROP-*,
 // R-TIMING-*, R-COMPLETE-*, R-TRIAGE-*). Pure data + helpers; the grader
 // composes them.
-//
-// Wrapped in an IIFE; published via `window.ToxicologyTestRequest`.
 
 // ----------------------------------------------------------------------
 // Axis A — Appropriateness (TOXBASE / NPIS indication-to-assay match, 1-9)

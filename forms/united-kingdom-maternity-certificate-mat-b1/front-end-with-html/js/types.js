@@ -94,11 +94,6 @@
  * @property {string} timestamp
  */
 
-// Wrapped in an IIFE so locals stay scoped — this file is loaded as a
-// classic <script> (no ES modules) so the page can be opened directly via
-// `file://`. Public symbols attach to a single global namespace,
-// `window.MatB1Form`.
-
 /** @returns {AssessmentData} */
 function emptyAssessment() {
   return {

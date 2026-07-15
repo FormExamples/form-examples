@@ -10,8 +10,6 @@ import { isExerciseTest } from './types.js';
 // tier with red-flag auto-escalation. Rule IDs are stable and identical across
 // every front-end and the back-end (R-APPROP-*, R-SAFETY-*, R-COMPLETE-*,
 // R-TRIAGE-*). Pure data + helpers; the grader composes them.
-//
-// Wrapped in an IIFE; published via `window.CardiacStressTestRequest`.
 
 // ----------------------------------------------------------------------
 // Axis A — Appropriateness (ACC/AHA Appropriate Use Criteria 1-9 ordinal)

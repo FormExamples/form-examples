@@ -18,8 +18,6 @@ import { nihssCategory } from './types.js';
  * @typedef {import('./types.js').FiredRule} FiredRule
  */
 
-// Wrapped in an IIFE; published via window.StrokeAssessment.
-
 /**
  * Calculate the NIHSS score from patient assessment data.
  * @param {AssessmentData} data

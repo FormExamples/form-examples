@@ -6,10 +6,6 @@
 // rehydrated from localStorage. Also exposes a few utility helpers that
 // mirror `src/lib/engine/utils.ts` (age, percentile category, gestational
 // age category, dev-screen labels and colour classes).
-//
-// Wrapped in an IIFE; loaded as a classic <script> tag (no ES modules) so
-// the page can be opened directly via `file://`. Public symbols are
-// attached to a single global namespace, `window.PediatricAssessment`.
 
 /**
  * @typedef {'male' | 'female' | 'other' | ''} Sex

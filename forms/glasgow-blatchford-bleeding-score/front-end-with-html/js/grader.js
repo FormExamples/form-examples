@@ -27,8 +27,6 @@ import { bloodUreaPoints, cardiacFailurePoint, gbsRules, haemoglobinPoints, hepa
  * @typedef {import('./types.js').FiredRule} FiredRule
  */
 
-// Wrapped in an IIFE; published via window.GlasgowBlatchfordBleedingScore.
-
 /**
  * True when every scored parameter has an input and the patient's sex is known
  * (an unknown / unset sex is treated as incomplete because it changes the

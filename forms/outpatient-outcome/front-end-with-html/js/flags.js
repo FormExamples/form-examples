@@ -10,8 +10,6 @@ import { eq5dSummary } from './rules.js';
 //   high     — important for clinical follow-up
 //   medium   — warrants review / further action
 //   low      — data quality or minor operational concern
-//
-// Wrapped in an IIFE; published via `window.OutpatientOutcome`.
 
 /**
  * Detect flagged issues.

@@ -18,8 +18,6 @@
  * @typedef {import('./types.js').FlaggedIssue} FlaggedIssue
  */
 
-// Wrapped in an IIFE; published via window.OttawaAnkleRules.
-
 // Criterion inputs that feed the ankle decision, with a human label for the
 // incomplete-assessment flag.
 const ANKLE_INPUTS = [

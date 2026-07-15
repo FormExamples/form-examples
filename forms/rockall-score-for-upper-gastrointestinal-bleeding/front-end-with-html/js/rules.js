@@ -35,8 +35,6 @@
  * @property {(d: AssessmentData) => boolean} evaluate
  */
 
-// Wrapped in an IIFE; published via window.RockallScoreForUpperGastrointestinalBleeding.
-
 /**
  * Clinical parameter — age (years). Returns 0/1/2; a missing age scores 0.
  * @param {AssessmentData} d

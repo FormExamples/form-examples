@@ -23,8 +23,6 @@ import { ancillaryRules } from './mfs-rules.js';
  * @typedef {import('./types.js').AdditionalFlag} AdditionalFlag
  */
 
-// Wrapped in an IIFE; published via window.FallRiskAssessment.
-
 /**
  * @param {AssessmentData} data
  * @returns {AdditionalFlag[]}

@@ -21,9 +21,6 @@ import { completenessSlots, mandatoryRules } from './rules.js';
  * @typedef {import('./types.js').FiredRule} FiredRule
  */
 
-// Wrapped in an IIFE; published via
-// window.RecommendedSummaryPlanForEmergencyCareAndTreatment.
-
 /**
  * Evaluate the eight mandatory rules against the plan.
  * @param {RespectPlan} plan

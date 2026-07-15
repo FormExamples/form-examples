@@ -20,8 +20,6 @@ import { counterReferralRules as rules } from './counter-referral-rules.js';
  * @typedef {import('./types.js').ValidationResult} ValidationResult
  */
 
-// Wrapped in an IIFE; published via window.WhoCounterReferralForm.
-
 /**
  * @param {AssessmentData} data
  * @returns {ValidationResult}

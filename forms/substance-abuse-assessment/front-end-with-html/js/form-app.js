@@ -10,10 +10,6 @@ import { auditRiskCategory, auditRiskLabel, bmiCategory, calculateAuditScore, ca
 // progress summary reflects how many fields have been answered. Submission
 // runs the pure AUDIT/DAST scoring engine and renders an inline report.
 // State is persisted to localStorage so a partial fill survives a reload.
-//
-// Sibling files loaded as plain `<script>` tags (in order) attach their
-// exports to `window.SubstanceAbuseAssessment`. Whole file is wrapped
-// in an IIFE so its top-level identifiers don't leak to the global scope.
 
 // ----------------------------------------------------------------------
 // Persistence

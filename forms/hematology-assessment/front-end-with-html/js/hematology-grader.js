@@ -18,8 +18,6 @@ import { calculateAbnormalityScore, collectNumericItems } from './types.js';
  * @typedef {import('./types.js').FiredRule} FiredRule
  */
 
-// Wrapped in an IIFE; published via window.HematologyAssessment.
-
 /**
  * Calculate the composite abnormality from assessment data.
  * @param {AssessmentData} data

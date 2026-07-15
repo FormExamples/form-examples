@@ -29,8 +29,6 @@ import { classifyENps, classifyScore } from './types.js';
  * @typedef {import('./types.js').ENpsResult} ENpsResult
  */
 
-// Wrapped in an IIFE; published via window.EmployeeSatisfactionSurvey.
-
 /**
  * Score a single domain: mean of 1-5 answers and 0-100 normalised score.
  *

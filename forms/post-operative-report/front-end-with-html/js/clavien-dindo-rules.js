@@ -27,8 +27,6 @@
  * @property {number} order
  */
 
-// Wrapped in an IIFE; published via window.PostOperativeReport.
-
 /** @type {ClavienDindoRule[]} */
 const clavienDindoRules = [
   {

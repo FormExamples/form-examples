@@ -29,8 +29,6 @@ import { cssrsRules } from './rules.js';
  * @typedef {import('./types.js').FiredCriterion} FiredCriterion
  */
 
-// Wrapped in an IIFE; published via window.ColumbiaSuicideSeverityRatingScale.
-
 /** Management recommendation per risk tier (spec §4 tier table). */
 const MANAGEMENT = {
   high:

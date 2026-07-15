@@ -12,8 +12,6 @@
  * @typedef {import('./types.js').AdditionalFlag} AdditionalFlag
  */
 
-// Wrapped in an IIFE; published via window.PulmonologyAssessment.
-
 /**
  * @param {AssessmentData} data
  * @returns {AdditionalFlag[]}

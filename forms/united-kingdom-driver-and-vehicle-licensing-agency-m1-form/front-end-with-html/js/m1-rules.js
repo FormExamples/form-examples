@@ -21,8 +21,6 @@ import { isFilled } from './types.js';
  * @typedef {import('./types.js').ValidationRule} ValidationRule
  */
 
-// Wrapped in an IIFE; published via window.DvlaM1Form.
-
 /** @type {ValidationRule[]} */
 const m1Rules = [
   // --- Part A — Personal details -----------------------------------

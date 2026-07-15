@@ -22,8 +22,6 @@
  * @property {string} label   - human-readable band range
  */
 
-// Wrapped in an IIFE; published via window.GraceScoreForAcuteCoronarySyndrome.
-
 // ─── Variable 1: age (years) — monotonically increasing ───────────────
 /** @type {PointBand[]} */
 const AGE_BANDS = [

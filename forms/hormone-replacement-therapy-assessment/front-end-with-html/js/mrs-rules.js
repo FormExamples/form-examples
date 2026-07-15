@@ -24,8 +24,6 @@
  * @property {(d: AssessmentData) => MRSItemScore} getScore
  */
 
-// Wrapped in an IIFE; published via window.HormoneReplacementTherapyAssessment.
-
 /** @type {MRSRule[]} */
 const mrsRules = [
   // ─── SOMATIC SUBSCALE ────────────────────────────────────

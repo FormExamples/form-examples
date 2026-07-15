@@ -28,8 +28,6 @@
  * @property {(d: AssessmentData) => boolean} evaluate  - true when SATISFIED
  */
 
-// Wrapped in an IIFE; published via window.PulmonaryEmbolismRuleOutCriteria.
-
 /** @type {PercRule[]} */
 const percRules = [
   // ─── CRITERION 1: AGE < 50 (derived from the shared age value) ────

@@ -11,8 +11,7 @@ import { anyAdjustment, anyDifficulty } from './rules.js';
 // Each flag is { flagId, category, priority, description, suggestedAction }.
 // Flag IDs are stable and identical across every front-end and the back-end.
 // Some flags depend on the computed eligibility / impact bands, supplied via
-// the `context` argument. Wrapped in an IIFE; published via
-// `window.NeurodiversityAdjustmentRequest`.
+// the `context` argument.
 
 /**
  * Detect compliance-and-wellbeing flags for a reasonable-adjustments request.

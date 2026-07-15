@@ -7,7 +7,6 @@
 //
 // Each flag is { flagId, category, priority, description, suggestedAction }.
 // Flag IDs are stable and identical across every front-end and the back-end.
-// Wrapped in an IIFE; published via `window.EndoscopyTestRequest`.
 
 const LOWER_GI_INDICATIONS = [
   'rectal-bleeding', 'change-in-bowel-habit', 'positive-fit',

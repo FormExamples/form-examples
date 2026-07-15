@@ -21,8 +21,6 @@ import { detectFlaggedIssues } from './flagged-issues.js';
  * @typedef {import('./types.js').CompletenessResult} CompletenessResult
  */
 
-// Wrapped in an IIFE; published via window.AdvanceStatementAboutCare.
-
 /**
  * @param {StatementData} data
  * @param {number} missingRequiredCount

@@ -7,9 +7,6 @@ import { sampleCards } from './data.js';
 // we fall back to the sample data and surface a small banner. The
 // rendered table is sortable (click any column header) and filterable
 // (search + specialty + clinical priority + Waiting Time Status).
-//
-// Sibling modules loaded as plain `<script>` tags (in dependency order)
-// attach their exports to `window.MedicalWaitingListCardDashboard`.
 
   
 

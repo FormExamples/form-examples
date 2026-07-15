@@ -25,8 +25,6 @@ import { mewsParameters } from './rules.js';
  * @typedef {import('./types.js').FiredParameter} FiredParameter
  */
 
-// Wrapped in an IIFE; published via window.ModifiedEarlyWarningScore.
-
 /** Derive the risk band from the aggregate. */
 function bandForScore(score) {
   if (score >= 5) return 'high';

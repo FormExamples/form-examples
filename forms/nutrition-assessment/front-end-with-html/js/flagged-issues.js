@@ -9,8 +9,6 @@
  * @typedef {import('./types.js').AdditionalFlag} AdditionalFlag
  */
 
-// Wrapped in an IIFE; published via window.NutritionAssessment.
-
 /**
  * @param {AssessmentData} data
  * @returns {AdditionalFlag[]}

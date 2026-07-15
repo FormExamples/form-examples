@@ -11,8 +11,6 @@ import { severityLevelFromScore } from './types.js';
  * @typedef {import('./types.js').FiredRule} FiredRule
  */
 
-// Wrapped in an IIFE; published via window.GastroenterologyAssessment.
-
 /**
  * @param {AssessmentData} data
  * @returns {{ severityScore: number, severityLevel: SeverityLevel, firedRules: FiredRule[] }}

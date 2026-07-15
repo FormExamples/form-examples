@@ -17,8 +17,6 @@ import { normalizeLikertScores } from './types.js';
  * @property {(d: AssessmentData) => boolean} evaluate
  */
 
-// Wrapped in an IIFE; published via window.PatientSatisfactionSurvey.
-
 /** @type {SatisfactionRule[]} */
 const satisfactionRules = [
   // ─── ACCESS & WAITING TIMES ────────────────────────────────

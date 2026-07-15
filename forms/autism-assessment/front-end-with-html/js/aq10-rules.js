@@ -5,8 +5,6 @@
 //   - 'agree'    -> score 1 if response is "definitely-agree" or "slightly-agree"
 //   - 'disagree' -> score 1 if response is "definitely-disagree" or "slightly-disagree"
 
-// Wrapped in an IIFE; published via window.AutismAssessment.
-
 const aq10Questions = [
   {
     id: 'AQ10-01',

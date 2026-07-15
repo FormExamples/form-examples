@@ -4,8 +4,7 @@
 // Builds the canonical empty `NeurodiversityAdjustmentRequest` shape so
 // newly-added fields default correctly when older saved state is rehydrated
 // from localStorage. Property names are camelCase to match the front-end serde
-// / examples convention. Wrapped in an IIFE; published via
-// `window.NeurodiversityAdjustmentRequest`.
+// / examples convention.
 
 /**
  * Build a fresh, fully-blank neurodiversity reasonable-adjustments request.

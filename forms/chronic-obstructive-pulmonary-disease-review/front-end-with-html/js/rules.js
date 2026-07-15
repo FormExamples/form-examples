@@ -22,8 +22,6 @@
  * @property {(d: ReviewData) => boolean} evaluate
  */
 
-// Wrapped in an IIFE; published via window.ChronicObstructivePulmonaryDiseaseReview.
-
 // ----------------------------------------------------------------------
 // Shared threshold helpers (single source of truth for the grader)
 // ----------------------------------------------------------------------

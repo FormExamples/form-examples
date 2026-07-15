@@ -2,9 +2,6 @@ import { detectFlaggedIssues } from './flagged-issues.js';
 import { validateReferral } from './referral-validator.js';
 import { emptyAssessment, hasNumber, hasText, isYesNoUnknownAnswered, priorityLabel, sectionLabel } from './types.js';
 
-// WHO Acute Referral Form - patient/clinician wizard (vanilla JS, classic
-// <script>).
-//
 // Single-page continuous wizard: every section is rendered into the page
 // in document order. Steps 1-7 are completed by the initiating facility;
 // step 8 (Referral Facility Receipt) is completed by the receiving

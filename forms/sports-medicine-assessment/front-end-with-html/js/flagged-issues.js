@@ -18,8 +18,6 @@
  * @typedef {import('./types.js').AdditionalFlag} AdditionalFlag
  */
 
-// Wrapped in an IIFE; published via window.SportsMedicineAssessment.
-
 const isYes = (v) => v === 'yes';
 
 /**

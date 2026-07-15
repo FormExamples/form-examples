@@ -7,8 +7,6 @@ import { scoreAppropriateness, scoreCompleteness, scoreSpecimenQuality, scoreTri
 // single pure, deterministic grading result. The public entry point is
 // `calculateGrade(data)`. The output shape and rule / flag IDs are identical
 // across every front-end and the back-end.
-//
-// Wrapped in an IIFE; published via `window.HistopathologyTestRequest`.
 
 /**
  * Derive an overall recommendation for the pathology vetting desk from the

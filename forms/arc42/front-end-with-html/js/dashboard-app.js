@@ -9,10 +9,6 @@ import { sampleDocuments } from './data.js';
 // box + maturity dropdown + recommendation dropdown). Maturity band, completed-
 // section count, flag count, and recommendation all come from the shared engine
 // output so the dashboard and report stay aligned.
-//
-// Sibling modules loaded as plain `<script>` tags (in dependency order) attach
-// their exports to `window.Arc42Dashboard`. The whole file is wrapped in an
-// IIFE so its top-level identifiers do not leak to the global scope.
 
 // ----------------------------------------------------------------------
 // State

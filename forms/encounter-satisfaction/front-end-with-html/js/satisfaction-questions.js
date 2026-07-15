@@ -13,8 +13,6 @@
  * @property {string} text
  */
 
-// Wrapped in an IIFE; published via window.EncounterSatisfaction.
-
 /** @type {SatisfactionQuestion[]} */
 const satisfactionQuestions = [
   // ─── Access & Scheduling (3) ────────────────────────────

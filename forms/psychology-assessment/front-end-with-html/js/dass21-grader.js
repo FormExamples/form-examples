@@ -8,8 +8,6 @@ import { dass21Rules } from './dass21-rules.js';
 //   Anxiety:    0-7  normal / 8-9   mild / 10-14 moderate / 15-19 severe / 20+ extremely severe
 //   Stress:     0-14 normal / 15-18 mild / 19-25 moderate / 26-33 severe / 34+ extremely severe
 
-// Wrapped in an IIFE; published via window.PsychologyAssessment.
-
 /**
  * @typedef {import('./types.js').AssessmentData} AssessmentData
  * @typedef {import('./types.js').DassSeverity} DassSeverity

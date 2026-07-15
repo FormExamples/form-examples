@@ -9,10 +9,6 @@ import { sampleReviews } from './data.js';
 // table is sortable (click any column header) and filterable (search box +
 // G-stage dropdown + KDIGO-zone dropdown + review-status dropdown +
 // referral-flag dropdown).
-//
-// Sibling modules loaded as plain `<script>` tags (in dependency order) attach
-// their exports to `window.ChronicKidneyDiseaseReviewDashboard`. The whole file
-// is wrapped in an IIFE so its top-level identifiers do not leak.
 
 // ----------------------------------------------------------------------
 // State

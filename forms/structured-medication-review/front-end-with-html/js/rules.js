@@ -23,8 +23,6 @@
  * @typedef {import('./types.js').BurdenBand} BurdenBand
  */
 
-// Wrapped in an IIFE; published via window.StructuredMedicationReview.
-
 /** Polypharmacy boundary thresholds (regular-medicine count). */
 const POLYPHARMACY_THRESHOLD = 5;
 const HYPERPOLYPHARMACY_THRESHOLD = 10;

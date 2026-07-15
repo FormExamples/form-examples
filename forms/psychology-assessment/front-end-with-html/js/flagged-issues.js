@@ -11,8 +11,6 @@
  * @typedef {import('./types.js').SubscaleScore} SubscaleScore
  */
 
-// Wrapped in an IIFE; published via window.PsychologyAssessment.
-
 /**
  * @param {AssessmentData} data
  * @param {SubscaleScore} depression

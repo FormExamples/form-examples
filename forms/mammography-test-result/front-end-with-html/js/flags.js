@@ -15,7 +15,6 @@ import { isBiRadsCritical, isBiRadsUrgent } from './rules.js';
  * @typedef {import('./types.js').FlagPriority} FlagPriority
  */
 
-// Wrapped in an IIFE; published via window.MammographyTestResult.
 // Depends on rules.js (isBiRadsUrgent / isBiRadsCritical), so it must load
 // after it.
 

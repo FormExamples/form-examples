@@ -24,8 +24,6 @@
  * @property {(d: AssessmentData) => boolean} fires
  */
 
-// Wrapped in an IIFE; published via window.SportsMedicineAssessment.
-
 const isYes = (v) => v === 'yes';
 const isHighContact = (d) => d.sportPositionDetails.contactLevel === 'high';
 const isContactSport = (d) =>

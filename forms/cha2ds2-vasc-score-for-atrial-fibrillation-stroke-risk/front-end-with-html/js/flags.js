@@ -18,9 +18,6 @@
  * @typedef {import('./types.js').FlaggedIssue} FlaggedIssue
  */
 
-// Wrapped in an IIFE; published via
-// window.Cha2ds2VascScoreForAtrialFibrillationStrokeRisk.
-
 /**
  * @param {AssessmentData} data
  * @param {{ riskBand: 'low'|'intermediate'|'high', cha2ds2VascScore: number }} grade

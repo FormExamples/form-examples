@@ -4,8 +4,7 @@
 //
 // Builds the canonical empty `ClinicianAssessment` shape so newly-added
 // fields default correctly when older saved state is rehydrated from
-// localStorage. Wrapped in an IIFE; published via
-// `window.PreOperativeAssessmentByClinician`.
+// localStorage.
 
 /**
  * Build a fresh, fully-blank clinician assessment.

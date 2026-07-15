@@ -20,8 +20,6 @@ import { normaliseCreatinine } from './rules.js';
  * @typedef {import('./types.js').FlaggedIssue} FlaggedIssue
  */
 
-// Wrapped in an IIFE; published via window.GraceScoreForAcuteCoronarySyndrome.
-
 /**
  * @param {AssessmentData} data
  * @param {'low' | 'intermediate' | 'high'} riskCategory  - overall category from the grader

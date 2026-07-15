@@ -18,8 +18,6 @@
  * @typedef {import('./types.js').FlaggedIssue} FlaggedIssue
  */
 
-// Wrapped in an IIFE; published via window.CapriniVenousThromboembolismRiskAssessment.
-
 // The 3-point thrombophilia factors (excludes historyOfVte, which has its own
 // prior-VTE flag).
 const THROMBOPHILIA_FIELDS = [

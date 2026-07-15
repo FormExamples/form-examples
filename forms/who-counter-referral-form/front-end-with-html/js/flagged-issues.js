@@ -14,8 +14,6 @@ import { hasAnyStatusFlag, hasText } from './types.js';
  * @typedef {import('./types.js').FlaggedIssue} FlaggedIssue
  */
 
-// Wrapped in an IIFE; published via window.WhoCounterReferralForm.
-
 /**
  * @param {AssessmentData} data
  * @returns {FlaggedIssue[]}

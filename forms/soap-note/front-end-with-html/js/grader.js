@@ -29,8 +29,6 @@ import { SOAP_SECTIONS } from './types.js';
  * @typedef {import('./types.js').GradingResult} GradingResult
  */
 
-// Wrapped in an IIFE; published via window.SoapNote.
-
 /**
  * Build the per-SOAP-section presence rows for the report.
  * @param {{subjectivePresent: boolean, objectivePresent: boolean,

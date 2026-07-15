@@ -14,8 +14,6 @@
  * @typedef {import('./types.js').FiredRule} FiredRule
  */
 
-// Wrapped in an IIFE; published via window.BiopsyTestResult.
-
 // ──────────────────────────────────────────────
 // Diagnostic predicates (utils.ts)
 // ──────────────────────────────────────────────

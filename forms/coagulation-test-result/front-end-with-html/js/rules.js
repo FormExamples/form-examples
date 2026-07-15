@@ -18,8 +18,6 @@
  * @typedef {import('./types.js').FiredRule} FiredRule
  */
 
-// Wrapped in an IIFE; published via window.CoagulationTestResult.
-
 // ----------------------------------------------------------------------
 // Critical-value and abnormality predicates (mirror `utils.ts`)
 // ----------------------------------------------------------------------

@@ -2,18 +2,16 @@ import { detectFlaggedIssues } from './flagged-issues.js';
 import { validatePrehospital } from './prehospital-validator.js';
 import { emptyAssessment, emptyReassessment, gcsTotal, hasNumber, hasText, isYesNoAnswered, priorityLabel, sectionLabel } from './types.js';
 
-// WHO Prehospital Form (SCF Prehospital) — clinician wizard (vanilla JS,
-// classic <script>). Single-page continuous wizard: every section is
-// rendered into the page in document order. Conditional rules
-// (RED-triage airway / IV access; RED-triage GCS; injury intent /
-// mechanism only when "Injury" is checked; bleeding control only when an
-// active bleeding site is recorded; SAMPLE Unknown vs free-text
-// alternation; drowning life vest only when drowning; vehicle "other"
-// detail; reassessment array up to 3 entries) are gated by the
-// validator's applies() so the report only counts a rule when its branch
-// is active. Submission runs the pure validator + flagged-issues engine
-// and renders an inline report. State is persisted to localStorage so a
-// partial fill survives a page reload.
+// Single-page continuous wizard: every section is rendered into the page in
+// document order. Conditional rules (RED-triage airway / IV access;
+// RED-triage GCS; injury intent / mechanism only when "Injury" is checked;
+// bleeding control only when an active bleeding site is recorded; SAMPLE
+// Unknown vs free-text alternation; drowning life vest only when drowning;
+// vehicle "other" detail; reassessment array up to 3 entries) are gated by
+// the validator's applies() so the report only counts a rule when its branch
+// is active. Submission runs the pure validator + flagged-issues engine and
+// renders an inline report. State is persisted to localStorage so a partial
+// fill survives a page reload.
 //
 // Lily Design System HTML headless: this file emits Lily-shaped DOM
 // (fieldset.fieldset, .field, .label, .text-input, .radio-group,

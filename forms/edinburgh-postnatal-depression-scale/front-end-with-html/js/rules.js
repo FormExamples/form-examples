@@ -28,8 +28,6 @@
  * @property {string[]} options   - four option labels in printed order (index 0..3)
  */
 
-// Wrapped in an IIFE; published via window.EdinburghPostnatalDepressionScale.
-
 // Items reverse-scored per spec §4 (top printed option = 3, bottom = 0).
 const REVERSE_ITEMS = [3, 5, 6, 7, 8, 9, 10];
 

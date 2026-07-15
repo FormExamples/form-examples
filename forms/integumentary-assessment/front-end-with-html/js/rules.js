@@ -26,8 +26,6 @@
  * @property {(d: AssessmentData) => number} evaluate
  */
 
-// Wrapped in an IIFE; published via window.IntegumentaryAssessment.
-
 function nullableInt(v) {
   if (v === null || v === undefined || v === '') return 0;
   const n = Number(v);

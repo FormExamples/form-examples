@@ -21,8 +21,6 @@ import { ESAS_ITEMS, classifyESASTotal } from './types.js';
  * @typedef {import('./types.js').IndividualFlag} IndividualFlag
  */
 
-// Wrapped in an IIFE; published via window.PalliativeAssessment.
-
 /**
  * Evaluate the ten-item ESAS-r against the supplied assessment data and
  * produce the total, severity band, audit trail of fired rules, and

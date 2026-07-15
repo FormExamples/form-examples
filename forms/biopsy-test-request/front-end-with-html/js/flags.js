@@ -7,7 +7,6 @@
 //
 // Each flag is { flagId, category, priority, description, suggestedAction }.
 // Flag IDs are stable and identical across every front-end and the back-end.
-// Wrapped in an IIFE; published via `window.BiopsyTestRequest`.
 
 function hasValue(v) {
   return v !== null && v !== undefined && v !== '';

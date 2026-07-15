@@ -5,9 +5,6 @@
 // fields surfaced to an airline medical-desk reviewer: passenger,
 // airline, flight, departure date, primary diagnosis, computed
 // fitness-to-fly band, safety-flag count, and lifecycle status.
-//
-// Wrapped in an IIFE so its top-level identifiers do not leak to
-// window.
 (function () {
 'use strict';
 

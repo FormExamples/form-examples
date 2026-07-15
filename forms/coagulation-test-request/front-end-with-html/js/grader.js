@@ -7,8 +7,6 @@ import { evaluatePreanalytical, scoreAppropriateness, scoreCompleteness, scoreTr
 // single pure, deterministic grading result. The public entry point is
 // `calculateGrade(data)`. The output shape and rule / flag IDs are identical
 // across every front-end and the back-end.
-//
-// Wrapped in an IIFE; published via `window.CoagulationTestRequest`.
 
 /**
  * Derive an overall recommendation for the coagulation-laboratory vetting desk

@@ -10,8 +10,6 @@ import { countSelectedPanels } from './types.js';
 // (routine / urgent) with red-flag auto-escalation. Rule IDs are stable and
 // identical across every front-end and the back-end (R-APPROP-*, R-VALIDITY-*,
 // R-COMPLETE-*, R-TRIAGE-*). Pure data + helpers; the grader composes them.
-//
-// Wrapped in an IIFE; published via `window.AllergySkinTestRequest`.
 
 // ----------------------------------------------------------------------
 // Axis A — Appropriateness (BSACI / EAACI indication match, 1-9 ordinal)

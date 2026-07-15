@@ -14,7 +14,6 @@ import { hasAnyResultValue, hasToxicResult } from './rules.js';
  * @typedef {import('./types.js').FlagPriority} FlagPriority
  */
 
-// Wrapped in an IIFE; published via window.ToxicologyTestResult.
 // Depends on rules.js (hasToxicResult, hasAnyResultValue), so it must load
 // after it.
 

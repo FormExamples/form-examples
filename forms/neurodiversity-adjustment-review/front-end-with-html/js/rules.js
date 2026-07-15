@@ -11,8 +11,6 @@ import { anyEffectivenessAnswered, anyNotWorking, ratedCount, ratedValues, worki
 // timeframe. Rule IDs are stable and identical across every front-end and the
 // back-end (R-EFFECT-*, R-WELL-*, R-COMPLETE-*, R-NEXT-*). Pure data + helpers;
 // the grader composes them.
-//
-// Wrapped in an IIFE; published via `window.NeurodiversityAdjustmentReview`.
 
 // ----------------------------------------------------------------------
 // Axis A — effectiveness (first match wins)

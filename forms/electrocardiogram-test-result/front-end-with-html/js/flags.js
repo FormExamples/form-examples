@@ -14,8 +14,6 @@ import { QTC_PROLONGED_MS, hasAbnormalRhythm, hasCriticalFinding } from './rules
  * @typedef {import('./types.js').FlagPriority} FlagPriority
  */
 
-// Wrapped in an IIFE; published via window.ElectrocardiogramTestResult.
-
 /**
  * Detect the safety-critical flags for a report.
  * @param {ElectrocardiogramResult} r

@@ -19,8 +19,6 @@
  * @property {(d: AssessmentData) => boolean} evaluate
  */
 
-// Wrapped in an IIFE; published via window.CageAlcoholQuestionnaire.
-
 /** @type {CageRule[]} */
 const cageRules = [
   // ─── CRITERION C: CUT DOWN ────────────────────────────────────

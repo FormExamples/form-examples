@@ -32,8 +32,6 @@ import { ALBUMIN_FACTOR, NORMAL_HIGH_WITHOUT_K, NORMAL_HIGH_WITH_K, NORMAL_LOW, 
  * @typedef {import('./types.js').FiredRule} FiredRule
  */
 
-// Wrapped in an IIFE; published via window.AnionGapCalculator.
-
 /** True when a numeric value is present (not null/undefined/NaN). */
 function present(n) {
   return n !== null && n !== undefined && !Number.isNaN(n);

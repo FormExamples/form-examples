@@ -12,10 +12,6 @@ import { emptyAssessment, priorityClass, priorityLabel, reviewStatusClass, revie
 // reviewStatus, componentStatuses, firedRules; flags.js -> flaggedIssues) and
 // renders an inline report. State is persisted to localStorage so a partial fill
 // survives a page reload.
-//
-// Sibling files loaded as plain `<script>` tags (in order) attach their exports
-// to `window.EpilepsyReview`. The whole file is wrapped in an IIFE so its
-// top-level identifiers don't leak.
 
 // ----------------------------------------------------------------------
 // Persistence

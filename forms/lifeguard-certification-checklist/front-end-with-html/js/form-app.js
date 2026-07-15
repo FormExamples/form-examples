@@ -14,11 +14,6 @@ import { COMPRESSION_DEPTH_MAX, COMPRESSION_DEPTH_MIN, COMPRESSION_RATE_MAX, COM
 // audit table, deficiency list, and prioritised flagged-issues list.
 // State is persisted to localStorage so a partial fill survives a page
 // reload.
-//
-// Sibling files loaded as plain `<script>` tags (in order: types →
-// rules → lifeguard-grader → flagged-issues → app) attach their exports to
-// `window.LifeguardCertificationChecklist`. The whole file is wrapped
-// in an IIFE so its top-level identifiers don't leak to the global scope.
 
 // ----------------------------------------------------------------------
 // Persistence

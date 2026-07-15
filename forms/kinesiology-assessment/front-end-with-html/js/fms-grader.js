@@ -21,8 +21,6 @@ import { fmsBandClass, fmsCategory, riskBand, riskBandLabel } from './types.js';
  * @typedef {import('./types.js').FiredRule} FiredRule
  */
 
-// Wrapped in an IIFE; published via window.KinesiologyAssessment.
-
 /**
  * Pure: calculate the total FMS score for the supplied assessment data.
  * Returns the 0-21 total, category label, risk band, and per-pattern

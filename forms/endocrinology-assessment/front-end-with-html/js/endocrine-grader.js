@@ -14,8 +14,6 @@ import { axisStatusClass, axisStatusLabel, maxStatus } from './types.js';
  * @typedef {import('./types.js').FiredRule} FiredRule
  */
 
-// Wrapped in an IIFE; published via window.EndocrinologyAssessment.
-
 /**
  * @param {AssessmentData} data
  * @returns {{ axisGrades: AxisGrade[], overallStatus: AxisStatus, answeredCount: number, firedRules: FiredRule[] }}

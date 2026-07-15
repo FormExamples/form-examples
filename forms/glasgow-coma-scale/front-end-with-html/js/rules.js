@@ -21,8 +21,6 @@
  * @property {string} label        - human-readable descriptor for the dropdown
  */
 
-// Wrapped in an IIFE; published via window.GlasgowComaScale.
-
 /** Eye opening (E) — descriptor options, high score first. */
 /** @type {ComponentOption[]} */
 const eyeOptions = [

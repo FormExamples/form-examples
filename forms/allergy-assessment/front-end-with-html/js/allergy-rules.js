@@ -17,8 +17,6 @@
  * @property {(d: AssessmentData) => boolean} evaluate
  */
 
-// Wrapped in an IIFE; published via window.AllergyAssessment.
-
 /** @type {AllergyRule[]} */
 const allergyRules = [
   // ─── ANAPHYLAXIS INDICATORS (SEVERE) ────────────────────────

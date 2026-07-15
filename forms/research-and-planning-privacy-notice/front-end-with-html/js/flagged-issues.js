@@ -8,8 +8,6 @@
  * @typedef {import('./types.js').AdditionalFlag} AdditionalFlag
  */
 
-// Wrapped in an IIFE; published via window.ResearchAndPlanningPrivacyNotice.
-
 /**
  * Detects additional flags that should be highlighted for the
  * information-governance officer.

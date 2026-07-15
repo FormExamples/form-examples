@@ -20,8 +20,6 @@ import { AFP_CRITICAL, BETA_HCG_CRITICAL, MARKERS } from './types.js';
  * @typedef {import('./types.js').FiredRule} FiredRule
  */
 
-// Wrapped in an IIFE; published via window.TumorMarkerTestResult.
-
 // ----------------------------------------------------------------------
 // Measured-marker predicates (mirror `utils.ts`)
 // ----------------------------------------------------------------------

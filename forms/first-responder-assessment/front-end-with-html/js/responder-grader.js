@@ -17,8 +17,6 @@ import { aggregateCompetency } from './types.js';
  * @typedef {import('./types.js').GradingResult} GradingResult
  */
 
-// Wrapped in an IIFE; published via window.FirstResponderAssessment.
-
 /**
  * Pure function: evaluates all first responder rules against assessment data.
  * Returns domain competency levels, overall fitness decision, and all fired rules.

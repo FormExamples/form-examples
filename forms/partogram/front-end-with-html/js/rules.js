@@ -26,8 +26,6 @@
  * @typedef {import('./types.js').ProgressClassification} ProgressClassification
  */
 
-// Wrapped in an IIFE; published via window.Partogram.
-
 /** Cervical dilatation (cm) at which the active phase — and the alert line — begins. */
 const ALERT_LINE_START_CM = 4;
 

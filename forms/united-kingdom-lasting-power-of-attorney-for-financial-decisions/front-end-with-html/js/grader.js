@@ -22,8 +22,6 @@ import { applyBlockerRules, computeValidityBand } from './rules.js';
 // Algorithm (max-grade): any statutory blocker promotes compositeRisk to
 // `critical`; otherwise the worst flag wins (high > moderate > low); default
 // low.
-//
-// Wrapped in an IIFE; published via `window.UkLpaFinancialDecisions`.
 
 /** Max-grade composite risk from fired blockers and additional flags. */
 function computeCompositeRisk(firedRules, flags) {

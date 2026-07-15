@@ -3,11 +3,7 @@ import { sampleFitNotes } from './sample-data.js';
 // UK Statement of Fitness for Work dashboard (vanilla classic-script app).
 //
 // Renders a sortable, filterable table of recent fit notes plus summary
-// counters across the page header. Sibling modules loaded as plain `<script>`
-// tags (in dependency order) attach their exports to
-// `window.UkFitNoteDashboard`. Pulling them off here keeps the rest of this
-// file referring to short local names. The whole file is wrapped in an IIFE
-// so its top-level identifiers do not leak to the global scope.
+// counters across the page header.
 
 /**
  * @typedef {Object} FitNoteRow

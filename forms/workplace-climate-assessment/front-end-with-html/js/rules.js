@@ -31,8 +31,6 @@
  * @property {1 | 5} scaleMax
  */
 
-// Wrapped in an IIFE; published via window.WorkplaceClimateAssessment.
-
 // ---------------------------------------------------------------------
 // Likert agreement scale (text labels for each numeric value 1..5)
 // ---------------------------------------------------------------------

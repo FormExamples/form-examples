@@ -20,8 +20,6 @@ import { ldRules, levelScore } from './rules.js';
  * @typedef {import('./types.js').FiredRule} FiredRule
  */
 
-// Wrapped in an IIFE; published via window.LearningDisabilityAssessment.
-
 /**
  * Classify a mean adaptive score (0-3) into a severity category.
  * @param {number} mean

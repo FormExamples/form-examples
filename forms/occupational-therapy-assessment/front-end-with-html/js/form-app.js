@@ -11,11 +11,6 @@ import { copmCategoryClass, copmPerformanceCategory, difficultyLabel, emptyAsses
 // progress summary reflects how many fields have been answered. Submission
 // runs the pure COPM scoring engine and renders an inline report. State is
 // persisted to localStorage so a partial fill survives a page reload.
-//
-// Sibling files loaded as plain `<script>` tags (in order) attach their
-// exports to `window.OccupationalTherapyAssessment`. The whole file is
-// wrapped in an IIFE so its top-level identifiers don't leak to the
-// global scope.
 
 // ----------------------------------------------------------------------
 // Persistence

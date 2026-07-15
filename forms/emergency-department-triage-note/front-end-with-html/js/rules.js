@@ -22,8 +22,6 @@
  * @typedef {import('./types.js').FiredDiscriminator} FiredDiscriminator
  */
 
-// Wrapped in an IIFE; published via window.EmergencyDepartmentTriageNote.
-
 // ─── NEWS2 per-parameter scoring (Scale 1 default) ──────────────────
 
 /**

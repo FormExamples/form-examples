@@ -17,10 +17,6 @@ import { coronerReasonLabel, emptyCertificate, gradeLabel, medicalExaminerStatus
 // This is a STATUTORY DOCUMENTATION instrument, NOT a diagnostic tool and NOT a
 // substitute for the certifying doctor's, coroner's, or medical examiner's
 // statutory judgement. The engine validates completeness and consistency only.
-//
-// Sibling files loaded as plain `<script>` tags (in order) attach their exports
-// to `window.MedicalCertificateOfCauseOfDeath`. The whole file is wrapped in an
-// IIFE so its top-level identifiers do not leak.
 
 // ----------------------------------------------------------------------
 // Persistence

@@ -25,8 +25,6 @@ import { ottawaRules } from './rules.js';
  * @typedef {import('./types.js').FiredCriterion} FiredCriterion
  */
 
-// Wrapped in an IIFE; published via window.OttawaKneeRule.
-
 /**
  * Evaluate the five Ottawa criteria and record each as an audit row (fired
  * true/false), mirroring the `ottawa_knee_rule_grade_rule` table.

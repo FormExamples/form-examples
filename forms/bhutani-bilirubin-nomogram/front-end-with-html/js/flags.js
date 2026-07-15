@@ -24,8 +24,6 @@ import { roundOne } from './rules.js';
  * @typedef {import('./types.js').FlaggedIssue} FlaggedIssue
  */
 
-// Wrapped in an IIFE; published via window.BhutaniBilirubinNomogram.
-
 /**
  * @param {AssessmentData} data
  * @param {GradingResult} grade

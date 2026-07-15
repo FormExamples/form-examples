@@ -10,8 +10,6 @@
  * @typedef {import('./types.js').AdditionalFlag} AdditionalFlag
  */
 
-// Wrapped in an IIFE; published via window.HematologyAssessment.
-
 /**
  * @param {AssessmentData} data
  * @returns {AdditionalFlag[]}

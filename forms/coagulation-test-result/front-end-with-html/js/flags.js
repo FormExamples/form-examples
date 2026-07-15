@@ -14,8 +14,8 @@ import { hasAnyResultValue, hasCriticalValue, hasDicPicture, hasIsolatedApttProl
  * @typedef {import('./types.js').FlagPriority} FlagPriority
  */
 
-// Wrapped in an IIFE; published via window.CoagulationTestResult.
-// Depends on rules.js (the critical-value predicates), so it must load after it.
+// Depends on rules.js (the critical-value predicates), so it must load after
+// it.
 
 /**
  * Detect the safety-critical flags for a report.

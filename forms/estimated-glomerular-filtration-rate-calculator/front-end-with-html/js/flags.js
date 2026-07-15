@@ -21,8 +21,6 @@ import { BOUNDARY_MARGIN, G1_MIN, G2_MIN, G3A_MIN } from './rules.js';
  * @typedef {import('./types.js').FlaggedIssue} FlaggedIssue
  */
 
-// Wrapped in an IIFE; published via window.EstimatedGlomerularFiltrationRateCalculator.
-
 /**
  * @param {AssessmentData} data
  * @param {number | null} egfr        - unrounded eGFR (mL/min/1.73 m²), or null

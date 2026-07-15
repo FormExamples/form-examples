@@ -18,8 +18,6 @@
  * @typedef {import('./types.js').FiredRule} FiredRule
  */
 
-// Wrapped in an IIFE; published via window.NursingCarePlan.
-
 /**
  * True when the problem carries at least one goal.
  * @param {Problem} p

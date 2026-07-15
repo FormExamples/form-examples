@@ -24,8 +24,6 @@ import { systemScorers } from './rules.js';
  * @typedef {import('./types.js').FiredRule} FiredRule
  */
 
-// Wrapped in an IIFE; published via window.SequentialOrganFailureAssessment.
-
 const SYSTEMS = ['respiration', 'coagulation', 'liver', 'cardiovascular', 'cns', 'renal'];
 
 /**

@@ -7,8 +7,6 @@ import { countPartAShadedItems, sumScores } from './types.js';
 // fires; the audit table in the report shows the rule id, domain,
 // description, and tentative ADHD classification associated with it.
 
-// Wrapped in an IIFE; published via window.AttentionDeficitAssessment.
-
 const asrsRules = [
   // ─── Part A screener ─────────────────────────────────────
   {

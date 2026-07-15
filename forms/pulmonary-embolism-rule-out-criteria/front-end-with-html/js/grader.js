@@ -29,8 +29,6 @@ import { percRules } from './rules.js';
  * @typedef {import('./types.js').FiredRule} FiredRule
  */
 
-// Wrapped in an IIFE; published via window.PulmonaryEmbolismRuleOutCriteria.
-
 /**
  * Evaluate the eight PERC criterion rules.
  * @param {AssessmentData} data

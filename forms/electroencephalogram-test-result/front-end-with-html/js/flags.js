@@ -15,8 +15,6 @@ import { hasCriticalFinding } from './rules.js';
  * @typedef {import('./types.js').FlagPriority} FlagPriority
  */
 
-// Wrapped in an IIFE; published via window.ElectroencephalogramTestResult.
-
 /**
  * Detect the safety-critical flags for a report.
  * @param {ElectroencephalogramResult} r

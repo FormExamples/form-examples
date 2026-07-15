@@ -200,11 +200,6 @@
  * @property {string} timestamp
  */
 
-// Wrapped in an IIFE so locals stay scoped — this file is loaded as a
-// classic <script> (no ES modules) so the page can be opened directly via
-// `file://`. The IIFE attaches its public symbols to a single global
-// namespace, `window.SundownerSyndromeAssessment`.
-
 // CMAI item ids. Kept here so `emptyAssessment()` can populate every key
 // even before `cmai-rules.js` has loaded.
 const CMAI_ITEM_IDS = [];

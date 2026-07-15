@@ -29,8 +29,6 @@
  * @typedef {import('./types.js').ENpsResult} ENpsResult
  */
 
-// Wrapped in an IIFE; published via window.EmployeeSatisfactionSurvey.
-
 const DOMAIN_LABELS = {
   workload: 'Workload & Work-Life Balance',
   management: 'Management & Leadership',

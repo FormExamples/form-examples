@@ -13,8 +13,6 @@ import { flatten, recommendationLabel } from './types.js';
 // Invariant: a critical result auto-escalates Axis D to critical-alert and
 // raises the critical-finding flag, regardless of the other axes. The
 // least-urgent band is only chosen when no rule fires.
-//
-// Wrapped in an IIFE; published via `window.CardiologyResponse`.
 
 /**
  * Derive the overall recommendation from the graded axes. A critical result

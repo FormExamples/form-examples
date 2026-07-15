@@ -30,8 +30,6 @@ import { classifyDiseaseActivity } from './types.js';
  * @typedef {import('./types.js').FiredRule} FiredRule
  */
 
-// Wrapped in an IIFE; published via window.RheumatologyAssessment.
-
 /**
  * Evaluate the DAS28 declarative rules and the numeric DAS28-ESR formula
  * against the supplied assessment data.

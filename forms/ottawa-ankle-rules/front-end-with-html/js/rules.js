@@ -28,8 +28,6 @@
  * @property {(d: AssessmentData) => boolean} evaluate
  */
 
-// Wrapped in an IIFE; published via window.OttawaAnkleRules.
-
 /**
  * Derived input shared by criteria A3 and F3. "Unable to bear weight" is true
  * only when the patient cannot take four steps BOTH immediately after the

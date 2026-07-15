@@ -26,7 +26,6 @@ import { classifyResult, gradeCompleteness, gradeFollowUp, gradeSeverity } from 
  * @typedef {import('./types.js').FiredRule} FiredRule
  */
 
-// Wrapped in an IIFE; published via window.EchocardiogramTestResult.
 // Depends on rules.js (the four axis functions) and flags.js (detectFlags),
 // so it must load after both.
 

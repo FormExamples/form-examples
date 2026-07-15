@@ -13,8 +13,6 @@ import { ecogRules } from './ecog-rules.js';
  * @typedef {import('./types.js').FiredRule} FiredRule
  */
 
-// Wrapped in an IIFE; published via window.OncologyAssessment.
-
 /**
  * Evaluate every ECOG rule against the supplied assessment data.
  *

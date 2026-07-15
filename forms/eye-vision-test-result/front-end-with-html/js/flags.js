@@ -14,7 +14,6 @@ import { hasCriticalFinding, hasElevatedIop, hasReferableRetinopathy } from './r
  * @typedef {import('./types.js').FlagPriority} FlagPriority
  */
 
-// Wrapped in an IIFE; published via window.EyeVisionTestResult.
 // Depends on rules.js (the structured-findings predicates), so it must load
 // after it.
 

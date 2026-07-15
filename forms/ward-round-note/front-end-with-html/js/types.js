@@ -164,11 +164,6 @@
  * @property {string} timestamp
  */
 
-// Wrapped in an IIFE so locals stay scoped — this file is loaded as a
-// classic <script> (no ES modules) so the page can be opened directly via
-// `file://`. The IIFE attaches its public symbols to a single global
-// namespace, `window.WardRoundNote`.
-
 /**
  * Build a fresh, fully-blank note. Text / enum fields default to `''`; the one
  * numeric field (NEWS2 total) defaults to `null`; date and datetime fields

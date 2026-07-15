@@ -4,8 +4,7 @@
 // Builds the canonical empty `CoagulationTestRequest` shape so newly-added
 // fields default correctly when older saved state is rehydrated from
 // localStorage. Property names are camelCase to match the front-end serde /
-// examples convention (snake_case in SQL). Wrapped in an IIFE; published via
-// `window.CoagulationTestRequest`.
+// examples convention (snake_case in SQL).
 
 /**
  * Canonical list of the orderable coagulation tests. The `field` is the

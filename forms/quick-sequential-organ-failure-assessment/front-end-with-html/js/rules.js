@@ -19,8 +19,6 @@
  * @property {(d: AssessmentData) => boolean} evaluate
  */
 
-// Wrapped in an IIFE; published via window.QuickSequentialOrganFailureAssessment.
-
 /** @type {QsofaRule[]} */
 const qsofaRules = [
   // ─── CRITERION 1: RESPIRATORY RATE ────────────────────────────

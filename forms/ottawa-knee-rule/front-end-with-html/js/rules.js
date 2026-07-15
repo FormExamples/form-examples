@@ -25,8 +25,6 @@
  * @property {(d: AssessmentData) => boolean} evaluate
  */
 
-// Wrapped in an IIFE; published via window.OttawaKneeRule.
-
 /** @type {OttawaRule[]} */
 const ottawaRules = [
   // ─── CRITERION 1: AGE >= 55 ───────────────────────────────────

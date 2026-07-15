@@ -21,8 +21,6 @@ import { cageRules } from './rules.js';
  * @typedef {import('./types.js').FiredCriterion} FiredCriterion
  */
 
-// Wrapped in an IIFE; published via window.CageAlcoholQuestionnaire.
-
 /**
  * Evaluate the four CAGE criterion rules and collect the ones that fired.
  * @param {AssessmentData} data

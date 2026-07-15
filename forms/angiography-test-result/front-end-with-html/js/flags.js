@@ -12,8 +12,6 @@ import { hasCriticalFinding } from './rules.js';
  * @typedef {import('./types.js').Flag} Flag
  */
 
-// Wrapped in an IIFE; published via window.AngiographyTestResult.
-
 /**
  * @param {AngiographyResult} r
  * @returns {Flag[]}

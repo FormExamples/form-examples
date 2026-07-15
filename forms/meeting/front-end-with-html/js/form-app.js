@@ -1,6 +1,4 @@
-// Wires the meeting form to the validation engine. Loaded as a classic
-// <script> after scoring.js, so Meeting.validateMeeting is on the global
-// namespace.
+// Wires the meeting form to the validation engine.
 import { validateMeeting } from './scoring.js';
 const DRAFT_KEY = 'meeting-draft';
 

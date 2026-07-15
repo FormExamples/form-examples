@@ -24,8 +24,6 @@ import { isRapidDecline, present } from './rules.js';
  * @typedef {import('./types.js').FlaggedIssue} FlaggedIssue
  */
 
-// Wrapped in an IIFE; published via window.ChronicKidneyDiseaseReview.
-
 /**
  * Detect the flags raised by the review findings.
  *

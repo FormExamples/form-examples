@@ -17,8 +17,6 @@ import { dashCategory } from './types.js';
 //   61-80  -> Severe disability
 //   81-100 -> Very severe disability
 
-// Wrapped in an IIFE; published via window.OrthopedicAssessment.
-
 /**
  * Calculate the DASH score and fired rules from assessment data.
  * @param {import('./types.js').AssessmentData} data

@@ -12,8 +12,6 @@ import { validationRules } from './validation-rules.js';
  * @typedef {import('./types.js').ValidationStatus} ValidationStatus
  */
 
-// Wrapped in an IIFE; published via window.ResearchAndPlanningPrivacyNotice.
-
 /**
  * Pure function: validates the completeness of the research and planning
  * privacy notice form.

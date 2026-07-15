@@ -31,8 +31,6 @@
  * @property {(d: AssessmentData) => number} evaluate
  */
 
-// Wrapped in an IIFE; published via window.NeurologyAssessment.
-
 /** @type {NIHSSRule[]} */
 const nihssRules = [
   {

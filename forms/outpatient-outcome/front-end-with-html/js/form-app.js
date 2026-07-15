@@ -9,10 +9,6 @@ import { FFT_LABELS, OUTCOME_LABELS, emptyAssessment, gradeLabel, labelFrom } fr
 // summary reflects how many key fields have been answered. Submission runs the
 // pure four-domain OOCG grader and renders an inline outcome report. State is
 // persisted to localStorage so a partial fill survives a page reload.
-//
-// Sibling files loaded as plain `<script>` tags (in order) attach their
-// exports to `window.OutpatientOutcome`. The whole file is wrapped in an IIFE
-// so its top-level identifiers don't leak to the global scope.
 
 // ----------------------------------------------------------------------
 // Persistence

@@ -19,8 +19,6 @@
  * @typedef {import('./types.js').FlaggedIssue} FlaggedIssue
  */
 
-// Wrapped in an IIFE; published via window.GlasgowBlatchfordBleedingScore.
-
 /**
  * @param {AssessmentData} data
  * @param {import('./grader.js')} grade - grading result from calculateGbsGrade

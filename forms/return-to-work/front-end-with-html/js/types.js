@@ -3,7 +3,7 @@
 // Builds the canonical empty `AssessmentData` shape so newly-added fields
 // default correctly when older saved state is rehydrated from localStorage.
 // Property names are camelCase to match the front-end serde / examples
-// convention. Wrapped in an IIFE; published via `window.ReturnToWork`.
+// convention.
 //
 // Ported byte-for-byte from the Svelte engine (`src/lib/engine/types.ts`
 // + `src/lib/stores/assessment.svelte.ts` `createDefaultAssessment()`).

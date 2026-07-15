@@ -16,7 +16,7 @@
  * @typedef {'continue-attempts' | 'lifestyle-optimisation' | 'targeted-treatment' | 'specialist-referral' | 'art-referral' | ''} Recommendation
  */
 
-// IIFE — classic <script> tag, no ES modules. Publishes to window.FertilityAssessment.
+// Publishes to window.FertilityAssessment.
 
 /**
  * Build a fresh, fully-blank assessment.

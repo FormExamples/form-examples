@@ -11,10 +11,6 @@ import { sampleAssessments } from './data.js';
 // This dashboard is a governance / review tool. It surfaces the engine's
 // legal-completeness status, recommended-section classification, and urgency; it
 // makes NO automated detention decision.
-//
-// Sibling modules loaded as plain `<script>` tags (in dependency order) attach
-// their exports to `window.MentalHealthActAssessmentDashboard`. The whole file
-// is wrapped in an IIFE so its top-level identifiers do not leak.
 
 // ----------------------------------------------------------------------
 // State

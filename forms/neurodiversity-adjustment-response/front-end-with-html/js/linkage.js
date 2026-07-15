@@ -7,7 +7,7 @@
 // categories the worker requested so the responder can mark each agreed or
 // declined. Idempotent and one-shot (the handoff is consumed on use).
 //
-// Self-contained, progressive enhancement. Wrapped in an IIFE.
+// Self-contained, progressive enhancement.
 
 (function () {
 'use strict';

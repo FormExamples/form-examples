@@ -109,8 +109,6 @@
  * @property {string} timestamp
  */
 
-// Wrapped in an IIFE; published via window.SleepQualityAssessment.
-
 /**
  * Build a fresh, fully-blank assessment.
  * Strings default to `''`; numeric fields default to `null`.

@@ -36,8 +36,6 @@
  * @property {(d: AssessmentData) => boolean} evaluate
  */
 
-// Wrapped in an IIFE; published via window.GlasgowBlatchfordBleedingScore.
-
 /**
  * Parameter 1 — blood urea (mmol/L). Returns 0, 2, 3, 4, or 6; 0 when
  * unmeasured (a missing input contributes no points, per spec §4).

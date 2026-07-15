@@ -9,12 +9,6 @@ import { emptyAssessment, psqiCategoryClass, sleepEfficiencyCalc } from './types
 // progress summary reflects how many fields have been answered. Submission
 // runs the pure PSQI scoring engine and renders an inline report. State
 // is persisted to localStorage so a partial fill survives a page reload.
-//
-// Sibling files loaded as plain `<script>` tags (in order) attach their
-// exports to `window.SleepQualityAssessment`. Pulling them off here keeps
-// the rest of this file referring to short local names. Whole file is
-// wrapped in an IIFE so its top-level identifiers don't leak to the
-// global scope.
 
 // ----------------------------------------------------------------------
 // Persistence

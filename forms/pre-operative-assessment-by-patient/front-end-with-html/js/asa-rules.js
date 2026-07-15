@@ -21,8 +21,6 @@ import { calculateAge } from './types.js';
  * @property {(d: AssessmentData) => boolean} evaluate
  */
 
-// Wrapped in an IIFE; published via window.PreOperativeAssessmentByPatient.
-
 /** @type {ASARule[]} */
 const asaRules = [
   // ─── CARDIOVASCULAR ──────────────────────────────────────

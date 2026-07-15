@@ -8,8 +8,6 @@ import { scoreAppropriateness, scoreBleedingRisk, scoreCompleteness, scoreTriage
 // `calculateGrade(data)`. The output shape and rule / flag IDs are identical
 // across every front-end and the back-end, mirroring SQL migration 05's
 // columns.
-//
-// Wrapped in an IIFE; published via `window.BiopsyTestRequest`.
 
 /**
  * Derive an overall recommendation for the pathology / imaging vetting desk

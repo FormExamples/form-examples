@@ -37,8 +37,6 @@ import { BILIRUBIN_UMOL_DIVISOR, COEF_BILIRUBIN, COEF_CREATININE, COEF_INR, CONS
  * @typedef {import('./types.js').FiredRule} FiredRule
  */
 
-// Wrapped in an IIFE; published via window.ModelForEndStageLiverDiseaseScore.
-
 /** Present numeric predicate. */
 function isNum(n) {
   return n !== null && n !== undefined && !Number.isNaN(Number(n));

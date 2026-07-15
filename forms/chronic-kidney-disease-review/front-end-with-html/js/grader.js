@@ -25,8 +25,6 @@ import { albuminuriaCategoryLabel, gfrCategoryLabel, kdigoRiskZoneLabel, reviewS
  * @typedef {import('./types.js').GradingResult} GradingResult
  */
 
-// Wrapped in an IIFE; published via window.ChronicKidneyDiseaseReview.
-
 /**
  * Evaluate each review component's documentation status.
  * @param {AssessmentData} data

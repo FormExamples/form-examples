@@ -10,11 +10,6 @@ import { sampleRows } from './data.js';
 // blocker dropdown). Validity band and composite risk are produced by the
 // shared validation engine, so the dashboard and the wizard's report stay
 // aligned.
-//
-// Sibling modules loaded as plain `<script>` tags (in dependency order) attach
-// their exports to `window.UkLpaFinancialDecisionsDashboard`. The whole file is
-// wrapped in an IIFE so its top-level identifiers do not leak to the global
-// scope.
 
 // ----------------------------------------------------------------------
 // State

@@ -12,8 +12,6 @@
  * @typedef {import('./types.js').AdditionalFlag} AdditionalFlag
  */
 
-// Wrapped in an IIFE; published via window.KinesiologyAssessment.
-
 /**
  * Compute the per-pattern effective score (lower of L/R for bilateral
  * patterns; pain forces 0).

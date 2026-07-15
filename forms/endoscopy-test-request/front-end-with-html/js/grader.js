@@ -8,8 +8,6 @@ import { scoreAppropriateness, scoreCompleteness, scoreRisk, scoreUrgency } from
 // `calculateGrade(data)`. The output shape and rule / flag IDs are identical
 // across every front-end and the back-end. The grade columns mirror SQL
 // migration 05.
-//
-// Wrapped in an IIFE; published via `window.EndoscopyTestRequest`.
 
 /**
  * Derive an overall recommendation for the endoscopy vetting desk from the

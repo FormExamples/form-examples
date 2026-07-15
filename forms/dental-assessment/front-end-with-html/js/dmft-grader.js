@@ -19,8 +19,6 @@ import { getDMFTCategory, getDMFTScore } from './types.js';
  * @typedef {import('./types.js').FiredRule} FiredRule
  */
 
-// Wrapped in an IIFE; published via window.DentalAssessment.
-
 /**
  * Evaluate all DMFT rules against the supplied assessment data and
  * produce the total score, the category, and the per-rule audit trail.

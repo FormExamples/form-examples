@@ -8,7 +8,6 @@
 // opens the sibling clinician form pre-filled.
 //
 // Self-contained progressive enhancement; the page is fully usable without it.
-// Wrapped in an IIFE; exposes nothing globally.
 
 (function () {
 'use strict';

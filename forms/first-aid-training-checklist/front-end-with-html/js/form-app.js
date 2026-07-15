@@ -13,11 +13,6 @@ import { emptyAssessment, outcomeClass, outcomeLabel, triStateLabel, triStatePil
 // with a Pass / Needs Development / Fail badge, critical-skill audit table,
 // non-critical deficiency list, and prioritised flagged-issues list. State
 // is persisted to localStorage so a partial fill survives a page reload.
-//
-// Sibling files loaded as plain `<script>` tags (in order: types →
-// rules → first-aid-grader → flagged-issues → app) attach their exports to
-// `window.FirstAidTrainingChecklist`. The whole file is wrapped in an IIFE
-// so its top-level identifiers don't leak to the global scope.
 
 // ----------------------------------------------------------------------
 // Persistence

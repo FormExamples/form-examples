@@ -21,8 +21,6 @@
  * @typedef {import('./types.js').FlaggedIssue} FlaggedIssue
  */
 
-// Wrapped in an IIFE; published via window.MedicationReconciliation.
-
 // Clinically significant interaction pairs (substring match on drug names of
 // any two reconciled line items). This is a prompt for pharmacist review, not a
 // definitive decision-support engine.

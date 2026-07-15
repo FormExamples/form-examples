@@ -14,8 +14,6 @@ import { aq10Category } from './types.js';
  * @typedef {import('./types.js').FiredRule} FiredRule
  */
 
-// Wrapped in an IIFE; published via window.AutismAssessment.
-
 /**
  * Calculate AQ-10 score and per-question fired rules.
  * @param {AssessmentData} data

@@ -109,11 +109,6 @@
  * @property {string} timestamp
  */
 
-// Wrapped in an IIFE so locals stay scoped — this file is loaded as a
-// classic <script> (no ES modules) so the page can be opened directly via
-// `file://`. The IIFE attaches its public symbols to a single global
-// namespace, `window.DiabeticEyeScreening`.
-
 /**
  * Build a fresh, fully-blank screening record.
  * Strings default to `''`; numeric fields default to `null`.

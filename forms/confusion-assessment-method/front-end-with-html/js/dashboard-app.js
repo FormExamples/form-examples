@@ -9,10 +9,6 @@ import { sampleAssessments } from './data.js';
 // box + variant dropdown + classification dropdown + motoric-subtype dropdown +
 // delirium-flag dropdown). CAM is a status / classification form, so the table
 // shows a classification badge rather than a numeric score.
-//
-// Sibling modules loaded as plain `<script>` tags (in dependency order) attach
-// their exports to `window.ConfusionAssessmentMethodDashboard`. The whole file
-// is wrapped in an IIFE so its top-level identifiers do not leak.
 
 // ----------------------------------------------------------------------
 // State

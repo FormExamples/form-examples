@@ -27,8 +27,6 @@ import { bandForTotal, descriptorLabel, eyeOptions, motorOptions, severityBands,
  * @typedef {import('./types.js').SeverityBand} SeverityBand
  */
 
-// Wrapped in an IIFE; published via window.GlasgowComaScale.
-
 /** Uppercase a descriptor enum for a rule id, e.g. 'to-sound' -> 'TO-SOUND'. */
 function ruleToken(value) {
   return String(value).toUpperCase();

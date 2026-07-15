@@ -20,10 +20,6 @@ import { bandClass, bandLabel, emptyAssessment, instrumentFormLabel, priorityLab
 // The ZBI measures the carer's own perceived burden; it is a screen prompting
 // carer support, respite, and mental-health screening, not a diagnosis of the
 // carer nor an assessment of the care recipient.
-//
-// Sibling files loaded as plain `<script>` tags (in order) attach their exports
-// to `window.ZaritBurdenInterview`. The whole file is wrapped in an IIFE so its
-// top-level identifiers don't leak.
 
 // ----------------------------------------------------------------------
 // Persistence

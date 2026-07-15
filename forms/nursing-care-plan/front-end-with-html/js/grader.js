@@ -20,8 +20,6 @@ import { classifyProblem, hasEvaluation, hasGoal, hasIntervention, problemFiredR
  * @typedef {import('./types.js').PlanStatus} PlanStatus
  */
 
-// Wrapped in an IIFE; published via window.NursingCarePlan.
-
 /**
  * Completeness percent: the proportion of the three required elements (goal,
  * intervention, evaluation) present across all problems, 0–100, rounded.

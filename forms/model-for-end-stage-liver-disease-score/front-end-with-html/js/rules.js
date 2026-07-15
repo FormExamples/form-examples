@@ -21,8 +21,6 @@
  * @property {(score: number) => boolean} evaluate
  */
 
-// Wrapped in an IIFE; published via window.ModelForEndStageLiverDiseaseScore.
-
 // ─── Formula coefficients and bounds (spec §4) ──────────────────
 /** Coefficient on ln(bilirubin) in the base MELD formula. */
 const COEF_BILIRUBIN = 3.78;

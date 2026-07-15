@@ -12,8 +12,6 @@ import { gradeToPriority } from './types.js';
 //
 //   { fitnessStatement, computedFitness, overridden, restrictionPriority,
 //     firedRules[], additionalFlags[], timestamp }
-//
-// Wrapped in an IIFE; published via `window.ReturnToWork`.
 
 /** Derive the computed fitness statement from the clinician's outcome. */
 function deriveFitness(data) {

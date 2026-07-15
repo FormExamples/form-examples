@@ -10,8 +10,6 @@
 // `parkland_formula_for_burns_grade_rule` SQL table (rule_id, instrument, band,
 // category, description).
 
-// Wrapped in an IIFE; published via window.ParklandFormulaForBurns.
-
 // ─── Parkland constants (spec §4) ───────────────────────────────
 /** Parkland (Baxter) coefficient in mL per kg per %TBSA. */
 const PARKLAND_COEFFICIENT = 4;

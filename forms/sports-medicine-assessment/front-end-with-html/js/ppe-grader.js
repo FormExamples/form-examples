@@ -16,8 +16,6 @@ import { ppeRules } from './rules.js';
  * @typedef {import('./types.js').FiredRule} FiredRule
  */
 
-// Wrapped in an IIFE; published via window.SportsMedicineAssessment.
-
 /**
  * @param {FiredRule[]} firedRules
  * @returns {Clearance}

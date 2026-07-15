@@ -22,8 +22,6 @@
  * @property {(value: number, normalLow: number, normalHigh: number) => boolean} evaluate
  */
 
-// Wrapped in an IIFE; published via window.AnionGapCalculator.
-
 // ─── Formula and reference constants (spec §4) ──────────────────
 /** Reference (normal) albumin in g/L the gap is corrected to. */
 const REF_ALBUMIN = 40;

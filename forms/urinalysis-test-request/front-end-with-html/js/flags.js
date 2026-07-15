@@ -9,7 +9,6 @@ import { countSelectedTests } from './types.js';
 //
 // Each flag is { flagId, category, priority, description, suggestedAction }.
 // Flag IDs are stable and identical across every front-end and the back-end.
-// Wrapped in an IIFE; published via `window.UrinalysisTestRequest`.
 
 /**
  * Detect safety flags for a urinalysis test request.

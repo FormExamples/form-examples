@@ -2,11 +2,6 @@
 // `src/lib/engine/types.ts` data model for the WHO Prehospital Form
 // (SCF Prehospital). This file publishes the empty-state factory and
 // shared helpers used across the wizard.
-//
-// Wrapped in an IIFE so locals stay scoped — this file is loaded as a
-// classic <script> (no ES modules) so the page can be opened directly
-// via `file://`. The IIFE attaches its public symbols to a single
-// global namespace, `window.WhoPrehospitalForm`.
 
 /** @returns {object} A fresh PeEntry (Physical Exam per-system). */
 function emptyPeEntry() {

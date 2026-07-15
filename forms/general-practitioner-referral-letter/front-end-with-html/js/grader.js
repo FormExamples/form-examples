@@ -25,8 +25,6 @@ import { mandatoryFor } from './rules.js';
  * @typedef {import('./types.js').FiredRule} FiredRule
  */
 
-// Wrapped in an IIFE; published via window.GeneralPractitionerReferralLetter.
-
 /**
  * Evaluate the mandatory-field set against the referral, returning one
  * FiredRule per applicable mandatory field with its satisfied state.

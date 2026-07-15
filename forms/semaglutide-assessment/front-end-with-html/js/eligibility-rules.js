@@ -19,8 +19,6 @@
  * @property {'absolute' | 'relative'} type
  */
 
-// Wrapped in an IIFE; published via window.SemaglutideAssessment.
-
 /**
  * Absolute contraindications - these make a patient ineligible for semaglutide.
  * @type {EligibilityRuleDefinition[]}

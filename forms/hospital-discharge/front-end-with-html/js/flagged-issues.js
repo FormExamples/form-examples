@@ -10,8 +10,6 @@
  * @typedef {import('./types.js').AdditionalFlag} AdditionalFlag
  */
 
-// Wrapped in an IIFE; published via window.HospitalDischarge.
-
 /**
  * @param {AssessmentData} data
  * @returns {AdditionalFlag[]}

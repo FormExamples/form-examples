@@ -25,8 +25,6 @@
  * @property {(d: AssessmentData) => boolean} evaluate
  */
 
-// Wrapped in an IIFE; published via window.Curb65PneumoniaSeverityScore.
-
 /** @type {Curb65Rule[]} */
 const curb65Rules = [
   // ─── CRITERION C: CONFUSION ───────────────────────────────────

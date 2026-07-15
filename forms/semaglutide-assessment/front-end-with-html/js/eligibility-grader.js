@@ -20,8 +20,6 @@ import { bmiCategory, calculateBMI } from './types.js';
  * @typedef {import('./types.js').FiredRule} FiredRule
  */
 
-// Wrapped in an IIFE; published via window.SemaglutideAssessment.
-
 /**
  * Pure function: evaluates eligibility for semaglutide therapy.
  *

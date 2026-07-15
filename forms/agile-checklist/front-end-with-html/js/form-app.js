@@ -15,10 +15,6 @@ import { ALL_ITEMS, PRACTICES_ITEMS, SECTION_LABEL, STAKEHOLDERS_ITEMS, TEAMS_IT
 // client-side, persists draft state to localStorage, and renders an inline
 // report with composite maturity, fired coaching rules, operational flags,
 // and a per-item table.
-//
-// Sibling files loaded as plain `<script>` tags (in order) attach their
-// exports to `window.AgileChecklist`. Whole file is wrapped in an IIFE so
-// its top-level identifiers don't leak to the global scope.
 
 const TOTAL_STEPS = 5;
 

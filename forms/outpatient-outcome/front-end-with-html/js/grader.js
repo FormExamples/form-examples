@@ -8,8 +8,6 @@ import { gradeClinical, gradeMax, gradeOperational, gradePREM, gradePROM, promis
 // `calculateGrade(data)` (aliased `gradeOOCG`). The overall grade is the worst
 // of the four domain grades ("highest severity wins"). Output shape, rule IDs,
 // and flag IDs are identical across every front-end and the back-end.
-//
-// Wrapped in an IIFE; published via `window.OutpatientOutcome`.
 
 /**
  * Public entry point. Pure and deterministic.

@@ -19,8 +19,6 @@ import { asaRules } from './asa-rules.js';
  * @typedef {import('./types.js').FiredRule} FiredRule
  */
 
-// Wrapped in an IIFE; published via window.PreOperativeAssessmentByPatient.
-
 /**
  * Evaluate all 42 ASA grading rules against the patient assessment.
  *

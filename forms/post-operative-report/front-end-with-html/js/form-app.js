@@ -11,11 +11,6 @@ import { calculateDurationMinutes, emptyAssessment } from './types.js';
 // fields have been answered per section. Submission runs the pure
 // Clavien-Dindo grading engine and renders an inline report. State is
 // persisted to localStorage so a partial fill survives a page reload.
-//
-// Sibling files loaded as plain `<script>` tags (in order) attach their
-// exports to `window.PostOperativeReport`. Pulling them off here keeps the
-// rest of this file referring to short local names. Whole file is wrapped
-// in an IIFE so its top-level identifiers don't leak to the global scope.
 
 // ----------------------------------------------------------------------
 // Persistence

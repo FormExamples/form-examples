@@ -11,10 +11,6 @@ import { sampleAssessments } from './data.js';
 // The Ottawa Knee Rule is a DECISION RULE, not a score: rows carry a binary
 // imaging decision (X-ray indicated / not indicated) and a fired-criterion
 // count, not a total.
-//
-// Sibling modules loaded as plain `<script>` tags (in dependency order) attach
-// their exports to `window.OttawaKneeRuleDashboard`. The whole file is wrapped
-// in an IIFE so its top-level identifiers do not leak.
 
 // ----------------------------------------------------------------------
 // State

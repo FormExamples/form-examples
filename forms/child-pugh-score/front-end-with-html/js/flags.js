@@ -21,8 +21,6 @@
  * @typedef {import('./types.js').FlaggedIssue} FlaggedIssue
  */
 
-// Wrapped in an IIFE; published via window.ChildPughScore.
-
 /**
  * @param {AssessmentData} data
  * @param {import('./grader.js')} grade - grading result from calculateChildPughGrade

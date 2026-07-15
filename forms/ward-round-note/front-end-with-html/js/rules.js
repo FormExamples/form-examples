@@ -31,8 +31,6 @@
  * @property {boolean} present    - whether the component is documented
  */
 
-// Wrapped in an IIFE; published via window.WardRoundNote.
-
 /** A text/enum field is present when it is a non-blank string. */
 function has(v) {
   return v !== null && v !== undefined && String(v).trim() !== '';

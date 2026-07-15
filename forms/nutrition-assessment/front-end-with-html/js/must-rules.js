@@ -32,8 +32,6 @@
  * @property {(d: AssessmentData) => number} evaluate
  */
 
-// Wrapped in an IIFE; published via window.NutritionAssessment.
-
 /** @type {MUSTRule[]} */
 const mustRules = [
   {

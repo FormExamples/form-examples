@@ -28,8 +28,6 @@ import { COMPONENTS } from './types.js';
  * @typedef {import('./types.js').GradingResult} GradingResult
  */
 
-// Wrapped in an IIFE; published via window.WardRoundNote.
-
 /**
  * Build the per-component presence rows for the report (all ten components).
  * @param {ReturnType<typeof componentPresence>} presence

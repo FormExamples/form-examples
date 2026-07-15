@@ -16,8 +16,6 @@
  * @typedef {import('./types.js').FlaggedIssue} FlaggedIssue
  */
 
-// Wrapped in an IIFE; published via window.OttawaKneeRule.
-
 // Hours beyond which the rule's acute-injury validation no longer strictly
 // applies (7 days = 168 hours).
 const ACUTE_HOURS_LIMIT = 168;

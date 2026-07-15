@@ -10,11 +10,6 @@ import { sampleRequests } from './data.js';
 // (search box + triage-tier dropdown + appropriateness-band dropdown +
 // prep-safety-band dropdown + radiation-dose-band dropdown + safety-flags
 // dropdown).
-//
-// Sibling modules loaded as plain `<script>` tags (in dependency order)
-// attach their exports to `window.NuclearMedicineTestRequestDashboard`.
-// The whole file is wrapped in an IIFE so its top-level identifiers do not
-// leak to the global scope.
 
 // ----------------------------------------------------------------------
 // State

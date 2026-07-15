@@ -9,10 +9,6 @@ import { sampleAssessments } from './data.js';
 // box + care-setting dropdown + ankle-decision dropdown + foot-decision
 // dropdown). Each row shows the two independent boolean imaging decisions
 // (there is no score column — this instrument is a decision rule, not a score).
-//
-// Sibling modules loaded as plain `<script>` tags (in dependency order) attach
-// their exports to `window.OttawaAnkleRulesDashboard`. The whole file is wrapped
-// in an IIFE so its top-level identifiers do not leak.
 
 // ----------------------------------------------------------------------
 // State

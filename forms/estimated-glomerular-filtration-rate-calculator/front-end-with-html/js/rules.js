@@ -20,8 +20,6 @@
  * @property {(egfr: number) => boolean} evaluate
  */
 
-// Wrapped in an IIFE; published via window.EstimatedGlomerularFiltrationRateCalculator.
-
 // ─── CKD-EPI 2021 creatinine constants (spec §4) ────────────────
 /** Conversion divisor: serum creatinine umol/L → mg/dL. */
 const UMOL_PER_MGDL = 88.42;

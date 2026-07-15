@@ -9,8 +9,6 @@
 // of acuity and appropriateness. Rule IDs are stable and identical across every
 // front-end and the back-end (R-APPROP-*, R-URGENCY-*, R-COMPLETE-*,
 // R-PRIORITY-*). Pure data + helpers; the grader composes them.
-//
-// Wrapped in an IIFE; published via `window.HearingTestRequest`.
 
 // ----------------------------------------------------------------------
 // Axis A — Appropriateness (1-9 ordinal; BSA recommended procedures / NICE

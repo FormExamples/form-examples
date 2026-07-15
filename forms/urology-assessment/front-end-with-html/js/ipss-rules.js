@@ -21,8 +21,6 @@
  * @property {string} text
  */
 
-// Wrapped in an IIFE; published via window.UrologyAssessment.
-
 /** @type {IPSSRuleDefinition[]} */
 const ipssQuestions = [
   {

@@ -16,11 +16,6 @@ import { allergyStatusLabel, emptyAssessment, flatten, priorityLabel, statusClas
 // localStorage so a partial fill survives a page reload.
 //
 // This is a documentation / completeness form, NOT a scored instrument.
-//
-// Sibling files loaded as plain `<script>` tags (in order) attach their exports
-// to `window.HistoryAndPhysicalExamination`. Pulling them off here keeps the
-// rest of this file referring to short local names. The whole file is wrapped
-// in an IIFE so its top-level identifiers don't leak.
 
 // Map of component id -> human-readable label, for the completeness checklist.
 const COMPONENT_LABELS = {};

@@ -10,8 +10,6 @@
 // identical across every front-end and the back-end (R-APPROP-*, R-SAFETY-*,
 // R-DOSE-*, R-COMPLETE-*, R-TRIAGE-*). Pure data + helpers; the grader
 // composes them.
-//
-// Wrapped in an IIFE; published via `window.NuclearMedicineTestRequest`.
 
 // ----------------------------------------------------------------------
 // Axis A — Appropriateness (ACR Appropriateness Criteria / RCR iRefer 1-9)

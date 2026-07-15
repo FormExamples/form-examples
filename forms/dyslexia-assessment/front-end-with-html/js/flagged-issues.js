@@ -11,8 +11,6 @@
  * @typedef {import('./types.js').AdditionalFlag} AdditionalFlag
  */
 
-// Wrapped in an IIFE; published via window.DyslexiaAssessment.
-
 /**
  * Push a flag for a numeric standardised score that falls below a
  * dyslexia-band threshold.

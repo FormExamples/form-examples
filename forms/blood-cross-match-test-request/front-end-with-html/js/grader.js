@@ -7,8 +7,6 @@ import { scoreAppropriateness, scoreCompleteness, scoreIdentitySafety, scoreTria
 // single pure, deterministic grading result. The public entry point is
 // `calculateGrade(data)`. The output shape and rule / flag IDs are identical
 // across every front-end and the back-end.
-//
-// Wrapped in an IIFE; published via `window.BloodCrossMatchTestRequest`.
 
 /**
  * Derive an overall recommendation for the transfusion-laboratory vetting desk

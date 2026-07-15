@@ -27,8 +27,6 @@
  * @property {(d: AssessmentData) => boolean} completed
  */
 
-// Wrapped in an IIFE; published via window.LearningDisabilityAnnualHealthCheck.
-
 // Sentinel enum values that mean "the component was not carried out". Any other
 // non-empty value (including declined / not-applicable / not-eligible /
 // no-carer / yes / no) counts as a recorded, completed component (spec §4).

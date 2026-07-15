@@ -29,8 +29,6 @@ import { ottawaRules, unableToBearWeight } from './rules.js';
  * @typedef {import('./types.js').FiredCriterion} FiredCriterion
  */
 
-// Wrapped in an IIFE; published via window.OttawaAnkleRules.
-
 /**
  * Evaluate the six Ottawa criteria and collect the ones whose finding is
  * positive. Criteria A3 and F3 share the derived unable-to-bear-weight input,

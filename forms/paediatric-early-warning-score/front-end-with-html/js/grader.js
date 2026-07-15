@@ -28,8 +28,6 @@ import { scoreCapillaryRefill, scoreConsciousness, scoreHeartRate, scoreOxygenSa
  * @typedef {import('./types.js').FiredTrigger} FiredTrigger
  */
 
-// Wrapped in an IIFE; published via window.PaediatricEarlyWarningScore.
-
 // Severity ranking so we can take the worst of two bands.
 const BAND_SEVERITY = { 'routine': 0, 'low': 1, 'medium': 2, 'high': 3 };
 

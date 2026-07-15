@@ -10,8 +10,6 @@
 //   - null for unanswered numeric fields; '' for unanswered dates
 //   - boolean flags default to false
 //   - UUID-style string ids where the SvelteKit factory uses them
-//
-// Wrapped in an IIFE; published via `window.UkLpaFinancialDecisions`.
 
 let personCounter = 0;
 /** Stable-ish incrementing id (mirrors the SvelteKit factory nextId). */

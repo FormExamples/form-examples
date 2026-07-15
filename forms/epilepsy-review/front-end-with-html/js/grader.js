@@ -27,8 +27,6 @@ import { reviewStatusLabel, seizureControlLabel } from './types.js';
  * @typedef {import('./types.js').GradingResult} GradingResult
  */
 
-// Wrapped in an IIFE; published via window.EpilepsyReview.
-
 /**
  * Evaluate each applicable review component's documentation status.
  * @param {AssessmentData} data

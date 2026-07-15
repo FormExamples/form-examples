@@ -30,8 +30,6 @@ import { allergyDocumented, componentRules, coreExamAddressed, nonEmpty } from '
  * @typedef {import('./types.js').FiredRule} FiredRule
  */
 
-// Wrapped in an IIFE; published via window.HistoryAndPhysicalExamination.
-
 /** allergies undocumented — a blocking condition. */
 function allergiesUndocumented(r) {
   return !allergyDocumented(r);

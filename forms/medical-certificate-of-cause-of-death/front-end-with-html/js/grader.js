@@ -23,8 +23,6 @@ import { coronerReferralIndicated, missingPartIa, unacceptableSoleCause, underly
  * @typedef {import('./types.js').ValidityClass} ValidityClass
  */
 
-// Wrapped in an IIFE; published via window.MedicalCertificateOfCauseOfDeath.
-
 /**
  * Assign the single validity class (spec §4).
  * @param {DeathCertificate} d

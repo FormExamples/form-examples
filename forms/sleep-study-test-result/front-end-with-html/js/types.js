@@ -145,11 +145,6 @@
  * @property {string} gradedAt                             - ISO timestamp
  */
 
-// Wrapped in an IIFE so locals stay scoped — this file is loaded as a
-// classic <script> (no ES modules) so the page can be opened directly via
-// `file://`. The IIFE attaches its public symbols to a single global
-// namespace, `window.SleepStudyTestResult`.
-
 /**
  * Build a fresh, fully-blank sleep study test result.
  * Strings default to `''`; quantitative metrics default to `null`;

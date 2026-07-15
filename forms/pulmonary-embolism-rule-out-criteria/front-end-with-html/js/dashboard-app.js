@@ -9,10 +9,6 @@ import { sampleAssessments } from './data.js';
 // box + setting dropdown + classification dropdown + pre-test dropdown + workup
 // dropdown). PERC is a status / classification form, so the table shows a
 // classification badge rather than a numeric score.
-//
-// Sibling modules loaded as plain `<script>` tags (in dependency order) attach
-// their exports to `window.PulmonaryEmbolismRuleOutCriteriaDashboard`. The whole
-// file is wrapped in an IIFE so its top-level identifiers do not leak.
 
 // ----------------------------------------------------------------------
 // State

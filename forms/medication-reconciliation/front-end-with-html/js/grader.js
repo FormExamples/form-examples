@@ -26,8 +26,6 @@ import { statusLabel } from './types.js';
  * @typedef {import('./types.js').FiredRule} FiredRule
  */
 
-// Wrapped in an IIFE; published via window.MedicationReconciliation.
-
 /**
  * Compute the reconciliation grade for the supplied data.
  * @param {ReconciliationData} data

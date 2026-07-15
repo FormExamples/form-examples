@@ -17,8 +17,6 @@
  * @typedef {import('./types.js').FlaggedIssue} FlaggedIssue
  */
 
-// Wrapped in an IIFE; published via window.EdinburghPostnatalDepressionScale.
-
 /**
  * @param {AssessmentData} data
  * @param {{ itemScores: number[], totalScore: number,

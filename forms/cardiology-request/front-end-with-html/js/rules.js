@@ -9,8 +9,6 @@
 // are stable and identical across every front-end and the back-end
 // (R-APPROP-*, R-SAFETY-*, R-COMPLETE-*, R-TRIAGE-*). Pure data + helpers; the
 // grader composes them.
-//
-// Wrapped in an IIFE; published via `window.CardiologyRequest`.
 
 // ----------------------------------------------------------------------
 // Axis A — Referral appropriateness (right reason -> right service)

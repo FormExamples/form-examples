@@ -14,8 +14,6 @@ import { hoursFromOnset } from './types.js';
  * @typedef {import('./types.js').AdditionalFlag} AdditionalFlag
  */
 
-// Wrapped in an IIFE; published via window.StrokeAssessment.
-
 /**
  * @param {AssessmentData} data
  * @returns {AdditionalFlag[]}

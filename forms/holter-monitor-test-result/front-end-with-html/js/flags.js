@@ -14,7 +14,6 @@ import { hasCriticalFinding, hasSignificantPause } from './rules.js';
  * @typedef {import('./types.js').FlagPriority} FlagPriority
  */
 
-// Wrapped in an IIFE; published via window.HolterMonitorTestResult.
 // Depends on rules.js (the structured-findings predicates), so it must load
 // after it.
 

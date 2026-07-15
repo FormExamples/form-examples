@@ -8,8 +8,6 @@ import { scoreAppropriateness, scoreCompleteness, scorePriority, scoreUrgency } 
 // `calculateGrade(data)`. The output shape and rule / flag IDs are identical
 // across every front-end and the back-end, and map onto the
 // mammography_test_request_grade SQL columns.
-//
-// Wrapped in an IIFE; published via `window.MammographyTestRequest`.
 
 /**
  * Derive an overall vetting recommendation from the four axes. Least-alarming

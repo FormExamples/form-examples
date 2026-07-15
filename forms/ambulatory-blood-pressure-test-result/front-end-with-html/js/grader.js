@@ -26,8 +26,6 @@ import { classifyResult, gradeCompleteness, gradeFollowUp, gradeSeverity } from 
  * @typedef {import('./types.js').FiredRule} FiredRule
  */
 
-// Wrapped in an IIFE; published via window.AmbulatoryBloodPressureTestResult.
-
 /**
  * Derives the overall recommendation from the graded axes.
  *

@@ -34,8 +34,6 @@ import { completenessSlots, mandatoryRules } from './rules.js';
  * @typedef {import('./types.js').FiredRule} FiredRule
  */
 
-// Wrapped in an IIFE; published via window.ChildSafeguardingReferral.
-
 /**
  * Evaluate the mandatory rules against the referral.
  * @param {SafeguardingReferral} referral

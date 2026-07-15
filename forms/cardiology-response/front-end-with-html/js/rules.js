@@ -12,8 +12,6 @@ import { hasAnyCardiacFinding, hasCriticalFinding, hasReducedEjectionFraction } 
 // Rule IDs are stable and identical across every front-end and the back-end
 // (R-CLASS-*, R-SEVERITY-*, R-COMP-*, R-FOLLOWUP-*). Pure data + helpers; the
 // grader composes them.
-//
-// Wrapped in an IIFE; published via `window.CardiologyResponse`.
 
 // ----------------------------------------------------------------------
 // Axis A — response classification

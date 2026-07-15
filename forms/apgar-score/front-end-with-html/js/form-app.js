@@ -16,11 +16,6 @@ import { SIGNS, bandClass, bandLabel, emptyAssessment, emptyTimepoint, priorityL
 // Grimace, Activity, Respiration). Submission runs the pure scoring engine
 // (per-timepoint totals, bands, trend, flagged issues) and renders an inline
 // report. State is persisted to localStorage so a partial fill survives reload.
-//
-// Sibling files loaded as plain `<script>` tags (in order) attach their exports
-// to `window.ApgarScore`. Pulling them off here keeps the rest of this file
-// referring to short local names. The whole file is wrapped in an IIFE so its
-// top-level identifiers don't leak.
 
 // ----------------------------------------------------------------------
 // Persistence

@@ -19,8 +19,6 @@ import { VERY_HIGH } from './rules.js';
  * @typedef {import('./types.js').FlaggedIssue} FlaggedIssue
  */
 
-// Wrapped in an IIFE; published via window.AnionGapCalculator.
-
 /**
  * @param {AssessmentData} data
  * @param {import('./grader.js')} grade - the object returned by calculateAnionGap

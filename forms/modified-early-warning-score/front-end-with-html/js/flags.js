@@ -22,8 +22,6 @@ import { avpuLabel } from './types.js';
  * @typedef {import('./types.js').FlaggedIssue} FlaggedIssue
  */
 
-// Wrapped in an IIFE; published via window.ModifiedEarlyWarningScore.
-
 /**
  * @param {ObservationData} data
  * @param {{ mewsScore: number, singleParameterTrigger: boolean,

@@ -14,8 +14,6 @@ import { hasPathogenicVariant, hasVus } from './rules.js';
  * @typedef {import('./types.js').FlagPriority} FlagPriority
  */
 
-// Wrapped in an IIFE; published via window.GeneticTestResult.
-
 /**
  * Detect the safety-critical flags for a report.
  * @param {GeneticResult} r

@@ -22,8 +22,6 @@
  * @property {(t: Timepoint) => number} score  - selected 0/1/2 for this sign (0 when unanswered)
  */
 
-// Wrapped in an IIFE; published via window.ApgarScore.
-
 /** Parse a '0' | '1' | '2' | '' sign selection to a number (0 when unanswered). */
 function signPoints(value) {
   return value === '' || value == null ? 0 : Number(value);

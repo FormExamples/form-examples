@@ -23,8 +23,6 @@ import { scoreBloodPressure, scoreConsciousness, scoreOxygen, scorePulse, scoreR
  * @typedef {import('./types.js').FiredRule} FiredRule
  */
 
-// Wrapped in an IIFE; published via window.NationalEarlyWarningScore2.
-
 // Severity ranking so we can take the worst of two bands.
 const BAND_SEVERITY = { 'low': 0, 'low-medium': 1, 'medium': 2, 'high': 3 };
 

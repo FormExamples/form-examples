@@ -15,8 +15,6 @@
  * @typedef {import('./types.js').FlaggedIssue} FlaggedIssue
  */
 
-// Wrapped in an IIFE; published via window.WellsScoreForDeepVeinThrombosis.
-
 // The ten criterion inputs, in wizard order, with a human label for the
 // incomplete-assessment flag.
 const CRITERION_INPUTS = [

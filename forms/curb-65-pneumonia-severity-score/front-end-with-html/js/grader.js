@@ -30,8 +30,6 @@ import { curb65Rules } from './rules.js';
  * @typedef {import('./types.js').FiredCriterion} FiredCriterion
  */
 
-// Wrapped in an IIFE; published via window.Curb65PneumoniaSeverityScore.
-
 /**
  * Evaluate the five CURB-65 criterion rules and collect the ones that fired.
  * @param {AssessmentData} data

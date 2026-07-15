@@ -141,11 +141,6 @@
  * @property {string} gradedAt                             - ISO timestamp
  */
 
-// Wrapped in an IIFE so locals stay scoped — this file is loaded as a
-// classic <script> (no ES modules) so the page can be opened directly via
-// `file://`. The IIFE attaches its public symbols to a single global
-// namespace, `window.CardiacStressTestResult`.
-
 /**
  * Build a fresh, fully-blank cardiac stress test result.
  * Strings default to `''`; numeric measurements default to `null`;

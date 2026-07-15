@@ -26,8 +26,6 @@ import { classificationRules } from './rules.js';
  * @typedef {import('./types.js').FiredRule} FiredRule
  */
 
-// Wrapped in an IIFE; published via window.CervicalScreening.
-
 /**
  * Completeness: the reached branch has its determining inputs present. A
  * result classification is `complete` when eligibility (age), consent, sample

@@ -4,11 +4,6 @@
 // This file builds and exports the canonical empty AssessmentData shape used
 // by the wizard, so that newly-added fields automatically default correctly
 // when older saved state is rehydrated from localStorage.
-//
-// Wrapped in an IIFE so locals stay scoped — this file is loaded as a
-// classic <script> (no ES modules) so the page can be opened directly via
-// `file://`. The IIFE attaches its public symbols to a single global
-// namespace, `window.AudiologyAssessment`.
 
 /**
  * Build a fresh, fully-blank assessment.

@@ -21,8 +21,6 @@ import { ancillaryRules, mfsItems } from './mfs-rules.js';
  * @typedef {import('./types.js').FiredRule} FiredRule
  */
 
-// Wrapped in an IIFE; published via window.FallRiskAssessment.
-
 /**
  * Classify a numeric MFS score (0-125) into the base severity. The
  * Critical-override is applied separately by `gradeFallRisk`.

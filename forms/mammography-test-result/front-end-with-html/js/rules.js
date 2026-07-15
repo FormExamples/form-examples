@@ -21,8 +21,6 @@ import { biRadsShortLabel } from './types.js';
  * @typedef {import('./types.js').FiredRule} FiredRule
  */
 
-// Wrapped in an IIFE; published via window.MammographyTestResult.
-
 // ----------------------------------------------------------------------
 // Structured-findings predicates (mirror `utils.ts`)
 // ----------------------------------------------------------------------

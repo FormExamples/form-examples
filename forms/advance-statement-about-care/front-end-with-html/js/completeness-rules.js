@@ -15,8 +15,6 @@
  * @property {(d: StatementData) => boolean} evaluate
  */
 
-// Wrapped in an IIFE; published via window.AdvanceStatementAboutCare.
-
 /** @type {CompletenessRule[]} */
 const completenessRules = [
   // ─── PERSONAL INFORMATION ─────────────────────────────────

@@ -17,8 +17,6 @@
 //   10. Dysarthria (0-2)
 //   11. Extinction and Inattention (0-2)
 
-// Wrapped in an IIFE; published via window.StrokeAssessment.
-
 const nihssItems = [
   {
     id: 'NIHSS-1A',

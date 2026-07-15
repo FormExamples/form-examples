@@ -3,8 +3,6 @@ import { statusLabel } from './types.js';
 // Export helpers for the WHO Surgical Safety Checklist.
 // Builds JSON / XML / CSV / TSV / printable-HTML representations of a
 // completed (or in-progress) checklist record.
-//
-// Wrapped in an IIFE; published via `window.WhoSurgicalSafetyChecklist`.
 
 function xmlEscape(s) {
   return String(s ?? '')

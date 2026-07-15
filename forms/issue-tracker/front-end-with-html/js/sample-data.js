@@ -1,5 +1,4 @@
-// Sample dashboard rows. In production this would come from the backend
-// API; the static dashboard inlines them so the page works via file://.
+// Sample dashboard rows.
 export const SAMPLE_ISSUES = [
   {
     id: 'ISSUE-2026-0001',

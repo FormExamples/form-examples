@@ -18,8 +18,6 @@ import { classifyProblem, hasEvaluation, hasGoal, hasIntervention } from './rule
  * @typedef {import('./types.js').FlaggedIssue} FlaggedIssue
  */
 
-// Wrapped in an IIFE; published via window.NursingCarePlan.
-
 // The four referenced risk assessments, mapped to the `linkedRisk` code a
 // problem uses to claim it.
 const RISK_GROUPS = [

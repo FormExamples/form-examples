@@ -17,8 +17,6 @@
  * @typedef {import('./types.js').Acvpu} Acvpu
  */
 
-// Wrapped in an IIFE; published via window.NationalEarlyWarningScore2.
-
 /**
  * Respiration rate (breaths/min).
  *   <=8 -> 3 | 9-11 -> 1 | 12-20 -> 0 | 21-24 -> 2 | >=25 -> 3

@@ -8,8 +8,6 @@
 // priority low / moderate / high composite. Rule IDs are stable and identical
 // across every front-end and the back-end (R-APPROP-*, R-URGENCY-*,
 // R-COMPLETE-*, R-PRIORITY-*). Pure data + helpers; the grader composes them.
-//
-// Wrapped in an IIFE; published via `window.ElectrocardiogramTestRequest`.
 
 // ----------------------------------------------------------------------
 // Axis A — Appropriateness (AHA/ACC ECG-use guidance, 1-9 ordinal)

@@ -12,8 +12,6 @@ import { fullyPopulatedQualityScenarios, nonDraftAdrs, nonEmpty, risksWithMitiga
 // The thresholds are identical across every front-end and the back-end so the
 // HTML engine matches the Svelte and Loco stacks byte-for-byte. Pure data +
 // helpers; the grader (grader.js) composes them.
-//
-// Wrapped in an IIFE; published via `window.Arc42`.
 
 // Per-section predicate: returns { populated, complete } for a document.
 const RULES = {

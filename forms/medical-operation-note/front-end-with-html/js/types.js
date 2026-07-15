@@ -3,8 +3,7 @@
 //
 // Builds the canonical empty `OperationNote` shape so newly-added fields
 // default correctly when older saved state is rehydrated from
-// localStorage. Wrapped in an IIFE; published via
-// `window.MedicalOperationNote`.
+// localStorage.
 
 /**
  * Build a fresh, fully-blank operation note.

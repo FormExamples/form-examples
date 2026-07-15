@@ -11,11 +11,6 @@ import { emptyAssessment, outcomeClass, outcomeLabel, priorityClass, priorityLab
 // Submission runs the pure validation engine and renders an inline
 // report. State is persisted to localStorage so a partial fill survives
 // a reload.
-//
-// Sibling files loaded as plain `<script>` tags (in order) attach their
-// exports to `window.EmployeeOffboardingChecklist`. The whole file is
-// wrapped in an IIFE so its top-level identifiers don't leak to the
-// global scope.
 
 // ----------------------------------------------------------------------
 // Persistence

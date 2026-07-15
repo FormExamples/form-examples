@@ -1,8 +1,6 @@
 import { validateM1 } from './m1-validator.js';
 import { emptyAssessment, priorityLabel } from './types.js';
 
-// DVLA M1 — patient wizard (vanilla classic <script>).
-//
 // Single-page continuous wizard: every section is rendered into the page in
 // document order. The user scrolls through them; a top-of-page native
 // <progress> + step-list reflects how many fields have been answered.

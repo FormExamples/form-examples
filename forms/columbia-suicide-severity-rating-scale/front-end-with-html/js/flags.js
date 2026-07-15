@@ -20,8 +20,6 @@
  * @typedef {import('./types.js').FlaggedIssue} FlaggedIssue
  */
 
-// Wrapped in an IIFE; published via window.ColumbiaSuicideSeverityRatingScale.
-
 /**
  * @param {AssessmentData} data
  * @param {{ ideationLevel: number, suicidalBehaviourPresent: boolean,

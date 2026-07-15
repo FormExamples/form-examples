@@ -21,8 +21,6 @@
  * @typedef {import('./types.js').FlaggedIssue} FlaggedIssue
  */
 
-// Wrapped in an IIFE; published via window.LearningDisabilityAnnualHealthCheck.
-
 /**
  * Detect the clinical flags raised by the annual-health-check findings.
  *

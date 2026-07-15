@@ -11,12 +11,6 @@ import { sectionPopulationCheckers } from './validation-rules.js';
 // answered. Submission runs the pure IPS completeness validator and
 // renders an inline report. State is persisted to localStorage so a
 // partial fill survives a page reload.
-//
-// Sibling files loaded as plain `<script>` tags (in order) attach
-// their exports to `window.InternationalPatientSummary`. Pulling them
-// off here keeps the rest of this file referring to short local
-// names. Whole file is wrapped in an IIFE so its top-level
-// identifiers don't leak to the global scope.
 
 const TOTAL_SECTIONS = 10;
 

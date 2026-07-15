@@ -43,8 +43,6 @@
  * @property {(d: AssessmentData) => number} evaluate
  */
 
-// Wrapped in an IIFE; published via window.PalliativeAssessment.
-
 /** @returns {number} 0-10 score or 0 if unanswered. */
 function esasValue(d, key) {
   const v = d.esasrSymptoms[key];

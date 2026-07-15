@@ -25,8 +25,6 @@ import { albuminPoints, ascitesPoints, bilirubinPoints, childPughRules, classBan
  * @typedef {import('./types.js').FiredRule} FiredRule
  */
 
-// Wrapped in an IIFE; published via window.ChildPughScore.
-
 /**
  * Evaluate the declarative rule table and collect the rows that fired (one per
  * answered parameter).

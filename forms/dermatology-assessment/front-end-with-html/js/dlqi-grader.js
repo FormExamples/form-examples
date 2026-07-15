@@ -21,8 +21,6 @@
  * @typedef {import('./types.js').DLQIRuleDefinition} DLQIRuleDefinition
  */
 
-// Wrapped in an IIFE; published via window.DermatologyAssessment.
-
 /** @type {DLQIRuleDefinition[]} */
 const dlqiQuestions = [
   {

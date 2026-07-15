@@ -24,8 +24,6 @@ import { scoreSeverity } from './types.js';
  * @typedef {import('./types.js').GradingResult} GradingResult
  */
 
-// Wrapped in an IIFE; published via window.DyslexiaAssessment.
-
 /**
  * Pick the most-severe of two severities.
  * @param {Severity} a

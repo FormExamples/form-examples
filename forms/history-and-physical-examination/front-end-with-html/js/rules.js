@@ -26,8 +26,6 @@
  * @property {(r: ClerkingRecord) => boolean} evaluate
  */
 
-// Wrapped in an IIFE; published via window.HistoryAndPhysicalExamination.
-
 /** Trim helper — treats undefined / null as empty. */
 function nonEmpty(v) {
   return typeof v === 'string' && v.trim() !== '';

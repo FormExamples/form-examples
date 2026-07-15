@@ -22,8 +22,6 @@ import { GRADED_CYTOLOGY, MAX_AGE, MIN_AGE } from './rules.js';
  * @typedef {import('./types.js').FlaggedIssue} FlaggedIssue
  */
 
-// Wrapped in an IIFE; published via window.CervicalScreening.
-
 /** Is a date string strictly in the past (before today)? */
 function isPast(dateStr) {
   if (!dateStr) return false;

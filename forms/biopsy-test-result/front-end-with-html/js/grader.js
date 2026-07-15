@@ -28,8 +28,6 @@ import { classifyResult, gradeCompleteness, gradeFollowUp, gradeSeverity } from 
  * @typedef {import('./types.js').FiredRule} FiredRule
  */
 
-// Wrapped in an IIFE; published via window.BiopsyTestResult.
-
 /**
  * Derives the overall recommendation from the graded axes.
  * @param {string} classification

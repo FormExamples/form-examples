@@ -1,9 +1,6 @@
 // Declarative priority classification rules for the Prescription Request
 // form. Mirrors `src/lib/engine/prescription-rules.ts`. Each rule has an
 // `evaluate(data)` function returning true when the rule applies.
-//
-// Loaded as a classic <script> tag; attaches `prescriptionRules` to
-// `window.PrescriptionRequest`.
 
 /** @type {import('./types.js').PrescriptionRule[]} */
 const prescriptionRules = [

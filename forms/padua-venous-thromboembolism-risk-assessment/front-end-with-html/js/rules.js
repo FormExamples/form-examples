@@ -19,8 +19,6 @@
  * @property {(d: AssessmentData) => boolean} evaluate
  */
 
-// Wrapped in an IIFE; published via window.PaduaVenousThromboembolismRiskAssessment.
-
 /** @type {PaduaRule[]} */
 const paduaRules = [
   // ─── FACTOR 1: ACTIVE CANCER (3) ──────────────────────────────

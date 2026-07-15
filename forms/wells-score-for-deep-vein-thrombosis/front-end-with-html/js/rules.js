@@ -21,8 +21,6 @@
  * @property {(d: AssessmentData) => boolean} evaluate
  */
 
-// Wrapped in an IIFE; published via window.WellsScoreForDeepVeinThrombosis.
-
 /** @type {WellsRule[]} */
 const wellsRules = [
   // ─── CRITERION 1: ACTIVE CANCER ───────────────────────────────

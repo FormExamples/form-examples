@@ -32,8 +32,6 @@ import { ESAS_ITEMS } from './types.js';
  * @typedef {import('./types.js').AdditionalFlag} AdditionalFlag
  */
 
-// Wrapped in an IIFE; published via window.PalliativeAssessment.
-
 const labelByKey = Object.create(null);
 for (const item of ESAS_ITEMS) labelByKey[item.key] = item.label;
 

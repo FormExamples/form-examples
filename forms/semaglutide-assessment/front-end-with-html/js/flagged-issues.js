@@ -13,8 +13,6 @@ import { calculateAge, calculateBMI } from './types.js';
  * @typedef {import('./types.js').AdditionalFlag} AdditionalFlag
  */
 
-// Wrapped in an IIFE; published via window.SemaglutideAssessment.
-
 /**
  * @param {AssessmentData} data
  * @returns {AdditionalFlag[]}

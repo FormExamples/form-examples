@@ -22,8 +22,6 @@
  * @property {(bmi: number) => boolean} evaluate
  */
 
-// Wrapped in an IIFE; published via window.BmiBsaCalculator.
-
 // ─── WHO adult BMI band boundaries (spec §4, inclusive lower bounds) ──────
 /** Underweight upper bound (exclusive) — normal begins here. */
 const BMI_NORMAL = 18.5;

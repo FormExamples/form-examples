@@ -22,8 +22,6 @@ import { isComplete } from './grader.js';
  * @typedef {import('./types.js').FlaggedIssue} FlaggedIssue
  */
 
-// Wrapped in an IIFE; published via window.BreastScreening.
-
 // Roughly the recall interval, in whole months.
 const OVERDUE_MONTHS = 36;
 

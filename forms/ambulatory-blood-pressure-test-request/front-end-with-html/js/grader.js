@@ -7,9 +7,6 @@ import { scoreAppropriateness, scoreCompleteness, scoreSuitability, scoreTriage 
 // single pure, deterministic grading result. The public entry point is
 // `calculateGrade(data)`. The output shape and rule / flag IDs are identical
 // across every front-end and the back-end (mirrors SQL migration 05 columns).
-//
-// Wrapped in an IIFE; published via
-// `window.AmbulatoryBloodPressureTestRequest`.
 
 /**
  * Derive an overall vetting recommendation from the four axes. The

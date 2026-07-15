@@ -17,8 +17,6 @@
  * @typedef {import('./types.js').FlaggedIssue} FlaggedIssue
  */
 
-// Wrapped in an IIFE; published via window.FourATestForDelirium.
-
 /**
  * @param {AssessmentData} data
  * @param {number} totalScore  - total 0-12 from the grader

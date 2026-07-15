@@ -24,8 +24,6 @@ import { ASIAN_HIGH, ASIAN_INCREASED, DUBOIS_COEFF, DUBOIS_HEIGHT_EXP, DUBOIS_WE
  * @typedef {import('./types.js').FiredThreshold} FiredThreshold
  */
 
-// Wrapped in an IIFE; published via window.BmiBsaCalculator.
-
 /** Round a number to `dp` decimal places (returns null unchanged). */
 function roundTo(n, dp) {
   if (n === null || n === undefined || Number.isNaN(n)) return null;

@@ -9,8 +9,6 @@ import { BP_SEVERE_DIASTOLIC, BP_SEVERE_SYSTOLIC } from './rules.js';
 //
 // Each flag is { flagId, category, priority, description, suggestedAction }.
 // Flag IDs are stable and identical across every front-end and the back-end.
-// Wrapped in an IIFE; published via
-// `window.AmbulatoryBloodPressureTestRequest`.
 
 // Accelerated (malignant) hypertension is at the very top of the severe range
 // and warrants same-day specialist review for end-organ damage.

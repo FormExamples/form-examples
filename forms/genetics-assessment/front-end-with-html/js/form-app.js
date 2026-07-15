@@ -9,10 +9,6 @@ import { calculateAge, emptyAssessment, emptyRelative, riskLevelClass, riskLevel
 // progress summary reflects how many fields have been answered. Submission
 // runs the pure genetics scoring engine and renders an inline report. State
 // is persisted to localStorage so a partial fill survives a page reload.
-//
-// Sibling files loaded as plain `<script>` tags (in order) attach their
-// exports to `window.GeneticsAssessment`. Pulling them off here keeps the
-// rest of this file referring to short local names.
 
 // ----------------------------------------------------------------------
 // Persistence

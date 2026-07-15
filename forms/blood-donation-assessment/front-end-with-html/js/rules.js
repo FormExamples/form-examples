@@ -29,8 +29,6 @@ import { calculateAgeYears } from './types.js';
  * @property {(d: AssessmentData) => FiredRule | null} evaluate
  */
 
-// Wrapped in an IIFE; published via window.BloodDonationAssessment.
-
 /** @param {string} id @param {string} category @param {string} description @param {string} window */
 function temp(id, category, description, window) {
   return { id, category, description, status: 'temporarily-deferred', deferralWindow: window };

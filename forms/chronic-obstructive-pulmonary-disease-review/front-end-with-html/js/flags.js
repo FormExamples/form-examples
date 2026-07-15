@@ -16,8 +16,6 @@
  * @typedef {import('./types.js').FlaggedIssue} FlaggedIssue
  */
 
-// Wrapped in an IIFE; published via window.ChronicObstructivePulmonaryDiseaseReview.
-
 /**
  * @param {ReviewData} data
  * @param {{ abeGroup: ('A'|'B'|'E'|null), reviewStatus: ('complete'|'partial'|'incomplete') }} grade

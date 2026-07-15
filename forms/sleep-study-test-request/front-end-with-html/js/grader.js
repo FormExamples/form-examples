@@ -7,8 +7,6 @@ import { scoreAppropriateness, scoreCompleteness, scorePriority, scoreTriage } f
 // single pure, deterministic grading result. The public entry point is
 // `calculateGrade(data)`. The output shape and rule / flag IDs are identical
 // across every front-end and the back-end.
-//
-// Wrapped in an IIFE; published via `window.SleepStudyTestRequest`.
 
 /**
  * Derive an overall recommendation for the sleep-service vetting desk from the

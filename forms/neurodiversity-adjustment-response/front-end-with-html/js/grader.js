@@ -15,8 +15,6 @@ import { anyAgreed, flatten, recommendationLabel } from './types.js';
 // drives the legal-risk axis to high-risk, raises the discrimination-risk flag,
 // and auto-escalates the follow-up urgency. The least-alarming band is chosen
 // only when no rule fires.
-//
-// Wrapped in an IIFE; published via `window.NeurodiversityAdjustmentResponse`.
 
 /**
  * Derive the overall recommendation from the response and graded axes.

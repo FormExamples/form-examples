@@ -13,10 +13,6 @@ import { emptyAssessment, mortalityBandClass, mortalityBandLabel, priorityLabel,
 // engine (per-system sub-scores, total, delta, band, Sepsis-3, flagged issues)
 // and renders an inline report. State is persisted to localStorage so a partial
 // fill survives a page reload.
-//
-// Sibling files loaded as plain `<script>` tags (in order) attach their exports
-// to `window.SequentialOrganFailureAssessment`. The whole file is wrapped in an
-// IIFE so its top-level identifiers don't leak.
 
 // ----------------------------------------------------------------------
 // Persistence

@@ -10,10 +10,6 @@ import { calculateBmi, ckdStageFromEgfr, hba1cMmolMol, riskCategoryClass, riskCa
 // Submission runs the pure SCORE2-Diabetes scoring engine and renders an
 // inline report. State is persisted to localStorage so a partial fill
 // survives a page reload.
-//
-// Sibling files loaded as plain `<script>` tags (in order) attach their
-// exports to `window.SystematicCoronaryRiskEvaluation2Diabetes`. Whole
-// file is wrapped in an IIFE so its top-level identifiers don't leak.
 
 // ----------------------------------------------------------------------
 // Persistence

@@ -33,8 +33,6 @@ import { RISK_FACTOR_LABELS } from './types.js';
  * @typedef {import('./types.js').FiredRule} FiredRule
  */
 
-// Wrapped in an IIFE; published via window.BhutaniBilirubinNomogram.
-
 /**
  * Collect the risk factors that are set to 'yes'.
  * @param {AssessmentData} data

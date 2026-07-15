@@ -19,8 +19,6 @@ import { RAPID_GROWTH_CM } from './rules.js';
  * @typedef {import('./types.js').Category} Category
  */
 
-// Wrapped in an IIFE; published via window.AbdominalAorticAneurysmScreening.
-
 /**
  * @param {AssessmentData} data
  * @param {{ category: Category, growthCm: number|null }} grade  - result from the grader

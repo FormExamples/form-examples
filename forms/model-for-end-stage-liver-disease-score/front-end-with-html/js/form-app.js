@@ -13,11 +13,6 @@ import { emptyAssessment, meldVariantLabel, mortalityBandClass, mortalityBandLab
 // them. Submission runs the pure MELD engine (weighted logarithmic score,
 // mortality band, flagged issues) and renders an inline report. State is
 // persisted to localStorage so a partial fill survives a page reload.
-//
-// Sibling files loaded as plain `<script>` tags (in order) attach their exports
-// to `window.ModelForEndStageLiverDiseaseScore`. Pulling them off here keeps the
-// rest of this file referring to short local names. The whole file is wrapped in
-// an IIFE so its top-level identifiers don't leak.
 
 // ----------------------------------------------------------------------
 // Persistence

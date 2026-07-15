@@ -45,11 +45,6 @@
  * @typedef {'no-handicap' | 'mild' | 'moderate' | 'severe'} DhiHandicapLevel
  */
 
-// Wrapped in an IIFE so locals stay scoped — this file is loaded as a
-// classic <script> (no ES modules) so the page can be opened directly via
-// `file://`. The IIFE attaches its public symbols to a single global
-// namespace, `window.AudioVestibularAssessment`.
-
 /** Build an empty {hz500, hz1000, hz2000, hz4000} object. */
 function emptyEarThresholds() {
   return { hz500: null, hz1000: null, hz2000: null, hz4000: null };

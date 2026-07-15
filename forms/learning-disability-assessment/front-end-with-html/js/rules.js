@@ -24,8 +24,6 @@
  * @property {(d: AssessmentData) => number} evaluate
  */
 
-// Wrapped in an IIFE; published via window.LearningDisabilityAssessment.
-
 /** Convert a SupportLevel to its 0-3 numeric weight (0 if blank). */
 function levelScore(level) {
   switch (level) {

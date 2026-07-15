@@ -101,11 +101,6 @@
  * @property {string} gradedAt                            - ISO timestamp
  */
 
-// Wrapped in an IIFE so locals stay scoped — this file is loaded as a
-// classic <script> (no ES modules) so the page can be opened directly via
-// `file://`. The IIFE attaches its public symbols to a single global
-// namespace, `window.AngiographyTestResult`.
-
 /**
  * Build a fresh, fully-blank angiography result.
  * Strings default to `''`; the numeric field defaults to `null`;

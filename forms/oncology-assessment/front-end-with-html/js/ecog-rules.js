@@ -17,8 +17,6 @@
  * @property {(d: AssessmentData) => boolean} evaluate
  */
 
-// Wrapped in an IIFE; published via window.OncologyAssessment.
-
 /** @type {ECOGRule[]} */
 const ecogRules = [
   // ─── DEMOGRAPHICS / PERFORMANCE STATUS ──────────────────

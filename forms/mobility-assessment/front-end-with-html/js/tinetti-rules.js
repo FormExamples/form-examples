@@ -12,8 +12,6 @@
  * @property {number} maxScore
  */
 
-// Wrapped in an IIFE; published via window.MobilityAssessment.
-
 /** @type {TinettiRuleDefinition[]} */
 const tinettiBalanceItems = [
   {

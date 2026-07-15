@@ -19,8 +19,6 @@
  * @typedef {import('./types.js').FiredRule} FiredRule
  */
 
-// Wrapped in an IIFE; published via window.UrinalysisTestResult.
-
 // ----------------------------------------------------------------------
 // Structured-findings predicates (mirror `utils.ts`)
 // ----------------------------------------------------------------------

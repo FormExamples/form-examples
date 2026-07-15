@@ -18,8 +18,6 @@
  * @typedef {import('./types.js').FiredRule} FiredRule
  */
 
-// Wrapped in an IIFE; published via window.GeneticTestResult.
-
 // ----------------------------------------------------------------------
 // Structured-findings predicates (mirror `utils.ts`)
 // ----------------------------------------------------------------------

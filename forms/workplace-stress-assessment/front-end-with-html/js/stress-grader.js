@@ -17,8 +17,6 @@ import { riskLevelRank } from './types.js';
  * @typedef {import('./types.js').FiredItem} FiredItem
  */
 
-// Wrapped in an IIFE; published via window.WorkplaceStressAssessment.
-
 /**
  * Classify a domain mean against its HSE percentile cut-offs.
  *

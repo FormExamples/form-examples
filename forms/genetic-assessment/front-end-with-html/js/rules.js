@@ -15,8 +15,6 @@
  * @typedef {import('./types.js').RiskRuleDefinition} RiskRuleDefinition
  */
 
-// Wrapped in an IIFE; published via window.GeneticAssessment.
-
 /** @type {RiskRuleDefinition[]} */
 const riskRules = [
   {

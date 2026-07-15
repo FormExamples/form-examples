@@ -13,11 +13,6 @@ import { emptyAssessment, priorityLabel, readinessBandClass, readinessBandLabel 
 // sub-scores, total 0-10, readiness band gated on oxygen saturation, optional
 // PADSS total, flagged issues) and renders an inline report. State is persisted
 // to localStorage so a partial fill survives a page reload.
-//
-// Sibling files loaded as plain `<script>` tags (in order) attach their exports
-// to `window.PostAnaesthesiaCareUnitRecord`. Pulling them off here keeps the
-// rest of this file referring to short local names. The whole file is wrapped in
-// an IIFE so its top-level identifiers don't leak.
 
 // ----------------------------------------------------------------------
 // Option lists (single source of truth for wizard inputs + report labels)

@@ -16,8 +16,6 @@
  * @property {(d: AssessmentData) => boolean} evaluate
  */
 
-// Wrapped in an IIFE; published via window.VaccinationsChecklist.
-
 /** @type {VaccinationRule[]} */
 const vaccinationRules = [
   // ─── CHILDHOOD IMMUNISATIONS ──────────────────────────────

@@ -12,9 +12,7 @@ import { renderNoticeHtml } from './notice-text.js';
 // reload.
 //
 // This module is loaded as `type="module"` solely so it can `import` the
-// BMA privacy notice prose builder. All public symbols are kept local and
-// the file is wrapped in an IIFE so it does not leak top-level
-// identifiers.
+// BMA privacy notice prose builder.
 
 // ----------------------------------------------------------------------
 // Persistence

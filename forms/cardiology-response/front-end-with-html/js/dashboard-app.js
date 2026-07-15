@@ -9,11 +9,6 @@ import { sampleResponses } from './data.js';
 // rendered table is sortable (click any column header) and filterable
 // (search box + classification dropdown + follow-up-urgency dropdown +
 // safety-flags dropdown).
-//
-// Sibling modules loaded as plain `<script>` tags (in dependency order)
-// attach their exports to `window.CardiologyResponseDashboard`. The whole file
-// is wrapped in an IIFE so its top-level identifiers do not leak to the global
-// scope.
 
 // ----------------------------------------------------------------------
 // State

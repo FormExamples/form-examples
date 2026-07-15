@@ -8,8 +8,6 @@ import { evaluateContrastSafety, evaluateDose, scoreAppropriateness, scoreComple
 // `calculateGrade(data)`. The output shape and rule / flag IDs are identical
 // across every front-end and the back-end, and map onto the
 // ct_scan_test_request_grade SQL columns.
-//
-// Wrapped in an IIFE; published via `window.CtScanTestRequest`.
 
 /**
  * Derive an overall recommendation for the imaging vetting desk from the four

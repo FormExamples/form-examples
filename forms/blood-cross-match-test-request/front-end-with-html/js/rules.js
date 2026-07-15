@@ -10,8 +10,6 @@
 // to stat. Rule IDs are stable and identical across every front-end and the
 // back-end (R-APPROP-*, R-IDENTITY-*, R-COMPLETE-*, R-TRIAGE-*). Pure data +
 // helpers; the grader composes them.
-//
-// Wrapped in an IIFE; published via `window.BloodCrossMatchTestRequest`.
 
 // ----------------------------------------------------------------------
 // Axis A — Appropriateness (1-9 ordinal, anchored on NICE NG24)

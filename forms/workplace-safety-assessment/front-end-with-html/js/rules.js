@@ -29,8 +29,6 @@
  * @property {(d: AssessmentData) => number} evaluate
  */
 
-// Wrapped in an IIFE; published via window.WorkplaceSafetyAssessment.
-
 /** Severity for a "no" answer to a positively-phrased control question. */
 function gradeNoIsBad(answer, severity) {
   if (answer === '' || answer === undefined || answer === null) return 0;

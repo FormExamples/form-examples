@@ -18,9 +18,6 @@
  * @typedef {import('./types.js').FlaggedIssue} FlaggedIssue
  */
 
-// Wrapped in an IIFE; published via
-// window.AlcoholUseDisordersIdentificationTestConsumption.
-
 /** Is an item value unanswered? */
 function isMissing(v) {
   return v === null || v === undefined || v === '';

@@ -1,8 +1,4 @@
 // Grading engine — simple completeness check for acknowledgment step.
-//
-// Exposed both as an ES module export and as a classic-script namespace
-// value so the page can be opened directly via file:// without CORS
-// blocking ES module loading.
 
 function grade(data) {
   const firedRules = [];

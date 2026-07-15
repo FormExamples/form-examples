@@ -22,8 +22,6 @@ import { gradeToFindingLevel } from './types.js';
  * @typedef {import('./types.js').SeverityGrade} SeverityGrade
  */
 
-// Wrapped in an IIFE; published via window.WorkplaceSafetyAssessment.
-
 /**
  * Determine the worst outcome from a set of fired rules.
  * @param {FiredRule[]} firedRules

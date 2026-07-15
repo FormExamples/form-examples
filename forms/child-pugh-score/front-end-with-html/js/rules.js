@@ -36,8 +36,6 @@
  * @property {(d: AssessmentData) => boolean} evaluate
  */
 
-// Wrapped in an IIFE; published via window.ChildPughScore.
-
 /**
  * Parameter 1 — total bilirubin (µmol/L). Returns 1-3, or null when unmeasured.
  * @param {AssessmentData} d

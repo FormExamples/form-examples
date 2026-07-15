@@ -9,11 +9,6 @@ import { sampleResponses } from './data.js';
 // table is sortable (click any column header) and filterable (search box +
 // outcome dropdown + legal-risk dropdown + follow-up-urgency dropdown +
 // flags dropdown).
-//
-// Sibling modules loaded as plain `<script>` tags (in dependency order) attach
-// their exports to `window.NeurodiversityAdjustmentResponseDashboard`. The
-// whole file is wrapped in an IIFE so its top-level identifiers do not leak to
-// the global scope.
 
 // ----------------------------------------------------------------------
 // State

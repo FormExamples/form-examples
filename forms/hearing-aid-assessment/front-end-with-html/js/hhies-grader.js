@@ -15,8 +15,6 @@ import { hhiesCategory } from './types.js';
  * @typedef {import('./types.js').FiredRule} FiredRule
  */
 
-// Wrapped in an IIFE; published via window.HearingAidAssessment.
-
 /**
  * Calculate the HHIE-S total score from the patient questionnaire.
  *

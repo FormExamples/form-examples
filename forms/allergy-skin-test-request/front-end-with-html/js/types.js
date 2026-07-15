@@ -6,8 +6,7 @@
 // Property names are camelCase to match the front-end serde / examples
 // convention. Allergen panels and validity/safety history are modelled as
 // boolean fields (defaulting to false), mirroring the BOOLEAN columns in the
-// SQL source of truth. Wrapped in an IIFE; published via
-// `window.AllergySkinTestRequest`.
+// SQL source of truth.
 
 /**
  * Build a fresh, fully-blank allergy test request.

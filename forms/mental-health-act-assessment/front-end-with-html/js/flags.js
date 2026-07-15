@@ -30,8 +30,6 @@ import { isDetaining, nonEmpty, riskLimbStatus } from './rules.js';
  * @typedef {import('./types.js').FlaggedIssue} FlaggedIssue
  */
 
-// Wrapped in an IIFE; published via window.MentalHealthActAssessment.
-
 // Milliseconds in five days — the s2/s3 statutory window between the two medical
 // examinations (Mental Health Act 1983, Code of Practice).
 const FIVE_DAYS_MS = 5 * 24 * 60 * 60 * 1000;

@@ -11,11 +11,6 @@ import { abnormalitySeverityClass, abnormalitySeverityLabel, followUpUrgencyClas
 // dropdown). Columns mirror the SvelteKit dashboard route: report id, patient,
 // request type, status, reported date, Axis A classification, Axis B severity,
 // Axis D urgency, Axis C completeness, and flag count.
-//
-// Sibling modules loaded as plain `<script>` tags (in dependency order) attach
-// their exports to `window.BloodCrossMatchTestResultDashboard` (data + api)
-// and `window.BloodCrossMatchTestResult` (shared labels from js/types.js).
-// The whole file is wrapped in an IIFE so its top-level identifiers do not leak.
 
 // ----------------------------------------------------------------------
 // State

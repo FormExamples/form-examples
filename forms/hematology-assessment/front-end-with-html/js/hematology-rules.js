@@ -17,8 +17,6 @@ import { bloodCountScore } from './types.js';
  * @property {(d: AssessmentData) => boolean} evaluate
  */
 
-// Wrapped in an IIFE; published via window.HematologyAssessment.
-
 /** @returns {HematologyRule[]} */
 function allRules() {
   return [

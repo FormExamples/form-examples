@@ -1,6 +1,4 @@
 // Wires the form to the scoring engine and renders the report.
-// Loaded as a classic <script> after scoring.js, so `IssueTracker.gradeIssue`
-// is available on the global namespace.
 import { gradeIssue } from './scoring.js';
 
 const form = document.getElementById('issue-form');

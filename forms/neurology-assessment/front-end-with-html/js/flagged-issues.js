@@ -12,8 +12,6 @@
  * @typedef {import('./types.js').AdditionalFlag} AdditionalFlag
  */
 
-// Wrapped in an IIFE; published via window.NeurologyAssessment.
-
 /**
  * @param {AssessmentData} data
  * @returns {AdditionalFlag[]}

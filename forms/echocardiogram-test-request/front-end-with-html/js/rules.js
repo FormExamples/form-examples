@@ -8,8 +8,6 @@
 // are stable and identical across every front-end and the back-end
 // (R-APPROP-*, R-URGENCY-*, R-COMPLETE-*, R-PRIORITY-*). Pure data + helpers;
 // the grader composes them.
-//
-// Wrapped in an IIFE; published via `window.EchocardiogramTestRequest`.
 
 // ----------------------------------------------------------------------
 // Axis A — Appropriateness (ACC/AHA/ASE & BSE Appropriate Use Criteria 1-9)

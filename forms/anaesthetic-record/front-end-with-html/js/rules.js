@@ -19,8 +19,6 @@
  * @typedef {import('./types.js').RecordData} RecordData
  */
 
-// Wrapped in an IIFE; published via window.AnaestheticRecord.
-
 // ---------------------------------------------------------------------------
 // Small pure predicates
 // ---------------------------------------------------------------------------

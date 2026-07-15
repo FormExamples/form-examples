@@ -14,7 +14,6 @@ import { hasCriticalFinding, hasSignificantGrowth, hasUtiFeatures, isDipstickPos
  * @typedef {import('./types.js').FlagPriority} FlagPriority
  */
 
-// Wrapped in an IIFE; published via window.UrinalysisTestResult.
 // Depends on rules.js (the structured-findings predicates), so it must load
 // after it.
 

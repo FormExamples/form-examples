@@ -17,8 +17,6 @@
  * @typedef {import('./types.js').FlaggedIssue} FlaggedIssue
  */
 
-// Wrapped in an IIFE; published via window.Curb65PneumoniaSeverityScore.
-
 /**
  * @param {AssessmentData} data
  * @param {{ totalScore: number, scoreVariant: string }} grade

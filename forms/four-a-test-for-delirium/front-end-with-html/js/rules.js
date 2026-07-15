@@ -22,8 +22,6 @@
  * @property {(d: AssessmentData) => boolean} evaluate
  */
 
-// Wrapped in an IIFE; published via window.FourATestForDelirium.
-
 /** @type {FourATRule[]} */
 const fouratRules = [
   // ─── ITEM 1: ALERTNESS (0 or 4) ───────────────────────────────

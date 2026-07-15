@@ -15,8 +15,6 @@
  * @property {(d: AssessmentData) => boolean} evaluate
  */
 
-// Wrapped in an IIFE; published via window.EmployeeOnboardingChecklist.
-
 /** @type {OnboardingRule[]} */
 const onboardingRules = [
   // ─── PRE-EMPLOYMENT CHECKS ──────────────────────────────────

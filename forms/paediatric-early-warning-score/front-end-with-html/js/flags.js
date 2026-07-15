@@ -19,8 +19,6 @@
  * @typedef {import('./types.js').Flag} Flag
  */
 
-// Wrapped in an IIFE; published via window.PaediatricEarlyWarningScore.
-
 /**
  * @param {AssessmentData} data
  * @param {{ subscores: Subscores, aggregateScore: number, maxParameterScore: number }} grade

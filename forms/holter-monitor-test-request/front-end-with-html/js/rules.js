@@ -8,8 +8,6 @@
 // are stable and identical across every front-end and the back-end
 // (R-APPROP-*, R-MATCH-*, R-TRIAGE-*, R-COMPLETE-*, R-PRIORITY-*). Pure data +
 // helpers; the grader composes them.
-//
-// Wrapped in an IIFE; published via `window.HolterMonitorTestRequest`.
 
 // ----------------------------------------------------------------------
 // Axis A — Appropriateness (ACC/AHA ambulatory ECG 1-9 ordinal)

@@ -21,8 +21,6 @@
  * @property {(diameterCm: number) => boolean} evaluate
  */
 
-// Wrapped in an IIFE; published via window.AbdominalAorticAneurysmScreening.
-
 // ─── Diameter thresholds (spec §4) ──────────────────────────────
 /** Lower bound of a small aneurysm (cm, inclusive). Below this is normal. */
 const SMALL_MIN = 3.0;

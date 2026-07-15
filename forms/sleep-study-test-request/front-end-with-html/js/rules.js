@@ -8,8 +8,6 @@
 // DVLA auto-escalation. Rule IDs are stable and identical across every
 // front-end and the back-end (R-APPROP-*, R-PRIORITY-*, R-COMPLETE-*,
 // R-TRIAGE-*). Pure data + helpers; the grader composes them.
-//
-// Wrapped in an IIFE; published via `window.SleepStudyTestRequest`.
 
 // Epworth above this threshold indicates abnormal / severe daytime sleepiness.
 const EPWORTH_ABNORMAL = 11;     // >10 indicates abnormal daytime sleepiness

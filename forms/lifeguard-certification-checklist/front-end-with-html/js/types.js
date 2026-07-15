@@ -178,8 +178,6 @@
  * @property {string} timestamp
  */
 
-// IIFE so locals stay scoped — this file is loaded as a classic <script>
-// (no ES modules) so the page can be opened directly via `file://`.
 // Public symbols are attached to the global namespace
 // `window.LifeguardCertificationChecklist`.
 

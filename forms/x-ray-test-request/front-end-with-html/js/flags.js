@@ -6,7 +6,6 @@
 //
 // Each flag is { flagId, category, priority, description, suggestedAction }.
 // Flag IDs are stable and identical across every front-end and the back-end.
-// Wrapped in an IIFE; published via `window.XRayTestRequest`.
 
 // Regions where laterality (left / right) is clinically meaningful, so a
 // missing or not-applicable laterality risks imaging the wrong side.

@@ -14,8 +14,6 @@
  * @property {(d: AssessmentData) => boolean} evaluate
  */
 
-// Wrapped in an IIFE; published via window.RheumatologyAssessment.
-
 /** @type {DAS28Rule[]} */
 const das28Rules = [
   // ─── JOINT ASSESSMENT ────────────────────────────────────

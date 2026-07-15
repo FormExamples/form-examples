@@ -14,12 +14,6 @@ import { sampleTeams } from './data.js';
 // employees. The dashboard intentionally exposes no personal identifiers
 // in any column, sort key, or filter input — only the department name is
 // shown, by design.
-//
-// Sibling modules loaded as plain `<script>` tags (in dependency order)
-// attach their exports to `window.WorkplaceClimateAssessmentDashboard`.
-// Pulling them off here keeps the rest of this file referring to short
-// local names. The whole file is wrapped in an IIFE so its top-level
-// identifiers do not leak to the global scope.
 
 // ----------------------------------------------------------------------
 // State

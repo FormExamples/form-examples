@@ -13,10 +13,6 @@ import { sampleCertificates } from './data.js';
 // validity classification, the derived underlying cause, and the coroner-referral
 // indication; it makes NO diagnostic judgement and does not discharge any
 // statutory duty.
-//
-// Sibling modules loaded as plain `<script>` tags (in dependency order) attach
-// their exports to `window.MedicalCertificateOfCauseOfDeathDashboard`. The whole
-// file is wrapped in an IIFE so its top-level identifiers do not leak.
 
 // ----------------------------------------------------------------------
 // State

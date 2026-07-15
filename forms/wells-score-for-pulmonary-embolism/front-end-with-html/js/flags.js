@@ -15,8 +15,6 @@
  * @typedef {import('./types.js').FlaggedIssue} FlaggedIssue
  */
 
-// Wrapped in an IIFE; published via window.WellsScoreForPulmonaryEmbolism.
-
 // The six yes/no criterion inputs, in wizard order, with a human label for the
 // incomplete-assessment flag. The numeric heart rate is checked separately.
 const CRITERION_INPUTS = [

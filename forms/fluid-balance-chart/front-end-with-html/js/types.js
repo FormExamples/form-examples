@@ -102,11 +102,6 @@
  * @property {string} timestamp
  */
 
-// Wrapped in an IIFE so locals stay scoped — this file is loaded as a
-// classic <script> (no ES modules) so the page can be opened directly via
-// `file://`. The IIFE attaches its public symbols to a single global
-// namespace, `window.FluidBalanceChart`.
-
 /** Default charting period in hours (spec §4). */
 const DEFAULT_CHART_PERIOD_HOURS = 24;
 

@@ -12,8 +12,6 @@ import { hasCriticalFinding, hasInvolvedMargin } from './rules.js';
  * @typedef {import('./types.js').Flag} Flag
  */
 
-// Wrapped in an IIFE; published via window.BiopsyTestResult.
-
 /**
  * @param {BiopsyResult} r
  * @returns {Flag[]}

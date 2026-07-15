@@ -16,8 +16,6 @@
  * @typedef {import('./types.js').FiredRule} FiredRule
  */
 
-// Wrapped in an IIFE; published via window.AmbulatoryBloodPressureTestResult.
-
 // ----------------------------------------------------------------------
 // Clinical thresholds (NICE NG136 / BIHS / ESH ABPM averages, mmHg)
 // ----------------------------------------------------------------------

@@ -22,8 +22,6 @@
  * @typedef {import('./types.js').FluidStatus} FluidStatus
  */
 
-// Wrapped in an IIFE; published via window.FluidBalanceChart.
-
 /** Default significant-balance threshold in mL per 24 h (spec §4). */
 const SIGNIFICANT_BALANCE_ML_PER_24H = 1000;
 

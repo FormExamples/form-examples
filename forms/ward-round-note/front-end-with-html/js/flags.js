@@ -24,8 +24,6 @@ import { has } from './rules.js';
  * @typedef {import('./types.js').FlaggedIssue} FlaggedIssue
  */
 
-// Wrapped in an IIFE; published via window.WardRoundNote.
-
 /**
  * Detect the safety flags raised by the note.
  *

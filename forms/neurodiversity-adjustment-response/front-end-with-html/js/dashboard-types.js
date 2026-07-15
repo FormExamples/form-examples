@@ -52,11 +52,6 @@
  * @typedef {ResponseRow[] | { items: ResponseRow[], total?: number }} DashboardResponsesResponse
  */
 
-// Wrapped in an IIFE so locals stay scoped — this file is loaded as a classic
-// <script> (no ES modules) so the page can be opened directly via `file://`.
-// The IIFE attaches its public symbols to a single global namespace,
-// `window.NeurodiversityAdjustmentResponseDashboard`.
-
 /** Axis A outcome-classification display label. */
 function outcomeClassificationLabel(value) {
   switch (value) {

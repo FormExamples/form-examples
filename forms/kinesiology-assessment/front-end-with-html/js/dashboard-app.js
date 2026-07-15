@@ -12,12 +12,6 @@ import { samplePatients } from './data.js';
 // Default sort is FMS total ascending, so the most at-risk patients
 // surface at the top of the list — that's the clinical priority for an
 // FMS dashboard.
-//
-// Sibling modules loaded as plain `<script>` tags (in dependency order)
-// attach their exports to `window.KinesiologyAssessmentDashboard`. Pulling
-// them off here keeps the rest of this file referring to short local
-// names. The whole file is wrapped in an IIFE so its top-level identifiers
-// do not leak to the global scope.
 
 // ----------------------------------------------------------------------
 // State

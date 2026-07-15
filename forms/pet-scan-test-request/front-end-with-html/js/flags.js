@@ -10,7 +10,6 @@ import { isFdgStudy } from './types.js';
 //
 // Each flag is { flagId, category, priority, description, suggestedAction }.
 // Flag IDs are stable and identical across every front-end and the back-end.
-// Wrapped in an IIFE; published via `window.PetScanTestRequest`.
 
 /**
  * Detect safety flags for a PET-CT scan request.

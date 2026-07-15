@@ -24,8 +24,6 @@
  * @property {(d: AssessmentData) => DassItem} evaluate
  */
 
-// Wrapped in an IIFE; published via window.PsychologyAssessment.
-
 /** @type {DassRule[]} */
 const dass21Rules = [
   // --- Depression ----------------------------------------------------

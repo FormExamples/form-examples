@@ -25,8 +25,6 @@ import { actionLineExpectedCm, alertLineExpectedCm, classifyProgress, elapsedHou
  * @typedef {import('./types.js').FiredLine} FiredLine
  */
 
-// Wrapped in an IIFE; published via window.Partogram.
-
 /**
  * Find the latest observation (by `observedAt`) carrying a non-null cervical
  * dilatation. Rows without a parseable time are considered earlier than any

@@ -27,8 +27,6 @@ import { centorRules } from './rules.js';
  * @typedef {import('./types.js').FiredCriterion} FiredCriterion
  */
 
-// Wrapped in an IIFE; published via window.CentorScoreForStreptococcalPharyngitis.
-
 /**
  * Compute the McIsaac age modifier for a whole-year age.
  * +1 for ages 3-14, -1 for ages >= 45, 0 for 15-44, and 0 when age is missing.

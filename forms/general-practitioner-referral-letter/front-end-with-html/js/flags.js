@@ -21,8 +21,6 @@ import { MANDATORY_ALWAYS } from './rules.js';
  * @typedef {import('./types.js').FlaggedIssue} FlaggedIssue
  */
 
-// Wrapped in an IIFE; published via window.GeneralPractitionerReferralLetter.
-
 const nonEmpty = (s) => typeof s === 'string' && s.trim() !== '';
 
 /**

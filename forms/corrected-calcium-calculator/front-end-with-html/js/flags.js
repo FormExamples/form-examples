@@ -19,8 +19,6 @@ import { HIGH, LOW, SEVERE_HIGH, SEVERE_LOW } from './rules.js';
  * @typedef {import('./types.js').FlaggedIssue} FlaggedIssue
  */
 
-// Wrapped in an IIFE; published via window.CorrectedCalciumCalculator.
-
 /**
  * @param {AssessmentData} data
  * @param {number | null} correctedCalcium  - unrounded corrected value, or null

@@ -16,11 +16,6 @@ import { decisionClass, decisionLabel, emptyAssessment, priorityLabel, yesNoLabe
 //
 // This instrument is a boolean DECISION RULE, not a numeric score: there is no
 // total to sum and no risk band.
-//
-// Sibling files loaded as plain `<script>` tags (in order) attach their exports
-// to `window.OttawaAnkleRules`. Pulling them off here keeps the rest of this
-// file referring to short local names. The whole file is wrapped in an IIFE so
-// its top-level identifiers don't leak.
 
 // ----------------------------------------------------------------------
 // Persistence

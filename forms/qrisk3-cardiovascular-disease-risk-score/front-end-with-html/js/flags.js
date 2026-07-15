@@ -18,8 +18,6 @@
  * @typedef {import('./types.js').FlaggedIssue} FlaggedIssue
  */
 
-// Wrapped in an IIFE; published via window.Qrisk3CardiovascularDiseaseRiskScore.
-
 /**
  * @param {AssessmentData} data
  * @param {number | null} tenYearRiskPercent - from the grader (null when not computable)

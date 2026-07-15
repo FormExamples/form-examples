@@ -2,9 +2,6 @@ import { validateCfar } from './cfar-validator.js';
 import { detectFlaggedIssues } from './flagged-issues.js';
 import { calculateAge, emptyAssessment, hasText, priorityLabel, sectionLabel } from './types.js';
 
-// WHO Emergency First Aid Form — Community First Aid Responder wizard
-// (vanilla JS, classic <script>).
-//
 // Single-page continuous wizard: every section is rendered in document
 // order as a Lily `<fieldset class="fieldset">`. Each CABCDE category
 // (steps 5–10) pairs an Assessment block with an Intervention block;

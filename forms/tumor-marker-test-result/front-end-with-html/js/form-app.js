@@ -14,11 +14,6 @@ import { MARKERS, abnormalitySeverityClass, abnormalitySeverityLabel, emptyResul
 // recommendation, fired-rule audit trail, and safety flags) and renders an
 // inline structured laboratory-medicine report. State is persisted to
 // localStorage so a partial fill survives a page reload.
-//
-// Sibling files loaded as plain `<script>` tags (in order) attach their
-// exports to `window.TumorMarkerTestResult`. Pulling them off here keeps the
-// rest of this file referring to short local names. The whole file is wrapped
-// in an IIFE so its top-level identifiers don't leak.
 
 // ----------------------------------------------------------------------
 // Persistence

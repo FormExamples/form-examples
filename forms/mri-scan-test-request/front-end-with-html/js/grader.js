@@ -10,8 +10,6 @@ import { scoreAppropriateness, scoreCompleteness, scoreContrastRenal, scoreSafet
 // migration 05 (appropriatenessScore / appropriatenessBand, mriSafetyBand,
 // contrastRenalFlag, completenessPercent, triageTier / targetTimeframe,
 // recommendation).
-//
-// Wrapped in an IIFE; published via `window.MriScanTestRequest`.
 
 /**
  * Derive an overall recommendation for the imaging vetting desk from the four

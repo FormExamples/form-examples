@@ -12,8 +12,6 @@ import { dsgRules } from './rules.js';
  * @typedef {import('./types.js').FiredRule} FiredRule
  */
 
-// Wrapped in an IIFE; published via window.BloodDonationAssessment.
-
 /**
  * Run all DSG rules against the supplied data.
  *

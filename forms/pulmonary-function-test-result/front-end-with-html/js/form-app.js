@@ -14,11 +14,6 @@ import { abnormalitySeverityClass, abnormalitySeverityLabel, bronchodilatorRever
 // lung-function report with the fired-rule audit trail and safety flags.
 // State is persisted to localStorage so a partial fill survives a page
 // reload.
-//
-// Sibling files loaded as plain `<script>` tags (in order) attach their
-// exports to `window.PulmonaryFunctionTestResult`. Pulling them off here
-// keeps the rest of this file referring to short local names. The whole file
-// is wrapped in an IIFE so its top-level identifiers don't leak.
 
 // ----------------------------------------------------------------------
 // Persistence

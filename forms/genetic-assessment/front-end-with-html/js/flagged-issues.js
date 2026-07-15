@@ -16,8 +16,6 @@
  * @typedef {import('./types.js').AdditionalFlag} AdditionalFlag
  */
 
-// Wrapped in an IIFE; published via window.GeneticAssessment.
-
 /**
  * @param {AssessmentData} data
  * @returns {AdditionalFlag[]}

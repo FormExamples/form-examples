@@ -20,8 +20,6 @@ import { activeItemNumbers, ratingValue } from './rules.js';
  * @typedef {import('./types.js').FlaggedIssue} FlaggedIssue
  */
 
-// Wrapped in an IIFE; published via window.ZaritBurdenInterview.
-
 /**
  * @param {AssessmentData} data
  * @param {{ totalScore: number, maxScore: number, burdenBand: string }} grade

@@ -18,8 +18,6 @@ import { fullyPopulatedQualityScenarios, nonDraftAdrs, risksWithMitigation } fro
 //
 // The output shape and fired-rule / flag IDs are identical across every
 // front-end and the back-end. Public entry point: `calculateMaturity(d)`.
-//
-// Wrapped in an IIFE; published via `window.Arc42`.
 
 /**
  * Derive the computed maturity band from per-section completeness plus the

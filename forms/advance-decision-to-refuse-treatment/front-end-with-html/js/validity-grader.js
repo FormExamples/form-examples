@@ -16,8 +16,6 @@ import { validityRules } from './validity-rules.js';
  * @typedef {import('./types.js').FiredRule} FiredRule
  */
 
-// Wrapped in an IIFE; published via window.AdvanceDecisionToRefuseTreatment.
-
 /** Heuristic: if core identification fields are empty, treat as draft.
  * @param {AssessmentData} data
  */

@@ -17,8 +17,6 @@
  * @typedef {import('./types.js').RecommendedSectionClass} RecommendedSectionClass
  */
 
-// Wrapped in an IIFE; published via window.MentalHealthActAssessment.
-
 const nonEmpty = (s) => typeof s === 'string' && s.trim() !== '';
 
 /**

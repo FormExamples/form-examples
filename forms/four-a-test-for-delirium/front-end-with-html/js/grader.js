@@ -25,8 +25,6 @@ import { fouratRules } from './rules.js';
  * @typedef {import('./types.js').FiredRule} FiredRule
  */
 
-// Wrapped in an IIFE; published via window.FourATestForDelirium.
-
 /**
  * Evaluate the scoring rules and collect the ones that fired.
  * @param {AssessmentData} data

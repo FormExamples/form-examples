@@ -21,8 +21,6 @@ import { MANDATORY_RULES } from './rules.js';
  * @typedef {import('./types.js').CompletenessStatus} CompletenessStatus
  */
 
-// Wrapped in an IIFE; published via window.AnaestheticRecord.
-
 /**
  * Evaluate every mandatory rule against the record, producing the audit trail
  * that mirrors the `anaesthetic_record_grade_rule` SQL table.

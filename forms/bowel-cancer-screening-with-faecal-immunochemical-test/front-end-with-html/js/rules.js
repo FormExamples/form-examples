@@ -15,8 +15,6 @@
  * @typedef {import('./types.js').FiredRule} FiredRule
  */
 
-// Wrapped in an IIFE; published via window.BowelCancerScreeningFit.
-
 // ─── Sample-adequacy states that classify as spoilt (spec §4) ───
 /** Adequacy values that are not adequate and therefore require a repeat kit. */
 const INADEQUATE_SAMPLE = ['spoilt', 'insufficient', 'expired'];

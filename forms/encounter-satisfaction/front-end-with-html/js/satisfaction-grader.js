@@ -19,8 +19,6 @@ import { satisfactionCategory } from './types.js';
  * @typedef {import('./types.js').DomainScore} DomainScore
  */
 
-// Wrapped in an IIFE; published via window.EncounterSatisfaction.
-
 /**
  * Calculate the composite ESS score, category, and domain breakdown.
  *

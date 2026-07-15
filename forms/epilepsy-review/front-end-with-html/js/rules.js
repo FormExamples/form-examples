@@ -13,8 +13,6 @@
  * @typedef {import('./types.js').SeizureControl} SeizureControl
  */
 
-// Wrapped in an IIFE; published via window.EpilepsyReview.
-
 /** A numeric field is present when it is neither null nor undefined nor NaN. */
 function present(v) {
   return v !== null && v !== undefined && !Number.isNaN(v);

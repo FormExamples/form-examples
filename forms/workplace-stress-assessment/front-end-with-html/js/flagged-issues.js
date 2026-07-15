@@ -26,8 +26,6 @@ import { riskLevelLabel } from './types.js';
  * @typedef {import('./types.js').RiskLevel} RiskLevel
  */
 
-// Wrapped in an IIFE; published via window.WorkplaceStressAssessment.
-
 const DOMAIN_LABELS = {
   demands: 'Demands',
   control: 'Control',

@@ -17,8 +17,6 @@
  * @property {number} score
  */
 
-// Wrapped in an IIFE; published via window.EncounterSatisfaction.
-
 /** All Likert-scored fields with display labels, grouped by section. */
 const SECTIONS = [
   {

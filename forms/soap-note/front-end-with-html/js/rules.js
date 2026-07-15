@@ -30,8 +30,6 @@
  * @property {boolean} present   - whether the component is satisfied
  */
 
-// Wrapped in an IIFE; published via window.SoapNote.
-
 /** A single field is present when it is a non-blank string. */
 function has(v) {
   return v !== null && v !== undefined && String(v).trim() !== '';

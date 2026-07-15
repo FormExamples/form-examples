@@ -19,8 +19,6 @@ import { psqiCategory, sleepEfficiencyCalc } from './types.js';
  * @typedef {import('./types.js').FiredRule} FiredRule
  */
 
-// Wrapped in an IIFE; published via window.SleepQualityAssessment.
-
 /**
  * Calculate the PSQI Global Score from patient data.
  * Returns the total score (0–21), category label, and per-component fired

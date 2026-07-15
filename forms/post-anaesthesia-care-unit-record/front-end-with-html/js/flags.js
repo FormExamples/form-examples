@@ -20,8 +20,6 @@ import { padssScore } from './rules.js';
  * @typedef {import('./types.js').FlaggedIssue} FlaggedIssue
  */
 
-// Wrapped in an IIFE; published via window.PostAnaesthesiaCareUnitRecord.
-
 // Pain score at or above this threshold is treated as uncontrolled.
 const PAIN_THRESHOLD = 4;
 

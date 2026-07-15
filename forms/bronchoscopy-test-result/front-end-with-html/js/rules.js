@@ -18,8 +18,6 @@
  * @typedef {import('./types.js').FiredRule} FiredRule
  */
 
-// Wrapped in an IIFE; published via window.BronchoscopyTestResult.
-
 // ----------------------------------------------------------------------
 // Structured-findings predicates (mirror `utils.ts`)
 // ----------------------------------------------------------------------

@@ -7,8 +7,6 @@
  * @typedef {import('./types.js').AdditionalFlag} AdditionalFlag
  */
 
-// Wrapped in an IIFE; published via window.CodeOfConductNotice.
-
 /**
  * Detects additional flags that should be highlighted for the compliance officer.
  * @param {AssessmentData} data

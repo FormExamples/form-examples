@@ -127,6 +127,3 @@
  *
  * @typedef {ChecklistRow[] | { items: ChecklistRow[], total?: number }} DashboardChecklistsResponse
  */
-
-// IIFE establishes the namespace so other classic <script> files can safely
-// attach exports to `window.WhoSurgicalSafetyChecklistDashboard`.

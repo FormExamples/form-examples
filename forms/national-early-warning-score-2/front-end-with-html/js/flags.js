@@ -21,8 +21,6 @@
  * @typedef {import('./types.js').Flag} Flag
  */
 
-// Wrapped in an IIFE; published via window.NationalEarlyWarningScore2.
-
 /**
  * @param {AssessmentData} data
  * @param {{ subscores: Subscores, aggregate: number, redScore: boolean }} grade

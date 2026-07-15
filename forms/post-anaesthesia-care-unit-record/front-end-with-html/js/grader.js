@@ -27,8 +27,6 @@ import { aldreteRules, aldreteScore, padssScore } from './rules.js';
  * @typedef {import('./types.js').FiredParameter} FiredParameter
  */
 
-// Wrapped in an IIFE; published via window.PostAnaesthesiaCareUnitRecord.
-
 /**
  * Evaluate the five Aldrete parameter rules and collect them as audit rows,
  * each carrying the 0/1/2 points it contributed.

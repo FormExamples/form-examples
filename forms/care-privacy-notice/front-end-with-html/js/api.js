@@ -1,6 +1,4 @@
 // Backend API client for the Care Privacy Notice clinician dashboard.
-// Loaded as a classic <script> tag (no ES modules) and attaches its
-// public symbols to `window.CarePrivacyNoticeDashboard`.
 
 const API_BASE = 'http://localhost:5150';
 

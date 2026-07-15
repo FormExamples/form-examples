@@ -8,8 +8,6 @@
  * @typedef {import('./types.js').AdditionalFlag} AdditionalFlag
  */
 
-// Wrapped in an IIFE; published via window.FirstResponderAssessment.
-
 /**
  * @param {AssessmentData} data
  * @returns {AdditionalFlag[]}

@@ -18,8 +18,6 @@
  * @typedef {import('./types.js').FlaggedIssue} FlaggedIssue
  */
 
-// Wrapped in an IIFE; published via window.HasBledScoreForMajorBleedingRisk.
-
 /**
  * @param {AssessmentData} data
  * @param {number} totalScore  - total 0-9 from the grader

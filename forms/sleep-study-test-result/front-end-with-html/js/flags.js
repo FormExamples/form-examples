@@ -14,8 +14,8 @@ import { hasCriticalFinding, isSevereAhi } from './rules.js';
  * @typedef {import('./types.js').FlagPriority} FlagPriority
  */
 
-// Wrapped in an IIFE; published via window.SleepStudyTestResult.
-// Depends on rules.js (hasCriticalFinding, isSevereAhi), so it must load after it.
+// Depends on rules.js (hasCriticalFinding, isSevereAhi), so it must load
+// after it.
 
 /**
  * Detect the safety-critical flags for a report.

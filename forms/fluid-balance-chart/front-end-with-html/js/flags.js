@@ -20,8 +20,6 @@ import { ANURIA_ABSOLUTE_ML, ANURIA_MIN_HOURS, ANURIA_RATE_ML_PER_KG_PER_HOUR, O
  * @typedef {import('./types.js').FlaggedIssue} FlaggedIssue
  */
 
-// Wrapped in an IIFE; published via window.FluidBalanceChart.
-
 /**
  * @param {ChartData} data
  * @param {GradingResult} grade  - result from gradeFluidBalance

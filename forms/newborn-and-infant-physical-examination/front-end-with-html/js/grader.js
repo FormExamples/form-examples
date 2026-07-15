@@ -36,8 +36,6 @@ import { LOW_SAT, nipeReferRules } from './rules.js';
  * @typedef {import('./types.js').FiredRule} FiredRule
  */
 
-// Wrapped in an IIFE; published via window.NewbornAndInfantPhysicalExamination.
-
 /** An enum observation counts as unexamined when blank or explicitly not-examined. */
 function enumUnexamined(v) {
   return v === '' || v === 'not-examined' || v === null || v === undefined;

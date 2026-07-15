@@ -6,7 +6,7 @@
 // requested adjustment categories into a same-origin localStorage handoff, then
 // opens the sibling response form pre-filled.
 //
-// Self-contained, progressive enhancement. Wrapped in an IIFE.
+// Self-contained, progressive enhancement.
 
 (function () {
 'use strict';

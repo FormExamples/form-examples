@@ -24,8 +24,6 @@ import { camRules } from './rules.js';
  * @typedef {import('./types.js').FiredRule} FiredRule
  */
 
-// Wrapped in an IIFE; published via window.ConfusionAssessmentMethod.
-
 /**
  * Whether the CAM-ICU arousal gate blocks assessment: variant is CAM-ICU and
  * the RASS score is -4 or -5 (unrousable).

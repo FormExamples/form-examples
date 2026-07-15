@@ -35,8 +35,6 @@
  * @property {boolean} reverseScored Whether to reverse-code (6 - raw) before averaging.
  */
 
-// Wrapped in an IIFE; published via window.WorkplaceStressAssessment.
-
 // ---------------------------------------------------------------------
 // Likert scales (text labels for each numeric value 1..5)
 // ---------------------------------------------------------------------

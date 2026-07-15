@@ -1,8 +1,5 @@
 // Pure validation engine for the meeting form. Mirrors the
 // validateMeeting() rules described in ../AGENTS.md.
-//
-// Loaded as a classic <script> before app.js; exposes Meeting.validateMeeting
-// on the global namespace.
 
 function parseDate(value) {
 	if (!value) return null;

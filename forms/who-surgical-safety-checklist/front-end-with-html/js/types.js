@@ -5,8 +5,7 @@
 //
 // Builds the canonical empty checklist shape so newly-added fields
 // default correctly when older saved state is rehydrated from
-// localStorage. Wrapped in an IIFE; published via
-// `window.WhoSurgicalSafetyChecklist`.
+// localStorage.
 
 /**
  * Build a fresh, fully-blank WHO Surgical Safety Checklist record.

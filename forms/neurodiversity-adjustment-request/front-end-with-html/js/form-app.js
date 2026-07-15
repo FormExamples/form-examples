@@ -8,10 +8,6 @@ import { diagnosisStatusLabel, emptyRequest, impactLabel } from './types.js';
 // summary reflects how many fields have been answered. Submission runs the pure
 // four-axis grader and renders an inline request report. State is persisted to
 // localStorage so a partial fill survives a page reload.
-//
-// Sibling files loaded as plain `<script>` tags (in order) attach their exports
-// to `window.NeurodiversityAdjustmentRequest`. The whole file is wrapped in an
-// IIFE so its top-level identifiers don't leak to the global scope.
 
 // ----------------------------------------------------------------------
 // Persistence

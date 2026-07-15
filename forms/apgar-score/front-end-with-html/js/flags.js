@@ -19,8 +19,6 @@
  * @typedef {import('./types.js').FlaggedIssue} FlaggedIssue
  */
 
-// Wrapped in an IIFE; published via window.ApgarScore.
-
 /** Format a timepoint's minutes for display, e.g. "5-minute". */
 function tpLabel(minutes) {
   return minutes == null ? 'a' : `${minutes}-minute`;

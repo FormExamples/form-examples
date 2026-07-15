@@ -18,8 +18,6 @@ import { bradenRules } from './rules.js';
  * @typedef {import('./types.js').FiredRule} FiredRule
  */
 
-// Wrapped in an IIFE; published via window.IntegumentaryAssessment.
-
 /**
  * Classify a numeric Braden score (6-23) into a risk level.
  * @param {number} score

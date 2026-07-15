@@ -15,8 +15,6 @@ import { validationRules } from './validation-rules.js';
  * @typedef {import('./types.js').FiredRule} FiredRule
  */
 
-// Wrapped in an IIFE; published via window.InternationalPatientSummary.
-
 /**
  * @param {{ mandatoryPopulated: number, mandatoryTotal: number,
  *           optionalPopulated: number, optionalTotal: number }} counts

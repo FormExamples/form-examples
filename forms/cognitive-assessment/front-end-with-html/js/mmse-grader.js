@@ -13,8 +13,6 @@ import { mmseCategory } from './types.js';
  * @typedef {import('./types.js').FiredRule} FiredRule
  */
 
-// Wrapped in an IIFE; published via window.CognitiveAssessment.
-
 /**
  * Pure function: calculates the MMSE score from patient assessment data.
  * Returns the total score (0-30), its category label, and fired rules

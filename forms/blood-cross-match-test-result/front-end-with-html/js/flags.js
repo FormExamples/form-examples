@@ -13,8 +13,6 @@ import { hasCriticalResult, insufficientUnits, isAboDiscrepancy, isTwoSampleRule
  * @typedef {import('./types.js').Flag} Flag
  */
 
-// Wrapped in an IIFE; published via window.BloodCrossMatchTestResult.
-
 /**
  * Detect all safety-critical flags for a result.
  *

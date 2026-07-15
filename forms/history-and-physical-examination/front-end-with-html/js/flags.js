@@ -20,8 +20,6 @@ import { abnormalVitals, allergyDocumented, missingCoreExam, missingHistory, non
  * @typedef {import('./types.js').FlaggedIssue} FlaggedIssue
  */
 
-// Wrapped in an IIFE; published via window.HistoryAndPhysicalExamination.
-
 /**
  * @param {ClerkingRecord} r
  * @returns {FlaggedIssue[]}

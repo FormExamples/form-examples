@@ -10,8 +10,6 @@
 // stable and identical across every front-end and the back-end
 // (R-APPROP-*, R-URGENCY-*, R-COMPLETE-*, R-RISK-*). Pure data + helpers; the
 // grader composes them.
-//
-// Wrapped in an IIFE; published via `window.ColonoscopyTestRequest`.
 
 // NICE DG56: a FIT result at or above this threshold (micrograms of
 // haemoglobin per gram of faeces) triggers the suspected-cancer pathway.

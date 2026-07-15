@@ -21,8 +21,6 @@ import { INADEQUATE_SAMPLE } from './rules.js';
  * @typedef {import('./types.js').FlaggedIssue} FlaggedIssue
  */
 
-// Wrapped in an IIFE; published via window.BowelCancerScreeningFit.
-
 /**
  * @param {AssessmentData} data
  * @param {{ resultClass: string, symptomaticPathway: boolean, status: string }} grade

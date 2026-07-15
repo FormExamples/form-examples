@@ -17,8 +17,6 @@ import { nihssRules } from './nihss-rules.js';
  * @typedef {import('./types.js').FiredRule} FiredRule
  */
 
-// Wrapped in an IIFE; published via window.NeurologyAssessment.
-
 /**
  * NIHSS severity label based on total score.
  * @param {number} score

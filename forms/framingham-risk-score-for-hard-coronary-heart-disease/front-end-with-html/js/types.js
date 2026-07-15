@@ -1,8 +1,8 @@
 // Framingham Risk Score for Hard CHD — data model and labels.
 //
-// Wrapped in an IIFE so private symbols never leak. Public exports attach
-// to `window.FraminghamRiskScore`. Mirrors the SvelteKit
-// `src/lib/engine/types.ts` and `src/lib/stores/assessment.svelte.ts`.
+// Public exports attach to `window.FraminghamRiskScore`. Mirrors the
+// SvelteKit `src/lib/engine/types.ts` and
+// `src/lib/stores/assessment.svelte.ts`.
 
   /** A pristine assessment with every field at its empty default. */
   function emptyAssessment() {

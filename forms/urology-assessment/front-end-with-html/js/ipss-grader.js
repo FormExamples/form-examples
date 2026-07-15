@@ -15,8 +15,6 @@ import { ipssCategory } from './types.js';
  * @typedef {import('./types.js').FiredRule} FiredRule
  */
 
-// Wrapped in an IIFE; published via window.UrologyAssessment.
-
 /**
  * Calculate IPSS total score and per-question fired rules.
  * Items the patient has not answered (`null`) are excluded entirely; a

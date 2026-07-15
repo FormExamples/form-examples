@@ -1,9 +1,5 @@
 // Renders the BMA GDPR privacy notice template with practice config interpolated.
 // Source: https://www.bma.org.uk/advice-and-support/ethics/confidentiality-and-health-records/gdpr-privacy-notices-for-gp-practices
-//
-// Exposed both as an ES module export (so other importers keep working)
-// and as a classic-script namespace value so the page opens directly via
-// file:// without CORS blocking.
 
 function esc(str) {
   const div = document.createElement('div');

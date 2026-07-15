@@ -5,8 +5,6 @@
  * @typedef {import('./types.js').ValidationRule} ValidationRule
  */
 
-// Wrapped in an IIFE; published via window.ResearchAndPlanningPrivacyNotice.
-
 /** @type {ValidationRule[]} */
 const validationRules = [
   // Recipient Details

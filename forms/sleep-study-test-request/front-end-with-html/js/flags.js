@@ -9,7 +9,6 @@ import { EPWORTH_ABNORMAL as EPWORTH_ABNORMAL$imported, EPWORTH_SEVERE as EPWORT
 //
 // Each flag is { flagId, category, priority, description, suggestedAction }.
 // Flag IDs are stable and identical across every front-end and the back-end.
-// Wrapped in an IIFE; published via `window.SleepStudyTestRequest`.
 
 const EPWORTH_ABNORMAL = EPWORTH_ABNORMAL$imported || 11;
 const EPWORTH_SEVERE = EPWORTH_SEVERE$imported || 16;

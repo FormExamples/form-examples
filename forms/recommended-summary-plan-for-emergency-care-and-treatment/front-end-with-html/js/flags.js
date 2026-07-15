@@ -19,9 +19,6 @@
  * @typedef {import('./types.js').FlaggedIssue} FlaggedIssue
  */
 
-// Wrapped in an IIFE; published via
-// window.RecommendedSummaryPlanForEmergencyCareAndTreatment.
-
 const nonEmpty = (s) => typeof s === 'string' && s.trim() !== '';
 
 /**

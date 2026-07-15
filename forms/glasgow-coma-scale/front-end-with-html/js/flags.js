@@ -19,8 +19,6 @@
  * @typedef {import('./types.js').FlaggedIssue} FlaggedIssue
  */
 
-// Wrapped in an IIFE; published via window.GlasgowComaScale.
-
 /**
  * @param {AssessmentData} data
  * @param {{ totalScore: number|null, motorScore: number|null,

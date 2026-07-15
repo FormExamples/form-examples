@@ -6,7 +6,7 @@
 // Property names are camelCase to match the front-end serde / examples
 // convention (mirroring the SQL snake_case columns). Also carries the small
 // pure helpers (cardinality counts + display labels) shared by the completeness
-// rules, grader, and wizard. Wrapped in an IIFE; published via `window.Arc42`.
+// rules, grader, and wizard.
 
 /**
  * Build a fresh, fully-blank arc42 documentation record. Strings default to

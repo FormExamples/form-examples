@@ -6,7 +6,6 @@
 // Property names are camelCase to match the front-end serde / examples
 // convention. The requested tumour markers are modelled as BOOLEAN fields
 // (mirroring the BOOLEAN columns in SQL migration 04), defaulting to false.
-// Wrapped in an IIFE; published via `window.TumorMarkerTestRequest`.
 
 /**
  * Build a fresh, fully-blank serum tumour-marker request.

@@ -7,7 +7,6 @@
 //
 // Each flag is { flagId, category, priority, description, suggestedAction }.
 // Flag IDs are stable and identical across every front-end and the back-end.
-// Wrapped in an IIFE; published via `window.DexaBoneDensityTestRequest`.
 
 // NOGG / ISCD repeat-DXA interval: a previous DEXA within ~2 years (730 days)
 // without a clear monitoring indication is a possible duplicate.

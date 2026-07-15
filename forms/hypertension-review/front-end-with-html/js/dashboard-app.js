@@ -8,10 +8,6 @@ import { sampleReviews } from './data.js';
 // table is sortable (click any column header) and filterable (search box +
 // control-status dropdown + review-status dropdown + stage dropdown + severe-flag
 // dropdown).
-//
-// Sibling modules loaded as plain `<script>` tags (in dependency order) attach
-// their exports to `window.HypertensionReviewDashboard`. The whole file is
-// wrapped in an IIFE so its top-level identifiers do not leak.
 
 // ----------------------------------------------------------------------
 // State

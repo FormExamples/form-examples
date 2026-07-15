@@ -11,10 +11,6 @@ import { abnormalitySeverityClass, abnormalitySeverityLabel, biopsyMethodLabel, 
 // entered. Submission runs the pure grading engine (four axes + safety flags)
 // and renders an inline histopathology report. State is persisted to
 // localStorage so a partial fill survives a page reload.
-//
-// Sibling files loaded as plain `<script>` tags (in order: types → rules →
-// grader → flags → form-app) attach their exports to `window.BiopsyTestResult`.
-// The whole file is wrapped in an IIFE so its top-level identifiers don't leak.
 
 // ----------------------------------------------------------------------
 // Persistence

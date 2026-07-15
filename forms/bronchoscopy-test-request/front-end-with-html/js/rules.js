@@ -10,8 +10,6 @@
 // are stable and identical across every front-end and the back-end
 // (R-APPROP-*, R-URGENCY-*, R-COMPLETE-*, R-RISK-*). Pure data + helpers; the
 // grader composes them.
-//
-// Wrapped in an IIFE; published via `window.BronchoscopyTestRequest`.
 
 // ----------------------------------------------------------------------
 // Axis A — Appropriateness (BTS bronchoscopy + indication match, 1-9)

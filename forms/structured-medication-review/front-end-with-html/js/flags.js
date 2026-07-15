@@ -17,8 +17,6 @@
  * @typedef {import('./types.js').FlaggedIssue} FlaggedIssue
  */
 
-// Wrapped in an IIFE; published via window.StructuredMedicationReview.
-
 /**
  * @param {ReviewData} data
  * @param {import('./types.js').GradingResult} grade  - result from calculateSmrGrade

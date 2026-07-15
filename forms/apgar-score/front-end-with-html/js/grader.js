@@ -28,8 +28,6 @@ import { apgarRules, signPoints } from './rules.js';
  * @typedef {import('./types.js').FiredSign} FiredSign
  */
 
-// Wrapped in an IIFE; published via window.ApgarScore.
-
 /** Band for a per-timepoint total (0-10). */
 function bandForTotal(total) {
   return total >= 7 ? 'reassuring' : total >= 4 ? 'moderately-low' : 'low';

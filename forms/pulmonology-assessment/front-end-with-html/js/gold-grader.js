@@ -14,8 +14,6 @@ import { determineAbcdGroup } from './types.js';
  * @typedef {import('./types.js').FiredRule} FiredRule
  */
 
-// Wrapped in an IIFE; published via window.PulmonologyAssessment.
-
 /**
  * Evaluate the GOLD rule set against the supplied assessment data and
  * return the maximum stage among fired rules together with the ABCD group.

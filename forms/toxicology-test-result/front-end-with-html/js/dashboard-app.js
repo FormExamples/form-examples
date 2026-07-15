@@ -10,11 +10,6 @@ import { abnormalitySeverityClass, abnormalitySeverityLabel, followUpUrgencyClas
 // box + classification dropdown + follow-up-urgency dropdown). Columns mirror
 // the SvelteKit dashboard route
 // (`front-end-with-svelte/src/routes/+page.svelte`).
-//
-// Sibling modules loaded as plain `<script>` tags (in dependency order) attach
-// their exports to `window.ToxicologyTestResultDashboard`; display labels come
-// from the form namespace `window.ToxicologyTestResult` (js/types.js). The
-// whole file is wrapped in an IIFE so its top-level identifiers do not leak.
 
 // ----------------------------------------------------------------------
 // State

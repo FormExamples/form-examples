@@ -15,8 +15,6 @@ import { ng201Rules } from './rules.js';
  * @typedef {import('./types.js').FiredRule} FiredRule
  */
 
-// Wrapped in an IIFE; published via window.ObstetricsAssessment.
-
 /**
  * Friendly label for a RiskLevel.
  * @param {RiskLevel} level

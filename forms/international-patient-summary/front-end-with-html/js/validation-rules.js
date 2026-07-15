@@ -21,8 +21,6 @@
  * @property {(d: AssessmentData) => 'ok' | 'empty'} evaluate
  */
 
-// Wrapped in an IIFE; published via window.InternationalPatientSummary.
-
 /** Patient demographics is "populated" only when the IPS-required
  *  identifiers are present: a name, a date of birth, and a sex code. */
 function demographicsPopulated(d) {

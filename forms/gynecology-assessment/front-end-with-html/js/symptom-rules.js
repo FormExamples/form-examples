@@ -16,8 +16,6 @@
  * @property {string} text
  */
 
-// Wrapped in an IIFE; published via window.GynecologyAssessment.
-
 /** @type {SymptomRuleDefinition[]} */
 const symptomDefinitions = [
   { id: 'SYM-01', symptomNumber: 1,  domain: 'Menstrual pain',

@@ -27,8 +27,6 @@ import { FOURTEEN_DAY_RISK_PERCENT } from './types.js';
  * @typedef {import('./types.js').FiredCriterion} FiredCriterion
  */
 
-// Wrapped in an IIFE; published via window.TimiRiskScoreForAcuteCoronarySyndrome.
-
 /**
  * Evaluate the seven TIMI criterion rules and collect the ones that fired.
  * @param {AssessmentData} data

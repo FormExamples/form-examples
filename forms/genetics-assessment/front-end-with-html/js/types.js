@@ -290,11 +290,6 @@
  * @property {string} timestamp
  */
 
-// Wrapped in an IIFE so locals stay scoped — this file is loaded as a
-// classic <script> (no ES modules) so the page can be opened directly via
-// `file://`. The IIFE attaches its public symbols to a single global
-// namespace, `window.GeneticsAssessment`.
-
 /** Build a fresh, empty fixed-slot Relative.
  *  @param {{relation: string, side: 'maternal' | 'paternal' | 'self' | '',
  *           generation: 1 | 2 | 3, sex: Sex}} opts

@@ -21,8 +21,6 @@
  * @property {(d: ExaminationData) => boolean} evaluate
  */
 
-// Wrapped in an IIFE; published via window.NewbornAndInfantPhysicalExamination.
-
 const LOW_SAT = 95; // percent; a saturation below this is a refer trigger.
 
 /** @type {NipeRule[]} */

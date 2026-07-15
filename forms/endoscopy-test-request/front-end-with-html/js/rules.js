@@ -9,8 +9,6 @@
 // every front-end and the back-end (R-APPROP-*, R-URGENCY-*, R-COMPLETE-*,
 // R-RISK-*). The axis enum values match SQL migration 06:
 // appropriateness | urgency | completeness | risk.
-//
-// Wrapped in an IIFE; published via `window.EndoscopyTestRequest`.
 
 // ----------------------------------------------------------------------
 // Axis A — Appropriateness (ACR / ASGE-AUC / EPAGE 1-9 ordinal)

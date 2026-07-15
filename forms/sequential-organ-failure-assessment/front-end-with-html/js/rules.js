@@ -22,8 +22,6 @@
  * @property {string} description
  */
 
-// Wrapped in an IIFE; published via window.SequentialOrganFailureAssessment.
-
 /** True when a numeric value is present (not null/undefined/NaN). */
 function has(v) {
   return v !== null && v !== undefined && !Number.isNaN(v);

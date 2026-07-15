@@ -10,8 +10,6 @@ import { vaRules } from './va-rules.js';
  * @typedef {import('./types.js').FiredRule} FiredRule
  */
 
-// Wrapped in an IIFE; published via window.OphthalmologyAssessment.
-
 /** VA grade severity ordering for comparison. */
 const gradeOrder = {
   normal: 0,

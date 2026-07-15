@@ -11,8 +11,6 @@
  * @typedef {import('./types.js').AdditionalFlag} AdditionalFlag
  */
 
-// Wrapped in an IIFE; published via window.AutismAssessment.
-
 /**
  * @param {AssessmentData} data
  * @returns {AdditionalFlag[]}

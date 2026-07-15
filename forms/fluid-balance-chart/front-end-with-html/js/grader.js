@@ -27,8 +27,6 @@ import { categoryLabel, fluidStatusLabel } from './types.js';
  * @typedef {import('./types.js').RunningBalancePoint} RunningBalancePoint
  */
 
-// Wrapped in an IIFE; published via window.FluidBalanceChart.
-
 /**
  * Coerce a value to a finite number, or null when absent / non-numeric.
  * @param {*} v

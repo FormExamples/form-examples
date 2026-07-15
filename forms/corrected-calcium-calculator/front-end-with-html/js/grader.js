@@ -26,8 +26,6 @@ import { FACTOR, REF_ALBUMIN, classificationRules } from './rules.js';
  * @typedef {import('./types.js').FiredRule} FiredRule
  */
 
-// Wrapped in an IIFE; published via window.CorrectedCalciumCalculator.
-
 /** Round a number to two decimal places (returns null unchanged). */
 function roundTwo(n) {
   if (n === null || n === undefined || Number.isNaN(n)) return null;

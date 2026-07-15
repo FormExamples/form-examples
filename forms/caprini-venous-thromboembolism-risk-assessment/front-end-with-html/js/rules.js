@@ -23,8 +23,6 @@
  * @property {(d: AssessmentData) => boolean} evaluate
  */
 
-// Wrapped in an IIFE; published via window.CapriniVenousThromboembolismRiskAssessment.
-
 // Compact factor definitions: [section, field, points, category, description].
 // The snake_case `factor` key and the stable `id` are derived below.
 const factorDefs = [

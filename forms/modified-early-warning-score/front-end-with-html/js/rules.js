@@ -22,8 +22,6 @@
  * @property {(point: number, value: (number|null|'')) => string} describe
  */
 
-// Wrapped in an IIFE; published via window.ModifiedEarlyWarningScore.
-
 /**
  * Systolic blood pressure sub-score (mmHg):
  *   <= 70 -> 3, 71-80 -> 2, 81-100 -> 1, 101-199 -> 0, >= 200 -> 2

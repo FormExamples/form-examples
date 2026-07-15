@@ -28,8 +28,6 @@ import { deriveEligibility, outcomeRules } from './rules.js';
  * @typedef {import('./types.js').FiredRule} FiredRule
  */
 
-// Wrapped in an IIFE; published via window.BreastScreening.
-
 /**
  * Determine whether every required input for a final classification is present.
  * @param {ScreeningData} d

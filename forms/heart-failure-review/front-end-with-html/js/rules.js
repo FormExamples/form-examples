@@ -28,8 +28,6 @@
  * @property {(d: ReviewData) => boolean} satisfied
  */
 
-// Wrapped in an IIFE; published via window.HeartFailureReview.
-
 /** True when a text / enum value is non-blank. */
 function filled(v) {
   return v !== null && v !== undefined && String(v).trim() !== '';

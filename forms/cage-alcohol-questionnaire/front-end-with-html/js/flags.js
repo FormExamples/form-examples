@@ -15,8 +15,6 @@
  * @typedef {import('./types.js').FlaggedIssue} FlaggedIssue
  */
 
-// Wrapped in an IIFE; published via window.CageAlcoholQuestionnaire.
-
 /**
  * @param {AssessmentData} data
  * @param {number} cageScore  - total 0-4 from the grader

@@ -1,9 +1,5 @@
 // Plain-JavaScript / JSDoc type definitions for the Otolaryngology
 // Assessment form. Mirrors the SvelteKit reference data model.
-//
-// Loaded as a classic <script> (no ES modules) so the page works when
-// opened directly via file://. Wrapped in an IIFE to keep locals scoped;
-// public symbols are attached to `window.OtolaryngologyAssessment`.
 
 /**
  * @typedef {'male' | 'female' | 'other' | ''} Sex

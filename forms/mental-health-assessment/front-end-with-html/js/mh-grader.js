@@ -13,8 +13,6 @@ import { calculateAuditCScore, calculateGad7Score, calculatePhq9Score, gad7Quest
  * @typedef {import('./types.js').GradingResult} GradingResult
  */
 
-// Wrapped in an IIFE; published via window.MentalHealthAssessment.
-
 // `detectAdditionalFlags` is resolved at call time because flagged-issues.js
 // loads after this file in index.html.
 

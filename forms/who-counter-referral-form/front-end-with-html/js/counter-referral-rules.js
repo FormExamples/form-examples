@@ -17,8 +17,6 @@ import { hasText, isYesNoAnswered } from './types.js';
  * @typedef {import('./types.js').ValidationRule} ValidationRule
  */
 
-// Wrapped in an IIFE; published via window.WhoCounterReferralForm.
-
 /** @type {ValidationRule[]} */
 const counterReferralRules = [
   // ─── Step 1 — Patient Identification ────────────────────

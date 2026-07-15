@@ -27,8 +27,6 @@
  * @property {string} description
  */
 
-// Wrapped in an IIFE; published via window.KinesiologyAssessment.
-
 /** @type {FMSRuleDefinition[]} */
 const fmsPatterns = [
   {

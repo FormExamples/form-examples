@@ -22,8 +22,6 @@ import { has, safetyNettingRequired as safetyNettingRequired$imported } from './
  * @typedef {import('./types.js').FlaggedIssue} FlaggedIssue
  */
 
-// Wrapped in an IIFE; published via window.SoapNote.
-
 /**
  * Detect the safety flags raised by the note.
  *

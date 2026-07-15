@@ -3,7 +3,7 @@
 // Builds the canonical empty `AssessmentData` shape so newly-added fields
 // default correctly when older saved state is rehydrated from localStorage.
 // Property names are camelCase to match the front-end serde / examples
-// convention. Wrapped in an IIFE; published via `window.OutpatientOutcome`.
+// convention.
 //
 // The form collects a full outpatient outcome report across ten data sections
 // (patient details, encounter, operational efficiency, clinical outcome, three

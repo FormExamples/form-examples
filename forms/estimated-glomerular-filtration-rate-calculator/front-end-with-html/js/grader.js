@@ -27,8 +27,6 @@ import { stageLabel } from './types.js';
  * @typedef {import('./types.js').FiredRule} FiredRule
  */
 
-// Wrapped in an IIFE; published via window.EstimatedGlomerularFiltrationRateCalculator.
-
 /** Round to the nearest whole number (returns null unchanged). */
 function roundWhole(n) {
   if (n === null || n === undefined || Number.isNaN(n)) return null;

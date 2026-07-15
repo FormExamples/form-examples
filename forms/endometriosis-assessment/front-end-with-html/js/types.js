@@ -18,11 +18,6 @@
  * Full questionnaire data — see emptyAssessment() for shape.
  */
 
-// Wrapped in an IIFE so locals stay scoped — this file is loaded as a
-// classic <script> (no ES modules) so the page can be opened directly via
-// `file://`. Public symbols are attached to a single global namespace,
-// `window.EndometriosisAssessment`.
-
 /** Build a fresh, fully-blank assessment. */
 function emptyAssessment() {
   return {

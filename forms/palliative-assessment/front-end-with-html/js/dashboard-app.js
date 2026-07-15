@@ -12,12 +12,6 @@ import { samplePatients } from './data.js';
 // Default sort is by ESAS-r severity descending so the most-symptomatic
 // patients surface first — that is the primary clinical question this
 // dashboard exists to answer.
-//
-// Sibling modules loaded as plain `<script>` tags (in dependency order)
-// attach their exports to `window.PalliativeAssessmentDashboard`. Pulling
-// them off here keeps the rest of this file referring to short local
-// names. The whole file is wrapped in an IIFE so its top-level identifiers
-// do not leak to the global scope.
 
 // ----------------------------------------------------------------------
 // State

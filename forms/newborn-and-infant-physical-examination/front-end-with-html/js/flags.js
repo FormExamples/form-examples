@@ -23,8 +23,6 @@ import { LOW_SAT } from './rules.js';
  * @typedef {import('./types.js').FlaggedIssue} FlaggedIssue
  */
 
-// Wrapped in an IIFE; published via window.NewbornAndInfantPhysicalExamination.
-
 /**
  * @param {ExaminationData} data
  * @param {{ eyesResult: string, heartResult: string, hipsResult: string,

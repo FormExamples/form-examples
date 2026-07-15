@@ -2,8 +2,6 @@ import { detectFlaggedIssues } from './flagged-issues.js';
 import { emptyAssessment, hasText, isDoubleVisionBranchActive, isLaserTreatmentBranchActive, isMonocularBranchActive, isVisualFieldBranchActive, isVisualFieldCauseBranchActive, priorityLabel, sectionLabel } from './types.js';
 import { validateV1 } from './v1-validator.js';
 
-// DVLA V1 form - patient wizard (vanilla JS, classic <script>).
-//
 // Single-page continuous wizard: every section is rendered into the page in
 // document order. The user scrolls through them; a top-of-page progress
 // summary reflects how many tracked rules are satisfied. Submission runs the

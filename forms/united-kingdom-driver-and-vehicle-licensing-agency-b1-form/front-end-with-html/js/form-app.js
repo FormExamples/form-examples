@@ -2,8 +2,6 @@ import { validateB1 } from './b1-validator.js';
 import { detectFlaggedIssues } from './flagged-issues.js';
 import { emptyAssessment, epilepsyDeclarationRequired, hasText, isYesNoAnswered, priorityLabel, sectionLabel } from './types.js';
 
-// DVLA B1 form - patient wizard (vanilla JS, classic <script>).
-//
 // Single-page continuous wizard: every section is rendered into the page in
 // document order. The user scrolls through them; a top-of-page native
 // <progress> + step-list reflects how many tracked fields have been answered.

@@ -17,8 +17,6 @@ import { competencyToNumber } from './types.js';
  * @property {(d: AssessmentData) => boolean} evaluate
  */
 
-// Wrapped in an IIFE; published via window.FirstResponderAssessment.
-
 /** @type {ResponderRule[]} */
 const responderRules = [
   // ─── PHYSICAL FITNESS ──────────────────────────────────────

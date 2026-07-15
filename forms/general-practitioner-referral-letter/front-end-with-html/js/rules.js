@@ -31,8 +31,6 @@
  * @property {(r: Referral) => boolean} present
  */
 
-// Wrapped in an IIFE; published via window.GeneralPractitionerReferralLetter.
-
 const nonEmpty = (s) => typeof s === 'string' && s.trim() !== '';
 const hasDate = (d) => d !== null && d !== undefined && d !== '';
 

@@ -35,8 +35,6 @@ import { calculateAge } from './types.js';
  * @property {(d: AssessmentData) => boolean} evaluate
  */
 
-// Wrapped in an IIFE; published via window.OrganDonationAssessment.
-
 /** @type {DonorRule[]} */
 const donationRules = [
   // ─── DEMOGRAPHICS ──────────────────────────────────────────

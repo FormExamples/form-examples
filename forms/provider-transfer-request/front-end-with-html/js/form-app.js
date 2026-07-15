@@ -2,9 +2,6 @@ import { detectFlaggedIssues } from './flagged-issues.js';
 import { validateTransfer } from './transfer-validator.js';
 import { completenessLabel, emptyAssessment, hasNumber, hasText, priorityLabel, sectionLabel } from './types.js';
 
-// Provider Transfer Request - clinician handover wizard (vanilla JS, classic
-// <script>).
-//
 // Single-page continuous wizard: every section is rendered into the page in
 // document order and the user scrolls through them. Steps 1-8 are filled in
 // by the requesting provider; step 9 (Sign-off & Acknowledgement) carries
@@ -16,10 +13,6 @@ import { completenessLabel, emptyAssessment, hasNumber, hasText, priorityLabel, 
 //
 // Lily HTML headless class contracts are honoured throughout — see
 // `forms/AGENTS-front-end-html.md` for the class vocabulary.
-//
-// Sibling files loaded as plain `<script>` tags (in order) attach their
-// exports to `window.ProviderTransferRequest`. The whole file is wrapped in
-// an IIFE so its top-level identifiers don't leak to the global scope.
 
 // ----------------------------------------------------------------------
 // Persistence

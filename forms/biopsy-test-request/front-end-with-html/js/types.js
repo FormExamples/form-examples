@@ -3,7 +3,7 @@
 // Builds the canonical empty `BiopsyRequest` shape so newly-added fields
 // default correctly when older saved state is rehydrated from localStorage.
 // Property names are camelCase to match the front-end serde / examples
-// convention. Wrapped in an IIFE; published via `window.BiopsyTestRequest`.
+// convention.
 
 /**
  * Build a fresh, fully-blank biopsy request.

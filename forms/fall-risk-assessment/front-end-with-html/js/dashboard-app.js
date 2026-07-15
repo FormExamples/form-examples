@@ -11,12 +11,6 @@ import { samplePatients } from './data.js';
 // Default sort surfaces Critical patients first (severity rank descending,
 // then MFS score descending), matching the clinical priority defined in
 // `forms/fall-risk-assessment/AGENTS.md`.
-//
-// Sibling modules loaded as plain `<script>` tags (in dependency order)
-// attach their exports to `window.FallRiskAssessmentDashboard`. Pulling them
-// off here keeps the rest of this file referring to short local names. The
-// whole file is wrapped in an IIFE so its top-level identifiers do not leak
-// to the global scope.
 
 // ----------------------------------------------------------------------
 // State

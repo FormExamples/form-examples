@@ -9,10 +9,6 @@ import { deriveStatus, emptyChecklist, emptyTeamMember, isSignInComplete, isSign
 // step-list table of contents, persists state to localStorage on every
 // change, validates required fields on submit, and renders an inline report
 // with computed safety flags and JSON / XML / CSV / TSV / Print exports.
-//
-// Sibling files loaded as plain <script> tags (in order) attach their public
-// API to `window.WhoSurgicalSafetyChecklist`. The whole file is wrapped in an
-// IIFE so its locals do not leak to the global scope.
 
 // ----------------------------------------------------------------------
 // Persistence

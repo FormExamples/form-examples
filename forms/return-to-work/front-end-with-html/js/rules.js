@@ -6,8 +6,6 @@
 // priority (max-grade rule). Grade 1 = routine, 2 = standard, 3 = restricted,
 // 4 = high-risk. Rule IDs (RST-NNN) are stable and identical across every
 // front-end and the back-end.
-//
-// Wrapped in an IIFE; published via `window.ReturnToWork`.
 
 /** Count the number of enumerated workplace adjustments that are active. */
 function countAdjustments(data) {

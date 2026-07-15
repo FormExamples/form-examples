@@ -28,9 +28,6 @@ import { cha2ds2VascRules } from './rules.js';
  * @typedef {import('./types.js').FiredCriterion} FiredCriterion
  */
 
-// Wrapped in an IIFE; published via
-// window.Cha2ds2VascScoreForAtrialFibrillationStrokeRisk.
-
 // Adjusted annual ischaemic-stroke rate (%) indexed by total score 0-9
 // (Lip et al., Chest 2010).
 const ANNUAL_STROKE_RATE_PERCENT = [0.2, 1.3, 2.2, 3.2, 4.0, 6.7, 9.8, 9.6, 6.7, 15.2];

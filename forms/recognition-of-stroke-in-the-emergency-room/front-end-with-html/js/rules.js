@@ -23,8 +23,6 @@
  * @property {(d: AssessmentData) => boolean} evaluate
  */
 
-// Wrapped in an IIFE; published via window.RecognitionOfStrokeInTheEmergencyRoom.
-
 /** @type {RosierRule[]} */
 const rosierRules = [
   // ─── MIMIC 1: LOSS OF CONSCIOUSNESS / SYNCOPE (-1) ────────────

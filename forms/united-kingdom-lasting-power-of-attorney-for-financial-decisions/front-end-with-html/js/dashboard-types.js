@@ -43,7 +43,3 @@
  * Response from `GET /api/united_kingdom_lasting_powers_of_attorney_for_financial_decisions`.
  * @typedef {DashboardRow[] | { items: DashboardRow[], total?: number }} DashboardResponse
  */
-
-// Wrapped in an IIFE so locals stay scoped — loaded as a classic <script> so
-// the page opens directly via file://. Attaches its public symbols to
-// `window.UkLpaFinancialDecisionsDashboard`.

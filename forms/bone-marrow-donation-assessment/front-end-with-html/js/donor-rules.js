@@ -20,8 +20,6 @@ import { calculateAge } from './types.js';
  * @property {(d: any) => boolean} evaluate
  */
 
-// Wrapped in an IIFE; published via window.BoneMarrowDonationAssessment.
-
 /** @type {DonorRule[]} */
 const donorRules = [
   // ─── HLA MATCHING ──────────────────────────────────────────

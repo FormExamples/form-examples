@@ -19,8 +19,6 @@ import { validationRules } from './validation-rules.js';
  * @typedef {import('./types.js').Outcome} Outcome
  */
 
-// Wrapped in an IIFE; published via window.EmployeeOffboardingChecklist.
-
 /**
  * Validate an offboarding checklist.
  *

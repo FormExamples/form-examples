@@ -20,8 +20,6 @@
  * @property {(d: AssessmentData) => number} evaluate
  */
 
-// Wrapped in an IIFE; published via window.AsthmaAssessment.
-
 /** @type {ACTRule[]} */
 const actRules = [
   {

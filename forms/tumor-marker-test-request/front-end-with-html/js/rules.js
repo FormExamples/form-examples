@@ -11,8 +11,6 @@ import { MARKERS, countSelectedMarkers, markerLabel, selectedMarkerFields } from
 // are stable and identical across every front-end and the back-end
 // (R-APPROP-*, R-INTERP-*, R-COMPLETE-*, R-TRIAGE-*). Pure data + helpers; the
 // grader composes them.
-//
-// Wrapped in an IIFE; published via `window.TumorMarkerTestRequest`.
 
 // ----------------------------------------------------------------------
 // Axis A — Appropriateness (marker-to-indication fit, 1-9 ordinal)

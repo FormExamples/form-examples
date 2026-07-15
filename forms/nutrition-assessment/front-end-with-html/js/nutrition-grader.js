@@ -28,8 +28,6 @@ import { mustRules } from './must-rules.js';
  * @typedef {import('./types.js').FiredRule} FiredRule
  */
 
-// Wrapped in an IIFE; published via window.NutritionAssessment.
-
 /**
  * Classify a numeric MUST score (0-6) into a risk band.
  * @param {number} score

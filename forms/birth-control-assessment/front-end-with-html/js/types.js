@@ -2,9 +2,7 @@
 // `src/lib/engine/types.ts` data model for the Birth Control Assessment form.
 //
 // Builds and exports the canonical empty AssessmentData shape used by the
-// wizard, plus helpers (BMI, age) shared with the grader. All public symbols
-// are attached to `window.BirthControlAssessment` from a single IIFE so the
-// page works under file:// without ES modules.
+// wizard, plus helpers (BMI, age) shared with the grader.
 
 /**
  * @typedef {'female' | 'male' | 'other' | ''} Sex

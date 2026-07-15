@@ -1,7 +1,6 @@
 // Sample patient privacy-notice acknowledgement data for the Care
 // Privacy Notice clinician dashboard. Used as a fallback when the backend
-// API is unavailable. Loaded as a classic <script> tag (no ES modules) so
-// the page opens directly via file://.
+// API is unavailable.
 
 const samplePatients = [
   { id: '1',  patientName: 'Smith, John',         nhsNumber: '943 476 5919', dateAcknowledged: '2026-04-15', status: 'complete',   practiceName: 'Riverside Medical Practice' },

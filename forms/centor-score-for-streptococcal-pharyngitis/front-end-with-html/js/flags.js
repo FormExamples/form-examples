@@ -17,8 +17,6 @@
  * @typedef {import('./types.js').FlaggedIssue} FlaggedIssue
  */
 
-// Wrapped in an IIFE; published via window.CentorScoreForStreptococcalPharyngitis.
-
 /**
  * @param {AssessmentData} data
  * @param {number} mcIsaacScore  - modified McIsaac score (-1..5) from the grader

@@ -21,8 +21,6 @@ import { severityCategory } from './types.js';
  * @typedef {import('./types.js').FiredRule} FiredRule
  */
 
-// Wrapped in an IIFE; published via window.GynecologyAssessment.
-
 /** Convert flow heaviness to numeric score (0-3) or null if unanswered. */
 function flowHeavinessScore(flow) {
   switch (flow) {

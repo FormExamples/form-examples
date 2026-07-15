@@ -25,8 +25,6 @@ import { DIASTOLIC_HYPERTENSION_MMHG, FHR_HIGH_BPM, FHR_LOW_BPM, MS_PER_HOUR, PO
  * @typedef {import('./types.js').Observation} Observation
  */
 
-// Wrapped in an IIFE; published via window.Partogram.
-
 /**
  * True when no dilatation increase is recorded across any window of at least
  * `POOR_PROGRESS_HOURS` hours: i.e. some earlier dilatation reading has an

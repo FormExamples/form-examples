@@ -8,8 +8,6 @@ import { nonDraftAdrs, nonEmpty } from './types.js';
 // { category, priority, description }. Detectors run HIGH -> MEDIUM -> LOW and
 // the flag categories are stable and identical across every front-end and the
 // back-end.
-//
-// Wrapped in an IIFE; published via `window.Arc42`.
 
 // High-priority detectors: an entire mandatory section is missing.
 const HIGH = [

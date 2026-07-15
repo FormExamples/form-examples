@@ -14,11 +14,6 @@
  * @typedef {'inattentive' | 'hyperactive-impulsive' | 'combined' | 'unspecified'} ADHDSubtype
  */
 
-// Wrapped in an IIFE so locals stay scoped — this file is loaded as a
-// classic <script> (no ES modules) so the page can be opened directly via
-// `file://`. The IIFE attaches its public symbols to a single global
-// namespace, `window.AttentionDeficitAssessment`.
-
 /**
  * Build a fresh, fully-blank assessment.
  * Strings default to `''`; numeric ASRS scores default to `null`; lists default to `[]`.

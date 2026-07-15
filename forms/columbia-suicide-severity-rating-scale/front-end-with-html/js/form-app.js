@@ -18,10 +18,6 @@ import { emptyAssessment, ideationLevelLabel, priorityLabel, riskTierClass, risk
 // This instrument concerns suicide risk. It is a validated clinical screening
 // tool for trained staff; the software stratifies risk and prompts escalation,
 // it does not diagnose or replace clinical judgement.
-//
-// Sibling files loaded as plain `<script>` tags (in order) attach their exports
-// to `window.ColumbiaSuicideSeverityRatingScale`. The whole file is wrapped in
-// an IIFE so its top-level identifiers don't leak.
 
 // ----------------------------------------------------------------------
 // Persistence

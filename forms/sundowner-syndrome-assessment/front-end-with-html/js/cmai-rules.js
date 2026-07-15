@@ -30,8 +30,6 @@
  * @property {string} description
  */
 
-// Wrapped in an IIFE; published via window.SundownerSyndromeAssessment.
-
 /** @type {{ value: number, label: string }[]} */
 const cmaiScaleOptions = [
   { value: 1, label: '1 — Never' },

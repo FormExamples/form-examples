@@ -7,8 +7,6 @@ import { countAdjustments } from './rules.js';
 // (`src/lib/engine/flagged-issues.ts`). Each flag is
 // { id, category, message, priority }. Flag IDs (FLAG-*) are stable and
 // identical across every front-end and the back-end.
-//
-// Wrapped in an IIFE; published via `window.ReturnToWork`.
 
 /** True if any high-risk adjustment requiring a formal risk assessment is set. */
 function hasHighRiskAdjustment(data) {

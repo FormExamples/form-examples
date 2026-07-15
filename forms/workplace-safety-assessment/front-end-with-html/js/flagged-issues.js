@@ -26,8 +26,6 @@
  * @typedef {import('./types.js').AdditionalFlag} AdditionalFlag
  */
 
-// Wrapped in an IIFE; published via window.WorkplaceSafetyAssessment.
-
 /**
  * @param {AssessmentData} data
  * @returns {AdditionalFlag[]}

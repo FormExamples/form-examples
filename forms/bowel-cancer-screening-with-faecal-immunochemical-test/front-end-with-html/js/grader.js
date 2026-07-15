@@ -32,8 +32,6 @@ import { DEFAULT_THRESHOLD } from './types.js';
  * @typedef {import('./types.js').FiredRule} FiredRule
  */
 
-// Wrapped in an IIFE; published via window.BowelCancerScreeningFit.
-
 /** True when a numeric value is present (not null/undefined/NaN). */
 function hasNumber(n) {
   return n !== null && n !== undefined && !Number.isNaN(n);

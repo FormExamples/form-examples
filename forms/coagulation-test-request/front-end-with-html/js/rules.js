@@ -10,8 +10,6 @@ import { TESTS, countSelectedTests } from './types.js';
 // and suspected-DIC auto-escalation to stat. Rule IDs are stable and identical
 // across every front-end and the back-end (R-APPROP-*, R-PREANALYTICAL-*,
 // R-COMPLETE-*, R-TRIAGE-*). Pure data + helpers; the grader composes them.
-//
-// Wrapped in an IIFE; published via `window.CoagulationTestRequest`.
 
 // ----------------------------------------------------------------------
 // Axis A — Appropriateness (BSH indication / retest-interval anchor, 1-9)

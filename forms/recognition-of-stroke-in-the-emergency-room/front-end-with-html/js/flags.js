@@ -17,8 +17,6 @@
  * @typedef {import('./types.js').FlaggedIssue} FlaggedIssue
  */
 
-// Wrapped in an IIFE; published via window.RecognitionOfStrokeInTheEmergencyRoom.
-
 const SIGN_FIELDS = [
   ['facialWeakness', 'asymmetric facial weakness'],
   ['armWeakness', 'asymmetric arm weakness'],

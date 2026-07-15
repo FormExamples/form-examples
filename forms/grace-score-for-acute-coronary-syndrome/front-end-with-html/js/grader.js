@@ -30,8 +30,6 @@ import { AGE_BANDS, CARDIAC_ARREST_POINTS, CREATININE_BANDS, ELEVATED_ENZYMES_PO
  * @typedef {import('./types.js').FiredContributor} FiredContributor
  */
 
-// Wrapped in an IIFE; published via window.GraceScoreForAcuteCoronarySyndrome.
-
 /**
  * Compute the full GRACE grade for the supplied assessment data.
  * @param {AssessmentData} data

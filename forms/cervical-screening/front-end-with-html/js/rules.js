@@ -23,8 +23,6 @@
  * @property {(d: ScreeningData) => boolean} evaluate
  */
 
-// Wrapped in an IIFE; published via window.CervicalScreening.
-
 const MIN_AGE = 25;
 const MAX_AGE = 64;
 

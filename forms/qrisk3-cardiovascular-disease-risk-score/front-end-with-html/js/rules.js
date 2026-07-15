@@ -26,8 +26,6 @@
  * @typedef {import('./types.js').AssessmentData} AssessmentData
  */
 
-// Wrapped in an IIFE; published via window.Qrisk3CardiovascularDiseaseRiskScore.
-
 // Approximate cohort means used to centre the continuous variables. Centring
 // makes the linear predictor ~0 for an "average" patient so the baseline
 // survival maps to the average population risk.

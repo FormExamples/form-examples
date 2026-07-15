@@ -16,8 +16,6 @@
  * @typedef {import('./types.js').FlaggedIssue} FlaggedIssue
  */
 
-// Wrapped in an IIFE; published via window.QuickSequentialOrganFailureAssessment.
-
 /**
  * @param {AssessmentData} data
  * @param {number} qsofaScore  - total 0-3 from the grader

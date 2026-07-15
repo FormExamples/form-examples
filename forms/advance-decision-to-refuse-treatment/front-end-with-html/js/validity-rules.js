@@ -24,8 +24,6 @@ import { hasLifeSustainingRefusal } from './types.js';
  * @property {(d: AssessmentData) => boolean} evaluate
  */
 
-// Wrapped in an IIFE; published via window.AdvanceDecisionToRefuseTreatment.
-
 /** @type {ValidityRule[]} */
 const validityRules = [
   // ─── CRITICAL: Life-sustaining treatment legal requirements ───

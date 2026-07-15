@@ -12,8 +12,6 @@ import { anyAgreed, declineJustified, hasAlternative } from './types.js';
 // timeframe. Rule IDs are stable and identical across every front-end and the
 // back-end (R-OUTCOME-*, R-LEGAL-*, R-COMPLETE-*, R-FOLLOWUP-*). Pure data +
 // helpers; the grader composes them.
-//
-// Wrapped in an IIFE; published via `window.NeurodiversityAdjustmentResponse`.
 
 // ----------------------------------------------------------------------
 // Axis A — outcome classification (first match wins)

@@ -22,8 +22,6 @@
  * @property {number} maxScore
  */
 
-// Wrapped in an IIFE; published via window.CognitiveAssessment.
-
 /** @type {MMSERuleDefinition[]} */
 const mmseDomains = [
   // Orientation - Time (5 points)

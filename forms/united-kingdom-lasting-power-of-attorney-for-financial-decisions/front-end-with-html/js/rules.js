@@ -7,8 +7,6 @@
 // composite-risk algorithm (grader.js) promotes any fired blocker to
 // `critical`. Rule IDs, priorities, and statutory citations are stable and
 // identical across every front-end and the back-end.
-//
-// Wrapped in an IIFE; published via `window.UkLpaFinancialDecisions`.
 
 // ----------------------------------------------------------------------
 // Utilities (port of validator/utils.ts)

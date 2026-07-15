@@ -14,7 +14,6 @@ import { hasAnyAbnormalFinding, hasCriticalResult, hasExertionalHypotension, has
  * @typedef {import('./types.js').FlagPriority} FlagPriority
  */
 
-// Wrapped in an IIFE; published via window.CardiacStressTestResult.
 // Depends on rules.js (the structured-findings predicates), so it must load
 // after it.
 

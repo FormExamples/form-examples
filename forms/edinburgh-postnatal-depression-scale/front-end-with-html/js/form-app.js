@@ -19,10 +19,6 @@ import { bandClass, bandLabel, emptyAssessment, priorityLabel } from './types.js
 // The EPDS is a validated screen, not a diagnosis, and item 10 (thoughts of
 // self-harm) is handled as a safety-critical item: any positive response raises
 // a mandatory urgent flag regardless of the total score.
-//
-// Sibling files loaded as plain `<script>` tags (in order) attach their exports
-// to `window.EdinburghPostnatalDepressionScale`. The whole file is wrapped in an
-// IIFE so its top-level identifiers don't leak.
 
 // ----------------------------------------------------------------------
 // Persistence

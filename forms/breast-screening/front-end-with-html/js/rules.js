@@ -30,8 +30,6 @@
  * @property {(d: ScreeningData) => boolean} evaluate
  */
 
-// Wrapped in an IIFE; published via window.BreastScreening.
-
 /**
  * Eligibility gate. Pure; order matters (first match wins).
  * @param {ScreeningData} d

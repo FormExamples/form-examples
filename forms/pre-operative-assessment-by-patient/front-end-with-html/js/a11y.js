@@ -12,8 +12,6 @@
 // selection or the page introduction, and a "start over" control that clears
 // the saved draft. Reduced motion is handled in CSS. Preferences persist in
 // localStorage under a user-level key.
-//
-// Wrapped in an IIFE; exposes nothing globally except an idempotent init.
 
 (function () {
 'use strict';

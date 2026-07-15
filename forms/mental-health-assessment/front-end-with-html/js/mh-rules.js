@@ -11,8 +11,6 @@
  * @typedef {import('./types.js').SeverityLevel} SeverityLevel
  */
 
-// Wrapped in an IIFE; published via window.MentalHealthAssessment.
-
 // ──────────────────────────────────────────────
 // PHQ-9 Scoring Rules
 // ──────────────────────────────────────────────

@@ -20,8 +20,6 @@
  * @property {(d: AssessmentData) => boolean} evaluate
  */
 
-// Wrapped in an IIFE; published via window.TimiRiskScoreForAcuteCoronarySyndrome.
-
 /** @type {TimiRule[]} */
 const timiRules = [
   // ─── CRITERION 1: AGE >= 65 ───────────────────────────────────

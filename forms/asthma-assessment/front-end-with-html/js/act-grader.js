@@ -17,8 +17,6 @@ import { actRules } from './act-rules.js';
  * @typedef {import('./types.js').FiredRule} FiredRule
  */
 
-// Wrapped in an IIFE; published via window.AsthmaAssessment.
-
 /**
  * Classify a numeric ACT score (5-25) into a control level.
  * @param {number} score

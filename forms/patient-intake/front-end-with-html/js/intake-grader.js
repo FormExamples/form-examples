@@ -15,8 +15,6 @@ import { intakeRules } from './intake-rules.js';
  * @typedef {import('./types.js').FiredRule} FiredRule
  */
 
-// Wrapped in an IIFE; published via window.PatientIntake.
-
 /**
  * Evaluate every intake rule against the supplied assessment data and
  * return the worst-fired risk level plus the list of rules that fired.

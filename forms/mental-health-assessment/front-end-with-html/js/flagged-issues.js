@@ -16,8 +16,6 @@ import { calculateAuditCScore, calculateGad7Score, calculatePhq9Score } from './
  * @typedef {import('./types.js').AdditionalFlag} AdditionalFlag
  */
 
-// Wrapped in an IIFE; published via window.MentalHealthAssessment.
-
 /**
  * @param {AssessmentData} data
  * @returns {AdditionalFlag[]}

@@ -2,12 +2,11 @@ import { validateEuGeneral } from './eu-general-validator.js';
 import { detectFlaggedIssues } from './flagged-issues.js';
 import { emptyAssessment, hasNumber, hasText, isYesNoAnswered, priorityLabel, sectionLabel } from './types.js';
 
-// WHO Emergency Unit Form: General — patient/clinician wizard (vanilla
-// JS, classic <script>). Single-page continuous wizard: all 16 sections
-// rendered into the page in document order as Lily-shaped
-// <fieldset class="fieldset"> blocks. Conditional sub-blocks (ambulance
-// level, deficit description, admit ward, transfer destination, cause
-// of death) only appear when the answers above them require them.
+// Single-page continuous wizard: all 16 sections rendered into the page in
+// document order as Lily-shaped <fieldset class="fieldset"> blocks.
+// Conditional sub-blocks (ambulance level, deficit description, admit ward,
+// transfer destination, cause of death) only appear when the answers above
+// them require them.
 //
 // On submit the pure validator + flagged-issues engine runs and a
 // report is rendered into the Lily .panel region. State is persisted to

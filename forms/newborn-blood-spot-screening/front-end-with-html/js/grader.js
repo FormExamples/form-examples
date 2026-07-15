@@ -19,8 +19,6 @@ import { computeAgeAtSampleDays } from './types.js';
  * @typedef {import('./types.js').GradingResult} GradingResult
  */
 
-// Wrapped in an IIFE; published via window.NewbornBloodSpotScreening.
-
 /**
  * Classify a newborn blood spot screening record.
  * @param {ScreeningData} data

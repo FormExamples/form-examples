@@ -2,11 +2,6 @@
 // `src/lib/engine/types.ts` data model for the WHO Emergency Unit Form:
 // Trauma. This file publishes the empty-state factory and shared
 // helpers used across the wizard.
-//
-// Wrapped in an IIFE so locals stay scoped — this file is loaded as a
-// classic <script> (no ES modules) so the page can be opened directly
-// via `file://`. The IIFE attaches its public symbols to a single
-// global namespace, `window.WhoEmergencyUnitTraumaForm`.
 
 function emptyPe() {
   return { normal: false, notes: '' };

@@ -7,7 +7,7 @@
 // patient-reported history so the clinician can verify it against their own
 // objective findings. Idempotent and one-shot (the handoff is consumed on use).
 //
-// Self-contained progressive enhancement. Wrapped in an IIFE.
+// Self-contained progressive enhancement.
 
 (function () {
 'use strict';

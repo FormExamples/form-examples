@@ -1,7 +1,6 @@
 // Prenatal risk rule definitions.
 //
-// Mirrors `src/lib/engine/risk-rules.ts` from the SvelteKit reference. Loaded
-// as a classic <script>; attaches `riskRules` to `window.PrenatalAssessment`.
+// Mirrors `src/lib/engine/risk-rules.ts` from the SvelteKit reference.
 //
 // Risk score is cumulative:
 //   0-2   = Low risk

@@ -25,8 +25,6 @@ import { epdsItems, scoreForOption } from './rules.js';
  * @typedef {import('./types.js').FiredItem} FiredItem
  */
 
-// Wrapped in an IIFE; published via window.EdinburghPostnatalDepressionScale.
-
 /**
  * Compute the ten reverse-corrected item scores. Unanswered items map to null.
  * @param {AssessmentData} data

@@ -8,8 +8,6 @@ import { countSelectedPanels } from './types.js';
 // single pure, deterministic grading result. The public entry point is
 // `calculateGrade(data)`. The output shape and rule / flag IDs are identical
 // across every front-end and the back-end.
-//
-// Wrapped in an IIFE; published via `window.BloodTestRequest`.
 
 /**
  * Derive an overall recommendation for the laboratory vetting desk from the

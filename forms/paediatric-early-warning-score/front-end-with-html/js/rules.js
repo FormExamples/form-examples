@@ -22,8 +22,6 @@
  * @typedef {import('./types.js').Consciousness} Consciousness
  */
 
-// Wrapped in an IIFE; published via window.PaediatricEarlyWarningScore.
-
 // Age-band scoring tables for the two rate parameters. Each parameter is an
 // ordered list of [upperBoundInclusive, score] pairs covering the whole
 // numeric domain. `scoreAgainstBand` returns the score of the first pair whose

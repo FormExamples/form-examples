@@ -33,8 +33,6 @@ import { optionLabel, preventionActionLabel } from './types.js';
  * @typedef {import('./types.js').GradingResult} GradingResult
  */
 
-// Wrapped in an IIFE; published via window.WaterlowPressureUlcerRiskAssessment.
-
 /**
  * Derive the risk band from the total Waterlow score.
  * @param {number} score

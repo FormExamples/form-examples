@@ -34,8 +34,6 @@ import { maxStatus } from './types.js';
  * @property {(d: AssessmentData) => { status: AxisStatus, findings: string[] }} evaluate
  */
 
-// Wrapped in an IIFE; published via window.EndocrinologyAssessment.
-
 /** @type {AxisRule[]} */
 const axisRules = [
   {

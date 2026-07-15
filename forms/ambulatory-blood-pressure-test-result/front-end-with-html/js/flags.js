@@ -13,8 +13,6 @@ import { hasCriticalFinding, nighttimeHypertensive, recordingIsInadequate } from
  * @typedef {import('./types.js').Flag} Flag
  */
 
-// Wrapped in an IIFE; published via window.AmbulatoryBloodPressureTestResult.
-
 /**
  * @param {AmbulatoryBloodPressureResult} r
  * @returns {Flag[]}

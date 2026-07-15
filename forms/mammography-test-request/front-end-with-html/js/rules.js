@@ -8,8 +8,6 @@
 // highest; (D) clinical priority (low / moderate / high) from symptom + risk
 // escalation rules. Rule IDs are stable and identical across every front-end
 // and the back-end (R-APPROP-*, R-URGENCY-*, R-COMPLETE-*, R-PRIORITY-*).
-//
-// Wrapped in an IIFE; published via `window.MammographyTestRequest`.
 
 // ----------------------------------------------------------------------
 // Axis A — Appropriateness (ACR Appropriateness Criteria 1-9 ordinal)

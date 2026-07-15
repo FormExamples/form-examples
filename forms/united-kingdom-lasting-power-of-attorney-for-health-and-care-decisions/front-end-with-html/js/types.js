@@ -1,6 +1,5 @@
-// JSDoc type aliases mirroring the SvelteKit engine's `types.ts`. Loaded as a
-// classic <script> so the page works from file://. Other engine modules
-// reference these types via @typedef imports.
+// JSDoc type aliases mirroring the SvelteKit engine's `types.ts`. Other
+// engine modules reference these types via @typedef imports.
 
 /**
  * @typedef {'yes' | 'no' | ''} YesNo
