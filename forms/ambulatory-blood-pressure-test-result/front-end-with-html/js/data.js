@@ -6,11 +6,6 @@
 // critical, inconclusive), both monitoring modalities, and the follow-up
 // urgency ladder.
 
-(function () {
-'use strict';
-window.AmbulatoryBloodPressureTestResultDashboard =
-  window.AmbulatoryBloodPressureTestResultDashboard || {};
-
 /** @type {import('./dashboard-types.js').ReportRow[]} */
 const sampleReports = [
   {
@@ -87,5 +82,4 @@ const sampleReports = [
   }
 ];
 
-window.AmbulatoryBloodPressureTestResultDashboard.sampleReports = sampleReports;
-})();
+export { sampleReports };

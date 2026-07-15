@@ -1,3 +1,7 @@
+import { detectFlaggedIssues } from './flags.js';
+import { calculateRosierGrade } from './grader.js';
+import { bandClass, bandLabel, emptyAssessment, hypoglycaemiaCorrectedLabel, priorityLabel } from './types.js';
+
 // Recognition Of Stroke In the Emergency Room (ROSIER) — bedside wizard
 // (vanilla JavaScript, no build).
 //
@@ -14,19 +18,6 @@
 // exports to `window.RecognitionOfStrokeInTheEmergencyRoom`. Pulling them off
 // here keeps the rest of this file referring to short local names. The whole
 // file is wrapped in an IIFE so its top-level identifiers don't leak.
-(function () {
-'use strict';
-
-const NS = window.RecognitionOfStrokeInTheEmergencyRoom;
-const {
-  emptyAssessment,
-  bandLabel,
-  bandClass,
-  priorityLabel,
-  hypoglycaemiaCorrectedLabel,
-  calculateRosierGrade,
-  detectFlaggedIssues
-} = NS;
 
 // ----------------------------------------------------------------------
 // Persistence
@@ -955,4 +946,3 @@ if (document.readyState === 'loading') {
 } else {
   init();
 }
-})();

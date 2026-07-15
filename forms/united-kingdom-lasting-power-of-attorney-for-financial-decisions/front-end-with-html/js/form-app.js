@@ -1,3 +1,6 @@
+import { validateLpa } from './grader.js';
+import { bandLabel, compositeRiskLabel, createEmptyCertificateProvider, createEmptyPerson, decisionModeLabel, emptyLpa, whenAttorneysCanActLabel } from './types.js';
+
 // UK Lasting Power of Attorney for Financial Decisions (LP1F) — 15-step wizard.
 //
 // Single-page continuous wizard: every LP1F section (1–15) is rendered into the
@@ -11,21 +14,6 @@
 // Sibling files loaded as plain `<script>` tags (in order) attach their
 // exports to `window.UkLpaFinancialDecisions`. The whole file is wrapped in an
 // IIFE so its top-level identifiers do not leak to the global scope.
-
-(function () {
-'use strict';
-
-const NS = window.UkLpaFinancialDecisions;
-const {
-  emptyLpa,
-  createEmptyPerson,
-  createEmptyCertificateProvider,
-  decisionModeLabel,
-  whenAttorneysCanActLabel,
-  bandLabel,
-  compositeRiskLabel,
-  validateLpa
-} = NS;
 
 // ----------------------------------------------------------------------
 // Persistence
@@ -1272,4 +1260,3 @@ if (document.readyState === 'loading') {
 } else {
   init();
 }
-})();

@@ -1,3 +1,5 @@
+import { fouratRules } from './rules.js';
+
 // 4AT grader. Pure functions: take an `AssessmentData` object, evaluate the
 // scoring rules in `fouratRules`, group fired rules by item to award each item
 // its points, sum the total (0-12), and derive the interpretation band.
@@ -24,10 +26,6 @@
  */
 
 // Wrapped in an IIFE; published via window.FourATestForDelirium.
-(function () {
-'use strict';
-window.FourATestForDelirium = window.FourATestForDelirium || {};
-const { fouratRules } = window.FourATestForDelirium;
 
 /**
  * Evaluate the scoring rules and collect the ones that fired.
@@ -109,8 +107,4 @@ function calculateFourATGrade(data) {
   };
 }
 
-Object.assign(window.FourATestForDelirium, {
-  evaluateRules,
-  calculateFourATGrade
-});
-})();
+export { evaluateRules, calculateFourATGrade };

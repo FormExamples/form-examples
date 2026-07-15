@@ -1,3 +1,7 @@
+import { gradeDonor } from './donation-grader.js';
+import { detectAdditionalFlags } from './flagged-issues.js';
+import { bmiCategory, calculateBMI, donorTypeLabel, eligibilityClass, eligibilityLabel, emptyAssessment, gradeClass, gradeLabel, riskLevelClass, riskLevelLabel } from './types.js';
+
 // Organ Donation Assessment - donor wizard (vanilla JS, no build).
 //
 // Single-page continuous wizard: every section is rendered into the page in
@@ -10,24 +14,6 @@
 // exports to `window.OrganDonationAssessment`. Pulling them off here keeps
 // the rest of this file referring to short local names. Whole file is
 // wrapped in an IIFE so its top-level identifiers don't leak globally.
-(function () {
-'use strict';
-
-const NS = window.OrganDonationAssessment;
-const {
-  emptyAssessment,
-  calculateBMI,
-  bmiCategory,
-  eligibilityLabel,
-  eligibilityClass,
-  riskLevelLabel,
-  riskLevelClass,
-  donorTypeLabel,
-  gradeLabel,
-  gradeClass,
-  gradeDonor,
-  detectAdditionalFlags
-} = NS;
 
 // ----------------------------------------------------------------------
 // Persistence
@@ -1636,4 +1622,3 @@ if (document.readyState === 'loading') {
 } else {
   init();
 }
-})();

@@ -1,3 +1,5 @@
+import { estimateTenYearRisk, hba1cToPercent, isSmoker } from './types.js';
+
 // PREVENT risk rules. Each rule mirrors src/lib/engine/risk-rules.ts in
 // the SvelteKit form: high-risk first, then medium, then protective low
 // indicators.
@@ -13,14 +15,6 @@
  * @property {string} riskLevel
  * @property {(d: AssessmentData) => boolean} evaluate
  */
-
-(function () {
-'use strict';
-window.PredictingRiskOfCardiovascularDiseaseEvents =
-  window.PredictingRiskOfCardiovascularDiseaseEvents || {};
-
-const NS = window.PredictingRiskOfCardiovascularDiseaseEvents;
-const { estimateTenYearRisk, hba1cToPercent, isSmoker } = NS;
 
 /** @type {RiskRule[]} */
 const allRules = [
@@ -236,7 +230,4 @@ function evaluateRules(data) {
   return fired;
 }
 
-Object.assign(window.PredictingRiskOfCardiovascularDiseaseEvents, {
-  evaluateRules
-});
-})();
+export { evaluateRules };

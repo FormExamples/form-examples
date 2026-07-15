@@ -20,9 +20,6 @@
  */
 
 // Wrapped in an IIFE; published via window.UrinalysisTestResult.
-(function () {
-'use strict';
-window.UrinalysisTestResult = window.UrinalysisTestResult || {};
 
 // ----------------------------------------------------------------------
 // Structured-findings predicates (mirror `utils.ts`)
@@ -513,17 +510,4 @@ function gradeFollowUp(r, classification, severity) {
   };
 }
 
-Object.assign(window.UrinalysisTestResult, {
-  isDipstickPositive,
-  isDipstickStrong,
-  hasCriticalFinding,
-  hasSignificantGrowth,
-  hasUtiFeatures,
-  hasAnyAbnormalFinding,
-  hasOnlyIncidentalFinding,
-  classifyResult,
-  gradeSeverity,
-  gradeCompleteness,
-  gradeFollowUp
-});
-})();
+export { isDipstickPositive, isDipstickStrong, hasCriticalFinding, hasSignificantGrowth, hasUtiFeatures, hasAnyAbnormalFinding, hasOnlyIncidentalFinding, classifyResult, gradeSeverity, gradeCompleteness, gradeFollowUp };

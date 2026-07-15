@@ -1,3 +1,5 @@
+import { systemLabel } from './types.js';
+
 // Flagged-issue detection (red flags). Independent of the total SOFA score
 // (which the grader produces), this module raises clinician-facing safety flags
 // per spec §7:
@@ -20,11 +22,6 @@
  */
 
 // Wrapped in an IIFE; published via window.SequentialOrganFailureAssessment.
-(function () {
-'use strict';
-window.SequentialOrganFailureAssessment =
-  window.SequentialOrganFailureAssessment || {};
-const { systemLabel } = window.SequentialOrganFailureAssessment;
 
 /**
  * @param {AssessmentData} data
@@ -137,5 +134,4 @@ function detectFlaggedIssues(data, grade) {
   return flags;
 }
 
-window.SequentialOrganFailureAssessment.detectFlaggedIssues = detectFlaggedIssues;
-})();
+export { detectFlaggedIssues };

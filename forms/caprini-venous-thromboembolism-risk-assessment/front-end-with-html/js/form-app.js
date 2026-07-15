@@ -1,3 +1,8 @@
+import { detectFlaggedIssues } from './flags.js';
+import { calculateCapriniGrade } from './grader.js';
+import { capriniRules } from './rules.js';
+import { emptyAssessment, priorityLabel, recommendedProphylaxisLabel, riskBandClass, riskBandLabel, weightGroupLabel } from './types.js';
+
 // Caprini Venous Thromboembolism Risk Assessment — clinician wizard
 // (vanilla JavaScript, no build).
 //
@@ -14,21 +19,6 @@
 // Sibling files loaded as plain `<script>` tags (in order) attach their exports
 // to `window.CapriniVenousThromboembolismRiskAssessment`. The whole file is
 // wrapped in an IIFE so its top-level identifiers don't leak.
-(function () {
-'use strict';
-
-const NS = window.CapriniVenousThromboembolismRiskAssessment;
-const {
-  emptyAssessment,
-  riskBandLabel,
-  riskBandClass,
-  recommendedProphylaxisLabel,
-  weightGroupLabel,
-  priorityLabel,
-  capriniRules,
-  calculateCapriniGrade,
-  detectFlaggedIssues
-} = NS;
 
 // ----------------------------------------------------------------------
 // Persistence
@@ -889,4 +879,3 @@ if (document.readyState === 'loading') {
 } else {
   init();
 }
-})();

@@ -8,11 +8,6 @@
 // a two-week-wait suspected-cancer case, an urgent frozen-section case, and a
 // specimen-fixation-issue case.
 
-(function () {
-'use strict';
-window.HistopathologyTestRequestDashboard =
-  window.HistopathologyTestRequestDashboard || {};
-
 /** @type {import('./types.js').RequestRow[]} */
 const sampleRequests = [
   {
@@ -157,5 +152,4 @@ const sampleRequests = [
   }
 ];
 
-window.HistopathologyTestRequestDashboard.sampleRequests = sampleRequests;
-})();
+export { sampleRequests };

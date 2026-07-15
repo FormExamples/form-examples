@@ -6,11 +6,6 @@
 // down) or returns an empty list, callers fall back to the sample data shipped
 // in `data.js` so the page is usable standalone.
 
-(function () {
-'use strict';
-window.GeneralPractitionerReferralLetterDashboard =
-  window.GeneralPractitionerReferralLetterDashboard || {};
-
 const API_BASE = 'http://localhost:5150';
 const REFERRALS_PATH = '/api/dashboard/referrals';
 
@@ -35,6 +30,4 @@ async function fetchReferrals() {
   return data.items || [];
 }
 
-window.GeneralPractitionerReferralLetterDashboard.fetchReferrals = fetchReferrals;
-window.GeneralPractitionerReferralLetterDashboard.API_BASE = API_BASE;
-})();
+export { fetchReferrals, API_BASE };

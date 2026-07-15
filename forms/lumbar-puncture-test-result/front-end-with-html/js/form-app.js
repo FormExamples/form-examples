@@ -1,3 +1,7 @@
+import { calculateGrade } from './grader.js';
+import { culturePositive as culturePositive$imported } from './rules.js';
+import { abnormalitySeverityClass, abnormalitySeverityLabel, csfAppearanceLabel, emptyResult, followUpUrgencyClass, followUpUrgencyLabel, priorityLabel, recommendationLabel, reportStatusLabel, reportingCategoryLabel, resultClassificationClass, resultClassificationLabel, testResultLabel } from './types.js';
+
 // Lumbar Puncture Test Result — reporting-clinician wizard
 // (vanilla JavaScript, no build).
 //
@@ -15,26 +19,6 @@
 // exports to `window.LumbarPunctureTestResult`. Pulling them off here keeps the
 // rest of this file referring to short local names. The whole file is wrapped
 // in an IIFE so its top-level identifiers don't leak.
-(function () {
-'use strict';
-
-const NS = window.LumbarPunctureTestResult;
-const {
-  emptyResult,
-  resultClassificationLabel,
-  abnormalitySeverityLabel,
-  followUpUrgencyLabel,
-  csfAppearanceLabel,
-  testResultLabel,
-  reportingCategoryLabel,
-  reportStatusLabel,
-  recommendationLabel,
-  priorityLabel,
-  resultClassificationClass,
-  abnormalitySeverityClass,
-  followUpUrgencyClass,
-  calculateGrade
-} = NS;
 
 // ----------------------------------------------------------------------
 // Persistence
@@ -656,7 +640,7 @@ function refreshLivePreview() {
 
 function updateConditionalAlerts() {
   const preview = calculateGrade(state);
-  const culturePositive = NS.culturePositive(state);
+  const culturePositive = culturePositive$imported(state);
   const visibility = {
     'culture-alert': culturePositive,
     'critical-pattern-alert': state.bacterialMeningitisPattern || state.subarachnoidHaemorrhageSuggested,
@@ -1072,4 +1056,3 @@ if (document.readyState === 'loading') {
 } else {
   init();
 }
-})();

@@ -1,3 +1,7 @@
+import { detectFlags } from './flags.js';
+import { classifyOutcome, gradeCompleteness, gradeFollowUp, gradeLegalRisk } from './rules.js';
+import { anyAgreed, flatten, recommendationLabel } from './types.js';
+
 // Four-axis grader for the Neurodiversity Adjustment Response.
 //
 // Composes the rule sets in rules.js and the compliance-and-risk flags in
@@ -13,22 +17,6 @@
 // only when no rule fires.
 //
 // Wrapped in an IIFE; published via `window.NeurodiversityAdjustmentResponse`.
-
-(function () {
-'use strict';
-window.NeurodiversityAdjustmentResponse =
-  window.NeurodiversityAdjustmentResponse || {};
-const NS = window.NeurodiversityAdjustmentResponse;
-const {
-  flatten,
-  anyAgreed,
-  classifyOutcome,
-  gradeLegalRisk,
-  gradeCompleteness,
-  gradeFollowUp,
-  detectFlags,
-  recommendationLabel
-} = NS;
 
 /**
  * Derive the overall recommendation from the response and graded axes.
@@ -102,8 +90,4 @@ function calculateGrade(data) {
   };
 }
 
-Object.assign(NS, {
-  calculateGrade,
-  deriveRecommendation
-});
-})();
+export { calculateGrade, deriveRecommendation };

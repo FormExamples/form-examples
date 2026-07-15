@@ -168,9 +168,6 @@
 // classic <script> (no ES modules) so the page can be opened directly via
 // `file://`. The IIFE attaches its public symbols to a single global
 // namespace, `window.WardRoundNote`.
-(function () {
-'use strict';
-window.WardRoundNote = window.WardRoundNote || {};
 
 /**
  * Build a fresh, fully-blank note. Text / enum fields default to `''`; the one
@@ -322,15 +319,4 @@ function priorityLabel(priority) {
   }
 }
 
-Object.assign(window.WardRoundNote, {
-  emptyAssessment,
-  COMPONENTS,
-  statusLabel,
-  statusClass,
-  clinicianGradeLabel,
-  observationTrendLabel,
-  vteStatusLabel,
-  escalationStatusLabel,
-  priorityLabel
-});
-})();
+export { emptyAssessment, COMPONENTS, statusLabel, statusClass, clinicianGradeLabel, observationTrendLabel, vteStatusLabel, escalationStatusLabel, priorityLabel };

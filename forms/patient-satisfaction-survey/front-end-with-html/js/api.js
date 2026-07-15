@@ -7,11 +7,6 @@
 // fall back to the sample data shipped in `data.js` so the page remains
 // usable standalone (e.g. when opened directly via `file://`).
 
-(function () {
-'use strict';
-window.PatientSatisfactionSurveyDashboard =
-  window.PatientSatisfactionSurveyDashboard || {};
-
 const API_BASE = 'http://localhost:5150';
 const PATIENTS_PATH = '/api/dashboard/patients';
 
@@ -36,6 +31,4 @@ async function fetchPatients() {
   return data.items || [];
 }
 
-window.PatientSatisfactionSurveyDashboard.fetchPatients = fetchPatients;
-window.PatientSatisfactionSurveyDashboard.API_BASE = API_BASE;
-})();
+export { fetchPatients, API_BASE };

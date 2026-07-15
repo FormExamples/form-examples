@@ -1,3 +1,5 @@
+import { calculateAge, calculateBMI } from './types.js';
+
 // Flagged-issue detection. Independent of eligibility status, this module
 // raises clinician-facing flags for hypoglycemia risk, elevated HbA1c, severe
 // obesity, cardiovascular disease, eating-disorder history, suicidal ideation,
@@ -12,11 +14,6 @@
  */
 
 // Wrapped in an IIFE; published via window.SemaglutideAssessment.
-(function () {
-'use strict';
-window.SemaglutideAssessment = window.SemaglutideAssessment || {};
-const NS = window.SemaglutideAssessment;
-const { calculateAge, calculateBMI } = NS;
 
 /**
  * @param {AssessmentData} data
@@ -227,7 +224,4 @@ function detectAdditionalFlags(data) {
   return flags;
 }
 
-Object.assign(window.SemaglutideAssessment, {
-  detectAdditionalFlags
-});
-})();
+export { detectAdditionalFlags };

@@ -167,9 +167,6 @@
 // <script> (no ES modules) so the page can be opened directly via `file://`.
 // The IIFE attaches its public symbols to a single global namespace,
 // `window.ChildSafeguardingReferral`.
-(function () {
-'use strict';
-window.ChildSafeguardingReferral = window.ChildSafeguardingReferral || {};
 
 /**
  * Build a fresh, fully-blank referral.
@@ -369,19 +366,4 @@ function priorityLabel(priority) {
   }
 }
 
-Object.assign(window.ChildSafeguardingReferral, {
-  emptyReferral,
-  statusLabel,
-  statusClass,
-  urgencyLabel,
-  urgencyClass,
-  urgencyPathway,
-  primaryCategoryLabel,
-  consentStatusLabel,
-  sharingBasisLabel,
-  childSexLabel,
-  yesNoLabel,
-  yesNoUnknownLabel,
-  priorityLabel
-});
-})();
+export { emptyReferral, statusLabel, statusClass, urgencyLabel, urgencyClass, urgencyPathway, primaryCategoryLabel, consentStatusLabel, sharingBasisLabel, childSexLabel, yesNoLabel, yesNoUnknownLabel, priorityLabel };

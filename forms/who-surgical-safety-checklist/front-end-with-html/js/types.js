@@ -8,11 +8,6 @@
 // localStorage. Wrapped in an IIFE; published via
 // `window.WhoSurgicalSafetyChecklist`.
 
-(function () {
-'use strict';
-window.WhoSurgicalSafetyChecklist =
-  window.WhoSurgicalSafetyChecklist || {};
-
 /**
  * Build a fresh, fully-blank WHO Surgical Safety Checklist record.
  * Strings default to ''; numeric fields default to null; the team-member
@@ -181,13 +176,4 @@ function statusLabel(status) {
   }
 }
 
-Object.assign(window.WhoSurgicalSafetyChecklist, {
-  emptyChecklist,
-  emptyTeamMember,
-  deriveStatus,
-  isSignInComplete,
-  isTimeOutComplete,
-  isSignOutComplete,
-  statusLabel
-});
-})();
+export { emptyChecklist, emptyTeamMember, deriveStatus, isSignInComplete, isTimeOutComplete, isSignOutComplete, statusLabel };

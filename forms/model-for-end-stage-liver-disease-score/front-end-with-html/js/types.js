@@ -131,10 +131,6 @@
 // classic <script> (no ES modules) so the page can be opened directly via
 // `file://`. The IIFE attaches its public symbols to a single global
 // namespace, `window.ModelForEndStageLiverDiseaseScore`.
-(function () {
-'use strict';
-window.ModelForEndStageLiverDiseaseScore =
-  window.ModelForEndStageLiverDiseaseScore || {};
 
 /**
  * Build a fresh, fully-blank assessment.
@@ -270,15 +266,4 @@ function priorityLabel(priority) {
   }
 }
 
-Object.assign(window.ModelForEndStageLiverDiseaseScore, {
-  emptyAssessment,
-  meldVariantLabel,
-  mortalityBandLabel,
-  mortalityBandClass,
-  clinicianRoleLabel,
-  careSettingLabel,
-  sexLabel,
-  ageBandLabel,
-  priorityLabel
-});
-})();
+export { emptyAssessment, meldVariantLabel, mortalityBandLabel, mortalityBandClass, clinicianRoleLabel, careSettingLabel, sexLabel, ageBandLabel, priorityLabel };

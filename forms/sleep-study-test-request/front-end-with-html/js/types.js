@@ -6,11 +6,6 @@
 // Property names are camelCase to match the front-end serde / examples
 // convention. Wrapped in an IIFE; published via `window.SleepStudyTestRequest`.
 
-(function () {
-'use strict';
-window.SleepStudyTestRequest =
-  window.SleepStudyTestRequest || {};
-
 /**
  * Build a fresh, fully-blank sleep study request.
  * Strings default to ''; numeric / date fields default to null;
@@ -95,11 +90,4 @@ function indicationLabel(value) {
   return INDICATION_LABELS[value] || value || '';
 }
 
-Object.assign(window.SleepStudyTestRequest, {
-  emptyRequest,
-  studyTypeLabel,
-  indicationLabel,
-  STUDY_TYPE_LABELS,
-  INDICATION_LABELS
-});
-})();
+export { emptyRequest, studyTypeLabel, indicationLabel, STUDY_TYPE_LABELS, INDICATION_LABELS };

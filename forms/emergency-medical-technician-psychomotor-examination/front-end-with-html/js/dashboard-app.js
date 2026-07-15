@@ -1,3 +1,6 @@
+import { fetchCandidates } from './api.js';
+import { sampleCandidates } from './data.js';
+
 // Emergency Medical Technician Psychomotor Examination - training
 // coordinator dashboard (vanilla classic-script app).
 //
@@ -13,11 +16,6 @@
 // Pulling them off here keeps the rest of this file referring to short
 // local names. The whole file is wrapped in an IIFE so its top-level
 // identifiers do not leak to the global scope.
-(function () {
-'use strict';
-const NS =
-  window.EmergencyMedicalTechnicianPsychomotorExaminationDashboard;
-const { fetchCandidates, sampleCandidates } = NS;
 
 // ----------------------------------------------------------------------
 // State
@@ -551,4 +549,3 @@ if (document.readyState === 'loading') {
 } else {
   init();
 }
-})();

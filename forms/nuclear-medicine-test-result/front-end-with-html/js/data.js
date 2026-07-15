@@ -7,11 +7,6 @@
 // bands, with two critical-alert rows (a high-probability PE on V/Q and a
 // widespread metastatic pattern on a bone scan).
 
-(function () {
-'use strict';
-window.NuclearMedicineTestResultDashboard =
-  window.NuclearMedicineTestResultDashboard || {};
-
 /** @type {import('./dashboard-types.js').ReportRow[]} */
 const sampleReports = [
   {
@@ -100,5 +95,4 @@ const sampleReports = [
   }
 ];
 
-window.NuclearMedicineTestResultDashboard.sampleReports = sampleReports;
-})();
+export { sampleReports };

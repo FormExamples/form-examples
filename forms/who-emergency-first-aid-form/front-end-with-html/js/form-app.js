@@ -1,3 +1,7 @@
+import { validateCfar } from './cfar-validator.js';
+import { detectFlaggedIssues } from './flagged-issues.js';
+import { calculateAge, emptyAssessment, hasText, priorityLabel, sectionLabel } from './types.js';
+
 // WHO Emergency First Aid Form — Community First Aid Responder wizard
 // (vanilla JS, classic <script>).
 //
@@ -9,18 +13,6 @@
 // haemorrhage step. Submission runs the pure validator + flagged-issues
 // engine and renders an inline report. State is persisted to localStorage
 // so a partial fill survives a page reload.
-
-(function () {
-'use strict';
-const {
-  emptyAssessment,
-  hasText,
-  calculateAge,
-  sectionLabel,
-  priorityLabel,
-  validateCfar,
-  detectFlaggedIssues
-} = window.WhoEmergencyFirstAidForm;
 
 const TOTAL_STEPS = 12;
 
@@ -1228,8 +1220,5 @@ if (document.readyState === 'loading') {
 }
 
 // Expose a small debug surface (does not leak state itself).
-Object.assign(window.WhoEmergencyFirstAidForm, {
-  _getState: () => state,
-  _submitForm: submitForm
-});
-})();
+export const _getState = () => state;
+export const _submitForm = submitForm;

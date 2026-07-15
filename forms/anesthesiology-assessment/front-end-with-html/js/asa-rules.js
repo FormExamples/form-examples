@@ -6,10 +6,6 @@
 //
 // ASA-001 — class I-II = low; III = medium; IV = high; V-VI = critical.
 
-(function () {
-'use strict';
-window.AnesthesiologyAssessment = window.AnesthesiologyAssessment || {};
-
 /** Friendly long label for an ASA class. */
 function asaClassLabel(klass) {
   switch (klass) {
@@ -62,9 +58,4 @@ function evaluateAsa(d) {
   return { class: klass, emergency, riskLevel: risk, firedRules };
 }
 
-Object.assign(window.AnesthesiologyAssessment, {
-  asaClassLabel,
-  asaRiskFromClass,
-  evaluateAsa
-});
-})();
+export { asaClassLabel, asaRiskFromClass, evaluateAsa };

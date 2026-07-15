@@ -22,10 +22,6 @@
  */
 
 // Wrapped in an IIFE; published via window.HasBledScoreForMajorBleedingRisk.
-(function () {
-'use strict';
-window.HasBledScoreForMajorBleedingRisk =
-  window.HasBledScoreForMajorBleedingRisk || {};
 
 /** @type {HasBledRule[]} */
 const hasBledRules = [
@@ -124,5 +120,4 @@ const hasBledRules = [
   }
 ];
 
-window.HasBledScoreForMajorBleedingRisk.hasBledRules = hasBledRules;
-})();
+export { hasBledRules };

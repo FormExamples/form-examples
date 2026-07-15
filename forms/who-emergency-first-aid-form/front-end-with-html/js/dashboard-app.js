@@ -1,3 +1,6 @@
+import { fetchPatients } from './api.js';
+import { samplePatients } from './data.js';
+
 // WHO Emergency First Aid Form - clinician dashboard (vanilla classic-script
 // app).
 //
@@ -12,12 +15,6 @@
 // them off here keeps the rest of this file referring to short local names.
 // The whole file is wrapped in an IIFE so its top-level identifiers do not
 // leak to the global scope.
-(function () {
-'use strict';
-const {
-  fetchPatients,
-  samplePatients
-} = window.WhoEmergencyFirstAidDashboard;
 
 // ----------------------------------------------------------------------
 // State
@@ -428,4 +425,3 @@ if (document.readyState === 'loading') {
 } else {
   init();
 }
-})();

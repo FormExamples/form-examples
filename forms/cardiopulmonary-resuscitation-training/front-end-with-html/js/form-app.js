@@ -1,3 +1,8 @@
+import { gradeBLS } from './bls-grader.js';
+import { detectAdditionalFlags } from './flagged-issues.js';
+import { blsRules } from './rules.js';
+import { COMPRESSION_DEPTH_MAX, COMPRESSION_DEPTH_MIN, COMPRESSION_RATE_MAX, COMPRESSION_RATE_MIN, compressionDepthInRange, compressionRateInRange, emptyAssessment, outcomeClass, outcomeLabel, triStateLabel, triStatePillClass } from './types.js';
+
 // Cardiopulmonary Resuscitation Training — examiner wizard (vanilla JS).
 //
 // Single-page continuous wizard: every section is rendered into the page in
@@ -13,26 +18,6 @@
 // rules → bls-grader → flagged-issues → app) attach their exports to
 // `window.CardiopulmonaryResuscitationTraining`. The whole file is wrapped
 // in an IIFE so its top-level identifiers don't leak to the global scope.
-(function () {
-'use strict';
-
-const NS = window.CardiopulmonaryResuscitationTraining;
-const {
-  emptyAssessment,
-  outcomeLabel,
-  outcomeClass,
-  triStateLabel,
-  triStatePillClass,
-  COMPRESSION_RATE_MIN,
-  COMPRESSION_RATE_MAX,
-  COMPRESSION_DEPTH_MIN,
-  COMPRESSION_DEPTH_MAX,
-  compressionRateInRange,
-  compressionDepthInRange,
-  blsRules,
-  gradeBLS,
-  detectAdditionalFlags
-} = NS;
 
 // ----------------------------------------------------------------------
 // Persistence
@@ -1038,4 +1023,3 @@ if (document.readyState === 'loading') {
 } else {
   init();
 }
-})();

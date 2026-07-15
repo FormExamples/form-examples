@@ -55,12 +55,7 @@
 // classic <script> (no ES modules) so the page can be opened directly via
 // `file://`. The IIFE attaches its public symbols to a single global
 // namespace, `window.CentorScoreForStreptococcalPharyngitisDashboard`.
-(function () {
-'use strict';
-window.CentorScoreForStreptococcalPharyngitisDashboard =
-  window.CentorScoreForStreptococcalPharyngitisDashboard || {};
 
 // No runtime exports; types are JSDoc-only. Touch the namespace so this file
 // is unambiguously side-effecting and other files can rely on it loading
 // before they read `window.CentorScoreForStreptococcalPharyngitisDashboard`.
-})();

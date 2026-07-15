@@ -1,19 +1,11 @@
+import { calculateAge, countADLsNeedingHelp, countDependentADLs, countIADLsNeedingHelp } from './utils.js';
+
 // Clinical Frailty Scale (CFS) classification rules.
 // Mirrors `src/lib/engine/cfs-rules.ts` from the SvelteKit reference.
 //
 // Each rule evaluates patient data and returns true if the condition is
 // present. The CFS score is determined by the highest-score rule that fires.
 // CFS 1 is the default when no rules fire (very fit patient).
-
-(function () {
-'use strict';
-window.GerontologyAssessment = window.GerontologyAssessment || {};
-const {
-  calculateAge,
-  countDependentADLs,
-  countADLsNeedingHelp,
-  countIADLsNeedingHelp
-} = window.GerontologyAssessment;
 
 const cfsRules = [
   // ─── CFS 2 - WELL ───────────────────────────────────────
@@ -323,5 +315,4 @@ const cfsRules = [
   }
 ];
 
-window.GerontologyAssessment.cfsRules = cfsRules;
-})();
+export { cfsRules };

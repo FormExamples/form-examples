@@ -6,10 +6,6 @@
 // band, with allergy comorbidities flagged for a subset; NHS numbers in the
 // canonical "NNN NNN NNNN" display form.
 
-(function () {
-'use strict';
-window.AsthmaAssessmentDashboard = window.AsthmaAssessmentDashboard || {};
-
 /** @type {import('./types.js').PatientRow[]} */
 const samplePatients = [
   {
@@ -122,5 +118,4 @@ const samplePatients = [
   }
 ];
 
-window.AsthmaAssessmentDashboard.samplePatients = samplePatients;
-})();
+export { samplePatients };

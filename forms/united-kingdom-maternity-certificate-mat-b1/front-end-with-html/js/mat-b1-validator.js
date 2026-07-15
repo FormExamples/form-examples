@@ -1,3 +1,7 @@
+import { detectAdditionalFlags } from './flagged-issues.js';
+import { matB1Rules } from './mat-b1-rules.js';
+import { priorityOrder, weeksBetween } from './types.js';
+
 // MAT B1 maternity certificate - pure validator.
 //
 // Branching:
@@ -22,12 +26,6 @@
  * @typedef {import('./types.js').FiredRule} FiredRule
  * @typedef {import('./types.js').ValidationResult} ValidationResult
  */
-
-(function () {
-'use strict';
-window.MatB1Form = window.MatB1Form || {};
-const { matB1Rules, priorityOrder, weeksBetween, detectAdditionalFlags } =
-  window.MatB1Form;
 
 /**
  * @param {AssessmentData} data
@@ -78,8 +76,8 @@ function validateMatB1(data) {
   // index.html). The function is added to MatB1Form before this script runs.
   const additionalFlags = (typeof detectAdditionalFlags === 'function')
     ? detectAdditionalFlags(data)
-    : (window.MatB1Form.detectAdditionalFlags
-        ? window.MatB1Form.detectAdditionalFlags(data)
+    : (detectAdditionalFlags
+        ? detectAdditionalFlags(data)
         : []);
 
   const complete =
@@ -104,5 +102,4 @@ function validateMatB1(data) {
   };
 }
 
-window.MatB1Form.validateMatB1 = validateMatB1;
-})();
+export { validateMatB1 };

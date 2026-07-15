@@ -1,3 +1,5 @@
+import { calculateBMI, calculateTcHdlRatio, isSmoker } from './types.js';
+
 // 20 Heart Health Check (HHC) clinical risk rules. Pure functions: each
 // rule's `evaluate()` is a predicate over the assessment data, the calculated
 // 10-year risk percentage, and the calculated heart age. Mirrors
@@ -11,11 +13,6 @@
  * @typedef {import('./types.js').AssessmentData} AssessmentData
  * @typedef {import('./types.js').FiredRule} FiredRule
  */
-
-(function () {
-'use strict';
-window.HeartHealthCheck = window.HeartHealthCheck || {};
-const { calculateBMI, calculateTcHdlRatio, isSmoker } = window.HeartHealthCheck;
 
 function allRules() {
   return [
@@ -233,5 +230,4 @@ function evaluateRules(data, tenYearRisk, heartAge) {
   return fired;
 }
 
-Object.assign(window.HeartHealthCheck, { evaluateRules });
-})();
+export { evaluateRules };

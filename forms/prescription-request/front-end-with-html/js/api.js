@@ -6,10 +6,6 @@
 // server down) or returns an empty list, callers fall back to the sample
 // data shipped in `data.js` so the page is usable standalone.
 
-(function () {
-'use strict';
-window.PrescriptionRequestDashboard = window.PrescriptionRequestDashboard || {};
-
 const API_BASE = 'http://localhost:5150';
 const PRESCRIPTIONS_PATH = '/api/dashboard/prescriptions';
 
@@ -34,6 +30,4 @@ async function fetchPrescriptions() {
   return data.items || [];
 }
 
-window.PrescriptionRequestDashboard.fetchPrescriptions = fetchPrescriptions;
-window.PrescriptionRequestDashboard.API_BASE = API_BASE;
-})();
+export { fetchPrescriptions, API_BASE };

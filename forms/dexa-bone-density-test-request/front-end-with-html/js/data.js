@@ -8,11 +8,6 @@
 // request, a recent-fragility-fracture case, a high-FRAX case, and a
 // duplicate-recent-dexa case.
 
-(function () {
-'use strict';
-window.DexaBoneDensityTestRequestDashboard =
-  window.DexaBoneDensityTestRequestDashboard || {};
-
 /** @type {import('./types.js').RequestRow[]} */
 const sampleRequests = [
   {
@@ -152,5 +147,4 @@ const sampleRequests = [
   }
 ];
 
-window.DexaBoneDensityTestRequestDashboard.sampleRequests = sampleRequests;
-})();
+export { sampleRequests };

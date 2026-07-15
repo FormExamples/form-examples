@@ -7,11 +7,6 @@
 // / examples convention. Wrapped in an IIFE; published via
 // `window.PulmonaryFunctionTestRequest`.
 
-(function () {
-'use strict';
-window.PulmonaryFunctionTestRequest =
-  window.PulmonaryFunctionTestRequest || {};
-
 /**
  * Build a fresh, fully-blank pulmonary function test request.
  * Strings default to ''; numeric fields default to null;
@@ -101,11 +96,4 @@ function indicationLabel(value) {
   return INDICATION_LABELS[value] || value || '';
 }
 
-Object.assign(window.PulmonaryFunctionTestRequest, {
-  emptyRequest,
-  testTypeLabel,
-  TEST_TYPE_LABELS,
-  indicationLabel,
-  INDICATION_LABELS
-});
-})();
+export { emptyRequest, testTypeLabel, TEST_TYPE_LABELS, indicationLabel, INDICATION_LABELS };

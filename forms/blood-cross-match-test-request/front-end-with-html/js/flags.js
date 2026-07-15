@@ -9,12 +9,6 @@
 // Flag IDs are stable and identical across every front-end and the back-end.
 // Wrapped in an IIFE; published via `window.BloodCrossMatchTestRequest`.
 
-(function () {
-'use strict';
-window.BloodCrossMatchTestRequest =
-  window.BloodCrossMatchTestRequest || {};
-const NS = window.BloodCrossMatchTestRequest;
-
 /**
  * Detect safety flags for a blood cross-match / transfusion request.
  *
@@ -134,5 +128,4 @@ function detectFlags(data, context) {
   return flags;
 }
 
-Object.assign(NS, { detectFlags });
-})();
+export { detectFlags };

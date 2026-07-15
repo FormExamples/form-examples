@@ -1,3 +1,5 @@
+import { PASS_PERCENT_THRESHOLD } from './types.js';
+
 // Prioritised flag detection for the NREMT EMT Psychomotor Skills
 // Examination report.
 //
@@ -20,14 +22,6 @@
  * @typedef {import('./types.js').AdditionalFlag} AdditionalFlag
  * @typedef {import('./types.js').FiredRule} FiredRule
  */
-
-(function () {
-'use strict';
-window.EmergencyMedicalTechnicianPsychomotorExamination =
-  window.EmergencyMedicalTechnicianPsychomotorExamination || {};
-
-const NS = window.EmergencyMedicalTechnicianPsychomotorExamination;
-const { PASS_PERCENT_THRESHOLD } = NS;
 
 /** Threshold for "multiple non-critical deficiencies overall". */
 const MULTI_DEF_THRESHOLD = 3;
@@ -209,9 +203,4 @@ function detectAdditionalFlags(data, grading) {
   return flags;
 }
 
-Object.assign(NS, {
-  detectAdditionalFlags,
-  MULTI_DEF_THRESHOLD,
-  PRIMARY_SURVEY_INCOMPLETE_THRESHOLD
-});
-})();
+export { detectAdditionalFlags, MULTI_DEF_THRESHOLD, PRIMARY_SURVEY_INCOMPLETE_THRESHOLD };

@@ -1,3 +1,7 @@
+import { detectFlags } from './flags.js';
+import { computeCompleteness } from './rules.js';
+import { fullyPopulatedQualityScenarios, nonDraftAdrs, risksWithMitigation } from './types.js';
+
 // Documentation-maturity grader for the arc42 form.
 //
 // Ported verbatim from the SvelteKit `maturity-grader.ts`. Composes the
@@ -16,18 +20,6 @@
 // front-end and the back-end. Public entry point: `calculateMaturity(d)`.
 //
 // Wrapped in an IIFE; published via `window.Arc42`.
-
-(function () {
-'use strict';
-window.Arc42 = window.Arc42 || {};
-const NS = window.Arc42;
-const {
-  computeCompleteness,
-  detectFlags,
-  nonDraftAdrs,
-  fullyPopulatedQualityScenarios,
-  risksWithMitigation
-} = NS;
 
 /**
  * Derive the computed maturity band from per-section completeness plus the
@@ -73,5 +65,4 @@ function calculateMaturity(d) {
   return { computedMaturity, finalMaturity, completenessBySection, firedRules, additionalFlags };
 }
 
-Object.assign(NS, { calculateMaturity, bandFromCompleteness });
-})();
+export { calculateMaturity, bandFromCompleteness };

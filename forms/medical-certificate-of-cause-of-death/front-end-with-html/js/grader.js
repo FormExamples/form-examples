@@ -1,3 +1,5 @@
+import { coronerReferralIndicated, missingPartIa, unacceptableSoleCause, underlyingCause } from './rules.js';
+
 // Medical Certificate of Cause of Death (MCCD) validity grader. Pure functions:
 // take a `DeathCertificate` object, evaluate the coroner-referral criteria, the
 // completeness of Part I, and the acceptability of the stated cause, and assign
@@ -22,16 +24,6 @@
  */
 
 // Wrapped in an IIFE; published via window.MedicalCertificateOfCauseOfDeath.
-(function () {
-'use strict';
-window.MedicalCertificateOfCauseOfDeath =
-  window.MedicalCertificateOfCauseOfDeath || {};
-const {
-  coronerReferralIndicated,
-  unacceptableSoleCause,
-  missingPartIa,
-  underlyingCause
-} = window.MedicalCertificateOfCauseOfDeath;
 
 /**
  * Assign the single validity class (spec §4).
@@ -61,8 +53,4 @@ function validateCertificate(d) {
   };
 }
 
-Object.assign(window.MedicalCertificateOfCauseOfDeath, {
-  deriveValidityClass,
-  validateCertificate
-});
-})();
+export { deriveValidityClass, validateCertificate };

@@ -146,10 +146,6 @@
 // classic <script> (no ES modules) so the page can be opened directly via
 // `file://`. The IIFE attaches its public symbols to a single global
 // namespace, `window.MastCellActivationSyndromeAssessment`.
-(function () {
-'use strict';
-window.MastCellActivationSyndromeAssessment =
-  window.MastCellActivationSyndromeAssessment || {};
 
 /** @returns {SymptomDetail} */
 function emptySymptomDetail() {
@@ -255,10 +251,4 @@ function mcasCategoryClass(score) {
   return 'mcas-severe';
 }
 
-Object.assign(window.MastCellActivationSyndromeAssessment, {
-  emptyAssessment,
-  emptySymptomDetail,
-  mcasCategory,
-  mcasCategoryClass
-});
-})();
+export { emptyAssessment, emptySymptomDetail, mcasCategory, mcasCategoryClass };

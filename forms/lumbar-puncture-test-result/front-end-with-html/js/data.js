@@ -6,11 +6,6 @@
 // critical / inconclusive), the severity ladder, and the follow-up urgency
 // bands, with two critical-alert rows (a bacterial pattern and an SAH pattern).
 
-(function () {
-'use strict';
-window.LumbarPunctureTestResultDashboard =
-  window.LumbarPunctureTestResultDashboard || {};
-
 /** @type {import('./dashboard-types.js').ReportRow[]} */
 const sampleReports = [
   {
@@ -87,5 +82,4 @@ const sampleReports = [
   }
 ];
 
-window.LumbarPunctureTestResultDashboard.sampleReports = sampleReports;
-})();
+export { sampleReports };

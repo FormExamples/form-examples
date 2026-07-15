@@ -6,11 +6,6 @@
 // Day. A subset are flagged as overdue so the default sort can demonstrate
 // the "overdue first" behaviour required for HR triage.
 
-(function () {
-'use strict';
-window.EmployeeOnboardingChecklistDashboard =
-  window.EmployeeOnboardingChecklistDashboard || {};
-
 /** @type {import('./types.js').EmployeeRow[]} */
 const sampleEmployees = [
   {
@@ -159,5 +154,4 @@ const sampleEmployees = [
   }
 ];
 
-window.EmployeeOnboardingChecklistDashboard.sampleEmployees = sampleEmployees;
-})();
+export { sampleEmployees };

@@ -8,11 +8,6 @@
 // grades to an overall E because two PROM instruments worsened (PROM > worst
 // of the other three domains).
 
-(function () {
-'use strict';
-window.OutpatientOutcomeDashboard =
-  window.OutpatientOutcomeDashboard || {};
-
 /** @type {import('./dashboard-types.js').OutcomeRow[]} */
 const sampleOutcomes = [
   {
@@ -73,5 +68,4 @@ const sampleOutcomes = [
   }
 ];
 
-window.OutpatientOutcomeDashboard.sampleOutcomes = sampleOutcomes;
-})();
+export { sampleOutcomes };

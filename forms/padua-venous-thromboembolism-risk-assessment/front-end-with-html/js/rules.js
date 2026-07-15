@@ -20,10 +20,6 @@
  */
 
 // Wrapped in an IIFE; published via window.PaduaVenousThromboembolismRiskAssessment.
-(function () {
-'use strict';
-window.PaduaVenousThromboembolismRiskAssessment =
-  window.PaduaVenousThromboembolismRiskAssessment || {};
 
 /** @type {PaduaRule[]} */
 const paduaRules = [
@@ -142,5 +138,4 @@ const paduaRules = [
   }
 ];
 
-window.PaduaVenousThromboembolismRiskAssessment.paduaRules = paduaRules;
-})();
+export { paduaRules };

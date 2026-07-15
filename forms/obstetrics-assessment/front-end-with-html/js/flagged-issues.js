@@ -9,9 +9,6 @@
  */
 
 // Wrapped in an IIFE; published via window.ObstetricsAssessment.
-(function () {
-'use strict';
-window.ObstetricsAssessment = window.ObstetricsAssessment || {};
 
 /**
  * @param {AssessmentData} data
@@ -365,5 +362,4 @@ function detectAdditionalFlags(data) {
   return flags;
 }
 
-window.ObstetricsAssessment.detectAdditionalFlags = detectAdditionalFlags;
-})();
+export { detectAdditionalFlags };

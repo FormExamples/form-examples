@@ -1,8 +1,13 @@
-(function (root, doc) {
-  const ns = root.MedicalWaitingListCard;
+import { calculateWaitingTimeStatus } from './composite-grader.js';
+import { STEPS, createEmptyCard } from './types.js';
+
+const root = window;
+const doc = document;
+
+  
   const STORAGE_KEY = 'medical-waiting-list-card-draft-v1';
 
-  const state = ns.createEmptyCard();
+  const state = createEmptyCard();
 
   function load() {
     try {
@@ -81,7 +86,7 @@
     const list = doc.getElementById('step-list');
     if (!list) return;
     list.innerHTML = '';
-    ns.STEPS.forEach(function (s) {
+    STEPS.forEach(function (s) {
       const li = doc.createElement('li');
       li.className = 'step-list-item';
       li.setAttribute('data-status', 'waiting');
@@ -128,7 +133,7 @@
     // Update step-list item status
     const items = doc.querySelectorAll('#step-list .step-list-item');
     items.forEach(function (li, idx) {
-      const slug = ns.STEPS[idx].slug;
+      const slug = STEPS[idx].slug;
       const sectionKey =
         slug === 'waiting-list' ? 'waitingList' : slug === 'signoff' ? 'signoff' : slug;
       const c = countSectionFilled(state[sectionKey]);
@@ -151,7 +156,7 @@
   }
 
   function recompute() {
-    const r = ns.calculateWaitingTimeStatus(state);
+    const r = calculateWaitingTimeStatus(state);
     renderReport(r);
   }
 
@@ -251,4 +256,3 @@
   } else {
     init();
   }
-})(window, document);

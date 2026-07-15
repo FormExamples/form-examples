@@ -6,11 +6,6 @@
 // both directions of delta-SOFA (improving and deteriorating), and set the
 // Sepsis-3 flag wherever infection is suspected and delta-SOFA is >= 2.
 
-(function () {
-'use strict';
-window.SequentialOrganFailureAssessmentDashboard =
-  window.SequentialOrganFailureAssessmentDashboard || {};
-
 /** @type {import('./dashboard-types.js').AssessmentRow[]} */
 const sampleAssessments = [
   {
@@ -81,6 +76,4 @@ const sampleAssessments = [
   }
 ];
 
-window.SequentialOrganFailureAssessmentDashboard.sampleAssessments =
-  sampleAssessments;
-})();
+export { sampleAssessments };

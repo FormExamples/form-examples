@@ -1,3 +1,5 @@
+import { classifyDiseaseActivity } from './types.js';
+
 // Flagged-issue detection. Independent of the DAS28 score (which the
 // grader computes) but uses the same DAS28 formula to detect "high
 // disease activity" status. Raises clinician-facing flags for cervical
@@ -12,10 +14,6 @@
  */
 
 // Wrapped in an IIFE; published via window.RheumatologyAssessment.
-(function () {
-'use strict';
-window.RheumatologyAssessment = window.RheumatologyAssessment || {};
-const { classifyDiseaseActivity } = window.RheumatologyAssessment;
 
 /**
  * @param {AssessmentData} data
@@ -224,5 +222,4 @@ function detectAdditionalFlags(data) {
   return flags;
 }
 
-window.RheumatologyAssessment.detectAdditionalFlags = detectAdditionalFlags;
-})();
+export { detectAdditionalFlags };

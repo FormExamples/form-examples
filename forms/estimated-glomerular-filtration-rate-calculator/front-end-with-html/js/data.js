@@ -6,11 +6,6 @@
 // and several care settings. referralFlag is set whenever the stage is G4 or
 // G5 (nephrology referral per NICE NG203).
 
-(function () {
-'use strict';
-window.EstimatedGlomerularFiltrationRateCalculatorDashboard =
-  window.EstimatedGlomerularFiltrationRateCalculatorDashboard || {};
-
 /** @type {import('./dashboard-types.js').AssessmentRow[]} */
 const sampleAssessments = [
   {
@@ -85,6 +80,4 @@ const sampleAssessments = [
   }
 ];
 
-window.EstimatedGlomerularFiltrationRateCalculatorDashboard.sampleAssessments =
-  sampleAssessments;
-})();
+export { sampleAssessments };

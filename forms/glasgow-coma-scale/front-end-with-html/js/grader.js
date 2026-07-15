@@ -1,3 +1,5 @@
+import { bandForTotal, descriptorLabel, eyeOptions, motorOptions, severityBands, verbalOptions } from './rules.js';
+
 // Glasgow Coma Scale grader. Pure functions: take an `AssessmentData` object,
 // resolve each component descriptor to a numeric score (or null for "not
 // testable"), sum the total, band it, and derive the secondary GCS-Pupils
@@ -26,13 +28,6 @@
  */
 
 // Wrapped in an IIFE; published via window.GlasgowComaScale.
-(function () {
-'use strict';
-window.GlasgowComaScale = window.GlasgowComaScale || {};
-const {
-  eyeOptions, verbalOptions, motorOptions,
-  descriptorLabel, bandForTotal, severityBands
-} = window.GlasgowComaScale;
 
 /** Uppercase a descriptor enum for a rule id, e.g. 'to-sound' -> 'TO-SOUND'. */
 function ruleToken(value) {
@@ -197,8 +192,4 @@ function calculateGcsGrade(data) {
   };
 }
 
-Object.assign(window.GlasgowComaScale, {
-  resolveComponent,
-  calculateGcsGrade
-});
-})();
+export { resolveComponent, calculateGcsGrade };

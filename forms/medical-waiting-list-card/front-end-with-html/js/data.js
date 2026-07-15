@@ -2,9 +2,7 @@
 // SvelteKit dashboard's `src/lib/sample-data.ts`. Used standalone when the
 // backend is unreachable.
 
-(function () {
-  'use strict';
-  window.MedicalWaitingListCardDashboard = window.MedicalWaitingListCardDashboard || {};
+  
 
   /** @type {import('./types.js').WaitingListCardSummary[]} */
   const samples = [
@@ -166,5 +164,6 @@
     }
   ];
 
-  window.MedicalWaitingListCardDashboard.sampleCards = samples;
-})();
+  
+
+export { samples as sampleCards };

@@ -1,3 +1,6 @@
+import { detectFlags } from './flags.js';
+import { classifyResult, gradeCompleteness, gradeFollowUp, gradeSeverity } from './rules.js';
+
 // Angiography four-axis grader. Faithful vanilla-JS port of the SvelteKit
 // engine module `src/lib/engine/grader.ts`.
 //
@@ -23,16 +26,6 @@
  */
 
 // Wrapped in an IIFE; published via window.AngiographyTestResult.
-(function () {
-'use strict';
-window.AngiographyTestResult = window.AngiographyTestResult || {};
-const {
-  classifyResult,
-  gradeSeverity,
-  gradeCompleteness,
-  gradeFollowUp,
-  detectFlags
-} = window.AngiographyTestResult;
 
 /**
  * Derives the overall recommendation from the graded axes.
@@ -84,7 +77,7 @@ function calculateGrade(result) {
 
   // `flags.js` loads after this file, so resolve detectFlags lazily off the
   // namespace when not captured at load time.
-  const detect = detectFlags || window.AngiographyTestResult.detectFlags;
+  const detect = detectFlags || detectFlags;
   const flags = detect(result);
 
   return {
@@ -102,8 +95,4 @@ function calculateGrade(result) {
   };
 }
 
-Object.assign(window.AngiographyTestResult, {
-  calculateGrade,
-  deriveRecommendation
-});
-})();
+export { calculateGrade, deriveRecommendation };

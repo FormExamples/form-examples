@@ -11,12 +11,6 @@
 //
 // Wrapped in an IIFE; published via `window.MammographyTestRequest`.
 
-(function () {
-'use strict';
-window.MammographyTestRequest =
-  window.MammographyTestRequest || {};
-const NS = window.MammographyTestRequest;
-
 // ----------------------------------------------------------------------
 // Axis A — Appropriateness (ACR Appropriateness Criteria 1-9 ordinal)
 // ----------------------------------------------------------------------
@@ -376,18 +370,4 @@ function scorePriority(data) {
   return { band, firedRules };
 }
 
-Object.assign(NS, {
-  scoreAppropriateness,
-  appropriatenessBand,
-  scoreUrgency,
-  scoreCompleteness,
-  scorePriority,
-  maxTier,
-  maxPriority,
-  ageInYears,
-  TRIAGE_ORDER,
-  PRIORITY_ORDER,
-  TARGET_TIMEFRAMES,
-  INDICATION_EXAM_MAP
-});
-})();
+export { scoreAppropriateness, appropriatenessBand, scoreUrgency, scoreCompleteness, scorePriority, maxTier, maxPriority, ageInYears, TRIAGE_ORDER, PRIORITY_ORDER, TARGET_TIMEFRAMES, INDICATION_EXAM_MAP };

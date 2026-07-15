@@ -1,3 +1,7 @@
+import { detectFlaggedIssues } from './flags.js';
+import { calculateCha2ds2VascGrade } from './grader.js';
+import { ageBandLabel, anticoagulationLabel, emptyAssessment, priorityLabel, riskBandClass, riskBandLabel } from './types.js';
+
 // CHA2DS2-VASc Score for Atrial Fibrillation Stroke Risk — single-page wizard
 // (vanilla JavaScript, no build).
 //
@@ -14,20 +18,6 @@
 // exports to `window.Cha2ds2VascScoreForAtrialFibrillationStrokeRisk`. Pulling
 // them off here keeps the rest of this file referring to short local names.
 // The whole file is wrapped in an IIFE so its top-level identifiers don't leak.
-(function () {
-'use strict';
-
-const NS = window.Cha2ds2VascScoreForAtrialFibrillationStrokeRisk;
-const {
-  emptyAssessment,
-  riskBandLabel,
-  riskBandClass,
-  anticoagulationLabel,
-  ageBandLabel,
-  priorityLabel,
-  calculateCha2ds2VascGrade,
-  detectFlaggedIssues
-} = NS;
 
 // ----------------------------------------------------------------------
 // Persistence
@@ -982,4 +972,3 @@ if (document.readyState === 'loading') {
 } else {
   init();
 }
-})();

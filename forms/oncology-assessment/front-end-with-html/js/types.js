@@ -190,9 +190,6 @@
 // classic <script> (no ES modules) so the page works when opened via
 // `file://`. The IIFE attaches its public symbols to a single global
 // namespace, `window.OncologyAssessment`.
-(function () {
-'use strict';
-window.OncologyAssessment = window.OncologyAssessment || {};
 
 /**
  * Build a fresh, fully-blank assessment.
@@ -360,12 +357,4 @@ function karnofskyToECOG(kps) {
   return 4;
 }
 
-Object.assign(window.OncologyAssessment, {
-  emptyAssessment,
-  calculateBMI,
-  bmiCategory,
-  ecogGradeLabel,
-  ecogGradeClass,
-  karnofskyToECOG
-});
-})();
+export { emptyAssessment, calculateBMI, bmiCategory, ecogGradeLabel, ecogGradeClass, karnofskyToECOG };

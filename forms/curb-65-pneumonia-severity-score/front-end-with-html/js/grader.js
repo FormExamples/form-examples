@@ -1,3 +1,5 @@
+import { curb65Rules } from './rules.js';
+
 // CURB-65 grader. Pure functions: take an `AssessmentData` object, evaluate the
 // five criterion rules in `curb65Rules`, award 0 or 1 point each, sum the total,
 // and derive the mortality-risk band and recommended site-of-care disposition.
@@ -29,11 +31,6 @@
  */
 
 // Wrapped in an IIFE; published via window.Curb65PneumoniaSeverityScore.
-(function () {
-'use strict';
-window.Curb65PneumoniaSeverityScore =
-  window.Curb65PneumoniaSeverityScore || {};
-const { curb65Rules } = window.Curb65PneumoniaSeverityScore;
 
 /**
  * Evaluate the five CURB-65 criterion rules and collect the ones that fired.
@@ -175,8 +172,4 @@ function calculateCurb65Grade(data) {
   };
 }
 
-Object.assign(window.Curb65PneumoniaSeverityScore, {
-  evaluateCriteria,
-  calculateCurb65Grade
-});
-})();
+export { evaluateCriteria, calculateCurb65Grade };

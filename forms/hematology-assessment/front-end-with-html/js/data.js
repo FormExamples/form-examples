@@ -6,10 +6,6 @@
 // critical) and the full score range, with flagged issues counted for a
 // subset; MRN values in the canonical "MRN-NNNNNNNN" display form.
 
-(function () {
-'use strict';
-window.HematologyAssessmentDashboard = window.HematologyAssessmentDashboard || {};
-
 /** @type {import('./types.js').PatientRow[]} */
 const samplePatients = [
   {
@@ -146,5 +142,4 @@ const samplePatients = [
   }
 ];
 
-window.HematologyAssessmentDashboard.samplePatients = samplePatients;
-})();
+export { samplePatients };

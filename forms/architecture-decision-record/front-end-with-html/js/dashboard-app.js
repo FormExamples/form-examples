@@ -1,14 +1,13 @@
 /*
  * ADR register dashboard.
  *
- * Reads window.ARCHITECTURE_DECISION_RECORDS (set by data.js), renders a
+ * Reads ARCHITECTURE_DECISION_RECORDS (set by data.js), renders a
  * sortable, filterable register table, and links each row to the rendered
  * Markdown ADR.
  */
-(function () {
-  'use strict';
+import { ARCHITECTURE_DECISION_RECORDS } from './data.js';
 
-  var DATA = window.ARCHITECTURE_DECISION_RECORDS || [];
+  var DATA = ARCHITECTURE_DECISION_RECORDS || [];
 
   // Display order: superseded/deprecated last by default
   var STATUS_ORDER = ['pending', 'decided', 'approved', 'superseded', 'deprecated'];
@@ -147,4 +146,3 @@
     wire();
     render();
   });
-})();

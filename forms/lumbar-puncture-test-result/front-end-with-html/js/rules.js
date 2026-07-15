@@ -19,9 +19,6 @@
  */
 
 // Wrapped in an IIFE; published via window.LumbarPunctureTestResult.
-(function () {
-'use strict';
-window.LumbarPunctureTestResult = window.LumbarPunctureTestResult || {};
 
 // ----------------------------------------------------------------------
 // Structured-findings predicates (mirror `utils.ts`)
@@ -464,13 +461,4 @@ function gradeFollowUp(r, classification, severity) {
   };
 }
 
-Object.assign(window.LumbarPunctureTestResult, {
-  culturePositive,
-  hasCriticalFinding,
-  hasAnyAbnormalFinding,
-  classifyResult,
-  gradeSeverity,
-  gradeCompleteness,
-  gradeFollowUp
-});
-})();
+export { culturePositive, hasCriticalFinding, hasAnyAbnormalFinding, classifyResult, gradeSeverity, gradeCompleteness, gradeFollowUp };

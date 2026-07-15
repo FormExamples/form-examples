@@ -1,3 +1,5 @@
+import { anyAgreed, daysBetween } from './types.js';
+
 // Compliance-and-risk flag detection for the Neurodiversity Adjustment Response
 // engine.
 //
@@ -11,13 +13,6 @@
 // Each flag is { flagId, category, priority, description, suggestedAction }.
 // Flag IDs are stable and identical across every front-end and the back-end.
 // Wrapped in an IIFE; published via `window.NeurodiversityAdjustmentResponse`.
-
-(function () {
-'use strict';
-window.NeurodiversityAdjustmentResponse =
-  window.NeurodiversityAdjustmentResponse || {};
-const NS = window.NeurodiversityAdjustmentResponse;
-const { anyAgreed, daysBetween } = NS;
 
 /**
  * Detect compliance-and-risk flags for a neurodiversity adjustment response.
@@ -125,5 +120,4 @@ function detectFlags(r, axes) {
   return flags;
 }
 
-Object.assign(NS, { detectFlags });
-})();
+export { detectFlags };

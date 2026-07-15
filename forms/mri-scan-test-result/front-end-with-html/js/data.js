@@ -6,11 +6,6 @@
 // critical / inconclusive), the severity ladder, and the follow-up urgency
 // bands, with a critical-alert row whose cord compression raised three flags.
 
-(function () {
-'use strict';
-window.MriScanTestResultDashboard =
-  window.MriScanTestResultDashboard || {};
-
 /** @type {import('./dashboard-types.js').ReportRow[]} */
 const sampleReports = [
   {
@@ -87,5 +82,4 @@ const sampleReports = [
   }
 ];
 
-window.MriScanTestResultDashboard.sampleReports = sampleReports;
-})();
+export { sampleReports };

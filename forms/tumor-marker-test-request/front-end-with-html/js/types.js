@@ -8,11 +8,6 @@
 // (mirroring the BOOLEAN columns in SQL migration 04), defaulting to false.
 // Wrapped in an IIFE; published via `window.TumorMarkerTestRequest`.
 
-(function () {
-'use strict';
-window.TumorMarkerTestRequest =
-  window.TumorMarkerTestRequest || {};
-
 /**
  * Build a fresh, fully-blank serum tumour-marker request.
  * Strings default to ''; numeric / date fields default to null;
@@ -122,14 +117,4 @@ function indicationLabel(value) {
   return INDICATION_LABELS[value] || value || '';
 }
 
-Object.assign(window.TumorMarkerTestRequest, {
-  emptyRequest,
-  MARKERS,
-  MARKER_LABELS,
-  markerLabel,
-  countSelectedMarkers,
-  selectedMarkerFields,
-  INDICATION_LABELS,
-  indicationLabel
-});
-})();
+export { emptyRequest, MARKERS, MARKER_LABELS, markerLabel, countSelectedMarkers, selectedMarkerFields, INDICATION_LABELS, indicationLabel };

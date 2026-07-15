@@ -6,11 +6,6 @@
 // Immediate → Level 5 Non-urgent), the NEWS2 escalation, and every care
 // setting.
 
-(function () {
-'use strict';
-window.EmergencyDepartmentTriageNoteDashboard =
-  window.EmergencyDepartmentTriageNoteDashboard || {};
-
 /** @type {import('./dashboard-types.js').TriageRow[]} */
 const sampleTriageNotes = [
   {
@@ -106,5 +101,4 @@ const sampleTriageNotes = [
   }
 ];
 
-window.EmergencyDepartmentTriageNoteDashboard.sampleTriageNotes = sampleTriageNotes;
-})();
+export { sampleTriageNotes };

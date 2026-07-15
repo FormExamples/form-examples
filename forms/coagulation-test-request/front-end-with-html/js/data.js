@@ -8,11 +8,6 @@
 // request, a STAT active-bleeding case, a suspected-DIC case, and a
 // no-test-selected case.
 
-(function () {
-'use strict';
-window.CoagulationTestRequestDashboard =
-  window.CoagulationTestRequestDashboard || {};
-
 /** @type {import('./types.js').RequestRow[]} */
 const sampleRequests = [
   {
@@ -157,5 +152,4 @@ const sampleRequests = [
   }
 ];
 
-window.CoagulationTestRequestDashboard.sampleRequests = sampleRequests;
-})();
+export { sampleRequests };

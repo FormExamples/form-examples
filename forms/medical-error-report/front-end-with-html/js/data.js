@@ -6,10 +6,6 @@
 // of the NCC MERP A-I categories, with the reported flag set on a subset.
 // NHS numbers in the canonical "NNN NNN NNNN" display form.
 
-(function () {
-'use strict';
-window.MedicalErrorReportDashboard = window.MedicalErrorReportDashboard || {};
-
 /** @type {import('./types.js').IncidentRow[]} */
 const sampleIncidents = [
   {
@@ -146,5 +142,4 @@ const sampleIncidents = [
   }
 ];
 
-window.MedicalErrorReportDashboard.sampleIncidents = sampleIncidents;
-})();
+export { sampleIncidents };

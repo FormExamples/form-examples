@@ -1,3 +1,7 @@
+import { calculateASRS } from './asrs-grader.js';
+import { detectAdditionalFlags } from './flagged-issues.js';
+import { adhdSubtypeLabel, asrsClassificationClass, asrsClassificationLabel, asrsFrequencyLabel, emptyAssessment } from './types.js';
+
 // Attention Deficit Assessment — patient wizard (vanilla JavaScript, no build).
 //
 // Single-page continuous wizard: every section is rendered into the page in
@@ -10,19 +14,6 @@
 // exports to `window.AttentionDeficitAssessment`. Pulling them off here
 // keeps the rest of this file referring to short local names. Whole file
 // is wrapped in an IIFE so its top-level identifiers don't leak.
-(function () {
-'use strict';
-
-const NS = window.AttentionDeficitAssessment;
-const {
-  emptyAssessment,
-  calculateASRS,
-  detectAdditionalFlags,
-  asrsFrequencyLabel,
-  asrsClassificationLabel,
-  asrsClassificationClass,
-  adhdSubtypeLabel
-} = NS;
 
 // ----------------------------------------------------------------------
 // Persistence
@@ -1200,4 +1191,3 @@ if (document.readyState === 'loading') {
 } else {
   init();
 }
-})();

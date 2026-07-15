@@ -13,12 +13,6 @@
 //
 // Wrapped in an IIFE; published via `window.BronchoscopyTestRequest`.
 
-(function () {
-'use strict';
-window.BronchoscopyTestRequest =
-  window.BronchoscopyTestRequest || {};
-const NS = window.BronchoscopyTestRequest;
-
 // ----------------------------------------------------------------------
 // Axis A — Appropriateness (BTS bronchoscopy + indication match, 1-9)
 // ----------------------------------------------------------------------
@@ -408,19 +402,4 @@ function scoreRisk(data) {
   };
 }
 
-Object.assign(NS, {
-  scoreAppropriateness,
-  appropriatenessBand,
-  scoreUrgency,
-  scoreCompleteness,
-  scoreRisk,
-  isTwoWeekWaitEligible,
-  deriveAnticoagulantAction,
-  maxTier,
-  maxBand,
-  TRIAGE_ORDER,
-  TARGET_TIMEFRAMES,
-  RISK_ORDER,
-  INDICATION_PROCEDURE_MAP
-});
-})();
+export { scoreAppropriateness, appropriatenessBand, scoreUrgency, scoreCompleteness, scoreRisk, isTwoWeekWaitEligible, deriveAnticoagulantAction, maxTier, maxBand, TRIAGE_ORDER, TARGET_TIMEFRAMES, RISK_ORDER, INDICATION_PROCEDURE_MAP };

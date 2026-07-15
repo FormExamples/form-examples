@@ -1,3 +1,5 @@
+import { isDatePast } from './types.js';
+
 // Flagged-issue detection for HR managers. Independent of the rule engine
 // and completion percentage, this module raises priority alerts about
 // safety-critical onboarding items: DBS, right to work, OH clearance,
@@ -12,10 +14,6 @@
  */
 
 // Wrapped in an IIFE; published via window.EmployeeOnboardingChecklist.
-(function () {
-'use strict';
-window.EmployeeOnboardingChecklist = window.EmployeeOnboardingChecklist || {};
-const NS = window.EmployeeOnboardingChecklist;
 
 /**
  * @param {AssessmentData} data
@@ -58,7 +56,7 @@ function detectAdditionalFlags(data) {
         id: 'FLAG-RTW-002',
         category: 'Pre-Employment',
         message: `Right to work expires ${data.preEmploymentChecks.rightToWorkExpiryDate} - renewal required`,
-        priority: NS.isDatePast(data.preEmploymentChecks.rightToWorkExpiryDate) ? 'high' : 'medium'
+        priority: isDatePast(data.preEmploymentChecks.rightToWorkExpiryDate) ? 'high' : 'medium'
       });
     }
   }
@@ -108,7 +106,7 @@ function detectAdditionalFlags(data) {
 
   // ─── Registration expiry (HIGH) ─────────────────────────────
   if (data.professionalRegistration.registrationExpiryDate) {
-    if (NS.isDatePast(data.professionalRegistration.registrationExpiryDate)) {
+    if (isDatePast(data.professionalRegistration.registrationExpiryDate)) {
       flags.push({
         id: 'FLAG-REG-002',
         category: 'Professional Registration',
@@ -184,5 +182,4 @@ function detectAdditionalFlags(data) {
   return flags;
 }
 
-window.EmployeeOnboardingChecklist.detectAdditionalFlags = detectAdditionalFlags;
-})();
+export { detectAdditionalFlags };

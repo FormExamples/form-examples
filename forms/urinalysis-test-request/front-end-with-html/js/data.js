@@ -8,11 +8,6 @@
 // visible-haematuria 2WW case, a specimen-not-collected case, and a
 // no-test-selected case. `tests` lists the selected tests (camelCase keys).
 
-(function () {
-'use strict';
-window.UrinalysisTestRequestDashboard =
-  window.UrinalysisTestRequestDashboard || {};
-
 /** @type {import('./types.js').RequestRow[]} */
 const sampleRequests = [
   {
@@ -157,5 +152,4 @@ const sampleRequests = [
   }
 ];
 
-window.UrinalysisTestRequestDashboard.sampleRequests = sampleRequests;
-})();
+export { sampleRequests };

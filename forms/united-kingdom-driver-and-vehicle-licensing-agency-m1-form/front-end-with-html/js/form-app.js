@@ -1,3 +1,6 @@
+import { validateM1 } from './m1-validator.js';
+import { emptyAssessment, priorityLabel } from './types.js';
+
 // DVLA M1 — patient wizard (vanilla classic <script>).
 //
 // Single-page continuous wizard: every section is rendered into the page in
@@ -10,14 +13,6 @@
 // and Q3 (Recent Contact) section cards are hidden from view entirely; the
 // form ends after Q1 -> Authorisation. When Q1 = Yes, both sections are
 // visible. This mirrors the SvelteKit step components.
-
-(function () {
-'use strict';
-const {
-  emptyAssessment,
-  validateM1,
-  priorityLabel
-} = window.DvlaM1Form;
 
 // ----------------------------------------------------------------------
 // Persistence
@@ -1006,4 +1001,3 @@ if (document.readyState === 'loading') {
 } else {
   init();
 }
-})();

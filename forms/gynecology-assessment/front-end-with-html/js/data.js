@@ -6,10 +6,6 @@
 // screening-status value, with symptom scores covering the full
 // minimal -> severe range; NHS numbers in the canonical "NNN NNN NNNN" form.
 
-(function () {
-'use strict';
-window.GynecologyAssessmentDashboard = window.GynecologyAssessmentDashboard || {};
-
 /** @type {import('./types.js').PatientRow[]} */
 const samplePatients = [
   {
@@ -122,5 +118,4 @@ const samplePatients = [
   }
 ];
 
-window.GynecologyAssessmentDashboard.samplePatients = samplePatients;
-})();
+export { samplePatients };

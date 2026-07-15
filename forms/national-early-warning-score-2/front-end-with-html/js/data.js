@@ -6,11 +6,6 @@
 // high), the red-score escalation (a single parameter = 3 lifting an otherwise
 // low aggregate into low-medium), and every care setting.
 
-(function () {
-'use strict';
-window.NationalEarlyWarningScore2Dashboard =
-  window.NationalEarlyWarningScore2Dashboard || {};
-
 /** @type {import('./dashboard-types.js').AssessmentRow[]} */
 const sampleAssessments = [
   {
@@ -92,5 +87,4 @@ const sampleAssessments = [
   }
 ];
 
-window.NationalEarlyWarningScore2Dashboard.sampleAssessments = sampleAssessments;
-})();
+export { sampleAssessments };

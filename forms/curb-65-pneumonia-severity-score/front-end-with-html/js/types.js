@@ -143,10 +143,6 @@
 // classic <script> (no ES modules) so the page can be opened directly via
 // `file://`. The IIFE attaches its public symbols to a single global
 // namespace, `window.Curb65PneumoniaSeverityScore`.
-(function () {
-'use strict';
-window.Curb65PneumoniaSeverityScore =
-  window.Curb65PneumoniaSeverityScore || {};
 
 /**
  * Build a fresh, fully-blank assessment.
@@ -284,15 +280,4 @@ function priorityLabel(priority) {
   }
 }
 
-Object.assign(window.Curb65PneumoniaSeverityScore, {
-  emptyAssessment,
-  riskBandLabel,
-  riskBandClass,
-  scoreVariantLabel,
-  dispositionLabel,
-  clinicianRoleLabel,
-  careSettingLabel,
-  sexLabel,
-  priorityLabel
-});
-})();
+export { emptyAssessment, riskBandLabel, riskBandClass, scoreVariantLabel, dispositionLabel, clinicianRoleLabel, careSettingLabel, sexLabel, priorityLabel };

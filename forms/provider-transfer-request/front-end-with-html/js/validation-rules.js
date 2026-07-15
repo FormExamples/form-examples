@@ -1,3 +1,5 @@
+import { acknowledgementStarted, hasText, isYesNoUnknownAnswered } from './types.js';
+
 // Provider Transfer Request - SBAR completeness validation rules.
 //
 // Each rule maps to one tracked field. Rules are tagged `mandatory: true` when
@@ -22,12 +24,6 @@
  * @property {(d: AssessmentData) => boolean} applies
  * @property {(d: AssessmentData) => boolean} isSatisfied
  */
-
-(function () {
-'use strict';
-window.ProviderTransferRequest = window.ProviderTransferRequest || {};
-const { hasText, isYesNoUnknownAnswered, acknowledgementStarted } =
-  window.ProviderTransferRequest;
 
 /** @type {ValidationRule[]} */
 const validationRules = [
@@ -480,5 +476,4 @@ const validationRules = [
   }
 ];
 
-window.ProviderTransferRequest.validationRules = validationRules;
-})();
+export { validationRules };

@@ -22,9 +22,6 @@
  */
 
 // Wrapped in an IIFE; published via window.UrologyAssessment.
-(function () {
-'use strict';
-window.UrologyAssessment = window.UrologyAssessment || {};
 
 /** @type {IPSSRuleDefinition[]} */
 const ipssQuestions = [
@@ -91,9 +88,4 @@ const qolResponseOptions = [
   { value: 6, label: 'Terrible' }
 ];
 
-Object.assign(window.UrologyAssessment, {
-  ipssQuestions,
-  ipssResponseOptions,
-  qolResponseOptions
-});
-})();
+export { ipssQuestions, ipssResponseOptions, qolResponseOptions };

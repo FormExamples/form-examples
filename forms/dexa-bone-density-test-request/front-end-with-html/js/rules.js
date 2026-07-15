@@ -11,12 +11,6 @@
 //
 // Wrapped in an IIFE; published via `window.DexaBoneDensityTestRequest`.
 
-(function () {
-'use strict';
-window.DexaBoneDensityTestRequest =
-  window.DexaBoneDensityTestRequest || {};
-const NS = window.DexaBoneDensityTestRequest;
-
 // ----------------------------------------------------------------------
 // Axis A — Appropriateness (NICE CG146 / NOGG / FRAX, 1-9 ordinal)
 // ----------------------------------------------------------------------
@@ -371,18 +365,4 @@ function scoreTriage(data) {
   };
 }
 
-Object.assign(NS, {
-  scoreAppropriateness,
-  appropriatenessBand,
-  evaluateRadiationSafety,
-  scoreCompleteness,
-  scoreTriage,
-  maxTier,
-  TRIAGE_ORDER,
-  TARGET_TIMEFRAMES,
-  INDICATION_REGION_MAP,
-  DOSE_BY_REGION,
-  FRAX_INTERVENTION_THRESHOLD,
-  FRAX_HIGH_THRESHOLD
-});
-})();
+export { scoreAppropriateness, appropriatenessBand, evaluateRadiationSafety, scoreCompleteness, scoreTriage, maxTier, TRIAGE_ORDER, TARGET_TIMEFRAMES, INDICATION_REGION_MAP, DOSE_BY_REGION, FRAX_INTERVENTION_THRESHOLD, FRAX_HIGH_THRESHOLD };

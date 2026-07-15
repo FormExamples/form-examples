@@ -5,11 +5,6 @@
 // Property names are camelCase to match the front-end serde / examples
 // convention. Wrapped in an IIFE; published via `window.CytologyTestRequest`.
 
-(function () {
-'use strict';
-window.CytologyTestRequest =
-  window.CytologyTestRequest || {};
-
 /**
  * Build a fresh, fully-blank cytology specimen request.
  * Strings default to ''; numeric / date / date-time fields default to null;
@@ -93,11 +88,4 @@ function indicationLabel(value) {
   return INDICATION_LABELS[value] || value || '';
 }
 
-Object.assign(window.CytologyTestRequest, {
-  emptyRequest,
-  specimenTypeLabel,
-  indicationLabel,
-  SPECIMEN_TYPE_LABELS,
-  INDICATION_LABELS
-});
-})();
+export { emptyRequest, specimenTypeLabel, indicationLabel, SPECIMEN_TYPE_LABELS, INDICATION_LABELS };

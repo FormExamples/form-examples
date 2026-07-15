@@ -147,9 +147,6 @@
 // classic <script> (no ES modules) so the page can be opened directly via
 // `file://`. The IIFE attaches its public symbols to a single global
 // namespace, `window.PetScanTestResult`.
-(function () {
-'use strict';
-window.PetScanTestResult = window.PetScanTestResult || {};
 
 /**
  * The `number | null` fields on PetScanResult. Used by the wizard for the
@@ -355,20 +352,4 @@ function followUpUrgencyClass(value) {
   }
 }
 
-Object.assign(window.PetScanTestResult, {
-  NUMERIC_FIELDS,
-  emptyResult,
-  resultClassificationLabel,
-  abnormalitySeverityLabel,
-  followUpUrgencyLabel,
-  scanTypeLabel,
-  treatmentResponseLabel,
-  examinationAdequacyLabel,
-  reportStatusLabel,
-  recommendationLabel,
-  priorityLabel,
-  resultClassificationClass,
-  abnormalitySeverityClass,
-  followUpUrgencyClass
-});
-})();
+export { NUMERIC_FIELDS, emptyResult, resultClassificationLabel, abnormalitySeverityLabel, followUpUrgencyLabel, scanTypeLabel, treatmentResponseLabel, examinationAdequacyLabel, reportStatusLabel, recommendationLabel, priorityLabel, resultClassificationClass, abnormalitySeverityClass, followUpUrgencyClass };

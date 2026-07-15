@@ -17,9 +17,6 @@
  */
 
 // Wrapped in an IIFE; published via window.GeneticAssessment.
-(function () {
-'use strict';
-window.GeneticAssessment = window.GeneticAssessment || {};
 
 /**
  * @param {AssessmentData} data
@@ -193,5 +190,4 @@ function detectAdditionalFlags(data) {
   return flags;
 }
 
-window.GeneticAssessment.detectAdditionalFlags = detectAdditionalFlags;
-})();
+export { detectAdditionalFlags };

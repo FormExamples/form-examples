@@ -1,3 +1,6 @@
+import { AGE_MAX_HOURS, AGE_MIN_HOURS, gestationBand, percentileTracks, roundOne, thresholds } from './rules.js';
+import { RISK_FACTOR_LABELS } from './types.js';
+
 // Bhutani bilirubin nomogram classifier. Pure functions: take an
 // `AssessmentData` object and perform two independent lookups against the
 // tabulated curves in `rules.js`.
@@ -31,18 +34,6 @@
  */
 
 // Wrapped in an IIFE; published via window.BhutaniBilirubinNomogram.
-(function () {
-'use strict';
-window.BhutaniBilirubinNomogram = window.BhutaniBilirubinNomogram || {};
-const {
-  AGE_MIN_HOURS,
-  AGE_MAX_HOURS,
-  RISK_FACTOR_LABELS,
-  gestationBand,
-  percentileTracks,
-  thresholds,
-  roundOne
-} = window.BhutaniBilirubinNomogram;
 
 /**
  * Collect the risk factors that are set to 'yes'.
@@ -179,8 +170,4 @@ function gradeBhutani(data) {
   };
 }
 
-Object.assign(window.BhutaniBilirubinNomogram, {
-  collectRiskFactors,
-  gradeBhutani
-});
-})();
+export { collectRiskFactors, gradeBhutani };

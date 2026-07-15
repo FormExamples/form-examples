@@ -1,3 +1,5 @@
+import { centorRules } from './rules.js';
+
 // Centor grader. Pure functions: take an `AssessmentData` object, evaluate the
 // four criterion rules in `centorRules`, award 0 or 1 point each, sum the Centor
 // total (0-4), apply the McIsaac age modifier, and derive the modified score and
@@ -26,11 +28,6 @@
  */
 
 // Wrapped in an IIFE; published via window.CentorScoreForStreptococcalPharyngitis.
-(function () {
-'use strict';
-window.CentorScoreForStreptococcalPharyngitis =
-  window.CentorScoreForStreptococcalPharyngitis || {};
-const { centorRules } = window.CentorScoreForStreptococcalPharyngitis;
 
 /**
  * Compute the McIsaac age modifier for a whole-year age.
@@ -145,9 +142,4 @@ function calculateCentorGrade(data) {
   };
 }
 
-Object.assign(window.CentorScoreForStreptococcalPharyngitis, {
-  ageModifierFor,
-  evaluateCriteria,
-  calculateCentorGrade
-});
-})();
+export { ageModifierFor, evaluateCriteria, calculateCentorGrade };

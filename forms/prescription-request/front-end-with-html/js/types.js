@@ -93,9 +93,6 @@
 // classic <script> (no ES modules) so the page can be opened directly via
 // `file://`. The IIFE attaches its public symbols to a single global
 // namespace, `window.PrescriptionRequest`.
-(function () {
-'use strict';
-window.PrescriptionRequest = window.PrescriptionRequest || {};
 
 /**
  * Build a fresh, fully-blank assessment.
@@ -164,9 +161,4 @@ function priorityLevelClass(level) {
   }
 }
 
-Object.assign(window.PrescriptionRequest, {
-  emptyAssessment,
-  priorityLevelLabel,
-  priorityLevelClass
-});
-})();
+export { emptyAssessment, priorityLevelLabel, priorityLevelClass };

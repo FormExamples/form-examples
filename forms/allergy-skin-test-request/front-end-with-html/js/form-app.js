@@ -1,3 +1,6 @@
+import { calculateGrade } from './grader.js';
+import { ALLERGEN_PANELS, countSelectedPanels, emptyRequest, indicationLabel, selectedPanelCategories, testTypeLabel } from './types.js';
+
 // Allergy Skin Test Request — clinician referral wizard (vanilla JS).
 //
 // Single-page continuous wizard: every section is rendered into the page in
@@ -9,19 +12,6 @@
 // Sibling files loaded as plain `<script>` tags (in order) attach their
 // exports to `window.AllergySkinTestRequest`. The whole file is wrapped in an
 // IIFE so its top-level identifiers don't leak to the global scope.
-
-(function () {
-'use strict';
-
-const NS = window.AllergySkinTestRequest;
-const {
-  emptyRequest,
-  ALLERGEN_PANELS,
-  countSelectedPanels,
-  testTypeLabel,
-  indicationLabel,
-  calculateGrade
-} = NS;
 
 // ----------------------------------------------------------------------
 // Persistence
@@ -758,7 +748,7 @@ function renderReport() {
     timestamp
   } = lastResult;
 
-  const panels = NS.selectedPanelCategories(state.test)
+  const panels = selectedPanelCategories(state.test)
     .map((c) => titleCase(c)).join(', ');
 
   const flagsList = flags.length === 0
@@ -902,4 +892,3 @@ if (document.readyState === 'loading') {
 } else {
   init();
 }
-})();

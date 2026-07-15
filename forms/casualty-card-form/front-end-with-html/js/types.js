@@ -2,10 +2,6 @@
 //
 // Mirrors the SvelteKit form's `src/lib/engine/types.ts` and store defaults.
 // Attaches public symbols to `window.CasualtyCardForm`.
-(function () {
-'use strict';
-
-const NS = (window.CasualtyCardForm = window.CasualtyCardForm || {});
 
 /** Returns a fresh empty CasualtyCardData object. */
 function emptyCasualtyCard() {
@@ -229,8 +225,4 @@ function news2ResponseClass(response) {
   return `response-${response || 'low'}`;
 }
 
-NS.emptyCasualtyCard = emptyCasualtyCard;
-NS.calculateGCSTotal = calculateGCSTotal;
-NS.news2ResponseLabel = news2ResponseLabel;
-NS.news2ResponseClass = news2ResponseClass;
-})();
+export { emptyCasualtyCard, calculateGCSTotal, news2ResponseLabel, news2ResponseClass };

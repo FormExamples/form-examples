@@ -19,9 +19,6 @@
  */
 
 // Wrapped in an IIFE; published via window.CardiacStressTestResult.
-(function () {
-'use strict';
-window.CardiacStressTestResult = window.CardiacStressTestResult || {};
 
 // ----------------------------------------------------------------------
 // Clinical thresholds (mirror `utils.ts`)
@@ -520,21 +517,4 @@ function gradeFollowUp(r, classification, severity) {
   };
 }
 
-Object.assign(window.CardiacStressTestResult, {
-  DUKE_HIGH_RISK_MAX,
-  DUKE_LOW_RISK_MIN,
-  LOW_WORKLOAD_METS,
-  isStronglyPositive,
-  hasExertionalHypotension,
-  hasIschaemiaAtLowWorkload,
-  hasHighRiskDukeScore,
-  hasCriticalResult,
-  hasAnyAbnormalFinding,
-  isInconclusiveStudy,
-  dukeRiskBand,
-  classifyResult,
-  gradeSeverity,
-  gradeCompleteness,
-  gradeFollowUp
-});
-})();
+export { DUKE_HIGH_RISK_MAX, DUKE_LOW_RISK_MIN, LOW_WORKLOAD_METS, isStronglyPositive, hasExertionalHypotension, hasIschaemiaAtLowWorkload, hasHighRiskDukeScore, hasCriticalResult, hasAnyAbnormalFinding, isInconclusiveStudy, dukeRiskBand, classifyResult, gradeSeverity, gradeCompleteness, gradeFollowUp };

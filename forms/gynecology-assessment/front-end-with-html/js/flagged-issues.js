@@ -11,9 +11,6 @@
  */
 
 // Wrapped in an IIFE; published via window.GynecologyAssessment.
-(function () {
-'use strict';
-window.GynecologyAssessment = window.GynecologyAssessment || {};
 
 /**
  * @param {AssessmentData} data
@@ -206,5 +203,4 @@ function detectAdditionalFlags(data) {
   return flags;
 }
 
-window.GynecologyAssessment.detectAdditionalFlags = detectAdditionalFlags;
-})();
+export { detectAdditionalFlags };

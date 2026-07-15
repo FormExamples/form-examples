@@ -1,3 +1,6 @@
+import { CATEGORY_DEFS, pointsFor } from './rules.js';
+import { optionLabel, preventionActionLabel } from './types.js';
+
 // Waterlow grader. Pure functions: take an `AssessmentData` object, map each
 // core category and each special-risk group to its points, sum every
 // contribution into the Waterlow total, derive the risk band, and build the
@@ -31,12 +34,6 @@
  */
 
 // Wrapped in an IIFE; published via window.WaterlowPressureUlcerRiskAssessment.
-(function () {
-'use strict';
-window.WaterlowPressureUlcerRiskAssessment =
-  window.WaterlowPressureUlcerRiskAssessment || {};
-const NS = window.WaterlowPressureUlcerRiskAssessment;
-const { pointsFor, CATEGORY_DEFS, optionLabel, preventionActionLabel } = NS;
 
 /**
  * Derive the risk band from the total Waterlow score.
@@ -115,8 +112,4 @@ function calculateWaterlowGrade(data) {
   };
 }
 
-Object.assign(window.WaterlowPressureUlcerRiskAssessment, {
-  bandForScore,
-  calculateWaterlowGrade
-});
-})();
+export { bandForScore, calculateWaterlowGrade };

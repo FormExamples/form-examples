@@ -7,11 +7,6 @@
 // localStorage. Wrapped in an IIFE; published via
 // `window.PreOperativeAssessmentByClinician`.
 
-(function () {
-'use strict';
-window.PreOperativeAssessmentByClinician =
-  window.PreOperativeAssessmentByClinician || {};
-
 /**
  * Build a fresh, fully-blank clinician assessment.
  * Strings default to ''; numeric fields default to null; lists default to [].
@@ -296,13 +291,4 @@ function riskLabel(level) {
   }
 }
 
-Object.assign(window.PreOperativeAssessmentByClinician, {
-  emptyAssessment,
-  computeBmi,
-  bmiCategory,
-  maxAsa,
-  isHighRiskSurgery,
-  riskLabel,
-  ASA_ORDER
-});
-})();
+export { emptyAssessment, computeBmi, bmiCategory, maxAsa, isHighRiskSurgery, riskLabel, ASA_ORDER };

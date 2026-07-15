@@ -174,10 +174,6 @@
 // classic <script> (no ES modules) so the page can be opened directly via
 // `file://`. The IIFE attaches its public symbols to a single global
 // namespace, `window.NewbornAndInfantPhysicalExamination`.
-(function () {
-'use strict';
-window.NewbornAndInfantPhysicalExamination =
-  window.NewbornAndInfantPhysicalExamination || {};
 
 /**
  * Build a fresh, fully-blank examination.
@@ -352,16 +348,4 @@ function priorityLabel(priority) {
   }
 }
 
-Object.assign(window.NewbornAndInfantPhysicalExamination, {
-  emptyAssessment,
-  outcomeLabel,
-  outcomeClass,
-  componentResultLabel,
-  componentResultClass,
-  practitionerRoleLabel,
-  careSettingLabel,
-  examinationContextLabel,
-  sexLabel,
-  priorityLabel
-});
-})();
+export { emptyAssessment, outcomeLabel, outcomeClass, componentResultLabel, componentResultClass, practitionerRoleLabel, careSettingLabel, examinationContextLabel, sexLabel, priorityLabel };

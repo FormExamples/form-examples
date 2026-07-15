@@ -7,11 +7,6 @@
 // over the corresponding LPA — identical to the SvelteKit dashboard's
 // sampleLpaRows — so the two stacks stay byte-for-byte aligned.
 
-(function () {
-'use strict';
-window.UkLpaFinancialDecisionsDashboard =
-  window.UkLpaFinancialDecisionsDashboard || {};
-
 /** @type {import('./dashboard-types.js').DashboardRow[]} */
 const sampleRows = [
   {
@@ -112,5 +107,4 @@ const sampleRows = [
   }
 ];
 
-window.UkLpaFinancialDecisionsDashboard.sampleRows = sampleRows;
-})();
+export { sampleRows };

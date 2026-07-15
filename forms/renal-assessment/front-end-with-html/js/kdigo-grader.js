@@ -1,3 +1,5 @@
+import { kdigoCompositeRisk, kdigoRules, resolveAlbuminuriaCategory, resolveEgfr, resolveGfrCategory } from './kdigo-rules.js';
+
 // KDIGO grader. Pure functions: take an AssessmentData object, return the
 // resolved GFR category (G1-G5), albuminuria category (A1-A3), composite
 // risk level (low / moderate / high / very-high), the underlying numeric
@@ -20,18 +22,6 @@
  * @typedef {import('./types.js').AlbuminuriaCategory} AlbuminuriaCategory
  * @typedef {import('./types.js').RiskLevel} RiskLevel
  */
-
-(function () {
-'use strict';
-window.RenalAssessment = window.RenalAssessment || {};
-
-const {
-  kdigoRules,
-  resolveEgfr,
-  resolveGfrCategory,
-  resolveAlbuminuriaCategory,
-  kdigoCompositeRisk
-} = window.RenalAssessment;
 
 /**
  * Run the KDIGO classification against the supplied assessment data and
@@ -75,5 +65,4 @@ function calculateKdigo(data) {
   return { gfrCategory, albuminuriaCategory, riskLevel, egfr, acr, firedRules };
 }
 
-window.RenalAssessment.calculateKdigo = calculateKdigo;
-})();
+export { calculateKdigo };

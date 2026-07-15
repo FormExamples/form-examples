@@ -1,3 +1,7 @@
+import { calculateGrade } from './grader.js';
+import { deriveWhoClassification } from './rules.js';
+import { abnormalitySeverityClass, abnormalitySeverityLabel, emptyResult, examinationAdequacyLabel, followUpUrgencyClass, followUpUrgencyLabel, priorityLabel, recommendationLabel, reportStatusLabel, resultClassificationClass, resultClassificationLabel, scanRegionLabel, scoreLabel, whoClassificationClass, whoClassificationLabel } from './types.js';
+
 // DEXA Bone Density Test Result — reporting-clinician wizard
 // (vanilla JavaScript, no build).
 //
@@ -15,29 +19,6 @@
 // exports to `window.DexaBoneDensityTestResult`. Pulling them off here keeps
 // the rest of this file referring to short local names. The whole file is
 // wrapped in an IIFE so its top-level identifiers don't leak.
-(function () {
-'use strict';
-
-const NS = window.DexaBoneDensityTestResult;
-const {
-  emptyResult,
-  resultClassificationLabel,
-  abnormalitySeverityLabel,
-  followUpUrgencyLabel,
-  whoClassificationLabel,
-  scanRegionLabel,
-  examinationAdequacyLabel,
-  reportStatusLabel,
-  recommendationLabel,
-  scoreLabel,
-  priorityLabel,
-  resultClassificationClass,
-  abnormalitySeverityClass,
-  followUpUrgencyClass,
-  whoClassificationClass,
-  deriveWhoClassification,
-  calculateGrade
-} = NS;
 
 // ----------------------------------------------------------------------
 // Persistence
@@ -1074,4 +1055,3 @@ if (document.readyState === 'loading') {
 } else {
   init();
 }
-})();

@@ -9,12 +9,6 @@
 // Flag IDs are stable and identical across every front-end and the back-end.
 // Wrapped in an IIFE; published via `window.PulmonaryFunctionTestRequest`.
 
-(function () {
-'use strict';
-window.PulmonaryFunctionTestRequest =
-  window.PulmonaryFunctionTestRequest || {};
-const NS = window.PulmonaryFunctionTestRequest;
-
 /**
  * Detect safety flags for a pulmonary function test request.
  *
@@ -88,5 +82,4 @@ function detectFlags(data, context) {
   return flags;
 }
 
-Object.assign(NS, { detectFlags });
-})();
+export { detectFlags };

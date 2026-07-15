@@ -1,3 +1,6 @@
+import { calculateGrade } from './grader.js';
+import { emptyRequest, testTypeLabel } from './types.js';
+
 // Pulmonary Function Test Request — clinician referral wizard (vanilla JS).
 //
 // Single-page continuous wizard: every section is rendered into the page in
@@ -9,16 +12,6 @@
 // Sibling files loaded as plain `<script>` tags (in order) attach their
 // exports to `window.PulmonaryFunctionTestRequest`. The whole file is wrapped
 // in an IIFE so its top-level identifiers don't leak to the global scope.
-
-(function () {
-'use strict';
-
-const NS = window.PulmonaryFunctionTestRequest;
-const {
-  emptyRequest,
-  testTypeLabel,
-  calculateGrade
-} = NS;
 
 // ----------------------------------------------------------------------
 // Persistence
@@ -820,4 +813,3 @@ if (document.readyState === 'loading') {
 } else {
   init();
 }
-})();

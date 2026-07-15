@@ -1,9 +1,6 @@
-// Donor rule family, ported from the SvelteKit engine.
+import { ageYearsAt, findDonorSignature } from './utils.js';
 
-(function () {
-'use strict';
-window.UkLpaForm = window.UkLpaForm || {};
-const { ageYearsAt, findDonorSignature } = window.UkLpaForm;
+// Donor rule family, ported from the SvelteKit engine.
 
 function applyDonorRules(app) {
   const fired = [];
@@ -79,5 +76,4 @@ function applyDonorRules(app) {
   return fired;
 }
 
-window.UkLpaForm.applyDonorRules = applyDonorRules;
-})();
+export { applyDonorRules };

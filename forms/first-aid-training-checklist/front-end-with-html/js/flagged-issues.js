@@ -20,13 +20,6 @@
  * @typedef {import('./types.js').FiredRule} FiredRule
  */
 
-(function () {
-'use strict';
-window.FirstAidTrainingChecklist =
-  window.FirstAidTrainingChecklist || {};
-
-const NS = window.FirstAidTrainingChecklist;
-
 /**
  * Build the list of flagged issues for the examiner report.
  *
@@ -189,7 +182,4 @@ function detectAdditionalFlags(data, grading) {
   return flags;
 }
 
-Object.assign(NS, {
-  detectAdditionalFlags
-});
-})();
+export { detectAdditionalFlags };

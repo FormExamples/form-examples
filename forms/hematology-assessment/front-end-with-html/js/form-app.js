@@ -1,3 +1,7 @@
+import { detectAdditionalFlags } from './flagged-issues.js';
+import { calculateAbnormality } from './hematology-grader.js';
+import { abnormalityLevelClass, abnormalityLevelLabel, bloodCountScore, coagulationScore, collectNumericItems, emptyAssessment, ironStudiesScore } from './types.js';
+
 // Hematology Assessment - clinician wizard (vanilla JavaScript, no build).
 //
 // Single-page continuous wizard: every section is rendered into the page in
@@ -10,21 +14,6 @@
 // exports to `window.HematologyAssessment`. Pulling them off here keeps the
 // rest of this file referring to short local names. The whole file is
 // wrapped in an IIFE so its top-level identifiers don't leak globally.
-(function () {
-'use strict';
-
-const NS = window.HematologyAssessment;
-const {
-  emptyAssessment,
-  collectNumericItems,
-  bloodCountScore,
-  coagulationScore,
-  ironStudiesScore,
-  abnormalityLevelLabel,
-  abnormalityLevelClass,
-  calculateAbnormality,
-  detectAdditionalFlags
-} = NS;
 
 // ----------------------------------------------------------------------
 // Persistence
@@ -124,7 +113,6 @@ function lilyInputClass(type) {
     default:       return 'text-input';
   }
 }
-
 
 /**
  * Build a labelled text input.
@@ -1279,4 +1267,3 @@ if (document.readyState === 'loading') {
 } else {
   init();
 }
-})();

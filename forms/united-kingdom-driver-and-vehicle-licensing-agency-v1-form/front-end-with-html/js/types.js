@@ -176,9 +176,6 @@
 // classic <script> (no ES modules) so the page can be opened directly via
 // `file://`. The IIFE attaches its public symbols to a single global
 // namespace, `window.DvlaV1Form`.
-(function () {
-'use strict';
-window.DvlaV1Form = window.DvlaV1Form || {};
 
 /** @returns {AssessmentData} */
 function emptyAssessment() {
@@ -339,22 +336,4 @@ function priorityLabel(priority) {
   }
 }
 
-Object.assign(window.DvlaV1Form, {
-  emptyAssessment,
-  hasText,
-  isYesNoAnswered,
-  isMonocularBranchActive,
-  isVisualFieldBranchActive,
-  isVisualFieldCauseBranchActive,
-  isGlaucomaBranchActive,
-  isRetinitisPigmentosaBranchActive,
-  isLaserTreatmentBranchActive,
-  isBlepharospasmBranchActive,
-  isNightBlindnessBranchActive,
-  isDoubleVisionBranchActive,
-  isOtherVisionBranchActive,
-  isRecentContactBranchActive,
-  sectionLabel,
-  priorityLabel
-});
-})();
+export { emptyAssessment, hasText, isYesNoAnswered, isMonocularBranchActive, isVisualFieldBranchActive, isVisualFieldCauseBranchActive, isGlaucomaBranchActive, isRetinitisPigmentosaBranchActive, isLaserTreatmentBranchActive, isBlepharospasmBranchActive, isNightBlindnessBranchActive, isDoubleVisionBranchActive, isOtherVisionBranchActive, isRecentContactBranchActive, sectionLabel, priorityLabel };

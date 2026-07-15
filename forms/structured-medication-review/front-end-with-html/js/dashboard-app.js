@@ -1,3 +1,6 @@
+import { fetchReviews } from './api.js';
+import { sampleReviews } from './data.js';
+
 // SMR — clinician dashboard (vanilla classic-script app).
 //
 // On boot we fetch the review list from the backend; on any failure (or empty
@@ -8,12 +11,6 @@
 // Sibling modules loaded as plain `<script>` tags (in dependency order) attach
 // their exports to `window.StructuredMedicationReviewDashboard`. The whole file
 // is wrapped in an IIFE so its top-level identifiers do not leak.
-(function () {
-'use strict';
-const {
-  fetchReviews,
-  sampleReviews
-} = window.StructuredMedicationReviewDashboard;
 
 // ----------------------------------------------------------------------
 // State
@@ -393,4 +390,3 @@ if (document.readyState === 'loading') {
 } else {
   init();
 }
-})();

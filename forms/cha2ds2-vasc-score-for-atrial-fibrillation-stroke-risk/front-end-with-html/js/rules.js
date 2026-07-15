@@ -22,10 +22,6 @@
 
 // Wrapped in an IIFE; published via
 // window.Cha2ds2VascScoreForAtrialFibrillationStrokeRisk.
-(function () {
-'use strict';
-window.Cha2ds2VascScoreForAtrialFibrillationStrokeRisk =
-  window.Cha2ds2VascScoreForAtrialFibrillationStrokeRisk || {};
 
 /** @type {Cha2ds2VascRule[]} */
 const cha2ds2VascRules = [
@@ -114,6 +110,4 @@ const cha2ds2VascRules = [
   }
 ];
 
-window.Cha2ds2VascScoreForAtrialFibrillationStrokeRisk.cha2ds2VascRules =
-  cha2ds2VascRules;
-})();
+export { cha2ds2VascRules };

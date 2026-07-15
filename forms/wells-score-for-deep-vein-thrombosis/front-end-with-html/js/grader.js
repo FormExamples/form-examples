@@ -1,3 +1,5 @@
+import { wellsRules } from './rules.js';
+
 // Wells DVT grader. Pure functions: take an `AssessmentData` object, evaluate
 // the ten rules in `wellsRules`, award +1 per positive criterion (nine of them)
 // and −2 for the alternative-diagnosis adjustment, sum the total (−2..9), and
@@ -24,11 +26,6 @@
  */
 
 // Wrapped in an IIFE; published via window.WellsScoreForDeepVeinThrombosis.
-(function () {
-'use strict';
-window.WellsScoreForDeepVeinThrombosis =
-  window.WellsScoreForDeepVeinThrombosis || {};
-const { wellsRules } = window.WellsScoreForDeepVeinThrombosis;
 
 /**
  * Evaluate the ten Wells rules and collect the ones that fired.
@@ -124,8 +121,4 @@ function calculateWellsGrade(data) {
   };
 }
 
-Object.assign(window.WellsScoreForDeepVeinThrombosis, {
-  evaluateCriteria,
-  calculateWellsGrade
-});
-})();
+export { evaluateCriteria, calculateWellsGrade };

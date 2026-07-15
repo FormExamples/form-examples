@@ -1,3 +1,5 @@
+import { isComplete } from './grader.js';
+
 // Flagged-issue detection (red flags). Independent of the derived screening
 // outcome (which the grader produces), this module raises clinician-facing
 // safety flags per spec §5:
@@ -21,10 +23,6 @@
  */
 
 // Wrapped in an IIFE; published via window.BreastScreening.
-(function () {
-'use strict';
-window.BreastScreening = window.BreastScreening || {};
-const { isComplete } = window.BreastScreening;
 
 // Roughly the recall interval, in whole months.
 const OVERDUE_MONTHS = 36;
@@ -175,5 +173,4 @@ function detectFlaggedIssues(data) {
   return flags;
 }
 
-window.BreastScreening.detectFlaggedIssues = detectFlaggedIssues;
-})();
+export { detectFlaggedIssues };

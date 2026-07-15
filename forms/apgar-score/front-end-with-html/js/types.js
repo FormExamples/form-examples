@@ -110,9 +110,6 @@
 // classic <script> (no ES modules) so the page can be opened directly via
 // `file://`. The IIFE attaches its public symbols to a single global
 // namespace, `window.ApgarScore`.
-(function () {
-'use strict';
-window.ApgarScore = window.ApgarScore || {};
 
 /**
  * Build a fresh, blank timepoint.
@@ -300,18 +297,4 @@ function priorityLabel(priority) {
   }
 }
 
-Object.assign(window.ApgarScore, {
-  emptyAssessment,
-  emptyTimepoint,
-  SIGNS,
-  bandLabel,
-  bandClass,
-  trendLabel,
-  signScoreLabel,
-  clinicianRoleLabel,
-  careSettingLabel,
-  modeOfDeliveryLabel,
-  sexLabel,
-  priorityLabel
-});
-})();
+export { emptyAssessment, emptyTimepoint, SIGNS, bandLabel, bandClass, trendLabel, signScoreLabel, clinicianRoleLabel, careSettingLabel, modeOfDeliveryLabel, sexLabel, priorityLabel };

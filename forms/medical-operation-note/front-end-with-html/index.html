@@ -122,30 +122,9 @@
     </footer>
   </main>
 
-  <!--
-    Classic <script> tags (no `type="module"`) so the page works when opened
-    directly via file:// — browsers block ES-module imports from file:// for
-    CORS reasons, but allow ordered classic scripts. Each file attaches its
-    public symbols to `window.MedicalOperationNote`. Whole-file IIFE
-    wrappers keep top-level locals out of the global scope.
-
-    pdfmake is loaded from a CDN for client-side PDF export. The form is
-    fully usable without it; the "Download PDF" button degrades to a notice
-    if pdfmake fails to load.
-  -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.10/pdfmake.min.js" defer></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.10/vfs_fonts.js" defer></script>
 
-  <script src="js/types.js"></script>
-  <script src="js/utils.js"></script>
-  <script src="js/clavien-dindo-rules.js"></script>
-  <script src="js/blood-loss-rules.js"></script>
-  <script src="js/count-rules.js"></script>
-  <script src="js/never-event-rules.js"></script>
-  <script src="js/anaesthetic-event-rules.js"></script>
-  <script src="js/composite-grader.js"></script>
-  <script src="js/flagged-issues.js"></script>
-  <script src="js/report.js"></script>
-  <script src="js/wizard.js"></script>
+  <script type="module" src="js/wizard.js"></script>
 </body>
 </html>

@@ -8,11 +8,6 @@
 // predictive-test-counselling-required case, a consent-not-obtained case, and
 // a prenatal-time-critical case.
 
-(function () {
-'use strict';
-window.GeneticTestRequestDashboard =
-  window.GeneticTestRequestDashboard || {};
-
 /** @type {import('./types.js').RequestRow[]} */
 const sampleRequests = [
   {
@@ -157,5 +152,4 @@ const sampleRequests = [
   }
 ];
 
-window.GeneticTestRequestDashboard.sampleRequests = sampleRequests;
-})();
+export { sampleRequests };

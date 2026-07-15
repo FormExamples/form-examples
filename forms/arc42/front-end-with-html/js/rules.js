@@ -1,3 +1,5 @@
+import { fullyPopulatedQualityScenarios, nonDraftAdrs, nonEmpty, risksWithMitigation } from './types.js';
+
 // Per-section completeness rules for the arc42 documentation-maturity engine.
 //
 // Ported verbatim from the SvelteKit `completeness-rules.ts`. Each of the 12
@@ -12,17 +14,6 @@
 // helpers; the grader (grader.js) composes them.
 //
 // Wrapped in an IIFE; published via `window.Arc42`.
-
-(function () {
-'use strict';
-window.Arc42 = window.Arc42 || {};
-const NS = window.Arc42;
-const {
-  nonEmpty,
-  nonDraftAdrs,
-  fullyPopulatedQualityScenarios,
-  risksWithMitigation
-} = NS;
 
 // Per-section predicate: returns { populated, complete } for a document.
 const RULES = {
@@ -97,5 +88,4 @@ function computeCompleteness(d) {
   return out;
 }
 
-Object.assign(NS, { computeCompleteness });
-})();
+export { computeCompleteness };

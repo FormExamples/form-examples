@@ -1,3 +1,5 @@
+import { calculateAge } from './types.js';
+
 // Declarative cardiology grading rules.
 //
 // Each rule evaluates patient data and returns true if the condition is
@@ -18,10 +20,6 @@
  */
 
 // Wrapped in an IIFE; published via window.CardiologyAssessment.
-(function () {
-'use strict';
-window.CardiologyAssessment = window.CardiologyAssessment || {};
-const { calculateAge } = window.CardiologyAssessment;
 
 /** @type {CardioRule[]} */
 const cardioRules = [
@@ -357,5 +355,4 @@ const cardioRules = [
   }
 ];
 
-window.CardiologyAssessment.cardioRules = cardioRules;
-})();
+export { cardioRules };

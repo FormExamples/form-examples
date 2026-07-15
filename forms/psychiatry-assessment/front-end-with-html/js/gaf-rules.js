@@ -17,10 +17,6 @@
  * @property {(d: AssessmentData) => boolean} evaluate
  */
 
-(function () {
-'use strict';
-window.PsychiatryAssessment = window.PsychiatryAssessment || {};
-
 /** @type {GAFRule[]} */
 const gafRules = [
   // Presenting Complaint
@@ -357,5 +353,4 @@ const gafRules = [
   }
 ];
 
-Object.assign(window.PsychiatryAssessment, { gafRules });
-})();
+export { gafRules };

@@ -201,9 +201,6 @@
 // classic <script> (no ES modules) so the page can be opened directly via
 // `file://`. The IIFE attaches its public symbols to a single global
 // namespace, `window.LearningDisabilityAssessment`.
-(function () {
-'use strict';
-window.LearningDisabilityAssessment = window.LearningDisabilityAssessment || {};
 
 /**
  * Build a fresh, fully-blank assessment.
@@ -349,9 +346,4 @@ function bmiCategory(bmi) {
   return 'Obese Class III';
 }
 
-Object.assign(window.LearningDisabilityAssessment, {
-  emptyAssessment,
-  calculateBMI,
-  bmiCategory
-});
-})();
+export { emptyAssessment, calculateBMI, bmiCategory };

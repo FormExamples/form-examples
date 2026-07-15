@@ -154,8 +154,4 @@
  * @property {string} computedAt
  */
 
-(function () {
-'use strict';
-window.UkLpaForm = window.UkLpaForm || {};
-window.UkLpaForm.ENGINE_VERSION = '0.1.0';
-})();
+export const ENGINE_VERSION = '0.1.0';

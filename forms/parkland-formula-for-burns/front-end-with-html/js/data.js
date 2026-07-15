@@ -6,11 +6,6 @@
 // %TBSA values. total24hVolumeMl = 4 × weight × %TBSA. majorBurnFlag is true
 // when %TBSA meets the age-band referral threshold (adult ≥ 15%, child ≥ 10%).
 
-(function () {
-'use strict';
-window.ParklandFormulaForBurnsDashboard =
-  window.ParklandFormulaForBurnsDashboard || {};
-
 /** @type {import('./dashboard-types.js').AssessmentRow[]} */
 const sampleAssessments = [
   {
@@ -85,6 +80,4 @@ const sampleAssessments = [
   }
 ];
 
-window.ParklandFormulaForBurnsDashboard.sampleAssessments =
-  sampleAssessments;
-})();
+export { sampleAssessments };

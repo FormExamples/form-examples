@@ -1,3 +1,7 @@
+import { detectAdditionalFlags } from './flagged-issues.js';
+import { calculateManchesterScore, countBethesdaMet, gradeGenetics } from './genetics-grader.js';
+import { calculateAge, emptyAssessment, emptyRelative, riskLevelClass, riskLevelLabel } from './types.js';
+
 // Genetics Assessment - clinical wizard (vanilla JavaScript, no build).
 //
 // Single-page continuous wizard: every section is rendered into the page in
@@ -9,21 +13,6 @@
 // Sibling files loaded as plain `<script>` tags (in order) attach their
 // exports to `window.GeneticsAssessment`. Pulling them off here keeps the
 // rest of this file referring to short local names.
-(function () {
-'use strict';
-
-const NS = window.GeneticsAssessment;
-const {
-  emptyAssessment,
-  emptyRelative,
-  riskLevelLabel,
-  riskLevelClass,
-  calculateAge,
-  calculateManchesterScore,
-  countBethesdaMet,
-  gradeGenetics,
-  detectAdditionalFlags
-} = NS;
 
 // ----------------------------------------------------------------------
 // Persistence
@@ -147,7 +136,6 @@ function lilyInputClass(type) {
     default:       return 'text-input';
   }
 }
-
 
 /**
  * Build a labelled text input.
@@ -1883,4 +1871,3 @@ if (document.readyState === 'loading') {
 } else {
   init();
 }
-})();

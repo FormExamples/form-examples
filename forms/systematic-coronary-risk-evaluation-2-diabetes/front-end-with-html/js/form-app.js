@@ -1,3 +1,7 @@
+import { gradeAssessment } from './risk-grader.js';
+import { createDefaultAssessmentData } from './types.js';
+import { calculateBmi, ckdStageFromEgfr, hba1cMmolMol, riskCategoryClass, riskCategoryLabel } from './utils.js';
+
 // SCORE2-Diabetes — clinician wizard (vanilla JS, Lily-shaped).
 //
 // Single-page continuous wizard: every section is rendered into the page in
@@ -10,20 +14,6 @@
 // Sibling files loaded as plain `<script>` tags (in order) attach their
 // exports to `window.SystematicCoronaryRiskEvaluation2Diabetes`. Whole
 // file is wrapped in an IIFE so its top-level identifiers don't leak.
-
-(function () {
-'use strict';
-
-const NS = window.SystematicCoronaryRiskEvaluation2Diabetes;
-const {
-  createDefaultAssessmentData,
-  calculateBmi,
-  hba1cMmolMol,
-  ckdStageFromEgfr,
-  gradeAssessment,
-  riskCategoryLabel,
-  riskCategoryClass
-} = NS;
 
 // ----------------------------------------------------------------------
 // Persistence
@@ -1339,4 +1329,3 @@ if (document.readyState === 'loading') {
 } else {
   init();
 }
-})();

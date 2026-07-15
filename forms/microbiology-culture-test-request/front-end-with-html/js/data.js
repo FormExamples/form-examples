@@ -8,11 +8,6 @@
 // stat blood-culture case, a specimen-not-collected case, and a
 // no-test-selected case.
 
-(function () {
-'use strict';
-window.MicrobiologyCultureTestRequestDashboard =
-  window.MicrobiologyCultureTestRequestDashboard || {};
-
 /** @type {import('./types.js').RequestRow[]} */
 const sampleRequests = [
   {
@@ -167,5 +162,4 @@ const sampleRequests = [
   }
 ];
 
-window.MicrobiologyCultureTestRequestDashboard.sampleRequests = sampleRequests;
-})();
+export { sampleRequests };

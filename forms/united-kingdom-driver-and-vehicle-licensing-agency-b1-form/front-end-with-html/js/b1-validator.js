@@ -1,3 +1,5 @@
+import { b1Rules } from './b1-rules.js';
+
 // DVLA B1 completeness validator. Pure function: takes an `AssessmentData`
 // object, returns a `ValidationResult` with per-section breakdown and the
 // list of fired (unsatisfied) rules. Each rule is first checked against
@@ -10,11 +12,6 @@
  * @typedef {import('./types.js').SectionCompleteness} SectionCompleteness
  * @typedef {import('./types.js').FiredRule} FiredRule
  */
-
-(function () {
-'use strict';
-window.DvlaB1Form = window.DvlaB1Form || {};
-const { b1Rules } = window.DvlaB1Form;
 
 /**
  * @param {AssessmentData} data
@@ -83,5 +80,4 @@ function validateB1(data) {
   };
 }
 
-window.DvlaB1Form.validateB1 = validateB1;
-})();
+export { validateB1 };

@@ -23,9 +23,6 @@
  */
 
 // Wrapped in an IIFE; published via window.ApgarScore.
-(function () {
-'use strict';
-window.ApgarScore = window.ApgarScore || {};
 
 /** Parse a '0' | '1' | '2' | '' sign selection to a number (0 when unanswered). */
 function signPoints(value) {
@@ -85,5 +82,4 @@ const apgarRules = [
   }
 ];
 
-Object.assign(window.ApgarScore, { apgarRules, signPoints });
-})();
+export { apgarRules, signPoints };

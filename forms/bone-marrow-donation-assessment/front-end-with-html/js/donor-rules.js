@@ -1,3 +1,5 @@
+import { calculateAge } from './types.js';
+
 // Bone Marrow Donor evaluation rules.
 //
 // Mirrors the SvelteKit reference engine in
@@ -19,10 +21,6 @@
  */
 
 // Wrapped in an IIFE; published via window.BoneMarrowDonationAssessment.
-(function () {
-'use strict';
-window.BoneMarrowDonationAssessment = window.BoneMarrowDonationAssessment || {};
-const { calculateAge } = window.BoneMarrowDonationAssessment;
 
 /** @type {DonorRule[]} */
 const donorRules = [
@@ -189,5 +187,4 @@ const donorRules = [
     evaluate: (d) => d.physicalExamination.posteriorIliacCrestAssessment === 'unsuitable' }
 ];
 
-window.BoneMarrowDonationAssessment.donorRules = donorRules;
-})();
+export { donorRules };

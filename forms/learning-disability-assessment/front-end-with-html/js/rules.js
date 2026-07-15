@@ -25,9 +25,6 @@
  */
 
 // Wrapped in an IIFE; published via window.LearningDisabilityAssessment.
-(function () {
-'use strict';
-window.LearningDisabilityAssessment = window.LearningDisabilityAssessment || {};
 
 /** Convert a SupportLevel to its 0-3 numeric weight (0 if blank). */
 function levelScore(level) {
@@ -70,5 +67,4 @@ const ldRules = [
   adaptiveRule('LD-PRA-004', 'Practical', 'Work or school skills', 'practicalWorkSchool')
 ];
 
-Object.assign(window.LearningDisabilityAssessment, { ldRules, levelScore });
-})();
+export { ldRules, levelScore };

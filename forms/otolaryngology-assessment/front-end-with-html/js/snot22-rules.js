@@ -1,3 +1,5 @@
+import { SNOT22_ITEMS } from './types.js';
+
 // SNOT-22 (Sino-Nasal Outcome Test) scoring rules.
 //
 // Each rule corresponds to one of the 22 questions and returns the patient's
@@ -15,11 +17,6 @@
  * @property {(d: AssessmentData) => { score: number, answered: boolean }} evaluate
  */
 
-(function () {
-'use strict';
-window.OtolaryngologyAssessment = window.OtolaryngologyAssessment || {};
-const { SNOT22_ITEMS } = window.OtolaryngologyAssessment;
-
 /** @type {SNOT22Rule[]} */
 const snot22Rules = SNOT22_ITEMS.map((item, idx) => ({
   id: `SNOT22-${String(idx + 1).padStart(3, '0')}`,
@@ -35,5 +32,4 @@ const snot22Rules = SNOT22_ITEMS.map((item, idx) => ({
   }
 }));
 
-window.OtolaryngologyAssessment.snot22Rules = snot22Rules;
-})();
+export { snot22Rules };

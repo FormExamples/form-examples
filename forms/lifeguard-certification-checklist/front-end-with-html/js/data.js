@@ -17,11 +17,6 @@
 // expiry date at render time, so the dataset stays sensible if "today"
 // drifts.
 
-(function () {
-'use strict';
-window.LifeguardCertificationChecklistDashboard =
-  window.LifeguardCertificationChecklistDashboard || {};
-
 /** @type {import('./types.js').CandidateRow[]} */
 const sampleCandidates = [
   {
@@ -230,6 +225,4 @@ const sampleCandidates = [
   }
 ];
 
-window.LifeguardCertificationChecklistDashboard.sampleCandidates =
-  sampleCandidates;
-})();
+export { sampleCandidates };

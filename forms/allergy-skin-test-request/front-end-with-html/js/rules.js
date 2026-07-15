@@ -1,3 +1,5 @@
+import { countSelectedPanels } from './types.js';
+
 // Four-axis rule catalogue for the Allergy Skin Test Request engine.
 //
 // Derived from index.md and the SQL grade tables (05): (A) appropriateness 1-9
@@ -10,13 +12,6 @@
 // R-COMPLETE-*, R-TRIAGE-*). Pure data + helpers; the grader composes them.
 //
 // Wrapped in an IIFE; published via `window.AllergySkinTestRequest`.
-
-(function () {
-'use strict';
-window.AllergySkinTestRequest =
-  window.AllergySkinTestRequest || {};
-const NS = window.AllergySkinTestRequest;
-const { countSelectedPanels } = NS;
 
 // ----------------------------------------------------------------------
 // Axis A — Appropriateness (BSACI / EAACI indication match, 1-9 ordinal)
@@ -363,18 +358,4 @@ function scoreTriage(data) {
   };
 }
 
-Object.assign(NS, {
-  scoreAppropriateness,
-  noAllergenAppropriatenessRule,
-  appropriatenessBand,
-  scoreValiditySafety,
-  maxValidityBand,
-  scoreCompleteness,
-  scoreTriage,
-  maxTier,
-  TRIAGE_ORDER,
-  TARGET_TIMEFRAMES,
-  VALIDITY_ORDER,
-  INDICATION_TEST_MAP
-});
-})();
+export { scoreAppropriateness, noAllergenAppropriatenessRule, appropriatenessBand, scoreValiditySafety, maxValidityBand, scoreCompleteness, scoreTriage, maxTier, TRIAGE_ORDER, TARGET_TIMEFRAMES, VALIDITY_ORDER, INDICATION_TEST_MAP };

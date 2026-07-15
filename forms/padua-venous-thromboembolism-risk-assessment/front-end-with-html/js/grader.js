@@ -1,3 +1,5 @@
+import { paduaRules } from './rules.js';
+
 // Padua grader. Pure functions: take an `AssessmentData` object, evaluate the
 // eleven weighted factor rules in `paduaRules`, award each factor's weight when
 // present, sum the total (0-20), derive the risk band with the >= 4 threshold,
@@ -31,11 +33,6 @@
  */
 
 // Wrapped in an IIFE; published via window.PaduaVenousThromboembolismRiskAssessment.
-(function () {
-'use strict';
-window.PaduaVenousThromboembolismRiskAssessment =
-  window.PaduaVenousThromboembolismRiskAssessment || {};
-const { paduaRules } = window.PaduaVenousThromboembolismRiskAssessment;
 
 /**
  * Evaluate the eleven Padua factor rules and collect the ones that fired.
@@ -133,9 +130,4 @@ function calculatePaduaGrade(data) {
   };
 }
 
-Object.assign(window.PaduaVenousThromboembolismRiskAssessment, {
-  evaluateFactors,
-  hasBleedingContraindication,
-  calculatePaduaGrade
-});
-})();
+export { evaluateFactors, hasBleedingContraindication, calculatePaduaGrade };

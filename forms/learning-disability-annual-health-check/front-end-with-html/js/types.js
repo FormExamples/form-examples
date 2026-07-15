@@ -182,10 +182,6 @@
 // classic <script> (no ES modules) so the page can be opened directly via
 // `file://`. The IIFE attaches its public symbols to a single global
 // namespace, `window.LearningDisabilityAnnualHealthCheck`.
-(function () {
-'use strict';
-window.LearningDisabilityAnnualHealthCheck =
-  window.LearningDisabilityAnnualHealthCheck || {};
 
 /**
  * Build a fresh, fully-blank annual health check. Text / enum fields default to
@@ -338,14 +334,4 @@ function priorityLabel(priority) {
   }
 }
 
-Object.assign(window.LearningDisabilityAnnualHealthCheck, {
-  emptyAssessment,
-  statusLabel,
-  statusClass,
-  clinicianRoleLabel,
-  sexLabel,
-  ageBandLabel,
-  ldRegisterStatusLabel,
-  priorityLabel
-});
-})();
+export { emptyAssessment, statusLabel, statusClass, clinicianRoleLabel, sexLabel, ageBandLabel, ldRegisterStatusLabel, priorityLabel };

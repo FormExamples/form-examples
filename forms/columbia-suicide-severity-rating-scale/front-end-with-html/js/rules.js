@@ -22,10 +22,6 @@
  */
 
 // Wrapped in an IIFE; published via window.ColumbiaSuicideSeverityRatingScale.
-(function () {
-'use strict';
-window.ColumbiaSuicideSeverityRatingScale =
-  window.ColumbiaSuicideSeverityRatingScale || {};
 
 /** @type {CssrsRule[]} */
 const cssrsRules = [
@@ -134,5 +130,4 @@ const cssrsRules = [
   }
 ];
 
-window.ColumbiaSuicideSeverityRatingScale.cssrsRules = cssrsRules;
-})();
+export { cssrsRules };

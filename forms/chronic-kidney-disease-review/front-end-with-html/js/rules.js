@@ -21,9 +21,6 @@
  */
 
 // Wrapped in an IIFE; published via window.ChronicKidneyDiseaseReview.
-(function () {
-'use strict';
-window.ChronicKidneyDiseaseReview = window.ChronicKidneyDiseaseReview || {};
 
 /** A numeric field is present when it is neither null nor undefined nor NaN. */
 function present(v) {
@@ -205,14 +202,4 @@ const COMPONENTS = [
   }
 ];
 
-Object.assign(window.ChronicKidneyDiseaseReview, {
-  present,
-  gfrCategory,
-  albuminuriaCategory,
-  kdigoRiskZone,
-  selectBpTarget,
-  bloodPressureAtTarget,
-  isRapidDecline,
-  COMPONENTS
-});
-})();
+export { present, gfrCategory, albuminuriaCategory, kdigoRiskZone, selectBpTarget, bloodPressureAtTarget, isRapidDecline, COMPONENTS };

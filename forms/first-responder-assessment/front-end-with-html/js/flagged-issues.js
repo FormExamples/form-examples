@@ -9,9 +9,6 @@
  */
 
 // Wrapped in an IIFE; published via window.FirstResponderAssessment.
-(function () {
-'use strict';
-window.FirstResponderAssessment = window.FirstResponderAssessment || {};
 
 /**
  * @param {AssessmentData} data
@@ -178,5 +175,4 @@ function detectAdditionalFlags(data) {
   return flags;
 }
 
-window.FirstResponderAssessment.detectAdditionalFlags = detectAdditionalFlags;
-})();
+export { detectAdditionalFlags };

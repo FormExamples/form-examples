@@ -1,3 +1,5 @@
+import { nihssRules } from './nihss-rules.js';
+
 // NIHSS (National Institutes of Health Stroke Scale) grader. Pure
 // functions: take an `AssessmentData` object, return the total NIHSS
 // score (0-42), the severity label, and the list of items that scored
@@ -16,10 +18,6 @@
  */
 
 // Wrapped in an IIFE; published via window.NeurologyAssessment.
-(function () {
-'use strict';
-window.NeurologyAssessment = window.NeurologyAssessment || {};
-const { nihssRules } = window.NeurologyAssessment;
 
 /**
  * NIHSS severity label based on total score.
@@ -80,9 +78,4 @@ function calculateNIHSS(data) {
   return { nihssScore: totalScore, nihssSeverity, firedRules };
 }
 
-Object.assign(window.NeurologyAssessment, {
-  nihssSeverityLabel,
-  nihssSeverityClass,
-  calculateNIHSS
-});
-})();
+export { nihssSeverityLabel, nihssSeverityClass, calculateNIHSS };

@@ -1,3 +1,5 @@
+import { BOUNDARY_MARGIN, G1_MIN, G2_MIN, G3A_MIN } from './rules.js';
+
 // Flagged-issue detection (red flags). Independent of the CKD G-stage that the
 // grader produces, this module raises clinician-facing safety flags per spec §5,
 // using the unrounded eGFR and the assessment inputs:
@@ -20,16 +22,6 @@
  */
 
 // Wrapped in an IIFE; published via window.EstimatedGlomerularFiltrationRateCalculator.
-(function () {
-'use strict';
-window.EstimatedGlomerularFiltrationRateCalculator =
-  window.EstimatedGlomerularFiltrationRateCalculator || {};
-const {
-  G1_MIN,
-  G2_MIN,
-  G3A_MIN,
-  BOUNDARY_MARGIN
-} = window.EstimatedGlomerularFiltrationRateCalculator;
 
 /**
  * @param {AssessmentData} data
@@ -155,6 +147,4 @@ function sortByPriority(flags) {
   return flags;
 }
 
-window.EstimatedGlomerularFiltrationRateCalculator.detectFlaggedIssues =
-  detectFlaggedIssues;
-})();
+export { detectFlaggedIssues };

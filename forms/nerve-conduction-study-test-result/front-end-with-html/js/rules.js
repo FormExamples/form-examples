@@ -20,9 +20,6 @@
  */
 
 // Wrapped in an IIFE; published via window.NerveConductionStudyTestResult.
-(function () {
-'use strict';
-window.NerveConductionStudyTestResult = window.NerveConductionStudyTestResult || {};
 
 // ----------------------------------------------------------------------
 // Structured-findings predicates (mirror `utils.ts`)
@@ -475,14 +472,4 @@ function gradeFollowUp(r, classification, severity) {
   };
 }
 
-Object.assign(window.NerveConductionStudyTestResult, {
-  hasCriticalFinding,
-  isSevereAcuteNeuropathy,
-  hasAnyAbnormalFinding,
-  isNormalStudy,
-  classifyResult,
-  gradeSeverity,
-  gradeCompleteness,
-  gradeFollowUp
-});
-})();
+export { hasCriticalFinding, isSevereAcuteNeuropathy, hasAnyAbnormalFinding, isNormalStudy, classifyResult, gradeSeverity, gradeCompleteness, gradeFollowUp };

@@ -6,10 +6,6 @@
 // Mirrors the Svelte engine flag IDs and priorities documented in
 // `docs/superpowers/specs/2026-04-16-anesthesiology-assessment-design.md`.
 
-(function () {
-'use strict';
-window.AnesthesiologyAssessment = window.AnesthesiologyAssessment || {};
-
 function detectAdditionalFlags(d) {
   const flags = [];
 
@@ -205,5 +201,4 @@ function detectAdditionalFlags(d) {
   return flags;
 }
 
-window.AnesthesiologyAssessment.detectAdditionalFlags = detectAdditionalFlags;
-})();
+export { detectAdditionalFlags };

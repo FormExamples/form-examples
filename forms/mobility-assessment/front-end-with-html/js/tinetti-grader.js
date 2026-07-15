@@ -1,3 +1,6 @@
+import { tinettiBalanceItems, tinettiGaitItems } from './tinetti-rules.js';
+import { tinettiCategory } from './types.js';
+
 // Tinetti grader. Pure functions: take an `AssessmentData` object, return
 // the total Tinetti score (0-28), the balance subscore (0-16), the gait
 // subscore (0-12), the risk-category label, and the list of fired rules
@@ -14,10 +17,6 @@
  */
 
 // Wrapped in an IIFE; published via window.MobilityAssessment.
-(function () {
-'use strict';
-window.MobilityAssessment = window.MobilityAssessment || {};
-const { tinettiBalanceItems, tinettiGaitItems, tinettiCategory } = window.MobilityAssessment;
 
 /**
  * Calculate Tinetti score from assessment data.
@@ -94,5 +93,4 @@ function calculateTinetti(data) {
   return { tinettiTotal, balanceScore, gaitScore, tinettiCategoryLabel, firedRules };
 }
 
-window.MobilityAssessment.calculateTinetti = calculateTinetti;
-})();
+export { calculateTinetti };

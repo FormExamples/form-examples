@@ -10,9 +10,6 @@
 //   5-7  = Moderate concerns
 //   > 7  = Good performance / satisfaction
 
-(function () {
-  'use strict';
-
   const copmActivities = [
     { id: 'COPM-PERF-01', activityNumber: 1, domain: 'Performance',
       text: 'Activity 1 - Self-identified occupational performance problem' },
@@ -72,12 +69,7 @@
     { value: 'unable', label: 'Unable to perform' }
   ];
 
-  window.OccupationalTherapyAssessment = window.OccupationalTherapyAssessment || {};
-  Object.assign(window.OccupationalTherapyAssessment, {
-    copmActivities,
-    copmScoreOptions,
-    copmSatisfactionOptions,
-    copmImportanceOptions,
-    difficultyOptions
-  });
-})();
+  
+  
+
+export { copmActivities, copmScoreOptions, copmSatisfactionOptions, copmImportanceOptions, difficultyOptions };

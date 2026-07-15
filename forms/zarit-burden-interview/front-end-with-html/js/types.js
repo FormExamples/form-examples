@@ -128,9 +128,6 @@
 // classic <script> (no ES modules) so the page can be opened directly via
 // `file://`. The IIFE attaches its public symbols to a single global
 // namespace, `window.ZaritBurdenInterview`.
-(function () {
-'use strict';
-window.ZaritBurdenInterview = window.ZaritBurdenInterview || {};
 
 /**
  * Build a fresh, fully-blank assessment.
@@ -260,15 +257,4 @@ function priorityLabel(priority) {
   }
 }
 
-Object.assign(window.ZaritBurdenInterview, {
-  emptyAssessment,
-  bandLabel,
-  bandClass,
-  practitionerRoleLabel,
-  careSettingLabel,
-  instrumentFormLabel,
-  carerRelationshipLabel,
-  recipientConditionLabel,
-  priorityLabel
-});
-})();
+export { emptyAssessment, bandLabel, bandClass, practitionerRoleLabel, careSettingLabel, instrumentFormLabel, carerRelationshipLabel, recipientConditionLabel, priorityLabel };

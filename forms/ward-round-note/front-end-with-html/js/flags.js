@@ -1,3 +1,5 @@
+import { has } from './rules.js';
+
 // Flagged-issue detection (safety flags). Independent of the completeness
 // status (which the grader produces), this module raises clinician-facing
 // safety flags per spec §5, each with a priority.
@@ -23,10 +25,6 @@
  */
 
 // Wrapped in an IIFE; published via window.WardRoundNote.
-(function () {
-'use strict';
-window.WardRoundNote = window.WardRoundNote || {};
-const NS = window.WardRoundNote;
 
 /**
  * Detect the safety flags raised by the note.
@@ -42,9 +40,9 @@ function detectFlaggedIssues(data, grade) {
   const ex = data.examination;
   const inv = data.investigations;
   const esc = data.escalation;
-  const planDocumented = NS.has(data.plan.planAndJobs);
+  const planDocumented = has(data.plan.planAndJobs);
   const escalationDocumented =
-    NS.has(esc.escalationStatus) && esc.escalationStatus !== 'not-recorded';
+    has(esc.escalationStatus) && esc.escalationStatus !== 'not-recorded';
 
   const deteriorating =
     (ex.news2Total !== null && ex.news2Total >= 5) ||
@@ -135,5 +133,4 @@ function detectFlaggedIssues(data, grade) {
   return flags;
 }
 
-window.WardRoundNote.detectFlaggedIssues = detectFlaggedIssues;
-})();
+export { detectFlaggedIssues };

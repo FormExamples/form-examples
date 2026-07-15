@@ -5,12 +5,6 @@
 // this catalogue surfaces it as a FiredRule so the composite-grader can
 // fold it into the overall risk band.
 
-(function () {
-'use strict';
-window.MedicalOperationNote =
-  window.MedicalOperationNote || {};
-const NS = window.MedicalOperationNote;
-
 const CLAVIEN_DINDO_DESCRIPTIONS = {
   '0':    'No deviation from normal post-operative course',
   'I':    'Any deviation managed without pharmacological / surgical / endoscopic / radiological intervention',
@@ -39,8 +33,4 @@ function applyClavienDindoRules(data) {
   }];
 }
 
-Object.assign(NS, {
-  CLAVIEN_DINDO_DESCRIPTIONS,
-  applyClavienDindoRules
-});
-})();
+export { CLAVIEN_DINDO_DESCRIPTIONS, applyClavienDindoRules };

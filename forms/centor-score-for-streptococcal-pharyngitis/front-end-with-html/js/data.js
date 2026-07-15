@@ -6,11 +6,6 @@
 // every care setting, with the red flag set on the row that carries an airway /
 // quinsy warning feature.
 
-(function () {
-'use strict';
-window.CentorScoreForStreptococcalPharyngitisDashboard =
-  window.CentorScoreForStreptococcalPharyngitisDashboard || {};
-
 /** @type {import('./dashboard-types.js').AssessmentRow[]} */
 const sampleAssessments = [
   {
@@ -92,6 +87,4 @@ const sampleAssessments = [
   }
 ];
 
-window.CentorScoreForStreptococcalPharyngitisDashboard.sampleAssessments =
-  sampleAssessments;
-})();
+export { sampleAssessments };

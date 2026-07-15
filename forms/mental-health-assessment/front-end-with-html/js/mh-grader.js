@@ -1,3 +1,6 @@
+import { detectAdditionalFlags } from './flagged-issues.js';
+import { calculateAuditCScore, calculateGad7Score, calculatePhq9Score, gad7Questions, gad7Severity, gad7SeverityLabel, gadKeys, phq9Questions, phq9Severity, phq9SeverityLabel, phqKeys } from './mh-rules.js';
+
 // PHQ-9 + GAD-7 grader. Pure functions: take an `AssessmentData` object,
 // return a `GradingResult` containing PHQ-9 / GAD-7 score totals, severity
 // classification, and per-question audit trail.
@@ -11,24 +14,7 @@
  */
 
 // Wrapped in an IIFE; published via window.MentalHealthAssessment.
-(function () {
-'use strict';
-window.MentalHealthAssessment = window.MentalHealthAssessment || {};
 
-const NS = window.MentalHealthAssessment;
-const {
-  phq9Questions,
-  phqKeys,
-  calculatePhq9Score,
-  phq9Severity,
-  phq9SeverityLabel,
-  gad7Questions,
-  gadKeys,
-  calculateGad7Score,
-  gad7Severity,
-  gad7SeverityLabel,
-  calculateAuditCScore
-} = NS;
 // `detectAdditionalFlags` is resolved at call time because flagged-issues.js
 // loads after this file in index.html.
 
@@ -144,7 +130,7 @@ function gradeAssessment(data) {
     data.substanceUse.alcoholQuantity,
     data.substanceUse.bingeDrinking
   );
-  const additionalFlags = window.MentalHealthAssessment.detectAdditionalFlags(data);
+  const additionalFlags = detectAdditionalFlags(data);
 
   return {
     phq9,
@@ -179,11 +165,4 @@ function severityClass(level) {
   }
 }
 
-Object.assign(window.MentalHealthAssessment, {
-  calculatePHQ9,
-  calculateGAD7,
-  gradeAssessment,
-  severityLabel,
-  severityClass
-});
-})();
+export { calculatePHQ9, calculateGAD7, gradeAssessment, severityLabel, severityClass };

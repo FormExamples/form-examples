@@ -9,12 +9,6 @@
 //
 // Wrapped in an IIFE; published via `window.ReturnToWork`.
 
-(function () {
-'use strict';
-window.ReturnToWork =
-  window.ReturnToWork || {};
-const NS = window.ReturnToWork;
-
 /** Count the number of enumerated workplace adjustments that are active. */
 function countAdjustments(data) {
   const a = data.adjustments;
@@ -148,8 +142,4 @@ const restrictionRules = [
   }
 ];
 
-Object.assign(NS, {
-  countAdjustments,
-  restrictionRules
-});
-})();
+export { countAdjustments, restrictionRules };

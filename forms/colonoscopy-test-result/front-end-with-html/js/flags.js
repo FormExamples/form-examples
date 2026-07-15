@@ -1,3 +1,5 @@
+import { hasCriticalFinding } from './rules.js';
+
 // Safety-critical flag detection for the Colonoscopy Test Result.
 //
 // Faithful vanilla-JavaScript port of the SvelteKit engine module
@@ -13,10 +15,6 @@
  */
 
 // Wrapped in an IIFE; published via window.ColonoscopyTestResult.
-(function () {
-'use strict';
-window.ColonoscopyTestResult = window.ColonoscopyTestResult || {};
-const { hasCriticalFinding } = window.ColonoscopyTestResult;
 
 /**
  * Detect the safety-critical flags for a report.
@@ -142,7 +140,4 @@ function detectFlags(r) {
   return flags;
 }
 
-Object.assign(window.ColonoscopyTestResult, {
-  detectFlags
-});
-})();
+export { detectFlags };

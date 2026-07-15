@@ -1,3 +1,5 @@
+import { riskLevelLabel } from './types.js';
+
 // Flagged-issue detection for the Workplace Stress Assessment.
 //
 // These flags are computed AFTER the per-domain mean has been graded (by
@@ -25,10 +27,6 @@
  */
 
 // Wrapped in an IIFE; published via window.WorkplaceStressAssessment.
-(function () {
-'use strict';
-const NS = window.WorkplaceStressAssessment = window.WorkplaceStressAssessment || {};
-const { riskLevelLabel } = NS;
 
 const DOMAIN_LABELS = {
   demands: 'Demands',
@@ -205,5 +203,4 @@ function detectAdditionalFlags(data, domains) {
   return flags;
 }
 
-NS.detectAdditionalFlags = detectAdditionalFlags;
-})();
+export { detectAdditionalFlags };

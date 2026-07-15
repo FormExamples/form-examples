@@ -5,11 +5,6 @@
 // network, server down) or returns an empty list, callers fall back to the
 // sample data shipped in `data.js` so the page is usable standalone.
 
-(function () {
-'use strict';
-window.UltrasoundTestResultDashboard =
-  window.UltrasoundTestResultDashboard || {};
-
 const API_BASE = 'http://localhost:5150';
 const REPORTS_PATH = '/api/dashboard/reports';
 
@@ -34,6 +29,4 @@ async function fetchReports() {
   return data.items || [];
 }
 
-window.UltrasoundTestResultDashboard.fetchReports = fetchReports;
-window.UltrasoundTestResultDashboard.API_BASE = API_BASE;
-})();
+export { fetchReports, API_BASE };

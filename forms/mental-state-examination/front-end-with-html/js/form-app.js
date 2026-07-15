@@ -1,3 +1,6 @@
+import { assess } from './grader.js';
+import { emptyAssessment, priorityLabel, riskLevelClass, riskLevelLabel, statusClass, statusLabel } from './types.js';
+
 // Mental State Examination (MSE) — single-page wizard (vanilla JavaScript,
 // no build).
 //
@@ -14,19 +17,6 @@
 // Sibling files loaded as plain `<script>` tags (in order) attach their
 // exports to `window.MentalStateExamination`. The whole file is wrapped in an
 // IIFE so its top-level identifiers don't leak.
-(function () {
-'use strict';
-
-const NS = window.MentalStateExamination;
-const {
-  emptyAssessment,
-  statusLabel,
-  statusClass,
-  riskLevelLabel,
-  riskLevelClass,
-  priorityLabel,
-  assess
-} = NS;
 
 // ----------------------------------------------------------------------
 // Persistence
@@ -1027,4 +1017,3 @@ if (document.readyState === 'loading') {
 } else {
   init();
 }
-})();

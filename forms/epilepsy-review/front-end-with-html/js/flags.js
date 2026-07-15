@@ -1,3 +1,5 @@
+import { present } from './rules.js';
+
 // Flagged-issue detection for the epilepsy annual review. Independent of the
 // seizure-control class and completeness status (which the grader produces),
 // this module raises clinician-facing flags per spec §5, each with a priority.
@@ -24,11 +26,6 @@
  */
 
 // Wrapped in an IIFE; published via window.EpilepsyReview.
-(function () {
-'use strict';
-window.EpilepsyReview = window.EpilepsyReview || {};
-const NS = window.EpilepsyReview;
-const { present } = NS;
 
 /**
  * Detect the safety flags raised by the review findings.
@@ -196,5 +193,4 @@ function detectFlaggedIssues(data, grade) {
   return flags;
 }
 
-NS.detectFlaggedIssues = detectFlaggedIssues;
-})();
+export { detectFlaggedIssues };

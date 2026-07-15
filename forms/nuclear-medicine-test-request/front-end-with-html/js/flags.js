@@ -9,12 +9,6 @@
 // Flag IDs are stable and identical across every front-end and the back-end.
 // Wrapped in an IIFE; published via `window.NuclearMedicineTestRequest`.
 
-(function () {
-'use strict';
-window.NuclearMedicineTestRequest =
-  window.NuclearMedicineTestRequest || {};
-const NS = window.NuclearMedicineTestRequest;
-
 /**
  * Detect safety flags for a nuclear medicine request.
  *
@@ -110,5 +104,4 @@ function detectFlags(data, context) {
   return flags;
 }
 
-Object.assign(NS, { detectFlags });
-})();
+export { detectFlags };

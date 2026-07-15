@@ -23,10 +23,6 @@
  */
 
 // Wrapped in an IIFE; published via window.BmiBsaCalculator.
-(function () {
-'use strict';
-window.BmiBsaCalculator =
-  window.BmiBsaCalculator || {};
 
 // ─── WHO adult BMI band boundaries (spec §4, inclusive lower bounds) ──────
 /** Underweight upper bound (exclusive) — normal begins here. */
@@ -128,24 +124,4 @@ const categoryRules = [
   }
 ];
 
-Object.assign(window.BmiBsaCalculator, {
-  BMI_NORMAL,
-  BMI_OVERWEIGHT,
-  BMI_OBESE_1,
-  BMI_OBESE_2,
-  BMI_OBESE_3,
-  ASIAN_INCREASED,
-  ASIAN_HIGH,
-  MOSTELLER_DIVISOR,
-  DUBOIS_COEFF,
-  DUBOIS_HEIGHT_EXP,
-  DUBOIS_WEIGHT_EXP,
-  HEIGHT_MIN,
-  HEIGHT_MAX,
-  WEIGHT_MIN,
-  WEIGHT_MAX,
-  BMI_MIN,
-  BMI_MAX,
-  categoryRules
-});
-})();
+export { BMI_NORMAL, BMI_OVERWEIGHT, BMI_OBESE_1, BMI_OBESE_2, BMI_OBESE_3, ASIAN_INCREASED, ASIAN_HIGH, MOSTELLER_DIVISOR, DUBOIS_COEFF, DUBOIS_HEIGHT_EXP, DUBOIS_WEIGHT_EXP, HEIGHT_MIN, HEIGHT_MAX, WEIGHT_MIN, WEIGHT_MAX, BMI_MIN, BMI_MAX, categoryRules };

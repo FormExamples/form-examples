@@ -1,3 +1,6 @@
+import { fetchScreenings } from './api.js';
+import { sampleScreenings } from './data.js';
+
 // Newborn Blood Spot Screening — dashboard (vanilla classic-script app).
 //
 // On boot we fetch the screening list from the backend; on any failure (or
@@ -9,12 +12,6 @@
 // Sibling modules loaded as plain `<script>` tags (in dependency order) attach
 // their exports to `window.NewbornBloodSpotScreeningDashboard`. The whole file
 // is wrapped in an IIFE so its top-level identifiers do not leak.
-(function () {
-'use strict';
-const {
-  fetchScreenings,
-  sampleScreenings
-} = window.NewbornBloodSpotScreeningDashboard;
 
 // ----------------------------------------------------------------------
 // State
@@ -393,4 +390,3 @@ if (document.readyState === 'loading') {
 } else {
   init();
 }
-})();

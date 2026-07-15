@@ -1,3 +1,5 @@
+import { MANDATORY_ALWAYS } from './rules.js';
+
 // Referral-flag detection. Independent of the completeness status (which the
 // grader produces), this module raises referrer-facing flags per spec §5:
 //
@@ -20,11 +22,6 @@
  */
 
 // Wrapped in an IIFE; published via window.GeneralPractitionerReferralLetter.
-(function () {
-'use strict';
-window.GeneralPractitionerReferralLetter =
-  window.GeneralPractitionerReferralLetter || {};
-const NS = window.GeneralPractitionerReferralLetter;
 
 const nonEmpty = (s) => typeof s === 'string' && s.trim() !== '';
 
@@ -36,7 +33,7 @@ const nonEmpty = (s) => typeof s === 'string' && s.trim() !== '';
  */
 function missingMandatoryFields(r) {
   const missing = [];
-  const always = NS.MANDATORY_ALWAYS || [];
+  const always = MANDATORY_ALWAYS || [];
   for (const field of always) {
     if (field.present(r) !== true) missing.push(field.label);
   }
@@ -146,6 +143,4 @@ function detectFlaggedIssues(referral) {
   return flags;
 }
 
-NS.missingMandatoryFields = missingMandatoryFields;
-NS.detectFlaggedIssues = detectFlaggedIssues;
-})();
+export { missingMandatoryFields, detectFlaggedIssues };

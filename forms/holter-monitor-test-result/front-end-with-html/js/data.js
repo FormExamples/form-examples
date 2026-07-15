@@ -7,11 +7,6 @@
 // bands, with critical-alert rows whose critical rhythm findings raised two
 // flags each.
 
-(function () {
-'use strict';
-window.HolterMonitorTestResultDashboard =
-  window.HolterMonitorTestResultDashboard || {};
-
 /** @type {import('./dashboard-types.js').ReportRow[]} */
 const sampleReports = [
   {
@@ -100,5 +95,4 @@ const sampleReports = [
   }
 ];
 
-window.HolterMonitorTestResultDashboard.sampleReports = sampleReports;
-})();
+export { sampleReports };

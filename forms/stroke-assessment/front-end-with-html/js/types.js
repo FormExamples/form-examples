@@ -146,9 +146,6 @@
 // classic <script> (no ES modules) so the page can be opened directly via
 // `file://`. The IIFE attaches its public symbols to a single global
 // namespace, `window.StrokeAssessment`.
-(function () {
-'use strict';
-window.StrokeAssessment = window.StrokeAssessment || {};
 
 /**
  * Build a fresh, fully-blank assessment.
@@ -264,11 +261,4 @@ function hoursFromOnset(onsetTime) {
   return diffMs / (1000 * 60 * 60);
 }
 
-Object.assign(window.StrokeAssessment, {
-  emptyAssessment,
-  calculateAge,
-  nihssCategory,
-  nihssCategoryClass,
-  hoursFromOnset
-});
-})();
+export { emptyAssessment, calculateAge, nihssCategory, nihssCategoryClass, hoursFromOnset };

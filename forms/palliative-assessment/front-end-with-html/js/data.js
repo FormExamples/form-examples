@@ -13,10 +13,6 @@
 // low totals carry none. Each score is 0-10; the ten-symptom sum equals
 // `esasTotal`.
 
-(function () {
-'use strict';
-window.PalliativeAssessmentDashboard = window.PalliativeAssessmentDashboard || {};
-
 /** @type {import('./types.js').PatientRow[]} */
 const samplePatients = [
   {
@@ -213,5 +209,4 @@ const samplePatients = [
   }
 ];
 
-window.PalliativeAssessmentDashboard.samplePatients = samplePatients;
-})();
+export { samplePatients };

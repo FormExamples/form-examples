@@ -6,10 +6,6 @@
 // sea modes, urgent-flag counts from 0 to 3, and a mix of completed and
 // in-flight transfers (some with null arrivalTime).
 
-(function () {
-'use strict';
-window.WhoAcuteReferralDashboard = window.WhoAcuteReferralDashboard || {};
-
 /** @type {import('./types.js').PatientRow[]} */
 const samplePatients = [
   {
@@ -182,5 +178,4 @@ const samplePatients = [
   }
 ];
 
-window.WhoAcuteReferralDashboard.samplePatients = samplePatients;
-})();
+export { samplePatients };

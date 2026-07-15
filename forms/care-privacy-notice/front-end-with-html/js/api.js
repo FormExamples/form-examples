@@ -2,11 +2,6 @@
 // Loaded as a classic <script> tag (no ES modules) and attaches its
 // public symbols to `window.CarePrivacyNoticeDashboard`.
 
-(function () {
-'use strict';
-window.CarePrivacyNoticeDashboard =
-  window.CarePrivacyNoticeDashboard || {};
-
 const API_BASE = 'http://localhost:5150';
 
 /**
@@ -22,5 +17,4 @@ async function fetchPatients() {
   return data.items || [];
 }
 
-window.CarePrivacyNoticeDashboard.fetchPatients = fetchPatients;
-})();
+export { fetchPatients };

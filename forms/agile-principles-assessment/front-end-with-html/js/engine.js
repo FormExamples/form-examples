@@ -1,8 +1,7 @@
-(function () {
-  'use strict';
+import { PRINCIPLES } from './principles.js';
 
-  const NS = (window.AgilePrinciplesAssessment = window.AgilePrinciplesAssessment || {});
-  const PRINCIPLES = NS.PRINCIPLES;
+  
+  
 
   const COACHING = {
     'customer-satisfaction': {
@@ -268,7 +267,8 @@
     };
   }
 
-  NS.bandFor = bandFor;
-  NS.deriveMaturity = deriveMaturity;
-  NS.calculateMaturity = calculateMaturity;
-})();
+  
+  
+  
+
+export { bandFor, deriveMaturity, calculateMaturity };

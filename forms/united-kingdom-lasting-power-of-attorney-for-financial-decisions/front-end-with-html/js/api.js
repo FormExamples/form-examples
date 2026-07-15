@@ -7,11 +7,6 @@
 // in `data.js` so the page is usable standalone. The RESTful resource plural
 // matches the SvelteKit route.
 
-(function () {
-'use strict';
-window.UkLpaFinancialDecisionsDashboard =
-  window.UkLpaFinancialDecisionsDashboard || {};
-
 const API_BASE = 'http://localhost:5150';
 const REQUESTS_PATH =
   '/api/united_kingdom_lasting_powers_of_attorney_for_financial_decisions';
@@ -38,6 +33,4 @@ async function fetchLpas() {
   return [];
 }
 
-window.UkLpaFinancialDecisionsDashboard.fetchLpas = fetchLpas;
-window.UkLpaFinancialDecisionsDashboard.API_BASE = API_BASE;
-})();
+export { fetchLpas, API_BASE };

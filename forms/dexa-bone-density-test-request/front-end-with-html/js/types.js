@@ -7,11 +7,6 @@
 // convention. Wrapped in an IIFE; published via
 // `window.DexaBoneDensityTestRequest`.
 
-(function () {
-'use strict';
-window.DexaBoneDensityTestRequest =
-  window.DexaBoneDensityTestRequest || {};
-
 /**
  * Build a fresh, fully-blank DEXA bone-density request.
  * Strings default to ''; numeric / date fields default to null;
@@ -95,11 +90,4 @@ function indicationLabel(value) {
   return INDICATION_LABELS[value] || value || '';
 }
 
-Object.assign(window.DexaBoneDensityTestRequest, {
-  emptyRequest,
-  scanRegionLabel,
-  indicationLabel,
-  SCAN_REGION_LABELS,
-  INDICATION_LABELS
-});
-})();
+export { emptyRequest, scanRegionLabel, indicationLabel, SCAN_REGION_LABELS, INDICATION_LABELS };

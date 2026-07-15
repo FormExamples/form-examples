@@ -1,3 +1,6 @@
+import { das28Rules } from './das28-rules.js';
+import { classifyDiseaseActivity } from './types.js';
+
 // DAS28-ESR grader. Pure functions: take an `AssessmentData` object,
 // return the numeric DAS28 score, the disease-activity classification,
 // and the list of fired declarative rules.
@@ -28,10 +31,6 @@
  */
 
 // Wrapped in an IIFE; published via window.RheumatologyAssessment.
-(function () {
-'use strict';
-window.RheumatologyAssessment = window.RheumatologyAssessment || {};
-const { das28Rules, classifyDiseaseActivity } = window.RheumatologyAssessment;
 
 /**
  * Evaluate the DAS28 declarative rules and the numeric DAS28-ESR formula
@@ -83,5 +82,4 @@ function calculateDAS28(data) {
   return { das28Score: roundedScore, diseaseActivity, firedRules };
 }
 
-window.RheumatologyAssessment.calculateDAS28 = calculateDAS28;
-})();
+export { calculateDAS28 };

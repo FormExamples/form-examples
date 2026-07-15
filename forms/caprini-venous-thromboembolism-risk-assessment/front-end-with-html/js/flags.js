@@ -19,11 +19,6 @@
  */
 
 // Wrapped in an IIFE; published via window.CapriniVenousThromboembolismRiskAssessment.
-(function () {
-'use strict';
-window.CapriniVenousThromboembolismRiskAssessment =
-  window.CapriniVenousThromboembolismRiskAssessment || {};
-const NS = window.CapriniVenousThromboembolismRiskAssessment;
 
 // The 3-point thrombophilia factors (excludes historyOfVte, which has its own
 // prior-VTE flag).
@@ -133,5 +128,4 @@ function detectFlaggedIssues(data, grade) {
   return flags;
 }
 
-NS.detectFlaggedIssues = detectFlaggedIssues;
-})();
+export { detectFlaggedIssues };

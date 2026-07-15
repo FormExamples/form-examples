@@ -6,11 +6,6 @@
 // or returns an empty list, callers fall back to the sample data shipped in
 // `data.js` so the page is usable standalone.
 
-(function () {
-'use strict';
-window.LearningDisabilityAnnualHealthCheckDashboard =
-  window.LearningDisabilityAnnualHealthCheckDashboard || {};
-
 const API_BASE = 'http://localhost:5150';
 const CHECKS_PATH = '/api/dashboard/checks';
 
@@ -33,6 +28,4 @@ async function fetchChecks() {
   return data.items || [];
 }
 
-window.LearningDisabilityAnnualHealthCheckDashboard.fetchChecks = fetchChecks;
-window.LearningDisabilityAnnualHealthCheckDashboard.API_BASE = API_BASE;
-})();
+export { fetchChecks, API_BASE };

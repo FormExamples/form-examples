@@ -6,10 +6,6 @@
 // comorbidities flagged for a subset; NHS numbers in the canonical
 // "NNN NNN NNNN" display form.
 
-(function () {
-'use strict';
-window.DermatologyAssessmentDashboard = window.DermatologyAssessmentDashboard || {};
-
 /** @type {import('./types.js').PatientRow[]} */
 const samplePatients = [
   {
@@ -122,5 +118,4 @@ const samplePatients = [
   }
 ];
 
-window.DermatologyAssessmentDashboard.samplePatients = samplePatients;
-})();
+export { samplePatients };

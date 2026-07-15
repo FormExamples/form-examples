@@ -197,9 +197,6 @@
 // classic <script> (no ES modules) so the page can be opened directly via
 // `file://`. The IIFE attaches its public symbols to a single global
 // namespace, `window.CardiologyAssessment`.
-(function () {
-'use strict';
-window.CardiologyAssessment = window.CardiologyAssessment || {};
 
 /**
  * Build a fresh, fully-blank assessment.
@@ -404,15 +401,4 @@ function riskLevelClass(risk) {
   }
 }
 
-Object.assign(window.CardiologyAssessment, {
-  emptyAssessment,
-  calculateBMI,
-  bmiCategory,
-  calculateAge,
-  estimateMETs,
-  ccsClassLabel,
-  nyhaClassLabel,
-  riskLevelLabel,
-  riskLevelClass
-});
-})();
+export { emptyAssessment, calculateBMI, bmiCategory, calculateAge, estimateMETs, ccsClassLabel, nyhaClassLabel, riskLevelLabel, riskLevelClass };

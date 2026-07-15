@@ -1,3 +1,6 @@
+import { detectFlags } from './flags.js';
+import { scoreCompleteness, scoreEligibility, scoreImpact, scorePriority } from './rules.js';
+
 // Four-axis grader for the Neurodiversity Adjustment Request.
 //
 // Composes the rule sets in rules.js and the flags in flags.js into a single
@@ -6,19 +9,6 @@
 // across every front-end and the back-end.
 //
 // Wrapped in an IIFE; published via `window.NeurodiversityAdjustmentRequest`.
-
-(function () {
-'use strict';
-window.NeurodiversityAdjustmentRequest =
-  window.NeurodiversityAdjustmentRequest || {};
-const NS = window.NeurodiversityAdjustmentRequest;
-const {
-  scoreEligibility,
-  scoreImpact,
-  scoreCompleteness,
-  scorePriority,
-  detectFlags
-} = NS;
 
 /**
  * Derive an overall handling recommendation from the four axes. An incomplete
@@ -104,9 +94,4 @@ function calculateGrade(data) {
   };
 }
 
-Object.assign(NS, {
-  calculateGrade,
-  deriveRecommendation,
-  RECOMMENDATION_LABELS
-});
-})();
+export { calculateGrade, deriveRecommendation, RECOMMENDATION_LABELS };

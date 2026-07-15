@@ -165,9 +165,6 @@
 // <script> (no ES modules) so the page can be opened directly via file://. The
 // IIFE attaches its public symbols to a single global namespace,
 // `window.MedicationReconciliation`.
-(function () {
-'use strict';
-window.MedicationReconciliation = window.MedicationReconciliation || {};
 
 /** Build a fresh, fully-blank information source. @returns {InformationSource} */
 function emptySource() {
@@ -444,30 +441,4 @@ function priorityLabel(priority) {
   }
 }
 
-Object.assign(window.MedicationReconciliation, {
-  emptySource,
-  emptyAllergy,
-  emptyLineItem,
-  emptyDiscrepancy,
-  emptyReconciliation,
-  statusLabel,
-  statusClass,
-  reconciliationTypeLabel,
-  careSettingLabel,
-  clinicianRoleLabel,
-  ageBandLabel,
-  sexLabel,
-  allergyStatusLabel,
-  sourceTypeLabel,
-  reactionTypeLabel,
-  severityLabel,
-  listSourceLabel,
-  routeLabel,
-  highRiskClassLabel,
-  adherenceLabel,
-  itemStatusLabel,
-  discrepancyTypeLabel,
-  intendedActionLabel,
-  priorityLabel
-});
-})();
+export { emptySource, emptyAllergy, emptyLineItem, emptyDiscrepancy, emptyReconciliation, statusLabel, statusClass, reconciliationTypeLabel, careSettingLabel, clinicianRoleLabel, ageBandLabel, sexLabel, allergyStatusLabel, sourceTypeLabel, reactionTypeLabel, severityLabel, listSourceLabel, routeLabel, highRiskClassLabel, adherenceLabel, itemStatusLabel, discrepancyTypeLabel, intendedActionLabel, priorityLabel };

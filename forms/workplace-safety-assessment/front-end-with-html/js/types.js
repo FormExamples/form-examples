@@ -203,9 +203,6 @@
 // classic <script> (no ES modules) so the page can be opened directly via
 // `file://`. The IIFE attaches its public symbols to a single global
 // namespace, `window.WorkplaceSafetyAssessment`.
-(function () {
-'use strict';
-window.WorkplaceSafetyAssessment = window.WorkplaceSafetyAssessment || {};
 
 /**
  * Build a fresh, fully-blank assessment.
@@ -392,13 +389,4 @@ function actionTimeframe(outcome) {
   }
 }
 
-Object.assign(window.WorkplaceSafetyAssessment, {
-  emptyAssessment,
-  outcomeLabel,
-  outcomeClass,
-  gradeToFindingLevel,
-  gradeLabel,
-  findingLevelClass,
-  actionTimeframe
-});
-})();
+export { emptyAssessment, outcomeLabel, outcomeClass, gradeToFindingLevel, gradeLabel, findingLevelClass, actionTimeframe };

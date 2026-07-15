@@ -1,3 +1,5 @@
+import { hasNumber } from './types.js';
+
 // WHO Acute Referral Form flagged-issue detection. Independent of the
 // completeness check (which is handled by the validator), this module
 // raises clinically significant flags for high-risk responses such as
@@ -9,11 +11,6 @@
  * @typedef {import('./types.js').AssessmentData} AssessmentData
  * @typedef {import('./types.js').FlaggedIssue} FlaggedIssue
  */
-
-(function () {
-'use strict';
-window.WhoAcuteReferralForm = window.WhoAcuteReferralForm || {};
-const { hasNumber } = window.WhoAcuteReferralForm;
 
 /**
  * @param {AssessmentData} data
@@ -223,5 +220,4 @@ function detectFlaggedIssues(data) {
   return flags;
 }
 
-window.WhoAcuteReferralForm.detectFlaggedIssues = detectFlaggedIssues;
-})();
+export { detectFlaggedIssues };

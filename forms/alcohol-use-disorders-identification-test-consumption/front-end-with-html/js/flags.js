@@ -20,10 +20,6 @@
 
 // Wrapped in an IIFE; published via
 // window.AlcoholUseDisordersIdentificationTestConsumption.
-(function () {
-'use strict';
-window.AlcoholUseDisordersIdentificationTestConsumption =
-  window.AlcoholUseDisordersIdentificationTestConsumption || {};
 
 /** Is an item value unanswered? */
 function isMissing(v) {
@@ -131,6 +127,4 @@ function detectFlaggedIssues(data, auditcScore) {
   return flags;
 }
 
-window.AlcoholUseDisordersIdentificationTestConsumption.detectFlaggedIssues =
-  detectFlaggedIssues;
-})();
+export { detectFlaggedIssues };

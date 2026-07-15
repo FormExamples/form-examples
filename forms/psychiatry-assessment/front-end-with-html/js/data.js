@@ -7,10 +7,6 @@
 // Two rows carry `riskLevel: 'imminent'` to exercise the row-level
 // suicidal-ideation visual emphasis.
 
-(function () {
-'use strict';
-window.PsychiatryAssessmentDashboard = window.PsychiatryAssessmentDashboard || {};
-
 /** @type {import('./types.js').PatientRow[]} */
 const samplePatients = [
   {
@@ -123,5 +119,4 @@ const samplePatients = [
   }
 ];
 
-window.PsychiatryAssessmentDashboard.samplePatients = samplePatients;
-})();
+export { samplePatients };

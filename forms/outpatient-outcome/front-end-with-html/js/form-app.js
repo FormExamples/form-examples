@@ -1,3 +1,7 @@
+import { calculateGrade } from './grader.js';
+import { calcWaitDays, promisGphTScore, promisMhTScore } from './rules.js';
+import { FFT_LABELS, OUTCOME_LABELS, emptyAssessment, gradeLabel, labelFrom } from './types.js';
+
 // Outpatient Outcome Report — clinician wizard (vanilla JS).
 //
 // Single-page continuous wizard: every section is rendered into the page in
@@ -9,22 +13,6 @@
 // Sibling files loaded as plain `<script>` tags (in order) attach their
 // exports to `window.OutpatientOutcome`. The whole file is wrapped in an IIFE
 // so its top-level identifiers don't leak to the global scope.
-
-(function () {
-'use strict';
-
-const NS = window.OutpatientOutcome;
-const {
-  emptyAssessment,
-  calculateGrade,
-  gradeLabel,
-  labelFrom,
-  OUTCOME_LABELS,
-  FFT_LABELS,
-  calcWaitDays,
-  promisGphTScore,
-  promisMhTScore
-} = NS;
 
 // ----------------------------------------------------------------------
 // Persistence
@@ -1026,4 +1014,3 @@ if (document.readyState === 'loading') {
 } else {
   init();
 }
-})();

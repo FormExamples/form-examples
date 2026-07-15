@@ -5,8 +5,7 @@
  * that consumes the form data and returns true when the rule should fire.
  */
 
-(function (root) {
-  const Fp92aForm = root.Fp92aForm || (root.Fp92aForm = {});
+  
 
   /** Calculate age in whole years from an ISO yyyy-mm-dd birth date. */
   function ageYears(birthDateIso) {
@@ -19,9 +18,9 @@
     if (m < 0 || (m === 0 && today.getDate() < dob.getDate())) age--;
     return age;
   }
-  Fp92aForm.ageYears = ageYears;
+  
 
-  Fp92aForm.RULES = [
+  export const RULES = [
     {
       id: "fp92a.rule.condition.permanent-fistula",
       category: "eligible-condition",
@@ -98,7 +97,7 @@
       fires: (d) => d.conditions.includes("cancer-or-effects"),
     },
 
-    // Disqualifying / redirect rules
+                                     
     {
       id: "fp92a.rule.disqualifying.diet-only-diabetes",
       category: "disqualifying",
@@ -174,4 +173,5 @@
         d.cancerTreatmentPhase === "" ,
     },
   ];
-})(window);
+
+export { ageYears };

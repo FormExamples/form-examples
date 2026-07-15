@@ -1,3 +1,5 @@
+import { snellenToDecimal } from './types.js';
+
 // Visual Acuity grading rules. Mirrors `src/lib/engine/va-rules.ts`.
 //
 // Each rule evaluates patient data and returns true if the condition is
@@ -17,10 +19,6 @@
  */
 
 // Wrapped in an IIFE; published via window.OphthalmologyAssessment.
-(function () {
-'use strict';
-window.OphthalmologyAssessment = window.OphthalmologyAssessment || {};
-const { snellenToDecimal } = window.OphthalmologyAssessment;
 
 /** @type {VARule[]} */
 const vaRules = [
@@ -240,5 +238,4 @@ const vaRules = [
   }
 ];
 
-window.OphthalmologyAssessment.vaRules = vaRules;
-})();
+export { vaRules };

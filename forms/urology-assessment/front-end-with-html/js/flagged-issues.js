@@ -13,9 +13,6 @@
  */
 
 // Wrapped in an IIFE; published via window.UrologyAssessment.
-(function () {
-'use strict';
-window.UrologyAssessment = window.UrologyAssessment || {};
 
 /**
  * @param {AssessmentData} data
@@ -170,5 +167,4 @@ function detectAdditionalFlags(data) {
   return flags;
 }
 
-window.UrologyAssessment.detectAdditionalFlags = detectAdditionalFlags;
-})();
+export { detectAdditionalFlags };

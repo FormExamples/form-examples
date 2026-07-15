@@ -7,10 +7,6 @@
  * @typedef {import('./types.js').AdditionalFlag} AdditionalFlag
  */
 
-(function () {
-'use strict';
-window.MedicalErrorReport = window.MedicalErrorReport || {};
-
 /**
  * @param {AssessmentData} data
  * @returns {AdditionalFlag[]}
@@ -200,5 +196,4 @@ function detectAdditionalFlags(data) {
   return flags;
 }
 
-Object.assign(window.MedicalErrorReport, { detectAdditionalFlags });
-})();
+export { detectAdditionalFlags };

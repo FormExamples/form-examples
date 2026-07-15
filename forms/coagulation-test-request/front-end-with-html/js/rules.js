@@ -1,3 +1,5 @@
+import { TESTS, countSelectedTests } from './types.js';
+
 // Four-axis rule catalogue for the Coagulation Test Request engine.
 //
 // Derived from index.md and sql/05: (A) appropriateness 1-9 + band by
@@ -10,12 +12,6 @@
 // R-COMPLETE-*, R-TRIAGE-*). Pure data + helpers; the grader composes them.
 //
 // Wrapped in an IIFE; published via `window.CoagulationTestRequest`.
-
-(function () {
-'use strict';
-window.CoagulationTestRequest = window.CoagulationTestRequest || {};
-const NS = window.CoagulationTestRequest;
-const { countSelectedTests } = NS;
 
 // ----------------------------------------------------------------------
 // Axis A — Appropriateness (BSH indication / retest-interval anchor, 1-9)
@@ -42,7 +38,7 @@ const INDICATION_TEST_MAP = {
 
 function selectedFields(tests) {
   const out = [];
-  for (const t of NS.TESTS) if (tests[t.field] === true) out.push(t.field);
+  for (const t of TESTS) if (tests[t.field] === true) out.push(t.field);
   return out;
 }
 
@@ -333,15 +329,4 @@ function scoreTriage(data) {
   };
 }
 
-Object.assign(NS, {
-  scoreAppropriateness,
-  appropriatenessBand,
-  evaluatePreanalytical,
-  scoreCompleteness,
-  scoreTriage,
-  maxTier,
-  TRIAGE_ORDER,
-  TARGET_TIMEFRAMES,
-  INDICATION_TEST_MAP
-});
-})();
+export { scoreAppropriateness, appropriatenessBand, evaluatePreanalytical, scoreCompleteness, scoreTriage, maxTier, TRIAGE_ORDER, TARGET_TIMEFRAMES, INDICATION_TEST_MAP };

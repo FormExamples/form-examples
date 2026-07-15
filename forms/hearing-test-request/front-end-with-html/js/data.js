@@ -8,11 +8,6 @@
 // sudden-SNHL urgent / emergency case, a unilateral-symptoms case, and an
 // ear-discharge case.
 
-(function () {
-'use strict';
-window.HearingTestRequestDashboard =
-  window.HearingTestRequestDashboard || {};
-
 /** @type {import('./types.js').RequestRow[]} */
 const sampleRequests = [
   {
@@ -167,5 +162,4 @@ const sampleRequests = [
   }
 ];
 
-window.HearingTestRequestDashboard.sampleRequests = sampleRequests;
-})();
+export { sampleRequests };

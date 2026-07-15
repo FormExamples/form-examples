@@ -8,11 +8,6 @@
 // suspected-MS request, an emergency suspected-meningitis case, a coagulopathy
 // contraindication case, and a raised-ICP-needs-imaging case.
 
-(function () {
-'use strict';
-window.LumbarPunctureTestRequestDashboard =
-  window.LumbarPunctureTestRequestDashboard || {};
-
 /** @type {import('./types.js').RequestRow[]} */
 const sampleRequests = [
   {
@@ -157,5 +152,4 @@ const sampleRequests = [
   }
 ];
 
-window.LumbarPunctureTestRequestDashboard.sampleRequests = sampleRequests;
-})();
+export { sampleRequests };

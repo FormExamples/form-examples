@@ -1,3 +1,7 @@
+import { detectAdditionalFlags } from './flagged-issues.js';
+import { calculateBraden, riskLevelClass, riskLevelLabel } from './integumentary-grader.js';
+import { bmiCategory, calculateBMI, calculateWoundArea, emptyAssessment } from './types.js';
+
 // Integumentary Assessment - patient/clinician wizard (vanilla JavaScript,
 // no build). Lily Design System HTML headless contract.
 //
@@ -11,20 +15,6 @@
 // Sibling files loaded as plain `<script>` tags (in order) attach their
 // exports to `window.IntegumentaryAssessment`. Whole file is wrapped in an
 // IIFE so its top-level identifiers don't leak to the global scope.
-(function () {
-'use strict';
-
-const NS = window.IntegumentaryAssessment;
-const {
-  emptyAssessment,
-  calculateBMI,
-  bmiCategory,
-  calculateWoundArea,
-  calculateBraden,
-  riskLevelLabel,
-  riskLevelClass,
-  detectAdditionalFlags
-} = NS;
 
 // ----------------------------------------------------------------------
 // Persistence
@@ -1696,4 +1686,3 @@ if (document.readyState === 'loading') {
 } else {
   init();
 }
-})();

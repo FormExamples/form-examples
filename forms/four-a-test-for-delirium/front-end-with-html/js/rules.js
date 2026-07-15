@@ -23,9 +23,6 @@
  */
 
 // Wrapped in an IIFE; published via window.FourATestForDelirium.
-(function () {
-'use strict';
-window.FourATestForDelirium = window.FourATestForDelirium || {};
 
 /** @type {FourATRule[]} */
 const fouratRules = [
@@ -86,5 +83,4 @@ const fouratRules = [
   }
 ];
 
-window.FourATestForDelirium.fouratRules = fouratRules;
-})();
+export { fouratRules };

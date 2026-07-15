@@ -1,3 +1,5 @@
+import { countSelectedTests } from './types.js';
+
 // Safety-flag detection for the Urinalysis Test Request engine.
 //
 // Pure function returning safety flags using the grade_flag categories from
@@ -8,12 +10,6 @@
 // Each flag is { flagId, category, priority, description, suggestedAction }.
 // Flag IDs are stable and identical across every front-end and the back-end.
 // Wrapped in an IIFE; published via `window.UrinalysisTestRequest`.
-
-(function () {
-'use strict';
-window.UrinalysisTestRequest = window.UrinalysisTestRequest || {};
-const NS = window.UrinalysisTestRequest;
-const { countSelectedTests } = NS;
 
 /**
  * Detect safety flags for a urinalysis test request.
@@ -88,5 +84,4 @@ function detectFlags(data, context) {
   return flags;
 }
 
-Object.assign(NS, { detectFlags });
-})();
+export { detectFlags };

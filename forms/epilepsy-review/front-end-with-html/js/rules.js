@@ -14,9 +14,6 @@
  */
 
 // Wrapped in an IIFE; published via window.EpilepsyReview.
-(function () {
-'use strict';
-window.EpilepsyReview = window.EpilepsyReview || {};
 
 /** A numeric field is present when it is neither null nor undefined nor NaN. */
 function present(v) {
@@ -137,11 +134,4 @@ function componentApplicable(component, data) {
   return component.applicable ? !!component.applicable(data) : true;
 }
 
-Object.assign(window.EpilepsyReview, {
-  present,
-  filled,
-  classifyControl,
-  COMPONENTS,
-  componentApplicable
-});
-})();
+export { present, filled, classifyControl, COMPONENTS, componentApplicable };

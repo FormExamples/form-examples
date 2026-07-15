@@ -127,10 +127,6 @@
 // classic <script> (no ES modules) so the page can be opened directly via
 // `file://`. The IIFE attaches its public symbols to a single global
 // namespace, `window.PaduaVenousThromboembolismRiskAssessment`.
-(function () {
-'use strict';
-window.PaduaVenousThromboembolismRiskAssessment =
-  window.PaduaVenousThromboembolismRiskAssessment || {};
 
 /**
  * Build a fresh, fully-blank assessment.
@@ -250,14 +246,4 @@ function priorityLabel(priority) {
   }
 }
 
-Object.assign(window.PaduaVenousThromboembolismRiskAssessment, {
-  emptyAssessment,
-  riskBandLabel,
-  riskBandClass,
-  prophylaxisLabel,
-  clinicianRoleLabel,
-  careSettingLabel,
-  sexLabel,
-  priorityLabel
-});
-})();
+export { emptyAssessment, riskBandLabel, riskBandClass, prophylaxisLabel, clinicianRoleLabel, careSettingLabel, sexLabel, priorityLabel };

@@ -1,12 +1,9 @@
+import { detectAdditionalFlags } from './flagged-issues.js';
+import { evaluateRules } from './risk-rules.js';
+import { isLikelyDraft } from './utils.js';
+
 // SCORE2-Diabetes - Pure scoring engine: combines fired rules into a
 // summary risk category and gathers safety flags.
-(function () {
-'use strict';
-
-const NS = (window.SystematicCoronaryRiskEvaluation2Diabetes =
-  window.SystematicCoronaryRiskEvaluation2Diabetes || {});
-
-const { evaluateRules, detectAdditionalFlags, isLikelyDraft } = NS;
 
 /**
  * Returns risk category and the rules that fired. The category is the
@@ -58,6 +55,4 @@ function gradeAssessment(data) {
   };
 }
 
-NS.calculateRisk = calculateRisk;
-NS.gradeAssessment = gradeAssessment;
-})();
+export { calculateRisk, gradeAssessment };

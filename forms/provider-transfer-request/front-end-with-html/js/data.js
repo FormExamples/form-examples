@@ -6,10 +6,6 @@
 // with acknowledgement status set for a subset; NHS numbers in the canonical
 // "NNN NNN NNNN" display form.
 
-(function () {
-'use strict';
-window.ProviderTransferRequestDashboard = window.ProviderTransferRequestDashboard || {};
-
 /** @type {import('./types.js').PatientRow[]} */
 const samplePatients = [
   {
@@ -134,5 +130,4 @@ const samplePatients = [
   }
 ];
 
-window.ProviderTransferRequestDashboard.samplePatients = samplePatients;
-})();
+export { samplePatients };

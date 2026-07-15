@@ -6,11 +6,6 @@
 // or returns an empty list, callers fall back to the sample data shipped in
 // `data.js` so the page is usable standalone.
 
-(function () {
-'use strict';
-window.AnaestheticRecordDashboard =
-  window.AnaestheticRecordDashboard || {};
-
 const API_BASE = 'http://localhost:5150';
 const RECORDS_PATH = '/api/dashboard/records';
 
@@ -35,6 +30,4 @@ async function fetchRecords() {
   return data.items || [];
 }
 
-window.AnaestheticRecordDashboard.fetchRecords = fetchRecords;
-window.AnaestheticRecordDashboard.API_BASE = API_BASE;
-})();
+export { fetchRecords, API_BASE };

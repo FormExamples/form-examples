@@ -1,3 +1,5 @@
+import { validationRules } from './validation-rules.js';
+
 // Discharge summary completeness validator. Pure functions: take an
 // `AssessmentData` object, return the per-rule audit trail and the
 // overall completeness level.
@@ -14,10 +16,6 @@
  */
 
 // Wrapped in an IIFE; published via window.HospitalDischarge.
-(function () {
-'use strict';
-window.HospitalDischarge = window.HospitalDischarge || {};
-const { validationRules } = window.HospitalDischarge;
 
 /**
  * Validate the discharge summary against all NICE NG27 rules.
@@ -84,5 +82,4 @@ function validateDischarge(data) {
   };
 }
 
-window.HospitalDischarge.validateDischarge = validateDischarge;
-})();
+export { validateDischarge };

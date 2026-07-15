@@ -1,3 +1,7 @@
+import { validate } from './grader.js';
+import { classifyProblem, hasEvaluation, hasGoal, hasIntervention } from './rules.js';
+import { ADL_CATEGORIES, LINKED_RISK_OPTIONS, MET_OPTIONS, adlCategoryLabel, completenessClass, completenessLabel, emptyGoal, emptyIntervention, emptyPlan, emptyProblem, riskLevelLabel } from './types.js';
+
 // Nursing Care Plan — nurse wizard (vanilla JavaScript, no build).
 //
 // Single-page continuous wizard: every section is rendered into the page in
@@ -11,24 +15,6 @@
 // Sibling files loaded as plain `<script>` tags (in order) attach their
 // exports to `window.NursingCarePlan`. The whole file is wrapped in an IIFE so
 // its top-level identifiers don't leak to the global scope.
-(function () {
-'use strict';
-
-const NS = window.NursingCarePlan;
-const {
-  emptyPlan,
-  emptyProblem,
-  emptyGoal,
-  emptyIntervention,
-  ADL_CATEGORIES,
-  MET_OPTIONS,
-  LINKED_RISK_OPTIONS,
-  adlCategoryLabel,
-  completenessLabel,
-  completenessClass,
-  riskLevelLabel,
-  validate
-} = NS;
 
 // ----------------------------------------------------------------------
 // Persistence
@@ -411,7 +397,7 @@ function problemEditor() {
     problems.forEach((p, idx) => {
       const card = document.createElement('div');
       card.className = 'list-row problem-card';
-      const cls = window.NursingCarePlan.classifyProblem(p);
+      const cls = classifyProblem(p);
 
       // Problem-level fields (Assessment + Diagnosis of ADPIE).
       card.innerHTML = `
@@ -457,7 +443,7 @@ function problemEditor() {
             refreshLiveStatus();
             // Re-classify badge live without a full rerender.
             const badge = card.querySelector('.list-row-header .risk-badge');
-            const c = window.NursingCarePlan.classifyProblem(problems[idx]);
+            const c = classifyProblem(problems[idx]);
             if (badge) {
               badge.className = `risk-badge ${completenessClass(c)}`;
               badge.textContent = completenessLabel(c);
@@ -557,7 +543,7 @@ function problemEditor() {
           updateProgress();
           refreshLiveStatus();
           const badge = card.querySelector('.list-row-header .risk-badge');
-          const c = window.NursingCarePlan.classifyProblem(problems[idx]);
+          const c = classifyProblem(problems[idx]);
           if (badge) {
             badge.className = `risk-badge ${completenessClass(c)}`;
             badge.textContent = completenessLabel(c);
@@ -802,13 +788,13 @@ function countFlat(pairs) {
 
 /** Step 4 completion = present required ADPIE elements across problems. */
 function countProblems() {
-  const NSns = window.NursingCarePlan;
+  
   let answered = 0;
   let total = state.problems.length * 3;
   for (const p of state.problems) {
-    if (NSns.hasGoal(p)) answered += 1;
-    if (NSns.hasIntervention(p)) answered += 1;
-    if (NSns.hasEvaluation(p)) answered += 1;
+    if (hasGoal(p)) answered += 1;
+    if (hasIntervention(p)) answered += 1;
+    if (hasEvaluation(p)) answered += 1;
   }
   return { answered, total };
 }
@@ -1099,4 +1085,3 @@ if (document.readyState === 'loading') {
 } else {
   init();
 }
-})();

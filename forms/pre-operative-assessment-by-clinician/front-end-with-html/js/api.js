@@ -7,11 +7,6 @@
 // down) or returns an empty list, callers fall back to the sample data
 // shipped in `data.js` so the page is usable standalone.
 
-(function () {
-'use strict';
-window.PreOperativeAssessmentByClinicianDashboard =
-  window.PreOperativeAssessmentByClinicianDashboard || {};
-
 const API_BASE = 'http://localhost:5150';
 const ASSESSMENTS_PATH = '/api/assessments';
 
@@ -42,7 +37,4 @@ async function fetchAssessments() {
   return [];
 }
 
-window.PreOperativeAssessmentByClinicianDashboard.fetchAssessments =
-  fetchAssessments;
-window.PreOperativeAssessmentByClinicianDashboard.API_BASE = API_BASE;
-})();
+export { fetchAssessments, API_BASE };

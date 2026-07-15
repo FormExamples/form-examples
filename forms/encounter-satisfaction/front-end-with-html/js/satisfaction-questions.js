@@ -14,9 +14,6 @@
  */
 
 // Wrapped in an IIFE; published via window.EncounterSatisfaction.
-(function () {
-'use strict';
-window.EncounterSatisfaction = window.EncounterSatisfaction || {};
 
 /** @type {SatisfactionQuestion[]} */
 const satisfactionQuestions = [
@@ -175,8 +172,4 @@ const likertResponseOptions = [
   { value: 5, label: 'Very Satisfied' }
 ];
 
-Object.assign(window.EncounterSatisfaction, {
-  satisfactionQuestions,
-  likertResponseOptions
-});
-})();
+export { satisfactionQuestions, likertResponseOptions };

@@ -28,9 +28,6 @@
  */
 
 // Wrapped in an IIFE; published via window.ObstetricsAssessment.
-(function () {
-'use strict';
-window.ObstetricsAssessment = window.ObstetricsAssessment || {};
 
 /** @type {NG201Rule[]} */
 const ng201Rules = [
@@ -436,5 +433,4 @@ const ng201Rules = [
   }
 ];
 
-window.ObstetricsAssessment.ng201Rules = ng201Rules;
-})();
+export { ng201Rules };

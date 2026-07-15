@@ -1,3 +1,6 @@
+import { classifyFluidStatus, significantBalanceThresholdMl } from './rules.js';
+import { categoryLabel, fluidStatusLabel } from './types.js';
+
 // Fluid Balance Chart grader. Pure functions: take a `ChartData` object (a
 // parent chart header plus its repeating timed intake/output entry list) and
 // derive the reconciliation outputs (spec §4). This is NOT a single numeric
@@ -25,15 +28,6 @@
  */
 
 // Wrapped in an IIFE; published via window.FluidBalanceChart.
-(function () {
-'use strict';
-window.FluidBalanceChart = window.FluidBalanceChart || {};
-const {
-  significantBalanceThresholdMl,
-  classifyFluidStatus,
-  fluidStatusLabel,
-  categoryLabel
-} = window.FluidBalanceChart;
 
 /**
  * Coerce a value to a finite number, or null when absent / non-numeric.
@@ -186,9 +180,4 @@ function gradeFluidBalance(data) {
   };
 }
 
-Object.assign(window.FluidBalanceChart, {
-  num,
-  spanHours,
-  gradeFluidBalance
-});
-})();
+export { num, spanHours, gradeFluidBalance };

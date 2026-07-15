@@ -18,9 +18,6 @@
  */
 
 // Wrapped in an IIFE; published via window.OncologyAssessment.
-(function () {
-'use strict';
-window.OncologyAssessment = window.OncologyAssessment || {};
 
 /** @type {ECOGRule[]} */
 const ecogRules = [
@@ -362,5 +359,4 @@ const ecogRules = [
   }
 ];
 
-window.OncologyAssessment.ecogRules = ecogRules;
-})();
+export { ecogRules };

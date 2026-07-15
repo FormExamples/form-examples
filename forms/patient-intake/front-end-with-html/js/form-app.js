@@ -1,3 +1,7 @@
+import { detectAdditionalFlags } from './flagged-issues.js';
+import { calculateRiskLevel } from './intake-grader.js';
+import { emptyAssessment, riskLevelClass, riskLevelLabel } from './types.js';
+
 // Patient Intake - patient wizard (vanilla JavaScript, no build).
 //
 // Single-page continuous wizard: every section is rendered into the page in
@@ -10,17 +14,6 @@
 // exports to `window.PatientIntake`. Pulling them off here keeps the rest
 // of this file referring to short local names. Whole file is wrapped in
 // an IIFE so its top-level identifiers don't leak to the global scope.
-(function () {
-'use strict';
-
-const NS = window.PatientIntake;
-const {
-  emptyAssessment,
-  riskLevelLabel,
-  riskLevelClass,
-  calculateRiskLevel,
-  detectAdditionalFlags
-} = NS;
 
 // ----------------------------------------------------------------------
 // Persistence
@@ -1393,4 +1386,3 @@ if (document.readyState === 'loading') {
 } else {
   init();
 }
-})();

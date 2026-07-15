@@ -6,11 +6,6 @@
 // every care setting, with the anticoagulation flag set whenever the risk band
 // is high.
 
-(function () {
-'use strict';
-window.Cha2ds2VascScoreForAtrialFibrillationStrokeRiskDashboard =
-  window.Cha2ds2VascScoreForAtrialFibrillationStrokeRiskDashboard || {};
-
 /** @type {import('./dashboard-types.js').AssessmentRow[]} */
 const sampleAssessments = [
   {
@@ -95,6 +90,4 @@ const sampleAssessments = [
   }
 ];
 
-window.Cha2ds2VascScoreForAtrialFibrillationStrokeRiskDashboard.sampleAssessments =
-  sampleAssessments;
-})();
+export { sampleAssessments };

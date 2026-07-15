@@ -1,8 +1,9 @@
+import { gradeFitNote } from './grader.js';
+import { ASSESSMENT_METHODS, DIAGNOSIS_CATEGORIES, PROFESSIONS, emptyFitNote } from './types.js';
+
 /* UK Fit Note — wizard renderer, autosave, and report generation. */
 
-(function () {
-  'use strict';
-  const ns = window.FitNote;
+  
 
   const STORAGE_KEY = 'united-kingdom-statement-of-fitness-for-work.front-end-form-with-html.v1';
   const TOTAL_FIELDS = 38;
@@ -12,10 +13,10 @@
   function loadState() {
     try {
       const raw = localStorage.getItem(STORAGE_KEY);
-      if (!raw) return ns.emptyFitNote();
-      return mergeDeep(ns.emptyFitNote(), JSON.parse(raw));
+      if (!raw) return emptyFitNote();
+      return mergeDeep(emptyFitNote(), JSON.parse(raw));
     } catch (_) {
-      return ns.emptyFitNote();
+      return emptyFitNote();
     }
   }
 
@@ -292,7 +293,7 @@
 
     root.appendChild(section(1, 'Issuer (healthcare professional)',
       textField('Full name', () => state.clinician.name, v => state.clinician.name = v, 'Required (DWP policy 3.7).'),
-      selectField('Profession', ns.PROFESSIONS, () => state.clinician.profession, v => state.clinician.profession = v),
+      selectField('Profession', PROFESSIONS, () => state.clinician.profession, v => state.clinician.profession = v),
       selectField('Registration body', ['GMC','NMC','HCPC','GPhC','other'], () => state.clinician.registrationBody, v => state.clinician.registrationBody = v),
       textField('Registration number', () => state.clinician.registrationNumber, v => state.clinician.registrationNumber = v),
       yesNoField('Private practice?', () => state.clinician.isPrivatePractice, v => state.clinician.isPrivatePractice = v),
@@ -313,7 +314,7 @@
 
     root.appendChild(section(3, 'Assessment',
       textField('Assessment date', () => state.assessmentDate, v => state.assessmentDate = v, '', 'date'),
-      selectField('Assessment method', ns.ASSESSMENT_METHODS, () => state.assessmentMethod, v => state.assessmentMethod = v, 'DWP policy 3.1.'),
+      selectField('Assessment method', ASSESSMENT_METHODS, () => state.assessmentMethod, v => state.assessmentMethod = v, 'DWP policy 3.1.'),
       yesNoField('Considered fitness for work in general?', () => state.generalFitnessConsidered, v => state.generalFitnessConsidered = v, 'DWP policy 5.1.')
     ));
 
@@ -321,7 +322,7 @@
       textareaField('Condition(s) causing absence', () => state.diagnosisText, v => state.diagnosisText = v),
       textField('SNOMED CT code (optional)', () => state.diagnosisSnomedCode, v => state.diagnosisSnomedCode = v),
       textField('SNOMED display (optional)', () => state.diagnosisSnomedDisplay, v => state.diagnosisSnomedDisplay = v),
-      selectField('Diagnosis category', ns.DIAGNOSIS_CATEGORIES, () => state.diagnosisCategory, v => state.diagnosisCategory = v),
+      selectField('Diagnosis category', DIAGNOSIS_CATEGORIES, () => state.diagnosisCategory, v => state.diagnosisCategory = v),
       textField('Condition first recorded date', () => state.conditionFirstRecordedDate, v => state.conditionFirstRecordedDate = v, 'Drives the first-6-months rule.', 'date'),
       yesNoField('Automatic disability (HIV / cancer / MS)?', () => state.isAutomaticDisability, v => state.isAutomaticDisability = v, 'Equality Act 2010 s.6.'),
       yesNoField('Reason is non-medical?', () => state.isNonMedical, v => state.isNonMedical = v, 'DWP policy 3.6: cannot issue fit notes for non-medical reasons.')
@@ -374,7 +375,7 @@
   }
 
   function renderReport() {
-    const grade = ns.gradeFitNote(state);
+    const grade = gradeFitNote(state);
     const root = document.getElementById('report');
     root.innerHTML = '';
 
@@ -419,7 +420,7 @@
   function reset() {
     if (!confirm('Discard the current fit note and start again?')) return;
     localStorage.removeItem(STORAGE_KEY);
-    state = ns.emptyFitNote();
+    state = emptyFitNote();
     render();
     document.getElementById('report').innerHTML = '<p class="empty-message">Submit the form to see the report.</p>';
   }
@@ -430,4 +431,3 @@
     document.getElementById('submit-btn').addEventListener('click', renderReport);
     document.getElementById('reset-btn').addEventListener('click', reset);
   });
-})();

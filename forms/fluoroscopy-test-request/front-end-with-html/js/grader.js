@@ -1,3 +1,7 @@
+import { detectFlags } from './flags.js';
+import { scoreAppropriateness, scoreCompleteness, scoreRadiationDose, scoreSafety, scoreTriage } from './rules.js';
+import { isBariumStudy } from './types.js';
+
 // Four-axis grader for the Fluoroscopy Test Request.
 //
 // Composes the rule sets in rules.js and the safety flags in flags.js into a
@@ -6,20 +10,6 @@
 // across every front-end and the back-end.
 //
 // Wrapped in an IIFE; published via `window.FluoroscopyTestRequest`.
-
-(function () {
-'use strict';
-window.FluoroscopyTestRequest =
-  window.FluoroscopyTestRequest || {};
-const NS = window.FluoroscopyTestRequest;
-const {
-  scoreAppropriateness,
-  scoreRadiationDose,
-  scoreSafety,
-  scoreCompleteness,
-  scoreTriage,
-  detectFlags
-} = NS;
 
 /**
  * Derive an overall recommendation for the imaging vetting desk from the four
@@ -89,7 +79,7 @@ function calculateGrade(data) {
 
   const suspectedPerforationBarium =
     data.request.primaryIndication === 'suspected-perforation' &&
-    NS.isBariumStudy(data.request.studyType);
+    isBariumStudy(data.request.studyType);
 
   const recommendation = deriveRecommendation(
     appr.band,
@@ -117,9 +107,4 @@ function calculateGrade(data) {
   };
 }
 
-Object.assign(NS, {
-  calculateGrade,
-  deriveRecommendation,
-  RECOMMENDATION_LABELS
-});
-})();
+export { calculateGrade, deriveRecommendation, RECOMMENDATION_LABELS };

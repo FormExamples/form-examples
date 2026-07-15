@@ -1,3 +1,5 @@
+import { deriveEligibility, outcomeRules } from './rules.js';
+
 // Breast-screening grader. Pure functions: take a `ScreeningData` object, derive
 // the eligibility status, then walk the ordered `outcomeRules` and take the
 // FIRST match to fix the screening outcome and outcome band. This is a
@@ -27,10 +29,6 @@
  */
 
 // Wrapped in an IIFE; published via window.BreastScreening.
-(function () {
-'use strict';
-window.BreastScreening = window.BreastScreening || {};
-const { deriveEligibility, outcomeRules } = window.BreastScreening;
 
 /**
  * Determine whether every required input for a final classification is present.
@@ -119,8 +117,4 @@ function calculateGrade(data) {
   };
 }
 
-Object.assign(window.BreastScreening, {
-  isComplete,
-  calculateGrade
-});
-})();
+export { isComplete, calculateGrade };

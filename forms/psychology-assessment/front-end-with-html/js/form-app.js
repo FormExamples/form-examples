@@ -1,3 +1,8 @@
+import { calculateDass21, severityLabel } from './dass21-grader.js';
+import { dass21Rules } from './dass21-rules.js';
+import { detectAdditionalFlags } from './flagged-issues.js';
+import { emptyAssessment } from './types.js';
+
 // Psychology Assessment - patient wizard (vanilla ES module).
 //
 // Single-page continuous wizard: every section is rendered into the page in
@@ -10,15 +15,6 @@
 // exports to `window.PsychologyAssessment`. Pulling them off here keeps the
 // rest of this file referring to short local names. Whole file wrapped in
 // an IIFE so its top-level identifiers don't leak to the global scope.
-(function () {
-'use strict';
-const {
-  emptyAssessment,
-  dass21Rules,
-  calculateDass21,
-  severityLabel,
-  detectAdditionalFlags
-} = window.PsychologyAssessment;
 
 // ----------------------------------------------------------------------
 // Persistence
@@ -1001,4 +997,3 @@ if (document.readyState === 'loading') {
 } else {
   init();
 }
-})();

@@ -1,3 +1,5 @@
+import { hasAbnormalResult, hasAnyResultValue, hasCriticalValue } from './rules.js';
+
 // Safety-critical flag detection for the Blood Test Result.
 //
 // Faithful vanilla-JavaScript port of the SvelteKit engine module
@@ -13,14 +15,6 @@
  */
 
 // Wrapped in an IIFE; published via window.BloodTestResult.
-(function () {
-'use strict';
-window.BloodTestResult = window.BloodTestResult || {};
-const {
-  hasCriticalValue,
-  hasAbnormalResult,
-  hasAnyResultValue
-} = window.BloodTestResult;
 
 /**
  * Detect the safety-critical flags for a report.
@@ -143,7 +137,4 @@ function detectFlags(r) {
   return flags;
 }
 
-Object.assign(window.BloodTestResult, {
-  detectFlags
-});
-})();
+export { detectFlags };

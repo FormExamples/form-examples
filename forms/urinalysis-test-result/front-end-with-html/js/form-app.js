@@ -1,3 +1,6 @@
+import { calculateGrade } from './grader.js';
+import { abnormalitySeverityClass, abnormalitySeverityLabel, cultureResultLabel, emptyResult, followUpUrgencyClass, followUpUrgencyLabel, priorityLabel, recommendationLabel, reportStatusLabel, resultClassificationClass, resultClassificationLabel, specimenTypeLabel } from './types.js';
+
 // Urinalysis Test Result — reporting-clinician wizard
 // (vanilla JavaScript, no build).
 //
@@ -15,25 +18,6 @@
 // exports to `window.UrinalysisTestResult`. Pulling them off here keeps the
 // rest of this file referring to short local names. The whole file is wrapped
 // in an IIFE so its top-level identifiers don't leak.
-(function () {
-'use strict';
-
-const NS = window.UrinalysisTestResult;
-const {
-  emptyResult,
-  resultClassificationLabel,
-  abnormalitySeverityLabel,
-  followUpUrgencyLabel,
-  specimenTypeLabel,
-  cultureResultLabel,
-  reportStatusLabel,
-  recommendationLabel,
-  priorityLabel,
-  resultClassificationClass,
-  abnormalitySeverityClass,
-  followUpUrgencyClass,
-  calculateGrade
-} = NS;
 
 // ----------------------------------------------------------------------
 // Persistence
@@ -1147,4 +1131,3 @@ if (document.readyState === 'loading') {
 } else {
   init();
 }
-})();

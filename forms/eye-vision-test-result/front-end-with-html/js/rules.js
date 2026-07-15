@@ -19,9 +19,6 @@
  */
 
 // Wrapped in an IIFE; published via window.EyeVisionTestResult.
-(function () {
-'use strict';
-window.EyeVisionTestResult = window.EyeVisionTestResult || {};
 
 // ----------------------------------------------------------------------
 // Clinical thresholds (mirror `utils.ts`)
@@ -521,17 +518,4 @@ function gradeFollowUp(r, classification, severity) {
   };
 }
 
-Object.assign(window.EyeVisionTestResult, {
-  ACUTE_IOP_MMHG,
-  RAISED_IOP_MMHG,
-  hasAcuteRaisedIop,
-  hasElevatedIop,
-  hasCriticalFinding,
-  hasAnyAbnormalFinding,
-  hasReferableRetinopathy,
-  classifyResult,
-  gradeSeverity,
-  gradeCompleteness,
-  gradeFollowUp
-});
-})();
+export { ACUTE_IOP_MMHG, RAISED_IOP_MMHG, hasAcuteRaisedIop, hasElevatedIop, hasCriticalFinding, hasAnyAbnormalFinding, hasReferableRetinopathy, classifyResult, gradeSeverity, gradeCompleteness, gradeFollowUp };

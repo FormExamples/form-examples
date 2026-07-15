@@ -1,6 +1,6 @@
-(function () {
-  'use strict';
-  const NS = window.AgilePrinciplesDashboard;
+import { fetchAssessments } from './api.js';
+
+  
   const MATURITIES = ['optimising', 'mature', 'developing', 'initial', 'ad-hoc', 'insufficient-data'];
   const ROLES = [
     'individual-contributor',
@@ -290,7 +290,7 @@
   }
 
   document.addEventListener('DOMContentLoaded', function () {
-    NS.fetchAssessments().then(function (rows) {
+    fetchAssessments().then(function (rows) {
       state.rows = rows;
       renderTiles();
       renderFilters();
@@ -312,4 +312,3 @@
     document.getElementById('tab-teams').addEventListener('click', function () { setView('teams'); });
     document.getElementById('export-csv').addEventListener('click', exportCsv);
   });
-})();

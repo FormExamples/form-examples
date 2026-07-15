@@ -236,9 +236,6 @@
 // classic <script> (no ES modules) so the page can be opened directly via
 // `file://`. The IIFE attaches its public symbols to a single global
 // namespace, `window.PostOperativeReport`.
-(function () {
-'use strict';
-window.PostOperativeReport = window.PostOperativeReport || {};
 
 /**
  * Build a fresh, fully-blank assessment.
@@ -361,8 +358,4 @@ function calculateDurationMinutes(startTime, endTime) {
   return diff;
 }
 
-Object.assign(window.PostOperativeReport, {
-  emptyAssessment,
-  calculateDurationMinutes
-});
-})();
+export { emptyAssessment, calculateDurationMinutes };

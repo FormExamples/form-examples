@@ -1,3 +1,7 @@
+import { createDefaultData } from './data-model.js';
+import { grade } from './grader.js';
+import { renderNoticeHtml } from './notice-text.js';
+
 // Care Privacy Notice — acknowledgement wizard (vanilla JavaScript).
 //
 // Single-page continuous wizard: every section is rendered into the page
@@ -11,12 +15,6 @@
 // BMA privacy notice prose builder. All public symbols are kept local and
 // the file is wrapped in an IIFE so it does not leak top-level
 // identifiers.
-
-(function () {
-'use strict';
-
-const NS = window.CarePrivacyNotice;
-const { renderNoticeHtml, createDefaultData, grade } = NS;
 
 // ----------------------------------------------------------------------
 // Persistence
@@ -650,4 +648,3 @@ if (document.readyState === 'loading') {
 } else {
   init();
 }
-})();

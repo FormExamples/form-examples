@@ -213,9 +213,6 @@
 // classic <script> (no ES modules) so the page can be opened directly via
 // `file://`. The IIFE attaches its public symbols to a single global
 // namespace, `window.OrthopedicAssessment`.
-(function () {
-'use strict';
-window.OrthopedicAssessment = window.OrthopedicAssessment || {};
 
 /**
  * Build a fresh, fully-blank assessment.
@@ -345,10 +342,4 @@ function dashCategoryClass(score) {
   return 'dash-very-severe';
 }
 
-Object.assign(window.OrthopedicAssessment, {
-  emptyAssessment,
-  calculateAge,
-  dashCategory,
-  dashCategoryClass
-});
-})();
+export { emptyAssessment, calculateAge, dashCategory, dashCategoryClass };

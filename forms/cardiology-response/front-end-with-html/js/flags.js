@@ -1,3 +1,5 @@
+import { hasCriticalFinding, hasReducedEjectionFraction } from './types.js';
+
 // Safety-flag detection for the Cardiology Response engine.
 //
 // Pure function returning safety flags using the grade_flag categories from
@@ -9,13 +11,6 @@
 // Each flag is { flagId, category, priority, description, suggestedAction }.
 // Flag IDs are stable and identical across every front-end and the back-end.
 // Wrapped in an IIFE; published via `window.CardiologyResponse`.
-
-(function () {
-'use strict';
-window.CardiologyResponse =
-  window.CardiologyResponse || {};
-const NS = window.CardiologyResponse;
-const { hasCriticalFinding, hasReducedEjectionFraction } = NS;
 
 /**
  * Detect safety flags for a cardiology response.
@@ -126,5 +121,4 @@ function detectFlags(r) {
   return flags;
 }
 
-Object.assign(NS, { detectFlags });
-})();
+export { detectFlags };

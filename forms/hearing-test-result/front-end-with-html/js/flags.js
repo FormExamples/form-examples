@@ -1,3 +1,5 @@
+import { hasCriticalFinding } from './rules.js';
+
 // Safety-critical flag detection for the Hearing Test Result.
 //
 // Faithful vanilla-JavaScript port of the SvelteKit engine module
@@ -14,10 +16,6 @@
 
 // Wrapped in an IIFE; published via window.HearingTestResult.
 // Depends on rules.js (hasCriticalFinding), so it must load after it.
-(function () {
-'use strict';
-window.HearingTestResult = window.HearingTestResult || {};
-const { hasCriticalFinding } = window.HearingTestResult;
 
 /**
  * Detect the safety-critical flags for a report.
@@ -152,7 +150,4 @@ function detectFlags(r) {
   return flags;
 }
 
-Object.assign(window.HearingTestResult, {
-  detectFlags
-});
-})();
+export { detectFlags };

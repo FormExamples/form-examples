@@ -6,11 +6,6 @@
 // all three risk bands, and every care setting, with the admit flag set
 // whenever the total score is >= 3.
 
-(function () {
-'use strict';
-window.Curb65PneumoniaSeverityScoreDashboard =
-  window.Curb65PneumoniaSeverityScoreDashboard || {};
-
 /** @type {import('./dashboard-types.js').AssessmentRow[]} */
 const sampleAssessments = [
   {
@@ -103,6 +98,4 @@ const sampleAssessments = [
   }
 ];
 
-window.Curb65PneumoniaSeverityScoreDashboard.sampleAssessments =
-  sampleAssessments;
-})();
+export { sampleAssessments };

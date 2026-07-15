@@ -1,8 +1,6 @@
-(function () {
-  'use strict';
-  const NS = (window.AgilePrinciplesDashboard = window.AgilePrinciplesDashboard || {});
+  
 
-  NS.SAMPLE_ASSESSMENTS = [
+  export const SAMPLE_ASSESSMENTS = [
     { id: 'A001', date: '2025-07-15', respondent: 'Alice Hopper', role: 'scrum-master', team: 'Aurora', organisation: 'Acme Engineering', answered: 12, meanScore: 3.42, maturity: 'developing', weakPrinciples: ['P3 Deliver frequently', 'P9 Technical excellence'], flags: ['slow-delivery', 'technical-debt'] },
     { id: 'A002', date: '2025-10-15', respondent: 'Alice Hopper', role: 'scrum-master', team: 'Aurora', organisation: 'Acme Engineering', answered: 12, meanScore: 3.83, maturity: 'mature', weakPrinciples: ['P9 Technical excellence'], flags: ['technical-debt'] },
     { id: 'A003', date: '2026-01-15', respondent: 'Alice Hopper', role: 'scrum-master', team: 'Aurora', organisation: 'Acme Engineering', answered: 12, meanScore: 4.25, maturity: 'mature', weakPrinciples: [], flags: [] },
@@ -24,4 +22,3 @@
 
     { id: 'A014', date: '2026-04-18', respondent: 'Farah Lopez', role: 'team-lead', team: 'Fornax', organisation: 'Acme Engineering', answered: 4, meanScore: null, maturity: 'insufficient-data', weakPrinciples: [], flags: ['insufficient-data'] },
   ];
-})();

@@ -1,11 +1,8 @@
+import { calculateAge } from './types.js';
+
 // Detects additional flags that should be highlighted for the clinician,
 // independent of UKMEC categorisation. Mirrors the SvelteKit reference
 // engine in `src/lib/engine/flagged-issues.ts`.
-
-(function () {
-'use strict';
-window.ContraceptionAssessment = window.ContraceptionAssessment || {};
-const NS = window.ContraceptionAssessment;
 
 /**
  * @param {Object} data
@@ -14,7 +11,7 @@ const NS = window.ContraceptionAssessment;
  */
 function detectAdditionalFlags(data, ukmecResults) {
   const flags = [];
-  const age = NS.calculateAge(data.demographics.dateOfBirth);
+  const age = calculateAge(data.demographics.dateOfBirth);
 
   // Preferred method has UKMEC 3 or 4
   if (data.preferencesPriorities.preferredMethod) {
@@ -195,7 +192,4 @@ function detectAdditionalFlags(data, ukmecResults) {
   return flags;
 }
 
-Object.assign(window.ContraceptionAssessment, {
-  detectAdditionalFlags
-});
-})();
+export { detectAdditionalFlags };

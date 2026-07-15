@@ -1,3 +1,7 @@
+import { calculateGrade } from './grader.js';
+import { isBiRadsCritical, isBiRadsUrgent } from './rules.js';
+import { abnormalitySeverityClass, abnormalitySeverityLabel, biRadsLabel, breastDensityLabel, emptyResult, examTypeLabel, followUpUrgencyClass, followUpUrgencyLabel, lateralityLabel, priorityLabel, recommendationLabel, reportStatusLabel, resultClassificationClass, resultClassificationLabel } from './types.js';
+
 // Mammography Test Result — reporting-clinician wizard
 // (vanilla JavaScript, no build).
 //
@@ -15,29 +19,6 @@
 // exports to `window.MammographyTestResult`. Pulling them off here keeps the
 // rest of this file referring to short local names. The whole file is wrapped
 // in an IIFE so its top-level identifiers don't leak.
-(function () {
-'use strict';
-
-const NS = window.MammographyTestResult;
-const {
-  emptyResult,
-  resultClassificationLabel,
-  abnormalitySeverityLabel,
-  followUpUrgencyLabel,
-  examTypeLabel,
-  lateralityLabel,
-  breastDensityLabel,
-  biRadsLabel,
-  reportStatusLabel,
-  recommendationLabel,
-  priorityLabel,
-  resultClassificationClass,
-  abnormalitySeverityClass,
-  followUpUrgencyClass,
-  isBiRadsUrgent,
-  isBiRadsCritical,
-  calculateGrade
-} = NS;
 
 // ----------------------------------------------------------------------
 // Persistence
@@ -1085,4 +1066,3 @@ if (document.readyState === 'loading') {
 } else {
   init();
 }
-})();

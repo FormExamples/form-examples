@@ -110,10 +110,6 @@
 // classic <script> (no ES modules) so the page can be opened directly via
 // `file://`. The IIFE attaches its public symbols to a single global
 // namespace, `window.EdinburghPostnatalDepressionScale`.
-(function () {
-'use strict';
-window.EdinburghPostnatalDepressionScale =
-  window.EdinburghPostnatalDepressionScale || {};
 
 /**
  * Build a fresh, fully-blank assessment.
@@ -241,15 +237,4 @@ function priorityLabel(priority) {
   }
 }
 
-Object.assign(window.EdinburghPostnatalDepressionScale, {
-  emptyAssessment,
-  bandLabel,
-  bandClass,
-  clinicianRoleLabel,
-  careSettingLabel,
-  perinatalStageLabel,
-  ageBandLabel,
-  assistanceNeededLabel,
-  priorityLabel
-});
-})();
+export { emptyAssessment, bandLabel, bandClass, clinicianRoleLabel, careSettingLabel, perinatalStageLabel, ageBandLabel, assistanceNeededLabel, priorityLabel };

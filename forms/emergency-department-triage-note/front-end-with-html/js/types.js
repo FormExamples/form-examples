@@ -159,9 +159,6 @@
 // classic <script> (no ES modules) so the page can be opened directly via
 // `file://`. The IIFE attaches its public symbols to a single global
 // namespace, `window.EmergencyDepartmentTriageNote`.
-(function () {
-'use strict';
-window.EmergencyDepartmentTriageNote = window.EmergencyDepartmentTriageNote || {};
 
 /**
  * Build a fresh, fully-blank assessment.
@@ -363,20 +360,4 @@ function priorityLabel(priority) {
   }
 }
 
-Object.assign(window.EmergencyDepartmentTriageNote, {
-  emptyAssessment,
-  priorityColour,
-  priorityName,
-  targetMinutes,
-  targetLabel,
-  priorityClass,
-  careSettingLabel,
-  arrivalModeLabel,
-  ageBandLabel,
-  sexLabel,
-  onOxygenLabel,
-  acvpuLabel,
-  yesNoLabel,
-  priorityLabel
-});
-})();
+export { emptyAssessment, priorityColour, priorityName, targetMinutes, targetLabel, priorityClass, careSettingLabel, arrivalModeLabel, ageBandLabel, sexLabel, onOxygenLabel, acvpuLabel, yesNoLabel, priorityLabel };

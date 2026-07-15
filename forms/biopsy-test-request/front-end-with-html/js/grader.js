@@ -1,3 +1,6 @@
+import { detectFlags } from './flags.js';
+import { scoreAppropriateness, scoreBleedingRisk, scoreCompleteness, scoreTriage } from './rules.js';
+
 // Four-axis grader for the Biopsy Test Request.
 //
 // Composes the rule sets in rules.js and the safety flags in flags.js into a
@@ -7,18 +10,6 @@
 // columns.
 //
 // Wrapped in an IIFE; published via `window.BiopsyTestRequest`.
-
-(function () {
-'use strict';
-window.BiopsyTestRequest = window.BiopsyTestRequest || {};
-const NS = window.BiopsyTestRequest;
-const {
-  scoreAppropriateness,
-  scoreBleedingRisk,
-  scoreCompleteness,
-  scoreTriage,
-  detectFlags
-} = NS;
 
 /**
  * Derive an overall recommendation for the pathology / imaging vetting desk
@@ -106,9 +97,4 @@ function calculateGrade(data) {
   };
 }
 
-Object.assign(NS, {
-  calculateGrade,
-  deriveRecommendation,
-  RECOMMENDATION_LABELS
-});
-})();
+export { calculateGrade, deriveRecommendation, RECOMMENDATION_LABELS };

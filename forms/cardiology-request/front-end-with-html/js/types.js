@@ -5,11 +5,6 @@
 // Property names are camelCase to match the front-end serde / examples
 // convention. Wrapped in an IIFE; published via `window.CardiologyRequest`.
 
-(function () {
-'use strict';
-window.CardiologyRequest =
-  window.CardiologyRequest || {};
-
 /**
  * Build a fresh, fully-blank cardiology referral request.
  * Strings default to ''; numeric / date fields default to null;
@@ -113,11 +108,4 @@ function reasonLabel(value) {
   return REASON_LABELS[value] || value || '';
 }
 
-Object.assign(window.CardiologyRequest, {
-  emptyRequest,
-  serviceLabel,
-  reasonLabel,
-  SERVICE_LABELS,
-  REASON_LABELS
-});
-})();
+export { emptyRequest, serviceLabel, reasonLabel, SERVICE_LABELS, REASON_LABELS };

@@ -1,3 +1,5 @@
+import { calculateAge } from './types.js';
+
 // STOP-BANG OSA screening — 8 yes/no items, sum 0-8.
 //
 // SB-S  Snoring loudly        (Step 7)
@@ -10,11 +12,6 @@
 // SB-G  Sex = male            (Step 1)
 //
 // Score risk mapping: 0-2 = low, 3-4 = medium, 5-8 = high.
-
-(function () {
-'use strict';
-window.AnesthesiologyAssessment = window.AnesthesiologyAssessment || {};
-const { calculateAge } = window.AnesthesiologyAssessment;
 
 function stopbangRiskFromScore(score) {
   if (score >= 5) return 'high';
@@ -115,8 +112,4 @@ function evaluateStopbang(d) {
   };
 }
 
-Object.assign(window.AnesthesiologyAssessment, {
-  stopbangRiskFromScore,
-  evaluateStopbang
-});
-})();
+export { stopbangRiskFromScore, evaluateStopbang };

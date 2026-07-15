@@ -12,12 +12,6 @@
 //
 // Wrapped in an IIFE; published via `window.LumbarPunctureTestRequest`.
 
-(function () {
-'use strict';
-window.LumbarPunctureTestRequest =
-  window.LumbarPunctureTestRequest || {};
-const NS = window.LumbarPunctureTestRequest;
-
 // ----------------------------------------------------------------------
 // Axis A — Appropriateness (1-9 ordinal indication match)
 // ----------------------------------------------------------------------
@@ -385,17 +379,4 @@ function scoreTriage(data) {
   };
 }
 
-Object.assign(NS, {
-  scoreAppropriateness,
-  appropriatenessBand,
-  scoreSafety,
-  scoreCompleteness,
-  scoreTriage,
-  maxTier,
-  maxBand,
-  TRIAGE_ORDER,
-  CONTRAINDICATION_ORDER,
-  TARGET_TIMEFRAMES,
-  INDICATION_INTENT_MAP
-});
-})();
+export { scoreAppropriateness, appropriatenessBand, scoreSafety, scoreCompleteness, scoreTriage, maxTier, maxBand, TRIAGE_ORDER, CONTRAINDICATION_ORDER, TARGET_TIMEFRAMES, INDICATION_INTENT_MAP };

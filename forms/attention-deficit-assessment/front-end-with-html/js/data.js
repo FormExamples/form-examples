@@ -6,11 +6,6 @@
 // comorbidities populated for a subset; NHS numbers in the canonical
 // "NNN NNN NNNN" display form.
 
-(function () {
-'use strict';
-window.AttentionDeficitAssessmentDashboard =
-  window.AttentionDeficitAssessmentDashboard || {};
-
 /** @type {import('./types.js').PatientRow[]} */
 const samplePatients = [
   {
@@ -123,5 +118,4 @@ const samplePatients = [
   }
 ];
 
-window.AttentionDeficitAssessmentDashboard.samplePatients = samplePatients;
-})();
+export { samplePatients };

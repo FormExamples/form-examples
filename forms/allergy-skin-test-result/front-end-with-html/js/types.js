@@ -135,9 +135,6 @@
 // classic <script> (no ES modules) so the page can be opened directly via
 // `file://`. The IIFE attaches its public symbols to a single global
 // namespace, `window.AllergySkinTestResult`.
-(function () {
-'use strict';
-window.AllergySkinTestResult = window.AllergySkinTestResult || {};
 
 /**
  * Build a fresh, fully-blank allergy skin test result.
@@ -309,17 +306,4 @@ function followUpUrgencyClass(value) {
   }
 }
 
-Object.assign(window.AllergySkinTestResult, {
-  emptyResult,
-  resultClassificationLabel,
-  abnormalitySeverityLabel,
-  followUpUrgencyLabel,
-  testTypeLabel,
-  reportStatusLabel,
-  recommendationLabel,
-  priorityLabel,
-  resultClassificationClass,
-  abnormalitySeverityClass,
-  followUpUrgencyClass
-});
-})();
+export { emptyResult, resultClassificationLabel, abnormalitySeverityLabel, followUpUrgencyLabel, testTypeLabel, reportStatusLabel, recommendationLabel, priorityLabel, resultClassificationClass, abnormalitySeverityClass, followUpUrgencyClass };

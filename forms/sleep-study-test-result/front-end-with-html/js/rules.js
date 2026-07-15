@@ -20,9 +20,6 @@
  */
 
 // Wrapped in an IIFE; published via window.SleepStudyTestResult.
-(function () {
-'use strict';
-window.SleepStudyTestResult = window.SleepStudyTestResult || {};
 
 // ----------------------------------------------------------------------
 // Structured-findings predicates (mirror `utils.ts`)
@@ -494,17 +491,4 @@ function gradeFollowUp(r, classification, severity) {
   };
 }
 
-Object.assign(window.SleepStudyTestResult, {
-  SEVERE_AHI_THRESHOLD,
-  isSevereAhi,
-  hasCriticalFinding,
-  hasAnyAbnormalFinding,
-  hasOnlyPeriodicLimbMovements,
-  ahiSeverityBand,
-  ahiReportingCategory,
-  classifyResult,
-  gradeSeverity,
-  gradeCompleteness,
-  gradeFollowUp
-});
-})();
+export { SEVERE_AHI_THRESHOLD, isSevereAhi, hasCriticalFinding, hasAnyAbnormalFinding, hasOnlyPeriodicLimbMovements, ahiSeverityBand, ahiReportingCategory, classifyResult, gradeSeverity, gradeCompleteness, gradeFollowUp };

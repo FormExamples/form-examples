@@ -24,11 +24,6 @@
  * @typedef {import('./types.js').GradingResult} GradingResult
  */
 
-(function () {
-'use strict';
-window.SeasonalAffectiveDisorderAssessment =
-  window.SeasonalAffectiveDisorderAssessment || {};
-
 /**
  * Detect prioritised flagged issues for a given assessment + grading.
  *
@@ -271,6 +266,4 @@ function detectAdditionalFlags(data, g) {
   return flags;
 }
 
-window.SeasonalAffectiveDisorderAssessment.detectAdditionalFlags =
-  detectAdditionalFlags;
-})();
+export { detectAdditionalFlags };

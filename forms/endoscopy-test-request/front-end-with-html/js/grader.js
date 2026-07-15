@@ -1,3 +1,6 @@
+import { detectFlags } from './flags.js';
+import { scoreAppropriateness, scoreCompleteness, scoreRisk, scoreUrgency } from './rules.js';
+
 // Four-axis grader for the Endoscopy Test Request.
 //
 // Composes the rule sets in rules.js and the safety flags in flags.js into a
@@ -7,18 +10,6 @@
 // migration 05.
 //
 // Wrapped in an IIFE; published via `window.EndoscopyTestRequest`.
-
-(function () {
-'use strict';
-window.EndoscopyTestRequest = window.EndoscopyTestRequest || {};
-const NS = window.EndoscopyTestRequest;
-const {
-  scoreAppropriateness,
-  scoreUrgency,
-  scoreCompleteness,
-  scoreRisk,
-  detectFlags
-} = NS;
 
 /**
  * Derive an overall recommendation for the endoscopy vetting desk from the
@@ -112,9 +103,4 @@ function calculateGrade(data) {
   };
 }
 
-Object.assign(NS, {
-  calculateGrade,
-  deriveRecommendation,
-  RECOMMENDATION_LABELS
-});
-})();
+export { calculateGrade, deriveRecommendation, RECOMMENDATION_LABELS };

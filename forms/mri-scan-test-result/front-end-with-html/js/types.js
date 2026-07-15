@@ -148,9 +148,6 @@
 // classic <script> (no ES modules) so the page can be opened directly via
 // `file://`. The IIFE attaches its public symbols to a single global
 // namespace, `window.MriScanTestResult`.
-(function () {
-'use strict';
-window.MriScanTestResult = window.MriScanTestResult || {};
 
 /**
  * The numeric report fields, which default to `null` (not `''`) and must be
@@ -359,20 +356,4 @@ function followUpUrgencyClass(value) {
   }
 }
 
-Object.assign(window.MriScanTestResult, {
-  NUMERIC_FIELDS,
-  emptyResult,
-  resultClassificationLabel,
-  abnormalitySeverityLabel,
-  followUpUrgencyLabel,
-  bodyRegionLabel,
-  reportStatusLabel,
-  contrastUsedLabel,
-  examinationAdequacyLabel,
-  recommendationLabel,
-  priorityLabel,
-  resultClassificationClass,
-  abnormalitySeverityClass,
-  followUpUrgencyClass
-});
-})();
+export { NUMERIC_FIELDS, emptyResult, resultClassificationLabel, abnormalitySeverityLabel, followUpUrgencyLabel, bodyRegionLabel, reportStatusLabel, contrastUsedLabel, examinationAdequacyLabel, recommendationLabel, priorityLabel, resultClassificationClass, abnormalitySeverityClass, followUpUrgencyClass };

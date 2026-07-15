@@ -127,10 +127,6 @@
 // classic <script> (no ES modules) so the page can be opened directly via
 // `file://`. The IIFE attaches its public symbols to a single global
 // namespace, `window.BowelCancerScreeningFit`.
-(function () {
-'use strict';
-window.BowelCancerScreeningFit =
-  window.BowelCancerScreeningFit || {};
 
 /** Default programme (screening) threshold in ug Hb/g. */
 const DEFAULT_THRESHOLD = 120;
@@ -265,16 +261,4 @@ function priorityLabel(priority) {
   }
 }
 
-Object.assign(window.BowelCancerScreeningFit, {
-  DEFAULT_THRESHOLD,
-  emptyAssessment,
-  resultClassLabel,
-  resultClassClass,
-  managementActionLabel,
-  clinicianRoleLabel,
-  sexLabel,
-  withinAgeRangeLabel,
-  sampleAdequacyLabel,
-  priorityLabel
-});
-})();
+export { DEFAULT_THRESHOLD, emptyAssessment, resultClassLabel, resultClassClass, managementActionLabel, clinicianRoleLabel, sexLabel, withinAgeRangeLabel, sampleAdequacyLabel, priorityLabel };

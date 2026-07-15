@@ -1,3 +1,5 @@
+import { involvesNeedleEmg } from './types.js';
+
 // Four-axis rule catalogue for the Nerve Conduction Study Test Request engine.
 //
 // Derived from index.md and SQL migration 05/06: (A) appropriateness 1-9 + band
@@ -10,13 +12,6 @@
 // helpers; the grader composes them.
 //
 // Wrapped in an IIFE; published via `window.NerveConductionStudyTestRequest`.
-
-(function () {
-'use strict';
-window.NerveConductionStudyTestRequest =
-  window.NerveConductionStudyTestRequest || {};
-const NS = window.NerveConductionStudyTestRequest;
-const { involvesNeedleEmg } = NS;
 
 // ----------------------------------------------------------------------
 // Axis A — Appropriateness (AANEM / AAN electrodiagnostic, 1-9 ordinal)
@@ -328,17 +323,4 @@ function scoreTriage(data) {
   };
 }
 
-Object.assign(NS, {
-  scoreAppropriateness,
-  appropriatenessBand,
-  scoreProceduralRisk,
-  scoreCompleteness,
-  scoreTriage,
-  maxTier,
-  maxRisk,
-  TRIAGE_ORDER,
-  TARGET_TIMEFRAMES,
-  RISK_ORDER,
-  INDICATION_STUDY_MAP
-});
-})();
+export { scoreAppropriateness, appropriatenessBand, scoreProceduralRisk, scoreCompleteness, scoreTriage, maxTier, maxRisk, TRIAGE_ORDER, TARGET_TIMEFRAMES, RISK_ORDER, INDICATION_STUDY_MAP };

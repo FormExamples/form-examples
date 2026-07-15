@@ -1,3 +1,5 @@
+import { CONDITIONS } from './types.js';
+
 // Newborn blood spot classification rules (pure, no I/O).
 //
 // This form is a documentation-and-classification record, not a numeric score.
@@ -27,10 +29,6 @@
  */
 
 // Wrapped in an IIFE; published via window.NewbornBloodSpotScreening.
-(function () {
-'use strict';
-window.NewbornBloodSpotScreening = window.NewbornBloodSpotScreening || {};
-const { CONDITIONS } = window.NewbornBloodSpotScreening;
 
 // Repeat reasons that indicate an avoidable repeat (sampling technique or card
 // fault, rather than a genuinely borderline result).
@@ -124,12 +122,4 @@ function deriveSampleQuality(data, ageAtSampleDays) {
   };
 }
 
-Object.assign(window.NewbornBloodSpotScreening, {
-  AVOIDABLE_REPEAT_REASONS,
-  normaliseConditionResults,
-  deriveReferrals,
-  deriveOverallOutcome,
-  deriveReferralStatus,
-  deriveSampleQuality
-});
-})();
+export { AVOIDABLE_REPEAT_REASONS, normaliseConditionResults, deriveReferrals, deriveOverallOutcome, deriveReferralStatus, deriveSampleQuality };

@@ -6,9 +6,6 @@
 //   - 'disagree' -> score 1 if response is "definitely-disagree" or "slightly-disagree"
 
 // Wrapped in an IIFE; published via window.AutismAssessment.
-(function () {
-'use strict';
-window.AutismAssessment = window.AutismAssessment || {};
 
 const aq10Questions = [
   {
@@ -110,10 +107,4 @@ function aq10ScoreFromResponse(questionNumber, responseValue) {
   return isDisagree ? 1 : 0;
 }
 
-Object.assign(window.AutismAssessment, {
-  aq10Questions,
-  aq10ResponseOptions,
-  aq10ScoringDirections,
-  aq10ScoreFromResponse
-});
-})();
+export { aq10Questions, aq10ResponseOptions, aq10ScoringDirections, aq10ScoreFromResponse };

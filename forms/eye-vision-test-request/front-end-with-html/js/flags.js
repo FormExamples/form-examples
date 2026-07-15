@@ -9,12 +9,6 @@
 // Flag IDs are stable and identical across every front-end and the back-end.
 // Wrapped in an IIFE; published via `window.EyeVisionTestRequest`.
 
-(function () {
-'use strict';
-window.EyeVisionTestRequest =
-  window.EyeVisionTestRequest || {};
-const NS = window.EyeVisionTestRequest;
-
 /**
  * Detect safety flags for an eye vision test request.
  *
@@ -95,5 +89,4 @@ function detectFlags(data, context) {
   return flags;
 }
 
-Object.assign(NS, { detectFlags });
-})();
+export { detectFlags };

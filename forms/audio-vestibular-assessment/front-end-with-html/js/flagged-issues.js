@@ -8,10 +8,6 @@
 //
 // Priority levels: urgent > high > medium > low.
 
-(function () {
-'use strict';
-const NS = window.AudioVestibularAssessment = window.AudioVestibularAssessment || {};
-
 /**
  * @param {object} data    AssessmentData
  * @param {object} result  GradingResult from `grade(data)`
@@ -252,5 +248,4 @@ function detectAdditionalFlags(data, result) {
   return flags;
 }
 
-NS.detectAdditionalFlags = detectAdditionalFlags;
-})();
+export { detectAdditionalFlags };

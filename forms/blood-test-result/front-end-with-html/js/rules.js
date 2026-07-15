@@ -19,9 +19,6 @@
  */
 
 // Wrapped in an IIFE; published via window.BloodTestResult.
-(function () {
-'use strict';
-window.BloodTestResult = window.BloodTestResult || {};
 
 // ----------------------------------------------------------------------
 // Interpretation-summary predicates (mirror `utils.ts`)
@@ -470,15 +467,4 @@ function gradeFollowUp(r, classification, severity) {
   };
 }
 
-Object.assign(window.BloodTestResult, {
-  hasCriticalValue,
-  hasAbnormalResult,
-  analyteValues,
-  hasAnyResultValue,
-  structuredReportingCategory,
-  classifyResult,
-  gradeSeverity,
-  gradeCompleteness,
-  gradeFollowUp
-});
-})();
+export { hasCriticalValue, hasAbnormalResult, analyteValues, hasAnyResultValue, structuredReportingCategory, classifyResult, gradeSeverity, gradeCompleteness, gradeFollowUp };

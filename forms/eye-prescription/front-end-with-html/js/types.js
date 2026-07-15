@@ -5,9 +5,7 @@
 // Empty string `''` for unanswered text/enum fields; null for unanswered
 // numeric fields.
 
-(function () {
-  'use strict';
-  const NS = (window.EyePrescription = window.EyePrescription || {});
+  
 
   function emptyEye() {
     return {
@@ -150,8 +148,9 @@
     return age;
   }
 
-  NS.emptyPrescription = emptyPrescription;
-  NS.emptyEye = emptyEye;
-  NS.snapQuarter = snapQuarter;
-  NS.ageInYears = ageInYears;
-}());
+  
+  
+  
+  
+
+export { emptyPrescription, emptyEye, snapQuarter, ageInYears };

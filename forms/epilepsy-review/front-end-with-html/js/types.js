@@ -186,9 +186,6 @@
 // classic <script> (no ES modules) so the page can be opened directly via
 // `file://`. The IIFE attaches its public symbols to a single global
 // namespace, `window.EpilepsyReview`.
-(function () {
-'use strict';
-window.EpilepsyReview = window.EpilepsyReview || {};
 
 /**
  * Build a fresh, fully-blank review. Text / enum fields default to `''`;
@@ -344,15 +341,4 @@ function priorityClass(priority) {
   }
 }
 
-Object.assign(window.EpilepsyReview, {
-  emptyAssessment,
-  seizureControlLabel,
-  seizureControlClass,
-  reviewStatusLabel,
-  reviewStatusClass,
-  reviewerRoleLabel,
-  careSettingLabel,
-  priorityLabel,
-  priorityClass
-});
-})();
+export { emptyAssessment, seizureControlLabel, seizureControlClass, reviewStatusLabel, reviewStatusClass, reviewerRoleLabel, careSettingLabel, priorityLabel, priorityClass };

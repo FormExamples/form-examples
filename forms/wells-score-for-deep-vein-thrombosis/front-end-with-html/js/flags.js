@@ -16,10 +16,6 @@
  */
 
 // Wrapped in an IIFE; published via window.WellsScoreForDeepVeinThrombosis.
-(function () {
-'use strict';
-window.WellsScoreForDeepVeinThrombosis =
-  window.WellsScoreForDeepVeinThrombosis || {};
 
 // The ten criterion inputs, in wizard order, with a human label for the
 // incomplete-assessment flag.
@@ -116,5 +112,4 @@ function detectFlaggedIssues(data, wellsScore) {
   return flags;
 }
 
-window.WellsScoreForDeepVeinThrombosis.detectFlaggedIssues = detectFlaggedIssues;
-})();
+export { detectFlaggedIssues };

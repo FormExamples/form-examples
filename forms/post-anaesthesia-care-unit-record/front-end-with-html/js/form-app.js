@@ -1,3 +1,7 @@
+import { detectFlaggedIssues } from './flags.js';
+import { calculatePacuGrade } from './grader.js';
+import { emptyAssessment, priorityLabel, readinessBandClass, readinessBandLabel } from './types.js';
+
 // Post-Anaesthesia Care Unit (PACU) Record — recovery wizard
 // (vanilla JavaScript, no build).
 //
@@ -14,18 +18,6 @@
 // to `window.PostAnaesthesiaCareUnitRecord`. Pulling them off here keeps the
 // rest of this file referring to short local names. The whole file is wrapped in
 // an IIFE so its top-level identifiers don't leak.
-(function () {
-'use strict';
-
-const NS = window.PostAnaesthesiaCareUnitRecord;
-const {
-  emptyAssessment,
-  readinessBandLabel,
-  readinessBandClass,
-  priorityLabel,
-  calculatePacuGrade,
-  detectFlaggedIssues
-} = NS;
 
 // ----------------------------------------------------------------------
 // Option lists (single source of truth for wizard inputs + report labels)
@@ -1123,4 +1115,3 @@ if (document.readyState === 'loading') {
 } else {
   init();
 }
-})();

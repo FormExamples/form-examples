@@ -11,10 +11,6 @@
 // category, description).
 
 // Wrapped in an IIFE; published via window.ParklandFormulaForBurns.
-(function () {
-'use strict';
-window.ParklandFormulaForBurns =
-  window.ParklandFormulaForBurns || {};
 
 // ─── Parkland constants (spec §4) ───────────────────────────────
 /** Parkland (Baxter) coefficient in mL per kg per %TBSA. */
@@ -46,14 +42,4 @@ function referralThreshold(ageBand) {
   return ageBand === 'child' ? REFERRAL_TBSA_CHILD : REFERRAL_TBSA_ADULT;
 }
 
-Object.assign(window.ParklandFormulaForBurns, {
-  PARKLAND_COEFFICIENT,
-  FIRST_PHASE_HOURS,
-  SECOND_PHASE_HOURS,
-  URINE_LOW_FACTOR,
-  URINE_HIGH_FACTOR,
-  REFERRAL_TBSA_ADULT,
-  REFERRAL_TBSA_CHILD,
-  referralThreshold
-});
-})();
+export { PARKLAND_COEFFICIENT, FIRST_PHASE_HOURS, SECOND_PHASE_HOURS, URINE_LOW_FACTOR, URINE_HIGH_FACTOR, REFERRAL_TBSA_ADULT, REFERRAL_TBSA_CHILD, referralThreshold };

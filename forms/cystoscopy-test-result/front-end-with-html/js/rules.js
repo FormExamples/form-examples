@@ -19,9 +19,6 @@
  */
 
 // Wrapped in an IIFE; published via window.CystoscopyTestResult.
-(function () {
-'use strict';
-window.CystoscopyTestResult = window.CystoscopyTestResult || {};
 
 // ----------------------------------------------------------------------
 // Structured-findings predicates (mirror `utils.ts`)
@@ -427,13 +424,4 @@ function gradeFollowUp(r, classification, severity) {
   };
 }
 
-Object.assign(window.CystoscopyTestResult, {
-  hasCriticalFinding,
-  hasAnyAbnormalFinding,
-  hasOnlyMinorFinding,
-  classifyResult,
-  gradeSeverity,
-  gradeCompleteness,
-  gradeFollowUp
-});
-})();
+export { hasCriticalFinding, hasAnyAbnormalFinding, hasOnlyMinorFinding, classifyResult, gradeSeverity, gradeCompleteness, gradeFollowUp };

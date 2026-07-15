@@ -32,9 +32,6 @@
  */
 
 // Wrapped in an IIFE; published via window.WardRoundNote.
-(function () {
-'use strict';
-window.WardRoundNote = window.WardRoundNote || {};
 
 /** A text/enum field is present when it is a non-blank string. */
 function has(v) {
@@ -177,10 +174,4 @@ function recommendedComponents(data) {
   ];
 }
 
-Object.assign(window.WardRoundNote, {
-  has,
-  componentPresence,
-  requiredComponents,
-  recommendedComponents
-});
-})();
+export { has, componentPresence, requiredComponents, recommendedComponents };

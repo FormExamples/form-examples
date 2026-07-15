@@ -31,13 +31,6 @@
  * @property {(d: AssessmentData) => TriState} evaluate
  */
 
-(function () {
-'use strict';
-window.EmergencyMedicalTechnicianPsychomotorExamination =
-  window.EmergencyMedicalTechnicianPsychomotorExamination || {};
-
-const NS = window.EmergencyMedicalTechnicianPsychomotorExamination;
-
 /**
  * Helper: read a tri-state field, normalising missing/unknown values.
  * @param {AssessmentData} d
@@ -411,5 +404,4 @@ const psychomotorRules = [
   }
 ];
 
-NS.psychomotorRules = psychomotorRules;
-})();
+export { psychomotorRules };

@@ -1,3 +1,6 @@
+import { evaluateRules } from './hematology-rules.js';
+import { calculateAbnormalityScore, collectNumericItems } from './types.js';
+
 // Hematology grader. Pure functions: take an `AssessmentData` object,
 // return the abnormality level, composite score (0-100), and fired rules.
 // If fewer than 3 numeric items are answered, returns "draft" status.
@@ -16,14 +19,6 @@
  */
 
 // Wrapped in an IIFE; published via window.HematologyAssessment.
-(function () {
-'use strict';
-window.HematologyAssessment = window.HematologyAssessment || {};
-const {
-  collectNumericItems,
-  calculateAbnormalityScore,
-  evaluateRules
-} = window.HematologyAssessment;
 
 /**
  * Calculate the composite abnormality from assessment data.
@@ -69,5 +64,4 @@ function calculateAbnormality(data) {
   };
 }
 
-window.HematologyAssessment.calculateAbnormality = calculateAbnormality;
-})();
+export { calculateAbnormality };

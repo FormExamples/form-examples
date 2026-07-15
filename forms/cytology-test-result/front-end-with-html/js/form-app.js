@@ -1,3 +1,6 @@
+import { calculateGrade } from './grader.js';
+import { abnormalitySeverityClass, abnormalitySeverityLabel, emptyResult, followUpUrgencyClass, followUpUrgencyLabel, hpvResultLabel, priorityLabel, recommendationLabel, reportStatusLabel, resultClassificationClass, resultClassificationLabel, specimenAdequacyLabel, specimenTypeLabel } from './types.js';
+
 // Cytology Test Result — reporting-clinician wizard
 // (vanilla JavaScript, no build).
 //
@@ -15,26 +18,6 @@
 // exports to `window.CytologyTestResult`. Pulling them off here keeps the
 // rest of this file referring to short local names. The whole file is wrapped
 // in an IIFE so its top-level identifiers don't leak.
-(function () {
-'use strict';
-
-const NS = window.CytologyTestResult;
-const {
-  emptyResult,
-  resultClassificationLabel,
-  abnormalitySeverityLabel,
-  followUpUrgencyLabel,
-  specimenTypeLabel,
-  reportStatusLabel,
-  specimenAdequacyLabel,
-  hpvResultLabel,
-  recommendationLabel,
-  priorityLabel,
-  resultClassificationClass,
-  abnormalitySeverityClass,
-  followUpUrgencyClass,
-  calculateGrade
-} = NS;
 
 // ----------------------------------------------------------------------
 // Persistence
@@ -992,4 +975,3 @@ if (document.readyState === 'loading') {
 } else {
   init();
 }
-})();

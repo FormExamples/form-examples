@@ -6,11 +6,6 @@
 // setting, with the recommended investigation following the band (ultrasound
 // when DVT likely, D-dimer when DVT unlikely).
 
-(function () {
-'use strict';
-window.WellsScoreForDeepVeinThrombosisDashboard =
-  window.WellsScoreForDeepVeinThrombosisDashboard || {};
-
 /** @type {import('./dashboard-types.js').AssessmentRow[]} */
 const sampleAssessments = [
   {
@@ -85,6 +80,4 @@ const sampleAssessments = [
   }
 ];
 
-window.WellsScoreForDeepVeinThrombosisDashboard.sampleAssessments =
-  sampleAssessments;
-})();
+export { sampleAssessments };

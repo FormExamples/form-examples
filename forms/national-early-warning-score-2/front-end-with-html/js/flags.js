@@ -22,9 +22,6 @@
  */
 
 // Wrapped in an IIFE; published via window.NationalEarlyWarningScore2.
-(function () {
-'use strict';
-window.NationalEarlyWarningScore2 = window.NationalEarlyWarningScore2 || {};
 
 /**
  * @param {AssessmentData} data
@@ -178,5 +175,4 @@ function detectFlaggedIssues(data, grade) {
   return flags;
 }
 
-window.NationalEarlyWarningScore2.detectFlaggedIssues = detectFlaggedIssues;
-})();
+export { detectFlaggedIssues };

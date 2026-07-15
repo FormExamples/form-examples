@@ -1,3 +1,5 @@
+import { normalizeLikertScores } from './types.js';
+
 // Patient Satisfaction Survey grading rules.
 //
 // Each rule evaluates the survey data and returns true if the condition is
@@ -16,10 +18,6 @@
  */
 
 // Wrapped in an IIFE; published via window.PatientSatisfactionSurvey.
-(function () {
-'use strict';
-window.PatientSatisfactionSurvey = window.PatientSatisfactionSurvey || {};
-const { normalizeLikertScores } = window.PatientSatisfactionSurvey;
 
 /** @type {SatisfactionRule[]} */
 const satisfactionRules = [
@@ -338,5 +336,4 @@ const satisfactionRules = [
   }
 ];
 
-window.PatientSatisfactionSurvey.satisfactionRules = satisfactionRules;
-})();
+export { satisfactionRules };

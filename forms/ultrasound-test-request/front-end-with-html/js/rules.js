@@ -12,12 +12,6 @@
 //
 // Wrapped in an IIFE; published via `window.UltrasoundTestRequest`.
 
-(function () {
-'use strict';
-window.UltrasoundTestRequest =
-  window.UltrasoundTestRequest || {};
-const NS = window.UltrasoundTestRequest;
-
 // ----------------------------------------------------------------------
 // Axis A — Appropriateness (ACR Appropriateness Criteria 1-9 ordinal)
 // ----------------------------------------------------------------------
@@ -358,16 +352,4 @@ function scoreTriage(data) {
   };
 }
 
-Object.assign(NS, {
-  scoreAppropriateness,
-  appropriatenessBand,
-  evaluateSuitability,
-  scoreCompleteness,
-  scoreTriage,
-  maxTier,
-  TRIAGE_ORDER,
-  TARGET_TIMEFRAMES,
-  REGION_PREP,
-  INDICATION_REGION_MAP
-});
-})();
+export { scoreAppropriateness, appropriatenessBand, evaluateSuitability, scoreCompleteness, scoreTriage, maxTier, TRIAGE_ORDER, TARGET_TIMEFRAMES, REGION_PREP, INDICATION_REGION_MAP };

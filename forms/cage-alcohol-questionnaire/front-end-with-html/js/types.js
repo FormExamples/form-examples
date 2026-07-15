@@ -95,10 +95,6 @@
 // classic <script> (no ES modules) so the page can be opened directly via
 // `file://`. The IIFE attaches its public symbols to a single global
 // namespace, `window.CageAlcoholQuestionnaire`.
-(function () {
-'use strict';
-window.CageAlcoholQuestionnaire =
-  window.CageAlcoholQuestionnaire || {};
 
 /**
  * Build a fresh, fully-blank assessment.
@@ -205,14 +201,4 @@ function priorityLabel(priority) {
   }
 }
 
-Object.assign(window.CageAlcoholQuestionnaire, {
-  emptyAssessment,
-  resultBandLabel,
-  resultBandClass,
-  clinicianRoleLabel,
-  careSettingLabel,
-  sexLabel,
-  ageBandLabel,
-  priorityLabel
-});
-})();
+export { emptyAssessment, resultBandLabel, resultBandClass, clinicianRoleLabel, careSettingLabel, sexLabel, ageBandLabel, priorityLabel };

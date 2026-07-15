@@ -8,11 +8,6 @@
 // Home, Family Carer, Residential Care, Nursing Home, Hospital). NHS
 // numbers are in the canonical "NNN NNN NNNN" display form.
 
-(function () {
-'use strict';
-window.SundownerSyndromeAssessmentDashboard =
-  window.SundownerSyndromeAssessmentDashboard || {};
-
 /** @type {import('./types.js').PatientRow[]} */
 const samplePatients = [
   {
@@ -161,5 +156,4 @@ const samplePatients = [
   }
 ];
 
-window.SundownerSyndromeAssessmentDashboard.samplePatients = samplePatients;
-})();
+export { samplePatients };

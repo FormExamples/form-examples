@@ -3,8 +3,6 @@
 // Wrapped in an IIFE so private symbols never leak. Public exports attach
 // to `window.FraminghamRiskScore`. Mirrors the SvelteKit
 // `src/lib/engine/types.ts` and `src/lib/stores/assessment.svelte.ts`.
-(function () {
-  'use strict';
 
   /** A pristine assessment with every field at its empty default. */
   function emptyAssessment() {
@@ -133,14 +131,7 @@
   }
 
   // Attach to namespace
-  window.FraminghamRiskScore = window.FraminghamRiskScore || {};
-  Object.assign(window.FraminghamRiskScore, {
-    emptyAssessment,
-    riskLevelLabel,
-    riskLevelClass,
-    convertMmolToMg,
-    calculateBmi,
-    isSmoker,
-    isLikelyDraft
-  });
-})();
+  
+  
+
+export { emptyAssessment, riskLevelLabel, riskLevelClass, convertMmolToMg, calculateBmi, isSmoker, isLikelyDraft };

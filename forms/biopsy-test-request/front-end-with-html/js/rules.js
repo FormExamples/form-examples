@@ -11,11 +11,6 @@
 //
 // Wrapped in an IIFE; published via `window.BiopsyTestRequest`.
 
-(function () {
-'use strict';
-window.BiopsyTestRequest = window.BiopsyTestRequest || {};
-const NS = window.BiopsyTestRequest;
-
 // ----------------------------------------------------------------------
 // Axis A — Appropriateness (ACR Appropriateness Criteria 1-9 ordinal)
 // ----------------------------------------------------------------------
@@ -374,19 +369,4 @@ function scoreTriage(data) {
   };
 }
 
-Object.assign(NS, {
-  scoreAppropriateness,
-  appropriatenessBand,
-  scoreBleedingRisk,
-  anticoagulantAction,
-  scoreCompleteness,
-  scoreTriage,
-  maxBand,
-  maxTier,
-  BLEEDING_ORDER,
-  TRIAGE_ORDER,
-  TARGET_TIMEFRAMES,
-  INDICATION_SITE_MAP,
-  TWO_WEEK_WAIT_INDICATIONS
-});
-})();
+export { scoreAppropriateness, appropriatenessBand, scoreBleedingRisk, anticoagulantAction, scoreCompleteness, scoreTriage, maxBand, maxTier, BLEEDING_ORDER, TRIAGE_ORDER, TARGET_TIMEFRAMES, INDICATION_SITE_MAP, TWO_WEEK_WAIT_INDICATIONS };

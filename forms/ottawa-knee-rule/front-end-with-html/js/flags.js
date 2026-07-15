@@ -17,9 +17,6 @@
  */
 
 // Wrapped in an IIFE; published via window.OttawaKneeRule.
-(function () {
-'use strict';
-window.OttawaKneeRule = window.OttawaKneeRule || {};
 
 // Hours beyond which the rule's acute-injury validation no longer strictly
 // applies (7 days = 168 hours).
@@ -134,5 +131,4 @@ function detectFlaggedIssues(data, xrayIndicated) {
   return flags;
 }
 
-window.OttawaKneeRule.detectFlaggedIssues = detectFlaggedIssues;
-})();
+export { detectFlaggedIssues };

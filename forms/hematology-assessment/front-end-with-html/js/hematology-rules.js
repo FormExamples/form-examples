@@ -1,3 +1,5 @@
+import { bloodCountScore } from './types.js';
+
 // Hematology grading rules. Each rule maps a single declarative predicate
 // over `AssessmentData` to a fired-rule entry with a concern level (high /
 // medium / low). Rules mirror the SvelteKit reference engine in
@@ -16,10 +18,6 @@
  */
 
 // Wrapped in an IIFE; published via window.HematologyAssessment.
-(function () {
-'use strict';
-window.HematologyAssessment = window.HematologyAssessment || {};
-const { bloodCountScore } = window.HematologyAssessment;
 
 /** @returns {HematologyRule[]} */
 function allRules() {
@@ -263,8 +261,4 @@ function evaluateRules(data) {
   return fired;
 }
 
-Object.assign(window.HematologyAssessment, {
-  allRules,
-  evaluateRules
-});
-})();
+export { allRules, evaluateRules };

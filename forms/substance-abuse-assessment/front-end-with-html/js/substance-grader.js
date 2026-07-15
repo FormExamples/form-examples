@@ -1,18 +1,11 @@
+import { detectAdditionalFlags } from './flagged-issues.js';
+import { substanceRules } from './substance-rules.js';
+import { auditRiskCategory, calculateAuditScore, calculateDastScore, dastRiskCategory } from './utils.js';
+
 // Pure scoring engine: evaluates all substance abuse rules against patient
 // data and returns AUDIT score, DAST score, overall risk level, fired
 // rules, and additional flags.
 // Mirrors `src/lib/engine/substance-grader.ts` from the SvelteKit reference.
-(function () {
-'use strict';
-const NS = window.SubstanceAbuseAssessment;
-const {
-  substanceRules,
-  detectAdditionalFlags,
-  calculateAuditScore,
-  calculateDastScore,
-  auditRiskCategory,
-  dastRiskCategory
-} = NS;
 
 /**
  * Pure function: returns full GradingResult.
@@ -68,5 +61,4 @@ function deriveOverallRisk(firedRules, auditScore, dastScore) {
   return 'low';
 }
 
-Object.assign(NS, { calculateSubstanceGrade });
-})();
+export { calculateSubstanceGrade };

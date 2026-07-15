@@ -1,3 +1,6 @@
+import { donorRules } from './donor-rules.js';
+import { collectionMethodLabel, hlaMatchLabel } from './types.js';
+
 // Donor eligibility grader. Pure functions: take an `AssessmentData`
 // object, evaluate every declarative rule from `donor-rules.js`, then
 // classify the donor into:
@@ -22,12 +25,6 @@
 //
 // Note: Grade-1 ASA / HLA "ideal" rules are positive findings and do not
 // degrade eligibility.
-
-(function () {
-'use strict';
-window.BoneMarrowDonationAssessment = window.BoneMarrowDonationAssessment || {};
-const NS = window.BoneMarrowDonationAssessment;
-const { donorRules, hlaMatchLabel, collectionMethodLabel } = NS;
 
 /**
  * Evaluate every declarative donor rule against the given assessment data.
@@ -130,10 +127,4 @@ function gradeDonor(data) {
   };
 }
 
-Object.assign(window.BoneMarrowDonationAssessment, {
-  evaluateRules,
-  classifyEligibility,
-  deriveCollectionMethod,
-  gradeDonor
-});
-})();
+export { evaluateRules, classifyEligibility, deriveCollectionMethod, gradeDonor };

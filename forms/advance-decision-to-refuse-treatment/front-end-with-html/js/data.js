@@ -6,11 +6,6 @@
 // every LPA status, and a mix of life-sustaining-refusal flags. NHS numbers
 // in the canonical "NNN NNN NNNN" display form.
 
-(function () {
-'use strict';
-window.AdvanceDecisionToRefuseTreatmentDashboard =
-  window.AdvanceDecisionToRefuseTreatmentDashboard || {};
-
 /** @type {import('./types.js').PatientRow[]} */
 const samplePatients = [
   {
@@ -135,5 +130,4 @@ const samplePatients = [
   }
 ];
 
-window.AdvanceDecisionToRefuseTreatmentDashboard.samplePatients = samplePatients;
-})();
+export { samplePatients };

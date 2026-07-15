@@ -8,12 +8,6 @@
 // anaesthesia) raise composite risk to at least High-risk, and arrest
 // pushes it to Critical.
 
-(function () {
-'use strict';
-window.MedicalOperationNote =
-  window.MedicalOperationNote || {};
-const NS = window.MedicalOperationNote;
-
 const ANAESTHETIC_EVENTS = {
   'none': {
     label: 'No anaesthetic event',
@@ -85,8 +79,4 @@ function applyAnaestheticEventRules(data) {
   return fired;
 }
 
-Object.assign(NS, {
-  ANAESTHETIC_EVENTS,
-  applyAnaestheticEventRules
-});
-})();
+export { ANAESTHETIC_EVENTS, applyAnaestheticEventRules };

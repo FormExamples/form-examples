@@ -7,11 +7,6 @@
 // bands, with a critical-alert row whose severe OSA plus desaturation raised
 // three flags.
 
-(function () {
-'use strict';
-window.SleepStudyTestResultDashboard =
-  window.SleepStudyTestResultDashboard || {};
-
 /** @type {import('./dashboard-types.js').ReportRow[]} */
 const sampleReports = [
   {
@@ -100,5 +95,4 @@ const sampleReports = [
   }
 ];
 
-window.SleepStudyTestResultDashboard.sampleReports = sampleReports;
-})();
+export { sampleReports };

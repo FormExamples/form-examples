@@ -1,3 +1,5 @@
+import { percRules } from './rules.js';
+
 // PERC grader. Pure functions: take an `AssessmentData` object, evaluate the
 // eight criterion rules in `percRules`, apply the pre-test-probability gate, and
 // derive a binary classification. This is a status / classification form — there
@@ -28,10 +30,6 @@
  */
 
 // Wrapped in an IIFE; published via window.PulmonaryEmbolismRuleOutCriteria.
-(function () {
-'use strict';
-window.PulmonaryEmbolismRuleOutCriteria = window.PulmonaryEmbolismRuleOutCriteria || {};
-const { percRules } = window.PulmonaryEmbolismRuleOutCriteria;
 
 /**
  * Evaluate the eight PERC criterion rules.
@@ -122,8 +120,4 @@ function calculatePercGrade(data) {
   };
 }
 
-Object.assign(window.PulmonaryEmbolismRuleOutCriteria, {
-  evaluateCriteria,
-  calculatePercGrade
-});
-})();
+export { evaluateCriteria, calculatePercGrade };

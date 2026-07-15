@@ -1,3 +1,5 @@
+import { hasCriticalResult, insufficientUnits, isAboDiscrepancy, isTwoSampleRuleUnmet } from './rules.js';
+
 // Safety-critical flag detection for the blood cross-match test result.
 //
 // Faithful vanilla-JS port of the SvelteKit engine's
@@ -12,10 +14,6 @@
  */
 
 // Wrapped in an IIFE; published via window.BloodCrossMatchTestResult.
-(function () {
-'use strict';
-const NS = window.BloodCrossMatchTestResult =
-  window.BloodCrossMatchTestResult || {};
 
 /**
  * Detect all safety-critical flags for a result.
@@ -28,7 +26,7 @@ function detectFlags(r) {
   const flags = [];
 
   // ─── critical-result-alert (auto-raised with a critical result) ───
-  if (NS.hasCriticalResult(r)) {
+  if (hasCriticalResult(r)) {
     flags.push({
       flagId: 'F-CRITICAL-RESULT-001',
       category: 'critical-result-alert',
@@ -52,7 +50,7 @@ function detectFlags(r) {
   }
 
   // ─── discrepancy-with-request (identity-safety event) ───
-  if (NS.isAboDiscrepancy(r) || NS.isTwoSampleRuleUnmet(r)) {
+  if (isAboDiscrepancy(r) || isTwoSampleRuleUnmet(r)) {
     flags.push({
       flagId: 'F-DISCREPANCY-001',
       category: 'discrepancy-with-request',
@@ -67,8 +65,8 @@ function detectFlags(r) {
   // ─── abnormal-requiring-action (incompatible crossmatch) ───
   if (
     r.crossmatchResult === 'incompatible' &&
-    !NS.isAboDiscrepancy(r) &&
-    !NS.isTwoSampleRuleUnmet(r)
+    !isAboDiscrepancy(r) &&
+    !isTwoSampleRuleUnmet(r)
   ) {
     flags.push({
       flagId: 'F-ABNORMAL-ACTION-001',
@@ -121,7 +119,7 @@ function detectFlags(r) {
   }
 
   // ─── missing-measurement (insufficient / unrecorded units) ───
-  if (NS.insufficientUnits(r)) {
+  if (insufficientUnits(r)) {
     flags.push({
       flagId: 'F-MISSING-MEASUREMENT-001',
       category: 'missing-measurement',
@@ -165,7 +163,4 @@ function detectFlags(r) {
   return flags;
 }
 
-Object.assign(NS, {
-  detectFlags
-});
-})();
+export { detectFlags };

@@ -1,3 +1,7 @@
+import { validateEuTrauma } from './eu-trauma-validator.js';
+import { detectFlaggedIssues } from './flagged-issues.js';
+import { emptyAssessment, hasNumber, priorityLabel, sectionLabel } from './types.js';
+
 // WHO Emergency Unit Form: Trauma — patient/clinician wizard (vanilla
 // JS, classic <script>). Single-page continuous wizard: every section
 // is rendered into the page in document order. Conditional rules (time
@@ -24,19 +28,6 @@
 //
 // The whole file is wrapped in an IIFE so its locals do not leak to
 // the global scope.
-
-(function () {
-'use strict';
-
-const NS = window.WhoEmergencyUnitTraumaForm;
-const {
-  emptyAssessment,
-  hasNumber,
-  sectionLabel,
-  priorityLabel,
-  validateEuTrauma,
-  detectFlaggedIssues
-} = NS;
 
 // ----------------------------------------------------------------------
 // Persistence
@@ -2053,8 +2044,5 @@ if (document.readyState === 'loading') {
 }
 
 // Expose a small public surface for debugging in the browser console.
-Object.assign(window.WhoEmergencyUnitTraumaForm, {
-  _getState: () => state,
-  _submitForm: submitForm
-});
-})();
+export const _getState = () => state;
+export const _submitForm = submitForm;

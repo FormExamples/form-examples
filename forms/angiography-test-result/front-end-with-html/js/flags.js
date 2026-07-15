@@ -1,3 +1,5 @@
+import { hasCriticalFinding } from './rules.js';
+
 // Flagged-issue detection (safety-critical flags). Faithful vanilla-JS port
 // of the SvelteKit engine module `src/lib/engine/flagged-issues.ts`.
 //
@@ -11,10 +13,6 @@
  */
 
 // Wrapped in an IIFE; published via window.AngiographyTestResult.
-(function () {
-'use strict';
-window.AngiographyTestResult = window.AngiographyTestResult || {};
-const { hasCriticalFinding } = window.AngiographyTestResult;
 
 /**
  * @param {AngiographyResult} r
@@ -146,5 +144,4 @@ function detectFlags(r) {
   return flags;
 }
 
-window.AngiographyTestResult.detectFlags = detectFlags;
-})();
+export { detectFlags };

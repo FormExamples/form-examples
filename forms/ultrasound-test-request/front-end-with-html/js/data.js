@@ -9,11 +9,6 @@
 // suspected-DVT urgent case, a suspected-testicular-torsion emergency case,
 // and a prep-not-met case.
 
-(function () {
-'use strict';
-window.UltrasoundTestRequestDashboard =
-  window.UltrasoundTestRequestDashboard || {};
-
 /** @type {import('./types.js').RequestRow[]} */
 const sampleRequests = [
   {
@@ -158,5 +153,4 @@ const sampleRequests = [
   }
 ];
 
-window.UltrasoundTestRequestDashboard.sampleRequests = sampleRequests;
-})();
+export { sampleRequests };

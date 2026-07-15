@@ -7,11 +7,6 @@
 // convention. Wrapped in an IIFE; published via
 // `window.MammographyTestRequest`.
 
-(function () {
-'use strict';
-window.MammographyTestRequest =
-  window.MammographyTestRequest || {};
-
 /**
  * Build a fresh, fully-blank mammography request.
  * Strings default to ''; numeric / date fields default to null;
@@ -82,9 +77,4 @@ function examTypeLabel(value) {
   return EXAM_TYPE_LABELS[value] || value || '';
 }
 
-Object.assign(window.MammographyTestRequest, {
-  emptyRequest,
-  examTypeLabel,
-  EXAM_TYPE_LABELS
-});
-})();
+export { emptyRequest, examTypeLabel, EXAM_TYPE_LABELS };

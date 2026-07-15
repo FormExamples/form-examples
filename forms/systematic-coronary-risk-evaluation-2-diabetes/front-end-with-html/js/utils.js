@@ -1,9 +1,4 @@
 // SCORE2-Diabetes - Pure utility helpers used by rules, grader, and UI.
-(function () {
-'use strict';
-
-const NS = (window.SystematicCoronaryRiskEvaluation2Diabetes =
-  window.SystematicCoronaryRiskEvaluation2Diabetes || {});
 
 /**
  * Calculate BMI from height (cm) and weight (kg). Returns null if either
@@ -107,12 +102,4 @@ function riskCategoryClass(category) {
   }
 }
 
-NS.calculateBmi = calculateBmi;
-NS.calculateAge = calculateAge;
-NS.hasEstablishedCvd = hasEstablishedCvd;
-NS.hba1cMmolMol = hba1cMmolMol;
-NS.ckdStageFromEgfr = ckdStageFromEgfr;
-NS.isLikelyDraft = isLikelyDraft;
-NS.riskCategoryLabel = riskCategoryLabel;
-NS.riskCategoryClass = riskCategoryClass;
-})();
+export { calculateBmi, calculateAge, hasEstablishedCvd, hba1cMmolMol, ckdStageFromEgfr, isLikelyDraft, riskCategoryLabel, riskCategoryClass };

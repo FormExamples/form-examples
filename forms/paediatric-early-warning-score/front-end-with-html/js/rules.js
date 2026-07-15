@@ -23,9 +23,6 @@
  */
 
 // Wrapped in an IIFE; published via window.PaediatricEarlyWarningScore.
-(function () {
-'use strict';
-window.PaediatricEarlyWarningScore = window.PaediatricEarlyWarningScore || {};
 
 // Age-band scoring tables for the two rate parameters. Each parameter is an
 // ordered list of [upperBoundInclusive, score] pairs covering the whole
@@ -171,15 +168,4 @@ function scoreConsciousness(value) {
   }
 }
 
-Object.assign(window.PaediatricEarlyWarningScore, {
-  AGE_BAND_TABLE,
-  scoreAgainstBand,
-  scoreRespiratoryRate,
-  scoreHeartRate,
-  scoreRespiratoryEffort,
-  scoreOxygenSaturation,
-  scoreSupplementalOxygen,
-  scoreCapillaryRefill,
-  scoreConsciousness
-});
-})();
+export { AGE_BAND_TABLE, scoreAgainstBand, scoreRespiratoryRate, scoreHeartRate, scoreRespiratoryEffort, scoreOxygenSaturation, scoreSupplementalOxygen, scoreCapillaryRefill, scoreConsciousness };

@@ -8,11 +8,6 @@
 // a stat massive-haemorrhage case, a two-sample-rule-not-met case, and a
 // known-antibodies case.
 
-(function () {
-'use strict';
-window.BloodCrossMatchTestRequestDashboard =
-  window.BloodCrossMatchTestRequestDashboard || {};
-
 /** @type {import('./types.js').RequestRow[]} */
 const sampleRequests = [
   {
@@ -177,5 +172,4 @@ const sampleRequests = [
   }
 ];
 
-window.BloodCrossMatchTestRequestDashboard.sampleRequests = sampleRequests;
-})();
+export { sampleRequests };

@@ -27,10 +27,6 @@
  */
 
 // Wrapped in an IIFE; published via window.Qrisk3CardiovascularDiseaseRiskScore.
-(function () {
-'use strict';
-window.Qrisk3CardiovascularDiseaseRiskScore =
-  window.Qrisk3CardiovascularDiseaseRiskScore || {};
 
 // Approximate cohort means used to centre the continuous variables. Centring
 // makes the linear predictor ~0 for an "average" patient so the baseline
@@ -103,7 +99,7 @@ const BINARY_WEIGHTS = {
   onCorticosteroids: 0.40
 };
 
-window.Qrisk3CardiovascularDiseaseRiskScore.model = {
+export const model = {
   MEANS,
   SEX_MODEL,
   CONTINUOUS_WEIGHTS,
@@ -113,4 +109,3 @@ window.Qrisk3CardiovascularDiseaseRiskScore.model = {
   CKD_WEIGHTS,
   BINARY_WEIGHTS
 };
-})();

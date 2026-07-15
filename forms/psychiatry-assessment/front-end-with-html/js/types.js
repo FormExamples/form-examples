@@ -200,9 +200,6 @@
 // classic <script> (no ES modules) so the page can be opened directly via
 // `file://`. The IIFE attaches its public symbols to a single global
 // namespace, `window.PsychiatryAssessment`.
-(function () {
-'use strict';
-window.PsychiatryAssessment = window.PsychiatryAssessment || {};
 
 /**
  * Build a fresh, fully-blank assessment.
@@ -357,10 +354,4 @@ function gafBracketClass(score) {
   return 'bracket-danger';
 }
 
-Object.assign(window.PsychiatryAssessment, {
-  emptyAssessment,
-  gafScoreLabel,
-  gafBracketLabel,
-  gafBracketClass
-});
-})();
+export { emptyAssessment, gafScoreLabel, gafBracketLabel, gafBracketClass };

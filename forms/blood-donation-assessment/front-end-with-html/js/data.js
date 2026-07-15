@@ -8,10 +8,6 @@
 // and <13.5 (male) are typical JPAC deferral thresholds, captured here as
 // "Out of Range" vital-sign status.
 
-(function () {
-'use strict';
-window.BloodDonationAssessmentDashboard = window.BloodDonationAssessmentDashboard || {};
-
 /** @type {import('./types.js').DonorRow[]} */
 const sampleDonors = [
   {
@@ -124,5 +120,4 @@ const sampleDonors = [
   }
 ];
 
-window.BloodDonationAssessmentDashboard.sampleDonors = sampleDonors;
-})();
+export { sampleDonors };

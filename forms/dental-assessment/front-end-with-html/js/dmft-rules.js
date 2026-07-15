@@ -1,3 +1,5 @@
+import { getDMFTScore } from './types.js';
+
 // Declarative DMFT grading rules for the Dental Assessment form.
 //
 // Each rule evaluates patient data and returns true if its condition is
@@ -19,11 +21,6 @@
  */
 
 // Wrapped in an IIFE; published via window.DentalAssessment.
-(function () {
-'use strict';
-window.DentalAssessment = window.DentalAssessment || {};
-
-const { getDMFTScore } = window.DentalAssessment;
 
 /** @type {DMFTRule[]} */
 const dmftRules = [
@@ -188,5 +185,4 @@ const dmftRules = [
   }
 ];
 
-window.DentalAssessment.dmftRules = dmftRules;
-})();
+export { dmftRules };

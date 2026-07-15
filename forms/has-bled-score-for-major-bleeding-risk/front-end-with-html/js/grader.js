@@ -1,3 +1,5 @@
+import { hasBledRules } from './rules.js';
+
 // HAS-BLED grader. Pure functions: take an `AssessmentData` object, evaluate
 // the nine criterion rules in `hasBledRules`, award 0 or 1 point each, sum the
 // total (0-9), and derive the risk band with the >= 3 higher-bleeding-risk
@@ -28,11 +30,6 @@
  */
 
 // Wrapped in an IIFE; published via window.HasBledScoreForMajorBleedingRisk.
-(function () {
-'use strict';
-window.HasBledScoreForMajorBleedingRisk =
-  window.HasBledScoreForMajorBleedingRisk || {};
-const { hasBledRules } = window.HasBledScoreForMajorBleedingRisk;
 
 /**
  * Evaluate the nine HAS-BLED criterion rules and collect the ones that fired.
@@ -160,10 +157,4 @@ function calculateHasBledGrade(data) {
   };
 }
 
-Object.assign(window.HasBledScoreForMajorBleedingRisk, {
-  evaluateCriteria,
-  deriveRiskBand,
-  summariseModifiableFactors,
-  calculateHasBledGrade
-});
-})();
+export { evaluateCriteria, deriveRiskBand, summariseModifiableFactors, calculateHasBledGrade };

@@ -7,10 +7,6 @@
 // the required worked cases: a routine monitoring request, a stat case, a
 // fasting-not-met case, and a no-test-selected case.
 
-(function () {
-'use strict';
-window.BloodTestRequestDashboard = window.BloodTestRequestDashboard || {};
-
 /** @type {import('./types.js').RequestRow[]} */
 const sampleRequests = [
   {
@@ -155,5 +151,4 @@ const sampleRequests = [
   }
 ];
 
-window.BloodTestRequestDashboard.sampleRequests = sampleRequests;
-})();
+export { sampleRequests };

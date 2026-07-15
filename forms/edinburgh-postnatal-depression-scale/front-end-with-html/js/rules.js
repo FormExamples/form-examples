@@ -29,10 +29,6 @@
  */
 
 // Wrapped in an IIFE; published via window.EdinburghPostnatalDepressionScale.
-(function () {
-'use strict';
-window.EdinburghPostnatalDepressionScale =
-  window.EdinburghPostnatalDepressionScale || {};
 
 // Items reverse-scored per spec §4 (top printed option = 3, bottom = 0).
 const REVERSE_ITEMS = [3, 5, 6, 7, 8, 9, 10];
@@ -185,10 +181,4 @@ function itemByNumber(number) {
   return epdsItems.find((it) => it.number === number);
 }
 
-Object.assign(window.EdinburghPostnatalDepressionScale, {
-  epdsItems,
-  REVERSE_ITEMS,
-  scoreForOption,
-  itemByNumber
-});
-})();
+export { epdsItems, REVERSE_ITEMS, scoreForOption, itemByNumber };

@@ -41,7 +41,4 @@
  * @property {number} total
  */
 
-(function () {
-  'use strict';
-  window.MedicalWaitingListCardDashboard = window.MedicalWaitingListCardDashboard || {};
-})();
+  

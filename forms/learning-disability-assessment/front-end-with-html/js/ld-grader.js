@@ -1,3 +1,5 @@
+import { ldRules, levelScore } from './rules.js';
+
 // Learning-Disability adaptive-functioning grader. Pure functions: take
 // an `AssessmentData` object, return the average adaptive-support score
 // (0-3 per item, scaled across answered items), the SeverityCategory
@@ -19,10 +21,6 @@
  */
 
 // Wrapped in an IIFE; published via window.LearningDisabilityAssessment.
-(function () {
-'use strict';
-window.LearningDisabilityAssessment = window.LearningDisabilityAssessment || {};
-const { ldRules, levelScore } = window.LearningDisabilityAssessment;
 
 /**
  * Classify a mean adaptive score (0-3) into a severity category.
@@ -126,11 +124,4 @@ function calculateLD(data) {
   };
 }
 
-Object.assign(window.LearningDisabilityAssessment, {
-  classifyAdaptiveScore,
-  severityLabel,
-  severityDescription,
-  severityClass,
-  calculateLD
-});
-})();
+export { classifyAdaptiveScore, severityLabel, severityDescription, severityClass, calculateLD };

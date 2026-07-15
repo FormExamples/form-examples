@@ -6,11 +6,6 @@
 // level, with a mix of HLA match grades and collection-method
 // recommendations; NHS numbers in the canonical "NNN NNN NNNN" display form.
 
-(function () {
-'use strict';
-window.BoneMarrowDonationAssessmentDashboard =
-  window.BoneMarrowDonationAssessmentDashboard || {};
-
 /** @type {import('./types.js').PatientRow[]} */
 const samplePatients = [
   {
@@ -123,5 +118,4 @@ const samplePatients = [
   }
 ];
 
-window.BoneMarrowDonationAssessmentDashboard.samplePatients = samplePatients;
-})();
+export { samplePatients };

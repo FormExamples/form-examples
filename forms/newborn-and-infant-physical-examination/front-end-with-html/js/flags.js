@@ -1,3 +1,5 @@
+import { LOW_SAT } from './rules.js';
+
 // Referral-flag detection. Independent of the outcome roll-up (which the grader
 // produces), this module raises practitioner-facing safety flags per spec §5,
 // each pointing at the appropriate onward-referral pathway:
@@ -22,11 +24,6 @@
  */
 
 // Wrapped in an IIFE; published via window.NewbornAndInfantPhysicalExamination.
-(function () {
-'use strict';
-window.NewbornAndInfantPhysicalExamination =
-  window.NewbornAndInfantPhysicalExamination || {};
-const { LOW_SAT } = window.NewbornAndInfantPhysicalExamination;
 
 /**
  * @param {ExaminationData} data
@@ -185,6 +182,4 @@ function detectFlaggedIssues(data, grade) {
   return flags;
 }
 
-window.NewbornAndInfantPhysicalExamination.detectFlaggedIssues =
-  detectFlaggedIssues;
-})();
+export { detectFlaggedIssues };

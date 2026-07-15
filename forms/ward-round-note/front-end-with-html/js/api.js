@@ -6,10 +6,6 @@
 // or returns an empty list, callers fall back to the sample data shipped in
 // `data.js` so the page is usable standalone.
 
-(function () {
-'use strict';
-window.WardRoundNoteDashboard = window.WardRoundNoteDashboard || {};
-
 const API_BASE = 'http://localhost:5150';
 const NOTES_PATH = '/api/dashboard/notes';
 
@@ -34,6 +30,4 @@ async function fetchNotes() {
   return data.items || [];
 }
 
-window.WardRoundNoteDashboard.fetchNotes = fetchNotes;
-window.WardRoundNoteDashboard.API_BASE = API_BASE;
-})();
+export { fetchNotes, API_BASE };

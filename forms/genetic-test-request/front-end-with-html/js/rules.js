@@ -1,3 +1,5 @@
+import { isPredictiveTest, isPrenatalRequest } from './types.js';
+
 // Four-axis rule catalogue for the Genetic Test Request engine.
 //
 // Derived from index.md and sql/05_*_grade.sql: (A) appropriateness 1-9 + band
@@ -10,12 +12,6 @@
 // R-COMPLETE-*, R-TRIAGE-*). Pure data + helpers; the grader composes them.
 //
 // Wrapped in an IIFE; published via `window.GeneticTestRequest`.
-
-(function () {
-'use strict';
-window.GeneticTestRequest = window.GeneticTestRequest || {};
-const NS = window.GeneticTestRequest;
-const { isPredictiveTest, isPrenatalRequest } = NS;
 
 // ----------------------------------------------------------------------
 // Axis A — Appropriateness (NHS National Genomic Test Directory, 1-9 ordinal)
@@ -300,16 +296,4 @@ function scoreTriage(data) {
   return { tier, targetTimeframe, firedRules };
 }
 
-Object.assign(NS, {
-  scoreAppropriateness,
-  appropriatenessBand,
-  scoreConsentCounselling,
-  scoreCompleteness,
-  scoreTriage,
-  maxTier,
-  TRIAGE_ORDER,
-  TARGET_TIMEFRAMES,
-  PRENATAL_TIMEFRAME,
-  INDICATION_TEST_MAP
-});
-})();
+export { scoreAppropriateness, appropriatenessBand, scoreConsentCounselling, scoreCompleteness, scoreTriage, maxTier, TRIAGE_ORDER, TARGET_TIMEFRAMES, PRENATAL_TIMEFRAME, INDICATION_TEST_MAP };

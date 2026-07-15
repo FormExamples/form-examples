@@ -2,12 +2,6 @@
 // `src/lib/engine/flagged-issues.ts`. Pure function — same output shape and
 // flag IDs as the canonical engine.
 
-(function () {
-'use strict';
-window.PreOperativeAssessmentByClinician =
-  window.PreOperativeAssessmentByClinician || {};
-const NS = window.PreOperativeAssessmentByClinician;
-
 function detectAdditionalFlags(data) {
   const flags = [];
 
@@ -203,5 +197,4 @@ function detectAdditionalFlags(data) {
   return flags;
 }
 
-Object.assign(NS, { detectAdditionalFlags });
-})();
+export { detectAdditionalFlags };

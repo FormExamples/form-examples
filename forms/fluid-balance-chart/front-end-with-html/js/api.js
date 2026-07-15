@@ -6,11 +6,6 @@
 // or returns an empty list, callers fall back to the sample data shipped in
 // `data.js` so the page is usable standalone.
 
-(function () {
-'use strict';
-window.FluidBalanceChartDashboard =
-  window.FluidBalanceChartDashboard || {};
-
 const API_BASE = 'http://localhost:5150';
 const CHARTS_PATH = '/api/dashboard/charts';
 
@@ -35,6 +30,4 @@ async function fetchCharts() {
   return data.items || [];
 }
 
-window.FluidBalanceChartDashboard.fetchCharts = fetchCharts;
-window.FluidBalanceChartDashboard.API_BASE = API_BASE;
-})();
+export { fetchCharts, API_BASE };

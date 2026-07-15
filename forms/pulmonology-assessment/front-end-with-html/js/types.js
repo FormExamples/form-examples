@@ -163,9 +163,6 @@
 // classic <script> (no ES modules) so the page can be opened directly via
 // `file://`. The IIFE attaches its public symbols to a single global
 // namespace, `window.PulmonologyAssessment`.
-(function () {
-'use strict';
-window.PulmonologyAssessment = window.PulmonologyAssessment || {};
 
 /**
  * Build a fresh, fully-blank assessment.
@@ -333,15 +330,4 @@ function catImpactLabel(score) {
   return 'Very high impact';
 }
 
-Object.assign(window.PulmonologyAssessment, {
-  emptyAssessment,
-  calculateBMI,
-  bmiCategory,
-  calculateFev1FvcRatio,
-  goldStageLabel,
-  goldStageClass,
-  abcdGroupLabel,
-  determineAbcdGroup,
-  catImpactLabel
-});
-})();
+export { emptyAssessment, calculateBMI, bmiCategory, calculateFev1FvcRatio, goldStageLabel, goldStageClass, abcdGroupLabel, determineAbcdGroup, catImpactLabel };

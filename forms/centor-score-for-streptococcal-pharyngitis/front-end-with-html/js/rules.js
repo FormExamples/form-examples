@@ -21,10 +21,6 @@
  */
 
 // Wrapped in an IIFE; published via window.CentorScoreForStreptococcalPharyngitis.
-(function () {
-'use strict';
-window.CentorScoreForStreptococcalPharyngitis =
-  window.CentorScoreForStreptococcalPharyngitis || {};
 
 /** @type {CentorRule[]} */
 const centorRules = [
@@ -72,5 +68,4 @@ const centorRules = [
   }
 ];
 
-window.CentorScoreForStreptococcalPharyngitis.centorRules = centorRules;
-})();
+export { centorRules };

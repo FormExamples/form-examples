@@ -9,12 +9,6 @@
 // Flag IDs are stable and identical across every front-end and the back-end.
 // Wrapped in an IIFE; published via `window.DexaBoneDensityTestRequest`.
 
-(function () {
-'use strict';
-window.DexaBoneDensityTestRequest =
-  window.DexaBoneDensityTestRequest || {};
-const NS = window.DexaBoneDensityTestRequest;
-
 // NOGG / ISCD repeat-DXA interval: a previous DEXA within ~2 years (730 days)
 // without a clear monitoring indication is a possible duplicate.
 const DUPLICATE_DEXA_DAYS = 730;
@@ -131,5 +125,4 @@ function isDuplicateRecentDexa(d) {
   return ageDays >= 0 && ageDays < DUPLICATE_DEXA_DAYS;
 }
 
-Object.assign(NS, { detectFlags });
-})();
+export { detectFlags };

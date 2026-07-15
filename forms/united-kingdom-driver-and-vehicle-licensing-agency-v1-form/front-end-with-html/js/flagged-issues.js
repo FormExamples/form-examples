@@ -15,10 +15,6 @@
  * @typedef {import('./types.js').FlaggedIssue} FlaggedIssue
  */
 
-(function () {
-'use strict';
-window.DvlaV1Form = window.DvlaV1Form || {};
-
 /**
  * @param {AssessmentData} data
  * @returns {FlaggedIssue[]}
@@ -193,5 +189,4 @@ function detectFlaggedIssues(data) {
   return flags;
 }
 
-window.DvlaV1Form.detectFlaggedIssues = detectFlaggedIssues;
-})();
+export { detectFlaggedIssues };

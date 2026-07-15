@@ -7,11 +7,6 @@
 // down) or returns an empty list, callers fall back to the sample data
 // shipped in `data.js` so the page is usable standalone.
 
-(function () {
-'use strict';
-window.FirstAidTrainingChecklistDashboard =
-  window.FirstAidTrainingChecklistDashboard || {};
-
 const API_BASE = 'http://localhost:5150';
 const TRAINEES_PATH = '/api/dashboard/trainees';
 
@@ -36,6 +31,4 @@ async function fetchTrainees() {
   return data.items || [];
 }
 
-window.FirstAidTrainingChecklistDashboard.fetchTrainees = fetchTrainees;
-window.FirstAidTrainingChecklistDashboard.API_BASE = API_BASE;
-})();
+export { fetchTrainees, API_BASE };

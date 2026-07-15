@@ -9,12 +9,6 @@
 // Flag IDs are stable and identical across every front-end and the back-end.
 // Wrapped in an IIFE; published via `window.BronchoscopyTestRequest`.
 
-(function () {
-'use strict';
-window.BronchoscopyTestRequest =
-  window.BronchoscopyTestRequest || {};
-const NS = window.BronchoscopyTestRequest;
-
 /**
  * Detect safety flags for a bronchoscopy request.
  *
@@ -141,5 +135,4 @@ function detectFlags(data, context) {
   return flags;
 }
 
-Object.assign(NS, { detectFlags });
-})();
+export { detectFlags };

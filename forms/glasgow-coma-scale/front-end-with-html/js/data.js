@@ -6,10 +6,6 @@
 // intubated-verbal-NT case (total undefined, reported "9T"), every care
 // setting, and the airway-risk flag set whenever a defined total is <= 8.
 
-(function () {
-'use strict';
-window.GlasgowComaScaleDashboard = window.GlasgowComaScaleDashboard || {};
-
 /** @type {import('./dashboard-types.js').AssessmentRow[]} */
 const sampleAssessments = [
   {
@@ -98,5 +94,4 @@ const sampleAssessments = [
   }
 ];
 
-window.GlasgowComaScaleDashboard.sampleAssessments = sampleAssessments;
-})();
+export { sampleAssessments };

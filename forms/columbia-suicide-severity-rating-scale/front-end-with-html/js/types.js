@@ -149,10 +149,6 @@
 // classic <script> (no ES modules) so the page can be opened directly via
 // `file://`. The IIFE attaches its public symbols to a single global
 // namespace, `window.ColumbiaSuicideSeverityRatingScale`.
-(function () {
-'use strict';
-window.ColumbiaSuicideSeverityRatingScale =
-  window.ColumbiaSuicideSeverityRatingScale || {};
 
 /**
  * Build a fresh, fully-blank assessment.
@@ -301,15 +297,4 @@ function priorityLabel(priority) {
   }
 }
 
-Object.assign(window.ColumbiaSuicideSeverityRatingScale, {
-  emptyAssessment,
-  riskTierLabel,
-  riskTierClass,
-  ideationLevelLabel,
-  clinicianRoleLabel,
-  careSettingLabel,
-  sexLabel,
-  ageBandLabel,
-  priorityLabel
-});
-})();
+export { emptyAssessment, riskTierLabel, riskTierClass, ideationLevelLabel, clinicianRoleLabel, careSettingLabel, sexLabel, ageBandLabel, priorityLabel };

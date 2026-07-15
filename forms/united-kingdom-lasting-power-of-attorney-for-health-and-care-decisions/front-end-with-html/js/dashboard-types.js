@@ -49,8 +49,3 @@
  * @property {number} fatalRuleCount
  * @property {FiredRuleRow[]} firedRules
  */
-
-(function () {
-'use strict';
-window.UkLpaDashboard = window.UkLpaDashboard || {};
-})();

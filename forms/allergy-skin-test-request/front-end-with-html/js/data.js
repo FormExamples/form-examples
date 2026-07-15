@@ -8,11 +8,6 @@
 // previous-anaphylaxis case, an antihistamines-invalidate case, and a
 // no-allergen-selected case.
 
-(function () {
-'use strict';
-window.AllergySkinTestRequestDashboard =
-  window.AllergySkinTestRequestDashboard || {};
-
 /** @type {import('./types.js').RequestRow[]} */
 const sampleRequests = [
   {
@@ -167,5 +162,4 @@ const sampleRequests = [
   }
 ];
 
-window.AllergySkinTestRequestDashboard.sampleRequests = sampleRequests;
-})();
+export { sampleRequests };

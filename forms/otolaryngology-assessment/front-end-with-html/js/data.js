@@ -11,11 +11,6 @@
 //   Moderate  8-19
 //   Severe    20+
 
-(function () {
-'use strict';
-window.OtolaryngologyAssessmentDashboard =
-  window.OtolaryngologyAssessmentDashboard || {};
-
 /** @type {import('./types.js').PatientRow[]} */
 const samplePatients = [
   {
@@ -128,5 +123,4 @@ const samplePatients = [
   }
 ];
 
-window.OtolaryngologyAssessmentDashboard.samplePatients = samplePatients;
-})();
+export { samplePatients };

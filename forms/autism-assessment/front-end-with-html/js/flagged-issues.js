@@ -12,9 +12,6 @@
  */
 
 // Wrapped in an IIFE; published via window.AutismAssessment.
-(function () {
-'use strict';
-window.AutismAssessment = window.AutismAssessment || {};
 
 /**
  * @param {AssessmentData} data
@@ -214,5 +211,4 @@ function detectAdditionalFlags(data) {
   return flags;
 }
 
-window.AutismAssessment.detectAdditionalFlags = detectAdditionalFlags;
-})();
+export { detectAdditionalFlags };

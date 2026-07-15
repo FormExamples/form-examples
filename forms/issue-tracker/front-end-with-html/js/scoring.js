@@ -3,11 +3,8 @@
 // Mirrors the Vitest-tested engine in
 // ../../front-end-form-with-svelte/src/lib/engine/.
 //
-// Loaded as a classic <script> (no type="module") so the page works via
-// file://. Exposes its API through the global `IssueTracker` namespace.
+// ES module: exports the scoring engine's public API.
 
-(function (global) {
-'use strict';
 
 const BAND_RANK = { low: 0, moderate: 1, high: 2, critical: 3 };
 const BAND_BY_RANK = ['low', 'moderate', 'high', 'critical'];
@@ -260,6 +257,4 @@ function gradeIssue(data) {
   };
 }
 
-global.IssueTracker = { gradeIssue, maxBand };
-
-})(typeof window !== 'undefined' ? window : globalThis);
+export { gradeIssue, maxBand };

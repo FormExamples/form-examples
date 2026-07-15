@@ -19,9 +19,6 @@
  */
 
 // Wrapped in an IIFE; published via window.AnaestheticRecord.
-(function () {
-'use strict';
-window.AnaestheticRecord = window.AnaestheticRecord || {};
 
 // Physiological limits for the derangement flag (spec §5).
 const SPO2_LOWER_LIMIT = 92;
@@ -188,10 +185,4 @@ function detectFlaggedIssues(record, grade) {
   return flags;
 }
 
-Object.assign(window.AnaestheticRecord, {
-  SPO2_LOWER_LIMIT,
-  SYSTOLIC_LOWER_LIMIT,
-  allergyTerms,
-  detectFlaggedIssues
-});
-})();
+export { SPO2_LOWER_LIMIT, SYSTOLIC_LOWER_LIMIT, allergyTerms, detectFlaggedIssues };

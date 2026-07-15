@@ -1,3 +1,7 @@
+import { detectFlaggedIssues } from './flags.js';
+import { gradePartogram } from './grader.js';
+import { CONTRACTION_STRENGTHS, DIPSTICK_GRADES, DURATION_BANDS, LIQUOR_STATES, MOULDING_GRADES, contractionStrengthLabel, dipstickLabel, durationBandLabel, emptyObservation, emptyRecord, liquorStateLabel, mouldingLabel, priorityLabel, progressClass, progressLabel } from './types.js';
+
 // Partogram — labour-record wizard (vanilla JavaScript, no build).
 //
 // Single-page continuous wizard: every step is rendered into the page in
@@ -14,29 +18,6 @@
 // Sibling files loaded as plain `<script>` tags (in order) attach their exports
 // to `window.Partogram`. The whole file is wrapped in an IIFE so its top-level
 // identifiers don't leak.
-(function () {
-'use strict';
-
-const NS = window.Partogram;
-const {
-  emptyRecord,
-  emptyObservation,
-  LIQUOR_STATES,
-  MOULDING_GRADES,
-  DURATION_BANDS,
-  CONTRACTION_STRENGTHS,
-  DIPSTICK_GRADES,
-  liquorStateLabel,
-  mouldingLabel,
-  durationBandLabel,
-  contractionStrengthLabel,
-  dipstickLabel,
-  progressLabel,
-  progressClass,
-  priorityLabel,
-  gradePartogram,
-  detectFlaggedIssues
-} = NS;
 
 // ----------------------------------------------------------------------
 // Persistence
@@ -1012,4 +993,3 @@ if (document.readyState === 'loading') {
 } else {
   init();
 }
-})();

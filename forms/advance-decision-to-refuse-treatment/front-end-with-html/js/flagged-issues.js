@@ -1,3 +1,5 @@
+import { hasLifeSustainingRefusal } from './types.js';
+
 // Flagged-issue detection. Mirrors `src/lib/engine/flagged-issues.ts`
 // from the SvelteKit reference. These flags are independent of the
 // rule-based validity status and surface safety- and legally-critical
@@ -9,10 +11,6 @@
  */
 
 // Wrapped in an IIFE; published via window.AdvanceDecisionToRefuseTreatment.
-(function () {
-'use strict';
-window.AdvanceDecisionToRefuseTreatment = window.AdvanceDecisionToRefuseTreatment || {};
-const { hasLifeSustainingRefusal } = window.AdvanceDecisionToRefuseTreatment;
 
 /**
  * @param {AssessmentData} data
@@ -186,5 +184,4 @@ function detectAdditionalFlags(data) {
   return flags;
 }
 
-window.AdvanceDecisionToRefuseTreatment.detectAdditionalFlags = detectAdditionalFlags;
-})();
+export { detectAdditionalFlags };

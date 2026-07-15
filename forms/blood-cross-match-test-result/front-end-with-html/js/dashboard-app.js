@@ -1,3 +1,7 @@
+import { fetchReports } from './api.js';
+import { sampleReports } from './data.js';
+import { abnormalitySeverityClass, abnormalitySeverityLabel, followUpUrgencyClass, followUpUrgencyLabel, reportStatusLabel, requestTypeLabel, resultClassificationClass, resultClassificationLabel } from './types.js';
+
 // Blood Cross-Match Test Result — clinician dashboard (vanilla classic-script app).
 //
 // On boot we fetch the graded-report list from the backend; on any failure (or
@@ -12,22 +16,6 @@
 // their exports to `window.BloodCrossMatchTestResultDashboard` (data + api)
 // and `window.BloodCrossMatchTestResult` (shared labels from js/types.js).
 // The whole file is wrapped in an IIFE so its top-level identifiers do not leak.
-(function () {
-'use strict';
-const {
-  fetchReports,
-  sampleReports
-} = window.BloodCrossMatchTestResultDashboard;
-const {
-  resultClassificationLabel,
-  resultClassificationClass,
-  abnormalitySeverityLabel,
-  abnormalitySeverityClass,
-  followUpUrgencyLabel,
-  followUpUrgencyClass,
-  requestTypeLabel,
-  reportStatusLabel
-} = window.BloodCrossMatchTestResult;
 
 // ----------------------------------------------------------------------
 // State
@@ -387,4 +375,3 @@ if (document.readyState === 'loading') {
 } else {
   init();
 }
-})();

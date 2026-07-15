@@ -1,6 +1,4 @@
-(function () {
-  'use strict';
-  const NS = (window.AgileChecklistDashboard = window.AgileChecklistDashboard || {});
+  
   const API_BASE = '/api/checklists';
   const CACHE_KEY = 'agile-checklist-dashboard:cache:v1';
   const CACHE_TTL_MS = 24 * 60 * 60 * 1000; // 24h
@@ -39,7 +37,7 @@
    * Returns { source: 'cache' | 'api' | 'sample', rows, fetchedAt? }.
    * Caller may call again to refresh after rendering the cached rows.
    */
-  NS.fetchChecklists = function () {
+  export const fetchChecklists = function () {
     return fetch(API_BASE)
       .then(function (res) {
         if (!res.ok) throw new Error('API ' + res.status);
@@ -56,5 +54,6 @@
       });
   };
 
-  NS.clearChecklistsCache = clearCache;
-})();
+  
+
+export { clearCache as clearChecklistsCache };

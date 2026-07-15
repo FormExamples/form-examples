@@ -8,11 +8,6 @@
 // request, an urgent reduced-fetal-movements case, and an outside-window NT
 // request.
 
-(function () {
-'use strict';
-window.PregnancyUltrasoundTestRequestDashboard =
-  window.PregnancyUltrasoundTestRequestDashboard || {};
-
 /** @type {import('./types.js').RequestRow[]} */
 const sampleRequests = [
   {
@@ -167,5 +162,4 @@ const sampleRequests = [
   }
 ];
 
-window.PregnancyUltrasoundTestRequestDashboard.sampleRequests = sampleRequests;
-})();
+export { sampleRequests };

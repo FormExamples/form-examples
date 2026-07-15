@@ -6,11 +6,6 @@
 // every combined-severity band, with withdrawal risk flagged for a subset;
 // NHS numbers in the canonical "NNN NNN NNNN" display form.
 
-(function () {
-'use strict';
-window.SubstanceAbuseAssessmentDashboard =
-  window.SubstanceAbuseAssessmentDashboard || {};
-
 /** @type {import('./types.js').PatientRow[]} */
 const samplePatients = [
   {
@@ -147,5 +142,4 @@ const samplePatients = [
   }
 ];
 
-window.SubstanceAbuseAssessmentDashboard.samplePatients = samplePatients;
-})();
+export { samplePatients };

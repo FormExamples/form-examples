@@ -7,12 +7,6 @@
 //
 // Wrapped in an IIFE; published via `window.UkLpaFinancialDecisions`.
 
-(function () {
-'use strict';
-window.UkLpaFinancialDecisions =
-  window.UkLpaFinancialDecisions || {};
-const NS = window.UkLpaFinancialDecisions;
-
 function singleAttorneyNoReplacement(lpa) {
   if (lpa.attorneys.length !== 1) return null;
   if (lpa.replacementAttorneys.length > 0) return null;
@@ -164,5 +158,4 @@ function applyFlagRules(lpa) {
   return fired;
 }
 
-Object.assign(NS, { FLAG_RULES, applyFlagRules });
-})();
+export { FLAG_RULES, applyFlagRules };

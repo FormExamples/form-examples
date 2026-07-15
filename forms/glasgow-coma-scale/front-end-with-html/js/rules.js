@@ -22,9 +22,6 @@
  */
 
 // Wrapped in an IIFE; published via window.GlasgowComaScale.
-(function () {
-'use strict';
-window.GlasgowComaScale = window.GlasgowComaScale || {};
 
 /** Eye opening (E) — descriptor options, high score first. */
 /** @type {ComponentOption[]} */
@@ -98,13 +95,4 @@ function bandForTotal(total) {
   return found ? found.band : '';
 }
 
-Object.assign(window.GlasgowComaScale, {
-  eyeOptions,
-  verbalOptions,
-  motorOptions,
-  scoreFor,
-  descriptorLabel,
-  severityBands,
-  bandForTotal
-});
-})();
+export { eyeOptions, verbalOptions, motorOptions, scoreFor, descriptorLabel, severityBands, bandForTotal };

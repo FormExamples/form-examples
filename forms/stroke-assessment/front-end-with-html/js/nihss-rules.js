@@ -18,9 +18,6 @@
 //   11. Extinction and Inattention (0-2)
 
 // Wrapped in an IIFE; published via window.StrokeAssessment.
-(function () {
-'use strict';
-window.StrokeAssessment = window.StrokeAssessment || {};
 
 const nihssItems = [
   {
@@ -130,5 +127,4 @@ const nihssItems = [
   }
 ];
 
-window.StrokeAssessment.nihssItems = nihssItems;
-})();
+export { nihssItems };

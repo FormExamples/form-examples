@@ -5,11 +5,6 @@
 // rows span every completeness status, a range of completeness percents and
 // safety-flag counts, and every urgency class.
 
-(function () {
-'use strict';
-window.AnaestheticRecordDashboard =
-  window.AnaestheticRecordDashboard || {};
-
 /** @type {import('./dashboard-types.js').RecordRow[]} */
 const sampleRecords = [
   {
@@ -98,5 +93,4 @@ const sampleRecords = [
   }
 ];
 
-window.AnaestheticRecordDashboard.sampleRecords = sampleRecords;
-})();
+export { sampleRecords };

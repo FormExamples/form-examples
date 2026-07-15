@@ -11,12 +11,6 @@
 //
 // Wrapped in an IIFE; published via `window.EchocardiogramTestRequest`.
 
-(function () {
-'use strict';
-window.EchocardiogramTestRequest =
-  window.EchocardiogramTestRequest || {};
-const NS = window.EchocardiogramTestRequest;
-
 // ----------------------------------------------------------------------
 // Axis A — Appropriateness (ACC/AHA/ASE & BSE Appropriate Use Criteria 1-9)
 // ----------------------------------------------------------------------
@@ -379,19 +373,4 @@ function scorePriority(data) {
   return { band, firedRules };
 }
 
-Object.assign(NS, {
-  scoreAppropriateness,
-  appropriatenessBand,
-  scoreUrgency,
-  scoreCompleteness,
-  scorePriority,
-  maxTier,
-  maxPriority,
-  URGENCY_ORDER,
-  PRIORITY_ORDER,
-  TARGET_TIMEFRAMES,
-  INDICATION_ECHO_MAP,
-  NT_PROBNP_URGENT,
-  NT_PROBNP_ROUTINE
-});
-})();
+export { scoreAppropriateness, appropriatenessBand, scoreUrgency, scoreCompleteness, scorePriority, maxTier, maxPriority, URGENCY_ORDER, PRIORITY_ORDER, TARGET_TIMEFRAMES, INDICATION_ECHO_MAP, NT_PROBNP_URGENT, NT_PROBNP_ROUTINE };

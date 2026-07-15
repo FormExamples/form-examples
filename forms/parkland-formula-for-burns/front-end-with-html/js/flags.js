@@ -1,3 +1,6 @@
+import { roundOne } from './grader.js';
+import { FIRST_PHASE_HOURS, referralThreshold } from './rules.js';
+
 // Flagged-issue detection (red flags). Independent of the arithmetic (which the
 // grader produces), this module raises clinician-facing safety flags per spec §5:
 //
@@ -18,15 +21,6 @@
  */
 
 // Wrapped in an IIFE; published via window.ParklandFormulaForBurns.
-(function () {
-'use strict';
-window.ParklandFormulaForBurns =
-  window.ParklandFormulaForBurns || {};
-const {
-  FIRST_PHASE_HOURS,
-  referralThreshold,
-  roundOne
-} = window.ParklandFormulaForBurns;
 
 /**
  * @param {AssessmentData} data
@@ -170,5 +164,4 @@ function detectFlaggedIssues(data, grade) {
   return flags;
 }
 
-window.ParklandFormulaForBurns.detectFlaggedIssues = detectFlaggedIssues;
-})();
+export { detectFlaggedIssues };

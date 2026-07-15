@@ -13,11 +13,6 @@
 //
 // Coordinator / team names are placeholder values.
 
-(function () {
-'use strict';
-window.WhoSurgicalSafetyChecklistDashboard =
-  window.WhoSurgicalSafetyChecklistDashboard || {};
-
 /** @type {import('./types.js').ChecklistRow[]} */
 const sampleChecklists = [
   {
@@ -724,5 +719,4 @@ const sampleChecklists = [
   }
 ];
 
-window.WhoSurgicalSafetyChecklistDashboard.sampleChecklists = sampleChecklists;
-})();
+export { sampleChecklists };

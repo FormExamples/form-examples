@@ -31,9 +31,6 @@
  */
 
 // Wrapped in an IIFE; published via window.SundownerSyndromeAssessment.
-(function () {
-'use strict';
-window.SundownerSyndromeAssessment = window.SundownerSyndromeAssessment || {};
 
 /** @type {{ value: number, label: string }[]} */
 const cmaiScaleOptions = [
@@ -122,11 +119,4 @@ const npiDomains = [
     description: 'Loss of appetite, weight change, food preference change.' }
 ];
 
-Object.assign(window.SundownerSyndromeAssessment, {
-  cmaiItems,
-  cmaiScaleOptions,
-  npiDomains,
-  npiFrequencyOptions,
-  npiSeverityOptions
-});
-})();
+export { cmaiItems, cmaiScaleOptions, npiDomains, npiFrequencyOptions, npiSeverityOptions };

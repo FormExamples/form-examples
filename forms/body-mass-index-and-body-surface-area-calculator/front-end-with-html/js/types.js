@@ -105,10 +105,6 @@
 // classic <script> (no ES modules) so the page can be opened directly via
 // `file://`. The IIFE attaches its public symbols to a single global
 // namespace, `window.BmiBsaCalculator`.
-(function () {
-'use strict';
-window.BmiBsaCalculator =
-  window.BmiBsaCalculator || {};
 
 /**
  * Build a fresh, fully-blank assessment.
@@ -257,17 +253,4 @@ function priorityLabel(priority) {
   }
 }
 
-Object.assign(window.BmiBsaCalculator, {
-  emptyAssessment,
-  bmiCategoryLabel,
-  bmiCategoryClass,
-  clinicianRoleLabel,
-  careSettingLabel,
-  purposeLabel,
-  sexLabel,
-  ageBandLabel,
-  ancestryLabel,
-  bsaFormulaLabel,
-  priorityLabel
-});
-})();
+export { emptyAssessment, bmiCategoryLabel, bmiCategoryClass, clinicianRoleLabel, careSettingLabel, purposeLabel, sexLabel, ageBandLabel, ancestryLabel, bsaFormulaLabel, priorityLabel };

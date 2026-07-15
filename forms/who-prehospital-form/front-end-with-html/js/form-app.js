@@ -1,3 +1,7 @@
+import { detectFlaggedIssues } from './flagged-issues.js';
+import { validatePrehospital } from './prehospital-validator.js';
+import { emptyAssessment, emptyReassessment, gcsTotal, hasNumber, hasText, isYesNoAnswered, priorityLabel, sectionLabel } from './types.js';
+
 // WHO Prehospital Form (SCF Prehospital) — clinician wizard (vanilla JS,
 // classic <script>). Single-page continuous wizard: every section is
 // rendered into the page in document order. Conditional rules
@@ -15,21 +19,6 @@
 // (fieldset.fieldset, .field, .label, .text-input, .radio-group,
 // .radio-input, .error-message, .error-summary, .panel, .step-list,
 // .progress) per forms/AGENTS-front-end-html.md.
-
-(function () {
-'use strict';
-const {
-  emptyAssessment,
-  emptyReassessment,
-  hasText,
-  hasNumber,
-  isYesNoAnswered,
-  gcsTotal,
-  sectionLabel,
-  priorityLabel,
-  validatePrehospital,
-  detectFlaggedIssues
-} = window.WhoPrehospitalForm;
 
 // ----------------------------------------------------------------------
 // Persistence
@@ -1701,4 +1690,3 @@ if (document.readyState === 'loading') {
 } else {
   init();
 }
-})();

@@ -19,10 +19,6 @@
 //   - any single medium factor -> medium
 //   - otherwise -> low
 
-(function () {
-'use strict';
-window.AnesthesiologyAssessment = window.AnesthesiologyAssessment || {};
-
 function mallampatiLabel(klass) {
   switch (klass) {
     case 'i': return 'Mallampati Class I';
@@ -139,8 +135,4 @@ function evaluateAirway(d) {
   };
 }
 
-Object.assign(window.AnesthesiologyAssessment, {
-  mallampatiLabel,
-  evaluateAirway
-});
-})();
+export { mallampatiLabel, evaluateAirway };

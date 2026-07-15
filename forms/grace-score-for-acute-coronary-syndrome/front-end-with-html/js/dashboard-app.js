@@ -1,3 +1,6 @@
+import { fetchAssessments } from './api.js';
+import { sampleAssessments } from './data.js';
+
 // GRACE — clinician dashboard (vanilla classic-script app).
 //
 // On boot we fetch the assessment list from the backend; on any failure (or
@@ -8,12 +11,6 @@
 // Sibling modules loaded as plain `<script>` tags (in dependency order) attach
 // their exports to `window.GraceScoreForAcuteCoronarySyndromeDashboard`.
 // The whole file is wrapped in an IIFE so its top-level identifiers do not leak.
-(function () {
-'use strict';
-const {
-  fetchAssessments,
-  sampleAssessments
-} = window.GraceScoreForAcuteCoronarySyndromeDashboard;
 
 // ----------------------------------------------------------------------
 // State
@@ -383,4 +380,3 @@ if (document.readyState === 'loading') {
 } else {
   init();
 }
-})();

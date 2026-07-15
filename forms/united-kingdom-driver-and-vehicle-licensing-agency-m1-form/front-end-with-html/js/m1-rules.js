@@ -1,3 +1,5 @@
+import { isFilled } from './types.js';
+
 // DVLA M1 form — validation rules.
 //
 // Each rule's `evaluate(data)` returns true when the rule *fires* (i.e. a
@@ -20,10 +22,6 @@
  */
 
 // Wrapped in an IIFE; published via window.DvlaM1Form.
-(function () {
-'use strict';
-window.DvlaM1Form = window.DvlaM1Form || {};
-const { isFilled } = window.DvlaM1Form;
 
 /** @type {ValidationRule[]} */
 const m1Rules = [
@@ -204,5 +202,4 @@ const m1Rules = [
   }
 ];
 
-window.DvlaM1Form.m1Rules = m1Rules;
-})();
+export { m1Rules };

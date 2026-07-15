@@ -1,3 +1,7 @@
+import { detectAdditionalFlags } from './flagged-issues.js';
+import { calculateGold } from './gold-grader.js';
+import { abcdGroupLabel, bmiCategory, calculateBMI, calculateFev1FvcRatio, catImpactLabel, emptyAssessment, goldStageClass, goldStageLabel } from './types.js';
+
 // Pulmonology Assessment - patient wizard (vanilla JavaScript, no build).
 //
 // Single-page continuous wizard: every section is rendered into the page in
@@ -11,22 +15,6 @@
 // the rest of this file referring to short local names. Whole file is
 // wrapped in an IIFE so its top-level identifiers don't leak to the
 // global scope.
-(function () {
-'use strict';
-
-const NS = window.PulmonologyAssessment;
-const {
-  emptyAssessment,
-  calculateBMI,
-  bmiCategory,
-  calculateFev1FvcRatio,
-  goldStageLabel,
-  goldStageClass,
-  abcdGroupLabel,
-  catImpactLabel,
-  calculateGold,
-  detectAdditionalFlags
-} = NS;
 
 // ----------------------------------------------------------------------
 // Persistence
@@ -1361,4 +1349,3 @@ if (document.readyState === 'loading') {
 } else {
   init();
 }
-})();

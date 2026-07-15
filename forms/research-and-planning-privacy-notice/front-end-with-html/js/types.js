@@ -71,9 +71,6 @@
 // classic <script> (no ES modules) so the page can be opened directly via
 // `file://`. The IIFE attaches its public symbols to a single global
 // namespace, `window.ResearchAndPlanningPrivacyNotice`.
-(function () {
-'use strict';
-window.ResearchAndPlanningPrivacyNotice = window.ResearchAndPlanningPrivacyNotice || {};
 
 /**
  * Build a fresh, fully-blank assessment.
@@ -185,13 +182,4 @@ function acknowledgementStatusClass(s) {
   }
 }
 
-Object.assign(window.ResearchAndPlanningPrivacyNotice, {
-  emptyAssessment,
-  completenessPercent,
-  validationStatus,
-  completenessLabel,
-  acknowledgementStatus,
-  acknowledgementStatusLabel,
-  acknowledgementStatusClass
-});
-})();
+export { emptyAssessment, completenessPercent, validationStatus, completenessLabel, acknowledgementStatus, acknowledgementStatusLabel, acknowledgementStatusClass };

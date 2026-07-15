@@ -20,9 +20,6 @@
  */
 
 // Wrapped in an IIFE; published via window.SemaglutideAssessment.
-(function () {
-'use strict';
-window.SemaglutideAssessment = window.SemaglutideAssessment || {};
 
 /**
  * Absolute contraindications - these make a patient ineligible for semaglutide.
@@ -143,9 +140,4 @@ const bmiThresholds = {
   }
 };
 
-Object.assign(window.SemaglutideAssessment, {
-  absoluteContraindications,
-  relativeContraindications,
-  bmiThresholds
-});
-})();
+export { absoluteContraindications, relativeContraindications, bmiThresholds };

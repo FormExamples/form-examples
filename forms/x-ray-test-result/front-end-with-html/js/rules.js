@@ -19,9 +19,6 @@
  */
 
 // Wrapped in an IIFE; published via window.XRayTestResult.
-(function () {
-'use strict';
-window.XRayTestResult = window.XRayTestResult || {};
 
 // ----------------------------------------------------------------------
 // Structured-findings predicates (mirror `utils.ts`)
@@ -445,13 +442,4 @@ function gradeFollowUp(r, classification, severity) {
   };
 }
 
-Object.assign(window.XRayTestResult, {
-  hasCriticalFinding,
-  hasAnyAbnormalFinding,
-  hasOnlyIncidentalFinding,
-  classifyResult,
-  gradeSeverity,
-  gradeCompleteness,
-  gradeFollowUp
-});
-})();
+export { hasCriticalFinding, hasAnyAbnormalFinding, hasOnlyIncidentalFinding, classifyResult, gradeSeverity, gradeCompleteness, gradeFollowUp };

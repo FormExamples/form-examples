@@ -1,3 +1,5 @@
+import { CRITERIA, SIGNATORIES, nonEmpty, sectionToClass } from './rules.js';
+
 // Mental Health Act legal-completeness grader. Pure functions: take a
 // `MentalHealthActAssessment` object, classify the recommended section, look up
 // that class's required signatories and criteria (from `rules.js`), and derive
@@ -30,15 +32,6 @@
  */
 
 // Wrapped in an IIFE; published via window.MentalHealthActAssessment.
-(function () {
-'use strict';
-window.MentalHealthActAssessment = window.MentalHealthActAssessment || {};
-const {
-  nonEmpty,
-  sectionToClass,
-  SIGNATORIES,
-  CRITERIA
-} = window.MentalHealthActAssessment;
 
 /**
  * Build the required-signatory checklist for the recommended section.
@@ -152,11 +145,4 @@ function gradeMentalHealthActAssessment(data) {
   };
 }
 
-Object.assign(window.MentalHealthActAssessment, {
-  evaluateSignatories,
-  evaluateCriteria,
-  deriveCompleteness,
-  deriveUrgency,
-  gradeMentalHealthActAssessment
-});
-})();
+export { evaluateSignatories, evaluateCriteria, deriveCompleteness, deriveUrgency, gradeMentalHealthActAssessment };

@@ -1,3 +1,6 @@
+import { validateMatB1 } from './mat-b1-validator.js';
+import { emptyAssessment, isFilled, priorityLabel } from './types.js';
+
 // MAT B1 maternity certificate - patient wizard (vanilla JS, classic <script>).
 //
 // Single-page continuous wizard: every section is rendered into the page in
@@ -8,15 +11,6 @@
 // page reload. Conditional sections (certificateType pre/post selecting
 // Part A or Part B; issuerType doctor/midwife selecting the issuer fields)
 // are hidden via re-render.
-
-(function () {
-'use strict';
-const {
-  emptyAssessment,
-  isFilled,
-  priorityLabel,
-  validateMatB1
-} = window.MatB1Form;
 
 // ----------------------------------------------------------------------
 // Persistence
@@ -931,4 +925,3 @@ if (document.readyState === 'loading') {
 } else {
   init();
 }
-})();

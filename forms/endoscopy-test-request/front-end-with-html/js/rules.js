@@ -12,11 +12,6 @@
 //
 // Wrapped in an IIFE; published via `window.EndoscopyTestRequest`.
 
-(function () {
-'use strict';
-window.EndoscopyTestRequest = window.EndoscopyTestRequest || {};
-const NS = window.EndoscopyTestRequest;
-
 // ----------------------------------------------------------------------
 // Axis A — Appropriateness (ACR / ASGE-AUC / EPAGE 1-9 ordinal)
 // ----------------------------------------------------------------------
@@ -459,18 +454,4 @@ function scoreRisk(data) {
   };
 }
 
-Object.assign(NS, {
-  scoreAppropriateness,
-  appropriatenessBand,
-  scoreUrgency,
-  scoreCompleteness,
-  scoreRisk,
-  maxTier,
-  glasgowBlatchford,
-  rockall,
-  TRIAGE_ORDER,
-  TARGET_TIMEFRAMES,
-  INDICATION_PROCEDURE_MAP,
-  HIGH_RISK_PROCEDURES
-});
-})();
+export { scoreAppropriateness, appropriatenessBand, scoreUrgency, scoreCompleteness, scoreRisk, maxTier, glasgowBlatchford, rockall, TRIAGE_ORDER, TARGET_TIMEFRAMES, INDICATION_PROCEDURE_MAP, HIGH_RISK_PROCEDURES };

@@ -6,11 +6,6 @@
 // screening contexts, and a range of care settings, with the referral flag set
 // whenever the outcome is `refer`.
 
-(function () {
-'use strict';
-window.NewbornAndInfantPhysicalExaminationDashboard =
-  window.NewbornAndInfantPhysicalExaminationDashboard || {};
-
 /** @type {import('./dashboard-types.js').ExaminationRow[]} */
 const sampleExaminations = [
   {
@@ -85,6 +80,4 @@ const sampleExaminations = [
   }
 ];
 
-window.NewbornAndInfantPhysicalExaminationDashboard.sampleExaminations =
-  sampleExaminations;
-})();
+export { sampleExaminations };

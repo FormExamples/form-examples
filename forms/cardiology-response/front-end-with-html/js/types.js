@@ -5,11 +5,6 @@
 // Property names are camelCase to match the front-end serde / examples
 // convention. Wrapped in an IIFE; published via `window.CardiologyResponse`.
 
-(function () {
-'use strict';
-window.CardiologyResponse =
-  window.CardiologyResponse || {};
-
 /**
  * Build a fresh, fully-blank cardiology response (consult reply).
  * Strings default to ''; numeric / date fields default to null;
@@ -231,18 +226,4 @@ function recommendationLabel(value) {
   }
 }
 
-Object.assign(window.CardiologyResponse, {
-  emptyResponse,
-  flatten,
-  hasCriticalFinding,
-  hasAnyCardiacFinding,
-  hasReducedEjectionFraction,
-  responseClassificationLabel,
-  severityLabel,
-  followUpUrgencyLabel,
-  consultationTypeLabel,
-  responseStatusLabel,
-  primaryDiagnosisCategoryLabel,
-  recommendationLabel
-});
-})();
+export { emptyResponse, flatten, hasCriticalFinding, hasAnyCardiacFinding, hasReducedEjectionFraction, responseClassificationLabel, severityLabel, followUpUrgencyLabel, consultationTypeLabel, responseStatusLabel, primaryDiagnosisCategoryLabel, recommendationLabel };

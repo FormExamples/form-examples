@@ -12,11 +12,6 @@
 // data appears anywhere in this file. NHS numbers follow the canonical
 // "NNN NNN NNNN" display form.
 
-(function () {
-'use strict';
-window.MedicalOperationNoteDashboard =
-  window.MedicalOperationNoteDashboard || {};
-
 /** @type {import('./types.js').OperationNoteRow[]} */
 const sampleOperationNotes = [
   // --- Routine ----------------------------------------------------------
@@ -268,6 +263,4 @@ const sampleOperationNotes = [
   }
 ];
 
-window.MedicalOperationNoteDashboard.sampleOperationNotes =
-  sampleOperationNotes;
-})();
+export { sampleOperationNotes };

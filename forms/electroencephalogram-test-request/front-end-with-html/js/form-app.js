@@ -1,3 +1,6 @@
+import { calculateGrade } from './grader.js';
+import { eegTypeLabel, emptyRequest } from './types.js';
+
 // Electroencephalogram (EEG) Test Request — clinician referral wizard
 // (vanilla JS).
 //
@@ -11,16 +14,6 @@
 // exports to `window.ElectroencephalogramTestRequest`. The whole file is
 // wrapped in an IIFE so its top-level identifiers don't leak to the global
 // scope.
-
-(function () {
-'use strict';
-
-const NS = window.ElectroencephalogramTestRequest;
-const {
-  emptyRequest,
-  eegTypeLabel,
-  calculateGrade
-} = NS;
 
 // ----------------------------------------------------------------------
 // Persistence
@@ -800,4 +793,3 @@ if (document.readyState === 'loading') {
 } else {
   init();
 }
-})();

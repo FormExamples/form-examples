@@ -6,11 +6,6 @@
 // Property names are camelCase to match the front-end serde / examples
 // convention. Wrapped in an IIFE; published via `window.UltrasoundTestRequest`.
 
-(function () {
-'use strict';
-window.UltrasoundTestRequest =
-  window.UltrasoundTestRequest || {};
-
 /**
  * Build a fresh, fully-blank general ultrasound request.
  * Strings default to ''; numeric / date fields default to null;
@@ -106,11 +101,4 @@ function indicationLabel(value) {
   return INDICATION_LABELS[value] || value || '';
 }
 
-Object.assign(window.UltrasoundTestRequest, {
-  emptyRequest,
-  bodyRegionLabel,
-  indicationLabel,
-  BODY_REGION_LABELS,
-  INDICATION_LABELS
-});
-})();
+export { emptyRequest, bodyRegionLabel, indicationLabel, BODY_REGION_LABELS, INDICATION_LABELS };

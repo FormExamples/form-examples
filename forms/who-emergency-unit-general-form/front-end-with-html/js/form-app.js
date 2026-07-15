@@ -1,3 +1,7 @@
+import { validateEuGeneral } from './eu-general-validator.js';
+import { detectFlaggedIssues } from './flagged-issues.js';
+import { emptyAssessment, hasNumber, hasText, isYesNoAnswered, priorityLabel, sectionLabel } from './types.js';
+
 // WHO Emergency Unit Form: General — patient/clinician wizard (vanilla
 // JS, classic <script>). Single-page continuous wizard: all 16 sections
 // rendered into the page in document order as Lily-shaped
@@ -15,19 +19,6 @@
 // + input.radio-input, every section is fieldset.fieldset with
 // legend.fieldset-legend containing section-step + h2.section-title +
 // optional section-description.
-
-(function () {
-'use strict';
-const {
-  emptyAssessment,
-  hasText,
-  hasNumber,
-  isYesNoAnswered,
-  sectionLabel,
-  priorityLabel,
-  validateEuGeneral,
-  detectFlaggedIssues
-} = window.WhoEmergencyUnitGeneralForm;
 
 const TOTAL_STEPS = 16;
 
@@ -1747,8 +1738,5 @@ if (document.readyState === 'loading') {
 }
 
 // Expose a small public surface for debugging in the browser console.
-Object.assign(window.WhoEmergencyUnitGeneralForm, {
-  _getState: () => state,
-  _submitForm: submitForm
-});
-})();
+export const _getState = () => state;
+export const _submitForm = submitForm;

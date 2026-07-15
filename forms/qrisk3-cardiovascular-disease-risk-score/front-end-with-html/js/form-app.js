@@ -1,3 +1,7 @@
+import { detectFlaggedIssues } from './flags.js';
+import { calculateQrisk3Grade } from './grader.js';
+import { emptyAssessment, priorityLabel, riskBandClass, riskBandLabel } from './types.js';
+
 // QRISK3 Cardiovascular Disease Risk Score — clinician wizard (vanilla
 // JavaScript, no build).
 //
@@ -14,18 +18,6 @@
 // to `window.Qrisk3CardiovascularDiseaseRiskScore`. Pulling them off here keeps
 // the rest of this file referring to short local names. The whole file is
 // wrapped in an IIFE so its top-level identifiers don't leak.
-(function () {
-'use strict';
-
-const NS = window.Qrisk3CardiovascularDiseaseRiskScore;
-const {
-  emptyAssessment,
-  riskBandLabel,
-  riskBandClass,
-  priorityLabel,
-  calculateQrisk3Grade,
-  detectFlaggedIssues
-} = NS;
 
 // ----------------------------------------------------------------------
 // Persistence
@@ -1022,4 +1014,3 @@ if (document.readyState === 'loading') {
 } else {
   init();
 }
-})();

@@ -8,11 +8,6 @@
 // written instructions and flexible hours; and someone awaiting an autism
 // assessment at risk of burnout.
 
-(function () {
-'use strict';
-window.NeurodiversityAdjustmentRequestDashboard =
-  window.NeurodiversityAdjustmentRequestDashboard || {};
-
 /** @type {import('./dashboard-types.js').RequestRow[]} */
 const sampleRequests = [
   {
@@ -157,5 +152,4 @@ const sampleRequests = [
   }
 ];
 
-window.NeurodiversityAdjustmentRequestDashboard.sampleRequests = sampleRequests;
-})();
+export { sampleRequests };

@@ -50,12 +50,7 @@
 // Wrapped in an IIFE so locals stay scoped — this file is loaded as a classic
 // <script> (no ES modules). The IIFE attaches its public symbols to a single
 // global namespace, `window.StructuredMedicationReviewDashboard`.
-(function () {
-'use strict';
-window.StructuredMedicationReviewDashboard =
-  window.StructuredMedicationReviewDashboard || {};
 
 // No runtime exports; types are JSDoc-only. Touch the namespace so this file
 // is unambiguously side-effecting and other files can rely on it loading
 // before they read `window.StructuredMedicationReviewDashboard`.
-})();

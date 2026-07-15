@@ -163,9 +163,6 @@
 // classic <script> (no ES modules) so the page can be opened directly
 // via `file://`. The IIFE attaches its public symbols to a single
 // global namespace, `window.InternationalPatientSummary`.
-(function () {
-'use strict';
-window.InternationalPatientSummary = window.InternationalPatientSummary || {};
 
 /**
  * Build a fresh, fully-blank assessment.
@@ -234,9 +231,4 @@ const OPTIONAL_SECTIONS = [
   'advanceDirectives'
 ];
 
-Object.assign(window.InternationalPatientSummary, {
-  emptyAssessment,
-  MANDATORY_SECTIONS,
-  OPTIONAL_SECTIONS
-});
-})();
+export { emptyAssessment, MANDATORY_SECTIONS, OPTIONAL_SECTIONS };

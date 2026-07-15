@@ -12,10 +12,6 @@
 //   DASH = ((sum of n responses / n) - 1) * 25
 //   Minimum 27 of 30 items must be answered.
 
-(function () {
-'use strict';
-window.OrthopedicAssessment = window.OrthopedicAssessment || {};
-
 const dashQuestions = [
   // Daily activities (Items 1-8)
   { id: 'DASH-01', questionNumber: 1, domain: 'Daily activities', text: 'Open a tight or new jar' },
@@ -96,12 +92,4 @@ function getResponseOptions(questionNumber) {
   return dashAgreementOptions;
 }
 
-Object.assign(window.OrthopedicAssessment, {
-  dashQuestions,
-  dashDifficultyOptions,
-  dashImpactOptions,
-  dashSeverityOptions,
-  dashAgreementOptions,
-  getResponseOptions
-});
-})();
+export { dashQuestions, dashDifficultyOptions, dashImpactOptions, dashSeverityOptions, dashAgreementOptions, getResponseOptions };

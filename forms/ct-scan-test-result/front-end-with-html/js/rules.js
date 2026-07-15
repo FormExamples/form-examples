@@ -19,9 +19,6 @@
  */
 
 // Wrapped in an IIFE; published via window.CtScanTestResult.
-(function () {
-'use strict';
-window.CtScanTestResult = window.CtScanTestResult || {};
 
 // ----------------------------------------------------------------------
 // Structured-findings predicates (mirror `utils.ts`)
@@ -438,13 +435,4 @@ function gradeFollowUp(r, classification, severity) {
   };
 }
 
-Object.assign(window.CtScanTestResult, {
-  hasCriticalFinding,
-  hasAnyAbnormalFinding,
-  hasOnlyIncidentalFinding,
-  classifyResult,
-  gradeSeverity,
-  gradeCompleteness,
-  gradeFollowUp
-});
-})();
+export { hasCriticalFinding, hasAnyAbnormalFinding, hasOnlyIncidentalFinding, classifyResult, gradeSeverity, gradeCompleteness, gradeFollowUp };

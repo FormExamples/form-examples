@@ -1,3 +1,7 @@
+import { detectFlaggedIssues } from './flags.js';
+import { calculatePaduaGrade } from './grader.js';
+import { emptyAssessment, priorityLabel, prophylaxisLabel, riskBandClass, riskBandLabel } from './types.js';
+
 // Padua Venous Thromboembolism Risk Assessment (Padua Prediction Score) —
 // bedside wizard (vanilla JavaScript, no build).
 //
@@ -14,19 +18,6 @@
 // to `window.PaduaVenousThromboembolismRiskAssessment`. Pulling them off here
 // keeps the rest of this file referring to short local names. The whole file is
 // wrapped in an IIFE so its top-level identifiers don't leak.
-(function () {
-'use strict';
-
-const NS = window.PaduaVenousThromboembolismRiskAssessment;
-const {
-  emptyAssessment,
-  riskBandLabel,
-  riskBandClass,
-  prophylaxisLabel,
-  priorityLabel,
-  calculatePaduaGrade,
-  detectFlaggedIssues
-} = NS;
 
 // ----------------------------------------------------------------------
 // Persistence
@@ -1005,4 +996,3 @@ if (document.readyState === 'loading') {
 } else {
   init();
 }
-})();

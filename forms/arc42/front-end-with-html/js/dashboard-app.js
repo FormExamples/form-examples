@@ -1,3 +1,6 @@
+import { fetchDocuments } from './api.js';
+import { sampleDocuments } from './data.js';
+
 // arc42 — architecture dashboard (vanilla classic-script app).
 //
 // On boot we fetch the document list from the backend; on any failure (or
@@ -10,12 +13,6 @@
 // Sibling modules loaded as plain `<script>` tags (in dependency order) attach
 // their exports to `window.Arc42Dashboard`. The whole file is wrapped in an
 // IIFE so its top-level identifiers do not leak to the global scope.
-(function () {
-'use strict';
-const {
-  fetchDocuments,
-  sampleDocuments
-} = window.Arc42Dashboard;
 
 // ----------------------------------------------------------------------
 // State
@@ -359,4 +356,3 @@ if (document.readyState === 'loading') {
 } else {
   init();
 }
-})();

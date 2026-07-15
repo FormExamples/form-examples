@@ -16,9 +16,6 @@
  */
 
 // Wrapped in an IIFE; published via window.AdvanceStatementAboutCare.
-(function () {
-'use strict';
-window.AdvanceStatementAboutCare = window.AdvanceStatementAboutCare || {};
 
 /** @type {CompletenessRule[]} */
 const completenessRules = [
@@ -266,5 +263,4 @@ const completenessRules = [
   }
 ];
 
-window.AdvanceStatementAboutCare.completenessRules = completenessRules;
-})();
+export { completenessRules };

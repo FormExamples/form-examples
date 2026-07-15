@@ -98,9 +98,6 @@
 // classic <script> (no ES modules) so the page can be opened directly via
 // `file://`. Public symbols attach to a single global namespace,
 // `window.MatB1Form`.
-(function () {
-'use strict';
-window.MatB1Form = window.MatB1Form || {};
 
 /** @returns {AssessmentData} */
 function emptyAssessment() {
@@ -184,11 +181,4 @@ function priorityLabel(priority) {
   }
 }
 
-Object.assign(window.MatB1Form, {
-  emptyAssessment,
-  isFilled,
-  weeksBetween,
-  priorityOrder,
-  priorityLabel
-});
-})();
+export { emptyAssessment, isFilled, weeksBetween, priorityOrder, priorityLabel };

@@ -1,3 +1,6 @@
+import { INADEQUATE_SAMPLE, classificationRules } from './rules.js';
+import { DEFAULT_THRESHOLD } from './types.js';
+
 // Bowel-cancer-screening FIT grader. Pure functions: take an `AssessmentData`
 // object and apply the priority-ordered classification, returning the result
 // class, the recommended management action, the symptomatic-pathway indicator,
@@ -30,15 +33,6 @@
  */
 
 // Wrapped in an IIFE; published via window.BowelCancerScreeningFit.
-(function () {
-'use strict';
-window.BowelCancerScreeningFit =
-  window.BowelCancerScreeningFit || {};
-const {
-  DEFAULT_THRESHOLD,
-  INADEQUATE_SAMPLE,
-  classificationRules
-} = window.BowelCancerScreeningFit;
 
 /** True when a numeric value is present (not null/undefined/NaN). */
 function hasNumber(n) {
@@ -126,8 +120,4 @@ function gradeFit(data) {
   };
 }
 
-Object.assign(window.BowelCancerScreeningFit, {
-  hasNumber,
-  gradeFit
-});
-})();
+export { hasNumber, gradeFit };

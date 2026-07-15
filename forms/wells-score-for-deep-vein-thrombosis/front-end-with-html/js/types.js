@@ -117,10 +117,6 @@
 // <script> (no ES modules) so the page can be opened directly via `file://`.
 // The IIFE attaches its public symbols to a single global namespace,
 // `window.WellsScoreForDeepVeinThrombosis`.
-(function () {
-'use strict';
-window.WellsScoreForDeepVeinThrombosis =
-  window.WellsScoreForDeepVeinThrombosis || {};
 
 /**
  * Build a fresh, fully-blank assessment.
@@ -281,18 +277,4 @@ function priorityLabel(priority) {
   }
 }
 
-Object.assign(window.WellsScoreForDeepVeinThrombosis, {
-  emptyAssessment,
-  twoLevelBandLabel,
-  threeLevelBandLabel,
-  bandClass,
-  recommendedInvestigationLabel,
-  clinicianRoleLabel,
-  careSettingLabel,
-  sexLabel,
-  ageBandLabel,
-  symptomaticLegLabel,
-  yesNoLabel,
-  priorityLabel
-});
-})();
+export { emptyAssessment, twoLevelBandLabel, threeLevelBandLabel, bandClass, recommendedInvestigationLabel, clinicianRoleLabel, careSettingLabel, sexLabel, ageBandLabel, symptomaticLegLabel, yesNoLabel, priorityLabel };

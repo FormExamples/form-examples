@@ -1,3 +1,6 @@
+import { mrsRules } from './mrs-rules.js';
+import { calculateAge } from './types.js';
+
 // MRS (Menopause Rating Scale) grader and HRT risk classifier.
 //
 // Pure functions: take an AssessmentData object, return the total MRS
@@ -20,11 +23,6 @@
  * @typedef {import('./types.js').FiredRule} FiredRule
  * @typedef {import('./types.js').HRTRiskClassification} HRTRiskClassification
  */
-
-(function () {
-'use strict';
-window.HormoneReplacementTherapyAssessment = window.HormoneReplacementTherapyAssessment || {};
-const { mrsRules, calculateAge } = window.HormoneReplacementTherapyAssessment;
 
 /**
  * Map a numeric total MRS score to a severity band.
@@ -145,9 +143,4 @@ function classifyHRTRisk(data) {
   return 'Favourable';
 }
 
-Object.assign(window.HormoneReplacementTherapyAssessment, {
-  getMRSSeverity,
-  calculateMRS,
-  classifyHRTRisk
-});
-})();
+export { getMRSSeverity, calculateMRS, classifyHRTRisk };

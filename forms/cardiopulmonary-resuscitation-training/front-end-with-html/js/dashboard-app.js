@@ -1,3 +1,6 @@
+import { fetchTrainees } from './api.js';
+import { sampleTrainees } from './data.js';
+
 // Cardiopulmonary Resuscitation Training - training coordinator dashboard
 // (vanilla classic-script app).
 //
@@ -13,10 +16,6 @@
 // here keeps the rest of this file referring to short local names. The
 // whole file is wrapped in an IIFE so its top-level identifiers do not
 // leak to the global scope.
-(function () {
-'use strict';
-const NS = window.CardiopulmonaryResuscitationTrainingDashboard;
-const { fetchTrainees, sampleTrainees } = NS;
 
 // ----------------------------------------------------------------------
 // Configuration
@@ -580,4 +579,3 @@ if (document.readyState === 'loading') {
 } else {
   init();
 }
-})();

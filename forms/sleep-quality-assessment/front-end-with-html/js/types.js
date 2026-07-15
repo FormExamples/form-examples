@@ -110,9 +110,6 @@
  */
 
 // Wrapped in an IIFE; published via window.SleepQualityAssessment.
-(function () {
-'use strict';
-window.SleepQualityAssessment = window.SleepQualityAssessment || {};
 
 /**
  * Build a fresh, fully-blank assessment.
@@ -221,10 +218,4 @@ function sleepEfficiencyCalc(hoursAsleep, hoursInBed) {
   return (hoursAsleep / hoursInBed) * 100;
 }
 
-Object.assign(window.SleepQualityAssessment, {
-  emptyAssessment,
-  psqiCategory,
-  psqiCategoryClass,
-  sleepEfficiencyCalc
-});
-})();
+export { emptyAssessment, psqiCategory, psqiCategoryClass, sleepEfficiencyCalc };

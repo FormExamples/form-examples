@@ -1,3 +1,7 @@
+import { calculateASA } from './asa-grader.js';
+import { detectAdditionalFlags } from './flagged-issues.js';
+import { asaGradeClass, asaGradeLabel, bmiCategory, calculateAge, calculateBMI, emptyAssessment, estimateMETs } from './types.js';
+
 // Pre-Operative Assessment by Patient - patient wizard (vanilla JS, no build).
 //
 // Single-page continuous wizard: every section is rendered into the page in
@@ -11,21 +15,6 @@
 // here keeps the rest of this file referring to short local names. Whole
 // file is wrapped in an IIFE so its top-level identifiers don't leak to
 // the global scope.
-(function () {
-'use strict';
-
-const NS = window.PreOperativeAssessmentByPatient;
-const {
-  emptyAssessment,
-  calculateBMI,
-  bmiCategory,
-  estimateMETs,
-  calculateAge,
-  asaGradeLabel,
-  asaGradeClass,
-  calculateASA,
-  detectAdditionalFlags
-} = NS;
 
 // ----------------------------------------------------------------------
 // Persistence
@@ -1496,4 +1485,3 @@ if (document.readyState === 'loading') {
 } else {
   init();
 }
-})();

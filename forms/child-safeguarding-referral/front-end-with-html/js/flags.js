@@ -1,3 +1,5 @@
+import { consentBasisOk } from './rules.js';
+
 // Safeguarding-flag detection. Independent of the completeness status and
 // urgency classification (which the grader produces), this module raises
 // duty-team-facing safeguarding flags per spec §5:
@@ -24,10 +26,6 @@
  */
 
 // Wrapped in an IIFE; published via window.ChildSafeguardingReferral.
-(function () {
-'use strict';
-window.ChildSafeguardingReferral = window.ChildSafeguardingReferral || {};
-const NS = window.ChildSafeguardingReferral;
 
 const nonEmpty = (s) => typeof s === 'string' && s.trim() !== '';
 const hasNumber = (n) => typeof n === 'number' && !Number.isNaN(n);
@@ -52,7 +50,7 @@ function missingMandatoryFields(r) {
   if (!nonEmpty(r.concern.concernDescription)) missing.push('concern description');
   if (!nonEmpty(r.category.primaryCategory)) missing.push('primary category of abuse');
   if (!nonEmpty(r.risk.immediateDanger)) missing.push('immediate-danger answer');
-  if (typeof NS.consentBasisOk === 'function' && !NS.consentBasisOk(r)) {
+  if (typeof consentBasisOk === 'function' && !consentBasisOk(r)) {
     missing.push('consent / information-sharing basis');
   }
   return missing;
@@ -123,7 +121,7 @@ function detectFlaggedIssues(referral) {
   }
 
   // ─── No consent basis documented (HIGH) ─────────────────────
-  if (typeof NS.consentBasisOk === 'function' && !NS.consentBasisOk(referral)) {
+  if (typeof consentBasisOk === 'function' && !consentBasisOk(referral)) {
     flags.push({
       id: 'F-NO-CONSENT-BASIS-001',
       category: 'no-consent-basis',
@@ -185,6 +183,4 @@ function detectFlaggedIssues(referral) {
   return flags;
 }
 
-NS.missingMandatoryFields = missingMandatoryFields;
-NS.detectFlaggedIssues = detectFlaggedIssues;
-})();
+export { missingMandatoryFields, detectFlaggedIssues };

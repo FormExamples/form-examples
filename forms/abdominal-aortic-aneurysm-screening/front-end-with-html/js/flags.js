@@ -1,3 +1,5 @@
+import { RAPID_GROWTH_CM } from './rules.js';
+
 // Flagged-issue detection (red flags). Independent of the diameter category
 // (which the grader produces), this module raises clinician-facing safety flags
 // per spec §5:
@@ -18,11 +20,6 @@
  */
 
 // Wrapped in an IIFE; published via window.AbdominalAorticAneurysmScreening.
-(function () {
-'use strict';
-window.AbdominalAorticAneurysmScreening =
-  window.AbdominalAorticAneurysmScreening || {};
-const { RAPID_GROWTH_CM } = window.AbdominalAorticAneurysmScreening;
 
 /**
  * @param {AssessmentData} data
@@ -116,6 +113,4 @@ function detectFlaggedIssues(data, grade) {
   return flags;
 }
 
-window.AbdominalAorticAneurysmScreening.detectFlaggedIssues =
-  detectFlaggedIssues;
-})();
+export { detectFlaggedIssues };

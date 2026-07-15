@@ -1,3 +1,5 @@
+import { activeItemNumbers, ratingValue } from './rules.js';
+
 // Flagged-issue detection (red flags). Independent of the burden band, this
 // module raises clinician-facing flags per spec §5:
 //
@@ -19,10 +21,6 @@
  */
 
 // Wrapped in an IIFE; published via window.ZaritBurdenInterview.
-(function () {
-'use strict';
-window.ZaritBurdenInterview = window.ZaritBurdenInterview || {};
-const { activeItemNumbers, ratingValue } = window.ZaritBurdenInterview;
 
 /**
  * @param {AssessmentData} data
@@ -130,5 +128,4 @@ function detectFlaggedIssues(data, grade) {
   return flags;
 }
 
-window.ZaritBurdenInterview.detectFlaggedIssues = detectFlaggedIssues;
-})();
+export { detectFlaggedIssues };

@@ -6,11 +6,6 @@
 // listed in `forms/workplace-safety-assessment/AGENTS.md`, with a realistic
 // distribution of last-audit dates and open-action counts.
 
-(function () {
-'use strict';
-window.WorkplaceSafetyAssessmentDashboard =
-  window.WorkplaceSafetyAssessmentDashboard || {};
-
 /** @type {import('./types.js').SiteRow[]} */
 const sampleSites = [
   {
@@ -135,5 +130,4 @@ const sampleSites = [
   }
 ];
 
-window.WorkplaceSafetyAssessmentDashboard.sampleSites = sampleSites;
-})();
+export { sampleSites };

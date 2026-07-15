@@ -243,9 +243,6 @@
 // classic <script> (no ES modules) so the page can be opened directly via
 // `file://`. The IIFE attaches its public symbols to a single global
 // namespace, `window.DvlaB1Form`.
-(function () {
-'use strict';
-window.DvlaB1Form = window.DvlaB1Form || {};
 
 /** @returns {AssessmentData} */
 function emptyAssessment() {
@@ -434,12 +431,4 @@ function priorityLabel(priority) {
   }
 }
 
-Object.assign(window.DvlaB1Form, {
-  emptyAssessment,
-  hasText,
-  isYesNoAnswered,
-  epilepsyDeclarationRequired,
-  sectionLabel,
-  priorityLabel
-});
-})();
+export { emptyAssessment, hasText, isYesNoAnswered, epilepsyDeclarationRequired, sectionLabel, priorityLabel };

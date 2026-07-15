@@ -6,10 +6,6 @@
 // mechanism of injury, and every disposition; multiple rows with FAST
 // positive findings and one dead-on-arrival row.
 
-(function () {
-'use strict';
-window.WhoEmergencyUnitTraumaDashboard = window.WhoEmergencyUnitTraumaDashboard || {};
-
 /** @type {import('./types.js').PatientRow[]} */
 const samplePatients = [
   {
@@ -206,5 +202,4 @@ const samplePatients = [
   }
 ];
 
-window.WhoEmergencyUnitTraumaDashboard.samplePatients = samplePatients;
-})();
+export { samplePatients };

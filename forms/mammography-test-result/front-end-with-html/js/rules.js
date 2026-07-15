@@ -1,3 +1,5 @@
+import { biRadsShortLabel } from './types.js';
+
 // Declarative four-axis grading rules for the Mammography Test Result.
 //
 // Faithful vanilla-JavaScript port of the SvelteKit engine modules
@@ -20,10 +22,6 @@
  */
 
 // Wrapped in an IIFE; published via window.MammographyTestResult.
-(function () {
-'use strict';
-window.MammographyTestResult = window.MammographyTestResult || {};
-const { biRadsShortLabel } = window.MammographyTestResult;
 
 // ----------------------------------------------------------------------
 // Structured-findings predicates (mirror `utils.ts`)
@@ -587,14 +585,4 @@ function gradeFollowUp(r, classification, severity) {
   };
 }
 
-Object.assign(window.MammographyTestResult, {
-  hasAnyAbnormalFinding,
-  hasOnlyIncidentalFinding,
-  isBiRadsUrgent,
-  isBiRadsCritical,
-  classifyResult,
-  gradeSeverity,
-  gradeCompleteness,
-  gradeFollowUp
-});
-})();
+export { hasAnyAbnormalFinding, hasOnlyIncidentalFinding, isBiRadsUrgent, isBiRadsCritical, classifyResult, gradeSeverity, gradeCompleteness, gradeFollowUp };

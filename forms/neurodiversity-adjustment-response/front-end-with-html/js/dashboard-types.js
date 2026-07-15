@@ -56,10 +56,6 @@
 // <script> (no ES modules) so the page can be opened directly via `file://`.
 // The IIFE attaches its public symbols to a single global namespace,
 // `window.NeurodiversityAdjustmentResponseDashboard`.
-(function () {
-'use strict';
-window.NeurodiversityAdjustmentResponseDashboard =
-  window.NeurodiversityAdjustmentResponseDashboard || {};
 
 /** Axis A outcome-classification display label. */
 function outcomeClassificationLabel(value) {
@@ -108,10 +104,4 @@ function responseStatusLabel(value) {
   }
 }
 
-Object.assign(window.NeurodiversityAdjustmentResponseDashboard, {
-  outcomeClassificationLabel,
-  legalRiskBandLabel,
-  followUpUrgencyLabel,
-  responseStatusLabel
-});
-})();
+export { outcomeClassificationLabel, legalRiskBandLabel, followUpUrgencyLabel, responseStatusLabel };

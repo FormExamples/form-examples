@@ -1,3 +1,6 @@
+import { GRADED_DOMAIN_KEYS, surveyItems } from './rules.js';
+import { classifyENps, classifyScore } from './types.js';
+
 // Employee Satisfaction Survey grader. Pure functions: given an
 // `AssessmentData` object, return per-domain 0-100 scores, a 0-100
 // composite, the satisfaction category, and the eNPS classification.
@@ -27,11 +30,6 @@
  */
 
 // Wrapped in an IIFE; published via window.EmployeeSatisfactionSurvey.
-(function () {
-'use strict';
-const NS = window.EmployeeSatisfactionSurvey =
-  window.EmployeeSatisfactionSurvey || {};
-const { surveyItems, GRADED_DOMAIN_KEYS, classifyScore, classifyENps } = NS;
 
 /**
  * Score a single domain: mean of 1-5 answers and 0-100 normalised score.
@@ -155,9 +153,4 @@ function gradeSatisfaction(data) {
   };
 }
 
-Object.assign(NS, {
-  gradeDomain,
-  gradeENps,
-  gradeSatisfaction
-});
-})();
+export { gradeDomain, gradeENps, gradeSatisfaction };

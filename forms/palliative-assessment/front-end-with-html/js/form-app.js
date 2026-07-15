@@ -1,3 +1,7 @@
+import { gradeESAS } from './esas-grader.js';
+import { detectAdditionalFlags } from './flagged-issues.js';
+import { ESAS_ITEMS, classifyESASTotal, classifyIndividualSymptom, emptyAssessment, severityBandClass, severityBandLabel } from './types.js';
+
 // Palliative Assessment - patient / carer wizard (vanilla JavaScript, no
 // build step). Single-page continuous wizard: every section is rendered
 // into the page in document order. The user scrolls through them; a
@@ -11,20 +15,6 @@
 // the rest of this file referring to short local names. Whole file is
 // wrapped in an IIFE so its top-level identifiers don't leak to the
 // global scope.
-(function () {
-'use strict';
-
-const NS = window.PalliativeAssessment;
-const {
-  emptyAssessment,
-  ESAS_ITEMS,
-  classifyESASTotal,
-  severityBandLabel,
-  severityBandClass,
-  classifyIndividualSymptom,
-  gradeESAS,
-  detectAdditionalFlags
-} = NS;
 
 // ----------------------------------------------------------------------
 // Persistence
@@ -1584,4 +1574,3 @@ if (document.readyState === 'loading') {
 } else {
   init();
 }
-})();

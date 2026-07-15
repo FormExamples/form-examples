@@ -24,9 +24,6 @@
  */
 
 // Wrapped in an IIFE; published via window.CervicalScreening.
-(function () {
-'use strict';
-window.CervicalScreening = window.CervicalScreening || {};
 
 const MIN_AGE = 25;
 const MAX_AGE = 64;
@@ -146,9 +143,4 @@ const classificationRules = [
   }
 ];
 
-window.CervicalScreening.classificationRules = classificationRules;
-window.CervicalScreening.notEligible = notEligible;
-window.CervicalScreening.GRADED_CYTOLOGY = GRADED;
-window.CervicalScreening.MIN_AGE = MIN_AGE;
-window.CervicalScreening.MAX_AGE = MAX_AGE;
-})();
+export { classificationRules, notEligible, GRADED as GRADED_CYTOLOGY, MIN_AGE, MAX_AGE };

@@ -7,11 +7,6 @@
 // that the self-harm flag can be raised even when the total is in the lower
 // band (row 4) — item 10 is evaluated independently of the total.
 
-(function () {
-'use strict';
-window.EdinburghPostnatalDepressionScaleDashboard =
-  window.EdinburghPostnatalDepressionScaleDashboard || {};
-
 /** @type {import('./dashboard-types.js').AssessmentRow[]} */
 const sampleAssessments = [
   {
@@ -93,6 +88,4 @@ const sampleAssessments = [
   }
 ];
 
-window.EdinburghPostnatalDepressionScaleDashboard.sampleAssessments =
-  sampleAssessments;
-})();
+export { sampleAssessments };

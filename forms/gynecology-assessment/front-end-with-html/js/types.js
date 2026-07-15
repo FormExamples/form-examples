@@ -151,9 +151,6 @@
 // classic <script> (no ES modules) so the page can be opened directly via
 // `file://`. The IIFE attaches its public symbols to a single global
 // namespace, `window.GynecologyAssessment`.
-(function () {
-'use strict';
-window.GynecologyAssessment = window.GynecologyAssessment || {};
 
 /**
  * Build a fresh, fully-blank assessment.
@@ -273,11 +270,4 @@ function menopausalStatusLabel(status) {
   }
 }
 
-Object.assign(window.GynecologyAssessment, {
-  emptyAssessment,
-  calculateAge,
-  severityCategory,
-  severityClass,
-  menopausalStatusLabel
-});
-})();
+export { emptyAssessment, calculateAge, severityCategory, severityClass, menopausalStatusLabel };

@@ -5,10 +5,6 @@
 // rows span every result class and management action, both care settings, and
 // the urgent flag is set whenever urgent colposcopy is indicated.
 
-(function () {
-'use strict';
-window.CervicalScreeningDashboard = window.CervicalScreeningDashboard || {};
-
 /** @type {import('./dashboard-types.js').ScreeningRow[]} */
 const sampleScreenings = [
   {
@@ -83,5 +79,4 @@ const sampleScreenings = [
   }
 ];
 
-window.CervicalScreeningDashboard.sampleScreenings = sampleScreenings;
-})();
+export { sampleScreenings };

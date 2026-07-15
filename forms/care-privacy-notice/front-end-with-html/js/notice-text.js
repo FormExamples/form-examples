@@ -5,10 +5,6 @@
 // and as a classic-script namespace value so the page opens directly via
 // file:// without CORS blocking.
 
-(function () {
-'use strict';
-window.CarePrivacyNotice = window.CarePrivacyNotice || {};
-
 function esc(str) {
   const div = document.createElement('div');
   div.textContent = str || '';
@@ -213,5 +209,4 @@ information and your individual rights.</p>
 `;
 }
 
-window.CarePrivacyNotice.renderNoticeHtml = renderNoticeHtml;
-})();
+export { renderNoticeHtml };

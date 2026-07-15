@@ -153,10 +153,6 @@
 // classic <script> (no ES modules) so the page can be opened directly via
 // `file://`. The IIFE attaches its public symbols to a single global
 // namespace, `window.SequentialOrganFailureAssessment`.
-(function () {
-'use strict';
-window.SequentialOrganFailureAssessment =
-  window.SequentialOrganFailureAssessment || {};
 
 /**
  * Build a fresh, fully-blank assessment.
@@ -330,17 +326,4 @@ function priorityLabel(priority) {
   }
 }
 
-Object.assign(window.SequentialOrganFailureAssessment, {
-  emptyAssessment,
-  mortalityBandLabel,
-  mortalityBandClass,
-  systemLabel,
-  roleLabel,
-  careLocationLabel,
-  sexLabel,
-  suspectedInfectionLabel,
-  respiratorySupportLabel,
-  vasopressorLabel,
-  priorityLabel
-});
-})();
+export { emptyAssessment, mortalityBandLabel, mortalityBandClass, systemLabel, roleLabel, careLocationLabel, sexLabel, suspectedInfectionLabel, respiratorySupportLabel, vasopressorLabel, priorityLabel };

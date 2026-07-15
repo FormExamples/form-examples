@@ -11,12 +11,6 @@
 //
 // Wrapped in an IIFE; published via `window.HolterMonitorTestRequest`.
 
-(function () {
-'use strict';
-window.HolterMonitorTestRequest =
-  window.HolterMonitorTestRequest || {};
-const NS = window.HolterMonitorTestRequest;
-
 // ----------------------------------------------------------------------
 // Axis A — Appropriateness (ACC/AHA ambulatory ECG 1-9 ordinal)
 // ----------------------------------------------------------------------
@@ -428,19 +422,4 @@ function scorePriority(data) {
   return { band, score, firedRules };
 }
 
-Object.assign(NS, {
-  scoreAppropriateness,
-  appropriatenessBand,
-  evaluateFrequencyMatch,
-  adjustAppropriatenessForMatch,
-  scoreTriage,
-  scoreCompleteness,
-  scorePriority,
-  maxTier,
-  TRIAGE_ORDER,
-  TARGET_TIMEFRAMES,
-  INDICATION_MONITOR_MAP,
-  FREQUENCY_MONITOR_MAP,
-  FREQUENCY_RECOMMENDED_LABEL
-});
-})();
+export { scoreAppropriateness, appropriatenessBand, evaluateFrequencyMatch, adjustAppropriatenessForMatch, scoreTriage, scoreCompleteness, scorePriority, maxTier, TRIAGE_ORDER, TARGET_TIMEFRAMES, INDICATION_MONITOR_MAP, FREQUENCY_MONITOR_MAP, FREQUENCY_RECOMMENDED_LABEL };

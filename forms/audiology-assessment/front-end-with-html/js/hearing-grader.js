@@ -1,13 +1,11 @@
+import { hearingRules } from './hearing-rules.js';
+import { GRADE_ORDER, classifyDbHL, worseGrade } from './types.js';
+
 // Pure function: evaluates all hearing rules against patient data and
 // returns the maximum grade among all fired rules and per-ear PTA
 // classification, defaulting to 'normal' for patients with no fired rules.
 //
 // Mirrors src/lib/engine/hearing-grader.ts in the SvelteKit form.
-
-(function () {
-'use strict';
-const NS = window.AudiologyAssessment;
-const { hearingRules, classifyDbHL, worseGrade, GRADE_ORDER } = NS;
 
 function calculateHearingGrade(data) {
   const firedRules = [];
@@ -44,5 +42,4 @@ function calculateHearingGrade(data) {
   return { hearingGrade, firedRules, ptaGrade, rightGrade, leftGrade };
 }
 
-Object.assign(window.AudiologyAssessment, { calculateHearingGrade });
-})();
+export { calculateHearingGrade };

@@ -1,3 +1,7 @@
+import { detectAdditionalFlags } from './flagged-issues.js';
+import { evaluateRules } from './risk-rules.js';
+import { estimateTenYearRisk, estimateThirtyYearRisk, isLikelyDraft } from './types.js';
+
 // PREVENT risk grader. Pure functions: take an `AssessmentData` object,
 // return a complete GradingResult including risk category, percentages,
 // fired rules, and additional flags.
@@ -12,20 +16,6 @@
  * @typedef {import('./types.js').AssessmentData} AssessmentData
  * @typedef {import('./types.js').GradingResult} GradingResult
  */
-
-(function () {
-'use strict';
-window.PredictingRiskOfCardiovascularDiseaseEvents =
-  window.PredictingRiskOfCardiovascularDiseaseEvents || {};
-
-const NS = window.PredictingRiskOfCardiovascularDiseaseEvents;
-const {
-  estimateTenYearRisk,
-  estimateThirtyYearRisk,
-  isLikelyDraft,
-  evaluateRules,
-  detectAdditionalFlags
-} = NS;
 
 /**
  * @param {AssessmentData} data
@@ -64,7 +54,4 @@ function calculateRisk(data) {
   };
 }
 
-Object.assign(window.PredictingRiskOfCardiovascularDiseaseEvents, {
-  calculateRisk
-});
-})();
+export { calculateRisk };

@@ -1,9 +1,6 @@
 // Additional-flag detection for the Prescription Request form.
 // Mirrors `src/lib/engine/flagged-issues.ts`. Returns flags for clinician
 // review that are independent of the overall priority level.
-(function () {
-'use strict';
-window.PrescriptionRequest = window.PrescriptionRequest || {};
 
 /**
  * Detects additional flags for clinician review,
@@ -114,5 +111,4 @@ function detectAdditionalFlags(data) {
   return flags;
 }
 
-Object.assign(window.PrescriptionRequest, { detectAdditionalFlags });
-})();
+export { detectAdditionalFlags };

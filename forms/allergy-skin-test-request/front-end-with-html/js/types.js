@@ -9,11 +9,6 @@
 // SQL source of truth. Wrapped in an IIFE; published via
 // `window.AllergySkinTestRequest`.
 
-(function () {
-'use strict';
-window.AllergySkinTestRequest =
-  window.AllergySkinTestRequest || {};
-
 /**
  * Build a fresh, fully-blank allergy test request.
  * Strings default to ''; numeric / date fields default to null;
@@ -132,14 +127,4 @@ function indicationLabel(value) {
   return INDICATION_LABELS[value] || value || '';
 }
 
-Object.assign(window.AllergySkinTestRequest, {
-  emptyRequest,
-  ALLERGEN_PANELS,
-  countSelectedPanels,
-  selectedPanelCategories,
-  testTypeLabel,
-  TEST_TYPE_LABELS,
-  indicationLabel,
-  INDICATION_LABELS
-});
-})();
+export { emptyRequest, ALLERGEN_PANELS, countSelectedPanels, selectedPanelCategories, testTypeLabel, TEST_TYPE_LABELS, indicationLabel, INDICATION_LABELS };

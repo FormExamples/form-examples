@@ -8,11 +8,6 @@
 // referral, a suspected-ACS red-flag case, an exertional-syncope case, and a
 // new-onset-heart-failure case.
 
-(function () {
-'use strict';
-window.CardiologyRequestDashboard =
-  window.CardiologyRequestDashboard || {};
-
 /** @type {import('./types.js').RequestRow[]} */
 const sampleRequests = [
   {
@@ -167,5 +162,4 @@ const sampleRequests = [
   }
 ];
 
-window.CardiologyRequestDashboard.sampleRequests = sampleRequests;
-})();
+export { sampleRequests };

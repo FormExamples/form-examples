@@ -19,9 +19,6 @@
  */
 
 // Wrapped in an IIFE; published via window.HearingTestResult.
-(function () {
-'use strict';
-window.HearingTestResult = window.HearingTestResult || {};
 
 // ----------------------------------------------------------------------
 // Structured-findings predicates (mirror `utils.ts`)
@@ -462,14 +459,4 @@ function gradeFollowUp(r, classification, severity) {
   };
 }
 
-Object.assign(window.HearingTestResult, {
-  hasCriticalFinding,
-  hasAnyAbnormalFinding,
-  isNormalHearing,
-  worstPureToneAverage,
-  classifyResult,
-  gradeSeverity,
-  gradeCompleteness,
-  gradeFollowUp
-});
-})();
+export { hasCriticalFinding, hasAnyAbnormalFinding, isNormalHearing, worstPureToneAverage, classifyResult, gradeSeverity, gradeCompleteness, gradeFollowUp };

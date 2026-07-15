@@ -7,11 +7,6 @@
 // convention. Wrapped in an IIFE; published via
 // `window.CystoscopyTestRequest`.
 
-(function () {
-'use strict';
-window.CystoscopyTestRequest =
-  window.CystoscopyTestRequest || {};
-
 /**
  * Build a fresh, fully-blank cystoscopy request.
  * Strings default to ''; numeric / date fields default to null;
@@ -95,11 +90,4 @@ function indicationLabel(value) {
   return INDICATION_LABELS[value] || value || '';
 }
 
-Object.assign(window.CystoscopyTestRequest, {
-  emptyRequest,
-  procedureLabel,
-  indicationLabel,
-  PROCEDURE_LABELS,
-  INDICATION_LABELS
-});
-})();
+export { emptyRequest, procedureLabel, indicationLabel, PROCEDURE_LABELS, INDICATION_LABELS };

@@ -19,9 +19,6 @@
  */
 
 // Wrapped in an IIFE; published via window.AngiographyTestResult.
-(function () {
-'use strict';
-window.AngiographyTestResult = window.AngiographyTestResult || {};
 
 // ----------------------------------------------------------------------
 // Structured-findings predicates (mirror utils.ts)
@@ -485,16 +482,4 @@ function gradeFollowUp(r, classification, severity) {
   };
 }
 
-Object.assign(window.AngiographyTestResult, {
-  CRITICAL_STENOSIS_PERCENT,
-  hasCriticalStenosis,
-  hasCriticalFinding,
-  hasAnyAbnormalFinding,
-  hasOnlyIncidentalFinding,
-  stenosisSeverityCategory,
-  classifyResult,
-  gradeSeverity,
-  gradeCompleteness,
-  gradeFollowUp
-});
-})();
+export { CRITICAL_STENOSIS_PERCENT, hasCriticalStenosis, hasCriticalFinding, hasAnyAbnormalFinding, hasOnlyIncidentalFinding, stenosisSeverityCategory, classifyResult, gradeSeverity, gradeCompleteness, gradeFollowUp };

@@ -6,11 +6,6 @@
 // down) or returns an empty list, callers fall back to the sample data
 // shipped in `data.js` so the page is usable standalone.
 
-(function () {
-'use strict';
-window.OrganDonationAssessmentDashboard =
-  window.OrganDonationAssessmentDashboard || {};
-
 const API_BASE = 'http://localhost:5150';
 const DONORS_PATH = '/api/dashboard/donors';
 
@@ -35,6 +30,4 @@ async function fetchDonors() {
   return data.items || [];
 }
 
-window.OrganDonationAssessmentDashboard.fetchDonors = fetchDonors;
-window.OrganDonationAssessmentDashboard.API_BASE = API_BASE;
-})();
+export { fetchDonors, API_BASE };

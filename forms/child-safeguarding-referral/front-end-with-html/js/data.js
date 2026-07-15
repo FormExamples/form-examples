@@ -6,11 +6,6 @@
 // (emergency / urgent / standard), and each primary category, with at least one
 // immediate-danger row to exercise the critical-row styling.
 
-(function () {
-'use strict';
-window.ChildSafeguardingReferralDashboard =
-  window.ChildSafeguardingReferralDashboard || {};
-
 /** @type {import('./dashboard-types.js').ReferralRow[]} */
 const sampleReferrals = [
   {
@@ -87,5 +82,4 @@ const sampleReferrals = [
   }
 ];
 
-window.ChildSafeguardingReferralDashboard.sampleReferrals = sampleReferrals;
-})();
+export { sampleReferrals };

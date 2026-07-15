@@ -5,10 +5,6 @@
 // Property names are camelCase to match the front-end serde / examples
 // convention. Wrapped in an IIFE; published via `window.GeneticTestRequest`.
 
-(function () {
-'use strict';
-window.GeneticTestRequest = window.GeneticTestRequest || {};
-
 /**
  * Build a fresh, fully-blank clinical genetics / genomic test request.
  * Strings default to ''; date fields default to ''; boolean fields default
@@ -115,13 +111,4 @@ function isPrenatalRequest(testType, indication, specimenType) {
   );
 }
 
-Object.assign(window.GeneticTestRequest, {
-  emptyRequest,
-  testTypeLabel,
-  indicationLabel,
-  isPredictiveTest,
-  isPrenatalRequest,
-  TEST_TYPE_LABELS,
-  INDICATION_LABELS
-});
-})();
+export { emptyRequest, testTypeLabel, indicationLabel, isPredictiveTest, isPrenatalRequest, TEST_TYPE_LABELS, INDICATION_LABELS };

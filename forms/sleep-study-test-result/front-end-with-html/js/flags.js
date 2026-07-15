@@ -1,3 +1,5 @@
+import { hasCriticalFinding, isSevereAhi } from './rules.js';
+
 // Safety-critical flag detection for the Sleep Study Test Result.
 //
 // Faithful vanilla-JavaScript port of the SvelteKit engine module
@@ -14,10 +16,6 @@
 
 // Wrapped in an IIFE; published via window.SleepStudyTestResult.
 // Depends on rules.js (hasCriticalFinding, isSevereAhi), so it must load after it.
-(function () {
-'use strict';
-window.SleepStudyTestResult = window.SleepStudyTestResult || {};
-const { hasCriticalFinding, isSevereAhi } = window.SleepStudyTestResult;
 
 /**
  * Detect the safety-critical flags for a report.
@@ -141,7 +139,4 @@ function detectFlags(r) {
   return flags;
 }
 
-Object.assign(window.SleepStudyTestResult, {
-  detectFlags
-});
-})();
+export { detectFlags };

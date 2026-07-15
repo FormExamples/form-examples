@@ -6,11 +6,6 @@
 // critical / inconclusive), the severity ladder, the follow-up urgency bands,
 // and the BI-RADS spectrum, with a critical-alert BI-RADS 5 row.
 
-(function () {
-'use strict';
-window.MammographyTestResultDashboard =
-  window.MammographyTestResultDashboard || {};
-
 /** @type {import('./dashboard-types.js').ReportRow[]} */
 const sampleReports = [
   {
@@ -113,5 +108,4 @@ const sampleReports = [
   }
 ];
 
-window.MammographyTestResultDashboard.sampleReports = sampleReports;
-})();
+export { sampleReports };

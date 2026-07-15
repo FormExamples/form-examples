@@ -7,11 +7,6 @@
 // urgency bands, with a critical-alert row whose severe osteoporosis raised
 // three flags.
 
-(function () {
-'use strict';
-window.DexaBoneDensityTestResultDashboard =
-  window.DexaBoneDensityTestResultDashboard || {};
-
 /** @type {import('./dashboard-types.js').ReportRow[]} */
 const sampleReports = [
   {
@@ -114,5 +109,4 @@ const sampleReports = [
   }
 ];
 
-window.DexaBoneDensityTestResultDashboard.sampleReports = sampleReports;
-})();
+export { sampleReports };

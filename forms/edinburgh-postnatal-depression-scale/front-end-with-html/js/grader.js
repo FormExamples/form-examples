@@ -1,3 +1,5 @@
+import { epdsItems, scoreForOption } from './rules.js';
+
 // EPDS grader. Pure functions: take an `AssessmentData` object, convert each
 // item's raw selected option into its 0-3 symptom score (applying reverse
 // scoring for items 3, 5, 6, 7, 8, 9 and 10 via `rules.js`), sum the ten
@@ -24,11 +26,6 @@
  */
 
 // Wrapped in an IIFE; published via window.EdinburghPostnatalDepressionScale.
-(function () {
-'use strict';
-window.EdinburghPostnatalDepressionScale =
-  window.EdinburghPostnatalDepressionScale || {};
-const { epdsItems, scoreForOption } = window.EdinburghPostnatalDepressionScale;
 
 /**
  * Compute the ten reverse-corrected item scores. Unanswered items map to null.
@@ -145,8 +142,4 @@ function calculateEpdsGrade(data) {
   };
 }
 
-Object.assign(window.EdinburghPostnatalDepressionScale, {
-  computeItemScores,
-  calculateEpdsGrade
-});
-})();
+export { computeItemScores, calculateEpdsGrade };

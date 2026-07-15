@@ -8,11 +8,6 @@
 // routine polyp-surveillance request, a two-week-wait positive-FIT case, a
 // high-bleeding-risk anticoagulant case, and an unfit-for-prep case.
 
-(function () {
-'use strict';
-window.ColonoscopyTestRequestDashboard =
-  window.ColonoscopyTestRequestDashboard || {};
-
 /** @type {import('./types.js').RequestRow[]} */
 const sampleRequests = [
   {
@@ -167,5 +162,4 @@ const sampleRequests = [
   }
 ];
 
-window.ColonoscopyTestRequestDashboard.sampleRequests = sampleRequests;
-})();
+export { sampleRequests };

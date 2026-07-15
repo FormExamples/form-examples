@@ -6,11 +6,6 @@
 // completeness grade, and every review type, with the escalation flag set
 // whenever the ABE group is E.
 
-(function () {
-'use strict';
-window.ChronicObstructivePulmonaryDiseaseReviewDashboard =
-  window.ChronicObstructivePulmonaryDiseaseReviewDashboard || {};
-
 /** @type {import('./dashboard-types.js').ReviewRow[]} */
 const sampleReviews = [
   {
@@ -92,6 +87,4 @@ const sampleReviews = [
   }
 ];
 
-window.ChronicObstructivePulmonaryDiseaseReviewDashboard.sampleReviews =
-  sampleReviews;
-})();
+export { sampleReviews };

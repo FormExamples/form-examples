@@ -1,3 +1,5 @@
+import { snot22Rules } from './snot22-rules.js';
+
 // SNOT-22 grader. Pure functions: take an `AssessmentData`, return total
 // (0-110), severity level, answered count, and per-question audit trail.
 //
@@ -11,11 +13,6 @@
  * @typedef {import('./types.js').FiredRule} FiredRule
  * @typedef {import('./types.js').SeverityLevel} SeverityLevel
  */
-
-(function () {
-'use strict';
-window.OtolaryngologyAssessment = window.OtolaryngologyAssessment || {};
-const { snot22Rules } = window.OtolaryngologyAssessment;
 
 /** @returns {SeverityLevel} */
 function classifySnot22Score(score) {
@@ -74,10 +71,4 @@ function calculateSnot22(data) {
   return { totalScore, severityLevel, answeredCount, firedRules };
 }
 
-Object.assign(window.OtolaryngologyAssessment, {
-  classifySnot22Score,
-  severityLabel,
-  severityClass,
-  calculateSnot22
-});
-})();
+export { classifySnot22Score, severityLabel, severityClass, calculateSnot22 };

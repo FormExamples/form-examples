@@ -211,9 +211,6 @@
 // classic <script> (no ES modules) so the page can be opened directly via
 // `file://`. The IIFE attaches its public symbols to a single global
 // namespace, `window.WhoEmergencyFirstAidForm`.
-(function () {
-'use strict';
-window.WhoEmergencyFirstAidForm = window.WhoEmergencyFirstAidForm || {};
 
 /** @returns {AssessmentData} */
 function emptyAssessment() {
@@ -429,20 +426,4 @@ function priorityLabel(priority) {
   }
 }
 
-Object.assign(window.WhoEmergencyFirstAidForm, {
-  emptyAssessment,
-  hasText,
-  calculateAge,
-  isAssessmentAnswered,
-  hasAnyMajorBleedingIntervention,
-  hasAnyAirwayIntervention,
-  hasAnyBreathingIntervention,
-  hasAnyCirculationIntervention,
-  hasAnyDisabilityIntervention,
-  hasAnyExposureIntervention,
-  hasNonTourniquetBleedingIntervention,
-  medicationTakenAnswered,
-  sectionLabel,
-  priorityLabel
-});
-})();
+export { emptyAssessment, hasText, calculateAge, isAssessmentAnswered, hasAnyMajorBleedingIntervention, hasAnyAirwayIntervention, hasAnyBreathingIntervention, hasAnyCirculationIntervention, hasAnyDisabilityIntervention, hasAnyExposureIntervention, hasNonTourniquetBleedingIntervention, medicationTakenAnswered, sectionLabel, priorityLabel };

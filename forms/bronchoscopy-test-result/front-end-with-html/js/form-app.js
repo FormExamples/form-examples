@@ -1,3 +1,6 @@
+import { calculateGrade } from './grader.js';
+import { abnormalitySeverityClass, abnormalitySeverityLabel, complicationLabel, emptyResult, followUpUrgencyClass, followUpUrgencyLabel, priorityLabel, procedureLabel, recommendationLabel, reportStatusLabel, resultClassificationClass, resultClassificationLabel, sedationUsedLabel } from './types.js';
+
 // Bronchoscopy Test Result — reporting-clinician wizard
 // (vanilla JavaScript, no build).
 //
@@ -15,26 +18,6 @@
 // exports to `window.BronchoscopyTestResult`. Pulling them off here keeps the
 // rest of this file referring to short local names. The whole file is wrapped
 // in an IIFE so its top-level identifiers don't leak.
-(function () {
-'use strict';
-
-const NS = window.BronchoscopyTestResult;
-const {
-  emptyResult,
-  resultClassificationLabel,
-  abnormalitySeverityLabel,
-  followUpUrgencyLabel,
-  procedureLabel,
-  sedationUsedLabel,
-  complicationLabel,
-  reportStatusLabel,
-  recommendationLabel,
-  priorityLabel,
-  resultClassificationClass,
-  abnormalitySeverityClass,
-  followUpUrgencyClass,
-  calculateGrade
-} = NS;
 
 // ----------------------------------------------------------------------
 // Persistence
@@ -1002,4 +985,3 @@ if (document.readyState === 'loading') {
 } else {
   init();
 }
-})();

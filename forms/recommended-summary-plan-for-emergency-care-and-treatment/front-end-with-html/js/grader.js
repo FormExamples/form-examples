@@ -1,3 +1,5 @@
+import { completenessSlots, mandatoryRules } from './rules.js';
+
 // ReSPECT completeness grader. Pure functions: take a `RespectPlan` object,
 // evaluate the eight mandatory rules in `mandatoryRules`, and derive the
 // documentation status and completeness percentage.
@@ -21,12 +23,6 @@
 
 // Wrapped in an IIFE; published via
 // window.RecommendedSummaryPlanForEmergencyCareAndTreatment.
-(function () {
-'use strict';
-window.RecommendedSummaryPlanForEmergencyCareAndTreatment =
-  window.RecommendedSummaryPlanForEmergencyCareAndTreatment || {};
-const { mandatoryRules, completenessSlots } =
-  window.RecommendedSummaryPlanForEmergencyCareAndTreatment;
 
 /**
  * Evaluate the eight mandatory rules against the plan.
@@ -97,9 +93,4 @@ function gradePlan(plan) {
   };
 }
 
-Object.assign(window.RecommendedSummaryPlanForEmergencyCareAndTreatment, {
-  evaluateRules,
-  completenessPercent,
-  gradePlan
-});
-})();
+export { evaluateRules, completenessPercent, gradePlan };

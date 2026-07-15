@@ -22,9 +22,6 @@
 // classic <script> (no ES modules) so the page can be opened directly via
 // `file://`. Public symbols are attached to a single global namespace,
 // `window.EndometriosisAssessment`.
-(function () {
-'use strict';
-window.EndometriosisAssessment = window.EndometriosisAssessment || {};
 
 /** Build a fresh, fully-blank assessment. */
 function emptyAssessment() {
@@ -261,16 +258,4 @@ function endoGradeLabel(grade) {
   }
 }
 
-Object.assign(window.EndometriosisAssessment, {
-  emptyAssessment,
-  calculateBMI,
-  bmiCategory,
-  calculateEHP30Total,
-  ehp30Label,
-  asrmStageLabel,
-  asrmStageShort,
-  severityLabel,
-  severityClass,
-  endoGradeLabel
-});
-})();
+export { emptyAssessment, calculateBMI, bmiCategory, calculateEHP30Total, ehp30Label, asrmStageLabel, asrmStageShort, severityLabel, severityClass, endoGradeLabel };

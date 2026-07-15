@@ -12,11 +12,6 @@
 // All entries are anonymous, group-level aggregates only — there are no
 // individual employee identifiers anywhere in this dataset.
 
-(function () {
-'use strict';
-window.WorkplaceClimateAssessmentDashboard =
-  window.WorkplaceClimateAssessmentDashboard || {};
-
 /** @type {import('./types.js').TeamRow[]} */
 const sampleTeams = [
   {
@@ -261,5 +256,4 @@ const sampleTeams = [
   }
 ];
 
-window.WorkplaceClimateAssessmentDashboard.sampleTeams = sampleTeams;
-})();
+export { sampleTeams };

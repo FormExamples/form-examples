@@ -1,8 +1,5 @@
 // Additional flag detector — port of `src/lib/engine/flagged-issues.ts`.
 // Returns safety alerts independent of ASRM staging, sorted by priority.
-(function () {
-'use strict';
-window.EndometriosisAssessment = window.EndometriosisAssessment || {};
 
 function detectAdditionalFlags(data) {
   const flags = [];
@@ -192,5 +189,4 @@ function detectAdditionalFlags(data) {
   return flags;
 }
 
-window.EndometriosisAssessment.detectAdditionalFlags = detectAdditionalFlags;
-})();
+export { detectAdditionalFlags };

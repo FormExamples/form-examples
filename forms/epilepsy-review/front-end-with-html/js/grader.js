@@ -1,3 +1,7 @@
+import { detectFlaggedIssues } from './flags.js';
+import { COMPONENTS, classifyControl, componentApplicable } from './rules.js';
+import { reviewStatusLabel, seizureControlLabel } from './types.js';
+
 // Epilepsy-review seizure-control classification and completeness grader. Pure
 // functions: take an `AssessmentData` object and derive the documentation
 // outputs (spec §4). This is NOT a numeric severity score. It emits:
@@ -24,18 +28,6 @@
  */
 
 // Wrapped in an IIFE; published via window.EpilepsyReview.
-(function () {
-'use strict';
-window.EpilepsyReview = window.EpilepsyReview || {};
-const NS = window.EpilepsyReview;
-const {
-  classifyControl,
-  COMPONENTS,
-  componentApplicable,
-  detectFlaggedIssues,
-  seizureControlLabel,
-  reviewStatusLabel
-} = NS;
 
 /**
  * Evaluate each applicable review component's documentation status.
@@ -143,11 +135,6 @@ function gradeEpilepsyReview(data) {
   };
 }
 
-Object.assign(NS, {
-  computeComponentStatuses,
-  gradeReviewStatus,
-  gradeEpilepsyReview,
-  // Canonical alias used by the wizard app.
-  review: gradeEpilepsyReview
-});
-})();
+export const review = gradeEpilepsyReview;
+
+export { computeComponentStatuses, gradeReviewStatus, gradeEpilepsyReview };

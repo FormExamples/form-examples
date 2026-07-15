@@ -1,3 +1,5 @@
+import { countContributingFactors } from './types.js';
+
 // Medical error grading rules. Each rule evaluates report data and returns
 // true if the condition is present. Grade 1 = minimal, 2 = mild, 3 = moderate,
 // 4 = severe, 5 = critical. Mirrors the SvelteKit `error-rules.ts`.
@@ -12,11 +14,6 @@
  * @property {number} grade
  * @property {(d: AssessmentData) => boolean} evaluate
  */
-
-(function () {
-'use strict';
-window.MedicalErrorReport = window.MedicalErrorReport || {};
-const { countContributingFactors } = window.MedicalErrorReport;
 
 /** @type {ErrorRule[]} */
 const errorRules = [
@@ -82,5 +79,4 @@ const errorRules = [
   }
 ];
 
-Object.assign(window.MedicalErrorReport, { errorRules });
-})();
+export { errorRules };

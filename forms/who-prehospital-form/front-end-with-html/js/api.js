@@ -6,10 +6,6 @@
 // down) or returns an empty list, callers fall back to the sample data
 // shipped in `data.js` so the page is usable standalone.
 
-(function () {
-'use strict';
-window.WhoPrehospitalDashboard = window.WhoPrehospitalDashboard || {};
-
 const API_BASE = 'http://localhost:5150';
 const PATIENTS_PATH = '/api/dashboard/patients';
 
@@ -34,6 +30,4 @@ async function fetchPatients() {
   return data.items || [];
 }
 
-window.WhoPrehospitalDashboard.fetchPatients = fetchPatients;
-window.WhoPrehospitalDashboard.API_BASE = API_BASE;
-})();
+export { fetchPatients, API_BASE };

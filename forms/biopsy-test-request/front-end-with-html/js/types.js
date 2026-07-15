@@ -5,10 +5,6 @@
 // Property names are camelCase to match the front-end serde / examples
 // convention. Wrapped in an IIFE; published via `window.BiopsyTestRequest`.
 
-(function () {
-'use strict';
-window.BiopsyTestRequest = window.BiopsyTestRequest || {};
-
 /**
  * Build a fresh, fully-blank biopsy request.
  * Strings default to ''; numeric / date fields default to null;
@@ -125,13 +121,4 @@ function indicationLabel(value) {
   return INDICATION_LABELS[value] || value || '';
 }
 
-Object.assign(window.BiopsyTestRequest, {
-  emptyRequest,
-  biopsySiteLabel,
-  biopsyMethodLabel,
-  indicationLabel,
-  BIOPSY_SITE_LABELS,
-  BIOPSY_METHOD_LABELS,
-  INDICATION_LABELS
-});
-})();
+export { emptyRequest, biopsySiteLabel, biopsyMethodLabel, indicationLabel, BIOPSY_SITE_LABELS, BIOPSY_METHOD_LABELS, INDICATION_LABELS };

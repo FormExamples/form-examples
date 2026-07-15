@@ -1,10 +1,7 @@
 // Wires the meeting form to the validation engine. Loaded as a classic
 // <script> after scoring.js, so Meeting.validateMeeting is on the global
 // namespace.
-(function () {
-'use strict';
-
-const { validateMeeting } = window.Meeting;
+import { validateMeeting } from './scoring.js';
 const DRAFT_KEY = 'meeting-draft';
 
 const form           = document.getElementById('meeting-form');
@@ -548,5 +545,3 @@ renderStepList();
 restoreDraft();
 updateSummaryCount();
 updateStepStatuses();
-
-})();

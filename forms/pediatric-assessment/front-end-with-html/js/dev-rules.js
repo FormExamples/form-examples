@@ -17,10 +17,6 @@
  * @property {(d: AssessmentData) => boolean} evaluate
  */
 
-(function () {
-'use strict';
-window.PediatricAssessment = window.PediatricAssessment || {};
-
 /** @type {DevScreenRule[]} */
 const devScreenRules = [
   // ─── GROSS MOTOR ────────────────────────────────────────
@@ -229,5 +225,4 @@ const devScreenRules = [
   }
 ];
 
-window.PediatricAssessment.devScreenRules = devScreenRules;
-})();
+export { devScreenRules };

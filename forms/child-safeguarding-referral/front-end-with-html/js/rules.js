@@ -35,9 +35,6 @@
  */
 
 // Wrapped in an IIFE; published via window.ChildSafeguardingReferral.
-(function () {
-'use strict';
-window.ChildSafeguardingReferral = window.ChildSafeguardingReferral || {};
 
 const nonEmpty = (s) => typeof s === 'string' && s.trim() !== '';
 const hasNumber = (n) => typeof n === 'number' && !Number.isNaN(n);
@@ -182,11 +179,4 @@ const completenessSlots = [
   }
 ];
 
-Object.assign(window.ChildSafeguardingReferral, {
-  consentBasisOk,
-  hasReferrerContact,
-  hasChildDobOrAge,
-  mandatoryRules,
-  completenessSlots
-});
-})();
+export { consentBasisOk, hasReferrerContact, hasChildDobOrAge, mandatoryRules, completenessSlots };

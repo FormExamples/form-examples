@@ -139,10 +139,6 @@
 // <script> (no ES modules) so the page can be opened directly via `file://`.
 // The IIFE attaches its public symbols to a single global namespace,
 // `window.HistoryAndPhysicalExamination`.
-(function () {
-'use strict';
-window.HistoryAndPhysicalExamination =
-  window.HistoryAndPhysicalExamination || {};
 
 /**
  * Build a fresh, fully-blank clerking record.
@@ -325,18 +321,4 @@ function priorityLabel(priority) {
   }
 }
 
-Object.assign(window.HistoryAndPhysicalExamination, {
-  emptyAssessment,
-  flatten,
-  clinicianRoleLabel,
-  careSettingLabel,
-  admissionSourceLabel,
-  ageBandLabel,
-  sexLabel,
-  allergyStatusLabel,
-  consciousnessLabel,
-  statusLabel,
-  statusClass,
-  priorityLabel
-});
-})();
+export { emptyAssessment, flatten, clinicianRoleLabel, careSettingLabel, admissionSourceLabel, ageBandLabel, sexLabel, allergyStatusLabel, consciousnessLabel, statusLabel, statusClass, priorityLabel };

@@ -7,10 +7,6 @@
 // the classification (the action-line row's dilatation is on / right of the
 // action line for its elapsed time; the alert-line row lies between the lines).
 
-(function () {
-'use strict';
-window.PartogramDashboard = window.PartogramDashboard || {};
-
 /** @type {import('./dashboard-types.js').PartogramRow[]} */
 const samplePartograms = [
   {
@@ -92,5 +88,4 @@ const samplePartograms = [
   }
 ];
 
-window.PartogramDashboard.samplePartograms = samplePartograms;
-})();
+export { samplePartograms };

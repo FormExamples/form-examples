@@ -14,10 +14,6 @@
  * @typedef {import('./types.js').AdditionalFlag} AdditionalFlag
  */
 
-(function () {
-'use strict';
-window.PediatricAssessment = window.PediatricAssessment || {};
-
 /**
  * Detect additional clinician-facing flags from the supplied assessment data.
  * Flags are sorted high → medium → low priority.
@@ -261,5 +257,4 @@ function detectAdditionalFlags(data) {
   return flags;
 }
 
-window.PediatricAssessment.detectAdditionalFlags = detectAdditionalFlags;
-})();
+export { detectAdditionalFlags };

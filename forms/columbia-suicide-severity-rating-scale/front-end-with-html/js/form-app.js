@@ -1,3 +1,7 @@
+import { detectFlaggedIssues } from './flags.js';
+import { calculateCssrsGrade } from './grader.js';
+import { emptyAssessment, ideationLevelLabel, priorityLabel, riskTierClass, riskTierLabel } from './types.js';
+
 // Columbia Suicide Severity Rating Scale (C-SSRS) — clinician wizard
 // (vanilla JavaScript, no build).
 //
@@ -18,19 +22,6 @@
 // Sibling files loaded as plain `<script>` tags (in order) attach their exports
 // to `window.ColumbiaSuicideSeverityRatingScale`. The whole file is wrapped in
 // an IIFE so its top-level identifiers don't leak.
-(function () {
-'use strict';
-
-const NS = window.ColumbiaSuicideSeverityRatingScale;
-const {
-  emptyAssessment,
-  riskTierLabel,
-  riskTierClass,
-  ideationLevelLabel,
-  priorityLabel,
-  calculateCssrsGrade,
-  detectFlaggedIssues
-} = NS;
 
 // ----------------------------------------------------------------------
 // Persistence
@@ -1103,4 +1094,3 @@ if (document.readyState === 'loading') {
 } else {
   init();
 }
-})();

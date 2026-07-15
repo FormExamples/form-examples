@@ -1,3 +1,5 @@
+import { dass21Rules } from './dass21-rules.js';
+
 // DASS-21 grader. Pure functions: take an `AssessmentData` object, return
 // per-subscale `SubscaleScore` records and the list of fired rules.
 //
@@ -7,10 +9,6 @@
 //   Stress:     0-14 normal / 15-18 mild / 19-25 moderate / 26-33 severe / 34+ extremely severe
 
 // Wrapped in an IIFE; published via window.PsychologyAssessment.
-(function () {
-'use strict';
-window.PsychologyAssessment = window.PsychologyAssessment || {};
-const { dass21Rules } = window.PsychologyAssessment;
 
 /**
  * @typedef {import('./types.js').AssessmentData} AssessmentData
@@ -131,11 +129,4 @@ function calculateDass21(data) {
   return { depression, anxiety, stress, firedRules };
 }
 
-Object.assign(window.PsychologyAssessment, {
-  classifyDassDepression,
-  classifyDassAnxiety,
-  classifyDassStress,
-  severityLabel,
-  calculateDass21
-});
-})();
+export { classifyDassDepression, classifyDassAnxiety, classifyDassStress, severityLabel, calculateDass21 };

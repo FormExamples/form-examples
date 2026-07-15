@@ -1,3 +1,5 @@
+import { hasCriticalFinding, hasInvolvedMargin } from './rules.js';
+
 // Safety-flag detection. Faithful vanilla-JS port of the tested SvelteKit
 // engine module `flagged-issues.ts`.
 //
@@ -11,10 +13,6 @@
  */
 
 // Wrapped in an IIFE; published via window.BiopsyTestResult.
-(function () {
-'use strict';
-window.BiopsyTestResult = window.BiopsyTestResult || {};
-const { hasCriticalFinding, hasInvolvedMargin } = window.BiopsyTestResult;
 
 /**
  * @param {BiopsyResult} r
@@ -134,5 +132,4 @@ function detectFlags(r) {
   return flags;
 }
 
-window.BiopsyTestResult.detectFlags = detectFlags;
-})();
+export { detectFlags };

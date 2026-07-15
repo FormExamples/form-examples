@@ -30,9 +30,6 @@
  */
 
 // Wrapped in an IIFE; published via window.WorkplaceSafetyAssessment.
-(function () {
-'use strict';
-window.WorkplaceSafetyAssessment = window.WorkplaceSafetyAssessment || {};
 
 /** Severity for a "no" answer to a positively-phrased control question. */
 function gradeNoIsBad(answer, severity) {
@@ -463,5 +460,4 @@ const safetyRules = [
   }
 ];
 
-window.WorkplaceSafetyAssessment.safetyRules = safetyRules;
-})();
+export { safetyRules };

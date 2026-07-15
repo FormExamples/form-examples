@@ -1,13 +1,8 @@
+import { computeBmi } from './types.js';
+
 // ASA Physical Status rules. Mirrors the SvelteKit
 // `src/lib/engine/asa-rules.ts` rule catalogue 1:1 (rule IDs identical).
 // Pure functions, no side effects.
-
-(function () {
-'use strict';
-window.PreOperativeAssessmentByClinician =
-  window.PreOperativeAssessmentByClinician || {};
-const NS = window.PreOperativeAssessmentByClinician;
-const { computeBmi } = NS;
 
 /** @type {Array<{id:string,grade:string,category:string,description:string,fires:(d:any)=>boolean}>} */
 const ASA_RULES = [
@@ -273,8 +268,4 @@ function applyAsaRules(data) {
   return fired;
 }
 
-Object.assign(NS, {
-  ASA_RULES,
-  applyAsaRules
-});
-})();
+export { ASA_RULES, applyAsaRules };

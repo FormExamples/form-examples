@@ -1,3 +1,7 @@
+import { calculateGrade } from './grader.js';
+import { SIGNIFICANT_PAUSE_SECONDS } from './rules.js';
+import { NUMERIC_FIELDS, abnormalitySeverityClass, abnormalitySeverityLabel, emptyResult, followUpUrgencyClass, followUpUrgencyLabel, monitorTypeLabel, predominantRhythmLabel, priorityLabel, recommendationLabel, reportStatusLabel, resultClassificationClass, resultClassificationLabel } from './types.js';
+
 // Holter Monitor Test Result — reporting-clinician wizard
 // (vanilla JavaScript, no build).
 //
@@ -15,27 +19,6 @@
 // exports to `window.HolterMonitorTestResult`. Pulling them off here keeps the
 // rest of this file referring to short local names. The whole file is wrapped
 // in an IIFE so its top-level identifiers don't leak.
-(function () {
-'use strict';
-
-const NS = window.HolterMonitorTestResult;
-const {
-  NUMERIC_FIELDS,
-  emptyResult,
-  resultClassificationLabel,
-  abnormalitySeverityLabel,
-  followUpUrgencyLabel,
-  monitorTypeLabel,
-  predominantRhythmLabel,
-  reportStatusLabel,
-  recommendationLabel,
-  priorityLabel,
-  resultClassificationClass,
-  abnormalitySeverityClass,
-  followUpUrgencyClass,
-  SIGNIFICANT_PAUSE_SECONDS,
-  calculateGrade
-} = NS;
 
 // ----------------------------------------------------------------------
 // Persistence
@@ -1105,4 +1088,3 @@ if (document.readyState === 'loading') {
 } else {
   init();
 }
-})();

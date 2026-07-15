@@ -1,3 +1,6 @@
+import { completenessPercent, validationStatus } from './types.js';
+import { validationRules } from './validation-rules.js';
+
 // Form validator. Pure function: takes an `AssessmentData` object,
 // returns the completeness percentage, the overall status (`Complete` /
 // `Incomplete`), and the list of fired (i.e. failing) validation rules.
@@ -10,12 +13,6 @@
  */
 
 // Wrapped in an IIFE; published via window.ResearchAndPlanningPrivacyNotice.
-(function () {
-'use strict';
-window.ResearchAndPlanningPrivacyNotice = window.ResearchAndPlanningPrivacyNotice || {};
-
-const NS = window.ResearchAndPlanningPrivacyNotice;
-const { validationRules, completenessPercent, validationStatus } = NS;
 
 /**
  * Pure function: validates the completeness of the research and planning
@@ -62,5 +59,4 @@ function validateForm(data) {
   };
 }
 
-window.ResearchAndPlanningPrivacyNotice.validateForm = validateForm;
-})();
+export { validateForm };

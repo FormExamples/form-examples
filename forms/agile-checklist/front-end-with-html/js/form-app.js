@@ -1,3 +1,6 @@
+import { calculateMaturity } from './engine.js';
+import { ALL_ITEMS, PRACTICES_ITEMS, SECTION_LABEL, STAKEHOLDERS_ITEMS, TEAMS_ITEMS } from './items.js';
+
 // Agile Checklist — single-page wizard (vanilla JS, Lily-classes contract).
 //
 // 5-section continuous wizard rendered in document order:
@@ -16,17 +19,6 @@
 // Sibling files loaded as plain `<script>` tags (in order) attach their
 // exports to `window.AgileChecklist`. Whole file is wrapped in an IIFE so
 // its top-level identifiers don't leak to the global scope.
-
-(function () {
-'use strict';
-
-const NS = window.AgileChecklist;
-const ALL_ITEMS = NS.ALL_ITEMS;
-const TEAMS_ITEMS = NS.TEAMS_ITEMS;
-const STAKEHOLDERS_ITEMS = NS.STAKEHOLDERS_ITEMS;
-const PRACTICES_ITEMS = NS.PRACTICES_ITEMS;
-const SECTION_LABEL = NS.SECTION_LABEL;
-const calculateMaturity = NS.calculateMaturity;
 
 const TOTAL_STEPS = 5;
 
@@ -905,4 +897,3 @@ if (document.readyState === 'loading') {
 } else {
   init();
 }
-})();

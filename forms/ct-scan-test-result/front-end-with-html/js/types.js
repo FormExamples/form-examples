@@ -147,9 +147,6 @@
 // classic <script> (no ES modules) so the page can be opened directly via
 // `file://`. The IIFE attaches its public symbols to a single global
 // namespace, `window.CtScanTestResult`.
-(function () {
-'use strict';
-window.CtScanTestResult = window.CtScanTestResult || {};
 
 /**
  * The numeric report fields, which default to `null` (not `''`) and must be
@@ -358,20 +355,4 @@ function followUpUrgencyClass(value) {
   }
 }
 
-Object.assign(window.CtScanTestResult, {
-  NUMERIC_FIELDS,
-  emptyResult,
-  resultClassificationLabel,
-  abnormalitySeverityLabel,
-  followUpUrgencyLabel,
-  bodyRegionLabel,
-  reportStatusLabel,
-  contrastUsedLabel,
-  examinationAdequacyLabel,
-  recommendationLabel,
-  priorityLabel,
-  resultClassificationClass,
-  abnormalitySeverityClass,
-  followUpUrgencyClass
-});
-})();
+export { NUMERIC_FIELDS, emptyResult, resultClassificationLabel, abnormalitySeverityLabel, followUpUrgencyLabel, bodyRegionLabel, reportStatusLabel, contrastUsedLabel, examinationAdequacyLabel, recommendationLabel, priorityLabel, resultClassificationClass, abnormalitySeverityClass, followUpUrgencyClass };

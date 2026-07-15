@@ -1,3 +1,6 @@
+import { dyslexiaRules } from './dyslexia-rules.js';
+import { scoreSeverity } from './types.js';
+
 // Dyslexia grader. Pure functions: given an `AssessmentData`, return a
 // `GradingResult` consisting of one `DomainScore` per rule plus an
 // overall severity. The overall severity is driven by the *lowest*
@@ -22,12 +25,6 @@
  */
 
 // Wrapped in an IIFE; published via window.DyslexiaAssessment.
-(function () {
-'use strict';
-window.DyslexiaAssessment = window.DyslexiaAssessment || {};
-
-const NS = window.DyslexiaAssessment;
-const { dyslexiaRules, scoreSeverity } = NS;
 
 /**
  * Pick the most-severe of two severities.
@@ -117,10 +114,4 @@ function severityClass(severity) {
   }
 }
 
-Object.assign(window.DyslexiaAssessment, {
-  gradeDyslexia,
-  severityLabel,
-  severityClass,
-  maxSeverity
-});
-})();
+export { gradeDyslexia, severityLabel, severityClass, maxSeverity };

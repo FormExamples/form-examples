@@ -6,11 +6,6 @@
 // inconclusive), the severity ladder, and the follow-up urgency bands, with
 // critical-alert rows whose pathogenic variants raised several flags.
 
-(function () {
-'use strict';
-window.GeneticTestResultDashboard =
-  window.GeneticTestResultDashboard || {};
-
 /** @type {import('./dashboard-types.js').ReportRow[]} */
 const sampleReports = [
   {
@@ -99,5 +94,4 @@ const sampleReports = [
   }
 ];
 
-window.GeneticTestResultDashboard.sampleReports = sampleReports;
-})();
+export { sampleReports };

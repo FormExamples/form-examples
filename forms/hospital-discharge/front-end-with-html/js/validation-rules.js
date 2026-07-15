@@ -19,9 +19,6 @@
  */
 
 // Wrapped in an IIFE; published via window.HospitalDischarge.
-(function () {
-'use strict';
-window.HospitalDischarge = window.HospitalDischarge || {};
 
 /** Helper: a non-empty trimmed string. */
 function nonEmpty(s) {
@@ -307,5 +304,4 @@ const validationRules = [
   }
 ];
 
-window.HospitalDischarge.validationRules = validationRules;
-})();
+export { validationRules };

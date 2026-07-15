@@ -8,11 +8,6 @@
 // Ported byte-for-byte from the Svelte engine (`src/lib/engine/types.ts`
 // + `src/lib/stores/assessment.svelte.ts` `createDefaultAssessment()`).
 
-(function () {
-'use strict';
-window.ReturnToWork =
-  window.ReturnToWork || {};
-
 /**
  * Build a fresh, fully-blank return-to-work record.
  * Strings default to ''; numeric / date fields default to null / '';
@@ -212,14 +207,4 @@ function gradeToPriority(grade) {
   return 'routine';
 }
 
-Object.assign(window.ReturnToWork, {
-  emptyAssessment,
-  fitnessStatementLabel,
-  restrictionPriorityLabel,
-  restrictionGradeLabel,
-  clinicianRoleLabel,
-  mechanismLabel,
-  calculateAge,
-  gradeToPriority
-});
-})();
+export { emptyAssessment, fitnessStatementLabel, restrictionPriorityLabel, restrictionGradeLabel, clinicianRoleLabel, mechanismLabel, calculateAge, gradeToPriority };

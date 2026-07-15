@@ -5,11 +5,6 @@
 // The rows span the signed ROSIER range (-2..+5), both bands, and every care
 // setting, with the activate-pathway flag set whenever the score is > 0.
 
-(function () {
-'use strict';
-window.RecognitionOfStrokeInTheEmergencyRoomDashboard =
-  window.RecognitionOfStrokeInTheEmergencyRoomDashboard || {};
-
 /** @type {import('./dashboard-types.js').AssessmentRow[]} */
 const sampleAssessments = [
   {
@@ -84,6 +79,4 @@ const sampleAssessments = [
   }
 ];
 
-window.RecognitionOfStrokeInTheEmergencyRoomDashboard.sampleAssessments =
-  sampleAssessments;
-})();
+export { sampleAssessments };

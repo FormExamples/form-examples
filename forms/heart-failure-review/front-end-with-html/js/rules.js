@@ -29,9 +29,6 @@
  */
 
 // Wrapped in an IIFE; published via window.HeartFailureReview.
-(function () {
-'use strict';
-window.HeartFailureReview = window.HeartFailureReview || {};
 
 /** True when a text / enum value is non-blank. */
 function filled(v) {
@@ -124,10 +121,7 @@ function indicatedPillarKeys(heartFailureType) {
   return [];
 }
 
-Object.assign(window.HeartFailureReview, {
-  reviewDomainRules,
-  indicatedPillarKeys,
-  _filled: filled,
-  _num: num
-});
-})();
+export const _filled = filled;
+export const _num = num;
+
+export { reviewDomainRules, indicatedPillarKeys };

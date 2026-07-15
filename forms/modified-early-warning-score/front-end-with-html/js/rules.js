@@ -23,10 +23,6 @@
  */
 
 // Wrapped in an IIFE; published via window.ModifiedEarlyWarningScore.
-(function () {
-'use strict';
-window.ModifiedEarlyWarningScore =
-  window.ModifiedEarlyWarningScore || {};
 
 /**
  * Systolic blood pressure sub-score (mmHg):
@@ -164,12 +160,4 @@ const mewsParameters = [
   }
 ];
 
-Object.assign(window.ModifiedEarlyWarningScore, {
-  scoreSystolicBloodPressure,
-  scoreHeartRate,
-  scoreRespiratoryRate,
-  scoreTemperature,
-  scoreAvpu,
-  mewsParameters
-});
-})();
+export { scoreSystolicBloodPressure, scoreHeartRate, scoreRespiratoryRate, scoreTemperature, scoreAvpu, mewsParameters };

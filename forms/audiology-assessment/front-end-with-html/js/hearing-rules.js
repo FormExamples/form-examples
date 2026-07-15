@@ -1,3 +1,5 @@
+import { classifyDbHL } from './types.js';
+
 // Declarative hearing grading rules based on WHO Classification.
 // Each rule evaluates patient data and returns true if the condition is
 // present. The hearing grade is determined by the highest-grade rule that
@@ -5,11 +7,6 @@
 // the default when no rules fire.
 //
 // Mirrors src/lib/engine/hearing-rules.ts in the SvelteKit form.
-
-(function () {
-'use strict';
-const NS = window.AudiologyAssessment;
-const { classifyDbHL } = NS;
 
 const hearingRules = [
   // ─── PURE TONE AVERAGE - RIGHT EAR ──────────────────────
@@ -217,5 +214,4 @@ const hearingRules = [
   }
 ];
 
-Object.assign(window.AudiologyAssessment, { hearingRules });
-})();
+export { hearingRules };

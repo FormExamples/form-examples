@@ -7,11 +7,6 @@
 // (including "None" and "Discontinued") so each filter has matches.
 // NHS numbers are in the canonical "NNN NNN NNNN" display form.
 
-(function () {
-'use strict';
-window.HormoneReplacementTherapyAssessmentDashboard =
-  window.HormoneReplacementTherapyAssessmentDashboard || {};
-
 /** @type {import('./types.js').PatientRow[]} */
 const samplePatients = [
   {
@@ -124,5 +119,4 @@ const samplePatients = [
   }
 ];
 
-window.HormoneReplacementTherapyAssessmentDashboard.samplePatients = samplePatients;
-})();
+export { samplePatients };

@@ -198,9 +198,6 @@
 // classic <script> (no ES modules) so the page can be opened directly via
 // `file://`. The IIFE attaches its public symbols to a single global
 // namespace, `window.AllergyAssessment`.
-(function () {
-'use strict';
-window.AllergyAssessment = window.AllergyAssessment || {};
 
 /**
  * Build a fresh, fully-blank assessment.
@@ -395,14 +392,4 @@ function severityClass(level) {
   }
 }
 
-Object.assign(window.AllergyAssessment, {
-  emptyAssessment,
-  calculateBMI,
-  bmiCategory,
-  severityWeight,
-  calculateAllergyBurdenScore,
-  countAllergens,
-  severityLabel,
-  severityClass
-});
-})();
+export { emptyAssessment, calculateBMI, bmiCategory, severityWeight, calculateAllergyBurdenScore, countAllergens, severityLabel, severityClass };

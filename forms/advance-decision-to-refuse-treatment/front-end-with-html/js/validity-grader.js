@@ -1,3 +1,5 @@
+import { validityRules } from './validity-rules.js';
+
 // Pure functions: evaluate all validity rules against ADRT data and
 // classify the document into a `ValidityStatus`. Mirrors
 // `src/lib/engine/validity-grader.ts` from the SvelteKit reference.
@@ -15,10 +17,6 @@
  */
 
 // Wrapped in an IIFE; published via window.AdvanceDecisionToRefuseTreatment.
-(function () {
-'use strict';
-window.AdvanceDecisionToRefuseTreatment = window.AdvanceDecisionToRefuseTreatment || {};
-const { validityRules } = window.AdvanceDecisionToRefuseTreatment;
 
 /** Heuristic: if core identification fields are empty, treat as draft.
  * @param {AssessmentData} data
@@ -71,5 +69,4 @@ function calculateValidity(data) {
   return { validityStatus, firedRules };
 }
 
-window.AdvanceDecisionToRefuseTreatment.calculateValidity = calculateValidity;
-})();
+export { calculateValidity };

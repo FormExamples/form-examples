@@ -1,3 +1,5 @@
+import { ancillaryRules, mfsItems } from './mfs-rules.js';
+
 // Fall Risk grader. Pure functions: take an `AssessmentData` object,
 // return the total Morse Fall Scale score (0-125), the `Severity`, the
 // list of fired item rules, and the Critical-override metadata.
@@ -20,10 +22,6 @@
  */
 
 // Wrapped in an IIFE; published via window.FallRiskAssessment.
-(function () {
-'use strict';
-window.FallRiskAssessment = window.FallRiskAssessment || {};
-const { mfsItems, ancillaryRules } = window.FallRiskAssessment;
 
 /**
  * Classify a numeric MFS score (0-125) into the base severity. The
@@ -111,8 +109,4 @@ function gradeFallRisk(data) {
   };
 }
 
-Object.assign(window.FallRiskAssessment, {
-  classifyMfsScore,
-  gradeFallRisk
-});
-})();
+export { classifyMfsScore, gradeFallRisk };

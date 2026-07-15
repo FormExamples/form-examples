@@ -1,3 +1,6 @@
+import { detectFlaggedIssues } from './flags.js';
+import { componentRules } from './rules.js';
+
 // Learning Disability Annual Health Check completeness grader. Pure functions:
 // take an `AssessmentData` object and derive the documentation outputs (spec §4).
 // This is NOT a numeric severity score. It emits:
@@ -27,12 +30,6 @@
  */
 
 // Wrapped in an IIFE; published via window.LearningDisabilityAnnualHealthCheck.
-(function () {
-'use strict';
-window.LearningDisabilityAnnualHealthCheck =
-  window.LearningDisabilityAnnualHealthCheck || {};
-const NS = window.LearningDisabilityAnnualHealthCheck;
-const { componentRules } = NS;
 
 /**
  * Evaluate each required-component rule against the record.
@@ -136,7 +133,7 @@ function calculateGrade(data) {
  */
 function assess(data) {
   const grade = calculateGrade(data);
-  const detectFlaggedIssues = NS.detectFlaggedIssues;
+  
   const flags = detectFlaggedIssues(data, { status: grade.status });
 
   return {
@@ -150,10 +147,4 @@ function assess(data) {
   };
 }
 
-Object.assign(NS, {
-  computeComponentStatuses,
-  isHealthActionPlanComplete,
-  calculateGrade,
-  assess
-});
-})();
+export { computeComponentStatuses, isHealthActionPlanComplete, calculateGrade, assess };

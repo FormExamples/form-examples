@@ -1,3 +1,7 @@
+import { calculateGrade } from './grader.js';
+import { DUKE_HIGH_RISK_MAX } from './rules.js';
+import { abnormalitySeverityClass, abnormalitySeverityLabel, bloodPressureResponseLabel, emptyResult, followUpUrgencyClass, followUpUrgencyLabel, priorityLabel, recommendationLabel, reportStatusLabel, resultClassificationClass, resultClassificationLabel, testTypeLabel } from './types.js';
+
 // Cardiac Stress Test Result — reporting-clinician wizard
 // (vanilla JavaScript, no build).
 //
@@ -15,26 +19,6 @@
 // exports to `window.CardiacStressTestResult`. Pulling them off here keeps the
 // rest of this file referring to short local names. The whole file is wrapped
 // in an IIFE so its top-level identifiers don't leak.
-(function () {
-'use strict';
-
-const NS = window.CardiacStressTestResult;
-const {
-  emptyResult,
-  resultClassificationLabel,
-  abnormalitySeverityLabel,
-  followUpUrgencyLabel,
-  testTypeLabel,
-  bloodPressureResponseLabel,
-  reportStatusLabel,
-  recommendationLabel,
-  priorityLabel,
-  resultClassificationClass,
-  abnormalitySeverityClass,
-  followUpUrgencyClass,
-  calculateGrade,
-  DUKE_HIGH_RISK_MAX
-} = NS;
 
 // ----------------------------------------------------------------------
 // Persistence
@@ -1054,4 +1038,3 @@ if (document.readyState === 'loading') {
 } else {
   init();
 }
-})();

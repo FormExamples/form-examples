@@ -1,3 +1,5 @@
+import { ageInYears } from './types.js';
+
 // Flagged-issue detection for the Fertility Assessment.
 //
 // Independent of the concern-level score (which the grader computes), this
@@ -9,11 +11,6 @@
  * @typedef {import('./types.js').AssessmentData} AssessmentData
  * @typedef {import('./types.js').AdditionalFlag} AdditionalFlag
  */
-
-(function () {
-'use strict';
-window.FertilityAssessment = window.FertilityAssessment || {};
-const { ageInYears } = window.FertilityAssessment;
 
 function detectAdditionalFlags(data) {
   /** @type {AdditionalFlag[]} */
@@ -329,5 +326,4 @@ function detectAdditionalFlags(data) {
   return flags;
 }
 
-window.FertilityAssessment.detectAdditionalFlags = detectAdditionalFlags;
-})();
+export { detectAdditionalFlags };

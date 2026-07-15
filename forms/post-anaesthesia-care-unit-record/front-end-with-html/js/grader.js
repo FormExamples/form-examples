@@ -1,3 +1,5 @@
+import { aldreteRules, aldreteScore, padssScore } from './rules.js';
+
 // PACU / Modified Aldrete grader. Pure functions: take a `PacuRecord` object,
 // map each of the five Aldrete parameter answers to a 0/1/2 sub-score, sum the
 // total (0-10), and derive the readiness band. The optional PADSS total is
@@ -26,12 +28,6 @@
  */
 
 // Wrapped in an IIFE; published via window.PostAnaesthesiaCareUnitRecord.
-(function () {
-'use strict';
-window.PostAnaesthesiaCareUnitRecord =
-  window.PostAnaesthesiaCareUnitRecord || {};
-const { aldreteScore, padssScore, aldreteRules } =
-  window.PostAnaesthesiaCareUnitRecord;
 
 /**
  * Evaluate the five Aldrete parameter rules and collect them as audit rows,
@@ -158,9 +154,4 @@ function calculatePacuGrade(data) {
   };
 }
 
-Object.assign(window.PostAnaesthesiaCareUnitRecord, {
-  evaluateParameters,
-  calculatePadss,
-  calculatePacuGrade
-});
-})();
+export { evaluateParameters, calculatePadss, calculatePacuGrade };

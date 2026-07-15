@@ -108,9 +108,6 @@
 // classic <script> (no ES modules) so the page can be opened directly via
 // `file://`. The IIFE attaches its public symbols to a single global
 // namespace, `window.KinesiologyAssessment`.
-(function () {
-'use strict';
-window.KinesiologyAssessment = window.KinesiologyAssessment || {};
 
 /**
  * Build a fresh, fully-blank assessment.
@@ -224,13 +221,4 @@ function calculateAge(dob) {
   return age;
 }
 
-Object.assign(window.KinesiologyAssessment, {
-  emptyAssessment,
-  emptyPattern,
-  fmsCategory,
-  fmsBandClass,
-  riskBand,
-  riskBandLabel,
-  calculateAge
-});
-})();
+export { emptyAssessment, emptyPattern, fmsCategory, fmsBandClass, riskBand, riskBandLabel, calculateAge };

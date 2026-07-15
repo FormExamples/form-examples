@@ -1,3 +1,5 @@
+import { cfarRules } from './cfar-rules.js';
+
 // WHO Emergency First Aid Form completeness validator. Pure function: takes
 // an `AssessmentData` object, returns a `ValidationResult` with per-section
 // breakdown and the list of fired (unsatisfied) rules. Each rule is first
@@ -10,11 +12,6 @@
  * @typedef {import('./types.js').SectionCompleteness} SectionCompleteness
  * @typedef {import('./types.js').FiredRule} FiredRule
  */
-
-(function () {
-'use strict';
-window.WhoEmergencyFirstAidForm = window.WhoEmergencyFirstAidForm || {};
-const { cfarRules } = window.WhoEmergencyFirstAidForm;
 
 /**
  * @param {AssessmentData} data
@@ -83,5 +80,4 @@ function validateCfar(data) {
   };
 }
 
-window.WhoEmergencyFirstAidForm.validateCfar = validateCfar;
-})();
+export { validateCfar };

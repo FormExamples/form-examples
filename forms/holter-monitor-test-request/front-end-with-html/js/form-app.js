@@ -1,3 +1,6 @@
+import { calculateGrade } from './grader.js';
+import { emptyRequest, indicationLabel, monitorTypeLabel } from './types.js';
+
 // Holter Monitor Test Request — clinician referral wizard (vanilla JS).
 //
 // Single-page continuous wizard: every section is rendered into the page in
@@ -9,17 +12,6 @@
 // Sibling files loaded as plain `<script>` tags (in order) attach their
 // exports to `window.HolterMonitorTestRequest`. The whole file is wrapped in
 // an IIFE so its top-level identifiers don't leak to the global scope.
-
-(function () {
-'use strict';
-
-const NS = window.HolterMonitorTestRequest;
-const {
-  emptyRequest,
-  monitorTypeLabel,
-  indicationLabel,
-  calculateGrade
-} = NS;
 
 // ----------------------------------------------------------------------
 // Persistence
@@ -829,4 +821,3 @@ if (document.readyState === 'loading') {
 } else {
   init();
 }
-})();

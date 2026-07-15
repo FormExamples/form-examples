@@ -241,9 +241,6 @@
 // classic <script> (no ES modules) so the page can be opened directly via
 // `file://`. Public symbols attach to a single global namespace,
 // `window.PlasticSurgeryAssessment`.
-(function () {
-'use strict';
-window.PlasticSurgeryAssessment = window.PlasticSurgeryAssessment || {};
 
 /**
  * Build a fresh, fully-blank assessment.
@@ -501,15 +498,4 @@ function riskLevelClass(risk) {
   }
 }
 
-Object.assign(window.PlasticSurgeryAssessment, {
-  emptyAssessment,
-  calculateBMI,
-  bmiCategory,
-  calculateAge,
-  asaClassLabel,
-  woundClassLabel,
-  complexityLabel,
-  riskLevelLabel,
-  riskLevelClass
-});
-})();
+export { emptyAssessment, calculateBMI, bmiCategory, calculateAge, asaClassLabel, woundClassLabel, complexityLabel, riskLevelLabel, riskLevelClass };

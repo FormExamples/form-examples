@@ -68,9 +68,6 @@
 // classic <script> (no ES modules) so the page can be opened directly via
 // `file://`. The IIFE attaches its public symbols to a single global
 // namespace, `window.CodeOfConductNotice`.
-(function () {
-'use strict';
-window.CodeOfConductNotice = window.CodeOfConductNotice || {};
 
 /**
  * Build a fresh, fully-blank assessment.
@@ -179,13 +176,4 @@ function acknowledgementStatusClass(s) {
   }
 }
 
-Object.assign(window.CodeOfConductNotice, {
-  emptyAssessment,
-  completenessPercent,
-  validationStatus,
-  completenessLabel,
-  acknowledgementStatus,
-  acknowledgementStatusLabel,
-  acknowledgementStatusClass
-});
-})();
+export { emptyAssessment, completenessPercent, validationStatus, completenessLabel, acknowledgementStatus, acknowledgementStatusLabel, acknowledgementStatusClass };

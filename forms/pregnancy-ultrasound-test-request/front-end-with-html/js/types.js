@@ -7,11 +7,6 @@
 // convention. Wrapped in an IIFE; published via
 // `window.PregnancyUltrasoundTestRequest`.
 
-(function () {
-'use strict';
-window.PregnancyUltrasoundTestRequest =
-  window.PregnancyUltrasoundTestRequest || {};
-
 /**
  * Build a fresh, fully-blank obstetric ultrasound request.
  * Strings default to ''; numeric / date fields default to null;
@@ -125,11 +120,4 @@ function scanTypeLabel(value) {
   return SCAN_TYPE_LABELS[value] || value || '';
 }
 
-Object.assign(window.PregnancyUltrasoundTestRequest, {
-  emptyRequest,
-  gestationalAgeToDays,
-  formatGestationalAge,
-  scanTypeLabel,
-  SCAN_TYPE_LABELS
-});
-})();
+export { emptyRequest, gestationalAgeToDays, formatGestationalAge, scanTypeLabel, SCAN_TYPE_LABELS };

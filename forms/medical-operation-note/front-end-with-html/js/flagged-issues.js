@@ -1,3 +1,6 @@
+import { ANAESTHETIC_EVENTS } from './anaesthetic-event-rules.js';
+import { countsAgreed } from './count-rules.js';
+
 // Additional safety-flag detection. Mirrors the SvelteKit
 // `src/lib/engine/flagged-issues.ts`. Pure function — same output shape
 // and flag IDs as the canonical engine.
@@ -8,13 +11,6 @@
 // conversion to open, intra-operative arrest, anaesthetic incident,
 // implant registry pending, specimen labelling issue, equipment problem,
 // documentation gap.
-
-(function () {
-'use strict';
-window.MedicalOperationNote =
-  window.MedicalOperationNote || {};
-const NS = window.MedicalOperationNote;
-const { countsAgreed, ANAESTHETIC_EVENTS } = NS;
 
 function detectAdditionalFlags(data) {
   const flags = [];
@@ -197,5 +193,4 @@ function detectAdditionalFlags(data) {
   return flags;
 }
 
-Object.assign(NS, { detectAdditionalFlags });
-})();
+export { detectAdditionalFlags };

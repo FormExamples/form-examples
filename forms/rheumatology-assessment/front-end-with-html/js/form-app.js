@@ -1,3 +1,7 @@
+import { calculateDAS28 } from './das28-grader.js';
+import { detectAdditionalFlags } from './flagged-issues.js';
+import { bmiCategory, calculateBMI, classifyDiseaseActivity, diseaseActivityClass, diseaseActivityLabel, emptyAssessment } from './types.js';
+
 // Rheumatology Assessment - patient wizard (vanilla JavaScript, no build).
 //
 // Single-page continuous wizard: every section is rendered into the page in
@@ -11,20 +15,6 @@
 // the rest of this file referring to short local names. Whole file is
 // wrapped in an IIFE so its top-level identifiers don't leak to the global
 // scope.
-(function () {
-'use strict';
-
-const NS = window.RheumatologyAssessment;
-const {
-  emptyAssessment,
-  calculateBMI,
-  bmiCategory,
-  classifyDiseaseActivity,
-  diseaseActivityLabel,
-  diseaseActivityClass,
-  calculateDAS28,
-  detectAdditionalFlags
-} = NS;
 
 // ----------------------------------------------------------------------
 // Persistence
@@ -1562,4 +1552,3 @@ if (document.readyState === 'loading') {
 } else {
   init();
 }
-})();

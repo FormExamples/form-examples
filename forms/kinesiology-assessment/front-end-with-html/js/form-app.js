@@ -1,3 +1,8 @@
+import { detectAdditionalFlags } from './flagged-issues.js';
+import { gradeFMS } from './fms-grader.js';
+import { fmsScoreOptions, fmsScoreOptionsCompact } from './fms-rules.js';
+import { emptyAssessment, emptyPattern, fmsBandClass, fmsCategory, riskBand, riskBandLabel } from './types.js';
+
 // Kinesiology Assessment - patient wizard (vanilla JavaScript, no build).
 //
 // Single-page continuous wizard: every section is rendered into the page
@@ -11,22 +16,6 @@
 // exports to `window.KinesiologyAssessment`. Pulling them off here keeps
 // the rest of this file referring to short local names. Whole file is
 // wrapped in an IIFE so its top-level identifiers don't leak.
-(function () {
-'use strict';
-
-const NS = window.KinesiologyAssessment;
-const {
-  emptyAssessment,
-  emptyPattern,
-  fmsCategory,
-  fmsBandClass,
-  riskBand,
-  riskBandLabel,
-  fmsScoreOptions,
-  fmsScoreOptionsCompact,
-  gradeFMS,
-  detectAdditionalFlags
-} = NS;
 
 // ----------------------------------------------------------------------
 // Persistence
@@ -1104,4 +1093,3 @@ if (document.readyState === 'loading') {
 } else {
   init();
 }
-})();

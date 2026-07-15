@@ -23,10 +23,6 @@
  */
 
 // Wrapped in an IIFE; published via window.SequentialOrganFailureAssessment.
-(function () {
-'use strict';
-window.SequentialOrganFailureAssessment =
-  window.SequentialOrganFailureAssessment || {};
 
 /** True when a numeric value is present (not null/undefined/NaN). */
 function has(v) {
@@ -259,13 +255,4 @@ const systemScorers = {
   renal: scoreRenal
 };
 
-Object.assign(window.SequentialOrganFailureAssessment, {
-  systemScorers,
-  scoreRespiration,
-  scoreCoagulation,
-  scoreLiver,
-  scoreCardiovascular,
-  scoreCns,
-  scoreRenal
-});
-})();
+export { systemScorers, scoreRespiration, scoreCoagulation, scoreLiver, scoreCardiovascular, scoreCns, scoreRenal };

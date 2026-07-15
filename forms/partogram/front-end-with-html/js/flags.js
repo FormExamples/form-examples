@@ -1,3 +1,5 @@
+import { DIASTOLIC_HYPERTENSION_MMHG, FHR_HIGH_BPM, FHR_LOW_BPM, MS_PER_HOUR, POOR_PROGRESS_HOURS, PULSE_TACHYCARDIA_BPM, SYSTOLIC_HYPERTENSION_MMHG, SYSTOLIC_HYPOTENSION_MMHG, TEMPERATURE_FEVER_C, num } from './rules.js';
+
 // Flagged-issue detection (red flags). Emitted independently of the progress
 // classification (spec §5), each scanned across the WHOLE observation series,
 // each with a priority. Each flag mirrors a category in the
@@ -24,21 +26,6 @@
  */
 
 // Wrapped in an IIFE; published via window.Partogram.
-(function () {
-'use strict';
-window.Partogram = window.Partogram || {};
-const {
-  num,
-  FHR_LOW_BPM,
-  FHR_HIGH_BPM,
-  TEMPERATURE_FEVER_C,
-  SYSTOLIC_HYPERTENSION_MMHG,
-  DIASTOLIC_HYPERTENSION_MMHG,
-  PULSE_TACHYCARDIA_BPM,
-  SYSTOLIC_HYPOTENSION_MMHG,
-  POOR_PROGRESS_HOURS,
-  MS_PER_HOUR
-} = window.Partogram;
 
 /**
  * True when no dilatation increase is recorded across any window of at least
@@ -257,8 +244,4 @@ function detectFlaggedIssues(data, grade) {
   return flags;
 }
 
-Object.assign(window.Partogram, {
-  noProgressOverWindow,
-  detectFlaggedIssues
-});
-})();
+export { noProgressOverWindow, detectFlaggedIssues };

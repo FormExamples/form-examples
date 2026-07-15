@@ -19,9 +19,6 @@
  */
 
 // Wrapped in an IIFE; published via window.HistopathologyTestResult.
-(function () {
-'use strict';
-window.HistopathologyTestResult = window.HistopathologyTestResult || {};
 
 // ----------------------------------------------------------------------
 // Structured-findings predicates (mirror `utils.ts`)
@@ -498,16 +495,4 @@ function gradeFollowUp(r, classification, severity) {
   };
 }
 
-Object.assign(window.HistopathologyTestResult, {
-  hasOriginatingRequest,
-  hasUnexpectedMalignancy,
-  hasInvolvedMargin,
-  hasCriticalFinding,
-  hasAnyAbnormalFinding,
-  buildReportingCategory,
-  classifyResult,
-  gradeSeverity,
-  gradeCompleteness,
-  gradeFollowUp
-});
-})();
+export { hasOriginatingRequest, hasUnexpectedMalignancy, hasInvolvedMargin, hasCriticalFinding, hasAnyAbnormalFinding, buildReportingCategory, classifyResult, gradeSeverity, gradeCompleteness, gradeFollowUp };

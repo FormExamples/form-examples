@@ -1,3 +1,5 @@
+import { present } from './rules.js';
+
 // Flagged-issue detection for the hypertension annual review. Independent of the
 // control class and completeness status (which the grader produces), this module
 // raises clinician-facing flags per spec §5, each with a priority. Categories
@@ -20,11 +22,6 @@
  */
 
 // Wrapped in an IIFE; published via window.HypertensionReview.
-(function () {
-'use strict';
-window.HypertensionReview = window.HypertensionReview || {};
-const NS = window.HypertensionReview;
-const { present } = NS;
 
 /**
  * Detect the flags raised by the review findings.
@@ -165,5 +162,4 @@ function detectFlaggedIssues(data, grade) {
   return flags;
 }
 
-NS.detectFlaggedIssues = detectFlaggedIssues;
-})();
+export { detectFlaggedIssues };

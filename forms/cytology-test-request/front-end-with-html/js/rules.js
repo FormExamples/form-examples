@@ -12,12 +12,6 @@
 //
 // Wrapped in an IIFE; published via `window.CytologyTestRequest`.
 
-(function () {
-'use strict';
-window.CytologyTestRequest =
-  window.CytologyTestRequest || {};
-const NS = window.CytologyTestRequest;
-
 // ----------------------------------------------------------------------
 // Axis A — Appropriateness (NHS Cervical Screening / indication match, 1-9)
 // ----------------------------------------------------------------------
@@ -351,16 +345,4 @@ function scoreTriage(data) {
   };
 }
 
-Object.assign(NS, {
-  scoreAppropriateness,
-  appropriatenessBand,
-  evaluatePreanalytical,
-  hoursSinceCollection,
-  scoreCompleteness,
-  scoreTriage,
-  maxTier,
-  TRIAGE_ORDER,
-  TARGET_TIMEFRAMES,
-  INDICATION_SPECIMEN_MAP
-});
-})();
+export { scoreAppropriateness, appropriatenessBand, evaluatePreanalytical, hoursSinceCollection, scoreCompleteness, scoreTriage, maxTier, TRIAGE_ORDER, TARGET_TIMEFRAMES, INDICATION_SPECIMEN_MAP };

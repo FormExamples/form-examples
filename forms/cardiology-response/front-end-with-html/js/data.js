@@ -6,11 +6,6 @@
 // critical / inconclusive), severity, and follow-up urgency (including the
 // critical-result auto-escalation to critical-alert).
 
-(function () {
-'use strict';
-window.CardiologyResponseDashboard =
-  window.CardiologyResponseDashboard || {};
-
 /** @type {import('./dashboard-types.js').ResponseRow[]} */
 const sampleResponses = [
   {
@@ -87,5 +82,4 @@ const sampleResponses = [
   }
 ];
 
-window.CardiologyResponseDashboard.sampleResponses = sampleResponses;
-})();
+export { sampleResponses };

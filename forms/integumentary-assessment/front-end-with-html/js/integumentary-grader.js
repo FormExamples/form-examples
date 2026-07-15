@@ -1,3 +1,5 @@
+import { bradenRules } from './rules.js';
+
 // Braden Scale grader. Pure functions: take an `AssessmentData` object,
 // return the total Braden score (6-23), the `RiskLevel`, and the list of
 // fired subscales. Unanswered subscales are excluded from the total but
@@ -17,10 +19,6 @@
  */
 
 // Wrapped in an IIFE; published via window.IntegumentaryAssessment.
-(function () {
-'use strict';
-window.IntegumentaryAssessment = window.IntegumentaryAssessment || {};
-const { bradenRules } = window.IntegumentaryAssessment;
 
 /**
  * Classify a numeric Braden score (6-23) into a risk level.
@@ -107,10 +105,4 @@ function calculateBraden(data) {
   return { bradenScore, riskLevel, answeredCount, firedRules };
 }
 
-Object.assign(window.IntegumentaryAssessment, {
-  classifyBradenScore,
-  riskLevelLabel,
-  riskLevelClass,
-  calculateBraden
-});
-})();
+export { classifyBradenScore, riskLevelLabel, riskLevelClass, calculateBraden };

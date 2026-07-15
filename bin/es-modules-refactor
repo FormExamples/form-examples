@@ -1,0 +1,765 @@
+#!/usr/bin/env python3
+"""bin/es-modules-refactor — convert a form's `front-end-with-html/`
+JavaScript from the classic `window.<Namespace>` global-sharing pattern to
+native ES modules (`import` / `export` + `<script type="module">`).
+
+See spec/es-modules.md for the decision, the source pattern, and the target
+pattern. In short, each `js/*.js` file used to be an IIFE that published its
+public symbols onto a per-surface `window.<Namespace>` object and consumed its
+dependencies back off it, with the dependency graph encoded in the order of
+classic `<script>` tags in the HTML. This tool:
+
+  * drops the IIFE wrapper and `'use strict'` (modules are strict + scoped);
+  * removes the namespace plumbing (`window.NS = window.NS || {}`,
+    `const NS = window.NS`, publish lines, destructure-consume lines);
+  * emits a trailing `export { … }` for each file's published symbols;
+  * emits top-of-file `import { … } from './file.js'` for each consumed
+    symbol, resolved through a per-form symbol -> file map;
+  * rewrites `index.html` / `dashboard.html` to load a single module entry
+    point (plus any standalone utility such as `table-export.js`);
+  * preserves genuine `window.*` assignments that are not namespace plumbing
+    (e.g. an entry exposing `window.gradeObjective` for the smoke test).
+
+The transform is conservative: if a form uses a namespace idiom the tool does
+not recognise, it ABORTS that whole form (leaves every file untouched) and
+reports it, so a form is never left half-converted.
+
+Usage:
+  bin/es-modules-refactor <slug>...        # named forms
+  bin/es-modules-refactor --all            # every form under forms/
+  bin/es-modules-refactor --dry-run <slug> # show what would change
+  bin/es-modules-refactor --check --all    # CI drift check (non-zero on drift)
+
+Idempotent: a form already on ES modules (no namespace plumbing left) is a
+no-op. --check implies --dry-run and exits non-zero if any form would change.
+"""
+
+from __future__ import annotations
+
+import argparse
+import re
+import sys
+from pathlib import Path
+
+REPO_ROOT = Path(__file__).resolve().parent.parent
+FORMS_DIR = REPO_ROOT / "forms"
+
+# Entry-point filenames, in priority order, per HTML surface.
+WIZARD_ENTRIES = ["form-app.js", "wizard.js", "app.js"]
+DASH_ENTRIES = ["dashboard-app.js", "dashboard.js"]
+# Standalone utilities: no import graph, loaded as their own module tag.
+STANDALONE = {"table-export.js"}
+
+
+class Abort(Exception):
+    """Raised to skip a whole form when an unrecognised idiom is seen."""
+
+
+# --------------------------------------------------------------------------
+# JS analysis
+# --------------------------------------------------------------------------
+
+def strip_comments(text: str) -> str:
+    """Blank out // line comments and /* */ block comments so idiom
+    detection never trips over prose that mentions `window.Foo`. Keeps line
+    count and offsets identical (replaces comment bytes with spaces)."""
+    out = []
+    i, n = 0, len(text)
+    while i < n:
+        two = text[i:i + 2]
+        if two == "//":
+            j = text.find("\n", i)
+            j = n if j == -1 else j
+            out.append(" " * (j - i))
+            i = j
+        elif two == "/*":
+            j = text.find("*/", i + 2)
+            j = n if j == -1 else j + 2
+            seg = text[i:j]
+            out.append("".join("\n" if c == "\n" else " " for c in seg))
+            i = j
+        elif text[i] in "\"'`":
+            q = text[i]
+            j = i + 1
+            while j < n and text[j] != q:
+                if text[j] == "\\":
+                    j += 2
+                    continue
+                j += 1
+            out.append(text[i:j + 1])
+            i = j + 1
+        else:
+            out.append(text[i])
+            i += 1
+    return "".join(out)
+
+
+# window.Name = window.Name || {}   (one or two lines; the trailing `;` is
+# omitted so the parenthesised combined form
+# `const NS = (window.Name = window.Name || {});` is still detected — there a
+# `)` sits between `{}` and `;`).
+NS_INIT_RE = re.compile(
+    r"window\.(?P<ns>[A-Za-z_$][\w$]*)\s*=\s*window\.(?P=ns)\s*\|\|\s*\{\}")
+
+
+def window_tokens(code: str) -> set[str]:
+    """Identifiers that denote the global object in this file: always
+    `window`, plus any IIFE parameter bound to the global object, as in
+    `(function (global) { … })(window)`, `(function (root) { … }(this))`, or
+    the multi-parameter `(function (root, doc) { … })(window, document)`.
+
+    Open parameters are paired positionally with the invocation arguments; a
+    parameter whose argument mentions window/self/globalThis/this is global."""
+    toks = {"window"}
+    clean = strip_comments(code)
+    GLOBAL = re.compile(r"\b(?:window|self|globalThis|this)\b")
+    for mo in re.finditer(r"\(function\s*\(([^)]*)\)\s*\{", clean):
+        params = [p.strip() for p in mo.group(1).split(",") if p.strip()]
+        if not params:
+            continue
+        # Find this IIFE's invocation: the matching `})(args)` / `}(args))`.
+        after = match_brace(clean, clean.index("{", mo.end() - 1))
+        mc = re.match(r"\)?\s*\(([^)]*)\)", clean[after:])
+        if not mc:
+            continue
+        args = [a.strip() for a in mc.group(1).split(",")]
+        for i, p in enumerate(params):
+            if i < len(args) and GLOBAL.search(args[i]):
+                toks.add(p)
+    return toks
+
+
+def iife_bindings(code: str) -> list[tuple[str, str]]:
+    """If the file is wrapped in an outer IIFE with parameters, return the
+    (parameter, argument) pairs, e.g. [('root', 'window'), ('doc', 'document')]
+    for `(function (root, doc) { … })(window, document)`. Empty if the file
+    does not open with an IIFE."""
+    clean = strip_comments(code)
+    mo = re.match(r"\s*\(function\s*\(([^)]*)\)\s*\{", clean)
+    if not mo:
+        return []
+    params = [p.strip() for p in mo.group(1).split(",") if p.strip()]
+    if not params:
+        return []
+    after = match_brace(clean, clean.index("{", mo.end() - 1))
+    mc = re.match(r"\)?\s*\(([^)]*)\)", clean[after:])
+    if not mc:
+        return []
+    args = [a.strip() for a in mc.group(1).split(",")]
+    # Slice arguments from the ORIGINAL code so their text is preserved.
+    arg_span = code[after + mc.start(1):after + mc.end(1)]
+    args = [a.strip() for a in arg_span.split(",")]
+    return [(p, args[i]) for i, p in enumerate(params) if i < len(args)]
+
+
+def find_namespaces(js_files: dict[str, str]) -> set[str]:
+    ns: set[str] = set()
+    for code in js_files.values():
+        clean = strip_comments(code)
+        for tok in window_tokens(code):
+            esc = re.escape(tok)
+            #  <tok>.NS = <tok>.NS || {}
+            for m in re.finditer(
+                    rf"{esc}\.([A-Za-z_$][\w$]*)\s*=\s*{esc}\.\1\s*\|\|\s*\{{\}}",
+                    clean):
+                ns.add(m.group(1))
+            #  <tok>.NS || (<tok>.NS = {})     (reverse-init idiom)
+            for m in re.finditer(
+                    rf"{esc}\.([A-Za-z_$][\w$]*)\s*\|\|\s*\(\s*{esc}\.\1\s*=\s*\{{\}}\s*\)",
+                    clean):
+                ns.add(m.group(1))
+    return ns
+
+
+IDENT = r"[A-Za-z_$][\w$]*"
+
+
+def scan_stmt_end(text: str, i: int) -> int:
+    """From index i, return the index of the `;` that ends the statement,
+    honouring (), [], {} nesting and string / template literals."""
+    depth, n = 0, len(text)
+    while i < n:
+        c = text[i]
+        if c in "([{":
+            depth += 1
+            i += 1
+        elif c in ")]}":
+            depth -= 1
+            i += 1
+        elif c in "\"'`":
+            i = skip_string(text, i)
+        elif c == ";" and depth == 0:
+            return i
+        else:
+            i += 1
+    raise Abort("unterminated statement while scanning publish RHS")
+
+
+def skip_string(text: str, i: int) -> int:
+    """i is at a quote/backtick. Return index just past the closing quote."""
+    q, n = text[i], len(text)
+    i += 1
+    while i < n and text[i] != q:
+        i = i + 2 if text[i] == "\\" else i + 1
+    return i + 1
+
+
+def match_brace(text: str, i: int) -> int:
+    """i is at `{`. Return index just past the matching `}`."""
+    depth, n = 0, len(text)
+    while i < n:
+        c = text[i]
+        if c in "([{":
+            depth += 1
+            i += 1
+        elif c in ")]}":
+            depth -= 1
+            i += 1
+            if depth == 0:
+                return i
+        elif c in "\"'`":
+            i = skip_string(text, i)
+        else:
+            i += 1
+    raise Abort("unmatched brace")
+
+
+def top_level_colon(s: str) -> int | None:
+    depth, i, n = 0, 0, len(s)
+    while i < n:
+        c = s[i]
+        if c in "([{":
+            depth += 1
+        elif c in ")]}":
+            depth -= 1
+        elif c in "\"'`":
+            i = skip_string(s, i)
+            continue
+        elif c == ":" and depth == 0:
+            return i
+        i += 1
+    return None
+
+
+def parse_object_members(inner: str) -> list[tuple[str, str | None]]:
+    """Split an object-literal body into (key, value|None) pairs, preserving
+    the raw value text. `None` value means shorthand (`{ foo }`)."""
+    members, depth, buf, i, n = [], 0, "", 0, len(inner)
+    while i < n:
+        c = inner[i]
+        if c in "([{":
+            depth += 1
+            buf += c
+            i += 1
+        elif c in ")]}":
+            depth -= 1
+            buf += c
+            i += 1
+        elif c in "\"'`":
+            j = skip_string(inner, i)
+            buf += inner[i:j]
+            i = j
+        elif c == "," and depth == 0:
+            members.append(buf)
+            buf = ""
+            i += 1
+        else:
+            buf += c
+            i += 1
+    if buf.strip():
+        members.append(buf)
+
+    out: list[tuple[str, str | None]] = []
+    for m in members:
+        m = m.strip()
+        if not m:
+            continue
+        if m.startswith("..."):
+            raise Abort(f"spread in object publish: {m!r}")
+        ci = top_level_colon(m)
+        if ci is None:
+            if not re.fullmatch(IDENT, m):
+                raise Abort(f"unsupported object member: {m!r}")
+            out.append((m, None))
+        else:
+            key, val = m[:ci].strip(), m[ci + 1:].strip()
+            if not re.fullmatch(IDENT, key):
+                raise Abort(f"unsupported object key: {key!r}")
+            out.append((key, val))
+    return out
+
+
+class FilePlan:
+    """The rewrite plan for one JS file: text edits plus what it publishes and
+    consumes (both tagged by namespace so wizard/dashboard symbols of the same
+    name never collide)."""
+
+    def __init__(self):
+        self.edits: list[tuple[int, int, str]] = []  # (start, end, replacement)
+        self.published: list[tuple[str, str, str | None]] = []  # (ns, name, local|None-for-const)
+        self.consumed: list[tuple[str, str, str]] = []  # (ns, import_name, local_name)
+
+
+def plan_file(code: str, namespaces: set[str]) -> FilePlan:
+    """Detect every namespace idiom in one file and produce a FilePlan.
+    Detection runs on a comment-stripped copy whose offsets match `code`;
+    replacement text is sliced from `code` so real content is preserved."""
+    clean = strip_comments(code)
+    plan = FilePlan()
+    claimed: list[tuple[int, int]] = []
+
+    def claim(a, b):
+        claimed.append((a, b))
+
+    def is_claimed(pos):
+        return any(a <= pos < b for a, b in claimed)
+
+    ns_alt = "|".join(re.escape(n) for n in namespaces)
+    tokens = window_tokens(code)
+    tok_alt = "|".join(re.escape(t) for t in tokens)
+
+    alias_ns: dict[str, str] = {}
+    # Combined alias + init: const NS = <tok>.<ns> = <tok>.<ns> || {};
+    # (optionally parenthesised: const NS = (<tok>.<ns> = <tok>.<ns> || {});)
+    for m in re.finditer(
+            rf"\bconst\s+({IDENT})\s*=\s*\(?\s*(?:{tok_alt})\.({ns_alt})(?![\w$])"
+            rf"\s*=\s*(?:{tok_alt})\.\2(?![\w$])\s*\|\|\s*\{{\}}\s*\)?\s*;", clean):
+        alias_ns[m.group(1)] = m.group(2)
+        plan.edits.append((m.start(), m.end(), ""))
+        claim(m.start(), m.end())
+    # Combined alias + reverse-init: const NS = <tok>.<ns> || (<tok>.<ns> = {});
+    for m in re.finditer(
+            rf"\bconst\s+({IDENT})\s*=\s*(?:{tok_alt})\.({ns_alt})(?![\w$])"
+            rf"\s*\|\|\s*\(\s*(?:{tok_alt})\.\2(?![\w$])\s*=\s*\{{\}}\s*\)\s*;", clean):
+        if is_claimed(m.start()):
+            continue
+        alias_ns[m.group(1)] = m.group(2)
+        plan.edits.append((m.start(), m.end(), ""))
+        claim(m.start(), m.end())
+    # Plain alias: const NS = <tok>.<ns>;
+    for m in re.finditer(
+            rf"\bconst\s+({IDENT})\s*=\s*(?:{tok_alt})\.({ns_alt})(?![\w$])\s*;", clean):
+        if is_claimed(m.start()):
+            continue
+        alias_ns[m.group(1)] = m.group(2)
+        plan.edits.append((m.start(), m.end(), ""))
+        claim(m.start(), m.end())
+
+    # Namespace targets: (literal, ns). Dotted <tok>.<ns> forms first.
+    targets: list[tuple[str, str]] = [(f"{t}.{n}", n) for n in namespaces
+                                      for t in tokens]
+    targets += [(a, ns) for a, ns in alias_ns.items()]
+
+    for lit, ns in targets:
+        esc = re.escape(lit)
+        # For a bare-alias target, require it not be preceded by `.` or a word
+        # char (so it never matches inside window.<ns> or a longer identifier).
+        pre = r"(?<![\w$.])" if "." not in lit else ""
+        post = r"(?![\w$])"
+
+        # Namespace init: <lit> = <lit> || {};   (window form only), plus the
+        # reverse-init idiom  <lit> || (<lit> = {});
+        if "." in lit:
+            for pat in (rf"{esc}{post}\s*=\s*{esc}{post}\s*\|\|\s*\{{\}}\s*;",
+                        rf"{esc}{post}\s*\|\|\s*\(\s*{esc}{post}\s*=\s*\{{\}}\s*\)\s*;"):
+                for m in re.finditer(pat, clean):
+                    if is_claimed(m.start()):
+                        continue  # already inside a combined alias+init decl
+                    plan.edits.append((m.start(), m.end(), ""))
+                    claim(m.start(), m.end())
+
+        # Object.assign(<lit>, { ... });
+        for m in re.finditer(rf"Object\.assign\(\s*{pre}{esc}{post}\s*,\s*", clean):
+            brace = clean.find("{", m.end() - 1)
+            if brace == -1 or is_claimed(m.start()):
+                continue
+            after_obj = match_brace(clean, brace)
+            j = after_obj
+            while j < len(clean) and clean[j] in " \t\n":
+                j += 1
+            if clean[j] != ")":
+                raise Abort("malformed Object.assign")
+            j += 1
+            while j < len(clean) and clean[j] in " \t\n":
+                j += 1
+            if clean[j] != ";":
+                raise Abort("malformed Object.assign (no ;)")
+            end = j + 1
+            inner = clean[brace + 1:after_obj - 1]
+            reps = []
+            for key, val in parse_object_members(inner):
+                if val is None:
+                    plan.published.append((ns, key, key))  # shorthand -> export {key}
+                else:
+                    plan.published.append((ns, key, None))  # -> export const key = val
+                    reps.append(f"export const {key} = {val};")
+            plan.edits.append((m.start(), end, "\n".join(reps)))
+            claim(m.start(), end)
+
+        # Same-name shadow: const PROP = <expr ... <lit>.PROP ...>;  where the
+        # declared local has the SAME name as the namespace member read inside
+        # its own initializer (e.g. `const X = NS.X || 11;` or
+        # `const X = NS.X(args);`). Importing X plainly would clash with the
+        # local `const X`, so import it under an alias and rewrite just that
+        # read. (The plain `const X = NS.X;` form has no surrounding expression
+        # and is handled by the single-member consume below, which drops it.)
+        # (The shadow cases are always a single line: `const X = NS.X || d;` /
+        # `const X = NS.X(args);`. Bound the initializer to one line so this
+        # never has to scan across statements.)
+        for m in re.finditer(rf"\bconst\s+({IDENT})\s*=([^;\n]*);", clean):
+            if is_claimed(m.start()):
+                continue
+            local, init = m.group(1), m.group(2)
+            mm = re.search(rf"{pre}{esc}\s*\.\s*{re.escape(local)}(?![\w$])", init)
+            if not mm:
+                continue
+            if init.strip() == f"{lit}.{local}":
+                continue  # bare re-bind; let single-member consume drop it
+            occ_s = m.start(2) + mm.start()
+            occ_e = m.start(2) + mm.end()
+            if is_claimed(occ_s):
+                continue
+            alias = f"{local}$imported"
+            plan.consumed.append((ns, local, alias))
+            plan.edits.append((occ_s, occ_e, alias))
+            claim(occ_s, occ_e)
+
+        # Single-member dotted consume: const LOCAL = <lit>.PROP;
+        # (equivalent to a one-symbol destructure). Must run before the generic
+        # member-access scan so it is not left as `const X = X;`.
+        for m in re.finditer(
+                rf"\bconst\s+({IDENT})\s*=\s*{pre}{esc}\s*\.\s*({IDENT})\s*;", clean):
+            if is_claimed(m.start()):
+                continue
+            loc, prop = m.group(1), m.group(2)
+            plan.consumed.append((ns, prop, loc))
+            plan.edits.append((m.start(), m.end(), ""))
+            claim(m.start(), m.end())
+
+        # Member access: <lit>.PROP  (publish if followed by `=`, else read).
+        # Tolerate whitespace/newline between the namespace and the dot.
+        for m in re.finditer(rf"{pre}{esc}\s*\.\s*({IDENT})", clean):
+            if is_claimed(m.start()):
+                continue
+            prop = m.group(1)
+            j = m.end()
+            while j < len(clean) and clean[j] in " \t\n":
+                j += 1
+            if j < len(clean) and clean[j] == "=" and clean[j + 1:j + 2] not in ("=", ">"):
+                # publish: <lit>.PROP = RHS;
+                semi = scan_stmt_end(clean, j + 1)
+                rhs = clean[j + 1:semi].strip()
+                if re.fullmatch(IDENT, rhs):
+                    # bare re-export: drop the statement; export { rhs as prop }.
+                    plan.published.append((ns, prop, rhs))
+                    plan.edits.append((m.start(), semi + 1, ""))
+                    claim(m.start(), semi + 1)
+                else:
+                    # Expression RHS: rewrite only the `<lit>.PROP =` prefix to
+                    # `export const PROP =`, leaving the RHS in place — and
+                    # UNCLAIMED — so any namespace member-accesses inside it
+                    # (e.g. a function body calling ns.other()) are converted by
+                    # later iterations of this same loop.
+                    plan.published.append((ns, prop, None))
+                    plan.edits.append((m.start(), j + 1, f"export const {prop} ="))
+                    claim(m.start(), j + 1)
+            else:
+                # read: replace <lit>.PROP with PROP, import PROP
+                plan.consumed.append((ns, prop, prop))
+                plan.edits.append((m.start(), m.end(), prop))
+                claim(m.start(), m.end())
+
+        # Destructure consume: const { a, b: c } = <lit>;
+        for m in re.finditer(
+                rf"\bconst\s*\{{([^{{}}]*)\}}\s*=\s*{pre}{esc}{post}\s*;", clean):
+            if is_claimed(m.start()):
+                continue
+            for part in m.group(1).split(","):
+                part = part.strip()
+                if not part:
+                    continue
+                if ":" in part:
+                    imp, loc = (x.strip() for x in part.split(":", 1))
+                else:
+                    imp = loc = part
+                if not re.fullmatch(IDENT, imp) or not re.fullmatch(IDENT, loc):
+                    raise Abort(f"unsupported destructure member: {part!r}")
+                plan.consumed.append((ns, imp, loc))
+            plan.edits.append((m.start(), m.end(), ""))
+            claim(m.start(), m.end())
+
+    # Drop pass-through re-exports: a symbol this file both consumes and
+    # publishes under the same name is not defined here — the file it imported
+    # from is the real source, and consumers resolve to that. (const-form
+    # publishes, local is None, are genuine definitions and always kept.)
+    consumed_keys = {(ns, imp) for ns, imp, _loc in plan.consumed}
+    plan.published = [(ns, name, local) for (ns, name, local) in plan.published
+                      if local is None or (ns, name) not in consumed_keys]
+    return plan
+
+
+def apply_plan(code: str, plan: FilePlan, symbol_file: dict[tuple[str, str], str],
+               this_name: str) -> str:
+    # Apply edits right-to-left so offsets stay valid. Overlapping edits would
+    # corrupt offsets, so reject them outright (a detection bug, not valid).
+    text = code
+    prev_start = None
+    for start, end, rep in sorted(plan.edits, key=lambda e: e[0], reverse=True):
+        if prev_start is not None and end > prev_start:
+            raise Abort(f"overlapping edits at [{start}:{end}] and start {prev_start}")
+        prev_start = start
+        text = text[:start] + rep + text[end:]
+
+    # Remove the IIFE wrapper. The opener may take a global-object parameter
+    # (`(function (global) {`); the closer may be any of `})();`, `}());`,
+    # `})(window);`, `}(window));` (with or without a trailing `;`).
+    text = re.sub(
+        r"\(function\s*\([^)]*\)\s*\{[ \t]*\n(?:[ \t]*['\"]use strict['\"];[ \t]*\n)?",
+        "", text, count=1)
+    text = re.sub(
+        r"\n[ \t]*\}\)?\([^)]*\)\)?;?[ \t]*\n?\s*$", "\n", text)
+
+    # An IIFE parameter that aliased a global other than the namespace (e.g.
+    # `doc` <- document in `(function (root, doc) { … })(window, document)`)
+    # loses its binding when the wrapper is removed. Re-declare any such param
+    # that the (converted) body still references.
+    inject = []
+    for param, arg in iife_bindings(code):
+        if param != arg and re.search(rf"(?<![\w$])(?:{re.escape(param)})(?![\w$])", text):
+            inject.append(f"const {param} = {arg};")
+
+    # Imports, grouped by source file, with `as` renames where needed.
+    by_file: dict[str, dict[str, str]] = {}
+    for ns, imp, loc in plan.consumed:
+        src = symbol_file.get((ns, imp))
+        if src is None:
+            raise Abort(f"consumed symbol {imp!r} (ns {ns}) is exported by no file")
+        if src == this_name:
+            continue
+        by_file.setdefault(src, {})[imp] = loc
+    import_lines = []
+    for src in sorted(by_file):
+        names = []
+        for imp in sorted(by_file[src]):
+            loc = by_file[src][imp]
+            names.append(imp if imp == loc else f"{imp} as {loc}")
+        import_lines.append(f"import {{ {', '.join(names)} }} from './{src}';")
+
+    # Trailing `export { … }` for identifier / shorthand publishes (const-form
+    # publishes already carry their own `export const`).
+    export_names, seen = [], set()
+    for ns, name, local in plan.published:
+        if local is None:
+            continue  # emitted inline as `export const`
+        entry = name if name == local else f"{local} as {name}"
+        if entry not in seen:
+            seen.add(entry)
+            export_names.append(entry)
+    export_block = ("export { " + ", ".join(export_names) + " };") if export_names else ""
+
+    body = re.sub(r"\n{3,}", "\n\n", text.strip("\n"))
+    parts = []
+    if import_lines:
+        parts.append("\n".join(import_lines))
+    if inject:
+        parts.append("\n".join(inject))
+    if body:
+        parts.append(body)
+    if export_block:
+        parts.append(export_block)
+    return "\n\n".join(parts) + "\n"
+
+
+def assert_clean(code: str, namespaces: set[str], name: str) -> None:
+    """After rewrite, no code-level reference to a namespace should remain."""
+    clean = strip_comments(code)
+    for ns in namespaces:
+        if re.search(rf"\bwindow\.{re.escape(ns)}(?![\w$])", clean):
+            raise Abort(f"{name}: residual window.{ns} after rewrite")
+
+
+# --------------------------------------------------------------------------
+# HTML rewrite
+# --------------------------------------------------------------------------
+
+LOCAL_SCRIPT_RE = re.compile(
+    r'[ \t]*<script\b[^>]*\bsrc="js/(?P<file>[^"]+)"[^>]*>\s*</script>[ \t]*\n?')
+# The gold-standard "Classic <script> tags …" comment block.
+CLASSIC_COMMENT_RE = re.compile(
+    r"[ \t]*<!--(?:(?!-->).)*?Classic <script>(?:(?!-->).)*?-->[ \t]*\n?",
+    re.DOTALL)
+
+
+def rewrite_html(html: str, entries: list[str]) -> str:
+    present = [m.group("file") for m in LOCAL_SCRIPT_RE.finditer(html)]
+    if not present:
+        return html
+    entry = next((e for e in entries if e in present), None)
+    if entry is None:
+        # Fall back to the last local script as the entry.
+        entry = present[-1]
+    keep_standalone = [f for f in present if f in STANDALONE]
+
+    # Remove the stale "Classic <script>" explanatory comment.
+    html = CLASSIC_COMMENT_RE.sub("", html)
+
+    replacement_lines = [f'  <script type="module" src="js/{entry}"></script>']
+    for f in keep_standalone:
+        if f != entry:
+            replacement_lines.append(
+                f'  <script type="module" src="js/{f}"></script>')
+    replacement = "\n".join(replacement_lines) + "\n"
+
+    # Replace the first local-script tag with the replacement block and drop
+    # every other local-script tag.
+    done = {"emitted": False}
+
+    def sub(m):
+        if not done["emitted"]:
+            done["emitted"] = True
+            return replacement
+        return ""
+
+    return LOCAL_SCRIPT_RE.sub(sub, html)
+
+
+# --------------------------------------------------------------------------
+# Per-form driver
+# --------------------------------------------------------------------------
+
+def process_form(slug: str):
+    """Compute new contents for a form. Returns dict[path -> new_text] of the
+    files that would change (empty if none). Raises Abort to skip the form."""
+    fe = FORMS_DIR / slug / "front-end-with-html"
+    jsdir = fe / "js"
+    if not jsdir.is_dir():
+        return {}, "no js/ dir"
+
+    js_files = {p.name: p.read_text() for p in sorted(jsdir.glob("*.js"))}
+    namespaces = find_namespaces(js_files)
+    if not namespaces:
+        # No `window.<Namespace>` sharing detected. This is safe to treat as
+        # HTML-only (just flip the entry to a module) ONLY when the JS is
+        # already ES modules, or the wizard is a single self-contained file.
+        # If several interdependent classic scripts share *bare* top-level
+        # globals (no namespace, no import/export), collapsing the HTML to one
+        # module entry would silently drop the others — refuse and report.
+        already_module = any(
+            re.search(r"^\s*(?:import|export)\b", strip_comments(c), re.M)
+            for c in js_files.values())
+        if not already_module:
+            for html_name in ("index.html", "dashboard.html"):
+                p = fe / html_name
+                if not p.exists():
+                    continue
+                locals_ = [m.group("file")
+                           for m in LOCAL_SCRIPT_RE.finditer(p.read_text())
+                           if m.group("file") not in STANDALONE]
+                if len(locals_) > 1:
+                    raise Abort(
+                        f"{html_name}: {len(locals_)} classic scripts share bare "
+                        f"globals (no namespace) — convert by hand")
+        changes = {}
+        for html_name, entries in (("index.html", WIZARD_ENTRIES),
+                                    ("dashboard.html", DASH_ENTRIES)):
+            p = fe / html_name
+            if not p.exists():
+                continue
+            old = p.read_text()
+            new = rewrite_html(old, entries)
+            if new != old:
+                changes[p] = new
+        return changes, "no namespace (html-only)" if changes else "no-op"
+
+    # Plan every file, then build the (namespace, symbol) -> file export map.
+    plans: dict[str, FilePlan] = {}
+    symbol_file: dict[tuple[str, str], str] = {}
+    for name, code in js_files.items():
+        plan = plan_file(code, namespaces)
+        plans[name] = plan
+        for ns, exported, _local in plan.published:
+            key = (ns, exported)
+            if key in symbol_file and symbol_file[key] != name:
+                raise Abort(
+                    f"symbol {exported!r} (ns {ns}) exported by both "
+                    f"{symbol_file[key]} and {name}")
+            symbol_file[key] = name
+
+    changes: dict[Path, str] = {}
+    for name, code in js_files.items():
+        plan = plans[name]
+        if not (plan.edits or plan.published or plan.consumed):
+            continue  # standalone file (e.g. table-export.js)
+        new = apply_plan(code, plan, symbol_file, name)
+        assert_clean(new, namespaces, name)
+        if new != code:
+            changes[jsdir / name] = new
+
+    # HTML surfaces.
+    for html_name, entries in (("index.html", WIZARD_ENTRIES),
+                               ("dashboard.html", DASH_ENTRIES)):
+        p = fe / html_name
+        if not p.exists():
+            continue
+        old = p.read_text()
+        new = rewrite_html(old, entries)
+        if new != old:
+            changes[p] = new
+
+    return changes, f"namespaces={','.join(sorted(namespaces))}"
+
+
+def all_slugs() -> list[str]:
+    return sorted(p.parent.name for p in FORMS_DIR.glob("*/front-end-with-html"))
+
+
+def main() -> int:
+    ap = argparse.ArgumentParser(description=__doc__)
+    ap.add_argument("slugs", nargs="*")
+    ap.add_argument("--all", action="store_true")
+    ap.add_argument("--dry-run", action="store_true")
+    ap.add_argument("--check", action="store_true")
+    args = ap.parse_args()
+
+    if args.check:
+        args.dry_run = True
+    slugs = all_slugs() if args.all else args.slugs
+    if not slugs:
+        ap.error("give one or more slugs, or --all")
+
+    changed_forms = 0
+    aborted: list[tuple[str, str]] = []
+    for slug in slugs:
+        try:
+            changes, note = process_form(slug)
+        except Abort as e:
+            aborted.append((slug, str(e)))
+            print(f"SKIP  {slug}: {e}")
+            continue
+        if not changes:
+            continue
+        changed_forms += 1
+        verb = "would change" if args.dry_run else "converting"
+        print(f"{verb:>13}  {slug}  ({note})")
+        for path in sorted(changes):
+            rel = path.relative_to(REPO_ROOT)
+            print(f"                 {rel}")
+        if not args.dry_run:
+            for path, text in changes.items():
+                path.write_text(text)
+
+    print()
+    print(f"forms changed: {changed_forms} / {len(slugs)}")
+    if aborted:
+        print(f"forms skipped (manual review): {len(aborted)}")
+        for slug, why in aborted:
+            print(f"  {slug}: {why}")
+
+    if args.check and changed_forms:
+        print("\ndrift detected: run bin/es-modules-refactor --all", file=sys.stderr)
+        return 1
+    return 0
+
+
+if __name__ == "__main__":
+    sys.exit(main())

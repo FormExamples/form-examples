@@ -1,18 +1,10 @@
+import { calculateLpaValidity } from './composite-validator.js';
+import { emptyAttorney, emptyCertificateProvider, emptyLpaApplication, emptyPersonToNotify, emptyReplacementAttorney } from './factory.js';
+
 // LP1H wizard — vanilla classic-script app. Renders all 14 statutory sections
 // as a continuous single-page wizard, binds inputs to a single LpaApplication
 // state object, recomputes validity on every change, and re-renders the
 // report aside.
-
-(function () {
-'use strict';
-const {
-  emptyLpaApplication,
-  emptyAttorney,
-  emptyReplacementAttorney,
-  emptyCertificateProvider,
-  emptyPersonToNotify,
-  calculateLpaValidity,
-} = window.UkLpaForm;
 
 // ---------------------------------------------------------------------------
 // State
@@ -728,4 +720,3 @@ if (document.readyState === 'loading') {
 } else {
   boot();
 }
-})();

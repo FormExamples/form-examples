@@ -18,9 +18,6 @@
  */
 
 // Wrapped in an IIFE; published via window.AllergyAssessment.
-(function () {
-'use strict';
-window.AllergyAssessment = window.AllergyAssessment || {};
 
 /** @type {AllergyRule[]} */
 const allergyRules = [
@@ -255,5 +252,4 @@ const allergyRules = [
   }
 ];
 
-window.AllergyAssessment.allergyRules = allergyRules;
-})();
+export { allergyRules };

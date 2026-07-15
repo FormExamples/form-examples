@@ -8,11 +8,6 @@
 // screening request, a two-week-wait breast-lump case, and a
 // bloody-nipple-discharge case.
 
-(function () {
-'use strict';
-window.MammographyTestRequestDashboard =
-  window.MammographyTestRequestDashboard || {};
-
 /** @type {import('./types.js').RequestRow[]} */
 const sampleRequests = [
   {
@@ -167,5 +162,4 @@ const sampleRequests = [
   }
 ];
 
-window.MammographyTestRequestDashboard.sampleRequests = sampleRequests;
-})();
+export { sampleRequests };

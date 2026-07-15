@@ -154,9 +154,6 @@
 // classic <script> (no ES modules) so the page can be opened directly via
 // `file://`. The IIFE attaches its public symbols to a single global
 // namespace, `window.MicrobiologyCultureTestResult`.
-(function () {
-'use strict';
-window.MicrobiologyCultureTestResult = window.MicrobiologyCultureTestResult || {};
 
 /**
  * Build a fresh, fully-blank microbiology culture result.
@@ -351,18 +348,4 @@ function followUpUrgencyClass(value) {
   }
 }
 
-Object.assign(window.MicrobiologyCultureTestResult, {
-  emptyResult,
-  resultClassificationLabel,
-  abnormalitySeverityLabel,
-  followUpUrgencyLabel,
-  specimenTypeLabel,
-  cultureResultLabel,
-  reportStatusLabel,
-  recommendationLabel,
-  priorityLabel,
-  resultClassificationClass,
-  abnormalitySeverityClass,
-  followUpUrgencyClass
-});
-})();
+export { emptyResult, resultClassificationLabel, abnormalitySeverityLabel, followUpUrgencyLabel, specimenTypeLabel, cultureResultLabel, reportStatusLabel, recommendationLabel, priorityLabel, resultClassificationClass, abnormalitySeverityClass, followUpUrgencyClass };

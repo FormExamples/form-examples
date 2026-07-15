@@ -1,3 +1,7 @@
+import { detectAdditionalFlags } from './flagged-issues.js';
+import { calculateNIHSS } from './nihss-grader.js';
+import { calculateAge, emptyAssessment, hoursFromOnset, nihssCategory, nihssCategoryClass } from './types.js';
+
 // Stroke Assessment - patient wizard (vanilla JavaScript, no build).
 //
 // Single-page continuous wizard: every NIHSS section is rendered into the
@@ -11,19 +15,6 @@
 // exports to `window.StrokeAssessment`. Pulling them off here keeps the
 // rest of this file referring to short local names. Whole file is wrapped
 // in an IIFE so its top-level identifiers don't leak to the global scope.
-(function () {
-'use strict';
-
-const NS = window.StrokeAssessment;
-const {
-  emptyAssessment,
-  calculateAge,
-  nihssCategory,
-  nihssCategoryClass,
-  hoursFromOnset,
-  calculateNIHSS,
-  detectAdditionalFlags
-} = NS;
 
 // ----------------------------------------------------------------------
 // Persistence
@@ -1161,4 +1152,3 @@ if (document.readyState === 'loading') {
 } else {
   init();
 }
-})();

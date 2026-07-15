@@ -12,12 +12,6 @@
 //
 // Wrapped in an IIFE; published via `window.NeurodiversityAdjustmentRequest`.
 
-(function () {
-'use strict';
-window.NeurodiversityAdjustmentRequest =
-  window.NeurodiversityAdjustmentRequest || {};
-const NS = window.NeurodiversityAdjustmentRequest;
-
 // ----------------------------------------------------------------------
 // Shared helpers
 // ----------------------------------------------------------------------
@@ -350,18 +344,4 @@ function scorePriority(data) {
   };
 }
 
-Object.assign(NS, {
-  anyCondition,
-  anyDifficulty,
-  anyAdjustment,
-  scoreEligibility,
-  scoreImpact,
-  scoreCompleteness,
-  scorePriority,
-  maxTier,
-  maxImpactBand,
-  PRIORITY_ORDER,
-  IMPACT_ORDER,
-  TARGET_TIMEFRAMES
-});
-})();
+export { anyCondition, anyDifficulty, anyAdjustment, scoreEligibility, scoreImpact, scoreCompleteness, scorePriority, maxTier, maxImpactBand, PRIORITY_ORDER, IMPACT_ORDER, TARGET_TIMEFRAMES };

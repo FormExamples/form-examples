@@ -95,10 +95,6 @@
 // classic <script> (no ES modules) so the page can be opened directly via
 // `file://`. The IIFE attaches its public symbols to a single global
 // namespace, `window.EstimatedGlomerularFiltrationRateCalculator`.
-(function () {
-'use strict';
-window.EstimatedGlomerularFiltrationRateCalculator =
-  window.EstimatedGlomerularFiltrationRateCalculator || {};
 
 /**
  * Build a fresh, fully-blank assessment.
@@ -209,14 +205,4 @@ function priorityLabel(priority) {
   }
 }
 
-Object.assign(window.EstimatedGlomerularFiltrationRateCalculator, {
-  emptyAssessment,
-  stageLabel,
-  stageClass,
-  clinicianRoleLabel,
-  careSettingLabel,
-  sexLabel,
-  equationLabel,
-  priorityLabel
-});
-})();
+export { emptyAssessment, stageLabel, stageClass, clinicianRoleLabel, careSettingLabel, sexLabel, equationLabel, priorityLabel };

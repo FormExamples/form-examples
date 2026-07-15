@@ -9,11 +9,6 @@
 // Flag IDs are stable and identical across every front-end and the back-end.
 // Wrapped in an IIFE; published via `window.MriScanTestRequest`.
 
-(function () {
-'use strict';
-window.MriScanTestRequest = window.MriScanTestRequest || {};
-const NS = window.MriScanTestRequest;
-
 /**
  * Detect safety flags for an MRI scan request.
  *
@@ -176,5 +171,4 @@ function detectFlags(data, context) {
   return flags;
 }
 
-Object.assign(NS, { detectFlags });
-})();
+export { detectFlags };

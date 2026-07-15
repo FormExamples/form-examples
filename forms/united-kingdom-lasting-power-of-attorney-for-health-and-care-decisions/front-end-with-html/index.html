@@ -69,25 +69,6 @@
     </footer>
   </main>
 
-  <!--
-    Classic <script> tags (no `type="module"`) so the page works when opened
-    directly via file://. Each file attaches its public symbols to
-    `window.UkLpaForm`.
-
-    Load order: types -> utils -> factory -> rule families -> flags
-              -> composite-validator -> app.
-  -->
-  <script src="js/types.js"></script>
-  <script src="js/utils.js"></script>
-  <script src="js/factory.js"></script>
-  <script src="js/donor-rules.js"></script>
-  <script src="js/attorney-rules.js"></script>
-  <script src="js/certificate-provider-rules.js"></script>
-  <script src="js/signature-order-rules.js"></script>
-  <script src="js/instruction-rules.js"></script>
-  <script src="js/registration-rules.js"></script>
-  <script src="js/flagged-issues.js"></script>
-  <script src="js/composite-validator.js"></script>
-  <script src="js/form-app.js"></script>
+  <script type="module" src="js/form-app.js"></script>
 </body>
 </html>

@@ -178,9 +178,6 @@
 // classic <script> (no ES modules) so the page can be opened directly via
 // `file://`. The IIFE attaches its public symbols to a single global
 // namespace, `window.MentalStateExamination`.
-(function () {
-'use strict';
-window.MentalStateExamination = window.MentalStateExamination || {};
 
 /**
  * Build a fresh, fully-blank assessment. Every text / enum field defaults to
@@ -373,17 +370,4 @@ function priorityLabel(priority) {
   }
 }
 
-Object.assign(window.MentalStateExamination, {
-  emptyAssessment,
-  DOMAINS,
-  statusLabel,
-  statusClass,
-  riskLevelLabel,
-  riskLevelClass,
-  clinicianRoleLabel,
-  careSettingLabel,
-  sexLabel,
-  ageBandLabel,
-  priorityLabel
-});
-})();
+export { emptyAssessment, DOMAINS, statusLabel, statusClass, riskLevelLabel, riskLevelClass, clinicianRoleLabel, careSettingLabel, sexLabel, ageBandLabel, priorityLabel };

@@ -1,3 +1,5 @@
+import { mandatoryFor } from './rules.js';
+
 // General Practitioner Referral Letter grader. Pure functions: take a
 // `Referral` object, evaluate the mandatory-field set for the selected urgency
 // (`mandatoryFor`), and derive the completeness status, completeness percentage,
@@ -24,11 +26,6 @@
  */
 
 // Wrapped in an IIFE; published via window.GeneralPractitionerReferralLetter.
-(function () {
-'use strict';
-window.GeneralPractitionerReferralLetter =
-  window.GeneralPractitionerReferralLetter || {};
-const { mandatoryFor } = window.GeneralPractitionerReferralLetter;
 
 /**
  * Evaluate the mandatory-field set against the referral, returning one
@@ -115,10 +112,4 @@ function gradeReferral(referral) {
   };
 }
 
-Object.assign(window.GeneralPractitionerReferralLetter, {
-  evaluateRules,
-  completeness,
-  classifyUrgency,
-  gradeReferral
-});
-})();
+export { evaluateRules, completeness, classifyUrgency, gradeReferral };

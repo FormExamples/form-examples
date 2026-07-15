@@ -6,10 +6,6 @@
 // names are camelCase to match the front-end serde / examples convention.
 // Wrapped in an IIFE; published via `window.MriScanTestRequest`.
 
-(function () {
-'use strict';
-window.MriScanTestRequest = window.MriScanTestRequest || {};
-
 /**
  * Build a fresh, fully-blank MRI scan request.
  * Strings default to ''; numeric / date fields default to null;
@@ -122,11 +118,4 @@ function indicationLabel(value) {
   return INDICATION_LABELS[value] || value || '';
 }
 
-Object.assign(window.MriScanTestRequest, {
-  emptyRequest,
-  bodyRegionLabel,
-  indicationLabel,
-  BODY_REGION_LABELS,
-  INDICATION_LABELS
-});
-})();
+export { emptyRequest, bodyRegionLabel, indicationLabel, BODY_REGION_LABELS, INDICATION_LABELS };

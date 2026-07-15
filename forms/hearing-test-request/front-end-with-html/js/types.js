@@ -5,10 +5,6 @@
 // Property names are camelCase to match the front-end serde / examples
 // convention. Wrapped in an IIFE; published via `window.HearingTestRequest`.
 
-(function () {
-'use strict';
-window.HearingTestRequest = window.HearingTestRequest || {};
-
 /**
  * Build a fresh, fully-blank hearing test request.
  * Strings default to ''; numeric / date fields default to null;
@@ -76,9 +72,4 @@ function testTypeLabel(value) {
   return TEST_TYPE_LABELS[value] || value || '';
 }
 
-Object.assign(window.HearingTestRequest, {
-  emptyRequest,
-  testTypeLabel,
-  TEST_TYPE_LABELS
-});
-})();
+export { emptyRequest, testTypeLabel, TEST_TYPE_LABELS };

@@ -29,9 +29,6 @@
  */
 
 // Wrapped in an IIFE; published via window.PulmonaryEmbolismRuleOutCriteria.
-(function () {
-'use strict';
-window.PulmonaryEmbolismRuleOutCriteria = window.PulmonaryEmbolismRuleOutCriteria || {};
 
 /** @type {PercRule[]} */
 const percRules = [
@@ -124,5 +121,4 @@ const percRules = [
   }
 ];
 
-window.PulmonaryEmbolismRuleOutCriteria.percRules = percRules;
-})();
+export { percRules };

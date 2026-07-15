@@ -6,11 +6,6 @@
 // cognitive impairment / possible delirium), every care setting, and the
 // delirium flag is set whenever the total is >= 4.
 
-(function () {
-'use strict';
-window.FourATestForDeliriumDashboard =
-  window.FourATestForDeliriumDashboard || {};
-
 /** @type {import('./dashboard-types.js').AssessmentRow[]} */
 const sampleAssessments = [
   {
@@ -85,5 +80,4 @@ const sampleAssessments = [
   }
 ];
 
-window.FourATestForDeliriumDashboard.sampleAssessments = sampleAssessments;
-})();
+export { sampleAssessments };

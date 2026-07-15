@@ -191,10 +191,6 @@
 // classic <script> (no ES modules) so the page can be opened directly via
 // `file://`. The IIFE attaches its public symbols to a single global
 // namespace, `window.SeasonalAffectiveDisorderAssessment`.
-(function () {
-'use strict';
-window.SeasonalAffectiveDisorderAssessment =
-  window.SeasonalAffectiveDisorderAssessment || {};
 
 /**
  * Build a fresh, fully-blank assessment.
@@ -324,8 +320,4 @@ function mergeOver(fresh, parsed) {
   return fresh;
 }
 
-Object.assign(window.SeasonalAffectiveDisorderAssessment, {
-  emptyAssessment,
-  mergeOver
-});
-})();
+export { emptyAssessment, mergeOver };

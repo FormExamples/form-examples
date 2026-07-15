@@ -6,10 +6,6 @@
 // (A/B/E), with allergy and oxygen-therapy flags for a subset; NHS numbers
 // in the canonical "NNN NNN NNNN" display form.
 
-(function () {
-'use strict';
-window.PulmonologyAssessmentDashboard = window.PulmonologyAssessmentDashboard || {};
-
 /** @type {import('./types.js').PatientRow[]} */
 const samplePatients = [
   {
@@ -122,5 +118,4 @@ const samplePatients = [
   }
 ];
 
-window.PulmonologyAssessmentDashboard.samplePatients = samplePatients;
-})();
+export { samplePatients };

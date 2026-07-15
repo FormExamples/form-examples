@@ -6,10 +6,6 @@
 // affected axis, with flagged-issue counts varying from zero to many; NHS
 // numbers in the canonical "NNN NNN NNNN" display form.
 
-(function () {
-'use strict';
-window.EndocrinologyAssessmentDashboard = window.EndocrinologyAssessmentDashboard || {};
-
 /** @type {import('./types.js').PatientRow[]} */
 const samplePatients = [
   {
@@ -122,5 +118,4 @@ const samplePatients = [
   }
 ];
 
-window.EndocrinologyAssessmentDashboard.samplePatients = samplePatients;
-})();
+export { samplePatients };

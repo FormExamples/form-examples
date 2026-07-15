@@ -20,10 +20,6 @@
  */
 
 // Wrapped in an IIFE; published via window.CageAlcoholQuestionnaire.
-(function () {
-'use strict';
-window.CageAlcoholQuestionnaire =
-  window.CageAlcoholQuestionnaire || {};
 
 /** @type {CageRule[]} */
 const cageRules = [
@@ -68,5 +64,4 @@ const cageRules = [
   }
 ];
 
-window.CageAlcoholQuestionnaire.cageRules = cageRules;
-})();
+export { cageRules };

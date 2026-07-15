@@ -1,3 +1,6 @@
+import { timiRules } from './rules.js';
+import { FOURTEEN_DAY_RISK_PERCENT } from './types.js';
+
 // TIMI UA/NSTEMI grader. Pure functions: take an `AssessmentData` object,
 // evaluate the seven criterion rules in `timiRules`, award 0 or 1 point each,
 // sum the total (0-7), derive the risk band, and look up the 14-day
@@ -25,12 +28,6 @@
  */
 
 // Wrapped in an IIFE; published via window.TimiRiskScoreForAcuteCoronarySyndrome.
-(function () {
-'use strict';
-window.TimiRiskScoreForAcuteCoronarySyndrome =
-  window.TimiRiskScoreForAcuteCoronarySyndrome || {};
-const { timiRules, FOURTEEN_DAY_RISK_PERCENT } =
-  window.TimiRiskScoreForAcuteCoronarySyndrome;
 
 /**
  * Evaluate the seven TIMI criterion rules and collect the ones that fired.
@@ -124,9 +121,4 @@ function calculateTimiGrade(data) {
   };
 }
 
-Object.assign(window.TimiRiskScoreForAcuteCoronarySyndrome, {
-  evaluateCriteria,
-  deriveRiskBand,
-  calculateTimiGrade
-});
-})();
+export { evaluateCriteria, deriveRiskBand, calculateTimiGrade };

@@ -25,9 +25,6 @@
  */
 
 // Wrapped in an IIFE; published via window.ConfusionAssessmentMethod.
-(function () {
-'use strict';
-window.ConfusionAssessmentMethod = window.ConfusionAssessmentMethod || {};
 
 /** @type {CamRule[]} */
 const camRules = [
@@ -72,5 +69,4 @@ const camRules = [
   }
 ];
 
-window.ConfusionAssessmentMethod.camRules = camRules;
-})();
+export { camRules };

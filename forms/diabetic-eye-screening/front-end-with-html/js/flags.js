@@ -20,9 +20,6 @@
  */
 
 // Wrapped in an IIFE; published via window.DiabeticEyeScreening.
-(function () {
-'use strict';
-window.DiabeticEyeScreening = window.DiabeticEyeScreening || {};
 
 /** Whole months between two date strings (b - a); null when either unparseable. */
 function monthsBetween(aStr, bStr) {
@@ -168,5 +165,4 @@ function detectFlaggedIssues(data, grade) {
   return flags;
 }
 
-window.DiabeticEyeScreening.detectFlaggedIssues = detectFlaggedIssues;
-})();
+export { detectFlaggedIssues };

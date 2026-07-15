@@ -1,3 +1,6 @@
+import { calculatePtaFromThresholds, classifyDhiHandicap, classifyHearingLossGrade, dhiAnswerScore } from './audio-vestibular-rules.js';
+import { DHI_ITEMS } from './types.js';
+
 // Audio-Vestibular Assessment grader. Pure functions: take an
 // `AssessmentData` object, return:
 //
@@ -7,17 +10,6 @@
 //   - inter-aural asymmetry in dB
 //   - the DHI total (0-100), per-subscale subtotals, and handicap level
 //   - the per-item answered count for both instruments (audit trail)
-
-(function () {
-'use strict';
-const NS = window.AudioVestibularAssessment = window.AudioVestibularAssessment || {};
-const {
-  DHI_ITEMS,
-  calculatePtaFromThresholds,
-  classifyHearingLossGrade,
-  dhiAnswerScore,
-  classifyDhiHandicap
-} = NS;
 
 /**
  * Compute pure-tone audiometry results: per-ear PTAs, better-ear PTA,
@@ -132,9 +124,4 @@ function grade(data) {
   };
 }
 
-Object.assign(NS, {
-  calculatePureToneAudiometry,
-  calculateDhi,
-  grade
-});
-})();
+export { calculatePureToneAudiometry, calculateDhi, grade };

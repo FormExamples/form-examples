@@ -7,11 +7,6 @@
 // safety-flag counts. NHS numbers in the canonical "NNN NNN NNNN" display
 // form.
 
-(function () {
-'use strict';
-window.PreOperativeAssessmentByPatientDashboard =
-  window.PreOperativeAssessmentByPatientDashboard || {};
-
 /** @type {import('./types.js').PatientRow[]} */
 const samplePatients = [
   {
@@ -136,5 +131,4 @@ const samplePatients = [
   }
 ];
 
-window.PreOperativeAssessmentByPatientDashboard.samplePatients = samplePatients;
-})();
+export { samplePatients };

@@ -19,9 +19,6 @@
  */
 
 // Wrapped in an IIFE; published via window.PulmonaryFunctionTestResult.
-(function () {
-'use strict';
-window.PulmonaryFunctionTestResult = window.PulmonaryFunctionTestResult || {};
 
 // ----------------------------------------------------------------------
 // Structured-findings predicates (mirror `utils.ts`)
@@ -483,14 +480,4 @@ function gradeFollowUp(r, classification, severity) {
   };
 }
 
-Object.assign(window.PulmonaryFunctionTestResult, {
-  hasCriticalFinding,
-  hasAnyAbnormalFinding,
-  isNormalStudy,
-  reportingCategoryFor,
-  classifyResult,
-  gradeSeverity,
-  gradeCompleteness,
-  gradeFollowUp
-});
-})();
+export { hasCriticalFinding, hasAnyAbnormalFinding, isNormalStudy, reportingCategoryFor, classifyResult, gradeSeverity, gradeCompleteness, gradeFollowUp };

@@ -32,9 +32,6 @@
 // classic <script> (no ES modules) so the page can be opened directly via
 // `file://`. The IIFE attaches its public symbols to a single global
 // namespace, `window.ContraceptionAssessment`.
-(function () {
-'use strict';
-window.ContraceptionAssessment = window.ContraceptionAssessment || {};
 
 /**
  * Build a fresh, fully-blank assessment.
@@ -149,11 +146,4 @@ function ukmecBadgeClass(category) {
   return `ukmec-cat-${category}`;
 }
 
-Object.assign(window.ContraceptionAssessment, {
-  emptyAssessment,
-  calculateAge,
-  ukmecCategoryLabel,
-  ukmecLabel,
-  ukmecBadgeClass
-});
-})();
+export { emptyAssessment, calculateAge, ukmecCategoryLabel, ukmecLabel, ukmecBadgeClass };

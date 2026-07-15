@@ -1,3 +1,6 @@
+import { axisRules } from './rules.js';
+import { axisStatusClass, axisStatusLabel, maxStatus } from './types.js';
+
 // Endocrine grader. Pure functions: take an `AssessmentData` object,
 // run each axis rule, and return per-axis grades plus the overall status.
 //
@@ -12,10 +15,6 @@
  */
 
 // Wrapped in an IIFE; published via window.EndocrinologyAssessment.
-(function () {
-'use strict';
-window.EndocrinologyAssessment = window.EndocrinologyAssessment || {};
-const { axisRules, axisStatusLabel, axisStatusClass, maxStatus } = window.EndocrinologyAssessment;
 
 /**
  * @param {AssessmentData} data
@@ -67,7 +66,4 @@ function calculateGrades(data) {
   return { axisGrades, overallStatus: overall || 'normal', answeredCount, firedRules };
 }
 
-Object.assign(window.EndocrinologyAssessment, {
-  calculateGrades
-});
-})();
+export { calculateGrades };

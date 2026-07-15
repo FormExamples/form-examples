@@ -14,10 +14,6 @@
  * @typedef {import('./types.js').SeverityCategory} SeverityCategory
  */
 
-(function () {
-'use strict';
-window.PostTraumaticStressAssessment = window.PostTraumaticStressAssessment || {};
-
 /**
  * @param {AssessmentData} _data
  * @param {number} total
@@ -60,5 +56,4 @@ function detectFiredRules(_data, total, category, probableDsm5) {
   return fired;
 }
 
-window.PostTraumaticStressAssessment.detectFiredRules = detectFiredRules;
-})();
+export { detectFiredRules };

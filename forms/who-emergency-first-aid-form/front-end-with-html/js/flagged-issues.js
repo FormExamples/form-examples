@@ -1,3 +1,5 @@
+import { hasAnyAirwayIntervention, hasAnyMajorBleedingIntervention, hasNonTourniquetBleedingIntervention, hasText, isAssessmentAnswered } from './types.js';
+
 // WHO Emergency First Aid Form — flagged-issue detection. Independent of
 // the completeness check (which is handled by the validator), this module
 // raises clinically significant flags such as: major bleeding finding
@@ -10,17 +12,6 @@
  * @typedef {import('./types.js').AssessmentData} AssessmentData
  * @typedef {import('./types.js').FlaggedIssue} FlaggedIssue
  */
-
-(function () {
-'use strict';
-window.WhoEmergencyFirstAidForm = window.WhoEmergencyFirstAidForm || {};
-const {
-  hasText,
-  isAssessmentAnswered,
-  hasAnyAirwayIntervention,
-  hasAnyMajorBleedingIntervention,
-  hasNonTourniquetBleedingIntervention
-} = window.WhoEmergencyFirstAidForm;
 
 /**
  * @param {AssessmentData} data
@@ -233,5 +224,4 @@ function detectFlaggedIssues(data) {
   return flags;
 }
 
-window.WhoEmergencyFirstAidForm.detectFlaggedIssues = detectFlaggedIssues;
-})();
+export { detectFlaggedIssues };

@@ -1,3 +1,7 @@
+import { detectFlaggedIssues } from './flags.js';
+import { calculateWellsGrade } from './grader.js';
+import { bandClass, emptyAssessment, haemodynamicStatusLabel, priorityLabel, recommendedPathwayLabel, threeLevelBandLabel, twoLevelBandLabel, yesNoLabel } from './types.js';
+
 // Wells Score for Pulmonary Embolism (PE) — single-page wizard
 // (vanilla JavaScript, no build).
 //
@@ -14,22 +18,6 @@
 // to `window.WellsScoreForPulmonaryEmbolism`. Pulling them off here keeps the
 // rest of this file referring to short local names. The whole file is wrapped
 // in an IIFE so its top-level identifiers don't leak.
-(function () {
-'use strict';
-
-const NS = window.WellsScoreForPulmonaryEmbolism;
-const {
-  emptyAssessment,
-  twoLevelBandLabel,
-  threeLevelBandLabel,
-  bandClass,
-  recommendedPathwayLabel,
-  haemodynamicStatusLabel,
-  yesNoLabel,
-  priorityLabel,
-  calculateWellsGrade,
-  detectFlaggedIssues
-} = NS;
 
 // ----------------------------------------------------------------------
 // Persistence
@@ -1022,4 +1010,3 @@ if (document.readyState === 'loading') {
 } else {
   init();
 }
-})();

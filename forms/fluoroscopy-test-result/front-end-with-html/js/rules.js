@@ -19,9 +19,6 @@
  */
 
 // Wrapped in an IIFE; published via window.FluoroscopyTestResult.
-(function () {
-'use strict';
-window.FluoroscopyTestResult = window.FluoroscopyTestResult || {};
 
 // ----------------------------------------------------------------------
 // Structured-findings predicates (mirror `utils.ts`)
@@ -443,13 +440,4 @@ function gradeFollowUp(r, classification, severity) {
   };
 }
 
-Object.assign(window.FluoroscopyTestResult, {
-  hasCriticalFinding,
-  hasAnyAbnormalFinding,
-  hasOnlyIncidentalFinding,
-  classifyResult,
-  gradeSeverity,
-  gradeCompleteness,
-  gradeFollowUp
-});
-})();
+export { hasCriticalFinding, hasAnyAbnormalFinding, hasOnlyIncidentalFinding, classifyResult, gradeSeverity, gradeCompleteness, gradeFollowUp };

@@ -1,3 +1,5 @@
+import { FACTOR, REF_ALBUMIN, classificationRules } from './rules.js';
+
 // Corrected-calcium grader. Pure functions: take an `AssessmentData` object,
 // apply the albumin-correction formula to the two measured inputs, and classify
 // the result against the adult reference range.
@@ -25,15 +27,6 @@
  */
 
 // Wrapped in an IIFE; published via window.CorrectedCalciumCalculator.
-(function () {
-'use strict';
-window.CorrectedCalciumCalculator =
-  window.CorrectedCalciumCalculator || {};
-const {
-  REF_ALBUMIN,
-  FACTOR,
-  classificationRules
-} = window.CorrectedCalciumCalculator;
 
 /** Round a number to two decimal places (returns null unchanged). */
 function roundTwo(n) {
@@ -117,8 +110,4 @@ function calculateCorrectedCalcium(data) {
   };
 }
 
-Object.assign(window.CorrectedCalciumCalculator, {
-  roundTwo,
-  calculateCorrectedCalcium
-});
-})();
+export { roundTwo, calculateCorrectedCalcium };

@@ -1,3 +1,6 @@
+import { calculateASA } from './composite-grader.js';
+import { bmiCategory, computeBmi, emptyAssessment, riskLabel } from './types.js';
+
 // Pre-operative Assessment by Clinician — clinician wizard (vanilla JS).
 //
 // Single-page continuous wizard: every section is rendered into the page in
@@ -11,18 +14,6 @@
 // here keeps the rest of this file referring to short local names. Whole
 // file is wrapped in an IIFE so its top-level identifiers don't leak to
 // the global scope.
-
-(function () {
-'use strict';
-
-const NS = window.PreOperativeAssessmentByClinician;
-const {
-  emptyAssessment,
-  computeBmi,
-  bmiCategory,
-  riskLabel,
-  calculateASA
-} = NS;
 
 // ----------------------------------------------------------------------
 // Persistence
@@ -1806,4 +1797,3 @@ if (document.readyState === 'loading') {
 } else {
   init();
 }
-})();

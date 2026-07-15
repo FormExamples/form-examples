@@ -1,3 +1,5 @@
+import { calculateAge } from './types.js';
+
 // Flagged-issue detection. Independent of the HHIE-S score (which the
 // grader computes), this module raises clinician-facing flags for sudden
 // onset, unilateral loss, tinnitus, vertigo, ear surgery, ototoxic
@@ -10,10 +12,6 @@
  */
 
 // Wrapped in an IIFE; published via window.HearingAidAssessment.
-(function () {
-'use strict';
-window.HearingAidAssessment = window.HearingAidAssessment || {};
-const { calculateAge } = window.HearingAidAssessment;
 
 /**
  * @param {AssessmentData} data
@@ -161,5 +159,4 @@ function detectAdditionalFlags(data) {
   return flags;
 }
 
-window.HearingAidAssessment.detectAdditionalFlags = detectAdditionalFlags;
-})();
+export { detectAdditionalFlags };

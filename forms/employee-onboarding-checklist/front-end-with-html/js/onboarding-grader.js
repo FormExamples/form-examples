@@ -1,3 +1,6 @@
+import { onboardingRules } from './onboarding-rules.js';
+import { deriveCompletionStatus } from './types.js';
+
 // Onboarding-checklist grader. Pure functions: take an `AssessmentData`
 // object, return the completion percentage (0-100), the
 // `CompletionStatus` (not-started / in-progress / mostly-complete /
@@ -13,10 +16,6 @@
  */
 
 // Wrapped in an IIFE; published via window.EmployeeOnboardingChecklist.
-(function () {
-'use strict';
-window.EmployeeOnboardingChecklist = window.EmployeeOnboardingChecklist || {};
-const NS = window.EmployeeOnboardingChecklist;
 
 /**
  * Pure function: evaluates all onboarding rules against employee data.
@@ -36,7 +35,7 @@ function calculateOnboardingGrade(data) {
   /** @type {FiredRule[]} */
   const firedRules = [];
 
-  for (const rule of NS.onboardingRules) {
+  for (const rule of onboardingRules) {
     try {
       if (rule.evaluate(data)) {
         firedRules.push({
@@ -57,7 +56,7 @@ function calculateOnboardingGrade(data) {
   const completionPercentage = total > 0 ? Math.round((completed / total) * 1000) / 10 : 0;
 
   // Derive status from percentage
-  const completionStatus = NS.deriveCompletionStatus(completionPercentage);
+  const completionStatus = deriveCompletionStatus(completionPercentage);
 
   // Derive overall risk from worst fired rule grade
   const overallRisk = deriveOverallRisk(firedRules, completionPercentage);
@@ -178,9 +177,4 @@ function deriveOverallRisk(firedRules, completionPercentage) {
   return 'low';
 }
 
-Object.assign(window.EmployeeOnboardingChecklist, {
-  calculateOnboardingGrade,
-  countCompletedItems,
-  deriveOverallRisk
-});
-})();
+export { calculateOnboardingGrade, countCompletedItems, deriveOverallRisk };

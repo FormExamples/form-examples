@@ -175,9 +175,6 @@
 // classic <script> (no ES modules) so the page can be opened directly via
 // `file://`. The IIFE attaches its public symbols to a single global
 // namespace, `window.SemaglutideAssessment`.
-(function () {
-'use strict';
-window.SemaglutideAssessment = window.SemaglutideAssessment || {};
 
 /**
  * Build a fresh, fully-blank assessment.
@@ -347,12 +344,4 @@ function eligibilityClass(status) {
   }
 }
 
-Object.assign(window.SemaglutideAssessment, {
-  emptyAssessment,
-  calculateAge,
-  calculateBMI,
-  bmiCategory,
-  eligibilityLabel,
-  eligibilityClass
-});
-})();
+export { emptyAssessment, calculateAge, calculateBMI, bmiCategory, eligibilityLabel, eligibilityClass };

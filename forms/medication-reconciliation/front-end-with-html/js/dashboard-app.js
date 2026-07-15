@@ -1,3 +1,6 @@
+import { fetchReconciliations } from './api.js';
+import { sampleReconciliations } from './data.js';
+
 // Medication Reconciliation — clinician dashboard (vanilla classic-script app).
 //
 // On boot we fetch the reconciliation list from the backend; on any failure (or
@@ -8,12 +11,6 @@
 // Sibling modules loaded as plain `<script>` tags (in dependency order) attach
 // their exports to `window.MedicationReconciliationDashboard`. The whole file is
 // wrapped in an IIFE so its top-level identifiers do not leak.
-(function () {
-'use strict';
-const {
-  fetchReconciliations,
-  sampleReconciliations
-} = window.MedicationReconciliationDashboard;
 
 // ----------------------------------------------------------------------
 // State
@@ -378,4 +375,3 @@ if (document.readyState === 'loading') {
 } else {
   init();
 }
-})();

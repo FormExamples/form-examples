@@ -8,11 +8,6 @@
 // a routine surveillance request, a 2WW visible-haematuria case, an
 // active-UTI defer case, and a high-bleeding-risk anticoagulant case.
 
-(function () {
-'use strict';
-window.CystoscopyTestRequestDashboard =
-  window.CystoscopyTestRequestDashboard || {};
-
 /** @type {import('./types.js').RequestRow[]} */
 const sampleRequests = [
   {
@@ -167,5 +162,4 @@ const sampleRequests = [
   }
 ];
 
-window.CystoscopyTestRequestDashboard.sampleRequests = sampleRequests;
-})();
+export { sampleRequests };

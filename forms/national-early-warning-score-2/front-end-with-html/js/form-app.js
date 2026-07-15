@@ -1,3 +1,7 @@
+import { detectFlaggedIssues } from './flags.js';
+import { gradeNews2 } from './grader.js';
+import { acvpuLabel, emptyAssessment, priorityLabel, riskBandClass, riskBandLabel } from './types.js';
+
 // National Early Warning Score 2 (NEWS2) — bedside wizard
 // (vanilla JavaScript, no build).
 //
@@ -15,19 +19,6 @@
 // to `window.NationalEarlyWarningScore2`. Pulling them off here keeps the rest
 // of this file referring to short local names. The whole file is wrapped in an
 // IIFE so its top-level identifiers don't leak.
-(function () {
-'use strict';
-
-const NS = window.NationalEarlyWarningScore2;
-const {
-  emptyAssessment,
-  riskBandLabel,
-  riskBandClass,
-  priorityLabel,
-  acvpuLabel,
-  gradeNews2,
-  detectFlaggedIssues
-} = NS;
 
 // ----------------------------------------------------------------------
 // Persistence
@@ -1068,4 +1059,3 @@ if (document.readyState === 'loading') {
 } else {
   init();
 }
-})();

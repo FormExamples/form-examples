@@ -1,3 +1,5 @@
+import { cha2ds2VascRules } from './rules.js';
+
 // CHA2DS2-VASc grader. Pure functions: take an `AssessmentData` object,
 // evaluate the eight criterion rules in `cha2ds2VascRules`, award their
 // weighted points, sum the total (0-9), and derive the risk band, the
@@ -28,11 +30,6 @@
 
 // Wrapped in an IIFE; published via
 // window.Cha2ds2VascScoreForAtrialFibrillationStrokeRisk.
-(function () {
-'use strict';
-window.Cha2ds2VascScoreForAtrialFibrillationStrokeRisk =
-  window.Cha2ds2VascScoreForAtrialFibrillationStrokeRisk || {};
-const { cha2ds2VascRules } = window.Cha2ds2VascScoreForAtrialFibrillationStrokeRisk;
 
 // Adjusted annual ischaemic-stroke rate (%) indexed by total score 0-9
 // (Lip et al., Chest 2010).
@@ -159,10 +156,4 @@ function calculateCha2ds2VascGrade(data) {
   };
 }
 
-Object.assign(window.Cha2ds2VascScoreForAtrialFibrillationStrokeRisk, {
-  evaluateCriteria,
-  calculateAgePoint,
-  calculateCha2ds2VascGrade,
-  ANNUAL_STROKE_RATE_PERCENT
-});
-})();
+export { evaluateCriteria, calculateAgePoint, calculateCha2ds2VascGrade, ANNUAL_STROKE_RATE_PERCENT };

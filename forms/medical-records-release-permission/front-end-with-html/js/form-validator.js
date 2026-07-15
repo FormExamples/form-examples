@@ -1,19 +1,10 @@
+import { completenessPercent, completenessStatus, isValidEmail, validationStatus } from './types.js';
+import { validationRules } from './validation-rules.js';
+
 // Pure form-completeness validator for the Medical Records Release
 // Permission form. Mirrors `src/lib/engine/form-validator.ts` from the
 // SvelteKit implementation: each missing required field, each invalid
 // email, and each cross-field date inconsistency surfaces as a fired rule.
-
-(function () {
-'use strict';
-const NS = window.MedicalRecordsReleasePermission =
-  window.MedicalRecordsReleasePermission || {};
-const {
-  validationRules,
-  completenessPercent,
-  validationStatus,
-  completenessStatus,
-  isValidEmail
-} = NS;
 
 /**
  * Validate the full assessment data and return a completeness score plus a
@@ -145,5 +136,4 @@ function validateForm(data) {
   };
 }
 
-Object.assign(NS, { validateForm });
-})();
+export { validateForm };

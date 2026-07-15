@@ -6,11 +6,6 @@
 // category, with NHS numbers in the canonical "NNN NNN NNNN" display form
 // and ISO-8601 calendar dates.
 
-(function () {
-'use strict';
-window.MedicalRecordsReleasePermissionDashboard =
-  window.MedicalRecordsReleasePermissionDashboard || {};
-
 /** @type {import('./types.js').PatientRow[]} */
 const samplePatients = [
   {
@@ -123,5 +118,4 @@ const samplePatients = [
   }
 ];
 
-window.MedicalRecordsReleasePermissionDashboard.samplePatients = samplePatients;
-})();
+export { samplePatients };

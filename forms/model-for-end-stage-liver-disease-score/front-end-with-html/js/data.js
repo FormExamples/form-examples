@@ -6,11 +6,6 @@
 // extreme), all three variants, both dialysis states, and several care
 // settings. dialysisFlag is set whenever the dialysis creatinine rule applied.
 
-(function () {
-'use strict';
-window.ModelForEndStageLiverDiseaseScoreDashboard =
-  window.ModelForEndStageLiverDiseaseScoreDashboard || {};
-
 /** @type {import('./dashboard-types.js').AssessmentRow[]} */
 const sampleAssessments = [
   {
@@ -92,6 +87,4 @@ const sampleAssessments = [
   }
 ];
 
-window.ModelForEndStageLiverDiseaseScoreDashboard.sampleAssessments =
-  sampleAssessments;
-})();
+export { sampleAssessments };

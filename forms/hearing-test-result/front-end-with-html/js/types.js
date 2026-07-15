@@ -160,9 +160,6 @@
 // classic <script> (no ES modules) so the page can be opened directly via
 // `file://`. The IIFE attaches its public symbols to a single global
 // namespace, `window.HearingTestResult`.
-(function () {
-'use strict';
-window.HearingTestResult = window.HearingTestResult || {};
 
 /**
  * Build a fresh, fully-blank hearing test result.
@@ -373,20 +370,4 @@ function followUpUrgencyClass(value) {
   }
 }
 
-Object.assign(window.HearingTestResult, {
-  emptyResult,
-  resultClassificationLabel,
-  abnormalitySeverityLabel,
-  followUpUrgencyLabel,
-  testTypeLabel,
-  reportStatusLabel,
-  testReliabilityLabel,
-  hearingLossTypeLabel,
-  hearingLossSeverityLabel,
-  recommendationLabel,
-  priorityLabel,
-  resultClassificationClass,
-  abnormalitySeverityClass,
-  followUpUrgencyClass
-});
-})();
+export { emptyResult, resultClassificationLabel, abnormalitySeverityLabel, followUpUrgencyLabel, testTypeLabel, reportStatusLabel, testReliabilityLabel, hearingLossTypeLabel, hearingLossSeverityLabel, recommendationLabel, priorityLabel, resultClassificationClass, abnormalitySeverityClass, followUpUrgencyClass };

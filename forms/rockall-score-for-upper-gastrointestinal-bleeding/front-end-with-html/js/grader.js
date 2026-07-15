@@ -1,3 +1,5 @@
+import { agePoints, comorbidityPoints, diagnosisPoints, riskBand, rockallRules, shockPoints, stigmataPoints } from './rules.js';
+
 // Rockall grader. Pure functions: take an `AssessmentData` object, score the
 // three clinical parameters (age, shock, comorbidity) into a pre-endoscopy
 // (clinical) score of 0-7, and — when endoscopy has been performed — add the two
@@ -28,19 +30,6 @@
  */
 
 // Wrapped in an IIFE; published via window.RockallScoreForUpperGastrointestinalBleeding.
-(function () {
-'use strict';
-window.RockallScoreForUpperGastrointestinalBleeding =
-  window.RockallScoreForUpperGastrointestinalBleeding || {};
-const {
-  agePoints,
-  shockPoints,
-  comorbidityPoints,
-  diagnosisPoints,
-  stigmataPoints,
-  riskBand,
-  rockallRules
-} = window.RockallScoreForUpperGastrointestinalBleeding;
 
 /**
  * Evaluate the declarative rule table and collect the rows that fired.
@@ -118,8 +107,4 @@ function calculateRockallGrade(data) {
   };
 }
 
-Object.assign(window.RockallScoreForUpperGastrointestinalBleeding, {
-  evaluateRules,
-  calculateRockallGrade
-});
-})();
+export { evaluateRules, calculateRockallGrade };

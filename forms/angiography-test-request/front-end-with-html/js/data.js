@@ -8,11 +8,6 @@
 // peripheral-arterial-disease request, a contrast-allergy case, a
 // renal-impairment case, and an emergency GI-bleeding case.
 
-(function () {
-'use strict';
-window.AngiographyTestRequestDashboard =
-  window.AngiographyTestRequestDashboard || {};
-
 /** @type {import('./types.js').RequestRow[]} */
 const sampleRequests = [
   {
@@ -167,5 +162,4 @@ const sampleRequests = [
   }
 ];
 
-window.AngiographyTestRequestDashboard.sampleRequests = sampleRequests;
-})();
+export { sampleRequests };

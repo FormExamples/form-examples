@@ -5,11 +5,6 @@
 // rows span both completeness statuses, a range of completeness percentages,
 // Health Action Plans present and absent, and the STOMP flag set and clear.
 
-(function () {
-'use strict';
-window.LearningDisabilityAnnualHealthCheckDashboard =
-  window.LearningDisabilityAnnualHealthCheckDashboard || {};
-
 /** @type {import('./dashboard-types.js').CheckRow[]} */
 const sampleChecks = [
   {
@@ -91,5 +86,4 @@ const sampleChecks = [
   }
 ];
 
-window.LearningDisabilityAnnualHealthCheckDashboard.sampleChecks = sampleChecks;
-})();
+export { sampleChecks };

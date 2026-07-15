@@ -1,3 +1,5 @@
+import { countPartAShadedItems, sumScores } from './types.js';
+
 // ASRS (Adult ADHD Self-Report Scale v1.1) rule definitions.
 //
 // Each rule evaluates the assessment data and returns true when its
@@ -6,10 +8,6 @@
 // description, and tentative ADHD classification associated with it.
 
 // Wrapped in an IIFE; published via window.AttentionDeficitAssessment.
-(function () {
-'use strict';
-window.AttentionDeficitAssessment = window.AttentionDeficitAssessment || {};
-const { sumScores, countPartAShadedItems } = window.AttentionDeficitAssessment;
 
 const asrsRules = [
   // ─── Part A screener ─────────────────────────────────────
@@ -235,5 +233,4 @@ function allASRSScores(d) {
   return { partA, partB, total: partA + partB };
 }
 
-window.AttentionDeficitAssessment.asrsRules = asrsRules;
-})();
+export { asrsRules };

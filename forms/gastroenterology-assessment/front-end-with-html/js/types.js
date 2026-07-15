@@ -206,9 +206,6 @@
 // classic <script> (no ES modules) so the page can be opened directly via
 // `file://`. The IIFE attaches its public symbols to a single global
 // namespace, `window.GastroenterologyAssessment`.
-(function () {
-'use strict';
-window.GastroenterologyAssessment = window.GastroenterologyAssessment || {};
 
 /**
  * Build a fresh, fully-blank assessment.
@@ -395,13 +392,4 @@ function bristolStoolDescription(type) {
   }
 }
 
-Object.assign(window.GastroenterologyAssessment, {
-  emptyAssessment,
-  calculateBMI,
-  bmiCategory,
-  severityLevelFromScore,
-  severityLabel,
-  severityClass,
-  bristolStoolDescription
-});
-})();
+export { emptyAssessment, calculateBMI, bmiCategory, severityLevelFromScore, severityLabel, severityClass, bristolStoolDescription };

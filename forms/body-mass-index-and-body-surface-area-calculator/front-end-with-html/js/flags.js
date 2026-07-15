@@ -1,3 +1,5 @@
+import { ASIAN_HIGH, ASIAN_INCREASED, BMI_MAX, BMI_MIN, BMI_NORMAL, BMI_OBESE_3, HEIGHT_MAX, HEIGHT_MIN, WEIGHT_MAX, WEIGHT_MIN } from './rules.js';
+
 // Flagged-issue detection (red flags). Independent of the WHO category (which the
 // grader produces), this module raises clinician-facing safety flags per spec §5,
 // using the unrounded BMI and the raw height/weight inputs:
@@ -20,22 +22,6 @@
  */
 
 // Wrapped in an IIFE; published via window.BmiBsaCalculator.
-(function () {
-'use strict';
-window.BmiBsaCalculator =
-  window.BmiBsaCalculator || {};
-const {
-  BMI_NORMAL,
-  BMI_OBESE_3,
-  ASIAN_INCREASED,
-  ASIAN_HIGH,
-  HEIGHT_MIN,
-  HEIGHT_MAX,
-  WEIGHT_MIN,
-  WEIGHT_MAX,
-  BMI_MIN,
-  BMI_MAX
-} = window.BmiBsaCalculator;
 
 /**
  * @param {AssessmentData} data
@@ -150,5 +136,4 @@ function detectFlaggedIssues(data, bmi) {
   return flags;
 }
 
-window.BmiBsaCalculator.detectFlaggedIssues = detectFlaggedIssues;
-})();
+export { detectFlaggedIssues };

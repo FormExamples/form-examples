@@ -1,3 +1,8 @@
+import { detectAdditionalFlags } from './flagged-issues.js';
+import { gradeOET } from './oet-grader.js';
+import { clinicalCriteria, criterionRegistry, linguisticCriteria } from './rules.js';
+import { CRITERIA, emptyAssessment, gradeClass, gradeLabel } from './types.js';
+
 // Medical Language Speaking Assessment for Cymraeg — examiner wizard
 // (vanilla JavaScript, no build).
 //
@@ -14,21 +19,6 @@
 // them off here keeps the rest of this file referring to short local
 // names. The whole file is wrapped in an IIFE so its top-level identifiers
 // don't leak to the global scope.
-(function () {
-'use strict';
-
-const NS = window.MedicalLanguageSpeakingAssessmentForCymraeg;
-const {
-  emptyAssessment,
-  gradeLabel,
-  gradeClass,
-  CRITERIA,
-  criterionRegistry,
-  linguisticCriteria,
-  clinicalCriteria,
-  gradeOET,
-  detectAdditionalFlags
-} = NS;
 
 const TOTAL_STEPS = 5;
 
@@ -996,4 +986,3 @@ if (document.readyState === 'loading') {
 } else {
   init();
 }
-})();

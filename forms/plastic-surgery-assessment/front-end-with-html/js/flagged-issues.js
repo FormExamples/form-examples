@@ -8,10 +8,6 @@
  * @typedef {import('./types.js').AdditionalFlag} AdditionalFlag
  */
 
-(function () {
-'use strict';
-window.PlasticSurgeryAssessment = window.PlasticSurgeryAssessment || {};
-
 /**
  * @param {AssessmentData} data
  * @returns {AdditionalFlag[]}
@@ -254,5 +250,4 @@ function detectAdditionalFlags(data) {
   return flags;
 }
 
-window.PlasticSurgeryAssessment.detectAdditionalFlags = detectAdditionalFlags;
-})();
+export { detectAdditionalFlags };

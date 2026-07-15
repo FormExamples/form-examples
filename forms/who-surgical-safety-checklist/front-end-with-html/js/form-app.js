@@ -1,3 +1,7 @@
+import { download, openPrintable, toCsv, toJson, toPrintableHtml, toTsv, toXml } from './exports.js';
+import { computeFlags } from './flags.js';
+import { deriveStatus, emptyChecklist, emptyTeamMember, isSignInComplete, isSignOutComplete, isTimeOutComplete, statusLabel } from './types.js';
+
 // WHO Surgical Safety Checklist — single-page form controller (vanilla JS).
 //
 // Renders five fieldset sections (Case details, Sign In, Time Out, Sign Out,
@@ -9,28 +13,6 @@
 // Sibling files loaded as plain <script> tags (in order) attach their public
 // API to `window.WhoSurgicalSafetyChecklist`. The whole file is wrapped in an
 // IIFE so its locals do not leak to the global scope.
-
-(function () {
-'use strict';
-
-const NS = window.WhoSurgicalSafetyChecklist;
-const {
-  emptyChecklist,
-  emptyTeamMember,
-  deriveStatus,
-  isSignInComplete,
-  isTimeOutComplete,
-  isSignOutComplete,
-  statusLabel,
-  computeFlags,
-  toJson,
-  toXml,
-  toCsv,
-  toTsv,
-  toPrintableHtml,
-  download,
-  openPrintable
-} = NS;
 
 // ----------------------------------------------------------------------
 // Persistence
@@ -1423,8 +1405,5 @@ if (document.readyState === 'loading') {
 }
 
 // Expose a small public surface for debugging in the browser console.
-Object.assign(window.WhoSurgicalSafetyChecklist, {
-  _getState: () => state,
-  _submitForm: submitForm
-});
-})();
+export const _getState = () => state;
+export const _submitForm = submitForm;

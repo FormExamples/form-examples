@@ -4,10 +4,6 @@
 // clinician, independent of the MRC grade. Mirrors the SvelteKit
 // `src/lib/engine/flagged-issues.ts`.
 
-(function () {
-'use strict';
-window.RespirologyAssessment = window.RespirologyAssessment || {};
-
 /**
  * @param {import('./types.js').AssessmentData} data
  * @returns {import('./types.js').AdditionalFlag[]}
@@ -230,5 +226,4 @@ function detectAdditionalFlags(data) {
   return flags;
 }
 
-window.RespirologyAssessment.detectAdditionalFlags = detectAdditionalFlags;
-})();
+export { detectAdditionalFlags };

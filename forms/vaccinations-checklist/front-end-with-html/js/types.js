@@ -255,9 +255,6 @@
 // classic <script> (no ES modules) so the page can be opened directly via
 // `file://`. The IIFE attaches its public symbols to a single global
 // namespace, `window.VaccinationsChecklist`.
-(function () {
-'use strict';
-window.VaccinationsChecklist = window.VaccinationsChecklist || {};
 
 /**
  * Build a fresh, fully-blank assessment.
@@ -510,14 +507,4 @@ function gradeLabel(grade) {
   }
 }
 
-Object.assign(window.VaccinationsChecklist, {
-  emptyAssessment,
-  calculateBMI,
-  bmiCategory,
-  complianceStatusLabel,
-  complianceStatusClass,
-  riskLevelLabel,
-  riskLevelClass,
-  gradeLabel
-});
-})();
+export { emptyAssessment, calculateBMI, bmiCategory, complianceStatusLabel, complianceStatusClass, riskLevelLabel, riskLevelClass, gradeLabel };

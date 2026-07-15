@@ -1,3 +1,7 @@
+import { detectFlaggedIssues } from './flags.js';
+import { deriveOverallOutcome, deriveReferralStatus, deriveReferrals, deriveSampleQuality, normaliseConditionResults } from './rules.js';
+import { computeAgeAtSampleDays } from './types.js';
+
 // Newborn blood spot grader. Pure function `gradeBloodspot(data)`, no I/O.
 //
 // Orchestrates the classification helpers in `rules.js` and the flag detection
@@ -16,18 +20,6 @@
  */
 
 // Wrapped in an IIFE; published via window.NewbornBloodSpotScreening.
-(function () {
-'use strict';
-window.NewbornBloodSpotScreening = window.NewbornBloodSpotScreening || {};
-const {
-  computeAgeAtSampleDays,
-  normaliseConditionResults,
-  deriveReferrals,
-  deriveOverallOutcome,
-  deriveReferralStatus,
-  deriveSampleQuality,
-  detectFlaggedIssues
-} = window.NewbornBloodSpotScreening;
 
 /**
  * Classify a newborn blood spot screening record.
@@ -63,5 +55,4 @@ function gradeBloodspot(data) {
   };
 }
 
-window.NewbornBloodSpotScreening.gradeBloodspot = gradeBloodspot;
-})();
+export { gradeBloodspot };

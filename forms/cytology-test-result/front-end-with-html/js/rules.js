@@ -19,9 +19,6 @@
  */
 
 // Wrapped in an IIFE; published via window.CytologyTestResult.
-(function () {
-'use strict';
-window.CytologyTestResult = window.CytologyTestResult || {};
 
 // ----------------------------------------------------------------------
 // Cytology-finding predicates (mirror `utils.ts`)
@@ -504,15 +501,4 @@ function gradeFollowUp(r, classification, severity) {
   };
 }
 
-Object.assign(window.CytologyTestResult, {
-  hasHighGradeCategory,
-  hasLowGradeCategory,
-  hasCriticalFinding,
-  hasAnyAbnormalFinding,
-  hasIsolatedHpvPositive,
-  classifyResult,
-  gradeSeverity,
-  gradeCompleteness,
-  gradeFollowUp
-});
-})();
+export { hasHighGradeCategory, hasLowGradeCategory, hasCriticalFinding, hasAnyAbnormalFinding, hasIsolatedHpvPositive, classifyResult, gradeSeverity, gradeCompleteness, gradeFollowUp };

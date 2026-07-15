@@ -1,3 +1,6 @@
+import { satisfactionQuestions } from './satisfaction-questions.js';
+import { satisfactionCategory } from './types.js';
+
 // ESS (Encounter Satisfaction Score) grader. Pure functions: take an
 // `AssessmentData` object and return the composite mean score (1.0-5.0),
 // its category, and per-domain breakdowns.
@@ -17,10 +20,6 @@
  */
 
 // Wrapped in an IIFE; published via window.EncounterSatisfaction.
-(function () {
-'use strict';
-window.EncounterSatisfaction = window.EncounterSatisfaction || {};
-const { satisfactionQuestions, satisfactionCategory } = window.EncounterSatisfaction;
 
 /**
  * Calculate the composite ESS score, category, and domain breakdown.
@@ -79,5 +78,4 @@ function calculateSatisfaction(data) {
   };
 }
 
-window.EncounterSatisfaction.calculateSatisfaction = calculateSatisfaction;
-})();
+export { calculateSatisfaction };

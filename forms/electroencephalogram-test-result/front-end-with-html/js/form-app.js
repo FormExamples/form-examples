@@ -1,3 +1,6 @@
+import { calculateGrade } from './grader.js';
+import { abnormalitySeverityClass, abnormalitySeverityLabel, backgroundRhythmLabel, eegTypeLabel, emptyResult, followUpUrgencyClass, followUpUrgencyLabel, priorityLabel, recommendationLabel, recordingQualityLabel, reportStatusLabel, resultClassificationClass, resultClassificationLabel } from './types.js';
+
 // Electroencephalogram (EEG) Test Result — reporting-clinician wizard
 // (vanilla JavaScript, no build).
 //
@@ -15,26 +18,6 @@
 // exports to `window.ElectroencephalogramTestResult`. Pulling them off here
 // keeps the rest of this file referring to short local names. The whole file
 // is wrapped in an IIFE so its top-level identifiers don't leak.
-(function () {
-'use strict';
-
-const NS = window.ElectroencephalogramTestResult;
-const {
-  emptyResult,
-  resultClassificationLabel,
-  abnormalitySeverityLabel,
-  followUpUrgencyLabel,
-  eegTypeLabel,
-  recordingQualityLabel,
-  backgroundRhythmLabel,
-  reportStatusLabel,
-  recommendationLabel,
-  priorityLabel,
-  resultClassificationClass,
-  abnormalitySeverityClass,
-  followUpUrgencyClass,
-  calculateGrade
-} = NS;
 
 // ----------------------------------------------------------------------
 // Persistence
@@ -1018,4 +1001,3 @@ if (document.readyState === 'loading') {
 } else {
   init();
 }
-})();

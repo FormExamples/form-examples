@@ -5,11 +5,6 @@
 // three control classes, all three review-completeness statuses, every
 // hypertension stage, and set the severe flag whenever clinic BP was >= 180/120.
 
-(function () {
-'use strict';
-window.HypertensionReviewDashboard =
-  window.HypertensionReviewDashboard || {};
-
 /** @type {import('./dashboard-types.js').ReviewRow[]} */
 const sampleReviews = [
   {
@@ -102,5 +97,4 @@ const sampleReviews = [
   }
 ];
 
-window.HypertensionReviewDashboard.sampleReviews = sampleReviews;
-})();
+export { sampleReviews };

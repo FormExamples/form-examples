@@ -1,13 +1,12 @@
+import { fetchLpas } from './api.js';
+import { sampleLpas } from './data.js';
+
 // LP1H case-manager dashboard — vanilla classic-script app.
 //
 // On boot we fetch LPAs from the backend; on any failure (or empty response)
 // we fall back to sample data and show a small banner. The table is sortable
 // (click any column header) and filterable (search box + validity, stage,
 // jurisdiction, and decision-rule dropdowns).
-
-(function () {
-'use strict';
-const { fetchLpas, sampleLpas } = window.UkLpaDashboard;
 
 /** @type {import('./types.js').LpaRow[]} */
 let lpas = [];
@@ -261,4 +260,3 @@ if (document.readyState === 'loading') {
 } else {
   boot();
 }
-})();

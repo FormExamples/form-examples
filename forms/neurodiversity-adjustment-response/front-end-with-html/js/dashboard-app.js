@@ -1,3 +1,7 @@
+import { fetchResponses } from './api.js';
+import { followUpUrgencyLabel, legalRiskBandLabel, outcomeClassificationLabel, responseStatusLabel } from './dashboard-types.js';
+import { sampleResponses } from './data.js';
+
 // Neurodiversity Adjustment Response — dashboard (vanilla classic-script app).
 //
 // On boot we fetch the response list from the backend; on any failure (or empty
@@ -10,16 +14,6 @@
 // their exports to `window.NeurodiversityAdjustmentResponseDashboard`. The
 // whole file is wrapped in an IIFE so its top-level identifiers do not leak to
 // the global scope.
-(function () {
-'use strict';
-const {
-  fetchResponses,
-  sampleResponses,
-  outcomeClassificationLabel,
-  legalRiskBandLabel,
-  followUpUrgencyLabel,
-  responseStatusLabel
-} = window.NeurodiversityAdjustmentResponseDashboard;
 
 // ----------------------------------------------------------------------
 // State
@@ -479,4 +473,3 @@ if (document.readyState === 'loading') {
 } else {
   init();
 }
-})();

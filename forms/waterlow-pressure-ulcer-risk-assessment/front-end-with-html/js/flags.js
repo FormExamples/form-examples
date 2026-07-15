@@ -22,11 +22,6 @@
  */
 
 // Wrapped in an IIFE; published via window.WaterlowPressureUlcerRiskAssessment.
-(function () {
-'use strict';
-window.WaterlowPressureUlcerRiskAssessment =
-  window.WaterlowPressureUlcerRiskAssessment || {};
-const NS = window.WaterlowPressureUlcerRiskAssessment;
 
 // The six core category inputs (build, skin, sex, age, continence, mobility)
 // used for the completeness check. Each is [section, field].
@@ -142,5 +137,4 @@ function detectFlaggedIssues(data, grade) {
   return flags;
 }
 
-NS.detectFlaggedIssues = detectFlaggedIssues;
-})();
+export { detectFlaggedIssues };

@@ -16,10 +16,6 @@
  */
 
 // Wrapped in an IIFE; published via window.WellsScoreForPulmonaryEmbolism.
-(function () {
-'use strict';
-window.WellsScoreForPulmonaryEmbolism =
-  window.WellsScoreForPulmonaryEmbolism || {};
 
 // The six yes/no criterion inputs, in wizard order, with a human label for the
 // incomplete-assessment flag. The numeric heart rate is checked separately.
@@ -109,5 +105,4 @@ function detectFlaggedIssues(data, wellsScore) {
   return flags;
 }
 
-window.WellsScoreForPulmonaryEmbolism.detectFlaggedIssues = detectFlaggedIssues;
-})();
+export { detectFlaggedIssues };

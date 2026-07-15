@@ -1,3 +1,5 @@
+import { isPredictiveTest, isPrenatalRequest } from './types.js';
+
 // Safety-flag detection for the Genetic Test Request engine.
 //
 // Pure function returning safety flags using the grade_flag categories from
@@ -8,12 +10,6 @@
 // Each flag is { flagId, category, priority, description, suggestedAction }.
 // Flag IDs are stable and identical across every front-end and the back-end.
 // Wrapped in an IIFE; published via `window.GeneticTestRequest`.
-
-(function () {
-'use strict';
-window.GeneticTestRequest = window.GeneticTestRequest || {};
-const NS = window.GeneticTestRequest;
-const { isPredictiveTest, isPrenatalRequest } = NS;
 
 /**
  * Detect safety flags for a genetic test request.
@@ -109,5 +105,4 @@ function detectFlags(data, context) {
   return flags;
 }
 
-Object.assign(NS, { detectFlags });
-})();
+export { detectFlags };

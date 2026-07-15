@@ -6,11 +6,6 @@
 // critical / inconclusive), the severity ladder, and the follow-up urgency
 // bands, with critical-alert rows whose bladder tumours raised two flags.
 
-(function () {
-'use strict';
-window.CystoscopyTestResultDashboard =
-  window.CystoscopyTestResultDashboard || {};
-
 /** @type {import('./dashboard-types.js').ReportRow[]} */
 const sampleReports = [
   {
@@ -87,5 +82,4 @@ const sampleReports = [
   }
 ];
 
-window.CystoscopyTestResultDashboard.sampleReports = sampleReports;
-})();
+export { sampleReports };

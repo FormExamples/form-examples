@@ -1,3 +1,6 @@
+import { calculateGrade } from './grader.js';
+import { diagnosisStatusLabel, emptyRequest, impactLabel } from './types.js';
+
 // Neurodiversity Adjustment Request — reasonable-adjustments wizard (vanilla JS).
 //
 // Single-page continuous wizard: every section is rendered into the page in
@@ -9,17 +12,6 @@
 // Sibling files loaded as plain `<script>` tags (in order) attach their exports
 // to `window.NeurodiversityAdjustmentRequest`. The whole file is wrapped in an
 // IIFE so its top-level identifiers don't leak to the global scope.
-
-(function () {
-'use strict';
-
-const NS = window.NeurodiversityAdjustmentRequest;
-const {
-  emptyRequest,
-  diagnosisStatusLabel,
-  impactLabel,
-  calculateGrade
-} = NS;
 
 // ----------------------------------------------------------------------
 // Persistence
@@ -870,4 +862,3 @@ if (document.readyState === 'loading') {
 } else {
   init();
 }
-})();

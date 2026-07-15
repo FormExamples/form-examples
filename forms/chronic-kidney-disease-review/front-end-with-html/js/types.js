@@ -176,9 +176,6 @@
 // classic <script> (no ES modules) so the page can be opened directly via
 // `file://`. The IIFE attaches its public symbols to a single global
 // namespace, `window.ChronicKidneyDiseaseReview`.
-(function () {
-'use strict';
-window.ChronicKidneyDiseaseReview = window.ChronicKidneyDiseaseReview || {};
 
 /**
  * Build a fresh, fully-blank review. Text / enum fields default to `''`;
@@ -372,19 +369,4 @@ function priorityClass(priority) {
   }
 }
 
-Object.assign(window.ChronicKidneyDiseaseReview, {
-  emptyAssessment,
-  gfrCategoryLabel,
-  gfrCategoryClass,
-  albuminuriaCategoryLabel,
-  albuminuriaCategoryClass,
-  kdigoRiskZoneLabel,
-  kdigoRiskZoneClass,
-  reviewStatusLabel,
-  reviewStatusClass,
-  clinicianRoleLabel,
-  referralDecisionLabel,
-  priorityLabel,
-  priorityClass
-});
-})();
+export { emptyAssessment, gfrCategoryLabel, gfrCategoryClass, albuminuriaCategoryLabel, albuminuriaCategoryClass, kdigoRiskZoneLabel, kdigoRiskZoneClass, reviewStatusLabel, reviewStatusClass, clinicianRoleLabel, referralDecisionLabel, priorityLabel, priorityClass };

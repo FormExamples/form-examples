@@ -1,3 +1,7 @@
+import { calculateGrade } from './grader.js';
+import { hasCriticalFinding } from './rules.js';
+import { abnormalitySeverityClass, abnormalitySeverityLabel, bronchodilatorReversibilityLabel, emptyResult, followUpUrgencyClass, followUpUrgencyLabel, priorityLabel, recommendationLabel, reportStatusLabel, resultClassificationClass, resultClassificationLabel, severityLabel, testTypeLabel, ventilatoryPatternLabel } from './types.js';
+
 // Pulmonary Function Test Result — report-entry wizard
 // (vanilla JavaScript, no build).
 //
@@ -15,28 +19,6 @@
 // exports to `window.PulmonaryFunctionTestResult`. Pulling them off here
 // keeps the rest of this file referring to short local names. The whole file
 // is wrapped in an IIFE so its top-level identifiers don't leak.
-(function () {
-'use strict';
-
-const NS = window.PulmonaryFunctionTestResult;
-const {
-  emptyResult,
-  resultClassificationLabel,
-  abnormalitySeverityLabel,
-  followUpUrgencyLabel,
-  testTypeLabel,
-  reportStatusLabel,
-  ventilatoryPatternLabel,
-  severityLabel,
-  bronchodilatorReversibilityLabel,
-  recommendationLabel,
-  priorityLabel,
-  resultClassificationClass,
-  abnormalitySeverityClass,
-  followUpUrgencyClass,
-  hasCriticalFinding,
-  calculateGrade
-} = NS;
 
 // ----------------------------------------------------------------------
 // Persistence
@@ -1082,4 +1064,3 @@ if (document.readyState === 'loading') {
 } else {
   init();
 }
-})();

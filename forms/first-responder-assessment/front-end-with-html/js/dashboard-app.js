@@ -1,3 +1,6 @@
+import { fetchResponders } from './api.js';
+import { sampleResponders } from './data.js';
+
 // First Responder Assessment - management dashboard (vanilla classic-script app).
 //
 // On boot we fetch the responder list from the backend; on any failure (or
@@ -14,12 +17,6 @@
 // Pulling them off here keeps the rest of this file referring to short
 // local names. The whole file is wrapped in an IIFE so its top-level
 // identifiers do not leak to the global scope.
-(function () {
-'use strict';
-const {
-  fetchResponders,
-  sampleResponders
-} = window.FirstResponderAssessmentDashboard;
 
 // ----------------------------------------------------------------------
 // State
@@ -416,4 +413,3 @@ if (document.readyState === 'loading') {
 } else {
   init();
 }
-})();

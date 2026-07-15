@@ -1,3 +1,7 @@
+import { fetchReviews } from './api.js';
+import { effectivenessBandLabel, nextStepUrgencyLabel, reviewStatusLabel, wellbeingRiskBandLabel } from './dashboard-types.js';
+import { sampleReviews } from './data.js';
+
 // Neurodiversity Adjustment Review — dashboard (vanilla classic-script app).
 //
 // On boot we fetch the review list from the backend; on any failure (or empty
@@ -10,16 +14,6 @@
 // their exports to `window.NeurodiversityAdjustmentReviewDashboard`. The
 // whole file is wrapped in an IIFE so its top-level identifiers do not leak to
 // the global scope.
-(function () {
-'use strict';
-const {
-  fetchReviews,
-  sampleReviews,
-  effectivenessBandLabel,
-  wellbeingRiskBandLabel,
-  nextStepUrgencyLabel,
-  reviewStatusLabel
-} = window.NeurodiversityAdjustmentReviewDashboard;
 
 // ----------------------------------------------------------------------
 // State
@@ -469,4 +463,3 @@ if (document.readyState === 'loading') {
 } else {
   init();
 }
-})();

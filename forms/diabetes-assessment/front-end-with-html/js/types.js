@@ -173,9 +173,6 @@
 // classic <script> (no ES modules) so the page can be opened directly via
 // `file://`. The IIFE attaches its public symbols to a single global
 // namespace, `window.DiabetesAssessment`.
-(function () {
-'use strict';
-window.DiabetesAssessment = window.DiabetesAssessment || {};
 
 /**
  * Build a fresh, fully-blank assessment.
@@ -420,13 +417,4 @@ function controlLevelClass(level) {
   }
 }
 
-Object.assign(window.DiabetesAssessment, {
-  emptyAssessment,
-  hba1cMmolMol,
-  countComplications,
-  calculateCompositeScore,
-  collectScoredItems,
-  controlLevelLabel,
-  controlLevelClass
-});
-})();
+export { emptyAssessment, hba1cMmolMol, countComplications, calculateCompositeScore, collectScoredItems, controlLevelLabel, controlLevelClass };

@@ -1,3 +1,6 @@
+import { calculateGrade } from './grader.js';
+import { abnormalitySeverityClass, abnormalitySeverityLabel, bodyRegionLabel, emptyResult, examinationAdequacyLabel, followUpUrgencyClass, followUpUrgencyLabel, lateralityLabel, priorityLabel, recommendationLabel, reportStatusLabel, resultClassificationClass, resultClassificationLabel } from './types.js';
+
 // Ultrasound Test Result — reporting-clinician wizard
 // (vanilla JavaScript, no build).
 //
@@ -15,26 +18,6 @@
 // exports to `window.UltrasoundTestResult`. Pulling them off here keeps the
 // rest of this file referring to short local names. The whole file is wrapped
 // in an IIFE so its top-level identifiers don't leak.
-(function () {
-'use strict';
-
-const NS = window.UltrasoundTestResult;
-const {
-  emptyResult,
-  resultClassificationLabel,
-  abnormalitySeverityLabel,
-  followUpUrgencyLabel,
-  bodyRegionLabel,
-  lateralityLabel,
-  examinationAdequacyLabel,
-  reportStatusLabel,
-  recommendationLabel,
-  priorityLabel,
-  resultClassificationClass,
-  abnormalitySeverityClass,
-  followUpUrgencyClass,
-  calculateGrade
-} = NS;
 
 // ----------------------------------------------------------------------
 // Persistence
@@ -1067,4 +1050,3 @@ if (document.readyState === 'loading') {
 } else {
   init();
 }
-})();

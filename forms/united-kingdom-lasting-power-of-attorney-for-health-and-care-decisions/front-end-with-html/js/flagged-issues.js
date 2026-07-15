@@ -1,9 +1,5 @@
 // Non-statutory ambiguity and risk flag detection.
 
-(function () {
-'use strict';
-window.UkLpaForm = window.UkLpaForm || {};
-
 function detectAdditionalFlags(app) {
   const flags = [];
 
@@ -68,5 +64,4 @@ function detectAdditionalFlags(app) {
   return flags;
 }
 
-window.UkLpaForm.detectAdditionalFlags = detectAdditionalFlags;
-})();
+export { detectAdditionalFlags };

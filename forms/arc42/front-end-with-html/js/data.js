@@ -7,11 +7,6 @@
 // `sampleDocumentRows`. The values here are the engine output for those
 // documents, so the HTML dashboard, the Svelte dashboard, and the report agree.
 
-(function () {
-'use strict';
-window.Arc42Dashboard =
-  window.Arc42Dashboard || {};
-
 /** @type {import('./dashboard-types.js').DashboardRow[]} */
 const sampleDocuments = [
   {
@@ -56,5 +51,4 @@ const sampleDocuments = [
   }
 ];
 
-window.Arc42Dashboard.sampleDocuments = sampleDocuments;
-})();
+export { sampleDocuments };

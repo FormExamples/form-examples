@@ -6,11 +6,6 @@
 // Axis D urgencies, both complete and incomplete reports, and a range of flag
 // counts.
 
-(function () {
-'use strict';
-window.BloodCrossMatchTestResultDashboard =
-  window.BloodCrossMatchTestResultDashboard || {};
-
 /** @type {import('./dashboard-types.js').ReportRow[]} */
 const sampleReports = [
   {
@@ -99,5 +94,4 @@ const sampleReports = [
   }
 ];
 
-window.BloodCrossMatchTestResultDashboard.sampleReports = sampleReports;
-})();
+export { sampleReports };

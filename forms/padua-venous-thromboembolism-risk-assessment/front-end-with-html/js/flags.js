@@ -18,10 +18,6 @@
  */
 
 // Wrapped in an IIFE; published via window.PaduaVenousThromboembolismRiskAssessment.
-(function () {
-'use strict';
-window.PaduaVenousThromboembolismRiskAssessment =
-  window.PaduaVenousThromboembolismRiskAssessment || {};
 
 /**
  * @param {AssessmentData} data
@@ -111,6 +107,4 @@ function detectFlaggedIssues(data, paduaScore) {
   return flags;
 }
 
-window.PaduaVenousThromboembolismRiskAssessment.detectFlaggedIssues =
-  detectFlaggedIssues;
-})();
+export { detectFlaggedIssues };

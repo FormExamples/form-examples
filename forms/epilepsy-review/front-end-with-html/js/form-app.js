@@ -1,3 +1,6 @@
+import { review } from './grader.js';
+import { emptyAssessment, priorityClass, priorityLabel, reviewStatusClass, reviewStatusLabel, seizureControlClass, seizureControlLabel } from './types.js';
+
 // Epilepsy Annual Review — single-page wizard (vanilla JavaScript, no build).
 //
 // Single continuous wizard: every step is rendered into the page in document
@@ -13,20 +16,6 @@
 // Sibling files loaded as plain `<script>` tags (in order) attach their exports
 // to `window.EpilepsyReview`. The whole file is wrapped in an IIFE so its
 // top-level identifiers don't leak.
-(function () {
-'use strict';
-
-const NS = window.EpilepsyReview;
-const {
-  emptyAssessment,
-  seizureControlLabel,
-  seizureControlClass,
-  reviewStatusLabel,
-  reviewStatusClass,
-  priorityLabel,
-  priorityClass,
-  review
-} = NS;
 
 // ----------------------------------------------------------------------
 // Persistence
@@ -1012,4 +1001,3 @@ if (document.readyState === 'loading') {
 } else {
   init();
 }
-})();

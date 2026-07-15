@@ -172,10 +172,6 @@
 // <script> (no ES modules) so the page can be opened directly via `file://`.
 // The IIFE attaches its public symbols to a single global namespace,
 // `window.ChronicObstructivePulmonaryDiseaseReview`.
-(function () {
-'use strict';
-window.ChronicObstructivePulmonaryDiseaseReview =
-  window.ChronicObstructivePulmonaryDiseaseReview || {};
 
 /**
  * Build a fresh, fully-blank review.
@@ -390,22 +386,4 @@ function priorityLabel(priority) {
   }
 }
 
-Object.assign(window.ChronicObstructivePulmonaryDiseaseReview, {
-  emptyAssessment,
-  goldGradeLabel,
-  goldGradeShort,
-  goldGradeClass,
-  abeGroupLabel,
-  abeGroupShort,
-  abeGroupClass,
-  reviewStatusLabel,
-  reviewStatusClass,
-  axisLabel,
-  axisClass,
-  clinicianRoleLabel,
-  reviewTypeLabel,
-  sexLabel,
-  ageBandLabel,
-  priorityLabel
-});
-})();
+export { emptyAssessment, goldGradeLabel, goldGradeShort, goldGradeClass, abeGroupLabel, abeGroupShort, abeGroupClass, reviewStatusLabel, reviewStatusClass, axisLabel, axisClass, clinicianRoleLabel, reviewTypeLabel, sexLabel, ageBandLabel, priorityLabel };

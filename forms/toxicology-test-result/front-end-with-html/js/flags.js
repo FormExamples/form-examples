@@ -1,3 +1,5 @@
+import { hasAnyResultValue, hasToxicResult } from './rules.js';
+
 // Safety-critical flag detection for the Toxicology Test Result.
 //
 // Faithful vanilla-JavaScript port of the SvelteKit engine module
@@ -15,10 +17,6 @@
 // Wrapped in an IIFE; published via window.ToxicologyTestResult.
 // Depends on rules.js (hasToxicResult, hasAnyResultValue), so it must load
 // after it.
-(function () {
-'use strict';
-window.ToxicologyTestResult = window.ToxicologyTestResult || {};
-const { hasToxicResult, hasAnyResultValue } = window.ToxicologyTestResult;
 
 /**
  * Detect the safety-critical flags for a report.
@@ -155,7 +153,4 @@ function detectFlags(r) {
   return flags;
 }
 
-Object.assign(window.ToxicologyTestResult, {
-  detectFlags
-});
-})();
+export { detectFlags };

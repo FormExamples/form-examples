@@ -2,11 +2,10 @@
 // page works opened directly via file://. Public symbols are attached to
 // window.MedicalWaitingListCard.
 
-(function (root) {
-  const ns = (root.MedicalWaitingListCard = root.MedicalWaitingListCard || {});
+  
 
   // Steps shown in the wizard.
-  ns.STEPS = [
+  export const STEPS = [
     { number: 1, slug: 'practitioner', title: 'Practitioner identification' },
     { number: 2, slug: 'patient', title: 'Patient identification' },
     { number: 3, slug: 'referral', title: 'Referral details' },
@@ -16,9 +15,9 @@
     { number: 7, slug: 'signoff', title: 'Sign-off' }
   ];
 
-  ns.TOTAL_STEPS = ns.STEPS.length;
+  export const TOTAL_STEPS = STEPS.length;
 
-  ns.createEmptyCard = function createEmptyCard() {
+  export const createEmptyCard = function createEmptyCard() {
     return {
       status: 'draft',
       entryDate: null,
@@ -94,4 +93,3 @@
       }
     };
   };
-})(window);

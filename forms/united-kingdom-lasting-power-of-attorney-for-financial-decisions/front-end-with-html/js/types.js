@@ -13,12 +13,6 @@
 //
 // Wrapped in an IIFE; published via `window.UkLpaFinancialDecisions`.
 
-(function () {
-'use strict';
-window.UkLpaFinancialDecisions =
-  window.UkLpaFinancialDecisions || {};
-const NS = window.UkLpaFinancialDecisions;
-
 let personCounter = 0;
 /** Stable-ish incrementing id (mirrors the SvelteKit factory nextId). */
 function nextId(prefix) {
@@ -175,15 +169,4 @@ function compositeRiskLabel(risk) {
   }
 }
 
-Object.assign(NS, {
-  nextId,
-  createEmptyAddress,
-  createEmptyPerson,
-  createEmptyCertificateProvider,
-  emptyLpa,
-  decisionModeLabel,
-  whenAttorneysCanActLabel,
-  bandLabel,
-  compositeRiskLabel
-});
-})();
+export { nextId, createEmptyAddress, createEmptyPerson, createEmptyCertificateProvider, emptyLpa, decisionModeLabel, whenAttorneysCanActLabel, bandLabel, compositeRiskLabel };

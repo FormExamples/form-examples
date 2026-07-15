@@ -7,10 +7,6 @@
 // to LTOT + non-invasive ventilation; NHS numbers in the canonical
 // "NNN NNN NNNN" display form.
 
-(function () {
-'use strict';
-window.RespirologyAssessmentDashboard = window.RespirologyAssessmentDashboard || {};
-
 /** @type {import('./types.js').PatientRow[]} */
 const samplePatients = [
   {
@@ -111,5 +107,4 @@ const samplePatients = [
   }
 ];
 
-window.RespirologyAssessmentDashboard.samplePatients = samplePatients;
-})();
+export { samplePatients };

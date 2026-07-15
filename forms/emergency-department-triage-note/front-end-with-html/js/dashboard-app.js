@@ -1,3 +1,6 @@
+import { fetchTriageNotes } from './api.js';
+import { sampleTriageNotes } from './data.js';
+
 // Emergency Department Triage Note — clinician dashboard (vanilla
 // classic-script app).
 //
@@ -9,12 +12,6 @@
 // Sibling modules loaded as plain `<script>` tags (in dependency order) attach
 // their exports to `window.EmergencyDepartmentTriageNoteDashboard`. The whole
 // file is wrapped in an IIFE so its top-level identifiers do not leak.
-(function () {
-'use strict';
-const {
-  fetchTriageNotes,
-  sampleTriageNotes
-} = window.EmergencyDepartmentTriageNoteDashboard;
 
 // ----------------------------------------------------------------------
 // State
@@ -341,4 +338,3 @@ if (document.readyState === 'loading') {
 } else {
   init();
 }
-})();

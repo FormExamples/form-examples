@@ -1,3 +1,6 @@
+import { fetchCandidates } from './api.js';
+import { sampleCandidates } from './data.js';
+
 // Lifeguard Certification Checklist - training coordinator dashboard
 // (vanilla classic-script app).
 //
@@ -13,10 +16,6 @@
 // keeps the rest of this file referring to short local names. The whole
 // file is wrapped in an IIFE so its top-level identifiers do not leak to
 // the global scope.
-(function () {
-'use strict';
-const NS = window.LifeguardCertificationChecklistDashboard;
-const { fetchCandidates, sampleCandidates } = NS;
 
 // ----------------------------------------------------------------------
 // Configuration
@@ -601,4 +600,3 @@ if (document.readyState === 'loading') {
 } else {
   init();
 }
-})();

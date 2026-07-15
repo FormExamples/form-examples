@@ -6,10 +6,6 @@
 // Medium, High, Very high) with varied occupations and pain severities;
 // NHS numbers in the canonical "NNN NNN NNNN" display form.
 
-(function () {
-'use strict';
-window.ErgonomicAssessmentDashboard = window.ErgonomicAssessmentDashboard || {};
-
 /** @type {import('./types.js').PatientRow[]} */
 const samplePatients = [
   {
@@ -134,5 +130,4 @@ const samplePatients = [
   }
 ];
 
-window.ErgonomicAssessmentDashboard.samplePatients = samplePatients;
-})();
+export { samplePatients };

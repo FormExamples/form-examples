@@ -1,3 +1,6 @@
+import { rules } from './rules.js';
+import { maxRiskLevel } from './types.js';
+
 // Genetics Assessment grader. Pure functions: take an `AssessmentData`
 // object, compute the Manchester score, count Bethesda criteria met,
 // extract PREMM5 and Tyrer-Cuzick external scores, build a grader context,
@@ -11,11 +14,6 @@
  * @typedef {import('./types.js').Relative} Relative
  * @typedef {import('./rules.js').GraderContext} GraderContext
  */
-
-(function () {
-'use strict';
-window.GeneticsAssessment = window.GeneticsAssessment || {};
-const { rules, maxRiskLevel } = window.GeneticsAssessment;
 
 // Manchester scoring weights (Evans 2004 / Evans & Lalloo). Per-cancer
 // points; the breast male/female rows differ between proband and relatives
@@ -237,10 +235,4 @@ function gradeGenetics(data) {
   };
 }
 
-Object.assign(window.GeneticsAssessment, {
-  calculateManchesterScore,
-  countBethesdaMet,
-  buildContext,
-  gradeGenetics
-});
-})();
+export { calculateManchesterScore, countBethesdaMet, buildContext, gradeGenetics };

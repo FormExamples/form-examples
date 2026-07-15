@@ -5,10 +5,6 @@
 // names are camelCase to match the front-end serde / examples convention.
 // Wrapped in an IIFE; published via `window.XRayTestRequest`.
 
-(function () {
-'use strict';
-window.XRayTestRequest = window.XRayTestRequest || {};
-
 /**
  * Build a fresh, fully-blank plain-radiograph (X-ray) request.
  * Strings default to ''; numeric / date fields default to null;
@@ -103,11 +99,4 @@ function indicationLabel(value) {
   return INDICATION_LABELS[value] || value || '';
 }
 
-Object.assign(window.XRayTestRequest, {
-  emptyRequest,
-  bodyRegionLabel,
-  indicationLabel,
-  BODY_REGION_LABELS,
-  INDICATION_LABELS
-});
-})();
+export { emptyRequest, bodyRegionLabel, indicationLabel, BODY_REGION_LABELS, INDICATION_LABELS };

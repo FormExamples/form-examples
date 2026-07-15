@@ -19,9 +19,6 @@
  */
 
 // Wrapped in an IIFE; published via window.ColonoscopyTestResult.
-(function () {
-'use strict';
-window.ColonoscopyTestResult = window.ColonoscopyTestResult || {};
 
 // ----------------------------------------------------------------------
 // Structured-findings predicates (mirror `utils.ts`)
@@ -452,13 +449,4 @@ function gradeFollowUp(r, classification, severity) {
   };
 }
 
-Object.assign(window.ColonoscopyTestResult, {
-  hasCriticalFinding,
-  hasAnyAbnormalFinding,
-  hasOnlyIncidentalFinding,
-  classifyResult,
-  gradeSeverity,
-  gradeCompleteness,
-  gradeFollowUp
-});
-})();
+export { hasCriticalFinding, hasAnyAbnormalFinding, hasOnlyIncidentalFinding, classifyResult, gradeSeverity, gradeCompleteness, gradeFollowUp };

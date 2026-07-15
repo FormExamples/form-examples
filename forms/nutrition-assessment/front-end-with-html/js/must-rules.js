@@ -33,9 +33,6 @@
  */
 
 // Wrapped in an IIFE; published via window.NutritionAssessment.
-(function () {
-'use strict';
-window.NutritionAssessment = window.NutritionAssessment || {};
 
 /** @type {MUSTRule[]} */
 const mustRules = [
@@ -80,5 +77,4 @@ const mustRules = [
   }
 ];
 
-window.NutritionAssessment.mustRules = mustRules;
-})();
+export { mustRules };

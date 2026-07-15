@@ -1,3 +1,5 @@
+import { COMPRESSION_DEPTH_MAX, COMPRESSION_DEPTH_MIN, COMPRESSION_RATE_MAX, COMPRESSION_RATE_MIN, compressionDepthInRange, compressionRateInRange } from './types.js';
+
 // Prioritised flag detection for the BLS Skills Verification report.
 //
 // Independent of the pass/fail outcome (which the grader computes), this
@@ -16,21 +18,6 @@
  * @typedef {import('./types.js').AdditionalFlag} AdditionalFlag
  * @typedef {import('./types.js').FiredRule} FiredRule
  */
-
-(function () {
-'use strict';
-window.CardiopulmonaryResuscitationTraining =
-  window.CardiopulmonaryResuscitationTraining || {};
-
-const NS = window.CardiopulmonaryResuscitationTraining;
-const {
-  COMPRESSION_RATE_MIN,
-  COMPRESSION_RATE_MAX,
-  COMPRESSION_DEPTH_MIN,
-  COMPRESSION_DEPTH_MAX,
-  compressionRateInRange,
-  compressionDepthInRange
-} = NS;
 
 /** Slow AED-shock threshold (seconds). */
 const SLOW_AED_SECONDS = 90;
@@ -178,8 +165,4 @@ function detectAdditionalFlags(data, grading) {
   return flags;
 }
 
-Object.assign(NS, {
-  detectAdditionalFlags,
-  SLOW_AED_SECONDS
-});
-})();
+export { detectAdditionalFlags, SLOW_AED_SECONDS };

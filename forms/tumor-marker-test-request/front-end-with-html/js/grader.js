@@ -1,3 +1,6 @@
+import { detectFlags } from './flags.js';
+import { scoreAppropriateness, scoreCompleteness, scoreInterpretation, scoreTriage } from './rules.js';
+
 // Four-axis grader for the Tumor Marker Test Request.
 //
 // Composes the rule sets in rules.js and the safety flags in flags.js into a
@@ -6,19 +9,6 @@
 // across every front-end and the back-end.
 //
 // Wrapped in an IIFE; published via `window.TumorMarkerTestRequest`.
-
-(function () {
-'use strict';
-window.TumorMarkerTestRequest =
-  window.TumorMarkerTestRequest || {};
-const NS = window.TumorMarkerTestRequest;
-const {
-  scoreAppropriateness,
-  scoreInterpretation,
-  scoreCompleteness,
-  scoreTriage,
-  detectFlags
-} = NS;
 
 /**
  * Derive an overall recommendation for the laboratory vetting desk from the
@@ -102,9 +92,4 @@ function calculateGrade(data) {
   };
 }
 
-Object.assign(NS, {
-  calculateGrade,
-  deriveRecommendation,
-  RECOMMENDATION_LABELS
-});
-})();
+export { calculateGrade, deriveRecommendation, RECOMMENDATION_LABELS };

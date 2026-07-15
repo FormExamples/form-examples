@@ -1,3 +1,7 @@
+import { calculateACT, classifyACTScore, controlLevelClass, controlLevelLabel } from './act-grader.js';
+import { detectAdditionalFlags } from './flagged-issues.js';
+import { bmiCategory, calculateBMI, calculatePeakFlowPercent, emptyAssessment, fev1Severity } from './types.js';
+
 // Asthma Assessment — patient wizard (vanilla JS).
 //
 // Single-page continuous wizard: every section is rendered into the page in
@@ -10,23 +14,6 @@
 // exports to `window.AsthmaAssessment`. Pulling them off here keeps the
 // rest of this file referring to short local names. Whole file is wrapped
 // in an IIFE so its top-level identifiers don't leak to the global scope.
-
-(function () {
-'use strict';
-
-const NS = window.AsthmaAssessment;
-const {
-  emptyAssessment,
-  calculateBMI,
-  bmiCategory,
-  calculatePeakFlowPercent,
-  fev1Severity,
-  calculateACT,
-  classifyACTScore,
-  controlLevelLabel,
-  controlLevelClass,
-  detectAdditionalFlags
-} = NS;
 
 // ----------------------------------------------------------------------
 // Persistence
@@ -1443,4 +1430,3 @@ if (document.readyState === 'loading') {
 } else {
   init();
 }
-})();

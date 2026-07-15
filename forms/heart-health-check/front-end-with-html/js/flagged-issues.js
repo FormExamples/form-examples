@@ -1,3 +1,6 @@
+import { calculateHeartAge, estimateTenYearRisk } from './risk-grader.js';
+import { calculateBMI, calculateTcHdlRatio } from './types.js';
+
 // 13 additional clinical safety flags that are independent of the 20 HHC
 // rules. Mirrors `src/lib/engine/flagged-issues.ts` from the SvelteKit
 // reference. Each flag has a stable ID, a category, a human-readable
@@ -8,16 +11,6 @@
  * @typedef {import('./types.js').AssessmentData} AssessmentData
  * @typedef {import('./types.js').AdditionalFlag} AdditionalFlag
  */
-
-(function () {
-'use strict';
-window.HeartHealthCheck = window.HeartHealthCheck || {};
-const {
-  calculateBMI,
-  calculateTcHdlRatio,
-  estimateTenYearRisk,
-  calculateHeartAge
-} = window.HeartHealthCheck;
 
 /**
  * Detect all "additional" (non-rule) clinical flags raised by the supplied
@@ -186,5 +179,4 @@ function detectAdditionalFlags(data) {
   return flags;
 }
 
-Object.assign(window.HeartHealthCheck, { detectAdditionalFlags });
-})();
+export { detectAdditionalFlags };

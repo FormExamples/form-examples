@@ -17,12 +17,6 @@
  * @typedef {import('./types.js').GradingResult} GradingResult
  */
 
-(function () {
-'use strict';
-window.MedicalLanguageSpeakingAssessmentForEnglish =
-  window.MedicalLanguageSpeakingAssessmentForEnglish || {};
-const NS = window.MedicalLanguageSpeakingAssessmentForEnglish;
-
 /** Coerce numeric-or-null. */
 function n(v) {
   if (v === null || v === undefined || v === '') return null;
@@ -233,5 +227,4 @@ function detectAdditionalFlags(data, grading) {
   return flags;
 }
 
-NS.detectAdditionalFlags = detectAdditionalFlags;
-})();
+export { detectAdditionalFlags };

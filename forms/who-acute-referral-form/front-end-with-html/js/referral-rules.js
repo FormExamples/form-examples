@@ -1,3 +1,5 @@
+import { hasText, isYesNoUnknownAnswered } from './types.js';
+
 // WHO Acute Referral Form - completeness validation rules.
 //
 // Each rule maps to one required field. Conditional fields (Other-precaution
@@ -18,11 +20,6 @@
  * @property {(d: AssessmentData) => boolean} applies
  * @property {(d: AssessmentData) => boolean} isSatisfied
  */
-
-(function () {
-'use strict';
-window.WhoAcuteReferralForm = window.WhoAcuteReferralForm || {};
-const { hasText, isYesNoUnknownAnswered } = window.WhoAcuteReferralForm;
 
 /** @type {ValidationRule[]} */
 const referralRules = [
@@ -304,5 +301,4 @@ const referralRules = [
   }
 ];
 
-window.WhoAcuteReferralForm.referralRules = referralRules;
-})();
+export { referralRules };

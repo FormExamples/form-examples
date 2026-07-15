@@ -1,13 +1,13 @@
+import { calculateBmi, convertMmolToMg, isSmoker } from './types.js';
+
 // Framingham Risk Score — declarative risk rules.
 //
 // Vanilla-JS port of `src/lib/engine/risk-rules.ts`. Each rule has an
 // `evaluate(data, riskPct)` predicate; the grader fires every rule whose
 // predicate returns true. Pure — no side effects.
-(function () {
-  'use strict';
 
-  const NS = window.FraminghamRiskScore;
-  const { convertMmolToMg, calculateBmi, isSmoker } = NS;
+  
+  
 
   /** Total cholesterol normalised to mg/dL, or null. */
   function getTcMg(d) {
@@ -225,7 +225,6 @@
     ];
   }
 
-  Object.assign(window.FraminghamRiskScore, {
-    allRules
-  });
-})();
+  
+
+export { allRules };

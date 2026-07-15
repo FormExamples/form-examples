@@ -8,11 +8,6 @@
 // suspected-angina exercise-treadmill request, a recent-ACS contraindication
 // case, and a severe-aortic-stenosis case.
 
-(function () {
-'use strict';
-window.CardiacStressTestRequestDashboard =
-  window.CardiacStressTestRequestDashboard || {};
-
 /** @type {import('./types.js').RequestRow[]} */
 const sampleRequests = [
   {
@@ -157,5 +152,4 @@ const sampleRequests = [
   }
 ];
 
-window.CardiacStressTestRequestDashboard.sampleRequests = sampleRequests;
-})();
+export { sampleRequests };

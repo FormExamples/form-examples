@@ -5,10 +5,6 @@
 // Twelve realistic rows: spans complete and partial validation, both
 // epilepsy declarations, and a range of high-priority flag counts.
 
-(function () {
-'use strict';
-window.DvlaB1Dashboard = window.DvlaB1Dashboard || {};
-
 /** @type {import('./types.js').PatientRow[]} */
 const samplePatients = [
   {
@@ -145,5 +141,4 @@ const samplePatients = [
   }
 ];
 
-window.DvlaB1Dashboard.samplePatients = samplePatients;
-})();
+export { samplePatients };

@@ -1,3 +1,7 @@
+import { detectFlaggedIssues } from './flags.js';
+import { calculateRockallGrade } from './grader.js';
+import { comorbidityLabel, diagnosisLabel, emptyAssessment, endoscopyPerformedLabel, priorityLabel, riskBandClass, riskBandLabel, shockLabel, stigmataLabel } from './types.js';
+
 // Rockall Score for Upper Gastrointestinal Bleeding — bedside wizard (vanilla
 // JavaScript, no build).
 //
@@ -15,23 +19,6 @@
 // to `window.RockallScoreForUpperGastrointestinalBleeding`. Pulling them off
 // here keeps the rest of this file referring to short local names. The whole
 // file is wrapped in an IIFE so its top-level identifiers don't leak.
-(function () {
-'use strict';
-
-const NS = window.RockallScoreForUpperGastrointestinalBleeding;
-const {
-  emptyAssessment,
-  riskBandLabel,
-  riskBandClass,
-  comorbidityLabel,
-  endoscopyPerformedLabel,
-  diagnosisLabel,
-  stigmataLabel,
-  shockLabel,
-  priorityLabel,
-  calculateRockallGrade,
-  detectFlaggedIssues
-} = NS;
 
 // ----------------------------------------------------------------------
 // Persistence
@@ -1001,4 +988,3 @@ if (document.readyState === 'loading') {
 } else {
   init();
 }
-})();

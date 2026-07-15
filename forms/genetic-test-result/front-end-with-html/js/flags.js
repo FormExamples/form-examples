@@ -1,3 +1,5 @@
+import { hasPathogenicVariant, hasVus } from './rules.js';
+
 // Safety-critical flag detection for the Genetic Test Result.
 //
 // Faithful vanilla-JavaScript port of the SvelteKit engine module
@@ -13,10 +15,6 @@
  */
 
 // Wrapped in an IIFE; published via window.GeneticTestResult.
-(function () {
-'use strict';
-window.GeneticTestResult = window.GeneticTestResult || {};
-const { hasPathogenicVariant, hasVus } = window.GeneticTestResult;
 
 /**
  * Detect the safety-critical flags for a report.
@@ -152,7 +150,4 @@ function detectFlags(r) {
   return flags;
 }
 
-Object.assign(window.GeneticTestResult, {
-  detectFlags
-});
-})();
+export { detectFlags };

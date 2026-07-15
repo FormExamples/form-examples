@@ -1,3 +1,5 @@
+import { hasCriticalFinding, hasModerateValveDisease, hasSevereLvImpairment, hasSevereValveDisease } from './rules.js';
+
 // Safety-critical flag detection for the Echocardiogram Test Result.
 //
 // Faithful vanilla-JavaScript port of the SvelteKit engine module
@@ -15,15 +17,6 @@
 // Wrapped in an IIFE; published via window.EchocardiogramTestResult.
 // Depends on rules.js (the structured-findings predicates), so it must load
 // after it.
-(function () {
-'use strict';
-window.EchocardiogramTestResult = window.EchocardiogramTestResult || {};
-const {
-  hasCriticalFinding,
-  hasSevereValveDisease,
-  hasModerateValveDisease,
-  hasSevereLvImpairment
-} = window.EchocardiogramTestResult;
 
 /**
  * Detect the safety-critical flags for a report.
@@ -192,7 +185,4 @@ function detectFlags(r) {
   return flags;
 }
 
-Object.assign(window.EchocardiogramTestResult, {
-  detectFlags
-});
-})();
+export { detectFlags };

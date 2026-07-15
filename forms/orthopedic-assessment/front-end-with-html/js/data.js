@@ -5,10 +5,6 @@
 // Twelve realistic rows: spans every disability level and surgical-candidate
 // status, with NHS numbers in the canonical "NNN NNN NNNN" display form.
 
-(function () {
-'use strict';
-window.OrthopedicAssessmentDashboard = window.OrthopedicAssessmentDashboard || {};
-
 /** @type {import('./types.js').PatientRow[]} */
 const samplePatients = [
   {
@@ -121,5 +117,4 @@ const samplePatients = [
   }
 ];
 
-window.OrthopedicAssessmentDashboard.samplePatients = samplePatients;
-})();
+export { samplePatients };

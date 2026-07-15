@@ -1,3 +1,5 @@
+import { mrcRules } from './mrc-rules.js';
+
 // MRC Dyspnoea Scale grader.
 //
 // Pure function: evaluates all MRC rules against patient data and returns
@@ -6,19 +8,13 @@
 //
 // Mirrors the SvelteKit `src/lib/engine/mrc-grader.ts`.
 
-(function () {
-'use strict';
-window.RespirologyAssessment = window.RespirologyAssessment || {};
-
-const NS = window.RespirologyAssessment;
-
 /**
  * @param {import('./types.js').AssessmentData} data
  * @returns {{ mrcGrade: 1|2|3|4|5, firedRules: import('./types.js').FiredRule[] }}
  */
 function calculateMRC(data) {
   const firedRules = [];
-  for (const rule of NS.mrcRules) {
+  for (const rule of mrcRules) {
     try {
       if (rule.evaluate(data)) {
         firedRules.push({
@@ -39,5 +35,4 @@ function calculateMRC(data) {
   return { mrcGrade, firedRules };
 }
 
-NS.calculateMRC = calculateMRC;
-})();
+export { calculateMRC };

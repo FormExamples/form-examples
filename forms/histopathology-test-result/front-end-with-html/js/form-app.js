@@ -1,3 +1,7 @@
+import { calculateGrade } from './grader.js';
+import { hasInvolvedMargin, hasUnexpectedMalignancy } from './rules.js';
+import { abnormalitySeverityClass, abnormalitySeverityLabel, emptyResult, followUpUrgencyClass, followUpUrgencyLabel, histologicalGradeLabel, priorityLabel, recommendationLabel, reportStatusLabel, resectionMarginsLabel, resultClassificationClass, resultClassificationLabel, specimenAdequacyLabel } from './types.js';
+
 // Histopathology Test Result — reporting-clinician wizard
 // (vanilla JavaScript, no build).
 //
@@ -15,28 +19,6 @@
 // exports to `window.HistopathologyTestResult`. Pulling them off here keeps
 // the rest of this file referring to short local names. The whole file is
 // wrapped in an IIFE so its top-level identifiers don't leak.
-(function () {
-'use strict';
-
-const NS = window.HistopathologyTestResult;
-const {
-  emptyResult,
-  resultClassificationLabel,
-  abnormalitySeverityLabel,
-  followUpUrgencyLabel,
-  histologicalGradeLabel,
-  resectionMarginsLabel,
-  specimenAdequacyLabel,
-  reportStatusLabel,
-  recommendationLabel,
-  priorityLabel,
-  resultClassificationClass,
-  abnormalitySeverityClass,
-  followUpUrgencyClass,
-  hasUnexpectedMalignancy,
-  hasInvolvedMargin,
-  calculateGrade
-} = NS;
 
 // ----------------------------------------------------------------------
 // Persistence
@@ -1061,4 +1043,3 @@ if (document.readyState === 'loading') {
 } else {
   init();
 }
-})();

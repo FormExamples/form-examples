@@ -195,9 +195,6 @@
 // classic <script> (no ES modules) so the page can be opened directly via
 // `file://`. The IIFE attaches its public symbols to a single global
 // namespace, `window.FallRiskAssessment`.
-(function () {
-'use strict';
-window.FallRiskAssessment = window.FallRiskAssessment || {};
 
 /**
  * Build a fresh, fully-blank assessment.
@@ -343,9 +340,4 @@ function severityClass(s) {
   }
 }
 
-Object.assign(window.FallRiskAssessment, {
-  emptyAssessment,
-  severityLabel,
-  severityClass
-});
-})();
+export { emptyAssessment, severityLabel, severityClass };

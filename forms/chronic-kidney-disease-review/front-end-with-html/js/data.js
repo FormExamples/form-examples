@@ -6,11 +6,6 @@
 // review-completeness statuses, and set the referral flag whenever a
 // nephrology-referral criterion (very-high zone, eGFR < 30, or ACR >= 70) fired.
 
-(function () {
-'use strict';
-window.ChronicKidneyDiseaseReviewDashboard =
-  window.ChronicKidneyDiseaseReviewDashboard || {};
-
 /** @type {import('./dashboard-types.js').ReviewRow[]} */
 const sampleReviews = [
   {
@@ -111,5 +106,4 @@ const sampleReviews = [
   }
 ];
 
-window.ChronicKidneyDiseaseReviewDashboard.sampleReviews = sampleReviews;
-})();
+export { sampleReviews };

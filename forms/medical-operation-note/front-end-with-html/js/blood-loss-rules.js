@@ -8,12 +8,6 @@
 //   severe   1501-3000 mL
 //   massive  > 3000 mL
 
-(function () {
-'use strict';
-window.MedicalOperationNote =
-  window.MedicalOperationNote || {};
-const NS = window.MedicalOperationNote;
-
 /** Classify an EBL value (mL) into a band; null → 'minimal'. */
 function classifyBloodLoss(ml) {
   const v = Number(ml);
@@ -42,8 +36,4 @@ function applyBloodLossRules(data) {
   }];
 }
 
-Object.assign(NS, {
-  classifyBloodLoss,
-  applyBloodLossRules
-});
-})();
+export { classifyBloodLoss, applyBloodLossRules };

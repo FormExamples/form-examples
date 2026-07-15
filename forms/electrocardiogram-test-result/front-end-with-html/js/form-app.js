@@ -1,3 +1,7 @@
+import { calculateGrade } from './grader.js';
+import { QTC_PROLONGED_MS } from './rules.js';
+import { abnormalitySeverityClass, abnormalitySeverityLabel, cardiacAxisLabel, ecgTypeLabel, emptyResult, followUpUrgencyClass, followUpUrgencyLabel, priorityLabel, recommendationLabel, recordingQualityLabel, reportStatusLabel, resultClassificationClass, resultClassificationLabel, rhythmLabel } from './types.js';
+
 // Electrocardiogram Test Result — reporting-clinician wizard
 // (vanilla JavaScript, no build).
 //
@@ -15,28 +19,6 @@
 // exports to `window.ElectrocardiogramTestResult`. Pulling them off here
 // keeps the rest of this file referring to short local names. The whole file
 // is wrapped in an IIFE so its top-level identifiers don't leak.
-(function () {
-'use strict';
-
-const NS = window.ElectrocardiogramTestResult;
-const {
-  emptyResult,
-  resultClassificationLabel,
-  abnormalitySeverityLabel,
-  followUpUrgencyLabel,
-  ecgTypeLabel,
-  rhythmLabel,
-  cardiacAxisLabel,
-  recordingQualityLabel,
-  reportStatusLabel,
-  recommendationLabel,
-  priorityLabel,
-  resultClassificationClass,
-  abnormalitySeverityClass,
-  followUpUrgencyClass,
-  QTC_PROLONGED_MS,
-  calculateGrade
-} = NS;
 
 // ----------------------------------------------------------------------
 // Persistence
@@ -1095,4 +1077,3 @@ if (document.readyState === 'loading') {
 } else {
   init();
 }
-})();

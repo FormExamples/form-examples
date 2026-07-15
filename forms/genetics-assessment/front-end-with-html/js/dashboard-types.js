@@ -95,11 +95,7 @@
 // `file://`. The IIFE attaches its public symbols to a single global
 // namespace, `window.GeneticsAssessmentDashboard`. (Note the trailing 's' —
 // this is the *Genetics* dashboard, not the related *Genetic* one.)
-(function () {
-'use strict';
-window.GeneticsAssessmentDashboard = window.GeneticsAssessmentDashboard || {};
 
 // No runtime exports; types are JSDoc-only. Touch the namespace so this file
 // is unambiguously side-effecting and other files can rely on it loading
 // before they read `window.GeneticsAssessmentDashboard`.
-})();

@@ -6,11 +6,6 @@
 // eye laterality values, and every IOP status; NHS numbers in the canonical
 // "NNN NNN NNNN" display form.
 
-(function () {
-'use strict';
-window.OphthalmologyAssessmentDashboard =
-  window.OphthalmologyAssessmentDashboard || {};
-
 /** @type {import('./types.js').PatientRow[]} */
 const samplePatients = [
   {
@@ -123,5 +118,4 @@ const samplePatients = [
   }
 ];
 
-window.OphthalmologyAssessmentDashboard.samplePatients = samplePatients;
-})();
+export { samplePatients };

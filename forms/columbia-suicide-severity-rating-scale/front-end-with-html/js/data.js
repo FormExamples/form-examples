@@ -6,11 +6,6 @@
 // (low / moderate / high), and every care setting, with the escalation flag
 // set whenever the risk tier is High.
 
-(function () {
-'use strict';
-window.ColumbiaSuicideSeverityRatingScaleDashboard =
-  window.ColumbiaSuicideSeverityRatingScaleDashboard || {};
-
 /** @type {import('./dashboard-types.js').AssessmentRow[]} */
 const sampleAssessments = [
   {
@@ -85,6 +80,4 @@ const sampleAssessments = [
   }
 ];
 
-window.ColumbiaSuicideSeverityRatingScaleDashboard.sampleAssessments =
-  sampleAssessments;
-})();
+export { sampleAssessments };

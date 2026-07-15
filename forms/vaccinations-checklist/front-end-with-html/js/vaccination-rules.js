@@ -17,9 +17,6 @@
  */
 
 // Wrapped in an IIFE; published via window.VaccinationsChecklist.
-(function () {
-'use strict';
-window.VaccinationsChecklist = window.VaccinationsChecklist || {};
 
 /** @type {VaccinationRule[]} */
 const vaccinationRules = [
@@ -271,5 +268,4 @@ const vaccinationRules = [
   }
 ];
 
-window.VaccinationsChecklist.vaccinationRules = vaccinationRules;
-})();
+export { vaccinationRules };

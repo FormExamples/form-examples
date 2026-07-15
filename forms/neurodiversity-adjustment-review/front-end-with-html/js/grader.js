@@ -1,3 +1,7 @@
+import { detectFlags } from './flags.js';
+import { classifyEffectiveness, gradeCompleteness, gradeNextStep, gradeWellbeingRisk } from './rules.js';
+import { anyNotWorking, flatten, recommendationLabel } from './types.js';
+
 // Four-axis grader for the Neurodiversity Adjustment Review.
 //
 // Composes the rule sets in rules.js and the review flags in flags.js into a
@@ -12,22 +16,6 @@
 // axes. The least-alarming band is chosen only when no rule fires.
 //
 // Wrapped in an IIFE; published via `window.NeurodiversityAdjustmentReview`.
-
-(function () {
-'use strict';
-window.NeurodiversityAdjustmentReview =
-  window.NeurodiversityAdjustmentReview || {};
-const NS = window.NeurodiversityAdjustmentReview;
-const {
-  flatten,
-  anyNotWorking,
-  classifyEffectiveness,
-  gradeWellbeingRisk,
-  gradeCompleteness,
-  gradeNextStep,
-  detectFlags,
-  recommendationLabel
-} = NS;
 
 /**
  * Derive the overall recommendation from the review and graded axes.
@@ -106,8 +94,4 @@ function calculateGrade(data) {
   };
 }
 
-Object.assign(NS, {
-  calculateGrade,
-  deriveRecommendation
-});
-})();
+export { calculateGrade, deriveRecommendation };

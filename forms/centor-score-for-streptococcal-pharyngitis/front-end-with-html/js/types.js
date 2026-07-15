@@ -126,10 +126,6 @@
 // classic <script> (no ES modules) so the page can be opened directly via
 // `file://`. The IIFE attaches its public symbols to a single global
 // namespace, `window.CentorScoreForStreptococcalPharyngitis`.
-(function () {
-'use strict';
-window.CentorScoreForStreptococcalPharyngitis =
-  window.CentorScoreForStreptococcalPharyngitis || {};
 
 /**
  * Build a fresh, fully-blank assessment.
@@ -246,14 +242,4 @@ function priorityLabel(priority) {
   }
 }
 
-Object.assign(window.CentorScoreForStreptococcalPharyngitis, {
-  emptyAssessment,
-  riskBandLabel,
-  riskBandClass,
-  ageModifierLabel,
-  clinicianRoleLabel,
-  careSettingLabel,
-  sexLabel,
-  priorityLabel
-});
-})();
+export { emptyAssessment, riskBandLabel, riskBandClass, ageModifierLabel, clinicianRoleLabel, careSettingLabel, sexLabel, priorityLabel };

@@ -1,3 +1,6 @@
+import { present, roundOne } from './grader.js';
+import { VERY_HIGH } from './rules.js';
+
 // Flagged-issue detection (red flags). Independent of the classification band
 // (which the grader produces), this module raises clinician-facing safety flags
 // per spec §5, using the unrounded grader output:
@@ -17,10 +20,6 @@
  */
 
 // Wrapped in an IIFE; published via window.AnionGapCalculator.
-(function () {
-'use strict';
-window.AnionGapCalculator = window.AnionGapCalculator || {};
-const { VERY_HIGH, present, roundOne } = window.AnionGapCalculator;
 
 /**
  * @param {AssessmentData} data
@@ -123,5 +122,4 @@ function detectFlaggedIssues(data, grade) {
   return flags;
 }
 
-window.AnionGapCalculator.detectFlaggedIssues = detectFlaggedIssues;
-})();
+export { detectFlaggedIssues };

@@ -104,9 +104,6 @@
 // classic <script> (no ES modules) so the page can be opened directly via
 // `file://`. The IIFE attaches its public symbols to a single global
 // namespace, `window.BloodCrossMatchTestResult`.
-(function () {
-'use strict';
-window.BloodCrossMatchTestResult = window.BloodCrossMatchTestResult || {};
 
 /**
  * Build a fresh, fully-blank result record.
@@ -315,21 +312,4 @@ function priorityClass(priority) {
   }
 }
 
-Object.assign(window.BloodCrossMatchTestResult, {
-  emptyResult,
-  resultClassificationLabel,
-  abnormalitySeverityLabel,
-  followUpUrgencyLabel,
-  recommendationLabel,
-  requestTypeLabel,
-  reportStatusLabel,
-  bloodGroupLabel,
-  componentLabel,
-  crossmatchResultLabel,
-  priorityLabel,
-  resultClassificationClass,
-  abnormalitySeverityClass,
-  followUpUrgencyClass,
-  priorityClass
-});
-})();
+export { emptyResult, resultClassificationLabel, abnormalitySeverityLabel, followUpUrgencyLabel, recommendationLabel, requestTypeLabel, reportStatusLabel, bloodGroupLabel, componentLabel, crossmatchResultLabel, priorityLabel, resultClassificationClass, abnormalitySeverityClass, followUpUrgencyClass, priorityClass };

@@ -9,10 +9,6 @@
 // GI disease, hypersensitivity). NHS numbers are in the canonical
 // "NNN NNN NNNN" display form.
 
-(function () {
-'use strict';
-window.SemaglutideAssessmentDashboard = window.SemaglutideAssessmentDashboard || {};
-
 /** @type {import('./types.js').PatientRow[]} */
 const samplePatients = [
   {
@@ -233,5 +229,4 @@ const samplePatients = [
   }
 ];
 
-window.SemaglutideAssessmentDashboard.samplePatients = samplePatients;
-})();
+export { samplePatients };

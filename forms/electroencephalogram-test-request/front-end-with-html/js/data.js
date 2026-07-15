@@ -8,11 +8,6 @@
 // request, an emergency suspected-status-epilepticus case, and an
 // encephalopathy case.
 
-(function () {
-'use strict';
-window.ElectroencephalogramTestRequestDashboard =
-  window.ElectroencephalogramTestRequestDashboard || {};
-
 /** @type {import('./types.js').RequestRow[]} */
 const sampleRequests = [
   {
@@ -157,5 +152,4 @@ const sampleRequests = [
   }
 ];
 
-window.ElectroencephalogramTestRequestDashboard.sampleRequests = sampleRequests;
-})();
+export { sampleRequests };

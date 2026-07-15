@@ -11,9 +11,6 @@
  */
 
 // Wrapped in an IIFE; published via window.PostOperativeReport.
-(function () {
-'use strict';
-window.PostOperativeReport = window.PostOperativeReport || {};
 
 /**
  * @param {AssessmentData} data
@@ -298,5 +295,4 @@ function detectAdditionalFlags(data) {
   return flags;
 }
 
-window.PostOperativeReport.detectAdditionalFlags = detectAdditionalFlags;
-})();
+export { detectAdditionalFlags };

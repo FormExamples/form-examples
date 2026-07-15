@@ -21,10 +21,6 @@
  */
 
 // Wrapped in an IIFE; published via window.ColumbiaSuicideSeverityRatingScale.
-(function () {
-'use strict';
-window.ColumbiaSuicideSeverityRatingScale =
-  window.ColumbiaSuicideSeverityRatingScale || {};
 
 /**
  * @param {AssessmentData} data
@@ -187,6 +183,4 @@ function detectFlaggedIssues(data, grade) {
   return flags;
 }
 
-window.ColumbiaSuicideSeverityRatingScale.detectFlaggedIssues =
-  detectFlaggedIssues;
-})();
+export { detectFlaggedIssues };

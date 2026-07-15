@@ -19,10 +19,6 @@
  */
 
 // Wrapped in an IIFE; published via window.Qrisk3CardiovascularDiseaseRiskScore.
-(function () {
-'use strict';
-window.Qrisk3CardiovascularDiseaseRiskScore =
-  window.Qrisk3CardiovascularDiseaseRiskScore || {};
 
 /**
  * @param {AssessmentData} data
@@ -129,6 +125,4 @@ function detectFlaggedIssues(data, tenYearRiskPercent) {
   return flags;
 }
 
-window.Qrisk3CardiovascularDiseaseRiskScore.detectFlaggedIssues =
-  detectFlaggedIssues;
-})();
+export { detectFlaggedIssues };

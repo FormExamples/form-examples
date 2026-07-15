@@ -1,3 +1,5 @@
+import { classificationRules, deriveContext } from './rules.js';
+
 // Diabetic-eye-screening grader. Pure functions: take a `ScreeningData` object,
 // derive the worst-eye summary, apply the gated first-match classification
 // cascade in `classificationRules`, and return the worst R/M grade, the
@@ -28,10 +30,6 @@
  */
 
 // Wrapped in an IIFE; published via window.DiabeticEyeScreening.
-(function () {
-'use strict';
-window.DiabeticEyeScreening = window.DiabeticEyeScreening || {};
-const { classificationRules, deriveContext } = window.DiabeticEyeScreening;
 
 /**
  * Completeness of one eye's grading: it must carry an R and an M grade, unless
@@ -112,9 +110,4 @@ function calculateGrade(data) {
   };
 }
 
-Object.assign(window.DiabeticEyeScreening, {
-  calculateGrade,
-  computeStatus,
-  eyeComplete
-});
-})();
+export { calculateGrade, computeStatus, eyeComplete };

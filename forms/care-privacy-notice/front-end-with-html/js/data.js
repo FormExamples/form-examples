@@ -3,11 +3,6 @@
 // API is unavailable. Loaded as a classic <script> tag (no ES modules) so
 // the page opens directly via file://.
 
-(function () {
-'use strict';
-window.CarePrivacyNoticeDashboard =
-  window.CarePrivacyNoticeDashboard || {};
-
 const samplePatients = [
   { id: '1',  patientName: 'Smith, John',         nhsNumber: '943 476 5919', dateAcknowledged: '2026-04-15', status: 'complete',   practiceName: 'Riverside Medical Practice' },
   { id: '2',  patientName: 'Patel, Priya',        nhsNumber: '721 938 4102', dateAcknowledged: '2026-04-14', status: 'complete',   practiceName: 'Riverside Medical Practice' },
@@ -26,5 +21,4 @@ const samplePatients = [
   { id: '15', patientName: 'Young, Elizabeth',    nhsNumber: '057 842 6139', dateAcknowledged: '2026-04-01', status: 'complete',   practiceName: 'The Green Practice' }
 ];
 
-window.CarePrivacyNoticeDashboard.samplePatients = samplePatients;
-})();
+export { samplePatients };

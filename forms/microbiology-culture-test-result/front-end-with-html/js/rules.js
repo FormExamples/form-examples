@@ -19,9 +19,6 @@
  */
 
 // Wrapped in an IIFE; published via window.MicrobiologyCultureTestResult.
-(function () {
-'use strict';
-window.MicrobiologyCultureTestResult = window.MicrobiologyCultureTestResult || {};
 
 // ----------------------------------------------------------------------
 // Structured-findings predicates (mirror `utils.ts`)
@@ -450,15 +447,4 @@ function gradeFollowUp(r, classification, severity) {
   };
 }
 
-Object.assign(window.MicrobiologyCultureTestResult, {
-  isPositiveCulture,
-  hasCriticalOrganism,
-  hasResistanceMarker,
-  hasPositiveSpecialisedTest,
-  hasAnyAbnormalFinding,
-  classifyResult,
-  gradeSeverity,
-  gradeCompleteness,
-  gradeFollowUp
-});
-})();
+export { isPositiveCulture, hasCriticalOrganism, hasResistanceMarker, hasPositiveSpecialisedTest, hasAnyAbnormalFinding, classifyResult, gradeSeverity, gradeCompleteness, gradeFollowUp };

@@ -234,9 +234,6 @@
 // classic <script> (no ES modules) so the page can be opened directly via
 // `file://`. The IIFE attaches its public symbols to a single global
 // namespace, `window.OrganDonationAssessment`.
-(function () {
-'use strict';
-window.OrganDonationAssessment = window.OrganDonationAssessment || {};
 
 /**
  * Build a fresh, fully-blank assessment.
@@ -506,17 +503,4 @@ function gradeClass(grade) {
   }
 }
 
-Object.assign(window.OrganDonationAssessment, {
-  emptyAssessment,
-  calculateBMI,
-  bmiCategory,
-  calculateAge,
-  eligibilityLabel,
-  eligibilityClass,
-  riskLevelLabel,
-  riskLevelClass,
-  donorTypeLabel,
-  gradeLabel,
-  gradeClass
-});
-})();
+export { emptyAssessment, calculateBMI, bmiCategory, calculateAge, eligibilityLabel, eligibilityClass, riskLevelLabel, riskLevelClass, donorTypeLabel, gradeLabel, gradeClass };

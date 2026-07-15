@@ -1,3 +1,5 @@
+import { hasAirwayIntervention, hasBreathingIntervention, hasCirculationIntervention, hasNumber, hasText } from './types.js';
+
 // WHO Emergency Unit Form: Trauma — flagged-issue detection.
 // Independent of completeness — every required field may be filled,
 // yet the patient may still present with high-risk vitals, abnormal
@@ -10,17 +12,6 @@
 //
 // Priorities (urgent > high > medium > low) drive sort order in the
 // report.
-
-(function () {
-'use strict';
-window.WhoEmergencyUnitTraumaForm = window.WhoEmergencyUnitTraumaForm || {};
-const {
-  hasNumber,
-  hasText,
-  hasAirwayIntervention,
-  hasBreathingIntervention,
-  hasCirculationIntervention
-} = window.WhoEmergencyUnitTraumaForm;
 
 function detectFlaggedIssues(data) {
   const flags = [];
@@ -444,5 +435,4 @@ function detectFlaggedIssues(data) {
   return flags;
 }
 
-window.WhoEmergencyUnitTraumaForm.detectFlaggedIssues = detectFlaggedIssues;
-})();
+export { detectFlaggedIssues };

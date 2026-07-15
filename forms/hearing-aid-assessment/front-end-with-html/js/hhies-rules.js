@@ -17,9 +17,6 @@
  */
 
 // Wrapped in an IIFE; published via window.HearingAidAssessment.
-(function () {
-'use strict';
-window.HearingAidAssessment = window.HearingAidAssessment || {};
 
 /** @type {HHIESRuleDefinition[]} */
 const hhiesQuestions = [
@@ -95,8 +92,4 @@ const hhiesResponseOptions = [
   { value: 4, label: 'Yes' }
 ];
 
-Object.assign(window.HearingAidAssessment, {
-  hhiesQuestions,
-  hhiesResponseOptions
-});
-})();
+export { hhiesQuestions, hhiesResponseOptions };

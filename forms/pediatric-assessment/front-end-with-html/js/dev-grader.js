@@ -1,3 +1,5 @@
+import { devScreenRules } from './dev-rules.js';
+
 // Developmental screen grader. Pure functions: take an `AssessmentData`
 // object, evaluate every rule from `dev-rules.js`, and return:
 //
@@ -13,11 +15,6 @@
  * @typedef {import('./types.js').OverallResult} OverallResult
  * @typedef {import('./types.js').FiredRule} FiredRule
  */
-
-(function () {
-'use strict';
-window.PediatricAssessment = window.PediatricAssessment || {};
-const { devScreenRules } = window.PediatricAssessment;
 
 /**
  * Evaluate developmental screening rules and produce a domain-by-domain and
@@ -76,5 +73,4 @@ function calculateDevelopmentalScreen(data) {
   return { overallResult, domainResults: coreDomainsMap, firedRules };
 }
 
-window.PediatricAssessment.calculateDevelopmentalScreen = calculateDevelopmentalScreen;
-})();
+export { calculateDevelopmentalScreen };

@@ -5,10 +5,6 @@
 // decision combination (ankle only, foot only, both, neither), both injured
 // sides, and every care setting.
 
-(function () {
-'use strict';
-window.OttawaAnkleRulesDashboard = window.OttawaAnkleRulesDashboard || {};
-
 /** @type {import('./dashboard-types.js').AssessmentRow[]} */
 const sampleAssessments = [
   {
@@ -83,5 +79,4 @@ const sampleAssessments = [
   }
 ];
 
-window.OttawaAnkleRulesDashboard.sampleAssessments = sampleAssessments;
-})();
+export { sampleAssessments };

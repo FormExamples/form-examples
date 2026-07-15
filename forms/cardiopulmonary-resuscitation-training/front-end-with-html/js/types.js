@@ -142,10 +142,6 @@
 // (no ES modules) so the page can be opened directly via `file://`.
 // Public symbols are attached to the global namespace
 // `window.CardiopulmonaryResuscitationTraining`.
-(function () {
-'use strict';
-window.CardiopulmonaryResuscitationTraining =
-  window.CardiopulmonaryResuscitationTraining || {};
 
 /** Build a fresh, fully-blank assessment.
  *  Strings default to ''; numeric fields default to null.
@@ -302,18 +298,4 @@ function compressionDepthInRange(depth) {
     depth >= COMPRESSION_DEPTH_MIN && depth <= COMPRESSION_DEPTH_MAX;
 }
 
-Object.assign(window.CardiopulmonaryResuscitationTraining, {
-  emptyAssessment,
-  outcomeLabel,
-  outcomeClass,
-  triStateLabel,
-  triStatePillClass,
-  CRITICAL_RULE_IDS,
-  COMPRESSION_RATE_MIN,
-  COMPRESSION_RATE_MAX,
-  COMPRESSION_DEPTH_MIN,
-  COMPRESSION_DEPTH_MAX,
-  compressionRateInRange,
-  compressionDepthInRange
-});
-})();
+export { emptyAssessment, outcomeLabel, outcomeClass, triStateLabel, triStatePillClass, CRITICAL_RULE_IDS, COMPRESSION_RATE_MIN, COMPRESSION_RATE_MAX, COMPRESSION_DEPTH_MIN, COMPRESSION_DEPTH_MAX, compressionRateInRange, compressionDepthInRange };

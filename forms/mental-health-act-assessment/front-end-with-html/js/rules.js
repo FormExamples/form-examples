@@ -18,9 +18,6 @@
  */
 
 // Wrapped in an IIFE; published via window.MentalHealthActAssessment.
-(function () {
-'use strict';
-window.MentalHealthActAssessment = window.MentalHealthActAssessment || {};
 
 const nonEmpty = (s) => typeof s === 'string' && s.trim() !== '';
 
@@ -170,13 +167,4 @@ const CRITERIA = {
   'none': []
 };
 
-Object.assign(window.MentalHealthActAssessment, {
-  nonEmpty,
-  sectionToClass,
-  isDetaining,
-  riskLimbStatus,
-  DETAINING_CLASSES,
-  SIGNATORIES,
-  CRITERIA
-});
-})();
+export { nonEmpty, sectionToClass, isDetaining, riskLimbStatus, DETAINING_CLASSES, SIGNATORIES, CRITERIA };

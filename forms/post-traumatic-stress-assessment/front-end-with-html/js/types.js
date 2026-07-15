@@ -112,9 +112,6 @@
 // classic <script> (no ES modules) so the page can be opened directly via
 // `file://`. The IIFE attaches its public symbols to a single global
 // namespace, `window.PostTraumaticStressAssessment`.
-(function () {
-'use strict';
-window.PostTraumaticStressAssessment = window.PostTraumaticStressAssessment || {};
 
 /**
  * Build a fresh, fully-blank assessment.
@@ -185,9 +182,4 @@ function categoryDescription(category) {
   }
 }
 
-Object.assign(window.PostTraumaticStressAssessment, {
-  emptyAssessment,
-  pclResponseOptions,
-  categoryDescription
-});
-})();
+export { emptyAssessment, pclResponseOptions, categoryDescription };

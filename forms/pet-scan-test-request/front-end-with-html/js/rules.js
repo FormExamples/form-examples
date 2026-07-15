@@ -1,3 +1,5 @@
+import { isFdgStudy } from './types.js';
+
 // Four-axis rule catalogue for the PET Scan Test Request engine.
 //
 // Derived from index.md and the SQL migrations: (A) appropriateness 1-9 + band
@@ -9,12 +11,6 @@
 // helpers; the grader composes them.
 //
 // Wrapped in an IIFE; published via `window.PetScanTestRequest`.
-
-(function () {
-'use strict';
-window.PetScanTestRequest = window.PetScanTestRequest || {};
-const NS = window.PetScanTestRequest;
-const { isFdgStudy } = NS;
 
 // ----------------------------------------------------------------------
 // Axis A — Appropriateness (ACR Appropriateness Criteria / RCR iRefer 1-9)
@@ -362,20 +358,4 @@ function scoreTriage(data) {
   };
 }
 
-Object.assign(NS, {
-  scoreAppropriateness,
-  appropriatenessBand,
-  scorePrepSafety,
-  scoreRadiationDose,
-  scoreCompleteness,
-  scoreTriage,
-  maxTier,
-  maxPrepBand,
-  TRIAGE_ORDER,
-  TARGET_TIMEFRAMES,
-  INDICATION_SCAN_MAP,
-  RADIATION_DOSE_BY_SCAN,
-  GLUCOSE_UNCONTROLLED_THRESHOLD,
-  GLUCOSE_ELEVATED_THRESHOLD
-});
-})();
+export { scoreAppropriateness, appropriatenessBand, scorePrepSafety, scoreRadiationDose, scoreCompleteness, scoreTriage, maxTier, maxPrepBand, TRIAGE_ORDER, TARGET_TIMEFRAMES, INDICATION_SCAN_MAP, RADIATION_DOSE_BY_SCAN, GLUCOSE_UNCONTROLLED_THRESHOLD, GLUCOSE_ELEVATED_THRESHOLD };

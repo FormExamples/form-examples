@@ -1,3 +1,5 @@
+import { hasCriticalFinding } from './rules.js';
+
 // Safety-critical flag detection for the Bronchoscopy Test Result.
 //
 // Faithful vanilla-JavaScript port of the SvelteKit engine module
@@ -13,10 +15,6 @@
  */
 
 // Wrapped in an IIFE; published via window.BronchoscopyTestResult.
-(function () {
-'use strict';
-window.BronchoscopyTestResult = window.BronchoscopyTestResult || {};
-const { hasCriticalFinding } = window.BronchoscopyTestResult;
 
 /**
  * Detect the safety-critical flags for a report.
@@ -147,7 +145,4 @@ function detectFlags(r) {
   return flags;
 }
 
-Object.assign(window.BronchoscopyTestResult, {
-  detectFlags
-});
-})();
+export { detectFlags };

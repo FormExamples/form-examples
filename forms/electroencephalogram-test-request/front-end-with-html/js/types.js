@@ -6,11 +6,6 @@
 // names are camelCase to match the front-end serde / examples convention.
 // Wrapped in an IIFE; published via `window.ElectroencephalogramTestRequest`.
 
-(function () {
-'use strict';
-window.ElectroencephalogramTestRequest =
-  window.ElectroencephalogramTestRequest || {};
-
 /**
  * Build a fresh, fully-blank EEG test request.
  * Strings default to ''; numeric / date fields default to null;
@@ -93,11 +88,4 @@ function indicationLabel(value) {
   return INDICATION_LABELS[value] || value || '';
 }
 
-Object.assign(window.ElectroencephalogramTestRequest, {
-  emptyRequest,
-  eegTypeLabel,
-  indicationLabel,
-  EEG_TYPE_LABELS,
-  INDICATION_LABELS
-});
-})();
+export { emptyRequest, eegTypeLabel, indicationLabel, EEG_TYPE_LABELS, INDICATION_LABELS };

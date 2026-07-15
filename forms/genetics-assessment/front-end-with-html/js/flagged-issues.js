@@ -1,3 +1,5 @@
+import { gradeGenetics } from './genetics-grader.js';
+
 // Genetics Assessment — additional flagged issues.
 //
 // These flags are independent of the Manchester / Bethesda / PREMM5 /
@@ -12,11 +14,6 @@
  * @typedef {import('./types.js').AssessmentData} AssessmentData
  * @typedef {import('./types.js').AdditionalFlag} AdditionalFlag
  */
-
-(function () {
-'use strict';
-window.GeneticsAssessment = window.GeneticsAssessment || {};
-const { gradeGenetics } = window.GeneticsAssessment;
 
 /**
  * @param {AssessmentData} data
@@ -314,5 +311,4 @@ function detectAdditionalFlags(data) {
   return flags;
 }
 
-window.GeneticsAssessment.detectAdditionalFlags = detectAdditionalFlags;
-})();
+export { detectAdditionalFlags };

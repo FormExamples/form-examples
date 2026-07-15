@@ -6,11 +6,6 @@
 // every care setting, with the high-risk flag set whenever the score is >= 5
 // and the 14-day event-risk lookup applied per score.
 
-(function () {
-'use strict';
-window.TimiRiskScoreForAcuteCoronarySyndromeDashboard =
-  window.TimiRiskScoreForAcuteCoronarySyndromeDashboard || {};
-
 /** @type {import('./dashboard-types.js').AssessmentRow[]} */
 const sampleAssessments = [
   {
@@ -92,6 +87,4 @@ const sampleAssessments = [
   }
 ];
 
-window.TimiRiskScoreForAcuteCoronarySyndromeDashboard.sampleAssessments =
-  sampleAssessments;
-})();
+export { sampleAssessments };

@@ -20,9 +20,6 @@
  */
 
 // Wrapped in an IIFE; published via window.PatientIntake.
-(function () {
-'use strict';
-window.PatientIntake = window.PatientIntake || {};
 
 /** @type {IntakeRule[]} */
 const intakeRules = [
@@ -215,5 +212,4 @@ const intakeRules = [
   }
 ];
 
-window.PatientIntake.intakeRules = intakeRules;
-})();
+export { intakeRules };

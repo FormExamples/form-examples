@@ -1,28 +1,29 @@
-(function (root) {
-  const ns = (root.MedicalWaitingListCard = root.MedicalWaitingListCard || {});
+import { LONG_WAIT_WEEKS, daysBetween } from './priority-targets.js';
+
+  
 
   const TWO_WEEK_WAIT_DAYS = 14;
   const PRIORITY_1_DAYS = 7;
   const MISSING_APPOINTMENT_DAYS = 14;
 
-  ns.detectAdditionalFlags = function detectAdditionalFlags(card, todayIso) {
+  export const detectAdditionalFlags = function detectAdditionalFlags(card, todayIso) {
     const flags = [];
     const wl = card.waitingList;
     const appt = card.appointment;
     const ref = card.referral;
     const pt = card.patient;
 
-    const daysWaited = ns.daysBetween(wl.rttClockStartDate, todayIso);
-    const daysToAppointment = ns.daysBetween(todayIso, appt.appointmentDate);
+    const daysWaited = daysBetween(wl.rttClockStartDate, todayIso);
+    const daysToAppointment = daysBetween(todayIso, appt.appointmentDate);
 
-    if (daysWaited !== null && daysWaited > ns.LONG_WAIT_WEEKS * 7) {
+    if (daysWaited !== null && daysWaited > LONG_WAIT_WEEKS * 7) {
       flags.push({
         flagId: 'F-LONG-WAITER-001',
         category: 'long-waiter-52-week',
         priority: 'high',
         description:
           'Patient has waited more than ' +
-          ns.LONG_WAIT_WEEKS +
+          LONG_WAIT_WEEKS +
           ' weeks. Mandatory long-waiter review required.',
         suggestedAction: 'Trigger long-waiter harm-review process and contact the patient.'
       });
@@ -124,4 +125,3 @@
 
     return flags;
   };
-})(window);

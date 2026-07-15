@@ -30,10 +30,6 @@
  */
 
 // Wrapped in an IIFE; published via window.EmployeeSatisfactionSurvey.
-(function () {
-'use strict';
-const NS = window.EmployeeSatisfactionSurvey =
-  window.EmployeeSatisfactionSurvey || {};
 
 const DOMAIN_LABELS = {
   workload: 'Workload & Work-Life Balance',
@@ -222,5 +218,4 @@ function detectAdditionalFlags(data, grading) {
   return flags;
 }
 
-NS.detectAdditionalFlags = detectAdditionalFlags;
-})();
+export { detectAdditionalFlags };

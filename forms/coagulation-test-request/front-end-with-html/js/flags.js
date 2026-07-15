@@ -1,3 +1,5 @@
+import { countSelectedTests } from './types.js';
+
 // Safety-flag detection for the Coagulation Test Request engine.
 //
 // Pure function returning safety flags using the grade_flag categories from
@@ -7,12 +9,6 @@
 // Each flag is { flagId, category, priority, description, suggestedAction }.
 // Flag IDs are stable and identical across every front-end and the back-end.
 // Wrapped in an IIFE; published via `window.CoagulationTestRequest`.
-
-(function () {
-'use strict';
-window.CoagulationTestRequest = window.CoagulationTestRequest || {};
-const NS = window.CoagulationTestRequest;
-const { countSelectedTests } = NS;
 
 /**
  * Detect safety flags for a coagulation test request.
@@ -110,5 +106,4 @@ function detectFlags(data, context) {
   return flags;
 }
 
-Object.assign(NS, { detectFlags });
-})();
+export { detectFlags };

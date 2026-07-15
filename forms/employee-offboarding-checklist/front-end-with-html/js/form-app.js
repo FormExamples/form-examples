@@ -1,3 +1,7 @@
+import { validateChecklist } from './checklist-validator.js';
+import { detectAdditionalFlags } from './flagged-issues.js';
+import { emptyAssessment, outcomeClass, outcomeLabel, priorityClass, priorityLabel } from './types.js';
+
 // Employee Offboarding Checklist — HR / line-manager / IT wizard
 // (vanilla JS).
 //
@@ -12,19 +16,6 @@
 // exports to `window.EmployeeOffboardingChecklist`. The whole file is
 // wrapped in an IIFE so its top-level identifiers don't leak to the
 // global scope.
-(function () {
-'use strict';
-
-const NS = window.EmployeeOffboardingChecklist;
-const {
-  emptyAssessment,
-  validateChecklist,
-  detectAdditionalFlags,
-  outcomeLabel,
-  outcomeClass,
-  priorityLabel,
-  priorityClass
-} = NS;
 
 // ----------------------------------------------------------------------
 // Persistence
@@ -1401,4 +1392,3 @@ if (document.readyState === 'loading') {
 // Silence unused-variable lint for the `conditional` helper when a step
 // doesn't reach for it; it's defined for future use.
 void conditional;
-})();

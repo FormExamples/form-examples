@@ -1,3 +1,6 @@
+import { hhiesQuestions } from './hhies-rules.js';
+import { hhiesCategory } from './types.js';
+
 // HHIE-S grader. Pure function: takes an `AssessmentData` object and
 // returns the total HHIE-S score (0-40), its category label, and the list
 // of fired rules (questions that scored > 0).
@@ -13,10 +16,6 @@
  */
 
 // Wrapped in an IIFE; published via window.HearingAidAssessment.
-(function () {
-'use strict';
-window.HearingAidAssessment = window.HearingAidAssessment || {};
-const { hhiesQuestions, hhiesCategory } = window.HearingAidAssessment;
 
 /**
  * Calculate the HHIE-S total score from the patient questionnaire.
@@ -68,8 +67,4 @@ function gradeHHIES(data) {
   return { score: hhiesScore, severity: hhiesCategoryLabel, firedRules };
 }
 
-Object.assign(window.HearingAidAssessment, {
-  calculateHHIES,
-  gradeHHIES
-});
-})();
+export { calculateHHIES, gradeHHIES };

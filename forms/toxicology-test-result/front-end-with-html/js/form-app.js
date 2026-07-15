@@ -1,3 +1,6 @@
+import { calculateGrade } from './grader.js';
+import { NUMERIC_FIELDS, abnormalitySeverityClass, abnormalitySeverityLabel, emptyResult, followUpUrgencyClass, followUpUrgencyLabel, overallResultStatusLabel, paracetamolNomogramLabel, priorityLabel, recommendationLabel, reportStatusLabel, resultClassificationClass, resultClassificationLabel, specimenConditionLabel } from './types.js';
+
 // Toxicology Test Result — reporting-clinician wizard
 // (vanilla JavaScript, no build).
 //
@@ -15,27 +18,6 @@
 // exports to `window.ToxicologyTestResult`. Pulling them off here keeps the
 // rest of this file referring to short local names. The whole file is wrapped
 // in an IIFE so its top-level identifiers don't leak.
-(function () {
-'use strict';
-
-const NS = window.ToxicologyTestResult;
-const {
-  emptyResult,
-  NUMERIC_FIELDS,
-  resultClassificationLabel,
-  abnormalitySeverityLabel,
-  followUpUrgencyLabel,
-  paracetamolNomogramLabel,
-  overallResultStatusLabel,
-  specimenConditionLabel,
-  reportStatusLabel,
-  recommendationLabel,
-  priorityLabel,
-  resultClassificationClass,
-  abnormalitySeverityClass,
-  followUpUrgencyClass,
-  calculateGrade
-} = NS;
 
 // ----------------------------------------------------------------------
 // Persistence
@@ -1064,4 +1046,3 @@ if (document.readyState === 'loading') {
 } else {
   init();
 }
-})();

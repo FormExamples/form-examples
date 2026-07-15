@@ -11,12 +11,6 @@
 //
 // Wrapped in an IIFE; published via `window.HistopathologyTestRequest`.
 
-(function () {
-'use strict';
-window.HistopathologyTestRequest =
-  window.HistopathologyTestRequest || {};
-const NS = window.HistopathologyTestRequest;
-
 // ----------------------------------------------------------------------
 // Axis A — Appropriateness (RCPath cancer datasets / tissue pathways, 1-9)
 // ----------------------------------------------------------------------
@@ -344,15 +338,4 @@ function scoreTriage(data) {
   return { tier, targetTimeframe, immediate, firedRules };
 }
 
-Object.assign(NS, {
-  scoreAppropriateness,
-  appropriatenessBand,
-  scoreSpecimenQuality,
-  scoreCompleteness,
-  scoreTriage,
-  maxTier,
-  TRIAGE_ORDER,
-  TARGET_TIMEFRAMES,
-  INDICATION_SPECIMEN_MAP
-});
-})();
+export { scoreAppropriateness, appropriatenessBand, scoreSpecimenQuality, scoreCompleteness, scoreTriage, maxTier, TRIAGE_ORDER, TARGET_TIMEFRAMES, INDICATION_SPECIMEN_MAP };

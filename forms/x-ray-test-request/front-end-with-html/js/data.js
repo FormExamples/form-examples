@@ -7,10 +7,6 @@
 // display form. Includes the required worked cases: a routine chest X-ray, an
 // urgent trauma case, a pregnancy-flag case, and a repeat-recent-imaging case.
 
-(function () {
-'use strict';
-window.XRayTestRequestDashboard = window.XRayTestRequestDashboard || {};
-
 /** @type {import('./types.js').RequestRow[]} */
 const sampleRequests = [
   {
@@ -175,5 +171,4 @@ const sampleRequests = [
   }
 ];
 
-window.XRayTestRequestDashboard.sampleRequests = sampleRequests;
-})();
+export { sampleRequests };

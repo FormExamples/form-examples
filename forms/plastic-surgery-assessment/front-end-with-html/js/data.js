@@ -7,11 +7,6 @@
 // Moderate, High, Critical). NHS numbers in canonical "NNN NNN NNNN"
 // display form.
 
-(function () {
-'use strict';
-window.PlasticSurgeryAssessmentDashboard =
-  window.PlasticSurgeryAssessmentDashboard || {};
-
 /** @type {import('./types.js').PatientRow[]} */
 const samplePatients = [
   {
@@ -124,5 +119,4 @@ const samplePatients = [
   }
 ];
 
-window.PlasticSurgeryAssessmentDashboard.samplePatients = samplePatients;
-})();
+export { samplePatients };

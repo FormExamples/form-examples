@@ -1,3 +1,5 @@
+import { isRapidDecline, present } from './rules.js';
+
 // Flagged-issue detection for the chronic kidney disease annual review.
 // Independent of the review-completeness status (which the grader produces),
 // this module raises clinician-facing flags per spec §5, each with a priority.
@@ -23,11 +25,6 @@
  */
 
 // Wrapped in an IIFE; published via window.ChronicKidneyDiseaseReview.
-(function () {
-'use strict';
-window.ChronicKidneyDiseaseReview = window.ChronicKidneyDiseaseReview || {};
-const NS = window.ChronicKidneyDiseaseReview;
-const { present, isRapidDecline } = NS;
 
 /**
  * Detect the flags raised by the review findings.
@@ -193,5 +190,4 @@ function detectFlaggedIssues(data, grade) {
   return flags;
 }
 
-NS.detectFlaggedIssues = detectFlaggedIssues;
-})();
+export { detectFlaggedIssues };

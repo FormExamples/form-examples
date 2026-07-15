@@ -1,11 +1,9 @@
+import { calculateAge } from './types.js';
+import { allMethods, methodLabels, ukmecRules } from './ukmec-rules.js';
+
 // UKMEC grader. Pure functions: take an `AssessmentData` object, return
 // per-method UKMEC categories and the list of fired rules. Mirrors the
 // SvelteKit reference engine in `src/lib/engine/ukmec-grader.ts`.
-
-(function () {
-'use strict';
-window.ContraceptionAssessment = window.ContraceptionAssessment || {};
-const NS = window.ContraceptionAssessment;
 
 /**
  * Derive a Set of active clinical conditions from the assessment data.
@@ -14,7 +12,7 @@ const NS = window.ContraceptionAssessment;
  */
 function deriveConditions(data) {
   const conditions = new Set();
-  const age = NS.calculateAge(data.demographics.dateOfBirth);
+  const age = calculateAge(data.demographics.dateOfBirth);
 
   if (data.medicalHistory.migraineWithAura === 'yes') {
     conditions.add('migraineWithAura');
@@ -103,7 +101,7 @@ function deriveConditions(data) {
  * @returns {{ ukmecResults: Object[], firedRules: Object[] }}
  */
 function evaluateUKMEC(data) {
-  const { ukmecRules, allMethods, methodLabels } = NS;
+  
 
   const firedRules = [];
   const methodCategories = new Map();
@@ -146,8 +144,4 @@ function evaluateUKMEC(data) {
   return { ukmecResults, firedRules };
 }
 
-Object.assign(window.ContraceptionAssessment, {
-  evaluateUKMEC,
-  deriveConditions
-});
-})();
+export { evaluateUKMEC, deriveConditions };

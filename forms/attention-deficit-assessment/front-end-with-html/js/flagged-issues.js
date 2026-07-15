@@ -4,10 +4,6 @@
 // stimulants, substance use, depression, seizure history, tic
 // disorders, missing childhood onset, and so on.
 
-(function () {
-'use strict';
-window.AttentionDeficitAssessment = window.AttentionDeficitAssessment || {};
-
 function detectAdditionalFlags(data) {
   const flags = [];
 
@@ -182,5 +178,4 @@ function detectAdditionalFlags(data) {
   return flags;
 }
 
-window.AttentionDeficitAssessment.detectAdditionalFlags = detectAdditionalFlags;
-})();
+export { detectAdditionalFlags };

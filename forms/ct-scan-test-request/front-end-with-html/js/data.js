@@ -7,11 +7,6 @@
 // form. Includes the required worked cases: a routine case, an urgent case, a
 // contrast / renal-caution case, and a pregnancy-flag case.
 
-(function () {
-'use strict';
-window.CtScanTestRequestDashboard =
-  window.CtScanTestRequestDashboard || {};
-
 /** @type {import('./types.js').RequestRow[]} */
 const sampleRequests = [
   {
@@ -166,5 +161,4 @@ const sampleRequests = [
   }
 ];
 
-window.CtScanTestRequestDashboard.sampleRequests = sampleRequests;
-})();
+export { sampleRequests };

@@ -7,11 +7,6 @@
 // convention. Wrapped in an IIFE; published via
 // `window.HolterMonitorTestRequest`.
 
-(function () {
-'use strict';
-window.HolterMonitorTestRequest =
-  window.HolterMonitorTestRequest || {};
-
 /**
  * Build a fresh, fully-blank ambulatory ECG (Holter) monitoring request.
  * Strings default to ''; numeric / date fields default to null;
@@ -97,11 +92,4 @@ function indicationLabel(value) {
   return INDICATION_LABELS[value] || value || '';
 }
 
-Object.assign(window.HolterMonitorTestRequest, {
-  emptyRequest,
-  monitorTypeLabel,
-  indicationLabel,
-  MONITOR_TYPE_LABELS,
-  INDICATION_LABELS
-});
-})();
+export { emptyRequest, monitorTypeLabel, indicationLabel, MONITOR_TYPE_LABELS, INDICATION_LABELS };

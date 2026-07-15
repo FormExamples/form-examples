@@ -7,10 +7,6 @@
 // flagged for a subset; NHS numbers in the canonical "NNN NNN NNNN" form
 // and onsetTime in ISO local "YYYY-MM-DDTHH:MM".
 
-(function () {
-'use strict';
-window.StrokeAssessmentDashboard = window.StrokeAssessmentDashboard || {};
-
 /** @type {import('./types.js').PatientRow[]} */
 const samplePatients = [
   {
@@ -123,5 +119,4 @@ const samplePatients = [
   }
 ];
 
-window.StrokeAssessmentDashboard.samplePatients = samplePatients;
-})();
+export { samplePatients };

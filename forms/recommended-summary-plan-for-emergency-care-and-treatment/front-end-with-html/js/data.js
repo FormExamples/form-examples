@@ -6,11 +6,6 @@
 // recommendation (attempt, do-not-attempt, and not-yet-documented), with one
 // past review date to exercise the governance styling.
 
-(function () {
-'use strict';
-window.RecommendedSummaryPlanForEmergencyCareAndTreatmentDashboard =
-  window.RecommendedSummaryPlanForEmergencyCareAndTreatmentDashboard || {};
-
 /** @type {import('./dashboard-types.js').PlanRow[]} */
 const samplePlans = [
   {
@@ -81,6 +76,4 @@ const samplePlans = [
   }
 ];
 
-window.RecommendedSummaryPlanForEmergencyCareAndTreatmentDashboard.samplePlans =
-  samplePlans;
-})();
+export { samplePlans };

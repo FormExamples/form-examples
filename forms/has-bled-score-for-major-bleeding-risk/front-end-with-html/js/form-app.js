@@ -1,3 +1,7 @@
+import { detectFlaggedIssues } from './flags.js';
+import { calculateHasBledGrade } from './grader.js';
+import { emptyAssessment, priorityLabel, riskBandClass, riskBandLabel } from './types.js';
+
 // HAS-BLED Score for Major Bleeding Risk — bedside wizard
 // (vanilla JavaScript, no build).
 //
@@ -13,18 +17,6 @@
 // exports to `window.HasBledScoreForMajorBleedingRisk`. Pulling them off here
 // keeps the rest of this file referring to short local names. The whole file
 // is wrapped in an IIFE so its top-level identifiers don't leak.
-(function () {
-'use strict';
-
-const NS = window.HasBledScoreForMajorBleedingRisk;
-const {
-  emptyAssessment,
-  riskBandLabel,
-  riskBandClass,
-  priorityLabel,
-  calculateHasBledGrade,
-  detectFlaggedIssues
-} = NS;
 
 // ----------------------------------------------------------------------
 // Persistence
@@ -1043,4 +1035,3 @@ if (document.readyState === 'loading') {
 } else {
   init();
 }
-})();

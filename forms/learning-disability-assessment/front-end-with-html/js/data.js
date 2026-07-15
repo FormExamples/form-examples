@@ -7,10 +7,6 @@
 // outcomes, and a mix of reasonable-adjustments flags. NHS numbers in the
 // canonical "NNN NNN NNNN" display form.
 
-(function () {
-'use strict';
-window.LearningDisabilityAssessmentDashboard = window.LearningDisabilityAssessmentDashboard || {};
-
 /** @type {import('./types.js').PatientRow[]} */
 const samplePatients = [
   {
@@ -135,5 +131,4 @@ const samplePatients = [
   }
 ];
 
-window.LearningDisabilityAssessmentDashboard.samplePatients = samplePatients;
-})();
+export { samplePatients };

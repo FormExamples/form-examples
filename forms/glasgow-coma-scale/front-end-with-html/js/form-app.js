@@ -1,3 +1,8 @@
+import { detectFlaggedIssues } from './flags.js';
+import { calculateGcsGrade } from './grader.js';
+import { descriptorLabel, eyeOptions, motorOptions, verbalOptions } from './rules.js';
+import { emptyAssessment, priorityLabel, reactivityLabel, severityBandClass, severityBandLabel } from './types.js';
+
 // Glasgow Coma Scale (GCS) — bedside wizard (vanilla JavaScript, no build).
 //
 // Single-page continuous wizard: every step is rendered into the page in
@@ -13,23 +18,6 @@
 // exports to `window.GlasgowComaScale`. Pulling them off here keeps the rest of
 // this file referring to short local names. The whole file is wrapped in an
 // IIFE so its top-level identifiers don't leak.
-(function () {
-'use strict';
-
-const NS = window.GlasgowComaScale;
-const {
-  emptyAssessment,
-  severityBandLabel,
-  severityBandClass,
-  reactivityLabel,
-  priorityLabel,
-  eyeOptions,
-  verbalOptions,
-  motorOptions,
-  descriptorLabel,
-  calculateGcsGrade,
-  detectFlaggedIssues
-} = NS;
 
 // ----------------------------------------------------------------------
 // Persistence
@@ -1016,4 +1004,3 @@ if (document.readyState === 'loading') {
 } else {
   init();
 }
-})();

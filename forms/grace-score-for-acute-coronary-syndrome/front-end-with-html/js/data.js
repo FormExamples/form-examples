@@ -6,11 +6,6 @@
 // care setting, and a spread of point totals, with the escalation flag set
 // whenever the overall category is High (early angiography within 24 hours).
 
-(function () {
-'use strict';
-window.GraceScoreForAcuteCoronarySyndromeDashboard =
-  window.GraceScoreForAcuteCoronarySyndromeDashboard || {};
-
 /** @type {import('./dashboard-types.js').AssessmentRow[]} */
 const sampleAssessments = [
   {
@@ -85,6 +80,4 @@ const sampleAssessments = [
   }
 ];
 
-window.GraceScoreForAcuteCoronarySyndromeDashboard.sampleAssessments =
-  sampleAssessments;
-})();
+export { sampleAssessments };

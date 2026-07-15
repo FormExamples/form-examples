@@ -1,3 +1,6 @@
+import { asrsRules } from './asrs-rules.js';
+import { classifyFromTotal, countPartAShadedItems, determineSubtype, sumScores } from './types.js';
+
 // ASRS grader. Pure functions: take an `AssessmentData` object and return
 // the Part A score, Part B score, total, subscores, classification, subtype
 // and the list of rules that fired.
@@ -7,18 +10,6 @@
 //   Part A screener positive AND total >= 28  -> likely
 //   Part A screener positive OR total >= 24   -> possible
 //   else                                       -> unlikely
-
-(function () {
-'use strict';
-window.AttentionDeficitAssessment = window.AttentionDeficitAssessment || {};
-const NS = window.AttentionDeficitAssessment;
-const {
-  asrsRules,
-  sumScores,
-  countPartAShadedItems,
-  classifyFromTotal,
-  determineSubtype
-} = NS;
 
 /** Pure function: evaluate ASRS scoring against patient data. */
 function calculateASRS(data) {
@@ -121,5 +112,4 @@ function calculateASRS(data) {
   };
 }
 
-NS.calculateASRS = calculateASRS;
-})();
+export { calculateASRS };

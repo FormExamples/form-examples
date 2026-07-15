@@ -6,11 +6,6 @@
 // down) or returns an empty list, callers fall back to the sample data
 // shipped in `data.js` so the page is usable standalone.
 
-(function () {
-'use strict';
-window.ReturnToWorkDashboard =
-  window.ReturnToWorkDashboard || {};
-
 const API_BASE = 'http://localhost:5150';
 const RECORDS_PATH = '/api/return_to_works';
 
@@ -41,6 +36,4 @@ async function fetchRecords() {
   return [];
 }
 
-window.ReturnToWorkDashboard.fetchRecords = fetchRecords;
-window.ReturnToWorkDashboard.API_BASE = API_BASE;
-})();
+export { fetchRecords, API_BASE };

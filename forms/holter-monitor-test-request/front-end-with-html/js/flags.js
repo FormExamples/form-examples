@@ -9,12 +9,6 @@
 // Flag IDs are stable and identical across every front-end and the back-end.
 // Wrapped in an IIFE; published via `window.HolterMonitorTestRequest`.
 
-(function () {
-'use strict';
-window.HolterMonitorTestRequest =
-  window.HolterMonitorTestRequest || {};
-const NS = window.HolterMonitorTestRequest;
-
 /**
  * Detect safety flags for an ambulatory ECG (Holter) monitoring request.
  *
@@ -104,5 +98,4 @@ function detectFlags(data, context) {
   return flags;
 }
 
-Object.assign(NS, { detectFlags });
-})();
+export { detectFlags };

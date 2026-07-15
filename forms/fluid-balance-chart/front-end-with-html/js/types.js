@@ -106,9 +106,6 @@
 // classic <script> (no ES modules) so the page can be opened directly via
 // `file://`. The IIFE attaches its public symbols to a single global
 // namespace, `window.FluidBalanceChart`.
-(function () {
-'use strict';
-window.FluidBalanceChart = window.FluidBalanceChart || {};
 
 /** Default charting period in hours (spec §4). */
 const DEFAULT_CHART_PERIOD_HOURS = 24;
@@ -230,17 +227,4 @@ function priorityLabel(priority) {
   }
 }
 
-Object.assign(window.FluidBalanceChart, {
-  DEFAULT_CHART_PERIOD_HOURS,
-  INTAKE_CATEGORIES,
-  OUTPUT_CATEGORIES,
-  emptyEntry,
-  emptyChart,
-  clinicianRoleLabel,
-  directionLabel,
-  categoryLabel,
-  fluidStatusLabel,
-  fluidStatusClass,
-  priorityLabel
-});
-})();
+export { DEFAULT_CHART_PERIOD_HOURS, INTAKE_CATEGORIES, OUTPUT_CATEGORIES, emptyEntry, emptyChart, clinicianRoleLabel, directionLabel, categoryLabel, fluidStatusLabel, fluidStatusClass, priorityLabel };

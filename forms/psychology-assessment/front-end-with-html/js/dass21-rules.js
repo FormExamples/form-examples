@@ -25,9 +25,6 @@
  */
 
 // Wrapped in an IIFE; published via window.PsychologyAssessment.
-(function () {
-'use strict';
-window.PsychologyAssessment = window.PsychologyAssessment || {};
 
 /** @type {DassRule[]} */
 const dass21Rules = [
@@ -189,5 +186,4 @@ const dass21Rules = [
   }
 ];
 
-window.PsychologyAssessment.dass21Rules = dass21Rules;
-})();
+export { dass21Rules };

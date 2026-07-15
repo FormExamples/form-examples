@@ -12,11 +12,6 @@
 // engine grades four domains (Clinical, PROM, PREM, Operational) A–E and takes
 // the overall grade as the worst of the four ("highest severity wins").
 
-(function () {
-'use strict';
-window.OutpatientOutcome =
-  window.OutpatientOutcome || {};
-
 /**
  * Build a fresh, fully-blank outpatient outcome report.
  * Strings default to ''; numeric / date / level fields default to null.
@@ -157,14 +152,4 @@ function labelFrom(map, value) {
   return (map && map[value]) || value || '';
 }
 
-Object.assign(window.OutpatientOutcome, {
-  emptyAssessment,
-  gradeLabel,
-  labelFrom,
-  GRADE_LABELS,
-  OUTCOME_LABELS,
-  FFT_LABELS,
-  ATTENDANCE_LABELS,
-  MODALITY_LABELS
-});
-})();
+export { emptyAssessment, gradeLabel, labelFrom, GRADE_LABELS, OUTCOME_LABELS, FFT_LABELS, ATTENDANCE_LABELS, MODALITY_LABELS };

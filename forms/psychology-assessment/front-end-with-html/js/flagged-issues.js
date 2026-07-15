@@ -12,9 +12,6 @@
  */
 
 // Wrapped in an IIFE; published via window.PsychologyAssessment.
-(function () {
-'use strict';
-window.PsychologyAssessment = window.PsychologyAssessment || {};
 
 /**
  * @param {AssessmentData} data
@@ -195,5 +192,4 @@ function detectAdditionalFlags(data, depression, anxiety, stress) {
   return flags;
 }
 
-window.PsychologyAssessment.detectAdditionalFlags = detectAdditionalFlags;
-})();
+export { detectAdditionalFlags };

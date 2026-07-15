@@ -154,9 +154,6 @@
 // classic <script> (no ES modules) so the page can be opened directly via
 // `file://`. The IIFE attaches its public symbols to a single global
 // namespace, `window.GeneticTestResult`.
-(function () {
-'use strict';
-window.GeneticTestResult = window.GeneticTestResult || {};
 
 /**
  * Build a fresh, fully-blank genetic test result.
@@ -369,20 +366,4 @@ function followUpUrgencyClass(value) {
   }
 }
 
-Object.assign(window.GeneticTestResult, {
-  emptyResult,
-  resultClassificationLabel,
-  abnormalitySeverityLabel,
-  followUpUrgencyLabel,
-  testTypeLabel,
-  variantClassificationLabel,
-  sampleTypeLabel,
-  zygosityLabel,
-  reportStatusLabel,
-  recommendationLabel,
-  priorityLabel,
-  resultClassificationClass,
-  abnormalitySeverityClass,
-  followUpUrgencyClass
-});
-})();
+export { emptyResult, resultClassificationLabel, abnormalitySeverityLabel, followUpUrgencyLabel, testTypeLabel, variantClassificationLabel, sampleTypeLabel, zygosityLabel, reportStatusLabel, recommendationLabel, priorityLabel, resultClassificationClass, abnormalitySeverityClass, followUpUrgencyClass };

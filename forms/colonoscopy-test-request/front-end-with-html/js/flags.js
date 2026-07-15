@@ -9,12 +9,6 @@
 // Flag IDs are stable and identical across every front-end and the back-end.
 // Wrapped in an IIFE; published via `window.ColonoscopyTestRequest`.
 
-(function () {
-'use strict';
-window.ColonoscopyTestRequest =
-  window.ColonoscopyTestRequest || {};
-const NS = window.ColonoscopyTestRequest;
-
 /**
  * Detect safety flags for a colonoscopy request.
  *
@@ -136,5 +130,4 @@ function fitExpected(d) {
     d.redFlags.abdominalMass || d.redFlags.rectalBleeding;
 }
 
-Object.assign(NS, { detectFlags });
-})();
+export { detectFlags };

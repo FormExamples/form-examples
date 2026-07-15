@@ -182,9 +182,6 @@
 // classic <script> (no ES modules) so the page can be opened directly via
 // `file://`. The IIFE attaches its public symbols to a single global
 // namespace, `window.IntegumentaryAssessment`.
-(function () {
-'use strict';
-window.IntegumentaryAssessment = window.IntegumentaryAssessment || {};
 
 /**
  * Build a fresh, fully-blank assessment.
@@ -311,10 +308,4 @@ function calculateWoundArea(length, width) {
   return Math.round(length * width * 10) / 10;
 }
 
-Object.assign(window.IntegumentaryAssessment, {
-  emptyAssessment,
-  calculateBMI,
-  bmiCategory,
-  calculateWoundArea
-});
-})();
+export { emptyAssessment, calculateBMI, bmiCategory, calculateWoundArea };

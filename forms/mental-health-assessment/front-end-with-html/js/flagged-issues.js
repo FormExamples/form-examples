@@ -1,3 +1,5 @@
+import { calculateAuditCScore, calculateGad7Score, calculatePhq9Score } from './mh-rules.js';
+
 // Flagged-issue detection. Independent of PHQ-9 / GAD-7 totals (which the
 // grader computes), this module raises clinician-facing alerts for
 // safety-critical risk findings: suicidal ideation, self-harm, harm to
@@ -15,12 +17,6 @@
  */
 
 // Wrapped in an IIFE; published via window.MentalHealthAssessment.
-(function () {
-'use strict';
-window.MentalHealthAssessment = window.MentalHealthAssessment || {};
-
-const { calculatePhq9Score, calculateGad7Score, calculateAuditCScore } =
-  window.MentalHealthAssessment;
 
 /**
  * @param {AssessmentData} data
@@ -222,5 +218,4 @@ function detectAdditionalFlags(data) {
   return flags;
 }
 
-window.MentalHealthAssessment.detectAdditionalFlags = detectAdditionalFlags;
-})();
+export { detectAdditionalFlags };

@@ -5,10 +5,6 @@
 // Property names are camelCase to match the front-end serde / examples
 // convention. Wrapped in an IIFE; published via `window.CtScanTestRequest`.
 
-(function () {
-'use strict';
-window.CtScanTestRequest = window.CtScanTestRequest || {};
-
 /**
  * Build a fresh, fully-blank CT scan request.
  * Strings default to ''; numeric / date fields default to null;
@@ -105,12 +101,4 @@ function usesIvContrast(contrastRequired) {
   return contrastRequired === 'iv-iodinated' || contrastRequired === 'both';
 }
 
-Object.assign(window.CtScanTestRequest, {
-  emptyRequest,
-  bodyRegionLabel,
-  contrastLabel,
-  usesIvContrast,
-  BODY_REGION_LABELS,
-  CONTRAST_LABELS
-});
-})();
+export { emptyRequest, bodyRegionLabel, contrastLabel, usesIvContrast, BODY_REGION_LABELS, CONTRAST_LABELS };

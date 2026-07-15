@@ -19,9 +19,6 @@
  */
 
 // Wrapped in an IIFE; published via window.ElectrocardiogramTestResult.
-(function () {
-'use strict';
-window.ElectrocardiogramTestResult = window.ElectrocardiogramTestResult || {};
 
 // ----------------------------------------------------------------------
 // Structured-findings predicates (mirror `utils.ts`)
@@ -436,14 +433,4 @@ function gradeFollowUp(r, classification, severity) {
   };
 }
 
-Object.assign(window.ElectrocardiogramTestResult, {
-  QTC_PROLONGED_MS,
-  hasCriticalFinding,
-  hasAnyAbnormalFinding,
-  hasAbnormalRhythm,
-  classifyResult,
-  gradeSeverity,
-  gradeCompleteness,
-  gradeFollowUp
-});
-})();
+export { QTC_PROLONGED_MS, hasCriticalFinding, hasAnyAbnormalFinding, hasAbnormalRhythm, classifyResult, gradeSeverity, gradeCompleteness, gradeFollowUp };

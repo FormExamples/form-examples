@@ -1,3 +1,5 @@
+import { intakeRules } from './intake-rules.js';
+
 // Patient Intake risk-level grader. Pure functions: take an
 // `AssessmentData` object, evaluate every intake rule, and return the
 // maximum risk level fired plus the per-rule audit trail.
@@ -14,10 +16,6 @@
  */
 
 // Wrapped in an IIFE; published via window.PatientIntake.
-(function () {
-'use strict';
-window.PatientIntake = window.PatientIntake || {};
-const { intakeRules } = window.PatientIntake;
 
 /**
  * Evaluate every intake rule against the supplied assessment data and
@@ -59,5 +57,4 @@ function calculateRiskLevel(data) {
   return { riskLevel, firedRules };
 }
 
-window.PatientIntake.calculateRiskLevel = calculateRiskLevel;
-})();
+export { calculateRiskLevel };

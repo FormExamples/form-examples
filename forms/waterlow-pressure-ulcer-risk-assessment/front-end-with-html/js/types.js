@@ -123,10 +123,6 @@
 // classic <script> (no ES modules) so the page can be opened directly via
 // `file://`. The IIFE attaches its public symbols to a single global
 // namespace, `window.WaterlowPressureUlcerRiskAssessment`.
-(function () {
-'use strict';
-window.WaterlowPressureUlcerRiskAssessment =
-  window.WaterlowPressureUlcerRiskAssessment || {};
 
 /**
  * Build a fresh, fully-blank assessment.
@@ -320,13 +316,4 @@ function priorityLabel(priority) {
   }
 }
 
-Object.assign(window.WaterlowPressureUlcerRiskAssessment, {
-  emptyAssessment,
-  options,
-  optionLabel,
-  riskBandLabel,
-  riskBandClass,
-  preventionActionLabel,
-  priorityLabel
-});
-})();
+export { emptyAssessment, options, optionLabel, riskBandLabel, riskBandClass, preventionActionLabel, priorityLabel };

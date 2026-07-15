@@ -1,3 +1,7 @@
+import { detectFlaggedIssues } from './flags.js';
+import { calculateCorrectedCalcium } from './grader.js';
+import { classificationClass, classificationLabel, emptyAssessment, priorityLabel } from './types.js';
+
 // Corrected Calcium Calculator — single-page wizard (vanilla JavaScript, no build).
 //
 // Single-page continuous wizard: every step is rendered into the page in
@@ -12,18 +16,6 @@
 // to `window.CorrectedCalciumCalculator`. Pulling them off here keeps the rest
 // of this file referring to short local names. The whole file is wrapped in an
 // IIFE so its top-level identifiers don't leak.
-(function () {
-'use strict';
-
-const NS = window.CorrectedCalciumCalculator;
-const {
-  emptyAssessment,
-  classificationLabel,
-  classificationClass,
-  priorityLabel,
-  calculateCorrectedCalcium,
-  detectFlaggedIssues
-} = NS;
 
 // ----------------------------------------------------------------------
 // Persistence
@@ -866,4 +858,3 @@ if (document.readyState === 'loading') {
 } else {
   init();
 }
-})();

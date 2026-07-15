@@ -128,9 +128,6 @@
 // classic <script> (no ES modules) so the page can be opened directly via
 // `file://`. The IIFE attaches its public symbols to a single global
 // namespace, `window.BreastScreening`.
-(function () {
-'use strict';
-window.BreastScreening = window.BreastScreening || {};
 
 /**
  * Build a fresh, fully-blank screening record.
@@ -282,16 +279,4 @@ function priorityLabel(priority) {
   }
 }
 
-Object.assign(window.BreastScreening, {
-  emptyAssessment,
-  eligibilityLabel,
-  readingOutcomeLabel,
-  imagingClassLabel,
-  screeningOutcomeLabel,
-  outcomeBandLabel,
-  outcomeBandClass,
-  clinicianRoleLabel,
-  episodeTypeLabel,
-  priorityLabel
-});
-})();
+export { emptyAssessment, eligibilityLabel, readingOutcomeLabel, imagingClassLabel, screeningOutcomeLabel, outcomeBandLabel, outcomeBandClass, clinicianRoleLabel, episodeTypeLabel, priorityLabel };

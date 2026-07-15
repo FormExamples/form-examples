@@ -194,10 +194,6 @@
  * @property {string} timestamp
  */
 
-(function () {
-'use strict';
-window.OtolaryngologyAssessment = window.OtolaryngologyAssessment || {};
-
 /**
  * Build a fresh empty assessment. Strings default to `''`; numeric SNOT-22
  * fields default to `null`.
@@ -349,9 +345,4 @@ const SNOT22_OPTIONS = [
   { value: 5, label: 'As bad as it can be' }
 ];
 
-Object.assign(window.OtolaryngologyAssessment, {
-  emptyAssessment,
-  SNOT22_ITEMS,
-  SNOT22_OPTIONS
-});
-})();
+export { emptyAssessment, SNOT22_ITEMS, SNOT22_OPTIONS };

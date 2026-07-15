@@ -1,3 +1,5 @@
+import { hasNumber, hasText, isYesNoAnswered } from './types.js';
+
 // WHO Emergency Unit Form: Trauma — completeness rules.
 //
 // The form is a structured data-collection instrument for emergency
@@ -15,11 +17,6 @@
 //
 // Rule IDs follow the pattern <SECTION>-<NN>; the prefix lets the
 // report group fired rules by section.
-
-(function () {
-'use strict';
-window.WhoEmergencyUnitTraumaForm = window.WhoEmergencyUnitTraumaForm || {};
-const { hasText, hasNumber, isYesNoAnswered } = window.WhoEmergencyUnitTraumaForm;
 
 const euTraumaRules = [
   // ─── Step 1 — Patient Registration ────────────────────────
@@ -446,5 +443,4 @@ const euTraumaRules = [
   }
 ];
 
-window.WhoEmergencyUnitTraumaForm.euTraumaRules = euTraumaRules;
-})();
+export { euTraumaRules };

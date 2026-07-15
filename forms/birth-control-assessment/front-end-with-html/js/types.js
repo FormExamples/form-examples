@@ -217,10 +217,6 @@
  * @property {string} timestamp
  */
 
-(function () {
-'use strict';
-window.BirthControlAssessment = window.BirthControlAssessment || {};
-
 /**
  * Build a fresh, fully-blank assessment.
  * Strings default to `''`; numeric fields default to `null`.
@@ -464,16 +460,4 @@ function methodDisplayName(method) {
   return names[method] || method;
 }
 
-Object.assign(window.BirthControlAssessment, {
-  emptyAssessment,
-  calculateBMI,
-  bmiCategory,
-  calculateAge,
-  mecCategoryLabel,
-  mecCategoryShort,
-  mecCategoryClass,
-  riskLevelLabel,
-  riskLevelClass,
-  methodDisplayName
-});
-})();
+export { emptyAssessment, calculateBMI, bmiCategory, calculateAge, mecCategoryLabel, mecCategoryShort, mecCategoryClass, riskLevelLabel, riskLevelClass, methodDisplayName };

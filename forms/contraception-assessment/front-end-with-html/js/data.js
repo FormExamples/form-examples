@@ -7,10 +7,6 @@
 // of preferred and current contraceptive methods. NHS numbers in the
 // canonical "NNN NNN NNNN" display form.
 
-(function () {
-'use strict';
-window.ContraceptionAssessmentDashboard = window.ContraceptionAssessmentDashboard || {};
-
 /** @type {import('./types.js').PatientRow[]} */
 const samplePatients = [
   {
@@ -123,5 +119,4 @@ const samplePatients = [
   }
 ];
 
-window.ContraceptionAssessmentDashboard.samplePatients = samplePatients;
-})();
+export { samplePatients };

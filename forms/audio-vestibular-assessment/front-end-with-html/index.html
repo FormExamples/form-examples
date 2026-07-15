@@ -105,16 +105,6 @@
     </footer>
   </main>
 
-  <!--
-    Classic <script> tags (no `type="module"`) so the page works when
-    opened directly via file:// — browsers block ES-module imports from
-    file:// for CORS reasons, but allow ordered classic scripts. Each
-    file attaches its public symbols to `window.AudioVestibularAssessment`.
-  -->
-  <script src="js/types.js"></script>
-  <script src="js/audio-vestibular-rules.js"></script>
-  <script src="js/audio-vestibular-grader.js"></script>
-  <script src="js/flagged-issues.js"></script>
-  <script src="js/form-app.js"></script>
+  <script type="module" src="js/form-app.js"></script>
 </body>
 </html>

@@ -11,9 +11,6 @@
  */
 
 // Wrapped in an IIFE; published via window.OphthalmologyAssessment.
-(function () {
-'use strict';
-window.OphthalmologyAssessment = window.OphthalmologyAssessment || {};
 
 /**
  * @param {AssessmentData} data
@@ -224,5 +221,4 @@ function detectAdditionalFlags(data) {
   return flags;
 }
 
-window.OphthalmologyAssessment.detectAdditionalFlags = detectAdditionalFlags;
-})();
+export { detectAdditionalFlags };

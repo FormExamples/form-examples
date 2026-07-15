@@ -1,3 +1,7 @@
+import { detectFlaggedIssues } from './flags.js';
+import { calculateTimiGrade } from './grader.js';
+import { emptyAssessment, priorityLabel, riskBandClass, riskBandLabel, workingDiagnosisLabel } from './types.js';
+
 // TIMI Risk Score for Acute Coronary Syndrome (UA/NSTEMI) — bedside wizard
 // (vanilla JavaScript, no build).
 //
@@ -13,19 +17,6 @@
 // exports to `window.TimiRiskScoreForAcuteCoronarySyndrome`. Pulling them off
 // here keeps the rest of this file referring to short local names. The whole
 // file is wrapped in an IIFE so its top-level identifiers don't leak.
-(function () {
-'use strict';
-
-const NS = window.TimiRiskScoreForAcuteCoronarySyndrome;
-const {
-  emptyAssessment,
-  riskBandLabel,
-  riskBandClass,
-  priorityLabel,
-  workingDiagnosisLabel,
-  calculateTimiGrade,
-  detectFlaggedIssues
-} = NS;
 
 // ----------------------------------------------------------------------
 // Persistence
@@ -963,4 +954,3 @@ if (document.readyState === 'loading') {
 } else {
   init();
 }
-})();

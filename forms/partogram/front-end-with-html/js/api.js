@@ -6,10 +6,6 @@
 // down) or returns an empty list, callers fall back to the sample data shipped
 // in `data.js` so the page is usable standalone.
 
-(function () {
-'use strict';
-window.PartogramDashboard = window.PartogramDashboard || {};
-
 const API_BASE = 'http://localhost:5150';
 const PARTOGRAMS_PATH = '/api/dashboard/partograms';
 
@@ -34,6 +30,4 @@ async function fetchPartograms() {
   return data.items || [];
 }
 
-window.PartogramDashboard.fetchPartograms = fetchPartograms;
-window.PartogramDashboard.API_BASE = API_BASE;
-})();
+export { fetchPartograms, API_BASE };

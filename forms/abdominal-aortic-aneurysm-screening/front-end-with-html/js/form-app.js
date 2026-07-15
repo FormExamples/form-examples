@@ -1,3 +1,7 @@
+import { detectFlaggedIssues } from './flags.js';
+import { classifyAaa } from './grader.js';
+import { categoryClass, categoryLabel, emptyAssessment, priorityLabel, surveillanceBandLabel } from './types.js';
+
 // Abdominal Aortic Aneurysm (AAA) Screening — clinic wizard
 // (vanilla JavaScript, no build).
 //
@@ -13,19 +17,6 @@
 // to `window.AbdominalAorticAneurysmScreening`. Pulling them off here keeps the
 // rest of this file referring to short local names. The whole file is wrapped in
 // an IIFE so its top-level identifiers don't leak.
-(function () {
-'use strict';
-
-const NS = window.AbdominalAorticAneurysmScreening;
-const {
-  emptyAssessment,
-  categoryLabel,
-  categoryClass,
-  surveillanceBandLabel,
-  priorityLabel,
-  classifyAaa,
-  detectFlaggedIssues
-} = NS;
 
 // ----------------------------------------------------------------------
 // Persistence
@@ -888,4 +879,3 @@ if (document.readyState === 'loading') {
 } else {
   init();
 }
-})();

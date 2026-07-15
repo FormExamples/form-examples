@@ -26,10 +26,6 @@
  */
 
 // Wrapped in an IIFE; published via window.Curb65PneumoniaSeverityScore.
-(function () {
-'use strict';
-window.Curb65PneumoniaSeverityScore =
-  window.Curb65PneumoniaSeverityScore || {};
 
 /** @type {Curb65Rule[]} */
 const curb65Rules = [
@@ -94,5 +90,4 @@ const curb65Rules = [
   }
 ];
 
-window.Curb65PneumoniaSeverityScore.curb65Rules = curb65Rules;
-})();
+export { curb65Rules };

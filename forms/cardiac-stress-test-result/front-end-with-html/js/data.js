@@ -6,11 +6,6 @@
 // critical / inconclusive), the severity ladder, and the follow-up urgency
 // bands, with critical-alert rows whose critical results raised two flags.
 
-(function () {
-'use strict';
-window.CardiacStressTestResultDashboard =
-  window.CardiacStressTestResultDashboard || {};
-
 /** @type {import('./dashboard-types.js').ReportRow[]} */
 const sampleReports = [
   {
@@ -99,5 +94,4 @@ const sampleReports = [
   }
 ];
 
-window.CardiacStressTestResultDashboard.sampleReports = sampleReports;
-})();
+export { sampleReports };

@@ -17,10 +17,6 @@
  */
 
 // Wrapped in an IIFE; published via window.ChronicObstructivePulmonaryDiseaseReview.
-(function () {
-'use strict';
-window.ChronicObstructivePulmonaryDiseaseReview =
-  window.ChronicObstructivePulmonaryDiseaseReview || {};
 
 /**
  * @param {ReviewData} data
@@ -134,6 +130,4 @@ function detectFlaggedIssues(data, grade) {
   return flags;
 }
 
-window.ChronicObstructivePulmonaryDiseaseReview.detectFlaggedIssues =
-  detectFlaggedIssues;
-})();
+export { detectFlaggedIssues };

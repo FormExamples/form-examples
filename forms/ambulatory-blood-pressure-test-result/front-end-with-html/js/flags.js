@@ -1,3 +1,5 @@
+import { hasCriticalFinding, nighttimeHypertensive, recordingIsInadequate } from './rules.js';
+
 // Flagged-issue detection (safety flags). Faithful vanilla-JavaScript port of
 // the SvelteKit engine `src/lib/engine/flagged-issues.ts`.
 //
@@ -12,15 +14,6 @@
  */
 
 // Wrapped in an IIFE; published via window.AmbulatoryBloodPressureTestResult.
-(function () {
-'use strict';
-window.AmbulatoryBloodPressureTestResult =
-  window.AmbulatoryBloodPressureTestResult || {};
-const {
-  hasCriticalFinding,
-  recordingIsInadequate,
-  nighttimeHypertensive
-} = window.AmbulatoryBloodPressureTestResult;
 
 /**
  * @param {AmbulatoryBloodPressureResult} r
@@ -157,5 +150,4 @@ function detectFlags(r) {
   return flags;
 }
 
-window.AmbulatoryBloodPressureTestResult.detectFlags = detectFlags;
-})();
+export { detectFlags };

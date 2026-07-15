@@ -5,10 +5,6 @@
 // Ten realistic rows: mix of pre-confinement (Part A) / post-confinement
 // (Part B), doctor and midwife issuers, with one row marked DUPLICATE.
 
-(function () {
-'use strict';
-window.MatB1Dashboard = window.MatB1Dashboard || {};
-
 /** @type {import('./types.js').PatientRow[]} */
 const samplePatients = [
   {
@@ -163,5 +159,4 @@ const samplePatients = [
   }
 ];
 
-window.MatB1Dashboard.samplePatients = samplePatients;
-})();
+export { samplePatients };

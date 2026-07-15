@@ -4,9 +4,6 @@
 // by the wizard so newly-added fields default correctly when older saved
 // state is rehydrated from localStorage.
 
-(function () {
-  'use strict';
-
   /** @returns {object} */
   function emptyAssessment() {
     return {
@@ -99,11 +96,7 @@
     return 'copm-good';
   }
 
-  window.OccupationalTherapyAssessment = window.OccupationalTherapyAssessment || {};
-  Object.assign(window.OccupationalTherapyAssessment, {
-    emptyAssessment,
-    difficultyLabel,
-    copmPerformanceCategory,
-    copmCategoryClass
-  });
-})();
+  
+  
+
+export { emptyAssessment, difficultyLabel, copmPerformanceCategory, copmCategoryClass };

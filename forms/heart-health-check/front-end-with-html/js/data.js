@@ -6,10 +6,6 @@
 // sexes, a range of ages 39-73, heart-age gaps positive and negative, and
 // flag counts from 0 to 6. NHS numbers in canonical "NNN NNN NNNN" form.
 
-(function () {
-'use strict';
-window.HeartHealthCheckDashboard = window.HeartHealthCheckDashboard || {};
-
 /** @type {import('./types.js').PatientRow[]} */
 const samplePatients = [
   {
@@ -158,5 +154,4 @@ const samplePatients = [
   }
 ];
 
-window.HeartHealthCheckDashboard.samplePatients = samplePatients;
-})();
+export { samplePatients };

@@ -29,9 +29,6 @@
  */
 
 // Wrapped in an IIFE; published via window.OttawaAnkleRules.
-(function () {
-'use strict';
-window.OttawaAnkleRules = window.OttawaAnkleRules || {};
 
 /**
  * Derived input shared by criteria A3 and F3. "Unable to bear weight" is true
@@ -105,5 +102,4 @@ const ottawaRules = [
   }
 ];
 
-Object.assign(window.OttawaAnkleRules, { ottawaRules, unableToBearWeight });
-})();
+export { ottawaRules, unableToBearWeight };

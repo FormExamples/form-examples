@@ -1,3 +1,6 @@
+import { copmActivities as activities } from './copm-rules.js';
+import { copmPerformanceCategory } from './types.js';
+
 // COPM (Canadian Occupational Performance Measure) grader.
 // Pure functions: calculate average performance and satisfaction scores
 // (1-10) and their category labels from patient assessment data.
@@ -12,10 +15,7 @@
 //     5-7  = Moderate concerns
 //     > 7  = Good satisfaction
 
-(function () {
-  'use strict';
-
-  const NS = window.OccupationalTherapyAssessment;
+  
 
   /**
    * @param {object} data Assessment data
@@ -53,7 +53,7 @@
       sat.activity4.name, sat.activity5.name
     ];
 
-    const activities = NS.copmActivities;
+    
 
     let perfTotal = 0;
     let perfCount = 0;
@@ -96,8 +96,8 @@
       ? Math.round((satTotal / satCount) * 10) / 10
       : 0;
 
-    const performanceCategoryLabel = NS.copmPerformanceCategory(performanceScore);
-    const satisfactionCategoryLabel = NS.copmPerformanceCategory(satisfactionScore);
+    const performanceCategoryLabel = copmPerformanceCategory(performanceScore);
+    const satisfactionCategoryLabel = copmPerformanceCategory(satisfactionScore);
 
     return {
       performanceScore,
@@ -108,8 +108,7 @@
     };
   }
 
-  window.OccupationalTherapyAssessment = window.OccupationalTherapyAssessment || {};
-  Object.assign(window.OccupationalTherapyAssessment, {
-    calculateCOPM
-  });
-})();
+  
+  
+
+export { calculateCOPM };

@@ -1,3 +1,5 @@
+import { hasText, isYesNoAnswered } from './types.js';
+
 // WHO Counter-Referral Form — completeness rules.
 //
 // The counter-referral form is a structured data-collection document, not a
@@ -16,11 +18,6 @@
  */
 
 // Wrapped in an IIFE; published via window.WhoCounterReferralForm.
-(function () {
-'use strict';
-window.WhoCounterReferralForm = window.WhoCounterReferralForm || {};
-
-const { hasText, isYesNoAnswered } = window.WhoCounterReferralForm;
 
 /** @type {ValidationRule[]} */
 const counterReferralRules = [
@@ -299,5 +296,4 @@ const counterReferralRules = [
   }
 ];
 
-window.WhoCounterReferralForm.counterReferralRules = counterReferralRules;
-})();
+export { counterReferralRules };

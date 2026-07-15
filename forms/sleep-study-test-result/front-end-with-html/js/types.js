@@ -149,9 +149,6 @@
 // classic <script> (no ES modules) so the page can be opened directly via
 // `file://`. The IIFE attaches its public symbols to a single global
 // namespace, `window.SleepStudyTestResult`.
-(function () {
-'use strict';
-window.SleepStudyTestResult = window.SleepStudyTestResult || {};
 
 /**
  * Build a fresh, fully-blank sleep study test result.
@@ -368,20 +365,4 @@ function followUpUrgencyClass(value) {
   }
 }
 
-Object.assign(window.SleepStudyTestResult, {
-  emptyResult,
-  NUMERIC_FIELDS,
-  resultClassificationLabel,
-  abnormalitySeverityLabel,
-  followUpUrgencyLabel,
-  studyTypeLabel,
-  studyAdequacyLabel,
-  osaSeverityLabel,
-  reportStatusLabel,
-  recommendationLabel,
-  priorityLabel,
-  resultClassificationClass,
-  abnormalitySeverityClass,
-  followUpUrgencyClass
-});
-})();
+export { emptyResult, NUMERIC_FIELDS, resultClassificationLabel, abnormalitySeverityLabel, followUpUrgencyLabel, studyTypeLabel, studyAdequacyLabel, osaSeverityLabel, reportStatusLabel, recommendationLabel, priorityLabel, resultClassificationClass, abnormalitySeverityClass, followUpUrgencyClass };

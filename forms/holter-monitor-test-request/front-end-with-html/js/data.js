@@ -8,11 +8,6 @@
 // case, a post-stroke-AF-detection case, and a symptom-frequency / monitor
 // mismatch case.
 
-(function () {
-'use strict';
-window.HolterMonitorTestRequestDashboard =
-  window.HolterMonitorTestRequestDashboard || {};
-
 /** @type {import('./types.js').RequestRow[]} */
 const sampleRequests = [
   {
@@ -167,5 +162,4 @@ const sampleRequests = [
   }
 ];
 
-window.HolterMonitorTestRequestDashboard.sampleRequests = sampleRequests;
-})();
+export { sampleRequests };

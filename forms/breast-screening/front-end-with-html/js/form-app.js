@@ -1,3 +1,7 @@
+import { detectFlaggedIssues } from './flags.js';
+import { calculateGrade } from './grader.js';
+import { eligibilityLabel, emptyAssessment, imagingClassLabel, outcomeBandClass, outcomeBandLabel, priorityLabel, readingOutcomeLabel, screeningOutcomeLabel } from './types.js';
+
 // Breast Screening Record (NHS Breast Screening Programme) — screening wizard
 // (vanilla JavaScript, no build).
 //
@@ -14,22 +18,6 @@
 // to `window.BreastScreening`. Pulling them off here keeps the rest of this
 // file referring to short local names. The whole file is wrapped in an IIFE so
 // its top-level identifiers don't leak.
-(function () {
-'use strict';
-
-const NS = window.BreastScreening;
-const {
-  emptyAssessment,
-  eligibilityLabel,
-  readingOutcomeLabel,
-  imagingClassLabel,
-  screeningOutcomeLabel,
-  outcomeBandLabel,
-  outcomeBandClass,
-  priorityLabel,
-  calculateGrade,
-  detectFlaggedIssues
-} = NS;
 
 // ----------------------------------------------------------------------
 // Persistence
@@ -1001,4 +989,3 @@ if (document.readyState === 'loading') {
 } else {
   init();
 }
-})();

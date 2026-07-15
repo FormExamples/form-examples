@@ -6,11 +6,6 @@
 // critical / inconclusive), the severity ladder, and the follow-up urgency
 // bands, with a critical-alert row whose contrast leak raised two flags.
 
-(function () {
-'use strict';
-window.FluoroscopyTestResultDashboard =
-  window.FluoroscopyTestResultDashboard || {};
-
 /** @type {import('./dashboard-types.js').ReportRow[]} */
 const sampleReports = [
   {
@@ -87,5 +82,4 @@ const sampleReports = [
   }
 ];
 
-window.FluoroscopyTestResultDashboard.sampleReports = sampleReports;
-})();
+export { sampleReports };

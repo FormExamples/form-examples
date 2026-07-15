@@ -1,3 +1,6 @@
+import { gradeMentalHealthActAssessment } from './grader.js';
+import { isDetaining, nonEmpty, riskLimbStatus } from './rules.js';
+
 // Flagged-issue detection (safety, legal, and governance). Independent of the
 // completeness status (which the grader produces), this module raises
 // AMHP/clinician-facing flags per spec §5:
@@ -28,11 +31,6 @@
  */
 
 // Wrapped in an IIFE; published via window.MentalHealthActAssessment.
-(function () {
-'use strict';
-window.MentalHealthActAssessment = window.MentalHealthActAssessment || {};
-const { nonEmpty, isDetaining, riskLimbStatus } =
-  window.MentalHealthActAssessment;
 
 // Milliseconds in five days — the s2/s3 statutory window between the two medical
 // examinations (Mental Health Act 1983, Code of Practice).
@@ -227,8 +225,7 @@ function detectFlaggedIssues(data, grade) {
   // Emitted whenever the assessment is not yet classifiable as valid (a
   // required signatory or evidence field is empty). The grader owns the status;
   // we recompute it here so this module stays independent of call order.
-  const status = window.MentalHealthActAssessment
-    .gradeMentalHealthActAssessment(data).completenessStatus;
+  const status = gradeMentalHealthActAssessment(data).completenessStatus;
   if (status === 'incomplete') {
     flags.push({
       id: 'F-INCOMPLETE-001',
@@ -248,5 +245,4 @@ function detectFlaggedIssues(data, grade) {
   return flags;
 }
 
-window.MentalHealthActAssessment.detectFlaggedIssues = detectFlaggedIssues;
-})();
+export { detectFlaggedIssues };

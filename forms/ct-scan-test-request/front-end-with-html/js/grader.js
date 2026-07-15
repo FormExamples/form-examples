@@ -1,3 +1,6 @@
+import { detectFlags } from './flags.js';
+import { evaluateContrastSafety, evaluateDose, scoreAppropriateness, scoreCompleteness, scoreTriage } from './rules.js';
+
 // Four-axis grader for the CT Scan Test Request.
 //
 // Composes the rule sets in rules.js and the safety flags in flags.js into a
@@ -7,19 +10,6 @@
 // ct_scan_test_request_grade SQL columns.
 //
 // Wrapped in an IIFE; published via `window.CtScanTestRequest`.
-
-(function () {
-'use strict';
-window.CtScanTestRequest = window.CtScanTestRequest || {};
-const NS = window.CtScanTestRequest;
-const {
-  scoreAppropriateness,
-  evaluateDose,
-  evaluateContrastSafety,
-  scoreCompleteness,
-  scoreTriage,
-  detectFlags
-} = NS;
 
 /**
  * Derive an overall recommendation for the imaging vetting desk from the four
@@ -110,9 +100,4 @@ function calculateGrade(data) {
   };
 }
 
-Object.assign(NS, {
-  calculateGrade,
-  deriveRecommendation,
-  RECOMMENDATION_LABELS
-});
-})();
+export { calculateGrade, deriveRecommendation, RECOMMENDATION_LABELS };

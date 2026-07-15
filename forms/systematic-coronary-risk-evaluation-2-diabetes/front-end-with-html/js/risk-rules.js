@@ -1,13 +1,8 @@
+import { calculateBmi, hasEstablishedCvd, hba1cMmolMol } from './utils.js';
+
 // SCORE2-Diabetes - 20 risk rules (CVR-001 .. CVR-020).
 //
 // Mirrors `front-end-form-with-svelte/src/lib/engine/risk-rules.ts`.
-(function () {
-'use strict';
-
-const NS = (window.SystematicCoronaryRiskEvaluation2Diabetes =
-  window.SystematicCoronaryRiskEvaluation2Diabetes || {});
-
-const { hasEstablishedCvd, hba1cMmolMol, calculateBmi } = NS;
 
 function allRules() {
   return [
@@ -203,6 +198,4 @@ function evaluateRules(data) {
   return fired;
 }
 
-NS.allRules = allRules;
-NS.evaluateRules = evaluateRules;
-})();
+export { allRules, evaluateRules };

@@ -1,3 +1,7 @@
+import { detectFlags } from './flags.js';
+import { calculateGrade } from './grader.js';
+import { abnormalitySeverityClass, abnormalitySeverityLabel, biopsyMethodLabel, biopsySiteLabel, emptyResult, followUpUrgencyClass, followUpUrgencyLabel, histologicalGradeLabel, priorityLabel, recommendationLabel, reportStatusLabel, resectionMarginsLabel, resultClassificationClass, resultClassificationLabel, specimenAdequacyLabel } from './types.js';
+
 // Biopsy Test Result — single-page report wizard (vanilla JavaScript, no build).
 //
 // Single-page continuous wizard: every report section is rendered into the page
@@ -11,29 +15,6 @@
 // Sibling files loaded as plain `<script>` tags (in order: types → rules →
 // grader → flags → form-app) attach their exports to `window.BiopsyTestResult`.
 // The whole file is wrapped in an IIFE so its top-level identifiers don't leak.
-(function () {
-'use strict';
-
-const NS = window.BiopsyTestResult;
-const {
-  emptyResult,
-  calculateGrade,
-  detectFlags,
-  priorityLabel,
-  resultClassificationLabel,
-  resultClassificationClass,
-  abnormalitySeverityLabel,
-  abnormalitySeverityClass,
-  followUpUrgencyLabel,
-  followUpUrgencyClass,
-  recommendationLabel,
-  biopsySiteLabel,
-  biopsyMethodLabel,
-  specimenAdequacyLabel,
-  histologicalGradeLabel,
-  resectionMarginsLabel,
-  reportStatusLabel
-} = NS;
 
 // ----------------------------------------------------------------------
 // Persistence
@@ -990,4 +971,3 @@ if (document.readyState === 'loading') {
 } else {
   init();
 }
-})();

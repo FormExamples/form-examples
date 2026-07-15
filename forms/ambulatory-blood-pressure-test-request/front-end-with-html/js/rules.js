@@ -15,12 +15,6 @@
 // grader composes them. Wrapped in an IIFE; published via
 // `window.AmbulatoryBloodPressureTestRequest`.
 
-(function () {
-'use strict';
-window.AmbulatoryBloodPressureTestRequest =
-  window.AmbulatoryBloodPressureTestRequest || {};
-const NS = window.AmbulatoryBloodPressureTestRequest;
-
 // ----------------------------------------------------------------------
 // Shared blood-pressure thresholds (NICE NG136)
 // ----------------------------------------------------------------------
@@ -413,22 +407,4 @@ function scoreTriage(data) {
   };
 }
 
-Object.assign(NS, {
-  scoreAppropriateness,
-  appropriatenessBand,
-  scoreSuitability,
-  scoreCompleteness,
-  scoreTriage,
-  maxTier,
-  isSevere,
-  isStage1OrAbove,
-  bpPresent,
-  TRIAGE_ORDER,
-  TARGET_TIMEFRAMES,
-  BP_STAGE1_SYSTOLIC,
-  BP_STAGE1_DIASTOLIC,
-  BP_SEVERE_SYSTOLIC,
-  BP_SEVERE_DIASTOLIC,
-  BMI_LARGE_ARM
-});
-})();
+export { scoreAppropriateness, appropriatenessBand, scoreSuitability, scoreCompleteness, scoreTriage, maxTier, isSevere, isStage1OrAbove, bpPresent, TRIAGE_ORDER, TARGET_TIMEFRAMES, BP_STAGE1_SYSTOLIC, BP_STAGE1_DIASTOLIC, BP_SEVERE_SYSTOLIC, BP_SEVERE_DIASTOLIC, BMI_LARGE_ARM };

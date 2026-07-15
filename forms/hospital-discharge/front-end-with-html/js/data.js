@@ -6,10 +6,6 @@
 // arrangement, with discharge destinations representative of UK acute-trust
 // patient flow; NHS numbers in the canonical "NNN NNN NNNN" display form.
 
-(function () {
-'use strict';
-window.HospitalDischargeDashboard = window.HospitalDischargeDashboard || {};
-
 /** @type {import('./types.js').PatientRow[]} */
 const samplePatients = [
   {
@@ -122,5 +118,4 @@ const samplePatients = [
   }
 ];
 
-window.HospitalDischargeDashboard.samplePatients = samplePatients;
-})();
+export { samplePatients };

@@ -9,12 +9,6 @@
 // Flag IDs are stable and identical across every front-end and the back-end.
 // Wrapped in an IIFE; published via `window.HistopathologyTestRequest`.
 
-(function () {
-'use strict';
-window.HistopathologyTestRequest =
-  window.HistopathologyTestRequest || {};
-const NS = window.HistopathologyTestRequest;
-
 /**
  * Detect safety flags for a histopathology test request.
  *
@@ -112,5 +106,4 @@ function detectFlags(data, context) {
   return flags;
 }
 
-Object.assign(NS, { detectFlags });
-})();
+export { detectFlags };

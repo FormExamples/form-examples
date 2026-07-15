@@ -5,11 +5,6 @@
 // rows span the Aldrete score range, both readiness bands, and every anaesthetic
 // technique, with the not-ready flag set whenever the band is 'not-ready'.
 
-(function () {
-'use strict';
-window.PostAnaesthesiaCareUnitRecordDashboard =
-  window.PostAnaesthesiaCareUnitRecordDashboard || {};
-
 /** @type {import('./dashboard-types.js').RecordRow[]} */
 const sampleRecords = [
   {
@@ -84,5 +79,4 @@ const sampleRecords = [
   }
 ];
 
-window.PostAnaesthesiaCareUnitRecordDashboard.sampleRecords = sampleRecords;
-})();
+export { sampleRecords };

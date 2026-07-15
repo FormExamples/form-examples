@@ -1,8 +1,6 @@
-(function () {
-  'use strict';
-  const NS = (window.AgileChecklistDashboard = window.AgileChecklistDashboard || {});
+  
 
-  NS.SAMPLE_CHECKLISTS = [
+  export const SAMPLE_CHECKLISTS = [
     { id: 'C001', date: '2025-07-15', respondent: 'Alice Hopper', role: 'scrum-master', team: 'Aurora', organisation: 'Acme Engineering', answered: 57, teamsPercent: 72, stakeholdersPercent: 64, practicesPercent: 56, overallPercent: 64, maturity: 'developing', weakSections: ['Practices'], flags: ['finished-work-risk'] },
     { id: 'C002', date: '2025-10-15', respondent: 'Alice Hopper', role: 'scrum-master', team: 'Aurora', organisation: 'Acme Engineering', answered: 57, teamsPercent: 80, stakeholdersPercent: 71, practicesPercent: 67, overallPercent: 73, maturity: 'developing', weakSections: [], flags: [] },
     { id: 'C003', date: '2026-01-15', respondent: 'Alice Hopper', role: 'scrum-master', team: 'Aurora', organisation: 'Acme Engineering', answered: 57, teamsPercent: 88, stakeholdersPercent: 79, practicesPercent: 78, overallPercent: 82, maturity: 'mature', weakSections: [], flags: [] },
@@ -24,4 +22,3 @@
 
     { id: 'C014', date: '2026-04-18', respondent: 'Farah Lopez', role: 'team-lead', team: 'Fornax', organisation: 'Acme Engineering', answered: 18, teamsPercent: 75, stakeholdersPercent: null, practicesPercent: null, overallPercent: null, maturity: 'insufficient-data', weakSections: [], flags: ['insufficient-data'] },
   ];
-})();

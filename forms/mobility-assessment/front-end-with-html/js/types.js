@@ -165,9 +165,6 @@
 // classic <script> (no ES modules) so the page can be opened directly via
 // `file://`. The IIFE attaches its public symbols to a single global
 // namespace, `window.MobilityAssessment`.
-(function () {
-'use strict';
-window.MobilityAssessment = window.MobilityAssessment || {};
 
 /**
  * Build a fresh, fully-blank assessment.
@@ -305,11 +302,4 @@ function tugCategory(timeSeconds) {
   return 'Impaired mobility';
 }
 
-Object.assign(window.MobilityAssessment, {
-  emptyAssessment,
-  calculateAge,
-  tinettiCategory,
-  tinettiCategoryClass,
-  tugCategory
-});
-})();
+export { emptyAssessment, calculateAge, tinettiCategory, tinettiCategoryClass, tugCategory };

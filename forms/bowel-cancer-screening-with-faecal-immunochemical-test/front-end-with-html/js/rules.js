@@ -16,10 +16,6 @@
  */
 
 // Wrapped in an IIFE; published via window.BowelCancerScreeningFit.
-(function () {
-'use strict';
-window.BowelCancerScreeningFit =
-  window.BowelCancerScreeningFit || {};
 
 // ─── Sample-adequacy states that classify as spoilt (spec §4) ───
 /** Adequacy values that are not adequate and therefore require a repeat kit. */
@@ -76,8 +72,4 @@ const classificationRules = {
   }
 };
 
-Object.assign(window.BowelCancerScreeningFit, {
-  INADEQUATE_SAMPLE,
-  classificationRules
-});
-})();
+export { INADEQUATE_SAMPLE, classificationRules };

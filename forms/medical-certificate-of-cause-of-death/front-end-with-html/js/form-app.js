@@ -1,3 +1,7 @@
+import { detectFlaggedIssues } from './flags.js';
+import { validateCertificate } from './grader.js';
+import { coronerReasonLabel, emptyCertificate, gradeLabel, medicalExaminerStatusLabel, priorityLabel, seenAfterDeathByLabel, sexLabel, validityClassClass, validityClassLabel } from './types.js';
+
 // Medical Certificate of Cause of Death (MCCD) — wizard (vanilla JavaScript,
 // no build).
 //
@@ -17,23 +21,6 @@
 // Sibling files loaded as plain `<script>` tags (in order) attach their exports
 // to `window.MedicalCertificateOfCauseOfDeath`. The whole file is wrapped in an
 // IIFE so its top-level identifiers do not leak.
-(function () {
-'use strict';
-
-const NS = window.MedicalCertificateOfCauseOfDeath;
-const {
-  emptyCertificate,
-  validityClassLabel,
-  validityClassClass,
-  gradeLabel,
-  sexLabel,
-  seenAfterDeathByLabel,
-  coronerReasonLabel,
-  medicalExaminerStatusLabel,
-  priorityLabel,
-  validateCertificate,
-  detectFlaggedIssues
-} = NS;
 
 // ----------------------------------------------------------------------
 // Persistence
@@ -949,4 +936,3 @@ if (document.readyState === 'loading') {
 } else {
   init();
 }
-})();

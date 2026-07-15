@@ -1,3 +1,5 @@
+import { ageInYears } from './types.js';
+
 // NICE CG156 Fertility Assessment scoring rules.
 //
 // Each rule contributes one point to a numeric concern score when its
@@ -17,11 +19,6 @@
  * @property {number} weight
  * @property {(d: AssessmentData) => boolean} evaluate
  */
-
-(function () {
-'use strict';
-window.FertilityAssessment = window.FertilityAssessment || {};
-const { ageInYears } = window.FertilityAssessment;
 
 /** @type {FertilityRule[]} */
 const fertilityRules = [
@@ -362,5 +359,4 @@ const fertilityRules = [
   }
 ];
 
-window.FertilityAssessment.fertilityRules = fertilityRules;
-})();
+export { fertilityRules };

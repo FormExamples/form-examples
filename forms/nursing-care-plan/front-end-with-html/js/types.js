@@ -114,9 +114,6 @@
 // <script> (no ES modules) so the page can be opened directly via `file://`.
 // The IIFE attaches its public symbols to a single global namespace,
 // `window.NursingCarePlan`.
-(function () {
-'use strict';
-window.NursingCarePlan = window.NursingCarePlan || {};
 
 /** Monotonic-ish unique id for a newly-created problem / goal / intervention row. */
 let _seq = 0;
@@ -262,19 +259,4 @@ function riskLevelLabel(level) {
   }
 }
 
-Object.assign(window.NursingCarePlan, {
-  uid,
-  emptyRiskGroup,
-  emptyGoal,
-  emptyIntervention,
-  emptyProblem,
-  emptyPlan,
-  ADL_CATEGORIES,
-  MET_OPTIONS,
-  LINKED_RISK_OPTIONS,
-  adlCategoryLabel,
-  completenessLabel,
-  completenessClass,
-  riskLevelLabel
-});
-})();
+export { uid, emptyRiskGroup, emptyGoal, emptyIntervention, emptyProblem, emptyPlan, ADL_CATEGORIES, MET_OPTIONS, LINKED_RISK_OPTIONS, adlCategoryLabel, completenessLabel, completenessClass, riskLevelLabel };

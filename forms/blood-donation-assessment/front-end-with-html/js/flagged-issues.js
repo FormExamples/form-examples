@@ -1,3 +1,5 @@
+import { calculateAgeYears } from './types.js';
+
 // Flagged-issue detection. Independent of overall eligibility status,
 // this module raises clinician-facing flags for under-weight donors,
 // abnormal vital signs, multiple recent deferrable exposures, missing
@@ -9,10 +11,6 @@
  */
 
 // Wrapped in an IIFE; published via window.BloodDonationAssessment.
-(function () {
-'use strict';
-window.BloodDonationAssessment = window.BloodDonationAssessment || {};
-const { calculateAgeYears } = window.BloodDonationAssessment;
 
 /**
  * @param {AssessmentData} data
@@ -365,5 +363,4 @@ function detectAdditionalFlags(data) {
   return flags;
 }
 
-window.BloodDonationAssessment.detectAdditionalFlags = detectAdditionalFlags;
-})();
+export { detectAdditionalFlags };

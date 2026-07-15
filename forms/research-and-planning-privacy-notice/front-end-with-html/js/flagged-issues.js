@@ -9,9 +9,6 @@
  */
 
 // Wrapped in an IIFE; published via window.ResearchAndPlanningPrivacyNotice.
-(function () {
-'use strict';
-window.ResearchAndPlanningPrivacyNotice = window.ResearchAndPlanningPrivacyNotice || {};
 
 /**
  * Detects additional flags that should be highlighted for the
@@ -88,5 +85,4 @@ function detectAdditionalFlags(data) {
   return flags;
 }
 
-window.ResearchAndPlanningPrivacyNotice.detectAdditionalFlags = detectAdditionalFlags;
-})();
+export { detectAdditionalFlags };

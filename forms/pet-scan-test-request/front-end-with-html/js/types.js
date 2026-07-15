@@ -5,10 +5,6 @@
 // Property names are camelCase to match the front-end serde / examples
 // convention. Wrapped in an IIFE; published via `window.PetScanTestRequest`.
 
-(function () {
-'use strict';
-window.PetScanTestRequest = window.PetScanTestRequest || {};
-
 /**
  * Build a fresh, fully-blank PET-CT scan request.
  * Strings default to ''; numeric / date fields default to null;
@@ -84,10 +80,4 @@ function isFdgStudy(scanType) {
   return scanType === 'fdg-pet-ct' || scanType === 'cardiac-pet';
 }
 
-Object.assign(window.PetScanTestRequest, {
-  emptyRequest,
-  scanTypeLabel,
-  isFdgStudy,
-  SCAN_TYPE_LABELS
-});
-})();
+export { emptyRequest, scanTypeLabel, isFdgStudy, SCAN_TYPE_LABELS };

@@ -6,10 +6,6 @@
 // with allergy and previous-adverse-incident flags set on a subset; NHS
 // numbers in the canonical "NNN NNN NNNN" display form.
 
-(function () {
-'use strict';
-window.MentalHealthAssessmentDashboard = window.MentalHealthAssessmentDashboard || {};
-
 /** @type {import('./types.js').PatientRow[]} */
 const samplePatients = [
   {
@@ -134,5 +130,4 @@ const samplePatients = [
   }
 ];
 
-window.MentalHealthAssessmentDashboard.samplePatients = samplePatients;
-})();
+export { samplePatients };

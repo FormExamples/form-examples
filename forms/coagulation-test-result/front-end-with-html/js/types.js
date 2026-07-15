@@ -142,9 +142,6 @@
 // classic <script> (no ES modules) so the page can be opened directly via
 // `file://`. The IIFE attaches its public symbols to a single global
 // namespace, `window.CoagulationTestResult`.
-(function () {
-'use strict';
-window.CoagulationTestResult = window.CoagulationTestResult || {};
 
 /**
  * Build a fresh, fully-blank coagulation test result.
@@ -337,19 +334,4 @@ function overallResultStatusClass(value) {
   }
 }
 
-Object.assign(window.CoagulationTestResult, {
-  emptyResult,
-  resultClassificationLabel,
-  abnormalitySeverityLabel,
-  followUpUrgencyLabel,
-  overallResultStatusLabel,
-  specimenConditionLabel,
-  reportStatusLabel,
-  recommendationLabel,
-  priorityLabel,
-  resultClassificationClass,
-  abnormalitySeverityClass,
-  followUpUrgencyClass,
-  overallResultStatusClass
-});
-})();
+export { emptyResult, resultClassificationLabel, abnormalitySeverityLabel, followUpUrgencyLabel, overallResultStatusLabel, specimenConditionLabel, reportStatusLabel, recommendationLabel, priorityLabel, resultClassificationClass, abnormalitySeverityClass, followUpUrgencyClass, overallResultStatusClass };

@@ -1,3 +1,5 @@
+import { ottawaRules, unableToBearWeight } from './rules.js';
+
 // Ottawa Ankle / Foot Rules decision engine. Pure functions: take an
 // `AssessmentData` object and apply the boolean decision rule (NO summation and
 // NO risk band — this is a classification instrument). It derives "unable to
@@ -28,10 +30,6 @@
  */
 
 // Wrapped in an IIFE; published via window.OttawaAnkleRules.
-(function () {
-'use strict';
-window.OttawaAnkleRules = window.OttawaAnkleRules || {};
-const { ottawaRules, unableToBearWeight } = window.OttawaAnkleRules;
 
 /**
  * Evaluate the six Ottawa criteria and collect the ones whose finding is
@@ -105,8 +103,4 @@ function calculateOttawaDecision(data) {
   };
 }
 
-Object.assign(window.OttawaAnkleRules, {
-  evaluateCriteria,
-  calculateOttawaDecision
-});
-})();
+export { evaluateCriteria, calculateOttawaDecision };

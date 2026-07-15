@@ -7,11 +7,6 @@
 // falls back to this data when the backend is unreachable so a clinician
 // can still demo and review the dashboard offline.
 
-(function () {
-'use strict';
-window.PatientSatisfactionSurveyDashboard =
-  window.PatientSatisfactionSurveyDashboard || {};
-
 /** @type {import('./types.js').PatientRow[]} */
 const samplePatients = [
   {
@@ -124,5 +119,4 @@ const samplePatients = [
   }
 ];
 
-window.PatientSatisfactionSurveyDashboard.samplePatients = samplePatients;
-})();
+export { samplePatients };

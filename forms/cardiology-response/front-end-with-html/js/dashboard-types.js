@@ -61,10 +61,6 @@
 // <script> (no ES modules) so the page can be opened directly via `file://`.
 // The IIFE attaches its public symbols to a single global namespace,
 // `window.CardiologyResponseDashboard`.
-(function () {
-'use strict';
-window.CardiologyResponseDashboard =
-  window.CardiologyResponseDashboard || {};
 
 /** Axis A response-classification display label. */
 function responseClassificationLabel(value) {
@@ -122,11 +118,4 @@ function responseStatusLabel(value) {
   }
 }
 
-Object.assign(window.CardiologyResponseDashboard, {
-  responseClassificationLabel,
-  severityLabel,
-  followUpUrgencyLabel,
-  consultationTypeLabel,
-  responseStatusLabel
-});
-})();
+export { responseClassificationLabel, severityLabel, followUpUrgencyLabel, consultationTypeLabel, responseStatusLabel };

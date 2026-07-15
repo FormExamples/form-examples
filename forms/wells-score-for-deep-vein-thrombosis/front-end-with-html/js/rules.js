@@ -22,10 +22,6 @@
  */
 
 // Wrapped in an IIFE; published via window.WellsScoreForDeepVeinThrombosis.
-(function () {
-'use strict';
-window.WellsScoreForDeepVeinThrombosis =
-  window.WellsScoreForDeepVeinThrombosis || {};
 
 /** @type {WellsRule[]} */
 const wellsRules = [
@@ -130,5 +126,4 @@ const wellsRules = [
   }
 ];
 
-window.WellsScoreForDeepVeinThrombosis.wellsRules = wellsRules;
-})();
+export { wellsRules };

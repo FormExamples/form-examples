@@ -8,11 +8,6 @@
 // realistic mix of risk flags (concussion history, RED-S, family CV
 // history); NHS numbers in the canonical "NNN NNN NNNN" display form.
 
-(function () {
-'use strict';
-window.SportsMedicineAssessmentDashboard =
-  window.SportsMedicineAssessmentDashboard || {};
-
 /** @type {import('./types.js').AthleteRow[]} */
 const sampleAthletes = [
   {
@@ -185,5 +180,4 @@ const sampleAthletes = [
   }
 ];
 
-window.SportsMedicineAssessmentDashboard.sampleAthletes = sampleAthletes;
-})();
+export { sampleAthletes };

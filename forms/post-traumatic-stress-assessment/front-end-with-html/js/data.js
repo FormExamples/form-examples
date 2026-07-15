@@ -12,11 +12,6 @@
 //   Moderate : 33-37 (probable PTSD threshold)
 //   Severe   : 38-80
 
-(function () {
-'use strict';
-window.PostTraumaticStressAssessmentDashboard =
-  window.PostTraumaticStressAssessmentDashboard || {};
-
 /** @type {import('./types.js').PatientRow[]} */
 const samplePatients = [
   {
@@ -129,5 +124,4 @@ const samplePatients = [
   }
 ];
 
-window.PostTraumaticStressAssessmentDashboard.samplePatients = samplePatients;
-})();
+export { samplePatients };

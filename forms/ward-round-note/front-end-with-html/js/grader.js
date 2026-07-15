@@ -1,3 +1,7 @@
+import { detectFlaggedIssues } from './flags.js';
+import { componentPresence, recommendedComponents, requiredComponents } from './rules.js';
+import { COMPONENTS } from './types.js';
+
 // Ward-round-note documentation-completeness grader. Pure functions: take an
 // `AssessmentData` object and derive the documentation outputs (spec §4).
 // This is NOT a numeric clinical score. It emits:
@@ -25,17 +29,6 @@
  */
 
 // Wrapped in an IIFE; published via window.WardRoundNote.
-(function () {
-'use strict';
-window.WardRoundNote = window.WardRoundNote || {};
-const NS = window.WardRoundNote;
-const {
-  componentPresence,
-  requiredComponents,
-  recommendedComponents,
-  detectFlaggedIssues,
-  COMPONENTS
-} = NS;
 
 /**
  * Build the per-component presence rows for the report (all ten components).
@@ -157,9 +150,4 @@ function assess(data) {
   };
 }
 
-Object.assign(NS, {
-  componentStatuses,
-  calculateGrade,
-  assess
-});
-})();
+export { componentStatuses, calculateGrade, assess };

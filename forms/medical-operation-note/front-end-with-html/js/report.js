@@ -1,21 +1,11 @@
+import { ASA_LABELS, bloodLossBandLabel, compositeRiskLabel } from './types.js';
+import { esc, formatTimestamp } from './utils.js';
+
 // Report renderer: HTML preview + pdfmake PDF generation.
 //
 // Pure functions over the GradingResult returned by
 // `calculateOperationGrade(data)`. Mirrors the SvelteKit report layout
 // closely so the printed PDF reads the same as the on-screen preview.
-
-(function () {
-'use strict';
-window.MedicalOperationNote =
-  window.MedicalOperationNote || {};
-const NS = window.MedicalOperationNote;
-const {
-  esc,
-  compositeRiskLabel,
-  bloodLossBandLabel,
-  ASA_LABELS,
-  formatTimestamp
-} = NS;
 
 function priorityClass(priority) {
   switch (priority) {
@@ -329,9 +319,4 @@ function downloadPdf(result) {
   window.pdfMake.createPdf(doc).download(filename);
 }
 
-Object.assign(NS, {
-  renderReport,
-  buildPdfDocument,
-  downloadPdf
-});
-})();
+export { renderReport, buildPdfDocument, downloadPdf };

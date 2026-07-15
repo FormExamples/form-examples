@@ -146,9 +146,6 @@
 // classic <script> (no ES modules) so the page can be opened directly via
 // `file://`. The IIFE attaches its public symbols to a single global
 // namespace, `window.LumbarPunctureTestResult`.
-(function () {
-'use strict';
-window.LumbarPunctureTestResult = window.LumbarPunctureTestResult || {};
 
 /**
  * Build a fresh, fully-blank lumbar puncture test result.
@@ -356,19 +353,4 @@ function followUpUrgencyClass(value) {
   }
 }
 
-Object.assign(window.LumbarPunctureTestResult, {
-  emptyResult,
-  resultClassificationLabel,
-  abnormalitySeverityLabel,
-  followUpUrgencyLabel,
-  csfAppearanceLabel,
-  testResultLabel,
-  reportingCategoryLabel,
-  reportStatusLabel,
-  recommendationLabel,
-  priorityLabel,
-  resultClassificationClass,
-  abnormalitySeverityClass,
-  followUpUrgencyClass
-});
-})();
+export { emptyResult, resultClassificationLabel, abnormalitySeverityLabel, followUpUrgencyLabel, csfAppearanceLabel, testResultLabel, reportingCategoryLabel, reportStatusLabel, recommendationLabel, priorityLabel, resultClassificationClass, abnormalitySeverityClass, followUpUrgencyClass };

@@ -1,3 +1,5 @@
+import { activeItemNumbers, maxScoreFor, ratingValue, zaritItems } from './rules.js';
+
 // Zarit Burden Interview grader. Pure functions: take an `AssessmentData`
 // object, sum the answered 0-4 item ratings over the active item set (all 22
 // for ZBI-22, or the 12-item short-form subset for ZBI-12), and derive the
@@ -29,15 +31,6 @@
  */
 
 // Wrapped in an IIFE; published via window.ZaritBurdenInterview.
-(function () {
-'use strict';
-window.ZaritBurdenInterview = window.ZaritBurdenInterview || {};
-const {
-  zaritItems,
-  activeItemNumbers,
-  maxScoreFor,
-  ratingValue
-} = window.ZaritBurdenInterview;
 
 /**
  * Derive the burden band from a total for the given instrument form.
@@ -126,8 +119,4 @@ function calculateZaritGrade(data) {
   return { itemRatings, totalScore, maxScore, burdenBand, firedItems };
 }
 
-Object.assign(window.ZaritBurdenInterview, {
-  burdenBandFor,
-  calculateZaritGrade
-});
-})();
+export { burdenBandFor, calculateZaritGrade };

@@ -1,3 +1,7 @@
+import { fetchReports } from './api.js';
+import { sampleReports } from './data.js';
+import { abnormalitySeverityClass, abnormalitySeverityLabel, bodyRegionLabel, followUpUrgencyClass, followUpUrgencyLabel, reportStatusLabel, resultClassificationClass, resultClassificationLabel } from './types.js';
+
 // Ultrasound Test Result — clinician dashboard (vanilla classic-script app).
 //
 // On boot we fetch the graded-report list from the backend; on any failure (or
@@ -11,22 +15,6 @@
 // their exports to `window.UltrasoundTestResultDashboard`; display labels come
 // from the form namespace `window.UltrasoundTestResult` (js/types.js). The
 // whole file is wrapped in an IIFE so its top-level identifiers do not leak.
-(function () {
-'use strict';
-const {
-  fetchReports,
-  sampleReports
-} = window.UltrasoundTestResultDashboard;
-const {
-  bodyRegionLabel,
-  reportStatusLabel,
-  resultClassificationLabel,
-  abnormalitySeverityLabel,
-  followUpUrgencyLabel,
-  resultClassificationClass,
-  abnormalitySeverityClass,
-  followUpUrgencyClass
-} = window.UltrasoundTestResult;
 
 // ----------------------------------------------------------------------
 // State
@@ -393,4 +381,3 @@ if (document.readyState === 'loading') {
 } else {
   init();
 }
-})();

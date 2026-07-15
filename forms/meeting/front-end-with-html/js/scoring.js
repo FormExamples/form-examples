@@ -3,8 +3,6 @@
 //
 // Loaded as a classic <script> before app.js; exposes Meeting.validateMeeting
 // on the global namespace.
-(function (global) {
-'use strict';
 
 function parseDate(value) {
 	if (!value) return null;
@@ -222,5 +220,4 @@ function validateMeeting(data) {
 	};
 }
 
-global.Meeting = { validateMeeting };
-})(window);
+export { validateMeeting };

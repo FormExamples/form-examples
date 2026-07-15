@@ -27,9 +27,6 @@
  */
 
 // Wrapped in an IIFE; published via window.Partogram.
-(function () {
-'use strict';
-window.Partogram = window.Partogram || {};
 
 /** Cervical dilatation (cm) at which the active phase — and the alert line — begins. */
 const ALERT_LINE_START_CM = 4;
@@ -112,22 +109,4 @@ function classifyProgress(dilatationCm, t) {
   return 'actionLineCrossed';
 }
 
-Object.assign(window.Partogram, {
-  ALERT_LINE_START_CM,
-  ACTION_LINE_OFFSET_HOURS,
-  FHR_LOW_BPM,
-  FHR_HIGH_BPM,
-  TEMPERATURE_FEVER_C,
-  SYSTOLIC_HYPERTENSION_MMHG,
-  DIASTOLIC_HYPERTENSION_MMHG,
-  PULSE_TACHYCARDIA_BPM,
-  SYSTOLIC_HYPOTENSION_MMHG,
-  POOR_PROGRESS_HOURS,
-  MS_PER_HOUR,
-  num,
-  elapsedHours,
-  alertLineExpectedCm,
-  actionLineExpectedCm,
-  classifyProgress
-});
-})();
+export { ALERT_LINE_START_CM, ACTION_LINE_OFFSET_HOURS, FHR_LOW_BPM, FHR_HIGH_BPM, TEMPERATURE_FEVER_C, SYSTOLIC_HYPERTENSION_MMHG, DIASTOLIC_HYPERTENSION_MMHG, PULSE_TACHYCARDIA_BPM, SYSTOLIC_HYPOTENSION_MMHG, POOR_PROGRESS_HOURS, MS_PER_HOUR, num, elapsedHours, alertLineExpectedCm, actionLineExpectedCm, classifyProgress };

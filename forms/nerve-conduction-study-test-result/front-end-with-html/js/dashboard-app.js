@@ -1,3 +1,7 @@
+import { fetchReports } from './api.js';
+import { sampleReports } from './data.js';
+import { abnormalitySeverityClass, abnormalitySeverityLabel, followUpUrgencyClass, followUpUrgencyLabel, reportStatusLabel, resultClassificationClass, resultClassificationLabel, studyTypeLabel } from './types.js';
+
 // Nerve Conduction Study Test Result — clinician dashboard (vanilla
 // classic-script app).
 //
@@ -13,22 +17,6 @@
 // labels come from the form namespace `window.NerveConductionStudyTestResult`
 // (js/types.js). The whole file is wrapped in an IIFE so its top-level
 // identifiers do not leak.
-(function () {
-'use strict';
-const {
-  fetchReports,
-  sampleReports
-} = window.NerveConductionStudyTestResultDashboard;
-const {
-  studyTypeLabel,
-  reportStatusLabel,
-  resultClassificationLabel,
-  abnormalitySeverityLabel,
-  followUpUrgencyLabel,
-  resultClassificationClass,
-  abnormalitySeverityClass,
-  followUpUrgencyClass
-} = window.NerveConductionStudyTestResult;
 
 // ----------------------------------------------------------------------
 // State
@@ -395,4 +383,3 @@ if (document.readyState === 'loading') {
 } else {
   init();
 }
-})();

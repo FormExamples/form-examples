@@ -13,9 +13,6 @@
  */
 
 // Wrapped in an IIFE; published via window.MobilityAssessment.
-(function () {
-'use strict';
-window.MobilityAssessment = window.MobilityAssessment || {};
 
 /** @type {TinettiRuleDefinition[]} */
 const tinettiBalanceItems = [
@@ -144,9 +141,6 @@ const tinettiGaitItems = [
   }
 ];
 
-Object.assign(window.MobilityAssessment, {
-  tinettiBalanceItems,
-  tinettiGaitItems,
-  allTinettiItems: [...tinettiBalanceItems, ...tinettiGaitItems]
-});
-})();
+export const allTinettiItems = [...tinettiBalanceItems, ...tinettiGaitItems];
+
+export { tinettiBalanceItems, tinettiGaitItems };

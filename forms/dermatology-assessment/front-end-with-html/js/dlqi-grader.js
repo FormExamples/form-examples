@@ -22,9 +22,6 @@
  */
 
 // Wrapped in an IIFE; published via window.DermatologyAssessment.
-(function () {
-'use strict';
-window.DermatologyAssessment = window.DermatologyAssessment || {};
 
 /** @type {DLQIRuleDefinition[]} */
 const dlqiQuestions = [
@@ -166,11 +163,4 @@ function calculateDLQI(data) {
   return { dlqiScore, dlqiCategoryLabel, answeredCount, firedRules };
 }
 
-Object.assign(window.DermatologyAssessment, {
-  dlqiQuestions,
-  dlqiResponseOptions,
-  dlqiCategory,
-  dlqiCategoryClass,
-  calculateDLQI
-});
-})();
+export { dlqiQuestions, dlqiResponseOptions, dlqiCategory, dlqiCategoryClass, calculateDLQI };

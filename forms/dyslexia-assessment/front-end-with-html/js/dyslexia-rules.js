@@ -27,9 +27,6 @@
  */
 
 // Wrapped in an IIFE; published via window.DyslexiaAssessment.
-(function () {
-'use strict';
-window.DyslexiaAssessment = window.DyslexiaAssessment || {};
 
 /** @type {DyslexiaRule[]} */
 const dyslexiaRules = [
@@ -89,5 +86,4 @@ const dyslexiaRules = [
   }
 ];
 
-window.DyslexiaAssessment.dyslexiaRules = dyslexiaRules;
-})();
+export { dyslexiaRules };

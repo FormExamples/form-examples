@@ -7,11 +7,6 @@
 // bands, with critical-alert rows whose STEMI and Holter findings raised
 // multiple flags.
 
-(function () {
-'use strict';
-window.ElectrocardiogramTestResultDashboard =
-  window.ElectrocardiogramTestResultDashboard || {};
-
 /** @type {import('./dashboard-types.js').ReportRow[]} */
 const sampleReports = [
   {
@@ -100,5 +95,4 @@ const sampleReports = [
   }
 ];
 
-window.ElectrocardiogramTestResultDashboard.sampleReports = sampleReports;
-})();
+export { sampleReports };

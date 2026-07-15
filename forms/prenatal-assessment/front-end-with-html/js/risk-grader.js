@@ -1,15 +1,13 @@
+import { riskRules } from './risk-rules.js';
+import { riskCategory } from './types.js';
+
 // Pure prenatal risk grader.
 //
 // Mirrors `src/lib/engine/risk-grader.ts` from the SvelteKit reference. Loaded
 // as a classic <script>; attaches `calculateRisk` to `window.PrenatalAssessment`.
-(function () {
-'use strict';
-window.PrenatalAssessment = window.PrenatalAssessment || {};
-
-const NS = window.PrenatalAssessment;
 
 function fire(id, firedRules) {
-  const rule = NS.riskRules.find((r) => r.id === id);
+  const rule = riskRules.find((r) => r.id === id);
   if (!rule) return 0;
   firedRules.push({
     id: rule.id,
@@ -118,9 +116,8 @@ function calculateRisk(data) {
   if (data.currentSymptoms.visionChanges === 'yes') riskScore += fire('RISK-SX-003', firedRules);
   if (data.currentSymptoms.headache === 'yes') riskScore += fire('RISK-SX-004', firedRules);
 
-  const riskLevel = NS.riskCategory(riskScore);
+  const riskLevel = riskCategory(riskScore);
   return { riskScore, riskLevel, firedRules };
 }
 
-Object.assign(window.PrenatalAssessment, { calculateRisk });
-})();
+export { calculateRisk };

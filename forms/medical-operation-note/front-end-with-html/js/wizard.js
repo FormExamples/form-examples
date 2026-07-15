@@ -1,3 +1,8 @@
+import { calculateOperationGrade } from './composite-grader.js';
+import { renderReport } from './report.js';
+import { emptyOperationNote } from './types.js';
+import { esc } from './utils.js';
+
 // Medical Operation Note — operating-team wizard (vanilla JS).
 //
 // Single-page continuous wizard: every section is rendered into the page
@@ -10,17 +15,6 @@
 // Sibling files loaded as plain `<script>` tags (in order) attach their
 // exports to `window.MedicalOperationNote`. Whole file is wrapped in an
 // IIFE so its top-level identifiers don't leak to the global scope.
-
-(function () {
-'use strict';
-
-const NS = window.MedicalOperationNote;
-const {
-  emptyOperationNote,
-  esc,
-  calculateOperationGrade,
-  renderReport
-} = NS;
 
 // ----------------------------------------------------------------------
 // Persistence
@@ -1070,7 +1064,7 @@ function submitForm() {
 function startOver() {
   if (!confirm('Clear all answers and start a fresh op note?')) return;
   clearState();
-  state = NS.emptyOperationNote();
+  state = emptyOperationNote();
   lastResult = null;
   const report = document.getElementById('report');
   if (report) report.innerHTML = '<p class="empty-message">Submit the form to see the report.</p>';
@@ -1102,12 +1096,11 @@ function init() {
 }
 
 // Expose state for the report renderer (it needs the full data object).
-NS.getState = () => state;
-NS.getLastResult = () => lastResult;
+export const getState = () => state;
+export const getLastResult = () => lastResult;
 
 if (document.readyState === 'loading') {
   document.addEventListener('DOMContentLoaded', init);
 } else {
   init();
 }
-})();

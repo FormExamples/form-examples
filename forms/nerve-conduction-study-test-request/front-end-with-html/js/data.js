@@ -8,11 +8,6 @@
 // motor-neurone-disease urgent case, and an anticoagulant + needle-EMG
 // bleeding-risk case.
 
-(function () {
-'use strict';
-window.NerveConductionStudyTestRequestDashboard =
-  window.NerveConductionStudyTestRequestDashboard || {};
-
 /** @type {import('./types.js').RequestRow[]} */
 const sampleRequests = [
   {
@@ -167,5 +162,4 @@ const sampleRequests = [
   }
 ];
 
-window.NerveConductionStudyTestRequestDashboard.sampleRequests = sampleRequests;
-})();
+export { sampleRequests };

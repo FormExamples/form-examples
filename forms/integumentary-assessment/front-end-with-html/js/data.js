@@ -6,11 +6,6 @@
 // and a range of pressure-ulcer stages flagged for a subset; NHS numbers in
 // the canonical "NNN NNN NNNN" display form.
 
-(function () {
-'use strict';
-window.IntegumentaryAssessmentDashboard =
-  window.IntegumentaryAssessmentDashboard || {};
-
 /** @type {import('./types.js').PatientRow[]} */
 const samplePatients = [
   {
@@ -123,5 +118,4 @@ const samplePatients = [
   }
 ];
 
-window.IntegumentaryAssessmentDashboard.samplePatients = samplePatients;
-})();
+export { samplePatients };

@@ -1,3 +1,5 @@
+import { albuminPoints, ascitesPoints, bilirubinPoints, childPughRules, classBand, coagulationPoints, encephalopathyPoints } from './rules.js';
+
 // Child-Pugh grader. Pure functions: take an `AssessmentData` object, score the
 // five parameters (each 1-3 points via the helpers in `rules.js`), sum the
 // answered points into a total (5-15 when complete), and band the total into a
@@ -24,18 +26,6 @@
  */
 
 // Wrapped in an IIFE; published via window.ChildPughScore.
-(function () {
-'use strict';
-window.ChildPughScore = window.ChildPughScore || {};
-const {
-  bilirubinPoints,
-  albuminPoints,
-  coagulationPoints,
-  ascitesPoints,
-  encephalopathyPoints,
-  classBand,
-  childPughRules
-} = window.ChildPughScore;
 
 /**
  * Evaluate the declarative rule table and collect the rows that fired (one per
@@ -124,8 +114,4 @@ function calculateChildPughGrade(data) {
   };
 }
 
-Object.assign(window.ChildPughScore, {
-  evaluateRules,
-  calculateChildPughGrade
-});
-})();
+export { evaluateRules, calculateChildPughGrade };

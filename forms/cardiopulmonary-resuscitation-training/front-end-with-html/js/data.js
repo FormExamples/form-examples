@@ -15,11 +15,6 @@
 // expiry date at render time, so the dataset stays sensible if "today"
 // drifts.
 
-(function () {
-'use strict';
-window.CardiopulmonaryResuscitationTrainingDashboard =
-  window.CardiopulmonaryResuscitationTrainingDashboard || {};
-
 /** @type {import('./types.js').TraineeRow[]} */
 const sampleTrainees = [
   {
@@ -204,6 +199,4 @@ const sampleTrainees = [
   }
 ];
 
-window.CardiopulmonaryResuscitationTrainingDashboard.sampleTrainees =
-  sampleTrainees;
-})();
+export { sampleTrainees };

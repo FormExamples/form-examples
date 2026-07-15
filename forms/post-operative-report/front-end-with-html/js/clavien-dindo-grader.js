@@ -1,3 +1,5 @@
+import { clavienDindoRuleByGrade } from './clavien-dindo-rules.js';
+
 // Clavien-Dindo grader. Pure functions: take an `AssessmentData` object,
 // return the highest-graded complication observed (the patient's overall
 // Clavien-Dindo grade), the count of complications, and the list of fired
@@ -19,10 +21,6 @@
  */
 
 // Wrapped in an IIFE; published via window.PostOperativeReport.
-(function () {
-'use strict';
-window.PostOperativeReport = window.PostOperativeReport || {};
-const { clavienDindoRuleByGrade } = window.PostOperativeReport;
 
 /** Friendly label for a Clavien-Dindo grade key. */
 function gradeLabel(grade) {
@@ -111,11 +109,4 @@ function calculateClavienDindo(data) {
   };
 }
 
-Object.assign(window.PostOperativeReport, {
-  gradeLabel,
-  gradeShortLabel,
-  gradeBadgeClass,
-  gradeOrder,
-  calculateClavienDindo
-});
-})();
+export { gradeLabel, gradeShortLabel, gradeBadgeClass, gradeOrder, calculateClavienDindo };

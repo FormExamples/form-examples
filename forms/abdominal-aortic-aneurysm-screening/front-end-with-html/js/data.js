@@ -6,11 +6,6 @@
 // non-visualised), with the referral flag set whenever a vascular referral is
 // indicated (large aneurysm or a symptomatic aneurysm).
 
-(function () {
-'use strict';
-window.AbdominalAorticAneurysmScreeningDashboard =
-  window.AbdominalAorticAneurysmScreeningDashboard || {};
-
 /** @type {import('./dashboard-types.js').ScreeningRow[]} */
 const sampleScreenings = [
   {
@@ -92,6 +87,4 @@ const sampleScreenings = [
   }
 ];
 
-window.AbdominalAorticAneurysmScreeningDashboard.sampleScreenings =
-  sampleScreenings;
-})();
+export { sampleScreenings };

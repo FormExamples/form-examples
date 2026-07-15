@@ -1,9 +1,8 @@
-// Dashboard logic: render the table from window.SAMPLE_MEETINGS, sort by
+// Dashboard logic: render the table from SAMPLE_MEETINGS, sort by
 // header click, filter by the dropdowns, search across title / organiser /
 // summary, and expand-on-click to show summary + action items + outcomes.
 
-(function () {
-'use strict';
+import { SAMPLE_MEETINGS } from './sample-data.js';
 
 const tableBody     = document.getElementById('meetings-body');
 const tilesEl       = document.getElementById('tiles');
@@ -155,7 +154,7 @@ function renderTable(rows) {
 }
 
 function render() {
-	const all      = window.SAMPLE_MEETINGS || [];
+	const all      = SAMPLE_MEETINGS || [];
 	const filtered = applyFilters(all);
 	const sorted   = [...filtered].sort((a, b) => compare(a, b, sortKey, sortDir));
 
@@ -208,5 +207,3 @@ refreshButton.addEventListener('click', render);
 
 updateSortIndicators();
 render();
-
-})();

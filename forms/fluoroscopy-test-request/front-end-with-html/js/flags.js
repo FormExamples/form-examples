@@ -1,3 +1,5 @@
+import { isBariumStudy, isIonisingStudy } from './types.js';
+
 // Safety-flag detection for the Fluoroscopy Test Request engine.
 //
 // Pure function returning safety flags using the grade_flag categories from
@@ -8,13 +10,6 @@
 // Each flag is { flagId, category, priority, description, suggestedAction }.
 // Flag IDs are stable and identical across every front-end and the back-end.
 // Wrapped in an IIFE; published via `window.FluoroscopyTestRequest`.
-
-(function () {
-'use strict';
-window.FluoroscopyTestRequest =
-  window.FluoroscopyTestRequest || {};
-const NS = window.FluoroscopyTestRequest;
-const { isBariumStudy, isIonisingStudy } = NS;
 
 /**
  * Detect safety flags for a fluoroscopy / contrast-study request.
@@ -122,5 +117,4 @@ function detectFlags(data, context) {
   return flags;
 }
 
-Object.assign(NS, { detectFlags });
-})();
+export { detectFlags };

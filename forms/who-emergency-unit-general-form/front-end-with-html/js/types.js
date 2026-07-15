@@ -8,10 +8,6 @@
 // via `file://`. The IIFE attaches its public symbols to a single
 // global namespace, `window.WhoEmergencyUnitGeneralForm`.
 
-(function () {
-'use strict';
-window.WhoEmergencyUnitGeneralForm = window.WhoEmergencyUnitGeneralForm || {};
-
 /** @returns {object} A fresh, empty AssessmentData instance. */
 function emptyAssessment() {
   return {
@@ -408,15 +404,4 @@ function priorityLabel(priority) {
   }
 }
 
-Object.assign(window.WhoEmergencyUnitGeneralForm, {
-  emptyAssessment,
-  hasText,
-  hasNumber,
-  isYesNoAnswered,
-  hasAirwayIntervention,
-  hasBreathingIntervention,
-  hasCirculationIntervention,
-  sectionLabel,
-  priorityLabel
-});
-})();
+export { emptyAssessment, hasText, hasNumber, isYesNoAnswered, hasAirwayIntervention, hasBreathingIntervention, hasCirculationIntervention, sectionLabel, priorityLabel };

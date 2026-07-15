@@ -1,3 +1,5 @@
+import { anyAdjustment, anyDifficulty } from './rules.js';
+
 // Compliance-and-wellbeing flag detection for the Neurodiversity Adjustment
 // Request engine.
 //
@@ -11,13 +13,6 @@
 // Some flags depend on the computed eligibility / impact bands, supplied via
 // the `context` argument. Wrapped in an IIFE; published via
 // `window.NeurodiversityAdjustmentRequest`.
-
-(function () {
-'use strict';
-window.NeurodiversityAdjustmentRequest =
-  window.NeurodiversityAdjustmentRequest || {};
-const NS = window.NeurodiversityAdjustmentRequest;
-const { anyAdjustment, anyDifficulty } = NS;
 
 /**
  * Detect compliance-and-wellbeing flags for a reasonable-adjustments request.
@@ -122,5 +117,4 @@ function detectFlags(data, context) {
   return flags;
 }
 
-Object.assign(NS, { detectFlags });
-})();
+export { detectFlags };

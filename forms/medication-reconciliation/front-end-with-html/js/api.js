@@ -6,11 +6,6 @@
 // server down) or returns an empty list, callers fall back to the sample data
 // shipped in `data.js` so the page is usable standalone.
 
-(function () {
-'use strict';
-window.MedicationReconciliationDashboard =
-  window.MedicationReconciliationDashboard || {};
-
 const API_BASE = 'http://localhost:5150';
 const RECONCILIATIONS_PATH = '/api/dashboard/reconciliations';
 
@@ -35,6 +30,4 @@ async function fetchReconciliations() {
   return data.items || [];
 }
 
-window.MedicationReconciliationDashboard.fetchReconciliations = fetchReconciliations;
-window.MedicationReconciliationDashboard.API_BASE = API_BASE;
-})();
+export { fetchReconciliations, API_BASE };

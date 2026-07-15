@@ -1,3 +1,5 @@
+import { abeGroupOf, copdRules, coreComponents, exacerbationRiskOf, goldGradeOf, supportingComponents, symptomBurdenOf } from './rules.js';
+
 // COPD-review grader. Pure functions: take a `ReviewData` object and derive the
 // four independent outputs plus the audit trail of fired rules.
 //
@@ -23,20 +25,6 @@
  */
 
 // Wrapped in an IIFE; published via window.ChronicObstructivePulmonaryDiseaseReview.
-(function () {
-'use strict';
-window.ChronicObstructivePulmonaryDiseaseReview =
-  window.ChronicObstructivePulmonaryDiseaseReview || {};
-const NS = window.ChronicObstructivePulmonaryDiseaseReview;
-const {
-  copdRules,
-  coreComponents,
-  supportingComponents,
-  goldGradeOf,
-  symptomBurdenOf,
-  exacerbationRiskOf,
-  abeGroupOf
-} = NS;
 
 /**
  * Evaluate the declarative classification rules and collect the ones that fired
@@ -142,8 +130,4 @@ function calculateGrade(data) {
   };
 }
 
-Object.assign(window.ChronicObstructivePulmonaryDiseaseReview, {
-  evaluateRules,
-  calculateGrade
-});
-})();
+export { evaluateRules, calculateGrade };

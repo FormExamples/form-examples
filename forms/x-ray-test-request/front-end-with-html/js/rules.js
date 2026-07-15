@@ -17,11 +17,6 @@
 //
 // Wrapped in an IIFE; published via `window.XRayTestRequest`.
 
-(function () {
-'use strict';
-window.XRayTestRequest = window.XRayTestRequest || {};
-const NS = window.XRayTestRequest;
-
 // ----------------------------------------------------------------------
 // Axis A — Appropriateness (ACR Appropriateness Criteria / RCR iRefer 1-9)
 // ----------------------------------------------------------------------
@@ -381,18 +376,4 @@ function scoreTriage(data) {
   };
 }
 
-Object.assign(NS, {
-  scoreAppropriateness,
-  appropriatenessBand,
-  scoreRadiationSafety,
-  doseBand,
-  maxSafetyBand,
-  scoreCompleteness,
-  scoreTriage,
-  maxTier,
-  TRIAGE_ORDER,
-  TARGET_TIMEFRAMES,
-  REGION_INDICATION_MAP,
-  REGION_DOSE_BAND
-});
-})();
+export { scoreAppropriateness, appropriatenessBand, scoreRadiationSafety, doseBand, maxSafetyBand, scoreCompleteness, scoreTriage, maxTier, TRIAGE_ORDER, TARGET_TIMEFRAMES, REGION_INDICATION_MAP, REGION_DOSE_BAND };

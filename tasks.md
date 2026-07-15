@@ -299,12 +299,30 @@ Design each feature on the reference forms
       catches this whole class and passed 572/572 across all 286 forms with the
       new assertion (the old sweep only checked for thrown JS errors, which a
       404 navigation does not raise, so the bug had slipped through).
+- [x] **ES-modules front-end refactor — DONE (2026-07-15).** Reverses the
+      earlier item (1): rather than de-module the 3 outliers to match the
+      classic `window.<Namespace>` scripts, the project decision flipped — **all
+      HTML front-ends now use native ES modules** (`import`/`export` +
+      `<script type="module">`). Recorded in [`spec/es-modules.md`](spec/es-modules.md)
+      (incl. the accepted `file://` tradeoff — modules must be served over HTTP).
+      Built `bin/es-modules-refactor` (offset-based, namespace-aware converter:
+      strips IIFE + namespace plumbing, resolves a per-(namespace,symbol)→file
+      map, emits import/export, re-declares non-namespace IIFE params, rewrites
+      HTML to a single module entry; idempotent; `--check` CI drift detector,
+      wired into AGENTS.md Verify). It handles the many real idioms found in the
+      corpus (per-symbol + `Object.assign` publishes, two-line & parenthesised &
+      reverse `|| {}` inits, `const NS = window.X` aliases, global-param IIFEs
+      incl. multi-param `(root, doc)`, inline member-access consumes, same-name
+      shadows via `as`-aliased imports, function-RHS publishes with inner refs).
+      **283 forms tool-converted; 3 bare-global forms (issue-tracker, meeting,
+      architecture-decision-record) hand-converted (the tool aborts + reports
+      those rather than silently dropping scripts).** `--check --all` clean; all
+      2809 JS files pass `node --check`; full `bin/test-e2e --html --all`
+      smoke+a11y+dashboard-export sweep green. Updated
+      `forms/AGENTS-front-end-html.md` §5 and the gold-standard example.
+      *Note:* the `file://` self-contained property in earlier notes no longer
+      holds — that was the whole tradeoff.
 - [ ] **Front-end conformance follow-ups (documented, not fixed):**
-      (1) 3 forms use ES-module `<script type="module">` instead of the
-      classic window-namespace scripts the repo standardises on (breaks under
-      `file://`, works under http): `objectives-and-key-results-tracker`,
-      `united-states-hipaa-authorization-form`, `vaccinations-assessment` — the
-      latter two render inline (not broken), just non-conforming.
       (2) 6 forms with a `form-app.js` lack the `STORAGE_KEY` autosave the other
       276 have (agile-principles-assessment, issue-tracker, meeting,
       objectives-and-key-results-tracker, uk-lpa-health, vaccinations-assessment);

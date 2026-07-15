@@ -1,3 +1,6 @@
+import { rebaRules } from './reba-rules.js';
+import { rebaRiskLevel } from './types.js';
+
 // REBA grader. Pure functions: take an `AssessmentData` object and return
 // the REBA score (1-15), the textual risk level, and the list of fired
 // rules. Mirrors the SvelteKit `reba-grader.ts` reference engine.
@@ -13,11 +16,6 @@
  * @typedef {import('./types.js').AssessmentData} AssessmentData
  * @typedef {import('./types.js').FiredRule} FiredRule
  */
-
-(function () {
-'use strict';
-window.ErgonomicAssessment = window.ErgonomicAssessment || {};
-const { rebaRules, rebaRiskLevel } = window.ErgonomicAssessment;
 
 /**
  * Evaluate all REBA rules against the assessment data and produce the total
@@ -52,5 +50,4 @@ function calculateREBA(data) {
   return { rebaScore, riskLevel, firedRules };
 }
 
-window.ErgonomicAssessment.calculateREBA = calculateREBA;
-})();
+export { calculateREBA };

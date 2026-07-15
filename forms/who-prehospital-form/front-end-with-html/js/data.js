@@ -6,10 +6,6 @@
 // category, reassessment count (0-3), and a mix of completed/in-progress
 // handovers.
 
-(function () {
-'use strict';
-window.WhoPrehospitalDashboard = window.WhoPrehospitalDashboard || {};
-
 /** @type {import('./types.js').PatientRow[]} */
 const samplePatients = [
   {
@@ -194,5 +190,4 @@ const samplePatients = [
   }
 ];
 
-window.WhoPrehospitalDashboard.samplePatients = samplePatients;
-})();
+export { samplePatients };

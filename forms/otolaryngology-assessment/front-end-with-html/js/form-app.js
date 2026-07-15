@@ -1,3 +1,7 @@
+import { detectAdditionalFlags } from './flagged-issues.js';
+import { calculateSnot22, classifySnot22Score, severityClass, severityLabel } from './snot22-grader.js';
+import { SNOT22_ITEMS, SNOT22_OPTIONS, emptyAssessment } from './types.js';
+
 // Otolaryngology Assessment — patient/clinician wizard (vanilla JS, no build).
 //
 // Single-page continuous wizard: every section is rendered into the page in
@@ -11,20 +15,6 @@
 // the rest of this file referring to short local names. Whole file is
 // wrapped in an IIFE so its top-level identifiers don't leak to the global
 // scope.
-(function () {
-'use strict';
-
-const NS = window.OtolaryngologyAssessment;
-const {
-  emptyAssessment,
-  SNOT22_ITEMS,
-  SNOT22_OPTIONS,
-  calculateSnot22,
-  classifySnot22Score,
-  severityLabel,
-  severityClass,
-  detectAdditionalFlags
-} = NS;
 
 // ----------------------------------------------------------------------
 // Persistence
@@ -1255,4 +1245,3 @@ if (document.readyState === 'loading') {
 } else {
   init();
 }
-})();

@@ -213,9 +213,6 @@
 // classic <script> (no ES modules) so the page can be opened directly via
 // `file://`. The IIFE attaches its public symbols to a single global
 // namespace, `window.ObstetricsAssessment`.
-(function () {
-'use strict';
-window.ObstetricsAssessment = window.ObstetricsAssessment || {};
 
 /**
  * Build a fresh, fully-blank assessment.
@@ -404,11 +401,4 @@ function calculateEdd(lmp) {
   return d.toISOString().slice(0, 10);
 }
 
-Object.assign(window.ObstetricsAssessment, {
-  emptyAssessment,
-  calculateBMI,
-  bmiCategory,
-  calculateAge,
-  calculateEdd
-});
-})();
+export { emptyAssessment, calculateBMI, bmiCategory, calculateAge, calculateEdd };

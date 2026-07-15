@@ -6,10 +6,6 @@
 // and every referral status; NHS numbers in the canonical "NNN NNN NNNN"
 // display form.
 
-(function () {
-'use strict';
-window.AutismAssessmentDashboard = window.AutismAssessmentDashboard || {};
-
 /** @type {import('./types.js').PatientRow[]} */
 const samplePatients = [
   {
@@ -122,5 +118,4 @@ const samplePatients = [
   }
 ];
 
-window.AutismAssessmentDashboard.samplePatients = samplePatients;
-})();
+export { samplePatients };

@@ -1,3 +1,6 @@
+import { fetchRequests } from './api.js';
+import { sampleRequests } from './data.js';
+
 // Ultrasound Test Request — vetting dashboard (vanilla classic-script app).
 //
 // General (non-obstetric) diagnostic ultrasound. On boot we fetch the request
@@ -11,12 +14,6 @@
 // attach their exports to `window.UltrasoundTestRequestDashboard`. The whole
 // file is wrapped in an IIFE so its top-level identifiers do not leak to the
 // global scope.
-(function () {
-'use strict';
-const {
-  fetchRequests,
-  sampleRequests
-} = window.UltrasoundTestRequestDashboard;
 
 // ----------------------------------------------------------------------
 // State
@@ -426,4 +423,3 @@ if (document.readyState === 'loading') {
 } else {
   init();
 }
-})();

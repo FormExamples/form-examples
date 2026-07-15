@@ -7,11 +7,6 @@
 // bands, with two critical-alert rows (a DVT and an aneurysm) whose critical
 // findings each raised two flags.
 
-(function () {
-'use strict';
-window.UltrasoundTestResultDashboard =
-  window.UltrasoundTestResultDashboard || {};
-
 /** @type {import('./dashboard-types.js').ReportRow[]} */
 const sampleReports = [
   {
@@ -100,5 +95,4 @@ const sampleReports = [
   }
 ];
 
-window.UltrasoundTestResultDashboard.sampleReports = sampleReports;
-})();
+export { sampleReports };

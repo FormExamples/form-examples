@@ -1,3 +1,7 @@
+import { detectFlaggedIssues } from './flags.js';
+import { triage } from './grader.js';
+import { acvpuLabel, ageBandLabel, arrivalModeLabel, careSettingLabel, emptyAssessment, onOxygenLabel, priorityClass, priorityLabel, priorityName, sexLabel, targetLabel } from './types.js';
+
 // Emergency Department Triage Note — first-contact triage wizard
 // (vanilla JavaScript, no build).
 //
@@ -17,25 +21,6 @@
 // Sibling files loaded as plain `<script>` tags (in order) attach their exports
 // to `window.EmergencyDepartmentTriageNote`. The whole file is wrapped in an
 // IIFE so its top-level identifiers don't leak.
-(function () {
-'use strict';
-
-const NS = window.EmergencyDepartmentTriageNote;
-const {
-  emptyAssessment,
-  priorityName,
-  targetLabel,
-  priorityClass,
-  careSettingLabel,
-  arrivalModeLabel,
-  ageBandLabel,
-  sexLabel,
-  onOxygenLabel,
-  acvpuLabel,
-  priorityLabel,
-  triage,
-  detectFlaggedIssues
-} = NS;
 
 // ----------------------------------------------------------------------
 // Persistence
@@ -1022,4 +1007,3 @@ if (document.readyState === 'loading') {
 } else {
   init();
 }
-})();

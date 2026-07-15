@@ -1,3 +1,6 @@
+import { fetchPlans } from './api.js';
+import { samplePlans } from './data.js';
+
 // ReSPECT — clinician dashboard (vanilla classic-script app).
 //
 // On boot we fetch the plan list from the backend; on any failure (or empty
@@ -9,12 +12,6 @@
 // their exports to
 // `window.RecommendedSummaryPlanForEmergencyCareAndTreatmentDashboard`. The
 // whole file is wrapped in an IIFE so its top-level identifiers do not leak.
-(function () {
-'use strict';
-const {
-  fetchPlans,
-  samplePlans
-} = window.RecommendedSummaryPlanForEmergencyCareAndTreatmentDashboard;
 
 // ----------------------------------------------------------------------
 // State
@@ -381,4 +378,3 @@ if (document.readyState === 'loading') {
 } else {
   init();
 }
-})();

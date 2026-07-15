@@ -1,3 +1,7 @@
+import { detectAdditionalFlags } from './flagged-issues.js';
+import { responderRules } from './responder-rules.js';
+import { aggregateCompetency } from './types.js';
+
 // First Responder grader. Pure functions: take an `AssessmentData` object
 // and produce a `GradingResult` (overall competency, fitness decision,
 // risk level, domain breakdown, fired rules, additional flags, timestamp).
@@ -14,12 +18,6 @@
  */
 
 // Wrapped in an IIFE; published via window.FirstResponderAssessment.
-(function () {
-'use strict';
-window.FirstResponderAssessment = window.FirstResponderAssessment || {};
-
-const NS = window.FirstResponderAssessment;
-const { responderRules, aggregateCompetency } = NS;
 
 /**
  * Pure function: evaluates all first responder rules against assessment data.
@@ -60,7 +58,7 @@ function calculateResponderGrade(data) {
   // Determine overall risk from worst fired rule grade
   const overallRisk = deriveOverallRisk(firedRules, overallCompetency);
 
-  const additionalFlags = NS.detectAdditionalFlags(data);
+  const additionalFlags = detectAdditionalFlags(data);
 
   return {
     overallCompetency,
@@ -153,7 +151,4 @@ function deriveOverallRisk(firedRules, overallCompetency) {
   return 'low';
 }
 
-Object.assign(window.FirstResponderAssessment, {
-  calculateResponderGrade
-});
-})();
+export { calculateResponderGrade };

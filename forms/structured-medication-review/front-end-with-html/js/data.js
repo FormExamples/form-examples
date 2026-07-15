@@ -5,11 +5,6 @@
 // The rows span every burden band, both review statuses, and every care
 // setting, with medicine counts and ACB scores consistent with the band.
 
-(function () {
-'use strict';
-window.StructuredMedicationReviewDashboard =
-  window.StructuredMedicationReviewDashboard || {};
-
 /** @type {import('./dashboard-types.js').ReviewRow[]} */
 const sampleReviews = [
   {
@@ -98,5 +93,4 @@ const sampleReviews = [
   }
 ];
 
-window.StructuredMedicationReviewDashboard.sampleReviews = sampleReviews;
-})();
+export { sampleReviews };

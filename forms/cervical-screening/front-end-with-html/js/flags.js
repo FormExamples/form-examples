@@ -1,3 +1,5 @@
+import { GRADED_CYTOLOGY, MAX_AGE, MIN_AGE } from './rules.js';
+
 // Flagged-issue detection (safety flags). Independent of the result class
 // (which the grader produces), this module raises clinician-facing safety flags
 // per spec §5:
@@ -21,10 +23,6 @@
  */
 
 // Wrapped in an IIFE; published via window.CervicalScreening.
-(function () {
-'use strict';
-window.CervicalScreening = window.CervicalScreening || {};
-const { GRADED_CYTOLOGY, MIN_AGE, MAX_AGE } = window.CervicalScreening;
 
 /** Is a date string strictly in the past (before today)? */
 function isPast(dateStr) {
@@ -160,5 +158,4 @@ function detectFlaggedIssues(data, grade) {
   return flags;
 }
 
-window.CervicalScreening.detectFlaggedIssues = detectFlaggedIssues;
-})();
+export { detectFlaggedIssues };

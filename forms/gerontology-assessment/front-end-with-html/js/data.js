@@ -6,10 +6,6 @@
 // cognitive status varying across rows; NHS numbers in the canonical
 // "NNN NNN NNNN" display form.
 
-(function () {
-'use strict';
-window.GerontologyAssessmentDashboard = window.GerontologyAssessmentDashboard || {};
-
 /** @type {import('./types.js').PatientRow[]} */
 const samplePatients = [
   {
@@ -110,5 +106,4 @@ const samplePatients = [
   }
 ];
 
-window.GerontologyAssessmentDashboard.samplePatients = samplePatients;
-})();
+export { samplePatients };

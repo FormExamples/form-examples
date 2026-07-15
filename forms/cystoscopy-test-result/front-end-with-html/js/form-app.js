@@ -1,3 +1,6 @@
+import { calculateGrade } from './grader.js';
+import { abnormalitySeverityClass, abnormalitySeverityLabel, anaesthesiaLabel, complicationLabel, emptyResult, followUpUrgencyClass, followUpUrgencyLabel, priorityLabel, procedureLabel, recommendationLabel, reportStatusLabel, resultClassificationClass, resultClassificationLabel, tumourAppearanceLabel } from './types.js';
+
 // Cystoscopy Test Result — reporting-clinician wizard
 // (vanilla JavaScript, no build).
 //
@@ -15,27 +18,6 @@
 // exports to `window.CystoscopyTestResult`. Pulling them off here keeps the
 // rest of this file referring to short local names. The whole file is wrapped
 // in an IIFE so its top-level identifiers don't leak.
-(function () {
-'use strict';
-
-const NS = window.CystoscopyTestResult;
-const {
-  emptyResult,
-  resultClassificationLabel,
-  abnormalitySeverityLabel,
-  followUpUrgencyLabel,
-  procedureLabel,
-  anaesthesiaLabel,
-  tumourAppearanceLabel,
-  complicationLabel,
-  reportStatusLabel,
-  recommendationLabel,
-  priorityLabel,
-  resultClassificationClass,
-  abnormalitySeverityClass,
-  followUpUrgencyClass,
-  calculateGrade
-} = NS;
 
 // ----------------------------------------------------------------------
 // Persistence
@@ -1046,4 +1028,3 @@ if (document.readyState === 'loading') {
 } else {
   init();
 }
-})();

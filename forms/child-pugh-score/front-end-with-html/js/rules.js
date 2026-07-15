@@ -37,9 +37,6 @@
  */
 
 // Wrapped in an IIFE; published via window.ChildPughScore.
-(function () {
-'use strict';
-window.ChildPughScore = window.ChildPughScore || {};
 
 /**
  * Parameter 1 — total bilirubin (µmol/L). Returns 1-3, or null when unmeasured.
@@ -287,13 +284,4 @@ const childPughRules = [
   }
 ];
 
-Object.assign(window.ChildPughScore, {
-  bilirubinPoints,
-  albuminPoints,
-  coagulationPoints,
-  ascitesPoints,
-  encephalopathyPoints,
-  classBand,
-  childPughRules
-});
-})();
+export { bilirubinPoints, albuminPoints, coagulationPoints, ascitesPoints, encephalopathyPoints, classBand, childPughRules };

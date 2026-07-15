@@ -6,10 +6,6 @@
 // smokers / non-smokers. NHS numbers in the canonical "NNN NNN NNNN" form;
 // ages within the Framingham-Hard-CHD validated range (30-79).
 
-(function () {
-'use strict';
-window.FraminghamRiskScoreDashboard = window.FraminghamRiskScoreDashboard || {};
-
 /** @type {import('./types.js').PatientRow[]} */
 const samplePatients = [
   {
@@ -134,5 +130,4 @@ const samplePatients = [
   }
 ];
 
-window.FraminghamRiskScoreDashboard.samplePatients = samplePatients;
-})();
+export { samplePatients };

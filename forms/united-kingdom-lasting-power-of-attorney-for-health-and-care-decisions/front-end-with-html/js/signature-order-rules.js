@@ -1,15 +1,6 @@
-// Signature-order rule family.
+import { findAttorneySignatures, findCertificateProviderSignature, findDonorSignature, isSignedBefore, signatureSignedAt } from './utils.js';
 
-(function () {
-'use strict';
-window.UkLpaForm = window.UkLpaForm || {};
-const {
-  findAttorneySignatures,
-  findCertificateProviderSignature,
-  findDonorSignature,
-  isSignedBefore,
-  signatureSignedAt,
-} = window.UkLpaForm;
+// Signature-order rule family.
 
 function applySignatureOrderRules(app) {
   const fired = [];
@@ -108,5 +99,4 @@ function applySignatureOrderRules(app) {
   return fired;
 }
 
-window.UkLpaForm.applySignatureOrderRules = applySignatureOrderRules;
-})();
+export { applySignatureOrderRules };

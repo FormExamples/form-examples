@@ -1,3 +1,6 @@
+import { completenessPercent, validationStatus } from './types.js';
+import { validationRules as rules } from './validation-rules.js';
+
 // Pure form-completeness validator for the Consent To Treatment form.
 // Mirrors `src/lib/engine/form-validator.ts`.
 //
@@ -5,10 +8,7 @@
 // field on the assessment data, and returns the completeness percent,
 // status label, and the list of fired rules (missing required fields).
 
-(function () {
-  'use strict';
-
-  const NS = (window.ConsentToTreatment = window.ConsentToTreatment || {});
+  
 
   /**
    * @param {import('./types.js').AssessmentData} data
@@ -16,7 +16,7 @@
    */
   function validateForm(data) {
     const firedRules = [];
-    const rules = NS.validationRules;
+    
 
     for (const rule of rules) {
       const section = data[rule.section];
@@ -33,11 +33,12 @@
 
     const totalRequired = rules.length;
     const completedCount = totalRequired - firedRules.length;
-    const completeness = NS.completenessPercent(completedCount, totalRequired);
-    const status = NS.validationStatus(completeness);
+    const completeness = completenessPercent(completedCount, totalRequired);
+    const status = validationStatus(completeness);
 
     return { completeness, status, firedRules };
   }
 
-  NS.validateForm = validateForm;
-})();
+  
+
+export { validateForm };

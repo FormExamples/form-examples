@@ -1,3 +1,7 @@
+import { detectFlaggedIssues } from './flags.js';
+import { calculateGrade } from './grader.js';
+import { emptyScreening, managementActionLabel, priorityLabel, resultClassClass, resultClassLabel, statusLabel } from './types.js';
+
 // Cervical Screening record — single-page wizard (vanilla JavaScript, no build).
 //
 // Single-page continuous wizard: every step is rendered into the page in
@@ -12,20 +16,6 @@
 // to `window.CervicalScreening`. Pulling them off here keeps the rest of this
 // file referring to short local names. The whole file is wrapped in an IIFE so
 // its top-level identifiers don't leak.
-(function () {
-'use strict';
-
-const NS = window.CervicalScreening;
-const {
-  emptyScreening,
-  resultClassLabel,
-  resultClassClass,
-  managementActionLabel,
-  statusLabel,
-  priorityLabel,
-  calculateGrade,
-  detectFlaggedIssues
-} = NS;
 
 // ----------------------------------------------------------------------
 // Persistence
@@ -967,4 +957,3 @@ if (document.readyState === 'loading') {
 } else {
   init();
 }
-})();

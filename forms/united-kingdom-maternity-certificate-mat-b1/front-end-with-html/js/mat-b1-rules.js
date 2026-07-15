@@ -1,3 +1,5 @@
+import { isFilled, weeksBetween } from './types.js';
+
 // MAT B1 maternity certificate - validation rules.
 //
 // Each rule's `evaluate(data)` returns true when the rule *fires* (i.e. a
@@ -30,11 +32,6 @@
  * @property {(d: AssessmentData) => boolean} evaluate
  * @property {string} message
  */
-
-(function () {
-'use strict';
-window.MatB1Form = window.MatB1Form || {};
-const { isFilled, weeksBetween } = window.MatB1Form;
 
 /** @type {ValidationRule[]} */
 const matB1Rules = [
@@ -293,5 +290,4 @@ const matB1Rules = [
   }
 ];
 
-window.MatB1Form.matB1Rules = matB1Rules;
-})();
+export { matB1Rules };

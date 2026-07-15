@@ -1,3 +1,5 @@
+import { cmaiItems } from './cmai-rules.js';
+
 // Flagged-issue detection for the sundowner syndrome assessment.
 //
 // Independent of the CMAI/NPI totals, this module raises clinician-facing
@@ -17,12 +19,6 @@
  * @typedef {import('./types.js').AssessmentData} AssessmentData
  * @typedef {import('./types.js').AdditionalFlag} AdditionalFlag
  */
-
-(function () {
-'use strict';
-window.SundownerSyndromeAssessment = window.SundownerSyndromeAssessment || {};
-const NS = window.SundownerSyndromeAssessment;
-const { cmaiItems } = NS;
 
 // CMAI item numbers that represent specifically aggressive behaviour
 // (versus general agitation). Items 4 (cursing), 7 (hitting), 8 (kicking),
@@ -313,5 +309,4 @@ function detectAdditionalFlags(data) {
   return flags;
 }
 
-window.SundownerSyndromeAssessment.detectAdditionalFlags = detectAdditionalFlags;
-})();
+export { detectAdditionalFlags };

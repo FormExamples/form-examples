@@ -157,9 +157,6 @@
 // classic <script> (no ES modules) so the page can be opened directly via
 // `file://`. The IIFE attaches its public symbols to a single global
 // namespace, `window.EchocardiogramTestResult`.
-(function () {
-'use strict';
-window.EchocardiogramTestResult = window.EchocardiogramTestResult || {};
 
 /**
  * Build a fresh, fully-blank echocardiogram test result.
@@ -370,20 +367,4 @@ function followUpUrgencyClass(value) {
   }
 }
 
-Object.assign(window.EchocardiogramTestResult, {
-  emptyResult,
-  resultClassificationLabel,
-  abnormalitySeverityLabel,
-  followUpUrgencyLabel,
-  echoTypeLabel,
-  valveGradeLabel,
-  reportStatusLabel,
-  studyQualityLabel,
-  lvFunctionLabel,
-  recommendationLabel,
-  priorityLabel,
-  resultClassificationClass,
-  abnormalitySeverityClass,
-  followUpUrgencyClass
-});
-})();
+export { emptyResult, resultClassificationLabel, abnormalitySeverityLabel, followUpUrgencyLabel, echoTypeLabel, valveGradeLabel, reportStatusLabel, studyQualityLabel, lvFunctionLabel, recommendationLabel, priorityLabel, resultClassificationClass, abnormalitySeverityClass, followUpUrgencyClass };

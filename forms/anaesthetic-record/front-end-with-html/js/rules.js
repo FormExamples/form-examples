@@ -20,9 +20,6 @@
  */
 
 // Wrapped in an IIFE; published via window.AnaestheticRecord.
-(function () {
-'use strict';
-window.AnaestheticRecord = window.AnaestheticRecord || {};
 
 // ---------------------------------------------------------------------------
 // Small pure predicates
@@ -144,10 +141,4 @@ const MANDATORY_RULES = [
   }
 ];
 
-Object.assign(window.AnaestheticRecord, {
-  textPresent,
-  numberPresent,
-  fluidsSummaryPresent,
-  MANDATORY_RULES
-});
-})();
+export { textPresent, numberPresent, fluidsSummaryPresent, MANDATORY_RULES };

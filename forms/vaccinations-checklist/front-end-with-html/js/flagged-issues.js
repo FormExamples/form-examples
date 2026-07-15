@@ -11,9 +11,6 @@
  */
 
 // Wrapped in an IIFE; published via window.VaccinationsChecklist.
-(function () {
-'use strict';
-window.VaccinationsChecklist = window.VaccinationsChecklist || {};
 
 /**
  * @param {AssessmentData} data
@@ -187,5 +184,4 @@ function detectAdditionalFlags(data) {
   return flags;
 }
 
-window.VaccinationsChecklist.detectAdditionalFlags = detectAdditionalFlags;
-})();
+export { detectAdditionalFlags };

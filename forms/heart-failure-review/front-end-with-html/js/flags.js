@@ -25,9 +25,6 @@
  */
 
 // Wrapped in an IIFE; published via window.HeartFailureReview.
-(function () {
-'use strict';
-window.HeartFailureReview = window.HeartFailureReview || {};
 
 /**
  * Detect the safety flags raised by the review findings.
@@ -177,5 +174,4 @@ function detectFlaggedIssues(data, grade) {
   return flags;
 }
 
-window.HeartFailureReview.detectFlaggedIssues = detectFlaggedIssues;
-})();
+export { detectFlaggedIssues };

@@ -1,3 +1,6 @@
+import { rules } from './rules.js';
+import { ESAS_ITEMS, classifyESASTotal } from './types.js';
+
 // ESAS-r grader. Pure functions: take an `AssessmentData` object, return
 // the total ESAS-r score (0-100), the SeverityBand, the list of fired
 // rules, and the per-symptom individual flags (any symptom >= 7).
@@ -19,11 +22,6 @@
  */
 
 // Wrapped in an IIFE; published via window.PalliativeAssessment.
-(function () {
-'use strict';
-window.PalliativeAssessment = window.PalliativeAssessment || {};
-const NS = window.PalliativeAssessment;
-const { rules, ESAS_ITEMS, classifyESASTotal } = NS;
 
 /**
  * Evaluate the ten-item ESAS-r against the supplied assessment data and
@@ -108,7 +106,4 @@ function gradeESAS(data) {
   };
 }
 
-Object.assign(window.PalliativeAssessment, {
-  gradeESAS
-});
-})();
+export { gradeESAS };

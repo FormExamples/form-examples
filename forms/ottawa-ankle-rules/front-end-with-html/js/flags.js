@@ -19,9 +19,6 @@
  */
 
 // Wrapped in an IIFE; published via window.OttawaAnkleRules.
-(function () {
-'use strict';
-window.OttawaAnkleRules = window.OttawaAnkleRules || {};
 
 // Criterion inputs that feed the ankle decision, with a human label for the
 // incomplete-assessment flag.
@@ -134,5 +131,4 @@ function detectFlaggedIssues(data, decision) {
   return flags;
 }
 
-window.OttawaAnkleRules.detectFlaggedIssues = detectFlaggedIssues;
-})();
+export { detectFlaggedIssues };

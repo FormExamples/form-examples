@@ -6,10 +6,6 @@
 // four medication-optimisation statuses, and every review-completeness grade,
 // with the urgent-review flag set for the symptomatic / advanced patients.
 
-(function () {
-'use strict';
-window.HeartFailureReviewDashboard = window.HeartFailureReviewDashboard || {};
-
 /** @type {import('./dashboard-types.js').ReviewRow[]} */
 const sampleReviews = [
   {
@@ -110,5 +106,4 @@ const sampleReviews = [
   }
 ];
 
-window.HeartFailureReviewDashboard.sampleReviews = sampleReviews;
-})();
+export { sampleReviews };

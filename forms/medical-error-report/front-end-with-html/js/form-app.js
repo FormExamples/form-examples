@@ -1,3 +1,6 @@
+import { calculateErrorGrade } from './error-grader.js';
+import { emptyAssessment, errorTypeLabel, nccMerpLabel, riskLevelClass, riskLevelLabel, whoSeverityLabel } from './types.js';
+
 // Medical Error Report - reporter wizard (vanilla JavaScript, no build).
 //
 // Single-page continuous wizard: every section is rendered into the page in
@@ -11,19 +14,6 @@
 // exports to `window.MedicalErrorReport`. Pulling them off here keeps the
 // rest of this file referring to short local names. Whole file is wrapped
 // in an IIFE so its top-level identifiers don't leak to the global scope.
-(function () {
-'use strict';
-
-const NS = window.MedicalErrorReport;
-const {
-  emptyAssessment,
-  calculateErrorGrade,
-  whoSeverityLabel,
-  nccMerpLabel,
-  riskLevelLabel,
-  riskLevelClass,
-  errorTypeLabel
-} = NS;
 
 // ----------------------------------------------------------------------
 // Persistence
@@ -1318,4 +1308,3 @@ if (document.readyState === 'loading') {
 } else {
   init();
 }
-})();

@@ -1,3 +1,5 @@
+import { referralRules } from './referral-rules.js';
+
 // WHO Acute Referral Form completeness validator. Pure function: takes an
 // `AssessmentData` object, returns a `ValidationResult` with per-section
 // breakdown and the list of fired (unsatisfied) rules. Each rule is first
@@ -10,11 +12,6 @@
  * @typedef {import('./types.js').SectionCompleteness} SectionCompleteness
  * @typedef {import('./types.js').FiredRule} FiredRule
  */
-
-(function () {
-'use strict';
-window.WhoAcuteReferralForm = window.WhoAcuteReferralForm || {};
-const { referralRules } = window.WhoAcuteReferralForm;
 
 /**
  * @param {AssessmentData} data
@@ -83,5 +80,4 @@ function validateReferral(data) {
   };
 }
 
-window.WhoAcuteReferralForm.validateReferral = validateReferral;
-})();
+export { validateReferral };

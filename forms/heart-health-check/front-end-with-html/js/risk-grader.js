@@ -1,3 +1,6 @@
+import { evaluateRules } from './risk-rules.js';
+import { calculateBMI, calculateTcHdlRatio, emptyAssessment, isLikelyDraft, smokingPoints } from './types.js';
+
 // 10-year CVD risk estimator + heart-age calculator + grading orchestration.
 // Mirrors `src/lib/engine/risk-calculator.ts` and `risk-grader.ts` from the
 // SvelteKit reference. Pure functions — no side effects.
@@ -6,18 +9,6 @@
  * @typedef {import('./types.js').AssessmentData} AssessmentData
  * @typedef {import('./types.js').FiredRule} FiredRule
  */
-
-(function () {
-'use strict';
-window.HeartHealthCheck = window.HeartHealthCheck || {};
-const {
-  calculateBMI,
-  calculateTcHdlRatio,
-  smokingPoints,
-  isLikelyDraft,
-  emptyAssessment,
-  evaluateRules
-} = window.HeartHealthCheck;
 
 /**
  * Estimate the 10-year cardiovascular risk percentage from assessment data.
@@ -167,9 +158,4 @@ function calculateRisk(data) {
   return { riskCategory, tenYearRiskPercent, heartAge, firedRules };
 }
 
-Object.assign(window.HeartHealthCheck, {
-  estimateTenYearRisk,
-  calculateHeartAge,
-  calculateRisk
-});
-})();
+export { estimateTenYearRisk, calculateHeartAge, calculateRisk };

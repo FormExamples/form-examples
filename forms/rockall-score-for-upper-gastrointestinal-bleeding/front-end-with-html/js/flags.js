@@ -21,10 +21,6 @@
  */
 
 // Wrapped in an IIFE; published via window.RockallScoreForUpperGastrointestinalBleeding.
-(function () {
-'use strict';
-window.RockallScoreForUpperGastrointestinalBleeding =
-  window.RockallScoreForUpperGastrointestinalBleeding || {};
 
 /**
  * @param {AssessmentData} data
@@ -127,6 +123,4 @@ function detectFlaggedIssues(data, grade) {
   return flags;
 }
 
-window.RockallScoreForUpperGastrointestinalBleeding.detectFlaggedIssues =
-  detectFlaggedIssues;
-})();
+export { detectFlaggedIssues };

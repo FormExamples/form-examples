@@ -1,3 +1,6 @@
+import { calculateGrade } from './grader.js';
+import { biopsySiteLabel, emptyRequest, indicationLabel } from './types.js';
+
 // Biopsy Test Request — clinician referral wizard (vanilla JS).
 //
 // Single-page continuous wizard: every section is rendered into the page in
@@ -9,17 +12,6 @@
 // Sibling files loaded as plain `<script>` tags (in order) attach their
 // exports to `window.BiopsyTestRequest`. The whole file is wrapped in an IIFE
 // so its top-level identifiers don't leak to the global scope.
-
-(function () {
-'use strict';
-
-const NS = window.BiopsyTestRequest;
-const {
-  emptyRequest,
-  biopsySiteLabel,
-  indicationLabel,
-  calculateGrade
-} = NS;
 
 // ----------------------------------------------------------------------
 // Persistence
@@ -888,4 +880,3 @@ if (document.readyState === 'loading') {
 } else {
   init();
 }
-})();

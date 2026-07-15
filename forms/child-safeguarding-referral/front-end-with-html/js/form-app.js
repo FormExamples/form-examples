@@ -1,3 +1,7 @@
+import { detectFlaggedIssues } from './flags.js';
+import { gradeReferral } from './grader.js';
+import { emptyReferral, primaryCategoryLabel, priorityLabel, statusClass, statusLabel, urgencyClass, urgencyLabel, urgencyPathway } from './types.js';
+
 // Child Safeguarding Referral — wizard (vanilla JavaScript, no build).
 //
 // Single-page continuous wizard: every step is rendered into the page in
@@ -17,22 +21,6 @@
 // to `window.ChildSafeguardingReferral`. Pulling them off here keeps the rest
 // of this file referring to short local names. The whole file is wrapped in an
 // IIFE so its top-level identifiers don't leak.
-(function () {
-'use strict';
-
-const NS = window.ChildSafeguardingReferral;
-const {
-  emptyReferral,
-  statusLabel,
-  statusClass,
-  urgencyLabel,
-  urgencyClass,
-  urgencyPathway,
-  priorityLabel,
-  primaryCategoryLabel,
-  gradeReferral,
-  detectFlaggedIssues
-} = NS;
 
 // ----------------------------------------------------------------------
 // Persistence
@@ -1066,4 +1054,3 @@ if (document.readyState === 'loading') {
 } else {
   init();
 }
-})();

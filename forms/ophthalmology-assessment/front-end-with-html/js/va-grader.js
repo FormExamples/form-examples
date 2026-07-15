@@ -1,3 +1,5 @@
+import { vaRules } from './va-rules.js';
+
 // Visual Acuity grader. Pure functions: take an `AssessmentData` object,
 // evaluate every VA rule, and return the worst grade plus the list of fired
 // rules. Mirrors `src/lib/engine/va-grader.ts`.
@@ -9,10 +11,6 @@
  */
 
 // Wrapped in an IIFE; published via window.OphthalmologyAssessment.
-(function () {
-'use strict';
-window.OphthalmologyAssessment = window.OphthalmologyAssessment || {};
-const { vaRules } = window.OphthalmologyAssessment;
 
 /** VA grade severity ordering for comparison. */
 const gradeOrder = {
@@ -60,5 +58,4 @@ function calculateVisualAcuityGrade(data) {
   return { vaGrade, firedRules };
 }
 
-window.OphthalmologyAssessment.calculateVisualAcuityGrade = calculateVisualAcuityGrade;
-})();
+export { calculateVisualAcuityGrade };

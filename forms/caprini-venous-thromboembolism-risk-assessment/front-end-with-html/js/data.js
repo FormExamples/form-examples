@@ -7,11 +7,6 @@
 // downgrade (a high-band row with a high bleeding risk is recommended
 // mechanical prophylaxis rather than pharmacological).
 
-(function () {
-'use strict';
-window.CapriniVenousThromboembolismRiskAssessmentDashboard =
-  window.CapriniVenousThromboembolismRiskAssessmentDashboard || {};
-
 /** @type {import('./dashboard-types.js').AssessmentRow[]} */
 const sampleAssessments = [
   {
@@ -104,6 +99,4 @@ const sampleAssessments = [
   }
 ];
 
-window.CapriniVenousThromboembolismRiskAssessmentDashboard.sampleAssessments =
-  sampleAssessments;
-})();
+export { sampleAssessments };

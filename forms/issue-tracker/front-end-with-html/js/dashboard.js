@@ -1,8 +1,7 @@
-// Dashboard logic: render the table from window.SAMPLE_ISSUES, sort by
+// Dashboard logic: render the table from SAMPLE_ISSUES, sort by
 // header click, filter by the dropdowns, and search across CC + system + assignee.
 
-(function () {
-'use strict';
+import { SAMPLE_ISSUES } from './sample-data.js';
 
 const tableBody = document.getElementById('issues-body');
 const rowCount = document.getElementById('row-count');
@@ -60,7 +59,7 @@ function applyFilters(rows) {
 }
 
 function render() {
-  const all = window.SAMPLE_ISSUES || [];
+  const all = SAMPLE_ISSUES || [];
   const filtered = applyFilters(all);
   const sorted = [...filtered].sort((a, b) => compare(a, b, sortKey, sortDir));
 
@@ -121,5 +120,3 @@ filterSelects.forEach((sel) => sel.addEventListener('change', render));
 
 updateSortIndicators();
 render();
-
-})();

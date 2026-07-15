@@ -9,12 +9,6 @@
 // Flag IDs are stable and identical across every front-end and the back-end.
 // Wrapped in an IIFE; published via `window.CystoscopyTestRequest`.
 
-(function () {
-'use strict';
-window.CystoscopyTestRequest =
-  window.CystoscopyTestRequest || {};
-const NS = window.CystoscopyTestRequest;
-
 /**
  * Detect safety flags for a cystoscopy request.
  *
@@ -98,5 +92,4 @@ function detectFlags(data, context) {
   return flags;
 }
 
-Object.assign(NS, { detectFlags });
-})();
+export { detectFlags };

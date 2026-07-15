@@ -6,10 +6,6 @@
 // PSQI score range, with snoring flagged for a subset; NHS numbers in the
 // canonical "NNN NNN NNNN" display form.
 
-(function () {
-'use strict';
-window.SleepQualityAssessmentDashboard = window.SleepQualityAssessmentDashboard || {};
-
 /** @type {import('./types.js').PatientRow[]} */
 const samplePatients = [
   {
@@ -122,5 +118,4 @@ const samplePatients = [
   }
 ];
 
-window.SleepQualityAssessmentDashboard.samplePatients = samplePatients;
-})();
+export { samplePatients };

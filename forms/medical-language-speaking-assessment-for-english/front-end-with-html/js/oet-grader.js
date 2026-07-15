@@ -1,3 +1,5 @@
+import { criterionRegistry } from './rules.js';
+
 // OET Speaking Sub-test (Medicine) grader.
 //
 // Pure function: takes an `AssessmentData` object, returns the linguistic
@@ -30,13 +32,6 @@
  * @typedef {import('./types.js').CriterionScore} CriterionScore
  * @typedef {import('./types.js').GradingResult} GradingResult
  */
-
-(function () {
-'use strict';
-window.MedicalLanguageSpeakingAssessmentForEnglish =
-  window.MedicalLanguageSpeakingAssessmentForEnglish || {};
-const NS = window.MedicalLanguageSpeakingAssessmentForEnglish;
-const { criterionRegistry } = NS;
 
 /**
  * Map a 0-500 scaled score to an OET grade.
@@ -157,8 +152,4 @@ function gradeOET(data) {
   };
 }
 
-Object.assign(NS, {
-  classifyScaledScore,
-  gradeOET
-});
-})();
+export { classifyScaledScore, gradeOET };

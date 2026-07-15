@@ -6,11 +6,6 @@
 // names are camelCase to match the front-end serde / examples convention.
 // Wrapped in an IIFE; published via `window.ElectrocardiogramTestRequest`.
 
-(function () {
-'use strict';
-window.ElectrocardiogramTestRequest =
-  window.ElectrocardiogramTestRequest || {};
-
 /**
  * Build a fresh, fully-blank ECG test request.
  * Strings default to ''; numeric / date fields default to null;
@@ -100,11 +95,4 @@ function indicationLabel(value) {
   return INDICATION_LABELS[value] || value || '';
 }
 
-Object.assign(window.ElectrocardiogramTestRequest, {
-  emptyRequest,
-  ecgTypeLabel,
-  indicationLabel,
-  ECG_TYPE_LABELS,
-  INDICATION_LABELS
-});
-})();
+export { emptyRequest, ecgTypeLabel, indicationLabel, ECG_TYPE_LABELS, INDICATION_LABELS };

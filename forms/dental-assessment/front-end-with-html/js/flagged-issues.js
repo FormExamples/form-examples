@@ -12,9 +12,6 @@
  */
 
 // Wrapped in an IIFE; published via window.DentalAssessment.
-(function () {
-'use strict';
-window.DentalAssessment = window.DentalAssessment || {};
 
 /**
  * @param {AssessmentData} data
@@ -173,5 +170,4 @@ function detectAdditionalFlags(data) {
   return flags;
 }
 
-window.DentalAssessment.detectAdditionalFlags = detectAdditionalFlags;
-})();
+export { detectAdditionalFlags };

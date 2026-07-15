@@ -1,3 +1,6 @@
+import { giRules } from './gi-rules.js';
+import { severityLevelFromScore } from './types.js';
+
 // Pure GI grader. Evaluates all GI scoring rules against patient data and
 // returns the composite severity score, severity level, and the per-rule
 // audit trail. Mirrors the SvelteKit `gi-grader.ts` engine.
@@ -9,10 +12,6 @@
  */
 
 // Wrapped in an IIFE; published via window.GastroenterologyAssessment.
-(function () {
-'use strict';
-window.GastroenterologyAssessment = window.GastroenterologyAssessment || {};
-const { giRules, severityLevelFromScore } = window.GastroenterologyAssessment;
 
 /**
  * @param {AssessmentData} data
@@ -44,5 +43,4 @@ function calculateGISeverity(data) {
   return { severityScore, severityLevel, firedRules };
 }
 
-window.GastroenterologyAssessment.calculateGISeverity = calculateGISeverity;
-})();
+export { calculateGISeverity };

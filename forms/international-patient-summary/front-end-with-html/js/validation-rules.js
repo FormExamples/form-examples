@@ -22,9 +22,6 @@
  */
 
 // Wrapped in an IIFE; published via window.InternationalPatientSummary.
-(function () {
-'use strict';
-window.InternationalPatientSummary = window.InternationalPatientSummary || {};
 
 /** Patient demographics is "populated" only when the IPS-required
  *  identifiers are present: a name, a date of birth, and a sex code. */
@@ -174,8 +171,7 @@ const validationRules = [
   }
 ];
 
-window.InternationalPatientSummary.validationRules = validationRules;
-window.InternationalPatientSummary.sectionPopulationCheckers = {
+export const sectionPopulationCheckers = {
   demographicsPopulated,
   problemListPopulated,
   medicationsPopulated,
@@ -187,4 +183,5 @@ window.InternationalPatientSummary.sectionPopulationCheckers = {
   advanceDirectivesPopulated,
   authoringClinicianPopulated
 };
-})();
+
+export { validationRules };

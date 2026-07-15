@@ -171,9 +171,6 @@
 // classic <script> (no ES modules) so the page can be opened directly via
 // `file://`. The IIFE attaches its public symbols to a single global
 // namespace, `window.WhoCounterReferralForm`.
-(function () {
-'use strict';
-window.WhoCounterReferralForm = window.WhoCounterReferralForm || {};
 
 /**
  * Build a fresh, fully-blank counter-referral form.
@@ -295,10 +292,4 @@ function priorityLabel(priority) {
   }
 }
 
-window.WhoCounterReferralForm.emptyAssessment = emptyAssessment;
-window.WhoCounterReferralForm.hasText = hasText;
-window.WhoCounterReferralForm.isYesNoAnswered = isYesNoAnswered;
-window.WhoCounterReferralForm.hasAnyStatusFlag = hasAnyStatusFlag;
-window.WhoCounterReferralForm.sectionLabel = sectionLabel;
-window.WhoCounterReferralForm.priorityLabel = priorityLabel;
-})();
+export { emptyAssessment, hasText, isYesNoAnswered, hasAnyStatusFlag, sectionLabel, priorityLabel };

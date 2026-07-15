@@ -5,10 +5,6 @@
 // Twelve realistic rows spanning every overall outcome, referral status, and
 // sample-quality combination; NHS numbers in the canonical "NNN NNN NNNN" form.
 
-(function () {
-'use strict';
-window.NewbornBloodSpotScreeningDashboard = window.NewbornBloodSpotScreeningDashboard || {};
-
 /** @type {import('./types.js').ScreeningRow[]} */
 const sampleScreenings = [
   {
@@ -145,5 +141,4 @@ const sampleScreenings = [
   }
 ];
 
-window.NewbornBloodSpotScreeningDashboard.sampleScreenings = sampleScreenings;
-})();
+export { sampleScreenings };

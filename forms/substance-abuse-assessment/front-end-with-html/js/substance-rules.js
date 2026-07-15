@@ -1,12 +1,10 @@
+import { calculateAuditScore, calculateDastScore } from './utils.js';
+
 // Declarative substance abuse grading rules. Each rule evaluates patient
 // data and returns true if the condition is present. Grade scale:
 //   1 = mild finding, 2 = moderate, 3 = significant, 4 = severe/critical.
 //
 // Mirrors `src/lib/engine/substance-rules.ts` from the SvelteKit reference.
-(function () {
-'use strict';
-const NS = window.SubstanceAbuseAssessment;
-const { calculateAuditScore, calculateDastScore } = NS;
 
 const substanceRules = [
   // ─── AUDIT ALCOHOL SCREENING ──────────────────────────────────
@@ -310,5 +308,4 @@ const substanceRules = [
   }
 ];
 
-Object.assign(NS, { substanceRules });
-})();
+export { substanceRules };

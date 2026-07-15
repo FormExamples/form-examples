@@ -159,10 +159,6 @@
 // classic <script> (no ES modules) so the page can be opened directly via
 // `file://`. The IIFE attaches its public symbols to a single global
 // namespace, `window.CapriniVenousThromboembolismRiskAssessment`.
-(function () {
-'use strict';
-window.CapriniVenousThromboembolismRiskAssessment =
-  window.CapriniVenousThromboembolismRiskAssessment || {};
 
 /**
  * Build a fresh, fully-blank assessment.
@@ -357,18 +353,4 @@ function priorityLabel(priority) {
   }
 }
 
-Object.assign(window.CapriniVenousThromboembolismRiskAssessment, {
-  emptyAssessment,
-  ageBandPoints,
-  riskBandLabel,
-  riskBandClass,
-  recommendedProphylaxisLabel,
-  clinicianRoleLabel,
-  careSettingLabel,
-  admissionTypeLabel,
-  sexLabel,
-  ageBandLabel,
-  weightGroupLabel,
-  priorityLabel
-});
-})();
+export { emptyAssessment, ageBandPoints, riskBandLabel, riskBandClass, recommendedProphylaxisLabel, clinicianRoleLabel, careSettingLabel, admissionTypeLabel, sexLabel, ageBandLabel, weightGroupLabel, priorityLabel };

@@ -1,3 +1,5 @@
+import { actionLineExpectedCm, alertLineExpectedCm, classifyProgress, elapsedHours, num } from './rules.js';
+
 // Partogram grader. Pure function: takes a `PartogramRecord` object (a parent
 // labour-record header plus its repeating timed observation list) and derives
 // the labour-progress classification and the reference-line geometry (spec §4).
@@ -24,16 +26,6 @@
  */
 
 // Wrapped in an IIFE; published via window.Partogram.
-(function () {
-'use strict';
-window.Partogram = window.Partogram || {};
-const {
-  num,
-  elapsedHours,
-  alertLineExpectedCm,
-  actionLineExpectedCm,
-  classifyProgress
-} = window.Partogram;
 
 /**
  * Find the latest observation (by `observedAt`) carrying a non-null cervical
@@ -120,8 +112,4 @@ function gradePartogram(data) {
   };
 }
 
-Object.assign(window.Partogram, {
-  latestDilatationObservation,
-  gradePartogram
-});
-})();
+export { latestDilatationObservation, gradePartogram };

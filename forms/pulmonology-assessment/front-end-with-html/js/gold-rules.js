@@ -19,9 +19,6 @@
  */
 
 // Wrapped in an IIFE; published via window.PulmonologyAssessment.
-(function () {
-'use strict';
-window.PulmonologyAssessment = window.PulmonologyAssessment || {};
 
 /** @type {GoldRule[]} */
 const goldRules = [
@@ -262,5 +259,4 @@ const goldRules = [
   }
 ];
 
-window.PulmonologyAssessment.goldRules = goldRules;
-})();
+export { goldRules };

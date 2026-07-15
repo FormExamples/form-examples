@@ -20,9 +20,6 @@
  */
 
 // Wrapped in an IIFE; published via window.DexaBoneDensityTestResult.
-(function () {
-'use strict';
-window.DexaBoneDensityTestResult = window.DexaBoneDensityTestResult || {};
 
 // ----------------------------------------------------------------------
 // WHO densitometric classification + predicates (mirror `utils.ts`)
@@ -477,16 +474,4 @@ function gradeFollowUp(r, classification, severity) {
   };
 }
 
-Object.assign(window.DexaBoneDensityTestResult, {
-  deriveWhoClassification,
-  effectiveWhoClassification,
-  hasCriticalFinding,
-  hasOsteoporosis,
-  hasOsteopenia,
-  hasAnyAbnormalFinding,
-  classifyResult,
-  gradeSeverity,
-  gradeCompleteness,
-  gradeFollowUp
-});
-})();
+export { deriveWhoClassification, effectiveWhoClassification, hasCriticalFinding, hasOsteoporosis, hasOsteopenia, hasAnyAbnormalFinding, classifyResult, gradeSeverity, gradeCompleteness, gradeFollowUp };

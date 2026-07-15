@@ -1,3 +1,8 @@
+import { detectAdditionalFlags } from './flagged-issues.js';
+import { calculateMCASScore } from './symptom-grader.js';
+import { frequencyOptions, severityOptions } from './symptom-rules.js';
+import { emptyAssessment, emptySymptomDetail, mcasCategory, mcasCategoryClass } from './types.js';
+
 // Mast Cell Activation Syndrome (MCAS) Assessment - patient wizard
 // (vanilla JavaScript, no build).
 //
@@ -11,20 +16,6 @@
 // exports to `window.MastCellActivationSyndromeAssessment`. Whole file is
 // wrapped in an IIFE so its top-level identifiers don't leak to the global
 // scope.
-(function () {
-'use strict';
-
-const NS = window.MastCellActivationSyndromeAssessment;
-const {
-  emptyAssessment,
-  emptySymptomDetail,
-  mcasCategory,
-  mcasCategoryClass,
-  severityOptions,
-  frequencyOptions,
-  calculateMCASScore,
-  detectAdditionalFlags
-} = NS;
 
 // ----------------------------------------------------------------------
 // Persistence
@@ -1072,4 +1063,3 @@ if (document.readyState === 'loading') {
 } else {
   init();
 }
-})();

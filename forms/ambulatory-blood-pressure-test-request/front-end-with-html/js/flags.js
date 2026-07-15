@@ -1,3 +1,5 @@
+import { BP_SEVERE_DIASTOLIC, BP_SEVERE_SYSTOLIC } from './rules.js';
+
 // Safety-flag detection for the Ambulatory Blood Pressure Test Request engine.
 //
 // Pure function returning safety flags using the grade_flag categories from
@@ -9,17 +11,6 @@
 // Flag IDs are stable and identical across every front-end and the back-end.
 // Wrapped in an IIFE; published via
 // `window.AmbulatoryBloodPressureTestRequest`.
-
-(function () {
-'use strict';
-window.AmbulatoryBloodPressureTestRequest =
-  window.AmbulatoryBloodPressureTestRequest || {};
-const NS = window.AmbulatoryBloodPressureTestRequest;
-
-const {
-  BP_SEVERE_SYSTOLIC,
-  BP_SEVERE_DIASTOLIC
-} = NS;
 
 // Accelerated (malignant) hypertension is at the very top of the severe range
 // and warrants same-day specialist review for end-organ damage.
@@ -119,5 +110,4 @@ function detectFlags(data) {
   return flags;
 }
 
-Object.assign(NS, { detectFlags });
-})();
+export { detectFlags };

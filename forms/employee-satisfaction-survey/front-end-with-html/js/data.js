@@ -14,11 +14,6 @@
 // All entries are anonymous, group-level aggregates only — there are no
 // individual employee identifiers anywhere in this dataset.
 
-(function () {
-'use strict';
-window.EmployeeSatisfactionSurveyDashboard =
-  window.EmployeeSatisfactionSurveyDashboard || {};
-
 /** @type {import('./types.js').TeamRow[]} */
 const sampleTeams = [
   {
@@ -263,5 +258,4 @@ const sampleTeams = [
   }
 ];
 
-window.EmployeeSatisfactionSurveyDashboard.sampleTeams = sampleTeams;
-})();
+export { sampleTeams };

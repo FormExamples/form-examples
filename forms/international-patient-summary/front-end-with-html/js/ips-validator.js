@@ -1,3 +1,5 @@
+import { validationRules } from './validation-rules.js';
+
 // IPS Completeness Validator. Pure functions: take an
 // `AssessmentData` object, return the completeness level (Complete /
 // Partial / Incomplete) plus per-section audit trail.
@@ -14,10 +16,6 @@
  */
 
 // Wrapped in an IIFE; published via window.InternationalPatientSummary.
-(function () {
-'use strict';
-window.InternationalPatientSummary = window.InternationalPatientSummary || {};
-const { validationRules } = window.InternationalPatientSummary;
 
 /**
  * @param {{ mandatoryPopulated: number, mandatoryTotal: number,
@@ -118,10 +116,4 @@ function validateIPS(data) {
   };
 }
 
-Object.assign(window.InternationalPatientSummary, {
-  classifyCompleteness,
-  completenessLevelLabel,
-  completenessLevelClass,
-  validateIPS
-});
-})();
+export { classifyCompleteness, completenessLevelLabel, completenessLevelClass, validateIPS };

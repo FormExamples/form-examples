@@ -1,3 +1,5 @@
+import { epilepsyDeclarationRequired, hasText, isYesNoAnswered } from './types.js';
+
 // DVLA B1 - completeness validation rules.
 //
 // Each rule maps to one required field. Conditional sections (Q4 No -> skip
@@ -18,11 +20,6 @@
  * @property {(d: AssessmentData) => boolean} applies
  * @property {(d: AssessmentData) => boolean} isSatisfied
  */
-
-(function () {
-'use strict';
-window.DvlaB1Form = window.DvlaB1Form || {};
-const { hasText, isYesNoAnswered, epilepsyDeclarationRequired } = window.DvlaB1Form;
 
 /** @type {ValidationRule[]} */
 const b1Rules = [
@@ -450,5 +447,4 @@ const b1Rules = [
   }
 ];
 
-window.DvlaB1Form.b1Rules = b1Rules;
-})();
+export { b1Rules };

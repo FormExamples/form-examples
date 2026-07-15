@@ -6,11 +6,6 @@
 // mix of wards, with urine-output rates consistent with the status (the
 // oliguria row's rate is below the 0.5 mL/kg/h threshold).
 
-(function () {
-'use strict';
-window.FluidBalanceChartDashboard =
-  window.FluidBalanceChartDashboard || {};
-
 /** @type {import('./dashboard-types.js').ChartRow[]} */
 const sampleCharts = [
   {
@@ -99,5 +94,4 @@ const sampleCharts = [
   }
 ];
 
-window.FluidBalanceChartDashboard.sampleCharts = sampleCharts;
-})();
+export { sampleCharts };

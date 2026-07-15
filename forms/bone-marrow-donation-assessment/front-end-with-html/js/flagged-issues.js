@@ -1,3 +1,5 @@
+import { calculateAge } from './types.js';
+
 // Flagged-issue detection for the Bone Marrow Donation Assessment.
 //
 // Independent of the rule-firing grader, this module raises clinician-facing
@@ -12,11 +14,6 @@
  * @property {string} message
  * @property {'high' | 'medium' | 'low'} priority
  */
-
-(function () {
-'use strict';
-window.BoneMarrowDonationAssessment = window.BoneMarrowDonationAssessment || {};
-const { calculateAge } = window.BoneMarrowDonationAssessment;
 
 /**
  * @param {*} data Full AssessmentData.
@@ -453,5 +450,4 @@ function detectAdditionalFlags(data) {
   return flags;
 }
 
-window.BoneMarrowDonationAssessment.detectAdditionalFlags = detectAdditionalFlags;
-})();
+export { detectAdditionalFlags };

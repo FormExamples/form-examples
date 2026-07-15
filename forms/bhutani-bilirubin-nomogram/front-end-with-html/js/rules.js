@@ -16,9 +16,6 @@
 // linearly interpolates between them.
 
 // Wrapped in an IIFE; published via window.BhutaniBilirubinNomogram.
-(function () {
-'use strict';
-window.BhutaniBilirubinNomogram = window.BhutaniBilirubinNomogram || {};
 
 // ─── Nomogram domain (spec §4) ──────────────────────────────────
 /** Lowest defined age on the nomogram (hours). */
@@ -156,15 +153,4 @@ function roundOne(n) {
   return Math.round(n * 10) / 10;
 }
 
-Object.assign(window.BhutaniBilirubinNomogram, {
-  AGE_MIN_HOURS,
-  AGE_MAX_HOURS,
-  PERCENTILE_ANCHORS,
-  THRESHOLD_CURVES,
-  gestationBand,
-  interpolate,
-  percentileTracks,
-  thresholds,
-  roundOne
-});
-})();
+export { AGE_MIN_HOURS, AGE_MAX_HOURS, PERCENTILE_ANCHORS, THRESHOLD_CURVES, gestationBand, interpolate, percentileTracks, thresholds, roundOne };

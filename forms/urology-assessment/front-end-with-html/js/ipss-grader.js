@@ -1,3 +1,6 @@
+import { ipssQuestions } from './ipss-rules.js';
+import { ipssCategory } from './types.js';
+
 // IPSS (International Prostate Symptom Score) grader. Pure functions: take
 // an `AssessmentData` object, return the total IPSS score (0-35), its
 // category, and the per-question fired rules.
@@ -13,10 +16,6 @@
  */
 
 // Wrapped in an IIFE; published via window.UrologyAssessment.
-(function () {
-'use strict';
-window.UrologyAssessment = window.UrologyAssessment || {};
-const { ipssQuestions, ipssCategory } = window.UrologyAssessment;
 
 /**
  * Calculate IPSS total score and per-question fired rules.
@@ -55,5 +54,4 @@ function calculateIPSS(data) {
   return { ipssScore, ipssCategoryLabel, firedRules };
 }
 
-window.UrologyAssessment.calculateIPSS = calculateIPSS;
-})();
+export { calculateIPSS };

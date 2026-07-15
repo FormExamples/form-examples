@@ -1,3 +1,8 @@
+import { calculateCOPM } from './copm-grader.js';
+import { copmActivities, copmImportanceOptions, copmSatisfactionOptions, copmScoreOptions, difficultyOptions } from './copm-rules.js';
+import { detectAdditionalFlags } from './flagged-issues.js';
+import { copmCategoryClass, copmPerformanceCategory, difficultyLabel, emptyAssessment } from './types.js';
+
 // Occupational Therapy Assessment - patient wizard (vanilla JavaScript,
 // no build).
 //
@@ -11,23 +16,6 @@
 // exports to `window.OccupationalTherapyAssessment`. The whole file is
 // wrapped in an IIFE so its top-level identifiers don't leak to the
 // global scope.
-(function () {
-'use strict';
-
-const NS = window.OccupationalTherapyAssessment;
-const {
-  emptyAssessment,
-  difficultyLabel,
-  copmPerformanceCategory,
-  copmCategoryClass,
-  copmActivities,
-  copmScoreOptions,
-  copmSatisfactionOptions,
-  copmImportanceOptions,
-  difficultyOptions,
-  calculateCOPM,
-  detectAdditionalFlags
-} = NS;
 
 // ----------------------------------------------------------------------
 // Persistence
@@ -1073,4 +1061,3 @@ if (document.readyState === 'loading') {
 } else {
   init();
 }
-})();

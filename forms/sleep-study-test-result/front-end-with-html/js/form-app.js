@@ -1,3 +1,7 @@
+import { calculateGrade } from './grader.js';
+import { isSevereAhi } from './rules.js';
+import { NUMERIC_FIELDS, abnormalitySeverityClass, abnormalitySeverityLabel, emptyResult, followUpUrgencyClass, followUpUrgencyLabel, osaSeverityLabel, priorityLabel, recommendationLabel, reportStatusLabel, resultClassificationClass, resultClassificationLabel, studyAdequacyLabel, studyTypeLabel } from './types.js';
+
 // Sleep Study Test Result — reporting-clinician wizard
 // (vanilla JavaScript, no build).
 //
@@ -15,28 +19,6 @@
 // exports to `window.SleepStudyTestResult`. Pulling them off here keeps the
 // rest of this file referring to short local names. The whole file is wrapped
 // in an IIFE so its top-level identifiers don't leak.
-(function () {
-'use strict';
-
-const NS = window.SleepStudyTestResult;
-const {
-  emptyResult,
-  NUMERIC_FIELDS,
-  resultClassificationLabel,
-  abnormalitySeverityLabel,
-  followUpUrgencyLabel,
-  studyTypeLabel,
-  studyAdequacyLabel,
-  osaSeverityLabel,
-  reportStatusLabel,
-  recommendationLabel,
-  priorityLabel,
-  resultClassificationClass,
-  abnormalitySeverityClass,
-  followUpUrgencyClass,
-  isSevereAhi,
-  calculateGrade
-} = NS;
 
 // ----------------------------------------------------------------------
 // Persistence
@@ -1124,4 +1106,3 @@ if (document.readyState === 'loading') {
 } else {
   init();
 }
-})();

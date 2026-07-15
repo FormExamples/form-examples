@@ -8,11 +8,6 @@
 // paracetamol-timing-critical case (T003), a deliberate-self-harm safeguarding
 // case (T004), and a no-test-selected case (T007).
 
-(function () {
-'use strict';
-window.ToxicologyTestRequestDashboard =
-  window.ToxicologyTestRequestDashboard || {};
-
 /** @type {import('./types.js').RequestRow[]} */
 const sampleRequests = [
   {
@@ -157,5 +152,4 @@ const sampleRequests = [
   }
 ];
 
-window.ToxicologyTestRequestDashboard.sampleRequests = sampleRequests;
-})();
+export { sampleRequests };

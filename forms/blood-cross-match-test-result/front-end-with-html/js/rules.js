@@ -15,9 +15,6 @@
  */
 
 // Wrapped in an IIFE; published via window.BloodCrossMatchTestResult.
-(function () {
-'use strict';
-window.BloodCrossMatchTestResult = window.BloodCrossMatchTestResult || {};
 
 // ──────────────────────────────────────────────
 // Structured-findings predicates
@@ -464,15 +461,4 @@ function gradeFollowUp(r, classification, severity) {
   };
 }
 
-Object.assign(window.BloodCrossMatchTestResult, {
-  hasCriticalResult,
-  isAboDiscrepancy,
-  isTwoSampleRuleUnmet,
-  hasAnyAbnormalFinding,
-  insufficientUnits,
-  classifyResult,
-  gradeSeverity,
-  gradeCompleteness,
-  gradeFollowUp
-});
-})();
+export { hasCriticalResult, isAboDiscrepancy, isTwoSampleRuleUnmet, hasAnyAbnormalFinding, insufficientUnits, classifyResult, gradeSeverity, gradeCompleteness, gradeFollowUp };

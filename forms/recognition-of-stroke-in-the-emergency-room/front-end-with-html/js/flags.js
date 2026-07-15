@@ -18,10 +18,6 @@
  */
 
 // Wrapped in an IIFE; published via window.RecognitionOfStrokeInTheEmergencyRoom.
-(function () {
-'use strict';
-window.RecognitionOfStrokeInTheEmergencyRoom =
-  window.RecognitionOfStrokeInTheEmergencyRoom || {};
 
 const SIGN_FIELDS = [
   ['facialWeakness', 'asymmetric facial weakness'],
@@ -130,6 +126,4 @@ function detectFlaggedIssues(data, rosierScore) {
   return flags;
 }
 
-window.RecognitionOfStrokeInTheEmergencyRoom.detectFlaggedIssues =
-  detectFlaggedIssues;
-})();
+export { detectFlaggedIssues };

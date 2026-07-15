@@ -27,10 +27,6 @@
  */
 
 // Wrapped in an IIFE; published via window.HistoryAndPhysicalExamination.
-(function () {
-'use strict';
-window.HistoryAndPhysicalExamination =
-  window.HistoryAndPhysicalExamination || {};
 
 /** Trim helper — treats undefined / null as empty. */
 function nonEmpty(v) {
@@ -217,17 +213,4 @@ const componentRules = [
   }
 ];
 
-Object.assign(window.HistoryAndPhysicalExamination, {
-  componentRules,
-  VITAL_RANGES,
-  CORE_EXAM_FIELDS,
-  REQUIRED_HISTORY_FIELDS,
-  nonEmpty,
-  allergyDocumented,
-  anyVitalRecorded,
-  coreExamAddressed,
-  missingCoreExam,
-  missingHistory,
-  abnormalVitals
-});
-})();
+export { componentRules, VITAL_RANGES, CORE_EXAM_FIELDS, REQUIRED_HISTORY_FIELDS, nonEmpty, allergyDocumented, anyVitalRecorded, coreExamAddressed, missingCoreExam, missingHistory, abnormalVitals };

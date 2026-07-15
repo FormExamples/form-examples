@@ -1,3 +1,6 @@
+import { calculatePlasticsGrade } from './plastics-grader.js';
+import { asaClassLabel, bmiCategory, calculateAge, calculateBMI, complexityLabel, emptyAssessment, riskLevelClass, riskLevelLabel, woundClassLabel } from './types.js';
+
 // Plastic Surgery Assessment — patient wizard (vanilla JavaScript, no build).
 //
 // Single-page continuous wizard: every section is rendered into the page in
@@ -10,22 +13,6 @@
 // Sibling files loaded as plain `<script>` tags (in order) attach their
 // exports to `window.PlasticSurgeryAssessment`. The whole file is wrapped
 // in an IIFE so its top-level identifiers don't leak to the global scope.
-(function () {
-'use strict';
-
-const NS = window.PlasticSurgeryAssessment;
-const {
-  emptyAssessment,
-  calculateBMI,
-  bmiCategory,
-  calculateAge,
-  asaClassLabel,
-  woundClassLabel,
-  complexityLabel,
-  riskLevelLabel,
-  riskLevelClass,
-  calculatePlasticsGrade
-} = NS;
 
 // ----------------------------------------------------------------------
 // Persistence
@@ -1821,4 +1808,3 @@ if (document.readyState === 'loading') {
 } else {
   init();
 }
-})();

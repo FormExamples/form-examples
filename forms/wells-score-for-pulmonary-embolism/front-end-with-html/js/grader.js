@@ -1,3 +1,5 @@
+import { wellsRules } from './rules.js';
+
 // Wells PE grader. Pure functions: take an `AssessmentData` object, evaluate the
 // seven weighted rules in `wellsRules`, award each present criterion its weight
 // (+3, +1.5, or +1), sum the total (0..12.5), and derive the two-level (NICE
@@ -23,11 +25,6 @@
  */
 
 // Wrapped in an IIFE; published via window.WellsScoreForPulmonaryEmbolism.
-(function () {
-'use strict';
-window.WellsScoreForPulmonaryEmbolism =
-  window.WellsScoreForPulmonaryEmbolism || {};
-const { wellsRules } = window.WellsScoreForPulmonaryEmbolism;
 
 /**
  * Evaluate the seven Wells rules and collect the ones that fired.
@@ -125,8 +122,4 @@ function calculateWellsGrade(data) {
   };
 }
 
-Object.assign(window.WellsScoreForPulmonaryEmbolism, {
-  evaluateCriteria,
-  calculateWellsGrade
-});
-})();
+export { evaluateCriteria, calculateWellsGrade };

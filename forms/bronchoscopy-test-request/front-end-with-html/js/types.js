@@ -7,11 +7,6 @@
 // convention. Wrapped in an IIFE; published via
 // `window.BronchoscopyTestRequest`.
 
-(function () {
-'use strict';
-window.BronchoscopyTestRequest =
-  window.BronchoscopyTestRequest || {};
-
 /**
  * Build a fresh, fully-blank bronchoscopy request.
  * Strings default to ''; numeric / date fields default to null;
@@ -105,11 +100,4 @@ function indicationLabel(value) {
   return INDICATION_LABELS[value] || value || '';
 }
 
-Object.assign(window.BronchoscopyTestRequest, {
-  emptyRequest,
-  procedureLabel,
-  indicationLabel,
-  PROCEDURE_LABELS,
-  INDICATION_LABELS
-});
-})();
+export { emptyRequest, procedureLabel, indicationLabel, PROCEDURE_LABELS, INDICATION_LABELS };

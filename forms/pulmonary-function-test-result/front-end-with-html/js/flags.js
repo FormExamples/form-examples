@@ -1,3 +1,5 @@
+import { hasCriticalFinding } from './rules.js';
+
 // Safety-critical flag detection for the Pulmonary Function Test Result.
 //
 // Faithful vanilla-JavaScript port of the SvelteKit engine module
@@ -14,10 +16,6 @@
 
 // Wrapped in an IIFE; published via window.PulmonaryFunctionTestResult.
 // Depends on rules.js (hasCriticalFinding), so it must load after it.
-(function () {
-'use strict';
-window.PulmonaryFunctionTestResult = window.PulmonaryFunctionTestResult || {};
-const { hasCriticalFinding } = window.PulmonaryFunctionTestResult;
 
 /**
  * Detect the safety-critical flags for a report.
@@ -151,7 +149,4 @@ function detectFlags(r) {
   return flags;
 }
 
-Object.assign(window.PulmonaryFunctionTestResult, {
-  detectFlags
-});
-})();
+export { detectFlags };

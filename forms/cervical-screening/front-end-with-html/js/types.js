@@ -143,9 +143,6 @@
 // classic <script> (no ES modules) so the page can be opened directly via
 // `file://`. The IIFE attaches its public symbols to a single global
 // namespace, `window.CervicalScreening`.
-(function () {
-'use strict';
-window.CervicalScreening = window.CervicalScreening || {};
 
 /**
  * Build a fresh, fully-blank screening record.
@@ -322,18 +319,4 @@ function priorityLabel(priority) {
   }
 }
 
-Object.assign(window.CervicalScreening, {
-  emptyScreening,
-  resultClassLabel,
-  resultClassClass,
-  managementActionLabel,
-  sampleTakerRoleLabel,
-  careSettingLabel,
-  recallIntervalLabel,
-  hpvResultLabel,
-  cytologyGradeLabel,
-  sampleAdequacyLabel,
-  statusLabel,
-  priorityLabel
-});
-})();
+export { emptyScreening, resultClassLabel, resultClassClass, managementActionLabel, sampleTakerRoleLabel, careSettingLabel, recallIntervalLabel, hpvResultLabel, cytologyGradeLabel, sampleAdequacyLabel, statusLabel, priorityLabel };

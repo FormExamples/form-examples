@@ -1,3 +1,8 @@
+import { detectAdditionalFlags } from './flagged-issues.js';
+import { safetyRules } from './rules.js';
+import { gradeSafety } from './safety-grader.js';
+import { actionTimeframe, emptyAssessment, findingLevelClass, gradeLabel, gradeToFindingLevel, outcomeClass, outcomeLabel } from './types.js';
+
 // Workplace Safety Assessment — auditor checklist (vanilla JS).
 //
 // Single-page continuous wizard: every section is rendered into the page in
@@ -13,22 +18,6 @@
 // rules → safety-grader → flagged-issues → app) attach their exports to
 // `window.WorkplaceSafetyAssessment`. The whole file is wrapped in an IIFE
 // so its top-level identifiers don't leak to the global scope.
-(function () {
-'use strict';
-
-const NS = window.WorkplaceSafetyAssessment;
-const {
-  emptyAssessment,
-  outcomeLabel,
-  outcomeClass,
-  gradeLabel,
-  findingLevelClass,
-  gradeToFindingLevel,
-  actionTimeframe,
-  safetyRules,
-  gradeSafety,
-  detectAdditionalFlags
-} = NS;
 
 // ----------------------------------------------------------------------
 // Persistence
@@ -1283,4 +1272,3 @@ if (document.readyState === 'loading') {
 } else {
   init();
 }
-})();

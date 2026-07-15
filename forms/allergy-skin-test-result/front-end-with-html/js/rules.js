@@ -19,9 +19,6 @@
  */
 
 // Wrapped in an IIFE; published via window.AllergySkinTestResult.
-(function () {
-'use strict';
-window.AllergySkinTestResult = window.AllergySkinTestResult || {};
 
 // ----------------------------------------------------------------------
 // Structured-findings predicates (mirror `utils.ts`)
@@ -411,13 +408,4 @@ function gradeFollowUp(r, classification, severity) {
   };
 }
 
-Object.assign(window.AllergySkinTestResult, {
-  hasCriticalFinding,
-  hasAnyAbnormalFinding,
-  isInvalidTest,
-  classifyResult,
-  gradeSeverity,
-  gradeCompleteness,
-  gradeFollowUp
-});
-})();
+export { hasCriticalFinding, hasAnyAbnormalFinding, isInvalidTest, classifyResult, gradeSeverity, gradeCompleteness, gradeFollowUp };

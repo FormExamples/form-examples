@@ -1,3 +1,5 @@
+import { hasNumber, hasText } from './types.js';
+
 // Provider Transfer Request - flagged-issue detection. Independent of the
 // completeness check (handled by the validator), this module raises
 // clinically significant flags for unstable patients, abnormal vital signs,
@@ -9,11 +11,6 @@
  * @typedef {import('./types.js').AssessmentData} AssessmentData
  * @typedef {import('./types.js').FlaggedIssue} FlaggedIssue
  */
-
-(function () {
-'use strict';
-window.ProviderTransferRequest = window.ProviderTransferRequest || {};
-const { hasNumber, hasText } = window.ProviderTransferRequest;
 
 /**
  * @param {AssessmentData} data
@@ -258,5 +255,4 @@ function detectFlaggedIssues(data) {
   return flags;
 }
 
-window.ProviderTransferRequest.detectFlaggedIssues = detectFlaggedIssues;
-})();
+export { detectFlaggedIssues };

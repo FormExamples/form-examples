@@ -5,10 +5,6 @@
 // Twelve realistic rows: spans every Q2 category, three with the suicidal-
 // thoughts variant, varied recent-contact and high-priority flag counts.
 
-(function () {
-'use strict';
-window.DvlaM1Dashboard = window.DvlaM1Dashboard || {};
-
 /**
  * Mental health condition category labels (Q2) for the DVLA M1 form.
  * These exact strings are the canonical labels also used as filter values.
@@ -169,6 +165,4 @@ const samplePatients = [
   }
 ];
 
-window.DvlaM1Dashboard.conditionCategories = conditionCategories;
-window.DvlaM1Dashboard.samplePatients = samplePatients;
-})();
+export { conditionCategories, samplePatients };

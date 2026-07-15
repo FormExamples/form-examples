@@ -20,9 +20,6 @@
  */
 
 // Wrapped in an IIFE; published via window.EchocardiogramTestResult.
-(function () {
-'use strict';
-window.EchocardiogramTestResult = window.EchocardiogramTestResult || {};
 
 // ----------------------------------------------------------------------
 // Structured-findings predicates (mirror `utils.ts`)
@@ -506,18 +503,4 @@ function gradeFollowUp(r, classification, severity) {
   };
 }
 
-Object.assign(window.EchocardiogramTestResult, {
-  valveGrades,
-  hasSevereValveDisease,
-  hasModerateValveDisease,
-  hasAnyValveDisease,
-  hasSevereLvImpairment,
-  hasAnyLvImpairment,
-  hasCriticalFinding,
-  hasAnyAbnormalFinding,
-  classifyResult,
-  gradeSeverity,
-  gradeCompleteness,
-  gradeFollowUp
-});
-})();
+export { valveGrades, hasSevereValveDisease, hasModerateValveDisease, hasAnyValveDisease, hasSevereLvImpairment, hasAnyLvImpairment, hasCriticalFinding, hasAnyAbnormalFinding, classifyResult, gradeSeverity, gradeCompleteness, gradeFollowUp };

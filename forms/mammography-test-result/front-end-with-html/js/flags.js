@@ -1,3 +1,5 @@
+import { isBiRadsCritical, isBiRadsUrgent } from './rules.js';
+
 // Safety-critical flag detection for the Mammography Test Result.
 //
 // Faithful vanilla-JavaScript port of the SvelteKit engine module
@@ -16,10 +18,6 @@
 // Wrapped in an IIFE; published via window.MammographyTestResult.
 // Depends on rules.js (isBiRadsUrgent / isBiRadsCritical), so it must load
 // after it.
-(function () {
-'use strict';
-window.MammographyTestResult = window.MammographyTestResult || {};
-const { isBiRadsUrgent, isBiRadsCritical } = window.MammographyTestResult;
 
 /**
  * Detect the safety-critical flags for a report.
@@ -188,7 +186,4 @@ function detectFlags(r) {
   return flags;
 }
 
-Object.assign(window.MammographyTestResult, {
-  detectFlags
-});
-})();
+export { detectFlags };

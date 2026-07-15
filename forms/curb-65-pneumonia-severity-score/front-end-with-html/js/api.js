@@ -6,11 +6,6 @@
 // down) or returns an empty list, callers fall back to the sample data shipped
 // in `data.js` so the page is usable standalone.
 
-(function () {
-'use strict';
-window.Curb65PneumoniaSeverityScoreDashboard =
-  window.Curb65PneumoniaSeverityScoreDashboard || {};
-
 const API_BASE = 'http://localhost:5150';
 const ASSESSMENTS_PATH = '/api/dashboard/assessments';
 
@@ -35,6 +30,4 @@ async function fetchAssessments() {
   return data.items || [];
 }
 
-window.Curb65PneumoniaSeverityScoreDashboard.fetchAssessments = fetchAssessments;
-window.Curb65PneumoniaSeverityScoreDashboard.API_BASE = API_BASE;
-})();
+export { fetchAssessments, API_BASE };

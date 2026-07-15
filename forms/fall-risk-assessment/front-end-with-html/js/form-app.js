@@ -1,3 +1,8 @@
+import { gradeFallRisk } from './fall-risk-grader.js';
+import { detectAdditionalFlags } from './flagged-issues.js';
+import { mfsItems } from './mfs-rules.js';
+import { emptyAssessment, severityClass, severityLabel } from './types.js';
+
 // Fall Risk Assessment - patient wizard (vanilla JavaScript, no build).
 //
 // Single-page continuous wizard: every section is rendered into the page in
@@ -11,18 +16,6 @@
 // exports to `window.FallRiskAssessment`. Pulling them off here keeps the
 // rest of this file referring to short local names. Whole file is wrapped
 // in an IIFE so its top-level identifiers don't leak to the global scope.
-(function () {
-'use strict';
-
-const NS = window.FallRiskAssessment;
-const {
-  emptyAssessment,
-  severityLabel,
-  severityClass,
-  mfsItems,
-  gradeFallRisk,
-  detectAdditionalFlags
-} = NS;
 
 // ----------------------------------------------------------------------
 // Persistence
@@ -121,7 +114,6 @@ function lilyInputClass(type) {
     default:       return 'text-input';
   }
 }
-
 
 /**
  * Build a labelled text input.
@@ -1387,4 +1379,3 @@ if (document.readyState === 'loading') {
 } else {
   init();
 }
-})();

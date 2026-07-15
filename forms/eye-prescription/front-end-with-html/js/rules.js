@@ -1,3 +1,5 @@
+import { ageInYears } from './types.js';
+
 // Eye Prescription — classification engine.
 //
 // Pure functions: no DOM, no IO. Three passes:
@@ -8,10 +10,8 @@
 // Safety flags fire independently. See
 // ../doc/refractive-classification-rules.md for the band tables.
 
-(function () {
-  'use strict';
-  const NS = (window.EyePrescription = window.EyePrescription || {});
-  const { ageInYears } = NS;
+  
+  
 
   // ----------------------------------------------------------------------
   // Per-eye sphere class
@@ -262,9 +262,10 @@
     return expiry.toISOString().slice(0, 10);
   }
 
-  NS.classify = classify;
-  NS.classifySphere = classifySphere;
-  NS.classifyCylinder = classifyCylinder;
-  NS.classifyPresbyopia = classifyPresbyopia;
-  NS.suggestExpiry = suggestExpiry;
-}());
+  
+  
+  
+  
+  
+
+export { classify, classifySphere, classifyCylinder, classifyPresbyopia, suggestExpiry };

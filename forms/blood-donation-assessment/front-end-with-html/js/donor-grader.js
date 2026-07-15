@@ -1,3 +1,5 @@
+import { dsgRules } from './rules.js';
+
 // Donor grader: applies the JPAC Donor Selection Guidelines (DSG) rules
 // against an `AssessmentData` and returns the overall eligibility status.
 //
@@ -11,10 +13,6 @@
  */
 
 // Wrapped in an IIFE; published via window.BloodDonationAssessment.
-(function () {
-'use strict';
-window.BloodDonationAssessment = window.BloodDonationAssessment || {};
-const { dsgRules } = window.BloodDonationAssessment;
 
 /**
  * Run all DSG rules against the supplied data.
@@ -57,5 +55,4 @@ function gradeDonor(data) {
   return { eligibilityStatus, deferralWindow, firedRules };
 }
 
-window.BloodDonationAssessment.gradeDonor = gradeDonor;
-})();
+export { gradeDonor };

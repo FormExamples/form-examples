@@ -200,9 +200,6 @@
 // classic <script> (no ES modules) so the page can be opened directly via
 // `file://`. The IIFE attaches its public symbols to a single global
 // namespace, `window.HormoneReplacementTherapyAssessment`.
-(function () {
-'use strict';
-window.HormoneReplacementTherapyAssessment = window.HormoneReplacementTherapyAssessment || {};
 
 /**
  * Build a fresh, fully-blank assessment.
@@ -402,15 +399,4 @@ function mrsScoreLabel(score) {
   }
 }
 
-Object.assign(window.HormoneReplacementTherapyAssessment, {
-  emptyAssessment,
-  calculateBMI,
-  bmiCategory,
-  calculateAge,
-  mrsSeverityLabel,
-  mrsSeverityClass,
-  riskClassificationLabel,
-  riskClassificationClass,
-  mrsScoreLabel
-});
-})();
+export { emptyAssessment, calculateBMI, bmiCategory, calculateAge, mrsSeverityLabel, mrsSeverityClass, riskClassificationLabel, riskClassificationClass, mrsScoreLabel };

@@ -1,3 +1,6 @@
+import { detectFlaggedIssues } from './flags.js';
+import { domainRules } from './rules.js';
+
 // Mental State Examination completeness-and-risk grader. Pure functions: take
 // an `AssessmentData` object and derive the documentation outputs (spec §4).
 // This is NOT a numeric severity score. It emits:
@@ -28,11 +31,6 @@
  */
 
 // Wrapped in an IIFE; published via window.MentalStateExamination.
-(function () {
-'use strict';
-window.MentalStateExamination = window.MentalStateExamination || {};
-const NS = window.MentalStateExamination;
-const { domainRules, detectFlaggedIssues } = NS;
 
 /**
  * Evaluate each domain-documentation rule against the record.
@@ -145,10 +143,4 @@ function assess(data) {
   };
 }
 
-Object.assign(NS, {
-  computeDomainStatuses,
-  deriveRiskLevel,
-  calculateGrade,
-  assess
-});
-})();
+export { computeDomainStatuses, deriveRiskLevel, calculateGrade, assess };

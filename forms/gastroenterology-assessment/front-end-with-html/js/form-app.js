@@ -1,3 +1,7 @@
+import { detectAdditionalFlags } from './flagged-issues.js';
+import { calculateGISeverity } from './gi-grader.js';
+import { bmiCategory, bristolStoolDescription, calculateBMI, emptyAssessment, severityClass, severityLabel } from './types.js';
+
 // Gastroenterology Assessment - patient wizard (vanilla JavaScript, no build).
 //
 // Single-page continuous wizard: every section is rendered into the page in
@@ -12,20 +16,6 @@
 // keeps the rest of this file referring to short local names. The whole
 // file is wrapped in an IIFE so its top-level identifiers don't leak to
 // the global scope.
-(function () {
-'use strict';
-
-const NS = window.GastroenterologyAssessment;
-const {
-  emptyAssessment,
-  calculateBMI,
-  bmiCategory,
-  severityLabel,
-  severityClass,
-  bristolStoolDescription,
-  calculateGISeverity,
-  detectAdditionalFlags
-} = NS;
 
 // ----------------------------------------------------------------------
 // Persistence
@@ -138,7 +128,6 @@ function lilyInputClass(type) {
     default:       return 'text-input';
   }
 }
-
 
 /**
  * Build a labelled text input.
@@ -1576,4 +1565,3 @@ if (document.readyState === 'loading') {
 } else {
   init();
 }
-})();

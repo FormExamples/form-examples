@@ -1,3 +1,5 @@
+import { ageInYears } from './rules.js';
+
 // Safety-flag detection for the Mammography Test Request engine.
 //
 // Pure function returning safety flags using the grade_flag categories from
@@ -8,13 +10,6 @@
 // Each flag is { flagId, category, priority, description, suggestedAction }.
 // Flag IDs are stable and identical across every front-end and the back-end.
 // Wrapped in an IIFE; published via `window.MammographyTestRequest`.
-
-(function () {
-'use strict';
-window.MammographyTestRequest =
-  window.MammographyTestRequest || {};
-const NS = window.MammographyTestRequest;
-const { ageInYears } = NS;
 
 /**
  * Detect safety flags for a mammography request.
@@ -114,5 +109,4 @@ function detectFlags(data, context) {
   return flags;
 }
 
-Object.assign(NS, { detectFlags });
-})();
+export { detectFlags };

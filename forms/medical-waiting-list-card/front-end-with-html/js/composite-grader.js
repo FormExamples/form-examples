@@ -1,11 +1,14 @@
-(function (root) {
-  const ns = (root.MedicalWaitingListCard = root.MedicalWaitingListCard || {});
+import { detectAdditionalFlags } from './flagged-issues.js';
+import { daysBetween, todayIso } from './priority-targets.js';
+import { calculateWaitingTime } from './waiting-time-rules.js';
 
-  ns.calculateWaitingTimeStatus = function calculateWaitingTimeStatus(card, options) {
-    const today = (options && options.todayIso) || ns.todayIso();
-    const wt = ns.calculateWaitingTime(card, today);
-    const additionalFlags = ns.detectAdditionalFlags(card, today);
-    const daysToAppointment = ns.daysBetween(today, card.appointment.appointmentDate);
+  
+
+  export const calculateWaitingTimeStatus = function calculateWaitingTimeStatus(card, options) {
+    const today = (options && options.todayIso) || todayIso();
+    const wt = calculateWaitingTime(card, today);
+    const additionalFlags = detectAdditionalFlags(card, today);
+    const daysToAppointment = daysBetween(today, card.appointment.appointmentDate);
 
     return {
       waitingTimeStatus: wt.band,
@@ -21,4 +24,3 @@
       graderNotes: ''
     };
   };
-})(window);

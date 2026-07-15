@@ -20,9 +20,6 @@
  */
 
 // Wrapped in an IIFE; published via window.ApgarScore.
-(function () {
-'use strict';
-window.ApgarScore = window.ApgarScore || {};
 
 /** Format a timepoint's minutes for display, e.g. "5-minute". */
 function tpLabel(minutes) {
@@ -146,5 +143,4 @@ function detectFlaggedIssues(data, gradedTimepoints) {
   return flags;
 }
 
-window.ApgarScore.detectFlaggedIssues = detectFlaggedIssues;
-})();
+export { detectFlaggedIssues };

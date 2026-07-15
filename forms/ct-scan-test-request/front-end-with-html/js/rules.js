@@ -1,3 +1,5 @@
+import { usesIvContrast } from './types.js';
+
 // Four-axis rule catalogue for the CT Scan Test Request engine.
 //
 // Derived from index.md and the SQL migrations: (A) appropriateness 1-9 + band
@@ -10,12 +12,6 @@
 // composes them.
 //
 // Wrapped in an IIFE; published via `window.CtScanTestRequest`.
-
-(function () {
-'use strict';
-window.CtScanTestRequest = window.CtScanTestRequest || {};
-const NS = window.CtScanTestRequest;
-const { usesIvContrast } = NS;
 
 // ----------------------------------------------------------------------
 // Axis A — Appropriateness (ACR Appropriateness Criteria 1-9 ordinal)
@@ -439,19 +435,4 @@ function scoreTriage(data) {
   };
 }
 
-Object.assign(NS, {
-  scoreAppropriateness,
-  appropriatenessBand,
-  evaluateDose,
-  evaluateContrastSafety,
-  scoreCompleteness,
-  scoreTriage,
-  maxTier,
-  TRIAGE_ORDER,
-  TARGET_TIMEFRAMES,
-  DOSE_BY_REGION,
-  INDICATION_REGION_MAP,
-  EGFR_CAUTION,
-  EGFR_CONTRAINDICATED
-});
-})();
+export { scoreAppropriateness, appropriatenessBand, evaluateDose, evaluateContrastSafety, scoreCompleteness, scoreTriage, maxTier, TRIAGE_ORDER, TARGET_TIMEFRAMES, DOSE_BY_REGION, INDICATION_REGION_MAP, EGFR_CAUTION, EGFR_CONTRAINDICATED };

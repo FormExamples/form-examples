@@ -1,3 +1,5 @@
+import { hasCriticalOrganism, hasResistanceMarker, isPositiveCulture } from './rules.js';
+
 // Safety-critical flag detection for the Microbiology Culture Test Result.
 //
 // Faithful vanilla-JavaScript port of the SvelteKit engine module
@@ -13,11 +15,6 @@
  */
 
 // Wrapped in an IIFE; published via window.MicrobiologyCultureTestResult.
-(function () {
-'use strict';
-window.MicrobiologyCultureTestResult = window.MicrobiologyCultureTestResult || {};
-const { hasCriticalOrganism, hasResistanceMarker, isPositiveCulture } =
-  window.MicrobiologyCultureTestResult;
 
 /**
  * Detect the safety-critical flags for a report.
@@ -147,7 +144,4 @@ function detectFlags(r) {
   return flags;
 }
 
-Object.assign(window.MicrobiologyCultureTestResult, {
-  detectFlags
-});
-})();
+export { detectFlags };

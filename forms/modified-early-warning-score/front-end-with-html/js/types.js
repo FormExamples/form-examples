@@ -127,10 +127,6 @@
 // classic <script> (no ES modules) so the page can be opened directly via
 // `file://`. The IIFE attaches its public symbols to a single global
 // namespace, `window.ModifiedEarlyWarningScore`.
-(function () {
-'use strict';
-window.ModifiedEarlyWarningScore =
-  window.ModifiedEarlyWarningScore || {};
 
 /**
  * Build a fresh, fully-blank observation.
@@ -258,15 +254,4 @@ function priorityLabel(priority) {
   }
 }
 
-Object.assign(window.ModifiedEarlyWarningScore, {
-  emptyObservation,
-  riskBandLabel,
-  riskBandClass,
-  clinicianRoleLabel,
-  careSettingLabel,
-  sexLabel,
-  ageBandLabel,
-  avpuLabel,
-  priorityLabel
-});
-})();
+export { emptyObservation, riskBandLabel, riskBandClass, clinicianRoleLabel, careSettingLabel, sexLabel, ageBandLabel, avpuLabel, priorityLabel };

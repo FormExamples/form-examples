@@ -32,9 +32,6 @@
  */
 
 // Wrapped in an IIFE; published via window.EmployeeSatisfactionSurvey.
-(function () {
-'use strict';
-window.EmployeeSatisfactionSurvey = window.EmployeeSatisfactionSurvey || {};
 
 // ---------------------------------------------------------------------
 // Likert agreement scale (text labels for each numeric value 1..5)
@@ -277,16 +274,4 @@ const GRADED_DOMAIN_KEYS = [
   'culture', 'environment', 'recognition', 'overall'
 ];
 
-Object.assign(window.EmployeeSatisfactionSurvey, {
-  LIKERT_AGREEMENT,
-  DOMAINS,
-  surveyItems,
-  GRADED_DOMAIN_KEYS,
-  DEPARTMENT_OPTIONS,
-  TENURE_OPTIONS,
-  HOURS_OPTIONS,
-  ROLE_LEVEL_OPTIONS,
-  WORK_LOCATION_OPTIONS,
-  RETENTION_INTENT_OPTIONS
-});
-})();
+export { LIKERT_AGREEMENT, DOMAINS, surveyItems, GRADED_DOMAIN_KEYS, DEPARTMENT_OPTIONS, TENURE_OPTIONS, HOURS_OPTIONS, ROLE_LEVEL_OPTIONS, WORK_LOCATION_OPTIONS, RETENTION_INTENT_OPTIONS };

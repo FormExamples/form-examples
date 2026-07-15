@@ -20,9 +20,6 @@
  */
 
 // Wrapped in an IIFE; published via window.PaediatricEarlyWarningScore.
-(function () {
-'use strict';
-window.PaediatricEarlyWarningScore = window.PaediatricEarlyWarningScore || {};
 
 /**
  * @param {AssessmentData} data
@@ -140,5 +137,4 @@ function detectFlaggedIssues(data, grade) {
   return flags;
 }
 
-window.PaediatricEarlyWarningScore.detectFlaggedIssues = detectFlaggedIssues;
-})();
+export { detectFlaggedIssues };

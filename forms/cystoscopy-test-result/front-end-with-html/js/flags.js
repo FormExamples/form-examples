@@ -1,3 +1,5 @@
+import { hasCriticalFinding } from './rules.js';
+
 // Safety-critical flag detection for the Cystoscopy Test Result.
 //
 // Faithful vanilla-JavaScript port of the SvelteKit engine module
@@ -13,10 +15,6 @@
  */
 
 // Wrapped in an IIFE; published via window.CystoscopyTestResult.
-(function () {
-'use strict';
-window.CystoscopyTestResult = window.CystoscopyTestResult || {};
-const { hasCriticalFinding } = window.CystoscopyTestResult;
 
 /**
  * Detect the safety-critical flags for a report.
@@ -140,7 +138,4 @@ function detectFlags(r) {
   return flags;
 }
 
-Object.assign(window.CystoscopyTestResult, {
-  detectFlags
-});
-})();
+export { detectFlags };

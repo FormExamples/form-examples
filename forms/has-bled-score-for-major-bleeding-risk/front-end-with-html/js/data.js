@@ -6,11 +6,6 @@
 // every care setting, with the high-bleeding-risk flag set whenever the score
 // is >= 3.
 
-(function () {
-'use strict';
-window.HasBledScoreForMajorBleedingRiskDashboard =
-  window.HasBledScoreForMajorBleedingRiskDashboard || {};
-
 /** @type {import('./dashboard-types.js').AssessmentRow[]} */
 const sampleAssessments = [
   {
@@ -95,6 +90,4 @@ const sampleAssessments = [
   }
 ];
 
-window.HasBledScoreForMajorBleedingRiskDashboard.sampleAssessments =
-  sampleAssessments;
-})();
+export { sampleAssessments };

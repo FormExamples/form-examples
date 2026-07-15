@@ -1,3 +1,7 @@
+import { detectFlaggedIssues } from './flags.js';
+import { calculateCurb65Grade } from './grader.js';
+import { dispositionLabel, emptyAssessment, priorityLabel, riskBandClass, riskBandLabel, scoreVariantLabel } from './types.js';
+
 // CURB-65 Pneumonia Severity Score — clinician wizard (vanilla JavaScript,
 // no build).
 //
@@ -13,20 +17,6 @@
 // exports to `window.Curb65PneumoniaSeverityScore`. Pulling them off here keeps
 // the rest of this file referring to short local names. The whole file is
 // wrapped in an IIFE so its top-level identifiers don't leak.
-(function () {
-'use strict';
-
-const NS = window.Curb65PneumoniaSeverityScore;
-const {
-  emptyAssessment,
-  riskBandLabel,
-  riskBandClass,
-  scoreVariantLabel,
-  dispositionLabel,
-  priorityLabel,
-  calculateCurb65Grade,
-  detectFlaggedIssues
-} = NS;
 
 // ----------------------------------------------------------------------
 // Persistence
@@ -1050,4 +1040,3 @@ if (document.readyState === 'loading') {
 } else {
   init();
 }
-})();

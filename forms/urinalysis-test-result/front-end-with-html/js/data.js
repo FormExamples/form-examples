@@ -7,11 +7,6 @@
 // bands, with a critical-alert row (significant bacteriuria in pregnancy)
 // whose critical finding raised two flags.
 
-(function () {
-'use strict';
-window.UrinalysisTestResultDashboard =
-  window.UrinalysisTestResultDashboard || {};
-
 /** @type {import('./dashboard-types.js').ReportRow[]} */
 const sampleReports = [
   {
@@ -88,5 +83,4 @@ const sampleReports = [
   }
 ];
 
-window.UrinalysisTestResultDashboard.sampleReports = sampleReports;
-})();
+export { sampleReports };

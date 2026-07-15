@@ -1,3 +1,7 @@
+import { ageYears } from './fp92a-rules.js';
+import { evaluateFp92a } from './fp92a-validator.js';
+import { ELIGIBLE_CONDITION_LABELS, STEP_TITLES, TOTAL_STEPS as TOTAL } from './types.js';
+
 /**
  * FP92A — single-page step-by-step wizard controller.
  *
@@ -5,10 +9,9 @@
  * eligibility summary on the final step.
  */
 
-(function (root) {
-  const F = root.Fp92aForm;
+  
   const STORAGE_KEY = "fp92a.application.v1";
-  const TOTAL = F.TOTAL_STEPS;
+  
 
   const form = document.getElementById("application-form");
   const steps = Array.from(document.querySelectorAll(".step"));
@@ -46,9 +49,9 @@
       li.className = "step-list-item";
       li.dataset.status = "waiting";
       li.dataset.step = String(i);
-      li.setAttribute("aria-label", "Step " + i + ": " + (F.STEP_TITLES[i - 1] || ""));
+      li.setAttribute("aria-label", "Step " + i + ": " + (STEP_TITLES[i - 1] || ""));
       const span = document.createElement("span");
-      span.textContent = (F.STEP_TITLES[i - 1] || ("Step " + i));
+      span.textContent = (STEP_TITLES[i - 1] || ("Step " + i));
       li.appendChild(span);
       li.addEventListener("click", () => { persist(); showStep(i); });
       stepList.appendChild(li);
@@ -77,7 +80,7 @@
   function showStep(n) {
     current = Math.min(TOTAL, Math.max(1, n));
     steps.forEach((s) => { s.hidden = Number(s.dataset.step) !== current; });
-    progressText.textContent = `Step ${current} of ${TOTAL} — ${F.STEP_TITLES[current - 1]}`;
+    progressText.textContent = `Step ${current} of ${TOTAL} — ${STEP_TITLES[current - 1]}`;
     if (progressBar) progressBar.value = Math.round((current / TOTAL) * 100);
     prevBtn.disabled = current === 1;
     nextBtn.hidden = current === TOTAL;
@@ -154,12 +157,12 @@
 
   function renderSummary() {
     const app = buildApplicationData(collect());
-    const result = F.evaluateFp92a(app);
+    const result = evaluateFp92a(app);
     const label = result.outcome === "eligible" ? "Eligible"
       : result.outcome === "ineligible" ? "Ineligible"
       : "Requires clarification";
     const conditions = result.eligibleConditions
-      .map((c) => F.ELIGIBLE_CONDITION_LABELS[c] || c)
+      .map((c) => ELIGIBLE_CONDITION_LABELS[c] || c)
       .join(", ") || "(none)";
     const rulesHtml = result.firedRules.map((r) =>
       `<li><strong>${r.category}</strong> — ${r.description}</li>`).join("");
@@ -182,7 +185,7 @@
 
   function updateAgeDisplay() {
     const dob = form.querySelector('[name="patientBirthDate"]').value;
-    const age = F.ageYears(dob);
+    const age = ageYears(dob);
     if (ageInput) ageInput.value = age == null ? "" : `${age} years`;
     if (!ageAdvice) return;
     ageAdvice.innerHTML = "";
@@ -237,4 +240,3 @@
   renderStepList();
   rehydrate();
   showStep(1);
-})(window);

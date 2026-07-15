@@ -1,3 +1,5 @@
+import { FIRST_PHASE_HOURS, PARKLAND_COEFFICIENT, SECOND_PHASE_HOURS, URINE_HIGH_FACTOR, URINE_LOW_FACTOR } from './rules.js';
+
 // Parkland-formula grader. Pure functions: take an `AssessmentData` object,
 // apply the Parkland formula to the body weight and %TBSA, split the total 50/50
 // into the mandated phases, and derive an infusion rate for each phase offset by
@@ -32,17 +34,6 @@
  */
 
 // Wrapped in an IIFE; published via window.ParklandFormulaForBurns.
-(function () {
-'use strict';
-window.ParklandFormulaForBurns =
-  window.ParklandFormulaForBurns || {};
-const {
-  PARKLAND_COEFFICIENT,
-  FIRST_PHASE_HOURS,
-  SECOND_PHASE_HOURS,
-  URINE_LOW_FACTOR,
-  URINE_HIGH_FACTOR
-} = window.ParklandFormulaForBurns;
 
 /** Round a number to one decimal place (returns null unchanged). */
 function roundOne(n) {
@@ -206,9 +197,4 @@ function calculateParkland(data) {
   };
 }
 
-Object.assign(window.ParklandFormulaForBurns, {
-  roundOne,
-  computeHoursSinceInjury,
-  calculateParkland
-});
-})();
+export { roundOne, computeHoursSinceInjury, calculateParkland };

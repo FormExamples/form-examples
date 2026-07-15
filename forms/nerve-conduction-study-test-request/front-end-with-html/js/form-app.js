@@ -1,3 +1,6 @@
+import { calculateGrade } from './grader.js';
+import { emptyRequest, regionLabel, studyTypeLabel } from './types.js';
+
 // Nerve Conduction Study Test Request — clinician referral wizard (vanilla JS).
 //
 // Single-page continuous wizard: every section is rendered into the page in
@@ -10,17 +13,6 @@
 // exports to `window.NerveConductionStudyTestRequest`. The whole file is
 // wrapped in an IIFE so its top-level identifiers don't leak to the global
 // scope.
-
-(function () {
-'use strict';
-
-const NS = window.NerveConductionStudyTestRequest;
-const {
-  emptyRequest,
-  studyTypeLabel,
-  regionLabel,
-  calculateGrade
-} = NS;
 
 // ----------------------------------------------------------------------
 // Persistence
@@ -827,4 +819,3 @@ if (document.readyState === 'loading') {
 } else {
   init();
 }
-})();

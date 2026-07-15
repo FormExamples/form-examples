@@ -1,3 +1,7 @@
+import { calculateAntenatalRisk, riskLevelClass, riskLevelLabel } from './antenatal-grader.js';
+import { detectAdditionalFlags } from './flagged-issues.js';
+import { bmiCategory, calculateAge, calculateBMI, calculateEdd, emptyAssessment } from './types.js';
+
 // Obstetrics Assessment - patient/midwife wizard (vanilla JavaScript, no build).
 //
 // Single-page continuous wizard: every section is rendered into the page in
@@ -11,21 +15,6 @@
 // exports to `window.ObstetricsAssessment`. Pulling them off here keeps
 // the rest of this file referring to short local names. Whole file is
 // wrapped in an IIFE so its top-level identifiers don't leak globally.
-(function () {
-'use strict';
-
-const NS = window.ObstetricsAssessment;
-const {
-  emptyAssessment,
-  calculateBMI,
-  bmiCategory,
-  calculateAge,
-  calculateEdd,
-  calculateAntenatalRisk,
-  riskLevelLabel,
-  riskLevelClass,
-  detectAdditionalFlags
-} = NS;
 
 // ----------------------------------------------------------------------
 // Persistence
@@ -1538,4 +1527,3 @@ if (document.readyState === 'loading') {
 } else {
   init();
 }
-})();

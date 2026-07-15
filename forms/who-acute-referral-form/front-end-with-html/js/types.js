@@ -180,9 +180,6 @@
 // classic <script> (no ES modules) so the page can be opened directly via
 // `file://`. The IIFE attaches its public symbols to a single global
 // namespace, `window.WhoAcuteReferralForm`.
-(function () {
-'use strict';
-window.WhoAcuteReferralForm = window.WhoAcuteReferralForm || {};
 
 /** @returns {AbcdeEntry} */
 function emptyAbcdeEntry() {
@@ -316,13 +313,4 @@ function priorityLabel(priority) {
   }
 }
 
-Object.assign(window.WhoAcuteReferralForm, {
-  emptyAssessment,
-  emptyAbcdeEntry,
-  hasText,
-  isYesNoUnknownAnswered,
-  hasNumber,
-  sectionLabel,
-  priorityLabel
-});
-})();
+export { emptyAssessment, emptyAbcdeEntry, hasText, isYesNoUnknownAnswered, hasNumber, sectionLabel, priorityLabel };

@@ -176,9 +176,6 @@
 // classic <script> (no ES modules) so the page can be opened directly via
 // `file://`. The IIFE attaches its public symbols to a single global
 // namespace, `window.AdvanceDecisionToRefuseTreatment`.
-(function () {
-'use strict';
-window.AdvanceDecisionToRefuseTreatment = window.AdvanceDecisionToRefuseTreatment || {};
 
 /**
  * Build a fresh, fully-blank assessment.
@@ -316,10 +313,4 @@ function validityStatusClass(status) {
   }
 }
 
-Object.assign(window.AdvanceDecisionToRefuseTreatment, {
-  emptyAssessment,
-  hasLifeSustainingRefusal,
-  validityStatusLabel,
-  validityStatusClass
-});
-})();
+export { emptyAssessment, hasLifeSustainingRefusal, validityStatusLabel, validityStatusClass };

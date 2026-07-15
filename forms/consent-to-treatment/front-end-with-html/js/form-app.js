@@ -1,3 +1,8 @@
+import { detectAdditionalFlags } from './flagged-issues.js';
+import { validateForm as validateFormEngine } from './form-validator.js';
+import { completenessClass, completenessLabel, emptyAssessment } from './types.js';
+import { validationRules as rules } from './validation-rules.js';
+
 // Consent To Treatment - patient wizard (vanilla JavaScript, no build).
 //
 // Single-page continuous wizard: every section is rendered into the page in
@@ -11,17 +16,9 @@
 // exports to `window.ConsentToTreatment`. Pulling them off here keeps the
 // rest of this file referring to short local names. Whole file is wrapped
 // in an IIFE so its top-level identifiers don't leak to the global scope.
-(function () {
-  'use strict';
 
-  const NS = window.ConsentToTreatment;
-  const {
-    emptyAssessment,
-    completenessLabel,
-    completenessClass,
-    validateForm: validateFormEngine,
-    detectAdditionalFlags
-  } = NS;
+  
+  
 
   // ----------------------------------------------------------------------
   // Persistence
@@ -770,7 +767,7 @@
   }
 
   function updateProgress() {
-    const rules = NS.validationRules;
+    
     const total = rules.length;
     let answered = 0;
     const sectionAnswered = {};
@@ -847,7 +844,7 @@
 
   function validateForm() {
     const errors = [];
-    const rules = NS.validationRules;
+    
     for (const rule of rules) {
       const value = state[rule.section] ? state[rule.section][rule.field] : undefined;
       const id = rule.section + '-' + rule.field;
@@ -1024,4 +1021,3 @@
   } else {
     init();
   }
-})();

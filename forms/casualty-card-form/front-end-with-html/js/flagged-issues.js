@@ -2,10 +2,6 @@
 //
 // Mirrors `src/lib/engine/flagged-issues.ts` from the SvelteKit form.
 // Attaches public symbols to `window.CasualtyCardForm`.
-(function () {
-'use strict';
-
-const NS = (window.CasualtyCardForm = window.CasualtyCardForm || {});
 
 function detectFlaggedIssues(data, news2) {
   const flags = [];
@@ -156,5 +152,4 @@ function detectFlaggedIssues(data, news2) {
   return flags;
 }
 
-NS.detectFlaggedIssues = detectFlaggedIssues;
-})();
+export { detectFlaggedIssues };

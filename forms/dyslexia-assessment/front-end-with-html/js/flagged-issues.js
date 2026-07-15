@@ -12,9 +12,6 @@
  */
 
 // Wrapped in an IIFE; published via window.DyslexiaAssessment.
-(function () {
-'use strict';
-window.DyslexiaAssessment = window.DyslexiaAssessment || {};
 
 /**
  * Push a flag for a numeric standardised score that falls below a
@@ -228,5 +225,4 @@ function detectAdditionalFlags(data) {
   return flags;
 }
 
-window.DyslexiaAssessment.detectAdditionalFlags = detectAdditionalFlags;
-})();
+export { detectAdditionalFlags };

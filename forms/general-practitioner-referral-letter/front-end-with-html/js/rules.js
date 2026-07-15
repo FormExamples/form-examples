@@ -32,10 +32,6 @@
  */
 
 // Wrapped in an IIFE; published via window.GeneralPractitionerReferralLetter.
-(function () {
-'use strict';
-window.GeneralPractitionerReferralLetter =
-  window.GeneralPractitionerReferralLetter || {};
 
 const nonEmpty = (s) => typeof s === 'string' && s.trim() !== '';
 const hasDate = (d) => d !== null && d !== undefined && d !== '';
@@ -180,13 +176,4 @@ function mandatoryFor(r) {
   return fields;
 }
 
-Object.assign(window.GeneralPractitionerReferralLetter, {
-  nonEmpty,
-  hasDate,
-  MANDATORY_ALWAYS,
-  MANDATORY_URGENCY_REASON,
-  MANDATORY_SUSPECTED_CANCER_CRITERION,
-  MANDATORY_SUSPECTED_CANCER_PATHWAY,
-  mandatoryFor
-});
-})();
+export { nonEmpty, hasDate, MANDATORY_ALWAYS, MANDATORY_URGENCY_REASON, MANDATORY_SUSPECTED_CANCER_CRITERION, MANDATORY_SUSPECTED_CANCER_PATHWAY, mandatoryFor };

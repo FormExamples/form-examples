@@ -1,3 +1,5 @@
+import { hasAnyCardiacFinding, hasCriticalFinding, hasReducedEjectionFraction } from './types.js';
+
 // Four-axis rule catalogue for the Cardiology Response interpretation engine.
 //
 // Ported verbatim from the svelte engine: (A) response classification
@@ -12,17 +14,6 @@
 // grader composes them.
 //
 // Wrapped in an IIFE; published via `window.CardiologyResponse`.
-
-(function () {
-'use strict';
-window.CardiologyResponse =
-  window.CardiologyResponse || {};
-const NS = window.CardiologyResponse;
-const {
-  hasCriticalFinding,
-  hasAnyCardiacFinding,
-  hasReducedEjectionFraction
-} = NS;
 
 // ----------------------------------------------------------------------
 // Axis A — response classification
@@ -380,11 +371,4 @@ function gradeFollowUp(r, classification, severity) {
   };
 }
 
-Object.assign(NS, {
-  classifyResponse,
-  gradeSeverity,
-  gradeCompleteness,
-  gradeFollowUp,
-  COMPLETENESS_SECTIONS
-});
-})();
+export { classifyResponse, gradeSeverity, gradeCompleteness, gradeFollowUp, COMPLETENESS_SECTIONS };

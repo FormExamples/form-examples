@@ -168,9 +168,6 @@
 // classic <script> (no ES modules) so the page can be opened directly via
 // `file://`. The IIFE attaches its public symbols to a single global
 // namespace, `window.AdvanceStatementAboutCare`.
-(function () {
-'use strict';
-window.AdvanceStatementAboutCare = window.AdvanceStatementAboutCare || {};
 
 /**
  * Build a fresh, fully-blank statement.
@@ -302,10 +299,4 @@ function placeLabel(place) {
   }
 }
 
-Object.assign(window.AdvanceStatementAboutCare, {
-  emptyStatement,
-  completenessLevelLabel,
-  completenessLevelClass,
-  placeLabel
-});
-})();
+export { emptyStatement, completenessLevelLabel, completenessLevelClass, placeLabel };

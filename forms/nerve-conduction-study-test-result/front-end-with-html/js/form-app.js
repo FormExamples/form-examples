@@ -1,3 +1,6 @@
+import { calculateGrade } from './grader.js';
+import { abnormalitySeverityClass, abnormalitySeverityLabel, emptyResult, followUpUrgencyClass, followUpUrgencyLabel, lateralityLabel, priorityLabel, recommendationLabel, regionLabel, reportStatusLabel, resultClassificationClass, resultClassificationLabel, studyAdequacyLabel, studyTypeLabel } from './types.js';
+
 // Nerve Conduction Study Test Result — reporting-clinician wizard
 // (vanilla JavaScript, no build).
 //
@@ -15,27 +18,6 @@
 // exports to `window.NerveConductionStudyTestResult`. Pulling them off here
 // keeps the rest of this file referring to short local names. The whole file
 // is wrapped in an IIFE so its top-level identifiers don't leak.
-(function () {
-'use strict';
-
-const NS = window.NerveConductionStudyTestResult;
-const {
-  emptyResult,
-  resultClassificationLabel,
-  abnormalitySeverityLabel,
-  followUpUrgencyLabel,
-  studyTypeLabel,
-  regionLabel,
-  lateralityLabel,
-  studyAdequacyLabel,
-  reportStatusLabel,
-  recommendationLabel,
-  priorityLabel,
-  resultClassificationClass,
-  abnormalitySeverityClass,
-  followUpUrgencyClass,
-  calculateGrade
-} = NS;
 
 // ----------------------------------------------------------------------
 // Persistence
@@ -1030,4 +1012,3 @@ if (document.readyState === 'loading') {
 } else {
   init();
 }
-})();

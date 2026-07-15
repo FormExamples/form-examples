@@ -1,3 +1,6 @@
+import { calculateGrade } from './grader.js';
+import { echoTypeLabel, emptyRequest } from './types.js';
+
 // Echocardiogram Test Request — clinician referral wizard (vanilla JS).
 //
 // Single-page continuous wizard: every section is rendered into the page in
@@ -9,16 +12,6 @@
 // Sibling files loaded as plain `<script>` tags (in order) attach their
 // exports to `window.EchocardiogramTestRequest`. The whole file is wrapped in
 // an IIFE so its top-level identifiers don't leak to the global scope.
-
-(function () {
-'use strict';
-
-const NS = window.EchocardiogramTestRequest;
-const {
-  emptyRequest,
-  echoTypeLabel,
-  calculateGrade
-} = NS;
 
 // ----------------------------------------------------------------------
 // Persistence
@@ -889,4 +882,3 @@ if (document.readyState === 'loading') {
 } else {
   init();
 }
-})();

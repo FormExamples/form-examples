@@ -11,12 +11,6 @@
 //
 // Wrapped in an IIFE; published via `window.PulmonaryFunctionTestRequest`.
 
-(function () {
-'use strict';
-window.PulmonaryFunctionTestRequest =
-  window.PulmonaryFunctionTestRequest || {};
-const NS = window.PulmonaryFunctionTestRequest;
-
 // ----------------------------------------------------------------------
 // Axis A — Appropriateness (NICE NG80 / NG115, ARTP indication match; 1-9)
 // ----------------------------------------------------------------------
@@ -332,17 +326,4 @@ function scoreTriage(data) {
   };
 }
 
-Object.assign(NS, {
-  scoreAppropriateness,
-  appropriatenessBand,
-  scoreSafety,
-  maxBand,
-  SAFETY_ORDER,
-  scoreCompleteness,
-  scoreTriage,
-  maxTier,
-  TRIAGE_ORDER,
-  TARGET_TIMEFRAMES,
-  INDICATION_TEST_MAP
-});
-})();
+export { scoreAppropriateness, appropriatenessBand, scoreSafety, maxBand, SAFETY_ORDER, scoreCompleteness, scoreTriage, maxTier, TRIAGE_ORDER, TARGET_TIMEFRAMES, INDICATION_TEST_MAP };

@@ -12,10 +12,6 @@
  * @typedef {import('./types.js').AdditionalFlag} AdditionalFlag
  */
 
-(function () {
-'use strict';
-window.ErgonomicAssessment = window.ErgonomicAssessment || {};
-
 /**
  * @param {AssessmentData} data
  * @returns {AdditionalFlag[]}
@@ -241,5 +237,4 @@ function detectAdditionalFlags(data) {
   return flags;
 }
 
-window.ErgonomicAssessment.detectAdditionalFlags = detectAdditionalFlags;
-})();
+export { detectAdditionalFlags };

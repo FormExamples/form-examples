@@ -7,11 +7,6 @@
 // / examples convention. Wrapped in an IIFE; published via
 // `window.NeurodiversityAdjustmentResponse`.
 
-(function () {
-'use strict';
-window.NeurodiversityAdjustmentResponse =
-  window.NeurodiversityAdjustmentResponse || {};
-
 /**
  * Build a fresh, fully-blank neurodiversity reasonable-adjustments response.
  * Strings default to ''; numeric / date fields default to null; boolean
@@ -281,20 +276,4 @@ function recommendationLabel(value) {
   }
 }
 
-Object.assign(window.NeurodiversityAdjustmentResponse, {
-  emptyResponse,
-  flatten,
-  anyAgreed,
-  hasAlternative,
-  declineJustified,
-  daysBetween,
-  outcomeClassificationLabel,
-  legalRiskBandLabel,
-  followUpUrgencyLabel,
-  overallDecisionLabel,
-  responseStatusLabel,
-  handlingMethodLabel,
-  declineReasonCategoryLabel,
-  recommendationLabel
-});
-})();
+export { emptyResponse, flatten, anyAgreed, hasAlternative, declineJustified, daysBetween, outcomeClassificationLabel, legalRiskBandLabel, followUpUrgencyLabel, overallDecisionLabel, responseStatusLabel, handlingMethodLabel, declineReasonCategoryLabel, recommendationLabel };

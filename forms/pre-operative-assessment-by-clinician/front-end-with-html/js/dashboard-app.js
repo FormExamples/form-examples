@@ -1,3 +1,6 @@
+import { fetchAssessments } from './api.js';
+import { sampleAssessments } from './data.js';
+
 // Pre-operative Assessment by Clinician - clinician dashboard
 // (vanilla classic-script app).
 //
@@ -12,12 +15,6 @@
 // Pulling them off here keeps the rest of this file referring to short local
 // names. The whole file is wrapped in an IIFE so its top-level identifiers
 // do not leak to the global scope.
-(function () {
-'use strict';
-const {
-  fetchAssessments,
-  sampleAssessments
-} = window.PreOperativeAssessmentByClinicianDashboard;
 
 // ----------------------------------------------------------------------
 // State
@@ -459,4 +456,3 @@ if (document.readyState === 'loading') {
 } else {
   init();
 }
-})();

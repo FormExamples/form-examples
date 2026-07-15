@@ -6,11 +6,6 @@
 // down) or returns an empty list, callers fall back to the sample data shipped
 // in `data.js` so the page is usable standalone.
 
-(function () {
-'use strict';
-window.Arc42Dashboard =
-  window.Arc42Dashboard || {};
-
 const API_BASE = 'http://localhost:5150';
 const DOCUMENTS_PATH = '/api/arc42_documentations';
 
@@ -41,6 +36,4 @@ async function fetchDocuments() {
   return [];
 }
 
-window.Arc42Dashboard.fetchDocuments = fetchDocuments;
-window.Arc42Dashboard.API_BASE = API_BASE;
-})();
+export { fetchDocuments, API_BASE };

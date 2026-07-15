@@ -19,10 +19,6 @@
  */
 
 // Wrapped in an IIFE; published via window.TimiRiskScoreForAcuteCoronarySyndrome.
-(function () {
-'use strict';
-window.TimiRiskScoreForAcuteCoronarySyndrome =
-  window.TimiRiskScoreForAcuteCoronarySyndrome || {};
 
 /**
  * @param {AssessmentData} data
@@ -126,6 +122,4 @@ function detectFlaggedIssues(data, timiScore) {
   return flags;
 }
 
-window.TimiRiskScoreForAcuteCoronarySyndrome.detectFlaggedIssues =
-  detectFlaggedIssues;
-})();
+export { detectFlaggedIssues };

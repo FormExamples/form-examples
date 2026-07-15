@@ -5,10 +5,6 @@
 // Twelve realistic rows: spans every NIHSS severity band and stroke-risk
 // band, with NHS numbers in the canonical "NNN NNN NNNN" display form.
 
-(function () {
-'use strict';
-window.NeurologyAssessmentDashboard = window.NeurologyAssessmentDashboard || {};
-
 /** @type {import('./types.js').PatientRow[]} */
 const samplePatients = [
   {
@@ -109,5 +105,4 @@ const samplePatients = [
   }
 ];
 
-window.NeurologyAssessmentDashboard.samplePatients = samplePatients;
-})();
+export { samplePatients };

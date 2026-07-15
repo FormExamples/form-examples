@@ -18,9 +18,6 @@
  */
 
 // Wrapped in an IIFE; published via window.FourATestForDelirium.
-(function () {
-'use strict';
-window.FourATestForDelirium = window.FourATestForDelirium || {};
 
 /**
  * @param {AssessmentData} data
@@ -106,5 +103,4 @@ function detectFlaggedIssues(data, totalScore) {
   return flags;
 }
 
-window.FourATestForDelirium.detectFlaggedIssues = detectFlaggedIssues;
-})();
+export { detectFlaggedIssues };

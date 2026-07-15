@@ -1,3 +1,5 @@
+import { anyTestSelected } from './types.js';
+
 // Four-axis rule catalogue for the Microbiology Culture Test Request engine.
 //
 // Derived from index.md and SQL migration 05/06: (A) appropriateness 1-9 + band
@@ -11,13 +13,6 @@
 // + helpers; the grader composes them.
 //
 // Wrapped in an IIFE; published via `window.MicrobiologyCultureTestRequest`.
-
-(function () {
-'use strict';
-window.MicrobiologyCultureTestRequest =
-  window.MicrobiologyCultureTestRequest || {};
-const NS = window.MicrobiologyCultureTestRequest;
-const { anyTestSelected } = NS;
 
 // ----------------------------------------------------------------------
 // Axis A — Appropriateness (UKHSA SMI specimen / indication match, 1-9)
@@ -363,17 +358,4 @@ function scoreTriage(data) {
   };
 }
 
-Object.assign(NS, {
-  scoreAppropriateness,
-  appropriatenessBand,
-  scorePreanalytical,
-  scoreCompleteness,
-  scoreTriage,
-  maxTier,
-  worsePreanalytical,
-  TRIAGE_ORDER,
-  TARGET_TIMEFRAMES,
-  PREANALYTICAL_ORDER,
-  INDICATION_SPECIMEN_MAP
-});
-})();
+export { scoreAppropriateness, appropriatenessBand, scorePreanalytical, scoreCompleteness, scoreTriage, maxTier, worsePreanalytical, TRIAGE_ORDER, TARGET_TIMEFRAMES, PREANALYTICAL_ORDER, INDICATION_SPECIMEN_MAP };

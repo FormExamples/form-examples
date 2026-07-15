@@ -3,10 +3,6 @@
 // importer that needs it) and as a classic-script namespace value so the
 // page can be opened directly via file:// without CORS blocking.
 
-(function () {
-'use strict';
-window.CarePrivacyNotice = window.CarePrivacyNotice || {};
-
 function createDefaultData() {
   return {
     config: {
@@ -26,5 +22,4 @@ function createDefaultData() {
   };
 }
 
-window.CarePrivacyNotice.createDefaultData = createDefaultData;
-})();
+export { createDefaultData };

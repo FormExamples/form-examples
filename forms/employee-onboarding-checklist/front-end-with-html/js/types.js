@@ -216,9 +216,6 @@
 // classic <script> (no ES modules) so the page can be opened directly via
 // `file://`. The IIFE attaches its public symbols to a single global
 // namespace, `window.EmployeeOnboardingChecklist`.
-(function () {
-'use strict';
-window.EmployeeOnboardingChecklist = window.EmployeeOnboardingChecklist || {};
 
 /**
  * Build a fresh, fully-blank assessment.
@@ -481,16 +478,4 @@ function isDatePast(dateStr) {
   return d < new Date();
 }
 
-Object.assign(window.EmployeeOnboardingChecklist, {
-  emptyAssessment,
-  deriveCompletionStatus,
-  completionStatusLabel,
-  completionStatusClass,
-  riskLevelLabel,
-  riskLevelClass,
-  gradeLabel,
-  gradeClass,
-  formatDate,
-  isDatePast
-});
-})();
+export { emptyAssessment, deriveCompletionStatus, completionStatusLabel, completionStatusClass, riskLevelLabel, riskLevelClass, gradeLabel, gradeClass, formatDate, isDatePast };

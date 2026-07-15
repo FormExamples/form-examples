@@ -1,3 +1,6 @@
+import { calculateRisk } from './risk-grader.js';
+import { calculateBmi, emptyAssessment, riskCategoryClass, riskCategoryLabel } from './types.js';
+
 // Predicting Risk of Cardiovascular Disease Events (PREVENT) - patient
 // wizard (vanilla JavaScript, no build).
 //
@@ -12,17 +15,6 @@
 // exports to `window.PredictingRiskOfCardiovascularDiseaseEvents`. The whole
 // file is wrapped in an IIFE so its top-level identifiers don't leak to the
 // global scope.
-(function () {
-'use strict';
-
-const NS = window.PredictingRiskOfCardiovascularDiseaseEvents;
-const {
-  emptyAssessment,
-  calculateBmi,
-  calculateRisk,
-  riskCategoryLabel,
-  riskCategoryClass
-} = NS;
 
 // ----------------------------------------------------------------------
 // Persistence
@@ -1208,4 +1200,3 @@ if (document.readyState === 'loading') {
 } else {
   init();
 }
-})();

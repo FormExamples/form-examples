@@ -10,12 +10,6 @@
 //
 // Wrapped in an IIFE; published via `window.UkLpaFinancialDecisions`.
 
-(function () {
-'use strict';
-window.UkLpaFinancialDecisions =
-  window.UkLpaFinancialDecisions || {};
-const NS = window.UkLpaFinancialDecisions;
-
 // ----------------------------------------------------------------------
 // Utilities (port of validator/utils.ts)
 // ----------------------------------------------------------------------
@@ -603,14 +597,4 @@ function computeValidityBand(lpa) {
   return ready ? 'ready_for_signing' : 'draft';
 }
 
-Object.assign(NS, {
-  ageOnDate,
-  todayIso,
-  namesEqual,
-  personEquals,
-  personIsPopulated,
-  BLOCKER_RULES,
-  applyBlockerRules,
-  computeValidityBand
-});
-})();
+export { ageOnDate, todayIso, namesEqual, personEquals, personIsPopulated, BLOCKER_RULES, applyBlockerRules, computeValidityBand };

@@ -26,9 +26,6 @@
  */
 
 // Wrapped in an IIFE; published via window.OttawaKneeRule.
-(function () {
-'use strict';
-window.OttawaKneeRule = window.OttawaKneeRule || {};
 
 /** @type {OttawaRule[]} */
 const ottawaRules = [
@@ -85,5 +82,4 @@ const ottawaRules = [
   }
 ];
 
-window.OttawaKneeRule.ottawaRules = ottawaRules;
-})();
+export { ottawaRules };

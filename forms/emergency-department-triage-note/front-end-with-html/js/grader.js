@@ -1,3 +1,6 @@
+import { DISCRIMINATOR_FLAGS, scoreBloodPressure, scoreConsciousness, scoreOxygen, scorePulse, scoreRespiratoryRate, scoreSpo2, scoreTemperature } from './rules.js';
+import { priorityColour, priorityName, targetMinutes } from './types.js';
+
 // Emergency Department Triage Note grader. Pure functions: take an
 // `AssessmentData` object, compute the supporting NEWS2 aggregate from the
 // vital signs, evaluate the Manchester Triage System (MTS) discriminators, and
@@ -25,23 +28,6 @@
  */
 
 // Wrapped in an IIFE; published via window.EmergencyDepartmentTriageNote.
-(function () {
-'use strict';
-window.EmergencyDepartmentTriageNote = window.EmergencyDepartmentTriageNote || {};
-const NS = window.EmergencyDepartmentTriageNote;
-const {
-  scoreRespiratoryRate,
-  scoreSpo2,
-  scoreOxygen,
-  scoreBloodPressure,
-  scorePulse,
-  scoreConsciousness,
-  scoreTemperature,
-  DISCRIMINATOR_FLAGS,
-  priorityColour,
-  priorityName,
-  targetMinutes
-} = NS;
 
 /** The six scored physiological parameters (oxygen weighting excluded). */
 const RED_SCORE_KEYS = [
@@ -216,11 +202,4 @@ function triage(data) {
   };
 }
 
-Object.assign(window.EmergencyDepartmentTriageNote, {
-  computeSubscores,
-  news2Aggregate,
-  deriveDiscriminators,
-  news2Escalation,
-  triage
-});
-})();
+export { computeSubscores, news2Aggregate, deriveDiscriminators, news2Escalation, triage };

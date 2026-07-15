@@ -1,3 +1,5 @@
+import { PANELS, countSelectedPanels, selectedPanels } from './types.js';
+
 // Four-axis rule catalogue for the Blood Test Request engine.
 //
 // Derived from index.md + SQL migrations 05/06/07: (A) appropriateness 1-9 +
@@ -12,12 +14,6 @@
 // composes them.
 //
 // Wrapped in an IIFE; published via `window.BloodTestRequest`.
-
-(function () {
-'use strict';
-window.BloodTestRequest = window.BloodTestRequest || {};
-const NS = window.BloodTestRequest;
-const { countSelectedPanels, selectedPanels, PANELS } = NS;
 
 // ----------------------------------------------------------------------
 // Axis A — Appropriateness (1-9 ordinal)
@@ -249,7 +245,7 @@ function scorePreanalytical(data) {
 const COMPLETENESS_FIELDS = [
   { weight: 3, present: (d) => !!d.clinical.primaryIndication, ruleId: 'R-COMPLETE-INDICATION', label: 'primary indication' },
   { weight: 3, present: (d) => !!d.clinical.clinicalDetails && d.clinical.clinicalDetails.trim() !== '', ruleId: 'R-COMPLETE-CLINICAL-DETAILS', label: 'clinical details' },
-  { weight: 3, present: (d) => NS.countSelectedPanels(d.panels) > 0, ruleId: 'R-COMPLETE-PANELS', label: 'at least one test panel' },
+  { weight: 3, present: (d) => countSelectedPanels(d.panels) > 0, ruleId: 'R-COMPLETE-PANELS', label: 'at least one test panel' },
   { weight: 1, present: (d) => !!d.patient.firstName && !!d.patient.lastName, ruleId: 'R-COMPLETE-PATIENT-NAME', label: 'patient name' },
   { weight: 1, present: (d) => !!d.patient.nhsNumber, ruleId: 'R-COMPLETE-NHS-NUMBER', label: 'NHS number' },
   { weight: 1, present: (d) => !!d.patient.dateOfBirth, ruleId: 'R-COMPLETE-DOB', label: 'date of birth' },
@@ -333,7 +329,7 @@ function scoreTriage(data) {
   );
   for (const f of criticalSelected) {
     tier = maxTier(tier, 'stat');
-    const panel = NS.PANELS.find((p) => p.field === f);
+    const panel = PANELS.find((p) => p.field === f);
     firedRules.push({
       ruleId: `R-TRIAGE-CRITICAL-${f.toUpperCase()}`,
       axis: 'triage',
@@ -358,17 +354,4 @@ function scoreTriage(data) {
   };
 }
 
-Object.assign(NS, {
-  scoreAppropriateness,
-  appropriatenessBand,
-  scorePreanalytical,
-  scoreCompleteness,
-  scoreTriage,
-  maxTier,
-  worseBand,
-  TRIAGE_ORDER,
-  TARGET_TIMEFRAMES,
-  CRITICAL_PANELS,
-  INDICATION_PANEL_MAP
-});
-})();
+export { scoreAppropriateness, appropriatenessBand, scorePreanalytical, scoreCompleteness, scoreTriage, maxTier, worseBand, TRIAGE_ORDER, TARGET_TIMEFRAMES, CRITICAL_PANELS, INDICATION_PANEL_MAP };

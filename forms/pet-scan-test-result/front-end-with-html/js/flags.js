@@ -1,3 +1,5 @@
+import { hasCriticalFinding } from './rules.js';
+
 // Safety-critical flag detection for the PET Scan Test Result.
 //
 // Faithful vanilla-JavaScript port of the SvelteKit engine module
@@ -15,10 +17,6 @@
 
 // Wrapped in an IIFE; published via window.PetScanTestResult.
 // Depends on rules.js (hasCriticalFinding), so it must load after it.
-(function () {
-'use strict';
-window.PetScanTestResult = window.PetScanTestResult || {};
-const { hasCriticalFinding } = window.PetScanTestResult;
 
 /**
  * Detect the safety-critical flags for a report.
@@ -151,7 +149,4 @@ function detectFlags(r) {
   return flags;
 }
 
-Object.assign(window.PetScanTestResult, {
-  detectFlags
-});
-})();
+export { detectFlags };

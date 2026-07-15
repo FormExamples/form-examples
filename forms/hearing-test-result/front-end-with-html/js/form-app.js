@@ -1,3 +1,6 @@
+import { calculateGrade } from './grader.js';
+import { abnormalitySeverityClass, abnormalitySeverityLabel, emptyResult, followUpUrgencyClass, followUpUrgencyLabel, hearingLossSeverityLabel, hearingLossTypeLabel, priorityLabel, recommendationLabel, reportStatusLabel, resultClassificationClass, resultClassificationLabel, testReliabilityLabel, testTypeLabel } from './types.js';
+
 // Hearing Test Result — reporting-clinician wizard
 // (vanilla JavaScript, no build).
 //
@@ -15,27 +18,6 @@
 // exports to `window.HearingTestResult`. Pulling them off here keeps the
 // rest of this file referring to short local names. The whole file is wrapped
 // in an IIFE so its top-level identifiers don't leak.
-(function () {
-'use strict';
-
-const NS = window.HearingTestResult;
-const {
-  emptyResult,
-  resultClassificationLabel,
-  abnormalitySeverityLabel,
-  followUpUrgencyLabel,
-  testTypeLabel,
-  reportStatusLabel,
-  testReliabilityLabel,
-  hearingLossTypeLabel,
-  hearingLossSeverityLabel,
-  recommendationLabel,
-  priorityLabel,
-  resultClassificationClass,
-  abnormalitySeverityClass,
-  followUpUrgencyClass,
-  calculateGrade
-} = NS;
 
 // ----------------------------------------------------------------------
 // Persistence
@@ -1087,4 +1069,3 @@ if (document.readyState === 'loading') {
 } else {
   init();
 }
-})();

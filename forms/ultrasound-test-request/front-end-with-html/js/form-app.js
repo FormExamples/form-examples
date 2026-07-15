@@ -1,3 +1,6 @@
+import { calculateGrade } from './grader.js';
+import { bodyRegionLabel, emptyRequest, indicationLabel } from './types.js';
+
 // Ultrasound Test Request — clinician referral wizard (vanilla JS).
 //
 // General (non-obstetric) diagnostic ultrasound request. Single-page
@@ -10,17 +13,6 @@
 // Sibling files loaded as plain `<script>` tags (in order) attach their
 // exports to `window.UltrasoundTestRequest`. The whole file is wrapped in an
 // IIFE so its top-level identifiers don't leak to the global scope.
-
-(function () {
-'use strict';
-
-const NS = window.UltrasoundTestRequest;
-const {
-  emptyRequest,
-  bodyRegionLabel,
-  indicationLabel,
-  calculateGrade
-} = NS;
 
 // ----------------------------------------------------------------------
 // Persistence
@@ -832,4 +824,3 @@ if (document.readyState === 'loading') {
 } else {
   init();
 }
-})();

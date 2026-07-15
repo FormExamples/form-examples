@@ -1,3 +1,6 @@
+import { assess } from './grader.js';
+import { emptyAssessment, priorityLabel, statusClass, statusLabel } from './types.js';
+
 // Ward Round Note — single-page wizard (vanilla JavaScript, no build).
 //
 // Single continuous wizard: every step is rendered into the page in document
@@ -14,17 +17,6 @@
 // Sibling files loaded as plain `<script>` tags (in order) attach their exports
 // to `window.WardRoundNote`. The whole file is wrapped in an IIFE so its
 // top-level identifiers don't leak.
-(function () {
-'use strict';
-
-const NS = window.WardRoundNote;
-const {
-  emptyAssessment,
-  statusLabel,
-  statusClass,
-  priorityLabel,
-  assess
-} = NS;
 
 // ----------------------------------------------------------------------
 // Persistence
@@ -908,4 +900,3 @@ if (document.readyState === 'loading') {
 } else {
   init();
 }
-})();

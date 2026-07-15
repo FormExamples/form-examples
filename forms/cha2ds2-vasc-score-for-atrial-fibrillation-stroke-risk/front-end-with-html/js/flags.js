@@ -20,10 +20,6 @@
 
 // Wrapped in an IIFE; published via
 // window.Cha2ds2VascScoreForAtrialFibrillationStrokeRisk.
-(function () {
-'use strict';
-window.Cha2ds2VascScoreForAtrialFibrillationStrokeRisk =
-  window.Cha2ds2VascScoreForAtrialFibrillationStrokeRisk || {};
 
 /**
  * @param {AssessmentData} data
@@ -142,6 +138,4 @@ function detectFlaggedIssues(data, grade) {
   return flags;
 }
 
-window.Cha2ds2VascScoreForAtrialFibrillationStrokeRisk.detectFlaggedIssues =
-  detectFlaggedIssues;
-})();
+export { detectFlaggedIssues };

@@ -1,3 +1,7 @@
+import { detectFlaggedIssues } from './flags.js';
+import { requiredComponents, sectionPresence } from './rules.js';
+import { SOAP_SECTIONS } from './types.js';
+
 // SOAP-note documentation-completeness grader. Pure functions: take an
 // `AssessmentData` object and derive the documentation outputs (spec §4).
 // This is NOT a numeric clinical score. It emits:
@@ -26,11 +30,6 @@
  */
 
 // Wrapped in an IIFE; published via window.SoapNote.
-(function () {
-'use strict';
-window.SoapNote = window.SoapNote || {};
-const NS = window.SoapNote;
-const { sectionPresence, requiredComponents, detectFlaggedIssues, SOAP_SECTIONS } = NS;
 
 /**
  * Build the per-SOAP-section presence rows for the report.
@@ -134,9 +133,4 @@ function assess(data) {
   };
 }
 
-Object.assign(NS, {
-  sectionStatuses,
-  calculateGrade,
-  assess
-});
-})();
+export { sectionStatuses, calculateGrade, assess };

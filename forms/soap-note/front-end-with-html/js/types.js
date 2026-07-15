@@ -139,9 +139,6 @@
 // classic <script> (no ES modules) so the page can be opened directly via
 // `file://`. The IIFE attaches its public symbols to a single global
 // namespace, `window.SoapNote`.
-(function () {
-'use strict';
-window.SoapNote = window.SoapNote || {};
 
 /**
  * Build a fresh, fully-blank note. Every text / enum field defaults to `''`;
@@ -294,16 +291,4 @@ function priorityLabel(priority) {
   }
 }
 
-Object.assign(window.SoapNote, {
-  emptyAssessment,
-  SOAP_SECTIONS,
-  statusLabel,
-  statusClass,
-  clinicianRoleLabel,
-  careSettingLabel,
-  encounterTypeLabel,
-  sexLabel,
-  ageBandLabel,
-  priorityLabel
-});
-})();
+export { emptyAssessment, SOAP_SECTIONS, statusLabel, statusClass, clinicianRoleLabel, careSettingLabel, encounterTypeLabel, sexLabel, ageBandLabel, priorityLabel };

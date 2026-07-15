@@ -1,3 +1,6 @@
+import { detectFlags } from './flags.js';
+import { scoreAppropriateness, scoreCompleteness, scoreConsentCounselling, scoreTriage } from './rules.js';
+
 // Four-axis grader for the Genetic Test Request.
 //
 // Composes the rule sets in rules.js and the safety flags in flags.js into a
@@ -6,18 +9,6 @@
 // across every front-end and the back-end.
 //
 // Wrapped in an IIFE; published via `window.GeneticTestRequest`.
-
-(function () {
-'use strict';
-window.GeneticTestRequest = window.GeneticTestRequest || {};
-const NS = window.GeneticTestRequest;
-const {
-  scoreAppropriateness,
-  scoreConsentCounselling,
-  scoreCompleteness,
-  scoreTriage,
-  detectFlags
-} = NS;
 
 /**
  * Derive an overall recommendation for the Genomic Laboratory Hub vetting desk
@@ -100,9 +91,4 @@ function calculateGrade(data) {
   };
 }
 
-Object.assign(NS, {
-  calculateGrade,
-  deriveRecommendation,
-  RECOMMENDATION_LABELS
-});
-})();
+export { calculateGrade, deriveRecommendation, RECOMMENDATION_LABELS };

@@ -1,3 +1,5 @@
+import { mewsParameters } from './rules.js';
+
 // MEWS grader. Pure functions: take an `ObservationData` object, map each of
 // the five parameters to a 0-3 sub-score via the Subbe (2001) allocation table
 // in `rules.js`, sum the aggregate (0-14), derive the risk band, and detect the
@@ -24,11 +26,6 @@
  */
 
 // Wrapped in an IIFE; published via window.ModifiedEarlyWarningScore.
-(function () {
-'use strict';
-window.ModifiedEarlyWarningScore =
-  window.ModifiedEarlyWarningScore || {};
-const { mewsParameters } = window.ModifiedEarlyWarningScore;
 
 /** Derive the risk band from the aggregate. */
 function bandForScore(score) {
@@ -153,10 +150,4 @@ function calculateMewsGrade(data) {
   };
 }
 
-Object.assign(window.ModifiedEarlyWarningScore, {
-  bandForScore,
-  monitoringFrequencyForBand,
-  evaluateParameters,
-  calculateMewsGrade
-});
-})();
+export { bandForScore, monitoringFrequencyForBand, evaluateParameters, calculateMewsGrade };

@@ -7,10 +7,6 @@
 // the dashboard, and flags allergies for a representative subset; NHS
 // numbers in the canonical "NNN NNN NNNN" display form.
 
-(function () {
-'use strict';
-window.RheumatologyAssessmentDashboard = window.RheumatologyAssessmentDashboard || {};
-
 /** @type {import('./types.js').PatientRow[]} */
 const samplePatients = [
   {
@@ -135,5 +131,4 @@ const samplePatients = [
   }
 ];
 
-window.RheumatologyAssessmentDashboard.samplePatients = samplePatients;
-})();
+export { samplePatients };

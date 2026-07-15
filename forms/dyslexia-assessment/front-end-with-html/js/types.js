@@ -185,9 +185,6 @@
 // classic <script> (no ES modules) so the page can be opened directly via
 // `file://`. The IIFE attaches its public symbols to a single global
 // namespace, `window.DyslexiaAssessment`.
-(function () {
-'use strict';
-window.DyslexiaAssessment = window.DyslexiaAssessment || {};
 
 /**
  * Build a fresh, fully-blank assessment.
@@ -342,9 +339,4 @@ function scoreBandLabel(score) {
   return 'Significantly below average';
 }
 
-Object.assign(window.DyslexiaAssessment, {
-  emptyAssessment,
-  scoreSeverity,
-  scoreBandLabel
-});
-})();
+export { emptyAssessment, scoreSeverity, scoreBandLabel };

@@ -1,3 +1,7 @@
+import { detectAdditionalFlags } from './flagged-issues.js';
+import { calculateREBA } from './reba-grader.js';
+import { emptyAssessment, rebaActionLevel, rebaRiskClass, rebaRiskLevel } from './types.js';
+
 // Ergonomic Assessment - patient wizard (vanilla JavaScript, no build).
 //
 // Single-page continuous wizard: every section is rendered into the page in
@@ -10,18 +14,6 @@
 // exports to `window.ErgonomicAssessment`. Pulling them off here keeps the
 // rest of this file referring to short local names. Whole file is wrapped
 // in an IIFE so its top-level identifiers don't leak to the global scope.
-(function () {
-'use strict';
-
-const NS = window.ErgonomicAssessment;
-const {
-  emptyAssessment,
-  calculateREBA,
-  detectAdditionalFlags,
-  rebaRiskLevel,
-  rebaRiskClass,
-  rebaActionLevel
-} = NS;
 
 // ----------------------------------------------------------------------
 // Persistence
@@ -121,7 +113,6 @@ function lilyInputClass(type) {
     default:       return 'text-input';
   }
 }
-
 
 /**
  * Build a labelled text input.
@@ -1442,4 +1433,3 @@ if (document.readyState === 'loading') {
 } else {
   init();
 }
-})();

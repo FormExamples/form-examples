@@ -6,11 +6,6 @@
 // severe), with red-flag counts varying from 0 to 4. NHS numbers are in the
 // canonical "NNN NNN NNNN" display form.
 
-(function () {
-'use strict';
-window.GastroenterologyAssessmentDashboard =
-  window.GastroenterologyAssessmentDashboard || {};
-
 /** @type {import('./types.js').PatientRow[]} */
 const samplePatients = [
   {
@@ -111,5 +106,4 @@ const samplePatients = [
   }
 ];
 
-window.GastroenterologyAssessmentDashboard.samplePatients = samplePatients;
-})();
+export { samplePatients };

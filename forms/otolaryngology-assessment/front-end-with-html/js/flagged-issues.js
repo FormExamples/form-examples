@@ -10,10 +10,6 @@
  * @typedef {import('./types.js').AdditionalFlag} AdditionalFlag
  */
 
-(function () {
-'use strict';
-window.OtolaryngologyAssessment = window.OtolaryngologyAssessment || {};
-
 /**
  * @param {AssessmentData} data
  * @returns {AdditionalFlag[]}
@@ -248,5 +244,4 @@ function sumNumbers(arr) {
   return total;
 }
 
-window.OtolaryngologyAssessment.detectAdditionalFlags = detectAdditionalFlags;
-})();
+export { detectAdditionalFlags };

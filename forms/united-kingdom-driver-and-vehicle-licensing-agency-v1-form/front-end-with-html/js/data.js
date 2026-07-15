@@ -5,10 +5,6 @@
 // Twelve realistic rows: spans monocular vision, glaucoma, and diplopia
 // declarations; mix of complete and partial validation states.
 
-(function () {
-'use strict';
-window.DvlaV1Dashboard = window.DvlaV1Dashboard || {};
-
 /** @type {import('./types.js').PatientRow[]} */
 const samplePatients = [
   {
@@ -157,5 +153,4 @@ const samplePatients = [
   }
 ];
 
-window.DvlaV1Dashboard.samplePatients = samplePatients;
-})();
+export { samplePatients };

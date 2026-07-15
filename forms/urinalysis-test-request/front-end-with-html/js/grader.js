@@ -1,3 +1,7 @@
+import { detectFlags } from './flags.js';
+import { scoreAppropriateness, scoreCompleteness, scorePreanalytical, scoreTriage } from './rules.js';
+import { countSelectedTests } from './types.js';
+
 // Four-axis grader for the Urinalysis Test Request.
 //
 // Composes the rule sets in rules.js and the safety flags in flags.js into a
@@ -6,19 +10,6 @@
 // across every front-end and the back-end.
 //
 // Wrapped in an IIFE; published via `window.UrinalysisTestRequest`.
-
-(function () {
-'use strict';
-window.UrinalysisTestRequest = window.UrinalysisTestRequest || {};
-const NS = window.UrinalysisTestRequest;
-const {
-  scoreAppropriateness,
-  scorePreanalytical,
-  scoreCompleteness,
-  scoreTriage,
-  countSelectedTests,
-  detectFlags
-} = NS;
 
 /**
  * Derive an overall recommendation for the pathology vetting desk from the
@@ -104,9 +95,4 @@ function calculateGrade(data) {
   };
 }
 
-Object.assign(NS, {
-  calculateGrade,
-  deriveRecommendation,
-  RECOMMENDATION_LABELS
-});
-})();
+export { calculateGrade, deriveRecommendation, RECOMMENDATION_LABELS };

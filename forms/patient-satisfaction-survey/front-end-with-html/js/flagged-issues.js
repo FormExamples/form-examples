@@ -10,9 +10,6 @@
  */
 
 // Wrapped in an IIFE; published via window.PatientSatisfactionSurvey.
-(function () {
-'use strict';
-window.PatientSatisfactionSurvey = window.PatientSatisfactionSurvey || {};
 
 /**
  * @param {AssessmentData} data
@@ -195,5 +192,4 @@ function detectAdditionalFlags(data) {
   return flags;
 }
 
-window.PatientSatisfactionSurvey.detectAdditionalFlags = detectAdditionalFlags;
-})();
+export { detectAdditionalFlags };

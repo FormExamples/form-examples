@@ -1,3 +1,5 @@
+import { calculateAge } from './types.js';
+
 // Organ Donor evaluation rules.
 //
 // Each rule is `{ id, category, description, grade, evaluate(data) -> bool }`.
@@ -34,10 +36,6 @@
  */
 
 // Wrapped in an IIFE; published via window.OrganDonationAssessment.
-(function () {
-'use strict';
-window.OrganDonationAssessment = window.OrganDonationAssessment || {};
-const { calculateAge } = window.OrganDonationAssessment;
 
 /** @type {DonorRule[]} */
 const donationRules = [
@@ -441,5 +439,4 @@ const donationRules = [
   }
 ];
 
-window.OrganDonationAssessment.donationRules = donationRules;
-})();
+export { donationRules };

@@ -20,10 +20,6 @@
  */
 
 // Wrapped in an IIFE; published via window.ElectroencephalogramTestResult.
-(function () {
-'use strict';
-window.ElectroencephalogramTestResult =
-  window.ElectroencephalogramTestResult || {};
 
 // ----------------------------------------------------------------------
 // Structured-findings predicates (mirror `utils.ts`)
@@ -417,13 +413,4 @@ function gradeFollowUp(r, classification, severity) {
   };
 }
 
-Object.assign(window.ElectroencephalogramTestResult, {
-  hasCriticalFinding,
-  hasAnyAbnormalFinding,
-  isNormalStudy,
-  classifyResult,
-  gradeSeverity,
-  gradeCompleteness,
-  gradeFollowUp
-});
-})();
+export { hasCriticalFinding, hasAnyAbnormalFinding, isNormalStudy, classifyResult, gradeSeverity, gradeCompleteness, gradeFollowUp };

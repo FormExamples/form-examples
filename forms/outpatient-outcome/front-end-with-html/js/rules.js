@@ -12,12 +12,6 @@
 //
 // Wrapped in an IIFE; published via `window.OutpatientOutcome`.
 
-(function () {
-'use strict';
-window.OutpatientOutcome =
-  window.OutpatientOutcome || {};
-const NS = window.OutpatientOutcome;
-
 // ----------------------------------------------------------------------
 // Grade utilities
 // ----------------------------------------------------------------------
@@ -419,18 +413,4 @@ function gradeOperational(data) {
   return { grade: '', rules };
 }
 
-Object.assign(NS, {
-  gradeOrdinal,
-  gradeMax,
-  eq5dDimensionChange,
-  eq5dSummary,
-  promisGphTScore,
-  promisMhTScore,
-  calculateAge,
-  calcWaitDays,
-  gradeClinical,
-  gradePROM,
-  gradePREM,
-  gradeOperational
-});
-})();
+export { gradeOrdinal, gradeMax, eq5dDimensionChange, eq5dSummary, promisGphTScore, promisMhTScore, calculateAge, calcWaitDays, gradeClinical, gradePROM, gradePREM, gradeOperational };

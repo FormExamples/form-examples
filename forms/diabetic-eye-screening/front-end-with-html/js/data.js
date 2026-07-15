@@ -5,10 +5,6 @@
 // rows span every recall / referral outcome, both worst-eye grades, and the
 // urgent flag is set whenever urgent ophthalmology referral (R3A) is indicated.
 
-(function () {
-'use strict';
-window.DiabeticEyeScreeningDashboard = window.DiabeticEyeScreeningDashboard || {};
-
 /** @type {import('./dashboard-types.js').ScreeningRow[]} */
 const sampleScreenings = [
   {
@@ -90,5 +86,4 @@ const sampleScreenings = [
   }
 ];
 
-window.DiabeticEyeScreeningDashboard.sampleScreenings = sampleScreenings;
-})();
+export { sampleScreenings };

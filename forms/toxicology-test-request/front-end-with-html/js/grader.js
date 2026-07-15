@@ -1,3 +1,6 @@
+import { detectFlags } from './flags.js';
+import { evaluateTiming, scoreAppropriateness, scoreCompleteness, scoreTriage } from './rules.js';
+
 // Four-axis grader for the Toxicology Test Request.
 //
 // Composes the rule sets in rules.js and the safety flags in flags.js into a
@@ -6,18 +9,6 @@
 // across every front-end and the back-end.
 //
 // Wrapped in an IIFE; published via `window.ToxicologyTestRequest`.
-
-(function () {
-'use strict';
-window.ToxicologyTestRequest = window.ToxicologyTestRequest || {};
-const NS = window.ToxicologyTestRequest;
-const {
-  scoreAppropriateness,
-  evaluateTiming,
-  scoreCompleteness,
-  scoreTriage,
-  detectFlags
-} = NS;
 
 /**
  * Derive an overall recommendation for the toxicology vetting desk from the
@@ -95,9 +86,4 @@ function calculateGrade(data) {
   };
 }
 
-Object.assign(NS, {
-  calculateGrade,
-  deriveRecommendation,
-  RECOMMENDATION_LABELS
-});
-})();
+export { calculateGrade, deriveRecommendation, RECOMMENDATION_LABELS };

@@ -52,10 +52,6 @@
 // <script> (no ES modules) so the page can be opened directly via `file://`.
 // The IIFE attaches its public symbols to a single global namespace,
 // `window.ToxicologyTestRequestDashboard`.
-(function () {
-'use strict';
-window.ToxicologyTestRequestDashboard =
-  window.ToxicologyTestRequestDashboard || {};
 
 // Human-readable labels for the toxicology assay fields, used to render the
 // "assays selected" column. Mirrors the form's ASSAYS list.
@@ -72,5 +68,4 @@ const ASSAY_LABELS = {
   specificDrugLevel: 'Specific drug'
 };
 
-window.ToxicologyTestRequestDashboard.ASSAY_LABELS = ASSAY_LABELS;
-})();
+export { ASSAY_LABELS };

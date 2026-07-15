@@ -17,10 +17,6 @@
  */
 
 // Wrapped in an IIFE; published via window.AmbulatoryBloodPressureTestResult.
-(function () {
-'use strict';
-window.AmbulatoryBloodPressureTestResult =
-  window.AmbulatoryBloodPressureTestResult || {};
 
 // ----------------------------------------------------------------------
 // Clinical thresholds (NICE NG136 / BIHS / ESH ABPM averages, mmHg)
@@ -539,32 +535,4 @@ function gradeFollowUp(r, classification, severity) {
   };
 }
 
-Object.assign(window.AmbulatoryBloodPressureTestResult, {
-  // thresholds
-  DAYTIME_HTN_SYSTOLIC,
-  DAYTIME_HTN_DIASTOLIC,
-  TWENTY_FOUR_HOUR_HTN_SYSTOLIC,
-  TWENTY_FOUR_HOUR_HTN_DIASTOLIC,
-  NIGHTTIME_HTN_SYSTOLIC,
-  NIGHTTIME_HTN_DIASTOLIC,
-  SEVERE_HTN_SYSTOLIC,
-  SEVERE_HTN_DIASTOLIC,
-  STAGE2_HTN_SYSTOLIC,
-  STAGE2_HTN_DIASTOLIC,
-  ADEQUATE_READINGS_PERCENT,
-  // predicates
-  daytimeHypertensive,
-  twentyFourHourHypertensive,
-  nighttimeHypertensive,
-  severeByAverages,
-  hasCriticalFinding,
-  hasAnyAbnormalFinding,
-  recordingIsAdequate,
-  recordingIsInadequate,
-  // axis rules
-  classifyResult,
-  gradeSeverity,
-  gradeCompleteness,
-  gradeFollowUp
-});
-})();
+export { DAYTIME_HTN_SYSTOLIC, DAYTIME_HTN_DIASTOLIC, TWENTY_FOUR_HOUR_HTN_SYSTOLIC, TWENTY_FOUR_HOUR_HTN_DIASTOLIC, NIGHTTIME_HTN_SYSTOLIC, NIGHTTIME_HTN_DIASTOLIC, SEVERE_HTN_SYSTOLIC, SEVERE_HTN_DIASTOLIC, STAGE2_HTN_SYSTOLIC, STAGE2_HTN_DIASTOLIC, ADEQUATE_READINGS_PERCENT, daytimeHypertensive, twentyFourHourHypertensive, nighttimeHypertensive, severeByAverages, hasCriticalFinding, hasAnyAbnormalFinding, recordingIsAdequate, recordingIsInadequate, classifyResult, gradeSeverity, gradeCompleteness, gradeFollowUp };

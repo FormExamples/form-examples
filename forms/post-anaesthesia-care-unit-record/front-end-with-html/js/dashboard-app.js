@@ -1,3 +1,6 @@
+import { fetchRecords } from './api.js';
+import { sampleRecords } from './data.js';
+
 // PACU Record — recovery-team dashboard (vanilla classic-script app).
 //
 // On boot we fetch the recovery-record list from the backend; on any failure
@@ -9,12 +12,6 @@
 // Sibling modules loaded as plain `<script>` tags (in dependency order) attach
 // their exports to `window.PostAnaesthesiaCareUnitRecordDashboard`. The whole
 // file is wrapped in an IIFE so its top-level identifiers do not leak.
-(function () {
-'use strict';
-const {
-  fetchRecords,
-  sampleRecords
-} = window.PostAnaesthesiaCareUnitRecordDashboard;
 
 // ----------------------------------------------------------------------
 // State
@@ -379,4 +376,3 @@ if (document.readyState === 'loading') {
 } else {
   init();
 }
-})();

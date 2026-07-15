@@ -19,9 +19,6 @@
  */
 
 // Wrapped in an IIFE; published via window.NewbornBloodSpotScreening.
-(function () {
-'use strict';
-window.NewbornBloodSpotScreening = window.NewbornBloodSpotScreening || {};
 
 /**
  * @param {ScreeningData} data
@@ -135,5 +132,4 @@ function detectFlaggedIssues(data, ctx) {
   return flags;
 }
 
-window.NewbornBloodSpotScreening.detectFlaggedIssues = detectFlaggedIssues;
-})();
+export { detectFlaggedIssues };

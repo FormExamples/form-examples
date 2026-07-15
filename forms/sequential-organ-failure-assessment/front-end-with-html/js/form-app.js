@@ -1,3 +1,7 @@
+import { detectFlaggedIssues } from './flags.js';
+import { calculateSofaGrade } from './grader.js';
+import { emptyAssessment, mortalityBandClass, mortalityBandLabel, priorityLabel, respiratorySupportLabel, systemLabel, vasopressorLabel } from './types.js';
+
 // Sequential Organ Failure Assessment (SOFA) — clinician wizard
 // (vanilla JavaScript, no build).
 //
@@ -13,21 +17,6 @@
 // Sibling files loaded as plain `<script>` tags (in order) attach their exports
 // to `window.SequentialOrganFailureAssessment`. The whole file is wrapped in an
 // IIFE so its top-level identifiers don't leak.
-(function () {
-'use strict';
-
-const NS = window.SequentialOrganFailureAssessment;
-const {
-  emptyAssessment,
-  mortalityBandLabel,
-  mortalityBandClass,
-  systemLabel,
-  priorityLabel,
-  respiratorySupportLabel,
-  vasopressorLabel,
-  calculateSofaGrade,
-  detectFlaggedIssues
-} = NS;
 
 // ----------------------------------------------------------------------
 // Persistence
@@ -1089,4 +1078,3 @@ if (document.readyState === 'loading') {
 } else {
   init();
 }
-})();

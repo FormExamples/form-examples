@@ -1,10 +1,6 @@
 // Pure utility functions for the Gerontology Assessment.
 // Mirrors `src/lib/engine/utils.ts` from the SvelteKit reference.
 
-(function () {
-'use strict';
-window.GerontologyAssessment = window.GerontologyAssessment || {};
-
 /** Calculate BMI from weight (kg) and height (cm). Returns null if invalid. */
 function calculateBMI(weightKg, heightCm) {
   if (!weightKg || !heightCm || weightKg <= 0 || heightCm <= 0) return null;
@@ -94,14 +90,4 @@ function countIADLsNeedingHelp(data) {
   return fields.filter((f) => f === 'needs-assistance' || f === 'dependent').length;
 }
 
-Object.assign(window.GerontologyAssessment, {
-  calculateBMI,
-  bmiCategory,
-  calculateAge,
-  cfsScoreLabel,
-  cfsScoreClass,
-  countDependentADLs,
-  countADLsNeedingHelp,
-  countIADLsNeedingHelp
-});
-})();
+export { calculateBMI, bmiCategory, calculateAge, cfsScoreLabel, cfsScoreClass, countDependentADLs, countADLsNeedingHelp, countIADLsNeedingHelp };

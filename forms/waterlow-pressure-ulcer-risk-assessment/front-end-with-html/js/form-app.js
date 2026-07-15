@@ -1,3 +1,7 @@
+import { detectFlaggedIssues } from './flags.js';
+import { calculateWaterlowGrade } from './grader.js';
+import { emptyAssessment, optionLabel, options, preventionActionLabel, priorityLabel, riskBandClass, riskBandLabel } from './types.js';
+
 // Waterlow Pressure Ulcer Risk Assessment — clinician wizard
 // (vanilla JavaScript, no build).
 //
@@ -13,21 +17,6 @@
 // Sibling files loaded as plain `<script>` tags (in order) attach their exports
 // to `window.WaterlowPressureUlcerRiskAssessment`. The whole file is wrapped in
 // an IIFE so its top-level identifiers don't leak.
-(function () {
-'use strict';
-
-const NS = window.WaterlowPressureUlcerRiskAssessment;
-const {
-  emptyAssessment,
-  options,
-  optionLabel,
-  riskBandLabel,
-  riskBandClass,
-  preventionActionLabel,
-  priorityLabel,
-  calculateWaterlowGrade,
-  detectFlaggedIssues
-} = NS;
 
 // ----------------------------------------------------------------------
 // Persistence
@@ -861,4 +850,3 @@ if (document.readyState === 'loading') {
 } else {
   init();
 }
-})();

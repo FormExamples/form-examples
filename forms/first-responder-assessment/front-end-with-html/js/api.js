@@ -5,10 +5,6 @@
 // (CORS, network, server down) or returns an empty list, callers fall back
 // to the sample data shipped in `data.js` so the page is usable standalone.
 
-(function () {
-'use strict';
-window.FirstResponderAssessmentDashboard = window.FirstResponderAssessmentDashboard || {};
-
 const API_BASE = 'http://localhost:5150';
 const RESPONDERS_PATH = '/api/dashboard/responders';
 
@@ -33,6 +29,4 @@ async function fetchResponders() {
   return data.items || [];
 }
 
-window.FirstResponderAssessmentDashboard.fetchResponders = fetchResponders;
-window.FirstResponderAssessmentDashboard.API_BASE = API_BASE;
-})();
+export { fetchResponders, API_BASE };

@@ -8,11 +8,6 @@
 // CBT), and a mix of suicidal-risk safety flags. NHS numbers in the
 // canonical "NNN NNN NNNN" display form.
 
-(function () {
-'use strict';
-window.SeasonalAffectiveDisorderAssessmentDashboard =
-  window.SeasonalAffectiveDisorderAssessmentDashboard || {};
-
 /** @type {import('./types.js').PatientRow[]} */
 const samplePatients = [
   {
@@ -149,6 +144,4 @@ const samplePatients = [
   }
 ];
 
-window.SeasonalAffectiveDisorderAssessmentDashboard.samplePatients =
-  samplePatients;
-})();
+export { samplePatients };

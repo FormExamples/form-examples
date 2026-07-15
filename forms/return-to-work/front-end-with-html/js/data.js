@@ -8,11 +8,6 @@
 // daysAbsent, flagCount) are exactly what the shared engine
 // (`js/grader.js`) computes over each source record.
 
-(function () {
-'use strict';
-window.ReturnToWorkDashboard =
-  window.ReturnToWorkDashboard || {};
-
 /** @type {import('./dashboard-types.js').DashboardRow[]} */
 const sampleRows = [
   {
@@ -57,5 +52,4 @@ const sampleRows = [
   }
 ];
 
-window.ReturnToWorkDashboard.sampleRows = sampleRows;
-})();
+export { sampleRows };

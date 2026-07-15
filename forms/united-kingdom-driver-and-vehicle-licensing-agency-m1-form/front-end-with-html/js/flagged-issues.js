@@ -1,3 +1,5 @@
+import { priorityOrder } from './types.js';
+
 // Clinical / safety flags raised independently of completeness validation.
 //
 //   - Suicidal-thoughts variant of anxiety/depression -> urgent review.
@@ -17,11 +19,6 @@
  * @typedef {import('./types.js').AssessmentData} AssessmentData
  * @typedef {import('./types.js').AdditionalFlag} AdditionalFlag
  */
-
-(function () {
-'use strict';
-window.DvlaM1Form = window.DvlaM1Form || {};
-const { priorityOrder } = window.DvlaM1Form;
 
 /**
  * @param {AssessmentData} data
@@ -187,8 +184,4 @@ function countYes(data) {
   return n;
 }
 
-Object.assign(window.DvlaM1Form, {
-  detectAdditionalFlags,
-  countYes
-});
-})();
+export { detectAdditionalFlags, countYes };

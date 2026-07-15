@@ -7,11 +7,6 @@
 // / examples convention. Wrapped in an IIFE; published via
 // `window.NeurodiversityAdjustmentReview`.
 
-(function () {
-'use strict';
-window.NeurodiversityAdjustmentReview =
-  window.NeurodiversityAdjustmentReview || {};
-
 /**
  * Build a fresh, fully-blank neurodiversity reasonable-adjustments review.
  * Strings default to ''; numeric / date fields default to null; boolean
@@ -269,23 +264,4 @@ function recommendationLabel(value) {
   }
 }
 
-Object.assign(window.NeurodiversityAdjustmentReview, {
-  emptyReview,
-  flatten,
-  effValues,
-  ratedValues,
-  ratedCount,
-  workingWellCount,
-  anyNotWorking,
-  anyEffectivenessAnswered,
-  effectivenessBandLabel,
-  wellbeingRiskBandLabel,
-  nextStepUrgencyLabel,
-  reviewStatusLabel,
-  reviewMethodLabel,
-  workerSatisfiedLabel,
-  wellbeingChangeLabel,
-  effectivenessValueLabel,
-  recommendationLabel
-});
-})();
+export { emptyReview, flatten, effValues, ratedValues, ratedCount, workingWellCount, anyNotWorking, anyEffectivenessAnswered, effectivenessBandLabel, wellbeingRiskBandLabel, nextStepUrgencyLabel, reviewStatusLabel, reviewMethodLabel, workerSatisfiedLabel, wellbeingChangeLabel, effectivenessValueLabel, recommendationLabel };

@@ -14,10 +14,6 @@
  */
 
 // Wrapped in an IIFE; published via window.PostAnaesthesiaCareUnitRecord.
-(function () {
-'use strict';
-window.PostAnaesthesiaCareUnitRecord =
-  window.PostAnaesthesiaCareUnitRecord || {};
 
 // ─── Aldrete parameter enum → 0/1/2 level ─────────────────────────────
 const ALDRETE_SCORES = {
@@ -86,11 +82,4 @@ const aldreteRules = [
     get: (d) => d.oxygenSaturation.oxygenSaturation }
 ];
 
-Object.assign(window.PostAnaesthesiaCareUnitRecord, {
-  ALDRETE_SCORES,
-  PADSS_SCORES,
-  aldreteScore,
-  padssScore,
-  aldreteRules
-});
-})();
+export { ALDRETE_SCORES, PADSS_SCORES, aldreteScore, padssScore, aldreteRules };

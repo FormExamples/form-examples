@@ -1,3 +1,5 @@
+import { calculateAge } from './types.js';
+
 // Flagged-issue detection for the HRT assessment.
 //
 // Independent of the MRS score (handled by the grader), this module raises
@@ -9,11 +11,6 @@
  * @typedef {import('./types.js').AssessmentData} AssessmentData
  * @typedef {import('./types.js').AdditionalFlag} AdditionalFlag
  */
-
-(function () {
-'use strict';
-window.HormoneReplacementTherapyAssessment = window.HormoneReplacementTherapyAssessment || {};
-const { calculateAge } = window.HormoneReplacementTherapyAssessment;
 
 /**
  * @param {AssessmentData} data
@@ -211,5 +208,4 @@ function detectAdditionalFlags(data) {
   return flags;
 }
 
-window.HormoneReplacementTherapyAssessment.detectAdditionalFlags = detectAdditionalFlags;
-})();
+export { detectAdditionalFlags };

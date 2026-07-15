@@ -18,10 +18,6 @@
  * @property {(d: AssessmentData) => boolean} evaluate
  */
 
-(function () {
-'use strict';
-window.RespirologyAssessment = window.RespirologyAssessment || {};
-
 /** @type {MRCRule[]} */
 const mrcRules = [
   // ─── DIRECT MRC GRADE ─────────────────────────────────────
@@ -273,5 +269,4 @@ const mrcRules = [
   }
 ];
 
-window.RespirologyAssessment.mrcRules = mrcRules;
-})();
+export { mrcRules };

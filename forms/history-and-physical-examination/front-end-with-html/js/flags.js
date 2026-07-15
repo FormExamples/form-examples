@@ -1,3 +1,5 @@
+import { abnormalVitals, allergyDocumented, missingCoreExam, missingHistory, nonEmpty } from './rules.js';
+
 // Flagged-issue detection (safety flags). Computed independently of the
 // completeness status per spec §5, each flag carries a priority and a suggested
 // action. Two categories are BLOCKING (they force an incomplete status in the
@@ -19,17 +21,6 @@
  */
 
 // Wrapped in an IIFE; published via window.HistoryAndPhysicalExamination.
-(function () {
-'use strict';
-window.HistoryAndPhysicalExamination =
-  window.HistoryAndPhysicalExamination || {};
-const {
-  nonEmpty,
-  allergyDocumented,
-  missingCoreExam,
-  missingHistory,
-  abnormalVitals
-} = window.HistoryAndPhysicalExamination;
 
 /**
  * @param {ClerkingRecord} r
@@ -130,5 +121,4 @@ function detectFlaggedIssues(r) {
   return flags;
 }
 
-window.HistoryAndPhysicalExamination.detectFlaggedIssues = detectFlaggedIssues;
-})();
+export { detectFlaggedIssues };

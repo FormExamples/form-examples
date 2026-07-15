@@ -149,9 +149,6 @@
 // classic <script> (no ES modules) so the page can be opened directly via
 // `file://`. The IIFE attaches its public symbols to a single global
 // namespace, `window.FluoroscopyTestResult`.
-(function () {
-'use strict';
-window.FluoroscopyTestResult = window.FluoroscopyTestResult || {};
 
 /**
  * Build a fresh, fully-blank fluoroscopy test result.
@@ -349,19 +346,4 @@ function followUpUrgencyClass(value) {
   }
 }
 
-Object.assign(window.FluoroscopyTestResult, {
-  emptyResult,
-  resultClassificationLabel,
-  abnormalitySeverityLabel,
-  followUpUrgencyLabel,
-  studyTypeLabel,
-  contrastUsedLabel,
-  examinationAdequacyLabel,
-  reportStatusLabel,
-  recommendationLabel,
-  priorityLabel,
-  resultClassificationClass,
-  abnormalitySeverityClass,
-  followUpUrgencyClass
-});
-})();
+export { emptyResult, resultClassificationLabel, abnormalitySeverityLabel, followUpUrgencyLabel, studyTypeLabel, contrastUsedLabel, examinationAdequacyLabel, reportStatusLabel, recommendationLabel, priorityLabel, resultClassificationClass, abnormalitySeverityClass, followUpUrgencyClass };

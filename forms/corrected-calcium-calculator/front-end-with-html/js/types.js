@@ -105,10 +105,6 @@
 // classic <script> (no ES modules) so the page can be opened directly via
 // `file://`. The IIFE attaches its public symbols to a single global
 // namespace, `window.CorrectedCalciumCalculator`.
-(function () {
-'use strict';
-window.CorrectedCalciumCalculator =
-  window.CorrectedCalciumCalculator || {};
 
 /**
  * Build a fresh, fully-blank assessment.
@@ -223,14 +219,4 @@ function priorityLabel(priority) {
   }
 }
 
-Object.assign(window.CorrectedCalciumCalculator, {
-  emptyAssessment,
-  classificationLabel,
-  classificationClass,
-  clinicianRoleLabel,
-  careSettingLabel,
-  sexLabel,
-  ageBandLabel,
-  priorityLabel
-});
-})();
+export { emptyAssessment, classificationLabel, classificationClass, clinicianRoleLabel, careSettingLabel, sexLabel, ageBandLabel, priorityLabel };

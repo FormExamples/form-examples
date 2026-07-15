@@ -12,10 +12,6 @@
 // patterns; asymmetric tests are counted out of 5 bilateral patterns
 // (hurdle step, in-line lunge, shoulder mobility, ASLR, rotary stability).
 
-(function () {
-'use strict';
-window.KinesiologyAssessmentDashboard = window.KinesiologyAssessmentDashboard || {};
-
 /** @type {import('./types.js').PatientRow[]} */
 const samplePatients = [
   {
@@ -140,5 +136,4 @@ const samplePatients = [
   }
 ];
 
-window.KinesiologyAssessmentDashboard.samplePatients = samplePatients;
-})();
+export { samplePatients };

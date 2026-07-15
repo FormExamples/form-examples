@@ -7,11 +7,6 @@
 // bands, with a critical-alert row whose endobronchial lesion raised three
 // flags.
 
-(function () {
-'use strict';
-window.BronchoscopyTestResultDashboard =
-  window.BronchoscopyTestResultDashboard || {};
-
 /** @type {import('./dashboard-types.js').ReportRow[]} */
 const sampleReports = [
   {
@@ -88,5 +83,4 @@ const sampleReports = [
   }
 ];
 
-window.BronchoscopyTestResultDashboard.sampleReports = sampleReports;
-})();
+export { sampleReports };

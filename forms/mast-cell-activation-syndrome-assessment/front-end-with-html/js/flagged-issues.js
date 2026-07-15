@@ -11,10 +11,6 @@
  */
 
 // Wrapped in an IIFE; published via window.MastCellActivationSyndromeAssessment.
-(function () {
-'use strict';
-window.MastCellActivationSyndromeAssessment =
-  window.MastCellActivationSyndromeAssessment || {};
 
 /**
  * @param {AssessmentData} data
@@ -233,6 +229,4 @@ function detectAdditionalFlags(data) {
   return flags;
 }
 
-window.MastCellActivationSyndromeAssessment.detectAdditionalFlags =
-  detectAdditionalFlags;
-})();
+export { detectAdditionalFlags };

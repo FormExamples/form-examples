@@ -5,11 +5,6 @@
 // The rows span every status class, every reconciliation type, and a range of
 // source and discrepancy counts.
 
-(function () {
-'use strict';
-window.MedicationReconciliationDashboard =
-  window.MedicationReconciliationDashboard || {};
-
 /** @type {import('./dashboard-types.js').ReconciliationRow[]} */
 const sampleReconciliations = [
   {
@@ -98,5 +93,4 @@ const sampleReconciliations = [
   }
 ];
 
-window.MedicationReconciliationDashboard.sampleReconciliations = sampleReconciliations;
-})();
+export { sampleReconciliations };

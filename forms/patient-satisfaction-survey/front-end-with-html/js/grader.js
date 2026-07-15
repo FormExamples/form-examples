@@ -1,3 +1,6 @@
+import { satisfactionRules } from './rules.js';
+import { categorizeScore, normalizeLikertScores } from './types.js';
+
 // Patient Satisfaction grader. Pure functions: take an `AssessmentData`
 // object and return the per-domain normalized scores (0-100), the overall
 // composite score, the satisfaction category, and the list of fired rules.
@@ -12,14 +15,6 @@
  */
 
 // Wrapped in an IIFE; published via window.PatientSatisfactionSurvey.
-(function () {
-'use strict';
-window.PatientSatisfactionSurvey = window.PatientSatisfactionSurvey || {};
-const {
-  satisfactionRules,
-  normalizeLikertScores,
-  categorizeScore
-} = window.PatientSatisfactionSurvey;
 
 /**
  * Calculate normalized scores for each of the seven satisfaction domains.
@@ -138,9 +133,4 @@ function calculateSatisfactionGrade(data) {
   return { normalizedScore, satisfactionCategory, domainScores, firedRules };
 }
 
-Object.assign(window.PatientSatisfactionSurvey, {
-  calculateDomainScores,
-  calculateOverallScore,
-  calculateSatisfactionGrade
-});
-})();
+export { calculateDomainScores, calculateOverallScore, calculateSatisfactionGrade };

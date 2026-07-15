@@ -160,9 +160,6 @@
 // classic <script> (no ES modules) so the page can be opened directly via
 // `file://`. The IIFE attaches its public symbols to a single global
 // namespace, `window.HearingAidAssessment`.
-(function () {
-'use strict';
-window.HearingAidAssessment = window.HearingAidAssessment || {};
 
 /**
  * Build a fresh, fully-blank assessment.
@@ -313,11 +310,4 @@ function hearingLossGrade(pta) {
   return 'Profound';
 }
 
-Object.assign(window.HearingAidAssessment, {
-  emptyAssessment,
-  calculateAge,
-  hhiesCategory,
-  hhiesSeverityClass,
-  hearingLossGrade
-});
-})();
+export { emptyAssessment, calculateAge, hhiesCategory, hhiesSeverityClass, hearingLossGrade };

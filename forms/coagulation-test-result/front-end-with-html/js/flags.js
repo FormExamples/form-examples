@@ -1,3 +1,5 @@
+import { hasAnyResultValue, hasCriticalValue, hasDicPicture, hasIsolatedApttProlongation, hasSpecimenQualityIssue } from './rules.js';
+
 // Safety-critical flag detection for the Coagulation Test Result.
 //
 // Faithful vanilla-JavaScript port of the SvelteKit engine module
@@ -14,16 +16,6 @@
 
 // Wrapped in an IIFE; published via window.CoagulationTestResult.
 // Depends on rules.js (the critical-value predicates), so it must load after it.
-(function () {
-'use strict';
-window.CoagulationTestResult = window.CoagulationTestResult || {};
-const {
-  hasCriticalValue,
-  hasDicPicture,
-  hasIsolatedApttProlongation,
-  hasAnyResultValue,
-  hasSpecimenQualityIssue
-} = window.CoagulationTestResult;
 
 /**
  * Detect the safety-critical flags for a report.
@@ -148,7 +140,4 @@ function detectFlags(r) {
   return flags;
 }
 
-Object.assign(window.CoagulationTestResult, {
-  detectFlags
-});
-})();
+export { detectFlags };

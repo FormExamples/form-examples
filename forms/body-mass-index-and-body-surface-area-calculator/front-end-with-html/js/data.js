@@ -7,11 +7,6 @@
 // severeFlag is set whenever the BMI is >= 40 (obese class III) or < 18.5
 // (underweight).
 
-(function () {
-'use strict';
-window.BmiBsaCalculatorDashboard =
-  window.BmiBsaCalculatorDashboard || {};
-
 /** @type {import('./dashboard-types.js').AssessmentRow[]} */
 const sampleAssessments = [
   {
@@ -93,6 +88,4 @@ const sampleAssessments = [
   }
 ];
 
-window.BmiBsaCalculatorDashboard.sampleAssessments =
-  sampleAssessments;
-})();
+export { sampleAssessments };

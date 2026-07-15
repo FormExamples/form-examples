@@ -36,10 +36,6 @@
  */
 
 // Wrapped in an IIFE; published via window.RockallScoreForUpperGastrointestinalBleeding.
-(function () {
-'use strict';
-window.RockallScoreForUpperGastrointestinalBleeding =
-  window.RockallScoreForUpperGastrointestinalBleeding || {};
 
 /**
  * Clinical parameter — age (years). Returns 0/1/2; a missing age scores 0.
@@ -260,13 +256,4 @@ const rockallRules = [
   }
 ];
 
-Object.assign(window.RockallScoreForUpperGastrointestinalBleeding, {
-  agePoints,
-  shockPoints,
-  comorbidityPoints,
-  diagnosisPoints,
-  stigmataPoints,
-  riskBand,
-  rockallRules
-});
-})();
+export { agePoints, shockPoints, comorbidityPoints, diagnosisPoints, stigmataPoints, riskBand, rockallRules };

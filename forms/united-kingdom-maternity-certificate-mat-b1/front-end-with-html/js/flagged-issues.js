@@ -1,3 +1,5 @@
+import { priorityOrder, weeksBetween } from './types.js';
+
 // MAT B1 maternity certificate - additional flagged issues.
 //
 // Clinical / administrative flags raised in addition to the rule-based
@@ -20,11 +22,6 @@
  * @typedef {import('./types.js').AssessmentData} AssessmentData
  * @typedef {import('./types.js').AdditionalFlag} AdditionalFlag
  */
-
-(function () {
-'use strict';
-window.MatB1Form = window.MatB1Form || {};
-const { priorityOrder, weeksBetween } = window.MatB1Form;
 
 /**
  * @param {AssessmentData} data
@@ -153,5 +150,4 @@ function detectAdditionalFlags(data) {
   return flags;
 }
 
-window.MatB1Form.detectAdditionalFlags = detectAdditionalFlags;
-})();
+export { detectAdditionalFlags };

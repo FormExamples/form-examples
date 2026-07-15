@@ -130,8 +130,3 @@
 
 // IIFE establishes the namespace so other classic <script> files can safely
 // attach exports to `window.WhoSurgicalSafetyChecklistDashboard`.
-(function () {
-'use strict';
-window.WhoSurgicalSafetyChecklistDashboard =
-  window.WhoSurgicalSafetyChecklistDashboard || {};
-})();

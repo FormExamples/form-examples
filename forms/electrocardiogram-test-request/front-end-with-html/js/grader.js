@@ -1,3 +1,6 @@
+import { detectFlags } from './flags.js';
+import { scoreAppropriateness, scoreCompleteness, scorePriority, scoreTriage } from './rules.js';
+
 // Four-axis grader for the Electrocardiogram (ECG) Test Request.
 //
 // Composes the rule sets in rules.js and the safety flags in flags.js into a
@@ -6,19 +9,6 @@
 // across every front-end and the back-end.
 //
 // Wrapped in an IIFE; published via `window.ElectrocardiogramTestRequest`.
-
-(function () {
-'use strict';
-window.ElectrocardiogramTestRequest =
-  window.ElectrocardiogramTestRequest || {};
-const NS = window.ElectrocardiogramTestRequest;
-const {
-  scoreAppropriateness,
-  scoreTriage,
-  scoreCompleteness,
-  scorePriority,
-  detectFlags
-} = NS;
 
 /**
  * Derive an overall recommendation for the cardiac-physiology vetting desk
@@ -98,9 +88,4 @@ function calculateGrade(data) {
   };
 }
 
-Object.assign(NS, {
-  calculateGrade,
-  deriveRecommendation,
-  RECOMMENDATION_LABELS
-});
-})();
+export { calculateGrade, deriveRecommendation, RECOMMENDATION_LABELS };

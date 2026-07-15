@@ -1,3 +1,6 @@
+import { dashQuestions } from './dash-rules.js';
+import { dashCategory } from './types.js';
+
 // DASH (Disabilities of the Arm, Shoulder and Hand) grader. Pure functions:
 // take an `AssessmentData` object, return the total DASH score (0-100), its
 // disability category label, and the list of fired rules (questions
@@ -15,10 +18,6 @@
 //   81-100 -> Very severe disability
 
 // Wrapped in an IIFE; published via window.OrthopedicAssessment.
-(function () {
-'use strict';
-window.OrthopedicAssessment = window.OrthopedicAssessment || {};
-const { dashQuestions, dashCategory } = window.OrthopedicAssessment;
 
 /**
  * Calculate the DASH score and fired rules from assessment data.
@@ -72,5 +71,4 @@ function calculateDASH(data) {
   return { dashScore, dashCategoryLabel, firedRules, answeredCount };
 }
 
-Object.assign(window.OrthopedicAssessment, { calculateDASH });
-})();
+export { calculateDASH };

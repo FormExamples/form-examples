@@ -1,3 +1,6 @@
+import { allergyRules } from './allergy-rules.js';
+import { calculateAllergyBurdenScore } from './types.js';
+
 // Allergy severity grader. Pure functions: take an `AssessmentData` object,
 // evaluate every classification rule, and return the maximum severity level
 // among all fired rules plus the audit trail of fired rules and the weighted
@@ -14,10 +17,6 @@
  */
 
 // Wrapped in an IIFE; published via window.AllergyAssessment.
-(function () {
-'use strict';
-window.AllergyAssessment = window.AllergyAssessment || {};
-const { allergyRules, calculateAllergyBurdenScore } = window.AllergyAssessment;
 
 /**
  * Evaluate every severity rule against the assessment data and produce the
@@ -67,8 +66,4 @@ function calculateAllergyBurden(data) {
   return calculateAllergyBurdenScore(data);
 }
 
-Object.assign(window.AllergyAssessment, {
-  calculateAllergySeverity,
-  calculateAllergyBurden
-});
-})();
+export { calculateAllergySeverity, calculateAllergyBurden };

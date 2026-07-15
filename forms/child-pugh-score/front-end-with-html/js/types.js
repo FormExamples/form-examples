@@ -132,9 +132,6 @@
 // classic <script> (no ES modules) so the page can be opened directly via
 // `file://`. The IIFE attaches its public symbols to a single global
 // namespace, `window.ChildPughScore`.
-(function () {
-'use strict';
-window.ChildPughScore = window.ChildPughScore || {};
 
 /**
  * Build a fresh, fully-blank assessment.
@@ -297,18 +294,4 @@ function priorityLabel(priority) {
   }
 }
 
-Object.assign(window.ChildPughScore, {
-  emptyAssessment,
-  childPughClassLabel,
-  childPughClassCss,
-  surgicalRiskLabel,
-  clinicianRoleLabel,
-  careSettingLabel,
-  aetiologyLabel,
-  sexLabel,
-  ageBandLabel,
-  ascitesLabel,
-  encephalopathyLabel,
-  priorityLabel
-});
-})();
+export { emptyAssessment, childPughClassLabel, childPughClassCss, surgicalRiskLabel, clinicianRoleLabel, careSettingLabel, aetiologyLabel, sexLabel, ageBandLabel, ascitesLabel, encephalopathyLabel, priorityLabel };

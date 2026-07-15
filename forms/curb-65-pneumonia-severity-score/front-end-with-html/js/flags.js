@@ -18,10 +18,6 @@
  */
 
 // Wrapped in an IIFE; published via window.Curb65PneumoniaSeverityScore.
-(function () {
-'use strict';
-window.Curb65PneumoniaSeverityScore =
-  window.Curb65PneumoniaSeverityScore || {};
 
 /**
  * @param {AssessmentData} data
@@ -143,5 +139,4 @@ function detectFlaggedIssues(data, grade) {
   return flags;
 }
 
-window.Curb65PneumoniaSeverityScore.detectFlaggedIssues = detectFlaggedIssues;
-})();
+export { detectFlaggedIssues };

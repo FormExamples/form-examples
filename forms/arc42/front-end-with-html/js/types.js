@@ -8,10 +8,6 @@
 // pure helpers (cardinality counts + display labels) shared by the completeness
 // rules, grader, and wizard. Wrapped in an IIFE; published via `window.Arc42`.
 
-(function () {
-'use strict';
-window.Arc42 = window.Arc42 || {};
-
 /**
  * Build a fresh, fully-blank arc42 documentation record. Strings default to
  * '' (unanswered text / enum); arrays default to []. Mirrors the SvelteKit
@@ -140,16 +136,4 @@ const SECTION_NAMES = {
   12: 'Glossary'
 };
 
-Object.assign(window.Arc42, {
-  emptyDocumentation,
-  nonEmpty,
-  nonDraftAdrs,
-  fullyPopulatedQualityScenarios,
-  risksWithMitigation,
-  completeSectionCount,
-  maturityLabel,
-  completenessLabel,
-  recommendationLabel,
-  SECTION_NAMES
-});
-})();
+export { emptyDocumentation, nonEmpty, nonDraftAdrs, fullyPopulatedQualityScenarios, risksWithMitigation, completeSectionCount, maturityLabel, completenessLabel, recommendationLabel, SECTION_NAMES };

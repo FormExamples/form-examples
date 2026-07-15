@@ -6,11 +6,6 @@
 // both CAM variants, and each motoric subtype, with the delirium flag set
 // whenever the classification is 'present'.
 
-(function () {
-'use strict';
-window.ConfusionAssessmentMethodDashboard =
-  window.ConfusionAssessmentMethodDashboard || {};
-
 /** @type {import('./dashboard-types.js').AssessmentRow[]} */
 const sampleAssessments = [
   {
@@ -92,6 +87,4 @@ const sampleAssessments = [
   }
 ];
 
-window.ConfusionAssessmentMethodDashboard.sampleAssessments =
-  sampleAssessments;
-})();
+export { sampleAssessments };

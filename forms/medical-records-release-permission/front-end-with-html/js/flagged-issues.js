@@ -4,11 +4,6 @@
 // score: even a fully complete form can raise flags about sensitive data,
 // expired authorisation, or release scope.
 
-(function () {
-'use strict';
-const NS = window.MedicalRecordsReleasePermission =
-  window.MedicalRecordsReleasePermission || {};
-
 /**
  * Detect additional flags that should be highlighted for review.
  * Pure function: no side effects.
@@ -189,5 +184,4 @@ function detectAdditionalFlags(data) {
   return flags;
 }
 
-Object.assign(NS, { detectAdditionalFlags });
-})();
+export { detectAdditionalFlags };

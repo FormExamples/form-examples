@@ -1,3 +1,5 @@
+import { epilepsyDeclarationRequired } from './types.js';
+
 // DVLA B1 flagged-issue detection. Independent of the completeness check
 // (which is handled by the validator), this module raises clinician- or
 // DVLA-significant flags for high-risk responses such as missing epilepsy
@@ -9,11 +11,6 @@
  * @typedef {import('./types.js').AssessmentData} AssessmentData
  * @typedef {import('./types.js').FlaggedIssue} FlaggedIssue
  */
-
-(function () {
-'use strict';
-window.DvlaB1Form = window.DvlaB1Form || {};
-const { epilepsyDeclarationRequired } = window.DvlaB1Form;
 
 /**
  * @param {AssessmentData} data
@@ -170,5 +167,4 @@ function detectFlaggedIssues(data) {
   return flags;
 }
 
-window.DvlaB1Form.detectFlaggedIssues = detectFlaggedIssues;
-})();
+export { detectFlaggedIssues };

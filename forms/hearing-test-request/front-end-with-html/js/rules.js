@@ -12,11 +12,6 @@
 //
 // Wrapped in an IIFE; published via `window.HearingTestRequest`.
 
-(function () {
-'use strict';
-window.HearingTestRequest = window.HearingTestRequest || {};
-const NS = window.HearingTestRequest;
-
 // ----------------------------------------------------------------------
 // Axis A — Appropriateness (1-9 ordinal; BSA recommended procedures / NICE
 // NG98 indication match). There is no single published 1-9 audiology score;
@@ -317,16 +312,4 @@ function scorePriority(triageTier, apprBand) {
   };
 }
 
-Object.assign(NS, {
-  scoreAppropriateness,
-  appropriatenessBand,
-  scoreTriage,
-  scoreCompleteness,
-  scorePriority,
-  maxTier,
-  isUnilateral,
-  TRIAGE_ORDER,
-  TARGET_TIMEFRAMES,
-  INDICATION_TEST_MAP
-});
-})();
+export { scoreAppropriateness, appropriatenessBand, scoreTriage, scoreCompleteness, scorePriority, maxTier, isUnilateral, TRIAGE_ORDER, TARGET_TIMEFRAMES, INDICATION_TEST_MAP };

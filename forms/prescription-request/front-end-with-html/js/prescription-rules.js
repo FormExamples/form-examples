@@ -4,9 +4,6 @@
 //
 // Loaded as a classic <script> tag; attaches `prescriptionRules` to
 // `window.PrescriptionRequest`.
-(function () {
-'use strict';
-window.PrescriptionRequest = window.PrescriptionRequest || {};
 
 /** @type {import('./types.js').PrescriptionRule[]} */
 const prescriptionRules = [
@@ -86,5 +83,4 @@ const prescriptionRules = [
   }
 ];
 
-Object.assign(window.PrescriptionRequest, { prescriptionRules });
-})();
+export { prescriptionRules };

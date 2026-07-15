@@ -7,11 +7,6 @@
 // server down) or returns an empty list, callers fall back to the sample
 // data shipped in `data.js` so the page is usable standalone.
 
-(function () {
-'use strict';
-window.MedicalOperationNoteDashboard =
-  window.MedicalOperationNoteDashboard || {};
-
 const API_BASE = 'http://localhost:5150';
 const OPERATION_NOTES_PATH = '/api/operation-notes';
 
@@ -42,7 +37,4 @@ async function fetchOperationNotes() {
   return [];
 }
 
-window.MedicalOperationNoteDashboard.fetchOperationNotes =
-  fetchOperationNotes;
-window.MedicalOperationNoteDashboard.API_BASE = API_BASE;
-})();
+export { fetchOperationNotes, API_BASE };

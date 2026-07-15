@@ -155,9 +155,6 @@
 // classic <script> (no ES modules) so the page can be opened directly via
 // `file://`. The IIFE attaches its public symbols to a single global
 // namespace, `window.HematologyAssessment`.
-(function () {
-'use strict';
-window.HematologyAssessment = window.HematologyAssessment || {};
 
 /**
  * Build a fresh, fully-blank assessment.
@@ -471,14 +468,4 @@ function abnormalityLevelClass(level) {
   }
 }
 
-Object.assign(window.HematologyAssessment, {
-  emptyAssessment,
-  collectNumericItems,
-  calculateAbnormalityScore,
-  bloodCountScore,
-  coagulationScore,
-  ironStudiesScore,
-  abnormalityLevelLabel,
-  abnormalityLevelClass
-});
-})();
+export { emptyAssessment, collectNumericItems, calculateAbnormalityScore, bloodCountScore, coagulationScore, ironStudiesScore, abnormalityLevelLabel, abnormalityLevelClass };

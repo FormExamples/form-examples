@@ -162,9 +162,6 @@
 // classic <script> (no ES modules) so the page can be opened directly via
 // `file://`. The IIFE attaches its public symbols to a single global
 // namespace, `window.DentalAssessment`.
-(function () {
-'use strict';
-window.DentalAssessment = window.DentalAssessment || {};
 
 /**
  * Build a fresh, fully-blank assessment.
@@ -323,12 +320,4 @@ function dmftCategoryClass(category) {
   return `score-${category}`;
 }
 
-Object.assign(window.DentalAssessment, {
-  emptyAssessment,
-  getDMFTScore,
-  getDMFTCategory,
-  dmftCategoryLabel,
-  dmftScoreShortLabel,
-  dmftCategoryClass
-});
-})();
+export { emptyAssessment, getDMFTScore, getDMFTCategory, dmftCategoryLabel, dmftScoreShortLabel, dmftCategoryClass };

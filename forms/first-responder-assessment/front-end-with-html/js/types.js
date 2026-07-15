@@ -215,9 +215,6 @@
 // classic <script> (no ES modules) so the page can be opened directly via
 // `file://`. The IIFE attaches its public symbols to a single global
 // namespace, `window.FirstResponderAssessment`.
-(function () {
-'use strict';
-window.FirstResponderAssessment = window.FirstResponderAssessment || {};
 
 /**
  * Build a fresh, fully-blank assessment.
@@ -526,20 +523,4 @@ function aggregateCompetency(levels) {
   }
 }
 
-Object.assign(window.FirstResponderAssessment, {
-  emptyAssessment,
-  calculateBMI,
-  bmiCategory,
-  calculateAge,
-  competencyToNumber,
-  competencyLabel,
-  competencyClass,
-  fitnessDecisionLabel,
-  fitnessDecisionClass,
-  riskLevelLabel,
-  riskLevelClass,
-  gradeLabel,
-  gradeClass,
-  aggregateCompetency
-});
-})();
+export { emptyAssessment, calculateBMI, bmiCategory, calculateAge, competencyToNumber, competencyLabel, competencyClass, fitnessDecisionLabel, fitnessDecisionClass, riskLevelLabel, riskLevelClass, gradeLabel, gradeClass, aggregateCompetency };

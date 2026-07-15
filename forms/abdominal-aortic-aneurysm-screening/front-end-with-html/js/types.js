@@ -115,10 +115,6 @@
 // classic <script> (no ES modules) so the page can be opened directly via
 // `file://`. The IIFE attaches its public symbols to a single global
 // namespace, `window.AbdominalAorticAneurysmScreening`.
-(function () {
-'use strict';
-window.AbdominalAorticAneurysmScreening =
-  window.AbdominalAorticAneurysmScreening || {};
 
 /**
  * Build a fresh, fully-blank assessment.
@@ -248,15 +244,4 @@ function priorityLabel(priority) {
   }
 }
 
-Object.assign(window.AbdominalAorticAneurysmScreening, {
-  emptyAssessment,
-  categoryLabel,
-  categoryClass,
-  surveillanceBandLabel,
-  technicianRoleLabel,
-  eligibilityRouteLabel,
-  scanTypeLabel,
-  sexLabel,
-  priorityLabel
-});
-})();
+export { emptyAssessment, categoryLabel, categoryClass, surveillanceBandLabel, technicianRoleLabel, eligibilityRouteLabel, scanTypeLabel, sexLabel, priorityLabel };

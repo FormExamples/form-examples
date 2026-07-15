@@ -23,9 +23,6 @@
  */
 
 // Wrapped in an IIFE; published via window.FluidBalanceChart.
-(function () {
-'use strict';
-window.FluidBalanceChart = window.FluidBalanceChart || {};
 
 /** Default significant-balance threshold in mL per 24 h (spec §4). */
 const SIGNIFICANT_BALANCE_ML_PER_24H = 1000;
@@ -91,14 +88,4 @@ function classifyFluidStatus(args) {
   return 'balanced';
 }
 
-Object.assign(window.FluidBalanceChart, {
-  SIGNIFICANT_BALANCE_ML_PER_24H,
-  OLIGURIA_RATE_ML_PER_KG_PER_HOUR,
-  ANURIA_RATE_ML_PER_KG_PER_HOUR,
-  OLIGURIA_MIN_HOURS,
-  ANURIA_MIN_HOURS,
-  ANURIA_ABSOLUTE_ML,
-  significantBalanceThresholdMl,
-  classifyFluidStatus
-});
-})();
+export { SIGNIFICANT_BALANCE_ML_PER_24H, OLIGURIA_RATE_ML_PER_KG_PER_HOUR, ANURIA_RATE_ML_PER_KG_PER_HOUR, OLIGURIA_MIN_HOURS, ANURIA_MIN_HOURS, ANURIA_ABSOLUTE_ML, significantBalanceThresholdMl, classifyFluidStatus };

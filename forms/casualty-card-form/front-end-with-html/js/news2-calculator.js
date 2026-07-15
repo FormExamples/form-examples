@@ -2,10 +2,6 @@
 //
 // Pure scoring engine, mirrors `src/lib/engine/news2-calculator.ts`.
 // Attaches public symbols to `window.CasualtyCardForm`.
-(function () {
-'use strict';
-
-const NS = (window.CasualtyCardForm = window.CasualtyCardForm || {});
 
 function scoreRespiratoryRate(rr) {
   if (rr === null || rr === undefined || rr === '') {
@@ -111,5 +107,4 @@ function calculateNEWS2(vitals) {
   return { totalScore, parameterScores, clinicalResponse, hasAnySingleScore3 };
 }
 
-NS.calculateNEWS2 = calculateNEWS2;
-})();
+export { calculateNEWS2 };

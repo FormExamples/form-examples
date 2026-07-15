@@ -18,9 +18,6 @@
  */
 
 // Wrapped in an IIFE; published via window.HypertensionReview.
-(function () {
-'use strict';
-window.HypertensionReview = window.HypertensionReview || {};
 
 /** A numeric field is present when it is neither null nor undefined. */
 function present(v) {
@@ -221,11 +218,4 @@ const COMPONENTS = [
   }
 ];
 
-Object.assign(window.HypertensionReview, {
-  present,
-  selectTarget,
-  classifyControl,
-  computeStage,
-  COMPONENTS
-});
-})();
+export { present, selectTarget, classifyControl, computeStage, COMPONENTS };

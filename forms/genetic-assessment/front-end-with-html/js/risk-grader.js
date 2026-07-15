@@ -1,3 +1,6 @@
+import { riskRules } from './rules.js';
+import { riskCategory } from './types.js';
+
 // Genetic Assessment risk grader.
 //
 // Pure functions: take an `AssessmentData` object, return the total risk
@@ -18,10 +21,6 @@
  */
 
 // Wrapped in an IIFE; published via window.GeneticAssessment.
-(function () {
-'use strict';
-window.GeneticAssessment = window.GeneticAssessment || {};
-const { riskRules, riskCategory } = window.GeneticAssessment;
 
 /**
  * Look up a rule by id and push it onto firedRules; return its weight.
@@ -184,8 +183,4 @@ function gradeRisk(data) {
   return calculateRisk(data);
 }
 
-Object.assign(window.GeneticAssessment, {
-  calculateRisk,
-  gradeRisk
-});
-})();
+export { calculateRisk, gradeRisk };

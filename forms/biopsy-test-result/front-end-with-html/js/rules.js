@@ -15,9 +15,6 @@
  */
 
 // Wrapped in an IIFE; published via window.BiopsyTestResult.
-(function () {
-'use strict';
-window.BiopsyTestResult = window.BiopsyTestResult || {};
 
 // ──────────────────────────────────────────────
 // Diagnostic predicates (utils.ts)
@@ -484,13 +481,4 @@ function gradeFollowUp(r, classification, severity) {
   };
 }
 
-Object.assign(window.BiopsyTestResult, {
-  hasInvolvedMargin,
-  hasCriticalFinding,
-  hasAnyAbnormalFinding,
-  classifyResult,
-  gradeSeverity,
-  gradeCompleteness,
-  gradeFollowUp
-});
-})();
+export { hasInvolvedMargin, hasCriticalFinding, hasAnyAbnormalFinding, classifyResult, gradeSeverity, gradeCompleteness, gradeFollowUp };

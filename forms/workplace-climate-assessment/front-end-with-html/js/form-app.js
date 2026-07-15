@@ -1,3 +1,8 @@
+import { detectAdditionalFlags } from './flagged-issues.js';
+import { gradeClimate } from './grader.js';
+import { DEPARTMENT_OPTIONS, DOMAINS, HOURS_OPTIONS, LIKERT_AGREEMENT, RECOMMEND_OPTIONS, ROLE_LEVEL_OPTIONS, TENURE_OPTIONS, WORK_LOCATION_OPTIONS, surveyItems } from './rules.js';
+import { categoryClass, categoryLabel, emptyAssessment } from './types.js';
+
 // Workplace Climate Assessment — employee wizard (vanilla JS, Lily HTML).
 //
 // Single-page continuous wizard: every section renders into the page in
@@ -13,27 +18,6 @@
 // keeps the rest of this file referring to short local names. The whole
 // file is wrapped in an IIFE so its top-level identifiers don't leak to
 // the global scope.
-
-(function () {
-'use strict';
-
-const NS = window.WorkplaceClimateAssessment;
-const {
-  emptyAssessment,
-  categoryLabel,
-  categoryClass,
-  LIKERT_AGREEMENT,
-  DOMAINS,
-  surveyItems,
-  DEPARTMENT_OPTIONS,
-  TENURE_OPTIONS,
-  HOURS_OPTIONS,
-  ROLE_LEVEL_OPTIONS,
-  WORK_LOCATION_OPTIONS,
-  RECOMMEND_OPTIONS,
-  gradeClimate,
-  detectAdditionalFlags
-} = NS;
 
 // ----------------------------------------------------------------------
 // Persistence
@@ -862,4 +846,3 @@ if (document.readyState === 'loading') {
 // Silence unused-variable lint for `radioGroup` helper if no step
 // uses it; it is defined for future use.
 void radioGroup;
-})();

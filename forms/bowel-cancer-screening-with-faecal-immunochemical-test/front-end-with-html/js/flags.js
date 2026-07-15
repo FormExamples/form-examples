@@ -1,3 +1,6 @@
+import { hasNumber } from './grader.js';
+import { INADEQUATE_SAMPLE } from './rules.js';
+
 // Flagged-issue detection (red flags). Fired independently of the result class
 // (which the grader produces), this module raises clinician-facing safety flags
 // per spec §5:
@@ -19,11 +22,6 @@
  */
 
 // Wrapped in an IIFE; published via window.BowelCancerScreeningFit.
-(function () {
-'use strict';
-window.BowelCancerScreeningFit =
-  window.BowelCancerScreeningFit || {};
-const { INADEQUATE_SAMPLE, hasNumber } = window.BowelCancerScreeningFit;
 
 /**
  * @param {AssessmentData} data
@@ -110,5 +108,4 @@ function detectFlaggedIssues(data, grade) {
   return flags;
 }
 
-window.BowelCancerScreeningFit.detectFlaggedIssues = detectFlaggedIssues;
-})();
+export { detectFlaggedIssues };

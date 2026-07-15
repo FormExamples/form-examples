@@ -32,9 +32,6 @@
  */
 
 // Wrapped in an IIFE; published via window.WorkplaceClimateAssessment.
-(function () {
-'use strict';
-window.WorkplaceClimateAssessment = window.WorkplaceClimateAssessment || {};
 
 // ---------------------------------------------------------------------
 // Likert agreement scale (text labels for each numeric value 1..5)
@@ -299,16 +296,4 @@ const GRADED_DOMAIN_KEYS = [
   'collaboration', 'recognition', 'wellbeing', 'career'
 ];
 
-Object.assign(window.WorkplaceClimateAssessment, {
-  LIKERT_AGREEMENT,
-  DOMAINS,
-  surveyItems,
-  GRADED_DOMAIN_KEYS,
-  DEPARTMENT_OPTIONS,
-  TENURE_OPTIONS,
-  HOURS_OPTIONS,
-  ROLE_LEVEL_OPTIONS,
-  WORK_LOCATION_OPTIONS,
-  RECOMMEND_OPTIONS
-});
-})();
+export { LIKERT_AGREEMENT, DOMAINS, surveyItems, GRADED_DOMAIN_KEYS, DEPARTMENT_OPTIONS, TENURE_OPTIONS, HOURS_OPTIONS, ROLE_LEVEL_OPTIONS, WORK_LOCATION_OPTIONS, RECOMMEND_OPTIONS };

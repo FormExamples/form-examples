@@ -1,3 +1,5 @@
+import { isExerciseTest } from './types.js';
+
 // Four-axis rule catalogue for the Cardiac Stress Test Request engine.
 //
 // Derived from index.md and the SQL grade tables: (A) appropriateness 1-9 +
@@ -10,13 +12,6 @@
 // R-TRIAGE-*). Pure data + helpers; the grader composes them.
 //
 // Wrapped in an IIFE; published via `window.CardiacStressTestRequest`.
-
-(function () {
-'use strict';
-window.CardiacStressTestRequest =
-  window.CardiacStressTestRequest || {};
-const NS = window.CardiacStressTestRequest;
-const { isExerciseTest } = NS;
 
 // ----------------------------------------------------------------------
 // Axis A — Appropriateness (ACC/AHA Appropriate Use Criteria 1-9 ordinal)
@@ -330,17 +325,4 @@ function scoreTriage(data) {
   };
 }
 
-Object.assign(NS, {
-  scoreAppropriateness,
-  appropriatenessBand,
-  scoreSafety,
-  scoreCompleteness,
-  scoreTriage,
-  maxTier,
-  maxBand,
-  TRIAGE_ORDER,
-  CONTRAINDICATION_ORDER,
-  TARGET_TIMEFRAMES,
-  INDICATION_TEST_MAP
-});
-})();
+export { scoreAppropriateness, appropriatenessBand, scoreSafety, scoreCompleteness, scoreTriage, maxTier, maxBand, TRIAGE_ORDER, CONTRAINDICATION_ORDER, TARGET_TIMEFRAMES, INDICATION_TEST_MAP };

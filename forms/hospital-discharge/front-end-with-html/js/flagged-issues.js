@@ -11,9 +11,6 @@
  */
 
 // Wrapped in an IIFE; published via window.HospitalDischarge.
-(function () {
-'use strict';
-window.HospitalDischarge = window.HospitalDischarge || {};
 
 /**
  * @param {AssessmentData} data
@@ -241,5 +238,4 @@ function detectAdditionalFlags(data) {
   return flags;
 }
 
-window.HospitalDischarge.detectAdditionalFlags = detectAdditionalFlags;
-})();
+export { detectAdditionalFlags };

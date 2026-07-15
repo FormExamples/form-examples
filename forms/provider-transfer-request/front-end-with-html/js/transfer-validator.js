@@ -1,3 +1,5 @@
+import { validationRules } from './validation-rules.js';
+
 // Provider Transfer Request - completeness validator. Pure function: takes
 // an `AssessmentData` object and returns a `ValidationResult` with per-section
 // breakdown, an overall `CompletenessLevel`, and the list of fired
@@ -15,11 +17,6 @@
  * @typedef {import('./types.js').FiredRule} FiredRule
  * @typedef {import('./types.js').CompletenessLevel} CompletenessLevel
  */
-
-(function () {
-'use strict';
-window.ProviderTransferRequest = window.ProviderTransferRequest || {};
-const { validationRules } = window.ProviderTransferRequest;
 
 /**
  * @param {AssessmentData} data
@@ -109,5 +106,4 @@ function validateTransfer(data) {
   };
 }
 
-window.ProviderTransferRequest.validateTransfer = validateTransfer;
-})();
+export { validateTransfer };

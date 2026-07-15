@@ -1,3 +1,7 @@
+import { detectFlaggedIssues } from './flags.js';
+import { calculateGraceGrade } from './grader.js';
+import { bandLabel, emptyAssessment, priorityLabel, riskCategoryClass, riskCategoryLabel } from './types.js';
+
 // GRACE Score for Acute Coronary Syndrome — admission wizard
 // (vanilla JavaScript, no build).
 //
@@ -14,19 +18,6 @@
 // to `window.GraceScoreForAcuteCoronarySyndrome`. Pulling them off here keeps
 // the rest of this file referring to short local names. The whole file is
 // wrapped in an IIFE so its top-level identifiers don't leak.
-(function () {
-'use strict';
-
-const NS = window.GraceScoreForAcuteCoronarySyndrome;
-const {
-  emptyAssessment,
-  riskCategoryLabel,
-  riskCategoryClass,
-  bandLabel,
-  priorityLabel,
-  calculateGraceGrade,
-  detectFlaggedIssues
-} = NS;
 
 // ----------------------------------------------------------------------
 // Persistence
@@ -989,4 +980,3 @@ if (document.readyState === 'loading') {
 } else {
   init();
 }
-})();

@@ -156,9 +156,6 @@
 // classic <script> (no ES modules) so the page can be opened directly via
 // `file://`. The IIFE attaches its public symbols to a single global
 // namespace, `window.CognitiveAssessment`.
-(function () {
-'use strict';
-window.CognitiveAssessment = window.CognitiveAssessment || {};
 
 /**
  * Build a fresh, fully-blank assessment.
@@ -297,10 +294,4 @@ function mmseCategoryClass(score) {
   return 'cat-severe';
 }
 
-Object.assign(window.CognitiveAssessment, {
-  emptyAssessment,
-  calculateAge,
-  mmseCategory,
-  mmseCategoryClass
-});
-})();
+export { emptyAssessment, calculateAge, mmseCategory, mmseCategoryClass };

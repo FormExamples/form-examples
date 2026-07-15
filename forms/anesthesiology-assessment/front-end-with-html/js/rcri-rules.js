@@ -10,10 +10,6 @@
 // Score risk mapping: 0 = low, 1 = medium, 2 = high, >=3 = critical.
 // MACE risk per published Lee Index: 0=0.4%, 1=1.0%, 2=2.4%, >=3=5.4%.
 
-(function () {
-'use strict';
-window.AnesthesiologyAssessment = window.AnesthesiologyAssessment || {};
-
 function rcriRiskFromScore(score) {
   if (score >= 3) return 'critical';
   if (score === 2) return 'high';
@@ -98,9 +94,4 @@ function evaluateRcri(d) {
   };
 }
 
-Object.assign(window.AnesthesiologyAssessment, {
-  rcriRiskFromScore,
-  rcriMacePercent,
-  evaluateRcri
-});
-})();
+export { rcriRiskFromScore, rcriMacePercent, evaluateRcri };

@@ -1,3 +1,5 @@
+import { QTC_PROLONGED_MS, hasAbnormalRhythm, hasCriticalFinding } from './rules.js';
+
 // Safety-critical flag detection for the Electrocardiogram Test Result.
 //
 // Faithful vanilla-JavaScript port of the SvelteKit engine module
@@ -13,11 +15,6 @@
  */
 
 // Wrapped in an IIFE; published via window.ElectrocardiogramTestResult.
-(function () {
-'use strict';
-window.ElectrocardiogramTestResult = window.ElectrocardiogramTestResult || {};
-const { hasCriticalFinding, hasAbnormalRhythm, QTC_PROLONGED_MS } =
-  window.ElectrocardiogramTestResult;
 
 /**
  * Detect the safety-critical flags for a report.
@@ -146,7 +143,4 @@ function detectFlags(r) {
   return flags;
 }
 
-Object.assign(window.ElectrocardiogramTestResult, {
-  detectFlags
-});
-})();
+export { detectFlags };

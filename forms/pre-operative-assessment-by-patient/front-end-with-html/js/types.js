@@ -222,9 +222,6 @@
 // classic <script> (no ES modules) so the page can be opened directly via
 // `file://`. The IIFE attaches its public symbols to a single global
 // namespace, `window.PreOperativeAssessmentByPatient`.
-(function () {
-'use strict';
-window.PreOperativeAssessmentByPatient = window.PreOperativeAssessmentByPatient || {};
 
 /**
  * Build a fresh, fully-blank assessment.
@@ -422,13 +419,4 @@ function asaGradeClass(grade) {
   }
 }
 
-Object.assign(window.PreOperativeAssessmentByPatient, {
-  emptyAssessment,
-  calculateBMI,
-  bmiCategory,
-  estimateMETs,
-  calculateAge,
-  asaGradeLabel,
-  asaGradeClass
-});
-})();
+export { emptyAssessment, calculateBMI, bmiCategory, estimateMETs, calculateAge, asaGradeLabel, asaGradeClass };

@@ -141,9 +141,6 @@
 // classic <script> (no ES modules) so the page can be opened directly via
 // `file://`. The IIFE attaches its public symbols to a single global
 // namespace, `window.CytologyTestResult`.
-(function () {
-'use strict';
-window.CytologyTestResult = window.CytologyTestResult || {};
 
 /**
  * Build a fresh, fully-blank cytology test result.
@@ -331,19 +328,4 @@ function followUpUrgencyClass(value) {
   }
 }
 
-Object.assign(window.CytologyTestResult, {
-  emptyResult,
-  resultClassificationLabel,
-  abnormalitySeverityLabel,
-  followUpUrgencyLabel,
-  specimenTypeLabel,
-  reportStatusLabel,
-  specimenAdequacyLabel,
-  hpvResultLabel,
-  recommendationLabel,
-  priorityLabel,
-  resultClassificationClass,
-  abnormalitySeverityClass,
-  followUpUrgencyClass
-});
-})();
+export { emptyResult, resultClassificationLabel, abnormalitySeverityLabel, followUpUrgencyLabel, specimenTypeLabel, reportStatusLabel, specimenAdequacyLabel, hpvResultLabel, recommendationLabel, priorityLabel, resultClassificationClass, abnormalitySeverityClass, followUpUrgencyClass };

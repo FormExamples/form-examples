@@ -15,10 +15,6 @@
  * @typedef {'low' | 'moderate' | 'high' | 'critical'} RiskLevel
  */
 
-(function () {
-'use strict';
-window.SubstanceAbuseAssessment = window.SubstanceAbuseAssessment || {};
-
 /**
  * Build a fresh, fully-blank assessment.
  * Strings default to `''`; numeric fields default to `null`.
@@ -182,7 +178,4 @@ function emptyAssessment() {
   };
 }
 
-Object.assign(window.SubstanceAbuseAssessment, {
-  emptyAssessment
-});
-})();
+export { emptyAssessment };

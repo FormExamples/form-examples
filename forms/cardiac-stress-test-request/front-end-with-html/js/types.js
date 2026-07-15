@@ -7,11 +7,6 @@
 // convention. Wrapped in an IIFE; published via
 // `window.CardiacStressTestRequest`.
 
-(function () {
-'use strict';
-window.CardiacStressTestRequest =
-  window.CardiacStressTestRequest || {};
-
 /**
  * Build a fresh, fully-blank cardiac stress test request.
  * Strings default to ''; numeric / date fields default to null;
@@ -105,12 +100,4 @@ function isExerciseTest(testType) {
   return testType === 'exercise-treadmill-ecg' || testType === 'stress-echo';
 }
 
-Object.assign(window.CardiacStressTestRequest, {
-  emptyRequest,
-  testTypeLabel,
-  indicationLabel,
-  isExerciseTest,
-  TEST_TYPE_LABELS,
-  INDICATION_LABELS
-});
-})();
+export { emptyRequest, testTypeLabel, indicationLabel, isExerciseTest, TEST_TYPE_LABELS, INDICATION_LABELS };

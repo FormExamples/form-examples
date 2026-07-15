@@ -1,3 +1,6 @@
+import { fetchRequests } from './api.js';
+import { sampleRequests } from './data.js';
+
 // Electrocardiogram (ECG) Test Request — vetting dashboard
 // (vanilla classic-script app).
 //
@@ -11,12 +14,6 @@
 // attach their exports to `window.ElectrocardiogramTestRequestDashboard`.
 // The whole file is wrapped in an IIFE so its top-level identifiers do not
 // leak to the global scope.
-(function () {
-'use strict';
-const {
-  fetchRequests,
-  sampleRequests
-} = window.ElectrocardiogramTestRequestDashboard;
 
 // ----------------------------------------------------------------------
 // State
@@ -414,4 +411,3 @@ if (document.readyState === 'loading') {
 } else {
   init();
 }
-})();

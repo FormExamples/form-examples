@@ -5,11 +5,6 @@
 // rows span all three risk bands (low / raised / high) and every care setting,
 // with the statin flag set whenever the 10-year risk is >= 10% (NICE threshold).
 
-(function () {
-'use strict';
-window.Qrisk3CardiovascularDiseaseRiskScoreDashboard =
-  window.Qrisk3CardiovascularDiseaseRiskScoreDashboard || {};
-
 /** @type {import('./dashboard-types.js').AssessmentRow[]} */
 const sampleAssessments = [
   {
@@ -84,6 +79,4 @@ const sampleAssessments = [
   }
 ];
 
-window.Qrisk3CardiovascularDiseaseRiskScoreDashboard.sampleAssessments =
-  sampleAssessments;
-})();
+export { sampleAssessments };

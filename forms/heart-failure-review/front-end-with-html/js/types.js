@@ -107,9 +107,6 @@
 // classic <script> (no ES modules) so the page can be opened directly via
 // `file://`. The IIFE attaches its public symbols to a single global
 // namespace, `window.HeartFailureReview`.
-(function () {
-'use strict';
-window.HeartFailureReview = window.HeartFailureReview || {};
 
 /**
  * The four pillars of guideline-directed medical therapy, in order. Each entry
@@ -371,21 +368,4 @@ function priorityLabel(priority) {
   }
 }
 
-Object.assign(window.HeartFailureReview, {
-  PILLARS,
-  emptyReview,
-  functionalStatusLabel,
-  functionalStatusClass,
-  optimisationStatusLabel,
-  optimisationStatusClass,
-  reviewStatusLabel,
-  reviewStatusClass,
-  heartFailureTypeLabel,
-  clinicianRoleLabel,
-  careSettingLabel,
-  pillarStatusLabel,
-  sexLabel,
-  ageBandLabel,
-  priorityLabel
-});
-})();
+export { PILLARS, emptyReview, functionalStatusLabel, functionalStatusClass, optimisationStatusLabel, optimisationStatusClass, reviewStatusLabel, reviewStatusClass, heartFailureTypeLabel, clinicianRoleLabel, careSettingLabel, pillarStatusLabel, sexLabel, ageBandLabel, priorityLabel };

@@ -1,3 +1,7 @@
+import { detectAdditionalFlags } from './flags.js';
+import { restrictionRules } from './rules.js';
+import { gradeToPriority } from './types.js';
+
 // Grader for the Return to Work statement of fitness for work.
 //
 // Ported byte-for-byte from the Svelte engine (`src/lib/engine/rtw-grader.ts`).
@@ -10,17 +14,6 @@
 //     firedRules[], additionalFlags[], timestamp }
 //
 // Wrapped in an IIFE; published via `window.ReturnToWork`.
-
-(function () {
-'use strict';
-window.ReturnToWork =
-  window.ReturnToWork || {};
-const NS = window.ReturnToWork;
-const {
-  restrictionRules,
-  detectAdditionalFlags,
-  gradeToPriority
-} = NS;
 
 /** Derive the computed fitness statement from the clinician's outcome. */
 function deriveFitness(data) {
@@ -92,9 +85,4 @@ function calculateReturnToWork(data) {
   };
 }
 
-Object.assign(NS, {
-  calculateReturnToWork,
-  deriveFitness,
-  deriveRestrictionPriority
-});
-})();
+export { calculateReturnToWork, deriveFitness, deriveRestrictionPriority };

@@ -1,3 +1,7 @@
+import { detectFlaggedIssues } from './flags.js';
+import { calculateQsofaGrade } from './grader.js';
+import { emptyAssessment, priorityLabel, riskBandClass, riskBandLabel } from './types.js';
+
 // Quick Sequential Organ Failure Assessment (qSOFA) — bedside wizard
 // (vanilla JavaScript, no build).
 //
@@ -13,18 +17,6 @@
 // exports to `window.QuickSequentialOrganFailureAssessment`. Pulling them off
 // here keeps the rest of this file referring to short local names. The whole
 // file is wrapped in an IIFE so its top-level identifiers don't leak.
-(function () {
-'use strict';
-
-const NS = window.QuickSequentialOrganFailureAssessment;
-const {
-  emptyAssessment,
-  riskBandLabel,
-  riskBandClass,
-  priorityLabel,
-  calculateQsofaGrade,
-  detectFlaggedIssues
-} = NS;
 
 // ----------------------------------------------------------------------
 // Persistence
@@ -889,4 +881,3 @@ if (document.readyState === 'loading') {
 } else {
   init();
 }
-})();

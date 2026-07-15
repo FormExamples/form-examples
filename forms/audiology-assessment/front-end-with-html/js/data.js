@@ -7,10 +7,6 @@
 // with tinnitus flagged for a subset; NHS numbers in the canonical
 // "NNN NNN NNNN" display form.
 
-(function () {
-'use strict';
-window.AudiologyAssessmentDashboard = window.AudiologyAssessmentDashboard || {};
-
 /** @type {import('./types.js').PatientRow[]} */
 const samplePatients = [
   {
@@ -135,5 +131,4 @@ const samplePatients = [
   }
 ];
 
-window.AudiologyAssessmentDashboard.samplePatients = samplePatients;
-})();
+export { samplePatients };

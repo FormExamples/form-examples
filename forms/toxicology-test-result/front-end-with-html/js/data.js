@@ -7,11 +7,6 @@
 // bands, with critical-alert rows for a paracetamol overdose and a carbon
 // monoxide poisoning.
 
-(function () {
-'use strict';
-window.ToxicologyTestResultDashboard =
-  window.ToxicologyTestResultDashboard || {};
-
 /** @type {import('./dashboard-types.js').ReportRow[]} */
 const sampleReports = [
   {
@@ -100,5 +95,4 @@ const sampleReports = [
   }
 ];
 
-window.ToxicologyTestResultDashboard.sampleReports = sampleReports;
-})();
+export { sampleReports };

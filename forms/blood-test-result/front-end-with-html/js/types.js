@@ -159,9 +159,6 @@
 // classic <script> (no ES modules) so the page can be opened directly via
 // `file://`. The IIFE attaches its public symbols to a single global
 // namespace, `window.BloodTestResult`.
-(function () {
-'use strict';
-window.BloodTestResult = window.BloodTestResult || {};
 
 /**
  * Build a fresh, fully-blank blood test result.
@@ -381,20 +378,4 @@ function overallResultStatusClass(value) {
   }
 }
 
-Object.assign(window.BloodTestResult, {
-  emptyResult,
-  resultClassificationLabel,
-  abnormalitySeverityLabel,
-  followUpUrgencyLabel,
-  overallResultStatusLabel,
-  reportStatusLabel,
-  specimenTypeLabel,
-  specimenConditionLabel,
-  recommendationLabel,
-  priorityLabel,
-  resultClassificationClass,
-  abnormalitySeverityClass,
-  followUpUrgencyClass,
-  overallResultStatusClass
-});
-})();
+export { emptyResult, resultClassificationLabel, abnormalitySeverityLabel, followUpUrgencyLabel, overallResultStatusLabel, reportStatusLabel, specimenTypeLabel, specimenConditionLabel, recommendationLabel, priorityLabel, resultClassificationClass, abnormalitySeverityClass, followUpUrgencyClass, overallResultStatusClass };

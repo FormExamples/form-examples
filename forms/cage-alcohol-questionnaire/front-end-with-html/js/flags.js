@@ -16,10 +16,6 @@
  */
 
 // Wrapped in an IIFE; published via window.CageAlcoholQuestionnaire.
-(function () {
-'use strict';
-window.CageAlcoholQuestionnaire =
-  window.CageAlcoholQuestionnaire || {};
 
 /**
  * @param {AssessmentData} data
@@ -94,5 +90,4 @@ function detectFlaggedIssues(data, cageScore) {
   return flags;
 }
 
-window.CageAlcoholQuestionnaire.detectFlaggedIssues = detectFlaggedIssues;
-})();
+export { detectFlaggedIssues };

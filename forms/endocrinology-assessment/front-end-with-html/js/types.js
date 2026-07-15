@@ -200,9 +200,6 @@
 // classic <script> (no ES modules) so the page can be opened directly via
 // `file://`. The IIFE attaches its public symbols to a single global
 // namespace, `window.EndocrinologyAssessment`.
-(function () {
-'use strict';
-window.EndocrinologyAssessment = window.EndocrinologyAssessment || {};
 
 /**
  * Build a fresh, fully-blank assessment.
@@ -375,12 +372,4 @@ function maxStatus(a, b) {
   return (order[a] || 0) >= (order[b] || 0) ? a : b;
 }
 
-Object.assign(window.EndocrinologyAssessment, {
-  emptyAssessment,
-  calculateBMI,
-  bmiCategory,
-  axisStatusLabel,
-  axisStatusClass,
-  maxStatus
-});
-})();
+export { emptyAssessment, calculateBMI, bmiCategory, axisStatusLabel, axisStatusClass, maxStatus };

@@ -15,10 +15,6 @@
 //
 // NHS numbers are in the canonical "NNN NNN NNNN" display form.
 
-(function () {
-'use strict';
-window.GeneticsAssessmentDashboard = window.GeneticsAssessmentDashboard || {};
-
 /** @type {import('./types.js').PatientRow[]} */
 const samplePatients = [
   {
@@ -167,5 +163,4 @@ const samplePatients = [
   }
 ];
 
-window.GeneticsAssessmentDashboard.samplePatients = samplePatients;
-})();
+export { samplePatients };

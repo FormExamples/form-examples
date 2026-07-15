@@ -1,9 +1,5 @@
 // Instruction rule family.
 
-(function () {
-'use strict';
-window.UkLpaForm = window.UkLpaForm || {};
-
 const PROHIBITED_PATTERNS = [
   /assist(ed|ing)?\s+(suicide|dying|death)/i,
   /euthana/i,
@@ -70,5 +66,4 @@ function applyInstructionRules(app) {
   return fired;
 }
 
-window.UkLpaForm.applyInstructionRules = applyInstructionRules;
-})();
+export { applyInstructionRules };

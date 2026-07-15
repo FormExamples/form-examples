@@ -6,10 +6,6 @@
 // or returns an empty list, callers fall back to the sample data shipped in
 // `data.js` so the page is usable standalone.
 
-(function () {
-'use strict';
-window.HeartFailureReviewDashboard = window.HeartFailureReviewDashboard || {};
-
 const API_BASE = 'http://localhost:5150';
 const REVIEWS_PATH = '/api/dashboard/reviews';
 
@@ -32,6 +28,4 @@ async function fetchReviews() {
   return data.items || [];
 }
 
-window.HeartFailureReviewDashboard.fetchReviews = fetchReviews;
-window.HeartFailureReviewDashboard.API_BASE = API_BASE;
-})();
+export { fetchReviews, API_BASE };

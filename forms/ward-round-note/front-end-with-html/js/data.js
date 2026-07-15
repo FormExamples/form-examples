@@ -5,10 +5,6 @@
 // The rows span all three completeness statuses, the full completeness-percent
 // range, a variety of clinician grades and wards, and both safety-flag states.
 
-(function () {
-'use strict';
-window.WardRoundNoteDashboard = window.WardRoundNoteDashboard || {};
-
 /** @type {import('./dashboard-types.js').NoteRow[]} */
 const sampleNotes = [
   {
@@ -101,5 +97,4 @@ const sampleNotes = [
   }
 ];
 
-window.WardRoundNoteDashboard.sampleNotes = sampleNotes;
-})();
+export { sampleNotes };

@@ -10,12 +10,6 @@
 // Flag IDs are stable and identical across every front-end and the back-end.
 // Wrapped in an IIFE; published via `window.ElectroencephalogramTestRequest`.
 
-(function () {
-'use strict';
-window.ElectroencephalogramTestRequest =
-  window.ElectroencephalogramTestRequest || {};
-const NS = window.ElectroencephalogramTestRequest;
-
 // Phrases that imply the EEG is being requested to rule out / exclude
 // epilepsy — contrary to NICE NG217.
 const EXCLUDE_EPILEPSY_PATTERNS = [
@@ -116,5 +110,4 @@ function impliesExcludeEpilepsy(d) {
   return EXCLUDE_EPILEPSY_PATTERNS.some((p) => q.includes(p));
 }
 
-Object.assign(NS, { detectFlags });
-})();
+export { detectFlags };

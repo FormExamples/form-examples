@@ -18,10 +18,6 @@
  */
 
 // Wrapped in an IIFE; published via window.CentorScoreForStreptococcalPharyngitis.
-(function () {
-'use strict';
-window.CentorScoreForStreptococcalPharyngitis =
-  window.CentorScoreForStreptococcalPharyngitis || {};
 
 /**
  * @param {AssessmentData} data
@@ -117,6 +113,4 @@ function detectFlaggedIssues(data, mcIsaacScore) {
   return flags;
 }
 
-window.CentorScoreForStreptococcalPharyngitis.detectFlaggedIssues =
-  detectFlaggedIssues;
-})();
+export { detectFlaggedIssues };

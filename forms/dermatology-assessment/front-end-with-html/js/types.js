@@ -172,9 +172,6 @@
 // classic <script> (no ES modules) so the page can be opened directly via
 // `file://`. The IIFE attaches its public symbols to a single global
 // namespace, `window.DermatologyAssessment`.
-(function () {
-'use strict';
-window.DermatologyAssessment = window.DermatologyAssessment || {};
 
 /**
  * Build a fresh, fully-blank assessment.
@@ -299,10 +296,4 @@ function fitzpatrickUVRisk(type) {
   }
 }
 
-Object.assign(window.DermatologyAssessment, {
-  emptyAssessment,
-  calculateAge,
-  fitzpatrickLabel,
-  fitzpatrickUVRisk
-});
-})();
+export { emptyAssessment, calculateAge, fitzpatrickLabel, fitzpatrickUVRisk };

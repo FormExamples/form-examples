@@ -1,3 +1,6 @@
+import { review } from './grader.js';
+import { albuminuriaCategoryClass, albuminuriaCategoryLabel, emptyAssessment, gfrCategoryClass, gfrCategoryLabel, kdigoRiskZoneClass, kdigoRiskZoneLabel, priorityClass, priorityLabel, referralDecisionLabel, reviewStatusClass, reviewStatusLabel } from './types.js';
+
 // Chronic Kidney Disease Annual Review — single-page wizard (vanilla
 // JavaScript, no build).
 //
@@ -14,25 +17,6 @@
 // Sibling files loaded as plain `<script>` tags (in order) attach their exports
 // to `window.ChronicKidneyDiseaseReview`. The whole file is wrapped in an IIFE
 // so its top-level identifiers don't leak.
-(function () {
-'use strict';
-
-const NS = window.ChronicKidneyDiseaseReview;
-const {
-  emptyAssessment,
-  gfrCategoryLabel,
-  gfrCategoryClass,
-  albuminuriaCategoryLabel,
-  albuminuriaCategoryClass,
-  kdigoRiskZoneLabel,
-  kdigoRiskZoneClass,
-  reviewStatusLabel,
-  reviewStatusClass,
-  referralDecisionLabel,
-  priorityLabel,
-  priorityClass,
-  review
-} = NS;
 
 // ----------------------------------------------------------------------
 // Persistence
@@ -995,4 +979,3 @@ if (document.readyState === 'loading') {
 } else {
   init();
 }
-})();

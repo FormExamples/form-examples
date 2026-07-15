@@ -5,11 +5,6 @@
 // The rows span the AUDIT-C score range (0-12), all four risk bands, and every
 // care setting, with the positive-screen flag set whenever the score is >= 5.
 
-(function () {
-'use strict';
-window.AlcoholUseDisordersIdentificationTestConsumptionDashboard =
-  window.AlcoholUseDisordersIdentificationTestConsumptionDashboard || {};
-
 /** @type {import('./dashboard-types.js').AssessmentRow[]} */
 const sampleAssessments = [
   {
@@ -94,6 +89,4 @@ const sampleAssessments = [
   }
 ];
 
-window.AlcoholUseDisordersIdentificationTestConsumptionDashboard.sampleAssessments =
-  sampleAssessments;
-})();
+export { sampleAssessments };

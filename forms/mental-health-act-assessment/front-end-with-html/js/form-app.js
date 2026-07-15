@@ -1,3 +1,7 @@
+import { detectFlaggedIssues } from './flags.js';
+import { gradeMentalHealthActAssessment } from './grader.js';
+import { completenessStatusClass, completenessStatusLabel, criterionLabel, emptyAssessment, outcomeLabel, priorityLabel, sectionClassLabel, urgencyClass, urgencyLabel } from './types.js';
+
 // Mental Health Act Assessment — wizard (vanilla JavaScript, no build).
 //
 // Single-page continuous wizard: every step is rendered into the page in
@@ -16,23 +20,6 @@
 // Sibling files loaded as plain `<script>` tags (in order) attach their exports
 // to `window.MentalHealthActAssessment`. The whole file is wrapped in an IIFE so
 // its top-level identifiers do not leak.
-(function () {
-'use strict';
-
-const NS = window.MentalHealthActAssessment;
-const {
-  emptyAssessment,
-  completenessStatusLabel,
-  completenessStatusClass,
-  sectionClassLabel,
-  urgencyLabel,
-  urgencyClass,
-  criterionLabel,
-  outcomeLabel,
-  priorityLabel,
-  gradeMentalHealthActAssessment,
-  detectFlaggedIssues
-} = NS;
 
 // ----------------------------------------------------------------------
 // Persistence
@@ -1077,4 +1064,3 @@ if (document.readyState === 'loading') {
 } else {
   init();
 }
-})();

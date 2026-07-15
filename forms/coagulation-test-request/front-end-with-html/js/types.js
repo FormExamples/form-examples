@@ -7,10 +7,6 @@
 // examples convention (snake_case in SQL). Wrapped in an IIFE; published via
 // `window.CoagulationTestRequest`.
 
-(function () {
-'use strict';
-window.CoagulationTestRequest = window.CoagulationTestRequest || {};
-
 /**
  * Canonical list of the orderable coagulation tests. The `field` is the
  * camelCase property on the `tests` section (matches the SQL boolean column
@@ -114,12 +110,4 @@ function indicationLabel(value) {
   return INDICATION_LABELS[value] || value || '';
 }
 
-Object.assign(window.CoagulationTestRequest, {
-  emptyRequest,
-  countSelectedTests,
-  selectedTestLabels,
-  indicationLabel,
-  INDICATION_LABELS,
-  TESTS
-});
-})();
+export { emptyRequest, countSelectedTests, selectedTestLabels, indicationLabel, INDICATION_LABELS, TESTS };

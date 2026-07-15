@@ -1,3 +1,5 @@
+import { validationRules } from './validation-rules.js';
+
 // Pure offboarding checklist validator. Takes an `AssessmentData` object,
 // returns the outcome (Complete / Partial / Incomplete), the completion
 // percentage (0-100, based on mandatory items satisfied), the list of
@@ -18,10 +20,6 @@
  */
 
 // Wrapped in an IIFE; published via window.EmployeeOffboardingChecklist.
-(function () {
-'use strict';
-window.EmployeeOffboardingChecklist = window.EmployeeOffboardingChecklist || {};
-const NS = window.EmployeeOffboardingChecklist;
 
 /**
  * Validate an offboarding checklist.
@@ -47,7 +45,7 @@ function validateChecklist(data) {
   let anyOutstanding = false;
   let anyMandatoryBlockerOutstanding = false;
 
-  for (const rule of NS.validationRules) {
+  for (const rule of validationRules) {
     let outstanding = false;
     try {
       outstanding = !!rule.evaluate(data);
@@ -106,5 +104,4 @@ function validateChecklist(data) {
   };
 }
 
-window.EmployeeOffboardingChecklist.validateChecklist = validateChecklist;
-})();
+export { validateChecklist };

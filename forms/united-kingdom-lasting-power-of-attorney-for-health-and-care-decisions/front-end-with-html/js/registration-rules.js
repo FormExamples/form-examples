@@ -1,9 +1,5 @@
 // Registration rule family.
 
-(function () {
-'use strict';
-window.UkLpaForm = window.UkLpaForm || {};
-
 function applyRegistrationRules(app) {
   const fired = [];
   const reg = app.registration;
@@ -63,5 +59,4 @@ function applyRegistrationRules(app) {
   return fired;
 }
 
-window.UkLpaForm.applyRegistrationRules = applyRegistrationRules;
-})();
+export { applyRegistrationRules };

@@ -1,3 +1,7 @@
+import { detectAdditionalFlags } from './flagged-issues.js';
+import { calculateOnboardingGrade, countCompletedItems } from './onboarding-grader.js';
+import { completionStatusClass, completionStatusLabel, emptyAssessment, gradeClass, gradeLabel, riskLevelClass, riskLevelLabel } from './types.js';
+
 // Employee Onboarding Checklist — HR / line-manager wizard (vanilla JS).
 //
 // Single-page continuous wizard: every section is rendered into the page in
@@ -12,22 +16,6 @@
 // keeps the rest of this file referring to short local names. The whole
 // file is wrapped in an IIFE so its top-level identifiers don't leak to
 // the global scope.
-(function () {
-'use strict';
-
-const NS = window.EmployeeOnboardingChecklist;
-const {
-  emptyAssessment,
-  calculateOnboardingGrade,
-  countCompletedItems,
-  detectAdditionalFlags,
-  completionStatusLabel,
-  completionStatusClass,
-  riskLevelLabel,
-  riskLevelClass,
-  gradeLabel,
-  gradeClass
-} = NS;
 
 // ----------------------------------------------------------------------
 // Persistence
@@ -1571,4 +1559,3 @@ if (document.readyState === 'loading') {
 // Silence unused-variable lint for `conditional` helper if a step
 // doesn't reach for it; it is defined for future use.
 void conditional;
-})();

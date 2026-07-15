@@ -1,3 +1,6 @@
+import { nihssItems } from './nihss-rules.js';
+import { nihssCategory } from './types.js';
+
 // NIHSS grader. Pure functions: take an `AssessmentData` object and produce
 // the total NIHSS score (0-42), its category label, and the list of fired
 // rules (NIHSS items that contributed any non-zero score). Items left
@@ -16,10 +19,6 @@
  */
 
 // Wrapped in an IIFE; published via window.StrokeAssessment.
-(function () {
-'use strict';
-window.StrokeAssessment = window.StrokeAssessment || {};
-const NS = window.StrokeAssessment;
 
 /**
  * Calculate the NIHSS score from patient assessment data.
@@ -27,7 +26,7 @@ const NS = window.StrokeAssessment;
  * @returns {{ nihssScore: number, nihssCategoryLabel: string, firedRules: FiredRule[] }}
  */
 function calculateNIHSS(data) {
-  const { nihssItems, nihssCategory } = NS;
+  
   /** @type {FiredRule[]} */
   const firedRules = [];
 
@@ -72,5 +71,4 @@ function calculateNIHSS(data) {
   return { nihssScore, nihssCategoryLabel, firedRules };
 }
 
-window.StrokeAssessment.calculateNIHSS = calculateNIHSS;
-})();
+export { calculateNIHSS };

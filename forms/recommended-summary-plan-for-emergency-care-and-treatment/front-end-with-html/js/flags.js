@@ -21,10 +21,6 @@
 
 // Wrapped in an IIFE; published via
 // window.RecommendedSummaryPlanForEmergencyCareAndTreatment.
-(function () {
-'use strict';
-window.RecommendedSummaryPlanForEmergencyCareAndTreatment =
-  window.RecommendedSummaryPlanForEmergencyCareAndTreatment || {};
 
 const nonEmpty = (s) => typeof s === 'string' && s.trim() !== '';
 
@@ -149,6 +145,4 @@ function detectFlaggedIssues(plan, today) {
   return flags;
 }
 
-window.RecommendedSummaryPlanForEmergencyCareAndTreatment.detectFlaggedIssues =
-  detectFlaggedIssues;
-})();
+export { detectFlaggedIssues };

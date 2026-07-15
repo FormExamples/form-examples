@@ -5,10 +5,6 @@
 // Twelve realistic rows: spans every severity band, three with suicidal-
 // ideation flag, NHS numbers in the canonical "NNN NNN NNNN" display form.
 
-(function () {
-'use strict';
-window.PsychologyAssessmentDashboard = window.PsychologyAssessmentDashboard || {};
-
 /** @type {import('./types.js').PatientRow[]} */
 const samplePatients = [
   {
@@ -133,5 +129,4 @@ const samplePatients = [
   }
 ];
 
-window.PsychologyAssessmentDashboard.samplePatients = samplePatients;
-})();
+export { samplePatients };

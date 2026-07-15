@@ -1,9 +1,9 @@
-(function () {
-  'use strict';
+import { calculateMaturity } from './engine.js';
+import { PRINCIPLES } from './principles.js';
 
-  const NS = window.AgilePrinciplesAssessment;
-  const PRINCIPLES = NS.PRINCIPLES;
-  const calculateMaturity = NS.calculateMaturity;
+  
+  
+  
 
   const ROLES = [
     { value: '', label: '—' },
@@ -483,4 +483,3 @@
     document.getElementById('submit-btn').addEventListener('click', renderReport);
     document.getElementById('reset-btn').addEventListener('click', reset);
   });
-})();

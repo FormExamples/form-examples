@@ -1,3 +1,5 @@
+import { hba1cMmolMol } from './types.js';
+
 // Diabetes control rules - declarative and pure. Each rule reads the full
 // AssessmentData and returns true / false. Mirrors
 // `src/lib/engine/diabetes-rules.ts` from the Svelte reference.
@@ -15,11 +17,6 @@
  * @property {string} concernLevel
  * @property {(d: AssessmentData) => boolean} evaluate
  */
-
-(function () {
-'use strict';
-window.DiabetesAssessment = window.DiabetesAssessment || {};
-const { hba1cMmolMol } = window.DiabetesAssessment;
 
 /** @type {DiabetesRule[]} */
 const allRules = [
@@ -233,5 +230,4 @@ function evaluateRules(data) {
   return fired;
 }
 
-Object.assign(window.DiabetesAssessment, { allRules, evaluateRules });
-})();
+export { allRules, evaluateRules };

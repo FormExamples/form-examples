@@ -18,10 +18,6 @@
  */
 
 // Wrapped in an IIFE; published via window.MedicalCertificateOfCauseOfDeath.
-(function () {
-'use strict';
-window.MedicalCertificateOfCauseOfDeath =
-  window.MedicalCertificateOfCauseOfDeath || {};
 
 const nonEmpty = (s) => typeof s === 'string' && s.trim() !== '';
 
@@ -178,17 +174,4 @@ function underlyingCause(d) {
   return '';
 }
 
-Object.assign(window.MedicalCertificateOfCauseOfDeath, {
-  nonEmpty,
-  normalise,
-  CORONER_REASONS,
-  MODES,
-  coronerReferralIndicated,
-  soleCause,
-  isUnacceptableMode,
-  unacceptableSoleCause,
-  missingPartIa,
-  illogicalSequence,
-  underlyingCause
-});
-})();
+export { nonEmpty, normalise, CORONER_REASONS, MODES, coronerReferralIndicated, soleCause, isUnacceptableMode, unacceptableSoleCause, missingPartIa, illogicalSequence, underlyingCause };

@@ -28,9 +28,6 @@
  */
 
 // Wrapped in an IIFE; published via window.ZaritBurdenInterview.
-(function () {
-'use strict';
-window.ZaritBurdenInterview = window.ZaritBurdenInterview || {};
 
 // The 12-item short-form subset (spec §3 / §4).
 const SHORT_FORM_ITEMS = [1, 2, 3, 6, 9, 10, 11, 12, 17, 20, 21, 22];
@@ -120,13 +117,4 @@ function itemByNumber(number) {
   return zaritItems.find((it) => it.number === number);
 }
 
-Object.assign(window.ZaritBurdenInterview, {
-  zaritItems,
-  SHORT_FORM_ITEMS,
-  RESPONSE_SCALE,
-  activeItemNumbers,
-  maxScoreFor,
-  ratingValue,
-  itemByNumber
-});
-})();
+export { zaritItems, SHORT_FORM_ITEMS, RESPONSE_SCALE, activeItemNumbers, maxScoreFor, ratingValue, itemByNumber };

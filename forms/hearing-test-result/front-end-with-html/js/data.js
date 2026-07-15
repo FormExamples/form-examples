@@ -7,11 +7,6 @@
 // bands, with critical-alert rows whose sudden sensorineural loss or marked
 // asymmetry raised multiple flags.
 
-(function () {
-'use strict';
-window.HearingTestResultDashboard =
-  window.HearingTestResultDashboard || {};
-
 /** @type {import('./dashboard-types.js').ReportRow[]} */
 const sampleReports = [
   {
@@ -100,5 +95,4 @@ const sampleReports = [
   }
 ];
 
-window.HearingTestResultDashboard.sampleReports = sampleReports;
-})();
+export { sampleReports };

@@ -1,3 +1,6 @@
+import { num } from './grader.js';
+import { ANURIA_ABSOLUTE_ML, ANURIA_MIN_HOURS, ANURIA_RATE_ML_PER_KG_PER_HOUR, OLIGURIA_MIN_HOURS, OLIGURIA_RATE_ML_PER_KG_PER_HOUR } from './rules.js';
+
 // Flagged-issue detection (safety flags). Emitted independently of the
 // fluid-status classification (spec §5). Each flag mirrors a category in the
 // `fluid_balance_chart_grade_flag` SQL table:
@@ -18,17 +21,6 @@
  */
 
 // Wrapped in an IIFE; published via window.FluidBalanceChart.
-(function () {
-'use strict';
-window.FluidBalanceChart = window.FluidBalanceChart || {};
-const {
-  OLIGURIA_RATE_ML_PER_KG_PER_HOUR,
-  ANURIA_RATE_ML_PER_KG_PER_HOUR,
-  OLIGURIA_MIN_HOURS,
-  ANURIA_MIN_HOURS,
-  ANURIA_ABSOLUTE_ML,
-  num
-} = window.FluidBalanceChart;
 
 /**
  * @param {ChartData} data
@@ -140,5 +132,4 @@ function detectFlaggedIssues(data, grade) {
   return flags;
 }
 
-window.FluidBalanceChart.detectFlaggedIssues = detectFlaggedIssues;
-})();
+export { detectFlaggedIssues };

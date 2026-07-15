@@ -1,3 +1,6 @@
+import { detectFlags } from './flags.js';
+import { scoreAppropriateness, scoreCompleteness, scorePriority, scoreUrgency } from './rules.js';
+
 // Four-axis grader for the Mammography Test Request.
 //
 // Composes the rule sets in rules.js and the safety flags in flags.js into a
@@ -7,19 +10,6 @@
 // mammography_test_request_grade SQL columns.
 //
 // Wrapped in an IIFE; published via `window.MammographyTestRequest`.
-
-(function () {
-'use strict';
-window.MammographyTestRequest =
-  window.MammographyTestRequest || {};
-const NS = window.MammographyTestRequest;
-const {
-  scoreAppropriateness,
-  scoreUrgency,
-  scoreCompleteness,
-  scorePriority,
-  detectFlags
-} = NS;
 
 /**
  * Derive an overall vetting recommendation from the four axes. Least-alarming
@@ -106,9 +96,4 @@ function calculateGrade(data) {
   };
 }
 
-Object.assign(NS, {
-  calculateGrade,
-  deriveRecommendation,
-  RECOMMENDATION_LABELS
-});
-})();
+export { calculateGrade, deriveRecommendation, RECOMMENDATION_LABELS };

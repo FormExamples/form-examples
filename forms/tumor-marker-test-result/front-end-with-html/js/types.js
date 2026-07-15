@@ -150,9 +150,6 @@
 // classic <script> (no ES modules) so the page can be opened directly via
 // `file://`. The IIFE attaches its public symbols to a single global
 // namespace, `window.TumorMarkerTestResult`.
-(function () {
-'use strict';
-window.TumorMarkerTestResult = window.TumorMarkerTestResult || {};
 
 /**
  * The ten measured serum tumour markers, with display metadata. Mirrors the
@@ -352,20 +349,4 @@ function followUpUrgencyClass(value) {
   }
 }
 
-Object.assign(window.TumorMarkerTestResult, {
-  MARKERS,
-  AFP_CRITICAL,
-  BETA_HCG_CRITICAL,
-  emptyResult,
-  resultClassificationLabel,
-  abnormalitySeverityLabel,
-  followUpUrgencyLabel,
-  trendLabel,
-  reportStatusLabel,
-  recommendationLabel,
-  priorityLabel,
-  resultClassificationClass,
-  abnormalitySeverityClass,
-  followUpUrgencyClass
-});
-})();
+export { MARKERS, AFP_CRITICAL, BETA_HCG_CRITICAL, emptyResult, resultClassificationLabel, abnormalitySeverityLabel, followUpUrgencyLabel, trendLabel, reportStatusLabel, recommendationLabel, priorityLabel, resultClassificationClass, abnormalitySeverityClass, followUpUrgencyClass };

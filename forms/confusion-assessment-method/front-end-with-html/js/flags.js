@@ -20,9 +20,6 @@
  */
 
 // Wrapped in an IIFE; published via window.ConfusionAssessmentMethod.
-(function () {
-'use strict';
-window.ConfusionAssessmentMethod = window.ConfusionAssessmentMethod || {};
 
 /**
  * @param {AssessmentData} data
@@ -127,5 +124,4 @@ function detectFlaggedIssues(data, grade) {
   return flags;
 }
 
-window.ConfusionAssessmentMethod.detectFlaggedIssues = detectFlaggedIssues;
-})();
+export { detectFlaggedIssues };

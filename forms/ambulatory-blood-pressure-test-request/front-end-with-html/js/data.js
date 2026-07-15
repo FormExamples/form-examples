@@ -8,11 +8,6 @@
 // request, a severe-hypertension urgent case, an atrial-fibrillation accuracy
 // case, and a missing-clinic-BP case.
 
-(function () {
-'use strict';
-window.AmbulatoryBloodPressureTestRequestDashboard =
-  window.AmbulatoryBloodPressureTestRequestDashboard || {};
-
 /** @type {import('./types.js').RequestRow[]} */
 const sampleRequests = [
   {
@@ -167,5 +162,4 @@ const sampleRequests = [
   }
 ];
 
-window.AmbulatoryBloodPressureTestRequestDashboard.sampleRequests = sampleRequests;
-})();
+export { sampleRequests };

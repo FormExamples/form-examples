@@ -10,9 +10,6 @@
  */
 
 // Wrapped in an IIFE; published via window.MobilityAssessment.
-(function () {
-'use strict';
-window.MobilityAssessment = window.MobilityAssessment || {};
 
 /**
  * @param {AssessmentData} data
@@ -190,5 +187,4 @@ function detectAdditionalFlags(data) {
   return flags;
 }
 
-window.MobilityAssessment.detectAdditionalFlags = detectAdditionalFlags;
-})();
+export { detectAdditionalFlags };

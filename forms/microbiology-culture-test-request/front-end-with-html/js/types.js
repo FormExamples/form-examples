@@ -8,11 +8,6 @@
 // `test_*` columns in SQL migration 04. Wrapped in an IIFE; published via
 // `window.MicrobiologyCultureTestRequest`.
 
-(function () {
-'use strict';
-window.MicrobiologyCultureTestRequest =
-  window.MicrobiologyCultureTestRequest || {};
-
 /**
  * Build a fresh, fully-blank microbiology culture request.
  * Strings default to ''; date / time fields default to ''; boolean test and
@@ -134,14 +129,4 @@ function indicationLabel(value) {
   return INDICATION_LABELS[value] || value || '';
 }
 
-Object.assign(window.MicrobiologyCultureTestRequest, {
-  emptyRequest,
-  TEST_FIELDS,
-  countSelectedTests,
-  anyTestSelected,
-  specimenTypeLabel,
-  SPECIMEN_TYPE_LABELS,
-  indicationLabel,
-  INDICATION_LABELS
-});
-})();
+export { emptyRequest, TEST_FIELDS, countSelectedTests, anyTestSelected, specimenTypeLabel, SPECIMEN_TYPE_LABELS, indicationLabel, INDICATION_LABELS };

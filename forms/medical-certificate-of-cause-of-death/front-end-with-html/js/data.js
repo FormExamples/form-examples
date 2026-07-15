@@ -6,11 +6,6 @@
 // coroner-referral case and an unacceptable-sole-cause case, and cover a range
 // of underlying causes.
 
-(function () {
-'use strict';
-window.MedicalCertificateOfCauseOfDeathDashboard =
-  window.MedicalCertificateOfCauseOfDeathDashboard || {};
-
 /** @type {import('./dashboard-types.js').CertificateRow[]} */
 const sampleCertificates = [
   {
@@ -85,6 +80,4 @@ const sampleCertificates = [
   }
 ];
 
-window.MedicalCertificateOfCauseOfDeathDashboard.sampleCertificates =
-  sampleCertificates;
-})();
+export { sampleCertificates };

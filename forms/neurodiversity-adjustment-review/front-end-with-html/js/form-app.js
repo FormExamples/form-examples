@@ -1,3 +1,6 @@
+import { calculateGrade } from './grader.js';
+import { effectivenessBandLabel, emptyReview, nextStepUrgencyLabel, reviewStatusLabel, wellbeingRiskBandLabel } from './types.js';
+
 // Neurodiversity Adjustment Review — effectiveness-review wizard (vanilla JS).
 //
 // Single-page continuous wizard: every section is rendered into the page in
@@ -9,19 +12,6 @@
 // Sibling files loaded as plain `<script>` tags (in order) attach their exports
 // to `window.NeurodiversityAdjustmentReview`. The whole file is wrapped in an
 // IIFE so its top-level identifiers don't leak to the global scope.
-
-(function () {
-'use strict';
-
-const NS = window.NeurodiversityAdjustmentReview;
-const {
-  emptyReview,
-  calculateGrade,
-  effectivenessBandLabel,
-  wellbeingRiskBandLabel,
-  nextStepUrgencyLabel,
-  reviewStatusLabel
-} = NS;
 
 // ----------------------------------------------------------------------
 // Persistence
@@ -939,4 +929,3 @@ if (document.readyState === 'loading') {
 } else {
   init();
 }
-})();

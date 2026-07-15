@@ -7,11 +7,6 @@
 // the required worked cases: a routine cancer-staging FDG-PET-CT, an
 // uncontrolled-glucose case, and a pregnancy case.
 
-(function () {
-'use strict';
-window.PetScanTestRequestDashboard =
-  window.PetScanTestRequestDashboard || {};
-
 /** @type {import('./types.js').RequestRow[]} */
 const sampleRequests = [
   {
@@ -166,5 +161,4 @@ const sampleRequests = [
   }
 ];
 
-window.PetScanTestRequestDashboard.sampleRequests = sampleRequests;
-})();
+export { sampleRequests };

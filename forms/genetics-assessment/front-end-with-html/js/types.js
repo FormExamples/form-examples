@@ -294,9 +294,6 @@
 // classic <script> (no ES modules) so the page can be opened directly via
 // `file://`. The IIFE attaches its public symbols to a single global
 // namespace, `window.GeneticsAssessment`.
-(function () {
-'use strict';
-window.GeneticsAssessment = window.GeneticsAssessment || {};
 
 /** Build a fresh, empty fixed-slot Relative.
  *  @param {{relation: string, side: 'maternal' | 'paternal' | 'self' | '',
@@ -543,13 +540,4 @@ function calculateAge(dob) {
   return age;
 }
 
-Object.assign(window.GeneticsAssessment, {
-  emptyFixedRelative,
-  emptyRelative,
-  emptyAssessment,
-  riskLevelLabel,
-  riskLevelClass,
-  maxRiskLevel,
-  calculateAge
-});
-})();
+export { emptyFixedRelative, emptyRelative, emptyAssessment, riskLevelLabel, riskLevelClass, maxRiskLevel, calculateAge };

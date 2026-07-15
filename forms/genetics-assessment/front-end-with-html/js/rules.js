@@ -45,10 +45,6 @@
  * @property {boolean} hasMultiplePrimaries
  */
 
-(function () {
-'use strict';
-window.GeneticsAssessment = window.GeneticsAssessment || {};
-
 /** @type {GeneticsRule[]} */
 const rules = [
   // ─── Manchester Score thresholds (BRCA1/2) ────────────────
@@ -213,5 +209,4 @@ const rules = [
   }
 ];
 
-window.GeneticsAssessment.rules = rules;
-})();
+export { rules };

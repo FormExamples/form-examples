@@ -2,9 +2,6 @@
 // score. Mirrors `src/lib/engine/flagged-issues.ts` from the SvelteKit
 // reference. Loaded as a classic <script>; attaches `detectAdditionalFlags`
 // to `window.PrenatalAssessment`.
-(function () {
-'use strict';
-window.PrenatalAssessment = window.PrenatalAssessment || {};
 
 function detectAdditionalFlags(data) {
   const flags = [];
@@ -221,5 +218,4 @@ function detectAdditionalFlags(data) {
   return flags;
 }
 
-Object.assign(window.PrenatalAssessment, { detectAdditionalFlags });
-})();
+export { detectAdditionalFlags };

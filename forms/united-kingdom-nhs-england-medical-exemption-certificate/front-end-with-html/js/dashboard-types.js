@@ -1,7 +1,6 @@
-(function (root) {
-  const F = root.Fp92aDashboard || (root.Fp92aDashboard = {});
+  
 
-  F.CONDITION_LABELS = {
+  export const CONDITION_LABELS = {
     "permanent-fistula": "Permanent fistula",
     "hypoadrenalism": "Hypoadrenalism",
     "diabetes-insipidus-or-hypopituitarism": "Diabetes insipidus / hypopituitarism",
@@ -14,13 +13,13 @@
     "cancer-or-effects": "Cancer-related",
   };
 
-  F.OUTCOME_LABELS = {
+  export const OUTCOME_LABELS = {
     "eligible": "Eligible",
     "ineligible": "Ineligible",
     "requires-clarification": "Requires clarification",
   };
 
-  F.STATUS_LABELS = {
+  export const STATUS_LABELS = {
     "draft": "Draft",
     "ready-to-post": "Ready to post",
     "posted": "Posted",
@@ -29,4 +28,3 @@
     "expired": "Expired",
     "cancelled": "Cancelled",
   };
-})(window);

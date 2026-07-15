@@ -7,11 +7,6 @@
 // negative result, and several screening hubs. Faecal Hb is null when there is
 // no valid result (non-return or spoilt sample).
 
-(function () {
-'use strict';
-window.BowelCancerScreeningFitDashboard =
-  window.BowelCancerScreeningFitDashboard || {};
-
 /** @type {import('./dashboard-types.js').AssessmentRow[]} */
 const sampleAssessments = [
   {
@@ -93,6 +88,4 @@ const sampleAssessments = [
   }
 ];
 
-window.BowelCancerScreeningFitDashboard.sampleAssessments =
-  sampleAssessments;
-})();
+export { sampleAssessments };

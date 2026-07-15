@@ -1,9 +1,5 @@
 // Certificate-provider rule family.
 
-(function () {
-'use strict';
-window.UkLpaForm = window.UkLpaForm || {};
-
 function applyCertificateProviderRules(app) {
   const fired = [];
   const cp = app.certificateProvider;
@@ -97,5 +93,4 @@ function applyCertificateProviderRules(app) {
   return fired;
 }
 
-window.UkLpaForm.applyCertificateProviderRules = applyCertificateProviderRules;
-})();
+export { applyCertificateProviderRules };

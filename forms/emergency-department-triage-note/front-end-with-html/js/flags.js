@@ -20,9 +20,6 @@
  */
 
 // Wrapped in an IIFE; published via window.EmergencyDepartmentTriageNote.
-(function () {
-'use strict';
-window.EmergencyDepartmentTriageNote = window.EmergencyDepartmentTriageNote || {};
 
 /**
  * @param {AssessmentData} data
@@ -142,5 +139,4 @@ function detectFlaggedIssues(data, result) {
   return flags;
 }
 
-window.EmergencyDepartmentTriageNote.detectFlaggedIssues = detectFlaggedIssues;
-})();
+export { detectFlaggedIssues };

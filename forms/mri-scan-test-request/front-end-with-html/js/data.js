@@ -8,11 +8,6 @@
 // conditional/implant case, a contraindicated pacemaker case, and a
 // gadolinium-renal case.
 
-(function () {
-'use strict';
-window.MriScanTestRequestDashboard =
-  window.MriScanTestRequestDashboard || {};
-
 /** @type {import('./types.js').RequestRow[]} */
 const sampleRequests = [
   {
@@ -157,5 +152,4 @@ const sampleRequests = [
   }
 ];
 
-window.MriScanTestRequestDashboard.sampleRequests = sampleRequests;
-})();
+export { sampleRequests };

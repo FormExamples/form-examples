@@ -119,9 +119,6 @@
 // classic <script> (no ES modules) so the page can be opened directly via
 // `file://`. The IIFE attaches its public symbols to a single global
 // namespace, `window.GlasgowBlatchfordBleedingScore`.
-(function () {
-'use strict';
-window.GlasgowBlatchfordBleedingScore = window.GlasgowBlatchfordBleedingScore || {};
 
 /**
  * Build a fresh, fully-blank assessment.
@@ -257,16 +254,4 @@ function priorityLabel(priority) {
   }
 }
 
-Object.assign(window.GlasgowBlatchfordBleedingScore, {
-  emptyAssessment,
-  riskBandLabel,
-  riskBandCss,
-  clinicianRoleLabel,
-  careSettingLabel,
-  presentingComplaintLabel,
-  sexLabel,
-  ageBandLabel,
-  yesNoLabel,
-  priorityLabel
-});
-})();
+export { emptyAssessment, riskBandLabel, riskBandCss, clinicianRoleLabel, careSettingLabel, presentingComplaintLabel, sexLabel, ageBandLabel, yesNoLabel, priorityLabel };

@@ -1,3 +1,5 @@
+import { classifyProblem, hasEvaluation, hasGoal, hasIntervention } from './rules.js';
+
 // Flagged-issue detection for the Nursing Care Plan.
 //
 // Emitted independently of the plan status. Each issue carries a priority
@@ -17,11 +19,6 @@
  */
 
 // Wrapped in an IIFE; published via window.NursingCarePlan.
-(function () {
-'use strict';
-window.NursingCarePlan = window.NursingCarePlan || {};
-const { hasGoal, hasIntervention, hasEvaluation, classifyProblem } =
-  window.NursingCarePlan;
 
 // The four referenced risk assessments, mapped to the `linkedRisk` code a
 // problem uses to claim it.
@@ -149,5 +146,4 @@ function detectFlags(plan) {
   return flags;
 }
 
-window.NursingCarePlan.detectFlags = detectFlags;
-})();
+export { detectFlags };

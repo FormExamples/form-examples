@@ -1,9 +1,7 @@
-(function () {
-  'use strict';
-  const NS = (window.AgilePrinciplesDashboard = window.AgilePrinciplesDashboard || {});
+  
   const API_BASE = '/api/assessments';
 
-  NS.fetchAssessments = function () {
+  export const fetchAssessments = function () {
     return fetch(API_BASE)
       .then(function (res) {
         if (!res.ok) throw new Error('API ' + res.status);
@@ -11,4 +9,3 @@
       })
       .catch(function () { return NS.SAMPLE_ASSESSMENTS; });
   };
-})();

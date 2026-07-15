@@ -8,11 +8,6 @@
 // routine barium-swallow, a pregnancy case, a contrast-allergy case, and a
 // suspected-perforation case.
 
-(function () {
-'use strict';
-window.FluoroscopyTestRequestDashboard =
-  window.FluoroscopyTestRequestDashboard || {};
-
 /** @type {import('./types.js').RequestRow[]} */
 const sampleRequests = [
   {
@@ -167,5 +162,4 @@ const sampleRequests = [
   }
 ];
 
-window.FluoroscopyTestRequestDashboard.sampleRequests = sampleRequests;
-})();
+export { sampleRequests };

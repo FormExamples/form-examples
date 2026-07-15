@@ -18,10 +18,6 @@
  */
 
 // Wrapped in an IIFE; published via window.EdinburghPostnatalDepressionScale.
-(function () {
-'use strict';
-window.EdinburghPostnatalDepressionScale =
-  window.EdinburghPostnatalDepressionScale || {};
 
 /**
  * @param {AssessmentData} data
@@ -115,6 +111,4 @@ function detectFlaggedIssues(data, grade) {
   return flags;
 }
 
-window.EdinburghPostnatalDepressionScale.detectFlaggedIssues =
-  detectFlaggedIssues;
-})();
+export { detectFlaggedIssues };

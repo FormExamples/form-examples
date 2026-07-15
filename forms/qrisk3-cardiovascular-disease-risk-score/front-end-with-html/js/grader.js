@@ -1,3 +1,6 @@
+import { model } from './rules.js';
+import { ckdStageLabel, diabetesLabel, ethnicityLabel, smokingLabel } from './types.js';
+
 // QRISK3 grader. Pure functions: take an `AssessmentData` object, build a
 // weighted linear predictor from the representative coefficient tables in
 // `rules.js`, and map it through an approximate baseline survival to a 10-year
@@ -28,17 +31,11 @@
  */
 
 // Wrapped in an IIFE; published via window.Qrisk3CardiovascularDiseaseRiskScore.
-(function () {
-'use strict';
-const NS = window.Qrisk3CardiovascularDiseaseRiskScore =
-  window.Qrisk3CardiovascularDiseaseRiskScore || {};
-const {
-  ethnicityLabel, smokingLabel, diabetesLabel, ckdStageLabel
-} = NS;
+
 const {
   MEANS, SEX_MODEL, CONTINUOUS_WEIGHTS, SMOKING_WEIGHTS, DIABETES_WEIGHTS,
   ETHNICITY_WEIGHTS, CKD_WEIGHTS, BINARY_WEIGHTS
-} = NS.model;
+} = model;
 
 const YES_NO_LABEL = { yes: 'Yes', no: 'No', '': 'Not recorded' };
 
@@ -229,11 +226,4 @@ function calculateQrisk3Grade(data) {
   };
 }
 
-Object.assign(window.Qrisk3CardiovascularDiseaseRiskScore, {
-  hasRequiredInputs,
-  buildContributions,
-  riskFromLinearPredictor,
-  estimateHeartAge,
-  calculateQrisk3Grade
-});
-})();
+export { hasRequiredInputs, buildContributions, riskFromLinearPredictor, estimateHeartAge, calculateQrisk3Grade };

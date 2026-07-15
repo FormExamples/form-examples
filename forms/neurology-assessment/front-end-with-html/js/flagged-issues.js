@@ -13,9 +13,6 @@
  */
 
 // Wrapped in an IIFE; published via window.NeurologyAssessment.
-(function () {
-'use strict';
-window.NeurologyAssessment = window.NeurologyAssessment || {};
 
 /**
  * @param {AssessmentData} data
@@ -215,5 +212,4 @@ function detectAdditionalFlags(data) {
   return flags;
 }
 
-window.NeurologyAssessment.detectAdditionalFlags = detectAdditionalFlags;
-})();
+export { detectAdditionalFlags };

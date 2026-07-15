@@ -1,8 +1,8 @@
+import { computePeriodDays, countAdaptations } from './types.js';
+
 /* UK Fit Note — grading engine: validity, adaptation, period, safety. */
 
-(function () {
-  'use strict';
-  const ns = (window.FitNote = window.FitNote || {});
+  
 
   const AUTO_DISABILITY_REGEX = /\b(hiv|human immunodeficiency virus|cancer|carcinoma|malignan|neoplasm|multiple sclerosis|\bms\b)\b/i;
   const DRIVING_REGEX = /\b(should not drive|must not drive|do not drive|no driving)\b/i;
@@ -27,7 +27,7 @@
     return 'compliant';
   }
 
-  ns.gradeFitNote = function gradeFitNote(fitNote) {
+  export const gradeFitNote = function gradeFitNote(fitNote) {
     const firedRules = [];
     const flags = [];
 
@@ -51,7 +51,7 @@
     const isValid = !firedRules.some(r => r.ruleSet === 'validity' && r.severity === 'high');
 
     // Adaptation rules -------------------------------------------------------
-    const adaptationCount = ns.countAdaptations(fitNote);
+    const adaptationCount = countAdaptations(fitNote);
     let adaptationIntensity = '';
     if (fitNote.fitnessForWork === 'may_be_fit') {
       adaptationIntensity = classifyAdaptation(adaptationCount);
@@ -71,7 +71,7 @@
     }
 
     // Period rules -----------------------------------------------------------
-    const periodDays = ns.computePeriodDays(fitNote);
+    const periodDays = computePeriodDays(fitNote);
     let withinFirst6Months = '';
     if (fitNote.conditionFirstRecordedDate && fitNote.assessmentDate) {
       const condition = new Date(fitNote.conditionFirstRecordedDate);
@@ -171,4 +171,3 @@
       safetyFlags: flags,
     };
   };
-})();

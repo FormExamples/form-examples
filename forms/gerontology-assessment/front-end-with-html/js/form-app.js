@@ -1,3 +1,8 @@
+import { calculateCFS } from './cfs-grader.js';
+import { detectAdditionalFlags } from './flagged-issues.js';
+import { emptyAssessment } from './types.js';
+import { bmiCategory, calculateAge, calculateBMI, cfsScoreClass, cfsScoreLabel } from './utils.js';
+
 // Gerontology Assessment - patient wizard (vanilla JavaScript, no build).
 //
 // Single-page continuous wizard: every section is rendered into the page in
@@ -11,20 +16,6 @@
 // the rest of this file referring to short local names. Whole file is
 // wrapped in an IIFE so its top-level identifiers don't leak to the
 // global scope.
-(function () {
-'use strict';
-
-const NS = window.GerontologyAssessment;
-const {
-  emptyAssessment,
-  calculateBMI,
-  bmiCategory,
-  calculateAge,
-  cfsScoreLabel,
-  cfsScoreClass,
-  calculateCFS,
-  detectAdditionalFlags
-} = NS;
 
 // ----------------------------------------------------------------------
 // Persistence
@@ -121,7 +112,6 @@ function lilyInputClass(type) {
     default:       return 'text-input';
   }
 }
-
 
 function textInput(opts) {
   const id = `${opts.section}-${opts.field}`;
@@ -1269,4 +1259,3 @@ if (document.readyState === 'loading') {
 } else {
   init();
 }
-})();

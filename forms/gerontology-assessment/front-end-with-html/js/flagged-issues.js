@@ -1,3 +1,5 @@
+import { calculateAge } from './utils.js';
+
 // Flagged-issue detection for the Gerontology Assessment.
 // Mirrors `src/lib/engine/flagged-issues.ts` from the SvelteKit reference.
 //
@@ -6,11 +8,6 @@
 // malnutrition, severe frailty, pressure-injury risk, depression, social
 // isolation, advance directives, continence, very advanced age, and poor
 // medication adherence. Flags are sorted high > medium > low.
-
-(function () {
-'use strict';
-window.GerontologyAssessment = window.GerontologyAssessment || {};
-const { calculateAge } = window.GerontologyAssessment;
 
 function detectAdditionalFlags(data) {
   const flags = [];
@@ -241,5 +238,4 @@ function detectAdditionalFlags(data) {
   return flags;
 }
 
-window.GerontologyAssessment.detectAdditionalFlags = detectAdditionalFlags;
-})();
+export { detectAdditionalFlags };

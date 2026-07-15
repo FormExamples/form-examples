@@ -7,10 +7,6 @@
 // Green-Book vaccine names so the missing-list cell reads as a clinically
 // useful catch-up plan.
 
-(function () {
-'use strict';
-window.VaccinationsChecklistDashboard = window.VaccinationsChecklistDashboard || {};
-
 /** @type {import('./types.js').PatientRow[]} */
 const samplePatients = [
   // ── Childhood (0-18) ────────────────────────────────────────────────
@@ -164,5 +160,4 @@ const samplePatients = [
   }
 ];
 
-window.VaccinationsChecklistDashboard.samplePatients = samplePatients;
-})();
+export { samplePatients };

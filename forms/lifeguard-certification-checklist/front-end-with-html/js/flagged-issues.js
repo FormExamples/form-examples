@@ -1,3 +1,5 @@
+import { COMPRESSION_DEPTH_MAX, COMPRESSION_DEPTH_MIN, COMPRESSION_RATE_MAX, COMPRESSION_RATE_MIN, SLOW_AED_SECONDS, SURFACE_DIVE_MIN_METRES, SWIM_200M_MAX_SECONDS, SWIM_50M_MAX_SECONDS, compressionDepthInRange, compressionRateInRange, surfaceDiveDepthAdequate, swim200mWithinTarget, swim50mWithinTarget } from './types.js';
+
 // Prioritised flag detection for the Lifeguard Competency Verification
 // report. Independent of the pass/fail/needs-development outcome
 // (which the grader computes), this module surfaces flags for examiner
@@ -18,28 +20,6 @@
  * @typedef {import('./types.js').AdditionalFlag} AdditionalFlag
  * @typedef {import('./types.js').FiredRule} FiredRule
  */
-
-(function () {
-'use strict';
-window.LifeguardCertificationChecklist =
-  window.LifeguardCertificationChecklist || {};
-
-const NS = window.LifeguardCertificationChecklist;
-const {
-  SWIM_50M_MAX_SECONDS,
-  SWIM_200M_MAX_SECONDS,
-  COMPRESSION_RATE_MIN,
-  COMPRESSION_RATE_MAX,
-  COMPRESSION_DEPTH_MIN,
-  COMPRESSION_DEPTH_MAX,
-  SLOW_AED_SECONDS,
-  SURFACE_DIVE_MIN_METRES,
-  swim50mWithinTarget,
-  swim200mWithinTarget,
-  compressionRateInRange,
-  compressionDepthInRange,
-  surfaceDiveDepthAdequate
-} = NS;
 
 /**
  * Build the list of flagged issues for the examiner report.
@@ -235,7 +215,4 @@ function detectAdditionalFlags(data, grading) {
   return flags;
 }
 
-Object.assign(NS, {
-  detectAdditionalFlags
-});
-})();
+export { detectAdditionalFlags };

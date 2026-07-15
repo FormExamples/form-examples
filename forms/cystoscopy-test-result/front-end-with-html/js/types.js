@@ -149,9 +149,6 @@
 // classic <script> (no ES modules) so the page can be opened directly via
 // `file://`. The IIFE attaches its public symbols to a single global
 // namespace, `window.CystoscopyTestResult`.
-(function () {
-'use strict';
-window.CystoscopyTestResult = window.CystoscopyTestResult || {};
 
 /**
  * Build a fresh, fully-blank cystoscopy test result.
@@ -355,20 +352,4 @@ function followUpUrgencyClass(value) {
   }
 }
 
-Object.assign(window.CystoscopyTestResult, {
-  emptyResult,
-  resultClassificationLabel,
-  abnormalitySeverityLabel,
-  followUpUrgencyLabel,
-  procedureLabel,
-  anaesthesiaLabel,
-  tumourAppearanceLabel,
-  complicationLabel,
-  reportStatusLabel,
-  recommendationLabel,
-  priorityLabel,
-  resultClassificationClass,
-  abnormalitySeverityClass,
-  followUpUrgencyClass
-});
-})();
+export { emptyResult, resultClassificationLabel, abnormalitySeverityLabel, followUpUrgencyLabel, procedureLabel, anaesthesiaLabel, tumourAppearanceLabel, complicationLabel, reportStatusLabel, recommendationLabel, priorityLabel, resultClassificationClass, abnormalitySeverityClass, followUpUrgencyClass };

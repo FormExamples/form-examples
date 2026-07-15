@@ -1,3 +1,8 @@
+import { gradeFirstAid } from './first-aid-grader.js';
+import { detectAdditionalFlags } from './flagged-issues.js';
+import { fawRules } from './rules.js';
+import { emptyAssessment, outcomeClass, outcomeLabel, triStateLabel, triStatePillClass } from './types.js';
+
 // First Aid Training Checklist — examiner wizard (vanilla JS).
 //
 // Single-page continuous wizard: every section is rendered into the page in
@@ -13,20 +18,6 @@
 // rules → first-aid-grader → flagged-issues → app) attach their exports to
 // `window.FirstAidTrainingChecklist`. The whole file is wrapped in an IIFE
 // so its top-level identifiers don't leak to the global scope.
-(function () {
-'use strict';
-
-const NS = window.FirstAidTrainingChecklist;
-const {
-  emptyAssessment,
-  outcomeLabel,
-  outcomeClass,
-  triStateLabel,
-  triStatePillClass,
-  fawRules,
-  gradeFirstAid,
-  detectAdditionalFlags
-} = NS;
 
 // ----------------------------------------------------------------------
 // Persistence
@@ -1046,4 +1037,3 @@ if (document.readyState === 'loading') {
 } else {
   init();
 }
-})();

@@ -1,3 +1,5 @@
+import { classifyPhq9, classifySpaq, phq9Items, spaqItems } from './sad-rules.js';
+
 // Pure SAD grader. Takes an `AssessmentData` object and returns the SPAQ
 // total + band, the PHQ-9 total + band, the combined severity, and the
 // audit trail of fired rules.
@@ -18,14 +20,6 @@
  * @typedef {import('./types.js').SpaqBand} SpaqBand
  * @typedef {import('./types.js').Phq9Band} Phq9Band
  */
-
-(function () {
-'use strict';
-window.SeasonalAffectiveDisorderAssessment =
-  window.SeasonalAffectiveDisorderAssessment || {};
-
-const NS = window.SeasonalAffectiveDisorderAssessment;
-const { spaqItems, phq9Items, classifySpaq, classifyPhq9 } = NS;
 
 /**
  * Grade a SAD assessment.
@@ -119,7 +113,4 @@ function gradeSAD(data) {
   };
 }
 
-Object.assign(window.SeasonalAffectiveDisorderAssessment, {
-  gradeSAD
-});
-})();
+export { gradeSAD };

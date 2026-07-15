@@ -1,3 +1,7 @@
+import { detectFlags } from './flags.js';
+import { classifyResponse, gradeCompleteness, gradeFollowUp, gradeSeverity } from './rules.js';
+import { flatten, recommendationLabel } from './types.js';
+
 // Four-axis grader for the Cardiology Response.
 //
 // Composes the rule sets in rules.js and the safety flags in flags.js into a
@@ -11,21 +15,6 @@
 // least-urgent band is only chosen when no rule fires.
 //
 // Wrapped in an IIFE; published via `window.CardiologyResponse`.
-
-(function () {
-'use strict';
-window.CardiologyResponse =
-  window.CardiologyResponse || {};
-const NS = window.CardiologyResponse;
-const {
-  flatten,
-  classifyResponse,
-  gradeSeverity,
-  gradeCompleteness,
-  gradeFollowUp,
-  detectFlags,
-  recommendationLabel
-} = NS;
 
 /**
  * Derive the overall recommendation from the graded axes. A critical result
@@ -105,8 +94,4 @@ function calculateGrade(data) {
   };
 }
 
-Object.assign(NS, {
-  calculateGrade,
-  deriveRecommendation
-});
-})();
+export { calculateGrade, deriveRecommendation };

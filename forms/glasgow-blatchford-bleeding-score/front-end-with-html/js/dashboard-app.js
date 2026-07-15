@@ -1,3 +1,6 @@
+import { fetchAssessments } from './api.js';
+import { sampleAssessments } from './data.js';
+
 // Glasgow-Blatchford Bleeding Score — clinician dashboard (vanilla
 // classic-script app).
 //
@@ -9,12 +12,6 @@
 // Sibling modules loaded as plain `<script>` tags (in dependency order) attach
 // their exports to `window.GlasgowBlatchfordBleedingScoreDashboard`. The whole
 // file is wrapped in an IIFE so its top-level identifiers do not leak.
-(function () {
-'use strict';
-const {
-  fetchAssessments,
-  sampleAssessments
-} = window.GlasgowBlatchfordBleedingScoreDashboard;
 
 // ----------------------------------------------------------------------
 // State
@@ -386,4 +383,3 @@ if (document.readyState === 'loading') {
 } else {
   init();
 }
-})();

@@ -1,3 +1,6 @@
+import { detectFlags } from './flags.js';
+import { evaluateSuitability, scoreAppropriateness, scoreCompleteness, scoreTriage } from './rules.js';
+
 // Four-axis grader for the Ultrasound Test Request
 // (general, non-obstetric diagnostic ultrasound).
 //
@@ -7,19 +10,6 @@
 // across every front-end and the back-end.
 //
 // Wrapped in an IIFE; published via `window.UltrasoundTestRequest`.
-
-(function () {
-'use strict';
-window.UltrasoundTestRequest =
-  window.UltrasoundTestRequest || {};
-const NS = window.UltrasoundTestRequest;
-const {
-  scoreAppropriateness,
-  evaluateSuitability,
-  scoreCompleteness,
-  scoreTriage,
-  detectFlags
-} = NS;
 
 /**
  * Derive an overall recommendation for the imaging vetting desk from the four
@@ -106,9 +96,4 @@ function calculateGrade(data) {
   };
 }
 
-Object.assign(NS, {
-  calculateGrade,
-  deriveRecommendation,
-  RECOMMENDATION_LABELS
-});
-})();
+export { calculateGrade, deriveRecommendation, RECOMMENDATION_LABELS };

@@ -8,11 +8,6 @@
 // cases: a routine surveillance request, a two-week-wait suspected-cancer
 // case, and a high-bleeding-risk anticoagulant case.
 
-(function () {
-'use strict';
-window.EndoscopyTestRequestDashboard =
-  window.EndoscopyTestRequestDashboard || {};
-
 /** @type {import('./types.js').RequestRow[]} */
 const sampleRequests = [
   {
@@ -167,5 +162,4 @@ const sampleRequests = [
   }
 ];
 
-window.EndoscopyTestRequestDashboard.sampleRequests = sampleRequests;
-})();
+export { sampleRequests };

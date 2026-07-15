@@ -1,3 +1,5 @@
+import { calculateWoundArea } from './types.js';
+
 // Flagged-issue detection. Independent of the Braden total (which the
 // grader computes), this module raises clinician-facing flags for
 // pressure-ulcer staging, wound infection, anaphylactic-priority alerts
@@ -11,11 +13,6 @@
  */
 
 // Wrapped in an IIFE; published via window.IntegumentaryAssessment.
-(function () {
-'use strict';
-window.IntegumentaryAssessment = window.IntegumentaryAssessment || {};
-
-const { calculateWoundArea } = window.IntegumentaryAssessment;
 
 /**
  * @param {AssessmentData} data
@@ -307,5 +304,4 @@ function detectAdditionalFlags(data) {
   return flags;
 }
 
-window.IntegumentaryAssessment.detectAdditionalFlags = detectAdditionalFlags;
-})();
+export { detectAdditionalFlags };

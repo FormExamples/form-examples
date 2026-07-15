@@ -25,9 +25,6 @@
  */
 
 // Wrapped in an IIFE; published via window.SportsMedicineAssessment.
-(function () {
-'use strict';
-window.SportsMedicineAssessment = window.SportsMedicineAssessment || {};
 
 const isYes = (v) => v === 'yes';
 const isHighContact = (d) => d.sportPositionDetails.contactLevel === 'high';
@@ -358,5 +355,4 @@ const ppeRules = [
   }
 ];
 
-window.SportsMedicineAssessment.ppeRules = ppeRules;
-})();
+export { ppeRules };

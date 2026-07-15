@@ -1,3 +1,5 @@
+import { scoreCapillaryRefill, scoreConsciousness, scoreHeartRate, scoreOxygenSaturation, scoreRespiratoryEffort, scoreRespiratoryRate, scoreSupplementalOxygen } from './rules.js';
+
 // PEWS grader. Pure functions: take an `AssessmentData` object, score each
 // parameter via the band tables in `rules.js` (the two rate parameters against
 // the selected age band), sum the aggregate, take the maximum single-parameter
@@ -27,19 +29,6 @@
  */
 
 // Wrapped in an IIFE; published via window.PaediatricEarlyWarningScore.
-(function () {
-'use strict';
-window.PaediatricEarlyWarningScore = window.PaediatricEarlyWarningScore || {};
-const NS = window.PaediatricEarlyWarningScore;
-const {
-  scoreRespiratoryRate,
-  scoreHeartRate,
-  scoreRespiratoryEffort,
-  scoreOxygenSaturation,
-  scoreSupplementalOxygen,
-  scoreCapillaryRefill,
-  scoreConsciousness
-} = NS;
 
 // Severity ranking so we can take the worst of two bands.
 const BAND_SEVERITY = { 'routine': 0, 'low': 1, 'medium': 2, 'high': 3 };
@@ -294,11 +283,4 @@ function gradePews(data) {
   };
 }
 
-Object.assign(window.PaediatricEarlyWarningScore, {
-  computeSubscores,
-  aggregateBand,
-  worstBand,
-  gradePews,
-  PARAMETER_KEYS
-});
-})();
+export { computeSubscores, aggregateBand, worstBand, gradePews, PARAMETER_KEYS };

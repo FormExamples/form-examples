@@ -204,9 +204,6 @@
 // classic <script> (no ES modules) so the page can be opened directly via
 // `file://`. The IIFE attaches its public symbols to a single global
 // namespace, `window.OphthalmologyAssessment`.
-(function () {
-'use strict';
-window.OphthalmologyAssessment = window.OphthalmologyAssessment || {};
 
 /**
  * Build a fresh, fully-blank assessment.
@@ -379,10 +376,4 @@ function vaGradeClass(grade) {
   }
 }
 
-Object.assign(window.OphthalmologyAssessment, {
-  emptyAssessment,
-  snellenToDecimal,
-  vaGradeLabel,
-  vaGradeClass
-});
-})();
+export { emptyAssessment, snellenToDecimal, vaGradeLabel, vaGradeClass };

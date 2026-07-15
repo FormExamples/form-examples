@@ -8,11 +8,6 @@
 // an emergency sudden-visual-loss case, a retinal-detachment (flashes /
 // floaters) case, and a suspected giant cell arteritis case.
 
-(function () {
-'use strict';
-window.EyeVisionTestRequestDashboard =
-  window.EyeVisionTestRequestDashboard || {};
-
 /** @type {import('./types.js').RequestRow[]} */
 const sampleRequests = [
   {
@@ -167,5 +162,4 @@ const sampleRequests = [
   }
 ];
 
-window.EyeVisionTestRequestDashboard.sampleRequests = sampleRequests;
-})();
+export { sampleRequests };

@@ -182,10 +182,6 @@
 // (no ES modules) so the page can be opened directly via `file://`.
 // Public symbols are attached to the global namespace
 // `window.LifeguardCertificationChecklist`.
-(function () {
-'use strict';
-window.LifeguardCertificationChecklist =
-  window.LifeguardCertificationChecklist || {};
 
 /** Build a fresh, fully-blank assessment.
  *  Strings default to ''; numeric fields default to null.
@@ -394,25 +390,4 @@ function surfaceDiveDepthAdequate(m) {
   return m !== null && m !== undefined && m >= SURFACE_DIVE_MIN_METRES;
 }
 
-Object.assign(window.LifeguardCertificationChecklist, {
-  emptyAssessment,
-  outcomeLabel,
-  outcomeClass,
-  triStateLabel,
-  triStatePillClass,
-  CRITICAL_RULE_IDS,
-  SWIM_50M_MAX_SECONDS,
-  SWIM_200M_MAX_SECONDS,
-  COMPRESSION_RATE_MIN,
-  COMPRESSION_RATE_MAX,
-  COMPRESSION_DEPTH_MIN,
-  COMPRESSION_DEPTH_MAX,
-  SLOW_AED_SECONDS,
-  SURFACE_DIVE_MIN_METRES,
-  swim50mWithinTarget,
-  swim200mWithinTarget,
-  compressionRateInRange,
-  compressionDepthInRange,
-  surfaceDiveDepthAdequate
-});
-})();
+export { emptyAssessment, outcomeLabel, outcomeClass, triStateLabel, triStatePillClass, CRITICAL_RULE_IDS, SWIM_50M_MAX_SECONDS, SWIM_200M_MAX_SECONDS, COMPRESSION_RATE_MIN, COMPRESSION_RATE_MAX, COMPRESSION_DEPTH_MIN, COMPRESSION_DEPTH_MAX, SLOW_AED_SECONDS, SURFACE_DIVE_MIN_METRES, swim50mWithinTarget, swim200mWithinTarget, compressionRateInRange, compressionDepthInRange, surfaceDiveDepthAdequate };

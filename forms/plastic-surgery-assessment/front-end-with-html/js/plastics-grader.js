@@ -1,3 +1,6 @@
+import { detectAdditionalFlags } from './flagged-issues.js';
+import { plasticsRules } from './plastics-rules.js';
+
 // Pure plastic surgery grading engine. Mirrors the SvelteKit reference
 // `plastics-grader.ts`: derives ASA class, wound class, complexity score,
 // runs every declarative rule, and reduces fired-rule grades plus the three
@@ -9,11 +12,6 @@
  * @typedef {import('./types.js').GradingResult} GradingResult
  * @typedef {import('./types.js').RiskLevel} RiskLevel
  */
-
-(function () {
-'use strict';
-window.PlasticSurgeryAssessment = window.PlasticSurgeryAssessment || {};
-const { plasticsRules, detectAdditionalFlags } = window.PlasticSurgeryAssessment;
 
 /** Derive ASA class from clinician input. */
 function deriveASAClass(data) {
@@ -108,5 +106,4 @@ function calculatePlasticsGrade(data) {
   };
 }
 
-window.PlasticSurgeryAssessment.calculatePlasticsGrade = calculatePlasticsGrade;
-})();
+export { calculatePlasticsGrade };

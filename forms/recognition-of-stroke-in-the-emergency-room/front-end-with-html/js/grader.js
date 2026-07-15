@@ -1,3 +1,5 @@
+import { rosierRules } from './rules.js';
+
 // ROSIER grader. Pure functions: take an `AssessmentData` object, evaluate the
 // seven signed criterion rules in `rosierRules`, award -1 (mimic) or +1 (sign)
 // each, sum the signed total (-2..+5), and derive the band with the strict > 0
@@ -27,11 +29,6 @@
  */
 
 // Wrapped in an IIFE; published via window.RecognitionOfStrokeInTheEmergencyRoom.
-(function () {
-'use strict';
-window.RecognitionOfStrokeInTheEmergencyRoom =
-  window.RecognitionOfStrokeInTheEmergencyRoom || {};
-const { rosierRules } = window.RecognitionOfStrokeInTheEmergencyRoom;
 
 /**
  * Evaluate the seven ROSIER criterion rules and collect the ones that fired.
@@ -118,8 +115,4 @@ function calculateRosierGrade(data) {
   };
 }
 
-Object.assign(window.RecognitionOfStrokeInTheEmergencyRoom, {
-  evaluateCriteria,
-  calculateRosierGrade
-});
-})();
+export { evaluateCriteria, calculateRosierGrade };

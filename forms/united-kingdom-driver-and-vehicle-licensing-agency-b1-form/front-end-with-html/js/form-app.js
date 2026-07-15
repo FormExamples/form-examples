@@ -1,3 +1,7 @@
+import { validateB1 } from './b1-validator.js';
+import { detectFlaggedIssues } from './flagged-issues.js';
+import { emptyAssessment, epilepsyDeclarationRequired, hasText, isYesNoAnswered, priorityLabel, sectionLabel } from './types.js';
+
 // DVLA B1 form - patient wizard (vanilla JS, classic <script>).
 //
 // Single-page continuous wizard: every section is rendered into the page in
@@ -8,19 +12,6 @@
 // survives a page reload. Conditional sections (Q4 No -> skip Q5/Q6, Q10 No
 // -> skip Q10a/b, Q12 No -> skip Q12a/b, epilepsy declaration when
 // applicable) are hidden via re-render.
-
-(function () {
-'use strict';
-const {
-  emptyAssessment,
-  hasText,
-  isYesNoAnswered,
-  epilepsyDeclarationRequired,
-  sectionLabel,
-  priorityLabel,
-  validateB1,
-  detectFlaggedIssues
-} = window.DvlaB1Form;
 
 // ----------------------------------------------------------------------
 // Persistence
@@ -1459,4 +1450,3 @@ if (document.readyState === 'loading') {
 } else {
   init();
 }
-})();

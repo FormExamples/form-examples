@@ -1,3 +1,5 @@
+import { resolveAlbuminuriaCategory, resolveEgfr } from './kdigo-rules.js';
+
 // Flagged-issue detection for the Renal Assessment form. Independent of the
 // KDIGO classification (which the grader computes), this module raises
 // clinician-facing flags for severe biochemical derangements (hyperkalemia,
@@ -10,12 +12,6 @@
  * @typedef {import('./types.js').AssessmentData} AssessmentData
  * @typedef {import('./types.js').AdditionalFlag} AdditionalFlag
  */
-
-(function () {
-'use strict';
-window.RenalAssessment = window.RenalAssessment || {};
-
-const { resolveEgfr, resolveAlbuminuriaCategory } = window.RenalAssessment;
 
 /**
  * @param {AssessmentData} data
@@ -318,5 +314,4 @@ function detectAdditionalFlags(data) {
   return flags;
 }
 
-window.RenalAssessment.detectAdditionalFlags = detectAdditionalFlags;
-})();
+export { detectAdditionalFlags };

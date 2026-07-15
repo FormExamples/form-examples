@@ -6,11 +6,6 @@
 // the full follow-up-urgency ladder, and a spread of arterial territories,
 // with flag counts matching the graded fixtures.
 
-(function () {
-'use strict';
-window.AngiographyTestResultDashboard =
-  window.AngiographyTestResultDashboard || {};
-
 /** @type {import('./dashboard-types.js').ReportRow[]} */
 const sampleReports = [
   {
@@ -111,5 +106,4 @@ const sampleReports = [
   }
 ];
 
-window.AngiographyTestResultDashboard.sampleReports = sampleReports;
-})();
+export { sampleReports };

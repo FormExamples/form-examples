@@ -6,9 +6,6 @@
  */
 
 // Wrapped in an IIFE; published via window.ResearchAndPlanningPrivacyNotice.
-(function () {
-'use strict';
-window.ResearchAndPlanningPrivacyNotice = window.ResearchAndPlanningPrivacyNotice || {};
 
 /** @type {ValidationRule[]} */
 const validationRules = [
@@ -59,5 +56,4 @@ const validationRules = [
   }
 ];
 
-window.ResearchAndPlanningPrivacyNotice.validationRules = validationRules;
-})();
+export { validationRules };

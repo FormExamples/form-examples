@@ -1,10 +1,7 @@
 // Wires the form to the scoring engine and renders the report.
 // Loaded as a classic <script> after scoring.js, so `IssueTracker.gradeIssue`
 // is available on the global namespace.
-(function () {
-'use strict';
-
-const { gradeIssue } = window.IssueTracker;
+import { gradeIssue } from './scoring.js';
 
 const form = document.getElementById('issue-form');
 const reportEl = document.getElementById('report');
@@ -180,5 +177,3 @@ form.addEventListener('reset', () => {
 });
 
 updateProgress();
-
-})();

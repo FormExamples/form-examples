@@ -1,3 +1,5 @@
+import { prehospitalRules } from './prehospital-rules.js';
+
 // WHO Prehospital Form (SCF Prehospital) — completeness validator. Pure
 // function: takes an `AssessmentData` object, returns a
 // `ValidationResult` with per-section breakdown and the list of fired
@@ -5,11 +7,6 @@
 // so conditional sections (RED-triage interventions, injury intent /
 // mechanism, bleeding control) do not produce false missing-field
 // reports.
-
-(function () {
-'use strict';
-window.WhoPrehospitalForm = window.WhoPrehospitalForm || {};
-const { prehospitalRules } = window.WhoPrehospitalForm;
 
 function validatePrehospital(data) {
   const sectionMap = new Map();
@@ -72,5 +69,4 @@ function validatePrehospital(data) {
   };
 }
 
-window.WhoPrehospitalForm.validatePrehospital = validatePrehospital;
-})();
+export { validatePrehospital };

@@ -1,3 +1,5 @@
+import { hasCriticalFinding } from './rules.js';
+
 // Safety-critical flag detection for the Nuclear Medicine Test Result.
 //
 // Faithful vanilla-JavaScript port of the SvelteKit engine module
@@ -17,10 +19,6 @@
 
 // Wrapped in an IIFE; published via window.NuclearMedicineTestResult.
 // Depends on rules.js (hasCriticalFinding), so it must load after it.
-(function () {
-'use strict';
-window.NuclearMedicineTestResult = window.NuclearMedicineTestResult || {};
-const { hasCriticalFinding } = window.NuclearMedicineTestResult;
 
 /**
  * Detect safety-critical flags independently of the four axes.
@@ -140,7 +138,4 @@ function detectFlags(r) {
   return flags;
 }
 
-Object.assign(window.NuclearMedicineTestResult, {
-  detectFlags
-});
-})();
+export { detectFlags };

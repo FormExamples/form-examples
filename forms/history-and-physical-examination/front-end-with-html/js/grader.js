@@ -1,3 +1,5 @@
+import { allergyDocumented, componentRules, coreExamAddressed, nonEmpty } from './rules.js';
+
 // H&P completeness grader. Pure functions: take a flat `ClerkingRecord`,
 // evaluate the ten required-component rules in `componentRules`, count how many
 // are satisfied, derive the completeness percentage, and classify the clerking
@@ -29,16 +31,6 @@
  */
 
 // Wrapped in an IIFE; published via window.HistoryAndPhysicalExamination.
-(function () {
-'use strict';
-window.HistoryAndPhysicalExamination =
-  window.HistoryAndPhysicalExamination || {};
-const {
-  componentRules,
-  nonEmpty,
-  allergyDocumented,
-  coreExamAddressed
-} = window.HistoryAndPhysicalExamination;
 
 /** allergies undocumented — a blocking condition. */
 function allergiesUndocumented(r) {
@@ -143,10 +135,4 @@ function gradeCompleteness(r) {
   };
 }
 
-Object.assign(window.HistoryAndPhysicalExamination, {
-  allergiesUndocumented,
-  noImpressionOrPlan,
-  evaluateComponents,
-  gradeCompleteness
-});
-})();
+export { allergiesUndocumented, noImpressionOrPlan, evaluateComponents, gradeCompleteness };

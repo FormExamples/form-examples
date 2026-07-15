@@ -23,10 +23,6 @@
  */
 
 // Wrapped in an IIFE; published via window.GraceScoreForAcuteCoronarySyndrome.
-(function () {
-'use strict';
-window.GraceScoreForAcuteCoronarySyndrome =
-  window.GraceScoreForAcuteCoronarySyndrome || {};
 
 // ─── Variable 1: age (years) — monotonically increasing ───────────────
 /** @type {PointBand[]} */
@@ -157,22 +153,4 @@ function invasiveStrategyText(category) {
   }
 }
 
-Object.assign(window.GraceScoreForAcuteCoronarySyndrome, {
-  AGE_BANDS,
-  HEART_RATE_BANDS,
-  SBP_BANDS,
-  CREATININE_BANDS,
-  KILLIP_POINTS,
-  CARDIAC_ARREST_POINTS,
-  ST_DEVIATION_POINTS,
-  ELEVATED_ENZYMES_POINTS,
-  IN_HOSPITAL_THRESHOLDS,
-  SIX_MONTH_THRESHOLDS,
-  UMOL_PER_MGDL,
-  normaliseCreatinine,
-  bandLookup,
-  bandForTotal,
-  worseBand,
-  invasiveStrategyText
-});
-})();
+export { AGE_BANDS, HEART_RATE_BANDS, SBP_BANDS, CREATININE_BANDS, KILLIP_POINTS, CARDIAC_ARREST_POINTS, ST_DEVIATION_POINTS, ELEVATED_ENZYMES_POINTS, IN_HOSPITAL_THRESHOLDS, SIX_MONTH_THRESHOLDS, UMOL_PER_MGDL, normaliseCreatinine, bandLookup, bandForTotal, worseBand, invasiveStrategyText };

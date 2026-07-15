@@ -1,3 +1,5 @@
+import { hasNumber, hasText, isYesNoAnswered } from './types.js';
+
 // WHO Emergency Unit Form: General — completeness validation rules.
 //
 // The form is a structured data-collection instrument for non-trauma
@@ -10,11 +12,6 @@
 //
 // Rule IDs follow the pattern <SECTION>-<NN>; the prefix lets the
 // report group fired rules by section.
-
-(function () {
-'use strict';
-window.WhoEmergencyUnitGeneralForm = window.WhoEmergencyUnitGeneralForm || {};
-const { hasText, hasNumber, isYesNoAnswered } = window.WhoEmergencyUnitGeneralForm;
 
 const euGeneralRules = [
   // ─── Step 1 — Patient Registration ────────────────────────
@@ -346,5 +343,4 @@ const euGeneralRules = [
   }
 ];
 
-window.WhoEmergencyUnitGeneralForm.euGeneralRules = euGeneralRules;
-})();
+export { euGeneralRules };

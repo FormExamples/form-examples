@@ -117,10 +117,6 @@
 // <script> (no ES modules) so the page can be opened directly via `file://`.
 // The IIFE attaches its public symbols to a single global namespace,
 // `window.MedicalCertificateOfCauseOfDeath`.
-(function () {
-'use strict';
-window.MedicalCertificateOfCauseOfDeath =
-  window.MedicalCertificateOfCauseOfDeath || {};
 
 /**
  * Build a fresh, fully-blank certificate.
@@ -273,16 +269,4 @@ function priorityLabel(priority) {
   }
 }
 
-Object.assign(window.MedicalCertificateOfCauseOfDeath, {
-  emptyCertificate,
-  validityClassLabel,
-  validityClassClass,
-  gradeLabel,
-  sexLabel,
-  seenAfterDeathByLabel,
-  coronerReasonLabel,
-  medicalExaminerStatusLabel,
-  yesNoLabel,
-  priorityLabel
-});
-})();
+export { emptyCertificate, validityClassLabel, validityClassClass, gradeLabel, sexLabel, seenAfterDeathByLabel, coronerReasonLabel, medicalExaminerStatusLabel, yesNoLabel, priorityLabel };

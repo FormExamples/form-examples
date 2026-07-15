@@ -13,9 +13,6 @@
  */
 
 // Wrapped in an IIFE; published via window.AdvanceStatementAboutCare.
-(function () {
-'use strict';
-window.AdvanceStatementAboutCare = window.AdvanceStatementAboutCare || {};
 
 /**
  * @param {StatementData} data
@@ -153,5 +150,4 @@ function detectFlaggedIssues(data) {
   return flags;
 }
 
-window.AdvanceStatementAboutCare.detectFlaggedIssues = detectFlaggedIssues;
-})();
+export { detectFlaggedIssues };

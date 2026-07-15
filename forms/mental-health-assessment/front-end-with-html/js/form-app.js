@@ -1,3 +1,7 @@
+import { gradeAssessment, severityClass } from './mh-grader.js';
+import { calculateAuditCScore, calculateGad7Score, calculatePhq9Score, gad7Questions, gadAnswerOptions, gadKeys, phq9Questions, phqAnswerOptions, phqKeys } from './mh-rules.js';
+import { calculateAge, emptyAssessment } from './types.js';
+
 // Mental Health Assessment - patient wizard (vanilla JavaScript, no build).
 //
 // Single-page continuous wizard: every section is rendered into the page in
@@ -12,25 +16,6 @@
 // the rest of this file referring to short local names. Whole file is
 // wrapped in an IIFE so its top-level identifiers don't leak to the global
 // scope.
-(function () {
-'use strict';
-
-const NS = window.MentalHealthAssessment;
-const {
-  emptyAssessment,
-  calculateAge,
-  phq9Questions,
-  phqKeys,
-  phqAnswerOptions,
-  gad7Questions,
-  gadKeys,
-  gadAnswerOptions,
-  calculatePhq9Score,
-  calculateGad7Score,
-  calculateAuditCScore,
-  gradeAssessment,
-  severityClass
-} = NS;
 
 // ----------------------------------------------------------------------
 // Persistence
@@ -1356,4 +1341,3 @@ if (document.readyState === 'loading') {
 } else {
   init();
 }
-})();

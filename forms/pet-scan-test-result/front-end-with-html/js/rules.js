@@ -19,9 +19,6 @@
  */
 
 // Wrapped in an IIFE; published via window.PetScanTestResult.
-(function () {
-'use strict';
-window.PetScanTestResult = window.PetScanTestResult || {};
 
 // ----------------------------------------------------------------------
 // Structured-findings predicates (mirror `utils.ts`)
@@ -461,14 +458,4 @@ function gradeFollowUp(r, classification, severity) {
   };
 }
 
-Object.assign(window.PetScanTestResult, {
-  hasCriticalFinding,
-  hasAnyAbnormalFinding,
-  hasOnlyIncidentalFinding,
-  isNegativeStudy,
-  classifyResult,
-  gradeSeverity,
-  gradeCompleteness,
-  gradeFollowUp
-});
-})();
+export { hasCriticalFinding, hasAnyAbnormalFinding, hasOnlyIncidentalFinding, isNegativeStudy, classifyResult, gradeSeverity, gradeCompleteness, gradeFollowUp };

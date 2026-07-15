@@ -1,3 +1,6 @@
+import { errorRules } from './error-rules.js';
+import { detectAdditionalFlags } from './flagged-issues.js';
+
 // Medical-error grader. Pure functions: take an `AssessmentData` object,
 // evaluate every rule, derive WHO severity, NCC MERP category, and overall
 // risk level. Mirrors the SvelteKit `error-grader.ts`.
@@ -10,11 +13,6 @@
  * @typedef {import('./types.js').NCCMERPCategory} NCCMERPCategory
  * @typedef {import('./types.js').RiskLevel} RiskLevel
  */
-
-(function () {
-'use strict';
-window.MedicalErrorReport = window.MedicalErrorReport || {};
-const { errorRules, detectAdditionalFlags } = window.MedicalErrorReport;
 
 /**
  * Evaluate every error rule, then derive WHO severity, NCC MERP category,
@@ -94,5 +92,4 @@ function deriveOverallRisk(firedRules, whoSeverity, nccMerpCategory) {
   return 'low';
 }
 
-Object.assign(window.MedicalErrorReport, { calculateErrorGrade });
-})();
+export { calculateErrorGrade };

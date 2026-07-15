@@ -1,3 +1,7 @@
+import { detectFlaggedIssues } from './flags.js';
+import { calculateNipeGrade } from './grader.js';
+import { componentResultClass, componentResultLabel, emptyAssessment, outcomeClass, outcomeLabel, priorityLabel, sexLabel } from './types.js';
+
 // Newborn and Infant Physical Examination (NIPE) — screening wizard
 // (vanilla JavaScript, no build).
 //
@@ -14,21 +18,6 @@
 // to `window.NewbornAndInfantPhysicalExamination`. Pulling them off here keeps
 // the rest of this file referring to short local names. The whole file is
 // wrapped in an IIFE so its top-level identifiers don't leak.
-(function () {
-'use strict';
-
-const NS = window.NewbornAndInfantPhysicalExamination;
-const {
-  emptyAssessment,
-  outcomeLabel,
-  outcomeClass,
-  componentResultLabel,
-  componentResultClass,
-  sexLabel,
-  priorityLabel,
-  calculateNipeGrade,
-  detectFlaggedIssues
-} = NS;
 
 // ----------------------------------------------------------------------
 // Persistence
@@ -1127,4 +1116,3 @@ if (document.readyState === 'loading') {
 } else {
   init();
 }
-})();

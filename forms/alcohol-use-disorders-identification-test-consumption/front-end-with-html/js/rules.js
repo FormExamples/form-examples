@@ -22,10 +22,6 @@
 
 // Wrapped in an IIFE; published via
 // window.AlcoholUseDisordersIdentificationTestConsumption.
-(function () {
-'use strict';
-window.AlcoholUseDisordersIdentificationTestConsumption =
-  window.AlcoholUseDisordersIdentificationTestConsumption || {};
 
 /** Coerce an item value (number, numeric string, or null) to a 0-4 point. */
 function toPoint(v) {
@@ -68,6 +64,4 @@ const auditcRules = [
   }
 ];
 
-window.AlcoholUseDisordersIdentificationTestConsumption.auditcRules = auditcRules;
-window.AlcoholUseDisordersIdentificationTestConsumption.toPoint = toPoint;
-})();
+export { auditcRules, toPoint };

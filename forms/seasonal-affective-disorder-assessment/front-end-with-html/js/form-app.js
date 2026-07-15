@@ -1,3 +1,8 @@
+import { detectAdditionalFlags } from './flagged-issues.js';
+import { gradeSAD } from './sad-grader.js';
+import { PHQ9_OPTIONS, SPAQ_OPTIONS, combinedSeverityClass, combinedSeverityLabel, phq9BandLabel, phq9Items, spaqBandLabel, spaqItems } from './sad-rules.js';
+import { emptyAssessment, mergeOver } from './types.js';
+
 // Seasonal Affective Disorder Assessment - patient wizard (vanilla JavaScript).
 //
 // Single-page continuous wizard: every section is rendered in document order.
@@ -8,25 +13,6 @@
 //
 // Sibling files loaded as plain `<script>` tags (in order) attach their
 // exports to `window.SeasonalAffectiveDisorderAssessment`.
-
-(function () {
-'use strict';
-
-const NS = window.SeasonalAffectiveDisorderAssessment;
-const {
-  emptyAssessment,
-  mergeOver,
-  spaqItems,
-  phq9Items,
-  PHQ9_OPTIONS,
-  SPAQ_OPTIONS,
-  gradeSAD,
-  spaqBandLabel,
-  phq9BandLabel,
-  combinedSeverityLabel,
-  combinedSeverityClass,
-  detectAdditionalFlags
-} = NS;
 
 const TOTAL_STEPS = 10;
 
@@ -1365,4 +1351,3 @@ if (document.readyState === 'loading') {
 } else {
   init();
 }
-})();

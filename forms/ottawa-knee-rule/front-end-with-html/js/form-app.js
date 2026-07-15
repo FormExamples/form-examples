@@ -1,3 +1,7 @@
+import { detectFlaggedIssues } from './flags.js';
+import { gradeOttawaKnee } from './grader.js';
+import { criterionLabel, decisionClass, decisionLabel, emptyAssessment, priorityLabel, yesNoLabel } from './types.js';
+
 // Ottawa Knee Rule — bedside wizard (vanilla JavaScript, no build).
 //
 // Single-page continuous wizard: every step is rendered into the page in
@@ -15,20 +19,6 @@
 // to `window.OttawaKneeRule`. Pulling them off here keeps the rest of this file
 // referring to short local names. The whole file is wrapped in an IIFE so its
 // top-level identifiers don't leak.
-(function () {
-'use strict';
-
-const NS = window.OttawaKneeRule;
-const {
-  emptyAssessment,
-  decisionLabel,
-  decisionClass,
-  criterionLabel,
-  yesNoLabel,
-  priorityLabel,
-  gradeOttawaKnee,
-  detectFlaggedIssues
-} = NS;
 
 // ----------------------------------------------------------------------
 // Persistence
@@ -966,4 +956,3 @@ if (document.readyState === 'loading') {
 } else {
   init();
 }
-})();

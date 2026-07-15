@@ -1,3 +1,5 @@
+import { anyAgreed, declineJustified, hasAlternative } from './types.js';
+
 // Four-axis rule catalogue for the Neurodiversity Adjustment Response engine.
 //
 // Ported verbatim from the canonical engine spec: (A) outcome classification
@@ -12,13 +14,6 @@
 // helpers; the grader composes them.
 //
 // Wrapped in an IIFE; published via `window.NeurodiversityAdjustmentResponse`.
-
-(function () {
-'use strict';
-window.NeurodiversityAdjustmentResponse =
-  window.NeurodiversityAdjustmentResponse || {};
-const NS = window.NeurodiversityAdjustmentResponse;
-const { anyAgreed, hasAlternative, declineJustified } = NS;
 
 // ----------------------------------------------------------------------
 // Axis A — outcome classification (first match wins)
@@ -348,12 +343,4 @@ function gradeFollowUp(r, legalRiskBand) {
   return done('none');
 }
 
-Object.assign(NS, {
-  classifyOutcome,
-  gradeLegalRisk,
-  gradeCompleteness,
-  gradeFollowUp,
-  COMPLETENESS_SECTIONS,
-  LEGAL_ORDER
-});
-})();
+export { classifyOutcome, gradeLegalRisk, gradeCompleteness, gradeFollowUp, COMPLETENESS_SECTIONS, LEGAL_ORDER };

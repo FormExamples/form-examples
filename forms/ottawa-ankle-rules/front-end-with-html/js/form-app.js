@@ -1,3 +1,7 @@
+import { detectFlaggedIssues } from './flags.js';
+import { calculateOttawaDecision } from './grader.js';
+import { decisionClass, decisionLabel, emptyAssessment, priorityLabel, yesNoLabel } from './types.js';
+
 // Ottawa Ankle Rules (and Ottawa Foot Rules) — bedside wizard
 // (vanilla JavaScript, no build).
 //
@@ -17,19 +21,6 @@
 // to `window.OttawaAnkleRules`. Pulling them off here keeps the rest of this
 // file referring to short local names. The whole file is wrapped in an IIFE so
 // its top-level identifiers don't leak.
-(function () {
-'use strict';
-
-const NS = window.OttawaAnkleRules;
-const {
-  emptyAssessment,
-  decisionLabel,
-  decisionClass,
-  yesNoLabel,
-  priorityLabel,
-  calculateOttawaDecision,
-  detectFlaggedIssues
-} = NS;
 
 // ----------------------------------------------------------------------
 // Persistence
@@ -1020,4 +1011,3 @@ if (document.readyState === 'loading') {
 } else {
   init();
 }
-})();

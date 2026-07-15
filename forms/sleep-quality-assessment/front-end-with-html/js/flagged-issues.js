@@ -1,3 +1,5 @@
+import { frequencyToScore } from './psqi-rules.js';
+
 // Flagged-issue detection for the Sleep Quality Assessment.
 //
 // Surfaces clinically-significant or safety-critical alerts that are
@@ -11,10 +13,6 @@
  */
 
 // Wrapped in an IIFE; published via window.SleepQualityAssessment.
-(function () {
-'use strict';
-const NS = window.SleepQualityAssessment = window.SleepQualityAssessment || {};
-const { frequencyToScore } = NS;
 
 /**
  * Detect non-score-based clinical flags.
@@ -223,5 +221,4 @@ function detectAdditionalFlags(data) {
   return flags;
 }
 
-Object.assign(window.SleepQualityAssessment, { detectAdditionalFlags });
-})();
+export { detectAdditionalFlags };

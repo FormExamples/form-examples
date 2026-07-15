@@ -1,10 +1,9 @@
+import { endoRules } from './endo-rules.js';
+import { calculateEHP30Total } from './types.js';
+
 // Pure scoring engine — port of `src/lib/engine/endo-grader.ts`. Evaluates
 // all rules, derives ASRM stage, computes ASRM points, EHP-30 average, and
 // overall severity. No side effects.
-(function () {
-'use strict';
-const NS = window.EndometriosisAssessment;
-const { endoRules, calculateEHP30Total } = NS;
 
 /** Pure: evaluate all endo rules; compute stage, points, EHP-30 average, severity. */
 function calculateEndoGrade(data) {
@@ -90,10 +89,4 @@ function deriveOverallSeverity(firedRules, asrmStage, ehp30Score) {
   return 'mild';
 }
 
-Object.assign(window.EndometriosisAssessment, {
-  calculateEndoGrade,
-  deriveASRMStage,
-  calculateASRMPoints,
-  deriveOverallSeverity
-});
-})();
+export { calculateEndoGrade, deriveASRMStage, calculateASRMPoints, deriveOverallSeverity };

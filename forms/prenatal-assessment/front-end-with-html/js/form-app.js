@@ -1,3 +1,7 @@
+import { detectAdditionalFlags } from './flagged-issues.js';
+import { calculateRisk } from './risk-grader.js';
+import { bmiCategory, calculateBMI, emptyAssessment, gestationalWeeksLabel, riskLevelClass, riskLevelLabel } from './types.js';
+
 // Prenatal Assessment - patient wizard (vanilla JavaScript, no build).
 //
 // Single-page continuous wizard: every section is rendered into the page in
@@ -10,20 +14,6 @@
 // exports to `window.PrenatalAssessment`. Pulling them off here keeps the
 // rest of this file referring to short local names. Whole file is wrapped
 // in an IIFE so its top-level identifiers don't leak to the global scope.
-(function () {
-'use strict';
-
-const NS = window.PrenatalAssessment;
-const {
-  emptyAssessment,
-  calculateBMI,
-  bmiCategory,
-  calculateRisk,
-  riskLevelLabel,
-  riskLevelClass,
-  gestationalWeeksLabel,
-  detectAdditionalFlags
-} = NS;
 
 // ----------------------------------------------------------------------
 // Persistence
@@ -1153,4 +1143,3 @@ if (document.readyState === 'loading') {
 } else {
   init();
 }
-})();

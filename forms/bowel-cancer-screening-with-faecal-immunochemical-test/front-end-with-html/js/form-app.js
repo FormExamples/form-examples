@@ -1,3 +1,7 @@
+import { detectFlaggedIssues } from './flags.js';
+import { gradeFit } from './grader.js';
+import { emptyAssessment, managementActionLabel, priorityLabel, resultClassClass, resultClassLabel } from './types.js';
+
 // Bowel Cancer Screening (FIT) — single-page wizard (vanilla JavaScript, no build).
 //
 // Single-page continuous wizard: every step is rendered into the page in
@@ -12,19 +16,6 @@
 // to `window.BowelCancerScreeningFit`. Pulling them off here keeps the rest of
 // this file referring to short local names. The whole file is wrapped in an
 // IIFE so its top-level identifiers don't leak.
-(function () {
-'use strict';
-
-const NS = window.BowelCancerScreeningFit;
-const {
-  emptyAssessment,
-  resultClassLabel,
-  resultClassClass,
-  managementActionLabel,
-  priorityLabel,
-  gradeFit,
-  detectFlaggedIssues
-} = NS;
 
 // ----------------------------------------------------------------------
 // Persistence
@@ -979,4 +970,3 @@ if (document.readyState === 'loading') {
 } else {
   init();
 }
-})();

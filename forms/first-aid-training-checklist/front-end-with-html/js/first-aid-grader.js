@@ -1,3 +1,5 @@
+import { fawRules } from './rules.js';
+
 // First Aid at Work (FAW) Competency grader. Pure functions: take an
 // `AssessmentData` object, evaluate each declarative rule in the registry,
 // and return the pass / needs-development / fail outcome plus the audit
@@ -17,14 +19,6 @@
  * @typedef {import('./types.js').FiredRule} FiredRule
  * @typedef {import('./types.js').TriState} TriState
  */
-
-(function () {
-'use strict';
-window.FirstAidTrainingChecklist =
-  window.FirstAidTrainingChecklist || {};
-
-const NS = window.FirstAidTrainingChecklist;
-const { fawRules } = NS;
 
 const NEEDS_DEVELOPMENT_DEFICIENCY_LIMIT = 2;
 
@@ -108,8 +102,4 @@ function gradeFirstAid(data) {
   };
 }
 
-Object.assign(NS, {
-  gradeFirstAid,
-  NEEDS_DEVELOPMENT_DEFICIENCY_LIMIT
-});
-})();
+export { gradeFirstAid, NEEDS_DEVELOPMENT_DEFICIENCY_LIMIT };

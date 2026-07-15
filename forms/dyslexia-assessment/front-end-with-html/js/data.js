@@ -6,10 +6,6 @@
 // band, with first-degree family history flagged for a subset; NHS numbers
 // in the canonical "NNN NNN NNNN" display form.
 
-(function () {
-'use strict';
-window.DyslexiaAssessmentDashboard = window.DyslexiaAssessmentDashboard || {};
-
 /** @type {import('./types.js').PatientRow[]} */
 const samplePatients = [
   {
@@ -122,5 +118,4 @@ const samplePatients = [
   }
 ];
 
-window.DyslexiaAssessmentDashboard.samplePatients = samplePatients;
-})();
+export { samplePatients };

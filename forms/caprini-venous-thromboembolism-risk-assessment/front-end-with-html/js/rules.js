@@ -24,10 +24,6 @@
  */
 
 // Wrapped in an IIFE; published via window.CapriniVenousThromboembolismRiskAssessment.
-(function () {
-'use strict';
-window.CapriniVenousThromboembolismRiskAssessment =
-  window.CapriniVenousThromboembolismRiskAssessment || {};
 
 // Compact factor definitions: [section, field, points, category, description].
 // The snake_case `factor` key and the stable `id` are derived below.
@@ -104,5 +100,4 @@ const capriniRules = factorDefs.map(([section, field, points, category, descript
   };
 });
 
-window.CapriniVenousThromboembolismRiskAssessment.capriniRules = capriniRules;
-})();
+export { capriniRules };

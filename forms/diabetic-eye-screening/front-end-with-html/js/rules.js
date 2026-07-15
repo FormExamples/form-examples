@@ -34,9 +34,6 @@
  */
 
 // Wrapped in an IIFE; published via window.DiabeticEyeScreening.
-(function () {
-'use strict';
-window.DiabeticEyeScreening = window.DiabeticEyeScreening || {};
 
 // Retinopathy severity ranking: R0 < R1 < R2 < R3S < R3A. A stable treated
 // proliferative eye (R3S) ranks below an active proliferative eye (R3A) because
@@ -216,13 +213,4 @@ const classificationRules = [
   }
 ];
 
-Object.assign(window.DiabeticEyeScreening, {
-  classificationRules,
-  deriveContext,
-  worstRetinopathy,
-  worstMaculopathy,
-  anyUngradable,
-  lowRiskEligible,
-  RETINOPATHY_SEVERITY
-});
-})();
+export { classificationRules, deriveContext, worstRetinopathy, worstMaculopathy, anyUngradable, lowRiskEligible, RETINOPATHY_SEVERITY };

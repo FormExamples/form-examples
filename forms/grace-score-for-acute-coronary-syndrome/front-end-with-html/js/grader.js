@@ -1,3 +1,5 @@
+import { AGE_BANDS, CARDIAC_ARREST_POINTS, CREATININE_BANDS, ELEVATED_ENZYMES_POINTS, HEART_RATE_BANDS, IN_HOSPITAL_THRESHOLDS, KILLIP_POINTS, SBP_BANDS, SIX_MONTH_THRESHOLDS, ST_DEVIATION_POINTS, bandForTotal, bandLookup, invasiveStrategyText, normaliseCreatinine, worseBand } from './rules.js';
+
 // GRACE grader. Pure functions: take an `AssessmentData` object, map each of
 // the eight admission variables through its weighted, banded point lookup (see
 // `rules.js`), sum the points into the GRACE total, read that total against the
@@ -29,28 +31,6 @@
  */
 
 // Wrapped in an IIFE; published via window.GraceScoreForAcuteCoronarySyndrome.
-(function () {
-'use strict';
-window.GraceScoreForAcuteCoronarySyndrome =
-  window.GraceScoreForAcuteCoronarySyndrome || {};
-const NS = window.GraceScoreForAcuteCoronarySyndrome;
-const {
-  AGE_BANDS,
-  HEART_RATE_BANDS,
-  SBP_BANDS,
-  CREATININE_BANDS,
-  KILLIP_POINTS,
-  CARDIAC_ARREST_POINTS,
-  ST_DEVIATION_POINTS,
-  ELEVATED_ENZYMES_POINTS,
-  IN_HOSPITAL_THRESHOLDS,
-  SIX_MONTH_THRESHOLDS,
-  normaliseCreatinine,
-  bandLookup,
-  bandForTotal,
-  worseBand,
-  invasiveStrategyText
-} = NS;
 
 /**
  * Compute the full GRACE grade for the supplied assessment data.
@@ -154,7 +134,4 @@ function calculateGraceGrade(data) {
   };
 }
 
-Object.assign(window.GraceScoreForAcuteCoronarySyndrome, {
-  calculateGraceGrade
-});
-})();
+export { calculateGraceGrade };

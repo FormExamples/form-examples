@@ -7,11 +7,6 @@
 // convention. Wrapped in an IIFE; published via
 // `window.AngiographyTestRequest`.
 
-(function () {
-'use strict';
-window.AngiographyTestRequest =
-  window.AngiographyTestRequest || {};
-
 /**
  * Build a fresh, fully-blank vascular angiography request.
  * Strings default to ''; numeric / date fields default to null;
@@ -113,12 +108,4 @@ function usesIonisingRadiation(angiographyType) {
   return angiographyType !== '' && angiographyType !== 'mr-angiography';
 }
 
-Object.assign(window.AngiographyTestRequest, {
-  emptyRequest,
-  angiographyTypeLabel,
-  bodyRegionLabel,
-  usesIonisingRadiation,
-  ANGIOGRAPHY_TYPE_LABELS,
-  BODY_REGION_LABELS
-});
-})();
+export { emptyRequest, angiographyTypeLabel, bodyRegionLabel, usesIonisingRadiation, ANGIOGRAPHY_TYPE_LABELS, BODY_REGION_LABELS };

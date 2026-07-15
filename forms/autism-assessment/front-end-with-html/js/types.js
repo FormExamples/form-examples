@@ -153,9 +153,6 @@
 // classic <script> (no ES modules) so the page can be opened directly via
 // `file://`. The IIFE attaches its public symbols to a single global
 // namespace, `window.AutismAssessment`.
-(function () {
-'use strict';
-window.AutismAssessment = window.AutismAssessment || {};
 
 /**
  * Build a fresh, fully-blank assessment.
@@ -253,9 +250,4 @@ function aq10ScoreClass(score) {
   return 'aq10-very-high';
 }
 
-Object.assign(window.AutismAssessment, {
-  emptyAssessment,
-  aq10Category,
-  aq10ScoreClass
-});
-})();
+export { emptyAssessment, aq10Category, aq10ScoreClass };

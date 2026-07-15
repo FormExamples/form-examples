@@ -166,9 +166,6 @@
 // classic <script> (no ES modules) so the page can be opened directly via
 // `file://`. The IIFE attaches its public symbols to a single global
 // namespace, `window.PsychologyAssessment`.
-(function () {
-'use strict';
-window.PsychologyAssessment = window.PsychologyAssessment || {};
 
 /**
  * Build a fresh, fully-blank assessment.
@@ -246,5 +243,4 @@ function emptyAssessment() {
   };
 }
 
-window.PsychologyAssessment.emptyAssessment = emptyAssessment;
-})();
+export { emptyAssessment };

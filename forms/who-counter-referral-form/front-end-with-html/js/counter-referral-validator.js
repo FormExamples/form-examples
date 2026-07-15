@@ -1,3 +1,5 @@
+import { counterReferralRules as rules } from './counter-referral-rules.js';
+
 // Pure function: validates the WHO Counter-Referral Form data for completeness.
 //
 // Each rule in `counterReferralRules` is checked first against `applies()` to
@@ -19,16 +21,13 @@
  */
 
 // Wrapped in an IIFE; published via window.WhoCounterReferralForm.
-(function () {
-'use strict';
-window.WhoCounterReferralForm = window.WhoCounterReferralForm || {};
 
 /**
  * @param {AssessmentData} data
  * @returns {ValidationResult}
  */
 function validateCounterReferral(data) {
-  const rules = window.WhoCounterReferralForm.counterReferralRules;
+  
 
   /** @type {Map<SectionKey, SectionCompleteness>} */
   const sectionMap = new Map();
@@ -93,5 +92,4 @@ function validateCounterReferral(data) {
   };
 }
 
-window.WhoCounterReferralForm.validateCounterReferral = validateCounterReferral;
-})();
+export { validateCounterReferral };

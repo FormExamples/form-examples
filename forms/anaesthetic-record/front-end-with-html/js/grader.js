@@ -1,3 +1,5 @@
+import { MANDATORY_RULES } from './rules.js';
+
 // Anaesthetic Record completeness grader. Pure functions: take a `RecordData`
 // object (the parent record plus its three repeating child lists — drugs, timed
 // observations, and intra-operative events) and derive the completeness outputs
@@ -20,10 +22,6 @@
  */
 
 // Wrapped in an IIFE; published via window.AnaestheticRecord.
-(function () {
-'use strict';
-window.AnaestheticRecord = window.AnaestheticRecord || {};
-const { MANDATORY_RULES } = window.AnaestheticRecord;
 
 /**
  * Evaluate every mandatory rule against the record, producing the audit trail
@@ -82,8 +80,4 @@ function calculateGrade(record) {
   };
 }
 
-Object.assign(window.AnaestheticRecord, {
-  evaluateRules,
-  calculateGrade
-});
-})();
+export { evaluateRules, calculateGrade };

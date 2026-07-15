@@ -6,11 +6,6 @@
 // (routine / urgent / two-week-wait / emergency), with at least one emergency
 // and one red-flag row to exercise the critical-row styling.
 
-(function () {
-'use strict';
-window.GeneralPractitionerReferralLetterDashboard =
-  window.GeneralPractitionerReferralLetterDashboard || {};
-
 /** @type {import('./dashboard-types.js').ReferralRow[]} */
 const sampleReferrals = [
   {
@@ -87,5 +82,4 @@ const sampleReferrals = [
   }
 ];
 
-window.GeneralPractitionerReferralLetterDashboard.sampleReferrals = sampleReferrals;
-})();
+export { sampleReferrals };

@@ -6,11 +6,6 @@
 // critical / inconclusive), the severity ladder, and the follow-up urgency
 // bands, with critical-alert rows whose critical findings raised two flags.
 
-(function () {
-'use strict';
-window.NerveConductionStudyTestResultDashboard =
-  window.NerveConductionStudyTestResultDashboard || {};
-
 /** @type {import('./dashboard-types.js').ReportRow[]} */
 const sampleReports = [
   {
@@ -99,5 +94,4 @@ const sampleReports = [
   }
 ];
 
-window.NerveConductionStudyTestResultDashboard.sampleReports = sampleReports;
-})();
+export { sampleReports };

@@ -204,9 +204,6 @@
 // classic <script> (no ES modules) so the page can be opened directly via
 // `file://`. The IIFE attaches its public symbols to a single global
 // namespace, `window.SundownerSyndromeAssessment`.
-(function () {
-'use strict';
-window.SundownerSyndromeAssessment = window.SundownerSyndromeAssessment || {};
 
 // CMAI item ids. Kept here so `emptyAssessment()` can populate every key
 // even before `cmai-rules.js` has loaded.
@@ -384,12 +381,4 @@ function severityClass(s) {
   }
 }
 
-Object.assign(window.SundownerSyndromeAssessment, {
-  emptyAssessment,
-  severityFromCMAI,
-  severityLabel,
-  severityClass,
-  CMAI_ITEM_IDS,
-  NPI_DOMAIN_KEYS
-});
-})();
+export { emptyAssessment, severityFromCMAI, severityLabel, severityClass, CMAI_ITEM_IDS, NPI_DOMAIN_KEYS };

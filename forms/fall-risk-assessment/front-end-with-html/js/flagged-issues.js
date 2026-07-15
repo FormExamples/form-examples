@@ -1,3 +1,6 @@
+import { gradeFallRisk } from './fall-risk-grader.js';
+import { ancillaryRules } from './mfs-rules.js';
+
 // Flagged-issue detection for the Fall Risk Assessment.
 //
 // Independent of the raw MFS score (which the grader computes), this module
@@ -21,10 +24,6 @@
  */
 
 // Wrapped in an IIFE; published via window.FallRiskAssessment.
-(function () {
-'use strict';
-window.FallRiskAssessment = window.FallRiskAssessment || {};
-const { ancillaryRules, gradeFallRisk } = window.FallRiskAssessment;
 
 /**
  * @param {AssessmentData} data
@@ -193,5 +192,4 @@ function detectAdditionalFlags(data) {
   return flags;
 }
 
-window.FallRiskAssessment.detectAdditionalFlags = detectAdditionalFlags;
-})();
+export { detectAdditionalFlags };

@@ -4,10 +4,6 @@
 // value so the page can be opened directly via file:// without CORS
 // blocking ES module loading.
 
-(function () {
-'use strict';
-window.CarePrivacyNotice = window.CarePrivacyNotice || {};
-
 function grade(data) {
   const firedRules = [];
 
@@ -42,5 +38,4 @@ function grade(data) {
   return { overallStatus, firedRules };
 }
 
-window.CarePrivacyNotice.grade = grade;
-})();
+export { grade };

@@ -17,12 +17,6 @@
 //
 // Wrapped in an IIFE; published via `window.CystoscopyTestRequest`.
 
-(function () {
-'use strict';
-window.CystoscopyTestRequest =
-  window.CystoscopyTestRequest || {};
-const NS = window.CystoscopyTestRequest;
-
 // ----------------------------------------------------------------------
 // Axis A — Appropriateness (NICE NG12 / BAUS haematuria; 1-9 ordinal)
 // ----------------------------------------------------------------------
@@ -392,18 +386,4 @@ function scoreRisk(data) {
   return { band, anticoagulantAction: action, firedRules };
 }
 
-Object.assign(NS, {
-  scoreAppropriateness,
-  appropriatenessBand,
-  scoreUrgency,
-  evaluateTwoWeekWait,
-  scoreCompleteness,
-  scoreRisk,
-  maxTier,
-  maxRisk,
-  TRIAGE_ORDER,
-  TARGET_TIMEFRAMES,
-  RISK_ORDER,
-  INDICATION_PROCEDURE_MAP
-});
-})();
+export { scoreAppropriateness, appropriatenessBand, scoreUrgency, evaluateTwoWeekWait, scoreCompleteness, scoreRisk, maxTier, maxRisk, TRIAGE_ORDER, TARGET_TIMEFRAMES, RISK_ORDER, INDICATION_PROCEDURE_MAP };

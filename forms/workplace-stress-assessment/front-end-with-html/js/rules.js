@@ -36,9 +36,6 @@
  */
 
 // Wrapped in an IIFE; published via window.WorkplaceStressAssessment.
-(function () {
-'use strict';
-window.WorkplaceStressAssessment = window.WorkplaceStressAssessment || {};
 
 // ---------------------------------------------------------------------
 // Likert scales (text labels for each numeric value 1..5)
@@ -260,14 +257,4 @@ const HOURS_OPTIONS = [
   { value: 'long-hours-45-plus',  label: 'Long hours (45+ hours / week)' }
 ];
 
-Object.assign(window.WorkplaceStressAssessment, {
-  LIKERT_FREQUENCY,
-  LIKERT_AGREEMENT,
-  DOMAINS,
-  stressItems,
-  HSE_BENCHMARKS,
-  DEPARTMENT_OPTIONS,
-  TENURE_OPTIONS,
-  HOURS_OPTIONS
-});
-})();
+export { LIKERT_FREQUENCY, LIKERT_AGREEMENT, DOMAINS, stressItems, HSE_BENCHMARKS, DEPARTMENT_OPTIONS, TENURE_OPTIONS, HOURS_OPTIONS };

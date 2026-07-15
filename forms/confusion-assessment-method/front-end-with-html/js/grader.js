@@ -1,3 +1,5 @@
+import { camRules } from './rules.js';
+
 // CAM grader. Pure functions: take an `AssessmentData` object, evaluate the
 // four feature rules in `camRules`, and apply the fixed CAM diagnostic
 // algorithm to derive a classification. This is a status / classification
@@ -23,10 +25,6 @@
  */
 
 // Wrapped in an IIFE; published via window.ConfusionAssessmentMethod.
-(function () {
-'use strict';
-window.ConfusionAssessmentMethod = window.ConfusionAssessmentMethod || {};
-const { camRules } = window.ConfusionAssessmentMethod;
 
 /**
  * Whether the CAM-ICU arousal gate blocks assessment: variant is CAM-ICU and
@@ -145,9 +143,4 @@ function calculateCamGrade(data) {
   };
 }
 
-Object.assign(window.ConfusionAssessmentMethod, {
-  isUnableToAssess,
-  evaluateFeatures,
-  calculateCamGrade
-});
-})();
+export { isUnableToAssess, evaluateFeatures, calculateCamGrade };

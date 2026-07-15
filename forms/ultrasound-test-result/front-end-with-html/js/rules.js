@@ -19,9 +19,6 @@
  */
 
 // Wrapped in an IIFE; published via window.UltrasoundTestResult.
-(function () {
-'use strict';
-window.UltrasoundTestResult = window.UltrasoundTestResult || {};
 
 // ----------------------------------------------------------------------
 // Structured-findings predicates (mirror `utils.ts`)
@@ -465,13 +462,4 @@ function gradeFollowUp(r, classification, severity) {
   };
 }
 
-Object.assign(window.UltrasoundTestResult, {
-  hasCriticalFinding,
-  hasAnyAbnormalFinding,
-  hasOnlyIncidentalFinding,
-  classifyResult,
-  gradeSeverity,
-  gradeCompleteness,
-  gradeFollowUp
-});
-})();
+export { hasCriticalFinding, hasAnyAbnormalFinding, hasOnlyIncidentalFinding, classifyResult, gradeSeverity, gradeCompleteness, gradeFollowUp };

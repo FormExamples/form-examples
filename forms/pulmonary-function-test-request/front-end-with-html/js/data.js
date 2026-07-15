@@ -7,11 +7,6 @@
 // Includes the required worked cases: a routine suspected-asthma request, a
 // recent-MI contraindication case, and an active-respiratory-infection case.
 
-(function () {
-'use strict';
-window.PulmonaryFunctionTestRequestDashboard =
-  window.PulmonaryFunctionTestRequestDashboard || {};
-
 /** @type {import('./types.js').RequestRow[]} */
 const sampleRequests = [
   {
@@ -156,5 +151,4 @@ const sampleRequests = [
   }
 ];
 
-window.PulmonaryFunctionTestRequestDashboard.sampleRequests = sampleRequests;
-})();
+export { sampleRequests };

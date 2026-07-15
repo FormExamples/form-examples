@@ -6,8 +6,6 @@
  * document on submit. Designed to work from file:// — no ES modules, no
  * fetch, no build step.
  */
-(function () {
-  'use strict';
 
   // -- Enums ---------------------------------------------------------------
 
@@ -1035,4 +1033,3 @@
   } else {
     init();
   }
-})();

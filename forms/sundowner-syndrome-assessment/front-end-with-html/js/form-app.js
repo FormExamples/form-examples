@@ -1,3 +1,8 @@
+import { cmaiItems, cmaiScaleOptions, npiDomains, npiFrequencyOptions, npiSeverityOptions } from './cmai-rules.js';
+import { detectAdditionalFlags } from './flagged-issues.js';
+import { gradeSundowner } from './sundowner-grader.js';
+import { CMAI_ITEM_IDS, NPI_DOMAIN_KEYS, emptyAssessment, severityClass, severityFromCMAI, severityLabel } from './types.js';
+
 // Sundowner Syndrome Assessment - patient/carer wizard (vanilla JS, no build).
 //
 // Single-page continuous wizard: every section is rendered into the page in
@@ -11,25 +16,6 @@
 // keeps the rest of this file referring to short local names. The whole
 // file is wrapped in an IIFE so its top-level identifiers don't leak to
 // the global scope.
-(function () {
-'use strict';
-
-const NS = window.SundownerSyndromeAssessment;
-const {
-  emptyAssessment,
-  severityFromCMAI,
-  severityLabel,
-  severityClass,
-  cmaiItems,
-  cmaiScaleOptions,
-  npiDomains,
-  npiFrequencyOptions,
-  npiSeverityOptions,
-  gradeSundowner,
-  detectAdditionalFlags,
-  CMAI_ITEM_IDS,
-  NPI_DOMAIN_KEYS
-} = NS;
 
 // ----------------------------------------------------------------------
 // Persistence
@@ -1475,4 +1461,3 @@ if (document.readyState === 'loading') {
 } else {
   init();
 }
-})();

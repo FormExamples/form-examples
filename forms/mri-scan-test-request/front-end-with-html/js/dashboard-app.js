@@ -1,3 +1,6 @@
+import { fetchRequests } from './api.js';
+import { sampleRequests } from './data.js';
+
 // MRI Scan Test Request — vetting dashboard (vanilla classic-script app).
 //
 // On boot we fetch the request list from the backend; on any failure (or
@@ -10,12 +13,6 @@
 // attach their exports to `window.MriScanTestRequestDashboard`. The whole file
 // is wrapped in an IIFE so its top-level identifiers do not leak to the global
 // scope.
-(function () {
-'use strict';
-const {
-  fetchRequests,
-  sampleRequests
-} = window.MriScanTestRequestDashboard;
 
 // ----------------------------------------------------------------------
 // State
@@ -414,4 +411,3 @@ if (document.readyState === 'loading') {
 } else {
   init();
 }
-})();

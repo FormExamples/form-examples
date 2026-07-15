@@ -1,3 +1,8 @@
+import { calculateAQ10 } from './aq10-grader.js';
+import { aq10Questions, aq10ResponseOptions, aq10ScoreFromResponse } from './aq10-rules.js';
+import { detectAdditionalFlags } from './flagged-issues.js';
+import { aq10Category, aq10ScoreClass, emptyAssessment } from './types.js';
+
 // Autism Assessment - patient wizard (vanilla JavaScript, no build).
 //
 // Single-page continuous wizard: every section is rendered into the page in
@@ -10,20 +15,6 @@
 // exports to `window.AutismAssessment`. Pulling them off here keeps the
 // rest of this file referring to short local names. Whole file is wrapped
 // in an IIFE so its top-level identifiers don't leak to the global scope.
-(function () {
-'use strict';
-
-const NS = window.AutismAssessment;
-const {
-  emptyAssessment,
-  aq10Category,
-  aq10ScoreClass,
-  aq10Questions,
-  aq10ResponseOptions,
-  aq10ScoreFromResponse,
-  calculateAQ10,
-  detectAdditionalFlags
-} = NS;
 
 // ----------------------------------------------------------------------
 // Persistence
@@ -1229,4 +1220,3 @@ if (document.readyState === 'loading') {
 } else {
   init();
 }
-})();

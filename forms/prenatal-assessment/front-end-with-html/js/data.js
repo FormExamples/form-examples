@@ -6,10 +6,6 @@
 // very-high), all three trimesters, and a mix of referred / non-referred
 // statuses. NHS numbers in the canonical "NNN NNN NNNN" display form.
 
-(function () {
-'use strict';
-window.PrenatalAssessmentDashboard = window.PrenatalAssessmentDashboard || {};
-
 /** @type {import('./types.js').PatientRow[]} */
 const samplePatients = [
   {
@@ -122,5 +118,4 @@ const samplePatients = [
   }
 ];
 
-window.PrenatalAssessmentDashboard.samplePatients = samplePatients;
-})();
+export { samplePatients };

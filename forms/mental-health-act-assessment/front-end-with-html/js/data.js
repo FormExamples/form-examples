@@ -6,11 +6,6 @@
 // holding power, an emergency power, and a non-detaining 'none' outcome), and
 // every urgency class.
 
-(function () {
-'use strict';
-window.MentalHealthActAssessmentDashboard =
-  window.MentalHealthActAssessmentDashboard || {};
-
 /** @type {import('./dashboard-types.js').AssessmentRow[]} */
 const sampleAssessments = [
   {
@@ -85,5 +80,4 @@ const sampleAssessments = [
   }
 ];
 
-window.MentalHealthActAssessmentDashboard.sampleAssessments = sampleAssessments;
-})();
+export { sampleAssessments };

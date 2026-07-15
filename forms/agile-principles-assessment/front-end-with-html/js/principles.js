@@ -1,6 +1,4 @@
 // Public exports attached to window.AgilePrinciplesAssessment.
-(function () {
-  'use strict';
 
   const PRINCIPLES = [
     {
@@ -103,6 +101,7 @@
     },
   ];
 
-  window.AgilePrinciplesAssessment = window.AgilePrinciplesAssessment || {};
-  window.AgilePrinciplesAssessment.PRINCIPLES = PRINCIPLES;
-})();
+  
+  
+
+export { PRINCIPLES };

@@ -220,9 +220,6 @@
 // classic <script> (no ES modules) so the page can be opened directly via
 // `file://`. The IIFE attaches its public symbols to a single global
 // namespace, `window.WorkplaceClimateAssessment`.
-(function () {
-'use strict';
-window.WorkplaceClimateAssessment = window.WorkplaceClimateAssessment || {};
 
 /**
  * Build a fresh, fully-blank assessment.
@@ -339,11 +336,4 @@ function classifyScore(score) {
   return 'critical';
 }
 
-Object.assign(window.WorkplaceClimateAssessment, {
-  emptyAssessment,
-  categoryLabel,
-  categoryClass,
-  categoryRank,
-  classifyScore
-});
-})();
+export { emptyAssessment, categoryLabel, categoryClass, categoryRank, classifyScore };

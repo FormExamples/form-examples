@@ -1,3 +1,6 @@
+import { goldRules } from './gold-rules.js';
+import { determineAbcdGroup } from './types.js';
+
 // GOLD COPD grader. Pure functions: take an `AssessmentData` object,
 // return the GOLD stage (1-4), the ABCD group (A/B/E), and the list of
 // fired rules.
@@ -12,10 +15,6 @@
  */
 
 // Wrapped in an IIFE; published via window.PulmonologyAssessment.
-(function () {
-'use strict';
-window.PulmonologyAssessment = window.PulmonologyAssessment || {};
-const { goldRules, determineAbcdGroup } = window.PulmonologyAssessment;
 
 /**
  * Evaluate the GOLD rule set against the supplied assessment data and
@@ -59,5 +58,4 @@ function calculateGold(data) {
   return { goldStage, abcdGroup, firedRules };
 }
 
-window.PulmonologyAssessment.calculateGold = calculateGold;
-})();
+export { calculateGold };

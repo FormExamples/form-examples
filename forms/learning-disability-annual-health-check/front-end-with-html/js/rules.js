@@ -28,10 +28,6 @@
  */
 
 // Wrapped in an IIFE; published via window.LearningDisabilityAnnualHealthCheck.
-(function () {
-'use strict';
-window.LearningDisabilityAnnualHealthCheck =
-  window.LearningDisabilityAnnualHealthCheck || {};
 
 // Sentinel enum values that mean "the component was not carried out". Any other
 // non-empty value (including declined / not-applicable / not-eligible /
@@ -231,9 +227,4 @@ const componentRules = [
   }
 ];
 
-Object.assign(window.LearningDisabilityAnnualHealthCheck, {
-  componentRules,
-  isRecorded,
-  NOT_RECORDED
-});
-})();
+export { componentRules, isRecorded, NOT_RECORDED };

@@ -179,10 +179,6 @@
  * @property {string} timestamp
  */
 
-(function () {
-'use strict';
-window.PediatricAssessment = window.PediatricAssessment || {};
-
 /**
  * Build a fresh, fully-blank assessment.
  * Strings default to `''`; numeric fields default to `null`; lists default to `[]`.
@@ -384,16 +380,4 @@ function gestationalAgeCategory(weeks) {
   return 'Post-term';
 }
 
-Object.assign(window.PediatricAssessment, {
-  emptyAssessment,
-  calculateAgeMonths,
-  calculateAge,
-  formatAge,
-  devScreenLabel,
-  devScreenClass,
-  domainResultLabel,
-  domainResultClass,
-  percentileCategory,
-  gestationalAgeCategory
-});
-})();
+export { emptyAssessment, calculateAgeMonths, calculateAge, formatAge, devScreenLabel, devScreenClass, domainResultLabel, domainResultClass, percentileCategory, gestationalAgeCategory };

@@ -1,3 +1,5 @@
+import { cageRules } from './rules.js';
+
 // CAGE grader. Pure functions: take an `AssessmentData` object, evaluate the
 // four criterion rules in `cageRules`, award 0 or 1 point each, sum the total
 // (0-4), and derive the result band against the >= 2 positive-screen cut-off.
@@ -20,11 +22,6 @@
  */
 
 // Wrapped in an IIFE; published via window.CageAlcoholQuestionnaire.
-(function () {
-'use strict';
-window.CageAlcoholQuestionnaire =
-  window.CageAlcoholQuestionnaire || {};
-const { cageRules } = window.CageAlcoholQuestionnaire;
 
 /**
  * Evaluate the four CAGE criterion rules and collect the ones that fired.
@@ -102,8 +99,4 @@ function calculateCageGrade(data) {
   };
 }
 
-Object.assign(window.CageAlcoholQuestionnaire, {
-  evaluateCriteria,
-  calculateCageGrade
-});
-})();
+export { evaluateCriteria, calculateCageGrade };

@@ -7,11 +7,6 @@
 // convention. Wrapped in an IIFE; published via
 // `window.BloodCrossMatchTestRequest`.
 
-(function () {
-'use strict';
-window.BloodCrossMatchTestRequest =
-  window.BloodCrossMatchTestRequest || {};
-
 /**
  * Build a fresh, fully-blank blood cross-match / transfusion request.
  * Strings default to ''; numeric / date / time fields default to null;
@@ -137,15 +132,4 @@ function bloodGroupLabel(value) {
   return BLOOD_GROUP_LABELS[value] || value || '';
 }
 
-Object.assign(window.BloodCrossMatchTestRequest, {
-  emptyRequest,
-  requestTypeLabel,
-  componentLabel,
-  indicationLabel,
-  bloodGroupLabel,
-  REQUEST_TYPE_LABELS,
-  COMPONENT_LABELS,
-  INDICATION_LABELS,
-  BLOOD_GROUP_LABELS
-});
-})();
+export { emptyRequest, requestTypeLabel, componentLabel, indicationLabel, bloodGroupLabel, REQUEST_TYPE_LABELS, COMPONENT_LABELS, INDICATION_LABELS, BLOOD_GROUP_LABELS };

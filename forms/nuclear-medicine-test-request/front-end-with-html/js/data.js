@@ -8,11 +8,6 @@
 // cases: a routine bone scan, a pregnancy case, a breastfeeding case, and a
 // high-radiation-dose case.
 
-(function () {
-'use strict';
-window.NuclearMedicineTestRequestDashboard =
-  window.NuclearMedicineTestRequestDashboard || {};
-
 /** @type {import('./types.js').RequestRow[]} */
 const sampleRequests = [
   {
@@ -167,5 +162,4 @@ const sampleRequests = [
   }
 ];
 
-window.NuclearMedicineTestRequestDashboard.sampleRequests = sampleRequests;
-})();
+export { sampleRequests };

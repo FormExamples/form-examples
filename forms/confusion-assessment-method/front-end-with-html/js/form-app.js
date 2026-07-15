@@ -1,3 +1,7 @@
+import { detectFlaggedIssues } from './flags.js';
+import { calculateCamGrade } from './grader.js';
+import { classificationClass, classificationLabel, emptyAssessment, featureLabel, featureStateLabel, motoricSubtypeLabel, priorityLabel } from './types.js';
+
 // Confusion Assessment Method (CAM) — bedside wizard (vanilla JavaScript,
 // no build).
 //
@@ -14,20 +18,6 @@
 // exports to `window.ConfusionAssessmentMethod`. Pulling them off here keeps
 // the rest of this file referring to short local names. The whole file is
 // wrapped in an IIFE so its top-level identifiers don't leak.
-(function () {
-'use strict';
-
-const NS = window.ConfusionAssessmentMethod;
-const {
-  emptyAssessment,
-  classificationLabel,
-  classificationClass,
-  featureStateLabel,
-  featureLabel,
-  priorityLabel,
-  calculateCamGrade,
-  detectFlaggedIssues
-} = NS;
 
 // ----------------------------------------------------------------------
 // Persistence
@@ -825,7 +815,7 @@ function renderReport() {
   }
 
   const subtypeLine = motoricSubtype
-    ? `<p class="muted">Motoric subtype: <strong>${esc(NS.motoricSubtypeLabel(motoricSubtype))}</strong>.</p>`
+    ? `<p class="muted">Motoric subtype: <strong>${esc(motoricSubtypeLabel(motoricSubtype))}</strong>.</p>`
     : '';
 
   out.innerHTML = `
@@ -1084,4 +1074,3 @@ if (document.readyState === 'loading') {
 } else {
   init();
 }
-})();

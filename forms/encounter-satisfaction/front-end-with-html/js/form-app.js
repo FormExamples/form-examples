@@ -1,3 +1,8 @@
+import { detectAdditionalFlags } from './flagged-issues.js';
+import { calculateSatisfaction } from './satisfaction-grader.js';
+import { likertResponseOptions, satisfactionQuestions } from './satisfaction-questions.js';
+import { categoryClass, emptyAssessment, satisfactionCategory } from './types.js';
+
 // Encounter Satisfaction Survey - patient wizard (vanilla JavaScript,
 // no build).
 //
@@ -12,19 +17,6 @@
 // exports to `window.EncounterSatisfaction`. Pulling them off here keeps
 // the rest of this file referring to short local names. Whole file is
 // wrapped in an IIFE so its top-level identifiers don't leak globally.
-(function () {
-'use strict';
-
-const NS = window.EncounterSatisfaction;
-const {
-  emptyAssessment,
-  satisfactionCategory,
-  categoryClass,
-  satisfactionQuestions,
-  likertResponseOptions,
-  calculateSatisfaction,
-  detectAdditionalFlags
-} = NS;
 
 // ----------------------------------------------------------------------
 // Persistence
@@ -890,4 +882,3 @@ if (document.readyState === 'loading') {
 } else {
   init();
 }
-})();

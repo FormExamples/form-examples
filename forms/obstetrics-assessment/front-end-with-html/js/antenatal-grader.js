@@ -1,3 +1,5 @@
+import { ng201Rules } from './rules.js';
+
 // NICE NG201 Antenatal Risk grader. Pure functions: take an
 // `AssessmentData` object, evaluate every NG201 rule, and return the
 // overall risk level plus the audit trail of fired rules.
@@ -14,10 +16,6 @@
  */
 
 // Wrapped in an IIFE; published via window.ObstetricsAssessment.
-(function () {
-'use strict';
-window.ObstetricsAssessment = window.ObstetricsAssessment || {};
-const { ng201Rules } = window.ObstetricsAssessment;
 
 /**
  * Friendly label for a RiskLevel.
@@ -106,9 +104,4 @@ function countAnsweredInputs(data) {
   return count;
 }
 
-Object.assign(window.ObstetricsAssessment, {
-  riskLevelLabel,
-  riskLevelClass,
-  calculateAntenatalRisk
-});
-})();
+export { riskLevelLabel, riskLevelClass, calculateAntenatalRisk };

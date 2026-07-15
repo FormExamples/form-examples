@@ -129,10 +129,7 @@
  * @property {string} timestamp
  */
 
-(function () {
-  'use strict';
-
-  const NS = (window.ConsentToTreatment = window.ConsentToTreatment || {});
+  
 
   /** @returns {AssessmentData} */
   function emptyAssessment() {
@@ -230,9 +227,10 @@
     return 'status-empty';
   }
 
-  NS.emptyAssessment = emptyAssessment;
-  NS.completenessPercent = completenessPercent;
-  NS.validationStatus = validationStatus;
-  NS.completenessLabel = completenessLabel;
-  NS.completenessClass = completenessClass;
-})();
+  
+  
+  
+  
+  
+
+export { emptyAssessment, completenessPercent, validationStatus, completenessLabel, completenessClass };

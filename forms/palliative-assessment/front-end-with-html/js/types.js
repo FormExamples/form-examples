@@ -220,9 +220,6 @@
 // classic <script> (no ES modules) so the page can be opened directly via
 // `file://`. The IIFE attaches its public symbols to a single global
 // namespace, `window.PalliativeAssessment`.
-(function () {
-'use strict';
-window.PalliativeAssessment = window.PalliativeAssessment || {};
 
 /**
  * Build a fresh, fully-blank assessment.
@@ -427,12 +424,4 @@ function classifyIndividualSymptom(score) {
   return 'severe';
 }
 
-Object.assign(window.PalliativeAssessment, {
-  emptyAssessment,
-  ESAS_ITEMS,
-  classifyESASTotal,
-  severityBandLabel,
-  severityBandClass,
-  classifyIndividualSymptom
-});
-})();
+export { emptyAssessment, ESAS_ITEMS, classifyESASTotal, severityBandLabel, severityBandClass, classifyIndividualSymptom };

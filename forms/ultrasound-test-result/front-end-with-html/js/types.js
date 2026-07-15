@@ -148,9 +148,6 @@
 // classic <script> (no ES modules) so the page can be opened directly via
 // `file://`. The IIFE attaches its public symbols to a single global
 // namespace, `window.UltrasoundTestResult`.
-(function () {
-'use strict';
-window.UltrasoundTestResult = window.UltrasoundTestResult || {};
 
 /**
  * Build a fresh, fully-blank ultrasound test result.
@@ -353,19 +350,4 @@ function followUpUrgencyClass(value) {
   }
 }
 
-Object.assign(window.UltrasoundTestResult, {
-  emptyResult,
-  resultClassificationLabel,
-  abnormalitySeverityLabel,
-  followUpUrgencyLabel,
-  bodyRegionLabel,
-  lateralityLabel,
-  examinationAdequacyLabel,
-  reportStatusLabel,
-  recommendationLabel,
-  priorityLabel,
-  resultClassificationClass,
-  abnormalitySeverityClass,
-  followUpUrgencyClass
-});
-})();
+export { emptyResult, resultClassificationLabel, abnormalitySeverityLabel, followUpUrgencyLabel, bodyRegionLabel, lateralityLabel, examinationAdequacyLabel, reportStatusLabel, recommendationLabel, priorityLabel, resultClassificationClass, abnormalitySeverityClass, followUpUrgencyClass };

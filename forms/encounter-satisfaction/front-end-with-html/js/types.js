@@ -119,9 +119,6 @@
 // classic <script> (no ES modules) so the page can be opened directly via
 // `file://`. The IIFE attaches its public symbols to a single global
 // namespace, `window.EncounterSatisfaction`.
-(function () {
-'use strict';
-window.EncounterSatisfaction = window.EncounterSatisfaction || {};
 
 /**
  * Build a fresh, fully-blank assessment.
@@ -213,9 +210,4 @@ function categoryClass(category) {
   }
 }
 
-Object.assign(window.EncounterSatisfaction, {
-  emptyAssessment,
-  satisfactionCategory,
-  categoryClass
-});
-})();
+export { emptyAssessment, satisfactionCategory, categoryClass };

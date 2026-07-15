@@ -137,18 +137,7 @@
     </footer>
   </main>
 
-  <!--
-    Classic <script> tags (no `type="module"`) so the page works when opened
-    directly via file:// — browsers block ES-module imports from file:// for
-    CORS reasons, but allow ordered classic scripts. Each file attaches its
-    public symbols to `window.HearingAidAssessmentDashboard`.
-
-    Load order: types -> data -> api -> app (each depends on those above).
-  -->
-  <script src="js/dashboard-types.js"></script>
-  <script src="js/data.js"></script>
-  <script src="js/api.js"></script>
-  <script src="js/dashboard-app.js"></script>
-    <script src="js/table-export.js"></script>
+  <script type="module" src="js/dashboard-app.js"></script>
+  <script type="module" src="js/table-export.js"></script>
 </body>
 </html>

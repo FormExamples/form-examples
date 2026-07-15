@@ -1,8 +1,7 @@
-(function (root) {
-  const F = root.Fp92aDashboard || (root.Fp92aDashboard = {});
+  
 
   // Sample FP92A applications for standalone development.
-  F.SAMPLE_APPLICATIONS = [
+  export const SAMPLE_APPLICATIONS = [
     {
       certificateNumber: "FP92A-000123",
       patientName: "Margaret Hughes",
@@ -84,4 +83,3 @@
       status: "ready-to-post",
     },
   ];
-})(window);

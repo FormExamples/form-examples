@@ -1,3 +1,5 @@
+import { estimateTenYearRisk, hba1cToPercent, isSmoker } from './types.js';
+
 // PREVENT additional-flag detection. Mirrors src/lib/engine/flagged-issues.ts
 // in the SvelteKit form. These are clinician-facing alerts independent of
 // the numeric risk score.
@@ -6,14 +8,6 @@
  * @typedef {import('./types.js').AssessmentData} AssessmentData
  * @typedef {import('./types.js').AdditionalFlag} AdditionalFlag
  */
-
-(function () {
-'use strict';
-window.PredictingRiskOfCardiovascularDiseaseEvents =
-  window.PredictingRiskOfCardiovascularDiseaseEvents || {};
-
-const NS = window.PredictingRiskOfCardiovascularDiseaseEvents;
-const { estimateTenYearRisk, hba1cToPercent, isSmoker } = NS;
 
 /**
  * @param {AssessmentData} data
@@ -192,7 +186,4 @@ function detectAdditionalFlags(data) {
   return flags;
 }
 
-Object.assign(window.PredictingRiskOfCardiovascularDiseaseEvents, {
-  detectAdditionalFlags
-});
-})();
+export { detectAdditionalFlags };

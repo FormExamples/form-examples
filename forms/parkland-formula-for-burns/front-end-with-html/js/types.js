@@ -125,10 +125,6 @@
 // classic <script> (no ES modules) so the page can be opened directly via
 // `file://`. The IIFE attaches its public symbols to a single global
 // namespace, `window.ParklandFormulaForBurns`.
-(function () {
-'use strict';
-window.ParklandFormulaForBurns =
-  window.ParklandFormulaForBurns || {};
 
 /**
  * Build a fresh, fully-blank assessment.
@@ -262,16 +258,4 @@ function priorityLabel(priority) {
   }
 }
 
-Object.assign(window.ParklandFormulaForBurns, {
-  emptyAssessment,
-  clinicianRoleLabel,
-  careSettingLabel,
-  sexLabel,
-  ageBandLabel,
-  tbsaMethodLabel,
-  mechanismLabel,
-  yesNoLabel,
-  injuryTimeKnownLabel,
-  priorityLabel
-});
-})();
+export { emptyAssessment, clinicianRoleLabel, careSettingLabel, sexLabel, ageBandLabel, tbsaMethodLabel, mechanismLabel, yesNoLabel, injuryTimeKnownLabel, priorityLabel };

@@ -8,10 +8,6 @@
 // vs non-users, and occupational noise exposure flagged for a subset; NHS
 // numbers in the canonical "NNN NNN NNNN" display form.
 
-(function () {
-'use strict';
-window.HearingAidAssessmentDashboard = window.HearingAidAssessmentDashboard || {};
-
 /** @type {import('./types.js').PatientRow[]} */
 const samplePatients = [
   {
@@ -148,5 +144,4 @@ const samplePatients = [
   }
 ];
 
-window.HearingAidAssessmentDashboard.samplePatients = samplePatients;
-})();
+export { samplePatients };

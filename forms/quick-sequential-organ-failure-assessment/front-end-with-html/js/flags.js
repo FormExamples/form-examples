@@ -17,10 +17,6 @@
  */
 
 // Wrapped in an IIFE; published via window.QuickSequentialOrganFailureAssessment.
-(function () {
-'use strict';
-window.QuickSequentialOrganFailureAssessment =
-  window.QuickSequentialOrganFailureAssessment || {};
 
 /**
  * @param {AssessmentData} data
@@ -111,6 +107,4 @@ function detectFlaggedIssues(data, qsofaScore) {
   return flags;
 }
 
-window.QuickSequentialOrganFailureAssessment.detectFlaggedIssues =
-  detectFlaggedIssues;
-})();
+export { detectFlaggedIssues };

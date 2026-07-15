@@ -8,9 +8,6 @@
 //   3-5   = Moderate risk
 //   6-9   = High risk
 //   10+   = Very high risk
-(function () {
-'use strict';
-window.PrenatalAssessment = window.PrenatalAssessment || {};
 
 const riskRules = [
   // Obstetric history
@@ -59,5 +56,4 @@ const riskRules = [
   { id: 'RISK-SX-004',    category: 'Current Symptoms',   description: 'Severe headache',                                            weight: 2 }
 ];
 
-Object.assign(window.PrenatalAssessment, { riskRules });
-})();
+export { riskRules };

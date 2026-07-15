@@ -9,11 +9,6 @@
 // massive-haemoptysis case, a high-bleeding-risk anticoagulant case, and a
 // hypoxia case.
 
-(function () {
-'use strict';
-window.BronchoscopyTestRequestDashboard =
-  window.BronchoscopyTestRequestDashboard || {};
-
 /** @type {import('./types.js').RequestRow[]} */
 const sampleRequests = [
   {
@@ -168,5 +163,4 @@ const sampleRequests = [
   }
 ];
 
-window.BronchoscopyTestRequestDashboard.sampleRequests = sampleRequests;
-})();
+export { sampleRequests };

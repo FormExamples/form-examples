@@ -1,3 +1,5 @@
+import { maxStatus } from './types.js';
+
 // Endocrinology axis-grading rules.
 //
 // Each axis is graded against an AxisStatus value:
@@ -33,10 +35,6 @@
  */
 
 // Wrapped in an IIFE; published via window.EndocrinologyAssessment.
-(function () {
-'use strict';
-window.EndocrinologyAssessment = window.EndocrinologyAssessment || {};
-const { maxStatus } = window.EndocrinologyAssessment;
 
 /** @type {AxisRule[]} */
 const axisRules = [
@@ -369,6 +367,4 @@ function anyAnswered(section) {
   return false;
 }
 
-window.EndocrinologyAssessment.axisRules = axisRules;
-window.EndocrinologyAssessment.anyAnswered = anyAnswered;
-})();
+export { axisRules, anyAnswered };

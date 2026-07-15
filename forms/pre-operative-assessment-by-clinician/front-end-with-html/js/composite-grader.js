@@ -1,14 +1,11 @@
+import { applyAsaRules } from './asa-rules.js';
+import { detectAdditionalFlags } from './flagged-issues.js';
+import { isHighRiskSurgery, maxAsa } from './types.js';
+
 // Composite grader. Mirrors the SvelteKit `composite-grader.ts`,
 // `mallampati-rules.ts`, `rcri-rules.ts`, `stopbang-rules.ts`, and
 // `frailty-rules.ts` files. Pure functions; the public entry point is
 // `calculateASA(data)` which returns the full GradingResult.
-
-(function () {
-'use strict';
-window.PreOperativeAssessmentByClinician =
-  window.PreOperativeAssessmentByClinician || {};
-const NS = window.PreOperativeAssessmentByClinician;
-const { applyAsaRules, isHighRiskSurgery, maxAsa } = NS;
 
 // ---------- Mallampati ----------
 
@@ -166,8 +163,8 @@ function calculateASA(data) {
   const { score: rcriScore, firedRules: rcriFired } = applyRcriRules(data);
   const { score: stopbangScore, firedRules: stopbangFired } = applyStopBangRules(data);
   const frailtyFired = applyFrailtyRules(data);
-  const additionalFlags = NS.detectAdditionalFlags
-    ? NS.detectAdditionalFlags(data)
+  const additionalFlags = detectAdditionalFlags
+    ? detectAdditionalFlags(data)
     : [];
 
   const hasHighFlag = additionalFlags.some((f) => f.priority === 'high');
@@ -206,12 +203,4 @@ function calculateASA(data) {
   };
 }
 
-Object.assign(NS, {
-  applyMallampatiRules,
-  applyRcriRules,
-  applyStopBangRules,
-  applyFrailtyRules,
-  computeCompositeRisk,
-  calculateASA
-});
-})();
+export { applyMallampatiRules, applyRcriRules, applyStopBangRules, applyFrailtyRules, computeCompositeRisk, calculateASA };

@@ -5,11 +5,6 @@
 // The rows span the full qSOFA score range (0-3), both risk bands, and every
 // care setting, with the escalation flag set whenever the score is >= 2.
 
-(function () {
-'use strict';
-window.QuickSequentialOrganFailureAssessmentDashboard =
-  window.QuickSequentialOrganFailureAssessmentDashboard || {};
-
 /** @type {import('./dashboard-types.js').AssessmentRow[]} */
 const sampleAssessments = [
   {
@@ -84,6 +79,4 @@ const sampleAssessments = [
   }
 ];
 
-window.QuickSequentialOrganFailureAssessmentDashboard.sampleAssessments =
-  sampleAssessments;
-})();
+export { sampleAssessments };

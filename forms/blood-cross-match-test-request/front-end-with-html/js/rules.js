@@ -13,12 +13,6 @@
 //
 // Wrapped in an IIFE; published via `window.BloodCrossMatchTestRequest`.
 
-(function () {
-'use strict';
-window.BloodCrossMatchTestRequest =
-  window.BloodCrossMatchTestRequest || {};
-const NS = window.BloodCrossMatchTestRequest;
-
 // ----------------------------------------------------------------------
 // Axis A — Appropriateness (1-9 ordinal, anchored on NICE NG24)
 // ----------------------------------------------------------------------
@@ -392,19 +386,4 @@ function scoreTriage(data) {
   };
 }
 
-Object.assign(NS, {
-  scoreAppropriateness,
-  appropriatenessBand,
-  scoreIdentitySafety,
-  worstBand,
-  scoreCompleteness,
-  scoreTriage,
-  maxTier,
-  TRIAGE_ORDER,
-  IDENTITY_ORDER,
-  TARGET_TIMEFRAMES,
-  INDICATION_REQUEST_MAP,
-  HB_THRESHOLD_DEFAULT,
-  HB_THRESHOLD_ACS
-});
-})();
+export { scoreAppropriateness, appropriatenessBand, scoreIdentitySafety, worstBand, scoreCompleteness, scoreTriage, maxTier, TRIAGE_ORDER, IDENTITY_ORDER, TARGET_TIMEFRAMES, INDICATION_REQUEST_MAP, HB_THRESHOLD_DEFAULT, HB_THRESHOLD_ACS };

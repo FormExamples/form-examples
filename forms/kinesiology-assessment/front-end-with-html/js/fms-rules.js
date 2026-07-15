@@ -28,9 +28,6 @@
  */
 
 // Wrapped in an IIFE; published via window.KinesiologyAssessment.
-(function () {
-'use strict';
-window.KinesiologyAssessment = window.KinesiologyAssessment || {};
 
 /** @type {FMSRuleDefinition[]} */
 const fmsPatterns = [
@@ -94,9 +91,4 @@ const fmsScoreOptionsCompact = [
   { value: 3, label: '3 - Without compensation' }
 ];
 
-Object.assign(window.KinesiologyAssessment, {
-  fmsPatterns,
-  fmsScoreOptions,
-  fmsScoreOptionsCompact
-});
-})();
+export { fmsPatterns, fmsScoreOptions, fmsScoreOptionsCompact };

@@ -6,10 +6,6 @@
 // very-high) and every periodontal status, with NHS numbers in the
 // canonical "NNN NNN NNNN" display form.
 
-(function () {
-'use strict';
-window.DentalAssessmentDashboard = window.DentalAssessmentDashboard || {};
-
 /** @type {import('./types.js').PatientRow[]} */
 const samplePatients = [
   {
@@ -110,5 +106,4 @@ const samplePatients = [
   }
 ];
 
-window.DentalAssessmentDashboard.samplePatients = samplePatients;
-})();
+export { samplePatients };

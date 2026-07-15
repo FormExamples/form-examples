@@ -1,3 +1,7 @@
+import { detectAdditionalFlags } from './flagged-issues.js';
+import { calculateMRS, classifyHRTRisk } from './mrs-grader.js';
+import { bmiCategory, calculateAge, calculateBMI, emptyAssessment, mrsScoreLabel, mrsSeverityClass, mrsSeverityLabel, riskClassificationClass, riskClassificationLabel } from './types.js';
+
 // Hormone Replacement Therapy (HRT) Assessment - patient wizard
 // (vanilla JavaScript, no build).
 //
@@ -13,24 +17,6 @@
 // off here keeps the rest of this file referring to short local names.
 // Whole file is wrapped in an IIFE so its top-level identifiers don't
 // leak to the global scope.
-(function () {
-'use strict';
-
-const NS = window.HormoneReplacementTherapyAssessment;
-const {
-  emptyAssessment,
-  calculateBMI,
-  bmiCategory,
-  calculateAge,
-  mrsSeverityLabel,
-  mrsSeverityClass,
-  riskClassificationLabel,
-  riskClassificationClass,
-  mrsScoreLabel,
-  calculateMRS,
-  classifyHRTRisk,
-  detectAdditionalFlags
-} = NS;
 
 // ----------------------------------------------------------------------
 // Persistence
@@ -1567,4 +1553,3 @@ if (document.readyState === 'loading') {
 } else {
   init();
 }
-})();

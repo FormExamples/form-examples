@@ -1,3 +1,6 @@
+import { calculateGrade } from './grader.js';
+import { abnormalitySeverityClass, abnormalitySeverityLabel, emptyResult, examinationAdequacyLabel, followUpUrgencyClass, followUpUrgencyLabel, priorityLabel, recommendationLabel, reportStatusLabel, resultClassificationClass, resultClassificationLabel, scanTypeLabel } from './types.js';
+
 // Nuclear Medicine Test Result — reporting-clinician wizard
 // (vanilla JavaScript, no build).
 //
@@ -15,25 +18,6 @@
 // exports to `window.NuclearMedicineTestResult`. Pulling them off here keeps
 // the rest of this file referring to short local names. The whole file is
 // wrapped in an IIFE so its top-level identifiers don't leak.
-(function () {
-'use strict';
-
-const NS = window.NuclearMedicineTestResult;
-const {
-  emptyResult,
-  resultClassificationLabel,
-  abnormalitySeverityLabel,
-  followUpUrgencyLabel,
-  scanTypeLabel,
-  reportStatusLabel,
-  examinationAdequacyLabel,
-  recommendationLabel,
-  priorityLabel,
-  resultClassificationClass,
-  abnormalitySeverityClass,
-  followUpUrgencyClass,
-  calculateGrade
-} = NS;
 
 // ----------------------------------------------------------------------
 // Persistence
@@ -1033,4 +1017,3 @@ if (document.readyState === 'loading') {
 } else {
   init();
 }
-})();

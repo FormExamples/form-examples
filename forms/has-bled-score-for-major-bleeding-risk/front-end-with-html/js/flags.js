@@ -19,10 +19,6 @@
  */
 
 // Wrapped in an IIFE; published via window.HasBledScoreForMajorBleedingRisk.
-(function () {
-'use strict';
-window.HasBledScoreForMajorBleedingRisk =
-  window.HasBledScoreForMajorBleedingRisk || {};
 
 /**
  * @param {AssessmentData} data
@@ -124,6 +120,4 @@ function detectFlaggedIssues(data, totalScore) {
   return flags;
 }
 
-window.HasBledScoreForMajorBleedingRisk.detectFlaggedIssues =
-  detectFlaggedIssues;
-})();
+export { detectFlaggedIssues };

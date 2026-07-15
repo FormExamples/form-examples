@@ -1,13 +1,8 @@
+import { calculateBmi, hasEstablishedCvd, hba1cMmolMol } from './utils.js';
+
 // SCORE2-Diabetes - Additional safety flags.
 //
 // Mirrors `front-end-form-with-svelte/src/lib/engine/flagged-issues.ts`.
-(function () {
-'use strict';
-
-const NS = (window.SystematicCoronaryRiskEvaluation2Diabetes =
-  window.SystematicCoronaryRiskEvaluation2Diabetes || {});
-
-const { hasEstablishedCvd, hba1cMmolMol, calculateBmi } = NS;
 
 function detectAdditionalFlags(data) {
   const flags = [];
@@ -194,5 +189,4 @@ function detectAdditionalFlags(data) {
   return flags;
 }
 
-NS.detectAdditionalFlags = detectAdditionalFlags;
-})();
+export { detectAdditionalFlags };

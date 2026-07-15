@@ -1,3 +1,5 @@
+import { calculateAge } from './types.js';
+
 // ASA Physical Status Classification grading rules.
 //
 // Each rule evaluates a single patient-data condition. The overall ASA
@@ -20,10 +22,6 @@
  */
 
 // Wrapped in an IIFE; published via window.PreOperativeAssessmentByPatient.
-(function () {
-'use strict';
-window.PreOperativeAssessmentByPatient = window.PreOperativeAssessmentByPatient || {};
-const { calculateAge } = window.PreOperativeAssessmentByPatient;
 
 /** @type {ASARule[]} */
 const asaRules = [
@@ -397,5 +395,4 @@ const asaRules = [
   }
 ];
 
-window.PreOperativeAssessmentByPatient.asaRules = asaRules;
-})();
+export { asaRules };

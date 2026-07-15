@@ -22,9 +22,6 @@
  */
 
 // Wrapped in an IIFE; published via window.ChildPughScore.
-(function () {
-'use strict';
-window.ChildPughScore = window.ChildPughScore || {};
 
 /**
  * @param {AssessmentData} data
@@ -148,5 +145,4 @@ function detectFlaggedIssues(data, grade) {
   return flags;
 }
 
-window.ChildPughScore.detectFlaggedIssues = detectFlaggedIssues;
-})();
+export { detectFlaggedIssues };

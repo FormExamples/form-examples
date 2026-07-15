@@ -1,3 +1,8 @@
+import { detectAdditionalFlags } from './flagged-issues.js';
+import { gradeLifeguard } from './lifeguard-grader.js';
+import { lifeguardRules } from './rules.js';
+import { COMPRESSION_DEPTH_MAX, COMPRESSION_DEPTH_MIN, COMPRESSION_RATE_MAX, COMPRESSION_RATE_MIN, SLOW_AED_SECONDS, SURFACE_DIVE_MIN_METRES, SWIM_200M_MAX_SECONDS, SWIM_50M_MAX_SECONDS, compressionDepthInRange, compressionRateInRange, emptyAssessment, outcomeClass, outcomeLabel, surfaceDiveDepthAdequate, swim200mWithinTarget, swim50mWithinTarget, triStateLabel, triStatePillClass } from './types.js';
+
 // Lifeguard Certification Checklist — examiner wizard (vanilla JS).
 //
 // Single-page continuous wizard: every section is rendered into the page in
@@ -14,33 +19,6 @@
 // rules → lifeguard-grader → flagged-issues → app) attach their exports to
 // `window.LifeguardCertificationChecklist`. The whole file is wrapped
 // in an IIFE so its top-level identifiers don't leak to the global scope.
-(function () {
-'use strict';
-
-const NS = window.LifeguardCertificationChecklist;
-const {
-  emptyAssessment,
-  outcomeLabel,
-  outcomeClass,
-  triStateLabel,
-  triStatePillClass,
-  SWIM_50M_MAX_SECONDS,
-  SWIM_200M_MAX_SECONDS,
-  COMPRESSION_RATE_MIN,
-  COMPRESSION_RATE_MAX,
-  COMPRESSION_DEPTH_MIN,
-  COMPRESSION_DEPTH_MAX,
-  SLOW_AED_SECONDS,
-  SURFACE_DIVE_MIN_METRES,
-  swim50mWithinTarget,
-  swim200mWithinTarget,
-  compressionRateInRange,
-  compressionDepthInRange,
-  surfaceDiveDepthAdequate,
-  lifeguardRules,
-  gradeLifeguard,
-  detectAdditionalFlags
-} = NS;
 
 // ----------------------------------------------------------------------
 // Persistence
@@ -1272,4 +1250,3 @@ if (document.readyState === 'loading') {
 } else {
   init();
 }
-})();

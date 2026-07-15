@@ -1,3 +1,6 @@
+import { calculateGrade } from './grader.js';
+import { emptyRequest, procedureLabel } from './types.js';
+
 // Endoscopy Test Request — clinician referral wizard (vanilla JS).
 //
 // Single-page continuous wizard: every section is rendered into the page in
@@ -9,16 +12,6 @@
 // Sibling files loaded as plain `<script>` tags (in order) attach their
 // exports to `window.EndoscopyTestRequest`. The whole file is wrapped in an
 // IIFE so its top-level identifiers don't leak to the global scope.
-
-(function () {
-'use strict';
-
-const NS = window.EndoscopyTestRequest;
-const {
-  emptyRequest,
-  procedureLabel,
-  calculateGrade
-} = NS;
 
 // ----------------------------------------------------------------------
 // Persistence
@@ -940,4 +933,3 @@ if (document.readyState === 'loading') {
 } else {
   init();
 }
-})();

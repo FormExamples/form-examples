@@ -1,3 +1,7 @@
+import { detectFlaggedIssues } from './flagged-issues.js';
+import { validateTransfer } from './transfer-validator.js';
+import { completenessLabel, emptyAssessment, hasNumber, hasText, priorityLabel, sectionLabel } from './types.js';
+
 // Provider Transfer Request - clinician handover wizard (vanilla JS, classic
 // <script>).
 //
@@ -16,19 +20,6 @@
 // Sibling files loaded as plain `<script>` tags (in order) attach their
 // exports to `window.ProviderTransferRequest`. The whole file is wrapped in
 // an IIFE so its top-level identifiers don't leak to the global scope.
-(function () {
-'use strict';
-const NS = window.ProviderTransferRequest;
-const {
-  emptyAssessment,
-  hasText,
-  hasNumber,
-  sectionLabel,
-  priorityLabel,
-  completenessLabel,
-  validateTransfer,
-  detectFlaggedIssues
-} = NS;
 
 // ----------------------------------------------------------------------
 // Persistence
@@ -1345,4 +1336,3 @@ if (document.readyState === 'loading') {
 } else {
   init();
 }
-})();

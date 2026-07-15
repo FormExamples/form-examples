@@ -1,3 +1,7 @@
+import { detectFlaggedIssues } from './flags.js';
+import { gradeFluidBalance } from './grader.js';
+import { INTAKE_CATEGORIES, OUTPUT_CATEGORIES, categoryLabel, directionLabel, emptyChart, emptyEntry, fluidStatusClass, fluidStatusLabel, priorityLabel } from './types.js';
+
 // Fluid Balance Chart — charting wizard (vanilla JavaScript, no build).
 //
 // Single-page continuous wizard: every step is rendered into the page in
@@ -15,23 +19,6 @@
 // Sibling files loaded as plain `<script>` tags (in order) attach their exports
 // to `window.FluidBalanceChart`. The whole file is wrapped in an IIFE so its
 // top-level identifiers don't leak.
-(function () {
-'use strict';
-
-const NS = window.FluidBalanceChart;
-const {
-  emptyChart,
-  emptyEntry,
-  INTAKE_CATEGORIES,
-  OUTPUT_CATEGORIES,
-  categoryLabel,
-  directionLabel,
-  fluidStatusLabel,
-  fluidStatusClass,
-  priorityLabel,
-  gradeFluidBalance,
-  detectFlaggedIssues
-} = NS;
 
 // ----------------------------------------------------------------------
 // Persistence
@@ -928,4 +915,3 @@ if (document.readyState === 'loading') {
 } else {
   init();
 }
-})();

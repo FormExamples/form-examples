@@ -5,10 +5,6 @@
 // rows span the four result classifications, all follow-up urgencies, and a
 // range of completeness percentages and flag counts.
 
-(function () {
-'use strict';
-window.BiopsyTestResultDashboard = window.BiopsyTestResultDashboard || {};
-
 /** @type {import('./dashboard-types.js').ReportRow[]} */
 const sampleReports = [
   {
@@ -97,5 +93,4 @@ const sampleReports = [
   }
 ];
 
-window.BiopsyTestResultDashboard.sampleReports = sampleReports;
-})();
+export { sampleReports };

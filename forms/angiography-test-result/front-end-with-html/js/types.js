@@ -105,9 +105,6 @@
 // classic <script> (no ES modules) so the page can be opened directly via
 // `file://`. The IIFE attaches its public symbols to a single global
 // namespace, `window.AngiographyTestResult`.
-(function () {
-'use strict';
-window.AngiographyTestResult = window.AngiographyTestResult || {};
 
 /**
  * Build a fresh, fully-blank angiography result.
@@ -319,20 +316,4 @@ function followUpUrgencyClass(value) {
   }
 }
 
-Object.assign(window.AngiographyTestResult, {
-  emptyResult,
-  resultClassificationLabel,
-  abnormalitySeverityLabel,
-  followUpUrgencyLabel,
-  recommendationLabel,
-  angiographyTypeLabel,
-  bodyRegionLabel,
-  reportStatusLabel,
-  contrastUsedLabel,
-  examinationAdequacyLabel,
-  priorityLabel,
-  resultClassificationClass,
-  abnormalitySeverityClass,
-  followUpUrgencyClass
-});
-})();
+export { emptyResult, resultClassificationLabel, abnormalitySeverityLabel, followUpUrgencyLabel, recommendationLabel, angiographyTypeLabel, bodyRegionLabel, reportStatusLabel, contrastUsedLabel, examinationAdequacyLabel, priorityLabel, resultClassificationClass, abnormalitySeverityClass, followUpUrgencyClass };

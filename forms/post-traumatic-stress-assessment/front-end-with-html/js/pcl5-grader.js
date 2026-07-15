@@ -18,10 +18,6 @@
  * @typedef {import('./types.js').PclItemScore} PclItemScore
  */
 
-(function () {
-'use strict';
-window.PostTraumaticStressAssessment = window.PostTraumaticStressAssessment || {};
-
 const CUT_OFF = 33;
 
 /** @param {PclItemScore[]} items */
@@ -133,12 +129,4 @@ function calculatePcl5(d) {
   return { totalScore, category, probableDsm5Diagnosis, clusterScores, answeredCount };
 }
 
-Object.assign(window.PostTraumaticStressAssessment, {
-  CUT_OFF,
-  computeClusterScores,
-  categorise,
-  meetsDsm5Pattern,
-  answeredItemCount,
-  calculatePcl5
-});
-})();
+export { CUT_OFF, computeClusterScores, categorise, meetsDsm5Pattern, answeredItemCount, calculatePcl5 };

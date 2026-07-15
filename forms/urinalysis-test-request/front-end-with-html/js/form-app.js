@@ -1,3 +1,7 @@
+import { detectFlags } from './flags.js';
+import { calculateGrade } from './grader.js';
+import { TESTS, countSelectedTests, emptyRequest, testLabel } from './types.js';
+
 // Urinalysis Test Request — clinician order wizard (vanilla JS).
 //
 // Single-page continuous wizard: every section is rendered into the page in
@@ -9,19 +13,6 @@
 // Sibling files loaded as plain `<script>` tags (in order) attach their
 // exports to `window.UrinalysisTestRequest`. The whole file is wrapped in an
 // IIFE so its top-level identifiers don't leak to the global scope.
-
-(function () {
-'use strict';
-
-const NS = window.UrinalysisTestRequest;
-const {
-  emptyRequest,
-  TESTS,
-  testLabel,
-  countSelectedTests,
-  calculateGrade,
-  detectFlags
-} = NS;
 
 // ----------------------------------------------------------------------
 // Persistence
@@ -898,4 +889,3 @@ if (document.readyState === 'loading') {
 } else {
   init();
 }
-})();

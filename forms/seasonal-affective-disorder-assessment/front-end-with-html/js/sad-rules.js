@@ -37,11 +37,6 @@
  * @property {ScaleOption[]} options    - 0-3 options
  */
 
-(function () {
-'use strict';
-window.SeasonalAffectiveDisorderAssessment =
-  window.SeasonalAffectiveDisorderAssessment || {};
-
 /** Standard SPAQ 0-4 option set used by all six GSS items. */
 const SPAQ_OPTIONS = [
   { value: 0, label: 'No change' },
@@ -250,16 +245,4 @@ function combinedSeverityClass(severity) {
   return `severity-${severity}`;
 }
 
-Object.assign(window.SeasonalAffectiveDisorderAssessment, {
-  SPAQ_OPTIONS,
-  PHQ9_OPTIONS,
-  spaqItems,
-  phq9Items,
-  classifySpaq,
-  classifyPhq9,
-  spaqBandLabel,
-  phq9BandLabel,
-  combinedSeverityLabel,
-  combinedSeverityClass
-});
-})();
+export { SPAQ_OPTIONS, PHQ9_OPTIONS, spaqItems, phq9Items, classifySpaq, classifyPhq9, spaqBandLabel, phq9BandLabel, combinedSeverityLabel, combinedSeverityClass };

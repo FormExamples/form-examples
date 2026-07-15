@@ -6,10 +6,6 @@
 // completeness percentages, care settings, problem counts, and high-priority
 // flag counts. Identifiers use the canonical NHS "NNN NNN NNNN" display form.
 
-(function () {
-'use strict';
-window.NursingCarePlanDashboard = window.NursingCarePlanDashboard || {};
-
 /** @type {import('./dashboard-types.js').PlanRow[]} */
 const samplePlans = [
   { id: '1',  patientIdentifier: '943 476 5919', patientName: 'Smith, John',        wardLocation: 'Ward 12',      careSetting: 'ward',       status: 'complete',   completenessPercent: 100, problemCount: 3, flagCount: 0 },
@@ -26,5 +22,4 @@ const samplePlans = [
   { id: '12', patientIdentifier: '618 305 9247', patientName: 'Hall, Richard',      wardLocation: 'Ward 12',      careSetting: 'ward',       status: 'incomplete', completenessPercent: 0,   problemCount: 0, flagCount: 0 }
 ];
 
-window.NursingCarePlanDashboard.samplePlans = samplePlans;
-})();
+export { samplePlans };

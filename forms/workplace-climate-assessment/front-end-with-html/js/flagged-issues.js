@@ -29,10 +29,6 @@
  */
 
 // Wrapped in an IIFE; published via window.WorkplaceClimateAssessment.
-(function () {
-'use strict';
-const NS = window.WorkplaceClimateAssessment =
-  window.WorkplaceClimateAssessment || {};
 
 const DOMAIN_LABELS = {
   leadership:    'Leadership & Management',
@@ -225,5 +221,4 @@ function detectAdditionalFlags(data, grading) {
   return flags;
 }
 
-NS.detectAdditionalFlags = detectAdditionalFlags;
-})();
+export { detectAdditionalFlags };

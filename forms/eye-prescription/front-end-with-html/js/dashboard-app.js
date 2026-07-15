@@ -1,13 +1,13 @@
+import { sampleData as all } from './sample-data.js';
+
 // Eye Prescription — dashboard app.
 //
 // Renders a sortable, filterable table of prescriptions. Clicking a row
 // opens an inline detail panel with full per-eye data, lens
 // recommendation, and the safety-flag list.
 
-(function () {
-  'use strict';
-  const NS = window.EyePrescriptionDashboard;
-  const all = NS.sampleData;
+  
+  
 
   // ----------------------------------------------------------------------
   // State
@@ -272,4 +272,3 @@
   } else {
     init();
   }
-}());

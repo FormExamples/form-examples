@@ -121,10 +121,6 @@
 // classic <script> (no ES modules) so the page can be opened directly via
 // `file://`. The IIFE attaches its public symbols to a single global
 // namespace, `window.TimiRiskScoreForAcuteCoronarySyndrome`.
-(function () {
-'use strict';
-window.TimiRiskScoreForAcuteCoronarySyndrome =
-  window.TimiRiskScoreForAcuteCoronarySyndrome || {};
 
 /**
  * Build a fresh, fully-blank assessment.
@@ -250,15 +246,4 @@ function priorityLabel(priority) {
   }
 }
 
-Object.assign(window.TimiRiskScoreForAcuteCoronarySyndrome, {
-  emptyAssessment,
-  FOURTEEN_DAY_RISK_PERCENT,
-  riskBandLabel,
-  riskBandClass,
-  clinicianRoleLabel,
-  careSettingLabel,
-  workingDiagnosisLabel,
-  sexLabel,
-  priorityLabel
-});
-})();
+export { emptyAssessment, FOURTEEN_DAY_RISK_PERCENT, riskBandLabel, riskBandClass, clinicianRoleLabel, careSettingLabel, workingDiagnosisLabel, sexLabel, priorityLabel };

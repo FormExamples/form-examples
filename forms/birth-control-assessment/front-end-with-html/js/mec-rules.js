@@ -1,3 +1,5 @@
+import { calculateAge } from './types.js';
+
 // UK Medical Eligibility Criteria (UK MEC) grading rules.
 //
 // Mirrors `src/lib/engine/mec-rules.ts` from the SvelteKit reference. Each
@@ -20,11 +22,6 @@
  * @property {string[]} affectedMethods
  * @property {(d: AssessmentData) => boolean} evaluate
  */
-
-(function () {
-'use strict';
-window.BirthControlAssessment = window.BirthControlAssessment || {};
-const { calculateAge } = window.BirthControlAssessment;
 
 /** @type {MECRule[]} */
 const mecRules = [
@@ -392,5 +389,4 @@ const mecRules = [
   }
 ];
 
-window.BirthControlAssessment.mecRules = mecRules;
-})();
+export { mecRules };

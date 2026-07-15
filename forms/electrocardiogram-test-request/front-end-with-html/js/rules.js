@@ -11,12 +11,6 @@
 //
 // Wrapped in an IIFE; published via `window.ElectrocardiogramTestRequest`.
 
-(function () {
-'use strict';
-window.ElectrocardiogramTestRequest =
-  window.ElectrocardiogramTestRequest || {};
-const NS = window.ElectrocardiogramTestRequest;
-
 // ----------------------------------------------------------------------
 // Axis A — Appropriateness (AHA/ACC ECG-use guidance, 1-9 ordinal)
 // ----------------------------------------------------------------------
@@ -340,17 +334,4 @@ function scorePriority(triageTier, apprBand) {
   return { band, firedRules };
 }
 
-Object.assign(NS, {
-  scoreAppropriateness,
-  appropriatenessBand,
-  scoreTriage,
-  scoreCompleteness,
-  scorePriority,
-  maxTier,
-  maxPriority,
-  TRIAGE_ORDER,
-  PRIORITY_ORDER,
-  TARGET_TIMEFRAMES,
-  INDICATION_ECG_MAP
-});
-})();
+export { scoreAppropriateness, appropriatenessBand, scoreTriage, scoreCompleteness, scorePriority, maxTier, maxPriority, TRIAGE_ORDER, PRIORITY_ORDER, TARGET_TIMEFRAMES, INDICATION_ECG_MAP };

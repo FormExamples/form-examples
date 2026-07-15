@@ -1,3 +1,7 @@
+import { calculateDMFT } from './dmft-grader.js';
+import { detectAdditionalFlags } from './flagged-issues.js';
+import { dmftCategoryClass, dmftCategoryLabel, dmftScoreShortLabel, emptyAssessment, getDMFTCategory, getDMFTScore } from './types.js';
+
 // Dental Assessment - patient wizard (vanilla JavaScript, no build).
 //
 // Single-page continuous wizard: every section is rendered into the page in
@@ -10,20 +14,6 @@
 // exports to `window.DentalAssessment`. Pulling them off here keeps the
 // rest of this file referring to short local names. Whole file is wrapped
 // in an IIFE so its top-level identifiers don't leak to the global scope.
-(function () {
-'use strict';
-
-const NS = window.DentalAssessment;
-const {
-  emptyAssessment,
-  getDMFTScore,
-  getDMFTCategory,
-  dmftCategoryLabel,
-  dmftScoreShortLabel,
-  dmftCategoryClass,
-  calculateDMFT,
-  detectAdditionalFlags
-} = NS;
 
 // ----------------------------------------------------------------------
 // Persistence
@@ -1253,4 +1243,3 @@ if (document.readyState === 'loading') {
 } else {
   init();
 }
-})();

@@ -7,11 +7,6 @@
 // required worked cases: a routine resting 12-lead ECG, an emergency suspected-
 // ACS case with active chest pain, and a syncope red-flag case.
 
-(function () {
-'use strict';
-window.ElectrocardiogramTestRequestDashboard =
-  window.ElectrocardiogramTestRequestDashboard || {};
-
 /** @type {import('./types.js').RequestRow[]} */
 const sampleRequests = [
   {
@@ -156,5 +151,4 @@ const sampleRequests = [
   }
 ];
 
-window.ElectrocardiogramTestRequestDashboard.sampleRequests = sampleRequests;
-})();
+export { sampleRequests };

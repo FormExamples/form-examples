@@ -1,3 +1,5 @@
+import { blsRules } from './rules.js';
+
 // BLS Skills Verification grader. Pure functions: take an `AssessmentData`
 // object, evaluate each declarative rule in the registry, and return the
 // pass/fail outcome plus the audit trail of fired rules.
@@ -15,14 +17,6 @@
  * @typedef {import('./types.js').FiredRule} FiredRule
  * @typedef {import('./types.js').TriState} TriState
  */
-
-(function () {
-'use strict';
-window.CardiopulmonaryResuscitationTraining =
-  window.CardiopulmonaryResuscitationTraining || {};
-
-const NS = window.CardiopulmonaryResuscitationTraining;
-const { blsRules } = NS;
 
 const NON_CRITICAL_DEFICIENCY_LIMIT = 2;
 
@@ -104,8 +98,4 @@ function gradeBLS(data) {
   };
 }
 
-Object.assign(NS, {
-  gradeBLS,
-  NON_CRITICAL_DEFICIENCY_LIMIT
-});
-})();
+export { gradeBLS, NON_CRITICAL_DEFICIENCY_LIMIT };

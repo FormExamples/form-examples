@@ -1,3 +1,5 @@
+import { ESAS_ITEMS } from './types.js';
+
 // Flagged-issue detection for the Palliative Assessment.
 //
 // Independent of the ESAS-r total (which the grader computes), this module
@@ -31,11 +33,6 @@
  */
 
 // Wrapped in an IIFE; published via window.PalliativeAssessment.
-(function () {
-'use strict';
-window.PalliativeAssessment = window.PalliativeAssessment || {};
-const NS = window.PalliativeAssessment;
-const { ESAS_ITEMS } = NS;
 
 const labelByKey = Object.create(null);
 for (const item of ESAS_ITEMS) labelByKey[item.key] = item.label;
@@ -255,5 +252,4 @@ function detectAdditionalFlags(data) {
   return flags;
 }
 
-window.PalliativeAssessment.detectAdditionalFlags = detectAdditionalFlags;
-})();
+export { detectAdditionalFlags };

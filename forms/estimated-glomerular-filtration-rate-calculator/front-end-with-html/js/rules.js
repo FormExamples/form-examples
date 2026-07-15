@@ -21,10 +21,6 @@
  */
 
 // Wrapped in an IIFE; published via window.EstimatedGlomerularFiltrationRateCalculator.
-(function () {
-'use strict';
-window.EstimatedGlomerularFiltrationRateCalculator =
-  window.EstimatedGlomerularFiltrationRateCalculator || {};
 
 // ─── CKD-EPI 2021 creatinine constants (spec §4) ────────────────
 /** Conversion divisor: serum creatinine umol/L → mg/dL. */
@@ -117,22 +113,4 @@ const stageRules = [
   }
 ];
 
-Object.assign(window.EstimatedGlomerularFiltrationRateCalculator, {
-  UMOL_PER_MGDL,
-  KAPPA_FEMALE,
-  KAPPA_MALE,
-  ALPHA_FEMALE,
-  ALPHA_MALE,
-  MAX_EXPONENT,
-  BASE_COEFFICIENT,
-  AGE_DECAY_BASE,
-  FEMALE_MULTIPLIER,
-  G1_MIN,
-  G2_MIN,
-  G3A_MIN,
-  G3B_MIN,
-  G4_MIN,
-  BOUNDARY_MARGIN,
-  stageRules
-});
-})();
+export { UMOL_PER_MGDL, KAPPA_FEMALE, KAPPA_MALE, ALPHA_FEMALE, ALPHA_MALE, MAX_EXPONENT, BASE_COEFFICIENT, AGE_DECAY_BASE, FEMALE_MULTIPLIER, G1_MIN, G2_MIN, G3A_MIN, G3B_MIN, G4_MIN, BOUNDARY_MARGIN, stageRules };

@@ -6,9 +6,6 @@
  */
 
 // Wrapped in an IIFE; published via window.CodeOfConductNotice.
-(function () {
-'use strict';
-window.CodeOfConductNotice = window.CodeOfConductNotice || {};
 
 /** @type {ValidationRule[]} */
 const validationRules = [
@@ -53,5 +50,4 @@ const validationRules = [
   }
 ];
 
-window.CodeOfConductNotice.validationRules = validationRules;
-})();
+export { validationRules };

@@ -11,10 +11,6 @@
 // 2022-broadened set (doctor, nurse, occupational_therapist, pharmacist,
 // physiotherapist).
 
-(function () {
-'use strict';
-window.UkFitNoteDashboard = window.UkFitNoteDashboard || {};
-
 /** @type {import('./app.js').FitNoteRow[]} */
 const sampleFitNotes = [
   {
@@ -211,5 +207,4 @@ const sampleFitNotes = [
   },
 ];
 
-window.UkFitNoteDashboard.sampleFitNotes = sampleFitNotes;
-})();
+export { sampleFitNotes };

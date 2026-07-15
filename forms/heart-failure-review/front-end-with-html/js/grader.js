@@ -1,3 +1,7 @@
+import { detectFlaggedIssues } from './flags.js';
+import { indicatedPillarKeys, reviewDomainRules } from './rules.js';
+import { PILLARS } from './types.js';
+
 // Heart Failure Annual Review grader. Pure functions: take a `ReviewData`
 // object and derive the four documentation outputs (spec §4). This is NOT a
 // numeric severity score. It emits:
@@ -38,11 +42,6 @@
  */
 
 // Wrapped in an IIFE; published via window.HeartFailureReview.
-(function () {
-'use strict';
-window.HeartFailureReview = window.HeartFailureReview || {};
-const NS = window.HeartFailureReview;
-const { PILLARS, reviewDomainRules, indicatedPillarKeys, detectFlaggedIssues } = NS;
 
 /**
  * Derive the NYHA functional status from the recorded NYHA class.
@@ -204,10 +203,4 @@ function gradeReview(data) {
   };
 }
 
-Object.assign(NS, {
-  deriveFunctionalStatus,
-  deriveMedicationOptimisation,
-  deriveReviewCompleteness,
-  gradeReview
-});
-})();
+export { deriveFunctionalStatus, deriveMedicationOptimisation, deriveReviewCompleteness, gradeReview };

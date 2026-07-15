@@ -7,10 +7,6 @@
 // assistive devices; NHS numbers in the canonical "NNN NNN NNNN" display
 // form.
 
-(function () {
-'use strict';
-window.MobilityAssessmentDashboard = window.MobilityAssessmentDashboard || {};
-
 /** @type {import('./types.js').PatientRow[]} */
 const samplePatients = [
   {
@@ -123,5 +119,4 @@ const samplePatients = [
   }
 ];
 
-window.MobilityAssessmentDashboard.samplePatients = samplePatients;
-})();
+export { samplePatients };

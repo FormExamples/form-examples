@@ -1,3 +1,6 @@
+import { applyFlagRules } from './flags.js';
+import { applyBlockerRules, computeValidityBand } from './rules.js';
+
 // Validation orchestrator for the UK LP1F lasting power of attorney.
 //
 // Faithful port of the SvelteKit `validator/validator.ts`. Composes the
@@ -22,12 +25,6 @@
 //
 // Wrapped in an IIFE; published via `window.UkLpaFinancialDecisions`.
 
-(function () {
-'use strict';
-window.UkLpaFinancialDecisions =
-  window.UkLpaFinancialDecisions || {};
-const NS = window.UkLpaFinancialDecisions;
-
 /** Max-grade composite risk from fired blockers and additional flags. */
 function computeCompositeRisk(firedRules, flags) {
   if (firedRules.length > 0) return 'critical';
@@ -43,10 +40,10 @@ function computeCompositeRisk(firedRules, flags) {
  * @returns {{ validityBand:string, compositeRisk:string, firedRules:object[], additionalFlags:object[] }}
  */
 function validateLpa(lpa) {
-  const firedRules = NS.applyBlockerRules(lpa);
-  const additionalFlags = NS.applyFlagRules(lpa);
+  const firedRules = applyBlockerRules(lpa);
+  const additionalFlags = applyFlagRules(lpa);
   const compositeRisk = computeCompositeRisk(firedRules, additionalFlags);
-  const validityBand = NS.computeValidityBand(lpa);
+  const validityBand = computeValidityBand(lpa);
   return {
     validityBand,
     compositeRisk,
@@ -55,10 +52,6 @@ function validateLpa(lpa) {
   };
 }
 
-Object.assign(NS, {
-  validateLpa,
-  // Alias for parity with the canonical reference form's engine entry point.
-  calculateGrade: validateLpa,
-  computeCompositeRisk
-});
-})();
+export const calculateGrade = validateLpa;
+
+export { validateLpa, computeCompositeRisk };

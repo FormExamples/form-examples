@@ -1,3 +1,6 @@
+import { calculateGrade } from './grader.js';
+import { TESTS, countSelectedTests, emptyRequest, indicationLabel, selectedTestLabels } from './types.js';
+
 // Coagulation Test Request — clinician referral wizard (vanilla JS).
 //
 // Single-page continuous wizard: every section is rendered into the page in
@@ -9,18 +12,6 @@
 // Sibling files loaded as plain `<script>` tags (in order) attach their
 // exports to `window.CoagulationTestRequest`. The whole file is wrapped in an
 // IIFE so its top-level identifiers don't leak to the global scope.
-
-(function () {
-'use strict';
-
-const NS = window.CoagulationTestRequest;
-const {
-  emptyRequest,
-  countSelectedTests,
-  indicationLabel,
-  calculateGrade,
-  TESTS
-} = NS;
 
 // ----------------------------------------------------------------------
 // Persistence
@@ -760,7 +751,7 @@ function renderReport() {
     timestamp
   } = lastResult;
 
-  const selected = NS.selectedTestLabels(state.tests);
+  const selected = selectedTestLabels(state.tests);
   const testsSummary = selected.length
     ? selected.map((s) => esc(s)).join(', ')
     : '<span class="muted">no tests selected</span>';
@@ -912,4 +903,3 @@ if (document.readyState === 'loading') {
 } else {
   init();
 }
-})();

@@ -22,10 +22,6 @@
  */
 
 // Wrapped in an IIFE; published via window.AbdominalAorticAneurysmScreening.
-(function () {
-'use strict';
-window.AbdominalAorticAneurysmScreening =
-  window.AbdominalAorticAneurysmScreening || {};
 
 // ─── Diameter thresholds (spec §4) ──────────────────────────────
 /** Lower bound of a small aneurysm (cm, inclusive). Below this is normal. */
@@ -78,11 +74,4 @@ const classificationRules = [
   }
 ];
 
-Object.assign(window.AbdominalAorticAneurysmScreening, {
-  SMALL_MIN,
-  MEDIUM_MIN,
-  LARGE_MIN,
-  RAPID_GROWTH_CM,
-  classificationRules
-});
-})();
+export { SMALL_MIN, MEDIUM_MIN, LARGE_MIN, RAPID_GROWTH_CM, classificationRules };

@@ -1,13 +1,14 @@
+import { calculateBmi, convertMmolToMg, isSmoker } from './types.js';
+import { calculateFraminghamRisk } from './utils.js';
+
 // Framingham Risk Score — additional flagged issues.
 //
 // Vanilla-JS port of `src/lib/engine/flagged-issues.ts`. These flags are
 // independent of the risk score and highlight actionable safety / referral
 // alerts (eligibility, hypertensive crisis, severe lipids, treatment gaps).
-(function () {
-  'use strict';
 
-  const NS = window.FraminghamRiskScore;
-  const { calculateBmi, calculateFraminghamRisk, convertMmolToMg, isSmoker } = NS;
+  
+  
 
   /**
    * @param {object} data Full assessment data.
@@ -196,7 +197,6 @@
     return flags;
   }
 
-  Object.assign(window.FraminghamRiskScore, {
-    detectAdditionalFlags
-  });
-})();
+  
+
+export { detectAdditionalFlags };

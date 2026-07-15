@@ -1,3 +1,5 @@
+import { auditcRules } from './rules.js';
+
 // AUDIT-C grader. Pure functions: take an `AssessmentData` object, evaluate the
 // three consumption-item rules in `auditcRules`, award each item its 0-4 point
 // value, sum the total (0-12), and derive the risk band and positive-screen
@@ -26,11 +28,6 @@
 
 // Wrapped in an IIFE; published via
 // window.AlcoholUseDisordersIdentificationTestConsumption.
-(function () {
-'use strict';
-window.AlcoholUseDisordersIdentificationTestConsumption =
-  window.AlcoholUseDisordersIdentificationTestConsumption || {};
-const { auditcRules } = window.AlcoholUseDisordersIdentificationTestConsumption;
 
 /**
  * Evaluate the three consumption-item rules and collect one fired record per
@@ -121,9 +118,4 @@ function calculateAuditcGrade(data) {
   };
 }
 
-Object.assign(window.AlcoholUseDisordersIdentificationTestConsumption, {
-  evaluateItems,
-  bandForScore,
-  calculateAuditcGrade
-});
-})();
+export { evaluateItems, bandForScore, calculateAuditcGrade };

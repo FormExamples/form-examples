@@ -1,3 +1,5 @@
+import { donationRules } from './donation-rules.js';
+
 // Donor eligibility grader. Pure functions: take an `AssessmentData`
 // object, evaluate every declarative rule from `donation-rules.js`, then
 // classify the donor into:
@@ -15,12 +17,6 @@
 //
 // Note: SU-001 (ASA Grade I) is a positive Grade-1 marker and is excluded
 // from penalty counting, similar to the bone-marrow grader pattern.
-
-(function () {
-'use strict';
-window.OrganDonationAssessment = window.OrganDonationAssessment || {};
-const NS = window.OrganDonationAssessment;
-const { donationRules } = NS;
 
 /**
  * Evaluate every declarative donor rule against the given assessment data.
@@ -100,9 +96,4 @@ function gradeDonor(data) {
   };
 }
 
-Object.assign(window.OrganDonationAssessment, {
-  evaluateRules,
-  classifyEligibility,
-  gradeDonor
-});
-})();
+export { evaluateRules, classifyEligibility, gradeDonor };

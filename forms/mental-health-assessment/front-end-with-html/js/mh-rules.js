@@ -12,9 +12,6 @@
  */
 
 // Wrapped in an IIFE; published via window.MentalHealthAssessment.
-(function () {
-'use strict';
-window.MentalHealthAssessment = window.MentalHealthAssessment || {};
 
 // ──────────────────────────────────────────────
 // PHQ-9 Scoring Rules
@@ -190,19 +187,4 @@ function calculateAuditCScore(frequency, quantity, binge) {
   return f + q + b;
 }
 
-Object.assign(window.MentalHealthAssessment, {
-  phq9Questions,
-  phqKeys,
-  phqAnswerOptions,
-  calculatePhq9Score,
-  phq9Severity,
-  phq9SeverityLabel,
-  gad7Questions,
-  gadKeys,
-  gadAnswerOptions,
-  calculateGad7Score,
-  gad7Severity,
-  gad7SeverityLabel,
-  calculateAuditCScore
-});
-})();
+export { phq9Questions, phqKeys, phqAnswerOptions, calculatePhq9Score, phq9Severity, phq9SeverityLabel, gad7Questions, gadKeys, gadAnswerOptions, calculateGad7Score, gad7Severity, gad7SeverityLabel, calculateAuditCScore };

@@ -1,3 +1,6 @@
+import { fetchChecks } from './api.js';
+import { sampleChecks } from './data.js';
+
 // Learning Disability Annual Health Check — clinician dashboard
 // (vanilla classic-script app).
 //
@@ -9,12 +12,6 @@
 // Sibling modules loaded as plain `<script>` tags (in dependency order) attach
 // their exports to `window.LearningDisabilityAnnualHealthCheckDashboard`.
 // The whole file is wrapped in an IIFE so its top-level identifiers do not leak.
-(function () {
-'use strict';
-const {
-  fetchChecks,
-  sampleChecks
-} = window.LearningDisabilityAnnualHealthCheckDashboard;
 
 // ----------------------------------------------------------------------
 // State
@@ -370,4 +367,3 @@ if (document.readyState === 'loading') {
 } else {
   init();
 }
-})();

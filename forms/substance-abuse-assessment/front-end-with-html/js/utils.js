@@ -1,9 +1,6 @@
 // Utility helpers for the Substance Abuse Assessment form: BMI, AUDIT
 // scoring, DAST scoring, risk-category derivation, and label/colour
 // helpers. Mirrors `src/lib/engine/utils.ts` from the SvelteKit reference.
-(function () {
-'use strict';
-const NS = window.SubstanceAbuseAssessment;
 
 /** Calculate BMI from weight (kg) and height (cm). Returns null if invalid. */
 function calculateBMI(weightKg, heightCm) {
@@ -128,17 +125,4 @@ function substanceGradeLabel(grade) {
   }
 }
 
-Object.assign(NS, {
-  calculateBMI,
-  bmiCategory,
-  calculateAuditScore,
-  auditRiskCategory,
-  auditRiskLabel,
-  calculateDastScore,
-  dastRiskCategory,
-  dastRiskLabel,
-  riskLevelLabel,
-  riskLevelClass,
-  substanceGradeLabel
-});
-})();
+export { calculateBMI, bmiCategory, calculateAuditScore, auditRiskCategory, auditRiskLabel, calculateDastScore, dastRiskCategory, dastRiskLabel, riskLevelLabel, riskLevelClass, substanceGradeLabel };

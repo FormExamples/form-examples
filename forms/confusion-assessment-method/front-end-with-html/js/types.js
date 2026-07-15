@@ -144,9 +144,6 @@
 // classic <script> (no ES modules) so the page can be opened directly via
 // `file://`. The IIFE attaches its public symbols to a single global
 // namespace, `window.ConfusionAssessmentMethod`.
-(function () {
-'use strict';
-window.ConfusionAssessmentMethod = window.ConfusionAssessmentMethod || {};
 
 /**
  * Build a fresh, fully-blank assessment.
@@ -366,22 +363,4 @@ function priorityLabel(priority) {
   }
 }
 
-Object.assign(window.ConfusionAssessmentMethod, {
-  emptyAssessment,
-  classificationLabel,
-  classificationClass,
-  featureStateLabel,
-  featureLabel,
-  assessorRoleLabel,
-  camVariantLabel,
-  sexLabel,
-  ageBandLabel,
-  cognitiveBaselineLabel,
-  collateralSourceLabel,
-  onsetTimingLabel,
-  attentionTestLabel,
-  consciousnessLevelLabel,
-  motoricSubtypeLabel,
-  priorityLabel
-});
-})();
+export { emptyAssessment, classificationLabel, classificationClass, featureStateLabel, featureLabel, assessorRoleLabel, camVariantLabel, sexLabel, ageBandLabel, cognitiveBaselineLabel, collateralSourceLabel, onsetTimingLabel, attentionTestLabel, consciousnessLevelLabel, motoricSubtypeLabel, priorityLabel };

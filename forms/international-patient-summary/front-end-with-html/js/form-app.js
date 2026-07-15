@@ -1,3 +1,8 @@
+import { detectAdditionalFlags } from './flagged-issues.js';
+import { completenessLevelClass, completenessLevelLabel, validateIPS } from './ips-validator.js';
+import { emptyAssessment } from './types.js';
+import { sectionPopulationCheckers } from './validation-rules.js';
+
 // International Patient Summary - clinician wizard (vanilla JavaScript, no build).
 //
 // Single-page continuous wizard: every section is rendered into the
@@ -12,18 +17,6 @@
 // off here keeps the rest of this file referring to short local
 // names. Whole file is wrapped in an IIFE so its top-level
 // identifiers don't leak to the global scope.
-(function () {
-'use strict';
-
-const NS = window.InternationalPatientSummary;
-const {
-  emptyAssessment,
-  validateIPS,
-  completenessLevelLabel,
-  completenessLevelClass,
-  detectAdditionalFlags,
-  sectionPopulationCheckers
-} = NS;
 
 const TOTAL_SECTIONS = 10;
 
@@ -1224,4 +1217,3 @@ if (document.readyState === 'loading') {
 } else {
   init();
 }
-})();

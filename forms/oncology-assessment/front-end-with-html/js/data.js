@@ -6,10 +6,6 @@
 // and stages, and every treatment-status label; NHS numbers in the
 // canonical "NNN NNN NNNN" display form.
 
-(function () {
-'use strict';
-window.OncologyAssessmentDashboard = window.OncologyAssessmentDashboard || {};
-
 /** @type {import('./types.js').PatientRow[]} */
 const samplePatients = [
   {
@@ -122,5 +118,4 @@ const samplePatients = [
   }
 ];
 
-window.OncologyAssessmentDashboard.samplePatients = samplePatients;
-})();
+export { samplePatients };

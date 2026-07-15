@@ -1,9 +1,5 @@
 // Factory helpers for building empty engine inputs.
 
-(function () {
-'use strict';
-window.UkLpaForm = window.UkLpaForm || {};
-
 function emptyDonor() {
   return {
     title: '', givenNames: '', familyName: '', otherNamesUsed: '',
@@ -75,9 +71,4 @@ function emptyLpaApplication() {
   };
 }
 
-Object.assign(window.UkLpaForm, {
-  emptyDonor, emptyAttorney, emptyReplacementAttorney,
-  emptyCertificateProvider, emptyPersonToNotify,
-  emptyRegistrationApplication, emptyLpaApplication,
-});
-})();
+export { emptyDonor, emptyAttorney, emptyReplacementAttorney, emptyCertificateProvider, emptyPersonToNotify, emptyRegistrationApplication, emptyLpaApplication };

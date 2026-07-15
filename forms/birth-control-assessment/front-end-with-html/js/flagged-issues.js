@@ -1,3 +1,5 @@
+import { calculateAge } from './types.js';
+
 // Flagged-issue detection. Independent of UK MEC classification, this module
 // raises clinician-facing alerts for safety-critical conditions: previous
 // VTE, known thrombophilia, migraine with aura, ischaemic heart disease,
@@ -12,11 +14,6 @@
  * @typedef {import('./types.js').AssessmentData} AssessmentData
  * @typedef {import('./types.js').AdditionalFlag} AdditionalFlag
  */
-
-(function () {
-'use strict';
-window.BirthControlAssessment = window.BirthControlAssessment || {};
-const { calculateAge } = window.BirthControlAssessment;
 
 /**
  * @param {AssessmentData} data
@@ -215,5 +212,4 @@ function detectAdditionalFlags(data) {
   return flags;
 }
 
-window.BirthControlAssessment.detectAdditionalFlags = detectAdditionalFlags;
-})();
+export { detectAdditionalFlags };

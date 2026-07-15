@@ -1,3 +1,8 @@
+import { detectAdditionalFlags } from './flagged-issues.js';
+import { validateForm as runValidator } from './form-validator.js';
+import { completenessBadgeClass, emptyAssessment, validationStatusClass } from './types.js';
+import { purposeOptions, recordTypeOptions } from './validation-rules.js';
+
 // Medical Records Release Permission - patient wizard (vanilla JS, no build).
 //
 // Single-page continuous wizard: every section is rendered into the page in
@@ -12,22 +17,6 @@
 // here keeps the rest of this file referring to short local names. Whole
 // file is wrapped in an IIFE so its top-level identifiers don't leak to
 // the global scope.
-(function () {
-'use strict';
-
-const NS = window.MedicalRecordsReleasePermission;
-const {
-  emptyAssessment,
-  // The engine export `validateForm` is renamed to `runValidator` locally so
-  // the page-level required-field validator can keep the canonical Lily name
-  // `validateForm` without shadowing the engine.
-  validateForm: runValidator,
-  detectAdditionalFlags,
-  recordTypeOptions,
-  purposeOptions,
-  completenessBadgeClass,
-  validationStatusClass
-} = NS;
 
 // ----------------------------------------------------------------------
 // Persistence
@@ -1078,4 +1067,3 @@ if (document.readyState === 'loading') {
 } else {
   init();
 }
-})();

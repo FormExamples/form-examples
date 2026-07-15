@@ -3,11 +3,6 @@
 // Classic <script> module: attaches its public symbols to
 // `window.SystematicCoronaryRiskEvaluation2Diabetes`. Wrapped in an IIFE
 // so its top-level identifiers do not leak.
-(function () {
-'use strict';
-
-const NS = (window.SystematicCoronaryRiskEvaluation2Diabetes =
-  window.SystematicCoronaryRiskEvaluation2Diabetes || {});
 
 /**
  * @returns {Object} Empty AssessmentData record with all sections present.
@@ -112,5 +107,4 @@ function createDefaultAssessmentData() {
   };
 }
 
-NS.createDefaultAssessmentData = createDefaultAssessmentData;
-})();
+export { createDefaultAssessmentData };

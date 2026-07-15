@@ -16,9 +16,6 @@
  */
 
 // Wrapped in an IIFE; published via window.EmployeeOnboardingChecklist.
-(function () {
-'use strict';
-window.EmployeeOnboardingChecklist = window.EmployeeOnboardingChecklist || {};
 
 /** @type {OnboardingRule[]} */
 const onboardingRules = [
@@ -249,5 +246,4 @@ const onboardingRules = [
   }
 ];
 
-window.EmployeeOnboardingChecklist.onboardingRules = onboardingRules;
-})();
+export { onboardingRules };

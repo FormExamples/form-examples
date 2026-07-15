@@ -1,19 +1,14 @@
+import { applyAttorneyRules } from './attorney-rules.js';
+import { applyCertificateProviderRules } from './certificate-provider-rules.js';
+import { applyDonorRules } from './donor-rules.js';
+import { detectAdditionalFlags } from './flagged-issues.js';
+import { applyInstructionRules } from './instruction-rules.js';
+import { applyRegistrationRules } from './registration-rules.js';
+import { applySignatureOrderRules } from './signature-order-rules.js';
+import { ENGINE_VERSION } from './types.js';
+
 // Composite validator — entry point. Mirrors the SvelteKit
 // `composite-validator.ts` and emits the same `LpaValidityResult` shape.
-
-(function () {
-'use strict';
-window.UkLpaForm = window.UkLpaForm || {};
-const {
-  ENGINE_VERSION,
-  applyDonorRules,
-  applyAttorneyRules,
-  applyCertificateProviderRules,
-  applySignatureOrderRules,
-  applyInstructionRules,
-  applyRegistrationRules,
-  detectAdditionalFlags,
-} = window.UkLpaForm;
 
 const SEVERITY_RANK = { fatal: 4, high: 3, medium: 2, informational: 1 };
 
@@ -107,5 +102,4 @@ function calculateLpaValidity(app) {
   };
 }
 
-window.UkLpaForm.calculateLpaValidity = calculateLpaValidity;
-})();
+export { calculateLpaValidity };

@@ -1,3 +1,5 @@
+import { completenessSlots, mandatoryRules } from './rules.js';
+
 // Child Safeguarding Referral grader. Pure functions: take a
 // `SafeguardingReferral` object, evaluate the mandatory rules in
 // `mandatoryRules`, and derive the completeness status, completeness
@@ -33,10 +35,6 @@
  */
 
 // Wrapped in an IIFE; published via window.ChildSafeguardingReferral.
-(function () {
-'use strict';
-window.ChildSafeguardingReferral = window.ChildSafeguardingReferral || {};
-const { mandatoryRules, completenessSlots } = window.ChildSafeguardingReferral;
 
 /**
  * Evaluate the mandatory rules against the referral.
@@ -152,10 +150,4 @@ function gradeReferral(referral) {
   };
 }
 
-Object.assign(window.ChildSafeguardingReferral, {
-  evaluateRules,
-  completeness,
-  classifyUrgency,
-  gradeReferral
-});
-})();
+export { evaluateRules, completeness, classifyUrgency, gradeReferral };

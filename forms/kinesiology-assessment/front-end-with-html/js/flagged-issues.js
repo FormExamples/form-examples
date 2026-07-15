@@ -13,9 +13,6 @@
  */
 
 // Wrapped in an IIFE; published via window.KinesiologyAssessment.
-(function () {
-'use strict';
-window.KinesiologyAssessment = window.KinesiologyAssessment || {};
 
 /**
  * Compute the per-pattern effective score (lower of L/R for bilateral
@@ -167,5 +164,4 @@ function detectAdditionalFlags(data) {
   return flags;
 }
 
-window.KinesiologyAssessment.detectAdditionalFlags = detectAdditionalFlags;
-})();
+export { detectAdditionalFlags };

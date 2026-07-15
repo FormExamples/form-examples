@@ -1,3 +1,5 @@
+import { compressionDepthInRange, compressionRateInRange } from './types.js';
+
 // AHA BLS Skills Verification checklist rules (declarative).
 //
 // Each rule maps a single observed skill to a tri-state value:
@@ -27,14 +29,6 @@
  * @property {TriState} defaultExpectation
  * @property {(d: AssessmentData) => TriState} evaluate
  */
-
-(function () {
-'use strict';
-window.CardiopulmonaryResuscitationTraining =
-  window.CardiopulmonaryResuscitationTraining || {};
-
-const NS = window.CardiopulmonaryResuscitationTraining;
-const { compressionRateInRange, compressionDepthInRange } = NS;
 
 /**
  * Helper: read a tri-state field, normalising missing/unknown values.
@@ -368,5 +362,4 @@ const blsRules = [
   }
 ];
 
-NS.blsRules = blsRules;
-})();
+export { blsRules };

@@ -7,11 +7,6 @@
 // lifting an otherwise low aggregate into medium), the nurse / parent concern
 // triggers, and every care setting.
 
-(function () {
-'use strict';
-window.PaediatricEarlyWarningScoreDashboard =
-  window.PaediatricEarlyWarningScoreDashboard || {};
-
 /** @type {import('./dashboard-types.js').AssessmentRow[]} */
 const sampleAssessments = [
   {
@@ -107,5 +102,4 @@ const sampleAssessments = [
   }
 ];
 
-window.PaediatricEarlyWarningScoreDashboard.sampleAssessments = sampleAssessments;
-})();
+export { sampleAssessments };

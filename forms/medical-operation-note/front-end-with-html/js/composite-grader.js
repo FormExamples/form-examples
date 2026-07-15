@@ -1,29 +1,17 @@
+import { ANAESTHETIC_EVENTS, applyAnaestheticEventRules } from './anaesthetic-event-rules.js';
+import { applyBloodLossRules, classifyBloodLoss } from './blood-loss-rules.js';
+import { applyClavienDindoRules } from './clavien-dindo-rules.js';
+import { applyCountRules, countsAgreed } from './count-rules.js';
+import { detectAdditionalFlags } from './flagged-issues.js';
+import { applyNeverEventRules, hasNeverEvent } from './never-event-rules.js';
+import { clavienToCompositeRisk, eblToCompositeRisk, maxCompositeRisk } from './utils.js';
+
 // Composite grader for the medical operation note. Implements the
 // max-grade algorithm: the worst finding sets the composite grade;
 // Routine is the default when no rules fire.
 //
 // Mirrors the SvelteKit `src/lib/engine/composite-grader.ts`. Pure
 // functions; public entry point is `calculateOperationGrade(data)`.
-
-(function () {
-'use strict';
-window.MedicalOperationNote =
-  window.MedicalOperationNote || {};
-const NS = window.MedicalOperationNote;
-const {
-  maxCompositeRisk,
-  clavienToCompositeRisk,
-  eblToCompositeRisk,
-  classifyBloodLoss,
-  applyClavienDindoRules,
-  applyBloodLossRules,
-  applyCountRules,
-  countsAgreed,
-  applyNeverEventRules,
-  hasNeverEvent,
-  applyAnaestheticEventRules,
-  ANAESTHETIC_EVENTS
-} = NS;
 
 /**
  * Compute the composite-risk band by folding every fired rule through
@@ -133,8 +121,8 @@ function calculateOperationGrade(data) {
   const surgeonOverride = data.summary.surgeonOverrideGrade;
   if (surgeonOverride) compositeRisk = surgeonOverride;
 
-  const additionalFlags = NS.detectAdditionalFlags
-    ? NS.detectAdditionalFlags(data)
+  const additionalFlags = detectAdditionalFlags
+    ? detectAdditionalFlags(data)
     : [];
 
   return {
@@ -152,9 +140,4 @@ function calculateOperationGrade(data) {
   };
 }
 
-Object.assign(NS, {
-  computeCompositeRisk,
-  isUnplannedStepUp,
-  calculateOperationGrade
-});
-})();
+export { computeCompositeRisk, isUnplannedStepUp, calculateOperationGrade };

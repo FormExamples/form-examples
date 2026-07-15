@@ -137,9 +137,6 @@
 // <script> (no ES modules) so the page can be opened directly via `file://`.
 // The IIFE attaches its public symbols to a single global namespace,
 // `window.NewbornBloodSpotScreening`.
-(function () {
-'use strict';
-window.NewbornBloodSpotScreening = window.NewbornBloodSpotScreening || {};
 
 /**
  * The nine screened conditions, in reporting order. `carrierValid` is true
@@ -293,14 +290,4 @@ function referralStatusLabel(status) {
   }
 }
 
-Object.assign(window.NewbornBloodSpotScreening, {
-  CONDITIONS,
-  emptyAssessment,
-  computeAgeAtSampleDays,
-  resultClassLabel,
-  resultClassBadge,
-  overallOutcomeLabel,
-  overallOutcomeBadge,
-  referralStatusLabel
-});
-})();
+export { CONDITIONS, emptyAssessment, computeAgeAtSampleDays, resultClassLabel, resultClassBadge, overallOutcomeLabel, overallOutcomeBadge, referralStatusLabel };

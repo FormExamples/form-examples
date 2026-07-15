@@ -1,9 +1,11 @@
+import { fetchApplications } from './api.js';
+import { CONDITION_LABELS, OUTCOME_LABELS, STATUS_LABELS } from './dashboard-types.js';
+
 /**
  * FP92A dashboard - filter, render, refresh.
  */
 
-(function (root) {
-  const F = root.Fp92aDashboard;
+  
 
   const tbody = document.getElementById("applications-tbody");
   const emptyMsg = document.getElementById("empty-message");
@@ -39,23 +41,23 @@
       return true;
     });
     tbody.innerHTML = matches.map((a) => {
-      const cond = (a.conditions || []).map((c) => F.CONDITION_LABELS[c] || c).join(", ");
+      const cond = (a.conditions || []).map((c) => CONDITION_LABELS[c] || c).join(", ");
       return `<tr>
         <td>${escape(a.certificateNumber || "—")}</td>
         <td>${escape(a.patientName)}</td>
         <td>${escape(a.nhsNumber)}</td>
         <td>${escape(cond || "—")}</td>
-        <td><span class="badge ${escape(a.outcome)}">${escape(F.OUTCOME_LABELS[a.outcome] || a.outcome)}</span></td>
+        <td><span class="badge ${escape(a.outcome)}">${escape(OUTCOME_LABELS[a.outcome] || a.outcome)}</span></td>
         <td>${escape(a.validFrom || "—")}</td>
         <td>${escape(a.validUntil || "—")}</td>
-        <td><span class="badge status-${escape(a.status)}">${escape(F.STATUS_LABELS[a.status] || a.status)}</span></td>
+        <td><span class="badge status-${escape(a.status)}">${escape(STATUS_LABELS[a.status] || a.status)}</span></td>
       </tr>`;
     }).join("");
     emptyMsg.hidden = matches.length > 0;
   }
 
   async function load() {
-    const { items: data, source } = await F.fetchApplications();
+    const { items: data, source } = await fetchApplications();
     items = data;
     if (source === "sample") {
       banner.hidden = false;
@@ -68,4 +70,3 @@
 
   Object.values(filters).forEach((el) => el.addEventListener("input", render));
   load();
-})(window);

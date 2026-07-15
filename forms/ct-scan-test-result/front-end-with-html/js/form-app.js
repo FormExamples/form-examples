@@ -1,3 +1,6 @@
+import { calculateGrade } from './grader.js';
+import { NUMERIC_FIELDS, abnormalitySeverityClass, abnormalitySeverityLabel, bodyRegionLabel, contrastUsedLabel, emptyResult, examinationAdequacyLabel, followUpUrgencyClass, followUpUrgencyLabel, priorityLabel, recommendationLabel, reportStatusLabel, resultClassificationClass, resultClassificationLabel } from './types.js';
+
 // CT Scan Test Result — reporting-clinician wizard
 // (vanilla JavaScript, no build).
 //
@@ -15,27 +18,6 @@
 // exports to `window.CtScanTestResult`. Pulling them off here keeps the
 // rest of this file referring to short local names. The whole file is wrapped
 // in an IIFE so its top-level identifiers don't leak.
-(function () {
-'use strict';
-
-const NS = window.CtScanTestResult;
-const {
-  NUMERIC_FIELDS,
-  emptyResult,
-  resultClassificationLabel,
-  abnormalitySeverityLabel,
-  followUpUrgencyLabel,
-  bodyRegionLabel,
-  reportStatusLabel,
-  contrastUsedLabel,
-  examinationAdequacyLabel,
-  recommendationLabel,
-  priorityLabel,
-  resultClassificationClass,
-  abnormalitySeverityClass,
-  followUpUrgencyClass,
-  calculateGrade
-} = NS;
 
 // ----------------------------------------------------------------------
 // Persistence
@@ -1072,4 +1054,3 @@ if (document.readyState === 'loading') {
 } else {
   init();
 }
-})();

@@ -7,11 +7,6 @@
 // down) or returns an empty list, callers fall back to the sample data
 // shipped in `data.js` so the page is usable standalone.
 
-(function () {
-'use strict';
-window.EmployeeSatisfactionSurveyDashboard =
-  window.EmployeeSatisfactionSurveyDashboard || {};
-
 const API_BASE = 'http://localhost:5150';
 const TEAMS_PATH = '/api/dashboard/teams';
 
@@ -36,6 +31,4 @@ async function fetchTeams() {
   return data.items || [];
 }
 
-window.EmployeeSatisfactionSurveyDashboard.fetchTeams = fetchTeams;
-window.EmployeeSatisfactionSurveyDashboard.API_BASE = API_BASE;
-})();
+export { fetchTeams, API_BASE };

@@ -145,9 +145,6 @@
 // classic <script> (no ES modules) so the page can be opened directly via
 // `file://`. The IIFE attaches its public symbols to a single global
 // namespace, `window.BronchoscopyTestResult`.
-(function () {
-'use strict';
-window.BronchoscopyTestResult = window.BronchoscopyTestResult || {};
 
 /**
  * Build a fresh, fully-blank bronchoscopy result.
@@ -343,19 +340,4 @@ function followUpUrgencyClass(value) {
   }
 }
 
-Object.assign(window.BronchoscopyTestResult, {
-  emptyResult,
-  resultClassificationLabel,
-  abnormalitySeverityLabel,
-  followUpUrgencyLabel,
-  procedureLabel,
-  sedationUsedLabel,
-  complicationLabel,
-  reportStatusLabel,
-  recommendationLabel,
-  priorityLabel,
-  resultClassificationClass,
-  abnormalitySeverityClass,
-  followUpUrgencyClass
-});
-})();
+export { emptyResult, resultClassificationLabel, abnormalitySeverityLabel, followUpUrgencyLabel, procedureLabel, sedationUsedLabel, complicationLabel, reportStatusLabel, recommendationLabel, priorityLabel, resultClassificationClass, abnormalitySeverityClass, followUpUrgencyClass };

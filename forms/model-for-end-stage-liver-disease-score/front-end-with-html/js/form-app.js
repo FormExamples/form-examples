@@ -1,3 +1,7 @@
+import { detectFlaggedIssues } from './flags.js';
+import { calculateMeld } from './grader.js';
+import { emptyAssessment, meldVariantLabel, mortalityBandClass, mortalityBandLabel, priorityLabel } from './types.js';
+
 // MELD (Model for End-Stage Liver Disease) Score — single-page wizard
 // (vanilla JavaScript, no build).
 //
@@ -14,19 +18,6 @@
 // to `window.ModelForEndStageLiverDiseaseScore`. Pulling them off here keeps the
 // rest of this file referring to short local names. The whole file is wrapped in
 // an IIFE so its top-level identifiers don't leak.
-(function () {
-'use strict';
-
-const NS = window.ModelForEndStageLiverDiseaseScore;
-const {
-  emptyAssessment,
-  meldVariantLabel,
-  mortalityBandLabel,
-  mortalityBandClass,
-  priorityLabel,
-  calculateMeld,
-  detectFlaggedIssues
-} = NS;
 
 // ----------------------------------------------------------------------
 // Persistence
@@ -990,4 +981,3 @@ if (document.readyState === 'loading') {
 } else {
   init();
 }
-})();

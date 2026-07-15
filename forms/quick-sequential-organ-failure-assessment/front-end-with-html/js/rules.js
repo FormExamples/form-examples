@@ -20,10 +20,6 @@
  */
 
 // Wrapped in an IIFE; published via window.QuickSequentialOrganFailureAssessment.
-(function () {
-'use strict';
-window.QuickSequentialOrganFailureAssessment =
-  window.QuickSequentialOrganFailureAssessment || {};
 
 /** @type {QsofaRule[]} */
 const qsofaRules = [
@@ -65,5 +61,4 @@ const qsofaRules = [
   }
 ];
 
-window.QuickSequentialOrganFailureAssessment.qsofaRules = qsofaRules;
-})();
+export { qsofaRules };

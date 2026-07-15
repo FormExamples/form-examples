@@ -6,11 +6,6 @@
 // handicap level, with vestibular involvement flagged for a subset; NHS
 // numbers in the canonical "NNN NNN NNNN" display form.
 
-(function () {
-'use strict';
-window.AudioVestibularAssessmentDashboard =
-  window.AudioVestibularAssessmentDashboard || {};
-
 /** @type {import('./types.js').PatientRow[]} */
 const samplePatients = [
   {
@@ -123,5 +118,4 @@ const samplePatients = [
   }
 ];
 
-window.AudioVestibularAssessmentDashboard.samplePatients = samplePatients;
-})();
+export { samplePatients };

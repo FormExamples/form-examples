@@ -1,3 +1,8 @@
+import { detectAdditionalFlags } from './flagged-issues.js';
+import { calculateIPSS } from './ipss-grader.js';
+import { ipssQuestions, ipssResponseOptions, qolResponseOptions } from './ipss-rules.js';
+import { emptyAssessment, ipssCategory, ipssCategoryClass, ipssCategoryKey, qolLabel } from './types.js';
+
 // Urology Assessment - patient wizard (vanilla JavaScript, no build).
 //
 // Single-page continuous wizard: every section is rendered into the page in
@@ -10,22 +15,6 @@
 // exports to `window.UrologyAssessment`. Pulling them off here keeps the
 // rest of this file referring to short local names. Whole file is wrapped
 // in an IIFE so its top-level identifiers don't leak to the global scope.
-(function () {
-'use strict';
-
-const NS = window.UrologyAssessment;
-const {
-  emptyAssessment,
-  ipssCategory,
-  ipssCategoryClass,
-  ipssCategoryKey,
-  qolLabel,
-  ipssQuestions,
-  ipssResponseOptions,
-  qolResponseOptions,
-  calculateIPSS,
-  detectAdditionalFlags
-} = NS;
 
 // ----------------------------------------------------------------------
 // Persistence
@@ -1254,4 +1243,3 @@ if (document.readyState === 'loading') {
 } else {
   init();
 }
-})();

@@ -1,3 +1,6 @@
+import { detectFlags } from './flags.js';
+import { scoreAppropriateness, scoreCompleteness, scoreContrastRenal, scoreSafety, scoreTriage } from './rules.js';
+
 // Four-axis grader for the MRI Scan Test Request.
 //
 // Composes the rule sets in rules.js and the safety flags in flags.js into a
@@ -9,19 +12,6 @@
 // recommendation).
 //
 // Wrapped in an IIFE; published via `window.MriScanTestRequest`.
-
-(function () {
-'use strict';
-window.MriScanTestRequest = window.MriScanTestRequest || {};
-const NS = window.MriScanTestRequest;
-const {
-  scoreAppropriateness,
-  scoreSafety,
-  scoreContrastRenal,
-  scoreCompleteness,
-  scoreTriage,
-  detectFlags
-} = NS;
 
 /**
  * Derive an overall recommendation for the imaging vetting desk from the four
@@ -111,9 +101,4 @@ function calculateGrade(data) {
   };
 }
 
-Object.assign(NS, {
-  calculateGrade,
-  deriveRecommendation,
-  RECOMMENDATION_LABELS
-});
-})();
+export { calculateGrade, deriveRecommendation, RECOMMENDATION_LABELS };

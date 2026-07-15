@@ -1,3 +1,5 @@
+import { hasAnyAirwayIntervention, hasAnyBreathingIntervention, hasAnyCirculationIntervention, hasAnyDisabilityIntervention, hasAnyExposureIntervention, hasAnyMajorBleedingIntervention, hasText, isAssessmentAnswered, medicationTakenAnswered } from './types.js';
+
 // WHO Emergency First Aid Form — completeness rules for Community First
 // Aid Responders (CFAR). Each rule maps to one required field. Conditional
 // follow-ups (tourniquet time, "Other" precaution details) are gated by
@@ -18,21 +20,6 @@
  * @property {(d: AssessmentData) => boolean} applies
  * @property {(d: AssessmentData) => boolean} isSatisfied
  */
-
-(function () {
-'use strict';
-window.WhoEmergencyFirstAidForm = window.WhoEmergencyFirstAidForm || {};
-const {
-  hasText,
-  isAssessmentAnswered,
-  hasAnyMajorBleedingIntervention,
-  hasAnyAirwayIntervention,
-  hasAnyBreathingIntervention,
-  hasAnyCirculationIntervention,
-  hasAnyDisabilityIntervention,
-  hasAnyExposureIntervention,
-  medicationTakenAnswered
-} = window.WhoEmergencyFirstAidForm;
 
 /** @type {ValidationRule[]} */
 const cfarRules = [
@@ -280,5 +267,4 @@ const cfarRules = [
   }
 ];
 
-window.WhoEmergencyFirstAidForm.cfarRules = cfarRules;
-})();
+export { cfarRules };

@@ -1,3 +1,8 @@
+import { detectAdditionalFlags } from './flagged-issues.js';
+import { validateForm as validateAssessment } from './form-validator.js';
+import { acknowledgementStatus, acknowledgementStatusClass, acknowledgementStatusLabel, completenessLabel, emptyAssessment } from './types.js';
+import { validationRules } from './validation-rules.js';
+
 // Research and Planning Privacy Notice - acknowledgement wizard (vanilla
 // JavaScript, no build).
 //
@@ -13,20 +18,6 @@
 // here keeps the rest of this file referring to short local names. Whole
 // file is wrapped in an IIFE so its top-level identifiers don't leak to
 // the global scope.
-(function () {
-'use strict';
-
-const NS = window.ResearchAndPlanningPrivacyNotice;
-const {
-  emptyAssessment,
-  validationRules,
-  validateForm: validateAssessment,
-  detectAdditionalFlags,
-  acknowledgementStatus,
-  acknowledgementStatusLabel,
-  acknowledgementStatusClass,
-  completenessLabel
-} = NS;
 
 // ----------------------------------------------------------------------
 // Persistence
@@ -842,4 +833,3 @@ if (document.readyState === 'loading') {
 } else {
   init();
 }
-})();

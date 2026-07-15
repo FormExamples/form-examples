@@ -24,9 +24,6 @@
  */
 
 // Wrapped in an IIFE; published via window.StructuredMedicationReview.
-(function () {
-'use strict';
-window.StructuredMedicationReview = window.StructuredMedicationReview || {};
 
 /** Polypharmacy boundary thresholds (regular-medicine count). */
 const POLYPHARMACY_THRESHOLD = 5;
@@ -108,13 +105,4 @@ function requiredSectionsComplete(data) {
   );
 }
 
-Object.assign(window.StructuredMedicationReview, {
-  POLYPHARMACY_THRESHOLD,
-  HYPERPOLYPHARMACY_THRESHOLD,
-  ACB_SIGNIFICANT_THRESHOLD,
-  polypharmacyBandFor,
-  anticholinergicBandFor,
-  burdenBandFor,
-  requiredSectionsComplete
-});
-})();
+export { POLYPHARMACY_THRESHOLD, HYPERPOLYPHARMACY_THRESHOLD, ACB_SIGNIFICANT_THRESHOLD, polypharmacyBandFor, anticholinergicBandFor, burdenBandFor, requiredSectionsComplete };

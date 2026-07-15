@@ -58,9 +58,6 @@
 // classic <script> (no ES modules) so the page can be opened directly via
 // `file://`. The IIFE attaches its public symbols to a single global
 // namespace, `window.MedicalErrorReport`.
-(function () {
-'use strict';
-window.MedicalErrorReport = window.MedicalErrorReport || {};
 
 /** Build a fresh, fully-blank assessment. */
 function emptyAssessment() {
@@ -291,13 +288,4 @@ function countContributingFactors(cf) {
   return fields.filter((f) => f === 'yes').length;
 }
 
-Object.assign(window.MedicalErrorReport, {
-  emptyAssessment,
-  whoSeverityLabel,
-  nccMerpLabel,
-  riskLevelLabel,
-  riskLevelClass,
-  errorTypeLabel,
-  countContributingFactors
-});
-})();
+export { emptyAssessment, whoSeverityLabel, nccMerpLabel, riskLevelLabel, riskLevelClass, errorTypeLabel, countContributingFactors };

@@ -1,3 +1,7 @@
+import { calculateECOG } from './ecog-grader.js';
+import { detectAdditionalFlags } from './flagged-issues.js';
+import { bmiCategory, calculateBMI, ecogGradeClass, ecogGradeLabel, emptyAssessment, karnofskyToECOG } from './types.js';
+
 // Oncology Assessment - patient wizard (vanilla JavaScript, no build).
 //
 // Single-page continuous wizard: every section is rendered into the page
@@ -11,20 +15,6 @@
 // exports to `window.OncologyAssessment`. Pulling them off here keeps the
 // rest of this file referring to short local names. The whole file is
 // wrapped in an IIFE so its top-level identifiers stay scoped.
-(function () {
-'use strict';
-
-const NS = window.OncologyAssessment;
-const {
-  emptyAssessment,
-  calculateBMI,
-  bmiCategory,
-  ecogGradeLabel,
-  ecogGradeClass,
-  karnofskyToECOG,
-  calculateECOG,
-  detectAdditionalFlags
-} = NS;
 
 // ----------------------------------------------------------------------
 // Persistence
@@ -1638,4 +1628,3 @@ if (document.readyState === 'loading') {
 } else {
   init();
 }
-})();

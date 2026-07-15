@@ -7,11 +7,6 @@
 // eGFR values from severely reduced to normal. NHS numbers in the canonical
 // "NNN NNN NNNN" display form.
 
-(function () {
-'use strict';
-window.PredictingRiskOfCardiovascularDiseaseEventsDashboard =
-  window.PredictingRiskOfCardiovascularDiseaseEventsDashboard || {};
-
 /** @type {import('./types.js').PatientRow[]} */
 const samplePatients = [
   {
@@ -124,6 +119,4 @@ const samplePatients = [
   }
 ];
 
-window.PredictingRiskOfCardiovascularDiseaseEventsDashboard.samplePatients =
-  samplePatients;
-})();
+export { samplePatients };

@@ -6,11 +6,6 @@
 // every care setting, with the positive-screen flag set whenever the score is
 // >= 2 and the eye-opener marker set on the morning-drinking rows.
 
-(function () {
-'use strict';
-window.CageAlcoholQuestionnaireDashboard =
-  window.CageAlcoholQuestionnaireDashboard || {};
-
 /** @type {import('./dashboard-types.js').AssessmentRow[]} */
 const sampleAssessments = [
   {
@@ -92,5 +87,4 @@ const sampleAssessments = [
   }
 ];
 
-window.CageAlcoholQuestionnaireDashboard.sampleAssessments = sampleAssessments;
-})();
+export { sampleAssessments };

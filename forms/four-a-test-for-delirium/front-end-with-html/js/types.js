@@ -111,9 +111,6 @@
 // classic <script> (no ES modules) so the page can be opened directly via
 // `file://`. The IIFE attaches its public symbols to a single global
 // namespace, `window.FourATestForDelirium`.
-(function () {
-'use strict';
-window.FourATestForDelirium = window.FourATestForDelirium || {};
 
 /**
  * Build a fresh, fully-blank assessment.
@@ -248,16 +245,4 @@ function priorityLabel(priority) {
   }
 }
 
-Object.assign(window.FourATestForDelirium, {
-  emptyAssessment,
-  interpretationBandLabel,
-  interpretationBandClass,
-  settingLabel,
-  alertnessLabel,
-  amt4Label,
-  attentionLabel,
-  acuteChangeLabel,
-  acuteChangeSourceLabel,
-  priorityLabel
-});
-})();
+export { emptyAssessment, interpretationBandLabel, interpretationBandClass, settingLabel, alertnessLabel, amt4Label, attentionLabel, acuteChangeLabel, acuteChangeSourceLabel, priorityLabel };

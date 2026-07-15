@@ -3,10 +3,8 @@
 // flattened with derived counts so the dashboard can render without
 // joining tables.
 
-(function (global) {
-'use strict';
 
-global.SAMPLE_MEETINGS = [
+export const SAMPLE_MEETINGS = [
 	{
 		id: '550e8400-e29b-41d4-a716-446655440001',
 		title: 'Weekly platform stand-up',
@@ -177,4 +175,3 @@ global.SAMPLE_MEETINGS = [
 	},
 ];
 
-})(window);

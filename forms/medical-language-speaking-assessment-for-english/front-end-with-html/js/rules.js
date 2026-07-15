@@ -1,3 +1,5 @@
+import { CRITERIA } from './types.js';
+
 // Declarative criterion registry for the OET Medicine speaking sub-test.
 //
 // This file re-exposes the canonical criterion list from `types.js` and
@@ -13,13 +15,6 @@
  * @typedef {import('./types.js').LinguisticRating} LinguisticRating
  * @typedef {import('./types.js').ClinicalIndicators} ClinicalIndicators
  */
-
-(function () {
-'use strict';
-window.MedicalLanguageSpeakingAssessmentForEnglish =
-  window.MedicalLanguageSpeakingAssessmentForEnglish || {};
-const NS = window.MedicalLanguageSpeakingAssessmentForEnglish;
-const { CRITERIA } = NS;
 
 // ----------------------------------------------------------------------
 // Anchor descriptors per rating point
@@ -69,12 +64,4 @@ function clinicalCriteria() {
   return criterionRegistry.filter((c) => c.domain === 'clinical');
 }
 
-Object.assign(NS, {
-  LINGUISTIC_ANCHORS,
-  CLINICAL_ANCHORS,
-  criterionRegistry,
-  findCriterion,
-  linguisticCriteria,
-  clinicalCriteria
-});
-})();
+export { LINGUISTIC_ANCHORS, CLINICAL_ANCHORS, criterionRegistry, findCriterion, linguisticCriteria, clinicalCriteria };

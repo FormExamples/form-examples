@@ -1,3 +1,7 @@
+import { detectFlaggedIssues } from './flags.js';
+import { calculateGrade } from './grader.js';
+import { doseUnitLabel, drugCategoryLabel, emptyDrug, emptyEvent, emptyObservation, emptyRecord, eventTypeLabel, monitoringModalityLabel, priorityLabel, routeLabel, statusClass, statusLabel } from './types.js';
+
 // Anaesthetic Record — intra-operative charting wizard (vanilla JavaScript,
 // no build).
 //
@@ -21,26 +25,6 @@
 // Sibling files loaded as plain `<script>` tags (in order) attach their exports
 // to `window.AnaestheticRecord`. The whole file is wrapped in an IIFE so its
 // top-level identifiers don't leak.
-(function () {
-'use strict';
-
-const NS = window.AnaestheticRecord;
-const {
-  emptyRecord,
-  emptyDrug,
-  emptyObservation,
-  emptyEvent,
-  statusLabel,
-  statusClass,
-  drugCategoryLabel,
-  doseUnitLabel,
-  routeLabel,
-  eventTypeLabel,
-  monitoringModalityLabel,
-  priorityLabel,
-  calculateGrade,
-  detectFlaggedIssues
-} = NS;
 
 // ----------------------------------------------------------------------
 // Persistence
@@ -1585,4 +1569,3 @@ if (document.readyState === 'loading') {
 } else {
   init();
 }
-})();

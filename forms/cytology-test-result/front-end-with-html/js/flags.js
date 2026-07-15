@@ -1,3 +1,5 @@
+import { hasCriticalFinding, hasLowGradeCategory } from './rules.js';
+
 // Safety-critical flag detection for the Cytology Test Result.
 //
 // Faithful vanilla-JavaScript port of the SvelteKit engine module
@@ -15,10 +17,6 @@
 // Wrapped in an IIFE; published via window.CytologyTestResult.
 // Depends on rules.js (hasCriticalFinding, hasLowGradeCategory), so it must
 // load after it.
-(function () {
-'use strict';
-window.CytologyTestResult = window.CytologyTestResult || {};
-const { hasCriticalFinding, hasLowGradeCategory } = window.CytologyTestResult;
 
 /**
  * Detect the safety-critical flags for a report.
@@ -162,7 +160,4 @@ function detectFlags(r) {
   return flags;
 }
 
-Object.assign(window.CytologyTestResult, {
-  detectFlags
-});
-})();
+export { detectFlags };

@@ -1,3 +1,5 @@
+import { scoreBloodPressure, scoreConsciousness, scoreOxygen, scorePulse, scoreRespiratoryRate, scoreSpo2, scoreTemperature } from './rules.js';
+
 // NEWS2 grader. Pure functions: take an `AssessmentData` object, score each
 // parameter via the band tables in `rules.js`, sum the aggregate, apply the
 // red-score rule, and derive the clinical-risk band with the RCP-recommended
@@ -22,19 +24,6 @@
  */
 
 // Wrapped in an IIFE; published via window.NationalEarlyWarningScore2.
-(function () {
-'use strict';
-window.NationalEarlyWarningScore2 = window.NationalEarlyWarningScore2 || {};
-const NS = window.NationalEarlyWarningScore2;
-const {
-  scoreRespiratoryRate,
-  scoreSpo2,
-  scoreOxygen,
-  scoreBloodPressure,
-  scorePulse,
-  scoreConsciousness,
-  scoreTemperature
-} = NS;
 
 // Severity ranking so we can take the worst of two bands.
 const BAND_SEVERITY = { 'low': 0, 'low-medium': 1, 'medium': 2, 'high': 3 };
@@ -234,10 +223,4 @@ function gradeNews2(data) {
   };
 }
 
-Object.assign(window.NationalEarlyWarningScore2, {
-  computeSubscores,
-  aggregateBand,
-  worstBand,
-  gradeNews2
-});
-})();
+export { computeSubscores, aggregateBand, worstBand, gradeNews2 };

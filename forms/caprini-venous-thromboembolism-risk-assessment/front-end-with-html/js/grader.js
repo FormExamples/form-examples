@@ -1,3 +1,6 @@
+import { capriniRules } from './rules.js';
+import { ageBandPoints } from './types.js';
+
 // Caprini grader. Pure functions: take an `AssessmentData` object, evaluate
 // every weighted factor rule in `capriniRules`, add the age-band weight, sum the
 // total Caprini score, derive the risk band, and recommend a prophylaxis
@@ -29,12 +32,6 @@
  */
 
 // Wrapped in an IIFE; published via window.CapriniVenousThromboembolismRiskAssessment.
-(function () {
-'use strict';
-window.CapriniVenousThromboembolismRiskAssessment =
-  window.CapriniVenousThromboembolismRiskAssessment || {};
-const NS = window.CapriniVenousThromboembolismRiskAssessment;
-const { capriniRules, ageBandPoints } = NS;
 
 /**
  * Evaluate every factor rule and collect the ones that fired.
@@ -155,10 +152,4 @@ function calculateCapriniGrade(data) {
   };
 }
 
-Object.assign(window.CapriniVenousThromboembolismRiskAssessment, {
-  evaluateFactors,
-  bandForScore,
-  baseProphylaxisForBand,
-  calculateCapriniGrade
-});
-})();
+export { evaluateFactors, bandForScore, baseProphylaxisForBand, calculateCapriniGrade };

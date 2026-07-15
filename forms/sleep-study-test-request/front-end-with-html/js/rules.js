@@ -11,12 +11,6 @@
 //
 // Wrapped in an IIFE; published via `window.SleepStudyTestRequest`.
 
-(function () {
-'use strict';
-window.SleepStudyTestRequest =
-  window.SleepStudyTestRequest || {};
-const NS = window.SleepStudyTestRequest;
-
 // Epworth above this threshold indicates abnormal / severe daytime sleepiness.
 const EPWORTH_ABNORMAL = 11;     // >10 indicates abnormal daytime sleepiness
 const EPWORTH_SEVERE = 16;       // >=16 severe excessive sleepiness
@@ -398,21 +392,4 @@ function scoreTriage(data) {
   };
 }
 
-Object.assign(NS, {
-  scoreAppropriateness,
-  appropriatenessBand,
-  scorePriority,
-  scoreCompleteness,
-  scoreTriage,
-  maxTier,
-  maxPriority,
-  TRIAGE_ORDER,
-  PRIORITY_ORDER,
-  TARGET_TIMEFRAMES,
-  INDICATION_STUDY_MAP,
-  EPWORTH_ABNORMAL,
-  EPWORTH_SEVERE,
-  STOP_BANG_HIGH_RISK,
-  STOP_BANG_INTERMEDIATE
-});
-})();
+export { scoreAppropriateness, appropriatenessBand, scorePriority, scoreCompleteness, scoreTriage, maxTier, maxPriority, TRIAGE_ORDER, PRIORITY_ORDER, TARGET_TIMEFRAMES, INDICATION_STUDY_MAP, EPWORTH_ABNORMAL, EPWORTH_SEVERE, STOP_BANG_HIGH_RISK, STOP_BANG_INTERMEDIATE };

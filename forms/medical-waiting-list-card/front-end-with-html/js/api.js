@@ -3,9 +3,7 @@
 // (Loco / axum). When fetch fails or the response is empty, callers fall
 // back to the sample data in `data.js`.
 
-(function () {
-  'use strict';
-  window.MedicalWaitingListCardDashboard = window.MedicalWaitingListCardDashboard || {};
+  
 
   const API_BASE = 'http://localhost:5150';
   const CARDS_PATH = '/api/dashboard/cards';
@@ -23,6 +21,7 @@
     return data.items || [];
   }
 
-  window.MedicalWaitingListCardDashboard.fetchCards = fetchCards;
-  window.MedicalWaitingListCardDashboard.API_BASE = API_BASE;
-})();
+  
+  
+
+export { fetchCards, API_BASE };

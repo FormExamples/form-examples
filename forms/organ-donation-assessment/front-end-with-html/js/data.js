@@ -8,11 +8,6 @@
 // ABO compatibility and HLA match grade. NHS numbers are in the canonical
 // "NNN NNN NNNN" display form.
 
-(function () {
-'use strict';
-window.OrganDonationAssessmentDashboard =
-  window.OrganDonationAssessmentDashboard || {};
-
 /** @type {import('./types.js').DonorRow[]} */
 const sampleDonors = [
   {
@@ -149,5 +144,4 @@ const sampleDonors = [
   }
 ];
 
-window.OrganDonationAssessmentDashboard.sampleDonors = sampleDonors;
-})();
+export { sampleDonors };

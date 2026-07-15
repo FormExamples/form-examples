@@ -1,3 +1,5 @@
+import { fertilityRules } from './rules.js';
+
 // NICE CG156 Fertility grader. Pure functions: take an `AssessmentData`
 // object, fire each rule, and produce an overall concern level (Low /
 // Moderate / High) plus the audit trail of fired rules.
@@ -12,11 +14,6 @@
  * @typedef {import('./types.js').ConcernLevel} ConcernLevel
  * @typedef {import('./types.js').FiredRule} FiredRule
  */
-
-(function () {
-'use strict';
-window.FertilityAssessment = window.FertilityAssessment || {};
-const { fertilityRules } = window.FertilityAssessment;
 
 /**
  * Classify a numeric concern score into a category.
@@ -58,8 +55,4 @@ function calculateConcern(data) {
   return { concernScore: totalScore, concernLevel, firedRules };
 }
 
-Object.assign(window.FertilityAssessment, {
-  classifyConcernScore,
-  calculateConcern
-});
-})();
+export { classifyConcernScore, calculateConcern };

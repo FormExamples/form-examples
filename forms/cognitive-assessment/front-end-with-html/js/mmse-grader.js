@@ -1,3 +1,6 @@
+import { mmseDomains } from './mmse-rules.js';
+import { mmseCategory } from './types.js';
+
 // MMSE grader. Pure functions: take an `AssessmentData` object and return
 // the total MMSE score (0-30), category label, and per-item fired rules.
 //
@@ -11,10 +14,6 @@
  */
 
 // Wrapped in an IIFE; published via window.CognitiveAssessment.
-(function () {
-'use strict';
-window.CognitiveAssessment = window.CognitiveAssessment || {};
-const { mmseDomains, mmseCategory } = window.CognitiveAssessment;
 
 /**
  * Pure function: calculates the MMSE score from patient assessment data.
@@ -145,8 +144,4 @@ function domainBreakdown(data) {
   ];
 }
 
-Object.assign(window.CognitiveAssessment, {
-  calculateMMSE,
-  domainBreakdown
-});
-})();
+export { calculateMMSE, domainBreakdown };

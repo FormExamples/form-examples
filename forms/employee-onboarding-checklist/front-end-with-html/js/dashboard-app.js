@@ -1,3 +1,6 @@
+import { fetchEmployees } from './api.js';
+import { sampleEmployees } from './data.js';
+
 // Employee Onboarding Checklist - HR / management dashboard
 // (vanilla classic-script app).
 //
@@ -12,12 +15,6 @@
 // Pulling them off here keeps the rest of this file referring to short
 // local names. The whole file is wrapped in an IIFE so its top-level
 // identifiers do not leak to the global scope.
-(function () {
-'use strict';
-const {
-  fetchEmployees,
-  sampleEmployees
-} = window.EmployeeOnboardingChecklistDashboard;
 
 // ----------------------------------------------------------------------
 // State
@@ -454,4 +451,3 @@ if (document.readyState === 'loading') {
 } else {
   init();
 }
-})();

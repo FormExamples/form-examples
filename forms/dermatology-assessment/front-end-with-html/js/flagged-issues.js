@@ -13,9 +13,6 @@
  */
 
 // Wrapped in an IIFE; published via window.DermatologyAssessment.
-(function () {
-'use strict';
-window.DermatologyAssessment = window.DermatologyAssessment || {};
 
 /**
  * @param {AssessmentData} data
@@ -209,5 +206,4 @@ function detectAdditionalFlags(data) {
   return flags;
 }
 
-window.DermatologyAssessment.detectAdditionalFlags = detectAdditionalFlags;
-})();
+export { detectAdditionalFlags };

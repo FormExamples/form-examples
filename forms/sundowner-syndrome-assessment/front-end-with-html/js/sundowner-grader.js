@@ -1,3 +1,6 @@
+import { cmaiItems, npiDomains } from './cmai-rules.js';
+import { CMAI_ITEM_IDS, NPI_DOMAIN_KEYS, severityFromCMAI, severityLabel } from './types.js';
+
 // Sundowner syndrome grader. Pure functions: take an `AssessmentData`
 // object, return the CMAI total, NPI total, severity band, and a list of
 // fired rules summarising which scoring bands and elevated NPI domains
@@ -24,19 +27,6 @@
  * @typedef {import('./types.js').Severity} Severity
  * @typedef {import('./types.js').FiredRule} FiredRule
  */
-
-(function () {
-'use strict';
-window.SundownerSyndromeAssessment = window.SundownerSyndromeAssessment || {};
-const NS = window.SundownerSyndromeAssessment;
-const {
-  severityFromCMAI,
-  severityLabel,
-  cmaiItems,
-  npiDomains,
-  CMAI_ITEM_IDS,
-  NPI_DOMAIN_KEYS
-} = NS;
 
 /**
  * Sum the 29 CMAI items. Unanswered items (stored as 0) are treated as
@@ -170,9 +160,4 @@ function gradeSundowner(data) {
   };
 }
 
-Object.assign(window.SundownerSyndromeAssessment, {
-  gradeSundowner,
-  sumCMAI,
-  sumNPI
-});
-})();
+export { gradeSundowner, sumCMAI, sumNPI };

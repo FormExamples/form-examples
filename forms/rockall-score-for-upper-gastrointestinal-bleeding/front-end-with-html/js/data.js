@@ -7,11 +7,6 @@
 // assessments. The escalation flag is set for high-risk assessments (full
 // score >= 5, or a pre-endoscopy clinical score >= 3).
 
-(function () {
-'use strict';
-window.RockallScoreForUpperGastrointestinalBleedingDashboard =
-  window.RockallScoreForUpperGastrointestinalBleedingDashboard || {};
-
 /** @type {import('./dashboard-types.js').AssessmentRow[]} */
 const sampleAssessments = [
   {
@@ -93,6 +88,4 @@ const sampleAssessments = [
   }
 ];
 
-window.RockallScoreForUpperGastrointestinalBleedingDashboard.sampleAssessments =
-  sampleAssessments;
-})();
+export { sampleAssessments };

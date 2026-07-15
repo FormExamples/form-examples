@@ -6,10 +6,6 @@
 // overall risk level, with a mix of BMI values and nutritional-support
 // flags; NHS numbers in the canonical "NNN NNN NNNN" display form.
 
-(function () {
-'use strict';
-window.NutritionAssessmentDashboard = window.NutritionAssessmentDashboard || {};
-
 /** @type {import('./types.js').PatientRow[]} */
 const samplePatients = [
   {
@@ -134,5 +130,4 @@ const samplePatients = [
   }
 ];
 
-window.NutritionAssessmentDashboard.samplePatients = samplePatients;
-})();
+export { samplePatients };

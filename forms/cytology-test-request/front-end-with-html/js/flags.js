@@ -8,12 +8,6 @@
 // Flag IDs are stable and identical across every front-end and the back-end.
 // Wrapped in an IIFE; published via `window.CytologyTestRequest`.
 
-(function () {
-'use strict';
-window.CytologyTestRequest =
-  window.CytologyTestRequest || {};
-const NS = window.CytologyTestRequest;
-
 /**
  * Detect safety flags for a cytology specimen request.
  *
@@ -84,5 +78,4 @@ function detectFlags(data, context) {
   return flags;
 }
 
-Object.assign(NS, { detectFlags });
-})();
+export { detectFlags };

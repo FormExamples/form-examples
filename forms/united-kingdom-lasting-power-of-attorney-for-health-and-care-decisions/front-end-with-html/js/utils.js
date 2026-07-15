@@ -1,9 +1,5 @@
 // Date math and signature lookups, ported from the SvelteKit engine.
 
-(function () {
-'use strict';
-window.UkLpaForm = window.UkLpaForm || {};
-
 function parseIsoDate(value) {
   if (!value) return null;
   const d = new Date(value);
@@ -44,13 +40,4 @@ function isSignedBefore(a, b) {
   return da.getTime() <= db.getTime();
 }
 
-Object.assign(window.UkLpaForm, {
-  parseIsoDate,
-  ageYearsAt,
-  findDonorSignature,
-  findCertificateProviderSignature,
-  findAttorneySignatures,
-  signatureSignedAt,
-  isSignedBefore,
-});
-})();
+export { parseIsoDate, ageYearsAt, findDonorSignature, findCertificateProviderSignature, findAttorneySignatures, signatureSignedAt, isSignedBefore };

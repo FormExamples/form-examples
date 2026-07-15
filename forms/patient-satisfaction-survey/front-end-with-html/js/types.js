@@ -180,9 +180,6 @@
 // classic <script> (no ES modules) so the page can be opened directly via
 // `file://`. The IIFE attaches its public symbols to a single global
 // namespace, `window.PatientSatisfactionSurvey`.
-(function () {
-'use strict';
-window.PatientSatisfactionSurvey = window.PatientSatisfactionSurvey || {};
 
 /**
  * Build a fresh, fully-blank assessment.
@@ -339,12 +336,4 @@ function severityLabel(severity) {
   }
 }
 
-Object.assign(window.PatientSatisfactionSurvey, {
-  emptyAssessment,
-  normalizeLikertScores,
-  categorizeScore,
-  satisfactionCategoryLabel,
-  satisfactionCategoryClass,
-  severityLabel
-});
-})();
+export { emptyAssessment, normalizeLikertScores, categorizeScore, satisfactionCategoryLabel, satisfactionCategoryClass, severityLabel };

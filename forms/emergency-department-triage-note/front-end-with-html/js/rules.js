@@ -23,9 +23,6 @@
  */
 
 // Wrapped in an IIFE; published via window.EmergencyDepartmentTriageNote.
-(function () {
-'use strict';
-window.EmergencyDepartmentTriageNote = window.EmergencyDepartmentTriageNote || {};
 
 // ─── NEWS2 per-parameter scoring (Scale 1 default) ──────────────────
 
@@ -147,14 +144,4 @@ const DISCRIMINATOR_FLAGS = [
   { id: 'D-PAEDIATRIC-RED-FLAG',  field: 'paediatricRedFlag',   level: 2, category: 'disability',     description: 'Paediatric red flag (time-critical)' }
 ];
 
-Object.assign(window.EmergencyDepartmentTriageNote, {
-  scoreRespiratoryRate,
-  scoreSpo2,
-  scoreOxygen,
-  scoreBloodPressure,
-  scorePulse,
-  scoreConsciousness,
-  scoreTemperature,
-  DISCRIMINATOR_FLAGS
-});
-})();
+export { scoreRespiratoryRate, scoreSpo2, scoreOxygen, scoreBloodPressure, scorePulse, scoreConsciousness, scoreTemperature, DISCRIMINATOR_FLAGS };

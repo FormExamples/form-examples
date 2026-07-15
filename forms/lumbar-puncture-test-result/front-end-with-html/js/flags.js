@@ -1,3 +1,5 @@
+import { culturePositive, hasCriticalFinding } from './rules.js';
+
 // Safety-critical flag detection for the Lumbar Puncture Test Result.
 //
 // Faithful vanilla-JavaScript port of the SvelteKit engine module
@@ -13,10 +15,6 @@
  */
 
 // Wrapped in an IIFE; published via window.LumbarPunctureTestResult.
-(function () {
-'use strict';
-window.LumbarPunctureTestResult = window.LumbarPunctureTestResult || {};
-const { hasCriticalFinding, culturePositive } = window.LumbarPunctureTestResult;
 
 /**
  * Detect the safety-critical flags for a report.
@@ -147,7 +145,4 @@ function detectFlags(r) {
   return flags;
 }
 
-Object.assign(window.LumbarPunctureTestResult, {
-  detectFlags
-});
-})();
+export { detectFlags };

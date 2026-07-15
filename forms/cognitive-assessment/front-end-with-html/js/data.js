@@ -6,10 +6,6 @@
 // every referral source; NHS numbers in the canonical "NNN NNN NNNN"
 // display form.
 
-(function () {
-'use strict';
-window.CognitiveAssessmentDashboard = window.CognitiveAssessmentDashboard || {};
-
 /** @type {import('./types.js').PatientRow[]} */
 const samplePatients = [
   {
@@ -122,5 +118,4 @@ const samplePatients = [
   }
 ];
 
-window.CognitiveAssessmentDashboard.samplePatients = samplePatients;
-})();
+export { samplePatients };

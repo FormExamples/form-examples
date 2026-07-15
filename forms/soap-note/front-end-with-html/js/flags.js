@@ -1,3 +1,5 @@
+import { has, safetyNettingRequired as safetyNettingRequired$imported } from './rules.js';
+
 // Flagged-issue detection (safety flags). Independent of the completeness
 // status (which the grader produces), this module raises clinician-facing
 // safety flags per spec §5, each with a priority. A high-priority flag also
@@ -21,10 +23,6 @@
  */
 
 // Wrapped in an IIFE; published via window.SoapNote.
-(function () {
-'use strict';
-window.SoapNote = window.SoapNote || {};
-const NS = window.SoapNote;
 
 /**
  * Detect the safety flags raised by the note.
@@ -44,8 +42,8 @@ function detectFlaggedIssues(data, grade) {
 
   const redFlags = data.subjective.redFlagSymptoms === 'yes';
   const abnormalVitals = data.objective.abnormalVitalsPresent === 'yes';
-  const safetyNettingRequired = NS.safetyNettingRequired(data);
-  const safetyNettingRecorded = NS.has(data.plan.safetyNetting);
+  const safetyNettingRequired = safetyNettingRequired$imported(data);
+  const safetyNettingRecorded = has(data.plan.safetyNetting);
 
   // ─── Missing assessment (HIGH) ─────────────────────────────
   if (!presence.assessmentPresent) {
@@ -122,5 +120,4 @@ function detectFlaggedIssues(data, grade) {
   return flags;
 }
 
-window.SoapNote.detectFlaggedIssues = detectFlaggedIssues;
-})();
+export { detectFlaggedIssues };

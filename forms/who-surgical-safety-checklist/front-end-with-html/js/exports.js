@@ -1,15 +1,10 @@
+import { statusLabel } from './types.js';
+
 // Export helpers for the WHO Surgical Safety Checklist.
 // Builds JSON / XML / CSV / TSV / printable-HTML representations of a
 // completed (or in-progress) checklist record.
 //
 // Wrapped in an IIFE; published via `window.WhoSurgicalSafetyChecklist`.
-
-(function () {
-'use strict';
-window.WhoSurgicalSafetyChecklist =
-  window.WhoSurgicalSafetyChecklist || {};
-
-const NS = window.WhoSurgicalSafetyChecklist;
 
 function xmlEscape(s) {
   return String(s ?? '')
@@ -207,7 +202,7 @@ function delimitedEscape(v, sep) {
 
 /** Printable single-page HTML summary. Opens in a new window. */
 function toPrintableHtml(c, status, flags) {
-  const statusLbl = NS.statusLabel(status);
+  const statusLbl = statusLabel(status);
 
   function row(label, value) {
     const display =
@@ -370,14 +365,4 @@ function openPrintable(htmlString) {
   w.document.close();
 }
 
-Object.assign(window.WhoSurgicalSafetyChecklist, {
-  toJson,
-  toXml,
-  toCsv,
-  toTsv,
-  toPrintableHtml,
-  download,
-  openPrintable,
-  htmlEscape
-});
-})();
+export { toJson, toXml, toCsv, toTsv, toPrintableHtml, download, openPrintable, htmlEscape };

@@ -6,12 +6,6 @@
 // rule forces composite risk = Critical and triggers a statutory
 // notification flag.
 
-(function () {
-'use strict';
-window.MedicalOperationNote =
-  window.MedicalOperationNote || {};
-const NS = window.MedicalOperationNote;
-
 const NEVER_EVENT_TYPES = {
   'wrong-site':      'Wrong-site surgery',
   'wrong-side':      'Wrong-side surgery',
@@ -58,9 +52,4 @@ function hasNeverEvent(data) {
   );
 }
 
-Object.assign(NS, {
-  NEVER_EVENT_TYPES,
-  applyNeverEventRules,
-  hasNeverEvent
-});
-})();
+export { NEVER_EVENT_TYPES, applyNeverEventRules, hasNeverEvent };

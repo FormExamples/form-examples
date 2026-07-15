@@ -1,3 +1,6 @@
+import { detectAdditionalFlags } from './flagged-issues.js';
+import { mecRules } from './mec-rules.js';
+
 // UK MEC grader. Pure functions: take an `AssessmentData` object, evaluate
 // every MEC rule, derive per-method MEC categories (worst category wins) and
 // an overall risk level. Mirrors `src/lib/engine/mec-grader.ts` from the
@@ -12,11 +15,6 @@
  * @typedef {import('./types.js').GradingResult} GradingResult
  */
 
-(function () {
-'use strict';
-window.BirthControlAssessment = window.BirthControlAssessment || {};
-const NS = window.BirthControlAssessment;
-
 /**
  * Evaluate every MEC rule and return the grading result.
  * @param {AssessmentData} data
@@ -26,7 +24,7 @@ function calculateMECGrade(data) {
   /** @type {FiredRule[]} */
   const firedRules = [];
 
-  for (const rule of NS.mecRules) {
+  for (const rule of mecRules) {
     try {
       if (rule.evaluate(data)) {
         firedRules.push({
@@ -44,7 +42,7 @@ function calculateMECGrade(data) {
 
   const methodMEC = deriveMethodMEC(firedRules);
   const overallRisk = deriveOverallRisk(methodMEC);
-  const additionalFlags = NS.detectAdditionalFlags(data);
+  const additionalFlags = detectAdditionalFlags(data);
 
   return {
     methodMEC,
@@ -100,9 +98,4 @@ function deriveOverallRisk(methodMEC) {
   return 'low';
 }
 
-Object.assign(window.BirthControlAssessment, {
-  calculateMECGrade,
-  deriveMethodMEC,
-  deriveOverallRisk
-});
-})();
+export { calculateMECGrade, deriveMethodMEC, deriveOverallRisk };

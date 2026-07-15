@@ -1,3 +1,7 @@
+import { calculateGrade } from './grader.js';
+import { insufficientUnits, isAboDiscrepancy, isTwoSampleRuleUnmet } from './rules.js';
+import { abnormalitySeverityClass, abnormalitySeverityLabel, bloodGroupLabel, componentLabel, crossmatchResultLabel, emptyResult, followUpUrgencyClass, followUpUrgencyLabel, priorityClass, priorityLabel, recommendationLabel, reportStatusLabel, requestTypeLabel, resultClassificationClass, resultClassificationLabel } from './types.js';
+
 // Blood Cross-Match Test Result — report wizard (vanilla JavaScript, no build).
 //
 // Single-page continuous wizard: every step is rendered into the page in
@@ -14,31 +18,6 @@
 // exports to `window.BloodCrossMatchTestResult`. Pulling them off here keeps
 // the rest of this file referring to short local names. The whole file is
 // wrapped in an IIFE so its top-level identifiers don't leak.
-(function () {
-'use strict';
-
-const NS = window.BloodCrossMatchTestResult;
-const {
-  emptyResult,
-  resultClassificationLabel,
-  resultClassificationClass,
-  abnormalitySeverityLabel,
-  abnormalitySeverityClass,
-  followUpUrgencyLabel,
-  followUpUrgencyClass,
-  recommendationLabel,
-  requestTypeLabel,
-  reportStatusLabel,
-  bloodGroupLabel,
-  componentLabel,
-  crossmatchResultLabel,
-  priorityLabel,
-  priorityClass,
-  isAboDiscrepancy,
-  isTwoSampleRuleUnmet,
-  insufficientUnits,
-  calculateGrade
-} = NS;
 
 // ----------------------------------------------------------------------
 // Persistence
@@ -1020,4 +999,3 @@ if (document.readyState === 'loading') {
 } else {
   init();
 }
-})();

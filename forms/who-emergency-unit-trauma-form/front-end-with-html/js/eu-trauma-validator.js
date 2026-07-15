@@ -1,3 +1,5 @@
+import { euTraumaRules } from './eu-trauma-rules.js';
+
 // WHO Emergency Unit Form: Trauma — completeness validator. Pure
 // function: takes an `AssessmentData` object, returns a
 // `ValidationResult` with per-section breakdown and the list of fired
@@ -6,11 +8,6 @@
 // spine stabilization / GCS only for RED triage, admit ward, transfer
 // destination, cause of death) do not produce false missing-field
 // reports.
-
-(function () {
-'use strict';
-window.WhoEmergencyUnitTraumaForm = window.WhoEmergencyUnitTraumaForm || {};
-const { euTraumaRules } = window.WhoEmergencyUnitTraumaForm;
 
 function validateEuTrauma(data) {
   const sectionMap = new Map();
@@ -73,5 +70,4 @@ function validateEuTrauma(data) {
   };
 }
 
-window.WhoEmergencyUnitTraumaForm.validateEuTrauma = validateEuTrauma;
-})();
+export { validateEuTrauma };

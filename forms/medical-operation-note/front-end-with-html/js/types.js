@@ -6,11 +6,6 @@
 // localStorage. Wrapped in an IIFE; published via
 // `window.MedicalOperationNote`.
 
-(function () {
-'use strict';
-window.MedicalOperationNote =
-  window.MedicalOperationNote || {};
-
 /**
  * Build a fresh, fully-blank operation note.
  * Strings default to ''; numeric, date, and time fields default to null;
@@ -243,13 +238,4 @@ function bloodLossBandLabel(band) {
   }
 }
 
-Object.assign(window.MedicalOperationNote, {
-  emptyOperationNote,
-  COMPOSITE_RISK_ORDER,
-  CLAVIEN_DINDO_ORDER,
-  EBL_BAND_ORDER,
-  ASA_LABELS,
-  compositeRiskLabel,
-  bloodLossBandLabel
-});
-})();
+export { emptyOperationNote, COMPOSITE_RISK_ORDER, CLAVIEN_DINDO_ORDER, EBL_BAND_ORDER, ASA_LABELS, compositeRiskLabel, bloodLossBandLabel };

@@ -148,9 +148,6 @@
 // classic <script> (no ES modules) so the page can be opened directly via
 // `file://`. The IIFE attaches its public symbols to a single global
 // namespace, `window.DexaBoneDensityTestResult`.
-(function () {
-'use strict';
-window.DexaBoneDensityTestResult = window.DexaBoneDensityTestResult || {};
 
 /**
  * Build a fresh, fully-blank DEXA bone-density result.
@@ -371,21 +368,4 @@ function whoClassificationClass(value) {
   }
 }
 
-Object.assign(window.DexaBoneDensityTestResult, {
-  emptyResult,
-  resultClassificationLabel,
-  abnormalitySeverityLabel,
-  followUpUrgencyLabel,
-  whoClassificationLabel,
-  scanRegionLabel,
-  examinationAdequacyLabel,
-  reportStatusLabel,
-  recommendationLabel,
-  scoreLabel,
-  priorityLabel,
-  resultClassificationClass,
-  abnormalitySeverityClass,
-  followUpUrgencyClass,
-  whoClassificationClass
-});
-})();
+export { emptyResult, resultClassificationLabel, abnormalitySeverityLabel, followUpUrgencyLabel, whoClassificationLabel, scanRegionLabel, examinationAdequacyLabel, reportStatusLabel, recommendationLabel, scoreLabel, priorityLabel, resultClassificationClass, abnormalitySeverityClass, followUpUrgencyClass, whoClassificationClass };

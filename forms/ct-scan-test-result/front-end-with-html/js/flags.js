@@ -1,3 +1,5 @@
+import { hasCriticalFinding } from './rules.js';
+
 // Safety-critical flag detection for the CT Scan Test Result.
 //
 // Faithful vanilla-JavaScript port of the SvelteKit engine module
@@ -13,10 +15,6 @@
  */
 
 // Wrapped in an IIFE; published via window.CtScanTestResult.
-(function () {
-'use strict';
-window.CtScanTestResult = window.CtScanTestResult || {};
-const { hasCriticalFinding } = window.CtScanTestResult;
 
 /**
  * Detect the safety-critical flags for a report.
@@ -138,7 +136,4 @@ function detectFlags(r) {
   return flags;
 }
 
-Object.assign(window.CtScanTestResult, {
-  detectFlags
-});
-})();
+export { detectFlags };

@@ -1,3 +1,6 @@
+import { evaluateRules } from './diabetes-rules.js';
+import { calculateCompositeScore, collectScoredItems } from './types.js';
+
 // Diabetes grader - pure function. Mirrors `src/lib/engine/diabetes-grader.ts`
 // from the SvelteKit reference.
 //
@@ -16,15 +19,6 @@
  * @typedef {import('./types.js').ControlLevel} ControlLevel
  * @typedef {import('./types.js').FiredRule} FiredRule
  */
-
-(function () {
-'use strict';
-window.DiabetesAssessment = window.DiabetesAssessment || {};
-const {
-  evaluateRules,
-  collectScoredItems,
-  calculateCompositeScore
-} = window.DiabetesAssessment;
 
 /**
  * Calculate the composite control level, score, and fired rules.
@@ -53,5 +47,4 @@ function calculateControl(data) {
   return { controlLevel, controlScore: score, firedRules };
 }
 
-window.DiabetesAssessment.calculateControl = calculateControl;
-})();
+export { calculateControl };

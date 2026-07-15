@@ -18,9 +18,6 @@
 // classic <script> (no ES modules) so the page can be opened directly via
 // `file://`. The IIFE attaches its public symbols to a single global
 // namespace, `window.AttentionDeficitAssessment`.
-(function () {
-'use strict';
-window.AttentionDeficitAssessment = window.AttentionDeficitAssessment || {};
 
 /**
  * Build a fresh, fully-blank assessment.
@@ -204,15 +201,4 @@ function adhdSubtypeLabel(subtype) {
   }
 }
 
-Object.assign(window.AttentionDeficitAssessment, {
-  emptyAssessment,
-  sumScores,
-  countPartAShadedItems,
-  classifyFromTotal,
-  determineSubtype,
-  asrsFrequencyLabel,
-  asrsClassificationLabel,
-  asrsClassificationClass,
-  adhdSubtypeLabel
-});
-})();
+export { emptyAssessment, sumScores, countPartAShadedItems, classifyFromTotal, determineSubtype, asrsFrequencyLabel, asrsClassificationLabel, asrsClassificationClass, adhdSubtypeLabel };

@@ -1,3 +1,7 @@
+import { detectAdditionalFlags } from './flagged-issues.js';
+import { m1Rules } from './m1-rules.js';
+import { priorityOrder } from './types.js';
+
 // DVLA M1 form validator. Pure function: takes an `AssessmentData`, returns
 // a `ValidationResult` with the fired rules, additional flags, completeness
 // flag, stoppedAtQ1 flag, condition count, and a timestamp.
@@ -14,11 +18,6 @@
  * @typedef {import('./types.js').FiredRule} FiredRule
  * @typedef {import('./types.js').ValidationResult} ValidationResult
  */
-
-(function () {
-'use strict';
-window.DvlaM1Form = window.DvlaM1Form || {};
-const { m1Rules, detectAdditionalFlags, priorityOrder } = window.DvlaM1Form;
 
 /**
  * @param {AssessmentData} data
@@ -89,8 +88,4 @@ function countConditions(data) {
   return n;
 }
 
-Object.assign(window.DvlaM1Form, {
-  validateM1,
-  countConditions
-});
-})();
+export { validateM1, countConditions };

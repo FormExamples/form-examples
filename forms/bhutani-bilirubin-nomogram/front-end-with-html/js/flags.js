@@ -1,3 +1,5 @@
+import { roundOne } from './rules.js';
+
 // Flagged-issue detection (red flags). Independent of the risk zone (which the
 // grader produces), this module raises clinician-facing safety flags per
 // spec §5:
@@ -23,10 +25,6 @@
  */
 
 // Wrapped in an IIFE; published via window.BhutaniBilirubinNomogram.
-(function () {
-'use strict';
-window.BhutaniBilirubinNomogram = window.BhutaniBilirubinNomogram || {};
-const { roundOne } = window.BhutaniBilirubinNomogram;
 
 /**
  * @param {AssessmentData} data
@@ -189,5 +187,4 @@ function detectFlaggedIssues(data, grade) {
   return flags;
 }
 
-window.BhutaniBilirubinNomogram.detectFlaggedIssues = detectFlaggedIssues;
-})();
+export { detectFlaggedIssues };

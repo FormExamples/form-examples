@@ -5,11 +5,6 @@
 // The rows span every risk band (low, at-risk, high, very-high), each care
 // setting, and both existing-pressure-damage states.
 
-(function () {
-'use strict';
-window.WaterlowPressureUlcerRiskAssessmentDashboard =
-  window.WaterlowPressureUlcerRiskAssessmentDashboard || {};
-
 /** @type {import('./dashboard-types.js').AssessmentRow[]} */
 const sampleAssessments = [
   {
@@ -94,6 +89,4 @@ const sampleAssessments = [
   }
 ];
 
-window.WaterlowPressureUlcerRiskAssessmentDashboard.sampleAssessments =
-  sampleAssessments;
-})();
+export { sampleAssessments };

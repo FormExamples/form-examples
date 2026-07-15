@@ -149,9 +149,6 @@
 // classic <script> (no ES modules) so the page can be opened directly via
 // `file://`. The IIFE attaches its public symbols to a single global
 // namespace, `window.HistopathologyTestResult`.
-(function () {
-'use strict';
-window.HistopathologyTestResult = window.HistopathologyTestResult || {};
 
 /**
  * Build a fresh, fully-blank histopathology test result.
@@ -355,19 +352,4 @@ function followUpUrgencyClass(value) {
   }
 }
 
-Object.assign(window.HistopathologyTestResult, {
-  emptyResult,
-  resultClassificationLabel,
-  abnormalitySeverityLabel,
-  followUpUrgencyLabel,
-  histologicalGradeLabel,
-  resectionMarginsLabel,
-  specimenAdequacyLabel,
-  reportStatusLabel,
-  recommendationLabel,
-  priorityLabel,
-  resultClassificationClass,
-  abnormalitySeverityClass,
-  followUpUrgencyClass
-});
-})();
+export { emptyResult, resultClassificationLabel, abnormalitySeverityLabel, followUpUrgencyLabel, histologicalGradeLabel, resectionMarginsLabel, specimenAdequacyLabel, reportStatusLabel, recommendationLabel, priorityLabel, resultClassificationClass, abnormalitySeverityClass, followUpUrgencyClass };

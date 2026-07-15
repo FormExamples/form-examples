@@ -6,10 +6,6 @@
 // currency states, and recent / lapsed last-call-out dates. Used as the
 // sample-data fallback when the backend is offline.
 
-(function () {
-'use strict';
-window.FirstResponderAssessmentDashboard = window.FirstResponderAssessmentDashboard || {};
-
 /** @type {import('./types.js').ResponderRow[]} */
 const sampleResponders = [
   {
@@ -146,5 +142,4 @@ const sampleResponders = [
   }
 ];
 
-window.FirstResponderAssessmentDashboard.sampleResponders = sampleResponders;
-})();
+export { sampleResponders };

@@ -6,11 +6,6 @@
 // range, every care setting, and all four risk levels, with the safety flag set
 // whenever a high-priority flag was raised.
 
-(function () {
-'use strict';
-window.MentalStateExaminationDashboard =
-  window.MentalStateExaminationDashboard || {};
-
 /** @type {import('./dashboard-types.js').AssessmentRow[]} */
 const sampleAssessments = [
   {
@@ -103,5 +98,4 @@ const sampleAssessments = [
   }
 ];
 
-window.MentalStateExaminationDashboard.sampleAssessments = sampleAssessments;
-})();
+export { sampleAssessments };

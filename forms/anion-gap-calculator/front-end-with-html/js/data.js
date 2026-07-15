@@ -6,11 +6,6 @@
 // unknown), the hypoalbuminaemia-masking case, and several care settings.
 // raisedFlag is set whenever the classification is high or very-high.
 
-(function () {
-'use strict';
-window.AnionGapCalculatorDashboard =
-  window.AnionGapCalculatorDashboard || {};
-
 /** @type {import('./dashboard-types.js').AssessmentRow[]} */
 const sampleAssessments = [
   {
@@ -92,5 +87,4 @@ const sampleAssessments = [
   }
 ];
 
-window.AnionGapCalculatorDashboard.sampleAssessments = sampleAssessments;
-})();
+export { sampleAssessments };

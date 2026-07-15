@@ -16,9 +16,6 @@
  */
 
 // Wrapped in an IIFE; published via window.AllergyAssessment.
-(function () {
-'use strict';
-window.AllergyAssessment = window.AllergyAssessment || {};
 
 /**
  * @param {AssessmentData} data
@@ -224,5 +221,4 @@ function detectAdditionalFlags(data) {
   return flags;
 }
 
-window.AllergyAssessment.detectAdditionalFlags = detectAdditionalFlags;
-})();
+export { detectAdditionalFlags };

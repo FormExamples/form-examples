@@ -118,9 +118,6 @@
 // <script> (no ES modules) so the page can be opened directly via `file://`.
 // The IIFE attaches its public symbols to a single global namespace,
 // `window.BhutaniBilirubinNomogram`.
-(function () {
-'use strict';
-window.BhutaniBilirubinNomogram = window.BhutaniBilirubinNomogram || {};
 
 /**
  * Build a fresh, fully-blank assessment.
@@ -256,16 +253,4 @@ function priorityLabel(priority) {
   }
 }
 
-Object.assign(window.BhutaniBilirubinNomogram, {
-  emptyAssessment,
-  RISK_FACTOR_LABELS,
-  riskZoneLabel,
-  riskZoneClass,
-  percentileBandLabel,
-  clinicianRoleLabel,
-  careSettingLabel,
-  sexLabel,
-  measurementMethodLabel,
-  priorityLabel
-});
-})();
+export { emptyAssessment, RISK_FACTOR_LABELS, riskZoneLabel, riskZoneClass, percentileBandLabel, clinicianRoleLabel, careSettingLabel, sexLabel, measurementMethodLabel, priorityLabel };

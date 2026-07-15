@@ -1,3 +1,6 @@
+import { AGE_DECAY_BASE, ALPHA_FEMALE, ALPHA_MALE, BASE_COEFFICIENT, FEMALE_MULTIPLIER, KAPPA_FEMALE, KAPPA_MALE, MAX_EXPONENT, UMOL_PER_MGDL, stageRules } from './rules.js';
+import { stageLabel } from './types.js';
+
 // eGFR grader. Pure functions: take an `AssessmentData` object, apply the
 // CKD-EPI 2021 creatinine equation (race-free) to the serum creatinine, age, and
 // sex, and band the result into a KDIGO 2012 CKD G-stage.
@@ -25,23 +28,6 @@
  */
 
 // Wrapped in an IIFE; published via window.EstimatedGlomerularFiltrationRateCalculator.
-(function () {
-'use strict';
-window.EstimatedGlomerularFiltrationRateCalculator =
-  window.EstimatedGlomerularFiltrationRateCalculator || {};
-const {
-  UMOL_PER_MGDL,
-  KAPPA_FEMALE,
-  KAPPA_MALE,
-  ALPHA_FEMALE,
-  ALPHA_MALE,
-  MAX_EXPONENT,
-  BASE_COEFFICIENT,
-  AGE_DECAY_BASE,
-  FEMALE_MULTIPLIER,
-  stageRules,
-  stageLabel
-} = window.EstimatedGlomerularFiltrationRateCalculator;
 
 /** Round to the nearest whole number (returns null unchanged). */
 function roundWhole(n) {
@@ -164,9 +150,4 @@ function calculateEgfr(data) {
   };
 }
 
-Object.assign(window.EstimatedGlomerularFiltrationRateCalculator, {
-  roundWhole,
-  roundThree,
-  calculateEgfr
-});
-})();
+export { roundWhole, roundThree, calculateEgfr };

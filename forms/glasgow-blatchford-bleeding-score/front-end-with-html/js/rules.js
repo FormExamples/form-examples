@@ -37,9 +37,6 @@
  */
 
 // Wrapped in an IIFE; published via window.GlasgowBlatchfordBleedingScore.
-(function () {
-'use strict';
-window.GlasgowBlatchfordBleedingScore = window.GlasgowBlatchfordBleedingScore || {};
 
 /**
  * Parameter 1 — blood urea (mmol/L). Returns 0, 2, 3, 4, or 6; 0 when
@@ -297,16 +294,4 @@ const gbsRules = [
   }
 ];
 
-Object.assign(window.GlasgowBlatchfordBleedingScore, {
-  bloodUreaPoints,
-  haemoglobinPoints,
-  systolicBloodPressurePoints,
-  pulsePoint,
-  melaenaPoint,
-  syncopePoint,
-  hepaticDiseasePoint,
-  cardiacFailurePoint,
-  riskBandFor,
-  gbsRules
-});
-})();
+export { bloodUreaPoints, haemoglobinPoints, systolicBloodPressurePoints, pulsePoint, melaenaPoint, syncopePoint, hepaticDiseasePoint, cardiacFailurePoint, riskBandFor, gbsRules };

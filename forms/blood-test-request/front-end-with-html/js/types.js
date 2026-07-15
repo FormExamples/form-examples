@@ -5,10 +5,6 @@
 // Property names are camelCase to match the front-end serde / examples
 // convention. Wrapped in an IIFE; published via `window.BloodTestRequest`.
 
-(function () {
-'use strict';
-window.BloodTestRequest = window.BloodTestRequest || {};
-
 /**
  * Canonical list of the orderable blood-test panels. The `field` is the
  * camelCase property on the `panels` section (matches the SQL boolean column
@@ -126,12 +122,4 @@ function indicationLabel(value) {
   return INDICATION_LABELS[value] || value || '';
 }
 
-Object.assign(window.BloodTestRequest, {
-  emptyRequest,
-  countSelectedPanels,
-  selectedPanels,
-  indicationLabel,
-  PANELS,
-  INDICATION_LABELS
-});
-})();
+export { emptyRequest, countSelectedPanels, selectedPanels, indicationLabel, PANELS, INDICATION_LABELS };

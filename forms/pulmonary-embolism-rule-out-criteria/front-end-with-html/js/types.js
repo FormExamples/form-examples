@@ -128,9 +128,6 @@
 // classic <script> (no ES modules) so the page can be opened directly via
 // `file://`. The IIFE attaches its public symbols to a single global
 // namespace, `window.PulmonaryEmbolismRuleOutCriteria`.
-(function () {
-'use strict';
-window.PulmonaryEmbolismRuleOutCriteria = window.PulmonaryEmbolismRuleOutCriteria || {};
 
 /**
  * Build a fresh, fully-blank assessment.
@@ -254,16 +251,4 @@ function priorityLabel(priority) {
   }
 }
 
-Object.assign(window.PulmonaryEmbolismRuleOutCriteria, {
-  emptyAssessment,
-  classificationLabel,
-  classificationClass,
-  criterionStatusLabel,
-  clinicianRoleLabel,
-  careSettingLabel,
-  sexLabel,
-  pretestProbabilityLabel,
-  yesNoLabel,
-  priorityLabel
-});
-})();
+export { emptyAssessment, classificationLabel, classificationClass, criterionStatusLabel, clinicianRoleLabel, careSettingLabel, sexLabel, pretestProbabilityLabel, yesNoLabel, priorityLabel };

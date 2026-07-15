@@ -6,10 +6,6 @@
 // through Very Poor), several departments and visit types, and a mix of
 // flagged-issue counts so filters and sorts all have meaningful content.
 
-(function () {
-'use strict';
-window.EncounterSatisfactionDashboard = window.EncounterSatisfactionDashboard || {};
-
 /** @type {import('./types.js').PatientRow[]} */
 const samplePatients = [
   {
@@ -146,5 +142,4 @@ const samplePatients = [
   }
 ];
 
-window.EncounterSatisfactionDashboard.samplePatients = samplePatients;
-})();
+export { samplePatients };

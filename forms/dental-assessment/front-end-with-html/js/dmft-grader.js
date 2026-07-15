@@ -1,3 +1,6 @@
+import { dmftRules } from './dmft-rules.js';
+import { getDMFTCategory, getDMFTScore } from './types.js';
+
 // DMFT (Decayed, Missing, Filled Teeth) grader. Pure functions: take an
 // `AssessmentData` object, return the total DMFT score (0-32 typically),
 // the `DMFTCategory`, and the list of fired rules.
@@ -17,11 +20,6 @@
  */
 
 // Wrapped in an IIFE; published via window.DentalAssessment.
-(function () {
-'use strict';
-window.DentalAssessment = window.DentalAssessment || {};
-
-const { dmftRules, getDMFTScore, getDMFTCategory } = window.DentalAssessment;
 
 /**
  * Evaluate all DMFT rules against the supplied assessment data and
@@ -59,5 +57,4 @@ function calculateDMFT(data) {
   return { dmftScore, dmftCategory, firedRules };
 }
 
-window.DentalAssessment.calculateDMFT = calculateDMFT;
-})();
+export { calculateDMFT };

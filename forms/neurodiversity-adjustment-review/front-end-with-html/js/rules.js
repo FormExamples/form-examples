@@ -1,3 +1,5 @@
+import { anyEffectivenessAnswered, anyNotWorking, ratedCount, ratedValues, workingWellCount } from './types.js';
+
 // Four-axis rule catalogue for the Neurodiversity Adjustment Review engine.
 //
 // Ported verbatim from the canonical engine spec: (A) effectiveness
@@ -11,19 +13,6 @@
 // the grader composes them.
 //
 // Wrapped in an IIFE; published via `window.NeurodiversityAdjustmentReview`.
-
-(function () {
-'use strict';
-window.NeurodiversityAdjustmentReview =
-  window.NeurodiversityAdjustmentReview || {};
-const NS = window.NeurodiversityAdjustmentReview;
-const {
-  ratedValues,
-  ratedCount,
-  workingWellCount,
-  anyNotWorking,
-  anyEffectivenessAnswered
-} = NS;
 
 // ----------------------------------------------------------------------
 // Axis A — effectiveness (first match wins)
@@ -327,12 +316,4 @@ function gradeNextStep(r, wellbeingRiskBand) {
   return done('none');
 }
 
-Object.assign(NS, {
-  classifyEffectiveness,
-  gradeWellbeingRisk,
-  gradeCompleteness,
-  gradeNextStep,
-  COMPLETENESS_SECTIONS,
-  WELLBEING_ORDER
-});
-})();
+export { classifyEffectiveness, gradeWellbeingRisk, gradeCompleteness, gradeNextStep, COMPLETENESS_SECTIONS, WELLBEING_ORDER };

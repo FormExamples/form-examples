@@ -162,9 +162,6 @@
  */
 
 // Wrapped in an IIFE; published via window.ErgonomicAssessment.
-(function () {
-'use strict';
-window.ErgonomicAssessment = window.ErgonomicAssessment || {};
 
 /**
  * Build a fresh, fully-blank assessment.
@@ -295,10 +292,4 @@ function rebaActionLevel(score) {
   return 'Immediate action required';
 }
 
-Object.assign(window.ErgonomicAssessment, {
-  emptyAssessment,
-  rebaRiskLevel,
-  rebaRiskClass,
-  rebaActionLevel
-});
-})();
+export { emptyAssessment, rebaRiskLevel, rebaRiskClass, rebaActionLevel };

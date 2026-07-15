@@ -6,10 +6,6 @@
 // raised to the `urgent` priority bucket so the front-end report styles it
 // in red as the most prominent banner.
 
-(function () {
-'use strict';
-window.PsychiatryAssessment = window.PsychiatryAssessment || {};
-
 /**
  * @param {import('./types.js').AssessmentData} data
  * @returns {import('./types.js').AdditionalFlag[]}
@@ -206,5 +202,4 @@ function detectAdditionalFlags(data) {
   return flags;
 }
 
-Object.assign(window.PsychiatryAssessment, { detectAdditionalFlags });
-})();
+export { detectAdditionalFlags };

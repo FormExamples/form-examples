@@ -7,11 +7,6 @@
 // the required worked cases: a routine suspected-OSA request, an occupational-
 // driver case, and a severe-daytime-sleepiness case.
 
-(function () {
-'use strict';
-window.SleepStudyTestRequestDashboard =
-  window.SleepStudyTestRequestDashboard || {};
-
 /** @type {import('./types.js').RequestRow[]} */
 const sampleRequests = [
   {
@@ -176,5 +171,4 @@ const sampleRequests = [
   }
 ];
 
-window.SleepStudyTestRequestDashboard.sampleRequests = sampleRequests;
-})();
+export { sampleRequests };

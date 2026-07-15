@@ -18,9 +18,6 @@
  */
 
 // Wrapped in an IIFE; published via window.NationalEarlyWarningScore2.
-(function () {
-'use strict';
-window.NationalEarlyWarningScore2 = window.NationalEarlyWarningScore2 || {};
 
 /**
  * Respiration rate (breaths/min).
@@ -141,13 +138,4 @@ function scoreTemperature(temp) {
   return 2;
 }
 
-Object.assign(window.NationalEarlyWarningScore2, {
-  scoreRespiratoryRate,
-  scoreSpo2,
-  scoreOxygen,
-  scoreBloodPressure,
-  scorePulse,
-  scoreConsciousness,
-  scoreTemperature
-});
-})();
+export { scoreRespiratoryRate, scoreSpo2, scoreOxygen, scoreBloodPressure, scorePulse, scoreConsciousness, scoreTemperature };

@@ -1,3 +1,8 @@
+import { detectAdditionalFlags } from './flagged-issues.js';
+import { gradePsychomotor } from './psychomotor-grader.js';
+import { psychomotorRules } from './rules.js';
+import { PASS_PERCENT_THRESHOLD, emptyAssessment, outcomeClass, outcomeLabel, triStateLabel, triStatePillClass } from './types.js';
+
 // Emergency Medical Technician Psychomotor Examination — examiner wizard.
 //
 // Single-page continuous wizard: every section is rendered into the page in
@@ -13,22 +18,6 @@
 // to `window.EmergencyMedicalTechnicianPsychomotorExamination`. The whole
 // file is wrapped in an IIFE so its top-level identifiers don't leak to
 // the global scope.
-
-(function () {
-'use strict';
-
-const NS = window.EmergencyMedicalTechnicianPsychomotorExamination;
-const {
-  emptyAssessment,
-  outcomeLabel,
-  outcomeClass,
-  triStateLabel,
-  triStatePillClass,
-  psychomotorRules,
-  gradePsychomotor,
-  detectAdditionalFlags,
-  PASS_PERCENT_THRESHOLD
-} = NS;
 
 const TOTAL_STEPS = 6;
 
@@ -983,4 +972,3 @@ if (document.readyState === 'loading') {
 } else {
   init();
 }
-})();

@@ -20,9 +20,6 @@
  */
 
 // Wrapped in an IIFE; published via window.GlasgowBlatchfordBleedingScore.
-(function () {
-'use strict';
-window.GlasgowBlatchfordBleedingScore = window.GlasgowBlatchfordBleedingScore || {};
 
 /**
  * @param {AssessmentData} data
@@ -136,5 +133,4 @@ function detectFlaggedIssues(data, grade) {
   return flags;
 }
 
-window.GlasgowBlatchfordBleedingScore.detectFlaggedIssues = detectFlaggedIssues;
-})();
+export { detectFlaggedIssues };

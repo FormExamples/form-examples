@@ -1,3 +1,5 @@
+import { ALBUMIN_FACTOR, NORMAL_HIGH_WITHOUT_K, NORMAL_HIGH_WITH_K, NORMAL_LOW, REF_ALBUMIN, classificationRules } from './rules.js';
+
 // Anion-gap grader. Pure functions: take an `AssessmentData` object, apply the
 // anion-gap formula (with or without potassium) to the electrolyte panel,
 // derive the albumin-corrected gap when an albumin is present, and classify the
@@ -31,17 +33,6 @@
  */
 
 // Wrapped in an IIFE; published via window.AnionGapCalculator.
-(function () {
-'use strict';
-window.AnionGapCalculator = window.AnionGapCalculator || {};
-const {
-  REF_ALBUMIN,
-  ALBUMIN_FACTOR,
-  NORMAL_LOW,
-  NORMAL_HIGH_WITH_K,
-  NORMAL_HIGH_WITHOUT_K,
-  classificationRules
-} = window.AnionGapCalculator;
 
 /** True when a numeric value is present (not null/undefined/NaN). */
 function present(n) {
@@ -171,9 +162,4 @@ function calculateAnionGap(data) {
   };
 }
 
-Object.assign(window.AnionGapCalculator, {
-  present,
-  roundOne,
-  calculateAnionGap
-});
-})();
+export { present, roundOne, calculateAnionGap };

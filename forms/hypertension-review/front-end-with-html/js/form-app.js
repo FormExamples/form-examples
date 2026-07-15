@@ -1,3 +1,6 @@
+import { review } from './grader.js';
+import { controlStatusClass, controlStatusLabel, emptyAssessment, hypertensionStageClass, hypertensionStageLabel, primarySourceLabel, priorityClass, priorityLabel, reviewStatusClass, reviewStatusLabel } from './types.js';
+
 // Hypertension Annual Review — single-page wizard (vanilla JavaScript, no build).
 //
 // Single continuous wizard: every step is rendered into the page in document
@@ -13,23 +16,6 @@
 // Sibling files loaded as plain `<script>` tags (in order) attach their exports
 // to `window.HypertensionReview`. The whole file is wrapped in an IIFE so its
 // top-level identifiers don't leak.
-(function () {
-'use strict';
-
-const NS = window.HypertensionReview;
-const {
-  emptyAssessment,
-  controlStatusLabel,
-  controlStatusClass,
-  reviewStatusLabel,
-  reviewStatusClass,
-  hypertensionStageLabel,
-  hypertensionStageClass,
-  primarySourceLabel,
-  priorityLabel,
-  priorityClass,
-  review
-} = NS;
 
 // ----------------------------------------------------------------------
 // Persistence
@@ -995,4 +981,3 @@ if (document.readyState === 'loading') {
 } else {
   init();
 }
-})();

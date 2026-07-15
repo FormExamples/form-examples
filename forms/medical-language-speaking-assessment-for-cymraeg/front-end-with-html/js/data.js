@@ -14,11 +14,6 @@
 //   450-500 -> A,  350-440 -> B,  300-340 -> C+,
 //   200-290 -> C,  100-190 -> D,  0-90    -> E
 
-(function () {
-'use strict';
-window.MedicalLanguageSpeakingAssessmentForCymraegDashboard =
-  window.MedicalLanguageSpeakingAssessmentForCymraegDashboard || {};
-
 /** @type {import('./types.js').CandidateRow[]} */
 const sampleCandidates = [
   {
@@ -155,5 +150,4 @@ const sampleCandidates = [
   }
 ];
 
-window.MedicalLanguageSpeakingAssessmentForCymraegDashboard.sampleCandidates = sampleCandidates;
-})();
+export { sampleCandidates };

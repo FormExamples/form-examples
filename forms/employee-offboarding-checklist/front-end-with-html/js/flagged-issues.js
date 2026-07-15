@@ -17,9 +17,6 @@
  */
 
 // Wrapped in an IIFE; published via window.EmployeeOffboardingChecklist.
-(function () {
-'use strict';
-window.EmployeeOffboardingChecklist = window.EmployeeOffboardingChecklist || {};
 
 /**
  * @param {AssessmentData} data
@@ -178,5 +175,4 @@ function detectAdditionalFlags(data) {
   return flags;
 }
 
-window.EmployeeOffboardingChecklist.detectAdditionalFlags = detectAdditionalFlags;
-})();
+export { detectAdditionalFlags };

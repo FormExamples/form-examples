@@ -7,11 +7,6 @@
 // convention. Wrapped in an IIFE; published via
 // `window.FluoroscopyTestRequest`.
 
-(function () {
-'use strict';
-window.FluoroscopyTestRequest =
-  window.FluoroscopyTestRequest || {};
-
 /**
  * Build a fresh, fully-blank fluoroscopy / contrast-study request.
  * Strings default to ''; numeric / date fields default to null;
@@ -111,13 +106,4 @@ function isBariumStudy(studyType) {
   );
 }
 
-Object.assign(window.FluoroscopyTestRequest, {
-  emptyRequest,
-  studyTypeLabel,
-  indicationLabel,
-  isIonisingStudy,
-  isBariumStudy,
-  STUDY_TYPE_LABELS,
-  INDICATION_LABELS
-});
-})();
+export { emptyRequest, studyTypeLabel, indicationLabel, isIonisingStudy, isBariumStudy, STUDY_TYPE_LABELS, INDICATION_LABELS };

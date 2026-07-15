@@ -173,9 +173,6 @@
 // classic <script> (no ES modules) so the page can be opened directly via
 // `file://`. The IIFE attaches its public symbols to a single global
 // namespace, `window.PatientIntake`.
-(function () {
-'use strict';
-window.PatientIntake = window.PatientIntake || {};
 
 /**
  * Build a fresh, fully-blank assessment.
@@ -306,10 +303,4 @@ function calculateAge(dob) {
   return age;
 }
 
-Object.assign(window.PatientIntake, {
-  emptyAssessment,
-  riskLevelLabel,
-  riskLevelClass,
-  calculateAge
-});
-})();
+export { emptyAssessment, riskLevelLabel, riskLevelClass, calculateAge };

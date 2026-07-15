@@ -7,11 +7,6 @@
 // mix of diagnoses and priority areas; NHS numbers are in the canonical
 // "NNN NNN NNNN" display form.
 
-(function () {
-'use strict';
-window.OccupationalTherapyAssessmentDashboard =
-  window.OccupationalTherapyAssessmentDashboard || {};
-
 /** @type {import('./types.js').PatientRow[]} */
 const samplePatients = [
   {
@@ -124,5 +119,4 @@ const samplePatients = [
   }
 ];
 
-window.OccupationalTherapyAssessmentDashboard.samplePatients = samplePatients;
-})();
+export { samplePatients };

@@ -109,9 +109,6 @@
 // classic <script> (no ES modules) so the page can be opened directly via
 // `file://`. The IIFE attaches its public symbols to a single global
 // namespace, `window.BiopsyTestResult`.
-(function () {
-'use strict';
-window.BiopsyTestResult = window.BiopsyTestResult || {};
 
 /**
  * Build a fresh, fully-blank biopsy result.
@@ -329,21 +326,4 @@ function followUpUrgencyClass(value) {
   }
 }
 
-Object.assign(window.BiopsyTestResult, {
-  emptyResult,
-  resultClassificationLabel,
-  abnormalitySeverityLabel,
-  followUpUrgencyLabel,
-  recommendationLabel,
-  biopsySiteLabel,
-  biopsyMethodLabel,
-  specimenAdequacyLabel,
-  histologicalGradeLabel,
-  resectionMarginsLabel,
-  reportStatusLabel,
-  priorityLabel,
-  resultClassificationClass,
-  abnormalitySeverityClass,
-  followUpUrgencyClass
-});
-})();
+export { emptyResult, resultClassificationLabel, abnormalitySeverityLabel, followUpUrgencyLabel, recommendationLabel, biopsySiteLabel, biopsyMethodLabel, specimenAdequacyLabel, histologicalGradeLabel, resectionMarginsLabel, reportStatusLabel, priorityLabel, resultClassificationClass, abnormalitySeverityClass, followUpUrgencyClass };

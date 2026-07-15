@@ -31,10 +31,6 @@
 
 // Wrapped in an IIFE; published via
 // window.RecommendedSummaryPlanForEmergencyCareAndTreatment.
-(function () {
-'use strict';
-window.RecommendedSummaryPlanForEmergencyCareAndTreatment =
-  window.RecommendedSummaryPlanForEmergencyCareAndTreatment || {};
 
 const nonEmpty = (s) => typeof s === 'string' && s.trim() !== '';
 
@@ -171,8 +167,4 @@ const completenessSlots = [
   { key: 'signedAt', present: (p) => p.signOff.signedAt !== null && p.signOff.signedAt !== '' }
 ];
 
-Object.assign(window.RecommendedSummaryPlanForEmergencyCareAndTreatment, {
-  mandatoryRules,
-  completenessSlots
-});
-})();
+export { mandatoryRules, completenessSlots };

@@ -1,3 +1,6 @@
+import { detectFlaggedIssues } from './flags.js';
+import { gradeClinical, gradeMax, gradeOperational, gradePREM, gradePROM, promisGphTScore, promisMhTScore } from './rules.js';
+
 // Four-domain grader for the Outpatient Outcome Composite Grade (OOCG).
 //
 // Composes the domain graders in rules.js and the flagged issues in flags.js
@@ -7,12 +10,6 @@
 // and flag IDs are identical across every front-end and the back-end.
 //
 // Wrapped in an IIFE; published via `window.OutpatientOutcome`.
-
-(function () {
-'use strict';
-window.OutpatientOutcome =
-  window.OutpatientOutcome || {};
-const NS = window.OutpatientOutcome;
 
 /**
  * Public entry point. Pure and deterministic.
@@ -30,16 +27,7 @@ const NS = window.OutpatientOutcome;
  * }}
  */
 function calculateGrade(data) {
-  const {
-    gradeClinical,
-    gradePROM,
-    gradePREM,
-    gradeOperational,
-    detectFlaggedIssues,
-    gradeMax,
-    promisGphTScore,
-    promisMhTScore
-  } = NS;
+  
 
   // Enrich with derived PROMIS T-scores before grading.
   const enrichedData = {
@@ -84,8 +72,6 @@ function calculateGrade(data) {
   };
 }
 
-Object.assign(NS, {
-  calculateGrade,
-  gradeOOCG: calculateGrade
-});
-})();
+export const gradeOOCG = calculateGrade;
+
+export { calculateGrade };

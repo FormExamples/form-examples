@@ -23,9 +23,6 @@
  */
 
 // Wrapped in an IIFE; published via window.AnionGapCalculator.
-(function () {
-'use strict';
-window.AnionGapCalculator = window.AnionGapCalculator || {};
 
 // ─── Formula and reference constants (spec §4) ──────────────────
 /** Reference (normal) albumin in g/L the gap is corrected to. */
@@ -83,13 +80,4 @@ const classificationRules = [
   }
 ];
 
-Object.assign(window.AnionGapCalculator, {
-  REF_ALBUMIN,
-  ALBUMIN_FACTOR,
-  NORMAL_LOW,
-  NORMAL_HIGH_WITH_K,
-  NORMAL_HIGH_WITHOUT_K,
-  VERY_HIGH,
-  classificationRules
-});
-})();
+export { REF_ALBUMIN, ALBUMIN_FACTOR, NORMAL_LOW, NORMAL_HIGH_WITH_K, NORMAL_HIGH_WITHOUT_K, VERY_HIGH, classificationRules };

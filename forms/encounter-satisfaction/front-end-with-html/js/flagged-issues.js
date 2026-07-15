@@ -18,9 +18,6 @@
  */
 
 // Wrapped in an IIFE; published via window.EncounterSatisfaction.
-(function () {
-'use strict';
-window.EncounterSatisfaction = window.EncounterSatisfaction || {};
 
 /** All Likert-scored fields with display labels, grouped by section. */
 const SECTIONS = [
@@ -189,5 +186,4 @@ function detectAdditionalFlags(data, compositeScore) {
   return flags;
 }
 
-window.EncounterSatisfaction.detectAdditionalFlags = detectAdditionalFlags;
-})();
+export { detectAdditionalFlags };

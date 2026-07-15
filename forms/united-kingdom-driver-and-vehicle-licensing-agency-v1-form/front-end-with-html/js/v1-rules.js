@@ -1,3 +1,5 @@
+import { isBlepharospasmBranchActive, isDoubleVisionBranchActive, isGlaucomaBranchActive, isLaserTreatmentBranchActive, isMonocularBranchActive, isNightBlindnessBranchActive, isOtherVisionBranchActive, isRecentContactBranchActive, isRetinitisPigmentosaBranchActive, isVisualFieldBranchActive, isVisualFieldCauseBranchActive } from './types.js';
+
 // DVLA V1 — branch-aware completeness validation rules.
 //
 // Each rule asserts that a required field on the *active* branch has been
@@ -16,23 +18,6 @@
  * @property {string} message
  * @property {(d: AssessmentData) => boolean} evaluate
  */
-
-(function () {
-'use strict';
-window.DvlaV1Form = window.DvlaV1Form || {};
-const {
-  isMonocularBranchActive,
-  isVisualFieldBranchActive,
-  isVisualFieldCauseBranchActive,
-  isGlaucomaBranchActive,
-  isRetinitisPigmentosaBranchActive,
-  isLaserTreatmentBranchActive,
-  isBlepharospasmBranchActive,
-  isNightBlindnessBranchActive,
-  isDoubleVisionBranchActive,
-  isOtherVisionBranchActive,
-  isRecentContactBranchActive
-} = window.DvlaV1Form;
 
 /** @type {ValidationRule[]} */
 const v1Rules = [
@@ -428,5 +413,4 @@ const v1Rules = [
   }
 ];
 
-window.DvlaV1Form.v1Rules = v1Rules;
-})();
+export { v1Rules };

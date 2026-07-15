@@ -6,10 +6,6 @@
 // Property names are camelCase to match the front-end serde / examples
 // convention. Wrapped in an IIFE; published via `window.UrinalysisTestRequest`.
 
-(function () {
-'use strict';
-window.UrinalysisTestRequest = window.UrinalysisTestRequest || {};
-
 /**
  * Build a fresh, fully-blank urinalysis test request.
  * Strings default to ''; numeric / date fields default to null;
@@ -104,11 +100,4 @@ function testLabel(field) {
   return TEST_LABELS[field] || field || '';
 }
 
-Object.assign(window.UrinalysisTestRequest, {
-  emptyRequest,
-  TESTS,
-  TEST_LABELS,
-  countSelectedTests,
-  testLabel
-});
-})();
+export { emptyRequest, TESTS, TEST_LABELS, countSelectedTests, testLabel };

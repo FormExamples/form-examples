@@ -1,3 +1,7 @@
+import { detectAdditionalFlags } from './flagged-issues.js';
+import { calculateLD, severityClass, severityDescription, severityLabel } from './ld-grader.js';
+import { bmiCategory, calculateBMI, emptyAssessment } from './types.js';
+
 // Learning Disability Assessment - patient wizard (vanilla JS, no build).
 //
 // Single-page continuous wizard: every section is rendered into the page
@@ -11,20 +15,6 @@
 // exports to `window.LearningDisabilityAssessment`. Pulling them off here
 // keeps the rest of this file referring to short local names. Whole file
 // is wrapped in an IIFE so its top-level identifiers don't leak.
-(function () {
-'use strict';
-
-const NS = window.LearningDisabilityAssessment;
-const {
-  emptyAssessment,
-  calculateBMI,
-  bmiCategory,
-  calculateLD,
-  severityLabel,
-  severityDescription,
-  severityClass,
-  detectAdditionalFlags
-} = NS;
 
 // ----------------------------------------------------------------------
 // Persistence
@@ -1337,4 +1327,3 @@ if (document.readyState === 'loading') {
 } else {
   init();
 }
-})();

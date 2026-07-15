@@ -184,9 +184,6 @@
 // classic <script> (no ES modules) so the page can be opened directly via
 // `file://`. The IIFE attaches its public symbols to a single global
 // namespace, `window.RespirologyAssessment`.
-(function () {
-'use strict';
-window.RespirologyAssessment = window.RespirologyAssessment || {};
 
 /**
  * Build a fresh, fully-blank assessment.
@@ -352,13 +349,4 @@ function mrcGradeClass(grade) {
   return `grade-${grade}`;
 }
 
-Object.assign(window.RespirologyAssessment, {
-  emptyAssessment,
-  calculateBMI,
-  bmiCategory,
-  calculateStopBang,
-  mrcGradeLabel,
-  mrcSeverityLabel,
-  mrcGradeClass
-});
-})();
+export { emptyAssessment, calculateBMI, bmiCategory, calculateStopBang, mrcGradeLabel, mrcSeverityLabel, mrcGradeClass };

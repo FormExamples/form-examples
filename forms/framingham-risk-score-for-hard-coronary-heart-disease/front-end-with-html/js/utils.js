@@ -1,13 +1,13 @@
+import { convertMmolToMg, isSmoker } from './types.js';
+
 // Framingham Risk Score — Wilson/D'Agostino 1998 Cox regression.
 //
 // Vanilla-JS port of `src/lib/engine/utils.ts` (calculateFraminghamRisk).
 // Returns the 10-year hard-CHD risk percentage given a complete-enough
 // assessment. Pure function — no side effects.
-(function () {
-  'use strict';
 
-  const NS = window.FraminghamRiskScore;
-  const { convertMmolToMg, isSmoker } = NS;
+  
+  
 
   /**
    * Calculate the Framingham 10-year risk of hard CHD as a percentage
@@ -83,7 +83,6 @@
     }
   }
 
-  Object.assign(window.FraminghamRiskScore, {
-    calculateFraminghamRisk
-  });
-})();
+  
+
+export { calculateFraminghamRisk };

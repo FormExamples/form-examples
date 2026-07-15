@@ -24,10 +24,6 @@
  */
 
 // Wrapped in an IIFE; published via window.RecognitionOfStrokeInTheEmergencyRoom.
-(function () {
-'use strict';
-window.RecognitionOfStrokeInTheEmergencyRoom =
-  window.RecognitionOfStrokeInTheEmergencyRoom || {};
 
 /** @type {RosierRule[]} */
 const rosierRules = [
@@ -102,5 +98,4 @@ const rosierRules = [
   }
 ];
 
-window.RecognitionOfStrokeInTheEmergencyRoom.rosierRules = rosierRules;
-})();
+export { rosierRules };

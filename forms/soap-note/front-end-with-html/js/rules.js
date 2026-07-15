@@ -31,9 +31,6 @@
  */
 
 // Wrapped in an IIFE; published via window.SoapNote.
-(function () {
-'use strict';
-window.SoapNote = window.SoapNote || {};
 
 /** A single field is present when it is a non-blank string. */
 function has(v) {
@@ -159,10 +156,4 @@ function requiredComponents(data) {
   return components;
 }
 
-Object.assign(window.SoapNote, {
-  has,
-  sectionPresence,
-  safetyNettingRequired,
-  requiredComponents
-});
-})();
+export { has, sectionPresence, safetyNettingRequired, requiredComponents };

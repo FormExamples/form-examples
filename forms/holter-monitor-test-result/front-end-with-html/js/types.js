@@ -148,9 +148,6 @@
 // classic <script> (no ES modules) so the page can be opened directly via
 // `file://`. The IIFE attaches its public symbols to a single global
 // namespace, `window.HolterMonitorTestResult`.
-(function () {
-'use strict';
-window.HolterMonitorTestResult = window.HolterMonitorTestResult || {};
 
 /**
  * The numeric fields of the result record. Unanswered numeric fields are
@@ -358,19 +355,4 @@ function followUpUrgencyClass(value) {
   }
 }
 
-Object.assign(window.HolterMonitorTestResult, {
-  NUMERIC_FIELDS,
-  emptyResult,
-  resultClassificationLabel,
-  abnormalitySeverityLabel,
-  followUpUrgencyLabel,
-  monitorTypeLabel,
-  predominantRhythmLabel,
-  reportStatusLabel,
-  recommendationLabel,
-  priorityLabel,
-  resultClassificationClass,
-  abnormalitySeverityClass,
-  followUpUrgencyClass
-});
-})();
+export { NUMERIC_FIELDS, emptyResult, resultClassificationLabel, abnormalitySeverityLabel, followUpUrgencyLabel, monitorTypeLabel, predominantRhythmLabel, reportStatusLabel, recommendationLabel, priorityLabel, resultClassificationClass, abnormalitySeverityClass, followUpUrgencyClass };

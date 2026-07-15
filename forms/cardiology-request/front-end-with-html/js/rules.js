@@ -12,12 +12,6 @@
 //
 // Wrapped in an IIFE; published via `window.CardiologyRequest`.
 
-(function () {
-'use strict';
-window.CardiologyRequest =
-  window.CardiologyRequest || {};
-const NS = window.CardiologyRequest;
-
 // ----------------------------------------------------------------------
 // Axis A — Referral appropriateness (right reason -> right service)
 // ----------------------------------------------------------------------
@@ -343,16 +337,4 @@ function scoreTriage(data) {
   };
 }
 
-Object.assign(NS, {
-  scoreAppropriateness,
-  scoreSafety,
-  scoreCompleteness,
-  scoreTriage,
-  maxTier,
-  maxBand,
-  TRIAGE_ORDER,
-  SAFETY_ORDER,
-  TARGET_TIMEFRAMES,
-  REASON_SERVICE_MAP
-});
-})();
+export { scoreAppropriateness, scoreSafety, scoreCompleteness, scoreTriage, maxTier, maxBand, TRIAGE_ORDER, SAFETY_ORDER, TARGET_TIMEFRAMES, REASON_SERVICE_MAP };

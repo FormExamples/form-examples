@@ -1,3 +1,6 @@
+import { completenessPercent, validationStatus } from './types.js';
+import { validationRules } from './validation-rules.js';
+
 // Form validator. Pure function: takes an `AssessmentData` object,
 // returns the completeness percentage, the overall status (`Complete` /
 // `Incomplete`), and the list of fired (i.e. failing) validation rules.
@@ -10,12 +13,6 @@
  */
 
 // Wrapped in an IIFE; published via window.CodeOfConductNotice.
-(function () {
-'use strict';
-window.CodeOfConductNotice = window.CodeOfConductNotice || {};
-
-const NS = window.CodeOfConductNotice;
-const { validationRules, completenessPercent, validationStatus } = NS;
 
 /**
  * Pure function: validates the completeness of the code of conduct notice form.
@@ -61,5 +58,4 @@ function validateForm(data) {
   };
 }
 
-window.CodeOfConductNotice.validateForm = validateForm;
-})();
+export { validateForm };

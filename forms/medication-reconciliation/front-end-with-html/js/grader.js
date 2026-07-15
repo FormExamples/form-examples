@@ -1,3 +1,6 @@
+import { deriveStatus, discrepancyTouchesHighRisk, isIntentional, isUnintentional } from './rules.js';
+import { statusLabel } from './types.js';
+
 // Medication-reconciliation grader. Pure function: takes a `ReconciliationData`
 // object (a parent header plus its four child lists) and derives the
 // documentation-form outputs (spec §4). This is NOT a numeric score — it emits
@@ -24,16 +27,6 @@
  */
 
 // Wrapped in an IIFE; published via window.MedicationReconciliation.
-(function () {
-'use strict';
-window.MedicationReconciliation = window.MedicationReconciliation || {};
-const {
-  isIntentional,
-  isUnintentional,
-  discrepancyTouchesHighRisk,
-  deriveStatus,
-  statusLabel
-} = window.MedicationReconciliation;
 
 /**
  * Compute the reconciliation grade for the supplied data.
@@ -104,5 +97,4 @@ function calculateReconciliation(data) {
   };
 }
 
-window.MedicationReconciliation.calculateReconciliation = calculateReconciliation;
-})();
+export { calculateReconciliation };

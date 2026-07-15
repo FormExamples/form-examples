@@ -1,3 +1,6 @@
+import { calculateGrade } from './grader.js';
+import { emptyRequest, indicationLabel, procedureLabel } from './types.js';
+
 // Cystoscopy Test Request — clinician referral wizard (vanilla JS).
 //
 // Single-page continuous wizard: every section is rendered into the page in
@@ -9,17 +12,6 @@
 // Sibling files loaded as plain `<script>` tags (in order) attach their
 // exports to `window.CystoscopyTestRequest`. The whole file is wrapped in an
 // IIFE so its top-level identifiers don't leak to the global scope.
-
-(function () {
-'use strict';
-
-const NS = window.CystoscopyTestRequest;
-const {
-  emptyRequest,
-  procedureLabel,
-  indicationLabel,
-  calculateGrade
-} = NS;
 
 // ----------------------------------------------------------------------
 // Persistence
@@ -805,4 +797,3 @@ if (document.readyState === 'loading') {
 } else {
   init();
 }
-})();

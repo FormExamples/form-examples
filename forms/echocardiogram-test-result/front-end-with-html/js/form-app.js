@@ -1,3 +1,7 @@
+import { calculateGrade } from './grader.js';
+import { hasSevereValveDisease } from './rules.js';
+import { abnormalitySeverityClass, abnormalitySeverityLabel, echoTypeLabel, emptyResult, followUpUrgencyClass, followUpUrgencyLabel, lvFunctionLabel, priorityLabel, recommendationLabel, reportStatusLabel, resultClassificationClass, resultClassificationLabel, studyQualityLabel } from './types.js';
+
 // Echocardiogram Test Result — reporting-clinician wizard
 // (vanilla JavaScript, no build).
 //
@@ -15,27 +19,6 @@
 // exports to `window.EchocardiogramTestResult`. Pulling them off here keeps
 // the rest of this file referring to short local names. The whole file is
 // wrapped in an IIFE so its top-level identifiers don't leak.
-(function () {
-'use strict';
-
-const NS = window.EchocardiogramTestResult;
-const {
-  emptyResult,
-  resultClassificationLabel,
-  abnormalitySeverityLabel,
-  followUpUrgencyLabel,
-  echoTypeLabel,
-  reportStatusLabel,
-  studyQualityLabel,
-  lvFunctionLabel,
-  recommendationLabel,
-  priorityLabel,
-  resultClassificationClass,
-  abnormalitySeverityClass,
-  followUpUrgencyClass,
-  hasSevereValveDisease,
-  calculateGrade
-} = NS;
 
 // ----------------------------------------------------------------------
 // Persistence
@@ -1089,4 +1072,3 @@ if (document.readyState === 'loading') {
 } else {
   init();
 }
-})();

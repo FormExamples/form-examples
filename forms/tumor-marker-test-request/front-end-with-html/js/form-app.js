@@ -1,3 +1,6 @@
+import { calculateGrade } from './grader.js';
+import { MARKERS, countSelectedMarkers, emptyRequest, indicationLabel, markerLabel, selectedMarkerFields } from './types.js';
+
 // Tumor Marker Test Request — clinician referral wizard (vanilla JS).
 //
 // Single-page continuous wizard: every section is rendered into the page in
@@ -9,20 +12,6 @@
 // Sibling files loaded as plain `<script>` tags (in order) attach their
 // exports to `window.TumorMarkerTestRequest`. The whole file is wrapped in an
 // IIFE so its top-level identifiers don't leak to the global scope.
-
-(function () {
-'use strict';
-
-const NS = window.TumorMarkerTestRequest;
-const {
-  emptyRequest,
-  MARKERS,
-  markerLabel,
-  indicationLabel,
-  countSelectedMarkers,
-  selectedMarkerFields,
-  calculateGrade
-} = NS;
 
 // ----------------------------------------------------------------------
 // Persistence
@@ -826,4 +815,3 @@ if (document.readyState === 'loading') {
 } else {
   init();
 }
-})();

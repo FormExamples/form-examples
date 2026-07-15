@@ -6,10 +6,6 @@
 // with allergy and anticoagulant comorbidities flagged for a subset; NHS
 // numbers in the canonical "NNN NNN NNNN" display form.
 
-(function () {
-'use strict';
-window.CardiologyAssessmentDashboard = window.CardiologyAssessmentDashboard || {};
-
 /** @type {import('./types.js').PatientRow[]} */
 const samplePatients = [
   {
@@ -134,5 +130,4 @@ const samplePatients = [
   }
 ];
 
-window.CardiologyAssessmentDashboard.samplePatients = samplePatients;
-})();
+export { samplePatients };

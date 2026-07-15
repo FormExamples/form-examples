@@ -10,12 +10,6 @@
 // Flag IDs are stable and identical across every front-end and the back-end.
 // Wrapped in an IIFE; published via `window.PregnancyUltrasoundTestRequest`.
 
-(function () {
-'use strict';
-window.PregnancyUltrasoundTestRequest =
-  window.PregnancyUltrasoundTestRequest || {};
-const NS = window.PregnancyUltrasoundTestRequest;
-
 /**
  * Detect safety flags for an obstetric ultrasound request.
  *
@@ -168,5 +162,4 @@ function datingIncomplete(d) {
   return !hasGa && !hasLmp && !hasEdd;
 }
 
-Object.assign(NS, { detectFlags });
-})();
+export { detectFlags };

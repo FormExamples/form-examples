@@ -147,10 +147,6 @@
 // classic <script> (no ES modules) so the page can be opened directly via
 // `file://`. The IIFE attaches its public symbols to a single global
 // namespace, `window.ElectroencephalogramTestResult`.
-(function () {
-'use strict';
-window.ElectroencephalogramTestResult =
-  window.ElectroencephalogramTestResult || {};
 
 /**
  * Build a fresh, fully-blank EEG test result.
@@ -344,19 +340,4 @@ function followUpUrgencyClass(value) {
   }
 }
 
-Object.assign(window.ElectroencephalogramTestResult, {
-  emptyResult,
-  resultClassificationLabel,
-  abnormalitySeverityLabel,
-  followUpUrgencyLabel,
-  eegTypeLabel,
-  recordingQualityLabel,
-  backgroundRhythmLabel,
-  reportStatusLabel,
-  recommendationLabel,
-  priorityLabel,
-  resultClassificationClass,
-  abnormalitySeverityClass,
-  followUpUrgencyClass
-});
-})();
+export { emptyResult, resultClassificationLabel, abnormalitySeverityLabel, followUpUrgencyLabel, eegTypeLabel, recordingQualityLabel, backgroundRhythmLabel, reportStatusLabel, recommendationLabel, priorityLabel, resultClassificationClass, abnormalitySeverityClass, followUpUrgencyClass };

@@ -1,3 +1,7 @@
+import { detectFlaggedIssues } from './flags.js';
+import { calculateGrade } from './grader.js';
+import { abeGroupClass, abeGroupLabel, abeGroupShort, axisClass, axisLabel, emptyAssessment, goldGradeClass, goldGradeLabel, goldGradeShort, priorityLabel, reviewStatusClass, reviewStatusLabel } from './types.js';
+
 // Chronic Obstructive Pulmonary Disease Review (COPD annual review) — wizard
 // (vanilla JavaScript, no build).
 //
@@ -13,26 +17,6 @@
 // exports to `window.ChronicObstructivePulmonaryDiseaseReview`. Pulling them
 // off here keeps the rest of this file referring to short local names. The
 // whole file is wrapped in an IIFE so its top-level identifiers don't leak.
-(function () {
-'use strict';
-
-const NS = window.ChronicObstructivePulmonaryDiseaseReview;
-const {
-  emptyAssessment,
-  goldGradeLabel,
-  goldGradeShort,
-  goldGradeClass,
-  abeGroupLabel,
-  abeGroupShort,
-  abeGroupClass,
-  reviewStatusLabel,
-  reviewStatusClass,
-  axisLabel,
-  axisClass,
-  priorityLabel,
-  calculateGrade,
-  detectFlaggedIssues
-} = NS;
 
 // ----------------------------------------------------------------------
 // Persistence
@@ -1166,4 +1150,3 @@ if (document.readyState === 'loading') {
 } else {
   init();
 }
-})();

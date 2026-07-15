@@ -1,3 +1,6 @@
+import { fetchCards } from './api.js';
+import { sampleCards } from './data.js';
+
 // Medical Waiting List Card — booking-office dashboard.
 //
 // On boot we attempt a backend fetch; on any failure (or empty response)
@@ -8,9 +11,7 @@
 // Sibling modules loaded as plain `<script>` tags (in dependency order)
 // attach their exports to `window.MedicalWaitingListCardDashboard`.
 
-(function () {
-  'use strict';
-  const { fetchCards, sampleCards } = window.MedicalWaitingListCardDashboard;
+  
 
   /** @type {import('./types.js').WaitingListCardSummary[]} */
   let cards = [];
@@ -398,4 +399,3 @@
   } else {
     init();
   }
-})();

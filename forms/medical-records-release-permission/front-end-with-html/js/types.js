@@ -128,10 +128,6 @@
 // classic <script> (no ES modules) so the page can be opened directly via
 // `file://`. The IIFE attaches its public symbols to a single global
 // namespace, `window.MedicalRecordsReleasePermission`.
-(function () {
-'use strict';
-window.MedicalRecordsReleasePermission =
-  window.MedicalRecordsReleasePermission || {};
 
 /**
  * Build a fresh, fully-blank assessment.
@@ -241,13 +237,4 @@ function isValidEmail(email) {
   return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
 }
 
-Object.assign(window.MedicalRecordsReleasePermission, {
-  emptyAssessment,
-  completenessPercent,
-  validationStatus,
-  completenessStatus,
-  completenessBadgeClass,
-  validationStatusClass,
-  isValidEmail
-});
-})();
+export { emptyAssessment, completenessPercent, validationStatus, completenessStatus, completenessBadgeClass, validationStatusClass, isValidEmail };

@@ -16,9 +16,6 @@
  */
 
 // Wrapped in an IIFE; published via window.GeneticAssessment.
-(function () {
-'use strict';
-window.GeneticAssessment = window.GeneticAssessment || {};
 
 /** @type {RiskRuleDefinition[]} */
 const riskRules = [
@@ -162,5 +159,4 @@ const riskRules = [
   }
 ];
 
-window.GeneticAssessment.riskRules = riskRules;
-})();
+export { riskRules };

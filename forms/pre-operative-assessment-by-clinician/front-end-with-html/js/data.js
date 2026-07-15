@@ -7,11 +7,6 @@
 // representative spread of safety flags. NHS numbers are placeholder values
 // in the canonical "NNN NNN NNNN" display form.
 
-(function () {
-'use strict';
-window.PreOperativeAssessmentByClinicianDashboard =
-  window.PreOperativeAssessmentByClinicianDashboard || {};
-
 /** @type {import('./types.js').AssessmentRow[]} */
 const sampleAssessments = [
   {
@@ -196,6 +191,4 @@ const sampleAssessments = [
   }
 ];
 
-window.PreOperativeAssessmentByClinicianDashboard.sampleAssessments =
-  sampleAssessments;
-})();
+export { sampleAssessments };

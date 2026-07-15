@@ -7,11 +7,6 @@
 // recommendation whenever a high-risk score coincides with a bleeding
 // contraindication.
 
-(function () {
-'use strict';
-window.PaduaVenousThromboembolismRiskAssessmentDashboard =
-  window.PaduaVenousThromboembolismRiskAssessmentDashboard || {};
-
 /** @type {import('./dashboard-types.js').AssessmentRow[]} */
 const sampleAssessments = [
   {
@@ -86,6 +81,4 @@ const sampleAssessments = [
   }
 ];
 
-window.PaduaVenousThromboembolismRiskAssessmentDashboard.sampleAssessments =
-  sampleAssessments;
-})();
+export { sampleAssessments };

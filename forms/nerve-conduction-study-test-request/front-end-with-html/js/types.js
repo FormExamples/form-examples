@@ -7,11 +7,6 @@
 // examples convention. Wrapped in an IIFE; published via
 // `window.NerveConductionStudyTestRequest`.
 
-(function () {
-'use strict';
-window.NerveConductionStudyTestRequest =
-  window.NerveConductionStudyTestRequest || {};
-
 /**
  * Build a fresh, fully-blank electrodiagnostic request.
  * Strings default to ''; numeric / date fields default to null;
@@ -110,13 +105,4 @@ function involvesStimulation(studyType) {
   );
 }
 
-Object.assign(window.NerveConductionStudyTestRequest, {
-  emptyRequest,
-  studyTypeLabel,
-  regionLabel,
-  involvesNeedleEmg,
-  involvesStimulation,
-  STUDY_TYPE_LABELS,
-  REGION_LABELS
-});
-})();
+export { emptyRequest, studyTypeLabel, regionLabel, involvesNeedleEmg, involvesStimulation, STUDY_TYPE_LABELS, REGION_LABELS };

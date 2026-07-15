@@ -7,11 +7,6 @@
 // down) or returns an empty list, callers fall back to the sample data shipped
 // in `data.js` so the page is usable standalone.
 
-(function () {
-'use strict';
-window.MedicalCertificateOfCauseOfDeathDashboard =
-  window.MedicalCertificateOfCauseOfDeathDashboard || {};
-
 const API_BASE = 'http://localhost:5150';
 const CERTIFICATES_PATH = '/api/dashboard/certificates';
 
@@ -36,6 +31,4 @@ async function fetchCertificates() {
   return data.items || [];
 }
 
-window.MedicalCertificateOfCauseOfDeathDashboard.fetchCertificates = fetchCertificates;
-window.MedicalCertificateOfCauseOfDeathDashboard.API_BASE = API_BASE;
-})();
+export { fetchCertificates, API_BASE };

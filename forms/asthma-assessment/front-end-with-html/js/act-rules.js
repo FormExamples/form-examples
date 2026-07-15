@@ -21,9 +21,6 @@
  */
 
 // Wrapped in an IIFE; published via window.AsthmaAssessment.
-(function () {
-'use strict';
-window.AsthmaAssessment = window.AsthmaAssessment || {};
 
 /** @type {ACTRule[]} */
 const actRules = [
@@ -106,5 +103,4 @@ const actRules = [
   }
 ];
 
-window.AsthmaAssessment.actRules = actRules;
-})();
+export { actRules };

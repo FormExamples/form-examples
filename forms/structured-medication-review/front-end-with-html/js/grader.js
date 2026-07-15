@@ -1,3 +1,6 @@
+import { anticholinergicBandFor, burdenBandFor, polypharmacyBandFor, requiredSectionsComplete } from './rules.js';
+import { anticholinergicBandLabel, burdenBandLabel, polypharmacyBandLabel, reviewStatusLabel } from './types.js';
+
 // SMR grader. Pure functions: take a `ReviewData` object (a parent review plus
 // its repeating medicine list) and derive the documentation-form outputs
 // (spec §4). This is NOT a single numeric score — it emits:
@@ -23,19 +26,6 @@
  */
 
 // Wrapped in an IIFE; published via window.StructuredMedicationReview.
-(function () {
-'use strict';
-window.StructuredMedicationReview = window.StructuredMedicationReview || {};
-const {
-  polypharmacyBandFor,
-  anticholinergicBandFor,
-  burdenBandFor,
-  requiredSectionsComplete,
-  polypharmacyBandLabel,
-  anticholinergicBandLabel,
-  burdenBandLabel,
-  reviewStatusLabel
-} = window.StructuredMedicationReview;
 
 /**
  * Sum the per-medicine anticholinergic burden points. A null / missing value
@@ -150,9 +140,4 @@ function calculateSmrGrade(data) {
   };
 }
 
-Object.assign(window.StructuredMedicationReview, {
-  sumAnticholinergicBurden,
-  collectCriterionFlags,
-  calculateSmrGrade
-});
-})();
+export { sumAnticholinergicBurden, collectCriterionFlags, calculateSmrGrade };

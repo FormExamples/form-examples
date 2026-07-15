@@ -7,9 +7,7 @@
 // Records span simple / moderate / complex complexity, every flag
 // category, several lens types, and a mix of expired vs. active.
 
-(function () {
-  'use strict';
-  const NS = (window.EyePrescriptionDashboard = window.EyePrescriptionDashboard || {});
+  
 
   function eye(sph, cyl, axis, add, prismH, baseH, prismV, baseV) {
     return {
@@ -294,5 +292,6 @@
     })
   ];
 
-  NS.sampleData = data;
-}());
+  
+
+export { data as sampleData };

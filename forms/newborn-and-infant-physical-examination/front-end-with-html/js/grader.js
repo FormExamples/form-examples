@@ -1,3 +1,5 @@
+import { LOW_SAT, nipeReferRules } from './rules.js';
+
 // NIPE grader. Pure functions: take an `ExaminationData` object, classify each
 // of the four key screening components, roll the applicable components up into
 // an overall screening outcome, compute completeness, and emit the referral
@@ -35,11 +37,6 @@
  */
 
 // Wrapped in an IIFE; published via window.NewbornAndInfantPhysicalExamination.
-(function () {
-'use strict';
-window.NewbornAndInfantPhysicalExamination =
-  window.NewbornAndInfantPhysicalExamination || {};
-const { nipeReferRules, LOW_SAT } = window.NewbornAndInfantPhysicalExamination;
 
 /** An enum observation counts as unexamined when blank or explicitly not-examined. */
 function enumUnexamined(v) {
@@ -259,10 +256,4 @@ function calculateNipeGrade(data) {
   };
 }
 
-Object.assign(window.NewbornAndInfantPhysicalExamination, {
-  calculateNipeGrade,
-  heartCritical,
-  hipsAbnormalExam,
-  testesBilateral
-});
-})();
+export { calculateNipeGrade, heartCritical, hipsAbnormalExam, testesBilateral };

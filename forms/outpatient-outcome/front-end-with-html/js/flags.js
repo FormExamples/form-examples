@@ -1,3 +1,5 @@
+import { eq5dSummary } from './rules.js';
+
 // Flagged-issue detection for the Outpatient Outcome (OOCG) engine.
 //
 // Pure function returning flagged issues derived from the assessment data and
@@ -10,12 +12,6 @@
 //   low      — data quality or minor operational concern
 //
 // Wrapped in an IIFE; published via `window.OutpatientOutcome`.
-
-(function () {
-'use strict';
-window.OutpatientOutcome =
-  window.OutpatientOutcome || {};
-const NS = window.OutpatientOutcome;
 
 /**
  * Detect flagged issues.
@@ -85,7 +81,7 @@ function detectFlaggedIssues(data, clinicalGrade, premGrade) {
   }
 
   // ─── Medium: Any PROM instrument worsened ───────────────
-  const eq5d = NS.eq5dSummary(data.promEq5d5l);
+  const eq5d = eq5dSummary(data.promEq5d5l);
   if (eq5d.worsened > 0) {
     flags.push({
       id: 'FLAG-PROM-001',
@@ -179,5 +175,4 @@ function detectFlaggedIssues(data, clinicalGrade, premGrade) {
   return flags;
 }
 
-Object.assign(NS, { detectFlaggedIssues });
-})();
+export { detectFlaggedIssues };

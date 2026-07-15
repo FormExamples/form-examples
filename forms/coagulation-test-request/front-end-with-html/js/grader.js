@@ -1,3 +1,6 @@
+import { detectFlags } from './flags.js';
+import { evaluatePreanalytical, scoreAppropriateness, scoreCompleteness, scoreTriage } from './rules.js';
+
 // Four-axis grader for the Coagulation Test Request.
 //
 // Composes the rule sets in rules.js and the safety flags in flags.js into a
@@ -6,18 +9,6 @@
 // across every front-end and the back-end.
 //
 // Wrapped in an IIFE; published via `window.CoagulationTestRequest`.
-
-(function () {
-'use strict';
-window.CoagulationTestRequest = window.CoagulationTestRequest || {};
-const NS = window.CoagulationTestRequest;
-const {
-  scoreAppropriateness,
-  evaluatePreanalytical,
-  scoreCompleteness,
-  scoreTriage,
-  detectFlags
-} = NS;
 
 /**
  * Derive an overall recommendation for the coagulation-laboratory vetting desk
@@ -95,9 +86,4 @@ function calculateGrade(data) {
   };
 }
 
-Object.assign(NS, {
-  calculateGrade,
-  deriveRecommendation,
-  RECOMMENDATION_LABELS
-});
-})();
+export { calculateGrade, deriveRecommendation, RECOMMENDATION_LABELS };

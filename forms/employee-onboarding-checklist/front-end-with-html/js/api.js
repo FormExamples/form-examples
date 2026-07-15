@@ -6,11 +6,6 @@
 // back to the sample data shipped in `data.js` so the page is usable
 // standalone.
 
-(function () {
-'use strict';
-window.EmployeeOnboardingChecklistDashboard =
-  window.EmployeeOnboardingChecklistDashboard || {};
-
 const API_BASE = 'http://localhost:5150';
 const EMPLOYEES_PATH = '/api/dashboard/employees';
 
@@ -35,6 +30,4 @@ async function fetchEmployees() {
   return data.items || [];
 }
 
-window.EmployeeOnboardingChecklistDashboard.fetchEmployees = fetchEmployees;
-window.EmployeeOnboardingChecklistDashboard.API_BASE = API_BASE;
-})();
+export { fetchEmployees, API_BASE };

@@ -1,9 +1,6 @@
 // Declarative endometriosis grading rules — vanilla-JS port of
 // `src/lib/engine/endo-rules.ts`. Grade 1 = minimal, 2 = mild,
 // 3 = moderate/significant, 4 = severe/critical.
-(function () {
-'use strict';
-window.EndometriosisAssessment = window.EndometriosisAssessment || {};
 
 const endoRules = [
   // ─── MENSTRUAL HISTORY ──────────────────────────────────────
@@ -298,5 +295,4 @@ const endoRules = [
   }
 ];
 
-window.EndometriosisAssessment.endoRules = endoRules;
-})();
+export { endoRules };

@@ -183,9 +183,6 @@
 // classic <script> (no ES modules) so the page can be opened directly via
 // `file://`. The IIFE attaches its public symbols to a single global
 // namespace, `window.AsthmaAssessment`.
-(function () {
-'use strict';
-window.AsthmaAssessment = window.AsthmaAssessment || {};
 
 /**
  * Build a fresh, fully-blank assessment.
@@ -320,11 +317,4 @@ function fev1Severity(fev1Percent) {
   return 'Severe obstruction';
 }
 
-Object.assign(window.AsthmaAssessment, {
-  emptyAssessment,
-  calculateBMI,
-  bmiCategory,
-  calculatePeakFlowPercent,
-  fev1Severity
-});
-})();
+export { emptyAssessment, calculateBMI, bmiCategory, calculatePeakFlowPercent, fev1Severity };

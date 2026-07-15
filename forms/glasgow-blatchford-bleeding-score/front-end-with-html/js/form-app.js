@@ -1,3 +1,7 @@
+import { detectFlaggedIssues } from './flags.js';
+import { calculateGbsGrade } from './grader.js';
+import { emptyAssessment, presentingComplaintLabel, priorityLabel, riskBandCss, riskBandLabel, yesNoLabel } from './types.js';
+
 // Glasgow-Blatchford Bleeding Score (GBS) — bedside wizard (vanilla
 // JavaScript, no build).
 //
@@ -14,20 +18,6 @@
 // to `window.GlasgowBlatchfordBleedingScore`. Pulling them off here keeps the
 // rest of this file referring to short local names. The whole file is wrapped
 // in an IIFE so its top-level identifiers don't leak.
-(function () {
-'use strict';
-
-const NS = window.GlasgowBlatchfordBleedingScore;
-const {
-  emptyAssessment,
-  riskBandLabel,
-  riskBandCss,
-  presentingComplaintLabel,
-  yesNoLabel,
-  priorityLabel,
-  calculateGbsGrade,
-  detectFlaggedIssues
-} = NS;
 
 // ----------------------------------------------------------------------
 // Persistence
@@ -1006,4 +996,3 @@ if (document.readyState === 'loading') {
 } else {
   init();
 }
-})();

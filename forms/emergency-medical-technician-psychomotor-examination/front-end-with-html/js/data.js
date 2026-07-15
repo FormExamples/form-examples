@@ -16,11 +16,6 @@
 //
 // Reference "today" for the seed data is 2026-05-04.
 
-(function () {
-'use strict';
-window.EmergencyMedicalTechnicianPsychomotorExaminationDashboard =
-  window.EmergencyMedicalTechnicianPsychomotorExaminationDashboard || {};
-
 /** @type {import('./types.js').CandidateRow[]} */
 const sampleCandidates = [
   {
@@ -205,6 +200,4 @@ const sampleCandidates = [
   }
 ];
 
-window.EmergencyMedicalTechnicianPsychomotorExaminationDashboard.sampleCandidates =
-  sampleCandidates;
-})();
+export { sampleCandidates };

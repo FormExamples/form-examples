@@ -6,10 +6,6 @@
 // category, with allergies flagged for a subset; NHS numbers in the
 // canonical "NNN NNN NNNN" display form.
 
-(function () {
-'use strict';
-window.CasualtyCardFormDashboard = window.CasualtyCardFormDashboard || {};
-
 /** @type {import('./types.js').PatientRow[]} */
 const samplePatients = [
   {
@@ -134,5 +130,4 @@ const samplePatients = [
   }
 ];
 
-window.CasualtyCardFormDashboard.samplePatients = samplePatients;
-})();
+export { samplePatients };

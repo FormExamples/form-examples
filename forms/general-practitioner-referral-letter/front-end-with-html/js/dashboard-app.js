@@ -1,3 +1,6 @@
+import { fetchReferrals } from './api.js';
+import { sampleReferrals } from './data.js';
+
 // General Practitioner Referral Letter — dashboard (vanilla classic-script app).
 //
 // On boot we fetch the referral list from the backend; on any failure (or empty
@@ -8,12 +11,6 @@
 // Sibling modules loaded as plain `<script>` tags (in dependency order) attach
 // their exports to `window.GeneralPractitionerReferralLetterDashboard`. The
 // whole file is wrapped in an IIFE so its top-level identifiers do not leak.
-(function () {
-'use strict';
-const {
-  fetchReferrals,
-  sampleReferrals
-} = window.GeneralPractitionerReferralLetterDashboard;
 
 // ----------------------------------------------------------------------
 // State
@@ -367,4 +364,3 @@ if (document.readyState === 'loading') {
 } else {
   init();
 }
-})();

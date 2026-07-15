@@ -1,3 +1,5 @@
+import { lifeguardRules } from './rules.js';
+
 // Lifeguard Competency Verification grader. Pure functions: take an
 // `AssessmentData` object, evaluate each declarative rule in the registry,
 // and return the outcome plus the audit trail of fired rules.
@@ -21,14 +23,6 @@
  * @typedef {import('./types.js').FiredRule} FiredRule
  * @typedef {import('./types.js').TriState} TriState
  */
-
-(function () {
-'use strict';
-window.LifeguardCertificationChecklist =
-  window.LifeguardCertificationChecklist || {};
-
-const NS = window.LifeguardCertificationChecklist;
-const { lifeguardRules } = NS;
 
 const DEFICIENCY_LIMIT_FOR_PASS = 0;
 const DEFICIENCY_LIMIT_FOR_NEEDS_DEVELOPMENT = 2;
@@ -115,9 +109,4 @@ function gradeLifeguard(data) {
   };
 }
 
-Object.assign(NS, {
-  gradeLifeguard,
-  DEFICIENCY_LIMIT_FOR_PASS,
-  DEFICIENCY_LIMIT_FOR_NEEDS_DEVELOPMENT
-});
-})();
+export { gradeLifeguard, DEFICIENCY_LIMIT_FOR_PASS, DEFICIENCY_LIMIT_FOR_NEEDS_DEVELOPMENT };

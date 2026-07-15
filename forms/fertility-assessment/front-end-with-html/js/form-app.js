@@ -1,3 +1,7 @@
+import { calculateConcern } from './fertility-grader.js';
+import { detectAdditionalFlags } from './flagged-issues.js';
+import { ageInYears, bmiCategory, calculateBMI, concernLevelClass, concernLevelLabel, emptyAssessment } from './types.js';
+
 // Fertility Assessment — patient wizard (vanilla JavaScript, no build).
 //
 // Single-page continuous wizard: every section is rendered into the page
@@ -11,20 +15,6 @@
 // exports to `window.FertilityAssessment`. Pulling them off here keeps the
 // rest of this file referring to short local names. Whole file is wrapped
 // in an IIFE so its top-level identifiers don't leak to the global scope.
-(function () {
-'use strict';
-
-const NS = window.FertilityAssessment;
-const {
-  emptyAssessment,
-  calculateBMI,
-  bmiCategory,
-  ageInYears,
-  calculateConcern,
-  concernLevelLabel,
-  concernLevelClass,
-  detectAdditionalFlags
-} = NS;
 
 // ----------------------------------------------------------------------
 // Persistence
@@ -118,7 +108,6 @@ function lilyInputClass(type) {
     default:       return 'text-input';
   }
 }
-
 
 function textInput(opts) {
   const id = `${opts.section}-${opts.field}`;
@@ -1509,4 +1498,3 @@ if (document.readyState === 'loading') {
 } else {
   init();
 }
-})();

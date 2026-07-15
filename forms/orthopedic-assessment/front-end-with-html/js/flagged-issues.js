@@ -3,10 +3,6 @@
 // clinically-significant alerts. Pure function — mirrors the SvelteKit
 // `src/lib/engine/flagged-issues.ts` reference.
 
-(function () {
-'use strict';
-window.OrthopedicAssessment = window.OrthopedicAssessment || {};
-
 /**
  * @param {import('./types.js').AssessmentData} data
  * @returns {import('./types.js').AdditionalFlag[]}
@@ -194,5 +190,4 @@ function detectAdditionalFlags(data) {
   return flags;
 }
 
-Object.assign(window.OrthopedicAssessment, { detectAdditionalFlags });
-})();
+export { detectAdditionalFlags };

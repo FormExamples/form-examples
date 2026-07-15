@@ -1,3 +1,6 @@
+import { detectFlags } from './flags.js';
+import { classifyProblem, hasEvaluation, hasGoal, hasIntervention, problemFiredRules } from './rules.js';
+
 // Nursing Care Plan completeness grader. Pure functions: take a `CarePlan`
 // object, grade each problem, roll the problem classes up to a plan status,
 // compute the completeness percent, and attach the fired-rule audit trail and
@@ -18,17 +21,6 @@
  */
 
 // Wrapped in an IIFE; published via window.NursingCarePlan.
-(function () {
-'use strict';
-window.NursingCarePlan = window.NursingCarePlan || {};
-const {
-  hasGoal,
-  hasIntervention,
-  hasEvaluation,
-  classifyProblem,
-  problemFiredRules,
-  detectFlags
-} = window.NursingCarePlan;
 
 /**
  * Completeness percent: the proportion of the three required elements (goal,
@@ -102,9 +94,4 @@ function validate(plan) {
   };
 }
 
-Object.assign(window.NursingCarePlan, {
-  completenessPercent,
-  planStatus,
-  validate
-});
-})();
+export { completenessPercent, planStatus, validate };

@@ -11,11 +11,6 @@
 //
 // Wrapped in an IIFE; published via `window.MriScanTestRequest`.
 
-(function () {
-'use strict';
-window.MriScanTestRequest = window.MriScanTestRequest || {};
-const NS = window.MriScanTestRequest;
-
 // ----------------------------------------------------------------------
 // Axis A — Appropriateness (ACR Appropriateness Criteria 1-9 ordinal)
 // ----------------------------------------------------------------------
@@ -417,18 +412,4 @@ function scoreTriage(data) {
   };
 }
 
-Object.assign(NS, {
-  scoreAppropriateness,
-  appropriatenessBand,
-  scoreSafety,
-  scoreContrastRenal,
-  maxSafetyBand,
-  scoreCompleteness,
-  scoreTriage,
-  maxTier,
-  TRIAGE_ORDER,
-  TARGET_TIMEFRAMES,
-  SAFETY_ORDER,
-  INDICATION_REGION_MAP
-});
-})();
+export { scoreAppropriateness, appropriatenessBand, scoreSafety, scoreContrastRenal, maxSafetyBand, scoreCompleteness, scoreTriage, maxTier, TRIAGE_ORDER, TARGET_TIMEFRAMES, SAFETY_ORDER, INDICATION_REGION_MAP };

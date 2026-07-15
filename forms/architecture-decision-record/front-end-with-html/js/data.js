@@ -6,7 +6,7 @@
  *
  * Schema: array of objects, one per ADR. The dashboard renders these directly.
  */
-window.ARCHITECTURE_DECISION_RECORDS = [
+export const ARCHITECTURE_DECISION_RECORDS = [
   {
     slug: 'use-postgres-for-primary-storage',
     number: 1,

@@ -1,14 +1,16 @@
+import { allRules } from './risk-rules.js';
+import { isLikelyDraft } from './types.js';
+import { calculateFraminghamRisk } from './utils.js';
+
 // Framingham Risk Score — risk grader.
 //
 // Vanilla-JS port of `src/lib/engine/risk-grader.ts`. Pure function:
 // computes the 10-year hard-CHD risk percentage, fires every rule whose
 // predicate evaluates true, and assigns a low/intermediate/high category.
 // Returns 'draft' when age and sex are both missing.
-(function () {
-  'use strict';
 
-  const NS = window.FraminghamRiskScore;
-  const { isLikelyDraft, calculateFraminghamRisk, allRules } = NS;
+  
+  
 
   /**
    * @param {object} data Full assessment data.
@@ -44,7 +46,6 @@
     return { riskCategory, tenYearRiskPercent, firedRules };
   }
 
-  Object.assign(window.FraminghamRiskScore, {
-    calculateRisk
-  });
-})();
+  
+
+export { calculateRisk };

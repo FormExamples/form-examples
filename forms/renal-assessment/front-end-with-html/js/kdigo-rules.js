@@ -1,3 +1,5 @@
+import { albuminuriaCategoryLabel, calculateAge, classifyAlbuminuriaCategory, classifyGfrCategory, estimateEgfrCkdEpi2021, gfrCategoryLabel } from './types.js';
+
 // KDIGO CKD classification rules.
 //
 // Each rule produces a single named contribution to the report's audit
@@ -18,18 +20,6 @@
  * @property {string} description
  * @property {(d: AssessmentData) => string} evaluate
  */
-
-(function () {
-'use strict';
-window.RenalAssessment = window.RenalAssessment || {};
-const {
-  classifyGfrCategory,
-  classifyAlbuminuriaCategory,
-  gfrCategoryLabel,
-  albuminuriaCategoryLabel,
-  estimateEgfrCkdEpi2021,
-  calculateAge
-} = window.RenalAssessment;
 
 /**
  * Resolve the eGFR used for staging: prefer an explicitly entered eGFR;
@@ -142,13 +132,4 @@ const kdigoRules = [
   }
 ];
 
-Object.assign(window.RenalAssessment, {
-  kdigoRules,
-  resolveEgfr,
-  resolveGfrCategory,
-  resolveAlbuminuriaCategory,
-  kdigoCompositeRisk,
-  riskLevelLabel,
-  riskLevelClass
-});
-})();
+export { kdigoRules, resolveEgfr, resolveGfrCategory, resolveAlbuminuriaCategory, kdigoCompositeRisk, riskLevelLabel, riskLevelClass };

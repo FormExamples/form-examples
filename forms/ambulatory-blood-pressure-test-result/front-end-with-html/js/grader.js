@@ -1,3 +1,6 @@
+import { detectFlags } from './flags.js';
+import { classifyResult, gradeCompleteness, gradeFollowUp, gradeSeverity } from './rules.js';
+
 // ABPM four-axis interpretation grader. Faithful vanilla-JavaScript port of
 // the SvelteKit engine `src/lib/engine/grader.ts`.
 //
@@ -24,16 +27,6 @@
  */
 
 // Wrapped in an IIFE; published via window.AmbulatoryBloodPressureTestResult.
-(function () {
-'use strict';
-window.AmbulatoryBloodPressureTestResult =
-  window.AmbulatoryBloodPressureTestResult || {};
-const {
-  classifyResult,
-  gradeSeverity,
-  gradeCompleteness,
-  gradeFollowUp
-} = window.AmbulatoryBloodPressureTestResult;
 
 /**
  * Derives the overall recommendation from the graded axes.
@@ -87,7 +80,7 @@ function calculateGrade(result) {
 
   // Resolved at call time: flags.js loads after grader.js in the page's
   // classic-script order (types -> rules -> grader -> flags -> form-app).
-  const flags = window.AmbulatoryBloodPressureTestResult.detectFlags(result);
+  const flags = detectFlags(result);
 
   return {
     resultClassification: a.resultClassification,
@@ -104,8 +97,4 @@ function calculateGrade(result) {
   };
 }
 
-Object.assign(window.AmbulatoryBloodPressureTestResult, {
-  calculateGrade,
-  deriveRecommendation
-});
-})();
+export { calculateGrade, deriveRecommendation };

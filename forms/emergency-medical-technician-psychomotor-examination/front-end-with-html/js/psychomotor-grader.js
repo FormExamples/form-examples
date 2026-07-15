@@ -1,3 +1,6 @@
+import { psychomotorRules } from './rules.js';
+import { PASS_PERCENT_THRESHOLD } from './types.js';
+
 // NREMT EMT Psychomotor Skills Examination grader. Pure functions: take an
 // `AssessmentData` object, evaluate every declarative rule in the registry,
 // and return the pass/fail outcome plus the audit trail of fired rules.
@@ -19,14 +22,6 @@
  * @typedef {import('./types.js').FiredRule} FiredRule
  * @typedef {import('./types.js').TriState} TriState
  */
-
-(function () {
-'use strict';
-window.EmergencyMedicalTechnicianPsychomotorExamination =
-  window.EmergencyMedicalTechnicianPsychomotorExamination || {};
-
-const NS = window.EmergencyMedicalTechnicianPsychomotorExamination;
-const { psychomotorRules, PASS_PERCENT_THRESHOLD } = NS;
 
 /**
  * Evaluate every psychomotor rule, classify the outcome, and return the
@@ -121,7 +116,4 @@ function gradePsychomotor(data) {
   };
 }
 
-Object.assign(NS, {
-  gradePsychomotor
-});
-})();
+export { gradePsychomotor };

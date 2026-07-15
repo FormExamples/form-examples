@@ -1,3 +1,5 @@
+import { isNum, missingInputs } from './grader.js';
+
 // Flagged-issue detection (red flags). Independent of the mortality band (which
 // the grader produces), this module raises clinician-facing safety flags per
 // spec §5, using the computed score and the raw laboratory inputs:
@@ -19,11 +21,6 @@
  */
 
 // Wrapped in an IIFE; published via window.ModelForEndStageLiverDiseaseScore.
-(function () {
-'use strict';
-window.ModelForEndStageLiverDiseaseScore =
-  window.ModelForEndStageLiverDiseaseScore || {};
-const { isNum, missingInputs } = window.ModelForEndStageLiverDiseaseScore;
 
 /**
  * @param {AssessmentData} data
@@ -132,5 +129,4 @@ function detectFlaggedIssues(data, result) {
   return flags;
 }
 
-window.ModelForEndStageLiverDiseaseScore.detectFlaggedIssues = detectFlaggedIssues;
-})();
+export { detectFlaggedIssues };

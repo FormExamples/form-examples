@@ -8,11 +8,6 @@
 // Recorded), every UK GDPR Art.6 lawful basis (Public Task, Consent, Vital
 // Interests), and a mix of complete / incomplete validator states.
 
-(function () {
-'use strict';
-window.ResearchAndPlanningPrivacyNoticeDashboard =
-  window.ResearchAndPlanningPrivacyNoticeDashboard || {};
-
 /** @type {import('./types.js').PatientRow[]} */
 const samplePatients = [
   {
@@ -161,5 +156,4 @@ const samplePatients = [
   }
 ];
 
-window.ResearchAndPlanningPrivacyNoticeDashboard.samplePatients = samplePatients;
-})();
+export { samplePatients };

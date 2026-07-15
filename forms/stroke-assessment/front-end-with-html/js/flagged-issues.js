@@ -1,3 +1,6 @@
+import { calculateNIHSS } from './nihss-grader.js';
+import { hoursFromOnset } from './types.js';
+
 // Flagged-issue detection for acute stroke. Independent of the raw NIHSS
 // total (which the grader computes), this module raises clinician-facing
 // flags for safety-critical or clinically significant findings: sudden
@@ -12,17 +15,13 @@
  */
 
 // Wrapped in an IIFE; published via window.StrokeAssessment.
-(function () {
-'use strict';
-window.StrokeAssessment = window.StrokeAssessment || {};
-const NS = window.StrokeAssessment;
 
 /**
  * @param {AssessmentData} data
  * @returns {AdditionalFlag[]}
  */
 function detectAdditionalFlags(data) {
-  const { calculateNIHSS, hoursFromOnset } = NS;
+  
   /** @type {AdditionalFlag[]} */
   const flags = [];
 
@@ -206,5 +205,4 @@ function detectAdditionalFlags(data) {
   return flags;
 }
 
-window.StrokeAssessment.detectAdditionalFlags = detectAdditionalFlags;
-})();
+export { detectAdditionalFlags };

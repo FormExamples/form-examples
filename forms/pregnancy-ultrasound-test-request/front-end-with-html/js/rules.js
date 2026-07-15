@@ -9,12 +9,6 @@
 //
 // Wrapped in an IIFE; published via `window.PregnancyUltrasoundTestRequest`.
 
-(function () {
-'use strict';
-window.PregnancyUltrasoundTestRequest =
-  window.PregnancyUltrasoundTestRequest || {};
-const NS = window.PregnancyUltrasoundTestRequest;
-
 // ----------------------------------------------------------------------
 // Axis A — Appropriateness (ACR Appropriateness Criteria 1-9 ordinal)
 // ----------------------------------------------------------------------
@@ -411,16 +405,4 @@ function scoreTriage(data) {
   };
 }
 
-Object.assign(NS, {
-  scoreAppropriateness,
-  appropriatenessBand,
-  evaluateWindowFit,
-  scoreCompleteness,
-  scoreTriage,
-  maxTier,
-  TRIAGE_ORDER,
-  TARGET_TIMEFRAMES,
-  SCAN_WINDOWS,
-  INDICATION_SCAN_MAP
-});
-})();
+export { scoreAppropriateness, appropriatenessBand, evaluateWindowFit, scoreCompleteness, scoreTriage, maxTier, TRIAGE_ORDER, TARGET_TIMEFRAMES, SCAN_WINDOWS, INDICATION_SCAN_MAP };

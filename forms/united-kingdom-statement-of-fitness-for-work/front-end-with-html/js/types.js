@@ -1,10 +1,8 @@
 /* UK Fit Note — empty form factory and shared constants. */
 
-(function () {
-  'use strict';
-  const ns = (window.FitNote = window.FitNote || {});
+  
 
-  ns.emptyFitNote = function emptyFitNote() {
+  export const emptyFitNote = function emptyFitNote() {
     return {
       // Step 1: Issuer
       clinician: {
@@ -70,7 +68,7 @@
     };
   };
 
-  ns.PROFESSIONS = [
+  export const PROFESSIONS = [
     { value: 'doctor', label: 'Doctor (GMC)' },
     { value: 'nurse', label: 'Nurse (NMC)' },
     { value: 'occupational_therapist', label: 'Occupational therapist (HCPC)' },
@@ -79,14 +77,14 @@
     { value: 'other', label: 'Other' },
   ];
 
-  ns.ASSESSMENT_METHODS = [
+  export const ASSESSMENT_METHODS = [
     { value: 'in_person',                     label: 'In person (face-to-face)' },
     { value: 'video_call',                    label: 'Video call' },
     { value: 'telephone',                     label: 'Telephone' },
     { value: 'written_report_from_other_hcp', label: 'Written report from another healthcare professional' },
   ];
 
-  ns.DIAGNOSIS_CATEGORIES = [
+  export const DIAGNOSIS_CATEGORIES = [
     'mental_health',
     'musculoskeletal',
     'respiratory',
@@ -101,7 +99,7 @@
     'other',
   ];
 
-  ns.computePeriodDays = function computePeriodDays(fitNote) {
+  export const computePeriodDays = function computePeriodDays(fitNote) {
     if (fitNote.periodType === 'duration' && fitNote.periodDurationValue) {
       const n = Number(fitNote.periodDurationValue);
       switch (fitNote.periodDurationUnit) {
@@ -120,7 +118,7 @@
     return null;
   };
 
-  ns.countAdaptations = function countAdaptations(fitNote) {
+  export const countAdaptations = function countAdaptations(fitNote) {
     return (
       (fitNote.adaptationPhasedReturn === 'yes' ? 1 : 0) +
       (fitNote.adaptationAlteredHours === 'yes' ? 1 : 0) +
@@ -128,4 +126,3 @@
       (fitNote.adaptationWorkplaceAdaptations === 'yes' ? 1 : 0)
     );
   };
-})();

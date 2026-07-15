@@ -1,3 +1,5 @@
+import { BILIRUBIN_UMOL_DIVISOR, COEF_BILIRUBIN, COEF_CREATININE, COEF_INR, CONSTANT, CREATININE_CAP, CREATININE_UMOL_DIVISOR, DIALYSIS_CREATININE, LOWER_BOUND, MELD3_ALBUMIN_HIGH, MELD3_ALBUMIN_LOW, MELD3_CREATININE_CAP, SCORE_MAX, SCORE_MIN, SODIUM_GATE, SODIUM_HIGH, SODIUM_LOW, bandRules } from './rules.js';
+
 // MELD grader. Pure functions: take an `AssessmentData` object, convert the
 // laboratory inputs to mg/dL, apply the dialysis creatinine rule and value
 // bounds, compute the weighted logarithmic score, apply the MELD-Na sodium
@@ -36,30 +38,6 @@
  */
 
 // Wrapped in an IIFE; published via window.ModelForEndStageLiverDiseaseScore.
-(function () {
-'use strict';
-window.ModelForEndStageLiverDiseaseScore =
-  window.ModelForEndStageLiverDiseaseScore || {};
-const {
-  COEF_BILIRUBIN,
-  COEF_INR,
-  COEF_CREATININE,
-  CONSTANT,
-  LOWER_BOUND,
-  CREATININE_CAP,
-  DIALYSIS_CREATININE,
-  BILIRUBIN_UMOL_DIVISOR,
-  CREATININE_UMOL_DIVISOR,
-  SODIUM_LOW,
-  SODIUM_HIGH,
-  SODIUM_GATE,
-  SCORE_MIN,
-  SCORE_MAX,
-  MELD3_CREATININE_CAP,
-  MELD3_ALBUMIN_LOW,
-  MELD3_ALBUMIN_HIGH,
-  bandRules
-} = window.ModelForEndStageLiverDiseaseScore;
 
 /** Present numeric predicate. */
 function isNum(n) {
@@ -284,11 +262,4 @@ function calculateMeld(data) {
   return empty;
 }
 
-Object.assign(window.ModelForEndStageLiverDiseaseScore, {
-  isNum,
-  roundTo,
-  clamp,
-  missingInputs,
-  calculateMeld
-});
-})();
+export { isNum, roundTo, clamp, missingInputs, calculateMeld };

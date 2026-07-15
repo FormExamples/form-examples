@@ -1,3 +1,6 @@
+import { HSE_BENCHMARKS, stressItems } from './rules.js';
+import { riskLevelRank } from './types.js';
+
 // HSE Management Standards stress grader. Pure functions: given an
 // `AssessmentData` object, return per-domain means + concern categories,
 // and an overall risk equal to the worst-domain category.
@@ -15,10 +18,6 @@
  */
 
 // Wrapped in an IIFE; published via window.WorkplaceStressAssessment.
-(function () {
-'use strict';
-const NS = window.WorkplaceStressAssessment = window.WorkplaceStressAssessment || {};
-const { stressItems, HSE_BENCHMARKS, riskLevelRank } = NS;
 
 /**
  * Classify a domain mean against its HSE percentile cut-offs.
@@ -139,9 +138,4 @@ function gradeStress(data) {
   };
 }
 
-Object.assign(NS, {
-  classifyDomainMean,
-  gradeDomain,
-  gradeStress
-});
-})();
+export { classifyDomainMean, gradeDomain, gradeStress };

@@ -11,12 +11,6 @@
 //
 // Wrapped in an IIFE; published via `window.ElectroencephalogramTestRequest`.
 
-(function () {
-'use strict';
-window.ElectroencephalogramTestRequest =
-  window.ElectroencephalogramTestRequest || {};
-const NS = window.ElectroencephalogramTestRequest;
-
 // ----------------------------------------------------------------------
 // Axis A — Appropriateness (NICE NG217 / ILAE, 1-9 ordinal)
 // ----------------------------------------------------------------------
@@ -338,17 +332,4 @@ function scorePriority(data) {
   return { band, firedRules };
 }
 
-Object.assign(NS, {
-  scoreAppropriateness,
-  appropriatenessBand,
-  scoreUrgency,
-  scoreCompleteness,
-  scorePriority,
-  maxTier,
-  maxPriority,
-  TRIAGE_ORDER,
-  TARGET_TIMEFRAMES,
-  PRIORITY_ORDER,
-  INDICATION_EEG_MAP
-});
-})();
+export { scoreAppropriateness, appropriatenessBand, scoreUrgency, scoreCompleteness, scorePriority, maxTier, maxPriority, TRIAGE_ORDER, TARGET_TIMEFRAMES, PRIORITY_ORDER, INDICATION_EEG_MAP };

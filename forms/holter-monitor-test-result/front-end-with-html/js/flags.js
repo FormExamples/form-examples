@@ -1,3 +1,5 @@
+import { hasCriticalFinding, hasSignificantPause } from './rules.js';
+
 // Safety-critical flag detection for the Holter Monitor Test Result.
 //
 // Faithful vanilla-JavaScript port of the SvelteKit engine module
@@ -15,10 +17,6 @@
 // Wrapped in an IIFE; published via window.HolterMonitorTestResult.
 // Depends on rules.js (the structured-findings predicates), so it must load
 // after it.
-(function () {
-'use strict';
-window.HolterMonitorTestResult = window.HolterMonitorTestResult || {};
-const { hasCriticalFinding, hasSignificantPause } = window.HolterMonitorTestResult;
 
 /**
  * Detect the safety-critical flags for a report.
@@ -142,7 +140,4 @@ function detectFlags(r) {
   return flags;
 }
 
-Object.assign(window.HolterMonitorTestResult, {
-  detectFlags
-});
-})();
+export { detectFlags };

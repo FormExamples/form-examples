@@ -6,10 +6,6 @@
 // across multiple departments, with NHS numbers in the canonical
 // "NNN NNN NNNN" display form.
 
-(function () {
-'use strict';
-window.ConsentToTreatmentDashboard = window.ConsentToTreatmentDashboard || {};
-
 /** @type {import('./types.js').PatientRow[]} */
 const samplePatients = [
   {
@@ -122,5 +118,4 @@ const samplePatients = [
   }
 ];
 
-window.ConsentToTreatmentDashboard.samplePatients = samplePatients;
-})();
+export { samplePatients };

@@ -10,11 +10,6 @@
 //
 // Wrapped in an IIFE; published via `window.UrinalysisTestRequest`.
 
-(function () {
-'use strict';
-window.UrinalysisTestRequest = window.UrinalysisTestRequest || {};
-const NS = window.UrinalysisTestRequest;
-
 // ----------------------------------------------------------------------
 // Axis A — Appropriateness (1-9 ordinal, indication-to-test match)
 // ----------------------------------------------------------------------
@@ -353,18 +348,4 @@ function scoreTriage(data) {
   };
 }
 
-Object.assign(NS, {
-  scoreAppropriateness,
-  appropriatenessBand,
-  scorePreanalytical,
-  scoreCompleteness,
-  scoreTriage,
-  selectedTestFields,
-  maxTier,
-  worseBand,
-  TRIAGE_ORDER,
-  TARGET_TIMEFRAMES,
-  PREANALYTICAL_ORDER,
-  INDICATION_TEST_MAP
-});
-})();
+export { scoreAppropriateness, appropriatenessBand, scorePreanalytical, scoreCompleteness, scoreTriage, selectedTestFields, maxTier, worseBand, TRIAGE_ORDER, TARGET_TIMEFRAMES, PREANALYTICAL_ORDER, INDICATION_TEST_MAP };

@@ -1,3 +1,6 @@
+import { safetyRules } from './rules.js';
+import { gradeToFindingLevel } from './types.js';
+
 // Workplace Safety Assessment grader. Pure functions: take an
 // `AssessmentData` object, return the overall outcome, the per-category
 // findings tally, and the list of rules that fired (compliant + non-compliant).
@@ -20,10 +23,6 @@
  */
 
 // Wrapped in an IIFE; published via window.WorkplaceSafetyAssessment.
-(function () {
-'use strict';
-window.WorkplaceSafetyAssessment = window.WorkplaceSafetyAssessment || {};
-const { safetyRules, gradeToFindingLevel } = window.WorkplaceSafetyAssessment;
 
 /**
  * Determine the worst outcome from a set of fired rules.
@@ -100,8 +99,4 @@ function gradeSafety(data) {
   return { outcome, findingsByCategory, firedRules, answeredCount };
 }
 
-Object.assign(window.WorkplaceSafetyAssessment, {
-  gradeSafety,
-  highestOutcome
-});
-})();
+export { gradeSafety, highestOutcome };

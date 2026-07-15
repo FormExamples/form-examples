@@ -10,10 +10,6 @@
 //   3 = Risks outweigh advantages (method not usually recommended)
 //   4 = Unacceptable health risk (method should not be used)
 
-(function () {
-'use strict';
-window.ContraceptionAssessment = window.ContraceptionAssessment || {};
-
 const ukmecRules = [
   // ─── Combined Hormonal Contraception (CHC): COC, patch, ring ─────
 
@@ -260,9 +256,4 @@ const allMethods = [
   'sterilisation'
 ];
 
-Object.assign(window.ContraceptionAssessment, {
-  ukmecRules,
-  methodLabels,
-  allMethods
-});
-})();
+export { ukmecRules, methodLabels, allMethods };

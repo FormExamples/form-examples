@@ -6,11 +6,6 @@
 // names are camelCase to match the front-end serde / examples convention.
 // Wrapped in an IIFE; published via `window.EchocardiogramTestRequest`.
 
-(function () {
-'use strict';
-window.EchocardiogramTestRequest =
-  window.EchocardiogramTestRequest || {};
-
 /**
  * Build a fresh, fully-blank echocardiogram request.
  * Strings default to ''; numeric / date fields default to null;
@@ -114,11 +109,4 @@ function indicationLabel(value) {
   return INDICATION_LABELS[value] || value || '';
 }
 
-Object.assign(window.EchocardiogramTestRequest, {
-  emptyRequest,
-  echoTypeLabel,
-  indicationLabel,
-  ECHO_TYPE_LABELS,
-  INDICATION_LABELS
-});
-})();
+export { emptyRequest, echoTypeLabel, indicationLabel, ECHO_TYPE_LABELS, INDICATION_LABELS };

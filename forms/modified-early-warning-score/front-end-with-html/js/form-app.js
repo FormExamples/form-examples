@@ -1,3 +1,7 @@
+import { detectFlaggedIssues } from './flags.js';
+import { calculateMewsGrade } from './grader.js';
+import { avpuLabel, emptyObservation, priorityLabel, riskBandClass, riskBandLabel } from './types.js';
+
 // Modified Early Warning Score (MEWS) — bedside wizard (vanilla JavaScript,
 // no build).
 //
@@ -14,19 +18,6 @@
 // to `window.ModifiedEarlyWarningScore`. Pulling them off here keeps the rest
 // of this file referring to short local names. The whole file is wrapped in an
 // IIFE so its top-level identifiers don't leak.
-(function () {
-'use strict';
-
-const NS = window.ModifiedEarlyWarningScore;
-const {
-  emptyObservation,
-  riskBandLabel,
-  riskBandClass,
-  avpuLabel,
-  priorityLabel,
-  calculateMewsGrade,
-  detectFlaggedIssues
-} = NS;
 
 // ----------------------------------------------------------------------
 // Persistence
@@ -962,4 +953,3 @@ if (document.readyState === 'loading') {
 } else {
   init();
 }
-})();

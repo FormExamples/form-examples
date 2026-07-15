@@ -1,3 +1,8 @@
+import { detectFlaggedIssues } from './flags.js';
+import { calculateReconciliation } from './grader.js';
+import { isIntentional } from './rules.js';
+import { discrepancyTypeLabel, emptyAllergy, emptyDiscrepancy, emptyLineItem, emptyReconciliation, emptySource, highRiskClassLabel, intendedActionLabel, listSourceLabel, priorityLabel, statusClass, statusLabel } from './types.js';
+
 // Medication Reconciliation — reconciliation wizard (vanilla JavaScript, no
 // build).
 //
@@ -19,26 +24,6 @@
 // Sibling files loaded as plain `<script>` tags (in order) attach their exports
 // to `window.MedicationReconciliation`. The whole file is wrapped in an IIFE so
 // its top-level identifiers don't leak.
-(function () {
-'use strict';
-
-const NS = window.MedicationReconciliation;
-const {
-  emptyReconciliation,
-  emptySource,
-  emptyAllergy,
-  emptyLineItem,
-  emptyDiscrepancy,
-  statusLabel,
-  statusClass,
-  listSourceLabel,
-  highRiskClassLabel,
-  discrepancyTypeLabel,
-  intendedActionLabel,
-  priorityLabel,
-  calculateReconciliation,
-  detectFlaggedIssues
-} = NS;
 
 // ----------------------------------------------------------------------
 // Persistence
@@ -895,7 +880,7 @@ function renderReport() {
   const discrepancyRows = state.discrepancies.length === 0
     ? `<tr><td colspan="4" class="muted">No discrepancies recorded.</td></tr>`
     : state.discrepancies.map((d, i) => {
-        const intentional = NS.isIntentional(d);
+        const intentional = isIntentional(d);
         return `
       <tr class="${intentional ? '' : 'flag-medium'}">
         <th scope="row">${esc(discrepancyTypeLabel(d.discrepancyType) || `Discrepancy ${i + 1}`)}</th>
@@ -1187,4 +1172,3 @@ if (document.readyState === 'loading') {
 } else {
   init();
 }
-})();

@@ -22,10 +22,6 @@
  */
 
 // Wrapped in an IIFE; published via window.ModelForEndStageLiverDiseaseScore.
-(function () {
-'use strict';
-window.ModelForEndStageLiverDiseaseScore =
-  window.ModelForEndStageLiverDiseaseScore || {};
 
 // ─── Formula coefficients and bounds (spec §4) ──────────────────
 /** Coefficient on ln(bilirubin) in the base MELD formula. */
@@ -118,24 +114,4 @@ const bandRules = [
   }
 ];
 
-Object.assign(window.ModelForEndStageLiverDiseaseScore, {
-  COEF_BILIRUBIN,
-  COEF_INR,
-  COEF_CREATININE,
-  CONSTANT,
-  LOWER_BOUND,
-  CREATININE_CAP,
-  DIALYSIS_CREATININE,
-  BILIRUBIN_UMOL_DIVISOR,
-  CREATININE_UMOL_DIVISOR,
-  SODIUM_LOW,
-  SODIUM_HIGH,
-  SODIUM_GATE,
-  SCORE_MIN,
-  SCORE_MAX,
-  MELD3_CREATININE_CAP,
-  MELD3_ALBUMIN_LOW,
-  MELD3_ALBUMIN_HIGH,
-  bandRules
-});
-})();
+export { COEF_BILIRUBIN, COEF_INR, COEF_CREATININE, CONSTANT, LOWER_BOUND, CREATININE_CAP, DIALYSIS_CREATININE, BILIRUBIN_UMOL_DIVISOR, CREATININE_UMOL_DIVISOR, SODIUM_LOW, SODIUM_HIGH, SODIUM_GATE, SCORE_MIN, SCORE_MAX, MELD3_CREATININE_CAP, MELD3_ALBUMIN_LOW, MELD3_ALBUMIN_HIGH, bandRules };

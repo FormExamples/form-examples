@@ -1,3 +1,5 @@
+import { HIGH, LOW, SEVERE_HIGH, SEVERE_LOW } from './rules.js';
+
 // Flagged-issue detection (red flags). Independent of the classification band
 // (which the grader produces), this module raises clinician-facing safety flags
 // per spec §5, using the unrounded corrected calcium value:
@@ -18,16 +20,6 @@
  */
 
 // Wrapped in an IIFE; published via window.CorrectedCalciumCalculator.
-(function () {
-'use strict';
-window.CorrectedCalciumCalculator =
-  window.CorrectedCalciumCalculator || {};
-const {
-  LOW,
-  HIGH,
-  SEVERE_HIGH,
-  SEVERE_LOW
-} = window.CorrectedCalciumCalculator;
 
 /**
  * @param {AssessmentData} data
@@ -127,5 +119,4 @@ function detectFlaggedIssues(data, correctedCalcium) {
   return flags;
 }
 
-window.CorrectedCalciumCalculator.detectFlaggedIssues = detectFlaggedIssues;
-})();
+export { detectFlaggedIssues };

@@ -6,11 +6,6 @@
 // follow-up urgency (including the discrimination-risk auto-escalation and a
 // declined case with no rationale that fires F-DISCRIMINATION-RISK-001).
 
-(function () {
-'use strict';
-window.NeurodiversityAdjustmentResponseDashboard =
-  window.NeurodiversityAdjustmentResponseDashboard || {};
-
 /** @type {import('./dashboard-types.js').ResponseRow[]} */
 const sampleResponses = [
   {
@@ -97,5 +92,4 @@ const sampleResponses = [
   }
 ];
 
-window.NeurodiversityAdjustmentResponseDashboard.sampleResponses = sampleResponses;
-})();
+export { sampleResponses };

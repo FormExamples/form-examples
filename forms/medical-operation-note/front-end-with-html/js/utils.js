@@ -1,12 +1,7 @@
+import { CLAVIEN_DINDO_ORDER, COMPOSITE_RISK_ORDER, EBL_BAND_ORDER } from './types.js';
+
 // Small pure helpers shared by every other engine file. Pure functions,
 // no side effects. Published on `window.MedicalOperationNote`.
-
-(function () {
-'use strict';
-window.MedicalOperationNote =
-  window.MedicalOperationNote || {};
-const NS = window.MedicalOperationNote;
-const { COMPOSITE_RISK_ORDER, CLAVIEN_DINDO_ORDER, EBL_BAND_ORDER } = NS;
 
 /** HTML-escape a string for safe injection into innerHTML. */
 function esc(s) {
@@ -87,14 +82,4 @@ function formatTimestamp(iso) {
   }
 }
 
-Object.assign(NS, {
-  esc,
-  maxCompositeRisk,
-  maxClavienDindo,
-  maxBloodLossBand,
-  clavienToCompositeRisk,
-  eblToCompositeRisk,
-  sumOrZero,
-  formatTimestamp
-});
-})();
+export { esc, maxCompositeRisk, maxClavienDindo, maxBloodLossBand, clavienToCompositeRisk, eblToCompositeRisk, sumOrZero, formatTimestamp };

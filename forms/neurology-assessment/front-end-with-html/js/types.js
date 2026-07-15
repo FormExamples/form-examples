@@ -198,9 +198,6 @@
 // classic <script> (no ES modules) so the page can be opened directly via
 // `file://`. The IIFE attaches its public symbols to a single global
 // namespace, `window.NeurologyAssessment`.
-(function () {
-'use strict';
-window.NeurologyAssessment = window.NeurologyAssessment || {};
 
 /**
  * Build a fresh, fully-blank assessment.
@@ -358,9 +355,4 @@ function mrsLabel(score) {
   }
 }
 
-Object.assign(window.NeurologyAssessment, {
-  emptyAssessment,
-  calculateAge,
-  mrsLabel
-});
-})();
+export { emptyAssessment, calculateAge, mrsLabel };

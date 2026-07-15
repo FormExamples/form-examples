@@ -19,9 +19,6 @@
  */
 
 // Wrapped in an IIFE; published via window.ToxicologyTestResult.
-(function () {
-'use strict';
-window.ToxicologyTestResult = window.ToxicologyTestResult || {};
 
 // ----------------------------------------------------------------------
 // Toxic thresholds (mirror `severity-rules.ts`)
@@ -440,16 +437,4 @@ function gradeFollowUp(r, classification, severity) {
   };
 }
 
-Object.assign(window.ToxicologyTestResult, {
-  LITHIUM_TOXIC_MMOL_L,
-  CARBOXYHAEMOGLOBIN_TOXIC_PERCENT,
-  SALICYLATE_TOXIC_MG_L,
-  hasToxicResult,
-  isCriticalResult,
-  hasAnyResultValue,
-  classifyResult,
-  gradeSeverity,
-  gradeCompleteness,
-  gradeFollowUp
-});
-})();
+export { LITHIUM_TOXIC_MMOL_L, CARBOXYHAEMOGLOBIN_TOXIC_PERCENT, SALICYLATE_TOXIC_MG_L, hasToxicResult, isCriticalResult, hasAnyResultValue, classifyResult, gradeSeverity, gradeCompleteness, gradeFollowUp };

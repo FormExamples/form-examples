@@ -1,3 +1,5 @@
+import { normaliseCreatinine } from './rules.js';
+
 // Flagged-issue detection (red flags). Independent of the GRACE point total
 // (which the grader produces), this module raises clinician-facing safety flags
 // per spec §5:
@@ -19,11 +21,6 @@
  */
 
 // Wrapped in an IIFE; published via window.GraceScoreForAcuteCoronarySyndrome.
-(function () {
-'use strict';
-window.GraceScoreForAcuteCoronarySyndrome =
-  window.GraceScoreForAcuteCoronarySyndrome || {};
-const { normaliseCreatinine } = window.GraceScoreForAcuteCoronarySyndrome;
 
 /**
  * @param {AssessmentData} data
@@ -145,6 +142,4 @@ function detectFlaggedIssues(data, riskCategory) {
   return flags;
 }
 
-window.GraceScoreForAcuteCoronarySyndrome.detectFlaggedIssues =
-  detectFlaggedIssues;
-})();
+export { detectFlaggedIssues };

@@ -7,11 +7,6 @@
 // every care setting, both instrument forms, and a range of recipient
 // conditions.
 
-(function () {
-'use strict';
-window.ZaritBurdenInterviewDashboard =
-  window.ZaritBurdenInterviewDashboard || {};
-
 /** @type {import('./dashboard-types.js').AssessmentRow[]} */
 const sampleAssessments = [
   {
@@ -100,5 +95,4 @@ const sampleAssessments = [
   }
 ];
 
-window.ZaritBurdenInterviewDashboard.sampleAssessments = sampleAssessments;
-})();
+export { sampleAssessments };

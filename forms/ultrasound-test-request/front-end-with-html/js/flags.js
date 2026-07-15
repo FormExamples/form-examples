@@ -10,12 +10,6 @@
 // Flag IDs are stable and identical across every front-end and the back-end.
 // Wrapped in an IIFE; published via `window.UltrasoundTestRequest`.
 
-(function () {
-'use strict';
-window.UltrasoundTestRequest =
-  window.UltrasoundTestRequest || {};
-const NS = window.UltrasoundTestRequest;
-
 /**
  * Detect safety flags for a general ultrasound request.
  *
@@ -94,5 +88,4 @@ function detectFlags(data, context) {
   return flags;
 }
 
-Object.assign(NS, { detectFlags });
-})();
+export { detectFlags };

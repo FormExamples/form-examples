@@ -2,10 +2,6 @@
 // dashboard's `src/lib/data/sample.ts` so both surfaces show the same demo
 // dataset.
 
-(function () {
-'use strict';
-window.UkLpaDashboard = window.UkLpaDashboard || {};
-
 /** @type {import('./types.js').LpaRow[]} */
 const SAMPLE_LPAS = [
   {
@@ -118,5 +114,4 @@ const SAMPLE_LPAS = [
   },
 ];
 
-window.UkLpaDashboard.sampleLpas = SAMPLE_LPAS;
-})();
+export { SAMPLE_LPAS as sampleLpas };

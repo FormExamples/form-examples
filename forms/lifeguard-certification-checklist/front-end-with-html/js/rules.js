@@ -1,3 +1,5 @@
+import { compressionDepthInRange, compressionRateInRange, swim50mWithinTarget } from './types.js';
+
 // RLSS UK NPLQ / ILSF Lifeguard Competency Verification rules (declarative).
 //
 // Each rule maps a single observed competency to a tri-state value:
@@ -28,18 +30,6 @@
  * @property {TriState} defaultExpectation
  * @property {(d: AssessmentData) => TriState} evaluate
  */
-
-(function () {
-'use strict';
-window.LifeguardCertificationChecklist =
-  window.LifeguardCertificationChecklist || {};
-
-const NS = window.LifeguardCertificationChecklist;
-const {
-  swim50mWithinTarget,
-  compressionRateInRange,
-  compressionDepthInRange
-} = NS;
 
 /**
  * Helper: read a tri-state field, normalising missing/unknown values.
@@ -504,5 +494,4 @@ const lifeguardRules = [
   }
 ];
 
-NS.lifeguardRules = lifeguardRules;
-})();
+export { lifeguardRules };

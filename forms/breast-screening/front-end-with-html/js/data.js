@@ -6,10 +6,6 @@
 // symptomatic-referral pathway, and every outcome band, with the urgent flag
 // set for urgent and referral outcomes.
 
-(function () {
-'use strict';
-window.BreastScreeningDashboard = window.BreastScreeningDashboard || {};
-
 /** @type {import('./dashboard-types.js').ScreeningRow[]} */
 const sampleScreenings = [
   {
@@ -91,5 +87,4 @@ const sampleScreenings = [
   }
 ];
 
-window.BreastScreeningDashboard.sampleScreenings = sampleScreenings;
-})();
+export { sampleScreenings };

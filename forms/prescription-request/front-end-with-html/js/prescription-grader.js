@@ -1,12 +1,9 @@
+import { prescriptionRules } from './prescription-rules.js';
+
 // Pure priority-classification engine for the Prescription Request form.
 // Mirrors `src/lib/engine/prescription-grader.ts`. Evaluates every rule
 // from `prescription-rules.js` against the supplied AssessmentData and
 // returns the maximum priority level among the rules that fired.
-(function () {
-'use strict';
-window.PrescriptionRequest = window.PrescriptionRequest || {};
-
-const { prescriptionRules } = window.PrescriptionRequest;
 
 /** @type {Record<string, number>} */
 const PRIORITY_ORDER = { routine: 0, urgent: 1, emergency: 2 };
@@ -49,5 +46,4 @@ function calculatePriorityLevel(data) {
   return { priorityLevel, firedRules };
 }
 
-Object.assign(window.PrescriptionRequest, { calculatePriorityLevel });
-})();
+export { calculatePriorityLevel };

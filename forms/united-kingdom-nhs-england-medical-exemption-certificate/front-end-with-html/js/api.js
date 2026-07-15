@@ -3,10 +3,9 @@
  * If the backend is unreachable, returns the bundled sample list.
  */
 
-(function (root) {
-  const F = root.Fp92aDashboard || (root.Fp92aDashboard = {});
+  
 
-  F.fetchApplications = async function () {
+  export const fetchApplications = async function () {
     try {
       const res = await fetch("/api/applications", { headers: { Accept: "application/json" } });
       if (!res.ok) throw new Error(`HTTP ${res.status}`);
@@ -16,4 +15,3 @@
       return { items: F.SAMPLE_APPLICATIONS, source: "sample", error: String(err) };
     }
   };
-})(window);

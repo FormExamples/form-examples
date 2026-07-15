@@ -1,3 +1,5 @@
+import { hasCriticalFinding } from './rules.js';
+
 // Safety-critical flag detection for the MRI Scan Test Result.
 //
 // Faithful vanilla-JavaScript port of the SvelteKit engine module
@@ -13,10 +15,6 @@
  */
 
 // Wrapped in an IIFE; published via window.MriScanTestResult.
-(function () {
-'use strict';
-window.MriScanTestResult = window.MriScanTestResult || {};
-const { hasCriticalFinding } = window.MriScanTestResult;
 
 /**
  * Detect the safety-critical flags for a report.
@@ -139,7 +137,4 @@ function detectFlags(r) {
   return flags;
 }
 
-Object.assign(window.MriScanTestResult, {
-  detectFlags
-});
-})();
+export { detectFlags };

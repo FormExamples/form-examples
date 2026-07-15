@@ -1,3 +1,5 @@
+import { mcasCategory } from './types.js';
+
 // MCAS Symptom Score grader. Pure functions: take an `AssessmentData`
 // object and return the total symptom score (0-40, capped), the category,
 // the number of organ systems affected, and the list of fired rules.
@@ -20,10 +22,6 @@
  */
 
 // Wrapped in an IIFE; published via window.MastCellActivationSyndromeAssessment.
-(function () {
-'use strict';
-const NS = window.MastCellActivationSyndromeAssessment =
-  window.MastCellActivationSyndromeAssessment || {};
 
 /**
  * Score one organ system. Pushes a FiredRule for each symptom with severity
@@ -121,7 +119,7 @@ function calculateMCASScore(data) {
 
   // Cap score at 40 for clinical relevance.
   const symptomScore = Math.min(totalScore, 40);
-  const mcasCategoryLabel = NS.mcasCategory(symptomScore);
+  const mcasCategoryLabel = mcasCategory(symptomScore);
 
   return {
     symptomScore,
@@ -131,5 +129,4 @@ function calculateMCASScore(data) {
   };
 }
 
-Object.assign(NS, { calculateMCASScore, scoreOrganSystem });
-})();
+export { calculateMCASScore, scoreOrganSystem };

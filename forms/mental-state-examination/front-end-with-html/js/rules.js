@@ -1,3 +1,5 @@
+import { DOMAINS } from './types.js';
+
 // Declarative MSE documentation rules.
 //
 // The Mental State Examination is a documentation-and-completeness instrument,
@@ -23,11 +25,6 @@
  */
 
 // Wrapped in an IIFE; published via window.MentalStateExamination.
-(function () {
-'use strict';
-window.MentalStateExamination = window.MentalStateExamination || {};
-
-const { DOMAINS } = window.MentalStateExamination;
 
 /**
  * A domain is documented when at least one of its finding fields is non-blank.
@@ -55,8 +52,4 @@ const domainRules = DOMAINS.map((d, idx) => ({
   satisfied: (data) => sectionDocumented(data, d.section)
 }));
 
-Object.assign(window.MentalStateExamination, {
-  domainRules,
-  sectionDocumented
-});
-})();
+export { domainRules, sectionDocumented };

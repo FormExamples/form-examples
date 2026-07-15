@@ -1,3 +1,5 @@
+import { gcsTotal, hasAirwayIntervention, hasBreathingIntervention, hasIvAccessOrFluids, hasNumber, hasText } from './types.js';
+
 // WHO Prehospital Form (SCF Prehospital) flagged-issue detection.
 // Independent of the completeness check (which is handled by the
 // validator), this module raises clinically significant flags for mass
@@ -10,18 +12,6 @@
 //
 // Priorities (urgent > high > medium > low) drive sort order in the
 // report.
-
-(function () {
-'use strict';
-window.WhoPrehospitalForm = window.WhoPrehospitalForm || {};
-const {
-  hasNumber,
-  hasText,
-  hasAirwayIntervention,
-  hasBreathingIntervention,
-  hasIvAccessOrFluids,
-  gcsTotal
-} = window.WhoPrehospitalForm;
 
 /**
  * Best-effort parse of the systolic component of a free-text BP string
@@ -347,5 +337,4 @@ function detectFlaggedIssues(data) {
   return flags;
 }
 
-window.WhoPrehospitalForm.detectFlaggedIssues = detectFlaggedIssues;
-})();
+export { detectFlaggedIssues };

@@ -5,10 +5,6 @@
 // Twelve realistic CFAR encounters spanning medical and trauma cases, the
 // three GCS levels, and a range of urgent-flag counts.
 
-(function () {
-'use strict';
-window.WhoEmergencyFirstAidDashboard = window.WhoEmergencyFirstAidDashboard || {};
-
 /** @type {import('./types.js').PatientRow[]} */
 const samplePatients = [
   {
@@ -181,5 +177,4 @@ const samplePatients = [
   }
 ];
 
-window.WhoEmergencyFirstAidDashboard.samplePatients = samplePatients;
-})();
+export { samplePatients };

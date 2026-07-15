@@ -1,14 +1,10 @@
+import { gafRules } from './gaf-rules.js';
+
 // Pure GAF grading function. Mirrors the SvelteKit reference engine
 // (`src/lib/engine/gaf-grader.ts`).
 //
 // Starts at 100 (superior functioning) and subtracts the impact of each
 // fired rule. Final score is clamped to 1-100.
-
-(function () {
-'use strict';
-window.PsychiatryAssessment = window.PsychiatryAssessment || {};
-
-const { gafRules } = window.PsychiatryAssessment;
 
 /**
  * @param {import('./types.js').AssessmentData} data
@@ -35,5 +31,4 @@ function calculateGAF(data) {
   return { gafScore, firedRules };
 }
 
-Object.assign(window.PsychiatryAssessment, { calculateGAF });
-})();
+export { calculateGAF };

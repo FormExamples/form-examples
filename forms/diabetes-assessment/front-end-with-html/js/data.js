@@ -6,10 +6,6 @@
 // variety of HbA1c, complication counts, and last-review dates; NHS numbers
 // in the canonical "NNN NNN NNNN" display form.
 
-(function () {
-'use strict';
-window.DiabetesAssessmentDashboard = window.DiabetesAssessmentDashboard || {};
-
 /** @type {import('./types.js').PatientRow[]} */
 const samplePatients = [
   {
@@ -134,5 +130,4 @@ const samplePatients = [
   }
 ];
 
-window.DiabetesAssessmentDashboard.samplePatients = samplePatients;
-})();
+export { samplePatients };

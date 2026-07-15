@@ -7,11 +7,6 @@
 // / examples convention. Wrapped in an IIFE; published via
 // `window.NeurodiversityAdjustmentRequest`.
 
-(function () {
-'use strict';
-window.NeurodiversityAdjustmentRequest =
-  window.NeurodiversityAdjustmentRequest || {};
-
 /**
  * Build a fresh, fully-blank neurodiversity reasonable-adjustments request.
  * Strings default to ''; numeric / date fields default to null; boolean
@@ -122,11 +117,4 @@ function impactLabel(value) {
   return IMPACT_LABELS[value] || value || '';
 }
 
-Object.assign(window.NeurodiversityAdjustmentRequest, {
-  emptyRequest,
-  diagnosisStatusLabel,
-  impactLabel,
-  DIAGNOSIS_STATUS_LABELS,
-  IMPACT_LABELS
-});
-})();
+export { emptyRequest, diagnosisStatusLabel, impactLabel, DIAGNOSIS_STATUS_LABELS, IMPACT_LABELS };

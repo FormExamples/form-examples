@@ -6,10 +6,6 @@
 // with mental health flags set for a subset; NHS numbers in the canonical
 // "NNN NNN NNNN" display form. Gestational ages cover all three trimesters.
 
-(function () {
-'use strict';
-window.ObstetricsAssessmentDashboard = window.ObstetricsAssessmentDashboard || {};
-
 /** @type {import('./types.js').PatientRow[]} */
 const samplePatients = [
   {
@@ -134,5 +130,4 @@ const samplePatients = [
   }
 ];
 
-window.ObstetricsAssessmentDashboard.samplePatients = samplePatients;
-})();
+export { samplePatients };

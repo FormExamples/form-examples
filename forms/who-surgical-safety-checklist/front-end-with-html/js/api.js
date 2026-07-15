@@ -5,11 +5,6 @@
 // down) or returns an empty list, callers fall back to the sample data
 // shipped in `sample-data.js` so the page is usable standalone.
 
-(function () {
-'use strict';
-window.WhoSurgicalSafetyChecklistDashboard =
-  window.WhoSurgicalSafetyChecklistDashboard || {};
-
 const API_BASE = 'http://localhost:5150';
 const CHECKLISTS_PATH = '/api/checklists';
 
@@ -40,6 +35,4 @@ async function fetchChecklists() {
   return [];
 }
 
-window.WhoSurgicalSafetyChecklistDashboard.fetchChecklists = fetchChecklists;
-window.WhoSurgicalSafetyChecklistDashboard.API_BASE = API_BASE;
-})();
+export { fetchChecklists, API_BASE };

@@ -1,3 +1,7 @@
+import { detectAdditionalFlags } from './flagged-issues.js';
+import { calculateGAF } from './gaf-grader.js';
+import { emptyAssessment, gafBracketClass, gafBracketLabel, gafScoreLabel } from './types.js';
+
 // Psychiatry Assessment - patient wizard (vanilla JavaScript, no build).
 //
 // Single-page continuous wizard: every section is rendered into the page in
@@ -10,18 +14,6 @@
 // exports to `window.PsychiatryAssessment`. Pulling them off here keeps the
 // rest of this file referring to short local names. Whole file is wrapped
 // in an IIFE so its top-level identifiers don't leak to the global scope.
-(function () {
-'use strict';
-
-const NS = window.PsychiatryAssessment;
-const {
-  emptyAssessment,
-  gafScoreLabel,
-  gafBracketLabel,
-  gafBracketClass,
-  calculateGAF,
-  detectAdditionalFlags
-} = NS;
 
 // ----------------------------------------------------------------------
 // Persistence
@@ -1459,4 +1451,3 @@ if (document.readyState === 'loading') {
 } else {
   init();
 }
-})();

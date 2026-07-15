@@ -7,11 +7,6 @@
 // convention. Wrapped in an IIFE; published via
 // `window.EyeVisionTestRequest`.
 
-(function () {
-'use strict';
-window.EyeVisionTestRequest =
-  window.EyeVisionTestRequest || {};
-
 /**
  * Build a fresh, fully-blank eye vision test request.
  * Strings default to ''; numeric / date fields default to null;
@@ -102,11 +97,4 @@ function indicationLabel(value) {
   return INDICATION_LABELS[value] || value || '';
 }
 
-Object.assign(window.EyeVisionTestRequest, {
-  emptyRequest,
-  testTypeLabel,
-  indicationLabel,
-  TEST_TYPE_LABELS,
-  INDICATION_LABELS
-});
-})();
+export { emptyRequest, testTypeLabel, indicationLabel, TEST_TYPE_LABELS, INDICATION_LABELS };

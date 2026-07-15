@@ -1,3 +1,6 @@
+import { GRADED_DOMAIN_KEYS, surveyItems } from './rules.js';
+import { classifyScore } from './types.js';
+
 // Workplace Climate Assessment grader. Pure functions: given an
 // `AssessmentData` object, return per-domain 0-100 scores, a 0-100
 // composite Workplace Climate Index, and the climate category.
@@ -29,11 +32,6 @@
  */
 
 // Wrapped in an IIFE; published via window.WorkplaceClimateAssessment.
-(function () {
-'use strict';
-const NS = window.WorkplaceClimateAssessment =
-  window.WorkplaceClimateAssessment || {};
-const { surveyItems, GRADED_DOMAIN_KEYS, classifyScore } = NS;
 
 /**
  * Score a single domain: mean of 1-5 answers and 0-100 normalised score.
@@ -135,8 +133,4 @@ function gradeClimate(data) {
   };
 }
 
-Object.assign(NS, {
-  gradeDomain,
-  gradeClimate
-});
-})();
+export { gradeDomain, gradeClimate };

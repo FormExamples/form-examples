@@ -1,3 +1,5 @@
+import { hasCriticalFinding, hasElevatedIop, hasReferableRetinopathy } from './rules.js';
+
 // Safety-critical flag detection for the Eye Vision Test Result.
 //
 // Faithful vanilla-JavaScript port of the SvelteKit engine module
@@ -15,14 +17,6 @@
 // Wrapped in an IIFE; published via window.EyeVisionTestResult.
 // Depends on rules.js (the structured-findings predicates), so it must load
 // after it.
-(function () {
-'use strict';
-window.EyeVisionTestResult = window.EyeVisionTestResult || {};
-const {
-  hasCriticalFinding,
-  hasReferableRetinopathy,
-  hasElevatedIop
-} = window.EyeVisionTestResult;
 
 /**
  * Detect the safety-critical flags for a report.
@@ -154,7 +148,4 @@ function detectFlags(r) {
   return flags;
 }
 
-Object.assign(window.EyeVisionTestResult, {
-  detectFlags
-});
-})();
+export { detectFlags };

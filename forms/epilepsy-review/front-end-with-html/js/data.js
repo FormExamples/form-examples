@@ -6,11 +6,6 @@
 // care setting, and set the safety flag whenever a high-priority safety flag
 // (valproate PPP, status epilepticus, DVLA driving, or suicidality) was raised.
 
-(function () {
-'use strict';
-window.EpilepsyReviewDashboard =
-  window.EpilepsyReviewDashboard || {};
-
 /** @type {import('./dashboard-types.js').ReviewRow[]} */
 const sampleReviews = [
   {
@@ -95,5 +90,4 @@ const sampleReviews = [
   }
 ];
 
-window.EpilepsyReviewDashboard.sampleReviews = sampleReviews;
-})();
+export { sampleReviews };

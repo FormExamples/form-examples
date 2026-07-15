@@ -21,10 +21,6 @@
  */
 
 // Wrapped in an IIFE; published via window.TimiRiskScoreForAcuteCoronarySyndrome.
-(function () {
-'use strict';
-window.TimiRiskScoreForAcuteCoronarySyndrome =
-  window.TimiRiskScoreForAcuteCoronarySyndrome || {};
 
 /** @type {TimiRule[]} */
 const timiRules = [
@@ -100,5 +96,4 @@ const timiRules = [
   }
 ];
 
-window.TimiRiskScoreForAcuteCoronarySyndrome.timiRules = timiRules;
-})();
+export { timiRules };

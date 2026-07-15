@@ -1,3 +1,5 @@
+import { classificationRules } from './rules.js';
+
 // Cervical-screening grader. Pure functions: take a `ScreeningData` object,
 // apply the gated first-match classification cascade in `classificationRules`,
 // and return the result class, the recommended management action, a
@@ -25,10 +27,6 @@
  */
 
 // Wrapped in an IIFE; published via window.CervicalScreening.
-(function () {
-'use strict';
-window.CervicalScreening = window.CervicalScreening || {};
-const { classificationRules } = window.CervicalScreening;
 
 /**
  * Completeness: the reached branch has its determining inputs present. A
@@ -101,8 +99,4 @@ function calculateGrade(data) {
   return { resultClass, managementAction, status, firedRules };
 }
 
-Object.assign(window.CervicalScreening, {
-  calculateGrade,
-  computeStatus
-});
-})();
+export { calculateGrade, computeStatus };

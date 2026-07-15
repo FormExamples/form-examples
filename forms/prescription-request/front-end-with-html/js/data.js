@@ -7,10 +7,6 @@
 // statuses (submitted / reviewed / approved); NHS numbers in the canonical
 // "NNN NNN NNNN" display form.
 
-(function () {
-'use strict';
-window.PrescriptionRequestDashboard = window.PrescriptionRequestDashboard || {};
-
 /** @type {import('./types.js').PrescriptionRow[]} */
 const samplePrescriptions = [
   {
@@ -159,5 +155,4 @@ const samplePrescriptions = [
   }
 ];
 
-window.PrescriptionRequestDashboard.samplePrescriptions = samplePrescriptions;
-})();
+export { samplePrescriptions };

@@ -5,10 +5,6 @@
 // The rows span all three completeness statuses, the full completeness-percent
 // range, every care setting, and both safety-flag states.
 
-(function () {
-'use strict';
-window.SoapNoteDashboard = window.SoapNoteDashboard || {};
-
 /** @type {import('./dashboard-types.js').NoteRow[]} */
 const sampleNotes = [
   {
@@ -93,5 +89,4 @@ const sampleNotes = [
   }
 ];
 
-window.SoapNoteDashboard.sampleNotes = sampleNotes;
-})();
+export { sampleNotes };

@@ -121,9 +121,6 @@
 // <script> (no ES modules) so the page can be opened directly via `file://`.
 // The IIFE attaches its public symbols to a single global namespace,
 // `window.OttawaKneeRule`.
-(function () {
-'use strict';
-window.OttawaKneeRule = window.OttawaKneeRule || {};
 
 /**
  * Build a fresh, fully-blank assessment.
@@ -268,17 +265,4 @@ function priorityLabel(priority) {
   }
 }
 
-Object.assign(window.OttawaKneeRule, {
-  emptyAssessment,
-  decisionLabel,
-  decisionClass,
-  criterionLabel,
-  clinicianRoleLabel,
-  careSettingLabel,
-  injuryMechanismLabel,
-  sexLabel,
-  injuredSideLabel,
-  yesNoLabel,
-  priorityLabel
-});
-})();
+export { emptyAssessment, decisionLabel, decisionClass, criterionLabel, clinicianRoleLabel, careSettingLabel, injuryMechanismLabel, sexLabel, injuredSideLabel, yesNoLabel, priorityLabel };

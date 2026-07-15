@@ -1,3 +1,6 @@
+import { completenessRules } from './completeness-rules.js';
+import { detectFlaggedIssues } from './flagged-issues.js';
+
 // Completeness grader. Pure functions: take a `StatementData` object,
 // evaluate every completeness rule and return the level
 // (incomplete | partial | complete | verified), the list of missing
@@ -19,12 +22,6 @@
  */
 
 // Wrapped in an IIFE; published via window.AdvanceStatementAboutCare.
-(function () {
-'use strict';
-window.AdvanceStatementAboutCare = window.AdvanceStatementAboutCare || {};
-
-const NS = window.AdvanceStatementAboutCare;
-const { completenessRules, detectFlaggedIssues } = NS;
 
 /**
  * @param {StatementData} data
@@ -101,7 +98,4 @@ function calculateCompleteness(data) {
   };
 }
 
-Object.assign(window.AdvanceStatementAboutCare, {
-  calculateCompleteness
-});
-})();
+export { calculateCompleteness };

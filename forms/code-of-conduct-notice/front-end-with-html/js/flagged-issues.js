@@ -8,9 +8,6 @@
  */
 
 // Wrapped in an IIFE; published via window.CodeOfConductNotice.
-(function () {
-'use strict';
-window.CodeOfConductNotice = window.CodeOfConductNotice || {};
 
 /**
  * Detects additional flags that should be highlighted for the compliance officer.
@@ -66,5 +63,4 @@ function detectAdditionalFlags(data) {
   return flags;
 }
 
-window.CodeOfConductNotice.detectAdditionalFlags = detectAdditionalFlags;
-})();
+export { detectAdditionalFlags };

@@ -7,10 +7,6 @@
 // Allied Health, IT, Pharmacy), and a mix of conflict-of-interest
 // declarations and training currency bands.
 
-(function () {
-'use strict';
-window.CodeOfConductNoticeDashboard = window.CodeOfConductNoticeDashboard || {};
-
 /** @type {import('./types.js').StaffRow[]} */
 const sampleStaff = [
   {
@@ -147,5 +143,4 @@ const sampleStaff = [
   }
 ];
 
-window.CodeOfConductNoticeDashboard.sampleStaff = sampleStaff;
-})();
+export { sampleStaff };

@@ -1,3 +1,8 @@
+import { detectAdditionalFlags } from './flagged-issues.js';
+import { calculatePcl5 } from './pcl5-grader.js';
+import { detectFiredRules } from './pcl5-rules.js';
+import { categoryDescription, emptyAssessment, pclResponseOptions } from './types.js';
+
 // Post-Traumatic Stress Assessment — patient wizard (vanilla JavaScript,
 // no build).
 //
@@ -11,19 +16,6 @@
 // reload. Sibling files loaded as plain `<script>` tags (in order) attach
 // their exports to `window.PostTraumaticStressAssessment`. The whole file
 // is wrapped in an IIFE so its top-level identifiers don't leak globally.
-
-(function () {
-'use strict';
-
-const NS = window.PostTraumaticStressAssessment;
-const {
-  emptyAssessment,
-  pclResponseOptions,
-  categoryDescription,
-  calculatePcl5,
-  detectFiredRules,
-  detectAdditionalFlags
-} = NS;
 
 // ----------------------------------------------------------------------
 // Persistence
@@ -885,4 +877,3 @@ if (document.readyState === 'loading') {
 } else {
   init();
 }
-})();

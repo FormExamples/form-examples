@@ -10,10 +10,6 @@
 // `file://`. The IIFE attaches its public symbols to a single global
 // namespace, `window.AudiologyAssessment`.
 
-(function () {
-'use strict';
-window.AudiologyAssessment = window.AudiologyAssessment || {};
-
 /**
  * Build a fresh, fully-blank assessment.
  * Strings default to `''`; numeric fields default to `null`.
@@ -161,12 +157,4 @@ function hearingGradeClass(grade) {
   return 'grade-' + (grade || 'normal');
 }
 
-Object.assign(window.AudiologyAssessment, {
-  emptyAssessment,
-  classifyDbHL,
-  worseGrade,
-  hearingGradeLabel,
-  hearingGradeClass,
-  GRADE_ORDER
-});
-})();
+export { emptyAssessment, classifyDbHL, worseGrade, hearingGradeLabel, hearingGradeClass, GRADE_ORDER };

@@ -7,11 +7,6 @@
 // examples convention. Wrapped in an IIFE; published via
 // `window.LumbarPunctureTestRequest`.
 
-(function () {
-'use strict';
-window.LumbarPunctureTestRequest =
-  window.LumbarPunctureTestRequest || {};
-
 /**
  * Build a fresh, fully-blank lumbar puncture request.
  * Strings default to ''; numeric fields default to null;
@@ -96,11 +91,4 @@ function procedureIntentLabel(value) {
   return PROCEDURE_INTENT_LABELS[value] || value || '';
 }
 
-Object.assign(window.LumbarPunctureTestRequest, {
-  emptyRequest,
-  indicationLabel,
-  procedureIntentLabel,
-  INDICATION_LABELS,
-  PROCEDURE_INTENT_LABELS
-});
-})();
+export { emptyRequest, indicationLabel, procedureIntentLabel, INDICATION_LABELS, PROCEDURE_INTENT_LABELS };

@@ -1,3 +1,5 @@
+import { ASIAN_HIGH, ASIAN_INCREASED, DUBOIS_COEFF, DUBOIS_HEIGHT_EXP, DUBOIS_WEIGHT_EXP, MOSTELLER_DIVISOR, categoryRules } from './rules.js';
+
 // BMI/BSA grader. Pure functions: take an `AssessmentData` object, apply the
 // BMI and BSA formulae to the two measured inputs (height and weight), and band
 // the BMI into the WHO adult weight-status category.
@@ -23,19 +25,6 @@
  */
 
 // Wrapped in an IIFE; published via window.BmiBsaCalculator.
-(function () {
-'use strict';
-window.BmiBsaCalculator =
-  window.BmiBsaCalculator || {};
-const {
-  ASIAN_INCREASED,
-  ASIAN_HIGH,
-  MOSTELLER_DIVISOR,
-  DUBOIS_COEFF,
-  DUBOIS_HEIGHT_EXP,
-  DUBOIS_WEIGHT_EXP,
-  categoryRules
-} = window.BmiBsaCalculator;
 
 /** Round a number to `dp` decimal places (returns null unchanged). */
 function roundTo(n, dp) {
@@ -142,9 +131,4 @@ function calculateBmiBsa(data) {
   };
 }
 
-Object.assign(window.BmiBsaCalculator, {
-  roundOne,
-  roundTwo,
-  calculateBmiBsa
-});
-})();
+export { roundOne, roundTwo, calculateBmiBsa };

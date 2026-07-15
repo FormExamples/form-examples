@@ -115,11 +115,6 @@
 // classic <script> (no ES modules) so the page can be opened directly via
 // `file://`. The IIFE attaches its public symbols to a single global
 // namespace, `window.MedicalLanguageSpeakingAssessmentForCymraeg`.
-(function () {
-'use strict';
-window.MedicalLanguageSpeakingAssessmentForCymraeg =
-  window.MedicalLanguageSpeakingAssessmentForCymraeg || {};
-const NS = window.MedicalLanguageSpeakingAssessmentForCymraeg;
 
 /**
  * Build a fresh, fully-blank assessment.
@@ -313,11 +308,4 @@ const CRITERIA = [
   }
 ];
 
-Object.assign(NS, {
-  emptyAssessment,
-  gradeLabel,
-  gradeClass,
-  isAtOrAboveClinicalThreshold,
-  CRITERIA
-});
-})();
+export { emptyAssessment, gradeLabel, gradeClass, isAtOrAboveClinicalThreshold, CRITERIA };

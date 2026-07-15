@@ -11,9 +11,6 @@
  */
 
 // Wrapped in an IIFE; published via window.HematologyAssessment.
-(function () {
-'use strict';
-window.HematologyAssessment = window.HematologyAssessment || {};
 
 /**
  * @param {AssessmentData} data
@@ -200,5 +197,4 @@ function detectAdditionalFlags(data) {
   return flags;
 }
 
-window.HematologyAssessment.detectAdditionalFlags = detectAdditionalFlags;
-})();
+export { detectAdditionalFlags };

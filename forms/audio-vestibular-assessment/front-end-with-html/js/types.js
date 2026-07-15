@@ -49,9 +49,6 @@
 // classic <script> (no ES modules) so the page can be opened directly via
 // `file://`. The IIFE attaches its public symbols to a single global
 // namespace, `window.AudioVestibularAssessment`.
-(function () {
-'use strict';
-window.AudioVestibularAssessment = window.AudioVestibularAssessment || {};
 
 /** Build an empty {hz500, hz1000, hz2000, hz4000} object. */
 function emptyEarThresholds() {
@@ -193,10 +190,4 @@ function emptyAssessment() {
   };
 }
 
-Object.assign(window.AudioVestibularAssessment, {
-  emptyAssessment,
-  emptyEarThresholds,
-  emptyPtaEar,
-  DHI_ITEMS
-});
-})();
+export { emptyAssessment, emptyEarThresholds, emptyPtaEar, DHI_ITEMS };

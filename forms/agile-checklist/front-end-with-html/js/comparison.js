@@ -1,6 +1,4 @@
-(function () {
-  'use strict';
-  const NS = (window.AgileChecklistDashboard = window.AgileChecklistDashboard || {});
+  
 
   const VALID = new Set([
     'optimising', 'mature', 'developing', 'initial', 'ad-hoc', 'insufficient-data',
@@ -40,7 +38,7 @@
   };
 
   function readSisterCsv(text) {
-    const rows = NS.parseCsv ? NS.parseCsv(text) : fallbackParseCsv(text);
+    const rows = fallbackParseCsv(text);
     if (rows.length === 0) throw new Error('empty CSV');
     const headers = rows[0].map(function (h) { return h.trim(); });
     const idx = {};
@@ -128,7 +126,7 @@
     return out;
   }
 
-  NS.comparison = {
+  export const comparison = {
     coerceMaturity: coerceMaturity,
     quadrantFor: quadrantFor,
     QUADRANT_LABEL: QUADRANT_LABEL,
@@ -136,4 +134,3 @@
     readSisterCsv: readSisterCsv,
     pairSubmissions: pairSubmissions,
   };
-})();

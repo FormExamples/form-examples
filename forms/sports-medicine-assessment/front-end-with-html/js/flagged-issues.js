@@ -19,9 +19,6 @@
  */
 
 // Wrapped in an IIFE; published via window.SportsMedicineAssessment.
-(function () {
-'use strict';
-window.SportsMedicineAssessment = window.SportsMedicineAssessment || {};
 
 const isYes = (v) => v === 'yes';
 
@@ -294,5 +291,4 @@ function detectAdditionalFlags(data) {
   return flags;
 }
 
-window.SportsMedicineAssessment.detectAdditionalFlags = detectAdditionalFlags;
-})();
+export { detectAdditionalFlags };

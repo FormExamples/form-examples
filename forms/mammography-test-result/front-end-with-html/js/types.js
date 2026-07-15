@@ -160,9 +160,6 @@
 // classic <script> (no ES modules) so the page can be opened directly via
 // `file://`. The IIFE attaches its public symbols to a single global
 // namespace, `window.MammographyTestResult`.
-(function () {
-'use strict';
-window.MammographyTestResult = window.MammographyTestResult || {};
 
 /**
  * Build a fresh, fully-blank mammography test result.
@@ -398,22 +395,4 @@ function biRadsClass(value) {
   }
 }
 
-Object.assign(window.MammographyTestResult, {
-  emptyResult,
-  resultClassificationLabel,
-  abnormalitySeverityLabel,
-  followUpUrgencyLabel,
-  examTypeLabel,
-  lateralityLabel,
-  breastDensityLabel,
-  biRadsLabel,
-  biRadsShortLabel,
-  reportStatusLabel,
-  recommendationLabel,
-  priorityLabel,
-  resultClassificationClass,
-  abnormalitySeverityClass,
-  followUpUrgencyClass,
-  biRadsClass
-});
-})();
+export { emptyResult, resultClassificationLabel, abnormalitySeverityLabel, followUpUrgencyLabel, examTypeLabel, lateralityLabel, breastDensityLabel, biRadsLabel, biRadsShortLabel, reportStatusLabel, recommendationLabel, priorityLabel, resultClassificationClass, abnormalitySeverityClass, followUpUrgencyClass, biRadsClass };

@@ -10,12 +10,6 @@
 // Flag IDs are stable and identical across every front-end and the back-end.
 // Wrapped in an IIFE; published via `window.LumbarPunctureTestRequest`.
 
-(function () {
-'use strict';
-window.LumbarPunctureTestRequest =
-  window.LumbarPunctureTestRequest || {};
-const NS = window.LumbarPunctureTestRequest;
-
 /**
  * Detect safety flags for a lumbar puncture request.
  *
@@ -143,5 +137,4 @@ function detectFlags(data, context) {
   return flags;
 }
 
-Object.assign(NS, { detectFlags });
-})();
+export { detectFlags };

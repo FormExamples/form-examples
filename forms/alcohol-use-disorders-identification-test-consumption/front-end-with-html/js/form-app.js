@@ -1,3 +1,7 @@
+import { detectFlaggedIssues } from './flags.js';
+import { calculateAuditcGrade } from './grader.js';
+import { emptyAssessment, itemLabel, priorityLabel, riskBandClass, riskBandLabel } from './types.js';
+
 // Alcohol Use Disorders Identification Test — Consumption (AUDIT-C) —
 // screening wizard (vanilla JavaScript, no build).
 //
@@ -13,19 +17,6 @@
 // to `window.AlcoholUseDisordersIdentificationTestConsumption`. Pulling them off
 // here keeps the rest of this file referring to short local names. The whole
 // file is wrapped in an IIFE so its top-level identifiers don't leak.
-(function () {
-'use strict';
-
-const NS = window.AlcoholUseDisordersIdentificationTestConsumption;
-const {
-  emptyAssessment,
-  riskBandLabel,
-  riskBandClass,
-  priorityLabel,
-  itemLabel,
-  calculateAuditcGrade,
-  detectFlaggedIssues
-} = NS;
 
 // ----------------------------------------------------------------------
 // Persistence
@@ -931,4 +922,3 @@ if (document.readyState === 'loading') {
 } else {
   init();
 }
-})();

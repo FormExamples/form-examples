@@ -19,9 +19,6 @@
  */
 
 // Wrapped in an IIFE; published via window.GeneticTestResult.
-(function () {
-'use strict';
-window.GeneticTestResult = window.GeneticTestResult || {};
 
 // ----------------------------------------------------------------------
 // Structured-findings predicates (mirror `utils.ts`)
@@ -477,14 +474,4 @@ function gradeFollowUp(r, classification, severity) {
   };
 }
 
-Object.assign(window.GeneticTestResult, {
-  hasActionableFinding,
-  hasPathogenicVariant,
-  hasVus,
-  isNegativeResult,
-  classifyResult,
-  gradeSeverity,
-  gradeCompleteness,
-  gradeFollowUp
-});
-})();
+export { hasActionableFinding, hasPathogenicVariant, hasVus, isNegativeResult, classifyResult, gradeSeverity, gradeCompleteness, gradeFollowUp };

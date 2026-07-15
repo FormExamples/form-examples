@@ -1,3 +1,5 @@
+import { hasAnyAbnormalFinding, hasCriticalFinding } from './rules.js';
+
 // Safety-critical flag detection for the Nerve Conduction Study Test Result.
 //
 // Faithful vanilla-JavaScript port of the SvelteKit engine module
@@ -13,10 +15,6 @@
  */
 
 // Wrapped in an IIFE; published via window.NerveConductionStudyTestResult.
-(function () {
-'use strict';
-window.NerveConductionStudyTestResult = window.NerveConductionStudyTestResult || {};
-const { hasCriticalFinding, hasAnyAbnormalFinding } = window.NerveConductionStudyTestResult;
 
 /**
  * Detect the safety-critical flags for a report.
@@ -136,7 +134,4 @@ function detectFlags(r) {
   return flags;
 }
 
-Object.assign(window.NerveConductionStudyTestResult, {
-  detectFlags
-});
-})();
+export { detectFlags };

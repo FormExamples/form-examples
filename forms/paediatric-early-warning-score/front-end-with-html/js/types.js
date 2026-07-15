@@ -147,9 +147,6 @@
 // classic <script> (no ES modules) so the page can be opened directly via
 // `file://`. The IIFE attaches its public symbols to a single global
 // namespace, `window.PaediatricEarlyWarningScore`.
-(function () {
-'use strict';
-window.PaediatricEarlyWarningScore = window.PaediatricEarlyWarningScore || {};
 
 /**
  * Build a fresh, fully-blank assessment.
@@ -320,19 +317,4 @@ function priorityLabel(priority) {
   }
 }
 
-Object.assign(window.PaediatricEarlyWarningScore, {
-  emptyAssessment,
-  escalationBandLabel,
-  escalationBandClass,
-  ageBandLabel,
-  clinicianRoleLabel,
-  careSettingLabel,
-  respiratoryEffortLabel,
-  supplementalOxygenLabel,
-  capillaryRefillLabel,
-  consciousnessLabel,
-  sexLabel,
-  yesNoLabel,
-  priorityLabel
-});
-})();
+export { emptyAssessment, escalationBandLabel, escalationBandClass, ageBandLabel, clinicianRoleLabel, careSettingLabel, respiratoryEffortLabel, supplementalOxygenLabel, capillaryRefillLabel, consciousnessLabel, sexLabel, yesNoLabel, priorityLabel };

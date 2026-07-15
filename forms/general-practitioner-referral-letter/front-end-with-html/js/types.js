@@ -154,10 +154,6 @@
 // <script> (no ES modules) so the page can be opened directly via `file://`.
 // The IIFE attaches its public symbols to a single global namespace,
 // `window.GeneralPractitionerReferralLetter`.
-(function () {
-'use strict';
-window.GeneralPractitionerReferralLetter =
-  window.GeneralPractitionerReferralLetter || {};
 
 /**
  * Build a fresh, fully-blank referral.
@@ -321,16 +317,4 @@ function priorityLabel(priority) {
   }
 }
 
-Object.assign(window.GeneralPractitionerReferralLetter, {
-  emptyReferral,
-  statusLabel,
-  statusClass,
-  urgencyLabel,
-  urgencyClass,
-  urgencyPathway,
-  referrerRoleLabel,
-  patientSexLabel,
-  consentToShareLabel,
-  priorityLabel
-});
-})();
+export { emptyReferral, statusLabel, statusClass, urgencyLabel, urgencyClass, urgencyPathway, referrerRoleLabel, patientSexLabel, consentToShareLabel, priorityLabel };

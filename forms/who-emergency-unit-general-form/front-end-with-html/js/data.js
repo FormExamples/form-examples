@@ -5,10 +5,6 @@
 // Twelve realistic encounters spanning every arrival mode, AVPU level, and
 // disposition; multiple rows with high-risk signs and at least one death.
 
-(function () {
-'use strict';
-window.WhoEmergencyUnitGeneralDashboard = window.WhoEmergencyUnitGeneralDashboard || {};
-
 /** @type {import('./types.js').PatientRow[]} */
 const samplePatients = [
   {
@@ -181,5 +177,4 @@ const samplePatients = [
   }
 ];
 
-window.WhoEmergencyUnitGeneralDashboard.samplePatients = samplePatients;
-})();
+export { samplePatients };

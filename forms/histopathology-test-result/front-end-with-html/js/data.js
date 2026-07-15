@@ -7,11 +7,6 @@
 // bands, with a critical-alert row whose unexpected malignancy raised three
 // flags.
 
-(function () {
-'use strict';
-window.HistopathologyTestResultDashboard =
-  window.HistopathologyTestResultDashboard || {};
-
 /** @type {import('./dashboard-types.js').ReportRow[]} */
 const sampleReports = [
   {
@@ -100,5 +95,4 @@ const sampleReports = [
   }
 ];
 
-window.HistopathologyTestResultDashboard.sampleReports = sampleReports;
-})();
+export { sampleReports };

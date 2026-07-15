@@ -1,3 +1,6 @@
+import { calculateGrade } from './grader.js';
+import { emptyRequest, formatBloodPressure, testTypeLabel } from './types.js';
+
 // Ambulatory Blood Pressure Test Request — clinician referral wizard
 // (vanilla JS).
 //
@@ -10,17 +13,6 @@
 // Sibling files loaded as plain `<script>` tags (in order) attach their
 // exports to `window.AmbulatoryBloodPressureTestRequest`. The whole file is
 // wrapped in an IIFE so its top-level identifiers don't leak to global scope.
-
-(function () {
-'use strict';
-
-const NS = window.AmbulatoryBloodPressureTestRequest;
-const {
-  emptyRequest,
-  testTypeLabel,
-  formatBloodPressure,
-  calculateGrade
-} = NS;
 
 // ----------------------------------------------------------------------
 // Persistence
@@ -774,4 +766,3 @@ if (document.readyState === 'loading') {
 } else {
   init();
 }
-})();

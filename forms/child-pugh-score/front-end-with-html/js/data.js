@@ -6,10 +6,6 @@
 // (5-15), every care setting, with the decompensated flag set whenever the
 // class is C.
 
-(function () {
-'use strict';
-window.ChildPughScoreDashboard = window.ChildPughScoreDashboard || {};
-
 /** @type {import('./dashboard-types.js').AssessmentRow[]} */
 const sampleAssessments = [
   {
@@ -84,5 +80,4 @@ const sampleAssessments = [
   }
 ];
 
-window.ChildPughScoreDashboard.sampleAssessments = sampleAssessments;
-})();
+export { sampleAssessments };

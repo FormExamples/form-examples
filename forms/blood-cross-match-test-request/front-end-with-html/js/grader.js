@@ -1,3 +1,6 @@
+import { detectFlags } from './flags.js';
+import { scoreAppropriateness, scoreCompleteness, scoreIdentitySafety, scoreTriage } from './rules.js';
+
 // Four-axis grader for the Blood Cross-Match Test Request.
 //
 // Composes the rule sets in rules.js and the safety flags in flags.js into a
@@ -6,19 +9,6 @@
 // across every front-end and the back-end.
 //
 // Wrapped in an IIFE; published via `window.BloodCrossMatchTestRequest`.
-
-(function () {
-'use strict';
-window.BloodCrossMatchTestRequest =
-  window.BloodCrossMatchTestRequest || {};
-const NS = window.BloodCrossMatchTestRequest;
-const {
-  scoreAppropriateness,
-  scoreIdentitySafety,
-  scoreCompleteness,
-  scoreTriage,
-  detectFlags
-} = NS;
 
 /**
  * Derive an overall recommendation for the transfusion-laboratory vetting desk
@@ -99,9 +89,4 @@ function calculateGrade(data) {
   };
 }
 
-Object.assign(NS, {
-  calculateGrade,
-  deriveRecommendation,
-  RECOMMENDATION_LABELS
-});
-})();
+export { calculateGrade, deriveRecommendation, RECOMMENDATION_LABELS };

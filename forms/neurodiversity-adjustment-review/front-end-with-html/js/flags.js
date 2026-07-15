@@ -1,3 +1,5 @@
+import { anyNotWorking } from './types.js';
+
 // Review-flag detection for the Neurodiversity Adjustment Review engine.
 //
 // Pure function returning flags using the grade_flag categories from SQL
@@ -9,13 +11,6 @@
 // Each flag is { flagId, category, priority, description, suggestedAction }.
 // Flag IDs are stable and identical across every front-end and the back-end.
 // Wrapped in an IIFE; published via `window.NeurodiversityAdjustmentReview`.
-
-(function () {
-'use strict';
-window.NeurodiversityAdjustmentReview =
-  window.NeurodiversityAdjustmentReview || {};
-const NS = window.NeurodiversityAdjustmentReview;
-const { anyNotWorking } = NS;
 
 /**
  * Detect review flags for a neurodiversity adjustment review.
@@ -120,5 +115,4 @@ function detectFlags(r, axes) {
   return flags;
 }
 
-Object.assign(NS, { detectFlags });
-})();
+export { detectFlags };

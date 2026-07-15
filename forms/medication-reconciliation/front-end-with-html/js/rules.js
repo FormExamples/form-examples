@@ -23,9 +23,6 @@
  */
 
 // Wrapped in an IIFE; published via window.MedicationReconciliation.
-(function () {
-'use strict';
-window.MedicationReconciliation = window.MedicationReconciliation || {};
 
 /** The two-independent-source minimum for an adequate BPMH. */
 const MINIMUM_SOURCES = 2;
@@ -121,15 +118,4 @@ function deriveStatus(data, counts) {
   return 'complete';
 }
 
-Object.assign(window.MedicationReconciliation, {
-  MINIMUM_SOURCES,
-  HIGH_RISK_CLASSES,
-  isIntentional,
-  isUnintentional,
-  anyMissingActionOrRationale,
-  lineItemNeedsReview,
-  allergyStatusDocumented,
-  discrepancyTouchesHighRisk,
-  deriveStatus
-});
-})();
+export { MINIMUM_SOURCES, HIGH_RISK_CLASSES, isIntentional, isUnintentional, anyMissingActionOrRationale, lineItemNeedsReview, allergyStatusDocumented, discrepancyTouchesHighRisk, deriveStatus };

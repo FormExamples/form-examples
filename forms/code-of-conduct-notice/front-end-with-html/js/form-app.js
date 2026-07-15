@@ -1,3 +1,8 @@
+import { detectAdditionalFlags } from './flagged-issues.js';
+import { validateForm as engineValidateForm } from './form-validator.js';
+import { acknowledgementStatus, acknowledgementStatusClass, acknowledgementStatusLabel, completenessLabel, emptyAssessment } from './types.js';
+import { validationRules } from './validation-rules.js';
+
 // Code of Conduct Notice — acknowledgement wizard (vanilla JavaScript, no build).
 //
 // Single-page continuous wizard: every section is rendered into the page in
@@ -10,20 +15,6 @@
 // exports to `window.CodeOfConductNotice`. Pulling them off here keeps the
 // rest of this file referring to short local names. Whole file is wrapped
 // in an IIFE so its top-level identifiers don't leak to the global scope.
-(function () {
-'use strict';
-
-const NS = window.CodeOfConductNotice;
-const {
-  emptyAssessment,
-  validationRules,
-  validateForm: engineValidateForm,
-  detectAdditionalFlags,
-  acknowledgementStatus,
-  acknowledgementStatusLabel,
-  acknowledgementStatusClass,
-  completenessLabel
-} = NS;
 
 // ----------------------------------------------------------------------
 // Persistence
@@ -730,4 +721,3 @@ if (document.readyState === 'loading') {
 } else {
   init();
 }
-})();

@@ -1,3 +1,6 @@
+import { calculateMMSE } from './mmse-grader.js';
+import { calculateAge } from './types.js';
+
 // Flagged-issue detection. Independent of overall MMSE category, this
 // module raises clinician-facing flags for safety-critical or clinically
 // significant alerts: severe impairment, orientation loss, memory deficit,
@@ -12,10 +15,6 @@
  */
 
 // Wrapped in an IIFE; published via window.CognitiveAssessment.
-(function () {
-'use strict';
-window.CognitiveAssessment = window.CognitiveAssessment || {};
-const { calculateMMSE, calculateAge } = window.CognitiveAssessment;
 
 /**
  * @param {AssessmentData} data
@@ -229,5 +228,4 @@ function detectAdditionalFlags(data) {
   return flags;
 }
 
-window.CognitiveAssessment.detectAdditionalFlags = detectAdditionalFlags;
-})();
+export { detectAdditionalFlags };

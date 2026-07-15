@@ -1,3 +1,5 @@
+import { isBariumStudy, isIonisingStudy } from './types.js';
+
 // Four-axis rule catalogue for the Fluoroscopy Test Request engine.
 //
 // Derived from index.md and sql/05: (A) appropriateness 1-9 + band by
@@ -9,13 +11,6 @@
 // R-COMPLETE-*, R-TRIAGE-*). Pure data + helpers; the grader composes them.
 //
 // Wrapped in an IIFE; published via `window.FluoroscopyTestRequest`.
-
-(function () {
-'use strict';
-window.FluoroscopyTestRequest =
-  window.FluoroscopyTestRequest || {};
-const NS = window.FluoroscopyTestRequest;
-const { isBariumStudy, isIonisingStudy } = NS;
 
 // ----------------------------------------------------------------------
 // Axis A — Appropriateness (ACR Appropriateness Criteria / RCR iRefer 1-9)
@@ -397,19 +392,4 @@ function scoreTriage(data) {
   };
 }
 
-Object.assign(NS, {
-  scoreAppropriateness,
-  appropriatenessBand,
-  scoreRadiationDose,
-  scoreSafety,
-  scoreCompleteness,
-  scoreTriage,
-  maxTier,
-  maxSafety,
-  TRIAGE_ORDER,
-  SAFETY_ORDER,
-  TARGET_TIMEFRAMES,
-  STUDY_DOSE_BANDS,
-  INDICATION_STUDY_MAP
-});
-})();
+export { scoreAppropriateness, appropriatenessBand, scoreRadiationDose, scoreSafety, scoreCompleteness, scoreTriage, maxTier, maxSafety, TRIAGE_ORDER, SAFETY_ORDER, TARGET_TIMEFRAMES, STUDY_DOSE_BANDS, INDICATION_STUDY_MAP };

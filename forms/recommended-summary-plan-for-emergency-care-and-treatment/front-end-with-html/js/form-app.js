@@ -1,3 +1,7 @@
+import { detectFlaggedIssues } from './flags.js';
+import { gradePlan } from './grader.js';
+import { ceilingLabel, clinicianRoleLabel, cprRecommendationLabel, emptyPlan, involvementLabel, priorityBalanceLabel, priorityLabel, statusClass, statusLabel, yesNoLabel } from './types.js';
+
 // Recommended Summary Plan for Emergency Care and Treatment (ReSPECT) — wizard
 // (vanilla JavaScript, no build).
 //
@@ -14,24 +18,6 @@
 // to `window.RecommendedSummaryPlanForEmergencyCareAndTreatment`. Pulling them
 // off here keeps the rest of this file referring to short local names. The
 // whole file is wrapped in an IIFE so its top-level identifiers don't leak.
-(function () {
-'use strict';
-
-const NS = window.RecommendedSummaryPlanForEmergencyCareAndTreatment;
-const {
-  emptyPlan,
-  statusLabel,
-  statusClass,
-  priorityLabel,
-  priorityBalanceLabel,
-  cprRecommendationLabel,
-  ceilingLabel,
-  involvementLabel,
-  clinicianRoleLabel,
-  yesNoLabel,
-  gradePlan,
-  detectFlaggedIssues
-} = NS;
 
 // ----------------------------------------------------------------------
 // Persistence
@@ -993,4 +979,3 @@ if (document.readyState === 'loading') {
 } else {
   init();
 }
-})();

@@ -1,3 +1,7 @@
+import { calculateGrade } from './grader.js';
+import { severeByAverages } from './rules.js';
+import { abnormalitySeverityClass, abnormalitySeverityLabel, emptyResult, followUpUrgencyClass, followUpUrgencyLabel, priorityLabel, recommendationLabel, resultClassificationClass, resultClassificationLabel } from './types.js';
+
 // Ambulatory Blood Pressure (ABPM) Test Result — report-entry wizard
 // (vanilla JavaScript, no build).
 //
@@ -14,23 +18,6 @@
 // exports to `window.AmbulatoryBloodPressureTestResult`. Pulling them off
 // here keeps the rest of this file referring to short local names. The whole
 // file is wrapped in an IIFE so its top-level identifiers don't leak.
-(function () {
-'use strict';
-
-const NS = window.AmbulatoryBloodPressureTestResult;
-const {
-  emptyResult,
-  resultClassificationLabel,
-  abnormalitySeverityLabel,
-  followUpUrgencyLabel,
-  recommendationLabel,
-  priorityLabel,
-  resultClassificationClass,
-  abnormalitySeverityClass,
-  followUpUrgencyClass,
-  severeByAverages,
-  calculateGrade
-} = NS;
 
 // ----------------------------------------------------------------------
 // Persistence
@@ -1027,4 +1014,3 @@ if (document.readyState === 'loading') {
 } else {
   init();
 }
-})();

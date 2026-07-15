@@ -1,3 +1,5 @@
+import { hasNumber, hasText, isYesNoAnswered } from './types.js';
+
 // WHO Prehospital Form (SCF Prehospital) — completeness validation rules.
 //
 // The form is a structured prehospital documentation instrument for
@@ -13,11 +15,6 @@
 //
 // Rule IDs follow the pattern <SECTION>-<NN>; the prefix lets the report
 // group fired rules by section.
-
-(function () {
-'use strict';
-window.WhoPrehospitalForm = window.WhoPrehospitalForm || {};
-const { hasText, hasNumber, isYesNoAnswered } = window.WhoPrehospitalForm;
 
 const prehospitalRules = [
   // ─── Step 1 — Caller & Scene ──────────────────────────────
@@ -394,5 +391,4 @@ const prehospitalRules = [
   }
 ];
 
-window.WhoPrehospitalForm.prehospitalRules = prehospitalRules;
-})();
+export { prehospitalRules };

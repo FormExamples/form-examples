@@ -1,3 +1,7 @@
+import { detectFlaggedIssues } from './flags.js';
+import { calculateEgfr } from './grader.js';
+import { emptyAssessment, equationLabel, priorityLabel, sexLabel, stageClass, stageLabel } from './types.js';
+
 // eGFR Calculator — single-page wizard (vanilla JavaScript, no build).
 //
 // Single-page continuous wizard: every step is rendered into the page in
@@ -12,20 +16,6 @@
 // to `window.EstimatedGlomerularFiltrationRateCalculator`. Pulling them off here
 // keeps the rest of this file referring to short local names. The whole file is
 // wrapped in an IIFE so its top-level identifiers don't leak.
-(function () {
-'use strict';
-
-const NS = window.EstimatedGlomerularFiltrationRateCalculator;
-const {
-  emptyAssessment,
-  stageLabel,
-  stageClass,
-  equationLabel,
-  sexLabel,
-  priorityLabel,
-  calculateEgfr,
-  detectFlaggedIssues
-} = NS;
 
 // ----------------------------------------------------------------------
 // Persistence
@@ -856,4 +846,3 @@ if (document.readyState === 'loading') {
 } else {
   init();
 }
-})();

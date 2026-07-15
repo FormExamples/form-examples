@@ -6,11 +6,6 @@
 // critical / inconclusive), the severity ladder, and the follow-up urgency
 // bands, with a critical-alert row whose critical finding raised two flags.
 
-(function () {
-'use strict';
-window.EyeVisionTestResultDashboard =
-  window.EyeVisionTestResultDashboard || {};
-
 /** @type {import('./dashboard-types.js').ReportRow[]} */
 const sampleReports = [
   {
@@ -99,5 +94,4 @@ const sampleReports = [
   }
 ];
 
-window.EyeVisionTestResultDashboard.sampleReports = sampleReports;
-})();
+export { sampleReports };

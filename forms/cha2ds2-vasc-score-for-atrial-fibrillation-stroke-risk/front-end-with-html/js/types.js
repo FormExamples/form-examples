@@ -110,10 +110,6 @@
 // classic <script> (no ES modules) so the page can be opened directly via
 // `file://`. The IIFE attaches its public symbols to a single global
 // namespace, `window.Cha2ds2VascScoreForAtrialFibrillationStrokeRisk`.
-(function () {
-'use strict';
-window.Cha2ds2VascScoreForAtrialFibrillationStrokeRisk =
-  window.Cha2ds2VascScoreForAtrialFibrillationStrokeRisk || {};
 
 /**
  * Build a fresh, fully-blank assessment.
@@ -241,16 +237,4 @@ function priorityLabel(priority) {
   }
 }
 
-Object.assign(window.Cha2ds2VascScoreForAtrialFibrillationStrokeRisk, {
-  emptyAssessment,
-  riskBandLabel,
-  riskBandClass,
-  anticoagulationLabel,
-  clinicianRoleLabel,
-  careSettingLabel,
-  atrialFibrillationTypeLabel,
-  sexLabel,
-  ageBandLabel,
-  priorityLabel
-});
-})();
+export { emptyAssessment, riskBandLabel, riskBandClass, anticoagulationLabel, clinicianRoleLabel, careSettingLabel, atrialFibrillationTypeLabel, sexLabel, ageBandLabel, priorityLabel };

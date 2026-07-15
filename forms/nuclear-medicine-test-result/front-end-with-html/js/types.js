@@ -144,9 +144,6 @@
 // classic <script> (no ES modules) so the page can be opened directly via
 // `file://`. The IIFE attaches its public symbols to a single global
 // namespace, `window.NuclearMedicineTestResult`.
-(function () {
-'use strict';
-window.NuclearMedicineTestResult = window.NuclearMedicineTestResult || {};
 
 /**
  * Build a fresh, fully-blank nuclear medicine test result.
@@ -335,18 +332,4 @@ function followUpUrgencyClass(value) {
   }
 }
 
-Object.assign(window.NuclearMedicineTestResult, {
-  emptyResult,
-  resultClassificationLabel,
-  abnormalitySeverityLabel,
-  followUpUrgencyLabel,
-  scanTypeLabel,
-  reportStatusLabel,
-  examinationAdequacyLabel,
-  recommendationLabel,
-  priorityLabel,
-  resultClassificationClass,
-  abnormalitySeverityClass,
-  followUpUrgencyClass
-});
-})();
+export { emptyResult, resultClassificationLabel, abnormalitySeverityLabel, followUpUrgencyLabel, scanTypeLabel, reportStatusLabel, examinationAdequacyLabel, recommendationLabel, priorityLabel, resultClassificationClass, abnormalitySeverityClass, followUpUrgencyClass };

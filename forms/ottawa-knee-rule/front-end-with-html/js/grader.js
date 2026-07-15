@@ -1,3 +1,5 @@
+import { ottawaRules } from './rules.js';
+
 // Ottawa Knee Rule grader. Pure functions: take an `AssessmentData` object,
 // evaluate the five decision rules in `ottawaRules`, and apply ANY-of (logical
 // OR) logic to decide whether a knee radiograph is indicated.
@@ -24,10 +26,6 @@
  */
 
 // Wrapped in an IIFE; published via window.OttawaKneeRule.
-(function () {
-'use strict';
-window.OttawaKneeRule = window.OttawaKneeRule || {};
-const { ottawaRules } = window.OttawaKneeRule;
 
 /**
  * Evaluate the five Ottawa criteria and record each as an audit row (fired
@@ -111,8 +109,4 @@ function gradeOttawaKnee(data) {
   };
 }
 
-Object.assign(window.OttawaKneeRule, {
-  evaluateCriteria,
-  gradeOttawaKnee
-});
-})();
+export { evaluateCriteria, gradeOttawaKnee };

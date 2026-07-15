@@ -1,3 +1,6 @@
+import { FLAGS } from './flagged-issues.js';
+import { RULES } from './fp92a-rules.js';
+
 /**
  * FP92A — eligibility validator.
  *
@@ -5,8 +8,7 @@
  * computed outcome with validity period, fired rules, and advisory flags.
  */
 
-(function (root) {
-  const Fp92aForm = root.Fp92aForm || (root.Fp92aForm = {});
+  
 
   function isoPlusYears(iso, years) {
     if (!iso) return "";
@@ -17,8 +19,8 @@
   }
 
   function evaluateFp92a(data) {
-    const rules = Fp92aForm.RULES || [];
-    const flags = Fp92aForm.FLAGS || [];
+    const rules = RULES || [];
+    const flags = FLAGS || [];
 
     const firedRules = rules
       .filter((r) => {
@@ -80,5 +82,6 @@
     };
   }
 
-  Fp92aForm.evaluateFp92a = evaluateFp92a;
-})(window);
+  
+
+export { evaluateFp92a };

@@ -166,9 +166,6 @@
 // classic <script> (no ES modules) so the page can be opened directly via
 // `file://`. The IIFE attaches its public symbols to a single global
 // namespace, `window.NerveConductionStudyTestResult`.
-(function () {
-'use strict';
-window.NerveConductionStudyTestResult = window.NerveConductionStudyTestResult || {};
 
 /**
  * Build a fresh, fully-blank nerve conduction study / EMG result.
@@ -376,20 +373,4 @@ function followUpUrgencyClass(value) {
   }
 }
 
-Object.assign(window.NerveConductionStudyTestResult, {
-  emptyResult,
-  resultClassificationLabel,
-  abnormalitySeverityLabel,
-  followUpUrgencyLabel,
-  studyTypeLabel,
-  regionLabel,
-  lateralityLabel,
-  studyAdequacyLabel,
-  reportStatusLabel,
-  recommendationLabel,
-  priorityLabel,
-  resultClassificationClass,
-  abnormalitySeverityClass,
-  followUpUrgencyClass
-});
-})();
+export { emptyResult, resultClassificationLabel, abnormalitySeverityLabel, followUpUrgencyLabel, studyTypeLabel, regionLabel, lateralityLabel, studyAdequacyLabel, reportStatusLabel, recommendationLabel, priorityLabel, resultClassificationClass, abnormalitySeverityClass, followUpUrgencyClass };

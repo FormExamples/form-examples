@@ -1,6 +1,4 @@
 // Public exports attached to window.AgileChecklist.
-(function () {
-  'use strict';
 
   const TEAMS_ITEMS = [
     { id: 't01', ordinal: 1, section: 'teams', text: 'Teams have problems to solve rather than lists of tasks to perform.' },
@@ -76,10 +74,11 @@
     practices: 'Practices',
   };
 
-  window.AgileChecklist = window.AgileChecklist || {};
-  window.AgileChecklist.TEAMS_ITEMS = TEAMS_ITEMS;
-  window.AgileChecklist.STAKEHOLDERS_ITEMS = STAKEHOLDERS_ITEMS;
-  window.AgileChecklist.PRACTICES_ITEMS = PRACTICES_ITEMS;
-  window.AgileChecklist.ALL_ITEMS = ALL_ITEMS;
-  window.AgileChecklist.SECTION_LABEL = SECTION_LABEL;
-})();
+  
+  
+  
+  
+  
+  
+
+export { TEAMS_ITEMS, STAKEHOLDERS_ITEMS, PRACTICES_ITEMS, ALL_ITEMS, SECTION_LABEL };

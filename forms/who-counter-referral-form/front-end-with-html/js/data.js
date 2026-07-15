@@ -5,10 +5,6 @@
 // Twelve realistic rows: spans every follow-up timeframe, every status flag,
 // and includes one row where the patient/family has not been informed.
 
-(function () {
-'use strict';
-window.WhoCounterReferralDashboard = window.WhoCounterReferralDashboard || {};
-
 /** @type {import('./types.js').PatientRow[]} */
 const samplePatients = [
   {
@@ -181,5 +177,4 @@ const samplePatients = [
   }
 ];
 
-window.WhoCounterReferralDashboard.samplePatients = samplePatients;
-})();
+export { samplePatients };

@@ -7,11 +7,6 @@
 // bands, with a critical-alert row whose germ-cell-marker pattern raised two
 // flags.
 
-(function () {
-'use strict';
-window.TumorMarkerTestResultDashboard =
-  window.TumorMarkerTestResultDashboard || {};
-
 /** @type {import('./dashboard-types.js').ReportRow[]} */
 const sampleReports = [
   {
@@ -100,5 +95,4 @@ const sampleReports = [
   }
 ];
 
-window.TumorMarkerTestResultDashboard.sampleReports = sampleReports;
-})();
+export { sampleReports };

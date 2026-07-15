@@ -19,9 +19,6 @@
  */
 
 // Wrapped in an IIFE; published via window.HolterMonitorTestResult.
-(function () {
-'use strict';
-window.HolterMonitorTestResult = window.HolterMonitorTestResult || {};
 
 // ----------------------------------------------------------------------
 // Structured-findings predicates (mirror `utils.ts`)
@@ -483,17 +480,4 @@ function gradeFollowUp(r, classification, severity) {
   };
 }
 
-Object.assign(window.HolterMonitorTestResult, {
-  FAST_AF_MAX_HR_BPM,
-  SIGNIFICANT_PAUSE_SECONDS,
-  hasCriticalFinding,
-  hasSignificantPause,
-  hasFastAtrialFibrillation,
-  hasAnyAbnormalFinding,
-  hasHighEctopyBurden,
-  classifyResult,
-  gradeSeverity,
-  gradeCompleteness,
-  gradeFollowUp
-});
-})();
+export { FAST_AF_MAX_HR_BPM, SIGNIFICANT_PAUSE_SECONDS, hasCriticalFinding, hasSignificantPause, hasFastAtrialFibrillation, hasAnyAbnormalFinding, hasHighEctopyBurden, classifyResult, gradeSeverity, gradeCompleteness, gradeFollowUp };

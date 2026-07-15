@@ -219,9 +219,6 @@
 // classic <script> (no ES modules) so the page can be opened directly via
 // `file://`. Public symbols attach to a single global namespace,
 // `window.RenalAssessment`.
-(function () {
-'use strict';
-window.RenalAssessment = window.RenalAssessment || {};
 
 /**
  * Build a fresh, fully-blank assessment.
@@ -464,15 +461,4 @@ function albuminuriaCategoryLabel(a) {
   }
 }
 
-Object.assign(window.RenalAssessment, {
-  emptyAssessment,
-  calculateAge,
-  calculateBMI,
-  bmiCategory,
-  estimateEgfrCkdEpi2021,
-  classifyGfrCategory,
-  classifyAlbuminuriaCategory,
-  gfrCategoryLabel,
-  albuminuriaCategoryLabel
-});
-})();
+export { emptyAssessment, calculateAge, calculateBMI, bmiCategory, estimateEgfrCkdEpi2021, classifyGfrCategory, classifyAlbuminuriaCategory, gfrCategoryLabel, albuminuriaCategoryLabel };

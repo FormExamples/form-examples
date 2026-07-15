@@ -1,3 +1,5 @@
+import { avpuLabel } from './types.js';
+
 // Flagged-issue detection (red flags). Independent of the aggregate risk band
 // (which the grader produces), this module raises clinician-facing safety flags
 // per spec §5:
@@ -21,11 +23,6 @@
  */
 
 // Wrapped in an IIFE; published via window.ModifiedEarlyWarningScore.
-(function () {
-'use strict';
-window.ModifiedEarlyWarningScore =
-  window.ModifiedEarlyWarningScore || {};
-const { avpuLabel } = window.ModifiedEarlyWarningScore;
 
 /**
  * @param {ObservationData} data
@@ -173,5 +170,4 @@ function detectFlaggedIssues(data, grade) {
   return flags;
 }
 
-window.ModifiedEarlyWarningScore.detectFlaggedIssues = detectFlaggedIssues;
-})();
+export { detectFlaggedIssues };

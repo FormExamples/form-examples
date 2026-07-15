@@ -1,3 +1,8 @@
+import { detectAdditionalFlags } from './flagged-issues.js';
+import { calculateHHIES } from './hhies-grader.js';
+import { hhiesQuestions, hhiesResponseOptions } from './hhies-rules.js';
+import { calculateAge, emptyAssessment, hearingLossGrade, hhiesCategory, hhiesSeverityClass } from './types.js';
+
 // Hearing Aid Assessment - patient wizard (vanilla JavaScript, no build).
 //
 // Single-page continuous wizard: every section is rendered into the page in
@@ -10,21 +15,6 @@
 // exports to `window.HearingAidAssessment`. Pulling them off here keeps the
 // rest of this file referring to short local names. Whole file is wrapped
 // in an IIFE so its top-level identifiers don't leak to the global scope.
-(function () {
-'use strict';
-
-const NS = window.HearingAidAssessment;
-const {
-  emptyAssessment,
-  calculateAge,
-  hhiesCategory,
-  hhiesSeverityClass,
-  hearingLossGrade,
-  hhiesQuestions,
-  hhiesResponseOptions,
-  calculateHHIES,
-  detectAdditionalFlags
-} = NS;
 
 // ----------------------------------------------------------------------
 // Persistence
@@ -122,7 +112,6 @@ function lilyInputClass(type) {
     default:       return 'text-input';
   }
 }
-
 
 /**
  * Build a labelled text input.
@@ -1196,4 +1185,3 @@ if (document.readyState === 'loading') {
 } else {
   init();
 }
-})();

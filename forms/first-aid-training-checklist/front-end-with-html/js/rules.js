@@ -25,13 +25,6 @@
  * @property {(d: AssessmentData) => TriState} evaluate
  */
 
-(function () {
-'use strict';
-window.FirstAidTrainingChecklist =
-  window.FirstAidTrainingChecklist || {};
-
-const NS = window.FirstAidTrainingChecklist;
-
 /**
  * Helper: read a tri-state field, normalising missing/unknown values.
  * @param {AssessmentData} d
@@ -460,5 +453,4 @@ const fawRules = [
   }
 ];
 
-NS.fawRules = fawRules;
-})();
+export { fawRules };

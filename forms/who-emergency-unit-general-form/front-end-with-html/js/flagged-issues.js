@@ -1,3 +1,5 @@
+import { hasAirwayIntervention, hasBreathingIntervention, hasCirculationIntervention, hasNumber, hasText } from './types.js';
+
 // WHO Emergency Unit Form: General flagged-issue detection.
 // Independent of the completeness check (which is handled by the
 // validator), this module raises clinically significant flags for
@@ -10,17 +12,6 @@
 //
 // Priorities (urgent > high > medium > low) drive sort order in the
 // report.
-
-(function () {
-'use strict';
-window.WhoEmergencyUnitGeneralForm = window.WhoEmergencyUnitGeneralForm || {};
-const {
-  hasNumber,
-  hasText,
-  hasAirwayIntervention,
-  hasBreathingIntervention,
-  hasCirculationIntervention
-} = window.WhoEmergencyUnitGeneralForm;
 
 function detectFlaggedIssues(data) {
   const flags = [];
@@ -268,5 +259,4 @@ function detectFlaggedIssues(data) {
   return flags;
 }
 
-window.WhoEmergencyUnitGeneralForm.detectFlaggedIssues = detectFlaggedIssues;
-})();
+export { detectFlaggedIssues };

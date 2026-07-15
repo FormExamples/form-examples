@@ -2,10 +2,6 @@
 // The Loco backend lives at http://localhost:5150. On any network or
 // non-2xx response we fall back to sample data and surface a banner.
 
-(function () {
-'use strict';
-window.UkLpaDashboard = window.UkLpaDashboard || {};
-
 const API_BASE = 'http://localhost:5150';
 const LPAS_PATH = '/api/lpa';
 
@@ -25,6 +21,4 @@ async function fetchLpas() {
   return [];
 }
 
-window.UkLpaDashboard.fetchLpas = fetchLpas;
-window.UkLpaDashboard.API_BASE = API_BASE;
-})();
+export { fetchLpas, API_BASE };

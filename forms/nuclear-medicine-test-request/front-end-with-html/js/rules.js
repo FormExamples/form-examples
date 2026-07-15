@@ -13,12 +13,6 @@
 //
 // Wrapped in an IIFE; published via `window.NuclearMedicineTestRequest`.
 
-(function () {
-'use strict';
-window.NuclearMedicineTestRequest =
-  window.NuclearMedicineTestRequest || {};
-const NS = window.NuclearMedicineTestRequest;
-
 // ----------------------------------------------------------------------
 // Axis A — Appropriateness (ACR Appropriateness Criteria / RCR iRefer 1-9)
 // ----------------------------------------------------------------------
@@ -410,19 +404,4 @@ function scoreTriage(data) {
   };
 }
 
-Object.assign(NS, {
-  scoreAppropriateness,
-  appropriatenessBand,
-  radiationDoseBand,
-  scorePrepSafety,
-  scoreCompleteness,
-  scoreTriage,
-  maxTier,
-  maxPrepBand,
-  TRIAGE_ORDER,
-  PREP_ORDER,
-  TARGET_TIMEFRAMES,
-  SCAN_DOSE_BAND,
-  INDICATION_SCAN_MAP
-});
-})();
+export { scoreAppropriateness, appropriatenessBand, radiationDoseBand, scorePrepSafety, scoreCompleteness, scoreTriage, maxTier, maxPrepBand, TRIAGE_ORDER, PREP_ORDER, TARGET_TIMEFRAMES, SCAN_DOSE_BAND, INDICATION_SCAN_MAP };

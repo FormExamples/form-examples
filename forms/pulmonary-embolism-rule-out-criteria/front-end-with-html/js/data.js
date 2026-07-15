@@ -6,11 +6,6 @@
 // (pre-test probability low / not-low), and each care setting, with the workup
 // flag set whenever the classification is 'perc-positive'.
 
-(function () {
-'use strict';
-window.PulmonaryEmbolismRuleOutCriteriaDashboard =
-  window.PulmonaryEmbolismRuleOutCriteriaDashboard || {};
-
 /** @type {import('./dashboard-types.js').AssessmentRow[]} */
 const sampleAssessments = [
   {
@@ -92,6 +87,4 @@ const sampleAssessments = [
   }
 ];
 
-window.PulmonaryEmbolismRuleOutCriteriaDashboard.sampleAssessments =
-  sampleAssessments;
-})();
+export { sampleAssessments };

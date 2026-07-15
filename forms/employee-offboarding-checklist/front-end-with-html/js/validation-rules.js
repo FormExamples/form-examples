@@ -26,9 +26,6 @@
  */
 
 // Wrapped in an IIFE; published via window.EmployeeOffboardingChecklist.
-(function () {
-'use strict';
-window.EmployeeOffboardingChecklist = window.EmployeeOffboardingChecklist || {};
 
 /** "Outstanding" helper: yes-no field is anything other than 'yes'. */
 function notYes(v) { return v !== 'yes'; }
@@ -369,5 +366,4 @@ const validationRules = [
   }
 ];
 
-window.EmployeeOffboardingChecklist.validationRules = validationRules;
-})();
+export { validationRules };

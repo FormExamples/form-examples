@@ -1,3 +1,6 @@
+import { detectFlags } from './flags.js';
+import { scoreAppropriateness, scoreCompleteness, scoreRisk, scoreUrgency } from './rules.js';
+
 // Four-axis grader for the Colonoscopy Test Request.
 //
 // Composes the rule sets in rules.js and the safety flags in flags.js into a
@@ -6,19 +9,6 @@
 // across every front-end and the back-end.
 //
 // Wrapped in an IIFE; published via `window.ColonoscopyTestRequest`.
-
-(function () {
-'use strict';
-window.ColonoscopyTestRequest =
-  window.ColonoscopyTestRequest || {};
-const NS = window.ColonoscopyTestRequest;
-const {
-  scoreAppropriateness,
-  scoreUrgency,
-  scoreCompleteness,
-  scoreRisk,
-  detectFlags
-} = NS;
 
 /**
  * Derive an overall recommendation for the endoscopy vetting desk from the
@@ -108,9 +98,4 @@ function calculateGrade(data) {
   };
 }
 
-Object.assign(NS, {
-  calculateGrade,
-  deriveRecommendation,
-  RECOMMENDATION_LABELS
-});
-})();
+export { calculateGrade, deriveRecommendation, RECOMMENDATION_LABELS };

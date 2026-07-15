@@ -1,3 +1,8 @@
+import { detectFlaggedIssues } from './flags.js';
+import { calculateEpdsGrade } from './grader.js';
+import { epdsItems, itemByNumber, scoreForOption } from './rules.js';
+import { bandClass, bandLabel, emptyAssessment, priorityLabel } from './types.js';
+
 // Edinburgh Postnatal Depression Scale (EPDS) — self-report wizard
 // (vanilla JavaScript, no build).
 //
@@ -18,20 +23,6 @@
 // Sibling files loaded as plain `<script>` tags (in order) attach their exports
 // to `window.EdinburghPostnatalDepressionScale`. The whole file is wrapped in an
 // IIFE so its top-level identifiers don't leak.
-(function () {
-'use strict';
-
-const NS = window.EdinburghPostnatalDepressionScale;
-const {
-  emptyAssessment,
-  bandLabel,
-  bandClass,
-  priorityLabel,
-  epdsItems,
-  scoreForOption,
-  calculateEpdsGrade,
-  detectFlaggedIssues
-} = NS;
 
 // ----------------------------------------------------------------------
 // Persistence
@@ -423,7 +414,7 @@ function renderStep3() {
     title: 'Items 1 to 4',
     description: 'In the past 7 days… Choose the answer that comes closest to how you have felt.'
   });
-  [1, 2, 3, 4].forEach((n) => card.appendChild(itemField(NS.itemByNumber(n))));
+  [1, 2, 3, 4].forEach((n) => card.appendChild(itemField(itemByNumber(n))));
   return card;
 }
 
@@ -433,7 +424,7 @@ function renderStep4() {
     title: 'Items 5 to 9',
     description: 'In the past 7 days… Choose the answer that comes closest to how you have felt.'
   });
-  [5, 6, 7, 8, 9].forEach((n) => card.appendChild(itemField(NS.itemByNumber(n))));
+  [5, 6, 7, 8, 9].forEach((n) => card.appendChild(itemField(itemByNumber(n))));
   return card;
 }
 
@@ -444,7 +435,7 @@ function renderStep5() {
     description: 'This item asks about thoughts of self-harm. Any answer other than "Never" prompts an immediate safety review, regardless of the total score.'
   });
 
-  card.appendChild(itemField(NS.itemByNumber(10)));
+  card.appendChild(itemField(itemByNumber(10)));
 
   card.appendChild(readOnlyReadout({
     label: 'Item 10 safety check',
@@ -914,4 +905,3 @@ if (document.readyState === 'loading') {
 } else {
   init();
 }
-})();

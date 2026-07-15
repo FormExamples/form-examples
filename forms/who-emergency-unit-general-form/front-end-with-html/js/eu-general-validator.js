@@ -1,3 +1,5 @@
+import { euGeneralRules } from './eu-general-rules.js';
+
 // WHO Emergency Unit Form: General — completeness validator. Pure
 // function: takes an `AssessmentData` object, returns a
 // `ValidationResult` with per-section breakdown and the list of fired
@@ -5,11 +7,6 @@
 // so conditional sections (ambulance level, deficit description, admit
 // ward, transfer destination, cause of death) do not produce false
 // missing-field reports.
-
-(function () {
-'use strict';
-window.WhoEmergencyUnitGeneralForm = window.WhoEmergencyUnitGeneralForm || {};
-const { euGeneralRules } = window.WhoEmergencyUnitGeneralForm;
 
 function validateEuGeneral(data) {
   const sectionMap = new Map();
@@ -72,5 +69,4 @@ function validateEuGeneral(data) {
   };
 }
 
-window.WhoEmergencyUnitGeneralForm.validateEuGeneral = validateEuGeneral;
-})();
+export { validateEuGeneral };

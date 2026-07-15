@@ -1,3 +1,5 @@
+import { hasAnyStatusFlag, hasText } from './types.js';
+
 // Detects clinically significant issues in a WHO Counter-Referral Form
 // submission. These are independent of pure completeness — for example, the
 // patient may have an urgent follow-up timeframe (which still requires the
@@ -13,11 +15,6 @@
  */
 
 // Wrapped in an IIFE; published via window.WhoCounterReferralForm.
-(function () {
-'use strict';
-window.WhoCounterReferralForm = window.WhoCounterReferralForm || {};
-
-const { hasText, hasAnyStatusFlag } = window.WhoCounterReferralForm;
 
 /**
  * @param {AssessmentData} data
@@ -209,5 +206,4 @@ function detectFlaggedIssues(data) {
   return flags;
 }
 
-window.WhoCounterReferralForm.detectFlaggedIssues = detectFlaggedIssues;
-})();
+export { detectFlaggedIssues };

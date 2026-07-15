@@ -1,3 +1,8 @@
+import { detectFlaggedIssues } from './flags.js';
+import { gradePews } from './grader.js';
+import { AGE_BAND_TABLE } from './rules.js';
+import { ageBandLabel, capillaryRefillLabel, consciousnessLabel, emptyAssessment, escalationBandClass, escalationBandLabel, priorityLabel, respiratoryEffortLabel, supplementalOxygenLabel, yesNoLabel } from './types.js';
+
 // Paediatric Early Warning Score (PEWS) — bedside wizard
 // (vanilla JavaScript, no build).
 //
@@ -17,25 +22,6 @@
 // to `window.PaediatricEarlyWarningScore`. Pulling them off here keeps the rest
 // of this file referring to short local names. The whole file is wrapped in an
 // IIFE so its top-level identifiers don't leak.
-(function () {
-'use strict';
-
-const NS = window.PaediatricEarlyWarningScore;
-const {
-  emptyAssessment,
-  escalationBandLabel,
-  escalationBandClass,
-  ageBandLabel,
-  priorityLabel,
-  consciousnessLabel,
-  respiratoryEffortLabel,
-  supplementalOxygenLabel,
-  capillaryRefillLabel,
-  yesNoLabel,
-  AGE_BAND_TABLE,
-  gradePews,
-  detectFlaggedIssues
-} = NS;
 
 // ----------------------------------------------------------------------
 // Persistence
@@ -1078,4 +1064,3 @@ if (document.readyState === 'loading') {
 } else {
   init();
 }
-})();

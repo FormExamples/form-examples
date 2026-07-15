@@ -158,9 +158,6 @@
 // classic <script> (no ES modules) so the page can be opened directly via
 // `file://`. The IIFE attaches its public symbols to a single global
 // namespace, `window.UrologyAssessment`.
-(function () {
-'use strict';
-window.UrologyAssessment = window.UrologyAssessment || {};
 
 /**
  * Build a fresh, fully-blank assessment.
@@ -306,12 +303,4 @@ function qolLabel(score) {
   }
 }
 
-Object.assign(window.UrologyAssessment, {
-  emptyAssessment,
-  calculateAge,
-  ipssCategory,
-  ipssCategoryClass,
-  ipssCategoryKey,
-  qolLabel
-});
-})();
+export { emptyAssessment, calculateAge, ipssCategory, ipssCategoryClass, ipssCategoryKey, qolLabel };

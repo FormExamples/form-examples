@@ -4,8 +4,7 @@
  * JSDoc typedefs only; the runtime stores plain objects.
  */
 
-(function (root) {
-  const Fp92aForm = root.Fp92aForm || (root.Fp92aForm = {});
+  
 
   /**
    * @typedef {(
@@ -22,7 +21,7 @@
    * )} EligibleConditionCode
    */
 
-  Fp92aForm.ELIGIBLE_CONDITION_CODES = [
+  export const ELIGIBLE_CONDITION_CODES = [
     "permanent-fistula",
     "hypoadrenalism",
     "diabetes-insipidus-or-hypopituitarism",
@@ -35,7 +34,7 @@
     "cancer-or-effects",
   ];
 
-  Fp92aForm.ELIGIBLE_CONDITION_LABELS = {
+  export const ELIGIBLE_CONDITION_LABELS = {
     "permanent-fistula": "Permanent fistula",
     "hypoadrenalism": "Hypoadrenalism (e.g. Addison's)",
     "diabetes-insipidus-or-hypopituitarism": "Diabetes insipidus / hypopituitarism",
@@ -48,9 +47,9 @@
     "cancer-or-effects": "Cancer or effects of cancer",
   };
 
-  Fp92aForm.TOTAL_STEPS = 10;
+  export const TOTAL_STEPS = 10;
 
-  Fp92aForm.STEP_TITLES = [
+  export const STEP_TITLES = [
     "Practitioner identification",
     "Patient identification",
     "Existing exemption check",
@@ -62,4 +61,3 @@
     "Practitioner declaration",
     "Summary & eligibility result",
   ];
-})(window);

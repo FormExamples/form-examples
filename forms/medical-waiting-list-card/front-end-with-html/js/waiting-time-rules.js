@@ -1,17 +1,18 @@
-(function (root) {
-  const ns = (root.MedicalWaitingListCard = root.MedicalWaitingListCard || {});
+import { APPROACHING_BREACH_WINDOW_WEEKS, LONG_WAIT_WEEKS, RTT_BREACH_WEEKS, daysBetween, targetWaitWeeks, weeksBetween } from './priority-targets.js';
 
-  ns.calculateWaitingTime = function calculateWaitingTime(card, todayIso) {
-    const APPROACHING_DAYS = ns.APPROACHING_BREACH_WINDOW_WEEKS * 7;
+  
+
+  export const calculateWaitingTime = function calculateWaitingTime(card, todayIso) {
+    const APPROACHING_DAYS = APPROACHING_BREACH_WINDOW_WEEKS * 7;
     const clockStart = card.waitingList.rttClockStartDate;
     const priority = card.waitingList.clinicalPriority;
-    const target = ns.targetWaitWeeks(priority);
+    const target = targetWaitWeeks(priority);
 
-    const daysWaited = ns.daysBetween(clockStart, todayIso);
-    const weeksWaited = ns.weeksBetween(clockStart, todayIso);
+    const daysWaited = daysBetween(clockStart, todayIso);
+    const weeksWaited = weeksBetween(clockStart, todayIso);
     const daysToTarget =
       target !== null && daysWaited !== null ? Math.round(target * 7) - daysWaited : null;
-    const daysToBreach = daysWaited !== null ? ns.RTT_BREACH_WEEKS * 7 - daysWaited : null;
+    const daysToBreach = daysWaited !== null ? RTT_BREACH_WEEKS * 7 - daysWaited : null;
 
     const firedRules = [];
 
@@ -46,14 +47,14 @@
       };
     }
 
-    if (daysWaited !== null && daysWaited > ns.LONG_WAIT_WEEKS * 7) {
+    if (daysWaited !== null && daysWaited > LONG_WAIT_WEEKS * 7) {
       firedRules.push({
         ruleId: 'R-LW-52WK-001',
         instrument: 'long-wait',
         band: 'long-wait',
         category: 'long-waiter',
         description:
-          'Patient has waited more than ' + ns.LONG_WAIT_WEEKS + ' weeks since the RTT clock-start date.'
+          'Patient has waited more than ' + LONG_WAIT_WEEKS + ' weeks since the RTT clock-start date.'
       });
       return {
         band: 'long-wait',
@@ -86,7 +87,7 @@
           band: 'breached',
           category: 'rtt-18-week',
           description:
-            'Patient has breached the ' + ns.RTT_BREACH_WEEKS + '-week NHS RTT standard.'
+            'Patient has breached the ' + RTT_BREACH_WEEKS + '-week NHS RTT standard.'
         });
       }
       return {
@@ -111,7 +112,7 @@
         category: 'approaching-target',
         description:
           'Patient is within ' +
-          ns.APPROACHING_BREACH_WINDOW_WEEKS +
+          APPROACHING_BREACH_WINDOW_WEEKS +
           ' weeks of their ' +
           priority +
           ' target or the 18-week RTT standard.'
@@ -146,4 +147,3 @@
       firedRules: firedRules
     };
   };
-})(window);

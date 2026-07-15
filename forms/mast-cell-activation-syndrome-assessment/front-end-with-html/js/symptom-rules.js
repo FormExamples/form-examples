@@ -9,10 +9,6 @@
  */
 
 // Wrapped in an IIFE; published via window.MastCellActivationSyndromeAssessment.
-(function () {
-'use strict';
-window.MastCellActivationSyndromeAssessment =
-  window.MastCellActivationSyndromeAssessment || {};
 
 /** @type {SymptomDomainDefinition[]} */
 const symptomDomains = [
@@ -70,9 +66,4 @@ const frequencyOptions = [
   { value: 'daily', label: 'Daily' }
 ];
 
-Object.assign(window.MastCellActivationSyndromeAssessment, {
-  symptomDomains,
-  severityOptions,
-  frequencyOptions
-});
-})();
+export { symptomDomains, severityOptions, frequencyOptions };

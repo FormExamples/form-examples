@@ -10,9 +10,6 @@
  */
 
 // Wrapped in an IIFE; published via window.NutritionAssessment.
-(function () {
-'use strict';
-window.NutritionAssessment = window.NutritionAssessment || {};
 
 /**
  * @param {AssessmentData} data
@@ -279,5 +276,4 @@ function detectAdditionalFlags(data) {
   return flags;
 }
 
-window.NutritionAssessment.detectAdditionalFlags = detectAdditionalFlags;
-})();
+export { detectAdditionalFlags };

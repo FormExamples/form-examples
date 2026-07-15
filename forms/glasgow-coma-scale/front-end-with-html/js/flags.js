@@ -20,9 +20,6 @@
  */
 
 // Wrapped in an IIFE; published via window.GlasgowComaScale.
-(function () {
-'use strict';
-window.GlasgowComaScale = window.GlasgowComaScale || {};
 
 /**
  * @param {AssessmentData} data
@@ -134,5 +131,4 @@ function detectFlaggedIssues(data, grade) {
   return flags;
 }
 
-window.GlasgowComaScale.detectFlaggedIssues = detectFlaggedIssues;
-})();
+export { detectFlaggedIssues };

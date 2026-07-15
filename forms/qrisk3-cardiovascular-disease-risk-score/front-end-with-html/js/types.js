@@ -139,10 +139,6 @@
 // <script> (no ES modules) so the page can be opened directly via `file://`.
 // The IIFE attaches its public symbols to a single global namespace,
 // `window.Qrisk3CardiovascularDiseaseRiskScore`.
-(function () {
-'use strict';
-window.Qrisk3CardiovascularDiseaseRiskScore =
-  window.Qrisk3CardiovascularDiseaseRiskScore || {};
 
 /**
  * Build a fresh, fully-blank assessment.
@@ -310,17 +306,4 @@ function priorityLabel(priority) {
   }
 }
 
-Object.assign(window.Qrisk3CardiovascularDiseaseRiskScore, {
-  emptyAssessment,
-  riskBandLabel,
-  riskBandClass,
-  clinicianRoleLabel,
-  careSettingLabel,
-  sexLabel,
-  ethnicityLabel,
-  smokingLabel,
-  diabetesLabel,
-  ckdStageLabel,
-  priorityLabel
-});
-})();
+export { emptyAssessment, riskBandLabel, riskBandClass, clinicianRoleLabel, careSettingLabel, sexLabel, ethnicityLabel, smokingLabel, diabetesLabel, ckdStageLabel, priorityLabel };

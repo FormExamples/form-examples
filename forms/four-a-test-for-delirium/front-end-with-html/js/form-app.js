@@ -1,3 +1,7 @@
+import { detectFlaggedIssues } from './flags.js';
+import { calculateFourATGrade } from './grader.js';
+import { acuteChangeLabel, acuteChangeSourceLabel, alertnessLabel, amt4Label, attentionLabel, emptyAssessment, interpretationBandClass, interpretationBandLabel, priorityLabel } from './types.js';
+
 // 4AT (4 'A's Test) — rapid delirium and cognitive-impairment screen wizard
 // (vanilla JavaScript, no build).
 //
@@ -13,23 +17,6 @@
 // to `window.FourATestForDelirium`. Pulling them off here keeps the rest of
 // this file referring to short local names. The whole file is wrapped in an
 // IIFE so its top-level identifiers don't leak.
-(function () {
-'use strict';
-
-const NS = window.FourATestForDelirium;
-const {
-  emptyAssessment,
-  interpretationBandLabel,
-  interpretationBandClass,
-  alertnessLabel,
-  amt4Label,
-  attentionLabel,
-  acuteChangeLabel,
-  acuteChangeSourceLabel,
-  priorityLabel,
-  calculateFourATGrade,
-  detectFlaggedIssues
-} = NS;
 
 // ----------------------------------------------------------------------
 // Persistence
@@ -901,4 +888,3 @@ if (document.readyState === 'loading') {
 } else {
   init();
 }
-})();

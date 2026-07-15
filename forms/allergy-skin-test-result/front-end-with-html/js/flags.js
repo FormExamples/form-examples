@@ -1,3 +1,5 @@
+import { hasCriticalFinding } from './rules.js';
+
 // Safety-critical flag detection for the Allergy Skin Test Result.
 //
 // Faithful vanilla-JavaScript port of the SvelteKit engine module
@@ -13,10 +15,6 @@
  */
 
 // Wrapped in an IIFE; published via window.AllergySkinTestResult.
-(function () {
-'use strict';
-window.AllergySkinTestResult = window.AllergySkinTestResult || {};
-const { hasCriticalFinding } = window.AllergySkinTestResult;
 
 /**
  * Detect the safety-critical flags for a report.
@@ -146,7 +144,4 @@ function detectFlags(r) {
   return flags;
 }
 
-Object.assign(window.AllergySkinTestResult, {
-  detectFlags
-});
-})();
+export { detectFlags };

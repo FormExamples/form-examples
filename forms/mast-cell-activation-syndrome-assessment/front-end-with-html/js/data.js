@@ -8,11 +8,6 @@
 // anaphylaxis-risk flag set on the higher-risk patients. NHS numbers are in
 // the canonical "NNN NNN NNNN" display form.
 
-(function () {
-'use strict';
-window.MastCellActivationSyndromeAssessmentDashboard =
-  window.MastCellActivationSyndromeAssessmentDashboard || {};
-
 /** @type {import('./types.js').PatientRow[]} */
 const samplePatients = [
   {
@@ -125,6 +120,4 @@ const samplePatients = [
   }
 ];
 
-window.MastCellActivationSyndromeAssessmentDashboard.samplePatients =
-  samplePatients;
-})();
+export { samplePatients };

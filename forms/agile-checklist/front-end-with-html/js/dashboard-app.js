@@ -1,6 +1,7 @@
-(function () {
-  'use strict';
-  const NS = window.AgileChecklistDashboard;
+import { fetchChecklists } from './api.js';
+import { SAMPLE_CHECKLISTS } from './data.js';
+
+  
   const MATURITIES = ['optimising', 'mature', 'developing', 'initial', 'ad-hoc', 'insufficient-data'];
   const ROLES = [
     'team-member',
@@ -499,7 +500,7 @@
   }
 
   function resetToSample() {
-    state.rows = NS.SAMPLE_CHECKLISTS.slice();
+    state.rows = SAMPLE_CHECKLISTS.slice();
     state.filterMaturity = '';
     state.filterRole = '';
     renderTiles();
@@ -546,7 +547,7 @@
   }
 
   document.addEventListener('DOMContentLoaded', function () {
-    NS.fetchChecklists().then(applyFetchResult);
+    fetchChecklists().then(applyFetchResult);
 
     document.getElementById('filter-maturity').addEventListener('change', function (ev) {
       state.filterMaturity = ev.target.value;
@@ -574,4 +575,3 @@
     const resetBtn = document.getElementById('reset-sample');
     if (resetBtn) resetBtn.addEventListener('click', resetToSample);
   });
-})();

@@ -1,3 +1,7 @@
+import { detectFlaggedIssues } from './flags.js';
+import { calculatePercGrade } from './grader.js';
+import { classificationClass, classificationLabel, criterionStatusLabel, emptyAssessment, pretestProbabilityLabel, priorityLabel } from './types.js';
+
 // Pulmonary Embolism Rule-out Criteria (PERC) — bedside wizard (vanilla
 // JavaScript, no build).
 //
@@ -14,20 +18,6 @@
 // to `window.PulmonaryEmbolismRuleOutCriteria`. Pulling them off here keeps the
 // rest of this file referring to short local names. The whole file is wrapped in
 // an IIFE so its top-level identifiers don't leak.
-(function () {
-'use strict';
-
-const NS = window.PulmonaryEmbolismRuleOutCriteria;
-const {
-  emptyAssessment,
-  classificationLabel,
-  classificationClass,
-  criterionStatusLabel,
-  priorityLabel,
-  pretestProbabilityLabel,
-  calculatePercGrade,
-  detectFlaggedIssues
-} = NS;
 
 // ----------------------------------------------------------------------
 // Persistence
@@ -936,4 +926,3 @@ if (document.readyState === 'loading') {
 } else {
   init();
 }
-})();

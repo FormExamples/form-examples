@@ -11,9 +11,6 @@
  */
 
 // Wrapped in an IIFE; published via window.GastroenterologyAssessment.
-(function () {
-'use strict';
-window.GastroenterologyAssessment = window.GastroenterologyAssessment || {};
 
 /**
  * @param {AssessmentData} data
@@ -204,5 +201,4 @@ function detectAdditionalFlags(data) {
   return flags;
 }
 
-window.GastroenterologyAssessment.detectAdditionalFlags = detectAdditionalFlags;
-})();
+export { detectAdditionalFlags };

@@ -1,3 +1,5 @@
+import { hasCriticalFinding } from './rules.js';
+
 // Safety-critical flag detection for the X-Ray Test Result.
 //
 // Faithful vanilla-JavaScript port of the SvelteKit engine module
@@ -13,10 +15,6 @@
  */
 
 // Wrapped in an IIFE; published via window.XRayTestResult.
-(function () {
-'use strict';
-window.XRayTestResult = window.XRayTestResult || {};
-const { hasCriticalFinding } = window.XRayTestResult;
 
 /**
  * Detect the safety-critical flags for a report.
@@ -137,7 +135,4 @@ function detectFlags(r) {
   return flags;
 }
 
-Object.assign(window.XRayTestResult, {
-  detectFlags
-});
-})();
+export { detectFlags };

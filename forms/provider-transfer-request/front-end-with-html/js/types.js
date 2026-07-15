@@ -180,9 +180,6 @@
 // classic <script> (no ES modules) so the page can be opened directly via
 // `file://`. The IIFE attaches its public symbols to a single global
 // namespace, `window.ProviderTransferRequest`.
-(function () {
-'use strict';
-window.ProviderTransferRequest = window.ProviderTransferRequest || {};
 
 /** @returns {ProviderDetails} */
 function emptyProviderDetails() {
@@ -342,15 +339,4 @@ function completenessLabel(level) {
   }
 }
 
-Object.assign(window.ProviderTransferRequest, {
-  emptyAssessment,
-  emptyProviderDetails,
-  hasText,
-  isYesNoUnknownAnswered,
-  hasNumber,
-  acknowledgementStarted,
-  sectionLabel,
-  priorityLabel,
-  completenessLabel
-});
-})();
+export { emptyAssessment, emptyProviderDetails, hasText, isYesNoUnknownAnswered, hasNumber, acknowledgementStarted, sectionLabel, priorityLabel, completenessLabel };

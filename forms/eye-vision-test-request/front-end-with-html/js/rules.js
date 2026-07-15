@@ -10,12 +10,6 @@
 //
 // Wrapped in an IIFE; published via `window.EyeVisionTestRequest`.
 
-(function () {
-'use strict';
-window.EyeVisionTestRequest =
-  window.EyeVisionTestRequest || {};
-const NS = window.EyeVisionTestRequest;
-
 // ----------------------------------------------------------------------
 // Axis A — Appropriateness (RCOphth / NICE indication match, 1-9 ordinal)
 // ----------------------------------------------------------------------
@@ -329,15 +323,4 @@ function scorePriority(data) {
   return { band, points, firedRules };
 }
 
-Object.assign(NS, {
-  scoreAppropriateness,
-  appropriatenessBand,
-  scoreTriage,
-  scoreCompleteness,
-  scorePriority,
-  maxTier,
-  TRIAGE_ORDER,
-  TARGET_TIMEFRAMES,
-  INDICATION_TEST_MAP
-});
-})();
+export { scoreAppropriateness, appropriatenessBand, scoreTriage, scoreCompleteness, scorePriority, maxTier, TRIAGE_ORDER, TARGET_TIMEFRAMES, INDICATION_TEST_MAP };

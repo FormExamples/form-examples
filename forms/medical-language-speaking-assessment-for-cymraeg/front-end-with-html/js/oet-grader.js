@@ -1,3 +1,5 @@
+import { criterionRegistry } from './rules.js';
+
 // Clinical Welsh-language (Cymraeg) speaking assessment grader.
 //
 // Pure function: takes an `AssessmentData` object, returns the linguistic
@@ -31,13 +33,6 @@
  * @typedef {import('./types.js').CriterionScore} CriterionScore
  * @typedef {import('./types.js').GradingResult} GradingResult
  */
-
-(function () {
-'use strict';
-window.MedicalLanguageSpeakingAssessmentForCymraeg =
-  window.MedicalLanguageSpeakingAssessmentForCymraeg || {};
-const NS = window.MedicalLanguageSpeakingAssessmentForCymraeg;
-const { criterionRegistry } = NS;
 
 /**
  * Map a 0-500 scaled score to a grade.
@@ -158,8 +153,4 @@ function gradeOET(data) {
   };
 }
 
-Object.assign(NS, {
-  classifyScaledScore,
-  gradeOET
-});
-})();
+export { classifyScaledScore, gradeOET };

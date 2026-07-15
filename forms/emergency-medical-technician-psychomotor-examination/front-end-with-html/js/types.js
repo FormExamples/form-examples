@@ -141,10 +141,6 @@
 // (no ES modules) so the page can be opened directly via `file://`.
 // Public symbols are attached to the global namespace
 // `window.EmergencyMedicalTechnicianPsychomotorExamination`.
-(function () {
-'use strict';
-window.EmergencyMedicalTechnicianPsychomotorExamination =
-  window.EmergencyMedicalTechnicianPsychomotorExamination || {};
 
 /** Build a fresh, fully-blank assessment.
  *  Strings default to ''; numeric fields default to null.
@@ -294,13 +290,4 @@ const CRITICAL_RULE_IDS = [
 // Pass threshold is 80% of maxPoints AND no critical failures.
 const PASS_PERCENT_THRESHOLD = 80;
 
-Object.assign(window.EmergencyMedicalTechnicianPsychomotorExamination, {
-  emptyAssessment,
-  outcomeLabel,
-  outcomeClass,
-  triStateLabel,
-  triStatePillClass,
-  CRITICAL_RULE_IDS,
-  PASS_PERCENT_THRESHOLD
-});
-})();
+export { emptyAssessment, outcomeLabel, outcomeClass, triStateLabel, triStatePillClass, CRITICAL_RULE_IDS, PASS_PERCENT_THRESHOLD };

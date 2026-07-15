@@ -1,3 +1,5 @@
+import { EPWORTH_ABNORMAL as EPWORTH_ABNORMAL$imported, EPWORTH_SEVERE as EPWORTH_SEVERE$imported } from './rules.js';
+
 // Safety-flag detection for the Sleep Study Test Request engine.
 //
 // Pure function returning safety flags using the grade_flag categories from
@@ -9,14 +11,8 @@
 // Flag IDs are stable and identical across every front-end and the back-end.
 // Wrapped in an IIFE; published via `window.SleepStudyTestRequest`.
 
-(function () {
-'use strict';
-window.SleepStudyTestRequest =
-  window.SleepStudyTestRequest || {};
-const NS = window.SleepStudyTestRequest;
-
-const EPWORTH_ABNORMAL = NS.EPWORTH_ABNORMAL || 11;
-const EPWORTH_SEVERE = NS.EPWORTH_SEVERE || 16;
+const EPWORTH_ABNORMAL = EPWORTH_ABNORMAL$imported || 11;
+const EPWORTH_SEVERE = EPWORTH_SEVERE$imported || 16;
 
 function epworthValue(d) {
   const v = d.scores.epworthScore;
@@ -104,5 +100,4 @@ function detectFlags(data) {
   return flags;
 }
 
-Object.assign(NS, { detectFlags });
-})();
+export { detectFlags };

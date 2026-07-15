@@ -1,10 +1,8 @@
+import { calculateAuditScore, calculateDastScore } from './utils.js';
+
 // Detect additional flags that should be highlighted for the clinician,
 // independent of AUDIT/DAST scoring. These are safety-critical alerts.
 // Mirrors `src/lib/engine/flagged-issues.ts` from the SvelteKit reference.
-(function () {
-'use strict';
-const NS = window.SubstanceAbuseAssessment;
-const { calculateAuditScore, calculateDastScore } = NS;
 
 function detectAdditionalFlags(data) {
   const flags = [];
@@ -185,5 +183,4 @@ function detectAdditionalFlags(data) {
   return flags;
 }
 
-Object.assign(NS, { detectAdditionalFlags });
-})();
+export { detectAdditionalFlags };

@@ -19,9 +19,6 @@
  */
 
 // Wrapped in an IIFE; published via window.MriScanTestResult.
-(function () {
-'use strict';
-window.MriScanTestResult = window.MriScanTestResult || {};
 
 // ----------------------------------------------------------------------
 // Structured-findings predicates (mirror `utils.ts`)
@@ -454,13 +451,4 @@ function gradeFollowUp(r, classification, severity) {
   };
 }
 
-Object.assign(window.MriScanTestResult, {
-  hasCriticalFinding,
-  hasAnyAbnormalFinding,
-  hasOnlyIncidentalFinding,
-  classifyResult,
-  gradeSeverity,
-  gradeCompleteness,
-  gradeFollowUp
-});
-})();
+export { hasCriticalFinding, hasAnyAbnormalFinding, hasOnlyIncidentalFinding, classifyResult, gradeSeverity, gradeCompleteness, gradeFollowUp };

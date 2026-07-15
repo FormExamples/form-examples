@@ -5,12 +5,6 @@
 // High-risk (the canonical scoring table); a declared retained item is
 // handled in `never-event-rules.js` and pushes the grade to Critical.
 
-(function () {
-'use strict';
-window.MedicalOperationNote =
-  window.MedicalOperationNote || {};
-const NS = window.MedicalOperationNote;
-
 const COUNT_CHECKS = [
   {
     id: 'swab',
@@ -74,9 +68,4 @@ function applyCountRules(data) {
   return fired;
 }
 
-Object.assign(NS, {
-  COUNT_CHECKS,
-  countsAgreed,
-  applyCountRules
-});
-})();
+export { COUNT_CHECKS, countsAgreed, applyCountRules };

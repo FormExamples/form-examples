@@ -36,9 +36,6 @@
 // classic <script> (no ES modules) so the page can be opened directly via
 // `file://`. The IIFE attaches its public symbols to a single global
 // namespace, `window.AnesthesiologyAssessment`.
-(function () {
-'use strict';
-window.AnesthesiologyAssessment = window.AnesthesiologyAssessment || {};
 
 /**
  * Build a fresh, fully-blank assessment.
@@ -281,13 +278,4 @@ function worstRisk(a, b) {
   return order[a] >= order[b] ? a : b;
 }
 
-Object.assign(window.AnesthesiologyAssessment, {
-  emptyAssessment,
-  calculateBMI,
-  bmiCategory,
-  calculateAge,
-  riskLevelLabel,
-  riskLevelClass,
-  worstRisk
-});
-})();
+export { emptyAssessment, calculateBMI, bmiCategory, calculateAge, riskLevelLabel, riskLevelClass, worstRisk };

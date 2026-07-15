@@ -1,3 +1,6 @@
+import { fetchCertificates } from './api.js';
+import { sampleCertificates } from './data.js';
+
 // Medical Certificate of Cause of Death (MCCD) — certifier / medical-examiner
 // dashboard (vanilla classic-script app).
 //
@@ -14,12 +17,6 @@
 // Sibling modules loaded as plain `<script>` tags (in dependency order) attach
 // their exports to `window.MedicalCertificateOfCauseOfDeathDashboard`. The whole
 // file is wrapped in an IIFE so its top-level identifiers do not leak.
-(function () {
-'use strict';
-const {
-  fetchCertificates,
-  sampleCertificates
-} = window.MedicalCertificateOfCauseOfDeathDashboard;
 
 // ----------------------------------------------------------------------
 // State
@@ -344,4 +341,3 @@ if (document.readyState === 'loading') {
 } else {
   init();
 }
-})();

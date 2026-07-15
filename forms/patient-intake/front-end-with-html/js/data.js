@@ -6,10 +6,6 @@
 // allergy comorbidities flagged for a subset; NHS numbers in the canonical
 // "NNN NNN NNNN" display form.
 
-(function () {
-'use strict';
-window.PatientIntakeDashboard = window.PatientIntakeDashboard || {};
-
 /** @type {import('./types.js').PatientRow[]} */
 const samplePatients = [
   {
@@ -110,5 +106,4 @@ const samplePatients = [
   }
 ];
 
-window.PatientIntakeDashboard.samplePatients = samplePatients;
-})();
+export { samplePatients };

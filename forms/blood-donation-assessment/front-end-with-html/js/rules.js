@@ -1,3 +1,5 @@
+import { calculateAgeYears } from './types.js';
+
 // JPAC Donor Selection Guidelines (DSG) deferral rules.
 //
 // Each rule inspects an `AssessmentData` and, if a deferral criterion is
@@ -28,10 +30,6 @@
  */
 
 // Wrapped in an IIFE; published via window.BloodDonationAssessment.
-(function () {
-'use strict';
-window.BloodDonationAssessment = window.BloodDonationAssessment || {};
-const { calculateAgeYears } = window.BloodDonationAssessment;
 
 /** @param {string} id @param {string} category @param {string} description @param {string} window */
 function temp(id, category, description, window) {
@@ -600,5 +598,4 @@ const dsgRules = [
   }
 ];
 
-window.BloodDonationAssessment.dsgRules = dsgRules;
-})();
+export { dsgRules };

@@ -10,9 +10,6 @@
  */
 
 // Wrapped in an IIFE; published via window.InternationalPatientSummary.
-(function () {
-'use strict';
-window.InternationalPatientSummary = window.InternationalPatientSummary || {};
 
 /**
  * @param {AssessmentData} data
@@ -238,5 +235,4 @@ function detectAdditionalFlags(data) {
   return flags;
 }
 
-window.InternationalPatientSummary.detectAdditionalFlags = detectAdditionalFlags;
-})();
+export { detectAdditionalFlags };

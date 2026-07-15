@@ -22,10 +22,6 @@
  */
 
 // Wrapped in an IIFE; published via window.LearningDisabilityAnnualHealthCheck.
-(function () {
-'use strict';
-window.LearningDisabilityAnnualHealthCheck =
-  window.LearningDisabilityAnnualHealthCheck || {};
 
 /**
  * Detect the clinical flags raised by the annual-health-check findings.
@@ -182,5 +178,4 @@ function detectFlaggedIssues(data, grade) {
   return flags;
 }
 
-window.LearningDisabilityAnnualHealthCheck.detectFlaggedIssues = detectFlaggedIssues;
-})();
+export { detectFlaggedIssues };

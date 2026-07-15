@@ -6,11 +6,6 @@
 // with established-CVD comorbidity flagged for a subset; NHS numbers in the
 // canonical "NNN NNN NNNN" display form.
 
-(function () {
-'use strict';
-window.SystematicCoronaryRiskEvaluation2DiabetesDashboard =
-  window.SystematicCoronaryRiskEvaluation2DiabetesDashboard || {};
-
 /** @type {import('./types.js').PatientRow[]} */
 const samplePatients = [
   {
@@ -159,6 +154,4 @@ const samplePatients = [
   }
 ];
 
-window.SystematicCoronaryRiskEvaluation2DiabetesDashboard.samplePatients =
-  samplePatients;
-})();
+export { samplePatients };

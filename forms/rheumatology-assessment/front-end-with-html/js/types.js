@@ -185,9 +185,6 @@
 // classic <script> (no ES modules) so the page can be opened directly via
 // `file://`. The IIFE attaches its public symbols to a single global
 // namespace, `window.RheumatologyAssessment`.
-(function () {
-'use strict';
-window.RheumatologyAssessment = window.RheumatologyAssessment || {};
 
 /**
  * Build a fresh, fully-blank assessment.
@@ -352,12 +349,4 @@ function diseaseActivityClass(activity) {
   }
 }
 
-Object.assign(window.RheumatologyAssessment, {
-  emptyAssessment,
-  calculateBMI,
-  bmiCategory,
-  classifyDiseaseActivity,
-  diseaseActivityLabel,
-  diseaseActivityClass
-});
-})();
+export { emptyAssessment, calculateBMI, bmiCategory, classifyDiseaseActivity, diseaseActivityLabel, diseaseActivityClass };

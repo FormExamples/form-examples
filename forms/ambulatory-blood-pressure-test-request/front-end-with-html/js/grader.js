@@ -1,3 +1,6 @@
+import { detectFlags } from './flags.js';
+import { scoreAppropriateness, scoreCompleteness, scoreSuitability, scoreTriage } from './rules.js';
+
 // Four-axis grader for the Ambulatory Blood Pressure Test Request.
 //
 // Composes the rule sets in rules.js and the safety flags in flags.js into a
@@ -7,19 +10,6 @@
 //
 // Wrapped in an IIFE; published via
 // `window.AmbulatoryBloodPressureTestRequest`.
-
-(function () {
-'use strict';
-window.AmbulatoryBloodPressureTestRequest =
-  window.AmbulatoryBloodPressureTestRequest || {};
-const NS = window.AmbulatoryBloodPressureTestRequest;
-const {
-  scoreAppropriateness,
-  scoreSuitability,
-  scoreCompleteness,
-  scoreTriage,
-  detectFlags
-} = NS;
 
 /**
  * Derive an overall vetting recommendation from the four axes. The
@@ -98,9 +88,4 @@ function calculateGrade(data) {
   };
 }
 
-Object.assign(NS, {
-  calculateGrade,
-  deriveRecommendation,
-  RECOMMENDATION_LABELS
-});
-})();
+export { calculateGrade, deriveRecommendation, RECOMMENDATION_LABELS };

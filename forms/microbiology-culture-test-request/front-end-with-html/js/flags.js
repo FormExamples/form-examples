@@ -1,3 +1,5 @@
+import { anyTestSelected } from './types.js';
+
 // Safety-flag detection for the Microbiology Culture Test Request engine.
 //
 // Pure function returning safety flags using the grade_flag categories from
@@ -8,13 +10,6 @@
 // Each flag is { flagId, category, priority, description, suggestedAction }.
 // Flag IDs are stable and identical across every front-end and the back-end.
 // Wrapped in an IIFE; published via `window.MicrobiologyCultureTestRequest`.
-
-(function () {
-'use strict';
-window.MicrobiologyCultureTestRequest =
-  window.MicrobiologyCultureTestRequest || {};
-const NS = window.MicrobiologyCultureTestRequest;
-const { anyTestSelected } = NS;
 
 /**
  * Detect safety flags for a microbiology culture request.
@@ -97,5 +92,4 @@ function detectFlags(data) {
   return flags;
 }
 
-Object.assign(NS, { detectFlags });
-})();
+export { detectFlags };

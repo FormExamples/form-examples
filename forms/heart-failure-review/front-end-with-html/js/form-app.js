@@ -1,3 +1,6 @@
+import { gradeReview } from './grader.js';
+import { emptyReview, functionalStatusClass, functionalStatusLabel, optimisationStatusClass, optimisationStatusLabel, pillarStatusLabel, priorityLabel, reviewStatusClass, reviewStatusLabel } from './types.js';
+
 // Heart Failure Annual Review — single-page wizard (vanilla JavaScript, no
 // build).
 //
@@ -15,22 +18,6 @@
 // to `window.HeartFailureReview`. Pulling them off here keeps the rest of this
 // file referring to short local names. The whole file is wrapped in an IIFE so
 // its top-level identifiers don't leak.
-(function () {
-'use strict';
-
-const NS = window.HeartFailureReview;
-const {
-  emptyReview,
-  functionalStatusLabel,
-  functionalStatusClass,
-  optimisationStatusLabel,
-  optimisationStatusClass,
-  reviewStatusLabel,
-  reviewStatusClass,
-  pillarStatusLabel,
-  priorityLabel,
-  gradeReview
-} = NS;
 
 // ----------------------------------------------------------------------
 // Persistence
@@ -1060,4 +1047,3 @@ if (document.readyState === 'loading') {
 } else {
   init();
 }
-})();

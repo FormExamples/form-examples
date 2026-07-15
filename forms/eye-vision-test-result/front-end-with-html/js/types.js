@@ -149,9 +149,6 @@
 // classic <script> (no ES modules) so the page can be opened directly via
 // `file://`. The IIFE attaches its public symbols to a single global
 // namespace, `window.EyeVisionTestResult`.
-(function () {
-'use strict';
-window.EyeVisionTestResult = window.EyeVisionTestResult || {};
 
 /**
  * Build a fresh, fully-blank eye vision test result.
@@ -353,19 +350,4 @@ function followUpUrgencyClass(value) {
   }
 }
 
-Object.assign(window.EyeVisionTestResult, {
-  emptyResult,
-  resultClassificationLabel,
-  abnormalitySeverityLabel,
-  followUpUrgencyLabel,
-  testTypeLabel,
-  reportStatusLabel,
-  visualFieldResultLabel,
-  retinopathyGradeLabel,
-  recommendationLabel,
-  priorityLabel,
-  resultClassificationClass,
-  abnormalitySeverityClass,
-  followUpUrgencyClass
-});
-})();
+export { emptyResult, resultClassificationLabel, abnormalitySeverityLabel, followUpUrgencyLabel, testTypeLabel, reportStatusLabel, visualFieldResultLabel, retinopathyGradeLabel, recommendationLabel, priorityLabel, resultClassificationClass, abnormalitySeverityClass, followUpUrgencyClass };

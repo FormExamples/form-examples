@@ -31,9 +31,6 @@
  */
 
 // Wrapped in an IIFE; published via window.BreastScreening.
-(function () {
-'use strict';
-window.BreastScreening = window.BreastScreening || {};
 
 /**
  * Eligibility gate. Pure; order matters (first match wins).
@@ -137,8 +134,4 @@ const outcomeRules = [
   }
 ];
 
-Object.assign(window.BreastScreening, {
-  deriveEligibility,
-  outcomeRules
-});
-})();
+export { deriveEligibility, outcomeRules };

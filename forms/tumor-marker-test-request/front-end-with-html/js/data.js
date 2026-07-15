@@ -8,11 +8,6 @@
 // request, a two-week-wait suspected-malignancy case, an inappropriate-
 // screening case, and a no-marker-selected case.
 
-(function () {
-'use strict';
-window.TumorMarkerTestRequestDashboard =
-  window.TumorMarkerTestRequestDashboard || {};
-
 /** @type {import('./types.js').RequestRow[]} */
 const sampleRequests = [
   {
@@ -157,5 +152,4 @@ const sampleRequests = [
   }
 ];
 
-window.TumorMarkerTestRequestDashboard.sampleRequests = sampleRequests;
-})();
+export { sampleRequests };

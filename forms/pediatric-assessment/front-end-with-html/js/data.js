@@ -6,10 +6,6 @@
 // status, and immunization status; NHS numbers in the canonical
 // "NNN NNN NNNN" display form.
 
-(function () {
-'use strict';
-window.PediatricAssessmentDashboard = window.PediatricAssessmentDashboard || {};
-
 /** @type {import('./types.js').PatientRow[]} */
 const samplePatients = [
   {
@@ -122,5 +118,4 @@ const samplePatients = [
   }
 ];
 
-window.PediatricAssessmentDashboard.samplePatients = samplePatients;
-})();
+export { samplePatients };

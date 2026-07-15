@@ -1,3 +1,6 @@
+import { absoluteContraindications, bmiThresholds, relativeContraindications } from './eligibility-rules.js';
+import { bmiCategory, calculateBMI } from './types.js';
+
 // Semaglutide eligibility grader. Pure functions: take an `AssessmentData`
 // object, return the eligibility status (Eligible / Conditional / Ineligible),
 // the BMI and category, and the lists of fired absolute and relative
@@ -18,17 +21,6 @@
  */
 
 // Wrapped in an IIFE; published via window.SemaglutideAssessment.
-(function () {
-'use strict';
-window.SemaglutideAssessment = window.SemaglutideAssessment || {};
-const NS = window.SemaglutideAssessment;
-const {
-  absoluteContraindications,
-  relativeContraindications,
-  bmiThresholds,
-  calculateBMI,
-  bmiCategory
-} = NS;
 
 /**
  * Pure function: evaluates eligibility for semaglutide therapy.
@@ -134,7 +126,4 @@ function evaluateEligibility(data) {
   };
 }
 
-Object.assign(window.SemaglutideAssessment, {
-  evaluateEligibility
-});
-})();
+export { evaluateEligibility };

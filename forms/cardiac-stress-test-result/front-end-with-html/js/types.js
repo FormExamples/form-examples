@@ -145,9 +145,6 @@
 // classic <script> (no ES modules) so the page can be opened directly via
 // `file://`. The IIFE attaches its public symbols to a single global
 // namespace, `window.CardiacStressTestResult`.
-(function () {
-'use strict';
-window.CardiacStressTestResult = window.CardiacStressTestResult || {};
 
 /**
  * Build a fresh, fully-blank cardiac stress test result.
@@ -338,18 +335,4 @@ function followUpUrgencyClass(value) {
   }
 }
 
-Object.assign(window.CardiacStressTestResult, {
-  emptyResult,
-  resultClassificationLabel,
-  abnormalitySeverityLabel,
-  followUpUrgencyLabel,
-  testTypeLabel,
-  bloodPressureResponseLabel,
-  reportStatusLabel,
-  recommendationLabel,
-  priorityLabel,
-  resultClassificationClass,
-  abnormalitySeverityClass,
-  followUpUrgencyClass
-});
-})();
+export { emptyResult, resultClassificationLabel, abnormalitySeverityLabel, followUpUrgencyLabel, testTypeLabel, bloodPressureResponseLabel, reportStatusLabel, recommendationLabel, priorityLabel, resultClassificationClass, abnormalitySeverityClass, followUpUrgencyClass };

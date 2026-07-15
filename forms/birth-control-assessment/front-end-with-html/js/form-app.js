@@ -1,3 +1,7 @@
+import { detectAdditionalFlags } from './flagged-issues.js';
+import { calculateMECGrade } from './mec-grader.js';
+import { bmiCategory, calculateAge, calculateBMI, emptyAssessment, mecCategoryClass, mecCategoryLabel, mecCategoryShort, methodDisplayName, riskLevelClass, riskLevelLabel } from './types.js';
+
 // Birth Control Assessment - patient wizard (vanilla JavaScript, no build).
 //
 // Single-page continuous wizard: every section is rendered into the page in
@@ -9,24 +13,6 @@
 // Sibling files loaded as plain `<script>` tags (in order) attach their
 // exports to `window.BirthControlAssessment`. The whole file is wrapped in
 // an IIFE so its top-level identifiers don't leak to the global scope.
-(function () {
-'use strict';
-
-const NS = window.BirthControlAssessment;
-const {
-  emptyAssessment,
-  calculateBMI,
-  bmiCategory,
-  calculateAge,
-  calculateMECGrade,
-  detectAdditionalFlags,
-  mecCategoryLabel,
-  mecCategoryShort,
-  mecCategoryClass,
-  riskLevelLabel,
-  riskLevelClass,
-  methodDisplayName
-} = NS;
 
 // ----------------------------------------------------------------------
 // Persistence
@@ -1453,4 +1439,3 @@ if (document.readyState === 'loading') {
 } else {
   init();
 }
-})();

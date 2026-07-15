@@ -1,3 +1,7 @@
+import { detectFlaggedIssues } from './flags.js';
+import { calculateSmrGrade } from './grader.js';
+import { adherenceLabel, anticholinergicBandLabel, burdenBandClass, burdenBandLabel, emptyMedicine, emptyReview, highRiskClassLabel, polypharmacyBandLabel, priorityLabel, reviewStatusClass, reviewStatusLabel } from './types.js';
+
 // Structured Medication Review (SMR) — review wizard (vanilla JavaScript,
 // no build).
 //
@@ -15,25 +19,6 @@
 // Sibling files loaded as plain `<script>` tags (in order) attach their exports
 // to `window.StructuredMedicationReview`. The whole file is wrapped in an IIFE
 // so its top-level identifiers don't leak.
-(function () {
-'use strict';
-
-const NS = window.StructuredMedicationReview;
-const {
-  emptyReview,
-  emptyMedicine,
-  reviewStatusLabel,
-  reviewStatusClass,
-  burdenBandLabel,
-  burdenBandClass,
-  polypharmacyBandLabel,
-  anticholinergicBandLabel,
-  adherenceLabel,
-  highRiskClassLabel,
-  priorityLabel,
-  calculateSmrGrade,
-  detectFlaggedIssues
-} = NS;
 
 // ----------------------------------------------------------------------
 // Persistence
@@ -1160,4 +1145,3 @@ if (document.readyState === 'loading') {
 } else {
   init();
 }
-})();

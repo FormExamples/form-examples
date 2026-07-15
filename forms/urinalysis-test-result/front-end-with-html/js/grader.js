@@ -1,3 +1,6 @@
+import { detectFlags } from './flags.js';
+import { classifyResult, gradeCompleteness, gradeFollowUp, gradeSeverity } from './rules.js';
+
 // Urinalysis Test Result grader. Faithful vanilla-JavaScript port of the
 // SvelteKit engine module `src/lib/engine/grader.ts`.
 //
@@ -26,16 +29,6 @@
 // Wrapped in an IIFE; published via window.UrinalysisTestResult.
 // Depends on rules.js (the four axis functions) and flags.js (detectFlags),
 // so it must load after both.
-(function () {
-'use strict';
-window.UrinalysisTestResult = window.UrinalysisTestResult || {};
-const {
-  classifyResult,
-  gradeSeverity,
-  gradeCompleteness,
-  gradeFollowUp,
-  detectFlags
-} = window.UrinalysisTestResult;
 
 /**
  * Compute the full four-axis interpretation grade for a report.
@@ -102,8 +95,4 @@ function deriveRecommendation(classification, severity, urgency) {
   return 'routine-follow-up';
 }
 
-Object.assign(window.UrinalysisTestResult, {
-  calculateGrade,
-  deriveRecommendation
-});
-})();
+export { calculateGrade, deriveRecommendation };

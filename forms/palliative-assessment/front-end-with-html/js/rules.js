@@ -44,9 +44,6 @@
  */
 
 // Wrapped in an IIFE; published via window.PalliativeAssessment.
-(function () {
-'use strict';
-window.PalliativeAssessment = window.PalliativeAssessment || {};
 
 /** @returns {number} 0-10 score or 0 if unanswered. */
 function esasValue(d, key) {
@@ -223,5 +220,4 @@ const rules = [
   }
 ];
 
-window.PalliativeAssessment.rules = rules;
-})();
+export { rules };

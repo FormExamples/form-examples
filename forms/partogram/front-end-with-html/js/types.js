@@ -117,9 +117,6 @@
 // classic <script> (no ES modules) so the page can be opened directly via
 // `file://`. The IIFE attaches its public symbols to a single global
 // namespace, `window.Partogram`.
-(function () {
-'use strict';
-window.Partogram = window.Partogram || {};
 
 /**
  * Build a fresh, fully-blank observation row.
@@ -323,26 +320,4 @@ function priorityLabel(priority) {
   }
 }
 
-Object.assign(window.Partogram, {
-  LIQUOR_STATES,
-  MOULDING_GRADES,
-  DURATION_BANDS,
-  CONTRACTION_STRENGTHS,
-  DIPSTICK_GRADES,
-  emptyObservation,
-  emptyRecord,
-  clinicianRoleLabel,
-  careSettingLabel,
-  ageBandLabel,
-  parityLabel,
-  membranesLabel,
-  durationBandLabel,
-  contractionStrengthLabel,
-  liquorStateLabel,
-  mouldingLabel,
-  dipstickLabel,
-  progressLabel,
-  progressClass,
-  priorityLabel
-});
-})();
+export { LIQUOR_STATES, MOULDING_GRADES, DURATION_BANDS, CONTRACTION_STRENGTHS, DIPSTICK_GRADES, emptyObservation, emptyRecord, clinicianRoleLabel, careSettingLabel, ageBandLabel, parityLabel, membranesLabel, durationBandLabel, contractionStrengthLabel, liquorStateLabel, mouldingLabel, dipstickLabel, progressLabel, progressClass, priorityLabel };

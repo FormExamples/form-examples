@@ -1,3 +1,6 @@
+import { fetchTrainees } from './api.js';
+import { sampleTrainees } from './data.js';
+
 // First Aid Training Checklist - training coordinator dashboard
 // (vanilla classic-script app).
 //
@@ -12,10 +15,6 @@
 // Pulling them off here keeps the rest of this file referring to short
 // local names. The whole file is wrapped in an IIFE so its top-level
 // identifiers do not leak to the global scope.
-(function () {
-'use strict';
-const NS = window.FirstAidTrainingChecklistDashboard;
-const { fetchTrainees, sampleTrainees } = NS;
 
 // ----------------------------------------------------------------------
 // Configuration
@@ -585,4 +584,3 @@ if (document.readyState === 'loading') {
 } else {
   init();
 }
-})();

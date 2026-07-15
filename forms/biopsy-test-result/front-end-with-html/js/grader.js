@@ -1,3 +1,6 @@
+import { detectFlags } from './flags.js';
+import { classifyResult, gradeCompleteness, gradeFollowUp, gradeSeverity } from './rules.js';
+
 // Biopsy four-axis grader. Faithful vanilla-JS port of the tested SvelteKit
 // engine module `grader.ts`.
 //
@@ -26,16 +29,6 @@
  */
 
 // Wrapped in an IIFE; published via window.BiopsyTestResult.
-(function () {
-'use strict';
-window.BiopsyTestResult = window.BiopsyTestResult || {};
-const NS = window.BiopsyTestResult;
-const {
-  classifyResult,
-  gradeSeverity,
-  gradeCompleteness,
-  gradeFollowUp
-} = NS;
 
 /**
  * Derives the overall recommendation from the graded axes.
@@ -87,7 +80,7 @@ function calculateGrade(result) {
 
   // `flags.js` loads after this file (types → rules → grader → flags), so
   // resolve detectFlags at call time rather than at script-load time.
-  const flags = NS.detectFlags(result);
+  const flags = detectFlags(result);
 
   return {
     resultClassification: a.resultClassification,
@@ -104,8 +97,4 @@ function calculateGrade(result) {
   };
 }
 
-Object.assign(window.BiopsyTestResult, {
-  deriveRecommendation,
-  calculateGrade
-});
-})();
+export { deriveRecommendation, calculateGrade };

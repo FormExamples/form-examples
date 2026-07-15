@@ -16,9 +16,6 @@
  */
 
 // Wrapped in an IIFE; published via window.GastroenterologyAssessment.
-(function () {
-'use strict';
-window.GastroenterologyAssessment = window.GastroenterologyAssessment || {};
 
 /** @type {GIScoringRule[]} */
 const giRules = [
@@ -116,5 +113,4 @@ const giRules = [
   { id: 'RF-005', category: 'Red Flags', description: 'Heavy alcohol use',               points: 3, evaluate: (d) => d.redFlagsSocial.alcoholUse            === 'heavy' }
 ];
 
-window.GastroenterologyAssessment.giRules = giRules;
-})();
+export { giRules };

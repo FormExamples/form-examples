@@ -5,10 +5,6 @@
 // Twelve realistic rows: spans every IPSS severity category and referral
 // urgency band; NHS numbers in the canonical "NNN NNN NNNN" display form.
 
-(function () {
-'use strict';
-window.UrologyAssessmentDashboard = window.UrologyAssessmentDashboard || {};
-
 /** @type {import('./types.js').PatientRow[]} */
 const samplePatients = [
   {
@@ -121,5 +117,4 @@ const samplePatients = [
   }
 ];
 
-window.UrologyAssessmentDashboard.samplePatients = samplePatients;
-})();
+export { samplePatients };

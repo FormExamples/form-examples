@@ -6,11 +6,6 @@
 // and unwitnessed statements, includes statements with and without a
 // scheduled review date. NHS numbers in the canonical "NNN NNN NNNN" form.
 
-(function () {
-'use strict';
-window.AdvanceStatementAboutCareDashboard =
-  window.AdvanceStatementAboutCareDashboard || {};
-
 /** @type {import('./types.js').PatientRow[]} */
 const samplePatients = [
   {
@@ -123,5 +118,4 @@ const samplePatients = [
   }
 ];
 
-window.AdvanceStatementAboutCareDashboard.samplePatients = samplePatients;
-})();
+export { samplePatients };

@@ -1,3 +1,7 @@
+import { detectFlags } from './flags.js';
+import { scoreAppropriateness, scoreCompleteness, scorePreanalytical, scoreTriage } from './rules.js';
+import { countSelectedPanels } from './types.js';
+
 // Four-axis grader for the Blood Test Request.
 //
 // Composes the rule sets in rules.js and the safety flags in flags.js into a
@@ -6,18 +10,6 @@
 // across every front-end and the back-end.
 //
 // Wrapped in an IIFE; published via `window.BloodTestRequest`.
-
-(function () {
-'use strict';
-window.BloodTestRequest = window.BloodTestRequest || {};
-const NS = window.BloodTestRequest;
-const {
-  scoreAppropriateness,
-  scorePreanalytical,
-  scoreCompleteness,
-  scoreTriage,
-  detectFlags
-} = NS;
 
 /**
  * Derive an overall recommendation for the laboratory vetting desk from the
@@ -76,7 +68,7 @@ function calculateGrade(data) {
   const triage = scoreTriage(data);
   for (const r of triage.firedRules) firedRules.push(r);
 
-  const testsSelectedCount = NS.countSelectedPanels(data.panels);
+  const testsSelectedCount = countSelectedPanels(data.panels);
 
   const recommendation = deriveRecommendation(
     appr.band,
@@ -107,9 +99,4 @@ function calculateGrade(data) {
   };
 }
 
-Object.assign(NS, {
-  calculateGrade,
-  deriveRecommendation,
-  RECOMMENDATION_LABELS
-});
-})();
+export { calculateGrade, deriveRecommendation, RECOMMENDATION_LABELS };

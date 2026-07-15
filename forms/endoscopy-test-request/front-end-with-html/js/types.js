@@ -7,10 +7,6 @@
 // convention. Wrapped in an IIFE; published via
 // `window.EndoscopyTestRequest`.
 
-(function () {
-'use strict';
-window.EndoscopyTestRequest = window.EndoscopyTestRequest || {};
-
 /**
  * Build a fresh, fully-blank GI endoscopy request.
  * Strings default to ''; numeric / date fields default to null;
@@ -132,11 +128,4 @@ function indicationLabel(value) {
   return INDICATION_LABELS[value] || value || '';
 }
 
-Object.assign(window.EndoscopyTestRequest, {
-  emptyRequest,
-  procedureLabel,
-  indicationLabel,
-  PROCEDURE_LABELS,
-  INDICATION_LABELS
-});
-})();
+export { emptyRequest, procedureLabel, indicationLabel, PROCEDURE_LABELS, INDICATION_LABELS };

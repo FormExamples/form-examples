@@ -204,9 +204,6 @@
 // classic <script> (no ES modules) so the page can be opened directly via
 // `file://`. The IIFE attaches its public symbols to a single global
 // namespace, `window.HypertensionReview`.
-(function () {
-'use strict';
-window.HypertensionReview = window.HypertensionReview || {};
 
 /**
  * Build a fresh, fully-blank review. Text / enum fields default to `''`;
@@ -381,17 +378,4 @@ function priorityClass(priority) {
   }
 }
 
-Object.assign(window.HypertensionReview, {
-  emptyAssessment,
-  controlStatusLabel,
-  controlStatusClass,
-  reviewStatusLabel,
-  reviewStatusClass,
-  hypertensionStageLabel,
-  hypertensionStageClass,
-  primarySourceLabel,
-  clinicianRoleLabel,
-  priorityLabel,
-  priorityClass
-});
-})();
+export { emptyAssessment, controlStatusLabel, controlStatusClass, reviewStatusLabel, reviewStatusClass, hypertensionStageLabel, hypertensionStageClass, primarySourceLabel, clinicianRoleLabel, priorityLabel, priorityClass };

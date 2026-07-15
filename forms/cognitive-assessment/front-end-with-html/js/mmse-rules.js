@@ -23,9 +23,6 @@
  */
 
 // Wrapped in an IIFE; published via window.CognitiveAssessment.
-(function () {
-'use strict';
-window.CognitiveAssessment = window.CognitiveAssessment || {};
 
 /** @type {MMSERuleDefinition[]} */
 const mmseDomains = [
@@ -95,8 +92,4 @@ const mmseDomainMaxScores = {
   'Visuospatial': 1
 };
 
-Object.assign(window.CognitiveAssessment, {
-  mmseDomains,
-  mmseDomainMaxScores
-});
-})();
+export { mmseDomains, mmseDomainMaxScores };

@@ -20,11 +20,6 @@
 // signed off. Bottom line: items that are simple yes-or-empty raise no
 // medium/high flag while empty — they're caught by phase completion.
 
-(function () {
-'use strict';
-window.WhoSurgicalSafetyChecklist =
-  window.WhoSurgicalSafetyChecklist || {};
-
 /**
  * Compute the full list of safety flags for a given checklist state.
  * Returns an array sorted high → medium → low.
@@ -234,7 +229,4 @@ function hasAnyTimeOutAnswer(t) {
   );
 }
 
-Object.assign(window.WhoSurgicalSafetyChecklist, {
-  computeFlags
-});
-})();
+export { computeFlags };

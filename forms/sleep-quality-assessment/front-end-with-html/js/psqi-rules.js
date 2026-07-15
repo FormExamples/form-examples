@@ -11,9 +11,6 @@
 // Total range: 0–21.
 
 // Wrapped in an IIFE; published via window.SleepQualityAssessment.
-(function () {
-'use strict';
-window.SleepQualityAssessment = window.SleepQualityAssessment || {};
 
 /**
  * @typedef {Object} PSQIComponentDefinition
@@ -92,9 +89,4 @@ function frequencyToScore(freq) {
   }
 }
 
-Object.assign(window.SleepQualityAssessment, {
-  psqiComponents,
-  frequencyResponseOptions,
-  frequencyToScore
-});
-})();
+export { psqiComponents, frequencyResponseOptions, frequencyToScore };

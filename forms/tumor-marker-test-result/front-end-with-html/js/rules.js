@@ -1,3 +1,5 @@
+import { AFP_CRITICAL, BETA_HCG_CRITICAL, MARKERS } from './types.js';
+
 // Declarative four-axis grading rules for the Tumor Marker Test Result.
 //
 // Faithful vanilla-JavaScript port of the SvelteKit engine modules
@@ -19,11 +21,6 @@
  */
 
 // Wrapped in an IIFE; published via window.TumorMarkerTestResult.
-(function () {
-'use strict';
-window.TumorMarkerTestResult = window.TumorMarkerTestResult || {};
-
-const { MARKERS, AFP_CRITICAL, BETA_HCG_CRITICAL } = window.TumorMarkerTestResult;
 
 // ----------------------------------------------------------------------
 // Measured-marker predicates (mirror `utils.ts`)
@@ -394,15 +391,4 @@ function gradeFollowUp(r, classification, severity) {
   };
 }
 
-Object.assign(window.TumorMarkerTestResult, {
-  hasAnyMeasuredMarker,
-  measuredMarkerCount,
-  hasGermCellCriticalMarker,
-  isCriticalResult,
-  hasActionSignal,
-  classifyResult,
-  gradeSeverity,
-  gradeCompleteness,
-  gradeFollowUp
-});
-})();
+export { hasAnyMeasuredMarker, measuredMarkerCount, hasGermCellCriticalMarker, isCriticalResult, hasActionSignal, classifyResult, gradeSeverity, gradeCompleteness, gradeFollowUp };

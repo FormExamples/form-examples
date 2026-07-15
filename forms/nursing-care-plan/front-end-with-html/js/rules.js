@@ -19,9 +19,6 @@
  */
 
 // Wrapped in an IIFE; published via window.NursingCarePlan.
-(function () {
-'use strict';
-window.NursingCarePlan = window.NursingCarePlan || {};
 
 /**
  * True when the problem carries at least one goal.
@@ -118,11 +115,4 @@ function problemFiredRules(p, index) {
   ];
 }
 
-Object.assign(window.NursingCarePlan, {
-  hasGoal,
-  hasIntervention,
-  hasEvaluation,
-  classifyProblem,
-  problemFiredRules
-});
-})();
+export { hasGoal, hasIntervention, hasEvaluation, classifyProblem, problemFiredRules };

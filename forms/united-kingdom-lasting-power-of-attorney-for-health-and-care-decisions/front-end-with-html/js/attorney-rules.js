@@ -1,9 +1,6 @@
-// Attorney rule family, ported from the SvelteKit engine.
+import { ageYearsAt } from './utils.js';
 
-(function () {
-'use strict';
-window.UkLpaForm = window.UkLpaForm || {};
-const { ageYearsAt } = window.UkLpaForm;
+// Attorney rule family, ported from the SvelteKit engine.
 
 function attorneyKey(a) {
   return `${(a.givenNames || '').trim().toLowerCase()}|${(a.familyName || '').trim().toLowerCase()}|${a.birthDate}`;
@@ -181,5 +178,4 @@ function applyAttorneyRules(app) {
   return fired;
 }
 
-window.UkLpaForm.applyAttorneyRules = applyAttorneyRules;
-})();
+export { applyAttorneyRules };

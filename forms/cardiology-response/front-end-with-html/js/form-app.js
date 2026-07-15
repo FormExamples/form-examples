@@ -1,3 +1,6 @@
+import { calculateGrade } from './grader.js';
+import { consultationTypeLabel, emptyResponse, followUpUrgencyLabel, primaryDiagnosisCategoryLabel, responseClassificationLabel, severityLabel } from './types.js';
+
 // Cardiology Response — consult-reply wizard (vanilla JS).
 //
 // Single-page continuous wizard: every section is rendered into the page in
@@ -9,20 +12,6 @@
 // Sibling files loaded as plain `<script>` tags (in order) attach their
 // exports to `window.CardiologyResponse`. The whole file is wrapped in an IIFE
 // so its top-level identifiers don't leak to the global scope.
-
-(function () {
-'use strict';
-
-const NS = window.CardiologyResponse;
-const {
-  emptyResponse,
-  calculateGrade,
-  responseClassificationLabel,
-  severityLabel,
-  followUpUrgencyLabel,
-  consultationTypeLabel,
-  primaryDiagnosisCategoryLabel
-} = NS;
 
 // ----------------------------------------------------------------------
 // Persistence
@@ -869,4 +858,3 @@ if (document.readyState === 'loading') {
 } else {
   init();
 }
-})();

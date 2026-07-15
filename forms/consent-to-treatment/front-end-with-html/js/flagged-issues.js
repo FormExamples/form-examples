@@ -5,10 +5,7 @@
 // Independent of completeness; runs purely against the assessment data
 // and returns prioritised flags sorted high > medium > low.
 
-(function () {
-  'use strict';
-
-  const NS = (window.ConsentToTreatment = window.ConsentToTreatment || {});
+  
 
   /**
    * @param {import('./types.js').AssessmentData} data
@@ -136,5 +133,6 @@
     return flags;
   }
 
-  NS.detectAdditionalFlags = detectAdditionalFlags;
-})();
+  
+
+export { detectAdditionalFlags };

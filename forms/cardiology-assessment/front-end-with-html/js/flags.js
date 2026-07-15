@@ -11,9 +11,6 @@
  */
 
 // Wrapped in an IIFE; published via window.CardiologyAssessment.
-(function () {
-'use strict';
-window.CardiologyAssessment = window.CardiologyAssessment || {};
 
 /**
  * @param {AssessmentData} data
@@ -207,5 +204,4 @@ function detectAdditionalFlags(data) {
   return flags;
 }
 
-window.CardiologyAssessment.detectAdditionalFlags = detectAdditionalFlags;
-})();
+export { detectAdditionalFlags };

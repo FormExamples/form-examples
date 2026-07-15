@@ -1,3 +1,5 @@
+import { countAdjustments } from './rules.js';
+
 // Safety-flag ("flagged issues for occupational health") detection for the
 // Return to Work engine.
 //
@@ -7,13 +9,6 @@
 // identical across every front-end and the back-end.
 //
 // Wrapped in an IIFE; published via `window.ReturnToWork`.
-
-(function () {
-'use strict';
-window.ReturnToWork =
-  window.ReturnToWork || {};
-const NS = window.ReturnToWork;
-const { countAdjustments } = NS;
 
 /** True if any high-risk adjustment requiring a formal risk assessment is set. */
 function hasHighRiskAdjustment(data) {
@@ -138,5 +133,4 @@ function detectAdditionalFlags(data) {
   return flags;
 }
 
-Object.assign(NS, { detectAdditionalFlags, hasHighRiskAdjustment });
-})();
+export { detectAdditionalFlags, hasHighRiskAdjustment };

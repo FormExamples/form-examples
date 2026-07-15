@@ -7,11 +7,6 @@
 // examples convention. Wrapped in an IIFE; published via
 // `window.HistopathologyTestRequest`.
 
-(function () {
-'use strict';
-window.HistopathologyTestRequest =
-  window.HistopathologyTestRequest || {};
-
 /**
  * Build a fresh, fully-blank tissue histopathology request.
  * Strings default to ''; numeric / date fields default to null;
@@ -96,11 +91,4 @@ function indicationLabel(value) {
   return INDICATION_LABELS[value] || value || '';
 }
 
-Object.assign(window.HistopathologyTestRequest, {
-  emptyRequest,
-  specimenTypeLabel,
-  SPECIMEN_TYPE_LABELS,
-  indicationLabel,
-  INDICATION_LABELS
-});
-})();
+export { emptyRequest, specimenTypeLabel, SPECIMEN_TYPE_LABELS, indicationLabel, INDICATION_LABELS };

@@ -1,3 +1,7 @@
+import { detectFlags } from './flags.js';
+import { evaluateWindowFit, scoreAppropriateness, scoreCompleteness, scoreTriage } from './rules.js';
+import { gestationalAgeToDays } from './types.js';
+
 // Four-axis grader for the Pregnancy Ultrasound Test Request.
 //
 // Composes the rule sets in rules.js and the safety flags in flags.js into a
@@ -6,20 +10,6 @@
 // across every front-end and the back-end.
 //
 // Wrapped in an IIFE; published via `window.PregnancyUltrasoundTestRequest`.
-
-(function () {
-'use strict';
-window.PregnancyUltrasoundTestRequest =
-  window.PregnancyUltrasoundTestRequest || {};
-const NS = window.PregnancyUltrasoundTestRequest;
-const {
-  scoreAppropriateness,
-  evaluateWindowFit,
-  scoreCompleteness,
-  scoreTriage,
-  gestationalAgeToDays,
-  detectFlags
-} = NS;
 
 /**
  * Derive an overall recommendation for the imaging vetting desk from the four
@@ -110,9 +100,4 @@ function calculateGrade(data) {
   };
 }
 
-Object.assign(NS, {
-  calculateGrade,
-  deriveRecommendation,
-  RECOMMENDATION_LABELS
-});
-})();
+export { calculateGrade, deriveRecommendation, RECOMMENDATION_LABELS };

@@ -32,9 +32,6 @@
  */
 
 // Wrapped in an IIFE; published via window.NeurologyAssessment.
-(function () {
-'use strict';
-window.NeurologyAssessment = window.NeurologyAssessment || {};
 
 /** @type {NIHSSRule[]} */
 const nihssRules = [
@@ -145,5 +142,4 @@ const nihssRules = [
   }
 ];
 
-window.NeurologyAssessment.nihssRules = nihssRules;
-})();
+export { nihssRules };

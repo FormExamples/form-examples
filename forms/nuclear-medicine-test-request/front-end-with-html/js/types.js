@@ -7,11 +7,6 @@
 // examples convention. Wrapped in an IIFE; published via
 // `window.NuclearMedicineTestRequest`.
 
-(function () {
-'use strict';
-window.NuclearMedicineTestRequest =
-  window.NuclearMedicineTestRequest || {};
-
 /**
  * Build a fresh, fully-blank nuclear medicine request.
  * Strings default to ''; numeric / date fields default to null;
@@ -98,11 +93,4 @@ function indicationLabel(value) {
   return INDICATION_LABELS[value] || value || '';
 }
 
-Object.assign(window.NuclearMedicineTestRequest, {
-  emptyRequest,
-  scanTypeLabel,
-  indicationLabel,
-  SCAN_TYPE_LABELS,
-  INDICATION_LABELS
-});
-})();
+export { emptyRequest, scanTypeLabel, indicationLabel, SCAN_TYPE_LABELS, INDICATION_LABELS };

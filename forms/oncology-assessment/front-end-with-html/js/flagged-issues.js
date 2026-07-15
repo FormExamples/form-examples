@@ -13,9 +13,6 @@
  */
 
 // Wrapped in an IIFE; published via window.OncologyAssessment.
-(function () {
-'use strict';
-window.OncologyAssessment = window.OncologyAssessment || {};
 
 /**
  * @param {AssessmentData} data
@@ -192,5 +189,4 @@ function detectAdditionalFlags(data) {
   return flags;
 }
 
-window.OncologyAssessment.detectAdditionalFlags = detectAdditionalFlags;
-})();
+export { detectAdditionalFlags };

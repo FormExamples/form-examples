@@ -1,3 +1,5 @@
+import { nonDraftAdrs, nonEmpty } from './types.js';
+
 // Flagged-issue detection for the arc42 documentation-maturity engine.
 //
 // Ported verbatim from the SvelteKit `flagged-issues.ts`. Independent flags
@@ -8,12 +10,6 @@
 // back-end.
 //
 // Wrapped in an IIFE; published via `window.Arc42`.
-
-(function () {
-'use strict';
-window.Arc42 = window.Arc42 || {};
-const NS = window.Arc42;
-const { nonEmpty, nonDraftAdrs } = NS;
 
 // High-priority detectors: an entire mandatory section is missing.
 const HIGH = [
@@ -72,5 +68,4 @@ function detectFlags(d) {
   return out;
 }
 
-Object.assign(NS, { detectFlags });
-})();
+export { detectFlags };

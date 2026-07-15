@@ -1,3 +1,8 @@
+import { detectFlaggedIssues } from './flags.js';
+import { gradeCompleteness } from './grader.js';
+import { componentRules } from './rules.js';
+import { allergyStatusLabel, emptyAssessment, flatten, priorityLabel, statusClass, statusLabel } from './types.js';
+
 // History and Physical Examination (H&P) — clerking wizard
 // (vanilla JavaScript, no build).
 //
@@ -16,21 +21,6 @@
 // to `window.HistoryAndPhysicalExamination`. Pulling them off here keeps the
 // rest of this file referring to short local names. The whole file is wrapped
 // in an IIFE so its top-level identifiers don't leak.
-(function () {
-'use strict';
-
-const NS = window.HistoryAndPhysicalExamination;
-const {
-  emptyAssessment,
-  flatten,
-  allergyStatusLabel,
-  statusLabel,
-  statusClass,
-  priorityLabel,
-  componentRules,
-  gradeCompleteness,
-  detectFlaggedIssues
-} = NS;
 
 // Map of component id -> human-readable label, for the completeness checklist.
 const COMPONENT_LABELS = {};
@@ -1023,4 +1013,3 @@ if (document.readyState === 'loading') {
 } else {
   init();
 }
-})();

@@ -27,9 +27,6 @@
  */
 
 // Wrapped in an IIFE; published via window.WorkplaceSafetyAssessment.
-(function () {
-'use strict';
-window.WorkplaceSafetyAssessment = window.WorkplaceSafetyAssessment || {};
 
 /**
  * @param {AssessmentData} data
@@ -228,5 +225,4 @@ function detectAdditionalFlags(data) {
   return flags;
 }
 
-window.WorkplaceSafetyAssessment.detectAdditionalFlags = detectAdditionalFlags;
-})();
+export { detectAdditionalFlags };

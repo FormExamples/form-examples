@@ -1,3 +1,5 @@
+import { asaRules } from './asa-rules.js';
+
 // ASA Physical Status Classification grader. Pure functions: take an
 // `AssessmentData` object, return the maximum-grade ASA classification
 // (I-V; VI is for organ-donation cadavers and is not produced by this
@@ -18,10 +20,6 @@
  */
 
 // Wrapped in an IIFE; published via window.PreOperativeAssessmentByPatient.
-(function () {
-'use strict';
-window.PreOperativeAssessmentByPatient = window.PreOperativeAssessmentByPatient || {};
-const { asaRules } = window.PreOperativeAssessmentByPatient;
 
 /**
  * Evaluate all 42 ASA grading rules against the patient assessment.
@@ -57,5 +55,4 @@ function calculateASA(data) {
   return { asaGrade, firedRules };
 }
 
-window.PreOperativeAssessmentByPatient.calculateASA = calculateASA;
-})();
+export { calculateASA };

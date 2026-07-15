@@ -1,3 +1,8 @@
+import { calculateDASH } from './dash-grader.js';
+import { dashQuestions, getResponseOptions } from './dash-rules.js';
+import { detectAdditionalFlags } from './flagged-issues.js';
+import { calculateAge, dashCategory, dashCategoryClass, emptyAssessment } from './types.js';
+
 // Orthopedic Assessment - patient wizard (vanilla JavaScript, no build).
 //
 // Single-page continuous wizard: every section is rendered into the page in
@@ -10,20 +15,6 @@
 // exports to `window.OrthopedicAssessment`. Pulling them off here keeps the
 // rest of this file referring to short local names. Whole file is wrapped
 // in an IIFE so its top-level identifiers don't leak to the global scope.
-(function () {
-'use strict';
-
-const NS = window.OrthopedicAssessment;
-const {
-  emptyAssessment,
-  calculateAge,
-  dashCategory,
-  dashCategoryClass,
-  dashQuestions,
-  getResponseOptions,
-  calculateDASH,
-  detectAdditionalFlags
-} = NS;
 
 // ----------------------------------------------------------------------
 // Persistence
@@ -1596,4 +1587,3 @@ if (document.readyState === 'loading') {
 } else {
   init();
 }
-})();

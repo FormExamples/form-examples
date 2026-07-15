@@ -1,3 +1,5 @@
+import { classificationRules } from './rules.js';
+
 // AAA grader. Pure functions: take an `AssessmentData` object, apply the
 // non-visualised guard, classify the measured maximum aortic diameter against
 // the NHS AAA Screening Programme thresholds, and derive the surveillance /
@@ -27,11 +29,6 @@
  */
 
 // Wrapped in an IIFE; published via window.AbdominalAorticAneurysmScreening.
-(function () {
-'use strict';
-window.AbdominalAorticAneurysmScreening =
-  window.AbdominalAorticAneurysmScreening || {};
-const { classificationRules } = window.AbdominalAorticAneurysmScreening;
 
 /**
  * Map a diameter band to its surveillance / referral band and the recommended
@@ -167,9 +164,4 @@ function classifyAaa(data) {
   };
 }
 
-Object.assign(window.AbdominalAorticAneurysmScreening, {
-  bandForCategory,
-  calculateGrowth,
-  classifyAaa
-});
-})();
+export { bandForCategory, calculateGrowth, classifyAaa };

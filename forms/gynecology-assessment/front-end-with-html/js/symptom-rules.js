@@ -17,9 +17,6 @@
  */
 
 // Wrapped in an IIFE; published via window.GynecologyAssessment.
-(function () {
-'use strict';
-window.GynecologyAssessment = window.GynecologyAssessment || {};
 
 /** @type {SymptomRuleDefinition[]} */
 const symptomDefinitions = [
@@ -53,8 +50,4 @@ const symptomResponseOptions = [
   { value: 3, label: 'Severe' }
 ];
 
-Object.assign(window.GynecologyAssessment, {
-  symptomDefinitions,
-  symptomResponseOptions
-});
-})();
+export { symptomDefinitions, symptomResponseOptions };

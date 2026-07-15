@@ -1,6 +1,6 @@
 // Sample dashboard rows. In production this would come from the backend
 // API; the static dashboard inlines them so the page works via file://.
-window.SAMPLE_ISSUES = [
+export const SAMPLE_ISSUES = [
   {
     id: 'ISSUE-2026-0001',
     status: 'open',

@@ -6,10 +6,6 @@
 // vigorous and depressed newborns, and every care setting, with the
 // resuscitation flag set whenever any timepoint total is 3 or below.
 
-(function () {
-'use strict';
-window.ApgarScoreDashboard = window.ApgarScoreDashboard || {};
-
 /** @type {import('./dashboard-types.js').AssessmentRow[]} */
 const sampleAssessments = [
   {
@@ -91,5 +87,4 @@ const sampleAssessments = [
   }
 ];
 
-window.ApgarScoreDashboard.sampleAssessments = sampleAssessments;
-})();
+export { sampleAssessments };

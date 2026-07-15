@@ -1,3 +1,5 @@
+import { qsofaRules } from './rules.js';
+
 // qSOFA grader. Pure functions: take an `AssessmentData` object, evaluate the
 // three criterion rules in `qsofaRules`, award 0 or 1 point each, sum the total
 // (0-3), and derive the risk band with the >= 2 escalation threshold.
@@ -19,11 +21,6 @@
  */
 
 // Wrapped in an IIFE; published via window.QuickSequentialOrganFailureAssessment.
-(function () {
-'use strict';
-window.QuickSequentialOrganFailureAssessment =
-  window.QuickSequentialOrganFailureAssessment || {};
-const { qsofaRules } = window.QuickSequentialOrganFailureAssessment;
 
 /**
  * Evaluate the three qSOFA criterion rules and collect the ones that fired.
@@ -99,8 +96,4 @@ function calculateQsofaGrade(data) {
   };
 }
 
-Object.assign(window.QuickSequentialOrganFailureAssessment, {
-  evaluateCriteria,
-  calculateQsofaGrade
-});
-})();
+export { evaluateCriteria, calculateQsofaGrade };

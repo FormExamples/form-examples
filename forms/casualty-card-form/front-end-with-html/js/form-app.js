@@ -1,3 +1,7 @@
+import { detectFlaggedIssues } from './flagged-issues.js';
+import { calculateNEWS2 } from './news2-calculator.js';
+import { calculateGCSTotal, emptyCasualtyCard, news2ResponseClass, news2ResponseLabel } from './types.js';
+
 // Casualty Card Form — patient wizard (vanilla JavaScript, no build).
 //
 // Single continuous page; all 14 sections are rendered in document order.
@@ -9,18 +13,6 @@
 // Sibling files loaded via classic <script> tags attach symbols to
 // `window.CasualtyCardForm`. The whole file is wrapped in an IIFE so its
 // top-level identifiers do not leak.
-(function () {
-'use strict';
-
-const NS = window.CasualtyCardForm;
-const {
-  emptyCasualtyCard,
-  calculateGCSTotal,
-  calculateNEWS2,
-  detectFlaggedIssues,
-  news2ResponseLabel,
-  news2ResponseClass
-} = NS;
 
 // ----------------------------------------------------------------------
 // Persistence
@@ -1797,4 +1789,3 @@ if (document.readyState === 'loading') {
 } else {
   init();
 }
-})();

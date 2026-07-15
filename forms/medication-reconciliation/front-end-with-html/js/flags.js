@@ -22,9 +22,6 @@
  */
 
 // Wrapped in an IIFE; published via window.MedicationReconciliation.
-(function () {
-'use strict';
-window.MedicationReconciliation = window.MedicationReconciliation || {};
 
 // Clinically significant interaction pairs (substring match on drug names of
 // any two reconciled line items). This is a prompt for pharmacist review, not a
@@ -206,5 +203,4 @@ function detectFlaggedIssues(data, grade) {
   return flags;
 }
 
-window.MedicationReconciliation.detectFlaggedIssues = detectFlaggedIssues;
-})();
+export { detectFlaggedIssues };

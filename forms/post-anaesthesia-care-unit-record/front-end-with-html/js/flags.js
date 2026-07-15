@@ -1,3 +1,5 @@
+import { padssScore } from './rules.js';
+
 // Flagged-issue detection (red flags). Independent of the Aldrete total (which
 // the grader produces), this module raises clinician-facing safety flags per
 // spec §5:
@@ -19,11 +21,6 @@
  */
 
 // Wrapped in an IIFE; published via window.PostAnaesthesiaCareUnitRecord.
-(function () {
-'use strict';
-window.PostAnaesthesiaCareUnitRecord =
-  window.PostAnaesthesiaCareUnitRecord || {};
-const { padssScore } = window.PostAnaesthesiaCareUnitRecord;
 
 // Pain score at or above this threshold is treated as uncontrolled.
 const PAIN_THRESHOLD = 4;
@@ -153,5 +150,4 @@ function detectFlaggedIssues(data, grade) {
   return flags;
 }
 
-window.PostAnaesthesiaCareUnitRecord.detectFlaggedIssues = detectFlaggedIssues;
-})();
+export { detectFlaggedIssues };

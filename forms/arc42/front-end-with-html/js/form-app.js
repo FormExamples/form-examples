@@ -1,3 +1,7 @@
+import { calculateMaturity } from './grader.js';
+import { computeCompleteness } from './rules.js';
+import { SECTION_NAMES, completeSectionCount, completenessLabel, emptyDocumentation, maturityLabel, recommendationLabel } from './types.js';
+
 // arc42 — architecture-documentation wizard (vanilla JS).
 //
 // Single-page continuous wizard: all 12 arc42 sections are rendered into the
@@ -12,21 +16,6 @@
 // identifiers don't leak to the global scope.
 //
 // Load order: types -> rules -> flags -> grader -> form-app.
-
-(function () {
-'use strict';
-
-const NS = window.Arc42;
-const {
-  emptyDocumentation,
-  computeCompleteness,
-  completeSectionCount,
-  calculateMaturity,
-  maturityLabel,
-  completenessLabel,
-  recommendationLabel,
-  SECTION_NAMES
-} = NS;
 
 // ----------------------------------------------------------------------
 // Persistence
@@ -1141,4 +1130,3 @@ if (document.readyState === 'loading') {
 } else {
   init();
 }
-})();

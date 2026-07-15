@@ -6,11 +6,6 @@
 // critical / inconclusive), the severity ladder, and the follow-up urgency
 // bands, with a critical-alert row whose anaphylaxis raised three flags.
 
-(function () {
-'use strict';
-window.AllergySkinTestResultDashboard =
-  window.AllergySkinTestResultDashboard || {};
-
 /** @type {import('./dashboard-types.js').ReportRow[]} */
 const sampleReports = [
   {
@@ -87,5 +82,4 @@ const sampleReports = [
   }
 ];
 
-window.AllergySkinTestResultDashboard.sampleReports = sampleReports;
-})();
+export { sampleReports };

@@ -1,3 +1,7 @@
+import { fetchReports } from './api.js';
+import { sampleReports } from './data.js';
+import { abnormalitySeverityClass, abnormalitySeverityLabel, followUpUrgencyClass, followUpUrgencyLabel, reportStatusLabel, resultClassificationClass, resultClassificationLabel, specimenTypeLabel } from './types.js';
+
 // Microbiology Culture Test Result — clinician dashboard (vanilla classic-script app).
 //
 // On boot we fetch the graded-report list from the backend; on any failure (or
@@ -12,22 +16,6 @@
 // labels come from the form namespace `window.MicrobiologyCultureTestResult`
 // (js/types.js). The whole file is wrapped in an IIFE so its top-level
 // identifiers do not leak.
-(function () {
-'use strict';
-const {
-  fetchReports,
-  sampleReports
-} = window.MicrobiologyCultureTestResultDashboard;
-const {
-  specimenTypeLabel,
-  reportStatusLabel,
-  resultClassificationLabel,
-  abnormalitySeverityLabel,
-  followUpUrgencyLabel,
-  resultClassificationClass,
-  abnormalitySeverityClass,
-  followUpUrgencyClass
-} = window.MicrobiologyCultureTestResult;
 
 // ----------------------------------------------------------------------
 // State
@@ -394,4 +382,3 @@ if (document.readyState === 'loading') {
 } else {
   init();
 }
-})();

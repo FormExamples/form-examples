@@ -15,9 +15,6 @@
  */
 
 // Wrapped in an IIFE; published via window.RheumatologyAssessment.
-(function () {
-'use strict';
-window.RheumatologyAssessment = window.RheumatologyAssessment || {};
 
 /** @type {DAS28Rule[]} */
 const das28Rules = [
@@ -258,5 +255,4 @@ const das28Rules = [
   }
 ];
 
-window.RheumatologyAssessment.das28Rules = das28Rules;
-})();
+export { das28Rules };

@@ -17,9 +17,6 @@
  */
 
 // IIFE — classic <script> tag, no ES modules. Publishes to window.FertilityAssessment.
-(function () {
-'use strict';
-window.FertilityAssessment = window.FertilityAssessment || {};
 
 /**
  * Build a fresh, fully-blank assessment.
@@ -197,12 +194,4 @@ function concernLevelClass(level) {
   }
 }
 
-Object.assign(window.FertilityAssessment, {
-  emptyAssessment,
-  calculateBMI,
-  bmiCategory,
-  ageInYears,
-  concernLevelLabel,
-  concernLevelClass
-});
-})();
+export { emptyAssessment, calculateBMI, bmiCategory, ageInYears, concernLevelLabel, concernLevelClass };

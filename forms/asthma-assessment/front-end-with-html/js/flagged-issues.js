@@ -10,9 +10,6 @@
  */
 
 // Wrapped in an IIFE; published via window.AsthmaAssessment.
-(function () {
-'use strict';
-window.AsthmaAssessment = window.AsthmaAssessment || {};
 
 /**
  * @param {AssessmentData} data
@@ -280,5 +277,4 @@ function detectAdditionalFlags(data) {
   return flags;
 }
 
-window.AsthmaAssessment.detectAdditionalFlags = detectAdditionalFlags;
-})();
+export { detectAdditionalFlags };

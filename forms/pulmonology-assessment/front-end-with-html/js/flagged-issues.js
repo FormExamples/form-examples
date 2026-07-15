@@ -13,9 +13,6 @@
  */
 
 // Wrapped in an IIFE; published via window.PulmonologyAssessment.
-(function () {
-'use strict';
-window.PulmonologyAssessment = window.PulmonologyAssessment || {};
 
 /**
  * @param {AssessmentData} data
@@ -248,5 +245,4 @@ function detectAdditionalFlags(data) {
   return flags;
 }
 
-window.PulmonologyAssessment.detectAdditionalFlags = detectAdditionalFlags;
-})();
+export { detectAdditionalFlags };

@@ -1,3 +1,5 @@
+import { ppeRules } from './rules.js';
+
 // PPE clearance grader. Pure functions: take an `AssessmentData` object,
 // run every rule in `ppeRules`, and aggregate the highest-grade rule that
 // fired into a single `Clearance` decision.
@@ -15,10 +17,6 @@
  */
 
 // Wrapped in an IIFE; published via window.SportsMedicineAssessment.
-(function () {
-'use strict';
-window.SportsMedicineAssessment = window.SportsMedicineAssessment || {};
-const { ppeRules } = window.SportsMedicineAssessment;
 
 /**
  * @param {FiredRule[]} firedRules
@@ -68,6 +66,4 @@ function gradePPE(data) {
   return { clearance, firedRules };
 }
 
-window.SportsMedicineAssessment.gradePPE = gradePPE;
-window.SportsMedicineAssessment.aggregateClearance = aggregateClearance;
-})();
+export { gradePPE, aggregateClearance };

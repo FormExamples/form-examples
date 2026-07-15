@@ -13,12 +13,6 @@
 //
 // Wrapped in an IIFE; published via `window.ColonoscopyTestRequest`.
 
-(function () {
-'use strict';
-window.ColonoscopyTestRequest =
-  window.ColonoscopyTestRequest || {};
-const NS = window.ColonoscopyTestRequest;
-
 // NICE DG56: a FIT result at or above this threshold (micrograms of
 // haemoglobin per gram of faeces) triggers the suspected-cancer pathway.
 const FIT_POSITIVE_THRESHOLD = 10;
@@ -432,20 +426,4 @@ function scoreRisk(data) {
   return { band, anticoagulantAction, firedRules };
 }
 
-Object.assign(NS, {
-  scoreAppropriateness,
-  appropriatenessBand,
-  scoreUrgency,
-  scoreCompleteness,
-  scoreRisk,
-  maxTier,
-  maxRisk,
-  fitPositive,
-  redFlagCount,
-  FIT_POSITIVE_THRESHOLD,
-  TRIAGE_ORDER,
-  TARGET_TIMEFRAMES,
-  RISK_ORDER,
-  INDICATION_PROCEDURE_MAP
-});
-})();
+export { scoreAppropriateness, appropriatenessBand, scoreUrgency, scoreCompleteness, scoreRisk, maxTier, maxRisk, fitPositive, redFlagCount, FIT_POSITIVE_THRESHOLD, TRIAGE_ORDER, TARGET_TIMEFRAMES, RISK_ORDER, INDICATION_PROCEDURE_MAP };

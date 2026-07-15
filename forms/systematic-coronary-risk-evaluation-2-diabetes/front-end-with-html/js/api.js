@@ -6,11 +6,6 @@
 // down) or returns an empty list, callers fall back to the sample data
 // shipped in `data.js` so the page is usable standalone.
 
-(function () {
-'use strict';
-window.SystematicCoronaryRiskEvaluation2DiabetesDashboard =
-  window.SystematicCoronaryRiskEvaluation2DiabetesDashboard || {};
-
 const API_BASE = 'http://localhost:5190';
 const PATIENTS_PATH = '/api/dashboard/patients';
 
@@ -35,7 +30,4 @@ async function fetchPatients() {
   return data.items || [];
 }
 
-window.SystematicCoronaryRiskEvaluation2DiabetesDashboard.fetchPatients =
-  fetchPatients;
-window.SystematicCoronaryRiskEvaluation2DiabetesDashboard.API_BASE = API_BASE;
-})();
+export { fetchPatients, API_BASE };

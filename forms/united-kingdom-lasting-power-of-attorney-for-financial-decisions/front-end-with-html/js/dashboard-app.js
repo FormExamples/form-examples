@@ -1,3 +1,6 @@
+import { fetchLpas } from './api.js';
+import { sampleRows } from './data.js';
+
 // UK LP1F case dashboard (vanilla classic-script app).
 //
 // On boot we fetch the LPA list from the backend; on any failure (or empty
@@ -12,9 +15,6 @@
 // their exports to `window.UkLpaFinancialDecisionsDashboard`. The whole file is
 // wrapped in an IIFE so its top-level identifiers do not leak to the global
 // scope.
-(function () {
-'use strict';
-const { fetchLpas, sampleRows } = window.UkLpaFinancialDecisionsDashboard;
 
 // ----------------------------------------------------------------------
 // State
@@ -339,4 +339,3 @@ if (document.readyState === 'loading') {
 } else {
   init();
 }
-})();

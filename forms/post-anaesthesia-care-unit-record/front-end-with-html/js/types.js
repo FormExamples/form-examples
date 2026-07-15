@@ -140,10 +140,6 @@
 // <script> (no ES modules) so the page can be opened directly via `file://`.
 // The IIFE attaches its public symbols to a single global namespace,
 // `window.PostAnaesthesiaCareUnitRecord`.
-(function () {
-'use strict';
-window.PostAnaesthesiaCareUnitRecord =
-  window.PostAnaesthesiaCareUnitRecord || {};
 
 /**
  * Build a fresh, fully-blank record.
@@ -268,15 +264,4 @@ function priorityLabel(priority) {
   }
 }
 
-Object.assign(window.PostAnaesthesiaCareUnitRecord, {
-  emptyAssessment,
-  readinessBandLabel,
-  readinessBandClass,
-  nurseRoleLabel,
-  anaestheticTechniqueLabel,
-  sexLabel,
-  ageBandLabel,
-  asaStatusLabel,
-  priorityLabel
-});
-})();
+export { emptyAssessment, readinessBandLabel, readinessBandClass, nurseRoleLabel, anaestheticTechniqueLabel, sexLabel, ageBandLabel, asaStatusLabel, priorityLabel };

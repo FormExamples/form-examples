@@ -113,9 +113,6 @@
 // classic <script> (no ES modules) so the page can be opened directly via
 // `file://`. The IIFE attaches its public symbols to a single global
 // namespace, `window.DiabeticEyeScreening`.
-(function () {
-'use strict';
-window.DiabeticEyeScreening = window.DiabeticEyeScreening || {};
 
 /**
  * Build a fresh, fully-blank screening record.
@@ -320,22 +317,4 @@ function priorityLabel(priority) {
   }
 }
 
-Object.assign(window.DiabeticEyeScreening, {
-  emptyScreening,
-  retinopathyLabel,
-  maculopathyLabel,
-  outcomeLabel,
-  outcomeClass,
-  referralLabel,
-  recallIntervalLabel,
-  graderRoleLabel,
-  imagingMediaLabel,
-  ageBandLabel,
-  diabetesTypeLabel,
-  previousScreenResultLabel,
-  ungradableLabel,
-  photocoagulationLabel,
-  statusLabel,
-  priorityLabel
-});
-})();
+export { emptyScreening, retinopathyLabel, maculopathyLabel, outcomeLabel, outcomeClass, referralLabel, recallIntervalLabel, graderRoleLabel, imagingMediaLabel, ageBandLabel, diabetesTypeLabel, previousScreenResultLabel, ungradableLabel, photocoagulationLabel, statusLabel, priorityLabel };

@@ -1,3 +1,5 @@
+import { isUnilateral } from './rules.js';
+
 // Safety-flag detection for the Hearing Test Request engine.
 //
 // Pure function returning safety flags using the grade_flag categories from
@@ -8,12 +10,6 @@
 // Each flag is { flagId, category, priority, description, suggestedAction }.
 // Flag IDs are stable and identical across every front-end and the back-end.
 // Wrapped in an IIFE; published via `window.HearingTestRequest`.
-
-(function () {
-'use strict';
-window.HearingTestRequest = window.HearingTestRequest || {};
-const NS = window.HearingTestRequest;
-const { isUnilateral } = NS;
 
 /**
  * Detect safety flags for a hearing test request.
@@ -86,5 +82,4 @@ function detectFlags(data) {
   return flags;
 }
 
-Object.assign(NS, { detectFlags });
-})();
+export { detectFlags };

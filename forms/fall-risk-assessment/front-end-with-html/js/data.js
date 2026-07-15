@@ -9,10 +9,6 @@
 // MFS >= 75) is visible across multiple example patients. NHS numbers are in
 // the canonical "NNN NNN NNNN" display form.
 
-(function () {
-'use strict';
-window.FallRiskAssessmentDashboard = window.FallRiskAssessmentDashboard || {};
-
 /** @type {import('./types.js').PatientRow[]} */
 const samplePatients = [
   {
@@ -137,5 +133,4 @@ const samplePatients = [
   }
 ];
 
-window.FallRiskAssessmentDashboard.samplePatients = samplePatients;
-})();
+export { samplePatients };

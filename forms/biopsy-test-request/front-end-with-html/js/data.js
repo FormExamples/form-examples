@@ -8,11 +8,6 @@
 // request, a two-week-wait suspected-cancer case, a high-bleeding-risk
 // anticoagulant case, and a thrombocytopenia case.
 
-(function () {
-'use strict';
-window.BiopsyTestRequestDashboard =
-  window.BiopsyTestRequestDashboard || {};
-
 /** @type {import('./types.js').RequestRow[]} */
 const sampleRequests = [
   {
@@ -177,5 +172,4 @@ const sampleRequests = [
   }
 ];
 
-window.BiopsyTestRequestDashboard.sampleRequests = sampleRequests;
-})();
+export { sampleRequests };

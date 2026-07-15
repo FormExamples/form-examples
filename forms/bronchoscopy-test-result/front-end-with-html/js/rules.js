@@ -19,9 +19,6 @@
  */
 
 // Wrapped in an IIFE; published via window.BronchoscopyTestResult.
-(function () {
-'use strict';
-window.BronchoscopyTestResult = window.BronchoscopyTestResult || {};
 
 // ----------------------------------------------------------------------
 // Structured-findings predicates (mirror `utils.ts`)
@@ -449,13 +446,4 @@ function gradeFollowUp(r, classification, severity) {
   };
 }
 
-Object.assign(window.BronchoscopyTestResult, {
-  hasCriticalFinding,
-  hasAnyAbnormalFinding,
-  hasOnlyIncidentalFinding,
-  classifyResult,
-  gradeSeverity,
-  gradeCompleteness,
-  gradeFollowUp
-});
-})();
+export { hasCriticalFinding, hasAnyAbnormalFinding, hasOnlyIncidentalFinding, classifyResult, gradeSeverity, gradeCompleteness, gradeFollowUp };

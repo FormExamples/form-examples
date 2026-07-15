@@ -28,9 +28,6 @@
  */
 
 // Wrapped in an IIFE; published via window.PostOperativeReport.
-(function () {
-'use strict';
-window.PostOperativeReport = window.PostOperativeReport || {};
 
 /** @type {ClavienDindoRule[]} */
 const clavienDindoRules = [
@@ -104,6 +101,4 @@ const rulesByGrade = clavienDindoRules.reduce((acc, r) => {
   return acc;
 }, {});
 
-window.PostOperativeReport.clavienDindoRules = clavienDindoRules;
-window.PostOperativeReport.clavienDindoRuleByGrade = rulesByGrade;
-})();
+export { clavienDindoRules, rulesByGrade as clavienDindoRuleByGrade };

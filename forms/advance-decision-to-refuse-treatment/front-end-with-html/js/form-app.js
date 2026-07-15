@@ -1,3 +1,7 @@
+import { detectAdditionalFlags } from './flagged-issues.js';
+import { emptyAssessment, hasLifeSustainingRefusal, validityStatusClass, validityStatusLabel } from './types.js';
+import { calculateValidity } from './validity-grader.js';
+
 // Advance Decision To Refuse Treatment (ADRT) - patient wizard
 // (vanilla JavaScript, no build).
 //
@@ -13,18 +17,6 @@
 // here keeps the rest of this file referring to short local names. The
 // whole file is wrapped in an IIFE so its top-level identifiers don't
 // leak to the global scope.
-(function () {
-'use strict';
-
-const NS = window.AdvanceDecisionToRefuseTreatment;
-const {
-  emptyAssessment,
-  hasLifeSustainingRefusal,
-  validityStatusLabel,
-  validityStatusClass,
-  calculateValidity,
-  detectAdditionalFlags
-} = NS;
 
 const TOTAL_STEPS = 10;
 
@@ -1559,4 +1551,3 @@ if (document.readyState === 'loading') {
 } else {
   init();
 }
-})();

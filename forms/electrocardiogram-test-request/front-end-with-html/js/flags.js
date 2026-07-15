@@ -8,12 +8,6 @@
 // Flag IDs are stable and identical across every front-end and the back-end.
 // Wrapped in an IIFE; published via `window.ElectrocardiogramTestRequest`.
 
-(function () {
-'use strict';
-window.ElectrocardiogramTestRequest =
-  window.ElectrocardiogramTestRequest || {};
-const NS = window.ElectrocardiogramTestRequest;
-
 /**
  * Detect safety flags for an ECG test request.
  *
@@ -90,5 +84,4 @@ function detectFlags(data) {
   return flags;
 }
 
-Object.assign(NS, { detectFlags });
-})();
+export { detectFlags };

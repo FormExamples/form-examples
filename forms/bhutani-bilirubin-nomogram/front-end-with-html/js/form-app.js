@@ -1,3 +1,7 @@
+import { detectFlaggedIssues } from './flags.js';
+import { gradeBhutani } from './grader.js';
+import { emptyAssessment, measurementMethodLabel, percentileBandLabel, priorityLabel, riskZoneClass, riskZoneLabel, sexLabel } from './types.js';
+
 // Bhutani Bilirubin Nomogram — neonatal jaundice risk-zone wizard
 // (vanilla JavaScript, no build).
 //
@@ -14,21 +18,6 @@
 // to `window.BhutaniBilirubinNomogram`. Pulling them off here keeps the rest of
 // this file referring to short local names. The whole file is wrapped in an
 // IIFE so its top-level identifiers don't leak.
-(function () {
-'use strict';
-
-const NS = window.BhutaniBilirubinNomogram;
-const {
-  emptyAssessment,
-  riskZoneLabel,
-  riskZoneClass,
-  percentileBandLabel,
-  measurementMethodLabel,
-  sexLabel,
-  priorityLabel,
-  gradeBhutani,
-  detectFlaggedIssues
-} = NS;
 
 // ----------------------------------------------------------------------
 // Persistence
@@ -932,4 +921,3 @@ if (document.readyState === 'loading') {
 } else {
   init();
 }
-})();

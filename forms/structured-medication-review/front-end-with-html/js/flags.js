@@ -18,9 +18,6 @@
  */
 
 // Wrapped in an IIFE; published via window.StructuredMedicationReview.
-(function () {
-'use strict';
-window.StructuredMedicationReview = window.StructuredMedicationReview || {};
 
 /**
  * @param {ReviewData} data
@@ -147,5 +144,4 @@ function detectFlaggedIssues(data, grade) {
   return flags;
 }
 
-window.StructuredMedicationReview.detectFlaggedIssues = detectFlaggedIssues;
-})();
+export { detectFlaggedIssues };

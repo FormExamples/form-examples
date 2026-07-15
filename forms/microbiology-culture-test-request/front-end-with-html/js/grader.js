@@ -1,3 +1,6 @@
+import { detectFlags } from './flags.js';
+import { scoreAppropriateness, scoreCompleteness, scorePreanalytical, scoreTriage } from './rules.js';
+
 // Four-axis grader for the Microbiology Culture Test Request.
 //
 // Composes the rule sets in rules.js and the safety flags in flags.js into a
@@ -6,19 +9,6 @@
 // across every front-end and the back-end.
 //
 // Wrapped in an IIFE; published via `window.MicrobiologyCultureTestRequest`.
-
-(function () {
-'use strict';
-window.MicrobiologyCultureTestRequest =
-  window.MicrobiologyCultureTestRequest || {};
-const NS = window.MicrobiologyCultureTestRequest;
-const {
-  scoreAppropriateness,
-  scorePreanalytical,
-  scoreCompleteness,
-  scoreTriage,
-  detectFlags
-} = NS;
 
 /**
  * Derive an overall vetting recommendation from the four axes. The
@@ -101,9 +91,4 @@ function calculateGrade(data) {
   };
 }
 
-Object.assign(NS, {
-  calculateGrade,
-  deriveRecommendation,
-  RECOMMENDATION_LABELS
-});
-})();
+export { calculateGrade, deriveRecommendation, RECOMMENDATION_LABELS };

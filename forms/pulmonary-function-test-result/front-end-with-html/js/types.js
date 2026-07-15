@@ -162,9 +162,6 @@
 // classic <script> (no ES modules) so the page can be opened directly via
 // `file://`. The IIFE attaches its public symbols to a single global
 // namespace, `window.PulmonaryFunctionTestResult`.
-(function () {
-'use strict';
-window.PulmonaryFunctionTestResult = window.PulmonaryFunctionTestResult || {};
 
 /**
  * Build a fresh, fully-blank pulmonary function test result.
@@ -377,20 +374,4 @@ function followUpUrgencyClass(value) {
   }
 }
 
-Object.assign(window.PulmonaryFunctionTestResult, {
-  emptyResult,
-  resultClassificationLabel,
-  abnormalitySeverityLabel,
-  followUpUrgencyLabel,
-  testTypeLabel,
-  reportStatusLabel,
-  ventilatoryPatternLabel,
-  severityLabel,
-  bronchodilatorReversibilityLabel,
-  recommendationLabel,
-  priorityLabel,
-  resultClassificationClass,
-  abnormalitySeverityClass,
-  followUpUrgencyClass
-});
-})();
+export { emptyResult, resultClassificationLabel, abnormalitySeverityLabel, followUpUrgencyLabel, testTypeLabel, reportStatusLabel, ventilatoryPatternLabel, severityLabel, bronchodilatorReversibilityLabel, recommendationLabel, priorityLabel, resultClassificationClass, abnormalitySeverityClass, followUpUrgencyClass };

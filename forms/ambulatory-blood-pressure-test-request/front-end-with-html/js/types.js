@@ -7,11 +7,6 @@
 // Wrapped in an IIFE; published via
 // `window.AmbulatoryBloodPressureTestRequest`.
 
-(function () {
-'use strict';
-window.AmbulatoryBloodPressureTestRequest =
-  window.AmbulatoryBloodPressureTestRequest || {};
-
 /**
  * Build a fresh, fully-blank ABPM request.
  * Strings default to ''; numeric / date fields default to null;
@@ -99,12 +94,4 @@ function formatBloodPressure(systolic, diastolic) {
   return `${Number(systolic)}/${Number(diastolic)} mmHg`;
 }
 
-Object.assign(window.AmbulatoryBloodPressureTestRequest, {
-  emptyRequest,
-  testTypeLabel,
-  indicationLabel,
-  formatBloodPressure,
-  TEST_TYPE_LABELS,
-  INDICATION_LABELS
-});
-})();
+export { emptyRequest, testTypeLabel, indicationLabel, formatBloodPressure, TEST_TYPE_LABELS, INDICATION_LABELS };

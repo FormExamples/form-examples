@@ -1,3 +1,5 @@
+import { countSelectedAssays } from './types.js';
+
 // Four-axis rule catalogue for the Toxicology Test Request engine.
 //
 // Derived from index.md and SQL migration 05/06: (A) appropriateness 1-9 +
@@ -11,12 +13,6 @@
 // composes them.
 //
 // Wrapped in an IIFE; published via `window.ToxicologyTestRequest`.
-
-(function () {
-'use strict';
-window.ToxicologyTestRequest = window.ToxicologyTestRequest || {};
-const NS = window.ToxicologyTestRequest;
-const { countSelectedAssays } = NS;
 
 // ----------------------------------------------------------------------
 // Axis A — Appropriateness (TOXBASE / NPIS indication-to-assay match, 1-9)
@@ -349,17 +345,4 @@ function scoreTriage(data) {
   };
 }
 
-Object.assign(NS, {
-  scoreAppropriateness,
-  appropriatenessBand,
-  evaluateTiming,
-  scoreCompleteness,
-  scoreTriage,
-  maxTier,
-  selectedAssayFields,
-  TRIAGE_ORDER,
-  TARGET_TIMEFRAMES,
-  INDICATION_ASSAY_MAP,
-  PARACETAMOL_NOMOGRAM_HOURS
-});
-})();
+export { scoreAppropriateness, appropriatenessBand, evaluateTiming, scoreCompleteness, scoreTriage, maxTier, selectedAssayFields, TRIAGE_ORDER, TARGET_TIMEFRAMES, INDICATION_ASSAY_MAP, PARACETAMOL_NOMOGRAM_HOURS };

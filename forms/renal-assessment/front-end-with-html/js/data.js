@@ -6,10 +6,6 @@
 // category (A1-A3), and every KDIGO composite-risk band; NHS numbers in the
 // canonical "NNN NNN NNNN" display form.
 
-(function () {
-'use strict';
-window.RenalAssessmentDashboard = window.RenalAssessmentDashboard || {};
-
 /** @type {import('./types.js').PatientRow[]} */
 const samplePatients = [
   {
@@ -122,5 +118,4 @@ const samplePatients = [
   }
 ];
 
-window.RenalAssessmentDashboard.samplePatients = samplePatients;
-})();
+export { samplePatients };

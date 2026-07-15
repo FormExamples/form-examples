@@ -1,3 +1,6 @@
+import { calculateResponderGrade } from './responder-grader.js';
+import { bmiCategory, calculateBMI, competencyClass, competencyLabel, emptyAssessment, fitnessDecisionClass, fitnessDecisionLabel, gradeClass, gradeLabel, riskLevelClass, riskLevelLabel } from './types.js';
+
 // First Responder Assessment - patient wizard (vanilla JavaScript, no build).
 //
 // Single-page continuous wizard: every section is rendered into the page in
@@ -10,24 +13,6 @@
 // exports to `window.FirstResponderAssessment`. Pulling them off here keeps
 // the rest of this file referring to short local names. Whole file is
 // wrapped in an IIFE so its top-level identifiers don't leak globally.
-(function () {
-'use strict';
-
-const NS = window.FirstResponderAssessment;
-const {
-  emptyAssessment,
-  calculateBMI,
-  bmiCategory,
-  competencyLabel,
-  competencyClass,
-  fitnessDecisionLabel,
-  fitnessDecisionClass,
-  riskLevelLabel,
-  riskLevelClass,
-  gradeLabel,
-  gradeClass,
-  calculateResponderGrade
-} = NS;
 
 // ----------------------------------------------------------------------
 // Persistence
@@ -1519,4 +1504,3 @@ if (document.readyState === 'loading') {
 } else {
   init();
 }
-})();

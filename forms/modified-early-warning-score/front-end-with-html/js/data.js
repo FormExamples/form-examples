@@ -5,11 +5,6 @@
 // The rows span the low / medium / high risk bands, every care setting, and
 // both single-parameter-trigger states.
 
-(function () {
-'use strict';
-window.ModifiedEarlyWarningScoreDashboard =
-  window.ModifiedEarlyWarningScoreDashboard || {};
-
 /** @type {import('./dashboard-types.js').ObservationRow[]} */
 const sampleObservations = [
   {
@@ -84,5 +79,4 @@ const sampleObservations = [
   }
 ];
 
-window.ModifiedEarlyWarningScoreDashboard.sampleObservations = sampleObservations;
-})();
+export { sampleObservations };

@@ -25,9 +25,6 @@
  */
 
 // Wrapped in an IIFE; published via window.HormoneReplacementTherapyAssessment.
-(function () {
-'use strict';
-window.HormoneReplacementTherapyAssessment = window.HormoneReplacementTherapyAssessment || {};
 
 /** @type {MRSRule[]} */
 const mrsRules = [
@@ -115,5 +112,4 @@ const mrsRules = [
   }
 ];
 
-window.HormoneReplacementTherapyAssessment.mrsRules = mrsRules;
-})();
+export { mrsRules };

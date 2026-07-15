@@ -1,3 +1,6 @@
+import { frequencyToScore, psqiComponents } from './psqi-rules.js';
+import { psqiCategory, sleepEfficiencyCalc } from './types.js';
+
 // PSQI (Pittsburgh Sleep Quality Index) grader.
 //
 // Pure function: takes an `AssessmentData` object and returns the global
@@ -17,10 +20,6 @@
  */
 
 // Wrapped in an IIFE; published via window.SleepQualityAssessment.
-(function () {
-'use strict';
-const NS = window.SleepQualityAssessment = window.SleepQualityAssessment || {};
-const { psqiComponents, frequencyToScore, psqiCategory, sleepEfficiencyCalc } = NS;
 
 /**
  * Calculate the PSQI Global Score from patient data.
@@ -183,5 +182,4 @@ function calculatePSQI(data) {
   return { psqiScore, psqiCategoryLabel, firedRules };
 }
 
-Object.assign(window.SleepQualityAssessment, { calculatePSQI });
-})();
+export { calculatePSQI };

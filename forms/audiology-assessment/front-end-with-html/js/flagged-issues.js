@@ -3,9 +3,6 @@
 //
 // Mirrors src/lib/engine/flagged-issues.ts in the SvelteKit form.
 
-(function () {
-'use strict';
-
 function detectAdditionalFlags(data) {
   const flags = [];
 
@@ -226,5 +223,4 @@ function detectAdditionalFlags(data) {
   return flags;
 }
 
-Object.assign(window.AudiologyAssessment, { detectAdditionalFlags });
-})();
+export { detectAdditionalFlags };

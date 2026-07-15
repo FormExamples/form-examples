@@ -4,10 +4,7 @@
 // Each rule identifies a required field and the error message to display
 // if the field is empty or unanswered.
 
-(function () {
-  'use strict';
-
-  const NS = (window.ConsentToTreatment = window.ConsentToTreatment || {});
+  
 
   /** @type {{ id: string, section: string, field: string, message: string }[]} */
   const validationRules = [
@@ -64,5 +61,6 @@
     { id: 'REQ-SC-006', section: 'signatureConsent', field: 'clinicianRole', message: 'Clinician role is required' }
   ];
 
-  NS.validationRules = validationRules;
-})();
+  
+
+export { validationRules };

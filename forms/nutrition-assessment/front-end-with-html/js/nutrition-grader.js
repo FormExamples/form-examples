@@ -1,3 +1,5 @@
+import { mustRules } from './must-rules.js';
+
 // Nutrition / MUST grader. Pure functions: take an `AssessmentData` object,
 // return the total MUST score (0-6), the `MUSTRisk`, an overall
 // `SeverityLevel`, and the list of fired rules. Items the patient has not
@@ -27,10 +29,6 @@
  */
 
 // Wrapped in an IIFE; published via window.NutritionAssessment.
-(function () {
-'use strict';
-window.NutritionAssessment = window.NutritionAssessment || {};
-const { mustRules } = window.NutritionAssessment;
 
 /**
  * Classify a numeric MUST score (0-6) into a risk band.
@@ -169,13 +167,4 @@ function calculateMUST(data) {
   return { mustScore, mustRisk, severity, answeredCount, firedRules };
 }
 
-Object.assign(window.NutritionAssessment, {
-  classifyMUSTScore,
-  mustRiskLabel,
-  severityLabel,
-  severityClass,
-  mustRiskToSeverity,
-  escalateSeverity,
-  calculateMUST
-});
-})();
+export { classifyMUSTScore, mustRiskLabel, severityLabel, severityClass, mustRiskToSeverity, escalateSeverity, calculateMUST };

@@ -3,11 +3,6 @@
 // implementation, plus the picklist option arrays consumed by the form
 // renderer (record types and purpose of release).
 
-(function () {
-'use strict';
-const NS = window.MedicalRecordsReleasePermission =
-  window.MedicalRecordsReleasePermission || {};
-
 /**
  * Required-field validation rules. Each rule defines a required field and
  * its parent section. Iteration order is the order in which rules fire.
@@ -84,9 +79,4 @@ const purposeOptions = [
   { value: 'other', label: 'Other' }
 ];
 
-Object.assign(NS, {
-  validationRules,
-  recordTypeOptions,
-  purposeOptions
-});
-})();
+export { validationRules, recordTypeOptions, purposeOptions };

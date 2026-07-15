@@ -6,10 +6,6 @@
 // score range (0-23), every care setting, with the admit flag set whenever the
 // risk band is high (score >= 6).
 
-(function () {
-'use strict';
-window.GlasgowBlatchfordBleedingScoreDashboard = window.GlasgowBlatchfordBleedingScoreDashboard || {};
-
 /** @type {import('./dashboard-types.js').AssessmentRow[]} */
 const sampleAssessments = [
   {
@@ -84,5 +80,4 @@ const sampleAssessments = [
   }
 ];
 
-window.GlasgowBlatchfordBleedingScoreDashboard.sampleAssessments = sampleAssessments;
-})();
+export { sampleAssessments };

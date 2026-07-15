@@ -6,11 +6,6 @@
 // down) or returns an empty list, callers fall back to the sample data
 // shipped in `data.js` so the page is usable standalone.
 
-(function () {
-'use strict';
-window.NeurodiversityAdjustmentRequestDashboard =
-  window.NeurodiversityAdjustmentRequestDashboard || {};
-
 const API_BASE = 'http://localhost:5150';
 const REQUESTS_PATH = '/api/neurodiversity_adjustment_requests';
 
@@ -41,6 +36,4 @@ async function fetchRequests() {
   return [];
 }
 
-window.NeurodiversityAdjustmentRequestDashboard.fetchRequests = fetchRequests;
-window.NeurodiversityAdjustmentRequestDashboard.API_BASE = API_BASE;
-})();
+export { fetchRequests, API_BASE };

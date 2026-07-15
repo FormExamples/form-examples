@@ -1,3 +1,5 @@
+import { DHI_ITEMS } from './types.js';
+
 // Audio-Vestibular Assessment scoring rules.
 //
 // Two independent instruments are computed:
@@ -25,10 +27,6 @@
 // being a per-frequency / per-ear measurement extractor.
 
 // Wrapped in an IIFE; published via window.AudioVestibularAssessment.
-(function () {
-'use strict';
-const NS = window.AudioVestibularAssessment = window.AudioVestibularAssessment || {};
-const { DHI_ITEMS } = NS;
 
 /** Calculate a four-frequency PTA from {hz500, hz1000, hz2000, hz4000}. */
 function calculatePtaFromThresholds(thr) {
@@ -111,14 +109,4 @@ function dhiHandicapClass(level) {
   }
 }
 
-Object.assign(NS, {
-  calculatePtaFromThresholds,
-  classifyHearingLossGrade,
-  hearingLossGradeLabel,
-  hearingLossGradeClass,
-  dhiAnswerScore,
-  classifyDhiHandicap,
-  dhiHandicapLabel,
-  dhiHandicapClass
-});
-})();
+export { calculatePtaFromThresholds, classifyHearingLossGrade, hearingLossGradeLabel, hearingLossGradeClass, dhiAnswerScore, classifyDhiHandicap, dhiHandicapLabel, dhiHandicapClass };

@@ -1,3 +1,5 @@
+import { systemScorers } from './rules.js';
+
 // SOFA grader. Pure functions: take an `AssessmentData` object, run the six
 // per-system scorers in `systemScorers`, sum the non-null sub-scores into the
 // total (0-24), derive delta-SOFA from the recorded baseline, band the total
@@ -23,11 +25,6 @@
  */
 
 // Wrapped in an IIFE; published via window.SequentialOrganFailureAssessment.
-(function () {
-'use strict';
-window.SequentialOrganFailureAssessment =
-  window.SequentialOrganFailureAssessment || {};
-const { systemScorers } = window.SequentialOrganFailureAssessment;
 
 const SYSTEMS = ['respiration', 'coagulation', 'liver', 'cardiovascular', 'cns', 'renal'];
 
@@ -143,9 +140,4 @@ function calculateSofaGrade(data) {
   };
 }
 
-Object.assign(window.SequentialOrganFailureAssessment, {
-  SYSTEMS,
-  deriveMortalityBand,
-  calculateSofaGrade
-});
-})();
+export { SYSTEMS, deriveMortalityBand, calculateSofaGrade };

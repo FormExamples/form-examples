@@ -23,10 +23,6 @@
  */
 
 // Wrapped in an IIFE; published via window.ChronicObstructivePulmonaryDiseaseReview.
-(function () {
-'use strict';
-window.ChronicObstructivePulmonaryDiseaseReview =
-  window.ChronicObstructivePulmonaryDiseaseReview || {};
 
 // ----------------------------------------------------------------------
 // Shared threshold helpers (single source of truth for the grader)
@@ -259,14 +255,4 @@ const supportingComponents = [
     present: (d) => d.selfManagement.rescuePackSupplied !== '' }
 ];
 
-Object.assign(window.ChronicObstructivePulmonaryDiseaseReview, {
-  copdRules,
-  coreComponents,
-  supportingComponents,
-  goldGradeOf,
-  symptomBurdenOf,
-  exacerbationRiskOf,
-  abeGroupOf,
-  hasAxisData
-});
-})();
+export { copdRules, coreComponents, supportingComponents, goldGradeOf, symptomBurdenOf, exacerbationRiskOf, abeGroupOf, hasAxisData };

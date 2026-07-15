@@ -43,12 +43,7 @@
 // <script> (no ES modules) so the page can be opened directly via `file://`.
 // The IIFE attaches its public symbols to a single global namespace,
 // `window.Arc42Dashboard`.
-(function () {
-'use strict';
-window.Arc42Dashboard =
-  window.Arc42Dashboard || {};
 
 // No runtime exports; types are JSDoc-only. Touch the namespace so this file
 // is unambiguously side-effecting and other files can rely on it loading
 // before they read `window.Arc42Dashboard`.
-})();

@@ -6,10 +6,6 @@
 // Property names are camelCase to match the front-end serde / examples
 // convention. Wrapped in an IIFE; published via `window.ToxicologyTestRequest`.
 
-(function () {
-'use strict';
-window.ToxicologyTestRequest = window.ToxicologyTestRequest || {};
-
 /**
  * Canonical list of the orderable toxicology assays. The `field` is the
  * camelCase property on the `assays` section (matches the SQL boolean column
@@ -107,12 +103,4 @@ function indicationLabel(value) {
   return INDICATION_LABELS[value] || value || '';
 }
 
-Object.assign(window.ToxicologyTestRequest, {
-  ASSAYS,
-  emptyRequest,
-  countSelectedAssays,
-  assayLabel,
-  indicationLabel,
-  INDICATION_LABELS
-});
-})();
+export { ASSAYS, emptyRequest, countSelectedAssays, assayLabel, indicationLabel, INDICATION_LABELS };

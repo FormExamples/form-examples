@@ -230,9 +230,6 @@
 // <script> (no ES modules) so the page can be opened directly via `file://`.
 // The IIFE attaches its public symbols to a single global namespace,
 // `window.AnaestheticRecord`.
-(function () {
-'use strict';
-window.AnaestheticRecord = window.AnaestheticRecord || {};
 
 /**
  * Build a fresh, fully-blank drug-administration row.
@@ -560,25 +557,4 @@ function priorityLabel(priority) {
   }
 }
 
-Object.assign(window.AnaestheticRecord, {
-  emptyDrug,
-  emptyObservation,
-  emptyEvent,
-  emptyRecord,
-  statusLabel,
-  statusClass,
-  urgencyLabel,
-  sexLabel,
-  asaLabel,
-  anaestheticTechniqueLabel,
-  airwayTechniqueLabel,
-  regionalTechniqueLabel,
-  recoveryDestinationLabel,
-  doseUnitLabel,
-  routeLabel,
-  drugCategoryLabel,
-  eventTypeLabel,
-  monitoringModalityLabel,
-  priorityLabel
-});
-})();
+export { emptyDrug, emptyObservation, emptyEvent, emptyRecord, statusLabel, statusClass, urgencyLabel, sexLabel, asaLabel, anaestheticTechniqueLabel, airwayTechniqueLabel, regionalTechniqueLabel, recoveryDestinationLabel, doseUnitLabel, routeLabel, drugCategoryLabel, eventTypeLabel, monitoringModalityLabel, priorityLabel };

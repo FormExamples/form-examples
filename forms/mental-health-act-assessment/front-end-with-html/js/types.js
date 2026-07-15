@@ -170,9 +170,6 @@
 // <script> (no ES modules) so the page can be opened directly via `file://`.
 // The IIFE attaches its public symbols to a single global namespace,
 // `window.MentalHealthActAssessment`.
-(function () {
-'use strict';
-window.MentalHealthActAssessment = window.MentalHealthActAssessment || {};
 
 /**
  * Build a fresh, fully-blank assessment.
@@ -414,23 +411,4 @@ function priorityLabel(priority) {
   }
 }
 
-Object.assign(window.MentalHealthActAssessment, {
-  emptyAssessment,
-  completenessStatusLabel,
-  completenessStatusClass,
-  sectionClassLabel,
-  sectionClassShort,
-  urgencyLabel,
-  urgencyClass,
-  criterionLabel,
-  locationLabel,
-  ageBandLabel,
-  sexLabel,
-  imminenceLabel,
-  outcomeLabel,
-  conveyanceLabel,
-  consultedLabel,
-  yesNoLabel,
-  priorityLabel
-});
-})();
+export { emptyAssessment, completenessStatusLabel, completenessStatusClass, sectionClassLabel, sectionClassShort, urgencyLabel, urgencyClass, criterionLabel, locationLabel, ageBandLabel, sexLabel, imminenceLabel, outcomeLabel, conveyanceLabel, consultedLabel, yesNoLabel, priorityLabel };

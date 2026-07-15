@@ -19,9 +19,6 @@
  */
 
 // Wrapped in an IIFE; published via window.PulmonaryEmbolismRuleOutCriteria.
-(function () {
-'use strict';
-window.PulmonaryEmbolismRuleOutCriteria = window.PulmonaryEmbolismRuleOutCriteria || {};
 
 /**
  * True when any criterion input or the pre-test probability is unanswered.
@@ -141,8 +138,4 @@ function detectFlaggedIssues(data, grade) {
   return flags;
 }
 
-Object.assign(window.PulmonaryEmbolismRuleOutCriteria, {
-  hasMissingInputs,
-  detectFlaggedIssues
-});
-})();
+export { hasMissingInputs, detectFlaggedIssues };

@@ -1,3 +1,5 @@
+import { ecogRules } from './ecog-rules.js';
+
 // ECOG Performance Status grader. Pure function: evaluates all declarative
 // `ecogRules` against the supplied `AssessmentData` and returns the maximum
 // grade among fired rules (worst-case impairment), defaulting to ECOG 0
@@ -12,10 +14,6 @@
  */
 
 // Wrapped in an IIFE; published via window.OncologyAssessment.
-(function () {
-'use strict';
-window.OncologyAssessment = window.OncologyAssessment || {};
-const { ecogRules } = window.OncologyAssessment;
 
 /**
  * Evaluate every ECOG rule against the supplied assessment data.
@@ -51,5 +49,4 @@ function calculateECOG(data) {
   return { ecogGrade, firedRules };
 }
 
-window.OncologyAssessment.calculateECOG = calculateECOG;
-})();
+export { calculateECOG };

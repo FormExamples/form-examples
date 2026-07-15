@@ -1,3 +1,5 @@
+import { cssrsRules } from './rules.js';
+
 // C-SSRS grader. Pure functions, no I/O. C-SSRS is a status- and
 // severity-classification instrument — NOT a summed score.
 //
@@ -28,11 +30,6 @@
  */
 
 // Wrapped in an IIFE; published via window.ColumbiaSuicideSeverityRatingScale.
-(function () {
-'use strict';
-window.ColumbiaSuicideSeverityRatingScale =
-  window.ColumbiaSuicideSeverityRatingScale || {};
-const { cssrsRules } = window.ColumbiaSuicideSeverityRatingScale;
 
 /** Management recommendation per risk tier (spec §4 tier table). */
 const MANAGEMENT = {
@@ -141,8 +138,4 @@ function calculateCssrsGrade(data) {
   };
 }
 
-Object.assign(window.ColumbiaSuicideSeverityRatingScale, {
-  evaluateCriteria,
-  calculateCssrsGrade
-});
-})();
+export { evaluateCriteria, calculateCssrsGrade };

@@ -6,11 +6,6 @@
 // care setting, and both blocking-flag states (a blocking flag always forces an
 // incomplete status).
 
-(function () {
-'use strict';
-window.HistoryAndPhysicalExaminationDashboard =
-  window.HistoryAndPhysicalExaminationDashboard || {};
-
 /** @type {import('./dashboard-types.js').AssessmentRow[]} */
 const sampleAssessments = [
   {
@@ -85,5 +80,4 @@ const sampleAssessments = [
   }
 ];
 
-window.HistoryAndPhysicalExaminationDashboard.sampleAssessments = sampleAssessments;
-})();
+export { sampleAssessments };

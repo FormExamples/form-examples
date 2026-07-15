@@ -143,9 +143,6 @@
 // classic <script> (no ES modules) so the page works when opened directly
 // via `file://`. The IIFE attaches its public symbols to a single global
 // namespace, `window.HeartHealthCheck`.
-(function () {
-'use strict';
-window.HeartHealthCheck = window.HeartHealthCheck || {};
 
 /**
  * Build a fresh, fully-blank assessment.
@@ -300,15 +297,4 @@ function riskCategoryClass(level) {
   }
 }
 
-Object.assign(window.HeartHealthCheck, {
-  emptyAssessment,
-  calculateBMI,
-  bmiCategory,
-  calculateTcHdlRatio,
-  isSmoker,
-  smokingPoints,
-  isLikelyDraft,
-  riskCategoryLabel,
-  riskCategoryClass
-});
-})();
+export { emptyAssessment, calculateBMI, bmiCategory, calculateTcHdlRatio, isSmoker, smokingPoints, isLikelyDraft, riskCategoryLabel, riskCategoryClass };

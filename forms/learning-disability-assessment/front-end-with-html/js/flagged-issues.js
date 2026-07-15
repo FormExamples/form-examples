@@ -10,9 +10,6 @@
  */
 
 // Wrapped in an IIFE; published via window.LearningDisabilityAssessment.
-(function () {
-'use strict';
-window.LearningDisabilityAssessment = window.LearningDisabilityAssessment || {};
 
 /**
  * @param {AssessmentData} data
@@ -293,5 +290,4 @@ function detectAdditionalFlags(data) {
   return flags;
 }
 
-window.LearningDisabilityAssessment.detectAdditionalFlags = detectAdditionalFlags;
-})();
+export { detectAdditionalFlags };

@@ -1,3 +1,5 @@
+import { calculateAge } from './types.js';
+
 // Declarative plastic surgery grading rules.
 // Each rule evaluates patient data and returns true if the condition is
 // present. Grade 1 = mild, 2 = moderate, 3 = significant, 4 = severe/critical.
@@ -14,10 +16,6 @@
  */
 
 // IIFE; exposes via window.PlasticSurgeryAssessment.
-(function () {
-'use strict';
-window.PlasticSurgeryAssessment = window.PlasticSurgeryAssessment || {};
-const { calculateAge } = window.PlasticSurgeryAssessment;
 
 /** @type {PlasticsRule[]} */
 const plasticsRules = [
@@ -94,5 +92,4 @@ const plasticsRules = [
   { id: 'VTE-001', category: 'VTE Risk', description: 'High VTE risk', grade: 3, evaluate: (d) => d.procedurePlanningConsent.vteRisk === 'high' }
 ];
 
-window.PlasticSurgeryAssessment.plasticsRules = plasticsRules;
-})();
+export { plasticsRules };

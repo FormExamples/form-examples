@@ -26,10 +26,6 @@
  */
 
 // Wrapped in an IIFE; published via window.WellsScoreForPulmonaryEmbolism.
-(function () {
-'use strict';
-window.WellsScoreForPulmonaryEmbolism =
-  window.WellsScoreForPulmonaryEmbolism || {};
 
 /** @type {WellsRule[]} */
 const wellsRules = [
@@ -107,5 +103,4 @@ const wellsRules = [
   }
 ];
 
-window.WellsScoreForPulmonaryEmbolism.wellsRules = wellsRules;
-})();
+export { wellsRules };

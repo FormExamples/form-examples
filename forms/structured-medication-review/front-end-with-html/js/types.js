@@ -160,9 +160,6 @@
 // classic <script> (no ES modules) so the page can be opened directly via
 // `file://`. The IIFE attaches its public symbols to a single global
 // namespace, `window.StructuredMedicationReview`.
-(function () {
-'use strict';
-window.StructuredMedicationReview = window.StructuredMedicationReview || {};
 
 /**
  * Build a fresh, fully-blank medicine row.
@@ -396,23 +393,4 @@ function priorityLabel(priority) {
   }
 }
 
-Object.assign(window.StructuredMedicationReview, {
-  emptyMedicine,
-  emptyReview,
-  reviewStatusLabel,
-  reviewStatusClass,
-  burdenBandLabel,
-  burdenBandClass,
-  polypharmacyBandLabel,
-  anticholinergicBandLabel,
-  clinicianRoleLabel,
-  careSettingLabel,
-  consultationModeLabel,
-  sexLabel,
-  ageBandLabel,
-  frailtyLabel,
-  adherenceLabel,
-  highRiskClassLabel,
-  priorityLabel
-});
-})();
+export { emptyMedicine, emptyReview, reviewStatusLabel, reviewStatusClass, burdenBandLabel, burdenBandClass, polypharmacyBandLabel, anticholinergicBandLabel, clinicianRoleLabel, careSettingLabel, consultationModeLabel, sexLabel, ageBandLabel, frailtyLabel, adherenceLabel, highRiskClassLabel, priorityLabel };

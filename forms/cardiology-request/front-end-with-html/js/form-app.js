@@ -1,3 +1,6 @@
+import { calculateGrade } from './grader.js';
+import { emptyRequest, reasonLabel, serviceLabel } from './types.js';
+
 // Cardiology Request — clinician referral wizard (vanilla JS).
 //
 // Single-page continuous wizard: every section is rendered into the page in
@@ -9,17 +12,6 @@
 // Sibling files loaded as plain `<script>` tags (in order) attach their
 // exports to `window.CardiologyRequest`. The whole file is wrapped in an IIFE
 // so its top-level identifiers don't leak to the global scope.
-
-(function () {
-'use strict';
-
-const NS = window.CardiologyRequest;
-const {
-  emptyRequest,
-  serviceLabel,
-  reasonLabel,
-  calculateGrade
-} = NS;
 
 // ----------------------------------------------------------------------
 // Persistence
@@ -863,4 +855,3 @@ if (document.readyState === 'loading') {
 } else {
   init();
 }
-})();

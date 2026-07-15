@@ -8,11 +8,6 @@
 // suspected-endocarditis case, a raised-BNP heart-failure case, and a
 // rarely-appropriate case.
 
-(function () {
-'use strict';
-window.EchocardiogramTestRequestDashboard =
-  window.EchocardiogramTestRequestDashboard || {};
-
 /** @type {import('./types.js').RequestRow[]} */
 const sampleRequests = [
   {
@@ -157,5 +152,4 @@ const sampleRequests = [
   }
 ];
 
-window.EchocardiogramTestRequestDashboard.sampleRequests = sampleRequests;
-})();
+export { sampleRequests };

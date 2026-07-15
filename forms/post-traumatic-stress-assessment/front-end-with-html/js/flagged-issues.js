@@ -18,10 +18,6 @@
  * @typedef {import('./types.js').AdditionalFlag} AdditionalFlag
  */
 
-(function () {
-'use strict';
-window.PostTraumaticStressAssessment = window.PostTraumaticStressAssessment || {};
-
 /**
  * @param {AssessmentData} data
  * @param {number} total
@@ -129,5 +125,4 @@ function detectAdditionalFlags(data, total, probableDsm5, answeredCount) {
   return flags;
 }
 
-window.PostTraumaticStressAssessment.detectAdditionalFlags = detectAdditionalFlags;
-})();
+export { detectAdditionalFlags };

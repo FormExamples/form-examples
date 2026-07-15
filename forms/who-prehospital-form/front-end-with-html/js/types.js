@@ -8,10 +8,6 @@
 // via `file://`. The IIFE attaches its public symbols to a single
 // global namespace, `window.WhoPrehospitalForm`.
 
-(function () {
-'use strict';
-window.WhoPrehospitalForm = window.WhoPrehospitalForm || {};
-
 /** @returns {object} A fresh PeEntry (Physical Exam per-system). */
 function emptyPeEntry() {
   return { normal: false, notes: '' };
@@ -402,17 +398,4 @@ function priorityLabel(priority) {
   }
 }
 
-Object.assign(window.WhoPrehospitalForm, {
-  emptyAssessment,
-  emptyReassessment,
-  hasText,
-  hasNumber,
-  isYesNoAnswered,
-  hasAirwayIntervention,
-  hasBreathingIntervention,
-  hasIvAccessOrFluids,
-  gcsTotal,
-  sectionLabel,
-  priorityLabel
-});
-})();
+export { emptyAssessment, emptyReassessment, hasText, hasNumber, isYesNoAnswered, hasAirwayIntervention, hasBreathingIntervention, hasIvAccessOrFluids, gcsTotal, sectionLabel, priorityLabel };

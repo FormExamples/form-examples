@@ -1,3 +1,7 @@
+import { detectFlaggedIssues } from './flagged-issues.js';
+import { validateReferral } from './referral-validator.js';
+import { emptyAssessment, hasNumber, hasText, isYesNoUnknownAnswered, priorityLabel, sectionLabel } from './types.js';
+
 // WHO Acute Referral Form - patient/clinician wizard (vanilla JS, classic
 // <script>).
 //
@@ -11,19 +15,6 @@
 //
 // Lily HTML headless class contracts are honoured throughout — see
 // `forms/AGENTS-front-end-html.md` for the class vocabulary.
-
-(function () {
-'use strict';
-const {
-  emptyAssessment,
-  hasText,
-  isYesNoUnknownAnswered,
-  hasNumber,
-  sectionLabel,
-  priorityLabel,
-  validateReferral,
-  detectFlaggedIssues
-} = window.WhoAcuteReferralForm;
 
 // ----------------------------------------------------------------------
 // Persistence
@@ -1237,4 +1228,3 @@ if (document.readyState === 'loading') {
 } else {
   init();
 }
-})();

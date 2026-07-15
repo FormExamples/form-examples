@@ -1,3 +1,7 @@
+import { detectFlaggedIssues } from './flags.js';
+import { COMPONENTS, classifyControl, computeStage, selectTarget } from './rules.js';
+import { controlStatusLabel, hypertensionStageLabel, reviewStatusLabel } from './types.js';
+
 // Hypertension-review control-classification and completeness grader. Pure
 // functions: take an `AssessmentData` object and derive the documentation
 // outputs (spec §4). This is NOT a numeric severity score. It emits:
@@ -22,20 +26,6 @@
  */
 
 // Wrapped in an IIFE; published via window.HypertensionReview.
-(function () {
-'use strict';
-window.HypertensionReview = window.HypertensionReview || {};
-const NS = window.HypertensionReview;
-const {
-  selectTarget,
-  classifyControl,
-  computeStage,
-  COMPONENTS,
-  detectFlaggedIssues,
-  controlStatusLabel,
-  reviewStatusLabel,
-  hypertensionStageLabel
-} = NS;
 
 /**
  * Evaluate each review component's documentation status.
@@ -150,10 +140,4 @@ function review(data) {
   };
 }
 
-Object.assign(NS, {
-  computeComponentStatuses,
-  gradeReviewStatus,
-  computeControlStatus,
-  review
-});
-})();
+export { computeComponentStatuses, gradeReviewStatus, computeControlStatus, review };

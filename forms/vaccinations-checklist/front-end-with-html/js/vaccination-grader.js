@@ -1,3 +1,6 @@
+import { detectAdditionalFlags } from './flagged-issues.js';
+import { vaccinationRules } from './vaccination-rules.js';
+
 // Vaccinations Checklist grader. Pure functions: take an `AssessmentData`
 // object, evaluate the vaccination rules, derive completeness signals for
 // childhood / occupational / COVID / flu schedules, and classify overall
@@ -24,11 +27,6 @@
  */
 
 // Wrapped in an IIFE; published via window.VaccinationsChecklist.
-(function () {
-'use strict';
-window.VaccinationsChecklist = window.VaccinationsChecklist || {};
-const NS = window.VaccinationsChecklist;
-const { vaccinationRules } = NS;
 
 /**
  * Determine whether childhood immunisation schedule is complete.
@@ -230,8 +228,8 @@ function calculateVaccinationGrade(data) {
   const overallRisk = deriveOverallRisk(firedRules, complianceStatus, data);
 
   const additionalFlags =
-    typeof NS.detectAdditionalFlags === 'function'
-      ? NS.detectAdditionalFlags(data)
+    typeof detectAdditionalFlags === 'function'
+      ? detectAdditionalFlags(data)
       : [];
 
   const missingVaccinations = deriveMissingVaccinations(data);
@@ -267,14 +265,4 @@ function gradeChecklist(data) {
   };
 }
 
-Object.assign(window.VaccinationsChecklist, {
-  deriveChildhoodComplete,
-  deriveOccupationalComplete,
-  deriveMissingVaccinations,
-  deriveComplianceStatus,
-  deriveOverallRisk,
-  simplifyStatus,
-  calculateVaccinationGrade,
-  gradeChecklist
-});
-})();
+export { deriveChildhoodComplete, deriveOccupationalComplete, deriveMissingVaccinations, deriveComplianceStatus, deriveOverallRisk, simplifyStatus, calculateVaccinationGrade, gradeChecklist };

@@ -1,3 +1,5 @@
+import { effectiveWhoClassification, hasCriticalFinding, hasOsteoporosis } from './rules.js';
+
 // Safety-critical flag detection for the DEXA Bone Density Test Result.
 //
 // Faithful vanilla-JavaScript port of the SvelteKit engine module
@@ -15,14 +17,6 @@
 // Wrapped in an IIFE; published via window.DexaBoneDensityTestResult.
 // Depends on rules.js (the structured-findings predicates), so it must load
 // after it.
-(function () {
-'use strict';
-window.DexaBoneDensityTestResult = window.DexaBoneDensityTestResult || {};
-const {
-  effectiveWhoClassification,
-  hasCriticalFinding,
-  hasOsteoporosis
-} = window.DexaBoneDensityTestResult;
 
 /**
  * Detects safety-critical flags independently of the four axes. Flags are
@@ -147,7 +141,4 @@ function detectFlags(r) {
   return flags;
 }
 
-Object.assign(window.DexaBoneDensityTestResult, {
-  detectFlags
-});
-})();
+export { detectFlags };

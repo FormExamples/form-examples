@@ -115,10 +115,6 @@
 // classic <script> (no ES modules) so the page can be opened directly via
 // `file://`. The IIFE attaches its public symbols to a single global
 // namespace, `window.AmbulatoryBloodPressureTestResult`.
-(function () {
-'use strict';
-window.AmbulatoryBloodPressureTestResult =
-  window.AmbulatoryBloodPressureTestResult || {};
 
 /**
  * Build a fresh, fully-blank ABPM result.
@@ -306,18 +302,4 @@ function followUpUrgencyClass(value) {
   }
 }
 
-Object.assign(window.AmbulatoryBloodPressureTestResult, {
-  emptyResult,
-  resultClassificationLabel,
-  abnormalitySeverityLabel,
-  followUpUrgencyLabel,
-  recommendationLabel,
-  monitoringTypeLabel,
-  reportStatusLabel,
-  dipperStatusLabel,
-  priorityLabel,
-  resultClassificationClass,
-  abnormalitySeverityClass,
-  followUpUrgencyClass
-});
-})();
+export { emptyResult, resultClassificationLabel, abnormalitySeverityLabel, followUpUrgencyLabel, recommendationLabel, monitoringTypeLabel, reportStatusLabel, dipperStatusLabel, priorityLabel, resultClassificationClass, abnormalitySeverityClass, followUpUrgencyClass };

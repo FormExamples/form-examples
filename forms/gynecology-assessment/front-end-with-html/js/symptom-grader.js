@@ -1,3 +1,6 @@
+import { symptomDefinitions } from './symptom-rules.js';
+import { severityCategory } from './types.js';
+
 // Menstrual Symptom Severity Score grader. Pure functions: take an
 // `AssessmentData` object, return the total symptom score (0-30), the
 // severity category label, and the list of fired rules.
@@ -19,10 +22,6 @@
  */
 
 // Wrapped in an IIFE; published via window.GynecologyAssessment.
-(function () {
-'use strict';
-window.GynecologyAssessment = window.GynecologyAssessment || {};
-const { symptomDefinitions, severityCategory } = window.GynecologyAssessment;
 
 /** Convert flow heaviness to numeric score (0-3) or null if unanswered. */
 function flowHeavinessScore(flow) {
@@ -100,8 +99,4 @@ function calculateSymptomScore(data) {
   return { symptomScore, symptomCategoryLabel, firedRules };
 }
 
-Object.assign(window.GynecologyAssessment, {
-  flowHeavinessScore,
-  calculateSymptomScore
-});
-})();
+export { flowHeavinessScore, calculateSymptomScore };

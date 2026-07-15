@@ -1,3 +1,6 @@
+import { fetchRequests } from './api.js';
+import { sampleRequests } from './data.js';
+
 // Coagulation Test Request — vetting dashboard (vanilla classic-script app).
 //
 // On boot we fetch the request list from the backend; on any failure (or
@@ -10,12 +13,6 @@
 // attach their exports to `window.CoagulationTestRequestDashboard`. The whole
 // file is wrapped in an IIFE so its top-level identifiers do not leak to the
 // global scope.
-(function () {
-'use strict';
-const {
-  fetchRequests,
-  sampleRequests
-} = window.CoagulationTestRequestDashboard;
 
 // ----------------------------------------------------------------------
 // State
@@ -429,4 +426,3 @@ if (document.readyState === 'loading') {
 } else {
   init();
 }
-})();

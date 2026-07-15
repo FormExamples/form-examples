@@ -1,3 +1,7 @@
+import { detectAdditionalFlags } from './flagged-issues.js';
+import { calculateRisk } from './risk-grader.js';
+import { calculateBmi, emptyAssessment, riskLevelClass, riskLevelLabel } from './types.js';
+
 // Framingham Risk Score for Hard CHD — patient/clinician wizard.
 //
 // Single-page continuous wizard: every section renders into the page in
@@ -11,18 +15,6 @@
 // exports to `window.FraminghamRiskScore`. We pull them off here to keep
 // later code referring to short local names. Whole file is wrapped in an
 // IIFE so its top-level identifiers don't leak.
-(function () {
-'use strict';
-
-const NS = window.FraminghamRiskScore;
-const {
-  emptyAssessment,
-  calculateBmi,
-  riskLevelLabel,
-  riskLevelClass,
-  calculateRisk,
-  detectAdditionalFlags
-} = NS;
 
 // ----------------------------------------------------------------------
 // Persistence
@@ -1189,4 +1181,3 @@ if (document.readyState === 'loading') {
 } else {
   init();
 }
-})();

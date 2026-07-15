@@ -1,3 +1,5 @@
+import { calculateAge } from './types.js';
+
 // Flagged-issue detection for the Organ Donation Assessment.
 //
 // Independent of the rule-firing grader, this module raises clinician-facing
@@ -17,11 +19,6 @@
  * @typedef {import('./types.js').AssessmentData} AssessmentData
  * @typedef {import('./types.js').AdditionalFlag} AdditionalFlag
  */
-
-(function () {
-'use strict';
-window.OrganDonationAssessment = window.OrganDonationAssessment || {};
-const { calculateAge } = window.OrganDonationAssessment;
 
 /**
  * @param {AssessmentData} data
@@ -489,5 +486,4 @@ function detectAdditionalFlags(data) {
   return flags;
 }
 
-window.OrganDonationAssessment.detectAdditionalFlags = detectAdditionalFlags;
-})();
+export { detectAdditionalFlags };

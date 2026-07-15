@@ -6,11 +6,6 @@
 // down) or returns an empty list, callers fall back to the sample data shipped
 // in `data.js` so the page is usable standalone.
 
-(function () {
-'use strict';
-window.ModifiedEarlyWarningScoreDashboard =
-  window.ModifiedEarlyWarningScoreDashboard || {};
-
 const API_BASE = 'http://localhost:5150';
 const OBSERVATIONS_PATH = '/api/dashboard/observations';
 
@@ -35,6 +30,4 @@ async function fetchObservations() {
   return data.items || [];
 }
 
-window.ModifiedEarlyWarningScoreDashboard.fetchObservations = fetchObservations;
-window.ModifiedEarlyWarningScoreDashboard.API_BASE = API_BASE;
-})();
+export { fetchObservations, API_BASE };

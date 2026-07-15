@@ -47,8 +47,3 @@
 // Wrapped in an IIFE so locals stay scoped — loaded as a classic <script> so
 // the page opens directly via file://. Attaches its public symbols to
 // `window.UkLpaFinancialDecisionsDashboard`.
-(function () {
-'use strict';
-window.UkLpaFinancialDecisionsDashboard =
-  window.UkLpaFinancialDecisionsDashboard || {};
-})();

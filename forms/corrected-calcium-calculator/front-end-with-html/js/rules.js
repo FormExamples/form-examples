@@ -22,10 +22,6 @@
  */
 
 // Wrapped in an IIFE; published via window.CorrectedCalciumCalculator.
-(function () {
-'use strict';
-window.CorrectedCalciumCalculator =
-  window.CorrectedCalciumCalculator || {};
 
 // ─── Correction constants (spec §4) ─────────────────────────────
 /** Reference (normal) albumin in g/L that results are corrected to. */
@@ -73,13 +69,4 @@ const classificationRules = [
   }
 ];
 
-Object.assign(window.CorrectedCalciumCalculator, {
-  REF_ALBUMIN,
-  FACTOR,
-  LOW,
-  HIGH,
-  SEVERE_HIGH,
-  SEVERE_LOW,
-  classificationRules
-});
-})();
+export { REF_ALBUMIN, FACTOR, LOW, HIGH, SEVERE_HIGH, SEVERE_LOW, classificationRules };

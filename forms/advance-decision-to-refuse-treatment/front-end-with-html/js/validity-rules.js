@@ -1,3 +1,5 @@
+import { hasLifeSustainingRefusal } from './types.js';
+
 // Declarative validity rules for Advance Decision to Refuse Treatment
 // (ADRT). Mirrors `src/lib/engine/validity-rules.ts` from the SvelteKit
 // reference. A "fired rule" means its predicate evaluated to `true`,
@@ -23,10 +25,6 @@
  */
 
 // Wrapped in an IIFE; published via window.AdvanceDecisionToRefuseTreatment.
-(function () {
-'use strict';
-window.AdvanceDecisionToRefuseTreatment = window.AdvanceDecisionToRefuseTreatment || {};
-const { hasLifeSustainingRefusal } = window.AdvanceDecisionToRefuseTreatment;
 
 /** @type {ValidityRule[]} */
 const validityRules = [
@@ -214,5 +212,4 @@ const validityRules = [
   }
 ];
 
-window.AdvanceDecisionToRefuseTreatment.validityRules = validityRules;
-})();
+export { validityRules };

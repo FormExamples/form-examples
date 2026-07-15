@@ -14,9 +14,6 @@
  */
 
 // Wrapped in an IIFE; published via window.PatientIntake.
-(function () {
-'use strict';
-window.PatientIntake = window.PatientIntake || {};
 
 /**
  * @param {AssessmentData} data
@@ -198,5 +195,4 @@ function detectAdditionalFlags(data) {
   return flags;
 }
 
-window.PatientIntake.detectAdditionalFlags = detectAdditionalFlags;
-})();
+export { detectAdditionalFlags };

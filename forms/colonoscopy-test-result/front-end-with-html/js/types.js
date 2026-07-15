@@ -154,9 +154,6 @@
 // classic <script> (no ES modules) so the page can be opened directly via
 // `file://`. The IIFE attaches its public symbols to a single global
 // namespace, `window.ColonoscopyTestResult`.
-(function () {
-'use strict';
-window.ColonoscopyTestResult = window.ColonoscopyTestResult || {};
 
 /**
  * Build a fresh, fully-blank colonoscopy test result.
@@ -369,20 +366,4 @@ function followUpUrgencyClass(value) {
   }
 }
 
-Object.assign(window.ColonoscopyTestResult, {
-  emptyResult,
-  resultClassificationLabel,
-  abnormalitySeverityLabel,
-  followUpUrgencyLabel,
-  procedureLabel,
-  extentReachedLabel,
-  bowelPreparationQualityLabel,
-  complicationLabel,
-  reportStatusLabel,
-  recommendationLabel,
-  priorityLabel,
-  resultClassificationClass,
-  abnormalitySeverityClass,
-  followUpUrgencyClass
-});
-})();
+export { emptyResult, resultClassificationLabel, abnormalitySeverityLabel, followUpUrgencyLabel, procedureLabel, extentReachedLabel, bowelPreparationQualityLabel, complicationLabel, reportStatusLabel, recommendationLabel, priorityLabel, resultClassificationClass, abnormalitySeverityClass, followUpUrgencyClass };

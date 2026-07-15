@@ -1,3 +1,7 @@
+import { detectFlaggedIssues } from './flags.js';
+import { calculateCentorGrade } from './grader.js';
+import { ageModifierLabel, emptyAssessment, priorityLabel, riskBandClass, riskBandLabel } from './types.js';
+
 // Centor Score for Streptococcal Pharyngitis — sore-throat wizard
 // (vanilla JavaScript, no build).
 //
@@ -14,19 +18,6 @@
 // exports to `window.CentorScoreForStreptococcalPharyngitis`. Pulling them off
 // here keeps the rest of this file referring to short local names. The whole
 // file is wrapped in an IIFE so its top-level identifiers don't leak.
-(function () {
-'use strict';
-
-const NS = window.CentorScoreForStreptococcalPharyngitis;
-const {
-  emptyAssessment,
-  riskBandLabel,
-  riskBandClass,
-  ageModifierLabel,
-  priorityLabel,
-  calculateCentorGrade,
-  detectFlaggedIssues
-} = NS;
 
 // ----------------------------------------------------------------------
 // Persistence
@@ -984,4 +975,3 @@ if (document.readyState === 'loading') {
 } else {
   init();
 }
-})();

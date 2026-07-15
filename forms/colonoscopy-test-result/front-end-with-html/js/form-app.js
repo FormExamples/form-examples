@@ -1,3 +1,6 @@
+import { calculateGrade } from './grader.js';
+import { abnormalitySeverityClass, abnormalitySeverityLabel, bowelPreparationQualityLabel, complicationLabel, emptyResult, extentReachedLabel, followUpUrgencyClass, followUpUrgencyLabel, priorityLabel, procedureLabel, recommendationLabel, reportStatusLabel, resultClassificationClass, resultClassificationLabel } from './types.js';
+
 // Colonoscopy Test Result — reporting-clinician wizard
 // (vanilla JavaScript, no build).
 //
@@ -15,27 +18,6 @@
 // exports to `window.ColonoscopyTestResult`. Pulling them off here keeps the
 // rest of this file referring to short local names. The whole file is wrapped
 // in an IIFE so its top-level identifiers don't leak.
-(function () {
-'use strict';
-
-const NS = window.ColonoscopyTestResult;
-const {
-  emptyResult,
-  resultClassificationLabel,
-  abnormalitySeverityLabel,
-  followUpUrgencyLabel,
-  procedureLabel,
-  extentReachedLabel,
-  bowelPreparationQualityLabel,
-  complicationLabel,
-  reportStatusLabel,
-  recommendationLabel,
-  priorityLabel,
-  resultClassificationClass,
-  abnormalitySeverityClass,
-  followUpUrgencyClass,
-  calculateGrade
-} = NS;
 
 // ----------------------------------------------------------------------
 // Persistence
@@ -1037,4 +1019,3 @@ if (document.readyState === 'loading') {
 } else {
   init();
 }
-})();

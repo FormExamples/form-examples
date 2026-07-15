@@ -1,3 +1,7 @@
+import { detectFlaggedIssues } from './flagged-issues.js';
+import { emptyAssessment, hasText, isDoubleVisionBranchActive, isLaserTreatmentBranchActive, isMonocularBranchActive, isVisualFieldBranchActive, isVisualFieldCauseBranchActive, priorityLabel, sectionLabel } from './types.js';
+import { validateV1 } from './v1-validator.js';
+
 // DVLA V1 form - patient wizard (vanilla JS, classic <script>).
 //
 // Single-page continuous wizard: every section is rendered into the page in
@@ -8,22 +12,6 @@
 // Conditional sections (Q2 No -> monocular branch, Q3 Yes -> visual-field
 // cause branch, Q4-Q8 skip-when-No, Q9 controlled-status, Q10/Q11 details)
 // are hidden via re-render.
-
-(function () {
-'use strict';
-const {
-  emptyAssessment,
-  hasText,
-  isMonocularBranchActive,
-  isVisualFieldBranchActive,
-  isVisualFieldCauseBranchActive,
-  isLaserTreatmentBranchActive,
-  isDoubleVisionBranchActive,
-  sectionLabel,
-  priorityLabel,
-  validateV1,
-  detectFlaggedIssues
-} = window.DvlaV1Form;
 
 // ----------------------------------------------------------------------
 // Persistence
@@ -1276,4 +1264,3 @@ if (document.readyState === 'loading') {
 } else {
   init();
 }
-})();

@@ -1,3 +1,5 @@
+import { CRITERIA } from './types.js';
+
 // Declarative criterion registry for the clinical Welsh-language
 // (Cymraeg) speaking assessment.
 //
@@ -14,13 +16,6 @@
  * @typedef {import('./types.js').LinguisticRating} LinguisticRating
  * @typedef {import('./types.js').ClinicalIndicators} ClinicalIndicators
  */
-
-(function () {
-'use strict';
-window.MedicalLanguageSpeakingAssessmentForCymraeg =
-  window.MedicalLanguageSpeakingAssessmentForCymraeg || {};
-const NS = window.MedicalLanguageSpeakingAssessmentForCymraeg;
-const { CRITERIA } = NS;
 
 // ----------------------------------------------------------------------
 // Anchor descriptors per rating point
@@ -70,12 +65,4 @@ function clinicalCriteria() {
   return criterionRegistry.filter((c) => c.domain === 'clinical');
 }
 
-Object.assign(NS, {
-  LINGUISTIC_ANCHORS,
-  CLINICAL_ANCHORS,
-  criterionRegistry,
-  findCriterion,
-  linguisticCriteria,
-  clinicalCriteria
-});
-})();
+export { LINGUISTIC_ANCHORS, CLINICAL_ANCHORS, criterionRegistry, findCriterion, linguisticCriteria, clinicalCriteria };

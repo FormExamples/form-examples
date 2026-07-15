@@ -42,7 +42,9 @@ at runtime. This is consistent with the project-wide no-build constraint.
   names, attribute contracts, and structure rules.
 - **No runtime dependency on Lily.** No `<script src="…/lily/…">`, no
   CSS imports, no npm package. Every form's `front-end-*-with-html/`
-  directory is self-contained and works via `file://`.
+  directory is self-contained (its JS is native ES modules, so it must be
+  served over HTTP, not opened via `file://` — see
+  [`spec/es-modules.md`](../spec/es-modules.md)).
 - **Lily checkout location is `~/git/lilydesignsystem/lily-design-system/lily-design-system-html-headless/`.**
   Generators look there; if absent they fail with a clear error.
 - **Pinned commit recorded in [`lily-version.md`](lily-version.md).**
@@ -202,25 +204,33 @@ Every `front-end-with-html/index.html` (the wizard) follows this skeleton:
 
   <footer><!-- footer content --></footer>
 
-  <script src="js/types.js"></script>
-  <!-- domain scripts in order: rules → grader → flagged-issues -->
-  <script src="js/app.js"></script>
+  <!-- One module entry point; it imports types.js, the rules/grader/
+       flagged-issues modules, etc. through its own import graph. -->
+  <script type="module" src="js/app.js"></script>
 </body>
 </html>
 ```
 
 The dashboard (`front-end-with-html/dashboard.html`) follows the analogous
 `.data-table-*` shell, links its own `css/dashboard.css`, and loads
-`js/dashboard-app.js` (with `js/dashboard-types.js`, `js/data.js`,
-`js/api.js`). The wizard and dashboard cross-link in their page headers.
+`js/dashboard-app.js` as a module (which imports `js/dashboard-types.js`,
+`js/data.js`, `js/api.js`), plus the standalone `js/table-export.js`. The
+wizard and dashboard cross-link in their page headers.
 
 ## 5. JavaScript conventions
 
-- Classic `<script>` tags only. **No** `type="module"`, no bundler, no
-  `import`/`export`. Pages must work via `file://`.
-- IIFE wrapper per file. Public symbols hang off a single
-  `window.FormNameCamelCase` namespace.
-- Script load order:
+- Native **ES modules**: `<script type="module">` + `import` / `export`.
+  The HTML loads a single module entry point (`js/app.js` for the wizard,
+  `js/dashboard-app.js` for the dashboard); every other module is reached
+  through that entry's import graph. No bundler. See
+  [`spec/es-modules.md`](../spec/es-modules.md) for the full contract (and
+  the accepted `file://` tradeoff). `bin/es-modules-refactor --check --all`
+  is the drift detector.
+- Each file `export`s its public symbols and `import`s what it consumes from
+  sibling files by relative path. No IIFE wrapper, no `window.<Namespace>`
+  object (a module already has its own scope). A genuine `window.*`
+  assignment for an inline handler or the smoke test is still fine.
+- Dependency order is expressed by the `import` graph, not `<script>` order:
   `types.js` → form-specific `*-rules.js` → `*-grader.js` →
   `flagged-issues.js` → `app.js`.
 - `app.js` is responsible for:

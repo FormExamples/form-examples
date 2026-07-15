@@ -1,3 +1,5 @@
+import { usesIonisingRadiation } from './types.js';
+
 // Four-axis rule catalogue for the Angiography Test Request engine.
 //
 // Derived from index.md: (A) appropriateness 1-9 + band by indication x
@@ -10,13 +12,6 @@
 // R-COMPLETE-*, R-TRIAGE-*). Pure data + helpers; the grader composes them.
 //
 // Wrapped in an IIFE; published via `window.AngiographyTestRequest`.
-
-(function () {
-'use strict';
-window.AngiographyTestRequest =
-  window.AngiographyTestRequest || {};
-const NS = window.AngiographyTestRequest;
-const { usesIonisingRadiation } = NS;
 
 // ----------------------------------------------------------------------
 // Axis A — Appropriateness (ACR Appropriateness Criteria 1-9 ordinal)
@@ -374,19 +369,4 @@ function scoreTriage(data) {
   };
 }
 
-Object.assign(NS, {
-  scoreAppropriateness,
-  appropriatenessBand,
-  scoreSafety,
-  scoreCompleteness,
-  scoreTriage,
-  maxTier,
-  maxBand,
-  TRIAGE_ORDER,
-  SAFETY_ORDER,
-  TARGET_TIMEFRAMES,
-  INDICATION_TYPE_MAP,
-  SAFETY_RULES,
-  TRIAGE_RULES
-});
-})();
+export { scoreAppropriateness, appropriatenessBand, scoreSafety, scoreCompleteness, scoreTriage, maxTier, maxBand, TRIAGE_ORDER, SAFETY_ORDER, TARGET_TIMEFRAMES, INDICATION_TYPE_MAP, SAFETY_RULES, TRIAGE_RULES };

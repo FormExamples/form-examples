@@ -225,9 +225,6 @@
 // classic <script> (no ES modules) so the page can be opened directly via
 // `file://`. The IIFE attaches its public symbols to a single global
 // namespace, `window.EmployeeSatisfactionSurvey`.
-(function () {
-'use strict';
-window.EmployeeSatisfactionSurvey = window.EmployeeSatisfactionSurvey || {};
 
 /**
  * Build a fresh, fully-blank assessment.
@@ -361,12 +358,4 @@ function classifyENps(value) {
   return 'detractor';
 }
 
-Object.assign(window.EmployeeSatisfactionSurvey, {
-  emptyAssessment,
-  categoryLabel,
-  categoryClass,
-  categoryRank,
-  classifyScore,
-  classifyENps
-});
-})();
+export { emptyAssessment, categoryLabel, categoryClass, categoryRank, classifyScore, classifyENps };

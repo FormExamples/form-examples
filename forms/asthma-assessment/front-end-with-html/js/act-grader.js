@@ -1,3 +1,5 @@
+import { actRules } from './act-rules.js';
+
 // ACT (Asthma Control Test) grader. Pure functions: take an
 // `AssessmentData` object, return the total ACT score (5-25), the
 // `ControlLevel`, and the list of fired rules. Items the patient has not
@@ -16,10 +18,6 @@
  */
 
 // Wrapped in an IIFE; published via window.AsthmaAssessment.
-(function () {
-'use strict';
-window.AsthmaAssessment = window.AsthmaAssessment || {};
-const { actRules } = window.AsthmaAssessment;
 
 /**
  * Classify a numeric ACT score (5-25) into a control level.
@@ -101,10 +99,4 @@ function calculateACT(data) {
   return { actScore, controlLevel, answeredCount, firedRules };
 }
 
-Object.assign(window.AsthmaAssessment, {
-  classifyACTScore,
-  controlLevelLabel,
-  controlLevelClass,
-  calculateACT
-});
-})();
+export { classifyACTScore, controlLevelLabel, controlLevelClass, calculateACT };

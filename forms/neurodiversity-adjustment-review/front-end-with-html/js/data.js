@@ -6,11 +6,6 @@
 // high-risk), and next-step urgency (including the wellbeing-risk auto-escalation
 // and an escalated case).
 
-(function () {
-'use strict';
-window.NeurodiversityAdjustmentReviewDashboard =
-  window.NeurodiversityAdjustmentReviewDashboard || {};
-
 /** @type {import('./dashboard-types.js').ReviewRow[]} */
 const sampleReviews = [
   {
@@ -98,5 +93,4 @@ const sampleReviews = [
   }
 ];
 
-window.NeurodiversityAdjustmentReviewDashboard.sampleReviews = sampleReviews;
-})();
+export { sampleReviews };

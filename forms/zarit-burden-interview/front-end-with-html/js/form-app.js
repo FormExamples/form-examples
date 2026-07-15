@@ -1,3 +1,8 @@
+import { detectFlaggedIssues } from './flags.js';
+import { calculateZaritGrade } from './grader.js';
+import { RESPONSE_SCALE, activeItemNumbers, maxScoreFor, zaritItems } from './rules.js';
+import { bandClass, bandLabel, emptyAssessment, instrumentFormLabel, priorityLabel } from './types.js';
+
 // Zarit Burden Interview (ZBI) — caregiver-burden wizard (vanilla JavaScript,
 // no build).
 //
@@ -19,23 +24,6 @@
 // Sibling files loaded as plain `<script>` tags (in order) attach their exports
 // to `window.ZaritBurdenInterview`. The whole file is wrapped in an IIFE so its
 // top-level identifiers don't leak.
-(function () {
-'use strict';
-
-const NS = window.ZaritBurdenInterview;
-const {
-  emptyAssessment,
-  bandLabel,
-  bandClass,
-  priorityLabel,
-  instrumentFormLabel,
-  zaritItems,
-  RESPONSE_SCALE,
-  activeItemNumbers,
-  maxScoreFor,
-  calculateZaritGrade,
-  detectFlaggedIssues
-} = NS;
 
 // ----------------------------------------------------------------------
 // Persistence
@@ -926,4 +914,3 @@ if (document.readyState === 'loading') {
 } else {
   init();
 }
-})();

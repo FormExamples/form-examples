@@ -6,11 +6,6 @@
 // both two-level bands, and every care setting, with the recommended pathway
 // following the band (CTPA when PE likely, D-dimer when PE unlikely).
 
-(function () {
-'use strict';
-window.WellsScoreForPulmonaryEmbolismDashboard =
-  window.WellsScoreForPulmonaryEmbolismDashboard || {};
-
 /** @type {import('./dashboard-types.js').AssessmentRow[]} */
 const sampleAssessments = [
   {
@@ -85,6 +80,4 @@ const sampleAssessments = [
   }
 ];
 
-window.WellsScoreForPulmonaryEmbolismDashboard.sampleAssessments =
-  sampleAssessments;
-})();
+export { sampleAssessments };

@@ -1,3 +1,5 @@
+import { hasCriticalFinding } from './rules.js';
+
 // Safety-critical flag detection for the Electroencephalogram (EEG) Test
 // Result.
 //
@@ -14,11 +16,6 @@
  */
 
 // Wrapped in an IIFE; published via window.ElectroencephalogramTestResult.
-(function () {
-'use strict';
-window.ElectroencephalogramTestResult =
-  window.ElectroencephalogramTestResult || {};
-const { hasCriticalFinding } = window.ElectroencephalogramTestResult;
 
 /**
  * Detect the safety-critical flags for a report.
@@ -148,7 +145,4 @@ function detectFlags(r) {
   return flags;
 }
 
-Object.assign(window.ElectroencephalogramTestResult, {
-  detectFlags
-});
-})();
+export { detectFlags };

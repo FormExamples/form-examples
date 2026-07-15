@@ -1,3 +1,5 @@
+import { cardioRules } from './rules.js';
+
 // Cardiology grader. Pure functions: take an `AssessmentData` object,
 // evaluate every rule in `cardioRules`, derive CCS Angina and NYHA Heart
 // Failure classes from the patient's self-reported class, and return the
@@ -18,10 +20,6 @@
  */
 
 // Wrapped in an IIFE; published via window.CardiologyAssessment.
-(function () {
-'use strict';
-window.CardiologyAssessment = window.CardiologyAssessment || {};
-const { cardioRules } = window.CardiologyAssessment;
 
 /**
  * Derive the patient-reported CCS Angina Class.
@@ -103,10 +101,4 @@ function calculateCardioGrade(data) {
   return { ccsClass, nyhaClass, overallRisk, firedRules };
 }
 
-Object.assign(window.CardiologyAssessment, {
-  deriveCCSClass,
-  deriveNYHAClass,
-  deriveOverallRisk,
-  calculateCardioGrade
-});
-})();
+export { deriveCCSClass, deriveNYHAClass, deriveOverallRisk, calculateCardioGrade };

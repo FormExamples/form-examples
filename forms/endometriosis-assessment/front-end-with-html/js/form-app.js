@@ -1,3 +1,7 @@
+import { calculateEndoGrade } from './endo-grader.js';
+import { detectAdditionalFlags } from './flagged-issues.js';
+import { asrmStageLabel, asrmStageShort, bmiCategory, calculateBMI, ehp30Label, emptyAssessment, endoGradeLabel, severityClass, severityLabel } from './types.js';
+
 // Endometriosis Assessment - patient wizard (vanilla JavaScript, no build).
 //
 // Single-page continuous wizard: every section is rendered into the page in
@@ -10,23 +14,6 @@
 // exports to `window.EndometriosisAssessment`. Pulling them off here keeps
 // the rest of this file referring to short local names. Whole file is
 // wrapped in an IIFE so its top-level identifiers don't leak globally.
-(function () {
-'use strict';
-
-const NS = window.EndometriosisAssessment;
-const {
-  emptyAssessment,
-  calculateBMI,
-  bmiCategory,
-  ehp30Label,
-  asrmStageLabel,
-  asrmStageShort,
-  severityLabel,
-  severityClass,
-  endoGradeLabel,
-  calculateEndoGrade,
-  detectAdditionalFlags
-} = NS;
 
 // ----------------------------------------------------------------------
 // Persistence
@@ -1670,4 +1657,3 @@ if (document.readyState === 'loading') {
 } else {
   init();
 }
-})();

@@ -1,3 +1,5 @@
+import { bloodUreaPoints, cardiacFailurePoint, gbsRules, haemoglobinPoints, hepaticDiseasePoint, melaenaPoint, pulsePoint, riskBandFor, syncopePoint, systolicBloodPressurePoints } from './rules.js';
+
 // Glasgow-Blatchford grader. Pure functions: take an `AssessmentData` object,
 // score the eight weighted admission parameters (via the helpers in
 // `rules.js`), sum their point contributions into a total of 0-23, and derive
@@ -26,21 +28,6 @@
  */
 
 // Wrapped in an IIFE; published via window.GlasgowBlatchfordBleedingScore.
-(function () {
-'use strict';
-window.GlasgowBlatchfordBleedingScore = window.GlasgowBlatchfordBleedingScore || {};
-const {
-  bloodUreaPoints,
-  haemoglobinPoints,
-  systolicBloodPressurePoints,
-  pulsePoint,
-  melaenaPoint,
-  syncopePoint,
-  hepaticDiseasePoint,
-  cardiacFailurePoint,
-  riskBandFor,
-  gbsRules
-} = window.GlasgowBlatchfordBleedingScore;
 
 /**
  * True when every scored parameter has an input and the patient's sex is known
@@ -147,9 +134,4 @@ function calculateGbsGrade(data) {
   };
 }
 
-Object.assign(window.GlasgowBlatchfordBleedingScore, {
-  isComplete,
-  evaluateRules,
-  calculateGbsGrade
-});
-})();
+export { isComplete, evaluateRules, calculateGbsGrade };

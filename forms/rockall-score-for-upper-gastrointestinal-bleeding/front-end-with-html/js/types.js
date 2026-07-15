@@ -117,10 +117,6 @@
 // classic <script> (no ES modules) so the page can be opened directly via
 // `file://`. The IIFE attaches its public symbols to a single global
 // namespace, `window.RockallScoreForUpperGastrointestinalBleeding`.
-(function () {
-'use strict';
-window.RockallScoreForUpperGastrointestinalBleeding =
-  window.RockallScoreForUpperGastrointestinalBleeding || {};
 
 /**
  * Build a fresh, fully-blank assessment.
@@ -273,18 +269,4 @@ function priorityLabel(priority) {
   }
 }
 
-Object.assign(window.RockallScoreForUpperGastrointestinalBleeding, {
-  emptyAssessment,
-  riskBandLabel,
-  riskBandClass,
-  clinicianRoleLabel,
-  careSettingLabel,
-  sexLabel,
-  comorbidityLabel,
-  endoscopyPerformedLabel,
-  diagnosisLabel,
-  stigmataLabel,
-  shockLabel,
-  priorityLabel
-});
-})();
+export { emptyAssessment, riskBandLabel, riskBandClass, clinicianRoleLabel, careSettingLabel, sexLabel, comorbidityLabel, endoscopyPerformedLabel, diagnosisLabel, stigmataLabel, shockLabel, priorityLabel };

@@ -6,10 +6,6 @@
 // sides, and a range of fired-criterion counts. Because this is a decision rule
 // (ANY-of), a row is "X-ray indicated" exactly when firedCount >= 1.
 
-(function () {
-'use strict';
-window.OttawaKneeRuleDashboard = window.OttawaKneeRuleDashboard || {};
-
 /** @type {import('./dashboard-types.js').AssessmentRow[]} */
 const sampleAssessments = [
   {
@@ -91,5 +87,4 @@ const sampleAssessments = [
   }
 ];
 
-window.OttawaKneeRuleDashboard.sampleAssessments = sampleAssessments;
-})();
+export { sampleAssessments };

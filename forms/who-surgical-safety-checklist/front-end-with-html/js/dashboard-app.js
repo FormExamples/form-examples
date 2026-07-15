@@ -1,3 +1,6 @@
+import { fetchChecklists } from './api.js';
+import { sampleChecklists } from './sample-data.js';
+
 // Dashboard controller for the WHO Surgical Safety Checklist review
 // dashboard. Wires up:
 //   - initial data fetch (with sample-data fallback)
@@ -7,12 +10,6 @@
 //
 // Vanilla JS, no dependencies, no bundler. Attaches no executable export;
 // every public symbol lives on `window.WhoSurgicalSafetyChecklistDashboard`.
-
-(function () {
-'use strict';
-
-const ns = window.WhoSurgicalSafetyChecklistDashboard =
-  window.WhoSurgicalSafetyChecklistDashboard || {};
 
 // -------------------------------------------------------------------- //
 // Column definitions for the sortable table.
@@ -831,11 +828,11 @@ function showBanner(message) {
 // Initial data load.
 // -------------------------------------------------------------------- //
 async function loadData() {
-  const sample = Array.isArray(ns.sampleChecklists) ? ns.sampleChecklists : [];
+  const sample = Array.isArray(sampleChecklists) ? sampleChecklists : [];
 
-  if (typeof ns.fetchChecklists === 'function') {
+  if (typeof fetchChecklists === 'function') {
     try {
-      const rows = await ns.fetchChecklists();
+      const rows = await fetchChecklists();
       if (Array.isArray(rows) && rows.length > 0) {
         return rows;
       }
@@ -857,7 +854,7 @@ async function init() {
   try {
     state.rows = await loadData();
   } catch (e) {
-    state.rows = Array.isArray(ns.sampleChecklists) ? ns.sampleChecklists : [];
+    state.rows = Array.isArray(sampleChecklists) ? sampleChecklists : [];
     showBanner('Unexpected error loading checklists; showing sample data.');
   }
 
@@ -873,13 +870,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
 // Expose a small surface for tests / debugging without making the
 // closure-private state mutable from outside.
-ns.app = {
-  /** Re-run filter + sort + render (useful after programmatic state edits). */
+export const app = {
+                                                                               
   refresh: applyFiltersAndRender,
-  /** Open the detail modal for a specific checklist row. */
+                                                            
   openDetail: openDetailModal,
-  /** Close the detail modal. */
+                                
   closeDetail: closeDetailModal
 };
-
-})();

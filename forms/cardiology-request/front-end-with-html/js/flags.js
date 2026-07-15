@@ -8,12 +8,6 @@
 // Flag IDs are stable and identical across every front-end and the back-end.
 // Wrapped in an IIFE; published via `window.CardiologyRequest`.
 
-(function () {
-'use strict';
-window.CardiologyRequest =
-  window.CardiologyRequest || {};
-const NS = window.CardiologyRequest;
-
 /**
  * Detect safety flags for a cardiology referral request.
  *
@@ -85,5 +79,4 @@ function detectFlags(data /*, context */) {
   return flags;
 }
 
-Object.assign(NS, { detectFlags });
-})();
+export { detectFlags };

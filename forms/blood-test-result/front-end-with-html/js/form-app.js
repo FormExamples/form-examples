@@ -1,3 +1,7 @@
+import { calculateGrade } from './grader.js';
+import { analyteValues } from './rules.js';
+import { abnormalitySeverityClass, abnormalitySeverityLabel, emptyResult, followUpUrgencyClass, followUpUrgencyLabel, overallResultStatusLabel, priorityLabel, recommendationLabel, reportStatusLabel, resultClassificationClass, resultClassificationLabel, specimenConditionLabel, specimenTypeLabel } from './types.js';
+
 // Blood Test Result — reporting-clinician wizard
 // (vanilla JavaScript, no build).
 //
@@ -15,27 +19,6 @@
 // exports to `window.BloodTestResult`. Pulling them off here keeps the
 // rest of this file referring to short local names. The whole file is wrapped
 // in an IIFE so its top-level identifiers don't leak.
-(function () {
-'use strict';
-
-const NS = window.BloodTestResult;
-const {
-  emptyResult,
-  resultClassificationLabel,
-  abnormalitySeverityLabel,
-  followUpUrgencyLabel,
-  overallResultStatusLabel,
-  reportStatusLabel,
-  specimenTypeLabel,
-  specimenConditionLabel,
-  recommendationLabel,
-  priorityLabel,
-  resultClassificationClass,
-  abnormalitySeverityClass,
-  followUpUrgencyClass,
-  analyteValues,
-  calculateGrade
-} = NS;
 
 // ----------------------------------------------------------------------
 // Persistence
@@ -1113,4 +1096,3 @@ if (document.readyState === 'loading') {
 } else {
   init();
 }
-})();

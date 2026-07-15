@@ -6,11 +6,6 @@
 // missing-mandatory-section counts (0-5) and allergy comorbidities flagged
 // for a subset.
 
-(function () {
-'use strict';
-window.InternationalPatientSummaryDashboard =
-  window.InternationalPatientSummaryDashboard || {};
-
 /** @type {import('./types.js').PatientRow[]} */
 const samplePatients = [
   {
@@ -135,5 +130,4 @@ const samplePatients = [
   }
 ];
 
-window.InternationalPatientSummaryDashboard.samplePatients = samplePatients;
-})();
+export { samplePatients };

@@ -1,3 +1,8 @@
+import { detectAdditionalFlags } from './flagged-issues.js';
+import { calculateKdigo } from './kdigo-grader.js';
+import { riskLevelClass, riskLevelLabel } from './kdigo-rules.js';
+import { albuminuriaCategoryLabel, bmiCategory, calculateAge, calculateBMI, classifyAlbuminuriaCategory, classifyGfrCategory, emptyAssessment, estimateEgfrCkdEpi2021, gfrCategoryLabel } from './types.js';
+
 // Renal Assessment - patient/clinician wizard (vanilla JavaScript, no build).
 //
 // Single-page continuous wizard: every section is rendered into the page in
@@ -10,25 +15,6 @@
 // exports to `window.RenalAssessment`. Pulling them off here keeps the rest
 // of this file referring to short local names. Whole file is wrapped in an
 // IIFE so its top-level identifiers don't leak to the global scope.
-(function () {
-'use strict';
-
-const NS = window.RenalAssessment;
-const {
-  emptyAssessment,
-  calculateAge,
-  calculateBMI,
-  bmiCategory,
-  estimateEgfrCkdEpi2021,
-  classifyGfrCategory,
-  classifyAlbuminuriaCategory,
-  gfrCategoryLabel,
-  albuminuriaCategoryLabel,
-  calculateKdigo,
-  riskLevelLabel,
-  riskLevelClass,
-  detectAdditionalFlags
-} = NS;
 
 // ----------------------------------------------------------------------
 // Persistence
@@ -1501,4 +1487,3 @@ if (document.readyState === 'loading') {
 } else {
   init();
 }
-})();

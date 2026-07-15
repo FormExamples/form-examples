@@ -1,3 +1,5 @@
+import { competencyToNumber } from './types.js';
+
 // First Responder declarative grading rules.
 //
 // Each rule evaluates assessment data and returns true if the condition is
@@ -16,11 +18,6 @@
  */
 
 // Wrapped in an IIFE; published via window.FirstResponderAssessment.
-(function () {
-'use strict';
-window.FirstResponderAssessment = window.FirstResponderAssessment || {};
-
-const { competencyToNumber } = window.FirstResponderAssessment;
 
 /** @type {ResponderRule[]} */
 const responderRules = [
@@ -296,5 +293,4 @@ const responderRules = [
   }
 ];
 
-window.FirstResponderAssessment.responderRules = responderRules;
-})();
+export { responderRules };

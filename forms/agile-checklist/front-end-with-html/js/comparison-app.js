@@ -1,7 +1,7 @@
-(function () {
-  'use strict';
-  const NS = window.AgileChecklistDashboard;
-  const C = NS.comparison;
+import { comparison as C } from './comparison.js';
+
+  
+  
 
   const QUADRANTS = [
     'healthy-adoption',
@@ -221,4 +221,3 @@
     document.getElementById('comp-clear').addEventListener('click', clearAll);
     render();
   });
-})();

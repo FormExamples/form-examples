@@ -1,3 +1,7 @@
+import { detectFlaggedIssues } from './flags.js';
+import { calculateBmiBsa } from './grader.js';
+import { bmiCategoryClass, bmiCategoryLabel, bsaFormulaLabel, emptyAssessment, priorityLabel } from './types.js';
+
 // BMI and BSA Calculator — single-page wizard (vanilla JavaScript, no build).
 //
 // Single-page continuous wizard: every step is rendered into the page in
@@ -12,19 +16,6 @@
 // to `window.BmiBsaCalculator`. Pulling them off here keeps the rest of this
 // file referring to short local names. The whole file is wrapped in an IIFE so
 // its top-level identifiers don't leak.
-(function () {
-'use strict';
-
-const NS = window.BmiBsaCalculator;
-const {
-  emptyAssessment,
-  bmiCategoryLabel,
-  bmiCategoryClass,
-  bsaFormulaLabel,
-  priorityLabel,
-  calculateBmiBsa,
-  detectFlaggedIssues
-} = NS;
 
 // ----------------------------------------------------------------------
 // Persistence
@@ -847,4 +838,3 @@ if (document.readyState === 'loading') {
 } else {
   init();
 }
-})();

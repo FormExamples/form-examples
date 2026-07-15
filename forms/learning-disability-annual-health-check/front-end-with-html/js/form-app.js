@@ -1,3 +1,6 @@
+import { assess } from './grader.js';
+import { emptyAssessment, priorityLabel, statusClass, statusLabel } from './types.js';
+
 // Learning Disability Annual Health Check — single-page wizard
 // (vanilla JavaScript, no build).
 //
@@ -14,17 +17,6 @@
 // to `window.LearningDisabilityAnnualHealthCheck`. Pulling them off here keeps
 // the rest of this file referring to short local names. The whole file is
 // wrapped in an IIFE so its top-level identifiers don't leak.
-(function () {
-'use strict';
-
-const NS = window.LearningDisabilityAnnualHealthCheck;
-const {
-  emptyAssessment,
-  statusLabel,
-  statusClass,
-  priorityLabel,
-  assess
-} = NS;
 
 // ----------------------------------------------------------------------
 // Persistence
@@ -1144,4 +1136,3 @@ if (document.readyState === 'loading') {
 } else {
   init();
 }
-})();

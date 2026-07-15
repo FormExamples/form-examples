@@ -1,3 +1,6 @@
+import { detectFlags } from './flags.js';
+import { scoreAppropriateness, scoreCompleteness, scorePriority, scoreTriage } from './rules.js';
+
 // Four-axis grader for the Sleep Study Test Request.
 //
 // Composes the rule sets in rules.js and the safety flags in flags.js into a
@@ -6,19 +9,6 @@
 // across every front-end and the back-end.
 //
 // Wrapped in an IIFE; published via `window.SleepStudyTestRequest`.
-
-(function () {
-'use strict';
-window.SleepStudyTestRequest =
-  window.SleepStudyTestRequest || {};
-const NS = window.SleepStudyTestRequest;
-const {
-  scoreAppropriateness,
-  scorePriority,
-  scoreCompleteness,
-  scoreTriage,
-  detectFlags
-} = NS;
 
 /**
  * Derive an overall recommendation for the sleep-service vetting desk from the
@@ -99,9 +89,4 @@ function calculateGrade(data) {
   };
 }
 
-Object.assign(NS, {
-  calculateGrade,
-  deriveRecommendation,
-  RECOMMENDATION_LABELS
-});
-})();
+export { calculateGrade, deriveRecommendation, RECOMMENDATION_LABELS };

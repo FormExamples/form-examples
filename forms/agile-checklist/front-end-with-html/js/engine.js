@@ -1,10 +1,9 @@
-(function () {
-  'use strict';
+import { PRACTICES_ITEMS, STAKEHOLDERS_ITEMS, TEAMS_ITEMS } from './items.js';
 
-  const NS = (window.AgileChecklist = window.AgileChecklist || {});
-  const TEAMS_ITEMS = NS.TEAMS_ITEMS;
-  const STAKEHOLDERS_ITEMS = NS.STAKEHOLDERS_ITEMS;
-  const PRACTICES_ITEMS = NS.PRACTICES_ITEMS;
+  
+  
+  
+  
 
   const SECTION_LOW_THRESHOLD = 50;
   const SECTION_IMBALANCE_THRESHOLD = 30;
@@ -253,7 +252,8 @@
     };
   }
 
-  NS.bandFor = bandFor;
-  NS.deriveMaturity = deriveMaturity;
-  NS.calculateMaturity = calculateMaturity;
-})();
+  
+  
+  
+
+export { bandFor, deriveMaturity, calculateMaturity };

@@ -9,12 +9,6 @@
 // Flag IDs are stable and identical across every front-end and the back-end.
 // Wrapped in an IIFE; published via `window.EchocardiogramTestRequest`.
 
-(function () {
-'use strict';
-window.EchocardiogramTestRequest =
-  window.EchocardiogramTestRequest || {};
-const NS = window.EchocardiogramTestRequest;
-
 const NT_PROBNP_RAISED = 2000; // NICE NG106: > 2000 ng/L is the urgent threshold
 
 /**
@@ -131,5 +125,4 @@ function duplicateRecentEcho(d) {
   return days >= 0 && days <= 183;
 }
 
-Object.assign(NS, { detectFlags });
-})();
+export { detectFlags };

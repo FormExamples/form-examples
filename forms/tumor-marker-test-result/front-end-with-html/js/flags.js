@@ -1,3 +1,5 @@
+import { hasActionSignal, hasAnyMeasuredMarker, hasGermCellCriticalMarker, isCriticalResult } from './rules.js';
+
 // Safety-critical flag detection for the Tumor Marker Test Result.
 //
 // Faithful vanilla-JavaScript port of the SvelteKit engine module
@@ -15,16 +17,6 @@
 
 // Wrapped in an IIFE; published via window.TumorMarkerTestResult.
 // Depends on rules.js predicates, so it must load after rules.js.
-(function () {
-'use strict';
-window.TumorMarkerTestResult = window.TumorMarkerTestResult || {};
-
-const {
-  isCriticalResult,
-  hasGermCellCriticalMarker,
-  hasActionSignal,
-  hasAnyMeasuredMarker
-} = window.TumorMarkerTestResult;
 
 /**
  * Detects safety-critical flags independently of the four axes.
@@ -140,7 +132,4 @@ function detectFlags(r) {
   return flags;
 }
 
-Object.assign(window.TumorMarkerTestResult, {
-  detectFlags
-});
-})();
+export { detectFlags };

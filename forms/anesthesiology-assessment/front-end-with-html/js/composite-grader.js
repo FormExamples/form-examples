@@ -1,19 +1,14 @@
+import { evaluateAsa } from './asa-rules.js';
+import { evaluateAirway } from './mallampati-rules.js';
+import { evaluateRcri } from './rcri-rules.js';
+import { evaluateStopbang } from './stopbang-rules.js';
+import { worstRisk } from './types.js';
+
 // Composite perioperative-risk grader.
 //
 // Runs the four sub-graders (ASA, Mallampati airway, RCRI, STOP-BANG) and
 // promotes the worst sub-risk to the overall risk level. Also collects
 // every fired rule for the report's audit trail.
-
-(function () {
-'use strict';
-window.AnesthesiologyAssessment = window.AnesthesiologyAssessment || {};
-const {
-  evaluateAsa,
-  evaluateAirway,
-  evaluateRcri,
-  evaluateStopbang,
-  worstRisk
-} = window.AnesthesiologyAssessment;
 
 function gradeAssessment(d) {
   const asa = evaluateAsa(d);
@@ -44,5 +39,4 @@ function gradeAssessment(d) {
   };
 }
 
-window.AnesthesiologyAssessment.gradeAssessment = gradeAssessment;
-})();
+export { gradeAssessment };

@@ -15,10 +15,6 @@
  * @property {(d: AssessmentData) => boolean} evaluate
  */
 
-(function () {
-'use strict';
-window.ErgonomicAssessment = window.ErgonomicAssessment || {};
-
 /** @type {RebaRule[]} */
 const rebaRules = [
   // ─── NECK POSTURE ────────────────────────────────────────
@@ -125,5 +121,4 @@ const rebaRules = [
     evaluate: (d) => d.currentSymptoms.impactOnWork === 'severe' }
 ];
 
-window.ErgonomicAssessment.rebaRules = rebaRules;
-})();
+export { rebaRules };

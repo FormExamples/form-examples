@@ -184,9 +184,6 @@
 // classic <script> (no ES modules) so the page can be opened directly via
 // `file://`. The IIFE attaches its public symbols to a single global
 // namespace, `window.SportsMedicineAssessment`.
-(function () {
-'use strict';
-window.SportsMedicineAssessment = window.SportsMedicineAssessment || {};
 
 /**
  * Build a fresh, fully-blank assessment.
@@ -374,13 +371,4 @@ function gradeClass(g) {
   }
 }
 
-Object.assign(window.SportsMedicineAssessment, {
-  emptyAssessment,
-  calculateBMI,
-  bmiCategory,
-  clearanceLabel,
-  clearanceClass,
-  gradeLabel,
-  gradeClass
-});
-})();
+export { emptyAssessment, calculateBMI, bmiCategory, clearanceLabel, clearanceClass, gradeLabel, gradeClass };

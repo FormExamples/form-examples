@@ -23,9 +23,6 @@
 // classic <script> (no ES modules) so the page can be opened directly via
 // `file://`. The IIFE attaches its public symbols to a single global
 // namespace, `window.PrenatalAssessment`.
-(function () {
-'use strict';
-window.PrenatalAssessment = window.PrenatalAssessment || {};
 
 /**
  * Build a fresh, fully-blank assessment.
@@ -177,13 +174,4 @@ function gestationalWeeksLabel(weeks) {
   return weeks + ' weeks (3rd trimester)';
 }
 
-Object.assign(window.PrenatalAssessment, {
-  emptyAssessment,
-  calculateBMI,
-  bmiCategory,
-  riskCategory,
-  riskLevelLabel,
-  riskLevelClass,
-  gestationalWeeksLabel
-});
-})();
+export { emptyAssessment, calculateBMI, bmiCategory, riskCategory, riskLevelLabel, riskLevelClass, gestationalWeeksLabel };

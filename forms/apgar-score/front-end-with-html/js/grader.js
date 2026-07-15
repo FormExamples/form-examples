@@ -1,3 +1,5 @@
+import { apgarRules, signPoints } from './rules.js';
+
 // Apgar grader. Pure functions: take an `AssessmentData` object, and for each
 // repeated timepoint sum the five signs (each 0/1/2) into a total of 0-10,
 // derive the band, then compare consecutive scored timepoints for the trend.
@@ -27,10 +29,6 @@
  */
 
 // Wrapped in an IIFE; published via window.ApgarScore.
-(function () {
-'use strict';
-window.ApgarScore = window.ApgarScore || {};
-const { apgarRules, signPoints } = window.ApgarScore;
 
 /** Band for a per-timepoint total (0-10). */
 function bandForTotal(total) {
@@ -129,10 +127,4 @@ function calculateApgarGrade(data) {
   };
 }
 
-Object.assign(window.ApgarScore, {
-  bandForTotal,
-  gradeTimepoint,
-  evaluateFiredSigns,
-  calculateApgarGrade
-});
-})();
+export { bandForTotal, gradeTimepoint, evaluateFiredSigns, calculateApgarGrade };

@@ -19,9 +19,6 @@
  */
 
 // Wrapped in an IIFE; published via window.CoagulationTestResult.
-(function () {
-'use strict';
-window.CoagulationTestResult = window.CoagulationTestResult || {};
 
 // ----------------------------------------------------------------------
 // Critical-value and abnormality predicates (mirror `utils.ts`)
@@ -501,16 +498,4 @@ function gradeFollowUp(r, classification, severity) {
   };
 }
 
-Object.assign(window.CoagulationTestResult, {
-  hasCriticalValue,
-  hasDicPicture,
-  hasAnyAbnormalValue,
-  hasIsolatedApttProlongation,
-  hasAnyResultValue,
-  hasSpecimenQualityIssue,
-  classifyResult,
-  gradeSeverity,
-  gradeCompleteness,
-  gradeFollowUp
-});
-})();
+export { hasCriticalValue, hasDicPicture, hasAnyAbnormalValue, hasIsolatedApttProlongation, hasAnyResultValue, hasSpecimenQualityIssue, classifyResult, gradeSeverity, gradeCompleteness, gradeFollowUp };

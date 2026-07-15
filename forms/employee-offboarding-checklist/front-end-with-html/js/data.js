@@ -12,11 +12,6 @@
 // today's date of 2026-05-04; if the page is viewed substantially later the
 // numbers will simply look older — which is fine for sample data.
 
-(function () {
-'use strict';
-window.EmployeeOffboardingChecklistDashboard =
-  window.EmployeeOffboardingChecklistDashboard || {};
-
 /** @type {import('./types.js').EmployeeRow[]} */
 const sampleEmployees = [
   {
@@ -165,5 +160,4 @@ const sampleEmployees = [
   }
 ];
 
-window.EmployeeOffboardingChecklistDashboard.sampleEmployees = sampleEmployees;
-})();
+export { sampleEmployees };

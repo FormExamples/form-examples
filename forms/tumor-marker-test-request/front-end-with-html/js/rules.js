@@ -1,3 +1,5 @@
+import { MARKERS, countSelectedMarkers, markerLabel, selectedMarkerFields } from './types.js';
+
 // Four-axis rule catalogue for the Tumor Marker Test Request engine.
 //
 // Derived from index.md and SQL migrations 05 / 06: (A) appropriateness 1-9 +
@@ -11,13 +13,6 @@
 // grader composes them.
 //
 // Wrapped in an IIFE; published via `window.TumorMarkerTestRequest`.
-
-(function () {
-'use strict';
-window.TumorMarkerTestRequest =
-  window.TumorMarkerTestRequest || {};
-const NS = window.TumorMarkerTestRequest;
-const { MARKERS, selectedMarkerFields, markerLabel } = NS;
 
 // ----------------------------------------------------------------------
 // Axis A — Appropriateness (marker-to-indication fit, 1-9 ordinal)
@@ -250,7 +245,7 @@ function scoreInterpretation(data, context) {
 // percentage of weighted points present.
 
 const COMPLETENESS_FIELDS = [
-  { weight: 3, present: (d) => NS.countSelectedMarkers(d.markers) > 0, ruleId: 'R-COMPLETE-MARKER', label: 'at least one marker' },
+  { weight: 3, present: (d) => countSelectedMarkers(d.markers) > 0, ruleId: 'R-COMPLETE-MARKER', label: 'at least one marker' },
   { weight: 3, present: (d) => !!d.context.primaryIndication, ruleId: 'R-COMPLETE-INDICATION', label: 'primary indication' },
   { weight: 3, present: (d) => !!d.context.clinicalDetails && d.context.clinicalDetails.trim() !== '', ruleId: 'R-COMPLETE-CLINICAL-DETAILS', label: 'clinical details' },
   { weight: 1, present: (d) => !!d.patient.firstName && !!d.patient.lastName, ruleId: 'R-COMPLETE-PATIENT-NAME', label: 'patient name' },
@@ -377,19 +372,4 @@ function scoreTriage(data) {
   };
 }
 
-Object.assign(NS, {
-  scoreAppropriateness,
-  appropriatenessBand,
-  scoreInterpretation,
-  maxInterpretation,
-  scoreCompleteness,
-  scoreTriage,
-  maxTier,
-  TRIAGE_ORDER,
-  INTERPRETATION_ORDER,
-  TARGET_TIMEFRAMES,
-  MARKER_INDICATION_MAP,
-  SCREENING_MISUSE_INDICATIONS,
-  MONITORING_INDICATIONS
-});
-})();
+export { scoreAppropriateness, appropriatenessBand, scoreInterpretation, maxInterpretation, scoreCompleteness, scoreTriage, maxTier, TRIAGE_ORDER, INTERPRETATION_ORDER, TARGET_TIMEFRAMES, MARKER_INDICATION_MAP, SCREENING_MISUSE_INDICATIONS, MONITORING_INDICATIONS };

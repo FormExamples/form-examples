@@ -8,11 +8,6 @@
 // cervical-screening request, a two-week-wait suspected-malignancy case, a
 // previous-high-grade-cytology case, and a specimen-not-collected case.
 
-(function () {
-'use strict';
-window.CytologyTestRequestDashboard =
-  window.CytologyTestRequestDashboard || {};
-
 /** @type {import('./types.js').RequestRow[]} */
 const sampleRequests = [
   {
@@ -157,5 +152,4 @@ const sampleRequests = [
   }
 ];
 
-window.CytologyTestRequestDashboard.sampleRequests = sampleRequests;
-})();
+export { sampleRequests };

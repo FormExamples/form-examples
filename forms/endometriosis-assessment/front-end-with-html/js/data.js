@@ -8,11 +8,6 @@
 // (Stage I 1-5, Stage II 6-15, Stage III 16-40, Stage IV >40); EHP-30
 // scores range 0-100 (higher = worse health-related quality of life).
 
-(function () {
-'use strict';
-window.EndometriosisAssessmentDashboard =
-  window.EndometriosisAssessmentDashboard || {};
-
 /** @type {import('./types.js').PatientRow[]} */
 const samplePatients = [
   {
@@ -137,5 +132,4 @@ const samplePatients = [
   }
 ];
 
-window.EndometriosisAssessmentDashboard.samplePatients = samplePatients;
-})();
+export { samplePatients };

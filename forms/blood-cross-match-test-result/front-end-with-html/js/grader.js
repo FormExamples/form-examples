@@ -1,3 +1,6 @@
+import { detectFlags } from './flags.js';
+import { classifyResult, gradeCompleteness, gradeFollowUp, gradeSeverity } from './rules.js';
+
 // Pure four-axis interpretation engine for a blood cross-match test result.
 //
 // Faithful vanilla-JS port of the SvelteKit engine's
@@ -24,10 +27,6 @@
  */
 
 // Wrapped in an IIFE; published via window.BloodCrossMatchTestResult.
-(function () {
-'use strict';
-const NS = window.BloodCrossMatchTestResult =
-  window.BloodCrossMatchTestResult || {};
 
 /**
  * Derives the overall recommendation from the graded axes.
@@ -58,19 +57,19 @@ function calculateGrade(result) {
   const firedRules = [];
 
   // Axis A
-  const a = NS.classifyResult(result);
+  const a = classifyResult(result);
   firedRules.push(...a.firedRules);
 
   // Axis B
-  const b = NS.gradeSeverity(result, a.resultClassification);
+  const b = gradeSeverity(result, a.resultClassification);
   firedRules.push(...b.firedRules);
 
   // Axis C
-  const c = NS.gradeCompleteness(result);
+  const c = gradeCompleteness(result);
   firedRules.push(...c.firedRules);
 
   // Axis D
-  const d = NS.gradeFollowUp(result, a.resultClassification, b.abnormalitySeverity);
+  const d = gradeFollowUp(result, a.resultClassification, b.abnormalitySeverity);
   firedRules.push(...d.firedRules);
 
   const recommendation = deriveRecommendation(
@@ -81,7 +80,7 @@ function calculateGrade(result) {
 
   // detectFlags lives in flags.js; it is resolved at call time so the
   // canonical types → rules → grader → flags load order still works.
-  const flags = NS.detectFlags(result);
+  const flags = detectFlags(result);
 
   return {
     resultClassification: a.resultClassification,
@@ -98,8 +97,4 @@ function calculateGrade(result) {
   };
 }
 
-Object.assign(NS, {
-  calculateGrade,
-  deriveRecommendation
-});
-})();
+export { calculateGrade, deriveRecommendation };

@@ -1,3 +1,7 @@
+import { detectFlaggedIssues } from './flags.js';
+import { calculateWellsGrade } from './grader.js';
+import { bandClass, emptyAssessment, priorityLabel, recommendedInvestigationLabel, threeLevelBandLabel, twoLevelBandLabel, yesNoLabel } from './types.js';
+
 // Wells Score for Deep Vein Thrombosis (DVT) — bedside wizard
 // (vanilla JavaScript, no build).
 //
@@ -13,21 +17,6 @@
 // to `window.WellsScoreForDeepVeinThrombosis`. Pulling them off here keeps the
 // rest of this file referring to short local names. The whole file is wrapped
 // in an IIFE so its top-level identifiers don't leak.
-(function () {
-'use strict';
-
-const NS = window.WellsScoreForDeepVeinThrombosis;
-const {
-  emptyAssessment,
-  twoLevelBandLabel,
-  threeLevelBandLabel,
-  bandClass,
-  recommendedInvestigationLabel,
-  yesNoLabel,
-  priorityLabel,
-  calculateWellsGrade,
-  detectFlaggedIssues
-} = NS;
 
 // ----------------------------------------------------------------------
 // Persistence
@@ -976,4 +965,3 @@ if (document.readyState === 'loading') {
 } else {
   init();
 }
-})();

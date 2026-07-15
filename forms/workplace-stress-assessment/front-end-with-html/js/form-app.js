@@ -1,3 +1,8 @@
+import { detectAdditionalFlags } from './flagged-issues.js';
+import { DEPARTMENT_OPTIONS, DOMAINS, HOURS_OPTIONS, LIKERT_AGREEMENT, LIKERT_FREQUENCY, TENURE_OPTIONS, stressItems } from './rules.js';
+import { gradeStress } from './stress-grader.js';
+import { emptyAssessment, riskLevelClass, riskLevelLabel } from './types.js';
+
 // Workplace Stress Assessment - employee wizard (vanilla JavaScript, no build).
 //
 // Single-page continuous wizard implementing the 35-item HSE Management
@@ -14,25 +19,6 @@
 // keeps the rest of this file referring to short local names. The whole
 // file is wrapped in an IIFE so its top-level identifiers don't leak to
 // the global scope.
-
-(function () {
-'use strict';
-
-const NS = window.WorkplaceStressAssessment;
-const {
-  emptyAssessment,
-  riskLevelLabel,
-  riskLevelClass,
-  LIKERT_FREQUENCY,
-  LIKERT_AGREEMENT,
-  DOMAINS,
-  stressItems,
-  DEPARTMENT_OPTIONS,
-  TENURE_OPTIONS,
-  HOURS_OPTIONS,
-  gradeStress,
-  detectAdditionalFlags
-} = NS;
 
 // ----------------------------------------------------------------------
 // Persistence
@@ -773,4 +759,3 @@ if (document.readyState === 'loading') {
 void lilyInputClass;
 void radioGroup;
 void setFieldError;
-})();

@@ -3,9 +3,6 @@
 // clinically significant alerts. Mirrors the SvelteKit engine's
 // `flagged-issues.ts`.
 
-(function () {
-  'use strict';
-
   /**
    * @param {object} data Assessment data
    * @returns {{id: string, category: string, message: string,
@@ -180,8 +177,7 @@
     return flags;
   }
 
-  window.OccupationalTherapyAssessment = window.OccupationalTherapyAssessment || {};
-  Object.assign(window.OccupationalTherapyAssessment, {
-    detectAdditionalFlags
-  });
-})();
+  
+  
+
+export { detectAdditionalFlags };

@@ -6,11 +6,6 @@
 // hypercalcaemia / unknown), both severe thresholds, and several care settings.
 // severeFlag is set whenever the corrected calcium is >= 3.0 or < 1.9 mmol/L.
 
-(function () {
-'use strict';
-window.CorrectedCalciumCalculatorDashboard =
-  window.CorrectedCalciumCalculatorDashboard || {};
-
 /** @type {import('./dashboard-types.js').AssessmentRow[]} */
 const sampleAssessments = [
   {
@@ -85,6 +80,4 @@ const sampleAssessments = [
   }
 ];
 
-window.CorrectedCalciumCalculatorDashboard.sampleAssessments =
-  sampleAssessments;
-})();
+export { sampleAssessments };

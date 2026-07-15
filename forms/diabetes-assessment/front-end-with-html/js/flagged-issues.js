@@ -1,3 +1,5 @@
+import { hba1cMmolMol } from './types.js';
+
 // Diabetes flagged-issue detection. Independent of the composite control
 // score; raises clinician-facing alerts for HbA1c extremes, hypoglycaemia,
 // foot, eye, renal, cardiovascular, psychological, and self-care risks.
@@ -11,11 +13,6 @@
  * @typedef {import('./types.js').AssessmentData} AssessmentData
  * @typedef {import('./types.js').AdditionalFlag} AdditionalFlag
  */
-
-(function () {
-'use strict';
-window.DiabetesAssessment = window.DiabetesAssessment || {};
-const { hba1cMmolMol } = window.DiabetesAssessment;
 
 /**
  * @param {AssessmentData} data
@@ -228,5 +225,4 @@ function detectAdditionalFlags(data) {
   return flags;
 }
 
-window.DiabetesAssessment.detectAdditionalFlags = detectAdditionalFlags;
-})();
+export { detectAdditionalFlags };

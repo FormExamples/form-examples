@@ -168,10 +168,6 @@
 // (no ES modules) so the page can be opened directly via `file://`.
 // Public symbols are attached to the global namespace
 // `window.FirstAidTrainingChecklist`.
-(function () {
-'use strict';
-window.FirstAidTrainingChecklist =
-  window.FirstAidTrainingChecklist || {};
 
 /** Build a fresh, fully-blank assessment.
  *  Strings default to ''; numeric fields default to null.
@@ -339,12 +335,4 @@ const CRITICAL_RULE_IDS = [
   'FAW-MED-ANAPHYLAXIS'
 ];
 
-Object.assign(window.FirstAidTrainingChecklist, {
-  emptyAssessment,
-  outcomeLabel,
-  outcomeClass,
-  triStateLabel,
-  triStatePillClass,
-  CRITICAL_RULE_IDS
-});
-})();
+export { emptyAssessment, outcomeLabel, outcomeClass, triStateLabel, triStatePillClass, CRITICAL_RULE_IDS };

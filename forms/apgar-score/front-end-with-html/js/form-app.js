@@ -1,3 +1,7 @@
+import { detectFlaggedIssues } from './flags.js';
+import { calculateApgarGrade } from './grader.js';
+import { SIGNS, bandClass, bandLabel, emptyAssessment, emptyTimepoint, priorityLabel, trendLabel } from './types.js';
+
 // Apgar Score — newborn scoring wizard (vanilla JavaScript, no build).
 //
 // Single-page continuous wizard: every step is rendered into the page in
@@ -17,21 +21,6 @@
 // to `window.ApgarScore`. Pulling them off here keeps the rest of this file
 // referring to short local names. The whole file is wrapped in an IIFE so its
 // top-level identifiers don't leak.
-(function () {
-'use strict';
-
-const NS = window.ApgarScore;
-const {
-  emptyAssessment,
-  emptyTimepoint,
-  SIGNS,
-  bandLabel,
-  bandClass,
-  trendLabel,
-  priorityLabel,
-  calculateApgarGrade,
-  detectFlaggedIssues
-} = NS;
 
 // ----------------------------------------------------------------------
 // Persistence
@@ -970,4 +959,3 @@ if (document.readyState === 'loading') {
 } else {
   init();
 }
-})();

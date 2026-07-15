@@ -1,3 +1,6 @@
+import { classify, suggestExpiry } from './rules.js';
+import { emptyPrescription, snapQuarter } from './types.js';
+
 // Eye Prescription — form binding, computation, report.
 //
 // State lives in `state` and is bound to `data-bind="<section>.<field>"`
@@ -6,10 +9,8 @@
 // becomes null. Booleans use `data-bind-bool`. Re-classification is
 // debounced via requestAnimationFrame.
 
-(function () {
-  'use strict';
-  const NS = window.EyePrescription;
-  const { emptyPrescription, snapQuarter, classify, suggestExpiry } = NS;
+  
+  
 
   const STORAGE_KEY = 'eye-prescription.front-end-form-with-html.v1';
 
@@ -446,4 +447,3 @@
   } else {
     init();
   }
-}());

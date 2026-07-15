@@ -35,9 +35,6 @@
  */
 
 // Wrapped in an IIFE; published via window.FallRiskAssessment.
-(function () {
-'use strict';
-window.FallRiskAssessment = window.FallRiskAssessment || {};
 
 /** @type {MfsItem[]} */
 const mfsItems = [
@@ -171,8 +168,4 @@ const ancillaryRules = {
   hasPolypharmacy
 };
 
-Object.assign(window.FallRiskAssessment, {
-  mfsItems,
-  ancillaryRules
-});
-})();
+export { mfsItems, ancillaryRules };

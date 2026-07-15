@@ -1,3 +1,6 @@
+import { gradeBloodspot } from './grader.js';
+import { CONDITIONS, computeAgeAtSampleDays, emptyAssessment, overallOutcomeBadge, overallOutcomeLabel, referralStatusLabel, resultClassBadge, resultClassLabel } from './types.js';
+
 // Newborn Blood Spot Screening — sample-taker / laboratory wizard
 // (vanilla JavaScript, no build).
 //
@@ -12,21 +15,6 @@
 // Sibling files loaded as plain `<script>` tags (in order) attach their exports
 // to `window.NewbornBloodSpotScreening`. The whole file is wrapped in an IIFE
 // so its top-level identifiers don't leak to the global scope.
-(function () {
-'use strict';
-
-const NS = window.NewbornBloodSpotScreening;
-const {
-  CONDITIONS,
-  emptyAssessment,
-  computeAgeAtSampleDays,
-  resultClassLabel,
-  resultClassBadge,
-  overallOutcomeLabel,
-  overallOutcomeBadge,
-  referralStatusLabel,
-  gradeBloodspot
-} = NS;
 
 const TOTAL_STEPS = 7;
 
@@ -996,4 +984,3 @@ if (document.readyState === 'loading') {
 } else {
   init();
 }
-})();

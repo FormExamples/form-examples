@@ -27,9 +27,6 @@
  */
 
 // Wrapped in an IIFE; published via window.MentalStateExamination.
-(function () {
-'use strict';
-window.MentalStateExamination = window.MentalStateExamination || {};
 
 /**
  * Detect the safety flags raised by the examination findings.
@@ -244,5 +241,4 @@ function detectFlaggedIssues(data, grade) {
   return flags;
 }
 
-window.MentalStateExamination.detectFlaggedIssues = detectFlaggedIssues;
-})();
+export { detectFlaggedIssues };

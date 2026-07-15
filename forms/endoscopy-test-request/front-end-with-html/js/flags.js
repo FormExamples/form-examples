@@ -9,11 +9,6 @@
 // Flag IDs are stable and identical across every front-end and the back-end.
 // Wrapped in an IIFE; published via `window.EndoscopyTestRequest`.
 
-(function () {
-'use strict';
-window.EndoscopyTestRequest = window.EndoscopyTestRequest || {};
-const NS = window.EndoscopyTestRequest;
-
 const LOWER_GI_INDICATIONS = [
   'rectal-bleeding', 'change-in-bowel-habit', 'positive-fit',
   'ibd-surveillance', 'polyp-surveillance'
@@ -152,5 +147,4 @@ function detectFlags(data, context) {
   return flags;
 }
 
-Object.assign(NS, { detectFlags });
-})();
+export { detectFlags };

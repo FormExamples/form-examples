@@ -1,3 +1,7 @@
+import { validateCounterReferral } from './counter-referral-validator.js';
+import { detectFlaggedIssues } from './flagged-issues.js';
+import { emptyAssessment, priorityLabel, sectionLabel } from './types.js';
+
 // WHO Counter-Referral Form — single-page wizard controller (vanilla JS).
 //
 // Renders seven fieldset sections (Patient Identification, Facility Details,
@@ -9,18 +13,6 @@
 // attach their public symbols to `window.WhoCounterReferralForm`. The whole
 // file is wrapped in an IIFE so its top-level identifiers do not leak to
 // the global scope.
-
-(function () {
-'use strict';
-
-const NS = window.WhoCounterReferralForm;
-const {
-  emptyAssessment,
-  validateCounterReferral,
-  detectFlaggedIssues,
-  sectionLabel,
-  priorityLabel
-} = NS;
 
 // ----------------------------------------------------------------------
 // Persistence
@@ -1042,8 +1034,5 @@ if (document.readyState === 'loading') {
 }
 
 // Expose a small public surface for debugging in the browser console.
-Object.assign(window.WhoCounterReferralForm, {
-  _getState: () => state,
-  _submitForm: submitForm
-});
-})();
+export const _getState = () => state;
+export const _submitForm = submitForm;

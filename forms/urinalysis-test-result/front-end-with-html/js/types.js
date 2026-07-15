@@ -174,9 +174,6 @@
 // classic <script> (no ES modules) so the page can be opened directly via
 // `file://`. The IIFE attaches its public symbols to a single global
 // namespace, `window.UrinalysisTestResult`.
-(function () {
-'use strict';
-window.UrinalysisTestResult = window.UrinalysisTestResult || {};
 
 /**
  * Build a fresh, fully-blank urinalysis test result.
@@ -389,19 +386,4 @@ function followUpUrgencyClass(value) {
   }
 }
 
-Object.assign(window.UrinalysisTestResult, {
-  emptyResult,
-  resultClassificationLabel,
-  abnormalitySeverityLabel,
-  followUpUrgencyLabel,
-  specimenTypeLabel,
-  cultureResultLabel,
-  dipstickGradeLabel,
-  reportStatusLabel,
-  recommendationLabel,
-  priorityLabel,
-  resultClassificationClass,
-  abnormalitySeverityClass,
-  followUpUrgencyClass
-});
-})();
+export { emptyResult, resultClassificationLabel, abnormalitySeverityLabel, followUpUrgencyLabel, specimenTypeLabel, cultureResultLabel, dipstickGradeLabel, reportStatusLabel, recommendationLabel, priorityLabel, resultClassificationClass, abnormalitySeverityClass, followUpUrgencyClass };

@@ -1,3 +1,5 @@
+import { hasCriticalFinding, hasInvolvedMargin, hasUnexpectedMalignancy } from './rules.js';
+
 // Safety-critical flag detection for the Histopathology Test Result.
 //
 // Faithful vanilla-JavaScript port of the SvelteKit engine module
@@ -15,14 +17,6 @@
 // Wrapped in an IIFE; published via window.HistopathologyTestResult.
 // Depends on rules.js (the structured-findings predicates), so it must load
 // after it.
-(function () {
-'use strict';
-window.HistopathologyTestResult = window.HistopathologyTestResult || {};
-const {
-  hasCriticalFinding,
-  hasUnexpectedMalignancy,
-  hasInvolvedMargin
-} = window.HistopathologyTestResult;
 
 /**
  * Detect the safety-critical flags for a report.
@@ -166,7 +160,4 @@ function detectFlags(r) {
   return flags;
 }
 
-Object.assign(window.HistopathologyTestResult, {
-  detectFlags
-});
-})();
+export { detectFlags };

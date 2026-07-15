@@ -7,11 +7,6 @@
 // convention. Wrapped in an IIFE; published via
 // `window.ColonoscopyTestRequest`.
 
-(function () {
-'use strict';
-window.ColonoscopyTestRequest =
-  window.ColonoscopyTestRequest || {};
-
 /**
  * Build a fresh, fully-blank colonoscopy request.
  * Strings default to ''; numeric fields default to null; boolean red-flag /
@@ -107,11 +102,4 @@ function indicationLabel(value) {
   return INDICATION_LABELS[value] || value || '';
 }
 
-Object.assign(window.ColonoscopyTestRequest, {
-  emptyRequest,
-  procedureLabel,
-  indicationLabel,
-  PROCEDURE_LABELS,
-  INDICATION_LABELS
-});
-})();
+export { emptyRequest, procedureLabel, indicationLabel, PROCEDURE_LABELS, INDICATION_LABELS };

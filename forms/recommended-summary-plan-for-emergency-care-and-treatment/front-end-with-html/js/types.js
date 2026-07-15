@@ -144,10 +144,6 @@
 // <script> (no ES modules) so the page can be opened directly via `file://`.
 // The IIFE attaches its public symbols to a single global namespace,
 // `window.RecommendedSummaryPlanForEmergencyCareAndTreatment`.
-(function () {
-'use strict';
-window.RecommendedSummaryPlanForEmergencyCareAndTreatment =
-  window.RecommendedSummaryPlanForEmergencyCareAndTreatment || {};
 
 /**
  * Build a fresh, fully-blank plan.
@@ -293,16 +289,4 @@ function priorityLabel(priority) {
   }
 }
 
-Object.assign(window.RecommendedSummaryPlanForEmergencyCareAndTreatment, {
-  emptyPlan,
-  statusLabel,
-  statusClass,
-  priorityBalanceLabel,
-  cprRecommendationLabel,
-  ceilingLabel,
-  involvementLabel,
-  clinicianRoleLabel,
-  yesNoLabel,
-  priorityLabel
-});
-})();
+export { emptyPlan, statusLabel, statusClass, priorityBalanceLabel, cprRecommendationLabel, ceilingLabel, involvementLabel, clinicianRoleLabel, yesNoLabel, priorityLabel };

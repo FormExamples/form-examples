@@ -1,3 +1,6 @@
+import { fmsPatterns } from './fms-rules.js';
+import { fmsBandClass, fmsCategory, riskBand, riskBandLabel } from './types.js';
+
 // Functional Movement Screen (FMS) grader. Pure functions: take an
 // `AssessmentData` object, return the total FMS score (0-21), category
 // label, risk band, and a list of fired rules (one per pattern that
@@ -19,10 +22,6 @@
  */
 
 // Wrapped in an IIFE; published via window.KinesiologyAssessment.
-(function () {
-'use strict';
-window.KinesiologyAssessment = window.KinesiologyAssessment || {};
-const { fmsPatterns, fmsCategory, fmsBandClass, riskBand, riskBandLabel } = window.KinesiologyAssessment;
 
 /**
  * Pure: calculate the total FMS score for the supplied assessment data.
@@ -100,10 +99,4 @@ function fmsScoreLabel(score) {
   return `FMS ${score}/21 - ${fmsCategory(score)}`;
 }
 
-Object.assign(window.KinesiologyAssessment, {
-  gradeFMS,
-  fmsScoreLabel,
-  fmsBandClass,
-  riskBandLabel
-});
-})();
+export { gradeFMS, fmsScoreLabel };

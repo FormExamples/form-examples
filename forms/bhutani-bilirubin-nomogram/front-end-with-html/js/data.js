@@ -5,11 +5,6 @@
 // The rows span every risk zone (low → high), both threshold outcomes, and
 // every care setting, with `aboveExchange` set only for the emergency row.
 
-(function () {
-'use strict';
-window.BhutaniBilirubinNomogramDashboard =
-  window.BhutaniBilirubinNomogramDashboard || {};
-
 /** @type {import('./dashboard-types.js').AssessmentRow[]} */
 const sampleAssessments = [
   {
@@ -91,5 +86,4 @@ const sampleAssessments = [
   }
 ];
 
-window.BhutaniBilirubinNomogramDashboard.sampleAssessments = sampleAssessments;
-})();
+export { sampleAssessments };

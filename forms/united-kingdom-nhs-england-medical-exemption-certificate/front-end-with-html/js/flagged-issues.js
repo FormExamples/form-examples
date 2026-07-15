@@ -6,10 +6,9 @@
  * `fires(data, ruleHits)` predicate.
  */
 
-(function (root) {
-  const Fp92aForm = root.Fp92aForm || (root.Fp92aForm = {});
+  
 
-  Fp92aForm.FLAGS = [
+  export const FLAGS = [
     {
       id: "fp92a.flag.missing-signature",
       category: "completeness",
@@ -57,4 +56,3 @@
       fires: (d, hits) => hits.includes("fp92a.rule.renewal.active-certificate"),
     },
   ];
-})(window);

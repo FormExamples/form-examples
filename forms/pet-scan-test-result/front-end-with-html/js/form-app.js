@@ -1,3 +1,7 @@
+import { calculateGrade } from './grader.js';
+import { hasCriticalFinding } from './rules.js';
+import { NUMERIC_FIELDS, abnormalitySeverityClass, abnormalitySeverityLabel, emptyResult, examinationAdequacyLabel, followUpUrgencyClass, followUpUrgencyLabel, priorityLabel, recommendationLabel, reportStatusLabel, resultClassificationClass, resultClassificationLabel, scanTypeLabel, treatmentResponseLabel } from './types.js';
+
 // PET Scan Test Result — reporting-clinician wizard
 // (vanilla JavaScript, no build).
 //
@@ -15,28 +19,6 @@
 // exports to `window.PetScanTestResult`. Pulling them off here keeps the
 // rest of this file referring to short local names. The whole file is wrapped
 // in an IIFE so its top-level identifiers don't leak.
-(function () {
-'use strict';
-
-const NS = window.PetScanTestResult;
-const {
-  NUMERIC_FIELDS,
-  emptyResult,
-  resultClassificationLabel,
-  abnormalitySeverityLabel,
-  followUpUrgencyLabel,
-  scanTypeLabel,
-  treatmentResponseLabel,
-  examinationAdequacyLabel,
-  reportStatusLabel,
-  recommendationLabel,
-  priorityLabel,
-  resultClassificationClass,
-  abnormalitySeverityClass,
-  followUpUrgencyClass,
-  hasCriticalFinding,
-  calculateGrade
-} = NS;
 
 // ----------------------------------------------------------------------
 // Persistence
@@ -1113,4 +1095,3 @@ if (document.readyState === 'loading') {
 } else {
   init();
 }
-})();

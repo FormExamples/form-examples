@@ -22,10 +22,6 @@
  */
 
 // Wrapped in an IIFE; published via window.NewbornAndInfantPhysicalExamination.
-(function () {
-'use strict';
-window.NewbornAndInfantPhysicalExamination =
-  window.NewbornAndInfantPhysicalExamination || {};
 
 const LOW_SAT = 95; // percent; a saturation below this is a refer trigger.
 
@@ -93,6 +89,4 @@ const nipeReferRules = [
   }
 ];
 
-window.NewbornAndInfantPhysicalExamination.nipeReferRules = nipeReferRules;
-window.NewbornAndInfantPhysicalExamination.LOW_SAT = LOW_SAT;
-})();
+export { nipeReferRules, LOW_SAT };

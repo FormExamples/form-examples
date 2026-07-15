@@ -1,3 +1,6 @@
+import { coronerReferralIndicated, illogicalSequence, missingPartIa, nonEmpty, soleCause, unacceptableSoleCause } from './rules.js';
+import { coronerReasonLabel } from './types.js';
+
 // Flagged-issue detection (statutory, safety, and governance). Independent of the
 // validity class (which the grader produces), this module raises certifier- and
 // examiner-facing flags per spec §5:
@@ -27,19 +30,6 @@
  */
 
 // Wrapped in an IIFE; published via window.MedicalCertificateOfCauseOfDeath.
-(function () {
-'use strict';
-window.MedicalCertificateOfCauseOfDeath =
-  window.MedicalCertificateOfCauseOfDeath || {};
-const {
-  nonEmpty,
-  coronerReferralIndicated,
-  unacceptableSoleCause,
-  soleCause,
-  missingPartIa,
-  illogicalSequence,
-  coronerReasonLabel
-} = window.MedicalCertificateOfCauseOfDeath;
 
 /**
  * @param {DeathCertificate} d
@@ -172,5 +162,4 @@ function detectFlaggedIssues(d) {
   return flags;
 }
 
-window.MedicalCertificateOfCauseOfDeath.detectFlaggedIssues = detectFlaggedIssues;
-})();
+export { detectFlaggedIssues };
