@@ -322,16 +322,18 @@ Design each feature on the reference forms
       `forms/AGENTS-front-end-html.md` §5 and the gold-standard example.
       *Note:* the `file://` self-contained property in earlier notes no longer
       holds — that was the whole tradeoff.
-- [ ] **Front-end conformance follow-ups (documented, not fixed):**
-      (2) 6 forms with a `form-app.js` lack the `STORAGE_KEY` autosave the other
-      276 have (agile-principles-assessment, issue-tracker, meeting,
-      objectives-and-key-results-tracker, uk-lpa-health, vaccinations-assessment);
-      4 forms have no `form-app.js` at all (agile-consulting-scorecard,
-      medical-operation-note, the 2 privacy-notice forms). Assess per form
+- [ ] **Front-end conformance follow-up (documented, not fixed): autosave.**
+      A handful of forms with a `form-app.js` lack the `localStorage`/`STORAGE_KEY`
+      autosave the rest have (as of 2026-07-15: agile-principles-assessment,
+      issue-tracker, objectives-and-key-results-tracker, uk-lpa-health,
+      vaccinations-assessment — `meeting` DOES have it now). Assess per form
       whether autosave applies before rolling out.
-      (3) `agile-consulting-scorecard-for-hiring-help` is genuinely multi-page
-      (has its own `report.html`) — the one real single-page-wizard violation;
-      it is also a known Lily-Svelte TODO form.
+      *(Superseded note (3): `agile-consulting-scorecard-for-hiring-help` is NOT
+      a single-page-wizard violation — it is a single inline `<script>` form with
+      `onsubmit="return false;"` + live recompute-on-input and no `js/` dir; its
+      `report.html` is an intentional standalone printable artifact, not wizard
+      navigation. The full `bin/test-e2e --html --all` sweep passes it. The
+      ES-modules refactor correctly skipped it — nothing to modularise.)*
 - [i] **Representation-coverage audit — CORRECTED (2026-07-14).** The earlier
       audit (2026-07-13) wrongly called the FHIR-only extra file a "synthetic
       `grading_result`" and declared it intentional. It was NOT: `grading_result`
