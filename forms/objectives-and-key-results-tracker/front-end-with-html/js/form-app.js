@@ -20,6 +20,45 @@ export const state = {
   signature: { signed_by: '', override_reason: '', recommendation: '' },
 };
 
+// Autosave: persist the whole form state to localStorage on every edit and
+// rehydrate it on load so a partial fill survives a page reload.
+const STORAGE_KEY = 'objectives-and-key-results-tracker.front-end-with-html.v1';
+
+function saveState() {
+  try {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+  } catch (e) {
+    console.warn('Could not save OKR draft to localStorage.', e);
+  }
+}
+
+function loadState() {
+  try {
+    const raw = localStorage.getItem(STORAGE_KEY);
+    if (raw) mergeInto(state, JSON.parse(raw));
+  } catch (e) {
+    console.warn('Could not read OKR draft from localStorage.', e);
+  }
+}
+
+// Deep-merge a saved snapshot onto the canonical `state` shape: nested objects
+// recurse, arrays and primitives are copied, unknown keys are ignored.
+function mergeInto(target, src) {
+  if (!src || typeof src !== 'object') return;
+  for (const key of Object.keys(target)) {
+    if (!(key in src)) continue;
+    const tv = target[key];
+    const sv = src[key];
+    if (Array.isArray(tv)) {
+      if (Array.isArray(sv)) target[key] = sv;
+    } else if (tv && typeof tv === 'object' && sv && typeof sv === 'object') {
+      mergeInto(tv, sv);
+    } else {
+      target[key] = sv;
+    }
+  }
+}
+
 const STEPS = [
   { id: 1, title: 'Reporter & cycle' },
   { id: 2, title: 'Objective' },
@@ -103,8 +142,12 @@ function updateStepStatuses() {
 
 const bind = (selector, path) => {
   const [section, key] = path.split('.');
-  document.querySelector(selector).addEventListener('input', (e) => {
+  const elx = document.querySelector(selector);
+  const saved = state[section][key];
+  if (saved !== null && saved !== undefined && saved !== '') elx.value = saved;
+  elx.addEventListener('input', (e) => {
     state[section][key] = e.target.value;
+    saveState();
   });
 };
 
@@ -186,21 +229,26 @@ function renderStep5() {
       if (state.keyResults.length >= 5) return;
       state.keyResults.push({ position: state.keyResults.length + 1, title: '', krType: '', unit: '',
         startValue: null, currentValue: null, targetValue: null, ownerName: '', dueDate: '' });
+      saveState();
       draw();
     });
     root.querySelectorAll('[data-action="remove"]').forEach((btn) => btn.addEventListener('click', () => {
       const i = Number(btn.dataset.kr);
       state.keyResults.splice(i, 1);
       state.keyResults.forEach((kr, idx) => { kr.position = idx + 1; });
+      saveState();
       draw();
     }));
     root.querySelectorAll('fieldset[data-kr]').forEach((fs) => {
       const i = Number(fs.dataset.kr);
       fs.querySelectorAll('[data-field]').forEach((inp) => {
+        const field = inp.dataset.field;
+        const saved = state.keyResults[i][field];
+        if (saved !== null && saved !== undefined) inp.value = saved;  // hydrate (esp. the <select>)
         inp.addEventListener('input', () => {
-          const field = inp.dataset.field;
           const v = inp.type === 'number' ? (inp.value === '' ? null : Number(inp.value)) : inp.value;
           state.keyResults[i][field] = v;
+          saveState();
         });
       });
     });
@@ -242,8 +290,11 @@ function renderStep8() {
   bind('#ci-changes', 'checkIn.since_last_changes');
   bind('#ci-block', 'checkIn.blockers');
   bind('#ci-asks', 'checkIn.asks');
-  document.querySelector('#ci-conf').addEventListener('input', (e) => {
+  const ciConf = document.querySelector('#ci-conf');
+  if (state.checkIn.confidenceDecileAtCheckIn !== null && state.checkIn.confidenceDecileAtCheckIn !== undefined) ciConf.value = state.checkIn.confidenceDecileAtCheckIn;
+  ciConf.addEventListener('input', (e) => {
     state.checkIn.confidenceDecileAtCheckIn = e.target.value === '' ? null : Number(e.target.value);
+    saveState();
   });
 }
 
@@ -274,8 +325,11 @@ function renderStep10() {
     <label>Override reason (if any)<textarea id="s-override"></textarea></label>
   `;
   const numScore = (selector, key) => {
-    document.querySelector(selector).addEventListener('input', (e) => {
+    const elx = document.querySelector(selector);
+    if (state.scores[key] !== null && state.scores[key] !== undefined) elx.value = state.scores[key];
+    elx.addEventListener('input', (e) => {
       state.scores[key] = e.target.value === '' ? null : Number(e.target.value);
+      saveState();
     });
   };
   numScore('#s-progress', 'progressPercent');
@@ -358,6 +412,7 @@ function wireCopyTriage() {
 }
 
 document.addEventListener('DOMContentLoaded', () => {
+  loadState();
   renderSteps(); renderStep1(); renderStep2(); renderStep3(); renderStep4(); renderStep5();
   renderStep6(); renderStep7(); renderStep8(); renderStep9(); renderStep10();
   wireCompute(); wirePdf(); wireCopyTriage();
