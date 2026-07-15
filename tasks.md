@@ -322,12 +322,15 @@ Design each feature on the reference forms
       `forms/AGENTS-front-end-html.md` §5 and the gold-standard example.
       *Note:* the `file://` self-contained property in earlier notes no longer
       holds — that was the whole tradeoff.
-- [ ] **Front-end conformance follow-up (documented, not fixed): autosave.**
-      A handful of forms with a `form-app.js` lack the `localStorage`/`STORAGE_KEY`
-      autosave the rest have (as of 2026-07-15: agile-principles-assessment,
-      issue-tracker, objectives-and-key-results-tracker, uk-lpa-health,
-      vaccinations-assessment — `meeting` DOES have it now). Assess per form
-      whether autosave applies before rolling out.
+- [x] **Front-end autosave rollout — DONE (2026-07-15).** Added
+      `localStorage`/`STORAGE_KEY` autosave (`<slug>.front-end-with-html.v1`,
+      try/catch save/load, save-on-edit + hydrate-on-load) to the 5 forms that
+      lacked it: objectives-and-key-results-tracker, issue-tracker,
+      vaccinations-assessment, agile-principles-assessment, and uk-lpa-health
+      (LP1H). issue-tracker uses a DOM-level variant (no central state object);
+      the rest persist their state object deep-merged onto the canonical shape,
+      LP1H's dynamic lists included. Verified per form: `node --check`, a
+      fill→reload→persists check, and `bin/test-e2e --html <slug>` green.
       *(Superseded note (3): `agile-consulting-scorecard-for-hiring-help` is NOT
       a single-page-wizard violation — it is a single inline `<script>` form with
       `onsubmit="return false;"` + live recompute-on-input and no `js/` dir; its
