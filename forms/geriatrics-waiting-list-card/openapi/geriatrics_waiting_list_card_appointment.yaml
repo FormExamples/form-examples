@@ -1,0 +1,207 @@
+# Generated from sql/. Do not edit by hand.
+# SOURCE: geriatrics_waiting_list_card_appointment
+openapi: 3.1.0
+info:
+  title: Geriatrics Waiting List Card — GeriatricsWaitingListCardAppointment
+  version: 1.0.0
+  description: Scheduled or upcoming appointment attached to a waiting list card. A card may have zero or many appointments over its lifetime.
+paths:
+  /geriatrics-waiting-list-card-appointments:
+    get:
+      summary: List GeriatricsWaitingListCardAppointment records
+      operationId: listGeriatricsWaitingListCardAppointment
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of GeriatricsWaitingListCardAppointment records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/GeriatricsWaitingListCardAppointment"
+    post:
+      summary: Create a new GeriatricsWaitingListCardAppointment
+      operationId: createGeriatricsWaitingListCardAppointment
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/GeriatricsWaitingListCardAppointment"
+      responses:
+        "201":
+          description: The newly created GeriatricsWaitingListCardAppointment
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GeriatricsWaitingListCardAppointment"
+        "400":
+          description: Validation error
+  /geriatrics-waiting-list-card-appointments/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one GeriatricsWaitingListCardAppointment by id
+      operationId: getGeriatricsWaitingListCardAppointment
+      responses:
+        "200":
+          description: The requested GeriatricsWaitingListCardAppointment
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GeriatricsWaitingListCardAppointment"
+        "404":
+          description: GeriatricsWaitingListCardAppointment not found
+    patch:
+      summary: Update an existing GeriatricsWaitingListCardAppointment
+      operationId: updateGeriatricsWaitingListCardAppointment
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/GeriatricsWaitingListCardAppointment"
+      responses:
+        "200":
+          description: The updated GeriatricsWaitingListCardAppointment
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GeriatricsWaitingListCardAppointment"
+        "404":
+          description: GeriatricsWaitingListCardAppointment not found
+    delete:
+      summary: Soft-delete a GeriatricsWaitingListCardAppointment
+      operationId: deleteGeriatricsWaitingListCardAppointment
+      responses:
+        "204":
+          description: GeriatricsWaitingListCardAppointment deleted
+        "404":
+          description: GeriatricsWaitingListCardAppointment not found
+components:
+  schemas:
+    GeriatricsWaitingListCardAppointment:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was updated most-recently.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was deleted a.k.a. soft-removed.
+        geriatrics_waiting_list_card_id:
+          type: string
+          format: uuid
+          description: Foreign key to the parent waiting list card.
+        appointment_date:
+          type: string
+          format: date
+          description: Date of the appointment.
+        appointment_time:
+          type: string
+          format: time
+          description: Start time of the appointment.
+        duration_minutes:
+          type: integer
+          format: int32
+          description: Planned duration in minutes.
+        appointment_type:
+          type: string
+          enum:
+            - first-outpatient
+            - follow-up
+            - pre-assessment
+            - diagnostic
+            - treatment
+            - procedure
+            - admission
+            - telephone
+            - video
+            - other
+            - ""
+          description: "Appointment type: first-outpatient, follow-up, pre-assessment, diagnostic, treatment, procedure, admission, telephone, video, other."
+        site_name:
+          type: string
+          maxLength: 255
+          description: Name of the site (hospital, clinic, or community location).
+        site_address:
+          type: string
+          description: Postal address of the site, suitable for printing on a patient letter.
+        clinic_name:
+          type: string
+          maxLength: 255
+          description: Name of the clinic within the site.
+        room:
+          type: string
+          maxLength: 100
+          description: Room or location reference within the clinic.
+        clinician_name:
+          type: string
+          maxLength: 255
+          description: Name of the attending clinician, if known.
+        clinician_team:
+          type: string
+          maxLength: 255
+          description: Name of the clinical team, if assignment is by team rather than individual.
+        status:
+          type: string
+          enum:
+            - scheduled
+            - confirmed
+            - rebooked
+            - cancelled
+            - attended
+            - did-not-attend
+          description: "Appointment status: scheduled, confirmed, rebooked, cancelled, attended, did-not-attend."
+        travel_notes:
+          type: string
+          description: Free-text travel information for the patient (transport, parking).
+        access_notes:
+          type: string
+          description: Free-text accessibility notes (step-free access, BSL interpreter booked, etc.).
+      required:
+        - created_at
+        - updated_at
+        - geriatrics_waiting_list_card_id
+        - appointment_type
+        - site_name
+        - site_address
+        - clinic_name
+        - room
+        - clinician_name
+        - clinician_team
+        - status
+        - travel_notes
+        - access_notes
+      description: Scheduled or upcoming appointment attached to a waiting list card. A card may have zero or many appointments over its lifetime.

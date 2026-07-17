@@ -1,0 +1,187 @@
+# Generated from sql/. Do not edit by hand.
+# SOURCE: gen_practice_waiting_list_card_grade
+openapi: 3.1.0
+info:
+  title: General Practice Waiting List Card — GenPracticeWaitingListCardGrade
+  version: 1.0.0
+  description: Computed grading result for a waiting list card. One-to-one child of the card. Stores the Waiting Time Status, clinical priority, and derived day / week counts used by the dashboard and patient view.
+paths:
+  /gen-practice-waiting-list-card-grades:
+    get:
+      summary: List GenPracticeWaitingListCardGrade records
+      operationId: listGenPracticeWaitingListCardGrade
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of GenPracticeWaitingListCardGrade records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/GenPracticeWaitingListCardGrade"
+    post:
+      summary: Create a new GenPracticeWaitingListCardGrade
+      operationId: createGenPracticeWaitingListCardGrade
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/GenPracticeWaitingListCardGrade"
+      responses:
+        "201":
+          description: The newly created GenPracticeWaitingListCardGrade
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GenPracticeWaitingListCardGrade"
+        "400":
+          description: Validation error
+  /gen-practice-waiting-list-card-grades/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one GenPracticeWaitingListCardGrade by id
+      operationId: getGenPracticeWaitingListCardGrade
+      responses:
+        "200":
+          description: The requested GenPracticeWaitingListCardGrade
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GenPracticeWaitingListCardGrade"
+        "404":
+          description: GenPracticeWaitingListCardGrade not found
+    patch:
+      summary: Update an existing GenPracticeWaitingListCardGrade
+      operationId: updateGenPracticeWaitingListCardGrade
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/GenPracticeWaitingListCardGrade"
+      responses:
+        "200":
+          description: The updated GenPracticeWaitingListCardGrade
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GenPracticeWaitingListCardGrade"
+        "404":
+          description: GenPracticeWaitingListCardGrade not found
+    delete:
+      summary: Soft-delete a GenPracticeWaitingListCardGrade
+      operationId: deleteGenPracticeWaitingListCardGrade
+      responses:
+        "204":
+          description: GenPracticeWaitingListCardGrade deleted
+        "404":
+          description: GenPracticeWaitingListCardGrade not found
+components:
+  schemas:
+    GenPracticeWaitingListCardGrade:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was updated most-recently.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was deleted a.k.a. soft-removed.
+        gen_practice_waiting_list_card_id:
+          type: string
+          format: uuid
+          description: Foreign key to the parent waiting list card (unique, 1:1).
+        waiting_time_status:
+          type: string
+          enum:
+            - within-target
+            - approaching-breach
+            - breached
+            - long-wait
+            - ""
+          description: "Waiting Time Status band: within-target, approaching-breach, breached, long-wait."
+        clinical_priority:
+          type: string
+          enum:
+            - P1a
+            - P1b
+            - P2
+            - P3
+            - P4
+            - P5
+            - P6
+            - ""
+          description: Clinical priority that drove the calculation (echo of the input).
+        target_wait_weeks:
+          type: number
+          format: double
+          description: Maximum permitted wait in weeks for the recorded clinical priority.
+        days_waited:
+          type: integer
+          format: int32
+          description: Days elapsed since the RTT clock-start date.
+        weeks_waited:
+          type: number
+          format: double
+          description: Weeks elapsed since the RTT clock-start date.
+        days_to_target:
+          type: integer
+          format: int32
+          description: Days remaining until the priority-driven target wait is reached (negative if exceeded).
+        days_to_breach:
+          type: integer
+          format: int32
+          description: Days remaining until the 18-week RTT breach threshold is reached (negative if breached).
+        days_to_appointment:
+          type: integer
+          format: int32
+          description: Days until the next scheduled appointment (negative if in the past).
+        grader_notes:
+          type: string
+          description: Free-text grader notes (typically empty; populated when the engine cannot compute).
+        graded_at:
+          type: string
+          format: date-time
+          description: Timestamp when the engine last computed the result.
+      required:
+        - created_at
+        - updated_at
+        - gen_practice_waiting_list_card_id
+        - waiting_time_status
+        - clinical_priority
+        - grader_notes
+        - graded_at
+      description: Computed grading result for a waiting list card. One-to-one child of the card. Stores the Waiting Time Status, clinical priority, and derived day / week counts used by the dashboard and patient view.

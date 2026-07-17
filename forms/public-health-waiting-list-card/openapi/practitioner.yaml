@@ -1,0 +1,185 @@
+# Generated from sql/. Do not edit by hand.
+# SOURCE: practitioner
+openapi: 3.1.0
+info:
+  title: Public Health Waiting List Card — Practitioner
+  version: 1.0.0
+  description: Practitioner who completes a public health waiting list card on behalf of the patient.
+paths:
+  /practitioners:
+    get:
+      summary: List Practitioner records
+      operationId: listPractitioner
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of Practitioner records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Practitioner"
+    post:
+      summary: Create a new Practitioner
+      operationId: createPractitioner
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Practitioner"
+      responses:
+        "201":
+          description: The newly created Practitioner
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Practitioner"
+        "400":
+          description: Validation error
+  /practitioners/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one Practitioner by id
+      operationId: getPractitioner
+      responses:
+        "200":
+          description: The requested Practitioner
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Practitioner"
+        "404":
+          description: Practitioner not found
+    patch:
+      summary: Update an existing Practitioner
+      operationId: updatePractitioner
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Practitioner"
+      responses:
+        "200":
+          description: The updated Practitioner
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Practitioner"
+        "404":
+          description: Practitioner not found
+    delete:
+      summary: Soft-delete a Practitioner
+      operationId: deletePractitioner
+      responses:
+        "204":
+          description: Practitioner deleted
+        "404":
+          description: Practitioner not found
+components:
+  schemas:
+    Practitioner:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was updated most-recently.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was deleted a.k.a. soft-removed.
+        name:
+          type: string
+          maxLength: 255
+          description: Name.
+        email:
+          type: string
+          description: Email address.
+        phone:
+          type: string
+          description: Phone number.
+        role:
+          type: string
+          enum:
+            - gp
+            - consultant
+            - specialist-nurse
+            - referral-coordinator
+            - booking-clerk
+            - rtt-validator
+            - other
+            - ""
+          description: "Practitioner role: gp, consultant, specialist-nurse, referral-coordinator, booking-clerk, rtt-validator, other."
+        registration_body:
+          type: string
+          enum:
+            - GMC
+            - NMC
+            - HCPC
+            - GPhC
+            - other
+            - ""
+          description: "Professional registration body: GMC, NMC, HCPC, GPhC, other."
+        registration_number:
+          type: string
+          maxLength: 50
+          description: Professional registration number.
+        organisation_name:
+          type: string
+          maxLength: 255
+          description: Employing organisation (e.g. NHS trust name, GP practice name).
+        organisation_ods_code:
+          type: string
+          maxLength: 20
+          description: NHS Organisation Data Service (ODS) code for the organisation.
+        site_name:
+          type: string
+          maxLength: 255
+          description: Site or clinic name within the organisation.
+        country_as_iso_3166_1_alpha_2:
+          type: string
+          maxLength: 2
+          description: Country as ISO 3166-1 alpha-2 format.
+      required:
+        - created_at
+        - updated_at
+        - name
+        - role
+        - registration_body
+        - registration_number
+        - organisation_name
+        - organisation_ods_code
+        - site_name
+      description: Practitioner who completes a public health waiting list card on behalf of the patient.

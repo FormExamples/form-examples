@@ -1,0 +1,164 @@
+# Generated from sql/. Do not edit by hand.
+# SOURCE: gastro_waiting_list_card_grade_rule
+openapi: 3.1.0
+info:
+  title: Gastroenterology Waiting List Card — GastroWaitingListCardGradeRule
+  version: 1.0.0
+  description: Audit trail of every waiting-time-status / clinical-priority / long-wait rule that fired during grading of a waiting list card.
+paths:
+  /gastro-waiting-list-card-grade-rules:
+    get:
+      summary: List GastroWaitingListCardGradeRule records
+      operationId: listGastroWaitingListCardGradeRule
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of GastroWaitingListCardGradeRule records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/GastroWaitingListCardGradeRule"
+    post:
+      summary: Create a new GastroWaitingListCardGradeRule
+      operationId: createGastroWaitingListCardGradeRule
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/GastroWaitingListCardGradeRule"
+      responses:
+        "201":
+          description: The newly created GastroWaitingListCardGradeRule
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GastroWaitingListCardGradeRule"
+        "400":
+          description: Validation error
+  /gastro-waiting-list-card-grade-rules/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one GastroWaitingListCardGradeRule by id
+      operationId: getGastroWaitingListCardGradeRule
+      responses:
+        "200":
+          description: The requested GastroWaitingListCardGradeRule
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GastroWaitingListCardGradeRule"
+        "404":
+          description: GastroWaitingListCardGradeRule not found
+    patch:
+      summary: Update an existing GastroWaitingListCardGradeRule
+      operationId: updateGastroWaitingListCardGradeRule
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/GastroWaitingListCardGradeRule"
+      responses:
+        "200":
+          description: The updated GastroWaitingListCardGradeRule
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GastroWaitingListCardGradeRule"
+        "404":
+          description: GastroWaitingListCardGradeRule not found
+    delete:
+      summary: Soft-delete a GastroWaitingListCardGradeRule
+      operationId: deleteGastroWaitingListCardGradeRule
+      responses:
+        "204":
+          description: GastroWaitingListCardGradeRule deleted
+        "404":
+          description: GastroWaitingListCardGradeRule not found
+components:
+  schemas:
+    GastroWaitingListCardGradeRule:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was updated most-recently.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was deleted a.k.a. soft-removed.
+        gastro_waiting_list_card_grade_id:
+          type: string
+          format: uuid
+          description: Foreign key to the parent grade row.
+        rule_id:
+          type: string
+          maxLength: 50
+          description: Stable rule identifier (e.g. R-WTS-BREACHED-001).
+        instrument:
+          type: string
+          enum:
+            - waiting-time-status
+            - clinical-priority
+            - long-wait
+          description: "Scoring instrument the rule belongs to: waiting-time-status, clinical-priority, long-wait."
+        band:
+          type: string
+          enum:
+            - within-target
+            - approaching-breach
+            - breached
+            - long-wait
+            - ""
+          description: Band contributed by this rule (e.g. breached).
+        category:
+          type: string
+          maxLength: 50
+          description: Category descriptor (e.g. rtt-18-week, priority-target, long-waiter).
+        description:
+          type: string
+          maxLength: 500
+          description: Human-readable description of why the rule fired.
+      required:
+        - created_at
+        - updated_at
+        - gastro_waiting_list_card_grade_id
+        - rule_id
+        - instrument
+        - band
+        - category
+        - description
+      description: Audit trail of every waiting-time-status / clinical-priority / long-wait rule that fired during grading of a waiting list card.

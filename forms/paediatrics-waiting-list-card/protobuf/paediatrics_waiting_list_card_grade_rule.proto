@@ -1,0 +1,34 @@
+// Generated from sql/. Do not edit by hand.
+// SOURCE: paediatrics_waiting_list_card_grade_rule
+
+syntax = "proto3";
+
+package form_examples.paediatrics_waiting_list_card;
+
+enum PaediatricsWaitingListCardGradeRuleInstrumentEnum {
+  INSTRUMENT_UNSPECIFIED = 0;
+  INSTRUMENT_WAITING_TIME_STATUS = 1;  // waiting-time-status
+  INSTRUMENT_CLINICAL_PRIORITY = 2;  // clinical-priority
+  INSTRUMENT_LONG_WAIT = 3;  // long-wait
+}
+
+enum PaediatricsWaitingListCardGradeRuleBandEnum {
+  BAND_UNSPECIFIED = 0;
+  BAND_WITHIN_TARGET = 1;  // within-target
+  BAND_APPROACHING_BREACH = 2;  // approaching-breach
+  BAND_BREACHED = 3;  // breached
+  BAND_LONG_WAIT = 4;  // long-wait
+}
+
+message PaediatricsWaitingListCardGradeRule {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string paediatrics_waiting_list_card_grade_id = 5;  // UUID — uuid
+  string rule_id = 6;  // VARCHAR(50) — max 50 chars
+  PaediatricsWaitingListCardGradeRuleInstrumentEnum instrument = 7;  // VARCHAR(30)
+  PaediatricsWaitingListCardGradeRuleBandEnum band = 8;  // VARCHAR(20)
+  string category = 9;  // VARCHAR(50) — max 50 chars
+  string description = 10;  // VARCHAR(500) — max 500 chars
+}

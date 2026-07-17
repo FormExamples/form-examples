@@ -1,0 +1,170 @@
+# Generated from sql/. Do not edit by hand.
+# SOURCE: clin_neurophys_waiting_list_card_grade_flag
+openapi: 3.1.0
+info:
+  title: Clinical Neurophysiology Waiting List Card — ClinNeurophysWaitingListCardGradeFlag
+  version: 1.0.0
+  description: Safety / operational flags that fire independently of the Waiting Time Status, with priority and a suggested action for the booking team.
+paths:
+  /clin-neurophys-waiting-list-card-grade-flags:
+    get:
+      summary: List ClinNeurophysWaitingListCardGradeFlag records
+      operationId: listClinNeurophysWaitingListCardGradeFlag
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of ClinNeurophysWaitingListCardGradeFlag records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/ClinNeurophysWaitingListCardGradeFlag"
+    post:
+      summary: Create a new ClinNeurophysWaitingListCardGradeFlag
+      operationId: createClinNeurophysWaitingListCardGradeFlag
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ClinNeurophysWaitingListCardGradeFlag"
+      responses:
+        "201":
+          description: The newly created ClinNeurophysWaitingListCardGradeFlag
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ClinNeurophysWaitingListCardGradeFlag"
+        "400":
+          description: Validation error
+  /clin-neurophys-waiting-list-card-grade-flags/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one ClinNeurophysWaitingListCardGradeFlag by id
+      operationId: getClinNeurophysWaitingListCardGradeFlag
+      responses:
+        "200":
+          description: The requested ClinNeurophysWaitingListCardGradeFlag
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ClinNeurophysWaitingListCardGradeFlag"
+        "404":
+          description: ClinNeurophysWaitingListCardGradeFlag not found
+    patch:
+      summary: Update an existing ClinNeurophysWaitingListCardGradeFlag
+      operationId: updateClinNeurophysWaitingListCardGradeFlag
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ClinNeurophysWaitingListCardGradeFlag"
+      responses:
+        "200":
+          description: The updated ClinNeurophysWaitingListCardGradeFlag
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ClinNeurophysWaitingListCardGradeFlag"
+        "404":
+          description: ClinNeurophysWaitingListCardGradeFlag not found
+    delete:
+      summary: Soft-delete a ClinNeurophysWaitingListCardGradeFlag
+      operationId: deleteClinNeurophysWaitingListCardGradeFlag
+      responses:
+        "204":
+          description: ClinNeurophysWaitingListCardGradeFlag deleted
+        "404":
+          description: ClinNeurophysWaitingListCardGradeFlag not found
+components:
+  schemas:
+    ClinNeurophysWaitingListCardGradeFlag:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was updated most-recently.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was deleted a.k.a. soft-removed.
+        clin_neurophys_waiting_list_card_grade_id:
+          type: string
+          format: uuid
+          description: Foreign key to the parent grade row.
+        flag_id:
+          type: string
+          maxLength: 50
+          description: Stable flag identifier (e.g. F-BREACH-RISK-001).
+        category:
+          type: string
+          enum:
+            - breach-risk
+            - long-waiter-52-week
+            - priority-1-escalation
+            - two-week-wait-cancer
+            - missing-appointment
+            - accessibility-unmet
+            - interpreter-required
+            - contact-details-missing
+            - other
+            - ""
+          description: Flag category.
+        priority:
+          type: string
+          enum:
+            - low
+            - medium
+            - high
+            - ""
+          description: "Priority: low, medium, high."
+        description:
+          type: string
+          maxLength: 500
+          description: Human-readable description of what fired the flag.
+        suggested_action:
+          type: string
+          maxLength: 500
+          description: "Suggested action (e.g. \"contact patient to confirm next appointment\")."
+      required:
+        - created_at
+        - updated_at
+        - clin_neurophys_waiting_list_card_grade_id
+        - flag_id
+        - category
+        - priority
+        - description
+        - suggested_action
+      description: Safety / operational flags that fire independently of the Waiting Time Status, with priority and a suggested action for the booking team.

@@ -1,0 +1,15 @@
+<!ELEMENT practitioner (id,created_at,updated_at,deleted_at,name,email,phone,role,registration_body,registration_number,organisation_name,organisation_ods_code,site_name,country_as_iso_3166_1_alpha_2)>
+<!ELEMENT id (#PCDATA)>
+<!ELEMENT created_at (#PCDATA)>
+<!ELEMENT updated_at (#PCDATA)>
+<!ELEMENT deleted_at (#PCDATA)>
+<!ELEMENT name (#PCDATA)>
+<!ELEMENT email (#PCDATA)>
+<!ELEMENT phone (#PCDATA)>
+<!ELEMENT role (#PCDATA)>
+<!ELEMENT registration_body (#PCDATA)>
+<!ELEMENT registration_number (#PCDATA)>
+<!ELEMENT organisation_name (#PCDATA)>
+<!ELEMENT organisation_ods_code (#PCDATA)>
+<!ELEMENT site_name (#PCDATA)>
+<!ELEMENT country_as_iso_3166_1_alpha_2 (#PCDATA)>

@@ -1,0 +1,21 @@
+# Internal Medicine Waiting List Card — full-stack crate tasks
+
+- [x] Create Cargo workspace manifest and `migration` sub-crate
+- [x] Add `.gitignore` (`target`, `Cargo.lock`, `tmp`)
+- [x] Write the `assessments` migration (`m20260601_000001_create_waiting_list_cards.rs`)
+- [x] Implement `src/app.rs` with `Hooks` and Tera initialiser
+- [x] Implement `src/bin/main.rs` entry point
+- [x] Implement SeaORM entity in `src/models/_entities/assessments.rs`
+- [x] Implement `src/models/assessments.rs` (`new_draft`, `find_by_id`, `list_completed`)
+- [x] Port the engine types from the front-end TypeScript engine
+- [x] Port priority targets, waiting-time rules, composite grader
+- [x] Port the eight additional flag detectors
+- [x] Implement the assessment controller (landing → submit → report)
+- [x] Implement the dashboard controller with filter parameters
+- [x] Write the `templates/base.html.tera` layout with HTMX + Alpine.js + `hx-boost`
+- [x] Write the seven step partials with NHS RTT-aligned copy
+- [x] Write `landing.html.tera`, `assessment.html.tera`, `dashboard.html.tera`, `report.html.tera`
+- [x] Write engine unit tests (`composite_grader_test.rs`, `flagged_issues_test.rs`)
+- [x] Verify `cargo build` succeeds
+- [x] Verify `RUSTFLAGS=-Awarnings cargo check` succeeds
+- [ ] `cargo test` (requires a Postgres instance for the integration setup)

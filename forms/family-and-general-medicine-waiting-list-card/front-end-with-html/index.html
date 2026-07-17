@@ -1,0 +1,515 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Family and General Medicine Waiting List Card — practitioner form</title>
+  <meta name="description" content="Practitioner-completed administrative card aligned with NHS England Referral to Treatment (RTT) rules and the Clinical Prioritisation framework (P1–P6).">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <a class="skip-link visually-hidden" href="#form-sections">Skip to questionnaire</a>
+
+  <header class="page-header">
+    <div class="page-header-inner">
+      <h1>Family and General Medicine Waiting List Card</h1>
+      <p class="subtitle">Practitioner-completed. NHS RTT (18-week) and Clinical Prioritisation (P1–P6) aligned.</p>
+
+      <progress
+        id="progress"
+        class="progress"
+        max="100"
+        value="0"
+        aria-label="Form completion"
+      ></progress>
+      <p id="progress-text" class="subtitle" aria-live="polite">0 fields answered (0%)</p>
+
+      <ol
+        id="step-list"
+        class="step-list"
+        aria-label="Family and General Medicine Waiting List Card steps"
+        data-current="0"
+      ><!-- injected by js/form-app.js --></ol>
+    </div>
+  </header>
+
+  <main>
+    <div class="intro">
+      <p>
+        Complete the card on behalf of the patient to place them on a medical
+        waiting list. Answers are saved automatically in this browser so the
+        card can be resumed later.
+      </p>
+    </div>
+
+    <form
+      id="assessment-form"
+      class="form"
+      autocomplete="off"
+      novalidate
+      onsubmit="return false;"
+      aria-label="Family and General Medicine Waiting List Card"
+    >
+      <div
+        id="error-summary"
+        class="error-summary"
+        role="alert"
+        aria-label="Validation errors"
+        hidden
+      ></div>
+
+      <div id="form-sections">
+
+        <!-- Step 1 — Practitioner identification -->
+        <fieldset id="step-1" class="fieldset">
+          <legend class="fieldset-legend">1. Practitioner identification</legend>
+
+          <div class="field">
+            <label class="label" for="prac-name">Name</label>
+            <input class="text-input" id="prac-name" type="text" data-bind="practitioner.name" autocomplete="name">
+          </div>
+
+          <div class="field">
+            <label class="label" for="prac-role">Role</label>
+            <select class="select" id="prac-role" data-bind="practitioner.role">
+              <option value="">— select —</option>
+              <option value="gp">GP</option>
+              <option value="consultant">Consultant</option>
+              <option value="specialist-nurse">Specialist nurse</option>
+              <option value="referral-coordinator">Referral coordinator</option>
+              <option value="booking-clerk">Booking clerk</option>
+              <option value="rtt-validator">RTT validator</option>
+              <option value="other">Other</option>
+            </select>
+          </div>
+
+          <div class="field-row">
+            <div class="field">
+              <label class="label" for="prac-reg-body">Registration body</label>
+              <select class="select" id="prac-reg-body" data-bind="practitioner.registrationBody">
+                <option value="">— select —</option>
+                <option value="GMC">GMC</option>
+                <option value="NMC">NMC</option>
+                <option value="HCPC">HCPC</option>
+                <option value="GPhC">GPhC</option>
+                <option value="other">Other</option>
+              </select>
+            </div>
+
+            <div class="field">
+              <label class="label" for="prac-reg-number">Registration number</label>
+              <input class="text-input" id="prac-reg-number" type="text" data-bind="practitioner.registrationNumber">
+            </div>
+          </div>
+
+          <div class="field">
+            <label class="label" for="prac-org">Organisation name</label>
+            <input class="text-input" id="prac-org" type="text" data-bind="practitioner.organisationName">
+          </div>
+
+          <div class="field-row">
+            <div class="field">
+              <label class="label" for="prac-ods">ODS code</label>
+              <input class="text-input" id="prac-ods" type="text" data-bind="practitioner.organisationOdsCode">
+            </div>
+
+            <div class="field">
+              <label class="label" for="prac-site">Site name</label>
+              <input class="text-input" id="prac-site" type="text" data-bind="practitioner.siteName">
+            </div>
+          </div>
+
+          <div class="field-row">
+            <div class="field">
+              <label class="label" for="prac-email">Email</label>
+              <input class="text-input" id="prac-email" type="email" data-bind="practitioner.email">
+            </div>
+
+            <div class="field">
+              <label class="label" for="prac-phone">Phone</label>
+              <input class="text-input" id="prac-phone" type="tel" data-bind="practitioner.phone">
+            </div>
+          </div>
+        </fieldset>
+
+        <!-- Step 2 — Patient identification -->
+        <fieldset id="step-2" class="fieldset">
+          <legend class="fieldset-legend">2. Patient identification</legend>
+
+          <div class="field">
+            <label class="label" for="pt-name">Name</label>
+            <input class="text-input" id="pt-name" type="text" data-bind="patient.name" autocomplete="name">
+          </div>
+
+          <div class="field-row">
+            <div class="field">
+              <label class="label" for="pt-nhs">NHS number</label>
+              <input class="text-input" id="pt-nhs" type="text" data-bind="patient.unitedKingdomNhsNumber" inputmode="numeric" pattern="[0-9 ]*">
+            </div>
+
+            <div class="field">
+              <label class="label" for="pt-dob">Date of birth</label>
+              <input class="text-input" id="pt-dob" type="date" data-bind="patient.birthDate">
+            </div>
+
+            <div class="field">
+              <label class="label" for="pt-sex">Sex</label>
+              <select class="select" id="pt-sex" data-bind="patient.sex">
+                <option value="">— select —</option>
+                <option value="female">Female</option>
+                <option value="male">Male</option>
+                <option value="intersex">Intersex</option>
+                <option value="unknown">Unknown</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="field-row">
+            <div class="field">
+              <label class="label" for="pt-email">Email</label>
+              <input class="text-input" id="pt-email" type="email" data-bind="patient.email">
+            </div>
+
+            <div class="field">
+              <label class="label" for="pt-phone">Phone</label>
+              <input class="text-input" id="pt-phone" type="tel" data-bind="patient.phone">
+            </div>
+          </div>
+
+          <div class="field">
+            <label class="label" for="pt-address">Postal address</label>
+            <textarea class="text-area-input" id="pt-address" rows="3" data-bind="patient.postalAddressAsFullText"></textarea>
+          </div>
+
+          <div class="field-row">
+            <div class="field">
+              <label class="label" for="pt-postcode">Postcode</label>
+              <input class="text-input" id="pt-postcode" type="text" data-bind="patient.postcode">
+            </div>
+
+            <div class="field">
+              <label class="label" for="pt-lang">Preferred language (ISO 639-1)</label>
+              <input class="text-input" id="pt-lang" type="text" maxlength="2" data-bind="patient.preferredLanguageAsIso6391" placeholder="en">
+            </div>
+          </div>
+
+          <fieldset class="radio-group">
+            <legend class="radio-group-legend">Interpreter required</legend>
+            <label class="radio-input"><input type="radio" name="interpreter" value="yes" data-bind="patient.interpreterRequired"> <span>Yes</span></label>
+            <label class="radio-input"><input type="radio" name="interpreter" value="no" data-bind="patient.interpreterRequired"> <span>No</span></label>
+          </fieldset>
+
+          <div class="field">
+            <label class="label" for="pt-access">Accessibility needs</label>
+            <textarea class="text-area-input" id="pt-access" rows="2" data-bind="patient.accessibilityNeeds" placeholder="e.g. BSL interpreter, step-free access, large print"></textarea>
+          </div>
+
+          <div class="field">
+            <label class="label" for="pt-contact">Preferred contact channel</label>
+            <select class="select" id="pt-contact" data-bind="patient.preferredContactChannel">
+              <option value="">— select —</option>
+              <option value="sms">SMS</option>
+              <option value="email">Email</option>
+              <option value="phone">Phone</option>
+              <option value="letter">Letter</option>
+              <option value="nhs-app">NHS App</option>
+            </select>
+          </div>
+        </fieldset>
+
+        <!-- Step 3 — Referral details -->
+        <fieldset id="step-3" class="fieldset">
+          <legend class="fieldset-legend">3. Referral details</legend>
+
+          <div class="field-row">
+            <div class="field">
+              <label class="label" for="ref-source">Referral source</label>
+              <select class="select" id="ref-source" data-bind="referral.referralSource">
+                <option value="">— select —</option>
+                <option value="gp">GP</option>
+                <option value="consultant">Consultant</option>
+                <option value="a-and-e">A&amp;E</option>
+                <option value="self">Self-referral</option>
+                <option value="community">Community service</option>
+                <option value="screening">Screening programme</option>
+                <option value="other">Other</option>
+              </select>
+            </div>
+
+            <div class="field">
+              <label class="label" for="ref-date">Referral date</label>
+              <input class="text-input" id="ref-date" type="date" data-bind="referral.referralDate">
+            </div>
+          </div>
+
+          <div class="field">
+            <label class="label" for="ref-letter">Referral letter reference</label>
+            <input class="text-input" id="ref-letter" type="text" data-bind="referral.referralLetterReference">
+          </div>
+
+          <div class="field">
+            <label class="label" for="ref-reason">Reason for referral</label>
+            <textarea class="text-area-input" id="ref-reason" rows="3" data-bind="referral.reasonForReferral"></textarea>
+          </div>
+
+          <div class="field">
+            <label class="label" for="ref-condition">Presenting condition</label>
+            <textarea class="text-area-input" id="ref-condition" rows="3" data-bind="referral.presentingCondition"></textarea>
+          </div>
+
+          <div class="field-row">
+            <div class="field">
+              <label class="label" for="ref-icd">ICD-10 code</label>
+              <input class="text-input" id="ref-icd" type="text" data-bind="referral.icd10Code" placeholder="e.g. M17.0">
+            </div>
+
+            <div class="field">
+              <label class="label" for="ref-snomed">SNOMED CT code</label>
+              <input class="text-input" id="ref-snomed" type="text" data-bind="referral.snomedCtCode">
+            </div>
+          </div>
+
+          <fieldset class="radio-group">
+            <legend class="radio-group-legend">Suspected cancer (two-week wait)</legend>
+            <label class="radio-input"><input type="radio" name="suspected-cancer" value="yes" data-bind="referral.suspectedCancer"> <span>Yes</span></label>
+            <label class="radio-input"><input type="radio" name="suspected-cancer" value="no" data-bind="referral.suspectedCancer"> <span>No</span></label>
+          </fieldset>
+        </fieldset>
+
+        <!-- Step 4 — Waiting list entry -->
+        <fieldset id="step-4" class="fieldset">
+          <legend class="fieldset-legend">4. Waiting list entry</legend>
+
+          <div class="field">
+            <label class="label" for="wl-list">List name</label>
+            <input class="text-input" id="wl-list" type="text" data-bind="waitingList.listName" placeholder="e.g. Orthopaedic — knee replacement">
+          </div>
+
+          <div class="field-row">
+            <div class="field">
+              <label class="label" for="wl-specialty">Specialty</label>
+              <input class="text-input" id="wl-specialty" type="text" data-bind="waitingList.specialty" placeholder="e.g. Trauma &amp; Orthopaedics">
+            </div>
+
+            <div class="field">
+              <label class="label" for="wl-sub-specialty">Sub-specialty</label>
+              <input class="text-input" id="wl-sub-specialty" type="text" data-bind="waitingList.subSpecialty">
+            </div>
+          </div>
+
+          <div class="field">
+            <label class="label" for="wl-procedure">Procedure description</label>
+            <textarea class="text-area-input" id="wl-procedure" rows="3" data-bind="waitingList.procedureDescription" placeholder="Plain-language description of what the patient is waiting to do."></textarea>
+          </div>
+
+          <div class="field-row">
+            <div class="field">
+              <label class="label" for="wl-opcs">OPCS-4 code</label>
+              <input class="text-input" id="wl-opcs" type="text" data-bind="waitingList.opcs4Code">
+            </div>
+
+            <div class="field">
+              <label class="label" for="wl-priority">Clinical priority</label>
+              <select class="select" id="wl-priority" data-bind="waitingList.clinicalPriority">
+                <option value="">— select —</option>
+                <option value="P1a">P1a — Emergency (24 h)</option>
+                <option value="P1b">P1b — Urgent (72 h)</option>
+                <option value="P2">P2 — Cancer / time-critical (4 wk)</option>
+                <option value="P3">P3 — Substantial harm if delayed (12 wk)</option>
+                <option value="P4">P4 — Routine (18-wk RTT)</option>
+                <option value="P5">P5 — Deferred (6 mo)</option>
+                <option value="P6">P6 — Removed from list</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="field-row">
+            <div class="field">
+              <label class="label" for="wl-clock">RTT clock-start date</label>
+              <input class="text-input" id="wl-clock" type="date" data-bind="waitingList.rttClockStartDate">
+            </div>
+
+            <div class="field">
+              <label class="label" for="wl-expected-wait">Expected wait (weeks)</label>
+              <input class="text-input" id="wl-expected-wait" type="number" min="0" max="260" data-bind="waitingList.expectedWaitWeeks">
+            </div>
+          </div>
+
+          <div class="field">
+            <label class="label" for="wl-expected-type">Expected procedure type</label>
+            <select class="select" id="wl-expected-type" data-bind="waitingList.expectedProcedureType">
+              <option value="">— select —</option>
+              <option value="first-outpatient-appointment">First outpatient appointment</option>
+              <option value="follow-up-appointment">Follow-up appointment</option>
+              <option value="day-case-procedure">Day-case procedure</option>
+              <option value="inpatient-procedure">Inpatient procedure</option>
+              <option value="diagnostic">Diagnostic</option>
+              <option value="therapy">Therapy</option>
+              <option value="multi-disciplinary-team-review">MDT review</option>
+              <option value="other">Other</option>
+            </select>
+          </div>
+        </fieldset>
+
+        <!-- Step 5 — Upcoming appointment -->
+        <fieldset id="step-5" class="fieldset">
+          <legend class="fieldset-legend">5. Upcoming appointment</legend>
+
+          <div class="field-row">
+            <div class="field">
+              <label class="label" for="ap-date">Appointment date</label>
+              <input class="text-input" id="ap-date" type="date" data-bind="appointment.appointmentDate">
+            </div>
+
+            <div class="field">
+              <label class="label" for="ap-time">Appointment time</label>
+              <input class="text-input" id="ap-time" type="time" data-bind="appointment.appointmentTime">
+            </div>
+
+            <div class="field">
+              <label class="label" for="ap-duration">Duration (min)</label>
+              <input class="text-input" id="ap-duration" type="number" min="1" max="1440" data-bind="appointment.durationMinutes">
+            </div>
+          </div>
+
+          <div class="field">
+            <label class="label" for="ap-type">Appointment type</label>
+            <select class="select" id="ap-type" data-bind="appointment.appointmentType">
+              <option value="">— select —</option>
+              <option value="first-outpatient">First outpatient</option>
+              <option value="follow-up">Follow-up</option>
+              <option value="pre-assessment">Pre-assessment</option>
+              <option value="diagnostic">Diagnostic</option>
+              <option value="treatment">Treatment</option>
+              <option value="procedure">Procedure</option>
+              <option value="admission">Admission</option>
+              <option value="telephone">Telephone</option>
+              <option value="video">Video</option>
+              <option value="other">Other</option>
+            </select>
+          </div>
+
+          <div class="field-row">
+            <div class="field">
+              <label class="label" for="ap-site">Site name</label>
+              <input class="text-input" id="ap-site" type="text" data-bind="appointment.siteName">
+            </div>
+
+            <div class="field">
+              <label class="label" for="ap-clinic">Clinic</label>
+              <input class="text-input" id="ap-clinic" type="text" data-bind="appointment.clinicName">
+            </div>
+          </div>
+
+          <div class="field">
+            <label class="label" for="ap-address">Site address</label>
+            <textarea class="text-area-input" id="ap-address" rows="2" data-bind="appointment.siteAddress"></textarea>
+          </div>
+
+          <div class="field-row">
+            <div class="field">
+              <label class="label" for="ap-room">Room</label>
+              <input class="text-input" id="ap-room" type="text" data-bind="appointment.room">
+            </div>
+
+            <div class="field">
+              <label class="label" for="ap-clinician">Clinician</label>
+              <input class="text-input" id="ap-clinician" type="text" data-bind="appointment.clinicianName">
+            </div>
+
+            <div class="field">
+              <label class="label" for="ap-team">Team</label>
+              <input class="text-input" id="ap-team" type="text" data-bind="appointment.clinicianTeam">
+            </div>
+          </div>
+
+          <div class="field">
+            <label class="label" for="ap-status">Status</label>
+            <select class="select" id="ap-status" data-bind="appointment.status">
+              <option value="scheduled">Scheduled</option>
+              <option value="confirmed">Confirmed</option>
+              <option value="rebooked">Rebooked</option>
+              <option value="cancelled">Cancelled</option>
+              <option value="attended">Attended</option>
+              <option value="did-not-attend">Did not attend</option>
+            </select>
+          </div>
+
+          <div class="field">
+            <label class="label" for="ap-travel">Travel notes</label>
+            <textarea class="text-area-input" id="ap-travel" rows="2" data-bind="appointment.travelNotes" placeholder="Transport, parking, directions."></textarea>
+          </div>
+
+          <div class="field">
+            <label class="label" for="ap-access">Access notes</label>
+            <textarea class="text-area-input" id="ap-access" rows="2" data-bind="appointment.accessNotes" placeholder="Step-free access, BSL interpreter booked, etc."></textarea>
+          </div>
+        </fieldset>
+
+        <!-- Step 6 — Patient communication -->
+        <fieldset id="step-6" class="fieldset">
+          <legend class="fieldset-legend">6. Patient communication</legend>
+
+          <fieldset class="radio-group">
+            <legend class="radio-group-legend">Consent to reminders</legend>
+            <label class="radio-input"><input type="radio" name="consent-reminders" value="yes" data-bind="communication.consentToReminders"> <span>Yes</span></label>
+            <label class="radio-input"><input type="radio" name="consent-reminders" value="no" data-bind="communication.consentToReminders"> <span>No</span></label>
+          </fieldset>
+
+          <div class="field">
+            <label class="label" for="cm-notes">Communication notes</label>
+            <textarea class="text-area-input" id="cm-notes" rows="3" data-bind="communication.communicationNotes" placeholder="Preferred times to contact, language and interpreter needs, accessibility (BSL, large print, easy read)."></textarea>
+          </div>
+        </fieldset>
+
+        <!-- Step 7 — Sign-off -->
+        <fieldset id="step-7" class="fieldset">
+          <legend class="fieldset-legend">7. Sign-off</legend>
+
+          <div class="field">
+            <label class="label" for="so-notes">Additional notes</label>
+            <textarea class="text-area-input" id="so-notes" rows="3" data-bind="signoff.additionalNotes"></textarea>
+          </div>
+
+          <div class="field">
+            <label class="label" for="so-signed-at">Signed at (set on submit)</label>
+            <input class="text-input" id="so-signed-at" type="text" readonly data-bind="signoff.signedAt">
+          </div>
+        </fieldset>
+      </div>
+
+      <div class="button-group">
+        <button type="button" id="submit-btn" class="button" data-variant="primary">
+          Sign and view report
+        </button>
+        <button type="button" id="reset-btn" class="button" data-variant="secondary">
+          Start over
+        </button>
+      </div>
+    </form>
+
+    <section
+      id="report"
+      class="panel"
+      role="region"
+      aria-live="polite"
+      aria-label="Waiting Time Status report"
+    >
+      <p class="empty-message">
+        Enter the RTT clock-start date and clinical priority on step 4 to compute the Waiting Time Status.
+      </p>
+    </section>
+
+    <footer class="page-footer">
+      <p>
+        The Waiting Time Status is computed by a rule-based grader using the
+        NHS RTT 18-week standard, the Clinical Prioritisation framework
+        (P1–P6), and the 52-week long-waiter rule. It supports operational
+        decisions but does not replace clinician or booking-team judgement.
+      </p>
+    </footer>
+  </main>
+
+  <script type="module" src="js/form-app.js"></script>
+</body>
+</html>

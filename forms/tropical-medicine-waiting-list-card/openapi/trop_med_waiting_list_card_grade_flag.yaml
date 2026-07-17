@@ -1,0 +1,170 @@
+# Generated from sql/. Do not edit by hand.
+# SOURCE: trop_med_waiting_list_card_grade_flag
+openapi: 3.1.0
+info:
+  title: Tropical Medicine Waiting List Card — TropMedWaitingListCardGradeFlag
+  version: 1.0.0
+  description: Safety / operational flags that fire independently of the Waiting Time Status, with priority and a suggested action for the booking team.
+paths:
+  /trop-med-waiting-list-card-grade-flags:
+    get:
+      summary: List TropMedWaitingListCardGradeFlag records
+      operationId: listTropMedWaitingListCardGradeFlag
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of TropMedWaitingListCardGradeFlag records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/TropMedWaitingListCardGradeFlag"
+    post:
+      summary: Create a new TropMedWaitingListCardGradeFlag
+      operationId: createTropMedWaitingListCardGradeFlag
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/TropMedWaitingListCardGradeFlag"
+      responses:
+        "201":
+          description: The newly created TropMedWaitingListCardGradeFlag
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/TropMedWaitingListCardGradeFlag"
+        "400":
+          description: Validation error
+  /trop-med-waiting-list-card-grade-flags/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one TropMedWaitingListCardGradeFlag by id
+      operationId: getTropMedWaitingListCardGradeFlag
+      responses:
+        "200":
+          description: The requested TropMedWaitingListCardGradeFlag
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/TropMedWaitingListCardGradeFlag"
+        "404":
+          description: TropMedWaitingListCardGradeFlag not found
+    patch:
+      summary: Update an existing TropMedWaitingListCardGradeFlag
+      operationId: updateTropMedWaitingListCardGradeFlag
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/TropMedWaitingListCardGradeFlag"
+      responses:
+        "200":
+          description: The updated TropMedWaitingListCardGradeFlag
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/TropMedWaitingListCardGradeFlag"
+        "404":
+          description: TropMedWaitingListCardGradeFlag not found
+    delete:
+      summary: Soft-delete a TropMedWaitingListCardGradeFlag
+      operationId: deleteTropMedWaitingListCardGradeFlag
+      responses:
+        "204":
+          description: TropMedWaitingListCardGradeFlag deleted
+        "404":
+          description: TropMedWaitingListCardGradeFlag not found
+components:
+  schemas:
+    TropMedWaitingListCardGradeFlag:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was updated most-recently.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was deleted a.k.a. soft-removed.
+        trop_med_waiting_list_card_grade_id:
+          type: string
+          format: uuid
+          description: Foreign key to the parent grade row.
+        flag_id:
+          type: string
+          maxLength: 50
+          description: Stable flag identifier (e.g. F-BREACH-RISK-001).
+        category:
+          type: string
+          enum:
+            - breach-risk
+            - long-waiter-52-week
+            - priority-1-escalation
+            - two-week-wait-cancer
+            - missing-appointment
+            - accessibility-unmet
+            - interpreter-required
+            - contact-details-missing
+            - other
+            - ""
+          description: Flag category.
+        priority:
+          type: string
+          enum:
+            - low
+            - medium
+            - high
+            - ""
+          description: "Priority: low, medium, high."
+        description:
+          type: string
+          maxLength: 500
+          description: Human-readable description of what fired the flag.
+        suggested_action:
+          type: string
+          maxLength: 500
+          description: "Suggested action (e.g. \"contact patient to confirm next appointment\")."
+      required:
+        - created_at
+        - updated_at
+        - trop_med_waiting_list_card_grade_id
+        - flag_id
+        - category
+        - priority
+        - description
+        - suggested_action
+      description: Safety / operational flags that fire independently of the Waiting Time Status, with priority and a suggested action for the booking team.

@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE child_psych_waiting_list_card SYSTEM "child_psych_waiting_list_card.dtd">
+<child_psych_waiting_list_card>
+<id>770e8400-e29b-41d4-a716-446655440002</id>
+<created_at>2026-04-09T10:00:00Z</created_at>
+<updated_at>2026-04-09T10:00:00Z</updated_at>
+<deleted_at>2026-04-09T10:00:00Z</deleted_at>
+<patient_id>550e8400-e29b-41d4-a716-446655440000</patient_id>
+<practitioner_id>660e8400-e29b-41d4-a716-446655440001</practitioner_id>
+<status>draft</status>
+<entry_date>2026-01-15</entry_date>
+<entry_time></entry_time>
+<referral_source>gp</referral_source>
+<referral_date>2026-01-15</referral_date>
+<referral_letter_reference></referral_letter_reference>
+<reason_for_referral>Example text.</reason_for_referral>
+<presenting_condition></presenting_condition>
+<icd_10_code>ABC123</icd_10_code>
+<snomed_ct_code>ABC123</snomed_ct_code>
+<suspected_cancer>yes</suspected_cancer>
+<list_name>Example</list_name>
+<specialty></specialty>
+<sub_specialty></sub_specialty>
+<procedure_description>Example text.</procedure_description>
+<opcs_4_code>ABC123</opcs_4_code>
+<clinical_priority>P1a</clinical_priority>
+<rtt_clock_start_date>2026-01-15</rtt_clock_start_date>
+<expected_procedure_type>first-outpatient-appointment</expected_procedure_type>
+<expected_wait_weeks>1</expected_wait_weeks>
+<consent_to_reminders>yes</consent_to_reminders>
+<communication_notes>Example text.</communication_notes>
+<additional_notes>Example text.</additional_notes>
+<signed_at>2026-04-09T10:00:00Z</signed_at>
+</child_psych_waiting_list_card>

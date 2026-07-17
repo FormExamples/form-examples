@@ -1,0 +1,43 @@
+// Generated from sql/. Do not edit by hand.
+// SOURCE: practitioner
+
+syntax = "proto3";
+
+package form_examples.dermatology_waiting_list_card;
+
+enum PractitionerRoleEnum {
+  ROLE_UNSPECIFIED = 0;
+  ROLE_GP = 1;  // gp
+  ROLE_CONSULTANT = 2;  // consultant
+  ROLE_SPECIALIST_NURSE = 3;  // specialist-nurse
+  ROLE_REFERRAL_COORDINATOR = 4;  // referral-coordinator
+  ROLE_BOOKING_CLERK = 5;  // booking-clerk
+  ROLE_RTT_VALIDATOR = 6;  // rtt-validator
+  ROLE_OTHER = 7;  // other
+}
+
+enum PractitionerRegistrationBodyEnum {
+  REGISTRATIONBODY_UNSPECIFIED = 0;
+  REGISTRATIONBODY_GMC = 1;  // GMC
+  REGISTRATIONBODY_NMC = 2;  // NMC
+  REGISTRATIONBODY_HCPC = 3;  // HCPC
+  REGISTRATIONBODY_GPHC = 4;  // GPhC
+  REGISTRATIONBODY_OTHER = 5;  // other
+}
+
+message Practitioner {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string name = 5;  // VARCHAR(255) — max 255 chars
+  string email = 6;  // TEXT
+  string phone = 7;  // TEXT
+  PractitionerRoleEnum role = 8;  // VARCHAR(40)
+  PractitionerRegistrationBodyEnum registration_body = 9;  // VARCHAR(20)
+  string registration_number = 10;  // VARCHAR(50) — max 50 chars
+  string organisation_name = 11;  // VARCHAR(255) — max 255 chars
+  string organisation_ods_code = 12;  // VARCHAR(20) — max 20 chars
+  string site_name = 13;  // VARCHAR(255) — max 255 chars
+  string country_as_iso_3166_1_alpha_2 = 14;  // CHAR(2) — max 2 chars
+}

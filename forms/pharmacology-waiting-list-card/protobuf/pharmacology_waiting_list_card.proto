@@ -1,0 +1,93 @@
+// Generated from sql/. Do not edit by hand.
+// SOURCE: pharmacology_waiting_list_card
+
+syntax = "proto3";
+
+package form_examples.pharmacology_waiting_list_card;
+
+enum PharmacologyWaitingListCardStatusEnum {
+  STATUS_UNSPECIFIED = 0;
+  STATUS_DRAFT = 1;  // draft
+  STATUS_SUBMITTED = 2;  // submitted
+  STATUS_REVIEWED = 3;  // reviewed
+  STATUS_CLOSED = 4;  // closed
+}
+
+enum PharmacologyWaitingListCardReferralSourceEnum {
+  REFERRALSOURCE_UNSPECIFIED = 0;
+  REFERRALSOURCE_GP = 1;  // gp
+  REFERRALSOURCE_CONSULTANT = 2;  // consultant
+  REFERRALSOURCE_A_AND_E = 3;  // a-and-e
+  REFERRALSOURCE_SELF = 4;  // self
+  REFERRALSOURCE_COMMUNITY = 5;  // community
+  REFERRALSOURCE_SCREENING = 6;  // screening
+  REFERRALSOURCE_OTHER = 7;  // other
+}
+
+enum PharmacologyWaitingListCardSuspectedCancerEnum {
+  SUSPECTEDCANCER_UNSPECIFIED = 0;
+  SUSPECTEDCANCER_YES = 1;  // yes
+  SUSPECTEDCANCER_NO = 2;  // no
+}
+
+enum PharmacologyWaitingListCardClinicalPriorityEnum {
+  CLINICALPRIORITY_UNSPECIFIED = 0;
+  CLINICALPRIORITY_P1A = 1;  // P1a
+  CLINICALPRIORITY_P1B = 2;  // P1b
+  CLINICALPRIORITY_P2 = 3;  // P2
+  CLINICALPRIORITY_P3 = 4;  // P3
+  CLINICALPRIORITY_P4 = 5;  // P4
+  CLINICALPRIORITY_P5 = 6;  // P5
+  CLINICALPRIORITY_P6 = 7;  // P6
+}
+
+enum PharmacologyWaitingListCardExpectedProcedureTypeEnum {
+  EXPECTEDPROCEDURETYPE_UNSPECIFIED = 0;
+  EXPECTEDPROCEDURETYPE_FIRST_OUTPATIENT_APPOINTMENT = 1;  // first-outpatient-appointment
+  EXPECTEDPROCEDURETYPE_FOLLOW_UP_APPOINTMENT = 2;  // follow-up-appointment
+  EXPECTEDPROCEDURETYPE_DAY_CASE_PROCEDURE = 3;  // day-case-procedure
+  EXPECTEDPROCEDURETYPE_INPATIENT_PROCEDURE = 4;  // inpatient-procedure
+  EXPECTEDPROCEDURETYPE_DIAGNOSTIC = 5;  // diagnostic
+  EXPECTEDPROCEDURETYPE_THERAPY = 6;  // therapy
+  EXPECTEDPROCEDURETYPE_MULTI_DISCIPLINARY_TEAM_REVIEW = 7;  // multi-disciplinary-team-review
+  EXPECTEDPROCEDURETYPE_OTHER = 8;  // other
+}
+
+enum PharmacologyWaitingListCardConsentToRemindersEnum {
+  CONSENTTOREMINDERS_UNSPECIFIED = 0;
+  CONSENTTOREMINDERS_YES = 1;  // yes
+  CONSENTTOREMINDERS_NO = 2;  // no
+}
+
+message PharmacologyWaitingListCard {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string patient_id = 5;  // UUID — uuid
+  string practitioner_id = 6;  // UUID — uuid
+  PharmacologyWaitingListCardStatusEnum status = 7;  // VARCHAR(20)
+  string entry_date = 8;  // DATE — iso 8601 date
+  string entry_time = 9;  // TIME — iso 8601 time
+  PharmacologyWaitingListCardReferralSourceEnum referral_source = 10;  // VARCHAR(30)
+  string referral_date = 11;  // DATE — iso 8601 date
+  string referral_letter_reference = 12;  // VARCHAR(100) — max 100 chars
+  string reason_for_referral = 13;  // TEXT
+  string presenting_condition = 14;  // TEXT
+  string icd_10_code = 15;  // VARCHAR(20) — max 20 chars
+  string snomed_ct_code = 16;  // VARCHAR(30) — max 30 chars
+  PharmacologyWaitingListCardSuspectedCancerEnum suspected_cancer = 17;  // VARCHAR(5)
+  string list_name = 18;  // VARCHAR(255) — max 255 chars
+  string specialty = 19;  // VARCHAR(100) — max 100 chars
+  string sub_specialty = 20;  // VARCHAR(100) — max 100 chars
+  string procedure_description = 21;  // TEXT
+  string opcs_4_code = 22;  // VARCHAR(20) — max 20 chars
+  PharmacologyWaitingListCardClinicalPriorityEnum clinical_priority = 23;  // VARCHAR(5)
+  string rtt_clock_start_date = 24;  // DATE — iso 8601 date
+  PharmacologyWaitingListCardExpectedProcedureTypeEnum expected_procedure_type = 25;  // VARCHAR(40)
+  int32 expected_wait_weeks = 26;  // INTEGER
+  PharmacologyWaitingListCardConsentToRemindersEnum consent_to_reminders = 27;  // VARCHAR(5)
+  string communication_notes = 28;  // TEXT
+  string additional_notes = 29;  // TEXT
+  string signed_at = 30;  // TIMESTAMPTZ — iso 8601
+}

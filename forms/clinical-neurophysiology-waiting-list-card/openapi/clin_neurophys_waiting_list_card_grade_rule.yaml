@@ -1,0 +1,164 @@
+# Generated from sql/. Do not edit by hand.
+# SOURCE: clin_neurophys_waiting_list_card_grade_rule
+openapi: 3.1.0
+info:
+  title: Clinical Neurophysiology Waiting List Card — ClinNeurophysWaitingListCardGradeRule
+  version: 1.0.0
+  description: Audit trail of every waiting-time-status / clinical-priority / long-wait rule that fired during grading of a waiting list card.
+paths:
+  /clin-neurophys-waiting-list-card-grade-rules:
+    get:
+      summary: List ClinNeurophysWaitingListCardGradeRule records
+      operationId: listClinNeurophysWaitingListCardGradeRule
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of ClinNeurophysWaitingListCardGradeRule records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/ClinNeurophysWaitingListCardGradeRule"
+    post:
+      summary: Create a new ClinNeurophysWaitingListCardGradeRule
+      operationId: createClinNeurophysWaitingListCardGradeRule
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ClinNeurophysWaitingListCardGradeRule"
+      responses:
+        "201":
+          description: The newly created ClinNeurophysWaitingListCardGradeRule
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ClinNeurophysWaitingListCardGradeRule"
+        "400":
+          description: Validation error
+  /clin-neurophys-waiting-list-card-grade-rules/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one ClinNeurophysWaitingListCardGradeRule by id
+      operationId: getClinNeurophysWaitingListCardGradeRule
+      responses:
+        "200":
+          description: The requested ClinNeurophysWaitingListCardGradeRule
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ClinNeurophysWaitingListCardGradeRule"
+        "404":
+          description: ClinNeurophysWaitingListCardGradeRule not found
+    patch:
+      summary: Update an existing ClinNeurophysWaitingListCardGradeRule
+      operationId: updateClinNeurophysWaitingListCardGradeRule
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ClinNeurophysWaitingListCardGradeRule"
+      responses:
+        "200":
+          description: The updated ClinNeurophysWaitingListCardGradeRule
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ClinNeurophysWaitingListCardGradeRule"
+        "404":
+          description: ClinNeurophysWaitingListCardGradeRule not found
+    delete:
+      summary: Soft-delete a ClinNeurophysWaitingListCardGradeRule
+      operationId: deleteClinNeurophysWaitingListCardGradeRule
+      responses:
+        "204":
+          description: ClinNeurophysWaitingListCardGradeRule deleted
+        "404":
+          description: ClinNeurophysWaitingListCardGradeRule not found
+components:
+  schemas:
+    ClinNeurophysWaitingListCardGradeRule:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was updated most-recently.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was deleted a.k.a. soft-removed.
+        clin_neurophys_waiting_list_card_grade_id:
+          type: string
+          format: uuid
+          description: Foreign key to the parent grade row.
+        rule_id:
+          type: string
+          maxLength: 50
+          description: Stable rule identifier (e.g. R-WTS-BREACHED-001).
+        instrument:
+          type: string
+          enum:
+            - waiting-time-status
+            - clinical-priority
+            - long-wait
+          description: "Scoring instrument the rule belongs to: waiting-time-status, clinical-priority, long-wait."
+        band:
+          type: string
+          enum:
+            - within-target
+            - approaching-breach
+            - breached
+            - long-wait
+            - ""
+          description: Band contributed by this rule (e.g. breached).
+        category:
+          type: string
+          maxLength: 50
+          description: Category descriptor (e.g. rtt-18-week, priority-target, long-waiter).
+        description:
+          type: string
+          maxLength: 500
+          description: Human-readable description of why the rule fired.
+      required:
+        - created_at
+        - updated_at
+        - clin_neurophys_waiting_list_card_grade_id
+        - rule_id
+        - instrument
+        - band
+        - category
+        - description
+      description: Audit trail of every waiting-time-status / clinical-priority / long-wait rule that fired during grading of a waiting list card.

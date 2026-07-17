@@ -1,0 +1,9 @@
+mod users;
+
+mod patients;
+mod practitioners;
+mod venereology_waiting_list_cards;
+mod venereology_waiting_list_card_appointments;
+mod venereology_waiting_list_card_grades;
+mod venereology_waiting_list_card_grade_rules;
+mod venereology_waiting_list_card_grade_flags;

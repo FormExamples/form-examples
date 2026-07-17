@@ -1,0 +1,9 @@
+mod users;
+
+mod patients;
+mod practitioners;
+mod clin_biology_waiting_list_cards;
+mod clin_biology_waiting_list_card_appointments;
+mod clin_biology_waiting_list_card_grades;
+mod clin_biology_waiting_list_card_grade_rules;
+mod clin_biology_waiting_list_card_grade_flags;

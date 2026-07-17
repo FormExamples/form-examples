@@ -1,0 +1,39 @@
+// Generated from sql/. Do not edit by hand.
+// SOURCE: cardiology_waiting_list_card_grade_flag
+
+syntax = "proto3";
+
+package form_examples.cardiology_waiting_list_card;
+
+enum CardiologyWaitingListCardGradeFlagCategoryEnum {
+  CATEGORY_UNSPECIFIED = 0;
+  CATEGORY_BREACH_RISK = 1;  // breach-risk
+  CATEGORY_LONG_WAITER_52_WEEK = 2;  // long-waiter-52-week
+  CATEGORY_PRIORITY_1_ESCALATION = 3;  // priority-1-escalation
+  CATEGORY_TWO_WEEK_WAIT_CANCER = 4;  // two-week-wait-cancer
+  CATEGORY_MISSING_APPOINTMENT = 5;  // missing-appointment
+  CATEGORY_ACCESSIBILITY_UNMET = 6;  // accessibility-unmet
+  CATEGORY_INTERPRETER_REQUIRED = 7;  // interpreter-required
+  CATEGORY_CONTACT_DETAILS_MISSING = 8;  // contact-details-missing
+  CATEGORY_OTHER = 9;  // other
+}
+
+enum CardiologyWaitingListCardGradeFlagPriorityEnum {
+  PRIORITY_UNSPECIFIED = 0;
+  PRIORITY_LOW = 1;  // low
+  PRIORITY_MEDIUM = 2;  // medium
+  PRIORITY_HIGH = 3;  // high
+}
+
+message CardiologyWaitingListCardGradeFlag {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string cardiology_waiting_list_card_grade_id = 5;  // UUID — uuid
+  string flag_id = 6;  // VARCHAR(50) — max 50 chars
+  CardiologyWaitingListCardGradeFlagCategoryEnum category = 7;  // VARCHAR(50)
+  CardiologyWaitingListCardGradeFlagPriorityEnum priority = 8;  // VARCHAR(10)
+  string description = 9;  // VARCHAR(500) — max 500 chars
+  string suggested_action = 10;  // VARCHAR(500) — max 500 chars
+}

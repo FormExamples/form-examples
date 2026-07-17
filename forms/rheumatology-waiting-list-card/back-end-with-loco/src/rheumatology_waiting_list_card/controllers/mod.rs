@@ -1,0 +1,9 @@
+pub mod auth;
+
+pub mod patient;
+pub mod practitioner;
+pub mod rheumatology_waiting_list_card;
+pub mod rheumatology_waiting_list_card_appointment;
+pub mod rheumatology_waiting_list_card_grade;
+pub mod rheumatology_waiting_list_card_grade_rule;
+pub mod rheumatology_waiting_list_card_grade_flag;

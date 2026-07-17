@@ -1,0 +1,135 @@
+#!/bin/sh
+set -euf
+
+form_kebab_case=anaesthetics-waiting-list-card
+form_snake_case=anaesthetics_waiting_list_card
+
+createdb --host=localhost --port=5432 --username=loco --owner=loco "${form_snake_case}_development" || :
+createdb --host=localhost --port=5432 --username=loco --owner=loco "${form_snake_case}_test" || :
+createdb --host=localhost --port=5432 --username=loco --owner=loco "${form_snake_case}_production" || :
+
+loco new --name "${form_snake_case}" --db postgres --bg async --assets none -a
+cd "${form_snake_case}"
+
+# Pin time to a version compatible with cookie 0.18.1 (a fresh loco
+# starter otherwise resolves time 0.3.52, which fails to compile).
+cargo update -p time --precise 0.3.47
+
+cargo loco generate scaffold patient \
+    deleted_at:tstz \
+    name:string! \
+    birth_date:date! \
+    sex:string! \
+    email:text \
+    phone:text \
+    postal_address_as_full_text:text \
+    country_as_iso_3166_1_alpha_2:string \
+    postcode:text \
+    united_kingdom_nhs_number:string^ \
+    preferred_language_as_iso_639_1:string! \
+    interpreter_required:string! \
+    accessibility_needs:text! \
+    preferred_contact_channel:string! \
+    --api
+
+cargo loco generate scaffold practitioner \
+    deleted_at:tstz \
+    name:string! \
+    email:text \
+    phone:text \
+    role:string! \
+    registration_body:string! \
+    registration_number:string! \
+    organisation_name:string! \
+    organisation_ods_code:string! \
+    site_name:string! \
+    country_as_iso_3166_1_alpha_2:string \
+    --api
+
+cargo loco generate scaffold anaesthetics_waiting_list_card \
+    deleted_at:tstz \
+    patient:references \
+    practitioner:references \
+    status:string! \
+    entry_date:date \
+    entry_time:string \
+    referral_source:string! \
+    referral_date:date \
+    referral_letter_reference:string! \
+    reason_for_referral:text! \
+    presenting_condition:text! \
+    icd_10_code:string! \
+    snomed_ct_code:string! \
+    suspected_cancer:string! \
+    list_name:string! \
+    specialty:string! \
+    sub_specialty:string! \
+    procedure_description:text! \
+    opcs_4_code:string! \
+    clinical_priority:string! \
+    rtt_clock_start_date:date \
+    expected_procedure_type:string! \
+    expected_wait_weeks:int \
+    consent_to_reminders:string! \
+    communication_notes:text! \
+    additional_notes:text! \
+    signed_at:tstz \
+    --api
+
+cargo loco generate scaffold anaesthetics_waiting_list_card_appointment \
+    deleted_at:tstz \
+    anaesthetics_waiting_list_card:references \
+    appointment_date:date \
+    appointment_time:string \
+    duration_minutes:int \
+    appointment_type:string! \
+    site_name:string! \
+    site_address:text! \
+    clinic_name:string! \
+    room:string! \
+    clinician_name:string! \
+    clinician_team:string! \
+    status:string! \
+    travel_notes:text! \
+    access_notes:text! \
+    --api
+
+cargo loco generate scaffold anaesthetics_waiting_list_card_grade \
+    deleted_at:tstz \
+    anaesthetics_waiting_list_card:references \
+    waiting_time_status:string! \
+    clinical_priority:string! \
+    target_wait_weeks:double \
+    days_waited:int \
+    weeks_waited:double \
+    days_to_target:int \
+    days_to_breach:int \
+    days_to_appointment:int \
+    grader_notes:text! \
+    graded_at:tstz! \
+    --api
+
+cargo loco generate scaffold anaesthetics_waiting_list_card_grade_rule \
+    deleted_at:tstz \
+    anaesthetics_waiting_list_card_grade:references \
+    rule_id:string! \
+    instrument:string! \
+    band:string! \
+    category:string! \
+    description:string! \
+    --api
+
+cargo loco generate scaffold anaesthetics_waiting_list_card_grade_flag \
+    deleted_at:tstz \
+    anaesthetics_waiting_list_card_grade:references \
+    flag_id:string! \
+    category:string! \
+    priority:string! \
+    description:string! \
+    suggested_action:string! \
+    --api
+
+# Convert the freshly-scaffolded nested crate into the canonical route
+# layout: back-end-with-loco/src/${form_snake_case}/*.rs
+cd ..
+"$(git rev-parse --show-toplevel)/bin/route-loco-layout" "${form_kebab_case}"

@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Tropical Medicine Waiting List Card — review dashboard</title>
+  <meta name="description" content="Tropical Medicine Waiting List Card review dashboard. NHS RTT (18-week) and Clinical Prioritisation (P1–P6) aligned.">
+  <link rel="stylesheet" href="css/dashboard.css">
+</head>
+<body>
+  <a class="skip-link visually-hidden" href="#cards-table">Skip to cards table</a>
+
+  <header class="page-header">
+    <div class="page-header-inner">
+      <h1>Tropical Medicine Waiting List Card — Review Dashboard</h1>
+      <p class="subtitle">
+        Review waiting list cards by specialty, clinical priority,
+        Waiting Time Status, and safety / operational flags.
+      </p>
+    </div>
+  </header>
+
+  <main>
+    <!-- Status banner: shown when backend fetch fails and we fall back -->
+    <div
+      id="status-banner"
+      class="alert"
+      data-type="warning"
+      role="status"
+      aria-live="polite"
+      hidden
+    ></div>
+
+    <!-- Summary cards -->
+    <section class="filter-bar" aria-labelledby="summary-heading">
+      <h2 id="summary-heading" class="visually-hidden">Summary</h2>
+      <div class="filter-grid">
+        <div class="filter-field">
+          <p class="label">Cards</p>
+          <p id="summary-all" class="subtitle"><strong>0</strong></p>
+        </div>
+        <div class="filter-field">
+          <p class="label">Approaching</p>
+          <p id="summary-approaching" class="subtitle"><strong>0</strong></p>
+        </div>
+        <div class="filter-field">
+          <p class="label">Breached</p>
+          <p id="summary-breached" class="subtitle"><strong>0</strong></p>
+        </div>
+        <div class="filter-field">
+          <p class="label">Long-wait</p>
+          <p id="summary-long-wait" class="subtitle"><strong>0</strong></p>
+        </div>
+        <div class="filter-field">
+          <p class="label">High flags</p>
+          <p id="summary-high-flags" class="subtitle"><strong>0</strong></p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Filter bar -->
+    <section class="filter-bar" aria-labelledby="filter-bar-heading">
+      <h2 id="filter-bar-heading" class="visually-hidden">Filters</h2>
+
+      <div class="filter-grid">
+        <div class="filter-field filter-field-search field">
+          <label class="label" for="filter-search">Search</label>
+          <input
+            id="filter-search"
+            type="search"
+            class="search-input"
+            placeholder="Patient, NHS number, specialty, procedure, practitioner..."
+            autocomplete="off"
+          >
+        </div>
+
+        <div class="filter-field field">
+          <label class="label" for="filter-specialty">Specialty</label>
+          <select id="filter-specialty" class="select">
+            <option value="">All specialties</option>
+          </select>
+        </div>
+
+        <div class="filter-field field">
+          <label class="label" for="filter-priority">Clinical priority</label>
+          <select id="filter-priority" class="select">
+            <option value="">All priorities</option>
+            <option value="P1a">P1a — Emergency (24 h)</option>
+            <option value="P1b">P1b — Urgent (72 h)</option>
+            <option value="P2">P2 — Cancer / time-critical (4 wk)</option>
+            <option value="P3">P3 — Substantial harm (12 wk)</option>
+            <option value="P4">P4 — Routine (18-wk RTT)</option>
+            <option value="P5">P5 — Deferred (6 mo)</option>
+            <option value="P6">P6 — Removed from list</option>
+          </select>
+        </div>
+
+        <div class="filter-field field">
+          <label class="label" for="filter-status">Waiting Time Status</label>
+          <select id="filter-status" class="select">
+            <option value="">All statuses</option>
+            <option value="within-target">Within target</option>
+            <option value="approaching-breach">Approaching breach</option>
+            <option value="breached">Breached</option>
+            <option value="long-wait">Long wait (&gt; 52 wk)</option>
+          </select>
+        </div>
+
+        <div class="filter-field filter-field-actions">
+          <button
+            type="button"
+            id="filter-clear-btn"
+            class="button"
+            data-variant="secondary"
+            hidden
+          >
+            Clear filters
+          </button>
+        </div>
+      </div>
+
+      <div class="filter-summary">
+        <span id="filter-count">Loading cards...</span>
+      </div>
+    </section>
+
+    <!-- Cards table -->
+    <section class="table-card" aria-labelledby="cards-table-heading">
+      <h2 id="cards-table-heading" class="visually-hidden">Waiting list cards</h2>
+
+      <div class="table-scroll">
+        <table id="cards-table" class="data-table">
+          <thead class="data-table-head">
+            <tr id="cards-table-head" class="data-table-row">
+              <!-- Sortable column headers built by app.js -->
+            </tr>
+          </thead>
+          <tbody id="cards-table-body" class="data-table-body">
+            <!-- Data rows built by app.js -->
+          </tbody>
+        </table>
+      </div>
+
+      <p id="cards-empty-message" class="empty-message" hidden>
+        No cards match the current filters.
+      </p>
+    </section>
+
+    <footer class="page-footer">
+      <p>
+        Waiting Time Status is computed by a rule-based grader using the
+        NHS RTT 18-week standard, the Clinical Prioritisation framework
+        (P1–P6), and the 52-week long-waiter rule. This dashboard supports
+        operational review and does not replace booking-team judgement.
+      </p>
+    </footer>
+  </main>
+
+  <script type="module" src="js/dashboard-app.js"></script>
+  <script type="module" src="js/table-export.js"></script>
+</body>
+</html>

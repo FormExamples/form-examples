@@ -1,0 +1,9 @@
+mod users;
+
+mod patients;
+mod practitioners;
+mod plastic_surg_waiting_list_cards;
+mod plastic_surg_waiting_list_card_appointments;
+mod plastic_surg_waiting_list_card_grades;
+mod plastic_surg_waiting_list_card_grade_rules;
+mod plastic_surg_waiting_list_card_grade_flags;

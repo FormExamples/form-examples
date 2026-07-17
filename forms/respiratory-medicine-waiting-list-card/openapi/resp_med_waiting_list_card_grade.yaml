@@ -1,0 +1,187 @@
+# Generated from sql/. Do not edit by hand.
+# SOURCE: resp_med_waiting_list_card_grade
+openapi: 3.1.0
+info:
+  title: Respiratory Medicine Waiting List Card — RespMedWaitingListCardGrade
+  version: 1.0.0
+  description: Computed grading result for a waiting list card. One-to-one child of the card. Stores the Waiting Time Status, clinical priority, and derived day / week counts used by the dashboard and patient view.
+paths:
+  /resp-med-waiting-list-card-grades:
+    get:
+      summary: List RespMedWaitingListCardGrade records
+      operationId: listRespMedWaitingListCardGrade
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of RespMedWaitingListCardGrade records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/RespMedWaitingListCardGrade"
+    post:
+      summary: Create a new RespMedWaitingListCardGrade
+      operationId: createRespMedWaitingListCardGrade
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/RespMedWaitingListCardGrade"
+      responses:
+        "201":
+          description: The newly created RespMedWaitingListCardGrade
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/RespMedWaitingListCardGrade"
+        "400":
+          description: Validation error
+  /resp-med-waiting-list-card-grades/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one RespMedWaitingListCardGrade by id
+      operationId: getRespMedWaitingListCardGrade
+      responses:
+        "200":
+          description: The requested RespMedWaitingListCardGrade
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/RespMedWaitingListCardGrade"
+        "404":
+          description: RespMedWaitingListCardGrade not found
+    patch:
+      summary: Update an existing RespMedWaitingListCardGrade
+      operationId: updateRespMedWaitingListCardGrade
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/RespMedWaitingListCardGrade"
+      responses:
+        "200":
+          description: The updated RespMedWaitingListCardGrade
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/RespMedWaitingListCardGrade"
+        "404":
+          description: RespMedWaitingListCardGrade not found
+    delete:
+      summary: Soft-delete a RespMedWaitingListCardGrade
+      operationId: deleteRespMedWaitingListCardGrade
+      responses:
+        "204":
+          description: RespMedWaitingListCardGrade deleted
+        "404":
+          description: RespMedWaitingListCardGrade not found
+components:
+  schemas:
+    RespMedWaitingListCardGrade:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was updated most-recently.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was deleted a.k.a. soft-removed.
+        resp_med_waiting_list_card_id:
+          type: string
+          format: uuid
+          description: Foreign key to the parent waiting list card (unique, 1:1).
+        waiting_time_status:
+          type: string
+          enum:
+            - within-target
+            - approaching-breach
+            - breached
+            - long-wait
+            - ""
+          description: "Waiting Time Status band: within-target, approaching-breach, breached, long-wait."
+        clinical_priority:
+          type: string
+          enum:
+            - P1a
+            - P1b
+            - P2
+            - P3
+            - P4
+            - P5
+            - P6
+            - ""
+          description: Clinical priority that drove the calculation (echo of the input).
+        target_wait_weeks:
+          type: number
+          format: double
+          description: Maximum permitted wait in weeks for the recorded clinical priority.
+        days_waited:
+          type: integer
+          format: int32
+          description: Days elapsed since the RTT clock-start date.
+        weeks_waited:
+          type: number
+          format: double
+          description: Weeks elapsed since the RTT clock-start date.
+        days_to_target:
+          type: integer
+          format: int32
+          description: Days remaining until the priority-driven target wait is reached (negative if exceeded).
+        days_to_breach:
+          type: integer
+          format: int32
+          description: Days remaining until the 18-week RTT breach threshold is reached (negative if breached).
+        days_to_appointment:
+          type: integer
+          format: int32
+          description: Days until the next scheduled appointment (negative if in the past).
+        grader_notes:
+          type: string
+          description: Free-text grader notes (typically empty; populated when the engine cannot compute).
+        graded_at:
+          type: string
+          format: date-time
+          description: Timestamp when the engine last computed the result.
+      required:
+        - created_at
+        - updated_at
+        - resp_med_waiting_list_card_id
+        - waiting_time_status
+        - clinical_priority
+        - grader_notes
+        - graded_at
+      description: Computed grading result for a waiting list card. One-to-one child of the card. Stores the Waiting Time Status, clinical priority, and derived day / week counts used by the dashboard and patient view.

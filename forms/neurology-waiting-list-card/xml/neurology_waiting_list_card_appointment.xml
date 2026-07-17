@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE neurology_waiting_list_card_appointment SYSTEM "neurology_waiting_list_card_appointment.dtd">
+<neurology_waiting_list_card_appointment>
+<id>880e8400-e29b-41d4-a716-446655440003</id>
+<created_at>2026-04-09T10:00:00Z</created_at>
+<updated_at>2026-04-09T10:00:00Z</updated_at>
+<deleted_at>2026-04-09T10:00:00Z</deleted_at>
+<neurology_waiting_list_card_id>770e8400-e29b-41d4-a716-446655440002</neurology_waiting_list_card_id>
+<appointment_date>2026-01-15</appointment_date>
+<appointment_time></appointment_time>
+<duration_minutes>1</duration_minutes>
+<appointment_type>first-outpatient</appointment_type>
+<site_name>Example</site_name>
+<site_address>Example location</site_address>
+<clinic_name>Example</clinic_name>
+<room></room>
+<clinician_name>Example</clinician_name>
+<clinician_team>Dr Smith</clinician_team>
+<status>scheduled</status>
+<travel_notes>Example text.</travel_notes>
+<access_notes>Example text.</access_notes>
+</neurology_waiting_list_card_appointment>

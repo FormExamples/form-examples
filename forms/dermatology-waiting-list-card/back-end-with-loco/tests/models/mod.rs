@@ -1,0 +1,9 @@
+mod users;
+
+mod patients;
+mod practitioners;
+mod dermatology_waiting_list_cards;
+mod dermatology_waiting_list_card_appointments;
+mod dermatology_waiting_list_card_grades;
+mod dermatology_waiting_list_card_grade_rules;
+mod dermatology_waiting_list_card_grade_flags;

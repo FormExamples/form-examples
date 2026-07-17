@@ -1,0 +1,51 @@
+// Generated from sql/. Do not edit by hand.
+// SOURCE: stomatology_waiting_list_card_appointment
+
+syntax = "proto3";
+
+package form_examples.stomatology_waiting_list_card;
+
+enum StomatologyWaitingListCardAppointmentAppointmentTypeEnum {
+  APPOINTMENTTYPE_UNSPECIFIED = 0;
+  APPOINTMENTTYPE_FIRST_OUTPATIENT = 1;  // first-outpatient
+  APPOINTMENTTYPE_FOLLOW_UP = 2;  // follow-up
+  APPOINTMENTTYPE_PRE_ASSESSMENT = 3;  // pre-assessment
+  APPOINTMENTTYPE_DIAGNOSTIC = 4;  // diagnostic
+  APPOINTMENTTYPE_TREATMENT = 5;  // treatment
+  APPOINTMENTTYPE_PROCEDURE = 6;  // procedure
+  APPOINTMENTTYPE_ADMISSION = 7;  // admission
+  APPOINTMENTTYPE_TELEPHONE = 8;  // telephone
+  APPOINTMENTTYPE_VIDEO = 9;  // video
+  APPOINTMENTTYPE_OTHER = 10;  // other
+}
+
+enum StomatologyWaitingListCardAppointmentStatusEnum {
+  STATUS_UNSPECIFIED = 0;
+  STATUS_SCHEDULED = 1;  // scheduled
+  STATUS_CONFIRMED = 2;  // confirmed
+  STATUS_REBOOKED = 3;  // rebooked
+  STATUS_CANCELLED = 4;  // cancelled
+  STATUS_ATTENDED = 5;  // attended
+  STATUS_DID_NOT_ATTEND = 6;  // did-not-attend
+}
+
+message StomatologyWaitingListCardAppointment {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string stomatology_waiting_list_card_id = 5;  // UUID — uuid
+  string appointment_date = 6;  // DATE — iso 8601 date
+  string appointment_time = 7;  // TIME — iso 8601 time
+  int32 duration_minutes = 8;  // INTEGER
+  StomatologyWaitingListCardAppointmentAppointmentTypeEnum appointment_type = 9;  // VARCHAR(30)
+  string site_name = 10;  // VARCHAR(255) — max 255 chars
+  string site_address = 11;  // TEXT
+  string clinic_name = 12;  // VARCHAR(255) — max 255 chars
+  string room = 13;  // VARCHAR(100) — max 100 chars
+  string clinician_name = 14;  // VARCHAR(255) — max 255 chars
+  string clinician_team = 15;  // VARCHAR(255) — max 255 chars
+  StomatologyWaitingListCardAppointmentStatusEnum status = 16;  // VARCHAR(20)
+  string travel_notes = 17;  // TEXT
+  string access_notes = 18;  // TEXT
+}

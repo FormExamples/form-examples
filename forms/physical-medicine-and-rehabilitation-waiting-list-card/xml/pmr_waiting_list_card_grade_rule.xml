@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE pmr_waiting_list_card_grade_rule SYSTEM "pmr_waiting_list_card_grade_rule.dtd">
+<pmr_waiting_list_card_grade_rule>
+<id>aa0e8400-e29b-41d4-a716-446655440005</id>
+<created_at>2026-04-09T10:00:00Z</created_at>
+<updated_at>2026-04-09T10:00:00Z</updated_at>
+<deleted_at>2026-04-09T10:00:00Z</deleted_at>
+<pmr_waiting_list_card_grade_id>990e8400-e29b-41d4-a716-446655440004</pmr_waiting_list_card_grade_id>
+<rule_id>660e8400-e29b-41d4-a716-446655440001</rule_id>
+<instrument>waiting-time-status</instrument>
+<band>within-target</band>
+<category>General</category>
+<description>Example text.</description>
+</pmr_waiting_list_card_grade_rule>
