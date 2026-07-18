@@ -11,12 +11,9 @@
 		<p class="text-sm font-semibold uppercase tracking-wide text-primary">Heart Health Check</p>
 		<h1 class="mt-2 text-3xl font-bold text-base-content">Cardiovascular risk assessment</h1>
 		<p class="mt-4 text-base leading-relaxed text-base-content/70">
-			An NHS Heart Health Check completed as a single continuous wizard: patient information,
-			demographics and ethnicity, blood pressure, cholesterol, medical conditions, family history,
-			smoking and alcohol, physical activity and diet, body measurements, and clinician review. The
-			shared engine estimates the 10-year cardiovascular disease risk using a simplified QRISK3-based
-			model, derives the patient's heart age, classifies the overall risk, and flags issues for the
-			clinician.
+			An NHS Heart Health Check, completed as a single continuous wizard, that estimates the 10-year
+			cardiovascular disease risk using a simplified QRISK3-based model, derives the patient's heart
+			age, classifies the overall risk, and flags issues for the clinician.
 		</p>
 	</header>
 
@@ -51,9 +48,10 @@
 			<div>
 				<dt class="font-semibold text-base-content">Purpose</dt>
 				<dd class="mt-1 text-base-content/70">
-					Capture a structured cardiovascular profile and produce a graded report — 10-year CVD
-					risk, heart age, risk category, fired risk rules, and flagged issues — to support
-					clinician review.
+					Capture a structured cardiovascular profile — demographics and ethnicity, blood pressure,
+					cholesterol, medical conditions, family history, smoking and alcohol, physical activity and
+					diet, and body measurements — and produce a graded report: 10-year CVD risk, heart age,
+					risk category, fired risk rules, and flagged issues, to support clinician review.
 				</dd>
 			</div>
 			<div>

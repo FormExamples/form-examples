@@ -13,12 +13,9 @@
 		<h1 class="mt-2 text-3xl font-bold text-base-content">ROSIER bedside stroke-recognition screen</h1>
 		<p class="mt-4 text-base leading-relaxed text-base-content/70">
 			A bedside stroke-recognition screen for adults presenting acutely, completed as a single
-			continuous wizard. Two mimic-exclusion criteria — loss of consciousness / syncope and seizure
-			activity — subtract 1 point each; five acute-onset neurological signs — asymmetric facial, arm,
-			and leg weakness, speech disturbance, and visual field defect — add 1 point each, for a signed
-			total of &minus;2 to +5. Blood glucose is measured first to exclude the hypoglycaemia mimic.
-			The shared engine sums the score, derives the band, and flags ROSIER &gt; 0 as a positive
-			screen (stroke likely) that activates the acute stroke pathway.
+			continuous wizard, that scores mimic-exclusion criteria against acute-onset neurological signs
+			to flag ROSIER &gt; 0 as a positive screen (stroke likely) that activates the acute stroke
+			pathway.
 		</p>
 	</header>
 
@@ -53,9 +50,12 @@
 			<div>
 				<dt class="font-semibold text-base-content">Purpose</dt>
 				<dd class="mt-1 text-base-content/70">
-					Capture the two mimic criteria and five neurological signs and produce a graded report —
-					signed score &minus;2 to +5, band, and flagged issues — to support timely activation of the
-					acute stroke pathway.
+					Capture the two mimic-exclusion criteria — loss of consciousness / syncope and seizure
+					activity — and five acute-onset neurological signs — asymmetric facial, arm, and leg
+					weakness, speech disturbance, and visual field defect — after blood glucose is measured
+					first to exclude the hypoglycaemia mimic, and produce a graded report — signed score
+					&minus;2 to +5, band, and flagged issues — to support timely activation of the acute
+					stroke pathway.
 				</dd>
 			</div>
 			<div>

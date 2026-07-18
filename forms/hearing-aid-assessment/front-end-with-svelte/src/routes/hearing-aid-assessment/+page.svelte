@@ -11,11 +11,9 @@
 		<p class="text-sm font-semibold uppercase tracking-wide text-primary">Hearing Aid Assessment</p>
 		<h1 class="mt-2 text-3xl font-bold text-base-content">Hearing aid candidacy evaluation</h1>
 		<p class="mt-4 text-base leading-relaxed text-base-content/70">
-			A comprehensive hearing aid candidacy evaluation completed as a single continuous wizard:
-			demographics, hearing history, the HHIE-S questionnaire, communication difficulties, current
-			hearing aids, ear examination, audiogram results, lifestyle and needs, and expectations and
-			goals. The shared engine scores the Hearing Handicap Inventory for the Elderly — Screening
-			(HHIE-S), grades the worse-ear hearing loss, and flags issues for the audiologist.
+			A comprehensive hearing aid candidacy evaluation, completed as a single continuous wizard, that
+			scores the Hearing Handicap Inventory for the Elderly — Screening (HHIE-S) and grades
+			worse-ear hearing loss, flagging issues for the audiologist.
 		</p>
 	</header>
 
@@ -50,9 +48,10 @@
 			<div>
 				<dt class="font-semibold text-base-content">Purpose</dt>
 				<dd class="mt-1 text-base-content/70">
-					Capture a structured hearing profile and produce a scored report — HHIE-S score and
-					category, hearing-loss grade, and flagged issues — to support audiology review and hearing
-					aid candidacy decisions.
+					Capture a structured hearing profile — hearing history, communication difficulties, current
+					hearing aids, ear examination, audiogram results, lifestyle and needs, and expectations and
+					goals — and produce a scored report: HHIE-S score and category, hearing-loss grade, and
+					flagged issues, to support audiology review and hearing aid candidacy decisions.
 				</dd>
 			</div>
 			<div>

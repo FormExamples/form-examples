@@ -14,11 +14,8 @@
 		</h1>
 		<p class="mt-4 text-base leading-relaxed text-base-content/70">
 			A UK NHS–aligned DEXA / DXA bone-densitometry referral that a clinician completes to request an
-			osteoporosis scan. It records the requesting clinician, patient identification, the requested
-			scan region and clinical indication, fracture-risk factors (FRAX inputs), any previous DEXA, and
-			triage details — then computes a four-axis vetting grade (appropriateness, radiation safety,
-			request completeness, and triage priority) plus safety-critical flags to support the imaging
-			vetting desk's booking decision.
+			osteoporosis scan, computing a four-axis vetting grade plus safety-critical flags to support the
+			imaging vetting desk's booking decision.
 		</p>
 	</header>
 
@@ -53,8 +50,11 @@
 			<div>
 				<dt class="font-semibold text-base-content">Purpose</dt>
 				<dd class="mt-1 text-base-content/70">
-					Capture why a patient needs a DEXA bone-density scan and how urgently, and produce a vetting
-					report the imaging team can triage and book from.
+					Capture why a patient needs a DEXA bone-density scan and how urgently — the requesting
+					clinician, patient identification, requested scan region and clinical indication,
+					fracture-risk factors (FRAX inputs), any previous DEXA, and triage details — and produce
+					a four-axis vetting report (appropriateness, radiation safety, request completeness, and
+					triage priority) the imaging team can triage and book from.
 				</dd>
 			</div>
 			<div>

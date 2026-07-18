@@ -14,10 +14,7 @@
 		<h1 class="mt-2 text-3xl font-bold text-base-content">Emergency unit clinical documentation</h1>
 		<p class="mt-4 text-base leading-relaxed text-base-content/70">
 			The World Health Organization standardised emergency unit form for general (non-trauma)
-			patients, completed as a single continuous wizard: patient registration, chief complaint and
-			vitals, high-risk signs, the primary survey (airway, breathing, circulation, disability),
-			history, review of systems, past medical history, physical exam, diagnostics, interventions,
-			assessment and plan, reassessment, and disposition. The shared engine checks the record for
+			patients, completed as a single continuous wizard, whose shared engine checks the record for
 			completeness and flags clinically significant issues.
 		</p>
 	</header>
@@ -53,8 +50,12 @@
 			<div>
 				<dt class="font-semibold text-base-content">Purpose</dt>
 				<dd class="mt-1 text-base-content/70">
-					Capture a structured emergency unit record and produce a clinical report — completeness
-					status, outstanding fields, and flagged issues — for the receiving team.
+					Capture a structured emergency unit record — patient registration, chief complaint and
+					vitals, high-risk signs, the primary survey (airway, breathing, circulation, disability),
+					history, review of systems, past medical history, physical exam, diagnostics,
+					interventions, assessment and plan, reassessment, and disposition — and produce a
+					clinical report — completeness status, outstanding fields, and flagged issues — for the
+					receiving team.
 				</dd>
 			</div>
 			<div>

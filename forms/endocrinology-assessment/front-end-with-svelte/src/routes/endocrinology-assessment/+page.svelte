@@ -11,11 +11,9 @@
 		<p class="text-sm font-semibold uppercase tracking-wide text-primary">Endocrinology Assessment</p>
 		<h1 class="mt-2 text-3xl font-bold text-base-content">General endocrinology consultation</h1>
 		<p class="mt-4 text-base leading-relaxed text-base-content/70">
-			A comprehensive endocrine evaluation completed as a single continuous wizard: demographics,
-			presenting symptoms, and review of the thyroid, adrenal, glucose, reproductive, pituitary, and
-			bone / calcium axes, followed by a medications and lifestyle review and the clinical impression.
-			The shared engine grades each axis (normal, subclinical, mild, moderate, or severe), derives an
-			overall endocrine status, and flags issues for the endocrinologist.
+			A comprehensive endocrine evaluation, completed as a single continuous wizard across the
+			thyroid, adrenal, glucose, reproductive, pituitary, and bone / calcium axes, that the shared
+			engine grades axis-by-axis into an overall endocrine status flagged for the endocrinologist.
 		</p>
 	</header>
 
@@ -50,8 +48,10 @@
 			<div>
 				<dt class="font-semibold text-base-content">Purpose</dt>
 				<dd class="mt-1 text-base-content/70">
-					Capture a structured endocrine profile and produce a graded report — per-axis status,
-					overall endocrine status, and flagged issues — to support endocrinology review.
+					Capture a structured endocrine profile — demographics, presenting symptoms, axis review,
+					medications and lifestyle, and clinical impression — and produce a graded report: each
+					axis rated normal, subclinical, mild, moderate, or severe, an overall endocrine status,
+					and flagged issues, to support endocrinology review.
 				</dd>
 			</div>
 			<div>

@@ -11,11 +11,10 @@
 		<p class="text-sm font-semibold uppercase tracking-wide text-primary">Mammography Test Request</p>
 		<h1 class="mt-2 text-3xl font-bold text-base-content">Breast mammography imaging request</h1>
 		<p class="mt-4 text-base leading-relaxed text-base-content/70">
-			A clinician-driven breast mammography imaging request completed as a single continuous wizard:
-			requesting clinician, patient identification, the requested examination, symptoms, breast
-			history and risk, and triage. The shared engine computes a four-axis grade — appropriateness
-			(ACR Appropriateness Criteria), cancer-pathway urgency (NICE NG12 two-week-wait),
-			request completeness, and clinical priority — plus safety flags and an overall recommendation.
+			A clinician-driven breast mammography imaging request, completed as a single continuous
+			wizard, that computes a four-axis grade — appropriateness (ACR Appropriateness Criteria),
+			cancer-pathway urgency (NICE NG12 two-week-wait), request completeness, and clinical priority
+			— plus safety flags and an overall recommendation.
 		</p>
 	</header>
 
@@ -50,9 +49,10 @@
 			<div>
 				<dt class="font-semibold text-base-content">Purpose</dt>
 				<dd class="mt-1 text-base-content/70">
-					Capture a structured imaging request and produce a graded vetting report — appropriateness
-					score, cancer-pathway urgency, completeness, clinical priority, and flagged issues — to
-					support the imaging vetting desk.
+					Capture a structured imaging request — requesting clinician, patient identification, the
+					requested examination, symptoms, and breast history and risk — and produce a graded
+					vetting report: appropriateness score, cancer-pathway urgency, completeness, clinical
+					priority, and flagged issues to support the imaging vetting desk.
 				</dd>
 			</div>
 			<div>

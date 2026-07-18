@@ -14,9 +14,9 @@
 		</h1>
 		<p class="mt-4 text-base leading-relaxed text-base-content/70">
 			A UK NHS–aligned cardiology referral that a clinician completes to refer a patient into a
-			cardiology service. It records the requested service, the reason for referral, the clinical
+			cardiology service, recording the requested service, the reason for referral, the clinical
 			question, presenting symptoms and functional class, acute red flags, investigations already
-			performed, and triage details — then computes a four-axis vetting grade (referral
+			performed, and triage details, then computing a four-axis vetting grade (referral
 			appropriateness, safety / red-flag, request completeness, and triage priority) plus
 			safety-critical flags to support the department's triage and booking decision.
 		</p>

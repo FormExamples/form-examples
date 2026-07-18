@@ -12,11 +12,9 @@
 		</p>
 		<h1 class="mt-2 text-3xl font-bold text-base-content">Albumin-adjusted calcium for adults</h1>
 		<p class="mt-4 text-base leading-relaxed text-base-content/70">
-			Enter a measured total calcium (mmol/L) and serum albumin (g/L) in a single continuous wizard.
-			The shared engine applies the standard albumin correction — corrected calcium = total calcium
-			+ 0.02 × (40 − albumin) — and classifies the result against the adult reference range: normal
-			(2.20-2.60 mmol/L), hypocalcaemia (&lt; 2.20 mmol/L), or hypercalcaemia (&gt; 2.60 mmol/L).
-			Severe results (&ge; 3.0 or &lt; 1.9 mmol/L) are flagged for urgent action.
+			Enter a measured total calcium and serum albumin in a single continuous wizard, and the shared
+			engine applies the standard albumin correction and classifies the result against the adult
+			reference range.
 		</p>
 	</header>
 
@@ -51,9 +49,11 @@
 			<div>
 				<dt class="font-semibold text-base-content">Purpose</dt>
 				<dd class="mt-1 text-base-content/70">
-					Correct a total-calcium result for serum albumin and produce a graded report — corrected
-					value, classification, and flagged issues — to support interpretation when albumin is
-					abnormal.
+					Correct a total-calcium result for serum albumin — corrected calcium = total calcium +
+					0.02 × (40 − albumin) — and produce a graded report against the adult reference range
+					(2.20-2.60 mmol/L: hypocalcaemia below, hypercalcaemia above), with severe results
+					(&ge; 3.0 or &lt; 1.9 mmol/L) flagged for urgent action, to support interpretation when
+					albumin is abnormal.
 				</dd>
 			</div>
 			<div>

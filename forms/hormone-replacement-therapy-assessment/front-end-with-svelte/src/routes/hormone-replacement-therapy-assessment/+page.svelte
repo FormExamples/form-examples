@@ -13,11 +13,9 @@
 		</p>
 		<h1 class="mt-2 text-3xl font-bold text-base-content">Menopause symptom & HRT eligibility</h1>
 		<p class="mt-4 text-base leading-relaxed text-base-content/70">
-			A comprehensive menopause and HRT eligibility evaluation completed as a single continuous
-			wizard: demographics, menopause status, the Menopause Rating Scale (MRS) symptom inventory,
-			vasomotor symptoms, bone health, cardiovascular risk, breast health, current medications, a
-			contraindications screen, and treatment preferences. The shared engine computes the MRS total
-			and subscale scores with a severity band, classifies the HRT risk-benefit balance, and flags
+			A comprehensive menopause and HRT eligibility evaluation, completed as a single continuous
+			wizard, whose shared engine computes the Menopause Rating Scale (MRS) total and subscale
+			scores with a severity band, classifies the HRT risk-benefit balance, and flags
 			safety-critical issues for the clinician.
 		</p>
 	</header>
@@ -53,9 +51,11 @@
 			<div>
 				<dt class="font-semibold text-base-content">Purpose</dt>
 				<dd class="mt-1 text-base-content/70">
-					Capture a structured menopause profile and produce a graded report — MRS total and subscale
-					scores, symptom severity, HRT risk classification, and flagged issues — to support HRT
-					prescribing decisions.
+					Capture a structured menopause profile — demographics, menopause status, the MRS symptom
+					inventory, vasomotor symptoms, bone health, cardiovascular risk, breast health, current
+					medications, a contraindications screen, and treatment preferences — and produce a graded
+					report: MRS total and subscale scores, symptom severity, HRT risk classification, and
+					flagged issues, to support HRT prescribing decisions.
 				</dd>
 			</div>
 			<div>

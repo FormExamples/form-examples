@@ -12,12 +12,8 @@
 		</p>
 		<h1 class="mt-2 text-3xl font-bold text-base-content">BMI and BSA from height and weight</h1>
 		<p class="mt-4 text-base leading-relaxed text-base-content/70">
-			Enter a measured height (cm) and weight (kg) in a single continuous wizard. The shared engine
-			computes the Body Mass Index — BMI = weight ÷ height² — and bands it into the WHO adult
-			weight-status categories: underweight (&lt; 18.5), normal (18.5-24.9), overweight (25.0-29.9),
-			and obese class I-III (&ge; 30). It also computes the Body Surface Area by the Mosteller and Du
-			Bois formulae. Severe obesity (&ge; 40) and underweight (&lt; 18.5) are flagged, and Asian
-			action points at &ge; 23 and &ge; 27.5 are recorded when ancestry is Asian.
+			Enter a measured height and weight in a single continuous wizard, and the shared engine
+			computes the Body Mass Index with its WHO weight-status category and the Body Surface Area.
 		</p>
 	</header>
 
@@ -52,8 +48,12 @@
 			<div>
 				<dt class="font-semibold text-base-content">Purpose</dt>
 				<dd class="mt-1 text-base-content/70">
-					Convert a patient's height and weight into a BMI with the WHO weight-status category and a
-					body surface area in m² to support screening, monitoring, and drug dosing.
+					Convert a patient's height (cm) and weight (kg) into a BMI — weight ÷ height² — banded
+					into the WHO adult weight-status categories (underweight &lt; 18.5, normal 18.5-24.9,
+					overweight 25.0-29.9, and obese class I-III &ge; 30), and a body surface area in m² by
+					the Mosteller and Du Bois formulae, flagging severe obesity (&ge; 40) and underweight
+					(&lt; 18.5), and recording Asian action points at &ge; 23 and &ge; 27.5 when ancestry is
+					Asian, to support screening, monitoring, and drug dosing.
 				</dd>
 			</div>
 			<div>

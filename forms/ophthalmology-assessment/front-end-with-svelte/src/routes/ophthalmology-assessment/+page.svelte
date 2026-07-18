@@ -11,10 +11,10 @@
 		<p class="text-sm font-semibold uppercase tracking-wide text-primary">Ophthalmology Assessment</p>
 		<h1 class="mt-2 text-3xl font-bold text-base-content">Ophthalmic evaluation</h1>
 		<p class="mt-4 text-base leading-relaxed text-base-content/70">
-			A comprehensive ophthalmic evaluation completed as a single continuous wizard: demographics,
-			chief complaint, visual acuity, ocular history, anterior and posterior segment examination,
-			visual fields and pupils, medications, systemic conditions, and functional impact. The shared
-			engine grades best-corrected visual acuity, derives a visual impairment grade, and flags
+			A comprehensive ophthalmic evaluation — covering demographics, chief complaint, visual
+			acuity, ocular history, anterior and posterior segment examination, visual fields and
+			pupils, medications, systemic conditions, and functional impact — whose shared engine
+			grades best-corrected visual acuity, derives a visual impairment grade, and flags
 			safety-critical issues for the ophthalmologist.
 		</p>
 	</header>

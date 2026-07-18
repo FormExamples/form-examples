@@ -14,11 +14,8 @@
 		</h1>
 		<p class="mt-4 text-base leading-relaxed text-base-content/70">
 			A UK NHS–aligned CT scan request (referral) that a clinician completes to request a CT
-			examination. It records the requested body region, the clinical indication and specific
-			question, relevant history, the contrast and renal-safety factors, the IR(ME)R radiation
-			justification, and the requested urgency — then computes a four-axis vetting grade
-			(appropriateness, radiation &amp; contrast safety, request completeness, and triage priority)
-			plus safety-critical flags to support the imaging department's triage and protocolling decision.
+			examination, computing a four-axis vetting grade plus safety-critical flags to support the
+			imaging department's triage and protocolling decision.
 		</p>
 	</header>
 
@@ -53,8 +50,11 @@
 			<div>
 				<dt class="font-semibold text-base-content">Purpose</dt>
 				<dd class="mt-1 text-base-content/70">
-					Capture why a patient needs a CT examination and how urgently, and produce a vetting report
-					the imaging department can triage and protocol from.
+					Capture why a patient needs a CT examination and how urgently — the requested body region,
+					clinical indication and specific question, relevant history, contrast and renal-safety
+					factors, IR(ME)R radiation justification, and requested urgency — and produce a four-axis
+					vetting report (appropriateness, radiation &amp; contrast safety, request completeness, and
+					triage priority) the imaging department can triage and protocol from.
 				</dd>
 			</div>
 			<div>

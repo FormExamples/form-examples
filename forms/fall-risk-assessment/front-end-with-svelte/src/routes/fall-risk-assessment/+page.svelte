@@ -11,11 +11,9 @@
 		<p class="text-sm font-semibold uppercase tracking-wide text-primary">Fall Risk Assessment</p>
 		<h1 class="mt-2 text-3xl font-bold text-base-content">Morse Fall Scale evaluation</h1>
 		<p class="mt-4 text-base leading-relaxed text-base-content/70">
-			A comprehensive fall-risk evaluation completed as a single continuous wizard: demographics,
-			fall history, the six-item Morse Fall Scale (MFS), mobility and gait, medication review, vision
-			and sensory function, environmental hazards, cognition, previous interventions, and the
-			fall-prevention plan. The shared engine totals the MFS (0-125), classifies the patient as Low,
-			Moderate, High, or Critical risk, and flags issues for the care team.
+			A comprehensive fall-risk evaluation, completed as a single continuous wizard, that the shared
+			engine scores against the Morse Fall Scale to classify a patient's risk and flag issues for the
+			care team.
 		</p>
 	</header>
 
@@ -50,8 +48,11 @@
 			<div>
 				<dt class="font-semibold text-base-content">Purpose</dt>
 				<dd class="mt-1 text-base-content/70">
-					Capture a structured fall-risk profile and produce a graded report — Morse Fall Scale
-					total, risk level, and flagged issues — to support fall-prevention planning.
+					Capture a structured fall-risk profile — demographics, fall history, the six-item Morse Fall
+					Scale, mobility and gait, medication review, vision and sensory function, environmental
+					hazards, cognition, previous interventions, and the fall-prevention plan — and produce a
+					graded report: an MFS total (0-125), a Low / Moderate / High / Critical risk classification,
+					and flagged issues to support fall-prevention planning.
 				</dd>
 			</div>
 			<div>

@@ -11,12 +11,10 @@
 		<p class="text-sm font-semibold uppercase tracking-wide text-primary">Genetics Assessment</p>
 		<h1 class="mt-2 text-3xl font-bold text-base-content">Clinical genetics risk assessment</h1>
 		<p class="mt-4 text-base leading-relaxed text-base-content/70">
-			A clinical genetics assessment completed as a single continuous wizard: proband demographics,
-			presenting concern, personal medical history, a three-generation family pedigree, ancestry and
-			consanguinity, targeted risk scoring, prior genetic testing, patient understanding, and the
-			clinician's recommendation and referral plan. The shared engine computes the Manchester score
-			for BRCA1/2, counts the Revised Bethesda criteria for Lynch syndrome, records Tyrer-Cuzick and
-			PREMM5 results, stratifies overall genetic risk, and flags issues for the clinical geneticist.
+			A clinical genetics risk assessment, completed as a single continuous wizard, that computes the
+			Manchester score for BRCA1/2, the Revised Bethesda criteria for Lynch syndrome, Tyrer-Cuzick and
+			PREMM5 results, and an overall genetic risk stratification with flagged issues for the clinical
+			geneticist.
 		</p>
 	</header>
 
@@ -51,9 +49,11 @@
 			<div>
 				<dt class="font-semibold text-base-content">Purpose</dt>
 				<dd class="mt-1 text-base-content/70">
-					Capture a structured genetics profile and produce a graded report — Manchester score,
-					Bethesda criteria, PREMM5 and Tyrer-Cuzick results, overall risk, and flagged issues — to
-					support clinical genetics review and testing decisions.
+					Capture a structured genetics profile — proband demographics, presenting concern, personal
+					medical history, a three-generation family pedigree, ancestry and consanguinity, and prior
+					genetic testing — and produce a graded report: Manchester score, Bethesda criteria, PREMM5
+					and Tyrer-Cuzick results, overall risk, and flagged issues, to support clinical genetics review
+					and testing decisions.
 				</dd>
 			</div>
 			<div>

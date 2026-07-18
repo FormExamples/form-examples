@@ -14,11 +14,9 @@
 		<h1 class="mt-2 text-3xl font-bold text-base-content">Community first aid documentation</h1>
 		<p class="mt-4 text-base leading-relaxed text-base-content/70">
 			The World Health Organization standardised emergency first aid documentation form, completed as
-			a single continuous wizard: patient identification, referral and transport, situation,
-			background, the systematic CABCDE assessment and interventions (major bleeding, airway,
-			breathing, circulation, disability, exposure), recommendations and precautions, and community
-			first aid responder details. The shared engine checks the record for completeness and flags
-			clinically significant issues for the receiving facility.
+			a single continuous wizard following the systematic CABCDE (major bleeding, Airway, Breathing,
+			Circulation, Disability, Exposure) assessment framework, whose shared engine checks completeness
+			and flags clinically significant issues for the receiving facility.
 		</p>
 	</header>
 
@@ -53,8 +51,10 @@
 			<div>
 				<dt class="font-semibold text-base-content">Purpose</dt>
 				<dd class="mt-1 text-base-content/70">
-					Capture a structured emergency first aid record using the CABCDE framework and produce a
-					handover report — completeness status, outstanding fields, and flagged issues — for the
+					Capture a structured emergency first aid record — patient identification, referral and
+					transport, situation, background, the systematic CABCDE assessment and interventions,
+					recommendations and precautions, and community first aid responder details — and produce
+					a handover report — completeness status, outstanding fields, and flagged issues — for the
 					receiving facility.
 				</dd>
 			</div>

@@ -13,13 +13,11 @@
 			Lumbar puncture (LP) request / referral
 		</h1>
 		<p class="mt-4 text-base leading-relaxed text-base-content/70">
-			A UK NHS–aligned lumbar puncture request that a clinician completes to request cerebrospinal
-			fluid (CSF) sampling and/or manometry. It records the procedure intent, the clinical
-			indication and specific question, raised-intracranial-pressure and bleeding-risk safety
-			screening, the opening-pressure requirement, and the requested urgency — then computes a
-			four-axis vetting grade (appropriateness, safety / contraindication, request completeness, and
-			triage priority) plus safety-critical flags to support the neurology / acute-medicine team's
-			triage and scheduling decision.
+			A UK NHS–aligned lumbar puncture (LP) request form that a clinician completes to request
+			cerebrospinal fluid (CSF) sampling and/or manometry, computing a four-axis vetting grade
+			(appropriateness, safety / contraindication, request completeness, and triage priority) plus
+			safety-critical flags to support the neurology / acute-medicine team's triage and scheduling
+			decision.
 		</p>
 	</header>
 
@@ -54,9 +52,10 @@
 			<div>
 				<dt class="font-semibold text-base-content">Purpose</dt>
 				<dd class="mt-1 text-base-content/70">
-					Capture why a patient needs a lumbar puncture and how urgently, screen for raised-ICP and
-					bleeding contraindications, and produce a vetting report the neurology / acute-medicine
-					team can triage and schedule from.
+					Capture why a patient needs a lumbar puncture and how urgently — including the procedure
+					intent (CSF sampling and/or manometry), the specific clinical question, and the
+					opening-pressure requirement — screen for raised-ICP and bleeding contraindications, and
+					produce a vetting report the neurology / acute-medicine team can triage and schedule from.
 				</dd>
 			</div>
 			<div>

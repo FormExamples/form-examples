@@ -11,11 +11,9 @@
 		<p class="text-sm font-semibold uppercase tracking-wide text-primary">Gerontology Assessment</p>
 		<h1 class="mt-2 text-3xl font-bold text-base-content">Comprehensive geriatric evaluation</h1>
 		<p class="mt-4 text-base leading-relaxed text-base-content/70">
-			A comprehensive geriatric evaluation completed as a single continuous wizard: demographics,
-			functional assessment, cognitive screen, mobility and falls, nutrition, polypharmacy review,
-			comorbidities, psychosocial status, and continence and skin. The shared engine grades the
-			patient on the Clinical Frailty Scale (CFS 1–9), derives the fired classification rules, and
-			flags safety-critical issues for the geriatrician.
+			A comprehensive geriatric evaluation, completed as a single continuous wizard, that grades the
+			patient on the Clinical Frailty Scale (CFS 1–9) and flags safety-critical issues for the
+			geriatrician.
 		</p>
 	</header>
 
@@ -50,8 +48,10 @@
 			<div>
 				<dt class="font-semibold text-base-content">Purpose</dt>
 				<dd class="mt-1 text-base-content/70">
-					Capture a structured geriatric profile and produce a graded report — CFS score, the fired
-					classification rules, and flagged issues — to support comprehensive geriatric assessment.
+					Capture a structured geriatric profile — functional assessment, cognitive screen, mobility and
+					falls, nutrition, polypharmacy review, comorbidities, psychosocial status, and continence and
+					skin — and produce a graded report: CFS score, the fired classification rules, and flagged
+					issues, to support comprehensive geriatric assessment.
 				</dd>
 			</div>
 			<div>

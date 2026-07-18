@@ -13,11 +13,9 @@
 		</p>
 		<h1 class="mt-2 text-3xl font-bold text-base-content">Healthcare experience feedback</h1>
 		<p class="mt-4 text-base leading-relaxed text-base-content/70">
-			A Likert-scale patient experience survey completed as a single continuous wizard:
-			demographics, visit details, access and waiting times, communication, clinical care quality,
-			staff attitude, environment and facilities, discharge and follow-up, overall experience, and
-			free-text comments. The shared engine normalizes each care domain to a 0–100 score, derives an
-			overall satisfaction category, and flags issues for service quality improvement.
+			A Likert-scale patient experience survey, completed as a single continuous wizard, that
+			normalizes each care domain to a 0&ndash;100 score and derives an overall satisfaction
+			category, flagging issues for service quality improvement.
 		</p>
 	</header>
 

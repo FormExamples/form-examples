@@ -11,10 +11,8 @@
 		<p class="text-sm font-semibold uppercase tracking-wide text-primary">Contraception Assessment</p>
 		<h1 class="mt-2 text-3xl font-bold text-base-content">Contraceptive eligibility screening</h1>
 		<p class="mt-4 text-base leading-relaxed text-base-content/70">
-			A structured contraceptive method eligibility assessment completed as a single continuous
-			wizard: demographics, reproductive and menstrual history, current contraception, medical and
-			cardiovascular history, lifestyle, method preferences, breast / cervical screening, and family
-			planning goals. The shared engine applies the UK Medical Eligibility Criteria (UKMEC) to grade
+			A structured contraceptive method eligibility assessment, completed as a single
+			continuous wizard, that applies the UK Medical Eligibility Criteria (UKMEC) to grade
 			every contraceptive method from category 1 to 4 and flags issues for the clinician.
 		</p>
 	</header>

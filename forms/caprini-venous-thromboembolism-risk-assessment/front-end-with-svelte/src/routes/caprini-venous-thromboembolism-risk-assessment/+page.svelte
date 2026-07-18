@@ -13,11 +13,11 @@
 		<h1 class="mt-2 text-3xl font-bold text-base-content">Caprini VTE risk-stratification tool</h1>
 		<p class="mt-4 text-base leading-relaxed text-base-content/70">
 			A venous thromboembolism (VTE) risk-stratification tool for surgical and medical inpatients,
-			completed as a single continuous wizard. A checklist of weighted risk factors — worth 1, 2, 3,
-			or 5 points each — plus the patient's age band sum to a total Caprini score. The shared engine
-			maps the total to a risk band (very low 0-1, low 2, moderate 3-4, high &ge; 5) and recommends a
-			prophylaxis strategy, downgrading any pharmacological recommendation to mechanical when the
-			bleeding risk is high.
+			completed as a single continuous wizard that sums a checklist of weighted risk factors — worth
+			1, 2, 3, or 5 points each — plus the patient's age band into a total Caprini score, maps it to
+			a risk band (very low 0-1, low 2, moderate 3-4, high &ge; 5), and recommends a prophylaxis
+			strategy, downgrading any pharmacological recommendation to mechanical when the bleeding risk
+			is high.
 		</p>
 	</header>
 

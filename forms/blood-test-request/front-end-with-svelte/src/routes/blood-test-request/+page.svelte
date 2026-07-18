@@ -14,11 +14,9 @@
 		</h1>
 		<p class="mt-4 text-base leading-relaxed text-base-content/70">
 			A UK NHS–aligned pathology blood-test order that a clinician completes to request one or more
-			blood-test panels for a patient. It records the requested panels, the clinical indication and
-			details, pre-analytical and specimen-handling information, patient-safety factors, and the
-			requested urgency — then computes a four-axis grading (appropriateness, pre-analytical /
-			specimen safety, request completeness, and triage priority) plus safety-critical flags to
-			support the laboratory's triage and accept / query / reject decision.
+			blood-test panels for a patient and receive a four-axis vetting grade — appropriateness,
+			pre-analytical / specimen safety, request completeness, and triage priority — plus
+			safety-critical flags to support the laboratory's accept / query / reject decision.
 		</p>
 	</header>
 
@@ -53,9 +51,11 @@
 			<div>
 				<dt class="font-semibold text-base-content">Purpose</dt>
 				<dd class="mt-1 text-base-content/70">
-					Capture which blood-test panels to order and why, and produce a vetting report the
-					laboratory can triage from — appropriateness, pre-analytical safety, completeness, triage
-					priority, and safety flags.
+					Capture which blood-test panels to order and why — the clinical indication and
+					supporting details, pre-analytical and specimen-handling information, patient-safety
+					factors, and the requested urgency — and produce a vetting report the laboratory can
+					triage from: appropriateness, pre-analytical safety, completeness, triage priority, and
+					safety flags.
 				</dd>
 			</div>
 			<div>

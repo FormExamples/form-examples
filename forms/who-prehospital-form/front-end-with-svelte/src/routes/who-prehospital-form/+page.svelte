@@ -12,12 +12,9 @@
 		<h1 class="mt-2 text-3xl font-bold text-base-content">Prehospital emergency care run sheet</h1>
 		<p class="mt-4 text-base leading-relaxed text-base-content/70">
 			The World Health Organization standardised prehospital clinical documentation form (SCF
-			Prehospital), completed as a single continuous wizard: caller and scene, chief complaint and
-			initial vitals, high-risk signs, RED / YELLOW / GREEN triage, the systematic ABCDE primary
-			survey and interventions, SAMPLE history, injury details, physical exam, additional
-			interventions, assessment and plan, reassessments, and disposition with handover. The shared
-			engine checks the run sheet for completeness and flags clinically significant issues for the
-			receiving facility.
+			Prehospital), completed as a single continuous wizard around the systematic ABCDE primary survey,
+			whose shared engine checks the run sheet for completeness and flags clinically significant
+			issues for the receiving facility.
 		</p>
 	</header>
 
@@ -52,9 +49,12 @@
 			<div>
 				<dt class="font-semibold text-base-content">Purpose</dt>
 				<dd class="mt-1 text-base-content/70">
-					Capture a structured prehospital record using the ABCDE primary survey and produce a
-					handover report — triage category, completeness status, outstanding fields, and flagged
-					issues — for the receiving facility.
+					Capture a structured prehospital record — caller and scene, chief complaint and initial
+					vitals, high-risk signs, RED / YELLOW / GREEN triage, the systematic ABCDE primary survey
+					and interventions, SAMPLE history, injury details, physical exam, additional
+					interventions, assessment and plan, reassessments, and disposition with handover — and
+					produce a handover report — triage category, completeness status, outstanding fields, and
+					flagged issues — for the receiving facility.
 				</dd>
 			</div>
 			<div>

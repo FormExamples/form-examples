@@ -14,11 +14,9 @@
 		<h1 class="mt-2 text-3xl font-bold text-base-content">Emergency unit trauma documentation</h1>
 		<p class="mt-4 text-base leading-relaxed text-base-content/70">
 			The World Health Organization standardised emergency unit clinical documentation form for
-			trauma patients, completed as a single continuous wizard: patient registration, chief complaint
-			and vitals, high-risk red signs and trauma indicators, triage, the ABCDE primary survey with
-			FAST ultrasound, injury history, past histories, physical exam, assessment and plan,
-			diagnostics, medications and procedures, reassessment, and disposition. The shared engine checks
-			the record for completeness and flags clinically significant issues for the receiving team.
+			trauma patients, completed as a single continuous wizard around the ABCDE primary survey with
+			FAST ultrasound, whose shared engine checks the record for completeness and flags clinically
+			significant issues for the receiving team.
 		</p>
 	</header>
 
@@ -53,9 +51,12 @@
 			<div>
 				<dt class="font-semibold text-base-content">Purpose</dt>
 				<dd class="mt-1 text-base-content/70">
-					Capture a structured emergency unit trauma record using the ABCDE primary survey and
-					produce a handover report — triage category, completeness status, outstanding fields, and
-					flagged issues — for the receiving team.
+					Capture a structured emergency unit trauma record — patient registration, chief complaint
+					and vitals, high-risk red signs and trauma indicators, triage, the ABCDE primary survey
+					with FAST ultrasound, injury history, past histories, physical exam, assessment and plan,
+					diagnostics, medications and procedures, reassessment, and disposition — and produce a
+					handover report — triage category, completeness status, outstanding fields, and flagged
+					issues — for the receiving team.
 				</dd>
 			</div>
 			<div>

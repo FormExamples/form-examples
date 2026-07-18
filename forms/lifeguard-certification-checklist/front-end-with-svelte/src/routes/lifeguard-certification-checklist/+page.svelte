@@ -10,11 +10,9 @@
 		<p class="text-sm font-semibold uppercase tracking-wide text-primary">Lifeguard Certification Checklist</p>
 		<h1 class="mt-2 text-3xl font-bold text-base-content">Pool / beach lifeguard competency verification</h1>
 		<p class="mt-4 text-base leading-relaxed text-base-content/70">
-			A RLSS UK NPLQ / ILSF-aligned competency verification completed as a single continuous wizard:
-			candidate details, physical fitness and swim competency, supervision and scanning, conscious and
-			unconscious rescue, spinal injury management, CPR and AED, first aid and oxygen therapy, and
-			legal / regulatory knowledge. The shared engine grades the candidate Pass / Needs Development /
-			Fail — any critical-competency breach forces a Fail — and flags issues for the examiner.
+			A RLSS UK NPLQ / ILSF-aligned competency verification completed as a single continuous wizard,
+			whose shared engine grades the candidate Pass / Needs Development / Fail — any
+			critical-competency breach forces a Fail — and flags issues for the examiner.
 		</p>
 	</header>
 
@@ -49,9 +47,11 @@
 			<div>
 				<dt class="font-semibold text-base-content">Purpose</dt>
 				<dd class="mt-1 text-base-content/70">
-					Record a structured competency assessment and produce a graded report — Pass / Needs
-					Development / Fail, critical failures, deficiencies, and flagged issues — to support
-					certification decisions.
+					Record a structured competency assessment — candidate details, physical fitness and swim
+					competency, supervision and scanning, conscious and unconscious rescue, spinal injury
+					management, CPR and AED, first aid and oxygen therapy, and legal / regulatory knowledge —
+					and produce a graded report: Pass / Needs Development / Fail, critical failures,
+					deficiencies, and flagged issues, to support certification decisions.
 				</dd>
 			</div>
 			<div>

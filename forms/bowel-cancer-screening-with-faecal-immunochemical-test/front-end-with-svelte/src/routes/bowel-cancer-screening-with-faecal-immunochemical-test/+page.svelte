@@ -14,13 +14,12 @@
 			NHS Bowel Cancer Screening Programme result classification
 		</h1>
 		<p class="mt-4 text-base leading-relaxed text-base-content/70">
-			Record a home faecal immunochemical test (FIT) kit outcome in a single continuous wizard —
-			eligibility, kit return and adequacy, and the measured faecal haemoglobin concentration
-			(&micro;g Hb/g). The shared engine classifies the result against the programme threshold
-			(&ge; 120 &micro;g Hb/g positive) and sets a management action: negative &rarr; routine
-			two-yearly recall, positive &rarr; refer for colonoscopy, spoilt or not returned &rarr; repeat
-			kit. Red-flag symptoms route to the urgent suspected-cancer pathway regardless of the FIT
-			result.
+			Records a home faecal immunochemical test (FIT) kit outcome — eligibility, kit return and
+			adequacy, and the measured faecal haemoglobin concentration (&micro;g Hb/g) — in a single
+			continuous wizard whose shared engine classifies the result against the programme threshold
+			(&ge; 120 &micro;g Hb/g positive), sets a management action (negative &rarr; routine two-yearly
+			recall, positive &rarr; refer for colonoscopy, spoilt or not returned &rarr; repeat kit), and
+			routes red-flag symptoms to the urgent suspected-cancer pathway regardless of the FIT result.
 		</p>
 	</header>
 

@@ -11,12 +11,10 @@
 		<p class="text-sm font-semibold uppercase tracking-wide text-primary">Encounter Satisfaction</p>
 		<h1 class="mt-2 text-3xl font-bold text-base-content">Patient encounter satisfaction survey</h1>
 		<p class="mt-4 text-base leading-relaxed text-base-content/70">
-			A patient experience survey completed as a single continuous wizard: demographics, visit
-			information, then 19 satisfaction questions across six domains — access &amp; scheduling,
-			communication, staff &amp; professionalism, care quality, environment, and overall
-			satisfaction. The shared engine computes the Encounter Satisfaction Score (ESS) as the
-			composite mean (1.0–5.0), assigns a satisfaction category, breaks the score down by domain,
-			and flags issues for service review.
+			A patient experience survey, completed as a single continuous wizard across 19 satisfaction
+			questions in six domains, that the shared engine grades into the Encounter Satisfaction Score
+			(ESS) — a composite mean (1.0–5.0) with satisfaction category and per-domain breakdown — for
+			service review.
 		</p>
 	</header>
 
@@ -51,8 +49,11 @@
 			<div>
 				<dt class="font-semibold text-base-content">Purpose</dt>
 				<dd class="mt-1 text-base-content/70">
-					Capture structured patient feedback and produce a scored report — composite ESS, category,
-					per-domain breakdown, and flagged issues — to support service-quality review.
+					Capture structured patient feedback — demographics, visit information, and 19 satisfaction
+					questions across six domains (access &amp; scheduling, communication, staff &amp;
+					professionalism, care quality, environment, and overall satisfaction) — and produce a
+					scored report: composite ESS, category, per-domain breakdown, and flagged issues, to
+					support service-quality review.
 				</dd>
 			</div>
 			<div>

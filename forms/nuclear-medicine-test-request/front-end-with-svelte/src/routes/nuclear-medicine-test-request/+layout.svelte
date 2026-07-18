@@ -30,18 +30,18 @@
 </script>
 
 <svelte:head>
-	<title>Cardiology Request</title>
+	<title>Nuclear Medicine Test Request</title>
 	<link rel="stylesheet" href={themeHref} />
 </svelte:head>
 
 <div class="min-h-screen bg-base-200 text-base-content">
 	<nav class="border-b border-base-300 bg-base-100 shadow-sm no-print">
 		<div class="mx-auto flex max-w-5xl items-center justify-between px-4 py-3">
-			<a href="/nuclear-medicine-test-request/" class="text-lg font-bold text-base-content">Cardiology Request</a>
+			<a href="/nuclear-medicine-test-request/" class="text-lg font-bold text-base-content">Nuclear Medicine Test Request</a>
 			<div class="flex items-center gap-1">
 				<a href="/nuclear-medicine-test-request/" class={navClass('/')}>Welcome</a>
-				<a href="/nuclear-medicine-test-request/cardiology-requests/new" class={navClass('/cardiology-requests/new')}>New referral</a>
-				<a href="/nuclear-medicine-test-request/cardiology-requests" class={navClass('/cardiology-requests')}>Vetting dashboard</a>
+				<a href="/nuclear-medicine-test-request/nuclear-medicine-test-requests/new" class={navClass('/nuclear-medicine-test-requests/new')}>New request</a>
+				<a href="/nuclear-medicine-test-request/nuclear-medicine-test-requests" class={navClass('/nuclear-medicine-test-requests')}>Vetting dashboard</a>
 				<ThemeSelect label="Theme" class="ml-2" bind:value={theme}>
 					{#each THEME_OPTIONS as opt (opt.value)}
 						<ThemeSelectOption value={opt.value}>{opt.label}</ThemeSelectOption>

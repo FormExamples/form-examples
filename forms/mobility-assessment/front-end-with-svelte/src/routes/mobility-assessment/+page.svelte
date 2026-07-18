@@ -11,11 +11,9 @@
 		<p class="text-sm font-semibold uppercase tracking-wide text-primary">Mobility Assessment</p>
 		<h1 class="mt-2 text-3xl font-bold text-base-content">Balance, gait and fall-risk evaluation</h1>
 		<p class="mt-4 text-base leading-relaxed text-base-content/70">
-			A structured balance and gait evaluation completed as a single continuous wizard: demographics,
-			referral, fall history, balance and gait assessment, Timed Up and Go, range of motion, assistive
-			devices, medications, and functional independence. The shared engine grades the patient with the
-			Tinetti Performance-Oriented Mobility Assessment (POMA), stratifies fall risk, and flags issues
-			for the clinician.
+			A structured balance and gait evaluation completed as a single continuous wizard, in which the
+			shared engine grades the patient with the Tinetti Performance-Oriented Mobility Assessment
+			(POMA), stratifies fall risk, and flags issues for the clinician.
 		</p>
 	</header>
 
@@ -50,9 +48,11 @@
 			<div>
 				<dt class="font-semibold text-base-content">Purpose</dt>
 				<dd class="mt-1 text-base-content/70">
-					Capture a structured mobility profile and produce a graded report — Tinetti total (0-28),
-					balance and gait subscores, fall-risk category, and flagged issues — to support clinical
-					review and fall-prevention planning.
+					Capture a structured mobility profile across demographics, referral, fall history, balance
+					and gait testing, Timed Up and Go, range of motion, assistive devices, medications, and
+					functional independence, and produce a graded report — Tinetti total (0-28), balance and
+					gait subscores, fall-risk category, and flagged issues — to support clinical review and
+					fall-prevention planning.
 				</dd>
 			</div>
 			<div>

@@ -11,12 +11,10 @@
 		<p class="text-sm font-semibold uppercase tracking-wide text-primary">Plastic Surgery Assessment</p>
 		<h1 class="mt-2 text-3xl font-bold text-base-content">Reconstructive &amp; aesthetic surgery evaluation</h1>
 		<p class="mt-4 text-base leading-relaxed text-base-content/70">
-			A comprehensive plastic surgery assessment completed as a single continuous wizard:
-			demographics, reason for referral, medical and surgical history, current condition, wound and
-			tissue assessment, psychological assessment, anaesthetic risk, photography and documentation,
-			medications and allergies, and procedure planning and consent. The shared engine derives the
-			ASA Physical Status class, Wound Classification, and Surgical Complexity score, computes an
-			overall surgical risk level, and flags issues for the plastic surgeon.
+			A comprehensive plastic surgery assessment, completed as a single continuous ten-step wizard,
+			whose shared engine derives the ASA Physical Status class, Wound Classification, and Surgical
+			Complexity score, computes an overall surgical risk level, and flags issues for the plastic
+			surgeon.
 		</p>
 	</header>
 
@@ -51,9 +49,11 @@
 			<div>
 				<dt class="font-semibold text-base-content">Purpose</dt>
 				<dd class="mt-1 text-base-content/70">
-					Capture a structured plastic surgery profile and produce a graded report — ASA class,
-					wound class, complexity score, overall risk, and flagged issues — to support surgical
-					planning.
+					Capture a structured plastic surgery profile — spanning demographics, reason for referral,
+					medical and surgical history, current condition, wound and tissue assessment, psychological
+					assessment, anaesthetic risk, photography and documentation, medications and allergies, and
+					procedure planning and consent — and produce a graded report — ASA class, wound class,
+					complexity score, overall risk, and flagged issues — to support surgical planning.
 				</dd>
 			</div>
 			<div>

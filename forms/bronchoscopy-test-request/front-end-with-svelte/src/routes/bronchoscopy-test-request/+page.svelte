@@ -12,9 +12,9 @@
 		<h1 class="mt-2 text-3xl font-bold text-base-content">Airway endoscopy request (referral)</h1>
 		<p class="mt-4 text-base leading-relaxed text-base-content/70">
 			A UK NHS–aligned bronchoscopy request that a clinician completes to refer a patient for airway
-			endoscopy. It records the requested procedure, the clinical indication and specific question,
+			endoscopy, recording the requested procedure, the clinical indication and specific question,
 			relevant history, respiratory symptoms, imaging findings, bleeding / anticoagulation risk, and
-			procedural risk — then computes a four-axis vetting grade (appropriateness, cancer-pathway
+			procedural risk, then computing a four-axis vetting grade (appropriateness, cancer-pathway
 			urgency, request completeness, and pre-procedure risk) plus safety-critical flags to support
 			the bronchoscopy service's triage and booking decision.
 		</p>

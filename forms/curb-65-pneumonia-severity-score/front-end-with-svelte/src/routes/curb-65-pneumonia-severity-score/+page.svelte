@@ -15,11 +15,8 @@
 		</h1>
 		<p class="mt-4 text-base leading-relaxed text-base-content/70">
 			A clinician-facing severity assessment for adults with community-acquired pneumonia, completed
-			as a single continuous wizard. Five criteria — new-onset Confusion, Urea &gt; 7 mmol/L,
-			Respiratory rate &ge; 30/min, low Blood pressure (systolic &lt; 90 or diastolic &le; 60), and
-			age &ge; 65 — each score 1 point for a total of 0 to 5. The shared engine sums the score,
-			derives the mortality-risk band, and recommends a site-of-care disposition. Where serum urea is
-			unavailable, the four-criterion CRB-65 primary-care variant (0 to 4) is computed instead.
+			as a single continuous wizard that sums five weighted criteria into a 0-5 score and derives a
+			mortality-risk band and recommended site-of-care disposition.
 		</p>
 	</header>
 
@@ -54,8 +51,12 @@
 			<div>
 				<dt class="font-semibold text-base-content">Purpose</dt>
 				<dd class="mt-1 text-base-content/70">
-					Capture the five CURB-65 criteria and produce a graded report — score 0-5, mortality-risk
+					Capture the five CURB-65 criteria — new-onset Confusion, Urea &gt; 7 mmol/L, Respiratory
+					rate &ge; 30/min, low Blood pressure (systolic &lt; 90 or diastolic &le; 60), and age
+					&ge; 65, each worth 1 point — and produce a graded report — score 0-5, mortality-risk
 					band, recommended disposition, and flagged issues — to support the site-of-care decision.
+					Where serum urea is unavailable, the four-criterion CRB-65 primary-care variant (0-4) is
+					computed instead.
 				</dd>
 			</div>
 			<div>

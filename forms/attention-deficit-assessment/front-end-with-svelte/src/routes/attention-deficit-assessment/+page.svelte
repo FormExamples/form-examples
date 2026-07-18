@@ -13,9 +13,7 @@
 		</p>
 		<h1 class="mt-2 text-3xl font-bold text-base-content">Adult ADHD screening (ASRS v1.1)</h1>
 		<p class="mt-4 text-base leading-relaxed text-base-content/70">
-			A structured adult ADHD screening completed as a single continuous wizard: demographics, the
-			ASRS Part A screener and Part B symptom items, childhood history, functional impact, comorbid
-			conditions, medications, allergies, medical history, and social / support context. The shared
+			A structured adult ADHD screening completed as a single continuous wizard, whose shared
 			engine scores the WHO Adult ADHD Self-Report Scale (ASRS v1.1), classifies the likelihood of
 			ADHD, infers the predominant presentation (subtype), and flags issues for the clinician.
 		</p>
@@ -52,9 +50,11 @@
 			<div>
 				<dt class="font-semibold text-base-content">Purpose</dt>
 				<dd class="mt-1 text-base-content/70">
-					Capture a structured ADHD symptom profile and produce a graded report — ASRS total, Part A
-					screener result, ADHD classification, predominant presentation, and flagged issues — to
-					support clinical review.
+					Capture a structured ADHD symptom profile — demographics, the ASRS Part A screener and
+					Part B symptom items, childhood history, functional impact, comorbid conditions,
+					medications, allergies, medical history, and social / support context — and produce a
+					graded report (ASRS total, Part A screener result, ADHD classification, predominant
+					presentation, and flagged issues) to support clinical review.
 				</dd>
 			</div>
 			<div>

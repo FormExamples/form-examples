@@ -12,12 +12,9 @@
 		</p>
 		<h1 class="mt-2 text-3xl font-bold text-base-content">Seasonal mood disorder evaluation</h1>
 		<p class="mt-4 text-base leading-relaxed text-base-content/70">
-			A structured seasonal-mood evaluation completed as a single continuous wizard: demographics,
-			seasonal pattern history, current mood (PHQ-9), sleep and energy, appetite and weight, social
-			and occupational impact, light exposure, previous treatments, risk assessment, and treatment
-			plan. The shared engine computes the SPAQ Global Seasonality Score (GSS) and the PHQ-9
-			depression severity, derives a combined severity classification, and flags issues for the
-			clinician.
+			A structured seasonal-mood evaluation completed as a single continuous wizard, scored by the
+			shared engine's SPAQ Global Seasonality Score (GSS) and PHQ-9 depression severity into a
+			combined severity classification.
 		</p>
 	</header>
 
@@ -52,8 +49,11 @@
 			<div>
 				<dt class="font-semibold text-base-content">Purpose</dt>
 				<dd class="mt-1 text-base-content/70">
-					Capture a structured seasonal-mood profile and produce a graded report — SPAQ GSS band,
-					PHQ-9 severity, combined severity, and flagged issues — to support clinical review.
+					Capture a structured seasonal-mood profile — demographics, seasonal pattern history,
+					current mood (PHQ-9), sleep and energy, appetite and weight, social and occupational
+					impact, light exposure, previous treatments, risk assessment, and treatment plan — and
+					produce a graded report — SPAQ GSS band, PHQ-9 severity, combined severity, and flagged
+					issues — to support clinical review.
 				</dd>
 			</div>
 			<div>

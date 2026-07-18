@@ -10,13 +10,8 @@
 		<p class="text-sm font-semibold uppercase tracking-wide text-primary">Anaesthetic Record</p>
 		<h1 class="mt-2 text-3xl font-bold text-base-content">Intra-operative anaesthesia chart</h1>
 		<p class="mt-4 text-base leading-relaxed text-base-content/70">
-			A contemporaneous intra-operative anaesthetic record, completed as a single continuous wizard —
-			case identification, pre-induction checks, ASA and airway assessment, drugs and doses, airway
-			management, monitoring, timed physiological observations, fluids and blood loss, regional
-			technique, events and complications, and recovery handover. It captures a parent record plus
-			three repeating child lists (drug administrations, timed observations, and intra-operative
-			events). The shared engine grades the record's completeness (Complete, Partial, or Incomplete),
-			reports a completeness percent, and — independently — raises safety flags.
+			A contemporaneous intra-operative anaesthetic record, completed as a single continuous wizard,
+			graded by the shared engine for completeness and, independently, for safety flags.
 		</p>
 	</header>
 
@@ -51,8 +46,13 @@
 			<div>
 				<dt class="font-semibold text-base-content">Purpose</dt>
 				<dd class="mt-1 text-base-content/70">
-					Document an anaesthetic and produce a completeness report — status, completeness percent,
-					missing mandatory items, and flagged issues — to support a safe, auditable record.
+					Document an anaesthetic — case identification, pre-induction checks, ASA and airway
+					assessment, drugs and doses, airway management, monitoring, timed physiological
+					observations, fluids and blood loss, regional technique, events and complications, and
+					recovery handover, including repeating child lists for drug administrations, timed
+					observations, and intra-operative events — and produce a completeness report: status,
+					completeness percent, missing mandatory items, and flagged issues, to support a safe,
+					auditable record.
 				</dd>
 			</div>
 			<div>

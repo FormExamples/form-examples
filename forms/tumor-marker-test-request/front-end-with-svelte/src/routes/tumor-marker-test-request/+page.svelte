@@ -13,12 +13,12 @@
 			Serum tumour-marker blood-test request
 		</h1>
 		<p class="mt-4 text-base leading-relaxed text-base-content/70">
-			A UK NHS–aligned serum tumour-marker blood-test request that a clinician completes to order
-			one or more serum tumour markers. It records the requested markers, the clinical indication,
-			relevant history, any known cancer site and prior marker value, and the requested urgency —
-			then computes a four-axis vetting grade (appropriateness, interpretation safety, request
-			completeness, and urgency / triage priority) plus safety-critical flags, to support the
-			laboratory's decision to accept, query, redirect, or reject the request.
+			A UK NHS–aligned serum tumour-marker blood-test request that a clinician completes — recording
+			the requested markers, clinical indication, relevant history, any known cancer site and prior
+			marker value, and the requested urgency — from which the engine computes a four-axis vetting
+			grade (appropriateness, interpretation safety, request completeness, and urgency / triage
+			priority) plus safety-critical flags, to support the laboratory's decision to accept, query,
+			redirect, or reject the request.
 		</p>
 	</header>
 
@@ -53,9 +53,11 @@
 			<div>
 				<dt class="font-semibold text-base-content">Purpose</dt>
 				<dd class="mt-1 text-base-content/70">
-					Capture which serum tumour markers are requested and why, and produce a vetting report
-					the laboratory and requesting team can triage from. Tumour markers are poor screening
-					tests, so the form discourages non-evidence-based screening.
+					Capture which serum tumour markers are requested and why — clinical indication, relevant
+					history, known cancer site, and prior marker value — and produce a vetting report the
+					laboratory and requesting team can triage from, supporting a decision to accept, query,
+					redirect, or reject the request. Tumour markers are poor screening tests, so the form
+					discourages non-evidence-based screening.
 				</dd>
 			</div>
 			<div>

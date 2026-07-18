@@ -14,12 +14,10 @@
 		</p>
 		<h1 class="mt-2 text-3xl font-bold text-base-content">Authorise release of medical records</h1>
 		<p class="mt-4 text-base leading-relaxed text-base-content/70">
-			Complete this form as a single continuous wizard to authorise the release of your medical
-			records to a specified recipient: patient information, authorised recipient, records to
-			release, purpose, authorisation period, restrictions, patient rights, and signature and
-			consent. The shared engine validates the form for completeness, grades it Complete through
-			Incomplete, and flags issues such as missing consent, expired authorisation, and sensitive
-			records for review.
+			A single continuous wizard for authorising release of a patient's medical records to a
+			specified recipient, which the shared engine validates for completeness — grading it Complete
+			or Incomplete — and flags issues such as missing consent, expired authorisation, or sensitive
+			records requiring review.
 		</p>
 	</header>
 

@@ -14,12 +14,8 @@
 		</p>
 		<h1 class="mt-2 text-3xl font-bold text-base-content">Screening programme acknowledgment</h1>
 		<p class="mt-4 text-base leading-relaxed text-base-content/70">
-			A short single-page wizard that presents the practice's screening-program privacy notice —
-			how a patient's information is used across the NHS national screening programmes (cervical,
-			breast, bowel, abdominal aortic aneurysm, diabetic eye, and antenatal and newborn screening) —
-			and records the patient's acknowledgment and signature. The shared engine validates
-			completeness, derives a Complete / Incomplete status, and flags any governance issues for the
-			information-governance officer.
+			A short single-page wizard that presents the practice's screening-program privacy notice and
+			records the patient's acknowledgment and signature.
 		</p>
 	</header>
 
@@ -54,7 +50,9 @@
 			<div>
 				<dt class="font-semibold text-base-content">Purpose</dt>
 				<dd class="mt-1 text-base-content/70">
-					Record a patient's acknowledgment of the screening-programme privacy notice and produce a
+					Record a patient's acknowledgment and signature confirming they have been shown how their
+					information is used across the NHS national screening programmes (cervical, breast, bowel,
+					abdominal aortic aneurysm, diabetic eye, and antenatal and newborn screening), and produce a
 					completeness-graded summary — status, missing required fields, and flagged issues — for
 					practice records.
 				</dd>

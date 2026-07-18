@@ -11,12 +11,11 @@
 		<p class="text-sm font-semibold uppercase tracking-wide text-primary">Orthopedic Assessment</p>
 		<h1 class="mt-2 text-3xl font-bold text-base-content">Musculoskeletal evaluation</h1>
 		<p class="mt-4 text-base leading-relaxed text-base-content/70">
-			A comprehensive musculoskeletal evaluation completed as a single continuous wizard:
-			demographics, chief complaint, pain assessment, the 30-item DASH questionnaire, range of
-			motion, strength testing, functional limitations, imaging history, current treatment, and
-			surgical history. The shared engine computes the DASH (Disabilities of the Arm, Shoulder and
-			Hand) disability score and category, and flags clinically significant issues for the orthopedic
-			surgeon.
+			A comprehensive musculoskeletal evaluation — covering demographics, chief complaint, pain
+			assessment, the 30-item DASH questionnaire, range of motion, strength testing, functional
+			limitations, imaging history, current treatment, and surgical history — whose shared engine
+			computes the DASH (Disabilities of the Arm, Shoulder and Hand) disability score and
+			category and flags clinically significant issues for the orthopedic surgeon.
 		</p>
 	</header>
 

@@ -11,11 +11,9 @@
 		<p class="text-sm font-semibold uppercase tracking-wide text-primary">Endometriosis Assessment</p>
 		<h1 class="mt-2 text-3xl font-bold text-base-content">Endometriosis evaluation</h1>
 		<p class="mt-4 text-base leading-relaxed text-base-content/70">
-			A comprehensive endometriosis evaluation completed as a single continuous wizard: demographics,
-			menstrual history, pain assessment, gastrointestinal and urinary symptoms, fertility, previous
-			treatments, surgical history, quality-of-life impact, and treatment planning. The shared engine
-			grades the patient with the revised ASRM staging and the EHP-30 quality-of-life score, derives
-			an overall severity, and flags issues for the gynaecologist.
+			A comprehensive endometriosis evaluation, completed as a single continuous wizard, that the
+			shared engine grades with the revised ASRM staging and the EHP-30 quality-of-life score into
+			an overall severity flagged for the gynaecologist.
 		</p>
 	</header>
 
@@ -50,9 +48,11 @@
 			<div>
 				<dt class="font-semibold text-base-content">Purpose</dt>
 				<dd class="mt-1 text-base-content/70">
-					Capture a structured endometriosis profile and produce a graded report — ASRM stage,
-					EHP-30 quality-of-life score, overall severity, and flagged issues — to support
-					gynaecology review.
+					Capture a structured endometriosis profile — demographics, menstrual history, pain
+					assessment, gastrointestinal and urinary symptoms, fertility, previous treatments,
+					surgical history, quality-of-life impact, and treatment planning — and produce a graded
+					report: ASRM stage, EHP-30 quality-of-life score, overall severity, and flagged issues, to
+					support gynaecology review.
 				</dd>
 			</div>
 			<div>

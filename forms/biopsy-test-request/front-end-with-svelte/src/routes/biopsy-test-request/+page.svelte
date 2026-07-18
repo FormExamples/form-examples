@@ -11,13 +11,10 @@
 		<p class="text-sm font-semibold uppercase tracking-wide text-primary">Biopsy Test Request</p>
 		<h1 class="mt-2 text-3xl font-bold text-base-content">Tissue-biopsy / pathology request</h1>
 		<p class="mt-4 text-base leading-relaxed text-base-content/70">
-			A clinician-driven diagnostic tissue-biopsy referral completed as a single continuous wizard:
-			requesting clinician, patient identification, requested procedure (site, method, laterality),
-			clinical indication and question, lesion description, bleeding and coagulation status, and
-			requested urgency. The shared engine grades each request on four orthogonal axes —
-			appropriateness, periprocedural bleeding risk, request completeness, and urgency /
-			cancer-pathway triage — and raises safety flags for the pathology / interventional vetting
-			desk.
+			A clinician-driven diagnostic tissue-biopsy referral, completed as a single continuous
+			wizard, whose shared engine grades the request on four orthogonal axes — appropriateness,
+			periprocedural bleeding risk, request completeness, and urgency / cancer-pathway triage — and
+			raises safety flags for the pathology / interventional vetting desk.
 		</p>
 	</header>
 
@@ -52,9 +49,12 @@
 			<div>
 				<dt class="font-semibold text-base-content">Purpose</dt>
 				<dd class="mt-1 text-base-content/70">
-					Capture a structured biopsy request and produce a graded vetting report — appropriateness,
-					bleeding risk, completeness, triage tier, and flagged safety issues — to support the
-					pathology / interventional department's triage and booking decision.
+					Capture a structured biopsy request — requesting clinician, patient identification,
+					requested procedure (site, method, laterality), clinical indication and question, lesion
+					description, bleeding and coagulation status, and requested urgency — and produce a
+					graded vetting report covering appropriateness, bleeding risk, completeness, triage tier,
+					and flagged issues, to support the pathology / interventional department's triage and
+					booking decision.
 				</dd>
 			</div>
 			<div>

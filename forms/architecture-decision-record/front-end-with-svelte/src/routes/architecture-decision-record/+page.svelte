@@ -9,12 +9,9 @@
 		<p class="text-sm font-semibold uppercase tracking-wide text-primary">Architecture Decision Record</p>
 		<h1 class="mt-2 text-3xl font-bold text-base-content">Capture an architecture decision</h1>
 		<p class="mt-4 text-base leading-relaxed text-base-content/70">
-			Record an Architecture Decision Record (ADR) using the Tyree &amp; Akerman 14-section template
-			as a single continuous wizard: author and organization context, issue, decision, status and
-			group, assumptions, constraints, the positions (alternatives) considered, argument, implications,
-			the related decisions / requirements / artifacts / principles, notes, and sign-off. A pure
-			completeness-and-status engine measures how fully the template is filled in, surfaces the chosen
-			position, and flags governance gaps such as an approved record with no sign-off.
+			Record an Architecture Decision Record (ADR) using the Tyree &amp; Akerman 14-section template in
+			a single continuous wizard, and a pure completeness-and-status engine measures how fully the
+			template is filled in, surfaces the chosen position, and flags governance gaps.
 		</p>
 	</header>
 
@@ -49,8 +46,12 @@
 			<div>
 				<dt class="font-semibold text-base-content">Purpose</dt>
 				<dd class="mt-1 text-base-content/70">
-					Capture a structured architecture decision and produce a report — status, completeness, the
-					chosen position, flags, and a commit-ready Markdown ADR.
+					Capture a structured architecture decision — author and organization context, issue,
+					decision, status and group, assumptions, constraints, the positions (alternatives)
+					considered, argument, implications, the related decisions / requirements / artifacts /
+					principles, notes, and sign-off — and produce a report — status, completeness, the chosen
+					position, flags such as an approved record with no sign-off, and a commit-ready Markdown
+					ADR.
 				</dd>
 			</div>
 			<div>

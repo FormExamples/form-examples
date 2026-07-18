@@ -11,10 +11,8 @@
 		<h1 class="mt-2 text-3xl font-bold text-base-content">First Aid at Work competency assessment</h1>
 		<p class="mt-4 text-base leading-relaxed text-base-content/70">
 			A UK HSE First Aid at Work (FAW) competency assessment, aligned with the St John Ambulance
-			syllabus, completed as a single continuous wizard: trainee details, scene assessment, the
-			primary survey (DRABC), CPR &amp; AED, choking, bleeding, burns, fractures and spinal injury,
-			medical emergencies, and recording / handover. The shared engine grades each life-saving skill
-			and returns a Pass / Needs Development / Fail outcome with flagged issues for the examiner.
+			syllabus and completed as a single continuous wizard, that the shared engine grades to produce a
+			Pass / Needs Development / Fail outcome with flagged issues for the examiner.
 		</p>
 	</header>
 
@@ -49,7 +47,9 @@
 			<div>
 				<dt class="font-semibold text-base-content">Purpose</dt>
 				<dd class="mt-1 text-base-content/70">
-					Record a structured competency observation and produce a graded report — overall outcome,
+					Record a structured competency observation — trainee details, scene assessment, the primary
+					survey (DRABC), CPR &amp; AED, choking, bleeding, burns, fractures and spinal injury, medical
+					emergencies, and recording / handover — and produce a graded report — overall outcome,
 					per-skill results, and flagged issues — to support First Aid at Work certification.
 				</dd>
 			</div>

@@ -14,13 +14,8 @@
 			Risk stratification for acute upper GI bleeding
 		</h1>
 		<p class="mt-4 text-base leading-relaxed text-base-content/70">
-			Score three clinical parameters — age, shock (from heart rate and systolic blood pressure), and
-			comorbidity — in a single continuous wizard for a pre-endoscopy (clinical) Rockall score of
-			0-7. When endoscopy has been performed, two endoscopic parameters — diagnosis and stigmata of
-			recent haemorrhage — extend it to a full (post-endoscopy) Rockall score of 0-11. A higher score
-			means a higher risk of rebleeding and death; a full score of 2 or below identifies a low-risk
-			group. Shock, high-risk stigmata, upper GI malignancy, and high total scores are flagged for
-			action.
+			A single continuous wizard that scores clinical and, when available, endoscopic parameters to
+			stratify the risk of rebleeding and death from acute upper gastrointestinal bleeding.
 		</p>
 	</header>
 
@@ -55,9 +50,12 @@
 			<div>
 				<dt class="font-semibold text-base-content">Purpose</dt>
 				<dd class="mt-1 text-base-content/70">
-					Stratify the risk of rebleeding and death after acute upper GI bleeding to support
-					admission, monitoring, and escalation decisions — a graded report with the clinical and
-					full scores, per-parameter points, risk band, and flagged issues.
+					Stratify the risk of rebleeding and death after acute upper GI bleeding — scoring age,
+					shock (from heart rate and systolic blood pressure), and comorbidity for a pre-endoscopy
+					(clinical) score of 0-7, and diagnosis and stigmata of recent haemorrhage for a full
+					(post-endoscopy) score of 0-11, where a full score of 2 or below identifies a low-risk
+					group — to support admission, monitoring, and escalation decisions, flagging shock,
+					high-risk stigmata, upper GI malignancy, and high total scores for action.
 				</dd>
 			</div>
 			<div>

@@ -11,11 +11,10 @@
 		<p class="text-sm font-semibold uppercase tracking-wide text-primary">Birth Control Assessment</p>
 		<h1 class="mt-2 text-3xl font-bold text-base-content">Contraceptive suitability evaluation</h1>
 		<p class="mt-4 text-base leading-relaxed text-base-content/70">
-			A comprehensive contraceptive suitability evaluation completed as a single continuous wizard:
-			demographics, menstrual history, contraceptive history, medical history, cardiovascular risk,
-			thromboembolism risk, current medications, lifestyle, contraceptive preferences, and a clinical
-			recommendation. The shared engine grades each method against the UK Medical Eligibility Criteria
-			(UK MEC 1–4), derives an overall risk level, and flags safety-critical issues for the clinician.
+			A comprehensive contraceptive suitability evaluation, completed as a single continuous
+			wizard, whose shared engine grades each method against the UK Medical Eligibility Criteria
+			(UK MEC 1–4), derives an overall risk level, and flags safety-critical issues for the
+			clinician.
 		</p>
 	</header>
 
@@ -50,8 +49,11 @@
 			<div>
 				<dt class="font-semibold text-base-content">Purpose</dt>
 				<dd class="mt-1 text-base-content/70">
-					Capture a structured contraceptive risk profile and produce a graded report — per-method
-					UK MEC category, overall risk, and flagged issues — to support a prescribing decision.
+					Capture a structured contraceptive risk profile — demographics, menstrual history,
+					contraceptive history, medical history, cardiovascular risk, thromboembolism risk, current
+					medications, lifestyle, contraceptive preferences, and a clinical recommendation — and
+					produce a graded report covering per-method UK MEC category, overall risk, and flagged
+					issues, to support a prescribing decision.
 				</dd>
 			</div>
 			<div>

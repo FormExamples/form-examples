@@ -11,10 +11,9 @@
 		<p class="text-sm font-semibold uppercase tracking-wide text-primary">arc42</p>
 		<h1 class="mt-2 text-3xl font-bold text-base-content">Architecture documentation</h1>
 		<p class="mt-4 text-base leading-relaxed text-base-content/70">
-			A complete arc42 software-architecture document captured as a single continuous wizard: the
-			twelve arc42 sections from Introduction &amp; Goals through Risks &amp; Technical Debt, plus
-			summary and sign-off. The shared engine grades per-section completeness (empty / partial /
-			complete), derives an overall maturity band, and flags critical omissions for review.
+			Capture a complete arc42 software-architecture document as a single continuous wizard, and the
+			shared engine grades per-section completeness, derives an overall maturity band, and flags
+			critical omissions for review.
 		</p>
 	</header>
 
@@ -49,9 +48,11 @@
 			<div>
 				<dt class="font-semibold text-base-content">Purpose</dt>
 				<dd class="mt-1 text-base-content/70">
-					Capture a structured arc42 architecture record and produce a graded report — maturity
-					band, per-section completeness, fired rules, and flagged omissions — to support
-					architecture review and sign-off.
+					Capture a structured arc42 architecture record — the twelve arc42 sections from
+					Introduction &amp; Goals through Risks &amp; Technical Debt, plus summary and sign-off —
+					and produce a graded report — maturity band, per-section completeness (empty, partial, or
+					complete), fired rules, and flagged omissions — to support architecture review and
+					sign-off.
 				</dd>
 			</div>
 			<div>

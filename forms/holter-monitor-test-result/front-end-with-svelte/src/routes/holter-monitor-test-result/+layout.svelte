@@ -18,8 +18,9 @@
 		<div class="mx-auto flex max-w-5xl items-center justify-between px-4 py-3">
 			<a href="/holter-monitor-test-result/" class="text-lg font-bold text-gray-900">Holter Monitor Test Result</a>
 			<div class="flex gap-1">
-				<a href="/holter-monitor-test-result/" class={navClass('/')}>Reports</a>
+				<a href="/holter-monitor-test-result/" class={navClass('/')}>Welcome</a>
 				<a href="/holter-monitor-test-result/report" class={navClass('/report')}>New report</a>
+				<a href="/holter-monitor-test-result/reports" class={navClass('/reports')}>Reports</a>
 			</div>
 		</div>
 	</nav>

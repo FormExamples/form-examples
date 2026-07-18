@@ -11,12 +11,8 @@
 		<h1 class="mt-2 text-3xl font-bold text-base-content">Diabetic eye screening record</h1>
 		<p class="mt-4 text-base leading-relaxed text-base-content/70">
 			A structured record of a UK NHS Diabetic Eye Screening Programme retinal screening episode,
-			completed as a single continuous wizard. For each eye it captures the retinopathy (R) grade,
-			maculopathy (M) grade, photocoagulation (P) marker, and ungradable (U) marker, then
-			classifies the <strong>worst-eye result</strong> across both eyes and derives a
-			<strong>recall interval or referral pathway</strong> — urgent ophthalmology, hospital eye
-			service, slit-lamp, surveillance, or routine recall — and raises safety flags. This is a
-			documentation and result-classification form: there is no numeric score.
+			completed as a single continuous wizard that classifies the <strong>worst-eye result</strong>
+			across both eyes and derives a <strong>recall interval or referral pathway</strong>.
 		</p>
 	</header>
 
@@ -51,9 +47,12 @@
 			<div>
 				<dt class="font-semibold text-base-content">Purpose</dt>
 				<dd class="mt-1 text-base-content/70">
-					Capture a grader's per-eye decision and produce a classified report — the worst-eye
-					grade, the recall / referral outcome, and flagged issues — to support timely surveillance
-					and referral under the programme pathway.
+					Capture a grader's per-eye decision — the retinopathy (R) grade, maculopathy (M) grade,
+					photocoagulation (P) marker, and ungradable (U) marker — and produce a classified report —
+					the worst-eye grade, the recall / referral outcome (urgent ophthalmology, hospital eye
+					service, slit-lamp, surveillance, or routine recall), and flagged issues — to support
+					timely surveillance and referral under the programme pathway. This is a documentation and
+					result-classification form: there is no numeric score.
 				</dd>
 			</div>
 			<div>

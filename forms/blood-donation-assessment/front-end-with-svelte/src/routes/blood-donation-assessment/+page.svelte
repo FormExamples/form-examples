@@ -11,12 +11,9 @@
 		<p class="text-sm font-semibold uppercase tracking-wide text-primary">Blood Donation Assessment</p>
 		<h1 class="mt-2 text-3xl font-bold text-base-content">Donor eligibility screening</h1>
 		<p class="mt-4 text-base leading-relaxed text-base-content/70">
-			A whole-blood donor eligibility screen completed as a single continuous wizard: donor
-			demographics, general health, medical history, recent illness, travel history, lifestyle and
-			risk behaviours, pregnancy and transfusion history, vital signs, informed consent, and the
-			donation plan. The shared engine applies the JPAC Donor Selection Guidelines (used by UK
-			NHSBT) to determine whether the donor is eligible, temporarily deferred, or permanently
-			deferred, and flags issues for the donor-session clinician.
+			A whole-blood donor eligibility screen completed as a single continuous wizard, applying the
+			JPAC Donor Selection Guidelines (used by UK NHSBT) to determine whether the donor is
+			eligible, temporarily deferred, or permanently deferred.
 		</p>
 	</header>
 
@@ -51,9 +48,12 @@
 			<div>
 				<dt class="font-semibold text-base-content">Purpose</dt>
 				<dd class="mt-1 text-base-content/70">
-					Capture a structured donor profile and produce an eligibility report — eligible,
-					temporarily deferred, or permanently deferred — with the triggered deferral rules and
-					flagged issues, to support the donor-session clinician's final decision.
+					Capture a structured donor profile — demographics, general health, medical history,
+					recent illness, travel history, lifestyle and risk behaviours, pregnancy and
+					transfusion history, vital signs, informed consent, and the donation plan — and
+					produce an eligibility report — eligible, temporarily deferred, or permanently
+					deferred — with the triggered deferral rules and flagged issues, to support the
+					donor-session clinician's final decision.
 				</dd>
 			</div>
 			<div>

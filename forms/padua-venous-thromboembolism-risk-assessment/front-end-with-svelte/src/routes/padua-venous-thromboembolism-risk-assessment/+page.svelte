@@ -12,11 +12,10 @@
 		</p>
 		<h1 class="mt-2 text-3xl font-bold text-base-content">Padua Prediction Score for VTE risk</h1>
 		<p class="mt-4 text-base leading-relaxed text-base-content/70">
-			A risk-stratification tool for hospitalised medical (non-surgical) adults, completed as a
-			single continuous wizard. Eleven weighted risk factors are summed for a total of 0 to 20. The
-			shared engine computes the score, derives the risk band, and classifies Padua &ge; 4 as high
-			risk — prompting consideration of pharmacological thromboprophylaxis, subject to a
-			bleeding-risk check.
+			A risk-stratification tool for hospitalised medical (non-surgical) adults that sums eleven
+			weighted risk factors to a Padua score of 0&ndash;20 through a single continuous wizard,
+			classifying scores of 4 or above as high risk and prompting consideration of pharmacological
+			thromboprophylaxis subject to a bleeding-risk check.
 		</p>
 	</header>
 

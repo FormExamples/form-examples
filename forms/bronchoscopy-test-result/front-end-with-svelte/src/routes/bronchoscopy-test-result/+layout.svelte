@@ -18,8 +18,9 @@
 		<div class="mx-auto flex max-w-5xl items-center justify-between px-4 py-3">
 			<a href="/bronchoscopy-test-result/" class="text-lg font-bold text-gray-900">Bronchoscopy Test Result</a>
 			<div class="flex gap-1">
-				<a href="/bronchoscopy-test-result/" class={navClass('/')}>Reports</a>
+				<a href="/bronchoscopy-test-result/" class={navClass('/')}>Welcome</a>
 				<a href="/bronchoscopy-test-result/report" class={navClass('/report')}>New report</a>
+				<a href="/bronchoscopy-test-result/reports" class={navClass('/reports')}>Reports</a>
 			</div>
 		</div>
 	</nav>

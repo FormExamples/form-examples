@@ -1,24 +1,21 @@
 <script lang="ts">
 	// The app root is a welcome page: it explains the work and offers prominent
 	// links to the two working surfaces — the request form and the vetting
-	// dashboard. The collection routes (`/cardiology-requests` and
-	// `/cardiology-requests/new`) hold the actual functionality.
-	const plural = 'cardiology-requests';
+	// dashboard. The collection routes (`/nuclear-medicine-test-requests` and
+	// `/nuclear-medicine-test-requests/new`) hold the actual functionality.
+	const plural = 'nuclear-medicine-test-requests';
 </script>
 
 <main class="mx-auto max-w-4xl px-4 py-12">
 	<header class="mb-10">
-		<p class="text-sm font-semibold uppercase tracking-wide text-primary">Cardiology Request</p>
-		<h1 class="mt-2 text-3xl font-bold text-base-content">
-			Cardiology referral / consult request
-		</h1>
+		<p class="text-sm font-semibold uppercase tracking-wide text-primary">Nuclear Medicine Test Request</p>
+		<h1 class="mt-2 text-3xl font-bold text-base-content">Nuclear medicine (radionuclide imaging) request</h1>
 		<p class="mt-4 text-base leading-relaxed text-base-content/70">
-			A UK NHS–aligned cardiology referral that a clinician completes to refer a patient into a
-			cardiology service. It records the requested service, the reason for referral, the clinical
-			question, presenting symptoms and functional class, acute red flags, investigations already
-			performed, and triage details — then computes a four-axis vetting grade (referral
-			appropriateness, safety / red-flag, request completeness, and triage priority) plus
-			safety-critical flags to support the department's triage and booking decision.
+			A clinician completes a single-page wizard to request a radionuclide imaging study, and the
+			shared engine computes a four-axis vetting grade — ACR / RCR iRefer appropriateness,
+			preparation &amp; radiation safety, request completeness, and triage priority — plus
+			safety-critical flags and an overall recommendation the nuclear-medicine vetting desk can
+			triage from.
 		</p>
 	</header>
 
@@ -27,10 +24,10 @@
 			href="/nuclear-medicine-test-request/{plural}/new"
 			class="group rounded-lg border border-primary bg-primary p-6 text-primary-content shadow-sm transition hover:opacity-90"
 		>
-			<h2 class="text-lg font-semibold">Start a new referral</h2>
+			<h2 class="text-lg font-semibold">Start a new request</h2>
 			<p class="mt-2 text-sm text-primary-content/80">
 				Open the step-by-step request form. One continuous single-page wizard that grades the
-				referral as you complete it.
+				request as you complete it.
 			</p>
 			<span class="mt-4 inline-block text-sm font-semibold">Open the form →</span>
 		</a>
@@ -40,7 +37,7 @@
 		>
 			<h2 class="text-lg font-semibold">Vetting dashboard</h2>
 			<p class="mt-2 text-sm text-base-content/70">
-				Browse incoming referrals with their computed four-axis grades, and filter by triage tier
+				Browse incoming requests with their computed four-axis grades, and filter by triage tier
 				and recommendation.
 			</p>
 			<span class="mt-4 inline-block text-sm font-semibold text-primary">Open the dashboard →</span>
@@ -53,23 +50,31 @@
 			<div>
 				<dt class="font-semibold text-base-content">Purpose</dt>
 				<dd class="mt-1 text-base-content/70">
-					Capture why a patient should be seen by cardiology and how urgently, and produce a vetting
-					report the cardiology team can triage from. This is the request half of the
-					request/response pair.
+					Capture the requested radionuclide scan (bone scan, myocardial perfusion, V/Q lung scan,
+					thyroid uptake, renal DMSA / MAG3, gallium / octreotide, white-cell, or sentinel-node
+					study), the clinical indication and specific question, relevant history, and the
+					radiation-safety governance (pregnancy and breastfeeding status, renal function, recent
+					radionuclide exposure, weight) — then produce a graded vetting report to support the
+					nuclear-medicine department's justification, triage, and booking decisions.
 				</dd>
 			</div>
 			<div>
 				<dt class="font-semibold text-base-content">Specification</dt>
 				<dd class="mt-1 text-base-content/70">
-					Spec-driven: the living domain spec defines the data model, the four-axis grading engine,
-					and the safety-critical flag rules. The same engine grades both the form and the dashboard.
+					Spec-driven: the living domain spec defines the data model, the four-axis grading engine
+					(appropriateness, preparation &amp; radiation safety, request completeness, and triage
+					priority), and the safety-flag rules. The same engine grades both the form and the
+					dashboard.
 				</dd>
 			</div>
 			<div>
 				<dt class="font-semibold text-base-content">Documentation</dt>
 				<dd class="mt-1 text-base-content/70">
-					Aligned with NICE chest pain (CG95), chronic heart failure (NG106), transient loss of
-					consciousness (CG109), and the NHS e-Referral advice-and-guidance / referral-vetting model.
+					Drawn from the ACR Appropriateness Criteria, RCR *iRefer: Making the best use of clinical
+					radiology*, ARSAC *Notes for guidance on the clinical administration of
+					radiopharmaceuticals*, the Ionising Radiation (Medical Exposure) Regulations 2017
+					(IR(ME)R), ICRP radiation-protection guidance, and EANM / SNMMI procedure guidelines. A
+					vetting aid for the imaging desk, not a diagnostic tool.
 				</dd>
 			</div>
 		</dl>

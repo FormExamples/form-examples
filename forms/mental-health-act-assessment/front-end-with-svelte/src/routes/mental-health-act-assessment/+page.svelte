@@ -12,12 +12,10 @@
 		</p>
 		<h1 class="mt-2 text-3xl font-bold text-base-content">Mental Health Act Assessment</h1>
 		<p class="mt-4 text-base leading-relaxed text-base-content/70">
-			A statutory-documentation instrument, completed as a single continuous wizard. It records the
-			AMHP-coordinated assessment and the medical recommendations, documents the statutory criteria
-			and the required signatories, then classifies the recommended section, validates whether the
-			documentation is <strong>complete</strong> (valid / incomplete), classifies the urgency, and
-			raises safety, legal, and governance flags. This is a documentation and legal-completeness
-			instrument — there is <strong>no numeric score</strong> and it makes
+			A statutory-documentation instrument, completed as a single continuous wizard, that records
+			the AMHP-coordinated assessment and medical recommendations, classifies the recommended
+			section and urgency, and validates documentation completeness — <strong>valid</strong> or
+			<strong>incomplete</strong> — with <strong>no numeric score</strong> and
 			<strong>no automated decision to detain</strong>.
 		</p>
 	</header>

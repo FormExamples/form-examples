@@ -11,12 +11,9 @@
 		<p class="text-sm font-semibold uppercase tracking-wide text-primary">Workplace Climate Assessment</p>
 		<h1 class="mt-2 text-3xl font-bold text-base-content">Organisational climate survey</h1>
 		<p class="mt-4 text-base leading-relaxed text-base-content/70">
-			An anonymous Workplace Climate Index completed as a single continuous wizard: demographics
-			(broad anonymised banding), and 1-5 Likert items across leadership, psychological safety,
-			inclusion and belonging, communication, collaboration, recognition, wellbeing, career
-			development, and an overall climate view. The shared engine normalises each domain to 0-100,
-			averages the eight graded domains into a composite climate index, bands it Thriving / Healthy /
-			Developing / Strained / Critical, and raises flagged issues for HR and leadership.
+			An anonymous Workplace Climate Index questionnaire whose shared engine averages eight
+			Likert-scored organisational domains into a composite climate index, bands it Thriving /
+			Healthy / Developing / Strained / Critical, and raises flagged issues for HR and leadership.
 		</p>
 	</header>
 
@@ -51,9 +48,12 @@
 			<div>
 				<dt class="font-semibold text-base-content">Purpose</dt>
 				<dd class="mt-1 text-base-content/70">
-					Measure organisational culture, psychological safety and employee experience to inform
-					leadership, inclusion and wellbeing programmes. This is an engagement and screening tool,
-					not a clinical instrument.
+					Measure organisational culture, psychological safety, and employee experience via 1-5
+					Likert items across leadership, psychological safety, inclusion and belonging,
+					communication, collaboration, recognition, wellbeing, career development, and an overall
+					climate view, normalising each domain to 0-100 and averaging the eight graded domains
+					into a composite climate index to inform leadership, inclusion and wellbeing programmes.
+					This is an engagement and screening tool, not a clinical instrument.
 				</dd>
 			</div>
 			<div>

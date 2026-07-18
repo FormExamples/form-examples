@@ -11,10 +11,9 @@
 		<p class="text-sm font-semibold uppercase tracking-wide text-primary">Ergonomic Assessment</p>
 		<h1 class="mt-2 text-3xl font-bold text-base-content">Workplace ergonomic evaluation</h1>
 		<p class="mt-4 text-base leading-relaxed text-base-content/70">
-			A workplace ergonomic evaluation completed as a single continuous wizard: worker demographics,
-			workstation setup, posture assessment, repetitive tasks, manual handling, and current symptoms.
-			The shared engine grades musculoskeletal risk with the REBA (Rapid Entire Body Assessment)
-			instrument, derives a risk level and recommended action, and flags issues for the assessor.
+			A workplace ergonomic evaluation, completed as a single continuous wizard, that the shared
+			engine grades for musculoskeletal risk with the REBA (Rapid Entire Body Assessment) instrument,
+			deriving a risk level and recommended action flagged for the assessor.
 		</p>
 	</header>
 
@@ -49,8 +48,10 @@
 			<div>
 				<dt class="font-semibold text-base-content">Purpose</dt>
 				<dd class="mt-1 text-base-content/70">
-					Capture a structured ergonomic profile and produce a graded report — REBA score, risk
-					level, recommended action, and flagged issues — to support occupational health review.
+					Capture a structured ergonomic profile — worker demographics, workstation setup, posture
+					assessment, repetitive tasks, manual handling, and current symptoms — and produce a graded
+					report: REBA score, risk level, recommended action, and flagged issues, to support
+					occupational health review.
 				</dd>
 			</div>
 			<div>

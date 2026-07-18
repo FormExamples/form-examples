@@ -11,13 +11,9 @@
 		<p class="text-sm font-semibold uppercase tracking-wide text-primary">Learning Disability Assessment</p>
 		<h1 class="mt-2 text-3xl font-bold text-base-content">Annual health check &amp; adaptive-functioning assessment</h1>
 		<p class="mt-4 text-base leading-relaxed text-base-content/70">
-			A structured annual health check completed as a single continuous wizard: demographics, carer
-			and support network, communication needs, medical review, physical examination, adaptive
-			functioning, behavioural concerns, mental capacity and consent, reasonable adjustments, and a
-			personalised health action plan. The shared engine grades adaptive functioning into a DSM-5-TR
-			aligned severity category (Mild / Moderate / Severe / Profound) and flags issues such as
-			poorly-controlled epilepsy, psychotropic prescribing without a STOMP review, dysphagia, missed
-			national screening, and mental-capacity concerns.
+			A structured annual health check completed as a single continuous wizard, whose shared engine
+			grades adaptive functioning into a DSM-5-TR aligned severity category and flags clinical
+			concerns for the clinician.
 		</p>
 	</header>
 
@@ -52,9 +48,14 @@
 			<div>
 				<dt class="font-semibold text-base-content">Purpose</dt>
 				<dd class="mt-1 text-base-content/70">
-					Capture a structured learning-disability annual health check and produce a graded report —
-					severity category, adaptive-functioning detail, and flagged issues — plus a personalised
-					Health Action Plan with reasonable adjustments.
+					Capture a structured learning-disability annual health check — demographics, carer and
+					support network, communication needs, medical review, physical examination, adaptive
+					functioning, behavioural concerns, mental capacity and consent, and reasonable adjustments
+					— and produce a graded report: a DSM-5-TR aligned severity category (Mild / Moderate /
+					Severe / Profound), adaptive-functioning detail, and flagged issues such as
+					poorly-controlled epilepsy, psychotropic prescribing without a STOMP review, dysphagia,
+					missed national screening, and mental-capacity concerns, plus a personalised Health Action
+					Plan with reasonable adjustments.
 				</dd>
 			</div>
 			<div>

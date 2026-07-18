@@ -11,11 +11,9 @@
 		<p class="text-sm font-semibold uppercase tracking-wide text-primary">Prenatal Assessment</p>
 		<h1 class="mt-2 text-3xl font-bold text-base-content">Antenatal evaluation</h1>
 		<p class="mt-4 text-base leading-relaxed text-base-content/70">
-			A comprehensive antenatal evaluation completed as a single continuous wizard: demographics,
-			pregnancy details, obstetric history, medical history, current symptoms, vital signs, laboratory
-			results, lifestyle and nutrition, mental health screening, and birth-plan preferences. The shared
-			engine computes a cumulative pregnancy-risk score, stratifies the patient into a risk level, and
-			flags safety-critical issues for the obstetrician.
+			A comprehensive antenatal evaluation, completed as a single continuous ten-step wizard, whose
+			shared engine computes a cumulative pregnancy-risk score, stratifies the patient into a risk
+			level, and flags safety-critical issues for the obstetrician.
 		</p>
 	</header>
 

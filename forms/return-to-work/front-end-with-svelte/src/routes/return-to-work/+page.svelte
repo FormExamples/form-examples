@@ -12,13 +12,8 @@
 		<h1 class="mt-2 text-3xl font-bold text-base-content">Statement of Fitness for Work</h1>
 		<p class="mt-4 text-base leading-relaxed text-base-content/70">
 			A clinician-issued certificate authorising an employee's return to work after illness,
-			injury, or extended absence, completed as a single continuous twelve-step wizard: clinician
-			and patient identification, job context, absence history, reason for absence, current
-			treatment, functional assessment, fitness statement, phased-return plan, workplace
-			adjustments, follow-up plan, and sign-off. The shared engine derives the fitness statement
-			(fit / may be fit / not fit), a restriction-priority grade (routine / standard / restricted /
-			high-risk) by the max-grade rule, and safety flags for the occupational-health team. Aligned
-			with the UK NHS Med 3 "Fit Note".
+			injury, or extended absence, completed as a single continuous twelve-step wizard aligned with
+			the UK NHS Med 3 "Fit Note".
 		</p>
 	</header>
 
@@ -53,9 +48,12 @@
 			<div>
 				<dt class="font-semibold text-base-content">Purpose</dt>
 				<dd class="mt-1 text-base-content/70">
-					Capture a structured clinician assessment of an employee's fitness to resume work and
-					produce a signed Statement of Fitness for Work — fitness status, restriction priority,
-					and flagged issues — to share with the employer's occupational-health team.
+					Capture a structured clinician assessment — clinician and patient identification, job
+					context, absence history, reason for absence, current treatment, functional assessment,
+					fitness statement, phased-return plan, workplace adjustments, follow-up plan, and sign-off
+					— of an employee's fitness to resume work and produce a signed Statement of Fitness for
+					Work — fitness status, restriction priority, and flagged issues — to share with the
+					employer's occupational-health team.
 				</dd>
 			</div>
 			<div>

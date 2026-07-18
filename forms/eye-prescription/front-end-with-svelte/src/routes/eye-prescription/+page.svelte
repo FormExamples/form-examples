@@ -11,12 +11,9 @@
 		<p class="text-sm font-semibold uppercase tracking-wide text-primary">Eye Prescription</p>
 		<h1 class="mt-2 text-3xl font-bold text-base-content">UK GOC spectacle prescription</h1>
 		<p class="mt-4 text-base leading-relaxed text-base-content/70">
-			An optometrist-issued spectacle prescription completed as a single continuous wizard: prescriber
-			and patient identification, examination details, visual acuity, per-eye refraction (sphere,
-			cylinder, axis, addition, prism), pupillary distance, lens recommendation, and optional
-			ocular-health findings. The shared engine classifies each eye's refraction, derives an overall
-			prescription-complexity grade (simple, moderate, or complex), and raises safety flags for the
-			prescriber.
+			An optometrist-issued spectacle prescription, completed as a single continuous wizard, that the
+			shared engine classifies per-eye refraction into an overall complexity grade (simple, moderate,
+			or complex) with safety flags for the prescriber.
 		</p>
 	</header>
 
@@ -51,9 +48,11 @@
 			<div>
 				<dt class="font-semibold text-base-content">Purpose</dt>
 				<dd class="mt-1 text-base-content/70">
-					Capture a structured spectacle prescription and produce a graded report — per-eye refractive
-					classification, overall complexity, and flagged safety issues — to support dispensing and
-					clinical review.
+					Capture a structured spectacle prescription — prescriber and patient identification,
+					examination details, visual acuity, per-eye refraction (sphere, cylinder, axis, addition,
+					prism), pupillary distance, lens recommendation, and optional ocular-health findings — and
+					produce a graded report: per-eye refractive classification, overall complexity, and
+					flagged safety issues, to support dispensing and clinical review.
 				</dd>
 			</div>
 			<div>

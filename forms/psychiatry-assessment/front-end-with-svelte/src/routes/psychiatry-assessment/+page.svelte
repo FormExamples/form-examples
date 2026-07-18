@@ -11,10 +11,8 @@
 		<p class="text-sm font-semibold uppercase tracking-wide text-primary">Psychiatry Assessment</p>
 		<h1 class="mt-2 text-3xl font-bold text-base-content">Comprehensive psychiatric evaluation</h1>
 		<p class="mt-4 text-base leading-relaxed text-base-content/70">
-			A comprehensive psychiatric evaluation completed as a single continuous wizard: demographics,
-			presenting complaint, psychiatric history, mental status exam, risk assessment, mood and
-			anxiety, substance use, medications, medical history, social history, and capacity and consent.
-			The shared engine computes a Global Assessment of Functioning (GAF) score, summarises violence
+			A comprehensive psychiatric evaluation, completed as a single continuous eleven-step wizard,
+			whose shared engine computes a Global Assessment of Functioning (GAF) score, summarises violence
 			risk, and flags safety-critical issues for the psychiatrist.
 		</p>
 	</header>

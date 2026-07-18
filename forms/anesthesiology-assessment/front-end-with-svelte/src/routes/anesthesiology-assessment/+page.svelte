@@ -11,13 +11,9 @@
 		<p class="text-sm font-semibold uppercase tracking-wide text-primary">Anesthesiology Assessment</p>
 		<h1 class="mt-2 text-3xl font-bold text-base-content">Pre-operative anaesthesia evaluation</h1>
 		<p class="mt-4 text-base leading-relaxed text-base-content/70">
-			A UK NHS-aligned pre-operative anaesthesiology assessment completed as a single continuous
-			wizard: demographics, planned surgery, system-by-system medical history, medications,
-			allergies, previous anaesthesia, social and functional capacity, vital signs and airway
-			examination, investigations, and the anaesthetic plan. The shared engine combines four
-			validated instruments — ASA Physical Status, the Mallampati / airway assessment, the Revised
-			Cardiac Risk Index (RCRI / Lee), and STOP-BANG (OSA screening) — into one composite
-			perioperative risk level and flags safety-critical issues.
+			A UK NHS-aligned pre-operative anaesthesiology assessment, completed as a single continuous
+			wizard, that combines four validated instruments into one composite perioperative risk level and
+			flags safety-critical issues.
 		</p>
 	</header>
 

@@ -13,14 +13,11 @@
 		<h1 class="mt-2 text-3xl font-bold text-base-content">NHS newborn blood spot screening</h1>
 		<p class="mt-4 text-base leading-relaxed text-base-content/70">
 			A documentation and result-classification record for the NHS newborn blood spot (heel-prick)
-			screening test, normally taken around day 5 of life, completed as a single continuous wizard.
-			It records the sample event and its quality, eligibility and consent, and a per-condition
-			result for nine screened conditions — <strong>SCD</strong>, <strong>CF</strong>,
-			<strong>CHT</strong>, <strong>PKU</strong>, <strong>MCADD</strong>, <strong>MSUD</strong>,
-			<strong>IVA</strong>, <strong>GA1</strong>, and <strong>HCU</strong>. A pure engine classifies
-			each condition, derives the overall screening outcome by precedence, and raises flags — any
-			<strong>suspected</strong> result triggers an urgent specialist referral. This is a
-			classification form: there is no numeric score.
+			screening test, normally taken around day 5 of life, that classifies each of nine screened
+			conditions — <strong>SCD</strong>, <strong>CF</strong>, <strong>CHT</strong>,
+			<strong>PKU</strong>, <strong>MCADD</strong>, <strong>MSUD</strong>, <strong>IVA</strong>,
+			<strong>GA1</strong>, and <strong>HCU</strong> — derives an overall screening outcome, and
+			raises an urgent-referral flag for any <strong>suspected</strong> result.
 		</p>
 	</header>
 
@@ -55,8 +52,9 @@
 			<div>
 				<dt class="font-semibold text-base-content">Purpose</dt>
 				<dd class="mt-1 text-base-content/70">
-					Capture the sample event, quality, consent, and the nine per-condition results, and
-					produce a graded report — an overall screening outcome, referral status, urgent
+					Capture the sample event and its quality, eligibility and consent, and a per-condition
+					result for the nine screened conditions (SCD, CF, CHT, PKU, MCADD, MSUD, IVA, GA1, and
+					HCU), and produce a graded report — an overall screening outcome, referral status, urgent
 					referrals, and flagged issues — to support timely newborn screening and referral.
 				</dd>
 			</div>

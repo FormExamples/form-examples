@@ -13,11 +13,8 @@
 		<p class="mt-4 text-base leading-relaxed text-base-content/70">
 			The World Health Organization standardised acute referral form, completed as a single
 			continuous wizard following the SBAR (Situation, Background, Assessment, Recommendations)
-			communication framework: patient identification, facility and transport details, situation,
-			background with ABCDE assessment and interventions, clinical assessment with vital signs,
-			transport recommendations and precautions, provider sign-off, and referral-facility receipt.
-			The shared engine checks completeness and flags clinically significant issues for the
-			receiving facility.
+			communication framework, whose shared engine checks completeness and flags clinically
+			significant issues for the receiving facility.
 		</p>
 	</header>
 
@@ -52,9 +49,12 @@
 			<div>
 				<dt class="font-semibold text-base-content">Purpose</dt>
 				<dd class="mt-1 text-base-content/70">
-					Capture a structured acute referral for an inter-facility patient transfer and produce a
-					report — completeness summary plus flagged clinical issues — that travels with the patient
-					to the receiving facility.
+					Capture a structured acute referral for an inter-facility patient transfer — patient
+					identification, facility and transport details, situation, background with ABCDE
+					assessment and interventions, clinical assessment with vital signs, transport
+					recommendations and precautions, provider sign-off, and referral-facility receipt — and
+					produce a report — completeness summary plus flagged clinical issues — that travels with
+					the patient to the receiving facility.
 				</dd>
 			</div>
 			<div>

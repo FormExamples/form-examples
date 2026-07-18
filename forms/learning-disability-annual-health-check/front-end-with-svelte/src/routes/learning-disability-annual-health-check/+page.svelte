@@ -15,16 +15,12 @@
 		</h1>
 		<p class="mt-4 text-base leading-relaxed text-base-content/70">
 			A UK primary-care annual health check for people aged 14 or over on a practice's
-			learning-disability register, completed as a single continuous wizard. It covers reasonable
-			adjustments and communication, physical health, screening and immunisation uptake, a
-			medication review including <strong>STOMP</strong>, mental health and behaviour,
-			syndrome-specific checks, and carer and social circumstances — and produces a
-			<strong>Health Action Plan</strong>. This is a
-			<strong>documentation and completeness</strong> instrument, not a numeric score: the engine
+			learning-disability register, completed as a single continuous wizard, that is a
+			<strong>documentation and completeness</strong> instrument, not a numeric score — the engine
 			counts the 18 required components carried out completely, reports a completeness percentage,
-			gates the check on the Health Action Plan being produced and shared, classifies it
-			<strong>Complete</strong> or <strong>Incomplete</strong>, and — independently — raises clinical
-			flags including the STOMP flag.
+			gates the check on the <strong>Health Action Plan</strong> being produced and shared, and
+			classifies it <strong>Complete</strong> or <strong>Incomplete</strong>, independently raising
+			clinical flags including the STOMP flag.
 		</p>
 	</header>
 
@@ -59,10 +55,12 @@
 			<div>
 				<dt class="font-semibold text-base-content">Purpose</dt>
 				<dd class="mt-1 text-base-content/70">
-					Record the annual health check against its required components and produce a graded report
-					— a complete / incomplete classification, a completeness percentage, the Health Action Plan
-					status, and flagged issues — to support the health record and prompt action where a flag is
-					raised.
+					Record the annual health check — reasonable adjustments and communication, physical
+					health, screening and immunisation uptake, a medication review including STOMP, mental
+					health and behaviour, syndrome-specific checks, and carer and social circumstances —
+					against its 18 required components, and produce a graded report: a complete / incomplete
+					classification, a completeness percentage, the Health Action Plan status, and flagged
+					issues, to support the health record and prompt action where a flag is raised.
 				</dd>
 			</div>
 			<div>

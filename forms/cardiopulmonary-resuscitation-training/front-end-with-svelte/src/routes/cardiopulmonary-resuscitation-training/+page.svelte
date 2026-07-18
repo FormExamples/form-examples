@@ -10,12 +10,12 @@
 		<p class="text-sm font-semibold uppercase tracking-wide text-primary">Cardiopulmonary Resuscitation Training</p>
 		<h1 class="mt-2 text-3xl font-bold text-base-content">BLS skills verification</h1>
 		<p class="mt-4 text-base leading-relaxed text-base-content/70">
-			A Basic Life Support (BLS) cardiopulmonary resuscitation competency assessment, completed as a
-			single continuous wizard: trainee details, scene safety, responsiveness and breathing,
-			emergency activation, chest compressions, airway and rescue breaths, AED use and shock
-			delivery, and team dynamics. The shared engine grades each rescuer Pass or Fail against the
-			AHA BLS Skills Verification Checklist, enforcing critical-action criteria and flagging issues
-			for the examiner.
+			A Basic Life Support (BLS) cardiopulmonary resuscitation competency assessment — trainee
+			details, scene safety, responsiveness and breathing, emergency activation, chest compressions,
+			airway and rescue breaths, AED use and shock delivery, and team dynamics — completed as a
+			single continuous wizard whose shared engine grades each rescuer Pass or Fail against the AHA
+			BLS Skills Verification Checklist, enforcing critical-action criteria and flagging issues for
+			the examiner.
 		</p>
 	</header>
 

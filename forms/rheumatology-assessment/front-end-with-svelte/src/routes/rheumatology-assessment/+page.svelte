@@ -11,11 +11,8 @@
 		<p class="text-sm font-semibold uppercase tracking-wide text-primary">Rheumatology Assessment</p>
 		<h1 class="mt-2 text-3xl font-bold text-base-content">Rheumatological evaluation</h1>
 		<p class="mt-4 text-base leading-relaxed text-base-content/70">
-			A comprehensive rheumatological evaluation completed as a single continuous wizard:
-			demographics, chief complaint, 28-joint assessment, disease history, extra-articular features,
-			laboratory results, medications, allergies, functional assessment, and comorbidities. The shared
-			engine computes the DAS28-ESR disease activity score, classifies disease activity, and flags
-			issues for the rheumatologist.
+			A comprehensive rheumatological evaluation completed as a single continuous wizard, scored by
+			the shared engine's DAS28-ESR disease activity classification.
 		</p>
 	</header>
 
@@ -50,9 +47,11 @@
 			<div>
 				<dt class="font-semibold text-base-content">Purpose</dt>
 				<dd class="mt-1 text-base-content/70">
-					Capture a structured rheumatology profile and produce a graded report — the DAS28-ESR
-					disease activity score, disease activity classification, and flagged issues — to support
-					rheumatology review.
+					Capture a structured rheumatology profile — demographics, chief complaint, 28-joint
+					assessment, disease history, extra-articular features, laboratory results, medications,
+					allergies, functional assessment, and comorbidities — and produce a graded report — the
+					DAS28-ESR disease activity score, disease activity classification, and flagged issues — to
+					support rheumatology review.
 				</dd>
 			</div>
 			<div>

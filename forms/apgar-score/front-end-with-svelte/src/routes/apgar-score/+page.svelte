@@ -11,11 +11,8 @@
 		<h1 class="mt-2 text-3xl font-bold text-base-content">Newborn Apgar scoring</h1>
 		<p class="mt-4 text-base leading-relaxed text-base-content/70">
 			A rapid assessment of a newborn's condition in the first minutes after birth, completed as a
-			single continuous wizard. Five signs — Appearance (skin colour), Pulse (heart rate), Grimace
-			(reflex irritability), Activity (muscle tone), and Respiration — are each scored 0, 1, or 2 and
-			summed to a total of 0 to 10 at each timepoint (1 minute, 5 minutes, and 10 minutes and beyond
-			whenever the 5-minute total is below 7). The shared engine derives each total's band (7-10
-			reassuring, 4-6 moderately low, 0-3 low), the trend across timepoints, and any safety flags.
+			single continuous wizard, and the shared engine derives each timepoint's total, band, trend,
+			and any safety flags.
 		</p>
 	</header>
 
@@ -50,9 +47,12 @@
 			<div>
 				<dt class="font-semibold text-base-content">Purpose</dt>
 				<dd class="mt-1 text-base-content/70">
-					Capture the five Apgar signs at each timepoint and produce a graded report — per-timepoint
-					total, band, trend, and flagged issues — to support timely newborn resuscitation and
-					escalation.
+					Capture the five Apgar signs — Appearance (skin colour), Pulse (heart rate), Grimace (reflex
+					irritability), Activity (muscle tone), and Respiration — each scored 0, 1, or 2 and summed
+					to a total of 0 to 10 at each timepoint (1 minute, 5 minutes, and 10 minutes and beyond
+					whenever the 5-minute total is below 7). Produce a graded report — per-timepoint total and
+					band (7-10 reassuring, 4-6 moderately low, 0-3 low), trend across timepoints, and flagged
+					issues — to support timely newborn resuscitation and escalation.
 				</dd>
 			</div>
 			<div>

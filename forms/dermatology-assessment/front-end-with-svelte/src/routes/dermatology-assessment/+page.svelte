@@ -7,10 +7,8 @@
 		<p class="text-sm font-semibold uppercase tracking-wide text-primary">Dermatology Assessment</p>
 		<h1 class="mt-2 text-3xl font-bold text-base-content">Dermatology quality-of-life evaluation</h1>
 		<p class="mt-4 text-base leading-relaxed text-base-content/70">
-			A single continuous wizard covering demographics, chief complaint, the DLQI questionnaire,
-			lesion characteristics, medical history, medications, allergies, family history, and social
-			history. The shared engine computes the Dermatology Life Quality Index (DLQI) score, derives an
-			impact category, and flags issues for the dermatologist.
+			A single continuous wizard that computes the Dermatology Life Quality Index (DLQI) score,
+			derives an impact category, and flags issues for the dermatologist.
 		</p>
 	</header>
 
@@ -44,8 +42,10 @@
 			<div>
 				<dt class="font-semibold text-base-content">Purpose</dt>
 				<dd class="mt-1 text-base-content/70">
-					Capture a structured dermatology profile and produce a graded report — DLQI score, impact
-					category, and flagged issues — to support dermatology review.
+					Capture a structured dermatology profile — demographics, chief complaint, the DLQI
+					questionnaire, lesion characteristics, medical history, medications, allergies, family
+					history, and social history — and produce a graded report — DLQI score, impact category,
+					and flagged issues — to support dermatology review.
 				</dd>
 			</div>
 			<div>

@@ -10,13 +10,12 @@
 		<p class="text-sm font-semibold uppercase tracking-wide text-primary">UK NHS England Medical Exemption Certificate</p>
 		<h1 class="mt-2 text-3xl font-bold text-base-content">FP92A medical exemption application</h1>
 		<p class="mt-4 text-base leading-relaxed text-base-content/70">
-			Capture the data needed for an FP92A medical exemption application as a single continuous
-			wizard: practitioner identification, patient identification, existing-exemption and
-			age / pregnancy checks, qualifying-condition selection and detail, disability / appliance
-			attestation, and the practitioner declaration. The shared engine evaluates eligibility against
-			the ten NHSBSA-recognised qualifying conditions and flags issues for the practitioner. NHSBSA
-			Bridge House only accepts the original paper form signed in ink — this app is a digital staging
-			tool to prepare and validate the data first.
+			A single continuous wizard for capturing the data needed for an FP92A medical exemption
+			application — practitioner and patient identification, existing-exemption and age / pregnancy
+			checks, qualifying-condition selection and detail, and disability / appliance attestation —
+			whose shared engine evaluates eligibility against the ten NHSBSA-recognised qualifying
+			conditions before the practitioner prints and posts the signed paper form to NHSBSA Bridge
+			House, which only accepts the original in ink.
 		</p>
 	</header>
 

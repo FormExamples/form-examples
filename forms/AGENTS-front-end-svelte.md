@@ -24,7 +24,8 @@ plural base directory; individual items use a dynamic `[id]` route parameter:
 | `src/routes/<slug>/<plural>/+page.svelte` | `/<slug>/<plural>/` | **Dashboard** — the collection list |
 | `src/routes/<slug>/<plural>/[id]/+page.svelte` | `/<slug>/<plural>/[id]` | **Input form** — the single-page wizard for one item (`[id] = new` to create) |
 | `src/routes/<slug>/<plural>/[id]/report/+page.svelte` | `/<slug>/<plural>/[id]/report` | Report view for one item (PDF via `report/pdf/+server.ts`) |
-| `src/routes/<slug>/+page.svelte` | `/<slug>/` | **Welcome page** — explains the work (purpose, spec, documentation) and shows prominent links to the form route and the dashboard route |
+| `src/routes/<slug>/+page.svelte` | `/<slug>/` | **Welcome page** — one-sentence summary, links to every route choice, then a detailed user-friendly explanation of the form and its specification |
+| `src/routes/+server.ts` | `/` | **Root redirect** — a bare `GET` handler that 307-redirects to `/<slug>/`, so visiting the dev server (or a deployed root) at `/` lands on the welcome page instead of 404ing |
 
 So for the `cardiology-request` form (slug), everything lives under
 `src/routes/cardiology-request/`: `/cardiology-request/cardiology-requests/` is
@@ -32,14 +33,40 @@ the dashboard list and `/cardiology-request/cardiology-requests/[id]` (e.g.
 `…/new`) is the input form. Internal route links (`href`/`goto`) are absolute
 and include the `/<slug>` prefix; `/api/` fetch paths do not. Do **not** put
 routes directly under `src/routes/` (no `<slug>/` parent) — that is the legacy
-layout.
+layout, with one exception: `src/routes/+server.ts` at the true root, whose
+only job is redirecting `/` to `/<slug>/`:
+
+```ts
+import { redirect } from '@sveltejs/kit';
+
+export function GET() {
+	redirect(307, '/<slug>/');
+}
+```
 
 The form-root (`/<slug>/`) is a **welcome page**, not a form and not a
-dashboard. It is a plain `+page.svelte` (no redirect loader) that explains the
-form's purpose, specification, and documentation, then offers two prominent
-links: one to the input form (`/<slug>/<plural>/new`) and one to the dashboard
-(`/<slug>/<plural>/`). The nav in `+layout.svelte` links its brand to
-`/<slug>/` and exposes Welcome / form / dashboard.
+dashboard. It is a plain `+page.svelte` (no redirect loader), structured in
+this order:
+
+1. **One-sentence summary.** A single sentence naming the form and what it's
+   for — not a paragraph. This is the whole `<h1>`/eyebrow standfirst; save
+   detail for step 3.
+2. **Links to every route choice.** A prominent link for each working
+   surface this form exposes — at minimum the input form
+   (`/<slug>/<plural>/new`) and the dashboard (`/<slug>/<plural>/`); forms
+   with additional surfaces (e.g. a report-view route) link those too. Put
+   the links right after the summary, above the detailed explanation, so a
+   returning user can jump straight in without reading further.
+3. **Detailed explanation, in user-friendly wording.** What the form
+   captures, why, and what the shared engine computes from it — then its
+   specification: that it's spec-driven (the living domain spec defines the
+   data model, the grading engine, and the flag rules, and the same engine
+   grades every surface) and what it's clinically/documentarily grounded in.
+   Plain language over jargon; this is the section a first-time visitor
+   reads to decide whether the tool is relevant to them.
+
+The nav in `+layout.svelte` links its brand to `/<slug>/` and exposes
+Welcome / form / dashboard.
 Reference implementations: `forms/cardiology-request/` and
 `forms/cardiology-response/`.
 

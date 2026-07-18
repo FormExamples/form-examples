@@ -15,11 +15,11 @@
 		</h1>
 		<p class="mt-4 text-base leading-relaxed text-base-content/70">
 			A clinical prediction tool for adults with non-valvular atrial fibrillation, completed as a
-			single continuous wizard. Eight weighted criteria — congestive heart failure, hypertension,
-			age &ge; 75 (2) or 65&ndash;74 (1), diabetes, prior stroke / TIA / thromboembolism (2),
-			vascular disease, and female sex category — sum to a total of 0 to 9. The shared engine derives
-			the risk band, the estimated annual stroke rate, and an anticoagulation recommendation, and
-			pairs with HAS-BLED for the bleeding-risk side of the treatment decision.
+			single continuous wizard, that sums eight weighted criteria — congestive heart failure,
+			hypertension, age &ge; 75 (2) or 65&ndash;74 (1), diabetes, prior stroke / TIA / thromboembolism
+			(2), vascular disease, and female sex category — to a total of 0 to 9, whose shared engine
+			derives the risk band, the estimated annual stroke rate, and an anticoagulation recommendation,
+			pairing with HAS-BLED for the bleeding-risk side of the treatment decision.
 		</p>
 	</header>
 

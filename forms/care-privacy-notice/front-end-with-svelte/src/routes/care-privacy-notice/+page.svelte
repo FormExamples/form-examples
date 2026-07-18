@@ -11,10 +11,10 @@
 		<p class="text-sm font-semibold uppercase tracking-wide text-primary">Care Privacy Notice</p>
 		<h1 class="mt-2 text-3xl font-bold text-base-content">Privacy notice acknowledgment</h1>
 		<p class="mt-4 text-base leading-relaxed text-base-content/70">
-			A read-and-acknowledge privacy notice based on the BMA GDPR template for GP practices,
-			completed as a single continuous wizard: practice configuration, the privacy notice itself,
-			and the patient's acknowledgment and signature. The shared engine validates completeness,
-			derives a Complete / Incomplete status, and flags issues for the practice.
+			A read-and-acknowledge privacy notice based on the BMA GDPR template for GP practices —
+			practice configuration, the privacy notice itself, and the patient's acknowledgment and
+			signature — completed as a single continuous wizard whose shared engine validates
+			completeness, derives a Complete / Incomplete status, and flags issues for the practice.
 		</p>
 	</header>
 

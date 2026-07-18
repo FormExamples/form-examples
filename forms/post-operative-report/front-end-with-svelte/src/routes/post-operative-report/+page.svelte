@@ -11,12 +11,10 @@
 		<p class="text-sm font-semibold uppercase tracking-wide text-primary">Post-Operative Report</p>
 		<h1 class="mt-2 text-3xl font-bold text-base-content">Structured operation note &amp; complication grading</h1>
 		<p class="mt-4 text-base leading-relaxed text-base-content/70">
-			A structured post-operative report completed as a single continuous wizard: patient details,
-			procedure details, surgical team, intra-operative findings, anaesthesia summary, estimated blood
-			loss and fluid balance, specimens and implants, immediate post-op status, complications, and the
-			onward plan. The shared engine grades any complications with the Clavien-Dindo classification of
-			surgical complications, reports the overall (worst) grade, and flags safety-critical issues for
-			the clinical team.
+			A structured post-operative report, completed as a single continuous wizard covering patient,
+			procedure, surgical-team, intra-operative, and recovery details, whose shared engine grades any
+			complications with the Clavien-Dindo classification of surgical complications, reports the
+			overall (worst) grade, and flags safety-critical issues for the clinical team.
 		</p>
 	</header>
 
@@ -51,9 +49,10 @@
 			<div>
 				<dt class="font-semibold text-base-content">Purpose</dt>
 				<dd class="mt-1 text-base-content/70">
-					Document the procedure, intra-operative findings, anaesthesia, specimens and implants,
-					immediate recovery status, complications, and onward plan, then produce a graded report —
-					overall Clavien-Dindo grade, per-complication grades, and flagged issues — to support
+					Document the patient and procedure details, surgical team, intra-operative findings,
+					anaesthesia, estimated blood loss and fluid balance, specimens and implants, immediate
+					recovery status, complications, and onward plan, then produce a graded report — overall
+					Clavien-Dindo grade, per-complication grades, and flagged issues — to support
 					post-operative care and clinical governance.
 				</dd>
 			</div>

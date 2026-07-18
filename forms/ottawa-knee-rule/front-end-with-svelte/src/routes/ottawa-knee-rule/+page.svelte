@@ -10,12 +10,10 @@
 		<p class="text-sm font-semibold uppercase tracking-wide text-primary">Ottawa Knee Rule</p>
 		<h1 class="mt-2 text-3xl font-bold text-base-content">Ottawa Knee Rule imaging decision</h1>
 		<p class="mt-4 text-base leading-relaxed text-base-content/70">
-			A validated clinical decision rule that decides whether a knee radiograph is needed after an
-			acute knee injury, completed as a single continuous wizard. It records five objective bedside
-			criteria and applies simple ANY-of logic: a knee X-ray is indicated when at least one criterion
-			is present, and not indicated when all five are absent. This is a decision rule, not a score
-			&mdash; presence of any single criterion is sufficient and the criteria are never summed or
-			weighted.
+			A validated clinical decision rule &mdash; not a score &mdash; that records five objective
+			bedside criteria after an acute knee injury through a single continuous wizard and applies
+			ANY-of logic to decide whether a knee radiograph is indicated, with no summing or weighting of
+			criteria.
 		</p>
 	</header>
 

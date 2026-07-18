@@ -14,11 +14,9 @@
 		</p>
 		<h1 class="mt-2 text-3xl font-bold text-base-content">UK HSE Management Standards survey</h1>
 		<p class="mt-4 text-base leading-relaxed text-base-content/70">
-			An anonymous employee survey completed as a single continuous wizard. It uses the UK Health and
-			Safety Executive (HSE) Management Standards Indicator Tool — 35 statements across seven
-			organisational domains: demands, control, manager support, peer support, relationships, role
-			clarity, and organisational change. The shared engine scores each domain against HSE percentile
-			benchmarks, derives an overall concern level, and flags issues for occupational health and HR.
+			An anonymous employee survey using the UK Health and Safety Executive (HSE) Management
+			Standards Indicator Tool that scores seven organisational domains against HSE percentile
+			benchmarks to derive an overall concern level for occupational health and HR.
 		</p>
 	</header>
 
@@ -53,7 +51,9 @@
 			<div>
 				<dt class="font-semibold text-base-content">Purpose</dt>
 				<dd class="mt-1 text-base-content/70">
-					Measure perceived work-related stress across the seven HSE Management Standards domains and
+					Measure perceived work-related stress via 35 statements across seven HSE Management
+					Standards domains — demands, control, manager support, peer support, relationships, role
+					clarity, and organisational change — scored against HSE percentile benchmarks, and
 					identify teams or individuals at elevated risk of work-related ill health.
 				</dd>
 			</div>

@@ -13,10 +13,8 @@
 		<h1 class="mt-2 text-3xl font-bold text-base-content">qSOFA bedside sepsis-risk screen</h1>
 		<p class="mt-4 text-base leading-relaxed text-base-content/70">
 			A bedside screen for adults with suspected or confirmed infection, completed as a single
-			continuous wizard. Three objective criteria — respiratory rate &ge; 22/min, altered mentation
-			(GCS &lt; 15), and systolic blood pressure &le; 100 mmHg — each score 1 point for a total of 0
-			to 3. The shared engine sums the score, derives the risk band, and flags qSOFA &ge; 2 as a
-			positive screen that prompts escalation to a full SOFA and sepsis workup.
+			continuous wizard, that scores three objective criteria and flags qSOFA &ge; 2 as a positive
+			screen that prompts escalation to a full SOFA and sepsis workup.
 		</p>
 	</header>
 
@@ -51,8 +49,10 @@
 			<div>
 				<dt class="font-semibold text-base-content">Purpose</dt>
 				<dd class="mt-1 text-base-content/70">
-					Capture the three qSOFA criteria and produce a graded report — score 0-3, risk band, and
-					flagged issues — to support timely sepsis escalation.
+					Capture the three qSOFA criteria — respiratory rate &ge; 22/min, altered mentation (GCS
+					&lt; 15), and systolic blood pressure &le; 100 mmHg, each scoring 1 point — and produce a
+					graded report — score 0-3, risk band, and flagged issues — to support timely sepsis
+					escalation.
 				</dd>
 			</div>
 			<div>

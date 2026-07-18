@@ -11,11 +11,9 @@
 		<p class="text-sm font-semibold uppercase tracking-wide text-primary">Advance Statement About Care</p>
 		<h1 class="mt-2 text-3xl font-bold text-base-content">Record wishes and preferences for future care</h1>
 		<p class="mt-4 text-base leading-relaxed text-base-content/70">
-			A structured advance statement completed as a single continuous wizard: personal information,
-			statement context, values and beliefs, care preferences, medical treatment wishes, communication
-			preferences, people important to me, practical matters, and signatures and witnesses. The shared
-			engine assesses the statement for completeness, classifies it as Incomplete, Partial, Complete, or
-			Verified, lists missing sections, and flags documentation and validity issues for review.
+			A structured advance statement, completed as a single continuous wizard, that records a person's
+			wishes and preferences about future care and is assessed by the shared engine for completeness
+			and documentation and validity issues.
 		</p>
 	</header>
 
@@ -50,8 +48,11 @@
 			<div>
 				<dt class="font-semibold text-base-content">Purpose</dt>
 				<dd class="mt-1 text-base-content/70">
-					Capture a person's wishes and preferences about future care and produce a completeness
-					assessment — overall level, completed and missing sections, and flagged validity issues — to
+					Capture a person's wishes and preferences about future care — personal information,
+					statement context, values and beliefs, care preferences, medical treatment wishes,
+					communication preferences, people important to me, practical matters, and signatures and
+					witnesses — and produce a completeness assessment: overall level (Incomplete, Partial,
+					Complete, or Verified), completed and missing sections, and flagged validity issues, to
 					support care planning and best-interests decisions.
 				</dd>
 			</div>

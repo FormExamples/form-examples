@@ -12,12 +12,12 @@
 			Confidential medical information — neurological
 		</h1>
 		<p class="mt-4 text-base leading-relaxed text-base-content/70">
-			The DVLA B1 form collects the medical information the UK Driver and Vehicle Licensing Agency
-			requires to assess fitness to drive following a neurological condition. It is completed as a
-			single continuous wizard: personal details, healthcare professionals, condition history,
-			treatment provider, blackouts, seizures and epilepsy, medication, VP shunt, daily living,
-			double vision, eyesight, vehicle adaptations, and the applicant's authorisation. The shared
-			engine validates the declaration for completeness and flags issues for clinician review.
+			The DVLA B1 form is a single continuous wizard — personal details, healthcare professionals,
+			condition history, treatment provider, blackouts, seizures and epilepsy, medication, VP shunt,
+			daily living, double vision, eyesight, vehicle adaptations, and the applicant's authorisation —
+			that collects the medical information the UK Driver and Vehicle Licensing Agency requires to
+			assess fitness to drive following a neurological condition, validated by a shared engine for
+			completeness and flagged for clinician review.
 		</p>
 	</header>
 

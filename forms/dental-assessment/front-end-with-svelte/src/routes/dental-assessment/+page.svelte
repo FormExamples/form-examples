@@ -11,10 +11,8 @@
 		<p class="text-sm font-semibold uppercase tracking-wide text-primary">Dental Assessment</p>
 		<h1 class="mt-2 text-3xl font-bold text-base-content">Oral health evaluation</h1>
 		<p class="mt-4 text-base leading-relaxed text-base-content/70">
-			A comprehensive oral health evaluation completed as a single continuous wizard: demographics,
-			chief complaint, dental history, DMFT assessment, periodontal assessment, oral examination,
-			medical history, current medications, and radiographic findings. The shared engine computes
-			the DMFT (Decayed, Missing, Filled Teeth) Index and its caries-risk category, and flags
+			A comprehensive oral health evaluation completed as a single continuous wizard, computing the
+			DMFT (Decayed, Missing, Filled Teeth) Index and its caries-risk category, and flagging
 			safety-critical issues for the dental clinician.
 		</p>
 	</header>
@@ -50,7 +48,9 @@
 			<div>
 				<dt class="font-semibold text-base-content">Purpose</dt>
 				<dd class="mt-1 text-base-content/70">
-					Capture a structured oral-health profile and produce a graded report — DMFT score,
+					Capture a structured oral-health profile — demographics, chief complaint, dental history,
+					DMFT assessment, periodontal assessment, oral examination, medical history, current
+					medications, and radiographic findings — and produce a graded report — DMFT score,
 					caries-risk category, and flagged issues — to support dental review.
 				</dd>
 			</div>

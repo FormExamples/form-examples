@@ -11,11 +11,10 @@
 		<p class="text-sm font-semibold uppercase tracking-wide text-primary">Sleep Quality Assessment</p>
 		<h1 class="mt-2 text-3xl font-bold text-base-content">Pittsburgh Sleep Quality Index</h1>
 		<p class="mt-4 text-base leading-relaxed text-base-content/70">
-			A structured sleep quality evaluation completed as a single continuous wizard: demographics,
-			sleep habits, latency, duration, efficiency, disturbances, daytime dysfunction, medication use,
-			and medical / lifestyle factors. The shared engine computes the PSQI Global Score (0–21) across
-			its seven components, classifies sleep quality, and flags safety-critical issues for the
-			clinician.
+			A structured, single-page wizard covering sleep habits, latency, duration, efficiency,
+			disturbances, daytime dysfunction, medication use, and medical / lifestyle factors, from which
+			the shared engine computes the PSQI Global Score, classifies sleep quality, and flags
+			safety-critical issues for the clinician.
 		</p>
 	</header>
 

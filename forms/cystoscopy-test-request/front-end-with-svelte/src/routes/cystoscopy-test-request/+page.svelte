@@ -14,10 +14,7 @@
 		</h1>
 		<p class="mt-4 text-base leading-relaxed text-base-content/70">
 			A UK NHS–aligned cystoscopy referral that a clinician completes to request a cystoscopic
-			examination of the lower urinary tract. It records the requested procedure, the clinical
-			indication and specific question, relevant history, symptoms and red flags, bleeding-risk
-			factors, and the requested urgency — then computes a four-axis vetting grade (appropriateness,
-			cancer-pathway urgency, request completeness, and pre-procedure risk) plus safety-critical
+			examination of the lower urinary tract, computing a four-axis vetting grade plus safety-critical
 			flags to support the urology department's triage and booking decision.
 		</p>
 	</header>
@@ -53,8 +50,11 @@
 			<div>
 				<dt class="font-semibold text-base-content">Purpose</dt>
 				<dd class="mt-1 text-base-content/70">
-					Capture why a patient needs a cystoscopy and how urgently, and produce a vetting report the
-					urology team can triage and book from.
+					Capture why a patient needs a cystoscopy and how urgently — the requested procedure,
+					clinical indication and specific question, relevant history, symptoms and red flags,
+					bleeding-risk factors, and requested urgency — and produce a four-axis vetting report
+					(appropriateness, cancer-pathway urgency, request completeness, and pre-procedure risk)
+					the urology team can triage and book from.
 				</dd>
 			</div>
 			<div>

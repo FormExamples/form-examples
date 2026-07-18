@@ -13,14 +13,9 @@
 		</h1>
 		<p class="mt-4 text-base leading-relaxed text-base-content/70">
 			A UK primary-care annual epilepsy review (NICE NG217), completed as a single continuous
-			wizard. It captures the position since the last review — seizure type and frequency,
-			anti-seizure medication and adherence, triggers, SUDEP discussion, injuries and status
-			epilepticus, safety (DVLA driving, bathing), valproate and pregnancy-prevention arrangements
-			for women of childbearing potential, mental health, and the care plan. This is a
-			<strong>documentation and decision-support</strong> tool, not a numeric score: the engine
-			classifies seizure <strong>control</strong> (seizure-free / controlled / uncontrolled), grades
-			review <strong>completeness</strong> (complete / partial / incomplete), and — independently —
-			raises safety <strong>flags</strong>. It does not diagnose or prescribe.
+			wizard, that classifies seizure control, grades review completeness, and raises safety flags
+			&mdash; a <strong>documentation and decision-support</strong> tool, not a numeric score,
+			diagnosis, or prescription.
 		</p>
 	</header>
 
@@ -55,10 +50,13 @@
 			<div>
 				<dt class="font-semibold text-base-content">Purpose</dt>
 				<dd class="mt-1 text-base-content/70">
-					Record the annual epilepsy review and produce a graded report — a seizure-control
-					classification, a review-completeness status, and safety flags — to support the clinical
-					record and prompt escalation where seizures are uncontrolled or a safety concern is
-					present.
+					Record the position since the last review — seizure type and frequency, anti-seizure
+					medication and adherence, triggers, SUDEP discussion, injuries and status epilepticus,
+					safety (DVLA driving, bathing), valproate and pregnancy-prevention arrangements for women
+					of childbearing potential, mental health, and the care plan — and produce a graded report:
+					a seizure-control classification, a review-completeness status, and safety flags, to
+					support the clinical record and prompt escalation where seizures are uncontrolled or a
+					safety concern is present.
 				</dd>
 			</div>
 			<div>

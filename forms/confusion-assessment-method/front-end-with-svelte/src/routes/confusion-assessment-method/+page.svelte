@@ -12,13 +12,11 @@
 		</p>
 		<h1 class="mt-2 text-3xl font-bold text-base-content">CAM bedside delirium screen</h1>
 		<p class="mt-4 text-base leading-relaxed text-base-content/70">
-			A bedside delirium screening instrument, completed as a single continuous wizard. It records
-			four observational features — acute onset and fluctuating course, inattention, disorganised
-			thinking, and altered level of consciousness — and applies the validated CAM diagnostic
-			algorithm <strong>1 AND 2 AND (3 OR 4)</strong> to classify delirium as present or absent.
-			This is a status / classification form: there is no numeric score. A CAM-ICU mode adapts the
-			same features for ventilated and non-verbal patients, and records an unable-to-assess result
-			for an unrousable patient.
+			A bedside delirium screening instrument, completed as a single continuous wizard, that
+			applies the validated CAM diagnostic algorithm to four observational features — acute
+			onset and fluctuating course, inattention, disorganised thinking, and altered level of
+			consciousness — to classify delirium as present or absent, with a CAM-ICU mode for
+			ventilated and non-verbal patients.
 		</p>
 	</header>
 

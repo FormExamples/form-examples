@@ -15,11 +15,7 @@
 		</h1>
 		<p class="mt-4 text-base leading-relaxed text-base-content/70">
 			A UK NHS–aligned lung-function / spirometry test request that a clinician completes to request
-			pulmonary function testing for a patient. It records the requested test, the clinical
-			indication and specific question, respiratory symptoms, smoking and inhaler background, and a
-			focused safety / contraindication screen — then computes a four-axis vetting grade
-			(appropriateness, safety / contraindication, request completeness, and triage priority) plus
-			safety-critical flags to support the lung-function department's triage and booking decision.
+			pulmonary function testing for a patient.
 		</p>
 	</header>
 
@@ -54,8 +50,12 @@
 			<div>
 				<dt class="font-semibold text-base-content">Purpose</dt>
 				<dd class="mt-1 text-base-content/70">
-					Capture why a patient needs pulmonary function testing and how urgently, and produce a
-					vetting report the lung-function department can triage and book from.
+					Capture why a patient needs pulmonary function testing and how urgently — the requested
+					test, clinical indication and specific question, respiratory symptoms, smoking and
+					inhaler background, and a focused safety / contraindication screen — and produce a
+					vetting report, scored across appropriateness, safety / contraindication, request
+					completeness, and triage priority, that the lung-function department can triage and book
+					from.
 				</dd>
 			</div>
 			<div>

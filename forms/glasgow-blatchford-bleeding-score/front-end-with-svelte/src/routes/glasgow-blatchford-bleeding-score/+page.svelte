@@ -14,12 +14,10 @@
 			Pre-endoscopy risk stratification for acute upper GI bleeding
 		</h1>
 		<p class="mt-4 text-base leading-relaxed text-base-content/70">
-			Score eight weighted admission parameters — blood urea, haemoglobin (sex-specific bands),
+			Scores eight weighted admission parameters — blood urea, haemoglobin (sex-specific bands),
 			systolic blood pressure, pulse, melaena, syncope, hepatic disease, and cardiac failure — in a
-			single continuous wizard. The shared engine sums the contributions into a total of 0-23 and
-			bands it: 0 is very low risk (consider outpatient management), 1-5 is low-moderate risk, and 6
-			or more is high risk (admit and arrange urgent endoscopy). Haemodynamic instability, severe
-			anaemia, and high scores are flagged for action.
+			single continuous wizard, summing them into a total of 0-23 that bands and flags a patient’s
+			risk of needing intervention for acute upper GI bleeding.
 		</p>
 	</header>
 
@@ -55,8 +53,11 @@
 				<dt class="font-semibold text-base-content">Purpose</dt>
 				<dd class="mt-1 text-base-content/70">
 					Stratify the risk that a patient with suspected acute upper GI bleeding will need
-					intervention or transfusion — a graded report with the total, risk band, per-parameter
-					points, and flagged issues to support the admit-or-discharge decision.
+					intervention or transfusion: a total of 0 is very-low risk (consider outpatient management),
+					1-5 is low-moderate risk, and 6 or more is high risk (admit and arrange urgent endoscopy) — a
+					graded report with the total, risk band, per-parameter points, and flagged issues
+					(haemodynamic instability, severe anaemia, and high scores) to support the admit-or-discharge
+					decision.
 				</dd>
 			</div>
 			<div>

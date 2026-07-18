@@ -13,12 +13,11 @@
 		</p>
 		<h1 class="mt-2 text-3xl font-bold text-base-content">PCL-5 PTSD screen</h1>
 		<p class="mt-4 text-base leading-relaxed text-base-content/70">
-			The PTSD Checklist for DSM-5 (PCL-5) completed as a single continuous wizard: demographics,
-			trauma event identification, and the 20 self-report items across the four DSM-5 symptom
-			clusters — intrusion (B), avoidance (C), negative alterations in cognitions and mood (D), and
-			alterations in arousal and reactivity (E). The shared engine sums the 0-4 item ratings, derives
-			a severity category, tests the DSM-5 provisional-diagnosis pattern, and flags safety-critical
-			issues for the clinician.
+			The PTSD Checklist for DSM-5 (PCL-5), completed as a single continuous wizard covering
+			demographics, trauma event identification, and 20 self-report items across the four DSM-5
+			symptom clusters, whose shared engine sums the 0-4 item ratings, derives a severity category,
+			tests the DSM-5 provisional-diagnosis pattern, and flags safety-critical issues for the
+			clinician.
 		</p>
 	</header>
 
@@ -53,7 +52,9 @@
 			<div>
 				<dt class="font-semibold text-base-content">Purpose</dt>
 				<dd class="mt-1 text-base-content/70">
-					Capture a structured trauma-symptom profile and produce a graded report — PCL-5 total
+					Capture a structured trauma-symptom profile across the four DSM-5 symptom clusters —
+					intrusion (B), avoidance (C), negative alterations in cognitions and mood (D), and
+					alterations in arousal and reactivity (E) — and produce a graded report — PCL-5 total
 					score, severity category, DSM-5 provisional-diagnosis status, and flagged issues — to
 					support clinical review.
 				</dd>

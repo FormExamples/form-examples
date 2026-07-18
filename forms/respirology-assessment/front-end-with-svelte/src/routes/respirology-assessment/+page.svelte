@@ -11,11 +11,8 @@
 		<p class="text-sm font-semibold uppercase tracking-wide text-primary">Respirology Assessment</p>
 		<h1 class="mt-2 text-3xl font-bold text-base-content">Respiratory evaluation</h1>
 		<p class="mt-4 text-base leading-relaxed text-base-content/70">
-			A comprehensive respiratory evaluation completed as a single continuous wizard: demographics,
-			chief complaint, dyspnoea, cough, respiratory history, pulmonary function, medications,
-			allergies, smoking and exposures, and sleep and functional status. The shared engine grades the
-			patient on the MRC (Medical Research Council) Dyspnoea Scale (grades 1–5), and flags
-			safety-critical issues for the clinician.
+			A comprehensive respiratory evaluation completed as a single continuous wizard, graded by the
+			shared engine on the MRC (Medical Research Council) Dyspnoea Scale (grades 1–5).
 		</p>
 	</header>
 
@@ -50,8 +47,10 @@
 			<div>
 				<dt class="font-semibold text-base-content">Purpose</dt>
 				<dd class="mt-1 text-base-content/70">
-					Capture a structured respiratory profile and produce a graded report — the MRC dyspnoea
-					grade, the rules that fired, and flagged issues — to support respirology review.
+					Capture a structured respiratory profile — demographics, chief complaint, dyspnoea, cough,
+					respiratory history, pulmonary function, medications, allergies, smoking and exposures, and
+					sleep and functional status — and produce a graded report — the MRC dyspnoea grade, the
+					rules that fired, and flagged issues — to support respirology review.
 				</dd>
 			</div>
 			<div>

@@ -11,11 +11,10 @@
 		<p class="text-sm font-semibold uppercase tracking-wide text-primary">Code of Conduct Notice</p>
 		<h1 class="mt-2 text-3xl font-bold text-base-content">Read-and-acknowledge notice</h1>
 		<p class="mt-4 text-base leading-relaxed text-base-content/70">
-			A read-and-acknowledge code of conduct notice presenting the twelve core principles that
-			medical-service providers and supporting staff must uphold, completed as a single continuous
-			wizard: recipient details, the code of conduct notice itself, and acknowledgement with
-			signature capture. The shared engine validates completeness, derives a Complete / Incomplete
-			status, and flags issues for the compliance officer.
+			A read-and-acknowledge notice presenting the twelve core code-of-conduct principles that
+			medical-service providers and supporting staff must uphold, completed as a single
+			continuous wizard that captures recipient details, acknowledgement, and signature, and
+			validates completeness for the compliance officer.
 		</p>
 	</header>
 

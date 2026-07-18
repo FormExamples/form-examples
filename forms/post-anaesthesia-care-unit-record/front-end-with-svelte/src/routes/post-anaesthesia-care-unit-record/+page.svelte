@@ -15,12 +15,10 @@
 		</h1>
 		<p class="mt-4 text-base leading-relaxed text-base-content/70">
 			A recovery-room record for adults emerging from anaesthesia or sedation, completed as a single
-			continuous wizard. The five Modified Aldrete parameters — activity, respiration, circulation,
-			consciousness, and oxygen saturation — each score 0, 1, or 2, for a total of 0 to 10. A total
-			&ge; 9 <strong>with the oxygen-saturation parameter scoring 2</strong> is the conventional
-			threshold for discharge from PACU. For day-surgery cases, an optional PADSS covers street
-			fitness for discharge home. The shared engine sums the score, derives the readiness band, and
-			raises red flags.
+			continuous wizard, whose shared engine sums the five Modified Aldrete parameters — activity,
+			respiration, circulation, consciousness, and oxygen saturation — into a 0-to-10 score, derives an
+			SpO2-gated discharge-readiness band, optionally scores the PADSS for day-surgery street fitness,
+			and raises red flags.
 		</p>
 	</header>
 
@@ -55,8 +53,10 @@
 			<div>
 				<dt class="font-semibold text-base-content">Purpose</dt>
 				<dd class="mt-1 text-base-content/70">
-					Document the recovery observations and produce a graded report — Aldrete total 0-10,
-					readiness band, optional PADSS, and flagged issues — to support a safe discharge decision.
+					Document the recovery observations and produce a graded report — Aldrete total 0-10, an
+					SpO2-gated readiness band (discharge-ready requires a total &ge; 9 with the
+					oxygen-saturation parameter scoring 2), optional PADSS, and flagged issues — to support a
+					safe discharge decision.
 				</dd>
 			</div>
 			<div>

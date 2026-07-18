@@ -13,11 +13,11 @@
 			Toxicology / poisons / therapeutic-drug-level request
 		</h1>
 		<p class="mt-4 text-base leading-relaxed text-base-content/70">
-			A clinician completes a single-page wizard that orders one or more toxicology assays
-			(paracetamol, salicylate, alcohol, drugs-of-abuse screen, therapeutic-drug levels, heavy
-			metals, and more). The engine computes a four-axis vetting grade — appropriateness
-			(TOXBASE / NPIS indication-to-assay match), ingestion-timing validity, request completeness,
-			and triage priority — plus safety-critical flags to support the laboratory's vetting decision.
+			A clinician completes a single-page wizard that orders one or more toxicology assays —
+			paracetamol, salicylate, alcohol, drugs-of-abuse screen, therapeutic-drug levels, heavy metals,
+			and more — from which the engine computes a four-axis vetting grade (appropriateness,
+			ingestion-timing validity, request completeness, and triage priority) plus safety-critical
+			flags to support the laboratory's vetting decision.
 		</p>
 	</header>
 
@@ -52,7 +52,9 @@
 			<div>
 				<dt class="font-semibold text-base-content">Purpose</dt>
 				<dd class="mt-1 text-base-content/70">
-					Capture which toxicology assays should be run, why, and how urgently — then produce a
+					Capture which toxicology assays should be run — paracetamol, salicylate, alcohol,
+					drugs-of-abuse screen, therapeutic-drug levels, heavy metals, and more — why, and how
+					urgently, using appropriateness (TOXBASE / NPIS indication-to-assay match), then produce a
 					vetting report the laboratory can triage from. A deliberate overdose or a symptomatic
 					patient escalates to stat handling.
 				</dd>

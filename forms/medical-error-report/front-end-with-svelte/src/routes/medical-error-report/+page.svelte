@@ -11,12 +11,9 @@
 		<p class="text-sm font-semibold uppercase tracking-wide text-primary">Medical Error Report</p>
 		<h1 class="mt-2 text-3xl font-bold text-base-content">Patient-safety incident report</h1>
 		<p class="mt-4 text-base leading-relaxed text-base-content/70">
-			A structured medical error report completed as a single continuous wizard: reporter
-			demographics, incident details, patient involvement, error classification, contributing
-			factors, immediate actions, patient outcome, root cause analysis, corrective actions, and
-			reporting / follow-up. The shared engine classifies the incident with the WHO Severity Scale and
-			the NCC MERP Harm Categories, derives an overall risk level, and flags issues for the safety
-			team.
+			A structured medical error report, completed as a single continuous wizard, that classifies
+			the incident with the WHO Severity Scale and the NCC MERP Harm Categories, derives an overall
+			risk level, and flags issues for the safety team.
 		</p>
 	</header>
 
@@ -51,8 +48,9 @@
 			<div>
 				<dt class="font-semibold text-base-content">Purpose</dt>
 				<dd class="mt-1 text-base-content/70">
-					Capture a structured account of a medical error and produce a graded report — WHO severity,
-					NCC MERP category, overall risk, and flagged issues — to support incident review and
+					Capture a structured account of a medical error — including contributing factors, root
+					cause analysis, and corrective actions — and produce a graded report: WHO severity, NCC
+					MERP category, overall risk, and flagged issues to support incident review and
 					patient-safety improvement.
 				</dd>
 			</div>

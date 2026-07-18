@@ -12,12 +12,9 @@
 		</p>
 		<h1 class="mt-2 text-3xl font-bold text-base-content">ABPM monitoring request &amp; vetting</h1>
 		<p class="mt-4 text-base leading-relaxed text-base-content/70">
-			A UK NHS–aligned ambulatory blood pressure monitoring (ABPM) request completed as a single
-			continuous wizard: requesting clinician, patient identification, requested test, clinic blood
-			pressure, symptoms and accuracy factors, and triage. The shared engine grades each request on
-			four independent axes — appropriateness (NICE NG136), measurement suitability (BIHS),
-			request completeness, and triage priority — and raises safety-critical flags such as severe or
-			accelerated hypertension.
+			A UK NHS–aligned ambulatory blood pressure monitoring (ABPM) request, completed as a single
+			continuous wizard, that the shared engine grades on four independent axes and flags as
+			safety-critical when needed.
 		</p>
 	</header>
 
@@ -52,9 +49,12 @@
 			<div>
 				<dt class="font-semibold text-base-content">Purpose</dt>
 				<dd class="mt-1 text-base-content/70">
-					Capture a structured ABPM referral and produce a four-axis vetting report —
-					appropriateness, suitability, completeness, triage priority, a recommendation, and safety
-					flags — to support the monitoring service's triage and booking decision.
+					Capture a structured ABPM referral — requesting clinician, patient identification,
+					requested test, clinic blood pressure, symptoms and accuracy factors, and triage — and
+					produce a four-axis vetting report: appropriateness (NICE NG136), measurement suitability
+					(BIHS), completeness, triage priority, a recommendation, and safety flags such as severe
+					or accelerated hypertension, to support the monitoring service's triage and booking
+					decision.
 				</dd>
 			</div>
 			<div>

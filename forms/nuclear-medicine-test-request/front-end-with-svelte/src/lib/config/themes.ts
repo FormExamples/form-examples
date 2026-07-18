@@ -59,4 +59,4 @@ export const THEME_OPTIONS: ThemeOption[] = THEME_VALUES.map((value) => ({
 export const DEFAULT_THEME = 'light';
 
 /** localStorage key for the persisted theme selection. */
-export const THEME_STORAGE_KEY = 'cardiology-request.theme.v1';
+export const THEME_STORAGE_KEY = 'nuclear-medicine-test-request.theme.v1';

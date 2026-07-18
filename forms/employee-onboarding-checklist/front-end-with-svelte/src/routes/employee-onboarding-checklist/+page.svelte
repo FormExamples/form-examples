@@ -11,11 +11,9 @@
 		<p class="text-sm font-semibold uppercase tracking-wide text-primary">Employee Onboarding Checklist</p>
 		<h1 class="mt-2 text-3xl font-bold text-base-content">Healthcare staff onboarding</h1>
 		<p class="mt-4 text-base leading-relaxed text-base-content/70">
-			A structured onboarding checklist for healthcare staff completed as a single continuous wizard:
-			employee details, pre-employment checks, occupational health, mandatory training, professional
-			registration, IT systems and access, uniform and ID badge, induction programme, probation and
-			supervision, and sign-off and compliance. The shared engine computes a completion percentage,
-			derives an overall onboarding risk level, and flags outstanding items for HR.
+			A structured onboarding checklist for healthcare staff, completed as a single continuous
+			wizard, that the shared engine grades for completion percentage, overall onboarding risk
+			level, and outstanding items flagged for HR.
 		</p>
 	</header>
 
@@ -50,9 +48,11 @@
 			<div>
 				<dt class="font-semibold text-base-content">Purpose</dt>
 				<dd class="mt-1 text-base-content/70">
-					Capture a structured onboarding profile and produce a graded report — completion
-					percentage, completion status, overall risk, and flagged items — to support HR review and
-					safe deployment of new staff.
+					Capture a structured onboarding profile — employee details, pre-employment checks,
+					occupational health, mandatory training, professional registration, IT systems and access,
+					uniform and ID badge, induction programme, probation and supervision, and sign-off and
+					compliance — and produce a graded report: completion percentage, completion status,
+					overall risk, and flagged items, to support HR review and safe deployment of new staff.
 				</dd>
 			</div>
 			<div>

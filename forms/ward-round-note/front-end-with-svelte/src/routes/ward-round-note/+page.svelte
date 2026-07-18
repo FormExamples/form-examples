@@ -12,18 +12,10 @@
 			Ward Round Note — a daily inpatient review
 		</h1>
 		<p class="mt-4 text-base leading-relaxed text-base-content/70">
-			A daily inpatient review documented at the bedside during a ward round, completed as a single
-			continuous wizard across ten review components — review header, overnight events, current
-			problems and progress, examination and NEWS2, investigations reviewed, VTE assessment status,
-			medication changes, plan and jobs, escalation / ceiling-of-care status, and estimated
-			discharge. This is a <strong>documentation and completeness</strong> instrument, not a numeric
-			score: the engine grades the entry <strong>Complete</strong>, <strong>Partial</strong>, or
-			<strong>Incomplete</strong>, reports a completeness percentage over the eight required
-			components, and — independently — raises safety flags (a deteriorating NEWS2 needing
-			escalation, a VTE assessment not done, no plan documented, or abnormal results not actioned).
-			An explicit negative — "no changes", "none outstanding" — counts as documented. A Complete
-			grade means the entry is well documented so another clinician can safely continue care between
-			shifts — not that the clinical care was correct.
+			A daily inpatient review, documented at the bedside during a ward round as a single continuous
+			wizard across ten review components, that this <strong>documentation and completeness</strong>
+			instrument grades <strong>Complete</strong>, <strong>Partial</strong>, or
+			<strong>Incomplete</strong> and independently checks for safety flags requiring escalation.
 		</p>
 	</header>
 
@@ -58,10 +50,17 @@
 			<div>
 				<dt class="font-semibold text-base-content">Purpose</dt>
 				<dd class="mt-1 text-base-content/70">
-					Record a single daily ward round review across the ten review components and produce a
-					graded report — a complete / partial / incomplete classification, a completeness
-					percentage, per-component presence, and flagged issues — to support continuity of care
-					between shifts and prompt escalation and safety-netting.
+					Record a single daily ward round review across the ten review components — review header,
+					overnight events, current problems and progress, examination and NEWS2, investigations
+					reviewed, VTE assessment status, medication changes, plan and jobs, escalation /
+					ceiling-of-care status, and estimated discharge — and produce a graded report: a
+					complete / partial / incomplete classification, a completeness percentage over the eight
+					required components, per-component presence, and independently raised safety flags (a
+					deteriorating NEWS2 needing escalation, a VTE assessment not done, no plan documented, or
+					abnormal results not actioned — an explicit negative such as "no changes" counts as
+					documented) — to support continuity of care between shifts and prompt escalation and
+					safety-netting. A Complete grade means the entry is well documented for handover, not
+					that the clinical care itself was correct.
 				</dd>
 			</div>
 			<div>

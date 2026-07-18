@@ -14,11 +14,8 @@
 		<h1 class="mt-2 text-3xl font-bold text-base-content">Patient pre-operative health review</h1>
 		<p class="mt-4 text-base leading-relaxed text-base-content/70">
 			A patient-completed pre-operative health questionnaire, captured as a single continuous wizard
-			spanning 16 sections: demographics, cardiovascular, respiratory, renal, hepatic, endocrine,
-			neurological, haematological, musculoskeletal and airway, gastrointestinal, medications,
-			allergies, previous anaesthesia, social history, functional capacity, and pregnancy. The shared
-			engine computes an ASA (American Society of Anesthesiologists) Physical Status grade and flags
-			safety-critical issues for the anaesthetist.
+			across 16 sections, that computes an ASA (American Society of Anesthesiologists) Physical Status
+			grade and flags safety-critical issues for the anaesthetist.
 		</p>
 	</header>
 
@@ -53,8 +50,11 @@
 			<div>
 				<dt class="font-semibold text-base-content">Purpose</dt>
 				<dd class="mt-1 text-base-content/70">
-					Capture a structured pre-operative health profile and produce a graded report — ASA
-					Physical Status grade and flagged issues — to support anaesthetic planning.
+					Capture a structured pre-operative health profile — spanning demographics, cardiovascular,
+					respiratory, renal, hepatic, endocrine, neurological, haematological, musculoskeletal and
+					airway, gastrointestinal, medications, allergies, previous anaesthesia, social history,
+					functional capacity, and pregnancy — and produce a graded report — ASA Physical Status
+					grade and flagged issues — to support anaesthetic planning.
 				</dd>
 			</div>
 			<div>

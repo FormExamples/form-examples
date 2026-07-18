@@ -13,12 +13,11 @@
 			Urine pathology test request / order
 		</h1>
 		<p class="mt-4 text-base leading-relaxed text-base-content/70">
-			A UK NHS–aligned urine pathology test request that a clinician completes to order one or more
-			urine investigations for a patient. It records the requested test panel, the clinical
-			indication and details, symptoms and red flags, the specimen type and collection timing, and
-			the requested urgency — then computes a four-axis grade (appropriateness, preanalytical
-			specimen suitability, request completeness, and triage priority) plus safety-critical flags to
-			support the laboratory's triage and acceptance decision.
+			A UK NHS–aligned single-page wizard for ordering one or more urine investigations, recording the
+			requested test panel, clinical indication, symptoms and red flags, and specimen type and
+			collection timing, then computing a four-axis grade (appropriateness, preanalytical specimen
+			suitability, request completeness, and triage priority) plus safety-critical flags to support
+			the laboratory's triage and acceptance decision.
 		</p>
 	</header>
 

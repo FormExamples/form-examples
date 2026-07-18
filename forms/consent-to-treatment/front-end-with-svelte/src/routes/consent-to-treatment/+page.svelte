@@ -11,11 +11,9 @@
 		<p class="text-sm font-semibold uppercase tracking-wide text-primary">Consent to Treatment</p>
 		<h1 class="mt-2 text-3xl font-bold text-base-content">Informed consent for medical procedures</h1>
 		<p class="mt-4 text-base leading-relaxed text-base-content/70">
-			An informed-consent form completed as a single continuous wizard: patient information,
-			procedure details, risks and benefits, alternative treatments, anesthesia information,
-			questions and understanding, patient rights, and signature and consent. The shared engine
-			validates the form for completeness of every required section and flags safety-critical issues
-			for the clinician.
+			An informed-consent form for medical procedures, completed as a single continuous
+			wizard, that validates every required section for completeness and flags safety-critical
+			issues for the clinician.
 		</p>
 	</header>
 

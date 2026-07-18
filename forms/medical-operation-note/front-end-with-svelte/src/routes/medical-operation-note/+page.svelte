@@ -11,12 +11,9 @@
 		<p class="text-sm font-semibold uppercase tracking-wide text-primary">Medical Operation Note</p>
 		<h1 class="mt-2 text-3xl font-bold text-base-content">Operating-team surgical record</h1>
 		<p class="mt-4 text-base leading-relaxed text-base-content/70">
-			A contemporaneous operating-team record completed as a single continuous wizard: operation and
-			patient identification, surgical team, diagnoses and procedures, anaesthesia, position and
-			approach, operative findings, materials and implants, drains and specimens, safety counts and
-			estimated blood loss, post-operative plan, and sign-off. The shared engine computes the
-			composite operative-risk grade (Routine / Complicated / High-risk / Critical) using the
-			max-grade algorithm, with Clavien–Dindo and ASA context, and raises the WHO Sign-Out safety
+			A contemporaneous operating-team surgical record, completed as a single continuous wizard,
+			that computes a composite operative-risk grade (Routine / Complicated / High-risk / Critical)
+			via a max-grade algorithm with Clavien–Dindo and ASA context, and raises WHO Sign-Out safety
 			flags for the surgical team.
 		</p>
 	</header>

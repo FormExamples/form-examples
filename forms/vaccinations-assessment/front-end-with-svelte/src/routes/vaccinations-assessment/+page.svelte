@@ -11,11 +11,11 @@
 		<p class="text-sm font-semibold uppercase tracking-wide text-primary">Vaccinations Assessment</p>
 		<h1 class="mt-2 text-3xl font-bold text-base-content">Immunisation schedule compliance</h1>
 		<p class="mt-4 text-base leading-relaxed text-base-content/70">
-			A comprehensive vaccinations assessment completed as a single continuous wizard: patient
-			information, immunisation history, childhood, adult, travel and occupational vaccinations,
-			contraindications and allergies, consent, administration record, and clinical review. The
-			shared engine computes a vaccination completeness score, classifies the patient as up to date,
-			partially complete, overdue, or contraindicated, and flags issues for the immunisation nurse.
+			A comprehensive vaccinations assessment completed as a single continuous wizard covering
+			immunisation history, childhood, adult, travel, and occupational vaccinations, contraindications
+			and allergies, and consent, whose shared engine computes a vaccination completeness score,
+			classifies the patient as up to date, partially complete, overdue, or contraindicated, and flags
+			issues for the immunisation nurse.
 		</p>
 	</header>
 

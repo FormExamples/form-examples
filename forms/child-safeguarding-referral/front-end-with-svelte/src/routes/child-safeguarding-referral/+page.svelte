@@ -12,13 +12,9 @@
 		</p>
 		<h1 class="mt-2 text-3xl font-bold text-base-content">Refer a child to children’s social care</h1>
 		<p class="mt-4 text-base leading-relaxed text-base-content/70">
-			A structured referral to children’s social care when a professional believes a child may be
-			at risk of harm, completed as a single continuous wizard. It records the referrer and child
-			details, the concern or allegation, the category of abuse, immediate risk and safety, the
-			consent / information-sharing basis, who else has been informed, and the action requested.
-			This is a documentation-completeness and risk-classification instrument, not a score: the
-			shared engine grades the referral complete, partial, or incomplete, classifies its urgency
-			(emergency, urgent s47, or standard s17), and raises safeguarding flags.
+			A structured referral to children’s social care, completed as a single continuous wizard,
+			that grades a professional’s safeguarding concern about a child’s risk of harm for
+			completeness and classifies its urgency (emergency, urgent s47, or standard s17).
 		</p>
 	</header>
 
@@ -53,8 +49,11 @@
 			<div>
 				<dt class="font-semibold text-base-content">Purpose</dt>
 				<dd class="mt-1 text-base-content/70">
-					Record and route a referral — a completeness status, an urgency classification,
-					mandatory-requirement results, and safeguarding flags — not a clinical score.
+					Record and route a referral — capturing referrer and child details, the concern or
+					allegation, the category of abuse, immediate risk and safety, the consent /
+					information-sharing basis, who else has been informed, and the action requested — to
+					produce a completeness status, an urgency classification, mandatory-requirement results,
+					and safeguarding flags; not a clinical score.
 				</dd>
 			</div>
 			<div>

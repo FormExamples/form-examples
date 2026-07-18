@@ -11,11 +11,9 @@
 		<p class="text-sm font-semibold uppercase tracking-wide text-primary">Allergy Skin Test Request</p>
 		<h1 class="mt-2 text-3xl font-bold text-base-content">Allergy diagnostic testing referral</h1>
 		<p class="mt-4 text-base leading-relaxed text-base-content/70">
-			A UK NHS–aligned allergy testing request completed as a single continuous wizard: requesting
-			clinician, patient identification, requested test and allergen panels, clinical indication,
-			validity and safety history, and triage. The shared engine grades each request on four
-			independent axes — appropriateness, validity and safety, request completeness, and triage
-			priority — raises safety flags, and produces a vetting recommendation for the allergy service.
+			A UK NHS–aligned allergy testing request, completed as a single continuous wizard, that the
+			shared engine grades on four independent axes and turns into a vetting recommendation for the
+			allergy service.
 		</p>
 	</header>
 
@@ -50,9 +48,11 @@
 			<div>
 				<dt class="font-semibold text-base-content">Purpose</dt>
 				<dd class="mt-1 text-base-content/70">
-					Capture a structured allergy testing referral and produce a graded vetting report — four-axis
-					grade, safety flags, and a recommendation — to support the allergy service's triage and
-					booking decision.
+					Capture a structured allergy testing referral — requesting clinician, patient
+					identification, requested test and allergen panels, clinical indication, validity and
+					safety history, and triage — and produce a graded vetting report: appropriateness,
+					validity and safety, request completeness, and triage priority, plus safety flags and a
+					recommendation, to support the allergy service's triage and booking decision.
 				</dd>
 			</div>
 			<div>

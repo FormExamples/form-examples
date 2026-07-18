@@ -12,11 +12,8 @@
 		<h1 class="mt-2 text-3xl font-bold text-base-content">Vascular angiography request</h1>
 		<p class="mt-4 text-base leading-relaxed text-base-content/70">
 			A UK NHS–aligned vascular angiography request (referral), completed as a single continuous
-			wizard: requesting clinician, patient identification, the requested examination, contrast and
-			renal safety, bleeding and anticoagulation, pregnancy and radiation, then triage. The shared
-			engine grades each request on four independent axes — appropriateness (ACR / RCR iRefer),
-			contrast / radiation safety (ESUR / IR(ME)R), request completeness, and triage priority — and
-			raises safety-critical flags to support the imaging department's vetting and booking decision.
+			wizard, that the shared engine grades on four independent axes and flags for safety to support
+			the imaging department's vetting and booking decision.
 		</p>
 	</header>
 
@@ -51,9 +48,12 @@
 			<div>
 				<dt class="font-semibold text-base-content">Purpose</dt>
 				<dd class="mt-1 text-base-content/70">
-					Capture a structured vascular angiography request and produce a vetting report — the
-					four-axis grade, recommendation, and safety flags — to support imaging-department triage
-					and booking.
+					Capture a structured vascular angiography request — requesting clinician, patient
+					identification, the requested examination, contrast and renal safety, bleeding and
+					anticoagulation, pregnancy and radiation, and triage — and produce a vetting report:
+					appropriateness (ACR / RCR iRefer), contrast / radiation safety (ESUR / IR(ME)R), request
+					completeness, and triage priority, plus a recommendation and safety flags, to support
+					imaging-department triage and booking.
 				</dd>
 			</div>
 			<div>

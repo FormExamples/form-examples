@@ -15,10 +15,9 @@
 		<h1 class="mt-2 text-3xl font-bold text-base-content">Discharge back to primary care</h1>
 		<p class="mt-4 text-base leading-relaxed text-base-content/70">
 			The World Health Organization standardised counter-referral form, completed as a single
-			continuous wizard following the SBAR communication framework: patient identification, facility
-			details, Situation, Background, Assessment, Recommendations, and provider sign-off. The shared
-			engine checks the form for completeness and flags clinically significant issues for the primary
-			care provider receiving the patient.
+			continuous SBAR (Situation, Background, Assessment, Recommendations) wizard, whose shared engine
+			checks completeness and flags clinically significant issues for the primary care provider
+			receiving the patient.
 		</p>
 	</header>
 
@@ -53,9 +52,10 @@
 			<div>
 				<dt class="font-semibold text-base-content">Purpose</dt>
 				<dd class="mt-1 text-base-content/70">
-					Capture a structured counter-referral when a referral facility discharges a patient back to
-					primary care, and produce a completeness summary plus flagged issues to support a safe
-					handover.
+					Capture a structured counter-referral — patient identification, facility details,
+					Situation, Background, Assessment, Recommendations, and provider sign-off — when a
+					referral facility discharges a patient back to primary care, and produce a completeness
+					summary plus flagged issues to support a safe handover.
 				</dd>
 			</div>
 			<div>

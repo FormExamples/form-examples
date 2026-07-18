@@ -11,11 +11,11 @@
 		<p class="text-sm font-semibold uppercase tracking-wide text-primary">Organ Donation Assessment</p>
 		<h1 class="mt-2 text-3xl font-bold text-base-content">Donor suitability evaluation</h1>
 		<p class="mt-4 text-base leading-relaxed text-base-content/70">
-			A comprehensive organ-donor evaluation completed as a single continuous wizard: demographics,
-			donor type and registration, medical history, organ function, infectious-disease screening,
-			immunological compatibility, surgical assessment, and — for living donors — psychological and
-			ethical / legal requirements. The shared engine classifies the donor with the Donor Risk Index
-			and organ-specific suitability scoring, deriving an eligibility decision (suitable,
+			A comprehensive organ-donor evaluation — covering demographics, donor type and
+			registration, medical history, organ function, infectious-disease screening, immunological
+			compatibility, surgical assessment, and, for living donors, psychological and ethical /
+			legal requirements — whose shared engine classifies the donor with the Donor Risk Index and
+			organ-specific suitability scoring, deriving an eligibility decision (suitable,
 			conditionally suitable, unsuitable), an overall risk level, and flagged issues for the donor
 			assessment team.
 		</p>

@@ -14,13 +14,11 @@
 			A patient-centred whole-medicines review
 		</h1>
 		<p class="mt-4 text-base leading-relaxed text-base-content/70">
-			Conduct a comprehensive medication review for people with problematic polypharmacy, frailty,
-			or high-risk medicines, completed as a single continuous wizard. Record the patient's problems
-			and priorities, add one row per medicine with its indication, adherence, and anticholinergic
-			burden, then agree monitoring, goals, and a plan. The shared engine derives a review status
-			&mdash; Complete or Incomplete &mdash; a polypharmacy and anticholinergic-burden indicator, and
-			a set of flags. This is a documentation instrument with partial scoring, not a numeric
-			diagnostic score.
+			A patient-centred, single continuous wizard that reviews problematic polypharmacy, frailty, or
+			high-risk medicines &mdash; recording the patient's problems and priorities, a per-medicine list
+			with indication, adherence, and anticholinergic burden, and an agreed monitoring plan &mdash;
+			from which the shared engine derives a review status (Complete or Incomplete), a polypharmacy
+			and anticholinergic-burden indicator, and a set of flags.
 		</p>
 	</header>
 
@@ -58,7 +56,8 @@
 				<dd class="mt-1 text-base-content/70">
 					Document the review and produce a graded report &mdash; review status, burden band,
 					anticholinergic-burden sum, polypharmacy count, and flagged issues &mdash; to support safe
-					medicines optimisation.
+					medicines optimisation. This is a documentation instrument with partial scoring, not a
+					numeric diagnostic score.
 				</dd>
 			</div>
 			<div>

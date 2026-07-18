@@ -12,11 +12,11 @@
 		<p class="mt-4 text-base leading-relaxed text-base-content/70">
 			A structured record of a cervical screening (smear) encounter under the UK NHS Cervical
 			Screening Programme, using high-risk HPV (hrHPV) primary screening with reflex cytology on
-			HPV-positive samples, completed as a single continuous wizard. It documents eligibility,
+			HPV-positive samples, completed as a single continuous wizard that documents eligibility,
 			consent, sample adequacy, the primary hrHPV result, and reflex cytology, then classifies the
 			<strong>result</strong> and the <strong>management outcome</strong> — routine recall, early
-			repeat, colposcopy referral, or cease — and raises safety flags. This is a documentation and
-			result-classification form: there is no numeric score.
+			repeat, colposcopy referral, or cease — and raises safety flags (a documentation and
+			result-classification form, with no numeric score).
 		</p>
 	</header>
 

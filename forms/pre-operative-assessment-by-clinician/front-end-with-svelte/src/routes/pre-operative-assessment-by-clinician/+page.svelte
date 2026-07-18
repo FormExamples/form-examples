@@ -14,13 +14,10 @@
 		</p>
 		<h1 class="mt-2 text-3xl font-bold text-base-content">Clinician pre-operative assessment</h1>
 		<p class="mt-4 text-base leading-relaxed text-base-content/70">
-			A clinician-driven pre-operative evaluation completed as a single continuous wizard across 16
-			body-system sections: clinician and patient identification, planned procedure, vitals, airway,
-			cardiovascular, respiratory, neurological, renal/hepatic, haematology, endocrine,
-			gastrointestinal, musculoskeletal, medications and allergies, functional capacity, anaesthesia
-			plan, and sign-off. The shared engine computes the ASA Physical Status grade plus Mallampati,
-			RCRI, STOP-BANG, and Clinical Frailty Scale, derives a composite perioperative risk, and raises
-			safety flags for the anaesthetist.
+			A clinician-driven pre-operative evaluation, completed as a single continuous wizard across 16
+			body-system sections, that computes the ASA Physical Status grade plus Mallampati, RCRI,
+			STOP-BANG, and Clinical Frailty Scale, derives a composite perioperative risk, and raises safety
+			flags for the anaesthetist.
 		</p>
 	</header>
 
@@ -55,9 +52,12 @@
 			<div>
 				<dt class="font-semibold text-base-content">Purpose</dt>
 				<dd class="mt-1 text-base-content/70">
-					Capture structured objective findings across 16 body systems and produce a graded report —
-					computed and final ASA grade, Mallampati / RCRI / STOP-BANG / CFS scores, composite risk,
-					and safety flags — to support anaesthetic review and sign-off.
+					Capture structured objective findings across 16 body-system sections — clinician and patient
+					identification, planned procedure, vitals, airway, cardiovascular, respiratory,
+					neurological, renal/hepatic, haematology, endocrine, gastrointestinal, musculoskeletal,
+					medications and allergies, functional capacity, anaesthesia plan, and sign-off — and
+					produce a graded report — computed and final ASA grade, Mallampati / RCRI / STOP-BANG / CFS
+					scores, composite risk, and safety flags — to support anaesthetic review and sign-off.
 				</dd>
 			</div>
 			<div>

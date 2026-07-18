@@ -13,11 +13,9 @@
 		<h1 class="mt-2 text-3xl font-bold text-base-content">WHO "yellow card" — IHR 2005 Annex 6</h1>
 		<p class="mt-4 text-base leading-relaxed text-base-content/70">
 			The WHO model certificate used under the International Health Regulations (2005), Annex 6, to
-			record vaccinations or prophylaxis required for international travel. Completed as a single
-			continuous wizard: centre and supervising clinician, vaccinee identity and consent, travel
-			context, and each vaccination entry. The shared engine validates the certificate against rules
-			VAL001–VAL012, computes per-entry validity (yellow fever: vaccination + 10 days, lifetime per
-			the 2016 IHR amendment), and flags any errors and warnings.
+			record vaccinations or prophylaxis required for international travel, completed as a single
+			continuous wizard whose shared engine validates the certificate and computes per-entry
+			validity.
 		</p>
 	</header>
 
@@ -52,8 +50,11 @@
 			<div>
 				<dt class="font-semibold text-base-content">Purpose</dt>
 				<dd class="mt-1 text-base-content/70">
-					Capture a structured vaccination record and produce a validated certificate — overall
-					validity, per-entry validity dates, and the fired-rule report — for international travel.
+					Capture a structured vaccination record — centre and supervising clinician, vaccinee
+					identity and consent, travel context, and each vaccination entry — and produce a
+					validated certificate: overall validity against rules VAL001–VAL012, per-entry validity
+					dates (yellow fever: vaccination + 10 days, lifetime per the 2016 IHR amendment), and the
+					fired-rule report, for international travel.
 				</dd>
 			</div>
 			<div>

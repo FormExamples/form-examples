@@ -11,11 +11,10 @@
 		<p class="text-sm font-semibold uppercase tracking-wide text-primary">Vaccinations Checklist</p>
 		<h1 class="mt-2 text-3xl font-bold text-base-content">Immunisation status review</h1>
 		<p class="mt-4 text-base leading-relaxed text-base-content/70">
-			A comprehensive immunisation review completed as a single continuous wizard: demographics,
-			vaccination history, childhood immunisations, occupational, travel, COVID-19 and influenza
-			vaccines, contraindications and allergies, serology, and schedule / compliance. The shared
-			engine classifies the patient's vaccination compliance, derives an overall exposure risk level,
-			and flags safety-critical issues for the clinician.
+			A comprehensive immunisation review completed as a single continuous wizard covering childhood,
+			occupational, travel, COVID-19, and influenza vaccination history, contraindications and
+			allergies, and serology, whose shared engine classifies the patient's vaccination compliance,
+			derives an overall exposure risk level, and flags safety-critical issues for the clinician.
 		</p>
 	</header>
 

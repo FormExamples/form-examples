@@ -11,12 +11,9 @@
 		<p class="text-sm font-semibold uppercase tracking-wide text-primary">Gastroenterology Assessment</p>
 		<h1 class="mt-2 text-3xl font-bold text-base-content">Gastrointestinal symptom evaluation</h1>
 		<p class="mt-4 text-base leading-relaxed text-base-content/70">
-			A comprehensive gastroenterological evaluation completed as a single continuous wizard:
-			demographics, chief complaint, upper GI symptoms, lower GI symptoms, abdominal pain, liver and
-			pancreas, previous GI history, current medications, allergies and diet, and red flags / social
-			history. The shared engine sums weighted GI scoring rules into a composite symptom-severity
-			score, classifies it from minimal to very severe, and flags safety-critical issues for the
-			gastroenterologist.
+			A comprehensive gastroenterological evaluation, completed as a single continuous wizard, that
+			the shared engine scores into a composite symptom-severity level and flags safety-critical
+			issues for the gastroenterologist.
 		</p>
 	</header>
 
@@ -51,8 +48,9 @@
 			<div>
 				<dt class="font-semibold text-base-content">Purpose</dt>
 				<dd class="mt-1 text-base-content/70">
-					Capture a structured GI symptom profile and produce a graded report — composite severity
-					score, severity level, and flagged red-flag issues — to support gastroenterology review.
+					Capture a structured GI symptom profile and produce a graded report — a composite severity
+					score classified from minimal to very severe, and flagged red-flag issues — to support
+					gastroenterology review.
 				</dd>
 			</div>
 			<div>

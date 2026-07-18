@@ -16,11 +16,8 @@
 			Research and service-planning acknowledgement
 		</h1>
 		<p class="mt-4 text-base leading-relaxed text-base-content/70">
-			A short single-page wizard that presents the practice's research-and-planning privacy notice —
-			how confidential patient information is used for approved research and service planning — and
-			records the recipient's opt-out preferences (Type 1 and the NHS National Data Opt-Out),
-			acknowledgement, and signature. The shared engine validates completeness, derives a Complete /
-			Incomplete status, and flags any governance issues for the information-governance officer.
+			A short single-page wizard that presents the practice's research-and-planning privacy notice
+			and records the recipient's opt-out preferences, acknowledgement, and signature.
 		</p>
 	</header>
 
@@ -55,9 +52,11 @@
 			<div>
 				<dt class="font-semibold text-base-content">Purpose</dt>
 				<dd class="mt-1 text-base-content/70">
-					Record a recipient's opt-out preferences and acknowledgement of the research-and-planning
-					privacy notice and produce a completeness-graded summary — status, missing required fields,
-					and flagged issues — for information-governance records.
+					Record a recipient's opt-out preferences (Type 1 and the NHS National Data Opt-Out) and
+					acknowledgement and signature confirming they have been shown how confidential patient
+					information is used for approved research and service planning, and produce a
+					completeness-graded summary — status, missing required fields, and flagged issues — for
+					information-governance records.
 				</dd>
 			</div>
 			<div>

@@ -11,12 +11,10 @@
 		<p class="text-sm font-semibold uppercase tracking-wide text-primary">Substance Abuse Assessment</p>
 		<h1 class="mt-2 text-3xl font-bold text-base-content">Substance use disorder evaluation</h1>
 		<p class="mt-4 text-base leading-relaxed text-base-content/70">
-			A comprehensive biopsychosocial substance use evaluation completed as a single continuous
-			wizard: demographics, alcohol use (AUDIT), drug use (DAST-10), substance use history,
-			withdrawal assessment, mental-health comorbidities, physical-health impact, social and legal
-			impact, previous treatment history, and treatment planning and goals. The shared engine scores
-			the AUDIT (0-40) and DAST-10 (0-10) instruments, derives an overall risk level, and flags
-			safety-critical issues for the clinician.
+			A comprehensive, single-page wizard covering alcohol use, drug use, substance use history,
+			withdrawal, mental-health comorbidities, and social / physical-health impact, from which the
+			shared engine scores the AUDIT (0-40) and DAST-10 (0-10) instruments, derives an overall risk
+			level, and flags safety-critical issues for the clinician.
 		</p>
 	</header>
 

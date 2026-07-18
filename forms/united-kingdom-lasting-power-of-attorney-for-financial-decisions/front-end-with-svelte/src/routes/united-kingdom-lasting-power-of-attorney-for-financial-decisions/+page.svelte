@@ -15,12 +15,10 @@
 		</h1>
 		<p class="mt-4 text-base leading-relaxed text-base-content/70">
 			The LP1F is the official UK statutory deed under the Mental Capacity Act 2005 by which a donor
-			appoints one or more attorneys to make decisions about their property and financial affairs.
-			This wizard walks through all 15 sections as one continuous single page — donor, attorneys,
-			decision mode, replacement attorneys, when attorneys can act, people to notify, preferences and
-			instructions, signatures, applicant, recipient and registration. A validation engine fires
-			statutory blocker rules and additional flags so the deed is correct before it is signed and
-			sent to the Office of the Public Guardian.
+			appoints attorneys to make decisions about their property and financial affairs, completed as a
+			15-section single-page wizard whose validation engine fires statutory blocker rules and
+			additional flags so the deed is correct before it is signed and sent to the Office of the Public
+			Guardian.
 		</p>
 	</header>
 
@@ -55,8 +53,11 @@
 			<div>
 				<dt class="font-semibold text-base-content">Purpose</dt>
 				<dd class="mt-1 text-base-content/70">
-					Capture a structured LP1F deed and validate it — validity band, composite risk, fired
-					statutory blockers and additional flags — so it is correct before signing and registration.
+					Capture a structured LP1F deed — donor, attorneys, decision mode, replacement attorneys, when
+					attorneys can act, people to notify, preferences and instructions, signatures, applicant,
+					recipient, and registration — and produce a validated result (validity band, composite risk,
+					fired statutory blockers, and additional flags) so it is correct before signing and
+					registration.
 				</dd>
 			</div>
 			<div>

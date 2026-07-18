@@ -12,12 +12,9 @@
 		</p>
 		<h1 class="mt-2 text-3xl font-bold text-base-content">CKD-EPI 2021 eGFR and CKD G-stage</h1>
 		<p class="mt-4 text-base leading-relaxed text-base-content/70">
-			Enter a standardised serum creatinine (µmol/L) plus age and sex in a single continuous wizard.
-			The shared engine applies the CKD-EPI 2021 creatinine equation (race-free) — converting
-			µmol/L to mg/dL, then eGFR = 142 × min(Scr/κ, 1)^α × max(Scr/κ, 1)^−1.200 × 0.9938^age ×
-			(1.012 if female) — and bands the result into a KDIGO CKD G-stage: G1 (&ge; 90), G2 (60–89),
-			G3a (45–59), G3b (30–44), G4 (15–29), or G5 (&lt; 15). Low results and non-steady-state
-			creatinine are flagged for action.
+			A single-page calculator that takes a standardised serum creatinine, age, and sex and applies
+			the CKD-EPI 2021 creatinine equation (race-free) to estimate the GFR and band it into a KDIGO
+			CKD G-stage, flagging low results and non-steady-state creatinine for action.
 		</p>
 	</header>
 
@@ -52,9 +49,11 @@
 			<div>
 				<dt class="font-semibold text-base-content">Purpose</dt>
 				<dd class="mt-1 text-base-content/70">
-					Estimate the glomerular filtration rate from a single serum creatinine, age, and sex, and
-					produce a graded report — eGFR, CKD G-stage, and flagged issues — to support monitoring,
-					medication-dose review, and referral decisions.
+					Estimate the glomerular filtration rate from a single serum creatinine (µmol/L), age, and
+					sex, using the CKD-EPI 2021 creatinine equation (race-free), and produce a graded report —
+					eGFR and a KDIGO CKD G-stage banded as G1 (&ge; 90), G2 (60–89), G3a (45–59), G3b (30–44),
+					G4 (15–29), or G5 (&lt; 15), plus flagged issues — to support monitoring, medication-dose
+					review, and referral decisions.
 				</dd>
 			</div>
 			<div>

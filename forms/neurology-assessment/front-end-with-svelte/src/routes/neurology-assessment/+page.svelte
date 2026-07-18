@@ -11,11 +11,9 @@
 		<p class="text-sm font-semibold uppercase tracking-wide text-primary">Neurology Assessment</p>
 		<h1 class="mt-2 text-3xl font-bold text-base-content">Neurological evaluation</h1>
 		<p class="mt-4 text-base leading-relaxed text-base-content/70">
-			A comprehensive neurological evaluation completed as a single continuous wizard: demographics,
-			chief complaint, NIHSS stroke-scale assessment, headache, seizure history, motor and sensory
-			exam, cognition, medications, diagnostic results, and functional / social status. The shared
-			engine scores the patient on the NIH Stroke Scale (NIHSS), summarises the modified Rankin
-			Scale disability, and flags safety-critical issues for the neurologist.
+			A comprehensive neurological evaluation completed as a single continuous wizard, in which the
+			shared engine scores the patient on the NIH Stroke Scale (NIHSS), summarises the modified
+			Rankin Scale disability, and flags safety-critical issues for the neurologist.
 		</p>
 	</header>
 
@@ -50,8 +48,10 @@
 			<div>
 				<dt class="font-semibold text-base-content">Purpose</dt>
 				<dd class="mt-1 text-base-content/70">
-					Capture a structured neurological profile and produce a scored report — NIHSS total,
-					severity band, item scores, and flagged issues — to support neurology review.
+					Capture a structured neurological profile — chief complaint, NIHSS stroke-scale
+					assessment, headache, seizure history, motor and sensory exam, cognition, medications,
+					diagnostic results, and functional / social status — and produce a scored report — NIHSS
+					total, severity band, item scores, and flagged issues — to support neurology review.
 				</dd>
 			</div>
 			<div>

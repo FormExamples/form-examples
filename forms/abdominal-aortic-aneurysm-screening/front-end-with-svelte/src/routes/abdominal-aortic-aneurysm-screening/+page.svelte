@@ -15,10 +15,8 @@
 		</h1>
 		<p class="mt-4 text-base leading-relaxed text-base-content/70">
 			Record an abdominal ultrasound of the aorta — eligibility, consent, and the maximum
-			antero-posterior aortic diameter (cm) — in a single continuous wizard. The shared engine
-			classifies the aorta by diameter: normal (&lt; 3.0 cm), small aneurysm (3.0-4.4 cm), medium
-			aneurysm (4.5-5.4 cm), or large aneurysm (&ge; 5.5 cm), and sets the surveillance or referral
-			action. An aorta that cannot be adequately measured is reported as non-visualised for re-scan.
+			antero-posterior aortic diameter — in a single continuous wizard that classifies the aorta by
+			diameter and sets the surveillance or referral action.
 		</p>
 	</header>
 
@@ -54,7 +52,9 @@
 				<dt class="font-semibold text-base-content">Purpose</dt>
 				<dd class="mt-1 text-base-content/70">
 					Document an AAA screening scan and, from the maximum aortic diameter, derive the aneurysm
-					category, the surveillance or referral band, and a graded report with flagged issues.
+					category — normal (&lt; 3.0 cm), small (3.0-4.4 cm), medium (4.5-5.4 cm), or large (&ge;
+					5.5 cm), or non-visualised when the aorta cannot be adequately measured — the surveillance
+					or referral band, and a graded report with flagged issues.
 				</dd>
 			</div>
 			<div>

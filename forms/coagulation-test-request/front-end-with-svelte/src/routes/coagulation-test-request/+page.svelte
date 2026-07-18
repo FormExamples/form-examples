@@ -13,12 +13,11 @@
 			Coagulation / haemostasis blood-test request
 		</h1>
 		<p class="mt-4 text-base leading-relaxed text-base-content/70">
-			A UK NHS–aligned coagulation / haemostasis blood-test request that a clinician completes to
-			order one or more coagulation tests. It records the requested tests, the clinical indication
-			and details, the patient's anticoagulant and bleeding / thrombosis history, pre-analytical
-			specimen handling, and the requested urgency — then computes a four-axis vetting grade
-			(appropriateness, pre-analytical specimen safety, request completeness, and triage priority)
-			plus safety-critical flags to support the laboratory's and haematology team's triage decision.
+			A UK NHS–aligned coagulation / haemostasis blood-test request that a clinician completes,
+			in a single continuous wizard, to order coagulation tests and computes a four-axis vetting
+			grade — appropriateness, pre-analytical specimen safety, request completeness, and triage
+			priority — plus safety-critical flags for the laboratory’s and haematology team’s triage
+			decision.
 		</p>
 	</header>
 
@@ -53,8 +52,10 @@
 			<div>
 				<dt class="font-semibold text-base-content">Purpose</dt>
 				<dd class="mt-1 text-base-content/70">
-					Capture which coagulation tests are requested and why, and produce a vetting report the
-					coagulation laboratory and haematology team can triage from.
+					Capture which coagulation tests are requested and why — including the patient's
+					anticoagulant and bleeding / thrombosis history, pre-analytical specimen handling, and
+					requested urgency — and produce a vetting report the coagulation laboratory and
+					haematology team can triage from.
 				</dd>
 			</div>
 			<div>

@@ -11,12 +11,12 @@
 		<p class="text-sm font-semibold uppercase tracking-wide text-primary">Oncology Assessment</p>
 		<h1 class="mt-2 text-3xl font-bold text-base-content">Cancer patient evaluation</h1>
 		<p class="mt-4 text-base leading-relaxed text-base-content/70">
-			A comprehensive oncology evaluation completed as a single continuous wizard: demographics,
-			cancer diagnosis and TNM staging, treatment history, current treatment and response, symptom
-			assessment, treatment side effects, laboratory results, current medications, psychosocial
-			status, and functional / nutritional status. The shared engine grades the patient with the
-			ECOG Performance Status, derives the safety-critical flags an oncologist should review, and
-			generates a clinical report.
+			A comprehensive oncology evaluation — covering demographics, cancer diagnosis and TNM
+			staging, treatment history, current treatment and response, symptom assessment, treatment
+			side effects, laboratory results, current medications, psychosocial status, and functional
+			/ nutritional status — that the shared engine grades with the ECOG Performance Status,
+			derives the safety-critical flags an oncologist should review, and uses to generate a
+			clinical report.
 		</p>
 	</header>
 

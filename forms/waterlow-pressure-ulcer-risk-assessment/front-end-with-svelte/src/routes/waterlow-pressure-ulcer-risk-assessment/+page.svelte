@@ -12,12 +12,9 @@
 		</p>
 		<h1 class="mt-2 text-3xl font-bold text-base-content">Waterlow pressure-ulcer risk screen</h1>
 		<p class="mt-4 text-base leading-relaxed text-base-content/70">
-			A bedside pressure-ulcer risk screen for adults, completed as a single continuous wizard. It
-			records weighted risk categories — build / weight for height, skin type, sex and age,
-			continence, and mobility — plus four special-risk groups, and <strong>sums</strong> the points
-			into a Waterlow total. A higher total means higher risk. The shared engine maps the total to a
-			risk band (low under 10, at risk 10-14, high 15-19, very high &ge; 20) and recommends how far
-			to escalate the pressure-relieving support surface, repositioning, and skin care.
+			A bedside pressure-ulcer risk screen for adults that <strong>sums</strong> weighted risk
+			categories and special-risk groups into a Waterlow total — the higher the total, the higher
+			the risk — and maps it to a risk band with a recommended level of preventive care.
 		</p>
 	</header>
 
@@ -52,9 +49,12 @@
 			<div>
 				<dt class="font-semibold text-base-content">Purpose</dt>
 				<dd class="mt-1 text-base-content/70">
-					Capture the weighted Waterlow risk categories and produce a graded report — total score,
-					risk band, recommended prevention, and flagged issues — to support pressure-ulcer
-					prevention decisions.
+					Capture the weighted Waterlow risk categories — build / weight for height, skin type, sex
+					and age, continence, and mobility — plus four special-risk groups, completed as a single
+					continuous wizard, and produce a graded report: total score, risk band (low under 10, at
+					risk 10–14, high 15–19, very high 20 or more), recommended prevention — pressure-relieving
+					support surface, repositioning, and skin care — and flagged issues, to support
+					pressure-ulcer prevention decisions.
 				</dd>
 			</div>
 			<div>

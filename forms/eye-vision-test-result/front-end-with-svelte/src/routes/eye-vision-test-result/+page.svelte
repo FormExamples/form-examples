@@ -1,116 +1,84 @@
 <script lang="ts">
-	import { sampleReports } from '$lib/data/sample-reports';
-	import Badge from '$lib/components/ui/Badge.svelte';
-	import {
-		resultClassificationLabel,
-		resultClassificationColor,
-		abnormalitySeverityLabel,
-		abnormalitySeverityColor,
-		followUpUrgencyLabel,
-		followUpUrgencyColor,
-		testTypeLabel,
-		reportStatusLabel
-	} from '$lib/engine/utils';
-
-	let classificationFilter = $state('');
-	let urgencyFilter = $state('');
-
-	const rows = $derived(
-		sampleReports.filter(
-			(r) =>
-				(classificationFilter === '' || r.resultClassification === classificationFilter) &&
-				(urgencyFilter === '' || r.followUpUrgency === urgencyFilter)
-		)
-	);
+	// The app root is a welcome page: it explains the work and offers prominent
+	// links to the two working surfaces — the report wizard and the reports
+	// dashboard.
 </script>
 
-<main class="mx-auto max-w-5xl px-4 py-6">
-	<div class="mb-6 flex flex-wrap items-end justify-between gap-4">
-		<div>
-			<h1 class="text-2xl font-bold text-gray-900">Graded eye vision reports</h1>
-			<p class="mt-1 text-sm text-gray-600">
-				Four-axis interpretation grades for completed eye vision test reports.
+<main class="mx-auto max-w-4xl px-4 py-12">
+	<header class="mb-10">
+		<p class="text-sm font-semibold uppercase tracking-wide text-primary">Eye Vision Test Result</p>
+		<h1 class="mt-2 text-3xl font-bold text-gray-900">Eye examination reports, graded and ready to share</h1>
+		<p class="mt-4 text-base leading-relaxed text-gray-600">
+			The clinician's wizard records structured findings from an ophthalmic / optometric eye
+			examination, which the shared engine grades along four axes plus safety flags to produce a
+			ready-to-share report.
+		</p>
+	</header>
+
+	<div class="grid gap-4 sm:grid-cols-2">
+		<a
+			href="/eye-vision-test-result/report"
+			class="group rounded-lg border border-primary bg-primary p-6 text-white shadow-sm transition hover:opacity-90"
+		>
+			<h2 class="text-lg font-semibold">New report</h2>
+			<p class="mt-2 text-sm text-white/80">
+				Work through the seven-section wizard — clinical history,
+				measurements, findings, impression, critical-result communication,
+				and sign-off — to produce a graded ophthalmic report.
 			</p>
-		</div>
-		<a href="/eye-vision-test-result/report" class="button" data-variant="primary">New report</a>
+			<span class="mt-4 inline-block text-sm font-semibold">Open the form →</span>
+		</a>
+		<a
+			href="/eye-vision-test-result/reports"
+			class="group rounded-lg border border-gray-200 bg-white p-6 text-gray-900 shadow-sm transition hover:border-primary hover:shadow"
+		>
+			<h2 class="text-lg font-semibold">Reports dashboard</h2>
+			<p class="mt-2 text-sm text-gray-600">
+				Browse graded sample reports, filtering by result classification
+				(normal / abnormal / critical / inconclusive) and by follow-up
+				urgency (routine / recommended / urgent / critical alert).
+			</p>
+			<span class="mt-4 inline-block text-sm font-semibold text-primary">Open the dashboard →</span>
+		</a>
 	</div>
 
-	<div class="mb-4 flex flex-wrap gap-4">
-		<label class="text-sm">
-			<span class="mr-2 font-medium text-gray-700">Classification</span>
-			<select class="select inline-block w-auto" bind:value={classificationFilter}>
-				<option value="">All</option>
-				<option value="normal">Normal</option>
-				<option value="abnormal">Abnormal</option>
-				<option value="critical">Critical</option>
-				<option value="inconclusive">Inconclusive</option>
-			</select>
-		</label>
-		<label class="text-sm">
-			<span class="mr-2 font-medium text-gray-700">Follow-up urgency</span>
-			<select class="select inline-block w-auto" bind:value={urgencyFilter}>
-				<option value="">All</option>
-				<option value="routine">Routine</option>
-				<option value="recommended">Recommended</option>
-				<option value="urgent">Urgent</option>
-				<option value="critical-alert">Critical alert</option>
-			</select>
-		</label>
-	</div>
-
-	<div class="overflow-x-auto rounded-xl border border-gray-200 bg-white">
-		<table class="w-full text-left text-sm">
-			<thead class="border-b border-gray-200 bg-gray-50 text-gray-600">
-				<tr>
-					<th class="px-4 py-3 font-semibold">Report</th>
-					<th class="px-4 py-3 font-semibold">Patient</th>
-					<th class="px-4 py-3 font-semibold">Test type</th>
-					<th class="px-4 py-3 font-semibold">Status</th>
-					<th class="px-4 py-3 font-semibold">Reported</th>
-					<th class="px-4 py-3 font-semibold">Classification</th>
-					<th class="px-4 py-3 font-semibold">Severity</th>
-					<th class="px-4 py-3 font-semibold">Urgency</th>
-					<th class="px-4 py-3 font-semibold">Complete</th>
-					<th class="px-4 py-3 font-semibold">Flags</th>
-				</tr>
-			</thead>
-			<tbody>
-				{#each rows as r (r.id)}
-					<tr class="border-b border-gray-100 last:border-0 hover:bg-gray-50">
-						<td class="px-4 py-3 font-mono text-xs text-gray-500">{r.id}</td>
-						<td class="px-4 py-3 font-medium text-gray-900">{r.patientName}</td>
-						<td class="px-4 py-3 text-gray-700">{testTypeLabel(r.testType)}</td>
-						<td class="px-4 py-3 text-gray-700">{reportStatusLabel(r.reportStatus)}</td>
-						<td class="px-4 py-3 text-gray-700">{r.reportedDate}</td>
-						<td class="px-4 py-3">
-							<Badge
-								label={resultClassificationLabel(r.resultClassification)}
-								color={resultClassificationColor(r.resultClassification)}
-							/>
-						</td>
-						<td class="px-4 py-3">
-							<Badge
-								label={abnormalitySeverityLabel(r.abnormalitySeverity)}
-								color={abnormalitySeverityColor(r.abnormalitySeverity)}
-							/>
-						</td>
-						<td class="px-4 py-3">
-							<Badge
-								label={followUpUrgencyLabel(r.followUpUrgency)}
-								color={followUpUrgencyColor(r.followUpUrgency)}
-							/>
-						</td>
-						<td class="px-4 py-3 text-gray-700">{r.reportCompletenessPercent}%</td>
-						<td class="px-4 py-3 text-gray-700">{r.flagCount}</td>
-					</tr>
-				{:else}
-					<tr>
-						<td class="px-4 py-6 text-center text-gray-500" colspan="10">
-							No reports match the current filters.
-						</td>
-					</tr>
-				{/each}
-			</tbody>
-		</table>
-	</div>
+	<section class="mt-12">
+		<h2 class="text-lg font-semibold text-gray-900">About this work</h2>
+		<dl class="mt-4 space-y-4 text-sm">
+			<div>
+				<dt class="font-semibold text-gray-900">Purpose</dt>
+				<dd class="mt-1 text-gray-600">
+					Capturing structured eye-examination findings — the test type, clinical history,
+					visual-acuity, intraocular-pressure, and visual-field measurements, and findings such as
+					diabetic-retinopathy grading, optic-disc and macular abnormalities, or reduced visual acuity
+					or a visual-field defect — and grading them consistently across four axes (result
+					classification, abnormality severity with a structured reporting category, report
+					completeness, and follow-up urgency) supports timely identification of ophthalmic
+					emergencies and diabetic-retinopathy referral pathways — helping reporting clinicians
+					classify findings correctly, track report completeness, and make sure sudden visual loss,
+					acutely raised intraocular pressure, signs of giant cell arteritis, retinal detachment, or
+					proliferative diabetic retinopathy triggers an urgent ophthalmology review rather than being
+					missed.
+				</dd>
+			</div>
+			<div>
+				<dt class="font-semibold text-gray-900">Specification</dt>
+				<dd class="mt-1 text-gray-600">
+					This form is spec-driven: the living domain spec defines the data
+					model, the four-axis grading engine, and the flag rules, and that
+					same engine grades both the report wizard and the reports
+					dashboard, so the two surfaces never disagree.
+				</dd>
+			</div>
+			<div>
+				<dt class="font-semibold text-gray-900">Documentation</dt>
+				<dd class="mt-1 text-gray-600">
+					Aligned with Royal College of Ophthalmologists (RCOphth) reporting
+					and acute-eye guidance, NICE NG81 <em>Glaucoma: diagnosis and
+					management</em>, and the NHS Diabetic Eye Screening Programme
+					retinal-grading criteria.
+				</dd>
+			</div>
+		</dl>
+	</section>
 </main>

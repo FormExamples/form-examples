@@ -14,13 +14,9 @@
 		</p>
 		<h1 class="mt-2 text-3xl font-bold text-base-content">Cardiovascular risk calculator</h1>
 		<p class="mt-4 text-base leading-relaxed text-base-content/70">
-			Estimates the 10-year risk of hard coronary heart disease events (myocardial infarction or
-			coronary death) in patients aged 30–79 with no history of coronary heart disease or diabetes,
-			completed as a single continuous wizard: patient information, demographics, smoking history,
-			blood pressure, cholesterol, medical history, family history, lifestyle factors, current
-			medications, and review. The shared engine applies the Wilson / D'Agostino 1998 (ATP III)
-			Framingham Cox-regression model, categorises the risk as low, intermediate, or high, and flags
-			actionable issues for the clinician.
+			Estimates the 10-year risk of hard coronary heart disease events in patients aged 30–79 with no
+			history of coronary heart disease or diabetes, using a single continuous wizard that the shared
+			engine grades against the Framingham Cox-regression model.
 		</p>
 	</header>
 
@@ -55,9 +51,10 @@
 			<div>
 				<dt class="font-semibold text-base-content">Purpose</dt>
 				<dd class="mt-1 text-base-content/70">
-					Capture a structured cardiovascular risk profile and produce a graded report — the 10-year
-					hard CHD risk percentage, the risk category, and flagged issues — to support clinical
-					decision making.
+					Capture a structured cardiovascular risk profile for patients aged 30–79 with no history of
+					coronary heart disease or diabetes (myocardial infarction or coronary death risk), and
+					produce a graded report — the 10-year hard CHD risk percentage, the risk category, and
+					flagged issues — to support clinical decision making.
 				</dd>
 			</div>
 			<div>

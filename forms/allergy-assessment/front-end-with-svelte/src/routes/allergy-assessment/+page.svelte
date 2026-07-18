@@ -7,10 +7,9 @@
 		<p class="text-sm font-semibold uppercase tracking-wide text-primary">Allergy Assessment</p>
 		<h1 class="mt-2 text-3xl font-bold text-base-content">Comprehensive allergy evaluation</h1>
 		<p class="mt-4 text-base leading-relaxed text-base-content/70">
-			A single continuous wizard covering demographics, allergy history, drug / food / environmental
-			allergies, anaphylaxis history, testing results, current management, comorbidities, and impact.
-			The shared engine grades an overall allergy severity level, computes an allergy burden score,
-			and flags safety-critical issues for the allergist.
+			A single continuous wizard covering drug, food, and environmental allergies and anaphylaxis
+			history, graded by the shared engine into an overall allergy severity level and burden score
+			with safety-critical flags for the allergist.
 		</p>
 	</header>
 

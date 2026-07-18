@@ -11,9 +11,8 @@
 		<p class="text-sm font-semibold uppercase tracking-wide text-primary">Psychology Assessment</p>
 		<h1 class="mt-2 text-3xl font-bold text-base-content">DASS-21 psychological screening</h1>
 		<p class="mt-4 text-base leading-relaxed text-base-content/70">
-			A self-report psychological screen completed as a single continuous wizard: demographics, reason
-			for assessment, the 21-item Depression Anxiety Stress Scales (DASS-21), functional impact, a
-			brief safety screen, and support / history. The shared engine scores each DASS-21 subscale,
+			A self-report psychological screen, completed as a single continuous wizard built around the
+			21-item Depression Anxiety Stress Scales (DASS-21), whose shared engine scores each subscale,
 			assigns a severity category from the published DASS norms, and escalates safety flags — including
 			suicidal ideation — for urgent clinician review.
 		</p>

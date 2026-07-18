@@ -7,8 +7,7 @@
 		<p class="text-sm font-semibold uppercase tracking-wide text-primary">Asthma Assessment</p>
 		<h1 class="mt-2 text-3xl font-bold text-base-content">Asthma control evaluation</h1>
 		<p class="mt-4 text-base leading-relaxed text-base-content/70">
-			A single continuous wizard covering demographics, symptom frequency, lung function, triggers,
-			medications, allergies, exacerbation history, comorbidities, and social history. The shared
+			A single continuous wizard that captures a patient's asthma-control profile, and the shared
 			engine computes the Asthma Control Test (ACT) score, derives a control level, and flags
 			safety-critical issues for the clinician.
 		</p>
@@ -44,8 +43,10 @@
 			<div>
 				<dt class="font-semibold text-base-content">Purpose</dt>
 				<dd class="mt-1 text-base-content/70">
-					Capture a structured asthma-control profile and produce a graded report — ACT score,
-					control level, and flagged issues — to support clinical review.
+					Capture a structured asthma-control profile — demographics, symptom frequency, lung
+					function, triggers, medications, allergies, exacerbation history, comorbidities, and
+					social history — and produce a graded report — ACT score, control level, and flagged
+					issues — to support clinical review.
 				</dd>
 			</div>
 			<div>

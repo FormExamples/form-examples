@@ -12,13 +12,11 @@
 		</p>
 		<h1 class="mt-2 text-3xl font-bold text-base-content">Transfusion compatibility request</h1>
 		<p class="mt-4 text-base leading-relaxed text-base-content/70">
-			A UK NHS–aligned blood cross-match / transfusion compatibility request completed by a clinician
-			as a single continuous wizard: requesting clinician, patient identification, requested test and
-			component, clinical indication, blood group and history, sample and identity safety, and triage.
-			The shared engine grades the request on four independent axes — appropriateness (NICE NG24),
-			identity / sample safety (BSH / SHOT), request completeness, and triage priority — and raises
-			safety-critical flags to support the transfusion laboratory's acceptance and prioritisation
-			decision.
+			A UK NHS–aligned blood cross-match / transfusion compatibility request, completed by a
+			clinician as a single continuous wizard, whose shared engine grades the request on four
+			independent axes — appropriateness (NICE NG24), identity / sample safety (BSH / SHOT),
+			request completeness, and triage priority — and raises safety-critical flags to support the
+			transfusion laboratory's acceptance and prioritisation decision.
 		</p>
 	</header>
 
@@ -53,9 +51,11 @@
 			<div>
 				<dt class="font-semibold text-base-content">Purpose</dt>
 				<dd class="mt-1 text-base-content/70">
-					Capture a structured transfusion-compatibility request and produce a graded vetting report —
-					four-axis grade, overall recommendation, and safety flags — to support the transfusion
-					laboratory.
+					Capture a structured transfusion-compatibility request — requesting clinician, patient
+					identification, requested test and component, clinical indication, blood group and
+					history, sample and identity safety, and triage — and produce a graded vetting report
+					covering the four-axis grade, overall recommendation, and safety flags, to support the
+					transfusion laboratory.
 				</dd>
 			</div>
 			<div>

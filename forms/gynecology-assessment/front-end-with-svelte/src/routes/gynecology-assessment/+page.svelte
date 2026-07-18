@@ -11,11 +11,9 @@
 		<p class="text-sm font-semibold uppercase tracking-wide text-primary">Gynecology Assessment</p>
 		<h1 class="mt-2 text-3xl font-bold text-base-content">Gynaecological symptom evaluation</h1>
 		<p class="mt-4 text-base leading-relaxed text-base-content/70">
-			A comprehensive gynaecological evaluation completed as a single continuous wizard:
-			demographics, chief complaint, menstrual history, gynaecological symptoms, cervical screening,
-			obstetric history, sexual health, medical history, current medications, and family history. The
-			shared engine grades the patient with a Menstrual Symptom Severity Score (0–30), categorises the
-			severity, and flags issues for the gynaecologist.
+			A comprehensive gynaecological evaluation, completed as a single continuous wizard, that grades
+			the patient with a Menstrual Symptom Severity Score (0–30), categorises the severity, and flags
+			issues for the gynaecologist.
 		</p>
 	</header>
 
@@ -50,8 +48,10 @@
 			<div>
 				<dt class="font-semibold text-base-content">Purpose</dt>
 				<dd class="mt-1 text-base-content/70">
-					Capture a structured gynaecological profile and produce a graded report — symptom severity
-					score, category, and flagged issues — to support gynaecology review.
+					Capture a structured gynaecological profile — menstrual history, gynaecological symptoms,
+					cervical screening, obstetric history, sexual health, medical history, current medications,
+					and family history — and produce a graded report: symptom severity score, category, and
+					flagged issues, to support gynaecology review.
 				</dd>
 			</div>
 			<div>

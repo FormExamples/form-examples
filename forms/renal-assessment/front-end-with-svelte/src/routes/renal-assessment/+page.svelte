@@ -11,11 +11,9 @@
 		<p class="text-sm font-semibold uppercase tracking-wide text-primary">Renal Assessment</p>
 		<h1 class="mt-2 text-3xl font-bold text-base-content">Chronic kidney disease evaluation</h1>
 		<p class="mt-4 text-base leading-relaxed text-base-content/70">
-			A structured renal (kidney) assessment completed as a single continuous wizard: demographics,
-			presenting symptoms, CKD risk factors, physical examination, blood tests, urine tests, imaging
-			and biopsy review, medication review, and clinical impression. The shared engine applies the
-			KDIGO 2012/2024 CKD classification — combining GFR category (G1–G5) with albuminuria category
-			(A1–A3) into a composite risk level — and flags safety-critical issues for the nephrologist.
+			A structured renal (kidney) assessment completed as a single continuous wizard, classified by
+			the shared engine's KDIGO 2012/2024 CKD classification — combining GFR category (G1–G5) with
+			albuminuria category (A1–A3) into a composite risk level.
 		</p>
 	</header>
 
@@ -50,7 +48,9 @@
 			<div>
 				<dt class="font-semibold text-base-content">Purpose</dt>
 				<dd class="mt-1 text-base-content/70">
-					Capture a structured renal profile and produce a classified report — KDIGO GFR category,
+					Capture a structured renal profile — demographics, presenting symptoms, CKD risk factors,
+					physical examination, blood tests, urine tests, imaging and biopsy review, medication
+					review, and clinical impression — and produce a classified report — KDIGO GFR category,
 					albuminuria category, composite risk level, and flagged issues — to support nephrology
 					review and referral.
 				</dd>

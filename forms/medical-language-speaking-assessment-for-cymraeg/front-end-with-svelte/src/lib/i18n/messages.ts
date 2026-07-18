@@ -79,12 +79,9 @@ export const messages: Record<Locale, Messages> = {
 		pageTitle: 'Medical Language Speaking Assessment for Cymraeg',
 		intro:
 			'A clinical Welsh-language (Cymraeg) speaking assessment for healthcare professionals working ' +
-			'with Welsh-speaking patients, completed as a single continuous wizard: candidate details, two ' +
-			'role-plays (Sgwrs gyda Chlaf and Esboniad Clinigol), per-criterion ratings, and overall ' +
-			'feedback. The shared engine grades fluency, grammar, pronunciation, and clinical ' +
-			'appropriateness, scores the five clinical-communication indicators, and maps the result to a ' +
-			'CEFR-aligned grade (A-E) with a 0-500 scaled score and flagged issues, aligned to the NHS Wales ' +
-			'"More Than Just Words" framework.',
+			'with Welsh-speaking patients that grades fluency, grammar, pronunciation, and clinical ' +
+			'appropriateness across two role-plays, mapping the result to a CEFR-aligned grade (A-E) with a ' +
+			'0-500 scaled score, aligned to the NHS Wales "More Than Just Words" framework.',
 		startNewAssessment: 'Start a new assessment',
 		startBody:
 			'Open the step-by-step examiner form. One continuous single-page wizard that grades the ' +
@@ -98,9 +95,11 @@ export const messages: Record<Locale, Messages> = {
 		aboutThisWork: 'About this work',
 		purpose: 'Purpose',
 		purposeBody:
-			'Capture a structured Welsh-language clinical-speaking profile and produce a graded report — ' +
-			'CEFR-mapped grade, scaled score, per-criterion breakdown, and flagged issues — to support ' +
-			'NHS Wales Welsh-essential role decisions.',
+			'Capture a structured Welsh-language clinical-speaking profile — via two role-plays, ' +
+			'Sgwrs gyda Chlaf (patient conversation) and Esboniad Clinigol (clinical explanation), plus ' +
+			'candidate details and overall feedback — and produce a graded report: CEFR-mapped grade, ' +
+			'scaled score, per-criterion breakdown, and flagged issues to support NHS Wales ' +
+			'Welsh-essential role decisions.',
 		specification: 'Specification',
 		specificationBody:
 			'Spec-driven: the living domain spec defines the data model, the OET-style CEFR-mapped ' +
@@ -122,12 +121,9 @@ export const messages: Record<Locale, Messages> = {
 		pageTitle: 'Asesiad Siarad Iaith Feddygol ar gyfer Cymraeg',
 		intro:
 			'Asesiad siarad Cymraeg clinigol ar gyfer gweithwyr gofal iechyd proffesiynol sy’n gweithio ' +
-			'gyda chleifion sy’n siarad Cymraeg, wedi’i gwblhau fel un dewin di-dor: manylion yr ' +
-			'ymgeisydd, dwy sesiwn chwarae rôl (Sgwrs gyda Chlaf ac Esboniad Clinigol), sgoriau fesul maen ' +
-			'prawf, ac adborth cyffredinol. Mae’r injan a rennir yn graddio rhuglder, gramadeg, ynganu, ' +
-			'a phriodoldeb clinigol, yn sgorio’r pum dangosydd cyfathrebu clinigol, ac yn mapio’r ' +
-			'canlyniad i radd sy’n cyd-fynd â’r CEFR (A-E) gyda sgôr wedi’i graddio 0-500 a ' +
-			'materion wedi’u fflagio, yn unol â fframwaith “Mwy na Geiriau” GIG Cymru.',
+			'gyda chleifion sy’n siarad Cymraeg, sy’n graddio rhuglder, gramadeg, ynganu, a phriodoldeb ' +
+			'clinigol ar draws dwy sesiwn chwarae rôl, ac yn mapio’r canlyniad i radd sy’n cyd-fynd â’r ' +
+			'CEFR (A-E) gyda sgôr wedi’i graddio 0-500, yn unol â fframwaith “Mwy na Geiriau” GIG Cymru.',
 		startNewAssessment: 'Dechrau asesiad newydd',
 		startBody:
 			'Agorwch y ffurflen arholwr gam wrth gam. Un dewin un dudalen di-dor sy’n graddio’r ' +
@@ -141,10 +137,11 @@ export const messages: Record<Locale, Messages> = {
 		aboutThisWork: 'Ynglŷn â’r gwaith hwn',
 		purpose: 'Diben',
 		purposeBody:
-			'Casglu proffil siarad clinigol Cymraeg strwythuredig a chynhyrchu adroddiad graddedig — gradd ' +
-			'wedi’i mapio i’r CEFR, sgôr wedi’i graddio, dadansoddiad fesul maen prawf, a ' +
-			'materion wedi’u fflagio — i gefnogi penderfyniadau GIG Cymru am rolau lle mae’r Gymraeg ' +
-			'yn hanfodol.',
+			'Casglu proffil siarad clinigol Cymraeg strwythuredig — trwy ddwy sesiwn chwarae rôl, sef ' +
+			'Sgwrs gyda Chlaf ac Esboniad Clinigol, ynghyd â manylion yr ymgeisydd ac adborth cyffredinol ' +
+			'— a chynhyrchu adroddiad graddedig: gradd wedi’i mapio i’r CEFR, sgôr wedi’i graddio, ' +
+			'dadansoddiad fesul maen prawf, a materion wedi’u fflagio i gefnogi penderfyniadau GIG Cymru ' +
+			'am rolau lle mae’r Gymraeg yn hanfodol.',
 		specification: 'Manyleb',
 		specificationBody:
 			'Yn seiliedig ar fanyleb: mae’r fanyleb barhaus yn diffinio’r model data, yr injan ' +

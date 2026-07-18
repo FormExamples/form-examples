@@ -12,15 +12,11 @@
 			SOAP Note — a structured clinical progress note
 		</h1>
 		<p class="mt-4 text-base leading-relaxed text-base-content/70">
-			A structured clinical progress note recording one patient encounter in the four SOAP sections —
-			<strong>S</strong>ubjective, <strong>O</strong>bjective, <strong>A</strong>ssessment, and
-			<strong>P</strong>lan — completed as a single continuous wizard. This is a
-			<strong>documentation and completeness</strong> instrument, not a numeric score: the engine grades
-			the note <strong>Complete</strong>, <strong>Partial</strong>, or <strong>Incomplete</strong>,
-			reports a completeness percentage, and — independently — raises safety flags (a missing
-			Assessment or Plan, red-flag symptoms without a plan, no safety-netting advice, or abnormal
-			vitals not addressed). A Complete grade means the note is well documented so another clinician
-			can safely continue care — not that the clinical care was correct.
+			A structured clinical progress note that records one patient encounter across the four SOAP
+			sections — <strong>S</strong>ubjective, <strong>O</strong>bjective, <strong>A</strong>ssessment,
+			and <strong>P</strong>lan — via a single continuous wizard, then grades the note's documentation
+			completeness (<strong>Complete</strong>, <strong>Partial</strong>, or
+			<strong>Incomplete</strong>) and independently raises safety flags for the clinician.
 		</p>
 	</header>
 
@@ -57,7 +53,11 @@
 				<dd class="mt-1 text-base-content/70">
 					Record a single encounter across the four SOAP sections and produce a graded report — a
 					complete / partial / incomplete classification, a completeness percentage, per-section
-					presence, and flagged issues — to support the clinical record and prompt safety-netting.
+					presence, and flagged issues (a missing Assessment or Plan, red-flag symptoms without a
+					plan, no safety-netting advice, or abnormal vitals not addressed) — to support the clinical
+					record and prompt safety-netting. This is a documentation and completeness instrument, not a
+					numeric score: a Complete grade means the note is well documented so another clinician can
+					safely continue care, not that the clinical care itself was correct.
 				</dd>
 			</div>
 			<div>

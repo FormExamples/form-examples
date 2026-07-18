@@ -11,11 +11,10 @@
 		<p class="text-sm font-semibold uppercase tracking-wide text-primary">Sports Medicine Assessment</p>
 		<h1 class="mt-2 text-3xl font-bold text-base-content">Pre-participation physical evaluation</h1>
 		<p class="mt-4 text-base leading-relaxed text-base-content/70">
-			A pre-participation physical evaluation (PPE) completed as a single continuous wizard:
-			demographics, sport &amp; position details, medical and family history, menstrual / RED-S
-			screening, cardiovascular and musculoskeletal screening, neurological &amp; concussion
-			baseline, vision &amp; skin, and the clearance decision. The shared engine aggregates the PPE
-			rules into a single clearance decision — Cleared, Cleared with Conditions, Not Cleared Pending
+			A pre-participation physical evaluation (PPE) completed as a single continuous wizard covering
+			medical and family history, menstrual / RED-S screening, cardiovascular and musculoskeletal
+			screening, and neurological &amp; concussion baseline, from which the shared engine aggregates
+			the PPE rules into a clearance decision — Cleared, Cleared with Conditions, Not Cleared Pending
 			Further Evaluation, or Not Cleared for Sport — and flags issues for the clinician.
 		</p>
 	</header>
@@ -51,8 +50,10 @@
 			<div>
 				<dt class="font-semibold text-base-content">Purpose</dt>
 				<dd class="mt-1 text-base-content/70">
-					Capture a structured athlete profile and produce a graded report — PPE clearance decision,
-					rule audit trail, and flagged issues — to support clearance for sport.
+					Capture a structured athlete profile — medical and family history, RED-S, cardiovascular,
+					musculoskeletal, and neurological / concussion screening — and produce a graded report —
+					PPE clearance decision, rule audit trail, and flagged issues — to support clearance for
+					sport.
 				</dd>
 			</div>
 			<div>

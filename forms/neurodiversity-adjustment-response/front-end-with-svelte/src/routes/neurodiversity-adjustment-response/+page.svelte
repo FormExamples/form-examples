@@ -17,12 +17,10 @@
 		</h1>
 		<p class="mt-4 text-base leading-relaxed text-base-content/70">
 			A UK-aligned workplace reasonable-adjustments response for neurodiversity that an employer
-			(line manager, HR adviser, or occupational-health lead) completes in answer to a request. It
-			records the overall decision and its rationale, which adjustments were agreed and any
-			alternatives offered, the trial period and review date, support / resources /
-			responsibilities, and any escalation — then computes a four-axis grade (outcome
-			classification, legal / discrimination risk, response completeness, and follow-up / review
-			urgency) plus compliance-and-risk flags including an automatic discrimination-risk alert.
+			(line manager, HR adviser, or occupational-health lead) completes in answer to a request,
+			computing a four-axis grade (outcome classification, legal / discrimination risk, response
+			completeness, and follow-up / review urgency) plus compliance-and-risk flags including an
+			automatic discrimination-risk alert.
 		</p>
 	</header>
 
@@ -57,9 +55,10 @@
 			<div>
 				<dt class="font-semibold text-base-content">Purpose</dt>
 				<dd class="mt-1 text-base-content/70">
-					Record what the employer decided, what has been agreed, and how it will be reviewed, and
-					produce a structured confirmation-and-review record. This is the response half of the
-					request/response pair.
+					Record what the employer decided and why — the overall decision and its rationale, which
+					adjustments were agreed and any alternatives offered, the trial period and review date,
+					support / resources / responsibilities, and any escalation — and produce a structured
+					confirmation-and-review record. This is the response half of the request/response pair.
 				</dd>
 			</div>
 			<div>

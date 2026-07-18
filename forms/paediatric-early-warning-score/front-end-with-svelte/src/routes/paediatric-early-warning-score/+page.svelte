@@ -14,13 +14,10 @@
 			PEWS age-banded track-and-trigger early warning score
 		</h1>
 		<p class="mt-4 text-base leading-relaxed text-base-content/70">
-			An age-banded track-and-trigger early-warning tool for children, completed as a single
-			continuous wizard. The age band is selected first because it sets the normal ranges for the
-			two rate parameters. A clinician records seven parameters across three domains — respiratory
-			(rate, effort, SpO2, oxygen), cardiovascular (heart rate, capillary refill), and behaviour
-			(ACVPU) — each scored 0 to 3. The shared engine sums the aggregate, applies the
-			single-parameter and documented-concern override triggers, and returns the escalation band
-			with a recommended monitoring frequency and response.
+			An age-banded track-and-trigger early-warning tool for children that scores seven physiological
+			parameters across three domains (respiratory, cardiovascular, behaviour) 0&ndash;3 against the
+			selected age band through a single continuous wizard, then sums the total and applies override
+			triggers to return an escalation band with a recommended monitoring frequency.
 		</p>
 	</header>
 
@@ -55,9 +52,10 @@
 			<div>
 				<dt class="font-semibold text-base-content">Purpose</dt>
 				<dd class="mt-1 text-base-content/70">
-					Capture the seven PEWS parameters against the child's age band and produce a graded report
-					— aggregate total, escalation band, monitoring frequency, and flagged issues — to support
-					timely clinical escalation.
+					Capture the seven PEWS parameters &mdash; respiratory rate, effort, SpO2, and oxygen; heart
+					rate and capillary refill; and ACVPU consciousness &mdash; against the child's age band and
+					produce a graded report &mdash; aggregate total, escalation band, monitoring frequency, and
+					flagged issues &mdash; to support timely clinical escalation.
 				</dd>
 			</div>
 			<div>

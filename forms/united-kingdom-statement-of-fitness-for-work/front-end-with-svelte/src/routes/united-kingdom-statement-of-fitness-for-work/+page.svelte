@@ -12,11 +12,11 @@
 		</p>
 		<h1 class="mt-2 text-3xl font-bold text-base-content">Med 3 / fit note</h1>
 		<p class="mt-4 text-base leading-relaxed text-base-content/70">
-			A UK Statement of Fitness for Work (Med 3 / fit note) completed as a single continuous wizard:
-			issuer identification, patient identification, assessment, diagnosis, fitness for work,
-			adaptations, comments, period, follow-up, and sign-off. The shared engine classifies the
-			fitness category, adaptation intensity, and period compliance, checks validity, and fires
-			safety flags drawn directly from DWP guidance for healthcare professionals.
+			A UK Statement of Fitness for Work (Med 3 / fit note) completed as a single continuous wizard —
+			issuer and patient identification, assessment, diagnosis, fitness for work, adaptations, period,
+			and follow-up — whose shared engine classifies the fitness category, adaptation intensity, and
+			period compliance, checks validity, and fires safety flags drawn directly from DWP guidance for
+			healthcare professionals.
 		</p>
 	</header>
 

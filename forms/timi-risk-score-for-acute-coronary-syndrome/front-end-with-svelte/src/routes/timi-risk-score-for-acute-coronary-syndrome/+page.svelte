@@ -14,13 +14,12 @@
 			TIMI UA/NSTEMI bedside risk-stratification score
 		</h1>
 		<p class="mt-4 text-base leading-relaxed text-base-content/70">
-			A bedside risk-stratification tool for adults presenting with unstable angina or NSTEMI,
-			completed as a single continuous wizard. Seven clinical criteria — age &ge; 65, &ge; 3
-			coronary risk factors, known CAD, aspirin in the prior 7 days, &ge; 2 anginal episodes in 24
-			h, ST deviation &ge; 0.5 mm, and a positive cardiac marker — each score 1 point for a total of
-			0 to 7. The shared engine sums the score, derives the risk band (0-1 low, 2-4 intermediate,
-			5-7 high), and maps it to the 14-day risk of death, MI, or urgent revascularisation. This is
-			the UA/NSTEMI version; do not use it for STEMI.
+			A bedside risk-stratification tool, completed as a single continuous wizard, that scores adults
+			presenting with unstable angina or NSTEMI on seven clinical criteria — age &ge; 65, &ge; 3
+			coronary risk factors, known CAD, aspirin in the prior 7 days, &ge; 2 anginal episodes in 24 h,
+			ST deviation &ge; 0.5 mm, and a positive cardiac marker — from which the shared engine sums a
+			0-to-7 total, derives the risk band, and maps it to the 14-day risk of death, MI, or urgent
+			revascularisation.
 		</p>
 	</header>
 
@@ -55,9 +54,11 @@
 			<div>
 				<dt class="font-semibold text-base-content">Purpose</dt>
 				<dd class="mt-1 text-base-content/70">
-					Capture the seven TIMI criteria and produce a graded report — score 0-7, risk band, mapped
-					14-day event risk, and flagged issues — to support the choice of an early invasive versus
-					conservative strategy.
+					Capture the seven TIMI criteria (age, risk-factor burden, known CAD, aspirin use, anginal
+					frequency, ST deviation, and cardiac markers) and produce a graded report — score 0-7, risk
+					band (0-1 low, 2-4 intermediate, 5-7 high), mapped 14-day event risk, and flagged issues —
+					to support the choice of an early invasive versus conservative strategy. This is the
+					UA/NSTEMI version of the TIMI score; do not use it for STEMI.
 				</dd>
 			</div>
 			<div>

@@ -16,12 +16,10 @@
 		</h1>
 		<p class="mt-4 text-base leading-relaxed text-base-content/70">
 			A UK-aligned reasonable-adjustments request that a worker (or a manager on their behalf)
-			completes to ask their employer for adjustments at work. It records the worker's neurodivergent
-			profile, the functional difficulties they experience across the ACAS functional areas, the
-			specific adjustments requested, any supporting evidence, and the current impact and urgency —
-			then computes a four-axis grade (Equality Act 2010 eligibility, impact / wellbeing risk,
-			request completeness, and handling priority) plus compliance-and-wellbeing flags to support
-			the employer's duty to make reasonable adjustments without unreasonable delay.
+			completes to ask their employer for workplace adjustments, computing a four-axis grade
+			(Equality Act 2010 eligibility, impact / wellbeing risk, request completeness, and handling
+			priority) plus compliance-and-wellbeing flags to support the employer's duty to make
+			reasonable adjustments without unreasonable delay.
 		</p>
 	</header>
 
@@ -56,8 +54,11 @@
 			<div>
 				<dt class="font-semibold text-base-content">Purpose</dt>
 				<dd class="mt-1 text-base-content/70">
-					Capture what a neurodivergent worker needs and why, and produce a structured request the
-					employer can act on. This is the request half of the request/response pair.
+					Capture what a neurodivergent worker needs and why — their neurodivergent profile, the
+					functional difficulties they experience across the ACAS functional areas, the specific
+					adjustments requested, any supporting evidence, and the current impact and urgency — and
+					produce a structured request the employer can act on. This is the request half of the
+					request/response pair.
 				</dd>
 			</div>
 			<div>

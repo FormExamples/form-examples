@@ -15,11 +15,8 @@
 		<p class="mt-4 text-base leading-relaxed text-base-content/70">
 			A UK NHS–aligned cytology specimen request that a clinician completes to request a cytology
 			examination — cervical smear, urine, sputum, serous-cavity effusion, fine-needle aspiration, or
-			CSF. It records the requested specimen type and site, the clinical indication and specific
-			question, the cervical-screening / cytology context, the specimen-collection details, and the
-			requested urgency — then computes a four-axis vetting grade (appropriateness, pre-analytical
-			specimen adequacy, request completeness, and triage priority) plus safety-critical flags to
-			support the laboratory's triage and acceptance decision.
+			CSF — computing a four-axis vetting grade plus safety-critical flags to support the
+			laboratory's triage and acceptance decision.
 		</p>
 	</header>
 
@@ -54,8 +51,11 @@
 			<div>
 				<dt class="font-semibold text-base-content">Purpose</dt>
 				<dd class="mt-1 text-base-content/70">
-					Capture which cytology examination is requested and how urgently, and produce a vetting
-					report the cytology / pathology laboratory can triage and accept from.
+					Capture which cytology examination is requested and how urgently — the specimen type and
+					site, clinical indication and specific question, cervical-screening / cytology context,
+					specimen-collection details, and requested urgency — and produce a four-axis vetting
+					report (appropriateness, pre-analytical specimen adequacy, request completeness, and
+					triage priority) the cytology / pathology laboratory can triage and accept from.
 				</dd>
 			</div>
 			<div>

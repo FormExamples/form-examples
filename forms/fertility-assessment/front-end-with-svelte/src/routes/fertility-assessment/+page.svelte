@@ -11,12 +11,9 @@
 		<p class="text-sm font-semibold uppercase tracking-wide text-primary">Fertility Assessment</p>
 		<h1 class="mt-2 text-3xl font-bold text-base-content">Sub-fertility triage</h1>
 		<p class="mt-4 text-base leading-relaxed text-base-content/70">
-			A structured fertility (sub-fertility) assessment completed as a single continuous wizard:
-			demographics, reproductive history, menstrual cycle, medical and surgical history, lifestyle
-			factors, medications and supplements, partner factors and WHO 2021 semen analysis, hormone
-			profile, investigations, and clinical recommendation. The shared engine grades the couple with
-			the NICE CG156 concern level (Low / Moderate / High), derives a numeric concern score, and
-			flags issues for the fertility clinician.
+			A structured fertility (sub-fertility) assessment, completed as a single continuous wizard, that
+			the shared engine grades against NICE CG156 to derive a concern level and score and flag issues
+			for the fertility clinician.
 		</p>
 	</header>
 
@@ -51,9 +48,11 @@
 			<div>
 				<dt class="font-semibold text-base-content">Purpose</dt>
 				<dd class="mt-1 text-base-content/70">
-					Capture a structured fertility history and produce a graded report — NICE CG156 concern
-					level, numeric concern score, and flagged issues — to support investigation and referral
-					decisions.
+					Capture a structured fertility history — reproductive history, menstrual cycle, medical and
+					surgical history, lifestyle factors, medications and supplements, partner factors and semen
+					analysis, hormone profile, and investigations — and produce a graded report — NICE CG156
+					concern level (Low / Moderate / High), numeric concern score, and flagged issues — to support
+					investigation and referral decisions.
 				</dd>
 			</div>
 			<div>

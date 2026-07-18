@@ -12,12 +12,10 @@
 		</p>
 		<h1 class="mt-2 text-3xl font-bold text-base-content">MCAS symptom evaluation</h1>
 		<p class="mt-4 text-base leading-relaxed text-base-content/70">
-			A comprehensive mast cell activation syndrome evaluation completed as a single continuous
-			wizard: demographics, symptom overview, and severity grading across the dermatological,
-			gastrointestinal, cardiovascular, respiratory, and neurological organ systems, plus triggers,
-			laboratory results, and current treatment. The shared engine computes the MCAS Symptom Score
-			(0–40), the burden category, the number of organ systems affected, and flags safety-critical
-			issues for the clinician.
+			A comprehensive mast cell activation syndrome (MCAS) evaluation, completed as a single
+			continuous wizard across five organ systems, that computes the MCAS Symptom Score (0–40), the
+			burden category, and the number of organ systems affected, and flags safety-critical issues
+			for the clinician.
 		</p>
 	</header>
 

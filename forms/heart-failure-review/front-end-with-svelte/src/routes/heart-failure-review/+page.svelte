@@ -15,13 +15,10 @@
 		</h1>
 		<p class="mt-4 text-base leading-relaxed text-base-content/70">
 			A UK primary-care structured annual review for adults with established chronic heart failure,
-			completed as a single continuous wizard. It records functional status, fluid balance,
-			monitoring bloods, and medication optimisation, then derives an
-			<strong>NYHA functional status</strong>, a <strong>medication-optimisation status</strong>
-			against the four pillars of guideline-directed medical therapy (ACEi/ARB/ARNI, beta-blocker,
-			MRA, SGLT2 inhibitor), a <strong>review-completeness grade</strong>, and a set of safety flags.
-			This is a <strong>documentation and status-classification</strong> instrument, not a numeric
-			score and not a diagnostic calculator.
+			completed as a single continuous wizard, that derives an <strong>NYHA functional status</strong>,
+			a <strong>medication-optimisation status</strong> against the four pillars of
+			guideline-directed medical therapy, and a <strong>review-completeness grade</strong>, plus a
+			set of safety flags.
 		</p>
 	</header>
 
@@ -56,10 +53,11 @@
 			<div>
 				<dt class="font-semibold text-base-content">Purpose</dt>
 				<dd class="mt-1 text-base-content/70">
-					Capture the annual review and produce a graded report — an NYHA functional status, a
-					four-pillar medication-optimisation status, a review-completeness grade, and flagged
-					issues — to support the QOF heart-failure register review and prompt escalation where a
-					safety flag is raised.
+					Capture the annual review — functional status, fluid balance, monitoring bloods, and
+					medication optimisation — and produce a graded report: an NYHA functional status, a
+					four-pillar medication-optimisation status (ACEi/ARB/ARNI, beta-blocker, MRA, SGLT2
+					inhibitor), a review-completeness grade, and flagged issues, to support the QOF
+					heart-failure register review and prompt escalation where a safety flag is raised.
 				</dd>
 			</div>
 			<div>

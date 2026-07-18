@@ -12,11 +12,10 @@
 		</p>
 		<h1 class="mt-2 text-3xl font-bold text-base-content">Agile readiness self-assessment</h1>
 		<p class="mt-4 text-base leading-relaxed text-base-content/70">
-			Sixteen yes/no checkpoints — four from the Agile Manifesto and twelve from the Agile
-			Principles — completed as one continuous single-page wizard. The shared engine sums the ticked
-			items into a 0–16 score, reads off a readiness band (Low, Borderline, Medium, High), and
-			surfaces readiness flags plus per-item recommended next actions to help an organization decide
-			whether it is ready to hire agile consulting help.
+			Sixteen yes/no checkpoints from the Agile Manifesto and the Agile Principles, completed as one
+			continuous single-page wizard and graded by the shared engine into a readiness band with
+			recommended next actions, to help an organization decide whether it is ready to hire agile
+			consulting help.
 		</p>
 	</header>
 
@@ -51,9 +50,10 @@
 			<div>
 				<dt class="font-semibold text-base-content">Purpose</dt>
 				<dd class="mt-1 text-base-content/70">
-					Capture a structured agile-readiness profile and produce a graded report — total score,
-					readiness band, readiness flags, and recommended next actions — to support a hiring
-					decision.
+					Capture a structured agile-readiness profile — sixteen yes/no checkpoints, four from the
+					Agile Manifesto and twelve from the Agile Principles — and produce a graded report: a
+					total score (0-16), a readiness band (Low, Borderline, Medium, High), readiness flags, and
+					recommended next actions, to support a hiring decision.
 				</dd>
 			</div>
 			<div>

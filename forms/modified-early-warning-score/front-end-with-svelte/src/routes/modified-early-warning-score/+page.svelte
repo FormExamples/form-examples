@@ -15,11 +15,8 @@
 		</h1>
 		<p class="mt-4 text-base leading-relaxed text-base-content/70">
 			A bedside aggregate track-and-trigger score for adult inpatients (Subbe et al., QJM 2001),
-			completed as a single continuous wizard. A clinician records five physiological observations —
-			systolic blood pressure, heart rate, respiratory rate, temperature, and AVPU level of
-			consciousness — each allocated a sub-score of 0 to 3. The shared engine sums the aggregate MEWS
-			of 0 to 14, derives the risk band, and flags an aggregate of 5 or more, or any single parameter
-			scoring 3, as a trigger for urgent medical review and critical-care outreach.
+			completed as a single continuous wizard, that flags an aggregate of 5 or more, or any single
+			parameter scoring 3, as a trigger for urgent medical review and critical-care outreach.
 		</p>
 	</header>
 
@@ -54,8 +51,10 @@
 			<div>
 				<dt class="font-semibold text-base-content">Purpose</dt>
 				<dd class="mt-1 text-base-content/70">
-					Capture the five MEWS parameters and produce a graded report — aggregate MEWS, risk band,
-					monitoring frequency, and flagged issues — to support timely clinical escalation.
+					Capture the five MEWS parameters — systolic blood pressure, heart rate, respiratory rate,
+					temperature, and AVPU level of consciousness, each allocated a sub-score of 0 to 3 — and
+					produce a graded report — aggregate MEWS (0-14), risk band, monitoring frequency, and
+					flagged issues — to support timely clinical escalation.
 				</dd>
 			</div>
 			<div>

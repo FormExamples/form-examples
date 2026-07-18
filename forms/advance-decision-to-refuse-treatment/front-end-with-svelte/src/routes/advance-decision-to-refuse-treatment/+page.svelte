@@ -12,11 +12,8 @@
 		<h1 class="mt-2 text-3xl font-bold text-base-content">Record treatment refusals in advance</h1>
 		<p class="mt-4 text-base leading-relaxed text-base-content/70">
 			A legal document, completed as a single continuous wizard, that lets a person record decisions
-			to refuse specific medical treatments in advance under the Mental Capacity Act 2005: personal
-			details, mental-capacity declaration, circumstances, general and life-sustaining treatment
-			refusals, exceptions, other wishes, lasting power of attorney, healthcare-professional review,
-			and legal signatures. The shared engine checks legal validity and flags issues for clinical and
-			legal review.
+			to refuse specific medical treatments in advance under the Mental Capacity Act 2005, checked by
+			the shared engine for legal validity and flagged for clinical and legal review.
 		</p>
 	</header>
 
@@ -51,8 +48,11 @@
 			<div>
 				<dt class="font-semibold text-base-content">Purpose</dt>
 				<dd class="mt-1 text-base-content/70">
-					Capture a structured advance decision and produce a validity report — overall validity
-					status, fired validity rules, and flagged issues — to support clinical and legal review.
+					Capture a structured advance decision — personal details, mental-capacity declaration,
+					circumstances, general and life-sustaining treatment refusals, exceptions, other wishes,
+					lasting power of attorney, healthcare-professional review, and legal signatures — and
+					produce a validity report: overall validity status, fired validity rules, and flagged
+					issues, to support clinical and legal review.
 				</dd>
 			</div>
 			<div>

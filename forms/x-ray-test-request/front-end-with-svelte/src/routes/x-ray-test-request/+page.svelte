@@ -13,12 +13,10 @@
 			Plain-radiograph (X-ray) imaging request
 		</h1>
 		<p class="mt-4 text-base leading-relaxed text-base-content/70">
-			A UK NHS–aligned plain-radiograph referral that a clinician completes to request an X-ray. It
-			records the requested examination (body region, laterality, and indication), the specific
-			clinical question, the radiation-safety context (pregnancy status, recent similar imaging, and
-			the IR(ME)R justification), and triage details — then computes a four-axis vetting grade
-			(appropriateness, radiation safety, request completeness, and triage priority) plus
-			safety-critical flags to support the imaging department's vetting decision.
+			A UK NHS–aligned plain-radiograph referral that a clinician completes to request an X-ray, whose
+			shared engine computes a four-axis vetting grade — appropriateness, radiation safety, request
+			completeness, and triage priority — plus safety-critical flags to support the imaging
+			department's vetting decision.
 		</p>
 	</header>
 
@@ -53,8 +51,11 @@
 			<div>
 				<dt class="font-semibold text-base-content">Purpose</dt>
 				<dd class="mt-1 text-base-content/70">
-					Capture why a plain radiograph is requested and how urgently, justify the ionising-radiation
-					exposure, and produce a vetting report the imaging team can triage and book from.
+					Capture why a plain radiograph is requested and how urgently — the requested examination
+					(body region, laterality, and indication), the specific clinical question, the
+					radiation-safety context (pregnancy status, recent similar imaging, and the IR(ME)R
+					justification), and triage details — justify the ionising-radiation exposure, and produce
+					a vetting report the imaging team can triage and book from.
 				</dd>
 			</div>
 			<div>

@@ -14,12 +14,12 @@
 			Centor / McIsaac sore-throat decision aid
 		</h1>
 		<p class="mt-4 text-base leading-relaxed text-base-content/70">
-			A clinical prediction tool that estimates the likelihood that an acute sore throat is caused by
-			group A streptococcus, completed as a single continuous wizard. Four objective Centor criteria
-			— tonsillar exudate, tender anterior cervical nodes, fever (&gt; 38 °C or history), and absence
-			of cough — each score 1 point for a total of 0 to 4. The McIsaac age modifier (+1 for ages
-			3–14, 0 for 15–44, &minus;1 for &ge; 45) gives a modified score of &minus;1 to 5, which bands
-			the probability and guides testing and antibiotic decisions.
+			A clinical prediction tool, completed as a single continuous wizard, that estimates the
+			likelihood an acute sore throat is caused by group A streptococcus from four objective Centor
+			criteria — tonsillar exudate, tender anterior cervical nodes, fever (&gt; 38 °C or history),
+			and absence of cough — each worth 1 point (total 0 to 4), then applies the McIsaac age
+			modifier (+1 for ages 3–14, 0 for 15–44, &minus;1 for &ge; 45) for a modified score of &minus;1
+			to 5 that bands the probability and guides testing and antibiotic decisions.
 		</p>
 	</header>
 

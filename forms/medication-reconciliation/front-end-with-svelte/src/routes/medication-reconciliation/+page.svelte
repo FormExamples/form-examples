@@ -12,13 +12,11 @@
 			Reconcile medicines at a transition of care
 		</h1>
 		<p class="mt-4 text-base leading-relaxed text-base-content/70">
-			Reconcile a patient's medicines at admission, transfer, or discharge, completed as a single
-			continuous wizard. Build the best-possible medication history (BPMH) from two or more
-			independent sources, add one row per medicine on the BPMH and the inpatient list, then
-			classify every discrepancy and document its intended action and rationale. The shared engine
-			derives a completeness status &mdash; Complete, Discrepancies outstanding, or Incomplete
-			&mdash; and raises safety flags. This is a documentation-and-completeness instrument, not a
-			numeric score.
+			A single continuous wizard for reconciling a patient's medicines at admission, transfer, or
+			discharge that builds the best-possible medication history (BPMH) from two or more independent
+			sources, classifies every discrepancy against the inpatient list, and derives a completeness
+			status &mdash; Complete, Discrepancies outstanding, or Incomplete &mdash; with safety flags,
+			not a numeric score.
 		</p>
 	</header>
 
@@ -53,8 +51,9 @@
 			<div>
 				<dt class="font-semibold text-base-content">Purpose</dt>
 				<dd class="mt-1 text-base-content/70">
-					Document the reconciliation and produce a graded report &mdash; completeness status,
-					per-record counts, and flagged issues &mdash; to support safe transfers of care.
+					Document the reconciliation &mdash; including each medicine's intended action and rationale
+					&mdash; and produce a graded report: completeness status, per-record counts, and flagged
+					issues to support safe transfers of care.
 				</dd>
 			</div>
 			<div>

@@ -14,11 +14,11 @@
 		</h1>
 		<p class="mt-4 text-base leading-relaxed text-base-content/70">
 			A UK NHS–aligned sleep-study request that a clinician completes to refer a patient for a sleep
-			investigation, mainly to diagnose or exclude obstructive sleep apnoea. It records the requested
-			study type, the clinical indication and specific question, the Epworth and STOP-BANG scores,
-			anthropometry, symptoms and risk factors, and the requested urgency — then computes a four-axis
-			grade (appropriateness, clinical priority, request completeness, and triage) plus
-			safety-critical flags to support the sleep service's triage and booking decision.
+			investigation — mainly to diagnose or exclude obstructive sleep apnoea — recording the study
+			type, clinical indication, Epworth and STOP-BANG scores, anthropometry, symptoms, and risk
+			factors, then computing a four-axis grade (appropriateness, clinical priority, request
+			completeness, and triage) plus safety-critical flags to support the sleep service's triage and
+			booking decision.
 		</p>
 	</header>
 
@@ -53,8 +53,9 @@
 			<div>
 				<dt class="font-semibold text-base-content">Purpose</dt>
 				<dd class="mt-1 text-base-content/70">
-					Capture why a patient should have a sleep study and how urgently, and produce a vetting
-					report the sleep service can triage and book from.
+					Capture why a patient should have a sleep study and how urgently — study type, clinical
+					indication, Epworth and STOP-BANG scores, anthropometry, symptoms, and risk factors — and
+					produce a vetting report the sleep service can triage and book from.
 				</dd>
 			</div>
 			<div>

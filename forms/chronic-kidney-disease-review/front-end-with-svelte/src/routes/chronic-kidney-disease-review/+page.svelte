@@ -14,15 +14,10 @@
 			CKD review — KDIGO staging, risk zone, and completeness
 		</h1>
 		<p class="mt-4 text-base leading-relaxed text-base-content/70">
-			A UK primary-care structured chronic-kidney-disease review (NICE NG203, KDIGO 2012/2024),
-			completed as a single continuous wizard. It captures the two KDIGO staging measurements (eGFR
-			and urine ACR), blood pressure, a medication review, and the core CKD bloods. This is a
-			<strong>documentation and classification</strong> tool, not a numeric score: the engine derives
-			the <strong>G-stage</strong> (G1–G5) from the eGFR, the <strong>albuminuria stage</strong>
-			(A1–A3) from the urine ACR, indexes the pair into the KDIGO <strong>risk zone</strong>
-			(low / moderate / high / very high), grades review <strong>completeness</strong> (complete /
-			partial / incomplete), and — independently — raises flags mapped to NICE NG203 referral and
-			safety criteria. It does not diagnose or prescribe.
+			A UK primary-care structured chronic-kidney-disease review (NICE NG203, KDIGO 2012/2024)
+			that captures eGFR, urine ACR, blood pressure, medication review, and core CKD bloods in a
+			single continuous wizard, then classifies the KDIGO G-stage and albuminuria stage into a
+			risk zone, grades review completeness, and flags NICE NG203 referral and safety criteria.
 		</p>
 	</header>
 

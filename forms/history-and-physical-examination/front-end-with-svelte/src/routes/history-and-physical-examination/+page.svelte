@@ -15,14 +15,8 @@
 		</h1>
 		<p class="mt-4 text-base leading-relaxed text-base-content/70">
 			A structured clinician record of a full history and physical examination, completed as a single
-			continuous wizard. It captures the history (presenting complaint, its history, past medical and
-			surgical history, drugs and allergies, family and social history, and a systems review), the
-			vital signs and examination by body system, investigations, an impression, and a management
-			plan. This is a <strong>documentation and completeness</strong> instrument, not a numeric score:
-			the engine grades the clerking <strong>Complete</strong>, <strong>Partial</strong>, or
-			<strong>Incomplete</strong> with a completeness percentage, and raises safety flags — two of
-			which (allergies not documented; no impression and no plan) are blocking and force an incomplete
-			status.
+			continuous wizard, that the engine grades <strong>Complete</strong>, <strong>Partial</strong>,
+			or <strong>Incomplete</strong> with a completeness percentage rather than a numeric score.
 		</p>
 	</header>
 
@@ -57,9 +51,13 @@
 			<div>
 				<dt class="font-semibold text-base-content">Purpose</dt>
 				<dd class="mt-1 text-base-content/70">
-					Capture the full clerking and produce a graded report — a complete / partial / incomplete
-					classification, a completeness percentage, and flagged issues — to support the admission
-					document and prompt escalation where a safety flag is raised.
+					Capture the full clerking — history (presenting complaint, its history, past medical and
+					surgical history, drugs and allergies, family and social history, and a systems review),
+					vital signs and examination by body system, investigations, an impression, and a
+					management plan — and produce a graded report: a complete / partial / incomplete
+					classification, a completeness percentage, and flagged issues, two of which (allergies not
+					documented; no impression and no plan) are blocking and force an incomplete status, to
+					support the admission document and prompt escalation where a safety flag is raised.
 				</dd>
 			</div>
 			<div>

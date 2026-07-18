@@ -14,11 +14,9 @@
 		<h1 class="mt-2 text-3xl font-bold text-base-content">EEG test request (referral)</h1>
 		<p class="mt-4 text-base leading-relaxed text-base-content/70">
 			A UK NHS–aligned electroencephalogram (EEG) test request that a clinician completes to refer a
-			patient for EEG. It records the requested study type, the primary indication, the clinical
-			question, the seizure / epilepsy context, acute red flags, and triage details — then computes a
-			four-axis vetting grade (appropriateness, urgency, request completeness, and clinical priority)
-			plus safety-critical flags to support the neurophysiology department's triage and booking
-			decision.
+			patient for EEG, recording the study type, indication, and seizure context, then computing a
+			four-axis vetting grade plus safety-critical flags to support the neurophysiology
+			department's triage and booking decision.
 		</p>
 	</header>
 
@@ -53,8 +51,9 @@
 			<div>
 				<dt class="font-semibold text-base-content">Purpose</dt>
 				<dd class="mt-1 text-base-content/70">
-					Capture why a patient needs an EEG and how urgently, and produce a vetting report the
-					neurophysiology team can triage from.
+					Capture why a patient needs an EEG and how urgently — the requested study type, the
+					primary indication and clinical question, the seizure / epilepsy context, acute red flags,
+					and triage details — and produce a vetting report the neurophysiology team can triage from.
 				</dd>
 			</div>
 			<div>

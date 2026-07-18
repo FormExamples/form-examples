@@ -13,11 +13,9 @@
 		<h1 class="mt-2 text-3xl font-bold text-base-content">Health and Care Decisions (LP1H)</h1>
 		<p class="mt-4 text-base leading-relaxed text-base-content/70">
 			A digital implementation of the statutory LP1H form under the Mental Capacity Act 2005
-			(England and Wales), completed as a single continuous wizard: donor, scope and activation,
-			attorneys, decision rules, replacement attorneys, life-sustaining treatment, preferences,
-			instructions, people to notify, certificate provider, signatures, and registration. The shared
-			validity engine checks every entry against the Act and the LPA Regulations 2007, raises fired
-			statutory rules and ambiguity flags, and reports an overall validity status.
+			(England and Wales), completed as a single continuous wizard whose shared validity engine
+			checks every entry against the Act and the LPA Regulations 2007, raises fired statutory rules
+			and ambiguity flags, and reports an overall validity status.
 		</p>
 	</header>
 
@@ -52,8 +50,10 @@
 			<div>
 				<dt class="font-semibold text-base-content">Purpose</dt>
 				<dd class="mt-1 text-base-content/70">
-					Capture every LP1H field and produce a registration-ready application bundle for the Office
-					of the Public Guardian, with statutory validity and flagged issues.
+					Capture every LP1H field — donor, scope and activation, attorneys, decision rules, replacement
+					attorneys, life-sustaining treatment, preferences, instructions, people to notify, certificate
+					provider, signatures, and registration — and produce a registration-ready application bundle
+					for the Office of the Public Guardian, with statutory validity and flagged issues.
 				</dd>
 			</div>
 			<div>

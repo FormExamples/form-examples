@@ -15,11 +15,11 @@
 		</h1>
 		<p class="mt-4 text-base leading-relaxed text-base-content/70">
 			A brief screen for alcohol misuse and dependence in adults, completed as a single continuous
-			wizard. Four lifetime yes/no questions — <strong>C</strong>ut down, <strong>A</strong>nnoyed,
-			<strong>G</strong>uilty, and <strong>E</strong>ye-opener — each score 1 point for a "yes",
-			for a total of 0 to 4. The shared engine sums the score, derives the result band, and flags
-			CAGE &ge; 2 as a positive screen that prompts a fuller assessment of drinking. A "yes" to the
-			eye-opener question is a marker of physical dependence.
+			wizard of four lifetime yes/no questions — <strong>C</strong>ut down, <strong>A</strong>nnoyed,
+			<strong>G</strong>uilty, and <strong>E</strong>ye-opener — each worth 1 point for a "yes" (total
+			0 to 4), whose shared engine sums the score, derives the result band, flags CAGE &ge; 2 as a
+			positive screen prompting a fuller assessment of drinking, and treats a "yes" to the eye-opener
+			question as a marker of physical dependence.
 		</p>
 	</header>
 

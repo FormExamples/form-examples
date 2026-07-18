@@ -11,11 +11,9 @@
 		<p class="text-sm font-semibold uppercase tracking-wide text-primary">Patient Intake</p>
 		<h1 class="mt-2 text-3xl font-bold text-base-content">General patient intake</h1>
 		<p class="mt-4 text-base leading-relaxed text-base-content/70">
-			A general patient intake completed as a single continuous wizard: personal information,
-			insurance and ID, reason for visit, medical history, current medications, allergies, family
-			history, social history, review of systems, and consent and preferences. The shared engine
-			classifies the patient into a low / medium / high risk level and flags safety-critical and
-			administrative issues for the clinician.
+			A general patient intake, completed as a single continuous wizard, that captures the
+			patient's personal, medical, and social history and classifies them into a low, medium, or
+			high risk level, flagging safety-critical and administrative issues for the clinician.
 		</p>
 	</header>
 

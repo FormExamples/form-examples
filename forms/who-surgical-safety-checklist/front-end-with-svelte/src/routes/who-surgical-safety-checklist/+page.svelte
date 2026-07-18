@@ -10,11 +10,10 @@
 		<p class="text-sm font-semibold uppercase tracking-wide text-primary">WHO Surgical Safety Checklist</p>
 		<h1 class="mt-2 text-3xl font-bold text-base-content">Operating-room safety checklist</h1>
 		<p class="mt-4 text-base leading-relaxed text-base-content/70">
-			A digital implementation of the World Health Organization Surgical Safety Checklist, completed
-			by the operating team as one continuous single-page wizard: case details, then the three WHO
-			safety phases — Sign In (before induction), Time Out (before incision), and Sign Out (before
-			leaving the operating room) — and a summary. The shared engine computes the lifecycle status
-			and raises safety flags for the team.
+			A digital implementation of the World Health Organization Surgical Safety Checklist that the
+			operating team completes as one continuous wizard across the three WHO safety phases — Sign In,
+			Time Out, and Sign Out — with the shared engine computing lifecycle status and raising safety
+			flags for the team.
 		</p>
 	</header>
 
@@ -49,8 +48,10 @@
 			<div>
 				<dt class="font-semibold text-base-content">Purpose</dt>
 				<dd class="mt-1 text-base-content/70">
-					Produce a signed, timestamped record of the three WHO safety phases, the operating-team
-					roster, and any escalations noted during the case.
+					Capture case details, then the three WHO safety phases — Sign In (before induction), Time
+					Out (before incision), and Sign Out (before leaving the operating room) — and produce a
+					signed, timestamped record with a computed lifecycle status, the operating-team roster,
+					and any safety flags or escalations noted during the case.
 				</dd>
 			</div>
 			<div>

@@ -11,10 +11,8 @@
 		<p class="text-sm font-semibold uppercase tracking-wide text-primary">International Patient Summary</p>
 		<h1 class="mt-2 text-3xl font-bold text-base-content">Standardised cross-border health record extract</h1>
 		<p class="mt-4 text-base leading-relaxed text-base-content/70">
-			Compile an International Patient Summary (IPS) as a single continuous wizard: patient demographics,
-			problem list, medication summary, allergies and intolerances, immunisations, procedures, results and
-			investigations, medical devices, advance directives and consent, and authoring clinician signoff. The
-			shared engine validates section completeness against ISO 27269 and the HL7 FHIR IPS Implementation
+			Compile an International Patient Summary (IPS) as a single continuous wizard, whose shared
+			engine validates section completeness against ISO 27269 and the HL7 FHIR IPS Implementation
 			Guide, classifies the summary as Complete, Partial, or Incomplete, and flags issues for the
 			receiving clinician.
 		</p>
@@ -51,9 +49,11 @@
 			<div>
 				<dt class="font-semibold text-base-content">Purpose</dt>
 				<dd class="mt-1 text-base-content/70">
-					Capture a patient's core clinical facts in a minimal, specialty-agnostic format and produce a
-					graded report — completeness level, per-section audit trail, and flagged issues — to support
-					cross-border and unplanned care.
+					Capture a patient's core clinical facts in a minimal, specialty-agnostic format —
+					demographics, problem list, medication summary, allergies and intolerances, immunisations,
+					procedures, results and investigations, medical devices, advance directives and consent,
+					and authoring clinician signoff — and produce a graded report: completeness level,
+					per-section audit trail, and flagged issues, to support cross-border and unplanned care.
 				</dd>
 			</div>
 			<div>

@@ -13,12 +13,9 @@
 			Ophthalmic / optometric eye examination request
 		</h1>
 		<p class="mt-4 text-base leading-relaxed text-base-content/70">
-			A UK NHS–aligned eye examination request (referral) that a clinician completes to request an
-			eye vision test for a patient. It records the requested test, the eye(s) to be examined, the
-			clinical indication and specific question, relevant history, symptoms and red flags, and the
-			requested urgency — then computes a four-axis vetting grade (appropriateness, urgency / triage
-			priority, request completeness, and clinical priority) plus safety-critical flags to support
-			the eye-care service's triage and booking decision.
+			A UK NHS–aligned eye examination request (referral) that a clinician completes to record why,
+			how, and how urgently a patient needs an eye vision test, so the engine can compute a four-axis
+			vetting grade and safety-critical flags to support the eye-care service's triage decision.
 		</p>
 	</header>
 
@@ -53,8 +50,11 @@
 			<div>
 				<dt class="font-semibold text-base-content">Purpose</dt>
 				<dd class="mt-1 text-base-content/70">
-					Capture why a patient needs an eye vision test and how urgently, and produce a vetting
-					report the eye-care team can triage and book from.
+					Capture why a patient needs an eye vision test — the requested test, the eye(s) to be
+					examined, the clinical indication and specific question, relevant history, symptoms and red
+					flags, and how urgently — then produce a four-axis vetting grade (appropriateness, urgency /
+					triage priority, request completeness, and clinical priority) plus safety-critical flags that
+					the eye-care team can triage and book from.
 				</dd>
 			</div>
 			<div>

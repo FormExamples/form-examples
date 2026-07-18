@@ -14,11 +14,10 @@
 		</p>
 		<h1 class="mt-2 text-3xl font-bold text-base-content">Statutory disclosures acknowledgment</h1>
 		<p class="mt-4 text-base leading-relaxed text-base-content/70">
-			A short single-page wizard that presents the practice's legal-requirements privacy notice —
-			the statutory disclosures of personal information to NHS England, the Care Quality Commission,
-			the UK Health Security Agency and other bodies — and records the patient's acknowledgment and
-			signature. The shared engine validates completeness, derives a Complete / Incomplete status,
-			and flags any governance issues for the information-governance officer.
+			A short single-page wizard that presents the practice's legal-requirements privacy notice and
+			records the patient's acknowledgment and signature, whose shared engine validates completeness,
+			derives a Complete / Incomplete status, and flags any governance issues for the
+			information-governance officer.
 		</p>
 	</header>
 
@@ -53,9 +52,10 @@
 			<div>
 				<dt class="font-semibold text-base-content">Purpose</dt>
 				<dd class="mt-1 text-base-content/70">
-					Record a patient's acknowledgment of the statutory-disclosure privacy notice and produce a
-					completeness-graded summary — status, missing required fields, and flagged issues — for
-					practice records.
+					Record a patient's acknowledgment of the statutory-disclosure privacy notice — disclosures
+					of personal information to NHS England, the Care Quality Commission, the UK Health
+					Security Agency, and other bodies — and produce a completeness-graded summary: status,
+					missing required fields, and flagged issues, for practice records.
 				</dd>
 			</div>
 			<div>

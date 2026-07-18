@@ -12,16 +12,11 @@
 		</p>
 		<h1 class="mt-2 text-3xl font-bold text-base-content">MSE — the seven ASEPTIC domains</h1>
 		<p class="mt-4 text-base leading-relaxed text-base-content/70">
-			A structured clinician record of a psychiatric mental state examination, completed as a single
-			continuous wizard. It documents findings across the seven ASEPTIC domains — <strong
-				>a</strong
-			>ppearance and behaviour, <strong>s</strong>peech, <strong>e</strong>motion,
-			<strong>p</strong>erception, <strong>t</strong>hought, <strong>i</strong>nsight, and
-			<strong>c</strong>ognition. This is a
-			<strong>documentation and completeness</strong> instrument, not a numeric score: the engine
-			grades the record <strong>Complete</strong> or <strong>Partial</strong> with a completeness
-			percentage, and — independently — derives a risk indicator (none / low / moderate / high) from
-			safety flags raised across the domains.
+			A structured clinician record of a psychiatric mental state examination — documenting the
+			seven ASEPTIC domains (appearance and behaviour, speech, emotion, perception, thought,
+			insight, cognition) — that grades documentation completeness
+			(<strong>Complete</strong> or <strong>Partial</strong>) and, independently, derives a risk
+			indicator from safety flags, with <strong>no numeric score</strong>.
 		</p>
 	</header>
 
@@ -57,9 +52,9 @@
 				<dt class="font-semibold text-base-content">Purpose</dt>
 				<dd class="mt-1 text-base-content/70">
 					Capture the mental state across the seven ASEPTIC domains and produce a graded report — a
-					complete / partial classification, a completeness percentage, a risk indicator, and
-					flagged issues — to support the mental state section of a clinical record and prompt
-					escalation where risk is flagged.
+					complete / partial classification, a completeness percentage, a risk indicator (none / low /
+					moderate / high), and flagged issues — to support the mental state section of a clinical
+					record and prompt escalation where risk is flagged.
 				</dd>
 			</div>
 			<div>

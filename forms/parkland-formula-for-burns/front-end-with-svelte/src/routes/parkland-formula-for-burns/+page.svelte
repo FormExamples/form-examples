@@ -14,12 +14,10 @@
 			Fluid resuscitation for major thermal burns
 		</h1>
 		<p class="mt-4 text-base leading-relaxed text-base-content/70">
-			Enter body weight (kg), %TBSA burned, and the time of injury in a single continuous wizard. The
-			shared engine applies the Parkland formula — total 24 h volume = 4 mL × weight × %TBSA — splits
-			it 50/50 into the first 8 h (from injury) and the next 16 h, and derives an infusion rate for
-			each phase, offsetting for the time already elapsed. It also reports a urine-output target of
-			0.5-1.0 mL/kg/h. When more than 8 h have elapsed the first phase is overdue and the outstanding
-			volume should be given now. This is a starting estimate only, not definitive burns management.
+			A fluid-resuscitation calculator, completed as a single continuous wizard, that applies the
+			Parkland formula to a patient's weight, %TBSA burned, and time of injury to derive the 24-hour
+			crystalloid volume, its 8-hour/16-hour phase split and infusion rates, and a urine-output
+			target, as a starting estimate only.
 		</p>
 	</header>
 

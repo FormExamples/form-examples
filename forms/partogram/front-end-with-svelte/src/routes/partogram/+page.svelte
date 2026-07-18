@@ -10,13 +10,10 @@
 		<p class="text-sm font-semibold uppercase tracking-wide text-primary">Partogram</p>
 		<h1 class="mt-2 text-3xl font-bold text-base-content">Labour-progress record (partograph)</h1>
 		<p class="mt-4 text-base leading-relaxed text-base-content/70">
-			A graphical record of the progress of labour, completed as a single continuous wizard — labour
-			context, patient identification, admission findings, and a repeating series of timed
-			intrapartum observations (cervical dilatation, descent, contractions, fetal heart rate, liquor
-			and moulding, maternal vitals, urine, and drugs / oxytocin). The shared engine plots the latest
-			cervical dilatation against the alert line (4 + t cm) and the action line (t cm), classifies
-			labour progress (Normal, Alert-line crossed, or Action-line crossed), and — independently —
-			raises threshold flags across the whole observation series. It is not a validated numeric score.
+			A graphical record of the progress of labour, completed as a single continuous wizard, that
+			captures a repeating series of timed intrapartum observations and plots the latest cervical
+			dilatation against the alert and action reference lines to classify labour progress,
+			independently raising threshold flags &mdash; not a validated numeric score.
 		</p>
 	</header>
 
@@ -51,9 +48,10 @@
 			<div>
 				<dt class="font-semibold text-base-content">Purpose</dt>
 				<dd class="mt-1 text-base-content/70">
-					Record labour progress and produce a report — progress classification, reference-line
-					expectations, the observation series, and flagged issues — to support safe, auditable
-					intrapartum care.
+					Record labour progress &mdash; cervical dilatation, descent, contractions, fetal heart rate,
+					liquor and moulding, maternal vitals, urine, and drugs/oxytocin &mdash; and produce a report
+					&mdash; progress classification, reference-line expectations, the observation series, and
+					flagged issues &mdash; to support safe, auditable intrapartum care.
 				</dd>
 			</div>
 			<div>

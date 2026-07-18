@@ -16,12 +16,9 @@
 		</h1>
 		<p class="mt-4 text-base leading-relaxed text-base-content/70">
 			A UK NHS–aligned tissue histopathology specimen request that a clinician completes when
-			submitting a tissue specimen for histopathological examination. It records the specimen (type,
-			anatomical site, number of pots, fixative), the clinical indication and specific question,
-			relevant clinical details, provisional diagnosis and previous histology, and the requested
-			urgency — then computes a four-axis vetting grade (appropriateness, specimen quality, request
-			completeness, and urgency triage) plus safety-critical flags to support the laboratory's
-			accessioning, triage, and reporting decisions.
+			submitting a tissue specimen for histopathological examination, computing a four-axis vetting
+			grade and safety-critical flags to support the laboratory's accessioning, triage, and reporting
+			decisions.
 		</p>
 	</header>
 
@@ -56,8 +53,11 @@
 			<div>
 				<dt class="font-semibold text-base-content">Purpose</dt>
 				<dd class="mt-1 text-base-content/70">
-					Capture the specimen, indication, and urgency for a tissue pathology request, and produce a
-					vetting report the pathology laboratory can accession and triage from.
+					Capture the specimen (type, anatomical site, number of pots, fixative), the clinical indication
+					and specific question, relevant clinical details, provisional diagnosis and previous
+					histology, and the requested urgency — a four-axis grade (appropriateness, specimen
+					quality, request completeness, and urgency triage) — and produce a vetting report the
+					pathology laboratory can accession and triage from.
 				</dd>
 			</div>
 			<div>

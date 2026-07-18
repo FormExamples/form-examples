@@ -11,12 +11,11 @@
 		<p class="text-sm font-semibold uppercase tracking-wide text-primary">Nutrition Assessment</p>
 		<h1 class="mt-2 text-3xl font-bold text-base-content">Nutritional status evaluation</h1>
 		<p class="mt-4 text-base leading-relaxed text-base-content/70">
-			A comprehensive nutritional evaluation completed as a single continuous wizard: demographics,
-			anthropometric measurements, dietary history, MUST screening, swallowing and oral health,
-			gastrointestinal function, food allergies and intolerances, nutritional requirements, current
-			nutritional support, and care plan. The shared engine scores the patient with the Malnutrition
-			Universal Screening Tool (MUST), derives an overall severity level, and flags issues for the
-			dietitian or clinician.
+			A comprehensive nutritional evaluation — covering demographics, anthropometric measurements,
+			dietary history, MUST screening, swallowing and oral health, gastrointestinal function, food
+			allergies and intolerances, nutritional requirements, current nutritional support, and care
+			plan — that the shared engine scores with the Malnutrition Universal Screening Tool (MUST)
+			to derive an overall severity level and flag issues for the dietitian or clinician.
 		</p>
 	</header>
 

@@ -13,12 +13,8 @@
 		<h1 class="mt-2 text-3xl font-bold text-base-content">HAS-BLED bleeding-risk score</h1>
 		<p class="mt-4 text-base leading-relaxed text-base-content/70">
 			A bleeding-risk score for adults with atrial fibrillation on, or being considered for, oral
-			anticoagulation, completed as a single continuous wizard. Nine clinical criteria — Hypertension
-			(SBP &gt; 160), Abnormal renal function, Abnormal liver function, Stroke, Bleeding history,
-			Labile INR, Elderly (age &gt; 65), Drugs (antiplatelets/NSAIDs), and Alcohol (&ge; 8 units/week)
-			— each score 1 point for a total of 0 to 9. The shared engine sums the score, derives the risk
-			band, and flags HAS-BLED &ge; 3 as higher bleeding risk: not a contraindication to
-			anticoagulation, but a prompt to correct modifiable factors and read alongside CHA&#8322;DS&#8322;-VASc.
+			anticoagulation, completed as a single continuous wizard, that sums nine clinical criteria into
+			a total of 0 to 9 and flags a score of 3 or more as higher bleeding risk.
 		</p>
 	</header>
 
@@ -53,9 +49,12 @@
 			<div>
 				<dt class="font-semibold text-base-content">Purpose</dt>
 				<dd class="mt-1 text-base-content/70">
-					Capture the nine HAS-BLED criteria and produce a graded report — score 0-9, risk band, and
-					flagged issues — to support anticoagulation decisions and surface correctable bleeding-risk
-					factors.
+					Capture the nine HAS-BLED criteria — Hypertension (SBP &gt; 160), Abnormal renal function,
+					Abnormal liver function, Stroke, Bleeding history, Labile INR, Elderly (age &gt; 65), Drugs
+					(antiplatelets/NSAIDs), and Alcohol (&ge; 8 units/week) — and produce a graded report: score
+					0-9, risk band, and flagged issues, to support anticoagulation decisions and surface
+					correctable bleeding-risk factors. A high score is not a contraindication to anticoagulation;
+					read it alongside CHA&#8322;DS&#8322;-VASc.
 				</dd>
 			</div>
 			<div>

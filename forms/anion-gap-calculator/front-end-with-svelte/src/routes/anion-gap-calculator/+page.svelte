@@ -12,11 +12,8 @@
 			Serum anion gap and albumin correction for adults
 		</h1>
 		<p class="mt-4 text-base leading-relaxed text-base-content/70">
-			Enter a routine serum electrolyte panel (sodium, chloride, bicarbonate; optional potassium and
-			albumin) in a single continuous wizard. The shared engine computes the anion gap — (Na + K) −
-			(Cl + HCO₃), or Na − (Cl + HCO₃) without potassium — corrects it for albumin (+ 0.25 × (40 −
-			albumin)), and classifies the result: normal, low (&lt; 8 mmol/L), high (above the upper
-			bound), or very high (&ge; 20 mmol/L). A high gap is flagged for a HAGMA differential.
+			Enter a routine serum electrolyte panel in a single continuous wizard, and the shared engine
+			computes, albumin-corrects, and classifies the anion gap.
 		</p>
 	</header>
 
@@ -51,8 +48,11 @@
 			<div>
 				<dt class="font-semibold text-base-content">Purpose</dt>
 				<dd class="mt-1 text-base-content/70">
-					Turn a routine electrolyte panel into a computed anion gap, an albumin-corrected gap, a
-					classification band, and flagged issues that direct further investigation. It is a
+					Turn a routine electrolyte panel (sodium, chloride, bicarbonate; optional potassium and
+					albumin) into a computed anion gap — (Na + K) − (Cl + HCO₃), or Na − (Cl + HCO₃) without
+					potassium — an albumin-corrected gap (+ 0.25 × (40 − albumin)), a classification band
+					(normal, low &lt; 8 mmol/L, high, or very high &ge; 20 mmol/L, with a high gap flagged for a
+					HAGMA differential), and flagged issues that direct further investigation. It is a
 					decision-support prompt, not a diagnosis.
 				</dd>
 			</div>

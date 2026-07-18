@@ -7,10 +7,9 @@
 		<p class="text-sm font-semibold uppercase tracking-wide text-primary">Audiology Assessment</p>
 		<h1 class="mt-2 text-3xl font-bold text-base-content">Comprehensive hearing evaluation</h1>
 		<p class="mt-4 text-base leading-relaxed text-base-content/70">
-			A single continuous wizard covering demographics, chief complaint, hearing history, audiometric
-			results, tinnitus, vestibular symptoms, otoscopy, medical history, and functional communication.
-			The shared engine derives a hearing-level grade from the pure-tone average and flags
-			safety-critical issues for the audiologist.
+			A single continuous wizard that captures a structured hearing profile, whose shared engine
+			derives a hearing-level grade from the pure-tone average and flags safety-critical issues for
+			the audiologist.
 		</p>
 	</header>
 
@@ -44,8 +43,10 @@
 			<div>
 				<dt class="font-semibold text-base-content">Purpose</dt>
 				<dd class="mt-1 text-base-content/70">
-					Capture a structured hearing profile and produce a graded report — hearing-level grade and
-					flagged issues — to support audiology review.
+					Capture a structured hearing profile — demographics, chief complaint, hearing history,
+					audiometric results, tinnitus, vestibular symptoms, otoscopy, medical history, and
+					functional communication — and produce a graded report (hearing-level grade and flagged
+					issues) to support audiology review.
 				</dd>
 			</div>
 			<div>

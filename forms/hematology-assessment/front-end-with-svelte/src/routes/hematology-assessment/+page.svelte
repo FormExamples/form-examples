@@ -11,12 +11,9 @@
 		<p class="text-sm font-semibold uppercase tracking-wide text-primary">Hematology Assessment</p>
 		<h1 class="mt-2 text-3xl font-bold text-base-content">Haematological evaluation</h1>
 		<p class="mt-4 text-base leading-relaxed text-base-content/70">
-			A comprehensive haematological evaluation completed as a single continuous wizard: patient
-			information, complete blood count, coagulation studies, peripheral blood film, iron studies,
-			haemoglobinopathy screening, bone-marrow assessment, transfusion history, treatment and
-			medications, and clinical review. The shared engine computes a composite abnormality score
-			(0–100), classifies the result from normal to critical, fires interpretation rules, and flags
-			issues for the haematologist.
+			A comprehensive haematological evaluation, completed as a single continuous wizard, that
+			computes a composite abnormality score (0–100), classifies the result from normal to critical,
+			and flags issues for the haematologist.
 		</p>
 	</header>
 
@@ -51,9 +48,11 @@
 			<div>
 				<dt class="font-semibold text-base-content">Purpose</dt>
 				<dd class="mt-1 text-base-content/70">
-					Capture a structured haematology panel and produce a graded report — composite abnormality
-					score, classification, interpretation rules, and flagged issues — to support haematology
-					review.
+					Capture a structured haematology panel — complete blood count, coagulation studies,
+					peripheral blood film, iron studies, haemoglobinopathy screening, bone-marrow assessment,
+					transfusion history, and treatment and medications — and produce a graded report: composite
+					abnormality score, classification, interpretation rules, and flagged issues, to support
+					haematology review.
 				</dd>
 			</div>
 			<div>

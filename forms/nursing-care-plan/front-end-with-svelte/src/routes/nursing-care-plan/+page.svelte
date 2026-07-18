@@ -12,13 +12,13 @@
 			Document care through the nursing process (ADPIE)
 		</h1>
 		<p class="mt-4 text-base leading-relaxed text-base-content/70">
-			Build an individualised nursing care plan as a single continuous wizard. Record the identified
-			problems and needs, then work each one through the nursing process &mdash; assessment,
-			diagnosis, planning (SMART goals), implementation (interventions), and evaluation &mdash;
-			organised by the Roper&ndash;Logan&ndash;Tierney activities of living. The shared completeness
-			engine grades each problem Complete, Partial, or Incomplete, rolls that up to a plan status,
-			reports a completeness percent, and raises flagged issues. This is a documentation-and-
-			completeness instrument, not a numeric score.
+			A single continuous wizard for building an individualised nursing care plan &mdash;
+			recording identified problems and needs, then working each one through the nursing process
+			(assessment, diagnosis, planning with SMART goals, implementation via interventions, and
+			evaluation) organised by the Roper&ndash;Logan&ndash;Tierney activities of living &mdash;
+			whose shared completeness engine grades each problem Complete, Partial, or Incomplete,
+			rolls that up to a plan status, reports a completeness percent, and raises flagged issues,
+			as a documentation-and-completeness instrument rather than a numeric score.
 		</p>
 	</header>
 

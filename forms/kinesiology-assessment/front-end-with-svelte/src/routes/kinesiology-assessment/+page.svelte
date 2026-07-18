@@ -11,12 +11,9 @@
 		<p class="text-sm font-semibold uppercase tracking-wide text-primary">Kinesiology Assessment</p>
 		<h1 class="mt-2 text-3xl font-bold text-base-content">Functional movement screen</h1>
 		<p class="mt-4 text-base leading-relaxed text-base-content/70">
-			A functional movement evaluation completed as a single continuous wizard: demographics,
-			referral information, movement history, and the seven standardised Functional Movement Screen
-			(FMS) patterns — deep squat, hurdle step, in-line lunge, shoulder mobility, active straight leg
-			raise, trunk stability push-up, and rotary stability. The shared engine totals the composite
-			FMS score (0–21), classifies it, and flags pain, movement limitations, and asymmetries for the
-			clinician.
+			A functional movement evaluation completed as a single continuous wizard, whose shared engine
+			totals the composite Functional Movement Screen (FMS) score (0–21), classifies it, and flags
+			pain, movement limitations, and asymmetries for the clinician.
 		</p>
 	</header>
 
@@ -66,8 +63,10 @@
 			<div>
 				<dt class="font-semibold text-base-content">Documentation</dt>
 				<dd class="mt-1 text-base-content/70">
-					Uses the Functional Movement Screen (FMS): seven movement patterns each scored 0–3, with the
-					lower of left/right scores used for bilateral tests, for a composite score of 0–21.
+					Uses the Functional Movement Screen (FMS): seven movement patterns — deep squat, hurdle
+					step, in-line lunge, shoulder mobility, active straight leg raise, trunk stability
+					push-up, and rotary stability — each scored 0–3, with the lower of left/right scores used
+					for bilateral tests, for a composite score of 0–21.
 				</dd>
 			</div>
 		</dl>

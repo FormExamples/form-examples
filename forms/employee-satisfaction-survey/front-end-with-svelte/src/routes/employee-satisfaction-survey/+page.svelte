@@ -11,12 +11,9 @@
 		<p class="text-sm font-semibold uppercase tracking-wide text-primary">Employee Satisfaction Survey</p>
 		<h1 class="mt-2 text-3xl font-bold text-base-content">Workplace experience survey</h1>
 		<p class="mt-4 text-base leading-relaxed text-base-content/70">
-			An anonymous employee satisfaction survey completed as a single continuous wizard across ten
-			short topics: demographics, role and tenure, workload and work-life balance, management and
-			leadership, growth and development, compensation and benefits, culture and inclusion,
-			environment and resources, recognition and engagement, and overall experience. The shared
-			engine normalises each 1–5 Likert domain to a 0–100 score, averages them into a composite,
-			classifies the result, derives an eNPS classification, and flags issues for HR review.
+			An anonymous employee satisfaction survey, completed as a single continuous wizard across ten
+			short topics, that the shared engine normalises into a 0–100 composite score, satisfaction
+			category, and eNPS classification for HR review.
 		</p>
 	</header>
 
@@ -51,9 +48,12 @@
 			<div>
 				<dt class="font-semibold text-base-content">Purpose</dt>
 				<dd class="mt-1 text-base-content/70">
-					Capture a structured, anonymous picture of employee experience and produce a graded report
-					— composite score, satisfaction category, eNPS, and flagged issues — to inform retention,
-					engagement and culture programmes.
+					Capture a structured, anonymous picture of employee experience across ten topics —
+					demographics, role and tenure, workload and work-life balance, management and leadership,
+					growth and development, compensation and benefits, culture and inclusion, environment and
+					resources, recognition and engagement, and overall experience — and produce a graded
+					report: composite score, satisfaction category, eNPS, and flagged issues, to inform
+					retention, engagement and culture programmes.
 				</dd>
 			</div>
 			<div>

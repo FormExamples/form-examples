@@ -15,12 +15,9 @@
 		</h1>
 		<p class="mt-4 text-base leading-relaxed text-base-content/70">
 			A UK NHS–aligned implementation of the Royal College of Physicians' (2017) standardised
-			track-and-trigger early warning system, completed as a single continuous wizard. A clinician
-			records six physiological parameters — respiration rate, oxygen saturation, air or oxygen,
-			systolic blood pressure, pulse, consciousness (ACVPU), and temperature — each scored 0 to 3.
-			The shared engine adds a supplemental-oxygen weighting, aggregates the total, applies the
-			red-score rule, and returns the clinical-risk band with the RCP-recommended monitoring
-			frequency and escalation response.
+			track-and-trigger early warning system, completed as a single continuous wizard, that scores
+			six physiological parameters and returns a clinical-risk band with the RCP-recommended
+			monitoring frequency and escalation response.
 		</p>
 	</header>
 
@@ -55,8 +52,11 @@
 			<div>
 				<dt class="font-semibold text-base-content">Purpose</dt>
 				<dd class="mt-1 text-base-content/70">
-					Capture the six NEWS2 parameters and produce a graded report — aggregate total, risk band,
-					monitoring frequency, and flagged issues — to support timely clinical escalation.
+					Capture the six NEWS2 parameters — respiration rate, oxygen saturation, air or oxygen,
+					systolic blood pressure, pulse, consciousness (ACVPU), and temperature — each scored 0
+					to 3 with a supplemental-oxygen weighting, and produce a graded report — aggregate total,
+					risk band, monitoring frequency, and flagged issues — to support timely clinical
+					escalation.
 				</dd>
 			</div>
 			<div>

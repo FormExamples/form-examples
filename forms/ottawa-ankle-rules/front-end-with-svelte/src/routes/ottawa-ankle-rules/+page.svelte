@@ -12,12 +12,10 @@
 		</p>
 		<h1 class="mt-2 text-3xl font-bold text-base-content">Ottawa Ankle / Foot imaging decision rule</h1>
 		<p class="mt-4 text-base leading-relaxed text-base-content/70">
-			A validated bedside decision rule for adults after an acute ankle or midfoot injury, completed
-			as a single continuous wizard. This is a <strong>decision rule, not a score</strong>: there is
-			nothing to add up. An ankle X-ray is indicated when there is malleolar-zone pain together with
-			tenderness at the lateral or medial malleolus, or an inability to bear weight. A foot X-ray is
-			indicated when there is midfoot-zone pain together with tenderness at the base of the fifth
-			metatarsal or the navicular, or an inability to bear weight. The two decisions are independent.
+			A validated bedside decision rule &mdash; not a score &mdash; for adults after an acute ankle or
+			midfoot injury, completed as a single continuous wizard, that independently indicates an ankle
+			X-ray and/or a foot X-ray from malleolar- or midfoot-zone pain, bony tenderness at four
+			landmarks, and inability to bear weight.
 		</p>
 	</header>
 

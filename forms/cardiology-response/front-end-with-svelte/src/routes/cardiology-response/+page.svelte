@@ -14,9 +14,9 @@
 		</h1>
 		<p class="mt-4 text-base leading-relaxed text-base-content/70">
 			A UK NHS–aligned cardiology response that a cardiology clinician completes in answer to a
-			referral. It records the consultation type, the clinical summary and examination, the
+			referral, recording the consultation type, the clinical summary and examination, the
 			investigations performed, the structured findings, the diagnosis, the key left-ventricular
-			ejection fraction, and the management plan and follow-up — then computes a four-axis
+			ejection fraction, and the management plan and follow-up, then computing a four-axis
 			interpretation grade (response classification, condition severity, response completeness, and
 			follow-up urgency) plus safety-critical flags including an automatic critical-result alert.
 		</p>

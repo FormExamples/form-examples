@@ -1,110 +1,92 @@
+// Four-axis grader for the Nuclear Medicine Test Request.
+//
+// Composes the rule sets in rules.ts and the safety flags in flags.ts into a
+// single pure, deterministic grading result. The public entry point is
+// `calculateGrade(data)`. The output shape and rule / flag IDs are identical
+// across every front-end and the back-end.
+
 import type {
-	CardiologyRequest,
+	NuclearMedicineRequest,
 	GradingResult,
 	Recommendation,
 	AppropriatenessBand,
-	SafetyBand,
-	TriageTier,
+	PrepSafetyBand,
 	FiredRule
 } from './types';
-import { gradeAppropriateness } from './appropriateness-rules';
-import { gradeSafety } from './safety-rules';
-import { gradeCompleteness } from './completeness-rules';
-import { gradeTriage } from './triage-rules';
-import { detectFlags } from './flagged-issues';
+import {
+	scoreAppropriateness,
+	radiationDoseBand,
+	scorePrepSafety,
+	scoreCompleteness,
+	scoreTriage
+} from './rules';
+import { detectFlags } from './flags';
 
 /**
- * Pure four-axis vetting engine for a cardiology referral request.
- *
- * Computes:
- * - Axis A: referral appropriateness (usually-appropriate / may-be-appropriate /
- *   usually-not-appropriate).
- * - Axis B: safety / red-flag (ok / caution / red-flag).
- * - Axis C: request completeness percent (0–100, weighted).
- * - Axis D: triage priority (routine / urgent / emergency) + target timeframe.
- *
- * Plus an overall recommendation (accept / query-referrer / redirect / reject),
- * the fired-rule audit trail, and safety flags.
- *
- * Invariant: a red flag (suspected acute coronary syndrome, exertional syncope,
- * new-onset heart failure) drives Axis B to red-flag and auto-escalates Axis D
- * regardless of the other axes. The least-alarming band is only chosen when no
- * rule fires.
- *
- * No side effects, no network calls, no I/O.
+ * Derive an overall recommendation for the imaging vetting desk from the four
+ * axes. Least-alarming wins only when nothing escalates.
  */
-export function calculateGrade(request: CardiologyRequest): GradingResult {
+export function deriveRecommendation(
+	appropriatenessBand: AppropriatenessBand,
+	prepSafetyBand: PrepSafetyBand,
+	completenessPercent: number
+): Recommendation {
+	if (prepSafetyBand === 'contraindicated') return 'reject';
+	if (appropriatenessBand === 'usually-not-appropriate') return 'query-referrer';
+	if (completenessPercent < 50) return 'query-referrer';
+	if (prepSafetyBand === 'caution') return 'redirect';
+	return 'accept';
+}
+
+/** Human-readable recommendation labels. */
+export const RECOMMENDATION_LABELS: Record<string, string> = {
+	accept: 'Accept and book',
+	'query-referrer': 'Query the referrer',
+	redirect: 'Accept with safety caution',
+	reject: 'Reject'
+};
+
+/**
+ * Public entry point. Pure and deterministic. Composes the four axes plus
+ * the radiation-dose sub-check and the safety flags.
+ */
+export function calculateGrade(data: NuclearMedicineRequest): GradingResult {
 	const firedRules: FiredRule[] = [];
 
-	// Axis A
-	const a = gradeAppropriateness(request);
-	firedRules.push(...a.firedRules);
+	// Axis A — appropriateness.
+	const appr = scoreAppropriateness(data.request.primaryIndication, data.request.scanType);
+	if (appr.firedRule) firedRules.push(appr.firedRule);
 
-	// Axis B
-	const b = gradeSafety(request);
-	firedRules.push(...b.firedRules);
+	// Axis B — radiation dose + preparation / radiation safety.
+	const dose = radiationDoseBand(data.request.scanType);
+	if (dose.firedRule) firedRules.push(dose.firedRule);
+	const prep = scorePrepSafety(data, dose.band);
+	for (const r of prep.firedRules) firedRules.push(r);
 
-	// Axis C
-	const c = gradeCompleteness(request);
-	firedRules.push(...c.firedRules);
+	// Axis C — completeness.
+	const completeness = scoreCompleteness(data);
+	for (const m of completeness.missing) firedRules.push(m);
 
-	// Axis D (depends on the safety band)
-	const d = gradeTriage(request, b.safetyBand);
-	firedRules.push(...d.firedRules);
+	// Axis D — triage.
+	const triage = scoreTriage(data);
+	for (const r of triage.firedRules) firedRules.push(r);
 
-	const recommendation = deriveRecommendation(
-		a.appropriatenessBand,
-		b.safetyBand,
-		c.completenessPercent,
-		d.triageTier
-	);
+	const recommendation = deriveRecommendation(appr.band, prep.band, completeness.percent);
 
-	const flags = detectFlags(request);
+	const flags = detectFlags(data, { radiationDoseBand: dose.band });
 
 	return {
-		appropriatenessBand: a.appropriatenessBand,
-		safetyBand: b.safetyBand,
-		completenessPercent: c.completenessPercent,
-		triageTier: d.triageTier,
-		targetTimeframe: d.targetTimeframe,
+		appropriatenessScore: appr.score,
+		appropriatenessBand: appr.band,
+		prepSafetyBand: prep.band,
+		radiationDoseBand: dose.band,
+		completenessPercent: completeness.percent,
+		triageTier: triage.tier,
+		targetTimeframe: triage.targetTimeframe,
 		recommendation,
+		recommendationLabel: RECOMMENDATION_LABELS[recommendation] || recommendation,
 		firedRules,
 		flags,
 		gradedAt: new Date().toISOString()
 	};
-}
-
-/**
- * Derives the overall vetting recommendation from the graded axes.
- *
- * - reject: the referral is usually not appropriate and carries no red flag.
- * - redirect: the referral may be appropriate elsewhere (service mismatch) and
- *   carries no red flag.
- * - query-referrer: a red flag or low completeness needs clarification before
- *   booking (but a true emergency is still accepted onto the urgent pathway).
- * - accept: an appropriate, sufficiently complete referral.
- */
-function deriveRecommendation(
-	appropriateness: AppropriatenessBand,
-	safety: SafetyBand,
-	completeness: number,
-	triage: TriageTier
-): Recommendation {
-	// An emergency is always accepted onto the acute pathway.
-	if (triage === 'emergency') return 'accept';
-
-	if (appropriateness === 'usually-not-appropriate' && safety === 'ok') {
-		return 'reject';
-	}
-
-	if (appropriateness === 'may-be-appropriate' && safety === 'ok' && completeness < 60) {
-		return 'redirect';
-	}
-
-	// A red flag or a materially incomplete request needs clarification.
-	if (safety === 'red-flag' && completeness < 70) return 'query-referrer';
-	if (completeness < 50) return 'query-referrer';
-	if (appropriateness === 'may-be-appropriate' && completeness < 70) return 'query-referrer';
-
-	return 'accept';
 }

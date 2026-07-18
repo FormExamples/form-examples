@@ -11,12 +11,10 @@
 		<p class="text-sm font-semibold uppercase tracking-wide text-primary">Meeting</p>
 		<h1 class="mt-2 text-3xl font-bold text-base-content">General-purpose meeting record</h1>
 		<p class="mt-4 text-base leading-relaxed text-base-content/70">
-			Capture a meeting as a single continuous wizard: organiser and metadata, title and purpose,
-			invitation, agenda, participants, resources, recurrence, a 250-character summary, action items
-			/ outputs / outcomes, and sign-off. The shared validation engine checks the record for
-			structural problems — missing organiser, no participants on a completed meeting, an over-long
-			summary, scheduling errors, open-ended recurrence, overdue actions — and produces an overall
-			health verdict with flagged issues.
+			A general-purpose meeting record, captured as a single continuous wizard, whose shared
+			validation engine checks for structural problems — such as a missing organiser, no
+			participants, an over-long summary, scheduling errors, or overdue actions — and produces an
+			overall health verdict with flagged issues.
 		</p>
 	</header>
 

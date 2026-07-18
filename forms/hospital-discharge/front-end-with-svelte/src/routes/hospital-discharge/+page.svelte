@@ -11,12 +11,9 @@
 		<p class="text-sm font-semibold uppercase tracking-wide text-primary">Hospital Discharge</p>
 		<h1 class="mt-2 text-3xl font-bold text-base-content">Discharge summary &amp; safe transfer of care</h1>
 		<p class="mt-4 text-base leading-relaxed text-base-content/70">
-			A hospital discharge summary completed as a single continuous wizard: patient details,
-			admission summary, diagnoses, procedures, reconciled discharge medications, follow-up
-			arrangements, community care instructions, warning signs and safety-netting, clinician sign-off,
-			and patient / carer acknowledgement. The shared engine validates the summary against NICE NG27
-			completeness rules, classifies it as Complete, Partial or Incomplete, and raises safety flags
-			for the receiving clinician.
+			A hospital discharge summary completed as a single continuous wizard, whose shared engine
+			validates it against NICE NG27 completeness rules, classifies it as Complete, Partial or
+			Incomplete, and raises safety flags for the receiving clinician.
 		</p>
 	</header>
 
@@ -51,9 +48,12 @@
 			<div>
 				<dt class="font-semibold text-base-content">Purpose</dt>
 				<dd class="mt-1 text-base-content/70">
-					Capture a structured discharge summary and produce a graded report — NICE NG27
-					completeness level, outstanding fields, and flagged safety issues — to support safe
-					transfer of care to the GP and community teams.
+					Capture a structured discharge summary — patient details, admission summary, diagnoses,
+					procedures, reconciled discharge medications, follow-up arrangements, community care
+					instructions, warning signs and safety-netting, clinician sign-off, and patient / carer
+					acknowledgement — and produce a graded report: NICE NG27 completeness level, outstanding
+					fields, and flagged safety issues, to support safe transfer of care to the GP and
+					community teams.
 				</dd>
 			</div>
 			<div>

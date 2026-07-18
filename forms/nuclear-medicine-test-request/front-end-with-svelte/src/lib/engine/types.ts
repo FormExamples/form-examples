@@ -1,76 +1,84 @@
 // ──────────────────────────────────────────────
-// Cardiology Request — core data types
+// Nuclear Medicine Test Request — core data types
 //
 // Field names are camelCase (front-end serde); they mirror the snake_case
-// columns in sql/04_create_table_cardiology_request.sql and
-// sql/05_create_table_cardiology_request_grade.sql.
+// columns in the form's sql/ migrations. The model is nested by wizard section
+// (clinician / patient / request / safety / justification / triage) so step
+// components bind to a live section reference.
 // ──────────────────────────────────────────────
 
-// ─── Enumerations (mirror the SQL CHECK constraints) ───
+// ─── Enumerations (mirror the form option catalogues) ───
 
-/** Referral lifecycle status. */
-export type RequestStatus =
-	| 'draft'
-	| 'submitted'
-	| 'triaged'
-	| 'accepted'
-	| 'redirected'
-	| 'rejected'
+/** Requesting-clinician role. */
+export type ClinicianRole =
+	| 'radiologist'
+	| 'nuclear-medicine-physician'
+	| 'oncologist'
+	| 'cardiologist'
+	| 'gp'
+	| 'technologist'
+	| 'other'
+	| '';
+
+/** Professional registration body. */
+export type RegistrationBody = 'GMC' | 'HCPC' | 'NMC' | 'other' | '';
+
+/** Requested radionuclide scan type. */
+export type ScanType =
+	| 'bone-scan'
+	| 'myocardial-perfusion'
+	| 'vq-lung-scan'
+	| 'thyroid-uptake'
+	| 'renal-dmsa'
+	| 'renal-mag3'
+	| 'gallium-octreotide'
+	| 'white-cell-scan'
+	| 'sentinel-node'
+	| 'other'
+	| '';
+
+/** Primary clinical indication. */
+export type Indication =
+	| 'suspected-bone-metastases'
+	| 'cardiac-ischaemia'
+	| 'pulmonary-embolism'
+	| 'thyroid-function'
+	| 'renal-function'
+	| 'infection-localisation'
+	| 'tumour-localisation'
+	| 'sentinel-node-mapping'
+	| 'other'
+	| '';
+
+/** Pregnancy status for radiation justification. */
+export type PregnancyStatus =
+	| 'not-pregnant'
+	| 'pregnant'
+	| 'possible'
+	| 'unknown'
+	| 'not-applicable'
 	| '';
 
 /** Care setting the referral originates from. */
 export type Setting = 'outpatient' | 'inpatient' | 'community' | 'emergency' | '';
-
-/** Requested cardiology service. */
-export type RequestedService =
-	| 'general-cardiology'
-	| 'rapid-access-chest-pain'
-	| 'heart-failure'
-	| 'arrhythmia-ep'
-	| 'valve-clinic'
-	| 'inherited-cardiac-conditions'
-	| 'pre-operative-cardiac'
-	| 'other'
-	| '';
-
-/** Primary reason for referral. */
-export type ReferralReason =
-	| 'chest-pain'
-	| 'breathlessness'
-	| 'palpitations'
-	| 'syncope'
-	| 'heart-failure-symptoms'
-	| 'murmur-or-valve'
-	| 'abnormal-ecg'
-	| 'hypertension'
-	| 'arrhythmia'
-	| 'pre-operative-assessment'
-	| 'other'
-	| '';
-
-/** Character of chest pain per the angina typicality model. */
-export type ChestPainCharacter = 'typical-angina' | 'atypical' | 'non-anginal' | 'none' | '';
-
-/** New York Heart Association functional class. */
-export type NyhaClass = 'i' | 'ii' | 'iii' | 'iv' | '';
-
-/** Troponin / BNP result status. */
-export type InvestigationStatus = 'elevated' | 'normal' | 'not-done' | '';
 
 /** Requested triage urgency. */
 export type Urgency = 'routine' | 'urgent' | 'emergency' | '';
 
 // ─── Axis enumerations (grade) ───
 
-/** Axis A — referral appropriateness. */
+/** Axis A — ACR / RCR iRefer appropriateness band. */
 export type AppropriatenessBand =
 	| 'usually-appropriate'
 	| 'may-be-appropriate'
 	| 'usually-not-appropriate'
 	| '';
 
-/** Axis B — safety / red-flag. */
-export type SafetyBand = 'ok' | 'caution' | 'red-flag' | '';
+/** Axis B — preparation & radiation-safety band. */
+export type PrepSafetyBand = 'ok' | 'caution' | 'contraindicated' | '';
+
+/** Axis B — radiation effective-dose band. */
+export type RadiationDoseBand = 'low' | 'moderate' | 'high' | '';
 
 /** Axis D — triage priority. */
 export type TriageTier = 'routine' | 'urgent' | 'emergency' | '';
@@ -78,86 +86,84 @@ export type TriageTier = 'routine' | 'urgent' | 'emergency' | '';
 /** Overall vetting recommendation. */
 export type Recommendation = 'accept' | 'query-referrer' | 'redirect' | 'reject' | '';
 
-// ─── The request record (sql/04) ───
+// ─── The request record (nested by wizard section) ───
 
-/**
- * The cardiology referral / consult request — the source-of-truth record the
- * four-axis vetting grade is computed from.
- */
-export interface CardiologyRequest {
-	// Referring clinician
-	referringClinician: string;
-	referrerRole: string;
-	registrationBody: string;
+/** Requesting clinician (step 1). */
+export interface ClinicianSection {
+	clinicianName: string;
+	clinicianRole: ClinicianRole;
+	registrationBody: RegistrationBody;
 	registrationNumber: string;
-	supervisingConsultant: string;
 	requesterContact: string;
-	referralDate: string;
-
-	// Patient identification
-	nhsNumber: string;
-	patientName: string;
-	dateOfBirth: string;
-
-	// Referral lifecycle / setting
-	status: RequestStatus;
+	supervisingConsultant: string;
 	siteName: string;
-	setting: Setting;
-	requestedByDate: string;
+	referralDate: string;
+}
 
-	// Requested service and reason
-	requestedService: RequestedService;
-	referralReason: ReferralReason;
+/** Patient identification (step 2). */
+export interface PatientSection {
+	firstName: string;
+	lastName: string;
+	dateOfBirth: string;
+	nhsNumber: string;
+	weightKg: number | null;
+}
+
+/** Requested examination (step 3). */
+export interface RequestSection {
+	scanType: ScanType;
+	primaryIndication: Indication;
 	clinicalQuestion: string;
 	relevantHistory: string;
+}
 
-	// Symptoms
-	symptomChestPain: boolean;
-	chestPainCharacter: ChestPainCharacter;
-	symptomBreathlessness: boolean;
-	nyhaClass: NyhaClass;
-	symptomPalpitations: boolean;
-	symptomSyncope: boolean;
-	symptomOedema: boolean;
+/** Radiation safety (step 4). */
+export interface SafetySection {
+	pregnancyStatus: PregnancyStatus;
+	breastfeeding: boolean;
+	egfr: number | null;
+	recentOtherNuclearScan: boolean;
+}
 
-	// Red flags / acuity
-	suspectedAcs: boolean;
-	exertionalSyncope: boolean;
-	newOnsetHeartFailure: boolean;
+/** IR(ME)R justification (step 5). */
+export interface JustificationSection {
+	irMeRJustification: string;
+	supervisingConsultant: string;
+}
 
-	// Investigations already performed
-	ecgDone: boolean;
-	ecgFindings: string;
-	troponinStatus: InvestigationStatus;
-	bnpStatus: InvestigationStatus;
-
-	// Cardiac history and risk factors
-	knownCoronaryArteryDisease: boolean;
-	previousMi: boolean;
-	heartFailure: boolean;
-	valveDisease: boolean;
-	arrhythmia: boolean;
-	hypertension: boolean;
-	diabetes: boolean;
-	currentMedications: string;
-
-	// Triage
+/** Triage and submit (steps 6-7). */
+export interface TriageSection {
 	urgency: Urgency;
+	requestedByDate: string;
+	setting: Setting;
 	notes: string;
 }
 
-// ─── Grading types (sql/05, sql/06, sql/07) ───
+/**
+ * The nuclear medicine request — the source-of-truth record the four-axis
+ * vetting grade is computed from.
+ */
+export interface NuclearMedicineRequest {
+	clinician: ClinicianSection;
+	patient: PatientSection;
+	request: RequestSection;
+	safety: SafetySection;
+	justification: JustificationSection;
+	triage: TriageSection;
+}
+
+// ─── Grading types ───
 
 /** A scoring axis, used in the fired-rule audit trail. */
 export type Axis = 'appropriateness' | 'safety' | 'completeness' | 'triage';
 
-/** Flag category (mirrors the sql/07 CHECK constraint). */
+/** Flag category (mirrors the sql grade_flag CHECK constraint). */
 export type FlagCategory =
-	| 'suspected-acs'
-	| 'exertional-syncope'
-	| 'new-onset-heart-failure'
-	| 'red-flag-chest-pain'
-	| 'missing-reason'
+	| 'pregnancy'
+	| 'breastfeeding'
+	| 'high-radiation-dose'
+	| 'recent-radionuclide-interference'
+	| 'missing-indication'
 	| 'missing-clinical-question'
 	| 'other';
 
@@ -167,7 +173,7 @@ export type FlagPriority = 'low' | 'medium' | 'high';
 /** A single rule that fired during grading (audit trail). */
 export interface FiredRule {
 	ruleId: string;
-	axis: Axis;
+	axis: string;
 	category: string;
 	description: string;
 }
@@ -181,15 +187,14 @@ export interface Flag {
 	suggestedAction: string;
 }
 
-/**
- * The computed four-axis vetting grade. Mirrors
- * sql/05_create_table_cardiology_request_grade.sql.
- */
+/** The computed four-axis vetting grade. */
 export interface GradingResult {
 	// Axis A
+	appropriatenessScore: number;
 	appropriatenessBand: AppropriatenessBand;
 	// Axis B
-	safetyBand: SafetyBand;
+	prepSafetyBand: PrepSafetyBand;
+	radiationDoseBand: RadiationDoseBand;
 	// Axis C
 	completenessPercent: number;
 	// Axis D
@@ -197,6 +202,7 @@ export interface GradingResult {
 	targetTimeframe: string;
 	// Overall
 	recommendation: Recommendation;
+	recommendationLabel: string;
 	firedRules: FiredRule[];
 	flags: Flag[];
 	gradedAt: string;
@@ -212,16 +218,16 @@ export interface StepConfig {
 
 // ─── Dashboard row ───
 
-/** A graded referral row for the vetting dashboard table. */
-export interface ReferralRow {
+/** A graded request row for the vetting dashboard table. */
+export interface RequestRow {
 	id: string;
 	patientName: string;
-	requestedService: RequestedService;
-	referralReason: ReferralReason;
-	status: RequestStatus;
+	scanType: ScanType;
+	primaryIndication: Indication;
 	referralDate: string;
 	appropriatenessBand: AppropriatenessBand;
-	safetyBand: SafetyBand;
+	prepSafetyBand: PrepSafetyBand;
+	radiationDoseBand: RadiationDoseBand;
 	completenessPercent: number;
 	triageTier: TriageTier;
 	recommendation: Recommendation;

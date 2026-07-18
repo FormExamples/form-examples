@@ -7,10 +7,9 @@
 		<p class="text-sm font-semibold uppercase tracking-wide text-primary">Autism Assessment</p>
 		<h1 class="mt-2 text-3xl font-bold text-base-content">Autism spectrum screening</h1>
 		<p class="mt-4 text-base leading-relaxed text-base-content/70">
-			A single continuous wizard covering demographics, screening purpose, the AQ-10 questionnaire,
-			social communication, repetitive behaviours, sensory profile, developmental history, current
-			support, and family history. The shared engine computes the AQ-10 score, derives a screening
-			category, and flags issues for the clinician.
+			A single continuous wizard that captures a structured autism-screening profile, whose shared
+			engine computes the AQ-10 score, derives a screening category, and flags issues for the
+			clinician.
 		</p>
 	</header>
 
@@ -44,8 +43,11 @@
 			<div>
 				<dt class="font-semibold text-base-content">Purpose</dt>
 				<dd class="mt-1 text-base-content/70">
-					Capture a structured autism-screening profile and produce a graded report — AQ-10 score,
-					screening category, and flagged issues — to support clinical review and referral.
+					Capture a structured autism-screening profile — demographics, screening purpose, the AQ-10
+					questionnaire, social communication, repetitive behaviours, sensory profile,
+					developmental history, current support, and family history — and produce a graded report
+					(AQ-10 score, screening category, and flagged issues) to support clinical review and
+					referral.
 				</dd>
 			</div>
 			<div>

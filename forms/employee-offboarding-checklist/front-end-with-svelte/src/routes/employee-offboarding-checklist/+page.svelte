@@ -11,12 +11,9 @@
 		<p class="text-sm font-semibold uppercase tracking-wide text-primary">Employee Offboarding Checklist</p>
 		<h1 class="mt-2 text-3xl font-bold text-base-content">Structured employee offboarding</h1>
 		<p class="mt-4 text-base leading-relaxed text-base-content/70">
-			A structured offboarding checklist completed as a single continuous wizard: employee details,
-			exit interview, knowledge transfer, equipment return, access revocation, final payroll and
-			benefits, references and recommendations, non-disclosure and post-employment obligations,
-			forwarding details, and final sign-off. The shared engine validates completeness, returns a
-			Complete / Partial / Incomplete outcome, lists blocking items, and flags security- and
-			contract-critical issues for HR.
+			A structured offboarding checklist, completed as a single continuous wizard, that the shared
+			engine validates for completeness, returning a Complete / Partial / Incomplete outcome,
+			blocking items, and security- and contract-critical flags for HR.
 		</p>
 	</header>
 
@@ -53,7 +50,10 @@
 				<dd class="mt-1 text-base-content/70">
 					Ensure every departing employee completes the administrative, operational, and
 					knowledge-transfer steps required to protect patient safety, organisational data, and service
-					continuity — and produce a validated completeness report to support exit sign-off.
+					continuity — employee details, exit interview, knowledge transfer, equipment return, access
+					revocation, final payroll and benefits, references and recommendations, non-disclosure and
+					post-employment obligations, forwarding details, and final sign-off — and produce a
+					validated completeness report to support exit sign-off.
 				</dd>
 			</div>
 			<div>

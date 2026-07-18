@@ -11,12 +11,9 @@
 		<p class="text-sm font-semibold uppercase tracking-wide text-primary">First Responder Assessment</p>
 		<h1 class="mt-2 text-3xl font-bold text-base-content">Responder fitness &amp; competency</h1>
 		<p class="mt-4 text-base leading-relaxed text-base-content/70">
-			A comprehensive first responder fitness and competency evaluation completed as a single
-			continuous wizard: demographics, role and qualifications, physical fitness, clinical skills,
-			equipment and vehicle competency, communication skills, psychological readiness, occupational
-			health, CPD and training, and the overall fitness decision. The shared engine grades each
-			competency domain, derives an overall fitness decision and risk level, and flags
-			safety-critical issues for the assessor.
+			A comprehensive first responder fitness and competency evaluation, completed as a single
+			continuous wizard, that the shared engine grades across domains to derive an overall fitness
+			decision and risk level for the assessor.
 		</p>
 	</header>
 
@@ -51,8 +48,11 @@
 			<div>
 				<dt class="font-semibold text-base-content">Purpose</dt>
 				<dd class="mt-1 text-base-content/70">
-					Capture a structured competency profile and produce a graded report — overall competency,
-					fitness decision, risk level, and flagged issues — to support occupational fitness review.
+					Capture a structured competency profile — demographics, role and qualifications, physical
+					fitness, clinical skills, equipment and vehicle competency, communication skills,
+					psychological readiness, occupational health, and CPD and training — and produce a graded
+					report — overall competency, fitness decision, risk level, and flagged issues — to support
+					occupational fitness review.
 				</dd>
 			</div>
 			<div>

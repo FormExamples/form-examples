@@ -12,11 +12,9 @@
 		</p>
 		<h1 class="mt-2 text-3xl font-bold text-base-content">Wells DVT pre-test probability rule</h1>
 		<p class="mt-4 text-base leading-relaxed text-base-content/70">
-			A bedside clinical prediction rule for the pre-test probability of a first lower-limb DVT in
-			adults, completed as a single continuous wizard. Nine clinical criteria each score +1 when
-			present, and 2 points are subtracted when an alternative diagnosis is at least as likely as
-			DVT, for a total of &minus;2 to 9. The shared engine sums the score and stratifies the patient:
-			Wells &ge; 2 &rarr; DVT likely (proximal leg vein ultrasound) versus Wells &le; 1 &rarr; DVT
+			A bedside clinical prediction rule that sums nine +1 clinical criteria and a &minus;2
+			alternative-diagnosis adjustment into a Wells score of &minus;2 to 9 to stratify a patient's
+			pre-test probability of a first lower-limb DVT as likely (proximal leg vein ultrasound) or
 			unlikely (D-dimer).
 		</p>
 	</header>
@@ -52,9 +50,10 @@
 			<div>
 				<dt class="font-semibold text-base-content">Purpose</dt>
 				<dd class="mt-1 text-base-content/70">
-					Capture the nine Wells criteria and the alternative-diagnosis adjustment, and produce a
-					graded report — total score, two-level and three-level bands, recommended investigation,
-					and flagged issues — to direct the diagnostic pathway.
+					Capture the nine Wells criteria and the alternative-diagnosis adjustment, completed as a
+					single continuous wizard, and produce a graded report — total score (&minus;2 to 9),
+					two-level and three-level bands, recommended investigation, and flagged issues — to
+					direct the diagnostic pathway.
 				</dd>
 			</div>
 			<div>

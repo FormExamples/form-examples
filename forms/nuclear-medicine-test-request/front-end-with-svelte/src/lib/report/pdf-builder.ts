@@ -1,36 +1,25 @@
 import type { TDocumentDefinitions } from 'pdfmake/interfaces';
-import type { CardiologyRequest, GradingResult } from '$lib/engine/types';
+import type { NuclearMedicineRequest, GradingResult } from '$lib/engine/types';
 import {
+	scanTypeLabel,
+	indicationLabel,
 	appropriatenessLabel,
-	safetyLabel,
+	prepSafetyLabel,
+	radiationDoseLabel,
 	triageTierLabel,
 	recommendationLabel,
-	requestedServiceLabel,
-	referralReasonLabel,
-	statusLabel
+	calculateAge
 } from '$lib/engine/utils';
 
-type Margin = [number, number, number, number];
-
-/** Builds the pdfmake document definition for the cardiology vetting report. */
-export function buildPdfDocument(
-	data: CardiologyRequest,
-	result: GradingResult
-): TDocumentDefinitions {
-	const triageColor =
-		result.triageTier === 'routine'
-			? '#16a34a'
-			: result.triageTier === 'emergency'
-				? '#dc2626'
-				: result.triageTier === 'urgent'
-					? '#d97706'
-					: '#4b5563';
+/** Builds the pdfmake document definition for the nuclear medicine request vetting report. */
+export function buildPdfDocument(data: NuclearMedicineRequest, result: GradingResult): TDocumentDefinitions {
+	const age = calculateAge(data.patient.dateOfBirth);
 
 	return {
 		pageSize: 'A4',
 		pageMargins: [40, 60, 40, 60],
 		header: {
-			text: 'CARDIOLOGY REFERRAL — VETTING REPORT',
+			text: 'NUCLEAR MEDICINE REQUEST — VETTING REPORT',
 			alignment: 'center',
 			margin: [0, 20, 0, 0],
 			fontSize: 10,
@@ -38,7 +27,7 @@ export function buildPdfDocument(
 			bold: true
 		},
 		footer: (currentPage: number, pageCount: number) => ({
-			text: `Page ${currentPage} of ${pageCount} | Generated ${new Date(result.gradedAt).toLocaleString()} | NICE CG95 / NG106 / CG109`,
+			text: `Page ${currentPage} of ${pageCount} | Generated ${new Date(result.gradedAt).toLocaleString()}`,
 			alignment: 'center',
 			margin: [0, 20, 0, 0],
 			fontSize: 8,
@@ -46,141 +35,98 @@ export function buildPdfDocument(
 		}),
 		content: [
 			{
-				text: 'CARDIOLOGY REQUEST',
-				fontSize: 18,
+				text: recommendationLabel(result.recommendation),
+				fontSize: 24,
 				bold: true,
 				alignment: 'center',
-				margin: [0, 0, 0, 4] as Margin
+				margin: [0, 0, 0, 4]
 			},
 			{
-				text: `${requestedServiceLabel(data.requestedService)} — ${referralReasonLabel(data.referralReason)}`,
+				text: `${triageTierLabel(result.triageTier)}${result.targetTimeframe ? ` · ${result.targetTimeframe}` : ''}`,
 				fontSize: 12,
 				alignment: 'center',
 				color: '#4b5563',
-				margin: [0, 0, 0, 4] as Margin
-			},
-			{
-				text: `Triage: ${triageTierLabel(result.triageTier)} (${result.targetTimeframe})`,
-				fontSize: 14,
-				bold: true,
-				alignment: 'center',
-				color: triageColor,
-				margin: [0, 0, 0, 16] as Margin
+				margin: [0, 0, 0, 16]
 			},
 
-			// Four-axis vetting grade
-			sectionHeader('Vetting grade (four axes)'),
+			sectionHeader('Requested examination'),
 			{
 				table: {
 					widths: ['*', '*'],
 					body: [
-						[
-							field('A. Appropriateness', appropriatenessLabel(result.appropriatenessBand)),
-							field('B. Safety / red-flag', safetyLabel(result.safetyBand))
-						],
-						[
-							field('C. Request completeness', `${result.completenessPercent}%`),
-							field('D. Triage priority', triageTierLabel(result.triageTier))
-						],
-						[
-							field('Target timeframe', result.targetTimeframe || 'N/A'),
-							field('Recommendation', recommendationLabel(result.recommendation))
-						]
+						[field('Scan type', scanTypeLabel(data.request.scanType) || 'N/A'), field('Indication', indicationLabel(data.request.primaryIndication) || 'N/A')],
+						[field('Clinical question', data.request.clinicalQuestion || 'N/A'), field('IR(ME)R justification', data.justification.irMeRJustification || 'N/A')]
 					]
 				},
 				layout: 'lightHorizontalLines',
-				margin: [0, 0, 0, 16] as Margin
+				margin: [0, 0, 0, 16] as [number, number, number, number]
 			},
 
-			// Patient and referrer
-			sectionHeader('Patient and referrer'),
+			sectionHeader('Four-axis grade'),
 			{
 				table: {
 					widths: ['*', '*'],
 					body: [
-						[
-							field('Patient', data.patientName || 'N/A'),
-							field('NHS number', data.nhsNumber || 'N/A')
-						],
-						[
-							field('Referring clinician', data.referringClinician || 'N/A'),
-							field('Status', statusLabel(data.status))
-						],
-						[
-							field('Site', data.siteName || 'N/A'),
-							field('Setting', data.setting || 'N/A')
-						]
+						[field('A · Appropriateness', `${result.appropriatenessScore}/9 — ${appropriatenessLabel(result.appropriatenessBand)}`), field('B · Preparation & radiation safety', prepSafetyLabel(result.prepSafetyBand))],
+						[field('B · Radiation dose', radiationDoseLabel(result.radiationDoseBand)), field('C · Completeness', `${result.completenessPercent}%`)],
+						[field('D · Triage', triageTierLabel(result.triageTier)), field('Recommendation', recommendationLabel(result.recommendation))]
 					]
 				},
 				layout: 'lightHorizontalLines',
-				margin: [0, 0, 0, 16] as Margin
+				margin: [0, 0, 0, 16] as [number, number, number, number]
 			},
 
-			// Reason and question
-			sectionHeader('Reason and clinical question'),
-			{ text: `Clinical question: ${data.clinicalQuestion || 'Not specified'}`, margin: [0, 0, 0, 4] as Margin },
-			{ text: `Relevant history: ${data.relevantHistory || 'Not specified'}`, margin: [0, 0, 0, 16] as Margin },
-
-			// Symptoms
-			sectionHeader('Symptoms'),
-			{ ul: symptomList(data), margin: [0, 0, 0, 16] as Margin },
-
-			// Red flags and investigations
-			sectionHeader('Red flags and investigations'),
+			sectionHeader('Patient details'),
 			{
-				ul: [
-					`Suspected ACS: ${data.suspectedAcs ? 'Yes' : 'No'}`,
-					`Exertional syncope: ${data.exertionalSyncope ? 'Yes' : 'No'}`,
-					`New-onset heart failure: ${data.newOnsetHeartFailure ? 'Yes' : 'No'}`,
-					`Resting ECG: ${data.ecgDone ? `Done — ${data.ecgFindings || 'no findings recorded'}` : 'Not done'}`,
-					`Troponin: ${data.troponinStatus || 'N/A'}`,
-					`BNP / NT-proBNP: ${data.bnpStatus || 'N/A'}`
-				],
-				margin: [0, 0, 0, 16] as Margin
+				table: {
+					widths: ['*', '*'],
+					body: [
+						[field('Name', `${data.patient.firstName} ${data.patient.lastName}`), field('DOB', `${data.patient.dateOfBirth}${age ? ` (Age ${age})` : ''}`)],
+						[field('NHS number', data.patient.nhsNumber || 'N/A'), field('Requesting clinician', data.clinician.clinicianName || 'N/A')]
+					]
+				},
+				layout: 'lightHorizontalLines',
+				margin: [0, 0, 0, 16] as [number, number, number, number]
 			},
 
-			// Cardiac history
-			sectionHeader('Cardiac history and risk factors'),
-			{ ul: historyList(data), margin: [0, 0, 0, 8] as Margin },
-			{ text: `Current medications: ${data.currentMedications || 'None recorded'}`, margin: [0, 0, 0, 16] as Margin },
-
-			// Flags
 			...(result.flags.length > 0
 				? [
 						sectionHeader('Safety flags'),
 						{
 							ul: result.flags.map((f) => ({
 								text: `[${f.priority.toUpperCase()}] ${f.category}: ${f.description} — ${f.suggestedAction}`,
-								color:
-									f.priority === 'high'
-										? '#dc2626'
-										: f.priority === 'medium'
-											? '#d97706'
-											: '#4b5563',
-								margin: [0, 2, 0, 2] as Margin
+								color: f.priority === 'high' ? '#dc2626' : f.priority === 'medium' ? '#d97706' : '#4b5563',
+								margin: [0, 2, 0, 2] as [number, number, number, number]
 							})),
-							margin: [0, 0, 0, 16] as Margin
+							margin: [0, 0, 0, 16] as [number, number, number, number]
 						}
 					]
 				: []),
 
-			// Fired rules
 			...(result.firedRules.length > 0
 				? [
-						sectionHeader('Fired rules (audit trail)'),
+						sectionHeader('Fired rules'),
 						{
-							ul: result.firedRules.map((r) => ({
-								text: `[${r.axis}] ${r.ruleId}: ${r.description}`,
-								margin: [0, 2, 0, 2] as Margin
-							})),
-							margin: [0, 0, 0, 16] as Margin
+							table: {
+								headerRows: 1,
+								widths: [110, 80, '*'],
+								body: [
+									[
+										{ text: 'Rule ID', bold: true, fontSize: 9 },
+										{ text: 'Axis', bold: true, fontSize: 9 },
+										{ text: 'Description', bold: true, fontSize: 9 }
+									],
+									...result.firedRules.map((r) => [
+										{ text: r.ruleId, fontSize: 8, color: '#6b7280' },
+										{ text: r.axis, fontSize: 9 },
+										{ text: r.description, fontSize: 9 }
+									])
+								]
+							},
+							layout: 'lightHorizontalLines',
+							margin: [0, 0, 0, 16] as [number, number, number, number]
 						}
 					]
-				: []),
-
-			// Notes
-			...(data.notes
-				? [sectionHeader('Notes'), { text: data.notes, margin: [0, 0, 0, 8] as Margin }]
 				: [])
 		],
 		defaultStyle: {
@@ -189,39 +135,13 @@ export function buildPdfDocument(
 	};
 }
 
-function symptomList(data: CardiologyRequest): string[] {
-	const list: string[] = [];
-	if (data.symptomChestPain)
-		list.push(`Chest pain${data.chestPainCharacter ? ` (${data.chestPainCharacter})` : ''}`);
-	if (data.symptomBreathlessness)
-		list.push(`Breathlessness${data.nyhaClass ? ` (NYHA ${data.nyhaClass.toUpperCase()})` : ''}`);
-	if (data.symptomPalpitations) list.push('Palpitations');
-	if (data.symptomSyncope) list.push('Syncope / blackout');
-	if (data.symptomOedema) list.push('Peripheral oedema');
-	if (list.length === 0) list.push('No symptoms recorded');
-	return list;
-}
-
-function historyList(data: CardiologyRequest): string[] {
-	const list: string[] = [];
-	if (data.knownCoronaryArteryDisease) list.push('Known coronary artery disease');
-	if (data.previousMi) list.push('Previous myocardial infarction');
-	if (data.heartFailure) list.push('Established heart failure');
-	if (data.valveDisease) list.push('Valve disease');
-	if (data.arrhythmia) list.push('Arrhythmia');
-	if (data.hypertension) list.push('Hypertension');
-	if (data.diabetes) list.push('Diabetes');
-	if (list.length === 0) list.push('No cardiac history recorded');
-	return list;
-}
-
 function sectionHeader(text: string) {
 	return {
 		text,
 		fontSize: 14,
 		bold: true,
 		color: '#1f2937',
-		margin: [0, 8, 0, 8] as Margin
+		margin: [0, 8, 0, 8] as [number, number, number, number]
 	};
 }
 
@@ -231,6 +151,6 @@ function field(label: string, value: string) {
 			{ text: `${label}: `, bold: true, color: '#6b7280' },
 			{ text: value }
 		],
-		margin: [0, 4, 0, 4] as Margin
+		margin: [0, 4, 0, 4] as [number, number, number, number]
 	};
 }

@@ -12,15 +12,12 @@
 		</p>
 		<h1 class="mt-2 text-3xl font-bold text-base-content">Medical Certificate of Cause of Death</h1>
 		<p class="mt-4 text-base leading-relaxed text-base-content/70">
-			A statutory-documentation instrument, completed as a single continuous wizard. It records the
-			certifying doctor, the deceased, the date and place of death, the Part I direct causal
-			sequence and the Part II contributory conditions, and the coroner / medical-examiner referral
-			status, then classifies the certificate as <strong>valid</strong>,
-			<strong>incomplete</strong>, or <strong>refer to coroner</strong>, derives the underlying
-			cause, and raises statutory, safety, and governance flags. This is a completeness and
-			validity-classification instrument — there is <strong>no numeric score</strong>, and it does
-			not diagnose or replace the statutory judgement of the certifying doctor, coroner, or medical
-			examiner.
+			A statutory-documentation instrument, completed as a single continuous wizard, that records the
+			certifying doctor, the deceased, the date and place of death, and the Part I / Part II
+			cause-of-death sequence, then classifies the certificate as <strong>valid</strong>,
+			<strong>incomplete</strong>, or <strong>refer to coroner</strong> with
+			<strong>no numeric score</strong>, deferring diagnosis and statutory judgement to the
+			certifying doctor, coroner, or medical examiner.
 		</p>
 	</header>
 

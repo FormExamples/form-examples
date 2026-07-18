@@ -13,13 +13,9 @@
 		<h1 class="mt-2 text-3xl font-bold text-base-content">GRACE acute coronary syndrome risk score</h1>
 		<p class="mt-4 text-base leading-relaxed text-base-content/70">
 			A risk-stratification tool for adults with an acute coronary syndrome, completed as a single
-			continuous wizard. Eight admission variables — age, heart rate, systolic blood pressure, serum
-			creatinine, Killip class, cardiac arrest at admission, ST-segment deviation, and elevated
-			cardiac enzymes — map through the GRACE weighted regression point model. The shared engine sums
-			the points into a total, maps it to in-hospital (&le; 108 / 109&ndash;140 / &gt; 140) and
-			6-month (&le; 88 / 89&ndash;118 / &gt; 118) mortality bands, derives the overall Low /
-			Intermediate / High risk category (the worse of the two bands), and recommends the timing of an
-			invasive strategy.
+			continuous wizard, that maps eight admission variables through the GRACE weighted regression
+			point model into in-hospital and 6-month mortality bands, an overall Low / Intermediate / High
+			risk category, and a recommended timing for an invasive strategy.
 		</p>
 	</header>
 
@@ -54,9 +50,12 @@
 			<div>
 				<dt class="font-semibold text-base-content">Purpose</dt>
 				<dd class="mt-1 text-base-content/70">
-					Capture the eight GRACE variables and produce a graded report — point total, mortality
-					bands, overall risk category, an invasive-strategy recommendation, and flagged issues — to
-					support timely risk-based management of acute coronary syndrome.
+					Capture the eight GRACE variables — age, heart rate, systolic blood pressure, serum
+					creatinine, Killip class, cardiac arrest at admission, ST-segment deviation, and elevated
+					cardiac enzymes — and produce a graded report: point total, in-hospital (&le; 108 /
+					109&ndash;140 / &gt; 140) and 6-month (&le; 88 / 89&ndash;118 / &gt; 118) mortality bands, the
+					overall risk category (the worse of the two), an invasive-strategy recommendation, and flagged
+					issues, to support timely risk-based management of acute coronary syndrome.
 				</dd>
 			</div>
 			<div>

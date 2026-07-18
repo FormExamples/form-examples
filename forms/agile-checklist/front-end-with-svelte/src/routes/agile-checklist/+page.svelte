@@ -11,12 +11,9 @@
 		<p class="text-sm font-semibold uppercase tracking-wide text-primary">Agile Checklist</p>
 		<h1 class="mt-2 text-3xl font-bold text-base-content">Agile maturity self-assessment</h1>
 		<p class="mt-4 text-base leading-relaxed text-base-content/70">
-			Audit 57 concrete agile behaviours across three sections — Teams (25), Stakeholders (14), and
-			Practices (18) — in a single continuous wizard. Each item is answered yes / no / not-applicable.
-			The shared engine computes a per-section percentage of "yes" answers, derives a composite
-			agility maturity level (Optimising, Mature, Developing, Initial, Ad-hoc), fires per-section
-			coaching rules, and surfaces operational flags such as finished-work risk, experimentation
-			blocked, and psychological-safety risk.
+			Audit 57 concrete agile behaviours across Teams, Stakeholders, and Practices in a single
+			continuous wizard, graded by the shared engine into a composite agility maturity level with
+			per-section coaching rules and operational flags.
 		</p>
 	</header>
 
@@ -51,9 +48,12 @@
 			<div>
 				<dt class="font-semibold text-base-content">Purpose</dt>
 				<dd class="mt-1 text-base-content/70">
-					Capture observable agile behaviour and produce a graded coaching report — composite
-					maturity, per-section bands, fired coaching rules, and operational flags — to seed
-					retrospective experiments and coaching conversations.
+					Capture observable agile behaviour — 57 items across Teams (25), Stakeholders (14), and
+					Practices (18), each answered yes / no / not-applicable — and produce a graded coaching
+					report: composite maturity (Optimising, Mature, Developing, Initial, Ad-hoc), per-section
+					bands, fired coaching rules, and operational flags such as finished-work risk,
+					experimentation blocked, and psychological-safety risk, to seed retrospective experiments
+					and coaching conversations.
 				</dd>
 			</div>
 			<div>

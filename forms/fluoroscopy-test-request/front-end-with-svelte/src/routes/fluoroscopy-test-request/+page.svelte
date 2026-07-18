@@ -13,14 +13,9 @@
 			Fluoroscopy / contrast-study request
 		</h1>
 		<p class="mt-4 text-base leading-relaxed text-base-content/70">
-			A UK NHS–aligned fluoroscopy / contrast-study request that a clinician completes to request a
-			fluoroscopic examination — barium studies, water-soluble contrast studies, defecating
-			proctogram, hysterosalpingogram, micturating cystourethrogram, arthrogram, or a
-			fluoroscopy-guided procedure. It records the requested study, the clinical indication and
-			specific question, pregnancy and radiation-safety context, and the requested urgency — then
-			computes a four-axis vetting grade (appropriateness, safety + radiation dose, request
-			completeness, and triage priority) plus safety-critical flags to support the imaging
-			department's triage and booking decision.
+			A UK NHS–aligned fluoroscopy / contrast-study request that a clinician completes to record why,
+			which study, and how urgently a patient needs it, so the engine can compute a four-axis vetting
+			grade and safety-critical flags for the imaging department's triage decision.
 		</p>
 	</header>
 
@@ -55,8 +50,13 @@
 			<div>
 				<dt class="font-semibold text-base-content">Purpose</dt>
 				<dd class="mt-1 text-base-content/70">
-					Capture which fluoroscopic study a patient needs and how urgently, and produce a vetting
-					report the imaging department can triage and book from.
+					Capture which fluoroscopic study a patient needs — barium studies, water-soluble contrast
+					studies, defecating proctogram, hysterosalpingogram, micturating cystourethrogram,
+					arthrogram, or a fluoroscopy-guided procedure — the clinical indication and specific
+					question, pregnancy and radiation-safety context, and how urgently, then produce a
+					four-axis vetting grade (appropriateness, safety and radiation dose, request completeness,
+					and triage priority) plus safety-critical flags that the imaging department can triage and
+					book from.
 				</dd>
 			</div>
 			<div>

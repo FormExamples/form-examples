@@ -11,12 +11,9 @@
 		<p class="text-sm font-semibold uppercase tracking-wide text-primary">Integumentary Assessment</p>
 		<h1 class="mt-2 text-3xl font-bold text-base-content">Skin, hair, and nail review</h1>
 		<p class="mt-4 text-base leading-relaxed text-base-content/70">
-			A structured integumentary assessment completed as a single continuous wizard: demographics,
-			presenting skin concern, head-to-toe skin inspection, hair and scalp examination, nail
-			examination, wound assessment (stage and TIME), Braden Scale scoring, photography and
-			documentation, and clinical impression and care plan. The shared engine grades pressure-ulcer
-			risk with the validated Braden Scale (total 6-23, lower = higher risk) and flags issues for the
-			tissue-viability team.
+			A structured integumentary assessment completed as a single continuous wizard, whose shared
+			engine grades pressure-ulcer risk with the validated Braden Scale (total 6-23, lower = higher
+			risk) and flags issues for the tissue-viability team.
 		</p>
 	</header>
 
@@ -51,8 +48,11 @@
 			<div>
 				<dt class="font-semibold text-base-content">Purpose</dt>
 				<dd class="mt-1 text-base-content/70">
-					Capture a structured skin, hair, and nail profile and produce a graded report — Braden
-					pressure-ulcer risk, wound staging, and flagged issues — to support tissue-viability review.
+					Capture a structured skin, hair, and nail profile — presenting concern, head-to-toe skin
+					inspection, hair and scalp examination, nail examination, wound assessment (stage and
+					TIME), Braden Scale scoring, and photography and documentation — and produce a graded
+					report: Braden pressure-ulcer risk, wound staging, and flagged issues, to support the
+					clinical impression, care plan, and tissue-viability review.
 				</dd>
 			</div>
 			<div>

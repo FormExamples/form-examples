@@ -16,11 +16,9 @@
 		</h1>
 		<p class="mt-4 text-base leading-relaxed text-base-content/70">
 			A UK NHS–aligned ECG test request that a clinician completes to request a cardiac ECG
-			examination for a patient. It records the requested ECG type, the clinical indication and
-			specific question, relevant cardiac history and medications, symptoms and red flags, and the
-			requested urgency — then computes a four-axis vetting grade (appropriateness, urgency,
-			request completeness, and clinical priority) plus safety-critical flags to support the cardiac
-			physiology department's triage and booking decision.
+			examination for a patient, recording the clinical indication, history, symptoms and red
+			flags, and urgency, then computing a four-axis vetting grade plus safety-critical flags to
+			support the cardiac physiology department's triage and booking decision.
 		</p>
 	</header>
 
@@ -55,8 +53,10 @@
 			<div>
 				<dt class="font-semibold text-base-content">Purpose</dt>
 				<dd class="mt-1 text-base-content/70">
-					Capture which ECG examination is requested and how urgently, and produce a vetting report
-					the cardiac physiology team can triage and book from.
+					Capture which ECG examination is requested and how urgently — the ECG type, clinical
+					indication and specific question, relevant cardiac history and medications, and symptoms
+					and red flags — and produce a vetting report the cardiac physiology team can triage and
+					book from.
 				</dd>
 			</div>
 			<div>

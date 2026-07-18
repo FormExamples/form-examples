@@ -11,11 +11,10 @@
 		<p class="text-sm font-semibold uppercase tracking-wide text-primary">Urology Assessment</p>
 		<h1 class="mt-2 text-3xl font-bold text-base-content">Lower urinary tract evaluation</h1>
 		<p class="mt-4 text-base leading-relaxed text-base-content/70">
-			A comprehensive urological evaluation completed as a single continuous wizard: demographics,
-			chief complaint, the IPSS (International Prostate Symptom Score) questionnaire, quality of life,
-			urinary symptoms, renal function, sexual health, medical history, current medications, and family
-			history. The shared engine computes the IPSS total (0–35) and its severity category, captures the
-			quality-of-life score, and flags safety-critical issues for the urologist.
+			A comprehensive urological evaluation completed as a single continuous wizard covering the IPSS
+			(International Prostate Symptom Score) questionnaire, quality of life, urinary symptoms, renal
+			function, and sexual health, whose shared engine computes the IPSS total (0–35) and its severity
+			category, captures the quality-of-life score, and flags safety-critical issues for the urologist.
 		</p>
 	</header>
 

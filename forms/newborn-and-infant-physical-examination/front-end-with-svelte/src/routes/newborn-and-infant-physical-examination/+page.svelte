@@ -13,12 +13,10 @@
 		<h1 class="mt-2 text-3xl font-bold text-base-content">NIPE newborn screening examination</h1>
 		<p class="mt-4 text-base leading-relaxed text-base-content/70">
 			A UK national-screening head-to-toe examination of a baby, performed within 72 hours of birth
-			and repeated at the 6-8 week infant review, completed as a single continuous wizard. It records
-			a systematic examination and classifies four key screening components — eyes, heart, hips, and
-			testes (in boys) — each as <strong>Satisfactory</strong>, <strong>Refer</strong>, or
-			<strong>Not examined</strong>, then rolls the applicable components up into an overall
-			screening outcome and referral pathways. This is a classification and completeness form: there
-			is no numeric score.
+			and repeated at the 6-8 week infant review, that classifies four key screening components —
+			eyes, heart, hips, and testes (in boys) — as <strong>Satisfactory</strong>,
+			<strong>Refer</strong>, or <strong>Not examined</strong> and rolls them up into an overall
+			screening outcome and referral pathways, with no numeric score.
 		</p>
 	</header>
 
@@ -53,9 +51,11 @@
 			<div>
 				<dt class="font-semibold text-base-content">Purpose</dt>
 				<dd class="mt-1 text-base-content/70">
-					Capture the four NIPE key components and the head-to-toe examination and produce a graded
-					report — an overall screening outcome, per-component results, referral pathways, and
-					flagged issues — to support timely newborn screening and referral.
+					Capture the four NIPE key components — eyes, heart, hips, and testes (in boys) — via a
+					systematic head-to-toe examination performed within 72 hours of birth and repeated at the
+					6-8 week infant review, and produce a graded report — an overall screening outcome,
+					per-component results, referral pathways, and flagged issues — to support timely newborn
+					screening and referral.
 				</dd>
 			</div>
 			<div>

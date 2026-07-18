@@ -11,11 +11,8 @@
 		<h1 class="mt-2 text-3xl font-bold text-base-content">GCS neuro-observation assessment</h1>
 		<p class="mt-4 text-base leading-relaxed text-base-content/70">
 			A structured, clinician-driven assessment of impaired consciousness, completed as a single
-			continuous wizard. The observer scores three independent responses — Eye opening (E, 1&ndash;4),
-			Verbal response (V, 1&ndash;5), and Motor response (M, 1&ndash;6) — and the shared engine computes the
-			total GCS (3&ndash;15), the E/V/M breakdown, and a severity band (mild / moderate / severe). It
-			supports a "not testable" (NT) result per component and derives the secondary GCS-Pupils
-			(GCS-P) score. A defined total GCS &le; 8 signals coma and airway risk.
+			continuous wizard, that scores Eye, Verbal, and Motor responses into a total GCS (3&ndash;15) and
+			severity band, with a "not testable" option per component and a derived GCS-Pupils score.
 		</p>
 	</header>
 
@@ -50,8 +47,10 @@
 			<div>
 				<dt class="font-semibold text-base-content">Purpose</dt>
 				<dd class="mt-1 text-base-content/70">
-					Capture the three GCS components and produce a graded report — total GCS, breakdown,
-					severity band, GCS-Pupils, and flagged issues — to support timely neurological escalation.
+					Capture the three GCS components — Eye opening (E, 1&ndash;4), Verbal response (V, 1&ndash;5), and
+					Motor response (M, 1&ndash;6) — and produce a graded report: total GCS, breakdown, severity
+					band, GCS-Pupils, and flagged issues, including a coma / airway-risk flag when the total falls
+					to 8 or below, to support timely neurological escalation.
 				</dd>
 			</div>
 			<div>

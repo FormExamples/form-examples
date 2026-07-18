@@ -12,11 +12,10 @@
 			10-year cardiovascular risk for adults with type 2 diabetes
 		</h1>
 		<p class="mt-4 text-base leading-relaxed text-base-content/70">
-			A structured SCORE2-Diabetes assessment completed as a single continuous wizard: patient
-			demographics, diabetes history, cardiovascular history, blood pressure, lipid profile, renal
-			function, lifestyle factors, current medications, complications screening, and a risk-assessment
-			summary. The shared engine derives an overall 10-year cardiovascular risk category and flags
-			clinical safety issues for the clinician.
+			A structured, single-page wizard covering diabetes history, cardiovascular history, blood
+			pressure, lipid profile, renal function, and lifestyle factors for adults with type 2 diabetes,
+			from which the shared engine derives an overall 10-year cardiovascular risk category
+			(SCORE2-Diabetes) and flags clinical safety issues for the clinician.
 		</p>
 	</header>
 

@@ -13,12 +13,10 @@
 		</p>
 		<h1 class="mt-2 text-3xl font-bold text-base-content">Obstetric ultrasound scan request</h1>
 		<p class="mt-4 text-base leading-relaxed text-base-content/70">
-			A UK NHS–aligned obstetric ultrasound referral that a clinician completes to request a
-			pregnancy scan. It records the requesting clinician, patient identification, pregnancy dating,
-			obstetric history, the requested examination and clinical question, presenting symptoms and
-			red flags, and risk factors — then computes a four-axis vetting grade (appropriateness,
-			gestational-age window fit, request completeness, and triage priority) plus safety-critical
-			flags to support the imaging department's vetting and booking decision.
+			A UK NHS–aligned obstetric ultrasound referral that a clinician completes to request a pregnancy
+			scan, computing a four-axis vetting grade — appropriateness, gestational-age window fit, request
+			completeness, and triage priority — plus safety-critical flags to support the imaging
+			department's vetting and booking decision.
 		</p>
 	</header>
 
@@ -53,8 +51,10 @@
 			<div>
 				<dt class="font-semibold text-base-content">Purpose</dt>
 				<dd class="mt-1 text-base-content/70">
-					Capture which obstetric scan is requested and how urgently, and produce a vetting report
-					the imaging team can triage and book from.
+					Capture which obstetric scan is requested and how urgently — recording the requesting
+					clinician, patient identification, pregnancy dating, obstetric history, the requested
+					examination and clinical question, presenting symptoms and red flags, and risk factors —
+					and produce a vetting report the imaging team can triage and book from.
 				</dd>
 			</div>
 			<div>

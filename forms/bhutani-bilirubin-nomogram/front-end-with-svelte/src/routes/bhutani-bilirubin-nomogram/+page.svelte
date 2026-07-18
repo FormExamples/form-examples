@@ -14,12 +14,10 @@
 			Hour-specific bilirubin risk zone for newborns
 		</h1>
 		<p class="mt-4 text-base leading-relaxed text-base-content/70">
-			Enter a newborn's age in hours and total serum bilirubin (µmol/L) in a single continuous
-			wizard. The shared engine maps the point onto the hour-specific Bhutani nomogram to assign a
-			percentile risk zone — low (&lt; 40th), low-intermediate (40th&ndash;75th), high-intermediate
-			(75th&ndash;95th), or high (&ge; 95th) — and compares the same point against the
-			gestation-specific NICE phototherapy and exchange-transfusion thresholds. This is a
-			classification, not an additive score.
+			Enter a newborn's age in hours and total serum bilirubin in a single continuous wizard, and the
+			shared engine maps the point onto the hour-specific Bhutani nomogram to classify a percentile
+			risk zone and compare it against the gestation-specific NICE phototherapy and
+			exchange-transfusion thresholds.
 		</p>
 	</header>
 
@@ -54,9 +52,13 @@
 			<div>
 				<dt class="font-semibold text-base-content">Purpose</dt>
 				<dd class="mt-1 text-base-content/70">
-					Predict the risk of subsequent significant hyperbilirubinaemia and signal whether the TSB
-					is at or above the gestation-specific phototherapy or exchange-transfusion thresholds, to
-					support timely re-testing and treatment decisions.
+					Predict the risk of subsequent significant hyperbilirubinaemia by mapping the newborn's
+					age in hours and total serum bilirubin (µmol/L) onto the hour-specific Bhutani nomogram
+					to assign a percentile risk zone — low (&lt; 40th), low-intermediate (40th&ndash;75th),
+					high-intermediate (75th&ndash;95th), or high (&ge; 95th), a classification rather than an
+					additive score — and signal whether the TSB is at or above the gestation-specific
+					phototherapy or exchange-transfusion thresholds, to support timely re-testing and
+					treatment decisions.
 				</dd>
 			</div>
 			<div>

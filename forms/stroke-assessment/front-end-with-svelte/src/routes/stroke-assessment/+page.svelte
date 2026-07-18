@@ -11,12 +11,11 @@
 		<p class="text-sm font-semibold uppercase tracking-wide text-primary">Stroke Assessment</p>
 		<h1 class="mt-2 text-3xl font-bold text-base-content">Acute stroke evaluation (NIHSS)</h1>
 		<p class="mt-4 text-base leading-relaxed text-base-content/70">
-			A structured acute stroke evaluation completed as a single continuous wizard: demographics,
-			symptom onset and timing, level of consciousness, gaze and visual fields, facial palsy and
-			motor function, limb ataxia and sensory loss, language and dysarthria, extinction and
-			inattention, risk factors, and current medications. The shared engine scores the patient on
-			the National Institutes of Health Stroke Scale (NIHSS, 0–42), classifies stroke severity, and
-			flags issues for the stroke team.
+			A structured, single-page wizard covering symptom onset and timing, level of consciousness,
+			gaze and visual fields, facial palsy and motor function, limb ataxia and sensory loss, language
+			and dysarthria, extinction and inattention, and risk factors, from which the shared engine
+			scores the patient on the National Institutes of Health Stroke Scale (NIHSS, 0–42), classifies
+			stroke severity, and flags issues for the stroke team.
 		</p>
 	</header>
 

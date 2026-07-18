@@ -12,12 +12,9 @@
 		</p>
 		<h1 class="mt-2 text-3xl font-bold text-base-content">C-SSRS suicide-risk assessment</h1>
 		<p class="mt-4 text-base leading-relaxed text-base-content/70">
-			A structured suicide-risk assessment, completed as a single continuous wizard. It records the
-			severity of suicidal ideation on a five-point ordinal scale (Q1-Q5), categories of suicidal
-			behaviour, and the lethality of any actual attempt, then derives a
-			<strong>Low / Moderate / High</strong> risk tier with a proportionate management
-			recommendation. This is a severity- and status-classification instrument: there is no summed
-			score. A high-risk screen prompts an urgent psychiatric or crisis-service response.
+			A structured suicide-risk assessment, completed as a single continuous wizard, that
+			classifies suicidal ideation, behaviour, and attempt lethality into a Low / Moderate /
+			High risk tier with a proportionate management recommendation.
 		</p>
 	</header>
 
@@ -54,7 +51,8 @@
 				<dd class="mt-1 text-base-content/70">
 					Capture the ideation, behaviour, and lethality dimensions and produce a graded report — a
 					Low / Moderate / High risk tier, the fired criteria, and flagged issues — to support
-					timely, proportionate suicide-risk management.
+					timely, proportionate suicide-risk management; a high-risk screen prompts an urgent
+					psychiatric or crisis-service response.
 				</dd>
 			</div>
 			<div>

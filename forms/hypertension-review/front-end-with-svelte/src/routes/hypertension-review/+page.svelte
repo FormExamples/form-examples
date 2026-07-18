@@ -15,14 +15,11 @@
 		</h1>
 		<p class="mt-4 text-base leading-relaxed text-base-content/70">
 			A UK primary-care annual hypertension review (NICE NG136), completed as a single continuous
-			wizard. It captures clinic and home/ambulatory blood pressure, medication and adherence,
-			cardiovascular risk (QRISK), annual bloods, urine albumin:creatinine ratio, lifestyle, and
-			complications. This is a <strong>documentation and control-classification</strong> tool, not a
-			numeric score: the engine classifies blood-pressure
-			<strong>control</strong> (controlled / uncontrolled / severe uncontrolled) against an age- and
-			comorbidity-specific target, assigns a hypertension <strong>stage</strong>, grades review
-			<strong>completeness</strong> (complete / partial / incomplete), and — independently — raises flags.
-			It does not diagnose or prescribe.
+			wizard, that is a <strong>documentation and control-classification</strong> tool, not a numeric
+			score — the engine classifies blood-pressure <strong>control</strong> (controlled /
+			uncontrolled / severe uncontrolled) against an age- and comorbidity-specific target, assigns a
+			hypertension <strong>stage</strong>, and grades review <strong>completeness</strong>, without
+			diagnosing or prescribing.
 		</p>
 	</header>
 
@@ -57,10 +54,12 @@
 			<div>
 				<dt class="font-semibold text-base-content">Purpose</dt>
 				<dd class="mt-1 text-base-content/70">
-					Record the annual hypertension review and produce a graded report — a control
-					classification, a hypertension stage, a review-completeness status, and flagged issues —
-					to support the clinical record and prompt escalation where blood pressure is severe or
-					uncontrolled.
+					Record the annual hypertension review — clinic and home/ambulatory blood pressure,
+					medication and adherence, cardiovascular risk (QRISK), annual bloods, urine
+					albumin:creatinine ratio, lifestyle, and complications — and produce a graded report: a
+					control classification, a hypertension stage, a review-completeness status, and flagged
+					issues, to support the clinical record and prompt escalation where blood pressure is
+					severe or uncontrolled.
 				</dd>
 			</div>
 			<div>

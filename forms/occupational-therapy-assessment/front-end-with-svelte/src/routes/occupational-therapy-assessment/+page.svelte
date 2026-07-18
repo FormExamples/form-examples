@@ -11,12 +11,11 @@
 		<p class="text-sm font-semibold uppercase tracking-wide text-primary">Occupational Therapy Assessment</p>
 		<h1 class="mt-2 text-3xl font-bold text-base-content">Functional performance evaluation</h1>
 		<p class="mt-4 text-base leading-relaxed text-base-content/70">
-			A structured occupational therapy evaluation completed as a single continuous wizard:
-			demographics, referral information, self-care, productivity and leisure activities,
-			performance and satisfaction ratings, environmental factors, physical and cognitive status,
-			and goals. The shared engine grades the patient with the Canadian Occupational Performance
-			Measure (COPM), producing average performance and satisfaction scores and flagging issues for
-			the occupational therapist.
+			A structured occupational therapy evaluation — covering demographics, referral information,
+			self-care, productivity and leisure activities, performance and satisfaction ratings,
+			environmental factors, physical and cognitive status, and goals — that the shared engine
+			grades with the Canadian Occupational Performance Measure (COPM), producing average
+			performance and satisfaction scores and flagging issues for the occupational therapist.
 		</p>
 	</header>
 

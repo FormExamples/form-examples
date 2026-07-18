@@ -11,12 +11,9 @@
 		<p class="text-sm font-semibold uppercase tracking-wide text-primary">Genetic Assessment</p>
 		<h1 class="mt-2 text-3xl font-bold text-base-content">Genetic counselling referral</h1>
 		<p class="mt-4 text-base leading-relaxed text-base-content/70">
-			A structured genetic counselling referral assessment completed as a single continuous wizard:
-			demographics, referral information, personal medical history, cancer history, family pedigree,
-			cardiovascular genetics, neurogenetics, reproductive genetics, ethnic background and
-			consanguinity, and prior genetic testing. The shared engine applies weighted risk-factor
-			scoring to stratify the patient as Low, Moderate, or High risk, and flags clinically
-			significant issues for the genetic counsellor.
+			A structured genetic counselling referral assessment, completed as a single continuous wizard,
+			that the shared engine scores with weighted risk factors to stratify the patient's risk for the
+			genetic counsellor.
 		</p>
 	</header>
 

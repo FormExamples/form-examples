@@ -8,10 +8,8 @@
 		<h1 class="mt-2 text-3xl font-bold text-base-content">Structured diabetes review</h1>
 		<p class="mt-4 text-base leading-relaxed text-base-content/70">
 			A single continuous wizard aligned with NICE NG28 / NG17 and the Diabetes UK 15 Healthcare
-			Essentials: patient information, diabetes history, glycaemic control, medications, complications
-			screening, cardiovascular risk, self-care, psychological wellbeing, foot assessment, and care
-			plan. The shared engine derives a control level and composite score from HbA1c and risk factors,
-			and flags issues for the clinician.
+			Essentials, whose shared engine derives a control level and composite score from HbA1c and risk
+			factors and flags issues for the clinician.
 		</p>
 	</header>
 
@@ -45,8 +43,10 @@
 			<div>
 				<dt class="font-semibold text-base-content">Purpose</dt>
 				<dd class="mt-1 text-base-content/70">
-					Capture a structured diabetes-review profile and produce a graded report — control level,
-					composite score, and flagged issues — to support clinical review.
+					Capture a structured diabetes-review profile — patient information, diabetes history,
+					glycaemic control, medications, complications screening, cardiovascular risk, self-care,
+					psychological wellbeing, foot assessment, and care plan — and produce a graded report —
+					control level, composite score, and flagged issues — to support clinical review.
 				</dd>
 			</div>
 			<div>

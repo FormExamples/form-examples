@@ -13,12 +13,8 @@
 		<h1 class="mt-2 text-3xl font-bold text-base-content">Liver disease severity for adults</h1>
 		<p class="mt-4 text-base leading-relaxed text-base-content/70">
 			Enter total bilirubin, INR, and serum creatinine — plus serum sodium (MELD-Na, MELD 3.0) and
-			albumin (MELD 3.0) — in a single continuous wizard. The shared engine applies the weighted
-			logarithmic formula with the dialysis creatinine rule (creatinine set to 4.0 mg/dL when there
-			were &ge; 2 haemodialysis sessions or &ge; 24 h CVVHD), value bounds (floor 1.0; creatinine
-			cap 4.0), the sodium correction, clamps the result to 6-40, and maps it to an estimated
-			3-month mortality band: low (&le; 9), moderate (10-19), high (20-29), very high (30-39),
-			extreme (&ge; 40).
+			albumin (MELD 3.0) — in a single continuous wizard, and the shared engine applies the weighted
+			logarithmic formula to compute a MELD score and an estimated 3-month mortality band.
 		</p>
 	</header>
 
@@ -53,9 +49,12 @@
 			<div>
 				<dt class="font-semibold text-base-content">Purpose</dt>
 				<dd class="mt-1 text-base-content/70">
-					Grade the severity of chronic liver disease from routine laboratory values and produce a
-					report — MELD score, mortality band, and flagged issues — to support transplant
-					prioritisation. A decision-support calculator, not a diagnosis.
+					Grade the severity of chronic liver disease from routine laboratory values, applying the
+					dialysis creatinine rule (creatinine set to 4.0 mg/dL when there were &ge; 2 haemodialysis
+					sessions or &ge; 24 h CVVHD), value bounds (floor 1.0; creatinine cap 4.0), and the sodium
+					correction, and produce a report — a MELD score clamped to 6-40, a mortality band (low
+					&le; 9, moderate 10-19, high 20-29, very high 30-39, extreme &ge; 40), and flagged issues —
+					to support transplant prioritisation. A decision-support calculator, not a diagnosis.
 				</dd>
 			</div>
 			<div>

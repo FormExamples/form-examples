@@ -14,10 +14,8 @@
 		<h1 class="mt-2 text-3xl font-bold text-base-content">Agility maturity self-assessment</h1>
 		<p class="mt-4 text-base leading-relaxed text-base-content/70">
 			Score your team or organisation against the 12 principles of the Agile Manifesto in a single
-			continuous wizard: respondent context, a 1–5 Likert rating plus optional comment for each
-			principle, and a summary with weighting and an action plan. The shared engine computes a
-			composite agility maturity level, fires per-principle coaching rules, and surfaces operational
-			flags such as burnout risk, technical-debt risk, and command-and-control culture.
+			continuous wizard, graded by the shared engine into a composite agility maturity level with
+			per-principle coaching rules and operational-risk flags.
 		</p>
 	</header>
 
@@ -52,8 +50,10 @@
 			<div>
 				<dt class="font-semibold text-base-content">Purpose</dt>
 				<dd class="mt-1 text-base-content/70">
-					Capture a structured agility self-report and produce a graded result — composite maturity,
-					per-principle bands, and flagged operational risks — to seed coaching conversations and
+					Capture a structured agility self-report — respondent context and a 1-5 Likert rating plus
+					optional comment for each of the 12 principles — and produce a graded result: composite
+					maturity, per-principle bands, and flagged operational risks such as burnout risk,
+					technical-debt risk, and command-and-control culture, to seed coaching conversations and
 					retrospective items.
 				</dd>
 			</div>

@@ -11,11 +11,11 @@
 		<h1 class="mt-2 text-3xl font-bold text-base-content">NHS breast screening outcome record</h1>
 		<p class="mt-4 text-base leading-relaxed text-base-content/70">
 			A documentation and result-classification record for a mammography breast screening encounter
-			within the NHS Breast Screening Programme, completed as a single continuous wizard. It records
+			within the NHS Breast Screening Programme, completed as a single continuous wizard that records
 			eligibility, consent, mammogram views, the radiological reading outcome, and — where the woman
 			is recalled — a five-point breast imaging classification, then derives the
 			<strong>screening outcome and next action</strong>, validates completeness, and raises safety
-			flags. This is a classification form: there is no numeric score, and it is not a diagnosis.
+			flags (a classification, not a numeric score or a diagnosis).
 		</p>
 	</header>
 

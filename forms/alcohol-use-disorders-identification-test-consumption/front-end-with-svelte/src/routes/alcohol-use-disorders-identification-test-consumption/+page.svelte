@@ -12,12 +12,9 @@
 		</p>
 		<h1 class="mt-2 text-3xl font-bold text-base-content">AUDIT-C brief alcohol screen</h1>
 		<p class="mt-4 text-base leading-relaxed text-base-content/70">
-			A brief three-item alcohol screen for adults, completed as a single continuous wizard. The
-			three consumption items — frequency of drinking, typical quantity in UK units, and frequency
-			of heavy episodic drinking — each score 0 to 4 for a total of 0 to 12. The shared engine sums
-			the score, derives the risk band, and flags a total of &ge; 5 as a positive screen that
-			prompts the full 10-item AUDIT and a brief intervention. It is not a diagnostic test for
-			alcohol dependence.
+			A brief three-item alcohol screen for adults, completed as a single continuous wizard and
+			graded by the shared engine into a 0-12 score and risk band that flags a positive screen for
+			further assessment.
 		</p>
 	</header>
 
@@ -52,8 +49,11 @@
 			<div>
 				<dt class="font-semibold text-base-content">Purpose</dt>
 				<dd class="mt-1 text-base-content/70">
-					Capture the three AUDIT-C consumption items and produce a graded report — score 0-12,
-					risk band, and flagged issues — to support timely brief intervention and referral.
+					Capture the three AUDIT-C consumption items — frequency of drinking, typical quantity in UK
+					units, and frequency of heavy episodic drinking, each scored 0-4 — and produce a graded
+					report: score 0-12, risk band, and flagged issues, including a positive screen at &ge; 5
+					that prompts the full 10-item AUDIT and a brief intervention, to support timely
+					intervention and referral. It is not a diagnostic test for alcohol dependence.
 				</dd>
 			</div>
 			<div>

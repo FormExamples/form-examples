@@ -11,11 +11,9 @@
 		<p class="text-sm font-semibold uppercase tracking-wide text-primary">Pediatric Assessment</p>
 		<h1 class="mt-2 text-3xl font-bold text-base-content">Child development screening</h1>
 		<p class="mt-4 text-base leading-relaxed text-base-content/70">
-			A comprehensive paediatric evaluation completed as a single continuous wizard: demographics,
-			birth history, growth and nutrition, developmental milestones, immunisation status, medical
-			history, current medications, family history, and social / environmental factors. The shared
-			engine grades the child with a developmental screen (Normal / Concern / Delay across five core
-			domains) and flags safety-critical issues for the paediatrician.
+			A comprehensive paediatric evaluation, completed as a single continuous wizard, that grades
+			the child with a developmental screen &mdash; Normal, Concern, or Delay across five core
+			domains &mdash; and flags safety-critical issues for the paediatrician.
 		</p>
 	</header>
 

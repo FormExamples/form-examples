@@ -11,12 +11,10 @@
 		<p class="text-sm font-semibold uppercase tracking-wide text-primary">Provider Transfer Request</p>
 		<h1 class="mt-2 text-3xl font-bold text-base-content">Inter-provider handover (SBAR)</h1>
 		<p class="mt-4 text-base leading-relaxed text-base-content/70">
-			A structured handover for a patient whose care is being transferred between clinicians, wards,
-			or organisations. The nine sections follow the SBAR framework — Situation, Background,
-			Assessment, Recommendation — plus requesting/receiving provider details, patient demographics,
-			transfer logistics, and a two-party sign-off and acknowledgement. The shared engine validates
-			SBAR completeness (Complete / Partial / Incomplete) and flags clinically significant issues for
-			the receiving team.
+			A structured, nine-section handover for a patient whose care is being transferred between
+			clinicians, wards, or organisations, built around the SBAR (Situation, Background, Assessment,
+			Recommendation) framework, whose shared engine validates SBAR completeness — Complete, Partial,
+			or Incomplete — and flags clinically significant issues for the receiving team.
 		</p>
 	</header>
 
@@ -51,9 +49,10 @@
 			<div>
 				<dt class="font-semibold text-base-content">Purpose</dt>
 				<dd class="mt-1 text-base-content/70">
-					Capture a complete, SBAR-aligned handover and produce a graded report — completeness level,
-					per-section breakdown of missing items, and flagged safety issues — to support a safe
-					inter-provider transfer.
+					Capture a complete, SBAR-aligned handover — requesting/receiving provider details, patient
+					demographics, the four SBAR sections, transfer logistics, and a two-party sign-off and
+					acknowledgement — and produce a graded report — completeness level, per-section breakdown
+					of missing items, and flagged safety issues — to support a safe inter-provider transfer.
 				</dd>
 			</div>
 			<div>

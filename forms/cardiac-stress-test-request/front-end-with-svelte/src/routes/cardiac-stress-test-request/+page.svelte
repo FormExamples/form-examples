@@ -14,9 +14,9 @@
 		</h1>
 		<p class="mt-4 text-base leading-relaxed text-base-content/70">
 			A UK NHS–aligned cardiac stress / exercise test request that a clinician completes to request a
-			stress test for a patient with suspected or known cardiac disease. It records the requested test
+			stress test for a patient with suspected or known cardiac disease, recording the requested test
 			modality, the clinical indication and specific question, presenting symptoms, ability to
-			exercise, and the cardiac safety factors — then computes a four-axis vetting grade
+			exercise, and the cardiac safety factors, then computing a four-axis vetting grade
 			(appropriateness, safety / contraindication, request completeness, and triage priority) plus
 			safety-critical flags to support the cardiac-investigations department's triage and booking
 			decision.

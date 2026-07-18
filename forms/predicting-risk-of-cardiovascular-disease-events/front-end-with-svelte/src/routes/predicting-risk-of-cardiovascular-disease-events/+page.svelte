@@ -10,11 +10,10 @@
 		<p class="text-sm font-semibold uppercase tracking-wide text-primary">PREVENT CVD Risk Calculator</p>
 		<h1 class="mt-2 text-3xl font-bold text-base-content">Predicting Risk of Cardiovascular Disease Events</h1>
 		<p class="mt-4 text-base leading-relaxed text-base-content/70">
-			Estimate 10-year and 30-year risk of total cardiovascular disease for adults aged 30–79 without
-			known CVD, using the AHA PREVENT equations. Completed as a single continuous wizard:
-			demographics, blood pressure, cholesterol and lipids, metabolic health, renal function, smoking
-			history, medical history, medications, and review. The shared engine computes the risk category,
-			10- and 30-year risk percentages, the rules that fired, and flagged issues for the clinician.
+			Estimates 10-year and 30-year risk of total cardiovascular disease for adults aged 30-79 without
+			known CVD, using the AHA PREVENT equations completed as a single continuous wizard, whose shared
+			engine computes the risk category, 10- and 30-year risk percentages, the rules that fired, and
+			flagged issues for the clinician.
 		</p>
 	</header>
 
@@ -49,9 +48,10 @@
 			<div>
 				<dt class="font-semibold text-base-content">Purpose</dt>
 				<dd class="mt-1 text-base-content/70">
-					Capture a structured cardiovascular risk profile and produce a graded report — risk
-					category, 10- and 30-year CVD risk, fired rules, and flagged issues — to support primary
-					prevention review.
+					Capture a structured cardiovascular risk profile — demographics, blood pressure, cholesterol
+					and lipids, metabolic health, renal function, smoking history, medical history, and
+					medications — and produce a graded report — risk category, 10- and 30-year CVD risk, fired
+					rules, and flagged issues — to support primary prevention review.
 				</dd>
 			</div>
 			<div>

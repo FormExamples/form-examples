@@ -11,12 +11,11 @@
 		<p class="text-sm font-semibold uppercase tracking-wide text-primary">Sundowner Syndrome Assessment</p>
 		<h1 class="mt-2 text-3xl font-bold text-base-content">Sundowning evaluation</h1>
 		<p class="mt-4 text-base leading-relaxed text-base-content/70">
-			A structured evaluation of sundowner syndrome (sundowning) in elderly patients, particularly
-			those with dementia, completed as a single continuous wizard: demographics, cognitive status,
-			behavioural symptoms, temporal pattern, triggers, sleep-wake cycle, medication review,
-			environmental assessment, carer impact, and management plan. The shared engine scores the
-			Cohen-Mansfield Agitation Inventory (CMAI) and the Neuropsychiatric Inventory (NPI), classifies
-			a severity band, and flags issues for the clinician.
+			A structured, single-page wizard evaluating sundowner syndrome (sundowning) in elderly
+			patients, particularly those with dementia, across cognitive status, behavioural symptoms,
+			temporal pattern, triggers, and carer impact, from which the shared engine scores the
+			Cohen-Mansfield Agitation Inventory (CMAI) and Neuropsychiatric Inventory (NPI), classifies a
+			severity band, and flags issues for the clinician.
 		</p>
 	</header>
 

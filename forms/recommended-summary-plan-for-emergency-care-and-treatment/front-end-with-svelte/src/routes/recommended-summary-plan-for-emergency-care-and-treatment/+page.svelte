@@ -13,12 +13,8 @@
 		<h1 class="mt-2 text-3xl font-bold text-base-content">ReSPECT emergency care and treatment plan</h1>
 		<p class="mt-4 text-base leading-relaxed text-base-content/70">
 			A UK personalised emergency care and treatment plan created through shared decision-making,
-			completed as a single continuous wizard. It records a summary of relevant health, what matters
-			to the person, agreed clinical recommendations balancing life-sustaining treatment against
-			comfort, an explicit CPR recommendation (attempt or do-not-attempt), and agreed ceilings of
-			treatment. This is a documentation and completeness instrument, not a score: the shared engine
-			marks the plan complete or incomplete, reports a completeness percentage, and raises safety and
-			governance flags.
+			completed as a single continuous wizard — a documentation and completeness instrument, not a
+			score.
 		</p>
 	</header>
 
@@ -53,8 +49,11 @@
 			<div>
 				<dt class="font-semibold text-base-content">Purpose</dt>
 				<dd class="mt-1 text-base-content/70">
-					Record and validate clinician-agreed recommendations for emergency care — a completeness
-					status, mandatory-rule results, and safety flags — not a clinical score.
+					Record and validate clinician-agreed recommendations for emergency care — a summary of
+					relevant health, what matters to the person, agreed clinical recommendations balancing
+					life-sustaining treatment against comfort, an explicit CPR recommendation (attempt or
+					do-not-attempt), and agreed ceilings of treatment — producing a completeness status,
+					mandatory-rule results, and safety flags, not a clinical score.
 				</dd>
 			</div>
 			<div>

@@ -14,12 +14,11 @@
 			Microbiology specimen culture / MC&amp;S request
 		</h1>
 		<p class="mt-4 text-base leading-relaxed text-base-content/70">
-			A UK NHS–aligned microbiology specimen culture / MC&amp;S request that a clinician completes to
-			order microscopy, culture, and antibiotic-sensitivity testing on a clinical specimen. It records
-			the specimen and site, the requested tests, the clinical indication and details, pre-analytical
-			specimen handling, patient-safety factors, and the requested urgency — then computes a four-axis
-			vetting grade (appropriateness, pre-analytical specimen safety, request completeness, and triage
-			priority) plus safety-critical flags to support the laboratory's triage and acceptance decision.
+			A UK NHS–aligned microbiology specimen culture / MC&amp;S request form that a clinician
+			completes to order microscopy, culture, and antibiotic-sensitivity testing, computing a
+			four-axis vetting grade (appropriateness, pre-analytical specimen safety, request completeness,
+			and triage priority) plus safety-critical flags to support the laboratory's triage and
+			acceptance decision.
 		</p>
 	</header>
 
@@ -54,8 +53,9 @@
 			<div>
 				<dt class="font-semibold text-base-content">Purpose</dt>
 				<dd class="mt-1 text-base-content/70">
-					Capture what specimen and tests are being ordered, why, and how urgently, and produce a
-					vetting report the microbiology laboratory can triage and accept from.
+					Capture what specimen and tests are being ordered, why, how urgently, and how the specimen
+					should be handled pre-analytically, and produce a vetting report the microbiology
+					laboratory can triage and accept from.
 				</dd>
 			</div>
 			<div>

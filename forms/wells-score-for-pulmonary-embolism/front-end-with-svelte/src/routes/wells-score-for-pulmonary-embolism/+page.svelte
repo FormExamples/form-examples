@@ -12,13 +12,9 @@
 		</p>
 		<h1 class="mt-2 text-3xl font-bold text-base-content">Wells PE pre-test probability rule</h1>
 		<p class="mt-4 text-base leading-relaxed text-base-content/70">
-			A bedside clinical prediction rule for the pre-test probability of acute pulmonary embolism
-			(PE) in adults with suspected PE, completed as a single continuous wizard. Seven weighted
-			criteria contribute points &mdash; clinical signs of DVT (+3), PE most likely (+3), heart rate
-			&gt; 100 (+1.5), immobilisation or recent surgery (+1.5), previous DVT/PE (+1.5), haemoptysis
-			(+1), and malignancy (+1) &mdash; for a total of 0 to 12.5. The shared engine sums the score
-			and stratifies the patient: Wells &gt; 4 &rarr; PE likely (CTPA) versus Wells &le; 4 &rarr; PE
-			unlikely (D-dimer).
+			A bedside clinical prediction rule that sums seven weighted criteria into a Wells score of 0 to
+			12.5 to stratify an adult with suspected acute pulmonary embolism as likely (CTPA) or unlikely
+			(D-dimer).
 		</p>
 	</header>
 
@@ -53,9 +49,12 @@
 			<div>
 				<dt class="font-semibold text-base-content">Purpose</dt>
 				<dd class="mt-1 text-base-content/70">
-					Capture the seven Wells criteria and the patient's haemodynamic status, and produce a
-					graded report &mdash; total score, two-level and three-level bands, recommended pathway,
-					and flagged issues &mdash; to direct the diagnostic pathway.
+					Capture the seven weighted Wells criteria &mdash; clinical signs of DVT (+3), PE most
+					likely (+3), heart rate &gt; 100 (+1.5), immobilisation or recent surgery (+1.5),
+					previous DVT/PE (+1.5), haemoptysis (+1), and malignancy (+1) &mdash; and the patient's
+					haemodynamic status, and produce a graded report &mdash; total score (0 to 12.5),
+					two-level and three-level bands, recommended pathway, and flagged issues &mdash; to
+					direct the diagnostic pathway.
 				</dd>
 			</div>
 			<div>

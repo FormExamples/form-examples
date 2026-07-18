@@ -11,12 +11,9 @@
 		<p class="text-sm font-semibold uppercase tracking-wide text-primary">Dyslexia Assessment</p>
 		<h1 class="mt-2 text-3xl font-bold text-base-content">Specific learning difficulty evaluation</h1>
 		<p class="mt-4 text-base leading-relaxed text-base-content/70">
-			A structured dyslexia evaluation completed as a single continuous wizard: demographics,
-			developmental history, educational background, reading, writing and spelling, phonological
-			processing, working memory and processing speed, emotional and behavioural impact, previous
-			support, and a recommendations and support plan. The shared engine classifies each domain's
-			standardised score (mean 100, SD 15), derives an overall severity from the most-impaired
-			domain, and flags issues for the clinician.
+			A structured dyslexia evaluation completed as a single continuous wizard whose shared engine
+			classifies each domain's standardised score (mean 100, SD 15), derives an overall severity from
+			the most-impaired domain, and flags issues for the clinician.
 		</p>
 	</header>
 
@@ -51,9 +48,12 @@
 			<div>
 				<dt class="font-semibold text-base-content">Purpose</dt>
 				<dd class="mt-1 text-base-content/70">
-					Capture a structured profile of reading, writing, spelling, phonological processing,
-					working memory, and processing speed, then produce a graded report — overall severity,
-					per-domain scores, and flagged issues — to support clinical review.
+					Capture a structured profile — demographics, developmental history, educational
+					background, reading, writing and spelling, phonological processing, working memory and
+					processing speed, emotional and behavioural impact, previous support, and a
+					recommendations and support plan — then produce a graded report — overall severity
+					(derived from the most-impaired domain), per-domain scores, and flagged issues — to
+					support clinical review.
 				</dd>
 			</div>
 			<div>

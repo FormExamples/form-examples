@@ -12,13 +12,10 @@
 		</p>
 		<h1 class="mt-2 text-3xl font-bold text-base-content">Fitness-to-fly assessment (MEDIF)</h1>
 		<p class="mt-4 text-base leading-relaxed text-base-content/70">
-			Digitisation of the airline Medical Information Form (MEDIF), completed as a single continuous
-			14-section wizard: submitting agent, passenger identity, trip details, the reason clearance is
-			required, the attending physician's evaluation, diagnosis, cardiovascular and respiratory
-			status, recent events and surgery, pregnancy, communicable disease, requested in-flight
-			accommodations, cabin medications and equipment, and physician sign-off. The shared engine
-			grades a fitness-to-fly band, fires airline-aligned rules, and emits clinical safety flags for
-			the airline medical desk.
+			A digitisation of the airline Medical Information Form (MEDIF), completed as a single
+			continuous 14-section wizard covering passenger identity, trip details, and the attending
+			physician's clinical evaluation, that grades a fitness-to-fly band, fires airline-aligned
+			rules, and emits clinical safety flags for the airline medical desk.
 		</p>
 	</header>
 
@@ -53,8 +50,10 @@
 			<div>
 				<dt class="font-semibold text-base-content">Purpose</dt>
 				<dd class="mt-1 text-base-content/70">
-					Capture a structured fitness-to-fly profile and produce a graded report — fitness band,
-					fired rules, safety flags, and a medical-desk recommendation — to support airline clearance.
+					Capture a structured fitness-to-fly profile — diagnosis, cardiovascular and respiratory
+					status, recent events and surgery, pregnancy, communicable disease, and requested in-flight
+					accommodations — and produce a graded report: fitness band, fired rules, safety flags, and
+					a medical-desk recommendation to support airline clearance.
 				</dd>
 			</div>
 			<div>

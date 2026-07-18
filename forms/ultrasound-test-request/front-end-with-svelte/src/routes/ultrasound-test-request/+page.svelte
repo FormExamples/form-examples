@@ -13,10 +13,9 @@
 			General diagnostic ultrasound request
 		</h1>
 		<p class="mt-4 text-base leading-relaxed text-base-content/70">
-			A UK NHS–aligned general (non-obstetric) diagnostic ultrasound request that a clinician
-			completes to refer a patient for an ultrasound examination. It records the requested
-			examination (body region, laterality), the clinical indication and specific question, relevant
-			history, preparation requirements, and triage details — then computes a four-axis grade
+			A UK NHS–aligned single-page wizard for referring a patient for a general (non-obstetric)
+			diagnostic ultrasound examination, recording the requested examination, clinical indication,
+			relevant history, and preparation requirements, then computing a four-axis grade
 			(appropriateness, preparation / technical suitability, request completeness, and triage
 			priority) plus safety-critical flags to support the imaging department's triage and booking
 			decision.
@@ -54,8 +53,10 @@
 			<div>
 				<dt class="font-semibold text-base-content">Purpose</dt>
 				<dd class="mt-1 text-base-content/70">
-					Capture what ultrasound examination a patient needs and how urgently, and produce a vetting
-					report the imaging department can triage and book from.
+					Capture what ultrasound examination a patient needs — body region and laterality, clinical
+					indication and specific question, relevant history, preparation requirements, and triage
+					details — and how urgently, and produce a vetting report the imaging department can
+					triage and book from.
 				</dd>
 			</div>
 			<div>

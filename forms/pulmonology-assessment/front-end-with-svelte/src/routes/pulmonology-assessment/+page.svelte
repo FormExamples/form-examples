@@ -11,11 +11,9 @@
 		<p class="text-sm font-semibold uppercase tracking-wide text-primary">Pulmonology Assessment</p>
 		<h1 class="mt-2 text-3xl font-bold text-base-content">Respiratory evaluation</h1>
 		<p class="mt-4 text-base leading-relaxed text-base-content/70">
-			A comprehensive respiratory evaluation completed as a single continuous wizard: demographics,
-			chief complaint, spirometry, symptom assessment, exacerbation history, medications, allergies,
-			comorbidities, smoking and exposures, and functional status. The shared engine stages the
-			patient with the GOLD (Global Initiative for Chronic Obstructive Lung Disease) classification,
-			derives the ABCD assessment group, and flags issues for the pulmonologist.
+			A comprehensive respiratory evaluation completed as a single continuous wizard, staged by
+			the shared engine with the GOLD (Global Initiative for Chronic Obstructive Lung Disease)
+			classification and ABCD assessment group.
 		</p>
 	</header>
 
@@ -50,8 +48,10 @@
 			<div>
 				<dt class="font-semibold text-base-content">Purpose</dt>
 				<dd class="mt-1 text-base-content/70">
-					Capture a structured respiratory profile and produce a graded report — GOLD stage, ABCD
-					group, and flagged issues — to support pulmonology review.
+					Capture a structured respiratory profile — demographics, chief complaint, spirometry,
+					symptom assessment, exacerbation history, medications, allergies, comorbidities,
+					smoking and exposures, and functional status — and produce a graded report — GOLD
+					stage, ABCD group, and flagged issues — to support pulmonology review.
 				</dd>
 			</div>
 			<div>

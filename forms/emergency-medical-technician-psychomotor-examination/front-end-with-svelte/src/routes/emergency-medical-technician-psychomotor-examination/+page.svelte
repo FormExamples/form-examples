@@ -13,10 +13,9 @@
 		<h1 class="mt-2 text-3xl font-bold text-base-content">NREMT skills station scoring</h1>
 		<p class="mt-4 text-base leading-relaxed text-base-content/70">
 			An examiner records an NREMT-style EMT psychomotor skills examination as a single continuous
-			wizard: candidate and scenario details, scene size-up, primary survey, history taking and
-			secondary assessment, reassessment, and a critical-criteria review. The shared engine awards
-			points against the patient-assessment checklist, applies the critical-criteria overrides, and
-			returns an overall Pass / Fail with flagged issues for the candidate debrief.
+			wizard, and the shared engine awards points against the patient-assessment checklist, applies
+			critical-criteria overrides, and returns an overall Pass / Fail with flagged issues for the
+			candidate debrief.
 		</p>
 	</header>
 
@@ -51,9 +50,11 @@
 			<div>
 				<dt class="font-semibold text-base-content">Purpose</dt>
 				<dd class="mt-1 text-base-content/70">
-					Capture a structured skills-station record and produce a graded report — Pass / Fail,
-					points achieved, critical-criteria failures, and flagged issues — to support objective
-					EMT certification and remediation.
+					Capture a structured skills-station record — candidate and scenario details, scene
+					size-up, primary survey, history taking and secondary assessment, reassessment, and a
+					critical-criteria review — and produce a graded report: Pass / Fail, points achieved,
+					critical-criteria failures, and flagged issues, to support objective EMT certification
+					and remediation.
 				</dd>
 			</div>
 			<div>

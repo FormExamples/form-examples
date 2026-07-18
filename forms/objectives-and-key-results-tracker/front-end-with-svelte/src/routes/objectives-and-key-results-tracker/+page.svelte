@@ -10,12 +10,11 @@
 		<p class="text-sm font-semibold uppercase tracking-wide text-primary">Objectives and Key Results Tracker</p>
 		<h1 class="mt-2 text-3xl font-bold text-base-content">Track one objective and its key results</h1>
 		<p class="mt-4 text-base leading-relaxed text-base-content/70">
-			Capture one objective with its 1–5 key results as a single continuous wizard: reporter and cycle,
-			the objective, participants, strategic alignment, key results, initiatives, risks, the latest
-			check-in, the forecast, and the scores. The shared engine grades the objective on a Red / Amber /
-			Green (RAG) scale across seven instruments — progress, confidence, stretch, alignment, impact,
-			SMART quality, and pace — and raises flags for issues such as mis-alignment, no DRI, and pace
-			collapse.
+			Capture one objective with its 1–5 key results — reporter and cycle, the objective,
+			participants, strategic alignment, key results, initiatives, risks, the latest check-in,
+			and the forecast — then let the shared engine grade it on a Red / Amber / Green (RAG) scale
+			across seven instruments (progress, confidence, stretch, alignment, impact, SMART quality,
+			and pace) and raise flags for issues such as mis-alignment, no DRI, and pace collapse.
 		</p>
 	</header>
 

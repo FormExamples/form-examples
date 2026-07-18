@@ -11,11 +11,9 @@
 		<p class="text-sm font-semibold uppercase tracking-wide text-primary">Mental Health Assessment</p>
 		<h1 class="mt-2 text-3xl font-bold text-base-content">Depression and anxiety screening</h1>
 		<p class="mt-4 text-base leading-relaxed text-base-content/70">
-			A combined mental-health screen completed as a single continuous wizard: demographics, the
-			PHQ-9 depression screen, the GAD-7 anxiety screen, mood and affect, risk assessment, substance
-			use, current medications, treatment history, and social / functional status. The shared engine
-			scores the patient with the PHQ-9 (0–27) and GAD-7 (0–21) instruments, derives severity bands,
-			and flags safety-critical issues for the clinician.
+			A combined mental-health screen, completed as a single continuous wizard, that scores the
+			patient with the PHQ-9 (0–27) depression and GAD-7 (0–21) anxiety instruments, derives
+			severity bands, and flags safety-critical issues for the clinician.
 		</p>
 	</header>
 

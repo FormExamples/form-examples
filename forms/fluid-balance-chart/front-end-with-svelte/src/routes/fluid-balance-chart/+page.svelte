@@ -11,12 +11,8 @@
 		<h1 class="mt-2 text-3xl font-bold text-base-content">Intake / output monitoring chart</h1>
 		<p class="mt-4 text-base leading-relaxed text-base-content/70">
 			A bedside record of a patient's fluid intake and output over a charting period, completed as a
-			single continuous wizard — chart context, patient weight, timed intake entries, timed output
-			entries, and a summary note. It captures a parent chart header plus two repeating child lists
-			(intake rows and output rows). The shared engine reconciles the recorded volumes into totals, a
-			running and cumulative net balance, and the weight-indexed urine-output rate (mL/kg/h), grades
-			the fluid status (Balanced, Positive, Negative, or Oliguria), and — independently — raises
-			safety flags.
+			single continuous wizard, that the shared engine reconciles into a graded fluid-balance report
+			for the care team.
 		</p>
 	</header>
 
@@ -51,9 +47,11 @@
 			<div>
 				<dt class="font-semibold text-base-content">Purpose</dt>
 				<dd class="mt-1 text-base-content/70">
-					Reconcile recorded intake and output volumes and produce a fluid-balance report — totals,
-					net balance, urine-output rate, fluid status, and flagged issues — to support safe,
-					auditable monitoring.
+					Reconcile recorded intake and output volumes — timed entries across a parent chart header
+					and two repeating intake/output lists — and produce a fluid-balance report: totals, a
+					running and cumulative net balance, the weight-indexed urine-output rate (mL/kg/h), a
+					fluid-status classification (Balanced, Positive, Negative, or Oliguria), and independently
+					raised safety flags — to support safe, auditable monitoring.
 				</dd>
 			</div>
 			<div>

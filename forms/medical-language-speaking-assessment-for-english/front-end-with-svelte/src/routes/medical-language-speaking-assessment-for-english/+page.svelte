@@ -11,11 +11,10 @@
 		<h1 class="mt-2 text-3xl font-bold text-base-content">Clinical English speaking assessment</h1>
 		<p class="mt-4 text-base leading-relaxed text-base-content/70">
 			A criterion-based English-language speaking assessment for internationally educated healthcare
-			professionals, modelled on the Occupational English Test (OET) Medicine speaking sub-test. The
-			assessment is completed as a single continuous wizard: candidate details, two role-played
-			patient scenarios, four linguistic criteria (0-6), and five clinical-communication indicators
-			(0-3). The shared engine scales the combined band total to the OET 0-500 score, derives the
-			letter grade A–E and the registration outcome, and flags issues for the assessment lead.
+			professionals, modelled on the Occupational English Test (OET) Medicine speaking sub-test, that
+			scales four linguistic criteria (0-6) and five clinical-communication indicators (0-3) across
+			two role-played patient scenarios to an OET 0-500 score, deriving the letter grade A–E, the
+			registration outcome, and flagged issues.
 		</p>
 	</header>
 

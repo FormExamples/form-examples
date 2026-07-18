@@ -15,12 +15,8 @@
 		</h1>
 		<p class="mt-4 text-base leading-relaxed text-base-content/70">
 			A structured primary-care referral to a specialist or service, completed as a single
-			continuous wizard. It records the referrer and patient details, the referral destination,
-			urgency, reason and history, examination and investigation findings, medications and
-			allergies, and the patient’s expectations, consent, and safety-netting. This is a
-			documentation-completeness and urgency-classification instrument, not a score: the shared
-			engine grades the referral Complete or Incomplete with a completeness percentage, echoes its
-			urgency (routine, urgent, two-week-wait suspected cancer, or emergency), and raises flags.
+			continuous wizard, that the shared documentation engine grades for completeness and echoes
+			its urgency classification rather than scoring the patient.
 		</p>
 	</header>
 
@@ -55,9 +51,12 @@
 			<div>
 				<dt class="font-semibold text-base-content">Purpose</dt>
 				<dd class="mt-1 text-base-content/70">
-					Structure and route a referral — a completeness status, a completeness percentage, an
-					urgency classification, mandatory-field results, and flags — not a clinical score. It
-					checks the letter, not the patient.
+					Structure and route a referral — capturing the referrer and patient details, the referral
+					destination, urgency, reason and history, examination and investigation findings,
+					medications and allergies, and the patient's expectations, consent, and safety-netting —
+					into a completeness status, a completeness percentage, an echoed urgency classification
+					(routine, urgent, two-week-wait suspected cancer, or emergency), mandatory-field results,
+					and flags — not a clinical score. It checks the letter, not the patient.
 				</dd>
 			</div>
 			<div>

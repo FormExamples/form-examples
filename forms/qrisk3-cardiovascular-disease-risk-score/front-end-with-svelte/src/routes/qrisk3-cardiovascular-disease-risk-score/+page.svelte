@@ -13,10 +13,9 @@
 		<h1 class="mt-2 text-3xl font-bold text-base-content">10-year cardiovascular risk calculator</h1>
 		<p class="mt-4 text-base leading-relaxed text-base-content/70">
 			A primary-prevention CVD risk assessment for UK primary care, completed as a single continuous
-			wizard. It collects demographic, lifestyle, comorbidity, and measurement inputs, applies a
-			sex-specific weighted risk model, and returns a <strong>10-year CVD risk percentage</strong>,
-			a risk band, and an estimated heart age. A result &ge; 10% meets the NICE threshold at which a
-			statin plus lifestyle advice should be offered.
+			wizard, that applies a sex-specific weighted risk model to demographic, lifestyle, comorbidity,
+			and measurement inputs and returns a <strong>10-year CVD risk percentage</strong>, a risk band,
+			and an estimated heart age.
 		</p>
 		<p
 			class="mt-4 rounded-lg border border-warning/40 bg-warning/10 p-3 text-sm text-base-content/80"
@@ -58,8 +57,10 @@
 			<div>
 				<dt class="font-semibold text-base-content">Purpose</dt>
 				<dd class="mt-1 text-base-content/70">
-					Capture the QRISK3 inputs and produce a graded report — 10-year risk %, risk band, heart
-					age, and flagged issues — to support the NICE statin-offer decision.
+					Capture the QRISK3 inputs — demographic, lifestyle, comorbidity, and measurement — and
+					produce a graded report — 10-year risk %, risk band, heart age, and flagged issues — to
+					support the NICE statin-offer decision: a result &ge; 10% meets the threshold at which a
+					statin plus lifestyle advice should be offered.
 				</dd>
 			</div>
 			<div>

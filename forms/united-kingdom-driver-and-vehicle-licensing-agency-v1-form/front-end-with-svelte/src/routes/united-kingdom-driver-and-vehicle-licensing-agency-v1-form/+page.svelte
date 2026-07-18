@@ -12,13 +12,13 @@
 			Confidential medical information — vision
 		</h1>
 		<p class="mt-4 text-base leading-relaxed text-base-content/70">
-			The DVLA V1 form collects the vision self-declaration the UK Driver and Vehicle Licensing
-			Agency requires to assess fitness to drive. It is completed as a single continuous wizard:
-			personal details, healthcare professionals, and eleven vision questions covering the eyesight
-			standard, monocular vision, visual field, glaucoma, retinitis pigmentosa, laser treatment,
-			blepharospasm, night blindness, double vision, other conditions, and recent contact, plus the
-			applicant's authorisation. The shared engine validates the declaration for completeness
-			(honouring the form's conditional logic) and flags issues for clinician review.
+			The DVLA V1 form is a single continuous wizard — personal details, healthcare professionals,
+			and eleven vision questions covering the eyesight standard, monocular vision, visual field,
+			glaucoma, retinitis pigmentosa, laser treatment, blepharospasm, night blindness, double vision,
+			other conditions, and recent contact, plus the applicant's authorisation — that collects the
+			vision self-declaration the UK Driver and Vehicle Licensing Agency requires to assess fitness
+			to drive, validated by a shared engine for completeness (honouring the form's conditional
+			logic) and flagged for clinician review.
 		</p>
 	</header>
 

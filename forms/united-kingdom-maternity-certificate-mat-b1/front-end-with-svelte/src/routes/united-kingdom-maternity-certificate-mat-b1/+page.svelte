@@ -12,12 +12,11 @@
 		<p class="text-sm font-semibold uppercase tracking-wide text-primary">UK Maternity Certificate</p>
 		<h1 class="mt-2 text-3xl font-bold text-base-content">MAT B1 maternity certificate</h1>
 		<p class="mt-4 text-base leading-relaxed text-base-content/70">
-			The DWP MAT B1 certificate is issued by doctors and registered midwives so a pregnant
-			patient can claim Statutory Maternity Pay (SMP), Maternity Allowance (MA), and the Sure
-			Start Maternity Grant (SSMG). Capture the patient identification, either Part A
-			(pre-confinement) or Part B (post-confinement) — they are mutually exclusive — and the
-			issuer details, as one continuous single-page wizard. The shared rules engine validates
-			completeness, checks the issuing-window and credential rules, and flags issues for review.
+			The DWP MAT B1 certificate, issued by doctors and registered midwives so a pregnant patient
+			can claim Statutory Maternity Pay, Maternity Allowance, and the Sure Start Maternity Grant, is
+			captured as a single continuous wizard — patient identification, either Part A
+			(pre-confinement) or Part B (post-confinement), and issuer details — validated by a shared
+			rules engine for completeness, issuing-window, and credential rules.
 		</p>
 	</header>
 

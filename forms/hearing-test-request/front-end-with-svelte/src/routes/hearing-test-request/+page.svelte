@@ -14,10 +14,8 @@
 		</h1>
 		<p class="mt-4 text-base leading-relaxed text-base-content/70">
 			A UK NHS–aligned audiology request that a clinician completes to request a hearing test for a
-			patient. It records the requested test, the affected side, the clinical indication and specific
-			question, relevant history, symptoms and red flags, and the requested urgency — then computes a
-			four-axis vetting grade (appropriateness, urgency, request completeness, and clinical priority)
-			plus safety-critical flags to support the audiology department's triage and booking decision.
+			patient, computing a four-axis vetting grade and safety-critical flags to support the audiology
+			department's triage and booking decision.
 		</p>
 	</header>
 
@@ -52,8 +50,10 @@
 			<div>
 				<dt class="font-semibold text-base-content">Purpose</dt>
 				<dd class="mt-1 text-base-content/70">
-					Capture why and how urgently a patient should have an audiological examination, and produce
-					a vetting report the audiology team can triage and book from.
+					Capture the requested test, the affected side, the clinical indication and specific question,
+					relevant history, symptoms and red flags, and the requested urgency — a four-axis grade
+					(appropriateness, urgency, request completeness, and clinical priority) — and produce a
+					vetting report the audiology team can triage and book from.
 				</dd>
 			</div>
 			<div>

@@ -17,12 +17,9 @@
 		</h1>
 		<p class="mt-4 text-base leading-relaxed text-base-content/70">
 			A UK-aligned workplace reasonable-adjustments review for neurodiversity that a manager or HR
-			contact completes with the worker to check whether the agreed adjustments are still working.
-			It records the per-category effectiveness of the adjustments in place, the worker's feedback
-			and outcomes, any changes arising, and the next review date — then computes a four-axis grade
-			(overall effectiveness, wellbeing risk, review completeness, and next-step urgency) plus review
-			flags including an automatic adjustments-not-working alert. It is the review third of the ACAS
-			request / confirmation / review cycle.
+			contact completes with the worker to check whether the agreed adjustments are still working,
+			computing a four-axis grade (overall effectiveness, wellbeing risk, review completeness, and
+			next-step urgency) plus review flags including an automatic adjustments-not-working alert.
 		</p>
 	</header>
 
@@ -57,9 +54,10 @@
 			<div>
 				<dt class="font-semibold text-base-content">Purpose</dt>
 				<dd class="mt-1 text-base-content/70">
-					Record how the agreed adjustments are working in practice and what should change, and
-					produce a structured review record. This is the review third of the ACAS request /
-					confirmation / review cycle.
+					Record how the agreed adjustments are working in practice — the per-category effectiveness
+					of the adjustments in place, the worker's feedback and outcomes, any changes arising, and
+					the next review date — and produce a structured review record. This is the review third
+					of the ACAS request / confirmation / review cycle.
 				</dd>
 			</div>
 			<div>

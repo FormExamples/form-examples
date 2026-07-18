@@ -13,10 +13,8 @@
 		<h1 class="mt-2 text-3xl font-bold text-base-content">4AT bedside delirium screen</h1>
 		<p class="mt-4 text-base leading-relaxed text-base-content/70">
 			A rapid bedside screen for delirium and possible cognitive impairment, completed as a single
-			continuous wizard. Four items — alertness, the AMT4 abbreviated mental test, attention (months
-			backwards), and acute change or fluctuating course — score a total of 0 to 12. The shared
-			engine sums the score and assigns an interpretation band: a total of 4 or more flags possible
-			delirium, 1 to 3 flags possible cognitive impairment, and 0 means delirium is unlikely.
+			continuous wizard, that the shared engine scores across four items to assign an interpretation
+			band.
 		</p>
 	</header>
 
@@ -51,8 +49,11 @@
 			<div>
 				<dt class="font-semibold text-base-content">Purpose</dt>
 				<dd class="mt-1 text-base-content/70">
-					Capture the four 4AT items and produce a graded report — total score 0-12, interpretation
-					band, and flagged issues — to support timely delirium recognition.
+					Capture the four 4AT items — alertness, the AMT4 abbreviated mental test, attention (months
+					backwards), and acute change or fluctuating course — and produce a graded report: a total
+					score of 0 to 12, an interpretation band (4 or more flags possible delirium, 1 to 3 flags
+					possible cognitive impairment, and 0 means delirium is unlikely), and flagged issues — to
+					support timely delirium recognition.
 				</dd>
 			</div>
 			<div>

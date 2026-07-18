@@ -14,12 +14,9 @@
 		</h1>
 		<p class="mt-4 text-base leading-relaxed text-base-content/70">
 			A UK NHS–aligned GI endoscopy request that a clinician completes to request a gastrointestinal
-			endoscopy for a patient. It records the requested procedure, the clinical indication and
-			specific question, ALARM red-flag symptoms, FIT and haematinic results, anticoagulant /
-			antiplatelet medication, comorbidities, infection-control flags, the bowel-preparation and
-			sedation plan, and the requested urgency — then computes a four-axis vetting grade
-			(appropriateness, cancer-pathway urgency, request completeness, and pre-procedure risk) plus
-			safety-critical flags to support the endoscopy unit's triage and booking decision.
+			endoscopy for a patient, recording indications, red-flag symptoms, and pre-procedure risk
+			factors, then computing a four-axis vetting grade plus safety-critical flags to support the
+			endoscopy unit's triage and booking decision.
 		</p>
 	</header>
 
@@ -54,8 +51,11 @@
 			<div>
 				<dt class="font-semibold text-base-content">Purpose</dt>
 				<dd class="mt-1 text-base-content/70">
-					Capture why a patient needs a GI endoscopy and how urgently, and produce a vetting report
-					the endoscopy unit can triage and book from.
+					Capture why a patient needs a GI endoscopy and how urgently — the requested procedure,
+					clinical indication and specific question, ALARM red-flag symptoms, FIT and haematinic
+					results, anticoagulant / antiplatelet medication, comorbidities, infection-control flags,
+					and the bowel-preparation and sedation plan — and produce a vetting report the endoscopy
+					unit can triage and book from.
 				</dd>
 			</div>
 			<div>

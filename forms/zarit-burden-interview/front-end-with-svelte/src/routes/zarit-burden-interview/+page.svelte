@@ -12,13 +12,10 @@
 		</p>
 		<h1 class="mt-2 text-3xl font-bold text-base-content">ZBI carer-burden screen</h1>
 		<p class="mt-4 text-base leading-relaxed text-base-content/70">
-			A caregiver self-report questionnaire measuring the subjective burden of an informal carer,
-			completed as a single continuous wizard. The carer rates each statement on a 0-4 frequency
-			scale (0 = Never … 4 = Nearly always); a higher rating always means greater perceived burden,
-			with no reverse-scoring. On the full ZBI-22 the 22 items sum to a total of 0-88 mapped to four
-			burden bands; the validated ZBI-12 short form scores a 12-item subset to 0-48 with a
-			high-burden cut-off of &ge; 17. Item 22 (overall burden) drives the carer mental-health flag
-			independently of the total. The ZBI is a screen, not a diagnosis.
+			A caregiver self-report questionnaire that sums 0-4 frequency ratings into a ZBI-22 total (0-88)
+			or the validated ZBI-12 short-form total (0-48) to screen the subjective burden of an informal
+			carer, mapping the total to a burden band and independently flagging carer mental-health risk
+			from the overall-burden item.
 		</p>
 	</header>
 
@@ -53,8 +50,13 @@
 			<div>
 				<dt class="font-semibold text-base-content">Purpose</dt>
 				<dd class="mt-1 text-base-content/70">
-					Capture the ZBI item ratings and produce a graded report — total, burden band, and flagged
-					issues — to prompt carer support, respite, and mental-health screening.
+					Capture the ZBI item ratings — each rated on a 0-4 frequency scale (0 = Never … 4 = Nearly
+					always), with no reverse-scoring, so a higher rating always means greater perceived
+					burden — and produce a graded report: total score (ZBI-22 0-88, or the validated ZBI-12
+					short form 0-48 with a high-burden cut-off of &ge; 17), burden band, and flagged issues,
+					including item 22 (overall burden), which drives the carer mental-health flag
+					independently of the total, to prompt carer support, respite, and mental-health
+					screening. The ZBI is a screen, not a diagnosis.
 				</dd>
 			</div>
 			<div>

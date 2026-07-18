@@ -14,12 +14,8 @@
 		</h1>
 		<p class="mt-4 text-base leading-relaxed text-base-content/70">
 			A UK NHS–aligned genomic test request (referral) that a clinician completes to request a
-			genomic test for a patient or family. It records the requested test type, the clinical
-			indication and specific question, the clinical details and phenotype, the family history, and
-			the consent and pre-test counselling status — then computes a four-axis grading
-			(appropriateness, consent &amp; counselling, request completeness, and triage priority) plus
-			safety-critical flags to support the Genomic Laboratory Hub's triage and test-selection
-			decision.
+			genomic test for a patient or family, computing a four-axis grading and safety-critical flags
+			to support the Genomic Laboratory Hub's triage and test-selection decision.
 		</p>
 	</header>
 
@@ -54,9 +50,9 @@
 			<div>
 				<dt class="font-semibold text-base-content">Purpose</dt>
 				<dd class="mt-1 text-base-content/70">
-					Capture which genomic test is requested, the clinical indication and question, and the
-					consent and counselling status, and produce a vetting report the Genomic Laboratory Hub
-					can triage and select tests from.
+					Capture which genomic test is requested, the clinical indication and question, the clinical
+					details and phenotype, the family history, and the consent and counselling status, and
+					produce a vetting report the Genomic Laboratory Hub can triage and select tests from.
 				</dd>
 			</div>
 			<div>

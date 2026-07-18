@@ -14,11 +14,8 @@
 		</h1>
 		<p class="mt-4 text-base leading-relaxed text-base-content/70">
 			A UK NHS–aligned cardiac echocardiogram request that a clinician completes to request an
-			echocardiogram for a patient. It records the requested echo type, the clinical indication and
-			specific question, relevant cardiac history, symptoms and NYHA functional class, ECG and
-			natriuretic-peptide findings, any previous echo, and the requested urgency — then computes a
-			four-axis grading (appropriateness, urgency, request completeness, and clinical priority) plus
-			safety-critical flags to support the echo department's triage and booking decision.
+			echocardiogram for a patient, computing a four-axis grading plus safety-critical flags to
+			support the echo department's triage and booking decision.
 		</p>
 	</header>
 
@@ -53,8 +50,12 @@
 			<div>
 				<dt class="font-semibold text-base-content">Purpose</dt>
 				<dd class="mt-1 text-base-content/70">
-					Capture why a patient needs an echocardiogram, which study and how urgently, and produce a
-					vetting report the echo / cardiac-physiology department can triage and book from.
+					Capture why a patient needs an echocardiogram, which study and how urgently — the requested
+					echo type, clinical indication and specific question, relevant cardiac history, symptoms
+					and NYHA functional class, ECG and natriuretic-peptide findings, any previous echo, and
+					requested urgency — and produce a four-axis vetting report (appropriateness, urgency,
+					request completeness, and clinical priority) the echo / cardiac-physiology department can
+					triage and book from.
 				</dd>
 			</div>
 			<div>

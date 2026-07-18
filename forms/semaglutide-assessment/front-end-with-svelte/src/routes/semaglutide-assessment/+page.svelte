@@ -11,12 +11,10 @@
 		<p class="text-sm font-semibold uppercase tracking-wide text-primary">Semaglutide Assessment</p>
 		<h1 class="mt-2 text-3xl font-bold text-base-content">GLP-1 receptor agonist eligibility screening</h1>
 		<p class="mt-4 text-base leading-relaxed text-base-content/70">
-			A structured semaglutide eligibility screen completed as a single continuous wizard:
-			demographics, indication and goals, body composition, metabolic profile, cardiovascular risk,
-			contraindications screening, gastrointestinal history, current medications, mental-health
-			screening, and treatment plan. The shared engine determines an eligibility status
-			(Eligible / Conditional / Ineligible) from absolute and relative contraindications, derives BMI
-			and its category, and flags safety-critical monitoring issues for the prescriber.
+			A structured, single-page wizard that screens semaglutide eligibility across
+			demographics, metabolic and cardiovascular risk, contraindications, and treatment planning, then
+			determines an eligibility status (Eligible / Conditional / Ineligible), BMI category, and
+			safety-critical monitoring flags for the prescriber.
 		</p>
 	</header>
 

@@ -12,13 +12,9 @@
 		</p>
 		<h1 class="mt-2 text-3xl font-bold text-base-content">EPDS perinatal-depression screen</h1>
 		<p class="mt-4 text-base leading-relaxed text-base-content/70">
-			A 10-item self-report screen for perinatal (antenatal and postnatal) depression, completed as
-			a single continuous wizard. The respondent rates ten statements about the past seven days;
-			each item scores 0 to 3 (items 3, 5, 6, 7, 8, 9 and 10 are reverse-scored) and the ten scores
-			sum to a total of 0 to 30. A total &ge; 10 suggests possible depression and &ge; 13 likely
-			depression. Item 10 (thoughts of self-harm) additionally triggers a mandatory safety flag
-			whenever it scores &gt; 0, independent of the total. The EPDS is a screen, not a diagnostic
-			test.
+			A 10-item self-report screen, completed as a single continuous wizard, that rates ten
+			statements about the respondent's past seven days to flag possible perinatal (antenatal and
+			postnatal) depression &mdash; a screen, not a diagnostic test.
 		</p>
 	</header>
 
@@ -53,8 +49,11 @@
 			<div>
 				<dt class="font-semibold text-base-content">Purpose</dt>
 				<dd class="mt-1 text-base-content/70">
-					Capture the ten EPDS items and produce a graded report — total 0-30, interpretation band,
-					and flagged issues — to support timely perinatal mental-health assessment.
+					Capture the ten EPDS items — each scored 0 to 3, with items 3, 5, 6, 7, 8, 9 and 10
+					reverse-scored — and produce a graded report: a total of 0-30 with an interpretation band
+					(&ge; 10 possible, &ge; 13 likely depression), a mandatory safety flag whenever item 10
+					(thoughts of self-harm) scores &gt; 0 independent of the total, and other flagged issues,
+					to support timely perinatal mental-health assessment.
 				</dd>
 			</div>
 			<div>

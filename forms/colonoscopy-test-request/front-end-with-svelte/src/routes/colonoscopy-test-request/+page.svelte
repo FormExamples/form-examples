@@ -13,13 +13,10 @@
 			Lower-GI endoscopy procedure request
 		</h1>
 		<p class="mt-4 text-base leading-relaxed text-base-content/70">
-			A UK NHS–aligned lower-GI endoscopy request that a clinician completes to request a colonoscopy
-			(or flexible sigmoidoscopy / CT colonography) for a patient. It records the requested procedure,
-			the clinical indication and specific question, lower-GI red-flag symptoms, the FIT and
-			haemoglobin results, anticoagulant / antiplatelet medication, bowel-preparation fitness and
-			renal function, and the requested urgency — then computes a four-axis vetting grade
-			(appropriateness, cancer-pathway urgency, request completeness, and pre-procedure risk) plus
-			safety-critical flags to support the endoscopy unit's triage and booking decision.
+			A UK NHS–aligned lower-GI endoscopy request that a clinician completes to request a
+			colonoscopy (or flexible sigmoidoscopy / CT colonography) and computes a four-axis vetting
+			grade — appropriateness, cancer-pathway urgency, request completeness, and pre-procedure
+			risk — plus safety-critical flags for the endoscopy unit’s triage and booking decision.
 		</p>
 	</header>
 
@@ -54,8 +51,10 @@
 			<div>
 				<dt class="font-semibold text-base-content">Purpose</dt>
 				<dd class="mt-1 text-base-content/70">
-					Capture why a patient needs a lower-GI endoscopy and how urgently, and produce a vetting
-					report the endoscopy unit can triage and book from.
+					Capture why a patient needs a lower-GI endoscopy and how urgently — including lower-GI
+					red-flag symptoms, FIT and haemoglobin results, anticoagulant / antiplatelet medication,
+					and bowel-preparation fitness and renal function — and produce a vetting report the
+					endoscopy unit can triage and book from.
 				</dd>
 			</div>
 			<div>

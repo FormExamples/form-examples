@@ -14,12 +14,9 @@
 			Prognostic grading for chronic liver disease
 		</h1>
 		<p class="mt-4 text-base leading-relaxed text-base-content/70">
-			Grade five parameters — total bilirubin, serum albumin, INR (or prothrombin time), ascites, and
-			hepatic encephalopathy — in a single continuous wizard. The shared engine scores each parameter
-			1, 2, or 3 points, sums a total of 5-15, and assigns a class: Class A (5-6), Class B (7-9), or
-			Class C (10-15), each mapped to one- and two-year survival and peri-operative mortality risk.
-			Decompensated (Class C) disease, overt encephalopathy, refractory ascites, and severe
-			coagulopathy are flagged for action.
+			A single continuous wizard that grades five parameters of chronic liver disease severity — total
+			bilirubin, serum albumin, INR, ascites, and hepatic encephalopathy — into a Child-Pugh class (A, B,
+			or C) with associated survival and peri-operative mortality risk.
 		</p>
 	</header>
 
@@ -55,8 +52,10 @@
 				<dt class="font-semibold text-base-content">Purpose</dt>
 				<dd class="mt-1 text-base-content/70">
 					Stratify the severity of chronic liver disease to support prognosis, transplant assessment,
-					and surgical-risk discussion — a graded report with the total, class, per-parameter points,
-					and flagged issues.
+					and surgical-risk discussion — each parameter scores 1, 2, or 3 points, summing to a total
+					of 5-15 that bands into Class A (5-6), Class B (7-9), or Class C (10-15), and flags
+					decompensated (Class C) disease, overt encephalopathy, refractory ascites, and severe
+					coagulopathy for action.
 				</dd>
 			</div>
 			<div>

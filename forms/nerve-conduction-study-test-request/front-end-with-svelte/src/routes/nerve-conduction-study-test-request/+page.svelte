@@ -16,12 +16,9 @@
 		</h1>
 		<p class="mt-4 text-base leading-relaxed text-base-content/70">
 			A UK NHS–aligned nerve conduction study / EMG (electrodiagnostic) request that a clinician
-			completes to request a neurophysiology examination. It records the requested study (nerve
-			conduction, needle EMG, or both), the anatomical region and laterality, the clinical indication
-			and specific question, symptoms and their duration, and the safety factors that matter for
-			needle EMG and electrical stimulation — then computes a four-axis vetting grade (appropriateness,
-			procedural risk, request completeness, and triage priority) plus safety-critical flags to
-			support the neurophysiology department's triage and booking decision.
+			completes to request a neurophysiology examination, computing a four-axis vetting grade
+			(appropriateness, procedural risk, request completeness, and triage priority) plus
+			safety-critical flags to support the neurophysiology department's triage and booking decision.
 		</p>
 	</header>
 
@@ -56,9 +53,12 @@
 			<div>
 				<dt class="font-semibold text-base-content">Purpose</dt>
 				<dd class="mt-1 text-base-content/70">
-					Capture why a patient should have an electrodiagnostic study and how urgently, and produce
-					a vetting report the neurophysiology team can triage from. The final triage and booking
-					decision remains the responsibility of the vetting neurophysiologist.
+					Capture why a patient should have an electrodiagnostic study and how urgently — the
+					requested study (nerve conduction, needle EMG, or both), anatomical region and laterality,
+					clinical indication and specific question, symptoms and their duration, and the safety
+					factors that matter for needle EMG and electrical stimulation — and produce a vetting
+					report the neurophysiology team can triage from. The final triage and booking decision
+					remains the responsibility of the vetting neurophysiologist.
 				</dd>
 			</div>
 			<div>

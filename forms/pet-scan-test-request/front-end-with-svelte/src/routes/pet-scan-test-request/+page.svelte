@@ -13,14 +13,12 @@
 			PET-CT scan request (referral)
 		</h1>
 		<p class="mt-4 text-base leading-relaxed text-base-content/70">
-			A UK NHS–aligned PET-CT (positron emission tomography) scan request that a clinician completes
-			to request a PET-CT examination — most commonly an oncology FDG-PET-CT for cancer staging,
-			restaging, or treatment-response assessment. It records the requested tracer and scan type, the
-			indication and specific clinical question, the FDG patient-preparation and safety data
-			(diabetes, blood glucose, pregnancy, breastfeeding, renal function), the IR(ME)R justification,
-			and the requested urgency — then computes a four-axis vetting grade (appropriateness,
-			preparation safety and radiation dose, request completeness, and triage priority) plus
-			safety-critical flags to support the nuclear-medicine department's triage and booking decision.
+			A UK NHS&ndash;aligned PET-CT scan request that a clinician completes to request a PET-CT
+			examination &mdash; most commonly an oncology FDG-PET-CT for cancer staging, restaging, or
+			treatment-response assessment &mdash; recording the tracer, indication, FDG preparation and
+			safety data, IR(ME)R justification, and urgency, then computing a four-axis vetting grade
+			plus safety-critical flags to support the nuclear-medicine department's triage and booking
+			decision.
 		</p>
 	</header>
 
@@ -55,9 +53,10 @@
 			<div>
 				<dt class="font-semibold text-base-content">Purpose</dt>
 				<dd class="mt-1 text-base-content/70">
-					Capture why a PET-CT examination is requested and how urgently, assess its preparation
-					safety and radiation justification, and produce a vetting report the nuclear-medicine team
-					can triage and book from.
+					Capture why a PET-CT examination is requested and how urgently, including the FDG
+					patient-preparation and safety data (diabetes, blood glucose, pregnancy, breastfeeding, renal
+					function), assess preparation safety and radiation justification, and produce a vetting
+					report the nuclear-medicine team can triage and book from.
 				</dd>
 			</div>
 			<div>

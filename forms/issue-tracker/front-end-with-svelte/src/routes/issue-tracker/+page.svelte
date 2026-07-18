@@ -11,11 +11,9 @@
 		<p class="text-sm font-semibold uppercase tracking-wide text-primary">Issue Tracker</p>
 		<h1 class="mt-2 text-3xl font-bold text-base-content">Report and triage any issue</h1>
 		<p class="mt-4 text-base leading-relaxed text-base-content/70">
-			A general-purpose issue tracker completed as a single continuous wizard: reporter and metadata,
-			chief complaint, participants, symptoms, fractures, history, investigations, diagnosis,
-			treatments and prognosis, and scores. The shared engine grades the issue on seven independent
-			scales — priority rank, severity of impact, magnitude of damage, harm grade, failure condition,
-			MoSCoW requirement, and frequency — and derives a composite priority plus safety flags.
+			A general-purpose issue tracker completed as a single continuous wizard, whose shared engine
+			grades the issue on seven independent scales and derives a composite priority plus safety
+			flags.
 		</p>
 	</header>
 
@@ -50,9 +48,12 @@
 			<div>
 				<dt class="font-semibold text-base-content">Purpose</dt>
 				<dd class="mt-1 text-base-content/70">
-					Capture any reportable problem — bug, outage, safety event, complaint, or blocker — and
-					produce a graded report: a composite priority, the seven raw scores, and flagged issues to
-					support triage.
+					Capture any reportable problem — bug, outage, safety event, complaint, or blocker — via
+					reporter and metadata, chief complaint, participants, symptoms, fractures, history,
+					investigations, diagnosis, treatments and prognosis, and scores, and produce a graded
+					report: a composite priority, the seven raw scores (priority rank, severity of impact,
+					magnitude of damage, harm grade, failure condition, MoSCoW requirement, and frequency), and
+					flagged issues to support triage.
 				</dd>
 			</div>
 			<div>

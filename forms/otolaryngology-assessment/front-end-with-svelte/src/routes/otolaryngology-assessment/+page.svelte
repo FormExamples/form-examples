@@ -11,12 +11,12 @@
 		<p class="text-sm font-semibold uppercase tracking-wide text-primary">Otolaryngology Assessment</p>
 		<h1 class="mt-2 text-3xl font-bold text-base-content">Ear, nose & throat consultation</h1>
 		<p class="mt-4 text-base leading-relaxed text-base-content/70">
-			A general ear-nose-throat (ENT) consultation completed as a single continuous wizard:
-			demographics, presenting complaint, history of present illness, past ENT history, the SNOT-22
-			sino-nasal symptom questionnaire, and structured examination of the external head and neck,
-			otoscopy, anterior rhinoscopy, and the oropharynx and neck, ending with a clinical impression and
-			management plan. The shared engine sums the SNOT-22 score, classifies sinonasal quality-of-life
-			impact, and flags red-flag presentations for the ENT clinician.
+			A general ear-nose-throat (ENT) consultation — covering demographics, presenting complaint,
+			history of present illness, past ENT history, the SNOT-22 sino-nasal symptom questionnaire,
+			and structured examination of the external head and neck, otoscopy, anterior rhinoscopy,
+			and the oropharynx and neck, ending with a clinical impression and management plan — whose
+			shared engine sums the SNOT-22 score, classifies sinonasal quality-of-life impact, and
+			flags red-flag presentations for the ENT clinician.
 		</p>
 	</header>
 

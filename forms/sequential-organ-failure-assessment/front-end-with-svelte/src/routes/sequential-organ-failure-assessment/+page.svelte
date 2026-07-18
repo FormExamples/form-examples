@@ -12,12 +12,10 @@
 		</p>
 		<h1 class="mt-2 text-3xl font-bold text-base-content">SOFA organ-dysfunction score</h1>
 		<p class="mt-4 text-base leading-relaxed text-base-content/70">
-			A clinician-driven Sequential Organ Failure Assessment for critically ill adults, completed as
-			a single continuous wizard. Six organ systems — respiration, coagulation, liver,
-			cardiovascular, central nervous system, and renal — are each scored 0 to 4 from objective
-			physiology and laboratory findings, for a total of 0 to 24. The shared engine sums the total,
-			derives delta-SOFA versus a baseline, bands the mortality risk, sets the Sepsis-3 flag when an
-			acute rise of &ge; 2 points accompanies suspected infection, and raises safety flags.
+			A clinician-driven, single-continuous-wizard scoring of six organ systems — respiration,
+			coagulation, liver, cardiovascular, central nervous system, and renal — each 0 to 4 from
+			objective physiology and laboratory findings, producing a total SOFA of 0 to 24 with
+			delta-SOFA, mortality risk banding, Sepsis-3 flagging, and safety flags.
 		</p>
 	</header>
 
@@ -52,9 +50,11 @@
 			<div>
 				<dt class="font-semibold text-base-content">Purpose</dt>
 				<dd class="mt-1 text-base-content/70">
-					Capture the six SOFA organ-system inputs and produce a graded report — per-system
-					sub-scores, total 0-24, delta-SOFA, mortality band, Sepsis-3 flag, and flagged issues — to
-					quantify organ dysfunction and support timely escalation.
+					Capture the six SOFA organ-system inputs (respiration, coagulation, liver, cardiovascular,
+					central nervous system, and renal) and produce a graded report — per-system sub-scores,
+					total 0-24, delta-SOFA, mortality band, a Sepsis-3 flag when an acute rise of &ge; 2 points
+					accompanies suspected infection, and flagged issues — to quantify organ dysfunction and
+					support timely escalation.
 				</dd>
 			</div>
 			<div>

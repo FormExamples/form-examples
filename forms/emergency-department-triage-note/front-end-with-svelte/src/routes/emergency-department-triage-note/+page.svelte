@@ -15,12 +15,9 @@
 		</h1>
 		<p class="mt-4 text-base leading-relaxed text-base-content/70">
 			A first-contact emergency-department triage assessment, completed as a single continuous
-			wizard. A triage nurse records arrival, the presenting complaint, brief history, triage vital
-			signs, a pain score, and the Manchester Triage System discriminators. The shared engine then
-			<strong>classifies</strong> the patient into one of the five MTS priority levels — 1 Immediate,
-			2 Very urgent, 3 Urgent, 4 Standard, 5 Non-urgent — with the target time to first assessment. A
-			supporting NEWS2 aggregate can escalate the category, and red-flag issues prompt escalation.
-			This is a classification, not a summed score: the most urgent finding wins.
+			wizard, that <strong>classifies</strong> the patient into one of the five Manchester Triage
+			System priority levels using vital signs, pain score, and discriminators, with NEWS2-based
+			escalation.
 		</p>
 	</header>
 
@@ -55,9 +52,12 @@
 			<div>
 				<dt class="font-semibold text-base-content">Purpose</dt>
 				<dd class="mt-1 text-base-content/70">
-					Capture the triage findings and produce a graded report — MTS priority level, target time,
-					fired discriminators, supporting NEWS2 aggregate, and flagged issues — to support timely
-					clinical prioritisation and escalation.
+					Capture the triage findings — arrival, presenting complaint, brief history, triage vital
+					signs, pain score, and Manchester Triage System discriminators — and produce a graded
+					report: the MTS priority level (1 Immediate, 2 Very urgent, 3 Urgent, 4 Standard, 5
+					Non-urgent) with target time, fired discriminators, a supporting NEWS2 aggregate, and
+					flagged issues, to support timely clinical prioritisation and escalation. This is a
+					classification, not a summed score — the most urgent finding wins.
 				</dd>
 			</div>
 			<div>

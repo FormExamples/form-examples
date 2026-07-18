@@ -11,12 +11,9 @@
 		<p class="text-sm font-semibold uppercase tracking-wide text-primary">Palliative Assessment</p>
 		<h1 class="mt-2 text-3xl font-bold text-base-content">Symptom-focused palliative care review</h1>
 		<p class="mt-4 text-base leading-relaxed text-base-content/70">
-			A holistic palliative assessment completed as a single continuous wizard: demographics, primary
-			diagnosis and prognosis, ESAS-r symptom scoring, performance status, goals of care and
-			advance-care planning, medications and symptom control, psychosocial and spiritual concerns,
-			carer and family support, and the multidisciplinary plan. The shared engine scores the patient
-			with the Edmonton Symptom Assessment System-revised (ESAS-r), derives an overall symptom-burden
-			band, and flags issues for the palliative team.
+			A holistic palliative assessment, completed as a single continuous wizard, that scores the
+			patient with the Edmonton Symptom Assessment System-revised (ESAS-r), derives an overall
+			symptom-burden band, and flags issues for the palliative team.
 		</p>
 	</header>
 

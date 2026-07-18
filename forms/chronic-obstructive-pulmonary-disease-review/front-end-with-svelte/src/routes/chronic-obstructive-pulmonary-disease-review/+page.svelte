@@ -12,14 +12,11 @@
 		</p>
 		<h1 class="mt-2 text-3xl font-bold text-base-content">COPD annual review</h1>
 		<p class="mt-4 text-base leading-relaxed text-base-content/70">
-			A UK primary-care annual review for adults with confirmed COPD, completed as a single
-			continuous wizard. It records spirometry, symptom burden, exacerbation history, smoking,
-			inhaler technique and adherence, vaccinations, pulmonary rehabilitation, oxygen,
-			comorbidities, and the self-management plan. This is a
-			<strong>severity-classification and completeness</strong> instrument, not a numeric score: the
-			engine derives a <strong>GOLD airflow-limitation grade (1–4)</strong>, a combined
-			<strong>ABE assessment group</strong>, a <strong>review-completeness grade</strong>
-			(complete / partial / incomplete), and clinical flags. Aligned with NICE NG115 and GOLD 2023+.
+			A UK primary-care annual review for adults with confirmed COPD that captures spirometry,
+			symptom burden, exacerbation history, smoking, inhaler technique, vaccinations, and
+			self-management in a single continuous wizard, then classifies a GOLD airflow-limitation
+			grade, an ABE assessment group, and review completeness, aligned with NICE NG115 and GOLD
+			2023+.
 		</p>
 	</header>
 

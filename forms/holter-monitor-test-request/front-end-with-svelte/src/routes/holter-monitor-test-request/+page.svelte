@@ -14,12 +14,10 @@
 		</h1>
 		<p class="mt-4 text-base leading-relaxed text-base-content/70">
 			A UK NHS–aligned ambulatory ECG (Holter) monitoring request that a clinician completes to
-			request ambulatory cardiac rhythm monitoring for a patient. It records the requested monitor
-			type, the clinical indication and specific question, the patient's symptoms and symptom
-			frequency, the relevant cardiac context and red flags, and the requested urgency — then
-			computes a four-axis vetting grade (appropriateness, urgency / triage, request completeness,
-			and clinical priority) plus safety-critical flags to support the cardiac physiology
-			department's triage and booking decision.
+			request ambulatory cardiac rhythm monitoring for a patient, which the shared engine grades
+			across four axes (appropriateness, urgency / triage, request completeness, and clinical
+			priority) plus safety-critical flags to support the cardiac physiology department's triage
+			and booking decision.
 		</p>
 	</header>
 
@@ -54,7 +52,9 @@
 			<div>
 				<dt class="font-semibold text-base-content">Purpose</dt>
 				<dd class="mt-1 text-base-content/70">
-					Capture what ambulatory monitor is requested and why, match the monitor duration to the
+					Capture what ambulatory monitor is requested and why — the clinical indication and
+					specific question, the patient's symptoms and symptom frequency, the relevant cardiac
+					context and red flags, and the requested urgency — match the monitor duration to the
 					symptom frequency, and produce a vetting report the cardiac physiology team can triage and
 					book from.
 				</dd>

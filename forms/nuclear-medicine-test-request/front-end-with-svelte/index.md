@@ -1,6 +1,7 @@
-# Cardiology Request — front-end with Svelte
+# Nuclear Medicine Test Request — front-end with Svelte
 
-SvelteKit single-page wizard for capturing a cardiology referral / consult
-request and presenting the four-axis vetting grade (appropriateness, safety /
-red-flag, request completeness, triage priority) plus the overall vetting
-recommendation. A vetting dashboard at `/dashboard` lists sample referrals.
+SvelteKit single-page wizard for capturing a nuclear medicine (radionuclide
+imaging) request and presenting the four-axis vetting grade (appropriateness,
+preparation & radiation safety, request completeness, triage priority) plus the
+overall vetting recommendation. A vetting dashboard at
+`/nuclear-medicine-test-requests` lists sample requests.

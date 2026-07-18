@@ -16,11 +16,9 @@
 		<p class="mt-4 text-base leading-relaxed text-base-content/70">
 			A legal authorization under 45 CFR § 164.508 by which a patient (or their authorized
 			representative) gives a covered entity explicit, time-bounded permission to use or disclose
-			specifically described Protected Health Information (PHI) to a named recipient for a stated
-			purpose. Completed as a single continuous nine-step wizard: patient and signer identification,
-			disclosing source, recipient, records to disclose, purpose, expiration, patient-rights
-			acknowledgements, and signature. The shared engine validates every HIPAA core element and
-			required statement and flags sensitive-category gaps.
+			specifically described Protected Health Information to a named recipient for a stated purpose,
+			completed as a single continuous nine-step wizard whose shared engine validates every HIPAA
+			core element and required statement and flags sensitive-category gaps.
 		</p>
 	</header>
 
@@ -55,9 +53,10 @@
 			<div>
 				<dt class="font-semibold text-base-content">Purpose</dt>
 				<dd class="mt-1 text-base-content/70">
-					Capture a structured HIPAA authorization and produce a validity report — valid / invalid
-					status, completeness, fired rules with citations, and additional flags — to support a
-					medical-records release decision.
+					Capture a structured HIPAA authorization — patient and signer identification, disclosing
+					source, recipient, records to disclose, purpose, expiration, patient-rights acknowledgements,
+					and signature — and produce a validity report (valid / invalid status, completeness, fired
+					rules with citations, and additional flags) to support a medical-records release decision.
 				</dd>
 			</div>
 			<div>

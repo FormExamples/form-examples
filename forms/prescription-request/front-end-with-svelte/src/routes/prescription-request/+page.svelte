@@ -11,10 +11,8 @@
 		<p class="text-sm font-semibold uppercase tracking-wide text-primary">Prescription Request</p>
 		<h1 class="mt-2 text-3xl font-bold text-base-content">Prescription request with priority classification</h1>
 		<p class="mt-4 text-base leading-relaxed text-base-content/70">
-			A prescription request completed as a single continuous wizard: patient information, clinician
-			information, prescription details, substitution options, and request type. The shared engine
-			classifies each request by priority — Routine, Urgent, or Emergency — and flags issues for
-			clinician review.
+			A prescription request completed as a single continuous wizard, whose shared engine classifies
+			each request by priority — Routine, Urgent, or Emergency — and flags issues for clinician review.
 		</p>
 	</header>
 

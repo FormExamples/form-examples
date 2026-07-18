@@ -12,16 +12,11 @@
 		</p>
 		<h1 class="mt-2 text-3xl font-bold text-base-content">PERC bedside rule-out screen</h1>
 		<p class="mt-4 text-base leading-relaxed text-base-content/70">
-			A bedside rule-out screen for adults in whom the clinician has already judged the pre-test
-			probability of pulmonary embolism to be <strong>low</strong>, completed as a single
-			continuous wizard. It records eight objective criteria — age under 50, heart rate under 100,
-			SpO2 at least 95%, no unilateral leg swelling, no haemoptysis, no recent surgery or trauma, no
-			prior venous thromboembolism, and no exogenous oestrogen — plus the gestalt pre-test
-			probability. When the pre-test probability is <strong>low</strong> and
-			<strong>all eight criteria are satisfied</strong>, the result is
-			<strong>PERC-negative</strong> and PE is excluded without a D-dimer or imaging; otherwise it
-			is <strong>PERC-positive</strong>. This is a status / classification form: there is no numeric
-			score.
+			A bedside rule-out screen, completed as a single continuous wizard, for adults in whom the
+			clinician has already judged the pre-test probability of pulmonary embolism to be
+			<strong>low</strong>, that classifies the patient as <strong>PERC-negative</strong> (pre-test
+			probability low and all eight criteria satisfied, excluding PE without a D-dimer or imaging) or
+			<strong>PERC-positive</strong> otherwise — a status / classification form with no numeric score.
 		</p>
 	</header>
 
@@ -56,9 +51,12 @@
 			<div>
 				<dt class="font-semibold text-base-content">Purpose</dt>
 				<dd class="mt-1 text-base-content/70">
-					Capture the eight PERC criteria and the pre-test probability, and produce a graded report
-					— a PERC-negative / PERC-positive classification, the failed-criteria set, and flagged
-					issues — to safely reduce unnecessary D-dimer testing and imaging in low-risk patients.
+					Capture the eight PERC criteria — age under 50, heart rate under 100, SpO2 at least 95%, no
+					unilateral leg swelling, no haemoptysis, no recent surgery or trauma, no prior venous
+					thromboembolism, and no exogenous oestrogen — and the pre-test probability, and produce a
+					graded report — a PERC-negative / PERC-positive classification, the failed-criteria set,
+					and flagged issues — to safely reduce unnecessary D-dimer testing and imaging in low-risk
+					patients.
 				</dd>
 			</div>
 			<div>

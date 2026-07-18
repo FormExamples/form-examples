@@ -12,11 +12,9 @@
 		<h1 class="mt-2 text-3xl font-bold text-base-content">Combined audiology and balance evaluation</h1>
 		<p class="mt-4 text-base leading-relaxed text-base-content/70">
 			A combined audiology and vestibular (balance) assessment completed as a single continuous
-			wizard: demographics, presenting symptoms, otoscopic examination, pure-tone and speech
-			audiometry, tympanometry and acoustic reflexes, bedside vestibular screening, the 25-item
-			Dizziness Handicap Inventory (DHI), and the clinical impression and referral plan. The shared
-			engine classifies hearing loss with the WHO pure-tone audiometry grades, quantifies the DHI
-			handicap level, and flags issues for the audiologist or ENT clinician.
+			wizard, whose shared engine classifies hearing loss with the WHO pure-tone audiometry grades,
+			quantifies the Dizziness Handicap Inventory (DHI) handicap level, and flags issues for the
+			audiologist or ENT clinician.
 		</p>
 	</header>
 
@@ -51,8 +49,11 @@
 			<div>
 				<dt class="font-semibold text-base-content">Purpose</dt>
 				<dd class="mt-1 text-base-content/70">
-					Capture a structured audio-vestibular profile and produce a graded report — WHO
-					hearing-loss grade, DHI handicap level, and flagged issues — to support audiology and ENT
+					Capture a structured audio-vestibular profile — demographics, presenting symptoms,
+					otoscopic examination, pure-tone and speech audiometry, tympanometry and acoustic
+					reflexes, bedside vestibular screening, the 25-item Dizziness Handicap Inventory (DHI),
+					and the clinical impression and referral plan — and produce a graded report (WHO
+					hearing-loss grade, DHI handicap level, and flagged issues) to support audiology and ENT
 					review.
 				</dd>
 			</div>
