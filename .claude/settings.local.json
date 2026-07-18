@@ -1,6 +1,9 @@
 {
   "permissions": {
     "allow": [
+      "Write(//Users/jph/git/formexamples/form-examples/forms/**)",
+      "Edit(//Users/jph/git/formexamples/form-examples/forms/**)",
+      "Bash(bin/test-personas:*)",
       "Bash(cp:*)",
       "Bash(mkdir:*)",
       "Bash(rm:*)",
