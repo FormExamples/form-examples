@@ -48,7 +48,13 @@ FORMS_DIR = REPO_ROOT / "forms"
 WIZARD_ENTRIES = ["form-app.js", "wizard.js", "app.js"]
 DASH_ENTRIES = ["dashboard-app.js", "dashboard.js"]
 # Standalone utilities: no import graph, loaded as their own module tag.
-STANDALONE = {"table-export.js"}
+STANDALONE = {
+    "table-export.js",
+    "theme-select.js",
+    "locale-select.js",
+    "text-size-chooser.js",
+    "share-chooser.js",
+}
 
 
 class Abort(Exception):
@@ -596,8 +602,19 @@ def rewrite_html(html: str, entries: list[str]) -> str:
         return html
     entry = next((e for e in entries if e in present), None)
     if entry is None:
-        # Fall back to the last local script as the entry.
-        entry = present[-1]
+        non_standalone = [f for f in present if f not in STANDALONE]
+        if not non_standalone:
+            # No real entry point at all -- every present script is a
+            # standalone utility (e.g. a page whose actual logic is an
+            # inline <script>, not a js/*.js file). There is nothing to
+            # collapse to a single entry, and falling back to "the last
+            # script" here has no stable choice among equals: every
+            # standalone file is equally arbitrary as "entry", so repeated
+            # runs would cycle the tag order forever without converging.
+            # Leave the HTML untouched.
+            return html
+        # Fall back to the last non-standalone local script as the entry.
+        entry = non_standalone[-1]
     keep_standalone = [f for f in present if f in STANDALONE]
 
     # Remove the stale "Classic <script>" explanatory comment.

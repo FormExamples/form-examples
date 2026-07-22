@@ -76,7 +76,7 @@
 		</div>
 	</header>
 
-	<main class="mx-auto max-w-4xl px-4 py-6">
+	<main class="mx-16 px-4 py-6">
 		<!-- DASS-21 subscale scores -->
 		<div class="mb-6 grid grid-cols-1 gap-4 sm:grid-cols-3">
 			{#each subscales as [name, score] (name)}

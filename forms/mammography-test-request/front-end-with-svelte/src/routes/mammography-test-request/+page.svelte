@@ -6,17 +6,7 @@
 	const plural = 'mammography-test-requests';
 </script>
 
-<main class="mx-auto max-w-4xl px-4 py-12">
-	<header class="mb-10">
-		<p class="text-sm font-semibold uppercase tracking-wide text-primary">Mammography Test Request</p>
-		<h1 class="mt-2 text-3xl font-bold text-base-content">Breast mammography imaging request</h1>
-		<p class="mt-4 text-base leading-relaxed text-base-content/70">
-			A clinician-driven breast mammography imaging request, completed as a single continuous
-			wizard, that computes a four-axis grade — appropriateness (ACR Appropriateness Criteria),
-			cancer-pathway urgency (NICE NG12 two-week-wait), request completeness, and clinical priority
-			— plus safety flags and an overall recommendation.
-		</p>
-	</header>
+<main class="mx-16 px-4 py-12">
 
 	<div class="grid gap-4 sm:grid-cols-2">
 		<a

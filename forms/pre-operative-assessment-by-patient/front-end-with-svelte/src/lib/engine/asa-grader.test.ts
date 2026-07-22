@@ -15,7 +15,11 @@ function createHealthyPatient(): AssessmentData {
 			height: 175,
 			bmi: 24.5,
 			plannedProcedure: 'Inguinal hernia repair',
-			procedureUrgency: 'elective'
+			procedureUrgency: 'elective',
+			cancerHistory: 'no',
+			cancerHistoryDetails: '',
+			mrsaHistory: 'no',
+			recentHospitalOrCareHomeAdmission: 'no'
 		},
 		cardiovascular: {
 			hypertension: 'no',
@@ -30,7 +34,10 @@ function createHealthyPatient(): AssessmentData {
 			arrhythmiaType: '',
 			pacemaker: 'no',
 			recentMI: 'no',
-			recentMIWeeks: null
+			recentMIWeeks: null,
+			palpitationsOrBlackouts: 'no',
+			heartOrArterySurgery: 'no',
+			swollenAnkles: 'no'
 		},
 		respiratory: {
 			asthma: 'no',
@@ -41,9 +48,22 @@ function createHealthyPatient(): AssessmentData {
 			osaCPAP: '',
 			smoking: 'never',
 			smokingPackYears: null,
-			recentURTI: 'no'
+			recentURTI: 'no',
+			snoring: 'no',
+			snoringLoud: 'no',
+			collarSizeInches: null,
+			daytimeSleepiness: 'no',
+			observedApnoeaEpisodes: 'no'
 		},
-		renal: { ckd: 'no', ckdStage: '', dialysis: 'no', dialysisType: '' },
+		renal: {
+			ckd: 'no',
+			ckdStage: '',
+			dialysis: 'no',
+			dialysisType: '',
+			urinarySymptoms: 'no',
+			urinaryCatheterHistory: 'no',
+			prostateProblems: 'no'
+		},
 		hepatic: {
 			liverDisease: 'no',
 			cirrhosis: 'no',
@@ -75,7 +95,10 @@ function createHealthyPatient(): AssessmentData {
 			anticoagulantType: '',
 			sickleCellDisease: 'no',
 			sickleCellTrait: 'no',
-			anaemia: 'no'
+			anaemia: 'no',
+			personalVteHistory: 'no',
+			familyVteHistory: 'no',
+			bloodTransfusionHistory: 'no'
 		},
 		musculoskeletalAirway: {
 			rheumatoidArthritis: 'no',
@@ -85,9 +108,20 @@ function createHealthyPatient(): AssessmentData {
 			dentalIssues: 'no',
 			dentalDetails: '',
 			previousDifficultAirway: 'no',
-			mallampatiScore: '1'
+			mallampatiScore: '1',
+			jointOrArthritisProblems: 'no',
+			backOrNeckProblems: 'no',
+			skinConditions: 'no',
+			pressureSoreRisk: 'no'
 		},
-		gastrointestinal: { gord: 'no', hiatusHernia: 'no', nausea: 'no' },
+		gastrointestinal: {
+			gord: 'no',
+			hiatusHernia: 'no',
+			nausea: 'no',
+			bowelProblems: 'no',
+			foodIntolerances: 'no',
+			foodIntolerancesDetails: ''
+		},
 		medications: [],
 		allergies: [],
 		previousAnaesthesia: {
@@ -102,15 +136,35 @@ function createHealthyPatient(): AssessmentData {
 			alcohol: 'none',
 			alcoholUnitsPerWeek: null,
 			recreationalDrugs: 'no',
-			drugDetails: ''
+			drugDetails: '',
+			bloodDonor: 'no',
+			bodyPiercings: 'no'
 		},
 		functionalCapacity: {
 			exerciseTolerance: 'vigorous-exercise',
 			estimatedMETs: 10,
 			mobilityAids: 'no',
-			recentDecline: 'no'
+			recentDecline: 'no',
+			hearingProblems: 'no',
+			visionProblems: 'no',
+			balanceIssues: 'no'
 		},
-		pregnancy: { possiblyPregnant: '', pregnancyConfirmed: '', gestationWeeks: null }
+		pregnancy: {
+			possiblyPregnant: '',
+			pregnancyConfirmed: '',
+			gestationWeeks: null,
+			contraceptiveOrHrtUse: '',
+			lastMenstrualPeriod: ''
+		},
+		cognitiveMentalHealth: {
+			headInjuryRequiringHospitalisation: 'no',
+			memoryConcerns: 'no',
+			dementiaDiagnosis: 'no',
+			depressionOrAnxietyHistory: 'no',
+			depressionAnxietyImpactsDailyLife: '',
+			depressionAnxietySeenDoctor: '',
+			learningDifficulties: 'no'
+		}
 	};
 }
 

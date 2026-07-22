@@ -1,0 +1,243 @@
+#!/usr/bin/env python3
+"""bin/html-text-size-select-refactor -- add a third header control, text-size-select,
+to every form's front-end-with-html/ (index.html + dashboard.html), alongside the
+existing locale-select and theme-select.
+
+Mirrors lily-design-system-svelte-helpers/lily-design-system-svelte-text-size-select
+(see bin/svelte-text-size-select-refactor for the Svelte-side rollout), adapted to
+this repo's HTML convention: a native <select class="theme-select"> (reusing the
+existing Lily theme-select styling, matching #locale-select/#theme-select), setting
+`data-text-size` on <html> and persisting to localStorage.
+
+What changes per form (front-end-with-html/):
+  - js/text-size-select.js -> new vanilla-JS module (vendored contract; slug-
+    namespaced localStorage key, mirrors js/theme-select.js / js/locale-select.js)
+  - css/style.css, css/dashboard.css -> appends the `[data-text-size="..."]`
+    font-size mapping once (no new select styling needed -- .theme-select /
+    .theme-select-option are reused verbatim)
+  - index.html, dashboard.html -> inserts a `#text-size-select` <label>+<select>
+    right after the existing #theme-select </select>, and a
+    `<script type="module" src="js/text-size-select.js">` tag alongside the
+    existing theme-select.js / locale-select.js tags
+
+Usage:
+  bin/html-text-size-select-refactor --check   # CI drift check (no writes)
+  bin/html-text-size-select-refactor --apply   # write changes
+
+Only touches forms whose header has a `#theme-select` control (the standard
+shape produced by bin/html-theme-locale-select-refactor). Forms without one
+(the bespoke THEME_COLLISION_SLUGS pages, locale-select only) are skipped and
+reported for hand migration.
+
+Idempotent: re-running after a full --apply makes no further changes.
+"""
+
+from __future__ import annotations
+
+import argparse
+import re
+import sys
+from pathlib import Path
+
+REPO_ROOT = Path(__file__).resolve().parent.parent
+FORMS_DIR = REPO_ROOT / "forms"
+
+TEXT_SIZE_OPTIONS = [
+    ("small", "Small"),
+    ("medium", "Medium"),
+    ("large", "Large"),
+    ("x-large", "X Large"),
+]
+
+JS_TEMPLATE = """// Lily Design System — text-size-select (headless, vanilla JS).
+// Sets <html data-text-size> and persists the choice, matching the
+// front-end-with-svelte convention (front-end-with-svelte/src/lib/config/text-sizes.ts).
+// Supports WCAG 2.2 1.4.4 (Resize Text) / 1.4.12 (Text Spacing).
+
+const STORAGE_KEY = '__SLUG__.text-size.v1';
+const DEFAULT_TEXT_SIZE = 'medium';
+
+function readSavedTextSize() {
+  try {
+    return localStorage.getItem(STORAGE_KEY) ?? DEFAULT_TEXT_SIZE;
+  } catch {
+    return DEFAULT_TEXT_SIZE;
+  }
+}
+
+function applyTextSize(size, persist) {
+  document.documentElement.dataset.textSize = size;
+  if (persist) {
+    try {
+      localStorage.setItem(STORAGE_KEY, size);
+    } catch {
+      // ignore quota / privacy errors
+    }
+  }
+}
+
+function init() {
+  const select = document.getElementById('text-size-select');
+  const saved = readSavedTextSize();
+  applyTextSize(saved, false);
+  if (!select) return;
+  select.value = saved;
+  select.addEventListener('change', () => applyTextSize(select.value, true));
+}
+
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', init);
+} else {
+  init();
+}
+"""
+
+CSS_MARKER = '[data-text-size="small"]'
+
+CSS_BLOCK = """
+/* Lily: text-size-select -- WCAG 2.2 1.4.4 (Resize Text) / 1.4.12 (Text Spacing). */
+[data-text-size="small"]   { font-size: 87.5%; }
+[data-text-size="medium"]  { font-size: 100%; }
+[data-text-size="large"]   { font-size: 112.5%; }
+[data-text-size="x-large"] { font-size: 125%; }
+"""
+
+THEME_SELECT_CLOSE_RE = re.compile(
+    r'([ \t]*)<select class="theme-select" id="theme-select"[^>]*>.*?</select>\n',
+    re.S,
+)
+LOCALE_SELECT_CLOSE_RE = re.compile(
+    r'([ \t]*)<select class="theme-select" id="locale-select"[^>]*>.*?</select>\n',
+    re.S,
+)
+
+SCRIPT_TAG_RE = re.compile(
+    r'([ \t]*)<script type="module" src="js/theme-select\.js"></script>\n'
+)
+LOCALE_SCRIPT_TAG_RE = re.compile(
+    r'([ \t]*)<script type="module" src="js/locale-select\.js"></script>\n'
+)
+
+
+def text_size_select_markup(indent: str) -> str:
+    options = "\n".join(
+        f'{indent}<option class="theme-select-option" value="{value}"'
+        f'{" selected" if value == "medium" else ""}>{label}</option>'
+        for value, label in TEXT_SIZE_OPTIONS
+    )
+    return (
+        f'{indent}<label class="visually-hidden" for="text-size-select">Text size</label>\n'
+        f'{indent}<select class="theme-select" id="text-size-select" aria-label="Text size">\n'
+        f"{options}\n"
+        f"{indent}</select>\n"
+    )
+
+
+def process_html(path: Path, check: bool, slug: str) -> str:
+    text = path.read_text(encoding="utf-8")
+    if 'id="text-size-select"' in text:
+        return "skip-already-done"
+
+    has_theme_select = 'id="theme-select"' in text
+    anchor_re = THEME_SELECT_CLOSE_RE if has_theme_select else LOCALE_SELECT_CLOSE_RE
+    script_re = SCRIPT_TAG_RE if has_theme_select else LOCALE_SCRIPT_TAG_RE
+    if not has_theme_select and 'id="locale-select"' not in text:
+        return "skip-no-select-anchor"
+
+    def theme_repl(m: re.Match) -> str:
+        indent = m.group(1)
+        return m.group(0) + text_size_select_markup(indent)
+
+    new_text, n1 = anchor_re.subn(theme_repl, text, count=1)
+    if n1 == 0:
+        return "skip-nonstandard-markup"
+
+    new_text, n2 = script_re.subn(
+        lambda m: m.group(0) + f'{m.group(1)}<script type="module" src="js/text-size-select.js"></script>\n',
+        new_text,
+        count=1,
+    )
+    if n2 == 0:
+        return "skip-nonstandard-script-tags"
+
+    if not check:
+        path.write_text(new_text, encoding="utf-8")
+    return "changed"
+
+
+def process_js(path: Path, check: bool, slug: str) -> str:
+    if path.exists():
+        return "skip-already-done"
+    if not check:
+        path.write_text(JS_TEMPLATE.replace("__SLUG__", slug), encoding="utf-8")
+    return "changed"
+
+
+def process_css(path: Path, check: bool) -> str:
+    text = path.read_text(encoding="utf-8")
+    if CSS_MARKER in text:
+        return "skip-already-done"
+    new_text = text.rstrip("\n") + "\n" + CSS_BLOCK
+    if not check:
+        path.write_text(new_text, encoding="utf-8")
+    return "changed"
+
+
+def main() -> int:
+    parser = argparse.ArgumentParser()
+    mode = parser.add_mutually_exclusive_group(required=True)
+    mode.add_argument("--check", action="store_true")
+    mode.add_argument("--apply", action="store_true")
+    args = parser.parse_args()
+    check = args.check
+
+    counts: dict[str, int] = {}
+    skipped: list[str] = []
+
+    for form_dir in sorted(FORMS_DIR.iterdir()):
+        if not form_dir.is_dir():
+            continue
+        html_dir = form_dir / "front-end-with-html"
+        if not html_dir.is_dir():
+            continue
+        slug = form_dir.name
+
+        for html_name in ("index.html", "dashboard.html"):
+            html_path = html_dir / html_name
+            if not html_path.is_file():
+                continue
+            result = process_html(html_path, check, slug)
+            counts[result] = counts.get(result, 0) + 1
+            if result.startswith("skip-") and result != "skip-already-done":
+                skipped.append(f"{slug}/{html_name}: {result}")
+
+        js_path = html_dir / "js" / "text-size-select.js"
+        if (html_dir / "js").is_dir():
+            r = process_js(js_path, check, slug)
+            counts[f"js-{r}"] = counts.get(f"js-{r}", 0) + 1
+
+        for css_name in ("style.css", "dashboard.css"):
+            css_path = html_dir / "css" / css_name
+            if not css_path.is_file():
+                continue
+            result = process_css(css_path, check)
+            key = f"css-{result}"
+            counts[key] = counts.get(key, 0) + 1
+
+    mode_label = "CHECK" if check else "APPLY"
+    print(f"{mode_label} run")
+    for key in sorted(counts):
+        print(f"  {key}: {counts[key]}")
+    if skipped:
+        print("Skipped (needs hand migration):")
+        for line in skipped:
+            print(f"  {line}")
+
+    if check:
+        drift = sum(v for k, v in counts.items() if k == "changed" or k.endswith("-changed"))
+        return 1 if drift else 0
+    return 0
+
+
+if __name__ == "__main__":
+    sys.exit(main())

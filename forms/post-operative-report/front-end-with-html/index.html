@@ -6,15 +6,103 @@
   <title>Post-Operative Report — clinician questionnaire</title>
   <meta name="description" content="Structured post-operative report with Clavien-Dindo classification of surgical complications.">
   <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" id="theme-stylesheet" href="css/themes/light.css">
+  <script>
+    (function () {
+      try {
+        var saved = localStorage.getItem('post-operative-report.theme.v1');
+        var link = document.getElementById('theme-stylesheet');
+        if (saved && link) link.setAttribute('href', 'css/themes/' + saved + '.css');
+      } catch (e) {}
+    })();
+  </script>
 </head>
 <body>
   <a class="skip-link visually-hidden" href="#form-sections">Skip to questionnaire</a>
 
   <header class="page-header">
     <div class="page-header-inner">
-      <h1>Post-Operative Report</h1>
-      <p class="subtitle">Operation note with Clavien-Dindo grading of complications.</p>
-
+      <div class="page-header-bar">
+        <div class="page-header-title">
+          <h1>Post-Operative Report</h1>
+          <p class="subtitle">Operation note with Clavien-Dindo grading of complications.</p>
+        </div>
+        <div class="page-header-controls no-print">
+                <label class="visually-hidden" for="locale-select">Language</label>
+      <select class="theme-select" id="locale-select" aria-label="Language">
+      <option class="theme-select-option" value="en-GB" selected lang="en-GB">English (UK)</option>
+      <option class="theme-select-option" value="en-US" lang="en-US">English (US)</option>
+      <option class="theme-select-option" value="cy-GB" lang="cy-GB">Cymraeg</option>
+      <option class="theme-select-option" value="de-DE" lang="de-DE">Deutsch</option>
+      </select>
+      <label class="visually-hidden" for="theme-select">Theme</label>
+      <select class="theme-select" id="theme-select" aria-label="Theme">
+      <option class="theme-select-option" value="abyss">Abyss</option>
+      <option class="theme-select-option" value="acid">Acid</option>
+      <option class="theme-select-option" value="adobe-spectrum">Adobe Spectrum</option>
+      <option class="theme-select-option" value="aqua">Aqua</option>
+      <option class="theme-select-option" value="autumn">Autumn</option>
+      <option class="theme-select-option" value="black">Black</option>
+      <option class="theme-select-option" value="bumblebee">Bumblebee</option>
+      <option class="theme-select-option" value="business">Business</option>
+      <option class="theme-select-option" value="caramellatte">Caramellatte</option>
+      <option class="theme-select-option" value="cmyk">Cmyk</option>
+      <option class="theme-select-option" value="coffee">Coffee</option>
+      <option class="theme-select-option" value="corporate">Corporate</option>
+      <option class="theme-select-option" value="cupcake">Cupcake</option>
+      <option class="theme-select-option" value="cyberpunk">Cyberpunk</option>
+      <option class="theme-select-option" value="dark">Dark</option>
+      <option class="theme-select-option" value="dim">Dim</option>
+      <option class="theme-select-option" value="dracula">Dracula</option>
+      <option class="theme-select-option" value="emerald">Emerald</option>
+      <option class="theme-select-option" value="fantasy">Fantasy</option>
+      <option class="theme-select-option" value="forest">Forest</option>
+      <option class="theme-select-option" value="garden">Garden</option>
+      <option class="theme-select-option" value="halloween">Halloween</option>
+      <option class="theme-select-option" value="lemonade">Lemonade</option>
+      <option class="theme-select-option" value="light" selected>Light</option>
+      <option class="theme-select-option" value="lofi">Lofi</option>
+      <option class="theme-select-option" value="luxury">Luxury</option>
+      <option class="theme-select-option" value="mozilla-protocol">Mozilla Protocol</option>
+      <option class="theme-select-option" value="night">Night</option>
+      <option class="theme-select-option" value="nord">Nord</option>
+      <option class="theme-select-option" value="pastel">Pastel</option>
+      <option class="theme-select-option" value="retro">Retro</option>
+      <option class="theme-select-option" value="silk">Silk</option>
+      <option class="theme-select-option" value="sunset">Sunset</option>
+      <option class="theme-select-option" value="synthwave">Synthwave</option>
+      <option class="theme-select-option" value="united-kingdom-government-digital-service">UK · Government Digital Service</option>
+      <option class="theme-select-option" value="united-kingdom-national-health-service-england-for-patients">UK · NHS England — Patients</option>
+      <option class="theme-select-option" value="united-kingdom-national-health-service-england-for-practitioners">UK · NHS England — Practitioners</option>
+      <option class="theme-select-option" value="united-kingdom-national-health-service-scotland-for-patients">UK · NHS Scotland — Patients</option>
+      <option class="theme-select-option" value="united-kingdom-national-health-service-scotland-for-practitioners">UK · NHS Scotland — Practitioners</option>
+      <option class="theme-select-option" value="united-kingdom-national-health-service-wales-for-patients">UK · NHS Wales — Patients</option>
+      <option class="theme-select-option" value="united-kingdom-national-health-service-wales-for-practitioners">UK · NHS Wales — Practitioners</option>
+      <option class="theme-select-option" value="united-states-web-design-system">US · Web Design System</option>
+      <option class="theme-select-option" value="valentine">Valentine</option>
+      <option class="theme-select-option" value="winter">Winter</option>
+      <option class="theme-select-option" value="wireframe">Wireframe</option>
+      </select>
+      <label class="visually-hidden" for="text-size-chooser">Text size</label>
+      <select class="theme-select" id="text-size-chooser" aria-label="Text size">
+      <option class="theme-select-option" value="small">Small</option>
+      <option class="theme-select-option" value="medium" selected>Medium</option>
+      <option class="theme-select-option" value="large">Large</option>
+      <option class="theme-select-option" value="x-large">X Large</option>
+      </select>
+      <div class="share-chooser">
+      <button type="button" class="share-chooser-button" id="share-chooser" aria-label="Share this page" aria-expanded="false" aria-controls="share-chooser-list">
+      <span class="share-chooser-icon" aria-hidden="true">↪</span>
+      </button>
+      <ul class="share-chooser-list" id="share-chooser-list" hidden>
+      <li class="share-chooser-list-item">
+      <button type="button" class="share-chooser-copy" id="share-chooser-copy">Copy link</button>
+      </li>
+      </ul>
+      <p class="share-chooser-status" id="share-chooser-status" aria-live="polite"></p>
+      </div>
+        </div>
+      </div>
       <progress
         id="progress"
         class="progress"
@@ -105,6 +193,8 @@
       <p class="empty-message">Submit the form to see the report.</p>
     </section>
 
+  </main>
+
     <footer class="page-footer">
       <p>
         The Clavien-Dindo classification grades surgical complications by the
@@ -114,8 +204,12 @@
         for the operative record.
       </p>
     </footer>
-  </main>
+
 
   <script type="module" src="js/form-app.js"></script>
+  <script type="module" src="js/theme-select.js"></script>
+  <script type="module" src="js/text-size-chooser.js"></script>
+  <script type="module" src="js/share-chooser.js"></script>
+  <script type="module" src="js/locale-select.js"></script>
 </body>
 </html>

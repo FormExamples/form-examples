@@ -30,6 +30,7 @@
 	import Step14SocialHistory from '$lib/components/steps/Step14SocialHistory.svelte';
 	import Step15FunctionalCapacity from '$lib/components/steps/Step15FunctionalCapacity.svelte';
 	import Step16Pregnancy from '$lib/components/steps/Step16Pregnancy.svelte';
+	import Step17CognitiveMentalHealth from '$lib/components/steps/Step17CognitiveMentalHealth.svelte';
 
 	let errors = $state<{ id: string; message: string }[]>([]);
 
@@ -92,23 +93,21 @@
 	}
 </script>
 
-<main class="mx-auto max-w-3xl px-4 py-6">
-	<header class="mb-6 no-print">
-		<h1 class="text-2xl font-bold text-base-content">
-			{isNew ? 'New pre-operative assessment' : `Pre-operative assessment ${id}`}
-		</h1>
-		<p class="mt-1 text-sm text-base-content/70">
-			Complete each section; the ASA Physical Status grade and safety flags are computed on submit.
-		</p>
-		<Progress label="Assessment sections" value={visibleStepCount} max={visibleStepCount} />
-		<StepList label="Assessment sections" current={visibleStepCount}>
-			{#each steps as step (step.number)}
-				{#if step.number !== 16 || showPregnancy}
-					<StepListItem status="finished" label={step.title}>{step.shortTitle}</StepListItem>
-				{/if}
-			{/each}
-		</StepList>
-	</header>
+<main class="mx-16 px-4 py-6">
+	<h1 class="text-2xl font-bold text-base-content">
+		{isNew ? 'New pre-operative assessment' : `Pre-operative assessment ${id}`}
+	</h1>
+	<p class="mt-1 text-sm text-base-content/70">
+		Complete each section; the ASA Physical Status grade and safety flags are computed on submit.
+	</p>
+	<Progress label="Assessment sections" value={visibleStepCount} max={visibleStepCount} />
+	<StepList label="Assessment sections" current={visibleStepCount}>
+		{#each steps as step (step.number)}
+			{#if step.number !== 16 || showPregnancy}
+				<StepListItem status="finished" label={step.title}>{step.shortTitle}</StepListItem>
+			{/if}
+		{/each}
+	</StepList>
 
 	{#if errors.length > 0}
 		<ErrorSummary title="Please fix the following before submitting" class="mb-6">
@@ -139,6 +138,7 @@
 		{#if showPregnancy}
 			<Step16Pregnancy />
 		{/if}
+		<Step17CognitiveMentalHealth />
 
 		<div class="button-group">
 			<Button type="submit" data-variant="primary">Compute ASA grade &amp; view report</Button>

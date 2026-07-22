@@ -5,21 +5,7 @@
 	const plural = 'newborn-blood-spot-screenings';
 </script>
 
-<main class="mx-auto max-w-4xl px-4 py-12">
-	<header class="mb-10">
-		<p class="text-sm font-semibold uppercase tracking-wide text-primary">
-			Newborn Blood Spot Screening
-		</p>
-		<h1 class="mt-2 text-3xl font-bold text-base-content">NHS newborn blood spot screening</h1>
-		<p class="mt-4 text-base leading-relaxed text-base-content/70">
-			A documentation and result-classification record for the NHS newborn blood spot (heel-prick)
-			screening test, normally taken around day 5 of life, that classifies each of nine screened
-			conditions — <strong>SCD</strong>, <strong>CF</strong>, <strong>CHT</strong>,
-			<strong>PKU</strong>, <strong>MCADD</strong>, <strong>MSUD</strong>, <strong>IVA</strong>,
-			<strong>GA1</strong>, and <strong>HCU</strong> — derives an overall screening outcome, and
-			raises an urgent-referral flag for any <strong>suspected</strong> result.
-		</p>
-	</header>
+<main class="mx-16 px-4 py-12">
 
 	<div class="grid gap-4 sm:grid-cols-2">
 		<a

@@ -5,19 +5,7 @@
 	const plural = 'recognition-of-stroke-in-the-emergency-rooms';
 </script>
 
-<main class="mx-auto max-w-4xl px-4 py-12">
-	<header class="mb-10">
-		<p class="text-sm font-semibold uppercase tracking-wide text-primary">
-			Recognition Of Stroke In the Emergency Room
-		</p>
-		<h1 class="mt-2 text-3xl font-bold text-base-content">ROSIER bedside stroke-recognition screen</h1>
-		<p class="mt-4 text-base leading-relaxed text-base-content/70">
-			A bedside stroke-recognition screen for adults presenting acutely, completed as a single
-			continuous wizard, that scores mimic-exclusion criteria against acute-onset neurological signs
-			to flag ROSIER &gt; 0 as a positive screen (stroke likely) that activates the acute stroke
-			pathway.
-		</p>
-	</header>
+<main class="mx-16 px-4 py-12">
 
 	<div class="grid gap-4 sm:grid-cols-2">
 		<a

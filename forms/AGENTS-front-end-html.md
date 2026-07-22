@@ -149,8 +149,104 @@ Filters above the table reuse `.text-input`, `.select`, and `.button`.
 - `.page-header`, `.page-header-inner`, `.subtitle` — page chrome
   (statically positioned — never `position: sticky`/`fixed`; the whole page
   scrolls, header and footer included)
+- `.page-header-bar` — flex row inside `.page-header-inner` that lays out
+  the title on the **left** and the nav link(s) + select controls on the
+  **right**; wraps to a stacked layout on narrow viewports. Holds exactly
+  two children: `.page-header-title` (the `<h1>` + plain `.subtitle`) and
+  `.page-header-controls`.
+- `.page-header-title` — left column of `.page-header-bar` (`flex: 1 1 0%;
+  min-width: 0`, so it shrinks and wraps its text instead of forcing
+  `.page-header-controls` onto its own line)
+- `.page-header-controls` — right column of `.page-header-bar`: flex row
+  holding any nav link (`.page-header-link`, e.g. "View the dashboard →")
+  followed by the locale-select and theme-select controls
+- **Page-width model: `body` is edge-to-edge; `<main>` carries the gutter.**
+  `body { margin: 0; }` — full viewport width, no side inset. `.page-header`
+  and `.page-footer` are direct `body` children (the footer is a sibling of
+  `<main>`, not nested inside it) and are therefore full width too; their
+  own inner content stays readable via `.page-header-inner`'s
+  `max-width`+`margin:0 auto`, and `.page-footer`'s own horizontal padding.
+  `main { margin-left: 4rem; margin-right: 4rem; }` (no `max-width` — it
+  fills the remaining viewport width between the two 4rem gutters, replacing
+  the older centered-reading-column model). The handful of forms whose
+  `<main>` is instead reached via a shared `.container`/`#id` selector get
+  the same `margin-left`/`margin-right: 4rem` on that selector, with any
+  competing `max-width` removed.
+- `.skip-link` — top-of-page skip target
 - `.skip-link` — top-of-page skip target
 - `.empty-message` — empty-state copy inside a region
+
+## 3a. Theming (Lily themes, gold standard)
+
+Every `front-end-with-html/` uses the same **prebuilt Lily Design System
+theme system** as `front-end-with-svelte/` — do not hand-roll theme CSS.
+
+- **Vendored themes.** All Lily theme stylesheets are copied to
+  `css/themes/<name>.css` (light, dark, dim, dracula, nord, the NHS
+  England/Scotland/Wales patient & practitioner themes, GDS, USWDS, …). Each
+  is a standalone file; load **exactly one at a time** via a swappable
+  `<link rel="stylesheet" id="theme-stylesheet" href="css/themes/<name>.css">`
+  in `<head>` (they cannot be combined — each includes a bare `:where(:root)`
+  block and they would collide). A blocking inline script right after that
+  `<link>` applies any saved choice before first paint (FOUC guard).
+- **The default theme is the Lily light theme** (`css/themes/light.css`).
+- **`css/style.css` / `css/dashboard.css` alias onto Lily tokens, not
+  hardcoded hex.** `--color-bg`, `--color-surface`, `--color-text`,
+  `--color-muted`, `--color-border(-strong)`, `--color-focus`,
+  `--color-primary-light`, `--color-danger(-bg)`, `--color-warning-bg`,
+  `--color-success-bg` are all derived from the theme's
+  `--color-base-100/200/300/content`, `--color-primary`, `--color-error`,
+  `--color-warning`, `--color-success` (`--color-primary`/`--color-warning`/
+  `--color-success` are consumed directly, undeclared locally, so the theme's
+  value cascades through unmodified). `--color-primary-dark` has no Lily
+  equivalent and stays a static gold-standard value. This mirrors
+  `front-end-with-svelte`'s `app.css` mapping exactly, so switching
+  `#theme-select` re-skins the whole page.
+- **Controls.** `#locale-select`, `#theme-select`, then `#text-size-chooser`,
+  all native `<select class="theme-select">` with
+  `<option class="theme-select-option">` children (reusing the Lily
+  `theme-select` *catalog* styling — a different, unrelated component family
+  from the helpers below, deliberately untouched by their `*-chooser`
+  rename), matching the `front-end-with-svelte`
+  `LocaleChooser`/`ThemeChooser`/`TextSizeChooser` convention, inside the
+  `.page-header-controls` column — the right-hand side of `.page-header-bar`,
+  beside `.page-header-title` on the left (see §4). Vanilla ES modules
+  `js/theme-select.js` / `js/locale-select.js` / `js/text-size-chooser.js`
+  wire them up: theme-select swaps the `#theme-stylesheet` `href` and
+  persists to localStorage; locale-select sets `<html lang>` and persists to
+  localStorage; text-size-chooser sets `<html data-text-size>` (mapped to
+  `font-size` via `[data-text-size="…"]` rules in
+  `css/style.css`/`css/dashboard.css`, WCAG 2.2 1.4.4/1.4.12) and persists to
+  localStorage. Presentation only — no message catalogue is wired up; see
+  [`../docs/i18n.md`](../docs/i18n.md).
+- **`.share-chooser`** is the fourth control, right after
+  `#text-size-chooser`: a `<button id="share-chooser">` (glyph ↪) that tries
+  the native Web Share API first (`navigator.share`), falling back to a
+  one-item popup list ("Copy link" → clipboard), mirroring the
+  `front-end-with-svelte` `ShareChooser` convention — no social-network
+  targets, by design. Wired by `js/share-chooser.js`.
+- **Tool.** `bin/html-theme-locale-select-refactor --check|--apply` is the
+  drift detector / generator for locale-select/theme-select (the untouched
+  catalog controls).
+  `bin/html-text-size-select-refactor --check|--apply` is the drift detector /
+  generator for text-size-chooser (name predates the chooser rename).
+  `bin/html-share-button-refactor --check|--apply` is the drift detector /
+  generator for share-chooser (name predates the chooser rename).
+  `bin/html-helpers-chooser-rename --check|--apply` is the *-select/
+  share-button → *-chooser rename against `lily-design-system-svelte-helpers`;
+  pin recorded in
+  [`lily-svelte-helpers-version.md`](lily-svelte-helpers-version.md).
+  `bin/page-header-layout-refactor --check|--apply` is the drift detector /
+  generator for the title-left / controls-right `.page-header-bar` layout.
+- **Exclusion: `THEME_COLLISION_SLUGS`.** A handful of bespoke pages (GOV.UK
+  privacy notices, an NHS-branded dashboard, a vaccination-certificate
+  dashboard) define their own `.card`/`.container`/`.panel`/`.progress`/
+  `.select`/… classes with different HTML structure than Lily's. Loading the
+  swappable theme there doesn't no-op — Lily's rules for those class names
+  apply to the page's unrelated elements (verified: near-invisible text from
+  a `.card` collision). These forms are hardcoded into the tool's exclusion
+  set and keep a hand-styled locale-select only, no theme-select. Don't
+  remove a form from that set without re-verifying in a browser.
 
 ## 4. Page shell
 
@@ -170,13 +266,24 @@ Every `front-end-with-html/index.html` (the wizard) follows this skeleton:
 
   <header class="page-header">
     <div class="page-header-inner">
-      <h1>{{Form Title}}</h1>
-      <p class="subtitle">{{Form subtitle}}</p>
+      <div class="page-header-bar">
+        <div class="page-header-title">
+          <h1>{{Form Title}}</h1>
+          <p class="subtitle">{{Form subtitle}}</p>
+        </div>
+        <div class="page-header-controls no-print">
+          <!-- optional: <p class="subtitle page-header-link"><a href="dashboard.html">View the dashboard →</a></p> -->
+          <label class="visually-hidden" for="locale-select">Language</label>
+          <select class="theme-select" id="locale-select" aria-label="Language">…</select>
+          <label class="visually-hidden" for="theme-select">Theme</label>
+          <select class="theme-select" id="theme-select" aria-label="Theme">…</select>
+        </div>
+      </div>
+      <progress class="progress" max="100" value="0"
+                aria-label="Form completion"></progress>
+      <ol class="step-list" aria-label="{{Form Title}} steps"
+          data-current="0"><!-- step-list-items injected by app.js --></ol>
     </div>
-    <progress class="progress" max="100" value="0"
-              aria-label="Form completion"></progress>
-    <ol class="step-list" aria-label="{{Form Title}} steps"
-        data-current="0"><!-- step-list-items injected by app.js --></ol>
   </header>
 
   <main>
@@ -216,6 +323,12 @@ The dashboard (`front-end-with-html/dashboard.html`) follows the analogous
 `js/dashboard-app.js` as a module (which imports `js/dashboard-types.js`,
 `js/data.js`, `js/api.js`), plus the standalone `js/table-export.js`. The
 wizard and dashboard cross-link in their page headers.
+
+**Structural rule:** the `<main>` tag does not have an inner `<header>` tag.
+`.page-header` is always a sibling that precedes `<main>`, never nested
+inside it. `.page-footer` is likewise always a sibling that *follows*
+`<main>`, never nested inside it — both chrome elements are direct `body`
+children, full width, per the page-width model in §3.
 
 ## 5. JavaScript conventions
 
@@ -315,6 +428,7 @@ Local usage:
 
 ```sh
 bin/lily-html-refactor --check --all
+bin/page-header-layout-refactor --check
 ```
 
 Wire it into your CI step or into `bin/test` as appropriate.

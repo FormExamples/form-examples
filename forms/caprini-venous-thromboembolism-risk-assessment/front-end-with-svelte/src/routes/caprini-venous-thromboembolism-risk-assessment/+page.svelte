@@ -5,21 +5,7 @@
 	const plural = 'caprini-venous-thromboembolism-risk-assessments';
 </script>
 
-<main class="mx-auto max-w-4xl px-4 py-12">
-	<header class="mb-10">
-		<p class="text-sm font-semibold uppercase tracking-wide text-primary">
-			Caprini Venous Thromboembolism Risk Assessment
-		</p>
-		<h1 class="mt-2 text-3xl font-bold text-base-content">Caprini VTE risk-stratification tool</h1>
-		<p class="mt-4 text-base leading-relaxed text-base-content/70">
-			A venous thromboembolism (VTE) risk-stratification tool for surgical and medical inpatients,
-			completed as a single continuous wizard that sums a checklist of weighted risk factors — worth
-			1, 2, 3, or 5 points each — plus the patient's age band into a total Caprini score, maps it to
-			a risk band (very low 0-1, low 2, moderate 3-4, high &ge; 5), and recommends a prophylaxis
-			strategy, downgrading any pharmacological recommendation to mechanical when the bleeding risk
-			is high.
-		</p>
-	</header>
+<main class="mx-16 px-4 py-12">
 
 	<div class="grid gap-4 sm:grid-cols-2">
 		<a

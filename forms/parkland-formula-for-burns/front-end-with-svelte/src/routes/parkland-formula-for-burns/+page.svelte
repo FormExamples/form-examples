@@ -5,21 +5,7 @@
 	const plural = 'parkland-formula-for-burns-calculations';
 </script>
 
-<main class="mx-auto max-w-4xl px-4 py-12">
-	<header class="mb-10">
-		<p class="text-sm font-semibold uppercase tracking-wide text-primary">
-			Parkland Formula for Burns
-		</p>
-		<h1 class="mt-2 text-3xl font-bold text-base-content">
-			Fluid resuscitation for major thermal burns
-		</h1>
-		<p class="mt-4 text-base leading-relaxed text-base-content/70">
-			A fluid-resuscitation calculator, completed as a single continuous wizard, that applies the
-			Parkland formula to a patient's weight, %TBSA burned, and time of injury to derive the 24-hour
-			crystalloid volume, its 8-hour/16-hour phase split and infusion rates, and a urine-output
-			target, as a starting estimate only.
-		</p>
-	</header>
+<main class="mx-16 px-4 py-12">
 
 	<div class="grid gap-4 sm:grid-cols-2">
 		<a

@@ -6,17 +6,7 @@
 	const plural = 'substance-abuse-assessments';
 </script>
 
-<main class="mx-auto max-w-4xl px-4 py-12">
-	<header class="mb-10">
-		<p class="text-sm font-semibold uppercase tracking-wide text-primary">Substance Abuse Assessment</p>
-		<h1 class="mt-2 text-3xl font-bold text-base-content">Substance use disorder evaluation</h1>
-		<p class="mt-4 text-base leading-relaxed text-base-content/70">
-			A comprehensive, single-page wizard covering alcohol use, drug use, substance use history,
-			withdrawal, mental-health comorbidities, and social / physical-health impact, from which the
-			shared engine scores the AUDIT (0-40) and DAST-10 (0-10) instruments, derives an overall risk
-			level, and flags safety-critical issues for the clinician.
-		</p>
-	</header>
+<main class="mx-16 px-4 py-12">
 
 	<div class="grid gap-4 sm:grid-cols-2">
 		<a

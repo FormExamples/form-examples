@@ -80,22 +80,20 @@
 	}
 </script>
 
-<main class="mx-auto max-w-3xl px-4 py-6">
-	<header class="mb-6 no-print">
-		<h1 class="text-2xl font-bold text-base-content">
-			{isNew ? 'New MELD score calculation' : `MELD score ${id}`}
-		</h1>
-		<p class="mt-1 text-sm text-base-content/70">
-			Complete the sections; the MELD score and mortality band are computed on submit. Sodium and
-			albumin sections appear when the chosen instrument needs them.
-		</p>
-		<Progress label="Assessment sections" value={visibleSteps.length} max={visibleSteps.length} />
-		<StepList label="Assessment sections" current={visibleSteps.length}>
-			{#each visibleSteps as step (step.number)}
-				<StepListItem status="finished" label={step.title}>{step.shortTitle}</StepListItem>
-			{/each}
-		</StepList>
-	</header>
+<main class="mx-16 px-4 py-6">
+	<h1 class="text-2xl font-bold text-base-content">
+		{isNew ? 'New MELD score calculation' : `MELD score ${id}`}
+	</h1>
+	<p class="mt-1 text-sm text-base-content/70">
+		Complete the sections; the MELD score and mortality band are computed on submit. Sodium and
+		albumin sections appear when the chosen instrument needs them.
+	</p>
+	<Progress label="Assessment sections" value={visibleSteps.length} max={visibleSteps.length} />
+	<StepList label="Assessment sections" current={visibleSteps.length}>
+		{#each visibleSteps as step (step.number)}
+			<StepListItem status="finished" label={step.title}>{step.shortTitle}</StepListItem>
+		{/each}
+	</StepList>
 
 	{#if errors.length > 0}
 		<ErrorSummary title="Please fix the following before submitting" class="mb-6">

@@ -3,6 +3,7 @@
 	import Fieldset from '$lib/components/ui/Fieldset.svelte';
 	import NumberInput from '$lib/components/ui/NumberInput.svelte';
 	import RadioGroup from '$lib/components/ui/RadioGroup.svelte';
+	import DateInput from '$lib/components/ui/DateInput.svelte';
 
 	import { assessment } from '$lib/stores/assessment.svelte';
 
@@ -22,4 +23,7 @@
 			<NumberInput label="Gestation" name="gestWeeks" bind:value={p.gestationWeeks} unit="weeks" min={1} max={42} />
 		{/if}
 	{/if}
+
+	<Field label="Do you take contraceptive pills, HRT, or use oestrogen gel/coil?"><RadioGroup label="Do you take contraceptive pills, HRT, or use oestrogen gel/coil?">{#each yesNo as opt (opt.value)}<label><input type="radio" class="radio-input" name="contraceptiveHrt" value={opt.value} bind:group={p.contraceptiveOrHrtUse}/> {opt.label}</label>{/each}</RadioGroup></Field>
+	<Field label="Date of your last menstrual period" inputId="lmp"><DateInput id="lmp" label="Date of your last menstrual period" bind:value={p.lastMenstrualPeriod} /></Field>
 </Fieldset>

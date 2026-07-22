@@ -83,7 +83,7 @@
 	}
 </script>
 
-<main class="mx-auto max-w-6xl px-4 py-6">
+<main class="mx-16 px-4 py-6">
 	<div class="mb-6 flex flex-wrap items-end justify-between gap-4">
 		<div>
 			<h1 class="text-2xl font-bold text-base-content">Architecture dashboard</h1>

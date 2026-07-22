@@ -5,24 +5,7 @@
 	const plural = 'learning-disability-annual-health-checks';
 </script>
 
-<main class="mx-auto max-w-4xl px-4 py-12">
-	<header class="mb-10">
-		<p class="text-sm font-semibold uppercase tracking-wide text-primary">
-			Learning Disability Annual Health Check
-		</p>
-		<h1 class="mt-2 text-3xl font-bold text-base-content">
-			Completeness, the Health Action Plan, and STOMP
-		</h1>
-		<p class="mt-4 text-base leading-relaxed text-base-content/70">
-			A UK primary-care annual health check for people aged 14 or over on a practice's
-			learning-disability register, completed as a single continuous wizard, that is a
-			<strong>documentation and completeness</strong> instrument, not a numeric score — the engine
-			counts the 18 required components carried out completely, reports a completeness percentage,
-			gates the check on the <strong>Health Action Plan</strong> being produced and shared, and
-			classifies it <strong>Complete</strong> or <strong>Incomplete</strong>, independently raising
-			clinical flags including the STOMP flag.
-		</p>
-	</header>
+<main class="mx-16 px-4 py-12">
 
 	<div class="grid gap-4 sm:grid-cols-2">
 		<a

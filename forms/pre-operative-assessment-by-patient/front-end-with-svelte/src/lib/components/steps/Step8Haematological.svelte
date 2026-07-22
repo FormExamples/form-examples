@@ -31,4 +31,8 @@
 	{/if}
 
 	<Field label="Do you have anaemia?"><RadioGroup label="Do you have anaemia?">{#each yesNo as opt (opt.value)}<label><input type="radio" class="radio-input" name="anaemia" value={opt.value} bind:group={h.anaemia}/> {opt.label}</label>{/each}</RadioGroup></Field>
+
+	<Field label="Have you ever had a blood clot in your lungs or legs (DVT or pulmonary embolism)?"><RadioGroup label="Personal history of DVT/PE?">{#each yesNo as opt (opt.value)}<label><input type="radio" class="radio-input" name="vtePersonal" value={opt.value} bind:group={h.personalVteHistory}/> {opt.label}</label>{/each}</RadioGroup></Field>
+	<Field label="Does a blood relative have a history of blood clots in the lungs or legs (DVT or pulmonary embolism)?"><RadioGroup label="Family history of DVT/PE?">{#each yesNo as opt (opt.value)}<label><input type="radio" class="radio-input" name="vteFamily" value={opt.value} bind:group={h.familyVteHistory}/> {opt.label}</label>{/each}</RadioGroup></Field>
+	<Field label="Have you ever had a blood transfusion?"><RadioGroup label="Have you ever had a blood transfusion?">{#each yesNo as opt (opt.value)}<label><input type="radio" class="radio-input" name="transfusion" value={opt.value} bind:group={h.bloodTransfusionHistory}/> {opt.label}</label>{/each}</RadioGroup></Field>
 </Fieldset>

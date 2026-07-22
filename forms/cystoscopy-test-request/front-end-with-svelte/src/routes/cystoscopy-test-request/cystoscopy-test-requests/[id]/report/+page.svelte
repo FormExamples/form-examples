@@ -98,7 +98,7 @@
 		</div>
 	</header>
 
-	<main class="mx-auto max-w-4xl px-4 py-6">
+	<main class="mx-16 px-4 py-6">
 		<!-- Two-week-wait / risk alerts -->
 		{#if result.twoWeekWaitEligible || result.triageTier === 'two-week-wait'}
 			<Alert type="warning" heading="Suspected-cancer two-week-wait" class="mb-6">

@@ -5,16 +5,7 @@
 	const plural = 'apgar-scores';
 </script>
 
-<main class="mx-auto max-w-4xl px-4 py-12">
-	<header class="mb-10">
-		<p class="text-sm font-semibold uppercase tracking-wide text-primary">Apgar Score</p>
-		<h1 class="mt-2 text-3xl font-bold text-base-content">Newborn Apgar scoring</h1>
-		<p class="mt-4 text-base leading-relaxed text-base-content/70">
-			A rapid assessment of a newborn's condition in the first minutes after birth, completed as a
-			single continuous wizard, and the shared engine derives each timepoint's total, band, trend,
-			and any safety flags.
-		</p>
-	</header>
+<main class="mx-16 px-4 py-12">
 
 	<div class="grid gap-4 sm:grid-cols-2">
 		<a

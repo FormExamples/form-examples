@@ -5,21 +5,7 @@
 	const plural = 'medical-certificates-of-cause-of-death';
 </script>
 
-<main class="mx-auto max-w-4xl px-4 py-12">
-	<header class="mb-10">
-		<p class="text-sm font-semibold uppercase tracking-wide text-primary">
-			UK death certification (ONS / Coroners and Justice Act 2009)
-		</p>
-		<h1 class="mt-2 text-3xl font-bold text-base-content">Medical Certificate of Cause of Death</h1>
-		<p class="mt-4 text-base leading-relaxed text-base-content/70">
-			A statutory-documentation instrument, completed as a single continuous wizard, that records the
-			certifying doctor, the deceased, the date and place of death, and the Part I / Part II
-			cause-of-death sequence, then classifies the certificate as <strong>valid</strong>,
-			<strong>incomplete</strong>, or <strong>refer to coroner</strong> with
-			<strong>no numeric score</strong>, deferring diagnosis and statutory judgement to the
-			certifying doctor, coroner, or medical examiner.
-		</p>
-	</header>
+<main class="mx-16 px-4 py-12">
 
 	<div class="grid gap-4 sm:grid-cols-2">
 		<a

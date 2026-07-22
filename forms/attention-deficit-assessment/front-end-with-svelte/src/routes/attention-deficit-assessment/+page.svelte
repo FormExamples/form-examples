@@ -6,18 +6,7 @@
 	const plural = 'attention-deficit-assessments';
 </script>
 
-<main class="mx-auto max-w-4xl px-4 py-12">
-	<header class="mb-10">
-		<p class="text-sm font-semibold uppercase tracking-wide text-primary">
-			Attention Deficit Assessment
-		</p>
-		<h1 class="mt-2 text-3xl font-bold text-base-content">Adult ADHD screening (ASRS v1.1)</h1>
-		<p class="mt-4 text-base leading-relaxed text-base-content/70">
-			A structured adult ADHD screening completed as a single continuous wizard, whose shared
-			engine scores the WHO Adult ADHD Self-Report Scale (ASRS v1.1), classifies the likelihood of
-			ADHD, infers the predominant presentation (subtype), and flags issues for the clinician.
-		</p>
-	</header>
+<main class="mx-16 px-4 py-12">
 
 	<div class="grid gap-4 sm:grid-cols-2">
 		<a

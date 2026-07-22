@@ -78,7 +78,7 @@
 		</div>
 	</header>
 
-	<main class="mx-auto max-w-4xl px-4 py-6">
+	<main class="mx-16 px-4 py-6">
 		<!-- Frozen-section / specimen-quality alert -->
 		{#if result.immediate}
 			<Alert type="error" heading="Immediate (intra-operative) frozen section" class="mb-6">

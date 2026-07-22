@@ -5,19 +5,7 @@
 	const plural = 'sequential-organ-failure-assessments';
 </script>
 
-<main class="mx-auto max-w-4xl px-4 py-12">
-	<header class="mb-10">
-		<p class="text-sm font-semibold uppercase tracking-wide text-primary">
-			Sequential Organ Failure Assessment
-		</p>
-		<h1 class="mt-2 text-3xl font-bold text-base-content">SOFA organ-dysfunction score</h1>
-		<p class="mt-4 text-base leading-relaxed text-base-content/70">
-			A clinician-driven, single-continuous-wizard scoring of six organ systems — respiration,
-			coagulation, liver, cardiovascular, central nervous system, and renal — each 0 to 4 from
-			objective physiology and laboratory findings, producing a total SOFA of 0 to 24 with
-			delta-SOFA, mortality risk banding, Sepsis-3 flagging, and safety flags.
-		</p>
-	</header>
+<main class="mx-16 px-4 py-12">
 
 	<div class="grid gap-4 sm:grid-cols-2">
 		<a

@@ -4,19 +4,7 @@
 	// dashboard.
 </script>
 
-<main class="mx-auto max-w-4xl px-4 py-12">
-	<header class="mb-10">
-		<p class="text-sm font-semibold uppercase tracking-wide text-primary">Sleep Study Test Result</p>
-		<h1 class="mt-2 text-3xl font-bold text-gray-900">Sleep study (polysomnography) test result</h1>
-		<p class="mt-4 text-base leading-relaxed text-gray-600">
-			After an overnight sleep investigation, a sleep physician or clinical physiologist works
-			through a single-page wizard to record key metrics — apnoea-hypopnoea index, oxygen
-			desaturation index, minimum and time-below-90% SpO2, mean heart rate, and OSA severity
-			band — that a shared grading engine turns into a four-axis interpretation (result
-			classification, abnormality severity, report completeness, and follow-up urgency), including
-			an automatic alert for a critical result such as severe OSA with significant desaturation.
-		</p>
-	</header>
+<main class="mx-16 px-4 py-12">
 
 	<div class="grid gap-4 sm:grid-cols-2">
 		<a

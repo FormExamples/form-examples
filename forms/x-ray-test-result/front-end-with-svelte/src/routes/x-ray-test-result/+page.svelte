@@ -4,17 +4,7 @@
 	// dashboard.
 </script>
 
-<main class="mx-auto max-w-4xl px-4 py-12">
-	<header class="mb-10">
-		<p class="text-sm font-semibold uppercase tracking-wide text-primary">X-Ray Test Result</p>
-		<h1 class="mt-2 text-3xl font-bold text-gray-900">Plain-radiograph (X-ray) test result</h1>
-		<p class="mt-4 text-base leading-relaxed text-gray-600">
-			After a plain X-ray examination, a radiologist or reporting radiographer completes a
-			single-page wizard whose shared grading engine turns the structured findings into a
-			four-axis interpretation — result classification, abnormality severity, report
-			completeness, and follow-up urgency — with an automatic alert for a critical finding.
-		</p>
-	</header>
+<main class="mx-16 px-4 py-12">
 
 	<div class="grid gap-4 sm:grid-cols-2">
 		<a

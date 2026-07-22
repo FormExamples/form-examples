@@ -84,31 +84,29 @@
 	}
 </script>
 
-<main class="mx-auto max-w-3xl px-4 py-6">
-	<header class="mb-6 no-print">
-		<h1 class="text-2xl font-bold text-base-content">
-			{isNew ? 'New agile checklist' : `Agile checklist ${id}`}
-		</h1>
-		<p class="mt-1 text-sm text-base-content/70">
-			Complete the five sections; the composite maturity, per-section bands, and flags are computed
-			as you go.
-		</p>
-		<Progress label="Items answered" max={TOTAL_ITEMS} value={result.answeredCount} />
-		<p class="mt-1 text-sm text-base-content/60" aria-live="polite">
-			{result.answeredCount} of {TOTAL_ITEMS} items answered
-		</p>
-		<StepList label="Agile checklist steps" current={assessment.currentStep - 1}>
-			{#each STEPS as s (s.number)}
-				<StepListItem
-					status={stepStatus(s.number)}
-					current={s.number === assessment.currentStep}
-					onclick={() => gotoStep(s.number)}
-				>
-					{s.short}
-				</StepListItem>
-			{/each}
-		</StepList>
-	</header>
+<main class="mx-16 px-4 py-6">
+	<h1 class="text-2xl font-bold text-base-content">
+		{isNew ? 'New agile checklist' : `Agile checklist ${id}`}
+	</h1>
+	<p class="mt-1 text-sm text-base-content/70">
+		Complete the five sections; the composite maturity, per-section bands, and flags are computed
+		as you go.
+	</p>
+	<Progress label="Items answered" max={TOTAL_ITEMS} value={result.answeredCount} />
+	<p class="mt-1 text-sm text-base-content/60" aria-live="polite">
+		{result.answeredCount} of {TOTAL_ITEMS} items answered
+	</p>
+	<StepList label="Agile checklist steps" current={assessment.currentStep - 1}>
+		{#each STEPS as s (s.number)}
+			<StepListItem
+				status={stepStatus(s.number)}
+				current={s.number === assessment.currentStep}
+				onclick={() => gotoStep(s.number)}
+			>
+				{s.short}
+			</StepListItem>
+		{/each}
+	</StepList>
 
 	{#if errors.length > 0}
 		<ErrorSummary title="Please fix the following before submitting" class="mb-6">
@@ -123,17 +121,16 @@
 	<Form label="Agile checklist" onsubmit={submit}>
 		<div id="form-sections">
 			{#each stepComponents as StepComponent, i (i)}
-				<div
+				<section
 					id={`step-${i + 1}`}
 					class="mb-5"
 					style="scroll-margin-top: 6rem;"
 					onmouseenter={() => assessment.goto(i + 1)}
 					onfocusin={() => assessment.goto(i + 1)}
-					role="region"
 					aria-label={STEPS[i].title}
 				>
 					<StepComponent />
-				</div>
+				</section>
 			{/each}
 		</div>
 

@@ -1,0 +1,201 @@
+#!/usr/bin/env python3
+"""bin/lily-svelte-theme-locale-select-refactor -- migrate every form's
+Svelte ThemeSelect/LocaleSelect from the old native-<select> pattern to the
+new headless button+listbox pattern (lily-design-system-svelte-helpers'
+lily-design-system-svelte-theme-select / -locale-select, vendored as a
+contract -- see forms/AGENTS-front-end-svelte.md and
+forms/lily-svelte-helpers-version.md).
+
+What changes per form (front-end-with-svelte/):
+  - src/lib/components/ui/ThemeSelect.svelte   -> rewritten (button + listbox)
+  - src/lib/components/ui/LocaleSelect.svelte  -> rewritten (button + listbox)
+  - src/lib/components/ui/ThemeSelectOption.svelte  -> deleted (no longer used)
+  - src/lib/components/ui/LocaleSelectOption.svelte -> deleted (no longer used)
+  - src/routes/<slug>/+layout.svelte -> ThemeSelect/LocaleSelect now manage
+    their own <link>/data-theme/lang/dir/localStorage; the manual $state +
+    $derived + $effect + <link> boilerplate is removed, and the components
+    are called with themes/themesUrl/themeLabels (resp. locales/localeLabels)
+    instead of iterating *Option children.
+  - src/app.css -> baseline CSS for .lily-theme-select-*/.lily-locale-select-*
+    appended once (headless: no default styling). Prefixed `lily-` because
+    the vendored theme catalogue (static/themes/*.css) already claims the
+    bare `.theme-select` / `.theme-select-button` / `.theme-select-option`
+    class names for an unrelated picker-chip / native-select look -- reusing
+    them verbatim (the literal upstream class hooks) visually breaks the
+    control.
+
+Usage:
+  bin/lily-svelte-theme-locale-select-refactor --check   # CI drift check (no writes)
+  bin/lily-svelte-theme-locale-select-refactor --apply   # write changes
+
+Only touches forms whose +layout.svelte matches the standard shape produced
+by the earlier bin/svelte-locale-select-refactor rollout. Forms with a
+bespoke locale integration (currently just
+medical-language-speaking-assessment-for-cymraeg, which drives LocaleSelect
+from a shared i18n store) are skipped and reported for hand migration.
+
+Idempotent: re-running after a full --apply makes no further changes.
+"""
+
+from __future__ import annotations
+
+import argparse
+import re
+import sys
+from pathlib import Path
+
+REPO_ROOT = Path(__file__).resolve().parent.parent
+FORMS_DIR = REPO_ROOT / "forms"
+
+THEME_SELECT_SVELTE = '<script lang="ts" module>\n\t// Lily Design System — ThemeSelect (headless button + listbox).\n\t// Mirrors lily-design-system-svelte-helpers/lily-design-system-svelte-theme-select:\n\t// a button that opens a listbox, replacing the old native <select>. Manages its\n\t// own <link> swap, `data-theme` attribute, and localStorage persistence.\n\timport type { Snippet } from \'svelte\';\n\n\t/** Default button glyph: U+25D1 CIRCLE WITH RIGHT HALF BLACK. */\n\texport const CIRCLE_WITH_RIGHT_HALF_BLACK = \'◑\';\n\n\texport type ChildArgs = {\n\t\tvalue: string;\n\t\topen: boolean;\n\t\tlabelFor: (theme: string) => string;\n\t};\n\n\texport type Props = {\n\t\tlabel: string;\n\t\tthemesUrl: string;\n\t\tthemes: string[];\n\t\tvalue?: string;\n\t\tdefaultValue?: string;\n\t\tstorageKey?: string;\n\t\tdetectFromSystem?: boolean;\n\t\tname?: string;\n\t\textension?: string;\n\t\ttarget?: HTMLElement | null;\n\t\tthemeLabels?: Record<string, string>;\n\t\tchildren?: Snippet<[ChildArgs]>;\n\t\tonChange?: (theme: string) => void;\n\t\tclass?: string;\n\t\t[key: string]: unknown;\n\t};\n\n\t/** Title-case each hyphen-separated word: "high-contrast" -> "High Contrast". */\n\texport function themeName(theme: string): string {\n\t\treturn theme\n\t\t\t.split(\'-\')\n\t\t\t.map((word) => word.charAt(0).toUpperCase() + word.slice(1))\n\t\t\t.join(\' \');\n\t}\n\n\t/** Resolve `prefers-color-scheme` to a supported theme; \'\' if unavailable/unsupported. */\n\texport function matchSystemTheme(themes: readonly string[]): string {\n\t\tif (typeof window === \'undefined\' || typeof window.matchMedia !== \'function\') return \'\';\n\t\tconst wanted = window.matchMedia(\'(prefers-color-scheme: dark)\').matches ? \'dark\' : \'light\';\n\t\treturn themes.includes(wanted) ? wanted : \'\';\n\t}\n\n\texport function normaliseThemesUrl(themesUrl: string): string {\n\t\treturn themesUrl.endsWith(\'/\') ? themesUrl : themesUrl + \'/\';\n\t}\n\n\texport function themeHref(themesUrl: string, slug: string, extension: string): string {\n\t\treturn normaliseThemesUrl(themesUrl) + slug + extension;\n\t}\n\n\tlet uid = 0;\n\t/** Stable per-instance id prefix; SSR-safe (no Math.random / Date.now). */\n\texport function nextThemeSelectId(): string {\n\t\tuid += 1;\n\t\treturn `lily-theme-select-${uid}`;\n\t}\n</script>\n\n<script lang="ts">\n\tlet {\n\t\tclass: className = \'\',\n\t\tlabel,\n\t\tthemesUrl,\n\t\tthemes,\n\t\tvalue = $bindable(\'\'),\n\t\tdefaultValue,\n\t\tstorageKey,\n\t\tdetectFromSystem = false,\n\t\tname = \'theme\',\n\t\textension = \'.css\',\n\t\ttarget,\n\t\tthemeLabels = {},\n\t\tchildren,\n\t\tonChange,\n\t\t...restProps\n\t}: Props = $props();\n\n\tconst baseId = nextThemeSelectId();\n\tconst listId = `${baseId}-list`;\n\tconst optionId = (i: number) => `${baseId}-option-${i}`;\n\n\tlet open = $state(false);\n\tlet activeIndex = $state(-1);\n\tlet buttonEl: HTMLButtonElement | undefined = $state();\n\tlet listEl: HTMLUListElement | undefined = $state();\n\tlet rootEl: HTMLDivElement | undefined = $state();\n\n\t// Typeahead buffer: APG listbox behaviour. Reset after a pause.\n\tlet typeahead = \'\';\n\tlet typeaheadTimer: ReturnType<typeof setTimeout> | undefined;\n\n\tfunction labelFor(theme: string): string {\n\t\tif (theme in themeLabels) return themeLabels[theme];\n\t\treturn themeName(theme);\n\t}\n\n\tfunction getManagedLink(): HTMLLinkElement {\n\t\tconst selector = `link[data-lily-theme-select="${name}"]`;\n\t\tlet link = document.head.querySelector<HTMLLinkElement>(selector);\n\t\tif (!link) {\n\t\t\tlink = document.createElement(\'link\');\n\t\t\tlink.rel = \'stylesheet\';\n\t\t\tlink.setAttribute(\'data-lily-theme-select\', name);\n\t\t\tdocument.head.appendChild(link);\n\t\t}\n\t\treturn link;\n\t}\n\n\tfunction applyTheme(slug: string): void {\n\t\tif (typeof document === \'undefined\' || !slug) return;\n\t\tgetManagedLink().href = themeHref(themesUrl, slug, extension);\n\t\t(target ?? document.documentElement).setAttribute(\'data-theme\', slug);\n\t\tif (storageKey) {\n\t\t\ttry {\n\t\t\t\tlocalStorage.setItem(storageKey, slug);\n\t\t\t} catch {\n\t\t\t\t// ignore quota / privacy errors\n\t\t\t}\n\t\t}\n\t\tonChange?.(slug);\n\t}\n\n\tfunction setTheme(slug: string): void {\n\t\tvalue = slug;\n\t}\n\n\tfunction openList(startIndex?: number): void {\n\t\tconst selected = themes.indexOf(value);\n\t\tactiveIndex = startIndex ?? (selected >= 0 ? selected : 0);\n\t\topen = true;\n\t\t// Focus stays on the listbox; the active option is conveyed via\n\t\t// aria-activedescendant, per the APG listbox pattern.\n\t\tqueueMicrotask(() => {\n\t\t\tlistEl?.focus();\n\t\t\tscrollActiveIntoView();\n\t\t});\n\t}\n\n\tfunction closeList(refocus = true): void {\n\t\tif (!open) return;\n\t\topen = false;\n\t\tactiveIndex = -1;\n\t\tif (refocus) queueMicrotask(() => buttonEl?.focus());\n\t}\n\n\tfunction choose(index: number): void {\n\t\tconst slug = themes[index];\n\t\tif (slug) setTheme(slug);\n\t\tcloseList();\n\t}\n\n\tfunction scrollActiveIntoView(): void {\n\t\tif (activeIndex < 0 || !listEl) return;\n\t\tconst el = listEl.querySelector<HTMLElement>(`#${CSS.escape(optionId(activeIndex))}`);\n\t\tel?.scrollIntoView({ block: \'nearest\' });\n\t}\n\n\tfunction moveActive(delta: number): void {\n\t\tif (themes.length === 0) return;\n\t\tactiveIndex = Math.min(Math.max(activeIndex + delta, 0), themes.length - 1);\n\t\tscrollActiveIntoView();\n\t}\n\n\tfunction runTypeahead(char: string): void {\n\t\ttypeahead += char.toLowerCase();\n\t\tclearTimeout(typeaheadTimer);\n\t\ttypeaheadTimer = setTimeout(() => (typeahead = \'\'), 500);\n\t\tconst from = activeIndex < 0 ? 0 : activeIndex;\n\t\tfor (let n = 0; n < themes.length; n++) {\n\t\t\tconst i = (from + n) % themes.length;\n\t\t\tif (labelFor(themes[i]).toLowerCase().startsWith(typeahead)) {\n\t\t\t\tactiveIndex = i;\n\t\t\t\tscrollActiveIntoView();\n\t\t\t\treturn;\n\t\t\t}\n\t\t}\n\t}\n\n\tfunction onButtonKeydown(event: KeyboardEvent): void {\n\t\tswitch (event.key) {\n\t\t\tcase \'ArrowDown\':\n\t\t\tcase \'Enter\':\n\t\t\tcase \' \':\n\t\t\t\tevent.preventDefault();\n\t\t\t\topenList();\n\t\t\t\tbreak;\n\t\t\tcase \'ArrowUp\':\n\t\t\t\tevent.preventDefault();\n\t\t\t\topenList(themes.length - 1);\n\t\t\t\tbreak;\n\t\t}\n\t}\n\n\tfunction onListKeydown(event: KeyboardEvent): void {\n\t\tswitch (event.key) {\n\t\t\tcase \'ArrowDown\':\n\t\t\t\tevent.preventDefault();\n\t\t\t\tmoveActive(1);\n\t\t\t\tbreak;\n\t\t\tcase \'ArrowUp\':\n\t\t\t\tevent.preventDefault();\n\t\t\t\tmoveActive(-1);\n\t\t\t\tbreak;\n\t\t\tcase \'Home\':\n\t\t\t\tevent.preventDefault();\n\t\t\t\tactiveIndex = 0;\n\t\t\t\tscrollActiveIntoView();\n\t\t\t\tbreak;\n\t\t\tcase \'End\':\n\t\t\t\tevent.preventDefault();\n\t\t\t\tactiveIndex = themes.length - 1;\n\t\t\t\tscrollActiveIntoView();\n\t\t\t\tbreak;\n\t\t\tcase \'Enter\':\n\t\t\tcase \' \':\n\t\t\t\tevent.preventDefault();\n\t\t\t\tif (activeIndex >= 0) choose(activeIndex);\n\t\t\t\tbreak;\n\t\t\tcase \'Escape\':\n\t\t\t\tevent.preventDefault();\n\t\t\t\tcloseList();\n\t\t\t\tbreak;\n\t\t\tcase \'Tab\':\n\t\t\t\t// Tab moves on: close without stealing focus back.\n\t\t\t\tcloseList(false);\n\t\t\t\tbreak;\n\t\t\tdefault:\n\t\t\t\tif (event.key.length === 1 && !event.ctrlKey && !event.metaKey && !event.altKey) {\n\t\t\t\t\trunTypeahead(event.key);\n\t\t\t\t}\n\t\t}\n\t}\n\n\tfunction onRootFocusOut(event: FocusEvent): void {\n\t\tconst next = event.relatedTarget as Node | null;\n\t\tif (next && rootEl?.contains(next)) return;\n\t\tcloseList(false);\n\t}\n\n\tlet initialised = false;\n\n\t$effect(() => {\n\t\tconst current = value;\n\n\t\tif (!initialised) {\n\t\t\tinitialised = true;\n\t\t\tlet initial = current;\n\t\t\tif (!initial && storageKey) {\n\t\t\t\ttry {\n\t\t\t\t\tinitial = localStorage.getItem(storageKey) ?? \'\';\n\t\t\t\t} catch {\n\t\t\t\t\t// ignore privacy errors\n\t\t\t\t}\n\t\t\t}\n\t\t\tif (!initial && detectFromSystem) {\n\t\t\t\tinitial = matchSystemTheme(themes);\n\t\t\t}\n\t\t\tif (!initial) {\n\t\t\t\tinitial = defaultValue ?? (themes.includes(\'light\') ? \'light\' : themes[0]) ?? \'\';\n\t\t\t}\n\t\t\tif (initial && initial !== current) {\n\t\t\t\tvalue = initial;\n\t\t\t\treturn;\n\t\t\t}\n\t\t}\n\n\t\tif (current) applyTheme(current);\n\t});\n</script>\n\n<svelte:document\n\tonclick={(event) => {\n\t\tif (!open) return;\n\t\tconst t = event.target as Node | null;\n\t\tif (t && rootEl && !rootEl.contains(t)) closeList(false);\n\t}}\n/>\n\n<div\n\tbind:this={rootEl}\n\tclass={`lily-theme-select ${className}`.trim()}\n\tonfocusout={onRootFocusOut}\n\t{...restProps}\n>\n\t<input type="hidden" {name} {value} />\n\n\t<button\n\t\tbind:this={buttonEl}\n\t\ttype="button"\n\t\tclass="lily-theme-select-button"\n\t\taria-label={label}\n\t\taria-haspopup="listbox"\n\t\taria-expanded={open}\n\t\taria-controls={listId}\n\t\tonclick={() => (open ? closeList() : openList())}\n\t\tonkeydown={onButtonKeydown}\n\t>\n\t\t{#if children}\n\t\t\t{@render children({ value: value ?? \'\', open, labelFor })}\n\t\t{:else}\n\t\t\t<span class="lily-theme-select-icon" aria-hidden="true">{CIRCLE_WITH_RIGHT_HALF_BLACK}</span>\n\t\t{/if}\n\t</button>\n\n\t<ul\n\t\tbind:this={listEl}\n\t\tclass="lily-theme-select-list"\n\t\tid={listId}\n\t\trole="listbox"\n\t\taria-label={label}\n\t\taria-activedescendant={open && activeIndex >= 0 ? optionId(activeIndex) : undefined}\n\t\ttabindex="-1"\n\t\thidden={!open}\n\t\tonkeydown={onListKeydown}\n\t>\n\t\t{#each themes as theme, i (theme)}\n\t\t\t<li\n\t\t\t\tclass="lily-theme-select-option"\n\t\t\t\tid={optionId(i)}\n\t\t\t\trole="option"\n\t\t\t\taria-selected={theme === value}\n\t\t\t\tdata-active={i === activeIndex ? \'\' : undefined}\n\t\t\t\tonclick={() => choose(i)}\n\t\t\t>\n\t\t\t\t{labelFor(theme)}\n\t\t\t</li>\n\t\t{/each}\n\t</ul>\n</div>\n'
+
+LOCALE_SELECT_SVELTE = '<script lang="ts" module>\n\t// Lily Design System — LocaleSelect (headless button + listbox).\n\t// Mirrors lily-design-system-svelte-helpers/lily-design-system-svelte-locale-select:\n\t// the headless sibling of ThemeSelect. Manages `lang`/`dir` on the target\n\t// element and localStorage persistence; the listbox and button are\n\t// component-owned, replacing the old native <select>.\n\timport type { Snippet } from \'svelte\';\n\n\t/** Default button glyph: U+1F310 GLOBE WITH MERIDIANS + VS15 (text presentation,\n\t * so it reads monochrome like theme-select\'s ◑ rather than a colour emoji). */\n\texport const GLOBE_WITH_MERIDIANS = \'\\u{1F310}︎\';\n\n\texport type ChildArgs = {\n\t\tvalue: string;\n\t\topen: boolean;\n\t\tlabelFor: (locale: string) => string;\n\t};\n\n\texport type Props = {\n\t\tlabel: string;\n\t\tlocales: string[];\n\t\tvalue?: string;\n\t\tdefaultValue?: string;\n\t\tstorageKey?: string;\n\t\tdetectFromNavigator?: boolean;\n\t\tname?: string;\n\t\ttarget?: HTMLElement | null;\n\t\tapplyDir?: boolean;\n\t\tlocaleLabels?: Record<string, string>;\n\t\tchildren?: Snippet<[ChildArgs]>;\n\t\tonChange?: (locale: string) => void;\n\t\tclass?: string;\n\t\t[key: string]: unknown;\n\t};\n\n\t/** Base language subtags whose default writing direction is right-to-left. */\n\tconst RTL_LANGUAGE_TAGS = new Set([\n\t\t\'ar\', \'he\', \'fa\', \'ur\', \'yi\', \'ps\', \'sd\', \'ug\', \'dv\', \'ku\', \'arc\', \'ha\'\n\t]);\n\n\t/** Script subtags whose writing direction is right-to-left. */\n\tconst RTL_SCRIPT_SUBTAGS = new Set([\'arab\', \'hebr\', \'thaa\', \'nkoo\', \'syrc\']);\n\n\texport function bcp47LocaleTag(locale: string): string {\n\t\treturn locale.replace(/_/g, \'-\');\n\t}\n\n\t/** Right-to-left when the base language or any script subtag says so. */\n\texport function isRtlLocale(locale: string): boolean {\n\t\tif (!locale) return false;\n\t\tconst parts = locale.split(/[-_]/);\n\t\tfor (const part of parts) {\n\t\t\tif (RTL_SCRIPT_SUBTAGS.has(part.toLowerCase())) return true;\n\t\t}\n\t\treturn RTL_LANGUAGE_TAGS.has(parts[0]?.toLowerCase() ?? \'\');\n\t}\n\n\t/** Opportunistic Intl.DisplayNames lookup; never throws. */\n\tfunction intlDisplayName(locale: string): string {\n\t\ttry {\n\t\t\tconst env =\n\t\t\t\ttypeof navigator !== \'undefined\' && navigator.language ? navigator.language : \'en\';\n\t\t\treturn new Intl.DisplayNames([env], { type: \'language\' }).of(bcp47LocaleTag(locale)) ?? \'\';\n\t\t} catch {\n\t\t\treturn \'\';\n\t\t}\n\t}\n\n\t/** Match navigator.languages against a supported-locales list. */\n\texport function matchNavigatorLanguage(\n\t\tnavLangs: readonly string[],\n\t\tlocales: readonly string[]\n\t): string | \'\' {\n\t\tconst lc = (s: string) => s.toLowerCase().replace(/_/g, \'-\');\n\t\tconst localesLc = locales.map(lc);\n\t\tfor (const raw of navLangs) {\n\t\t\tconst nav = lc(raw);\n\t\t\tconst exactIndex = localesLc.indexOf(nav);\n\t\t\tif (exactIndex !== -1) return locales[exactIndex];\n\t\t\tconst navBase = nav.split(\'-\')[0];\n\t\t\tfor (let i = 0; i < locales.length; i++) {\n\t\t\t\tif (localesLc[i].split(\'-\')[0] === navBase) return locales[i];\n\t\t\t}\n\t\t}\n\t\treturn \'\';\n\t}\n\n\tlet uid = 0;\n\t/** Stable per-instance id prefix; SSR-safe (no Math.random / Date.now). */\n\texport function nextLocaleSelectId(): string {\n\t\tuid += 1;\n\t\treturn `lily-locale-select-${uid}`;\n\t}\n</script>\n\n<script lang="ts">\n\tlet {\n\t\tclass: className = \'\',\n\t\tlabel,\n\t\tlocales,\n\t\tvalue = $bindable(\'\'),\n\t\tdefaultValue,\n\t\tstorageKey,\n\t\tdetectFromNavigator = false,\n\t\tname = \'locale\',\n\t\ttarget,\n\t\tapplyDir = true,\n\t\tlocaleLabels = {},\n\t\tchildren,\n\t\tonChange,\n\t\t...restProps\n\t}: Props = $props();\n\n\tconst baseId = nextLocaleSelectId();\n\tconst listId = `${baseId}-list`;\n\tconst optionId = (i: number) => `${baseId}-option-${i}`;\n\n\tlet open = $state(false);\n\tlet activeIndex = $state(-1);\n\tlet buttonEl: HTMLButtonElement | undefined = $state();\n\tlet listEl: HTMLUListElement | undefined = $state();\n\tlet rootEl: HTMLDivElement | undefined = $state();\n\n\t// Typeahead buffer: APG listbox behaviour. Reset after a pause.\n\tlet typeahead = \'\';\n\tlet typeaheadTimer: ReturnType<typeof setTimeout> | undefined;\n\n\tfunction labelFor(locale: string): string {\n\t\tif (locale in localeLabels) return localeLabels[locale];\n\t\tconst intl = intlDisplayName(locale);\n\t\treturn intl || locale;\n\t}\n\n\tfunction tagFor(locale: string): string {\n\t\treturn bcp47LocaleTag(locale);\n\t}\n\n\tfunction applyLocale(code: string): void {\n\t\tif (typeof document === \'undefined\' || !code) return;\n\t\tconst root = target ?? document.documentElement;\n\t\troot.setAttribute(\'lang\', bcp47LocaleTag(code));\n\t\tif (applyDir) root.setAttribute(\'dir\', isRtlLocale(code) ? \'rtl\' : \'ltr\');\n\t\tif (storageKey) {\n\t\t\ttry {\n\t\t\t\tlocalStorage.setItem(storageKey, code);\n\t\t\t} catch {\n\t\t\t\t// ignore quota / privacy errors\n\t\t\t}\n\t\t}\n\t\tonChange?.(code);\n\t}\n\n\tfunction setLocale(code: string): void {\n\t\tvalue = code;\n\t}\n\n\tfunction openList(startIndex?: number): void {\n\t\tconst selected = locales.indexOf(value);\n\t\tactiveIndex = startIndex ?? (selected >= 0 ? selected : 0);\n\t\topen = true;\n\t\t// Focus stays on the listbox; the active option is conveyed via\n\t\t// aria-activedescendant, per the APG listbox pattern.\n\t\tqueueMicrotask(() => {\n\t\t\tlistEl?.focus();\n\t\t\tscrollActiveIntoView();\n\t\t});\n\t}\n\n\tfunction closeList(refocus = true): void {\n\t\tif (!open) return;\n\t\topen = false;\n\t\tactiveIndex = -1;\n\t\tif (refocus) queueMicrotask(() => buttonEl?.focus());\n\t}\n\n\tfunction choose(index: number): void {\n\t\tconst code = locales[index];\n\t\tif (code) setLocale(code);\n\t\tcloseList();\n\t}\n\n\tfunction scrollActiveIntoView(): void {\n\t\tif (activeIndex < 0 || !listEl) return;\n\t\tconst el = listEl.querySelector<HTMLElement>(`#${CSS.escape(optionId(activeIndex))}`);\n\t\tel?.scrollIntoView({ block: \'nearest\' });\n\t}\n\n\tfunction moveActive(delta: number): void {\n\t\tif (locales.length === 0) return;\n\t\tactiveIndex = Math.min(Math.max(activeIndex + delta, 0), locales.length - 1);\n\t\tscrollActiveIntoView();\n\t}\n\n\tfunction runTypeahead(char: string): void {\n\t\ttypeahead += char.toLowerCase();\n\t\tclearTimeout(typeaheadTimer);\n\t\ttypeaheadTimer = setTimeout(() => (typeahead = \'\'), 500);\n\t\tconst from = activeIndex < 0 ? 0 : activeIndex;\n\t\tfor (let n = 0; n < locales.length; n++) {\n\t\t\tconst i = (from + n) % locales.length;\n\t\t\tif (labelFor(locales[i]).toLowerCase().startsWith(typeahead)) {\n\t\t\t\tactiveIndex = i;\n\t\t\t\tscrollActiveIntoView();\n\t\t\t\treturn;\n\t\t\t}\n\t\t}\n\t}\n\n\tfunction onButtonKeydown(event: KeyboardEvent): void {\n\t\tswitch (event.key) {\n\t\t\tcase \'ArrowDown\':\n\t\t\tcase \'Enter\':\n\t\t\tcase \' \':\n\t\t\t\tevent.preventDefault();\n\t\t\t\topenList();\n\t\t\t\tbreak;\n\t\t\tcase \'ArrowUp\':\n\t\t\t\tevent.preventDefault();\n\t\t\t\topenList(locales.length - 1);\n\t\t\t\tbreak;\n\t\t}\n\t}\n\n\tfunction onListKeydown(event: KeyboardEvent): void {\n\t\tswitch (event.key) {\n\t\t\tcase \'ArrowDown\':\n\t\t\t\tevent.preventDefault();\n\t\t\t\tmoveActive(1);\n\t\t\t\tbreak;\n\t\t\tcase \'ArrowUp\':\n\t\t\t\tevent.preventDefault();\n\t\t\t\tmoveActive(-1);\n\t\t\t\tbreak;\n\t\t\tcase \'Home\':\n\t\t\t\tevent.preventDefault();\n\t\t\t\tactiveIndex = 0;\n\t\t\t\tscrollActiveIntoView();\n\t\t\t\tbreak;\n\t\t\tcase \'End\':\n\t\t\t\tevent.preventDefault();\n\t\t\t\tactiveIndex = locales.length - 1;\n\t\t\t\tscrollActiveIntoView();\n\t\t\t\tbreak;\n\t\t\tcase \'Enter\':\n\t\t\tcase \' \':\n\t\t\t\tevent.preventDefault();\n\t\t\t\tif (activeIndex >= 0) choose(activeIndex);\n\t\t\t\tbreak;\n\t\t\tcase \'Escape\':\n\t\t\t\tevent.preventDefault();\n\t\t\t\tcloseList();\n\t\t\t\tbreak;\n\t\t\tcase \'Tab\':\n\t\t\t\t// Tab moves on: close without stealing focus back.\n\t\t\t\tcloseList(false);\n\t\t\t\tbreak;\n\t\t\tdefault:\n\t\t\t\tif (event.key.length === 1 && !event.ctrlKey && !event.metaKey && !event.altKey) {\n\t\t\t\t\trunTypeahead(event.key);\n\t\t\t\t}\n\t\t}\n\t}\n\n\tfunction onRootFocusOut(event: FocusEvent): void {\n\t\tconst next = event.relatedTarget as Node | null;\n\t\tif (next && rootEl?.contains(next)) return;\n\t\tcloseList(false);\n\t}\n\n\tlet initialised = false;\n\n\t$effect(() => {\n\t\tconst current = value;\n\n\t\tif (!initialised) {\n\t\t\tinitialised = true;\n\t\t\tlet initial = current;\n\n\t\t\tif (!initial && storageKey) {\n\t\t\t\ttry {\n\t\t\t\t\tinitial = localStorage.getItem(storageKey) ?? \'\';\n\t\t\t\t} catch {\n\t\t\t\t\t// ignore privacy errors\n\t\t\t\t}\n\t\t\t}\n\n\t\t\tif (!initial && detectFromNavigator && typeof navigator !== \'undefined\') {\n\t\t\t\tconst navLangs =\n\t\t\t\t\tnavigator.languages && navigator.languages.length > 0\n\t\t\t\t\t\t? Array.from(navigator.languages)\n\t\t\t\t\t\t: navigator.language\n\t\t\t\t\t\t\t? [navigator.language]\n\t\t\t\t\t\t\t: [];\n\t\t\t\tinitial = matchNavigatorLanguage(navLangs, locales);\n\t\t\t}\n\n\t\t\tif (!initial) {\n\t\t\t\tinitial = defaultValue ?? (locales.includes(\'en\') ? \'en\' : locales[0]) ?? \'\';\n\t\t\t}\n\n\t\t\tif (initial && initial !== current) {\n\t\t\t\tvalue = initial;\n\t\t\t\treturn;\n\t\t\t}\n\t\t}\n\n\t\tif (current) applyLocale(current);\n\t});\n</script>\n\n<svelte:document\n\tonclick={(event) => {\n\t\tif (!open) return;\n\t\tconst t = event.target as Node | null;\n\t\tif (t && rootEl && !rootEl.contains(t)) closeList(false);\n\t}}\n/>\n\n<div\n\tbind:this={rootEl}\n\tclass={`lily-locale-select ${className}`.trim()}\n\tonfocusout={onRootFocusOut}\n\t{...restProps}\n>\n\t<input type="hidden" {name} {value} />\n\n\t<button\n\t\tbind:this={buttonEl}\n\t\ttype="button"\n\t\tclass="lily-locale-select-button"\n\t\taria-label={label}\n\t\taria-haspopup="listbox"\n\t\taria-expanded={open}\n\t\taria-controls={listId}\n\t\tonclick={() => (open ? closeList() : openList())}\n\t\tonkeydown={onButtonKeydown}\n\t>\n\t\t{#if children}\n\t\t\t{@render children({ value: value ?? \'\', open, labelFor })}\n\t\t{:else}\n\t\t\t<span class="lily-locale-select-icon" aria-hidden="true">{GLOBE_WITH_MERIDIANS}</span>\n\t\t{/if}\n\t</button>\n\n\t<ul\n\t\tbind:this={listEl}\n\t\tclass="lily-locale-select-list"\n\t\tid={listId}\n\t\trole="listbox"\n\t\taria-label={label}\n\t\taria-activedescendant={open && activeIndex >= 0 ? optionId(activeIndex) : undefined}\n\t\ttabindex="-1"\n\t\thidden={!open}\n\t\tonkeydown={onListKeydown}\n\t>\n\t\t{#each locales as locale, i (locale)}\n\t\t\t<li\n\t\t\t\tclass="lily-locale-select-option"\n\t\t\t\tid={optionId(i)}\n\t\t\t\trole="option"\n\t\t\t\taria-selected={locale === value}\n\t\t\t\tdata-active={i === activeIndex ? \'\' : undefined}\n\t\t\t\tlang={tagFor(locale)}\n\t\t\t\tonclick={() => choose(i)}\n\t\t\t>\n\t\t\t\t{labelFor(locale)}\n\t\t\t</li>\n\t\t{/each}\n\t</ul>\n</div>\n'
+
+APP_CSS_BLOCK = '\n/* Lily: .lily-theme-select / .lily-locale-select (headless button + listbox).\n   Prefixed `lily-` to avoid colliding with the vendored theme catalogue\'s\n   own unrelated `.theme-select` / `.select` / `.option` picker-chip and\n   native-select rules in static/themes/*.css. */\n.lily-theme-select, .lily-locale-select {\n\tposition: relative;\n\tdisplay: inline-block;\n}\n.lily-theme-select-button, .lily-locale-select-button {\n\tpadding: 0.25rem 0.5rem;\n\tborder: 1px solid var(--color-border);\n\tborder-radius: 0.25rem;\n\tbackground: var(--color-surface);\n\tcolor: inherit;\n\tcursor: pointer;\n\tline-height: 1;\n\tfont-family: system-ui, "Segoe UI Symbol", "Apple Symbols", sans-serif;\n\tfont-size: 1.125em;\n}\n.lily-theme-select-button:focus-visible, .lily-locale-select-button:focus-visible {\n\toutline: 2px solid var(--color-focus);\n\toutline-offset: 2px;\n}\n.lily-theme-select-list, .lily-locale-select-list {\n\tposition: absolute;\n\tz-index: 10;\n\tinset-block-start: 100%;\n\tinset-inline-start: 0;\n\tmargin: 0.25rem 0 0;\n\tpadding: 0;\n\tlist-style: none;\n\tmin-inline-size: 12rem;\n\tmax-block-size: 20rem;\n\toverflow-y: auto;\n\tbackground: var(--color-surface);\n\tborder: 1px solid var(--color-border);\n\tborder-radius: 0.375rem;\n\tbox-shadow: 0 4px 6px -1px rgba(0,0,0,0.1), 0 2px 4px -2px rgba(0,0,0,0.1);\n}\n.lily-theme-select-list[hidden], .lily-locale-select-list[hidden] { display: none; }\n.lily-theme-select-option, .lily-locale-select-option {\n\tpadding: 0.25rem 0.75rem;\n\tcursor: pointer;\n}\n.lily-theme-select-option[data-active], .lily-locale-select-option[data-active] {\n\tbackground: var(--color-primary-light);\n}\n.lily-theme-select-option[aria-selected="true"], .lily-locale-select-option[aria-selected="true"] {\n\tfont-weight: 600;\n}\n'
+
+APP_CSS_MARKER = ".lily-theme-select, .lily-locale-select {"
+
+OLD_IMPORTS = "\timport ThemeSelect from '$lib/components/ui/ThemeSelect.svelte';\n\timport ThemeSelectOption from '$lib/components/ui/ThemeSelectOption.svelte';\n\timport { THEME_OPTIONS, THEME_STORAGE_KEY, DEFAULT_THEME } from '$lib/config/themes';\n\timport LocaleSelect from '$lib/components/ui/LocaleSelect.svelte';\n\timport LocaleSelectOption from '$lib/components/ui/LocaleSelectOption.svelte';\n\timport { LOCALE_OPTIONS, LOCALE_STORAGE_KEY, DEFAULT_LOCALE } from '$lib/config/locales';\n"
+NEW_IMPORTS = "\timport ThemeSelect from '$lib/components/ui/ThemeSelect.svelte';\n\timport { THEME_OPTIONS, THEME_STORAGE_KEY, DEFAULT_THEME } from '$lib/config/themes';\n\timport LocaleSelect from '$lib/components/ui/LocaleSelect.svelte';\n\timport { LOCALE_OPTIONS, LOCALE_STORAGE_KEY, DEFAULT_LOCALE } from '$lib/config/locales';\n"
+BROWSER_IMPORT = "\timport { browser } from '$app/environment';\n"
+
+STATE_BLOCK_RE = re.compile('(?:\\tlet theme = \\$state\\(\\n\\t\\tbrowser \\? \\(localStorage\\.getItem\\(THEME_STORAGE_KEY\\) \\?\\? DEFAULT_THEME\\) : DEFAULT_THEME\\n\\t\\);\\n)')
+LINK_TAG_LITERAL = '\n\t<link rel="stylesheet" href={themeHref} />'
+NEW_STATE_BLOCK = '\t// ThemeSelect/LocaleSelect manage <link>/data-theme/lang/dir + localStorage themselves.\n\tconst themeValues = THEME_OPTIONS.map((o) => o.value);\n\tconst themeLabels = Object.fromEntries(THEME_OPTIONS.map((o) => [o.value, o.label]));\n\tconst localeValues = LOCALE_OPTIONS.map((o) => o.value);\n\tconst localeLabels = Object.fromEntries(LOCALE_OPTIONS.map((o) => [o.value, o.label]));\n'
+
+OLD_SELECTS_RE = re.compile('([ \\t]*)<LocaleSelect label="Language" class="ml-2" bind:value=\\{locale\\}>\\n[ \\t]*\\{#each LOCALE_OPTIONS as opt \\(opt\\.value\\)\\}\\n[ \\t]*<LocaleSelectOption value=\\{opt\\.value\\}>\\{opt\\.label\\}</LocaleSelectOption>\\n[ \\t]*\\{/each\\}\\n[ \\t]*</LocaleSelect>\\n[ \\t]*<ThemeSelect label="Theme" class="ml-2" bind:value=\\{theme\\}>\\n[ \\t]*\\{#each THEME_OPTIONS as opt \\(opt\\.value\\)\\}\\n[ \\t]*<ThemeSelectOption value=\\{opt\\.value\\}>\\{opt\\.label\\}</ThemeSelectOption>\\n[ \\t]*\\{/each\\}\\n[ \\t]*</ThemeSelect>\\n')
+
+
+def new_selects_markup(indent: str) -> str:
+    return (
+        f"{indent}<LocaleSelect\n"
+        f"{indent}\tlabel=\"Language\"\n"
+        f"{indent}\tclass=\"ml-2\"\n"
+        f"{indent}\tlocales={{localeValues}}\n"
+        f"{indent}\tlocaleLabels={{localeLabels}}\n"
+        f"{indent}\tdefaultValue={{DEFAULT_LOCALE}}\n"
+        f"{indent}\tstorageKey={{LOCALE_STORAGE_KEY}}\n"
+        f"{indent}/>\n"
+        f"{indent}<ThemeSelect\n"
+        f"{indent}\tlabel=\"Theme\"\n"
+        f"{indent}\tclass=\"ml-2\"\n"
+        f"{indent}\tthemesUrl={{`${{base}}/themes/`}}\n"
+        f"{indent}\tthemes={{themeValues}}\n"
+        f"{indent}\tthemeLabels={{themeLabels}}\n"
+        f"{indent}\tdefaultValue={{DEFAULT_THEME}}\n"
+        f"{indent}\tstorageKey={{THEME_STORAGE_KEY}}\n"
+        f"{indent}/>\n"
+    )
+
+
+EXTRA_IMPORT_RE = re.compile(
+    r"(\timport ThemeSelectOption from '\$lib/components/ui/ThemeSelectOption\.svelte';\n)"
+    r"((?:\timport \w+ from '\$lib/components/ui/\w+\.svelte';\n)+)"
+    r"(\timport \{ THEME_OPTIONS,)"
+)
+
+
+def process_layout(path: Path, check: bool) -> str:
+    text = path.read_text(encoding="utf-8")
+
+    if "themesUrl=" in text:
+        return "skip-already-done"
+
+    extra_imports = ""
+    if OLD_IMPORTS not in text:
+        m_extra = EXTRA_IMPORT_RE.search(text)
+        if not m_extra:
+            return "skip-nonstandard-imports"
+        extra_imports = m_extra.group(2)
+        text = text[: m_extra.start()] + m_extra.group(1) + m_extra.group(3) + text[m_extra.end() :]
+        if OLD_IMPORTS not in text:
+            return "skip-nonstandard-imports"
+    if BROWSER_IMPORT not in text:
+        return "skip-nonstandard-browser-import"
+    if not STATE_BLOCK_RE.search(text):
+        return "skip-nonstandard-state-block"
+    if LINK_TAG_LITERAL not in text:
+        return "skip-no-link-tag"
+    m = OLD_SELECTS_RE.search(text)
+    if not m:
+        return "skip-nonstandard-selects-markup"
+
+    text = text.replace(OLD_IMPORTS, NEW_IMPORTS + extra_imports, 1)
+    text = text.replace(BROWSER_IMPORT, "", 1)
+    text = STATE_BLOCK_RE.sub(NEW_STATE_BLOCK, text, count=1)
+    text = text.replace(LINK_TAG_LITERAL, "", 1)
+    m2 = OLD_SELECTS_RE.search(text)
+    indent = m2.group(1)
+    text = OLD_SELECTS_RE.sub(lambda _mm: new_selects_markup(indent), text, count=1)
+
+    if not check:
+        path.write_text(text, encoding="utf-8")
+    return "changed"
+
+
+def write_components(form_dir: Path, check: bool) -> None:
+    ui_dir = form_dir / "front-end-with-svelte" / "src" / "lib" / "components" / "ui"
+    for target, content in (
+        (ui_dir / "ThemeSelect.svelte", THEME_SELECT_SVELTE),
+        (ui_dir / "LocaleSelect.svelte", LOCALE_SELECT_SVELTE),
+    ):
+        if check:
+            continue
+        target.parent.mkdir(parents=True, exist_ok=True)
+        target.write_text(content, encoding="utf-8")
+
+    for stale in (ui_dir / "ThemeSelectOption.svelte", ui_dir / "LocaleSelectOption.svelte"):
+        if stale.exists() and not check:
+            stale.unlink()
+
+
+def update_app_css(form_dir: Path, check: bool) -> bool:
+    css_path = form_dir / "front-end-with-svelte" / "src" / "app.css"
+    if not css_path.exists():
+        return False
+    text = css_path.read_text(encoding="utf-8")
+    if APP_CSS_MARKER in text:
+        return False
+    if not check:
+        css_path.write_text(text.rstrip("\n") + "\n" + APP_CSS_BLOCK, encoding="utf-8")
+    return True
+
+
+def main() -> int:
+    parser = argparse.ArgumentParser(description=__doc__)
+    group = parser.add_mutually_exclusive_group(required=True)
+    group.add_argument("--check", action="store_true", help="CI drift check (no writes)")
+    group.add_argument("--apply", action="store_true", help="write changes")
+    args = parser.parse_args()
+
+    layouts = sorted(FORMS_DIR.glob("*/front-end-with-svelte/src/routes/*/+layout.svelte"))
+    stats: dict[str, int] = {}
+    skipped: list[str] = []
+    drift = False
+
+    for layout in layouts:
+        form_dir = layout.parents[4]
+        status = process_layout(layout, args.check)
+        stats[status] = stats.get(status, 0) + 1
+        if status.startswith("skip-nonstandard") or status == "skip-no-link-tag":
+            skipped.append(f"{form_dir.name}: {status}")
+
+        if status in ("changed", "skip-already-done"):
+            write_components(form_dir, args.check)
+            css_changed = update_app_css(form_dir, args.check)
+            if args.check and (status == "changed" or css_changed):
+                drift = True
+
+    print(("CHECK" if args.check else "APPLY") + " run")
+    for k, v in sorted(stats.items()):
+        print(f"  {k}: {v}")
+    if skipped:
+        print("Skipped (needs hand migration):")
+        for s in skipped:
+            print(f"  {s}")
+
+    return 1 if drift else 0
+
+
+if __name__ == "__main__":
+    sys.exit(main())

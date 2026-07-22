@@ -5,26 +5,7 @@
 	const plural = 'qrisk3-cardiovascular-disease-risk-scores';
 </script>
 
-<main class="mx-auto max-w-4xl px-4 py-12">
-	<header class="mb-10">
-		<p class="text-sm font-semibold uppercase tracking-wide text-primary">
-			QRISK3 Cardiovascular Disease Risk Score
-		</p>
-		<h1 class="mt-2 text-3xl font-bold text-base-content">10-year cardiovascular risk calculator</h1>
-		<p class="mt-4 text-base leading-relaxed text-base-content/70">
-			A primary-prevention CVD risk assessment for UK primary care, completed as a single continuous
-			wizard, that applies a sex-specific weighted risk model to demographic, lifestyle, comorbidity,
-			and measurement inputs and returns a <strong>10-year CVD risk percentage</strong>, a risk band,
-			and an estimated heart age.
-		</p>
-		<p
-			class="mt-4 rounded-lg border border-warning/40 bg-warning/10 p-3 text-sm text-base-content/80"
-		>
-			<strong>Representative model.</strong> The scoring engine is a documented approximation in the
-			shape of QRISK3, not the official QRISK3-2017 algorithm. It ranks patients the way QRISK3 would
-			but must not be used for real clinical decision-making.
-		</p>
-	</header>
+<main class="mx-16 px-4 py-12">
 
 	<div class="grid gap-4 sm:grid-cols-2">
 		<a

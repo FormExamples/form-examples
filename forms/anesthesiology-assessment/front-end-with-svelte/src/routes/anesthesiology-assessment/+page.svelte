@@ -6,16 +6,7 @@
 	const plural = 'anesthesiology-assessments';
 </script>
 
-<main class="mx-auto max-w-4xl px-4 py-12">
-	<header class="mb-10">
-		<p class="text-sm font-semibold uppercase tracking-wide text-primary">Anesthesiology Assessment</p>
-		<h1 class="mt-2 text-3xl font-bold text-base-content">Pre-operative anaesthesia evaluation</h1>
-		<p class="mt-4 text-base leading-relaxed text-base-content/70">
-			A UK NHS-aligned pre-operative anaesthesiology assessment, completed as a single continuous
-			wizard, that combines four validated instruments into one composite perioperative risk level and
-			flags safety-critical issues.
-		</p>
-	</header>
+<main class="mx-16 px-4 py-12">
 
 	<div class="grid gap-4 sm:grid-cols-2">
 		<a

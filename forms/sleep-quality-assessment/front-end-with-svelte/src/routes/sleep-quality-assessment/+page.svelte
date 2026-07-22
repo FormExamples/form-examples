@@ -6,17 +6,7 @@
 	const plural = 'sleep-quality-assessments';
 </script>
 
-<main class="mx-auto max-w-4xl px-4 py-12">
-	<header class="mb-10">
-		<p class="text-sm font-semibold uppercase tracking-wide text-primary">Sleep Quality Assessment</p>
-		<h1 class="mt-2 text-3xl font-bold text-base-content">Pittsburgh Sleep Quality Index</h1>
-		<p class="mt-4 text-base leading-relaxed text-base-content/70">
-			A structured, single-page wizard covering sleep habits, latency, duration, efficiency,
-			disturbances, daytime dysfunction, medication use, and medical / lifestyle factors, from which
-			the shared engine computes the PSQI Global Score, classifies sleep quality, and flags
-			safety-critical issues for the clinician.
-		</p>
-	</header>
+<main class="mx-16 px-4 py-12">
 
 	<div class="grid gap-4 sm:grid-cols-2">
 		<a

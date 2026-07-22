@@ -5,20 +5,7 @@
 	const plural = 'curb-65-pneumonia-severity-scores';
 </script>
 
-<main class="mx-auto max-w-4xl px-4 py-12">
-	<header class="mb-10">
-		<p class="text-sm font-semibold uppercase tracking-wide text-primary">
-			CURB-65 Pneumonia Severity Score
-		</p>
-		<h1 class="mt-2 text-3xl font-bold text-base-content">
-			CURB-65 community-acquired pneumonia severity
-		</h1>
-		<p class="mt-4 text-base leading-relaxed text-base-content/70">
-			A clinician-facing severity assessment for adults with community-acquired pneumonia, completed
-			as a single continuous wizard that sums five weighted criteria into a 0-5 score and derives a
-			mortality-risk band and recommended site-of-care disposition.
-		</p>
-	</header>
+<main class="mx-16 px-4 py-12">
 
 	<div class="grid gap-4 sm:grid-cols-2">
 		<a

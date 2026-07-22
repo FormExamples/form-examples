@@ -53,4 +53,10 @@
 	{#if c.recentMI === 'yes'}
 		<NumberInput label="How many weeks ago?" name="miWeeks" bind:value={c.recentMIWeeks} min={0} max={26} required />
 	{/if}
+
+	<Field label="Have you ever had heart or artery surgery?"><RadioGroup label="Have you ever had heart or artery surgery?">{#each yesNo as opt (opt.value)}<label><input type="radio" class="radio-input" name="heartSurgery" value={opt.value} bind:group={c.heartOrArterySurgery}/> {opt.label}</label>{/each}</RadioGroup></Field>
+
+	<Field label="Do you have swollen ankles?"><RadioGroup label="Do you have swollen ankles?">{#each yesNo as opt (opt.value)}<label><input type="radio" class="radio-input" name="swollenAnkles" value={opt.value} bind:group={c.swollenAnkles}/> {opt.label}</label>{/each}</RadioGroup></Field>
+
+	<Field label="Do you get palpitations, blackouts or feel faint?"><RadioGroup label="Do you get palpitations, blackouts or feel faint?">{#each yesNo as opt (opt.value)}<label><input type="radio" class="radio-input" name="palpitations" value={opt.value} bind:group={c.palpitationsOrBlackouts}/> {opt.label}</label>{/each}</RadioGroup></Field>
 </Fieldset>

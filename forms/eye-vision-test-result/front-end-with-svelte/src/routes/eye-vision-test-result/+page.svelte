@@ -4,16 +4,7 @@
 	// dashboard.
 </script>
 
-<main class="mx-auto max-w-4xl px-4 py-12">
-	<header class="mb-10">
-		<p class="text-sm font-semibold uppercase tracking-wide text-primary">Eye Vision Test Result</p>
-		<h1 class="mt-2 text-3xl font-bold text-gray-900">Eye examination reports, graded and ready to share</h1>
-		<p class="mt-4 text-base leading-relaxed text-gray-600">
-			The clinician's wizard records structured findings from an ophthalmic / optometric eye
-			examination, which the shared engine grades along four axes plus safety flags to produce a
-			ready-to-share report.
-		</p>
-	</header>
+<main class="mx-16 px-4 py-12">
 
 	<div class="grid gap-4 sm:grid-cols-2">
 		<a

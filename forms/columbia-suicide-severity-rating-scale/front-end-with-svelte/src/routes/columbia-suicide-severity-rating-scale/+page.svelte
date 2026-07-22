@@ -5,18 +5,7 @@
 	const plural = 'columbia-suicide-severity-rating-scales';
 </script>
 
-<main class="mx-auto max-w-4xl px-4 py-12">
-	<header class="mb-10">
-		<p class="text-sm font-semibold uppercase tracking-wide text-primary">
-			Columbia Suicide Severity Rating Scale
-		</p>
-		<h1 class="mt-2 text-3xl font-bold text-base-content">C-SSRS suicide-risk assessment</h1>
-		<p class="mt-4 text-base leading-relaxed text-base-content/70">
-			A structured suicide-risk assessment, completed as a single continuous wizard, that
-			classifies suicidal ideation, behaviour, and attempt lethality into a Low / Moderate /
-			High risk tier with a proportionate management recommendation.
-		</p>
-	</header>
+<main class="mx-16 px-4 py-12">
 
 	<div class="grid gap-4 sm:grid-cols-2">
 		<a

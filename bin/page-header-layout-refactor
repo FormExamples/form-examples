@@ -1,0 +1,205 @@
+#!/usr/bin/env python3
+"""bin/page-header-layout-refactor -- re-layout each HTML front-end's
+page header so the title sits on the left and the nav link(s) + locale/theme
+select controls sit on the right, instead of the controls row stacked above
+the title.
+
+What changes per form (front-end-with-html/):
+  index.html, dashboard.html:
+    Before:
+      <div class="page-header-inner">
+      <div class="page-header-controls no-print">
+        ...locale-select / theme-select...
+      </div>
+        <h1>Title</h1>
+        <p class="subtitle">Description</p>
+        <p class="subtitle"><a href="...">Nav link -></a></p>   [optional]
+
+    After:
+      <div class="page-header-inner">
+        <div class="page-header-bar">
+          <div class="page-header-title">
+            <h1>Title</h1>
+            <p class="subtitle">Description</p>
+          </div>
+          <div class="page-header-controls no-print">
+            <p class="subtitle page-header-link"><a href="...">Nav link -></a></p>   [optional]
+            ...locale-select / theme-select...
+          </div>
+        </div>
+
+    Whatever follows (progress/step-list on index.html; nothing on
+    dashboard.html) is left untouched.
+
+  css/style.css, css/dashboard.css:
+    Appends a `.page-header-bar` / `.page-header-title` / `.page-header-link`
+    rule block once, if not already present.
+
+Only touches forms whose header matches the standard shape (exactly one
+<h1>, exactly one plain <p class="subtitle">, at most one link
+<p class="subtitle"><a ...>). Forms with a bespoke header (no
+`<header class="page-header">`, e.g. the privacy-notice / tracker pages
+predating the wizard template) are skipped and reported for hand migration.
+
+Usage:
+  bin/page-header-layout-refactor --check   # CI drift check (no writes)
+  bin/page-header-layout-refactor --apply   # write changes
+
+Idempotent: re-running after a full --apply makes no further changes.
+"""
+
+from __future__ import annotations
+
+import argparse
+import re
+import sys
+from pathlib import Path
+
+REPO_ROOT = Path(__file__).resolve().parent.parent
+FORMS_DIR = REPO_ROOT / "forms"
+
+HEADER_BLOCK_RE = re.compile(
+    r'(?P<indent>[ \t]*)<div class="page-header-inner">\s*\n'
+    r'[ \t]*<div class="page-header-controls no-print">(?P<controls>.*?)</div>\s*\n'
+    r'[ \t]*<h1>(?P<h1>.*?)</h1>\s*\n'
+    r'[ \t]*<p class="subtitle">(?P<subtitle>(?:(?!</p>).)*?)</p>\s*\n'
+    r'(?:[ \t]*<p class="subtitle"><a (?P<link_attrs>[^>]*)>(?P<link_text>(?:(?!</a>).)*?)</a></p>\s*\n)?',
+    re.S,
+)
+
+HEADER_SIBLING_RE = re.compile(
+    r'(?P<indent>[ \t]*)<div class="page-header-controls no-print">(?P<controls>.*?)</div>\s*\n'
+    r'[ \t]*<div class="page-header-inner">\s*\n'
+    r'[ \t]*<h1>(?P<h1>.*?)</h1>\s*\n'
+    r'[ \t]*<p class="subtitle">(?P<subtitle>(?:(?!</p>).)*?)</p>\s*\n'
+    r'(?:[ \t]*<p class="subtitle"><a (?P<link_attrs>[^>]*)>(?P<link_text>(?:(?!</a>).)*?)</a></p>\s*\n)?',
+    re.S,
+)
+
+CSS_MARKER = ".page-header-bar {"
+
+CSS_BLOCK = """
+/* Lily: .page-header-bar -- title left, nav link(s) + select controls right. */
+.page-header-bar {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+.page-header-title { flex: 1 1 0%; min-width: 0; }
+.page-header-link { margin: 0 0 0.5rem; text-align: right; }
+"""
+
+
+def new_header_markup(m: re.Match) -> str:
+    indent = m.group("indent")
+    controls = m.group("controls").strip("\n").rstrip()
+    h1 = m.group("h1")
+    subtitle = m.group("subtitle")
+    link_attrs = m.group("link_attrs")
+    link_text = m.group("link_text")
+
+    link_html = ""
+    if link_attrs is not None:
+        link_html = (
+            f'{indent}      <p class="subtitle page-header-link">'
+            f'<a {link_attrs}>{link_text}</a></p>\n'
+        )
+
+    return (
+        f'{indent}<div class="page-header-inner">\n'
+        f'{indent}  <div class="page-header-bar">\n'
+        f'{indent}    <div class="page-header-title">\n'
+        f'{indent}      <h1>{h1}</h1>\n'
+        f'{indent}      <p class="subtitle">{subtitle}</p>\n'
+        f'{indent}    </div>\n'
+        f'{indent}    <div class="page-header-controls no-print">\n'
+        f"{link_html}"
+        f'{indent}      {controls}\n'
+        f'{indent}    </div>\n'
+        f'{indent}  </div>\n'
+    )
+
+
+def process_html(path: Path, check: bool) -> str:
+    text = path.read_text(encoding="utf-8")
+    if 'class="page-header-bar"' in text:
+        return "skip-already-done"
+    if 'class="page-header-controls no-print"' not in text:
+        return "skip-no-header"
+
+    new_text, count = HEADER_BLOCK_RE.subn(new_header_markup, text, count=1)
+    if count == 0:
+        new_text, count = HEADER_SIBLING_RE.subn(new_header_markup, text, count=1)
+    if count == 0:
+        return "skip-nonstandard-shape"
+
+    if not check:
+        path.write_text(new_text, encoding="utf-8")
+    return "changed"
+
+
+def process_css(path: Path, check: bool) -> str:
+    text = path.read_text(encoding="utf-8")
+    if CSS_MARKER in text:
+        return "skip-already-done"
+
+    new_text = text.rstrip("\n") + "\n" + CSS_BLOCK
+    if not check:
+        path.write_text(new_text, encoding="utf-8")
+    return "changed"
+
+
+def main() -> int:
+    parser = argparse.ArgumentParser()
+    mode = parser.add_mutually_exclusive_group(required=True)
+    mode.add_argument("--check", action="store_true")
+    mode.add_argument("--apply", action="store_true")
+    args = parser.parse_args()
+    check = args.check
+
+    counts: dict[str, int] = {}
+    skipped: list[str] = []
+
+    for form_dir in sorted(FORMS_DIR.iterdir()):
+        if not form_dir.is_dir():
+            continue
+        html_dir = form_dir / "front-end-with-html"
+        if not html_dir.is_dir():
+            continue
+
+        for html_name in ("index.html", "dashboard.html"):
+            html_path = html_dir / html_name
+            if not html_path.is_file():
+                continue
+            result = process_html(html_path, check)
+            counts[result] = counts.get(result, 0) + 1
+            if result.startswith("skip-") and result != "skip-already-done":
+                skipped.append(f"{form_dir.name}/{html_name}: {result}")
+
+        for css_name in ("style.css", "dashboard.css"):
+            css_path = html_dir / "css" / css_name
+            if not css_path.is_file():
+                continue
+            result = process_css(css_path, check)
+            key = f"css-{result}"
+            counts[key] = counts.get(key, 0) + 1
+
+    mode_label = "CHECK" if check else "APPLY"
+    print(f"{mode_label} run")
+    for key in sorted(counts):
+        print(f"  {key}: {counts[key]}")
+    if skipped:
+        print("Skipped (needs hand migration):")
+        for line in skipped:
+            print(f"  {line}")
+
+    if check:
+        drift = sum(v for k, v in counts.items() if k in ("changed",) or k == "css-changed")
+        return 1 if drift else 0
+    return 0
+
+
+if __name__ == "__main__":
+    sys.exit(main())

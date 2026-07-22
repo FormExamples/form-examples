@@ -1,0 +1,575 @@
+#!/usr/bin/env python3
+"""bin/svelte-text-size-select-refactor -- add the Lily
+lily-design-system-svelte-text-size-select headless control (a third
+header switcher, alongside LocaleSelect/ThemeSelect) to every form's
+Svelte front-end.
+
+What changes per form (front-end-with-svelte/):
+  - src/lib/components/ui/TextSizeSelect.svelte  -> new (vendored contract
+    copy of lily-design-system-svelte-text-size-select; no app-specific
+    logic, byte-identical across forms)
+  - src/lib/config/text-sizes.ts -> new (TEXT_SIZE_OPTIONS, DEFAULT_TEXT_SIZE,
+    TEXT_SIZE_STORAGE_KEY, storage key namespaced per form slug)
+  - src/app.css -> appends the `:root[data-text-size="..."]` font-size
+    mapping and `.text-size-select` baseline CSS once (headless: no default
+    styling otherwise; no `lily-` prefix needed since the vendored theme
+    catalogue in static/themes/*.css does not define this class, unlike
+    theme-select/locale-select)
+  - src/routes/<slug>/+layout.svelte -> imports TextSizeSelect + the new
+    config, derives textSizeValues/textSizeLabels alongside the existing
+    themeValues/localeValues, and renders <TextSizeSelect .../> immediately
+    after <ThemeSelect .../> in the header controls row
+
+Usage:
+  bin/svelte-text-size-select-refactor --check   # CI drift check (no writes)
+  bin/svelte-text-size-select-refactor --apply   # write changes
+
+Only touches forms whose +layout.svelte ends its <ThemeSelect> invocation
+with the standard `storageKey={THEME_STORAGE_KEY}` / `/>` shape produced by
+the theme/locale-select rollout. Forms with a bespoke header (currently
+medical-language-speaking-assessment-for-cymraeg, which drives LocaleSelect
+from its own i18n store) are skipped and reported for hand migration.
+
+Idempotent: re-running after a full --apply makes no further changes.
+"""
+
+from __future__ import annotations
+
+import argparse
+import re
+import sys
+from pathlib import Path
+
+REPO_ROOT = Path(__file__).resolve().parent.parent
+FORMS_DIR = REPO_ROOT / "forms"
+
+TEXT_SIZE_SELECT_SVELTE = '''<script lang="ts" module>
+\t// Lily Design System — TextSizeSelect (headless button + listbox).
+\t// Mirrors lily-design-system-svelte-helpers/lily-design-system-svelte-text-size-select:
+\t// a button that opens a listbox for choosing a reading text size, setting
+\t// `data-text-size` on a target element (default document.documentElement).
+\t// Supports WCAG 2.2 1.4.4 (Resize Text) / 1.4.12 (Text Spacing).
+\timport type { Snippet } from 'svelte';
+
+\t/** Default button glyph: U+0041 LATIN CAPITAL LETTER A. */
+\texport const LATIN_CAPITAL_LETTER_A = 'A';
+
+\texport type ChildArgs = {
+\t\tvalue: string;
+\t\topen: boolean;
+\t\tlabelFor: (size: string) => string;
+\t};
+
+\texport type Props = {
+\t\tlabel: string;
+\t\tsizes: string[];
+\t\tvalue?: string;
+\t\tdefaultValue?: string;
+\t\tstorageKey?: string;
+\t\tname?: string;
+\t\ttarget?: HTMLElement | null;
+\t\tsizeLabels?: Record<string, string>;
+\t\tchildren?: Snippet<[ChildArgs]>;
+\t\tonChange?: (size: string) => void;
+\t\tclass?: string;
+\t\t[key: string]: unknown;
+\t};
+
+\t/** Title-case each hyphen-separated word: "x-large" -> "X Large". */
+\texport function sizeName(size: string): string {
+\t\treturn size
+\t\t\t.split('-')
+\t\t\t.map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+\t\t\t.join(' ');
+\t}
+
+\tlet uid = 0;
+\t/** Stable per-instance id prefix; SSR-safe (no Math.random / Date.now). */
+\texport function nextTextSizeSelectId(): string {
+\t\tuid += 1;
+\t\treturn `text-size-select-${uid}`;
+\t}
+</script>
+
+<script lang="ts">
+\tlet {
+\t\tclass: className = '',
+\t\tlabel,
+\t\tsizes,
+\t\tvalue = $bindable(''),
+\t\tdefaultValue,
+\t\tstorageKey,
+\t\tname = 'text-size',
+\t\ttarget,
+\t\tsizeLabels = {},
+\t\tchildren,
+\t\tonChange,
+\t\t...restProps
+\t}: Props = $props();
+
+\tconst baseId = nextTextSizeSelectId();
+\tconst listId = `${baseId}-list`;
+\tconst optionId = (i: number) => `${baseId}-option-${i}`;
+
+\tlet open = $state(false);
+\tlet activeIndex = $state(-1);
+\tlet buttonEl: HTMLButtonElement | undefined = $state();
+\tlet listEl: HTMLUListElement | undefined = $state();
+\tlet rootEl: HTMLDivElement | undefined = $state();
+
+\t// Typeahead buffer: APG listbox behaviour. Reset after a pause.
+\tlet typeahead = '';
+\tlet typeaheadTimer: ReturnType<typeof setTimeout> | undefined;
+
+\tfunction labelFor(size: string): string {
+\t\tif (size in sizeLabels) return sizeLabels[size];
+\t\treturn sizeName(size);
+\t}
+
+\tfunction applySize(slug: string): void {
+\t\tif (typeof document === 'undefined' || !slug) return;
+\t\t(target ?? document.documentElement).setAttribute('data-text-size', slug);
+\t\tif (storageKey) {
+\t\t\ttry {
+\t\t\t\tlocalStorage.setItem(storageKey, slug);
+\t\t\t} catch {
+\t\t\t\t// ignore quota / privacy errors
+\t\t\t}
+\t\t}
+\t\tonChange?.(slug);
+\t}
+
+\tfunction setSize(slug: string): void {
+\t\tvalue = slug;
+\t}
+
+\tfunction openList(startIndex?: number): void {
+\t\tconst selected = sizes.indexOf(value);
+\t\tactiveIndex = startIndex ?? (selected >= 0 ? selected : 0);
+\t\topen = true;
+\t\t// Focus stays on the listbox; the active option is conveyed via
+\t\t// aria-activedescendant, per the APG listbox pattern.
+\t\tqueueMicrotask(() => {
+\t\t\tlistEl?.focus();
+\t\t\tscrollActiveIntoView();
+\t\t});
+\t}
+
+\tfunction closeList(refocus = true): void {
+\t\tif (!open) return;
+\t\topen = false;
+\t\tactiveIndex = -1;
+\t\tif (refocus) queueMicrotask(() => buttonEl?.focus());
+\t}
+
+\tfunction choose(index: number): void {
+\t\tconst slug = sizes[index];
+\t\tif (slug) setSize(slug);
+\t\tcloseList();
+\t}
+
+\tfunction scrollActiveIntoView(): void {
+\t\tif (activeIndex < 0 || !listEl) return;
+\t\tconst el = listEl.querySelector<HTMLElement>(`#${CSS.escape(optionId(activeIndex))}`);
+\t\tel?.scrollIntoView?.({ block: 'nearest' });
+\t}
+
+\tfunction moveActive(delta: number): void {
+\t\tif (sizes.length === 0) return;
+\t\tactiveIndex = Math.min(Math.max(activeIndex + delta, 0), sizes.length - 1);
+\t\tscrollActiveIntoView();
+\t}
+
+\tfunction runTypeahead(char: string): void {
+\t\ttypeahead += char.toLowerCase();
+\t\tclearTimeout(typeaheadTimer);
+\t\ttypeaheadTimer = setTimeout(() => (typeahead = ''), 500);
+\t\tconst from = activeIndex < 0 ? 0 : activeIndex;
+\t\tfor (let n = 0; n < sizes.length; n++) {
+\t\t\tconst i = (from + n) % sizes.length;
+\t\t\tif (labelFor(sizes[i]).toLowerCase().startsWith(typeahead)) {
+\t\t\t\tactiveIndex = i;
+\t\t\t\tscrollActiveIntoView();
+\t\t\t\treturn;
+\t\t\t}
+\t\t}
+\t}
+
+\tfunction onButtonKeydown(event: KeyboardEvent): void {
+\t\tswitch (event.key) {
+\t\t\tcase 'ArrowDown':
+\t\t\tcase 'Enter':
+\t\t\tcase ' ':
+\t\t\t\tevent.preventDefault();
+\t\t\t\topenList();
+\t\t\t\tbreak;
+\t\t\tcase 'ArrowUp':
+\t\t\t\tevent.preventDefault();
+\t\t\t\topenList(sizes.length - 1);
+\t\t\t\tbreak;
+\t\t}
+\t}
+
+\tfunction onListKeydown(event: KeyboardEvent): void {
+\t\tswitch (event.key) {
+\t\t\tcase 'ArrowDown':
+\t\t\t\tevent.preventDefault();
+\t\t\t\tmoveActive(1);
+\t\t\t\tbreak;
+\t\t\tcase 'ArrowUp':
+\t\t\t\tevent.preventDefault();
+\t\t\t\tmoveActive(-1);
+\t\t\t\tbreak;
+\t\t\tcase 'Home':
+\t\t\t\tevent.preventDefault();
+\t\t\t\tactiveIndex = 0;
+\t\t\t\tscrollActiveIntoView();
+\t\t\t\tbreak;
+\t\t\tcase 'End':
+\t\t\t\tevent.preventDefault();
+\t\t\t\tactiveIndex = sizes.length - 1;
+\t\t\t\tscrollActiveIntoView();
+\t\t\t\tbreak;
+\t\t\tcase 'Enter':
+\t\t\tcase ' ':
+\t\t\t\tevent.preventDefault();
+\t\t\t\tif (activeIndex >= 0) choose(activeIndex);
+\t\t\t\tbreak;
+\t\t\tcase 'Escape':
+\t\t\t\tevent.preventDefault();
+\t\t\t\tcloseList();
+\t\t\t\tbreak;
+\t\t\tcase 'Tab':
+\t\t\t\t// Tab moves on: close without stealing focus back.
+\t\t\t\tcloseList(false);
+\t\t\t\tbreak;
+\t\t\tdefault:
+\t\t\t\tif (event.key.length === 1 && !event.ctrlKey && !event.metaKey && !event.altKey) {
+\t\t\t\t\trunTypeahead(event.key);
+\t\t\t\t}
+\t\t}
+\t}
+
+\tfunction onRootFocusOut(event: FocusEvent): void {
+\t\tconst next = event.relatedTarget as Node | null;
+\t\tif (next && rootEl?.contains(next)) return;
+\t\tcloseList(false);
+\t}
+
+\tlet initialised = false;
+
+\t$effect(() => {
+\t\tconst current = value;
+
+\t\tif (!initialised) {
+\t\t\tinitialised = true;
+\t\t\tlet initial = current;
+\t\t\tif (!initial && storageKey) {
+\t\t\t\ttry {
+\t\t\t\t\tinitial = localStorage.getItem(storageKey) ?? '';
+\t\t\t\t} catch {
+\t\t\t\t\t// ignore privacy errors
+\t\t\t\t}
+\t\t\t}
+\t\t\tif (!initial) {
+\t\t\t\tinitial = defaultValue ?? (sizes.includes('medium') ? 'medium' : sizes[0]) ?? '';
+\t\t\t}
+\t\t\tif (initial && initial !== current) {
+\t\t\t\tvalue = initial;
+\t\t\t\treturn;
+\t\t\t}
+\t\t}
+
+\t\tif (current) applySize(current);
+\t});
+</script>
+
+<svelte:document
+\tonclick={(event) => {
+\t\tif (!open) return;
+\t\tconst t = event.target as Node | null;
+\t\tif (t && rootEl && !rootEl.contains(t)) closeList(false);
+\t}}
+/>
+
+<div
+\tbind:this={rootEl}
+\tclass={`text-size-select ${className}`.trim()}
+\tonfocusout={onRootFocusOut}
+\t{...restProps}
+>
+\t<input type="hidden" {name} {value} />
+
+\t<button
+\t\tbind:this={buttonEl}
+\t\ttype="button"
+\t\tclass="text-size-select-button"
+\t\taria-label={label}
+\t\taria-haspopup="listbox"
+\t\taria-expanded={open}
+\t\taria-controls={listId}
+\t\tonclick={() => (open ? closeList() : openList())}
+\t\tonkeydown={onButtonKeydown}
+\t>
+\t\t{#if children}
+\t\t\t{@render children({ value: value ?? '', open, labelFor })}
+\t\t{:else}
+\t\t\t<span class="text-size-select-icon" aria-hidden="true">{LATIN_CAPITAL_LETTER_A}</span>
+\t\t{/if}
+\t</button>
+
+\t<ul
+\t\tbind:this={listEl}
+\t\tclass="text-size-select-list"
+\t\tid={listId}
+\t\trole="listbox"
+\t\taria-label={label}
+\t\taria-activedescendant={open && activeIndex >= 0 ? optionId(activeIndex) : undefined}
+\t\ttabindex="-1"
+\t\thidden={!open}
+\t\tonkeydown={onListKeydown}
+\t>
+\t\t{#each sizes as size, i (size)}
+\t\t\t<li
+\t\t\t\tclass="text-size-select-option"
+\t\t\t\tid={optionId(i)}
+\t\t\t\trole="option"
+\t\t\t\taria-selected={size === value}
+\t\t\t\tdata-active={i === activeIndex ? '' : undefined}
+\t\t\t\tonclick={() => choose(i)}
+\t\t\t>
+\t\t\t\t{labelFor(size)}
+\t\t\t</li>
+\t\t{/each}
+\t</ul>
+</div>
+'''
+
+TEXT_SIZES_TS_TEMPLATE = """// The Lily text-size catalogue: WCAG 2.2 1.4.4 (Resize Text) support.
+// Mapped to real typography via `:root[data-text-size]` rules in app.css.
+
+/** A selectable reading text size: the slug and a human-readable label. */
+export interface TextSizeOption {
+\tvalue: string;
+\tlabel: string;
+}
+
+/** The text sizes offered by the switcher. */
+export const TEXT_SIZE_OPTIONS: TextSizeOption[] = [
+\t{ value: 'small', label: 'Small' },
+\t{ value: 'medium', label: 'Medium' },
+\t{ value: 'large', label: 'Large' },
+\t{ value: 'x-large', label: 'X Large' }
+];
+
+/** The gold-standard default text size. */
+export const DEFAULT_TEXT_SIZE = 'medium';
+
+/** localStorage key for the persisted text-size selection. */
+export const TEXT_SIZE_STORAGE_KEY = '__SLUG__.text-size.v1';
+"""
+
+APP_CSS_MARKER = '[data-text-size="small"]'
+
+APP_CSS_BLOCK = """
+/* Lily: text-size-select -- WCAG 2.2 1.4.4 (Resize Text) / 1.4.12 (Text Spacing). */
+:root[data-text-size="small"]   { font-size: 87.5%; }
+:root[data-text-size="medium"]  { font-size: 100%; }
+:root[data-text-size="large"]   { font-size: 112.5%; }
+:root[data-text-size="x-large"] { font-size: 125%; }
+
+/* Lily: .text-size-select (headless button + listbox). No upstream theme
+   catalogue collision (unlike theme-select/locale-select), so no `lily-`
+   prefix is needed here. */
+.text-size-select {
+\tposition: relative;
+\tdisplay: inline-block;
+}
+.text-size-select-button {
+\tpadding: 0.25rem 0.5rem;
+\tborder: 1px solid var(--color-border);
+\tborder-radius: 0.25rem;
+\tbackground: var(--color-surface);
+\tcolor: inherit;
+\tcursor: pointer;
+\tline-height: 1;
+\tfont-family: system-ui, "Segoe UI Symbol", "Apple Symbols", sans-serif;
+\tfont-size: 1.125em;
+}
+.text-size-select-button:focus-visible {
+\toutline: 2px solid var(--color-focus);
+\toutline-offset: 2px;
+}
+.text-size-select-list {
+\tposition: absolute;
+\tz-index: 10;
+\tinset-block-start: 100%;
+\tinset-inline-start: 0;
+\tmargin: 0.25rem 0 0;
+\tpadding: 0;
+\tlist-style: none;
+\tmin-inline-size: 12rem;
+\tmax-block-size: 20rem;
+\toverflow-y: auto;
+\tbackground: var(--color-surface);
+\tborder: 1px solid var(--color-border);
+\tborder-radius: 0.375rem;
+\tbox-shadow: 0 4px 6px -1px rgba(0,0,0,0.1), 0 2px 4px -2px rgba(0,0,0,0.1);
+}
+.text-size-select-list[hidden] { display: none; }
+.text-size-select-option {
+\tpadding: 0.25rem 0.75rem;
+\tcursor: pointer;
+}
+.text-size-select-option[data-active] {
+\tbackground: var(--color-primary-light);
+}
+.text-size-select-option[aria-selected="true"] {
+\tfont-weight: 600;
+}
+"""
+
+LOCALE_IMPORT_RE = re.compile(
+    r"(\timport \{ LOCALE_OPTIONS, LOCALE_STORAGE_KEY, DEFAULT_LOCALE \} from '\$lib/config/locales';\n)"
+)
+TEXT_SIZE_IMPORT = (
+    "\timport TextSizeSelect from '$lib/components/ui/TextSizeSelect.svelte';\n"
+    "\timport { TEXT_SIZE_OPTIONS, TEXT_SIZE_STORAGE_KEY, DEFAULT_TEXT_SIZE } from '$lib/config/text-sizes';\n"
+)
+
+LOCALE_LABELS_RE = re.compile(
+    r"(\tconst localeLabels = Object\.fromEntries\(LOCALE_OPTIONS\.map\(\(o\) => \[o\.value, o\.label\]\)\);\n)"
+)
+TEXT_SIZE_DERIVED = (
+    "\tconst textSizeValues = TEXT_SIZE_OPTIONS.map((o) => o.value);\n"
+    "\tconst textSizeLabels = Object.fromEntries(TEXT_SIZE_OPTIONS.map((o) => [o.value, o.label]));\n"
+)
+
+THEME_SELECT_TAG_RE = re.compile(
+    r'([ \t]*)<ThemeSelect\b(?:(?!/>).)*?storageKey=\{THEME_STORAGE_KEY\}\s*\n[ \t]*/>\n',
+    re.S,
+)
+
+
+def text_size_select_markup(indent: str) -> str:
+    return (
+        f"{indent}<TextSizeSelect\n"
+        f'{indent}\tlabel="Text size"\n'
+        f'{indent}\tclass="ml-2"\n'
+        f"{indent}\tsizes={{textSizeValues}}\n"
+        f"{indent}\tsizeLabels={{textSizeLabels}}\n"
+        f"{indent}\tdefaultValue={{DEFAULT_TEXT_SIZE}}\n"
+        f"{indent}\tstorageKey={{TEXT_SIZE_STORAGE_KEY}}\n"
+        f"{indent}/>\n"
+    )
+
+
+def process_layout(path: Path, check: bool) -> str:
+    text = path.read_text(encoding="utf-8")
+    if "TextSizeSelect" in text:
+        return "skip-already-done"
+    if "LOCALE_STORAGE_KEY, DEFAULT_LOCALE } from '$lib/config/locales'" not in text:
+        return "skip-nonstandard-imports"
+
+    text, n1 = LOCALE_IMPORT_RE.subn(lambda m: m.group(1) + TEXT_SIZE_IMPORT, text, count=1)
+    if n1 == 0:
+        return "skip-nonstandard-imports"
+
+    text, n2 = LOCALE_LABELS_RE.subn(lambda m: m.group(1) + TEXT_SIZE_DERIVED, text, count=1)
+    if n2 == 0:
+        return "skip-nonstandard-derived"
+
+    def theme_repl(m: re.Match) -> str:
+        indent = m.group(1)
+        return m.group(0) + text_size_select_markup(indent)
+
+    text, n3 = THEME_SELECT_TAG_RE.subn(theme_repl, text, count=1)
+    if n3 == 0:
+        return "skip-nonstandard-markup"
+
+    if not check:
+        path.write_text(text, encoding="utf-8")
+    return "changed"
+
+
+def process_component(path: Path, check: bool) -> str:
+    if path.exists():
+        return "skip-already-done"
+    if not check:
+        path.write_text(TEXT_SIZE_SELECT_SVELTE, encoding="utf-8")
+    return "changed"
+
+
+def process_config(path: Path, check: bool, slug: str) -> str:
+    if path.exists():
+        return "skip-already-done"
+    if not check:
+        path.write_text(TEXT_SIZES_TS_TEMPLATE.replace("__SLUG__", slug), encoding="utf-8")
+    return "changed"
+
+
+def process_css(path: Path, check: bool) -> str:
+    text = path.read_text(encoding="utf-8")
+    if APP_CSS_MARKER in text:
+        return "skip-already-done"
+    new_text = text.rstrip("\n") + "\n" + APP_CSS_BLOCK
+    if not check:
+        path.write_text(new_text, encoding="utf-8")
+    return "changed"
+
+
+def main() -> int:
+    parser = argparse.ArgumentParser()
+    mode = parser.add_mutually_exclusive_group(required=True)
+    mode.add_argument("--check", action="store_true")
+    mode.add_argument("--apply", action="store_true")
+    args = parser.parse_args()
+    check = args.check
+
+    counts: dict[str, int] = {}
+    skipped: list[str] = []
+
+    for form_dir in sorted(FORMS_DIR.iterdir()):
+        if not form_dir.is_dir():
+            continue
+        svelte_dir = form_dir / "front-end-with-svelte"
+        if not svelte_dir.is_dir():
+            continue
+        slug = form_dir.name
+
+        component_path = svelte_dir / "src/lib/components/ui/TextSizeSelect.svelte"
+        r = process_component(component_path, check)
+        counts[f"component-{r}"] = counts.get(f"component-{r}", 0) + 1
+
+        config_path = svelte_dir / "src/lib/config/text-sizes.ts"
+        r = process_config(config_path, check, slug)
+        counts[f"config-{r}"] = counts.get(f"config-{r}", 0) + 1
+
+        css_path = svelte_dir / "src/app.css"
+        if css_path.is_file():
+            r = process_css(css_path, check)
+            counts[f"css-{r}"] = counts.get(f"css-{r}", 0) + 1
+
+        for layout_path in svelte_dir.glob("src/routes/*/+layout.svelte"):
+            r = process_layout(layout_path, check)
+            counts[f"layout-{r}"] = counts.get(f"layout-{r}", 0) + 1
+            if r.startswith("skip-") and r != "skip-already-done":
+                skipped.append(f"{slug}/{layout_path.name}: {r}")
+
+    mode_label = "CHECK" if check else "APPLY"
+    print(f"{mode_label} run")
+    for key in sorted(counts):
+        print(f"  {key}: {counts[key]}")
+    if skipped:
+        print("Skipped (needs hand migration):")
+        for line in skipped:
+            print(f"  {line}")
+
+    if check:
+        drift = sum(v for k, v in counts.items() if k.endswith("-changed"))
+        return 1 if drift else 0
+    return 0
+
+
+if __name__ == "__main__":
+    sys.exit(main())

@@ -4,17 +4,7 @@
 	// dashboard.
 </script>
 
-<main class="mx-auto max-w-4xl px-4 py-12">
-	<header class="mb-10">
-		<p class="text-sm font-semibold uppercase tracking-wide text-primary">Colonoscopy Test Result</p>
-		<h1 class="mt-2 text-3xl font-bold text-gray-900">Colonoscopy report</h1>
-		<p class="mt-4 text-base leading-relaxed text-gray-600">
-			After a colonoscopy, this report captures what the endoscopist found — procedure and
-			extent, findings, polyps, and any biopsy, polypectomy, or complication — and grades it on
-			four independent axes with an automatic critical-result alert for findings such as an
-			obstructing or suspicious mass or a perforation.
-		</p>
-	</header>
+<main class="mx-16 px-4 py-12">
 
 	<div class="grid gap-4 sm:grid-cols-2">
 		<a

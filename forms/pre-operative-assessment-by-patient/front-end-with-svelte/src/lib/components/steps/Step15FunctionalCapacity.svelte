@@ -42,4 +42,9 @@
 	<Field label="Do you use any mobility aids (wheelchair, walker, stick)?"><RadioGroup label="Do you use any mobility aids (wheelchair, walker, stick)?">{#each yesNo as opt (opt.value)}<label><input type="radio" class="radio-input" name="mobilityAids" value={opt.value} bind:group={f.mobilityAids}/> {opt.label}</label>{/each}</RadioGroup></Field>
 
 	<Field label="Has your ability to exercise declined recently?"><RadioGroup label="Has your ability to exercise declined recently?">{#each yesNo as opt (opt.value)}<label><input type="radio" class="radio-input" name="recentDecline" value={opt.value} bind:group={f.recentDecline}/> {opt.label}</label>{/each}</RadioGroup></Field>
+
+	<p class="hint">Sensory and balance</p>
+	<Field label="Do you have any problems with your hearing?"><RadioGroup label="Do you have any problems with your hearing?">{#each yesNo as opt (opt.value)}<label><input type="radio" class="radio-input" name="hearing" value={opt.value} bind:group={f.hearingProblems}/> {opt.label}</label>{/each}</RadioGroup></Field>
+	<Field label="Do you have any problems with your eyesight?"><RadioGroup label="Do you have any problems with your eyesight?">{#each yesNo as opt (opt.value)}<label><input type="radio" class="radio-input" name="vision" value={opt.value} bind:group={f.visionProblems}/> {opt.label}</label>{/each}</RadioGroup></Field>
+	<Field label="Do you have any balance issues?"><RadioGroup label="Do you have any balance issues?">{#each yesNo as opt (opt.value)}<label><input type="radio" class="radio-input" name="balance" value={opt.value} bind:group={f.balanceIssues}/> {opt.label}</label>{/each}</RadioGroup></Field>
 </Fieldset>

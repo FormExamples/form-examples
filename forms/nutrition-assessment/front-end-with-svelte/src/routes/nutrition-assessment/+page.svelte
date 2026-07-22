@@ -6,18 +6,7 @@
 	const plural = 'nutrition-assessments';
 </script>
 
-<main class="mx-auto max-w-4xl px-4 py-12">
-	<header class="mb-10">
-		<p class="text-sm font-semibold uppercase tracking-wide text-primary">Nutrition Assessment</p>
-		<h1 class="mt-2 text-3xl font-bold text-base-content">Nutritional status evaluation</h1>
-		<p class="mt-4 text-base leading-relaxed text-base-content/70">
-			A comprehensive nutritional evaluation — covering demographics, anthropometric measurements,
-			dietary history, MUST screening, swallowing and oral health, gastrointestinal function, food
-			allergies and intolerances, nutritional requirements, current nutritional support, and care
-			plan — that the shared engine scores with the Malnutrition Universal Screening Tool (MUST)
-			to derive an overall severity level and flag issues for the dietitian or clinician.
-		</p>
-	</header>
+<main class="mx-16 px-4 py-12">
 
 	<div class="grid gap-4 sm:grid-cols-2">
 		<a

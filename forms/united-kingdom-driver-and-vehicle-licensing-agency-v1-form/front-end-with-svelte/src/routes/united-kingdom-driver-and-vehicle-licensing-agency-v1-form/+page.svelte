@@ -5,22 +5,7 @@
 	const plural = 'united-kingdom-driver-and-vehicle-licensing-agency-v1-forms';
 </script>
 
-<main class="mx-auto max-w-4xl px-4 py-12">
-	<header class="mb-10">
-		<p class="text-sm font-semibold uppercase tracking-wide text-primary">UK DVLA V1 Form</p>
-		<h1 class="mt-2 text-3xl font-bold text-base-content">
-			Confidential medical information — vision
-		</h1>
-		<p class="mt-4 text-base leading-relaxed text-base-content/70">
-			The DVLA V1 form is a single continuous wizard — personal details, healthcare professionals,
-			and eleven vision questions covering the eyesight standard, monocular vision, visual field,
-			glaucoma, retinitis pigmentosa, laser treatment, blepharospasm, night blindness, double vision,
-			other conditions, and recent contact, plus the applicant's authorisation — that collects the
-			vision self-declaration the UK Driver and Vehicle Licensing Agency requires to assess fitness
-			to drive, validated by a shared engine for completeness (honouring the form's conditional
-			logic) and flagged for clinician review.
-		</p>
-	</header>
+<main class="mx-16 px-4 py-12">
 
 	<div class="grid gap-4 sm:grid-cols-2">
 		<a

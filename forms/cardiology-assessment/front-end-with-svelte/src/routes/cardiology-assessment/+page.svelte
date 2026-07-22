@@ -6,19 +6,7 @@
 	const plural = 'cardiology-assessments';
 </script>
 
-<main class="mx-auto max-w-4xl px-4 py-12">
-	<header class="mb-10">
-		<p class="text-sm font-semibold uppercase tracking-wide text-primary">Cardiology Assessment</p>
-		<h1 class="mt-2 text-3xl font-bold text-base-content">Cardiovascular evaluation</h1>
-		<p class="mt-4 text-base leading-relaxed text-base-content/70">
-			A comprehensive cardiovascular evaluation — demographics, chest pain / angina, heart-failure
-			symptoms, cardiac history, arrhythmia and conduction, risk factors, diagnostic results,
-			medications, allergies, and social / functional status — completed as a single continuous
-			wizard whose shared engine grades the patient with the CCS Angina Classification and the NYHA
-			Heart Failure Classification, derives an overall cardiac risk level, and flags issues for the
-			cardiologist.
-		</p>
-	</header>
+<main class="mx-16 px-4 py-12">
 
 	<div class="grid gap-4 sm:grid-cols-2">
 		<a

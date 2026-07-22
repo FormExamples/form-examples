@@ -74,22 +74,20 @@
 	}
 </script>
 
-<main class="mx-auto max-w-3xl px-4 py-6">
-	<header class="mb-6 no-print">
-		<h1 class="text-2xl font-bold text-base-content">
-			{isNew ? 'New diabetic eye screening' : `Diabetic eye screening ${id}`}
-		</h1>
-		<p class="mt-1 text-sm text-base-content/70">
-			Complete the five sections; the worst-eye classification and recall pathway are computed on
-			submit. This is a classification form — there is no numeric score.
-		</p>
-		<Progress label="Screening sections" value={TOTAL_STEPS} max={TOTAL_STEPS} />
-		<StepList label="Screening sections" current={TOTAL_STEPS}>
-			{#each steps as step (step.number)}
-				<StepListItem status="finished" label={step.title}>{step.shortTitle}</StepListItem>
-			{/each}
-		</StepList>
-	</header>
+<main class="mx-16 px-4 py-6">
+	<h1 class="text-2xl font-bold text-base-content">
+		{isNew ? 'New diabetic eye screening' : `Diabetic eye screening ${id}`}
+	</h1>
+	<p class="mt-1 text-sm text-base-content/70">
+		Complete the five sections; the worst-eye classification and recall pathway are computed on
+		submit. This is a classification form — there is no numeric score.
+	</p>
+	<Progress label="Screening sections" value={TOTAL_STEPS} max={TOTAL_STEPS} />
+	<StepList label="Screening sections" current={TOTAL_STEPS}>
+		{#each steps as step (step.number)}
+			<StepListItem status="finished" label={step.title}>{step.shortTitle}</StepListItem>
+		{/each}
+	</StepList>
 
 	{#if errors.length > 0}
 		<ErrorSummary title="Please fix the following before submitting" class="mb-6">

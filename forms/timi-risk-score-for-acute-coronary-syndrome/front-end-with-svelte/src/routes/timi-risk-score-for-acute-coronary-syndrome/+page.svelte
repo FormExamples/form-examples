@@ -5,23 +5,7 @@
 	const plural = 'timi-risk-score-for-acute-coronary-syndromes';
 </script>
 
-<main class="mx-auto max-w-4xl px-4 py-12">
-	<header class="mb-10">
-		<p class="text-sm font-semibold uppercase tracking-wide text-primary">
-			TIMI Risk Score for Acute Coronary Syndrome
-		</p>
-		<h1 class="mt-2 text-3xl font-bold text-base-content">
-			TIMI UA/NSTEMI bedside risk-stratification score
-		</h1>
-		<p class="mt-4 text-base leading-relaxed text-base-content/70">
-			A bedside risk-stratification tool, completed as a single continuous wizard, that scores adults
-			presenting with unstable angina or NSTEMI on seven clinical criteria — age &ge; 65, &ge; 3
-			coronary risk factors, known CAD, aspirin in the prior 7 days, &ge; 2 anginal episodes in 24 h,
-			ST deviation &ge; 0.5 mm, and a positive cardiac marker — from which the shared engine sums a
-			0-to-7 total, derives the risk band, and maps it to the 14-day risk of death, MI, or urgent
-			revascularisation.
-		</p>
-	</header>
+<main class="mx-16 px-4 py-12">
 
 	<div class="grid gap-4 sm:grid-cols-2">
 		<a

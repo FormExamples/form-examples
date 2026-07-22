@@ -6,19 +6,7 @@
 	const plural = 'blood-test-requests';
 </script>
 
-<main class="mx-auto max-w-4xl px-4 py-12">
-	<header class="mb-10">
-		<p class="text-sm font-semibold uppercase tracking-wide text-primary">Blood Test Request</p>
-		<h1 class="mt-2 text-3xl font-bold text-base-content">
-			Pathology / phlebotomy blood-test order
-		</h1>
-		<p class="mt-4 text-base leading-relaxed text-base-content/70">
-			A UK NHS–aligned pathology blood-test order that a clinician completes to request one or more
-			blood-test panels for a patient and receive a four-axis vetting grade — appropriateness,
-			pre-analytical / specimen safety, request completeness, and triage priority — plus
-			safety-critical flags to support the laboratory's accept / query / reject decision.
-		</p>
-	</header>
+<main class="mx-16 px-4 py-12">
 
 	<div class="grid gap-4 sm:grid-cols-2">
 		<a

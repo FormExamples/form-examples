@@ -37,4 +37,9 @@
 			{ value: '3', label: 'Class 3' },
 			{ value: '4', label: 'Class 4' }
 		] as opt (opt.value)}<option value={opt.value}>{opt.label}</option>{/each}</Select></Field>
+
+	<Field label="Do you have arthritis or other joint problems?"><RadioGroup label="Do you have arthritis or other joint problems?">{#each yesNo as opt (opt.value)}<label><input type="radio" class="radio-input" name="jointProblems" value={opt.value} bind:group={m.jointOrArthritisProblems}/> {opt.label}</label>{/each}</RadioGroup></Field>
+	<Field label="Do you have back or neck problems?"><RadioGroup label="Do you have back or neck problems?">{#each yesNo as opt (opt.value)}<label><input type="radio" class="radio-input" name="backNeck" value={opt.value} bind:group={m.backOrNeckProblems}/> {opt.label}</label>{/each}</RadioGroup></Field>
+	<Field label="Do you have any skin conditions (e.g. dermatitis, thin skin, eczema)?"><RadioGroup label="Do you have any skin conditions?">{#each yesNo as opt (opt.value)}<label><input type="radio" class="radio-input" name="skinConditions" value={opt.value} bind:group={m.skinConditions}/> {opt.label}</label>{/each}</RadioGroup></Field>
+	<Field label="Are you at risk of pressure sores, or have you had them in the past?"><RadioGroup label="Are you at risk of pressure sores, or have you had them in the past?">{#each yesNo as opt (opt.value)}<label><input type="radio" class="radio-input" name="pressureSore" value={opt.value} bind:group={m.pressureSoreRisk}/> {opt.label}</label>{/each}</RadioGroup></Field>
 </Fieldset>

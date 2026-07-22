@@ -6,18 +6,7 @@
 	const plural = 'nuclear-medicine-test-requests';
 </script>
 
-<main class="mx-auto max-w-4xl px-4 py-12">
-	<header class="mb-10">
-		<p class="text-sm font-semibold uppercase tracking-wide text-primary">Nuclear Medicine Test Request</p>
-		<h1 class="mt-2 text-3xl font-bold text-base-content">Nuclear medicine (radionuclide imaging) request</h1>
-		<p class="mt-4 text-base leading-relaxed text-base-content/70">
-			A clinician completes a single-page wizard to request a radionuclide imaging study, and the
-			shared engine computes a four-axis vetting grade — ACR / RCR iRefer appropriateness,
-			preparation &amp; radiation safety, request completeness, and triage priority — plus
-			safety-critical flags and an overall recommendation the nuclear-medicine vetting desk can
-			triage from.
-		</p>
-	</header>
+<main class="mx-16 px-4 py-12">
 
 	<div class="grid gap-4 sm:grid-cols-2">
 		<a

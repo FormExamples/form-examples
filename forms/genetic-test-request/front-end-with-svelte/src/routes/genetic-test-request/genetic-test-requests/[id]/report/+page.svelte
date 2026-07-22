@@ -74,7 +74,7 @@
 		</div>
 	</header>
 
-	<main class="mx-auto max-w-4xl px-4 py-6">
+	<main class="mx-16 px-4 py-6">
 		<!-- Blocking / time-critical alerts -->
 		{#if result.consentCounsellingBand === 'not-met'}
 			<Alert type="error" heading="Consent not met — blocking" class="mb-6">

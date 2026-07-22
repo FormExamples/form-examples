@@ -5,19 +5,7 @@
 	const plural = 'zarit-burden-interviews';
 </script>
 
-<main class="mx-auto max-w-4xl px-4 py-12">
-	<header class="mb-10">
-		<p class="text-sm font-semibold uppercase tracking-wide text-primary">
-			Zarit Burden Interview
-		</p>
-		<h1 class="mt-2 text-3xl font-bold text-base-content">ZBI carer-burden screen</h1>
-		<p class="mt-4 text-base leading-relaxed text-base-content/70">
-			A caregiver self-report questionnaire that sums 0-4 frequency ratings into a ZBI-22 total (0-88)
-			or the validated ZBI-12 short-form total (0-48) to screen the subjective burden of an informal
-			carer, mapping the total to a burden band and independently flagging carer mental-health risk
-			from the overall-burden item.
-		</p>
-	</header>
+<main class="mx-16 px-4 py-12">
 
 	<div class="grid gap-4 sm:grid-cols-2">
 		<a

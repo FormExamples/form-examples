@@ -5,22 +5,7 @@
 	const plural = 'united-states-hipaa-authorization-forms';
 </script>
 
-<main class="mx-auto max-w-4xl px-4 py-12">
-	<header class="mb-10">
-		<p class="text-sm font-semibold uppercase tracking-wide text-primary">
-			United States HIPAA Authorization Form
-		</p>
-		<h1 class="mt-2 text-3xl font-bold text-base-content">
-			Authorization to use or disclose Protected Health Information
-		</h1>
-		<p class="mt-4 text-base leading-relaxed text-base-content/70">
-			A legal authorization under 45 CFR § 164.508 by which a patient (or their authorized
-			representative) gives a covered entity explicit, time-bounded permission to use or disclose
-			specifically described Protected Health Information to a named recipient for a stated purpose,
-			completed as a single continuous nine-step wizard whose shared engine validates every HIPAA
-			core element and required statement and flags sensitive-category gaps.
-		</p>
-	</header>
+<main class="mx-16 px-4 py-12">
 
 	<div class="grid gap-4 sm:grid-cols-2">
 		<a

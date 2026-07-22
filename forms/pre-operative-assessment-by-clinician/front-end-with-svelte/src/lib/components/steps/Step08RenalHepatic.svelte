@@ -4,6 +4,7 @@
   import Field from '$lib/components/ui/Field.svelte';
   import NumberInput from '$lib/components/ui/NumberInput.svelte';
   import Select from '$lib/components/ui/Select.svelte';
+  import TextInput from '$lib/components/ui/TextInput.svelte';
 </script>
 
 <Fieldset legend="Step 8 — Renal and hepatic">
@@ -58,6 +59,9 @@
         <option value="B">B</option>
         <option value="C">C</option>
       </Select>
+    </Field>
+    <Field label="Urinalysis findings" class="field-span-2">
+      <TextInput label="Urinalysis findings" bind:value={store.data.renalHepatic.urinalysisFindings} />
     </Field>
   </div>
 </Fieldset>

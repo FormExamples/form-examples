@@ -6,17 +6,7 @@
 	const plural = 'provider-transfer-requests';
 </script>
 
-<main class="mx-auto max-w-4xl px-4 py-12">
-	<header class="mb-10">
-		<p class="text-sm font-semibold uppercase tracking-wide text-primary">Provider Transfer Request</p>
-		<h1 class="mt-2 text-3xl font-bold text-base-content">Inter-provider handover (SBAR)</h1>
-		<p class="mt-4 text-base leading-relaxed text-base-content/70">
-			A structured, nine-section handover for a patient whose care is being transferred between
-			clinicians, wards, or organisations, built around the SBAR (Situation, Background, Assessment,
-			Recommendation) framework, whose shared engine validates SBAR completeness — Complete, Partial,
-			or Incomplete — and flags clinically significant issues for the receiving team.
-		</p>
-	</header>
+<main class="mx-16 px-4 py-12">
 
 	<div class="grid gap-4 sm:grid-cols-2">
 		<a

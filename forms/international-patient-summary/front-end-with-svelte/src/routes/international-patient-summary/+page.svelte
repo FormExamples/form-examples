@@ -6,17 +6,7 @@
 	const plural = 'international-patient-summaries';
 </script>
 
-<main class="mx-auto max-w-4xl px-4 py-12">
-	<header class="mb-10">
-		<p class="text-sm font-semibold uppercase tracking-wide text-primary">International Patient Summary</p>
-		<h1 class="mt-2 text-3xl font-bold text-base-content">Standardised cross-border health record extract</h1>
-		<p class="mt-4 text-base leading-relaxed text-base-content/70">
-			Compile an International Patient Summary (IPS) as a single continuous wizard, whose shared
-			engine validates section completeness against ISO 27269 and the HL7 FHIR IPS Implementation
-			Guide, classifies the summary as Complete, Partial, or Incomplete, and flags issues for the
-			receiving clinician.
-		</p>
-	</header>
+<main class="mx-16 px-4 py-12">
 
 	<div class="grid gap-4 sm:grid-cols-2">
 		<a

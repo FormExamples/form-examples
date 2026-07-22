@@ -5,20 +5,7 @@
 	const plural = 'newborn-and-infant-physical-examinations';
 </script>
 
-<main class="mx-auto max-w-4xl px-4 py-12">
-	<header class="mb-10">
-		<p class="text-sm font-semibold uppercase tracking-wide text-primary">
-			Newborn and Infant Physical Examination
-		</p>
-		<h1 class="mt-2 text-3xl font-bold text-base-content">NIPE newborn screening examination</h1>
-		<p class="mt-4 text-base leading-relaxed text-base-content/70">
-			A UK national-screening head-to-toe examination of a baby, performed within 72 hours of birth
-			and repeated at the 6-8 week infant review, that classifies four key screening components —
-			eyes, heart, hips, and testes (in boys) — as <strong>Satisfactory</strong>,
-			<strong>Refer</strong>, or <strong>Not examined</strong> and rolls them up into an overall
-			screening outcome and referral pathways, with no numeric score.
-		</p>
-	</header>
+<main class="mx-16 px-4 py-12">
 
 	<div class="grid gap-4 sm:grid-cols-2">
 		<a

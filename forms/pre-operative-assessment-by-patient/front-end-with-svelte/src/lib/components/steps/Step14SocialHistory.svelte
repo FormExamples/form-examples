@@ -31,4 +31,7 @@
 	{#if s.recreationalDrugs === 'yes'}
 		<Field label="Please provide details (substance, frequency)" inputId="drugDetails"><TextInput id="drugDetails" label="Please provide details (substance, frequency)" bind:value={s.drugDetails} /></Field>
 	{/if}
+
+	<Field label="Do you give blood?"><RadioGroup label="Do you give blood?">{#each yesNo as opt (opt.value)}<label><input type="radio" class="radio-input" name="bloodDonor" value={opt.value} bind:group={s.bloodDonor}/> {opt.label}</label>{/each}</RadioGroup></Field>
+	<Field label="Do you have any body piercings?"><RadioGroup label="Do you have any body piercings?">{#each yesNo as opt (opt.value)}<label><input type="radio" class="radio-input" name="piercings" value={opt.value} bind:group={s.bodyPiercings}/> {opt.label}</label>{/each}</RadioGroup></Field>
 </Fieldset>

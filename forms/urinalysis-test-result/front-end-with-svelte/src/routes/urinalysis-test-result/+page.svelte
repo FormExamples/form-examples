@@ -4,18 +4,7 @@
 	// dashboard.
 </script>
 
-<main class="mx-auto max-w-4xl px-4 py-12">
-	<header class="mb-10">
-		<p class="text-sm font-semibold uppercase tracking-wide text-primary">Urinalysis Test Result</p>
-		<h1 class="mt-2 text-3xl font-bold text-gray-900">Urinalysis test result</h1>
-		<p class="mt-4 text-base leading-relaxed text-gray-600">
-			A single-page wizard for recording urinalysis findings — specimen condition, dipstick
-			(reagent strip) results, microscopy, and culture with antibiotic sensitivities — graded by a
-			shared engine into a four-axis interpretation of result classification, abnormality severity,
-			report completeness, and follow-up urgency, with an automatic alert for a critical result such
-			as significant bacteriuria in pregnancy, a critical organism, or findings suggesting urosepsis.
-		</p>
-	</header>
+<main class="mx-16 px-4 py-12">
 
 	<div class="grid gap-4 sm:grid-cols-2">
 		<a

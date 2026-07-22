@@ -4,19 +4,7 @@
 	// dashboard.
 </script>
 
-<main class="mx-auto max-w-4xl px-4 py-12">
-	<header class="mb-10">
-		<p class="text-sm font-semibold uppercase tracking-wide text-primary">Toxicology Test Result</p>
-		<h1 class="mt-2 text-3xl font-bold text-gray-900">Toxicology and poisons test result</h1>
-		<p class="mt-4 text-base leading-relaxed text-gray-600">
-			After a toxicology assay has been performed, a clinical biochemist, toxicologist, or emergency
-			physician works through a single-page wizard to record measured levels — paracetamol,
-			salicylate, ethanol, lithium, digoxin, carboxyhaemoglobin, a drugs-of-abuse screen, and a named
-			specific drug — that a shared grading engine turns into a four-axis interpretation (result
-			classification, abnormality severity, report completeness, and follow-up urgency), including an
-			automatic alert for a toxic result.
-		</p>
-	</header>
+<main class="mx-16 px-4 py-12">
 
 	<div class="grid gap-4 sm:grid-cols-2">
 		<a

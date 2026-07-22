@@ -6,17 +6,7 @@
 	const plural = 'medical-operation-notes';
 </script>
 
-<main class="mx-auto max-w-4xl px-4 py-12">
-	<header class="mb-10">
-		<p class="text-sm font-semibold uppercase tracking-wide text-primary">Medical Operation Note</p>
-		<h1 class="mt-2 text-3xl font-bold text-base-content">Operating-team surgical record</h1>
-		<p class="mt-4 text-base leading-relaxed text-base-content/70">
-			A contemporaneous operating-team surgical record, completed as a single continuous wizard,
-			that computes a composite operative-risk grade (Routine / Complicated / High-risk / Critical)
-			via a max-grade algorithm with Clavien–Dindo and ASA context, and raises WHO Sign-Out safety
-			flags for the surgical team.
-		</p>
-	</header>
+<main class="mx-16 px-4 py-12">
 
 	<div class="grid gap-4 sm:grid-cols-2">
 		<a

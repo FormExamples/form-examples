@@ -6,12 +6,16 @@
   import NumberInput from '$lib/components/ui/NumberInput.svelte';
   import Select from '$lib/components/ui/Select.svelte';
   import DateInput from '$lib/components/ui/DateInput.svelte';
+  import TextAreaInput from '$lib/components/ui/TextAreaInput.svelte';
 </script>
 
 <Fieldset legend="Step 2 — Patient and planned procedure">
   <div class="field-grid">
     <Field label="NHS number">
       <TextInput label="NHS number" bind:value={store.data.patient.nhsNumber} />
+    </Field>
+    <Field label="Hospital number">
+      <TextInput label="Hospital number" bind:value={store.data.patient.hospitalNumber} />
     </Field>
     <Field label="Date of birth">
       <DateInput label="Date of birth" bind:value={store.data.patient.dateOfBirth} />
@@ -58,6 +62,13 @@
         aria-invalid={store.errors['step-2-planned-procedure'] ? 'true' : undefined}
       />
     </Field>
+    <Field label="Indication for surgery" class="field-span-2">
+      <TextAreaInput
+        label="Indication for surgery"
+        rows={2}
+        bind:value={store.data.surgery.indicationForSurgery}
+      />
+    </Field>
     <Field label="Specialty">
       <TextInput label="Specialty" bind:value={store.data.surgery.surgicalSpecialty} />
     </Field>
@@ -102,6 +113,9 @@
     </Field>
     <Field label="Consultant surgeon">
       <TextInput label="Consultant surgeon" bind:value={store.data.surgery.consultantSurgeon} />
+    </Field>
+    <Field label="Anaesthetist (if known)">
+      <TextInput label="Anaesthetist (if known)" bind:value={store.data.surgery.anaesthetistName} />
     </Field>
     <Field label="Planned date">
       <DateInput label="Planned date" bind:value={store.data.surgery.plannedDate} />

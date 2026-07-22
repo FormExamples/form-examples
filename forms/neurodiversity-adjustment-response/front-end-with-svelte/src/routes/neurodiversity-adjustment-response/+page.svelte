@@ -7,22 +7,7 @@
 	const plural = 'neurodiversity-adjustment-responses';
 </script>
 
-<main class="mx-auto max-w-4xl px-4 py-12">
-	<header class="mb-10">
-		<p class="text-sm font-semibold uppercase tracking-wide text-primary">
-			Neurodiversity Adjustment Response
-		</p>
-		<h1 class="mt-2 text-3xl font-bold text-base-content">
-			Workplace reasonable-adjustments response
-		</h1>
-		<p class="mt-4 text-base leading-relaxed text-base-content/70">
-			A UK-aligned workplace reasonable-adjustments response for neurodiversity that an employer
-			(line manager, HR adviser, or occupational-health lead) completes in answer to a request,
-			computing a four-axis grade (outcome classification, legal / discrimination risk, response
-			completeness, and follow-up / review urgency) plus compliance-and-risk flags including an
-			automatic discrimination-risk alert.
-		</p>
-	</header>
+<main class="mx-16 px-4 py-12">
 
 	<div class="grid gap-4 sm:grid-cols-2">
 		<a

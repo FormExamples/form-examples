@@ -7,18 +7,7 @@
 	const plural = 'framingham-risk-scores-for-hard-coronary-heart-disease';
 </script>
 
-<main class="mx-auto max-w-4xl px-4 py-12">
-	<header class="mb-10">
-		<p class="text-sm font-semibold uppercase tracking-wide text-primary">
-			Framingham Risk Score for Hard Coronary Heart Disease
-		</p>
-		<h1 class="mt-2 text-3xl font-bold text-base-content">Cardiovascular risk calculator</h1>
-		<p class="mt-4 text-base leading-relaxed text-base-content/70">
-			Estimates the 10-year risk of hard coronary heart disease events in patients aged 30–79 with no
-			history of coronary heart disease or diabetes, using a single continuous wizard that the shared
-			engine grades against the Framingham Cox-regression model.
-		</p>
-	</header>
+<main class="mx-16 px-4 py-12">
 
 	<div class="grid gap-4 sm:grid-cols-2">
 		<a

@@ -111,7 +111,7 @@
   </div>
 </header>
 
-<main>
+<main class="mx-16">
   <div class="intro">
     <p>
       Clinician data-entry wizard for the pre-operative assessment.
@@ -137,16 +137,15 @@
 
     <div id="form-sections">
       {#each stepComponents as StepComponent, i (i)}
-        <div
+        <section
           id={`step-${i + 1}`}
           class="step-section"
           onmouseenter={() => store.goto(i + 1)}
           onfocusin={() => store.goto(i + 1)}
-          role="region"
           aria-labelledby={`step-${i + 1}-legend`}
         >
           <StepComponent />
-        </div>
+        </section>
       {/each}
     </div>
 
@@ -155,15 +154,15 @@
       <Button type="reset" data-variant="secondary">Start over</Button>
     </div>
   </Form>
-
-  <footer class="page-footer">
-    <p>
-      ASA Physical Status Classification, Mallampati airway score, Revised
-      Cardiac Risk Index (Lee 1999), STOP-BANG (Chung 2008), and Clinical
-      Frailty Scale (Rockwood 2005) are validated clinical instruments.
-      This screening tool is for clinical decision support; final ASA
-      grading and anaesthesia planning remain the responsibility of the
-      signing clinician.
-    </p>
-  </footer>
 </main>
+
+<footer class="page-footer">
+  <p>
+    ASA Physical Status Classification, Mallampati airway score, Revised
+    Cardiac Risk Index (Lee 1999), STOP-BANG (Chung 2008), and Clinical
+    Frailty Scale (Rockwood 2005) are validated clinical instruments.
+    This screening tool is for clinical decision support; final ASA
+    grading and anaesthesia planning remain the responsibility of the
+    signing clinician.
+  </p>
+</footer>

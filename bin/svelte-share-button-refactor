@@ -1,0 +1,519 @@
+#!/usr/bin/env python3
+"""bin/svelte-share-button-refactor -- add a fourth header control,
+ShareButton, to every form's Svelte front-end, alongside
+LocaleSelect/ThemeSelect/TextSizeSelect.
+
+Mirrors lily-design-system-svelte-helpers/lily-design-system-svelte-share-button:
+a single-glyph icon button (U+21AA RIGHTWARDS ARROW WITH HOOK, "↪") that opens
+the native OS share sheet where available, and otherwise a small list —
+here, just "Copy link" to the clipboard.
+
+Editorial choice for this monorepo: `targets` stays empty. This package
+ships no social-network URLs on purpose (see its own docs: "which networks
+belong in your product is an editorial and privacy decision"), and a
+341-form medical/clinical monorepo covering everything from patient-data
+wizards to public calculators has no single defensible answer, so
+copy-link is the only destination offered everywhere.
+
+What changes per form (front-end-with-svelte/):
+  - src/lib/components/ui/ShareButton.svelte -> new (vendored contract
+    copy of lily-design-system-svelte-share-button; no app-specific logic)
+  - src/app.css -> appends the `.share-button` baseline CSS once
+  - src/routes/<slug>/+layout.svelte -> imports ShareButton, renders
+    <ShareButton .../> immediately after <TextSizeSelect .../> in the
+    header controls row
+
+Usage:
+  bin/svelte-share-button-refactor --check   # CI drift check (no writes)
+  bin/svelte-share-button-refactor --apply   # write changes
+
+Only touches forms whose +layout.svelte ends its <TextSizeSelect> invocation
+with the standard `storageKey={TEXT_SIZE_STORAGE_KEY}` / `/>` shape produced
+by bin/svelte-text-size-select-refactor. Forms without it are skipped and
+reported for hand migration.
+
+Idempotent: re-running after a full --apply makes no further changes.
+"""
+
+from __future__ import annotations
+
+import argparse
+import re
+import sys
+from pathlib import Path
+
+REPO_ROOT = Path(__file__).resolve().parent.parent
+FORMS_DIR = REPO_ROOT / "forms"
+
+SHARE_BUTTON_SVELTE = '''<script lang="ts" module>
+\t// Lily Design System — ShareButton (headless button + listbox/native sheet).
+\t// Mirrors lily-design-system-svelte-helpers/lily-design-system-svelte-share-button:
+\t// opens the OS share sheet where available (navigator.share), otherwise a
+\t// small list of destinations plus copy-to-clipboard.
+\timport type { Snippet } from 'svelte';
+
+\t/** Default button glyph: U+21AA RIGHTWARDS ARROW WITH HOOK. */
+\texport const RIGHTWARDS_ARROW_WITH_HOOK = '↪';
+
+\t/** One destination in the share list. `href` is a function so the
+\t * consumer owns the whole URL -- this component ships no third-party
+\t * endpoints and takes no view on which networks exist. */
+\texport type ShareTarget = {
+\t\tid: string;
+\t\tlabel: string;
+\t\thref: (url: string, title: string, text: string) => string;
+\t\tnewTab?: boolean;
+\t};
+
+\texport type ChildArgs = {
+\t\topen: boolean;
+\t\turl: string;
+\t};
+
+\texport type ShareStrategy = 'auto' | 'native' | 'list';
+
+\texport type Props = {
+\t\tlabel: string;
+\t\ttargets?: ShareTarget[];
+\t\turl?: string;
+\t\ttitle?: string;
+\t\ttext?: string;
+\t\tcopyLabel?: string;
+\t\tcopiedLabel?: string;
+\t\tcopyFailedLabel?: string;
+\t\tstrategy?: ShareStrategy;
+\t\tchildren?: Snippet<[ChildArgs]>;
+\t\tonShare?: (targetId: string, url: string) => void;
+\t\tonCopy?: (url: string) => void;
+\t\tonNativeShare?: (url: string) => void;
+\t\tclass?: string;
+\t\t[key: string]: unknown;
+\t};
+
+\t/** Is a native share sheet available? SSR-safe. */
+\texport function canShareNatively(): boolean {
+\t\treturn typeof navigator !== 'undefined' && typeof navigator.share === 'function';
+\t}
+
+\t/** Is an async clipboard available? SSR-safe. */
+\texport function canCopy(): boolean {
+\t\treturn (
+\t\t\ttypeof navigator !== 'undefined' &&
+\t\t\ttypeof navigator.clipboard?.writeText === 'function'
+\t\t);
+\t}
+
+\tlet uid = 0;
+\t/** Stable per-instance id prefix; SSR-safe (no Math.random / Date.now). */
+\texport function nextShareButtonId(): string {
+\t\tuid += 1;
+\t\treturn `share-button-${uid}`;
+\t}
+</script>
+
+<script lang="ts">
+\tlet {
+\t\tclass: className = '',
+\t\tlabel,
+\t\ttargets = [],
+\t\turl,
+\t\ttitle = '',
+\t\ttext = '',
+\t\tcopyLabel,
+\t\tcopiedLabel,
+\t\tcopyFailedLabel,
+\t\tstrategy = 'auto',
+\t\tchildren,
+\t\tonShare,
+\t\tonCopy,
+\t\tonNativeShare,
+\t\t...restProps
+\t}: Props = $props();
+
+\tconst baseId = nextShareButtonId();
+\tconst listId = `${baseId}-list`;
+
+\tlet open = $state(false);
+\tlet status = $state('');
+\tlet buttonEl: HTMLButtonElement | undefined = $state();
+\tlet listEl: HTMLUListElement | undefined = $state();
+\tlet rootEl: HTMLDivElement | undefined = $state();
+
+\tfunction currentUrl(): string {
+\t\tif (url) return url;
+\t\treturn typeof location !== 'undefined' ? location.href : '';
+\t}
+
+\tfunction items(): HTMLElement[] {
+\t\tif (!listEl) return [];
+\t\treturn Array.from(
+\t\t\tlistEl.querySelectorAll<HTMLElement>('.share-button-target, .share-button-copy')
+\t\t);
+\t}
+
+\tfunction openList(focusLast = false): void {
+\t\topen = true;
+\t\tstatus = '';
+\t\tqueueMicrotask(() => {
+\t\t\tconst all = items();
+\t\t\t(focusLast ? all[all.length - 1] : all[0])?.focus();
+\t\t});
+\t}
+
+\tfunction closeList(refocus = true): void {
+\t\tif (!open) return;
+\t\topen = false;
+\t\tif (refocus) queueMicrotask(() => buttonEl?.focus());
+\t}
+
+\tasync function shareNatively(): Promise<boolean> {
+\t\tif (!canShareNatively()) return false;
+\t\tconst shareUrl = currentUrl();
+\t\ttry {
+\t\t\tawait navigator.share({ url: shareUrl, title, text });
+\t\t\tonNativeShare?.(shareUrl);
+\t\t\treturn true;
+\t\t} catch {
+\t\t\t// A rejected promise here is almost always the user dismissing the
+\t\t\t// sheet, which is not an error and must not fall through to the
+\t\t\t// list -- that would reopen UI they just dismissed.
+\t\t\treturn true;
+\t\t}
+\t}
+
+\tasync function onButtonClick(): Promise<void> {
+\t\tif (open) {
+\t\t\tcloseList();
+\t\t\treturn;
+\t\t}
+\t\tif (strategy === 'native' || (strategy === 'auto' && canShareNatively())) {
+\t\t\tif (await shareNatively()) return;
+\t\t}
+\t\topenList();
+\t}
+
+\tfunction onButtonKeydown(event: KeyboardEvent): void {
+\t\tif (event.key === 'ArrowDown') {
+\t\t\tevent.preventDefault();
+\t\t\tif (!open) openList();
+\t\t\telse items()[0]?.focus();
+\t\t} else if (event.key === 'ArrowUp') {
+\t\t\tevent.preventDefault();
+\t\t\tif (!open) openList(true);
+\t\t\telse items()[items().length - 1]?.focus();
+\t\t}
+\t}
+
+\tfunction moveFocus(delta: number): void {
+\t\tconst all = items();
+\t\tif (all.length === 0) return;
+\t\tconst i = all.indexOf(document.activeElement as HTMLElement);
+\t\tconst next = Math.min(Math.max((i < 0 ? 0 : i) + delta, 0), all.length - 1);
+\t\tall[next]?.focus();
+\t}
+
+\tfunction onListKeydown(event: KeyboardEvent): void {
+\t\tswitch (event.key) {
+\t\t\tcase 'ArrowDown':
+\t\t\t\tevent.preventDefault();
+\t\t\t\tmoveFocus(1);
+\t\t\t\tbreak;
+\t\t\tcase 'ArrowUp':
+\t\t\t\tevent.preventDefault();
+\t\t\t\tmoveFocus(-1);
+\t\t\t\tbreak;
+\t\t\tcase 'Home':
+\t\t\t\tevent.preventDefault();
+\t\t\t\titems()[0]?.focus();
+\t\t\t\tbreak;
+\t\t\tcase 'End': {
+\t\t\t\tevent.preventDefault();
+\t\t\t\tconst all = items();
+\t\t\t\tall[all.length - 1]?.focus();
+\t\t\t\tbreak;
+\t\t\t}
+\t\t\tcase 'Escape':
+\t\t\t\tevent.preventDefault();
+\t\t\t\tcloseList();
+\t\t\t\tbreak;
+\t\t\tcase 'Tab':
+\t\t\t\tcloseList(false);
+\t\t\t\tbreak;
+\t\t}
+\t}
+
+\tfunction onRootFocusOut(event: FocusEvent): void {
+\t\tconst next = event.relatedTarget as Node | null;
+\t\tif (next && rootEl?.contains(next)) return;
+\t\tcloseList(false);
+\t}
+
+\tfunction chooseTarget(target: ShareTarget): void {
+\t\tonShare?.(target.id, currentUrl());
+\t\tcloseList();
+\t}
+
+\tasync function copyUrl(): Promise<void> {
+\t\tconst shareUrl = currentUrl();
+\t\ttry {
+\t\t\tif (!canCopy()) throw new Error('clipboard unavailable');
+\t\t\tawait navigator.clipboard.writeText(shareUrl);
+\t\t\tonCopy?.(shareUrl);
+\t\t\tif (copiedLabel) status = copiedLabel;
+\t\t} catch {
+\t\t\tif (copyFailedLabel) status = copyFailedLabel;
+\t\t}
+\t\tcloseList();
+\t}
+</script>
+
+<svelte:document
+\tonclick={(event) => {
+\t\tif (!open) return;
+\t\tconst t = event.target as Node | null;
+\t\tif (t && rootEl && !rootEl.contains(t)) closeList(false);
+\t}}
+/>
+
+<div
+\tbind:this={rootEl}
+\tclass={`share-button ${className}`.trim()}
+\tonfocusout={onRootFocusOut}
+\t{...restProps}
+>
+\t<button
+\t\tbind:this={buttonEl}
+\t\ttype="button"
+\t\tclass="share-button-trigger"
+\t\taria-label={label}
+\t\taria-expanded={open}
+\t\taria-controls={listId}
+\t\tonclick={onButtonClick}
+\t\tonkeydown={onButtonKeydown}
+\t>
+\t\t{#if children}
+\t\t\t{@render children({ open, url: currentUrl() })}
+\t\t{:else}
+\t\t\t<span class="share-button-icon" aria-hidden="true">{RIGHTWARDS_ARROW_WITH_HOOK}</span>
+\t\t{/if}
+\t</button>
+
+\t<ul
+\t\tbind:this={listEl}
+\t\tclass="share-button-list"
+\t\tid={listId}
+\t\thidden={!open}
+\t\tonkeydown={onListKeydown}
+\t>
+\t\t{#each targets as target (target.id)}
+\t\t\t<li class="share-button-list-item">
+\t\t\t\t<a
+\t\t\t\t\tclass="share-button-target"
+\t\t\t\t\tdata-target-id={target.id}
+\t\t\t\t\thref={target.href(currentUrl(), title, text)}
+\t\t\t\t\ttarget={target.newTab === false ? undefined : '_blank'}
+\t\t\t\t\trel="noopener noreferrer"
+\t\t\t\t\tonclick={() => chooseTarget(target)}
+\t\t\t\t>
+\t\t\t\t\t{target.label}
+\t\t\t\t</a>
+\t\t\t</li>
+\t\t{/each}
+
+\t\t{#if copyLabel}
+\t\t\t<li class="share-button-list-item">
+\t\t\t\t<button type="button" class="share-button-copy" onclick={copyUrl}>
+\t\t\t\t\t{copyLabel}
+\t\t\t\t</button>
+\t\t\t</li>
+\t\t{/if}
+\t</ul>
+
+\t<p class="share-button-status" aria-live="polite">{status}</p>
+</div>
+'''
+
+APP_CSS_MARKER = ".share-button-trigger {"
+
+APP_CSS_BLOCK = """
+/* Lily: .share-button (headless button + listbox / native share sheet). */
+.share-button {
+\tposition: relative;
+\tdisplay: inline-block;
+}
+.share-button-trigger {
+\tpadding: 0.25rem 0.5rem;
+\tborder: 1px solid var(--color-border);
+\tborder-radius: 0.25rem;
+\tbackground: var(--color-surface);
+\tcolor: inherit;
+\tcursor: pointer;
+\tline-height: 1;
+\tfont-family: system-ui, "Segoe UI Symbol", "Apple Symbols", sans-serif;
+\tfont-size: 1.125em;
+}
+.share-button-trigger:focus-visible {
+\toutline: 2px solid var(--color-focus);
+\toutline-offset: 2px;
+}
+.share-button-list {
+\tposition: absolute;
+\tz-index: 10;
+\tinset-block-start: 100%;
+\tinset-inline-end: 0;
+\tmargin: 0.25rem 0 0;
+\tpadding: 0;
+\tlist-style: none;
+\tmin-inline-size: 10rem;
+\tbackground: var(--color-surface);
+\tborder: 1px solid var(--color-border);
+\tborder-radius: 0.375rem;
+\tbox-shadow: 0 4px 6px -1px rgba(0,0,0,0.1), 0 2px 4px -2px rgba(0,0,0,0.1);
+}
+.share-button-list[hidden] { display: none; }
+.share-button-target,
+.share-button-copy {
+\tdisplay: block;
+\twidth: 100%;
+\tpadding: 0.25rem 0.75rem;
+\tborder: 0;
+\tbackground: none;
+\tcolor: inherit;
+\ttext-align: left;
+\ttext-decoration: none;
+\tfont: inherit;
+\tcursor: pointer;
+}
+.share-button-target:hover,
+.share-button-copy:hover,
+.share-button-target:focus-visible,
+.share-button-copy:focus-visible {
+\tbackground: var(--color-primary-light);
+}
+.share-button-status {
+\tposition: absolute;
+\twidth: 1px;
+\theight: 1px;
+\tpadding: 0;
+\tmargin: -1px;
+\toverflow: hidden;
+\tclip: rect(0, 0, 0, 0);
+\twhite-space: nowrap;
+\tborder: 0;
+}
+"""
+
+TEXT_SIZE_SELECT_TAG_RE = re.compile(
+    r'([ \t]*)<TextSizeSelect\b(?:(?!/>).)*?storageKey=\{TEXT_SIZE_STORAGE_KEY\}\s*\n[ \t]*/>\n',
+    re.S,
+)
+
+
+def share_button_markup(indent: str) -> str:
+    return (
+        f"{indent}<ShareButton\n"
+        f'{indent}\tlabel="Share this page"\n'
+        f'{indent}\tclass="ml-2"\n'
+        f'{indent}\tcopyLabel="Copy link"\n'
+        f'{indent}\tcopiedLabel="Link copied"\n'
+        f'{indent}\tcopyFailedLabel="Could not copy — copy it from the address bar"\n'
+        f"{indent}/>\n"
+    )
+
+
+def process_layout(path: Path, check: bool) -> str:
+    text = path.read_text(encoding="utf-8")
+    if "ShareButton" in text:
+        return "skip-already-done"
+    if "TEXT_SIZE_STORAGE_KEY" not in text:
+        return "skip-nonstandard-imports"
+
+    text = text.replace(
+        "\timport TextSizeSelect from '$lib/components/ui/TextSizeSelect.svelte';\n",
+        "\timport TextSizeSelect from '$lib/components/ui/TextSizeSelect.svelte';\n"
+        "\timport ShareButton from '$lib/components/ui/ShareButton.svelte';\n",
+        1,
+    )
+
+    def theme_repl(m: re.Match) -> str:
+        indent = m.group(1)
+        return m.group(0) + share_button_markup(indent)
+
+    new_text, n = TEXT_SIZE_SELECT_TAG_RE.subn(theme_repl, text, count=1)
+    if n == 0:
+        return "skip-nonstandard-markup"
+
+    if not check:
+        path.write_text(new_text, encoding="utf-8")
+    return "changed"
+
+
+def process_component(path: Path, check: bool) -> str:
+    if path.exists():
+        return "skip-already-done"
+    if not check:
+        path.write_text(SHARE_BUTTON_SVELTE, encoding="utf-8")
+    return "changed"
+
+
+def process_css(path: Path, check: bool) -> str:
+    text = path.read_text(encoding="utf-8")
+    if APP_CSS_MARKER in text:
+        return "skip-already-done"
+    new_text = text.rstrip("\n") + "\n" + APP_CSS_BLOCK
+    if not check:
+        path.write_text(new_text, encoding="utf-8")
+    return "changed"
+
+
+def main() -> int:
+    parser = argparse.ArgumentParser()
+    mode = parser.add_mutually_exclusive_group(required=True)
+    mode.add_argument("--check", action="store_true")
+    mode.add_argument("--apply", action="store_true")
+    args = parser.parse_args()
+    check = args.check
+
+    counts: dict[str, int] = {}
+    skipped: list[str] = []
+
+    for form_dir in sorted(FORMS_DIR.iterdir()):
+        if not form_dir.is_dir():
+            continue
+        svelte_dir = form_dir / "front-end-with-svelte"
+        if not svelte_dir.is_dir():
+            continue
+        slug = form_dir.name
+
+        component_path = svelte_dir / "src/lib/components/ui/ShareButton.svelte"
+        r = process_component(component_path, check)
+        counts[f"component-{r}"] = counts.get(f"component-{r}", 0) + 1
+
+        css_path = svelte_dir / "src/app.css"
+        if css_path.is_file():
+            r = process_css(css_path, check)
+            counts[f"css-{r}"] = counts.get(f"css-{r}", 0) + 1
+
+        for layout_path in svelte_dir.glob("src/routes/*/+layout.svelte"):
+            r = process_layout(layout_path, check)
+            counts[f"layout-{r}"] = counts.get(f"layout-{r}", 0) + 1
+            if r.startswith("skip-") and r != "skip-already-done":
+                skipped.append(f"{slug}/{layout_path.name}: {r}")
+
+    mode_label = "CHECK" if check else "APPLY"
+    print(f"{mode_label} run")
+    for key in sorted(counts):
+        print(f"  {key}: {counts[key]}")
+    if skipped:
+        print("Skipped (needs hand migration):")
+        for line in skipped:
+            print(f"  {line}")
+
+    if check:
+        drift = sum(v for k, v in counts.items() if k.endswith("-changed"))
+        return 1 if drift else 0
+    return 0
+
+
+if __name__ == "__main__":
+    sys.exit(main())

@@ -1,6 +1,6 @@
 import type { StepConfig, AssessmentData } from '$lib/engine/types';
 
-export const TOTAL_STEPS = 16;
+export const TOTAL_STEPS = 17;
 
 export const steps: StepConfig[] = [
 	{ number: 1, title: 'Demographics', shortTitle: 'Demographics', section: 'demographics' },
@@ -50,6 +50,12 @@ export const steps: StepConfig[] = [
 			const age = getAgeFromDOB(data.demographics.dateOfBirth);
 			return age >= 12 && age <= 55;
 		}
+	},
+	{
+		number: 17,
+		title: 'Cognitive and Mental Health',
+		shortTitle: 'Cognitive',
+		section: 'cognitiveMentalHealth'
 	}
 ];
 

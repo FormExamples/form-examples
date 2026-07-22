@@ -23,6 +23,7 @@ export interface Patient {
   lastName: string;
   dateOfBirth: string;
   nhsNumber: string;
+  hospitalNumber: string;
   sex: 'male' | 'female' | 'other' | '';
   weightKg: number | null;
   heightCm: number | null;
@@ -30,6 +31,7 @@ export interface Patient {
 
 export interface SurgeryPlan {
   plannedProcedure: string;
+  indicationForSurgery: string;
   surgicalSpecialty: string;
   urgency: 'elective' | 'urgent' | 'emergency' | 'immediate' | '';
   laterality: 'left' | 'right' | 'bilateral' | 'midline' | 'na' | '';
@@ -37,6 +39,7 @@ export interface SurgeryPlan {
   anticipatedBloodLossMl: number | null;
   anticipatedDurationMinutes: number | null;
   consultantSurgeon: string;
+  anaesthetistName: string;
   plannedDate: string;
 }
 
@@ -64,6 +67,11 @@ export interface Airway {
   beard: YesNo;
   upperLipBiteTest: 'I' | 'II' | 'III' | '';
   priorDifficultIntubation: YesNo;
+  previousSurgeries: string;
+  previousAnaestheticIssues: YesNo;
+  previousAnaestheticIssuesDetails: string;
+  familyHistoryAnaestheticComplications: YesNo;
+  familyHistoryAnaestheticComplicationsDetails: string;
   stopbangSnoring: YesNo;
   stopbangTired: YesNo;
   stopbangObservedApnoea: YesNo;
@@ -153,6 +161,7 @@ export interface RenalHepatic {
   albuminGL: number | null;
   chronicLiverDisease: 'none' | 'compensated' | 'decompensated' | '';
   childPughClass: 'A' | 'B' | 'C' | '';
+  urinalysisFindings: string;
 }
 
 export interface Haematology {
@@ -293,6 +302,16 @@ export interface FunctionalCapacity {
   cpetNotes: string;
   malnutritionRisk: 'none' | 'low' | 'medium' | 'high' | '';
   unintentionalWeightLossKg: number | null;
+  livingSituation:
+    | 'independent'
+    | 'lives-with-family'
+    | 'sheltered-housing'
+    | 'residential-care'
+    | 'nursing-home'
+    | '';
+  supportAtHome: YesNo;
+  mobilityStatus: string;
+  fallsRiskWithinYear: YesNo;
 }
 
 export interface AnaesthesiaPlan {
@@ -316,6 +335,19 @@ export interface AnaesthesiaPlan {
   anticipatedLengthOfStayDays: number | null;
   specialEquipment: string;
   bloodProductsRequired: string;
+  vteRiskLevel: 'low' | 'medium' | 'high' | '';
+  covidScreeningResult: 'not-tested' | 'negative' | 'positive' | 'pending' | '';
+  dischargeDestination:
+    | 'home'
+    | 'home-with-support'
+    | 'residential-care'
+    | 'nursing-home'
+    | 'rehabilitation'
+    | 'other'
+    | '';
+  followUpRequirements: string;
+  socialServicesInvolvement: YesNo;
+  reablementPhysiotherapyNeeds: YesNo;
 }
 
 export interface Summary {
@@ -323,6 +355,12 @@ export interface Summary {
   overrideReason: string;
   recommendation: 'proceed' | 'optimise-first' | 'mdt-review' | 'cancel' | '';
   clinicianNotes: string;
+  consentStatus: 'obtained' | 'pending' | 'declined' | 'unable-to-consent' | '';
+  interpreterRequired: YesNo;
+  discussionProcedure: YesNo;
+  discussionAnaesthetic: YesNo;
+  discussionRisksBenefits: YesNo;
+  discussionAlternatives: YesNo;
   signedAt: string;
 }
 

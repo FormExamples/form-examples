@@ -6,7 +6,7 @@
 	const plural = 'mri-scan-test-requests';
 </script>
 
-<main class="mx-auto max-w-3xl px-4 py-10">
+<main class="mx-16 px-4 py-10">
 	<div class="rounded-2xl border border-base-300 bg-base-100 p-8 shadow-sm">
 		<p class="text-sm font-semibold uppercase tracking-wide text-primary">MRI Scan Test Request</p>
 		<h1 class="mt-2 text-3xl font-bold text-base-content">MRI scan request (referral)</h1>

@@ -5,17 +5,7 @@
 	const plural = 'who-surgical-safety-checklists';
 </script>
 
-<main class="mx-auto max-w-4xl px-4 py-12">
-	<header class="mb-10">
-		<p class="text-sm font-semibold uppercase tracking-wide text-primary">WHO Surgical Safety Checklist</p>
-		<h1 class="mt-2 text-3xl font-bold text-base-content">Operating-room safety checklist</h1>
-		<p class="mt-4 text-base leading-relaxed text-base-content/70">
-			A digital implementation of the World Health Organization Surgical Safety Checklist that the
-			operating team completes as one continuous wizard across the three WHO safety phases — Sign In,
-			Time Out, and Sign Out — with the shared engine computing lifecycle status and raising safety
-			flags for the team.
-		</p>
-	</header>
+<main class="mx-16 px-4 py-12">
 
 	<div class="grid gap-4 sm:grid-cols-2">
 		<a

@@ -78,23 +78,21 @@
 	}
 </script>
 
-<main class="mx-auto max-w-3xl px-4 py-6">
-	<header class="mb-6 no-print">
-		<h1 class="text-2xl font-bold text-base-content">
-			{isNew ? 'New Mental Health Act assessment' : `MHA assessment ${id}`}
-		</h1>
-		<p class="mt-1 text-sm text-base-content/70">
-			Complete the nine sections; the section classification, completeness status, and urgency are
-			computed on submit. This is a documentation instrument — there is no numeric score and no
-			automated decision to detain.
-		</p>
-		<Progress label="Assessment sections" value={TOTAL_STEPS} max={TOTAL_STEPS} />
-		<StepList label="Assessment sections" current={TOTAL_STEPS}>
-			{#each steps as step (step.number)}
-				<StepListItem status="finished" label={step.title}>{step.shortTitle}</StepListItem>
-			{/each}
-		</StepList>
-	</header>
+<main class="mx-16 px-4 py-6">
+	<h1 class="text-2xl font-bold text-base-content">
+		{isNew ? 'New Mental Health Act assessment' : `MHA assessment ${id}`}
+	</h1>
+	<p class="mt-1 text-sm text-base-content/70">
+		Complete the nine sections; the section classification, completeness status, and urgency are
+		computed on submit. This is a documentation instrument — there is no numeric score and no
+		automated decision to detain.
+	</p>
+	<Progress label="Assessment sections" value={TOTAL_STEPS} max={TOTAL_STEPS} />
+	<StepList label="Assessment sections" current={TOTAL_STEPS}>
+		{#each steps as step (step.number)}
+			<StepListItem status="finished" label={step.title}>{step.shortTitle}</StepListItem>
+		{/each}
+	</StepList>
 
 	{#if errors.length > 0}
 		<ErrorSummary title="Please fix the following before submitting" class="mb-6">

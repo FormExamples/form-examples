@@ -12,6 +12,24 @@ export function detectAdditionalFlags(data: ClinicianAssessment): AdditionalFlag
       suggestedAction: 'Prepare difficult-airway trolley; consider awake fibreoptic intubation.',
     });
   }
+  if (data.airway.familyHistoryAnaestheticComplications === 'yes') {
+    flags.push({
+      flagId: 'F-MALIGNANT-HYPERTHERMIA',
+      category: 'malignant-hyperthermia',
+      priority: 'high',
+      description: 'Family history of anaesthetic complications — malignant hyperthermia susceptibility cannot be excluded',
+      suggestedAction: 'Confirm details; use a trigger-free (TIVA) technique and ensure dantrolene is available if MH is not excluded.',
+    });
+  }
+  if (data.airway.previousAnaestheticIssues === 'yes') {
+    flags.push({
+      flagId: 'F-PREVIOUS-ANAESTHETIC-ISSUE',
+      category: 'other',
+      priority: 'medium',
+      description: 'Documented previous anaesthetic problem',
+      suggestedAction: 'Review prior anaesthetic records before planning technique.',
+    });
+  }
   if (data.airway.priorDifficultIntubation === 'yes') {
     flags.push({
       flagId: 'F-DIFFICULT-AIRWAY-HISTORY',

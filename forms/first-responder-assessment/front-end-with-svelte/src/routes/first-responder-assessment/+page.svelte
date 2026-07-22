@@ -6,16 +6,7 @@
 	const plural = 'first-responder-assessments';
 </script>
 
-<main class="mx-auto max-w-4xl px-4 py-12">
-	<header class="mb-10">
-		<p class="text-sm font-semibold uppercase tracking-wide text-primary">First Responder Assessment</p>
-		<h1 class="mt-2 text-3xl font-bold text-base-content">Responder fitness &amp; competency</h1>
-		<p class="mt-4 text-base leading-relaxed text-base-content/70">
-			A comprehensive first responder fitness and competency evaluation, completed as a single
-			continuous wizard, that the shared engine grades across domains to derive an overall fitness
-			decision and risk level for the assessor.
-		</p>
-	</header>
+<main class="mx-16 px-4 py-12">
 
 	<div class="grid gap-4 sm:grid-cols-2">
 		<a

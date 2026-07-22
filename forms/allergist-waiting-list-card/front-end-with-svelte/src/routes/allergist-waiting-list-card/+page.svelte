@@ -5,17 +5,7 @@
 	const plural = 'allergist-waiting-list-cards';
 </script>
 
-<main class="mx-auto max-w-4xl px-4 py-12">
-	<header class="mb-10">
-		<p class="text-sm font-semibold uppercase tracking-wide text-primary">Allergist Waiting List Card</p>
-		<h1 class="mt-2 text-3xl font-bold text-base-content">NHS RTT waiting list card</h1>
-		<p class="mt-4 text-base leading-relaxed text-base-content/70">
-			A practitioner-completed administrative card, filled in as a single continuous wizard, that
-			places a patient on an allergist waiting list, gives them a transparent view of their referral,
-			expected wait, and upcoming appointment, and is graded by the shared engine against NHS England
-			clinical-priority and RTT targets to flag issues for the booking team.
-		</p>
-	</header>
+<main class="mx-16 px-4 py-12">
 
 	<div class="grid gap-4 sm:grid-cols-2">
 		<a

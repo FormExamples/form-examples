@@ -5,213 +5,107 @@
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <title>Agile Consulting Scorecard for Hiring Help</title>
   <meta name="description" content="Sixteen-item self-assessment to decide whether your organization is ready to hire agile consulting help.">
-  <style>
-    /* Lily Design System HTML headless contract. See
-     * forms/AGENTS-front-end-html.md for the class vocabulary.
-     * Local helpers (.preview, .item, etc.) are project-local. */
-
-    :root {
-      --color-primary: #2563eb;
-      --color-primary-dark: #2b6cb0;
-      --color-primary-light: #bee3f8;
-      --color-bg: #f7fafc;
-      --color-surface: #ffffff;
-      --color-text: #1a202c;
-      --color-muted: #4a5568;
-      --color-border: #cbd5e0;
-      --color-border-strong: #a0aec0;
-      --color-focus: #3182ce;
-      --color-danger: #e53e3e;
-      --color-danger-bg: #fed7d7;
-      --color-warning: #d69e2e;
-      --color-warning-bg: #fefcbf;
-      --color-success: #38a169;
-      --color-success-bg: #c6f6d5;
-      --radius: 0.5rem;
-      --radius-sm: 0.25rem;
-    }
-
-    *, *::before, *::after { box-sizing: border-box; }
-
-    body {
-      font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
-      max-width: 880px;
-      margin: 0 auto;
-      padding: 1.5rem 1rem 4rem;
-      color: var(--color-text);
-      background: var(--color-bg);
-      line-height: 1.5;
-    }
-
-    .visually-hidden {
-      position: absolute;
-      width: 1px; height: 1px;
-      padding: 0; margin: -1px;
-      overflow: hidden; clip: rect(0 0 0 0);
-      white-space: nowrap; border: 0;
-    }
-    .skip-link {
-      position: absolute;
-      left: -9999px; top: 0;
-      background: var(--color-primary);
-      color: white;
-      padding: 0.5rem 1rem;
-      z-index: 100;
-      text-decoration: none;
-    }
-    .skip-link:focus { left: 0; }
-
-    h1 { margin: 0 0 0.25rem; font-size: 1.6rem; }
-    .subtitle { margin: 0 0 1.5rem; color: var(--color-muted); }
-
-    /* Lily: .fieldset / .fieldset-legend */
-    .fieldset {
-      background: var(--color-surface);
-      border: 1px solid var(--color-border);
-      border-radius: var(--radius);
-      margin: 0 0 1.5rem;
-      padding: 1rem 1.25rem 1.25rem;
-    }
-    .fieldset-legend {
-      font-weight: 600;
-      padding: 0 0.5rem;
-      color: var(--color-text);
-    }
-    .field { margin: 0.75rem 0; }
-    .label { display: block; font-weight: 500; margin-bottom: 0.25rem; }
-
-    /* Lily inputs */
-    .text-input,
-    .text-area-input,
-    .email-input,
-    .number-input,
-    .date-input,
-    .time-input,
-    .tel-input,
-    .url-input,
-    .search-input,
-    .select {
-      width: 100%;
-      padding: 0.4rem 0.5rem;
-      border: 1px solid var(--color-border-strong);
-      border-radius: var(--radius-sm);
-      font: inherit;
-      background: var(--color-surface);
-    }
-    .text-area-input { resize: vertical; min-height: 2.4rem; }
-
-    .text-input:focus,
-    .text-area-input:focus,
-    .email-input:focus,
-    .select:focus {
-      outline: 2px solid var(--color-focus);
-      outline-offset: 1px;
-    }
-
-    .radio-input,
-    .checkbox-input { accent-color: var(--color-primary); }
-
-    /* Project-local item rows */
-    .item { padding: 0.75rem; border-top: 1px solid #edf2f7; }
-    .item:first-of-type { border-top: 0; }
-    .item-prompt { font-weight: 500; }
-    .item-help { font-size: 0.875rem; color: var(--color-muted); margin: 0.25rem 0 0.5rem; }
-    .radio-group {
-      display: flex;
-      gap: 1.25rem;
-      margin: 0.5rem 0;
-      flex-wrap: wrap;
-    }
-    .radio-group > label {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.25rem;
-      font-weight: normal;
-    }
-
-    /* Lily: .button */
-    .button-group {
-      display: flex;
-      gap: 0.5rem;
-      margin-top: 1rem;
-    }
-    .button {
-      padding: 0.5rem 1rem;
-      border: 1px solid var(--color-primary);
-      border-radius: var(--radius-sm);
-      background: var(--color-surface);
-      color: var(--color-primary);
-      font: inherit;
-      cursor: pointer;
-      user-select: none;
-    }
-    .button:hover:not(:disabled) { background: var(--color-bg); }
-    .button:focus-visible { outline: 2px solid var(--color-focus); outline-offset: 2px; }
-    .button[data-variant="primary"] {
-      background: var(--color-primary);
-      color: white;
-      border-color: var(--color-primary);
-    }
-    .button[data-variant="primary"]:hover:not(:disabled) {
-      background: var(--color-primary-dark);
-      border-color: var(--color-primary-dark);
-    }
-
-    /* Lily: .panel (preview region) */
-    .panel {
-      background: var(--color-surface);
-      border: 1px solid var(--color-border);
-      border-radius: var(--radius);
-      padding: 1.25rem;
-      margin: 0 0 1.5rem;
-      position: sticky;
-      top: 0.5rem;
-      z-index: 1;
-    }
-    .preview-row { display: flex; justify-content: space-between; gap: 1rem; }
-    .preview-row + .preview-row { margin-top: 0.4rem; }
-    .preview-band {
-      display: inline-block;
-      padding: 0.15rem 0.6rem;
-      border-radius: 999px;
-      font-weight: 600;
-      font-size: 0.875rem;
-    }
-    .band-low        { background: var(--color-danger-bg);   color: #742a2a; }
-    .band-borderline { background: var(--color-warning-bg);  color: #744210; }
-    .band-medium     { background: var(--color-primary-light); color: #2a4365; }
-    .band-high       { background: var(--color-success-bg);  color: #22543d; }
-    .flags-list {
-      margin: 0.5rem 0 0;
-      padding-left: 1.2rem;
-    }
-    .flag-priority-high   { color: #742a2a; }
-    .flag-priority-medium { color: #744210; }
-    .flag-priority-low    { color: var(--color-text); }
-    code { font-family: ui-monospace, "SFMono-Regular", Menlo, monospace; }
-  
-/* print-report-styles v1 — print-friendly report output (hide wizard chrome). */
-@media print {
-  .step-list, .step-list-item, #progress, #progress-text, .progress, .progress-bar,
-  .form-actions, .button, button, #error-summary, .error-summary,
-  .theme-select, .theme-toggle, nav, .no-print { display: none !important; }
-  html, body { background: #fff !important; color: #000 !important; }
-  #report, .report, .report-card, .panel, .fieldset {
-    box-shadow: none !important; border-color: #ccc !important; break-inside: avoid;
-  }
-  a { color: #000 !important; text-decoration: none; }
-  @page { margin: 1.5cm; }
-}
-</style>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" id="theme-stylesheet" href="css/themes/light.css">
+  <script>
+    (function () {
+      try {
+        var saved = localStorage.getItem('agile-consulting-scorecard-for-hiring-help.theme.v1');
+        var link = document.getElementById('theme-stylesheet');
+        if (saved && link) link.setAttribute('href', 'css/themes/' + saved + '.css');
+      } catch (e) {}
+    })();
+  </script>
 </head>
 <body>
   <a class="skip-link visually-hidden" href="#scorecard-form">Skip to scorecard</a>
 
-  <h1>Agile Consulting Scorecard for Hiring Help</h1>
-  <p class="subtitle">
+  <header>
+    <div class="page-header-bar">
+      <div class="page-header-title">
+        <h1>Agile Consulting Scorecard for Hiring Help</h1>
+      <p class="subtitle">
     Sixteen yes/no checkpoints from the Agile Manifesto and Principles.
     Score yourself and see whether you are ready to hire agile consulting help.
-  </p>
+      </p>
+      </div>
+      <div class="page-header-controls no-print">
+      <label class="visually-hidden" for="locale-select">Language</label>
+      <select class="theme-select" id="locale-select" aria-label="Language">
+      <option class="theme-select-option" value="en-GB" selected lang="en-GB">English (UK)</option>
+      <option class="theme-select-option" value="en-US" lang="en-US">English (US)</option>
+      <option class="theme-select-option" value="cy-GB" lang="cy-GB">Cymraeg</option>
+      <option class="theme-select-option" value="de-DE" lang="de-DE">Deutsch</option>
+      </select>
+      <label class="visually-hidden" for="theme-select">Theme</label>
+      <select class="theme-select" id="theme-select" aria-label="Theme">
+      <option class="theme-select-option" value="abyss">Abyss</option>
+      <option class="theme-select-option" value="acid">Acid</option>
+      <option class="theme-select-option" value="adobe-spectrum">Adobe Spectrum</option>
+      <option class="theme-select-option" value="aqua">Aqua</option>
+      <option class="theme-select-option" value="autumn">Autumn</option>
+      <option class="theme-select-option" value="black">Black</option>
+      <option class="theme-select-option" value="bumblebee">Bumblebee</option>
+      <option class="theme-select-option" value="business">Business</option>
+      <option class="theme-select-option" value="caramellatte">Caramellatte</option>
+      <option class="theme-select-option" value="cmyk">Cmyk</option>
+      <option class="theme-select-option" value="coffee">Coffee</option>
+      <option class="theme-select-option" value="corporate">Corporate</option>
+      <option class="theme-select-option" value="cupcake">Cupcake</option>
+      <option class="theme-select-option" value="cyberpunk">Cyberpunk</option>
+      <option class="theme-select-option" value="dark">Dark</option>
+      <option class="theme-select-option" value="dim">Dim</option>
+      <option class="theme-select-option" value="dracula">Dracula</option>
+      <option class="theme-select-option" value="emerald">Emerald</option>
+      <option class="theme-select-option" value="fantasy">Fantasy</option>
+      <option class="theme-select-option" value="forest">Forest</option>
+      <option class="theme-select-option" value="garden">Garden</option>
+      <option class="theme-select-option" value="halloween">Halloween</option>
+      <option class="theme-select-option" value="lemonade">Lemonade</option>
+      <option class="theme-select-option" value="light" selected>Light</option>
+      <option class="theme-select-option" value="lofi">Lofi</option>
+      <option class="theme-select-option" value="luxury">Luxury</option>
+      <option class="theme-select-option" value="mozilla-protocol">Mozilla Protocol</option>
+      <option class="theme-select-option" value="night">Night</option>
+      <option class="theme-select-option" value="nord">Nord</option>
+      <option class="theme-select-option" value="pastel">Pastel</option>
+      <option class="theme-select-option" value="retro">Retro</option>
+      <option class="theme-select-option" value="silk">Silk</option>
+      <option class="theme-select-option" value="sunset">Sunset</option>
+      <option class="theme-select-option" value="synthwave">Synthwave</option>
+      <option class="theme-select-option" value="united-kingdom-government-digital-service">UK · Government Digital Service</option>
+      <option class="theme-select-option" value="united-kingdom-national-health-service-england-for-patients">UK · NHS England — Patients</option>
+      <option class="theme-select-option" value="united-kingdom-national-health-service-england-for-practitioners">UK · NHS England — Practitioners</option>
+      <option class="theme-select-option" value="united-kingdom-national-health-service-scotland-for-patients">UK · NHS Scotland — Patients</option>
+      <option class="theme-select-option" value="united-kingdom-national-health-service-scotland-for-practitioners">UK · NHS Scotland — Practitioners</option>
+      <option class="theme-select-option" value="united-kingdom-national-health-service-wales-for-patients">UK · NHS Wales — Patients</option>
+      <option class="theme-select-option" value="united-kingdom-national-health-service-wales-for-practitioners">UK · NHS Wales — Practitioners</option>
+      <option class="theme-select-option" value="united-states-web-design-system">US · Web Design System</option>
+      <option class="theme-select-option" value="valentine">Valentine</option>
+      <option class="theme-select-option" value="winter">Winter</option>
+      <option class="theme-select-option" value="wireframe">Wireframe</option>
+      </select>
+      <label class="visually-hidden" for="text-size-chooser">Text size</label>
+      <select class="theme-select" id="text-size-chooser" aria-label="Text size">
+      <option class="theme-select-option" value="small">Small</option>
+      <option class="theme-select-option" value="medium" selected>Medium</option>
+      <option class="theme-select-option" value="large">Large</option>
+      <option class="theme-select-option" value="x-large">X Large</option>
+      </select>
+      <div class="share-chooser">
+      <button type="button" class="share-chooser-button" id="share-chooser" aria-label="Share this page" aria-expanded="false" aria-controls="share-chooser-list">
+      <span class="share-chooser-icon" aria-hidden="true">↪</span>
+      </button>
+      <ul class="share-chooser-list" id="share-chooser-list" hidden>
+      <li class="share-chooser-list-item">
+      <button type="button" class="share-chooser-copy" id="share-chooser-copy">Copy link</button>
+      </li>
+      </ul>
+      <p class="share-chooser-status" id="share-chooser-status" aria-live="polite"></p>
+      </div>
+      </div>
+    </div>
+  </header>
 
   <section class="panel preview" aria-live="polite" role="region" aria-label="Score preview">
     <div class="preview-row">
@@ -558,5 +452,9 @@
       recompute();
     });
   </script>
+  <script type="module" src="js/locale-select.js"></script>
+  <script type="module" src="js/theme-select.js"></script>
+  <script type="module" src="js/text-size-chooser.js"></script>
+  <script type="module" src="js/share-chooser.js"></script>
 </body>
 </html>

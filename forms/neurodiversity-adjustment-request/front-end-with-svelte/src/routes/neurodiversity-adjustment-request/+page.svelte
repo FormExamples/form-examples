@@ -6,22 +6,7 @@
 	const plural = 'neurodiversity-adjustment-requests';
 </script>
 
-<main class="mx-auto max-w-4xl px-4 py-12">
-	<header class="mb-10">
-		<p class="text-sm font-semibold uppercase tracking-wide text-primary">
-			Neurodiversity Adjustment Request
-		</p>
-		<h1 class="mt-2 text-3xl font-bold text-base-content">
-			Workplace reasonable-adjustments request for neurodiversity
-		</h1>
-		<p class="mt-4 text-base leading-relaxed text-base-content/70">
-			A UK-aligned reasonable-adjustments request that a worker (or a manager on their behalf)
-			completes to ask their employer for workplace adjustments, computing a four-axis grade
-			(Equality Act 2010 eligibility, impact / wellbeing risk, request completeness, and handling
-			priority) plus compliance-and-wellbeing flags to support the employer's duty to make
-			reasonable adjustments without unreasonable delay.
-		</p>
-	</header>
+<main class="mx-16 px-4 py-12">
 
 	<div class="grid gap-4 sm:grid-cols-2">
 		<a

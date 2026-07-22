@@ -5,20 +5,7 @@
 	const plural = 'mental-state-examinations';
 </script>
 
-<main class="mx-auto max-w-4xl px-4 py-12">
-	<header class="mb-10">
-		<p class="text-sm font-semibold uppercase tracking-wide text-primary">
-			Mental State Examination
-		</p>
-		<h1 class="mt-2 text-3xl font-bold text-base-content">MSE — the seven ASEPTIC domains</h1>
-		<p class="mt-4 text-base leading-relaxed text-base-content/70">
-			A structured clinician record of a psychiatric mental state examination — documenting the
-			seven ASEPTIC domains (appearance and behaviour, speech, emotion, perception, thought,
-			insight, cognition) — that grades documentation completeness
-			(<strong>Complete</strong> or <strong>Partial</strong>) and, independently, derives a risk
-			indicator from safety flags, with <strong>no numeric score</strong>.
-		</p>
-	</header>
+<main class="mx-16 px-4 py-12">
 
 	<div class="grid gap-4 sm:grid-cols-2">
 		<a

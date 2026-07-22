@@ -5,20 +5,7 @@
 	const plural = 'chronic-obstructive-pulmonary-disease-reviews';
 </script>
 
-<main class="mx-auto max-w-4xl px-4 py-12">
-	<header class="mb-10">
-		<p class="text-sm font-semibold uppercase tracking-wide text-primary">
-			Chronic Obstructive Pulmonary Disease Review
-		</p>
-		<h1 class="mt-2 text-3xl font-bold text-base-content">COPD annual review</h1>
-		<p class="mt-4 text-base leading-relaxed text-base-content/70">
-			A UK primary-care annual review for adults with confirmed COPD that captures spirometry,
-			symptom burden, exacerbation history, smoking, inhaler technique, vaccinations, and
-			self-management in a single continuous wizard, then classifies a GOLD airflow-limitation
-			grade, an ABE assessment group, and review completeness, aligned with NICE NG115 and GOLD
-			2023+.
-		</p>
-	</header>
+<main class="mx-16 px-4 py-12">
 
 	<div class="grid gap-4 sm:grid-cols-2">
 		<a

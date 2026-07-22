@@ -6,20 +6,7 @@
 	const plural = 'lumbar-puncture-test-requests';
 </script>
 
-<main class="mx-auto max-w-4xl px-4 py-12">
-	<header class="mb-10">
-		<p class="text-sm font-semibold uppercase tracking-wide text-primary">Lumbar Puncture Test Request</p>
-		<h1 class="mt-2 text-3xl font-bold text-base-content">
-			Lumbar puncture (LP) request / referral
-		</h1>
-		<p class="mt-4 text-base leading-relaxed text-base-content/70">
-			A UK NHS–aligned lumbar puncture (LP) request form that a clinician completes to request
-			cerebrospinal fluid (CSF) sampling and/or manometry, computing a four-axis vetting grade
-			(appropriateness, safety / contraindication, request completeness, and triage priority) plus
-			safety-critical flags to support the neurology / acute-medicine team's triage and scheduling
-			decision.
-		</p>
-	</header>
+<main class="mx-16 px-4 py-12">
 
 	<div class="grid gap-4 sm:grid-cols-2">
 		<a

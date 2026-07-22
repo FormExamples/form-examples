@@ -4,6 +4,7 @@
   import Field from '$lib/components/ui/Field.svelte';
   import NumberInput from '$lib/components/ui/NumberInput.svelte';
   import Select from '$lib/components/ui/Select.svelte';
+  import TextInput from '$lib/components/ui/TextInput.svelte';
 </script>
 
 <Fieldset legend="Step 14 — Functional capacity and frailty">
@@ -44,6 +45,37 @@
         <option value="medium">Medium</option>
         <option value="high">High</option>
       </Select>
+    </Field>
+  </div>
+
+  <h3 class="step-subhead">Social history</h3>
+  <div class="field-grid field-grid-3">
+    <Field label="Living situation">
+      <Select label="Living situation" bind:value={store.data.functionalCapacity.livingSituation}>
+        <option value="">—</option>
+        <option value="independent">Independent</option>
+        <option value="lives-with-family">Lives with family</option>
+        <option value="sheltered-housing">Sheltered housing</option>
+        <option value="residential-care">Residential care</option>
+        <option value="nursing-home">Nursing home</option>
+      </Select>
+    </Field>
+    <Field label="Support at home">
+      <Select label="Support at home" bind:value={store.data.functionalCapacity.supportAtHome}>
+        <option value="">—</option>
+        <option value="yes">Yes</option>
+        <option value="no">No</option>
+      </Select>
+    </Field>
+    <Field label="Falls within last year">
+      <Select label="Falls within last year" bind:value={store.data.functionalCapacity.fallsRiskWithinYear}>
+        <option value="">—</option>
+        <option value="yes">Yes</option>
+        <option value="no">No</option>
+      </Select>
+    </Field>
+    <Field label="Mobility status" class="field-span-2">
+      <TextInput label="Mobility status" bind:value={store.data.functionalCapacity.mobilityStatus} />
     </Field>
   </div>
 </Fieldset>

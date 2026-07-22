@@ -1,0 +1,237 @@
+#!/usr/bin/env python3
+"""bin/svelte-locale-select-refactor — add a hand-authored LocaleSelect
+control (Lily headless mirror, before ThemeSelect) to every form's
+`front-end-with-svelte/` root layout.
+
+Lily is consumed as a contract, not a runtime dependency (see
+forms/AGENTS-front-end-svelte.md §2), so this mirrors the ThemeSelect
+convention exactly: a local LocaleSelect.svelte/LocaleSelectOption.svelte
+pair reusing the `theme-select`/`theme-select-option` Lily classes, plus a
+`src/lib/config/locales.ts` with a fixed four-locale catalogue (en-GB,
+en-US, cy-GB, de-DE). Presentation-only: it sets `<html lang>` and
+persists the choice, matching the front-end-with-svelte theme mirror
+effect. No message catalogue is wired up — see docs/i18n.md for the
+deferred full-i18n rollout.
+
+Usage:
+  bin/svelte-locale-select-refactor --check   # CI drift check (no writes)
+  bin/svelte-locale-select-refactor --apply   # write changes
+
+Skips forms whose root layout has no ThemeSelect anchor yet (the
+`*-test-result` family predates the Lily theming rollout) and forms that
+already have a LocaleSelect (the medical-language-speaking-assessment-
+for-cymraeg i18n pilot, which ships its own translated LocaleSelect).
+
+Idempotent: re-running on an already-refactored form makes no further
+changes.
+"""
+
+from __future__ import annotations
+
+import argparse
+import re
+import sys
+from pathlib import Path
+
+REPO_ROOT = Path(__file__).resolve().parent.parent
+FORMS_DIR = REPO_ROOT / "forms"
+
+LOCALE_SELECT_SVELTE = '''<script lang="ts">
+\t// Lily Design System — LocaleSelect (headless).
+\t// The headless sibling of ThemeSelect: a native <select class="theme-select">
+\t// for choosing the UI language. Reuses the Lily theme-select styling so the two
+\t// nav controls render identically. The consumer provides LocaleSelectOption
+\t// children and applies the selected value. aria-label gives it an accessible name.
+\timport type { Snippet } from 'svelte';
+
+\tlet {
+\t\tclass: className = '',
+\t\tlabel,
+\t\tvalue = $bindable(''),
+\t\tchildren,
+\t\t...restProps
+\t}: {
+\t\t/** Accessible label. */
+\t\tlabel: string;
+\t\t/** Selected locale. Bindable. */
+\t\tvalue?: string;
+\t\t/** LocaleSelectOption elements. */
+\t\tchildren: Snippet;
+\t\t[key: string]: unknown;
+\t} = $props();
+</script>
+
+<select class={`theme-select ${className}`} aria-label={label} bind:value {...restProps}>
+\t{@render children?.()}
+</select>
+'''
+
+LOCALE_SELECT_OPTION_SVELTE = '''<script lang="ts">
+\t// Lily Design System — LocaleSelectOption (headless).
+\t// A single <option class="theme-select-option"> for use inside LocaleSelect.
+\timport type { Snippet } from 'svelte';
+
+\tlet {
+\t\tclass: className = '',
+\t\tvalue,
+\t\tselected = false,
+\t\tdisabled = false,
+\t\tchildren,
+\t\t...restProps
+\t}: {
+\t\t/** The locale value for this option. */
+\t\tvalue: string;
+\t\t/** Whether this option is pre-selected. */
+\t\tselected?: boolean;
+\t\t/** Whether this option is disabled. */
+\t\tdisabled?: boolean;
+\t\t/** The option label content. */
+\t\tchildren: Snippet;
+\t\t[key: string]: unknown;
+\t} = $props();
+</script>
+
+<option class={`theme-select-option ${className}`} {value} {selected} {disabled} {...restProps}
+\t>{@render children?.()}</option
+>
+'''
+
+LOCALES_TS_TEMPLATE = '''// The UI locales currently seeded across this repo (see root index.md).
+// Presentation-only: switching locale sets <html lang> and persists the
+// choice, matching the Lily theme-select convention. No message catalogue
+// is wired up for this form yet — see docs/i18n.md for the deferred rollout.
+
+/** A selectable UI locale: a BCP 47 tag and a human-readable label. */
+export interface LocaleOption {
+\tvalue: string;
+\tlabel: string;
+}
+
+/** Every seeded locale, in catalogue order. */
+export const LOCALE_OPTIONS: LocaleOption[] = [
+\t{ value: 'en-GB', label: 'English (UK)' },
+\t{ value: 'en-US', label: 'English (US)' },
+\t{ value: 'cy-GB', label: 'Cymraeg' },
+\t{ value: 'de-DE', label: 'Deutsch' }
+];
+
+/** The gold-standard default locale. */
+export const DEFAULT_LOCALE = 'en-GB';
+
+/** localStorage key for the persisted locale selection. */
+export const LOCALE_STORAGE_KEY = '__SLUG__.locale.v1';
+'''
+
+IMPORT_ANCHOR = "\timport { THEME_OPTIONS, THEME_STORAGE_KEY, DEFAULT_THEME } from '$lib/config/themes';\n"
+IMPORT_INSERT = (
+    "\timport LocaleSelect from '$lib/components/ui/LocaleSelect.svelte';\n"
+    "\timport LocaleSelectOption from '$lib/components/ui/LocaleSelectOption.svelte';\n"
+    "\timport { LOCALE_OPTIONS, LOCALE_STORAGE_KEY, DEFAULT_LOCALE } from '$lib/config/locales';\n"
+)
+
+THEME_EFFECT_RE = re.compile(
+    r"((?:\t// Mirror the choice onto <html data-theme> and persist it\.\n)?"
+    r"\t\$effect\(\(\) => \{\n"
+    r"\t\tif \(!browser\) return;\n"
+    r"\t\tdocument\.documentElement\.dataset\.theme = theme;\n"
+    r"\t\tlocalStorage\.setItem\(THEME_STORAGE_KEY, theme\);\n"
+    r"\t\}\);\n)"
+)
+
+LOCALE_STATE_AND_EFFECT = (
+    "\n"
+    "\t// Default locale mirrors the browser-detected/stored choice.\n"
+    "\tlet locale = $state(\n"
+    "\t\tbrowser ? (localStorage.getItem(LOCALE_STORAGE_KEY) ?? DEFAULT_LOCALE) : DEFAULT_LOCALE\n"
+    "\t);\n"
+    "\n"
+    "\t// Mirror the choice onto <html lang> and persist it.\n"
+    "\t$effect(() => {\n"
+    "\t\tif (!browser) return;\n"
+    "\t\tdocument.documentElement.lang = locale;\n"
+    "\t\tlocalStorage.setItem(LOCALE_STORAGE_KEY, locale);\n"
+    "\t});\n"
+)
+
+THEME_SELECT_RE = re.compile(r"([ \t]*)(<ThemeSelect\b)")
+
+
+def locale_select_markup(indent: str) -> str:
+    return (
+        f"{indent}<LocaleSelect label=\"Language\" class=\"ml-2\" bind:value={{locale}}>\n"
+        f"{indent}\t{{#each LOCALE_OPTIONS as opt (opt.value)}}\n"
+        f"{indent}\t\t<LocaleSelectOption value={{opt.value}}>{{opt.label}}</LocaleSelectOption>\n"
+        f"{indent}\t{{/each}}\n"
+        f"{indent}</LocaleSelect>\n"
+    )
+
+
+def process_layout(path: Path, check: bool) -> str:
+    text = path.read_text(encoding="utf-8")
+
+    if "LocaleSelect" in text:
+        return "skip-already-done"
+    if IMPORT_ANCHOR not in text:
+        return "skip-no-theme-import"
+    if not THEME_EFFECT_RE.search(text):
+        return "skip-no-theme-effect"
+    m = THEME_SELECT_RE.search(text)
+    if not m:
+        return "skip-no-theme-select-tag"
+
+    text = text.replace(IMPORT_ANCHOR, IMPORT_ANCHOR + IMPORT_INSERT, 1)
+    text = THEME_EFFECT_RE.sub(lambda mm: mm.group(1) + LOCALE_STATE_AND_EFFECT, text, count=1)
+
+    m2 = THEME_SELECT_RE.search(text)
+    indent = m2.group(1)
+    text = text[: m2.start()] + locale_select_markup(indent) + text[m2.start():]
+
+    if not check:
+        path.write_text(text, encoding="utf-8")
+    return "changed"
+
+
+def write_support_files(form_dir: Path, slug: str, check: bool) -> None:
+    ui_dir = form_dir / "front-end-with-svelte" / "src" / "lib" / "components" / "ui"
+    config_dir = form_dir / "front-end-with-svelte" / "src" / "lib" / "config"
+
+    for target, content in (
+        (ui_dir / "LocaleSelect.svelte", LOCALE_SELECT_SVELTE),
+        (ui_dir / "LocaleSelectOption.svelte", LOCALE_SELECT_OPTION_SVELTE),
+        (config_dir / "locales.ts", LOCALES_TS_TEMPLATE.replace("__SLUG__", slug)),
+    ):
+        if target.exists() or check:
+            continue
+        target.parent.mkdir(parents=True, exist_ok=True)
+        target.write_text(content, encoding="utf-8")
+
+
+def main() -> int:
+    parser = argparse.ArgumentParser(description=__doc__)
+    group = parser.add_mutually_exclusive_group(required=True)
+    group.add_argument("--check", action="store_true", help="CI drift check (no writes)")
+    group.add_argument("--apply", action="store_true", help="write changes")
+    args = parser.parse_args()
+
+    layouts = sorted(FORMS_DIR.glob("*/front-end-with-svelte/src/routes/*/+layout.svelte"))
+    stats: dict[str, int] = {}
+    drift = False
+    for layout in layouts:
+        form_dir = layout.parents[4]
+        slug = form_dir.name
+        status = process_layout(layout, args.check)
+        stats[status] = stats.get(status, 0) + 1
+        if status == "changed":
+            write_support_files(form_dir, slug, args.check)
+            if args.check:
+                drift = True
+
+    print(("CHECK" if args.check else "APPLY") + " run")
+    for k, v in sorted(stats.items()):
+        print(f"  {k}: {v}")
+
+    return 1 if drift else 0
+
+
+if __name__ == "__main__":
+    sys.exit(main())

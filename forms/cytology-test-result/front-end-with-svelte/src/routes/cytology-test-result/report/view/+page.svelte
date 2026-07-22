@@ -75,7 +75,7 @@
 		</div>
 	</header>
 
-	<main class="mx-auto max-w-4xl px-4 py-6">
+	<main class="mx-16 px-4 py-6">
 		<!-- Critical-result alert -->
 		{#if result.followUpUrgency === 'critical-alert'}
 			<Alert type="error" heading="Critical-result alert" class="mb-6">

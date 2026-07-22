@@ -5,21 +5,7 @@
 	const plural = 'chronic-kidney-disease-reviews';
 </script>
 
-<main class="mx-auto max-w-4xl px-4 py-12">
-	<header class="mb-10">
-		<p class="text-sm font-semibold uppercase tracking-wide text-primary">
-			Chronic Kidney Disease Annual Review
-		</p>
-		<h1 class="mt-2 text-3xl font-bold text-base-content">
-			CKD review — KDIGO staging, risk zone, and completeness
-		</h1>
-		<p class="mt-4 text-base leading-relaxed text-base-content/70">
-			A UK primary-care structured chronic-kidney-disease review (NICE NG203, KDIGO 2012/2024)
-			that captures eGFR, urine ACR, blood pressure, medication review, and core CKD bloods in a
-			single continuous wizard, then classifies the KDIGO G-stage and albuminuria stage into a
-			risk zone, grades review completeness, and flags NICE NG203 referral and safety criteria.
-		</p>
-	</header>
+<main class="mx-16 px-4 py-12">
 
 	<div class="grid gap-4 sm:grid-cols-2">
 		<a

@@ -93,7 +93,7 @@
 		</div>
 	</header>
 
-	<main class="mx-auto max-w-4xl px-4 py-6">
+	<main class="mx-16 px-4 py-6">
 		<!-- Urgent / flag alert -->
 		{#if result.triageTier === 'urgent'}
 			<Alert type="warning" heading="Urgent triage" class="mb-6">

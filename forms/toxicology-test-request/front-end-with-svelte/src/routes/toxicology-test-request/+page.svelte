@@ -6,20 +6,7 @@
 	const plural = 'toxicology-test-requests';
 </script>
 
-<main class="mx-auto max-w-4xl px-4 py-12">
-	<header class="mb-10">
-		<p class="text-sm font-semibold uppercase tracking-wide text-primary">Toxicology Test Request</p>
-		<h1 class="mt-2 text-3xl font-bold text-base-content">
-			Toxicology / poisons / therapeutic-drug-level request
-		</h1>
-		<p class="mt-4 text-base leading-relaxed text-base-content/70">
-			A clinician completes a single-page wizard that orders one or more toxicology assays —
-			paracetamol, salicylate, alcohol, drugs-of-abuse screen, therapeutic-drug levels, heavy metals,
-			and more — from which the engine computes a four-axis vetting grade (appropriateness,
-			ingestion-timing validity, request completeness, and triage priority) plus safety-critical
-			flags to support the laboratory's vetting decision.
-		</p>
-	</header>
+<main class="mx-16 px-4 py-12">
 
 	<div class="grid gap-4 sm:grid-cols-2">
 		<a

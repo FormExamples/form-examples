@@ -83,7 +83,7 @@
 		</div>
 	</header>
 
-	<main class="mx-auto max-w-4xl px-4 py-6">
+	<main class="mx-16 px-4 py-6">
 		<!-- Score banner -->
 		<div class="mb-6 rounded-xl border-2 p-6 text-center {riskBandColor(result.riskBand)}">
 			<div class="text-3xl font-bold">HAS-BLED {result.hasBledScore} of 9</div>

@@ -2,6 +2,7 @@
 	import Field from '$lib/components/ui/Field.svelte';
 	import Fieldset from '$lib/components/ui/Fieldset.svelte';
 	import RadioGroup from '$lib/components/ui/RadioGroup.svelte';
+	import TextInput from '$lib/components/ui/TextInput.svelte';
 
 	import { assessment } from '$lib/stores/assessment.svelte';
 
@@ -17,4 +18,9 @@
 	<Field label="Do you suffer from acid reflux / GORD?"><RadioGroup label="Do you suffer from acid reflux / GORD?">{#each yesNo as opt (opt.value)}<label><input type="radio" class="radio-input" name="gord" value={opt.value} bind:group={g.gord}/> {opt.label}</label>{/each}</RadioGroup></Field>
 	<Field label="Do you have a hiatus hernia?"><RadioGroup label="Do you have a hiatus hernia?">{#each yesNo as opt (opt.value)}<label><input type="radio" class="radio-input" name="hiatus" value={opt.value} bind:group={g.hiatusHernia}/> {opt.label}</label>{/each}</RadioGroup></Field>
 	<Field label="Do you often feel nauseous or vomit?"><RadioGroup label="Do you often feel nauseous or vomit?">{#each yesNo as opt (opt.value)}<label><input type="radio" class="radio-input" name="nausea" value={opt.value} bind:group={g.nausea}/> {opt.label}</label>{/each}</RadioGroup></Field>
+	<Field label="Do you have bowel problems or are you prone to constipation?"><RadioGroup label="Do you have bowel problems or are you prone to constipation?">{#each yesNo as opt (opt.value)}<label><input type="radio" class="radio-input" name="bowel" value={opt.value} bind:group={g.bowelProblems}/> {opt.label}</label>{/each}</RadioGroup></Field>
+	<Field label="Do you have any special diet or food intolerances?"><RadioGroup label="Do you have any special diet or food intolerances?">{#each yesNo as opt (opt.value)}<label><input type="radio" class="radio-input" name="foodIntol" value={opt.value} bind:group={g.foodIntolerances}/> {opt.label}</label>{/each}</RadioGroup></Field>
+	{#if g.foodIntolerances === 'yes'}
+		<Field label="Please provide details" inputId="foodIntolDetails"><TextInput id="foodIntolDetails" label="Please provide details" bind:value={g.foodIntolerancesDetails} /></Field>
+	{/if}
 </Fieldset>

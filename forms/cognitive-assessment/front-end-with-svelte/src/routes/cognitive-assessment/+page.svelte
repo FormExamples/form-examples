@@ -6,16 +6,7 @@
 	const plural = 'cognitive-assessments';
 </script>
 
-<main class="mx-auto max-w-4xl px-4 py-12">
-	<header class="mb-10">
-		<p class="text-sm font-semibold uppercase tracking-wide text-primary">Cognitive Assessment</p>
-		<h1 class="mt-2 text-3xl font-bold text-base-content">Cognitive function screening</h1>
-		<p class="mt-4 text-base leading-relaxed text-base-content/70">
-			A structured cognitive evaluation, completed as a single continuous wizard, that grades
-			the patient with the Mini-Mental State Examination (MMSE), derives a cognitive impairment
-			category, and flags issues for the clinician.
-		</p>
-	</header>
+<main class="mx-16 px-4 py-12">
 
 	<div class="grid gap-4 sm:grid-cols-2">
 		<a

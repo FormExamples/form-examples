@@ -7,19 +7,7 @@
 	const plural = 'who-counter-referral-forms';
 </script>
 
-<main class="mx-auto max-w-4xl px-4 py-12">
-	<header class="mb-10">
-		<p class="text-sm font-semibold uppercase tracking-wide text-primary">
-			WHO Counter-Referral Form
-		</p>
-		<h1 class="mt-2 text-3xl font-bold text-base-content">Discharge back to primary care</h1>
-		<p class="mt-4 text-base leading-relaxed text-base-content/70">
-			The World Health Organization standardised counter-referral form, completed as a single
-			continuous SBAR (Situation, Background, Assessment, Recommendations) wizard, whose shared engine
-			checks completeness and flags clinically significant issues for the primary care provider
-			receiving the patient.
-		</p>
-	</header>
+<main class="mx-16 px-4 py-12">
 
 	<div class="grid gap-4 sm:grid-cols-2">
 		<a

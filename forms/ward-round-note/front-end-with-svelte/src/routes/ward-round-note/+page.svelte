@@ -5,19 +5,7 @@
 	const plural = 'ward-round-notes';
 </script>
 
-<main class="mx-auto max-w-4xl px-4 py-12">
-	<header class="mb-10">
-		<p class="text-sm font-semibold uppercase tracking-wide text-primary">Ward Round Note</p>
-		<h1 class="mt-2 text-3xl font-bold text-base-content">
-			Ward Round Note — a daily inpatient review
-		</h1>
-		<p class="mt-4 text-base leading-relaxed text-base-content/70">
-			A daily inpatient review, documented at the bedside during a ward round as a single continuous
-			wizard across ten review components, that this <strong>documentation and completeness</strong>
-			instrument grades <strong>Complete</strong>, <strong>Partial</strong>, or
-			<strong>Incomplete</strong> and independently checks for safety flags requiring escalation.
-		</p>
-	</header>
+<main class="mx-16 px-4 py-12">
 
 	<div class="grid gap-4 sm:grid-cols-2">
 		<a

@@ -5,20 +5,7 @@
 	const plural = 'cervical-screenings';
 </script>
 
-<main class="mx-auto max-w-4xl px-4 py-12">
-	<header class="mb-10">
-		<p class="text-sm font-semibold uppercase tracking-wide text-primary">Cervical Screening</p>
-		<h1 class="mt-2 text-3xl font-bold text-base-content">Cervical screening record</h1>
-		<p class="mt-4 text-base leading-relaxed text-base-content/70">
-			A structured record of a cervical screening (smear) encounter under the UK NHS Cervical
-			Screening Programme, using high-risk HPV (hrHPV) primary screening with reflex cytology on
-			HPV-positive samples, completed as a single continuous wizard that documents eligibility,
-			consent, sample adequacy, the primary hrHPV result, and reflex cytology, then classifies the
-			<strong>result</strong> and the <strong>management outcome</strong> — routine recall, early
-			repeat, colposcopy referral, or cease — and raises safety flags (a documentation and
-			result-classification form, with no numeric score).
-		</p>
-	</header>
+<main class="mx-16 px-4 py-12">
 
 	<div class="grid gap-4 sm:grid-cols-2">
 		<a

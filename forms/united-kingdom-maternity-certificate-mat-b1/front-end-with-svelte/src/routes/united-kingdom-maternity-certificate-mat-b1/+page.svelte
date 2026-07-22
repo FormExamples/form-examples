@@ -7,18 +7,7 @@
 	const plural = 'united-kingdom-maternity-certificates-mat-b1';
 </script>
 
-<main class="mx-auto max-w-4xl px-4 py-12">
-	<header class="mb-10">
-		<p class="text-sm font-semibold uppercase tracking-wide text-primary">UK Maternity Certificate</p>
-		<h1 class="mt-2 text-3xl font-bold text-base-content">MAT B1 maternity certificate</h1>
-		<p class="mt-4 text-base leading-relaxed text-base-content/70">
-			The DWP MAT B1 certificate, issued by doctors and registered midwives so a pregnant patient
-			can claim Statutory Maternity Pay, Maternity Allowance, and the Sure Start Maternity Grant, is
-			captured as a single continuous wizard — patient identification, either Part A
-			(pre-confinement) or Part B (post-confinement), and issuer details — validated by a shared
-			rules engine for completeness, issuing-window, and credential rules.
-		</p>
-	</header>
+<main class="mx-16 px-4 py-12">
 
 	<div class="grid gap-4 sm:grid-cols-2">
 		<a

@@ -68,5 +68,57 @@
     <Field label="LOS (days)">
       <NumberInput label="LOS (days)" bind:value={store.data.anaesthesiaPlan.anticipatedLengthOfStayDays} />
     </Field>
+    <Field label="VTE risk assessment">
+      <Select label="VTE risk assessment" bind:value={store.data.anaesthesiaPlan.vteRiskLevel}>
+        <option value="">—</option>
+        <option value="low">Low</option>
+        <option value="medium">Medium</option>
+        <option value="high">High</option>
+      </Select>
+    </Field>
+    <Field label="COVID-19 screening / PCR">
+      <Select label="COVID-19 screening / PCR" bind:value={store.data.anaesthesiaPlan.covidScreeningResult}>
+        <option value="">—</option>
+        <option value="not-tested">Not tested</option>
+        <option value="negative">Negative</option>
+        <option value="positive">Positive</option>
+        <option value="pending">Pending</option>
+      </Select>
+    </Field>
+  </div>
+
+  <h3 class="step-subhead">Discharge planning</h3>
+  <div class="field-grid">
+    <Field label="Planned discharge destination">
+      <Select label="Planned discharge destination" bind:value={store.data.anaesthesiaPlan.dischargeDestination}>
+        <option value="">—</option>
+        <option value="home">Home</option>
+        <option value="home-with-support">Home with support</option>
+        <option value="residential-care">Residential care</option>
+        <option value="nursing-home">Nursing home</option>
+        <option value="rehabilitation">Rehabilitation</option>
+        <option value="other">Other</option>
+      </Select>
+    </Field>
+    <Field label="Social services involvement">
+      <Select label="Social services involvement" bind:value={store.data.anaesthesiaPlan.socialServicesInvolvement}>
+        <option value="">—</option>
+        <option value="yes">Yes</option>
+        <option value="no">No</option>
+      </Select>
+    </Field>
+    <Field label="Reablement / physiotherapy needs">
+      <Select
+        label="Reablement / physiotherapy needs"
+        bind:value={store.data.anaesthesiaPlan.reablementPhysiotherapyNeeds}
+      >
+        <option value="">—</option>
+        <option value="yes">Yes</option>
+        <option value="no">No</option>
+      </Select>
+    </Field>
+    <Field label="Follow-up requirements" class="field-span-2">
+      <TextInput label="Follow-up requirements" bind:value={store.data.anaesthesiaPlan.followUpRequirements} />
+    </Field>
   </div>
 </Fieldset>

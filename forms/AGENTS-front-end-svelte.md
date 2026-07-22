@@ -78,19 +78,75 @@ system** — do not hand-roll theme CSS.
 - **Vendored themes.** All Lily theme stylesheets are copied to
   `static/themes/<name>.css` (light, dark, dim, dracula, nord, the NHS
   England/Scotland/Wales patient & practitioner themes, GDS, USWDS, …). Each is
-  a standalone file; load **exactly one at a time** via a swappable
-  `<link rel="stylesheet" href="{base}/themes/{theme}.css">` in `+layout.svelte`
-  (they cannot be `@import`-ed together — each includes a bare `:where(:root)`
-  block and they would collide).
+  a standalone file; **exactly one loads at a time** via a swappable
+  `<link data-lily-theme-chooser>` that the `ThemeChooser` component injects and
+  swaps itself (they cannot be `@import`-ed together — each includes a bare
+  `:where(:root)` block and they would collide).
 - **The default theme is the Lily light theme.** The `@theme` block in
   `app.css` carries the Lily *light* token values, so the baseline render is
   Lily light before any stylesheet loads; the persisted default selection is
   `light` (`src/lib/config/themes.ts` `DEFAULT_THEME`). There is no "system"
   option (it would 404 on a missing stylesheet).
-- **Prebuilt control.** Switch themes with the Lily `ThemeSelect` +
-  `ThemeSelectOption` components (`src/lib/components/ui/`), mirroring the
-  upstream headless API (classes `theme-select` / `theme-select-option`), bound
-  to the theme state and reflected onto `<html data-theme>`.
+- **Prebuilt control.** Switch themes with the Lily `ThemeChooser` component
+  (`src/lib/components/ui/`), mirroring
+  `lily-design-system-svelte-helpers/lily-design-system-svelte-theme-chooser`:
+  a single-glyph icon button (◑) that opens a headless listbox. Called with
+  `themesUrl`/`themes`/`themeLabels`/`defaultValue`/`storageKey` props and
+  manages its own `<link>` swap, `data-theme` attribute, and localStorage
+  persistence internally.
+- **LocaleChooser sits before ThemeChooser** in the header nav, the headless
+  sibling of `ThemeChooser` (single-glyph 🌐 icon button + listbox, `locales`/
+  `localeLabels`/`defaultValue`/`storageKey` props), reflected onto
+  `<html lang>`/`<html dir>` and persisted to `src/lib/config/locales.ts`'s
+  `LOCALE_STORAGE_KEY`. Fixed four-locale catalogue (`en-GB`, `en-US`,
+  `cy-GB`, `de-DE`); presentation only — no message catalogue is wired up,
+  see [`../docs/i18n.md`](../docs/i18n.md). Vendors a companion
+  `src/lib/components/ui/locales.ts` (upstream's `defaultLocaleLabels`/RTL
+  data) alongside `LocaleChooser.svelte`. Both controls share
+  `.theme-chooser`/`.locale-chooser` baseline CSS appended once to `app.css`
+  (headless: no default styling otherwise; no `lily-` prefix needed — the
+  chooser rename dissolved the class-name collision with the unrelated
+  `lily-design-system-svelte-headless` catalog components that made the
+  prefix necessary in the first place). Tools:
+  `bin/svelte-locale-select-refactor --check` (a locale control present in
+  every layout) and `bin/svelte-helpers-chooser-rename --check|--apply`
+  (button+listbox contract + naming drift against
+  `lily-design-system-svelte-helpers`; pin recorded in
+  [`lily-svelte-helpers-version.md`](lily-svelte-helpers-version.md)).
+- **`TextSizeChooser` sits after `ThemeChooser`** in the header nav: the same
+  headless button+listbox shape (single-glyph "A" icon, `sizes`/`sizeLabels`/
+  `defaultValue`/`storageKey` props), mirroring
+  `lily-design-system-svelte-helpers/lily-design-system-svelte-text-size-chooser`.
+  Sets `data-text-size` on `<html>` (mapped to `font-size` via
+  `:root[data-text-size="…"]` rules in `app.css`; WCAG 2.2 1.4.4/1.4.12), and
+  persists to `src/lib/config/text-sizes.ts`'s `TEXT_SIZE_STORAGE_KEY`. Fixed
+  four-size catalogue (`small`/`medium`/`large`/`x-large`).
+- **`ShareChooser` sits after `TextSizeChooser`** in the header nav: the same
+  headless button shape (single-glyph "↪" icon), mirroring
+  `lily-design-system-svelte-helpers/lily-design-system-svelte-share-chooser`.
+  Opens the native OS share sheet where available
+  (`navigator.share`/`strategy="auto"`), otherwise a small list — here, just
+  a "Copy link" item, since this package ships no social-network URLs by
+  design and a 341-form medical/clinical monorepo has no single defensible
+  answer for which networks belong. `targets` stays `[]` everywhere. Tool
+  for both of the above (naming rollout + rename):
+  `bin/svelte-helpers-chooser-rename --check|--apply`.
+- **Header layout: title left, nav + controls right.** The header `<nav>`'s
+  inner row is `flex items-center justify-between`: the brand/title `<a>` is
+  the first child, and a second `flex items-center gap-1` wrapper holding the
+  nav links, `LocaleChooser`, `ThemeChooser`, `TextSizeChooser`, then
+  `ShareChooser` is the second child — so the row splits into a left title
+  and a right-aligned link/control cluster.
+- **Page-width model: `body` is edge-to-edge; `<main>` carries the gutter.**
+  `body { margin: 0; }` (an unlayered rule in `app.css` so it outranks
+  Tailwind's `@layer base` preflight reset). The `+layout.svelte` `<nav>`
+  is full width (its own background reaches the viewport edge; the
+  `mx-auto max-w-5xl` inner row keeps its links/controls centered and
+  padded). Every route's `<main>` carries `mx-16` (Tailwind for
+  `margin-left/right: 4rem`) instead of the old `mx-auto max-w-Nxl`
+  centered-column classes — no `max-width`, so it fills the remaining
+  viewport width between the two 4rem gutters. Matches
+  `front-end-with-html/`.
 - **Components consume Lily tokens, not hardcoded greys.** `app.css` registers
   the Lily palette in `@theme` (`--color-base-100/200/300`, `--color-base-content`,
   `--color-primary`, `--color-error`, …) so Tailwind emits `bg-base-100`,
@@ -298,6 +354,11 @@ header and footer included, scrolls with the content:
 ```
 
 Dashboards follow the analogous `DataTable` shell.
+
+**Structural rule:** the `<main>` tag does not have an inner `<header>` tag.
+`.page-header` is always a sibling that precedes `<main>`, never nested
+inside it — including on welcome pages and wizard/detail pages that show a
+title, description, `Progress`, or `StepList` above the page body.
 
 ## 6. State management
 

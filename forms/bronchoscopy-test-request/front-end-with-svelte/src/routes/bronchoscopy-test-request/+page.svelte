@@ -6,19 +6,7 @@
 	const plural = 'bronchoscopy-test-requests';
 </script>
 
-<main class="mx-auto max-w-4xl px-4 py-12">
-	<header class="mb-10">
-		<p class="text-sm font-semibold uppercase tracking-wide text-primary">Bronchoscopy Test Request</p>
-		<h1 class="mt-2 text-3xl font-bold text-base-content">Airway endoscopy request (referral)</h1>
-		<p class="mt-4 text-base leading-relaxed text-base-content/70">
-			A UK NHS–aligned bronchoscopy request that a clinician completes to refer a patient for airway
-			endoscopy, recording the requested procedure, the clinical indication and specific question,
-			relevant history, respiratory symptoms, imaging findings, bleeding / anticoagulation risk, and
-			procedural risk, then computing a four-axis vetting grade (appropriateness, cancer-pathway
-			urgency, request completeness, and pre-procedure risk) plus safety-critical flags to support
-			the bronchoscopy service's triage and booking decision.
-		</p>
-	</header>
+<main class="mx-16 px-4 py-12">
 
 	<div class="grid gap-4 sm:grid-cols-2">
 		<a

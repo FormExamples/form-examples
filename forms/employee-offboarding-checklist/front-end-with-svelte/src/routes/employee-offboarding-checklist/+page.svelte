@@ -6,16 +6,7 @@
 	const plural = 'employee-offboarding-checklists';
 </script>
 
-<main class="mx-auto max-w-4xl px-4 py-12">
-	<header class="mb-10">
-		<p class="text-sm font-semibold uppercase tracking-wide text-primary">Employee Offboarding Checklist</p>
-		<h1 class="mt-2 text-3xl font-bold text-base-content">Structured employee offboarding</h1>
-		<p class="mt-4 text-base leading-relaxed text-base-content/70">
-			A structured offboarding checklist, completed as a single continuous wizard, that the shared
-			engine validates for completeness, returning a Complete / Partial / Incomplete outcome,
-			blocking items, and security- and contract-critical flags for HR.
-		</p>
-	</header>
+<main class="mx-16 px-4 py-12">
 
 	<div class="grid gap-4 sm:grid-cols-2">
 		<a

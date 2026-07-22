@@ -7,19 +7,7 @@
 	const plural = 'legal-requirements-privacy-notices';
 </script>
 
-<main class="mx-auto max-w-4xl px-4 py-12">
-	<header class="mb-10">
-		<p class="text-sm font-semibold uppercase tracking-wide text-primary">
-			Legal Requirements Privacy Notice
-		</p>
-		<h1 class="mt-2 text-3xl font-bold text-base-content">Statutory disclosures acknowledgment</h1>
-		<p class="mt-4 text-base leading-relaxed text-base-content/70">
-			A short single-page wizard that presents the practice's legal-requirements privacy notice and
-			records the patient's acknowledgment and signature, whose shared engine validates completeness,
-			derives a Complete / Incomplete status, and flags any governance issues for the
-			information-governance officer.
-		</p>
-	</header>
+<main class="mx-16 px-4 py-12">
 
 	<div class="grid gap-4 sm:grid-cols-2">
 		<a

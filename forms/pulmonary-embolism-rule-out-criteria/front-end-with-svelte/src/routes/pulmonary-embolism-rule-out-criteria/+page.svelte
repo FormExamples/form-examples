@@ -5,20 +5,7 @@
 	const plural = 'pulmonary-embolism-rule-out-criterias';
 </script>
 
-<main class="mx-auto max-w-4xl px-4 py-12">
-	<header class="mb-10">
-		<p class="text-sm font-semibold uppercase tracking-wide text-primary">
-			Pulmonary Embolism Rule-out Criteria
-		</p>
-		<h1 class="mt-2 text-3xl font-bold text-base-content">PERC bedside rule-out screen</h1>
-		<p class="mt-4 text-base leading-relaxed text-base-content/70">
-			A bedside rule-out screen, completed as a single continuous wizard, for adults in whom the
-			clinician has already judged the pre-test probability of pulmonary embolism to be
-			<strong>low</strong>, that classifies the patient as <strong>PERC-negative</strong> (pre-test
-			probability low and all eight criteria satisfied, excluding PE without a D-dimer or imaging) or
-			<strong>PERC-positive</strong> otherwise — a status / classification form with no numeric score.
-		</p>
-	</header>
+<main class="mx-16 px-4 py-12">
 
 	<div class="grid gap-4 sm:grid-cols-2">
 		<a

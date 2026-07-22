@@ -50,4 +50,13 @@
 	{/if}
 
 	<Field label="Have you had a recent upper respiratory tract infection (cold/flu)?"><RadioGroup label="Have you had a recent upper respiratory tract infection (cold/flu)?">{#each yesNo as opt (opt.value)}<label><input type="radio" class="radio-input" name="urti" value={opt.value} bind:group={r.recentURTI}/> {opt.label}</label>{/each}</RadioGroup></Field>
+
+	<p class="hint">Snoring and daytime sleepiness (STOP-BANG screen)</p>
+	<Field label="Do you snore?"><RadioGroup label="Do you snore?">{#each yesNo as opt (opt.value)}<label><input type="radio" class="radio-input" name="snoring" value={opt.value} bind:group={r.snoring}/> {opt.label}</label>{/each}</RadioGroup></Field>
+	{#if r.snoring === 'yes'}
+		<Field label="Do you snore loudly (louder than talking or heard through a closed door)?"><RadioGroup label="Do you snore loudly?">{#each yesNo as opt (opt.value)}<label><input type="radio" class="radio-input" name="snoringLoud" value={opt.value} bind:group={r.snoringLoud}/> {opt.label}</label>{/each}</RadioGroup></Field>
+		<NumberInput label="Collar size (inches)" name="collarSize" bind:value={r.collarSizeInches} min={10} max={30} />
+	{/if}
+	<Field label="Do you often feel tired, fatigued or sleepy during the daytime?"><RadioGroup label="Do you often feel tired, fatigued or sleepy during the daytime?">{#each yesNo as opt (opt.value)}<label><input type="radio" class="radio-input" name="daytimeSleepy" value={opt.value} bind:group={r.daytimeSleepiness}/> {opt.label}</label>{/each}</RadioGroup></Field>
+	<Field label="Has anyone observed you stop breathing during your sleep?"><RadioGroup label="Has anyone observed you stop breathing during your sleep?">{#each yesNo as opt (opt.value)}<label><input type="radio" class="radio-input" name="observedApnoea" value={opt.value} bind:group={r.observedApnoeaEpisodes}/> {opt.label}</label>{/each}</RadioGroup></Field>
 </Fieldset>

@@ -84,7 +84,7 @@
 		</div>
 	</header>
 
-	<main class="mx-auto max-w-4xl px-4 py-6">
+	<main class="mx-16 px-4 py-6">
 		<!-- Title -->
 		<h2 class="mb-4 text-2xl font-bold text-base-content">
 			{pad4(data.adr.number)}{data.adr.title ? ` — ${data.adr.title}` : ''}

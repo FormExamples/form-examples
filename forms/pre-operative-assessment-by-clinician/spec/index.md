@@ -15,8 +15,8 @@ report with an anaesthesia plan suitable for the pre-operative record.
 This form is the clinician counterpart to a patient self-report pre-operative
 questionnaire: it is completed by an anaesthetist, surgeon, pre-op assessment
 nurse, or perioperative physician rather than by the patient. It is aligned with
-CPOC's *Preoperative Assessment and Optimisation for Adult Surgery* (June 2021)
-and the Geeky Medics *Anaesthetic Pre-operative Assessment OSCE Guide*, and is
+CPOC's _Preoperative Assessment and Optimisation for Adult Surgery_ (June 2021)
+and the Geeky Medics _Anaesthetic Pre-operative Assessment OSCE Guide_, and is
 intended to support shared decision-making under the Montgomery consent
 standard.
 
@@ -36,11 +36,11 @@ In scope: the schema, scoring engine, four front-ends (form + dashboard, each in
 - **Composite perioperative risk:** Low / Moderate / High / Critical, driven by
   the worst-band finding across instruments (max-grade algorithm).
 
-| Category | Drivers |
-| --- | --- |
-| Low | ASA I–II, Mallampati I–II, RCRI 0, STOP-BANG 0–2, CFS 1–3 — routine anaesthesia |
-| Moderate | any single mid-band finding — additional planning, senior review optional |
-| High | ASA III, Mallampati III–IV, RCRI ≥ 2, STOP-BANG ≥ 5, CFS 5–6 — senior anaesthetist review, consider enhanced care |
+| Category | Drivers                                                                                                                                            |
+| -------- | -------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Low      | ASA I–II, Mallampati I–II, RCRI 0, STOP-BANG 0–2, CFS 1–3 — routine anaesthesia                                                                    |
+| Moderate | any single mid-band finding — additional planning, senior review optional                                                                          |
+| High     | ASA III, Mallampati III–IV, RCRI ≥ 2, STOP-BANG ≥ 5, CFS 5–6 — senior anaesthetist review, consider enhanced care                                  |
 | Critical | ASA IV–V, predicted difficult airway plus significant cardiorespiratory comorbidity, CFS ≥ 7 — MDT pre-op review, consider critical care admission |
 
 ## 4. Inputs and outputs
@@ -53,17 +53,17 @@ In scope: the schema, scoring engine, four front-ends (form + dashboard, each in
 
 Required artefacts and their current status:
 
-| Subdirectory | Role |
-| --- | --- |
-| `sql` | source of truth |
-| `xml` | generated |
-| `fhir` | generated |
-| `protobuf` | generated |
-| `openapi` | generated |
-| `front-end-with-html` | HTML + Lily (wizard + dashboard) — not implemented |
-| `front-end-with-svelte` | SvelteKit (wizard + dashboard) — not implemented |
-| `back-end-with-loco` | Rust + Loco JSON API |
-| `back-end-with-loco-setup` | generated scaffold script |
+| Subdirectory               | Role                                               |
+| -------------------------- | -------------------------------------------------- |
+| `sql`                      | source of truth                                    |
+| `xml`                      | generated                                          |
+| `fhir`                     | generated                                          |
+| `protobuf`                 | generated                                          |
+| `openapi`                  | generated                                          |
+| `front-end-with-html`      | HTML + Lily (wizard + dashboard) — not implemented |
+| `front-end-with-svelte`    | SvelteKit (wizard + dashboard) — not implemented   |
+| `back-end-with-loco`       | Rust + Loco JSON API                               |
+| `back-end-with-loco-setup` | generated scaffold script                          |
 
 Generated artefacts (XML, FHIR R5, Protocol Buffers, OpenAPI, Loco setup script) are never hand-edited; re-run the generators in [`/AGENTS.md`](../../../AGENTS.md) §Tools after schema changes.
 

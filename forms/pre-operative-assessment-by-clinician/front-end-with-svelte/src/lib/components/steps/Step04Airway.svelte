@@ -4,6 +4,8 @@
   import Field from '$lib/components/ui/Field.svelte';
   import NumberInput from '$lib/components/ui/NumberInput.svelte';
   import Select from '$lib/components/ui/Select.svelte';
+  import TextInput from '$lib/components/ui/TextInput.svelte';
+  import TextAreaInput from '$lib/components/ui/TextAreaInput.svelte';
 
   const sb = [
     ['stopbangSnoring', 'Loud snoring'],
@@ -58,6 +60,46 @@
         <option value="yes">Yes</option>
         <option value="no">No</option>
       </Select>
+    </Field>
+  </div>
+
+  <h3 class="step-subhead">Surgical and anaesthetic history</h3>
+  <div class="field-grid">
+    <Field label="Previous surgeries" class="field-span-2">
+      <TextAreaInput
+        label="Previous surgeries"
+        rows={2}
+        bind:value={store.data.airway.previousSurgeries}
+      />
+    </Field>
+    <Field label="Previous anaesthetic issues">
+      <Select label="Previous anaesthetic issues" bind:value={store.data.airway.previousAnaestheticIssues}>
+        <option value="">—</option>
+        <option value="yes">Yes</option>
+        <option value="no">No</option>
+      </Select>
+    </Field>
+    <Field label="Previous anaesthetic issue details">
+      <TextInput
+        label="Previous anaesthetic issue details"
+        bind:value={store.data.airway.previousAnaestheticIssuesDetails}
+      />
+    </Field>
+    <Field label="Family history of anaesthetic complications">
+      <Select
+        label="Family history of anaesthetic complications"
+        bind:value={store.data.airway.familyHistoryAnaestheticComplications}
+      >
+        <option value="">—</option>
+        <option value="yes">Yes</option>
+        <option value="no">No</option>
+      </Select>
+    </Field>
+    <Field label="Family history details">
+      <TextInput
+        label="Family history details"
+        bind:value={store.data.airway.familyHistoryAnaestheticComplicationsDetails}
+      />
     </Field>
   </div>
 

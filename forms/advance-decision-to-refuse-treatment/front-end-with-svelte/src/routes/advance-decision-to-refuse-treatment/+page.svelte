@@ -6,16 +6,7 @@
 	const plural = 'advance-decisions-to-refuse-treatment';
 </script>
 
-<main class="mx-auto max-w-4xl px-4 py-12">
-	<header class="mb-10">
-		<p class="text-sm font-semibold uppercase tracking-wide text-primary">Advance Decision to Refuse Treatment</p>
-		<h1 class="mt-2 text-3xl font-bold text-base-content">Record treatment refusals in advance</h1>
-		<p class="mt-4 text-base leading-relaxed text-base-content/70">
-			A legal document, completed as a single continuous wizard, that lets a person record decisions
-			to refuse specific medical treatments in advance under the Mental Capacity Act 2005, checked by
-			the shared engine for legal validity and flagged for clinical and legal review.
-		</p>
-	</header>
+<main class="mx-16 px-4 py-12">
 
 	<div class="grid gap-4 sm:grid-cols-2">
 		<a

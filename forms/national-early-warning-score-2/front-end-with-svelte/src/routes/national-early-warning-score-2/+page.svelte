@@ -5,21 +5,7 @@
 	const plural = 'national-early-warning-score-2s';
 </script>
 
-<main class="mx-auto max-w-4xl px-4 py-12">
-	<header class="mb-10">
-		<p class="text-sm font-semibold uppercase tracking-wide text-primary">
-			National Early Warning Score 2
-		</p>
-		<h1 class="mt-2 text-3xl font-bold text-base-content">
-			NEWS2 track-and-trigger early warning score
-		</h1>
-		<p class="mt-4 text-base leading-relaxed text-base-content/70">
-			A UK NHS–aligned implementation of the Royal College of Physicians' (2017) standardised
-			track-and-trigger early warning system, completed as a single continuous wizard, that scores
-			six physiological parameters and returns a clinical-risk band with the RCP-recommended
-			monitoring frequency and escalation response.
-		</p>
-	</header>
+<main class="mx-16 px-4 py-12">
 
 	<div class="grid gap-4 sm:grid-cols-2">
 		<a

@@ -78,25 +78,23 @@
 	}
 </script>
 
-<main class="mx-auto max-w-3xl px-4 py-6">
-	<header class="mb-6 no-print">
-		<h1 class="text-2xl font-bold text-base-content">
-			{isNew ? 'New agile principles assessment' : `Agile principles assessment ${id}`}
-		</h1>
-		<p class="mt-1 text-sm text-base-content/70">
-			Complete all 14 sections; the composite maturity, per-principle bands, and operational flags
-			are computed live and finalised on submit.
-		</p>
-		<p class="mt-2 text-sm font-medium text-base-content/80">
-			{result.answeredCount} of 12 principles scored
-		</p>
-		<Progress label="Principles scored" value={result.answeredCount} max={12} />
-		<StepList label="Assessment sections" current={TOTAL_STEPS}>
-			{#each STEPS as step (step.number)}
-				<StepListItem status="finished" label={step.title}>{step.short}</StepListItem>
-			{/each}
-		</StepList>
-	</header>
+<main class="mx-16 px-4 py-6">
+	<h1 class="text-2xl font-bold text-base-content">
+		{isNew ? 'New agile principles assessment' : `Agile principles assessment ${id}`}
+	</h1>
+	<p class="mt-1 text-sm text-base-content/70">
+		Complete all 14 sections; the composite maturity, per-principle bands, and operational flags
+		are computed live and finalised on submit.
+	</p>
+	<p class="mt-2 text-sm font-medium text-base-content/80">
+		{result.answeredCount} of 12 principles scored
+	</p>
+	<Progress label="Principles scored" value={result.answeredCount} max={12} />
+	<StepList label="Assessment sections" current={TOTAL_STEPS}>
+		{#each STEPS as step (step.number)}
+			<StepListItem status="finished" label={step.title}>{step.short}</StepListItem>
+		{/each}
+	</StepList>
 
 	{#if errors.length > 0}
 		<ErrorSummary title="Please fix the following before submitting" class="mb-6">
@@ -111,9 +109,9 @@
 	<Form label="Agile principles assessment" onsubmit={submit}>
 		<div class="space-y-6">
 			{#each stepComponents as StepComponent, i (i)}
-				<div id="step-{i + 1}" class="scroll-mt-20 rounded-lg border border-base-300 bg-base-100 p-6 shadow-sm">
+				<section id="step-{i + 1}" class="scroll-mt-20 rounded-lg border border-base-300 bg-base-100 p-6 shadow-sm">
 					<StepComponent />
-				</div>
+				</section>
 			{/each}
 		</div>
 

@@ -1,0 +1,129 @@
+#!/usr/bin/env python3
+"""bin/html-helpers-chooser-rename -- rename the two HTML-side controls that
+mirror the Lily Svelte helpers' naming: text-size-select -> text-size-chooser,
+share-button -> share-chooser (dropping the old "-trigger" class in favour of
+"-button", matching the upstream ShareChooser rename).
+
+#theme-select / #locale-select are deliberately left untouched: those HTML
+controls reuse the *catalog* Lily `.theme-select` / `.theme-select-option`
+classes (a different, unrelated component family that the upstream helpers
+rename explicitly did NOT touch), not the renamed helpers package.
+
+What changes per form (front-end-with-html/):
+  - index.html, dashboard.html -> every `text-size-select` / `share-button`
+    substring (ids, classes, aria-controls, comments) renamed
+  - css/style.css, css/dashboard.css -> same substring rename
+  - js/text-size-select.js -> renamed to js/text-size-chooser.js (content
+    substring-renamed too)
+  - js/share-button.js -> renamed to js/share-chooser.js (content
+    substring-renamed too)
+
+Usage:
+  bin/html-helpers-chooser-rename --check   # CI drift check (no writes)
+  bin/html-helpers-chooser-rename --apply   # write changes
+
+Idempotent: re-running after a full --apply makes no further changes.
+"""
+
+from __future__ import annotations
+
+import argparse
+import re
+import sys
+from pathlib import Path
+
+REPO_ROOT = Path(__file__).resolve().parent.parent
+FORMS_DIR = REPO_ROOT / "forms"
+
+RENAMES = [
+    ("text-size-select", "text-size-chooser"),
+    ("share-button-trigger", "share-chooser-button"),
+    ("share-button", "share-chooser"),
+]
+
+
+def rename_text(text: str) -> str:
+    new_text = text
+    for old, new in RENAMES:
+        new_text = re.sub(rf"\b{re.escape(old)}\b", new, new_text)
+    return new_text
+
+
+def process_text_file(path: Path, check: bool) -> str:
+    text = path.read_text(encoding="utf-8")
+    had_old = any(re.search(rf"\b{re.escape(old)}\b", text) for old, _ in RENAMES)
+    if not had_old:
+        return "skip-not-present"
+    new_text = rename_text(text)
+    if not check:
+        path.write_text(new_text, encoding="utf-8")
+    return "changed"
+
+
+def process_js_rename(old_path: Path, new_path: Path, check: bool) -> str:
+    if new_path.exists() and not old_path.exists():
+        return "skip-already-done"
+    if not old_path.exists():
+        return "skip-missing"
+    text = old_path.read_text(encoding="utf-8")
+    new_text = rename_text(text)
+    if not check:
+        new_path.write_text(new_text, encoding="utf-8")
+        if old_path != new_path:
+            old_path.unlink()
+    return "changed"
+
+
+def main() -> int:
+    parser = argparse.ArgumentParser()
+    mode = parser.add_mutually_exclusive_group(required=True)
+    mode.add_argument("--check", action="store_true")
+    mode.add_argument("--apply", action="store_true")
+    args = parser.parse_args()
+    check = args.check
+
+    counts: dict[str, int] = {}
+
+    for form_dir in sorted(FORMS_DIR.iterdir()):
+        if not form_dir.is_dir():
+            continue
+        html_dir = form_dir / "front-end-with-html"
+        if not html_dir.is_dir():
+            continue
+
+        for html_name in ("index.html", "dashboard.html"):
+            html_path = html_dir / html_name
+            if not html_path.is_file():
+                continue
+            r = process_text_file(html_path, check)
+            counts[f"html-{r}"] = counts.get(f"html-{r}", 0) + 1
+
+        for css_name in ("style.css", "dashboard.css"):
+            css_path = html_dir / "css" / css_name
+            if not css_path.is_file():
+                continue
+            r = process_text_file(css_path, check)
+            counts[f"css-{r}"] = counts.get(f"css-{r}", 0) + 1
+
+        js_dir = html_dir / "js"
+        if js_dir.is_dir():
+            r = process_js_rename(
+                js_dir / "text-size-select.js", js_dir / "text-size-chooser.js", check
+            )
+            counts[f"js-text-size-{r}"] = counts.get(f"js-text-size-{r}", 0) + 1
+            r = process_js_rename(js_dir / "share-button.js", js_dir / "share-chooser.js", check)
+            counts[f"js-share-{r}"] = counts.get(f"js-share-{r}", 0) + 1
+
+    mode_label = "CHECK" if check else "APPLY"
+    print(f"{mode_label} run")
+    for key in sorted(counts):
+        print(f"  {key}: {counts[key]}")
+
+    if check:
+        drift = sum(v for k, v in counts.items() if k.endswith("-changed"))
+        return 1 if drift else 0
+    return 0
+
+
+if __name__ == "__main__":
+    sys.exit(main())

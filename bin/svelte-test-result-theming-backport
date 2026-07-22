@@ -1,0 +1,417 @@
+#!/usr/bin/env python3
+"""bin/svelte-test-result-theming-backport — backport the gold-standard
+Lily theme system to the `*-test-result` family's `front-end-with-svelte/`,
+which predates the theming rollout (plain hardcoded Tailwind tokens, no
+`static/themes/`, no `ThemeSelect`).
+
+One-shot, narrowly scoped migration for exactly the 37 forms whose root
+layout still has the legacy `bg-gray-50` nav shell (verified byte-identical
+across all 37 before writing this). For each form:
+
+  1. Replaces app.css's `@theme` + first `:root` block (hardcoded hex
+     tokens) with the gold-standard oklch Lily token set + alias block —
+     the same mapping used everywhere else in the repo (see
+     bin/html-theme-locale-select-refactor). The rest of app.css (component
+     CSS) is untouched.
+  2. Vendors `static/themes/*.css` from the pinned Lily checkout.
+  3. Adds `ThemeSelect.svelte` / `ThemeSelectOption.svelte` (byte-identical
+     to every other form) and `src/lib/config/themes.ts`.
+  4. Re-skins the nav shell (`bg-gray-50` → `bg-base-200 text-base-content`,
+     etc.) and adds the theme state/effect + swappable `<link>` + a
+     `ThemeSelect` control — bringing the layout to the exact gold-standard
+     shape so `bin/svelte-locale-select-refactor` picks it up afterwards.
+
+Usage:
+  bin/svelte-test-result-theming-backport --check   # CI drift check (no writes)
+  bin/svelte-test-result-theming-backport --apply   # write changes
+  bin/svelte-test-result-theming-backport --lily-dir PATH --apply
+
+Idempotent: re-running on an already-migrated form makes no further changes.
+Run `bin/svelte-locale-select-refactor --apply` afterwards to add LocaleSelect.
+"""
+
+from __future__ import annotations
+
+import argparse
+import shutil
+import sys
+from pathlib import Path
+
+REPO_ROOT = Path(__file__).resolve().parent.parent
+FORMS_DIR = REPO_ROOT / "forms"
+DEFAULT_LILY_THEMES_DIR = Path.home() / "git" / "lilydesignsystem" / "lily-design-system" / "themes"
+
+OLD_APP_CSS_HEADER = """@import 'tailwindcss';
+
+@theme {
+	--color-primary: #2563eb;
+	--color-primary-dark: #1d4ed8;
+	--color-danger: #dc2626;
+	--color-warning: #f59e0b;
+	--color-success: #16a34a;
+	--color-muted: #6b7280;
+}
+
+/*
+ * Lily class-name contract.
+ *
+ * Tailwind 4 still owns the page chrome; the rules below give each Lily
+ * class the same look-and-feel as the HTML reference so the headless
+ * contract carries the semantics and Tailwind carries the visual tokens.
+ * Mirrors forms/pre-operative-assessment-by-clinician/front-end-form-with-svelte/src/app.css.
+ */
+
+:root {
+	--color-primary-light: #dbeafe;
+	--color-bg: #f9fafb;
+	--color-surface: #ffffff;
+	--color-text: #111827;
+	--color-border: #e5e7eb;
+	--color-border-strong: #d1d5db;
+	--color-focus: #3b82f6;
+	--color-danger-bg: #fee2e2;
+	--color-warning-bg: #fef3c7;
+	--color-success-bg: #d1fae5;
+}"""
+
+NEW_APP_CSS_HEADER = """@import 'tailwindcss';
+
+/*
+ * Gold standard: the default theme is the Lily Design System *light* theme.
+ *
+ * These @theme tokens carry the Lily light-theme values, so Tailwind generates
+ * the Lily token utilities (bg-base-100, text-base-content, text-primary,
+ * text-error, …) and the baseline render IS Lily light even before a theme
+ * stylesheet loads. The vendored Lily theme files (static/themes/<name>.css)
+ * declare the same tokens in an *unlayered* :where(:root) block, which outranks
+ * these layered @theme defaults — so loading one (via the root layout) re-skins
+ * the entire app. Components consume only these tokens; there are no hardcoded
+ * greys, so every theme renders crisply.
+ */
+@theme {
+	--color-base-100: oklch(100% 0 0);
+	--color-base-200: oklch(98% 0 0);
+	--color-base-300: oklch(95% 0 0);
+	--color-base-content: oklch(21% 0.006 285.885);
+	--color-primary: oklch(45% 0.24 277.023);
+	--color-primary-content: oklch(93% 0.034 272.788);
+	--color-secondary: oklch(65% 0.241 354.308);
+	--color-secondary-content: oklch(94% 0.028 342.258);
+	--color-accent: oklch(77% 0.152 181.912);
+	--color-neutral: oklch(14% 0.005 285.823);
+	--color-neutral-content: oklch(92% 0.004 286.32);
+	--color-info: oklch(74% 0.16 232.661);
+	--color-info-content: oklch(29% 0.066 243.157);
+	--color-success: oklch(76% 0.177 163.223);
+	--color-success-content: oklch(37% 0.077 168.94);
+	--color-warning: oklch(82% 0.189 84.429);
+	--color-warning-content: oklch(41% 0.112 45.904);
+	--color-error: oklch(71% 0.194 13.428);
+	--color-error-content: oklch(27% 0.105 12.094);
+	--color-primary-dark: oklch(40% 0.22 277.023);
+}
+
+/*
+ * App-internal aliases used by the bespoke Lily component CSS below
+ * (.fieldset, .button, .select, .field, …). They derive entirely from the
+ * Lily tokens above, so they re-theme with the rest of the app.
+ */
+:root {
+	--color-bg: var(--color-base-200);
+	--color-surface: var(--color-base-100);
+	--color-text: var(--color-base-content);
+	--color-border: var(--color-base-300);
+	--color-border-strong: color-mix(in oklab, var(--color-base-300), var(--color-base-content) 28%);
+	--color-focus: var(--color-primary);
+	--color-muted: color-mix(in oklab, var(--color-base-content) 62%, var(--color-base-100));
+	--color-primary-light: color-mix(in oklab, var(--color-primary) 15%, var(--color-base-100));
+	--color-danger: var(--color-error);
+	--color-danger-bg: color-mix(in oklab, var(--color-error) 16%, var(--color-base-100));
+	--color-warning-bg: color-mix(in oklab, var(--color-warning) 20%, var(--color-base-100));
+	--color-success-bg: color-mix(in oklab, var(--color-success) 18%, var(--color-base-100));
+}"""
+
+THEME_SELECT_SVELTE = """<script lang=\"ts\">
+\t// Lily Design System — ThemeSelect (headless).
+\t// Mirrors the upstream lily-design-system-svelte-headless ThemeSelect: a
+\t// native <select class="theme-select"> for choosing a visual theme. The
+\t// consumer provides ThemeSelectOption children and applies the selected value
+\t// to the page. aria-label gives the control an accessible name.
+\timport type { Snippet } from 'svelte';
+
+\tlet {
+\t\tclass: className = '',
+\t\tlabel,
+\t\tvalue = $bindable(''),
+\t\tchildren,
+\t\t...restProps
+\t}: {
+\t\t/** Accessible label. */
+\t\tlabel: string;
+\t\t/** Selected theme. Bindable. */
+\t\tvalue?: string;
+\t\t/** ThemeSelectOption elements. */
+\t\tchildren: Snippet;
+\t\t[key: string]: unknown;
+\t} = $props();
+</script>
+
+<select class={`theme-select ${className}`} aria-label={label} bind:value {...restProps}>
+\t{@render children?.()}
+</select>
+"""
+
+THEME_SELECT_OPTION_SVELTE = """<script lang=\"ts\">
+\t// Lily Design System — ThemeSelectOption (headless).
+\t// A single <option class="theme-select-option"> for use inside ThemeSelect.
+\timport type { Snippet } from 'svelte';
+
+\tlet {
+\t\tclass: className = '',
+\t\tvalue,
+\t\tselected = false,
+\t\tdisabled = false,
+\t\tchildren,
+\t\t...restProps
+\t}: {
+\t\t/** The theme value for this option. */
+\t\tvalue: string;
+\t\t/** Whether this option is pre-selected. */
+\t\tselected?: boolean;
+\t\t/** Whether this option is disabled. */
+\t\tdisabled?: boolean;
+\t\t/** The option label content. */
+\t\tchildren: Snippet;
+\t\t[key: string]: unknown;
+\t} = $props();
+</script>
+
+<option class={`theme-select-option ${className}`} {value} {selected} {disabled} {...restProps}
+\t>{@render children?.()}</option
+>
+"""
+
+LABEL_OVERRIDES = {
+    "adobe-spectrum": "Adobe Spectrum",
+    "mozilla-protocol": "Mozilla Protocol",
+    "united-kingdom-government-digital-service": "UK · Government Digital Service",
+    "united-kingdom-national-health-service-england-for-patients": "UK · NHS England — Patients",
+    "united-kingdom-national-health-service-england-for-practitioners": "UK · NHS England — Practitioners",
+    "united-kingdom-national-health-service-scotland-for-patients": "UK · NHS Scotland — Patients",
+    "united-kingdom-national-health-service-scotland-for-practitioners": "UK · NHS Scotland — Practitioners",
+    "united-kingdom-national-health-service-wales-for-patients": "UK · NHS Wales — Patients",
+    "united-kingdom-national-health-service-wales-for-practitioners": "UK · NHS Wales — Practitioners",
+    "united-states-web-design-system": "US · Web Design System",
+}
+THEME_VALUES = [
+    "abyss", "acid", "adobe-spectrum", "aqua", "autumn", "black", "bumblebee", "business",
+    "caramellatte", "cmyk", "coffee", "corporate", "cupcake", "cyberpunk", "dark", "dim",
+    "dracula", "emerald", "fantasy", "forest", "garden", "halloween", "lemonade", "light",
+    "lofi", "luxury", "mozilla-protocol", "night", "nord", "pastel", "retro", "silk", "sunset",
+    "synthwave", "united-kingdom-government-digital-service",
+    "united-kingdom-national-health-service-england-for-patients",
+    "united-kingdom-national-health-service-england-for-practitioners",
+    "united-kingdom-national-health-service-scotland-for-patients",
+    "united-kingdom-national-health-service-scotland-for-practitioners",
+    "united-kingdom-national-health-service-wales-for-patients",
+    "united-kingdom-national-health-service-wales-for-practitioners",
+    "united-states-web-design-system", "valentine", "winter", "wireframe",
+]
+
+
+def title_case(value: str) -> str:
+    return " ".join(w[:1].upper() + w[1:] for w in value.split("-"))
+
+
+def themes_ts(slug: str) -> str:
+    overrides_lines = "\n".join(f"\t'{k}': '{v}'," for k, v in LABEL_OVERRIDES.items())
+    values_literal = ", ".join(f"'{v}'" for v in THEME_VALUES)
+    return f"""// The full Lily Design System theme catalogue, vendored as standalone
+// stylesheets under `static/themes/<value>.css`. Each file is loaded one at a
+// time via a swappable <link> in the root layout (standalone Lily theme files
+// are designed to be the sole theme stylesheet, so they cannot be combined).
+
+/** A selectable theme: the stylesheet basename and a human-readable label. */
+export interface ThemeOption {{
+\tvalue: string;
+\tlabel: string;
+}}
+
+/** Friendly labels for the long, fully-qualified design-system theme names. */
+const LABEL_OVERRIDES: Record<string, string> = {{
+{overrides_lines}
+}};
+
+/** Title-case a hyphenated single-word theme name (e.g. `cyberpunk` → `Cyberpunk`). */
+function titleCase(value: string): string {{
+\treturn value
+\t\t.split('-')
+\t\t.map((w) => w.charAt(0).toUpperCase() + w.slice(1))
+\t\t.join(' ');
+}}
+
+const THEME_VALUES = [{values_literal}];
+
+/** Every vendored Lily theme, in catalogue order. */
+export const THEME_OPTIONS: ThemeOption[] = THEME_VALUES.map((value) => ({{
+\tvalue,
+\tlabel: LABEL_OVERRIDES[value] ?? titleCase(value)
+}}));
+
+/** The gold-standard default theme: the Lily Design System light theme. */
+export const DEFAULT_THEME = 'light';
+
+/** localStorage key for the persisted theme selection. */
+export const THEME_STORAGE_KEY = '{slug}.theme.v1';
+"""
+
+
+OLD_IMPORTS = "\timport '../../app.css';\n\timport { page } from '$app/state';\n"
+NEW_IMPORTS = (
+    "\timport '../../app.css';\n"
+    "\timport { base } from '$app/paths';\n"
+    "\timport { browser } from '$app/environment';\n"
+    "\timport { page } from '$app/state';\n"
+    "\timport ThemeSelect from '$lib/components/ui/ThemeSelect.svelte';\n"
+    "\timport ThemeSelectOption from '$lib/components/ui/ThemeSelectOption.svelte';\n"
+    "\timport { THEME_OPTIONS, THEME_STORAGE_KEY, DEFAULT_THEME } from '$lib/config/themes';\n"
+)
+
+OLD_NAVCLASS_ACTIVE = "'rounded-md px-3 py-2 text-sm font-semibold text-primary bg-blue-50'"
+NEW_NAVCLASS_ACTIVE = "'rounded-md px-3 py-2 text-sm font-semibold text-primary bg-primary/10'"
+OLD_NAVCLASS_INACTIVE = "'rounded-md px-3 py-2 text-sm font-medium text-gray-600 hover:bg-gray-100'"
+NEW_NAVCLASS_INACTIVE = "'rounded-md px-3 py-2 text-sm font-medium text-base-content/70 hover:bg-base-200'"
+
+THEME_STATE_BLOCK = """
+	// Default theme is the Lily Design System light theme (gold standard).
+	let theme = $state(
+		browser ? (localStorage.getItem(THEME_STORAGE_KEY) ?? DEFAULT_THEME) : DEFAULT_THEME
+	);
+
+	// The active Lily theme stylesheet — exactly one standalone file at a time.
+	const themeHref = $derived(`${base}/themes/${theme}.css`);
+
+	// Mirror the choice onto <html data-theme> and persist it.
+	$effect(() => {
+		if (!browser) return;
+		document.documentElement.dataset.theme = theme;
+		localStorage.setItem(THEME_STORAGE_KEY, theme);
+	});
+"""
+
+THEME_SELECT_MARKUP = """				<ThemeSelect label="Theme" class="ml-2" bind:value={theme}>
+					{#each THEME_OPTIONS as opt (opt.value)}
+						<ThemeSelectOption value={opt.value}>{opt.label}</ThemeSelectOption>
+					{/each}
+				</ThemeSelect>
+"""
+
+
+def patch_layout(text: str, slug: str) -> str | None:
+    if OLD_IMPORTS not in text:
+        return None
+    text = text.replace(OLD_IMPORTS, NEW_IMPORTS, 1)
+    text = text.replace(OLD_NAVCLASS_ACTIVE, NEW_NAVCLASS_ACTIVE, 1)
+    text = text.replace(OLD_NAVCLASS_INACTIVE, NEW_NAVCLASS_INACTIVE, 1)
+    text = text.replace(
+        NEW_NAVCLASS_INACTIVE + ";\n</script>",
+        NEW_NAVCLASS_INACTIVE + ";\n" + THEME_STATE_BLOCK + "</script>",
+        1,
+    )
+    text = text.replace("</svelte:head>", '\t<link rel="stylesheet" href={themeHref} />\n</svelte:head>', 1)
+    text = text.replace('<div class="min-h-screen bg-gray-50">', '<div class="min-h-screen bg-base-200 text-base-content">', 1)
+    text = text.replace(
+        '<nav class="border-b border-gray-200 bg-white shadow-sm no-print">',
+        '<nav class="border-b border-base-300 bg-base-100 shadow-sm no-print">',
+        1,
+    )
+    text = text.replace('class="text-lg font-bold text-gray-900"', 'class="text-lg font-bold text-base-content"', 1)
+    text = text.replace('<div class="flex gap-1">', '<div class="flex items-center gap-1">', 1)
+
+    reports_anchor = "class={navClass('/reports')}>Reports</a>\n\t\t\t</div>"
+    if reports_anchor not in text:
+        return None
+    text = text.replace(
+        reports_anchor,
+        "class={navClass('/reports')}>Reports</a>\n" + THEME_SELECT_MARKUP + "\t\t\t</div>",
+        1,
+    )
+    return text
+
+
+def copy_theme_css(static_dir: Path, lily_themes_dir: Path, check: bool) -> None:
+    themes_dir = static_dir / "themes"
+    if not check:
+        themes_dir.mkdir(parents=True, exist_ok=True)
+    for src in lily_themes_dir.glob("*.css"):
+        dest = themes_dir / src.name
+        if dest.exists() and dest.stat().st_size == src.stat().st_size:
+            continue
+        if not check:
+            shutil.copy2(src, dest)
+
+
+def process_form(form_dir: Path, lily_themes_dir: Path, check: bool) -> str:
+    slug = form_dir.name
+    svelte_dir = form_dir / "front-end-with-svelte"
+    app_css = svelte_dir / "src" / "app.css"
+    if not app_css.exists():
+        return "skip-no-app-css"
+
+    css_text = app_css.read_text(encoding="utf-8")
+    if OLD_APP_CSS_HEADER not in css_text:
+        return "skip-not-legacy-header"
+
+    layouts = list(svelte_dir.glob("src/routes/*/+layout.svelte"))
+    layout = next((p for p in layouts if p.parent.name == slug), layouts[0] if layouts else None)
+    if layout is None:
+        return "skip-no-layout"
+
+    layout_text = layout.read_text(encoding="utf-8")
+    new_layout = patch_layout(layout_text, slug)
+    if new_layout is None:
+        return "skip-layout-anchor-mismatch"
+
+    if not check:
+        app_css.write_text(css_text.replace(OLD_APP_CSS_HEADER, NEW_APP_CSS_HEADER, 1), encoding="utf-8")
+        layout.write_text(new_layout, encoding="utf-8")
+        copy_theme_css(svelte_dir / "static", lily_themes_dir, check)
+        ui_dir = svelte_dir / "src" / "lib" / "components" / "ui"
+        config_dir = svelte_dir / "src" / "lib" / "config"
+        ui_dir.mkdir(parents=True, exist_ok=True)
+        config_dir.mkdir(parents=True, exist_ok=True)
+        (ui_dir / "ThemeSelect.svelte").write_text(THEME_SELECT_SVELTE, encoding="utf-8")
+        (ui_dir / "ThemeSelectOption.svelte").write_text(THEME_SELECT_OPTION_SVELTE, encoding="utf-8")
+        (config_dir / "themes.ts").write_text(themes_ts(slug), encoding="utf-8")
+
+    return "changed"
+
+
+def main() -> int:
+    parser = argparse.ArgumentParser(description=__doc__)
+    group = parser.add_mutually_exclusive_group(required=True)
+    group.add_argument("--check", action="store_true")
+    group.add_argument("--apply", action="store_true")
+    parser.add_argument("--lily-dir", type=Path, default=DEFAULT_LILY_THEMES_DIR)
+    args = parser.parse_args()
+
+    if not args.check and not args.lily_dir.is_dir():
+        sys.exit(f"Lily themes dir not found: {args.lily_dir}")
+
+    forms = sorted(p.parent for p in FORMS_DIR.glob("*/front-end-with-svelte"))
+    stats: dict[str, int] = {}
+    drift = False
+    for form_dir in forms:
+        result = process_form(form_dir, args.lily_dir, args.check)
+        stats[result] = stats.get(result, 0) + 1
+        if result == "changed" and args.check:
+            drift = True
+
+    print(("CHECK" if args.check else "APPLY") + " run")
+    for k, v in sorted(stats.items()):
+        print(f"  {k}: {v}")
+    return 1 if drift else 0
+
+
+if __name__ == "__main__":
+    sys.exit(main())

@@ -5,23 +5,7 @@
 	const plural = 'fit-screenings';
 </script>
 
-<main class="mx-auto max-w-4xl px-4 py-12">
-	<header class="mb-10">
-		<p class="text-sm font-semibold uppercase tracking-wide text-primary">
-			Bowel Cancer Screening with FIT
-		</p>
-		<h1 class="mt-2 text-3xl font-bold text-base-content">
-			NHS Bowel Cancer Screening Programme result classification
-		</h1>
-		<p class="mt-4 text-base leading-relaxed text-base-content/70">
-			Records a home faecal immunochemical test (FIT) kit outcome — eligibility, kit return and
-			adequacy, and the measured faecal haemoglobin concentration (&micro;g Hb/g) — in a single
-			continuous wizard whose shared engine classifies the result against the programme threshold
-			(&ge; 120 &micro;g Hb/g positive), sets a management action (negative &rarr; routine two-yearly
-			recall, positive &rarr; refer for colonoscopy, spoilt or not returned &rarr; repeat kit), and
-			routes red-flag symptoms to the urgent suspected-cancer pathway regardless of the FIT result.
-		</p>
-	</header>
+<main class="mx-16 px-4 py-12">
 
 	<div class="grid gap-4 sm:grid-cols-2">
 		<a

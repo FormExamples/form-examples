@@ -1,11 +1,14 @@
 <script lang="ts">
 	import '../../app.css';
 	import { base } from '$app/paths';
-	import { browser } from '$app/environment';
 	import { page } from '$app/state';
-	import ThemeSelect from '$lib/components/ui/ThemeSelect.svelte';
-	import ThemeSelectOption from '$lib/components/ui/ThemeSelectOption.svelte';
+	import ThemeChooser from '$lib/components/ui/ThemeChooser.svelte';
 	import { THEME_OPTIONS, THEME_STORAGE_KEY, DEFAULT_THEME } from '$lib/config/themes';
+	import LocaleChooser from '$lib/components/ui/LocaleChooser.svelte';
+	import { LOCALE_OPTIONS, LOCALE_STORAGE_KEY, DEFAULT_LOCALE } from '$lib/config/locales';
+	import TextSizeChooser from '$lib/components/ui/TextSizeChooser.svelte';
+	import ShareChooser from '$lib/components/ui/ShareChooser.svelte';
+	import { TEXT_SIZE_OPTIONS, TEXT_SIZE_STORAGE_KEY, DEFAULT_TEXT_SIZE } from '$lib/config/text-sizes';
 	let { children } = $props();
 
 	const navClass = (href: string) =>
@@ -13,20 +16,17 @@
 			? 'rounded-md px-3 py-2 text-sm font-semibold text-primary bg-primary/10'
 			: 'rounded-md px-3 py-2 text-sm font-medium text-base-content/70 hover:bg-base-200';
 
-	let theme = $state(
-		browser ? (localStorage.getItem(THEME_STORAGE_KEY) ?? DEFAULT_THEME) : DEFAULT_THEME
-	);
-	const themeHref = $derived(`${base}/themes/${theme}.css`);
-	$effect(() => {
-		if (!browser) return;
-		document.documentElement.dataset.theme = theme;
-		localStorage.setItem(THEME_STORAGE_KEY, theme);
-	});
+	// ThemeChooser/LocaleChooser manage <link>/data-theme/lang/dir + localStorage themselves.
+	const themeValues = THEME_OPTIONS.map((o) => o.value);
+	const themeLabels = Object.fromEntries(THEME_OPTIONS.map((o) => [o.value, o.label]));
+	const localeValues = LOCALE_OPTIONS.map((o) => o.value);
+	const localeLabels = Object.fromEntries(LOCALE_OPTIONS.map((o) => [o.value, o.label]));
+	const textSizeValues = TEXT_SIZE_OPTIONS.map((o) => o.value);
+	const textSizeLabels = Object.fromEntries(TEXT_SIZE_OPTIONS.map((o) => [o.value, o.label]));
 </script>
 
 <svelte:head>
 	<title>Diabetes Assessment</title>
-	<link rel="stylesheet" href={themeHref} />
 </svelte:head>
 
 <div class="min-h-screen bg-base-200 text-base-content">
@@ -37,11 +37,38 @@
 				<a href="/diabetes-assessment/" class={navClass('/')}>Welcome</a>
 				<a href="/diabetes-assessment/diabetes-assessments/new" class={navClass('/diabetes-assessments/new')}>New assessment</a>
 				<a href="/diabetes-assessment/diabetes-assessments" class={navClass('/diabetes-assessments')}>Dashboard</a>
-				<ThemeSelect label="Theme" class="ml-2" bind:value={theme}>
-					{#each THEME_OPTIONS as opt (opt.value)}
-						<ThemeSelectOption value={opt.value}>{opt.label}</ThemeSelectOption>
-					{/each}
-				</ThemeSelect>
+				<LocaleChooser
+					label="Language"
+					class="ml-2"
+					locales={localeValues}
+					localeLabels={localeLabels}
+					defaultValue={DEFAULT_LOCALE}
+					storageKey={LOCALE_STORAGE_KEY}
+				/>
+				<ThemeChooser
+					label="Theme"
+					class="ml-2"
+					themesUrl={`${base}/themes/`}
+					themes={themeValues}
+					themeLabels={themeLabels}
+					defaultValue={DEFAULT_THEME}
+					storageKey={THEME_STORAGE_KEY}
+				/>
+				<TextSizeChooser
+					label="Text size"
+					class="ml-2"
+					sizes={textSizeValues}
+					sizeLabels={textSizeLabels}
+					defaultValue={DEFAULT_TEXT_SIZE}
+					storageKey={TEXT_SIZE_STORAGE_KEY}
+				/>
+				<ShareChooser
+					label="Share this page"
+					class="ml-2"
+					copyLabel="Copy link"
+					copiedLabel="Link copied"
+					copyFailedLabel="Could not copy — copy it from the address bar"
+				/>
 			</div>
 		</div>
 	</nav>

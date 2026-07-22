@@ -5,22 +5,7 @@
 	const plural = 'united-kingdom-lasting-powers-of-attorney-for-financial-decisions';
 </script>
 
-<main class="mx-auto max-w-4xl px-4 py-12">
-	<header class="mb-10">
-		<p class="text-sm font-semibold uppercase tracking-wide text-primary">
-			UK Lasting Power of Attorney for Financial Decisions
-		</p>
-		<h1 class="mt-2 text-3xl font-bold text-base-content">
-			Property and financial affairs LPA (LP1F)
-		</h1>
-		<p class="mt-4 text-base leading-relaxed text-base-content/70">
-			The LP1F is the official UK statutory deed under the Mental Capacity Act 2005 by which a donor
-			appoints attorneys to make decisions about their property and financial affairs, completed as a
-			15-section single-page wizard whose validation engine fires statutory blocker rules and
-			additional flags so the deed is correct before it is signed and sent to the Office of the Public
-			Guardian.
-		</p>
-	</header>
+<main class="mx-16 px-4 py-12">
 
 	<div class="grid gap-4 sm:grid-cols-2">
 		<a

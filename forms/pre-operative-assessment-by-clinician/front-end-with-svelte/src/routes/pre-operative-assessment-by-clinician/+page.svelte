@@ -7,19 +7,7 @@
 	const plural = 'pre-operative-assessments-by-clinician';
 </script>
 
-<main class="mx-auto max-w-4xl px-4 py-12">
-	<header class="mb-10">
-		<p class="text-sm font-semibold uppercase tracking-wide text-primary">
-			Pre-operative Assessment by Clinician
-		</p>
-		<h1 class="mt-2 text-3xl font-bold text-base-content">Clinician pre-operative assessment</h1>
-		<p class="mt-4 text-base leading-relaxed text-base-content/70">
-			A clinician-driven pre-operative evaluation, completed as a single continuous wizard across 16
-			body-system sections, that computes the ASA Physical Status grade plus Mallampati, RCRI,
-			STOP-BANG, and Clinical Frailty Scale, derives a composite perioperative risk, and raises safety
-			flags for the anaesthetist.
-		</p>
-	</header>
+<main class="mx-16 px-4 py-12">
 
 	<div class="grid gap-4 sm:grid-cols-2">
 		<a

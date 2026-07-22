@@ -93,7 +93,7 @@
 		</div>
 	</header>
 
-	<main class="mx-auto max-w-4xl px-4 py-6">
+	<main class="mx-16 px-4 py-6">
 		<!-- Stat / reject alerts -->
 		{#if result.triageTier === 'stat'}
 			<Alert type="error" heading="Stat triage" class="mb-6">

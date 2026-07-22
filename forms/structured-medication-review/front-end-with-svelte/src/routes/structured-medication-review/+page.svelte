@@ -5,22 +5,7 @@
 	const plural = 'structured-medication-reviews';
 </script>
 
-<main class="mx-auto max-w-4xl px-4 py-12">
-	<header class="mb-10">
-		<p class="text-sm font-semibold uppercase tracking-wide text-primary">
-			Structured Medication Review
-		</p>
-		<h1 class="mt-2 text-3xl font-bold text-base-content">
-			A patient-centred whole-medicines review
-		</h1>
-		<p class="mt-4 text-base leading-relaxed text-base-content/70">
-			A patient-centred, single continuous wizard that reviews problematic polypharmacy, frailty, or
-			high-risk medicines &mdash; recording the patient's problems and priorities, a per-medicine list
-			with indication, adherence, and anticholinergic burden, and an agreed monitoring plan &mdash;
-			from which the shared engine derives a review status (Complete or Incomplete), a polypharmacy
-			and anticholinergic-burden indicator, and a set of flags.
-		</p>
-	</header>
+<main class="mx-16 px-4 py-12">
 
 	<div class="grid gap-4 sm:grid-cols-2">
 		<a

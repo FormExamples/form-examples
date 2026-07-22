@@ -5,21 +5,7 @@
 	const plural = 'bhutani-bilirubin-nomograms';
 </script>
 
-<main class="mx-auto max-w-4xl px-4 py-12">
-	<header class="mb-10">
-		<p class="text-sm font-semibold uppercase tracking-wide text-primary">
-			Bhutani Bilirubin Nomogram
-		</p>
-		<h1 class="mt-2 text-3xl font-bold text-base-content">
-			Hour-specific bilirubin risk zone for newborns
-		</h1>
-		<p class="mt-4 text-base leading-relaxed text-base-content/70">
-			Enter a newborn's age in hours and total serum bilirubin in a single continuous wizard, and the
-			shared engine maps the point onto the hour-specific Bhutani nomogram to classify a percentile
-			risk zone and compare it against the gestation-specific NICE phototherapy and
-			exchange-transfusion thresholds.
-		</p>
-	</header>
+<main class="mx-16 px-4 py-12">
 
 	<div class="grid gap-4 sm:grid-cols-2">
 		<a

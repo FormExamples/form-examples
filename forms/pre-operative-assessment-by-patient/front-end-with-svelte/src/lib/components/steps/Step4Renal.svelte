@@ -33,4 +33,8 @@
 				{ value: 'peritoneal', label: 'Peritoneal dialysis' }
 			] as opt (opt.value)}<option value={opt.value}>{opt.label}</option>{/each}</Select></Field>
 	{/if}
+
+	<Field label="Any urinary problems (difficulty passing urine, frequency at night)?"><RadioGroup label="Any urinary problems?">{#each yesNo as opt (opt.value)}<label><input type="radio" class="radio-input" name="urinarySymptoms" value={opt.value} bind:group={r.urinarySymptoms}/> {opt.label}</label>{/each}</RadioGroup></Field>
+	<Field label="Have you ever had a urinary catheter?"><RadioGroup label="Have you ever had a urinary catheter?">{#each yesNo as opt (opt.value)}<label><input type="radio" class="radio-input" name="catheter" value={opt.value} bind:group={r.urinaryCatheterHistory}/> {opt.label}</label>{/each}</RadioGroup></Field>
+	<Field label="Do you have prostate problems?"><RadioGroup label="Do you have prostate problems?">{#each yesNo as opt (opt.value)}<label><input type="radio" class="radio-input" name="prostate" value={opt.value} bind:group={r.prostateProblems}/> {opt.label}</label>{/each}</RadioGroup></Field>
 </Fieldset>

@@ -6,21 +6,7 @@
 	const plural = 'tumor-marker-test-requests';
 </script>
 
-<main class="mx-auto max-w-4xl px-4 py-12">
-	<header class="mb-10">
-		<p class="text-sm font-semibold uppercase tracking-wide text-primary">Tumor Marker Test Request</p>
-		<h1 class="mt-2 text-3xl font-bold text-base-content">
-			Serum tumour-marker blood-test request
-		</h1>
-		<p class="mt-4 text-base leading-relaxed text-base-content/70">
-			A UK NHS–aligned serum tumour-marker blood-test request that a clinician completes — recording
-			the requested markers, clinical indication, relevant history, any known cancer site and prior
-			marker value, and the requested urgency — from which the engine computes a four-axis vetting
-			grade (appropriateness, interpretation safety, request completeness, and urgency / triage
-			priority) plus safety-critical flags, to support the laboratory's decision to accept, query,
-			redirect, or reject the request.
-		</p>
-	</header>
+<main class="mx-16 px-4 py-12">
 
 	<div class="grid gap-4 sm:grid-cols-2">
 		<a

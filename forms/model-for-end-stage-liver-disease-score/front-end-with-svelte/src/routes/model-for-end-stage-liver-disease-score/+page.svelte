@@ -5,18 +5,7 @@
 	const plural = 'model-for-end-stage-liver-disease-scores';
 </script>
 
-<main class="mx-auto max-w-4xl px-4 py-12">
-	<header class="mb-10">
-		<p class="text-sm font-semibold uppercase tracking-wide text-primary">
-			Model for End-Stage Liver Disease (MELD) Score
-		</p>
-		<h1 class="mt-2 text-3xl font-bold text-base-content">Liver disease severity for adults</h1>
-		<p class="mt-4 text-base leading-relaxed text-base-content/70">
-			Enter total bilirubin, INR, and serum creatinine — plus serum sodium (MELD-Na, MELD 3.0) and
-			albumin (MELD 3.0) — in a single continuous wizard, and the shared engine applies the weighted
-			logarithmic formula to compute a MELD score and an estimated 3-month mortality band.
-		</p>
-	</header>
+<main class="mx-16 px-4 py-12">
 
 	<div class="grid gap-4 sm:grid-cols-2">
 		<a

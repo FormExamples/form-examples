@@ -63,7 +63,7 @@
 		</div>
 	</header>
 
-	<main class="mx-auto max-w-4xl px-4 py-6">
+	<main class="mx-16 px-4 py-6">
 		<!-- COPM score banners -->
 		<div class="mb-6 grid grid-cols-1 gap-4 sm:grid-cols-2">
 			<div class="rounded-xl border-2 p-6 text-center {copmScoreColor(result.performanceScore)}">

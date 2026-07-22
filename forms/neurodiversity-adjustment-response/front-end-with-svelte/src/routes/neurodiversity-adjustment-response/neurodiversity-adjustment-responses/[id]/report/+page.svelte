@@ -88,7 +88,7 @@
 		</div>
 	</header>
 
-	<main class="mx-auto max-w-4xl px-4 py-6">
+	<main class="mx-16 px-4 py-6">
 		<!-- Discrimination-risk alert -->
 		{#if result.legalRiskBand === 'high-risk'}
 			<Alert type="error" heading="Discrimination-risk alert" class="mb-6">

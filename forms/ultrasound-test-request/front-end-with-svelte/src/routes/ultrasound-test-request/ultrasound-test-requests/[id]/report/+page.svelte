@@ -82,7 +82,7 @@
 		</div>
 	</header>
 
-	<main class="mx-auto max-w-4xl px-4 py-6">
+	<main class="mx-16 px-4 py-6">
 		<!-- Emergency / urgent alert -->
 		{#if result.triageTier === 'emergency'}
 			<Alert type="error" heading="Emergency triage" class="mb-6">

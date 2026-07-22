@@ -4,22 +4,7 @@
 	// dashboard.
 </script>
 
-<main class="mx-auto max-w-4xl px-4 py-12">
-	<header class="mb-10">
-		<p class="text-sm font-semibold uppercase tracking-wide text-primary">Cardiac Stress Test Result</p>
-		<h1 class="mt-2 text-3xl font-bold text-gray-900">Cardiac stress test report</h1>
-		<p class="mt-4 text-base leading-relaxed text-gray-600">
-			After a cardiac stress test, the reporting clinician records what the exercise or
-			pharmacological stress examination found — the test type and protocol, the clinical
-			history, the haemodynamic and exercise response, the structured ECG and symptom findings,
-			the overall positive / negative / inconclusive conclusion, and the Duke treadmill
-			prognostic score — and a shared grading engine interprets the report on four independent
-			axes (result classification, abnormality severity with structured reporting, report
-			completeness, and follow-up urgency) plus safety flags, including an automatic
-			critical-result alert for findings such as exertional hypotension or a high-risk Duke
-			treadmill score.
-		</p>
-	</header>
+<main class="mx-16 px-4 py-12">
 
 	<div class="grid gap-4 sm:grid-cols-2">
 		<a

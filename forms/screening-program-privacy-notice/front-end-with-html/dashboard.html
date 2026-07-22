@@ -4,127 +4,43 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Screening Programme Privacy Notice — Clinician Dashboard</title>
-    <style>
-        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-            background: #f3f2f1;
-            color: #0b0c0c;
-            line-height: 1.5;
-        }
-        header {
-            background: #005eb8;
-            color: #fff;
-            padding: 1.5rem 0;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-        }
-        .container { max-width: 960px; margin: 0 auto; padding: 0 1rem; }
-        header h1 { font-size: 1.5rem; font-weight: 700; }
-        header p { color: #d0e6f9; margin-top: 0.25rem; font-size: 0.95rem; }
-        main { padding: 2rem 0; }
-        .card {
-            background: #fff;
-            border: 1px solid #d2d8de;
-            border-radius: 12px;
-            padding: 1.5rem;
-            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
-        }
-        .filters {
-            display: flex;
-            flex-wrap: wrap;
-            align-items: center;
-            gap: 0.75rem;
-            margin-bottom: 1rem;
-        }
-        .filters input[type="text"] {
-            flex: 1;
-            min-width: 200px;
-            padding: 0.5rem 0.75rem;
-            border: 2px solid #b1b4b6;
-            border-radius: 6px;
-            font-size: 0.95rem;
-            font-family: inherit;
-        }
-        .filters input[type="text"]:focus {
-            outline: none;
-            border-color: #005eb8;
-            box-shadow: 0 0 0 3px rgba(0,94,184,0.2);
-        }
-        .filters select {
-            padding: 0.5rem 0.75rem;
-            border: 2px solid #b1b4b6;
-            border-radius: 6px;
-            font-size: 0.95rem;
-            font-family: inherit;
-            background: #fff;
-        }
-        .filters select:focus {
-            outline: none;
-            border-color: #005eb8;
-        }
-        .btn-clear {
-            padding: 0.5rem 1rem;
-            border: 2px solid #005eb8;
-            border-radius: 6px;
-            background: transparent;
-            color: #005eb8;
-            font-size: 0.9rem;
-            cursor: pointer;
-            display: none;
-        }
-        .btn-clear:hover { background: #e8f1fa; }
-        .btn-clear.visible { display: inline-block; }
-        .count { font-size: 0.85rem; color: #505a5f; margin-bottom: 0.75rem; }
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            font-size: 0.95rem;
-        }
-        th {
-            text-align: left;
-            padding: 0.75rem 0.5rem;
-            border-bottom: 2px solid #005eb8;
-            font-weight: 600;
-            color: #0b0c0c;
-            cursor: pointer;
-            user-select: none;
-            white-space: nowrap;
-        }
-        th:hover { color: #005eb8; }
-        th .sort-arrow { font-size: 0.7rem; margin-left: 0.25rem; color: #b1b4b6; }
-        th .sort-arrow.active { color: #005eb8; }
-        td { padding: 0.65rem 0.5rem; border-bottom: 1px solid #e8e8e8; }
-        tr:hover td { background: #f8f8f8; }
-        .badge {
-            display: inline-block;
-            padding: 0.15rem 0.6rem;
-            border-radius: 999px;
-            font-size: 0.8rem;
-            font-weight: 600;
-            border: 1px solid;
-        }
-        .badge-complete { background: #e6f4ed; color: #00703c; border-color: #00703c; }
-        .badge-incomplete { background: #fef3e8; color: #f47738; border-color: #f47738; }
-        .empty-state {
-            text-align: center;
-            padding: 2rem;
-            color: #505a5f;
-            display: none;
-        }
-        footer {
-            text-align: center;
-            padding: 1.5rem 0;
-            color: #505a5f;
-            font-size: 0.85rem;
-        }
-    </style>
+  <link rel="stylesheet" href="css/dashboard.css">
 </head>
 <body>
     <header>
-        <div class="container">
-            <h1>Screening Programme Privacy Notice</h1>
-            <p>Clinician Dashboard — Patient Acknowledgments</p>
+      <div class="container page-header-bar">
+        <div class="page-header-title">
+          <h1>Screening Programme Privacy Notice</h1>
+          <p>Clinician Dashboard — Patient Acknowledgments</p>
         </div>
+        <div class="page-header-controls no-print">
+          <label class="visually-hidden" for="locale-select">Language</label>
+          <select class="theme-select" id="locale-select" aria-label="Language">
+          <option class="theme-select-option" value="en-GB" selected lang="en-GB">English (UK)</option>
+          <option class="theme-select-option" value="en-US" lang="en-US">English (US)</option>
+          <option class="theme-select-option" value="cy-GB" lang="cy-GB">Cymraeg</option>
+          <option class="theme-select-option" value="de-DE" lang="de-DE">Deutsch</option>
+          </select>
+          <label class="visually-hidden" for="text-size-chooser">Text size</label>
+          <select class="theme-select" id="text-size-chooser" aria-label="Text size">
+          <option class="theme-select-option" value="small">Small</option>
+          <option class="theme-select-option" value="medium" selected>Medium</option>
+          <option class="theme-select-option" value="large">Large</option>
+          <option class="theme-select-option" value="x-large">X Large</option>
+          </select>
+          <div class="share-chooser">
+          <button type="button" class="share-chooser-button" id="share-chooser" aria-label="Share this page" aria-expanded="false" aria-controls="share-chooser-list">
+          <span class="share-chooser-icon" aria-hidden="true">↪</span>
+          </button>
+          <ul class="share-chooser-list" id="share-chooser-list" hidden>
+          <li class="share-chooser-list-item">
+          <button type="button" class="share-chooser-copy" id="share-chooser-copy">Copy link</button>
+          </li>
+          </ul>
+          <p class="share-chooser-status" id="share-chooser-status" aria-live="polite"></p>
+          </div>
+        </div>
+      </div>
     </header>
 
     <main class="container">
@@ -409,5 +325,8 @@
   }
 })();
 </script>
+  <script type="module" src="js/text-size-chooser.js"></script>
+  <script type="module" src="js/share-chooser.js"></script>
+  <script type="module" src="js/locale-select.js"></script>
 </body>
 </html>

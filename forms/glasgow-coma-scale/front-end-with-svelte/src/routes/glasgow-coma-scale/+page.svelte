@@ -5,16 +5,7 @@
 	const plural = 'glasgow-coma-scales';
 </script>
 
-<main class="mx-auto max-w-4xl px-4 py-12">
-	<header class="mb-10">
-		<p class="text-sm font-semibold uppercase tracking-wide text-primary">Glasgow Coma Scale</p>
-		<h1 class="mt-2 text-3xl font-bold text-base-content">GCS neuro-observation assessment</h1>
-		<p class="mt-4 text-base leading-relaxed text-base-content/70">
-			A structured, clinician-driven assessment of impaired consciousness, completed as a single
-			continuous wizard, that scores Eye, Verbal, and Motor responses into a total GCS (3&ndash;15) and
-			severity band, with a "not testable" option per component and a derived GCS-Pupils score.
-		</p>
-	</header>
+<main class="mx-16 px-4 py-12">
 
 	<div class="grid gap-4 sm:grid-cols-2">
 		<a

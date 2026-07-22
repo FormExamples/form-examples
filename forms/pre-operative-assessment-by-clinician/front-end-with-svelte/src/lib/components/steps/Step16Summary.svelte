@@ -8,6 +8,13 @@
   import TextAreaInput from '$lib/components/ui/TextAreaInput.svelte';
 
   const r = $derived(store.result);
+
+  const discussionTopics = [
+    ['discussionProcedure', 'Procedure'],
+    ['discussionAnaesthetic', 'Anaesthetic'],
+    ['discussionRisksBenefits', 'Risks / benefits'],
+    ['discussionAlternatives', 'Alternatives'],
+  ] as const;
 </script>
 
 <Fieldset legend="Step 16 — Summary, ASA and sign-off">
@@ -70,6 +77,38 @@
     <Field label="Clinician notes" class="field-span-2">
       <TextAreaInput label="Clinician notes" rows={4} bind:value={store.data.summary.clinicianNotes} />
     </Field>
+  </div>
+
+  <h3 class="step-subhead">Patient education and consent</h3>
+  <div class="field-grid">
+    <Field label="Consent status">
+      <Select label="Consent status" bind:value={store.data.summary.consentStatus}>
+        <option value="">—</option>
+        <option value="obtained">Obtained</option>
+        <option value="pending">Pending</option>
+        <option value="declined">Declined</option>
+        <option value="unable-to-consent">Unable to consent</option>
+      </Select>
+    </Field>
+    <Field label="Interpreter required">
+      <Select label="Interpreter required" bind:value={store.data.summary.interpreterRequired}>
+        <option value="">—</option>
+        <option value="yes">Yes</option>
+        <option value="no">No</option>
+      </Select>
+    </Field>
+  </div>
+  <h4 class="step-subhead">Discussion held regarding</h4>
+  <div class="field-grid field-grid-4">
+    {#each discussionTopics as [key, label]}
+      <Field {label}>
+        <Select {label} bind:value={store.data.summary[key]}>
+          <option value="">—</option>
+          <option value="yes">Yes</option>
+          <option value="no">No</option>
+        </Select>
+      </Field>
+    {/each}
   </div>
 
   <p class="signoff-note">

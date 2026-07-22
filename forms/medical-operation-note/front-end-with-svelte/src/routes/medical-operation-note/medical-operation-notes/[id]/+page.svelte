@@ -75,29 +75,27 @@
 	}
 </script>
 
-<main class="mx-auto max-w-3xl px-4 py-6">
-	<header class="mb-6 no-print">
-		<h1 class="text-2xl font-bold text-base-content">
-			{isNew ? 'New operation note' : `Operation note ${id}`}
-		</h1>
-		<p class="mt-1 text-sm text-base-content/70">
-			Complete the twelve sections; the composite operative risk, Clavien–Dindo grade, blood-loss
-			band, and safety flags are computed on submit.
-		</p>
-		<Progress label="Form completion" max={100} value={store.percentComplete} />
-		<p class="mt-1 text-sm text-base-content/60" aria-live="polite">{store.percentComplete}% complete</p>
-		<StepList label="Operation note sections" current={store.currentStep - 1}>
-			{#each store.steps as s (s.number)}
-				<StepListItem
-					status={s.status}
-					current={s.number === store.currentStep}
-					onclick={() => gotoStep(s.number)}
-				>
-					{s.short}
-				</StepListItem>
-			{/each}
-		</StepList>
-	</header>
+<main class="mx-16 px-4 py-6">
+	<h1 class="text-2xl font-bold text-base-content">
+		{isNew ? 'New operation note' : `Operation note ${id}`}
+	</h1>
+	<p class="mt-1 text-sm text-base-content/70">
+		Complete the twelve sections; the composite operative risk, Clavien–Dindo grade, blood-loss
+		band, and safety flags are computed on submit.
+	</p>
+	<Progress label="Form completion" max={100} value={store.percentComplete} />
+	<p class="mt-1 text-sm text-base-content/60" aria-live="polite">{store.percentComplete}% complete</p>
+	<StepList label="Operation note sections" current={store.currentStep - 1}>
+		{#each store.steps as s (s.number)}
+			<StepListItem
+				status={s.status}
+				current={s.number === store.currentStep}
+				onclick={() => gotoStep(s.number)}
+			>
+				{s.short}
+			</StepListItem>
+		{/each}
+	</StepList>
 
 	{#if !store.errorSummaryHidden && errorEntries.length > 0}
 		<div bind:this={errorSummaryEl} class="mb-6" tabindex="-1">
@@ -114,16 +112,15 @@
 	<Form label="Medical operation note" onsubmit={submit}>
 		<div id="form-sections">
 			{#each stepComponents as StepComponent, i (i)}
-				<div
+				<section
 					id={`step-${i + 1}`}
 					class="step-section"
 					onmouseenter={() => store.goto(i + 1)}
 					onfocusin={() => store.goto(i + 1)}
-					role="region"
 					aria-label={STEPS[i]?.title ?? `Step ${i + 1}`}
 				>
 					<StepComponent />
-				</div>
+				</section>
 			{/each}
 		</div>
 

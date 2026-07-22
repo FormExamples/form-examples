@@ -5,19 +5,7 @@
 	const plural = 'international-certificates-of-vaccination-or-prophylaxis';
 </script>
 
-<main class="mx-auto max-w-4xl px-4 py-12">
-	<header class="mb-10">
-		<p class="text-sm font-semibold uppercase tracking-wide text-primary">
-			International Certificate of Vaccination or Prophylaxis
-		</p>
-		<h1 class="mt-2 text-3xl font-bold text-base-content">WHO "yellow card" — IHR 2005 Annex 6</h1>
-		<p class="mt-4 text-base leading-relaxed text-base-content/70">
-			The WHO model certificate used under the International Health Regulations (2005), Annex 6, to
-			record vaccinations or prophylaxis required for international travel, completed as a single
-			continuous wizard whose shared engine validates the certificate and computes per-entry
-			validity.
-		</p>
-	</header>
+<main class="mx-16 px-4 py-12">
 
 	<div class="grid gap-4 sm:grid-cols-2">
 		<a

@@ -6,16 +6,7 @@
 	const plural = 'advance-statements-about-care';
 </script>
 
-<main class="mx-auto max-w-4xl px-4 py-12">
-	<header class="mb-10">
-		<p class="text-sm font-semibold uppercase tracking-wide text-primary">Advance Statement About Care</p>
-		<h1 class="mt-2 text-3xl font-bold text-base-content">Record wishes and preferences for future care</h1>
-		<p class="mt-4 text-base leading-relaxed text-base-content/70">
-			A structured advance statement, completed as a single continuous wizard, that records a person's
-			wishes and preferences about future care and is assessed by the shared engine for completeness
-			and documentation and validity issues.
-		</p>
-	</header>
+<main class="mx-16 px-4 py-12">
 
 	<div class="grid gap-4 sm:grid-cols-2">
 		<a

@@ -1,26 +1,74 @@
 <script lang="ts">
 	import '../../app.css';
+	import { base } from '$app/paths';
 	import { page } from '$app/state';
+	import ThemeChooser from '$lib/components/ui/ThemeChooser.svelte';
+	import { THEME_OPTIONS, THEME_STORAGE_KEY, DEFAULT_THEME } from '$lib/config/themes';
+	import LocaleChooser from '$lib/components/ui/LocaleChooser.svelte';
+	import { LOCALE_OPTIONS, LOCALE_STORAGE_KEY, DEFAULT_LOCALE } from '$lib/config/locales';
+	import TextSizeChooser from '$lib/components/ui/TextSizeChooser.svelte';
+	import ShareChooser from '$lib/components/ui/ShareChooser.svelte';
+	import { TEXT_SIZE_OPTIONS, TEXT_SIZE_STORAGE_KEY, DEFAULT_TEXT_SIZE } from '$lib/config/text-sizes';
 	let { children } = $props();
 
 	const navClass = (href: string) =>
 		page.url.pathname === href
-			? 'rounded-md px-3 py-2 text-sm font-semibold text-primary bg-blue-50'
-			: 'rounded-md px-3 py-2 text-sm font-medium text-gray-600 hover:bg-gray-100';
+			? 'rounded-md px-3 py-2 text-sm font-semibold text-primary bg-primary/10'
+			: 'rounded-md px-3 py-2 text-sm font-medium text-base-content/70 hover:bg-base-200';
+
+	// ThemeChooser/LocaleChooser manage <link>/data-theme/lang/dir + localStorage themselves.
+	const themeValues = THEME_OPTIONS.map((o) => o.value);
+	const themeLabels = Object.fromEntries(THEME_OPTIONS.map((o) => [o.value, o.label]));
+	const localeValues = LOCALE_OPTIONS.map((o) => o.value);
+	const localeLabels = Object.fromEntries(LOCALE_OPTIONS.map((o) => [o.value, o.label]));
+	const textSizeValues = TEXT_SIZE_OPTIONS.map((o) => o.value);
+	const textSizeLabels = Object.fromEntries(TEXT_SIZE_OPTIONS.map((o) => [o.value, o.label]));
 </script>
 
 <svelte:head>
 	<title>X-Ray Test Result</title>
 </svelte:head>
 
-<div class="min-h-screen bg-gray-50">
-	<nav class="border-b border-gray-200 bg-white shadow-sm no-print">
+<div class="min-h-screen bg-base-200 text-base-content">
+	<nav class="border-b border-base-300 bg-base-100 shadow-sm no-print">
 		<div class="mx-auto flex max-w-5xl items-center justify-between px-4 py-3">
-			<a href="/x-ray-test-result/" class="text-lg font-bold text-gray-900">X-Ray Test Result</a>
-			<div class="flex gap-1">
+			<a href="/x-ray-test-result/" class="text-lg font-bold text-base-content">X-Ray Test Result</a>
+			<div class="flex items-center gap-1">
 				<a href="/x-ray-test-result/" class={navClass('/')}>Welcome</a>
 				<a href="/x-ray-test-result/report" class={navClass('/report')}>New report</a>
 				<a href="/x-ray-test-result/reports" class={navClass('/reports')}>Reports</a>
+				<LocaleChooser
+					label="Language"
+					class="ml-2"
+					locales={localeValues}
+					localeLabels={localeLabels}
+					defaultValue={DEFAULT_LOCALE}
+					storageKey={LOCALE_STORAGE_KEY}
+				/>
+				<ThemeChooser
+					label="Theme"
+					class="ml-2"
+					themesUrl={`${base}/themes/`}
+					themes={themeValues}
+					themeLabels={themeLabels}
+					defaultValue={DEFAULT_THEME}
+					storageKey={THEME_STORAGE_KEY}
+				/>
+				<TextSizeChooser
+					label="Text size"
+					class="ml-2"
+					sizes={textSizeValues}
+					sizeLabels={textSizeLabels}
+					defaultValue={DEFAULT_TEXT_SIZE}
+					storageKey={TEXT_SIZE_STORAGE_KEY}
+				/>
+				<ShareChooser
+					label="Share this page"
+					class="ml-2"
+					copyLabel="Copy link"
+					copiedLabel="Link copied"
+					copyFailedLabel="Could not copy — copy it from the address bar"
+				/>
 			</div>
 		</div>
 	</nav>

@@ -5,17 +5,7 @@
 	const plural = 'urology-waiting-list-cards';
 </script>
 
-<main class="mx-auto max-w-4xl px-4 py-12">
-	<header class="mb-10">
-		<p class="text-sm font-semibold uppercase tracking-wide text-primary">Urology Waiting List Card</p>
-		<h1 class="mt-2 text-3xl font-bold text-base-content">NHS RTT waiting list card</h1>
-		<p class="mt-4 text-base leading-relaxed text-base-content/70">
-			A practitioner-completed single-page wizard that places a patient on a urology waiting list —
-			recording referral, waiting-list entry, and appointment details — and grades the Waiting Time
-			Status against the NHS England clinical-priority targets (P1–P6), the 18-week RTT standard, and
-			the 52-week long-waiter rule, giving the patient a transparent view of their expected wait.
-		</p>
-	</header>
+<main class="mx-16 px-4 py-12">
 
 	<div class="grid gap-4 sm:grid-cols-2">
 		<a

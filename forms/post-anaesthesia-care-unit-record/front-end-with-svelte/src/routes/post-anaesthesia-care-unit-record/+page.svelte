@@ -5,22 +5,7 @@
 	const plural = 'post-anaesthesia-care-unit-records';
 </script>
 
-<main class="mx-auto max-w-4xl px-4 py-12">
-	<header class="mb-10">
-		<p class="text-sm font-semibold uppercase tracking-wide text-primary">
-			Post-Anaesthesia Care Unit (PACU) Record
-		</p>
-		<h1 class="mt-2 text-3xl font-bold text-base-content">
-			Recovery record with the Modified Aldrete discharge score
-		</h1>
-		<p class="mt-4 text-base leading-relaxed text-base-content/70">
-			A recovery-room record for adults emerging from anaesthesia or sedation, completed as a single
-			continuous wizard, whose shared engine sums the five Modified Aldrete parameters — activity,
-			respiration, circulation, consciousness, and oxygen saturation — into a 0-to-10 score, derives an
-			SpO2-gated discharge-readiness band, optionally scores the PADSS for day-surgery street fitness,
-			and raises red flags.
-		</p>
-	</header>
+<main class="mx-16 px-4 py-12">
 
 	<div class="grid gap-4 sm:grid-cols-2">
 		<a

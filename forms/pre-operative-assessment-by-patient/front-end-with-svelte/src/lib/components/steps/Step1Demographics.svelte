@@ -11,6 +11,10 @@
 	import { calculateBMI, bmiCategory } from '$lib/engine/utils';
 
 	const d = assessment.data.demographics;
+	const yesNo = [
+		{ value: 'yes', label: 'Yes' },
+		{ value: 'no', label: 'No' }
+	];
 
 	$effect(() => {
 		const bmi = calculateBMI(d.weight, d.height);
@@ -56,4 +60,12 @@
 			{ value: 'urgent', label: 'Urgent' },
 			{ value: 'emergency', label: 'Emergency' }
 		] as opt (opt.value)}<option value={opt.value}>{opt.label}</option>{/each}</Select></Field>
+
+	<p class="hint">Background health</p>
+	<Field label="Have you ever been diagnosed with cancer?"><RadioGroup label="Have you ever been diagnosed with cancer?">{#each yesNo as opt (opt.value)}<label><input type="radio" class="radio-input" name="cancer" value={opt.value} bind:group={d.cancerHistory}/> {opt.label}</label>{/each}</RadioGroup></Field>
+	{#if d.cancerHistory === 'yes'}
+		<Field label="Please give full details including dates and treatment" inputId="cancerDetails"><TextInput id="cancerDetails" label="Please give full details including dates and treatment" bind:value={d.cancerHistoryDetails} /></Field>
+	{/if}
+	<Field label="Do you have a history of MRSA or MSSA?"><RadioGroup label="Do you have a history of MRSA or MSSA?">{#each yesNo as opt (opt.value)}<label><input type="radio" class="radio-input" name="mrsa" value={opt.value} bind:group={d.mrsaHistory}/> {opt.label}</label>{/each}</RadioGroup></Field>
+	<Field label="Have you been admitted to hospital or a nursing/care home within the last 6 months?"><RadioGroup label="Have you been admitted to hospital or a nursing/care home within the last 6 months?">{#each yesNo as opt (opt.value)}<label><input type="radio" class="radio-input" name="recentAdmission" value={opt.value} bind:group={d.recentHospitalOrCareHomeAdmission}/> {opt.label}</label>{/each}</RadioGroup></Field>
 </Fieldset>

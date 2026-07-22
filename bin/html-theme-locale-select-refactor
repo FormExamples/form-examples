@@ -1,0 +1,479 @@
+#!/usr/bin/env python3
+"""bin/html-theme-locale-select-refactor — build multi-theme CSS
+infrastructure and add theme-select + locale-select controls to every
+form's `front-end-with-html/` header (index.html + dashboard.html).
+
+front-end-with-html/ previously shipped a single self-contained
+css/style.css (own hardcoded design tokens) with no theme-switching at
+all. This tool:
+
+  1. Vendors the full Lily theme CSS catalogue (~45 standalone theme
+     stylesheets, each inlining all Lily component CSS) from the pinned
+     Lily checkout into css/themes/<name>.css.
+  2. Aliases each form's own css/style.css and css/dashboard.css design
+     tokens (--color-bg, --color-primary, etc.) onto the swappable
+     theme's tokens (--color-base-100/200/300/content, --color-primary,
+     --color-error, --color-warning, --color-success) — the same
+     mapping front-end-with-svelte's app.css already uses — so switching
+     #theme-select re-skins the whole page, not just the new controls.
+     --color-primary-dark has no Lily equivalent and stays static.
+  3. Inserts a swappable <link id="theme-stylesheet"> plus a small
+     blocking inline FOUC-prevention script into <head>.
+  4. Inserts a `.page-header-controls` block (locale-select then
+     theme-select, before any existing header content) and two new
+     `js/theme-select.js` / `js/locale-select.js` ES modules.
+
+Both controls reuse the `theme-select`/`theme-select-option` Lily
+classes (matching the front-end-with-svelte LocaleSelect convention —
+see bin/svelte-locale-select-refactor). Presentation-only: locale-select
+sets <html lang> and persists the choice; no message catalogue is wired
+up — see docs/i18n.md for the deferred full-i18n rollout.
+
+Usage:
+  bin/html-theme-locale-select-refactor --check   # CI drift check (no writes)
+  bin/html-theme-locale-select-refactor --apply   # write changes
+  bin/html-theme-locale-select-refactor --lily-dir PATH --apply
+
+Skips forms with no css/style.css (a handful of stub forms with no
+front-end-with-html styling at all yet).
+
+Permanently excludes THEME_COLLISION_SLUGS (see below): bespoke pages
+whose own CSS defines classes that collide with real Lily component
+names (`.card`, `.container`, `.panel`, `.progress`, `.select`, …) with
+different HTML structure. Loading the swappable Lily theme there doesn't
+just no-op — the theme's rules for those class names apply to the page's
+unrelated elements (e.g. `--lily-text` leaking onto a `.card` that never
+declared its own text colour), which can make body text unreadable.
+These forms keep only the locale-select control, hand-styled locally, and
+never get the swappable `#theme-stylesheet` link. Do not "fix" this by
+re-running the tool on them — the exclusion is load-bearing, verified by
+rendering in a browser (see forms/*/CLAUDE.md history around
+bin/html-theme-locale-select-refactor's addition).
+
+Idempotent: re-running on an already-refactored form makes no further
+changes.
+"""
+
+from __future__ import annotations
+
+import argparse
+import re
+import shutil
+import sys
+from pathlib import Path
+
+REPO_ROOT = Path(__file__).resolve().parent.parent
+FORMS_DIR = REPO_ROOT / "forms"
+DEFAULT_LILY_THEMES_DIR = Path.home() / "git" / "lilydesignsystem" / "lily-design-system" / "themes"
+
+# Bespoke pages whose own CSS class names collide with real Lily component
+# names (verified: loading the swappable theme corrupts unrelated elements,
+# e.g. near-invisible text on legal-requirements-privacy-notice's .card).
+# These keep a hand-styled locale-select only — no swappable theme link, no
+# theme-select. See the module docstring. Do not remove from this set
+# without re-verifying in a browser first.
+THEME_COLLISION_SLUGS = {
+    "legal-requirements-privacy-notice",
+    "screening-program-privacy-notice",
+    "united-kingdom-statement-of-fitness-for-work",
+    "international-certificate-of-vaccination-or-prophylaxis",
+}
+
+LABEL_OVERRIDES = {
+    "adobe-spectrum": "Adobe Spectrum",
+    "mozilla-protocol": "Mozilla Protocol",
+    "united-kingdom-government-digital-service": "UK · Government Digital Service",
+    "united-kingdom-national-health-service-england-for-patients": "UK · NHS England — Patients",
+    "united-kingdom-national-health-service-england-for-practitioners": "UK · NHS England — Practitioners",
+    "united-kingdom-national-health-service-scotland-for-patients": "UK · NHS Scotland — Patients",
+    "united-kingdom-national-health-service-scotland-for-practitioners": "UK · NHS Scotland — Practitioners",
+    "united-kingdom-national-health-service-wales-for-patients": "UK · NHS Wales — Patients",
+    "united-kingdom-national-health-service-wales-for-practitioners": "UK · NHS Wales — Practitioners",
+    "united-states-web-design-system": "US · Web Design System",
+}
+
+THEME_VALUES = [
+    "abyss", "acid", "adobe-spectrum", "aqua", "autumn", "black", "bumblebee", "business",
+    "caramellatte", "cmyk", "coffee", "corporate", "cupcake", "cyberpunk", "dark", "dim",
+    "dracula", "emerald", "fantasy", "forest", "garden", "halloween", "lemonade", "light",
+    "lofi", "luxury", "mozilla-protocol", "night", "nord", "pastel", "retro", "silk", "sunset",
+    "synthwave", "united-kingdom-government-digital-service",
+    "united-kingdom-national-health-service-england-for-patients",
+    "united-kingdom-national-health-service-england-for-practitioners",
+    "united-kingdom-national-health-service-scotland-for-patients",
+    "united-kingdom-national-health-service-scotland-for-practitioners",
+    "united-kingdom-national-health-service-wales-for-patients",
+    "united-kingdom-national-health-service-wales-for-practitioners",
+    "united-states-web-design-system", "valentine", "winter", "wireframe",
+]
+DEFAULT_THEME = "light"
+
+LOCALE_OPTIONS = [
+    ("en-GB", "English (UK)"),
+    ("en-US", "English (US)"),
+    ("cy-GB", "Cymraeg"),
+    ("de-DE", "Deutsch"),
+]
+DEFAULT_LOCALE = "en-GB"
+
+
+def title_case(value: str) -> str:
+    return " ".join(w[:1].upper() + w[1:] for w in value.split("-"))
+
+
+def theme_label(value: str) -> str:
+    return LABEL_OVERRIDES.get(value, title_case(value))
+
+
+def theme_options_html(indent: str) -> str:
+    lines = []
+    for value in THEME_VALUES:
+        selected = " selected" if value == DEFAULT_THEME else ""
+        lines.append(f'{indent}<option class="theme-select-option" value="{value}"{selected}>{theme_label(value)}</option>')
+    return "\n".join(lines)
+
+
+def locale_options_html(indent: str) -> str:
+    lines = []
+    for value, label in LOCALE_OPTIONS:
+        selected = " selected" if value == DEFAULT_LOCALE else ""
+        lines.append(f'{indent}<option class="theme-select-option" value="{value}"{selected} lang="{value}">{label}</option>')
+    return "\n".join(lines)
+
+
+def header_controls_html(indent: str = "    ") -> str:
+    theme_opts = theme_options_html(indent + "  ")
+    locale_opts = locale_options_html(indent + "  ")
+    return (
+        f'{indent}<div class="page-header-controls no-print">\n'
+        f'{indent}  <label class="visually-hidden" for="locale-select">Language</label>\n'
+        f'{indent}  <select class="theme-select" id="locale-select" aria-label="Language">\n'
+        f"{locale_opts}\n"
+        f'{indent}  </select>\n'
+        f'{indent}  <label class="visually-hidden" for="theme-select">Theme</label>\n'
+        f'{indent}  <select class="theme-select" id="theme-select" aria-label="Theme">\n'
+        f"{theme_opts}\n"
+        f'{indent}  </select>\n'
+        f'{indent}</div>\n'
+    )
+
+
+def fouc_guard_html(slug: str, indent: str = "  ") -> str:
+    return (
+        f"{indent}<script>\n"
+        f"{indent}  (function () {{\n"
+        f"{indent}    try {{\n"
+        f"{indent}      var saved = localStorage.getItem('{slug}.theme.v1');\n"
+        f"{indent}      var link = document.getElementById('theme-stylesheet');\n"
+        f"{indent}      if (saved && link) link.setAttribute('href', 'css/themes/' + saved + '.css');\n"
+        f"{indent}    }} catch (e) {{}}\n"
+        f"{indent}  }})();\n"
+        f"{indent}</script>\n"
+    )
+
+
+PAGE_HEADER_CONTROLS_CSS = """
+.page-header-controls {
+  display: flex;
+  justify-content: flex-end;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-bottom: 0.75rem;
+}
+.page-header-controls .theme-select {
+  width: auto;
+  max-width: 14rem;
+}
+"""
+
+THEME_SELECT_JS_TEMPLATE = """// Lily Design System — theme-select (headless, vanilla JS).
+// Applies the chosen Lily theme by swapping the single swappable
+// <link id="theme-stylesheet"> href — the HTML analogue of the
+// front-end-with-svelte convention (front-end-with-svelte/src/lib/config/themes.ts).
+// A blocking inline script in <head> already applies any saved choice before
+// first paint; this module only wires up the <select> once the DOM is ready.
+
+const STORAGE_KEY = '{slug}.theme.v1';
+const DEFAULT_THEME = 'light';
+
+function themeHref(theme) {{
+  return `css/themes/${{theme}}.css`;
+}}
+
+function readSavedTheme() {{
+  try {{
+    return localStorage.getItem(STORAGE_KEY) ?? DEFAULT_THEME;
+  }} catch {{
+    return DEFAULT_THEME;
+  }}
+}}
+
+function applyTheme(theme, persist) {{
+  const link = document.getElementById('theme-stylesheet');
+  if (link) link.setAttribute('href', themeHref(theme));
+  document.documentElement.dataset.theme = theme;
+  if (persist) {{
+    try {{
+      localStorage.setItem(STORAGE_KEY, theme);
+    }} catch {{
+      // ignore quota / privacy errors
+    }}
+  }}
+}}
+
+function init() {{
+  const select = document.getElementById('theme-select');
+  const saved = readSavedTheme();
+  applyTheme(saved, false);
+  if (!select) return;
+  select.value = saved;
+  select.addEventListener('change', () => applyTheme(select.value, true));
+}}
+
+if (document.readyState === 'loading') {{
+  document.addEventListener('DOMContentLoaded', init);
+}} else {{
+  init();
+}}
+"""
+
+LOCALE_SELECT_JS_TEMPLATE = """// Lily Design System — locale-select (headless, vanilla JS).
+// Sets <html lang> and persists the choice, matching the
+// front-end-with-svelte convention (front-end-with-svelte/src/lib/config/locales.ts).
+// Presentation-only: no message catalogue is wired up for this form yet —
+// see docs/i18n.md for the deferred rollout.
+
+const STORAGE_KEY = '{slug}.locale.v1';
+const DEFAULT_LOCALE = 'en-GB';
+
+function readSavedLocale() {{
+  try {{
+    return localStorage.getItem(STORAGE_KEY) ?? DEFAULT_LOCALE;
+  }} catch {{
+    return DEFAULT_LOCALE;
+  }}
+}}
+
+function applyLocale(locale, persist) {{
+  document.documentElement.lang = locale;
+  if (persist) {{
+    try {{
+      localStorage.setItem(STORAGE_KEY, locale);
+    }} catch {{
+      // ignore quota / privacy errors
+    }}
+  }}
+}}
+
+function init() {{
+  const select = document.getElementById('locale-select');
+  const saved = readSavedLocale();
+  applyLocale(saved, false);
+  if (!select) return;
+  select.value = saved;
+  select.addEventListener('change', () => applyLocale(select.value, true));
+}}
+
+if (document.readyState === 'loading') {{
+  document.addEventListener('DOMContentLoaded', init);
+}} else {{
+  init();
+}}
+"""
+
+TOKEN_SUBS = [
+    (re.compile(r"[ \t]*--color-primary:\s*#[0-9a-fA-F]{3,8};\n"), ""),
+    (re.compile(r"(--color-bg:\s*)#[0-9a-fA-F]{3,8};"), r"\1var(--color-base-200);"),
+    (re.compile(r"(--color-surface:\s*)#[0-9a-fA-F]{3,8};"), r"\1var(--color-base-100);"),
+    (re.compile(r"(--color-text:\s*)#[0-9a-fA-F]{3,8};"), r"\1var(--color-base-content);"),
+    (re.compile(r"(--color-muted:\s*)#[0-9a-fA-F]{3,8};"),
+     r"\1color-mix(in oklab, var(--color-base-content) 62%, var(--color-base-100));"),
+    (re.compile(r"(--color-border:\s*)#[0-9a-fA-F]{3,8};"), r"\1var(--color-base-300);"),
+    (re.compile(r"(--color-border-strong:\s*)#[0-9a-fA-F]{3,8};"),
+     r"\1color-mix(in oklab, var(--color-base-300), var(--color-base-content) 28%);"),
+    (re.compile(r"(--color-focus:\s*)#[0-9a-fA-F]{3,8};"), r"\1var(--color-primary);"),
+    (re.compile(r"(--color-primary-light:\s*)#[0-9a-fA-F]{3,8};"),
+     r"\1color-mix(in oklab, var(--color-primary) 15%, var(--color-base-100));"),
+    (re.compile(r"(--color-danger:\s*)#[0-9a-fA-F]{3,8};"), r"\1var(--color-error);"),
+    (re.compile(r"(--color-danger-bg:\s*)#[0-9a-fA-F]{3,8};"),
+     r"\1color-mix(in oklab, var(--color-error) 16%, var(--color-base-100));"),
+    (re.compile(r"[ \t]*--color-warning:\s*#[0-9a-fA-F]{3,8};\n"), ""),
+    (re.compile(r"(--color-warning-bg:\s*)#[0-9a-fA-F]{3,8};"),
+     r"\1color-mix(in oklab, var(--color-warning) 20%, var(--color-base-100));"),
+    (re.compile(r"[ \t]*--color-success:\s*#[0-9a-fA-F]{3,8};\n"), ""),
+    (re.compile(r"(--color-success-bg:\s*)#[0-9a-fA-F]{3,8};"),
+     r"\1color-mix(in oklab, var(--color-success) 18%, var(--color-base-100));"),
+]
+
+TOKEN_ALIAS_MARKER = "var(--color-base-200)"
+
+LINK_RE_TEMPLATE = r'[ \t]*<link\b[^>]*\bhref="{href}"[^>]*/?>\n'
+HEADER_RE = re.compile(r'([ \t]*<header\b[^>]*>\n)([ \t]*<div class="page-header-inner">\n)?')
+MODULE_SCRIPT_RE = re.compile(r'[ \t]*<script\b[^>]*\btype="module"[^>]*\bsrc="js/[^"]+\.js"[^>]*></script>\n')
+BODY_OPEN_RE = re.compile(r'<body\b[^>]*>\n')
+BODY_CLOSE_RE = re.compile(r'[ \t]*</body>\n')
+
+
+def patch_css_tokens(path: Path):
+    text = path.read_text(encoding="utf-8")
+    if TOKEN_ALIAS_MARKER in text:
+        return "already-done", None
+    original = text
+    for pattern, repl in TOKEN_SUBS:
+        text = pattern.sub(repl, text, count=1)
+    if text == original:
+        return "no-match", None
+    text = text.rstrip("\n") + "\n\n/* Header theme/locale controls (project-local, not Lily) */\n" + PAGE_HEADER_CONTROLS_CSS
+    return "changed", text
+
+
+def patch_html(path: Path, slug: str, stylesheet_href: str):
+    text = path.read_text(encoding="utf-8")
+    if 'id="theme-stylesheet"' in text:
+        return "already-done", None
+
+    link_re = re.compile(LINK_RE_TEMPLATE.format(href=re.escape(stylesheet_href)))
+    m = link_re.search(text)
+    if not m:
+        return "no-link-anchor", None
+    insertion = (
+        '  <link rel="stylesheet" id="theme-stylesheet" href="css/themes/light.css">\n'
+        + fouc_guard_html(slug)
+    )
+    text = text[: m.end()] + insertion + text[m.end():]
+
+    hm = HEADER_RE.search(text)
+    if hm:
+        insert_at = hm.end(2) if hm.group(2) else hm.end(1)
+    else:
+        # Fallback: no <header> at all (a handful of bespoke one-off pages
+        # predate the .page-header convention) — insert right after <body>.
+        bm = BODY_OPEN_RE.search(text)
+        if not bm:
+            return "no-header-anchor", None
+        insert_at = bm.end()
+    text = text[:insert_at] + header_controls_html() + text[insert_at:]
+
+    sm = MODULE_SCRIPT_RE.search(text)
+    if sm:
+        insert_at2 = sm.start()
+    else:
+        # Fallback: no ES-module script tag at all (bespoke pages using a
+        # single inline <script>) — insert right before </body>.
+        em = BODY_CLOSE_RE.search(text)
+        if not em:
+            return "no-script-anchor", None
+        insert_at2 = em.start()
+    text = (
+        text[:insert_at2]
+        + '  <script type="module" src="js/theme-select.js"></script>\n'
+        '  <script type="module" src="js/locale-select.js"></script>\n'
+        + text[insert_at2:]
+    )
+
+    return "changed", text
+
+
+def copy_theme_css(css_dir: Path, lily_themes_dir: Path, check: bool) -> None:
+    themes_dir = css_dir / "themes"
+    if not check:
+        themes_dir.mkdir(parents=True, exist_ok=True)
+    for src in lily_themes_dir.glob("*.css"):
+        dest = themes_dir / src.name
+        if dest.exists() and dest.stat().st_size == src.stat().st_size:
+            continue
+        if not check:
+            shutil.copy2(src, dest)
+
+
+def process_form(form_dir: Path, lily_themes_dir: Path, check: bool):
+    slug = form_dir.name
+    if slug in THEME_COLLISION_SLUGS:
+        return "skip-theme-collision-slug"
+    html_dir = form_dir / "front-end-with-html"
+    style_css = html_dir / "css" / "style.css"
+    if not style_css.exists():
+        return "skip-no-style-css"
+
+    index_html = html_dir / "index.html"
+    dashboard_html = html_dir / "dashboard.html"
+    dashboard_css = html_dir / "css" / "dashboard.css"
+
+    results = {}
+
+    css_status, new_css = patch_css_tokens(style_css)
+    results["style.css"] = css_status
+    if css_status == "changed" and not check:
+        style_css.write_text(new_css, encoding="utf-8")
+
+    if dashboard_css.exists():
+        dcss_status, new_dcss = patch_css_tokens(dashboard_css)
+        results["dashboard.css"] = dcss_status
+        if dcss_status == "changed" and not check:
+            dashboard_css.write_text(new_dcss, encoding="utf-8")
+
+    idx_status, new_idx = patch_html(index_html, slug, "css/style.css")
+    results["index.html"] = idx_status
+    if idx_status == "changed" and not check:
+        index_html.write_text(new_idx, encoding="utf-8")
+
+    if dashboard_html.exists():
+        dash_status, new_dash = patch_html(dashboard_html, slug, "css/dashboard.css")
+        results["dashboard.html"] = dash_status
+        if dash_status == "changed" and not check:
+            dashboard_html.write_text(new_dash, encoding="utf-8")
+
+    any_changed = any(v == "changed" for v in results.values())
+    if any_changed and not check:
+        copy_theme_css(html_dir / "css", lily_themes_dir, check)
+        (html_dir / "js").mkdir(parents=True, exist_ok=True)
+        (html_dir / "js" / "theme-select.js").write_text(
+            THEME_SELECT_JS_TEMPLATE.format(slug=slug), encoding="utf-8"
+        )
+        (html_dir / "js" / "locale-select.js").write_text(
+            LOCALE_SELECT_JS_TEMPLATE.format(slug=slug), encoding="utf-8"
+        )
+
+    return results
+
+
+def main() -> int:
+    parser = argparse.ArgumentParser(description=__doc__)
+    group = parser.add_mutually_exclusive_group(required=True)
+    group.add_argument("--check", action="store_true", help="CI drift check (no writes)")
+    group.add_argument("--apply", action="store_true", help="write changes")
+    parser.add_argument("--lily-dir", type=Path, default=DEFAULT_LILY_THEMES_DIR,
+                         help="path to the Lily theme CSS catalogue directory")
+    args = parser.parse_args()
+
+    if not args.check and not args.lily_dir.is_dir():
+        sys.exit(f"Lily themes dir not found: {args.lily_dir}")
+
+    forms = sorted(p.parent for p in FORMS_DIR.glob("*/front-end-with-html"))
+    stats: dict[str, int] = {}
+    anomalies = []
+    drift = False
+    for form_dir in forms:
+        result = process_form(form_dir, args.lily_dir, args.check)
+        key = result if isinstance(result, str) else "processed"
+        stats[key] = stats.get(key, 0) + 1
+        if isinstance(result, dict):
+            for filename, status in result.items():
+                if status == "changed":
+                    drift = True
+                elif status != "already-done":
+                    anomalies.append((form_dir.name, filename, status))
+
+    print(("CHECK" if args.check else "APPLY") + " run")
+    for k, v in sorted(stats.items()):
+        print(f"  {k}: {v}")
+    if anomalies:
+        print(f"\n{len(anomalies)} anomalies (pre-existing structural outliers, left untouched):")
+        for a in anomalies:
+            print(" ", a)
+
+    return 1 if drift else 0
+
+
+if __name__ == "__main__":
+    sys.exit(main())

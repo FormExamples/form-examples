@@ -6,17 +6,7 @@
 	const plural = 'semaglutide-assessments';
 </script>
 
-<main class="mx-auto max-w-4xl px-4 py-12">
-	<header class="mb-10">
-		<p class="text-sm font-semibold uppercase tracking-wide text-primary">Semaglutide Assessment</p>
-		<h1 class="mt-2 text-3xl font-bold text-base-content">GLP-1 receptor agonist eligibility screening</h1>
-		<p class="mt-4 text-base leading-relaxed text-base-content/70">
-			A structured, single-page wizard that screens semaglutide eligibility across
-			demographics, metabolic and cardiovascular risk, contraindications, and treatment planning, then
-			determines an eligibility status (Eligible / Conditional / Ineligible), BMI category, and
-			safety-critical monitoring flags for the prescriber.
-		</p>
-	</header>
+<main class="mx-16 px-4 py-12">
 
 	<div class="grid gap-4 sm:grid-cols-2">
 		<a

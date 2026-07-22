@@ -97,22 +97,20 @@
 	}
 </script>
 
-<main class="mx-auto max-w-3xl px-4 py-6">
-	<header class="mb-6 no-print">
-		<h1 class="text-2xl font-bold text-base-content">
-			{isNew ? 'New architecture decision record' : `Architecture decision record ${id}`}
-		</h1>
-		<p class="mt-1 text-sm text-base-content/70">
-			Complete the sixteen sections of the Tyree &amp; Akerman template; completeness and flags are
-			computed on submit, and the report renders a commit-ready Markdown ADR.
-		</p>
-		<Progress label="Record sections" value={TOTAL_STEPS} max={TOTAL_STEPS} />
-		<StepList label="Record sections" current={TOTAL_STEPS}>
-			{#each steps as step (step.number)}
-				<StepListItem status="finished" label={step.title}>{step.shortTitle}</StepListItem>
-			{/each}
-		</StepList>
-	</header>
+<main class="mx-16 px-4 py-6">
+	<h1 class="text-2xl font-bold text-base-content">
+		{isNew ? 'New architecture decision record' : `Architecture decision record ${id}`}
+	</h1>
+	<p class="mt-1 text-sm text-base-content/70">
+		Complete the sixteen sections of the Tyree &amp; Akerman template; completeness and flags are
+		computed on submit, and the report renders a commit-ready Markdown ADR.
+	</p>
+	<Progress label="Record sections" value={TOTAL_STEPS} max={TOTAL_STEPS} />
+	<StepList label="Record sections" current={TOTAL_STEPS}>
+		{#each steps as step (step.number)}
+			<StepListItem status="finished" label={step.title}>{step.shortTitle}</StepListItem>
+		{/each}
+	</StepList>
 
 	{#if errors.length > 0}
 		<ErrorSummary title="Please fix the following before submitting" class="mb-6">

@@ -96,7 +96,7 @@
 		</div>
 	</header>
 
-	<main class="mx-auto max-w-4xl px-4 py-6">
+	<main class="mx-16 px-4 py-6">
 		<!-- Contraindication / emergency alert -->
 		{#if result.contraindicationBand === 'contraindicated'}
 			<Alert type="error" heading="Contraindicated" class="mb-6">

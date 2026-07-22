@@ -92,26 +92,24 @@
 	}
 </script>
 
-<main class="mx-auto max-w-3xl px-4 py-6">
-	<header class="mb-6 no-print">
-		<h1 class="text-2xl font-bold text-base-content">
-			{isNew ? 'New LP1H application' : `LP1H application ${id}`}
-		</h1>
-		<p class="mt-1 text-sm text-base-content/70">
-			Complete the {STEP_COUNT} sections; statutory validity and flagged issues are computed on submit.
-		</p>
-		<div class="mt-4">
-			<Progress label="LP1H sections" value={STEP_COUNT} max={STEP_COUNT} />
-		</div>
-		<ol class="mt-3 grid gap-1 text-sm text-base-content/70 sm:grid-cols-2">
-			{#each STEPS.slice(0, STEP_COUNT) as step (step.number)}
-				<li>
-					<span class="font-mono text-xs text-base-content/60">{step.lp1hSection}</span>
-					{step.title}
-				</li>
-			{/each}
-		</ol>
-	</header>
+<main class="mx-16 px-4 py-6">
+	<h1 class="text-2xl font-bold text-base-content">
+		{isNew ? 'New LP1H application' : `LP1H application ${id}`}
+	</h1>
+	<p class="mt-1 text-sm text-base-content/70">
+		Complete the {STEP_COUNT} sections; statutory validity and flagged issues are computed on submit.
+	</p>
+	<div class="mt-4">
+		<Progress label="LP1H sections" value={STEP_COUNT} max={STEP_COUNT} />
+	</div>
+	<ol class="mt-3 grid gap-1 text-sm text-base-content/70 sm:grid-cols-2">
+		{#each STEPS.slice(0, STEP_COUNT) as step (step.number)}
+			<li>
+				<span class="font-mono text-xs text-base-content/60">{step.lp1hSection}</span>
+				{step.title}
+			</li>
+		{/each}
+	</ol>
 
 	{#if errors.length > 0}
 		<ErrorSummary title="Please fix the following before submitting" class="mb-6">

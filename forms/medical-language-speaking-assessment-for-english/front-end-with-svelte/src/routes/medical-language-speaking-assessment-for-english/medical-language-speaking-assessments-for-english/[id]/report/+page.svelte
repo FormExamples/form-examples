@@ -85,7 +85,7 @@
 		</div>
 	</header>
 
-	<main class="mx-auto max-w-4xl px-4 py-6">
+	<main class="mx-16 px-4 py-6">
 		<!-- Overall grade banner -->
 		<div class="mb-6 rounded-xl border-2 p-6 text-center {gradeColor(result.grade)}">
 			<div class="text-3xl font-bold">{result.score} / 500</div>

@@ -4,21 +4,7 @@
 	// dashboard.
 </script>
 
-<main class="mx-auto max-w-4xl px-4 py-12">
-	<header class="mb-10">
-		<p class="text-sm font-semibold uppercase tracking-wide text-primary">Nuclear Medicine Test Result</p>
-		<h1 class="mt-2 text-3xl font-bold text-gray-900">Nuclear medicine report</h1>
-		<p class="mt-4 text-base leading-relaxed text-gray-600">
-			A wizard for a nuclear-medicine physician, radiologist, consultant, or other reporting
-			clinician to record a completed radionuclide examination's scan type, radiopharmaceutical
-			and injected activity, clinical history, narrative and structured findings, and key
-			quantitative measurements (such as ejection fraction or split renal function), from which
-			the shared grading engine computes a four-axis interpretation grade — result
-			classification, abnormality severity and structured reporting category, report
-			completeness, and follow-up urgency — plus safety flags including an automatic
-			critical-result alert.
-		</p>
-	</header>
+<main class="mx-16 px-4 py-12">
 
 	<div class="grid gap-4 sm:grid-cols-2">
 		<a

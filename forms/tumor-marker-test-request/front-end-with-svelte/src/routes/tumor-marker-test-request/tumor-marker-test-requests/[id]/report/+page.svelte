@@ -75,7 +75,7 @@
 		</div>
 	</header>
 
-	<main class="mx-auto max-w-4xl px-4 py-6">
+	<main class="mx-16 px-4 py-6">
 		<!-- Two-week-wait / misuse alert -->
 		{#if result.triageTier === 'two-week-wait'}
 			<Alert type="error" heading="Two-week-wait suspected-cancer pathway" class="mb-6">

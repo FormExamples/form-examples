@@ -5,18 +5,7 @@
 	const plural = 'child-safeguarding-referrals';
 </script>
 
-<main class="mx-auto max-w-4xl px-4 py-12">
-	<header class="mb-10">
-		<p class="text-sm font-semibold uppercase tracking-wide text-primary">
-			Child Safeguarding Referral
-		</p>
-		<h1 class="mt-2 text-3xl font-bold text-base-content">Refer a child to children’s social care</h1>
-		<p class="mt-4 text-base leading-relaxed text-base-content/70">
-			A structured referral to children’s social care, completed as a single continuous wizard,
-			that grades a professional’s safeguarding concern about a child’s risk of harm for
-			completeness and classifies its urgency (emergency, urgent s47, or standard s17).
-		</p>
-	</header>
+<main class="mx-16 px-4 py-12">
 
 	<div class="grid gap-4 sm:grid-cols-2">
 		<a

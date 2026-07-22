@@ -5,19 +5,7 @@
 	const plural = 'systematic-coronary-risk-evaluation-2-diabetes-records';
 </script>
 
-<main class="mx-auto max-w-4xl px-4 py-12">
-	<header class="mb-10">
-		<p class="text-sm font-semibold uppercase tracking-wide text-primary">SCORE2-Diabetes</p>
-		<h1 class="mt-2 text-3xl font-bold text-base-content">
-			10-year cardiovascular risk for adults with type 2 diabetes
-		</h1>
-		<p class="mt-4 text-base leading-relaxed text-base-content/70">
-			A structured, single-page wizard covering diabetes history, cardiovascular history, blood
-			pressure, lipid profile, renal function, and lifestyle factors for adults with type 2 diabetes,
-			from which the shared engine derives an overall 10-year cardiovascular risk category
-			(SCORE2-Diabetes) and flags clinical safety issues for the clinician.
-		</p>
-	</header>
+<main class="mx-16 px-4 py-12">
 
 	<div class="grid gap-4 sm:grid-cols-2">
 		<a

@@ -5,20 +5,7 @@
 	const plural = 'history-and-physical-examinations';
 </script>
 
-<main class="mx-auto max-w-4xl px-4 py-12">
-	<header class="mb-10">
-		<p class="text-sm font-semibold uppercase tracking-wide text-primary">
-			History and Physical Examination
-		</p>
-		<h1 class="mt-2 text-3xl font-bold text-base-content">
-			H and P — the comprehensive clerking document
-		</h1>
-		<p class="mt-4 text-base leading-relaxed text-base-content/70">
-			A structured clinician record of a full history and physical examination, completed as a single
-			continuous wizard, that the engine grades <strong>Complete</strong>, <strong>Partial</strong>,
-			or <strong>Incomplete</strong> with a completeness percentage rather than a numeric score.
-		</p>
-	</header>
+<main class="mx-16 px-4 py-12">
 
 	<div class="grid gap-4 sm:grid-cols-2">
 		<a

@@ -5,18 +5,7 @@
 	const plural = 'ambulatory-blood-pressure-test-requests';
 </script>
 
-<main class="mx-auto max-w-4xl px-4 py-12">
-	<header class="mb-10">
-		<p class="text-sm font-semibold uppercase tracking-wide text-primary">
-			Ambulatory Blood Pressure Test Request
-		</p>
-		<h1 class="mt-2 text-3xl font-bold text-base-content">ABPM monitoring request &amp; vetting</h1>
-		<p class="mt-4 text-base leading-relaxed text-base-content/70">
-			A UK NHS–aligned ambulatory blood pressure monitoring (ABPM) request, completed as a single
-			continuous wizard, that the shared engine grades on four independent axes and flags as
-			safety-critical when needed.
-		</p>
-	</header>
+<main class="mx-16 px-4 py-12">
 
 	<div class="grid gap-4 sm:grid-cols-2">
 		<a

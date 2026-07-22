@@ -5,19 +5,7 @@
 	const plural = 'ottawa-ankle-ruleses';
 </script>
 
-<main class="mx-auto max-w-4xl px-4 py-12">
-	<header class="mb-10">
-		<p class="text-sm font-semibold uppercase tracking-wide text-primary">
-			Ottawa Ankle Rules (and Ottawa Foot Rules)
-		</p>
-		<h1 class="mt-2 text-3xl font-bold text-base-content">Ottawa Ankle / Foot imaging decision rule</h1>
-		<p class="mt-4 text-base leading-relaxed text-base-content/70">
-			A validated bedside decision rule &mdash; not a score &mdash; for adults after an acute ankle or
-			midfoot injury, completed as a single continuous wizard, that independently indicates an ankle
-			X-ray and/or a foot X-ray from malleolar- or midfoot-zone pain, bony tenderness at four
-			landmarks, and inability to bear weight.
-		</p>
-	</header>
+<main class="mx-16 px-4 py-12">
 
 	<div class="grid gap-4 sm:grid-cols-2">
 		<a

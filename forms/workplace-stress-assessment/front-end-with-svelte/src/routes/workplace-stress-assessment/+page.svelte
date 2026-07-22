@@ -7,18 +7,7 @@
 	const plural = 'workplace-stress-assessments';
 </script>
 
-<main class="mx-auto max-w-4xl px-4 py-12">
-	<header class="mb-10">
-		<p class="text-sm font-semibold uppercase tracking-wide text-primary">
-			Workplace Stress Assessment
-		</p>
-		<h1 class="mt-2 text-3xl font-bold text-base-content">UK HSE Management Standards survey</h1>
-		<p class="mt-4 text-base leading-relaxed text-base-content/70">
-			An anonymous employee survey using the UK Health and Safety Executive (HSE) Management
-			Standards Indicator Tool that scores seven organisational domains against HSE percentile
-			benchmarks to derive an overall concern level for occupational health and HR.
-		</p>
-	</header>
+<main class="mx-16 px-4 py-12">
 
 	<div class="grid gap-4 sm:grid-cols-2">
 		<a

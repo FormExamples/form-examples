@@ -5,19 +5,7 @@
 	const plural = 'grace-scores-for-acute-coronary-syndrome';
 </script>
 
-<main class="mx-auto max-w-4xl px-4 py-12">
-	<header class="mb-10">
-		<p class="text-sm font-semibold uppercase tracking-wide text-primary">
-			GRACE Score for Acute Coronary Syndrome
-		</p>
-		<h1 class="mt-2 text-3xl font-bold text-base-content">GRACE acute coronary syndrome risk score</h1>
-		<p class="mt-4 text-base leading-relaxed text-base-content/70">
-			A risk-stratification tool for adults with an acute coronary syndrome, completed as a single
-			continuous wizard, that maps eight admission variables through the GRACE weighted regression
-			point model into in-hospital and 6-month mortality bands, an overall Low / Intermediate / High
-			risk category, and a recommended timing for an invasive strategy.
-		</p>
-	</header>
+<main class="mx-16 px-4 py-12">
 
 	<div class="grid gap-4 sm:grid-cols-2">
 		<a

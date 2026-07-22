@@ -78,22 +78,20 @@
 	}
 </script>
 
-<main class="mx-auto max-w-3xl px-4 py-6">
-	<header class="mb-6 no-print">
-		<h1 class="text-2xl font-bold text-base-content">
-			{isNew ? 'New lasting power of attorney (LP1F)' : `Lasting power of attorney ${id}`}
-		</h1>
-		<p class="mt-1 text-sm text-base-content/70">
-			Complete all 15 LP1F sections; the validity band, composite risk, statutory blockers and flags
-			are computed live and shown on the report.
-		</p>
-		<Progress label="LP1F sections" value={TOTAL_STEPS} max={TOTAL_STEPS} />
-		<StepList label="LP1F sections" current={TOTAL_STEPS}>
-			{#each STEPS as step (step.number)}
-				<StepListItem status="finished" label={step.title}>{step.short}</StepListItem>
-			{/each}
-		</StepList>
-	</header>
+<main class="mx-16 px-4 py-6">
+	<h1 class="text-2xl font-bold text-base-content">
+		{isNew ? 'New lasting power of attorney (LP1F)' : `Lasting power of attorney ${id}`}
+	</h1>
+	<p class="mt-1 text-sm text-base-content/70">
+		Complete all 15 LP1F sections; the validity band, composite risk, statutory blockers and flags
+		are computed live and shown on the report.
+	</p>
+	<Progress label="LP1F sections" value={TOTAL_STEPS} max={TOTAL_STEPS} />
+	<StepList label="LP1F sections" current={TOTAL_STEPS}>
+		{#each STEPS as step (step.number)}
+			<StepListItem status="finished" label={step.title}>{step.short}</StepListItem>
+		{/each}
+	</StepList>
 
 	{#if errors.length > 0}
 		<ErrorSummary title="Please fix the following before submitting" class="mb-6">

@@ -4,17 +4,7 @@
 	// dashboard.
 </script>
 
-<main class="mx-auto max-w-4xl px-4 py-12">
-	<header class="mb-10">
-		<p class="text-sm font-semibold uppercase tracking-wide text-primary">Electroencephalogram Test Result</p>
-		<h1 class="mt-2 text-3xl font-bold text-gray-900">EEG reports, graded and ready to share</h1>
-		<p class="mt-4 text-base leading-relaxed text-gray-600">
-			The clinician's wizard records what an electroencephalogram (EEG) recording found, and the
-			shared grading engine then computes a four-axis interpretation plus safety flags, including
-			an automatic critical-result alert for status epilepticus, a recorded seizure, or frequent
-			epileptiform discharges.
-		</p>
-	</header>
+<main class="mx-16 px-4 py-12">
 
 	<div class="grid gap-4 sm:grid-cols-2">
 		<a

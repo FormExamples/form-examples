@@ -5,20 +5,7 @@
 	const plural = 'soap-notes';
 </script>
 
-<main class="mx-auto max-w-4xl px-4 py-12">
-	<header class="mb-10">
-		<p class="text-sm font-semibold uppercase tracking-wide text-primary">SOAP Note</p>
-		<h1 class="mt-2 text-3xl font-bold text-base-content">
-			SOAP Note — a structured clinical progress note
-		</h1>
-		<p class="mt-4 text-base leading-relaxed text-base-content/70">
-			A structured clinical progress note that records one patient encounter across the four SOAP
-			sections — <strong>S</strong>ubjective, <strong>O</strong>bjective, <strong>A</strong>ssessment,
-			and <strong>P</strong>lan — via a single continuous wizard, then grades the note's documentation
-			completeness (<strong>Complete</strong>, <strong>Partial</strong>, or
-			<strong>Incomplete</strong>) and independently raises safety flags for the clinician.
-		</p>
-	</header>
+<main class="mx-16 px-4 py-12">
 
 	<div class="grid gap-4 sm:grid-cols-2">
 		<a

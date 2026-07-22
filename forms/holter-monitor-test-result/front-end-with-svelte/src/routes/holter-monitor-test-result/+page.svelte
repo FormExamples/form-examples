@@ -4,18 +4,7 @@
 	// dashboard.
 </script>
 
-<main class="mx-auto max-w-4xl px-4 py-12">
-	<header class="mb-10">
-		<p class="text-sm font-semibold uppercase tracking-wide text-primary">Holter Monitor Test Result</p>
-		<h1 class="mt-2 text-3xl font-bold text-gray-900">Ambulatory ECG (Holter monitor) reporting</h1>
-		<p class="mt-4 text-base leading-relaxed text-gray-600">
-			This wizard lets a cardiologist, cardiac physiologist, or other reporting clinician record what
-			an ambulatory ECG recording found, and the shared grading engine then computes a four-axis
-			grade — result classification, abnormality severity and structured reporting, report
-			completeness, and follow-up urgency — along with safety flags such as an automatic
-			critical-result alert.
-		</p>
-	</header>
+<main class="mx-16 px-4 py-12">
 
 	<div class="grid gap-4 sm:grid-cols-2">
 		<a

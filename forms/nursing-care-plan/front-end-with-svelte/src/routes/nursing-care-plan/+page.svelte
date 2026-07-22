@@ -5,22 +5,7 @@
 	const plural = 'nursing-care-plans';
 </script>
 
-<main class="mx-auto max-w-4xl px-4 py-12">
-	<header class="mb-10">
-		<p class="text-sm font-semibold uppercase tracking-wide text-primary">Nursing Care Plan</p>
-		<h1 class="mt-2 text-3xl font-bold text-base-content">
-			Document care through the nursing process (ADPIE)
-		</h1>
-		<p class="mt-4 text-base leading-relaxed text-base-content/70">
-			A single continuous wizard for building an individualised nursing care plan &mdash;
-			recording identified problems and needs, then working each one through the nursing process
-			(assessment, diagnosis, planning with SMART goals, implementation via interventions, and
-			evaluation) organised by the Roper&ndash;Logan&ndash;Tierney activities of living &mdash;
-			whose shared completeness engine grades each problem Complete, Partial, or Incomplete,
-			rolls that up to a plan status, reports a completeness percent, and raises flagged issues,
-			as a documentation-and-completeness instrument rather than a numeric score.
-		</p>
-	</header>
+<main class="mx-16 px-4 py-12">
 
 	<div class="grid gap-4 sm:grid-cols-2">
 		<a

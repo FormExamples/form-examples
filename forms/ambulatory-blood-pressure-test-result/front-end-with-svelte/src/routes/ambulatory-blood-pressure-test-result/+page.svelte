@@ -4,17 +4,7 @@
 	// dashboard.
 </script>
 
-<main class="mx-auto max-w-4xl px-4 py-12">
-	<header class="mb-10">
-		<p class="text-sm font-semibold uppercase tracking-wide text-primary">Ambulatory Blood Pressure Test Result</p>
-		<h1 class="mt-2 text-3xl font-bold text-gray-900">Ambulatory blood pressure monitoring reports</h1>
-		<p class="mt-4 text-base leading-relaxed text-gray-600">
-			The reporting clinician's wizard captures what a 24-hour ambulatory blood pressure monitoring
-			(ABPM) or home monitoring period found and, via a shared grading engine, turns it into a
-			four-axis interpretation grade with safety-critical flags, including an automatic alert for a
-			severe-hypertension result.
-		</p>
-	</header>
+<main class="mx-16 px-4 py-12">
 
 	<div class="grid gap-4 sm:grid-cols-2">
 		<a

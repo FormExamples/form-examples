@@ -61,12 +61,23 @@ schema changes. See `spec.md` §10 for the spec-driven workflow.
 - `bin/es-modules-decomment [--apply] [file…]` — one-shot (already applied): strip the stale IIFE/namespace/classic-script comments the ES-module conversion left behind; comment-only, idempotent
 - `bin/lily-html-refactor [--check] [--dry-run] [--scope=form|dashboard|both] [--all|<slug>]` — mechanical Lily HTML class swaps; `--check` is the CI drift detector
 - `bin/lily-sync [--check] [--lily-dir PATH]` — snapshot Lily HTML component specs into `forms/lily-spec/` and record the pinned upstream commit in `forms/lily-version.md`
+- `bin/html-theme-locale-select-refactor [--check|--apply] [--lily-dir PATH]` — vendor the Lily multi-theme CSS catalogue into `css/themes/`, alias each form's `css/style.css`/`css/dashboard.css` tokens onto it, and add header theme-select + locale-select controls; `--check` is the CI drift detector
+- `bin/page-header-layout-refactor [--check|--apply]` — re-layout each HTML front-end's page header so the title sits left and the nav link(s) + select controls sit right (`.page-header-bar` / `.page-header-title`); `--check` is the CI drift detector
+- `bin/html-text-size-select-refactor [--check|--apply]` — add a third header control, `#text-size-select`, alongside locale-select/theme-select (`lily-design-system-svelte-text-size-select` HTML analogue); `--check` is the CI drift detector
+- `bin/html-share-button-refactor [--check|--apply]` — add a fourth header control, `.share-button` (native Web Share API or copy-link fallback), alongside locale-select/theme-select/text-size-select (`lily-design-system-svelte-share-button` HTML analogue); `--check` is the CI drift detector
 
 ### Lily Design System (Svelte front-ends)
 
 - `bin/lily-svelte-refactor [--check] [--dry-run] [--scope=form|dashboard|both] [--show-risky] [--all|<slug>]` — mechanical Lily Svelte class swaps + risky-pattern report; `--check` is the CI drift detector
 - `bin/lily-svelte-status [--counts] [--slugs-only] [--status=PASS|PARTIAL|TODO|EMPTY]` — per-form Lily Svelte conformance report (PASS = canonical UI; PARTIAL = legacy names but Lily classes; TODO = no Lily yet; EMPTY = no implementation)
 - `bin/lily-svelte-sync [--check] [--lily-dir PATH]` — snapshot Lily Svelte component sources into `forms/lily-svelte-spec/` and record the pinned upstream commit in `forms/lily-svelte-version.md`
+- `bin/svelte-locale-select-refactor [--check|--apply]` — add a hand-authored LocaleSelect control (before ThemeSelect) to every form's root layout header; `--check` is the CI drift detector
+- `bin/lily-svelte-theme-locale-select-refactor [--check|--apply]` — migrate ThemeSelect/LocaleSelect from the old native-`<select>` pattern to the `lily-design-system-svelte-helpers` headless button+listbox pattern; `--check` is the CI drift detector; pin recorded in [`forms/lily-svelte-helpers-version.md`](forms/lily-svelte-helpers-version.md)
+- `bin/svelte-text-size-select-refactor [--check|--apply]` — add a third header control, `TextSizeSelect` (`lily-design-system-svelte-text-size-select`), alongside `LocaleSelect`/`ThemeSelect`; `--check` is the CI drift detector
+- `bin/svelte-share-button-refactor [--check|--apply]` — add a fourth header control, `ShareButton` (`lily-design-system-svelte-share-button`), alongside `LocaleSelect`/`ThemeSelect`/`TextSizeSelect`; `--check` is the CI drift detector
+- `bin/svelte-helpers-chooser-rename [--check|--apply]` — rename the four Svelte helper controls from `*Select`/`ShareButton` to `*Chooser`, matching upstream's `*-select`/`share-button` → `*-chooser` package rename (reads fresh component source from the pinned checkout at apply time); `--check` is the CI drift detector
+- `bin/html-helpers-chooser-rename [--check|--apply]` — the HTML-side half of the same rename: `#text-size-select`→`#text-size-chooser`, `.share-button`→`.share-chooser`. `#theme-select`/`#locale-select` are untouched (they mirror the unrelated, never-renamed catalog components); `--check` is the CI drift detector
+- `bin/svelte-test-result-theming-backport [--check|--apply] [--lily-dir PATH]` — one-shot: backport the gold-standard Lily theme system (oklch tokens, `static/themes/`, ThemeSelect) to the `*-test-result` family, which predates the theming rollout; run `bin/svelte-locale-select-refactor` afterwards
 
 ### Specs
 
@@ -174,6 +185,16 @@ bin/lily-html-refactor --check --all  # Lily HTML contract drift detector
 bin/lily-sync --check                 # Lily HTML spec-snapshot drift detector
 bin/lily-svelte-refactor --check --all # Lily Svelte contract drift detector
 bin/lily-svelte-sync --check          # Lily Svelte spec-snapshot drift detector
+bin/svelte-locale-select-refactor --check      # Svelte LocaleSelect drift detector
+bin/lily-svelte-theme-locale-select-refactor --check # Svelte ThemeSelect/LocaleSelect helpers-package drift detector
+bin/html-theme-locale-select-refactor --check  # HTML theme/locale-select drift detector
+bin/page-header-layout-refactor --check        # HTML page-header title-left/controls-right drift detector
+bin/html-text-size-select-refactor --check     # HTML text-size-select drift detector
+bin/svelte-text-size-select-refactor --check   # Svelte TextSizeSelect drift detector
+bin/html-share-button-refactor --check         # HTML share-button drift detector
+bin/svelte-share-button-refactor --check       # Svelte ShareButton drift detector
+bin/svelte-helpers-chooser-rename --check      # Svelte *-select/share-button -> *-chooser rename drift detector
+bin/html-helpers-chooser-rename --check        # HTML text-size-select/share-button -> *-chooser rename drift detector
 bin/generate-llms-txt.py --check      # Per-form llms.txt drift detector
 bin/generate-spec.py --check          # Per-form spec/ presence check (specs are hand-maintained)
 bin/generate-changelog-and-examples.py --check # CHANGELOG + examples/ drift detector

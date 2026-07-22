@@ -6,18 +6,7 @@
 	const plural = 'hearing-test-requests';
 </script>
 
-<main class="mx-auto max-w-4xl px-4 py-12">
-	<header class="mb-10">
-		<p class="text-sm font-semibold uppercase tracking-wide text-primary">Hearing Test Request</p>
-		<h1 class="mt-2 text-3xl font-bold text-base-content">
-			Audiology / hearing-assessment request
-		</h1>
-		<p class="mt-4 text-base leading-relaxed text-base-content/70">
-			A UK NHS–aligned audiology request that a clinician completes to request a hearing test for a
-			patient, computing a four-axis vetting grade and safety-critical flags to support the audiology
-			department's triage and booking decision.
-		</p>
-	</header>
+<main class="mx-16 px-4 py-12">
 
 	<div class="grid gap-4 sm:grid-cols-2">
 		<a

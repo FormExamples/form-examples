@@ -5,20 +5,7 @@
 	const plural = 'united-kingdom-statements-of-fitness-for-work';
 </script>
 
-<main class="mx-auto max-w-4xl px-4 py-12">
-	<header class="mb-10">
-		<p class="text-sm font-semibold uppercase tracking-wide text-primary">
-			UK Statement of Fitness for Work
-		</p>
-		<h1 class="mt-2 text-3xl font-bold text-base-content">Med 3 / fit note</h1>
-		<p class="mt-4 text-base leading-relaxed text-base-content/70">
-			A UK Statement of Fitness for Work (Med 3 / fit note) completed as a single continuous wizard —
-			issuer and patient identification, assessment, diagnosis, fitness for work, adaptations, period,
-			and follow-up — whose shared engine classifies the fitness category, adaptation intensity, and
-			period compliance, checks validity, and fires safety flags drawn directly from DWP guidance for
-			healthcare professionals.
-		</p>
-	</header>
+<main class="mx-16 px-4 py-12">
 
 	<div class="grid gap-4 sm:grid-cols-2">
 		<a

@@ -4,17 +4,7 @@
 	// dashboard.
 </script>
 
-<main class="mx-auto max-w-4xl px-4 py-12">
-	<header class="mb-10">
-		<p class="text-sm font-semibold uppercase tracking-wide text-primary">Histopathology Test Result</p>
-		<h1 class="mt-2 text-3xl font-bold text-gray-900">Histopathology (tissue pathology) reporting</h1>
-		<p class="mt-4 text-base leading-relaxed text-gray-600">
-			This wizard lets a consultant histopathologist, biomedical scientist, or specialist registrar
-			record a tissue specimen examination’s findings and structured interpretation, which the
-			shared engine grades across four axes with an automatic critical-result alert for an unexpected
-			malignancy or an involved resection margin on a curative resection.
-		</p>
-	</header>
+<main class="mx-16 px-4 py-12">
 
 	<div class="grid gap-4 sm:grid-cols-2">
 		<a

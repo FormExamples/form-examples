@@ -6,20 +6,7 @@
 	const plural = 'coagulation-test-requests';
 </script>
 
-<main class="mx-auto max-w-4xl px-4 py-12">
-	<header class="mb-10">
-		<p class="text-sm font-semibold uppercase tracking-wide text-primary">Coagulation Test Request</p>
-		<h1 class="mt-2 text-3xl font-bold text-base-content">
-			Coagulation / haemostasis blood-test request
-		</h1>
-		<p class="mt-4 text-base leading-relaxed text-base-content/70">
-			A UK NHS–aligned coagulation / haemostasis blood-test request that a clinician completes,
-			in a single continuous wizard, to order coagulation tests and computes a four-axis vetting
-			grade — appropriateness, pre-analytical specimen safety, request completeness, and triage
-			priority — plus safety-critical flags for the laboratory’s and haematology team’s triage
-			decision.
-		</p>
-	</header>
+<main class="mx-16 px-4 py-12">
 
 	<div class="grid gap-4 sm:grid-cols-2">
 		<a

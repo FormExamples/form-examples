@@ -5,20 +5,7 @@
 	const plural = 'blood-cross-match-test-requests';
 </script>
 
-<main class="mx-auto max-w-4xl px-4 py-12">
-	<header class="mb-10">
-		<p class="text-sm font-semibold uppercase tracking-wide text-primary">
-			Blood Cross-Match Test Request
-		</p>
-		<h1 class="mt-2 text-3xl font-bold text-base-content">Transfusion compatibility request</h1>
-		<p class="mt-4 text-base leading-relaxed text-base-content/70">
-			A UK NHS–aligned blood cross-match / transfusion compatibility request, completed by a
-			clinician as a single continuous wizard, whose shared engine grades the request on four
-			independent axes — appropriateness (NICE NG24), identity / sample safety (BSH / SHOT),
-			request completeness, and triage priority — and raises safety-critical flags to support the
-			transfusion laboratory's acceptance and prioritisation decision.
-		</p>
-	</header>
+<main class="mx-16 px-4 py-12">
 
 	<div class="grid gap-4 sm:grid-cols-2">
 		<a

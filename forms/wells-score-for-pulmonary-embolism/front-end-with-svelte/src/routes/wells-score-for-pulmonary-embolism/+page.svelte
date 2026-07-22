@@ -5,18 +5,7 @@
 	const plural = 'wells-score-for-pulmonary-embolisms';
 </script>
 
-<main class="mx-auto max-w-4xl px-4 py-12">
-	<header class="mb-10">
-		<p class="text-sm font-semibold uppercase tracking-wide text-primary">
-			Wells Score for Pulmonary Embolism
-		</p>
-		<h1 class="mt-2 text-3xl font-bold text-base-content">Wells PE pre-test probability rule</h1>
-		<p class="mt-4 text-base leading-relaxed text-base-content/70">
-			A bedside clinical prediction rule that sums seven weighted criteria into a Wells score of 0 to
-			12.5 to stratify an adult with suspected acute pulmonary embolism as likely (CTPA) or unlikely
-			(D-dimer).
-		</p>
-	</header>
+<main class="mx-16 px-4 py-12">
 
 	<div class="grid gap-4 sm:grid-cols-2">
 		<a

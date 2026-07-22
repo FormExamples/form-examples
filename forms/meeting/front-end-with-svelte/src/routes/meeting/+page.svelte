@@ -6,17 +6,7 @@
 	const plural = 'meetings';
 </script>
 
-<main class="mx-auto max-w-4xl px-4 py-12">
-	<header class="mb-10">
-		<p class="text-sm font-semibold uppercase tracking-wide text-primary">Meeting</p>
-		<h1 class="mt-2 text-3xl font-bold text-base-content">General-purpose meeting record</h1>
-		<p class="mt-4 text-base leading-relaxed text-base-content/70">
-			A general-purpose meeting record, captured as a single continuous wizard, whose shared
-			validation engine checks for structural problems — such as a missing organiser, no
-			participants, an over-long summary, scheduling errors, or overdue actions — and produces an
-			overall health verdict with flagged issues.
-		</p>
-	</header>
+<main class="mx-16 px-4 py-12">
 
 	<div class="grid gap-4 sm:grid-cols-2">
 		<a

@@ -5,19 +5,7 @@
 	const plural = 'united-kingdom-driver-and-vehicle-licensing-agency-m1-forms';
 </script>
 
-<main class="mx-auto max-w-4xl px-4 py-12">
-	<header class="mb-10">
-		<p class="text-sm font-semibold uppercase tracking-wide text-primary">UK DVLA M1 Form</p>
-		<h1 class="mt-2 text-3xl font-bold text-base-content">Confidential medical information — mental health</h1>
-		<p class="mt-4 text-base leading-relaxed text-base-content/70">
-			The DVLA M1 form is a single continuous wizard — personal details, healthcare professionals,
-			diagnosis confirmation, mental health conditions, recent contact, and the applicant's
-			authorisation — that captures the information the Drivers Medical Group at DVLA Swansea needs
-			to assess fitness to drive in relation to a mental health condition, validated by a shared
-			engine for completeness and consistency (applying the conditional Q1 = No stop rule) and
-			flagged for clinical safety.
-		</p>
-	</header>
+<main class="mx-16 px-4 py-12">
 
 	<div class="grid gap-4 sm:grid-cols-2">
 		<a

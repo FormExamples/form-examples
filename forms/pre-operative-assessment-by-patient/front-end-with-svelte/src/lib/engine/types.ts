@@ -21,6 +21,10 @@ export interface Demographics {
 	bmi: number | null;
 	plannedProcedure: string;
 	procedureUrgency: 'elective' | 'urgent' | 'emergency' | '';
+	cancerHistory: YesNo;
+	cancerHistoryDetails: string;
+	mrsaHistory: YesNo;
+	recentHospitalOrCareHomeAdmission: YesNo;
 }
 
 export interface Cardiovascular {
@@ -37,6 +41,9 @@ export interface Cardiovascular {
 	pacemaker: YesNo;
 	recentMI: YesNo;
 	recentMIWeeks: number | null;
+	palpitationsOrBlackouts: YesNo;
+	heartOrArterySurgery: YesNo;
+	swollenAnkles: YesNo;
 }
 
 export interface Respiratory {
@@ -49,6 +56,11 @@ export interface Respiratory {
 	smoking: SmokingStatus;
 	smokingPackYears: number | null;
 	recentURTI: YesNo;
+	snoring: YesNo;
+	snoringLoud: YesNo;
+	collarSizeInches: number | null;
+	daytimeSleepiness: YesNo;
+	observedApnoeaEpisodes: YesNo;
 }
 
 export interface Renal {
@@ -56,6 +68,9 @@ export interface Renal {
 	ckdStage: '1' | '2' | '3' | '4' | '5' | '';
 	dialysis: YesNo;
 	dialysisType: 'haemodialysis' | 'peritoneal' | '';
+	urinarySymptoms: YesNo;
+	urinaryCatheterHistory: YesNo;
+	prostateProblems: YesNo;
 }
 
 export interface Hepatic {
@@ -93,6 +108,9 @@ export interface Haematological {
 	sickleCellDisease: YesNo;
 	sickleCellTrait: YesNo;
 	anaemia: YesNo;
+	personalVteHistory: YesNo;
+	familyVteHistory: YesNo;
+	bloodTransfusionHistory: YesNo;
 }
 
 export interface MusculoskeletalAirway {
@@ -104,12 +122,19 @@ export interface MusculoskeletalAirway {
 	dentalDetails: string;
 	previousDifficultAirway: YesNo;
 	mallampatiScore: '1' | '2' | '3' | '4' | '';
+	jointOrArthritisProblems: YesNo;
+	backOrNeckProblems: YesNo;
+	skinConditions: YesNo;
+	pressureSoreRisk: YesNo;
 }
 
 export interface Gastrointestinal {
 	gord: YesNo;
 	hiatusHernia: YesNo;
 	nausea: YesNo;
+	bowelProblems: YesNo;
+	foodIntolerances: YesNo;
+	foodIntolerancesDetails: string;
 }
 
 export interface Medication {
@@ -138,6 +163,8 @@ export interface SocialHistory {
 	alcoholUnitsPerWeek: number | null;
 	recreationalDrugs: YesNo;
 	drugDetails: string;
+	bloodDonor: YesNo;
+	bodyPiercings: YesNo;
 }
 
 export interface FunctionalCapacity {
@@ -145,12 +172,27 @@ export interface FunctionalCapacity {
 	estimatedMETs: number | null;
 	mobilityAids: YesNo;
 	recentDecline: YesNo;
+	hearingProblems: YesNo;
+	visionProblems: YesNo;
+	balanceIssues: YesNo;
 }
 
 export interface Pregnancy {
 	possiblyPregnant: YesNo;
 	pregnancyConfirmed: YesNo;
 	gestationWeeks: number | null;
+	contraceptiveOrHrtUse: YesNo;
+	lastMenstrualPeriod: string;
+}
+
+export interface CognitiveMentalHealth {
+	headInjuryRequiringHospitalisation: YesNo;
+	memoryConcerns: YesNo;
+	dementiaDiagnosis: YesNo;
+	depressionOrAnxietyHistory: YesNo;
+	depressionAnxietyImpactsDailyLife: YesNo;
+	depressionAnxietySeenDoctor: YesNo;
+	learningDifficulties: YesNo;
 }
 
 // ──────────────────────────────────────────────
@@ -174,6 +216,7 @@ export interface AssessmentData {
 	socialHistory: SocialHistory;
 	functionalCapacity: FunctionalCapacity;
 	pregnancy: Pregnancy;
+	cognitiveMentalHealth: CognitiveMentalHealth;
 }
 
 // ──────────────────────────────────────────────

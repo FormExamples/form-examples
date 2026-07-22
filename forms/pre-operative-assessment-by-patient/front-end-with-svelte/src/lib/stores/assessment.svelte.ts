@@ -18,7 +18,11 @@ export function createDefaultAssessment(): AssessmentData {
 			height: null,
 			bmi: null,
 			plannedProcedure: '',
-			procedureUrgency: ''
+			procedureUrgency: '',
+			cancerHistory: '',
+			cancerHistoryDetails: '',
+			mrsaHistory: '',
+			recentHospitalOrCareHomeAdmission: ''
 		},
 		cardiovascular: {
 			hypertension: '',
@@ -33,7 +37,10 @@ export function createDefaultAssessment(): AssessmentData {
 			arrhythmiaType: '',
 			pacemaker: '',
 			recentMI: '',
-			recentMIWeeks: null
+			recentMIWeeks: null,
+			palpitationsOrBlackouts: '',
+			heartOrArterySurgery: '',
+			swollenAnkles: ''
 		},
 		respiratory: {
 			asthma: '',
@@ -44,13 +51,21 @@ export function createDefaultAssessment(): AssessmentData {
 			osaCPAP: '',
 			smoking: '',
 			smokingPackYears: null,
-			recentURTI: ''
+			recentURTI: '',
+			snoring: '',
+			snoringLoud: '',
+			collarSizeInches: null,
+			daytimeSleepiness: '',
+			observedApnoeaEpisodes: ''
 		},
 		renal: {
 			ckd: '',
 			ckdStage: '',
 			dialysis: '',
-			dialysisType: ''
+			dialysisType: '',
+			urinarySymptoms: '',
+			urinaryCatheterHistory: '',
+			prostateProblems: ''
 		},
 		hepatic: {
 			liverDisease: '',
@@ -83,7 +98,10 @@ export function createDefaultAssessment(): AssessmentData {
 			anticoagulantType: '',
 			sickleCellDisease: '',
 			sickleCellTrait: '',
-			anaemia: ''
+			anaemia: '',
+			personalVteHistory: '',
+			familyVteHistory: '',
+			bloodTransfusionHistory: ''
 		},
 		musculoskeletalAirway: {
 			rheumatoidArthritis: '',
@@ -93,12 +111,19 @@ export function createDefaultAssessment(): AssessmentData {
 			dentalIssues: '',
 			dentalDetails: '',
 			previousDifficultAirway: '',
-			mallampatiScore: ''
+			mallampatiScore: '',
+			jointOrArthritisProblems: '',
+			backOrNeckProblems: '',
+			skinConditions: '',
+			pressureSoreRisk: ''
 		},
 		gastrointestinal: {
 			gord: '',
 			hiatusHernia: '',
-			nausea: ''
+			nausea: '',
+			bowelProblems: '',
+			foodIntolerances: '',
+			foodIntolerancesDetails: ''
 		},
 		medications: [],
 		allergies: [],
@@ -114,18 +139,34 @@ export function createDefaultAssessment(): AssessmentData {
 			alcohol: '',
 			alcoholUnitsPerWeek: null,
 			recreationalDrugs: '',
-			drugDetails: ''
+			drugDetails: '',
+			bloodDonor: '',
+			bodyPiercings: ''
 		},
 		functionalCapacity: {
 			exerciseTolerance: '',
 			estimatedMETs: null,
 			mobilityAids: '',
-			recentDecline: ''
+			recentDecline: '',
+			hearingProblems: '',
+			visionProblems: '',
+			balanceIssues: ''
 		},
 		pregnancy: {
 			possiblyPregnant: '',
 			pregnancyConfirmed: '',
-			gestationWeeks: null
+			gestationWeeks: null,
+			contraceptiveOrHrtUse: '',
+			lastMenstrualPeriod: ''
+		},
+		cognitiveMentalHealth: {
+			headInjuryRequiringHospitalisation: '',
+			memoryConcerns: '',
+			dementiaDiagnosis: '',
+			depressionOrAnxietyHistory: '',
+			depressionAnxietyImpactsDailyLife: '',
+			depressionAnxietySeenDoctor: '',
+			learningDifficulties: ''
 		}
 	};
 }

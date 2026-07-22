@@ -75,7 +75,7 @@
 		</div>
 	</header>
 
-	<main class="mx-auto max-w-4xl px-4 py-6">
+	<main class="mx-16 px-4 py-6">
 		<!-- Representative-model disclaimer -->
 		<div class="mb-4 rounded-lg border border-warning/40 bg-warning/10 p-3 text-sm text-base-content/80">
 			<strong>Representative model.</strong> This is a documented approximation in the shape of QRISK3,

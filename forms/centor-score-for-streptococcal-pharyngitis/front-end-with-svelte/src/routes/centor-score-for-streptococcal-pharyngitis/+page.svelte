@@ -5,23 +5,7 @@
 	const plural = 'centor-score-for-streptococcal-pharyngitises';
 </script>
 
-<main class="mx-auto max-w-4xl px-4 py-12">
-	<header class="mb-10">
-		<p class="text-sm font-semibold uppercase tracking-wide text-primary">
-			Centor Score for Streptococcal Pharyngitis
-		</p>
-		<h1 class="mt-2 text-3xl font-bold text-base-content">
-			Centor / McIsaac sore-throat decision aid
-		</h1>
-		<p class="mt-4 text-base leading-relaxed text-base-content/70">
-			A clinical prediction tool, completed as a single continuous wizard, that estimates the
-			likelihood an acute sore throat is caused by group A streptococcus from four objective Centor
-			criteria — tonsillar exudate, tender anterior cervical nodes, fever (&gt; 38 °C or history),
-			and absence of cough — each worth 1 point (total 0 to 4), then applies the McIsaac age
-			modifier (+1 for ages 3–14, 0 for 15–44, &minus;1 for &ge; 45) for a modified score of &minus;1
-			to 5 that bands the probability and guides testing and antibiotic decisions.
-		</p>
-	</header>
+<main class="mx-16 px-4 py-12">
 
 	<div class="grid gap-4 sm:grid-cols-2">
 		<a

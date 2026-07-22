@@ -8,8 +8,39 @@
 </head>
 <body>
   <header>
-    <h1>ICVP review dashboard</h1>
-    <p>Issued International Certificates of Vaccination or Prophylaxis</p>
+    <div class="page-header-bar">
+      <div class="page-header-title">
+        <h1>ICVP review dashboard</h1>
+        <p>Issued International Certificates of Vaccination or Prophylaxis</p>
+      </div>
+      <div class="page-header-controls no-print">
+      <label class="visually-hidden" for="locale-select">Language</label>
+      <select class="theme-select" id="locale-select" aria-label="Language">
+      <option class="theme-select-option" value="en-GB" selected lang="en-GB">English (UK)</option>
+      <option class="theme-select-option" value="en-US" lang="en-US">English (US)</option>
+      <option class="theme-select-option" value="cy-GB" lang="cy-GB">Cymraeg</option>
+      <option class="theme-select-option" value="de-DE" lang="de-DE">Deutsch</option>
+      </select>
+      <label class="visually-hidden" for="text-size-chooser">Text size</label>
+      <select class="theme-select" id="text-size-chooser" aria-label="Text size">
+      <option class="theme-select-option" value="small">Small</option>
+      <option class="theme-select-option" value="medium" selected>Medium</option>
+      <option class="theme-select-option" value="large">Large</option>
+      <option class="theme-select-option" value="x-large">X Large</option>
+      </select>
+      <div class="share-chooser">
+      <button type="button" class="share-chooser-button" id="share-chooser" aria-label="Share this page" aria-expanded="false" aria-controls="share-chooser-list">
+      <span class="share-chooser-icon" aria-hidden="true">↪</span>
+      </button>
+      <ul class="share-chooser-list" id="share-chooser-list" hidden>
+      <li class="share-chooser-list-item">
+      <button type="button" class="share-chooser-copy" id="share-chooser-copy">Copy link</button>
+      </li>
+      </ul>
+      <p class="share-chooser-status" id="share-chooser-status" aria-live="polite"></p>
+      </div>
+      </div>
+    </div>
   </header>
 
   <section class="filters">
@@ -62,6 +93,9 @@
   </main>
 
   <script type="module" src="js/dashboard-app.js"></script>
+  <script type="module" src="js/locale-select.js"></script>
+  <script type="module" src="js/text-size-chooser.js"></script>
+  <script type="module" src="js/share-chooser.js"></script>
   <script type="module" src="js/table-export.js"></script>
 </body>
 </html>

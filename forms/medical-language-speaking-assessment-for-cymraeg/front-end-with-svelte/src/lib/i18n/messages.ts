@@ -28,6 +28,16 @@ export interface Messages {
 	themeLabel: string;
 	/** Accessible label for the locale switcher. */
 	localeLabel: string;
+	/** Accessible label for the text-size switcher. */
+	textSizeLabel: string;
+	/** Accessible label for the share button. */
+	shareLabel: string;
+	/** Label for the copy-link item in the share list. */
+	copyLinkLabel: string;
+	/** Announced after a successful copy. */
+	linkCopiedLabel: string;
+	/** Announced when the clipboard write fails. */
+	copyFailedLabel: string;
 	/** Small kicker above the page heading (the title in the *other* language). */
 	eyebrow: string;
 	/** Welcome-page main heading. */
@@ -75,6 +85,11 @@ export const messages: Record<Locale, Messages> = {
 		navDashboard: 'Dashboard',
 		themeLabel: 'Theme',
 		localeLabel: 'Language',
+		textSizeLabel: 'Text size',
+		shareLabel: 'Share this page',
+		copyLinkLabel: 'Copy link',
+		linkCopiedLabel: 'Link copied',
+		copyFailedLabel: 'Could not copy — copy it from the address bar',
 		eyebrow: 'Asesiad Siarad Iaith Feddygol — Cymraeg',
 		pageTitle: 'Medical Language Speaking Assessment for Cymraeg',
 		intro:
@@ -117,6 +132,11 @@ export const messages: Record<Locale, Messages> = {
 		navDashboard: 'Dangosfwrdd',
 		themeLabel: 'Thema',
 		localeLabel: 'Iaith',
+		textSizeLabel: 'Maint y Testun',
+		shareLabel: 'Rhannu\'r dudalen hon',
+		copyLinkLabel: 'Copïo\'r ddolen',
+		linkCopiedLabel: 'Dolen wedi\'i chopïo',
+		copyFailedLabel: 'Methwyd copïo — copïwch o far y cyfeiriad',
 		eyebrow: 'Medical Language Speaking Assessment — Cymraeg',
 		pageTitle: 'Asesiad Siarad Iaith Feddygol ar gyfer Cymraeg',
 		intro:

@@ -6,16 +6,7 @@
 	const plural = 'pediatric-assessments';
 </script>
 
-<main class="mx-auto max-w-4xl px-4 py-12">
-	<header class="mb-10">
-		<p class="text-sm font-semibold uppercase tracking-wide text-primary">Pediatric Assessment</p>
-		<h1 class="mt-2 text-3xl font-bold text-base-content">Child development screening</h1>
-		<p class="mt-4 text-base leading-relaxed text-base-content/70">
-			A comprehensive paediatric evaluation, completed as a single continuous wizard, that grades
-			the child with a developmental screen &mdash; Normal, Concern, or Delay across five core
-			domains &mdash; and flags safety-critical issues for the paediatrician.
-		</p>
-	</header>
+<main class="mx-16 px-4 py-12">
 
 	<div class="grid gap-4 sm:grid-cols-2">
 		<a

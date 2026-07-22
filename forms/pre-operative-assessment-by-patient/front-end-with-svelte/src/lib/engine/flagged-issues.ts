@@ -175,6 +175,43 @@ export function detectAdditionalFlags(data: AssessmentData): AdditionalFlag[] {
 		});
 	}
 
+	// ─── VTE history ─────────────────────────────────────────
+	if (data.haematological.personalVteHistory === 'yes') {
+		flags.push({
+			id: 'FLAG-VTE-001',
+			category: 'Haematological',
+			message: 'Personal history of DVT/PE - review VTE prophylaxis plan',
+			priority: 'high'
+		});
+	} else if (data.haematological.familyVteHistory === 'yes') {
+		flags.push({
+			id: 'FLAG-VTE-002',
+			category: 'Haematological',
+			message: 'Family history of DVT/PE - consider thrombophilia screening',
+			priority: 'medium'
+		});
+	}
+
+	// ─── Cognitive / mental health ───────────────────────────
+	if (data.cognitiveMentalHealth.dementiaDiagnosis === 'yes') {
+		flags.push({
+			id: 'FLAG-COGNITIVE-001',
+			category: 'Cognitive',
+			message: 'Dementia diagnosis - assess capacity to consent; involve family/advocate',
+			priority: 'high'
+		});
+	}
+
+	// ─── Infection control ───────────────────────────────────
+	if (data.demographics.mrsaHistory === 'yes') {
+		flags.push({
+			id: 'FLAG-INFECTION-001',
+			category: 'Infection Control',
+			message: 'History of MRSA/MSSA - screen and isolate per local policy',
+			priority: 'medium'
+		});
+	}
+
 	// ─── Sickle cell ─────────────────────────────────────────
 	if (data.haematological.sickleCellDisease === 'yes') {
 		flags.push({

@@ -6,19 +6,7 @@
 	const plural = 'otolaryngology-assessments';
 </script>
 
-<main class="mx-auto max-w-4xl px-4 py-12">
-	<header class="mb-10">
-		<p class="text-sm font-semibold uppercase tracking-wide text-primary">Otolaryngology Assessment</p>
-		<h1 class="mt-2 text-3xl font-bold text-base-content">Ear, nose & throat consultation</h1>
-		<p class="mt-4 text-base leading-relaxed text-base-content/70">
-			A general ear-nose-throat (ENT) consultation — covering demographics, presenting complaint,
-			history of present illness, past ENT history, the SNOT-22 sino-nasal symptom questionnaire,
-			and structured examination of the external head and neck, otoscopy, anterior rhinoscopy,
-			and the oropharynx and neck, ending with a clinical impression and management plan — whose
-			shared engine sums the SNOT-22 score, classifies sinonasal quality-of-life impact, and
-			flags red-flag presentations for the ENT clinician.
-		</p>
-	</header>
+<main class="mx-16 px-4 py-12">
 
 	<div class="grid gap-4 sm:grid-cols-2">
 		<a

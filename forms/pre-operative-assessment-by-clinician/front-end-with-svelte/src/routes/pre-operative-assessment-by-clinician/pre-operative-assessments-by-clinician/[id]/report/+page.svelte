@@ -74,7 +74,7 @@
     </div>
   </header>
 
-  <main>
+  <main class="mx-16">
     <Panel label="Pre-operative assessment report" class="report-panel">
       <h2>Pre-operative Assessment Report</h2>
 
