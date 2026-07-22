@@ -1,0 +1,220 @@
+# Generated from sql/. Do not edit by hand.
+# SOURCE: patient_reported_outcome_measures_score
+openapi: 3.1.0
+info:
+  title: Patient Reported Outcome Measures — PatientReportedOutcomeMeasuresScore
+  version: 1.0.0
+  description: Computed scores (1:1) for a patient_reported_outcome_measures row; always re-derivable from raw responses via the exact algorithms in spec/index.md.
+paths:
+  /patient-reported-outcome-measures-scores:
+    get:
+      summary: List PatientReportedOutcomeMeasuresScore records
+      operationId: listPatientReportedOutcomeMeasuresScore
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of PatientReportedOutcomeMeasuresScore records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/PatientReportedOutcomeMeasuresScore"
+    post:
+      summary: Create a new PatientReportedOutcomeMeasuresScore
+      operationId: createPatientReportedOutcomeMeasuresScore
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/PatientReportedOutcomeMeasuresScore"
+      responses:
+        "201":
+          description: The newly created PatientReportedOutcomeMeasuresScore
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PatientReportedOutcomeMeasuresScore"
+        "400":
+          description: Validation error
+  /patient-reported-outcome-measures-scores/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one PatientReportedOutcomeMeasuresScore by id
+      operationId: getPatientReportedOutcomeMeasuresScore
+      responses:
+        "200":
+          description: The requested PatientReportedOutcomeMeasuresScore
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PatientReportedOutcomeMeasuresScore"
+        "404":
+          description: PatientReportedOutcomeMeasuresScore not found
+    patch:
+      summary: Update an existing PatientReportedOutcomeMeasuresScore
+      operationId: updatePatientReportedOutcomeMeasuresScore
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/PatientReportedOutcomeMeasuresScore"
+      responses:
+        "200":
+          description: The updated PatientReportedOutcomeMeasuresScore
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PatientReportedOutcomeMeasuresScore"
+        "404":
+          description: PatientReportedOutcomeMeasuresScore not found
+    delete:
+      summary: Soft-delete a PatientReportedOutcomeMeasuresScore
+      operationId: deletePatientReportedOutcomeMeasuresScore
+      responses:
+        "204":
+          description: PatientReportedOutcomeMeasuresScore deleted
+        "404":
+          description: PatientReportedOutcomeMeasuresScore not found
+components:
+  schemas:
+    PatientReportedOutcomeMeasuresScore:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was most recently updated.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was soft-deleted.
+        patient_reported_outcome_measures_id:
+          type: string
+          format: uuid
+          description: Foreign key to the parent raw-response row (1:1).
+        sf36_pf:
+          type: number
+          format: double
+          description: SF-36 Physical Functioning domain score, 0-100 (RAND-36 method), higher = better.
+        sf36_rp:
+          type: number
+          format: double
+          description: SF-36 Role-Physical domain score, 0-100, higher = better.
+        sf36_bp:
+          type: number
+          format: double
+          description: SF-36 Bodily Pain domain score, 0-100, higher = better (less pain).
+        sf36_gh:
+          type: number
+          format: double
+          description: SF-36 General Health domain score, 0-100, higher = better.
+        sf36_vt:
+          type: number
+          format: double
+          description: SF-36 Vitality domain score, 0-100, higher = better.
+        sf36_sf:
+          type: number
+          format: double
+          description: SF-36 Social Functioning domain score, 0-100, higher = better.
+        sf36_re:
+          type: number
+          format: double
+          description: SF-36 Role-Emotional domain score, 0-100, higher = better.
+        sf36_mh:
+          type: number
+          format: double
+          description: SF-36 Mental Health domain score, 0-100, higher = better.
+        sf36_pcs_approx:
+          type: number
+          format: double
+          description: "Simplified (non-licensed) physical-component summary approximation: unweighted mean of PF/RP/BP/GH. NOT the trademarked QualityMetric SF-36v2 PCS."
+        sf36_mcs_approx:
+          type: number
+          format: double
+          description: "Simplified (non-licensed) mental-component summary approximation: unweighted mean of VT/SF/RE/MH. NOT the trademarked QualityMetric SF-36v2 MCS."
+        ndi_raw_score:
+          type: integer
+          format: int32
+          description: "NDI raw score: sum of answered sections, 0-50 max."
+        ndi_answered_sections:
+          type: integer
+          format: int32
+          description: Count of NDI sections answered (out of 10); used to adjust the percentage for missing sections.
+        ndi_percentage_score:
+          type: number
+          format: double
+          description: "NDI percentage score: rawScore / (5 x answeredSections) x 100. Lower = better (less disability)."
+        ndi_band:
+          type: string
+          enum:
+            - no-disability
+            - mild
+            - moderate
+            - severe
+            - complete
+            - ""
+          description: "NDI interpretation band: no-disability (0-4%), mild (5-14%), moderate (15-24%), severe (25-34%), complete (>=35%)."
+        mjoa_total_score:
+          type: integer
+          format: int32
+          description: mJOA total score, 0-17. Higher = less dysfunction from myelopathy.
+        mjoa_band:
+          type: string
+          enum:
+            - mild
+            - moderate
+            - severe
+            - ""
+          description: "mJOA severity band: mild (15-17), moderate (12-14), severe (0-11)."
+        eq5d_health_state_descriptor:
+          type: string
+          maxLength: 5
+          description: "EQ-5D-3L 5-digit health-state descriptor (mobility, self-care, usual activities, pain/discomfort, anxiety/depression), e.g. \"11123\"."
+        eq5d_uk_index_value:
+          type: number
+          format: double
+          description: EQ-5D-3L index value via the Dolan (1997) UK time-trade-off tariff. Approx -0.594 (worst) to 1.0 (full health), higher = better.
+        eq5d_vas_score:
+          type: number
+          format: double
+          description: EQ VAS score mirrored from the raw response, 0-100, higher = better.
+      required:
+        - created_at
+        - updated_at
+        - patient_reported_outcome_measures_id
+        - ndi_band
+        - mjoa_band
+        - eq5d_health_state_descriptor
+      description: Computed scores (1:1) for a patient_reported_outcome_measures row; always re-derivable from raw responses via the exact algorithms in spec/index.md.

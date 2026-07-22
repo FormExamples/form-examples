@@ -1,0 +1,159 @@
+# Generated from sql/. Do not edit by hand.
+# SOURCE: hospital_performance_indicators
+openapi: 3.1.0
+info:
+  title: Hospital Performance Indicators — HospitalPerformanceIndicators
+  version: 1.0.0
+  description: "One hospital Balanced Scorecard reporting period: hospital/site, period month/year, prepared-by, and sign-off notes."
+paths:
+  /hospital-performance-indicatorses:
+    get:
+      summary: List HospitalPerformanceIndicators records
+      operationId: listHospitalPerformanceIndicators
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of HospitalPerformanceIndicators records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/HospitalPerformanceIndicators"
+    post:
+      summary: Create a new HospitalPerformanceIndicators
+      operationId: createHospitalPerformanceIndicators
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/HospitalPerformanceIndicators"
+      responses:
+        "201":
+          description: The newly created HospitalPerformanceIndicators
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/HospitalPerformanceIndicators"
+        "400":
+          description: Validation error
+  /hospital-performance-indicatorses/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one HospitalPerformanceIndicators by id
+      operationId: getHospitalPerformanceIndicators
+      responses:
+        "200":
+          description: The requested HospitalPerformanceIndicators
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/HospitalPerformanceIndicators"
+        "404":
+          description: HospitalPerformanceIndicators not found
+    patch:
+      summary: Update an existing HospitalPerformanceIndicators
+      operationId: updateHospitalPerformanceIndicators
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/HospitalPerformanceIndicators"
+      responses:
+        "200":
+          description: The updated HospitalPerformanceIndicators
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/HospitalPerformanceIndicators"
+        "404":
+          description: HospitalPerformanceIndicators not found
+    delete:
+      summary: Soft-delete a HospitalPerformanceIndicators
+      operationId: deleteHospitalPerformanceIndicators
+      responses:
+        "204":
+          description: HospitalPerformanceIndicators deleted
+        "404":
+          description: HospitalPerformanceIndicators not found
+components:
+  schemas:
+    HospitalPerformanceIndicators:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was most recently updated.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was soft-deleted.
+        hospital_name:
+          type: string
+          maxLength: 255
+          description: Name of the hospital or facility being reported on.
+        period_month:
+          type: integer
+          format: int32
+          description: Reporting period month, 1-12.
+        period_year:
+          type: integer
+          format: int32
+          description: Reporting period year.
+        prepared_by_name:
+          type: string
+          maxLength: 255
+          description: Name of the person who compiled this scorecard.
+        overall_notes:
+          type: string
+          description: Free-text overall notes recorded at sign-off.
+        status:
+          type: string
+          enum:
+            - draft
+            - submitted
+          description: "Submission status: draft or submitted."
+        signed_at:
+          type: string
+          format: date-time
+          description: Timestamp the preparer signed off this scorecard.
+      required:
+        - created_at
+        - updated_at
+        - hospital_name
+        - prepared_by_name
+        - overall_notes
+        - status
+      description: "One hospital Balanced Scorecard reporting period: hospital/site, period month/year, prepared-by, and sign-off notes."

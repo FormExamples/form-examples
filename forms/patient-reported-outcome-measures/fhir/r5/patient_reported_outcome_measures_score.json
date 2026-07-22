@@ -1,0 +1,319 @@
+{
+  "resourceType": "Observation",
+  "id": "660e8400-e29b-41d4-a716-446655440001",
+  "meta": {
+    "profile": [
+      "http://hl7.org/fhir/StructureDefinition/Observation"
+    ],
+    "lastUpdated": "2026-04-09T10:00:00+00:00"
+  },
+  "status": "final",
+  "category": [
+    {
+      "coding": [
+        {
+          "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+          "code": "survey",
+          "display": "Survey"
+        }
+      ]
+    }
+  ],
+  "code": {
+    "coding": [
+      {
+        "system": "urn:form-examples:patient-reported-outcome-measures",
+        "code": "patient_reported_outcome_measures_score",
+        "display": "Patient Reported Outcome Measures Score"
+      }
+    ]
+  },
+  "encounter": {
+    "reference": "Encounter/550e8400-e29b-41d4-a716-446655440000"
+  },
+  "effectiveDateTime": "2026-04-09T10:00:00+00:00",
+  "component": [
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:patient-reported-outcome-measures",
+            "code": "deleted_at",
+            "display": "Deleted At"
+          }
+        ]
+      },
+      "valueDateTime": "2026-04-09T10:00:00+00:00"
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:patient-reported-outcome-measures",
+            "code": "sf36_pf",
+            "display": "Sf36 Pf"
+          }
+        ]
+      },
+      "valueQuantity": {
+        "value": 0.0
+      }
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:patient-reported-outcome-measures",
+            "code": "sf36_rp",
+            "display": "Sf36 Rp"
+          }
+        ]
+      },
+      "valueQuantity": {
+        "value": 0.0
+      }
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:patient-reported-outcome-measures",
+            "code": "sf36_bp",
+            "display": "Sf36 Bp"
+          }
+        ]
+      },
+      "valueQuantity": {
+        "value": 0.0
+      }
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:patient-reported-outcome-measures",
+            "code": "sf36_gh",
+            "display": "Sf36 Gh"
+          }
+        ]
+      },
+      "valueQuantity": {
+        "value": 0.0
+      }
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:patient-reported-outcome-measures",
+            "code": "sf36_vt",
+            "display": "Sf36 Vt"
+          }
+        ]
+      },
+      "valueQuantity": {
+        "value": 0.0
+      }
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:patient-reported-outcome-measures",
+            "code": "sf36_sf",
+            "display": "Sf36 Sf"
+          }
+        ]
+      },
+      "valueQuantity": {
+        "value": 0.0
+      }
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:patient-reported-outcome-measures",
+            "code": "sf36_re",
+            "display": "Sf36 Re"
+          }
+        ]
+      },
+      "valueQuantity": {
+        "value": 0.0
+      }
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:patient-reported-outcome-measures",
+            "code": "sf36_mh",
+            "display": "Sf36 Mh"
+          }
+        ]
+      },
+      "valueQuantity": {
+        "value": 0.0
+      }
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:patient-reported-outcome-measures",
+            "code": "sf36_pcs_approx",
+            "display": "Sf36 Pcs Approx"
+          }
+        ]
+      },
+      "valueQuantity": {
+        "value": 0.0
+      }
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:patient-reported-outcome-measures",
+            "code": "sf36_mcs_approx",
+            "display": "Sf36 Mcs Approx"
+          }
+        ]
+      },
+      "valueQuantity": {
+        "value": 0.0
+      }
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:patient-reported-outcome-measures",
+            "code": "ndi_raw_score",
+            "display": "Ndi Raw Score"
+          }
+        ]
+      },
+      "valueInteger": 5
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:patient-reported-outcome-measures",
+            "code": "ndi_answered_sections",
+            "display": "Ndi Answered Sections"
+          }
+        ]
+      },
+      "valueInteger": 1
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:patient-reported-outcome-measures",
+            "code": "ndi_percentage_score",
+            "display": "Ndi Percentage Score"
+          }
+        ]
+      },
+      "valueQuantity": {
+        "value": 5.0
+      }
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:patient-reported-outcome-measures",
+            "code": "ndi_band",
+            "display": "Ndi Band"
+          }
+        ]
+      },
+      "valueCodeableConcept": {
+        "coding": [
+          {
+            "system": "urn:form-examples:patient-reported-outcome-measures:ndi_band",
+            "code": "no-disability",
+            "display": "No-Disability"
+          }
+        ]
+      }
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:patient-reported-outcome-measures",
+            "code": "mjoa_total_score",
+            "display": "Mjoa Total Score"
+          }
+        ]
+      },
+      "valueInteger": 5
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:patient-reported-outcome-measures",
+            "code": "mjoa_band",
+            "display": "Mjoa Band"
+          }
+        ]
+      },
+      "valueCodeableConcept": {
+        "coding": [
+          {
+            "system": "urn:form-examples:patient-reported-outcome-measures:mjoa_band",
+            "code": "mild",
+            "display": "Mild"
+          }
+        ]
+      }
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:patient-reported-outcome-measures",
+            "code": "eq5d_health_state_descriptor",
+            "display": "Eq5D Health State Descriptor"
+          }
+        ]
+      },
+      "valueString": ""
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:patient-reported-outcome-measures",
+            "code": "eq5d_uk_index_value",
+            "display": "Eq5D Uk Index Value"
+          }
+        ]
+      },
+      "valueQuantity": {
+        "value": 0.0
+      }
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:patient-reported-outcome-measures",
+            "code": "eq5d_vas_score",
+            "display": "Eq5D Vas Score"
+          }
+        ]
+      },
+      "valueQuantity": {
+        "value": 5.0
+      }
+    }
+  ]
+}

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hospital_performance_indicators SYSTEM "hospital_performance_indicators.dtd">
+<hospital_performance_indicators>
+<id>550e8400-e29b-41d4-a716-446655440000</id>
+<created_at>2026-04-09T10:00:00Z</created_at>
+<updated_at>2026-04-09T10:00:00Z</updated_at>
+<deleted_at>2026-04-09T10:00:00Z</deleted_at>
+<hospital_name>Example</hospital_name>
+<period_month>1</period_month>
+<period_year>2026</period_year>
+<prepared_by_name>Example</prepared_by_name>
+<overall_notes>Example text.</overall_notes>
+<status>draft</status>
+<signed_at>2026-04-09T10:00:00Z</signed_at>
+</hospital_performance_indicators>

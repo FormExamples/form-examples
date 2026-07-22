@@ -1,0 +1,184 @@
+# Generated from sql/. Do not edit by hand.
+# SOURCE: pre_anaesthesia_assessment_grade_flag
+openapi: 3.1.0
+info:
+  title: Pre Anaesthesia Assessment — PreAnaesthesiaAssessmentGradeFlag
+  version: 1.0.0
+  description: Safety-critical flags that fire independently of the ASA grade, with priority and a suggested action for the perioperative team.
+paths:
+  /pre-anaesthesia-assessment-grade-flags:
+    get:
+      summary: List PreAnaesthesiaAssessmentGradeFlag records
+      operationId: listPreAnaesthesiaAssessmentGradeFlag
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of PreAnaesthesiaAssessmentGradeFlag records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/PreAnaesthesiaAssessmentGradeFlag"
+    post:
+      summary: Create a new PreAnaesthesiaAssessmentGradeFlag
+      operationId: createPreAnaesthesiaAssessmentGradeFlag
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/PreAnaesthesiaAssessmentGradeFlag"
+      responses:
+        "201":
+          description: The newly created PreAnaesthesiaAssessmentGradeFlag
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PreAnaesthesiaAssessmentGradeFlag"
+        "400":
+          description: Validation error
+  /pre-anaesthesia-assessment-grade-flags/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one PreAnaesthesiaAssessmentGradeFlag by id
+      operationId: getPreAnaesthesiaAssessmentGradeFlag
+      responses:
+        "200":
+          description: The requested PreAnaesthesiaAssessmentGradeFlag
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PreAnaesthesiaAssessmentGradeFlag"
+        "404":
+          description: PreAnaesthesiaAssessmentGradeFlag not found
+    patch:
+      summary: Update an existing PreAnaesthesiaAssessmentGradeFlag
+      operationId: updatePreAnaesthesiaAssessmentGradeFlag
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/PreAnaesthesiaAssessmentGradeFlag"
+      responses:
+        "200":
+          description: The updated PreAnaesthesiaAssessmentGradeFlag
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PreAnaesthesiaAssessmentGradeFlag"
+        "404":
+          description: PreAnaesthesiaAssessmentGradeFlag not found
+    delete:
+      summary: Soft-delete a PreAnaesthesiaAssessmentGradeFlag
+      operationId: deletePreAnaesthesiaAssessmentGradeFlag
+      responses:
+        "204":
+          description: PreAnaesthesiaAssessmentGradeFlag deleted
+        "404":
+          description: PreAnaesthesiaAssessmentGradeFlag not found
+components:
+  schemas:
+    PreAnaesthesiaAssessmentGradeFlag:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was updated most-recently.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was deleted a.k.a. soft-removed.
+        pre_anaesthesia_assessment_grade_id:
+          type: string
+          format: uuid
+          description: Foreign key to the pre_anaesthesia_assessment_grade table.
+        flag_id:
+          type: string
+          maxLength: 50
+          description: Stable flag identifier (e.g. F-DIFFICULT-AIRWAY-001).
+        category:
+          type: string
+          enum:
+            - difficult-airway
+            - severe-cardiac
+            - severe-respiratory
+            - severe-renal
+            - severe-hepatic
+            - severe-anaemia
+            - coagulopathy
+            - uncontrolled-diabetes
+            - severe-frailty
+            - recent-covid-19
+            - fasting-violation
+            - missing-crossmatch
+            - high-risk-medication
+            - capacity-concern
+            - paediatric
+            - pregnancy
+            - safeguarding
+            - malignant-hyperthermia
+            - latex-allergy
+            - sux-apnoea
+            - pseudocholinesterase-deficiency
+            - malnutrition-risk
+            - other
+            - ""
+          description: Flag category.
+        priority:
+          type: string
+          enum:
+            - low
+            - medium
+            - high
+            - ""
+          description: "Priority: low, medium, high."
+        description:
+          type: string
+          maxLength: 500
+          description: Human-readable description of what fired the flag.
+        suggested_action:
+          type: string
+          maxLength: 500
+          description: "Suggested clinical action (e.g. \"prepare difficult-airway trolley\")."
+      required:
+        - created_at
+        - updated_at
+        - pre_anaesthesia_assessment_grade_id
+        - flag_id
+        - category
+        - priority
+        - description
+        - suggested_action
+      description: Safety-critical flags that fire independently of the ASA grade, with priority and a suggested action for the perioperative team.

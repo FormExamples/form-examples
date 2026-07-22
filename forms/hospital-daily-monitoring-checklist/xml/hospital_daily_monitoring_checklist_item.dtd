@@ -1,0 +1,12 @@
+<!ELEMENT hospital_daily_monitoring_checklist_item (id,created_at,updated_at,deleted_at,hospital_daily_monitoring_checklist_id,item_code,section_number,section_title,item_text,status,remarks)>
+<!ELEMENT id (#PCDATA)>
+<!ELEMENT created_at (#PCDATA)>
+<!ELEMENT updated_at (#PCDATA)>
+<!ELEMENT deleted_at (#PCDATA)>
+<!ELEMENT hospital_daily_monitoring_checklist_id (#PCDATA)>
+<!ELEMENT item_code (#PCDATA)>
+<!ELEMENT section_number (#PCDATA)>
+<!ELEMENT section_title (#PCDATA)>
+<!ELEMENT item_text (#PCDATA)>
+<!ELEMENT status (#PCDATA)>
+<!ELEMENT remarks (#PCDATA)>

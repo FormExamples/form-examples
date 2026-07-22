@@ -1,0 +1,26 @@
+// Generated from sql/. Do not edit by hand.
+// SOURCE: hospital_dashboard_metrics
+
+syntax = "proto3";
+
+package form_examples.hospital_dashboard_metrics;
+
+enum HospitalDashboardMetricsStatusEnum {
+  STATUS_UNSPECIFIED = 0;
+  STATUS_DRAFT = 1;  // draft
+  STATUS_SUBMITTED = 2;  // submitted
+}
+
+message HospitalDashboardMetrics {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string hospital_name = 5;  // VARCHAR(255) — max 255 chars
+  int32 period_month = 6;  // INTEGER
+  int32 period_year = 7;  // INTEGER
+  string prepared_by_name = 8;  // VARCHAR(255) — max 255 chars
+  string overall_notes = 9;  // TEXT
+  HospitalDashboardMetricsStatusEnum status = 10;  // VARCHAR(20)
+  string signed_at = 11;  // TIMESTAMPTZ — iso 8601
+}

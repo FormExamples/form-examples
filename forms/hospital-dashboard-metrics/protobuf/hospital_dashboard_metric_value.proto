@@ -1,0 +1,20 @@
+// Generated from sql/. Do not edit by hand.
+// SOURCE: hospital_dashboard_metric_value
+
+syntax = "proto3";
+
+package form_examples.hospital_dashboard_metrics;
+
+message HospitalDashboardMetricValue {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string hospital_dashboard_metrics_id = 5;  // UUID — uuid
+  string metric_code = 6;  // VARCHAR(10) — max 10 chars
+  int32 category_number = 7;  // INTEGER
+  string category_title = 8;  // VARCHAR(255) — max 255 chars
+  string metric_text = 9;  // TEXT
+  double metric_value = 10;  // NUMERIC — numeric
+  string notes = 11;  // TEXT
+}

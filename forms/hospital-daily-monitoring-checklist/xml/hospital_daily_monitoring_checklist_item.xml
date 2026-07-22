@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hospital_daily_monitoring_checklist_item SYSTEM "hospital_daily_monitoring_checklist_item.dtd">
+<hospital_daily_monitoring_checklist_item>
+<id>660e8400-e29b-41d4-a716-446655440001</id>
+<created_at>2026-04-09T10:00:00Z</created_at>
+<updated_at>2026-04-09T10:00:00Z</updated_at>
+<deleted_at>2026-04-09T10:00:00Z</deleted_at>
+<hospital_daily_monitoring_checklist_id>550e8400-e29b-41d4-a716-446655440000</hospital_daily_monitoring_checklist_id>
+<item_code>ABC123</item_code>
+<section_number>2</section_number>
+<section_title>Example Title</section_title>
+<item_text>Example text.</item_text>
+<status>satisfactory</status>
+<remarks>Example text.</remarks>
+</hospital_daily_monitoring_checklist_item>

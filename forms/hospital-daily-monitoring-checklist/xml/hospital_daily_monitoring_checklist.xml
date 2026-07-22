@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hospital_daily_monitoring_checklist SYSTEM "hospital_daily_monitoring_checklist.dtd">
+<hospital_daily_monitoring_checklist>
+<id>550e8400-e29b-41d4-a716-446655440000</id>
+<created_at>2026-04-09T10:00:00Z</created_at>
+<updated_at>2026-04-09T10:00:00Z</updated_at>
+<deleted_at>2026-04-09T10:00:00Z</deleted_at>
+<hospital_name>Example</hospital_name>
+<department_or_site>Example location</department_or_site>
+<inspection_date>2026-01-15</inspection_date>
+<inspecting_officer_name>Example</inspecting_officer_name>
+<inspecting_officer_designation></inspecting_officer_designation>
+<overall_notes>Example text.</overall_notes>
+<action_plan>Example text.</action_plan>
+<status>draft</status>
+<signed_at>2026-04-09T10:00:00Z</signed_at>
+</hospital_daily_monitoring_checklist>

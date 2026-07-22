@@ -8,7 +8,7 @@ Cross-cutting docs:
 - [`AGENTS-front-end-svelte.md`](AGENTS-front-end-svelte.md) — Lily Design
   System Svelte headless conventions for every form's consolidated
   `front-end-with-svelte/` (RESTful routes: `/<plural>/` list + `/<plural>/[id]` form).
-- [`lily-version.md`](lily-version.md) / [`lily-svelte-version.md`](lily-svelte-version.md) — pinned upstream Lily commit hashes.
+- [`lily-version.md`](lily-version.md) / [`lily-svelte-version.md`](lily-svelte-version.md) / [`lily-svelte-helpers-version.md`](lily-svelte-helpers-version.md) — pinned upstream Lily commit hashes.
 - [`lily-spec/`](lily-spec) / [`lily-svelte-spec/`](lily-svelte-spec) — snapshot directories.
 - [`plan.md`](plan.md) / [`tasks.md`](tasks.md) — Lily refactor plan and tasks.
 
@@ -170,7 +170,10 @@ Subprojects:
 - [Holter monitor test request](holter-monitor-test-request)
 - [Holter Monitor Test Result](holter-monitor-test-result)
 - [hormone replacement therapy (HRT) assessment](hormone-replacement-therapy-assessment)
+- [Hospital Daily Monitoring Checklist](hospital-daily-monitoring-checklist)
+- [Hospital Dashboard Metrics](hospital-dashboard-metrics)
 - [hospital discharge](hospital-discharge)
+- [Hospital Performance Indicators](hospital-performance-indicators)
 - [Hypertension Annual Review](hypertension-review)
 - [Immunology waiting list card](immunology-waiting-list-card)
 - [Infectious diseases waiting list card](infectious-diseases-waiting-list-card)
@@ -255,6 +258,8 @@ Subprojects:
 - [Partogram (Partograph)](partogram)
 - [Pathology waiting list card](pathology-waiting-list-card)
 - [patient intake](patient-intake)
+- [Patient-Reported Outcome Measures](patient-reported-outcome-measures)
+- [Patient Room Readiness](patient-room-readiness)
 - [patient satisfaction survey](patient-satisfaction-survey)
 - [pediatric assessment](pediatric-assessment)
 - [PET scan test request](pet-scan-test-request)
@@ -267,6 +272,7 @@ Subprojects:
 - [Post-Anaesthesia Care Unit (PACU) Record](post-anaesthesia-care-unit-record)
 - [post-operative report](post-operative-report)
 - [post-traumatic stress assessment](post-traumatic-stress-assessment)
+- [Pre-Anaesthesia Assessment](pre-anaesthesia-assessment)
 - [pre-operative assessment by clinician](pre-operative-assessment-by-clinician)
 - [pre-operative assessment by patient](pre-operative-assessment-by-patient)
 - [predicting risk of cardiovascular disease events](predicting-risk-of-cardiovascular-disease-events)

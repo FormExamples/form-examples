@@ -1,0 +1,14 @@
+<!ELEMENT hospital_daily_monitoring_checklist (id,created_at,updated_at,deleted_at,hospital_name,department_or_site,inspection_date,inspecting_officer_name,inspecting_officer_designation,overall_notes,action_plan,status,signed_at)>
+<!ELEMENT id (#PCDATA)>
+<!ELEMENT created_at (#PCDATA)>
+<!ELEMENT updated_at (#PCDATA)>
+<!ELEMENT deleted_at (#PCDATA)>
+<!ELEMENT hospital_name (#PCDATA)>
+<!ELEMENT department_or_site (#PCDATA)>
+<!ELEMENT inspection_date (#PCDATA)>
+<!ELEMENT inspecting_officer_name (#PCDATA)>
+<!ELEMENT inspecting_officer_designation (#PCDATA)>
+<!ELEMENT overall_notes (#PCDATA)>
+<!ELEMENT action_plan (#PCDATA)>
+<!ELEMENT status (#PCDATA)>
+<!ELEMENT signed_at (#PCDATA)>

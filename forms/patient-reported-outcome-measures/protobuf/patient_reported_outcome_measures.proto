@@ -1,0 +1,74 @@
+// Generated from sql/. Do not edit by hand.
+// SOURCE: patient_reported_outcome_measures
+
+syntax = "proto3";
+
+package form_examples.patient_reported_outcome_measures;
+
+message PatientReportedOutcomeMeasures {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string subject_id = 5;  // VARCHAR(100) — max 100 chars
+  string visit = 6;  // VARCHAR(100) — max 100 chars
+  string assessment_date = 7;  // DATE — iso 8601 date
+  int32 general_health = 8;  // SMALLINT
+  int32 health_change_vs_year_ago = 9;  // SMALLINT
+  int32 vigorous_activities = 10;  // SMALLINT
+  int32 moderate_activities = 11;  // SMALLINT
+  int32 lifting_carrying_groceries = 12;  // SMALLINT
+  int32 climbing_several_flights = 13;  // SMALLINT
+  int32 climbing_one_flight = 14;  // SMALLINT
+  int32 bending_kneeling_stooping = 15;  // SMALLINT
+  int32 walking_more_than_mile = 16;  // SMALLINT
+  int32 walking_several_hundred_yards = 17;  // SMALLINT
+  int32 walking_one_hundred_yards = 18;  // SMALLINT
+  int32 bathing_dressing = 19;  // SMALLINT
+  int32 cut_down_time_physical = 20;  // SMALLINT
+  int32 accomplished_less_physical = 21;  // SMALLINT
+  int32 limited_in_kind_physical = 22;  // SMALLINT
+  int32 difficulty_performing_physical = 23;  // SMALLINT
+  int32 cut_down_time_emotional = 24;  // SMALLINT
+  int32 accomplished_less_emotional = 25;  // SMALLINT
+  int32 less_careful_than_usual = 26;  // SMALLINT
+  int32 social_activities_interference = 27;  // SMALLINT
+  int32 bodily_pain = 28;  // SMALLINT
+  int32 pain_interference_with_work = 29;  // SMALLINT
+  int32 felt_full_of_life = 30;  // SMALLINT
+  int32 very_nervous = 31;  // SMALLINT
+  int32 so_down_in_dumps = 32;  // SMALLINT
+  int32 felt_calm_peaceful = 33;  // SMALLINT
+  int32 lot_of_energy = 34;  // SMALLINT
+  int32 downhearted_depressed = 35;  // SMALLINT
+  int32 felt_worn_out = 36;  // SMALLINT
+  int32 been_happy = 37;  // SMALLINT
+  int32 felt_tired = 38;  // SMALLINT
+  int32 social_activities_interference_time = 39;  // SMALLINT
+  int32 get_sick_easier = 40;  // SMALLINT
+  int32 as_healthy_as_anybody = 41;  // SMALLINT
+  int32 expect_health_worse = 42;  // SMALLINT
+  int32 health_excellent = 43;  // SMALLINT
+  int32 ndi_pain_intensity = 44;  // SMALLINT
+  int32 ndi_personal_care = 45;  // SMALLINT
+  int32 ndi_lifting = 46;  // SMALLINT
+  int32 ndi_reading = 47;  // SMALLINT
+  int32 ndi_headache = 48;  // SMALLINT
+  int32 ndi_concentration = 49;  // SMALLINT
+  int32 ndi_work = 50;  // SMALLINT
+  int32 ndi_driving = 51;  // SMALLINT
+  int32 ndi_sleeping = 52;  // SMALLINT
+  int32 ndi_recreation = 53;  // SMALLINT
+  int32 mjoa_motor_arms = 54;  // SMALLINT
+  int32 mjoa_motor_legs = 55;  // SMALLINT
+  int32 mjoa_sensation_arms = 56;  // SMALLINT
+  int32 mjoa_sensation_legs = 57;  // SMALLINT
+  int32 mjoa_sensation_trunk = 58;  // SMALLINT
+  int32 mjoa_bladder_function = 59;  // SMALLINT
+  int32 eq5d_mobility = 60;  // SMALLINT
+  int32 eq5d_self_care = 61;  // SMALLINT
+  int32 eq5d_usual_activities = 62;  // SMALLINT
+  int32 eq5d_pain_discomfort = 63;  // SMALLINT
+  int32 eq5d_anxiety_depression = 64;  // SMALLINT
+  double eq5d_vas_score = 65;  // NUMERIC — numeric
+}

@@ -1,0 +1,12 @@
+<!ELEMENT hospital_dashboard_metric_value (id,created_at,updated_at,deleted_at,hospital_dashboard_metrics_id,metric_code,category_number,category_title,metric_text,metric_value,notes)>
+<!ELEMENT id (#PCDATA)>
+<!ELEMENT created_at (#PCDATA)>
+<!ELEMENT updated_at (#PCDATA)>
+<!ELEMENT deleted_at (#PCDATA)>
+<!ELEMENT hospital_dashboard_metrics_id (#PCDATA)>
+<!ELEMENT metric_code (#PCDATA)>
+<!ELEMENT category_number (#PCDATA)>
+<!ELEMENT category_title (#PCDATA)>
+<!ELEMENT metric_text (#PCDATA)>
+<!ELEMENT metric_value (#PCDATA)>
+<!ELEMENT notes (#PCDATA)>

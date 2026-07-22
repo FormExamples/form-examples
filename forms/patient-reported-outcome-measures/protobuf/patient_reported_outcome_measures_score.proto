@@ -1,0 +1,49 @@
+// Generated from sql/. Do not edit by hand.
+// SOURCE: patient_reported_outcome_measures_score
+
+syntax = "proto3";
+
+package form_examples.patient_reported_outcome_measures;
+
+enum PatientReportedOutcomeMeasuresScoreNdiBandEnum {
+  NDIBAND_UNSPECIFIED = 0;
+  NDIBAND_NO_DISABILITY = 1;  // no-disability
+  NDIBAND_MILD = 2;  // mild
+  NDIBAND_MODERATE = 3;  // moderate
+  NDIBAND_SEVERE = 4;  // severe
+  NDIBAND_COMPLETE = 5;  // complete
+}
+
+enum PatientReportedOutcomeMeasuresScoreMjoaBandEnum {
+  MJOABAND_UNSPECIFIED = 0;
+  MJOABAND_MILD = 1;  // mild
+  MJOABAND_MODERATE = 2;  // moderate
+  MJOABAND_SEVERE = 3;  // severe
+}
+
+message PatientReportedOutcomeMeasuresScore {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string patient_reported_outcome_measures_id = 5;  // UUID — uuid
+  double sf36_pf = 6;  // NUMERIC — numeric
+  double sf36_rp = 7;  // NUMERIC — numeric
+  double sf36_bp = 8;  // NUMERIC — numeric
+  double sf36_gh = 9;  // NUMERIC — numeric
+  double sf36_vt = 10;  // NUMERIC — numeric
+  double sf36_sf = 11;  // NUMERIC — numeric
+  double sf36_re = 12;  // NUMERIC — numeric
+  double sf36_mh = 13;  // NUMERIC — numeric
+  double sf36_pcs_approx = 14;  // NUMERIC — numeric
+  double sf36_mcs_approx = 15;  // NUMERIC — numeric
+  int32 ndi_raw_score = 16;  // SMALLINT
+  int32 ndi_answered_sections = 17;  // SMALLINT
+  double ndi_percentage_score = 18;  // NUMERIC — numeric
+  PatientReportedOutcomeMeasuresScoreNdiBandEnum ndi_band = 19;  // VARCHAR(20)
+  int32 mjoa_total_score = 20;  // SMALLINT
+  PatientReportedOutcomeMeasuresScoreMjoaBandEnum mjoa_band = 21;  // VARCHAR(20)
+  string eq5d_health_state_descriptor = 22;  // VARCHAR(5) — max 5 chars
+  double eq5d_uk_index_value = 23;  // NUMERIC — numeric
+  double eq5d_vas_score = 24;  // NUMERIC — numeric
+}

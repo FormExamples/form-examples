@@ -1,0 +1,947 @@
+// Generated from sql/. Do not edit by hand.
+// SOURCE: pre_anaesthesia_assessment
+
+syntax = "proto3";
+
+package form_examples.pre_anaesthesia_assessment;
+
+enum PreAnaesthesiaAssessmentStatusEnum {
+  STATUS_UNSPECIFIED = 0;
+  STATUS_DRAFT = 1;  // draft
+  STATUS_SUBMITTED = 2;  // submitted
+  STATUS_REVIEWED = 3;  // reviewed
+  STATUS_URGENT = 4;  // urgent
+}
+
+enum PreAnaesthesiaAssessmentUrgencyEnum {
+  URGENCY_UNSPECIFIED = 0;
+  URGENCY_ELECTIVE = 1;  // elective
+  URGENCY_URGENT = 2;  // urgent
+  URGENCY_EMERGENCY = 3;  // emergency
+  URGENCY_IMMEDIATE = 4;  // immediate
+}
+
+enum PreAnaesthesiaAssessmentLateralityEnum {
+  LATERALITY_UNSPECIFIED = 0;
+  LATERALITY_LEFT = 1;  // left
+  LATERALITY_RIGHT = 2;  // right
+  LATERALITY_BILATERAL = 3;  // bilateral
+  LATERALITY_MIDLINE = 4;  // midline
+  LATERALITY_NA = 5;  // na
+}
+
+enum PreAnaesthesiaAssessmentSurgicalSeverityEnum {
+  SURGICALSEVERITY_UNSPECIFIED = 0;
+  SURGICALSEVERITY_MINOR = 1;  // minor
+  SURGICALSEVERITY_INTERMEDIATE = 2;  // intermediate
+  SURGICALSEVERITY_MAJOR = 3;  // major
+  SURGICALSEVERITY_MAJOR_PLUS = 4;  // major-plus
+}
+
+enum PreAnaesthesiaAssessmentOnRoomAirEnum {
+  ONROOMAIR_UNSPECIFIED = 0;
+  ONROOMAIR_YES = 1;  // yes
+  ONROOMAIR_NO = 2;  // no
+}
+
+enum PreAnaesthesiaAssessmentMallampatiClassEnum {
+  MALLAMPATICLASS_UNSPECIFIED = 0;
+  MALLAMPATICLASS_I = 1;  // I
+  MALLAMPATICLASS_II = 2;  // II
+  MALLAMPATICLASS_III = 3;  // III
+  MALLAMPATICLASS_IV = 4;  // IV
+}
+
+enum PreAnaesthesiaAssessmentNeckRomEnum {
+  NECKROM_UNSPECIFIED = 0;
+  NECKROM_FULL = 1;  // full
+  NECKROM_REDUCED = 2;  // reduced
+  NECKROM_SEVERELY_LIMITED = 3;  // severely-limited
+}
+
+enum PreAnaesthesiaAssessmentCervicalSpineStabilityEnum {
+  CERVICALSPINESTABILITY_UNSPECIFIED = 0;
+  CERVICALSPINESTABILITY_STABLE = 1;  // stable
+  CERVICALSPINESTABILITY_LIMITED = 2;  // limited
+  CERVICALSPINESTABILITY_UNSTABLE = 3;  // unstable
+}
+
+enum PreAnaesthesiaAssessmentDentitionEnum {
+  DENTITION_UNSPECIFIED = 0;
+  DENTITION_GOOD = 1;  // good
+  DENTITION_LOOSE_TEETH = 2;  // loose-teeth
+  DENTITION_CAPS_CROWNS = 3;  // caps-crowns
+  DENTITION_EDENTULOUS = 4;  // edentulous
+  DENTITION_DENTURES = 5;  // dentures
+}
+
+enum PreAnaesthesiaAssessmentBeardEnum {
+  BEARD_UNSPECIFIED = 0;
+  BEARD_YES = 1;  // yes
+  BEARD_NO = 2;  // no
+}
+
+enum PreAnaesthesiaAssessmentUpperLipBiteTestEnum {
+  UPPERLIPBITETEST_UNSPECIFIED = 0;
+  UPPERLIPBITETEST_I = 1;  // I
+  UPPERLIPBITETEST_II = 2;  // II
+  UPPERLIPBITETEST_III = 3;  // III
+}
+
+enum PreAnaesthesiaAssessmentPriorDifficultIntubationEnum {
+  PRIORDIFFICULTINTUBATION_UNSPECIFIED = 0;
+  PRIORDIFFICULTINTUBATION_YES = 1;  // yes
+  PRIORDIFFICULTINTUBATION_NO = 2;  // no
+}
+
+enum PreAnaesthesiaAssessmentStopbangSnoringEnum {
+  STOPBANGSNORING_UNSPECIFIED = 0;
+  STOPBANGSNORING_YES = 1;  // yes
+  STOPBANGSNORING_NO = 2;  // no
+}
+
+enum PreAnaesthesiaAssessmentStopbangTiredEnum {
+  STOPBANGTIRED_UNSPECIFIED = 0;
+  STOPBANGTIRED_YES = 1;  // yes
+  STOPBANGTIRED_NO = 2;  // no
+}
+
+enum PreAnaesthesiaAssessmentStopbangObservedApnoeaEnum {
+  STOPBANGOBSERVEDAPNOEA_UNSPECIFIED = 0;
+  STOPBANGOBSERVEDAPNOEA_YES = 1;  // yes
+  STOPBANGOBSERVEDAPNOEA_NO = 2;  // no
+}
+
+enum PreAnaesthesiaAssessmentStopbangPressureEnum {
+  STOPBANGPRESSURE_UNSPECIFIED = 0;
+  STOPBANGPRESSURE_YES = 1;  // yes
+  STOPBANGPRESSURE_NO = 2;  // no
+}
+
+enum PreAnaesthesiaAssessmentStopbangBmiGt35Enum {
+  STOPBANGBMIGT35_UNSPECIFIED = 0;
+  STOPBANGBMIGT35_YES = 1;  // yes
+  STOPBANGBMIGT35_NO = 2;  // no
+}
+
+enum PreAnaesthesiaAssessmentStopbangAgeGt50Enum {
+  STOPBANGAGEGT50_UNSPECIFIED = 0;
+  STOPBANGAGEGT50_YES = 1;  // yes
+  STOPBANGAGEGT50_NO = 2;  // no
+}
+
+enum PreAnaesthesiaAssessmentStopbangNeckGt40Enum {
+  STOPBANGNECKGT40_UNSPECIFIED = 0;
+  STOPBANGNECKGT40_YES = 1;  // yes
+  STOPBANGNECKGT40_NO = 2;  // no
+}
+
+enum PreAnaesthesiaAssessmentStopbangMaleEnum {
+  STOPBANGMALE_UNSPECIFIED = 0;
+  STOPBANGMALE_YES = 1;  // yes
+  STOPBANGMALE_NO = 2;  // no
+}
+
+enum PreAnaesthesiaAssessmentHeartRhythmEnum {
+  HEARTRHYTHM_UNSPECIFIED = 0;
+  HEARTRHYTHM_SINUS = 1;  // sinus
+  HEARTRHYTHM_ATRIAL_FIBRILLATION = 2;  // atrial-fibrillation
+  HEARTRHYTHM_FLUTTER = 3;  // flutter
+  HEARTRHYTHM_HEART_BLOCK = 4;  // heart-block
+  HEARTRHYTHM_PACED = 5;  // paced
+  HEARTRHYTHM_OTHER = 6;  // other
+}
+
+enum PreAnaesthesiaAssessmentMurmurPresentEnum {
+  MURMURPRESENT_UNSPECIFIED = 0;
+  MURMURPRESENT_YES = 1;  // yes
+  MURMURPRESENT_NO = 2;  // no
+}
+
+enum PreAnaesthesiaAssessmentPeripheralPulsesEnum {
+  PERIPHERALPULSES_UNSPECIFIED = 0;
+  PERIPHERALPULSES_NORMAL = 1;  // normal
+  PERIPHERALPULSES_REDUCED = 2;  // reduced
+  PERIPHERALPULSES_ABSENT = 3;  // absent
+}
+
+enum PreAnaesthesiaAssessmentJvpRaisedEnum {
+  JVPRAISED_UNSPECIFIED = 0;
+  JVPRAISED_YES = 1;  // yes
+  JVPRAISED_NO = 2;  // no
+}
+
+enum PreAnaesthesiaAssessmentPeripheralOedemaEnum {
+  PERIPHERALOEDEMA_UNSPECIFIED = 0;
+  PERIPHERALOEDEMA_NONE = 1;  // none
+  PERIPHERALOEDEMA_MILD = 2;  // mild
+  PERIPHERALOEDEMA_MODERATE = 3;  // moderate
+  PERIPHERALOEDEMA_SEVERE = 4;  // severe
+}
+
+enum PreAnaesthesiaAssessmentEcgPerformedEnum {
+  ECGPERFORMED_UNSPECIFIED = 0;
+  ECGPERFORMED_YES = 1;  // yes
+  ECGPERFORMED_NO = 2;  // no
+}
+
+enum PreAnaesthesiaAssessmentEcgAxisEnum {
+  ECGAXIS_UNSPECIFIED = 0;
+  ECGAXIS_NORMAL = 1;  // normal
+  ECGAXIS_LEFT = 2;  // left
+  ECGAXIS_RIGHT = 3;  // right
+  ECGAXIS_EXTREME = 4;  // extreme
+}
+
+enum PreAnaesthesiaAssessmentEcgIschaemicChangesEnum {
+  ECGISCHAEMICCHANGES_UNSPECIFIED = 0;
+  ECGISCHAEMICCHANGES_YES = 1;  // yes
+  ECGISCHAEMICCHANGES_NO = 2;  // no
+}
+
+enum PreAnaesthesiaAssessmentEchoPerformedEnum {
+  ECHOPERFORMED_UNSPECIFIED = 0;
+  ECHOPERFORMED_YES = 1;  // yes
+  ECHOPERFORMED_NO = 2;  // no
+}
+
+enum PreAnaesthesiaAssessmentHistoryIhdEnum {
+  HISTORYIHD_UNSPECIFIED = 0;
+  HISTORYIHD_YES = 1;  // yes
+  HISTORYIHD_NO = 2;  // no
+}
+
+enum PreAnaesthesiaAssessmentHistoryChfEnum {
+  HISTORYCHF_UNSPECIFIED = 0;
+  HISTORYCHF_YES = 1;  // yes
+  HISTORYCHF_NO = 2;  // no
+}
+
+enum PreAnaesthesiaAssessmentHistoryStrokeTiaEnum {
+  HISTORYSTROKETIA_UNSPECIFIED = 0;
+  HISTORYSTROKETIA_YES = 1;  // yes
+  HISTORYSTROKETIA_NO = 2;  // no
+}
+
+enum PreAnaesthesiaAssessmentRecentMiWithin3MonthsEnum {
+  RECENTMIWITHIN3MONTHS_UNSPECIFIED = 0;
+  RECENTMIWITHIN3MONTHS_YES = 1;  // yes
+  RECENTMIWITHIN3MONTHS_NO = 2;  // no
+}
+
+enum PreAnaesthesiaAssessmentPacemakerOrIcdEnum {
+  PACEMAKERORICD_UNSPECIFIED = 0;
+  PACEMAKERORICD_YES = 1;  // yes
+  PACEMAKERORICD_NO = 2;  // no
+}
+
+enum PreAnaesthesiaAssessmentSevereValveDysfunctionEnum {
+  SEVEREVALVEDYSFUNCTION_UNSPECIFIED = 0;
+  SEVEREVALVEDYSFUNCTION_YES = 1;  // yes
+  SEVEREVALVEDYSFUNCTION_NO = 2;  // no
+}
+
+enum PreAnaesthesiaAssessmentActiveAnginaEnum {
+  ACTIVEANGINA_UNSPECIFIED = 0;
+  ACTIVEANGINA_YES = 1;  // yes
+  ACTIVEANGINA_NO = 2;  // no
+}
+
+enum PreAnaesthesiaAssessmentBreathSoundsEnum {
+  BREATHSOUNDS_UNSPECIFIED = 0;
+  BREATHSOUNDS_NORMAL = 1;  // normal
+  BREATHSOUNDS_REDUCED = 2;  // reduced
+  BREATHSOUNDS_BRONCHIAL = 3;  // bronchial
+  BREATHSOUNDS_SILENT = 4;  // silent
+}
+
+enum PreAnaesthesiaAssessmentWheezeEnum {
+  WHEEZE_UNSPECIFIED = 0;
+  WHEEZE_YES = 1;  // yes
+  WHEEZE_NO = 2;  // no
+}
+
+enum PreAnaesthesiaAssessmentCracklesEnum {
+  CRACKLES_UNSPECIFIED = 0;
+  CRACKLES_YES = 1;  // yes
+  CRACKLES_NO = 2;  // no
+}
+
+enum PreAnaesthesiaAssessmentCrepitationsEnum {
+  CREPITATIONS_UNSPECIFIED = 0;
+  CREPITATIONS_YES = 1;  // yes
+  CREPITATIONS_NO = 2;  // no
+}
+
+enum PreAnaesthesiaAssessmentChestWallDeformityEnum {
+  CHESTWALLDEFORMITY_UNSPECIFIED = 0;
+  CHESTWALLDEFORMITY_YES = 1;  // yes
+  CHESTWALLDEFORMITY_NO = 2;  // no
+}
+
+enum PreAnaesthesiaAssessmentAsthmaEnum {
+  ASTHMA_UNSPECIFIED = 0;
+  ASTHMA_NONE = 1;  // none
+  ASTHMA_CONTROLLED = 2;  // controlled
+  ASTHMA_UNCONTROLLED = 3;  // uncontrolled
+}
+
+enum PreAnaesthesiaAssessmentCopdEnum {
+  COPD_UNSPECIFIED = 0;
+  COPD_NONE = 1;  // none
+  COPD_MILD = 2;  // mild
+  COPD_MODERATE = 3;  // moderate
+  COPD_SEVERE = 4;  // severe
+}
+
+enum PreAnaesthesiaAssessmentCxrPerformedEnum {
+  CXRPERFORMED_UNSPECIFIED = 0;
+  CXRPERFORMED_YES = 1;  // yes
+  CXRPERFORMED_NO = 2;  // no
+}
+
+enum PreAnaesthesiaAssessmentPftPerformedEnum {
+  PFTPERFORMED_UNSPECIFIED = 0;
+  PFTPERFORMED_YES = 1;  // yes
+  PFTPERFORMED_NO = 2;  // no
+}
+
+enum PreAnaesthesiaAssessmentSmokingStatusEnum {
+  SMOKINGSTATUS_UNSPECIFIED = 0;
+  SMOKINGSTATUS_NEVER = 1;  // never
+  SMOKINGSTATUS_EX = 2;  // ex
+  SMOKINGSTATUS_CURRENT = 3;  // current
+}
+
+enum PreAnaesthesiaAssessmentCovidHistoryEnum {
+  COVIDHISTORY_UNSPECIFIED = 0;
+  COVIDHISTORY_NEVER = 1;  // never
+  COVIDHISTORY_RECOVERED = 2;  // recovered
+  COVIDHISTORY_RECENT = 3;  // recent
+  COVIDHISTORY_LONG_COVID = 4;  // long-covid
+}
+
+enum PreAnaesthesiaAssessmentCovidUnresolvedSymptomsEnum {
+  COVIDUNRESOLVEDSYMPTOMS_UNSPECIFIED = 0;
+  COVIDUNRESOLVEDSYMPTOMS_YES = 1;  // yes
+  COVIDUNRESOLVEDSYMPTOMS_NO = 2;  // no
+}
+
+enum PreAnaesthesiaAssessmentCognitionToolEnum {
+  COGNITIONTOOL_UNSPECIFIED = 0;
+  COGNITIONTOOL_AMT_4 = 1;  // AMT-4
+  COGNITIONTOOL_MOCA = 2;  // MOCA
+  COGNITIONTOOL_MMSE = 3;  // MMSE
+  COGNITIONTOOL_NONE = 4;  // none
+}
+
+enum PreAnaesthesiaAssessmentCognitiveImpairmentEnum {
+  COGNITIVEIMPAIRMENT_UNSPECIFIED = 0;
+  COGNITIVEIMPAIRMENT_NONE = 1;  // none
+  COGNITIVEIMPAIRMENT_MILD = 2;  // mild
+  COGNITIVEIMPAIRMENT_MODERATE = 3;  // moderate
+  COGNITIVEIMPAIRMENT_SEVERE = 4;  // severe
+}
+
+enum PreAnaesthesiaAssessmentCapacityConcernEnum {
+  CAPACITYCONCERN_UNSPECIFIED = 0;
+  CAPACITYCONCERN_YES = 1;  // yes
+  CAPACITYCONCERN_NO = 2;  // no
+}
+
+enum PreAnaesthesiaAssessmentMotorPowerEnum {
+  MOTORPOWER_UNSPECIFIED = 0;
+  MOTORPOWER_NORMAL = 1;  // normal
+  MOTORPOWER_REDUCED = 2;  // reduced
+  MOTORPOWER_SEVERELY_REDUCED = 3;  // severely-reduced
+}
+
+enum PreAnaesthesiaAssessmentReflexesEnum {
+  REFLEXES_UNSPECIFIED = 0;
+  REFLEXES_NORMAL = 1;  // normal
+  REFLEXES_HYPERREFLEXIC = 2;  // hyperreflexic
+  REFLEXES_HYPOREFLEXIC = 3;  // hyporeflexic
+  REFLEXES_ABSENT = 4;  // absent
+}
+
+enum PreAnaesthesiaAssessmentRecentStrokeTiaEnum {
+  RECENTSTROKETIA_UNSPECIFIED = 0;
+  RECENTSTROKETIA_YES = 1;  // yes
+  RECENTSTROKETIA_NO = 2;  // no
+}
+
+enum PreAnaesthesiaAssessmentSeizureDisorderEnum {
+  SEIZUREDISORDER_UNSPECIFIED = 0;
+  SEIZUREDISORDER_YES = 1;  // yes
+  SEIZUREDISORDER_NO = 2;  // no
+}
+
+enum PreAnaesthesiaAssessmentDialysisStatusEnum {
+  DIALYSISSTATUS_UNSPECIFIED = 0;
+  DIALYSISSTATUS_NONE = 1;  // none
+  DIALYSISSTATUS_PERITONEAL = 2;  // peritoneal
+  DIALYSISSTATUS_HAEMODIALYSIS = 3;  // haemodialysis
+  DIALYSISSTATUS_HAEMOFILTRATION = 4;  // haemofiltration
+}
+
+enum PreAnaesthesiaAssessmentCkdStageEnum {
+  CKDSTAGE_UNSPECIFIED = 0;
+  CKDSTAGE_V_1 = 1;  // 1
+  CKDSTAGE_V_2 = 2;  // 2
+  CKDSTAGE_V_3A = 3;  // 3a
+  CKDSTAGE_V_3B = 4;  // 3b
+  CKDSTAGE_V_4 = 5;  // 4
+  CKDSTAGE_V_5 = 6;  // 5
+}
+
+enum PreAnaesthesiaAssessmentChronicLiverDiseaseEnum {
+  CHRONICLIVERDISEASE_UNSPECIFIED = 0;
+  CHRONICLIVERDISEASE_NONE = 1;  // none
+  CHRONICLIVERDISEASE_COMPENSATED = 2;  // compensated
+  CHRONICLIVERDISEASE_DECOMPENSATED = 3;  // decompensated
+}
+
+enum PreAnaesthesiaAssessmentChildPughClassEnum {
+  CHILDPUGHCLASS_UNSPECIFIED = 0;
+  CHILDPUGHCLASS_A = 1;  // A
+  CHILDPUGHCLASS_B = 2;  // B
+  CHILDPUGHCLASS_C = 3;  // C
+}
+
+enum PreAnaesthesiaAssessmentOnAnticoagulantEnum {
+  ONANTICOAGULANT_UNSPECIFIED = 0;
+  ONANTICOAGULANT_YES = 1;  // yes
+  ONANTICOAGULANT_NO = 2;  // no
+}
+
+enum PreAnaesthesiaAssessmentAnticoagulantTypeEnum {
+  ANTICOAGULANTTYPE_UNSPECIFIED = 0;
+  ANTICOAGULANTTYPE_WARFARIN = 1;  // warfarin
+  ANTICOAGULANTTYPE_APIXABAN = 2;  // apixaban
+  ANTICOAGULANTTYPE_RIVAROXABAN = 3;  // rivaroxaban
+  ANTICOAGULANTTYPE_EDOXABAN = 4;  // edoxaban
+  ANTICOAGULANTTYPE_DABIGATRAN = 5;  // dabigatran
+  ANTICOAGULANTTYPE_LMWH = 6;  // lmwh
+  ANTICOAGULANTTYPE_HEPARIN_IV = 7;  // heparin-iv
+  ANTICOAGULANTTYPE_ASPIRIN = 8;  // aspirin
+  ANTICOAGULANTTYPE_CLOPIDOGREL = 9;  // clopidogrel
+  ANTICOAGULANTTYPE_TICAGRELOR = 10;  // ticagrelor
+  ANTICOAGULANTTYPE_NONE = 11;  // none
+}
+
+enum PreAnaesthesiaAssessmentGroupAndSaveEnum {
+  GROUPANDSAVE_UNSPECIFIED = 0;
+  GROUPANDSAVE_NOT_REQUIRED = 1;  // not-required
+  GROUPANDSAVE_ORDERED = 2;  // ordered
+  GROUPANDSAVE_VALID = 3;  // valid
+  GROUPANDSAVE_EXPIRED = 4;  // expired
+}
+
+enum PreAnaesthesiaAssessmentAnaemiaSeverityEnum {
+  ANAEMIASEVERITY_UNSPECIFIED = 0;
+  ANAEMIASEVERITY_NONE = 1;  // none
+  ANAEMIASEVERITY_MILD = 2;  // mild
+  ANAEMIASEVERITY_MODERATE = 3;  // moderate
+  ANAEMIASEVERITY_SEVERE = 4;  // severe
+}
+
+enum PreAnaesthesiaAssessmentDiabetesTypeEnum {
+  DIABETESTYPE_UNSPECIFIED = 0;
+  DIABETESTYPE_NONE = 1;  // none
+  DIABETESTYPE_TYPE_1 = 2;  // type-1
+  DIABETESTYPE_TYPE_2 = 3;  // type-2
+  DIABETESTYPE_GESTATIONAL = 4;  // gestational
+  DIABETESTYPE_OTHER = 5;  // other
+}
+
+enum PreAnaesthesiaAssessmentDiabetesOnInsulinEnum {
+  DIABETESONINSULIN_UNSPECIFIED = 0;
+  DIABETESONINSULIN_YES = 1;  // yes
+  DIABETESONINSULIN_NO = 2;  // no
+}
+
+enum PreAnaesthesiaAssessmentDiabetesControlEnum {
+  DIABETESCONTROL_UNSPECIFIED = 0;
+  DIABETESCONTROL_WELL_CONTROLLED = 1;  // well-controlled
+  DIABETESCONTROL_SUBOPTIMAL = 2;  // suboptimal
+  DIABETESCONTROL_POOR = 3;  // poor
+}
+
+enum PreAnaesthesiaAssessmentThyroidStatusEnum {
+  THYROIDSTATUS_UNSPECIFIED = 0;
+  THYROIDSTATUS_EUTHYROID = 1;  // euthyroid
+  THYROIDSTATUS_HYPOTHYROID = 2;  // hypothyroid
+  THYROIDSTATUS_HYPERTHYROID = 3;  // hyperthyroid
+}
+
+enum PreAnaesthesiaAssessmentAdrenalStatusEnum {
+  ADRENALSTATUS_UNSPECIFIED = 0;
+  ADRENALSTATUS_NORMAL = 1;  // normal
+  ADRENALSTATUS_ADDISONS = 2;  // addisons
+  ADRENALSTATUS_CUSHINGS = 3;  // cushings
+  ADRENALSTATUS_ON_STEROID_COVER = 4;  // on-steroid-cover
+}
+
+enum PreAnaesthesiaAssessmentOnLongTermSteroidsEnum {
+  ONLONGTERMSTEROIDS_UNSPECIFIED = 0;
+  ONLONGTERMSTEROIDS_YES = 1;  // yes
+  ONLONGTERMSTEROIDS_NO = 2;  // no
+}
+
+enum PreAnaesthesiaAssessmentAbdominalExamEnum {
+  ABDOMINALEXAM_UNSPECIFIED = 0;
+  ABDOMINALEXAM_NORMAL = 1;  // normal
+  ABDOMINALEXAM_DISTENDED = 2;  // distended
+  ABDOMINALEXAM_TENDER = 3;  // tender
+  ABDOMINALEXAM_ORGANOMEGALY = 4;  // organomegaly
+  ABDOMINALEXAM_OTHER = 5;  // other
+}
+
+enum PreAnaesthesiaAssessmentRefluxSymptomsEnum {
+  REFLUXSYMPTOMS_UNSPECIFIED = 0;
+  REFLUXSYMPTOMS_NONE = 1;  // none
+  REFLUXSYMPTOMS_OCCASIONAL = 2;  // occasional
+  REFLUXSYMPTOMS_FREQUENT = 3;  // frequent
+  REFLUXSYMPTOMS_SEVERE = 4;  // severe
+}
+
+enum PreAnaesthesiaAssessmentHiatusHerniaEnum {
+  HIATUSHERNIA_UNSPECIFIED = 0;
+  HIATUSHERNIA_YES = 1;  // yes
+  HIATUSHERNIA_NO = 2;  // no
+}
+
+enum PreAnaesthesiaAssessmentPreviousGastricSurgeryEnum {
+  PREVIOUSGASTRICSURGERY_UNSPECIFIED = 0;
+  PREVIOUSGASTRICSURGERY_YES = 1;  // yes
+  PREVIOUSGASTRICSURGERY_NO = 2;  // no
+}
+
+enum PreAnaesthesiaAssessmentNgTubeEnum {
+  NGTUBE_UNSPECIFIED = 0;
+  NGTUBE_YES = 1;  // yes
+  NGTUBE_NO = 2;  // no
+}
+
+enum PreAnaesthesiaAssessmentStomaEnum {
+  STOMA_UNSPECIFIED = 0;
+  STOMA_NONE = 1;  // none
+  STOMA_COLOSTOMY = 2;  // colostomy
+  STOMA_ILEOSTOMY = 3;  // ileostomy
+  STOMA_UROSTOMY = 4;  // urostomy
+  STOMA_GASTROSTOMY = 5;  // gastrostomy
+}
+
+enum PreAnaesthesiaAssessmentFastingConfirmedEnum {
+  FASTINGCONFIRMED_UNSPECIFIED = 0;
+  FASTINGCONFIRMED_YES = 1;  // yes
+  FASTINGCONFIRMED_NO = 2;  // no
+}
+
+enum PreAnaesthesiaAssessmentRapidSequenceInductionNeededEnum {
+  RAPIDSEQUENCEINDUCTIONNEEDED_UNSPECIFIED = 0;
+  RAPIDSEQUENCEINDUCTIONNEEDED_YES = 1;  // yes
+  RAPIDSEQUENCEINDUCTIONNEEDED_NO = 2;  // no
+}
+
+enum PreAnaesthesiaAssessmentSpineExamEnum {
+  SPINEEXAM_UNSPECIFIED = 0;
+  SPINEEXAM_NORMAL = 1;  // normal
+  SPINEEXAM_SCOLIOSIS = 2;  // scoliosis
+  SPINEEXAM_KYPHOSIS = 3;  // kyphosis
+  SPINEEXAM_PREVIOUS_SURGERY = 4;  // previous-surgery
+  SPINEEXAM_ANKYLOSING_SPONDYLITIS = 5;  // ankylosing-spondylitis
+  SPINEEXAM_OTHER = 6;  // other
+}
+
+enum PreAnaesthesiaAssessmentNeuraxialSuitableEnum {
+  NEURAXIALSUITABLE_UNSPECIFIED = 0;
+  NEURAXIALSUITABLE_YES = 1;  // yes
+  NEURAXIALSUITABLE_NO = 2;  // no
+  NEURAXIALSUITABLE_UNSURE = 3;  // unsure
+}
+
+enum PreAnaesthesiaAssessmentJointRomHipEnum {
+  JOINTROMHIP_UNSPECIFIED = 0;
+  JOINTROMHIP_FULL = 1;  // full
+  JOINTROMHIP_REDUCED = 2;  // reduced
+  JOINTROMHIP_SEVERELY_LIMITED = 3;  // severely-limited
+}
+
+enum PreAnaesthesiaAssessmentJointRomShoulderEnum {
+  JOINTROMSHOULDER_UNSPECIFIED = 0;
+  JOINTROMSHOULDER_FULL = 1;  // full
+  JOINTROMSHOULDER_REDUCED = 2;  // reduced
+  JOINTROMSHOULDER_SEVERELY_LIMITED = 3;  // severely-limited
+}
+
+enum PreAnaesthesiaAssessmentJointRomNeckEnum {
+  JOINTROMNECK_UNSPECIFIED = 0;
+  JOINTROMNECK_FULL = 1;  // full
+  JOINTROMNECK_REDUCED = 2;  // reduced
+  JOINTROMNECK_SEVERELY_LIMITED = 3;  // severely-limited
+}
+
+enum PreAnaesthesiaAssessmentSkinIvAccessEnum {
+  SKINIVACCESS_UNSPECIFIED = 0;
+  SKINIVACCESS_GOOD = 1;  // good
+  SKINIVACCESS_DIFFICULT = 2;  // difficult
+  SKINIVACCESS_VERY_DIFFICULT = 3;  // very-difficult
+}
+
+enum PreAnaesthesiaAssessmentSkinBlockSiteEnum {
+  SKINBLOCKSITE_UNSPECIFIED = 0;
+  SKINBLOCKSITE_INTACT = 1;  // intact
+  SKINBLOCKSITE_INFECTED = 2;  // infected
+  SKINBLOCKSITE_TATTOOED = 3;  // tattooed
+  SKINBLOCKSITE_SCARRED = 4;  // scarred
+}
+
+enum PreAnaesthesiaAssessmentPressureUlcerRiskEnum {
+  PRESSUREULCERRISK_UNSPECIFIED = 0;
+  PRESSUREULCERRISK_LOW = 1;  // low
+  PRESSUREULCERRISK_MODERATE = 2;  // moderate
+  PRESSUREULCERRISK_HIGH = 3;  // high
+  PRESSUREULCERRISK_VERY_HIGH = 4;  // very-high
+}
+
+enum PreAnaesthesiaAssessmentRouteEnum {
+  ROUTE_UNSPECIFIED = 0;
+  ROUTE_ORAL = 1;  // oral
+  ROUTE_IV = 2;  // iv
+  ROUTE_IM = 3;  // im
+  ROUTE_SC = 4;  // sc
+  ROUTE_INHALED = 5;  // inhaled
+  ROUTE_TOPICAL = 6;  // topical
+  ROUTE_PR = 7;  // pr
+  ROUTE_OTHER = 8;  // other
+}
+
+enum PreAnaesthesiaAssessmentClassEnum {
+  CLASS_UNSPECIFIED = 0;
+  CLASS_ANTICOAGULANT = 1;  // anticoagulant
+  CLASS_ANTIPLATELET = 2;  // antiplatelet
+  CLASS_ANTIHYPERTENSIVE = 3;  // antihypertensive
+  CLASS_ACE_INHIBITOR = 4;  // ace-inhibitor
+  CLASS_ARB = 5;  // arb
+  CLASS_BETA_BLOCKER = 6;  // beta-blocker
+  CLASS_DIURETIC = 7;  // diuretic
+  CLASS_INSULIN = 8;  // insulin
+  CLASS_ORAL_HYPOGLYCAEMIC = 9;  // oral-hypoglycaemic
+  CLASS_STEROID = 10;  // steroid
+  CLASS_OPIOID = 11;  // opioid
+  CLASS_BENZODIAZEPINE = 12;  // benzodiazepine
+  CLASS_SSRI = 13;  // ssri
+  CLASS_OTHER = 14;  // other
+}
+
+enum PreAnaesthesiaAssessmentPerioperativeActionEnum {
+  PERIOPERATIVEACTION_UNSPECIFIED = 0;
+  PERIOPERATIVEACTION_CONTINUE = 1;  // continue
+  PERIOPERATIVEACTION_HOLD_ON_DAY = 2;  // hold-on-day
+  PERIOPERATIVEACTION_HOLD_N_DAYS = 3;  // hold-n-days
+  PERIOPERATIVEACTION_STOP = 4;  // stop
+  PERIOPERATIVEACTION_SWITCH = 5;  // switch
+  PERIOPERATIVEACTION_BRIDGE = 6;  // bridge
+}
+
+enum PreAnaesthesiaAssessmentCategoryEnum {
+  CATEGORY_UNSPECIFIED = 0;
+  CATEGORY_DRUG = 1;  // drug
+  CATEGORY_LATEX = 2;  // latex
+  CATEGORY_FOOD = 3;  // food
+  CATEGORY_ADHESIVE = 4;  // adhesive
+  CATEGORY_CONTRAST = 5;  // contrast
+  CATEGORY_ENVIRONMENT = 6;  // environment
+  CATEGORY_OTHER = 7;  // other
+}
+
+enum PreAnaesthesiaAssessmentReactionTypeEnum {
+  REACTIONTYPE_UNSPECIFIED = 0;
+  REACTIONTYPE_ANAPHYLAXIS = 1;  // anaphylaxis
+  REACTIONTYPE_RASH = 2;  // rash
+  REACTIONTYPE_URTICARIA = 3;  // urticaria
+  REACTIONTYPE_ANGIOEDEMA = 4;  // angioedema
+  REACTIONTYPE_GI_UPSET = 5;  // gi-upset
+  REACTIONTYPE_BRONCHOSPASM = 6;  // bronchospasm
+  REACTIONTYPE_OTHER = 7;  // other
+}
+
+enum PreAnaesthesiaAssessmentReactionSeverityEnum {
+  REACTIONSEVERITY_UNSPECIFIED = 0;
+  REACTIONSEVERITY_MILD = 1;  // mild
+  REACTIONSEVERITY_MODERATE = 2;  // moderate
+  REACTIONSEVERITY_SEVERE = 3;  // severe
+  REACTIONSEVERITY_LIFE_THREATENING = 4;  // life-threatening
+}
+
+enum PreAnaesthesiaAssessmentVerifiedEnum {
+  VERIFIED_UNSPECIFIED = 0;
+  VERIFIED_YES = 1;  // yes
+  VERIFIED_NO = 2;  // no
+}
+
+enum PreAnaesthesiaAssessmentCpetPerformedEnum {
+  CPETPERFORMED_UNSPECIFIED = 0;
+  CPETPERFORMED_YES = 1;  // yes
+  CPETPERFORMED_NO = 2;  // no
+}
+
+enum PreAnaesthesiaAssessmentMalnutritionRiskEnum {
+  MALNUTRITIONRISK_UNSPECIFIED = 0;
+  MALNUTRITIONRISK_NONE = 1;  // none
+  MALNUTRITIONRISK_LOW = 2;  // low
+  MALNUTRITIONRISK_MEDIUM = 3;  // medium
+  MALNUTRITIONRISK_HIGH = 4;  // high
+}
+
+enum PreAnaesthesiaAssessmentTechniqueEnum {
+  TECHNIQUE_UNSPECIFIED = 0;
+  TECHNIQUE_GA = 1;  // ga
+  TECHNIQUE_REGIONAL = 2;  // regional
+  TECHNIQUE_NEURAXIAL = 3;  // neuraxial
+  TECHNIQUE_SEDATION = 4;  // sedation
+  TECHNIQUE_MAC = 5;  // mac
+  TECHNIQUE_LOCAL = 6;  // local
+  TECHNIQUE_COMBINED_GA_REGIONAL = 7;  // combined-ga-regional
+}
+
+enum PreAnaesthesiaAssessmentAirwayPlanEnum {
+  AIRWAYPLAN_UNSPECIFIED = 0;
+  AIRWAYPLAN_FACE_MASK = 1;  // face-mask
+  AIRWAYPLAN_SUPRAGLOTTIC = 2;  // supraglottic
+  AIRWAYPLAN_ETT = 3;  // ett
+  AIRWAYPLAN_AWAKE_FIBREOPTIC = 4;  // awake-fibreoptic
+  AIRWAYPLAN_SURGICAL_AIRWAY = 5;  // surgical-airway
+}
+
+enum PreAnaesthesiaAssessmentRsiPlannedEnum {
+  RSIPLANNED_UNSPECIFIED = 0;
+  RSIPLANNED_YES = 1;  // yes
+  RSIPLANNED_NO = 2;  // no
+}
+
+enum PreAnaesthesiaAssessmentMonitoringLevelEnum {
+  MONITORINGLEVEL_UNSPECIFIED = 0;
+  MONITORINGLEVEL_STANDARD = 1;  // standard
+  MONITORINGLEVEL_INVASIVE_ARTERIAL = 2;  // invasive-arterial
+  MONITORINGLEVEL_INVASIVE_CVC = 3;  // invasive-cvc
+  MONITORINGLEVEL_CARDIAC_OUTPUT = 4;  // cardiac-output
+}
+
+enum PreAnaesthesiaAssessmentPostOpDispositionEnum {
+  POSTOPDISPOSITION_UNSPECIFIED = 0;
+  POSTOPDISPOSITION_DAY_CASE = 1;  // day-case
+  POSTOPDISPOSITION_WARD = 2;  // ward
+  POSTOPDISPOSITION_ENHANCED_CARE = 3;  // enhanced-care
+  POSTOPDISPOSITION_HDU = 4;  // hdu
+  POSTOPDISPOSITION_ICU = 5;  // icu
+}
+
+message PreAnaesthesiaAssessment {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string patient_id = 5;  // UUID — uuid
+  string clinician_id = 6;  // UUID — uuid
+  PreAnaesthesiaAssessmentStatusEnum status = 7;  // VARCHAR(20)
+  string site_name = 8;  // VARCHAR(255) — max 255 chars
+  string assessment_date = 9;  // DATE — iso 8601 date
+  string assessment_time = 10;  // TIME — iso 8601 time
+  string planned_procedure = 11;  // VARCHAR(500) — max 500 chars
+  string surgical_specialty = 12;  // VARCHAR(100) — max 100 chars
+  PreAnaesthesiaAssessmentUrgencyEnum urgency = 13;  // VARCHAR(20)
+  PreAnaesthesiaAssessmentLateralityEnum laterality = 14;  // VARCHAR(10)
+  PreAnaesthesiaAssessmentSurgicalSeverityEnum surgical_severity = 15;  // VARCHAR(15)
+  int32 anticipated_blood_loss_ml = 16;  // INTEGER
+  int32 anticipated_duration_minutes = 17;  // INTEGER
+  string consultant_surgeon = 18;  // VARCHAR(255) — max 255 chars
+  string planned_date = 19;  // DATE — iso 8601 date
+  int32 systolic_bp = 20;  // INTEGER
+  int32 diastolic_bp = 21;  // INTEGER
+  int32 heart_rate = 22;  // INTEGER
+  int32 respiratory_rate = 23;  // INTEGER
+  double spo2_percent = 24;  // NUMERIC(4,1) — numeric(4,1)
+  double temperature_celsius = 25;  // NUMERIC(4,1) — numeric(4,1)
+  double capillary_refill_seconds = 26;  // NUMERIC(3,1) — numeric(3,1)
+  int32 pain_score_0_10 = 27;  // INTEGER
+  PreAnaesthesiaAssessmentOnRoomAirEnum on_room_air = 28;  // VARCHAR(5)
+  double supplemental_oxygen_litres = 29;  // NUMERIC(3,1) — numeric(3,1)
+  PreAnaesthesiaAssessmentMallampatiClassEnum mallampati_class = 30;  // VARCHAR(5)
+  double thyromental_distance_cm = 31;  // NUMERIC(3,1) — numeric(3,1)
+  double mouth_opening_cm = 32;  // NUMERIC(3,1) — numeric(3,1)
+  double inter_incisor_gap_cm = 33;  // NUMERIC(3,1) — numeric(3,1)
+  PreAnaesthesiaAssessmentNeckRomEnum neck_rom = 34;  // VARCHAR(20)
+  PreAnaesthesiaAssessmentCervicalSpineStabilityEnum cervical_spine_stability = 35;  // VARCHAR(20)
+  PreAnaesthesiaAssessmentDentitionEnum dentition = 36;  // VARCHAR(20)
+  PreAnaesthesiaAssessmentBeardEnum beard = 37;  // VARCHAR(5)
+  PreAnaesthesiaAssessmentUpperLipBiteTestEnum upper_lip_bite_test = 38;  // VARCHAR(5)
+  PreAnaesthesiaAssessmentPriorDifficultIntubationEnum prior_difficult_intubation = 39;  // VARCHAR(5)
+  PreAnaesthesiaAssessmentStopbangSnoringEnum stopbang_snoring = 40;  // VARCHAR(5)
+  PreAnaesthesiaAssessmentStopbangTiredEnum stopbang_tired = 41;  // VARCHAR(5)
+  PreAnaesthesiaAssessmentStopbangObservedApnoeaEnum stopbang_observed_apnoea = 42;  // VARCHAR(5)
+  PreAnaesthesiaAssessmentStopbangPressureEnum stopbang_pressure = 43;  // VARCHAR(5)
+  PreAnaesthesiaAssessmentStopbangBmiGt35Enum stopbang_bmi_gt35 = 44;  // VARCHAR(5)
+  PreAnaesthesiaAssessmentStopbangAgeGt50Enum stopbang_age_gt50 = 45;  // VARCHAR(5)
+  PreAnaesthesiaAssessmentStopbangNeckGt40Enum stopbang_neck_gt40 = 46;  // VARCHAR(5)
+  PreAnaesthesiaAssessmentStopbangMaleEnum stopbang_male = 47;  // VARCHAR(5)
+  string airway_notes = 48;  // TEXT
+  PreAnaesthesiaAssessmentHeartRhythmEnum heart_rhythm = 49;  // VARCHAR(20)
+  PreAnaesthesiaAssessmentMurmurPresentEnum murmur_present = 50;  // VARCHAR(5)
+  string murmur_description = 51;  // VARCHAR(255) — max 255 chars
+  PreAnaesthesiaAssessmentPeripheralPulsesEnum peripheral_pulses = 52;  // VARCHAR(20)
+  PreAnaesthesiaAssessmentJvpRaisedEnum jvp_raised = 53;  // VARCHAR(5)
+  PreAnaesthesiaAssessmentPeripheralOedemaEnum peripheral_oedema = 54;  // VARCHAR(20)
+  PreAnaesthesiaAssessmentEcgPerformedEnum ecg_performed = 55;  // VARCHAR(5)
+  string ecg_rhythm = 56;  // VARCHAR(50) — max 50 chars
+  int32 ecg_rate_bpm = 57;  // INTEGER
+  PreAnaesthesiaAssessmentEcgAxisEnum ecg_axis = 58;  // VARCHAR(30)
+  PreAnaesthesiaAssessmentEcgIschaemicChangesEnum ecg_ischaemic_changes = 59;  // VARCHAR(5)
+  string ecg_notes = 60;  // TEXT
+  PreAnaesthesiaAssessmentEchoPerformedEnum echo_performed = 61;  // VARCHAR(5)
+  int32 echo_ef_percent = 62;  // INTEGER
+  string echo_notes = 63;  // TEXT
+  PreAnaesthesiaAssessmentHistoryIhdEnum history_ihd = 64;  // VARCHAR(5)
+  PreAnaesthesiaAssessmentHistoryChfEnum history_chf = 65;  // VARCHAR(5)
+  PreAnaesthesiaAssessmentHistoryStrokeTiaEnum history_stroke_tia = 66;  // VARCHAR(5)
+  PreAnaesthesiaAssessmentRecentMiWithin3MonthsEnum recent_mi_within_3_months = 67;  // VARCHAR(5)
+  PreAnaesthesiaAssessmentPacemakerOrIcdEnum pacemaker_or_icd = 68;  // VARCHAR(5)
+  PreAnaesthesiaAssessmentSevereValveDysfunctionEnum severe_valve_dysfunction = 69;  // VARCHAR(5)
+  PreAnaesthesiaAssessmentActiveAnginaEnum active_angina = 70;  // VARCHAR(5)
+  PreAnaesthesiaAssessmentBreathSoundsEnum breath_sounds = 71;  // VARCHAR(30)
+  PreAnaesthesiaAssessmentWheezeEnum wheeze = 72;  // VARCHAR(5)
+  PreAnaesthesiaAssessmentCracklesEnum crackles = 73;  // VARCHAR(5)
+  PreAnaesthesiaAssessmentCrepitationsEnum crepitations = 74;  // VARCHAR(5)
+  PreAnaesthesiaAssessmentChestWallDeformityEnum chest_wall_deformity = 75;  // VARCHAR(5)
+  PreAnaesthesiaAssessmentAsthmaEnum asthma = 76;  // VARCHAR(20)
+  PreAnaesthesiaAssessmentCopdEnum copd = 77;  // VARCHAR(20)
+  PreAnaesthesiaAssessmentCxrPerformedEnum cxr_performed = 78;  // VARCHAR(5)
+  string cxr_findings = 79;  // TEXT
+  PreAnaesthesiaAssessmentPftPerformedEnum pft_performed = 80;  // VARCHAR(5)
+  double pft_fev1_percent_predicted = 81;  // NUMERIC(4,1) — numeric(4,1)
+  double pft_fev1_fvc_ratio = 82;  // NUMERIC(3,2) — numeric(3,2)
+  PreAnaesthesiaAssessmentSmokingStatusEnum smoking_status = 83;  // VARCHAR(20)
+  double pack_years = 84;  // NUMERIC(5,1) — numeric(5,1)
+  PreAnaesthesiaAssessmentCovidHistoryEnum covid_history = 85;  // VARCHAR(20)
+  int32 days_since_covid = 86;  // INTEGER
+  PreAnaesthesiaAssessmentCovidUnresolvedSymptomsEnum covid_unresolved_symptoms = 87;  // VARCHAR(5)
+  int32 gcs_total = 88;  // INTEGER
+  int32 gcs_eye = 89;  // INTEGER
+  int32 gcs_verbal = 90;  // INTEGER
+  int32 gcs_motor = 91;  // INTEGER
+  PreAnaesthesiaAssessmentCognitionToolEnum cognition_tool = 92;  // VARCHAR(20)
+  int32 cognition_score = 93;  // INTEGER
+  PreAnaesthesiaAssessmentCognitiveImpairmentEnum cognitive_impairment = 94;  // VARCHAR(20)
+  PreAnaesthesiaAssessmentCapacityConcernEnum capacity_concern = 95;  // VARCHAR(5)
+  string cranial_nerves_notes = 96;  // TEXT
+  PreAnaesthesiaAssessmentMotorPowerEnum motor_power = 97;  // VARCHAR(20)
+  string sensory_notes = 98;  // TEXT
+  PreAnaesthesiaAssessmentReflexesEnum reflexes = 99;  // VARCHAR(20)
+  PreAnaesthesiaAssessmentRecentStrokeTiaEnum recent_stroke_tia = 100;  // VARCHAR(5)
+  int32 days_since_stroke_tia = 101;  // INTEGER
+  PreAnaesthesiaAssessmentSeizureDisorderEnum seizure_disorder = 102;  // VARCHAR(5)
+  int32 creatinine_umol_l = 103;  // INTEGER
+  int32 egfr_ml_min_1_73m2 = 104;  // INTEGER
+  double urea_mmol_l = 105;  // NUMERIC(4,1) — numeric(4,1)
+  double potassium_mmol_l = 106;  // NUMERIC(3,1) — numeric(3,1)
+  double sodium_mmol_l = 107;  // NUMERIC(4,1) — numeric(4,1)
+  PreAnaesthesiaAssessmentDialysisStatusEnum dialysis_status = 108;  // VARCHAR(20)
+  PreAnaesthesiaAssessmentCkdStageEnum ckd_stage = 109;  // VARCHAR(5)
+  int32 bilirubin_umol_l = 110;  // INTEGER
+  int32 alt_u_l = 111;  // INTEGER
+  int32 ast_u_l = 112;  // INTEGER
+  int32 alp_u_l = 113;  // INTEGER
+  double albumin_g_l = 114;  // NUMERIC(4,1) — numeric(4,1)
+  PreAnaesthesiaAssessmentChronicLiverDiseaseEnum chronic_liver_disease = 115;  // VARCHAR(20)
+  PreAnaesthesiaAssessmentChildPughClassEnum child_pugh_class = 116;  // VARCHAR(5)
+  int32 hb_g_l = 117;  // INTEGER
+  double wcc_10_9_l = 118;  // NUMERIC(4,1) — numeric(4,1)
+  int32 platelets_10_9_l = 119;  // INTEGER
+  double mcv_fl = 120;  // NUMERIC(4,1) — numeric(4,1)
+  int32 ferritin_ug_l = 121;  // INTEGER
+  double transferrin_saturation_percent = 122;  // NUMERIC(4,1) — numeric(4,1)
+  double inr = 123;  // NUMERIC(4,2) — numeric(4,2)
+  double aptt_seconds = 124;  // NUMERIC(4,1) — numeric(4,1)
+  double fibrinogen_g_l = 125;  // NUMERIC(3,1) — numeric(3,1)
+  PreAnaesthesiaAssessmentOnAnticoagulantEnum on_anticoagulant = 126;  // VARCHAR(5)
+  PreAnaesthesiaAssessmentAnticoagulantTypeEnum anticoagulant_type = 127;  // VARCHAR(50)
+  string anticoagulant_hold_plan = 128;  // VARCHAR(255) — max 255 chars
+  PreAnaesthesiaAssessmentGroupAndSaveEnum group_and_save = 129;  // VARCHAR(20)
+  int32 crossmatch_units = 130;  // INTEGER
+  string last_transfusion_date = 131;  // DATE — iso 8601 date
+  PreAnaesthesiaAssessmentAnaemiaSeverityEnum anaemia_severity = 132;  // VARCHAR(20)
+  PreAnaesthesiaAssessmentDiabetesTypeEnum diabetes_type = 133;  // VARCHAR(20)
+  PreAnaesthesiaAssessmentDiabetesOnInsulinEnum diabetes_on_insulin = 134;  // VARCHAR(5)
+  int32 hba1c_mmol_mol = 135;  // INTEGER
+  double fasting_glucose_mmol_l = 136;  // NUMERIC(3,1) — numeric(3,1)
+  double random_glucose_mmol_l = 137;  // NUMERIC(3,1) — numeric(3,1)
+  PreAnaesthesiaAssessmentDiabetesControlEnum diabetes_control = 138;  // VARCHAR(20)
+  string diabetes_complications = 139;  // VARCHAR(255) — max 255 chars
+  PreAnaesthesiaAssessmentThyroidStatusEnum thyroid_status = 140;  // VARCHAR(20)
+  double tsh_mu_l = 141;  // NUMERIC(6,2) — numeric(6,2)
+  PreAnaesthesiaAssessmentAdrenalStatusEnum adrenal_status = 142;  // VARCHAR(30)
+  PreAnaesthesiaAssessmentOnLongTermSteroidsEnum on_long_term_steroids = 143;  // VARCHAR(5)
+  double steroid_dose_mg = 144;  // NUMERIC(5,1) — numeric(5,1)
+  string steroid_cover_plan = 145;  // VARCHAR(255) — max 255 chars
+  PreAnaesthesiaAssessmentAbdominalExamEnum abdominal_exam = 146;  // VARCHAR(30)
+  string abdominal_notes = 147;  // TEXT
+  PreAnaesthesiaAssessmentRefluxSymptomsEnum reflux_symptoms = 148;  // VARCHAR(20)
+  PreAnaesthesiaAssessmentHiatusHerniaEnum hiatus_hernia = 149;  // VARCHAR(5)
+  PreAnaesthesiaAssessmentPreviousGastricSurgeryEnum previous_gastric_surgery = 150;  // VARCHAR(5)
+  PreAnaesthesiaAssessmentNgTubeEnum ng_tube = 151;  // VARCHAR(5)
+  PreAnaesthesiaAssessmentStomaEnum stoma = 152;  // VARCHAR(20)
+  PreAnaesthesiaAssessmentFastingConfirmedEnum fasting_confirmed = 153;  // VARCHAR(5)
+  string last_solid_food_at = 154;  // TIMESTAMPTZ — iso 8601
+  string last_clear_fluid_at = 155;  // TIMESTAMPTZ — iso 8601
+  PreAnaesthesiaAssessmentRapidSequenceInductionNeededEnum rapid_sequence_induction_needed = 156;  // VARCHAR(5)
+  PreAnaesthesiaAssessmentSpineExamEnum spine_exam = 157;  // VARCHAR(30)
+  string spine_notes = 158;  // TEXT
+  PreAnaesthesiaAssessmentNeuraxialSuitableEnum neuraxial_suitable = 159;  // VARCHAR(10)
+  PreAnaesthesiaAssessmentJointRomHipEnum joint_rom_hip = 160;  // VARCHAR(20)
+  PreAnaesthesiaAssessmentJointRomShoulderEnum joint_rom_shoulder = 161;  // VARCHAR(20)
+  PreAnaesthesiaAssessmentJointRomNeckEnum joint_rom_neck = 162;  // VARCHAR(20)
+  PreAnaesthesiaAssessmentSkinIvAccessEnum skin_iv_access = 163;  // VARCHAR(20)
+  PreAnaesthesiaAssessmentSkinBlockSiteEnum skin_block_site = 164;  // VARCHAR(20)
+  PreAnaesthesiaAssessmentPressureUlcerRiskEnum pressure_ulcer_risk = 165;  // VARCHAR(20)
+  string name = 166;  // VARCHAR(255) — max 255 chars
+  string dose = 167;  // VARCHAR(100) — max 100 chars
+  PreAnaesthesiaAssessmentRouteEnum route = 168;  // VARCHAR(30)
+  string frequency = 169;  // VARCHAR(100) — max 100 chars
+  string indication = 170;  // VARCHAR(255) — max 255 chars
+  PreAnaesthesiaAssessmentClassEnum class = 171;  // VARCHAR(50)
+  PreAnaesthesiaAssessmentPerioperativeActionEnum perioperative_action = 172;  // VARCHAR(20)
+  string perioperative_notes = 173;  // VARCHAR(500) — max 500 chars
+  string last_dose_at = 174;  // TIMESTAMPTZ — iso 8601
+  string allergen = 175;  // VARCHAR(255) — max 255 chars
+  PreAnaesthesiaAssessmentCategoryEnum category = 176;  // VARCHAR(30)
+  PreAnaesthesiaAssessmentReactionTypeEnum reaction_type = 177;  // VARCHAR(30)
+  PreAnaesthesiaAssessmentReactionSeverityEnum reaction_severity = 178;  // VARCHAR(20)
+  string reaction_notes = 179;  // VARCHAR(500) — max 500 chars
+  PreAnaesthesiaAssessmentVerifiedEnum verified = 180;  // VARCHAR(5)
+  double mets_estimate = 181;  // NUMERIC(3,1) — numeric(3,1)
+  double dasi_score = 182;  // NUMERIC(4,1) — numeric(4,1)
+  int32 ecog_performance_status = 183;  // INTEGER
+  int32 clinical_frailty_scale = 184;  // INTEGER
+  int32 six_minute_walk_metres = 185;  // INTEGER
+  int32 sts_one_minute_reps = 186;  // INTEGER
+  double tug_seconds = 187;  // NUMERIC(4,1) — numeric(4,1)
+  PreAnaesthesiaAssessmentCpetPerformedEnum cpet_performed = 188;  // VARCHAR(5)
+  double cpet_vo2_peak_ml_kg_min = 189;  // NUMERIC(4,1) — numeric(4,1)
+  double cpet_anaerobic_threshold_ml_kg_min = 190;  // NUMERIC(4,1) — numeric(4,1)
+  string cpet_notes = 191;  // TEXT
+  PreAnaesthesiaAssessmentMalnutritionRiskEnum malnutrition_risk = 192;  // VARCHAR(20)
+  double unintentional_weight_loss_kg = 193;  // NUMERIC(4,1) — numeric(4,1)
+  PreAnaesthesiaAssessmentTechniqueEnum technique = 194;  // VARCHAR(30)
+  PreAnaesthesiaAssessmentAirwayPlanEnum airway_plan = 195;  // VARCHAR(30)
+  PreAnaesthesiaAssessmentRsiPlannedEnum rsi_planned = 196;  // VARCHAR(5)
+  PreAnaesthesiaAssessmentMonitoringLevelEnum monitoring_level = 197;  // VARCHAR(20)
+  string analgesia_plan = 198;  // VARCHAR(500) — max 500 chars
+  string regional_block_planned = 199;  // VARCHAR(100) — max 100 chars
+  string dvt_prophylaxis = 200;  // VARCHAR(100) — max 100 chars
+  string antibiotic_prophylaxis = 201;  // VARCHAR(100) — max 100 chars
+  PreAnaesthesiaAssessmentPostOpDispositionEnum post_op_disposition = 202;  // VARCHAR(20)
+  int32 anticipated_length_of_stay_days = 203;  // INTEGER
+  string special_equipment = 204;  // VARCHAR(500) — max 500 chars
+  string blood_products_required = 205;  // VARCHAR(100) — max 100 chars
+}

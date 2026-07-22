@@ -1,0 +1,222 @@
+# Generated from sql/. Do not edit by hand.
+# SOURCE: pre_anaesthesia_assessment_grade
+openapi: 3.1.0
+info:
+  title: Pre Anaesthesia Assessment — PreAnaesthesiaAssessmentGrade
+  version: 1.0.0
+  description: Computed and signed-off grading result. Stores both the engine-computed ASA grade and the clinician-final grade with an override reason.
+paths:
+  /pre-anaesthesia-assessment-grades:
+    get:
+      summary: List PreAnaesthesiaAssessmentGrade records
+      operationId: listPreAnaesthesiaAssessmentGrade
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of PreAnaesthesiaAssessmentGrade records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/PreAnaesthesiaAssessmentGrade"
+    post:
+      summary: Create a new PreAnaesthesiaAssessmentGrade
+      operationId: createPreAnaesthesiaAssessmentGrade
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/PreAnaesthesiaAssessmentGrade"
+      responses:
+        "201":
+          description: The newly created PreAnaesthesiaAssessmentGrade
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PreAnaesthesiaAssessmentGrade"
+        "400":
+          description: Validation error
+  /pre-anaesthesia-assessment-grades/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one PreAnaesthesiaAssessmentGrade by id
+      operationId: getPreAnaesthesiaAssessmentGrade
+      responses:
+        "200":
+          description: The requested PreAnaesthesiaAssessmentGrade
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PreAnaesthesiaAssessmentGrade"
+        "404":
+          description: PreAnaesthesiaAssessmentGrade not found
+    patch:
+      summary: Update an existing PreAnaesthesiaAssessmentGrade
+      operationId: updatePreAnaesthesiaAssessmentGrade
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/PreAnaesthesiaAssessmentGrade"
+      responses:
+        "200":
+          description: The updated PreAnaesthesiaAssessmentGrade
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PreAnaesthesiaAssessmentGrade"
+        "404":
+          description: PreAnaesthesiaAssessmentGrade not found
+    delete:
+      summary: Soft-delete a PreAnaesthesiaAssessmentGrade
+      operationId: deletePreAnaesthesiaAssessmentGrade
+      responses:
+        "204":
+          description: PreAnaesthesiaAssessmentGrade deleted
+        "404":
+          description: PreAnaesthesiaAssessmentGrade not found
+components:
+  schemas:
+    PreAnaesthesiaAssessmentGrade:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was updated most-recently.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was deleted a.k.a. soft-removed.
+        pre_anaesthesia_assessment_id:
+          type: string
+          format: uuid
+          description: Foreign key to the pre_anaesthesia_assessment table.
+        computed_asa_grade:
+          type: string
+          enum:
+            - I
+            - II
+            - III
+            - IV
+            - V
+            - VI
+            - ""
+          description: ASA grade computed by the engine from clinician-observed data.
+        final_asa_grade:
+          type: string
+          enum:
+            - I
+            - II
+            - III
+            - IV
+            - V
+            - VI
+            - ""
+          description: ASA grade signed off by the clinician (may equal or differ from computed).
+        asa_emergency_suffix:
+          type: string
+          enum:
+            - E
+            - ""
+          description: "Emergency suffix: E if the procedure is emergency, empty otherwise."
+        override_reason:
+          type: string
+          maxLength: 500
+          description: Reason the clinician set final differently from computed (mandatory when they differ).
+        mallampati_class:
+          type: string
+          enum:
+            - I
+            - II
+            - III
+            - IV
+            - ""
+          description: Mallampati airway class as per step 4.
+        rcri_score:
+          type: integer
+          format: int32
+          description: Revised Cardiac Risk Index score (0-6).
+        stopbang_score:
+          type: integer
+          format: int32
+          description: STOP-BANG score (0-8).
+        frailty_scale:
+          type: integer
+          format: int32
+          description: Clinical Frailty Scale score (1-9).
+        composite_risk:
+          type: string
+          enum:
+            - low
+            - moderate
+            - high
+            - critical
+            - ""
+          description: "Composite perioperative risk: low, moderate, high, critical."
+        recommendation:
+          type: string
+          enum:
+            - proceed
+            - optimise-first
+            - mdt-review
+            - cancel
+            - ""
+          description: "Overall recommendation: proceed, optimise-first, mdt-review, cancel."
+        clinician_notes:
+          type: string
+          description: Free-text clinician summary notes.
+        signed_at:
+          type: string
+          format: date-time
+          description: Timestamp of clinician electronic signature.
+        graded_at:
+          type: string
+          format: date-time
+          description: Timestamp when the engine last computed the result.
+      required:
+        - created_at
+        - updated_at
+        - pre_anaesthesia_assessment_id
+        - computed_asa_grade
+        - final_asa_grade
+        - asa_emergency_suffix
+        - override_reason
+        - mallampati_class
+        - composite_risk
+        - recommendation
+        - clinician_notes
+        - graded_at
+      description: Computed and signed-off grading result. Stores both the engine-computed ASA grade and the clinician-final grade with an override reason.

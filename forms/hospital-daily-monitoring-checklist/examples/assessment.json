@@ -1,0 +1,30 @@
+{
+  "hospitalDailyMonitoringChecklist": {
+    "id": "550e8400-e29b-41d4-a716-000000000001",
+    "createdAt": "2026-04-09T10:00:00+00:00",
+    "updatedAt": "2026-04-09T10:00:00+00:00",
+    "deletedAt": null,
+    "hospitalName": "",
+    "departmentOrSite": "",
+    "inspectionDate": null,
+    "inspectingOfficerName": "",
+    "inspectingOfficerDesignation": "",
+    "overallNotes": "",
+    "actionPlan": "",
+    "status": "draft",
+    "signedAt": null
+  },
+  "hospitalDailyMonitoringChecklistItem": {
+    "id": "550e8400-e29b-41d4-a716-00000000000e",
+    "createdAt": "2026-04-09T10:00:00+00:00",
+    "updatedAt": "2026-04-09T10:00:00+00:00",
+    "deletedAt": null,
+    "hospitalDailyMonitoringChecklistId": "550e8400-e29b-41d4-a716-000000000012",
+    "itemCode": "",
+    "sectionNumber": 11,
+    "sectionTitle": "",
+    "itemText": "",
+    "status": "satisfactory",
+    "remarks": ""
+  }
+}

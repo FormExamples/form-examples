@@ -1,0 +1,27 @@
+# Hospital Daily Monitoring Checklist
+
+> A hospital administrator's / medical superintendent's **daily rounds checklist** that audits **97 concrete operational checkpoints** across **22 hospital areas** — OPD, Causality (Casualty), Dispensary, HR attendance, Ambulance, Diagnostic Facility (Pathology Lab + Radio Imaging), Store, OT/ICU, Labour Room, Wards, House Keeping, Water Supply, Electric Supply, Diet, Hospital Signage, Fire Fighting Equipment, Patient Feedback, Mortuary, Hospital Furniture, Hospital Waste Management, Infection Control Protocols, and Record Room.
+
+## Docs
+
+- [Form description and scoring details](index.md)
+- [Living domain spec — the behavioural contract](spec/index.md)
+- [Agent instructions](AGENTS.md)
+- [Implementation plan](plan.md)
+- [Task tracking](tasks.md)
+- [Changelog](CHANGELOG.md)
+
+## Artefacts
+
+- [SQL migrations — source of truth for the data shape](sql/)
+- [Filled-form JSON fixture + FHIR R5 Bundle examples](examples/)
+- [HTML front-end — single-page wizard + dashboard](front-end-with-html/)
+- [SvelteKit front-end — RESTful wizard + dashboard](front-end-with-svelte/)
+- [Rust Loco JSON-API back-end](back-end-with-loco/)
+
+## Generated representations
+
+- [XML + DTD per SQL table](xml/)
+- [FHIR HL7 R5 JSON per SQL entity](fhir/r5/)
+- [Protocol Buffers schemas](protobuf/)
+- [OpenAPI 3.1 specifications](openapi/)

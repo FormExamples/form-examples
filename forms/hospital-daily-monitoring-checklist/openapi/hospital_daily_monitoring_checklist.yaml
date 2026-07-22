@@ -1,0 +1,169 @@
+# Generated from sql/. Do not edit by hand.
+# SOURCE: hospital_daily_monitoring_checklist
+openapi: 3.1.0
+info:
+  title: Hospital Daily Monitoring Checklist — HospitalDailyMonitoringChecklist
+  version: 1.0.0
+  description: "One daily-monitoring inspection round at one hospital site: who inspected, when, and the sign-off notes."
+paths:
+  /hospital-daily-monitoring-checklists:
+    get:
+      summary: List HospitalDailyMonitoringChecklist records
+      operationId: listHospitalDailyMonitoringChecklist
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of HospitalDailyMonitoringChecklist records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/HospitalDailyMonitoringChecklist"
+    post:
+      summary: Create a new HospitalDailyMonitoringChecklist
+      operationId: createHospitalDailyMonitoringChecklist
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/HospitalDailyMonitoringChecklist"
+      responses:
+        "201":
+          description: The newly created HospitalDailyMonitoringChecklist
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/HospitalDailyMonitoringChecklist"
+        "400":
+          description: Validation error
+  /hospital-daily-monitoring-checklists/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one HospitalDailyMonitoringChecklist by id
+      operationId: getHospitalDailyMonitoringChecklist
+      responses:
+        "200":
+          description: The requested HospitalDailyMonitoringChecklist
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/HospitalDailyMonitoringChecklist"
+        "404":
+          description: HospitalDailyMonitoringChecklist not found
+    patch:
+      summary: Update an existing HospitalDailyMonitoringChecklist
+      operationId: updateHospitalDailyMonitoringChecklist
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/HospitalDailyMonitoringChecklist"
+      responses:
+        "200":
+          description: The updated HospitalDailyMonitoringChecklist
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/HospitalDailyMonitoringChecklist"
+        "404":
+          description: HospitalDailyMonitoringChecklist not found
+    delete:
+      summary: Soft-delete a HospitalDailyMonitoringChecklist
+      operationId: deleteHospitalDailyMonitoringChecklist
+      responses:
+        "204":
+          description: HospitalDailyMonitoringChecklist deleted
+        "404":
+          description: HospitalDailyMonitoringChecklist not found
+components:
+  schemas:
+    HospitalDailyMonitoringChecklist:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was most recently updated.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was soft-deleted.
+        hospital_name:
+          type: string
+          maxLength: 255
+          description: Name of the hospital or facility being inspected.
+        department_or_site:
+          type: string
+          maxLength: 255
+          description: Specific department, ward, or site visited during this round, if narrower than the whole hospital.
+        inspection_date:
+          type: string
+          format: date
+          description: Date the inspection round was carried out.
+        inspecting_officer_name:
+          type: string
+          maxLength: 255
+          description: Name of the inspecting officer (e.g. RMO, Medical Superintendent, hospital administrator).
+        inspecting_officer_designation:
+          type: string
+          maxLength: 255
+          description: Designation / job title of the inspecting officer.
+        overall_notes:
+          type: string
+          description: Free-text overall notes recorded at sign-off.
+        action_plan:
+          type: string
+          description: Free-text action plan recorded at sign-off, addressing needs-attention checkpoints.
+        status:
+          type: string
+          enum:
+            - draft
+            - submitted
+          description: "Submission status: draft or submitted."
+        signed_at:
+          type: string
+          format: date-time
+          description: Timestamp the inspecting officer signed off this round.
+      required:
+        - created_at
+        - updated_at
+        - hospital_name
+        - department_or_site
+        - inspecting_officer_name
+        - inspecting_officer_designation
+        - overall_notes
+        - action_plan
+        - status
+      description: "One daily-monitoring inspection round at one hospital site: who inspected, when, and the sign-off notes."

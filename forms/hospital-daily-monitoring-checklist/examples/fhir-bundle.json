@@ -1,0 +1,192 @@
+{
+  "resourceType": "Bundle",
+  "id": "550e8400-e29b-41d4-a716-000000000063",
+  "type": "document",
+  "timestamp": "2026-04-09T10:00:00+00:00",
+  "meta": {
+    "profile": [
+      "http://hl7.org/fhir/StructureDefinition/Bundle"
+    ],
+    "tag": [
+      {
+        "system": "https://github.com/joelparkerhenderson/form-examples",
+        "code": "example",
+        "display": "Hospital Daily Monitoring Checklist example bundle"
+      }
+    ]
+  },
+  "entry": [
+    {
+      "fullUrl": "urn:uuid:550e8400-e29b-41d4-a716-446655440000",
+      "resource": {
+        "resourceType": "Encounter",
+        "id": "550e8400-e29b-41d4-a716-446655440000",
+        "meta": {
+          "profile": [
+            "http://hl7.org/fhir/StructureDefinition/Encounter"
+          ],
+          "lastUpdated": "2026-04-09T10:00:00+00:00"
+        },
+        "status": "planned",
+        "class": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/v3-ActCode",
+                "code": "AMB",
+                "display": "ambulatory"
+              }
+            ]
+          }
+        ],
+        "type": [
+          {
+            "coding": [
+              {
+                "system": "http://snomed.info/sct",
+                "code": "185349003",
+                "display": "Encounter for check up"
+              }
+            ],
+            "text": "Hospital Daily Monitoring Checklist"
+          }
+        ],
+        "actualPeriod": {
+          "start": "2026-04-09T10:00:00+00:00"
+        }
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:660e8400-e29b-41d4-a716-446655440001",
+      "resource": {
+        "resourceType": "Observation",
+        "id": "660e8400-e29b-41d4-a716-446655440001",
+        "meta": {
+          "profile": [
+            "http://hl7.org/fhir/StructureDefinition/Observation"
+          ],
+          "lastUpdated": "2026-04-09T10:00:00+00:00"
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "survey",
+                "display": "Survey"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "urn:form-examples:hospital-daily-monitoring-checklist",
+              "code": "hospital_daily_monitoring_checklist_item",
+              "display": "Hospital Daily Monitoring Checklist Item"
+            }
+          ]
+        },
+        "encounter": {
+          "reference": "urn:uuid:550e8400-e29b-41d4-a716-446655440000"
+        },
+        "effectiveDateTime": "2026-04-09T10:00:00+00:00",
+        "component": [
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:hospital-daily-monitoring-checklist",
+                  "code": "deleted_at",
+                  "display": "Deleted At"
+                }
+              ]
+            },
+            "valueDateTime": "2026-04-09T10:00:00+00:00"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:hospital-daily-monitoring-checklist",
+                  "code": "item_code",
+                  "display": "Item Code"
+                }
+              ]
+            },
+            "valueString": "ABC123"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:hospital-daily-monitoring-checklist",
+                  "code": "section_number",
+                  "display": "Section Number"
+                }
+              ]
+            },
+            "valueInteger": 2
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:hospital-daily-monitoring-checklist",
+                  "code": "section_title",
+                  "display": "Section Title"
+                }
+              ]
+            },
+            "valueString": "Example Title"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:hospital-daily-monitoring-checklist",
+                  "code": "item_text",
+                  "display": "Item Text"
+                }
+              ]
+            },
+            "valueString": "Example text."
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:hospital-daily-monitoring-checklist",
+                  "code": "status",
+                  "display": "Status"
+                }
+              ]
+            },
+            "valueCodeableConcept": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:hospital-daily-monitoring-checklist:status",
+                  "code": "satisfactory",
+                  "display": "Satisfactory"
+                }
+              ]
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:hospital-daily-monitoring-checklist",
+                  "code": "remarks",
+                  "display": "Remarks"
+                }
+              ]
+            },
+            "valueString": "Example text."
+          }
+        ]
+      }
+    }
+  ]
+}

@@ -1,0 +1,110 @@
+#!/bin/sh
+set -euf
+
+form_kebab_case=patient-reported-outcome-measures
+form_snake_case=patient_reported_outcome_measures
+
+createdb --host=localhost --port=5432 --username=loco --owner=loco "${form_snake_case}_development" || :
+createdb --host=localhost --port=5432 --username=loco --owner=loco "${form_snake_case}_test" || :
+createdb --host=localhost --port=5432 --username=loco --owner=loco "${form_snake_case}_production" || :
+
+loco new --name "${form_snake_case}" --db postgres --bg async --assets none -a
+cd "${form_snake_case}"
+
+# Pin time to a version compatible with cookie 0.18.1 (a fresh loco
+# starter otherwise resolves time 0.3.52, which fails to compile).
+cargo update -p time --precise 0.3.47
+
+cargo loco generate scaffold patient_reported_outcome_measures \
+    deleted_at:tstz \
+    subject_id:string! \
+    visit:string! \
+    assessment_date:date \
+    general_health:int \
+    health_change_vs_year_ago:int \
+    vigorous_activities:int \
+    moderate_activities:int \
+    lifting_carrying_groceries:int \
+    climbing_several_flights:int \
+    climbing_one_flight:int \
+    bending_kneeling_stooping:int \
+    walking_more_than_mile:int \
+    walking_several_hundred_yards:int \
+    walking_one_hundred_yards:int \
+    bathing_dressing:int \
+    cut_down_time_physical:int \
+    accomplished_less_physical:int \
+    limited_in_kind_physical:int \
+    difficulty_performing_physical:int \
+    cut_down_time_emotional:int \
+    accomplished_less_emotional:int \
+    less_careful_than_usual:int \
+    social_activities_interference:int \
+    bodily_pain:int \
+    pain_interference_with_work:int \
+    felt_full_of_life:int \
+    very_nervous:int \
+    so_down_in_dumps:int \
+    felt_calm_peaceful:int \
+    lot_of_energy:int \
+    downhearted_depressed:int \
+    felt_worn_out:int \
+    been_happy:int \
+    felt_tired:int \
+    social_activities_interference_time:int \
+    get_sick_easier:int \
+    as_healthy_as_anybody:int \
+    expect_health_worse:int \
+    health_excellent:int \
+    ndi_pain_intensity:int \
+    ndi_personal_care:int \
+    ndi_lifting:int \
+    ndi_reading:int \
+    ndi_headache:int \
+    ndi_concentration:int \
+    ndi_work:int \
+    ndi_driving:int \
+    ndi_sleeping:int \
+    ndi_recreation:int \
+    mjoa_motor_arms:int \
+    mjoa_motor_legs:int \
+    mjoa_sensation_arms:int \
+    mjoa_sensation_legs:int \
+    mjoa_sensation_trunk:int \
+    mjoa_bladder_function:int \
+    eq5d_mobility:int \
+    eq5d_self_care:int \
+    eq5d_usual_activities:int \
+    eq5d_pain_discomfort:int \
+    eq5d_anxiety_depression:int \
+    eq5d_vas_score:double \
+    --api
+
+cargo loco generate scaffold patient_reported_outcome_measures_score \
+    deleted_at:tstz \
+    patient_reported_outcome_measures:references \
+    sf36_pf:double \
+    sf36_rp:double \
+    sf36_bp:double \
+    sf36_gh:double \
+    sf36_vt:double \
+    sf36_sf:double \
+    sf36_re:double \
+    sf36_mh:double \
+    sf36_pcs_approx:double \
+    sf36_mcs_approx:double \
+    ndi_raw_score:int \
+    ndi_answered_sections:int \
+    ndi_percentage_score:double \
+    ndi_band:string! \
+    mjoa_total_score:int \
+    mjoa_band:string! \
+    eq5d_health_state_descriptor:string! \
+    eq5d_uk_index_value:double \
+    eq5d_vas_score:double \
+    --api
+
+# Convert the freshly-scaffolded nested crate into the canonical route
+# layout: back-end-with-loco/src/${form_snake_case}/*.rs
+cd ..
+"$(git rev-parse --show-toplevel)/bin/route-loco-layout" "${form_kebab_case}"

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE patient_reported_outcome_measures_score SYSTEM "patient_reported_outcome_measures_score.dtd">
+<patient_reported_outcome_measures_score>
+<id>660e8400-e29b-41d4-a716-446655440001</id>
+<created_at>2026-04-09T10:00:00Z</created_at>
+<updated_at>2026-04-09T10:00:00Z</updated_at>
+<deleted_at>2026-04-09T10:00:00Z</deleted_at>
+<patient_reported_outcome_measures_id>550e8400-e29b-41d4-a716-446655440000</patient_reported_outcome_measures_id>
+<sf36_pf>0.0</sf36_pf>
+<sf36_rp>0.0</sf36_rp>
+<sf36_bp>0.0</sf36_bp>
+<sf36_gh>0.0</sf36_gh>
+<sf36_vt>0.0</sf36_vt>
+<sf36_sf>0.0</sf36_sf>
+<sf36_re>0.0</sf36_re>
+<sf36_mh>0.0</sf36_mh>
+<sf36_pcs_approx>0.0</sf36_pcs_approx>
+<sf36_mcs_approx>0.0</sf36_mcs_approx>
+<ndi_raw_score>5</ndi_raw_score>
+<ndi_answered_sections>1</ndi_answered_sections>
+<ndi_percentage_score>5.0</ndi_percentage_score>
+<ndi_band>no-disability</ndi_band>
+<mjoa_total_score>5</mjoa_total_score>
+<mjoa_band>mild</mjoa_band>
+<eq5d_health_state_descriptor></eq5d_health_state_descriptor>
+<eq5d_uk_index_value>5.0</eq5d_uk_index_value>
+<eq5d_vas_score>5.0</eq5d_vas_score>
+</patient_reported_outcome_measures_score>

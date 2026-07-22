@@ -1,0 +1,12 @@
+<!ELEMENT hospital_dashboard_metrics (id,created_at,updated_at,deleted_at,hospital_name,period_month,period_year,prepared_by_name,overall_notes,status,signed_at)>
+<!ELEMENT id (#PCDATA)>
+<!ELEMENT created_at (#PCDATA)>
+<!ELEMENT updated_at (#PCDATA)>
+<!ELEMENT deleted_at (#PCDATA)>
+<!ELEMENT hospital_name (#PCDATA)>
+<!ELEMENT period_month (#PCDATA)>
+<!ELEMENT period_year (#PCDATA)>
+<!ELEMENT prepared_by_name (#PCDATA)>
+<!ELEMENT overall_notes (#PCDATA)>
+<!ELEMENT status (#PCDATA)>
+<!ELEMENT signed_at (#PCDATA)>

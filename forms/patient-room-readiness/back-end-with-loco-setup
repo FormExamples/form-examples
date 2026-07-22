@@ -1,0 +1,56 @@
+#!/bin/sh
+set -euf
+
+form_kebab_case=patient-room-readiness
+form_snake_case=patient_room_readiness
+
+createdb --host=localhost --port=5432 --username=loco --owner=loco "${form_snake_case}_development" || :
+createdb --host=localhost --port=5432 --username=loco --owner=loco "${form_snake_case}_test" || :
+createdb --host=localhost --port=5432 --username=loco --owner=loco "${form_snake_case}_production" || :
+
+loco new --name "${form_snake_case}" --db postgres --bg async --assets none -a
+cd "${form_snake_case}"
+
+# Pin time to a version compatible with cookie 0.18.1 (a fresh loco
+# starter otherwise resolves time 0.3.52, which fails to compile).
+cargo update -p time --precise 0.3.47
+
+cargo loco generate scaffold patient_room_readiness_checklist \
+    deleted_at:tstz \
+    building_name_or_number:string! \
+    room_name_or_number:string! \
+    patient_cot_mattress_side_railings:bool! \
+    attendant_cot_mattress:bool! \
+    call_bell:bool! \
+    cardiac_table_iv_stand:bool! \
+    hot_kettle_glasses:bool! \
+    linen_patient_dress:bool! \
+    landline_numbers:bool! \
+    refrigerator_fan:bool! \
+    television_remote:bool! \
+    dustbin:bool! \
+    bath_towel_handtowels:bool! \
+    wc_dustbins:bool! \
+    washbasin_and_fittings:bool! \
+    bucket_and_mug:bool! \
+    geyser:bool! \
+    soap_dispenser:bool! \
+    toilet_kit:bool! \
+    window_glass_grooves:bool! \
+    sidewalls:bool! \
+    curtain_blind:bool! \
+    chair_sofa:bool! \
+    wall_seepage_water_leakage:bool! \
+    electricity_points_lights:bool! \
+    ceiling_tiles:bool! \
+    door_knobs_stopper:bool! \
+    inspector_name:string! \
+    inspector_email:string! \
+    inspection_date:date \
+    inspection_time:string \
+    --api
+
+# Convert the freshly-scaffolded nested crate into the canonical route
+# layout: back-end-with-loco/src/${form_snake_case}/*.rs
+cd ..
+"$(git rev-parse --show-toplevel)/bin/route-loco-layout" "${form_kebab_case}"

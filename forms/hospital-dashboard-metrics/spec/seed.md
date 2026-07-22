@@ -1,0 +1,79 @@
+# Hospital Dashboard Metrics
+
+---
+- Antibiotics Issuing
+- Culture Results
+- Narcotics Issuing
+---
+- ALOS
+- Bed Occupancy Rate
+- Bed Turnover Rate
+- Mortality Rate
+- Readmssion within 30 days
+- Complete Discharge Summary
+- Incomplete Medical History
+- Medical Records Discrepancy
+- Patient Safety Goals
+- Unplanned Transfer to CCU/ ICU
+- Staffing Ratios (FTEs)
+---
+- ER daily Cases
+- ECG
+- Patients Treated in less than 4 hours
+- Consultants Average Arrival Time
+- Consultants arrived in less than 30 minutes
+- Return to ER room within 24 hours
+- CPR Success Rate
+- Availability of Essintial Supplies
+---
+HAI, CAUTI, VAP, SSI, CLABSI 
+---
+- TAT
+- Blood Utilization
+- Blood Wastage
+---
+- New Registrations
+- OPD Statistics
+- FTE (Staffing Ratios)
+- Visits (by Departments)
+- New Visit Rate
+- Visits (by Physicians)
+- Appointments (by Departments)
+- Walk in Rate
+- Appointments (by Physicians)
+---
+- Surgical Volumes
+- Elective Surgeries Percentage
+- OR Cancellation Percentage
+- VTE Prophylaxis prior/ post to Surgery Compliance to VTE prophylxis form
+- Return to OR within 24 hours
+- The time and use of antibiotics prior to surgery
+--- 
+- Pharmacy Dispencing Quantities
+- Pharmacy Dispencing Cost
+- Medication Errors
+- Availability of Emergency Medication 
+- Expired Items Cost to purchased cost
+---
+- Radiation volumes
+---
+- Arrival times in OPD
+- Clinic Waiting Time
+---
+- Staff Satisfaction Survey
+- Vacancy Rate
+- Exit Survey
+---
+- Patient Stisfaction Survey
+- Patient Complaints Register
+---
+- In Hospital OVR (by Severity)
+- In Hospital OVR (by Type)
+- Responses to OVR
+---
+- No of WO on the timeline
+- PPM completion rate
+- Duration to complete CM
+- Equipment Breakdowns
+- Equipment Card
+- Supplies and equipment variances

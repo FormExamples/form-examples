@@ -1,0 +1,1488 @@
+# Generated from sql/. Do not edit by hand.
+# SOURCE: pre_anaesthesia_assessment
+openapi: 3.1.0
+info:
+  title: Pre Anaesthesia Assessment — PreAnaesthesiaAssessment
+  version: 1.0.0
+  description: "Clinician-led pre-operative assessment: objective findings, scoring inputs (ASA, Mallampati, RCRI, STOP-BANG, Clinical Frailty Scale), planned anaesthesia strategy, and safety flags for adult elective and urgent surgery."
+paths:
+  /pre-anaesthesia-assessments:
+    get:
+      summary: List PreAnaesthesiaAssessment records
+      operationId: listPreAnaesthesiaAssessment
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of PreAnaesthesiaAssessment records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/PreAnaesthesiaAssessment"
+    post:
+      summary: Create a new PreAnaesthesiaAssessment
+      operationId: createPreAnaesthesiaAssessment
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/PreAnaesthesiaAssessment"
+      responses:
+        "201":
+          description: The newly created PreAnaesthesiaAssessment
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PreAnaesthesiaAssessment"
+        "400":
+          description: Validation error
+  /pre-anaesthesia-assessments/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one PreAnaesthesiaAssessment by id
+      operationId: getPreAnaesthesiaAssessment
+      responses:
+        "200":
+          description: The requested PreAnaesthesiaAssessment
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PreAnaesthesiaAssessment"
+        "404":
+          description: PreAnaesthesiaAssessment not found
+    patch:
+      summary: Update an existing PreAnaesthesiaAssessment
+      operationId: updatePreAnaesthesiaAssessment
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/PreAnaesthesiaAssessment"
+      responses:
+        "200":
+          description: The updated PreAnaesthesiaAssessment
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PreAnaesthesiaAssessment"
+        "404":
+          description: PreAnaesthesiaAssessment not found
+    delete:
+      summary: Soft-delete a PreAnaesthesiaAssessment
+      operationId: deletePreAnaesthesiaAssessment
+      responses:
+        "204":
+          description: PreAnaesthesiaAssessment deleted
+        "404":
+          description: PreAnaesthesiaAssessment not found
+components:
+  schemas:
+    PreAnaesthesiaAssessment:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was updated most-recently.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was deleted a.k.a. soft-removed.
+        patient_id:
+          type: string
+          format: uuid
+          description: Foreign key to the patient being assessed.
+        clinician_id:
+          type: string
+          format: uuid
+          description: Foreign key to the clinician performing the assessment.
+        status:
+          type: string
+          enum:
+            - draft
+            - submitted
+            - reviewed
+            - urgent
+          description: "Lifecycle status: draft, submitted, reviewed, or urgent."
+        site_name:
+          type: string
+          maxLength: 255
+          description: Site or hospital where the assessment is performed.
+        assessment_date:
+          type: string
+          format: date
+          description: Date the assessment was performed.
+        assessment_time:
+          type: string
+          format: time
+          description: Time of day the assessment was performed.
+        planned_procedure:
+          type: string
+          maxLength: 500
+          description: Description of the planned surgical procedure.
+        surgical_specialty:
+          type: string
+          maxLength: 100
+          description: Surgical specialty responsible for the procedure.
+        urgency:
+          type: string
+          enum:
+            - elective
+            - urgent
+            - emergency
+            - immediate
+            - ""
+          description: "Procedure urgency (NCEPOD): elective, urgent, emergency, or immediate."
+        laterality:
+          type: string
+          enum:
+            - left
+            - right
+            - bilateral
+            - midline
+            - na
+            - ""
+          description: "Side of the body: left, right, bilateral, midline, or na."
+        surgical_severity:
+          type: string
+          enum:
+            - minor
+            - intermediate
+            - major
+            - major-plus
+            - ""
+          description: "Surgical severity grade (NICE): minor, intermediate, major, or major-plus."
+        anticipated_blood_loss_ml:
+          type: integer
+          format: int32
+          description: Expected intraoperative blood loss in millilitres.
+        anticipated_duration_minutes:
+          type: integer
+          format: int32
+          description: Expected operative duration in minutes.
+        consultant_surgeon:
+          type: string
+          maxLength: 255
+          description: Name of the responsible consultant surgeon.
+        planned_date:
+          type: string
+          format: date
+          description: Planned date of the operation.
+        systolic_bp:
+          type: integer
+          format: int32
+          description: Resting systolic blood pressure in mmHg.
+        diastolic_bp:
+          type: integer
+          format: int32
+          description: Resting diastolic blood pressure in mmHg.
+        heart_rate:
+          type: integer
+          format: int32
+          description: Resting heart rate in beats per minute.
+        respiratory_rate:
+          type: integer
+          format: int32
+          description: Resting respiratory rate in breaths per minute.
+        spo2_percent:
+          type: number
+          format: double
+          description: Peripheral oxygen saturation as a percentage.
+        temperature_celsius:
+          type: number
+          format: double
+          description: Core body temperature in degrees Celsius.
+        capillary_refill_seconds:
+          type: number
+          format: double
+          description: Capillary refill time in seconds.
+        pain_score_0_10:
+          type: integer
+          format: int32
+          description: Patient-reported resting pain on a 0-10 numeric rating scale.
+        on_room_air:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Whether SpO2 was measured on room air (yes/no).
+        supplemental_oxygen_litres:
+          type: number
+          format: double
+          description: Supplemental oxygen flow rate in litres per minute, if given.
+        mallampati_class:
+          type: string
+          enum:
+            - I
+            - II
+            - III
+            - IV
+            - ""
+          description: Mallampati airway classification I-IV.
+        thyromental_distance_cm:
+          type: number
+          format: double
+          description: Thyromental distance in centimetres.
+        mouth_opening_cm:
+          type: number
+          format: double
+          description: Maximal mouth opening in centimetres.
+        inter_incisor_gap_cm:
+          type: number
+          format: double
+          description: Inter-incisor gap at maximal mouth opening in centimetres.
+        neck_rom:
+          type: string
+          enum:
+            - full
+            - reduced
+            - severely-limited
+            - ""
+          description: "Cervical range of motion for airway assessment: full, reduced, or severely-limited."
+        cervical_spine_stability:
+          type: string
+          enum:
+            - stable
+            - limited
+            - unstable
+            - ""
+          description: "Cervical spine stability: stable, limited, or unstable."
+        dentition:
+          type: string
+          enum:
+            - good
+            - loose-teeth
+            - caps-crowns
+            - edentulous
+            - dentures
+            - ""
+          description: "Dentition assessment: good, loose-teeth, caps-crowns, edentulous, or dentures."
+        beard:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Presence of a beard that may impede mask seal.
+        upper_lip_bite_test:
+          type: string
+          enum:
+            - I
+            - II
+            - III
+            - ""
+          description: Upper lip bite test grade I, II, or III.
+        prior_difficult_intubation:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Documented history of previous difficult intubation.
+        stopbang_snoring:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: "STOP-BANG item: loud snoring."
+        stopbang_tired:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: "STOP-BANG item: daytime tiredness or fatigue."
+        stopbang_observed_apnoea:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: "STOP-BANG item: observed apnoea during sleep."
+        stopbang_pressure:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: "STOP-BANG item: high blood pressure (treated or untreated)."
+        stopbang_bmi_gt35:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: "STOP-BANG item: BMI greater than 35 kg/m2."
+        stopbang_age_gt50:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: "STOP-BANG item: age greater than 50 years."
+        stopbang_neck_gt40:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: "STOP-BANG item: neck circumference greater than 40 cm."
+        stopbang_male:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: "STOP-BANG item: male sex."
+        airway_notes:
+          type: string
+          description: Free-text clinician notes on airway assessment.
+        heart_rhythm:
+          type: string
+          enum:
+            - sinus
+            - atrial-fibrillation
+            - flutter
+            - heart-block
+            - paced
+            - other
+            - ""
+          description: Observed cardiac rhythm on examination.
+        murmur_present:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Presence of a cardiac murmur on auscultation.
+        murmur_description:
+          type: string
+          maxLength: 255
+          description: Free-text description of any cardiac murmur.
+        peripheral_pulses:
+          type: string
+          enum:
+            - normal
+            - reduced
+            - absent
+            - ""
+          description: "Peripheral pulses: normal, reduced, or absent."
+        jvp_raised:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Whether the jugular venous pressure is elevated.
+        peripheral_oedema:
+          type: string
+          enum:
+            - none
+            - mild
+            - moderate
+            - severe
+            - ""
+          description: "Severity of peripheral oedema: none, mild, moderate, or severe."
+        ecg_performed:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Whether a 12-lead ECG was performed for this assessment.
+        ecg_rhythm:
+          type: string
+          maxLength: 50
+          description: Reported ECG rhythm.
+        ecg_rate_bpm:
+          type: integer
+          format: int32
+          description: ECG ventricular rate in beats per minute.
+        ecg_axis:
+          type: string
+          enum:
+            - normal
+            - left
+            - right
+            - extreme
+            - ""
+          description: "ECG electrical axis: normal, left, right, or extreme."
+        ecg_ischaemic_changes:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Whether ischaemic changes are present on the ECG.
+        ecg_notes:
+          type: string
+          description: Free-text ECG interpretation notes.
+        echo_performed:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Whether a transthoracic echocardiogram was performed.
+        echo_ef_percent:
+          type: integer
+          format: int32
+          description: Left ventricular ejection fraction as a percentage.
+        echo_notes:
+          type: string
+          description: Free-text echocardiogram interpretation notes.
+        history_ihd:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: History of ischaemic heart disease (RCRI criterion).
+        history_chf:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: History of congestive heart failure (RCRI criterion).
+        history_stroke_tia:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: History of stroke or transient ischaemic attack (RCRI criterion).
+        recent_mi_within_3_months:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Myocardial infarction within the past three months.
+        pacemaker_or_icd:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Implanted pacemaker or implantable cardioverter-defibrillator present.
+        severe_valve_dysfunction:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Documented severe valvular dysfunction.
+        active_angina:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Active unstable anginal symptoms.
+        breath_sounds:
+          type: string
+          enum:
+            - normal
+            - reduced
+            - bronchial
+            - silent
+            - ""
+          description: "Auscultated breath sounds: normal, reduced, bronchial, or silent."
+        wheeze:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Audible wheeze on auscultation.
+        crackles:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Audible crackles on auscultation.
+        crepitations:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Audible crepitations on auscultation.
+        chest_wall_deformity:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Presence of chest wall deformity.
+        asthma:
+          type: string
+          enum:
+            - none
+            - controlled
+            - uncontrolled
+            - ""
+          description: "Asthma status: none, controlled, or uncontrolled."
+        copd:
+          type: string
+          enum:
+            - none
+            - mild
+            - moderate
+            - severe
+            - ""
+          description: "COPD severity: none, mild, moderate, or severe."
+        cxr_performed:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Whether a chest X-ray was performed.
+        cxr_findings:
+          type: string
+          description: Free-text chest X-ray findings.
+        pft_performed:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Whether pulmonary function tests were performed.
+        pft_fev1_percent_predicted:
+          type: number
+          format: double
+          description: FEV1 as a percentage of predicted.
+        pft_fev1_fvc_ratio:
+          type: number
+          format: double
+          description: FEV1/FVC ratio.
+        smoking_status:
+          type: string
+          enum:
+            - never
+            - ex
+            - current
+            - ""
+          description: "Smoking status: never, ex, or current."
+        pack_years:
+          type: number
+          format: double
+          description: Lifetime smoking exposure in pack-years.
+        covid_history:
+          type: string
+          enum:
+            - never
+            - recovered
+            - recent
+            - long-covid
+            - ""
+          description: "COVID-19 history category: never, recovered, recent, or long-covid."
+        days_since_covid:
+          type: integer
+          format: int32
+          description: Days since onset of acute COVID-19.
+        covid_unresolved_symptoms:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Whether post-COVID symptoms remain unresolved.
+        gcs_total:
+          type: integer
+          format: int32
+          description: Total Glasgow Coma Scale score, range 3-15.
+        gcs_eye:
+          type: integer
+          format: int32
+          description: GCS eye-opening component, range 1-4.
+        gcs_verbal:
+          type: integer
+          format: int32
+          description: GCS verbal component, range 1-5.
+        gcs_motor:
+          type: integer
+          format: int32
+          description: GCS motor component, range 1-6.
+        cognition_tool:
+          type: string
+          enum:
+            - AMT-4
+            - MOCA
+            - MMSE
+            - none
+            - ""
+          description: "Cognitive screening tool used: AMT-4, MOCA, MMSE, or none."
+        cognition_score:
+          type: integer
+          format: int32
+          description: Raw score reported by the cognitive screening tool.
+        cognitive_impairment:
+          type: string
+          enum:
+            - none
+            - mild
+            - moderate
+            - severe
+            - ""
+          description: "Clinical grade of cognitive impairment: none, mild, moderate, or severe."
+        capacity_concern:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Concern about the patient capacity to consent to the procedure.
+        cranial_nerves_notes:
+          type: string
+          description: Free-text notes on cranial nerve examination.
+        motor_power:
+          type: string
+          enum:
+            - normal
+            - reduced
+            - severely-reduced
+            - ""
+          description: "Global motor power grading: normal, reduced, or severely-reduced."
+        sensory_notes:
+          type: string
+          description: Free-text notes on sensory examination.
+        reflexes:
+          type: string
+          enum:
+            - normal
+            - hyperreflexic
+            - hyporeflexic
+            - absent
+            - ""
+          description: "Reflex findings: normal, hyperreflexic, hyporeflexic, or absent."
+        recent_stroke_tia:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Recent stroke or TIA relevant to perioperative risk.
+        days_since_stroke_tia:
+          type: integer
+          format: int32
+          description: Days since the most recent stroke or TIA.
+        seizure_disorder:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Active seizure disorder.
+        creatinine_umol_l:
+          type: integer
+          format: int32
+          description: Serum creatinine in micromoles per litre.
+        egfr_ml_min_1_73m2:
+          type: integer
+          format: int32
+          description: Estimated glomerular filtration rate in mL/min/1.73 m2.
+        urea_mmol_l:
+          type: number
+          format: double
+          description: Serum urea in millimoles per litre.
+        potassium_mmol_l:
+          type: number
+          format: double
+          description: Serum potassium in millimoles per litre.
+        sodium_mmol_l:
+          type: number
+          format: double
+          description: Serum sodium in millimoles per litre.
+        dialysis_status:
+          type: string
+          enum:
+            - none
+            - peritoneal
+            - haemodialysis
+            - haemofiltration
+            - ""
+          description: "Dialysis modality: none, peritoneal, haemodialysis, or haemofiltration."
+        ckd_stage:
+          type: string
+          enum:
+            - "1"
+            - "2"
+            - 3a
+            - 3b
+            - "4"
+            - "5"
+            - ""
+          description: Chronic kidney disease stage 1, 2, 3a, 3b, 4, or 5.
+        bilirubin_umol_l:
+          type: integer
+          format: int32
+          description: Serum bilirubin in micromoles per litre.
+        alt_u_l:
+          type: integer
+          format: int32
+          description: Alanine aminotransferase in units per litre.
+        ast_u_l:
+          type: integer
+          format: int32
+          description: Aspartate aminotransferase in units per litre.
+        alp_u_l:
+          type: integer
+          format: int32
+          description: Alkaline phosphatase in units per litre.
+        albumin_g_l:
+          type: number
+          format: double
+          description: Serum albumin in grams per litre.
+        chronic_liver_disease:
+          type: string
+          enum:
+            - none
+            - compensated
+            - decompensated
+            - ""
+          description: "Chronic liver disease status: none, compensated, or decompensated."
+        child_pugh_class:
+          type: string
+          enum:
+            - A
+            - B
+            - C
+            - ""
+          description: Child-Pugh class A, B, or C.
+        hb_g_l:
+          type: integer
+          format: int32
+          description: Haemoglobin in grams per litre.
+        wcc_10_9_l:
+          type: number
+          format: double
+          description: White cell count in 10^9/L.
+        platelets_10_9_l:
+          type: integer
+          format: int32
+          description: Platelet count in 10^9/L.
+        mcv_fl:
+          type: number
+          format: double
+          description: Mean corpuscular volume in femtolitres.
+        ferritin_ug_l:
+          type: integer
+          format: int32
+          description: Serum ferritin in micrograms per litre.
+        transferrin_saturation_percent:
+          type: number
+          format: double
+          description: Transferrin saturation as a percentage.
+        inr:
+          type: number
+          format: double
+          description: International normalised ratio.
+        aptt_seconds:
+          type: number
+          format: double
+          description: Activated partial thromboplastin time in seconds.
+        fibrinogen_g_l:
+          type: number
+          format: double
+          description: Fibrinogen concentration in grams per litre.
+        on_anticoagulant:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Whether the patient is on an anticoagulant or antiplatelet agent.
+        anticoagulant_type:
+          type: string
+          enum:
+            - warfarin
+            - apixaban
+            - rivaroxaban
+            - edoxaban
+            - dabigatran
+            - lmwh
+            - heparin-iv
+            - aspirin
+            - clopidogrel
+            - ticagrelor
+            - none
+            - ""
+          description: Primary anticoagulant or antiplatelet agent in use.
+        anticoagulant_hold_plan:
+          type: string
+          maxLength: 255
+          description: Perioperative hold or bridging plan for the anticoagulant.
+        group_and_save:
+          type: string
+          enum:
+            - not-required
+            - ordered
+            - valid
+            - expired
+            - ""
+          description: "Group-and-save status: not-required, ordered, valid, or expired."
+        crossmatch_units:
+          type: integer
+          format: int32
+          description: Number of crossmatched red cell units requested.
+        last_transfusion_date:
+          type: string
+          format: date
+          description: Date of the most recent blood transfusion.
+        anaemia_severity:
+          type: string
+          enum:
+            - none
+            - mild
+            - moderate
+            - severe
+            - ""
+          description: "Anaemia severity: none, mild, moderate, or severe."
+        diabetes_type:
+          type: string
+          enum:
+            - none
+            - type-1
+            - type-2
+            - gestational
+            - other
+            - ""
+          description: "Diabetes classification: none, type-1, type-2, gestational, or other."
+        diabetes_on_insulin:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Whether the patient uses insulin.
+        hba1c_mmol_mol:
+          type: integer
+          format: int32
+          description: HbA1c in mmol/mol.
+        fasting_glucose_mmol_l:
+          type: number
+          format: double
+          description: Fasting plasma glucose in millimoles per litre.
+        random_glucose_mmol_l:
+          type: number
+          format: double
+          description: Random plasma glucose in millimoles per litre.
+        diabetes_control:
+          type: string
+          enum:
+            - well-controlled
+            - suboptimal
+            - poor
+            - ""
+          description: "Clinical judgement of glycaemic control: well-controlled, suboptimal, or poor."
+        diabetes_complications:
+          type: string
+          maxLength: 255
+          description: Free-text list of diabetic complications.
+        thyroid_status:
+          type: string
+          enum:
+            - euthyroid
+            - hypothyroid
+            - hyperthyroid
+            - ""
+          description: "Thyroid functional status: euthyroid, hypothyroid, or hyperthyroid."
+        tsh_mu_l:
+          type: number
+          format: double
+          description: Thyroid-stimulating hormone in milli-units per litre.
+        adrenal_status:
+          type: string
+          enum:
+            - normal
+            - addisons
+            - cushings
+            - on-steroid-cover
+            - ""
+          description: "Adrenal functional status: normal, addisons, cushings, or on-steroid-cover."
+        on_long_term_steroids:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Whether the patient takes long-term corticosteroids.
+        steroid_dose_mg:
+          type: number
+          format: double
+          description: Current steroid dose in milligrams prednisolone equivalent.
+        steroid_cover_plan:
+          type: string
+          maxLength: 255
+          description: Perioperative steroid cover plan.
+        abdominal_exam:
+          type: string
+          enum:
+            - normal
+            - distended
+            - tender
+            - organomegaly
+            - other
+            - ""
+          description: "Abdominal examination findings: normal, distended, tender, organomegaly, or other."
+        abdominal_notes:
+          type: string
+          description: Free-text abdominal examination notes.
+        reflux_symptoms:
+          type: string
+          enum:
+            - none
+            - occasional
+            - frequent
+            - severe
+            - ""
+          description: "Severity of gastro-oesophageal reflux symptoms: none, occasional, frequent, or severe."
+        hiatus_hernia:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Documented hiatus hernia.
+        previous_gastric_surgery:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: History of previous gastric surgery.
+        ng_tube:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Nasogastric tube currently in situ.
+        stoma:
+          type: string
+          enum:
+            - none
+            - colostomy
+            - ileostomy
+            - urostomy
+            - gastrostomy
+            - ""
+          description: "Stoma type, if any: colostomy, ileostomy, urostomy, gastrostomy, or none."
+        fasting_confirmed:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Whether pre-operative fasting has been confirmed as adequate.
+        last_solid_food_at:
+          type: string
+          format: date-time
+          description: Timestamp of last solid food intake.
+        last_clear_fluid_at:
+          type: string
+          format: date-time
+          description: Timestamp of last clear fluid intake.
+        rapid_sequence_induction_needed:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Whether rapid sequence induction is required because of aspiration risk.
+        spine_exam:
+          type: string
+          enum:
+            - normal
+            - scoliosis
+            - kyphosis
+            - previous-surgery
+            - ankylosing-spondylitis
+            - other
+            - ""
+          description: Spinal examination findings relevant to neuraxial access.
+        spine_notes:
+          type: string
+          description: Free-text spinal examination notes.
+        neuraxial_suitable:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - unsure
+            - ""
+          description: "Clinician judgement of suitability for neuraxial block: yes, no, or unsure."
+        joint_rom_hip:
+          type: string
+          enum:
+            - full
+            - reduced
+            - severely-limited
+            - ""
+          description: Hip range of motion for positioning planning.
+        joint_rom_shoulder:
+          type: string
+          enum:
+            - full
+            - reduced
+            - severely-limited
+            - ""
+          description: Shoulder range of motion for positioning planning.
+        joint_rom_neck:
+          type: string
+          enum:
+            - full
+            - reduced
+            - severely-limited
+            - ""
+          description: Cervical range of motion for positioning planning (distinct from airway-focused neck_rom).
+        skin_iv_access:
+          type: string
+          enum:
+            - good
+            - difficult
+            - very-difficult
+            - ""
+          description: "Ease of peripheral intravenous access: good, difficult, or very-difficult."
+        skin_block_site:
+          type: string
+          enum:
+            - intact
+            - infected
+            - tattooed
+            - scarred
+            - ""
+          description: "Condition of planned regional block skin site: intact, infected, tattooed, or scarred."
+        pressure_ulcer_risk:
+          type: string
+          enum:
+            - low
+            - moderate
+            - high
+            - very-high
+            - ""
+          description: "Pressure ulcer risk category: low, moderate, high, or very-high."
+        name:
+          type: string
+          maxLength: 255
+          description: Regular medication name (current medication review item).
+        dose:
+          type: string
+          maxLength: 100
+          description: Regular medication dose.
+        route:
+          type: string
+          enum:
+            - oral
+            - iv
+            - im
+            - sc
+            - inhaled
+            - topical
+            - pr
+            - other
+            - ""
+          description: Medication route of administration.
+        frequency:
+          type: string
+          maxLength: 100
+          description: Medication dosing frequency.
+        indication:
+          type: string
+          maxLength: 255
+          description: Clinical indication for the medication.
+        class:
+          type: string
+          enum:
+            - anticoagulant
+            - antiplatelet
+            - antihypertensive
+            - ace-inhibitor
+            - arb
+            - beta-blocker
+            - diuretic
+            - insulin
+            - oral-hypoglycaemic
+            - steroid
+            - opioid
+            - benzodiazepine
+            - ssri
+            - other
+            - ""
+          description: Medication class for perioperative decision-making.
+        perioperative_action:
+          type: string
+          enum:
+            - continue
+            - hold-on-day
+            - hold-n-days
+            - stop
+            - switch
+            - bridge
+            - ""
+          description: "Perioperative action for this medication: continue, hold-on-day, hold-n-days, stop, switch, or bridge."
+        perioperative_notes:
+          type: string
+          maxLength: 500
+          description: Perioperative instructions or caveats for this medication.
+        last_dose_at:
+          type: string
+          format: date-time
+          description: Timestamp of the most recent recorded dose.
+        allergen:
+          type: string
+          maxLength: 255
+          description: Known allergen or trigger.
+        category:
+          type: string
+          enum:
+            - drug
+            - latex
+            - food
+            - adhesive
+            - contrast
+            - environment
+            - other
+            - ""
+          description: "Allergy category: drug, latex, food, adhesive, contrast, environment, or other."
+        reaction_type:
+          type: string
+          enum:
+            - anaphylaxis
+            - rash
+            - urticaria
+            - angioedema
+            - gi-upset
+            - bronchospasm
+            - other
+            - ""
+          description: Type of reported allergic reaction.
+        reaction_severity:
+          type: string
+          enum:
+            - mild
+            - moderate
+            - severe
+            - life-threatening
+            - ""
+          description: "Allergic reaction severity: mild, moderate, severe, or life-threatening."
+        reaction_notes:
+          type: string
+          maxLength: 500
+          description: Free-text notes describing the allergic reaction.
+        verified:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Whether the allergy history has been verified.
+        mets_estimate:
+          type: number
+          format: double
+          description: Estimated exercise capacity in metabolic equivalents (METs).
+        dasi_score:
+          type: number
+          format: double
+          description: Duke Activity Status Index (DASI) score.
+        ecog_performance_status:
+          type: integer
+          format: int32
+          description: ECOG performance status 0-4.
+        clinical_frailty_scale:
+          type: integer
+          format: int32
+          description: Rockwood Clinical Frailty Scale 1-9.
+        six_minute_walk_metres:
+          type: integer
+          format: int32
+          description: Six-minute walk test distance in metres.
+        sts_one_minute_reps:
+          type: integer
+          format: int32
+          description: One-minute sit-to-stand test repetitions.
+        tug_seconds:
+          type: number
+          format: double
+          description: Timed Up and Go test duration in seconds.
+        cpet_performed:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Whether cardiopulmonary exercise testing was performed.
+        cpet_vo2_peak_ml_kg_min:
+          type: number
+          format: double
+          description: Peak VO2 on CPET in mL/kg/min.
+        cpet_anaerobic_threshold_ml_kg_min:
+          type: number
+          format: double
+          description: Anaerobic threshold on CPET in mL/kg/min.
+        cpet_notes:
+          type: string
+          description: Free-text CPET interpretation notes.
+        malnutrition_risk:
+          type: string
+          enum:
+            - none
+            - low
+            - medium
+            - high
+            - ""
+          description: "Malnutrition risk category: none, low, medium, or high."
+        unintentional_weight_loss_kg:
+          type: number
+          format: double
+          description: Recent unintentional weight loss in kilograms.
+        technique:
+          type: string
+          enum:
+            - ga
+            - regional
+            - neuraxial
+            - sedation
+            - mac
+            - local
+            - combined-ga-regional
+            - ""
+          description: Planned primary anaesthetic technique.
+        airway_plan:
+          type: string
+          enum:
+            - face-mask
+            - supraglottic
+            - ett
+            - awake-fibreoptic
+            - surgical-airway
+            - ""
+          description: Planned airway management strategy.
+        rsi_planned:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Whether rapid sequence induction is planned.
+        monitoring_level:
+          type: string
+          enum:
+            - standard
+            - invasive-arterial
+            - invasive-cvc
+            - cardiac-output
+            - ""
+          description: "Planned intraoperative monitoring level: standard, invasive-arterial, invasive-cvc, or cardiac-output."
+        analgesia_plan:
+          type: string
+          maxLength: 500
+          description: Planned postoperative analgesia strategy.
+        regional_block_planned:
+          type: string
+          maxLength: 100
+          description: Regional block planned, if any.
+        dvt_prophylaxis:
+          type: string
+          maxLength: 100
+          description: Planned venous thromboembolism prophylaxis.
+        antibiotic_prophylaxis:
+          type: string
+          maxLength: 100
+          description: Planned surgical antibiotic prophylaxis.
+        post_op_disposition:
+          type: string
+          enum:
+            - day-case
+            - ward
+            - enhanced-care
+            - hdu
+            - icu
+            - ""
+          description: "Planned postoperative destination: day-case, ward, enhanced-care, hdu, or icu."
+        anticipated_length_of_stay_days:
+          type: integer
+          format: int32
+          description: Anticipated length of hospital stay in days.
+        special_equipment:
+          type: string
+          maxLength: 500
+          description: Special equipment required for the procedure.
+        blood_products_required:
+          type: string
+          maxLength: 100
+          description: Blood products required for the procedure.
+      required:
+        - created_at
+        - updated_at
+        - patient_id
+        - clinician_id
+        - status
+        - site_name
+        - planned_procedure
+        - surgical_specialty
+        - urgency
+        - laterality
+        - surgical_severity
+        - consultant_surgeon
+        - on_room_air
+        - mallampati_class
+        - neck_rom
+        - cervical_spine_stability
+        - dentition
+        - beard
+        - upper_lip_bite_test
+        - prior_difficult_intubation
+        - stopbang_snoring
+        - stopbang_tired
+        - stopbang_observed_apnoea
+        - stopbang_pressure
+        - stopbang_bmi_gt35
+        - stopbang_age_gt50
+        - stopbang_neck_gt40
+        - stopbang_male
+        - airway_notes
+        - heart_rhythm
+        - murmur_present
+        - murmur_description
+        - peripheral_pulses
+        - jvp_raised
+        - peripheral_oedema
+        - ecg_performed
+        - ecg_rhythm
+        - ecg_axis
+        - ecg_ischaemic_changes
+        - ecg_notes
+        - echo_performed
+        - echo_notes
+        - history_ihd
+        - history_chf
+        - history_stroke_tia
+        - recent_mi_within_3_months
+        - pacemaker_or_icd
+        - severe_valve_dysfunction
+        - active_angina
+        - breath_sounds
+        - wheeze
+        - crackles
+        - crepitations
+        - chest_wall_deformity
+        - asthma
+        - copd
+        - cxr_performed
+        - cxr_findings
+        - pft_performed
+        - smoking_status
+        - covid_history
+        - covid_unresolved_symptoms
+        - cognition_tool
+        - cognitive_impairment
+        - capacity_concern
+        - cranial_nerves_notes
+        - motor_power
+        - sensory_notes
+        - reflexes
+        - recent_stroke_tia
+        - seizure_disorder
+        - dialysis_status
+        - ckd_stage
+        - chronic_liver_disease
+        - child_pugh_class
+        - on_anticoagulant
+        - anticoagulant_type
+        - anticoagulant_hold_plan
+        - group_and_save
+        - anaemia_severity
+        - diabetes_type
+        - diabetes_on_insulin
+        - diabetes_control
+        - diabetes_complications
+        - thyroid_status
+        - adrenal_status
+        - on_long_term_steroids
+        - steroid_cover_plan
+        - abdominal_exam
+        - abdominal_notes
+        - reflux_symptoms
+        - hiatus_hernia
+        - previous_gastric_surgery
+        - ng_tube
+        - stoma
+        - fasting_confirmed
+        - rapid_sequence_induction_needed
+        - spine_exam
+        - spine_notes
+        - neuraxial_suitable
+        - joint_rom_hip
+        - joint_rom_shoulder
+        - joint_rom_neck
+        - skin_iv_access
+        - skin_block_site
+        - pressure_ulcer_risk
+        - name
+        - dose
+        - route
+        - frequency
+        - indication
+        - class
+        - perioperative_action
+        - perioperative_notes
+        - allergen
+        - category
+        - reaction_type
+        - reaction_severity
+        - reaction_notes
+        - verified
+        - cpet_performed
+        - cpet_notes
+        - malnutrition_risk
+        - technique
+        - airway_plan
+        - rsi_planned
+        - monitoring_level
+        - analgesia_plan
+        - regional_block_planned
+        - dvt_prophylaxis
+        - antibiotic_prophylaxis
+        - post_op_disposition
+        - special_equipment
+        - blood_products_required
+      description: "Clinician-led pre-operative assessment: objective findings, scoring inputs (ASA, Mallampati, RCRI, STOP-BANG, Clinical Frailty Scale), planned anaesthesia strategy, and safety flags for adult elective and urgent surgery."

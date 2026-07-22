@@ -1,0 +1,12 @@
+<!ELEMENT hospital_performance_indicator_value (id,created_at,updated_at,deleted_at,hospital_performance_indicators_id,indicator_code,category_number,category_title,indicator_text,indicator_value,notes)>
+<!ELEMENT id (#PCDATA)>
+<!ELEMENT created_at (#PCDATA)>
+<!ELEMENT updated_at (#PCDATA)>
+<!ELEMENT deleted_at (#PCDATA)>
+<!ELEMENT hospital_performance_indicators_id (#PCDATA)>
+<!ELEMENT indicator_code (#PCDATA)>
+<!ELEMENT category_number (#PCDATA)>
+<!ELEMENT category_title (#PCDATA)>
+<!ELEMENT indicator_text (#PCDATA)>
+<!ELEMENT indicator_value (#PCDATA)>
+<!ELEMENT notes (#PCDATA)>
