@@ -537,6 +537,8 @@ function renderStep2() {
   id.appendChild(textInput({ label: 'NHS number', section: 'patient', field: 'nhsNumber' }));
   card.appendChild(id);
 
+  card.appendChild(textInput({ label: 'Hospital number', section: 'patient', field: 'hospitalNumber' }));
+
   card.appendChild(radioGroup({
     label: 'Sex', section: 'patient', field: 'sex',
     options: [
@@ -567,6 +569,7 @@ function renderStep2() {
   card.appendChild(surgHead);
 
   card.appendChild(textInput({ label: 'Planned procedure', section: 'surgery', field: 'plannedProcedure' }));
+  card.appendChild(textArea({ label: 'Indication for surgery', section: 'surgery', field: 'indicationForSurgery', rows: 2 }));
   card.appendChild(textInput({ label: 'Surgical specialty', section: 'surgery', field: 'surgicalSpecialty' }));
   const sg = document.createElement('div');
   sg.className = 'two-col';
@@ -612,6 +615,7 @@ function renderStep2() {
   card.appendChild(sg3);
 
   card.appendChild(textInput({ label: 'Consultant surgeon', section: 'surgery', field: 'consultantSurgeon' }));
+  card.appendChild(textInput({ label: 'Anaesthetist (if known)', section: 'surgery', field: 'anaesthetistName' }));
   return card;
 }
 
@@ -699,6 +703,21 @@ function renderStep4() {
 
   card.appendChild(radioGroup({ label: 'Beard?', section: 'airway', field: 'beard', options: yesNo }));
   card.appendChild(radioGroup({ label: 'Prior difficult intubation?', section: 'airway', field: 'priorDifficultIntubation', options: yesNo }));
+
+  const histHead4 = document.createElement('h3');
+  histHead4.textContent = 'Surgical and anaesthetic history';
+  card.appendChild(histHead4);
+  card.appendChild(textArea({ label: 'Previous surgeries', section: 'airway', field: 'previousSurgeries', rows: 2 }));
+  card.appendChild(radioGroup({ label: 'Previous anaesthetic issues?', section: 'airway', field: 'previousAnaestheticIssues', options: yesNo }));
+  const paiBox = document.createElement('div');
+  paiBox.dataset.conditional = 'airway.previousAnaestheticIssues=yes';
+  paiBox.appendChild(textInput({ label: 'Previous anaesthetic issue details', section: 'airway', field: 'previousAnaestheticIssuesDetails' }));
+  card.appendChild(paiBox);
+  card.appendChild(radioGroup({ label: 'Family history of anaesthetic complications?', section: 'airway', field: 'familyHistoryAnaestheticComplications', options: yesNo }));
+  const fhBox = document.createElement('div');
+  fhBox.dataset.conditional = 'airway.familyHistoryAnaestheticComplications=yes';
+  fhBox.appendChild(textInput({ label: 'Family history details', section: 'airway', field: 'familyHistoryAnaestheticComplicationsDetails' }));
+  card.appendChild(fhBox);
 
   const sbHead = document.createElement('h3');
   sbHead.textContent = 'STOP-BANG screen for OSA';
@@ -959,6 +978,7 @@ function renderStep8() {
       { value: 'decompensated', label: 'Decompensated' }
     ]
   }));
+  card.appendChild(textInput({ label: 'Urinalysis findings', section: 'renalHepatic', field: 'urinalysisFindings' }));
   return card;
 }
 
@@ -1265,6 +1285,23 @@ function renderStep14() {
   }));
   g3.appendChild(textInput({ label: 'Unintentional weight loss', section: 'functionalCapacity', field: 'unintentionalWeightLossKg', type: 'number', min: 0, max: 100, step: 0.1, unit: 'kg' }));
   card.appendChild(g3);
+
+  const shHead = document.createElement('h3');
+  shHead.textContent = 'Social history';
+  card.appendChild(shHead);
+  card.appendChild(selectInput({
+    label: 'Living situation', section: 'functionalCapacity', field: 'livingSituation',
+    options: [
+      { value: 'independent', label: 'Independent' },
+      { value: 'lives-with-family', label: 'Lives with family' },
+      { value: 'sheltered-housing', label: 'Sheltered housing' },
+      { value: 'residential-care', label: 'Residential care' },
+      { value: 'nursing-home', label: 'Nursing home' }
+    ]
+  }));
+  card.appendChild(radioGroup({ label: 'Support at home?', section: 'functionalCapacity', field: 'supportAtHome', options: yesNo }));
+  card.appendChild(radioGroup({ label: 'Falls within last year?', section: 'functionalCapacity', field: 'fallsRiskWithinYear', options: yesNo }));
+  card.appendChild(textInput({ label: 'Mobility status', section: 'functionalCapacity', field: 'mobilityStatus' }));
   return card;
 }
 
@@ -1331,6 +1368,44 @@ function renderStep15() {
 
   card.appendChild(textInput({ label: 'Special equipment', section: 'anaesthesiaPlan', field: 'specialEquipment' }));
   card.appendChild(textInput({ label: 'Blood products required', section: 'anaesthesiaPlan', field: 'bloodProductsRequired' }));
+
+  const g3 = document.createElement('div'); g3.className = 'two-col';
+  g3.appendChild(selectInput({
+    label: 'VTE risk assessment', section: 'anaesthesiaPlan', field: 'vteRiskLevel',
+    options: [
+      { value: 'low', label: 'Low' },
+      { value: 'medium', label: 'Medium' },
+      { value: 'high', label: 'High' }
+    ]
+  }));
+  g3.appendChild(selectInput({
+    label: 'COVID-19 screening / PCR', section: 'anaesthesiaPlan', field: 'covidScreeningResult',
+    options: [
+      { value: 'not-tested', label: 'Not tested' },
+      { value: 'negative', label: 'Negative' },
+      { value: 'positive', label: 'Positive' },
+      { value: 'pending', label: 'Pending' }
+    ]
+  }));
+  card.appendChild(g3);
+
+  const dpHead = document.createElement('h3');
+  dpHead.textContent = 'Discharge planning';
+  card.appendChild(dpHead);
+  card.appendChild(selectInput({
+    label: 'Planned discharge destination', section: 'anaesthesiaPlan', field: 'dischargeDestination',
+    options: [
+      { value: 'home', label: 'Home' },
+      { value: 'home-with-support', label: 'Home with support' },
+      { value: 'residential-care', label: 'Residential care' },
+      { value: 'nursing-home', label: 'Nursing home' },
+      { value: 'rehabilitation', label: 'Rehabilitation' },
+      { value: 'other', label: 'Other' }
+    ]
+  }));
+  card.appendChild(radioGroup({ label: 'Social services involvement?', section: 'anaesthesiaPlan', field: 'socialServicesInvolvement', options: yesNo }));
+  card.appendChild(radioGroup({ label: 'Reablement / physiotherapy needs?', section: 'anaesthesiaPlan', field: 'reablementPhysiotherapyNeeds', options: yesNo }));
+  card.appendChild(textInput({ label: 'Follow-up requirements', section: 'anaesthesiaPlan', field: 'followUpRequirements' }));
   return card;
 }
 
@@ -1359,6 +1434,29 @@ function renderStep16() {
     ]
   }));
   card.appendChild(textArea({ label: 'Clinician notes', section: 'summary', field: 'clinicianNotes', rows: 3 }));
+
+  const consentHead = document.createElement('h3');
+  consentHead.textContent = 'Patient education and consent';
+  card.appendChild(consentHead);
+  card.appendChild(selectInput({
+    label: 'Consent status', section: 'summary', field: 'consentStatus',
+    options: [
+      { value: 'obtained', label: 'Obtained' },
+      { value: 'pending', label: 'Pending' },
+      { value: 'declined', label: 'Declined' },
+      { value: 'unable-to-consent', label: 'Unable to consent' }
+    ]
+  }));
+  card.appendChild(radioGroup({ label: 'Interpreter required?', section: 'summary', field: 'interpreterRequired', options: yesNo }));
+
+  const discussHead = document.createElement('h4');
+  discussHead.textContent = 'Discussion held regarding';
+  card.appendChild(discussHead);
+  card.appendChild(radioGroup({ label: 'Procedure discussed?', section: 'summary', field: 'discussionProcedure', options: yesNo }));
+  card.appendChild(radioGroup({ label: 'Anaesthetic discussed?', section: 'summary', field: 'discussionAnaesthetic', options: yesNo }));
+  card.appendChild(radioGroup({ label: 'Risks / benefits discussed?', section: 'summary', field: 'discussionRisksBenefits', options: yesNo }));
+  card.appendChild(radioGroup({ label: 'Alternatives discussed?', section: 'summary', field: 'discussionAlternatives', options: yesNo }));
+
   card.appendChild(textInput({ label: 'Signed at', section: 'summary', field: 'signedAt', type: 'datetime-local' }));
   return card;
 }
@@ -1412,17 +1510,19 @@ const TRACKED_FIELDS = [
   ['clinician', 'siteName'], ['clinician', 'assessmentDate'],
   // Patient (2)
   ['patient', 'firstName'], ['patient', 'lastName'],
-  ['patient', 'dateOfBirth'], ['patient', 'sex'],
+  ['patient', 'dateOfBirth'], ['patient', 'hospitalNumber'], ['patient', 'sex'],
   ['patient', 'weightKg'], ['patient', 'heightCm'],
   // Surgery (2)
-  ['surgery', 'plannedProcedure'], ['surgery', 'urgency'],
-  ['surgery', 'surgicalSeverity'],
+  ['surgery', 'plannedProcedure'], ['surgery', 'indicationForSurgery'],
+  ['surgery', 'urgency'], ['surgery', 'surgicalSeverity'],
   // Vitals (3)
   ['vitals', 'systolicBp'], ['vitals', 'diastolicBp'],
   ['vitals', 'heartRate'], ['vitals', 'spo2Percent'],
   ['vitals', 'onRoomAir'],
   // Airway (4)
   ['airway', 'mallampatiClass'], ['airway', 'priorDifficultIntubation'],
+  ['airway', 'previousAnaestheticIssues'],
+  ['airway', 'familyHistoryAnaestheticComplications'],
   ['airway', 'stopbangSnoring'], ['airway', 'stopbangTired'],
   ['airway', 'stopbangObservedApnoea'], ['airway', 'stopbangPressure'],
   ['airway', 'stopbangBmiGt35'], ['airway', 'stopbangAgeGt50'],
@@ -1443,6 +1543,7 @@ const TRACKED_FIELDS = [
   // Renal/Hepatic (8)
   ['renalHepatic', 'creatinineUmolL'], ['renalHepatic', 'egfrMlMin173m2'],
   ['renalHepatic', 'dialysisStatus'], ['renalHepatic', 'chronicLiverDisease'],
+  ['renalHepatic', 'urinalysisFindings'],
   // Haematology (9)
   ['haematology', 'hbGL'], ['haematology', 'platelets109L'],
   ['haematology', 'inr'], ['haematology', 'onAnticoagulant'],
@@ -1458,11 +1559,14 @@ const TRACKED_FIELDS = [
   // Functional (14)
   ['functionalCapacity', 'clinicalFrailtyScale'],
   ['functionalCapacity', 'malnutritionRisk'],
+  ['functionalCapacity', 'livingSituation'],
+  ['functionalCapacity', 'fallsRiskWithinYear'],
   // Plan (15)
   ['anaesthesiaPlan', 'technique'], ['anaesthesiaPlan', 'airwayPlan'],
   ['anaesthesiaPlan', 'postOpDisposition'],
+  ['anaesthesiaPlan', 'vteRiskLevel'], ['anaesthesiaPlan', 'dischargeDestination'],
   // Summary (16)
-  ['summary', 'recommendation']
+  ['summary', 'recommendation'], ['summary', 'consentStatus']
 ];
 
 function updateProgress() {

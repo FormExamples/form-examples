@@ -738,6 +738,114 @@ enum PreOperativeAssessmentByClinicianPostOpDispositionEnum {
   POSTOPDISPOSITION_ICU = 5;  // icu
 }
 
+enum PreOperativeAssessmentByClinicianPreviousAnaestheticIssuesEnum {
+  PREVIOUSANAESTHETICISSUES_UNSPECIFIED = 0;
+  PREVIOUSANAESTHETICISSUES_YES = 1;  // yes
+  PREVIOUSANAESTHETICISSUES_NO = 2;  // no
+}
+
+enum PreOperativeAssessmentByClinicianFamilyHistoryAnaestheticComplicationsEnum {
+  FAMILYHISTORYANAESTHETICCOMPLICATIONS_UNSPECIFIED = 0;
+  FAMILYHISTORYANAESTHETICCOMPLICATIONS_YES = 1;  // yes
+  FAMILYHISTORYANAESTHETICCOMPLICATIONS_NO = 2;  // no
+}
+
+enum PreOperativeAssessmentByClinicianLivingSituationEnum {
+  LIVINGSITUATION_UNSPECIFIED = 0;
+  LIVINGSITUATION_INDEPENDENT = 1;  // independent
+  LIVINGSITUATION_LIVES_WITH_FAMILY = 2;  // lives-with-family
+  LIVINGSITUATION_SHELTERED_HOUSING = 3;  // sheltered-housing
+  LIVINGSITUATION_RESIDENTIAL_CARE = 4;  // residential-care
+  LIVINGSITUATION_NURSING_HOME = 5;  // nursing-home
+}
+
+enum PreOperativeAssessmentByClinicianSupportAtHomeEnum {
+  SUPPORTATHOME_UNSPECIFIED = 0;
+  SUPPORTATHOME_YES = 1;  // yes
+  SUPPORTATHOME_NO = 2;  // no
+}
+
+enum PreOperativeAssessmentByClinicianFallsRiskWithinYearEnum {
+  FALLSRISKWITHINYEAR_UNSPECIFIED = 0;
+  FALLSRISKWITHINYEAR_YES = 1;  // yes
+  FALLSRISKWITHINYEAR_NO = 2;  // no
+}
+
+enum PreOperativeAssessmentByClinicianVteRiskLevelEnum {
+  VTERISKLEVEL_UNSPECIFIED = 0;
+  VTERISKLEVEL_LOW = 1;  // low
+  VTERISKLEVEL_MEDIUM = 2;  // medium
+  VTERISKLEVEL_HIGH = 3;  // high
+}
+
+enum PreOperativeAssessmentByClinicianCovidScreeningResultEnum {
+  COVIDSCREENINGRESULT_UNSPECIFIED = 0;
+  COVIDSCREENINGRESULT_NOT_TESTED = 1;  // not-tested
+  COVIDSCREENINGRESULT_NEGATIVE = 2;  // negative
+  COVIDSCREENINGRESULT_POSITIVE = 3;  // positive
+  COVIDSCREENINGRESULT_PENDING = 4;  // pending
+}
+
+enum PreOperativeAssessmentByClinicianDischargeDestinationEnum {
+  DISCHARGEDESTINATION_UNSPECIFIED = 0;
+  DISCHARGEDESTINATION_HOME = 1;  // home
+  DISCHARGEDESTINATION_HOME_WITH_SUPPORT = 2;  // home-with-support
+  DISCHARGEDESTINATION_RESIDENTIAL_CARE = 3;  // residential-care
+  DISCHARGEDESTINATION_NURSING_HOME = 4;  // nursing-home
+  DISCHARGEDESTINATION_REHABILITATION = 5;  // rehabilitation
+  DISCHARGEDESTINATION_OTHER = 6;  // other
+}
+
+enum PreOperativeAssessmentByClinicianSocialServicesInvolvementEnum {
+  SOCIALSERVICESINVOLVEMENT_UNSPECIFIED = 0;
+  SOCIALSERVICESINVOLVEMENT_YES = 1;  // yes
+  SOCIALSERVICESINVOLVEMENT_NO = 2;  // no
+}
+
+enum PreOperativeAssessmentByClinicianReablementPhysiotherapyNeedsEnum {
+  REABLEMENTPHYSIOTHERAPYNEEDS_UNSPECIFIED = 0;
+  REABLEMENTPHYSIOTHERAPYNEEDS_YES = 1;  // yes
+  REABLEMENTPHYSIOTHERAPYNEEDS_NO = 2;  // no
+}
+
+enum PreOperativeAssessmentByClinicianConsentStatusEnum {
+  CONSENTSTATUS_UNSPECIFIED = 0;
+  CONSENTSTATUS_OBTAINED = 1;  // obtained
+  CONSENTSTATUS_PENDING = 2;  // pending
+  CONSENTSTATUS_DECLINED = 3;  // declined
+  CONSENTSTATUS_UNABLE_TO_CONSENT = 4;  // unable-to-consent
+}
+
+enum PreOperativeAssessmentByClinicianInterpreterRequiredEnum {
+  INTERPRETERREQUIRED_UNSPECIFIED = 0;
+  INTERPRETERREQUIRED_YES = 1;  // yes
+  INTERPRETERREQUIRED_NO = 2;  // no
+}
+
+enum PreOperativeAssessmentByClinicianDiscussionProcedureEnum {
+  DISCUSSIONPROCEDURE_UNSPECIFIED = 0;
+  DISCUSSIONPROCEDURE_YES = 1;  // yes
+  DISCUSSIONPROCEDURE_NO = 2;  // no
+}
+
+enum PreOperativeAssessmentByClinicianDiscussionAnaestheticEnum {
+  DISCUSSIONANAESTHETIC_UNSPECIFIED = 0;
+  DISCUSSIONANAESTHETIC_YES = 1;  // yes
+  DISCUSSIONANAESTHETIC_NO = 2;  // no
+}
+
+enum PreOperativeAssessmentByClinicianDiscussionRisksBenefitsEnum {
+  DISCUSSIONRISKSBENEFITS_UNSPECIFIED = 0;
+  DISCUSSIONRISKSBENEFITS_YES = 1;  // yes
+  DISCUSSIONRISKSBENEFITS_NO = 2;  // no
+}
+
+enum PreOperativeAssessmentByClinicianDiscussionAlternativesEnum {
+  DISCUSSIONALTERNATIVES_UNSPECIFIED = 0;
+  DISCUSSIONALTERNATIVES_YES = 1;  // yes
+  DISCUSSIONALTERNATIVES_NO = 2;  // no
+}
+
 message PreOperativeAssessmentByClinician {
   string id = 1;  // UUID — uuid
   string created_at = 2;  // TIMESTAMPTZ — iso 8601
@@ -944,4 +1052,29 @@ message PreOperativeAssessmentByClinician {
   int32 anticipated_length_of_stay_days = 203;  // INTEGER
   string special_equipment = 204;  // VARCHAR(500) — max 500 chars
   string blood_products_required = 205;  // VARCHAR(100) — max 100 chars
+  string hospital_number = 206;  // TEXT
+  string indication_for_surgery = 207;  // TEXT
+  string anaesthetist_name = 208;  // TEXT
+  string previous_surgeries = 209;  // TEXT
+  PreOperativeAssessmentByClinicianPreviousAnaestheticIssuesEnum previous_anaesthetic_issues = 210;  // TEXT
+  string previous_anaesthetic_issues_details = 211;  // TEXT
+  PreOperativeAssessmentByClinicianFamilyHistoryAnaestheticComplicationsEnum family_history_anaesthetic_complications = 212;  // TEXT
+  string family_history_anaesthetic_complications_details = 213;  // TEXT
+  string urinalysis_findings = 214;  // TEXT
+  PreOperativeAssessmentByClinicianLivingSituationEnum living_situation = 215;  // TEXT
+  PreOperativeAssessmentByClinicianSupportAtHomeEnum support_at_home = 216;  // TEXT
+  string mobility_status = 217;  // TEXT
+  PreOperativeAssessmentByClinicianFallsRiskWithinYearEnum falls_risk_within_year = 218;  // TEXT
+  PreOperativeAssessmentByClinicianVteRiskLevelEnum vte_risk_level = 219;  // TEXT
+  PreOperativeAssessmentByClinicianCovidScreeningResultEnum covid_screening_result = 220;  // TEXT
+  PreOperativeAssessmentByClinicianDischargeDestinationEnum discharge_destination = 221;  // TEXT
+  string follow_up_requirements = 222;  // TEXT
+  PreOperativeAssessmentByClinicianSocialServicesInvolvementEnum social_services_involvement = 223;  // TEXT
+  PreOperativeAssessmentByClinicianReablementPhysiotherapyNeedsEnum reablement_physiotherapy_needs = 224;  // TEXT
+  PreOperativeAssessmentByClinicianConsentStatusEnum consent_status = 225;  // TEXT
+  PreOperativeAssessmentByClinicianInterpreterRequiredEnum interpreter_required = 226;  // TEXT
+  PreOperativeAssessmentByClinicianDiscussionProcedureEnum discussion_procedure = 227;  // TEXT
+  PreOperativeAssessmentByClinicianDiscussionAnaestheticEnum discussion_anaesthetic = 228;  // TEXT
+  PreOperativeAssessmentByClinicianDiscussionRisksBenefitsEnum discussion_risks_benefits = 229;  // TEXT
+  PreOperativeAssessmentByClinicianDiscussionAlternativesEnum discussion_alternatives = 230;  // TEXT
 }

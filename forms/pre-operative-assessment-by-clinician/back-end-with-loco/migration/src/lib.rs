@@ -12,6 +12,7 @@ mod m20260701_051341_patient_allergies;
 mod m20260701_051403_pre_operative_assessment_by_clinicians;
 mod m20260701_051440_pre_operative_assessment_by_clinician_grades;
 mod m20260701_051508_pre_operative_assessment_by_clinician_grade_rules;
+mod m20260723_120000_add_fields_to_pre_operative_assessment_by_clinicians;
 pub struct Migrator;
 
 #[async_trait::async_trait]
@@ -28,6 +29,7 @@ impl MigratorTrait for Migrator {
             Box::new(m20260701_051403_pre_operative_assessment_by_clinicians::Migration),
             Box::new(m20260701_051440_pre_operative_assessment_by_clinician_grades::Migration),
             Box::new(m20260701_051508_pre_operative_assessment_by_clinician_grade_rules::Migration),
+            Box::new(m20260723_120000_add_fields_to_pre_operative_assessment_by_clinicians::Migration),
             // inject-above (do not remove this comment)
         ]
     }

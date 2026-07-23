@@ -1350,6 +1350,157 @@ components:
           type: string
           maxLength: 100
           description: Blood products required for the procedure.
+        hospital_number:
+          type: string
+          description: Hospital number.
+        indication_for_surgery:
+          type: string
+          description: Indication for surgery.
+        anaesthetist_name:
+          type: string
+          description: Anaesthetist name.
+        previous_surgeries:
+          type: string
+          description: Previous surgeries.
+        previous_anaesthetic_issues:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: "Previous anaesthetic issues. One of: yes, no."
+        previous_anaesthetic_issues_details:
+          type: string
+          description: Previous anaesthetic issues details.
+        family_history_anaesthetic_complications:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: "Family history of anaesthetic complications. One of: yes, no."
+        family_history_anaesthetic_complications_details:
+          type: string
+          description: Family history of anaesthetic complications details.
+        urinalysis_findings:
+          type: string
+          description: Urinalysis findings.
+        living_situation:
+          type: string
+          enum:
+            - independent
+            - lives-with-family
+            - sheltered-housing
+            - residential-care
+            - nursing-home
+            - ""
+          description: "Living situation. One of: independent, lives-with-family, sheltered-housing, residential-care, nursing-home."
+        support_at_home:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: "Support at home. One of: yes, no."
+        mobility_status:
+          type: string
+          description: Mobility status.
+        falls_risk_within_year:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: "Falls risk within year. One of: yes, no."
+        vte_risk_level:
+          type: string
+          enum:
+            - low
+            - medium
+            - high
+            - ""
+          description: "VTE (venous thromboembolism) risk level. One of: low, medium, high."
+        covid_screening_result:
+          type: string
+          enum:
+            - not-tested
+            - negative
+            - positive
+            - pending
+            - ""
+          description: "COVID-19 screening result. One of: not-tested, negative, positive, pending."
+        discharge_destination:
+          type: string
+          enum:
+            - home
+            - home-with-support
+            - residential-care
+            - nursing-home
+            - rehabilitation
+            - other
+            - ""
+          description: "Discharge destination. One of: home, home-with-support, residential-care, nursing-home, rehabilitation, other."
+        follow_up_requirements:
+          type: string
+          description: Follow-up requirements.
+        social_services_involvement:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: "Social services involvement. One of: yes, no."
+        reablement_physiotherapy_needs:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: "Reablement / physiotherapy needs. One of: yes, no."
+        consent_status:
+          type: string
+          enum:
+            - obtained
+            - pending
+            - declined
+            - unable-to-consent
+            - ""
+          description: "Consent status. One of: obtained, pending, declined, unable-to-consent."
+        interpreter_required:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: "Interpreter required. One of: yes, no."
+        discussion_procedure:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: "Discussed the procedure with the patient. One of: yes, no."
+        discussion_anaesthetic:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: "Discussed the anaesthetic with the patient. One of: yes, no."
+        discussion_risks_benefits:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: "Discussed risks and benefits with the patient. One of: yes, no."
+        discussion_alternatives:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: "Discussed alternatives with the patient. One of: yes, no."
       required:
         - created_at
         - updated_at
@@ -1485,4 +1636,29 @@ components:
         - post_op_disposition
         - special_equipment
         - blood_products_required
+        - hospital_number
+        - indication_for_surgery
+        - anaesthetist_name
+        - previous_surgeries
+        - previous_anaesthetic_issues
+        - previous_anaesthetic_issues_details
+        - family_history_anaesthetic_complications
+        - family_history_anaesthetic_complications_details
+        - urinalysis_findings
+        - living_situation
+        - support_at_home
+        - mobility_status
+        - falls_risk_within_year
+        - vte_risk_level
+        - covid_screening_result
+        - discharge_destination
+        - follow_up_requirements
+        - social_services_involvement
+        - reablement_physiotherapy_needs
+        - consent_status
+        - interpreter_required
+        - discussion_procedure
+        - discussion_anaesthetic
+        - discussion_risks_benefits
+        - discussion_alternatives
       description: "Clinician-led pre-operative assessment: objective findings, scoring inputs (ASA, Mallampati, RCRI, STOP-BANG, Clinical Frailty Scale), planned anaesthesia strategy, and safety flags for adult elective and urgent surgery."

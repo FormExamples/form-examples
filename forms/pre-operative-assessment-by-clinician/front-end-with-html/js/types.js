@@ -26,6 +26,7 @@ function emptyAssessment() {
       lastName: '',
       dateOfBirth: '',
       nhsNumber: '',
+      hospitalNumber: '',
       sex: '',
       weightKg: null,
       heightCm: null,
@@ -33,6 +34,7 @@ function emptyAssessment() {
     },
     surgery: {
       plannedProcedure: '',
+      indicationForSurgery: '',
       surgicalSpecialty: '',
       urgency: '',
       laterality: '',
@@ -40,6 +42,7 @@ function emptyAssessment() {
       anticipatedBloodLossMl: null,
       anticipatedDurationMinutes: null,
       consultantSurgeon: '',
+      anaesthetistName: '',
       plannedDate: ''
     },
     vitals: {
@@ -65,6 +68,11 @@ function emptyAssessment() {
       beard: '',
       upperLipBiteTest: '',
       priorDifficultIntubation: '',
+      previousSurgeries: '',
+      previousAnaestheticIssues: '',
+      previousAnaestheticIssuesDetails: '',
+      familyHistoryAnaestheticComplications: '',
+      familyHistoryAnaestheticComplicationsDetails: '',
       stopbangSnoring: '',
       stopbangTired: '',
       stopbangObservedApnoea: '',
@@ -149,7 +157,8 @@ function emptyAssessment() {
       alpUL: null,
       albuminGL: null,
       chronicLiverDisease: '',
-      childPughClass: ''
+      childPughClass: '',
+      urinalysisFindings: ''
     },
     haematology: {
       hbGL: null,
@@ -223,7 +232,11 @@ function emptyAssessment() {
       cpetAnaerobicThresholdMlKgMin: null,
       cpetNotes: '',
       malnutritionRisk: '',
-      unintentionalWeightLossKg: null
+      unintentionalWeightLossKg: null,
+      livingSituation: '',
+      supportAtHome: '',
+      mobilityStatus: '',
+      fallsRiskWithinYear: ''
     },
     anaesthesiaPlan: {
       technique: '',
@@ -237,13 +250,25 @@ function emptyAssessment() {
       postOpDisposition: '',
       anticipatedLengthOfStayDays: null,
       specialEquipment: '',
-      bloodProductsRequired: ''
+      bloodProductsRequired: '',
+      vteRiskLevel: '',
+      covidScreeningResult: '',
+      dischargeDestination: '',
+      followUpRequirements: '',
+      socialServicesInvolvement: '',
+      reablementPhysiotherapyNeeds: ''
     },
     summary: {
       finalAsaGrade: '',
       overrideReason: '',
       recommendation: '',
       clinicianNotes: '',
+      consentStatus: '',
+      interpreterRequired: '',
+      discussionProcedure: '',
+      discussionAnaesthetic: '',
+      discussionRisksBenefits: '',
+      discussionAlternatives: '',
       signedAt: ''
     }
   };

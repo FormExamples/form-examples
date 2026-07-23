@@ -210,6 +210,31 @@ pub struct Params {
     pub anticipated_length_of_stay_days: Option<i32>,
     pub special_equipment: String,
     pub blood_products_required: String,
+    pub hospital_number: String,
+    pub indication_for_surgery: String,
+    pub anaesthetist_name: String,
+    pub previous_surgeries: String,
+    pub previous_anaesthetic_issues: String,
+    pub previous_anaesthetic_issues_details: String,
+    pub family_history_anaesthetic_complications: String,
+    pub family_history_anaesthetic_complications_details: String,
+    pub urinalysis_findings: String,
+    pub living_situation: String,
+    pub support_at_home: String,
+    pub mobility_status: String,
+    pub falls_risk_within_year: String,
+    pub vte_risk_level: String,
+    pub covid_screening_result: String,
+    pub discharge_destination: String,
+    pub follow_up_requirements: String,
+    pub social_services_involvement: String,
+    pub reablement_physiotherapy_needs: String,
+    pub consent_status: String,
+    pub interpreter_required: String,
+    pub discussion_procedure: String,
+    pub discussion_anaesthetic: String,
+    pub discussion_risks_benefits: String,
+    pub discussion_alternatives: String,
     }
 
 impl Params {
@@ -416,6 +441,31 @@ impl Params {
       item.anticipated_length_of_stay_days = Set(self.anticipated_length_of_stay_days);
       item.special_equipment = Set(self.special_equipment.clone());
       item.blood_products_required = Set(self.blood_products_required.clone());
+      item.hospital_number = Set(self.hospital_number.clone());
+      item.indication_for_surgery = Set(self.indication_for_surgery.clone());
+      item.anaesthetist_name = Set(self.anaesthetist_name.clone());
+      item.previous_surgeries = Set(self.previous_surgeries.clone());
+      item.previous_anaesthetic_issues = Set(self.previous_anaesthetic_issues.clone());
+      item.previous_anaesthetic_issues_details = Set(self.previous_anaesthetic_issues_details.clone());
+      item.family_history_anaesthetic_complications = Set(self.family_history_anaesthetic_complications.clone());
+      item.family_history_anaesthetic_complications_details = Set(self.family_history_anaesthetic_complications_details.clone());
+      item.urinalysis_findings = Set(self.urinalysis_findings.clone());
+      item.living_situation = Set(self.living_situation.clone());
+      item.support_at_home = Set(self.support_at_home.clone());
+      item.mobility_status = Set(self.mobility_status.clone());
+      item.falls_risk_within_year = Set(self.falls_risk_within_year.clone());
+      item.vte_risk_level = Set(self.vte_risk_level.clone());
+      item.covid_screening_result = Set(self.covid_screening_result.clone());
+      item.discharge_destination = Set(self.discharge_destination.clone());
+      item.follow_up_requirements = Set(self.follow_up_requirements.clone());
+      item.social_services_involvement = Set(self.social_services_involvement.clone());
+      item.reablement_physiotherapy_needs = Set(self.reablement_physiotherapy_needs.clone());
+      item.consent_status = Set(self.consent_status.clone());
+      item.interpreter_required = Set(self.interpreter_required.clone());
+      item.discussion_procedure = Set(self.discussion_procedure.clone());
+      item.discussion_anaesthetic = Set(self.discussion_anaesthetic.clone());
+      item.discussion_risks_benefits = Set(self.discussion_risks_benefits.clone());
+      item.discussion_alternatives = Set(self.discussion_alternatives.clone());
       }
 }
 

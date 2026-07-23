@@ -59,6 +59,27 @@
 - [x] Vitest unit tests for `composite-grader.ts`.
 - [x] `bin/test-form pre-operative-assessment-by-clinician` passes.
 
+## In progress (2026-07-23)
+
+Fields added to the Svelte engine/front-end from a spec/seed.md gap
+analysis (hospital number, indication for surgery, anaesthetist name,
+previous-anaesthetic/family-history airway questions, urinalysis findings,
+a social-history subsection, discharge-planning fields, and a
+consent/patient-education subsection) were missing from SQL/generated
+representations/Rust backend. Continuing the build-out:
+
+- [x] SQL: `sql/12_alter_table_pre_operative_assessment_by_clinician_add_fields.sql`
+      — 25 new columns. Verified applies cleanly against the full
+      migration stack.
+- [x] Regenerated XML, FHIR R5, protobuf, OpenAPI representations.
+- [x] Rust back-end-with-loco updated to match: new migration + 25 new
+      entity/controller fields. Verified via `cargo check` (clean) and
+      `cargo test` (40/40 passing) and `bin/test-form` (PASS).
+- [x] front-end-with-html/ — 25 new fields added to the existing steps
+      (no new step needed). Verified via Playwright (32 [data-step]
+      elements confirmed, all 25 field ids present/fillable, 0 console
+      errors) and `bin/lily-html-refactor --check` (0 risky lines).
+
 ## Deferred / future
 - [ ] Zod schemas for client-side validation.
 - [ ] Axe-core accessibility audit.

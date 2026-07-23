@@ -203,7 +203,32 @@ CREATE TABLE pre_operative_assessment_by_clinician (
     post_op_disposition VARCHAR(20) NOT NULL DEFAULT '' CHECK (post_op_disposition IN ('day-case', 'ward', 'enhanced-care', 'hdu', 'icu', '')),
     anticipated_length_of_stay_days INTEGER,
     special_equipment VARCHAR(500) NOT NULL DEFAULT '',
-    blood_products_required VARCHAR(100) NOT NULL DEFAULT ''
+    blood_products_required VARCHAR(100) NOT NULL DEFAULT '',
+    hospital_number TEXT NOT NULL DEFAULT '',
+    indication_for_surgery TEXT NOT NULL DEFAULT '',
+    anaesthetist_name TEXT NOT NULL DEFAULT '',
+    previous_surgeries TEXT NOT NULL DEFAULT '',
+    previous_anaesthetic_issues TEXT NOT NULL DEFAULT '' CHECK (previous_anaesthetic_issues IN ('yes', 'no', '')),
+    previous_anaesthetic_issues_details TEXT NOT NULL DEFAULT '',
+    family_history_anaesthetic_complications TEXT NOT NULL DEFAULT '' CHECK (family_history_anaesthetic_complications IN ('yes', 'no', '')),
+    family_history_anaesthetic_complications_details TEXT NOT NULL DEFAULT '',
+    urinalysis_findings TEXT NOT NULL DEFAULT '',
+    living_situation TEXT NOT NULL DEFAULT '' CHECK (living_situation IN ('independent', 'lives-with-family', 'sheltered-housing', 'residential-care', 'nursing-home', '')),
+    support_at_home TEXT NOT NULL DEFAULT '' CHECK (support_at_home IN ('yes', 'no', '')),
+    mobility_status TEXT NOT NULL DEFAULT '',
+    falls_risk_within_year TEXT NOT NULL DEFAULT '' CHECK (falls_risk_within_year IN ('yes', 'no', '')),
+    vte_risk_level TEXT NOT NULL DEFAULT '' CHECK (vte_risk_level IN ('low', 'medium', 'high', '')),
+    covid_screening_result TEXT NOT NULL DEFAULT '' CHECK (covid_screening_result IN ('not-tested', 'negative', 'positive', 'pending', '')),
+    discharge_destination TEXT NOT NULL DEFAULT '' CHECK (discharge_destination IN ('home', 'home-with-support', 'residential-care', 'nursing-home', 'rehabilitation', 'other', '')),
+    follow_up_requirements TEXT NOT NULL DEFAULT '',
+    social_services_involvement TEXT NOT NULL DEFAULT '' CHECK (social_services_involvement IN ('yes', 'no', '')),
+    reablement_physiotherapy_needs TEXT NOT NULL DEFAULT '' CHECK (reablement_physiotherapy_needs IN ('yes', 'no', '')),
+    consent_status TEXT NOT NULL DEFAULT '' CHECK (consent_status IN ('obtained', 'pending', 'declined', 'unable-to-consent', '')),
+    interpreter_required TEXT NOT NULL DEFAULT '' CHECK (interpreter_required IN ('yes', 'no', '')),
+    discussion_procedure TEXT NOT NULL DEFAULT '' CHECK (discussion_procedure IN ('yes', 'no', '')),
+    discussion_anaesthetic TEXT NOT NULL DEFAULT '' CHECK (discussion_anaesthetic IN ('yes', 'no', '')),
+    discussion_risks_benefits TEXT NOT NULL DEFAULT '' CHECK (discussion_risks_benefits IN ('yes', 'no', '')),
+    discussion_alternatives TEXT NOT NULL DEFAULT '' CHECK (discussion_alternatives IN ('yes', 'no', ''))
 );
 
 CREATE TRIGGER trigger_pre_operative_assessment_by_clinician_updated_at
@@ -623,3 +648,54 @@ COMMENT ON COLUMN pre_operative_assessment_by_clinician.special_equipment IS
     'Special equipment required for the procedure.';
 COMMENT ON COLUMN pre_operative_assessment_by_clinician.blood_products_required IS
     'Blood products required for the procedure.';
+
+COMMENT ON COLUMN pre_operative_assessment_by_clinician.hospital_number IS
+    'Hospital number.';
+COMMENT ON COLUMN pre_operative_assessment_by_clinician.indication_for_surgery IS
+    'Indication for surgery.';
+COMMENT ON COLUMN pre_operative_assessment_by_clinician.anaesthetist_name IS
+    'Anaesthetist name.';
+COMMENT ON COLUMN pre_operative_assessment_by_clinician.previous_surgeries IS
+    'Previous surgeries.';
+COMMENT ON COLUMN pre_operative_assessment_by_clinician.previous_anaesthetic_issues IS
+    'Previous anaesthetic issues. One of: yes, no.';
+COMMENT ON COLUMN pre_operative_assessment_by_clinician.previous_anaesthetic_issues_details IS
+    'Previous anaesthetic issues details.';
+COMMENT ON COLUMN pre_operative_assessment_by_clinician.family_history_anaesthetic_complications IS
+    'Family history of anaesthetic complications. One of: yes, no.';
+COMMENT ON COLUMN pre_operative_assessment_by_clinician.family_history_anaesthetic_complications_details IS
+    'Family history of anaesthetic complications details.';
+COMMENT ON COLUMN pre_operative_assessment_by_clinician.urinalysis_findings IS
+    'Urinalysis findings.';
+COMMENT ON COLUMN pre_operative_assessment_by_clinician.living_situation IS
+    'Living situation. One of: independent, lives-with-family, sheltered-housing, residential-care, nursing-home.';
+COMMENT ON COLUMN pre_operative_assessment_by_clinician.support_at_home IS
+    'Support at home. One of: yes, no.';
+COMMENT ON COLUMN pre_operative_assessment_by_clinician.mobility_status IS
+    'Mobility status.';
+COMMENT ON COLUMN pre_operative_assessment_by_clinician.falls_risk_within_year IS
+    'Falls risk within year. One of: yes, no.';
+COMMENT ON COLUMN pre_operative_assessment_by_clinician.vte_risk_level IS
+    'VTE (venous thromboembolism) risk level. One of: low, medium, high.';
+COMMENT ON COLUMN pre_operative_assessment_by_clinician.covid_screening_result IS
+    'COVID-19 screening result. One of: not-tested, negative, positive, pending.';
+COMMENT ON COLUMN pre_operative_assessment_by_clinician.discharge_destination IS
+    'Discharge destination. One of: home, home-with-support, residential-care, nursing-home, rehabilitation, other.';
+COMMENT ON COLUMN pre_operative_assessment_by_clinician.follow_up_requirements IS
+    'Follow-up requirements.';
+COMMENT ON COLUMN pre_operative_assessment_by_clinician.social_services_involvement IS
+    'Social services involvement. One of: yes, no.';
+COMMENT ON COLUMN pre_operative_assessment_by_clinician.reablement_physiotherapy_needs IS
+    'Reablement / physiotherapy needs. One of: yes, no.';
+COMMENT ON COLUMN pre_operative_assessment_by_clinician.consent_status IS
+    'Consent status. One of: obtained, pending, declined, unable-to-consent.';
+COMMENT ON COLUMN pre_operative_assessment_by_clinician.interpreter_required IS
+    'Interpreter required. One of: yes, no.';
+COMMENT ON COLUMN pre_operative_assessment_by_clinician.discussion_procedure IS
+    'Discussed the procedure with the patient. One of: yes, no.';
+COMMENT ON COLUMN pre_operative_assessment_by_clinician.discussion_anaesthetic IS
+    'Discussed the anaesthetic with the patient. One of: yes, no.';
+COMMENT ON COLUMN pre_operative_assessment_by_clinician.discussion_risks_benefits IS
+    'Discussed risks and benefits with the patient. One of: yes, no.';
+COMMENT ON COLUMN pre_operative_assessment_by_clinician.discussion_alternatives IS
+    'Discussed alternatives with the patient. One of: yes, no.';

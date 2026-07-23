@@ -206,4 +206,29 @@
 <anticipated_length_of_stay_days>1</anticipated_length_of_stay_days>
 <special_equipment></special_equipment>
 <blood_products_required></blood_products_required>
+<hospital_number>Example Hospital</hospital_number>
+<indication_for_surgery>Example procedure</indication_for_surgery>
+<anaesthetist_name>Example</anaesthetist_name>
+<previous_surgeries></previous_surgeries>
+<previous_anaesthetic_issues>yes</previous_anaesthetic_issues>
+<previous_anaesthetic_issues_details>Example text.</previous_anaesthetic_issues_details>
+<family_history_anaesthetic_complications>yes</family_history_anaesthetic_complications>
+<family_history_anaesthetic_complications_details>Example text.</family_history_anaesthetic_complications_details>
+<urinalysis_findings>Example text.</urinalysis_findings>
+<living_situation>independent</living_situation>
+<support_at_home>yes</support_at_home>
+<mobility_status>active</mobility_status>
+<falls_risk_within_year>yes</falls_risk_within_year>
+<vte_risk_level>low</vte_risk_level>
+<covid_screening_result>not-tested</covid_screening_result>
+<discharge_destination>home</discharge_destination>
+<follow_up_requirements></follow_up_requirements>
+<social_services_involvement>yes</social_services_involvement>
+<reablement_physiotherapy_needs>yes</reablement_physiotherapy_needs>
+<consent_status>obtained</consent_status>
+<interpreter_required>yes</interpreter_required>
+<discussion_procedure>yes</discussion_procedure>
+<discussion_anaesthetic>yes</discussion_anaesthetic>
+<discussion_risks_benefits>yes</discussion_risks_benefits>
+<discussion_alternatives>yes</discussion_alternatives>
 </pre_operative_assessment_by_clinician>
