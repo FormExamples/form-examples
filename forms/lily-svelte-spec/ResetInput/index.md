@@ -124,3 +124,7 @@ import ResetInput from './ResetInput.svelte';
 - `ButtonInput` — generic `<input type="button">`.
 - `Button` — `<button>` element variant.
 - `Form`, `Field`, `Fieldset` — form composition wrappers.
+
+---
+
+Lily™ and Lily Design System™ are trademarks.

@@ -4,7 +4,7 @@ A locale-aware currency input with automatic formatting, symbols, separators.
 
 ## Canonical documentation
 
-See [components/currency-input/index.md](../../../../components/currency-input/index.md) for the full component documentation, including ARIA, keyboard interactions, props, and usage guidance.
+See [components/currency-input/index.md](../../../components/currency-input/index.md) for the full component documentation, including ARIA, keyboard interactions, props, and usage guidance.
 
 ## Svelte usage
 
@@ -21,3 +21,7 @@ See [components/currency-input/index.md](../../../../components/currency-input/i
 - `CurrencyInput.svelte` — Svelte 5 implementation using runes
 - `CurrencyInput.test.ts` — vitest + @testing-library/svelte tests
 - `CurrencyInput.stories.svelte` — Storybook stories
+
+---
+
+Lily™ and Lily Design System™ are trademarks.

@@ -130,3 +130,7 @@ Supply the `value` string (pre-formatted as `X XX XX XX XXX XXX XX`) and a local
 - `UnitedKingdomNationalHealthServiceNumberView` - UK NHS number display.
 - `UnitedStatesSocialSecurityNumberView` - US SSN display.
 - `NorthernIrelandHealthAndCareNumberView` - Northern Ireland H&C number display.
+
+---
+
+Lily™ and Lily Design System™ are trademarks.

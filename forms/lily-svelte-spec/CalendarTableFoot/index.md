@@ -145,3 +145,7 @@ Import `CalendarTableFoot` from `./CalendarTableFoot.svelte`. Place inside `Cale
 
 - `CalendarTable`, `CalendarTableHead`, `CalendarTableBody`, `CalendarTableRow`, `CalendarTableTD`, `CalendarTableTD`.
 - `DataTableFoot`, `GanttTableTfoot`, `KanbanTableFoot`, `TableFoot`.
+
+---
+
+Lily™ and Lily Design System™ are trademarks.

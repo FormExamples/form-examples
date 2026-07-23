@@ -123,3 +123,7 @@ Import the component and bind `value`. Pass a translated `label`. Add `required`
 - `IrelandIndividualHealthIdentifierInput` / `IrelandIndividualHealthIdentifierView` — Ireland IHI.
 - `NorthernIrelandHealthAndCareNumberInput` / `NorthernIrelandHealthAndCareNumberView` — NI H&C number.
 - `UnitedStatesSocialSecurityNumberInput` / `UnitedStatesSocialSecurityNumberView` — US SSN.
+
+---
+
+Lily™ and Lily Design System™ are trademarks.

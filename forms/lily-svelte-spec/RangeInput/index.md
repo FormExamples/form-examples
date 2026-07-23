@@ -123,3 +123,7 @@ import RangeInput from './RangeInput.svelte';
 - `AngleSliderRangeInput` — range input for angles (degrees).
 - `Slider`, `SliderButton` — alternative slider patterns.
 - `SegmentGroup` — discrete named levels.
+
+---
+
+Lily™ and Lily Design System™ are trademarks.

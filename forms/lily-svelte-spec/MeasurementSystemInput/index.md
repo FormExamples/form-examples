@@ -123,3 +123,7 @@ Import the component, pass a `label`, and bind the `value`. Optionally provide a
 - `MeasurementUnitInput` / `MeasurementUnitView` — individual unit.
 - `Select`, `RadioGroup` — constrained alternatives when only a fixed set of systems is valid.
 - `TextInput` — plain text input without measurement-system semantics.
+
+---
+
+Lily™ and Lily Design System™ are trademarks.

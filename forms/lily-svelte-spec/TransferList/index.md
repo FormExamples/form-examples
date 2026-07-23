@@ -70,3 +70,7 @@ A headless Svelte 5 component inspired by [Ant Design Transfer](https://ant.desi
 
 - Ant Design Transfer: https://ant.design/components/transfer
 - WAI-ARIA Listbox Pattern: https://www.w3.org/WAI/ARIA/apg/patterns/listbox/
+
+---
+
+Lily™ and Lily Design System™ are trademarks.

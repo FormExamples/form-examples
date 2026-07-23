@@ -137,3 +137,7 @@ Place `KanbanTableTD` elements inside `KanbanTableRow`. Use `active` together wi
 - `KanbanTableRow` — the `<tr>` row that contains `KanbanTableTD` cells.
 - `KanbanTableTD` — `<col>` column definitions for `<colgroup>`.
 - `DataTableTD`, `CalendarTableTD`, `GanttTableTD` — equivalent cells for other table types.
+
+---
+
+Lily™ and Lily Design System™ are trademarks.

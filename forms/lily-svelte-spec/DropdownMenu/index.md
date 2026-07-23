@@ -118,3 +118,7 @@ Provide a `label` and children with `role="menuitem"` and `tabindex="-1"`.
 - `ContextMenu`, `ContextMenuItem` — right-click/long-press menus.
 - `MenuBar`, `MenuBarButton` — horizontal application menu bars.
 - `Select`, `Combobox`, `Listbox` — selection widgets.
+
+---
+
+Lily™ and Lily Design System™ are trademarks.

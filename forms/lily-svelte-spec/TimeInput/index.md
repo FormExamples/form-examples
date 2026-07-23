@@ -106,3 +106,7 @@ Import, bind `value`, and pass a translated `label`. Optionally constrain the al
 - `DateInput` — date-only input.
 - `DateTimeLocalInput` — combined date + time.
 - `DateTimeNowInput` — date + time with a "now" button.
+
+---
+
+Lily™ and Lily Design System™ are trademarks.

@@ -29,3 +29,7 @@ This component ships zero CSS. The consumer provides all styling targeting `.alb
 ## References
 
 - https://en.wikipedia.org/wiki/National_Health_Service_Central_Register
+
+---
+
+Lily™ and Lily Design System™ are trademarks.

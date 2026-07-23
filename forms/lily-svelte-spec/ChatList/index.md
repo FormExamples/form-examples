@@ -4,7 +4,7 @@ An ordered list of chat list item components.
 
 ## Canonical documentation
 
-See [components/chat-list/index.md](../../../../components/chat-list/index.md) for the full component documentation, including ARIA, keyboard interactions, props, and usage guidance.
+See [components/chat-list/index.md](../../../components/chat-list/index.md) for the full component documentation, including ARIA, keyboard interactions, props, and usage guidance.
 
 ## Svelte usage
 
@@ -21,3 +21,7 @@ See [components/chat-list/index.md](../../../../components/chat-list/index.md) f
 - `ChatList.svelte` — Svelte 5 implementation using runes
 - `ChatList.test.ts` — vitest + @testing-library/svelte tests
 - `ChatList.stories.svelte` — Storybook stories
+
+---
+
+Lily™ and Lily Design System™ are trademarks.

@@ -115,3 +115,7 @@ Import the component, pass content through the default `children` snippet, and o
 - `ErrorSummary` — list of errors at the top of a form.
 - `Banner` / `MedicalBanner` — page-level banners.
 - `Toast` / `Sonner` — transient, dismissible notifications.
+
+---
+
+Lily™ and Lily Design System™ are trademarks.

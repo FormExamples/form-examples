@@ -110,3 +110,7 @@ import RedOrangeYellowGreenBlueView from './RedOrangeYellowGreenBlueView.svelte'
 - `RedOrangeYellowGreenBluePickerButton` — button-style picker sibling.
 - `RedAmberGreenView` — three-level status view.
 - Other read-only status views: `FiveStarRatingView`, `FiveFaceRatingView`, `NetPromoterScoreView`.
+
+---
+
+Lily™ and Lily Design System™ are trademarks.

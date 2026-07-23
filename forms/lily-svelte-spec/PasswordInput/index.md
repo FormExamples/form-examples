@@ -123,3 +123,7 @@ import PasswordInput from './PasswordInput.svelte';
 - `PinInputDiv` — segmented input for PINs and OTPs.
 - `TextInput` — single-line text input for non-sensitive fields.
 - `Field`, `Label`, `Hint`, `ErrorMessage` — wrappers for labels and messaging.
+
+---
+
+Lily™ and Lily Design System™ are trademarks.

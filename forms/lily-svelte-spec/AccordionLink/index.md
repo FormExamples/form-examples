@@ -4,7 +4,7 @@ An accordion link.
 
 ## Canonical documentation
 
-See [components/accordion-link/index.md](../../../../components/accordion-link/index.md) for the full component documentation, including ARIA, keyboard interactions, props, and usage guidance.
+See [components/accordion-link/index.md](../../../components/accordion-link/index.md) for the full component documentation, including ARIA, keyboard interactions, props, and usage guidance.
 
 ## Svelte usage
 
@@ -21,3 +21,7 @@ See [components/accordion-link/index.md](../../../../components/accordion-link/i
 - `AccordionLink.svelte` — Svelte 5 implementation using runes
 - `AccordionLink.test.ts` — vitest + @testing-library/svelte tests
 - `AccordionLink.stories.svelte` — Storybook stories
+
+---
+
+Lily™ and Lily Design System™ are trademarks.

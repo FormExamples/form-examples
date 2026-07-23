@@ -164,3 +164,7 @@ References:
 - `TabBar` - the required parent.
 - `SegmentGroupItem` - radio-style alternative.
 - `Button` - generic button.
+
+---
+
+Lily™ and Lily Design System™ are trademarks.

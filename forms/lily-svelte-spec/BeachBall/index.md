@@ -110,3 +110,7 @@ Import `BeachBall` from `./BeachBall.svelte`. Always pass `label`. Toggle `activ
 - `ProgressCircle` — circular (determinate) progress.
 - `Progress` — linear progress bar.
 - `Skeleton` — placeholder shimmer blocks.
+
+---
+
+Lily™ and Lily Design System™ are trademarks.

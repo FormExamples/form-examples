@@ -103,3 +103,7 @@ Import, bind `value`, and pass a translated `label`. Use `min`/`max`/`step` via 
 - `DateInput` — date-only entry.
 - `DateTimeLocalInput` — combined date and time.
 - `DateTimeNowInput` — combined date + time with a "now" button.
+
+---
+
+Lily™ and Lily Design System™ are trademarks.

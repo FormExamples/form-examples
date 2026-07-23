@@ -114,3 +114,7 @@ References:
 - `Slider` - numeric value selection via range input.
 - `Splitter` - draggable separator.
 - `Resizable` - focusable resize region.
+
+---
+
+Lily™ and Lily Design System™ are trademarks.

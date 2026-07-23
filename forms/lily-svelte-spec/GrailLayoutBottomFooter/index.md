@@ -112,3 +112,7 @@ Place as a direct child of `GrailLayout`. The component itself provides the `con
 - `GrailLayoutTopHeader`, `GrailLayoutLeftAside`, `GrailLayoutCenterMain`, `GrailLayoutRightAside` - sibling slots.
 - `Footer` - semantic `<footer>` landmark component.
 - `Header` - semantic `<header>` landmark component.
+
+---
+
+Lily™ and Lily Design System™ are trademarks.

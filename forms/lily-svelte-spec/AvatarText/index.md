@@ -121,3 +121,7 @@ Import `AvatarText` from `./AvatarText.svelte`. Place inside an `Avatar`. Pass i
 - `AvatarImage` — image sibling.
 - `AvatarGroup` — stacked avatars.
 - `Character`, `Flair` — small display-only text primitives.
+
+---
+
+Lily™ and Lily Design System™ are trademarks.

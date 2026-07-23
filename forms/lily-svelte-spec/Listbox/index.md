@@ -183,3 +183,7 @@ Users can move focus with ArrowDown/ArrowUp (wrapping) and jump to the first/las
 - `DropdownMenu` — a menu that opens below a trigger button.
 - `CheckboxGroup` — a group of checkboxes for multi-select.
 - `RadioGroup` — a group of radios for single-select.
+
+---
+
+Lily™ and Lily Design System™ are trademarks.

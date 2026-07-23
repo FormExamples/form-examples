@@ -132,3 +132,7 @@ Import and bind `value`. Pass a translated `label`. Mark `required` when the for
 - `UnitedKingdomNationalHealthServiceNumberInput` / `UnitedKingdomNationalHealthServiceNumberView` — UK NHS number.
 - `IrelandIndividualHealthIdentifierInput` / `IrelandIndividualHealthIdentifierView` — Ireland IHI.
 - `NorthernIrelandHealthAndCareNumberInput` / `NorthernIrelandHealthAndCareNumberView` — NI H&C number.
+
+---
+
+Lily™ and Lily Design System™ are trademarks.

@@ -29,3 +29,7 @@ This component ships zero CSS. The consumer provides all styling targeting `.slo
 ## References
 
 - https://en.wikipedia.org/wiki/Unique_Master_Citizen_Number
+
+---
+
+Lily™ and Lily Design System™ are trademarks.

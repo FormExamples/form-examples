@@ -4,7 +4,7 @@ A table interactive grid tbody <tbody>.
 
 ## Canonical documentation
 
-See [components/table-body/index.md](../../../../components/table-body/index.md) for the full component documentation, including ARIA, keyboard interactions, props, and usage guidance.
+See [components/table-body/index.md](../../../components/table-body/index.md) for the full component documentation, including ARIA, keyboard interactions, props, and usage guidance.
 
 ## Svelte usage
 
@@ -21,3 +21,7 @@ See [components/table-body/index.md](../../../../components/table-body/index.md)
 - `TableBody.svelte` — Svelte 5 implementation using runes
 - `TableBody.test.ts` — vitest + @testing-library/svelte tests
 - `TableBody.stories.svelte` — Storybook stories
+
+---
+
+Lily™ and Lily Design System™ are trademarks.

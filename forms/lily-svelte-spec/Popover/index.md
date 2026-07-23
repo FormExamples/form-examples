@@ -141,3 +141,7 @@ import Popover from './Popover.svelte';
 - `Dialog`, `AlertDialog`, `FileDialog` — modal alternatives.
 - `Drawer`, `Sheet`, `SlideOutDrawer` — edge-anchored panels.
 - `FloatingPanel` — free-floating panel variant.
+
+---
+
+Lily™ and Lily Design System™ are trademarks.

@@ -121,3 +121,7 @@ Place inside a `<form>` (or `Form`) and set the `name` and `value` for the data 
 - `PasswordInput` - password input.
 - `Input` - generic HTML input wrapper.
 - `Form` - form wrapper with accessibility.
+
+---
+
+Lily™ and Lily Design System™ are trademarks.

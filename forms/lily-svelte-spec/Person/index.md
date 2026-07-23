@@ -4,7 +4,7 @@ A person component that contains other person-related information.
 
 ## Canonical documentation
 
-See [components/person/index.md](../../../../components/person/index.md) for the full component documentation, including ARIA, keyboard interactions, props, and usage guidance.
+See [components/person/index.md](../../../components/person/index.md) for the full component documentation, including ARIA, keyboard interactions, props, and usage guidance.
 
 ## Svelte usage
 
@@ -21,3 +21,7 @@ See [components/person/index.md](../../../../components/person/index.md) for the
 - `Person.svelte` — Svelte 5 implementation using runes
 - `Person.test.ts` — vitest + @testing-library/svelte tests
 - `Person.stories.svelte` — Storybook stories
+
+---
+
+Lily™ and Lily Design System™ are trademarks.

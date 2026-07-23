@@ -76,3 +76,7 @@ A headless Svelte 5 component that renders a single `<article>` element. Categor
 
 - MDN `<article>`: https://developer.mozilla.org/en-US/docs/Web/HTML/Element/article
 - WCAG 2.2 — Non-text Content (1.1.1): https://www.w3.org/WAI/WCAG22/Understanding/non-text-content.html
+
+---
+
+Lily™ and Lily Design System™ are trademarks.

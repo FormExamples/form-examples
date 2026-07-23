@@ -69,3 +69,7 @@ A headless Svelte 5 component for compact item rows in a collection. Inspired by
 ## References
 
 - USWDS Collection: https://designsystem.digital.gov/components/collection/
+
+---
+
+Lily™ and Lily Design System™ are trademarks.

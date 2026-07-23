@@ -134,3 +134,7 @@ Pass a required localized `label` and optionally bind `value`. The consumer rend
 - `UnitedKingdomNationalHealthServiceNumberInput` / ...`View` - UK NHS number.
 - `UnitedStatesSocialSecurityNumberInput` / ...`View` - US SSN.
 - `NumberInput` - generic numeric input.
+
+---
+
+Lily™ and Lily Design System™ are trademarks.

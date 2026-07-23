@@ -31,3 +31,7 @@ This component ships zero CSS. The consumer provides all styling targeting `.ell
 ## References
 
 - https://en.wikipedia.org/wiki/Central_Securities_Depository
+
+---
+
+Lily™ and Lily Design System™ are trademarks.

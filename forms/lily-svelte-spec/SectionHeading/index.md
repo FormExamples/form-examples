@@ -61,3 +61,7 @@ A headless Svelte 5 component that renders a `<header>` block with an eyebrow pa
 
 - HTML heading levels: https://developer.mozilla.org/en-US/docs/Web/HTML/Element/Heading_Elements
 - Mozilla Protocol Design System: https://protocol.mozilla.org
+
+---
+
+Lily™ and Lily Design System™ are trademarks.

@@ -138,3 +138,7 @@ import RadioGroup from './RadioGroup.svelte';
 - `SegmentGroup` / `SegmentGroupItem` — button-styled segmented alternative.
 - `Select` + `Option` — dropdown alternative.
 - `Fieldset` — generic field grouping with a `<legend>`.
+
+---
+
+Lily™ and Lily Design System™ are trademarks.

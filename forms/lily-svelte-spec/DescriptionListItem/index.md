@@ -4,7 +4,7 @@ One key-value pair in a description list using dt and dd elements.
 
 ## Canonical documentation
 
-See [components/description-list-item/index.md](../../../../components/description-list-item/index.md) for the full component documentation, including ARIA, keyboard interactions, props, and usage guidance.
+See [components/description-list-item/index.md](../../../components/description-list-item/index.md) for the full component documentation, including ARIA, keyboard interactions, props, and usage guidance.
 
 ## Svelte usage
 
@@ -21,3 +21,7 @@ See [components/description-list-item/index.md](../../../../components/descripti
 - `DescriptionListItem.svelte` — Svelte 5 implementation using runes
 - `DescriptionListItem.test.ts` — vitest + @testing-library/svelte tests
 - `DescriptionListItem.stories.svelte` — Storybook stories
+
+---
+
+Lily™ and Lily Design System™ are trademarks.

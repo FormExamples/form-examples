@@ -115,3 +115,7 @@ Place as a direct child of `GrailLayout`. The component itself provides the `mai
 - `GrailLayoutTopHeader`, `GrailLayoutLeftAside`, `GrailLayoutRightAside`, `GrailLayoutBottomFooter` - sibling slots.
 - `ArticleLayout` - wrapper for article-scoped content.
 - `SkipLink` - hidden link to jump to main content.
+
+---
+
+Lily™ and Lily Design System™ are trademarks.

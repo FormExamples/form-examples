@@ -122,3 +122,7 @@ import NumberInput from './NumberInput.svelte';
 - `CurrencyInput` — locale-aware currency formatting.
 - `TextInput` — generic text input for non-numeric strings.
 - `Field`, `Label`, `Hint`, `ErrorMessage` — wrappers for adding visible labels and messages.
+
+---
+
+Lily™ and Lily Design System™ are trademarks.

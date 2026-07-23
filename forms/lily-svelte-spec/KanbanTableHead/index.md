@@ -165,3 +165,7 @@ Place `KanbanTableHead` inside a `KanbanTable` and nest a `KanbanTableRow` conta
 - `KanbanTableRow` — a `<tr>` row used inside head/body/foot.
 - `KanbanTableTD` — a `<td role="gridcell">` task cell.
 - `KanbanTableTD` — `<col>` column definitions for `<colgroup>`.
+
+---
+
+Lily™ and Lily Design System™ are trademarks.

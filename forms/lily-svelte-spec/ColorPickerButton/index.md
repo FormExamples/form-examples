@@ -131,3 +131,7 @@ Set `color` to a CSS color. Provide a human-readable `label` (e.g. "Ocean Blue")
 - `ColorPicker` — 2D color region.
 - `ColorInput` — native color input.
 - `ToggleButton` — generic pressed/unpressed toggle.
+
+---
+
+Lily™ and Lily Design System™ are trademarks.

@@ -129,3 +129,7 @@ Import `Avatar` from `./Avatar.svelte`. Always pass `alt` (the person's name). P
 - `AvatarGroup` — visually stacked group.
 - `Person` — richer identity container.
 - `Image`, `FeaturePhoto` — generic images.
+
+---
+
+Lily™ and Lily Design System™ are trademarks.

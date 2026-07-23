@@ -139,3 +139,7 @@ References:
 - `ToolBar`, `ToolBarButton` - related toolbar pattern.
 - `MenuBar`, `MenuBarButton` - menu bar.
 - `TabBar`, `TabBarButton` - tabs pattern.
+
+---
+
+Lily™ and Lily Design System™ are trademarks.

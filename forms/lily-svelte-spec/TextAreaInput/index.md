@@ -102,3 +102,7 @@ Import, bind `value`, pass a translated `label`, and optionally set `rows`. Add 
 - `TextInput` — single-line text input.
 - `CharacterCounter` — standalone counter you can pair with `TextAreaInput`.
 - `Field` — wrapper providing a visible `<label>`, hint, and error.
+
+---
+
+Lily™ and Lily Design System™ are trademarks.

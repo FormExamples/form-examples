@@ -4,7 +4,7 @@ A group of dial components.
 
 ## Canonical documentation
 
-See [components/dial-group/index.md](../../../../components/dial-group/index.md) for the full component documentation, including ARIA, keyboard interactions, props, and usage guidance.
+See [components/dial-group/index.md](../../../components/dial-group/index.md) for the full component documentation, including ARIA, keyboard interactions, props, and usage guidance.
 
 ## Svelte usage
 
@@ -21,3 +21,7 @@ See [components/dial-group/index.md](../../../../components/dial-group/index.md)
 - `DialGroup.svelte` — Svelte 5 implementation using runes
 - `DialGroup.test.ts` — vitest + @testing-library/svelte tests
 - `DialGroup.stories.svelte` — Storybook stories
+
+---
+
+Lily™ and Lily Design System™ are trademarks.

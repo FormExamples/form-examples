@@ -94,3 +94,7 @@ Provide a required `label` and optional `accept`.
 - `ImageFileInput` — image file input with preview.
 - `FileManager` — embedded file browser region.
 - `FileDialog` — modal file operation dialog.
+
+---
+
+Lily™ and Lily Design System™ are trademarks.

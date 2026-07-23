@@ -106,3 +106,7 @@ Wrap slides inside `<Carousel label="...">`. Label is required and describes the
 - `HorizontalScroller` — non-carousel horizontal scrolling.
 - `Scroller`, `ScrollerVideo` — scrollytelling variants.
 - `Tour`, `TourList`, `TourListItem` — step-by-step guided content.
+
+---
+
+Lily™ and Lily Design System™ are trademarks.

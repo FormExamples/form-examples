@@ -115,3 +115,7 @@ Pass a required `summary` string and wrap the revealed content in the default sl
 - `Expander` — button-triggered disclosure with `aria-expanded`/`aria-controls`.
 - `Collapsible` — generic collapsible container.
 - `AccordionList` / `AccordionListItem` — grouped disclosures in an accordion pattern.
+
+---
+
+Lily™ and Lily Design System™ are trademarks.

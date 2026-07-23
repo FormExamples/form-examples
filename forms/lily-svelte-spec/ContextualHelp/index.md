@@ -61,3 +61,7 @@ A headless Svelte 5 component that renders a wrapper `<div class="contextual-hel
 
 - Adobe Spectrum ContextualHelp: https://spectrum.adobe.com/page/contextual-help/
 - WAI-ARIA Dialog Pattern: https://www.w3.org/WAI/ARIA/apg/patterns/dialog-modal/
+
+---
+
+Lily™ and Lily Design System™ are trademarks.

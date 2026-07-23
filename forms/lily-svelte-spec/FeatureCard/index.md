@@ -72,3 +72,7 @@ A headless Svelte 5 component rendering an `<article>` landmark containing an op
 
 - HTML `<article>`: https://developer.mozilla.org/en-US/docs/Web/HTML/Element/article
 - Mozilla Protocol Design System: https://protocol.mozilla.org
+
+---
+
+Lily™ and Lily Design System™ are trademarks.

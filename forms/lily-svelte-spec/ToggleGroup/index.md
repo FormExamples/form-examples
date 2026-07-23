@@ -112,3 +112,7 @@ Import and wrap `ToggleButton` children (or any buttons using `aria-pressed`/`ar
 - `RadioGroup` — mutually exclusive radio selection.
 - `SegmentGroup` / `SegmentGroupItem` — segmented single-select.
 - `ToolBar` / `ToolBarButton` — toolbar with arrow-key roving focus.
+
+---
+
+Lily™ and Lily Design System™ are trademarks.

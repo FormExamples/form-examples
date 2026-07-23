@@ -103,3 +103,7 @@ Bind the `checked` prop for reactivity. Provide `label` for accessibility. Wrap 
 - `CheckboxGroup` — groups related checkboxes.
 - `CheckListItem` — `<li>`-wrapped checkbox with visible label.
 - `SwitchButton` — styled on/off toggle.
+
+---
+
+Lily™ and Lily Design System™ are trademarks.

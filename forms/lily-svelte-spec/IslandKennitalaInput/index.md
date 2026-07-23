@@ -31,3 +31,7 @@ This component ships zero CSS. The consumer provides all styling targeting `.isl
 ## References
 
 - https://en.wikipedia.org/wiki/Kennitala
+
+---
+
+Lily™ and Lily Design System™ are trademarks.

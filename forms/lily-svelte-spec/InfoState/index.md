@@ -86,3 +86,7 @@ A headless Svelte 5 component that renders a single `<section>` element. Categor
 
 - WAI-ARIA `role="status"`: https://www.w3.org/WAI/ARIA/apg/patterns/alert/
 - MDN `<section>`: https://developer.mozilla.org/en-US/docs/Web/HTML/Element/section
+
+---
+
+Lily™ and Lily Design System™ are trademarks.

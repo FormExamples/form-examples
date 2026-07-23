@@ -112,3 +112,7 @@ import NetPromoterScoreView from './NetPromoterScoreView.svelte';
 - `NetPromoterScorePicker`, `NetPromoterScorePickerButton` — capture an NPS score.
 - `FiveStarRatingView`, `FiveFaceRatingView` — sibling rating view components.
 - `RedAmberGreenView`, `RedOrangeYellowGreenBlueView` — sibling read-only status displays.
+
+---
+
+Lily™ and Lily Design System™ are trademarks.

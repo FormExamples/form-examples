@@ -129,3 +129,7 @@ Import `AngleSliderRangeInput` from `./AngleSliderRangeInput.svelte`. Provide `l
 - `Dial` — rotary value picker.
 - `NumberInput` — plain number input.
 - `ColorPicker` — hue/saturation 2D picker.
+
+---
+
+Lily™ and Lily Design System™ are trademarks.

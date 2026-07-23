@@ -136,3 +136,7 @@ Import the component, optionally bind `open` to consumer state, and supply the n
 - `Menu` / `MenuItem` - generic menu and items.
 - `Drawer` / `Sheet` / `SlideOutDrawer` - edge-anchored navigation panels.
 - `AccordionNav` - hierarchical accordion navigation.
+
+---
+
+Lily™ and Lily Design System™ are trademarks.

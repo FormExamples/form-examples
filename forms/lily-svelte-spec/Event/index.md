@@ -4,7 +4,7 @@ An event component that contains other event-related information.
 
 ## Canonical documentation
 
-See [components/event/index.md](../../../../components/event/index.md) for the full component documentation, including ARIA, keyboard interactions, props, and usage guidance.
+See [components/event/index.md](../../../components/event/index.md) for the full component documentation, including ARIA, keyboard interactions, props, and usage guidance.
 
 ## Svelte usage
 
@@ -21,3 +21,7 @@ See [components/event/index.md](../../../../components/event/index.md) for the f
 - `Event.svelte` — Svelte 5 implementation using runes
 - `Event.test.ts` — vitest + @testing-library/svelte tests
 - `Event.stories.svelte` — Storybook stories
+
+---
+
+Lily™ and Lily Design System™ are trademarks.

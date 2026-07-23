@@ -133,3 +133,7 @@ References:
 - `TagInput` - input for adding new tags.
 - `Badge` - single count/status indicator.
 - `CheckboxGroup` - multi-select form group.
+
+---
+
+Lily™ and Lily Design System™ are trademarks.

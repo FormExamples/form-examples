@@ -66,3 +66,7 @@ A headless Svelte 5 component rendering an `<a>` element with the `download` att
 
 - HTML `<a>` `download` attribute: https://developer.mozilla.org/en-US/docs/Web/HTML/Element/a#download
 - Mozilla Protocol Design System: https://protocol.mozilla.org
+
+---
+
+Lily™ and Lily Design System™ are trademarks.

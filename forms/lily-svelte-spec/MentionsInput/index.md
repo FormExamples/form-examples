@@ -81,3 +81,7 @@ A headless Svelte 5 component inspired by [Ant Design Mentions](https://ant.desi
 
 - Ant Design Mentions: https://ant.design/components/mentions
 - WAI-ARIA Combobox Pattern: https://www.w3.org/WAI/ARIA/apg/patterns/combobox/
+
+---
+
+Lily™ and Lily Design System™ are trademarks.

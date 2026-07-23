@@ -131,3 +131,7 @@ import Option from './Option.svelte';
 - `ThemeSelect` + `ThemeSelectOption` — theme-specific select pair.
 - `SelectWithExtras` — select with search or grouped options.
 - `Combobox`, `Listbox` — richer alternatives to a native select.
+
+---
+
+Lily™ and Lily Design System™ are trademarks.

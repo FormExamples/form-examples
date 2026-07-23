@@ -138,3 +138,7 @@ import RedOrangeYellowGreenBluePickerButton from './RedOrangeYellowGreenBluePick
 - `RedOrangeYellowGreenBlueView` — read-only display sibling.
 - `RedAmberGreenPickerButton` — three-level button equivalent.
 - Other picker buttons: `FiveStarRatingPickerButton`, `FiveFaceRatingPickerButton`, `NetPromoterScorePickerButton`.
+
+---
+
+Lily™ and Lily Design System™ are trademarks.

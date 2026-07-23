@@ -157,3 +157,7 @@ Keyboard-arrow handling (consumer-provided on the parent):
 - `SegmentGroup` - the required parent.
 - `RadioInput` - native `<input type="radio">`.
 - `ToggleButton` / `ToggleGroup` - multi-select toggle equivalent.
+
+---
+
+Lily™ and Lily Design System™ are trademarks.

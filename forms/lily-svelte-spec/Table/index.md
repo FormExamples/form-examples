@@ -166,3 +166,7 @@ References:
 - `DataTable` - sortable data grid.
 - `CalendarTable`, `GanttTable`, `KanbanTable` - specialized tables.
 - `SummaryList` - key-value pair alternative.
+
+---
+
+Lily™ and Lily Design System™ are trademarks.

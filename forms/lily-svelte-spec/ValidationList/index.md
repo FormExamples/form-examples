@@ -60,3 +60,7 @@ A headless Svelte 5 component inspired by the U.S. Web Design System (USWDS) Val
 
 - USWDS Validation: https://designsystem.digital.gov/components/validation/
 - WAI-ARIA aria-live: https://www.w3.org/TR/wai-aria-1.2/#aria-live
+
+---
+
+Lily™ and Lily Design System™ are trademarks.

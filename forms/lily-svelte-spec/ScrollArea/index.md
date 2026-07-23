@@ -109,3 +109,7 @@ References:
 - `Resizable` - focusable region with resize semantics.
 - `Splitter` - separator between two panels.
 - `Sidebar` - complementary landmark without scroll guarantees.
+
+---
+
+Lily™ and Lily Design System™ are trademarks.

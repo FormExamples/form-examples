@@ -142,3 +142,7 @@ Consumers can style Detractors, Passives, and Promoters via the `data-value` att
 - `NetPromoterScoreView` — read-only display counterpart.
 - `FiveStarRatingPickerButton`, `FiveFaceRatingPickerButton` — sibling rating picker buttons.
 - `RedAmberGreenPickerButton`, `RedOrangeYellowGreenBluePickerButton` — status picker buttons with the same compound pattern.
+
+---
+
+Lily™ and Lily Design System™ are trademarks.

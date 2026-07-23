@@ -132,3 +132,7 @@ Bind `editing` and handle `onsubmit`. Place any inputs and action buttons inside
 - `Editable` — inline edit of a single string value.
 - `Form`, `Field` — standard form composition primitives.
 - `Dialog` — for full-screen modal edits.
+
+---
+
+Lily™ and Lily Design System™ are trademarks.

@@ -135,3 +135,7 @@ Import `Banner` from `./Banner.svelte`. Provide children as the message. For dis
 - `Alert` — inline status message.
 - `Toast`, `Sonner` — transient notifications.
 - `AlertDialog` — modal acknowledgment dialog.
+
+---
+
+Lily™ and Lily Design System™ are trademarks.

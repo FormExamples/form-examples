@@ -106,3 +106,7 @@ Place one or more `DoListItem`s inside a `DoList`.
 - `DoList` — the ordered-list container.
 - `DontList`, `DontListItem` — the paired anti-pattern list.
 - `CheckListItem`, `TaskListItem`, `SummaryListItem` — other list-item variants.
+
+---
+
+Lily™ and Lily Design System™ are trademarks.

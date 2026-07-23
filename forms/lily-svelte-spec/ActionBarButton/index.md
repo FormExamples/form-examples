@@ -60,3 +60,7 @@ A headless Svelte 5 component that renders a native `<button class="action-bar-b
 
 - Adobe Spectrum ActionBar: https://spectrum.adobe.com/page/action-bar/
 - WAI-ARIA Button Pattern: https://www.w3.org/WAI/ARIA/apg/patterns/button/
+
+---
+
+Lily™ and Lily Design System™ are trademarks.

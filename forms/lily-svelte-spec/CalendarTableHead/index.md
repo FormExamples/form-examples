@@ -137,3 +137,7 @@ Import `CalendarTableHead` from `./CalendarTableHead.svelte`. Place at the top o
 
 - `CalendarTable`, `CalendarTableBody`, `CalendarTableFoot`, `CalendarTableRow`, `CalendarTableTD`, `CalendarTableTD`.
 - `DataTableHead`, `GanttTableHead`, `KanbanTableHead`, `TableHead`.
+
+---
+
+Lily™ and Lily Design System™ are trademarks.

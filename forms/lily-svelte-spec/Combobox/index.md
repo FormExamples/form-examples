@@ -137,3 +137,7 @@ Bind `value` for filtering. Bind `open` to control visibility. Provide `role="op
 - `Command` — search-focused command palette variant.
 - `Listbox` — standalone selectable list.
 - `Select`, `SelectWithExtras` — `<select>`-based alternatives.
+
+---
+
+Lily™ and Lily Design System™ are trademarks.

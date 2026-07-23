@@ -83,3 +83,7 @@ Wrap the glyph in `<Character>`. Always provide `label` when the character conve
 - `Emoji` — emoji-specific variant with accessibility semantics.
 - `Icon` — container for SVG icons.
 - `ScreenReaderSpan` — visually hidden text intended only for screen readers.
+
+---
+
+Lily™ and Lily Design System™ are trademarks.

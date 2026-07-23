@@ -125,3 +125,7 @@ References:
 - `ButtonInput` - `<input type="button">` (no default submission).
 - `ResetInput` - `<input type="reset">`.
 - `Form` - form wrapper.
+
+---
+
+Lily™ and Lily Design System™ are trademarks.

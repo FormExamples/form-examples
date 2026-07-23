@@ -180,3 +180,7 @@ ArrowRight/ArrowLeft move focus horizontally between items. Home/End jump to fir
 - `ContextMenu` — right-click menu.
 - `TabBar` / `TabBarButton` — horizontal tabs for switching content panels.
 - `ToolBar` / `ToolBarButton` — horizontal toolbar for actions.
+
+---
+
+Lily™ and Lily Design System™ are trademarks.

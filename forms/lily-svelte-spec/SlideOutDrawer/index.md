@@ -136,3 +136,7 @@ References:
 - `Drawer` - simple edge panel.
 - `Dialog`, `AlertDialog` - centered modal dialogs.
 - `Sidebar` - persistent complementary region.
+
+---
+
+Lily™ and Lily Design System™ are trademarks.

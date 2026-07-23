@@ -130,3 +130,7 @@ References:
 - `TextInputWithSearch` - text input with search affordances.
 - `Combobox` - text input with dropdown suggestions.
 - `TagInput` - build a list of tags from typed entries.
+
+---
+
+Lily™ and Lily Design System™ are trademarks.

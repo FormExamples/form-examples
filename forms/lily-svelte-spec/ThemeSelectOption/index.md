@@ -120,3 +120,7 @@ Import and place inside `ThemeSelect`. Provide a unique `value` and label conten
 - `Option` — generic option for use with the generic `Select`.
 - `ThemeSelect` — radio-group alternative.
 - `ThemeSelectButton` — swatch-button alternative.
+
+---
+
+Lily™ and Lily Design System™ are trademarks.

@@ -101,3 +101,7 @@ Pass the visualization content as children and a descriptive `label`.
 - `GraphicBlock` — richer wrapper with title, description, notes, and ARIA description.
 - `FeaturePhoto`, `Image` — photographic content.
 - `Sparkline`, `Chart` components — chart primitives suitable as children.
+
+---
+
+Lily™ and Lily Design System™ are trademarks.

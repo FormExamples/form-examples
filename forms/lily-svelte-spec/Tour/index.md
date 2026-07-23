@@ -159,3 +159,7 @@ Import `Tour`, `TourList`, and `TourListItem`. Bind `active`, track a `step` ind
 - `TourListItem` — individual steps within the tour.
 - `Dialog` / `AlertDialog` — simpler single-message modal dialogs.
 - `Drawer` / `Sheet` — side-panel alternatives.
+
+---
+
+Lily™ and Lily Design System™ are trademarks.

@@ -105,3 +105,7 @@ Place as a child of `CheckList`. Pass the item text as children.
 - `CheckList` — parent container.
 - `CheckboxInput` — bare checkbox input.
 - `TaskListItem` — task-tracking list item.
+
+---
+
+Lily™ and Lily Design System™ are trademarks.

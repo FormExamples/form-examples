@@ -118,3 +118,7 @@ import PaginationListItem from './PaginationListItem.svelte';
 
 - `PaginationNav`, `PaginationList` — navigation landmark and list containers.
 - `BreadcrumbListItem`, `TreeListItem`, `ContentsListItem` — sibling list-item components.
+
+---
+
+Lily™ and Lily Design System™ are trademarks.

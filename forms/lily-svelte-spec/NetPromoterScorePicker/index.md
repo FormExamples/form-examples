@@ -154,3 +154,7 @@ The rendered markup is a `<fieldset role="radiogroup">` containing 11 `<label>` 
 - `RedOrangeYellowGreenBluePicker` / `RedOrangeYellowGreenBlueView` — five-level colour status.
 - `RadioGroup` — generic radio group.
 - `RangeInput` — slider input for numeric values.
+
+---
+
+Lily™ and Lily Design System™ are trademarks.

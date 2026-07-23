@@ -103,3 +103,7 @@ Import `BackLink` from `./BackLink.svelte`. Always pass `href`. Optionally provi
 - `BreadcrumbLink`, `BreadcrumbNav` — hierarchical trail navigation.
 - `SkipLink` — hidden keyboard shortcut to main content.
 - `Button` — for history-based back using JavaScript.
+
+---
+
+Lily™ and Lily Design System™ are trademarks.

@@ -143,3 +143,7 @@ Place inside a `MedicalBanner` or `MedicalBannerBox`, pass a descriptive `label`
 - `MedicalBannerBoxForAdvice` — paired advice-level region.
 - `Alert`, `AlertDialog`, `WarningCallout` — general-purpose warning/alert patterns.
 - `CareCard` — a medical care instruction card with urgency levels.
+
+---
+
+Lily™ and Lily Design System™ are trademarks.

@@ -118,3 +118,7 @@ Import the component, pass a `label`, and bind the `value`. Validate the format 
 - `MeasurementUnitInput` / `MeasurementUnitView` — measurement unit input/display.
 - `NumberInput` — numeric-only input without a unit.
 - `CurrencyInput` — locale-aware currency input.
+
+---
+
+Lily™ and Lily Design System™ are trademarks.

@@ -113,3 +113,7 @@ import Progress from './Progress.svelte';
 - `ProgressSpinner` — indeterminate spinning indicator.
 - `Meter` — non-progress measurement within a range.
 - `Loading`, `Skeleton` — alternative loading affordances.
+
+---
+
+Lily™ and Lily Design System™ are trademarks.

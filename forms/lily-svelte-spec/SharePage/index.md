@@ -4,7 +4,7 @@ A component for sharing the page on social media.
 
 ## Canonical documentation
 
-See [components/share-page/index.md](../../../../components/share-page/index.md) for the full component documentation, including ARIA, keyboard interactions, props, and usage guidance.
+See [components/share-page/index.md](../../../components/share-page/index.md) for the full component documentation, including ARIA, keyboard interactions, props, and usage guidance.
 
 ## Svelte usage
 
@@ -21,3 +21,7 @@ See [components/share-page/index.md](../../../../components/share-page/index.md)
 - `SharePage.svelte` — Svelte 5 implementation using runes
 - `SharePage.test.ts` — vitest + @testing-library/svelte tests
 - `SharePage.stories.svelte` — Storybook stories
+
+---
+
+Lily™ and Lily Design System™ are trademarks.

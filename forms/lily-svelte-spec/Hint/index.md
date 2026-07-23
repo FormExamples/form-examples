@@ -105,3 +105,7 @@ Place near the form control. Set a unique `id` and reference it from the input's
 - `Tooltip` / `HoverCard` - hover/focus popups.
 - `InformationCallout` - larger informational callout.
 - `Field` - wraps label, input, hint, and error together.
+
+---
+
+Lily™ and Lily Design System™ are trademarks.

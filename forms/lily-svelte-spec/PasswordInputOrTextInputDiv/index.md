@@ -133,3 +133,7 @@ import PasswordInputOrTextInputDiv from './PasswordInputOrTextInputDiv.svelte';
 - `PinInputDiv` — segmented PIN / OTP entry.
 - `TextInput` — standard text input.
 - `Field`, `Label`, `Hint`, `ErrorMessage` — labeling and messaging wrappers.
+
+---
+
+Lily™ and Lily Design System™ are trademarks.

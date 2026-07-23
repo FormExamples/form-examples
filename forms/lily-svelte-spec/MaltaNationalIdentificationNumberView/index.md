@@ -29,3 +29,7 @@ This component ships zero CSS. The consumer provides all styling targeting `.mal
 ## References
 
 - https://en.wikipedia.org/wiki/National_identification_number#Malta
+
+---
+
+Lily™ and Lily Design System™ are trademarks.

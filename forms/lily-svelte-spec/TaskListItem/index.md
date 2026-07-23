@@ -113,3 +113,7 @@ Import the component and place it inside a `TaskList` (or any `<ol>`/`<ul>`). Su
 - `TaskList` — the parent list container for `TaskListItem` children.
 - `CheckListItem` — similar but inside a `CheckList`.
 - `CheckboxInput` — the lower-level checkbox primitive for custom compositions.
+
+---
+
+Lily™ and Lily Design System™ are trademarks.

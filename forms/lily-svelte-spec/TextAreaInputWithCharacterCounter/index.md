@@ -123,3 +123,7 @@ Import, pass `label`, `maxLength`, and bind `value`. Optionally provide a transl
 - `CharacterCounter` — standalone counter for pairing with other inputs.
 - `TextInput` — single-line equivalent.
 - `Field` — provides a visible label/hint/error wrapper.
+
+---
+
+Lily™ and Lily Design System™ are trademarks.

@@ -31,3 +31,7 @@ This component ships zero CSS. The consumer provides all styling targeting `.sve
 ## References
 
 - https://en.wikipedia.org/wiki/Personal_identity_number_(Sweden)
+
+---
+
+Lily™ and Lily Design System™ are trademarks.

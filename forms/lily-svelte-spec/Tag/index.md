@@ -112,3 +112,7 @@ References:
 - `TagInput` - text input for creating tags.
 - `Badge` - count/status badge.
 - `Flair` - decorative highlight.
+
+---
+
+Lily™ and Lily Design System™ are trademarks.

@@ -1,0 +1,33 @@
+<!-- image-cropper.html -->
+<!-- ImageCropper component -->
+<!--
+  Description: a container for cropping and resizing an image to a selected region
+  HTML tag: <div>
+  CSS class: image-cropper
+  Role: application
+  Keyboard: None (passive element)
+  Accessibility: role="application" and aria-label for accessible name
+  Usage:
+    <div class="image-cropper" role="application" aria-label="Example">
+      ...
+    </div>
+-->
+
+<div
+  class="image-cropper"
+  role="application"
+  aria-label=""
+>
+  <!-- Consumer provides content -->
+</div>
+
+<script>
+  // ImageCropper behavior
+  (function() {
+    'use strict';
+    // ImageCropper: consumer implements interactive behavior
+    document.querySelectorAll('.image-cropper').forEach(function(el) {
+      // Interactive behavior initialization
+    });
+  })();
+</script>

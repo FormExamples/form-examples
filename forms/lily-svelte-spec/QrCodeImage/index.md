@@ -119,3 +119,7 @@ import QrCodeImage from './QrCodeImage.svelte';
 
 - `Image`, `Icon` — simple image and icon containers.
 - `ClipboardCopyButton` — copy-to-clipboard alternative for URLs.
+
+---
+
+Lily™ and Lily Design System™ are trademarks.

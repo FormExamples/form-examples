@@ -6,3 +6,7 @@ A generic block-level content container.
 
 - `class`: `string` — extra CSS classes.
 - `children`: `Snippet` — content slot.
+
+---
+
+Lily™ and Lily Design System™ are trademarks.

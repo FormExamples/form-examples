@@ -98,3 +98,7 @@ Pass the TSI string and an accessible label.
 - `EspanaTarjetaSanitariaIndividualInput` — input counterpart.
 - `UnitedKingdomNationalHealthServiceNumberView`, `FranceNumeroDIdentificationAuRepertoireView`, `IrelandIndividualHealthIdentifierView`, `NorthernIrelandHealthAndCareNumberView`, `UnitedStatesSocialSecurityNumberView` — analogous views for other countries.
 - `SummaryList`, `SummaryListItem` — key/value displays.
+
+---
+
+Lily™ and Lily Design System™ are trademarks.

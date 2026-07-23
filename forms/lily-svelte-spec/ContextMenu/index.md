@@ -129,3 +129,7 @@ Control `open` from your `oncontextmenu` handler on the trigger element. Provide
 - `ContextMenuItem` — individual `menuitem`.
 - `DropdownMenu` — menu opened below a trigger.
 - `Menu`, `MenuItem` — general-purpose menu pattern.
+
+---
+
+Lily™ and Lily Design System™ are trademarks.

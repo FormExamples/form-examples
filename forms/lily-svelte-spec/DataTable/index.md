@@ -187,3 +187,7 @@ Compose head/body/foot/row/cell components. Provide a descriptive `label` for th
 - `DataTableHead`, `DataTableBody`, `DataTableFoot`, `DataTableRow`, `DataTableTD`, `DataTableTD` — compound parts.
 - `Table` — static table.
 - `CalendarTable`, `GanttTable`, `KanbanTable` — specialized tables.
+
+---
+
+Lily™ and Lily Design System™ are trademarks.

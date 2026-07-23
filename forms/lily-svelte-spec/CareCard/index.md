@@ -102,3 +102,7 @@ Provide a required `heading` describing the action, and optionally pick one of t
 - `Alert`, `AlertDialog` — for time-bound and modal alert messages.
 - `InformationCallout`, `WarningCallout` — general, non-clinical callouts.
 - `MedicalBanner`, `MedicalBannerBox` — page-level medical messaging.
+
+---
+
+Lily™ and Lily Design System™ are trademarks.

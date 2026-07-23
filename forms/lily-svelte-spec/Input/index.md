@@ -135,3 +135,7 @@ Import the component, pass a `label` for screen readers, bind the `value`, and o
 - `Field` — wraps an input with a visible label, hint, and error message.
 - `Label` — a standalone `<label>` element linked to an input by `for`.
 - `Form` — the form container that collects and submits inputs.
+
+---
+
+Lily™ and Lily Design System™ are trademarks.

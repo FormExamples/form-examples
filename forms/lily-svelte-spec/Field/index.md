@@ -120,3 +120,7 @@ Place an input inside `Field`. Supply the input's `id` so the `<label for>` bind
 - `ErrorSummary` — summary of all form errors at the top of the form.
 - `ErrorMessage`, `Hint`, `Label` — lower-level pieces.
 - `Form` — top-level form wrapper.
+
+---
+
+Lily™ and Lily Design System™ are trademarks.

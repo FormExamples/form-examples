@@ -118,3 +118,7 @@ Pass `src` and `alt`. Optionally pass `caption` to get the figure/figcaption wra
 - `QrCodeImage` - QR code image generator.
 - `Figure` - standalone figure/figcaption wrapper.
 - `FeaturePhoto` - responsive photo component with alt-text validation.
+
+---
+
+Lily™ and Lily Design System™ are trademarks.

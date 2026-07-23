@@ -121,3 +121,7 @@ Place as a direct child of `GrailLayout`. The component itself provides the `ban
 - `Banner` - prominent message bar across the top of a page.
 - `SuperBanner` - high-priority system banner.
 - `HamburgerMenu` - mobile navigation toggle.
+
+---
+
+Lily™ and Lily Design System™ are trademarks.

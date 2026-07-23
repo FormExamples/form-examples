@@ -111,3 +111,7 @@ Bind `value` and provide a `label`.
 - `FiveStarRatingPicker`, `FiveStarRatingView` — star-based rating alternatives.
 - `NetPromoterScorePicker`, `NetPromoterScoreView` — 0–10 NPS alternative.
 - `RedAmberGreenPicker`, `RedOrangeYellowGreenBluePicker` — colour-based alternatives.
+
+---
+
+Lily™ and Lily Design System™ are trademarks.

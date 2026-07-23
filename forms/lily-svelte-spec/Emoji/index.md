@@ -95,3 +95,7 @@ Pass the emoji and a descriptive label.
 - `Icon` — generic icon container.
 - `Character` — single character display primitive.
 - `ScreenReaderSpan` — visually hidden descriptive text.
+
+---
+
+Lily™ and Lily Design System™ are trademarks.

@@ -119,3 +119,7 @@ Import and place inside a `TimelineList`. Set `datetime` (ISO) and `heading` (vi
 - `TaskListItem` — task-style list item with checkbox.
 - `SummaryListItem` — key-value summary row.
 - `EndNotes` — end-of-article notes list.
+
+---
+
+Lily™ and Lily Design System™ are trademarks.

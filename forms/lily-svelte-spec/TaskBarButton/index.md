@@ -98,3 +98,7 @@ Import the component and place one or more `TaskBarButton` elements inside a `Ta
 - `ToolBar` / `ToolBarButton` — similar pattern with built-in roving focus for editor-style toolbars.
 - `MenuBar` / `MenuBarButton` — menubar navigation pattern.
 - `Button` — a generic button for standalone use outside of bars.
+
+---
+
+Lily™ and Lily Design System™ are trademarks.

@@ -29,3 +29,7 @@ This component ships zero CSS. The consumer provides all styling targeting `.ita
 ## References
 
 - https://en.wikipedia.org/wiki/Italian_fiscal_code
+
+---
+
+Lily™ and Lily Design System™ are trademarks.

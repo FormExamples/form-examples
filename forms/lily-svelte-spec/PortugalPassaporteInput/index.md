@@ -31,3 +31,7 @@ This component ships zero CSS. The consumer provides all styling targeting `.por
 ## References
 
 - https://en.wikipedia.org/wiki/Portuguese_passport
+
+---
+
+Lily™ and Lily Design System™ are trademarks.

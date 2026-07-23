@@ -115,3 +115,7 @@ Import the component and pass content through `children`. Use `heading` and `hea
 - `CareCard` — medical care variant with urgency levels.
 - `Alert`, `Banner` — for prominent page-level messages rather than grouped content.
 - `Hero`, `Tile` — for larger feature presentations.
+
+---
+
+Lily™ and Lily Design System™ are trademarks.

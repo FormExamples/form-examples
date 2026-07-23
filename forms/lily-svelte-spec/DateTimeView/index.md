@@ -80,3 +80,7 @@ Import `DateTimeView` and pass an ISO 8601 `value`. Format the display string yo
 
 - MDN `<time>`: https://developer.mozilla.org/en-US/docs/Web/HTML/Element/time
 - ISO 8601: https://en.wikipedia.org/wiki/ISO_8601
+
+---
+
+Lily™ and Lily Design System™ are trademarks.

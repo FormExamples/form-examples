@@ -153,3 +153,7 @@ Wrap navigation content in `NavigationMenu`, pass a descriptive `label`, and inc
 - `AccordionNav` / `AccordionList` / `AccordionListItem` — collapsible navigation sections.
 - `Sidebar` — a side panel for navigation or supplementary content.
 - `HamburgerMenu` — a toggle button that opens a mobile navigation menu.
+
+---
+
+Lily™ and Lily Design System™ are trademarks.

@@ -77,3 +77,7 @@ A headless Svelte 5 component that renders a `<div role="group">` with an `aria-
 
 - Adobe Spectrum ActionGroup: https://spectrum.adobe.com/page/action-group/
 - WAI-ARIA Button Pattern: https://www.w3.org/WAI/ARIA/apg/patterns/button/
+
+---
+
+Lily™ and Lily Design System™ are trademarks.

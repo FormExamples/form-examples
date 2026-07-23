@@ -112,3 +112,7 @@ Import the component, pass the `value` string, and optionally provide a `label` 
 - `MeasurementSystemView` / `MeasurementSystemInput` — measurement system.
 - `MeasurementUnitView` / `MeasurementUnitInput` — measurement unit.
 - `BodyText` — general text block.
+
+---
+
+Lily™ and Lily Design System™ are trademarks.

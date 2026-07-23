@@ -147,3 +147,7 @@ Place inside a `GanttTable` after `GanttTableBody` and populate with `GanttTable
 - `GanttTableTR` - row wrapper.
 - `GanttTableTD` - data cell primitive.
 - `GanttTableTH` - column definition.
+
+---
+
+Lily™ and Lily Design System™ are trademarks.

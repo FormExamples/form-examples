@@ -124,3 +124,7 @@ Import `Alert` from `./Alert.svelte`. Pass the severity `type` for styling and c
 - `Notification` — brief event or update message.
 - `ErrorMessage`, `ErrorSummary` — form error presentation.
 - `InformationCallout`, `WarningCallout` — static emphasis callouts.
+
+---
+
+Lily™ and Lily Design System™ are trademarks.

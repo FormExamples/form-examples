@@ -99,3 +99,7 @@ Bind `value` to a `$state` variable. Provide `label` for accessibility since the
 
 - `ColorPicker` — 2D saturation/brightness picker.
 - `ColorPickerButton` — single swatch button for predefined colors.
+
+---
+
+Lily™ and Lily Design System™ are trademarks.

@@ -4,7 +4,7 @@ A horizontal bar chart visualization for displaying data.
 
 ## Canonical documentation
 
-See [components/bar-chart/index.md](../../../../components/bar-chart/index.md) for the full component documentation, including ARIA, keyboard interactions, props, and usage guidance.
+See [components/bar-chart/index.md](../../../components/bar-chart/index.md) for the full component documentation, including ARIA, keyboard interactions, props, and usage guidance.
 
 ## Svelte usage
 
@@ -21,3 +21,7 @@ See [components/bar-chart/index.md](../../../../components/bar-chart/index.md) f
 - `BarChart.svelte` — Svelte 5 implementation using runes
 - `BarChart.test.ts` — vitest + @testing-library/svelte tests
 - `BarChart.stories.svelte` — Storybook stories
+
+---
+
+Lily™ and Lily Design System™ are trademarks.

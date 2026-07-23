@@ -105,3 +105,7 @@ Import the component and pass the `phone` number including country code. Optiona
 - `EmailLink` / `EmailInput` — analogous Input/Link pair for email.
 - `ActionLink` — generic styled action hyperlink.
 - `DigitalObjectIdentifierLink` — persistent DOI hyperlink.
+
+---
+
+Lily™ and Lily Design System™ are trademarks.

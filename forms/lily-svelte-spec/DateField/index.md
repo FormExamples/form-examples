@@ -104,3 +104,7 @@ Bind `value`. Provide `label`. Pass `error` on validation failure; the alert wil
 - `DateInput` — bare `<input type="date">`.
 - `DateRange` — paired start/end date inputs.
 - `Field` — generic field wrapper for any input.
+
+---
+
+Lily™ and Lily Design System™ are trademarks.

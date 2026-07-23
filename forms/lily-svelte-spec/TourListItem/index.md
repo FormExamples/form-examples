@@ -155,3 +155,7 @@ Import and place inside `TourList` (possibly nested under a `Tour`). Pass a tran
 - `Tour` — outer dialog container that wraps the list.
 - `TaskListItem` / `TimelineListItem` — alternative `<li>` items for non-tour contexts.
 - `Dialog` / `AlertDialog` — simpler modal patterns.
+
+---
+
+Lily™ and Lily Design System™ are trademarks.

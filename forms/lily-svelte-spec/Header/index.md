@@ -122,3 +122,7 @@ Wrap header content in `<Header>...</Header>`. Provide `label` when there are mu
 - `GrailLayoutTopHeader` - Grail Layout structural wrapper for the top slot.
 - `Banner` / `SuperBanner` - high-priority banner messages.
 - `Headline` - page headline with heading and subtitle.
+
+---
+
+Lily™ and Lily Design System™ are trademarks.

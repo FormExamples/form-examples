@@ -99,3 +99,7 @@ Provide a required `label` and bind a value.
 - `EmailLink` — displays an email address as a clickable `mailto:` link.
 - `Field` — label + description + error wrapper around any input.
 - `TextInput`, `UrlInput`, `TelInput`, `SearchInput` — sibling input types.
+
+---
+
+Lily™ and Lily Design System™ are trademarks.

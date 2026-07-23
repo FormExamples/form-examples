@@ -129,3 +129,7 @@ Placeholder via restProps:
 - `Tag`, `TagGroup` - rendered output.
 - `TextInput` - generic text input.
 - `Combobox` - text input with filterable dropdown.
+
+---
+
+Lily™ and Lily Design System™ are trademarks.

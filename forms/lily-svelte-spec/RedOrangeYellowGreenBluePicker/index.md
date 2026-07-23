@@ -127,3 +127,7 @@ import RedOrangeYellowGreenBluePicker from './RedOrangeYellowGreenBluePicker.sve
 - `RedOrangeYellowGreenBluePickerButton` — button-style picker sibling.
 - `RedAmberGreenPicker`, `RedAmberGreenPickerButton`, `RedAmberGreenView` — three-level scale.
 - Other pickers: `FiveFaceRatingPicker`, `FiveStarRatingPicker`, `NetPromoterScorePicker`.
+
+---
+
+Lily™ and Lily Design System™ are trademarks.

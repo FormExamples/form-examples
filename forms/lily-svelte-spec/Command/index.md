@@ -135,3 +135,7 @@ Bind `value` to filter your command list. Render `<div role="option">` children;
 - `Combobox` — inline text input with suggestions.
 - `Menu`, `DropdownMenu`, `ContextMenu` — action lists with different triggers.
 - `SearchInput` — bare search input.
+
+---
+
+Lily™ and Lily Design System™ are trademarks.

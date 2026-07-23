@@ -145,3 +145,7 @@ Import `CalendarTableBody` from `./CalendarTableBody.svelte`. Place inside `Cale
 
 - `CalendarTable`, `CalendarTableHead`, `CalendarTableFoot`, `CalendarTableRow`, `CalendarTableTD`, `CalendarTableTD`.
 - `DataTableBody`, `GanttTableBody`, `KanbanTableBody`, `TableBody` — sibling variants.
+
+---
+
+Lily™ and Lily Design System™ are trademarks.

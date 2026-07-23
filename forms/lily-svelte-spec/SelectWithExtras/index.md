@@ -146,3 +146,7 @@ References:
 - `Option` - option element.
 - `Combobox` - filterable dropdown.
 - `Field` - full label + input + error wrapper.
+
+---
+
+Lily™ and Lily Design System™ are trademarks.

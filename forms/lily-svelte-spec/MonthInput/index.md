@@ -127,3 +127,7 @@ Import the component, pass a `label`, and bind the `value` (which will be a `YYY
 - `DateTimeLocalInput` — date + time without a timezone.
 - `DateTimeNowInput` — date + time with a "now" button.
 - `DateRange` — display of a start/end date range.
+
+---
+
+Lily™ and Lily Design System™ are trademarks.

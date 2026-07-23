@@ -4,7 +4,7 @@ A table interactive grid thead <thead>.
 
 ## Canonical documentation
 
-See [components/table-head/index.md](../../../../components/table-head/index.md) for the full component documentation, including ARIA, keyboard interactions, props, and usage guidance.
+See [components/table-head/index.md](../../../components/table-head/index.md) for the full component documentation, including ARIA, keyboard interactions, props, and usage guidance.
 
 ## Svelte usage
 
@@ -21,3 +21,7 @@ See [components/table-head/index.md](../../../../components/table-head/index.md)
 - `TableHead.svelte` — Svelte 5 implementation using runes
 - `TableHead.test.ts` — vitest + @testing-library/svelte tests
 - `TableHead.stories.svelte` — Storybook stories
+
+---
+
+Lily™ and Lily Design System™ are trademarks.

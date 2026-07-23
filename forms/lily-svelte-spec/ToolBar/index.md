@@ -115,3 +115,7 @@ Import both `ToolBar` and `ToolBarButton`. Pass a translated `label` and render 
 - `TaskBar` / `TaskBarButton` — simpler action bar without roving focus.
 - `MenuBar` / `MenuBarButton` — menubar pattern for menu triggers.
 - `ToggleGroup` / `ToggleButton` — grouped toggle buttons without roving focus.
+
+---
+
+Lily™ and Lily Design System™ are trademarks.

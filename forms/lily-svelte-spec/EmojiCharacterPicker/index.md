@@ -130,3 +130,7 @@ Wrap rows of `role="gridcell"` buttons inside the picker.
 - `Emoji` — a single emoji with accessible label.
 - `Listbox`, `SegmentGroup`, `RadioGroup` — simpler selection widgets.
 - `Command` — search-driven command palette.
+
+---
+
+Lily™ and Lily Design System™ are trademarks.

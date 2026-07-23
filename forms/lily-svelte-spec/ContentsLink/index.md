@@ -4,7 +4,7 @@ One table of contents link.
 
 ## Canonical documentation
 
-See [components/contents-link/index.md](../../../../components/contents-link/index.md) for the full component documentation, including ARIA, keyboard interactions, props, and usage guidance.
+See [components/contents-link/index.md](../../../components/contents-link/index.md) for the full component documentation, including ARIA, keyboard interactions, props, and usage guidance.
 
 ## Svelte usage
 
@@ -21,3 +21,7 @@ See [components/contents-link/index.md](../../../../components/contents-link/ind
 - `ContentsLink.svelte` — Svelte 5 implementation using runes
 - `ContentsLink.test.ts` — vitest + @testing-library/svelte tests
 - `ContentsLink.stories.svelte` — Storybook stories
+
+---
+
+Lily™ and Lily Design System™ are trademarks.

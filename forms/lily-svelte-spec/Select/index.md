@@ -147,3 +147,7 @@ References:
 - `SelectWithExtras` - select with `before`/`after` snippets.
 - `Combobox` - text input with filterable dropdown.
 - `Listbox` - keyboard-driven option list.
+
+---
+
+Lily™ and Lily Design System™ are trademarks.

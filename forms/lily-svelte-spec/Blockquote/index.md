@@ -59,3 +59,7 @@ A headless Svelte 5 component that renders a single native `<blockquote>` elemen
 
 - HTML `<blockquote>`: https://developer.mozilla.org/en-US/docs/Web/HTML/Element/blockquote
 - Mozilla Protocol Design System: https://protocol.mozilla.org
+
+---
+
+Lily™ and Lily Design System™ are trademarks.

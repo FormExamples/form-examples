@@ -124,3 +124,7 @@ References:
 - `CheckboxInput` - consent checkbox alternative.
 - `TextInput` - typed-name signature alternative.
 - `ImageFileInput` - upload a signature image.
+
+---
+
+Lily™ and Lily Design System™ are trademarks.

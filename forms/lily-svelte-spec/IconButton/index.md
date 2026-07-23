@@ -89,3 +89,7 @@ A headless Svelte 5 component that renders a single native `<button>` element. B
 
 - WAI-ARIA Button Pattern: https://www.w3.org/WAI/ARIA/apg/patterns/button/
 - HTML `<button>`: https://developer.mozilla.org/en-US/docs/Web/HTML/Element/button
+
+---
+
+Lily™ and Lily Design System™ are trademarks.

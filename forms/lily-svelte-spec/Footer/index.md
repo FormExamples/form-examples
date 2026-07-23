@@ -122,3 +122,7 @@ Wrap any footer-appropriate content in `<Footer>...</Footer>`. Supply `label` on
 - `GrailLayoutBottomFooter` - structural `<div>` wrapper for the Grail Layout bottom slot.
 - `GrailLayout` - Grail Layout container.
 - `Panel` - generic content panel.
+
+---
+
+Lily™ and Lily Design System™ are trademarks.

@@ -137,3 +137,7 @@ import ProgressCircle from './ProgressCircle.svelte';
 - `Progress` — native linear progress bar.
 - `ProgressSpinner` — indeterminate spinner.
 - `Meter` — range-bound measurement.
+
+---
+
+Lily™ and Lily Design System™ are trademarks.

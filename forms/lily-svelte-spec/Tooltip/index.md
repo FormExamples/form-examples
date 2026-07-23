@@ -139,3 +139,7 @@ Import, bind `visible`, set an `id` and `aria-describedby` on the trigger that m
 - `HoverCard` — card content shown on hover.
 - `Hint` — always-visible form-field guidance.
 - `FloatingPanel` — floating panel above page content.
+
+---
+
+Lily™ and Lily Design System™ are trademarks.

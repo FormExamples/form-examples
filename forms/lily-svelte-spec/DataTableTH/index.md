@@ -101,3 +101,7 @@ Place inside a `DataTableRow` within `DataTableHead`.
 
 - `DataTable`, `DataTableHead`, `DataTableBody` — enclosing components.
 - `DataTableRow`, `DataTableTD` — row and cell.
+
+---
+
+Lily™ and Lily Design System™ are trademarks.

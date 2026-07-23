@@ -56,3 +56,7 @@ A headless Svelte 5 component that renders `<div class="menu-group" role="group"
 
 - Adobe Spectrum Menu: https://spectrum.adobe.com/page/menu/
 - WAI-ARIA Menu Pattern: https://www.w3.org/WAI/ARIA/apg/patterns/menu/
+
+---
+
+Lily™ and Lily Design System™ are trademarks.

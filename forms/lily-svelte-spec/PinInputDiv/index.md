@@ -124,3 +124,7 @@ import PinInputDiv from './PinInputDiv.svelte';
 - `PasswordInput`, `PasswordInputOrTextInputDiv` — password fields.
 - `NumberInput` — single numeric input.
 - `TextInput` — arbitrary text input.
+
+---
+
+Lily™ and Lily Design System™ are trademarks.

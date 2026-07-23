@@ -114,3 +114,7 @@ Place as a direct child of `GrailLayout`. The component itself provides the `com
 - `GrailLayoutTopHeader`, `GrailLayoutCenterMain`, `GrailLayoutRightAside`, `GrailLayoutBottomFooter` - sibling slots.
 - `Sidebar` - dedicated side-panel component.
 - `NavigationMenu` - site-wide navigation menu.
+
+---
+
+Lily™ and Lily Design System™ are trademarks.

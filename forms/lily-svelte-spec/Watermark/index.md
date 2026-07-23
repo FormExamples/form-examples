@@ -59,3 +59,7 @@ The consumer is responsible for the actual repeating-pattern CSS, e.g. via a `ba
 ## References
 
 - Ant Design Watermark: https://ant.design/components/watermark
+
+---
+
+Lily™ and Lily Design System™ are trademarks.

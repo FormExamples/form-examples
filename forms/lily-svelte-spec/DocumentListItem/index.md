@@ -4,7 +4,7 @@ One document entry in a document list.
 
 ## Canonical documentation
 
-See [components/document-list-item/index.md](../../../../components/document-list-item/index.md) for the full component documentation, including ARIA, keyboard interactions, props, and usage guidance.
+See [components/document-list-item/index.md](../../../components/document-list-item/index.md) for the full component documentation, including ARIA, keyboard interactions, props, and usage guidance.
 
 ## Svelte usage
 
@@ -21,3 +21,7 @@ See [components/document-list-item/index.md](../../../../components/document-lis
 - `DocumentListItem.svelte` — Svelte 5 implementation using runes
 - `DocumentListItem.test.ts` — vitest + @testing-library/svelte tests
 - `DocumentListItem.stories.svelte` — Storybook stories
+
+---
+
+Lily™ and Lily Design System™ are trademarks.

@@ -124,3 +124,7 @@ import PostalCodeInput from './PostalCodeInput.svelte';
 - `PostalCodeView` — read-only display sibling.
 - `TextInput` — generic text input.
 - `Field`, `Label`, `Hint`, `ErrorMessage` — labeling and messaging wrappers.
+
+---
+
+Lily™ and Lily Design System™ are trademarks.

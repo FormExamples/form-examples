@@ -143,3 +143,7 @@ Import `BreadcrumbNav` from `./BreadcrumbNav.svelte`. Always pass `label`. Wrap 
 - `BackLink` — one-step back navigation.
 - `AccordionNav`, `ContentsNav`, `PaginationNav`, `TreeNav` — sibling landmarks.
 - `NavigationMenu` — primary site navigation.
+
+---
+
+Lily™ and Lily Design System™ are trademarks.

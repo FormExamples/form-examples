@@ -112,3 +112,7 @@ Import `ActionLink` from `./ActionLink.svelte`. Always provide `href`. Optionall
 - `Button` — in-page action trigger.
 - `BreadcrumbLink`, `PaginationLink`, `AccordionLink`, `ContentsLink`, `TreeLink` — context-specific links.
 - `EmailLink`, `TelLink`, `DigitalObjectIdentifierLink` — scheme-specific links.
+
+---
+
+Lily™ and Lily Design System™ are trademarks.

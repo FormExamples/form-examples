@@ -69,3 +69,7 @@ A headless Svelte 5 component that renders a single `<div class="affix">` whose 
 
 - Ant Design Affix: https://ant.design/components/affix
 - MDN `position: sticky`: https://developer.mozilla.org/en-US/docs/Web/CSS/position#sticky_positioning
+
+---
+
+Lily™ and Lily Design System™ are trademarks.

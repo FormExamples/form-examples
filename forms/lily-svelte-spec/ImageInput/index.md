@@ -127,3 +127,7 @@ Place inside a `<form>`. Pass `src` and `alt`. Optionally set `width`, `height`,
 - `Button` - generic `<button>` component.
 - `Image` - display-only image.
 - `ImageFileInput` - file input restricted to images.
+
+---
+
+Lily™ and Lily Design System™ are trademarks.

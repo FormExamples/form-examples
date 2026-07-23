@@ -114,3 +114,7 @@ Provide an accessible `label` (also used as button text) and a handler.
 - `FileInput` — minimal native file input.
 - `ImageFileInput` — image-only file input with preview.
 - `FileManager`, `FileDialog` — higher-level file management surfaces.
+
+---
+
+Lily™ and Lily Design System™ are trademarks.

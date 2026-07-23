@@ -156,3 +156,7 @@ Place `MenuBarButton` elements inside a `MenuBar`, one per top-level entry. Wire
 - `TabBarButton` — a similar-looking horizontal button for tabs.
 - `ToolBarButton` — a button within a toolbar.
 - `Button` — a generic standalone clickable button.
+
+---
+
+Lily™ and Lily Design System™ are trademarks.

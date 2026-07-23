@@ -29,3 +29,7 @@ This component ships zero CSS. The consumer provides all styling targeting `.deu
 ## References
 
 - https://de.wikipedia.org/wiki/Krankenversichertennummer
+
+---
+
+Lily™ and Lily Design System™ are trademarks.

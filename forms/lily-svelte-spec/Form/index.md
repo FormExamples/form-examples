@@ -157,3 +157,7 @@ Import the component, pass a required `label` describing the form's purpose, and
 - `ErrorMessage` - per-field error message.
 - `DataFilterForm` - a form specialised for data filtering.
 - `EditableForm` - form wrapper for inline editing.
+
+---
+
+Lily™ and Lily Design System™ are trademarks.

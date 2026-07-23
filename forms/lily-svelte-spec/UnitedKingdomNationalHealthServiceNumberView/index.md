@@ -112,3 +112,7 @@ Import the component and pass a translated `label` plus the `value` string (pre-
 - `IrelandIndividualHealthIdentifierView` — Ireland IHI read-only view.
 - `NorthernIrelandHealthAndCareNumberView` — NI H&C number view.
 - `UnitedStatesSocialSecurityNumberView` — US SSN read-only view.
+
+---
+
+Lily™ and Lily Design System™ are trademarks.

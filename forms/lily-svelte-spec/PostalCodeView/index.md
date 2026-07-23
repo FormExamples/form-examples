@@ -112,3 +112,7 @@ Note: unlike most `*View` components in this library, this one uses `text` (not 
 - `PostalCodeInput` — editable form sibling for the same postal code.
 - `SummaryList`, `SummaryListItem` — common containers for address fields.
 - Other read-only view components: `NorthernIrelandHealthAndCareNumberView`, `NetPromoterScoreView`, `RedAmberGreenView`.
+
+---
+
+Lily™ and Lily Design System™ are trademarks.

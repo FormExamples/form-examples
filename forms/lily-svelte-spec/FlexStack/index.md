@@ -75,3 +75,7 @@ A headless Svelte 5 component that renders a single `<div>` element. Category: l
 ## References
 
 - MDN flexbox: https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_flexible_box_layout
+
+---
+
+Lily™ and Lily Design System™ are trademarks.

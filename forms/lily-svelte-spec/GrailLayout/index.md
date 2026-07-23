@@ -171,3 +171,7 @@ Compose all five slot components as children of `GrailLayout`. The slot componen
 - `GrailLayoutBottomFooter` - bottom full-width slot.
 - `Header`, `Footer` - semantic landmark components you can place inside slots.
 - `ArticleLayout` - narrower article layout.
+
+---
+
+Lily™ and Lily Design System™ are trademarks.

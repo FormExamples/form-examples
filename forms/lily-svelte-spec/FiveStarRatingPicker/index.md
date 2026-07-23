@@ -127,3 +127,7 @@ Import the component, bind a number-typed state variable to `value`, and pass a 
 - `FiveFaceRatingPicker` - satisfaction rating using face icons.
 - `NetPromoterScorePicker` - 0-10 Net Promoter Score picker.
 - `RadioGroup` - generic radio group.
+
+---
+
+Lily™ and Lily Design System™ are trademarks.

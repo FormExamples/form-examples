@@ -126,3 +126,7 @@ Import `CalendarRangePicker` from `./CalendarRangePicker.svelte`. Pass `label`. 
 - `CalendarTable` + `CalendarTableHead`/`Body`/`Foot`/`Row`/`Data`/`Col` — the grid components.
 - `DateInput`, `DateRange`, `DateField`, `DateTimeLocalInput`, `DateTimeNowInput`, `MonthInput`, `WeekInput` — related date inputs.
 - `TimePickerInput`, `TimeInput` — time-selection counterparts.
+
+---
+
+Lily™ and Lily Design System™ are trademarks.

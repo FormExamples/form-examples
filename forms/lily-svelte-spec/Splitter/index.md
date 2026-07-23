@@ -147,3 +147,7 @@ References:
 - `Resizable` - a single resizable region (not between panels).
 - `Separator` - passive horizontal rule.
 - `ScrollBar` - custom scrollbar track.
+
+---
+
+Lily™ and Lily Design System™ are trademarks.

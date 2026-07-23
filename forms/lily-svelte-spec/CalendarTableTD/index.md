@@ -126,3 +126,7 @@ Import `CalendarTableTD` from `./CalendarTableTD.svelte`. Pass children for the 
 - `CalendarTable` — outer grid.
 - `CalendarTableHead`, `CalendarTableBody`, `CalendarTableFoot`, `CalendarTableTD` — siblings.
 - `DataTableTD`, `GanttTableTD`, `KanbanTableTD`, `TableTD` — sibling table variants.
+
+---
+
+Lily™ and Lily Design System™ are trademarks.

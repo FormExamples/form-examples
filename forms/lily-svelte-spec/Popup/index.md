@@ -134,3 +134,7 @@ import Popup from './Popup.svelte';
 - `Dialog`, `AlertDialog`, `FileDialog` — fully modal alternatives.
 - `Tooltip`, `HoverCard` — simpler hover/focus overlays.
 - `Drawer`, `Sheet`, `SlideOutDrawer`, `FloatingPanel` — other overlay patterns.
+
+---
+
+Lily™ and Lily Design System™ are trademarks.

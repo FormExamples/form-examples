@@ -108,3 +108,7 @@ Wrap related controls with a `legend` describing the group.
 - `Field` — label + single input wrapper.
 - `RadioGroup`, `CheckboxGroup` — semantic grouping for related controls.
 - `Form`, `ErrorSummary` — form-level composition.
+
+---
+
+Lily™ and Lily Design System™ are trademarks.

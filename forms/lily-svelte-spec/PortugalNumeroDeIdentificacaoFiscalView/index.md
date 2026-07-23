@@ -29,3 +29,7 @@ This component ships zero CSS. The consumer provides all styling targeting `.por
 ## References
 
 - https://en.wikipedia.org/wiki/Personal_identification_number_(Portugal)
+
+---
+
+Lily™ and Lily Design System™ are trademarks.

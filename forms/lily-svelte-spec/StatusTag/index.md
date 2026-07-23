@@ -4,7 +4,7 @@ A tag showing the current status of a task.
 
 ## Canonical documentation
 
-See [components/status-tag/index.md](../../../../components/status-tag/index.md) for the full component documentation, including ARIA, keyboard interactions, props, and usage guidance.
+See [components/status-tag/index.md](../../../components/status-tag/index.md) for the full component documentation, including ARIA, keyboard interactions, props, and usage guidance.
 
 ## Svelte usage
 
@@ -21,3 +21,7 @@ See [components/status-tag/index.md](../../../../components/status-tag/index.md)
 - `StatusTag.svelte` — Svelte 5 implementation using runes
 - `StatusTag.test.ts` — vitest + @testing-library/svelte tests
 - `StatusTag.stories.svelte` — Storybook stories
+
+---
+
+Lily™ and Lily Design System™ are trademarks.

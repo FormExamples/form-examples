@@ -119,3 +119,7 @@ Bind `x` and `y` state, paint a background behind the component (hue gradient is
 - `ColorPickerButton` — preset swatch button.
 - `ColorInput` — native `<input type="color">`.
 - `Slider`, `RangeInput` — 1D selection.
+
+---
+
+Lily™ and Lily Design System™ are trademarks.

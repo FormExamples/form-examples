@@ -146,3 +146,7 @@ Wrap medical banner content in `MedicalBanner`, nest `MedicalBannerBox` (for lay
 - `Banner` / `BannerBox` — non-medical banner equivalents.
 - `SuperBanner` — a high-priority application-wide banner.
 - `Alert`, `AlertDialog`, `Toast`, `Notification` — other status-message patterns.
+
+---
+
+Lily™ and Lily Design System™ are trademarks.

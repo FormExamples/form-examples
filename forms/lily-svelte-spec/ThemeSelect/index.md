@@ -123,3 +123,7 @@ Import both `ThemeSelect` and `ThemeSelectOption`. Pass a `label`, bind `value`,
 - `ThemeSelect` — radio-group alternative.
 - `ThemeView` — read-only display of the current theme.
 - `Select` — generic select for non-theme use cases.
+
+---
+
+Lily™ and Lily Design System™ are trademarks.

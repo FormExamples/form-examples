@@ -105,3 +105,7 @@ Provide the numeric value and a label describing the rating.
 - `FiveFaceRatingPicker` — picker counterpart (radio-based).
 - `FiveFaceRatingPickerButton` — individual face button primitive.
 - `FiveStarRatingView`, `NetPromoterScoreView`, `RedAmberGreenView`, `RedOrangeYellowGreenBlueView` — analogous read-only rating views.
+
+---
+
+Lily™ and Lily Design System™ are trademarks.

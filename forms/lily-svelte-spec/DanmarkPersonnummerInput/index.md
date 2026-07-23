@@ -31,3 +31,7 @@ This component ships zero CSS. The consumer provides all styling targeting `.dan
 ## References
 
 - https://en.wikipedia.org/wiki/Personal_identification_number_(Denmark)
+
+---
+
+Lily™ and Lily Design System™ are trademarks.

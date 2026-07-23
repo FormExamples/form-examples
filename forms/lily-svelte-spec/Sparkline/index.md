@@ -117,3 +117,7 @@ References:
 - `GraphicBlock` - larger framed chart with title, description, and notes.
 - `Meter`, `Progress`, `ProgressCircle` - simpler scalar indicators.
 - `Figure` - self-contained figure with caption.
+
+---
+
+Lily™ and Lily Design System™ are trademarks.

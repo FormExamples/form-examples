@@ -127,3 +127,7 @@ Pass a localized `label`. Optionally narrow `accept` to specific image MIME type
 - `FileDialog` - file browser dialog.
 - `ImageInput` - `<input type="image">` graphical submit.
 - `Image` - display an image.
+
+---
+
+Lily™ and Lily Design System™ are trademarks.

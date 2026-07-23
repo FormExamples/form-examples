@@ -147,3 +147,7 @@ Place inside a `GanttTable` and fill with `GanttTableTR` elements.
 - `GanttTableTR` - row wrapper.
 - `GanttTableTD` - cell primitive with `role="gridcell"` and `active` state.
 - `GanttTableTH` - column definition for `<colgroup>`.
+
+---
+
+Lily™ and Lily Design System™ are trademarks.

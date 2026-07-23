@@ -114,3 +114,7 @@ Bind `value` and provide an accessible `label`.
 - `EditableForm` — form-wrapped inline editing with Save/Cancel semantics.
 - `TextInput`, `TextAreaInput` — plain text inputs for explicit forms.
 - `Field` — label + input + error pattern.
+
+---
+
+Lily™ and Lily Design System™ are trademarks.

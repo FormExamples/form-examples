@@ -139,3 +139,7 @@ Bind both `dateValue` and `timeValue` and pass localised labels for the group, i
 - `DateTimeLocalInput` — single `<input type="datetime-local">` alternative.
 - `DateInput`, `TimeInput` — the underlying pair without a "Now" button.
 - `Form`, `Field` — form composition wrappers.
+
+---
+
+Lily™ and Lily Design System™ are trademarks.

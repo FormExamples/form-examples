@@ -29,3 +29,7 @@ This component ships zero CSS. The consumer provides all styling targeting `.uni
 ## References
 
 - https://en.wikipedia.org/wiki/National_Insurance_number
+
+---
+
+Lily™ and Lily Design System™ are trademarks.

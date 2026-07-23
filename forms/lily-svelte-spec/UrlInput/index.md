@@ -116,3 +116,7 @@ Import the component, bind `value`, and supply an accessible `label`. Wrap in a 
 - `SearchInput` — for search queries.
 - `Field` — wraps the input with a label, hint, and error message.
 - `Form` — form element for submission.
+
+---
+
+Lily™ and Lily Design System™ are trademarks.

@@ -29,3 +29,7 @@ This component ships zero CSS. The consumer provides all styling targeting `.lat
 ## References
 
 - https://en.wikipedia.org/wiki/National_identification_number#Latvia
+
+---
+
+Lily™ and Lily Design System™ are trademarks.

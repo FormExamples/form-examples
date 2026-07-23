@@ -74,3 +74,7 @@ A headless Svelte 5 component inspired by [Ant Design Popconfirm](https://ant.de
 
 - Ant Design Popconfirm: https://ant.design/components/popconfirm
 - WAI-ARIA Alert and Message Dialogs Pattern: https://www.w3.org/WAI/ARIA/apg/patterns/alertdialog/
+
+---
+
+Lily™ and Lily Design System™ are trademarks.

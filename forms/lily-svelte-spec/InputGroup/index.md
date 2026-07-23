@@ -79,3 +79,7 @@ A headless Svelte 5 component that renders a single `<div role="group">` element
 
 - WAI-ARIA `group`: https://www.w3.org/TR/wai-aria-1.2/#group
 - HTML `<input>`: https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input
+
+---
+
+Lily™ and Lily Design System™ are trademarks.

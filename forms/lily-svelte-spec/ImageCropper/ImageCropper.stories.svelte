@@ -1,17 +1,17 @@
 <script module lang="ts">
   import { defineMeta } from '@storybook/addon-svelte-csf';
-  import ThemeSelect from './ThemeSelect.svelte';
+  import ImageCropper from './ImageCropper.svelte';
 
   const { Story } = defineMeta({
-    title: 'Headless/ThemeSelect',
-    component: ThemeSelect,
+    title: 'Headless/ImageCropper',
+    component: ImageCropper,
   });
 </script>
 
 <Story
   name="Default"
   tags={['autodocs', '!dev']}
-  args={{'label':'Theme Picker'}}
+  args={{'label':'Image Cropper'}}
 >
-  <p>Picker content</p>
+  <p>Crop region</p>
 </Story>

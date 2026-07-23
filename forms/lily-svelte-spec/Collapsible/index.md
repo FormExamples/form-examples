@@ -111,3 +111,7 @@ Provide a required `summary` string and children content. Optionally bind `open`
 - `Details` — lower-level thin wrapper around `<details>`/`<summary>`.
 - `Expander` — similar pattern with different semantics.
 - `AccordionList`, `AccordionListItem` — grouped collapsible sections.
+
+---
+
+Lily™ and Lily Design System™ are trademarks.

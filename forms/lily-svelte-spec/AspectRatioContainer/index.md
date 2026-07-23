@@ -118,3 +118,7 @@ Import `AspectRatioContainer` from `./AspectRatioContainer.svelte`. Provide the 
 - `Image`, `FeaturePhoto` — image elements that commonly go inside.
 - `Figure` + `Caption` — figure with descriptive caption.
 - `ArticleLayout`, `ContentBlock`, `GrailLayout*` — higher-level layout containers.
+
+---
+
+Lily™ and Lily Design System™ are trademarks.

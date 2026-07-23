@@ -127,3 +127,7 @@ Import the component and render your inset content via the `children` snippet. P
 - `Alert` — a status message for important feedback.
 - `Hint` — hint text providing guidance for a form field.
 - `BodyText` — a standard rendered text block within a content-width container.
+
+---
+
+Lily™ and Lily Design System™ are trademarks.

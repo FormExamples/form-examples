@@ -123,3 +123,7 @@ Either link the label to a control by `for` matching the control's `id`, or wrap
 - `Field` — a form field wrapper that bundles a label, input, hint, and error message.
 - `Fieldset` — a group of related form fields with a legend.
 - `Form` — the form container.
+
+---
+
+Lily™ and Lily Design System™ are trademarks.

@@ -128,3 +128,7 @@ Import `AccordionList` from `./AccordionList.svelte`. Place it inside an `Accord
 - `AccordionLink` — a link inside an accordion trail.
 - `Collapsible` / `Details` — single-item disclosure widgets.
 - `TreeList` — hierarchical expandable list.
+
+---
+
+Lily™ and Lily Design System™ are trademarks.

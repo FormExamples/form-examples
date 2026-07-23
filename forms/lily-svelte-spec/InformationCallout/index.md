@@ -127,3 +127,7 @@ Import the component, pass a descriptive `label`, and render arbitrary content v
 - `WarningCallout` — a dedicated callout for warning messages.
 - `Banner` — a prominent message bar across the top of a page.
 - `Notification` — a brief message about an event or update.
+
+---
+
+Lily™ and Lily Design System™ are trademarks.

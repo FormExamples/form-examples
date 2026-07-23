@@ -118,3 +118,7 @@ Bind `open` to a state variable and toggle it with a trigger.
 - `FileDialog` — dialog for file operations.
 - `Drawer`, `Sheet` — edge-aligned panels.
 - `Popover`, `Popup`, `HoverCard` — lighter-weight floating surfaces.
+
+---
+
+Lily™ and Lily Design System™ are trademarks.

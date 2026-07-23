@@ -115,3 +115,7 @@ Pass a `label` when the icon conveys meaning that should be announced; pass `dec
 - `Image` - full image component with required alt text.
 - `ScreenReaderSpan` - visually hidden text for screen readers.
 - `Flair` - small inline label/emphasis element.
+
+---
+
+Lily™ and Lily Design System™ are trademarks.

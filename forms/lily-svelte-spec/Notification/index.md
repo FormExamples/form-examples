@@ -124,3 +124,7 @@ import Notification from './Notification.svelte';
 - `Banner`, `SuperBanner`, `MedicalBanner` — prominent persistent page-level messages.
 - `Alert`, `AlertDialog` — inline status messages and modal urgent dialogs.
 - `ErrorSummary` — aggregated form validation errors.
+
+---
+
+Lily™ and Lily Design System™ are trademarks.

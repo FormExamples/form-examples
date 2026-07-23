@@ -118,3 +118,7 @@ Place inside `GanttTableHead`, `GanttTableBody`, or `GanttTableTfoot`. Add cells
 - `GanttTableTD` - time-period data cell with active/selected state.
 - `GanttTableTH` - column definition element.
 - `DataTableRow`, `CalendarTableRow`, `KanbanTableRow`, `TableRow` - row variants in other table families.
+
+---
+
+Lily™ and Lily Design System™ are trademarks.

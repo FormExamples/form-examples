@@ -31,3 +31,7 @@ This component ships zero CSS. The consumer provides all styling targeting `.cyp
 ## References
 
 - https://en.wikipedia.org/wiki/Cypriot_passport
+
+---
+
+Lily™ and Lily Design System™ are trademarks.

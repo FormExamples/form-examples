@@ -94,3 +94,7 @@ Import `CalendarTableTD` and place inside a `CalendarTableRow` within `CalendarT
 
 - `CalendarTable`, `CalendarTableHead`, `CalendarTableBody`, `CalendarTableFoot`, `CalendarTableRow`, `CalendarTableTD`.
 - `DataTableTD`, `GanttTableTH`, `KanbanTableTD`, `TableTD` — sibling header-cell components in other tables.
+
+---
+
+Lily™ and Lily Design System™ are trademarks.

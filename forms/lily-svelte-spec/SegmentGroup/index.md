@@ -151,3 +151,7 @@ References:
 - `RadioGroup` / `RadioInput` - native form radios.
 - `ToggleGroup` - similar pattern for toggle buttons.
 - `CheckboxGroup` - multi-select equivalent.
+
+---
+
+Lily™ and Lily Design System™ are trademarks.

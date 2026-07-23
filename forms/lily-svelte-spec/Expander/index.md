@@ -112,3 +112,7 @@ Bind `expanded` and pass a label and children.
 - `Collapsible` — generic collapsible container.
 - `AccordionList`, `AccordionListItem` — grouped disclosures.
 - `HamburgerMenu` — mobile-style expander for navigation.
+
+---
+
+Lily™ and Lily Design System™ are trademarks.

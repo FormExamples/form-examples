@@ -119,3 +119,7 @@ import NorthernIrelandHealthAndCareNumberView from './NorthernIrelandHealthAndCa
 - `NorthernIrelandHealthAndCareNumberInput` — editable form control sibling.
 - `UnitedKingdomNationalHealthServiceNumberView`, `IrelandIndividualHealthIdentifierView`, `EspanaTarjetaSanitariaIndividualView`, `FranceNumeroDIdentificationAuRepertoireView` — other jurisdiction view siblings.
 - `SummaryList`, `SummaryListItem` — common containers for read-only identifier rows.
+
+---
+
+Lily™ and Lily Design System™ are trademarks.

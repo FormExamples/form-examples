@@ -170,3 +170,7 @@ Place `KanbanTableFoot` after `KanbanTableBody` inside a `KanbanTable`, and nest
 - `KanbanTableRow` — a `<tr>` row.
 - `KanbanTableTD` — a `<td role="gridcell">` data cell.
 - `KanbanTableTD` — `<col>` column definitions for `<colgroup>`.
+
+---
+
+Lily™ and Lily Design System™ are trademarks.

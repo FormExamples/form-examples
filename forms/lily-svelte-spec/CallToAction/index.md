@@ -119,3 +119,7 @@ Import `CallToAction` from `./CallToAction.svelte`. Set `href` for navigation or
 - `BackLink` — return-to-previous-page link.
 - `Hero`, `HeroHeadline` — contexts where CTAs typically live.
 - `SliderButton` — confirmation gesture button.
+
+---
+
+Lily™ and Lily Design System™ are trademarks.

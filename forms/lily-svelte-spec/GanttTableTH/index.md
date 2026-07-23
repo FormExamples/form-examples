@@ -121,3 +121,7 @@ Place `GanttTableTH` elements inside a `GanttTableTR` within `GanttTableHead`, o
 - `GanttTableTR` - row wrapper.
 - `GanttTableTD` - data cell primitive.
 - `DataTableTD`, `CalendarTableTD`, `KanbanTableTD`, `TableTD` - sibling header-cell components in other tables.
+
+---
+
+Lily™ and Lily Design System™ are trademarks.

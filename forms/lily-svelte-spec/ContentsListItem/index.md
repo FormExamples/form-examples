@@ -105,3 +105,7 @@ Place inside `ContentsList`. Wrap a link inside. Use `aria-current="page"` or `a
 - `ContentsList` — parent list.
 - `ContentsNav` — navigation landmark.
 - `ContentsLink` — standalone link variant.
+
+---
+
+Lily™ and Lily Design System™ are trademarks.

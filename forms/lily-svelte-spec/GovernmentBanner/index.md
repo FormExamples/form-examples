@@ -72,3 +72,7 @@ A headless Svelte 5 component inspired by the U.S. Web Design System (USWDS) Ban
 
 - USWDS Banner: https://designsystem.digital.gov/components/banner/
 - WAI-ARIA disclosure pattern: https://www.w3.org/WAI/ARIA/apg/patterns/disclosure/
+
+---
+
+Lily™ and Lily Design System™ are trademarks.

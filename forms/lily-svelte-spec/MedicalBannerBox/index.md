@@ -148,3 +148,7 @@ Place `MedicalBannerBox` inside a `MedicalBanner` and nest domain-specific `Medi
 - `MedicalBannerBoxForDanger` — danger-level nested region.
 - `BannerBox` — non-medical equivalent for `Banner`.
 - `Banner` — the non-medical banner root.
+
+---
+
+Lily™ and Lily Design System™ are trademarks.

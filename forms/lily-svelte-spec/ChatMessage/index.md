@@ -4,7 +4,7 @@ A chat message shows one chat conversation message entry and all its data, inclu
 
 ## Canonical documentation
 
-See [components/chat-message/index.md](../../../../components/chat-message/index.md) for the full component documentation, including ARIA, keyboard interactions, props, and usage guidance.
+See [components/chat-message/index.md](../../../components/chat-message/index.md) for the full component documentation, including ARIA, keyboard interactions, props, and usage guidance.
 
 ## Svelte usage
 
@@ -21,3 +21,7 @@ See [components/chat-message/index.md](../../../../components/chat-message/index
 - `ChatMessage.svelte` — Svelte 5 implementation using runes
 - `ChatMessage.test.ts` — vitest + @testing-library/svelte tests
 - `ChatMessage.stories.svelte` — Storybook stories
+
+---
+
+Lily™ and Lily Design System™ are trademarks.

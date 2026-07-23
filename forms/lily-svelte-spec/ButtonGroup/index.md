@@ -63,3 +63,7 @@ A headless Svelte 5 component that exposes a grouping landmark for assistive tec
 
 - USWDS Button group: https://designsystem.digital.gov/components/button-group/
 - WAI-ARIA group role: https://www.w3.org/TR/wai-aria-1.2/#group
+
+---
+
+Lily™ and Lily Design System™ are trademarks.

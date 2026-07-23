@@ -120,3 +120,7 @@ References:
 
 - `Loading` - announced loading indicator.
 - `Progress`, `ProgressCircle`, `ProgressSpinner` - progress indicators.
+
+---
+
+Lily™ and Lily Design System™ are trademarks.

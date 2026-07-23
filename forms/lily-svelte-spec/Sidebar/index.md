@@ -132,3 +132,7 @@ References:
 - `NavigationMenu`, `TreeNav` - navigation patterns.
 - `Sheet`, `SlideOutDrawer` - modal side overlays.
 - `Footer`, `Header` - other landmark regions.
+
+---
+
+Lily™ and Lily Design System™ are trademarks.

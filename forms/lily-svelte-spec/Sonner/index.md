@@ -131,3 +131,7 @@ References:
 - `Notification` - general-purpose notification element.
 - `Alert` - static status message.
 - `AlertDialog` - blocking urgent message.
+
+---
+
+Lily™ and Lily Design System™ are trademarks.

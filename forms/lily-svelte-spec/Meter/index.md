@@ -142,3 +142,7 @@ Import the component, pass a `label`, a `value`, and the `min`/`max` bounds. Opt
 - `RangeInput` — a slider input for selecting values in a range.
 - `Sparkline` — a small inline chart for trends.
 - `Gauge`/`Dial` — circular/rotary value selectors (`Dial`).
+
+---
+
+Lily™ and Lily Design System™ are trademarks.

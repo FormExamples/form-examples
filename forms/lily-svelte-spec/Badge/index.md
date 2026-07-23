@@ -119,3 +119,7 @@ Import `Badge` from `./Badge.svelte`. Provide children for the visible content. 
 - `Flair` — decorative inline highlight.
 - `Character` — single character display.
 - `Alert`, `Notification`, `Toast` — larger feedback surfaces.
+
+---
+
+Lily™ and Lily Design System™ are trademarks.

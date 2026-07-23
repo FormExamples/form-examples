@@ -4,7 +4,7 @@ A grouping container that presents related content in a structured format, often
 
 ## Canonical documentation
 
-See [components/tile/index.md](../../../../components/tile/index.md) for the full component documentation, including ARIA, keyboard interactions, props, and usage guidance.
+See [components/tile/index.md](../../../components/tile/index.md) for the full component documentation, including ARIA, keyboard interactions, props, and usage guidance.
 
 ## Svelte usage
 
@@ -21,3 +21,7 @@ See [components/tile/index.md](../../../../components/tile/index.md) for the ful
 - `Tile.svelte` — Svelte 5 implementation using runes
 - `Tile.test.ts` — vitest + @testing-library/svelte tests
 - `Tile.stories.svelte` — Storybook stories
+
+---
+
+Lily™ and Lily Design System™ are trademarks.

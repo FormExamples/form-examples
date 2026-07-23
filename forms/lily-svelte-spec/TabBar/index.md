@@ -160,3 +160,7 @@ References:
 - `TabBarButton` - the intended child.
 - `SegmentGroup` - for radio-style single selection.
 - `ToolBar`, `TaskBar` - toolbars of buttons.
+
+---
+
+Lily™ and Lily Design System™ are trademarks.

@@ -59,3 +59,7 @@ A headless Svelte 5 component inspired by [Ant Design Steps](https://ant.design/
 ## References
 
 - Ant Design Steps: https://ant.design/components/steps
+
+---
+
+Lily™ and Lily Design System™ are trademarks.

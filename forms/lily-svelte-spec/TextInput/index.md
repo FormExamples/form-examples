@@ -101,3 +101,7 @@ Import and bind `value`. Supply a translated `label`. Extend with placeholder/pa
 - `TextInputWithSearch` — text input plus a search button.
 - `PasswordInput` / `EmailInput` / `TelInput` / `UrlInput` / `NumberInput` — type-specialized variants.
 - `Field` — wrapper with visible label, hint, and error.
+
+---
+
+Lily™ and Lily Design System™ are trademarks.

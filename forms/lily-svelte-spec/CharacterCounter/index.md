@@ -101,3 +101,7 @@ Pass `count={text.length}` from the parent and optionally `max`. The component a
 - `TextAreaInputWithCharacterCounter` — combines a text-area-input with this counter.
 - `ErrorMessage` — error text for form fields.
 - `Progress`, `Meter` — generic numeric progress displays.
+
+---
+
+Lily™ and Lily Design System™ are trademarks.

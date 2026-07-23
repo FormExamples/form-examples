@@ -139,3 +139,7 @@ Provide three labels: `label` (group), `startLabel`, `endLabel`. Bind `start` an
 - `DateField` — single date with description and error.
 - `DateInput` — single bare date input.
 - `CalendarRangePicker` — full calendar-based range picker.
+
+---
+
+Lily™ and Lily Design System™ are trademarks.

@@ -133,3 +133,7 @@ Place inside `DataTable`. Use `<th scope="col">` inside a `DataTableRow` for the
 ## Related components
 
 - `DataTable`, `DataTableBody`, `DataTableFoot`, `DataTableRow`, `DataTableTD`, `DataTableTD`.
+
+---
+
+Lily™ and Lily Design System™ are trademarks.

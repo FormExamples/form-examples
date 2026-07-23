@@ -149,3 +149,7 @@ import PaginationNav from './PaginationNav.svelte';
 - `PaginationList` — the ordered list rendered inside this nav.
 - `PaginationListItem` — a single `<li>` in the list.
 - `BreadcrumbNav`, `TreeNav`, `ContentsNav` — other navigation landmarks.
+
+---
+
+Lily™ and Lily Design System™ are trademarks.

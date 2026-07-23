@@ -135,3 +135,7 @@ References:
 - `SummaryListItem` - the intended row component.
 - `DataTable`, `Table` - tabular alternatives.
 - `Fieldset` - grouping form fields.
+
+---
+
+Lily™ and Lily Design System™ are trademarks.

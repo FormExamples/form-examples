@@ -129,3 +129,7 @@ import RadioInput from './RadioInput.svelte';
 - `CheckboxInput`, `CheckboxGroup` — multi-select equivalents.
 - `SegmentGroup` / `SegmentGroupItem` — button-styled exclusive choice.
 - `SwitchButton` — on/off toggle.
+
+---
+
+Lily™ and Lily Design System™ are trademarks.

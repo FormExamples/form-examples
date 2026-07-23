@@ -82,3 +82,7 @@ Import `ClampText` and pass the `lines` prop. Provide consumer CSS that reads `-
 
 - MDN `line-clamp`: https://developer.mozilla.org/en-US/docs/Web/CSS/line-clamp
 - WCAG 2.2 — Use of Color: https://www.w3.org/WAI/WCAG22/Understanding/use-of-color
+
+---
+
+Lily™ and Lily Design System™ are trademarks.

@@ -111,3 +111,7 @@ Compose with `CheckListItem` children. Provide a `label` to describe the list's 
 - `CheckListItem` — a list item with a checkbox and label.
 - `DoList`, `DontList` — guideline lists.
 - `TaskList`, `TaskListItem` — task-tracking list.
+
+---
+
+Lily™ and Lily Design System™ are trademarks.

@@ -209,3 +209,7 @@ Import `GanttTable` along with the sub-components and compose head/body/foot row
 - `CalendarTable` - calendar-by-date grid.
 - `KanbanTable` - status-based board grid.
 - `Table` - generic table.
+
+---
+
+Lily™ and Lily Design System™ are trademarks.

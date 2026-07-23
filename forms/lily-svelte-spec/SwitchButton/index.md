@@ -126,3 +126,7 @@ References:
 - `ToggleButton` - pressed/unpressed state (uses `aria-pressed`).
 - `CheckboxInput` - form-bound boolean input.
 - `SegmentGroup` - mutually exclusive options.
+
+---
+
+Lily™ and Lily Design System™ are trademarks.

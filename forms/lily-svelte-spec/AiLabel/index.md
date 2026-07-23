@@ -104,3 +104,7 @@ Import `AiLabel` from `./AiLabel.svelte`. Optionally override `text` (what users
 - `Tag` — keyword label for categorization.
 - `Flair` — decorative inline highlight.
 - `Banner` / `InformationCallout` — page-level AI disclosures.
+
+---
+
+Lily™ and Lily Design System™ are trademarks.

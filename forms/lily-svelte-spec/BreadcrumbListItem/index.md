@@ -109,3 +109,7 @@ Import `BreadcrumbListItem` from `./BreadcrumbListItem.svelte`. Put inside `Brea
 - `BreadcrumbList` — `<ol>` wrapper.
 - `BreadcrumbLink` — styled link for breadcrumbs.
 - `PaginationListItem`, `ContentsListItem`, `TreeListItem` — sibling list items.
+
+---
+
+Lily™ and Lily Design System™ are trademarks.

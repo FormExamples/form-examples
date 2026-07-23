@@ -113,3 +113,7 @@ Import, optionally pass `label`, and set `urgent` for assertive announcements. C
 - `Notification` — brief event/update message component.
 - `Banner` / `SuperBanner` — persistent top-of-page messages.
 - `AlertDialog` — modal urgent dialog requiring acknowledgment.
+
+---
+
+Lily™ and Lily Design System™ are trademarks.

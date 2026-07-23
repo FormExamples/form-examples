@@ -122,3 +122,7 @@ Import `TimelineList` plus `TimelineListItem`, pass an accessible `label`, and p
 - `TaskList` / `TaskListItem` — ordered tasks with checkboxes.
 - `SummaryList` / `SummaryListItem` — key-value summary pairs.
 - `EndNotes` — titled endnote section at the end of an article.
+
+---
+
+Lily™ and Lily Design System™ are trademarks.

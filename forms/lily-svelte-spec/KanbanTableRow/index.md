@@ -123,3 +123,7 @@ Nest `KanbanTableRow` inside `KanbanTableHead`, `KanbanTableBody`, or `KanbanTab
 - `KanbanTableTD` — a `<td role="gridcell">` task cell.
 - `KanbanTableTD` — `<col>` column definitions inside `<colgroup>`.
 - `DataTableRow`, `CalendarTableRow`, `GanttTableTR` — equivalent rows for other table types.
+
+---
+
+Lily™ and Lily Design System™ are trademarks.

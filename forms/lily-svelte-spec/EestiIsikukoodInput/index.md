@@ -31,3 +31,7 @@ This component ships zero CSS. The consumer provides all styling targeting `.ees
 ## References
 
 - https://en.wikipedia.org/wiki/National_identification_number#Estonia
+
+---
+
+Lily™ and Lily Design System™ are trademarks.

@@ -64,3 +64,7 @@ A headless Svelte 5 component inspired by the U.S. Web Design System (USWDS) Inp
 ## References
 
 - USWDS Input mask: https://designsystem.digital.gov/components/input-mask/
+
+---
+
+Lily™ and Lily Design System™ are trademarks.

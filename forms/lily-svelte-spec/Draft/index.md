@@ -4,7 +4,7 @@ An early preliminary version of content such as an article, email, report, etc.
 
 ## Canonical documentation
 
-See [components/draft/index.md](../../../../components/draft/index.md) for the full component documentation, including ARIA, keyboard interactions, props, and usage guidance.
+See [components/draft/index.md](../../../components/draft/index.md) for the full component documentation, including ARIA, keyboard interactions, props, and usage guidance.
 
 ## Svelte usage
 
@@ -23,3 +23,7 @@ See [components/draft/index.md](../../../../components/draft/index.md) for the f
 - `Draft.svelte` — Svelte 5 implementation using runes
 - `Draft.test.ts` — vitest + @testing-library/svelte tests
 - `Draft.stories.svelte` — Storybook stories
+
+---
+
+Lily™ and Lily Design System™ are trademarks.

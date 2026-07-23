@@ -122,3 +122,7 @@ References:
 - `DateRange` - displaying a start-to-end range.
 - `Byline` - author and timestamp block.
 - `SummaryListItem` - key/value rows that often contain a `ReviewDate`.
+
+---
+
+Lily™ and Lily Design System™ are trademarks.

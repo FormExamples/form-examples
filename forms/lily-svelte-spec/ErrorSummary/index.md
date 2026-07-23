@@ -137,3 +137,7 @@ Render when errors exist; move focus to the summary after submit.
 - `Field` — field wrapper with built-in error paragraph.
 - `Alert` — generic status message.
 - `Form` — form wrapper for submit handling.
+
+---
+
+Lily™ and Lily Design System™ are trademarks.

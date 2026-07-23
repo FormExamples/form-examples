@@ -177,3 +177,7 @@ Import `CalendarTable` from `./CalendarTable.svelte`. Always pass `label` (e.g. 
 - `CalendarTableRow`, `CalendarTableTD`, `CalendarTableTD` — row / cell / column.
 - `CalendarRangePicker` — outer range-selection container.
 - `DataTable`, `GanttTable`, `KanbanTable`, `Table` — sibling table variants.
+
+---
+
+Lily™ and Lily Design System™ are trademarks.

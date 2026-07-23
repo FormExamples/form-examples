@@ -122,3 +122,7 @@ import ProgressSpinner from './ProgressSpinner.svelte';
 - `Loading` — broader loading container.
 - `Skeleton` — placeholder shapes for content that's loading.
 - `Notification`, `Alert` — for announcing loading state with more context.
+
+---
+
+Lily™ and Lily Design System™ are trademarks.

@@ -31,3 +31,7 @@ This component ships zero CSS. The consumer provides all styling targeting `.aus
 ## References
 
 - https://en.wikipedia.org/wiki/My_Health_Record
+
+---
+
+Lily™ and Lily Design System™ are trademarks.

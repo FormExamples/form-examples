@@ -4,7 +4,7 @@ A vertical column chart visualization for displaying data.
 
 ## Canonical documentation
 
-See [components/column-chart/index.md](../../../../components/column-chart/index.md) for the full component documentation, including ARIA, keyboard interactions, props, and usage guidance.
+See [components/column-chart/index.md](../../../components/column-chart/index.md) for the full component documentation, including ARIA, keyboard interactions, props, and usage guidance.
 
 ## Svelte usage
 
@@ -21,3 +21,7 @@ See [components/column-chart/index.md](../../../../components/column-chart/index
 - `ColumnChart.svelte` — Svelte 5 implementation using runes
 - `ColumnChart.test.ts` — vitest + @testing-library/svelte tests
 - `ColumnChart.stories.svelte` — Storybook stories
+
+---
+
+Lily™ and Lily Design System™ are trademarks.

@@ -122,3 +122,7 @@ Wrap your file listing and actions inside `FileManager`.
 - `FileInput`, `FileUpload`, `ImageFileInput` — file pickers.
 - `BreadcrumbNav` — path navigation.
 - `DataTable` — tabular file listings.
+
+---
+
+Lily™ and Lily Design System™ are trademarks.

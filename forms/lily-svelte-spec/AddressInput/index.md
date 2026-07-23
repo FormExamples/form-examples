@@ -4,7 +4,7 @@ An input for searching or manually entering an address.
 
 ## Canonical documentation
 
-See [components/address-input/index.md](../../../../components/address-input/index.md) for the full component documentation, including ARIA, keyboard interactions, props, and usage guidance.
+See [components/address-input/index.md](../../../components/address-input/index.md) for the full component documentation, including ARIA, keyboard interactions, props, and usage guidance.
 
 ## Svelte usage
 
@@ -21,3 +21,7 @@ See [components/address-input/index.md](../../../../components/address-input/ind
 - `AddressInput.svelte` — Svelte 5 implementation using runes
 - `AddressInput.test.ts` — vitest + @testing-library/svelte tests
 - `AddressInput.stories.svelte` — Storybook stories
+
+---
+
+Lily™ and Lily Design System™ are trademarks.

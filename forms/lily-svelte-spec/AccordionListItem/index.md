@@ -122,3 +122,7 @@ Import `AccordionListItem` from `./AccordionListItem.svelte`. Provide a `<summar
 - `Collapsible` — a generic expand/collapse container.
 - `Details` — a single disclosure widget outside an accordion context.
 - `TreeListItem` — hierarchical expandable tree node.
+
+---
+
+Lily™ and Lily Design System™ are trademarks.

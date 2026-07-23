@@ -7,3 +7,7 @@ A box area that looks like a mobile phone in landscape orientation.
 - `class`: `string` — extra CSS classes.
 - `label`: `string` — accessible label.
 - `children`: `Snippet` — content slot.
+
+---
+
+Lily™ and Lily Design System™ are trademarks.

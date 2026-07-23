@@ -101,3 +101,7 @@ Render conditionally when there is an error to display.
 - `Field` — includes a built-in error paragraph with `role="alert"`.
 - `Alert` — generic status message.
 - `Hint` — non-error helper text.
+
+---
+
+Lily™ and Lily Design System™ are trademarks.

@@ -113,3 +113,7 @@ Provide `label`. Hook `onsubmit` to your filtering function. Include submit and 
 - `Form` — generic form wrapper.
 - `SearchInput` — bare `<input type="search">`.
 - `ErrorSummary` — summarize validation errors in a form.
+
+---
+
+Lily™ and Lily Design System™ are trademarks.

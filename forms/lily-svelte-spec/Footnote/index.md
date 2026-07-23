@@ -106,3 +106,7 @@ Choose a stable unique id (e.g. `fn1`). Place a superscript link in the main con
 - `Citation` - inline or block citation acknowledging another work.
 - `Caption` - caption for a table or figure.
 - `Hint` - contextual guidance next to a form control.
+
+---
+
+Lily™ and Lily Design System™ are trademarks.

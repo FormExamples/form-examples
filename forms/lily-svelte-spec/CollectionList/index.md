@@ -59,3 +59,7 @@ A headless Svelte 5 component inspired by the U.S. Web Design System (USWDS) Col
 ## References
 
 - USWDS Collection: https://designsystem.digital.gov/components/collection/
+
+---
+
+Lily™ and Lily Design System™ are trademarks.

@@ -31,3 +31,7 @@ This component ships zero CSS. The consumer provides all styling targeting `.suo
 ## References
 
 - https://en.wikipedia.org/wiki/Personal_identity_code_(Finland)
+
+---
+
+Lily™ and Lily Design System™ are trademarks.

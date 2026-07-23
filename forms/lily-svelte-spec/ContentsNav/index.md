@@ -107,3 +107,7 @@ Wrap a `ContentsList` that contains `ContentsListItem`s, each containing an anch
 - `ContentsList` — ordered list inside this nav.
 - `ContentsListItem` — individual entries.
 - `BreadcrumbNav`, `PaginationNav`, `TreeNav` — other navigation variants.
+
+---
+
+Lily™ and Lily Design System™ are trademarks.

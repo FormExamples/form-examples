@@ -150,3 +150,7 @@ Bind `open` to consumer state, and toggle it from the trigger's `onmouseenter`/`
 - `FloatingPanel` - generic floating region container.
 - `Popup` - temporary overlay content.
 - `Dialog` / `AlertDialog` - modal dialogs.
+
+---
+
+Lily™ and Lily Design System™ are trademarks.

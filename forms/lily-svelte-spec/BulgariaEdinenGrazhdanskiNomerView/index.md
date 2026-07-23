@@ -29,3 +29,7 @@ This component ships zero CSS. The consumer provides all styling targeting `.bul
 ## References
 
 - https://en.wikipedia.org/wiki/Unique_citizenship_number
+
+---
+
+Lily™ and Lily Design System™ are trademarks.

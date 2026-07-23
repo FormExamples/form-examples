@@ -126,3 +126,7 @@ Import the component, pass a `label` (for example "IHI" or a localised equivalen
 - `FranceNumeroDIdentificationAuRepertoireInput` / `FranceNumeroDIdentificationAuRepertoireView` — French NIR.
 - `EspanaTarjetaSanitariaIndividualInput` / `EspanaTarjetaSanitariaIndividualView` — Spanish TSI.
 - `NorthernIrelandHealthAndCareNumberInput` / `NorthernIrelandHealthAndCareNumberView` — Northern Ireland H&C number.
+
+---
+
+Lily™ and Lily Design System™ are trademarks.

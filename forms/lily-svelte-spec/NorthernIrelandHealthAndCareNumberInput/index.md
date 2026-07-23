@@ -136,3 +136,7 @@ import NorthernIrelandHealthAndCareNumberInput from './NorthernIrelandHealthAndC
 - `IrelandIndividualHealthIdentifierInput` / `IrelandIndividualHealthIdentifierView` — Republic of Ireland IHI equivalents.
 - `EspanaTarjetaSanitariaIndividualInput`, `FranceNumeroDIdentificationAuRepertoireInput` — other jurisdictions.
 - `TextInput` — generic text input for non-identifier fields.
+
+---
+
+Lily™ and Lily Design System™ are trademarks.

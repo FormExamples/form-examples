@@ -133,3 +133,7 @@ Import `BreadcrumbList` from `./BreadcrumbList.svelte`. Place inside `Breadcrumb
 - `BreadcrumbListItem` — individual `<li>` in the trail.
 - `BreadcrumbLink` — anchor styled for breadcrumbs.
 - `PaginationList`, `TreeList`, `ContentsList` — sibling list types.
+
+---
+
+Lily™ and Lily Design System™ are trademarks.

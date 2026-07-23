@@ -112,3 +112,7 @@ Pass the numeric `value` (0-5) and a descriptive `label` (e.g. "4 out of 5 stars
 - `FiveFaceRatingView` - read-only face-based satisfaction rating.
 - `NetPromoterScoreView` - read-only NPS 0-10 display.
 - `RedAmberGreenView` - read-only status indicator.
+
+---
+
+Lily™ and Lily Design System™ are trademarks.

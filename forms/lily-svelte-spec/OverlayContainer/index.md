@@ -72,3 +72,7 @@ A headless Svelte 5 component that renders a single `<div>` element. Category: o
 
 - WAI-ARIA Dialog Pattern: https://www.w3.org/WAI/ARIA/apg/patterns/dialog-modal/
 - MDN `hidden` attribute: https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/hidden
+
+---
+
+Lily™ and Lily Design System™ are trademarks.

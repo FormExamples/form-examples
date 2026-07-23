@@ -131,3 +131,7 @@ Manage an `open` boolean in consumer state. Render `FloatingPanel` next to its t
 - `Popup` - temporary overlay above page content.
 - `Dialog` / `AlertDialog` - modal dialogs.
 - `Drawer` / `Sheet` / `SlideOutDrawer` - edge-anchored panels.
+
+---
+
+Lily™ and Lily Design System™ are trademarks.

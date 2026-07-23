@@ -126,3 +126,7 @@ Import `AccordionNav` from `./AccordionNav.svelte`. Always pass a `label`. Provi
 - `AccordionList` — required inner `<ol>` group.
 - `AccordionListItem` — individual `<details>` disclosure.
 - `BreadcrumbNav`, `ContentsNav`, `PaginationNav`, `TreeNav` — sibling navigation landmarks.
+
+---
+
+Lily™ and Lily Design System™ are trademarks.

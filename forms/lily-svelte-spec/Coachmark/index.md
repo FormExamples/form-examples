@@ -68,3 +68,7 @@ A headless Svelte 5 component that renders a `<div role="dialog" aria-modal="fal
 
 - Adobe Spectrum Coachmark: https://spectrum.adobe.com/page/coach-mark/
 - WAI-ARIA Dialog Pattern: https://www.w3.org/WAI/ARIA/apg/patterns/dialog-modal/
+
+---
+
+Lily™ and Lily Design System™ are trademarks.

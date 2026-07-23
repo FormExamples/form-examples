@@ -111,3 +111,7 @@ Bind a numeric value, define `min`/`max`/`step`, and provide an accessible `labe
 - `DialGroup` — groups multiple dial controls.
 - `Slider`, `RangeInput` — linear alternatives.
 - `AngleSliderRangeInput` — specialised angle input.
+
+---
+
+Lily™ and Lily Design System™ are trademarks.

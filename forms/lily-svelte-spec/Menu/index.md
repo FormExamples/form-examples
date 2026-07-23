@@ -184,3 +184,7 @@ ArrowDown/ArrowUp move focus between items (wrapping). Home/End jump to first/la
 - `ContextMenu` / `ContextMenuItem` — right-click / long-press menus.
 - `Listbox` — a list of selectable options.
 - `NavigationMenu` — a semantic `<nav>` for site-wide navigation.
+
+---
+
+Lily™ and Lily Design System™ are trademarks.

@@ -105,3 +105,7 @@ Import and place inside a `ToolBar`. Provide content via `children` and wire `on
 - `TaskBarButton` — a simpler bar button without roving focus.
 - `MenuBarButton` — button inside a menu bar.
 - `Button` — a general-purpose button for standalone contexts.
+
+---
+
+Lily™ and Lily Design System™ are trademarks.

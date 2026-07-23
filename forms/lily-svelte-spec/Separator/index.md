@@ -113,3 +113,7 @@ References:
 - `Splitter` - focusable separator between resizable regions.
 - `Resizable` - resizable region.
 - `Footer` / `Header` - top-level landmark structures.
+
+---
+
+Lily™ and Lily Design System™ are trademarks.

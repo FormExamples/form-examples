@@ -137,3 +137,7 @@ References:
 - `SummaryList` - the required parent.
 - `Field` - form field wrapper with label.
 - `DataTable`, `Table` - tabular alternatives.
+
+---
+
+Lily™ and Lily Design System™ are trademarks.

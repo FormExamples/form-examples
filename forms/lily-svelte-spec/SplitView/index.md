@@ -62,3 +62,7 @@ A headless Svelte 5 component that renders a wrapper `<div class="split-view">` 
 
 - Adobe Spectrum SplitView: https://spectrum.adobe.com/page/split-view/
 - WAI-ARIA Window Splitter Pattern: https://www.w3.org/WAI/ARIA/apg/patterns/windowsplitter/
+
+---
+
+Lily™ and Lily Design System™ are trademarks.

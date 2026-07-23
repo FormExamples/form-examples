@@ -156,3 +156,7 @@ The parent `Menu` handles ArrowDown/ArrowUp (wrapping) and Home/End.
 - `MenuBar` / `MenuBarButton` — horizontal menu bar.
 - `Listbox` — selectable-option list (uses `role="option"`).
 - `NavigationMenu` — semantic `<nav>` for site navigation.
+
+---
+
+Lily™ and Lily Design System™ are trademarks.

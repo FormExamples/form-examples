@@ -130,3 +130,7 @@ Compose five instances (values 1-5) inside a container. Track the selected value
 - `FiveStarRatingView` - read-only star-rating display.
 - `ToggleButton` - generic toggle button with `aria-pressed`.
 - `FiveFaceRatingPickerButton` - single-button version for face ratings.
+
+---
+
+Lily™ and Lily Design System™ are trademarks.

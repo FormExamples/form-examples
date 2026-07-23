@@ -128,3 +128,7 @@ Import and provide `<li role="treeitem" tabindex="-1">` children (the first visi
 - `TreeListItem` — helper item component.
 - `TreeMenu` — hierarchical menu variant.
 - `ContentsList` — table-of-contents flat list.
+
+---
+
+Lily™ and Lily Design System™ are trademarks.

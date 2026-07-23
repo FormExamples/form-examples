@@ -4,7 +4,7 @@ A permanent hyperlink for a Digital Object Identifier (DOI) to an electronic sou
 
 ## Canonical documentation
 
-See [components/digital-object-identifier-link/index.md](../../../../components/digital-object-identifier-link/index.md) for the full component documentation, including ARIA, keyboard interactions, props, and usage guidance.
+See [components/digital-object-identifier-link/index.md](../../../components/digital-object-identifier-link/index.md) for the full component documentation, including ARIA, keyboard interactions, props, and usage guidance.
 
 ## Svelte usage
 
@@ -21,3 +21,7 @@ See [components/digital-object-identifier-link/index.md](../../../../components/
 - `DigitalObjectIdentifierLink.svelte` — Svelte 5 implementation using runes
 - `DigitalObjectIdentifierLink.test.ts` — vitest + @testing-library/svelte tests
 - `DigitalObjectIdentifierLink.stories.svelte` — Storybook stories
+
+---
+
+Lily™ and Lily Design System™ are trademarks.

@@ -131,3 +131,7 @@ Related references:
 - `ScrollArea` - focusable scroll container without resize semantics.
 - `Sidebar` - complementary landmark without resize behavior.
 - `SlideOutDrawer` / `Sheet` - modal overlay panels.
+
+---
+
+Lily™ and Lily Design System™ are trademarks.

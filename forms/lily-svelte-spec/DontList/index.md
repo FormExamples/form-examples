@@ -116,3 +116,7 @@ Wrap one or more `DontListItem` children inside `DontList`.
 - `DontListItem` — a single discouraged-practice item.
 - `DoList`, `DoListItem` — the recommended-practice counterpart, usually paired.
 - `CheckList`, `TaskList`, `SummaryList` — other list patterns.
+
+---
+
+Lily™ and Lily Design System™ are trademarks.

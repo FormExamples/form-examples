@@ -4,7 +4,7 @@ A visual machine-readable symbolic code image, such as for a scanner.
 
 ## Canonical documentation
 
-See [components/barcode-image/index.md](../../../../components/barcode-image/index.md) for the full component documentation, including ARIA, keyboard interactions, props, and usage guidance.
+See [components/barcode-image/index.md](../../../components/barcode-image/index.md) for the full component documentation, including ARIA, keyboard interactions, props, and usage guidance.
 
 ## Svelte usage
 
@@ -21,3 +21,7 @@ See [components/barcode-image/index.md](../../../../components/barcode-image/ind
 - `BarcodeImage.svelte` — Svelte 5 implementation using runes
 - `BarcodeImage.test.ts` — vitest + @testing-library/svelte tests
 - `BarcodeImage.stories.svelte` — Storybook stories
+
+---
+
+Lily™ and Lily Design System™ are trademarks.

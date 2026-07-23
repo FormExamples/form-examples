@@ -127,3 +127,7 @@ Control `active` from parent state tracking which cell is currently focusable. O
 
 - `DataTableRow`, `DataTableHead`, `DataTableBody`, `DataTableFoot`, `DataTableTD` — compound parts.
 - `DataTable` — enclosing grid.
+
+---
+
+Lily™ and Lily Design System™ are trademarks.

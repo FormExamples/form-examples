@@ -118,3 +118,7 @@ Import `AvatarImage` from `./AvatarImage.svelte`. Always pass both `src` and `al
 - `AvatarText` — text/initials alternative or fallback.
 - `AvatarGroup` — stacked avatars.
 - `Image`, `FeaturePhoto` — standalone image components.
+
+---
+
+Lily™ and Lily Design System™ are trademarks.

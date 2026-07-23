@@ -63,3 +63,7 @@ Import `ContainerWithFluidWidth` and pass `paddingInline`. Required prop: `child
 ## References
 
 - MDN `padding-inline`: https://developer.mozilla.org/en-US/docs/Web/CSS/padding-inline
+
+---
+
+Lily™ and Lily Design System™ are trademarks.

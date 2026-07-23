@@ -65,3 +65,7 @@ Import `ContainerWithFixedWidth` and pass `maxWidth`. Required prop: `children`.
 
 - MDN `max-width`: https://developer.mozilla.org/en-US/docs/Web/CSS/max-width
 - MDN `margin-inline`: https://developer.mozilla.org/en-US/docs/Web/CSS/margin-inline
+
+---
+
+Lily™ and Lily Design System™ are trademarks.

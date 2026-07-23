@@ -95,3 +95,7 @@ Pass the email address as a prop.
 - `TelLink`, `TelInput` — telephone counterparts.
 - `DigitalObjectIdentifierLink` — DOI permanent hyperlink.
 - `ActionLink`, `BackLink` — other link variants.
+
+---
+
+Lily™ and Lily Design System™ are trademarks.

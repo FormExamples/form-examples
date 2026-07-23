@@ -112,3 +112,7 @@ Import the component and pass the formatted `value` and an accessible `label`. P
 - `IrelandIndividualHealthIdentifierView` — equivalent view for an Ireland IHI identifier.
 - `UnitedKingdomNationalHealthServiceNumberView` — equivalent view for a UK NHS number.
 - `SummaryList` / `SummaryListItem` — often used to group identifier views with labels.
+
+---
+
+Lily™ and Lily Design System™ are trademarks.

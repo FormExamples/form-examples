@@ -141,3 +141,7 @@ References:
 - `Drawer`, `SlideOutDrawer` - related side panels.
 - `Popover`, `FloatingPanel` - non-modal overlays.
 - `Sidebar` - persistent complementary landmark.
+
+---
+
+Lily™ and Lily Design System™ are trademarks.

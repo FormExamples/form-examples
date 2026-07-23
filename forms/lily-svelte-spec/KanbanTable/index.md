@@ -225,3 +225,7 @@ Import the compound components, compose them with a `KanbanTableHead` for the wo
 - `DataTable` — for displaying tabular data.
 - `GanttTable` — for schedule visualization.
 - `CalendarTable` — for date grids.
+
+---
+
+Lily™ and Lily Design System™ are trademarks.

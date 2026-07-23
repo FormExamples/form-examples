@@ -118,3 +118,7 @@ Import `ButtonInput` from `./ButtonInput.svelte`. Always pass `value`. Optionall
 - `ResetInput` — `<input type="reset">` for form reset.
 - `ImageInput` — `<input type="image">` graphical submit.
 - `ToggleButton`, `SwitchButton` — stateful buttons.
+
+---
+
+Lily™ and Lily Design System™ are trademarks.

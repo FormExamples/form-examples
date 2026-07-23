@@ -4,7 +4,7 @@ A table interactive grid row <tr>.
 
 ## Canonical documentation
 
-See [components/table-row/index.md](../../../../components/table-row/index.md) for the full component documentation, including ARIA, keyboard interactions, props, and usage guidance.
+See [components/table-row/index.md](../../../components/table-row/index.md) for the full component documentation, including ARIA, keyboard interactions, props, and usage guidance.
 
 ## Svelte usage
 
@@ -21,3 +21,7 @@ See [components/table-row/index.md](../../../../components/table-row/index.md) f
 - `TableRow.svelte` — Svelte 5 implementation using runes
 - `TableRow.test.ts` — vitest + @testing-library/svelte tests
 - `TableRow.stories.svelte` — Storybook stories
+
+---
+
+Lily™ and Lily Design System™ are trademarks.

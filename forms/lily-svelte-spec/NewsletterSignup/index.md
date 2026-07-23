@@ -75,3 +75,7 @@ A headless Svelte 5 component that renders a `<form>` with an email field, submi
 - WAI-ARIA `role="status"`: https://www.w3.org/TR/wai-aria-1.2/#status
 - WAI-ARIA `role="alert"`: https://www.w3.org/TR/wai-aria-1.2/#alert
 - Mozilla Protocol Design System: https://protocol.mozilla.org
+
+---
+
+Lily™ and Lily Design System™ are trademarks.

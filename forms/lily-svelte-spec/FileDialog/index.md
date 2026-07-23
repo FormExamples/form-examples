@@ -118,3 +118,7 @@ Bind `open` and provide dialog content as children.
 - `AlertDialog` — urgent must-acknowledge dialog.
 - `FileInput`, `FileUpload` — native file pickers.
 - `FileManager` — embedded file browser region.
+
+---
+
+Lily™ and Lily Design System™ are trademarks.

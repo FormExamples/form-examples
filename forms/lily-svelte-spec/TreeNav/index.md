@@ -118,3 +118,7 @@ Import and supply `<li role="treeitem" tabindex="-1">` children (one item with `
 - `TreeListItem` — helper item component.
 - `TreeMenu` — menu-flavored tree variant.
 - `NavigationMenu` / `BreadcrumbNav` — alternative navigation containers.
+
+---
+
+Lily™ and Lily Design System™ are trademarks.

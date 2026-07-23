@@ -107,3 +107,7 @@ Import the component, bind `value`, and pass a translated `label`. Extend with p
 - `EmailInput` / `EmailLink` — analogous Input/Link pair for email.
 - `TextInput` — generic single-line text input.
 - `UrlInput` — for URL entry.
+
+---
+
+Lily™ and Lily Design System™ are trademarks.

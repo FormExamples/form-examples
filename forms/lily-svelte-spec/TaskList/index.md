@@ -108,3 +108,7 @@ Import `TaskList` and place `TaskListItem` children (or raw `<li>` elements) ins
 - `CheckList` / `CheckListItem` — similar pattern but scoped to checked/unchecked checklists.
 - `TourList` / `TourListItem` — guided walkthrough sequences.
 - `TimelineList` / `TimelineListItem` — chronological event ordering.
+
+---
+
+Lily™ and Lily Design System™ are trademarks.

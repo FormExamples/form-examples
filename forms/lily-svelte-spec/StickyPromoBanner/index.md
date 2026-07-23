@@ -17,7 +17,7 @@ A headless Svelte 5 component that renders a sticky `<aside>` with a content slo
 
 ## Inline styles
 
-This component is the only headless Lily component that uses inline styles, because sticky positioning is core to its behavior. The inline styles are limited to:
+This component is the only headless Lily™ component that uses inline styles, because sticky positioning is core to its behavior. The inline styles are limited to:
 
 - `position: fixed`
 - `left: 0; right: 0`
@@ -82,3 +82,7 @@ All other visual styling (colors, padding, typography, shadow) must come from co
 
 - WAI-ARIA `role="complementary"`: https://www.w3.org/TR/wai-aria-1.2/#complementary
 - Mozilla Protocol Design System: https://protocol.mozilla.org
+
+---
+
+Lily™ and Lily Design System™ are trademarks.

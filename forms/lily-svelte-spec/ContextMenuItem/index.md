@@ -94,3 +94,7 @@ Place inside `ContextMenu`. Add click handlers via `restProps` (`onclick`) to im
 - `ContextMenu` — parent container.
 - `MenuItem` — menu item for `Menu`.
 - `DropdownMenu` — menu under a trigger button.
+
+---
+
+Lily™ and Lily Design System™ are trademarks.

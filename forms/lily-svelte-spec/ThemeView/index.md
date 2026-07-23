@@ -97,3 +97,7 @@ Import and pass the `label` (for accessibility) and the `value` (the theme name 
 - `ThemeSelect` / `ThemeSelectOption` — dropdown alternative.
 - `ThemeSelectButton` — swatch-button alternative.
 - `Character` — single-character display element.
+
+---
+
+Lily™ and Lily Design System™ are trademarks.

@@ -137,3 +137,7 @@ import PaginationList from './PaginationList.svelte';
 - `PaginationNav` — the outer navigation landmark for a full pagination region.
 - `PaginationListItem` — a single list item inside this list.
 - `BreadcrumbList`, `TreeList`, `ContentsList`, `TimelineList` — sibling list containers.
+
+---
+
+Lily™ and Lily Design System™ are trademarks.

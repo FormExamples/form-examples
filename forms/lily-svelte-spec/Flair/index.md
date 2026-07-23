@@ -98,3 +98,7 @@ Wrap inline text or markup in `<Flair>...</Flair>`. Provide a `label` only when 
 - `TagGroup` - group of tags.
 - `Character` - single-character inline display.
 - `ScreenReaderSpan` - visually hidden text for screen readers only.
+
+---
+
+Lily™ and Lily Design System™ are trademarks.

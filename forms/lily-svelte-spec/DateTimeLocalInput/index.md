@@ -132,3 +132,7 @@ Import the component and bind a string value in `YYYY-MM-DDThh:mm` format.
 - `DateInput` — date-only input.
 - `TimeInput` — time-only input.
 - `MonthInput`, `WeekInput` — alternative partial-date pickers.
+
+---
+
+Lily™ and Lily Design System™ are trademarks.

@@ -75,3 +75,7 @@ A headless Svelte 5 component that renders a single `<div>` element. Category: l
 ## References
 
 - MDN CSS Grid: https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_grid_layout
+
+---
+
+Lily™ and Lily Design System™ are trademarks.

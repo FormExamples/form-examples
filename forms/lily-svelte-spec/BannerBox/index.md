@@ -124,3 +124,7 @@ Import `BannerBox` from `./BannerBox.svelte`. Place as a direct child of `Banner
 - `Banner` — required outer container.
 - `MedicalBanner`, `MedicalBannerBox`, `MedicalBannerBoxForDanger`, `MedicalBannerBoxForAdvice` — medical variants.
 - `SuperBanner` — higher-priority banner.
+
+---
+
+Lily™ and Lily Design System™ are trademarks.

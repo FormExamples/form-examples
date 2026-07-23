@@ -118,3 +118,7 @@ References:
 - `Header`, `Footer` - landmark containers.
 - `NavigationMenu` - primary site nav.
 - `BreadcrumbNav` - secondary navigation.
+
+---
+
+Lily™ and Lily Design System™ are trademarks.

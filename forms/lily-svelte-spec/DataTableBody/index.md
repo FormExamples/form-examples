@@ -117,3 +117,7 @@ Place inside `DataTable`, populate with `DataTableRow` children containing `Data
 - `DataTable` — parent grid.
 - `DataTableHead`, `DataTableFoot` — other sections.
 - `DataTableRow`, `DataTableTD` — row and cell parts.
+
+---
+
+Lily™ and Lily Design System™ are trademarks.

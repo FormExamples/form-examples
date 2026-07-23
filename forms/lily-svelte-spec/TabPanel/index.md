@@ -64,3 +64,7 @@ A headless Svelte 5 component that renders `<div role="tabpanel" tabindex="0">`.
 
 - Adobe Spectrum Tabs: https://spectrum.adobe.com/page/tabs/
 - WAI-ARIA Tabs Pattern: https://www.w3.org/WAI/ARIA/apg/patterns/tabs/
+
+---
+
+Lily™ and Lily Design System™ are trademarks.

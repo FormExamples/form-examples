@@ -115,3 +115,7 @@ Import `Caption` from `./Caption.svelte`. Place inside a `<figure>` or `Figure`.
 - `Image`, `FeaturePhoto` — image children.
 - `BodyText` — general text blocks.
 - `EndNotes`, `Footnote` — other kinds of supplementary text.
+
+---
+
+Lily™ and Lily Design System™ are trademarks.

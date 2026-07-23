@@ -29,3 +29,7 @@ This component ships zero CSS. The consumer provides all styling targeting `.esp
 ## References
 
 - https://en.wikipedia.org/wiki/VAT_identification_number#Spain
+
+---
+
+Lily™ and Lily Design System™ are trademarks.

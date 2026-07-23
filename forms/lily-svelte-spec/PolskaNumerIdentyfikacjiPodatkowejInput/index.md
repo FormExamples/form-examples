@@ -31,3 +31,7 @@ This component ships zero CSS. The consumer provides all styling targeting `.pol
 ## References
 
 - https://en.wikipedia.org/wiki/National_identification_number#Poland
+
+---
+
+Lily™ and Lily Design System™ are trademarks.

@@ -136,3 +136,7 @@ Import `AlertDialog` from `./AlertDialog.svelte`. Bind `open` to local state. Pa
 - `FileDialog` — file-browsing dialog.
 - `Alert` — inline urgent message, not modal.
 - `Drawer`, `Sheet` — edge-anchored overlay panels.
+
+---
+
+Lily™ and Lily Design System™ are trademarks.

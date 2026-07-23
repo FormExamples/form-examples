@@ -140,3 +140,7 @@ Import the component, bind `value`, and supply `label`, `inputLabel`, and `searc
 - `TextInput` — plain single-line text input.
 - `Combobox` — text input paired with a filterable dropdown list.
 - `DataFilterForm` — form wrapper for complex multi-field filters.
+
+---
+
+Lily™ and Lily Design System™ are trademarks.

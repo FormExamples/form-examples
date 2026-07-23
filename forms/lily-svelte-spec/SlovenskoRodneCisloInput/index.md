@@ -31,3 +31,7 @@ This component ships zero CSS. The consumer provides all styling targeting `.slo
 ## References
 
 - https://en.wikipedia.org/wiki/National_identification_number#Slovakia
+
+---
+
+Lily™ and Lily Design System™ are trademarks.

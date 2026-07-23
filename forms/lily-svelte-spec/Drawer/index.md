@@ -113,3 +113,7 @@ Bind `open` to a state variable and choose a `side`.
 - `Sheet` — overlay sheet from a screen edge.
 - `Dialog` — centred modal dialog.
 - `Sidebar` — persistent side navigation.
+
+---
+
+Lily™ and Lily Design System™ are trademarks.

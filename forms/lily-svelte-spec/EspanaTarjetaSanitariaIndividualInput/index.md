@@ -100,3 +100,7 @@ Provide a required `label` and bind the value.
 - `UnitedKingdomNationalHealthServiceNumberInput`, `FranceNumeroDIdentificationAuRepertoireInput`, `IrelandIndividualHealthIdentifierInput`, `NorthernIrelandHealthAndCareNumberInput`, `UnitedStatesSocialSecurityNumberInput` — analogous identifiers for other countries.
 - `TextInput` — generic text input.
 - `Field`, `Form` — form composition wrappers.
+
+---
+
+Lily™ and Lily Design System™ are trademarks.

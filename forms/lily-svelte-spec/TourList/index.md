@@ -154,3 +154,7 @@ Import and place inside `Tour` (or use standalone with your own trigger), passin
 - `TourListItem` — step child components.
 - `TaskList` / `TimelineList` — ordered lists for non-tour contexts.
 - `Dialog` — general-purpose dialog component.
+
+---
+
+Lily™ and Lily Design System™ are trademarks.

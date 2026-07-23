@@ -72,3 +72,7 @@ A headless Svelte 5 component that renders a `<div>` with `role="toolbar"`. Insp
 
 - Adobe Spectrum ActionBar: https://spectrum.adobe.com/page/action-bar/
 - WAI-ARIA Toolbar Pattern: https://www.w3.org/WAI/ARIA/apg/patterns/toolbar/
+
+---
+
+Lily™ and Lily Design System™ are trademarks.

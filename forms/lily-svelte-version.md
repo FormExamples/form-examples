@@ -12,8 +12,8 @@ consumption model.
 | Field            | Value                                                                  |
 |------------------|------------------------------------------------------------------------|
 | Repository       | `lilydesignsystem/lily-design-system` (subdir `lily-design-system-svelte-headless`) |
-| Pinned commit    | `7b5e39c39`                                                             |
-| Date pinned      | 2026-07-02                                                              |
+| Pinned commit    | `9168437b9`                                                             |
+| Date pinned      | 2026-07-23                                                              |
 | Snapshot         | [`lily-svelte-spec/`](lily-svelte-spec/) — one subdirectory per component |
 
 This pin is the contract our forms build against. Newer Lily Svelte commits

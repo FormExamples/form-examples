@@ -4,7 +4,7 @@ A scatter chart visualization using dots to display data.
 
 ## Canonical documentation
 
-See [components/scatter-chart/index.md](../../../../components/scatter-chart/index.md) for the full component documentation, including ARIA, keyboard interactions, props, and usage guidance.
+See [components/scatter-chart/index.md](../../../components/scatter-chart/index.md) for the full component documentation, including ARIA, keyboard interactions, props, and usage guidance.
 
 ## Svelte usage
 
@@ -21,3 +21,7 @@ See [components/scatter-chart/index.md](../../../../components/scatter-chart/ind
 - `ScatterChart.svelte` — Svelte 5 implementation using runes
 - `ScatterChart.test.ts` — vitest + @testing-library/svelte tests
 - `ScatterChart.stories.svelte` — Storybook stories
+
+---
+
+Lily™ and Lily Design System™ are trademarks.

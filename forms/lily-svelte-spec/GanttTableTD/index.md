@@ -134,3 +134,7 @@ Inside a `GanttTableTR`, place one `GanttTableTD` per time-period column. Set `a
 - `GanttTableHead` / `GanttTableBody` / `GanttTableTfoot` - sections.
 - `GanttTableTH` - column definition (`<col>`).
 - `DataTableTD`, `CalendarTableTD`, `KanbanTableTD`, `TableTD` - data-cell variants in other table families.
+
+---
+
+Lily™ and Lily Design System™ are trademarks.

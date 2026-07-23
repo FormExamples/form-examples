@@ -4,7 +4,7 @@ A panel confirming a task has been completed.
 
 ## Canonical documentation
 
-See [components/success-panel/index.md](../../../../components/success-panel/index.md) for the full component documentation, including ARIA, keyboard interactions, props, and usage guidance.
+See [components/success-panel/index.md](../../../components/success-panel/index.md) for the full component documentation, including ARIA, keyboard interactions, props, and usage guidance.
 
 ## Svelte usage
 
@@ -21,3 +21,7 @@ See [components/success-panel/index.md](../../../../components/success-panel/ind
 - `SuccessPanel.svelte` — Svelte 5 implementation using runes
 - `SuccessPanel.test.ts` — vitest + @testing-library/svelte tests
 - `SuccessPanel.stories.svelte` — Storybook stories
+
+---
+
+Lily™ and Lily Design System™ are trademarks.

@@ -130,3 +130,7 @@ import Panel from './Panel.svelte';
 - `Fieldset` — grouped form controls with a `<legend>`.
 - `GrailLayoutCenterMain`, `GrailLayoutLeftAside`, `GrailLayoutRightAside` — page-structural landmarks.
 - `Dialog`, `Popover`, `Popup`, `Drawer` — overlay alternatives.
+
+---
+
+Lily™ and Lily Design System™ are trademarks.

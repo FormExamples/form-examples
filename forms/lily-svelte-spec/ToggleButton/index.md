@@ -110,3 +110,7 @@ Import, bind `pressed`, and pass a translated `label`. Optionally render visible
 - `SwitchButton` — traditional on/off switch styled toggle.
 - `Button` — standard button for actions.
 - `CheckboxInput` — checkbox equivalent for form-submission contexts.
+
+---
+
+Lily™ and Lily Design System™ are trademarks.

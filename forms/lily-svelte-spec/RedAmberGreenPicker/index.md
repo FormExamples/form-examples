@@ -128,3 +128,7 @@ import RedAmberGreenPicker from './RedAmberGreenPicker.svelte';
 - `RedAmberGreenPickerButton` — button-style picker used when you want a custom button-based picker UI.
 - `RedOrangeYellowGreenBluePicker`, `RedOrangeYellowGreenBluePickerButton`, `RedOrangeYellowGreenBlueView` — five-level scale.
 - Other pickers: `FiveFaceRatingPicker`, `FiveStarRatingPicker`, `NetPromoterScorePicker`.
+
+---
+
+Lily™ and Lily Design System™ are trademarks.

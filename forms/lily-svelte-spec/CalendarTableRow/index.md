@@ -122,3 +122,7 @@ Import `CalendarTableRow` from `./CalendarTableRow.svelte`. Fill with `<th>` cel
 
 - `CalendarTable`, `CalendarTableHead`, `CalendarTableBody`, `CalendarTableFoot`, `CalendarTableTD`, `CalendarTableTD`.
 - `DataTableRow`, `GanttTableTR`, `KanbanTableRow`, `TableRow`.
+
+---
+
+Lily™ and Lily Design System™ are trademarks.

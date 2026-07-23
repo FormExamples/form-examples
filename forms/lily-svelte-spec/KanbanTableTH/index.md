@@ -106,3 +106,7 @@ Place `KanbanTableTD` elements inside a `KanbanTableRow` within `KanbanTableHead
 - `KanbanTableFoot` — the `<tfoot>` section for totals.
 - `KanbanTableRow` — a `<tr>` row.
 - `KanbanTableTD` — a `<td role="gridcell">` task cell.
+
+---
+
+Lily™ and Lily Design System™ are trademarks.

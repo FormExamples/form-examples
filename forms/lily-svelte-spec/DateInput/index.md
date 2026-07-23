@@ -103,3 +103,7 @@ Provide `label` (used as `aria-label`). Bind `value` to a `$state` variable.
 - `DateField` — date input with label/description/error.
 - `DateRange` — start/end pair.
 - `DateTimeLocalInput`, `MonthInput`, `WeekInput`, `TimeInput` — related input types.
+
+---
+
+Lily™ and Lily Design System™ are trademarks.

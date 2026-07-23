@@ -29,3 +29,7 @@ This component ships zero CSS. The consumer provides all styling targeting `.eng
 ## References
 
 - https://en.wikipedia.org/wiki/NHS_number
+
+---
+
+Lily™ and Lily Design System™ are trademarks.

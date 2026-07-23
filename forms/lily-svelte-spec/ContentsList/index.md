@@ -104,3 +104,7 @@ Place inside `ContentsNav`, with `ContentsListItem` children containing anchor l
 - `ContentsNav` — navigation landmark wrapper.
 - `ContentsListItem` — individual entry.
 - `ContentsLink` — single link variant.
+
+---
+
+Lily™ and Lily Design System™ are trademarks.

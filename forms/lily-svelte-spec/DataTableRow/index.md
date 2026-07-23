@@ -114,3 +114,7 @@ Place inside `DataTableHead`, `DataTableBody`, or `DataTableFoot`. Populate with
 ## Related components
 
 - `DataTable`, `DataTableHead`, `DataTableBody`, `DataTableFoot`, `DataTableTD`, `DataTableTD`.
+
+---
+
+Lily™ and Lily Design System™ are trademarks.

@@ -53,3 +53,7 @@ A headless Svelte 5 component that renders `<span class="status-light" role="sta
 ## References
 
 - Adobe Spectrum StatusLight: https://spectrum.adobe.com/page/status-light/
+
+---
+
+Lily™ and Lily Design System™ are trademarks.

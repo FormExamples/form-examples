@@ -119,3 +119,7 @@ Wrap checkbox inputs inside `<CheckboxGroup label="...">`. The component is inte
 - `CheckboxInput` — bare checkbox input with `aria-label`.
 - `CheckList`, `CheckListItem` — ordered list of tasks with checkboxes.
 - `RadioGroup`, `RadioInput` — single-select equivalents.
+
+---
+
+Lily™ and Lily Design System™ are trademarks.

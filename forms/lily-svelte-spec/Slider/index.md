@@ -125,3 +125,7 @@ References:
 - `AngleSliderRangeInput` - angle-in-degrees variant.
 - `SliderButton` - slide-to-confirm button.
 - `Dial` - rotary selector.
+
+---
+
+Lily™ and Lily Design System™ are trademarks.

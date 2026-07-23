@@ -102,3 +102,7 @@ Provide `text` (what to copy) and `label` (the accessible name of the button). U
 
 - `Button` — generic button.
 - `Toast`, `Sonner` — notification surfaces for success/error feedback.
+
+---
+
+Lily™ and Lily Design System™ are trademarks.

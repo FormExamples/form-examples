@@ -179,3 +179,7 @@ Place `KanbanTableBody` inside a `KanbanTable` and nest `KanbanTableRow` childre
 - `KanbanTableRow` — a `<tr>` row inside body/head/foot.
 - `KanbanTableTD` — a `<td role="gridcell">` data cell.
 - `KanbanTableTD` — a `<th scope="col">` column header cell inside `<thead><tr>`.
+
+---
+
+Lily™ and Lily Design System™ are trademarks.

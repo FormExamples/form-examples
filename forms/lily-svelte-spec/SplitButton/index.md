@@ -89,3 +89,7 @@ A headless Svelte 5 component that renders a `<div role="group">` plus two `<but
 
 - WAI-ARIA Menu Button: https://www.w3.org/WAI/ARIA/apg/patterns/menu-button/
 - WAI-ARIA `aria-haspopup`: https://www.w3.org/TR/wai-aria-1.2/#aria-haspopup
+
+---
+
+Lily™ and Lily Design System™ are trademarks.

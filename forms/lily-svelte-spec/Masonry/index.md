@@ -73,3 +73,7 @@ A headless Svelte 5 component that renders a single `<div>` element. Category: l
 
 - MDN multi-column layout: https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_multicol_layout
 - MDN `break-inside`: https://developer.mozilla.org/en-US/docs/Web/CSS/break-inside
+
+---
+
+Lily™ and Lily Design System™ are trademarks.

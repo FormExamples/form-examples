@@ -9,3 +9,7 @@ A horizontal progress indicator.
 - `value`: `number` — current value.
 - `min`: `number` (default 0) — minimum.
 - `max`: `number` (default 100) — maximum.
+
+---
+
+Lily™ and Lily Design System™ are trademarks.

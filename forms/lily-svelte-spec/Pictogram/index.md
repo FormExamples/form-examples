@@ -64,3 +64,7 @@ A headless Svelte 5 component rendering a `<figure>` containing an `aria-hidden`
 
 - HTML `<figure>`: https://developer.mozilla.org/en-US/docs/Web/HTML/Element/figure
 - Mozilla Protocol Design System: https://protocol.mozilla.org
+
+---
+
+Lily™ and Lily Design System™ are trademarks.

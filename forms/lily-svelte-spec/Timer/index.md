@@ -102,3 +102,7 @@ Import, supply `label`, and pass formatted time content through `children`. Opti
 - `Toast` — transient notification messages.
 - `Progress` / `ProgressCircle` — show time-based progress visually.
 - `Meter` — gauge for a scalar value within a range.
+
+---
+
+Lily™ and Lily Design System™ are trademarks.

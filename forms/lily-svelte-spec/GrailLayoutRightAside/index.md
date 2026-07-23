@@ -116,3 +116,7 @@ Place as a direct child of `GrailLayout`. The component itself provides the `com
 - `GrailLayoutTopHeader`, `GrailLayoutLeftAside`, `GrailLayoutCenterMain`, `GrailLayoutBottomFooter` - sibling slots.
 - `Sidebar` - dedicated side-panel component.
 - `FloatingPanel` - overlay floating panel (not in-layout).
+
+---
+
+Lily™ and Lily Design System™ are trademarks.

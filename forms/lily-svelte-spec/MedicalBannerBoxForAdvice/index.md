@@ -143,3 +143,7 @@ Place inside a `MedicalBanner` or `MedicalBannerBox`, pass a descriptive `label`
 - `MedicalBannerBoxForDanger` — paired danger-level region.
 - `InformationCallout` — general supplementary info outside medical contexts.
 - `WarningCallout` — dedicated warning callout.
+
+---
+
+Lily™ and Lily Design System™ are trademarks.

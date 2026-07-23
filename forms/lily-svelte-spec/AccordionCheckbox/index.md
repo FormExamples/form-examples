@@ -57,3 +57,7 @@ Unlike `Details`, which uses a `<summary>` toggle, this component uses a real fo
 - `Collapsible` — generic collapsible container.
 - `CheckboxInput` — single checkbox without a revealable panel.
 - `AccordionList` / `AccordionListItem` — accordion list where one panel may open at a time.
+
+---
+
+Lily™ and Lily Design System™ are trademarks.
