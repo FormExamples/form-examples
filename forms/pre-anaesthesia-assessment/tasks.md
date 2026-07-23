@@ -59,6 +59,30 @@
 - [x] Vitest unit tests for `composite-grader.ts`.
 - [x] `bin/test-form pre-anaesthesia-assessment` passes.
 
+## In progress (2026-07-23)
+
+The detailed pre-anaesthesia proforma (10 new engine sections, ~150
+checklist fields, added to the Svelte engine + both front-ends earlier)
+was missing from SQL/generated representations/Rust backend. Continuing
+the build-out:
+
+- [x] SQL: `sql/13_alter_table_pre_anaesthesia_assessment_add_proforma_fields.sql`
+      — 205 new columns, prefixed per-section (`proforma_header_`,
+      `prev_anaes_`, `addiction_`, `pmh_proforma_`, `airway_exam_proforma_`,
+      `vitals_proforma_`, `gen_exam_proforma_`, `invest_proforma_`,
+      `risk_factors_`, `anaes_plan_proforma_`) to avoid colliding with
+      existing base-ASA-engine columns of the same clinical name (e.g.
+      `asthma`, `copd`, `arrhythmia`, `gord` already exist as enum columns
+      from the 16-step ASA assessment; the proforma's own boolean
+      checklist items are a distinct, separately-answered field).
+      Verified applies cleanly against the full migration stack (205/205
+      columns, 410 total on the table).
+- [x] Regenerated XML, FHIR R5, protobuf, OpenAPI representations.
+- [x] Rust back-end-with-loco updated to match: new migration + 205 new
+      entity/controller fields (table now 410 columns total). Verified
+      via `cargo check` (clean) and `cargo test` (40/40 passing) and
+      `bin/test-form` (PASS).
+
 ## Deferred / future
 - [ ] Zod schemas for client-side validation.
 - [ ] Axe-core accessibility audit.

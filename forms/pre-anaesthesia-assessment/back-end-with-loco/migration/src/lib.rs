@@ -12,6 +12,7 @@ mod m20260701_051341_patient_allergies;
 mod m20260701_051403_pre_anaesthesia_assessments;
 mod m20260701_051440_pre_anaesthesia_assessment_grades;
 mod m20260701_051508_pre_anaesthesia_assessment_grade_rules;
+mod m20260723_015542_pre_anaesthesia_assessment_add_proforma_fields;
 pub struct Migrator;
 
 #[async_trait::async_trait]
@@ -28,6 +29,7 @@ impl MigratorTrait for Migrator {
             Box::new(m20260701_051403_pre_anaesthesia_assessments::Migration),
             Box::new(m20260701_051440_pre_anaesthesia_assessment_grades::Migration),
             Box::new(m20260701_051508_pre_anaesthesia_assessment_grade_rules::Migration),
+            Box::new(m20260723_015542_pre_anaesthesia_assessment_add_proforma_fields::Migration),
             // inject-above (do not remove this comment)
         ]
     }

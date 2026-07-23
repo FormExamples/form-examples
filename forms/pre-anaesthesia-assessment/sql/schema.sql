@@ -609,7 +609,212 @@ CREATE TABLE pre_anaesthesia_assessment (
     post_op_disposition VARCHAR(20) NOT NULL DEFAULT '' CHECK (post_op_disposition IN ('day-case', 'ward', 'enhanced-care', 'hdu', 'icu', '')),
     anticipated_length_of_stay_days INTEGER,
     special_equipment VARCHAR(500) NOT NULL DEFAULT '',
-    blood_products_required VARCHAR(100) NOT NULL DEFAULT ''
+    blood_products_required VARCHAR(100) NOT NULL DEFAULT '',
+    proforma_header_department TEXT NOT NULL DEFAULT '',
+    proforma_header_registration_date TEXT NOT NULL DEFAULT '',
+    proforma_header_pre_op_diagnosis TEXT NOT NULL DEFAULT '',
+    prev_anaes_anaesthetic_difficulty BOOLEAN NOT NULL DEFAULT FALSE,
+    prev_anaes_abnormal_reaction BOOLEAN NOT NULL DEFAULT FALSE,
+    prev_anaes_ponv BOOLEAN NOT NULL DEFAULT FALSE,
+    prev_anaes_malignant_hyperpyrexia BOOLEAN NOT NULL DEFAULT FALSE,
+    prev_anaes_difficult_intubation BOOLEAN NOT NULL DEFAULT FALSE,
+    prev_anaes_difficult_spinal_or_epidural BOOLEAN NOT NULL DEFAULT FALSE,
+    addiction_alcohol BOOLEAN NOT NULL DEFAULT FALSE,
+    addiction_smoking BOOLEAN NOT NULL DEFAULT FALSE,
+    addiction_fast_score3_or_more BOOLEAN NOT NULL DEFAULT FALSE,
+    addiction_betel BOOLEAN NOT NULL DEFAULT FALSE,
+    addiction_drugs BOOLEAN NOT NULL DEFAULT FALSE,
+    addiction_other BOOLEAN NOT NULL DEFAULT FALSE,
+    addiction_other_details TEXT NOT NULL DEFAULT '',
+    pmh_proforma_hypertension BOOLEAN NOT NULL DEFAULT FALSE,
+    pmh_proforma_mi BOOLEAN NOT NULL DEFAULT FALSE,
+    pmh_proforma_mi_within_past6_months BOOLEAN NOT NULL DEFAULT FALSE,
+    pmh_proforma_angina_or_chest_pain BOOLEAN NOT NULL DEFAULT FALSE,
+    pmh_proforma_angina_triggers TEXT NOT NULL DEFAULT '',
+    pmh_proforma_heart_failure BOOLEAN NOT NULL DEFAULT FALSE,
+    pmh_proforma_dyspnoea BOOLEAN NOT NULL DEFAULT FALSE,
+    pmh_proforma_dyspnoea_subtypes TEXT NOT NULL DEFAULT '',
+    pmh_proforma_palpitation BOOLEAN NOT NULL DEFAULT FALSE,
+    pmh_proforma_arrhythmia BOOLEAN NOT NULL DEFAULT FALSE,
+    pmh_proforma_syncope_or_fainting BOOLEAN NOT NULL DEFAULT FALSE,
+    pmh_proforma_heart_murmur BOOLEAN NOT NULL DEFAULT FALSE,
+    pmh_proforma_rheumatic_fever BOOLEAN NOT NULL DEFAULT FALSE,
+    pmh_proforma_pacemaker BOOLEAN NOT NULL DEFAULT FALSE,
+    pmh_proforma_pacemaker_last_check_within6_months BOOLEAN NOT NULL DEFAULT FALSE,
+    pmh_proforma_implanted_icd_crtd BOOLEAN NOT NULL DEFAULT FALSE,
+    pmh_proforma_angioplasty BOOLEAN NOT NULL DEFAULT FALSE,
+    pmh_proforma_stenting BOOLEAN NOT NULL DEFAULT FALSE,
+    pmh_proforma_stenting_within_past6_months BOOLEAN NOT NULL DEFAULT FALSE,
+    pmh_proforma_stent_type TEXT NOT NULL DEFAULT '' CHECK (pmh_proforma_stent_type IN ('drug-eluting', 'bare-metal', 'unknown', '')),
+    pmh_proforma_valve_disease BOOLEAN NOT NULL DEFAULT FALSE,
+    pmh_proforma_cardiac_surgery BOOLEAN NOT NULL DEFAULT FALSE,
+    pmh_proforma_cardiac_surgery_within_past_year BOOLEAN NOT NULL DEFAULT FALSE,
+    pmh_proforma_peripheral_vascular_disease BOOLEAN NOT NULL DEFAULT FALSE,
+    pmh_proforma_ischemic_heart_disease BOOLEAN NOT NULL DEFAULT FALSE,
+    pmh_proforma_asthma BOOLEAN NOT NULL DEFAULT FALSE,
+    pmh_proforma_copd BOOLEAN NOT NULL DEFAULT FALSE,
+    pmh_proforma_tb BOOLEAN NOT NULL DEFAULT FALSE,
+    pmh_proforma_bronchiectasis BOOLEAN NOT NULL DEFAULT FALSE,
+    pmh_proforma_previous_hospital_admission BOOLEAN NOT NULL DEFAULT FALSE,
+    pmh_proforma_icu_admission BOOLEAN NOT NULL DEFAULT FALSE,
+    pmh_proforma_on_home_oxygen_or_nebulizers BOOLEAN NOT NULL DEFAULT FALSE,
+    pmh_proforma_uses_inhaler_daily_or_more BOOLEAN NOT NULL DEFAULT FALSE,
+    pmh_proforma_flu_cough_sputum BOOLEAN NOT NULL DEFAULT FALSE,
+    pmh_proforma_haemoptysis BOOLEAN NOT NULL DEFAULT FALSE,
+    pmh_proforma_sleep_apnoea BOOLEAN NOT NULL DEFAULT FALSE,
+    pmh_proforma_sleep_apnoea_using_cpap BOOLEAN NOT NULL DEFAULT FALSE,
+    pmh_proforma_stop_bang_risk TEXT NOT NULL DEFAULT '' CHECK (pmh_proforma_stop_bang_risk IN ('high', 'medium', 'low', '')),
+    pmh_proforma_other_respiratory_disease BOOLEAN NOT NULL DEFAULT FALSE,
+    pmh_proforma_diabetes_mellitus BOOLEAN NOT NULL DEFAULT FALSE,
+    pmh_proforma_diabetes_diet_controlled BOOLEAN NOT NULL DEFAULT FALSE,
+    pmh_proforma_diabetes_drug_controlled BOOLEAN NOT NULL DEFAULT FALSE,
+    pmh_proforma_diabetes_insulin_controlled BOOLEAN NOT NULL DEFAULT FALSE,
+    pmh_proforma_diabetes_hba1c_over69 BOOLEAN NOT NULL DEFAULT FALSE,
+    pmh_proforma_hypothyroid BOOLEAN NOT NULL DEFAULT FALSE,
+    pmh_proforma_hyperthyroid BOOLEAN NOT NULL DEFAULT FALSE,
+    pmh_proforma_stroke_or_tia BOOLEAN NOT NULL DEFAULT FALSE,
+    pmh_proforma_stroke_within3_months BOOLEAN NOT NULL DEFAULT FALSE,
+    pmh_proforma_stroke_residual_disability TEXT NOT NULL DEFAULT '',
+    pmh_proforma_epilepsy_or_seizures BOOLEAN NOT NULL DEFAULT FALSE,
+    pmh_proforma_epilepsy_control TEXT NOT NULL DEFAULT '' CHECK (pmh_proforma_epilepsy_control IN ('well-controlled', '3-12-months-ago', 'poorly-controlled', '')),
+    pmh_proforma_ms BOOLEAN NOT NULL DEFAULT FALSE,
+    pmh_proforma_muscular_dystrophy BOOLEAN NOT NULL DEFAULT FALSE,
+    pmh_proforma_other_neurological_disease BOOLEAN NOT NULL DEFAULT FALSE,
+    pmh_proforma_other_neurological_disease_details TEXT NOT NULL DEFAULT '',
+    pmh_proforma_dementia BOOLEAN NOT NULL DEFAULT FALSE,
+    pmh_proforma_creutzfeldt_jakob_disease BOOLEAN NOT NULL DEFAULT FALSE,
+    pmh_proforma_growth_hormone_or_gonadotrophin BOOLEAN NOT NULL DEFAULT FALSE,
+    pmh_proforma_brain_or_spinal_cord_surgery BOOLEAN NOT NULL DEFAULT FALSE,
+    pmh_proforma_four_at_score INTEGER,
+    pmh_proforma_complex_needs BOOLEAN NOT NULL DEFAULT FALSE,
+    pmh_proforma_renal_impairment BOOLEAN NOT NULL DEFAULT FALSE,
+    pmh_proforma_ckd_stage3 BOOLEAN NOT NULL DEFAULT FALSE,
+    pmh_proforma_ckd_stage4_or_hemodialysis BOOLEAN NOT NULL DEFAULT FALSE,
+    pmh_proforma_liver_disease BOOLEAN NOT NULL DEFAULT FALSE,
+    pmh_proforma_clotting_disorders_haemophilia BOOLEAN NOT NULL DEFAULT FALSE,
+    pmh_proforma_easy_bruising_prolonged_bleeding BOOLEAN NOT NULL DEFAULT FALSE,
+    pmh_proforma_dvt_or_pe BOOLEAN NOT NULL DEFAULT FALSE,
+    pmh_proforma_dvt_or_pe_within_past3_months BOOLEAN NOT NULL DEFAULT FALSE,
+    pmh_proforma_gord BOOLEAN NOT NULL DEFAULT FALSE,
+    pmh_proforma_any_other_disease BOOLEAN NOT NULL DEFAULT FALSE,
+    pmh_proforma_chronic_pain BOOLEAN NOT NULL DEFAULT FALSE,
+    pmh_proforma_duke_activity_status_index INTEGER,
+    pmh_proforma_mets_score NUMERIC,
+    pmh_proforma_ongoing_medications TEXT NOT NULL DEFAULT '',
+    pmh_proforma_cortisone_prednisone_steroid BOOLEAN NOT NULL DEFAULT FALSE,
+    pmh_proforma_blood_transfusion_history BOOLEAN NOT NULL DEFAULT FALSE,
+    pmh_proforma_chemotherapy_drugs BOOLEAN NOT NULL DEFAULT FALSE,
+    pmh_proforma_radiotherapy BOOLEAN NOT NULL DEFAULT FALSE,
+    airway_exam_proforma_mouth_opening BOOLEAN NOT NULL DEFAULT FALSE,
+    airway_exam_proforma_loose_teeth BOOLEAN NOT NULL DEFAULT FALSE,
+    airway_exam_proforma_denture_missing BOOLEAN NOT NULL DEFAULT FALSE,
+    airway_exam_proforma_mp_grade TEXT NOT NULL DEFAULT '' CHECK (airway_exam_proforma_mp_grade IN ('1', '2', '3', '4', '')),
+    airway_exam_proforma_micrognathia BOOLEAN NOT NULL DEFAULT FALSE,
+    airway_exam_proforma_tm_distance_over65 BOOLEAN NOT NULL DEFAULT FALSE,
+    airway_exam_proforma_mo_distance BOOLEAN NOT NULL DEFAULT FALSE,
+    airway_exam_proforma_tm_joint BOOLEAN NOT NULL DEFAULT FALSE,
+    airway_exam_proforma_short_neck_rom BOOLEAN NOT NULL DEFAULT FALSE,
+    airway_exam_proforma_difficult_airway BOOLEAN NOT NULL DEFAULT FALSE,
+    airway_exam_proforma_obesity_scoring BOOLEAN NOT NULL DEFAULT FALSE,
+    airway_exam_proforma_spine_back BOOLEAN NOT NULL DEFAULT FALSE,
+    airway_exam_proforma_scoliosis BOOLEAN NOT NULL DEFAULT FALSE,
+    airway_exam_proforma_vitals_examination BOOLEAN NOT NULL DEFAULT FALSE,
+    vitals_proforma_height_cm NUMERIC,
+    vitals_proforma_weight_kg NUMERIC,
+    vitals_proforma_hr INTEGER,
+    vitals_proforma_bp TEXT NOT NULL DEFAULT '',
+    vitals_proforma_resp_rate INTEGER,
+    vitals_proforma_spo2 NUMERIC,
+    vitals_proforma_temp NUMERIC,
+    vitals_proforma_bmi NUMERIC,
+    gen_exam_proforma_pallor BOOLEAN NOT NULL DEFAULT FALSE,
+    gen_exam_proforma_icterus BOOLEAN NOT NULL DEFAULT FALSE,
+    gen_exam_proforma_cyanosis BOOLEAN NOT NULL DEFAULT FALSE,
+    gen_exam_proforma_clubbing BOOLEAN NOT NULL DEFAULT FALSE,
+    gen_exam_proforma_koilonychia BOOLEAN NOT NULL DEFAULT FALSE,
+    gen_exam_proforma_lymphadenopathy BOOLEAN NOT NULL DEFAULT FALSE,
+    gen_exam_proforma_edema BOOLEAN NOT NULL DEFAULT FALSE,
+    gen_exam_proforma_jvp BOOLEAN NOT NULL DEFAULT FALSE,
+    invest_proforma_blood_group_haemoglobin TEXT NOT NULL DEFAULT '',
+    invest_proforma_differential_n TEXT NOT NULL DEFAULT '',
+    invest_proforma_differential_l TEXT NOT NULL DEFAULT '',
+    invest_proforma_differential_e TEXT NOT NULL DEFAULT '',
+    invest_proforma_differential_m TEXT NOT NULL DEFAULT '',
+    invest_proforma_differential_b TEXT NOT NULL DEFAULT '',
+    invest_proforma_absolute TEXT NOT NULL DEFAULT '',
+    invest_proforma_nc TEXT NOT NULL DEFAULT '',
+    invest_proforma_tlc TEXT NOT NULL DEFAULT '',
+    invest_proforma_tpc TEXT NOT NULL DEFAULT '',
+    invest_proforma_esr TEXT NOT NULL DEFAULT '',
+    invest_proforma_crp TEXT NOT NULL DEFAULT '',
+    invest_proforma_pcv TEXT NOT NULL DEFAULT '',
+    invest_proforma_latex_rast TEXT NOT NULL DEFAULT '',
+    invest_proforma_fbs TEXT NOT NULL DEFAULT '',
+    invest_proforma_ppbs TEXT NOT NULL DEFAULT '',
+    invest_proforma_hba1c TEXT NOT NULL DEFAULT '',
+    invest_proforma_na TEXT NOT NULL DEFAULT '',
+    invest_proforma_k TEXT NOT NULL DEFAULT '',
+    invest_proforma_urea TEXT NOT NULL DEFAULT '',
+    invest_proforma_creatinine TEXT NOT NULL DEFAULT '',
+    invest_proforma_bilirubin_total TEXT NOT NULL DEFAULT '',
+    invest_proforma_bilirubin_direct TEXT NOT NULL DEFAULT '',
+    invest_proforma_alk_phosphatase TEXT NOT NULL DEFAULT '',
+    invest_proforma_sgpt_alt TEXT NOT NULL DEFAULT '',
+    invest_proforma_sgot_ast TEXT NOT NULL DEFAULT '',
+    invest_proforma_bt TEXT NOT NULL DEFAULT '',
+    invest_proforma_ct TEXT NOT NULL DEFAULT '',
+    invest_proforma_pt TEXT NOT NULL DEFAULT '',
+    invest_proforma_aptt TEXT NOT NULL DEFAULT '',
+    invest_proforma_inr TEXT NOT NULL DEFAULT '',
+    invest_proforma_ft3 TEXT NOT NULL DEFAULT '',
+    invest_proforma_ft4 TEXT NOT NULL DEFAULT '',
+    invest_proforma_tsh TEXT NOT NULL DEFAULT '',
+    invest_proforma_ecg TEXT NOT NULL DEFAULT '',
+    invest_proforma_chest_xray TEXT NOT NULL DEFAULT '',
+    invest_proforma_pft TEXT NOT NULL DEFAULT '',
+    invest_proforma_abg TEXT NOT NULL DEFAULT '',
+    invest_proforma_two_d_echo TEXT NOT NULL DEFAULT '',
+    invest_proforma_lvef_percent NUMERIC,
+    invest_proforma_tmt TEXT NOT NULL DEFAULT '',
+    invest_proforma_ct_scan TEXT NOT NULL DEFAULT '',
+    invest_proforma_mri TEXT NOT NULL DEFAULT '',
+    risk_factors_cardiac BOOLEAN NOT NULL DEFAULT FALSE,
+    risk_factors_respiratory BOOLEAN NOT NULL DEFAULT FALSE,
+    risk_factors_diabetes BOOLEAN NOT NULL DEFAULT FALSE,
+    risk_factors_insulin BOOLEAN NOT NULL DEFAULT FALSE,
+    risk_factors_bmi_over40 BOOLEAN NOT NULL DEFAULT FALSE,
+    risk_factors_anticoagulants BOOLEAN NOT NULL DEFAULT FALSE,
+    risk_factors_allergies BOOLEAN NOT NULL DEFAULT FALSE,
+    risk_factors_antiplatelets BOOLEAN NOT NULL DEFAULT FALSE,
+    risk_factors_egfr_under30 BOOLEAN NOT NULL DEFAULT FALSE,
+    risk_factors_egfr30_to60 BOOLEAN NOT NULL DEFAULT FALSE,
+    risk_factors_age_over70 BOOLEAN NOT NULL DEFAULT FALSE,
+    risk_factors_pvd BOOLEAN NOT NULL DEFAULT FALSE,
+    risk_factors_liver_disease BOOLEAN NOT NULL DEFAULT FALSE,
+    risk_factors_vte_risk BOOLEAN NOT NULL DEFAULT FALSE,
+    risk_factors_complex_needs BOOLEAN NOT NULL DEFAULT FALSE,
+    risk_factors_anaemia BOOLEAN NOT NULL DEFAULT FALSE,
+    risk_factors_neuromuscular_disorders BOOLEAN NOT NULL DEFAULT FALSE,
+    risk_factors_others BOOLEAN NOT NULL DEFAULT FALSE,
+    risk_factors_others_details TEXT NOT NULL DEFAULT '',
+    anaes_plan_proforma_anaesthetic_concerns TEXT NOT NULL DEFAULT '',
+    anaes_plan_proforma_plan_tiva BOOLEAN NOT NULL DEFAULT FALSE,
+    anaes_plan_proforma_plan_ra BOOLEAN NOT NULL DEFAULT FALSE,
+    anaes_plan_proforma_plan_other BOOLEAN NOT NULL DEFAULT FALSE,
+    anaes_plan_proforma_plan_other_details TEXT NOT NULL DEFAULT '',
+    anaes_plan_proforma_list_for_ot_defer_not_fit TEXT NOT NULL DEFAULT '' CHECK (anaes_plan_proforma_list_for_ot_defer_not_fit IN ('list-for-ot', 'defer', 'not-fit', '')),
+    anaes_plan_proforma_nil_orally_after TEXT NOT NULL DEFAULT '',
+    anaes_plan_proforma_informed_written_consent BOOLEAN NOT NULL DEFAULT FALSE,
+    anaes_plan_proforma_risks_benefits_alternatives_discussed BOOLEAN NOT NULL DEFAULT FALSE,
+    anaes_plan_proforma_arrange_units_of_blood TEXT NOT NULL DEFAULT '',
+    anaes_plan_proforma_arrange_post_op_icu BOOLEAN NOT NULL DEFAULT FALSE,
+    anaes_plan_proforma_backup BOOLEAN NOT NULL DEFAULT FALSE,
+    anaes_plan_proforma_do_investigations TEXT NOT NULL DEFAULT '',
+    anaes_plan_proforma_do_special_orders TEXT NOT NULL DEFAULT '',
+    anaes_plan_proforma_reviewed_high_risk_anaesthesia BOOLEAN NOT NULL DEFAULT FALSE,
+    anaes_plan_proforma_reviewed_consent BOOLEAN NOT NULL DEFAULT FALSE,
+    anaes_plan_proforma_consultant_anaesthesiologist_name TEXT NOT NULL DEFAULT '',
+    anaes_plan_proforma_consultant_anaesthesiologist_signature TEXT NOT NULL DEFAULT ''
 );
 
 CREATE TRIGGER trigger_pre_anaesthesia_assessment_updated_at
@@ -1029,6 +1234,417 @@ COMMENT ON COLUMN pre_anaesthesia_assessment.special_equipment IS
     'Special equipment required for the procedure.';
 COMMENT ON COLUMN pre_anaesthesia_assessment.blood_products_required IS
     'Blood products required for the procedure.';
+
+COMMENT ON COLUMN pre_anaesthesia_assessment.proforma_header_department IS
+    'Department.';
+COMMENT ON COLUMN pre_anaesthesia_assessment.proforma_header_registration_date IS
+    'Registration date.';
+COMMENT ON COLUMN pre_anaesthesia_assessment.proforma_header_pre_op_diagnosis IS
+    'Pre op diagnosis.';
+COMMENT ON COLUMN pre_anaesthesia_assessment.prev_anaes_anaesthetic_difficulty IS
+    'Anaesthetic difficulty. Proforma checklist item (boolean).';
+COMMENT ON COLUMN pre_anaesthesia_assessment.prev_anaes_abnormal_reaction IS
+    'Abnormal reaction. Proforma checklist item (boolean).';
+COMMENT ON COLUMN pre_anaesthesia_assessment.prev_anaes_ponv IS
+    'Ponv. Proforma checklist item (boolean).';
+COMMENT ON COLUMN pre_anaesthesia_assessment.prev_anaes_malignant_hyperpyrexia IS
+    'Malignant hyperpyrexia. Proforma checklist item (boolean).';
+COMMENT ON COLUMN pre_anaesthesia_assessment.prev_anaes_difficult_intubation IS
+    'Difficult intubation. Proforma checklist item (boolean).';
+COMMENT ON COLUMN pre_anaesthesia_assessment.prev_anaes_difficult_spinal_or_epidural IS
+    'Difficult spinal or epidural. Proforma checklist item (boolean).';
+COMMENT ON COLUMN pre_anaesthesia_assessment.addiction_alcohol IS
+    'Alcohol. Proforma checklist item (boolean).';
+COMMENT ON COLUMN pre_anaesthesia_assessment.addiction_smoking IS
+    'Smoking. Proforma checklist item (boolean).';
+COMMENT ON COLUMN pre_anaesthesia_assessment.addiction_fast_score3_or_more IS
+    'Fast score3 or more. Proforma checklist item (boolean).';
+COMMENT ON COLUMN pre_anaesthesia_assessment.addiction_betel IS
+    'Betel. Proforma checklist item (boolean).';
+COMMENT ON COLUMN pre_anaesthesia_assessment.addiction_drugs IS
+    'Drugs. Proforma checklist item (boolean).';
+COMMENT ON COLUMN pre_anaesthesia_assessment.addiction_other IS
+    'Other. Proforma checklist item (boolean).';
+COMMENT ON COLUMN pre_anaesthesia_assessment.addiction_other_details IS
+    'Other details.';
+COMMENT ON COLUMN pre_anaesthesia_assessment.pmh_proforma_hypertension IS
+    'Hypertension. Proforma checklist item (boolean).';
+COMMENT ON COLUMN pre_anaesthesia_assessment.pmh_proforma_mi IS
+    'Mi. Proforma checklist item (boolean).';
+COMMENT ON COLUMN pre_anaesthesia_assessment.pmh_proforma_mi_within_past6_months IS
+    'Mi within past6 months. Proforma checklist item (boolean).';
+COMMENT ON COLUMN pre_anaesthesia_assessment.pmh_proforma_angina_or_chest_pain IS
+    'Angina or chest pain. Proforma checklist item (boolean).';
+COMMENT ON COLUMN pre_anaesthesia_assessment.pmh_proforma_angina_triggers IS
+    'Angina triggers. Comma-separated list of selected values; empty string if none selected.';
+COMMENT ON COLUMN pre_anaesthesia_assessment.pmh_proforma_heart_failure IS
+    'Heart failure. Proforma checklist item (boolean).';
+COMMENT ON COLUMN pre_anaesthesia_assessment.pmh_proforma_dyspnoea IS
+    'Dyspnoea. Proforma checklist item (boolean).';
+COMMENT ON COLUMN pre_anaesthesia_assessment.pmh_proforma_dyspnoea_subtypes IS
+    'Dyspnoea subtypes. Comma-separated list of selected values; empty string if none selected.';
+COMMENT ON COLUMN pre_anaesthesia_assessment.pmh_proforma_palpitation IS
+    'Palpitation. Proforma checklist item (boolean).';
+COMMENT ON COLUMN pre_anaesthesia_assessment.pmh_proforma_arrhythmia IS
+    'Arrhythmia. Proforma checklist item (boolean).';
+COMMENT ON COLUMN pre_anaesthesia_assessment.pmh_proforma_syncope_or_fainting IS
+    'Syncope or fainting. Proforma checklist item (boolean).';
+COMMENT ON COLUMN pre_anaesthesia_assessment.pmh_proforma_heart_murmur IS
+    'Heart murmur. Proforma checklist item (boolean).';
+COMMENT ON COLUMN pre_anaesthesia_assessment.pmh_proforma_rheumatic_fever IS
+    'Rheumatic fever. Proforma checklist item (boolean).';
+COMMENT ON COLUMN pre_anaesthesia_assessment.pmh_proforma_pacemaker IS
+    'Pacemaker. Proforma checklist item (boolean).';
+COMMENT ON COLUMN pre_anaesthesia_assessment.pmh_proforma_pacemaker_last_check_within6_months IS
+    'Pacemaker last check within6 months. Proforma checklist item (boolean).';
+COMMENT ON COLUMN pre_anaesthesia_assessment.pmh_proforma_implanted_icd_crtd IS
+    'Implanted icd crtd. Proforma checklist item (boolean).';
+COMMENT ON COLUMN pre_anaesthesia_assessment.pmh_proforma_angioplasty IS
+    'Angioplasty. Proforma checklist item (boolean).';
+COMMENT ON COLUMN pre_anaesthesia_assessment.pmh_proforma_stenting IS
+    'Stenting. Proforma checklist item (boolean).';
+COMMENT ON COLUMN pre_anaesthesia_assessment.pmh_proforma_stenting_within_past6_months IS
+    'Stenting within past6 months. Proforma checklist item (boolean).';
+COMMENT ON COLUMN pre_anaesthesia_assessment.pmh_proforma_stent_type IS
+    'Stent type. One of: drug-eluting, bare-metal, unknown.';
+COMMENT ON COLUMN pre_anaesthesia_assessment.pmh_proforma_valve_disease IS
+    'Valve disease. Proforma checklist item (boolean).';
+COMMENT ON COLUMN pre_anaesthesia_assessment.pmh_proforma_cardiac_surgery IS
+    'Cardiac surgery. Proforma checklist item (boolean).';
+COMMENT ON COLUMN pre_anaesthesia_assessment.pmh_proforma_cardiac_surgery_within_past_year IS
+    'Cardiac surgery within past year. Proforma checklist item (boolean).';
+COMMENT ON COLUMN pre_anaesthesia_assessment.pmh_proforma_peripheral_vascular_disease IS
+    'Peripheral vascular disease. Proforma checklist item (boolean).';
+COMMENT ON COLUMN pre_anaesthesia_assessment.pmh_proforma_ischemic_heart_disease IS
+    'Ischemic heart disease. Proforma checklist item (boolean).';
+COMMENT ON COLUMN pre_anaesthesia_assessment.pmh_proforma_asthma IS
+    'Asthma. Proforma checklist item (boolean).';
+COMMENT ON COLUMN pre_anaesthesia_assessment.pmh_proforma_copd IS
+    'Copd. Proforma checklist item (boolean).';
+COMMENT ON COLUMN pre_anaesthesia_assessment.pmh_proforma_tb IS
+    'Tb. Proforma checklist item (boolean).';
+COMMENT ON COLUMN pre_anaesthesia_assessment.pmh_proforma_bronchiectasis IS
+    'Bronchiectasis. Proforma checklist item (boolean).';
+COMMENT ON COLUMN pre_anaesthesia_assessment.pmh_proforma_previous_hospital_admission IS
+    'Previous hospital admission. Proforma checklist item (boolean).';
+COMMENT ON COLUMN pre_anaesthesia_assessment.pmh_proforma_icu_admission IS
+    'Icu admission. Proforma checklist item (boolean).';
+COMMENT ON COLUMN pre_anaesthesia_assessment.pmh_proforma_on_home_oxygen_or_nebulizers IS
+    'On home oxygen or nebulizers. Proforma checklist item (boolean).';
+COMMENT ON COLUMN pre_anaesthesia_assessment.pmh_proforma_uses_inhaler_daily_or_more IS
+    'Uses inhaler daily or more. Proforma checklist item (boolean).';
+COMMENT ON COLUMN pre_anaesthesia_assessment.pmh_proforma_flu_cough_sputum IS
+    'Flu cough sputum. Proforma checklist item (boolean).';
+COMMENT ON COLUMN pre_anaesthesia_assessment.pmh_proforma_haemoptysis IS
+    'Haemoptysis. Proforma checklist item (boolean).';
+COMMENT ON COLUMN pre_anaesthesia_assessment.pmh_proforma_sleep_apnoea IS
+    'Sleep apnoea. Proforma checklist item (boolean).';
+COMMENT ON COLUMN pre_anaesthesia_assessment.pmh_proforma_sleep_apnoea_using_cpap IS
+    'Sleep apnoea using cpap. Proforma checklist item (boolean).';
+COMMENT ON COLUMN pre_anaesthesia_assessment.pmh_proforma_stop_bang_risk IS
+    'Stop bang risk. One of: high, medium, low.';
+COMMENT ON COLUMN pre_anaesthesia_assessment.pmh_proforma_other_respiratory_disease IS
+    'Other respiratory disease. Proforma checklist item (boolean).';
+COMMENT ON COLUMN pre_anaesthesia_assessment.pmh_proforma_diabetes_mellitus IS
+    'Diabetes mellitus. Proforma checklist item (boolean).';
+COMMENT ON COLUMN pre_anaesthesia_assessment.pmh_proforma_diabetes_diet_controlled IS
+    'Diabetes diet controlled. Proforma checklist item (boolean).';
+COMMENT ON COLUMN pre_anaesthesia_assessment.pmh_proforma_diabetes_drug_controlled IS
+    'Diabetes drug controlled. Proforma checklist item (boolean).';
+COMMENT ON COLUMN pre_anaesthesia_assessment.pmh_proforma_diabetes_insulin_controlled IS
+    'Diabetes insulin controlled. Proforma checklist item (boolean).';
+COMMENT ON COLUMN pre_anaesthesia_assessment.pmh_proforma_diabetes_hba1c_over69 IS
+    'Diabetes hba1c over69. Proforma checklist item (boolean).';
+COMMENT ON COLUMN pre_anaesthesia_assessment.pmh_proforma_hypothyroid IS
+    'Hypothyroid. Proforma checklist item (boolean).';
+COMMENT ON COLUMN pre_anaesthesia_assessment.pmh_proforma_hyperthyroid IS
+    'Hyperthyroid. Proforma checklist item (boolean).';
+COMMENT ON COLUMN pre_anaesthesia_assessment.pmh_proforma_stroke_or_tia IS
+    'Stroke or tia. Proforma checklist item (boolean).';
+COMMENT ON COLUMN pre_anaesthesia_assessment.pmh_proforma_stroke_within3_months IS
+    'Stroke within3 months. Proforma checklist item (boolean).';
+COMMENT ON COLUMN pre_anaesthesia_assessment.pmh_proforma_stroke_residual_disability IS
+    'Stroke residual disability.';
+COMMENT ON COLUMN pre_anaesthesia_assessment.pmh_proforma_epilepsy_or_seizures IS
+    'Epilepsy or seizures. Proforma checklist item (boolean).';
+COMMENT ON COLUMN pre_anaesthesia_assessment.pmh_proforma_epilepsy_control IS
+    'Epilepsy control. One of: well-controlled, 3-12-months-ago, poorly-controlled.';
+COMMENT ON COLUMN pre_anaesthesia_assessment.pmh_proforma_ms IS
+    'Ms. Proforma checklist item (boolean).';
+COMMENT ON COLUMN pre_anaesthesia_assessment.pmh_proforma_muscular_dystrophy IS
+    'Muscular dystrophy. Proforma checklist item (boolean).';
+COMMENT ON COLUMN pre_anaesthesia_assessment.pmh_proforma_other_neurological_disease IS
+    'Other neurological disease. Proforma checklist item (boolean).';
+COMMENT ON COLUMN pre_anaesthesia_assessment.pmh_proforma_other_neurological_disease_details IS
+    'Other neurological disease details.';
+COMMENT ON COLUMN pre_anaesthesia_assessment.pmh_proforma_dementia IS
+    'Dementia. Proforma checklist item (boolean).';
+COMMENT ON COLUMN pre_anaesthesia_assessment.pmh_proforma_creutzfeldt_jakob_disease IS
+    'Creutzfeldt jakob disease. Proforma checklist item (boolean).';
+COMMENT ON COLUMN pre_anaesthesia_assessment.pmh_proforma_growth_hormone_or_gonadotrophin IS
+    'Growth hormone or gonadotrophin. Proforma checklist item (boolean).';
+COMMENT ON COLUMN pre_anaesthesia_assessment.pmh_proforma_brain_or_spinal_cord_surgery IS
+    'Brain or spinal cord surgery. Proforma checklist item (boolean).';
+COMMENT ON COLUMN pre_anaesthesia_assessment.pmh_proforma_four_at_score IS
+    'Four at score.';
+COMMENT ON COLUMN pre_anaesthesia_assessment.pmh_proforma_complex_needs IS
+    'Complex needs. Proforma checklist item (boolean).';
+COMMENT ON COLUMN pre_anaesthesia_assessment.pmh_proforma_renal_impairment IS
+    'Renal impairment. Proforma checklist item (boolean).';
+COMMENT ON COLUMN pre_anaesthesia_assessment.pmh_proforma_ckd_stage3 IS
+    'Ckd stage3. Proforma checklist item (boolean).';
+COMMENT ON COLUMN pre_anaesthesia_assessment.pmh_proforma_ckd_stage4_or_hemodialysis IS
+    'Ckd stage4 or hemodialysis. Proforma checklist item (boolean).';
+COMMENT ON COLUMN pre_anaesthesia_assessment.pmh_proforma_liver_disease IS
+    'Liver disease. Proforma checklist item (boolean).';
+COMMENT ON COLUMN pre_anaesthesia_assessment.pmh_proforma_clotting_disorders_haemophilia IS
+    'Clotting disorders haemophilia. Proforma checklist item (boolean).';
+COMMENT ON COLUMN pre_anaesthesia_assessment.pmh_proforma_easy_bruising_prolonged_bleeding IS
+    'Easy bruising prolonged bleeding. Proforma checklist item (boolean).';
+COMMENT ON COLUMN pre_anaesthesia_assessment.pmh_proforma_dvt_or_pe IS
+    'Dvt or pe. Proforma checklist item (boolean).';
+COMMENT ON COLUMN pre_anaesthesia_assessment.pmh_proforma_dvt_or_pe_within_past3_months IS
+    'Dvt or pe within past3 months. Proforma checklist item (boolean).';
+COMMENT ON COLUMN pre_anaesthesia_assessment.pmh_proforma_gord IS
+    'Gord. Proforma checklist item (boolean).';
+COMMENT ON COLUMN pre_anaesthesia_assessment.pmh_proforma_any_other_disease IS
+    'Any other disease. Proforma checklist item (boolean).';
+COMMENT ON COLUMN pre_anaesthesia_assessment.pmh_proforma_chronic_pain IS
+    'Chronic pain. Proforma checklist item (boolean).';
+COMMENT ON COLUMN pre_anaesthesia_assessment.pmh_proforma_duke_activity_status_index IS
+    'Duke activity status index.';
+COMMENT ON COLUMN pre_anaesthesia_assessment.pmh_proforma_mets_score IS
+    'Mets score.';
+COMMENT ON COLUMN pre_anaesthesia_assessment.pmh_proforma_ongoing_medications IS
+    'Ongoing medications.';
+COMMENT ON COLUMN pre_anaesthesia_assessment.pmh_proforma_cortisone_prednisone_steroid IS
+    'Cortisone prednisone steroid. Proforma checklist item (boolean).';
+COMMENT ON COLUMN pre_anaesthesia_assessment.pmh_proforma_blood_transfusion_history IS
+    'Blood transfusion history. Proforma checklist item (boolean).';
+COMMENT ON COLUMN pre_anaesthesia_assessment.pmh_proforma_chemotherapy_drugs IS
+    'Chemotherapy drugs. Proforma checklist item (boolean).';
+COMMENT ON COLUMN pre_anaesthesia_assessment.pmh_proforma_radiotherapy IS
+    'Radiotherapy. Proforma checklist item (boolean).';
+COMMENT ON COLUMN pre_anaesthesia_assessment.airway_exam_proforma_mouth_opening IS
+    'Mouth opening. Proforma checklist item (boolean).';
+COMMENT ON COLUMN pre_anaesthesia_assessment.airway_exam_proforma_loose_teeth IS
+    'Loose teeth. Proforma checklist item (boolean).';
+COMMENT ON COLUMN pre_anaesthesia_assessment.airway_exam_proforma_denture_missing IS
+    'Denture missing. Proforma checklist item (boolean).';
+COMMENT ON COLUMN pre_anaesthesia_assessment.airway_exam_proforma_mp_grade IS
+    'Mp grade. One of: 1, 2, 3, 4.';
+COMMENT ON COLUMN pre_anaesthesia_assessment.airway_exam_proforma_micrognathia IS
+    'Micrognathia. Proforma checklist item (boolean).';
+COMMENT ON COLUMN pre_anaesthesia_assessment.airway_exam_proforma_tm_distance_over65 IS
+    'Tm distance over65. Proforma checklist item (boolean).';
+COMMENT ON COLUMN pre_anaesthesia_assessment.airway_exam_proforma_mo_distance IS
+    'Mo distance. Proforma checklist item (boolean).';
+COMMENT ON COLUMN pre_anaesthesia_assessment.airway_exam_proforma_tm_joint IS
+    'Tm joint. Proforma checklist item (boolean).';
+COMMENT ON COLUMN pre_anaesthesia_assessment.airway_exam_proforma_short_neck_rom IS
+    'Short neck rom. Proforma checklist item (boolean).';
+COMMENT ON COLUMN pre_anaesthesia_assessment.airway_exam_proforma_difficult_airway IS
+    'Difficult airway. Proforma checklist item (boolean).';
+COMMENT ON COLUMN pre_anaesthesia_assessment.airway_exam_proforma_obesity_scoring IS
+    'Obesity scoring. Proforma checklist item (boolean).';
+COMMENT ON COLUMN pre_anaesthesia_assessment.airway_exam_proforma_spine_back IS
+    'Spine back. Proforma checklist item (boolean).';
+COMMENT ON COLUMN pre_anaesthesia_assessment.airway_exam_proforma_scoliosis IS
+    'Scoliosis. Proforma checklist item (boolean).';
+COMMENT ON COLUMN pre_anaesthesia_assessment.airway_exam_proforma_vitals_examination IS
+    'Vitals examination. Proforma checklist item (boolean).';
+COMMENT ON COLUMN pre_anaesthesia_assessment.vitals_proforma_height_cm IS
+    'Height cm.';
+COMMENT ON COLUMN pre_anaesthesia_assessment.vitals_proforma_weight_kg IS
+    'Weight kg.';
+COMMENT ON COLUMN pre_anaesthesia_assessment.vitals_proforma_hr IS
+    'Hr.';
+COMMENT ON COLUMN pre_anaesthesia_assessment.vitals_proforma_bp IS
+    'Bp.';
+COMMENT ON COLUMN pre_anaesthesia_assessment.vitals_proforma_resp_rate IS
+    'Resp rate.';
+COMMENT ON COLUMN pre_anaesthesia_assessment.vitals_proforma_spo2 IS
+    'Spo2.';
+COMMENT ON COLUMN pre_anaesthesia_assessment.vitals_proforma_temp IS
+    'Temp.';
+COMMENT ON COLUMN pre_anaesthesia_assessment.vitals_proforma_bmi IS
+    'Bmi.';
+COMMENT ON COLUMN pre_anaesthesia_assessment.gen_exam_proforma_pallor IS
+    'Pallor. Proforma checklist item (boolean).';
+COMMENT ON COLUMN pre_anaesthesia_assessment.gen_exam_proforma_icterus IS
+    'Icterus. Proforma checklist item (boolean).';
+COMMENT ON COLUMN pre_anaesthesia_assessment.gen_exam_proforma_cyanosis IS
+    'Cyanosis. Proforma checklist item (boolean).';
+COMMENT ON COLUMN pre_anaesthesia_assessment.gen_exam_proforma_clubbing IS
+    'Clubbing. Proforma checklist item (boolean).';
+COMMENT ON COLUMN pre_anaesthesia_assessment.gen_exam_proforma_koilonychia IS
+    'Koilonychia. Proforma checklist item (boolean).';
+COMMENT ON COLUMN pre_anaesthesia_assessment.gen_exam_proforma_lymphadenopathy IS
+    'Lymphadenopathy. Proforma checklist item (boolean).';
+COMMENT ON COLUMN pre_anaesthesia_assessment.gen_exam_proforma_edema IS
+    'Edema. Proforma checklist item (boolean).';
+COMMENT ON COLUMN pre_anaesthesia_assessment.gen_exam_proforma_jvp IS
+    'Jvp. Proforma checklist item (boolean).';
+COMMENT ON COLUMN pre_anaesthesia_assessment.invest_proforma_blood_group_haemoglobin IS
+    'Blood group haemoglobin.';
+COMMENT ON COLUMN pre_anaesthesia_assessment.invest_proforma_differential_n IS
+    'Differential n.';
+COMMENT ON COLUMN pre_anaesthesia_assessment.invest_proforma_differential_l IS
+    'Differential l.';
+COMMENT ON COLUMN pre_anaesthesia_assessment.invest_proforma_differential_e IS
+    'Differential e.';
+COMMENT ON COLUMN pre_anaesthesia_assessment.invest_proforma_differential_m IS
+    'Differential m.';
+COMMENT ON COLUMN pre_anaesthesia_assessment.invest_proforma_differential_b IS
+    'Differential b.';
+COMMENT ON COLUMN pre_anaesthesia_assessment.invest_proforma_absolute IS
+    'Absolute.';
+COMMENT ON COLUMN pre_anaesthesia_assessment.invest_proforma_nc IS
+    'Nc.';
+COMMENT ON COLUMN pre_anaesthesia_assessment.invest_proforma_tlc IS
+    'Tlc.';
+COMMENT ON COLUMN pre_anaesthesia_assessment.invest_proforma_tpc IS
+    'Tpc.';
+COMMENT ON COLUMN pre_anaesthesia_assessment.invest_proforma_esr IS
+    'Esr.';
+COMMENT ON COLUMN pre_anaesthesia_assessment.invest_proforma_crp IS
+    'Crp.';
+COMMENT ON COLUMN pre_anaesthesia_assessment.invest_proforma_pcv IS
+    'Pcv.';
+COMMENT ON COLUMN pre_anaesthesia_assessment.invest_proforma_latex_rast IS
+    'Latex rast.';
+COMMENT ON COLUMN pre_anaesthesia_assessment.invest_proforma_fbs IS
+    'Fbs.';
+COMMENT ON COLUMN pre_anaesthesia_assessment.invest_proforma_ppbs IS
+    'Ppbs.';
+COMMENT ON COLUMN pre_anaesthesia_assessment.invest_proforma_hba1c IS
+    'Hba1c.';
+COMMENT ON COLUMN pre_anaesthesia_assessment.invest_proforma_na IS
+    'Na.';
+COMMENT ON COLUMN pre_anaesthesia_assessment.invest_proforma_k IS
+    'K.';
+COMMENT ON COLUMN pre_anaesthesia_assessment.invest_proforma_urea IS
+    'Urea.';
+COMMENT ON COLUMN pre_anaesthesia_assessment.invest_proforma_creatinine IS
+    'Creatinine.';
+COMMENT ON COLUMN pre_anaesthesia_assessment.invest_proforma_bilirubin_total IS
+    'Bilirubin total.';
+COMMENT ON COLUMN pre_anaesthesia_assessment.invest_proforma_bilirubin_direct IS
+    'Bilirubin direct.';
+COMMENT ON COLUMN pre_anaesthesia_assessment.invest_proforma_alk_phosphatase IS
+    'Alk phosphatase.';
+COMMENT ON COLUMN pre_anaesthesia_assessment.invest_proforma_sgpt_alt IS
+    'Sgpt alt.';
+COMMENT ON COLUMN pre_anaesthesia_assessment.invest_proforma_sgot_ast IS
+    'Sgot ast.';
+COMMENT ON COLUMN pre_anaesthesia_assessment.invest_proforma_bt IS
+    'Bt.';
+COMMENT ON COLUMN pre_anaesthesia_assessment.invest_proforma_ct IS
+    'Ct.';
+COMMENT ON COLUMN pre_anaesthesia_assessment.invest_proforma_pt IS
+    'Pt.';
+COMMENT ON COLUMN pre_anaesthesia_assessment.invest_proforma_aptt IS
+    'Aptt.';
+COMMENT ON COLUMN pre_anaesthesia_assessment.invest_proforma_inr IS
+    'Inr.';
+COMMENT ON COLUMN pre_anaesthesia_assessment.invest_proforma_ft3 IS
+    'Ft3.';
+COMMENT ON COLUMN pre_anaesthesia_assessment.invest_proforma_ft4 IS
+    'Ft4.';
+COMMENT ON COLUMN pre_anaesthesia_assessment.invest_proforma_tsh IS
+    'Tsh.';
+COMMENT ON COLUMN pre_anaesthesia_assessment.invest_proforma_ecg IS
+    'Ecg.';
+COMMENT ON COLUMN pre_anaesthesia_assessment.invest_proforma_chest_xray IS
+    'Chest xray.';
+COMMENT ON COLUMN pre_anaesthesia_assessment.invest_proforma_pft IS
+    'Pft.';
+COMMENT ON COLUMN pre_anaesthesia_assessment.invest_proforma_abg IS
+    'Abg.';
+COMMENT ON COLUMN pre_anaesthesia_assessment.invest_proforma_two_d_echo IS
+    'Two d echo.';
+COMMENT ON COLUMN pre_anaesthesia_assessment.invest_proforma_lvef_percent IS
+    'Lvef percent.';
+COMMENT ON COLUMN pre_anaesthesia_assessment.invest_proforma_tmt IS
+    'Tmt.';
+COMMENT ON COLUMN pre_anaesthesia_assessment.invest_proforma_ct_scan IS
+    'Ct scan.';
+COMMENT ON COLUMN pre_anaesthesia_assessment.invest_proforma_mri IS
+    'Mri.';
+COMMENT ON COLUMN pre_anaesthesia_assessment.risk_factors_cardiac IS
+    'Cardiac. Proforma checklist item (boolean).';
+COMMENT ON COLUMN pre_anaesthesia_assessment.risk_factors_respiratory IS
+    'Respiratory. Proforma checklist item (boolean).';
+COMMENT ON COLUMN pre_anaesthesia_assessment.risk_factors_diabetes IS
+    'Diabetes. Proforma checklist item (boolean).';
+COMMENT ON COLUMN pre_anaesthesia_assessment.risk_factors_insulin IS
+    'Insulin. Proforma checklist item (boolean).';
+COMMENT ON COLUMN pre_anaesthesia_assessment.risk_factors_bmi_over40 IS
+    'Bmi over40. Proforma checklist item (boolean).';
+COMMENT ON COLUMN pre_anaesthesia_assessment.risk_factors_anticoagulants IS
+    'Anticoagulants. Proforma checklist item (boolean).';
+COMMENT ON COLUMN pre_anaesthesia_assessment.risk_factors_allergies IS
+    'Allergies. Proforma checklist item (boolean).';
+COMMENT ON COLUMN pre_anaesthesia_assessment.risk_factors_antiplatelets IS
+    'Antiplatelets. Proforma checklist item (boolean).';
+COMMENT ON COLUMN pre_anaesthesia_assessment.risk_factors_egfr_under30 IS
+    'Egfr under30. Proforma checklist item (boolean).';
+COMMENT ON COLUMN pre_anaesthesia_assessment.risk_factors_egfr30_to60 IS
+    'Egfr30 to60. Proforma checklist item (boolean).';
+COMMENT ON COLUMN pre_anaesthesia_assessment.risk_factors_age_over70 IS
+    'Age over70. Proforma checklist item (boolean).';
+COMMENT ON COLUMN pre_anaesthesia_assessment.risk_factors_pvd IS
+    'Pvd. Proforma checklist item (boolean).';
+COMMENT ON COLUMN pre_anaesthesia_assessment.risk_factors_liver_disease IS
+    'Liver disease. Proforma checklist item (boolean).';
+COMMENT ON COLUMN pre_anaesthesia_assessment.risk_factors_vte_risk IS
+    'Vte risk. Proforma checklist item (boolean).';
+COMMENT ON COLUMN pre_anaesthesia_assessment.risk_factors_complex_needs IS
+    'Complex needs. Proforma checklist item (boolean).';
+COMMENT ON COLUMN pre_anaesthesia_assessment.risk_factors_anaemia IS
+    'Anaemia. Proforma checklist item (boolean).';
+COMMENT ON COLUMN pre_anaesthesia_assessment.risk_factors_neuromuscular_disorders IS
+    'Neuromuscular disorders. Proforma checklist item (boolean).';
+COMMENT ON COLUMN pre_anaesthesia_assessment.risk_factors_others IS
+    'Others. Proforma checklist item (boolean).';
+COMMENT ON COLUMN pre_anaesthesia_assessment.risk_factors_others_details IS
+    'Others details.';
+COMMENT ON COLUMN pre_anaesthesia_assessment.anaes_plan_proforma_anaesthetic_concerns IS
+    'Anaesthetic concerns.';
+COMMENT ON COLUMN pre_anaesthesia_assessment.anaes_plan_proforma_plan_tiva IS
+    'Plan tiva. Proforma checklist item (boolean).';
+COMMENT ON COLUMN pre_anaesthesia_assessment.anaes_plan_proforma_plan_ra IS
+    'Plan ra. Proforma checklist item (boolean).';
+COMMENT ON COLUMN pre_anaesthesia_assessment.anaes_plan_proforma_plan_other IS
+    'Plan other. Proforma checklist item (boolean).';
+COMMENT ON COLUMN pre_anaesthesia_assessment.anaes_plan_proforma_plan_other_details IS
+    'Plan other details.';
+COMMENT ON COLUMN pre_anaesthesia_assessment.anaes_plan_proforma_list_for_ot_defer_not_fit IS
+    'List for ot defer not fit. One of: list-for-ot, defer, not-fit.';
+COMMENT ON COLUMN pre_anaesthesia_assessment.anaes_plan_proforma_nil_orally_after IS
+    'Nil orally after.';
+COMMENT ON COLUMN pre_anaesthesia_assessment.anaes_plan_proforma_informed_written_consent IS
+    'Informed written consent. Proforma checklist item (boolean).';
+COMMENT ON COLUMN pre_anaesthesia_assessment.anaes_plan_proforma_risks_benefits_alternatives_discussed IS
+    'Risks benefits alternatives discussed. Proforma checklist item (boolean).';
+COMMENT ON COLUMN pre_anaesthesia_assessment.anaes_plan_proforma_arrange_units_of_blood IS
+    'Arrange units of blood.';
+COMMENT ON COLUMN pre_anaesthesia_assessment.anaes_plan_proforma_arrange_post_op_icu IS
+    'Arrange post op icu. Proforma checklist item (boolean).';
+COMMENT ON COLUMN pre_anaesthesia_assessment.anaes_plan_proforma_backup IS
+    'Backup. Proforma checklist item (boolean).';
+COMMENT ON COLUMN pre_anaesthesia_assessment.anaes_plan_proforma_do_investigations IS
+    'Do investigations.';
+COMMENT ON COLUMN pre_anaesthesia_assessment.anaes_plan_proforma_do_special_orders IS
+    'Do special orders.';
+COMMENT ON COLUMN pre_anaesthesia_assessment.anaes_plan_proforma_reviewed_high_risk_anaesthesia IS
+    'Reviewed high risk anaesthesia. Proforma checklist item (boolean).';
+COMMENT ON COLUMN pre_anaesthesia_assessment.anaes_plan_proforma_reviewed_consent IS
+    'Reviewed consent. Proforma checklist item (boolean).';
+COMMENT ON COLUMN pre_anaesthesia_assessment.anaes_plan_proforma_consultant_anaesthesiologist_name IS
+    'Consultant anaesthesiologist name.';
+COMMENT ON COLUMN pre_anaesthesia_assessment.anaes_plan_proforma_consultant_anaesthesiologist_signature IS
+    'Consultant anaesthesiologist signature.';
 
 -- ========================================================================
 -- END 08_create_table_pre_anaesthesia_assessment.sql
