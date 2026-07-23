@@ -29,6 +29,10 @@
  * @property {number | null} bmi
  * @property {string} plannedProcedure
  * @property {ProcedureUrgency} procedureUrgency
+ * @property {YesNo} cancerHistory
+ * @property {string} cancerHistoryDetails
+ * @property {YesNo} mrsaHistory
+ * @property {YesNo} recentHospitalOrCareHomeAdmission
  */
 
 /**
@@ -46,6 +50,9 @@
  * @property {YesNo} pacemaker
  * @property {YesNo} recentMI
  * @property {number | null} recentMIWeeks
+ * @property {YesNo} palpitationsOrBlackouts
+ * @property {YesNo} heartOrArterySurgery
+ * @property {YesNo} swollenAnkles
  */
 
 /**
@@ -59,6 +66,11 @@
  * @property {SmokingStatus} smoking
  * @property {number | null} smokingPackYears
  * @property {YesNo} recentURTI
+ * @property {YesNo} snoring
+ * @property {YesNo} snoringLoud
+ * @property {number | null} collarSizeInches
+ * @property {YesNo} daytimeSleepiness
+ * @property {YesNo} observedApnoeaEpisodes
  */
 
 /**
@@ -67,6 +79,9 @@
  * @property {'1' | '2' | '3' | '4' | '5' | ''} ckdStage
  * @property {YesNo} dialysis
  * @property {'haemodialysis' | 'peritoneal' | ''} dialysisType
+ * @property {YesNo} urinarySymptoms
+ * @property {YesNo} urinaryCatheterHistory
+ * @property {YesNo} prostateProblems
  */
 
 /**
@@ -108,6 +123,9 @@
  * @property {YesNo} sickleCellDisease
  * @property {YesNo} sickleCellTrait
  * @property {YesNo} anaemia
+ * @property {YesNo} personalVteHistory
+ * @property {YesNo} familyVteHistory
+ * @property {YesNo} bloodTransfusionHistory
  */
 
 /**
@@ -120,6 +138,10 @@
  * @property {string} dentalDetails
  * @property {YesNo} previousDifficultAirway
  * @property {'1' | '2' | '3' | '4' | ''} mallampatiScore
+ * @property {YesNo} jointOrArthritisProblems
+ * @property {YesNo} backOrNeckProblems
+ * @property {YesNo} skinConditions
+ * @property {YesNo} pressureSoreRisk
  */
 
 /**
@@ -127,6 +149,9 @@
  * @property {YesNo} gord
  * @property {YesNo} hiatusHernia
  * @property {YesNo} nausea
+ * @property {YesNo} bowelProblems
+ * @property {YesNo} foodIntolerances
+ * @property {string} foodIntolerancesDetails
  */
 
 /**
@@ -159,6 +184,8 @@
  * @property {number | null} alcoholUnitsPerWeek
  * @property {YesNo} recreationalDrugs
  * @property {string} drugDetails
+ * @property {YesNo} bloodDonor
+ * @property {YesNo} bodyPiercings
  */
 
 /**
@@ -167,6 +194,9 @@
  * @property {number | null} estimatedMETs
  * @property {YesNo} mobilityAids
  * @property {YesNo} recentDecline
+ * @property {YesNo} hearingProblems
+ * @property {YesNo} visionProblems
+ * @property {YesNo} balanceIssues
  */
 
 /**
@@ -174,6 +204,19 @@
  * @property {YesNo} possiblyPregnant
  * @property {YesNo} pregnancyConfirmed
  * @property {number | null} gestationWeeks
+ * @property {YesNo} contraceptiveOrHrtUse
+ * @property {string} lastMenstrualPeriod
+ */
+
+/**
+ * @typedef {Object} CognitiveMentalHealth
+ * @property {YesNo} headInjuryRequiringHospitalisation
+ * @property {YesNo} memoryConcerns
+ * @property {YesNo} dementiaDiagnosis
+ * @property {YesNo} depressionOrAnxietyHistory
+ * @property {YesNo} depressionAnxietyImpactsDailyLife
+ * @property {YesNo} depressionAnxietySeenDoctor
+ * @property {YesNo} learningDifficulties
  */
 
 /**
@@ -194,6 +237,7 @@
  * @property {SocialHistory} socialHistory
  * @property {FunctionalCapacity} functionalCapacity
  * @property {Pregnancy} pregnancy
+ * @property {CognitiveMentalHealth} cognitiveMentalHealth
  */
 
 /**
@@ -234,7 +278,11 @@ function emptyAssessment() {
       height: null,
       bmi: null,
       plannedProcedure: '',
-      procedureUrgency: ''
+      procedureUrgency: '',
+      cancerHistory: '',
+      cancerHistoryDetails: '',
+      mrsaHistory: '',
+      recentHospitalOrCareHomeAdmission: ''
     },
     cardiovascular: {
       hypertension: '',
@@ -249,7 +297,10 @@ function emptyAssessment() {
       arrhythmiaType: '',
       pacemaker: '',
       recentMI: '',
-      recentMIWeeks: null
+      recentMIWeeks: null,
+      palpitationsOrBlackouts: '',
+      heartOrArterySurgery: '',
+      swollenAnkles: ''
     },
     respiratory: {
       asthma: '',
@@ -260,13 +311,21 @@ function emptyAssessment() {
       osaCPAP: '',
       smoking: '',
       smokingPackYears: null,
-      recentURTI: ''
+      recentURTI: '',
+      snoring: '',
+      snoringLoud: '',
+      collarSizeInches: null,
+      daytimeSleepiness: '',
+      observedApnoeaEpisodes: ''
     },
     renal: {
       ckd: '',
       ckdStage: '',
       dialysis: '',
-      dialysisType: ''
+      dialysisType: '',
+      urinarySymptoms: '',
+      urinaryCatheterHistory: '',
+      prostateProblems: ''
     },
     hepatic: {
       liverDisease: '',
@@ -299,7 +358,10 @@ function emptyAssessment() {
       anticoagulantType: '',
       sickleCellDisease: '',
       sickleCellTrait: '',
-      anaemia: ''
+      anaemia: '',
+      personalVteHistory: '',
+      familyVteHistory: '',
+      bloodTransfusionHistory: ''
     },
     musculoskeletalAirway: {
       rheumatoidArthritis: '',
@@ -309,12 +371,19 @@ function emptyAssessment() {
       dentalIssues: '',
       dentalDetails: '',
       previousDifficultAirway: '',
-      mallampatiScore: ''
+      mallampatiScore: '',
+      jointOrArthritisProblems: '',
+      backOrNeckProblems: '',
+      skinConditions: '',
+      pressureSoreRisk: ''
     },
     gastrointestinal: {
       gord: '',
       hiatusHernia: '',
-      nausea: ''
+      nausea: '',
+      bowelProblems: '',
+      foodIntolerances: '',
+      foodIntolerancesDetails: ''
     },
     medications: [],
     allergies: [],
@@ -330,18 +399,34 @@ function emptyAssessment() {
       alcohol: '',
       alcoholUnitsPerWeek: null,
       recreationalDrugs: '',
-      drugDetails: ''
+      drugDetails: '',
+      bloodDonor: '',
+      bodyPiercings: ''
     },
     functionalCapacity: {
       exerciseTolerance: '',
       estimatedMETs: null,
       mobilityAids: '',
-      recentDecline: ''
+      recentDecline: '',
+      hearingProblems: '',
+      visionProblems: '',
+      balanceIssues: ''
     },
     pregnancy: {
       possiblyPregnant: '',
       pregnancyConfirmed: '',
-      gestationWeeks: null
+      gestationWeeks: null,
+      contraceptiveOrHrtUse: '',
+      lastMenstrualPeriod: ''
+    },
+    cognitiveMentalHealth: {
+      headInjuryRequiringHospitalisation: '',
+      memoryConcerns: '',
+      dementiaDiagnosis: '',
+      depressionOrAnxietyHistory: '',
+      depressionAnxietyImpactsDailyLife: '',
+      depressionAnxietySeenDoctor: '',
+      learningDifficulties: ''
     }
   };
 }

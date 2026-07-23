@@ -417,6 +417,216 @@ enum PreOperativeAssessmentByPatientPregnancyConfirmedEnum {
   PREGNANCYCONFIRMED_NO = 2;  // no
 }
 
+enum PreOperativeAssessmentByPatientCancerHistoryEnum {
+  CANCERHISTORY_UNSPECIFIED = 0;
+  CANCERHISTORY_YES = 1;  // yes
+  CANCERHISTORY_NO = 2;  // no
+}
+
+enum PreOperativeAssessmentByPatientMrsaHistoryEnum {
+  MRSAHISTORY_UNSPECIFIED = 0;
+  MRSAHISTORY_YES = 1;  // yes
+  MRSAHISTORY_NO = 2;  // no
+}
+
+enum PreOperativeAssessmentByPatientRecentHospitalOrCareHomeAdmissionEnum {
+  RECENTHOSPITALORCAREHOMEADMISSION_UNSPECIFIED = 0;
+  RECENTHOSPITALORCAREHOMEADMISSION_YES = 1;  // yes
+  RECENTHOSPITALORCAREHOMEADMISSION_NO = 2;  // no
+}
+
+enum PreOperativeAssessmentByPatientPalpitationsOrBlackoutsEnum {
+  PALPITATIONSORBLACKOUTS_UNSPECIFIED = 0;
+  PALPITATIONSORBLACKOUTS_YES = 1;  // yes
+  PALPITATIONSORBLACKOUTS_NO = 2;  // no
+}
+
+enum PreOperativeAssessmentByPatientHeartOrArterySurgeryEnum {
+  HEARTORARTERYSURGERY_UNSPECIFIED = 0;
+  HEARTORARTERYSURGERY_YES = 1;  // yes
+  HEARTORARTERYSURGERY_NO = 2;  // no
+}
+
+enum PreOperativeAssessmentByPatientSwollenAnklesEnum {
+  SWOLLENANKLES_UNSPECIFIED = 0;
+  SWOLLENANKLES_YES = 1;  // yes
+  SWOLLENANKLES_NO = 2;  // no
+}
+
+enum PreOperativeAssessmentByPatientSnoringEnum {
+  SNORING_UNSPECIFIED = 0;
+  SNORING_YES = 1;  // yes
+  SNORING_NO = 2;  // no
+}
+
+enum PreOperativeAssessmentByPatientSnoringLoudEnum {
+  SNORINGLOUD_UNSPECIFIED = 0;
+  SNORINGLOUD_YES = 1;  // yes
+  SNORINGLOUD_NO = 2;  // no
+}
+
+enum PreOperativeAssessmentByPatientDaytimeSleepinessEnum {
+  DAYTIMESLEEPINESS_UNSPECIFIED = 0;
+  DAYTIMESLEEPINESS_YES = 1;  // yes
+  DAYTIMESLEEPINESS_NO = 2;  // no
+}
+
+enum PreOperativeAssessmentByPatientObservedApnoeaEpisodesEnum {
+  OBSERVEDAPNOEAEPISODES_UNSPECIFIED = 0;
+  OBSERVEDAPNOEAEPISODES_YES = 1;  // yes
+  OBSERVEDAPNOEAEPISODES_NO = 2;  // no
+}
+
+enum PreOperativeAssessmentByPatientUrinarySymptomsEnum {
+  URINARYSYMPTOMS_UNSPECIFIED = 0;
+  URINARYSYMPTOMS_YES = 1;  // yes
+  URINARYSYMPTOMS_NO = 2;  // no
+}
+
+enum PreOperativeAssessmentByPatientUrinaryCatheterHistoryEnum {
+  URINARYCATHETERHISTORY_UNSPECIFIED = 0;
+  URINARYCATHETERHISTORY_YES = 1;  // yes
+  URINARYCATHETERHISTORY_NO = 2;  // no
+}
+
+enum PreOperativeAssessmentByPatientProstateProblemsEnum {
+  PROSTATEPROBLEMS_UNSPECIFIED = 0;
+  PROSTATEPROBLEMS_YES = 1;  // yes
+  PROSTATEPROBLEMS_NO = 2;  // no
+}
+
+enum PreOperativeAssessmentByPatientPersonalVteHistoryEnum {
+  PERSONALVTEHISTORY_UNSPECIFIED = 0;
+  PERSONALVTEHISTORY_YES = 1;  // yes
+  PERSONALVTEHISTORY_NO = 2;  // no
+}
+
+enum PreOperativeAssessmentByPatientFamilyVteHistoryEnum {
+  FAMILYVTEHISTORY_UNSPECIFIED = 0;
+  FAMILYVTEHISTORY_YES = 1;  // yes
+  FAMILYVTEHISTORY_NO = 2;  // no
+}
+
+enum PreOperativeAssessmentByPatientBloodTransfusionHistoryEnum {
+  BLOODTRANSFUSIONHISTORY_UNSPECIFIED = 0;
+  BLOODTRANSFUSIONHISTORY_YES = 1;  // yes
+  BLOODTRANSFUSIONHISTORY_NO = 2;  // no
+}
+
+enum PreOperativeAssessmentByPatientJointOrArthritisProblemsEnum {
+  JOINTORARTHRITISPROBLEMS_UNSPECIFIED = 0;
+  JOINTORARTHRITISPROBLEMS_YES = 1;  // yes
+  JOINTORARTHRITISPROBLEMS_NO = 2;  // no
+}
+
+enum PreOperativeAssessmentByPatientBackOrNeckProblemsEnum {
+  BACKORNECKPROBLEMS_UNSPECIFIED = 0;
+  BACKORNECKPROBLEMS_YES = 1;  // yes
+  BACKORNECKPROBLEMS_NO = 2;  // no
+}
+
+enum PreOperativeAssessmentByPatientSkinConditionsEnum {
+  SKINCONDITIONS_UNSPECIFIED = 0;
+  SKINCONDITIONS_YES = 1;  // yes
+  SKINCONDITIONS_NO = 2;  // no
+}
+
+enum PreOperativeAssessmentByPatientPressureSoreRiskEnum {
+  PRESSURESORERISK_UNSPECIFIED = 0;
+  PRESSURESORERISK_YES = 1;  // yes
+  PRESSURESORERISK_NO = 2;  // no
+}
+
+enum PreOperativeAssessmentByPatientBowelProblemsEnum {
+  BOWELPROBLEMS_UNSPECIFIED = 0;
+  BOWELPROBLEMS_YES = 1;  // yes
+  BOWELPROBLEMS_NO = 2;  // no
+}
+
+enum PreOperativeAssessmentByPatientFoodIntolerancesEnum {
+  FOODINTOLERANCES_UNSPECIFIED = 0;
+  FOODINTOLERANCES_YES = 1;  // yes
+  FOODINTOLERANCES_NO = 2;  // no
+}
+
+enum PreOperativeAssessmentByPatientBloodDonorEnum {
+  BLOODDONOR_UNSPECIFIED = 0;
+  BLOODDONOR_YES = 1;  // yes
+  BLOODDONOR_NO = 2;  // no
+}
+
+enum PreOperativeAssessmentByPatientBodyPiercingsEnum {
+  BODYPIERCINGS_UNSPECIFIED = 0;
+  BODYPIERCINGS_YES = 1;  // yes
+  BODYPIERCINGS_NO = 2;  // no
+}
+
+enum PreOperativeAssessmentByPatientHearingProblemsEnum {
+  HEARINGPROBLEMS_UNSPECIFIED = 0;
+  HEARINGPROBLEMS_YES = 1;  // yes
+  HEARINGPROBLEMS_NO = 2;  // no
+}
+
+enum PreOperativeAssessmentByPatientVisionProblemsEnum {
+  VISIONPROBLEMS_UNSPECIFIED = 0;
+  VISIONPROBLEMS_YES = 1;  // yes
+  VISIONPROBLEMS_NO = 2;  // no
+}
+
+enum PreOperativeAssessmentByPatientBalanceIssuesEnum {
+  BALANCEISSUES_UNSPECIFIED = 0;
+  BALANCEISSUES_YES = 1;  // yes
+  BALANCEISSUES_NO = 2;  // no
+}
+
+enum PreOperativeAssessmentByPatientContraceptiveOrHrtUseEnum {
+  CONTRACEPTIVEORHRTUSE_UNSPECIFIED = 0;
+  CONTRACEPTIVEORHRTUSE_YES = 1;  // yes
+  CONTRACEPTIVEORHRTUSE_NO = 2;  // no
+}
+
+enum PreOperativeAssessmentByPatientHeadInjuryRequiringHospitalisationEnum {
+  HEADINJURYREQUIRINGHOSPITALISATION_UNSPECIFIED = 0;
+  HEADINJURYREQUIRINGHOSPITALISATION_YES = 1;  // yes
+  HEADINJURYREQUIRINGHOSPITALISATION_NO = 2;  // no
+}
+
+enum PreOperativeAssessmentByPatientMemoryConcernsEnum {
+  MEMORYCONCERNS_UNSPECIFIED = 0;
+  MEMORYCONCERNS_YES = 1;  // yes
+  MEMORYCONCERNS_NO = 2;  // no
+}
+
+enum PreOperativeAssessmentByPatientDementiaDiagnosisEnum {
+  DEMENTIADIAGNOSIS_UNSPECIFIED = 0;
+  DEMENTIADIAGNOSIS_YES = 1;  // yes
+  DEMENTIADIAGNOSIS_NO = 2;  // no
+}
+
+enum PreOperativeAssessmentByPatientDepressionOrAnxietyHistoryEnum {
+  DEPRESSIONORANXIETYHISTORY_UNSPECIFIED = 0;
+  DEPRESSIONORANXIETYHISTORY_YES = 1;  // yes
+  DEPRESSIONORANXIETYHISTORY_NO = 2;  // no
+}
+
+enum PreOperativeAssessmentByPatientDepressionAnxietyImpactsDailyLifeEnum {
+  DEPRESSIONANXIETYIMPACTSDAILYLIFE_UNSPECIFIED = 0;
+  DEPRESSIONANXIETYIMPACTSDAILYLIFE_YES = 1;  // yes
+  DEPRESSIONANXIETYIMPACTSDAILYLIFE_NO = 2;  // no
+}
+
+enum PreOperativeAssessmentByPatientDepressionAnxietySeenDoctorEnum {
+  DEPRESSIONANXIETYSEENDOCTOR_UNSPECIFIED = 0;
+  DEPRESSIONANXIETYSEENDOCTOR_YES = 1;  // yes
+  DEPRESSIONANXIETYSEENDOCTOR_NO = 2;  // no
+}
+
+enum PreOperativeAssessmentByPatientLearningDifficultiesEnum {
+  LEARNINGDIFFICULTIES_UNSPECIFIED = 0;
+  LEARNINGDIFFICULTIES_YES = 1;  // yes
+  LEARNINGDIFFICULTIES_NO = 2;  // no
+}
+
 message PreOperativeAssessmentByPatient {
   string id = 1;  // UUID — uuid
   string created_at = 2;  // TIMESTAMPTZ — iso 8601
@@ -516,4 +726,43 @@ message PreOperativeAssessmentByPatient {
   PreOperativeAssessmentByPatientPossiblyPregnantEnum possibly_pregnant = 96;  // TEXT
   PreOperativeAssessmentByPatientPregnancyConfirmedEnum pregnancy_confirmed = 97;  // TEXT
   int32 gestation_weeks = 98;  // INTEGER
+  PreOperativeAssessmentByPatientCancerHistoryEnum cancer_history = 99;  // TEXT
+  string cancer_history_details = 100;  // TEXT
+  PreOperativeAssessmentByPatientMrsaHistoryEnum mrsa_history = 101;  // TEXT
+  PreOperativeAssessmentByPatientRecentHospitalOrCareHomeAdmissionEnum recent_hospital_or_care_home_admission = 102;  // TEXT
+  PreOperativeAssessmentByPatientPalpitationsOrBlackoutsEnum palpitations_or_blackouts = 103;  // TEXT
+  PreOperativeAssessmentByPatientHeartOrArterySurgeryEnum heart_or_artery_surgery = 104;  // TEXT
+  PreOperativeAssessmentByPatientSwollenAnklesEnum swollen_ankles = 105;  // TEXT
+  PreOperativeAssessmentByPatientSnoringEnum snoring = 106;  // TEXT
+  PreOperativeAssessmentByPatientSnoringLoudEnum snoring_loud = 107;  // TEXT
+  double collar_size_inches = 108;  // NUMERIC(4,1) — numeric(4,1)
+  PreOperativeAssessmentByPatientDaytimeSleepinessEnum daytime_sleepiness = 109;  // TEXT
+  PreOperativeAssessmentByPatientObservedApnoeaEpisodesEnum observed_apnoea_episodes = 110;  // TEXT
+  PreOperativeAssessmentByPatientUrinarySymptomsEnum urinary_symptoms = 111;  // TEXT
+  PreOperativeAssessmentByPatientUrinaryCatheterHistoryEnum urinary_catheter_history = 112;  // TEXT
+  PreOperativeAssessmentByPatientProstateProblemsEnum prostate_problems = 113;  // TEXT
+  PreOperativeAssessmentByPatientPersonalVteHistoryEnum personal_vte_history = 114;  // TEXT
+  PreOperativeAssessmentByPatientFamilyVteHistoryEnum family_vte_history = 115;  // TEXT
+  PreOperativeAssessmentByPatientBloodTransfusionHistoryEnum blood_transfusion_history = 116;  // TEXT
+  PreOperativeAssessmentByPatientJointOrArthritisProblemsEnum joint_or_arthritis_problems = 117;  // TEXT
+  PreOperativeAssessmentByPatientBackOrNeckProblemsEnum back_or_neck_problems = 118;  // TEXT
+  PreOperativeAssessmentByPatientSkinConditionsEnum skin_conditions = 119;  // TEXT
+  PreOperativeAssessmentByPatientPressureSoreRiskEnum pressure_sore_risk = 120;  // TEXT
+  PreOperativeAssessmentByPatientBowelProblemsEnum bowel_problems = 121;  // TEXT
+  PreOperativeAssessmentByPatientFoodIntolerancesEnum food_intolerances = 122;  // TEXT
+  string food_intolerances_details = 123;  // TEXT
+  PreOperativeAssessmentByPatientBloodDonorEnum blood_donor = 124;  // TEXT
+  PreOperativeAssessmentByPatientBodyPiercingsEnum body_piercings = 125;  // TEXT
+  PreOperativeAssessmentByPatientHearingProblemsEnum hearing_problems = 126;  // TEXT
+  PreOperativeAssessmentByPatientVisionProblemsEnum vision_problems = 127;  // TEXT
+  PreOperativeAssessmentByPatientBalanceIssuesEnum balance_issues = 128;  // TEXT
+  PreOperativeAssessmentByPatientContraceptiveOrHrtUseEnum contraceptive_or_hrt_use = 129;  // TEXT
+  string last_menstrual_period = 130;  // TEXT
+  PreOperativeAssessmentByPatientHeadInjuryRequiringHospitalisationEnum head_injury_requiring_hospitalisation = 131;  // TEXT
+  PreOperativeAssessmentByPatientMemoryConcernsEnum memory_concerns = 132;  // TEXT
+  PreOperativeAssessmentByPatientDementiaDiagnosisEnum dementia_diagnosis = 133;  // TEXT
+  PreOperativeAssessmentByPatientDepressionOrAnxietyHistoryEnum depression_or_anxiety_history = 134;  // TEXT
+  PreOperativeAssessmentByPatientDepressionAnxietyImpactsDailyLifeEnum depression_anxiety_impacts_daily_life = 135;  // TEXT
+  PreOperativeAssessmentByPatientDepressionAnxietySeenDoctorEnum depression_anxiety_seen_doctor = 136;  // TEXT
+  PreOperativeAssessmentByPatientLearningDifficultiesEnum learning_difficulties = 137;  // TEXT
 }

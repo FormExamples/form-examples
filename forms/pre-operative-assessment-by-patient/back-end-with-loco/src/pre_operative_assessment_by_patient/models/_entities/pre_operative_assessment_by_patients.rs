@@ -191,6 +191,84 @@ pub struct Model {
     #[sea_orm(column_type = "Text")]
     pub pregnancy_confirmed: String,
     pub gestation_weeks: Option<i32>,
+    #[sea_orm(column_type = "Text")]
+    pub cancer_history: String,
+    #[sea_orm(column_type = "Text")]
+    pub cancer_history_details: String,
+    #[sea_orm(column_type = "Text")]
+    pub mrsa_history: String,
+    #[sea_orm(column_type = "Text")]
+    pub recent_hospital_or_care_home_admission: String,
+    #[sea_orm(column_type = "Text")]
+    pub palpitations_or_blackouts: String,
+    #[sea_orm(column_type = "Text")]
+    pub heart_or_artery_surgery: String,
+    #[sea_orm(column_type = "Text")]
+    pub swollen_ankles: String,
+    #[sea_orm(column_type = "Text")]
+    pub snoring: String,
+    #[sea_orm(column_type = "Text")]
+    pub snoring_loud: String,
+    #[sea_orm(column_type = "Double", nullable)]
+    pub collar_size_inches: Option<f64>,
+    #[sea_orm(column_type = "Text")]
+    pub daytime_sleepiness: String,
+    #[sea_orm(column_type = "Text")]
+    pub observed_apnoea_episodes: String,
+    #[sea_orm(column_type = "Text")]
+    pub urinary_symptoms: String,
+    #[sea_orm(column_type = "Text")]
+    pub urinary_catheter_history: String,
+    #[sea_orm(column_type = "Text")]
+    pub prostate_problems: String,
+    #[sea_orm(column_type = "Text")]
+    pub personal_vte_history: String,
+    #[sea_orm(column_type = "Text")]
+    pub family_vte_history: String,
+    #[sea_orm(column_type = "Text")]
+    pub blood_transfusion_history: String,
+    #[sea_orm(column_type = "Text")]
+    pub joint_or_arthritis_problems: String,
+    #[sea_orm(column_type = "Text")]
+    pub back_or_neck_problems: String,
+    #[sea_orm(column_type = "Text")]
+    pub skin_conditions: String,
+    #[sea_orm(column_type = "Text")]
+    pub pressure_sore_risk: String,
+    #[sea_orm(column_type = "Text")]
+    pub bowel_problems: String,
+    #[sea_orm(column_type = "Text")]
+    pub food_intolerances: String,
+    #[sea_orm(column_type = "Text")]
+    pub food_intolerances_details: String,
+    #[sea_orm(column_type = "Text")]
+    pub blood_donor: String,
+    #[sea_orm(column_type = "Text")]
+    pub body_piercings: String,
+    #[sea_orm(column_type = "Text")]
+    pub hearing_problems: String,
+    #[sea_orm(column_type = "Text")]
+    pub vision_problems: String,
+    #[sea_orm(column_type = "Text")]
+    pub balance_issues: String,
+    #[sea_orm(column_type = "Text")]
+    pub contraceptive_or_hrt_use: String,
+    #[sea_orm(column_type = "Text")]
+    pub last_menstrual_period: String,
+    #[sea_orm(column_type = "Text")]
+    pub head_injury_requiring_hospitalisation: String,
+    #[sea_orm(column_type = "Text")]
+    pub memory_concerns: String,
+    #[sea_orm(column_type = "Text")]
+    pub dementia_diagnosis: String,
+    #[sea_orm(column_type = "Text")]
+    pub depression_or_anxiety_history: String,
+    #[sea_orm(column_type = "Text")]
+    pub depression_anxiety_impacts_daily_life: String,
+    #[sea_orm(column_type = "Text")]
+    pub depression_anxiety_seen_doctor: String,
+    #[sea_orm(column_type = "Text")]
+    pub learning_difficulties: String,
     pub patient_id: i32,
 }
 

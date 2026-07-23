@@ -103,6 +103,45 @@ pub struct Params {
     pub possibly_pregnant: String,
     pub pregnancy_confirmed: String,
     pub gestation_weeks: Option<i32>,
+    pub cancer_history: String,
+    pub cancer_history_details: String,
+    pub mrsa_history: String,
+    pub recent_hospital_or_care_home_admission: String,
+    pub palpitations_or_blackouts: String,
+    pub heart_or_artery_surgery: String,
+    pub swollen_ankles: String,
+    pub snoring: String,
+    pub snoring_loud: String,
+    pub collar_size_inches: Option<f64>,
+    pub daytime_sleepiness: String,
+    pub observed_apnoea_episodes: String,
+    pub urinary_symptoms: String,
+    pub urinary_catheter_history: String,
+    pub prostate_problems: String,
+    pub personal_vte_history: String,
+    pub family_vte_history: String,
+    pub blood_transfusion_history: String,
+    pub joint_or_arthritis_problems: String,
+    pub back_or_neck_problems: String,
+    pub skin_conditions: String,
+    pub pressure_sore_risk: String,
+    pub bowel_problems: String,
+    pub food_intolerances: String,
+    pub food_intolerances_details: String,
+    pub blood_donor: String,
+    pub body_piercings: String,
+    pub hearing_problems: String,
+    pub vision_problems: String,
+    pub balance_issues: String,
+    pub contraceptive_or_hrt_use: String,
+    pub last_menstrual_period: String,
+    pub head_injury_requiring_hospitalisation: String,
+    pub memory_concerns: String,
+    pub dementia_diagnosis: String,
+    pub depression_or_anxiety_history: String,
+    pub depression_anxiety_impacts_daily_life: String,
+    pub depression_anxiety_seen_doctor: String,
+    pub learning_difficulties: String,
     }
 
 impl Params {
@@ -202,6 +241,45 @@ impl Params {
       item.possibly_pregnant = Set(self.possibly_pregnant.clone());
       item.pregnancy_confirmed = Set(self.pregnancy_confirmed.clone());
       item.gestation_weeks = Set(self.gestation_weeks);
+      item.cancer_history = Set(self.cancer_history.clone());
+      item.cancer_history_details = Set(self.cancer_history_details.clone());
+      item.mrsa_history = Set(self.mrsa_history.clone());
+      item.recent_hospital_or_care_home_admission = Set(self.recent_hospital_or_care_home_admission.clone());
+      item.palpitations_or_blackouts = Set(self.palpitations_or_blackouts.clone());
+      item.heart_or_artery_surgery = Set(self.heart_or_artery_surgery.clone());
+      item.swollen_ankles = Set(self.swollen_ankles.clone());
+      item.snoring = Set(self.snoring.clone());
+      item.snoring_loud = Set(self.snoring_loud.clone());
+      item.collar_size_inches = Set(self.collar_size_inches);
+      item.daytime_sleepiness = Set(self.daytime_sleepiness.clone());
+      item.observed_apnoea_episodes = Set(self.observed_apnoea_episodes.clone());
+      item.urinary_symptoms = Set(self.urinary_symptoms.clone());
+      item.urinary_catheter_history = Set(self.urinary_catheter_history.clone());
+      item.prostate_problems = Set(self.prostate_problems.clone());
+      item.personal_vte_history = Set(self.personal_vte_history.clone());
+      item.family_vte_history = Set(self.family_vte_history.clone());
+      item.blood_transfusion_history = Set(self.blood_transfusion_history.clone());
+      item.joint_or_arthritis_problems = Set(self.joint_or_arthritis_problems.clone());
+      item.back_or_neck_problems = Set(self.back_or_neck_problems.clone());
+      item.skin_conditions = Set(self.skin_conditions.clone());
+      item.pressure_sore_risk = Set(self.pressure_sore_risk.clone());
+      item.bowel_problems = Set(self.bowel_problems.clone());
+      item.food_intolerances = Set(self.food_intolerances.clone());
+      item.food_intolerances_details = Set(self.food_intolerances_details.clone());
+      item.blood_donor = Set(self.blood_donor.clone());
+      item.body_piercings = Set(self.body_piercings.clone());
+      item.hearing_problems = Set(self.hearing_problems.clone());
+      item.vision_problems = Set(self.vision_problems.clone());
+      item.balance_issues = Set(self.balance_issues.clone());
+      item.contraceptive_or_hrt_use = Set(self.contraceptive_or_hrt_use.clone());
+      item.last_menstrual_period = Set(self.last_menstrual_period.clone());
+      item.head_injury_requiring_hospitalisation = Set(self.head_injury_requiring_hospitalisation.clone());
+      item.memory_concerns = Set(self.memory_concerns.clone());
+      item.dementia_diagnosis = Set(self.dementia_diagnosis.clone());
+      item.depression_or_anxiety_history = Set(self.depression_or_anxiety_history.clone());
+      item.depression_anxiety_impacts_daily_life = Set(self.depression_anxiety_impacts_daily_life.clone());
+      item.depression_anxiety_seen_doctor = Set(self.depression_anxiety_seen_doctor.clone());
+      item.learning_difficulties = Set(self.learning_difficulties.clone());
       }
 }
 

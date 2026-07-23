@@ -18,7 +18,7 @@ const STORAGE_KEY = 'pre-operative-assessment-by-patient.front-end-with-html.v1'
 // Expose the draft key so a later linkage / accessibility module can offer a
 // "clear saved answers" control without re-deriving the key.
 window.__A11Y_DRAFT_KEY__ = STORAGE_KEY;
-const TOTAL_STEPS = 16;
+const TOTAL_STEPS = 17;
 
 /** @returns {import('./types.js').AssessmentData} */
 function loadState() {
@@ -538,6 +538,25 @@ function renderStep1() {
     ]
   }));
 
+  const bgHint = document.createElement('p');
+  bgHint.className = 'hint';
+  bgHint.textContent = 'Background health';
+  card.appendChild(bgHint);
+
+  card.appendChild(yesNoGroup('Have you ever been diagnosed with cancer?', 'demographics', 'cancerHistory'));
+  const cancerDetails = conditionalBlock({ section: 'demographics', field: 'cancerHistory', equals: 'yes' });
+  cancerDetails.appendChild(textInput({
+    label: 'Please give full details including dates and treatment',
+    section: 'demographics', field: 'cancerHistoryDetails'
+  }));
+  card.appendChild(cancerDetails);
+
+  card.appendChild(yesNoGroup('Do you have a history of MRSA or MSSA?', 'demographics', 'mrsaHistory'));
+  card.appendChild(yesNoGroup(
+    'Have you been admitted to hospital or a nursing/care home within the last 6 months?',
+    'demographics', 'recentHospitalOrCareHomeAdmission'
+  ));
+
   return card;
 }
 
@@ -592,6 +611,10 @@ function renderStep2() {
     type: 'number', min: 0, max: 26
   }));
   card.appendChild(miDetails);
+
+  card.appendChild(yesNoGroup('Have you ever had heart or artery surgery?', 'cardiovascular', 'heartOrArterySurgery'));
+  card.appendChild(yesNoGroup('Do you have swollen ankles?', 'cardiovascular', 'swollenAnkles'));
+  card.appendChild(yesNoGroup('Do you get palpitations, blackouts or feel faint?', 'cardiovascular', 'palpitationsOrBlackouts'));
 
   return card;
 }
@@ -654,6 +677,27 @@ function renderStep3() {
 
   card.appendChild(yesNoGroup('Recent upper respiratory tract infection?', 'respiratory', 'recentURTI'));
 
+  const stopBangHint = document.createElement('p');
+  stopBangHint.className = 'hint';
+  stopBangHint.textContent = 'Snoring and daytime sleepiness (STOP-BANG screen)';
+  card.appendChild(stopBangHint);
+
+  card.appendChild(yesNoGroup('Do you snore?', 'respiratory', 'snoring'));
+  const snoringDetails = conditionalBlock({ section: 'respiratory', field: 'snoring', equals: 'yes' });
+  snoringDetails.appendChild(yesNoGroup(
+    'Do you snore loudly (louder than talking or heard through a closed door)?',
+    'respiratory', 'snoringLoud'
+  ));
+  snoringDetails.appendChild(textInput({
+    label: 'Collar size (inches)',
+    section: 'respiratory', field: 'collarSizeInches',
+    type: 'number', min: 10, max: 30
+  }));
+  card.appendChild(snoringDetails);
+
+  card.appendChild(yesNoGroup('Do you often feel tired, fatigued or sleepy during the daytime?', 'respiratory', 'daytimeSleepiness'));
+  card.appendChild(yesNoGroup('Has anyone observed you stop breathing during your sleep?', 'respiratory', 'observedApnoeaEpisodes'));
+
   return card;
 }
 
@@ -690,6 +734,10 @@ function renderStep4() {
     ]
   }));
   card.appendChild(dialysisDetails);
+
+  card.appendChild(yesNoGroup('Any urinary problems (difficulty passing urine, frequency at night)?', 'renal', 'urinarySymptoms'));
+  card.appendChild(yesNoGroup('Have you ever had a urinary catheter?', 'renal', 'urinaryCatheterHistory'));
+  card.appendChild(yesNoGroup('Do you have prostate problems?', 'renal', 'prostateProblems'));
 
   return card;
 }
@@ -839,6 +887,16 @@ function renderStep8() {
 
   card.appendChild(yesNoGroup('Anaemia?', 'haematological', 'anaemia'));
 
+  card.appendChild(yesNoGroup(
+    'Have you ever had a blood clot in your lungs or legs (DVT or pulmonary embolism)?',
+    'haematological', 'personalVteHistory'
+  ));
+  card.appendChild(yesNoGroup(
+    'Does a blood relative have a history of blood clots in the lungs or legs (DVT or pulmonary embolism)?',
+    'haematological', 'familyVteHistory'
+  ));
+  card.appendChild(yesNoGroup('Have you ever had a blood transfusion?', 'haematological', 'bloodTransfusionHistory'));
+
   return card;
 }
 
@@ -875,6 +933,11 @@ function renderStep9() {
     ]
   }));
 
+  card.appendChild(yesNoGroup('Do you have arthritis or other joint problems?', 'musculoskeletalAirway', 'jointOrArthritisProblems'));
+  card.appendChild(yesNoGroup('Do you have back or neck problems?', 'musculoskeletalAirway', 'backOrNeckProblems'));
+  card.appendChild(yesNoGroup('Do you have any skin conditions (e.g. dermatitis, thin skin, eczema)?', 'musculoskeletalAirway', 'skinConditions'));
+  card.appendChild(yesNoGroup('Are you at risk of pressure sores, or have you had them in the past?', 'musculoskeletalAirway', 'pressureSoreRisk'));
+
   return card;
 }
 
@@ -888,6 +951,15 @@ function renderStep10() {
   card.appendChild(yesNoGroup('Gastro-oesophageal reflux (GORD)?', 'gastrointestinal', 'gord'));
   card.appendChild(yesNoGroup('Hiatus hernia?', 'gastrointestinal', 'hiatusHernia'));
   card.appendChild(yesNoGroup('Tendency to nausea or vomiting?', 'gastrointestinal', 'nausea'));
+  card.appendChild(yesNoGroup('Do you have bowel problems or are you prone to constipation?', 'gastrointestinal', 'bowelProblems'));
+
+  card.appendChild(yesNoGroup('Do you have any special diet or food intolerances?', 'gastrointestinal', 'foodIntolerances'));
+  const foodIntolDetails = conditionalBlock({ section: 'gastrointestinal', field: 'foodIntolerances', equals: 'yes' });
+  foodIntolDetails.appendChild(textInput({
+    label: 'Please provide details',
+    section: 'gastrointestinal', field: 'foodIntolerancesDetails'
+  }));
+  card.appendChild(foodIntolDetails);
 
   return card;
 }
@@ -979,6 +1051,9 @@ function renderStep14() {
   }));
   card.appendChild(drugDetails);
 
+  card.appendChild(yesNoGroup('Do you give blood?', 'socialHistory', 'bloodDonor'));
+  card.appendChild(yesNoGroup('Do you have any body piercings?', 'socialHistory', 'bodyPiercings'));
+
   return card;
 }
 
@@ -1013,6 +1088,15 @@ function renderStep15() {
   card.appendChild(yesNoGroup('Do you use mobility aids?', 'functionalCapacity', 'mobilityAids'));
   card.appendChild(yesNoGroup('Recent decline in functional capacity?', 'functionalCapacity', 'recentDecline'));
 
+  const sensoryHint = document.createElement('p');
+  sensoryHint.className = 'hint';
+  sensoryHint.textContent = 'Sensory and balance';
+  card.appendChild(sensoryHint);
+
+  card.appendChild(yesNoGroup('Do you have any problems with your hearing?', 'functionalCapacity', 'hearingProblems'));
+  card.appendChild(yesNoGroup('Do you have any problems with your eyesight?', 'functionalCapacity', 'visionProblems'));
+  card.appendChild(yesNoGroup('Do you have any balance issues?', 'functionalCapacity', 'balanceIssues'));
+
   return card;
 }
 
@@ -1036,6 +1120,50 @@ function renderStep16() {
   }));
   card.appendChild(gestationDetails);
 
+  card.appendChild(yesNoGroup(
+    'Do you take contraceptive pills, HRT, or use oestrogen gel/coil?',
+    'pregnancy', 'contraceptiveOrHrtUse'
+  ));
+  card.appendChild(textInput({
+    label: 'Date of your last menstrual period',
+    section: 'pregnancy', field: 'lastMenstrualPeriod',
+    type: 'date'
+  }));
+
+  return card;
+}
+
+function renderStep17() {
+  const card = sectionCard({
+    stepNumber: 17,
+    title: 'Cognitive and Mental Health',
+    description: 'Memory, mood and learning.'
+  });
+
+  card.appendChild(yesNoGroup(
+    'Have you ever had a head injury requiring hospitalisation?',
+    'cognitiveMentalHealth', 'headInjuryRequiringHospitalisation'
+  ));
+  card.appendChild(yesNoGroup(
+    'Have you attended a memory clinic, or do you have any concerns about your memory?',
+    'cognitiveMentalHealth', 'memoryConcerns'
+  ));
+  card.appendChild(yesNoGroup('Have you been diagnosed with dementia?', 'cognitiveMentalHealth', 'dementiaDiagnosis'));
+
+  card.appendChild(yesNoGroup(
+    'Do you have a history of, or are you currently suffering with, depression or anxiety?',
+    'cognitiveMentalHealth', 'depressionOrAnxietyHistory'
+  ));
+  const daDetails = conditionalBlock({ section: 'cognitiveMentalHealth', field: 'depressionOrAnxietyHistory', equals: 'yes' });
+  daDetails.appendChild(yesNoGroup('Does this impact on your daily life?', 'cognitiveMentalHealth', 'depressionAnxietyImpactsDailyLife'));
+  daDetails.appendChild(yesNoGroup('Have you seen a doctor with respect to this?', 'cognitiveMentalHealth', 'depressionAnxietySeenDoctor'));
+  card.appendChild(daDetails);
+
+  card.appendChild(yesNoGroup(
+    'Do you have a history of learning difficulties or disabilities?',
+    'cognitiveMentalHealth', 'learningDifficulties'
+  ));
+
   return card;
 }
 
@@ -1043,7 +1171,7 @@ const STEP_RENDERERS = [
   renderStep1, renderStep2, renderStep3, renderStep4, renderStep5,
   renderStep6, renderStep7, renderStep8, renderStep9, renderStep10,
   renderStep11, renderStep12, renderStep13, renderStep14, renderStep15,
-  renderStep16
+  renderStep16, renderStep17
 ];
 
 // ----------------------------------------------------------------------
@@ -1114,6 +1242,9 @@ const TRACKED_FIELDS = [
   ['demographics', 'height'],
   ['demographics', 'plannedProcedure'],
   ['demographics', 'procedureUrgency'],
+  ['demographics', 'cancerHistory'],
+  ['demographics', 'mrsaHistory'],
+  ['demographics', 'recentHospitalOrCareHomeAdmission'],
   // Cardiovascular yes/no items
   ['cardiovascular', 'hypertension'],
   ['cardiovascular', 'ischemicHeartDisease'],
@@ -1122,15 +1253,23 @@ const TRACKED_FIELDS = [
   ['cardiovascular', 'arrhythmia'],
   ['cardiovascular', 'pacemaker'],
   ['cardiovascular', 'recentMI'],
+  ['cardiovascular', 'heartOrArterySurgery'],
+  ['cardiovascular', 'swollenAnkles'],
+  ['cardiovascular', 'palpitationsOrBlackouts'],
   // Respiratory
   ['respiratory', 'asthma'],
   ['respiratory', 'copd'],
   ['respiratory', 'osa'],
   ['respiratory', 'smoking'],
   ['respiratory', 'recentURTI'],
+  ['respiratory', 'snoring'],
+  ['respiratory', 'daytimeSleepiness'],
+  ['respiratory', 'observedApnoeaEpisodes'],
   // Renal
   ['renal', 'ckd'],
   ['renal', 'dialysis'],
+  ['renal', 'urinarySymptoms'],
+  ['renal', 'prostateProblems'],
   // Hepatic
   ['hepatic', 'liverDisease'],
   ['hepatic', 'hepatitis'],
@@ -1148,6 +1287,8 @@ const TRACKED_FIELDS = [
   ['haematological', 'onAnticoagulants'],
   ['haematological', 'sickleCellDisease'],
   ['haematological', 'anaemia'],
+  ['haematological', 'personalVteHistory'],
+  ['haematological', 'bloodTransfusionHistory'],
   // Musculoskeletal & Airway
   ['musculoskeletalAirway', 'rheumatoidArthritis'],
   ['musculoskeletalAirway', 'cervicalSpineIssues'],
@@ -1155,10 +1296,16 @@ const TRACKED_FIELDS = [
   ['musculoskeletalAirway', 'limitedMouthOpening'],
   ['musculoskeletalAirway', 'dentalIssues'],
   ['musculoskeletalAirway', 'previousDifficultAirway'],
+  ['musculoskeletalAirway', 'jointOrArthritisProblems'],
+  ['musculoskeletalAirway', 'backOrNeckProblems'],
+  ['musculoskeletalAirway', 'skinConditions'],
+  ['musculoskeletalAirway', 'pressureSoreRisk'],
   // Gastrointestinal
   ['gastrointestinal', 'gord'],
   ['gastrointestinal', 'hiatusHernia'],
   ['gastrointestinal', 'nausea'],
+  ['gastrointestinal', 'bowelProblems'],
+  ['gastrointestinal', 'foodIntolerances'],
   // Previous Anaesthesia
   ['previousAnaesthesia', 'previousAnaesthesia'],
   ['previousAnaesthesia', 'familyMHHistory'],
@@ -1166,10 +1313,21 @@ const TRACKED_FIELDS = [
   // Social
   ['socialHistory', 'alcohol'],
   ['socialHistory', 'recreationalDrugs'],
+  ['socialHistory', 'bloodDonor'],
+  ['socialHistory', 'bodyPiercings'],
   // Functional capacity
   ['functionalCapacity', 'exerciseTolerance'],
   ['functionalCapacity', 'mobilityAids'],
-  ['functionalCapacity', 'recentDecline']
+  ['functionalCapacity', 'recentDecline'],
+  ['functionalCapacity', 'hearingProblems'],
+  ['functionalCapacity', 'visionProblems'],
+  ['functionalCapacity', 'balanceIssues'],
+  // Cognitive and Mental Health
+  ['cognitiveMentalHealth', 'headInjuryRequiringHospitalisation'],
+  ['cognitiveMentalHealth', 'memoryConcerns'],
+  ['cognitiveMentalHealth', 'dementiaDiagnosis'],
+  ['cognitiveMentalHealth', 'depressionOrAnxietyHistory'],
+  ['cognitiveMentalHealth', 'learningDifficulties']
 ];
 
 function updateProgress() {
@@ -1222,7 +1380,8 @@ const STEP_DEFINITIONS = [
   { step: 13, section: 'previousAnaesthesia',    title: 'Previous Anaesthesia' },
   { step: 14, section: 'socialHistory',          title: 'Social History' },
   { step: 15, section: 'functionalCapacity',     title: 'Functional Capacity' },
-  { step: 16, section: 'pregnancy',              title: 'Pregnancy' }
+  { step: 16, section: 'pregnancy',              title: 'Pregnancy' },
+  { step: 17, section: 'cognitiveMentalHealth',  title: 'Cognitive and Mental Health' }
 ];
 
 function renderStepList() {

@@ -694,6 +694,264 @@ components:
           type: integer
           format: int32
           description: Gestation weeks.
+        cancer_history:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: "Cancer history. One of: yes, no."
+        cancer_history_details:
+          type: string
+          description: Cancer history details.
+        mrsa_history:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: "MRSA history. One of: yes, no."
+        recent_hospital_or_care_home_admission:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: "Recent hospital or care home admission. One of: yes, no."
+        palpitations_or_blackouts:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: "Palpitations or blackouts. One of: yes, no."
+        heart_or_artery_surgery:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: "Heart or artery surgery. One of: yes, no."
+        swollen_ankles:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: "Swollen ankles. One of: yes, no."
+        snoring:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: "Snoring. One of: yes, no."
+        snoring_loud:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: "Loud snoring. One of: yes, no."
+        collar_size_inches:
+          type: number
+          format: double
+          description: Collar size in inches.
+        daytime_sleepiness:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: "Daytime sleepiness. One of: yes, no."
+        observed_apnoea_episodes:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: "Observed apnoea episodes. One of: yes, no."
+        urinary_symptoms:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: "Urinary symptoms. One of: yes, no."
+        urinary_catheter_history:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: "Urinary catheter history. One of: yes, no."
+        prostate_problems:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: "Prostate problems. One of: yes, no."
+        personal_vte_history:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: "Personal VTE (venous thromboembolism) history. One of: yes, no."
+        family_vte_history:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: "Family VTE (venous thromboembolism) history. One of: yes, no."
+        blood_transfusion_history:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: "Blood transfusion history. One of: yes, no."
+        joint_or_arthritis_problems:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: "Joint or arthritis problems. One of: yes, no."
+        back_or_neck_problems:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: "Back or neck problems. One of: yes, no."
+        skin_conditions:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: "Skin conditions. One of: yes, no."
+        pressure_sore_risk:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: "Pressure sore risk. One of: yes, no."
+        bowel_problems:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: "Bowel problems. One of: yes, no."
+        food_intolerances:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: "Food intolerances. One of: yes, no."
+        food_intolerances_details:
+          type: string
+          description: Food intolerances details.
+        blood_donor:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: "Blood donor. One of: yes, no."
+        body_piercings:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: "Body piercings. One of: yes, no."
+        hearing_problems:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: "Hearing problems. One of: yes, no."
+        vision_problems:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: "Vision problems. One of: yes, no."
+        balance_issues:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: "Balance issues. One of: yes, no."
+        contraceptive_or_hrt_use:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: "Contraceptive or HRT use. One of: yes, no."
+        last_menstrual_period:
+          type: string
+          description: Last menstrual period.
+        head_injury_requiring_hospitalisation:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: "Head injury requiring hospitalisation. One of: yes, no."
+        memory_concerns:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: "Memory concerns. One of: yes, no."
+        dementia_diagnosis:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: "Dementia diagnosis. One of: yes, no."
+        depression_or_anxiety_history:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: "Depression or anxiety history. One of: yes, no."
+        depression_anxiety_impacts_daily_life:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: "Depression/anxiety impacts daily life. One of: yes, no."
+        depression_anxiety_seen_doctor:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: "Depression/anxiety seen by a doctor. One of: yes, no."
+        learning_difficulties:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: "Learning difficulties. One of: yes, no."
       required:
         - created_at
         - updated_at
@@ -783,4 +1041,42 @@ components:
         - recent_decline
         - possibly_pregnant
         - pregnancy_confirmed
+        - cancer_history
+        - cancer_history_details
+        - mrsa_history
+        - recent_hospital_or_care_home_admission
+        - palpitations_or_blackouts
+        - heart_or_artery_surgery
+        - swollen_ankles
+        - snoring
+        - snoring_loud
+        - daytime_sleepiness
+        - observed_apnoea_episodes
+        - urinary_symptoms
+        - urinary_catheter_history
+        - prostate_problems
+        - personal_vte_history
+        - family_vte_history
+        - blood_transfusion_history
+        - joint_or_arthritis_problems
+        - back_or_neck_problems
+        - skin_conditions
+        - pressure_sore_risk
+        - bowel_problems
+        - food_intolerances
+        - food_intolerances_details
+        - blood_donor
+        - body_piercings
+        - hearing_problems
+        - vision_problems
+        - balance_issues
+        - contraceptive_or_hrt_use
+        - last_menstrual_period
+        - head_injury_requiring_hospitalisation
+        - memory_concerns
+        - dementia_diagnosis
+        - depression_or_anxiety_history
+        - depression_anxiety_impacts_daily_life
+        - depression_anxiety_seen_doctor
+        - learning_difficulties
       description: Pre operative assessment by patient.

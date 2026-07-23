@@ -96,7 +96,46 @@ CREATE TABLE pre_operative_assessment_by_patient (
     recent_decline TEXT NOT NULL DEFAULT '' CHECK (recent_decline IN ('yes', 'no', '')),
     possibly_pregnant TEXT NOT NULL DEFAULT '' CHECK (possibly_pregnant IN ('yes', 'no', '')),
     pregnancy_confirmed TEXT NOT NULL DEFAULT '' CHECK (pregnancy_confirmed IN ('yes', 'no', '')),
-    gestation_weeks INTEGER CHECK (gestation_weeks IS NULL OR (gestation_weeks >= 0 AND gestation_weeks <= 45))
+    gestation_weeks INTEGER CHECK (gestation_weeks IS NULL OR (gestation_weeks >= 0 AND gestation_weeks <= 45)),
+    cancer_history TEXT NOT NULL DEFAULT '' CHECK (cancer_history IN ('yes', 'no', '')),
+    cancer_history_details TEXT NOT NULL DEFAULT '',
+    mrsa_history TEXT NOT NULL DEFAULT '' CHECK (mrsa_history IN ('yes', 'no', '')),
+    recent_hospital_or_care_home_admission TEXT NOT NULL DEFAULT '' CHECK (recent_hospital_or_care_home_admission IN ('yes', 'no', '')),
+    palpitations_or_blackouts TEXT NOT NULL DEFAULT '' CHECK (palpitations_or_blackouts IN ('yes', 'no', '')),
+    heart_or_artery_surgery TEXT NOT NULL DEFAULT '' CHECK (heart_or_artery_surgery IN ('yes', 'no', '')),
+    swollen_ankles TEXT NOT NULL DEFAULT '' CHECK (swollen_ankles IN ('yes', 'no', '')),
+    snoring TEXT NOT NULL DEFAULT '' CHECK (snoring IN ('yes', 'no', '')),
+    snoring_loud TEXT NOT NULL DEFAULT '' CHECK (snoring_loud IN ('yes', 'no', '')),
+    collar_size_inches NUMERIC(4,1) CHECK (collar_size_inches IS NULL OR collar_size_inches > 0),
+    daytime_sleepiness TEXT NOT NULL DEFAULT '' CHECK (daytime_sleepiness IN ('yes', 'no', '')),
+    observed_apnoea_episodes TEXT NOT NULL DEFAULT '' CHECK (observed_apnoea_episodes IN ('yes', 'no', '')),
+    urinary_symptoms TEXT NOT NULL DEFAULT '' CHECK (urinary_symptoms IN ('yes', 'no', '')),
+    urinary_catheter_history TEXT NOT NULL DEFAULT '' CHECK (urinary_catheter_history IN ('yes', 'no', '')),
+    prostate_problems TEXT NOT NULL DEFAULT '' CHECK (prostate_problems IN ('yes', 'no', '')),
+    personal_vte_history TEXT NOT NULL DEFAULT '' CHECK (personal_vte_history IN ('yes', 'no', '')),
+    family_vte_history TEXT NOT NULL DEFAULT '' CHECK (family_vte_history IN ('yes', 'no', '')),
+    blood_transfusion_history TEXT NOT NULL DEFAULT '' CHECK (blood_transfusion_history IN ('yes', 'no', '')),
+    joint_or_arthritis_problems TEXT NOT NULL DEFAULT '' CHECK (joint_or_arthritis_problems IN ('yes', 'no', '')),
+    back_or_neck_problems TEXT NOT NULL DEFAULT '' CHECK (back_or_neck_problems IN ('yes', 'no', '')),
+    skin_conditions TEXT NOT NULL DEFAULT '' CHECK (skin_conditions IN ('yes', 'no', '')),
+    pressure_sore_risk TEXT NOT NULL DEFAULT '' CHECK (pressure_sore_risk IN ('yes', 'no', '')),
+    bowel_problems TEXT NOT NULL DEFAULT '' CHECK (bowel_problems IN ('yes', 'no', '')),
+    food_intolerances TEXT NOT NULL DEFAULT '' CHECK (food_intolerances IN ('yes', 'no', '')),
+    food_intolerances_details TEXT NOT NULL DEFAULT '',
+    blood_donor TEXT NOT NULL DEFAULT '' CHECK (blood_donor IN ('yes', 'no', '')),
+    body_piercings TEXT NOT NULL DEFAULT '' CHECK (body_piercings IN ('yes', 'no', '')),
+    hearing_problems TEXT NOT NULL DEFAULT '' CHECK (hearing_problems IN ('yes', 'no', '')),
+    vision_problems TEXT NOT NULL DEFAULT '' CHECK (vision_problems IN ('yes', 'no', '')),
+    balance_issues TEXT NOT NULL DEFAULT '' CHECK (balance_issues IN ('yes', 'no', '')),
+    contraceptive_or_hrt_use TEXT NOT NULL DEFAULT '' CHECK (contraceptive_or_hrt_use IN ('yes', 'no', '')),
+    last_menstrual_period TEXT NOT NULL DEFAULT '',
+    head_injury_requiring_hospitalisation TEXT NOT NULL DEFAULT '' CHECK (head_injury_requiring_hospitalisation IN ('yes', 'no', '')),
+    memory_concerns TEXT NOT NULL DEFAULT '' CHECK (memory_concerns IN ('yes', 'no', '')),
+    dementia_diagnosis TEXT NOT NULL DEFAULT '' CHECK (dementia_diagnosis IN ('yes', 'no', '')),
+    depression_or_anxiety_history TEXT NOT NULL DEFAULT '' CHECK (depression_or_anxiety_history IN ('yes', 'no', '')),
+    depression_anxiety_impacts_daily_life TEXT NOT NULL DEFAULT '' CHECK (depression_anxiety_impacts_daily_life IN ('yes', 'no', '')),
+    depression_anxiety_seen_doctor TEXT NOT NULL DEFAULT '' CHECK (depression_anxiety_seen_doctor IN ('yes', 'no', '')),
+    learning_difficulties TEXT NOT NULL DEFAULT '' CHECK (learning_difficulties IN ('yes', 'no', ''))
 );
 
 CREATE TRIGGER trigger_assessment_updated_at
@@ -323,3 +362,82 @@ COMMENT ON COLUMN pre_operative_assessment_by_patient.updated_at IS
     'Timestamp when this row was updated.';
 COMMENT ON COLUMN pre_operative_assessment_by_patient.deleted_at IS
     'Timestamp when this row was deleted.';
+
+COMMENT ON COLUMN pre_operative_assessment_by_patient.cancer_history IS
+    'Cancer history. One of: yes, no.';
+COMMENT ON COLUMN pre_operative_assessment_by_patient.cancer_history_details IS
+    'Cancer history details.';
+COMMENT ON COLUMN pre_operative_assessment_by_patient.mrsa_history IS
+    'MRSA history. One of: yes, no.';
+COMMENT ON COLUMN pre_operative_assessment_by_patient.recent_hospital_or_care_home_admission IS
+    'Recent hospital or care home admission. One of: yes, no.';
+COMMENT ON COLUMN pre_operative_assessment_by_patient.palpitations_or_blackouts IS
+    'Palpitations or blackouts. One of: yes, no.';
+COMMENT ON COLUMN pre_operative_assessment_by_patient.heart_or_artery_surgery IS
+    'Heart or artery surgery. One of: yes, no.';
+COMMENT ON COLUMN pre_operative_assessment_by_patient.swollen_ankles IS
+    'Swollen ankles. One of: yes, no.';
+COMMENT ON COLUMN pre_operative_assessment_by_patient.snoring IS
+    'Snoring. One of: yes, no.';
+COMMENT ON COLUMN pre_operative_assessment_by_patient.snoring_loud IS
+    'Loud snoring. One of: yes, no.';
+COMMENT ON COLUMN pre_operative_assessment_by_patient.collar_size_inches IS
+    'Collar size in inches.';
+COMMENT ON COLUMN pre_operative_assessment_by_patient.daytime_sleepiness IS
+    'Daytime sleepiness. One of: yes, no.';
+COMMENT ON COLUMN pre_operative_assessment_by_patient.observed_apnoea_episodes IS
+    'Observed apnoea episodes. One of: yes, no.';
+COMMENT ON COLUMN pre_operative_assessment_by_patient.urinary_symptoms IS
+    'Urinary symptoms. One of: yes, no.';
+COMMENT ON COLUMN pre_operative_assessment_by_patient.urinary_catheter_history IS
+    'Urinary catheter history. One of: yes, no.';
+COMMENT ON COLUMN pre_operative_assessment_by_patient.prostate_problems IS
+    'Prostate problems. One of: yes, no.';
+COMMENT ON COLUMN pre_operative_assessment_by_patient.personal_vte_history IS
+    'Personal VTE (venous thromboembolism) history. One of: yes, no.';
+COMMENT ON COLUMN pre_operative_assessment_by_patient.family_vte_history IS
+    'Family VTE (venous thromboembolism) history. One of: yes, no.';
+COMMENT ON COLUMN pre_operative_assessment_by_patient.blood_transfusion_history IS
+    'Blood transfusion history. One of: yes, no.';
+COMMENT ON COLUMN pre_operative_assessment_by_patient.joint_or_arthritis_problems IS
+    'Joint or arthritis problems. One of: yes, no.';
+COMMENT ON COLUMN pre_operative_assessment_by_patient.back_or_neck_problems IS
+    'Back or neck problems. One of: yes, no.';
+COMMENT ON COLUMN pre_operative_assessment_by_patient.skin_conditions IS
+    'Skin conditions. One of: yes, no.';
+COMMENT ON COLUMN pre_operative_assessment_by_patient.pressure_sore_risk IS
+    'Pressure sore risk. One of: yes, no.';
+COMMENT ON COLUMN pre_operative_assessment_by_patient.bowel_problems IS
+    'Bowel problems. One of: yes, no.';
+COMMENT ON COLUMN pre_operative_assessment_by_patient.food_intolerances IS
+    'Food intolerances. One of: yes, no.';
+COMMENT ON COLUMN pre_operative_assessment_by_patient.food_intolerances_details IS
+    'Food intolerances details.';
+COMMENT ON COLUMN pre_operative_assessment_by_patient.blood_donor IS
+    'Blood donor. One of: yes, no.';
+COMMENT ON COLUMN pre_operative_assessment_by_patient.body_piercings IS
+    'Body piercings. One of: yes, no.';
+COMMENT ON COLUMN pre_operative_assessment_by_patient.hearing_problems IS
+    'Hearing problems. One of: yes, no.';
+COMMENT ON COLUMN pre_operative_assessment_by_patient.vision_problems IS
+    'Vision problems. One of: yes, no.';
+COMMENT ON COLUMN pre_operative_assessment_by_patient.balance_issues IS
+    'Balance issues. One of: yes, no.';
+COMMENT ON COLUMN pre_operative_assessment_by_patient.contraceptive_or_hrt_use IS
+    'Contraceptive or HRT use. One of: yes, no.';
+COMMENT ON COLUMN pre_operative_assessment_by_patient.last_menstrual_period IS
+    'Last menstrual period.';
+COMMENT ON COLUMN pre_operative_assessment_by_patient.head_injury_requiring_hospitalisation IS
+    'Head injury requiring hospitalisation. One of: yes, no.';
+COMMENT ON COLUMN pre_operative_assessment_by_patient.memory_concerns IS
+    'Memory concerns. One of: yes, no.';
+COMMENT ON COLUMN pre_operative_assessment_by_patient.dementia_diagnosis IS
+    'Dementia diagnosis. One of: yes, no.';
+COMMENT ON COLUMN pre_operative_assessment_by_patient.depression_or_anxiety_history IS
+    'Depression or anxiety history. One of: yes, no.';
+COMMENT ON COLUMN pre_operative_assessment_by_patient.depression_anxiety_impacts_daily_life IS
+    'Depression/anxiety impacts daily life. One of: yes, no.';
+COMMENT ON COLUMN pre_operative_assessment_by_patient.depression_anxiety_seen_doctor IS
+    'Depression/anxiety seen by a doctor. One of: yes, no.';
+COMMENT ON COLUMN pre_operative_assessment_by_patient.learning_difficulties IS
+    'Learning difficulties. One of: yes, no.';
