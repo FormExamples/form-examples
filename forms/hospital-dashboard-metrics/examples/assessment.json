@@ -1,0 +1,28 @@
+{
+  "hospitalDashboardMetrics": {
+    "id": "550e8400-e29b-41d4-a716-000000000001",
+    "createdAt": "2026-04-09T10:00:00+00:00",
+    "updatedAt": "2026-04-09T10:00:00+00:00",
+    "deletedAt": null,
+    "hospitalName": "",
+    "periodMonth": 6,
+    "periodYear": 2050,
+    "preparedByName": "",
+    "overallNotes": "",
+    "status": "draft",
+    "signedAt": null
+  },
+  "hospitalDashboardMetricValue": {
+    "id": "550e8400-e29b-41d4-a716-00000000000c",
+    "createdAt": "2026-04-09T10:00:00+00:00",
+    "updatedAt": "2026-04-09T10:00:00+00:00",
+    "deletedAt": null,
+    "hospitalDashboardMetricsId": "550e8400-e29b-41d4-a716-000000000010",
+    "metricCode": "",
+    "categoryNumber": 7,
+    "categoryTitle": "",
+    "metricText": "",
+    "metricValue": null,
+    "notes": ""
+  }
+}

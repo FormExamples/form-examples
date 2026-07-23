@@ -1,0 +1,28 @@
+{
+  "hospitalPerformanceIndicators": {
+    "id": "550e8400-e29b-41d4-a716-000000000001",
+    "createdAt": "2026-04-09T10:00:00+00:00",
+    "updatedAt": "2026-04-09T10:00:00+00:00",
+    "deletedAt": null,
+    "hospitalName": "",
+    "periodMonth": 6,
+    "periodYear": 2050,
+    "preparedByName": "",
+    "overallNotes": "",
+    "status": "draft",
+    "signedAt": null
+  },
+  "hospitalPerformanceIndicatorValue": {
+    "id": "550e8400-e29b-41d4-a716-00000000000c",
+    "createdAt": "2026-04-09T10:00:00+00:00",
+    "updatedAt": "2026-04-09T10:00:00+00:00",
+    "deletedAt": null,
+    "hospitalPerformanceIndicatorsId": "550e8400-e29b-41d4-a716-000000000010",
+    "indicatorCode": "",
+    "categoryNumber": 2,
+    "categoryTitle": "",
+    "indicatorText": "",
+    "indicatorValue": null,
+    "notes": ""
+  }
+}
