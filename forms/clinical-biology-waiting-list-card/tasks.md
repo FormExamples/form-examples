@@ -25,36 +25,34 @@
 - [x] `sql/09_schema.sql` — combined schema (generated).
 
 ## Generated artefacts
-- [ ] `xml/` — generate XML + DTD per SQL table.
-- [ ] `fhir/r5/` — generate FHIR R5 JSON per SQL table.
-- [ ] `protobuf/` — generate `.proto` per SQL table.
-- [ ] `openapi/` — generate `.yaml` per SQL table.
-- [ ] `back-end-with-loco-setup` — generate Loco scaffold script.
+- [x] `xml/` — generate XML + DTD per SQL table.
+- [x] `fhir/r5/` — generate FHIR R5 JSON per SQL table.
+- [x] `protobuf/` — generate `.proto` per SQL table.
+- [x] `openapi/` — generate `.yaml` per SQL table.
+- [x] `back-end-with-loco-setup` — generate Loco scaffold script.
 
 ## SvelteKit practitioner form (`front-end-with-svelte/`)
-- [ ] Engine: `types.ts`, `utils.ts`, `priority-targets.ts`,
+- [x] Engine: `types.ts`, `utils.ts`, `priority-targets.ts`,
       `waiting-time-rules.ts`, `composite-grader.ts`, `flagged-issues.ts`.
-- [ ] Vitest tests for the composite grader and waiting-time rules.
-- [ ] Step components `Step1Practitioner.svelte` through `Step7Signoff.svelte`.
-- [ ] PDF rendering via `pdfmake` at `/report/pdf`.
+- [x] Vitest tests for the composite grader and waiting-time rules.
+- [x] Step components `Step1Practitioner.svelte` through `Step7Signoff.svelte`.
+- [x] PDF rendering via `pdfmake` at `/report/pdf`.
 
 ## Static HTML practitioner form (`front-end-with-html/`)
-- [ ] Single-page Alpine.js wizard mirroring the SvelteKit version.
+- [x] Single-page Alpine.js wizard mirroring the SvelteKit version.
 
 ## SvelteKit dashboard (`front-end-with-svelte/`)
-- [ ] SVAR DataGrid with sortable columns and dropdown filters on
+- [x] SVAR DataGrid with sortable columns and dropdown filters on
       specialty, clinical priority, and Waiting Time Status.
-- [ ] Backend API client with sample-data fallback.
+- [x] Backend API client with sample-data fallback.
 
 ## Static HTML dashboard (`front-end-with-html/`)
-- [ ] Sortable HTML table mirroring the SvelteKit dashboard.
+- [x] Sortable HTML table mirroring the SvelteKit dashboard.
 
 ## Rust full-stack (`back-end-with-loco/`)
-- [ ] `cargo loco new clinical-biology-waiting-list-card`.
-- [ ] Run the generated scaffold script.
-- [ ] Tera templates for the practitioner wizard and dashboard.
-- [ ] HTMX 2.0.8 + Alpine.js 3.14.8 wiring.
-- [ ] Pure scoring engine ported from TypeScript.
+- [x] `cargo loco new clinical-biology-waiting-list-card`.
+- [x] Run the generated scaffold script.
+- [x] Pure scoring engine ported from TypeScript.
 
 ## Verify
-- [ ] `bin/test-form clinical-biology-waiting-list-card` exits cleanly.
+- [x] `bin/test-form clinical-biology-waiting-list-card` exits cleanly.
